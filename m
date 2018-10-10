@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id AADAB7547F
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 801E0600E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 02:05:32 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id e22-v6so4031478qto.6
+	Wed, 10 Oct 2018 02:11:50 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id e22-v6so4043090qto.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 19:05:34 -0700 (PDT)
+	Tue, 09 Oct 2018 19:11:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=U8II52NPlTUq+hn3GIQKW50BlMLGswQlGuYa0GomtgI=;
-	b=ZDangdlmwkGhqHVaJR/rZK6W7XFbCakRr3ypud/Hwe6xxIxy12qAIwJu9gjUTqp8rv
-	WssUdiYM3GasRirmVmQm2bJzf72mB/a6j4IWtJ/9XM2+8d4sl7Ubvx2ooF799VZQ1cjJ
-	gjXnQIr5l6JtR6UwNKGZrhY8zofB6S2nuYdLayH2xNBTBfOXBQ6ekV/E5WtroKuc1EVJ
-	qepkrVQ/N7sn20wayJSuBDho4Vv/qTteCO9t58VVygvglYXQUAFkK62iTraHNpBe+CWT
-	wZKxkaA/TPWgu7uX5sMS5qfZtF7jbjddw6zsiDJIeDehJ1au5SJnW+ry0BgITyrS9aQR
-	tL+g==
+	:cc; bh=OBReSuB+avZT9Lc832v9c9dw++rnaTldwLbc00B/FyQ=;
+	b=UZDg6EQed6vKk+le9XOdLRUIwjHh4nS0VTxbmib1INNkVnt0pR0W7i1FYkbYM5xiIy
+	luCQm8ZcWLbTJOEf8Hl2CXQGWB9hKZ51WC5bbt2486DdsP4Rn6WO8DloMIIJ+sLNwdZq
+	71gbYa2e1fZnYfp1jqxzG/TlV4bmI3Drq9KTjoK/O8U9LsGePEtMzRkoZhPrlwJq1ivJ
+	wgtYhkP9lCasCdTduxVTFN2kBmu4JOA5FfmMEKYIY71mf7rDEHzFoJD8meKIUutJhQkd
+	sgG8wfKLyPJdij6uDqnuVEhdk24CZ5vmgoenQE0mL42uKnowTklBvWWs6DdIxsZzczkO
+	yuyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=U8II52NPlTUq+hn3GIQKW50BlMLGswQlGuYa0GomtgI=;
-	b=ERD++hJJkYJx3SHSx7Ltazyxw5vgokP9PTDyuEMcz+GKKNHb2Fy4wOHy+Yc8XtfwPn
-	DeBPNHK+UAPWNXD6U0NkXrtE6qdTaRf+ZsC4yr0rVJl6IPV53VlfAhAzzHPQdiwGn/U2
-	Zsi+ZkGsMVQ4u7/Tc0VzwhC0pGCY+9sj+XIMTKeV3u3QEg2xfknOD6ehry/AUGERZ6ER
-	ubJbBbPXgSBH7ciAeUdRNrZvXTyB8lvmjG5DfQvYNOcJ8my6Kl5GwIFSZ2rI+pp6mD+S
-	gNkJjYuhJwUJohnySsZ5SefW7xocOUkcfNqzliUZgN+HQ1eAndnrWBt/zN96nr8OHtgZ
-	87VQ==
-X-Gm-Message-State: ABuFfogtlS+aNK8F/OZ1JEA776umMRRbqVsgx6/DOAE1QXtfgNKoqYHT
-	x2LVI/Bruccjgp5ltcTjKOepF1/3OhESon6zk/A=
-X-Google-Smtp-Source: ACcGV62fYDsLSFn6MsOj983mLjHbcSmXs8zMluzKJ9MRH6xdZTxeDlw9FjwKbTYXlYV1RlwSRyXCKLOMJen/a2TloII=
+	bh=OBReSuB+avZT9Lc832v9c9dw++rnaTldwLbc00B/FyQ=;
+	b=VNuqSKYbfs7TRKPLGshmF+m8cbGt1Yp6tb7jPxfhgwArFSsKqWmXDaBwJa7k/SC7Pd
+	PADAjy6Cmy2DAYEAqjqoN1V2q7/cZmTB6MVPrnUiKVPpkIc09GoahedEJxjAHzat9w54
+	aaSGPDdvbeoGxTSa+GNr6diVPcZ+tXqkizvsHwlP5yXgpyzY9oMYkN6tUip+SkyIKO6p
+	+NivduMDFs6CAPa3ns7pAQLWEauUhz1+F4CPdc1hpTThEPbBKLpuJWQrI2oy8wlbDJnm
+	rVgntOQ5PkQYRUflS3KX0PdqIhsClytk/E+AYFZVbid8YmJxVS3dbcGHbkOJVFPhV/ND
+	gCSQ==
+X-Gm-Message-State: ABuFfog6T/BBmR1V6X+gLQb2blSw8eAw0jp3272ETm9YH3+NpMDs8/h4
+	ig40RBWVUzEq1cJ1QkM+L5LPgKaopCGAxGgPDdY=
+X-Google-Smtp-Source: ACcGV63bONI9yyMk5+2nxtrswP9iZXJJSQbkFdjq5rnApQZqLCy4QT2TTHFPMj8HuBgPlIa0rEAtDB3gquwouRJUEQo=
 X-Received: by 2002:aed:3031:: with SMTP id
-	46-v6mr25272573qte.29.1539137133373; 
-	Tue, 09 Oct 2018 19:05:33 -0700 (PDT)
+	46-v6mr25285679qte.29.1539137511210; 
+	Tue, 09 Oct 2018 19:11:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
-	<79b03cc8-41cf-f27e-c4ea-45f57f4a7ac9@gmail.com>
-In-Reply-To: <79b03cc8-41cf-f27e-c4ea-45f57f4a7ac9@gmail.com>
+References: <20181010015517.16921-1-Randy.MacLeod@windriver.com>
+In-Reply-To: <20181010015517.16921-1-Randy.MacLeod@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 Oct 2018 19:05:07 -0700
-Message-ID: <CAMKF1srBmwc75qXH2mvLoQ3Lav74E1yD+r5-_nTm0LiRWx+rKw@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
+Date: Tue, 9 Oct 2018 19:11:25 -0700
+Message-ID: <CAMKF1spbqwKwtg-XkbxBwfTHOFCa1JkdPNObpK+2CX4KZq15wg@mail.gmail.com>
+To: Randy MacLeod <Randy.MacLeod@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libvncserver: Update to latest version
+Subject: Re: [meta-networking][PATCH] postfix: update the upstream regex too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,106 +54,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 02:05:32 -0000
+X-List-Received-Date: Wed, 10 Oct 2018 02:11:50 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 9, 2018 at 5:31 PM akuster808 <akuster808@gmail.com> wrote:
+i have squashed it into earlier version in master-next
+On Tue, Oct 9, 2018 at 6:56 PM Randy MacLeod
+<Randy.MacLeod@windriver.com> wrote:
 >
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> ---
+>  meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+> index 7f00c3c19..960356999 100644
+> --- a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+> +++ b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+> @@ -8,4 +8,4 @@ SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patc
+>  SRC_URI[md5sum] = "4381c6492f415e4a69cf5099d4acea76"
+>  SRC_URI[sha256sum] = "54f514dae42b5275cb4bc9c69283f16c06200b71813d0bb696568c4ba7ae7e3b"
 >
-> On 10/09/2018 11:27 AM, Eddie James wrote:
-> > The latest release of libvncserver is almost two years old. A number of
-> > security fixes and enhancements have recently been committed. Since the repo
-> > is stable, point the recipe to the latest commit.
-> >
-> > libvncserver switched from autotools to cmake, so update the recipe as
-> > necessary, and add PACKAGECONFIG options to allow a more minimal build and
-> > install.
-> >
-> > Signed-off-by: Eddie James <eajames@linux.ibm.com>
-> > ---
-> >  .../libvncserver/libvncserver_0.9.11.bb            | 25 ----------------------
-> >  .../libvncserver/libvncserver_git.bb               | 23 ++++++++++++++++++++
-> >  2 files changed, 23 insertions(+), 25 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> >  create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> >
-> > diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> > deleted file mode 100644
-> > index 38dac06..0000000
-> > --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> > +++ /dev/null
-> > @@ -1,25 +0,0 @@
-> > -DESCRIPTION = "library for easy implementation of a RDP/VNC server"
-> > -HOMEPAGE = "https://libvnc.github.io"
-> > -SECTION = "libs"
-> > -PRIORITY = "optional"
-> > -LICENSE = "GPLv2"
-> > -LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
-> > -
-> > -DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
-> > -
-> > -PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
-> > -PACKAGECONFIG[systemd] = ",,systemd"
-> > -
-> > -RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
-> > -
-> > -inherit distro_features_check autotools binconfig pkgconfig
-> > -
-> > -REQUIRED_DISTRO_FEATURES = "x11"
-> > -
-> > -SRC_URI = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.tar.gz"
-> > -SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
-> > -SRC_URI[sha256sum] = "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894"
-> > -
-> > -S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
-> > -
-> > -TARGET_LDFLAGS += "-lgcrypt"
-> > diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> > new file mode 100644
-> > index 0000000..9fb2c09
->
-> This removes any notion of a version. I think that is not ideal.
->
-> Does the git hash equate to version ?
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> > @@ -0,0 +1,23 @@
-> > +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
-> > +HOMEPAGE = "https://libvnc.github.io"
-> > +SECTION = "libs"
-> > +PRIORITY = "optional"
-> > +LICENSE = "GPLv2"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
-> > +
-> > +PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
-> > +PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
-> > +PACKAGECONFIG[gnutls] = ",,gnutls"
-> > +PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
-> > +PACKAGECONFIG[openssl] = ",,openssl"
-> > +PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
-> > +PACKAGECONFIG[systemd] = ",,systemd"
-> > +PACKAGECONFIG[sdl] = ",,libsdl2"
-> > +PACKAGECONFIG[zlib] = ",,zlib"
-> > +
-> > +inherit cmake
-> > +
->
->
-> Have you run " yocto-check-layer"  with this?
->
-> I had to add 'REQUIRED_DISTRO_FEATURES = "x11" ' to make it pass on the
-> previous version.
-
-seemingly its still needed.
-
->
->
-> > +SRC_URI = "git://github.com/LibVNC/libvncserver"
-> > +SRCREV = "7b1ef0ffc4815cab9a96c7278394152bdc89dc4d"
-> > +
-> > +S = "${WORKDIR}/git"
-> - Armin
+> -UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
+> +UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
+> --
+> 2.17.0
 >
 > --
 > _______________________________________________
