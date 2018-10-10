@@ -1,52 +1,67 @@
-Return-Path: <rehsack@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 19BC66FF78
+Return-Path: <prvs=8141f8401=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C9A560237
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 07:03:27 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id y16so4381663wrw.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 00:03:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=pHFbtpaIy6KB8x/8SnktzjfeC8VpKUNRVqyS/m1Dnpw=;
-	b=irdJIh5gcDMxBKJ82Ll2Py//0n7uN+38iW02AiE/P2gr0sp7jtDn4O3wktISzD6iDR
-	XFwzSvyJ0E+JScIjkN994Nacf3vX32zHZMRD6VjG4XMS2THaAIzs4r1r6hYMdRWdAb8v
-	SbV8Ly+mnySuQTiQB8qF7P+tHqkRO9NV3tJxiq9kk9CoNBIVAPqFrEJoyWsca+zjbuYa
-	qBY/i4+45sGxbrmaOBwnFoBIfvh82tDGMRq/Mck4oGw1s5azRwpyRhE0U3Qd1eYQlDgq
-	WpMSS0L2ROgrx2MBorTF7C8on07iYeEqtVfI29suZBbxJ+LSnLB5g5OdZPPYueQNKp3i
-	bsZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=pHFbtpaIy6KB8x/8SnktzjfeC8VpKUNRVqyS/m1Dnpw=;
-	b=B2fMMkEWvfpo4kHmGS1mpVmMi7/opqjU9OtmEN/bOI+1jUcGyGrdjUfbpEbp68eeWH
-	mBj+PyVZho1+JQYwMGuZYIZXu8aZYxKR/n3Dy+t5UEXrN+OySGYhPIRWVGCafSI4Jnpk
-	MjfNrulBLFKpmtTPA7FyBqoQNUNLxODOsR7wBSQfJ2UYMPokAN870RtJrMpK2A82YZxK
-	hUSdmIpWLYXe0YmVj6SYRbNvmpqk8cbMTo9mOrE6VhWLGHEd5VuzVvIOxpXr6YlWdOPm
-	/xOJBFHlFCtSXwE/zaOGdwMrFiwt1n9BoWnoTs9Ndv5/Wy4hhn76VO56rUkjdoZvjpCK
-	6sqw==
-X-Gm-Message-State: ABuFfogWZD4CMWlKD6FxUWubnOcUCx3v0AxOONKZQ3/M48r1/ngqUZuZ
-	K4Tq9BIdlvo8Yw880DooG9GZLiEY
-X-Google-Smtp-Source: ACcGV63GoQc5hscDu6izWKjcEfFS0tIsqUXdt53Sh+gUJQQ7gGQesI7DTNokHnd+r8Lf9MhHy6XF6g==
-X-Received: by 2002:a5d:5148:: with SMTP id
-	u8-v6mr22342195wrt.299.1539155007778; 
-	Wed, 10 Oct 2018 00:03:27 -0700 (PDT)
-Received: from beaker.muppets.liwing.de (b2b-78-94-80-58.unitymedia.biz.
-	[78.94.80.58]) by smtp.gmail.com with ESMTPSA id
-	b139-v6sm33502296wmd.36.2018.10.10.00.03.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Oct 2018 00:03:27 -0700 (PDT)
-Sender: Jens Rehsack <rehsack@gmail.com>
-From: Jens Rehsack <sno@netbsd.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Oct 2018 09:03:10 +0200
-Message-Id: <20181010070310.18649-1-sno@netbsd.org>
-X-Mailer: git-send-email 2.17.1
-Cc: Jens Rehsack <sno@netbsd.org>,
-	=?UTF-8?q?Sven=20H=C3=A4drich?= <svenha@external.miltenyibiotec.de>,
-	Igor Kreps <igork@miltenyibiotec.de>
-Subject: [meta-mono][PATCH] layer.conf: update layer compatibility sumo->thud
+	Wed, 10 Oct 2018 07:38:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.54,363,1534802400"; d="scan'208";a="12788206"
+To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20180918151043.32634-1-git@andred.net>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	xsFNBFLopXgBEACzfrB885BYxx/AHUYSin/jJqkDTvBKf22r9Nws0AxuOGSy9WXe87uv7ylF
+	alqn8XobrGbRv91bFdbDZF84Ba3VB6Ac4KLvEomYDCGmDGdAz1AbYB0VRvI38lcZ2NqHDCfI
+	MQkm6qts37mwi/IUZXtuGrq3pkBRMAERAVXAN+07SEPi5FhrhpqFUCn6Suk3VdVfG9JJ+oAQ
+	V+DBQ1rIdTCFjIJBplgp53/2HQWHUjSSZ4tc8ESVyLD486pj/zod+gpikaxQ+84Jsb9AwAmW
+	1xs5ZH1mH44ML10sRQM6AAtCIsazAlRrA+Kktvz4gtYkATvqM3nEJVks74yAgaXNn3KlfOAY
+	lHdjYTsdzTb9l84cqPGjsC120n+Rf7/XIbDc+uA/SDqHwwrfiiOEaqIiIpvm4jzXW68rCITW
+	we1/8ruNx9jWgotO41hz5PbBiSa4oaYmKm/B28psjK/mQSY/ZcvMm3YUu2YdsptoxfAiX9kK
+	yvjEfN8snptJA2rJkhO5LoITcome8INHpxdo16ysnppq14HK/xH/wtTNHmKDZ90BZGMdoujL
+	ZuJXTz0oqJhpocx+mN54xQQJiq4at0SFAbLZABOuplvsJz0syqWEboTtsfyPYjK5BktSjhr1
+	tc9pWukQGWLAfUDV0XTyEUrEijs+tnHGpVbsdlinR/mieEt4JQARAQABzTdSaWNoYXJkIExl
+	aXRuZXIgKFNLSURBVEEpIDxyaWNoYXJkLmxlaXRuZXJAc2tpZGF0YS5jb20+wsF4BBMBAgAi
+	BQJS6KV4AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRANXM2qyKpn2IDPD/0entKI
+	IpsHqOeBzoN2EO5LCd/hi00hlCdVYwMdzEdJgsevW7ypp7dBXBJUh46M1QDC4lPTgK1SwU2u
+	KwKAmBU0eTD6AIrUB+TB8Tk2CckAiDL6qIzL0dL2AAb/mk2kGdoJRaAwSAjTJzQMbodTTznS
+	K6zxM/KE5BbV8nIS3cGTJ9wOjIhMA/2uw7GbBpHfhqkxQLwnEGaZUmon42qHKX818PWjE6PV
+	pElmhRTV6OVt/zniSSbfwmksvLIXESUQMjQP90I9SYc7PtVuYeejAtNRvk3MHCknFA5CpKAT
+	r74avoRQIvvczI73yTXv9gpJxtSnI3nzHWnflsTGfand6+fZBf7U+GGBVcUQwCSdOTaX+hyR
+	7RJnETgrs0raMeGogk4mwmR7p4MR407mmgoUiOby1LRDexaVAMAP7gbjMAk2rDnwh+TAbg/Y
+	6lbOJ9kdTjqDGBFJ4IZGRSAAXzbTQ45hR2F1UIOOQxqwE2Esr6adyDSV5fQpMj0ThJwPiQwr
+	ps9btjSh08Kj524gMw4jt7PlMj7q8iJkii1vzkUm0C0dI+jvycnya6Bqeuh2lkvS5p1Pwrx0
+	PAQEs/3aPfHlxhCI1JVzltb4wqWlbHCBR+QeaGCDloUhOX3FuoG9K2SZ2tFAAt3b19NQWvY9
+	k5rPj6Q9Yd5tHALTW0KTb+SwizKaXc7BTQRS6KV4ARAA8r+DSu50GbCZnX5PImCpEMQ5AA3g
+	xMy7mQnyZDh8NyUKECVz2lOPpHVdDM6LNoTt2NzZT8XrEY0E+Wp14iIFj/tWoh8A5EetKThz
+	f7yBo8pxpJuqiIdZURnqC8i/8U/1q6a/qo/vi+LdKlp5d8pRpwTTPnr4cmtuBUUELJX7ySDi
+	3Do3Xg8LNcAZInL+xrCSF5SzTB3Ab4f2TweMJCmKGci5007zD6VdwDokWgRxPAHdORbejqO9
+	dRK4DhYHQvesD54gashm2VciP6w4C/y3eWQTBCg+F5mIX7COqzOl73NObvukL/ThatAcEy/S
+	/8oT+WOiQqzBcwb9GW/V0R31P2kbNQ8FXj4Q57VAqC3l/8Q+BrBSPsuJco2pFNPflaPtGS9A
+	6fHqGwCrSIhy9bzcdqWh5yao9SL2h/qXWrbrNaY5kvkMeKvC8hkRpPKFjP+vfhR6uwmP8kbv
+	RJfogXapZZMsJsa3KUi0t9Ys9ZaEZCNvmoEV7YhFfBdqYE5gOlMSpF0LSFMhMgxz7Z43SxCN
+	rIHQXtpWIWECwz+VLOsr0V2CbbjrWvXp+me9Vp1AaFo5od3elEyCl/pabxKLqpZ/nNiRqUba
+	4eNr0pEkuDc+uzST3xRuZiUJnzBrnzo9BgVMn3mx/HqQ580YxWQ04hENdr8ymVZWHQ1KuJ7m
+	2Htz0UcAEQEAAcLBXwQYAQIACQUCUuileAIbDAAKCRANXM2qyKpn2CqOD/9a8RiAsq5G/WHJ
+	eQvMW/oZMpiSjJCqBxmz+S4ibIxYsWAaepykrOMPAiph2KTu9lnI5st/TSkJy9mskIO5FXTN
+	g+kdVyCg23D4PC0ay6EGLyTUuJriuG9twHbl63byF65ukBqRbnQKSOPdXpWRsKlgJOjVG1eA
+	qvZqhqy3OOFk9hmPWtqss1qE8gmr4vmpdDrWbYjjiQvW1UorGoEIiY4P5tlZDoI+ghqvOGBs
+	OF0JJkCdbMa5/vMBp+cjKhdh53nhY8yKSy3y2H5UevEpJKRw7xHnDjHVWny+ZPWZw8rDuIYB
+	pEo6jeZ+tDLDa9/6ozP1yrnxPRzeDs/j7th/T1JzQohxcKCpKONt72WPQdlRYYateAsu76dW
+	kakFtNiPnvI8JQ+R8yabD/vah0qyr9bhQDU3KcmBWLaW7de2XyA1XDIMlvBuCFbReyFQUbqX
+	lFMADKca2ak/vRr7pBfONFqJ4gUW0GGlVFkeKxXfvVJ7u1Wr0T4D1ul2nsDYo9LypwGEh8nV
+	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
+	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <28a8de89-a1f5-77be-0cd6-4d8424bfa2f2@skidata.com>
+Date: Wed, 10 Oct 2018 09:39:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
+MIME-Version: 1.0
+In-Reply-To: <20180918151043.32634-1-git@andred.net>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH] openjdk-8: support rm_work disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,24 +74,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 07:03:27 -0000
+X-List-Received-Date: Wed, 10 Oct 2018 07:38:09 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Jens Rehsack <sno@netbsd.org>
----
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 8a8d273..cf9a1f0 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -15,4 +15,4 @@ PREFERRED_VERSION_mono-native ?= "5.12.0.226"
- 
- PREFERRED_VERSION_nuget ?= "3.5.0"
- 
--LAYERSERIES_COMPAT_mono = "sumo"
-+LAYERSERIES_COMPAT_mono = "sumo thud"
--- 
-2.17.1
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
+If you have any questions, please let me know.
+
+regards;Richard.L
+
+On 9/18/18 5:10 PM, André Draszik wrote:
+> From: André Draszik <andre.draszik@jci.com>
+> 
+> Now that generation of the Java keystore actually works (again?),
+> OE-core commit 09bb7718d74 ("ca-certificates: use relative symlinks from $ETCCERTSDIR"),
+> do_compile() will fail when invoked multiple times.
+> 
+> The reason is that during do_compile(), the Java keytool is
+> used to create a Java keystore with the certificates provided
+> by ca-certificates. Before above OE-core commit, no
+> certificates were actually being added, but as certificates
+> are being added now, multiple do_compile() runs will end up
+> adding the same certificate twice when rm_work is disabled,
+> causing a keytool exception, as that is not allowed.
+> 
+> So let's remove any previously generated keystore before trying
+> to add certificates to it.
+> 
+> Signed-off-by: André Draszik <andre.draszik@jci.com>
+> 
+> ---
+> This applies on top of commit ec5aae3d ("conf: distro: add mejate{,-musl} distributions")
+> ---
+>  recipes-core/openjdk/openjdk-8-native.inc | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
+> index 6a01046..bae5d09 100644
+> --- a/recipes-core/openjdk/openjdk-8-native.inc
+> +++ b/recipes-core/openjdk/openjdk-8-native.inc
+> @@ -55,6 +55,7 @@ do_configure_prepend() {
+>  
+>  do_compile_prepend() {
+>      export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS}"
+> +    rm -f "${B}/images/j2sdk-image/jre/lib/security/cacerts"
+>  }
+>  
+>  do_compile_append() {
+> 
 
