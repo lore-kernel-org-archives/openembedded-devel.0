@@ -1,49 +1,27 @@
-Return-Path: <uvv.mail@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B105605C2
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D5CF79AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Oct 2018 09:35:27 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id q40-v6so9068991qte.0
+	Thu, 11 Oct 2018 10:15:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9BAFdkW022620
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Oct 2018 02:35:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=be6YuFSq4jC6RTtuwLZBAO6F2JCp2JVetQZsfEhO6Ao=;
-	b=jbF9tOJjQCYACBKdGEI3JdhBQAS12H12dNTGS8Uwjy8NguUD62wsjTa5baUt4ISYQ1
-	8J8di/ZIkRjLqpz28zVSkPrUKUo6ab9yiYM8qdT+ArfZk/oAyrNhwbHlMbzEoUziBzvj
-	+6rn2MBUc1iceJxDeIIlW8voEyuugQrr/HRFfaViqJfu8lOhQagIOPmLkBZ8fxaJ4txy
-	bW5I2mA5otFoZTsBeO596b+U2MpCBgoGYlztR+zObdDime+a0fhEwnf0e3hKqjTMNkn/
-	5RBRm6Xvy5BOu3pl4Z4DzbPQrc/XjjK8Aq8tnoxs3+tKlBWbHoQ6FjN2mocgzEJTEzDa
-	hjIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=be6YuFSq4jC6RTtuwLZBAO6F2JCp2JVetQZsfEhO6Ao=;
-	b=IXJOPO+cNp+PrAez8CmorTnHcelmoXrMVSvAWoYSYUtEoNMUGbJHXjYl4UcCrQOk/w
-	9uOfllMs9mu4IDsQspUmg9ooDxIwA466vP1CLCYrvyVSKMuzE09tMydH/9MnStOXtf1/
-	C8YGwrnhy5IjBUq8iWC8K9ebJ+QYo+HYd2h4cK4ZHFlR4+2CCfAZEIQbPvUrnWjAPB6e
-	OsphBX+VZ9B9rAWm70IJdg696MNCZ5EqlUPR6QINwfDKTAjfpcn20h72K0M+2Pyrtd4L
-	16yCO59jLqardxeovkNfL/S7IrVREzxamcHo1SbXgDdrLFpDFEfv8AUZCpRMU6nbqfxj
-	FhMQ==
-X-Gm-Message-State: ABuFfoiAbshbpOA9/PVC6SLg5dmrDOc3JtCSAlcE7tZtkER3oRac0qGo
-	FsrV4LHAoAe7TEKcH8TDUq3RdiN6qQ6Ndd+THp8=
-X-Google-Smtp-Source: ACcGV607fQprG86oNPACLgtcOyie6E4X2pl2cCKQtXNCQrixbKvRAeaPWroZjCRlLBmg5esVYIEA/Ihid593VAP43eM=
-X-Received: by 2002:ac8:1b87:: with SMTP id z7-v6mr716168qtj.321.1539250527981;
-	Thu, 11 Oct 2018 02:35:27 -0700 (PDT)
+	Thu, 11 Oct 2018 03:15:39 -0700 (PDT)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Thu, 11 Oct 2018 03:15:38 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1539245845-32509-1-git-send-email-changqing.li@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <b1b6c9ee-1839-e929-2b20-79b07c8ff530@windriver.com>
+Date: Thu, 11 Oct 2018 18:15:35 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-References: <20181011090824.21591-1-brgl@bgdev.pl>
-In-Reply-To: <20181011090824.21591-1-brgl@bgdev.pl>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Date: Thu, 11 Oct 2018 11:35:22 +0200
-Message-ID: <CAKHfEahAUCUK5A1gZmou8arwovBgg0xbtipOmngcEV8wjgB-bA@mail.gmail.com>
-To: brgl@bgdev.pl
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: lew@avast.com, bgolaszewski@baylibre.com,
-	openembedded-devel@lists.openembedded.org,
-	jan.kaisrlik@avast.com, karas@avast.com
-Subject: Re: [meta-oe][PATCH] catch2: new package
+In-Reply-To: <1539245845-32509-1-git-send-email-changqing.li@windriver.com>
+X-Originating-IP: [128.224.162.228]
+Subject: Re: [PATCH] e2fsprogs: fix test f_detect_junk print error msg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,117 +34,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2018 09:35:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 11 Oct 2018 10:15:38 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Hi Bartosz,
-As I learned quite recently, you have to do the following for header-only
-libraries:
-RDEPENDS_${PN}-dev = ""
-RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+please ignore this mail.
 
-Regards,
-Vyacheslav
-
-On Thu, Oct 11, 2018 at 11:08 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On 10/11/2018 04:17 PM, changqing.li@windriver.com wrote:
+> From: Changqing Li <changqing.li@windriver.com>
 >
-> Add a recipe for the catch2 testing framework. There's a bug upstream
-> which makes it impossible to build with gcc7 so include a patch.
+> test script have problem when the file want to grep
+> don't exist, change the check command to fix it
 >
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->  .../0001-internal-fix-build-in-GCC-7.patch    | 35 +++++++++++++++++++
->  meta-oe/recipes-test/catch2/catch2_2.4.1.bb   | 25 +++++++++++++
->  2 files changed, 60 insertions(+)
->  create mode 100644
-> meta-oe/recipes-test/catch2/catch2/0001-internal-fix-build-in-GCC-7.patch
->  create mode 100644 meta-oe/recipes-test/catch2/catch2_2.4.1.bb
+>   .../0001-e2fsprogs-fix-ptest-error-msg.patch       | 33 ++++++++++++++++++++++
+>   .../recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb |  1 +
+>   2 files changed, 34 insertions(+)
+>   create mode 100644 meta/recipes-devtools/e2fsprogs/e2fsprogs/0001-e2fsprogs-fix-ptest-error-msg.patch
 >
-> diff --git
-> a/meta-oe/recipes-test/catch2/catch2/0001-internal-fix-build-in-GCC-7.patch
-> b/meta-oe/recipes-test/catch2/catch2/0001-internal-fix-build-in-GCC-7.patch
+> diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs/0001-e2fsprogs-fix-ptest-error-msg.patch b/meta/recipes-devtools/e2fsprogs/e2fsprogs/0001-e2fsprogs-fix-ptest-error-msg.patch
 > new file mode 100644
-> index 000000000..606398afa
+> index 0000000..46d32ef
 > --- /dev/null
-> +++
-> b/meta-oe/recipes-test/catch2/catch2/0001-internal-fix-build-in-GCC-7.patch
-> @@ -0,0 +1,35 @@
-> +From 857bf7e83db330682a4c722d0b57be1e4481f4e2 Mon Sep 17 00:00:00 2001
-> +From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> +Date: Thu, 11 Oct 2018 09:44:24 +0200
-> +Subject: [PATCH] internal: fix build in GCC 7
+> +++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs/0001-e2fsprogs-fix-ptest-error-msg.patch
+> @@ -0,0 +1,33 @@
+> +From e193316891510ec3852699d57a860c65615196ef Mon Sep 17 00:00:00 2001
+> +From: Changqing Li <changqing.li@windriver.com>
+> +Date: Thu, 11 Oct 2018 15:13:24 +0800
+> +Subject: [PATCH] e2fsprogs: fix ptest error msg
 > +
-> +The following error is emitted by gcc 7:
+> +Upstream-Status: Inappropriate [oe-specific]
 > +
-> +include/internal/catch_tostring.cpp:217:21: error: comparison is always
-> true due to limited range of data type [-Werror=type-limits]
-> +|      } else if ('\0' <= value && value < ' ') {
-> +|                 ~~~~~^~~~~~~~
-> +| cc1plus: all warnings being treated as errors
+> +original command want to get count of match lines, but if
+> +config.h is not existed, like our case, the result of
+> +$(grep -c 'define HAVE_MAGIC_H' ../lib/config.h) will not be
+> +number, and cannot compare with 0, so fix it by check
+> +command executed result.
 > +
-> +We can drop the first part of the if.
-> +
-> +Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > +---
-> + include/internal/catch_tostring.cpp | 2 +-
+> + tests/f_detect_junk/script | 2 +-
 > + 1 file changed, 1 insertion(+), 1 deletion(-)
 > +
-> +diff --git a/include/internal/catch_tostring.cpp
-> b/include/internal/catch_tostring.cpp
-> +index 4e0c027d..59cc8dec 100644
-> +--- a/include/internal/catch_tostring.cpp
-> ++++ b/include/internal/catch_tostring.cpp
-> +@@ -214,7 +214,7 @@ std::string StringMaker<char>::convert(char value) {
-> +         return "'\\n'";
-> +     } else if (value == '\t') {
-> +         return "'\\t'";
-> +-    } else if ('\0' <= value && value < ' ') {
-> ++    } else if (value < ' ') {
-> +         return ::Catch::Detail::stringify(static_cast<unsigned
-> int>(value));
-> +     } else {
-> +         char chstr[] = "' '";
+> +diff --git a/tests/f_detect_junk/script b/tests/f_detect_junk/script
+> +index 2577842..d56ec1a 100644
+> +--- a/tests/f_detect_junk/script
+> ++++ b/tests/f_detect_junk/script
+> +@@ -1,6 +1,6 @@
+> + #!/bin/bash
+> +
+> +-if [ "$(grep -c 'define HAVE_MAGIC_H' ../lib/config.h)" -eq 0 ]; then
+> ++if ! grep -q -c 'define HAVE_MAGIC_H' ./config.h 2>/dev/null
+> + 	echo "$test_name: skipped (no magic)"
+> + 	exit 0
+> + fi
 > +--
-> +2.19.1
+> +2.7.4
 > +
-> diff --git a/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
-> b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
-> new file mode 100644
-> index 000000000..ba14a362c
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
-> @@ -0,0 +1,25 @@
-> +DESCRIPTION = "A modern, C++-native, header-only, test framework for
-> unit-tests, \
-> +TDD and BDD - using C++11, C++14, C++17 and later."
-> +AUTHOR = "Phil Nash, Martin Horenovsky and others"
-> +HOMEPAGE = "https://github.com/catchorg/Catch2"
-> +LICENSE = "BSL-1.0"
-> +LIC_FILES_CHKSUM =
-> "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
-> +
-> +SRC_URI = "git://github.com/catchorg/Catch2.git \
-> +           file://0001-internal-fix-build-in-GCC-7.patch"
-> +SRCREV = "9e1bdca4667295fcb16265eae00efa8423f07007"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "python-native"
-> +
-> +inherit cmake python3native
-> +
-> +# Header-only library
-> +ALLOW_EMPTY_${PN} = "1"
-> +
-> +do_install_append() {
-> +    rm ${D}/usr/share/Catch2/lldbinit
-> +    rm ${D}/usr/share/Catch2/gdbinit
-> +    rmdir ${D}/usr/share/Catch2/
-> +}
-> --
-> 2.19.1
->
-> --
+> diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
+> index 823d18b..c935f98 100644
+> --- a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
+> +++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
+> @@ -6,6 +6,7 @@ SRC_URI += "file://remove.ldconfig.call.patch \
+>               file://Revert-mke2fs-enable-the-metadata_csum-and-64bit-fea.patch \
+>               file://mkdir_p.patch \
+>               file://0001-misc-create_inode.c-set-dir-s-mode-correctly.patch \
+> +            file://0001-e2fsprogs-fix-ptest-error-msg.patch \
+>               "
+>   
+>   SRC_URI_append_class-native = " file://e2fsprogs-fix-missing-check-for-permission-denied.patch \
+
+-- 
+BRs
+
+Sandy(Li Changqing)
+Wind River Linux
+
 
