@@ -1,24 +1,24 @@
 Return-Path: <Changqing.Li@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94069798B6
+	by mail.openembedded.org (Postfix) with ESMTP id BA000746E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Oct 2018 02:26:39 +0000 (UTC)
+	Thu, 11 Oct 2018 02:53:36 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9B2QJJ9013938
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9B2qZhK014596
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 19:26:30 -0700
+	Wed, 10 Oct 2018 19:53:27 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Wed, 10 Oct 2018 19:26:09 -0700
+	14.3.408.0; Wed, 10 Oct 2018 19:53:06 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Oct 2018 10:26:08 +0800
-Message-ID: <1539224768-92209-1-git-send-email-changqing.li@windriver.com>
+Date: Thu, 11 Oct 2018 10:53:05 +0800
+Message-ID: <1539226385-343863-1-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH] freeradius: fix radiusd.service startup failed problem
+Subject: [PATCH V2] freeradius: fix radiusd.service startup failed problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2018 02:26:39 -0000
+X-List-Received-Date: Thu, 11 Oct 2018 02:53:36 -0000
 Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
-during radiud start up, it will sereval CVE of libssl,
-if allow_vulnerable_openssl set to no and one of CVE is matched,
-radiusd will not startup.
+during radiusd start up, it will check several CVEs of libssl,
+if allow_vulnerable_openssl set to no and one of the CVEs is
+matched, radiusd will not startup.
 
 in tls.c, two CVEs's version number is wrong, and after upgrade openssl
 to 1.1.1, one CVE matched, so startup failed. correct the version numner
-to make radiusd startup success.
+to make radiusd startup successfully.
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...s-correct-version-number-of-libssl-defect.patch | 43 ++++++++++++++++++++++
+ ...s-correct-version-number-of-libssl-defect.patch | 44 ++++++++++++++++++++++
  .../freeradius/freeradius_3.0.17.bb                |  1 +
- 2 files changed, 44 insertions(+)
+ 2 files changed, 45 insertions(+)
  create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
 
 diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
 new file mode 100644
-index 0000000..0a961d1
+index 0000000..9e1f5b2
 --- /dev/null
 +++ b/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
-@@ -0,0 +1,43 @@
+@@ -0,0 +1,44 @@
 +From fecf974b63f72eeb12d3b43522e948ca2bc704d4 Mon Sep 17 00:00:00 2001
 +From: Changqing Li <changqing.li@windriver.com>
 +Date: Thu, 11 Oct 2018 09:45:52 +0800
 +Subject: [PATCH] freeradius: correct version number of libssl defect
 +
-+Upstream-Status: Backport
++Upstream-Status: Backport [https://github.com/FreeRADIUS/freeradius-server
++                 /commit/ad039347beca4ded297813a1da6eabb61fcf2ddd]
 +
 +upstream have refactored this part code into
 +src/lib/tls/base.c, and problem also have fixed
