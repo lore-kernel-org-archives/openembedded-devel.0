@@ -1,23 +1,24 @@
-Return-Path: <james.feist@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A61F679A57
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 94069798B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 23:15:38 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	10 Oct 2018 16:15:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,366,1534834800"; d="scan'208";a="77843515"
-Received: from skyhawk.jf.intel.com ([10.54.51.81])
-	by fmsmga008.fm.intel.com with ESMTP; 10 Oct 2018 16:14:53 -0700
-From: James Feist <james.feist@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Oct 2018 16:13:37 -0700
-Message-Id: <20181010231337.46391-1-james.feist@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] valijson: Add recipe
+	Thu, 11 Oct 2018 02:26:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9B2QJJ9013938
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Oct 2018 19:26:30 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Wed, 10 Oct 2018 19:26:09 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 11 Oct 2018 10:26:08 +0800
+Message-ID: <1539224768-92209-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [PATCH] freeradius: fix radiusd.service startup failed problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,56 +31,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 23:15:38 -0000
+X-List-Received-Date: Thu, 11 Oct 2018 02:26:39 -0000
+Content-Type: text/plain
 
-valijson is a header only c++ library for JSON
-schema validation.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: James Feist <james.feist@linux.intel.com>
+during radiud start up, it will sereval CVE of libssl,
+if allow_vulnerable_openssl set to no and one of CVE is matched,
+radiusd will not startup.
+
+in tls.c, two CVEs's version number is wrong, and after upgrade openssl
+to 1.1.1, one CVE matched, so startup failed. correct the version numner
+to make radiusd startup success.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
+ ...s-correct-version-number-of-libssl-defect.patch | 43 ++++++++++++++++++++++
+ .../freeradius/freeradius_3.0.17.bb                |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
 
-Changes since v1:
-    - Fixed license
-    - Simplified symlink
-    - Removed extra whitespace
-
- .../recipes-devtools/valijson/valijson_git.bb | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/valijson/valijson_git.bb
-
-diff --git a/meta-oe/recipes-devtools/valijson/valijson_git.bb b/meta-oe/recipes-devtools/valijson/valijson_git.bb
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
 new file mode 100644
-index 000000000..e7edab646
+index 0000000..0a961d1
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/valijson/valijson_git.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Header-only C++ library for JSON Schema validation"
-+HOMEPAGE = "https://github.com/tristanpenman/valijson"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
+@@ -0,0 +1,43 @@
++From fecf974b63f72eeb12d3b43522e948ca2bc704d4 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Thu, 11 Oct 2018 09:45:52 +0800
++Subject: [PATCH] freeradius: correct version number of libssl defect
 +
-+SRC_URI = "git://github.com/tristanpenman/valijson.git"
-+PV = "0.1+git${SRCPV}"
++Upstream-Status: Backport
 +
-+SRCREV = "c2f22fddf599d04dc33fcd7ed257c698a05345d9"
++upstream have refactored this part code into
++src/lib/tls/base.c, and problem also have fixed
++by commit ad039347beca
 +
-+S = "${WORKDIR}/git"
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/main/tls.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+inherit cmake
++diff --git a/src/main/tls.c b/src/main/tls.c
++index acbfe79..d9c91f1 100644
++--- a/src/main/tls.c
+++++ b/src/main/tls.c
++@@ -72,15 +72,15 @@ typedef struct libssl_defect {
++ static libssl_defect_t libssl_defects[] =
++ {
++ 	{
++-		.low		= 0x01010101f,		/* 1.1.0a */
++-		.high		= 0x01010101f,		/* 1.1.0a */
+++		.low		= 0x01010001f,		/* 1.1.0a */
+++		.high		= 0x01010001f,		/* 1.1.0a */
++ 		.id		= "CVE-2016-6309",
++ 		.name		= "OCSP status request extension",
++ 		.comment	= "For more information see https://www.openssl.org/news/secadv/20160926.txt"
++ 	},
++ 	{
++-		.low		= 0x01010100f,		/* 1.1.0  */
++-		.high		= 0x01010100f,		/* 1.1.0  */
+++		.low		= 0x010100000f,		/* 1.1.0  */
+++		.high		= 0x01010000f,		/* 1.1.0  */
++ 		.id		= "CVE-2016-6304",
++ 		.name		= "OCSP status request extension",
++ 		.comment	= "For more information see https://www.openssl.org/news/secadv/20160922.txt"
++-- 
++2.7.4
 +
-+EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
-+
-+# valijson is a header only C++ library, so the main package will be empty.
-+RDEPENDS_${PN}-dev = ""
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+# valijson expects json.hpp where nlohmann-json_git.bb installs
-+# nlohmann/json.hpp, this allows usage via json.hpp
-+do_install_append() {
-+    ln -s nlohmann/json.hpp ${D}${includedir}/json.hpp
-+}
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+index 1b45e78..c17d56d 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+@@ -29,6 +29,7 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
+     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
++    file://0001-freeradius-correct-version-number-of-libssl-defect.patch \
+ "
+ SRC_URI[md5sum] = "1f4ad38f32101a7d50d818afa6f17339"
+ SRC_URI[sha256sum] = "3f03404b6e4a4f410e1f15ea2ababfec7f8a7ae8a49836d8a0c137436d913b96"
 -- 
-2.17.1
+2.7.4
 
 
