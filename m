@@ -1,23 +1,24 @@
-Return-Path: <james.feist@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A1FD79ADD
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B1B8744AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Oct 2018 20:48:18 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	11 Oct 2018 13:48:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,369,1534834800"; d="scan'208";a="99500122"
-Received: from skyhawk.jf.intel.com ([10.54.51.81])
-	by orsmga002.jf.intel.com with ESMTP; 11 Oct 2018 13:48:19 -0700
-From: James Feist <james.feist@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Oct 2018 13:47:04 -0700
-Message-Id: <20181011204704.17667-1-james.feist@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] nlohmann-json: Add symlink to json.hpp and update to 3.3.0
+	Fri, 12 Oct 2018 02:14:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9C2DnhX014857
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Oct 2018 19:14:20 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 11 Oct 2018 19:14:12 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 Oct 2018 10:14:11 +0800
+Message-ID: <1539310451-50949-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [PATCH V3] e2fsprogs: fix test f_detect_junk print error msg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,50 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2018 20:48:18 -0000
+X-List-Received-Date: Fri, 12 Oct 2018 02:14:29 -0000
+Content-Type: text/plain
 
-nlohmann-json has examples in their repo that refer to
-the header as json.hpp directly, as such many packages
-that require nlohmann-json expect json.hpp and not
-nlohmann/json.hpp as the cmake file installs. Create symlink
-so that access is available by either option. Also update
-to release 3.3.0.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: James Feist <james.feist@linux.intel.com>
+This test need to check config.h, so install it
+to fix below err msg:
+
+grep: ../lib/config.h: No such file or directory
+./test/f_detect_junk/script: line 3: [: : integer expression expected
+f_detect_junk: detect non-fs file data: ok
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
-    changes:
-    - fixed srcrev
+ meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
- .../nlohmann-json/nlohmann-json_git.bb                 | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
-index a89b659ae..65e49bc95 100644
---- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=9a8ae1c2d606c432a2aa2e2de15be22a"
- 
- SRC_URI = "git://github.com/nlohmann/json.git"
- 
--PV = "3.2.0+git${SRCPV}"
-+PV = "3.3.0+git${SRCPV}"
- 
--SRCREV = "8c20571136f2d5351b379a06ad6591bd980880fe"
-+SRCREV = "aafad2be1f3cd259a1e79d2f6fcf267d1ede9ec7"
- 
- S = "${WORKDIR}/git"
- 
-@@ -21,3 +21,9 @@ EXTRA_OECMAKE += "-DJSON_BuildTests=OFF"
- RDEPENDS_${PN}-dev = ""
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
+index 823d18b..beb0a36 100644
+--- a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
++++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.44.3.bb
+@@ -129,4 +129,7 @@ do_install_ptest() {
+ 	find "${D}${PTEST_PATH}" -type f \
+ 	    \( -name 'Makefile' -o -name 'Makefile.in' -o -name '*.o' -o -name '*.c' -o -name '*.h' \)\
+ 	    -exec  rm -f {} +
 +
-+# other packages commonly reference the file directly as "json.hpp"
-+# create symlink to allow this usage
-+do_install_append() {
-+    ln -s nlohmann/json.hpp ${D}${includedir}/json.hpp
-+}
++        install -d ${D}${PTEST_PATH}/lib
++        install -m 0644 ${B}/lib/config.h  ${D}${PTEST_PATH}/lib/
+ }
 -- 
-2.17.1
+2.7.4
 
 
