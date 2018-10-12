@@ -1,47 +1,55 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EC26794BE
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 09:05:56 +0000 (UTC)
-Received: by mail-pl1-f169.google.com with SMTP id f18-v6so5636996plr.1
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 02:05:57 -0700 (PDT)
+Return-Path: <ahartmetz@gmail.com>
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
+	[209.85.208.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 3202979B72
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Oct 2018 09:14:46 +0000 (UTC)
+Received: by mail-ed1-f54.google.com with SMTP id b7-v6so10822340edd.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Oct 2018 02:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=uyNUX4wErFc+pMbd+aFUt/zO5fir7XSj+NnnRzHW5F4=;
-	b=YH7WfBHOxtW6kkuyy5VZcwy72/iHrinOCbGPEPcXYNpxTo/NKeajjIpyNRpJy+4sLc
-	6ZJ+rjk3XEp9l4Bhny6Bm2ifcCTNAluomLg6fdxTzDUlKKxWhTezqHxXSD6+C37R/8Na
-	mbkCo+jp9WBiQr7g3b2c51DpceAN0PyEJMTi3Kr/Zby248u2u3iB6OWenCxB2oTvKTxC
-	FMMUn1QS047dRzl/apq7NLORJmv7XiywOc7YPuwt37QG5noBiXMdlAqWVfpsefVPWjjx
-	d9N9rkxqHiHu8tmjTgxcCTkH8OrDgY9r/6CID8wmiDMjhggc/QntX1Su+soDThk58AoE
-	KmLA==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=jzJDlfQW8y8n87nYGuwa1M5FUL9vknHh4ainhMTKR1Y=;
+	b=Vs/fhPVnMTGmTrR6eN3uX+CJF6D4C9MBqMP354ujJuFB7w4Yl2ma3HMakYw5QJJcc5
+	zaBLzeOfovpV9qbwsWarA0kneOgzHbaU1GecxkNQc3Mzdg/IJqqm4Ofj3DnF1CGWjx41
+	QXN7orJXB5Pa43x+C0rh9xSdgkiA3zvqomZqHeBqz1M05JTXTm0z3EFpzOlEsfiwYR71
+	gEXm0qHZIuvill7HpreB5Tm24kvjFd+ZUkzrCYRMG3Hrfu1oo9bs7c8JNj2Y6LVPoIhM
+	VnaZjcfQIxjH5sUlVs+iI7nkNZBwqj7rwQlGbAK89qqpLCtefwvLa+dJj+5xqa238ppi
+	pdWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=uyNUX4wErFc+pMbd+aFUt/zO5fir7XSj+NnnRzHW5F4=;
-	b=R+TPFcPsUo2IWP+Fvlcha6sJfD0BctjNDx9xZitROOLwvllO5tM6XKhJl8/7P2InWc
-	CAxpBYV2o/gA/w65p8dPZQtby0YaJzbtK+S1NIGBMWvBF++gFCrVG+hqG0jGqCuacuWD
-	cUD6WVXoqzv/LBqZeQZJ6F2WlEuFgI6wwkAksxFuqLuRwcBRRpUQXviVRkjkrpHycEX4
-	Uxtu/MzOnnAm099TP/8LiWnPUy4xMJN6ZngrDLwLWx43HF/aR3IttRHziaRTjlz8RlIK
-	nA0MQIupOdO4J9NX+tAKI1irVSNyzDc0DnmQ2ky57+2AAIPSsDDluJ7bsCl6XF7x7nEv
-	ggEg==
-X-Gm-Message-State: ABuFfog4C8858lb3sGKhK3pGOY2ZedL0pRtFL/DTXriMaYizpPXaJDfW
-	TIxqdYEgnWfqXZKxFGn+0yTwQZ/lOjdF6bI+7lFm8Q==
-X-Google-Smtp-Source: ACcGV61JKScInXRvum6fiWWUL+VknM76RzhUXsPDuLJGBIuDSkFXE8/+vnsZJ1FUaJGh3yLsgbShRXYW/sR7tvKYP0s=
-X-Received: by 2002:a17:902:d704:: with SMTP id
-	w4-v6mr5151557ply.230.1539335157178; 
-	Fri, 12 Oct 2018 02:05:57 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=jzJDlfQW8y8n87nYGuwa1M5FUL9vknHh4ainhMTKR1Y=;
+	b=OLrpASqVFSydI/TgUQm7hyuJN565l9anRO3Rbb6v97H7viSukpVmYC2TBn0R63qJA8
+	KCF6W84Tsiz4lJghJn+Eei0+Be8FKy+tDXdsccDtuCmugfgihhciPLPKq6KbeFpoZQYZ
+	WBAs/Nbt7v+JxcyHc8B/gr15zgGtua9t/qYfp55CuDK5KsMbTgBhrNtWdjlzXj4Ee3gs
+	z60hI1DJAdSCCdWUZCo+pxU1ff1/err2YJnzRAZe/ZQvtvWJZaAiqca1q8Hq2UOcSpqO
+	J9WZcwqdcAvrDmAXOH2F12f7hys6eGRBO+9n8TM+uwvO3AO8RNYI41NDu09J67zsT1WL
+	iAJQ==
+X-Gm-Message-State: ABuFfohAE/ffYiB2peP6EbZB9yg8UvrojaCcnpG91mndyof36xP4Nkkh
+	K1beZ8yfa6LmPG88OWxSUsItGeWE
+X-Google-Smtp-Source: ACcGV63TlJkhaReMzjH2jll52K4drKUhPIHbPV6ACBQfqp2Cc+n+B9h5lZr1Bmv4wrt7CngEu98WOQ==
+X-Received: by 2002:a17:906:6a09:: with SMTP id
+	o9-v6mr5972468ejr.99.1539335686496; 
+	Fri, 12 Oct 2018 02:14:46 -0700 (PDT)
+Received: from rechenplan.localnet
+	(200116b84217e00009c3869ee049974e.dip.versatel-1u1.de.
+	[2001:16b8:4217:e000:9c3:869e:e049:974e])
+	by smtp.gmail.com with ESMTPSA id
+	e30-v6sm403872edd.25.2018.10.12.02.14.45
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 12 Oct 2018 02:14:45 -0700 (PDT)
+From: Andreas Hartmetz <ahartmetz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Oct 2018 11:14:44 +0200
+Message-ID: <1823137.JgcnNxDFaY@rechenplan>
+In-Reply-To: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
+References: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
 MIME-Version: 1.0
-References: <CAMKF1spQ3K0fHrFF9=7nXGPR3gsLFf+jtnrib4E4-VSZYdVJvA@mail.gmail.com>
-In-Reply-To: <CAMKF1spQ3K0fHrFF9=7nXGPR3gsLFf+jtnrib4E4-VSZYdVJvA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Fri, 12 Oct 2018 11:05:43 +0200
-Message-ID: <CAAQYJAsvAP2yMXV_DbfbuX=o+7MmjtO7H7v6UBAnZn14RTS_UA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <Openembedded-devel@lists.openembedded.org>
-Subject: Re: State of the world, 2018-10-11
+Subject: Re: [meta-oe][PATCH] libvncserver: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,474 +62,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 09:05:56 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 12 Oct 2018 09:14:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Oct 11, 2018 at 7:28 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> http://www.openembedded.org/wiki/Bitbake_World_Status
->
-> == Failed tasks 2018-10-10 ==
->
-> INFO: jenkins-job.sh-1.8.45 Complete log available at
-> http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.report.20181011_102118.log
->
-> === common (0) ===
->
-> === common-x86 (1) ===
->     * sources/meta-freescale-3rdparty/recipes-bsp/u-boot/u-boot-boundary-fw-utils_2018.07.bb:do_fetch
->
-> === qemuarm (4) ===
->     * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
->     * sources/meta-openembedded/meta-oe/recipes-extended/redis/redis_4.0.8.bb:do_compile
->     * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_package_qa
->     * sources/meta-qt5/recipes-qt/qt5/qtbase_git.bb:do_compile
->
-> === qemuarm64 (1) ===
->     * sources/meta-browser/recipes-browser/chromium/chromium-ozone-wayland_71.0.3545.0.r589108.igalia.1.bb:do_compile
->
-> === qemux86 (1) ===
->     * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
->
-> === qemux86_64 (0) ===
->
-> === Number of failed tasks (9) ===
-> {| class=wikitable
-> |-
-> || qemuarm || 4 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm.20181010_090138.log/
-> ||
-> |-
-> || qemuarm64 || 1 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm64.20181010_160727.log/
-> ||
-> |-
-> || qemux86 || 2 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86.20181010_090144.log/
-> ||
-> |-
-> || qemux86_64 || 2 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86-64.20181010_184514.log/
-> ||
-> |}
->
-> === PNBLACKLISTs (0) ===
->
-> === QA issues (70) ===
-> {| class=wikitable
-> !| Count ||Issue
-> |-
-> ||0 ||already-stripped
-> |-
-> ||0 ||build-deps
-> |-
-> ||0 ||compile-host-path
-> |-
-> ||0 ||file-rdeps
-> |-
-> ||0 ||host-user-contaminated
-> |-
-> ||0 ||installed-vs-shipped
-> |-
-> ||0 ||invalid-pkgconfig
-> |-
-> ||0 ||ldflags
-> |-
-> ||0 ||libdir
-> |-
-> ||0 ||pkgname
-> |-
-> ||0 ||qa_pseudo
-> |-
-> ||0 ||symlink-to-sysroot
-> |-
-> ||0 ||textrel
-> |-
-> ||0 ||unknown-configure-option
-> |-
-> ||70 ||version-going-backwards
-> |}
->
->
->
-> === Incorrect PACKAGE_ARCH or sstate signatures (0) ===
->
-> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.signatures.20181011_065446.log/
->
->
->     * ERROR:  OE-core's config sanity checker detected a potential
-> misconfiguration.
->     * ERROR: no sigdata files were generated for MACHINE qemux86copy
-> in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
->
->
-> PNBLACKLISTs:
-> openembedded-core/:
-> meta-*:
-> PNBLACKLIST[android-system] = "depends on lxc from
-> meta-virtualiazation which isn't included in my world builds"
-> PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-> tested so much"
-> PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-> tested so much"
-> PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-> tested so much"
-> PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-> tested so much"
-> PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-> tested so much"
-> PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-> directory in /home/builder/poky :/"
->
->
-> QA issues by type:
-> count: 0 issue: already-stripped
->
->
-> count: 0 issue: libdir
->
->
-> count: 0 issue: textrel
->
->
-> count: 0 issue: build-deps
->
->
-> count: 0 issue: file-rdeps
->
->
-> count: 70 issue: version-going-backwards
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-cat went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-chroot went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-cpio went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-dd went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-dmesg went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-false went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-fstype went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-gunzip went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-gzip went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-halt went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-ipconfig went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-kill went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-kinit went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-ln went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-losetup went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-ls went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-minips went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-mkdir went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-mkfifo went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-mknod went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-mount went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-mv went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-nfsmount went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-nuke went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-pivot-root went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-poweroff went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-readlink went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-reboot went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-resume went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-run-init went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-sh went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-sleep went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-sync went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-true went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-umount went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-uname went backwards which would break package
-> feeds from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils went backwards which would break package feeds from
-> (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
-> klibc-static-utils-2.0.4: Package version for package
-> klibc-static-utils-zcat went backwards which would break package feeds
-> from (0:2.0.4-r0.1 to 0:2.0.4-r0.0) [version-going-backwards]
+By the way, this new version of the recipe also drops the spurious GTK+ 
+dependency of the old recipe. I was close to sending a patch to remove 
+that dependency... Maybe worth a look to check if GTK+ pulled in 
+anything libvnc might need or can put to good use. I didn't find 
+anything, but I also didn't runtime-test VNC.
 
-Hi Khem,
-
-finally the klibc-static-utils do build for x86 with security flags enabled.
-Strangely you get the above QA....I really don't see that..
-Some bug in package versioning ? Your custom setup?
-
-Cheers
-Andrea
+Am Dienstag, 9. Oktober 2018, 20:27:50 CEST schrieb Eddie James:
+> The latest release of libvncserver is almost two years old. A number
+> of security fixes and enhancements have recently been committed.
+> Since the repo is stable, point the recipe to the latest commit.
+> 
+> libvncserver switched from autotools to cmake, so update the recipe as
+> necessary, and add PACKAGECONFIG options to allow a more minimal
+> build and install.
+> 
+> Signed-off-by: Eddie James <eajames@linux.ibm.com>
+> ---
+>  .../libvncserver/libvncserver_0.9.11.bb            | 25
+> ---------------------- .../libvncserver/libvncserver_git.bb          
+>     | 23 ++++++++++++++++++++ 2 files changed, 23 insertions(+), 25
+> deletions(-)
+>  delete mode 100644
+> meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb create
+> mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> 
+> diff --git
+> a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+> b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+> deleted file mode 100644
+> index 38dac06..0000000
+> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+> -HOMEPAGE = "https://libvnc.github.io"
+> -SECTION = "libs"
+> -PRIORITY = "optional"
+> -LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM =
+> "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f" -
+> -DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+> -
+> -PACKAGECONFIG ??=
+> "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+> -PACKAGECONFIG[systemd] = ",,systemd"
+> -
+> -RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+> -
+> -inherit distro_features_check autotools binconfig pkgconfig
+> -
+> -REQUIRED_DISTRO_FEATURES = "x11"
+> -
+> -SRC_URI =
+> "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.ta
+> r.gz" -SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
+> -SRC_URI[sha256sum] =
+> "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894" -
+> -S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
+> -
+> -TARGET_LDFLAGS += "-lgcrypt"
+> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb new file
+> mode 100644
+> index 0000000..9fb2c09
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+> +HOMEPAGE = "https://libvnc.github.io"
+> +SECTION = "libs"
+> +PRIORITY = "optional"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f" +
+> +PACKAGECONFIG ??= "gcrypt gnutls jpeg png
+> ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl
+> zlib" +PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
+> +PACKAGECONFIG[gnutls] = ",,gnutls"
+> +PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
+> +PACKAGECONFIG[openssl] = ",,openssl"
+> +PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
+> +PACKAGECONFIG[systemd] = ",,systemd"
+> +PACKAGECONFIG[sdl] = ",,libsdl2"
+> +PACKAGECONFIG[zlib] = ",,zlib"
+> +
+> +inherit cmake
+> +
+> +SRC_URI = "git://github.com/LibVNC/libvncserver"
+> +SRCREV = "7b1ef0ffc4815cab9a96c7278394152bdc89dc4d"
+> +
+> +S = "${WORKDIR}/git"
 
 
-> packagegroup-core-standalone-sdk-target-1.0: Package version for
-> package packagegroup-core-standalone-sdk-target-dbg went backwards
-> which would break package feeds from (0:1.0-r8.8 to 0:1.0-r8.5)
-> [version-going-backwards]
-> packagegroup-core-standalone-sdk-target-1.0: Package version for
-> package packagegroup-core-standalone-sdk-target-dev went backwards
-> which would break package feeds from (0:1.0-r8.8 to 0:1.0-r8.5)
-> [version-going-backwards]
-> packagegroup-core-standalone-sdk-target-1.0: Package version for
-> package packagegroup-core-standalone-sdk-target-ptest went backwards
-> which would break package feeds from (0:1.0-r8.8 to 0:1.0-r8.5)
-> [version-going-backwards]
-> packagegroup-core-standalone-sdk-target-1.0: Package version for
-> package packagegroup-core-standalone-sdk-target went backwards which
-> would break package feeds from (0:1.0-r8.8 to 0:1.0-r8.5)
-> [version-going-backwards]
-> packagegroup-core-tools-debug-1.0: Package version for package
-> packagegroup-core-tools-debug-dbg went backwards which would break
-> package feeds from (0:1.0-r3.8 to 0:1.0-r3.5)
-> [version-going-backwards]
-> packagegroup-core-tools-debug-1.0: Package version for package
-> packagegroup-core-tools-debug-dev went backwards which would break
-> package feeds from (0:1.0-r3.8 to 0:1.0-r3.5)
-> [version-going-backwards]
-> packagegroup-core-tools-debug-1.0: Package version for package
-> packagegroup-core-tools-debug-ptest went backwards which would break
-> package feeds from (0:1.0-r3.8 to 0:1.0-r3.5)
-> [version-going-backwards]
-> packagegroup-core-tools-debug-1.0: Package version for package
-> packagegroup-core-tools-debug went backwards which would break package
-> feeds from (0:1.0-r3.8 to 0:1.0-r3.5) [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-dbg went backwards which would break package
-> feeds from (0:1.0-r13.8 to 0:1.0-r13.5) [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-debug-dbg went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-debug-dev went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-debug-ptest went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-debug went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-dev went backwards which would break package
-> feeds from (0:1.0-r13.8 to 0:1.0-r13.5) [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-extended-dbg went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-extended-dev went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-extended-ptest went backwards which would
-> break package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-extended went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-graphics-dbg went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-graphics-dev went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-graphics-ptest went backwards which would
-> break package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-graphics went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-host-tools-dbg went backwards which would
-> break package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-host-tools-dev went backwards which would
-> break package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-host-tools-ptest went backwards which would
-> break package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-host-tools went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-ptest went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-sdk-dbg went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-sdk-dev went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-sdk-ptest went backwards which would break
-> package feeds from (0:1.0-r13.8 to 0:1.0-r13.5)
-> [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted-sdk went backwards which would break package
-> feeds from (0:1.0-r13.8 to 0:1.0-r13.5) [version-going-backwards]
-> packagegroup-self-hosted-1.0: Package version for package
-> packagegroup-self-hosted went backwards which would break package
-> feeds from (0:1.0-r13.8 to 0:1.0-r13.5) [version-going-backwards]
->
->
-> count: 0 issue: host-user-contaminated
->
->
-> count: 0 issue: installed-vs-shipped
->
->
-> count: 0 issue: unknown-configure-option
->
->
-> count: 0 issue: symlink-to-sysroot
->
->
-> count: 0 issue: invalid-pkgconfig
->
->
-> count: 0 issue: pkgname
->
->
-> count: 0 issue: ldflags
->
->
-> count: 0 issue: compile-host-path
->
->
-> count: 0 issue: qa_pseudo
->
->
->
-> This git log matches with the metadata as seen by qemuarm build.
-> In some cases qemux86 and qemux86-64 builds are built with slightly
-> different metadata, you can see the exact version near the top of each
-> log.world.qemu* files linked from the report
-> ~/oe/world/yoe ~/oe/world/yoe
->
-> == Tested changes (not included in master yet) - bitbake ==
-> latest upstream commit:
-> ac15028 main: Fix environment handling for UI module imports
-> not included in master yet:
->
-> == Tested changes (not included in master yet) - openembedded-core ==
-> latest upstream commit:
-> d0d55ad libxml2: Make it compatible with externalsrc
-> not included in master yet:
-> 6c60ccd testimage: Ensure opkg/apt test suites are run
-> 8603d30 fixes
->
-> == Tested changes (not included in master yet) - meta-openembedded ==
-> latest upstream commit:
-> 463fd3d nodejs: Revert unintended changes (not ready yet)
-> not included in master yet:
-> 2d842ee glog: upgrade 0.3.4 -> 0.3.5
-> f818700 openvpn: enable sysvinit
-> 8a71561 postfix: update to 3.3.1
-> ed5c1c1 openldap: Reproducibility: Remove user, hostname, pwd from
-> version string
-> c1b4548 crda: Fix usrmerge install path
-> e0c6a33 libmpdclient: update to 2.16
-> ccfe7ac libmpdclient: make TCP support optional
-> c249286 babeld: Add Babel routing protocol recipe
-> 09ae486 openvpn: update to 2.4.6
-> aa19346 klibc-static-utils: really fix build for x86 with security flags enabled
-> 8e3db63 crash: Update from 7.2.3 to to 7.2.4
-> 62d21c0 nvme-cli: add recipe
-> b11ad53 gflags: add nativesdk to BBCLASSEXTEND
-> 1b68e3e c-ares: add nativesdk to BBCLASSEXTEND
-> f72160a grpc: fix grpc_cpp_plugin interpfor nativesdk
->
-> == Tested changes (not included in master yet) - meta-qt5 ==
-> latest upstream commit:
-> 0c7eb25 layer.conf: Add thud to LAYERSERIES_COMPAT
-> not included in master yet:
->
-> == Tested changes (not included in master yet) - meta-browser ==
-> latest upstream commit:
-> 4f39525 chromium: Check for toolchain being clang as well for deciding
-> on is_clang
-> not included in master yet:
-> ~/oe/world/yoe
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
