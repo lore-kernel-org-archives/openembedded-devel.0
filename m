@@ -1,51 +1,59 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 39B3D79BCD
+Return-Path: <dachaac@gmail.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BDCB179BCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 17:48:18 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id r64-v6so6544328pfb.13
+	Fri, 12 Oct 2018 17:52:27 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id z21-v6so12111615ljz.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 10:48:19 -0700 (PDT)
+	Fri, 12 Oct 2018 10:52:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=SgT6m/p5QccEqXlSNDxqdwndsue5/GEyK4ejsO+ZKkE=;
-	b=PmwlaRKDfaSs2vhJ590msglcqya8TA7Al9RVyVCzKNTlhjPCmsMfRXTfOYU+ykMic5
-	/mEmHQRribTgSN1/4i9N/FNpVDwlk+BpuFDVNiqnFXQIi6mN2UREeCxLreA/4IWi/o+a
-	DX4R26QXCa6w83elL3JTWANDvrKK5w7ILcaTNY+lCXtWV6X9nbEeRWGOU/i7Ybg/xHMS
-	PXNGqfWToKYVIbNnYvyP95hL1BPZoW7m2KB9XQvYVCL17oT0kZb8x5DesomEyq8Rrk+I
-	TEuT1Pb3r/hVubrcv+aFXtdsih81azIeuPlbo3ZcrY8H9adN22nUCq4cd7M490f2F9ZW
-	Bt9w==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=TMre8HU28Dau0dNZbIDZWN/JZdVMsoG7bUs6U9mZYa8=;
+	b=ln6llohKTWfnhzCP9D4krEVLLq694/Hfb37OmqX4mxMz3mKHcEwN8NrwsDuPgsB0lb
+	L0g2QJka1XzBEX5m7DaTxVjGHBLgBevrp6gztuTiVFZyoqABDxNKQ6t5khJqW6/hPNKq
+	bLinQQZGwJgtzAcDP+VzZFONPAC9nXfHCl7g1R/jL6p+9v3XYnPYcHuRks7mMJfL7cPK
+	nKgg3GvGgyNTtc+wvINkgLb7I72C9EYAt3tRR1U1YQ9KjvinseH/mkgN/Hk8+W5jXZbv
+	+Nhq64Qk/pzMn7+l4uDUkIya1c2ZTc/BB7y7fkAfIPJGNIsnu2Y/I4gZ75Eeq3BdbrxO
+	MYdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=SgT6m/p5QccEqXlSNDxqdwndsue5/GEyK4ejsO+ZKkE=;
-	b=c98eacZ4qhd+uPctDwy6mmH2HqSpBWmsqupwbWcTZGTdJUcy5xg8iIf9ut21PvRp/Z
-	Bparga4BetUNSQgun8qA/mK8YdtIreZoXZE/qgbpXcwQG5qUI7nstWS8YIg4YoVSRhJ2
-	0LI90hste0F0Fswo8NWm9Y++00jTlgJ8G0ODiLGggipKpeuvCkQiQ+Ag5ZqatpmUGwn9
-	UurE6f7ZyEUU6sdoHGjE/EeY9E32jnksS121++21tenppDoumEapj6fd06l1XGgY0T77
-	XkvkcsAKd4QF3xS5dLSpdzsNiPd3WXYmYVhdjs+HzP3sG4DToO7AtN5xMavrZZcEQGa9
-	I91w==
-X-Gm-Message-State: ABuFfojdoHCi0QYg1HUoIl1i00h2Tmw9Fc8yws2CZWLvozVibv0u2ccu
-	Z4z/mQw2FegvRm8/1Qc9fnacuWnR
-X-Google-Smtp-Source: ACcGV62EBT6G64NjnBG3FqK6wfbS2OULW6c8a8xgI7FTWS/7wqFp/7t/8stqiz1nujPRG8mnv+guQQ==
-X-Received: by 2002:a63:e442:: with SMTP id
-	i2-v6mr6446756pgk.381.1539366498756; 
-	Fri, 12 Oct 2018 10:48:18 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::939f])
-	by smtp.gmail.com with ESMTPSA id
-	h63-v6sm2454588pge.48.2018.10.12.10.48.17
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=TMre8HU28Dau0dNZbIDZWN/JZdVMsoG7bUs6U9mZYa8=;
+	b=fxdD3nG+yY7izECFCX+yHdJugmw+iVe2IoUvNAYaTq2hUai3Uv523KXzf2Ex/bBpOb
+	UTn7HqrKVWUH4lt0Wnbtv8yofQcG7l9SuCYbHT9BMcTd8ghMKmJ/x9/z7NjA+ulNxsjf
+	wxTfxm0/rZ/O4bUZwCZNwk0QbR59HhEv9B4rHX83CyRp3LopItTEF8fQMJBOnVX0OWxy
+	Avct+DikxtwkwSMXPjSal0RKKyASpvbPgrgt4QmZmtjpMtGSevMG+8YON1LuNDB0IVed
+	O9SDEQlhHTNkwd7ekw8pH+lta/L7/p59bmNImAjJxrzp080QhNSYg+sIb1zoGTpEaARd
+	5ASA==
+X-Gm-Message-State: ABuFfogOYwsta3J6T6S8ARzy/FLOT+sWH0MIF866g7o2o7Zn163i5/5Y
+	y2g/pPtHhmHsgkwIb0sCsKPXFod4
+X-Google-Smtp-Source: ACcGV60ocdk1y4s82bAywCph2kSmaTXqaEgDevdc5Wb4Wn26eT4Px33kkn5PDtzv8CjlVD+kTI7bBQ==
+X-Received: by 2002:a2e:8ec6:: with SMTP id
+	e6-v6mr4115832ljl.166.1539366747832; 
+	Fri, 12 Oct 2018 10:52:27 -0700 (PDT)
+Received: from ?IPv6:2001:14ba:8017:3300:685a:e65d:93a9:5922?
+	(dtynxhydknnxg7f9lnfvy-3.rev.dnainternet.fi.
+	[2001:14ba:8017:3300:685a:e65d:93a9:5922])
+	by smtp.googlemail.com with ESMTPSA id
+	k19-v6sm397019lfi.51.2018.10.12.10.52.26
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 12 Oct 2018 10:48:18 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 12 Oct 2018 10:52:26 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Oct 2018 10:48:09 -0700
-Message-Id: <20181012174809.23154-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.1
+References: <1539357981-3675-1-git-send-email-akuster808@gmail.com>
+	<1539357981-3675-2-git-send-email-akuster808@gmail.com>
+From: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <dachaac@gmail.com>
+Message-ID: <0256528b-d1aa-75f2-f660-b5e37fddecf3@gmail.com>
+Date: Fri, 12 Oct 2018 20:52:26 +0300
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [sumo][meta-qt5][PATCH] qtdeclarative: Backport patch to silence spurious warnings
+In-Reply-To: <1539357981-3675-2-git-send-email-akuster808@gmail.com>
+Subject: Re: [meta-oe][PATCH 1/5] directfb: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,70 +66,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 17:48:18 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 12 Oct 2018 17:52:28 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-This helps in reducing clutter in syslogs
+On 12/10/2018 18.26, Armin Kuster wrote:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...1-Software-render-Fix-warnings-flood.patch | 33 +++++++++++++++++++
- recipes-qt/qt5/qtdeclarative_git.bb           |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 recipes-qt/qt5/qtdeclarative/0001-Software-render-Fix-warnings-flood.patch
+> package has depends on vlc and gtk
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>   meta-oe/recipes-graphics/directfb/directfb.inc | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+> index 96aa311..cf8f19a 100644
+> --- a/meta-oe/recipes-graphics/directfb/directfb.inc
+> +++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+> @@ -32,7 +32,8 @@ LDFLAGS_append_arm = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -f
+>   
+>   BINCONFIG = "${bindir}/directfb-config"
+>   
+> -inherit autotools binconfig-disabled pkgconfig
+> +inherit autotools binconfig-disabled pkgconfig distro_features_check
+> +REQUIRED_DISTRO_FEATURES = "x11"
+>   
+Wrong method?
 
-diff --git a/recipes-qt/qt5/qtdeclarative/0001-Software-render-Fix-warnings-flood.patch b/recipes-qt/qt5/qtdeclarative/0001-Software-render-Fix-warnings-flood.patch
-new file mode 100644
-index 0000000..7557e53
---- /dev/null
-+++ b/recipes-qt/qt5/qtdeclarative/0001-Software-render-Fix-warnings-flood.patch
-@@ -0,0 +1,33 @@
-+From d4f89ae32e0f206dc3609467e9923652d0ec56d1 Mon Sep 17 00:00:00 2001
-+From: Friedemann Kleint <Friedemann.Kleint@qt.io>
-+Date: Mon, 19 Feb 2018 11:51:24 +0100
-+Subject: [PATCH] Software render: Fix warnings flood
-+
-+Add missing QPainter::end(), fixing:
-+
-+QBackingStore::endPaint() called with active painter on backingstore paint device
-+
-+Task-number: QTBUG-66452
-+Change-Id: Ia00e61953528b15015b3e41ba1868e670818cf14
-+Reviewed-by: Laszlo Agocs <laszlo.agocs@qt.io>
-+(cherry picked from commit 047f161b1a706e81034ccd8d4700a3126c16dfe4)
-+Upstream-Status: Backport
-+---
-+ .../scenegraph/adaptations/software/qsgsoftwarerenderer.cpp      | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/quick/scenegraph/adaptations/software/qsgsoftwarerenderer.cpp b/src/quick/scenegraph/adaptations/software/qsgsoftwarerenderer.cpp
-+index d403884b4..ffcee5f56 100644
-+--- a/src/quick/scenegraph/adaptations/software/qsgsoftwarerenderer.cpp
-++++ b/src/quick/scenegraph/adaptations/software/qsgsoftwarerenderer.cpp
-+@@ -156,6 +156,7 @@ void QSGSoftwareRenderer::render()
-+     m_flushRegion = renderNodes(&painter);
-+     qint64 renderTime = renderTimer.elapsed();
-+ 
-++    painter.end();
-+     if (m_backingStore != nullptr)
-+         m_backingStore->endPaint();
-+ 
-+-- 
-+2.19.1
-+
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index d6f468f..32e12de 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
-+SRC_URI += "file://0001-Software-render-Fix-warnings-flood.patch"
- 
- DEPENDS += "qtbase"
- 
--- 
-2.19.1
+Quote from:
+https://github.com/DirectFB/directfb
+
+"Optionally, depending on the configuration you want:
+
+    FBDev
+      - Linux kernel 2.2.x or newer with working frame buffer device
+        (check /proc/fb) for the fbdev system.
+
+    SDL
+      - libSDL (Simple Direct Media Layer) for the sdl system.
+
+    X11
+      - libX11 (X11 client library) for the X11 system (libx11-dev and libxext-dev packages)."
 
 
