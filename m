@@ -1,49 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CAE874740
+Return-Path: <james.feist@linux.intel.com>
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by mail.openembedded.org (Postfix) with ESMTP id CFB0D79BD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 19:55:53 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id o17-v6so15149203qtr.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 12:55:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=f/xYEqBK7huJd7MGRWx/Wenwifi/DUpLhdPBd4gTabs=;
-	b=ENMd+2b2AuGDi5bU16X9vEfH2IJ4LSIx0+dJ0D/eqrwvr/1AlyyHvddMEkrEyKCQSJ
-	seatDZcSmRepARI4VZEqUzd8afMQ3jvcav+X9Mr125kqaI5VG4Ayf/9ex14A642yHXCu
-	ASH3fwifJzldtq6bpd0YUPJBbr6RB2cpCavxG99B7NDr4dsav6jDzutxQAeS4619Kxno
-	vRtgCGWSU9Z0L623TRg9syNL9/tKIuuKj3sblOshKLFoe5JSroJp1IAfARTfMxjLS835
-	eHEDJSLcPf9G5RzGvF39YJtFML6Pg1fvNEO42gGCaZK+YtgahUE2QyNq6hCd1wJYao/F
-	OJnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=f/xYEqBK7huJd7MGRWx/Wenwifi/DUpLhdPBd4gTabs=;
-	b=QllwMEZ8WjJutLZxQEi7Ct366vKJ7P5wpbm1r8SxjpNIYZPcKIC8337mRh4q7zIes4
-	cebC0rqgJ1KXDkshWsKElMqgSUOeW26gtcvoWw7Ero4kRV7stg2jJhhivY9v6ahD+1Ry
-	tskXIBgKzM+WhJpsXJZ5sMo3Bv2mG/Ph+x68soN3q/NQvP8/xQp7neaSUEgbyAfu8fa8
-	5t6vXI+Yf9g+2Yv4oKHTkLxcqL6BxbpHSb0A9PeZYsHuHKgaiKDl/rSOJKjnYzmBA/Vr
-	arDuesVAtjKo4kzIM6DriWqAkLjMTj4kgKZIh/5im0qeBGurDYXUYCykdENWrAAI7Qpg
-	XKZw==
-X-Gm-Message-State: ABuFfojlMR3li5lRBatqanwCNN9yKopOMj+n6mxXkKqLvde7AI+1Fsbh
-	6WMbheXyxZBTrU0QxksLNzXo1CvczlMBM0bGYys=
-X-Google-Smtp-Source: ACcGV63ngtp+CA64pTJxb1xzV6DkjO4dH3c3QeWc0FQdFjp806GUquR9DX7pwMh+fv+q+YoYoFaHGk0zk0Nkx6VePoo=
-X-Received: by 2002:ad4:41cc:: with SMTP id a12mr7318003qvq.55.1539374154022; 
-	Fri, 12 Oct 2018 12:55:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <1539357981-3675-1-git-send-email-akuster808@gmail.com>
-	<1539357981-3675-5-git-send-email-akuster808@gmail.com>
-	<CALbNGRTxEzy8ZYxpKW0ORh9Ca9ODNYrmMxhcMQYYxDaL97N=3w@mail.gmail.com>
-In-Reply-To: <CALbNGRTxEzy8ZYxpKW0ORh9Ca9ODNYrmMxhcMQYYxDaL97N=3w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 12 Oct 2018 12:55:27 -0700
-Message-ID: <CAMKF1sofWn4oPK1yDPkBj9wxheCHg91WyLB8UHp4=9MM8cbOXg@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 4/5] blueman: add x11 to REQUIRED_DISTRO_FEATURES
+	Fri, 12 Oct 2018 20:03:33 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	12 Oct 2018 13:03:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.54,373,1534834800"; d="scan'208";a="82167403"
+Received: from skyhawk.jf.intel.com ([10.54.51.81])
+	by orsmga006.jf.intel.com with ESMTP; 12 Oct 2018 13:03:34 -0700
+From: James Feist <james.feist@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Oct 2018 13:02:28 -0700
+Message-Id: <20181012200228.18731-1-james.feist@linux.intel.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v3] valijson: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 19:55:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Oct 2018 20:03:34 -0000
 
-On Fri, Oct 12, 2018 at 12:51 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> On Fri, Oct 12, 2018 at 5:27 PM Armin Kuster <akuster808@gmail.com> wrote=
-:
-> >
-> > Nothing RPROVIDES 'thunar'
-> >
-> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> > ---
-> >  meta-oe/recipes-connectivity/blueman/blueman_git.bb | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> If thunar is the only reason then this has to go to append in
-> meta-xfce - there thunar PACKAGECONFIG is activated.
->
+valijson is a header only c++ library for JSON
+schema validation.
 
-I agree.
+Signed-off-by: James Feist <james.feist@linux.intel.com>
+---
+    Changes since v2:
+    - Removed symlink for nlohmann/json
 
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+    Changes since v1:
+    - Fixed license
+    - Simplified symlink
+    - Removed extra whitespace
+
+ .../recipes-devtools/valijson/valijson_git.bb | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/valijson/valijson_git.bb
+
+diff --git a/meta-oe/recipes-devtools/valijson/valijson_git.bb b/meta-oe/recipes-devtools/valijson/valijson_git.bb
+new file mode 100644
+index 000000000..c3254d16e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/valijson/valijson_git.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Header-only C++ library for JSON Schema validation"
++HOMEPAGE = "https://github.com/tristanpenman/valijson"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
++
++SRC_URI = "git://github.com/tristanpenman/valijson.git"
++PV = "0.1+git${SRCPV}"
++
++SRCREV = "c2f22fddf599d04dc33fcd7ed257c698a05345d9"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
++
++# valijson is a header only C++ library, so the main package will be empty.
++RDEPENDS_${PN}-dev = ""
++
++BBCLASSEXTEND = "native nativesdk"
++
+-- 
+2.17.1
+
 
