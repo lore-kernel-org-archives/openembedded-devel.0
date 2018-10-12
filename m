@@ -1,50 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 7ED4B74D03
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A937D74D03
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 15:26:22 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id u12-v6so6352371pfn.12
+	Fri, 12 Oct 2018 15:26:23 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id g2-v6so5992172pgu.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Oct 2018 08:26:23 -0700 (PDT)
+	Fri, 12 Oct 2018 08:26:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=5tdJe2CzvTm/8PGbEb6Ra6erwEMukx0Sx7DSk3cx5PE=;
-	b=Vd16TgzS4bYR2BUy7BDNHcTL7xzIi8bSiPGOBugsxBcQHDMtGvDA0nEN8lO3j1919W
-	zGEqgI9y8vBLzxznMkascaBQuytXEwpwtFICxKW/eAuXUiXSqzFnmnoOergdwe1VRffc
-	xc3Ql51M8jMiMNHHMoeLwrksaEQtPNvfuRlfDixP9cG44jmBPE3oFBeNuIck6UoSVuEw
-	MYgmJSX/6UTyzCXP5zoFW2CurK0ngFoDa8sUXbaCJVQYreq5euLe4AllsS1DS6J1qMXP
-	C7A/9Y3CvlWqxTC5a6ch00AI6Mn+0C35ZW7z64p0DJgiC3dy/33R4zIFnEHgKbxYAdie
-	x/bw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=jc5SXTjOIYv+rmatiCpUkwzHMR22hYueKA9XNdtvt6w=;
+	b=rzwo7K6hp+gK6gJkDiyaSHm3uFa0j2RVnTDCMpntylk/8kPNWsDpCvLE//U4L3auaZ
+	eC/mabPKBCEjJMM4fPC10GvqC9p9KtD6ZZKsoyiLwBGwD6cUSjziLKg06x7y4qT6T9Ya
+	awphf2Y85DtEPQhbY7Pi8+MlRe2x0O/3kuvbsjoq/9rmM2B5NORvwtbng/8eNFZYjv8p
+	puPJ1K/POPmvPThgzfxOxSofo2ASxMJl4d51VK6P3PfXSdKzOKabKV5yAO0Q3MZl0cpN
+	iz2FB2nW/nwROVoxJSPdaCOEEJ+qsDSidUIEvsN3YjqSbTz+myBCYq8Y9BdAQyDK3wPf
+	5tlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=5tdJe2CzvTm/8PGbEb6Ra6erwEMukx0Sx7DSk3cx5PE=;
-	b=ulmAlbSrro0pG117qvC1trfQMYEra0Ce9kFY580ko6KKNQwkZPEO9+mgfT2Dt9HViT
-	pmxAuR5rEKqjgf3Y457C2EEis3BPLOcvBT0GZjh7T6eJM3QjmX6S4iYTdvWa5SAo2qsZ
-	8Koh3Iuf+MDSOsKFqIwxHmhezCnGCKi/+3WNMTTna0lk4R0wLr6KJ6pQYQY7f3pGqvin
-	bYMHMiy/WwSFPMPakFC4Na+K2gzhJ5gbv9NJMVUstTfnCEWLXJ2aR1ee2yFCJuE59H9K
-	FGRYA8OZFoNCOELeueusVfAC2BseGddVw9gvkI9riYCVz9uxKdu+tA1bmoppnQUCAN1v
-	YIlQ==
-X-Gm-Message-State: ABuFfojz0CVXRc4ylPp11xO9lzScFZ31kTHfS5a/KuDKAj0PK9nCeg/I
-	IFVN/iyI6eJ5Pf4xgBuAgOs=
-X-Google-Smtp-Source: ACcGV63jpybSzs5SIdp+983R3yUrHH8MOshxRiH3qA+Nee25e9PDm23Nnwi44c8Xnd1SsL3V2aIwvA==
-X-Received: by 2002:a63:f314:: with SMTP id
-	l20-v6mr5781912pgh.407.1539357983626; 
-	Fri, 12 Oct 2018 08:26:23 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=jc5SXTjOIYv+rmatiCpUkwzHMR22hYueKA9XNdtvt6w=;
+	b=tBMgu2j6xAj8GM3VQgqUaEHV/DWtjClSWRZC4nFWPwuldOv9kieX6bYNHtGztRjVuu
+	syA9JtSZGhXFFeHc/L+/5kY69rkRfPO+0fTotd+TqypcoWC1r4JWkJ7uFzwEYG5pKA8j
+	tqYCPFXeIO4yXtEf8augaG9qgLqyNdqWJb3kWZ6u/Ctb40HT76wx2ncyWtZ3Ov6D32cu
+	YWyWI+vTt69yN+a3JSOzoXcuyld0K5UQqag55Vn6uQ4tGaXOS11nKUtlyTt4ahiNTrfk
+	RLCH7Rq58dLX+EgrBQ1wh7FAh/bOdjisIfIU8l0On+Miz4zm+kx6ZgzgCHlnW1SQdtfC
+	7Lfg==
+X-Gm-Message-State: ABuFfog2OLHxCu4b21xlMvemYIEm3y+aI4QJgUVMWQT4O+l6HsEBA1fW
+	fgoeThxio7UCTyiCqQbu+Sw=
+X-Google-Smtp-Source: ACcGV60Nk4e1fAdafWZPAl9p4xRZa0kIOZcf+ac8LkpUa+CHw2YzC2kUyxzapYUXNUImKBumRARtjg==
+X-Received: by 2002:a63:4d09:: with SMTP id
+	a9-v6mr5967704pgb.408.1539357984754; 
+	Fri, 12 Oct 2018 08:26:24 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:1074:2cb7:7274:2f54])
 	by smtp.gmail.com with ESMTPSA id
-	x20-v6sm3525729pfe.131.2018.10.12.08.26.22
+	x20-v6sm3525729pfe.131.2018.10.12.08.26.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 12 Oct 2018 08:26:22 -0700 (PDT)
+	Fri, 12 Oct 2018 08:26:23 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Oct 2018 08:26:16 -0700
-Message-Id: <1539357981-3675-1-git-send-email-akuster808@gmail.com>
+Date: Fri, 12 Oct 2018 08:26:17 -0700
+Message-Id: <1539357981-3675-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH 0/5] Make meta-oe pass again
+In-Reply-To: <1539357981-3675-1-git-send-email-akuster808@gmail.com>
+References: <1539357981-3675-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-oe][PATCH 1/5] directfb: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2018 15:26:22 -0000
+X-List-Received-Date: Fri, 12 Oct 2018 15:26:23 -0000
 
-There is a yocto-check-layer regression in meta-openembedded
-do to new packages being added.  These changes make meta-oe pass again
+package has depends on vlc and gtk
 
-Armin Kuster (5):
-  directfb: add x11 to REQUIRED_DISTRO_FEATURES
-  vlc: add x11 to REQUIRED_DISTRO_FEATURES
-  directfb-examples: add x11 to REQUIRED_DISTRO_FEATURES
-  blueman: add x11 to REQUIRED_DISTRO_FEATURES
-  blueman: really belongs in meta-networking
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-graphics/directfb/directfb.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- meta-multimedia/recipes-multimedia/vlc/vlc.inc                        | 4 +++-
- .../blueman/blueman/0001-Search-for-cython3.patch                     | 0
- .../recipes-connectivity/blueman/blueman_git.bb                       | 3 ++-
- meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb          | 3 ++-
- meta-oe/recipes-graphics/directfb/directfb.inc                        | 3 ++-
- 5 files changed, 9 insertions(+), 4 deletions(-)
- rename {meta-oe => meta-networking}/recipes-connectivity/blueman/blueman/0001-Search-for-cython3.patch (100%)
- rename {meta-oe => meta-networking}/recipes-connectivity/blueman/blueman_git.bb (95%)
-
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+index 96aa311..cf8f19a 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb.inc
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -32,7 +32,8 @@ LDFLAGS_append_arm = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -f
+ 
+ BINCONFIG = "${bindir}/directfb-config"
+ 
+-inherit autotools binconfig-disabled pkgconfig
++inherit autotools binconfig-disabled pkgconfig distro_features_check
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ PACKAGECONFIG ??= "linuxinput"
+ PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
 -- 
 2.7.4
 
