@@ -1,25 +1,49 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 70D6679479
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F32065CC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 16:12:48 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Oct 2018 09:12:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,385,1534834800"; d="scan'208";a="97621417"
-Received: from chiron.jf.intel.com ([10.54.74.39])
-	by fmsmga004.fm.intel.com with ESMTP; 15 Oct 2018 09:12:48 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Oct 2018 09:12:29 -0700
-Message-Id: <20181015161229.68258-2-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.14.4
-In-Reply-To: <20181015161229.68258-1-timothy.t.orling@linux.intel.com>
-References: <20181015161229.68258-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-perl][PATCH 2/2] libnet-dns-perl: upgrade 1.17 -> 1.18; enable ptest
+	Mon, 15 Oct 2018 18:04:02 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id q5-v6so12408621qki.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Oct 2018 11:04:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Ypx245DDrocRcZSzoyV4VRPNpBqiq5afBM/90PLVkYI=;
+	b=m2LlB10qJTsZM1dT/9u1EWPhoJvzm7UFFtA9U5cLFSiJvCNKl5r3+tWfHTOS8cwvUt
+	3BiglDSAhxGSOZQlHFOY2O2XXi7Fr0yZ9rmDh86F8Wv3XLXxp86Yq32uPyJmYFjtrXRN
+	8L1p538rL5TWwwJYsvMqUcskO5E5NrRdG0vGyZySiIpgaw4OBsNfOY6WnVkFNSdERwNr
+	qcVlTWQf9gb6cLsyTZRSuDRaZ+Vc0ITVPmm0ToZWU0R2+IyP62rq3qZs+PgOOPk8U+mT
+	vfZsJT3XfH8jqgDDt1RYuXumkSUdiSioLa6o/u2hKl414zFUNFnFDAgOk1mwf8Sh29Yj
+	9MRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Ypx245DDrocRcZSzoyV4VRPNpBqiq5afBM/90PLVkYI=;
+	b=nUvErnYjCY3fI78gSSSjCHLlglAZdqqLofJ8+a3vHnjcEF7lz30MIrA6gd4UGD+Iqs
+	r/O+1bWvQHvNjdmyiyikB/mopzWf4io8rp96CLEQFQH7g7g6uhn0dFy3eCVp7h6RfxcI
+	sOkmpK+UtLoTqpDGC9tYB4GF3nD28FNj6uzyfaVyYcFvBTaDEZ6jxVKCwz16SlW9TTcu
+	b1CiF8RcHieEXfYIzG5XK8CY9nntcUB9LH6et/bJeLAp7aVU90B+7H3+SRvdAsUAwrmg
+	9Mpzu3KqiU3GygSKUX2VNAfNOvlqxDT/+ety0zOOTMCt3bGkuWQniIeGd/lu6+zsfY8H
+	Nj+g==
+X-Gm-Message-State: ABuFfoik4YpKoR641fvHfUq0BoCaPBjJRTh+jzrS49/7AYzkajWlIjjf
+	imZZ0xRfmT0IIOdpr/dC9377EJmfe1BHmKwZLDo=
+X-Google-Smtp-Source: ACcGV62KXt/9nDY6Aleubk6Uz1NX3vOxqyFPI8U8EhEDcEXfqZqnm4wqhkeU8YpgWTQFJJp3DcOoazf9yDsadd0gOqE=
+X-Received: by 2002:a37:5003:: with SMTP id
+	e3-v6mr17560611qkb.102.1539626643261; 
+	Mon, 15 Oct 2018 11:04:03 -0700 (PDT)
+MIME-Version: 1.0
+References: <20181015155444.7275-1-brgl@bgdev.pl>
+In-Reply-To: <20181015155444.7275-1-brgl@bgdev.pl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Oct 2018 11:03:36 -0700
+Message-ID: <CAMKF1spH_HPGvbsgjTmw4Qhf4PpWk1-grZABNtVrHo9miY8BnA@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: lew@avast.com, Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	jan.kaisrlik@avast.com, karas@avast.com
+Subject: Re: [meta-oe][PATCH v2] catch2: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,136 +56,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 16:12:48 -0000
+X-List-Received-Date: Mon, 15 Oct 2018 18:04:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* Add UPSTREAM_CHECK_REGEX to ignore DEV releases
-* Add RDEPENDS that were missing
-* Enable ptest and add RDEPENDS for tests
-* Add RRECOMMENDS for libnet-dns-sec-perl
+On Mon, Oct 15, 2018 at 8:54 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>
+> Add a recipe for the catch2 testing framework. There's a bug upstream
+> which makes it impossible to build with gcc7 so include a patch.
+>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+> v1 -> v2:
+> - upstream merged a different solution for the build error: backport
+>   the relevant patch, include Upstream-Status tag
+> - use ${datadir} instead of hardcoded paths
+> - depend on python3-native, not python-native
+> - replace ALLOW_EMPTY_${PN} = "1" with RDEPENDS/RRECOMMENDS
+>
+>  ...1-Fix-convert-from-char-on-ARM-build.patch | 46 +++++++++++++++++++
+>  meta-oe/recipes-test/catch2/catch2_2.4.1.bb   | 26 +++++++++++
+>  2 files changed, 72 insertions(+)
+>  create mode 100644 meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch
+>  create mode 100644 meta-oe/recipes-test/catch2/catch2_2.4.1.bb
+>
+> diff --git a/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch b/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-opython3nativen-ARM-build.patch
+> new file mode 100644
+> index 000000000..307377563
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch
+> @@ -0,0 +1,46 @@
+> +From 5729874fa5059c39aa97cfa08fddf107b7a65c9e Mon Sep 17 00:00:00 2001
+> +From: Miguel Gaio <mgaio35@gmail.com>
+> +Date: Wed, 3 Oct 2018 10:22:16 +0200
+> +Subject: [PATCH] Fix convert from char on ARM build
+> +
+> +Some platforms set the signedness of char to unsigned (eg. ARM).
+> +Convert from char should not assume the signedness of char.
+> +
+> +Fix build issue with -Werror,-Wtautological-unsigned-zero-compare flags.
+> +
+> +Signed-off-by: Miguel Gaio <mgaio35@gmail.com>
+> +
+> +Upstream-Status: Accepted [Commit f1faaa9c107113692301ad8bb56084460ef1a2ff]
+> +
+> +Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> +---
+> + include/internal/catch_tostring.cpp | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/include/internal/catch_tostring.cpp b/include/internal/catch_tostring.cpp
+> +index 4e0c027d..8cbabbf2 100644
+> +--- a/include/internal/catch_tostring.cpp
+> ++++ b/include/internal/catch_tostring.cpp
+> +@@ -205,7 +205,7 @@ std::string StringMaker<bool>::convert(bool b) {
+> +     return b ? "true" : "false";
+> + }
+> +
+> +-std::string StringMaker<char>::convert(char value) {
+> ++std::string StringMaker<signed char>::convert(signed char value) {
+> +     if (value == '\r') {
+> +         return "'\\r'";
+> +     } else if (value == '\f') {
+> +@@ -222,8 +222,8 @@ std::string StringMaker<char>::convert(char value) {
+> +         return chstr;
+> +     }
+> + }
+> +-std::string StringMaker<signed char>::convert(signed char c) {
+> +-    return ::Catch::Detail::stringify(static_cast<char>(c));
+> ++std::string StringMaker<char>::convert(char c) {
+> ++    return ::Catch::Detail::stringify(static_cast<signed char>(c));
+> + }
+> + std::string StringMaker<unsigned char>::convert(unsigned char c) {
+> +     return ::Catch::Detail::stringify(static_cast<char>(c));
+> +--
+> +2.19.1
+> +
+> diff --git a/meta-oe/recipes-test/catch2/catch2_2.4.1.bb b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
+> new file mode 100644
+> index 000000000..370ade150
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
+> @@ -0,0 +1,26 @@
+> +DESCRIPTION = "A modern, C++-native, header-only, test framework for unit-tests, \
+> +TDD and BDD - using C++11, C++14, C++17 and later."
+> +AUTHOR = "Phil Nash, Martin Horenovsky and others"
+> +HOMEPAGE = "https://github.com/catchorg/Catch2"
+> +LICENSE = "BSL-1.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+> +
+> +SRC_URI = "git://github.com/catchorg/Catch2.git \
+> +           file://0001-Fix-convert-from-char-on-ARM-build.patch"
+> +SRCREV = "9e1bdca4667295fcb16265eae00efa8423f07007"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS = "python3-native"
 
-* Upstream release notes:
-"""
-**** 1.18 Sep 21, 2018
+this is redundant since python3native is being inherited.
 
-        Documentation revised to remove ambigous use of "answer" which
-        has been used to refer to both the answer section of a packet
-        and the entire reply packet received from a nameserver.
+> +
+> +inherit cmake python3native
+> +
+> +# Header-only library
+> +RDEPENDS_${PN}-dev = ""
+> +RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+> +
+> +do_install_append() {
+> +    rm ${D}/${datadir}/Catch2/lldbinit
+> +    rm ${D}/${datadir}/Catch2/gdbinit
+> +    rmdir ${D}/${datadir}/Catch2/
 
-Fix rt.cpan.org #127018
+why not just delete whole dir in one go ?
 
-        Net::DNS::ZoneFile->parse() fails if include directory specified.
-
-Fix rt.cpan.org #127012
-
-        DNS resolution broken when options ndots used in /etc/resolv.conf
-"""
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- .../recipes-perl/libnet/libnet-dns-perl_1.17.bb    | 27 ----------
- .../recipes-perl/libnet/libnet-dns-perl_1.18.bb    | 58 ++++++++++++++++++++++
- 2 files changed, 58 insertions(+), 27 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
- create mode 100644 meta-perl/recipes-perl/libnet/libnet-dns-perl_1.18.bb
-
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
-deleted file mode 100644
-index 79583551f9..0000000000
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "This package contains the DNS.pm module with friends."
--HOMEPAGE = "http://www.net-dns.org/"
--SECTION = "libs"
--LICENSE = "MIT"
--
--LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
--
--DEPENDS += "perl"
--
--SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "28fcbcbf4483a9f23f75be4b9e3e45c8"
--SRC_URI[sha256sum] = "9a79fd8fea1a708726c18d193ae4437479206ccb20ffa7f0971371e172e2c2e0"
--
--S = "${WORKDIR}/Net-DNS-${PV}"
--
--EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
--
--inherit cpan
--
--RDEPENDS_${PN} = "perl-module-integer"
--
--do_compile() {
--    export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
--    cpan_do_compile
--}
--BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.18.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.18.bb
-new file mode 100644
-index 0000000000..0b22fdf7f6
---- /dev/null
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.18.bb
-@@ -0,0 +1,58 @@
-+DESCRIPTION = "This package contains the DNS.pm module with friends."
-+HOMEPAGE = "http://www.net-dns.org/"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
-+
-+DEPENDS += "perl"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "67af7e5c1c339f60c45c1054374bd8ee"
-+SRC_URI[sha256sum] = "52ce1494fc9707fd5a60ed71db5cde727157b7f2363787d730d4d1bd9800a9d3"
-+
-+UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
-+
-+S = "${WORKDIR}/Net-DNS-${PV}"
-+
-+EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
-+
-+inherit cpan ptest-perl
-+
-+RDEPENDS_${PN} = " \
-+    libdigest-hmac-perl \
-+    perl-module-base \
-+    perl-module-constant \
-+    perl-module-digest-md5 \
-+    perl-module-digest-sha \
-+    perl-module-file-spec \
-+    perl-module-integer \
-+    perl-module-io-file \
-+    perl-module-io-select \
-+    perl-module-io-socket \
-+    perl-module-io-socket-ip \
-+    perl-module-mime-base64 \
-+    perl-module-scalar-util \
-+    perl-module-test-more \
-+    perl-module-time-local \
-+"
-+
-+RRECOMMENDS_${PN} += " \
-+    libnet-dns-sec-perl \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+    perl-module-encode \
-+    perl-module-encode-byte \
-+    perl-module-extutils-mm \
-+    perl-module-extutils-mm-unix \
-+    perl-module-overload \
-+"
-+
-+do_compile() {
-+    export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-+    cpan_do_compile
-+}
-+
-+BBCLASSEXTEND = "native"
--- 
-2.14.4
-
+> +}
+> --
+> 2.19.1
+>
 
