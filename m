@@ -1,51 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 56A3F78EFF
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+	[209.85.214.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D899797F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 11:11:45 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id y11-v6so18424118wma.3
+	Mon, 15 Oct 2018 12:52:46 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id y11-v6so9262989plt.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 04:11:46 -0700 (PDT)
+	Mon, 15 Oct 2018 05:52:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=65LvVi9ExlX2GjhCH8XRIWQd00S560GAjFT9D05Nmz4=;
-	b=G80sIV/Js+zWCPfy+xuSizguYv8GXSsCiWMiCY5Sf+iW9qlj4IErA9rMwodnj/oA2D
-	AKRerEM1vqs7QNxhK1IMuezryWTphgWITKaXtqHdcLx1icgeqKGYNDKvkklhHjEGvCUj
-	dFD4jPYO6gA/6uPuJiJmGLEYz0FXo+S7m4zJ2muJq0M+96SMuiXxtIRc+LCtNAmrYWnZ
-	KKpr7eB5dhpFfZG5cOJ95CDNAmOOUXq0fKQT8jidhCkbeJU9VD7SbdT2/5VL7s9SACMG
-	ezlmqREAWsrUT3ez66ceduAzKv3JjNBYr9mS8Nnc8bEhTa2FHsJRBYBs6Omfbjd6V09B
-	ZRxA==
+	h=from:to:subject:date:message-id;
+	bh=6yAdXvFuuQhpiRZwrGU7S/d1Gunm6WEZ2S5JkindHBk=;
+	b=BOvoazcHNiRejfkX9m9G5DbycCCq2KyGO4Yy+JZiwGKWXo4eBjeBuAspgoMp0UwXJN
+	rd2AECanQpAAaMKj0T0HUe2oA8e1KsxtLAWiaVGo6Clne91vmC34Va3GVJlZN63RQ9xn
+	37pu+0W7aNyqAh+LzkFA0ZnXBKGevDPlwabQ+mt2hZlqaodM/IAYWRImDUR7gvAXMB5s
+	jPMF+CcTB9N7UTpfuESzmNwmj4ZhVHyuKubWeM/9CH3qUALg5akrG9KxIej20p2FRB0Y
+	gsMWLHQb7daUfZ88aaaLCAPpOuq14ekN5sTlzUm6HQYJ8OBomez5IGq1Y4q2CI5fkbOv
+	6sXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=65LvVi9ExlX2GjhCH8XRIWQd00S560GAjFT9D05Nmz4=;
-	b=ZePt+OPrQcjJ43AhybvfgKqOD4NZ5ausvZbXFnQ/Q05IZAE/HVrh4LwrI9TRLQeI8x
-	lAo4afoCelZJ+/HiJ4Jrtan7c0JHZmWIFKzt9nTikfUDAj6ukHOPUGXwF2yvvR+VQStR
-	IIJOjNliuaxIRM/yygNR/4ns0c1HK+Ji11UkrJCTnR85sY031e3KyaFKeWw3z399A2nG
-	Plg3FNxu1fFHsxzK6oYF8MG6W7L9lr/e2vGixrshpPnlDeciXTPlLo58dkOCSIWXJr3a
-	6JmoqbcTGJxhNPbo7JblEoQhEeESDZGqx1EeT89jH9svrO2eQMRkvpXZOjirqJjZNsfh
-	0Kuw==
-X-Gm-Message-State: ABuFfohmOaRM5yzcdfi5pm1fSOOtKiMtQxcigAW3n1UCHN1Fwc5tXiGL
-	i4ktTGdUcUJTQ4QzbDzmWKrnEjgL
-X-Google-Smtp-Source: ACcGV61/cvEsQpAnrrnmjicO8sILVUV5oJxWfvHgvjSw8evDuQMEU61QQLIOXXpZ7t520PSK+x022A==
-X-Received: by 2002:a7b:c00a:: with SMTP id
-	c10-v6mr12442901wmb.73.1539601905807; 
-	Mon, 15 Oct 2018 04:11:45 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	a5-v6sm7813623wmh.8.2018.10.15.04.11.44
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Oct 2018 04:11:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=6yAdXvFuuQhpiRZwrGU7S/d1Gunm6WEZ2S5JkindHBk=;
+	b=QByWL2G/FtOaMo27gJW8KOfnbAAq6ViX+JGuoBXgdI8VQpdJDi5RUyrczlOHSaI2wW
+	L504Avz7KCvvU6fqoymrNz3daKnWoNQ08ZV2lSDbo41pfch2Uo0Oemzj/DCbAeRqhQO5
+	uU2i1Cv2tpuZ7+tBEmjJwEiQcere3/rcqtJ3t1fl6O2aoWuz99bJKcQH2xfLZTjc+TnP
+	MrQ4kNFyaDpbP+8QCpC7bsnGnEkv8nB88Y2O3tLthfOvoAlcVgdw04VMNCQZ1sfbAbl7
+	DihQuk/aNHFM2bSzvVpmhS2yVqrlLxrA0cc5dgQEj3a/dihqD2B99KMMANDEPvwCuc8I
+	aXBg==
+X-Gm-Message-State: ABuFfohelfObP615lQFvADeOe6VWzH+oFBPwgNEFQ1xe5lBFLpAyrczm
+	xdhj5jLfDafwwAr+aQ/B0l57ivw/dJw=
+X-Google-Smtp-Source: ACcGV62TFScl4NBov8EvU4uo0KcjAyoX2MmF25guMZts3y+Nnx/fEwySoble8Gn+uKfnbABI3fHHiQ==
+X-Received: by 2002:a17:902:8a8c:: with SMTP id
+	p12-v6mr16995808plo.133.1539607966854; 
+	Mon, 15 Oct 2018 05:52:46 -0700 (PDT)
+Received: from ankit.iind.intel.com ([192.55.54.41])
+	by smtp.gmail.com with ESMTPSA id
+	p4-v6sm13629241pfg.188.2018.10.15.05.52.45
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 15 Oct 2018 05:52:46 -0700 (PDT)
+From: Ankit Navik <ankit.tarot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Oct 2018 11:11:42 +0000
-Message-Id: <20181015111142.16695-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20181015111112.GA1342@jama>
-References: <20181015111112.GA1342@jama>
-Subject: [PATCH][meta-oe] glog: enable building shared library again
+Date: Mon, 15 Oct 2018 18:19:20 +0530
+Message-Id: <1539607760-20676-1-git-send-email-ankit.tarot@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] Khronos: Add Khronos LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,146 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 11:11:45 -0000
+X-List-Received-Date: Mon, 15 Oct 2018 12:52:46 -0000
 
-* fix the soversion used by libglog as explained bellow:
-
-The preferred default should IMHO be the same as with 0.3.4 version
-which was shared library, but that's easy to add with small bbappend
-having:
-EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
-
-but unfortunately the SONAME in the library changed from:
-objdump -x usr/lib/libglog.so.0.0.0 | grep SONAME
-  SONAME               libglog.so.0
-in 0.3.4 to:
-objdump -x usr/lib/libglog.so.0.3.5  | grep SONAME
-  SONAME               libglog.so.0.3.5
-
-Which breaks all our prebuilt binaries which now correctly complain that
-there isn't libglog.so.0 provider in dependencies:
-QA Issue: /usr/lib/libfoo.so.1.2.3 contained in package libfoo requires
-libglog.so.0, but no providers found in RDEPENDS_libfoo
-
-Which is quite unfortunate for minor upgrade. Did they really change the
-ABI (and expect to change it in all future minor upgrades) or is this
-change just unexpected side-effect of using cmake instead of autotools?
-
-It looks the later, because if I build 0.3.5 version with autotools I
-get:
-objdump -x usr/lib/libglog.so.0.0.0 | grep SONAME
-  SONAME               libglog.so.0
-
-and there is patch for SOVERSION here as well:
-https://github.com/google/or-tools/blob/master/patches/glog.patch
-
-applied in master:
-https://github.com/google/glog/blob/master/CMakeLists.txt#L493
-https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65#diff-af3b638bc2a3e6c650974192a53c7291
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Suggested-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 ---
- ...Rework-CMake-glog-VERSION-management.patch | 71 +++++++++++++++++++
- meta-oe/recipes-support/glog/glog_0.3.5.bb    |  3 +
- 2 files changed, 74 insertions(+)
- create mode 100644 meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+ meta-oe/licenses/Khronos | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-oe/licenses/Khronos
 
-diff --git a/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch b/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+diff --git a/meta-oe/licenses/Khronos b/meta-oe/licenses/Khronos
 new file mode 100644
-index 0000000000..f41a6c9724
+index 0000000..7afedf6
 --- /dev/null
-+++ b/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
-@@ -0,0 +1,71 @@
-+From 4ea11e0d7c0575316a6ccc07a931164ca29c3d2f Mon Sep 17 00:00:00 2001
-+From: Corentin Le Molgat <corentinl@google.com>
-+Date: Mon, 29 Jan 2018 14:59:08 +0100
-+Subject: [PATCH] Rework CMake glog VERSION management.
++++ b/meta-oe/licenses/Khronos
+@@ -0,0 +1,35 @@
++Copyright (c) 2016 The Khronos Group Inc.
 +
-+- Use of Project version properties instead of custom variables
-+- fix missmatch between VERSION (build version) and SOVERSION (API version)
-+src: https://cmake.org/cmake/help/latest/prop_tgt/VERSION.html#prop_tgt:VERSION
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software source and associated documentation files (the "Materials"),
++to deal in the Materials without restriction, including without limitation
++the rights to use, copy, modify, compile, merge, publish, distribute,
++sublicense, and/or sell copies of the Materials, and to permit persons to
++whom the Materials are furnished to do so, subject the following terms and
++conditions:
 +
-+Upstream-Status: Backport [https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65]
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ CMakeLists.txt | 23 ++++++++---------------
-+ 1 file changed, 8 insertions(+), 15 deletions(-)
++All modifications to the Materials used to create a binary that is
++distributed to third parties shall be provided to Khronos with an
++unrestricted license to use for the purposes of implementing bug fixes and
++enhancements to the Materials;
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 7415eab..fb4e408 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -8,23 +8,16 @@ if (POLICY CMP0063)
-+   cmake_policy (SET CMP0063 NEW)
-+ endif (POLICY CMP0063)
-+ 
-+-project (google-glog)
-++project(glog VERSION 0.3.5 LANGUAGES C CXX)
-+ 
-+ enable_testing ()
-+ 
-+-set (GLOG_MAJOR_VERSION 0)
-+-set (GLOG_MINOR_VERSION 3)
-+-set (GLOG_PATCH_VERSION 5)
-+-
-+-set (GLOG_VERSION
-+-  ${GLOG_MAJOR_VERSION}.${GLOG_MINOR_VERSION}.${GLOG_PATCH_VERSION})
-+-
-+ set (CPACK_PACKAGE_NAME glog)
-+ set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "")
-+-set (CPACK_PACKAGE_VERSION_MAJOR ${GLOG_MAJOR_VERSION})
-+-set (CPACK_PACKAGE_VERSION_MINOR ${GLOG_MINOR_VERSION})
-+-set (CPACK_PACKAGE_VERSION_PATCH ${GLOG_PATCH_VERSION})
-+-set (CPACK_PACKAGE_VERSION ${GLOG_VERSION})
-++set (CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-++set (CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-++set (CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-++set (CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-+ 
-+ option (WITH_GFLAGS "Use gflags" ON)
-+ option (WITH_THREADS "Enable multithreading support" ON)
-+@@ -406,8 +399,8 @@ if (gflags_FOUND)
-+   endif (NOT BUILD_SHARED_LIBS)
-+ endif (gflags_FOUND)
-+ 
-+-set_target_properties (glog PROPERTIES VERSION ${GLOG_MAJOR_VERSION})
-+-set_target_properties (glog PROPERTIES SOVERSION ${GLOG_VERSION})
-++set_target_properties (glog PROPERTIES VERSION ${PROJECT_VERSION})
-++set_target_properties (glog PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-+ 
-+ if (WIN32)
-+   target_compile_definitions (glog PUBLIC GLOG_NO_ABBREVIATED_SEVERITIES)
-+@@ -570,7 +563,7 @@ configure_package_config_file (glog-config.cmake.in
-+   NO_CHECK_REQUIRED_COMPONENTS_MACRO)
-+ 
-+ write_basic_package_version_file (glog-config-version.cmake VERSION
-+-  ${GLOG_VERSION} COMPATIBILITY SameMajorVersion)
-++  ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
-+ 
-+ export (TARGETS glog NAMESPACE glog:: FILE glog-targets.cmake)
-+ export (PACKAGE glog)
-+-- 
-+2.17.1
++If the binary is used as part of an OpenCL(TM) implementation, whether binary
++is distributed together with or separately to that implementation, then
++recipient must become an OpenCL Adopter and follow the published OpenCL
++conformance process for that implementation, details at:
++http://www.khronos.org/conformance/;
 +
-diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-index bf7df53f3f..4c1bce74e2 100644
---- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-@@ -11,6 +11,7 @@ DEPENDS = "libunwind"
- SRC_URI = " \
-     git://github.com/google/glog.git;branch=v035 \
-     file://0001-find-libunwind-during-configure.patch \
-+    file://0001-Rework-CMake-glog-VERSION-management.patch \
- "
- 
- SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
-@@ -22,3 +23,5 @@ inherit cmake
- RDEPENDS_${PN}-dev = ""
- RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
- RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
++The above copyright notice, the OpenCL trademark license, and this permission
++notice shall be included in all copies or substantial portions of the
++Materials.
 +
-+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
++THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS IN
++THE MATERIALS.
++
++OpenCL is a trademark of Apple Inc. used under license by Khronos.
++
 -- 
-2.17.1
+1.9.1
 
 
