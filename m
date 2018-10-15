@@ -1,49 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F32065CC7
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E5C660402
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 18:04:02 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id q5-v6so12408621qki.6
+	Mon, 15 Oct 2018 18:08:49 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id q12-v6so12397438qkl.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 11:04:04 -0700 (PDT)
+	Mon, 15 Oct 2018 11:08:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Ypx245DDrocRcZSzoyV4VRPNpBqiq5afBM/90PLVkYI=;
-	b=m2LlB10qJTsZM1dT/9u1EWPhoJvzm7UFFtA9U5cLFSiJvCNKl5r3+tWfHTOS8cwvUt
-	3BiglDSAhxGSOZQlHFOY2O2XXi7Fr0yZ9rmDh86F8Wv3XLXxp86Yq32uPyJmYFjtrXRN
-	8L1p538rL5TWwwJYsvMqUcskO5E5NrRdG0vGyZySiIpgaw4OBsNfOY6WnVkFNSdERwNr
-	qcVlTWQf9gb6cLsyTZRSuDRaZ+Vc0ITVPmm0ToZWU0R2+IyP62rq3qZs+PgOOPk8U+mT
-	vfZsJT3XfH8jqgDDt1RYuXumkSUdiSioLa6o/u2hKl414zFUNFnFDAgOk1mwf8Sh29Yj
-	9MRQ==
+	:cc; bh=TITmgkBNVYPG/VlhW12Nw1JGuELIVw+XlS9C0hNaOXs=;
+	b=X1NgWFKsD0yaY+7YQb3i53JRyZGitejTEbFiDH2IB95PtgLrVTbFI22LjM1aF3iiP6
+	ddzbxpLxZp4STARoBWP3E2ZDjbJCRKC3/lhTNRenvRdn1fmEgwW7xLRGCxG7K5U0lGXB
+	L1RA0jlPhx/eiTk2bnfPsYOsC0Z2LxMiWcd+nua4L8Pl1Y9qZNWq+1jGFh5DQCK5tZUe
+	EIJPvcwNlXzS9S2bR6miMZzn6uC8Uv/uDvBssBRybCxEcIJlsuwzQVFNRH9Hw6T1zfA9
+	tBxj3ZIe4pPZq4uX/Bb1bO5V+3hrTy9CdXi59Z9wSdPSoj9D+zmkd5ySlrQ8632iJi7u
+	WrGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Ypx245DDrocRcZSzoyV4VRPNpBqiq5afBM/90PLVkYI=;
-	b=nUvErnYjCY3fI78gSSSjCHLlglAZdqqLofJ8+a3vHnjcEF7lz30MIrA6gd4UGD+Iqs
-	r/O+1bWvQHvNjdmyiyikB/mopzWf4io8rp96CLEQFQH7g7g6uhn0dFy3eCVp7h6RfxcI
-	sOkmpK+UtLoTqpDGC9tYB4GF3nD28FNj6uzyfaVyYcFvBTaDEZ6jxVKCwz16SlW9TTcu
-	b1CiF8RcHieEXfYIzG5XK8CY9nntcUB9LH6et/bJeLAp7aVU90B+7H3+SRvdAsUAwrmg
-	9Mpzu3KqiU3GygSKUX2VNAfNOvlqxDT/+ety0zOOTMCt3bGkuWQniIeGd/lu6+zsfY8H
-	Nj+g==
-X-Gm-Message-State: ABuFfoik4YpKoR641fvHfUq0BoCaPBjJRTh+jzrS49/7AYzkajWlIjjf
-	imZZ0xRfmT0IIOdpr/dC9377EJmfe1BHmKwZLDo=
-X-Google-Smtp-Source: ACcGV62KXt/9nDY6Aleubk6Uz1NX3vOxqyFPI8U8EhEDcEXfqZqnm4wqhkeU8YpgWTQFJJp3DcOoazf9yDsadd0gOqE=
-X-Received: by 2002:a37:5003:: with SMTP id
-	e3-v6mr17560611qkb.102.1539626643261; 
-	Mon, 15 Oct 2018 11:04:03 -0700 (PDT)
+	bh=TITmgkBNVYPG/VlhW12Nw1JGuELIVw+XlS9C0hNaOXs=;
+	b=QKz89TU1B9d1lsfkjooNNeFhVIGwuhK9OokOIagc/QSqe6+k4FMWjqCfYHp2ddxAjn
+	sk+fSJHCX+Spy45hHxevSChCHf8L1P60y5xR2DobQCT38UZQZ4rHTE830vUNwZgVdJuN
+	L5CxiRHugpp2SlhxBc4WXXoxklBpE/SCZGM8fk4mqEtMIgR11zKaKe1ozNXIUraKcZrs
+	vhzIOKMSA7ped06YniKq4ZuIZd1DxgGYtmwyppJ7jycxRe20yQ2QXuKPFWGjysFxw7mg
+	ohTnEZf0BP4QCFWUMvLQRbPOrLB2mZ71/jvar3llBjIiukjZWXhNYqGU7bSWzHjENkLP
+	+rbg==
+X-Gm-Message-State: ABuFfogowUqNFZXZthvuDfoYucBqk/jPNxVztaJL63z7wjsBpEV1tJSg
+	vlLrMiGeYZVM0VbmhtzMIMxgm4WUQ2i+jEMHHyHuFaok
+X-Google-Smtp-Source: ACcGV62MDoOAQYuoHJkezEuXcGzSsPJBJsJooz9i9eZLfWU+ts1xtyGOfqH1yz1KAIxmzMyjJgX+IldQykUtaewnRS0=
+X-Received: by 2002:a37:9d55:: with SMTP id
+	g82-v6mr17124732qke.315.1539626930055; 
+	Mon, 15 Oct 2018 11:08:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20181015155444.7275-1-brgl@bgdev.pl>
-In-Reply-To: <20181015155444.7275-1-brgl@bgdev.pl>
+References: <20181015161229.68258-1-timothy.t.orling@linux.intel.com>
+In-Reply-To: <20181015161229.68258-1-timothy.t.orling@linux.intel.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Oct 2018 11:03:36 -0700
-Message-ID: <CAMKF1spH_HPGvbsgjTmw4Qhf4PpWk1-grZABNtVrHo9miY8BnA@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: lew@avast.com, Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	jan.kaisrlik@avast.com, karas@avast.com
-Subject: Re: [meta-oe][PATCH v2] catch2: new package
+Date: Mon, 15 Oct 2018 11:08:23 -0700
+Message-ID: <CAMKF1sp8-FsrpQHXgadfHSs_OGAAdNZ63j83Rifmwq4A8q2cSQ@mail.gmail.com>
+To: Tim Orling <timothy.t.orling@linux.intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH 1/2] libnet-dns-sec-perl: add recipe for 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,122 +54,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 18:04:02 -0000
+X-List-Received-Date: Mon, 15 Oct 2018 18:08:49 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 15, 2018 at 8:54 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+On Mon, Oct 15, 2018 at 9:12 AM Tim Orling
+<timothy.t.orling@linux.intel.com> wrote:
 >
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> Net::DNS::SEC is installed as an extension to an existing Net::DNS
+> installation providing packages to support DNSSEC as specified in
+> RFC4033, RFC4034, RFC4035 and related documents.
 >
-> Add a recipe for the catch2 testing framework. There's a bug upstream
-> which makes it impossible to build with gcc7 so include a patch.
+> It also provides support for SIG0 which is useful for dynamic updates.
 >
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> Implements cryptographic signature generation and verification functions
+> using RSA, DSA, ECDSA, and Edwards curve algorithms.
+>
+> The extended features are made available by replacing Net::DNS by
+> Net::DNS::SEC in the use declaration.
+>
+> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 > ---
-> v1 -> v2:
-> - upstream merged a different solution for the build error: backport
->   the relevant patch, include Upstream-Status tag
-> - use ${datadir} instead of hardcoded paths
-> - depend on python3-native, not python-native
-> - replace ALLOW_EMPTY_${PN} = "1" with RDEPENDS/RRECOMMENDS
+>  .../libnet/libnet-dns-sec-perl_1.10.bb             | 33 ++++++++++++++++++++++
+>  1 file changed, 33 insertions(+)
+>  create mode 100644 meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
 >
->  ...1-Fix-convert-from-char-on-ARM-build.patch | 46 +++++++++++++++++++
->  meta-oe/recipes-test/catch2/catch2_2.4.1.bb   | 26 +++++++++++
->  2 files changed, 72 insertions(+)
->  create mode 100644 meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch
->  create mode 100644 meta-oe/recipes-test/catch2/catch2_2.4.1.bb
->
-> diff --git a/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch b/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-opython3nativen-ARM-build.patch
+> diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
 > new file mode 100644
-> index 000000000..307377563
+> index 0000000000..5c485ed68f
 > --- /dev/null
-> +++ b/meta-oe/recipes-test/catch2/catch2/0001-Fix-convert-from-char-on-ARM-build.patch
-> @@ -0,0 +1,46 @@
-> +From 5729874fa5059c39aa97cfa08fddf107b7a65c9e Mon Sep 17 00:00:00 2001
-> +From: Miguel Gaio <mgaio35@gmail.com>
-> +Date: Wed, 3 Oct 2018 10:22:16 +0200
-> +Subject: [PATCH] Fix convert from char on ARM build
+> +++ b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
+> @@ -0,0 +1,33 @@
+> +DESCRIPTION = "DNSSEC extensions to Net::DNS"
+> +HOMEPAGE = "http://www.net-dns.org/"
+> +SECTION = "libs"
 > +
-> +Some platforms set the signedness of char to unsigned (eg. ARM).
-> +Convert from char should not assume the signedness of char.
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://README;beginline=165;endline=192;md5=6ef523fa09e8c272675839e21de16bde"
 > +
-> +Fix build issue with -Werror,-Wtautological-unsigned-zero-compare flags.
+> +SRC_URI = "https://cpan.metacpan.org/authors/id/W/WI/WILLEM/Net-DNS-SEC-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "ffa55a9898192c9d4c623cb1357eba9b"
+> +SRC_URI[sha256sum] = "37a47d4def72d7338f3cc7cd807ec19bd9e2ae638ae656fa536cf0314801989e"
 > +
-> +Signed-off-by: Miguel Gaio <mgaio35@gmail.com>
+> +DEPENDS += "openssl"
 > +
-> +Upstream-Status: Accepted [Commit f1faaa9c107113692301ad8bb56084460ef1a2ff]
+> +UPSTREAM_CHECK_REGEX = "Net\-DNS\-SEC\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 > +
-> +Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> +---
-> + include/internal/catch_tostring.cpp | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +S = "${WORKDIR}/Net-DNS-SEC-${PV}"
 > +
-> +diff --git a/include/internal/catch_tostring.cpp b/include/internal/catch_tostring.cpp
-> +index 4e0c027d..8cbabbf2 100644
-> +--- a/include/internal/catch_tostring.cpp
-> ++++ b/include/internal/catch_tostring.cpp
-> +@@ -205,7 +205,7 @@ std::string StringMaker<bool>::convert(bool b) {
-> +     return b ? "true" : "false";
-> + }
-> +
-> +-std::string StringMaker<char>::convert(char value) {
-> ++std::string StringMaker<signed char>::convert(signed char value) {
-> +     if (value == '\r') {
-> +         return "'\\r'";
-> +     } else if (value == '\f') {
-> +@@ -222,8 +222,8 @@ std::string StringMaker<char>::convert(char value) {
-> +         return chstr;
-> +     }
-> + }
-> +-std::string StringMaker<signed char>::convert(signed char c) {
-> +-    return ::Catch::Detail::stringify(static_cast<char>(c));
-> ++std::string StringMaker<char>::convert(char c) {
-> ++    return ::Catch::Detail::stringify(static_cast<signed char>(c));
-> + }
-> + std::string StringMaker<unsigned char>::convert(unsigned char c) {
-> +     return ::Catch::Detail::stringify(static_cast<char>(c));
-> +--
-> +2.19.1
-> +
-> diff --git a/meta-oe/recipes-test/catch2/catch2_2.4.1.bb b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
-> new file mode 100644
-> index 000000000..370ade150
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/catch2/catch2_2.4.1.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "A modern, C++-native, header-only, test framework for unit-tests, \
-> +TDD and BDD - using C++11, C++14, C++17 and later."
-> +AUTHOR = "Phil Nash, Martin Horenovsky and others"
-> +HOMEPAGE = "https://github.com/catchorg/Catch2"
-> +LICENSE = "BSL-1.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
-> +
-> +SRC_URI = "git://github.com/catchorg/Catch2.git \
-> +           file://0001-Fix-convert-from-char-on-ARM-build.patch"
-> +SRCREV = "9e1bdca4667295fcb16265eae00efa8423f07007"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "python3-native"
+> +EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
 
-this is redundant since python3native is being inherited.
+we could use STAGING_BASELIBDIR
 
 > +
-> +inherit cmake python3native
+> +inherit cpan ptest-perl
 > +
-> +# Header-only library
-> +RDEPENDS_${PN}-dev = ""
-> +RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+> +RDEPENDS_${PN} = " \
+> +    libnet-dns-perl \
+> +    libcrypto \
+> +    perl-module-dynaloader \
+> +    perl-module-file-find \
+> +    perl-module-file-spec \
+> +    perl-module-io-file \
+> +    perl-module-mime-base64 \
+> +    perl-module-test-more \
+> +"
 > +
-> +do_install_append() {
-> +    rm ${D}/${datadir}/Catch2/lldbinit
-> +    rm ${D}/${datadir}/Catch2/gdbinit
-> +    rmdir ${D}/${datadir}/Catch2/
-
-why not just delete whole dir in one go ?
-
-> +}
+> +BBCLASSEXTEND = "native"
 > --
-> 2.19.1
+> 2.14.4
 >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
