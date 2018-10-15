@@ -1,56 +1,56 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 245EE60801
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C6F16074F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 15:45:00 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id 206-v6so19426140wmb.5
+	Mon, 15 Oct 2018 15:54:47 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id a8-v6so20117317wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 08:45:02 -0700 (PDT)
+	Mon, 15 Oct 2018 08:54:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=bgiaQazVROxZ/o7/rd3p27R59K46zVDfndULs9hiJNU=;
-	b=GxNEjRmXafsHYUFAC8vYsQQeYHIWnuI6P01ZTaDKVUw9EOQ2BXDM8uhUUTwnajU+CV
-	mmOk4bysmgUe7qftBJR6H1KUS2kElki6cDHO43PpvPMgBQ5Tzl+i1gH2Hr6NbcbSyqEo
-	ZFVWWiXO0BnnYOjr1fQeugtoEBtdggHCAyqzGPMAamxnFw78FDUDCwTD7RYXVUD3ZSyU
-	XvTwMJofjYtK6zzRh8cMYhg9vhgb7Umv/w2ZKmJWyxzL261sOGkkG8xw8ICtr1UInf2X
-	+bGkfA5MntJ+SY2DHDMT3YptRtaQiLOUKdGSTRE/WjxX/VfJipCq7OKbMZPESDF2q3ZR
-	rbgQ==
+	b=b7qXYNOvIm9UbCSyigo9ie/oWTO4bTbCeenp4jkkL9hSFcTQjFW+EIFRx+vTpqIqJt
+	gL4I2Y+8MD0w5BrZn+SipfIOa56b9zDwOzPxL6XHbyy8ib8uX9BET9ZXYKPCMgxfzILI
+	LWT2KZavzb53gX8fFxmo9BMaqACprXcTn6djB5sdiT7ErxZdJ1ft1FVVfMoqqf+3Mg2v
+	+M/ntW8z/n8JnO4BUr6DXOOXZ2zO1kMpGMMnrxYeIUK4X+q3NQUXUtDegTj43YS4ke7v
+	iKgiaQLdqM+mNQBsX0OwM1DYJfcAIycj78f8JXg0AJmsSVVJL+YTdhshB8eWNagxtApk
+	FefA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=bgiaQazVROxZ/o7/rd3p27R59K46zVDfndULs9hiJNU=;
-	b=DO4NejCvDe5wPNse5/+Pf5MN0gYBb3adYk0fBL3b+l4zmHeZcqgUHMfU+XFVRooi96
-	H6K8w0S50Ns/DLUueJLZ8vpbu37CzJRlrBLfj4xwgmnrnE1o77VROYQpUmVuV+N94Gk9
-	OcPjcox0CVYcyY8MA0rdC8tSGDKNhGVG38jDdKJS2fZrRj031ajPsqxbZ+RptIjibK9N
-	2OQDjeAo1Ap+CIIPhWOUM2l38W3pq0yiq8CEFyAk7yLDCbjWOP9EApv8YkC86JX3ry/K
-	w+mot7Cmie7Vf43++IUORUXZx+KQp19lYzi1Q1YZpq0Xl+Ta3IWHa4vxrUgoMwwdxPhf
-	hTTA==
-X-Gm-Message-State: ABuFfohN1QlWif9wVALgr4IWRi/29iasLKc0vvEBaWH0AwPgHIRpjE4l
-	I9VTm2hJJzbT4PdWIBr4MBkXb6wqL/Y=
-X-Google-Smtp-Source: ACcGV617uTUkcdBmrJKMFwiv6uJ5r4pMQeMuJvZecQ1A0zIn/VWS7HipeZNFWdfzBwSuCUCjNb4Jrw==
-X-Received: by 2002:a1c:7f83:: with SMTP id
-	a125-v6mr14084875wmd.23.1539618301121; 
-	Mon, 15 Oct 2018 08:45:01 -0700 (PDT)
+	b=LZsoqMf7kJek05GKKrMJr7YbikbXHJ2I2M2ewCel9o/bGTRosIegLHac4qjDM+gl4H
+	6QVUa9AKJGELziUYarmi5yJ+pPFd1NYKXSWkiQZ+kKwqfUhGPRqRSx4LTaWaHYxrACfl
+	KQ9uk+qMzX/pqC5ce2IsanA840IujzVIhphTOFElisx7MCH4/Hpg/GPeBOrCbXPgHowZ
+	QxIEvWrWz5OvtvNiHv2BfO1MuWUrDNpcs0xTFgnCq4JGAfyhIo1M1//GmjE8FeLr+v46
+	pLwq6i1uYpOno9o7UpoBf5yR0XhmaAXVJmKLCgMekc9pgyCiqG5rakWe5hCHHMUkBcJj
+	37Cg==
+X-Gm-Message-State: ABuFfoghu1TsR8JLiOXaBnsk64XdwkhP8oKnscurreTCr6B9tNC24VHN
+	dvqFlOSAEGMyEhxpoB1mL7FH3OzDVeM=
+X-Google-Smtp-Source: ACcGV60H1OWNwm4s1pCQPX3DwT4l5FxSJtegu3UMz03kgUuMbPcNxEA/TVHkUNeysuBMv3dbM4pumw==
+X-Received: by 2002:a1c:5d54:: with SMTP id
+	r81-v6mr12769268wmb.88.1539618887674; 
+	Mon, 15 Oct 2018 08:54:47 -0700 (PDT)
 Received: from debian-brgl.baylibre.local
 	(AStLambert-681-1-4-9.w90-86.abo.wanadoo.fr. [90.86.11.9])
 	by smtp.gmail.com with ESMTPSA id
-	a11-v6sm15025971wrp.3.2018.10.15.08.44.59
+	g186-v6sm8349596wmf.19.2018.10.15.08.54.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Oct 2018 08:45:00 -0700 (PDT)
+	Mon, 15 Oct 2018 08:54:46 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster808@gmail.com>, Hiram Lew <lew@avast.com>,
 	Jan Kaisrlik <jan.kaisrlik@avast.com>, Lukas Karas <karas@avast.com>
-Date: Mon, 15 Oct 2018 17:44:55 +0200
-Message-Id: <20181015154455.6241-1-brgl@bgdev.pl>
+Date: Mon, 15 Oct 2018 17:54:44 +0200
+Message-Id: <20181015155444.7275-1-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
 Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH v2] catch2: new package
+Subject: [meta-oe][PATCH v2] catch2: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,7 +63,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 15:45:01 -0000
+X-List-Received-Date: Mon, 15 Oct 2018 15:54:47 -0000
 Content-Transfer-Encoding: 8bit
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
