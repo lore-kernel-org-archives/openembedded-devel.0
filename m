@@ -1,56 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
 	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id AC03D60043
+	by mail.openembedded.org (Postfix) with ESMTP id 56A3F78EFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 11:11:13 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 193-v6so19142046wme.3
+	Mon, 15 Oct 2018 11:11:45 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id y11-v6so18424118wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 04:11:14 -0700 (PDT)
+	Mon, 15 Oct 2018 04:11:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=B1U/5RHlEeWk7R4TWacZJiXcrKssDztKBUaT7gRes9Q=;
-	b=l/q8v0moL576GeFFkZoP+QdagPwrtQgONw5FEN80eMwoUOacfY8oBmXIkBVabS0Lr0
-	E2RRChaPP8C7AFHqKCy8khXLU06BV65gy70JgH3Asc2hEWqdp09UCI4HlBH5sJUGmFtR
-	SbRvRDs4gjjZ4y2RnWJDjH5v3aJ3adDTUbY7Di//l3VAqhyNUG1UW3DrXdqOUXGN6HU3
-	uXcVgC6XXzEkK1OR/CDpNOap9MO1zUP2A9gO9P1ek8Ot/UMWlvrR42PtRlXzIOBzveI5
-	xQek6Bnsi40Gw+zjxtmQhxHAeNXSH5kh8imDu9r/pKbuvK3GJwDjPjKDswOVbUB2Gpqn
-	bbNQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=65LvVi9ExlX2GjhCH8XRIWQd00S560GAjFT9D05Nmz4=;
+	b=G80sIV/Js+zWCPfy+xuSizguYv8GXSsCiWMiCY5Sf+iW9qlj4IErA9rMwodnj/oA2D
+	AKRerEM1vqs7QNxhK1IMuezryWTphgWITKaXtqHdcLx1icgeqKGYNDKvkklhHjEGvCUj
+	dFD4jPYO6gA/6uPuJiJmGLEYz0FXo+S7m4zJ2muJq0M+96SMuiXxtIRc+LCtNAmrYWnZ
+	KKpr7eB5dhpFfZG5cOJ95CDNAmOOUXq0fKQT8jidhCkbeJU9VD7SbdT2/5VL7s9SACMG
+	ezlmqREAWsrUT3ez66ceduAzKv3JjNBYr9mS8Nnc8bEhTa2FHsJRBYBs6Omfbjd6V09B
+	ZRxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=B1U/5RHlEeWk7R4TWacZJiXcrKssDztKBUaT7gRes9Q=;
-	b=RpCaGTe7YesUCpu38viM6JZSLDdPNQIoFkdJ7DeJQk0v4ZrlSc/hdi5N2O98wtJiMN
-	hSCwKSAjE+OIZw5MRCG2B7+Nwkh1EkZE3hyOSBXSiFOQPZkJihsJx+RyowMPZ6Sgwbdl
-	rcZEC9UTGUvRChwi2KqNTXxY8aXLms5iByJMeoiHp4837jag88qK/wszy56Yqiem5yOR
-	zAQ9H+Z2rhaA4WcuUSKxlZSrozADrHAanBFvel3yUI2w7ffbXzkfcYBJoAGox8iCzCxy
-	ovQoRLdpbt9r6m4AE0YGUcxTJNs7YuZb0hm6iPJiuxI2TyZGDPKbuyPcpvbtUK1U7fCS
-	323w==
-X-Gm-Message-State: ABuFfojzGhPVwnYlvf12A29NB9o368/Mfq8zkRueagYNZSDt5Z8zV/5X
-	9deTOYUj4jErvV0wM1AO5+4=
-X-Google-Smtp-Source: ACcGV63GNKVqU2BY9BfECzDt1Ta2QZu2d9UK+/jvXMWRXg6wRo/4UcGDNMdxx36bQvgJFflI/PqTww==
-X-Received: by 2002:a1c:3b87:: with SMTP id
-	i129-v6mr12346803wma.42.1539601874053; 
-	Mon, 15 Oct 2018 04:11:14 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=65LvVi9ExlX2GjhCH8XRIWQd00S560GAjFT9D05Nmz4=;
+	b=ZePt+OPrQcjJ43AhybvfgKqOD4NZ5ausvZbXFnQ/Q05IZAE/HVrh4LwrI9TRLQeI8x
+	lAo4afoCelZJ+/HiJ4Jrtan7c0JHZmWIFKzt9nTikfUDAj6ukHOPUGXwF2yvvR+VQStR
+	IIJOjNliuaxIRM/yygNR/4ns0c1HK+Ji11UkrJCTnR85sY031e3KyaFKeWw3z399A2nG
+	Plg3FNxu1fFHsxzK6oYF8MG6W7L9lr/e2vGixrshpPnlDeciXTPlLo58dkOCSIWXJr3a
+	6JmoqbcTGJxhNPbo7JblEoQhEeESDZGqx1EeT89jH9svrO2eQMRkvpXZOjirqJjZNsfh
+	0Kuw==
+X-Gm-Message-State: ABuFfohmOaRM5yzcdfi5pm1fSOOtKiMtQxcigAW3n1UCHN1Fwc5tXiGL
+	i4ktTGdUcUJTQ4QzbDzmWKrnEjgL
+X-Google-Smtp-Source: ACcGV61/cvEsQpAnrrnmjicO8sILVUV5oJxWfvHgvjSw8evDuQMEU61QQLIOXXpZ7t520PSK+x022A==
+X-Received: by 2002:a7b:c00a:: with SMTP id
+	c10-v6mr12442901wmb.73.1539601905807; 
+	Mon, 15 Oct 2018 04:11:45 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	t2-v6sm8876672wrr.7.2018.10.15.04.11.12
+	a5-v6sm7813623wmh.8.2018.10.15.04.11.44
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Oct 2018 04:11:12 -0700 (PDT)
+	Mon, 15 Oct 2018 04:11:44 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 15 Oct 2018 13:11:12 +0200
-To: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Message-ID: <20181015111112.GA1342@jama>
-References: <20181008091749.45975-1-uvv.mail@gmail.com>
-	<CAMKF1sp-q=SJ+R=bGNeCpSL_=ufUuqDJAnCPVMmVEZ2H7zYcjg@mail.gmail.com>
-	<CAKHfEah9WnNyh-wzdibsALB648po7RC4sKdNy5dWKYWpMDfL9g@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAKHfEah9WnNyh-wzdibsALB648po7RC4sKdNy5dWKYWpMDfL9g@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] glog: upgrade 0.3.4 -> 0.3.5
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Oct 2018 11:11:42 +0000
+Message-Id: <20181015111142.16695-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20181015111112.GA1342@jama>
+References: <20181015111112.GA1342@jama>
+Subject: [PATCH][meta-oe] glog: enable building shared library again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,35 +58,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 11:11:13 -0000
-X-Groupsio-MsgNum: 74994
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Oct 2018 11:11:45 -0000
 
---mP3DRpeJDSE+ciuQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 09, 2018 at 11:52:36AM +0200, Vyacheslav Yurkov wrote:
-> Well, two obvious reasons:
-> - glog fixes between 0.3.4 and 0.3.5
-> - cmake support, which simplifies dependency handling when SDK generation
-> is involved (for example for libraries like ceres-solver)
->=20
-> I need to update my patch for finding libunwind, so I will send another
-> version soon. The question I have now is that glog builds static library =
-by
-> default. What is the policy in that regard? Should a shared library be
-> preferred by default?
-
-I know I'm a bit late, but I have some questions about shared library.
+* fix the soversion used by libglog as explained bellow:
 
 The preferred default should IMHO be the same as with 0.3.4 version
 which was shared library, but that's easy to add with small bbappend
 having:
-EXTRA_OECMAKE +=3D "-DBUILD_SHARED_LIBS=3DON"
+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 
 but unfortunately the SONAME in the library changed from:
 objdump -x usr/lib/libglog.so.0.0.0 | grep SONAME
@@ -102,8 +76,8 @@ objdump -x usr/lib/libglog.so.0.3.5  | grep SONAME
 
 Which breaks all our prebuilt binaries which now correctly complain that
 there isn't libglog.so.0 provider in dependencies:
-QA Issue: /usr/lib/libfoo.so.1.2.3 contained in package libfoo requires lib=
-glog.so.0, but no providers found in RDEPENDS_libfoo
+QA Issue: /usr/lib/libfoo.so.1.2.3 contained in package libfoo requires
+libglog.so.0, but no providers found in RDEPENDS_libfoo
 
 Which is quite unfortunate for minor upgrade. Did they really change the
 ABI (and expect to change it in all future minor upgrades) or is this
@@ -119,206 +93,111 @@ https://github.com/google/or-tools/blob/master/patches/glog.patch
 
 applied in master:
 https://github.com/google/glog/blob/master/CMakeLists.txt#L493
-https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8c=
-b65#diff-af3b638bc2a3e6c650974192a53c7291
+https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65#diff-af3b638bc2a3e6c650974192a53c7291
 
-patch coming with this change backported to make it possible again to
-use the shared library.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...Rework-CMake-glog-VERSION-management.patch | 71 +++++++++++++++++++
+ meta-oe/recipes-support/glog/glog_0.3.5.bb    |  3 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
 
->=20
-> Vyacheslav
->=20
-> On Mon, Oct 8, 2018 at 3:42 PM Khem Raj <raj.khem@gmail.com> wrote:
->=20
-> > On Mon, Oct 8, 2018 at 2:18 AM Vyacheslav Yurkov <uvv.mail@gmail.com>
-> > wrote:
-> > >
-> > > Upgraded glog recipe to a new stable version in favor of cmake
-> > configuration
-> > > Old configure.ac patch is removed.
-> > >
-> > > Another cmake patch is added. When UNWIND_LIBRARY is used directly as=
- a
-> > public
-> > > dependency then absolute path is stored in cmake config file.
-> > > This is an issue when glog is used as part of generated SDK, which was
-> > built
-> > > on another machine. When SDK is installed on developer's machine,
-> > > cmake config contains a full path to non-existent location.
-> > > The solution is to find libunwind during configure stage and store ta=
-rget
-> > > name as a dependency, not a full path
-> > >
-> > > Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
-> > > ---
-> > >  ...gure.ac-Allow-user-to-disable-gflags.patch | 35 -----------------=
---
-> > >  ...0001-find-libunwind-during-configure.patch | 30 ++++++++++++++++
-> > >  .../glog/{glog_0.3.4.bb =3D> glog_0.3.5.bb}     | 13 +++----
-> > >  3 files changed, 37 insertions(+), 41 deletions(-)
-> > >  delete mode 100644
-> > meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disab=
-le-gflags.patch
-> > >  create mode 100644
-> > meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configure.=
-patch
-> > >  rename meta-oe/recipes-support/glog/{glog_0.3.4.bb =3D> glog_0.3.5.b=
-b}
-> > (55%)
-> > >
-> > > diff --git
-> > a/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-dis=
-able-gflags.patch
-> > b/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-dis=
-able-gflags.patch
-> > > deleted file mode 100644
-> > > index 596281ff6..000000000
-> > > ---
-> > a/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-dis=
-able-gflags.patch
-> > > +++ /dev/null
-> > > @@ -1,35 +0,0 @@
-> > > -From 0fabde0515e180c53961c27346dd7a79cffa4c1f Mon Sep 17 00:00:00 20=
-01
-> > > -From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-> > > -Date: Thu, 11 Aug 2016 11:49:36 +0200
-> > > -Subject: [PATCH] configure.ac: Allow user to disable gflags
-> > > -
-> > > -Under some circumstances like cross-compilation, the user might not =
-want
-> > > -to enable support for gflags.
-> > > -
-> > > -This patch allows support for --without-gflags
-> > > -
-> > > -Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-> > > ----
-> > > - configure.ac | 6 +++++-
-> > > - 1 file changed, 5 insertions(+), 1 deletion(-)
-> > > -
-> > > -diff --git a/configure.ac b/configure.ac
-> > > -index 7b4d21e7ae8a..eba5e5cda1ea 100644
-> > > ---- a/configure.ac
-> > > -+++ b/configure.ac
-> > > -@@ -136,7 +136,11 @@ AC_ARG_WITH(gflags,
-> > AS_HELP_STRING[--with-gflags=3DGFLAGS_DIR],
-> > > -   CFLAGS=3D"$CFLAGS $GFLAGS_CFLAGS"
-> > > -   LIBS=3D"$LIBS $GFLAGS_LIBS"
-> > > - )
-> > > --AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=3D1,
-> > ac_cv_have_libgflags=3D0)
-> > > -+if test x"$with_gflags" =3D x"no"; then
-> > > -+  ac_cv_have_libgflags=3D0
-> > > -+else
-> > > -+  AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=3D1,
-> > ac_cv_have_libgflags=3D0)
-> > > -+fi
-> > > - if test x"$ac_cv_have_libgflags" =3D x"1"; then
-> > > -   AC_DEFINE(HAVE_LIB_GFLAGS, 1, [define if you have google gflags
-> > library])
-> > > -   if test x"$GFLAGS_LIBS" =3D x""; then
-> > > ---
-> > > -2.8.1
-> > > -
-> > > diff --git
-> > a/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configur=
-e.patch
-> > b/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configur=
-e.patch
-> > > new file mode 100644
-> > > index 000000000..33dc9d38a
-> > > --- /dev/null
-> > > +++
-> > b/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configur=
-e.patch
-> > > @@ -0,0 +1,30 @@
-> > > +diff -ur git/CMakeLists.txt ../0.3.5-r0.unwind/git/CMakeLists.txt
-> > > +--- git/CMakeLists.txt 2018-10-08 08:54:15.118989400 +0200
-> > > ++++ ../0.3.5-r0.unwind/git/CMakeLists.txt      2018-10-05
-> > 16:26:59.745922318 +0200
-> > > +@@ -384,7 +384,9 @@
-> > > + set_target_properties (glog PROPERTIES POSITION_INDEPENDENT_CODE ON)
-> > > +
-> > > + if (UNWIND_LIBRARY)
-> > > +-  target_link_libraries (glog PUBLIC ${UNWIND_LIBRARY})
-> > > ++  add_library(unwind SHARED IMPORTED)
-> > > ++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION
-> > ${UNWIND_LIBRARY})
-> > > ++  target_link_libraries (glog PUBLIC unwind)
-> > > + endif (UNWIND_LIBRARY)
-> > > +
-> > > + if (HAVE_PTHREAD)
-> > > +diff -ur git/glog-config.cmake.in ../0.3.5-r0.unwind/git/
-> > glog-config.cmake.in
-> > > +--- git/glog-config.cmake.in   2018-10-08 08:54:15.122989699 +0200
-> > > ++++ ../0.3.5-r0.unwind/git/glog-config.cmake.in        2018-10-08
-> > 08:14:48.550745810 +0200
-> > > +@@ -4,4 +4,12 @@
-> > > +
-> > > + @gflags_DEPENDENCY@
-> > > +
-> > > ++find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
-> > > ++mark_as_advanced (UNWIND_LIBRARY)
-> > > ++
-> > > ++if (UNWIND_LIBRARY)
-> > > ++  add_library(unwind SHARED IMPORTED)
-> > > ++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION
-> > ${UNWIND_LIBRARY})
-> > > ++endif (UNWIND_LIBRARY)
-> > > ++
-> > > + include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
-> > > diff --git a/meta-oe/recipes-support/glog/glog_0.3.4.bb
-> > b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-> > > similarity index 55%
-> > > rename from meta-oe/recipes-support/glog/glog_0.3.4.bb
-> > > rename to meta-oe/recipes-support/glog/glog_0.3.5.bb
-> > > index d7c1974c6..bf7df53f3 100644
-> > > --- a/meta-oe/recipes-support/glog/glog_0.3.4.bb
-> > > +++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-> > > @@ -9,15 +9,16 @@ LIC_FILES_CHKSUM =3D
-> > "file://COPYING;md5=3Ddc9db360e0bbd4e46672f3fd91dd6c4b"
-> > >  DEPENDS =3D "libunwind"
-> > >
-> > >  SRC_URI =3D " \
-> > > -    git://github.com/google/glog.git \
-> > > -    file://0001-configure.ac-Allow-user-to-disable-gflags.patch \
-> > > +    git://github.com/google/glog.git;branch=3Dv035 \
-> > > +    file://0001-find-libunwind-during-configure.patch \
-> > >  "
-> > >
-> > > -SRCREV =3D "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
-> > > +SRCREV =3D "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > -PACKAGECONFIG ??=3D ""
-> > > -PACKAGECONFIG[gflags] =3D ",--without-gflags,gflags,"
-> > > +inherit cmake
-> > >
-> > > -inherit autotools pkgconfig
-> > > +RDEPENDS_${PN}-dev =3D ""
-> > > +RRECOMMENDS_${PN}-dev =3D "${PN}-staticdev"
-> > > +RRECOMMENDS_${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPKGV})"
-> >
-> > why do we need the above change
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch b/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+new file mode 100644
+index 0000000000..f41a6c9724
+--- /dev/null
++++ b/meta-oe/recipes-support/glog/glog/0001-Rework-CMake-glog-VERSION-management.patch
+@@ -0,0 +1,71 @@
++From 4ea11e0d7c0575316a6ccc07a931164ca29c3d2f Mon Sep 17 00:00:00 2001
++From: Corentin Le Molgat <corentinl@google.com>
++Date: Mon, 29 Jan 2018 14:59:08 +0100
++Subject: [PATCH] Rework CMake glog VERSION management.
++
++- Use of Project version properties instead of custom variables
++- fix missmatch between VERSION (build version) and SOVERSION (API version)
++src: https://cmake.org/cmake/help/latest/prop_tgt/VERSION.html#prop_tgt:VERSION
++
++Upstream-Status: Backport [https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65]
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ CMakeLists.txt | 23 ++++++++---------------
++ 1 file changed, 8 insertions(+), 15 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 7415eab..fb4e408 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -8,23 +8,16 @@ if (POLICY CMP0063)
++   cmake_policy (SET CMP0063 NEW)
++ endif (POLICY CMP0063)
++ 
++-project (google-glog)
+++project(glog VERSION 0.3.5 LANGUAGES C CXX)
++ 
++ enable_testing ()
++ 
++-set (GLOG_MAJOR_VERSION 0)
++-set (GLOG_MINOR_VERSION 3)
++-set (GLOG_PATCH_VERSION 5)
++-
++-set (GLOG_VERSION
++-  ${GLOG_MAJOR_VERSION}.${GLOG_MINOR_VERSION}.${GLOG_PATCH_VERSION})
++-
++ set (CPACK_PACKAGE_NAME glog)
++ set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "")
++-set (CPACK_PACKAGE_VERSION_MAJOR ${GLOG_MAJOR_VERSION})
++-set (CPACK_PACKAGE_VERSION_MINOR ${GLOG_MINOR_VERSION})
++-set (CPACK_PACKAGE_VERSION_PATCH ${GLOG_PATCH_VERSION})
++-set (CPACK_PACKAGE_VERSION ${GLOG_VERSION})
+++set (CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+++set (CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+++set (CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+++set (CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
++ 
++ option (WITH_GFLAGS "Use gflags" ON)
++ option (WITH_THREADS "Enable multithreading support" ON)
++@@ -406,8 +399,8 @@ if (gflags_FOUND)
++   endif (NOT BUILD_SHARED_LIBS)
++ endif (gflags_FOUND)
++ 
++-set_target_properties (glog PROPERTIES VERSION ${GLOG_MAJOR_VERSION})
++-set_target_properties (glog PROPERTIES SOVERSION ${GLOG_VERSION})
+++set_target_properties (glog PROPERTIES VERSION ${PROJECT_VERSION})
+++set_target_properties (glog PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
++ 
++ if (WIN32)
++   target_compile_definitions (glog PUBLIC GLOG_NO_ABBREVIATED_SEVERITIES)
++@@ -570,7 +563,7 @@ configure_package_config_file (glog-config.cmake.in
++   NO_CHECK_REQUIRED_COMPONENTS_MACRO)
++ 
++ write_basic_package_version_file (glog-config-version.cmake VERSION
++-  ${GLOG_VERSION} COMPATIBILITY SameMajorVersion)
+++  ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
++ 
++ export (TARGETS glog NAMESPACE glog:: FILE glog-targets.cmake)
++ export (PACKAGE glog)
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+index bf7df53f3f..4c1bce74e2 100644
+--- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
++++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+@@ -11,6 +11,7 @@ DEPENDS = "libunwind"
+ SRC_URI = " \
+     git://github.com/google/glog.git;branch=v035 \
+     file://0001-find-libunwind-during-configure.patch \
++    file://0001-Rework-CMake-glog-VERSION-management.patch \
+ "
+ 
+ SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
+@@ -22,3 +23,5 @@ inherit cmake
+ RDEPENDS_${PN}-dev = ""
+ RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+ RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
++
++EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
+-- 
+2.17.1
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---mP3DRpeJDSE+ciuQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCW8R1zwAKCRA3VSO3ZXaA
-HE/oAJ0fLnBPnIVJMOKlvFXCgF0c/wyk2QCeMaWAqNgwC7sTung01oKMfPRCZGA=
-=jifu
------END PGP SIGNATURE-----
-
---mP3DRpeJDSE+ciuQ--
