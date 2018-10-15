@@ -1,49 +1,51 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 82DD674586
+Return-Path: <uvv.mail@gmail.com>
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 68626797CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 13:37:16 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id f18-v6so9193612pgv.3
+	Mon, 15 Oct 2018 13:41:45 +0000 (UTC)
+Received: by mail-qt1-f171.google.com with SMTP id d21-v6so9049933qtq.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 06:37:17 -0700 (PDT)
+	Mon, 15 Oct 2018 06:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=DkeRwhcEzl+2f12dv5dF/0lGlhXIW72Ei2mD9n56a3A=;
-	b=rgra6Sip5AhqkoxxNT6sOsagQUbkYEK9PEC33Z/SpqivS0uDQHHS80D1Fj1WKoTPL/
-	YqAG6mrfFMALHgYyw4yfb0ESuFMT8LTd9m5XrfxmZSlLkVouDf+dUxXrEVsfy9v5JOgJ
-	5errTVSmnrKddeEOoN0FjN81oc96MAcWKTaAa36h45r+bFYPNKQmBYxb8PKWRuBc0D3J
-	a7EUC5VWbWLM6SUPMkOSAmwYHwReEVMoCGtH6FLELtHBIX4wC+edI9EG4ODbkTAdBrjS
-	4vG2HmgjQJuRlnZg88tO0anqROKUxbAnXQEm7BOfkXeCsRQbycjiyZhfzLyZtAY7gF7n
-	cR1A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=fjcgdXQItAxwcF3ntEkGXBcZlnnNL0BxEVQQjTecPMc=;
+	b=NlVotzFVrykTghDnDNYgWu6P3JBNoJOgrTJ3pbaE5DPTLVzVhOi6FyJPl9Su4kOMYi
+	Rv1oKPHvnDAs/heag7Lxm4DEP08f/mMfDhRnOStoEOtiBNvmQyXcjpfs5/na23pzm7il
+	I3F8w5DWP43kL50ItDot6NDQmlO+DDLgTb2Xrk3j15ujeup67FPFAtqP2eevq5aeUzRi
+	89YcyMejh1mcO+wZMkBaPX3G9ZdJwtwUj9S29xXdvNuyvNA8k035roMqN0VibASg0HBK
+	BDMrE8Y9CmFWEjodJd77phg6Xf3Vc+h8ne5VkR39Qz30y4EubtdbvSQfOTf5EaIVVDie
+	3MJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=DkeRwhcEzl+2f12dv5dF/0lGlhXIW72Ei2mD9n56a3A=;
-	b=a3wFIpNN9Ugfp44F0x7jR5aoUs+8ZjQ5uuvkL/1nEAlBzNFq+YdKeZoGKHPw/4B8Kd
-	mfiFuQD1ycP/SKNgo4dgWBBGYJ3a3UPP0aNEv6RxLQcq3Yoip7KkAqoaAzC3ACOXS4mJ
-	EwfpvTv+h8kK2kmEG4ArjwcsGHCeT03XjS8lff6BxN9PkAaAoqUwFjHxamY2WiFuUBP2
-	0K6mCww5lHCu0FnZIq1uzIUXM/6b8F7Mor4Kad7a1tTSiJsmiGGQOdzFadgN4JjS3BVh
-	yw4P5NoYHxYxPyFEJvKfU5Pdn6SpMClGNf6vDeWbGCRDLmdOmvLYuH05KIkjeSmwAuK4
-	MsGg==
-X-Gm-Message-State: ABuFfogjMabYQnFhWPbp2zzGIUTtclAqST9erEXoosC82rCUddS6yovP
-	MxJ3AXZErBjanp4pk7NOgi9LBUCxVAU=
-X-Google-Smtp-Source: ACcGV608rtyzo+Bb1cgv9mw/iA5qL94sEBD/l0O1ArRwTzKloo4MIY1J0JihNgGW+mpF99+IqBo7vw==
-X-Received: by 2002:a63:7744:: with SMTP id
-	s65-v6mr16174870pgc.197.1539610637288; 
-	Mon, 15 Oct 2018 06:37:17 -0700 (PDT)
-Received: from ankit.iind.intel.com ([192.55.54.41])
-	by smtp.gmail.com with ESMTPSA id
-	h87-v6sm20696549pfj.78.2018.10.15.06.37.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Oct 2018 06:37:16 -0700 (PDT)
-From: Ankit Navik <ankit.tarot@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Oct 2018 19:03:52 +0530
-Message-Id: <1539610432-25870-1-git-send-email-ankit.tarot@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [PATCH v2] opencl-icd-loader: Initial recipe for OpenCL ICD loader
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=fjcgdXQItAxwcF3ntEkGXBcZlnnNL0BxEVQQjTecPMc=;
+	b=TmQf8GNjBv4rIHlWIi2imU8dFEIOfUPD47+FGPA++5fYNwggMVYxKr6GERucpHUylu
+	+jzwYp9jXTssL1XMh9ixz232ifSnYK7ZX3qosQRpSyHtFGcXHqzPAeZwJ2YVRG3zS8KO
+	9N2lY9nis+D0uCHx4NCZehbVY1sLcrnxPexHf5NWU6JAoDgzSX8/TlE5u7wsYu+Xh+t4
+	0wC8ibHkEBA3Ms2mclJb9j7KFEo+slKm4owKyAu49pXj6r/saFjs1f9IzcgKLDPKjaQd
+	Isew/9xNXhYCBjIRbQyCC8youvuONsHMNxo5rMf8fohsnfNDNUORZR095ZC03e49RKLu
+	SyAw==
+X-Gm-Message-State: ABuFfojomq1qNlC9FMW58TUQuITcD4lW4xe98UijKQ/OdAxzDbO9cXmv
+	lK+Gtm+pHvk77I3NKuq3msHwVXtNdN87oUigSM4=
+X-Google-Smtp-Source: ACcGV609iaUbjpHVkptZi98tMHNXfEsGEHkPGDv9xt7r2Sy3mLpcT+OG6n0nSGAex8PfW21OmIJD3F+4bmS7RhroIJE=
+X-Received: by 2002:aed:3882:: with SMTP id
+	k2-v6mr15554936qte.345.1539610906272; 
+	Mon, 15 Oct 2018 06:41:46 -0700 (PDT)
+MIME-Version: 1.0
+References: <20181008091749.45975-1-uvv.mail@gmail.com>
+	<CAMKF1sp-q=SJ+R=bGNeCpSL_=ufUuqDJAnCPVMmVEZ2H7zYcjg@mail.gmail.com>
+	<CAKHfEah9WnNyh-wzdibsALB648po7RC4sKdNy5dWKYWpMDfL9g@mail.gmail.com>
+	<20181015111112.GA1342@jama>
+In-Reply-To: <20181015111112.GA1342@jama>
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Date: Mon, 15 Oct 2018 15:41:34 +0200
+Message-ID: <CAKHfEai-K5xnLG5qf889G5VzzjR146SreZ0FzowqFF2Yfih22w@mail.gmail.com>
+To: martin.jansa@gmail.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] glog: upgrade 0.3.4 -> 0.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,69 +58,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 13:37:16 -0000
+X-List-Received-Date: Mon, 15 Oct 2018 13:41:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This patch provides ICD loader library, ICD loader test binary
-and some helper library for test.
+Hi Martin,
+Thanks for the comment.
 
-Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
----
- .../opencl-icd-loader/opencl-icd-loader_git.bb     | 45 ++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
- create mode 100644 meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+Thanks for comments. I will add this patch and I also what to append
+RDEPENDS_${PN} += "libunwind".
+I plan to send the updates this week.
 
-diff --git a/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
-new file mode 100644
-index 0000000..7c49c8d
---- /dev/null
-+++ b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
-@@ -0,0 +1,45 @@
-+SUMMARY  = "OpenCL ICD Loader"
-+DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
-+LICENSE  = "Khronos"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ec724732ce73269486574c718ef0c79b"
-+SECTION = "base"
-+
-+inherit pkgconfig cmake
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
-+SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
-+
-+do_install () {
-+	install -d ${D}${bindir}
-+	install -m 0755 ${B}/bin/icd_loader_test ${D}${bindir}/
-+	chrpath -d ${D}${bindir}/icd_loader_test
-+	install -d ${D}${libdir}
-+	install -m 0644 ${B}/lib/libIcdLog.so ${D}${libdir}/
-+	install -m 0644 ${B}/lib/libOpenCLDriverStub.so ${D}${libdir}/
-+	chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
-+	install -m 0644 ${B}/lib/libOpenCL.so.1.2 ${D}${libdir}/
-+	cd ${D}${libdir}
-+	ln -s libOpenCL.so.1.2 libOpenCL.so.1
-+	ln -s libOpenCL.so.1 libOpenCL.so
-+}
-+
-+PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
-+PACKAGES += "libicdlog libicdlog-dbg"
-+PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
-+
-+FILES_${PN} = " \
-+	${bindir}/icd_loader_test \
-+	${libdir}/libOpenCLDriverStub.so \
-+	${libdir}/libOpenCL.so.1.2 \
-+"
-+FILES_${PN}-dev = " \
-+	${libdir}/libOpenCL.so \
-+	${libdir}/libOpenCL.so.1 \
-+"
-+
-+FILES_libicdlog = "${libdir}/libIcdLog.so"
-+FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so"
-+
-+DEPENDS = "opencl-headers"
-+RDEPENDS_${PN} = "libicdlog"
--- 
-1.9.1
+Vyacheslav
 
+On Mon, Oct 15, 2018 at 1:11 PM Martin Jansa <martin.jansa@gmail.com> wrote:
+
+> On Tue, Oct 09, 2018 at 11:52:36AM +0200, Vyacheslav Yurkov wrote:
+> > Well, two obvious reasons:
+> > - glog fixes between 0.3.4 and 0.3.5
+> > - cmake support, which simplifies dependency handling when SDK generation
+> > is involved (for example for libraries like ceres-solver)
+> >
+> > I need to update my patch for finding libunwind, so I will send another
+> > version soon. The question I have now is that glog builds static library
+> by
+> > default. What is the policy in that regard? Should a shared library be
+> > preferred by default?
+>
+> I know I'm a bit late, but I have some questions about shared library.
+>
+> The preferred default should IMHO be the same as with 0.3.4 version
+> which was shared library, but that's easy to add with small bbappend
+> having:
+> EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
+>
+> but unfortunately the SONAME in the library changed from:
+> objdump -x usr/lib/libglog.so.0.0.0 | grep SONAME
+>   SONAME               libglog.so.0
+> in 0.3.4 to:
+> objdump -x usr/lib/libglog.so.0.3.5  | grep SONAME
+>   SONAME               libglog.so.0.3.5
+>
+> Which breaks all our prebuilt binaries which now correctly complain that
+> there isn't libglog.so.0 provider in dependencies:
+> QA Issue: /usr/lib/libfoo.so.1.2.3 contained in package libfoo requires
+> libglog.so.0, but no providers found in RDEPENDS_libfoo
+>
+> Which is quite unfortunate for minor upgrade. Did they really change the
+> ABI (and expect to change it in all future minor upgrades) or is this
+> change just unexpected side-effect of using cmake instead of autotools?
+>
+> It looks the later, because if I build 0.3.5 version with autotools I
+> get:
+> objdump -x usr/lib/libglog.so.0.0.0 | grep SONAME
+>   SONAME               libglog.so.0
+>
+> and there is patch for SOVERSION here as well:
+> https://github.com/google/or-tools/blob/master/patches/glog.patch
+>
+> applied in master:
+> https://github.com/google/glog/blob/master/CMakeLists.txt#L493
+>
+> https://github.com/google/glog/commit/6b6e38a7d53fe01f42ce34384cf4ba4c50e8cb65#diff-af3b638bc2a3e6c650974192a53c7291
+>
+> patch coming with this change backported to make it possible again to
+> use the shared library.
 
