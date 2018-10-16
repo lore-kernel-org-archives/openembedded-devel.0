@@ -1,25 +1,56 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 57D3979943
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BD4C771A36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 01:19:47 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9G1Ixn7012771
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 15 Oct 2018 18:19:10 -0700
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
-	Mon, 15 Oct 2018 18:18:49 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<manjukumar.harthikote-matha@xilinx.com>, <akuster808@gmail.com>
-Date: Tue, 16 Oct 2018 09:18:47 +0800
-Message-ID: <1539652727-4633-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Tue, 16 Oct 2018 04:40:21 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id u12-v6so10768829pfn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Oct 2018 21:40:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=oCYcmj5ysgi97JoEDFd3RX8j0ZOY82Mx38KGCgB8WFY=;
+	b=CBkoPLIxCCAxZTAerCSw4VnopmuwW9/4lNL+ALK/4Ht4eongtfvk5MvqQMbxgiYDFl
+	rL5TX02hBLEqVOCfGuq4Hr45kLvzW5NKWWKZwvalDwkmpWSf9FBqQd66KwMmsldckvNr
+	X5dUfT2tCiXewjUkT7o2eq4T9T7XYR9TnhMZHcRcHAo93AhT8DXyrQ2cCqpXWZ+3WRzc
+	44eMVY+DxEeJ+I8C7mZ1S1k30qtEwQ1SxJB/HSrAfY7xNJrRnzvUYjBJzb9rfNrS86dP
+	s8nvcioN9vJSOLgtTLzavSIpvpPD/JGGJ+i+UH8ok+Hy1IUJXfRSQTHRqHF7DJGfAlm+
+	4xZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=oCYcmj5ysgi97JoEDFd3RX8j0ZOY82Mx38KGCgB8WFY=;
+	b=OVcclVGc72WEllybRN5CcOeX5ico62jj19nWo3kO9zymqng2lhDuDt/rzODVsCIVwn
+	5MErwnexZZ9JYp0lnkSQKM5ght0l+LNv92CwIyu85M5EcpVc44SxhSISe6TAhTbwha+e
+	CVrj6TkL0UuFvtcgaHKGKSTFyzEu+/R6ggPmXZ6U3Psuf6RznlwIpVUPqcNbC6ZSl72+
+	Zm4pJgK0gh2JI2FeiIq7VC9trPvWws/HsyrXfVJcxunfwZ1nsLQlOaFuy/KW+/wIy2Vm
+	Gz/jBbTaiLDCdq74e2rWLX71voVCxl3b5xLPik1ecAmwVpmwI3dBlzh6LYTzRhzvgfDD
+	Hf5g==
+X-Gm-Message-State: ABuFfoiXtRf4BolDOkfnylJtzACWh5SnNxoLu6fjCk16ggbIYlkxQPpN
+	BmNBl3HR+gGKa3ysnpXCg8mTjGJy1C2JddZrTX4=
+X-Google-Smtp-Source: ACcGV61ZsGw2pcNea+sGWFLGjxfyDOHydVacvb7iQ+ZSNShvVeZoN/ZTqiw0Fde4wNHAGQ6l96b2MPKQs/7M8JA03JU=
+X-Received: by 2002:a62:221c:: with SMTP id
+	i28-v6mr20643338pfi.196.1539664822592; 
+	Mon, 15 Oct 2018 21:40:22 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH] wireshark: update to 2.6.4
+References: <1538581223-13647-1-git-send-email-ankit.tarot@gmail.com>
+	<b0446aaa-3f8a-54c1-539f-887f671b9cb5@gmail.com>
+	<CAM_RqkOLurOJ7DSHwAeQ3OzXE4u-mVGDE02Vc5izuRgRU=SXEg@mail.gmail.com>
+	<CAMKF1spEdZOse-9yh6f3ia+evHJ_+6OJni+FePF_jEDSXvE4vg@mail.gmail.com>
+	<20181015031245.GB7186@denix.org>
+	<CAM_RqkPb0pFu57guB7gL5NLni-+pvdwqyLS2vL1rB8-q8Jbimg@mail.gmail.com>
+	<20181015181410.GF7186@denix.org>
+	<CAMKF1srW5-fDXbsEsFYS3Dj1AAPCCNfEhVpeYzBod66jaZu=EA@mail.gmail.com>
+	<20181015190052.GG7186@denix.org>
+	<CAJTo0LYk2Z866pnf7gAt=JaqrfF+f857SDet0G-iLssvp44fVA@mail.gmail.com>
+In-Reply-To: <CAJTo0LYk2Z866pnf7gAt=JaqrfF+f857SDet0G-iLssvp44fVA@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Tue, 16 Oct 2018 10:10:11 +0530
+Message-ID: <CAM_RqkM+suSb8nVeiCsbPGG2WC83Pr-QXwJz8OwFca1n9X7CpA@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] opencl-headers: Initial recipe for OpenCL headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,86 +63,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 01:19:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Oct 2018 04:40:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* Update SRC_URI
-  In https://1.as.dl.wireshark.org/src/, it only keep the latest
-  release. Switch to https://1.as.dl.wireshark.org/src/all-versions/
-  to make sure the old release can be found.
+Hi Ross,
+On Tue, Oct 16, 2018 at 12:37 AM Burton, Ross <ross.burton@intel.com> wrote:
+>
+> On Mon, 15 Oct 2018 at 20:01, Denys Dmytriyenko <denis@denix.org> wrote:
+> > > > > > > > > > +do_install () {
+> > > > > > > > > > +     install -d ${D}${includedir}/CL/
+> > > > > > > > > > +     for f in ${S}/CL/*.h; do
+> > > > > > > > > > +             install -m 0644 $f ${D}${includedir}/CL/
+> > > > > >
+> > > > > > Single file install? Not very optimized...
+> > > >
+> > > > > Its not a single file, Installing all the header files.
+> > > >
+> > > > It's a single file install in a for loop, hence my comment about being
+> > > > unoptimal. Why not use "cp *.h"?
+> > >
+> > >  I agree its suboptimal use here. May be
+> > >
+> > > install [OPTION]... -t DIRECTORY SOURCE
+> > >
+> > > could be tamed to make it better.
+> > > however cp messes the file permissions up if not used with right opts.
+> > > So I would not prefer it unless used with right
+> > > options to respect the file perms. Install does it correctly,
+> >
+> > Agree, cp would require passing correct options, but there are plenty of
+> > examples alreay.
+>
+> If we're bikeshedding a micro-optimisation then surely this is optimal:
+>
+>   install -m 0644 -D -t ${D}${includedir}/CL ${S}/CL/*.h
+>
+> That combines the mkdir and cp in one command.
+Thank you for your suggestion, but this one line command still throws
+error of No such file or directory.
+Following line will solve:
+install -d ${D}${includedir}/CL/
+install -m 0644 -t ${D}${includedir}/CL ${S}/CL/*.h
 
-* Drop patch fix-fatal-no-names-found-git-error.patch
-  Actually this piece of code should not be invoked when build from
-  tarball. But in previous releases the code will be performed when
-  building native package if host with rpmbuild and git installed, which
-  will cause a configure error. This issue has been fixed in 2.6.4:
-    commit 4fbc017e80d6d11f8c26cad12d883fd6da9d3504
-    CMake: Fix build from tarball under certain conditions
+I'll send this patch in v3.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../fix-fatal-no-names-found-git-error.patch       | 23 ----------------------
- .../{wireshark_2.6.2.bb => wireshark_2.6.4.bb}     |  7 +++----
- 2 files changed, 3 insertions(+), 27 deletions(-)
- delete mode 100644 meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
- rename meta-networking/recipes-support/wireshark/{wireshark_2.6.2.bb => wireshark_2.6.4.bb} (92%)
-
-diff --git a/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch b/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
-deleted file mode 100644
-index 80119e3..0000000
---- a/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--fixes
--
--| fatal: No names found, cannot describe anything.
--| CMake Error at CMakeLists.txt:3086 (string):
--|   string begin index: 1 is out of range 0 - 0
--
--Use always to circumvent the issue if git tag is not present
--
--Upstream-status: Pending
--
--Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
-----
----- wireshark-2.6.1/CMakeLists.txt	2018-08-08 18:18:05.388318652 -0700
--+++ wireshark-2.6.1/CMakeLists-fix.txt	2018-08-08 18:22:27.829670496 -0700
--@@ -3078,7 +3078,7 @@
-- 	endif()
-- 
-- 	execute_process(
---		COMMAND git describe --abbrev=8 --match v[1-9]*
--+		COMMAND git describe --always --abbrev=8 --match v[1-9]*
-- 		OUTPUT_VARIABLE _git_description
-- 		OUTPUT_STRIP_TRAILING_WHITESPACE
-- 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
-similarity index 92%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
-index 5be7d4f..595502e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
-@@ -8,15 +8,14 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
- 
- DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
- 
--SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
-+SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
-            file://0001-Add-libm-to-link-for-fmod-API.patch \
--           file://fix-fatal-no-names-found-git-error.patch \
-           "
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
--SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
-+SRC_URI[md5sum] = "8aa7b8c8ce0b6ce4256a081493819d6f"
-+SRC_URI[sha256sum] = "a06b007e6343f148b8b93443b2fcfc9bb3204311cd268565d54d1b71660bc861"
- 
- PE = "1"
- 
--- 
-2.7.4
-
+Regards, Ankit
+>
+> Ross
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
