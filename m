@@ -1,48 +1,41 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E1137745AC
+Return-Path: <asselsm@gmail.com>
+Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
+	[209.85.219.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C7924745A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 12:37:32 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id f78-v6so5637613pfe.1
+	Tue, 16 Oct 2018 13:11:22 +0000 (UTC)
+Received: by mail-yb1-f195.google.com with SMTP id e190-v6so8857196ybb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 05:37:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=splq7POSYgsb3WLukkKWsujizAIIxeerG6QLtvjigHo=;
-	b=A+VakZubKu6Jp53JkzYfKu4XnB32tQqndyUv3qgu3IozeTgUMu2UBUDJqtBZJD6ZX+
-	MrGs3nsrtcDnniK/TkNAcIPgi/r2taghT9k1pEGCrwRDLFMpNU6WvoSoMQSpWWmB9YPz
-	y9j4VEhVNanIrQzX6jMDxDI8QvDNxzbIRA9DNf0uLy2OeNi3e8UHsfENkCwRsFr5IJdq
-	OoHQupEQDzsGjj7GoaMGZkhFGZn0HRapOoyi89B/b4RQgqZVcLBULAltyk0ChSzQZRDD
-	4eZqPHiHVFLiAU5x5vf6TrEx/3LMhpxomFvtTKAbaUW8D5bhhTbq2eQSjEfuxP4pOvFM
-	liWQ==
+	Tue, 16 Oct 2018 06:11:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=splq7POSYgsb3WLukkKWsujizAIIxeerG6QLtvjigHo=;
-	b=cjXP8xktxlrYvJWG4OBqa+UmmDO33gefjyqlsYz8s5zwt3EboZbqQPm4Oev6G1Y8yU
-	VTg6blRvIB3kB3jhLiltDSPApQO654Gd2+sP1HabcUsDWzAH5u48Efdug6OoH0vc+Wo6
-	1nzeVdr6jyrYom88oyJxgxiFcn52s0Z50HV2/RFmpsOC/DkXpC7tfdipIeJGP1nnWqDN
-	s7D/2qn9sgxyZYbw6pQwAVD9Ixw0ug/QTriwXkMxhDGf2gAvIAKBCkTE9Xyc6nqWikRj
-	hbFQEUqmfVflajjjqriF7ykFpM4qWo59HPzMF48KWcXn4zeMQEKv+O08OYRHwzh7hDMC
-	vXdA==
-X-Gm-Message-State: ABuFfojQpmOfZZ7hT+u85QV+P3XobkoBkTMEHryY1KCFTYFEApTeTgSf
-	6DgocuN6QMYWopay46a33/s4AnwkRBQzKrJQlkQ=
-X-Google-Smtp-Source: ACcGV60bgUO2jrB1wKMhyXiV5Npqn05F0UTljsxMaR4KiNH+ib6ivA6bo0UErsDnndqTY/Gwksl2kCFpTdfShVUxe8w=
-X-Received: by 2002:a63:f252:: with SMTP id
-	d18-v6mr20171654pgk.2.1539693453774; 
-	Tue, 16 Oct 2018 05:37:33 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
+	:from:date:message-id:subject:to:cc:content-transfer-encoding;
+	bh=j1FYr47Ri2Ghy9BiRJChCbqgMUirwdA0CMEtvpX+AkA=;
+	b=dvKKNXiHDYr+xjkNCCCGt8heZePW+bH9QiAHltkdNGIIoupoXdBVMFZCwgyZWu87o/
+	WWzud5JWwGp4zAeXiNYdIg3zAN3SWIas+gTFxr7EheXQlg/g0fh/JLF2h3lkjJuD3ht4
+	syOhxXi7heM858wkwYNTFz3xLjwSKGlxqcu6m0ErRNzLJDwHF6bf35QZD7ysgYfETYGd
+	iR1hwVKT7PQpVsjLuogJJc61wSzLo9ofxzjnR1PO2Ddef2wL9RFhJlevpvQAMQQ88V/B
+	2T+lQ4i34eBepz70jGHf+bVWpHOy9DQv2/1DHD2xIue1oitngwkVnXS2+ld9Sw9OCt8s
+	Zy7w==
+X-Gm-Message-State: ABuFfoj5iis+V5Hfy8jWoDBwJfmVJgbAmYrfr+cQyXnTmYxVfKaHMBkw
+	y1/sHwzPluD9uv34Zp/XhEG8S5As+QOwXmUCL1E=
+X-Google-Smtp-Source: ACcGV60N2mPMSepJEjVE+g0rb6nE+Hr23jDh7xqWN3bY92r/xyyqZchUeX6sd/G6oIfDjZXFVPq+HsgyDl+4Tja2J4s=
+X-Received: by 2002:a25:200b:: with SMTP id
+	g11-v6mr11737896ybg.390.1539695483367; 
+	Tue, 16 Oct 2018 06:11:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <1539664828-29601-1-git-send-email-ankit.tarot@gmail.com>
-	<CAJTo0Lba-jQYe5W99ZA3zLCqNQiFeRhM7m8zipRTCon5cKA4sw@mail.gmail.com>
-In-Reply-To: <CAJTo0Lba-jQYe5W99ZA3zLCqNQiFeRhM7m8zipRTCon5cKA4sw@mail.gmail.com>
-From: Ankit Navik <ankit.tarot@gmail.com>
-Date: Tue, 16 Oct 2018 18:07:22 +0530
-Message-ID: <CAM_RqkOR+WeyxbrGm5FEThYOELNABzcWt6KTmj-A+JyZ1hvYxA@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v3] opencl-headers: Initial recipe for OpenCL headers
+References: <1539637881-20308-1-git-send-email-mark.asselstine@windriver.com>
+	<CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
+	<03c98f69-1127-172e-ac59-bb7450f37c04@windriver.com>
+In-Reply-To: <03c98f69-1127-172e-ac59-bb7450f37c04@windriver.com>
+Reply-To: mark.asselstine@windriver.com
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Tue, 16 Oct 2018 09:11:12 -0400
+Message-ID: <CAPuovELzqySBRn2e+jXO4RjMC6-NwUZkpQPBhJn3PQcxZXB2Lw@mail.gmail.com>
+To: hongxu.jia@windriver.com
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] polkit: fixup 'installed but not shipped' error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,30 +48,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 12:37:33 -0000
+X-List-Received-Date: Tue, 16 Oct 2018 13:11:23 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Ross
-On Tue, Oct 16, 2018 at 5:01 PM Burton, Ross <ross.burton@intel.com> wrote:
+On Tue, Oct 16, 2018 at 3:35 AM Hongxu Jia <hongxu.jia@windriver.com> wrote=
+:
 >
-> On Tue, 16 Oct 2018 at 05:43, Ankit Navik <ankit.tarot@gmail.com> wrote:
+> On 2018=E5=B9=B410=E6=9C=8816=E6=97=A5 06:01, Khem Raj wrote:
+> > may be we can use bitbake variables here and also optimize it a bit if
+> > possible ?
+> > too many installs there
 >
-> > +do_install () {
-> > +       install -d ${D}${includedir}/CL/
-> > +       install -m 0644 -D -t ${D}${includedir}/CL ${S}/CL/*.h
-> > +}
->
-> -D to install is 'create directories' which you've already done in the
-> previous line, so that can be removed.
->
-> If you're removing -D then a more idiomatic form would be:
->
-> +       install -d ${D}${includedir}/CL/
-> +       install -m 0644 ${S}/CL/*.h ${D}${includedir}/CL
-Opps, missed -D.
-Cool. I will use your suggestion.
+> It is not the issue of polkit, but gobject-introspection.bbclass in oe-co=
+re,
+> I've sent the fix to oe-core.
 
-Thanks, Ankit
+Hongxu, my search for a fix overlooked your patch, thanks for the
+heads up. For now let's withdraw my patch.
+
+Mark
+
+
 >
-> Ross
+> Here is my fix:
+>
+> commit 29b41806fa5679881efd04b0b41ecbf4ddd07d11
+> Author: Hongxu Jia <hongxu.jia@windriver.com>
+> Date:   Tue Oct 16 15:31:23 2018 +0800
+>
+>      gobject-introspection.bbclass: fix gir installed but not shipped in
+> any package while multilib enabled
+>
+>      Since commit [9524330 gobject-introspection: fix multilib install
+>      file conflicts] applied in oe-core, while multilib enabled, gir
+>      files will be installed to `${libdir}'.
+>
+>      Refer above commit, modify gobject-introspection.bbclass to
+>      split gir to package correctly.
+>
+>      Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>
+> diff --git a/meta/classes/gobject-introspection.bbclass
+> b/meta/classes/gobject-introspection.bbclass
+> index b6160b8..a323c1f 100644
+> --- a/meta/classes/gobject-introspection.bbclass
+> +++ b/meta/classes/gobject-introspection.bbclass
+> @@ -40,4 +40,4 @@ FILES_${PN}_append =3D " ${libdir}/girepository-*/*.typ=
+elib"
+>
+>   # .gir files go to dev package, as they're needed for developing (but
+> not for
+>   # running) things that depends on introspection.
+> -FILES_${PN}-dev_append =3D " ${datadir}/gir-*/*.gir"
+> +FILES_${PN}-dev_append =3D " ${datadir}/gir-*/*.gir ${libdir}/gir-*/*.gi=
+r"
+>
+> //Hongxu
+>
+> >> +        mv ${D}${libdir}/gir-1.0 ${D}/usr/share/.
+> >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
