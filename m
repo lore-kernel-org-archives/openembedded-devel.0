@@ -1,50 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D24B379101
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A6606FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 15:13:18 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id 12-v6so14327688qkj.10
+	Tue, 16 Oct 2018 17:50:31 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id i4-v6so11189892pgq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 08:13:20 -0700 (PDT)
+	Tue, 16 Oct 2018 10:50:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=JrSvSVQdodYUq46IpHCKwCn74BsaOVUNjpAzDmizCxQ=;
-	b=NN8XfC3WnbDBPVn7+ZHLnhPBSQI2oIpCKYIq0mZkL19EqrlpJpmczy91PB0CZL+bpx
-	eyh5sXWtgSiyQb0L+ukdnPX5orlQg5GmUcF9/fzNOtF97D+WClmPSwkrhMveOjgIlCMD
-	IUVKSBm8hmGlFgJZVUdlaVkvyPPtHm0Jk0osHyD79VyDg0XIyztoVjBxsasQLmCiwPpB
-	TOeOmDb15q3MNKjNrIFIQlNTb36YWlELI8lYunWHJ5I78UtjeeTB/uCqN5QYqoLuX0eu
-	FoN++OVhh6txKHtsR6q690RlAgcdMvqxxS6iqQJ89uilU4W8LCS6nZbrU67CA39rKwO1
-	u1YQ==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=8skbaLtG/WjhAfgh45Pwac2jVqcrAoqZWIjt47mREcY=;
+	b=varDhcxiP5hcM7akrHwNVL+kPbfaWwUZyeqbHoV1KWo+WpvDSh5Gg/UAfa4GslGY/F
+	wgj/TPF2yxELhTTwTHAqUKmlxm2DAXBtr/4q/0VclkmX+nh9P7qyhEk3MYBbasH8JFXx
+	6CAtmjS5vVlOnWSVb3m/6nlRMk5wJ6+bITQs6Jyb9kJLhTFIgMHMYR7N+iX6H5vXL4kj
+	S+c5TA0Id/ufi1PPE6jku3ZqIU0jLbvIFX+g1hj2ADLdQwal8m7dJmVXeM2Vke5+pVOa
+	7llMhPOV9SyeZdu3PiUd+rl/pGLPFxcx/OCvxqLeFVMYycMilQA1VHy2s5yBl5MnF+lj
+	VwJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=JrSvSVQdodYUq46IpHCKwCn74BsaOVUNjpAzDmizCxQ=;
-	b=WmJYhygbvhPx3r5GDpPuCu8NqXuJNDXs9rmkwzxbQEeYyUcSo5RNZybgRr+3JcV+AU
-	PytU2eyaGPD0Af1DBgmQasSRc/QGdaU9p/W3Z3nTqFEz4PUGNNpylPnfFC2hE7Ijeppt
-	jOmqXdTJ05ARutjMAI2f9yXd/unBWSgp4PrfDSRG78dJmqU67Mhq8aKyI6KjHGEgR2yz
-	RmlyTDUgDYvhnA3SScuby77YTY0tifFR78oeY7PeY2p/kdWinUuPMlDDX1xY9Rz1h1zU
-	3PNOqLDRncY1UTrm8tTHXiHN6Uo3Uh/5fCzwWqYRKZpGKYlGVOaUc7MLbV1rD5wxlH8M
-	SusQ==
-X-Gm-Message-State: ABuFfoj/SUhQrh5laFaHn7Br8F2cHZsWjQM5chCyudmaXR+tFg7OkmQG
-	lcyAJ557CJVhhvzSswkwE5n61N9mQx+7Q5X6RCI=
-X-Google-Smtp-Source: ACcGV60j6+FpQwj/Obmeve7B6gzfLx+Ox+XbHvsNEmfXML7/WSi2XWlUeiJk1nGD1VYze3dGrxlP+tjogQTSL36QY7w=
-X-Received: by 2002:ae9:f408:: with SMTP id y8-v6mr21593880qkl.2.1539702799516;
-	Tue, 16 Oct 2018 08:13:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <1539664828-29601-1-git-send-email-ankit.tarot@gmail.com>
-	<CAJTo0Lba-jQYe5W99ZA3zLCqNQiFeRhM7m8zipRTCon5cKA4sw@mail.gmail.com>
-	<CAM_RqkOR+WeyxbrGm5FEThYOELNABzcWt6KTmj-A+JyZ1hvYxA@mail.gmail.com>
-	<CAMKF1socKGKNmOROX0-isBt47hj+z1r7YyKxt+TKYDs0XZe=ZQ@mail.gmail.com>
-	<CAM_RqkN_A6tsLUBWcscF0m7AVZbi2+QBaKoF9QmprFnb0n--1Q@mail.gmail.com>
-In-Reply-To: <CAM_RqkN_A6tsLUBWcscF0m7AVZbi2+QBaKoF9QmprFnb0n--1Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Oct 2018 08:12:53 -0700
-Message-ID: <CAMKF1sqb-asvC5rAvxnLD4ahUEZFBih+JHfuECWvoc_ZoTbYsg@mail.gmail.com>
-To: Ankit Navik <ankit.tarot@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v3] opencl-headers: Initial recipe for OpenCL headers
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=8skbaLtG/WjhAfgh45Pwac2jVqcrAoqZWIjt47mREcY=;
+	b=Ok1gDoCCDIeHvcg/DYJnBLb/dDJb+laFAU0eRGbBKU6m/KrX4TvcoXyDnBP3+9hNfy
+	dN6itX9k8EKQYRKE8LEspAo/tnxM6hfoHJ2HcCI6Uq9HOMAS2kw1eMPePu5G/2C2937N
+	Zk/1XqiRNRH2rJM3v9gI/vWNqftb6N/gQ+KBYQZVsb11qC0hHbzOFm2c6xwNyLc+6LwS
+	GuRjaqew8OoAwXysQsSJXHpk/ZaUJzHxPHlGSaQmfG7MUFBjLy2xygFflIoL4a0kHtks
+	6ImrJaBhUL13FZ1+wVeEJrMckyS9nRrv7uRElO9WeQTN/VN0HyVUGuRcNqXVrmwnUl6a
+	KfAg==
+X-Gm-Message-State: ABuFfoj/l0zSaixKpvzeHZcgCpofC3aY0RgxEIIxRkTlZA+MaA/tio0X
+	YmV+lm+iwPDOFtJFnUkaJmAFzx0h0uE=
+X-Google-Smtp-Source: ACcGV623kHhAMcS4Fej4yMANkVohqCg8v2PvdFYn/v6ToTbowZpWjXFS1tnTFZxommAv2C944iVczw==
+X-Received: by 2002:a62:5441:: with SMTP id
+	i62-v6mr23177936pfb.155.1539712231868; 
+	Tue, 16 Oct 2018 10:50:31 -0700 (PDT)
+Received: from apnavik-DESK.iind.intel.com (fmdmzpr03-ext.fm.intel.com.
+	[192.55.54.38]) by smtp.gmail.com with ESMTPSA id
+	74-v6sm23516207pfx.182.2018.10.16.10.50.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 16 Oct 2018 10:50:31 -0700 (PDT)
+From: Ankit Navik <ankit.tarot@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Oct 2018 23:19:02 +0530
+Message-Id: <1539712142-6197-1-git-send-email-ankit.tarot@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <CAMKF1sqb-asvC5rAvxnLD4ahUEZFBih+JHfuECWvoc_ZoTbYsg@mail.gmail.com>
+References: <CAMKF1sqb-asvC5rAvxnLD4ahUEZFBih+JHfuECWvoc_ZoTbYsg@mail.gmail.com>
+Subject: [PATCH v4] opencl-headers: Initial recipe for OpenCL headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,55 +59,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 15:13:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 16 Oct 2018 17:50:31 -0000
 
-On Tue, Oct 16, 2018 at 7:06 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
->
-> Hi Raj,
-> On Tue, Oct 16, 2018 at 7:17 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Tue, Oct 16, 2018 at 5:37 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
-> > >
-> > > Hi Ross
-> > > On Tue, Oct 16, 2018 at 5:01 PM Burton, Ross <ross.burton@intel.com> wrote:
-> > > >
-> > > > On Tue, 16 Oct 2018 at 05:43, Ankit Navik <ankit.tarot@gmail.com> wrote:
-> > > >
-> > > > > +do_install () {
-> > > > > +       install -d ${D}${includedir}/CL/
-> > > > > +       install -m 0644 -D -t ${D}${includedir}/CL ${S}/CL/*.h
-> > > > > +}
-> > > >
-> > > > -D to install is 'create directories' which you've already done in the
-> > > > previous line, so that can be removed.
-> > > >
-> > > > If you're removing -D then a more idiomatic form would be:
-> > > >
-> > > > +       install -d ${D}${includedir}/CL/
-> > > > +       install -m 0644 ${S}/CL/*.h ${D}${includedir}/CL
-> > > Opps, missed -D.
-> > > Cool. I will use your suggestion.
-> >
-> > you just need single line there in do_install
-> >
-> >  install -m 0644 -D -t ${D}${includedir}/CL ${S}/CL/*.h
-> Single line solution is not working as I said in earlier email, it
-> throws an error as No such file and directory.
+Add generic recipe for OpenCL API headers.
 
-yes it wont now I see that its using wildcards. So send the final
-patch with Ross's suggestions and we can move on
+Suggested-by: Burton, Ross <ross.burton@intel.com>
+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+---
+ .../recipes-core/opencl-headers/opencl-headers_git.bb   | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
 
-> Regards, Ankit
-> >
-> >
-> > >
-> > > Thanks, Ankit
-> > > >
-> > > > Ross
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb b/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
+new file mode 100644
+index 0000000..dec1bea
+--- /dev/null
++++ b/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
+@@ -0,0 +1,17 @@
++SUMMARY  = "OpenCL API Headers"
++DESCRIPTION = "OpenCL compute API headers from Khronos Group"
++LICENSE  = "Khronos"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dcefc90f4c3c689ec0c2489064e7273b"
++SECTION = "base"
++
++S = "${WORKDIR}/git"
++SRCREV = "40c5d226c7c0706f0176884e9b94b3886679c983"
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git"
++
++do_configure[noexec] = "1"
++do_compile[noexec] = "1"
++
++do_install () {
++	install -d ${D}${includedir}/CL/
++	install -m 0644 ${S}/CL/*.h ${D}${includedir}/CL
++}
+-- 
+1.9.1
+
 
