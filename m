@@ -1,46 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 650317503E
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 57D3979943
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 22:01:59 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id x8-v6so12885995qka.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Oct 2018 15:02:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=25rXFKly7S2SJrcLTHVvMWqkiF1B84YXREDUqtDTKLM=;
-	b=NQNBQ6mM1eqDaIFgsvgUDL1bBmFqN7jaE6LWbshsAAsH0hHoxx2lOakT2i7FPty0xP
-	f2BPfzj27q2clC4skSVI5ItMG/U9FzV7P+3mh6RGM7ei9DAglcAP9TkuGywGpTcSh4zZ
-	5TVxQNODaTIVC/Hd5ZydLnqNeN2VzKvFhvPJqKjykDhy+QvU1GFwbhSknSx2H7r0NSqO
-	RKE3Amz0heoW/Fro/yQ2ysjlIaJahcmJweUco/Kwdy8NeJiNrsZXmL7XeUd+MAHflXX/
-	zwHiD++7cpwA2vGRoXJRJeX0YiP49Ds4OCt9vszD3FHXsmcQpQsWC7HckIKJ01l0/Vd1
-	QiuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=25rXFKly7S2SJrcLTHVvMWqkiF1B84YXREDUqtDTKLM=;
-	b=tKitIt+bdDD3iK+qu1ub8ah47vmZwgYaHO5i5VkNYxD5p+QctZN4SLBW9E1WMn0H6f
-	9NdqzahNFknjIC7cnfOQjxAd3D/d+/os9QKxn9fMvcPQcLKKc9OgiNRtfk7mjB/6s0nP
-	d9MP5oemuSV3LsrccxKuZUwH1rf+Wjcn+D9nBqF82nnTTHWzDtVh24cnyFGbW1cGVaWS
-	dYAwiBkYdX3cxVoEnI9sC08ySAKyp0jk2XVd4t1OSz2dsMB4TdbL7pCdUiMoXWw8rTdx
-	VnvYeQ6hwJbtVoLtTE8cj7GB0OkpoCSAXCw2CuJlisbUX00HrwXYFhnFCP4SYAkzuTNt
-	vPYw==
-X-Gm-Message-State: ABuFfojwy8KmWNQn9aSPHlUeUqiaEs2jVH5fqgJEwbhl+LdGsw6XEtdD
-	8iqstp/F2713vhs9u+J9EipaDo8rvwtJFgi8sIkZAw==
-X-Google-Smtp-Source: ACcGV62mK/kOaChnFQbszyDhhlHWNeouiWuUnlyOEMHKxuwiF4Gj8F/wzp24jQjQ7uESZfypOb1peFJza1PttuktHEA=
-X-Received: by 2002:ae9:f408:: with SMTP id y8-v6mr18596829qkl.2.1539640919823;
-	Mon, 15 Oct 2018 15:01:59 -0700 (PDT)
+	Tue, 16 Oct 2018 01:19:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9G1Ixn7012771
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 15 Oct 2018 18:19:10 -0700
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Mon, 15 Oct 2018 18:18:49 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<manjukumar.harthikote-matha@xilinx.com>, <akuster808@gmail.com>
+Date: Tue, 16 Oct 2018 09:18:47 +0800
+Message-ID: <1539652727-4633-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <1539637881-20308-1-git-send-email-mark.asselstine@windriver.com>
-In-Reply-To: <1539637881-20308-1-git-send-email-mark.asselstine@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Oct 2018 15:01:33 -0700
-Message-ID: <CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] polkit: fixup 'installed but not shipped' error
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-networking][PATCH] wireshark: update to 2.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,67 +32,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2018 22:01:59 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 16 Oct 2018 01:19:47 -0000
+Content-Type: text/plain
 
-On Mon, Oct 15, 2018 at 2:11 PM Mark Asselstine
-<mark.asselstine@windriver.com> wrote:
->
-> When building with 'installed-vs-shipped' QA check enabled you will
-> see the following when building polkit:
->
->     ERROR: polkit-0.115-r0 do_package: QA Issue: polkit:
->      Files/directories were installed but not shipped in any package:
->       /usr/lib64/gir-1.0
->       /usr/lib64/gir-1.0/Polkit-1.0.gir
->       /usr/lib64/gir-1.0/PolkitAgent-1.0.gir
->     Please set FILES such that these items are packaged. Alternatively
->       if they are unneeded, avoid installing them or delete them within
->       do_install.
->     polkit: 3 installed and not shipped files. [installed-vs-shipped]
->     ERROR: polkit-0.115-r0 do_package: Fatal QA errors found, failing task.
->
-> This is a result of the gobject instrospection GIR files not being
-> included in any package. Create a do_install_append() to move these
-> files to '/usr/share' where they will be picked up by the -dev
-> package. This is also the commonly used location for these files.
->
-> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-> ---
->  meta-oe/recipes-extended/polkit/polkit_0.115.bb | 9 +++++++++
->  1 file changed, 9 insertions(+)
->
-> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.115.bb b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-> index ad0f66a..ffaacaa 100644
-> --- a/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-> +++ b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-> @@ -53,3 +53,12 @@ USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysco
->
->  SYSTEMD_SERVICE_${PN} = "${BPN}.service"
->  SYSTEMD_AUTO_ENABLE = "disable"
-> +
-> +do_install_append () {
-> +    # should always be true since we inherit gobject-introspection, but let's just be sure
-> +    if [ -d ${D}${libdir}/gir-1.0 ]; then
-> +        install -d ${D}/usr
-> +        install -d ${D}/usr/share
+* Update SRC_URI
+  In https://1.as.dl.wireshark.org/src/, it only keep the latest
+  release. Switch to https://1.as.dl.wireshark.org/src/all-versions/
+  to make sure the old release can be found.
 
-may be we can use bitbake variables here and also optimize it a bit if
-possible ?
-too many installs there
+* Drop patch fix-fatal-no-names-found-git-error.patch
+  Actually this piece of code should not be invoked when build from
+  tarball. But in previous releases the code will be performed when
+  building native package if host with rpmbuild and git installed, which
+  will cause a configure error. This issue has been fixed in 2.6.4:
+    commit 4fbc017e80d6d11f8c26cad12d883fd6da9d3504
+    CMake: Fix build from tarball under certain conditions
 
-> +        mv ${D}${libdir}/gir-1.0 ${D}/usr/share/.
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../fix-fatal-no-names-found-git-error.patch       | 23 ----------------------
+ .../{wireshark_2.6.2.bb => wireshark_2.6.4.bb}     |  7 +++----
+ 2 files changed, 3 insertions(+), 27 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.6.2.bb => wireshark_2.6.4.bb} (92%)
 
+diff --git a/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch b/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
+deleted file mode 100644
+index 80119e3..0000000
+--- a/meta-networking/recipes-support/wireshark/wireshark/fix-fatal-no-names-found-git-error.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-fixes
+-
+-| fatal: No names found, cannot describe anything.
+-| CMake Error at CMakeLists.txt:3086 (string):
+-|   string begin index: 1 is out of range 0 - 0
+-
+-Use always to circumvent the issue if git tag is not present
+-
+-Upstream-status: Pending
+-
+-Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
+----
+---- wireshark-2.6.1/CMakeLists.txt	2018-08-08 18:18:05.388318652 -0700
+-+++ wireshark-2.6.1/CMakeLists-fix.txt	2018-08-08 18:22:27.829670496 -0700
+-@@ -3078,7 +3078,7 @@
+- 	endif()
+- 
+- 	execute_process(
+--		COMMAND git describe --abbrev=8 --match v[1-9]*
+-+		COMMAND git describe --always --abbrev=8 --match v[1-9]*
+- 		OUTPUT_VARIABLE _git_description
+- 		OUTPUT_STRIP_TRAILING_WHITESPACE
+- 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
+similarity index 92%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
+index 5be7d4f..595502e 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.4.bb
+@@ -8,15 +8,14 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
+ 
+ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+ 
+-SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
++SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
+            file://0001-Add-libm-to-link-for-fmod-API.patch \
+-           file://fix-fatal-no-names-found-git-error.patch \
+           "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
+-SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
++SRC_URI[md5sum] = "8aa7b8c8ce0b6ce4256a081493819d6f"
++SRC_URI[sha256sum] = "a06b007e6343f148b8b93443b2fcfc9bb3204311cd268565d54d1b71660bc861"
+ 
+ PE = "1"
+ 
+-- 
+2.7.4
 
-
-> +    fi
-> +}
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
