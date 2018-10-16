@@ -1,29 +1,48 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 60706749F3
+Return-Path: <ross.burton@intel.com>
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
+	[209.85.167.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7764C79981
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 07:35:20 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9G7ZLIr029132
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 16 Oct 2018 00:35:21 -0700 (PDT)
-Received: from [128.224.162.232] (128.224.162.232) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Tue, 16 Oct 2018 00:35:20 -0700
-To: Khem Raj <raj.khem@gmail.com>, Mark Asselstine
-	<mark.asselstine@windriver.com>
-References: <1539637881-20308-1-git-send-email-mark.asselstine@windriver.com>
-	<CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <03c98f69-1127-172e-ac59-bb7450f37c04@windriver.com>
-Date: Tue, 16 Oct 2018 15:35:17 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Tue, 16 Oct 2018 11:31:21 +0000 (UTC)
+Received: by mail-oi1-f196.google.com with SMTP id v69-v6so17740723oif.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Oct 2018 04:31:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=h9K/ujxpDdVnmlgSre30Bp0dVFqtto+C2rhrhHXGOiQ=;
+	b=fxktEUpvzszICLqhIfqtYaOfv2ej5OdjUgxFkgY/9usYSr1SWToZdlkopSua7Hd8lA
+	F8csJzG9vDSuNDhL7Dukve0doLL0ahOB+RwJ/1vbEbKy/ugNequHjbiZKi8zABBtgH1T
+	M8n8MjTEpJGS2ECUARpU2ve5YoRds375VKtuIlLpDF81DAdb1qaeZNPEMMVgZyboasDQ
+	Je3cNyYo9P+A7TjKstwF3qyUDf5fNBeCvEazaGr+IE6ChVgMMIeuIES1Gou7nbrQ8aqV
+	PfmJMhr2IFtb8IkB4dumkmrmCG0bmKG1/EgGqzS76Y+vvG55vFGLN2P/Z2GAXQ7RIlYO
+	8FkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=h9K/ujxpDdVnmlgSre30Bp0dVFqtto+C2rhrhHXGOiQ=;
+	b=b4ENXpIuggP45rPXNwXetX2PDRMgChMkTLndo38dFuurPK/sNVr/ZhWUL8ng26ooyt
+	hvIwJQNl8NyjydA2Uv2Sok/fAhIbcDYBzRnUC5wPouuXMMOeJnaaKoprMjmwLGERKG3J
+	N+mdeSIem+zP3RPgbTLVMLiOcPlHfiIxBFNCN6h9YdZvolRfYDFA0KHlueVVUNfAIxX8
+	q4sseWyDRMCUkrzmOKdyz9ISeaB2ppp3sq3dle3Q7iqhAhB5UQavOt2/IC7elb2Zekab
+	EXDc5WRfoPCAzOZBbnj/3l/8dovLkAW9JdJ2rffWVcpi/48izWDkc4DPNogluoI6z1Sz
+	nD1Q==
+X-Gm-Message-State: ABuFfojb4JxQ2ktptCanRMP2uIlceriLy1gZewFyIKf80t4IPw5fPtwG
+	ZYVov0yzaH43hBVrdJkBUy0vuFHbiDOL9KwXKku+IA==
+X-Google-Smtp-Source: ACcGV62ydAkzHakpeimg4YPfwJwLCCm67j4UC0dqzWFcwJ6u3LuvRKx67tKo4tUZcenAsok8q+WGHRppxnouFyXD/5c=
+X-Received: by 2002:aca:bbc5:: with SMTP id
+	l188-v6mr7304558oif.340.1539689482360; 
+	Tue, 16 Oct 2018 04:31:22 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] polkit: fixup 'installed but not shipped' error
+References: <1539664828-29601-1-git-send-email-ankit.tarot@gmail.com>
+In-Reply-To: <1539664828-29601-1-git-send-email-ankit.tarot@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 16 Oct 2018 12:31:10 +0100
+Message-ID: <CAJTo0Lba-jQYe5W99ZA3zLCqNQiFeRhM7m8zipRTCon5cKA4sw@mail.gmail.com>
+To: Ankit Navik <ankit.tarot@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v3] opencl-headers: Initial recipe for OpenCL headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,53 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 07:35:20 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 16 Oct 2018 11:31:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2018年10月16日 06:01, Khem Raj wrote:
-> may be we can use bitbake variables here and also optimize it a bit if
-> possible ?
-> too many installs there
+On Tue, 16 Oct 2018 at 05:43, Ankit Navik <ankit.tarot@gmail.com> wrote:
 
-It is not the issue of polkit, but gobject-introspection.bbclass in oe-core,
-I've sent the fix to oe-core.
+> +do_install () {
+> +       install -d ${D}${includedir}/CL/
+> +       install -m 0644 -D -t ${D}${includedir}/CL ${S}/CL/*.h
+> +}
 
-Here is my fix:
+-D to install is 'create directories' which you've already done in the
+previous line, so that can be removed.
 
-commit 29b41806fa5679881efd04b0b41ecbf4ddd07d11
-Author: Hongxu Jia <hongxu.jia@windriver.com>
-Date:   Tue Oct 16 15:31:23 2018 +0800
+If you're removing -D then a more idiomatic form would be:
 
-     gobject-introspection.bbclass: fix gir installed but not shipped in 
-any package while multilib enabled
++       install -d ${D}${includedir}/CL/
++       install -m 0644 ${S}/CL/*.h ${D}${includedir}/CL
 
-     Since commit [9524330 gobject-introspection: fix multilib install
-     file conflicts] applied in oe-core, while multilib enabled, gir
-     files will be installed to `${libdir}'.
-
-     Refer above commit, modify gobject-introspection.bbclass to
-     split gir to package correctly.
-
-     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-
-diff --git a/meta/classes/gobject-introspection.bbclass 
-b/meta/classes/gobject-introspection.bbclass
-index b6160b8..a323c1f 100644
---- a/meta/classes/gobject-introspection.bbclass
-+++ b/meta/classes/gobject-introspection.bbclass
-@@ -40,4 +40,4 @@ FILES_${PN}_append = " ${libdir}/girepository-*/*.typelib"
-
-  # .gir files go to dev package, as they're needed for developing (but 
-not for
-  # running) things that depends on introspection.
--FILES_${PN}-dev_append = " ${datadir}/gir-*/*.gir"
-+FILES_${PN}-dev_append = " ${datadir}/gir-*/*.gir ${libdir}/gir-*/*.gir"
-
-//Hongxu
-
->> +        mv ${D}${libdir}/gir-1.0 ${D}/usr/share/.
->
-
+Ross
 
