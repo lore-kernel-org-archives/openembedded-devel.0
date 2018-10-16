@@ -1,22 +1,29 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E7FAF7456D
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 60706749F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 05:24:51 +0000 (UTC)
+	Tue, 16 Oct 2018 07:35:20 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w9G5OpJd008350
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9G7ZLIr029132
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 15 Oct 2018 22:24:52 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	Tue, 16 Oct 2018 00:35:21 -0700 (PDT)
+Received: from [128.224.162.232] (128.224.162.232) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Mon, 15 Oct 2018 22:24:51 -0700
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Oct 2018 22:24:51 -0700
-Message-ID: <20181016052451.49822-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 16 Oct 2018 00:35:20 -0700
+To: Khem Raj <raj.khem@gmail.com>, Mark Asselstine
+	<mark.asselstine@windriver.com>
+References: <1539637881-20308-1-git-send-email-mark.asselstine@windriver.com>
+	<CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <03c98f69-1127-172e-ac59-bb7450f37c04@windriver.com>
+Date: Tue, 16 Oct 2018 15:35:17 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] cpupower: Update LIC_FILES_CHKSUM
+In-Reply-To: <CAMKF1sowVnGuDxLyK1mmgyT9B2=HbLv-pxWuW+jsAR1r+8Opnw@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] polkit: fixup 'installed but not shipped' error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,50 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2018 05:24:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Oct 2018 07:35:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+On 2018年10月16日 06:01, Khem Raj wrote:
+> may be we can use bitbake variables here and also optimize it a bit if
+> possible ?
+> too many installs there
 
-Update LIC_FILES_CHKSUM for cpupower as
-the COPYING file which is used for LIC_FILES_CHKSUM
-has been changed in below commit:
-commit bf02d491237eea10290bd379bf7fc8c37ac6c3b4
-Author: Mauro Carvalho Chehab <mchehab@s-opensource.com>
-Date:   Fri Mar 23 06:51:06 2018 -0300
+It is not the issue of polkit, but gobject-introspection.bbclass in oe-core,
+I've sent the fix to oe-core.
 
-    COPYING: use the new text with points to the license files
+Here is my fix:
 
-    Now that we have a new COPYING file with points to the
-    Linux license files, replace it with the old content.
+commit 29b41806fa5679881efd04b0b41ecbf4ddd07d11
+Author: Hongxu Jia <hongxu.jia@windriver.com>
+Date:   Tue Oct 16 15:31:23 2018 +0800
 
-    This patch does:
-     1 file changed, 0 insertions(+), 0 deletions(-)
-     rename COPYING.new => COPYING (100%)
+     gobject-introspection.bbclass: fix gir installed but not shipped in 
+any package while multilib enabled
 
-    Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-    Signed-off-by: Mauro Carvalho Chehab <mchehab@s-opensource.com>
-    Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+     Since commit [9524330 gobject-introspection: fix multilib install
+     file conflicts] applied in oe-core, while multilib enabled, gir
+     files will be installed to `${libdir}'.
 
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+     Refer above commit, modify gobject-introspection.bbclass to
+     split gir to package correctly.
 
-diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-index 4abd273fa..4544f5b2e 100644
---- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
-+++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Shows and sets processor power related values"
- DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
- saving related features of your processor."
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
- DEPENDS = "pciutils gettext-native"
- PROVIDES = "virtual/cpupower"
- 
--- 
-2.17.1
+     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+diff --git a/meta/classes/gobject-introspection.bbclass 
+b/meta/classes/gobject-introspection.bbclass
+index b6160b8..a323c1f 100644
+--- a/meta/classes/gobject-introspection.bbclass
++++ b/meta/classes/gobject-introspection.bbclass
+@@ -40,4 +40,4 @@ FILES_${PN}_append = " ${libdir}/girepository-*/*.typelib"
+
+  # .gir files go to dev package, as they're needed for developing (but 
+not for
+  # running) things that depends on introspection.
+-FILES_${PN}-dev_append = " ${datadir}/gir-*/*.gir"
++FILES_${PN}-dev_append = " ${datadir}/gir-*/*.gir ${libdir}/gir-*/*.gir"
+
+//Hongxu
+
+>> +        mv ${D}${libdir}/gir-1.0 ${D}/usr/share/.
+>
 
 
