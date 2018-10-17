@@ -1,50 +1,53 @@
-Return-Path: <yann.dirson@blade-group.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E45B174775
+Return-Path: <maxime.roussinbelanger@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CD30D798A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 19:48:53 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id x4so26035039otg.3
+	Wed, 17 Oct 2018 20:22:37 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id x24-v6so104318qtx.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 12:48:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=blade-group.com; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=j8RbEx/VFB+wGHHn0JRIEWLjdijgMoWJ17IzQPU8yUc=;
-	b=VX5JUPLX1kHJZxfFa2m/zdSek4oc/oh2F2XKyR5CKkd7nrx7D+7TWBdXfs9aj8UkFI
-	yS00tb6ZnF3LInRMKFFemaETIgvjsyMxnzKelLN0raq9HYqJqZR5LxMlEWRehf6o1pnF
-	xjKML8pX9nx+uT+jZ//fESZfebiKTWLvHhz44hXUJJd+fDZ6cBuNH16RdxTMIkckME7y
-	73Wq+/+gJrLPejwgIlXwxUic0NW/MXpNdzS9OkLz1tiy9gI42v3wb/IK4NyScG2W/4HV
-	UQ9J+5oUpRoOw4My9x7mmSqDvXYk/JwgX9SvPi56mWo+l0Y80+I7dghPePwH/uU1m5Lk
-	aRYg==
+	Wed, 17 Oct 2018 13:22:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xA3Al0GeOIEkgqX87GX0JZ38OS3+ANWE6An1mY+FIZo=;
+	b=Yuaaajfpp2M7zEE2L/xCRStoJWb1VYJOQl9M5/jHwM+ZNZGuNBmQDXPRm6V2Yuu8oF
+	okd7V7jfPR6ojScG5C0lv6hqk29VQSJogh5holncq4P3ZbrrXoBevkKNrvnX5N9kl6U5
+	lclYjtgSSfHUnpbFLMyjR2faJzyss+crs+etCHwx3ZXzaKWrfFlscUmp1bhRPX1tSz1f
+	gaexygIBmby8LtsjNDBWBE/mk5EEpPVnV093AjLR0IaAF86b73ra3a9uWeg1zCjPDLYT
+	v8MWVcF2flhnk4mImkyq41lDOyiAqW3MFyXs0vlaSZ9h613GbnvnuQlnQrdunRYeCZTv
+	j5hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=j8RbEx/VFB+wGHHn0JRIEWLjdijgMoWJ17IzQPU8yUc=;
-	b=FxvxzEiJ15t2NDVrmNWhVtaEa4HlRIPno4e0bbfV9yKTfJjsMygnm6et/7/rivUjs3
-	k5WOi9KoKVpGZyvj68c6LkaKcd7nbvDV+J1s0TtNLGkn2GStA1rGPR5WY+QMT+QH9CUp
-	AF0ViVoEv0n3Btk4WKUxvJDPwDeuD5lAF837K8kMr1xXRsJkitb5c0omsdX+V8A6zATP
-	YVq4Jw8Rmrrwyd0IGqvKPNYxjlNE5Pa4dWt9Yz3z68gcW/d5LsJ4FA11PF7UwH8osHTl
-	M4U9szi0X31Pq9N5UtW9/TF8pOduZXM0R2rasbxKfp26T8/zhSC5xwW1jYfPtSsARe6U
-	ZdhQ==
-X-Gm-Message-State: ABuFfojEeMticngJUravOIBjwwf2enwuQSH2H//POQJ3KnnDRSA4626s
-	DlVC7fDHyRdNSCmsoix8Oc7Qf1nzL7hfbexTB60TmQ==
-X-Google-Smtp-Source: ACcGV60wZAY4CSi586KnH+sUZ/HJZ4AbXYpV0iuT0m/c2wF/o1bkYM3EzizgeOOqJ6CqVlkr70ATr9nhyNVPExTqepU=
-X-Received: by 2002:a9d:550f:: with SMTP id l15mr13495647oth.83.1539805734699; 
-	Wed, 17 Oct 2018 12:48:54 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xA3Al0GeOIEkgqX87GX0JZ38OS3+ANWE6An1mY+FIZo=;
+	b=Aq8o04qDNfIFGPn9eDtbRzQX7h1RxkVV88GjKLyelzkgvsdgQSxHd8NZDZUr9Px4h+
+	ppnXPrWBOQpVB0AHefJMe28oFT35eC8pz2pcvmmP83PqrIfuwN0+f1rqyJB4NCKCoFEF
+	2PaH8r6aO+/j+7Aper+ltzyV9kqHN0bwFRkUnX36PF82GVeaF8OeLHuU5N+QqKIxrUN8
+	gJfN3qrw5zJkkT+gcYh8lQCMWy6pL0r++uR5NqjU2cJpx3ilMV08hWVNaJCjW/XHz7mt
+	eSnqYkOBrrkQy+3Ae4TPIb4H2sbALYcpeThrkK3ZgBr54HJ2ps1cTgwksRTUqRSVVKte
+	epdA==
+X-Gm-Message-State: ABuFfoipa2lihFxO7J14mR3ynxPHDgt5735C2cLklp5Mvag9YvK37mKC
+	sM5dwNtyYKK7yV9FG3JvFiD9hnHx
+X-Google-Smtp-Source: ACcGV60NJsMQfonrNSczUnjiwx5aejCy6mpfhk8ExGuculvJukg3Z/H2CGwp3YMQan81cHsCkMvyig==
+X-Received: by 2002:ac8:471a:: with SMTP id
+	f26-v6mr3673977qtp.157.1539807757811; 
+	Wed, 17 Oct 2018 13:22:37 -0700 (PDT)
+Received: from mbedesk.Sonatest.net
+	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
+	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
+	y20-v6sm12360009qkb.46.2018.10.17.13.22.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 17 Oct 2018 13:22:36 -0700 (PDT)
+From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Oct 2018 16:21:16 -0400
+Message-Id: <20181017202116.18146-1-maxime.roussinbelanger@gmail.com>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-References: <20181017154048.17231-1-yann@blade-group.com>
-	<CAMKF1soXq9u9GQMw4iemYLW5V9NpMLRQq1LABOGazJ3uTHBODA@mail.gmail.com>
-In-Reply-To: <CAMKF1soXq9u9GQMw4iemYLW5V9NpMLRQq1LABOGazJ3uTHBODA@mail.gmail.com>
-From: Yann Dirson <yann.dirson@blade-group.com>
-Date: Wed, 17 Oct 2018 21:48:42 +0200
-Message-ID: <CA+4=imYo4UusPgA203DmQ=FaJUeidvsoYcUv7Vo=vqqq1UrtEw@mail.gmail.com>
-To: raj.khem@gmail.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yann Dirson <yann@blade-group.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2] packagegroup-tools-bluetooth: work as advertized on distro without bluez* support
+Subject: [meta-oe][PATCH] libeigen: update to 3.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,69 +60,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 19:48:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Oct 2018 20:22:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Right.
+Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
+---
+ .../libeigen/{libeigen_3.3.4.bb => libeigen_3.3.5.bb}  | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/libeigen/{libeigen_3.3.4.bb => libeigen_3.3.5.bb} (65%)
 
-This is being discussed following v1 of the patch which I had sent to
--core, to which I had send the patch by mistake at first.
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb
+similarity index 65%
+rename from meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+rename to meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb
+index 31a42a9d66..b6d125272a 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb
+@@ -5,15 +5,15 @@ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
+ 
+ SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
+-SRC_URI[md5sum] = "a7aab9f758249b86c93221ad417fbe18"
+-SRC_URI[sha256sum] = "dd254beb0bafc695d0f62ae1a222ff85b52dbaa3a16f76e781dce22d0d20a4a6"
++SRC_URI[md5sum] = "e83549a79d1b721da0f8899ab34edf95"
++SRC_URI[sha256sum] = "7352bff3ea299e4c7d7fbe31c504f8eb9149d7e685dec5a12fbaa26379f603e2"
+ 
+-S = "${WORKDIR}/eigen-eigen-5a0156e40feb"
++S = "${WORKDIR}/eigen-eigen-b3f3d4950030"
+ 
+ inherit cmake
+ 
+-FILES_${PN} = "${libdir}"
+-FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
++FILES_${PN} = "${includedir} ${libdir}"
++FILES_${PN}-dev = "${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
+ 
+ # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+ RDEPENDS_${PN}-dev = ""
+-- 
+2.19.1
 
-Le mer. 17 oct. 2018 =C3=A0 20:39, Khem Raj <raj.khem@gmail.com> a =C3=A9cr=
-it :
-
-> On Wed, Oct 17, 2018 at 8:41 AM <yann.dirson@blade-group.com> wrote:
-> >
-> > From: Yann Dirson <yann@blade-group.com>
-> >
-> > Otherwise the build fails with:
-> >
-> >   NOTE: Runtime target '${RDEPENDS_}' is unbuildable, removing...
-> >   Missing or unbuildable dependency chain was: ['${RDEPENDS_}']
-> >
-> > This restores some truth in the "Otherwise install nothing" comment in
-> the recipe.
-> >
-> > Signed-off-by: Yann Dirson <yann@blade-group.com>
-> > ---
-> >  .../packagegroups/packagegroup-tools-bluetooth.bb               | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/packagegroups/
-> packagegroup-tools-bluetooth.bb
-> b/meta-oe/recipes-connectivity/packagegroups/
-> packagegroup-tools-bluetooth.bb
-> > index 0ede5e57b..e81516fef 100644
-> > --- a/meta-oe/recipes-connectivity/packagegroups/
-> packagegroup-tools-bluetooth.bb
-> > +++ b/meta-oe/recipes-connectivity/packagegroups/
-> packagegroup-tools-bluetooth.bb
-> > @@ -32,6 +32,8 @@ RDEPENDS_bluez5 =3D " \
-> >          '', d)} \
-> >  "
-> >
-> > +RDEPENDS_ =3D ""
-> > +
->
-> this does not look right to me.
->
-> >  # Install bluez4 tools or bluez5 tools depending on what is specified
-> in the distro.
-> >  # Otherwise install nothing.
-> >  RDEPENDS_${PN} =3D "${RDEPENDS_${BLUEZ}}"
-> > --
-> > 2.19.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
-
---=20
-Yann Dirson <yann@blade-group.com>
-Blade -- 38 rue du Sentier, 75002 Paris
 
