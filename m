@@ -1,46 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E7BF601F6
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C22460053
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 01:35:49 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id j46-v6so28218242qtc.9
+	Wed, 17 Oct 2018 02:45:54 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9H2jUF1017129
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2018 18:35:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=TrYsp0XBeRbLMReW2kyT7zMb2MMEv35VyV0jG/FFJ1Q=;
-	b=A87I1bg4YK2jTrC8NCHVMXrg24EeEsbl+5Arl3Yp1akYvg3xKYNge0Ggw21kUcDw6E
-	dlfEslHQ9FutRXLpbnr0let7NF8cYw1TmPAOIJx0QJ4HkoCbtW+F0FmFUSLDtcLr7T1z
-	BVHMLSa8mrEOEG7hjfJDGA1SPn2GMrYAIQJYvAiyj36dVbBZaVoxi/lLQDSGUun1oCTp
-	cJFkpF0BjoPEZ4Hfb2QYd2WlwfsMyWbXSxXZsgyffchshPZD9f0hLqWO4ec7QwXiL4vD
-	g4NvpD0rXAR53Tov3ZYGfivbBlD6RrUPeMggaUbXerB7f7MjdHIuq+xInYAoXKlz/jOj
-	A4bA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=TrYsp0XBeRbLMReW2kyT7zMb2MMEv35VyV0jG/FFJ1Q=;
-	b=BBzOPzkLQ7QOn88oS5u2WlFvBetNlOqdsbJj6eK9YZFUOz+FP6xBBkjyd6QnJMA/3Y
-	zDwtH+sIaWT43toisudrcceWw6fsI3lKuBYqZH3uEsaikv59ut13E8nPaCx2/bhVgDpG
-	nICIwOv9zzvA/XTnNj+TDGPqaLLBog+I4/lPWZzW0nvwrcP0WM4jom49TpvQ4CIsZbwu
-	jVazw6A9QMw2KIYeMS6d5oQ76cgXMa1kaP/xcdqEkEPcSQ7CCEZ/846I8Oij3LWunEtZ
-	qFeQW3cME1C0EHGkO6XQm/HksdObPR30gwOgbNuWGX1mk3ZQOtxE4X+xZoaKgbnRUCli
-	nrcQ==
-X-Gm-Message-State: ABuFfoiX2EQqIPeBcJBtG2SN26UWY8PW2z2zeHo23IZMscnVbguVdsi/
-	r9MTUgnF2k4giPMP2FhQNN5cqMY3UlB2wjeW9CZWxtVN
-X-Google-Smtp-Source: ACcGV63zcenGuZOq5gwT2qB2yHKpc7kR1TnJNoM8hrTeYEn46m7u8+HqRONjTVmNM0bCCHZVlOSYZmTRtIT59TCyhmg=
-X-Received: by 2002:a0c:8b4d:: with SMTP id d13mr20414527qvc.194.1539740150340;
-	Tue, 16 Oct 2018 18:35:50 -0700 (PDT)
+	Tue, 16 Oct 2018 19:45:45 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 16 Oct 2018 19:45:19 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Oct 2018 10:32:11 +0800
+Message-ID: <1539743531-11765-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <1539739424-287548-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1539739424-287548-1-git-send-email-changqing.li@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Oct 2018 18:35:24 -0700
-Message-ID: <CAMKF1srdHVMSTErXSys8nbw69vJykHuTPRhkt9ZqocekJLWXsg@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] gnulib: Security fix for CVE-2018-17942
+Subject: [meta-python][PATCH] python-requests: fix CVE-2018-18074
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,150 +31,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 01:35:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 17 Oct 2018 02:45:54 -0000
+Content-Type: text/plain
 
-On Tue, Oct 16, 2018 at 6:24 PM <changqing.li@windriver.com> wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../gnulib/gnulib/CVE-2018-17942.patch             | 88 ++++++++++++++++++++++
->  .../recipes-support/gnulib/gnulib_2017-08-20.18.bb |  9 ++-
->  2 files changed, 93 insertions(+), 4 deletions(-)
->  create mode 100644 meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
->
-> diff --git a/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch b/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
-> new file mode 100644
-> index 0000000..77e82b1
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
-> @@ -0,0 +1,88 @@
-> +From e91600a7aae3bafbefbe13abf771e61badd16286 Mon Sep 17 00:00:00 2001
-> +From: Changqing Li <changqing.li@windriver.com>
-> +Date: Tue, 16 Oct 2018 14:26:11 +0800
-> +Subject: [PATCH] vasnprintf: Fix heap memory overrun bug.
-> +
-> +Reported by Ben Pfaff <blp@cs.stanford.edu> in
-> +<https://lists.gnu.org/archive/html/bug-gnulib/2018-09/msg00107.html>.
-> +
-> +* lib/vasnprintf.c (convert_to_decimal): Allocate one more byte of
-> +memory.
-> +* tests/test-vasnprintf.c (test_function): Add another test.
-> +
-> +Upstream-Status: Backport [http://git.savannah.gnu.org/gitweb/?p=gnulib.git;
-> +a=commitdiff;h=278b4175c9d7dd47c1a3071554aac02add3b3c35]
-> +
-> +CVE: CVE-2018-17942
-> +
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +---
-> + ChangeLog               |  8 ++++++++
-> + lib/vasnprintf.c        |  4 +++-
-> + tests/test-vasnprintf.c | 19 ++++++++++++++++++-
-> + 3 files changed, 29 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/ChangeLog b/ChangeLog
-> +index 9864353..5ff76a3 100644
-> +--- a/ChangeLog
-> ++++ b/ChangeLog
-> +@@ -1,3 +1,11 @@
-> ++2018-09-23  Bruno Haible  <bruno@clisp.org>
-> ++      vasnprintf: Fix heap memory overrun bug.
-> ++      Reported by Ben Pfaff <blp@cs.stanford.edu> in
-> ++      <https://lists.gnu.org/archive/html/bug-gnulib/2018-09/msg00107.html>.
-> ++      * lib/vasnprintf.c (convert_to_decimal): Allocate one more byte of
-> ++      memory.
-> ++      * tests/test-vasnprintf.c (test_function): Add another test.
-> ++
-> + 2017-08-21  Paul Eggert  <eggert@cs.ucla.edu>
-> +
-> +       vc-list-files: port to Solaris 10
-> +diff --git a/lib/vasnprintf.c b/lib/vasnprintf.c
-> +index 2e4eb19..45de49f 100644
-> +--- a/lib/vasnprintf.c
-> ++++ b/lib/vasnprintf.c
-> +@@ -860,7 +860,9 @@ convert_to_decimal (mpn_t a, size_t extra_zeroes)
-> +   size_t a_len = a.nlimbs;
-> +   /* 0.03345 is slightly larger than log(2)/(9*log(10)).  */
-> +   size_t c_len = 9 * ((size_t)(a_len * (GMP_LIMB_BITS * 0.03345f)) + 1);
-> +-  char *c_ptr = (char *) malloc (xsum (c_len, extra_zeroes));
-> ++  /* We need extra_zeroes bytes for zeroes, followed by c_len bytes for the
-> ++     digits of a, followed by 1 byte for the terminating NUL.  */
-> ++  char *c_ptr = (char *) malloc (xsum (xsum (extra_zeroes, c_len), 1));
-> +   if (c_ptr != NULL)
-> +     {
-> +       char *d_ptr = c_ptr;
-> +diff --git a/tests/test-vasnprintf.c b/tests/test-vasnprintf.c
-> +index 2dd869f..ff68d5c 100644
-> +--- a/tests/test-vasnprintf.c
-> ++++ b/tests/test-vasnprintf.c
-> +@@ -53,7 +53,24 @@ test_function (char * (*my_asnprintf) (char *, size_t *, const char *, ...))
-> +       ASSERT (result != NULL);
-> +       ASSERT (strcmp (result, "12345") == 0);
-> +       ASSERT (length == 5);
-> +-      if (size < 6)
-> ++      if (size < 5 + 1)
-> ++        ASSERT (result != buf);
-> ++      ASSERT (memcmp (buf + size, &"DEADBEEF"[size], 8 - size) == 0);
-> ++      if (result != buf)
-> ++        free (result);
-> ++    }
-> ++   /* Note: This test assumes IEEE 754 representation of 'double' floats.  */
-> ++  for (size = 0; size <= 8; size++)
-> ++    {
-> ++      size_t length;
-> ++      char *result;
-> ++       memcpy (buf, "DEADBEEF", 8);
-> ++      length = size;
-> ++      result = my_asnprintf (buf, &length, "%2.0f", 1.6314159265358979e+125);
-> ++      ASSERT (result != NULL);
-> ++      ASSERT (strcmp (result, "163141592653589790215729350939528493057529598899734151772468186268423257777068536614838678161083520756952076273094236944990208") == 0);
-> ++      ASSERT (length == 126);
-> ++      if (size < 126 + 1)
-> +         ASSERT (result != buf);
-> +       ASSERT (memcmp (buf + size, &"DEADBEEF"[size], 8 - size) == 0);
-> +       if (result != buf)
-> +--
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> index 4a7d84a..1de6c42 100644
-> --- a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> +++ b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> @@ -14,17 +14,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=56a22a6e5bcce45e2c8ac184f81412b5"
->  SRCREV = "b23000de1e47c7d580e0e220966dd1ee42a5e5bc"
->
->  SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
-> +           file://CVE-2018-17942.patch \
->  "
->
->  S = "${WORKDIR}/git"
->
->  do_install () {
-> -    cd ${S}
-> -    git checkout master
-> -    git clone ${S} ${D}/${datadir}/gnulib
-> +    install -d ${D}/${datadir}/gnulib/
-> +    cp -rf ${S}/* ${D}/${datadir}/gnulib/
+Backport two patches to fix the following CVE.
 
-Can we use install cmd here and supply correct mode ?
+CVE: CVE-2018-18074
 
-> +    rm -rf ${D}/${datadir}/gnulib/.pc
-> +    rm -rf ${D}/${datadir}/gnulib/patches
->  }
->
-> -do_patch[noexec] = "1"
->  do_configure[noexec] = "1"
->  do_compile[noexec] = "1"
->  do_package[noexec] = "1"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../recipes-devtools/python/python-requests.inc    |   6 ++
+ ...rization-header-whenever-root-URL-changes.patch |  62 +++++++++++
+ ...uthorization-stripping-logic-as-discussed.patch | 118 +++++++++++++++++++++
+ 3 files changed, 186 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-requests/0001-Strip-Authorization-header-whenever-root-URL-changes.patch
+ create mode 100644 meta-python/recipes-devtools/python/python-requests/0002-Rework-authorization-stripping-logic-as-discussed.patch
+
+diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
+index efc652d..301c2f8 100644
+--- a/meta-python/recipes-devtools/python/python-requests.inc
++++ b/meta-python/recipes-devtools/python/python-requests.inc
+@@ -3,6 +3,12 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bfbeafb85a2cee261510d65d5ec19156"
+ 
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-requests:"
++
++SRC_URI += "file://0001-Strip-Authorization-header-whenever-root-URL-changes.patch \
++            file://0002-Rework-authorization-stripping-logic-as-discussed.patch \
++            "
++
+ SRC_URI[md5sum] = "6c1a31afec9d614e2e71a91ee6ca2878"
+ SRC_URI[sha256sum] = "ec22d826a36ed72a7358ff3fe56cbd4ba69dd7a6718ffd450ff0e9df7a47ce6a"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-requests/0001-Strip-Authorization-header-whenever-root-URL-changes.patch b/meta-python/recipes-devtools/python/python-requests/0001-Strip-Authorization-header-whenever-root-URL-changes.patch
+new file mode 100644
+index 0000000..80ef5ff
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-requests/0001-Strip-Authorization-header-whenever-root-URL-changes.patch
+@@ -0,0 +1,62 @@
++From fb0d391138df48e93c44a2087ea796cca5e229c0 Mon Sep 17 00:00:00 2001
++From: Bruce Merry <bmerry@ska.ac.za>
++Date: Thu, 28 Jun 2018 16:38:42 +0200
++Subject: [PATCH 1/2] Strip Authorization header whenever root URL changes
++
++Previously the header was stripped only if the hostname changed, but in
++an https -> http redirect that can leak the credentials on the wire
++(#4716). Based on with RFC 7235 section 2.2, the header is now stripped
++if the "canonical root URL" (scheme+authority) has changed, by checking
++scheme, hostname and port.
++
++Upstream-Status: Backport
++
++Fix CVE-2018-18074
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ requests/sessions.py   |  4 +++-
++ tests/test_requests.py | 12 +++++++++++-
++ 2 files changed, 14 insertions(+), 2 deletions(-)
++
++diff --git a/requests/sessions.py b/requests/sessions.py
++index ba13526..2969d83 100644
++--- a/requests/sessions.py
+++++ b/requests/sessions.py
++@@ -242,7 +242,9 @@ class SessionRedirectMixin(object):
++             original_parsed = urlparse(response.request.url)
++             redirect_parsed = urlparse(url)
++ 
++-            if (original_parsed.hostname != redirect_parsed.hostname):
+++            if (original_parsed.hostname != redirect_parsed.hostname
+++                    or original_parsed.port != redirect_parsed.port
+++                    or original_parsed.scheme != redirect_parsed.scheme):
++                 del headers['Authorization']
++ 
++         # .netrc might have more auth for us on our new host.
++diff --git a/tests/test_requests.py b/tests/test_requests.py
++index fcddb1d..e0e801a 100644
++--- a/tests/test_requests.py
+++++ b/tests/test_requests.py
++@@ -1575,7 +1575,17 @@ class TestRequests:
++             auth=('user', 'pass'),
++         )
++         assert r.history[0].request.headers['Authorization']
++-        assert not r.request.headers.get('Authorization', '')
+++        assert 'Authorization' not in r.request.headers
+++
+++    def test_auth_is_stripped_on_scheme_redirect(self, httpbin, httpbin_secure, httpbin_ca_bundle):
+++        r = requests.get(
+++            httpbin_secure('redirect-to'),
+++            params={'url': httpbin('get')},
+++            auth=('user', 'pass'),
+++            verify=httpbin_ca_bundle
+++        )
+++        assert r.history[0].request.headers['Authorization']
+++        assert 'Authorization' not in r.request.headers
++ 
++     def test_auth_is_retained_for_redirect_on_host(self, httpbin):
++         r = requests.get(httpbin('redirect/1'), auth=('user', 'pass'))
++-- 
++2.7.4
++
+diff --git a/meta-python/recipes-devtools/python/python-requests/0002-Rework-authorization-stripping-logic-as-discussed.patch b/meta-python/recipes-devtools/python/python-requests/0002-Rework-authorization-stripping-logic-as-discussed.patch
+new file mode 100644
+index 0000000..ef069fb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-requests/0002-Rework-authorization-stripping-logic-as-discussed.patch
+@@ -0,0 +1,118 @@
++From 698c2fa850bfc8b3bdb768e1c1cd6d57e643811d Mon Sep 17 00:00:00 2001
++From: Bruce Merry <bmerry@ska.ac.za>
++Date: Tue, 14 Aug 2018 13:30:43 +0200
++Subject: [PATCH 2/2] Rework authorization stripping logic as discussed
++
++The exception for http->https upgrade now requires the standard HTTP(S)
++ports to be used, either implicitly (no port specified) or explicitly.
++
++Upstream-Status: Backport
++
++Follow-up fix for CVE-2018-18074
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ requests/sessions.py   | 26 ++++++++++++++++++--------
++ tests/test_requests.py | 33 ++++++++++++++++++++++-----------
++ 2 files changed, 40 insertions(+), 19 deletions(-)
++
++diff --git a/requests/sessions.py b/requests/sessions.py
++index 2969d83..c11a3a2 100644
++--- a/requests/sessions.py
+++++ b/requests/sessions.py
++@@ -115,6 +115,22 @@ class SessionRedirectMixin(object):
++             return to_native_string(location, 'utf8')
++         return None
++ 
+++    def should_strip_auth(self, old_url, new_url):
+++        """Decide whether Authorization header should be removed when redirecting"""
+++        old_parsed = urlparse(old_url)
+++        new_parsed = urlparse(new_url)
+++        if old_parsed.hostname != new_parsed.hostname:
+++            return True
+++        # Special case: allow http -> https redirect when using the standard
+++        # ports. This isn't specified by RFC 7235, but is kept to avoid
+++        # breaking backwards compatibility with older versions of requests
+++        # that allowed any redirects on the same host.
+++        if (old_parsed.scheme == 'http' and old_parsed.port in (80, None)
+++                and new_parsed.scheme == 'https' and new_parsed.port in (443, None)):
+++            return False
+++        # Standard case: root URI must match
+++        return old_parsed.port != new_parsed.port or old_parsed.scheme != new_parsed.scheme
+++
++     def resolve_redirects(self, resp, req, stream=False, timeout=None,
++                           verify=True, cert=None, proxies=None, yield_requests=False, **adapter_kwargs):
++         """Receives a Response. Returns a generator of Responses or Requests."""
++@@ -236,16 +252,10 @@ class SessionRedirectMixin(object):
++         headers = prepared_request.headers
++         url = prepared_request.url
++ 
++-        if 'Authorization' in headers:
+++        if 'Authorization' in headers and self.should_strip_auth(response.request.url, url):
++             # If we get redirected to a new host, we should strip out any
++             # authentication headers.
++-            original_parsed = urlparse(response.request.url)
++-            redirect_parsed = urlparse(url)
++-
++-            if (original_parsed.hostname != redirect_parsed.hostname
++-                    or original_parsed.port != redirect_parsed.port
++-                    or original_parsed.scheme != redirect_parsed.scheme):
++-                del headers['Authorization']
+++            del headers['Authorization']
++ 
++         # .netrc might have more auth for us on our new host.
++         new_auth = get_netrc_auth(url) if self.trust_env else None
++diff --git a/tests/test_requests.py b/tests/test_requests.py
++index e0e801a..148067b 100644
++--- a/tests/test_requests.py
+++++ b/tests/test_requests.py
++@@ -1567,17 +1567,7 @@ class TestRequests:
++             preq = req.prepare()
++             assert test_url == preq.url
++ 
++-    @pytest.mark.xfail(raises=ConnectionError)
++-    def test_auth_is_stripped_on_redirect_off_host(self, httpbin):
++-        r = requests.get(
++-            httpbin('redirect-to'),
++-            params={'url': 'http://www.google.co.uk'},
++-            auth=('user', 'pass'),
++-        )
++-        assert r.history[0].request.headers['Authorization']
++-        assert 'Authorization' not in r.request.headers
++-
++-    def test_auth_is_stripped_on_scheme_redirect(self, httpbin, httpbin_secure, httpbin_ca_bundle):
+++    def test_auth_is_stripped_on_http_downgrade(self, httpbin, httpbin_secure, httpbin_ca_bundle):
++         r = requests.get(
++             httpbin_secure('redirect-to'),
++             params={'url': httpbin('get')},
++@@ -1594,6 +1584,27 @@ class TestRequests:
++ 
++         assert h1 == h2
++ 
+++    def test_should_strip_auth_host_change(self):
+++        s = requests.Session()
+++        assert s.should_strip_auth('http://example.com/foo', 'http://another.example.com/')
+++
+++    def test_should_strip_auth_http_downgrade(self):
+++        s = requests.Session()
+++        assert s.should_strip_auth('https://example.com/foo', 'http://example.com/bar')
+++
+++    def test_should_strip_auth_https_upgrade(self):
+++        s = requests.Session()
+++        assert not s.should_strip_auth('http://example.com/foo', 'https://example.com/bar')
+++        assert not s.should_strip_auth('http://example.com:80/foo', 'https://example.com/bar')
+++        assert not s.should_strip_auth('http://example.com/foo', 'https://example.com:443/bar')
+++        # Non-standard ports should trigger stripping
+++        assert s.should_strip_auth('http://example.com:8080/foo', 'https://example.com/bar')
+++        assert s.should_strip_auth('http://example.com/foo', 'https://example.com:8443/bar')
+++
+++    def test_should_strip_auth_port_change(self):
+++        s = requests.Session()
+++        assert s.should_strip_auth('http://example.com:1234/foo', 'https://example.com:4321/bar')
+++
++     def test_manual_redirect_with_partial_body_read(self, httpbin):
++         s = requests.Session()
++         r1 = s.get(httpbin('redirect/2'), allow_redirects=False, stream=True)
++-- 
++2.7.4
++
+-- 
+2.7.4
+
 
