@@ -1,28 +1,46 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C19F771BEE
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A0251745A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 03:17:20 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9H3HLbM010101
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 16 Oct 2018 20:17:21 -0700 (PDT)
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
-	Tue, 16 Oct 2018 20:17:20 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1539739424-287548-1-git-send-email-changqing.li@windriver.com>
-	<CAMKF1srdHVMSTErXSys8nbw69vJykHuTPRhkt9ZqocekJLWXsg@mail.gmail.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <8df8705f-35c3-2e45-fe56-8a4984c7d02d@windriver.com>
-Date: Wed, 17 Oct 2018 11:17:18 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Wed, 17 Oct 2018 04:04:27 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id m77-v6so12507882pfi.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Oct 2018 21:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=Kdr5nopVl8kor7iljvoFGogh5tSazr/TMRuazJwpulA=;
+	b=LdCCbwFS8tVJ+bGmUn/991duvUZJPigW5xJnDAwMCYs5DTrCh4J39NrfgokvrOyMMR
+	EFW33NsmPYJvRLrF+QmgzhZWLsDWwbvkqRisXHSwHS4ALKWIJVfKQna3FCP3ZZikFLae
+	qRREhTAR2curbpaR7vdSb0kPmzRTBw1dG8qZBNsaoMVqyyWQvfqckZFfZaqc26SmOOQJ
+	C2rvLTHNbe1mKudLtPCUPpjkZLKt0iypVnn03mT85WAytsS0xX5myZ06/PyK87zEkidM
+	P8ZV5Wzd1o/fJKJ6iXUffp9tZEGu0sP15y62qHv8ENeMYGx46NJoaV5n5kHM36U9NI/n
+	2SQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=Kdr5nopVl8kor7iljvoFGogh5tSazr/TMRuazJwpulA=;
+	b=V0GDG61dArOBcEcEosBgvPkJUQySwBFz6gDl6dQEVUP9oMO0hLbJMpmT6nYAOBW1dc
+	fuXvBw1QyyDdXkRAT0OR/IdEyk0ge3U/FOyqvSTPfUmxfheKQ4YY1LLdDVrM2Sgcumjc
+	Eoi4orgqosIkiUq2bR/SUgF0no2V/5TZdKrIeYTTyJ09QMxddjmmFHe9RkvL/ZzsfrP8
+	n1H57B2TXRLC2Ghrzj5zu78BmQPH0SyZs2lvXHAZMjhpjsQAywxoYWA+ENht/j7hl6nj
+	NOaZDjtuxbcazF9R/7CTPLAW+Lta9bB+T7F0TTpE8VGcMTsJwwopdagP9JkYCLFc6HBH
+	j3zA==
+X-Gm-Message-State: ABuFfoipLB0J1/FJuhoOt8t35pbLp/wNiXgnjm/kUmW0jI6gYA/TCMos
+	AA+h+G7kUGIus8aXL7nXjme7KvIukOZnYZwN9FF0jqSO
+X-Google-Smtp-Source: ACcGV61bm6EdUfl045DIhNfxch9vwCGPvJSFkPXhnS40T9EV295bydg4jpdAJiEkDYYME2iNOH9hASM/jstT9GUPUOc=
+X-Received: by 2002:a62:968a:: with SMTP id
+	s10-v6mr24717553pfk.191.1539749068264; 
+	Tue, 16 Oct 2018 21:04:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srdHVMSTErXSys8nbw69vJykHuTPRhkt9ZqocekJLWXsg@mail.gmail.com>
-X-Originating-IP: [128.224.162.228]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] gnulib: Security fix for CVE-2018-17942
+References: <1539610432-25870-1-git-send-email-ankit.tarot@gmail.com>
+In-Reply-To: <1539610432-25870-1-git-send-email-ankit.tarot@gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Wed, 17 Oct 2018 09:34:17 +0530
+Message-ID: <CAM_RqkNk9aFPGRN=2oWS+xHoLxZLm7Ht9Zcrc1VytV+xNqaSTw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2] opencl-icd-loader: Initial recipe for OpenCL ICD loader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,164 +53,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 03:17:20 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 17 Oct 2018 04:04:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-
-
-On 10/17/2018 09:35 AM, Khem Raj wrote:
-> On Tue, Oct 16, 2018 at 6:24 PM <changqing.li@windriver.com> wrote:
->> From: Changqing Li <changqing.li@windriver.com>
->>
->> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> ---
->>   .../gnulib/gnulib/CVE-2018-17942.patch             | 88 ++++++++++++++++++++++
->>   .../recipes-support/gnulib/gnulib_2017-08-20.18.bb |  9 ++-
->>   2 files changed, 93 insertions(+), 4 deletions(-)
->>   create mode 100644 meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
->>
->> diff --git a/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch b/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
->> new file mode 100644
->> index 0000000..77e82b1
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/gnulib/gnulib/CVE-2018-17942.patch
->> @@ -0,0 +1,88 @@
->> +From e91600a7aae3bafbefbe13abf771e61badd16286 Mon Sep 17 00:00:00 2001
->> +From: Changqing Li <changqing.li@windriver.com>
->> +Date: Tue, 16 Oct 2018 14:26:11 +0800
->> +Subject: [PATCH] vasnprintf: Fix heap memory overrun bug.
->> +
->> +Reported by Ben Pfaff <blp@cs.stanford.edu> in
->> +<https://lists.gnu.org/archive/html/bug-gnulib/2018-09/msg00107.html>.
->> +
->> +* lib/vasnprintf.c (convert_to_decimal): Allocate one more byte of
->> +memory.
->> +* tests/test-vasnprintf.c (test_function): Add another test.
->> +
->> +Upstream-Status: Backport [http://git.savannah.gnu.org/gitweb/?p=gnulib.git;
->> +a=commitdiff;h=278b4175c9d7dd47c1a3071554aac02add3b3c35]
->> +
->> +CVE: CVE-2018-17942
->> +
->> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> +---
->> + ChangeLog               |  8 ++++++++
->> + lib/vasnprintf.c        |  4 +++-
->> + tests/test-vasnprintf.c | 19 ++++++++++++++++++-
->> + 3 files changed, 29 insertions(+), 2 deletions(-)
->> +
->> +diff --git a/ChangeLog b/ChangeLog
->> +index 9864353..5ff76a3 100644
->> +--- a/ChangeLog
->> ++++ b/ChangeLog
->> +@@ -1,3 +1,11 @@
->> ++2018-09-23  Bruno Haible  <bruno@clisp.org>
->> ++      vasnprintf: Fix heap memory overrun bug.
->> ++      Reported by Ben Pfaff <blp@cs.stanford.edu> in
->> ++      <https://lists.gnu.org/archive/html/bug-gnulib/2018-09/msg00107.html>.
->> ++      * lib/vasnprintf.c (convert_to_decimal): Allocate one more byte of
->> ++      memory.
->> ++      * tests/test-vasnprintf.c (test_function): Add another test.
->> ++
->> + 2017-08-21  Paul Eggert  <eggert@cs.ucla.edu>
->> +
->> +       vc-list-files: port to Solaris 10
->> +diff --git a/lib/vasnprintf.c b/lib/vasnprintf.c
->> +index 2e4eb19..45de49f 100644
->> +--- a/lib/vasnprintf.c
->> ++++ b/lib/vasnprintf.c
->> +@@ -860,7 +860,9 @@ convert_to_decimal (mpn_t a, size_t extra_zeroes)
->> +   size_t a_len = a.nlimbs;
->> +   /* 0.03345 is slightly larger than log(2)/(9*log(10)).  */
->> +   size_t c_len = 9 * ((size_t)(a_len * (GMP_LIMB_BITS * 0.03345f)) + 1);
->> +-  char *c_ptr = (char *) malloc (xsum (c_len, extra_zeroes));
->> ++  /* We need extra_zeroes bytes for zeroes, followed by c_len bytes for the
->> ++     digits of a, followed by 1 byte for the terminating NUL.  */
->> ++  char *c_ptr = (char *) malloc (xsum (xsum (extra_zeroes, c_len), 1));
->> +   if (c_ptr != NULL)
->> +     {
->> +       char *d_ptr = c_ptr;
->> +diff --git a/tests/test-vasnprintf.c b/tests/test-vasnprintf.c
->> +index 2dd869f..ff68d5c 100644
->> +--- a/tests/test-vasnprintf.c
->> ++++ b/tests/test-vasnprintf.c
->> +@@ -53,7 +53,24 @@ test_function (char * (*my_asnprintf) (char *, size_t *, const char *, ...))
->> +       ASSERT (result != NULL);
->> +       ASSERT (strcmp (result, "12345") == 0);
->> +       ASSERT (length == 5);
->> +-      if (size < 6)
->> ++      if (size < 5 + 1)
->> ++        ASSERT (result != buf);
->> ++      ASSERT (memcmp (buf + size, &"DEADBEEF"[size], 8 - size) == 0);
->> ++      if (result != buf)
->> ++        free (result);
->> ++    }
->> ++   /* Note: This test assumes IEEE 754 representation of 'double' floats.  */
->> ++  for (size = 0; size <= 8; size++)
->> ++    {
->> ++      size_t length;
->> ++      char *result;
->> ++       memcpy (buf, "DEADBEEF", 8);
->> ++      length = size;
->> ++      result = my_asnprintf (buf, &length, "%2.0f", 1.6314159265358979e+125);
->> ++      ASSERT (result != NULL);
->> ++      ASSERT (strcmp (result, "163141592653589790215729350939528493057529598899734151772468186268423257777068536614838678161083520756952076273094236944990208") == 0);
->> ++      ASSERT (length == 126);
->> ++      if (size < 126 + 1)
->> +         ASSERT (result != buf);
->> +       ASSERT (memcmp (buf + size, &"DEADBEEF"[size], 8 - size) == 0);
->> +       if (result != buf)
->> +--
->> +2.7.4
->> +
->> diff --git a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
->> index 4a7d84a..1de6c42 100644
->> --- a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
->> +++ b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
->> @@ -14,17 +14,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=56a22a6e5bcce45e2c8ac184f81412b5"
->>   SRCREV = "b23000de1e47c7d580e0e220966dd1ee42a5e5bc"
->>
->>   SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
->> +           file://CVE-2018-17942.patch \
->>   "
->>
->>   S = "${WORKDIR}/git"
->>
->>   do_install () {
->> -    cd ${S}
->> -    git checkout master
->> -    git clone ${S} ${D}/${datadir}/gnulib
->> +    install -d ${D}/${datadir}/gnulib/
->> +    cp -rf ${S}/* ${D}/${datadir}/gnulib/
-> Can we use install cmd here and supply correct mode ?
-Compared  the mode,  looks same,  but maybe better still use the git 
-way.  I resend a V2 version.
-
-//Sandy
+Soft reminder
+On Mon, Oct 15, 2018 at 7:07 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
 >
->> +    rm -rf ${D}/${datadir}/gnulib/.pc
->> +    rm -rf ${D}/${datadir}/gnulib/patches
->>   }
->>
->> -do_patch[noexec] = "1"
->>   do_configure[noexec] = "1"
->>   do_compile[noexec] = "1"
->>   do_package[noexec] = "1"
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
--- 
-BRs
-
-Sandy(Li Changqing)
-Wind River Linux
-
+> This patch provides ICD loader library, ICD loader test binary
+> and some helper library for test.
+>
+> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> ---
+>  .../opencl-icd-loader/opencl-icd-loader_git.bb     | 45 ++++++++++++++++++++++
+>  1 file changed, 45 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+>
+> diff --git a/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+> new file mode 100644
+> index 0000000..7c49c8d
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+> @@ -0,0 +1,45 @@
+> +SUMMARY  = "OpenCL ICD Loader"
+> +DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
+> +LICENSE  = "Khronos"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ec724732ce73269486574c718ef0c79b"
+> +SECTION = "base"
+> +
+> +inherit pkgconfig cmake
+> +
+> +S = "${WORKDIR}/git"
+> +SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
+> +SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
+> +
+> +do_install () {
+> +       install -d ${D}${bindir}
+> +       install -m 0755 ${B}/bin/icd_loader_test ${D}${bindir}/
+> +       chrpath -d ${D}${bindir}/icd_loader_test
+> +       install -d ${D}${libdir}
+> +       install -m 0644 ${B}/lib/libIcdLog.so ${D}${libdir}/
+> +       install -m 0644 ${B}/lib/libOpenCLDriverStub.so ${D}${libdir}/
+> +       chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
+> +       install -m 0644 ${B}/lib/libOpenCL.so.1.2 ${D}${libdir}/
+> +       cd ${D}${libdir}
+> +       ln -s libOpenCL.so.1.2 libOpenCL.so.1
+> +       ln -s libOpenCL.so.1 libOpenCL.so
+> +}
+> +
+> +PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
+> +PACKAGES += "libicdlog libicdlog-dbg"
+> +PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+> +
+> +FILES_${PN} = " \
+> +       ${bindir}/icd_loader_test \
+> +       ${libdir}/libOpenCLDriverStub.so \
+> +       ${libdir}/libOpenCL.so.1.2 \
+> +"
+> +FILES_${PN}-dev = " \
+> +       ${libdir}/libOpenCL.so \
+> +       ${libdir}/libOpenCL.so.1 \
+> +"
+> +
+> +FILES_libicdlog = "${libdir}/libIcdLog.so"
+> +FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so"
+> +
+> +DEPENDS = "opencl-headers"
+> +RDEPENDS_${PN} = "libicdlog"
+> --
+> 1.9.1
+>
 
