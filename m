@@ -1,53 +1,53 @@
 Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id BAB8D796EE
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C0E2796EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 20:30:32 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id u34-v6so31704343qth.3
+	Wed, 17 Oct 2018 20:33:03 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id q41-v6so31698291qtq.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 13:30:34 -0700 (PDT)
+	Wed, 17 Oct 2018 13:33:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=vErrKfth0Psul+ag2kHF4gG81zERigNlam0FpOqMEAk=;
-	b=SrTzp7xfHaoirpeh6HKT+cTo0P1LdW5ofGPuAUmf509Cy1ApQy1xwGF9J4N7gPeCg/
-	1TOGGnfYwdtGwZefJZ+GYKKCt7yf3BwjiA0lOatzm/vj1DCeP+7bf9/Ng7Z2RUzhcXSo
-	Edp7yQaS8p3U1rFrSorHjZ+oIjUDTSYi1V1CSkRKq2vjRyCtC1iFS0k+8tgQMIarmirT
-	1TlTo+p4ThEjxZh932taUljtj1uKqHHE7SIIFVdVhClEE4uYugPDBZF5Ia6O9hoqpbiq
-	VkMF81warJLLlOF2oStj0+BN1AhAyON87xM6fqt4QbrYpSqlicis+pv1JloK1ddibRJp
-	rFdQ==
+	bh=Piz27WsE8ir+60wZWuJkhQf7mbKeYjeCboCwzARWzkY=;
+	b=kw3W2tlnurMfW8yN2duNWWxGLjb/YJgpNWYNlYWn9bqDS3ZOqwkuHSDnOcXErwjw7J
+	Z4eCYYSfKAcLebOmPv/LjvQgldF8gV/gSWtNiXQwrSn821fXDlkyYKf2keE/XK6Kpj1g
+	4DKHeXpFvAIE43iCVCGH/FTIYdJ6aAQ2Iz/jzp+G/Icj+mQflvmxsuRmGmYW8leOMT3z
+	2skZ6+RLnjINDmNF+xQUrfhUPPk7KTYVF2Jj4cDomdaF7OD3mBwWsACP1q9/mCHPQEtG
+	Uc7uYSKVeqgKyLQMHhTzht6hY3CLM3eHuihuip4UQW3U0pQd+HT0eK+T/pw6qcZVvRYA
+	T94g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=vErrKfth0Psul+ag2kHF4gG81zERigNlam0FpOqMEAk=;
-	b=NhshLeBZgyrLaS4JMgr+IDZO0H24Oe5jpUDdYPUEjviPjZN33gzDtc0ZL4jksk4WEp
-	IRGb3VlouUsRKkG1KEs3DborB/9gNpJRf+yL8J5qXCoW5F+bruOwcKczsnaNrLTxaV0i
-	DeJPHtVHR1EQLXqpN9edQ7eJ+DDNbpqCB3f5dsVtOvCVDlcAMlmhEWnXi0WS8ZPN4MzZ
-	e8+SUFlPAgTa21B8N41IMXOYUEuuHzqJrhV43nCJdWx95uQiYuBfRg30SYs9ZSmHxIDN
-	AkowLh6MxTrpPaz/lwOBfuFunXffH37oOCKS4wsyGXK1ZyDj0IwsRHPEp0JXNt/PP/cA
-	Tv9A==
-X-Gm-Message-State: ABuFfojU+3Ovfvc1ZX9OaDvkNgcA3MTv5G7y0GzyskhYCAE/yFL7MbiE
-	y4/qTA4D16mqjKUBrJlAAUOshA1J
-X-Google-Smtp-Source: ACcGV628tpWcUCe9kxLUgQb2btKBVc5Ee94u4bYD+U44kViggWs4l5/MotZdcJLl38eJBa9ivj/K6Q==
-X-Received: by 2002:aed:237b:: with SMTP id
-	i56-v6mr26854371qtc.341.1539808233543; 
-	Wed, 17 Oct 2018 13:30:33 -0700 (PDT)
+	bh=Piz27WsE8ir+60wZWuJkhQf7mbKeYjeCboCwzARWzkY=;
+	b=RxvQbdgYF12OMrauXZMhoplfP3Zvd0g+r/0VkRKo+CORrPmaNx1Vm9rrFwcJHpP228
+	nRRJK3Ik0bPq5xD856z1fRwGf5voJg8u1cNmrPB76rYy1jALDtbaTJrLqPT6Sse4HvRR
+	rHlKIuVoff7X0bGQVYjLoTO2YhY6q5/sT6uzGJBPRUbETytSi+66Q/aRAHfrNJfX3ICW
+	Na6IWonz8MjGZDo8r9hAEKyfGmN44U9M+b0Swhe2oGZISk4paG0JpHhqKG/sxaRnVntq
+	5PS38hJUmgOzXRnDJzXtovRc6m1PoSmiXVaKQsV3/vHsVFdIw4zRGEJIH9mz2uPFkBi9
+	geNQ==
+X-Gm-Message-State: ABuFfoi4rmqbP79s70i3Vv4qdfK/NOORL+UFpbKEsaaKLKZUO03zYeiF
+	KOoxr6Tvw5hBtXpMD2eoUG+M+KXp
+X-Google-Smtp-Source: ACcGV60VAzs0jsZEkpUA56cnQm79BYKjQNRgdPQOUVluCzPcGcM2iOhrI1OgiDx/pR3mcrUN9AeZBQ==
+X-Received: by 2002:ac8:3397:: with SMTP id
+	c23-v6mr26102182qtb.190.1539808383906; 
+	Wed, 17 Oct 2018 13:33:03 -0700 (PDT)
 Received: from mbedesk.Sonatest.net
 	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
 	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
-	w5-v6sm12286759qkw.69.2018.10.17.13.30.32
+	y28-v6sm13640181qtk.15.2018.10.17.13.33.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Oct 2018 13:30:33 -0700 (PDT)
+	Wed, 17 Oct 2018 13:33:02 -0700 (PDT)
 From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
 	<maxime.roussinbelanger@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Oct 2018 16:30:26 -0400
-Message-Id: <20181017203026.18833-1-maxime.roussinbelanger@gmail.com>
+Date: Wed, 17 Oct 2018 16:33:00 -0400
+Message-Id: <20181017203300.23376-1-maxime.roussinbelanger@gmail.com>
 X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] libeigen: update to 3.3.5
+Subject: [meta-oe][PATCH v3] libeigen: update to 3.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,9 +60,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 20:30:33 -0000
+X-List-Received-Date: Wed, 17 Oct 2018 20:33:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
 ---
  .../libeigen/{libeigen_3.3.4.bb => libeigen_3.3.5.bb}       | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
