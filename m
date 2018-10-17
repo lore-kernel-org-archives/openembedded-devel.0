@@ -1,47 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D96A79B05
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D014F79B5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 18:39:45 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id j46-v6so31267567qtc.9
+	Wed, 17 Oct 2018 19:14:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9HJEQpu008923
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 11:39:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=D0I8A06bsxHrT2t5XV/n9+A/gWS61kbHsSLiJgwyW7g=;
-	b=XWL6PoEAjVnEEdOjhXleuOH1uzmLwTFXRodWCt0Xh/hdEqtg6buOVlJphxY3B0W5BS
-	w1E1Y5rUkM+VKqYbwzfl2n+JS/W6uXFuyHe3av8nCTJ7P1N7oS5hlsauqqrKm+cZPQSN
-	naNhxp11X1prhdQYTOs2LkfRgC85OTRokqrYHsQGMDWgxbw0qxA8OSiVoybolAq7jYuj
-	M6xMRs579B28u7edNU8hZWzIPrIOzjCjByHM5WwG6iKAvRNr0X2IAhvJ6M79k/hJePDU
-	8wcMvEqRH2SYKo18y2QvvpumkORWQsMIolSjsqpB7gXO/rkZ69w0g7hN+Tdzxc6ex+JX
-	y2NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=D0I8A06bsxHrT2t5XV/n9+A/gWS61kbHsSLiJgwyW7g=;
-	b=cWkV3nI/LRvkWoM3ISoxZvsRuiHCAfcR9DgImKcGBLeb4Dq1R6jp72ZbLNjexI3EXP
-	5pl5gV5Rl/wvXr53JJwEYmIbVXKd8Ai7A4pwSP6JN5CV0UFBiMsvCqemHyLpuEwIprWH
-	hitnbIupWLET6uz9a/F7BYytAYULJDCYKAa/TvLGxoPUWiNztau9bhKzyk2KL2BRbxfu
-	GmbvNEsngXA4PzwVsirryE0bpIIMw2QsLKY01jBF6tsLegtQG2cm3ZJ4UxuPM0wyyOmD
-	pPQEX8Te5ZK6z/Nn2HEytQ+kUPt3qBQFYvRkhS17P9WDXFr1iYZXNIbR+TyUj3Twwzs2
-	MeRg==
-X-Gm-Message-State: ABuFfoilfBH2rCEWQQNXEfz69OP8ifXRfKiN7YK74csPwKCw/N+4yjSf
-	g6GJAl8AlUkPcNcYol9401SNjMLi+hMnjP+3xvE=
-X-Google-Smtp-Source: ACcGV61Ab9KR5HA3ouMdwP9hih+RFaXnXLzL7YVhldPrEeTuhNgssUrwD4pOxPM4ztGgAaTCfYlm9JYtRsUu/+QMwgg=
-X-Received: by 2002:a0c:98a6:: with SMTP id f35mr11663061qvd.224.1539801585960;
-	Wed, 17 Oct 2018 11:39:45 -0700 (PDT)
+	Wed, 17 Oct 2018 12:14:36 -0700
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
+	Wed, 17 Oct 2018 12:14:14 -0700
+From: Mark Hatle <mark.hatle@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Oct 2018 15:14:12 -0400
+Message-ID: <20181017191413.111522-1-mark.hatle@windriver.com>
+X-Mailer: git-send-email 2.16.0.rc2
 MIME-Version: 1.0
-References: <20181017154048.17231-1-yann@blade-group.com>
-In-Reply-To: <20181017154048.17231-1-yann@blade-group.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Oct 2018 11:39:19 -0700
-Message-ID: <CAMKF1soXq9u9GQMw4iemYLW5V9NpMLRQq1LABOGazJ3uTHBODA@mail.gmail.com>
-To: yann.dirson@blade-group.com
-Cc: yann@blade-group.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] packagegroup-tools-bluetooth: work as advertized on distro without bluez* support
+Subject: [PATCH 0/1] Fix gstreamer changing hash for different machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2018 18:39:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 17 Oct 2018 19:14:46 -0000
+Content-Type: text/plain
 
-On Wed, Oct 17, 2018 at 8:41 AM <yann.dirson@blade-group.com> wrote:
->
-> From: Yann Dirson <yann@blade-group.com>
->
-> Otherwise the build fails with:
->
->   NOTE: Runtime target '${RDEPENDS_}' is unbuildable, removing...
->   Missing or unbuildable dependency chain was: ['${RDEPENDS_}']
->
-> This restores some truth in the "Otherwise install nothing" comment in the recipe.
->
-> Signed-off-by: Yann Dirson <yann@blade-group.com>
-> ---
->  .../packagegroups/packagegroup-tools-bluetooth.bb               | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-> index 0ede5e57b..e81516fef 100644
-> --- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-> +++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-> @@ -32,6 +32,8 @@ RDEPENDS_bluez5 = " \
->          '', d)} \
->  "
->
-> +RDEPENDS_ = ""
-> +
+While working on a system with multiple BSPs, but a single distro configuration,
+I struggled with an issue of PR numbers increasing quickly and different
+behavior from boot to boot.
 
-this does not look right to me.
+Most of the issues were from oe-core and similar problems.  The gstreamer in
+oe-core has -exactly- the same code as this patch, so this is the equivalent
+version or meta-openembedded and the older gstreamer recipe.
 
->  # Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
->  # Otherwise install nothing.
->  RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
-> --
-> 2.19.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+This change makes sense in my configuration, but the only alternative I saw
+was to declare gstreamer as a MACHINE ARCH package, which I don't think we
+really want either.  Besides I'm not clear if that would resolve the hash/
+PR issue either.
+
+Mark Hatle (1):
+  gstreamer: Remove machine specific append
+
+ .../recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb     | 3 ---
+ 1 file changed, 3 deletions(-)
+
+-- 
+2.18.0
+
 
