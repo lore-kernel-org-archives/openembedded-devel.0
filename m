@@ -1,46 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B45F79C76
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CDE8C79B13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2018 15:38:17 +0000 (UTC)
-Received: by mail-qt1-f178.google.com with SMTP id x24-v6so3167500qtx.11
+	Thu, 18 Oct 2018 15:46:45 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id d14-v6so34766077qto.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2018 08:38:18 -0700 (PDT)
+	Thu, 18 Oct 2018 08:46:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=brE4NVzRmBMYmiPGQUZgxbG0+xaqWSslF6yZznxtp8M=;
-	b=tWJi/nUdt2XcMBtwQQ+FQxJ6RRGPXSADtiaivI2i9yMKynOoTyQOsCw1qJt3rBPMOi
-	uN+nknaYIu25tho3NTges7BYx0zRq5bauDFQwWwBaW0yhPCU8RbeO+cOqmqtEpbERBOe
-	4OeQiHfo1D3Oqm2nLPUny6JymxKVgiiQmisMNtyKkBpZhTnI+mUyAcTQiykG9OrI1wOD
-	wW2Y+QN7eW67Zhxw6GGLMG+O9KLlTRiDtVuWyyzFfupSbFbKGzBkTK5s2I22un9MyJZh
-	+LGyF2XDXOe/kwnznB6Yk1qWsAtM1v/rhEk9Z7u/doQH8OGt7I28n7d/+P0s0QcfYnPI
-	Hneg==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fDfEhsRFWJTcdMnPgXzmJK6JkgHo1R/jIWsw3eK+x60=;
+	b=r9eftGL25OJoopuUVSKrSeC7YCgYeqDfcmIsVqIOXdzT6h2gECaQEshZrGOWW6iHi5
+	PAYYQmtElz+dHbgb2GVWDkkajr0FO17ac+CgGZFFmlC4ZgAwBEglyM+5OEpo8T99+a11
+	kqAATff1uwEQ40I/A53ukQFvGfEjjP01lctX6h08Y9f9FWc3Uv2xm0b/oVZo0rpYY9m2
+	EboJdIzt4COFRJLRdhlV9pQly44Fco361gptCoPiPGCLFGMHVqVMEY8k2KWX9aSdh16/
+	6jGq22sindwv1POVKh+CP6aa1sm2zCvybFndntIW48tWGa4OKSgyGwDavnFuDqk8laMd
+	bX0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=brE4NVzRmBMYmiPGQUZgxbG0+xaqWSslF6yZznxtp8M=;
-	b=tb2L8JTIqntGon1lC0TzJESV57M8hMaVpZxg8jA/2wY82uP+SeZdeiwYr0TaO7MevU
-	MOiSw99RJTPoE4nfHxEvIUryeqwpnTd+dNyusqJ5l5wXR075qJ9lUfqzlh7NnzWGOYeY
-	J1IX1eR4xvptuFoCdrFDQyvwRO1qYAlrVb4d9jbcbKBqfQU/5UqlqkvrT4J9ckFf724z
-	G4BPoNESr0GMJ34ZRhyVoWt69916mVH/BZlEojvrlqY1LGf2PibdREDBQrmDPh9IoNZc
-	eefpr7nUdsuL/0VcQQwqioHItDOaP1znavQyxlxC52PBZg+OHv9kQRk4ER6AseOpD/Wa
-	p1cQ==
-X-Gm-Message-State: ABuFfohbINX9vvKJowIFO6lF9ayDTwCNi50LFiv72Ddsh+Nhlc+cZgkG
-	6TVVD6vSOF+gF8NsTAds3It/J1709U6sNlJYaSI=
-X-Google-Smtp-Source: ACcGV63yj2PDkUN2UE7v1SMVbv+409ZnvThUG4ougrWs2bnrLDf0/+GvOuZXLfjG+Eln/HbsNO2uvxAceA4SVWnTR+E=
-X-Received: by 2002:a0c:ad47:: with SMTP id v7mr26852891qvc.228.1539877097901; 
-	Thu, 18 Oct 2018 08:38:17 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fDfEhsRFWJTcdMnPgXzmJK6JkgHo1R/jIWsw3eK+x60=;
+	b=MF8ME7J1SOST/g/JNIZGO3imk5R6YXQEqHRiLZJA/3h6uYB9Sn6irmWElvhGnIfMiQ
+	mg9lVXkFNAMiBv2VcyCkwgrP0b8sW6Wn4jahY9CUL+fnE0msUXBYFtvpmcR+IUsRG710
+	le2PJ5gX0n8ES/0wmjOgAykYQARqiuCDL6cvaN4vUiyEMqHcaMVa3hzRJU8ftOyzqnsc
+	VsB6oc5IA0N8QqLFj7EOpK+Abk+cYWkYVXzno03SPkhfbAn9Fh0jTadM34kqbBNtL9Xp
+	EdjvuL7osN1hipLOhrkQBqSvxfcqvESBcmX2toWcdwnqX75Fe+zFshF/nPGcQWpAz9zD
+	EM6A==
+X-Gm-Message-State: ABuFfoh4M22i9Hq7SQvrtxFukL/pzX5RqwejD/sksbAo8jBh7NoVS028
+	FhXVX+Qe3dRd7Upg4NGrcJsGGaW7
+X-Google-Smtp-Source: ACcGV61m76OI52EupWH7dbdJbr7Xf4qcE/NJBOdHlAxERqnvGkutK85tW+u5hlROKqP+YRpApUKBjA==
+X-Received: by 2002:ac8:c6:: with SMTP id d6-v6mr3548763qtg.376.1539877606359; 
+	Thu, 18 Oct 2018 08:46:46 -0700 (PDT)
+Received: from mediabox.local (204-83-204-143.prna.hsdb.sasknet.sk.ca.
+	[204.83.204.143]) by smtp.gmail.com with ESMTPSA id
+	o4-v6sm14922401qtb.44.2018.10.18.08.46.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 18 Oct 2018 08:46:45 -0700 (PDT)
+From: Dan McGregor <danismostlikely@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2018 09:46:27 -0600
+Message-Id: <20181018154628.27229-1-danismostlikely@gmail.com>
+X-Mailer: git-send-email 2.19.0-dev
 MIME-Version: 1.0
-References: <baba8cff-5f3f-b6a4-efcd-377a43ba8096@telfort.nl>
-In-Reply-To: <baba8cff-5f3f-b6a4-efcd-377a43ba8096@telfort.nl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 18 Oct 2018 08:37:51 -0700
-Message-ID: <CAMKF1soxg8+rL-L4KLAZQy4cVoFZR=jz0uGrprJJCGBk05_Oag@mail.gmail.com>
-To: Ferry Toth <ftoth@telfort.nl>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: libgpiod2 incorrectly depends on python3-core
+Subject: [meta-oe][PATCH 1/2] vim: alternatify xxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +58,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2018 15:38:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 18 Oct 2018 15:46:46 -0000
+Content-Transfer-Encoding: 8bit
 
-Hi ferry
+From: Dan McGregor <dan.mcgregor@usask.ca>
 
-On Thu, Oct 18, 2018 at 6:33 AM Ferry Toth <ftoth@telfort.nl> wrote:
->
-> On master (to be 2.6): In recipe libgpiod_1.1.1 when enabling python3
-> bindings the generated libgpiod2 package depends on python3-core. The
-> result is when needing only libgpiod-tools in initramfs the whole of
-> python3 is pulled in.
->
+toybox also provides xxd.
 
-This is because of the recommendation thats added to for best out of
-box instal experience. You can always override that in your image
-recipe and that will break the rdep chain
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ meta-oe/recipes-support/vim/vim_8.1.0347.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-BAD_RECOMMENDATIONS += "libgpiod-python"
+diff --git a/meta-oe/recipes-support/vim/vim_8.1.0347.bb b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
+index 8713d66ed4..46d229e03b 100644
+--- a/meta-oe/recipes-support/vim/vim_8.1.0347.bb
++++ b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
+@@ -106,10 +106,12 @@ RDEPENDS_${BPN} = "ncurses-terminfo-base"
+ # Recommend that runtime data is installed along with vim
+ RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
+ 
+-ALTERNATIVE_${PN} = "vi vim"
++ALTERNATIVE_${PN} = "vi vim xxd"
++ALTERNATIVE_PRIORITY = "100"
+ ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
+ ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+ ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
+-ALTERNATIVE_PRIORITY = "100"
++ALTERNATIVE_TARGET[xxd] = "${bindir}/xxd"
++ALTERNATIVE_LINK_NAME[xxd] = "${bindir}/xxd"
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.19.0-dev
 
-> I believe this dependency to be incorrect, instead libgpiod-python
-> should depend on python3-core.
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
