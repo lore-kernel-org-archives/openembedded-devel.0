@@ -1,47 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 05CD579BC2
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BAEE746E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2018 01:55:44 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id d14-v6so32524324qto.4
+	Thu, 18 Oct 2018 07:20:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9I7JmmQ025159
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2018 18:55:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NyYnO9S86/hoAyyCz7+iBhEkHO4npQM2Hh89tmjI9u0=;
-	b=d2nJzY5VlDMljK2+k/AndhRaD/yZUewIWyB3OgqfoWfvQWEa/J/KDpwgu7imfdPSj3
-	OjGIXiviZx6WOj7nHk5c5v5wzkRIFxXSCifhyUF9FuMd5zeB2sOOdG56HebfWPQrX8z9
-	McDALo+UFOnlqpekQgsU0XjCWNJz5ns4lY28ck9bxxJ/ulV2MLvu5Fdw6tp5xokrNH4X
-	tgOw0Me0NW7vE4syIU2biy4V8FFVZX+d/GnQHJe1qZ6mxEwj2TKTSUSp5ukXjKNPJbLF
-	O+Sbh7Qu8cJw/KONtheVifdLuXz+WXDyeJHMM/rrNTv1PtMmqJoKnmCjnAnNRb43E1rZ
-	42UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=NyYnO9S86/hoAyyCz7+iBhEkHO4npQM2Hh89tmjI9u0=;
-	b=puk0uzuu9kQzHImPwWXwebDWbsas9OTTdOM5l6e8OQ18L4xTuBTyO5pTatwslUtiMd
-	5iPaJU/JoELhSAI2RglEhDO1n9/ZWg/AWY4mjUHh2BP9y2+eO7MfaPsijHJJmhdUfzNr
-	S8wGF7RY9iZpnNwkhp5bYS9ZORI8jNeADpL5FN3Xd4YeAhILLX5SF8A0uv/uQ/6rHoGW
-	6i5U3erStyanSzkEI/Zn8/I1hRYYknnsI3pQCepM5w1d9U39MFar/YLJirmljiIxRsEr
-	h4nCXnXdMBRX+enFQB7217UHAfjQX59fjmSahpibC9ajvuwAqme7bP34fCYAG4q4xJEX
-	YVbw==
-X-Gm-Message-State: ABuFfojoHu7ATEeNcVhoNIMooO3mXKJIggMySzXVeWaIWFKMO4f6t/6e
-	LQZLk0oPkhOJwdDcBm8Vn1CaWjZJlUU00qj0GhA=
-X-Google-Smtp-Source: ACcGV63WdM6o9W0FoFORW3u+FYapdU1DvwJE05vD3wlq9sQaTgHSO/CrIhqJzl7CrdrJuUx3rkbKJQBkVi0oPXkjnfI=
-X-Received: by 2002:a0c:8b4d:: with SMTP id d13mr24762372qvc.194.1539827745744;
-	Wed, 17 Oct 2018 18:55:45 -0700 (PDT)
+	Thu, 18 Oct 2018 00:20:35 -0700
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Thu, 18 Oct 2018 00:20:22 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Oct 2018 15:20:20 +0800
+Message-ID: <1539847220-31624-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20181009045520.32013-1-douglas.royds@taitradio.com>
-	<7c69b683-e925-c5a7-d190-0eb0e240dd47@taitradio.com>
-In-Reply-To: <7c69b683-e925-c5a7-d190-0eb0e240dd47@taitradio.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Oct 2018 18:55:19 -0700
-Message-ID: <CAMKF1srrnBJcYt=29nyciFB_b4c+qOL_atQ8okfesUD8ypPk1g@mail.gmail.com>
-To: Douglas Royds <douglas.royds@taitradio.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] openldap: Reproducibility: Remove user, hostname, pwd from version string
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-networking][PATCH] radvd: remove update-rc.d settings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,43 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2018 01:55:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 18 Oct 2018 07:20:44 -0000
+Content-Type: text/plain
 
-On Wed, Oct 17, 2018 at 6:08 PM Douglas Royds
-<douglas.royds@taitradio.com> wrote:
->
-> This patch is already on meta-openembedded master:
->
->     http://git.openembedded.org/meta-openembedded/commit/?id=ed5c1c19963546f09201747b11b94b71729b0bcd
->
-> For the record, I have just submitted it upstream:
->
->     http://www.openldap.org/its/index.cgi/Incoming?id=8928
->
-> Should I submit a new patch, changing the upstream-status to "Submitted"?
+We don't offer /etc/radvd.conf but only radvd.conf.example which would
+cause a startup error:
+  Starting radvd:
+  * /etc/radvd.conf does not exist or is empty.
 
-you can, also add a appropriate link to mailing list post that lists
-the submission
+Remove update-rc.d settings to make it doesn't start by default.
 
->
->
-> On 9/10/18 5:55 PM, Douglas Royds wrote:
->
-> > Upstream-Status: Pending
-> > Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
-> > ---
-> > ...
-> >
-> > diff --git a/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch b/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-> > ...
-> > +-WHOWHERE="$USER@`uname -n`:`pwd`"
-> > ++WHOWHERE="${SOURCE_DATE_EPOCH:-$USER@`uname -n`:`pwd`}"
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ meta-networking/recipes-daemons/radvd/radvd.inc | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
+index 06d16a4..59a07d7 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ b/meta-networking/recipes-daemons/radvd/radvd.inc
+@@ -20,7 +20,7 @@ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
+            file://volatiles.03_radvd \
+            file://radvd.default"
+ 
+-inherit autotools update-rc.d useradd pkgconfig systemd
++inherit autotools useradd pkgconfig systemd
+ 
+ SYSTEMD_SERVICE_${PN} = "radvd.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+@@ -36,7 +36,7 @@ do_install_append () {
+     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
+     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
+ 
+-    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/volatiles.03_radvd
++    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/03_radvd
+ 
+     # Install systemd service files
+     install -d ${D}${systemd_unitdir}/system
+@@ -54,9 +54,6 @@ do_install_append () {
+     done
+ }
+ 
+-INITSCRIPT_NAME = "radvd"
+-INITSCRIPT_PARAMS = "defaults 20 80"
+-
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
+ 
+-- 
+2.7.4
+
 
