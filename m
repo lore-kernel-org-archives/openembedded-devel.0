@@ -1,42 +1,46 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EFD4B79C5C
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 62D1079C40
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2018 13:47:38 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id u34-v6so34243907qth.3
+	Thu, 18 Oct 2018 14:29:22 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id x11-v6so1614975qkl.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2018 06:47:40 -0700 (PDT)
+	Thu, 18 Oct 2018 07:29:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
 	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=ANINGvQiqdSmBO/zUr9rQ+Xxl3G++iB4nyT/hF7e5XY=;
-	b=dtJe92cIEYHvx8NWS5AbrJNg8umsjVJyV11i2wVvOdv6EcKpAiJWEDwfhQodaYcVRO
-	t3ANyKbNDSM1iyVyJdk7VJTNHTTQmvmxZCLFzZ7plQoXC8wUwqIdnE/ILyL8T3hVj6P8
-	AqIom/1URvydP+5NnE5rOn8DuYGbiazQhOo47BQLISnuj6Cfao8zTJiHHBbZNItlrnFw
-	Je1QIvrxcWB/J/M58uhVkW6jYyzV7XCEsVcy6cKnjLiL52nMgW3nv95mqkqU/BGejsZV
-	bSxxrgE4zoD/6a52va1UvAn3rKxFdBaz4QLgX8lLYKt7+a0wYtQDpway7k1HWrfn+P+1
-	Td5w==
-X-Gm-Message-State: ABuFfojhcoHpOH7nenqTecfVdMX6LMyXp9T6FQFx0B+iw4JFLoEe9mIt
-	l2/ibq5/QzgX+7owELf1dZ7JIVrx
-X-Google-Smtp-Source: ACcGV61HbKU0kcseuaxalnDamOmU4YA3daQSrhRVoYETkKltjbemv9cNLPSPeV5UfzRBT1Fb+TRtMA==
-X-Received: by 2002:a0c:819c:: with SMTP id 28mr30778218qvd.7.1539870459635;
-	Thu, 18 Oct 2018 06:47:39 -0700 (PDT)
+	bh=fWBx0m2mDzmsYg0Q1Jr0GSx7FB/3vt1rZyw9hFCWc04=;
+	b=ULJZCa1zQADS6vq977Tn5gRyWOaXavgVROJdY4NWZ65j9oAEAe25MjtbMQlGGn+I0C
+	uabaSQRfHweqqgx2Kcgyv1/avt4CcmHRwrWljliG5IKy8r6RL+LP+lSLILgA4hOzZTR6
+	Ej7RlXRqWg7r5QUgtJCMCunHhGjMUmsbTAF4sqUBEnGN5Ilco+jPZiTLjFAqijBaanxt
+	+Okzj+qVzf8XekgEsL52+P0Qh1vExLZnzv5NTNiSZbUy+JMd53kV6xhbMDbv+D5psdqw
+	9gwNuKt2ED725sdyoVb+2Mu2JNILCygiOZkbHe1AAtUBoiYFBkQwLO15b+Pw9zcXpKX1
+	bCzg==
+X-Gm-Message-State: ABuFfogyaHC6YU9Uu40XytJDBirhsHjiVB8ZYgKjLNGGebZSBgyvrFW2
+	RDXoB0g48GiUpoi5wxNU5HdHkf+u
+X-Google-Smtp-Source: ACcGV60RtDBufi5agXRvHSbG/hOoMzQPTOk1k6J56yycS3Us85MqHaCApzXSv5b2qULQgz1ZGaxYYg==
+X-Received: by 2002:a37:5803:: with SMTP id
+	m3-v6mr29395771qkb.81.1539872963139; 
+	Thu, 18 Oct 2018 07:29:23 -0700 (PDT)
 Received: from bluvision ([77.107.218.170]) by smtp.gmail.com with ESMTPSA id
-	k39-v6sm1265382qtf.3.2018.10.18.06.47.38
+	n3-v6sm12919355qkc.48.2018.10.18.07.29.21
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 18 Oct 2018 06:47:38 -0700 (PDT)
-Message-ID: <706876eeb67589b7a04d0243b91156ac480c6434.camel@andred.net>
+	Thu, 18 Oct 2018 07:29:22 -0700 (PDT)
+Message-ID: <af0ffeb73026b1df4809bf1f378cf6729d7b35b2.camel@andred.net>
 From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org, Richard Leitner
-	<richard.leitner@skidata.com>
-Date: Thu, 18 Oct 2018 14:47:36 +0100
-In-Reply-To: <20180925085538.24188-1-andreas.obergschwandtner@skidata.com>
-References: <20180925085538.24188-1-andreas.obergschwandtner@skidata.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2018 15:29:20 +0100
+In-Reply-To: <CA+chaQfcYFFVBMSC4D5yAeHy8_wviYy40C9vT1QHDfEsPfKLbg@mail.gmail.com>
+References: <1539753685-18233-1-git-send-email-Qi.Chen@windriver.com>
+	<CABPh3UO90oG9asuYcmbi6BsTg84Y1oSrfQFu+C16x-=rEuBfJA@mail.gmail.com>
+	<CABPh3UOQCLzXK4CTGsQQw1YH_buPr=guuW+x6axW6nn_eCAw9A@mail.gmail.com>
+	<CA+chaQfcYFFVBMSC4D5yAeHy8_wviYy40C9vT1QHDfEsPfKLbg@mail.gmail.com>
 User-Agent: Evolution 3.30.1-1 
 Mime-Version: 1.0
-Subject: Re: [meta-java][PATCH] openjdk-8-native: hotspot: handle format-overflow error for gcc >= 7
+Subject: Re: [OE-core] [PATCH 1/2] systemd: upgrade to 239
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,27 +53,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2018 13:47:39 -0000
+X-List-Received-Date: Thu, 18 Oct 2018 14:29:22 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi (Richard),
+On Thu, 2018-10-18 at 12:55 +0200, Martin Jansa wrote:
+> Using u-a for the systemd symlinks to systemctl seems like best solution
+> to
+> me, I've already suggested it in:
+> http://lists.openembedded.org/pipermail/openembedded-core/2018-October/156597.html
 
+Yes, I'd support that.
 
-On Tue, 2018-09-25 at 10:55 +0200, Andreas Obergschwandtner wrote:
-> fixed the format-overflow warnings by patch affected files in
-> openjdk-8-hotspot
-> 
-> Signed-off-by: Andreas Obergschwandtner <
-> andreas.obergschwandtner@skidata.com>
-> ---
->  .../hotspot-handle-gcc7-format-overflow.patch | 25 +++++++++++++++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot-handle-
-> gcc7-format-overflow.patch
-
-This patch seems to have been staged to master-next, but the patch is not
-actually being used / referenced by the recipe.
 
 
 Cheers,
