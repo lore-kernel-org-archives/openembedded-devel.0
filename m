@@ -1,44 +1,23 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B48F9748F0
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 580F378CE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Oct 2018 08:50:08 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id a13-v6so36550117wrt.5
+	Fri, 19 Oct 2018 09:40:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w9J9ej3T028744
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Oct 2018 01:50:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=tIE1rgcefbovnnR/7mbWUqBN+HyqQhihR7O9/x2RzVc=;
-	b=ktlTIIBgdxHunU7J7o4k72JAEVBVM5sLHxCU2Jpu/ztyNTzkdagS7uI0dNM5TkGdTm
-	LbilVpgBQQ6rdLkYzr+XwQMlZFIa+kHd6xCTs7Oh0o+dbtRd1oGaywjDkidcbKkSI1DS
-	tXFNXaN+oA0wAeW40y3xwxfWfApp0s+6VkBKZBdBeU0D9V+Vzqm2cWbxXruSQyjEcV/c
-	bci6RTDUBhj1zP8u3DV6Ep8Ja1GLWSpVWtNDp15leIKGAKOLmlmT9vwJefGp0wsz8dSn
-	Gapf1OJexd4LDKZlQ17cTe5XjFZJ8fwDmSttf+Vi0sWw/XD75FBbxNPva2b91C5DDyag
-	/bnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=tIE1rgcefbovnnR/7mbWUqBN+HyqQhihR7O9/x2RzVc=;
-	b=VnfoMscE7klw+yhc7KoCIt+0AkJdUGRMK0twOjQya9J8+p5MvKHAuTpm5xwMpIsqZe
-	CqqDTTnWAa3yb6NV286P7XSZS1nCgGlyR+vdSw1hFKPtmqYBgzFgOV/mOQ1JHJuSU9W8
-	vaHHpn5ezrTQa481wqcvSX6TGOw1PYNKaLAs4FvZIjze9a08UgoCPl6ZFhYxsjw1LI6f
-	NyjqTDDyiNtvB1vjXw2KvaS89Uo6/9ffsaYxKoblN1mErZuHkB5D3sir8BPsvJHM6PeL
-	NAE+mRjm8ys5UWzkbAJkgyDyg6VFrUtL/oG6/7p4oo6MKxpFywpvY0okkdfycGsknK/d
-	Zflw==
-X-Gm-Message-State: ABuFfojZPi4HtAQB9SFZPL+GcKAKChbSeL04/cesilVdWwWt26n0acLz
-	LPkVn6mbBG1uZksvZqcoEbbVHWeTf7pXyJv7I6GCOaZGJAY=
-X-Google-Smtp-Source: ACcGV62GY4aI8nBw0Is0ENxHv6HURx6GYWiJw6NqRAKe41vpjU9YZ+1FhDX3+ioVSPNK3WHoU1zqRYIwXLD1cEZ5hcA=
-X-Received: by 2002:adf:f28c:: with SMTP id
-	k12-v6mr11103086wro.184.1539939008867; 
-	Fri, 19 Oct 2018 01:50:08 -0700 (PDT)
+	Fri, 19 Oct 2018 02:40:45 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Fri, 19 Oct 2018 02:40:44 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Oct 2018 16:59:19 +0800
+Message-ID: <20181019085919.18767-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Fri, 19 Oct 2018 10:49:57 +0200
-Message-ID: <CAAfyv34U8xRroCvy1JdoOkV98MB-pjARbrs=AGy5gQfecxyOhw@mail.gmail.com>
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: meta-java how to build client C1 option
+Subject: [meta-networking][PATCH] openipmi: not install .pyc and .pyo files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,53 +30,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2018 08:50:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 19 Oct 2018 09:40:47 -0000
+Content-Type: text/plain
 
-Hi,
+From: Kai Kang <kai.kang@windriver.com>
 
-IIRC when building openjdk-8 by default is used zero jvm variant
-(PACKAGECONFIG[zero] = "--with-jvm-variants=zero,,,"). I would like to
-build client (C1 - actually this option available in master-next). I
-have tried to build for arm - beaglebone (with hacked PACKAGECONFIG)
-but getting compilation issue like:
+openipmi load swig/python/.libs/_OpenIPMI.so to create .pyc and .pyo
+files. It fails when multilib is enable:
 
-| arm-poky-linux-gnueabi-g++: error: unrecognized argument in option
-'-march=i586'
-| arm-poky-linux-gnueabi-g++: note: valid arguments to '-march=' are:
-armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te
-armv5tej armv6 armv6-m armv6j armv6k armv6kz armv6s-m armv6t2 armv6z
-armv6zk armv7 armv7-a armv7-m armv7-r armv7e-m armv7ve armv8-a
-armv8-a+crc armv8-m.base armv8-m.main armv8-m.main+dsp armv8.1-a
-armv8.2-a armv8.2-a+fp16 iwmmxt iwmmxt2 native
-| arm-poky-linux-gnueabi-g++: error: unrecognized argument in option
-'-march=i586'
-| arm-poky-linux-gnueabi-g++: note: valid arguments to '-march=' are:
-armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te
-armv5tej armv6 armv6-m armv6j armv6k armv6kz armv6s-m armv6t2 armv6z
-armv6zk armv7 armv7-a armv7-m armv7-r armv7e-m armv7ve armv8-a
-armv8-a+crc armv8-m.base armv8-m.main armv8-m.main+dsp armv8.1-a
-armv8.2-a armv8.2-a+fp16 iwmmxt iwmmxt2 native
-| arm-poky-linux-gnueabi-g++: error: unrecognized command line option '-m32'
-| arm-poky-linux-gnueabi-g++: error: unrecognized command line option '-m32'
+| ImportError: .../lib32-openipmi/2.0.25-r0/OpenIPMI-2.0.25/swig/python/.libs/_OpenIPMI.so:
+| wrong ELF class: ELFCLASS32
 
-I have no java knowledge at all so please consider this as newbie
-question ;). So question is it is even possible build client for arm
-with meta-java? Thanks.
+Don't compile and install .pyc and .pyo files to fix the failure.
 
-BR,
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../openipmigui-not-compile-pyc-pyo.patch     | 26 +++++++++++++++++++
+ .../openipmi/openipmi_2.0.25.bb               |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-networking/recipes-support/openipmi/files/openipmigui-not-compile-pyc-pyo.patch
 
-marek
+diff --git a/meta-networking/recipes-support/openipmi/files/openipmigui-not-compile-pyc-pyo.patch b/meta-networking/recipes-support/openipmi/files/openipmigui-not-compile-pyc-pyo.patch
+new file mode 100644
+index 000000000..389407590
+--- /dev/null
++++ b/meta-networking/recipes-support/openipmi/files/openipmigui-not-compile-pyc-pyo.patch
+@@ -0,0 +1,26 @@
++openipmi load swig/python/.libs/_OpenIPMI.so to create .pyc and .pyo files.
++It fails when multilib is enable:
++
++| ImportError: .../lib32-openipmi/2.0.25-r0/OpenIPMI-2.0.25/swig/python/.libs/_OpenIPMI.so: wrong ELF class: ELFCLASS32
++
++Don't compile and install .pyc and .pyo files to fix the failure.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++diff --git a/swig/python/openipmigui/Makefile.am b/swig/python/openipmigui/Makefile.am
++index 570e7b9..88258bf 100644
++--- a/swig/python/openipmigui/Makefile.am
+++++ b/swig/python/openipmigui/Makefile.am
++@@ -34,9 +34,9 @@ localcopy:
++ 		fi \
++ 	done
++ 
++-all-local: localcopy $(PYC_FILES) $(PYO_FILES)
+++all-local: localcopy
++ 
++-install-exec-local: $(EXTRA_DIST) $(PYC_FILES) $(PYO_FILES)
+++install-exec-local: $(EXTRA_DIST)
++ 	$(INSTALL) -d $(DESTDIR)$(PYTHON_INSTALL_DIR)/openipmigui
++ 	$(INSTALL_DATA) $^ $(DESTDIR)$(PYTHON_INSTALL_DIR)/openipmigui
++ 
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.25.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.25.bb
+index a1f26edb4..d28ebd484 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.25.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.25.bb
+@@ -29,6 +29,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+            file://ipmi-init-fix-the-arguments.patch \
+            file://do-not-install-pyc-and-pyo.patch \
+            file://include_sys_types.patch \
++           file://openipmigui-not-compile-pyc-pyo.patch \
+            file://openipmi-helper \
+            file://ipmi.service \
+            "
+-- 
+2.19.0.rc2
 
---
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
-
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
 
