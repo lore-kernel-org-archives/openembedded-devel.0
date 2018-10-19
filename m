@@ -1,25 +1,44 @@
-Return-Path: <ftoth@telfort.nl>
-Received: from radex-web.radex.nl (smtp.radex.nl [178.250.146.7])
-	by mail.openembedded.org (Postfix) with ESMTP id A69E0605BE
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B48F9748F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Oct 2018 08:01:51 +0000 (UTC)
-Received: from [192.168.1.22] (cust-178-250-146-69.breedbanddelft.nl
-	[178.250.146.69])
-	by radex-web.radex.nl (Postfix) with ESMTPS id C2BB524057;
-	Fri, 19 Oct 2018 10:01:51 +0200 (CEST)
-To: Khem Raj <raj.khem@gmail.com>
-References: <baba8cff-5f3f-b6a4-efcd-377a43ba8096@telfort.nl>
-	<CAMKF1soxg8+rL-L4KLAZQy4cVoFZR=jz0uGrprJJCGBk05_Oag@mail.gmail.com>
-From: Ferry Toth <ftoth@telfort.nl>
-Message-ID: <fd4a2a9d-758c-7d8f-a118-b39a7884dc0f@telfort.nl>
-Date: Fri, 19 Oct 2018 10:01:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Fri, 19 Oct 2018 08:50:08 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id a13-v6so36550117wrt.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Oct 2018 01:50:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=tIE1rgcefbovnnR/7mbWUqBN+HyqQhihR7O9/x2RzVc=;
+	b=ktlTIIBgdxHunU7J7o4k72JAEVBVM5sLHxCU2Jpu/ztyNTzkdagS7uI0dNM5TkGdTm
+	LbilVpgBQQ6rdLkYzr+XwQMlZFIa+kHd6xCTs7Oh0o+dbtRd1oGaywjDkidcbKkSI1DS
+	tXFNXaN+oA0wAeW40y3xwxfWfApp0s+6VkBKZBdBeU0D9V+Vzqm2cWbxXruSQyjEcV/c
+	bci6RTDUBhj1zP8u3DV6Ep8Ja1GLWSpVWtNDp15leIKGAKOLmlmT9vwJefGp0wsz8dSn
+	Gapf1OJexd4LDKZlQ17cTe5XjFZJ8fwDmSttf+Vi0sWw/XD75FBbxNPva2b91C5DDyag
+	/bnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=tIE1rgcefbovnnR/7mbWUqBN+HyqQhihR7O9/x2RzVc=;
+	b=VnfoMscE7klw+yhc7KoCIt+0AkJdUGRMK0twOjQya9J8+p5MvKHAuTpm5xwMpIsqZe
+	CqqDTTnWAa3yb6NV286P7XSZS1nCgGlyR+vdSw1hFKPtmqYBgzFgOV/mOQ1JHJuSU9W8
+	vaHHpn5ezrTQa481wqcvSX6TGOw1PYNKaLAs4FvZIjze9a08UgoCPl6ZFhYxsjw1LI6f
+	NyjqTDDyiNtvB1vjXw2KvaS89Uo6/9ffsaYxKoblN1mErZuHkB5D3sir8BPsvJHM6PeL
+	NAE+mRjm8ys5UWzkbAJkgyDyg6VFrUtL/oG6/7p4oo6MKxpFywpvY0okkdfycGsknK/d
+	Zflw==
+X-Gm-Message-State: ABuFfojZPi4HtAQB9SFZPL+GcKAKChbSeL04/cesilVdWwWt26n0acLz
+	LPkVn6mbBG1uZksvZqcoEbbVHWeTf7pXyJv7I6GCOaZGJAY=
+X-Google-Smtp-Source: ACcGV62GY4aI8nBw0Is0ENxHv6HURx6GYWiJw6NqRAKe41vpjU9YZ+1FhDX3+ioVSPNK3WHoU1zqRYIwXLD1cEZ5hcA=
+X-Received: by 2002:adf:f28c:: with SMTP id
+	k12-v6mr11103086wro.184.1539939008867; 
+	Fri, 19 Oct 2018 01:50:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soxg8+rL-L4KLAZQy4cVoFZR=jz0uGrprJJCGBk05_Oag@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: libgpiod2 incorrectly depends on python3-core
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Fri, 19 Oct 2018 10:49:57 +0200
+Message-ID: <CAAfyv34U8xRroCvy1JdoOkV98MB-pjARbrs=AGy5gQfecxyOhw@mail.gmail.com>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: meta-java how to build client C1 option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,51 +51,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2018 08:01:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Oct 2018 08:50:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi
+Hi,
 
-Op 18-10-18 om 17:37 schreef Khem Raj:
-> Hi ferry
->
-> On Thu, Oct 18, 2018 at 6:33 AM Ferry Toth <ftoth@telfort.nl> wrote:
->> On master (to be 2.6): In recipe libgpiod_1.1.1 when enabling python3
->> bindings the generated libgpiod2 package depends on python3-core. The
->> result is when needing only libgpiod-tools in initramfs the whole of
->> python3 is pulled in.
->>
-> This is because of the recommendation thats added to for best out of
-> box instal experience. You can always override that in your image
-> recipe and that will break the rdep chain
->
-> BAD_RECOMMENDATIONS += "libgpiod-python"
+IIRC when building openjdk-8 by default is used zero jvm variant
+(PACKAGECONFIG[zero] = "--with-jvm-variants=zero,,,"). I would like to
+build client (C1 - actually this option available in master-next). I
+have tried to build for arm - beaglebone (with hacked PACKAGECONFIG)
+but getting compilation issue like:
 
-I am generating deb's and already receive one warning that deb's do not 
-support BAD_RECOMMENDATIONS. Would that work?
+| arm-poky-linux-gnueabi-g++: error: unrecognized argument in option
+'-march=i586'
+| arm-poky-linux-gnueabi-g++: note: valid arguments to '-march=' are:
+armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te
+armv5tej armv6 armv6-m armv6j armv6k armv6kz armv6s-m armv6t2 armv6z
+armv6zk armv7 armv7-a armv7-m armv7-r armv7e-m armv7ve armv8-a
+armv8-a+crc armv8-m.base armv8-m.main armv8-m.main+dsp armv8.1-a
+armv8.2-a armv8.2-a+fp16 iwmmxt iwmmxt2 native
+| arm-poky-linux-gnueabi-g++: error: unrecognized argument in option
+'-march=i586'
+| arm-poky-linux-gnueabi-g++: note: valid arguments to '-march=' are:
+armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te
+armv5tej armv6 armv6-m armv6j armv6k armv6kz armv6s-m armv6t2 armv6z
+armv6zk armv7 armv7-a armv7-m armv7-r armv7e-m armv7ve armv8-a
+armv8-a+crc armv8-m.base armv8-m.main armv8-m.main+dsp armv8.1-a
+armv8.2-a armv8.2-a+fp16 iwmmxt iwmmxt2 native
+| arm-poky-linux-gnueabi-g++: error: unrecognized command line option '-m32'
+| arm-poky-linux-gnueabi-g++: error: unrecognized command line option '-m32'
 
-In the deb control file we have:
+I have no java knowledge at all so please consider this as newbie
+question ;). So question is it is even possible build client for arm
+with meta-java? Thanks.
 
-Depends: libc6 (>= 2.27), python3-core
-Recommends: libgpiod-python, libgpiod-tools
-Provides: libgpiod
+BR,
 
-I believe the depends is wrong as it is libgpiod-python that depends on 
-python3-core.
+marek
 
-But libgpiod-python control file has only:
+--
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
 
-Depends: libc6 (>= 2.27), libgpiod2 (>= 1.1.1), libpython3.5m1.0 (>= 3.5.5)
-
->> I believe this dependency to be incorrect, instead libgpiod-python
->> should depend on python3-core.
->>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
 
