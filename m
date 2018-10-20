@@ -1,63 +1,42 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A69C79C44
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2018 14:02:36 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 89C361833E;
-	Sat, 20 Oct 2018 16:02:36 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id G45DiXi4PpkG; Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 6C44A1818A;
-	Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3B8C91A05F;
-	Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 302611A05E;
-	Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
-	by thoth.se.axis.com (Postfix) with ESMTP id 232F61B35;
-	Sat, 20 Oct 2018 16:02:35 +0200 (CEST)
-Received: from xbox11.axis.com (10.0.5.25) by XBOX01.axis.com (10.0.5.15) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Sat, 20 Oct 2018 16:02:35 +0200
-Received: from XBOX02.axis.com (10.0.5.16) by xbox11.axis.com (10.0.5.25) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Sat, 20 Oct 2018 16:02:34 +0200
-Received: from XBOX02.axis.com ([fe80::d00f:cb52:1b56:20d]) by XBOX02.axis.com
-	([fe80::d00f:cb52:1b56:20d%21]) with mapi id 15.00.1365.000;
-	Sat, 20 Oct 2018 16:02:34 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [PATCH v3] packagegroup-tools-bluetooth: work as advertized
-	on distro without bluez* support
-Thread-Index: AQHUZmEmLLvlkEDRHUa9DYN9KMVC96Uj/YyA///hjgCABDK2YA==
-Date: Sat, 20 Oct 2018 14:02:34 +0000
-Message-ID: <c88754fce95d4f5ca91340de0605231f@XBOX02.axis.com>
-References: <20181017205647.25447-1-yann@blade-group.com>
-	<58e27c81a75d4ffdb436ec577bbb7f9b@XBOX02.axis.com>
-	<CA+chaQeqKrGu3=5HYA+qm8a2iV86vDQdhMELEYkhBKfM6yWYZA@mail.gmail.com>
-	<71b4fe32a2dd4895938ba547944576df@XBOX02.axis.com>
-	<20181017221356.GB1375@jama>
-In-Reply-To: <20181017221356.GB1375@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 218D879D13
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Oct 2018 14:49:37 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id l41-v6so41571638qtl.8
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Oct 2018 07:49:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=SVZU/htsZKn3HSrJLPI2nCzBjkVBy9nKMHmCkxwhGYk=;
+	b=Tx5lmT30aAzNy+HX1sSx1pmvSRDqYHI2pXdQ56ZF8F3v3TEMsAp5g5chqTEZg4trLC
+	9PXmE9o/np+q3rBUsoH9+iDlCdJrfTQGNfsY/NRiyth/AJWamC0GmegL71FEPBi10iuM
+	jaE7Xk5itMeYjeVZGQxV+fuSsOXbUzFbltmhGBUZV1Wetgdr4TklHPcWExNkxbEM3me7
+	S5zLbmSd4jP63+LySNag6fWRyNWAsbG08YhTa4S7aExH+xPxDIaMTZBi1DaQ/4xLppud
+	fbn3Qb0HVJYbU1t/40esX2gbHDzR5HhVSRcnwolkVYM+FQZNBmOB0CMfza2sUuZHthUb
+	M8qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=SVZU/htsZKn3HSrJLPI2nCzBjkVBy9nKMHmCkxwhGYk=;
+	b=bpuM97ekLaSep1ONPoajbV2Rj5xgr2Ar+958EtokwuKWaTjo3EcrGKGM426vxs52Z/
+	0AGPtJsKbdjWxC0iIc5NGrSDzmPz0c96LmOI1j8tmyJO/NM6xgMiDmfhTe+TzGey3XDn
+	+nKBNy0vdw9uDRbuzaJ5hXmJWGtChgNibov+anB9/7YEzz5HtssHzvYK1ydVnGhLzYSy
+	hNd9om9rbJ6AqsUVlYQYJhAxGx0g9a1ullrwPVZTpLseziFr8CQeSK+wIerqVwouJh+1
+	EgG7SvGYuJyK+ytqJ7nMBRe9mdOaFZjzgavl0rvDLPR3+XHoJozY6m6X9bG+pPibwANH
+	wXaQ==
+X-Gm-Message-State: ABuFfoih0A34Qq7LnL4HpzzvvC0VcKj6Vb1OS4geaBpf19UL2dHc2AZB
+	jUIu2h7/f+SyQ3y6jqOM8Nh+hSSCCDEFgBrJOGKE0fOnNYOBJw==
+X-Google-Smtp-Source: ACcGV61J/ZJY8WXIf2592IFmvh37MI1M8F46NabzG9M5Mh/ZB9NG0K6b4PKe488OXQ6AfUry8FvVBySM7flU88UFQxU=
+X-Received: by 2002:a0c:98a6:: with SMTP id f35mr22879758qvd.224.1540046977468;
+	Sat, 20 Oct 2018 07:49:37 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Cc: "yann@blade-group.com" <yann@blade-group.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v3] packagegroup-tools-bluetooth: work as advertized on distro without bluez* support
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 20 Oct 2018 15:49:11 +0100
+Message-ID: <CAMKF1spCL_xjQrs7NLuQhM_m1eGJNb7bQP+ASa+3v-FEzmwbhA@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of the world, 2018-10-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,161 +49,242 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2018 14:02:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 20 Oct 2018 14:49:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: Martin Jansa <martin.jansa@gmail.com>
-> Sent: den 18 oktober 2018 00:14
-> To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> Cc: yann@blade-group.com; openembedded-devel <openembedded-
-> devel@lists.openembedded.org>
-> Subject: Re: [oe] [PATCH v3] packagegroup-tools-bluetooth: work as
-> advertized on distro without bluez* support
->=20
-> On Wed, Oct 17, 2018 at 10:03:53PM +0000, Peter Kjellerstedt wrote:
-> > > -----Original Message-----
-> > > From: openembedded-devel-bounces@lists.openembedded.org
-> <openembedded-
-> > > devel-bounces@lists.openembedded.org> On Behalf Of Martin Jansa
-> > > Sent: den 17 oktober 2018 23:34
-> > > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> > > Cc: yann@blade-group.com; openembedded-devel <openembedded-
-> > > devel@lists.openembedded.org>
-> > > Subject: Re: [oe] [PATCH v3] packagegroup-tools-bluetooth: work as
-> > > advertized on distro without bluez* support
-> > >
-> > > I wouldn't say that supporting bluez6 as BLUEZ value before
-> > > RDEPENDS_bluez6 is defined here is really better.
-> >
-> > Well, my point was that rewriting it according to my suggestion
-> > makes it agnostic to whatever value the ${BLUEZ} variable has.
->=20
-> And my point is that it doesn't make it better, because it will do
-> something useful only with RDEPENDS_bluez4 or RDEPENDS_bluez5, adding
-> dependency on undefined ${RDEPENDS_whatever} doesn't really help, does
-> it?
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Well, it actually does. Because if someone was to actually add=20
-support for bluez6 (or whatever) they would now get a build=20
-error because RDEPENDS_bluez6 is not defined instead of silently=20
-missing the dependencies that they need to add.
+== Number of issues - stats ==
+{| class='wikitable'
+!|Date     !!colspan='4'|Failed tasks    !!|Signatures
+!!colspan='15'|QA !!Comment
+|-
+|| ||qemuarm ||qemuarm64 ||qemux86 ||qemux86_64 ||all
+||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps
+||version-going-backwards ||host-user-contaminated
+||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot
+||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path
+||qa_pseudo ||
+|-
+||2018-10-18 ||4 ||0 ||2 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||0
+||0 ||0 ||0 ||0 ||0 ||0 ||
+|}
 
-However, my suggested code does not work due to bitbake messing=20
-up the parsing of the line, resulting in an error similar to this=20
-if ${BLUEZ} is not defined:
+== Failed tasks 2018-10-18 ==
 
-ERROR: Nothing RPROVIDES 'else' (but testrecipe.bb RDEPENDS on or otherwise=
- requires it)
+INFO: jenkins-job.sh-1.8.45 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.report.20181020_074622.log
 
-It suggests that somewhere there is some code doing something like
-d.getVar('RDEPENDS_%s' % pn, False).split() (that exact code does=20
-not exist though, I've checked). So to get it to work in practice=20
-one would have to do:
+=== common (0) ===
 
-FOOBAR =3D "${@'${RDEPENDS_${BLUEZ}}' if d.getVar('BLUEZ') else ''}"
-RDEPENDS_${PN} =3D "${FOOBAR}"
+=== common-x86 (0) ===
 
-If ${RDEPENDS_${BLUEZ}} is defined, then it yields the expected=20
-dependencies, and if ${BLUEZ} is defined but ${RDEPENDS_${BLUEZ}}=20
-is not, then it yields an error similar to:
+=== qemuarm (4) ===
+    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-extended/redis/redis_4.0.8.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_package_qa
+    * sources/meta-qt5/recipes-qt/qt5/qtwebkit_git.bb:do_compile
 
-ERROR: Nothing RPROVIDES '${@'${RDEPENDS_whatever}'' (but testrecipe.bb RDE=
-PENDS on or otherwise requires it)
+=== qemuarm64 (0) ===
 
-> > > Whole bluez4 support here is a bit useless considering that all
-> bluez4
-> > > related recipes were removed more than a year ago with:
-> > >
-> > > commit 007498ac72e26e9f7064de74f7fe96e91ae6c969
-> > > Author: Martin Jansa <Martin.Jansa@gmail.com>
-> > > Date:   Mon Jul 24 19:25:35 2017 +0200
-> > >
-> > >     bluez4: remove bluez4-only recipes
-> > >
-> > >
-> > > On Wed, Oct 17, 2018 at 11:20 PM Peter Kjellerstedt <
-> > > peter.kjellerstedt@axis.com> wrote:
-> > >
-> > > > > -----Original Message-----
-> > > > > From: openembedded-devel-bounces@lists.openembedded.org <
-> > > > openembedded-devel-bounces@lists.openembedded.org> On Behalf Of
-> > > > yann.dirson@blade-group.com
-> > > > > Sent: den 17 oktober 2018 22:57
-> > > > > To: openembedded-devel@lists.openembedded.org
-> > > > > Cc: Yann Dirson <yann@blade-group.com>
-> > > > > Subject: [oe] [PATCH v3] packagegroup-tools-bluetooth: work as
-> > > > advertized on distro without bluez* support
-> > > > >
-> > > > > From: Yann Dirson <yann@blade-group.com>
-> > > > >
-> > > > > Otherwise the build fails with:
-> > > > >
-> > > > >   NOTE: Runtime target '${RDEPENDS_}' is unbuildable,
-> removing...
-> > > > >   Missing or unbuildable dependency chain was: ['${RDEPENDS_}']
-> > > > >
-> > > > > This restores some truth in the "Otherwise install nothing"
-> comment
-> > > in
-> > > > > the recipe.
-> > > > >
-> > > > > Signed-off-by: Yann Dirson <yann@blade-group.com>
-> > > > > ---
-> > > > >  .../packagegroups/packagegroup-tools-bluetooth.bb            |
-> 5
-> > > ++++-
-> > > > >  1 file changed, 4 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/meta-oe/recipes-connectivity/packagegroups/
-> > > > packagegroup-tools-bluetooth.bb
-> > > > b/meta-oe/recipes-connectivity/packagegroups/
-> > > > packagegroup-tools-bluetooth.bb
-> > > > > index 0ede5e57b..207c7c1ae 100644
-> > > > > --- a/meta-oe/recipes-connectivity/packagegroups/
-> > > > packagegroup-tools-bluetooth.bb
-> > > > > +++ b/meta-oe/recipes-connectivity/packagegroups/
-> > > > packagegroup-tools-bluetooth.bb
-> > > > > @@ -34,4 +34,7 @@ RDEPENDS_bluez5 =3D " \
-> > > > >
-> > > > >  # Install bluez4 tools or bluez5 tools depending on what is
-> > > specified
-> > > > in the distro.
-> > > > >  # Otherwise install nothing.
-> > > > > -RDEPENDS_${PN} =3D "${RDEPENDS_${BLUEZ}}"
-> > > > > +RDEPENDS_${PN} =3D " \
-> > > > > +    ${@'${RDEPENDS_bluez5}' if d.getVar('BLUEZ', True) =3D=3D
-> 'bluez5'
-> > > else
-> > > > ''} \
-> > > > > +    ${@'${RDEPENDS_bluez4}' if d.getVar('BLUEZ', True) =3D=3D
-> 'bluez4'
-> > > else
-> > > > ''} \
-> > > > > +"
-> > > >
-> > > > You can simplify this (and support any value of ${BLUEZ} just in
-> > > > case someone decides to add bluez6):
-> > > >
-> > > > RDEPENDS_${PN} =3D "${@'${RDEPENDS_${BLUEZ}}' if d.getVar('BLUEZ')
-> else ''}"
-> > > >
-> > > > Also, the second argument to d.getVar() has defaulted to True for
-> > > > a long time, so no point in specifying it.
-> > > >
-> > > > > --
-> > > > > 2.19.1
-> > > >
-> > > > //Peter
-> >
-> > //Peter
-> >
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+=== qemux86 (2) ===
+    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
+    * sources/openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.14.0.bb:do_compile_ptest_base
 
-//Peter
+=== qemux86_64 (0) ===
 
+=== Number of failed tasks (6) ===
+{| class=wikitable
+|-
+|| qemuarm || 4 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm.20181018_071705.log/
+||
+|-
+|| qemuarm64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm64.20181018_180151.log/
+||
+|-
+|| qemux86 || 2 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86.20181018_071711.log/
+||
+|-
+|| qemux86_64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86-64.20181018_192657.log/
+||
+|}
+
+=== PNBLACKLISTs (0) ===
+
+=== QA issues (0) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||build-deps
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||host-user-contaminated
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||textrel
+|-
+||0 ||unknown-configure-option
+|-
+||0 ||version-going-backwards
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.signatures.20181019_141025.log/
+
+
+    * ERROR:  OE-core's config sanity checker detected a potential
+misconfiguration.
+    * ERROR: no sigdata files were generated for MACHINE qemux86copy
+in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-*:
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 0 issue: textrel
+
+
+count: 0 issue: build-deps
+
+
+count: 0 issue: file-rdeps
+
+
+count: 0 issue: version-going-backwards
+
+
+count: 0 issue: host-user-contaminated
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+5463c16 test/data: Add new tests for task checksum changing/not changing
+not included in master yet:
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+1127759 qemux86/gstreamer: Move kernel module recommendation to the
+machine configuration
+not included in master yet:
+bde0e52 systemd: Remove items that made this machine (qemu) specific
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+d7d0cc5 nodejs: Enable system ICU support
+not included in master yet:
+5559ea5 cpuid: upgrade 20170122 -> 20180519
+e6978e6 glog: enable building shared library again
+336242e keepalived: remove update-rc.d settings
+fc26880 Khronos: Add Khronos LICENSE
+7eb7a22 zlog: fix up library path for multilib
+dd2f7c1 wireshark: update to 2.6.4
+7023d0f cpupower: Update LIC_FILES_CHKSUM
+1d7ae74 catch2: new package
+256de49 opencl-headers: Initial recipe for OpenCL headers
+bc14dcc sharutils: CVE-2018-1000097
+b461c40 opencl-icd-loader: Initial recipe for OpenCL ICD loader
+d6bd1ed dracut: 048->049
+02fd051 hwdata:0.315->0.316
+df9f15c ipc-run: 0.99->20180523.0
+107eefe python-requests: fix CVE-2018-18074
+e499d11 gnulib: Security fix for CVE-2018-17942
+3e6226f strongswan: upgrade to 5.7.1
+104a87a libnet-dns-sec-perl: add recipe for 1.10
+632a6d1 libnet-dns-perl: upgrade 1.17 -> 1.18; enable ptest
+56fe12a udisks2: Upgrade to 2.7.8
+9981811 gstreamer: Remove machine specific append
+60a8ded libeigen: update to 3.3.5
+a5591f7 radvd: remove update-rc.d settings
+897c10b vim: alternatify xxd
+cdd3e9a toybox: Fix paths to match OE conventions
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+5832bf2 qtbase: don't use thumb for armv[45]
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+75640e1 chromium-ozone-wayland: Fix libdrm on glibc >= 2.25
+not included in master yet:
+~/oe/world/yoe
 
