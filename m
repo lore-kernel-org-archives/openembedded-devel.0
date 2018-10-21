@@ -1,28 +1,18 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 96B4179D25
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7742D79C7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2018 23:29:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9KNSdOu014278
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 20 Oct 2018 16:29:01 -0700
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Sat, 20 Oct 2018 16:28:31 -0700
-To: Anders Roxell <anders.roxell@linaro.org>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20181019145416.8021-1-anders.roxell@linaro.org>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <407614ae-de48-8832-e3ad-1ab130f8c826@windriver.com>
-Date: Sat, 20 Oct 2018 19:28:30 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
-MIME-Version: 1.0
-In-Reply-To: <20181019145416.8021-1-anders.roxell@linaro.org>
-X-Originating-IP: [172.25.44.4]
-Subject: Re: [meta-oe][PATCH] add a storage I/O benchmark test suite
+	Sun, 21 Oct 2018 14:34:26 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 42dMc23xD0z5t
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Oct 2018 16:34:26 +0200 (CEST)
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 21 Oct 2018 17:34:25 +0300
+Message-Id: <20181021143426.25760-2-bunk@stusta.de>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] libqmi: Add upstream fix for a 1.20.2 regression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,72 +25,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2018 23:29:27 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Oct 2018 14:34:26 -0000
 
-On 10/19/18 10:54 AM, Anders Roxell wrote:
-> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-> ---
->   .../recipes-benchmark/s-suite/s-suite_git.bb  | 30 +++++++++++++++++++
->   1 file changed, 30 insertions(+)
->   create mode 100644 meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> 
-> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> new file mode 100644
-> index 000000000000..77d172814065
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY = "Small collection of benchmarks for storage I/O"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
-> +
-> +SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
-> +PV = "0.0+git${SRCPV}"
-> +SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +# installing in /opt/S-suite since the package has
-> +# dependencies to the directory structure.
-> +do_install() {
-> +    install -d ${D}/opt/S-suite
-> +    for i in $(find ${S}/* -type d); do
-> +        install -d ${D}/opt/S-suite/$(basename $i)
-> +        install -m0755 -p ${S}/$(basename $i)/* ${D}/opt/S-suite/$(basename $i)
-> +    done
-> +
-> +    install -m0755 ${S}/config_params.sh ${D}/opt/S-suite
-> +    install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
-> +}
-> +
-> +RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
-> +
-> +FILES_${PN} = "/opt/S-suite/"
-> +
-> +# added to INSANE_SKIP since s-suite have an runtime
-> +# dependency (RDEPENDS) on libaio-dev.
-> +INSANE_SKIP_${PN} += "dev-deps"
-> 
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...-Don-t-create-invalid-wds-start-network-w.patch | 41 ++++++++++++++++++++++
+ .../recipes-connectivity/libqmi/libqmi_1.20.2.bb   |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
 
-Thanks for the submission but from:
-
-    https://github.com/Algodev-github/S
-
-    "These benchmarks have been written just for internal use,
-     and are more a yard than a well-finished work."
-
-
-That doesn't lead to a lot of confidence that these suite will
-be maintained for years. What's the value to meta-oe users to add
-this recipe compared to something that has been around for years
-if not decades such as Bonnie++:
-    https://layers.openembedded.org/layerindex/recipe/864/
-
-
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+new file mode 100644
+index 000000000..d230d6803
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+@@ -0,0 +1,41 @@
++From 8269f4d86927fbe19e78776a12736680fe9169b6 Mon Sep 17 00:00:00 2001
++From: Adrian Bunk <bunk@stusta.de>
++Date: Mon, 1 Oct 2018 16:53:31 +0300
++Subject: [PATCH] qmi-network: Don't create invalid --wds-start-network when
++ APN is not set
++
++In 1.20.2 the warning for this was turned into an error.
++
++(cherry picked from commit 289d8ad6419895e2e1fba3d78a54a0db65da521d)
++---
++Upstream-Status: Backport
++
++ utils/qmi-network.in | 12 +++++++-----
++ 1 file changed, 7 insertions(+), 5 deletions(-)
++
++diff --git a/utils/qmi-network.in b/utils/qmi-network.in
++index bf7bed9..a9e5299 100755
++--- a/utils/qmi-network.in
+++++ b/utils/qmi-network.in
++@@ -334,11 +334,13 @@ start_network ()
++ 
++     setup_data_format
++ 
++-    START_NETWORK_ARGS="apn='$APN'"
++-    if [ -n "$APN_USER" ]; then
++-        START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
++-        if [ -n "$APN_PASS" ]; then
++-            START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
+++    if [ -n "$APN" ]; then
+++        START_NETWORK_ARGS="apn='$APN'"
+++        if [ -n "$APN_USER" ]; then
+++            START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
+++            if [ -n "$APN_PASS" ]; then
+++                START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
+++            fi
++         fi
++     fi
++ 
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+index 3e08c4f9e..6811ce020 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+@@ -12,6 +12,7 @@ DEPENDS = "glib-2.0 libgudev libmbim glib-2.0-native"
+ inherit autotools pkgconfig bash-completion
+ 
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
++           file://0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch \
+            file://0001-Detect-clang.patch \
+            "
+ SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.11.0
+
 
