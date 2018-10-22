@@ -1,52 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id A1C3579C3A
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+	[209.85.221.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 5742460191
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2018 15:46:44 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id 206-v6so10822027wmb.5
+	Mon, 22 Oct 2018 15:48:00 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id f17-v6so13761831wrs.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2018 08:46:45 -0700 (PDT)
+	Mon, 22 Oct 2018 08:48:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
+	h=from:to:subject:date:message-id;
 	bh=zvB9YI8I5kynkFKjEG069izIktFC0qh5lRmsoITzs7Q=;
-	b=dJOac1xVxiPAicE2jKhc9abrsCqdsdvD9oaCjx+DaNMc8i8mL1cMjjYq95jK5sICFU
-	8Nc4QjT8oJIcN8AhFNEUd5Tf5z5cBq/USeeQos4gSXhUmwSgPrDe2rtYxav4goqjmjIm
-	dc8gVQGUxr5sGAo/ST4IMq9iNpamPsQtUK97vMp48m3RgxPZ1mxmim12r2wdqQTZqWH7
-	LUg3RIBY4poc8RKLoO/w3fSW5mj1qNVRdrbWHa9xHAe/8XT7kSLxT66FluXQ8qx5sbgi
-	KzIIaO0jurEN4yYPSj9Zslh49mHUeXrL29rjQOiyMBBw7M6n7zTioTM51JNsLZF5XSOz
-	hkNA==
+	b=ZCeXbCcaAJScC9fe3Kke0aCbDgIiS4KBghBbV3urKTTCL1BNqMVwABljfy/tRi4Cao
+	c2VaOwIIBm6IKRw4zfgpVG4lNI9te/WALQh49H7u3oejHOUfaXRBaU1sNXlhuZjRZAJP
+	eABvbmuYa/UzVyRxHMIUWP7rmJROXcMuAvL1cQaGRVV5QIFyO2q5Fhms+BagCleJoS6X
+	f3bb6W6XcfSdvc8zF3s1mPxrym2OMLfQ1ZRjPE4s4eWlP/gPyUIAInUlyTR1jTQLGzx0
+	E+o4sEfrVEAM5R674bHwxPFkGgMVfct/rE/D1Tke8mrTuvFO07v+WWyxuFct7I6EzPgS
+	QGNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
+	h=x-gm-message-state:from:to:subject:date:message-id;
 	bh=zvB9YI8I5kynkFKjEG069izIktFC0qh5lRmsoITzs7Q=;
-	b=temMxBvVXWntOEtbdYa5Palbkx7LQ5ItHgWH7+61SwPXPIUdEp7mpe8FUfTcvSFZkt
-	JDSBGsM2lyRYQC1C/8svHSwTod5U/i0D+tvG8Tm5q6gThq8OvTPqxyKIlRYN8amGBWkY
-	8mzcAxW44gSURfQpqUHaYbVrLrGh0VbxrYC/ufilCq2XikyK5uciU6MwtgB3rKE8aOpe
-	8rPXmUqBiX5AZdr0d3B0HiZrRABzg/M6d4LcL2MvHJUHn2iOpYKbqNLTL6H+fB+ECdeO
-	B2pGgVcTZNQdaUQNUSeRl/LYfk0qgK6CLDFUtCuQ7j459jBXJCIZUfQgDk8eKzwvJix5
-	GNxw==
-X-Gm-Message-State: ABuFfoiUc7RHiI17nep8idKbb3de34XyaoJT69ThUEU0TvQZmULfX2E7
-	LYyqdAHY6rl5yhv5tcsTxuZXSoePwNI=
-X-Google-Smtp-Source: ACcGV60iVtM26UAVJBG8XOTuenEZweMlXGqQneXtjY3lOsZsClQeVpU4g240sKQhfVC+HdAUAcAElQ==
-X-Received: by 2002:a1c:6355:: with SMTP id
-	x82-v6mr17108964wmb.145.1540223201409; 
-	Mon, 22 Oct 2018 08:46:41 -0700 (PDT)
+	b=btQ6XV6Wq1wxpZ/A0SAQNZBkK9deAzxtJ35lPIg6mfEG/X+evG8xXX5Z6Vp49T0iSp
+	gR+8v3cYqqhvoX6Y5msZwG17rasf9ebGgZxjs6YFAdS1QxH8XaF0j8eph6M1HeiZf8hk
+	Zp7cH7PayQ2pxXH4tCKXTxoY90FRyJhMpCLE36u+86tZiYHVc9DjLMf6iTDjQyJcRQp2
+	ynGFWcPMSCQVvE6OCrfxW4pFSIgYPLcH3pNWVEugwxRCCWTj/bZzHd6jd92tq0Z8XWHX
+	Pt3KUSSpRa9jXP2aRRgOoRCxI+XiksxacZPl7ZlwsXg3nMJCko5fN4G+Iu7epxvSsSt9
+	WH1g==
+X-Gm-Message-State: ABuFfohBqQZMgiVEoumUv2x7b5r/liK7sfa6Jd3ovgzzjaL4ZxjOt98P
+	mHAoYF7vTvbFTfMIhUocu1s/+yTvCTk=
+X-Google-Smtp-Source: ACcGV61mn/SCFj+fmUgCz87hu6kJHoFKne2Ojg6wAWVBj7CeCl/WznqgpjNnF8ELogUndLELErbgyg==
+X-Received: by 2002:a05:6000:8e:: with SMTP id
+	m14mr19846672wrx.302.1540223277539; 
+	Mon, 22 Oct 2018 08:47:57 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.event.pylonone.net ([185.7.230.214])
 	by smtp.gmail.com with ESMTPSA id
-	o201-v6sm20950634wmg.16.2018.10.22.08.46.39
+	143-v6sm25893153wmv.6.2018.10.22.08.47.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 22 Oct 2018 08:46:40 -0700 (PDT)
+	Mon, 22 Oct 2018 08:47:56 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Oct 2018 16:46:37 +0100
-Message-Id: <1540223197-8004-2-git-send-email-akuster808@gmail.com>
+Date: Mon, 22 Oct 2018 16:47:55 +0100
+Message-Id: <1540223275-8169-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1540223197-8004-1-git-send-email-akuster808@gmail.com>
-References: <1540223197-8004-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 2/2] postgresql: Fix build issue with timezone 2018f update
+Subject: [meta-oe][PATCH] postgresql: Fix build issue with timezone 2018f update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2018 15:46:45 -0000
+X-List-Received-Date: Mon, 22 Oct 2018 15:48:01 -0000
 
 Sync our copy of the timezone library with IANA release tzcode2018f.
 
