@@ -1,26 +1,49 @@
-Return-Path: <prvs=826889cc9=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BBA6744F2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A665F60191
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2018 13:14:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.54,412,1534802400"; 
-   d="scan'208";a="1743681"
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>, Andreas Obergschwandtner
-	<andreas.obergschwandtner@skidata.com>
-References: <20180925085538.24188-1-andreas.obergschwandtner@skidata.com>
-	<706876eeb67589b7a04d0243b91156ac480c6434.camel@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <515ae35f-d56a-571e-44b4-bcd3cb0133c4@skidata.com>
-Date: Mon, 22 Oct 2018 15:14:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
-MIME-Version: 1.0
-In-Reply-To: <706876eeb67589b7a04d0243b91156ac480c6434.camel@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH] openjdk-8-native: hotspot: handle format-overflow error for gcc >= 7
+	Mon, 22 Oct 2018 15:46:39 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id 143-v6so10769199wmf.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2018 08:46:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=mc31L9OWFi+aL4n44Rcc+hdYfbmDFV7juhhIv/yqhL4=;
+	b=dkMb+cf6lCzBfXcmtq99/n52Gs3kV432sFxZr71iLfhgMLVZ0dFggQheY9tb5Lea7e
+	cv2yWLm3dPdZkdfYUyaC27GhWDtOG/NpNJ0TsdWlYOPOZaI9WvMwmLXqG6JEdBQfTVk4
+	WByqhTTaLMTD+3kIh9DguAQmjTNKo3pkRZ7et07lei1V+Qf/1bVdePQfMKRwSOZDY3pW
+	DPSWOmLoD5pf3uHdRarmZYOskVbZWkVtDW9DplHSLx8WHp0HQPiYKz5axYPIwrNR3d0R
+	sjgl3XghAotzd4GZDudNUvgyUDAI14ISt8gFCzOxzxRd1Ly4IlU2jD5UzjzhzhBECI+F
+	xl3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=mc31L9OWFi+aL4n44Rcc+hdYfbmDFV7juhhIv/yqhL4=;
+	b=i/j8tpOpMHGrhWsfHAr5Lu+B6E0cEkA2S4CAfn+gYBX6R1DENuIngjUgUyFQUJfdGC
+	a/uYSGwe7/x+TRp5TApI6KgHwAWrlxX4Hy0SZKaSRQT0JYjYimq9b2rNMyY9sbfbK6G1
+	yPwgE7KuiMRHd1CRohvxlWelOEjgR40i2d+wiLz+oQ5Xs2t3Tf614/VLl6WigLEKnK3J
+	EXMou3bXgDsGmOJpC7JJZ/uVaHBRqcYHuoYNMIcKZo1Vq7c585UtpX7mH7vZNAWPcn39
+	P0vSO12bMJR3dJgbXKgx6KXvSJGwpL3gzX9eup+QmruktinJ9oPrdHpuDxx3S34JOatm
+	MuBg==
+X-Gm-Message-State: ABuFfoj8d3HkTG5BeQf4MQYAWvSZrMjKADJ8mP/fB8kTRvm9KlMTs1X4
+	5YJzlBV0jaevmGo4bUAJw4jfzEduP08=
+X-Google-Smtp-Source: ACcGV619Xhf7pb0PH5/atMbZfVukQvssAJzTVBNgqKya7YWDQ6SMTHmH+2fuGzaUhWc9mrKwEmAo0A==
+X-Received: by 2002:a1c:7c16:: with SMTP id
+	x22-v6mr15915605wmc.16.1540223199891; 
+	Mon, 22 Oct 2018 08:46:39 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.event.pylonone.net ([185.7.230.214])
+	by smtp.gmail.com with ESMTPSA id
+	o201-v6sm20950634wmg.16.2018.10.22.08.46.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 22 Oct 2018 08:46:39 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Oct 2018 16:46:36 +0100
+Message-Id: <1540223197-8004-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/2] blueman: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,38 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2018 13:14:51 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: de-AT
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 22 Oct 2018 15:46:40 -0000
 
-Hi André,
+Nothing RPROVIDES 'thunar'
 
-On 10/18/18 3:47 PM, André Draszik wrote:
-> Hi (Richard),
-> 
-> 
-> On Tue, 2018-09-25 at 10:55 +0200, Andreas Obergschwandtner wrote:
->> fixed the format-overflow warnings by patch affected files in
->> openjdk-8-hotspot
->>
->> Signed-off-by: Andreas Obergschwandtner <
->> andreas.obergschwandtner@skidata.com>
->> ---
->>   .../hotspot-handle-gcc7-format-overflow.patch | 25 +++++++++++++++++++
->>   1 file changed, 25 insertions(+)
->>   create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot-handle-
->> gcc7-format-overflow.patch
-> 
-> This patch seems to have been staged to master-next, but the patch is not
-> actually being used / referenced by the recipe.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-networking/recipes-connectivity/blueman/blueman_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Thanks for that catch!
-I also faced this problem now during the test build.
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_git.bb
+index 947db78..8eb99ed 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_git.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-native intltool-native"
+ 
+-inherit autotools systemd gsettings python3native gtk-icon-cache
++inherit autotools systemd gsettings python3native gtk-icon-cache distro_features_check
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI = " \
+     git://github.com/blueman-project/blueman.git \
+-- 
+2.7.4
 
-Therefore: Anreas, may you please send a v2? Thanks!
-
-Until then I'll remove it from master-next.
-
-regards;Richard.L
 
