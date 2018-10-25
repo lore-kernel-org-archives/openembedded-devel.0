@@ -1,48 +1,23 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com
-	[209.85.222.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 59048745D1
+Return-Path: <prvs=829e7dfac=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B56979101
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 13:47:01 +0000 (UTC)
-Received: by mail-ua1-f43.google.com with SMTP id g10so2424524uak.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 06:47:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZutHF793MqsnOCxmercORJdALqu5p+CLakphcZbbRfA=;
-	b=qHyCTQhAivC/ioFCEHBUlKMxLav1zLN2R+WipzPcE4le5rLAQVWAj0xnrTXqMmx7H3
-	jUe9YqiykpnfV40QPnDO1/2dhdCrMKWE6lRMpMBHRQMYUD52pbIovzfwUGiIYVIbwE1N
-	SLff64xSGUqJxM0EB0p1dn9iv8m5nTQ7TOpkX8l+4PrB+W4vlNdhDKjmvc3Ql0OKnqJJ
-	KW0kYIwFRfsk8De7iB6QqGrgFOdnzPWmfUIXWwyjQJ62tUKVDgMROYk0Ml3blKRMk03W
-	lW1nmwhg7RQdCiWaIAFOvINu8TuGPB/9gG83HCpcS/Pm/9Zop6tPVYs5o0Dq24u6HVFJ
-	FM/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZutHF793MqsnOCxmercORJdALqu5p+CLakphcZbbRfA=;
-	b=c5tzXUxfwSqnUAg/7wevBHuc0NEmttSB7U2JWBtxKuel/bmUiy5KIIigU/J3b+17Md
-	re5iGqdaxh1q9mydHI0Edb4rmgqJwfWMyFo5IbN0nSqIIc1E8FO3gyCS0WqDwwF0pdVe
-	Faqd/bk8YWbvYIwv1C71cirXD6ZMbSJJAtShG120zppN/1ENCwTb0LMuDbdLqKmkFWXn
-	Rw/NXtNpzvgYYZ1VRXFWTt6akkaKdAbKk1ve6ds5+jR6xxu7KwqEEssW9lOO+VFJ1NiZ
-	3luILZK0rYwuon/8FbUfrisvdWHHuO5SYBkbSk6f0Q2moZlcht7ombX53nGbFDXhjfO6
-	NWEw==
-X-Gm-Message-State: AGRZ1gIMHusUXWw3OjzWlm/5B08TFtHvjF6VzZoMB4wKnNs3Qe4nzRqr
-	u58bsUHnHWSbjW1HYcKzOvcstOPLiI3nChheea2O2BBY
-X-Google-Smtp-Source: AJdET5eMmSh4ZBGG0B8cJQuuepadKj1F12Dxh2FTWwAC56UEg7ryobMNraUH7YEjt2x8U4DDm5OhYZhuvRQ9qZCdtzU=
-X-Received: by 2002:ab0:15c5:: with SMTP id j5mr670733uae.50.1540475221722;
-	Thu, 25 Oct 2018 06:47:01 -0700 (PDT)
+	Thu, 25 Oct 2018 16:50:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.54,425,1534802400"; 
+   d="scan'208";a="1759236"
+To: <openembedded-devel@lists.openembedded.org>
+References: <20181023080310.1122-1-andreas.obergschwandtner@skidata.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <7632b429-608b-5c49-f995-bcd46abc635d@skidata.com>
+Date: Thu, 25 Oct 2018 18:50:48 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.0
 MIME-Version: 1.0
-References: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
-	<ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
-In-Reply-To: <ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
-From: Kyle Russell <bkylerussell@gmail.com>
-Date: Thu, 25 Oct 2018 09:46:50 -0400
-Message-ID: <CAFrQVPOGaOJO7rBHeeFgQ_yz2TgbqxM_vcwMiSN3v3NF4fJOag@mail.gmail.com>
-To: richard.leitner@skidata.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-java configuration
+In-Reply-To: <20181023080310.1122-1-andreas.obergschwandtner@skidata.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH v2] openjdk-8-native: hotspot: handle format-overflow error for gcc >= 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +30,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 13:47:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 25 Oct 2018 16:50:49 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: de-AT
+Content-Transfer-Encoding: 7bit
 
-Hi Richard,
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-Thanks for your reply.
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-On Thu, Oct 25, 2018 at 9:09 AM Richard Leitner <richard.leitner@skidata.com>
-wrote:
+If you have any questions, please let me know.
 
-> > A few years ago, it looked like
-> > there was an attempt to allow openjdk-8-native to provide
-> > virtual/javac-native, but it has since been reverted.
->
-> As I'm not into the meta-java stuff that long I do not know anything
-> about it... Do you have any pointers to ML discussions?
->
+regards;Richard.L
 
-Yes, I was specifically referring to
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=dfb21b449dd652b99bc4725796d143e8c9779cd6
-.
-
-
-> Yeah, ecj is needed for bootstrapping the jdk. For more details please
-> take a look at docs/bootstrap-flow.txt.
-
-
-Thanks!  I actually had missed that doc and was just looking at the README.
-
-
-> AFAIK currently using openjdk-8-native seems like the only solution.
->
-Nonetheless I'm open for any patches to enhance this behaviour ;-)
->
-
-Ok, I will try to keep my eyes open for possibilities.  I didn't see any
-documentation that described how to compile java code from other layers
-using recent JDKs provided by meta-java, so I was looking for validation
-that I was on the right track. :)  If I come up something I think would be
-an enhancement, I'll send out a proposal.
-
-Thanks again!
-Kyle
+On 10/23/18 10:03 AM, Andreas Obergschwandtner 
+<andreas.obergschwandtner@skidata.com> wrote:
+> fixed the format-overflow warnings by patch affected files in
+> openjdk-8-hotspot
+> 
+> Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+> ---
+> Changes v2:
+> 	+ add the patch reference to the openjdk-8-release-172b11-common.inc
+> ---
+>   .../openjdk-8-release-172b11-common.inc       |  1 +
+>   .../hotspot-handle-gcc7-format-overflow.patch | 25 +++++++++++++++++++
+>   2 files changed, 26 insertions(+)
+>   create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> index 0cda4bb..ad20585 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> @@ -20,6 +20,7 @@ PATCHES_URI = "\
+>       ${HOTSPOT_UB_PATCH} \
+>       ${LIBPNG_NEON_PATCH} \
+>       file://handle_extra_output.patch \
+> +    file://hotspot-handle-gcc7-format-overflow.patch \
+>   "
+>   HOTSPOT_UB_PATCH = "\
+>       file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch b/recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch
+> new file mode 100644
+> index 0000000..83626b3
+> --- /dev/null
+> +++ b/recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch
+> @@ -0,0 +1,25 @@
+> +# HG changeset patch
+> +# User Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+> +# Date 1537519446 -7200
+> +#      Fri Sep 21 10:44:06 2018 +0200
+> +# Node ID 213da2c3ee54a558abd30b0230afa40d4b4e7f83
+> +# Parent  80ee2541504ec08d65da9d968a18a00a69858ce0
+> +Handle format error for GCC >= 7
+> +
+> +diff --git a/hotspot/src/share/vm/adlc/output_c.cpp b/hotspot/src/share/vm/adlc/output_c.cpp
+> +--- a/hotspot/src/share/vm/adlc/output_c.cpp
+> ++++ b/hotspot/src/share/vm/adlc/output_c.cpp
+> +@@ -436,9 +436,11 @@
+> +   for (i = maxcycleused; i > 0; i /= 10)
+> +     cycledigit++;
+> +
+> +-  int maskdigit = 0;
+> +-  for (i = rescount; i > 0; i /= 10)
+> ++  int maskdigit = 1;
+> ++  for (i = rescount / 10; i > 0; i /= 10)
+> +     maskdigit++;
+> ++  if (maskdigit > 10)
+> ++    maskdigit = 10;
+> +
+> +   static const char* pipeline_use_cycle_mask = "Pipeline_Use_Cycle_Mask";
+> +   static const char* pipeline_use_element    = "Pipeline_Use_Element";
+> 
 
