@@ -1,49 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 28550796E4
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 65F8779867
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 20:40:15 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id l9-v6so11548357qtj.12
+	Thu, 25 Oct 2018 20:49:28 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id t6-v6so4383085plo.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 13:40:16 -0700 (PDT)
+	Thu, 25 Oct 2018 13:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=inTZ+jtiIq3wlowoaKzL6UmzUmMFYBez0qhut03kU54=;
-	b=NUqzq3+pQCeYecuPyVnCIahVzzHVcS4/nmWh/I7NxC9Y9oBr5agQMjYhHWKIoO/LbQ
-	NoXll5BOv7jguTITabFMfBlMC48xWz/U60PEbbUHxbf0mVC24suVS9P8YovXvX0eFlPj
-	Zw0KZYjXTEYAVHWf5BpI59+bXWdbjAHDuNnRL7yTNrDuW0pLrf6B4w4zWVTacH3lfKba
-	apaIqAb5Fw2ERPrJEEZ+5B7iOK9h+6G5ttG451J4XPxvkIJiZPTp0PI4xZ4k/ayzRwBT
-	bq3M4F9851tJuBOxmK3ZUjSZK+Qd0cBEq6XrqujMDFZKXfO6eFfEJ0C5cXe1UPHl8cLD
-	zdhw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=KJB1qBn0wSNidnA1xFGAt5Rr7sdsxqHd2ZLg+ZaBCQM=;
+	b=B7Wxi8oX5fyzLLD/PI2WJ0glTiEbM4/o8J4AWBBfGG+J4+cRnkguSX9jf8Ra5QY4Ii
+	1JshXnF43w6xh9+jW/e9bTCW9nnuwio9oZ2FqD+pI15IKbJjC0pt1WN566LWd91wLJtN
+	ZwkHML8BxF9Z/ZmwFFilhYzjtvkgNpnbFFTaio/thpgMjU2Fq1v8Q7CWJWogvtSX523f
+	Wi7aEGM7bTzb0RGkOiubnlSPfCopSjTiPmdvkTtSQ6QXr8P5+cEVnpXIl4PfZxuQzWcv
+	oLw8EcBLFsIO5AcLYYstz2iGUUJTz+dQpPgiDGPVT+/q7Wdq9ZjcYNjVAGLTcTwC3yu1
+	pThg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=inTZ+jtiIq3wlowoaKzL6UmzUmMFYBez0qhut03kU54=;
-	b=ZQRjcxEBuPVqP+xJ52Yi5PNj35UfES66em72YA4VUdAyLDcjEv0lVnbJQ5Pv+rYNYq
-	0ie6+OMCHBToqvfR8YVQdhovSRldtapgON+qxJlxwv/x4q5vqsYbj1i/xbTQfrAC8niw
-	dGNCfHAqgKwgGEvvw+RCOza/lu/zwvaa+z9VR7MuS5VaOZxMkobf5nnzkrGptvtjFM0c
-	MZlyMEJDQtPUr1ALh8/J/PM1Ei2WjYiC1L1ROgF+lTcSjOZHoqsLDVB/4nKCPynnS17D
-	+9B+PXY/yfWiibi+/DyzovDZJ2J6lGntCdLJmQ7+rsY/JpoY6zkJZWLBd7y6y6VNTPV7
-	vb/Q==
-X-Gm-Message-State: AGRZ1gJ+gIlHxcS7R6izri+/Q+J2bcwBhIB0Ykf5n3FqSAiq9e62Vzlc
-	aJ/WLdUTfuxU99ANJuRfLYO1eJQCDcYkGB1E2Ec=
-X-Google-Smtp-Source: AJdET5c4fGb/t0q2ZkiaRQRmPT0YtNiaJshgX1JadfZ7xfFoE2hC2yRYygwmfi1R8OYIyrJXNy9DW+hjFSr3O0GZLHU=
-X-Received: by 2002:ac8:16e4:: with SMTP id
-	y33-v6mr729445qtk.253.1540500015730; 
-	Thu, 25 Oct 2018 13:40:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20181024084359.26705-1-max+openembedded@blarg.de>
-	<20181024084359.26705-2-max+openembedded@blarg.de>
-In-Reply-To: <20181024084359.26705-2-max+openembedded@blarg.de>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=KJB1qBn0wSNidnA1xFGAt5Rr7sdsxqHd2ZLg+ZaBCQM=;
+	b=lNvWyfgew0PPGjDQQVBLC0mlOJXHDauwZWbqflTxzTAy9c9mVJFkLcueZg504bVr/l
+	CPnt+58mHkYK3CRj02pb9P7Z7JrwVfUreexoyoUQjZKXHs2L3jyZBEPlIA56SCDti3YJ
+	ocY5DAKQSg2UUeE7i45cYVptDa42A/EViQXhcqty0gP+myfDk7qxZFfStWk41/VkiPXt
+	EPpdMLWeDWorFjnKerUv4pvhtdwzmWkM1DBGGVlzUQw7H4YNadw7n60tpWoxDLvgY9jP
+	XobhS86xdxz2du+XFFDyCmaIzR+lxySsxH1Sv9KWOAuhw1K0SeEt+UC4wQpRhHSkrGms
+	/pjw==
+X-Gm-Message-State: AGRZ1gJIqlSaqiDIUOoRVNw1wzciaDR5iW7CEr0YLemN+jcyqheIvqno
+	cLmmkFOoE1ovGMAgJ9vX4Y/zHoQxe9tE8g==
+X-Google-Smtp-Source: AJdET5c2LSZ8xW7x/T5PsvGv70n2mC2CPKGZHPj10rXgVjHFR9kc+JY17aDfBpIZ8wxIIKlMclaQYQ==
+X-Received: by 2002:a17:902:b109:: with SMTP id
+	q9-v6mr674166plr.83.1540500569088; 
+	Thu, 25 Oct 2018 13:49:29 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::2f5b])
+	by smtp.gmail.com with ESMTPSA id
+	p19-v6sm2540228pff.172.2018.10.25.13.49.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 25 Oct 2018 13:49:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 25 Oct 2018 21:39:49 +0100
-Message-ID: <CAMKF1soDenc53hMO1mNvxfq4xG8FVWigink4GAgF1D=MKJrDGA@mail.gmail.com>
-To: max+openembedded@blarg.de
-Cc: Max Kellermann <max.kellermann@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] mpd: update to 0.20.22
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Oct 2018 13:49:15 -0700
+Message-Id: <20181025204915.22540-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libgit2: Upgrade to 0.27.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +58,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 20:40:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 25 Oct 2018 20:49:28 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 24, 2018 at 9:44 AM Max Kellermann
-<max+openembedded@blarg.de> wrote:
->
-> From: Max Kellermann <max.kellermann@gmail.com>
->
-> ---
->  .../musicpd/{mpd_0.20.21.bb => mpd_0.20.22.bb}                  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.20.21.bb => mpd_0.20.22.bb} (98%)
->
-> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-> similarity index 98%
-> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-> index d4edd5b31..504b9ef56 100644
-> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-> @@ -20,7 +20,7 @@ SRC_URI = " \
->      git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
->      file://mpd.conf.in \
->  "
-> -SRCREV = "98afae2520fbe5a322f803335b3142612fda4762"
-> +SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
+add missing dep on libgcrypt
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Fails to build
-http://errors.yoctoproject.org/Errors/Details/197399/
+diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
+index 59fb09c65b..e7f7688922 100644
+--- a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
++++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://libgit2.github.com/"
+ LICENSE = "GPL-2.0-with-GCC-exception & MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+ 
+-DEPENDS = "curl openssl zlib libssh2"
++DEPENDS = "curl openssl zlib libssh2 libgcrypt"
+ 
+ SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
+-#v0.27.4
+-SRCREV = "8b89f362a34fcccdf1c6c5f3445895b71d9c6d56"
++#v0.27.5
++SRCREV = "8e0b172981a046d19f1d9efa5acd6186bccbd3ce"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.19.1
 
->  S = "${WORKDIR}/git"
->
->  EXTRA_OECONF = "enable_bzip2=yes"
-> --
-> 2.19.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
