@@ -1,48 +1,22 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CEF479C00
+Return-Path: <prvs=829e7dfac=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id F01B971C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 10:01:21 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id y16so8652730wrw.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 03:01:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=hCUAqVBaqDEgYDpek5bU7GeUi2nKLhWjBHEZBTQT34U=;
-	b=b46X5qBSWKvhsjTfHiayiInu6toQC2ibpa2t2iA8pj7CIp1ck3fnn7IiddUyenRN+E
-	E9pOr2WrduZbufJ2OFDVNBm86dDE2MV1P3vXvZnsUHT6QGUIAWxbZJ2nY1hCKu5lq0gn
-	1krWAQw3HuNLUaZi86MWmbpcCWPCevwM6gIDUgSMflGHDK3EkZEzXVSQFtHQmSdT1LWY
-	qGMLCG7KedYnL75RxkJZd+sbvpdwJ6c7nO4YAo6F3+TGPHM/XXtkqsN2C5lqEU6q8A5v
-	oNK7rZR/mB2FQ+SlQbv1DDss6CcVg6CwQzVYp5oHxwv8QD/GQVxiV8t713QoaQ8spfOI
-	uZBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hCUAqVBaqDEgYDpek5bU7GeUi2nKLhWjBHEZBTQT34U=;
-	b=mOHZ7TsQ9AqyVnX8vt2Toaqi91n0UBEJB3Euq1lxIh6r2qguyuhdQLPDANg4UTnPs/
-	S/CZZN/2AK5B+kpj+vYwS07RPf0v7baR7B2YZzLaAOm9S7k8f02rHtUT45Poir9J8Ipq
-	rqmPykRRhZIThCxRdHY7iUniytTp7yaCNSuoGqzTYDzs4V1i/qM3ariSPB3y4QJffQbE
-	0KjZQGZllxf7XuRI7LZNa/WL71ZWKkfwH5uSen2rhW2y5AozN3bLc0pX1aNa2iR5x6t7
-	EauYtw5mGKNDvzHi2RAT/hemHlvSag+JIO88bUFbpwkpEJtxIg/MeaOeOo42u13Izpf/
-	c+Zg==
-X-Gm-Message-State: AGRZ1gLnUQ0gT4ix6bvuQsiEUvJQlPT/KTsLhzMoYjBNF3oT7apQ2K2O
-	9N2OTLS9S5LjmekRw3RPckTJ88Df
-X-Google-Smtp-Source: AJdET5eHDLKbz4LpNKKA52Qgph0Gh8fR3crtON5mQEfHANtt0l3d3/BTammagaDnPbnAg69twbZ9dg==
-X-Received: by 2002:adf:8909:: with SMTP id
-	s9-v6mr1158510wrs.309.1540461681791; 
-	Thu, 25 Oct 2018 03:01:21 -0700 (PDT)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (a-ii1-78.tin.it.
-	[212.216.139.141])
-	by smtp.gmail.com with ESMTPSA id j13sm719410wrx.5.2018.10.25.03.01.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 Oct 2018 03:01:20 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2018 12:01:10 +0200
-Message-Id: <1540461670-6802-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] redis: fix build for qemuarm disabling atomics
+	Thu, 25 Oct 2018 13:09:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.54,424,1534802400"; d="scan'208";a="13066398"
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
+Date: Thu, 25 Oct 2018 15:09:40 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.0
+MIME-Version: 1.0
+In-Reply-To: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: meta-java configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +29,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 10:01:21 -0000
+X-List-Received-Date: Thu, 25 Oct 2018 13:09:42 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: de-AT
+Content-Transfer-Encoding: 7bit
 
-Apply the same patch used for mips.
+Hi Kyle,
 
-Fix
-  |ld: networking.o: in function `createClient':
-  | /usr/src/debug/redis/4.0.8-r0/redis-4.0.8/src/networking.c:93:
-     undefined reference to `__atomic_fetch_add_8'
+On 10/24/18 11:15 PM, Kyle Russell wrote:
+> It looks like the only javac that meta-java exposes through its bbclasses
+> comes from libecj-bootstrap-native 3.6.2.  
+That's definitely true.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-oe/recipes-extended/redis/redis_4.0.8.bb | 1 +
- 1 file changed, 1 insertion(+)
+> A few years ago, it looked like
+> there was an attempt to allow openjdk-8-native to provide
+> virtual/javac-native, but it has since been reverted.
 
-diff --git a/meta-oe/recipes-extended/redis/redis_4.0.8.bb b/meta-oe/recipes-extended/redis/redis_4.0.8.bb
-index b6f37e9..80d36d2 100644
---- a/meta-oe/recipes-extended/redis/redis_4.0.8.bb
-+++ b/meta-oe/recipes-extended/redis/redis_4.0.8.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
- "
- 
- SRC_URI_append_mips = " file://remove-atomics.patch"
-+SRC_URI_append_arm = " file://remove-atomics.patch"
- 
- SRC_URI[md5sum] = "c75b11e4177e153e4dc1d8dd3a6174e4"
- SRC_URI[sha256sum] = "ff0c38b8c156319249fec61e5018cf5b5fe63a65b61690bec798f4c998c232ad"
--- 
-2.7.4
+As I'm not into the meta-java stuff that long I do not know anything 
+about it... Do you have any pointers to ML discussions?
 
+> 
+> I think I understand libecj is needed as part of the bootstrap process to
+> build openjdk, but if other layers want to build newer java code using
+> javac from openjdk 8 once available after bootstrap, does meta-java provide
+> support for using javac from openjdk-8-native, or is the expectation that
+> other layers would depend directly on openjdk-8-native and setup
+> EXTRANATIVEPATH as needed to reach its tools?
+
+Yeah, ecj is needed for bootstrapping the jdk. For more details please 
+take a look at docs/bootstrap-flow.txt.
+
+AFAIK currently using openjdk-8-native seems like the only solution. 
+Nonetheless I'm open for any patches to enhance this behaviour ;-)
+
+> 
+> Maybe this is planned future work, but I wanted to make sure I was
+> configuring the layer correctly and using it as intended.
+
+Currently (at least) I'm not having any future plans in this direction, 
+but as mentioned above I'm open for discussions and/or patches!
+
+> 
+> Thanks!
+> 
+> Kyle
+> 
+
+hope that helps...
+
+regards;Richard.L
 
