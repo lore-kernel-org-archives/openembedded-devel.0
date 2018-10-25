@@ -1,33 +1,49 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4908878F72
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 28550796E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 18:17:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9PIGsFV026176
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 25 Oct 2018 11:17:15 -0700
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Thu, 25 Oct 2018 11:17:04 -0700
-To: Paolo Valente <paolo.valente@linaro.org>, Anders Roxell
-	<anders.roxell@linaro.org>
-References: <20181019145416.8021-1-anders.roxell@linaro.org>
-	<407614ae-de48-8832-e3ad-1ab130f8c826@windriver.com>
-	<CAMKF1spNk9udbn+_jr2GBA7r0cmZU2Yjny1zPdds8v5QxcwGtQ@mail.gmail.com>
-	<CADYN=9+7AwJAPhr-59fU5nKTySat=auW6_ab-1WkAjpn4qYksQ@mail.gmail.com>
-	<EC41D389-8D01-4486-A739-E2B838B05692@linaro.org>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <f5c6f7be-c0c6-e06a-e16f-d7bc94df14cd@windriver.com>
-Date: Thu, 25 Oct 2018 14:17:02 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Thu, 25 Oct 2018 20:40:15 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id l9-v6so11548357qtj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Oct 2018 13:40:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=inTZ+jtiIq3wlowoaKzL6UmzUmMFYBez0qhut03kU54=;
+	b=NUqzq3+pQCeYecuPyVnCIahVzzHVcS4/nmWh/I7NxC9Y9oBr5agQMjYhHWKIoO/LbQ
+	NoXll5BOv7jguTITabFMfBlMC48xWz/U60PEbbUHxbf0mVC24suVS9P8YovXvX0eFlPj
+	Zw0KZYjXTEYAVHWf5BpI59+bXWdbjAHDuNnRL7yTNrDuW0pLrf6B4w4zWVTacH3lfKba
+	apaIqAb5Fw2ERPrJEEZ+5B7iOK9h+6G5ttG451J4XPxvkIJiZPTp0PI4xZ4k/ayzRwBT
+	bq3M4F9851tJuBOxmK3ZUjSZK+Qd0cBEq6XrqujMDFZKXfO6eFfEJ0C5cXe1UPHl8cLD
+	zdhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=inTZ+jtiIq3wlowoaKzL6UmzUmMFYBez0qhut03kU54=;
+	b=ZQRjcxEBuPVqP+xJ52Yi5PNj35UfES66em72YA4VUdAyLDcjEv0lVnbJQ5Pv+rYNYq
+	0ie6+OMCHBToqvfR8YVQdhovSRldtapgON+qxJlxwv/x4q5vqsYbj1i/xbTQfrAC8niw
+	dGNCfHAqgKwgGEvvw+RCOza/lu/zwvaa+z9VR7MuS5VaOZxMkobf5nnzkrGptvtjFM0c
+	MZlyMEJDQtPUr1ALh8/J/PM1Ei2WjYiC1L1ROgF+lTcSjOZHoqsLDVB/4nKCPynnS17D
+	+9B+PXY/yfWiibi+/DyzovDZJ2J6lGntCdLJmQ7+rsY/JpoY6zkJZWLBd7y6y6VNTPV7
+	vb/Q==
+X-Gm-Message-State: AGRZ1gJ+gIlHxcS7R6izri+/Q+J2bcwBhIB0Ykf5n3FqSAiq9e62Vzlc
+	aJ/WLdUTfuxU99ANJuRfLYO1eJQCDcYkGB1E2Ec=
+X-Google-Smtp-Source: AJdET5c4fGb/t0q2ZkiaRQRmPT0YtNiaJshgX1JadfZ7xfFoE2hC2yRYygwmfi1R8OYIyrJXNy9DW+hjFSr3O0GZLHU=
+X-Received: by 2002:ac8:16e4:: with SMTP id
+	y33-v6mr729445qtk.253.1540500015730; 
+	Thu, 25 Oct 2018 13:40:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <EC41D389-8D01-4486-A739-E2B838B05692@linaro.org>
-X-Originating-IP: [172.25.44.4]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] add a storage I/O benchmark test suite
+References: <20181024084359.26705-1-max+openembedded@blarg.de>
+	<20181024084359.26705-2-max+openembedded@blarg.de>
+In-Reply-To: <20181024084359.26705-2-max+openembedded@blarg.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 25 Oct 2018 21:39:49 +0100
+Message-ID: <CAMKF1soDenc53hMO1mNvxfq4xG8FVWigink4GAgF1D=MKJrDGA@mail.gmail.com>
+To: max+openembedded@blarg.de
+Cc: Max Kellermann <max.kellermann@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/2] mpd: update to 0.20.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,149 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 18:17:56 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Oct 2018 20:40:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 10/25/18 1:46 PM, Paolo Valente wrote:
-> [RESENDING: FIRST ATTEMPT REJECTED BECAUSE I WAS NOT SUBSCRIBED TO THE LIST]
-> 
->> Il giorno 23 ott 2018, alle ore 15:33, Anders Roxell <anders.roxell@linaro.org> ha scritto:
->>
->> CCing in the package maintainer.
->>
-> 
-> Thanks Anders, hi everybody,
-> 
->> On Sun, 21 Oct 2018 at 17:10, Khem Raj <raj.khem@gmail.com> wrote:
->>>
->>> On Sun, Oct 21, 2018 at 12:29 AM Randy MacLeod
->>> <randy.macleod@windriver.com> wrote:
->>>>
->>>> On 10/19/18 10:54 AM, Anders Roxell wrote:
->>>>> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
->>>>> ---
->>>>> .../recipes-benchmark/s-suite/s-suite_git.bb  | 30 +++++++++++++++++++
->>>>> 1 file changed, 30 insertions(+)
->>>>> create mode 100644 meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>
->>>>> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>> new file mode 100644
->>>>> index 000000000000..77d172814065
->>>>> --- /dev/null
->>>>> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>> @@ -0,0 +1,30 @@
->>>>> +SUMMARY = "Small collection of benchmarks for storage I/O"
->>>>> +LICENSE = "GPLv2"
->>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
->>>>> +
->>>>> +SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
->>>>> +PV = "0.0+git${SRCPV}"
->>>>> +SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
->>>>> +
->>>>> +S = "${WORKDIR}/git"
->>>>> +
->>>>> +# installing in /opt/S-suite since the package has
->>>>> +# dependencies to the directory structure.
->>>>> +do_install() {
->>>>> +    install -d ${D}/opt/S-suite
->>>>> +    for i in $(find ${S}/* -type d); do
->>>>> +        install -d ${D}/opt/S-suite/$(basename $i)
->>>>> +        install -m0755 -p ${S}/$(basename $i)/* ${D}/opt/S-suite/$(basename $i)
->>>>> +    done
->>>>> +
->>>>> +    install -m0755 ${S}/config_params.sh ${D}/opt/S-suite
->>>>> +    install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
->>>>> +}
->>>>> +
->>>>> +RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
->>>>> +
->>>>> +FILES_${PN} = "/opt/S-suite/"
->>>>> +
->>>>> +# added to INSANE_SKIP since s-suite have an runtime
->>>>> +# dependency (RDEPENDS) on libaio-dev.
->>>>> +INSANE_SKIP_${PN} += "dev-deps"
->>>>>
->>>>
->>>> Thanks for the submission but from:
->>>>
->>>>    https://github.com/Algodev-github/S
->>>>
->>>>    "These benchmarks have been written just for internal use,
->>>>     and are more a yard than a well-finished work."
->>>>
->>>>
->>>> That doesn't lead to a lot of confidence that these suite will
->>>> be maintained for years.
-> 
-> Gosh.  I put that disclaimer in the README when I first wrote it more
-> than 10 years ago.  After then, thousands of changes have been made by
-> me and many other contributors.  Unfortunately, I put the suite on
-> GitHub only recently.  But as you can see from the log, there have
-> been 448 commits in (less than) the last five months.
-> 
-> In addition, the S suite is now used in a new Phoronix benchmark and
-> in a new mmtests benchmark.
-
-Ah, good to know.
-
-> 
-> So, believe me, the S suite ATM is definitely in good shape, and seems
-> to be here to stay.
-> 
-> I'll remove that line, right after finishing a non-trivial new commit
-> I'm working on.
-> 
->>>> What's the value to meta-oe users to add
->>>> this recipe compared to something that has been around for years
->>>> if not decades such as Bonnie++:
->>>>    https://layers.openembedded.org/layerindex/recipe/864/
->>>>
->>>
-> 
-> The added value is that bonnie++ does not perform *any* of the benchmarks in the S suite, apart from that on throughput. I have made the S suite, many years ago, because I needed to run benchmarks that no suite provided. Here are some examples:
-> - start-up times of real applications under real background workloads
-> - playback quality (drop rate) of video and audio under real background workloads
-> - speed of code-development tasks (make, git checkout, git merge, git
->   grep) under real background workloads, plus measurement of system
->   responsiveness while one of these dev tasks is executed
-> - minimum per-client bandwidth guaranteed to a set of clients doing
->   any possible type of I/O
-> - maximum per-client latency guaranteed to a set of clients doing any
->   possible type of I/O
-> 
-> For any doubt, here I am.
-
-Thanks for the background Paolo.
-
-Perhaps when you get to the clean-up work, you will simplify the
-README based on your list above, move the details to another file
-and mention it at the end of the README.
-
-I withdraw my objection; this looks like a very useful
-set of benchmarks. Long live Algodev-github/S. ;-)
-
-../Randy
-
-> 
-> Thanks,
-> Paolo
-> 
->>> how I read this is that they have not made proper installation
->>> targets and its dependencies or letting user know of the dependencies
->>> which actually is not a problem with OE since both
->>> of these would be taken care of in the recipe with
->>> do_install and DEPENDS
->>
->> Do you mean DEPENDS or RDEPENDS?
->>
->> Cheers,
->> Anders
-> 
+On Wed, Oct 24, 2018 at 9:44 AM Max Kellermann
+<max+openembedded@blarg.de> wrote:
+>
+> From: Max Kellermann <max.kellermann@gmail.com>
+>
+> ---
+>  .../musicpd/{mpd_0.20.21.bb => mpd_0.20.22.bb}                  | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.20.21.bb => mpd_0.20.22.bb} (98%)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+> similarity index 98%
+> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+> index d4edd5b31..504b9ef56 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+> @@ -20,7 +20,7 @@ SRC_URI = " \
+>      git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
+>      file://mpd.conf.in \
+>  "
+> -SRCREV = "98afae2520fbe5a322f803335b3142612fda4762"
+> +SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
 
 
--- 
-# Randy MacLeod
-# Wind River Linux
+Fails to build
+http://errors.yoctoproject.org/Errors/Details/197399/
+
+>  S = "${WORKDIR}/git"
+>
+>  EXTRA_OECONF = "enable_bzip2=yes"
+> --
+> 2.19.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
