@@ -1,21 +1,47 @@
-Return-Path: <prvs=829e7dfac=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id F01B971C54
+Return-Path: <krussell7711@gmail.com>
+Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com
+	[209.85.222.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 59048745D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 13:09:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.54,424,1534802400"; d="scan'208";a="13066398"
-To: <openembedded-devel@lists.openembedded.org>
-References: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
-Date: Thu, 25 Oct 2018 15:09:40 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
+	Thu, 25 Oct 2018 13:47:01 +0000 (UTC)
+Received: by mail-ua1-f43.google.com with SMTP id g10so2424524uak.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Oct 2018 06:47:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ZutHF793MqsnOCxmercORJdALqu5p+CLakphcZbbRfA=;
+	b=qHyCTQhAivC/ioFCEHBUlKMxLav1zLN2R+WipzPcE4le5rLAQVWAj0xnrTXqMmx7H3
+	jUe9YqiykpnfV40QPnDO1/2dhdCrMKWE6lRMpMBHRQMYUD52pbIovzfwUGiIYVIbwE1N
+	SLff64xSGUqJxM0EB0p1dn9iv8m5nTQ7TOpkX8l+4PrB+W4vlNdhDKjmvc3Ql0OKnqJJ
+	KW0kYIwFRfsk8De7iB6QqGrgFOdnzPWmfUIXWwyjQJ62tUKVDgMROYk0Ml3blKRMk03W
+	lW1nmwhg7RQdCiWaIAFOvINu8TuGPB/9gG83HCpcS/Pm/9Zop6tPVYs5o0Dq24u6HVFJ
+	FM/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ZutHF793MqsnOCxmercORJdALqu5p+CLakphcZbbRfA=;
+	b=c5tzXUxfwSqnUAg/7wevBHuc0NEmttSB7U2JWBtxKuel/bmUiy5KIIigU/J3b+17Md
+	re5iGqdaxh1q9mydHI0Edb4rmgqJwfWMyFo5IbN0nSqIIc1E8FO3gyCS0WqDwwF0pdVe
+	Faqd/bk8YWbvYIwv1C71cirXD6ZMbSJJAtShG120zppN/1ENCwTb0LMuDbdLqKmkFWXn
+	Rw/NXtNpzvgYYZ1VRXFWTt6akkaKdAbKk1ve6ds5+jR6xxu7KwqEEssW9lOO+VFJ1NiZ
+	3luILZK0rYwuon/8FbUfrisvdWHHuO5SYBkbSk6f0Q2moZlcht7ombX53nGbFDXhjfO6
+	NWEw==
+X-Gm-Message-State: AGRZ1gIMHusUXWw3OjzWlm/5B08TFtHvjF6VzZoMB4wKnNs3Qe4nzRqr
+	u58bsUHnHWSbjW1HYcKzOvcstOPLiI3nChheea2O2BBY
+X-Google-Smtp-Source: AJdET5eMmSh4ZBGG0B8cJQuuepadKj1F12Dxh2FTWwAC56UEg7ryobMNraUH7YEjt2x8U4DDm5OhYZhuvRQ9qZCdtzU=
+X-Received: by 2002:ab0:15c5:: with SMTP id j5mr670733uae.50.1540475221722;
+	Thu, 25 Oct 2018 06:47:01 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex5srv.skidata.net (192.168.111.83)
+References: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
+	<ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
+In-Reply-To: <ba624040-6e9d-3fc2-d239-9eea5e15273e@skidata.com>
+From: Kyle Russell <bkylerussell@gmail.com>
+Date: Thu, 25 Oct 2018 09:46:50 -0400
+Message-ID: <CAFrQVPOGaOJO7rBHeeFgQ_yz2TgbqxM_vcwMiSN3v3NF4fJOag@mail.gmail.com>
+To: richard.leitner@skidata.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: meta-java configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -29,53 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 13:09:42 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: de-AT
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Oct 2018 13:47:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Kyle,
+Hi Richard,
 
-On 10/24/18 11:15 PM, Kyle Russell wrote:
-> It looks like the only javac that meta-java exposes through its bbclasses
-> comes from libecj-bootstrap-native 3.6.2.  
-That's definitely true.
+Thanks for your reply.
 
-> A few years ago, it looked like
-> there was an attempt to allow openjdk-8-native to provide
-> virtual/javac-native, but it has since been reverted.
+On Thu, Oct 25, 2018 at 9:09 AM Richard Leitner <richard.leitner@skidata.com>
+wrote:
 
-As I'm not into the meta-java stuff that long I do not know anything 
-about it... Do you have any pointers to ML discussions?
+> > A few years ago, it looked like
+> > there was an attempt to allow openjdk-8-native to provide
+> > virtual/javac-native, but it has since been reverted.
+>
+> As I'm not into the meta-java stuff that long I do not know anything
+> about it... Do you have any pointers to ML discussions?
+>
 
-> 
-> I think I understand libecj is needed as part of the bootstrap process to
-> build openjdk, but if other layers want to build newer java code using
-> javac from openjdk 8 once available after bootstrap, does meta-java provide
-> support for using javac from openjdk-8-native, or is the expectation that
-> other layers would depend directly on openjdk-8-native and setup
-> EXTRANATIVEPATH as needed to reach its tools?
+Yes, I was specifically referring to
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=dfb21b449dd652b99bc4725796d143e8c9779cd6
+.
 
-Yeah, ecj is needed for bootstrapping the jdk. For more details please 
-take a look at docs/bootstrap-flow.txt.
 
-AFAIK currently using openjdk-8-native seems like the only solution. 
+> Yeah, ecj is needed for bootstrapping the jdk. For more details please
+> take a look at docs/bootstrap-flow.txt.
+
+
+Thanks!  I actually had missed that doc and was just looking at the README.
+
+
+> AFAIK currently using openjdk-8-native seems like the only solution.
+>
 Nonetheless I'm open for any patches to enhance this behaviour ;-)
+>
 
-> 
-> Maybe this is planned future work, but I wanted to make sure I was
-> configuring the layer correctly and using it as intended.
+Ok, I will try to keep my eyes open for possibilities.  I didn't see any
+documentation that described how to compile java code from other layers
+using recent JDKs provided by meta-java, so I was looking for validation
+that I was on the right track. :)  If I come up something I think would be
+an enhancement, I'll send out a proposal.
 
-Currently (at least) I'm not having any future plans in this direction, 
-but as mentioned above I'm open for discussions and/or patches!
-
-> 
-> Thanks!
-> 
-> Kyle
-> 
-
-hope that helps...
-
-regards;Richard.L
+Thanks again!
+Kyle
 
