@@ -1,40 +1,48 @@
-Return-Path: <johannes.pointner@br-automation.com>
-X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 25 Oct 2018 09:22:03 UTC
-Received: from mail2.br-automation.com (mail2.br-automation.com
-	[213.33.116.61])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DA3579870
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CEF479C00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2018 09:22:03 +0000 (UTC)
-X-AuditID: c0a80110-d25ff70000001097-ca-5bd187b5ac9a
-Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
-	by mail2.br-automation.com () with SMTP id D5.1C.04247.5B781DB5;
-	Thu, 25 Oct 2018 11:07:02 +0200 (CEST)
-From: Johannes Pointner <johannes.pointner@br-automation.com>
+	Thu, 25 Oct 2018 10:01:21 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id y16so8652730wrw.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Oct 2018 03:01:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=hCUAqVBaqDEgYDpek5bU7GeUi2nKLhWjBHEZBTQT34U=;
+	b=b46X5qBSWKvhsjTfHiayiInu6toQC2ibpa2t2iA8pj7CIp1ck3fnn7IiddUyenRN+E
+	E9pOr2WrduZbufJ2OFDVNBm86dDE2MV1P3vXvZnsUHT6QGUIAWxbZJ2nY1hCKu5lq0gn
+	1krWAQw3HuNLUaZi86MWmbpcCWPCevwM6gIDUgSMflGHDK3EkZEzXVSQFtHQmSdT1LWY
+	qGMLCG7KedYnL75RxkJZd+sbvpdwJ6c7nO4YAo6F3+TGPHM/XXtkqsN2C5lqEU6q8A5v
+	oNK7rZR/mB2FQ+SlQbv1DDss6CcVg6CwQzVYp5oHxwv8QD/GQVxiV8t713QoaQ8spfOI
+	uZBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=hCUAqVBaqDEgYDpek5bU7GeUi2nKLhWjBHEZBTQT34U=;
+	b=mOHZ7TsQ9AqyVnX8vt2Toaqi91n0UBEJB3Euq1lxIh6r2qguyuhdQLPDANg4UTnPs/
+	S/CZZN/2AK5B+kpj+vYwS07RPf0v7baR7B2YZzLaAOm9S7k8f02rHtUT45Poir9J8Ipq
+	rqmPykRRhZIThCxRdHY7iUniytTp7yaCNSuoGqzTYDzs4V1i/qM3ariSPB3y4QJffQbE
+	0KjZQGZllxf7XuRI7LZNa/WL71ZWKkfwH5uSen2rhW2y5AozN3bLc0pX1aNa2iR5x6t7
+	EauYtw5mGKNDvzHi2RAT/hemHlvSag+JIO88bUFbpwkpEJtxIg/MeaOeOo42u13Izpf/
+	c+Zg==
+X-Gm-Message-State: AGRZ1gLnUQ0gT4ix6bvuQsiEUvJQlPT/KTsLhzMoYjBNF3oT7apQ2K2O
+	9N2OTLS9S5LjmekRw3RPckTJ88Df
+X-Google-Smtp-Source: AJdET5eHDLKbz4LpNKKA52Qgph0Gh8fR3crtON5mQEfHANtt0l3d3/BTammagaDnPbnAg69twbZ9dg==
+X-Received: by 2002:adf:8909:: with SMTP id
+	s9-v6mr1158510wrs.309.1540461681791; 
+	Thu, 25 Oct 2018 03:01:21 -0700 (PDT)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it (a-ii1-78.tin.it.
+	[212.216.139.141])
+	by smtp.gmail.com with ESMTPSA id j13sm719410wrx.5.2018.10.25.03.01.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 25 Oct 2018 03:01:20 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2018 11:07:00 +0200
-Message-Id: <20181025090700.8293-1-johannes.pointner@br-automation.com>
-X-Mailer: git-send-email 2.19.1
-MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 25/10/2018 11:07:01,
-	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 25/10/2018 11:07:01,
-	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
-	9.0.1FP5|November 22, 2015) at 25.10.2018 11:07:01
-X-TNEFEvaluated: 1
-X-Disclaimed: 5355
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgluLIzCtJLcpLzFFi42I5sILRRndb+8VogyvT2S0uHl7K7MDocW7j
-	CsYAxigum5TUnMyy1CJ9uwSujGUfSgqmc1W0N95haWCcztnFyMkhIWAi8fnDQ+YuRi4OIYHN
-	jBJTVvxmAUmwCdhKHJnwFcwWEdCV+PhhLiOIzSxgLfF++QJWEFtYwEbixryJYDaLgKrE8tfH
-	wWxeAXeJiY9uM0PUa0ssW/iaGWKZvETDrs3sEDWCEidnPmEBWSwhcI9Joun8YiaIIiGJ04vP
-	MsPZv+4zT2Dkm4Vk1iwk/QsYmVYxiucmZuYY6SUV6SaWluTnJpZk5ufpJefnbmKEhI/ADsbd
-	b7QPMQpwMCrx8Gq2XowWYk0sK67MPcQowcGsJMLrHAcU4k1JrKxKLcqPLyrNSS0+xCjNwaIk
-	zrvRdE+0kEB6YklqdmpqQWoRTJaJg1OqgVGbRfWZrXqZ5LKLzG83K4hdZ5ujxCW7pfvUz5VW
-	WxSle0R+6+teefL15Um7dO+ik7Ks84+Ja+dwnfm6IDNJt+bo/k5jr05PW1+H02em3rt1ZI5M
-	jWi0vP3F12WPF026Nz/MlqGGXez5VoMDtVHNmYtMihyC75Qv/PE5/CP/+pWXdavZzghrZSqx
-	FGckGmoxFxUnAgCxUSQrGwIAAA==
-Subject: [meta-networking][PATCH] mbedtls: upgrade to 2.13.0
+Date: Thu, 25 Oct 2018 12:01:10 +0200
+Message-Id: <1540461670-6802-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] redis: fix build for qemuarm disabling atomics
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,40 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2018 09:22:04 -0000
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Oct 2018 10:01:21 -0000
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+Apply the same patch used for mips.
+
+Fix
+  |ld: networking.o: in function `createClient':
+  | /usr/src/debug/redis/4.0.8-r0/redis-4.0.8/src/networking.c:93:
+     undefined reference to `__atomic_fetch_add_8'
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../mbedtls/{mbedtls=5F2.12.0.bb =3D> mbedtls=5F2.13.0.bb}          | 4 ++=
---
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls=5F2.12.0.bb =
-=3D> mbedtls=5F2.13.0.bb} (92%)
+ meta-oe/recipes-extended/redis/redis_4.0.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.=
-bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.13.0.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.13.0.bb
-index 71380ba19..ff3f7f0c1 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.13.0.bb
-@@ -24,8 +24,8 @@ SECTION =3D "libs"
-=20
- SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
-=20
--SRC=5FURI[md5sum] =3D "90b55ca8c726f6612de8a31a2a090e94"
--SRC=5FURI[sha256sum] =3D "a2bed048f41a19ec7b4dd2e96649145bbd68a6955c3b51ae=
-b7ccbf8908c3ce97"
-+SRC=5FURI[md5sum] =3D "659d96bb03012ca6db414a9137fcdbd6"
-+SRC=5FURI[sha256sum] =3D "593b4e4d2e1629fc407ab4750d69fa309a0ddb66565dc3de=
-b5b60eddbdeb06da"
-=20
- inherit cmake
-=20
---=20
-2.19.1
-
+diff --git a/meta-oe/recipes-extended/redis/redis_4.0.8.bb b/meta-oe/recipes-extended/redis/redis_4.0.8.bb
+index b6f37e9..80d36d2 100644
+--- a/meta-oe/recipes-extended/redis/redis_4.0.8.bb
++++ b/meta-oe/recipes-extended/redis/redis_4.0.8.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+ "
+ 
+ SRC_URI_append_mips = " file://remove-atomics.patch"
++SRC_URI_append_arm = " file://remove-atomics.patch"
+ 
+ SRC_URI[md5sum] = "c75b11e4177e153e4dc1d8dd3a6174e4"
+ SRC_URI[sha256sum] = "ff0c38b8c156319249fec61e5018cf5b5fe63a65b61690bec798f4c998c232ad"
+-- 
+2.7.4
 
 
