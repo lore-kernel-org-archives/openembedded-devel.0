@@ -1,54 +1,47 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BDD4179A4B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E9AC579C4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2018 10:49:19 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id d17-v6so560076wre.11
+	Fri, 26 Oct 2018 12:44:44 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id l41-v6so990415qtl.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2018 03:49:21 -0700 (PDT)
+	Fri, 26 Oct 2018 05:44:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=4dclJpZHVLjoKtfjaBSHjepVkP8fG/YyEdHAJRkQqpQ=;
-	b=efre5yGpFW9iNrc+IV/rONbasSGjNl75kWguh0XEpCNjsZkwM+yc2dAKg3Ixm0LF3O
-	1FT9567zD0QyvnaKIBcTX1Tor+l0tC5AXQNOyZvj/mfsmbt9etMzZXdg76qSxix9Cc0I
-	+tOtbNm+0Mo/bIpdPxc2syQjBjeWj8gIIudVy6kfymHxWgjh0BX3Tku1NTTJQMHG5cBC
-	8A3DDRR5iQZdBedUemQYLQEaIttFZwvhlXwR9r6OnG0a4nCI1ZvmiHTOtEVnYzkGMhG/
-	vPda3CadOdbxv8nGdhjx54l8dpHOcz0VaOrrzj3mgOCxxrqwYyAIeg6lBT/3Fyjr/a4C
-	hMyA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=fZZSNaZS9z099xm+FGLyJM3rDA/VojolLoiDs0pxxks=;
+	b=qR2slk2iCBPnqj+nqEJQhIIPPh3oH4U4KevzSBEuiS4JT+RLmp/o1UhXUx4gQtT6+u
+	N1fj6hrmeOu0vQLFXXfw5wOgdSpDHmoS2G3GweV/prT4urGfjsA7BYcuQ/vI2rRJiqP4
+	5Ym1MoFlW02UG8pd3reAY3h6I4Yezg6LmeypVPQKKFQTAAfV83WigsPNiYH4/d1JIKx9
+	YjPswSxuKqbF6Ct+xFK2V5r0YLMWI0nsvvjXZuTAbZgp3pwFHyp5aJNVuSM7eeKkkKmW
+	q4NxZFNSld0+2zSitFcWimx/vqI+D74+9JLlTLfvkQ8OXMAgIQ8DDKnvBO/xtMVGla6w
+	SVlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=4dclJpZHVLjoKtfjaBSHjepVkP8fG/YyEdHAJRkQqpQ=;
-	b=Q6HSFxtkDnr98iPZCKbqmUJwE22wwrYwdWUxMQCsUss+9K3rVYL6OYRcuF4G6e9YtJ
-	YPQI3duZI4/BBYyTWWMZZnngCa08JK865oKBgPQzTeW/7J3Cq8A/4DjlOTlMC7PWQK9n
-	zD8IjeYnh5N8U1iEmUcXdkk4gJ/PSVNDl2+L8x1y2k9QZ0ExvcC7Qpz9h/ZLisfYd/ZY
-	hL1rF2SP5en2C9Czq5mAPEnzUH3V1p9y8U0GSWIX06s4IpaT/3I7BInOd7YWvFr/EQcv
-	qfuZ84Z5oKUVhOREXdrIAEjSWfuuBbn23CemT0WJHkuoRYyTHOAS8MZrb7pOBWe6DAsh
-	+azw==
-X-Gm-Message-State: AGRZ1gLxcydAbY63WHX7QSdaDYbzY+9qLSitsR91bMpm423YBZv8kPE4
-	sRIBkoDXq+wcXAE8V2S2qLO+VtZW
-X-Google-Smtp-Source: AJdET5e++C1Xxo0qT+Q+v8Y2ETgciqZRAN8afkjtyeBIYxS6Q5PCOxFFP4rqnoj36U1s4NsiRzserA==
-X-Received: by 2002:a5d:554b:: with SMTP id
-	g11-v6mr250112wrw.222.1540550960049; 
-	Fri, 26 Oct 2018 03:49:20 -0700 (PDT)
-Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
-	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	x8-v6sm23905660wrd.54.2018.10.26.03.49.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 26 Oct 2018 03:49:19 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Oct 2018 12:48:57 +0200
-Message-Id: <20181026104857.32142-8-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.5
-In-Reply-To: <20181026104857.32142-1-schnitzeltony@gmail.com>
-References: <20181026104857.32142-1-schnitzeltony@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=fZZSNaZS9z099xm+FGLyJM3rDA/VojolLoiDs0pxxks=;
+	b=OG1VpMwfBogf2hhi0wP8vE8SY/QkHyOtqw4gq1KsgQlgwr9AWsabU/gyTHJd5R6OLR
+	xB0WHA7WTna1Gos7v4yFW1zYTBaNh2NQ1zduAzCReB9nOLbALzG6L4u+iNf5l1mDuun7
+	eQjh9WQvZ3cGTINOf/8uR58H259ftJ+VpMIWOEdIfOC1rKNg94F4gLGeiTvN+Fqxu0/t
+	s3vtJ+dL+fcW4mURgPnKOpFgZHf77vo+gpQ3672Ibf4lUTIJXYBwHg3B7OEIZ8gqcjBy
+	FLXdMCcWOoHU1jhgeTCnezTyVg/rqWCYG97f5unOew8sLI3GTYmrq6bWVDn0N1sFTQcN
+	4D9A==
+X-Gm-Message-State: AGRZ1gJOdqfKlTY+cfter8kKToAjeiwOWdFMQWQL+A51X7ahdSzpmzqp
+	KrEXRH0+qAPa9KB8SaibhZClnmh2MCdAjmSMUbc=
+X-Google-Smtp-Source: AJdET5fbCZf4z54RXQ1+4jC+EokkwhBw9F7Nx1e1UGYNNLlcqyoBdESbfBZtwvn3M3w1rAfGXzeJXLI1Aq6Ck4e3lUU=
+X-Received: by 2002:aed:3024:: with SMTP id 33-v6mr3010436qte.29.1540557885039;
+	Fri, 26 Oct 2018 05:44:45 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 8/8] network-manager-applet: upgrade 1.8.14 -> 1.8.18
+References: <20181026104857.32142-1-schnitzeltony@gmail.com>
+In-Reply-To: <20181026104857.32142-1-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 26 Oct 2018 13:44:19 +0100
+Message-ID: <CAMKF1sqS-wLnd-ULxV+sL9REtC94Btc=FNzyw=pVg9cBtqQaOw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/8] xfce4-settings: upgrade 4.12.3 -> 4.12.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,40 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2018 10:49:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 26 Oct 2018 12:44:45 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add a packageconfig for mobile-broadband-provider-info - disabled by default
+Hi Andreas
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- ...ork-manager-applet_1.8.14.bb => network-manager-applet_1.8.18.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.14.bb => network-manager-applet_1.8.18.bb} (78%)
+On Fri, Oct 26, 2018 at 11:49 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+>
+> * A GTK3 version is abvailable but keep GTK2: haven't found the time yet =
+to
+>   rework my additions which I would miss.
+> * 0002-Fix-linking-to-dbus-glib-bug-13633.patch had to be aligned slightl=
+y for
+>   changed sources.
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-similarity index 78%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-index 957516e1c..fffb57f9d 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-@@ -11,10 +11,11 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "bcdd92645d36fc5778f27aeb2773509b"
--SRC_URI[archive.sha256sum] = "ca9b1233721f700a7190b98eea69ce6d0ccf74fbfde173ac868a4ec7a78840cb"
-+SRC_URI[archive.md5sum] = "34923579b39360db64649342ee6735d8"
-+SRC_URI[archive.sha256sum] = "23dc1404f1e0622b7c4718b6d978b101d5e4d9be0b92133b3863a4dc29786178"
- 
- PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
-+PACKAGECONFIG[mobile-provider-info] = "--enable-mobile-broadband-provider-info,--disable-mobile-broadband-provider-info,mobile-broadband-provider-info,mobile-broadband-provider-info"
- PACKAGECONFIG ??= ""
- 
- EXTRA_OECONF = " \
--- 
-2.14.5
+I dont see these changes in the patch. It just is the recipe bumping
+the SRC_URI and PV
 
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb =
+b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> index d937653fa..a4685aed3 100644
+> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> @@ -13,13 +13,13 @@ REQUIRED_DISTRO_FEATURES =3D "x11"
+>  # + minor bugfixes - sent mainline but no response
+>  # + option to hide mousepointer for a specific (touch) input device - se=
+nt mainline but no response
+>  SRC_URI =3D " \
+> -    git://github.com/schnitzeltony/xfce4-settings.git;protocol=3Dgit;bra=
+nch=3Dfor-oe-4.12.3 \
+> +    git://github.com/schnitzeltony/xfce4-settings.git;protocol=3Dgit;bra=
+nch=3Dfor-oe-4.12.4 \
+>      file://0001-xsettings.xml-Set-default-themes.patch \
+>      file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
+>  "
+> -SRCREV =3D "b701ac8b66b83c17469dd5009da51eeb59eba442"
+> +SRCREV =3D "75d7c9b15e5ccce12b0864d3659ae9b6de96e245"
+>  S =3D "${WORKDIR}/git"
+> -PV =3D "4.12.3+git${SRCPV}"
+> +PV =3D "4.12.4+git${SRCPV}"
+>
+>  EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
+>
+> --
+> 2.14.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
