@@ -1,49 +1,74 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
-	[209.85.167.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0260079C64
+Return-Path: <mspinler@linux.vnet.ibm.com>
+X-Greylist: delayed 4031 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 26 Oct 2018 16:29:41 UTC
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+	[148.163.158.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A9A1D79C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2018 14:01:11 +0000 (UTC)
-Received: by mail-oi1-f193.google.com with SMTP id 20-v6so1086233oip.1
+	Fri, 26 Oct 2018 16:29:41 +0000 (UTC)
+Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w9QFJUeB059662 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2018 11:22:31 -0400
+Received: from e36.co.us.ibm.com (e36.co.us.ibm.com [32.97.110.154])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2nc5b4rey5-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2018 07:01:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=vh5Iy/C7Ig60h8/jpCjAqKTo/ySFaByA93govaMfbNc=;
-	b=mDB1vwf9s06TDU+DjWb5UejqT6tRJx0L37EYNH90Mcb2jXDqO84R8M6b1/EhD5Uqyt
-	w0xe5SyZd3nUEU74GclRdUQ+xvfwnSNxbNHNdyC9guenYWE8YtMaB5oJrisSYtQxozlY
-	OcJGT/vZRAzD1A+I4SyY3IlhTI+rm63iibAejyUg57Owltfo/cs+RbAcbjZph4zAyJ8i
-	BH5HRTrBrZ4RGwG5IkLgmnC2MmOJsew9WXb2JhzbMCLCxPF1JN66FpoLZdn3DQ0vdMA9
-	expQDW47TkpqjSr4ZAWJKOr/jqPk7RPFzKUUGFqNN2/TGLWt6eDCYpahCmiOA9MlaHqB
-	Zgug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=vh5Iy/C7Ig60h8/jpCjAqKTo/ySFaByA93govaMfbNc=;
-	b=Piv4BVPC7odzhLU39upQgLl/Ygpu5ZENEKWUc4LDU56/zgxWP1DziLetHEFjBV2TO0
-	w35Hr9Om0e9RtlmocH1XiM0c3KisWjHST+xUoZ9ZmKIrcmziEilU+ncxN0LuJvB7C70v
-	5kNn96YGMNZbWIA2idHXVAwGiumxdPpGg+FqGVBzcn4TrcKn41Aiv/OTeyUbjqLrsOBg
-	rWd6sikCuepUdQmTkmWj/wYOaMl82hK6Cq8rZvrhC2d7TXPsFs0w+LrMB/Jm8W2yLM/y
-	F4OrkFAx6ylW9EF0USYM8a1sZYSGNwoYgEhZoVyk3Zlj5Bo2blTAQ3eiz5B43RnRRKmt
-	H/Bg==
-X-Gm-Message-State: AGRZ1gKLPWu7WArLz2WVD8iK/7/cHctdaqVIo6IES9EOQZpK/e+6nKbJ
-	7g1ii+KR0llEt3gNrKJeksOnHqAAj5QQGcuLgkY=
-X-Google-Smtp-Source: AJdET5dxI6SoedurV2Qp/ZBgR2mKR/nzPmVTG8yHt29lCppY8Gtt/a8BceqpkchPLs2TLVj11BIBVeQ5pYdUbGjyVLU=
-X-Received: by 2002:aca:2b0a:: with SMTP id i10-v6mr2233065oik.7.1540562472896;
-	Fri, 26 Oct 2018 07:01:12 -0700 (PDT)
+	Fri, 26 Oct 2018 11:22:30 -0400
+Received: from localhost
+	by e36.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+	Violators will be prosecuted
+	for <openembedded-devel@lists.openembedded.org> from
+	<mspinler@linux.vnet.ibm.com>; Fri, 26 Oct 2018 09:22:30 -0600
+Received: from b03cxnp07028.gho.boulder.ibm.com (9.17.130.15)
+	by e36.co.us.ibm.com (192.168.1.136) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Fri, 26 Oct 2018 09:22:27 -0600
+Received: from b03ledav006.gho.boulder.ibm.com
+	(b03ledav006.gho.boulder.ibm.com [9.17.130.237])
+	by b03cxnp07028.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id w9QFMRSm17301682
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=FAIL) for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2018 15:22:27 GMT
+Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id EA458C6057
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2018 15:22:26 +0000 (GMT)
+Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id C4656C6055
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2018 15:22:26 +0000 (GMT)
+Received: from ltc.linux.ibm.com (unknown [9.16.170.189])
+	by b03ledav006.gho.boulder.ibm.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2018 15:22:26 +0000 (GMT)
 MIME-Version: 1.0
-References: <20181026104857.32142-1-schnitzeltony@gmail.com>
-	<20181026104857.32142-7-schnitzeltony@gmail.com>
-	<CAMKF1sqbZuypVK=YE9r5fb1_4gHkZhz8w1pyc3+rNhvV9mW8MQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqbZuypVK=YE9r5fb1_4gHkZhz8w1pyc3+rNhvV9mW8MQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 26 Oct 2018 16:01:00 +0200
-Message-ID: <CALbNGRS96819wmfQ9EeLuuqJ1mwcQkLfEXwUVq09X5PD_cveiw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 7/8] networkmanager: upgrade 1.10.10 -> 1.14.4
+Date: Fri, 26 Oct 2018 10:24:36 -0500
+From: Matt Spinler <mspinler@linux.vnet.ibm.com>
+To: openembedded-devel@lists.openembedded.org
+X-Sender: mspinler@linux.vnet.ibm.com
+User-Agent: Roundcube Webmail/1.0.1
+X-TM-AS-GCONF: 00
+x-cbid: 18102615-0020-0000-0000-00000E7FFBDB
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00009939; HX=3.00000242; KW=3.00000007;
+	PH=3.00000004; SC=3.00000268; SDB=6.01108292; UDB=6.00574087;
+	IPR=6.00888378; 
+	MB=3.00023918; MTD=3.00000008; XFM=3.00000015; UTC=2018-10-26 15:22:28
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 18102615-0021-0000-0000-000063822ACE
+Message-Id: <4d527ec6c1ac5415dcc51bf71ad4d6cf@linux.vnet.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-10-26_08:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=838 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1807170000 definitions=main-1810260129
+Subject: Using libpam with systemd but without systemd-logind
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +81,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2018 14:01:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 26 Oct 2018 16:29:41 -0000
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 26, 2018 at 2:50 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Fri, Oct 26, 2018 at 11:50 AM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
-> >
-> > * License checksum: copyright year changed
-> > * packageconfig glib: with this version (udev-)glib support hase to be =
-enabled
-> >   explicitly. Split this out to meta-gnome where network-manager-applet=
- lives.
-> > * packageconfig netconfig: This was nonsense: netconfig is a SUSE tool =
-[1]
-> >   which is not found in layer index. The error was detected now because
-> >   configuration checks for presence of netconfig.
-> > * --disable-ifnet and --disable-ifcfg-suse are gone
-> > * muse patches were aligned but have no resources to test them
-> typo ^^^^
-LOL: I've spent too many hours on music projects as muse, musescore...
+Hi,
 
-Will send V2
+Our embedded system uses systemd and libpam, but doesn't use systemd's
+logind package.
 
-Andreas
+The libpam recipe,
+https://github.com/openembedded/openembedded-core/blob/master/meta/recipes-extended/pam/libpam_1.3.0.bb#L149,
+will add pam_systemd.so to common-session if it detects systemd is used.
+
+However, systemd will only even build pam_systemd.so if the logind 
+package is enabled, shown here:
+https://github.com/systemd/systemd/blob/15b1180945f2cfa0f7938626ff060c8b52606a1a/meson.build#L1747
+
+So in our case, since we are explicitly disabling logind, pam will 
+complain
+in the journal about not being able to find pam_systemd.so.
+
+As logind isn't a systemd distro feature, I'm not sure how libpam can 
+really know
+that it doesn't need to add pam_systemd.so to common-session?
+
+Does anyone have any ideas on ways to handle this?
+
+Thanks,
+Matt
+
 
