@@ -1,50 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FBFF78F72
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 953EA65CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2018 03:03:26 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id p3-v6so1898994qkb.5
+	Sat, 27 Oct 2018 11:56:49 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id n12so2264231qkh.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2018 20:03:27 -0700 (PDT)
+	Sat, 27 Oct 2018 04:56:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=DKS8st92HB+0UpUY7LEageASW19vFlpJe2BgmYtj/+o=;
-	b=X8td0+jmRjCmAnTWsa5L3oT1L34tyCyYaKqcSICzUyefulJYNc8qRmrQvv8tpUhm9b
-	Zg04vsgJiW/q5ow39vvGkdkaQZSu4ZPx8CCzKZB0fnAPCEyFmLtLOeb+dCkUvN4w1gKE
-	q37yJnDWbmyDQgx3sduWKCwOx1mq42Mtstl9aOfZtkYOP5Lil1uMxNVmDtUoIHuNFWCk
-	ueneZ4H2+aeXIJy7jMhseKg3PE0Kz6+gMEXS0msJ3Kw56YVgWRIpuu//ZgoqKFqQlO6d
-	2FV1kJmFHI8zCFWq9iYBidmuwhD1OAHfilw/8Bq6FtXihhrZlU8/yu21mN1Rj08VDY5m
-	WFhw==
+	:cc; bh=qy0JxM3tThnC1EnM2s3NOtByjuOQAdrC011PqLyL7Vk=;
+	b=iJSKdaltO6B0bOVsC8kOd+0m9+0rg48q09bG+T1h8tkX3xMKpMrDL0WOMQ27X3elXM
+	Z26JGfPlW3M+lYHf0Gtdz0QzPV7v2XMCkn00+FTg7F4ttA+933LHsMwFjxlahbIePqP6
+	Ss3OjOJoJ9ddYqM+e3wODxP5Hc4DGRVYfFLpkW7Ca938A1ewkuK3nbs3G/uJbjG805X4
+	agVj9kJJpQPPk3gWxFJ36Aj89R8T0dbhB+W5z5lMILl/KBPfx9y4tw6Zdc/Md6fdHfuh
+	ci62g2wH6DY0fnBi60q9rUuQXzKKK1X2QumqWEKC5clDaB+E6r+BIelohQt+T6I+wVtD
+	9CHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=DKS8st92HB+0UpUY7LEageASW19vFlpJe2BgmYtj/+o=;
-	b=jmSbwmfNRj0wA8RkVcK+3eX34KqdLU0+BFnqEsYyUsC9queix8qguMVM1h/yAYN/Uh
-	VvtWgQDcdUzeKK70UMkMKAnMBckYoyPtiVAbGkwvt2huOnitr01ato7rtExi6jRW1Biv
-	O37ppt8rMgei3cHu9lF7P14oK7DRDaw6/HEdbEP3mW/z+Dmx8aPO7fLnVh4Ud6omHeea
-	qmVanHRvlIZkziF56IOylkEpZUj82Dzkv2oFEGoyV8dBUk7pkCRmv12McYWtstVGomBW
-	eDVljAClnVSDkV2DHGjkLjCKoaW/ckgWl1h9ZzxWvQBf72EOuv0jCLFq+feaQ2710Sin
-	Ljpw==
-X-Gm-Message-State: AGRZ1gK6hvSmk50TvMLI/TBgYsBnFahaUHYVX2YMGI+mFxyXyHe9ogdX
-	2OAPr39bj0ktlNzplJMfiFahei2C6S5jfDlJ95M=
-X-Google-Smtp-Source: AJdET5fMmNR7T1I2LV1shBLiPX6Rgaq5facUWoUuNUbCClg46TWqaL4XAcZEKlk3vFFL0ihwny4TaBuVnaNib4L2Y1U=
-X-Received: by 2002:a37:a84b:: with SMTP id r72mr5276553qke.2.1540609407047;
-	Fri, 26 Oct 2018 20:03:27 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=qy0JxM3tThnC1EnM2s3NOtByjuOQAdrC011PqLyL7Vk=;
+	b=j3zi8w2EonXNZDkX9U1Ac+1wiIbpg00pyyn9Xrv6ZOn9SPGyoY8Kxw4qjQjsA3d78q
+	SDT/WmOPlwHZx/Yockq4ui6P8RwlYwl4dRvJFqwhp7DEdobhjuseD9+uL87vGUfSHhhU
+	0YKIjoKbbSSb1pLyCZVgJFd6ffinXSzWalBineA7Mm0ybH0wLFQ+1gjjU1xY+JBXxwWa
+	0zpDst3lJpWGO/v4EbWDImSUvaIXPdgC7uXzxO+GGAbAkuqTrEu+HzaAX6A5AT7236NP
+	73iUfJbLn7VShvjVuGT8kvA9tRtypozvI5bh8jBV6L/FjTkymMNUaKwmss0K8tor1q+L
+	sg6A==
+X-Gm-Message-State: AGRZ1gLESty/HNn0kjRmrZnc2109jV75O1VAD8RE/eNXAOJFSSR1W60o
+	Rm4N/L/1jXuMEtGYwC+/yxMtO9i8avHvVOir8Aax0jfcOqbFJA==
+X-Google-Smtp-Source: AJdET5dva9foza4ibgX6JAK4GumxictuVBKn5+8szj6sW5TVHCmOdNJ89+o3XpnOFQzczVYm0rYR+fJh6w63h71pLWU=
+X-Received: by 2002:a37:5003:: with SMTP id
+	e3-v6mr6442953qkb.102.1540641410216; 
+	Sat, 27 Oct 2018 04:56:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20181026104857.32142-1-schnitzeltony@gmail.com>
-	<20181026104857.32142-3-schnitzeltony@gmail.com>
-	<CAMKF1srLRF6KCLRycLHHTzAC8nAbF-QGtxMHxBUSwdFO--qYtQ@mail.gmail.com>
-	<CALbNGRQ8Fik4GK92cPC1SZG1o0Ys_eOtBzoYciMzbGMuJt-NDw@mail.gmail.com>
-In-Reply-To: <CALbNGRQ8Fik4GK92cPC1SZG1o0Ys_eOtBzoYciMzbGMuJt-NDw@mail.gmail.com>
+References: <cover.1540243091.git.paul.eggleton@linux.intel.com>
+	<989d0e787f2adb3e7248aa0665b84384a01cd428.1540243091.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <989d0e787f2adb3e7248aa0665b84384a01cd428.1540243091.git.paul.eggleton@linux.intel.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Oct 2018 20:03:00 -0700
-Message-ID: <CAMKF1soeS=+cZkgi=EcNomrZy-7UnoSKMx_stxBk4cpZC0wE6g@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 27 Oct 2018 04:56:24 -0700
+Message-ID: <CAMKF1spPnAcmS9qOis2=Z58joHzUHRySB6XsS-Xe0-AWH4sjjg@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/8] catfish: initial add 1.4.6
+Subject: Re: [meta-oe][PATCH 1/1] libssh: upgrade to 0.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,52 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2018 03:03:26 -0000
+X-List-Received-Date: Sat, 27 Oct 2018 11:56:49 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 26, 2018 at 6:59 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Fri, Oct 26, 2018 at 2:47 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Fri, Oct 26, 2018 at 11:49 AM Andreas M=C3=BCller <schnitzeltony@gma=
-il.com> wrote:
-> > >
-> > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > > ---
-> > >  meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb | 17 +++++++++++++++=
-++
-> > >  1 file changed, 17 insertions(+)
-> > >  create mode 100644 meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb
-> > >
-> > > diff --git a/meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb b/meta-x=
-fce/recipes-apps/catfish/catfish_1.4.6.bb
-> > > new file mode 100644
-> > > index 000000000..229f882d0
-> > > --- /dev/null
-> > > +++ b/meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb
-> > > @@ -0,0 +1,17 @@
-> > > +SUMMARY =3D "Catfish is a handy file searching tool for linux and un=
-ix"
-> > > +SECTION =3D "x11/application"
-> > > +LICENSE =3D "GPLv2"
-> > > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4325afd396febcb659c36b495=
-33135d4"
-> > > +
-> > > +inherit xfce-app distutils3 gtk-icon-cache
-> > > +
-> > > +DEPENDS +=3D "python3-distutils-extra-native"
-> > > +
-> > > +B =3D "${S}"
-> >
-> > perhaps, inheriting autotools-brokensep is aligned here.
->
-> I decided not to use autotools-brokensep to avoid impression this is
-> build by autotools - it is build by distutils.
->
+Hi Paul
 
-I see. however its inheriting xfce-app -> xfce -> autotools
+Fails to build with thumb-1
 
-> Andreas
+see http://errors.yoctoproject.org/Errors/Details/197582/
+
+TOPDIR/build/tmpfs/work/armv5te-yoe-linux-gnueabi/libssh/0.8.4-r0/git/src/channels.c:2632:1:
+sorry, unimplemented: -fstack-check=specific for Thumb-1
+
+I am fine if it was using ARM ISA form armv5
+
+On Mon, Oct 22, 2018 at 2:20 PM Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+>
+> Notable changes since 0.7.3:
+>   * Fixed CVE-2018-10933 authentication bypass
+>   * Removed support for deprecated SSHv1 protocol
+>   * Added support for OpenSSL 1.1
+>   * Added support for chacha20-poly1305 cipher
+>   * Added ECDSA support with gcrypt backend
+>   * Improved threading support (note: libssh_threads is now gone)
+>
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  .../libssh/{libssh_0.7.3.bb => libssh_0.8.4.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/libssh/{libssh_0.7.3.bb => libssh_0.8.4.bb} (86%)
+>
+> diff --git a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
+> similarity index 86%
+> rename from meta-oe/recipes-support/libssh/libssh_0.7.3.bb
+> rename to meta-oe/recipes-support/libssh/libssh_0.8.4.bb
+> index 6064969ae..8566741a3 100644
+> --- a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
+> +++ b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
+>
+>  DEPENDS = "zlib openssl libgcrypt"
+>
+> -SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-7"
+> -SRCREV = "cdf7690e038230623cbbf6b024ece62f41efa98d"
+> +SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
+> +SRCREV = "789df0b7d0c7abd6b85db9fc5247e146e3d4ddba"
+>
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.17.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
