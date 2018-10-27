@@ -1,48 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 953EA65CF3
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1358A751D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2018 11:56:49 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id n12so2264231qkh.11
+	Sat, 27 Oct 2018 20:46:11 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id x12-v6so4595612wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2018 04:56:51 -0700 (PDT)
+	Sat, 27 Oct 2018 13:46:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=qy0JxM3tThnC1EnM2s3NOtByjuOQAdrC011PqLyL7Vk=;
-	b=iJSKdaltO6B0bOVsC8kOd+0m9+0rg48q09bG+T1h8tkX3xMKpMrDL0WOMQ27X3elXM
-	Z26JGfPlW3M+lYHf0Gtdz0QzPV7v2XMCkn00+FTg7F4ttA+933LHsMwFjxlahbIePqP6
-	Ss3OjOJoJ9ddYqM+e3wODxP5Hc4DGRVYfFLpkW7Ca938A1ewkuK3nbs3G/uJbjG805X4
-	agVj9kJJpQPPk3gWxFJ36Aj89R8T0dbhB+W5z5lMILl/KBPfx9y4tw6Zdc/Md6fdHfuh
-	ci62g2wH6DY0fnBi60q9rUuQXzKKK1X2QumqWEKC5clDaB+E6r+BIelohQt+T6I+wVtD
-	9CHw==
+	h=from:to:cc:subject:date:message-id;
+	bh=+M9kyjAmXKSxjueZQClNbY1ez7S8KO9j35mRPdA/5bo=;
+	b=FETPxmBlTxLuWroJ5UZWouXzkKtJqvZeVftCEnLmSt2VAmJ2lWL9EXPYf4lHwhMSBU
+	n5HhEqFQdJTVSyXGVrL281j6T0JZ10dPmqKGgF+RYMP6yBIwQRPLK0Cq9ly02g8nZSoD
+	jv0P0/FD/+Ag6CT60BmxGMkLkATe63LwfGVazHVU6Ks1/Qh7Qy5CjnrTUeLMRTJPDdlZ
+	W9LagN2yI8fLQCqdq51Ibd7JNhmwS7dAj6ptCTTGySfOUZDStso0VIALIBtJj29e0nI+
+	lkxgeUzljX9o7f3KLlOTrI/CM0YUAKh8hXZNcSamRP0hwhYaQKuD3mELAxUoW6PJbRCJ
+	BVKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=qy0JxM3tThnC1EnM2s3NOtByjuOQAdrC011PqLyL7Vk=;
-	b=j3zi8w2EonXNZDkX9U1Ac+1wiIbpg00pyyn9Xrv6ZOn9SPGyoY8Kxw4qjQjsA3d78q
-	SDT/WmOPlwHZx/Yockq4ui6P8RwlYwl4dRvJFqwhp7DEdobhjuseD9+uL87vGUfSHhhU
-	0YKIjoKbbSSb1pLyCZVgJFd6ffinXSzWalBineA7Mm0ybH0wLFQ+1gjjU1xY+JBXxwWa
-	0zpDst3lJpWGO/v4EbWDImSUvaIXPdgC7uXzxO+GGAbAkuqTrEu+HzaAX6A5AT7236NP
-	73iUfJbLn7VShvjVuGT8kvA9tRtypozvI5bh8jBV6L/FjTkymMNUaKwmss0K8tor1q+L
-	sg6A==
-X-Gm-Message-State: AGRZ1gLESty/HNn0kjRmrZnc2109jV75O1VAD8RE/eNXAOJFSSR1W60o
-	Rm4N/L/1jXuMEtGYwC+/yxMtO9i8avHvVOir8Aax0jfcOqbFJA==
-X-Google-Smtp-Source: AJdET5dva9foza4ibgX6JAK4GumxictuVBKn5+8szj6sW5TVHCmOdNJ89+o3XpnOFQzczVYm0rYR+fJh6w63h71pLWU=
-X-Received: by 2002:a37:5003:: with SMTP id
-	e3-v6mr6442953qkb.102.1540641410216; 
-	Sat, 27 Oct 2018 04:56:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1540243091.git.paul.eggleton@linux.intel.com>
-	<989d0e787f2adb3e7248aa0665b84384a01cd428.1540243091.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <989d0e787f2adb3e7248aa0665b84384a01cd428.1540243091.git.paul.eggleton@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 27 Oct 2018 04:56:24 -0700
-Message-ID: <CAMKF1spPnAcmS9qOis2=Z58joHzUHRySB6XsS-Xe0-AWH4sjjg@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] libssh: upgrade to 0.8.4
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+M9kyjAmXKSxjueZQClNbY1ez7S8KO9j35mRPdA/5bo=;
+	b=kILiE/RlWIbZDwiB7ohH51+rwTD2KD1oBybRIHRifwk/sC+SHIPepFducPKhY8pMEY
+	aXpylGFZ3LiWUXaoYOQojipXNbYcg+tJe8Y0E81COVwmUU37xocRypGyGng9GAMXgLS4
+	ut1kyUI9xKqyfKIq81VYu+vrfg01g2JA1PFdQyo79yDVwos41V8qjaTPJbD4+FFMkARL
+	xZeZ+KGN/Ibim9UtQ13DJMFCOCCb5lFv0VgLjT71k6DmZG7RpxkuBIvphR5+c2uKElnQ
+	deYxhmzHpYALattdhqSv286FjmN+pPYgMHeEV/is8oB0S5Ts9PBKk+XjEbFzSunYINtV
+	sFTQ==
+X-Gm-Message-State: AGRZ1gKPPs6p7rsSMu2OOZvqMzacnMlwhl69VvV6vE+39qw0xkIjClwR
+	vVVoVytqYEPUCUXfd1qjbETh3sJO
+X-Google-Smtp-Source: AJdET5fFWFvMrJwBr1pjopelOHwUC0sDxWRlhce8DAv3+jncMFhrU8Zg8eTmhTUD9voUe2+zdGS1MQ==
+X-Received: by 2002:adf:9326:: with SMTP id
+	35-v6mr10262575wro.318.1540673172079; 
+	Sat, 27 Oct 2018 13:46:12 -0700 (PDT)
+Received: from localhost.localdomain
+	(host211-58-dynamic.14-87-r.retail.telecomitalia.it. [87.14.58.211])
+	by smtp.gmail.com with ESMTPSA id
+	64-v6sm20503384wrr.64.2018.10.27.13.46.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 27 Oct 2018 13:46:11 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Oct 2018 22:46:05 +0200
+Message-Id: <1540673165-32042-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] kernel-selftest: temporary disable bpf for arm - fix build for qemuarm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2018 11:56:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 27 Oct 2018 20:46:12 -0000
 
-Hi Paul
+Even running on 32bit the bpf objects are 64bit: this triggers the QA  about
+bitsize mismatch 32 vs. 64. Besides, objdump does not recognize the arch 0xf7.
 
-Fails to build with thumb-1
+Trying the workaround to use the llvm-objdump and setting TOOLCHAIN = "clang"
+the build for arm fails on libcxx
 
-see http://errors.yoctoproject.org/Errors/Details/197582/
+  |include/c++/8.2.0/atomic:250: undefined reference to `__atomic_load_4'
 
-TOPDIR/build/tmpfs/work/armv5te-yoe-linux-gnueabi/libssh/0.8.4-r0/git/src/channels.c:2632:1:
-sorry, unimplemented: -fstack-check=specific for Thumb-1
+Temporary disable bpf as done for x86/32bit as it seems still unstable.
 
-I am fine if it was using ARM ISA form armv5
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Mon, Oct 22, 2018 at 2:20 PM Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
->
-> Notable changes since 0.7.3:
->   * Fixed CVE-2018-10933 authentication bypass
->   * Removed support for deprecated SSHv1 protocol
->   * Added support for OpenSSL 1.1
->   * Added support for chacha20-poly1305 cipher
->   * Added ECDSA support with gcrypt backend
->   * Improved threading support (note: libssh_threads is now gone)
->
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  .../libssh/{libssh_0.7.3.bb => libssh_0.8.4.bb}               | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-support/libssh/{libssh_0.7.3.bb => libssh_0.8.4.bb} (86%)
->
-> diff --git a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
-> similarity index 86%
-> rename from meta-oe/recipes-support/libssh/libssh_0.7.3.bb
-> rename to meta-oe/recipes-support/libssh/libssh_0.8.4.bb
-> index 6064969ae..8566741a3 100644
-> --- a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
-> +++ b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
->
->  DEPENDS = "zlib openssl libgcrypt"
->
-> -SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-7"
-> -SRCREV = "cdf7690e038230623cbbf6b024ece62f41efa98d"
-> +SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
-> +SRCREV = "789df0b7d0c7abd6b85db9fc5247e146e3d4ddba"
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.17.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 71bf83c..181e97c 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -20,6 +20,7 @@ SRC_URI += "file://run-ptest \
+ # if you have older kernel than that you need to remove it from PACKAGECONFIG
+ PACKAGECONFIG ??= "bpf vm"
+ PACKAGECONFIG_remove_x86 = "bpf"
++PACKAGECONFIG_remove_arm = "bpf"
+ 
+ PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
+ PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
+-- 
+2.7.4
+
 
