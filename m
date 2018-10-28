@@ -1,49 +1,51 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1358A751D2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B58BA74579
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2018 20:46:11 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id x12-v6so4595612wrw.8
+	Sun, 28 Oct 2018 01:30:39 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id z17-v6so2223276pgv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2018 13:46:13 -0700 (PDT)
+	Sat, 27 Oct 2018 18:30:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=+M9kyjAmXKSxjueZQClNbY1ez7S8KO9j35mRPdA/5bo=;
-	b=FETPxmBlTxLuWroJ5UZWouXzkKtJqvZeVftCEnLmSt2VAmJ2lWL9EXPYf4lHwhMSBU
-	n5HhEqFQdJTVSyXGVrL281j6T0JZ10dPmqKGgF+RYMP6yBIwQRPLK0Cq9ly02g8nZSoD
-	jv0P0/FD/+Ag6CT60BmxGMkLkATe63LwfGVazHVU6Ks1/Qh7Qy5CjnrTUeLMRTJPDdlZ
-	W9LagN2yI8fLQCqdq51Ibd7JNhmwS7dAj6ptCTTGySfOUZDStso0VIALIBtJj29e0nI+
-	lkxgeUzljX9o7f3KLlOTrI/CM0YUAKh8hXZNcSamRP0hwhYaQKuD3mELAxUoW6PJbRCJ
-	BVKg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ip5qQH+DkOWD71CZIm/l+y8vM2cUl8Q2DuB37i5ZL8Y=;
+	b=DmRYb/XeyPEu8MXfDoxmnzv4sMVK7wmGZgyuzsZ3mcxkWfcvdAdR//Gh18KLbENSOK
+	neDuQl+y6KooYJ0v+d/iBkFoah5xBy+6uT0hoVJ11lbar//4eafisCS+ilre0uw5aVeo
+	cCJz2DHaSDFaNwgE2zyDZppeTt/84AZfclbd5QTzJYSC5QbWwYFHVxm7eIzTRJyTfwZP
+	yZTYNiN8LR2k9XVgsLLvbz1pdeUECXjdRoEbyorX/N388kmP3D+acbYApHwYlS36nl8Y
+	pR1VGH+2pd5J3DhM0Vw7BTQTPubTO99MajdHvoUc8c77pvtmdHZVD2mUbNSbZird0CaI
+	RBSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+M9kyjAmXKSxjueZQClNbY1ez7S8KO9j35mRPdA/5bo=;
-	b=kILiE/RlWIbZDwiB7ohH51+rwTD2KD1oBybRIHRifwk/sC+SHIPepFducPKhY8pMEY
-	aXpylGFZ3LiWUXaoYOQojipXNbYcg+tJe8Y0E81COVwmUU37xocRypGyGng9GAMXgLS4
-	ut1kyUI9xKqyfKIq81VYu+vrfg01g2JA1PFdQyo79yDVwos41V8qjaTPJbD4+FFMkARL
-	xZeZ+KGN/Ibim9UtQ13DJMFCOCCb5lFv0VgLjT71k6DmZG7RpxkuBIvphR5+c2uKElnQ
-	deYxhmzHpYALattdhqSv286FjmN+pPYgMHeEV/is8oB0S5Ts9PBKk+XjEbFzSunYINtV
-	sFTQ==
-X-Gm-Message-State: AGRZ1gKPPs6p7rsSMu2OOZvqMzacnMlwhl69VvV6vE+39qw0xkIjClwR
-	vVVoVytqYEPUCUXfd1qjbETh3sJO
-X-Google-Smtp-Source: AJdET5fFWFvMrJwBr1pjopelOHwUC0sDxWRlhce8DAv3+jncMFhrU8Zg8eTmhTUD9voUe2+zdGS1MQ==
-X-Received: by 2002:adf:9326:: with SMTP id
-	35-v6mr10262575wro.318.1540673172079; 
-	Sat, 27 Oct 2018 13:46:12 -0700 (PDT)
-Received: from localhost.localdomain
-	(host211-58-dynamic.14-87-r.retail.telecomitalia.it. [87.14.58.211])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ip5qQH+DkOWD71CZIm/l+y8vM2cUl8Q2DuB37i5ZL8Y=;
+	b=Xal3ziZYEMZBB8cmLBiP1xE2oxOL/cIek6CW9wmDQ8jOEdjbdYz8+J8WrHOsv7iFFx
+	bVKv4/ImQZ+nJ/Hk2KxnWtnAaxOilWUKAYtMV6hrVUZHsE5noorRmKdaPCp6nBBnIZ98
+	MDQXdFtX2FbhOilyekS7q/vqqaqrCgxoe8whuByZwREZStJU1mmJHSN1p/YEHDcHbnYF
+	oU7rQxVHUuYgWv6CSogZf5iQfAoMqX2KnntwfgnnbUxOPn2cTqEQ0mvPnOo8vFm5CuIi
+	2/o59BAiV7ePkO5fvHqZ49iEfEIbTX3/rKsDTcS4W1jN8HCKRf7X2Is+KFKUV3kq/pYj
+	1q4g==
+X-Gm-Message-State: AGRZ1gJbMRnrMKuiSBAMozWVfnrP1LEfzg9tutESxb46kLmHeGDJ0iM7
+	SdGA3YKqu7VMfDTNPKzQeZY1H/BEOVw=
+X-Google-Smtp-Source: AJdET5dbnHWmPU5WdQyCSD4Uuos3ObXdVXPIKvNB1PHAterFhl2Dypw8MolgUy+W61IaaS25kSGBCQ==
+X-Received: by 2002:aa7:8348:: with SMTP id z8-v6mr6124125pfm.81.1540690240066;
+	Sat, 27 Oct 2018 18:30:40 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::2f5b])
 	by smtp.gmail.com with ESMTPSA id
-	64-v6sm20503384wrr.64.2018.10.27.13.46.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Oct 2018 13:46:11 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	11-v6sm24464475pfs.108.2018.10.27.18.30.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 27 Oct 2018 18:30:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Oct 2018 22:46:05 +0200
-Message-Id: <1540673165-32042-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] kernel-selftest: temporary disable bpf for arm - fix build for qemuarm
+Date: Sat, 27 Oct 2018 18:30:29 -0700
+Message-Id: <20181028013029.29734-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH] libssh: Do not use thumb-1 ISA on armv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2018 20:46:12 -0000
+X-List-Received-Date: Sun, 28 Oct 2018 01:30:39 -0000
+Content-Transfer-Encoding: 8bit
 
-Even running on 32bit the bpf objects are 64bit: this triggers the QA  about
-bitsize mismatch 32 vs. 64. Besides, objdump does not recognize the arch 0xf7.
+Fixes
+TOPDIR/build/tmpfs/work/armv5te-yoe-linux-gnueabi/libssh/0.8.4-r0/git/src/channels.c:2632:1:
+sorry, unimplemented: -fstack-check=specific for Thumb-1
 
-Trying the workaround to use the llvm-objdump and setting TOOLCHAIN = "clang"
-the build for arm fails on libcxx
-
-  |include/c++/8.2.0/atomic:250: undefined reference to `__atomic_load_4'
-
-Temporary disable bpf as done for x86/32bit as it seems still unstable.
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/libssh/libssh_0.8.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 71bf83c..181e97c 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -20,6 +20,7 @@ SRC_URI += "file://run-ptest \
- # if you have older kernel than that you need to remove it from PACKAGECONFIG
- PACKAGECONFIG ??= "bpf vm"
- PACKAGECONFIG_remove_x86 = "bpf"
-+PACKAGECONFIG_remove_arm = "bpf"
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.4.bb b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
+index 8566741a3a..6040ec959e 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.8.4.bb
+@@ -16,6 +16,8 @@ inherit cmake
+ PACKAGECONFIG ??=""
+ PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
  
- PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
- PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
++ARM_INSTRUCTION_SET_armv5 = "arm"
++
+ EXTRA_OECMAKE = " \
+     -DWITH_GCRYPT=1 \
+     -DWITH_PCAP=1 \
 -- 
-2.7.4
+2.19.1
 
 
