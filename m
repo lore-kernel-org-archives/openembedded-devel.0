@@ -1,52 +1,52 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B48AE79B55
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E923C79A5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:55 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id a132so5352141qkg.1
+	Mon, 29 Oct 2018 16:41:56 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id u34-v6so9996904qth.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:57 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1jyDdZ03wFbqE0F38BpvvWJYMZOaLBa1Eipj+Zq7BlM=;
-	b=pA8d8OR75BB8EJgL5laROi5Pc5saNlLwl10WCuC/Z8orTSzRn3Ocfvhhp1idjSXRIr
-	vi9UrsRxddOkcK02id6w2WtrYFtRG09Isii2r7Ll+AB6CidVsbCEQm1tAsZxOuM3nE1U
-	9VwVppKYDAkpolxrcyB1ESWLkIcTIIuAUMVfriImnpVz4QLqqPOCExRZLGlfrVKCCmJf
-	4x3kliPrOosiGWpx3KjsJyU17yFC8L453ezy6ovs0K0nedCo4h92ngp+n9PsEieKkAuF
-	vp32mzwkA6PPNlC9/15OtoxVK4PkqRa76LvyZ8sylk95tP6UxqIVz3sKYUtyYX1SYsxy
-	+n7g==
+	bh=yjFpahhyr93RREU9mxWwlikvtc3Bl3g79UI/+Pa4+mo=;
+	b=HEI3gaEUqPC4+ioj7ZGb9aQMV0ZHx9+Amd83NZVOUvoKiXmNnHQdWa2G3hcKwzye36
+	CouIVftXQEhrSeG4clh1gtRScOA7akRmGwHe+FGMnX4g3aa61P/oj5qQCMOghjgpoIn7
+	wOy/EyGE0ymuFQAlr2x7RLJjEh7XPHTE5djUaavrNT2hjmrIC23PtZfCo9n4Y6XC16Qv
+	rTnlE6bsK9iAXyC/mhgJhGa1S0XKlk45r4L12PUmFQy+gUnumszAGflsXN2GD78TUTqa
+	opN3GgJ3ZDTaYYNjknoue7H5PP817V9XHmFAOezsq1briCNQqOLULmbJ52hNf34rAaV0
+	MTbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=1jyDdZ03wFbqE0F38BpvvWJYMZOaLBa1Eipj+Zq7BlM=;
-	b=hYI1F9+hzKwv00orAF5uvoYpx8Pk/fPbV7O5Tpb3FR3IlnmIrn546i7Vh3gCSSF9+f
-	No9hj2IGAnZx83BZLaTX+nBkcbr3G3e0gdJTDkvNegUqc4KvmIuR7XHiOwzcMzcqXttE
-	8bU11Cke7AFFXcyyw6hgdzP2o6Dv90JMLRF0uRiTfgq8a+nZdfUUC2gcs40Qwn6LFTIS
-	CyohVteogkaxvPXQuIIDvqHMM2Rf6p1EJJ6vrrOHmIdE1N916RTlbQZopXQOWjhbpz0M
-	EoW87m7z0vMCHozS0Qow/xJUtz05TzYQ2E6DjQ3w6jCqefPe8uLGzS1MRcWfZpLtcJoN
-	5r9w==
-X-Gm-Message-State: AGRZ1gKqtOYZpTMS0+XzYQ7nBWaRseTLgR6YG8XqebaA4kPtwI8O/qHy
-	YMxtjcoPESx6X3/k+Eh/pw6O1pK8
-X-Google-Smtp-Source: AJdET5c/6XDOsQ/vDB1q/4fwwgUrpWK/rBcVznVG5c+Tyvf2XIXzskeNets3nOkgzIUJ2J7IkQEXrQ==
-X-Received: by 2002:ae9:de01:: with SMTP id
-	s1-v6mr13340666qkf.258.1540831316305; 
-	Mon, 29 Oct 2018 09:41:56 -0700 (PDT)
+	bh=yjFpahhyr93RREU9mxWwlikvtc3Bl3g79UI/+Pa4+mo=;
+	b=HBKWwCUNHYB47VTHHx2rTZXH3HYmwfNPu9+yNLKkOi2VYUoURDRaPO1TlZWEayQ8rK
+	yzFSb/U+b6F2rUOa6isIIBrO25QwMQlRf8xzXPzGF2Zb676D9yooaYJEFsBuECC11rNL
+	DQaJh1l6sqfgevupZhVzmyhTWlrI0+MXcnHcRle1Ee3G+foGZwZooXX/lDbWCnUZJnh1
+	Gm103QRYdYT7jnZPKm+RY/ZQULKSZSpRsmmYBQzSlBfs/+HtXm7gcIESIT4Wu5g1VPE9
+	3E4Vwxgfs8u3CZzI6xzL39HH8O+42+5zaaJRiaaN4oUwNvPW/ei8SBXg4crknJijUOED
+	WS8g==
+X-Gm-Message-State: AGRZ1gLDwX+Au8fcy6o7PqyEwp1r6qQDYbXw0yhhOkUD248FP8BTZGpJ
+	e3TlLtrD0DzwKSKZcx3iWruWxwcp
+X-Google-Smtp-Source: AJdET5fZDMC5zeEjoBLaLA3sxevwtHE9Wl3FJ+INnDpSSfpbO2GyZu/Cf+SHiE+a4d/SczPj2yaC5g==
+X-Received: by 2002:ac8:76d9:: with SMTP id
+	q25-v6mr13739004qtr.35.1540831317637; 
+	Mon, 29 Oct 2018 09:41:57 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.54
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:55 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:56 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:41:09 -0400
-Message-Id: <96e86320d4d21de21552cf98eb6145a114fcd69f.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:41:10 -0400
+Message-Id: <ef386b75ac95432d2fa8c4bcfcda95f16db6d555.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
 References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 12/16] mutter: add recipe for mutter window manager
+Subject: [RFC meta-gnome][PATCH 13/16] gnome-shell: add recipe for gnome-shell.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,269 +59,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:56 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:57 -0000
 
 From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
 Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 ---
- .../mutter/0001-disable-zenity-check.patch    | 27 ++++++++
- ...spection-variables-with-correct-path.patch | 63 +++++++++++++++++++
- .../0003-packageconfig-variable-fixup.patch   | 29 +++++++++
- .../mutter/0004-fix-broken-includes.patch     | 37 +++++++++++
- meta-gnome/recipes-gnome/gnome3/mutter_git.bb | 59 +++++++++++++++++
- 5 files changed, 215 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0001-disable-zenity-check.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0002-fixup-introspection-variables-with-correct-path.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0003-packageconfig-variable-fixup.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0004-fix-broken-includes.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter_git.bb
+ .../gnome-shell/0001-dont-detect-python.patch | 24 ++++++++++
+ .../recipes-gnome/gnome3/gnome-shell_git.bb   | 46 +++++++++++++++++++
+ 2 files changed, 70 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome3/mutter/0001-disable-zenity-check.patch b/meta-gnome/recipes-gnome/gnome3/mutter/0001-disable-zenity-check.patch
+diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch b/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
 new file mode 100644
-index 000000000..a37aec276
+index 000000000..50d874061
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/mutter/0001-disable-zenity-check.patch
-@@ -0,0 +1,27 @@
-+mutter: Disable check for zenity
++++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
+@@ -0,0 +1,24 @@
++gnome-shell: Add decoration to tweak python3 path
 +
-+  Disable autoconf check for zenity, no need graphical dialog boxes.
-+
-+  Upstream-status: Inappropriate [disable-feature]
-+
-+  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+
-+diff --git a/configure.ac b/configure.ac
-+index ef92f5ecb..5eede9e63 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -427,11 +427,6 @@ fi
-+ 
-+ AM_CONDITIONAL(HAVE_SM, test "$found_sm" = "yes")
-+ 
-+-AC_PATH_PROG(ZENITY, zenity, no)
-+-if test x"$ZENITY" = xno; then
-+-  AC_MSG_ERROR([zenity not found in your path - needed for dialogs])
-+-fi
-+-
-+ AC_ARG_ENABLE(debug,
-+ 	[  --enable-debug		enable debugging],,
-+ 	enable_debug=no)
-+-- 
-+2.17.1
-+
-diff --git a/meta-gnome/recipes-gnome/gnome3/mutter/0002-fixup-introspection-variables-with-correct-path.patch b/meta-gnome/recipes-gnome/gnome3/mutter/0002-fixup-introspection-variables-with-correct-path.patch
-new file mode 100644
-index 000000000..07c1f371a
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/mutter/0002-fixup-introspection-variables-with-correct-path.patch
-@@ -0,0 +1,63 @@
-+mutter: Fixup introspection paths
-+
-+  Fixup the introspection paths to enable correct results with
-+  gobject-introspection.
-+
-+  Upstream-status: Innappropriate [embedded specific]
-+
-+  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+
-+diff --git a/clutter/build/autotools/introspection.m4 b/clutter/build/autotools/introspection.m4
-+index d89c3d907..d2c60de4d 100644
-+--- a/clutter/build/autotools/introspection.m4
-++++ b/clutter/build/autotools/introspection.m4
-+@@ -56,14 +56,14 @@ m4_define([_GOBJECT_INTROSPECTION_CHECK_INTERNAL],
-+     INTROSPECTION_GIRDIR=
-+     INTROSPECTION_TYPELIBDIR=
-+     if test "x$found_introspection" = "xyes"; then
-+-       INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
-+-       INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
-+-       INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-+-       INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-+-       INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-++       INTROSPECTION_SCANNER=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
-++       INTROSPECTION_COMPILER=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
-++       INTROSPECTION_GENERATE=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-++       INTROSPECTION_GIRDIR=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-++       INTROSPECTION_TYPELIBDIR=$PKG_CONFIG_SYSROOT_DIR"$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-+        INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
-+        INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
-+-       INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
-++       INTROSPECTION_MAKEFILE=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
-+     fi
-+     AC_SUBST(INTROSPECTION_SCANNER)
-+     AC_SUBST(INTROSPECTION_COMPILER)
-+diff --git a/cogl/build/autotools/introspection.m4 b/cogl/build/autotools/introspection.m4
-+index 589721c5a..683ebdcc6 100644
-+--- a/cogl/build/autotools/introspection.m4
-++++ b/cogl/build/autotools/introspection.m4
-+@@ -54,14 +54,14 @@ m4_define([_GOBJECT_INTROSPECTION_CHECK_INTERNAL],
-+     INTROSPECTION_GIRDIR=
-+     INTROSPECTION_TYPELIBDIR=
-+     if test "x$found_introspection" = "xyes"; then
-+-       INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
-+-       INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
-+-       INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-+-       INTROSPECTION_GIRDIR=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-+-       INTROSPECTION_TYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-++       INTROSPECTION_SCANNER=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
-++       INTROSPECTION_COMPILER=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
-++       INTROSPECTION_GENERATE=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
-++       INTROSPECTION_GIRDIR=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
-++       INTROSPECTION_TYPELIBDIR=$PKG_CONFIG_SYSROOT_DIR"$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-+        INTROSPECTION_CFLAGS=`$PKG_CONFIG --cflags gobject-introspection-1.0`
-+-       INTROSPECTION_LIBS=`$PKG_CONFIG --libs gobject-introspection-1.0`
-+-       INTROSPECTION_MAKEFILE=`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
-++       INTROSPECTION_LIBS=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --libs gobject-introspection-1.0`
-++       INTROSPECTION_MAKEFILE=$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=datadir gobject-introspection-1.0`/gobject-introspection-1.0/Makefile.introspection
-+     fi
-+     AC_SUBST(INTROSPECTION_SCANNER)
-+     AC_SUBST(INTROSPECTION_COMPILER)
-+-- 
-+2.17.1
-+
-diff --git a/meta-gnome/recipes-gnome/gnome3/mutter/0003-packageconfig-variable-fixup.patch b/meta-gnome/recipes-gnome/gnome3/mutter/0003-packageconfig-variable-fixup.patch
-new file mode 100644
-index 000000000..1e44218a6
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/mutter/0003-packageconfig-variable-fixup.patch
-@@ -0,0 +1,29 @@
-+mutter: Fixup pkgconfig variables
-+
-+  Pkgconfig variables relating to the paths of datadirs, and
-+  gir, typelib.
++  The python detection used in the meson script doesn't
++  resolve correctly. Add a decoration to allow the
++  do_configure_prepend to sed in the correct path for
++  python3-native.
 +
 +  Upstream-status: Innappropriate [embedded-specific]
 +
 +  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 +
-+diff --git a/src/libmutter.pc.in b/src/libmutter.pc.in
-+index d2e837f4a..0c8db1a66 100644
-+--- a/src/libmutter.pc.in
-++++ b/src/libmutter.pc.in
-+@@ -2,8 +2,10 @@ prefix=@prefix@
-+ exec_prefix=@exec_prefix@
-+ libdir=@libdir@
-+ includedir=@includedir@
-+-girdir=@libdir@/mutter
-+-typelibdir=@libdir@/mutter
-++datarootdir=${prefix}/share
-++datadir=${datarootdir}
-++girdir=${datadir}/gir-1.0
-++typelibdir=${libdir}/mutter
-+ apiversion=@LIBMUTTER_API_VERSION@
++diff --git a/src/meson.build b/src/meson.build
++index 178e05899..d3d8df97b 100644
++--- a/src/meson.build
+++++ b/src/meson.build
++@@ -13,7 +13,7 @@ script_data.set('libdir', libdir)
++ script_data.set('libexecdir', libexecdir)
++ script_data.set('pkgdatadir', pkgdatadir)
++ script_data.set('pkglibdir', pkglibdir)
++-script_data.set('PYTHON', python.path())
+++script_data.set('PYTHON', '@PYTHON3_PATH@')
++ script_data.set('VERSION', meson.project_version())
 + 
-+ Name: libmutter
-+-- 
-+2.17.1
-+
-diff --git a/meta-gnome/recipes-gnome/gnome3/mutter/0004-fix-broken-includes.patch b/meta-gnome/recipes-gnome/gnome3/mutter/0004-fix-broken-includes.patch
++ foreach tool : ['gnome-shell-extension-tool', 'gnome-shell-perf-tool']
+diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb b/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
 new file mode 100644
-index 000000000..2a7580653
+index 000000000..d8f8a4c77
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/mutter/0004-fix-broken-includes.patch
-@@ -0,0 +1,37 @@
-+mutter: Fix broken includes for xcursor
-+
-+  Add missing include for the xcursor header to required
-+  files.
-+
-+  Upstream-status: Pending
-+
-+  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+
-+diff --git a/src/core/display.c b/src/core/display.c
-+index f6b4d5b9f..3930f1c32 100644
-+--- a/src/core/display.c
-++++ b/src/core/display.c
-+@@ -54,6 +54,7 @@
-+ #include <meta/meta-backend.h>
-+ #include "backends/meta-cursor-sprite-xcursor.h"
-+ #include "backends/meta-logical-monitor.h"
-++#include "backends/meta-cursor-sprite-xcursor.h"
-+ #include "backends/native/meta-backend-native.h"
-+ #include "backends/x11/meta-backend-x11.h"
-+ #include "backends/meta-stage-private.h"
-+diff --git a/src/x11/meta-x11-display.c b/src/x11/meta-x11-display.c
-+index 83f7dfbae..36ea95b91 100644
-+--- a/src/x11/meta-x11-display.c
-++++ b/src/x11/meta-x11-display.c
-+@@ -55,6 +55,8 @@
-+ #include "backends/meta-logical-monitor.h"
-+ #include "backends/meta-settings-private.h"
-+ #include "backends/x11/meta-backend-x11.h"
-++#include "backends/meta-cursor-sprite-xcursor.h"
-++
-+ #include "core/frame.h"
-+ #include "core/meta-workspace-manager-private.h"
-+ #include "core/util-private.h"
-+-- 
-+2.17.1
-+
-diff --git a/meta-gnome/recipes-gnome/gnome3/mutter_git.bb b/meta-gnome/recipes-gnome/gnome3/mutter_git.bb
-new file mode 100644
-index 000000000..b2065f224
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/mutter_git.bb
-@@ -0,0 +1,59 @@
-+DESCRIPTION = "Mutter (Gnome 3 window manager)"
++++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
+@@ -0,0 +1,46 @@
++DESCRIPTION = "GNOME Shell"
 +LICENSE = "GPLv2"
 +DEPENDS = " \
-+           glib-2.0 \
-+           gsettings-desktop-schemas \
-+           wayland-native \
-+           wayland-protocols \
-+           libxinerama \
-+           libinput \
-+           gtk+3 \
-+           gnome-desktop3 \
-+           libxcursor \
-+           libxkbfile \
-+           cogl-1.0 \
-+           clutter-1.0 \
++            glib-2.0 \
++            gsettings-desktop-schemas \
++            gjs \
++            gdm \
++            gnome-desktop3 \
++            mutter \
++            wayland \
++            wayland-protocols \
++            evolution-data-server \
++            libcroco \
++            polkit \
++            gnome-bluetooth \
++            gstreamer \
++            keybinder \
++            gnome-settings-daemon \
++            ibus \
++            librsvg \
++            sassc-native \
 +          "
 +
 +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+SRC_URI = " \
-+           git://gitlab.gnome.org/GNOME/mutter.git;protocol=http;branch=master \
-+           file://0001-disable-zenity-check.patch \
-+           file://0002-fixup-introspection-variables-with-correct-path.patch \
-+           file://0003-packageconfig-variable-fixup.patch \
-+           file://0004-fix-broken-includes.patch \
-+          "
++SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-shell.git;protocol=http;branch=master;tag=3.30.1 \
++           file://0001-dont-detect-python.patch \
++           "
 +
-+SRCREV="${AUTOREV}"
++RDEPENDS_gnome-shell += " python3-core python3-pygobject gnome-settings-daemon gnome-bluetooth gdm "
 +S = "${WORKDIR}/git"
 +
-+inherit autotools pkgconfig distro_features_check gobject-introspection gettext
++inherit pkgconfig meson gobject-introspection gettext
++
++EXTRA_OEMESON += " -Dman=false -Dnetworkmanager=false "
 +
 +FILES_${PN} += "${datadir}"
++FILES_${PN} += "${libdir}"
++FILES_${PN} += "${bindir}"
 +
 +do_configure_prepend() {
-+	# Autotools expects config.rpath to be with in the source tree
-+	install -d ${S}/build-aux
-+	cp ${STAGING_DIR_NATIVE}${datadir}/gettext/config.rpath ${S}/build-aux/config.rpath
-+
-+        # There are several Werrors that trip when building with Wayland enabled:
-+	# -Wno-error=implicit-function-declaration -Wno-error=nested-externs -Wno-error=int-conversion
-+	# and setting those as no-error does not seem to get picked up (it does appear in the compilation
-+	# command
-+	sed -i 's^-Werror -Wno-error=deprecated-declarations^-Wno-error=deprecated-declarations^g' ${S}/configure.ac
++	# Fixup the gsettings version
++	sed -i 's^3.27.90^3.24.1^g' ${S}/meson.build
++	sed -i "s^@PYTHON3_PATH@^${RECIPE_SYSROOT_NATIVE}/${bindir}/python3^g" ${S}/meson.build
 +}
 +
-+do_compile_prepend() {
-+	export GIR_EXTRA_LIBS_PATH="${B}/cogl/cogl/.libs:${B}/cogl/cogl-pango/.libs:${B}/cogl/cogl-path/.libs:${B}/clutter/clutter/.libs"
-+}
-+
-+do_install_append() {
-+	install -d ${D}/${datadir}/gir-1.0
-+	install ${B}/src/Meta-3.gir ${D}/${datadir}/gir-1.0
-+	install ${B}/cogl/cogl/Cogl-3.gir ${D}/${datadir}/gir-1.0
-+	install ${B}/cogl/cogl-pango/CoglPango-3.gir ${D}/${datadir}/gir-1.0
-+	install ${B}/clutter/clutter/Cally-3.gir ${D}/${datadir}/gir-1.0
-+	install ${B}/clutter/clutter/ClutterX11-3.gir ${D}/${datadir}/gir-1.0
-+	install ${B}/clutter/clutter/Clutter-3.gir ${D}/${datadir}/gir-1.0
-+}
 -- 
 2.17.1
 
