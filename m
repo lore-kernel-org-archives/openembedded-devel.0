@@ -1,22 +1,51 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C900771A0C
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BAE86003C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 07:25:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9T7Po2g019274
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 29 Oct 2018 00:25:50 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
-	Mon, 29 Oct 2018 00:25:49 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Mon, 29 Oct 2018 00:25:49 -0700
-Message-ID: <20181029072549.34730-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Mon, 29 Oct 2018 09:40:59 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id d17-v6so7566595wre.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Oct 2018 02:41:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QGKQcw+yWJAjxAaLbNV6JePvxolXDClO6oIdrQue/5c=;
+	b=cA8kOUmZL+1xmSEJnpTpQSCBBWQcxpt3/r6PsVm6qZ+CaCI4NqdPXQepLApUWp4giK
+	4Sp2JWIyGLvoVzv71/2c5ii+tC2ypyp67qnxV45/RuHSrpWizJngBLFiwjdHTVS1/DUR
+	UfLHpV1rgmSCFY5263Rbb6OmFn3Db2VPutSrwbfwSB9+maRc8AQsrXexD4esgjymAwjc
+	Q8kED1LKqm0T+7DjgFP+PLliK90Us98Jb6lolwJh1Cu9+tLJo13LdusuAWihF0ved7f/
+	7CR60IXq0rANjuPa/2bKtQZKOQk40OEF9eC2sllCKWRHjvsHwC3PAVO5p4b3MpRpNDfd
+	xXTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QGKQcw+yWJAjxAaLbNV6JePvxolXDClO6oIdrQue/5c=;
+	b=mHxdK3gHD36zDnoD4g6Ni0rKujKfrpbOTk98QtjMCM0bzBNXAvXs5BzgY2QPjYPgu6
+	LKwOpgf2/aI4onHkrI8KJv4qYfyCB8vLDvQzxKyzdBO8XkBKZI29swxN6zXE2BmFwODd
+	uonxpW1vmQCEhlgWOlCrtM6y7MV/35bj3F9Jg4d3bdPbetk8eURkkrQlb8aL1xeZFbhn
+	G5cqdXutK1iZjPYR93nJFFzrDNvExeVWXE+V+jV6EJFceIpBTYnkSqzAHR4hEKVvxQX+
+	ir9ffhLYh9907WAye2Y3qqGnU4V+pLTz8xjOn8qQfRP5AmPgQI7crW0YIPgkyCfhRnwp
+	Rbtw==
+X-Gm-Message-State: AGRZ1gKnYWOhd96zqGyjW7MeIn908DsqdGXA3c13Mk9ehP1/1PuH0ADW
+	6gqlqFGCZp/lHMu6GEEj0Hbe/NUB
+X-Google-Smtp-Source: AJdET5dPGYw2BNE/fz1wLONbd9GdtD6xdVSEE/FDFkS90QgMmqvihRStiFPgSSXsawCgvRrACTga0w==
+X-Received: by 2002:adf:f409:: with SMTP id g9-v6mr6079202wro.40.1540806059626;
+	Mon, 29 Oct 2018 02:40:59 -0700 (PDT)
+Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
+	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
+	60-v6sm14614038wra.35.2018.10.29.02.40.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 29 Oct 2018 02:40:58 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Oct 2018 10:40:41 +0100
+Message-Id: <20181029094042.14402-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.5
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH] apache2: Fix CVE-2018-11763
+Subject: [PATCH v2 1/2] xfce4-settings: upgrade 4.12.3 -> 4.12.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,569 +58,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 07:25:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Oct 2018 09:40:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+A GTK3 version is abvailable but keep GTK2: haven't found the time yet to
+rework my additions which I would miss.
 
-mod_http2: connection IO event handling reworked.
-Instead of reacting on incoming bytes, the state
-machine now acts on incoming frames that are affecting
-it. This reduces state transitions.
-
-Reference: https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-11763.html
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../apache2/apache2-native_2.4.34.bb          |   1 +
- .../apache2/apache2/CVE-2018-11763.patch      | 512 ++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.34.bb   |   1 +
- 3 files changed, 514 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
+V1 -> V2: Remove wrong comment on 0002-Fix-linking-to-dbus-glib-bug-13633.patch
+That was a leftover - initial version of this patch was on sumo
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
-index a3a6804d8..4cc384546 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
-@@ -10,6 +10,7 @@ inherit autotools pkgconfig native
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+index d937653fa..a4685aed3 100644
+--- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
++++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+@@ -13,13 +13,13 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ # + minor bugfixes - sent mainline but no response
+ # + option to hide mousepointer for a specific (touch) input device - sent mainline but no response
+ SRC_URI = " \
+-    git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.3 \
++    git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.4 \
+     file://0001-xsettings.xml-Set-default-themes.patch \
+     file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
+ "
+-SRCREV = "b701ac8b66b83c17469dd5009da51eeb59eba442"
++SRCREV = "75d7c9b15e5ccce12b0864d3659ae9b6de96e245"
+ S = "${WORKDIR}/git"
+-PV = "4.12.3+git${SRCPV}"
++PV = "4.12.4+git${SRCPV}"
  
- SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-+           file://CVE-2018-11763.patch \
-           "
+ EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
  
- S = "${WORKDIR}/httpd-${PV}"
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
-new file mode 100644
-index 000000000..a2c5b2e02
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
-@@ -0,0 +1,512 @@
-+From 484aba5048e3457dc1d15189f1910d007b1a4a76 Mon Sep 17 00:00:00 2001
-+From: Jim Jagielski <jim@apache.org>
-+Date: Wed, 12 Sep 2018 20:38:02 +0000
-+Subject: [PATCH] Merge r1840010 from trunk:
-+
-+On the trunk:
-+
-+mod_http2: connection IO event handling reworked. Instead of reacting on
-+     incoming bytes, the state machine now acts on incoming frames that are
-+     affecting it. This reduces state transitions.
-+
-+
-+Submitted by: icing
-+Reviewed by: icing, ylavic, jim
-+
-+
-+git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1840757 13f79535-47bb-0310-9956-ffa450edef68
-+CVE: CVE-2018-11763
-+Upstream-Status: Backport [https://github.com/apache/httpd/commit/484aba5048e3457dc1d15189f1910d007b1a4a76]
-+
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+---
-+ modules/http2/h2_session.c | 238 +++++++++++++++++++++++--------------
-+ modules/http2/h2_session.h |   7 +-
-+ modules/http2/h2_version.h |   4 +-
-+ 3 files changed, 158 insertions(+), 97 deletions(-)
-+
-+diff --git a/modules/http2/h2_session.c b/modules/http2/h2_session.c
-+index 805d6774dc..a1b31d2b30 100644
-+--- a/modules/http2/h2_session.c
-++++ b/modules/http2/h2_session.c
-+@@ -235,6 +235,7 @@ static int on_data_chunk_recv_cb(nghttp2_session *ngh2, uint8_t flags,
-+     stream = h2_session_stream_get(session, stream_id);
-+     if (stream) {
-+         status = h2_stream_recv_DATA(stream, flags, data, len);
-++        dispatch_event(session, H2_SESSION_EV_STREAM_CHANGE, 0, "stream data rcvd");
-+     }
-+     else {
-+         ap_log_cerror(APLOG_MARK, APLOG_DEBUG, 0, session->c, APLOGNO(03064)
-+@@ -317,9 +318,9 @@ static int on_header_cb(nghttp2_session *ngh2, const nghttp2_frame *frame,
-+ }
-+ 
-+ /**
-+- * nghttp2 session has received a complete frame. Most, it uses
-+- * for processing of internal state. HEADER and DATA frames however
-+- * we need to handle ourself.
-++ * nghttp2 session has received a complete frame. Most are used by nghttp2
-++ * for processing of internal state. Some, like HEADER and DATA frames,
-++ * we need to act on.
-+  */
-+ static int on_frame_recv_cb(nghttp2_session *ng2s,
-+                             const nghttp2_frame *frame,
-+@@ -378,6 +379,9 @@ static int on_frame_recv_cb(nghttp2_session *ng2s,
-+                           "h2_stream(%ld-%d): WINDOW_UPDATE incr=%d", 
-+                           session->id, (int)frame->hd.stream_id,
-+                           frame->window_update.window_size_increment);
-++            if (nghttp2_session_want_write(session->ngh2)) {
-++                dispatch_event(session, H2_SESSION_EV_FRAME_RCVD, 0, "window update");
-++            }
-+             break;
-+         case NGHTTP2_RST_STREAM:
-+             ap_log_cerror(APLOG_MARK, APLOG_DEBUG, 0, session->c, APLOGNO(03067)
-+@@ -404,6 +408,12 @@ static int on_frame_recv_cb(nghttp2_session *ng2s,
-+                                frame->goaway.error_code, NULL);
-+             }
-+             break;
-++        case NGHTTP2_SETTINGS:
-++            if (APLOGctrace2(session->c)) {
-++                ap_log_cerror(APLOG_MARK, APLOG_TRACE2, 0, session->c,
-++                              H2_SSSN_MSG(session, "SETTINGS, len=%ld"), (long)frame->hd.length);
-++            }
-++            break;
-+         default:
-+             if (APLOGctrace2(session->c)) {
-+                 char buffer[256];
-+@@ -415,7 +425,40 @@ static int on_frame_recv_cb(nghttp2_session *ng2s,
-+             }
-+             break;
-+     }
-+-    return (APR_SUCCESS == rv)? 0 : NGHTTP2_ERR_PROTO;
-++    
-++    if (session->state == H2_SESSION_ST_IDLE) {
-++        /* We received a frame, but session is in state IDLE. That means the frame
-++         * did not really progress any of the (possibly) open streams. It was a meta
-++         * frame, e.g. SETTINGS/WINDOW_UPDATE/unknown/etc.
-++         * Remember: IDLE means we cannot send because either there are no streams open or
-++         * all open streams are blocked on exhausted WINDOWs for outgoing data.
-++         * The more frames we receive that do not change this, the less interested we
-++         * become in serving this connection. This is expressed in increasing "idle_delays".
-++         * Eventually, the connection will timeout and we'll close it. */
-++        session->idle_frames = H2MIN(session->idle_frames + 1, session->frames_received);
-++            ap_log_cerror( APLOG_MARK, APLOG_TRACE2, 0, session->c,
-++                          H2_SSSN_MSG(session, "session has %ld idle frames"), 
-++                          (long)session->idle_frames);
-++        if (session->idle_frames > 10) {
-++            apr_size_t busy_frames = H2MAX(session->frames_received - session->idle_frames, 1);
-++            int idle_ratio = (int)(session->idle_frames / busy_frames); 
-++            if (idle_ratio > 100) {
-++                session->idle_delay = apr_time_from_msec(H2MIN(1000, idle_ratio));
-++            }
-++            else if (idle_ratio > 10) {
-++                session->idle_delay = apr_time_from_msec(10);
-++            }
-++            else if (idle_ratio > 1) {
-++                session->idle_delay = apr_time_from_msec(1);
-++            }
-++            else {
-++                session->idle_delay = 0;
-++            }
-++        }
-++    }
-++    
-++    if (APR_SUCCESS != rv) return NGHTTP2_ERR_PROTO;
-++    return 0;
-+ }
-+ 
-+ static int h2_session_continue_data(h2_session *session) {
-+@@ -1603,23 +1646,57 @@ static void update_child_status(h2_session *session, int status, const char *msg
-+ 
-+ static void transit(h2_session *session, const char *action, h2_session_state nstate)
-+ {
-++    apr_time_t timeout;
-++    int ostate, loglvl;
-++    const char *s;
-++    
-+     if (session->state != nstate) {
-+-        int loglvl = APLOG_DEBUG;
-+-        if ((session->state == H2_SESSION_ST_BUSY && nstate == H2_SESSION_ST_WAIT)
-+-            || (session->state == H2_SESSION_ST_WAIT && nstate == H2_SESSION_ST_BUSY)){
-++        ostate = session->state;
-++        session->state = nstate;
-++        
-++        loglvl = APLOG_DEBUG;
-++        if ((ostate == H2_SESSION_ST_BUSY && nstate == H2_SESSION_ST_WAIT)
-++            || (ostate == H2_SESSION_ST_WAIT && nstate == H2_SESSION_ST_BUSY)){
-+             loglvl = APLOG_TRACE1;
-+         }
-+         ap_log_cerror(APLOG_MARK, loglvl, 0, session->c, 
-+                       H2_SSSN_LOG(APLOGNO(03078), session, 
-+                       "transit [%s] -- %s --> [%s]"), 
-+-                      h2_session_state_str(session->state), action, 
-++                      h2_session_state_str(ostate), action, 
-+                       h2_session_state_str(nstate));
-+-        session->state = nstate;
-++        
-+         switch (session->state) {
-+             case H2_SESSION_ST_IDLE:
-+-                update_child_status(session, (session->open_streams == 0? 
-+-                                              SERVER_BUSY_KEEPALIVE
-+-                                              : SERVER_BUSY_READ), "idle");
-++                if (!session->remote.emitted_count) {
-++                    /* on fresh connections, with async mpm, do not return
-++                     * to mpm for a second. This gives the first request a better
-++                     * chance to arrive (und connection leaving IDLE state).
-++                     * If we return to mpm right away, this connection has the
-++                     * same chance of being cleaned up by the mpm as connections
-++                     * that already served requests - not fair. */
-++                    session->idle_sync_until = apr_time_now() + apr_time_from_sec(1);
-++                    s = "timeout";
-++                    timeout = H2MAX(session->s->timeout, session->s->keep_alive_timeout);
-++                    update_child_status(session, SERVER_BUSY_READ, "idle");
-++                    ap_log_cerror(APLOG_MARK, APLOG_TRACE1, 0, session->c, 
-++                                  H2_SSSN_LOG("", session, "enter idle, timeout = %d sec"), 
-++                                  (int)apr_time_sec(H2MAX(session->s->timeout, session->s->keep_alive_timeout)));
-++                }
-++                else if (session->open_streams) {
-++                    s = "timeout";
-++                    timeout = session->s->keep_alive_timeout;
-++                    update_child_status(session, SERVER_BUSY_KEEPALIVE, "idle");
-++                }
-++                else {
-++                    /* normal keepalive setup */
-++                    s = "keepalive";
-++                    timeout = session->s->keep_alive_timeout;
-++                    update_child_status(session, SERVER_BUSY_KEEPALIVE, "idle");
-++                }
-++                session->idle_until = apr_time_now() + timeout; 
-++                ap_log_cerror(APLOG_MARK, APLOG_TRACE1, 0, session->c, 
-++                              H2_SSSN_LOG("", session, "enter idle, %s = %d sec"), 
-++                              s, (int)apr_time_sec(timeout));
-+                 break;
-+             case H2_SESSION_ST_DONE:
-+                 update_child_status(session, SERVER_CLOSING, "done");
-+@@ -1726,8 +1803,6 @@ static void h2_session_ev_no_io(h2_session *session, int arg, const char *msg)
-+                      * This means we only wait for WINDOW_UPDATE from the 
-+                      * client and can block on READ. */
-+                     transit(session, "no io (flow wait)", H2_SESSION_ST_IDLE);
-+-                    session->idle_until = apr_time_now() + session->s->timeout;
-+-                    session->keep_sync_until = session->idle_until;
-+                     /* Make sure we have flushed all previously written output
-+                      * so that the client will react. */
-+                     if (h2_conn_io_flush(&session->io) != APR_SUCCESS) {
-+@@ -1738,12 +1813,7 @@ static void h2_session_ev_no_io(h2_session *session, int arg, const char *msg)
-+             }
-+             else if (session->local.accepting) {
-+                 /* When we have no streams, but accept new, switch to idle */
-+-                apr_time_t now = apr_time_now();
-+                 transit(session, "no io (keepalive)", H2_SESSION_ST_IDLE);
-+-                session->idle_until = (session->remote.emitted_count? 
-+-                                       session->s->keep_alive_timeout : 
-+-                                       session->s->timeout) + now;
-+-                session->keep_sync_until = now + apr_time_from_sec(1);
-+             }
-+             else {
-+                 /* We are no longer accepting new streams and there are
-+@@ -1758,12 +1828,25 @@ static void h2_session_ev_no_io(h2_session *session, int arg, const char *msg)
-+     }
-+ }
-+ 
-+-static void h2_session_ev_data_read(h2_session *session, int arg, const char *msg)
-++static void h2_session_ev_frame_rcvd(h2_session *session, int arg, const char *msg)
-++{
-++    switch (session->state) {
-++        case H2_SESSION_ST_IDLE:
-++        case H2_SESSION_ST_WAIT:
-++            transit(session, "frame received", H2_SESSION_ST_BUSY);
-++            break;
-++        default:
-++            /* nop */
-++            break;
-++    }
-++}
-++
-++static void h2_session_ev_stream_change(h2_session *session, int arg, const char *msg)
-+ {
-+     switch (session->state) {
-+         case H2_SESSION_ST_IDLE:
-+         case H2_SESSION_ST_WAIT:
-+-            transit(session, "data read", H2_SESSION_ST_BUSY);
-++            transit(session, "stream change", H2_SESSION_ST_BUSY);
-+             break;
-+         default:
-+             /* nop */
-+@@ -1803,16 +1886,6 @@ static void h2_session_ev_pre_close(h2_session *session, int arg, const char *ms
-+ static void ev_stream_open(h2_session *session, h2_stream *stream)
-+ {
-+     h2_iq_append(session->in_process, stream->id);
-+-    switch (session->state) {
-+-        case H2_SESSION_ST_IDLE:
-+-            if (session->open_streams == 1) {
-+-                /* enter timeout, since we have a stream again */
-+-                session->idle_until = (session->s->timeout + apr_time_now());
-+-            }
-+-            break;
-+-        default:
-+-            break;
-+-    }
-+ }
-+ 
-+ static void ev_stream_closed(h2_session *session, h2_stream *stream)
-+@@ -1825,11 +1898,6 @@ static void ev_stream_closed(h2_session *session, h2_stream *stream)
-+     }
-+     switch (session->state) {
-+         case H2_SESSION_ST_IDLE:
-+-            if (session->open_streams == 0) {
-+-                /* enter keepalive timeout, since we no longer have streams */
-+-                session->idle_until = (session->s->keep_alive_timeout
-+-                                       + apr_time_now());
-+-            }
-+             break;
-+         default:
-+             break;
-+@@ -1887,6 +1955,7 @@ static void on_stream_state_enter(void *ctx, h2_stream *stream)
-+         default:
-+             break;
-+     }
-++    dispatch_event(session, H2_SESSION_EV_STREAM_CHANGE, 0, "stream state change");
-+ }
-+ 
-+ static void on_stream_event(void *ctx, h2_stream *stream, 
-+@@ -1945,8 +2014,8 @@ static void dispatch_event(h2_session *session, h2_session_event_t ev,
-+         case H2_SESSION_EV_NO_IO:
-+             h2_session_ev_no_io(session, arg, msg);
-+             break;
-+-        case H2_SESSION_EV_DATA_READ:
-+-            h2_session_ev_data_read(session, arg, msg);
-++        case H2_SESSION_EV_FRAME_RCVD:
-++            h2_session_ev_frame_rcvd(session, arg, msg);
-+             break;
-+         case H2_SESSION_EV_NGH2_DONE:
-+             h2_session_ev_ngh2_done(session, arg, msg);
-+@@ -1957,6 +2026,9 @@ static void dispatch_event(h2_session *session, h2_session_event_t ev,
-+         case H2_SESSION_EV_PRE_CLOSE:
-+             h2_session_ev_pre_close(session, arg, msg);
-+             break;
-++        case H2_SESSION_EV_STREAM_CHANGE:
-++            h2_session_ev_stream_change(session, arg, msg);
-++            break;
-+         default:
-+             ap_log_cerror(APLOG_MARK, APLOG_TRACE1, 0, session->c,
-+                           H2_SSSN_MSG(session, "unknown event %d"), ev);
-+@@ -1990,13 +2062,15 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+     apr_status_t status = APR_SUCCESS;
-+     conn_rec *c = session->c;
-+     int rv, mpm_state, trace = APLOGctrace3(c);
-+-
-++    apr_time_t now;
-++    
-+     if (trace) {
-+         ap_log_cerror( APLOG_MARK, APLOG_TRACE3, status, c,
-+                       H2_SSSN_MSG(session, "process start, async=%d"), async);
-+     }
-+                   
-+     while (session->state != H2_SESSION_ST_DONE) {
-++        now = apr_time_now();
-+         session->have_read = session->have_written = 0;
-+ 
-+         if (session->local.accepting 
-+@@ -2034,39 +2108,42 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                 break;
-+                 
-+             case H2_SESSION_ST_IDLE:
-+-                /* We trust our connection into the default timeout/keepalive
-+-                 * handling of the core filters/mpm iff:
-+-                 * - keep_sync_until is not set
-+-                 * - we have an async mpm
-+-                 * - we have no open streams to process
-+-                 * - we are not sitting on a Upgrade: request
-+-                 * - we already have seen at least one request
-+-                 */
-+-                if (!session->keep_sync_until && async && !session->open_streams
-+-                    && !session->r && session->remote.emitted_count) {
-++                if (session->idle_until && (apr_time_now() + session->idle_delay) > session->idle_until) {
-++                    ap_log_cerror( APLOG_MARK, APLOG_TRACE1, status, c,
-++                                  H2_SSSN_MSG(session, "idle, timeout reached, closing"));
-++                    if (session->idle_delay) {
-++                        apr_table_setn(session->c->notes, "short-lingering-close", "1"); 
-++                    }
-++                    dispatch_event(session, H2_SESSION_EV_CONN_TIMEOUT, 0, "timeout");
-++                    goto out;
-++                }
-++                
-++                if (session->idle_delay) {
-++                    /* we are less interested in spending time on this connection */
-++                    ap_log_cerror( APLOG_MARK, APLOG_TRACE2, status, c,
-++                                  H2_SSSN_MSG(session, "session is idle (%ld ms), idle wait %ld sec left"), 
-++                                  (long)apr_time_as_msec(session->idle_delay),
-++                                  (long)apr_time_sec(session->idle_until - now));
-++                    apr_sleep(session->idle_delay);
-++                    session->idle_delay = 0;
-++                }
-++
-++                h2_conn_io_flush(&session->io);
-++                if (async && !session->r && (now > session->idle_sync_until)) {
-+                     if (trace) {
-+                         ap_log_cerror(APLOG_MARK, APLOG_TRACE3, status, c,
-+                                       H2_SSSN_MSG(session, 
-+                                       "nonblock read, %d streams open"), 
-+                                       session->open_streams);
-+                     }
-+-                    h2_conn_io_flush(&session->io);
-+                     status = h2_session_read(session, 0);
-+                     
-+                     if (status == APR_SUCCESS) {
-+                         session->have_read = 1;
-+-                        dispatch_event(session, H2_SESSION_EV_DATA_READ, 0, NULL);
-+                     }
-+-                    else if (APR_STATUS_IS_EAGAIN(status) 
-+-                        || APR_STATUS_IS_TIMEUP(status)) {
-+-                        if (apr_time_now() > session->idle_until) {
-+-                            dispatch_event(session, 
-+-                                           H2_SESSION_EV_CONN_TIMEOUT, 0, NULL);
-+-                        }
-+-                        else {
-+-                            status = APR_EAGAIN;
-+-                            goto out;
-+-                        }
-++                    else if (APR_STATUS_IS_EAGAIN(status) || APR_STATUS_IS_TIMEUP(status)) {
-++                        status = APR_EAGAIN;
-++                        goto out;
-+                     }
-+                     else {
-+                         ap_log_cerror(APLOG_MARK, APLOG_DEBUG, status, c,
-+@@ -2078,7 +2155,6 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                 }
-+                 else {
-+                     /* make certain, we send everything before we idle */
-+-                    h2_conn_io_flush(&session->io);
-+                     if (trace) {
-+                         ap_log_cerror(APLOG_MARK, APLOG_TRACE3, status, c,
-+                                       H2_SSSN_MSG(session, 
-+@@ -2090,7 +2166,6 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                      */
-+                     status = h2_mplx_idle(session->mplx);
-+                     if (status == APR_EAGAIN) {
-+-                        dispatch_event(session, H2_SESSION_EV_DATA_READ, 0, NULL);
-+                         break;
-+                     }
-+                     else if (status != APR_SUCCESS) {
-+@@ -2101,33 +2176,11 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                     status = h2_session_read(session, 1);
-+                     if (status == APR_SUCCESS) {
-+                         session->have_read = 1;
-+-                        dispatch_event(session, H2_SESSION_EV_DATA_READ, 0, NULL);
-+                     }
-+                     else if (status == APR_EAGAIN) {
-+                         /* nothing to read */
-+                     }
-+                     else if (APR_STATUS_IS_TIMEUP(status)) {
-+-                        apr_time_t now = apr_time_now();
-+-                        if (now > session->keep_sync_until) {
-+-                            /* if we are on an async mpm, now is the time that
-+-                             * we may dare to pass control to it. */
-+-                            session->keep_sync_until = 0;
-+-                        }
-+-                        if (now > session->idle_until) {
-+-                            if (trace) {
-+-                                ap_log_cerror(APLOG_MARK, APLOG_TRACE3, status, c,
-+-                                              H2_SSSN_MSG(session, 
-+-                                              "keepalive timeout"));
-+-                            }
-+-                            dispatch_event(session, 
-+-                                           H2_SESSION_EV_CONN_TIMEOUT, 0, "timeout");
-+-                        }
-+-                        else if (trace) {                        
-+-                            ap_log_cerror(APLOG_MARK, APLOG_TRACE3, status, c,
-+-                                          H2_SSSN_MSG(session, 
-+-                                          "keepalive, %f sec left"),
-+-                                          (session->idle_until - now) / 1000000.0f);
-+-                        }
-+                         /* continue reading handling */
-+                     }
-+                     else if (APR_STATUS_IS_ECONNABORTED(status)
-+@@ -2145,6 +2198,18 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                         dispatch_event(session, H2_SESSION_EV_CONN_ERROR, 0, "error");
-+                     }
-+                 }
-++                if (nghttp2_session_want_write(session->ngh2)) {
-++                    ap_update_child_status(session->c->sbh, SERVER_BUSY_WRITE, NULL);
-++                    status = h2_session_send(session);
-++                    if (status == APR_SUCCESS) {
-++                        status = h2_conn_io_flush(&session->io);
-++                    }
-++                    if (status != APR_SUCCESS) {
-++                        dispatch_event(session, H2_SESSION_EV_CONN_ERROR, 
-++                                       H2_ERR_INTERNAL_ERROR, "writing");
-++                        break;
-++                    }
-++                }
-+                 break;
-+                 
-+             case H2_SESSION_ST_BUSY:
-+@@ -2154,7 +2219,6 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                     status = h2_session_read(session, 0);
-+                     if (status == APR_SUCCESS) {
-+                         session->have_read = 1;
-+-                        dispatch_event(session, H2_SESSION_EV_DATA_READ, 0, NULL);
-+                     }
-+                     else if (status == APR_EAGAIN) {
-+                         /* nothing to read */
-+@@ -2218,7 +2282,7 @@ apr_status_t h2_session_process(h2_session *session, int async)
-+                                              session->iowait);
-+                 if (status == APR_SUCCESS) {
-+                     session->wait_us = 0;
-+-                    dispatch_event(session, H2_SESSION_EV_DATA_READ, 0, NULL);
-++                        dispatch_event(session, H2_SESSION_EV_STREAM_CHANGE, 0, NULL);
-+                 }
-+                 else if (APR_STATUS_IS_TIMEUP(status)) {
-+                     /* go back to checking all inputs again */
-+diff --git a/modules/http2/h2_session.h b/modules/http2/h2_session.h
-+index 486938b009..df2a862445 100644
-+--- a/modules/http2/h2_session.h
-++++ b/modules/http2/h2_session.h
-+@@ -66,10 +66,11 @@ typedef enum {
-+     H2_SESSION_EV_PROTO_ERROR,      /* protocol error */
-+     H2_SESSION_EV_CONN_TIMEOUT,     /* connection timeout */
-+     H2_SESSION_EV_NO_IO,            /* nothing has been read or written */
-+-    H2_SESSION_EV_DATA_READ,        /* connection data has been read */
-++    H2_SESSION_EV_FRAME_RCVD,       /* a frame has been received */
-+     H2_SESSION_EV_NGH2_DONE,        /* nghttp2 wants neither read nor write anything */
-+     H2_SESSION_EV_MPM_STOPPING,     /* the process is stopping */
-+     H2_SESSION_EV_PRE_CLOSE,        /* connection will close after this */
-++    H2_SESSION_EV_STREAM_CHANGE,    /* a stream (state/input/output) changed */
-+ } h2_session_event_t;
-+ 
-+ typedef struct h2_session {
-+@@ -118,7 +119,9 @@ typedef struct h2_session {
-+     apr_size_t max_stream_mem;      /* max buffer memory for a single stream */
-+     
-+     apr_time_t idle_until;          /* Time we shut down due to sheer boredom */
-+-    apr_time_t keep_sync_until;     /* Time we sync wait until passing to async mpm */
-++    apr_time_t idle_sync_until;     /* Time we sync wait until keepalive handling kicks in */
-++    apr_size_t idle_frames;         /* number of rcvd frames that kept session in idle state */
-++    apr_interval_time_t idle_delay; /* Time we delay processing rcvd frames in idle state */
-+     
-+     apr_bucket_brigade *bbtmp;      /* brigade for keeping temporary data */
-+     struct apr_thread_cond_t *iowait; /* our cond when trywaiting for data */
-+diff --git a/modules/http2/h2_version.h b/modules/http2/h2_version.h
-+index 5c53abd575..2ac718fc0f 100644
-+--- a/modules/http2/h2_version.h
-++++ b/modules/http2/h2_version.h
-+@@ -27,7 +27,7 @@
-+  * @macro
-+  * Version number of the http2 module as c string
-+  */
-+-#define MOD_HTTP2_VERSION "1.10.20"
-++#define MOD_HTTP2_VERSION "1.11.0"
-+ 
-+ /**
-+  * @macro
-+@@ -35,7 +35,7 @@
-+  * release. This is a 24 bit number with 8 bits for major number, 8 bits
-+  * for minor and 8 bits for patch. Version 1.2.3 becomes 0x010203.
-+  */
-+-#define MOD_HTTP2_VERSION_NUM 0x010a14
-++#define MOD_HTTP2_VERSION_NUM 0x010b00
-+ 
-+ 
-+ #endif /* mod_h2_h2_version_h */
-+-- 
-+2.17.1
-+
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-index a92ec5458..a87e3847f 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://configure-allow-to-disable-selinux-support.patch \
-+           file://CVE-2018-11763.patch \
-            file://init \
-            file://apache2-volatile.conf \
-            file://apache2.service \
 -- 
-2.17.1
+2.14.5
 
 
