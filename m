@@ -1,51 +1,51 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C3371791FA
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 098A5796E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:43 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id l9-v6so9956680qtj.12
+	Mon, 29 Oct 2018 16:41:45 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id a132so5351756qkg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:45 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TwhNEkOWah1YrrksFsxnZreSh8VxO0mJudeWXCuC7Fw=;
-	b=ndc8itZxSN2TGqNzw/QuCSAOkgD3HBZPpRIiKosj2wByGmecnN0JkpfUWtNArYxzxf
-	f+kxcM4k9rGIGMhRBpPhslW7h3Cw1ec1VlPnXLmV5WMVi6gQGv+Slbeez8H1K0hFdsxK
-	jelQ7zyW9uW/pylEc5kYxcQYxOApwO8Dx1pn07l1HzlMLiRNjasjuQqNTuALJfGnmtDg
-	7+0ipwJzWpmaUg5YZGVZqLGPj9p/e6NvJOLnAOvzFxuTf9ofmURa/MGAgCdOquPdvriI
-	MRITwmvxTbEph6gran+1If8uRzrwAdHeni3QyEnE7CNPK7ylk6O747EuwxgvHfsHS2ZE
-	hPKw==
+	bh=gXtpvcGTWa2Ggm8oVrIViOSuL7mu7xRC8D2m6h62rIQ=;
+	b=AZnHR3H4IJMDAkZvuQyJw1D+TImC4+/Mez+S/paYwFubEaVGhObMvhqWwSzdBtsAwU
+	CdYF1DnDmI4+kiHMeZq8Zs1XU2TpFxK1BdRkizNt2ipjJ2aRTOEYqaZyxSFt6nIdrV+N
+	bM7cgURD4/eLbAayvXKFduIVq8/CkF9F/d8dSPAh3QjuPl3tAyJmod8sGmul8ctS0pVC
+	74SkjARM8aAMOzddUFiNk6ThQ9ao51p/L3U+GQ9Hey+W4Wwn7NGfiMWtBADqiR46nSKI
+	lJXo+JsTzf9hmms/SANnDAJtEwqYnVawzyqTtnh1ipaI5CpQqA0RTonl/xoo6Ts/F7u0
+	3B8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=TwhNEkOWah1YrrksFsxnZreSh8VxO0mJudeWXCuC7Fw=;
-	b=Ultmd+aKjINIidA5v2+hbQPwuEqPbJEAVSjzsaXGngxkZeQgIo4ZPrDJQixVvzO/XB
-	OIsMCT+yACZCGngJQ/ahbk+NmQLluc2/lzgTJ2iM+bP4H/QXzVlfPMu7UnYDDL9lrBag
-	Rrr/O7ssNQulenNPB1ObBS1UGDSNrcf0gMNBsT0WXxLlmzD6alXJF+u27kuG/N0RcF5R
-	N3TWveNg11jPpNafNO1XowWPrFNNEpI+Sg0Atxe+VYzQ54zCZNRKdOrx9ZiwRI7CJaTt
-	eGVMNtCay6H/9242xJid7RFENWSXznFgV54PyM3gaGUJwwre4BJVcQC3gyox4qa/FEHK
-	ZvGg==
-X-Gm-Message-State: AGRZ1gJTbGaNNSpA8Gb6ygvEeWfjtDTGJ/GJJCUi84XR7TNg3sNITDRI
-	KEmCyUo+/ayCITHLTxKEL7GO+5kx
-X-Google-Smtp-Source: AJdET5cRoF4kpBsvoPyUwMI+qLltZjdDV9obJI5mGGt2LcVHvq9H6pYHtFrNWDspXCGLMA5JrxNRAw==
-X-Received: by 2002:a0c:a425:: with SMTP id w34mr13823635qvw.160.1540831304230;
-	Mon, 29 Oct 2018 09:41:44 -0700 (PDT)
+	bh=gXtpvcGTWa2Ggm8oVrIViOSuL7mu7xRC8D2m6h62rIQ=;
+	b=AKjZk9V67W80anuJiKYCnH9mQWjGcUZStf3I6QUMAlH5CRqcs9vJaSkxTaYWDVutr9
+	WwDckq2Y2M05r+ZhsymMW0i4EVN0/fDEw6sQBkzVEjuqO5CmfEnjB5UDyr2A5VTnMg7j
+	ZEdG2IzEslmBvgqfDvm18wuMjKWPSuuwL1oHmRORFArA5nOQZgfuolJE70LyDj0n0jlA
+	NdLCcSS457T4Y8NfVy5k4h1xGmaZk267Hh0Sfc/VIXN5/aKcA5wV+oAa8m5UYigb39Wb
+	bCTWilk1rwzfM0ObmkYY2RJ9CHTYQ4Ro1dHbyig/ri12H7XcdGRopn6BcGoLGqr79Mtc
+	hs2A==
+X-Gm-Message-State: AGRZ1gLCmKiQLvMTI0hHOQJJ0mmNIpAyZKFDVMuje8KuHaHaAhs6xdDR
+	nHhAA+4zS/88B/7J04CImqrkQAuC
+X-Google-Smtp-Source: AJdET5dycc2OFZ5mkEofz2XbkQ8DW0opBL1+dVv3OlTuLzYcE31dIoaw+ze2HPsKf89lkAQzJWjeGg==
+X-Received: by 2002:a37:1bd3:: with SMTP id m80mr12538681qkh.259.1540831305614;
+	Mon, 29 Oct 2018 09:41:45 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.42
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:43 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:44 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:41:00 -0400
-Message-Id: <b40eac3600551dd8e597cbf1cbdec7b78c038711.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:41:01 -0400
+Message-Id: <a3ce539915c9a45c2b8032260ea65d6ee5b00f6b.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
 References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 03/16] gjs: add a recipe for gjs (Gnome JavaScript engine)
+Subject: [RFC meta-gnome][PATCH 04/16] accountsservice: add recipe for Accounts Service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,138 +58,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:44 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:45 -0000
 
 From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
-Currently this hacks up gjs a little bit and relies on a
-specific SRCREV to sidestep the need for mozjs60 support
-(use mozjs52 instead).
-
 Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 ---
- .../gnome3/gjs/0001-fix-override-allow.patch  | 75 +++++++++++++++++++
- meta-gnome/recipes-gnome/gnome3/gjs_git.bb    | 30 ++++++++
- 2 files changed, 105 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gjs/0001-fix-override-allow.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gjs_git.bb
+ .../accountsservice/0001-strip-out-intl.patch | 104 ++++++++++++++++++
+ .../gnome3/accountsservice_git.bb             |  24 ++++
+ 2 files changed, 128 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome3/gjs/0001-fix-override-allow.patch b/meta-gnome/recipes-gnome/gnome3/gjs/0001-fix-override-allow.patch
+diff --git a/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch b/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
 new file mode 100644
-index 000000000..fc152db1d
+index 000000000..622b3335d
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/gjs/0001-fix-override-allow.patch
-@@ -0,0 +1,75 @@
-+gjs: Fix broken override GInterface properties
++++ b/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
+@@ -0,0 +1,104 @@
++accountsservice: Remove internationalization
 +
-+  [gjs Ticket #186] -- https://gitlab.gnome.org/GNOME/gjs/issues/186
-+ 
-+  Overriding introspected GObjectInterface properties 
-+  
-+  Signed-off-by: Philip Chimento <philip.chimento@gmail.com>
-+  
-+  The patch was imported from the gjs git server
-+  (git://gitlab.gnome.org/GNOME/gjs) with a commit id of
-+  322ffab6b0b24ab0ce36079642021d969b081730.
++  The i18n internationalization fails within the OE
++  environment.
 +
-+  Upstream-status: Backport
-+  
-+  This recipe can move to tracking a more appropriate revision
-+  once a recipe for building mozjs60 is created, and then this
-+  patch can be dropped.
++  Upstream-Status: Inappropriate [disable-feature]
 +
 +  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+diff --git a/gi/object.cpp b/gi/object.cpp
-+index 2b2265da..70032736 100644
-+--- a/gi/object.cpp
-++++ b/gi/object.cpp
-+@@ -717,7 +717,11 @@ bool ObjectPrototype::lazy_define_gobject_property(JSContext* cx,
-+     JS::RootedValue private_id(cx, JS::StringValue(JSID_TO_STRING(id)));
-+     if (!gjs_define_property_dynamic(
-+             cx, obj, name, "gobject_prop", &ObjectBase::prop_getter,
-+-            &ObjectBase::prop_setter, private_id, GJS_MODULE_PROP_FLAGS))
-++            &ObjectBase::prop_setter, private_id,
-++            // Make property configurable so that interface properties can be
-++            // overridden by GObject.ParamSpec.override in the class that
-++            // implements them
-++            GJS_MODULE_PROP_FLAGS & ~JSPROP_PERMANENT))
-+         return false;
++
++diff --git a/data/meson.build b/data/meson.build
++index 4987937..6274e5d 100644
++--- a/data/meson.build
+++++ b/data/meson.build
++@@ -28,15 +28,6 @@ configure_file(
 + 
-+     *resolved = true;
-+diff --git a/installed-tests/js/testGObjectInterface.js b/installed-tests/js/testGObjectInterface.js
-+index 9eab9746..daefb683 100644
-+--- a/installed-tests/js/testGObjectInterface.js
-++++ b/installed-tests/js/testGObjectInterface.js
-+@@ -84,6 +84,22 @@ const ImplementationOfTwoInterfaces = GObject.registerClass({
-+     }
-+ });
++ policy = act_namespace.to_lower() + '.policy'
 + 
-++const ImplementationOfIntrospectedInterface = GObject.registerClass({
-++    Implements: [Gio.Action],
-++    Properties: {
-++        'enabled': GObject.ParamSpec.override('enabled', Gio.Action),
-++        'name': GObject.ParamSpec.override('name', Gio.Action),
-++        'state': GObject.ParamSpec.override('state', Gio.Action),
-++        'state-type': GObject.ParamSpec.override('state-type', Gio.Action),
-++        'parameter-type': GObject.ParamSpec.override('parameter-type',
-++            Gio.Action)
-++    }
-++}, class ImplementationOfIntrospectedInterface extends GObject.Object {
-++    get name() {
-++        return 'inaction';
-++    }
-++});
-++
-+ describe('GObject interface', function () {
-+     it('cannot be instantiated', function () {
-+         expect(() => new AGObjectInterface()).toThrow();
-+@@ -247,6 +263,11 @@ describe('GObject interface', function () {
-+             253, 'testGObjectMustOverrideInterfaceProperties');
-+     });
++-i18n.merge_file(
++-  policy,
++-  input: policy + '.in',
++-  output: policy,
++-  po_dir: po_dir,
++-  install: true,
++-  install_dir: policy_dir,
++-)
++-
++ if install_systemd_unit_dir
++   service = 'accounts-daemon.service'
 + 
-++    it('can have introspected properties overriden', function() {
-++        let obj = new ImplementationOfIntrospectedInterface();
-++        expect(obj.name).toEqual('inaction');
-++    });
-++
-+     it('can be implemented by a class as well as its parent class', function () {
-+         const SubObject = GObject.registerClass(
-+             class SubObject extends GObjectImplementingGObjectInterface {});
-diff --git a/meta-gnome/recipes-gnome/gnome3/gjs_git.bb b/meta-gnome/recipes-gnome/gnome3/gjs_git.bb
++diff --git a/meson.build b/meson.build
++index 77b6a3f..7da5d5d 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -25,8 +25,6 @@ act_pkgincludedir = join_paths(act_includedir, act_api_name)
++ 
++ act_namespace = 'org.freedesktop.Accounts'
++ 
++-act_gettext = 'accounts-service'
++-
++ soversion = 0
++ current = 0
++ revision = 0
++@@ -35,11 +33,9 @@ libversion = '@0@.@1@.@2@'.format(soversion, current, revision)
++ act_buildtype = get_option('buildtype')
++ 
++ gnome = import('gnome')
++-i18n = import('i18n')
++ pkg = import('pkgconfig')
++ 
++ data_dir = join_paths(meson.current_source_dir(), 'data')
++-po_dir = join_paths(meson.current_source_dir(), 'po')
++ 
++ top_inc = include_directories('.')
++ 
++@@ -52,9 +48,6 @@ config_h.set_quoted('VERSION', act_version)
++ config_h.set('_DEFAULT_SOURCE', true)
++ config_h.set('_GNU_SOURCE', true)
++ 
++-# i18n
++-config_h.set_quoted('GETTEXT_PACKAGE', act_gettext)
++-
++ # headers
++ check_headers = [
++   'paths.h',
++@@ -182,7 +175,6 @@ config_h.set('WITH_SYSTEMD', enable_systemd or enable_elogind)
++ 
++ subdir('data')
++ subdir('src')
++-subdir('po')
++ 
++ enable_docbook = get_option('docbook')
++ if enable_docbook
++diff --git a/src/libaccountsservice/act-user-manager.c b/src/libaccountsservice/act-user-manager.c
++index 12be9cb..712db6c 100644
++--- a/src/libaccountsservice/act-user-manager.c
+++++ b/src/libaccountsservice/act-user-manager.c
++@@ -35,7 +35,6 @@
++ #endif /* HAVE_PATHS_H */
++ 
++ #include <glib.h>
++-#include <glib/gi18n-lib.h>
++ #include <glib/gstdio.h>
++ #include <glib-object.h>
++ #include <gio/gio.h>
++diff --git a/src/main.c b/src/main.c
++index 9caec7f..acbd422 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -155,7 +155,6 @@ main (int argc, char *argv[])
++         };
++ 
++         setlocale (LC_ALL, "");
++-        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
++ 
++ #if !GLIB_CHECK_VERSION (2, 35, 3)
++         g_type_init ();
++@@ -167,7 +166,6 @@ main (int argc, char *argv[])
++         }
++ 
++         context = g_option_context_new ("");
++-        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
++         g_option_context_set_summary (context, _("Provides D-Bus interfaces for querying and manipulating\nuser account information."));
++         g_option_context_add_main_entries (context, entries, NULL);
++         if (!g_option_context_parse (context, &argc, &argv, &error)) {
+diff --git a/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
 new file mode 100644
-index 000000000..db62f507f
+index 000000000..a019a8c6d
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/gjs_git.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "GNOME JavaScript engine"
-+LICENSE = "MIT|LGPLv2+"
-+DEPENDS = " \
++++ b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "Accounts Service"
++LICENSE = "GPLv3"
++DEPENDS = " \ 
 +            glib-2.0 \
 +            gsettings-desktop-schemas \
-+            mozjs \
-+            cairo \
++            polkit \
++            dbus \
 +          "
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=beb29cf17fabe736f0639b09ee6e76fa"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+SRC_URI = "git://gitlab.gnome.org/GNOME/gjs.git;protocol=http;branch=master \
-+           file://0001-fix-override-allow.patch \
++SRC_URI = "git://anongit.freedesktop.org/accountsservice.git;protocol=git;branch=master \
++           file://0001-strip-out-intl.patch \
 +           "
 +
-+# Last pre-mozjs60 merge commit. Once mozjs is upreved from 52->60,
-+# we can select a more sane version.
-+SRCREV="f2a8ca3dcfee06e03ae344932537951bc4d7739c"
++FILES_${PN} += "${systemd_system_unitdir}"
++FILES_${PN} += "${datadir}"
++FILES_${PN} += "${libdir}"
++
++SRCREV="${AUTOREV}"
 +S = "${WORKDIR}/git"
 +
-+inherit autotools pkgconfig gobject-introspection
-+EXTRA_OECONF += " --without-dbus-tests "
-+
-+FILES_${PN} += "${datadir}"
-+
-+do_configure_prepend() {
-+	export GI_DATADIR="${RECIPE_SYSROOT_NATIVE}${datadir}/gobject-introspection-1.0"
-+	sed -i 's#mozjs-17#mozjs-52#g' ${S}/configure.ac
-+}
++inherit pkgconfig meson gobject-introspection 
 +
 -- 
 2.17.1
