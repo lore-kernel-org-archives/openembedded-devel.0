@@ -1,49 +1,52 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B295A78EFF
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 00ED178EFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:39 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id 189so3918458qkj.8
+	Mon, 29 Oct 2018 16:41:40 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id 131so5332194qkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:41 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=iQbFUcdQjuDqjvy2uYMszyqgeEVe6WbG+HV6lYzSNqc=;
-	b=DRZStCECskJu91f5kiC+HJ1vpKk99tNH7Z6SsxnlM0lAx4BFQrhZ58kYje9nNRQgDi
-	+4o5hM3HAr/rTXXAoqZIdFNtDB6qzoLMAYjvAVeKXtpleJasVmyczJL3NS1ZNJBRPsAw
-	4IUiNPuDIChCUYy+RCOlSwwNogkYfDdaJLmWlg3L4TBbykVpSfTBrPL4Qkxot6T2VUCF
-	GoMcbPkII7pLnkwbcHddZ8DQaPJu0QxmeeKNX5u/aILNMRtkT8mnALpXrTofi++YldHz
-	w9dRdvVyOnK4A2q1WvwHEelDmvLBHxqtL87sU74K9OSKxztjroVkMFHnlFiT5vZBm8qV
-	ZHsg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=PS13uGY18HlHJ0UkLr7hMxv6ZrJIj5vC2qgx3d+wD9s=;
+	b=jx9Rks3erB32M6ay99S7QstOtU0qgMBKTwqBS+JL7q2FURLvEoP1OPkhiJ2S5f0EQa
+	labWL0bnlBiRFdJlDz6z+zPAX1VauNHIG8ODK1GhXIaB1RfhuvM0rqPH4k1e9aSnZa/i
+	X6Ur/wUnUbPOiErr6XCTi4ogz88xit/HeAcaluY2bPU+NdVKe5Pqta2sv4Pig+Cdn8VA
+	z0WRhrmJ4j+7SzRuXG8/8ConuXOi/MprH515RGC6q443Kcgdw9emR2OKPrWrPVO5JKNc
+	n0ZeVyeq/SqlRGOGXxbba+dQY9iIWDbsVNmDReL4b3eji/iznbKcar0PSG07y9WyHH/P
+	bm2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iQbFUcdQjuDqjvy2uYMszyqgeEVe6WbG+HV6lYzSNqc=;
-	b=Ldqy6X+ammtg0TNBrUkWuo6eDB8GpwWk36DKQpj3ROvwU4w4OQAAK4MhdlPiv/Fx6Z
-	pB0eGeOPPDghi0pq8d1XGzr+1zL1Onw5GmyMaIhJwNQ22kPcGlrJetc39dmIhKMVziXA
-	RlabEgrO6ZIx/XdzUb9C6Q9ao8tD3cL8ErV8rhTUNV/vvQBguh1/dMPnUE7zs0LJbuYY
-	gI5MhJRahW66kkkYWO753+MdZ8Gm4tuakAtR7UPs2apXyQno0733wztRYEXw4zIo+pDH
-	gQYpjrAK3KwVx8r/8WGY4dWEUqvnIEU9dUMguWPDvqrhYFyudANexkXLtb55tvo4OmJN
-	bn0g==
-X-Gm-Message-State: AGRZ1gKHxno13v25vzb8adfbSOKLB72nla1OA9o/9CpnpxtiWM8DiAQN
-	fLHkG58X1ttaJ26eXxuCBidBDv5e
-X-Google-Smtp-Source: AJdET5dxU8s3gW/V69Qs0PnhIAkppArNpx2c6gnnkhKn5zrp+tURTZJFhRCYJVbypnU5nnAbvIjoTA==
-X-Received: by 2002:a37:a1c1:: with SMTP id
-	k184mr12438531qke.166.1540831300309; 
-	Mon, 29 Oct 2018 09:41:40 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=PS13uGY18HlHJ0UkLr7hMxv6ZrJIj5vC2qgx3d+wD9s=;
+	b=D866f6+8VGmDBj2bpGWPARZR+pdFetd6qmRrs0CHIleNuhsf8ifwQ70mrG06aXoZ/f
+	dFH6CkR7aROfZ65XyuyCKPjkvB0K/hBa3NFP8rJW5SNMocqLJwesA8PmyXYtV/UtGs8x
+	KUHPVdWmi9dh5qTge97uwAVrjlyZ7KfRkiOMCYXK4vR6XZqCu2oFGsNVCyeA6agIuvga
+	JjEHkBh8yyAbC0Lq5iu7qIdHPDL9pkSyfIRQ/zd+ZUsK/i93924IJCLrJM3rpxN294vK
+	nT0NII1b2+bFn6ddeqnGHasGENR4B8O0Pr8aF8fpp0qRMYu1hDM4V7JF5x/Nk+fDt1R0
+	njAw==
+X-Gm-Message-State: AGRZ1gKYhtnywZqLWbFSijmPQ9bcHgQEl4be0Ur/olzEE3lWI1/iGAAe
+	1KoBYyIw+CDuBvCfqHUxWSwRjaHu
+X-Google-Smtp-Source: AJdET5fLQMbE2HrEatIQjfjfal1UJfRbOvg9nHGDnYKPB4C8TUJ4Pbo2KYtMLbA012xKg5TqiIF2og==
+X-Received: by 2002:a37:bb42:: with SMTP id
+	l63-v6mr13033088qkf.214.1540831301617; 
+	Mon, 29 Oct 2018 09:41:41 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.39
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:39 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:40 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:40:57 -0400
-Message-Id: <cover.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:40:58 -0400
+Message-Id: <249e8f90c9f911f125fbde534b24731e2a14bba6.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
+References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 00/16] Add gnome-shell support
+Subject: [RFC meta-gnome][PATCH 01/16] sassc: add recipes for libsass-native and sassc-native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,100 +59,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:40 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:41 -0000
 
-This adds gnome3/gnome-shell support (and required dependencies)
-to meta-gnome.
+From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
-Please review the following changes for suitability for inclusion. If you have
-any objections or suggestions for improvement, please respond to the patches. If
-you agree with the changes, please provide your Acked-by.
-
-The following changes since commit f1511d254632a34c1deb51f4bf8b8c21e7423f51:
-
-  libssh: Do not use thumb-1 ISA on armv5 (2018-10-27 18:29:32 -0700)
-
-are available in the Git repository at:
-
-  git://github.com/brendank310/meta-openembedded gnome-shell-support
-  https://github.com/brendank310/meta-openembedded/tree/gnome-shell-support
-
-Brendan Kerrigan (16):
-  sassc: add recipes for libsass-native and sassc-native.
-  ibus: add recipe for ibus to support gnome-settings-daemon and
-    gnome-shell
-  gjs: add a recipe for gjs (Gnome JavaScript engine)
-  accountsservice: add recipe for Accounts Service
-  lcms2: add recipe for Little Color Management System
-  gnome-settings-daemon: add recipe for gnome-settings-daemon
-  geocode-glib: add recipe for geocode-glib library
-  libgweather: add recipe for libgweather
-  gdm: add recipe for gdm (Gnome Desktop Manager)
-  dconf-native: add dconf-native recipe
-  libwacom: add recipe for libwacom
-  mutter: add recipe for mutter window manager
-  gnome-shell: add recipe for gnome-shell.
-  packagegroup-gnome3-base: add packagegroup for installing
-    gnome3/gnome-shell
-  gnome-shell-extensions: add recipe for gnome-shell-extensions
-  gnome-tweak-tool: add recipe for the GNOME Tweak tool
-
- .../dconf/dconf-native_0.28.0.bb              |  19 ++++
- .../accountsservice/0001-strip-out-intl.patch | 104 ++++++++++++++++++
- .../gnome3/accountsservice_git.bb             |  24 ++++
- meta-gnome/recipes-gnome/gnome3/gdm_git.bb    |  33 ++++++
- .../recipes-gnome/gnome3/geocode-glib_git.bb  |  21 ++++
- .../gnome3/gjs/0001-fix-override-allow.patch  |  75 +++++++++++++
- meta-gnome/recipes-gnome/gnome3/gjs_git.bb    |  30 +++++
- .../0001-remove-extraneous-plugins.patch      |  52 +++++++++
- .../gnome3/gnome-settings-daemon_git.bb       |  43 ++++++++
- .../gnome3/gnome-shell-extensions_git.bb      |  40 +++++++
- .../gnome-shell/0001-dont-detect-python.patch |  24 ++++
- .../recipes-gnome/gnome3/gnome-shell_git.bb   |  46 ++++++++
- .../recipes-gnome/gnome3/gnome-tweaks_git.bb  |  19 ++++
- .../ibus/0001-strip-out-dbus-build-dep.patch  |  29 +++++
- ...0002-decorate-automake-for-valaflags.patch |  46 ++++++++
- .../recipes-gnome/gnome3/ibus_1.5.19.bb       |  41 +++++++
- meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb  |  14 +++
- .../recipes-gnome/gnome3/libgweather_git.bb   |  23 ++++
- .../gnome3/libsass-native_3.5.4.bb            |  16 +++
- .../recipes-gnome/gnome3/libwacom_git.bb      |  17 +++
- .../mutter/0001-disable-zenity-check.patch    |  27 +++++
- ...spection-variables-with-correct-path.patch |  63 +++++++++++
- .../0003-packageconfig-variable-fixup.patch   |  29 +++++
- .../mutter/0004-fix-broken-includes.patch     |  37 +++++++
- meta-gnome/recipes-gnome/gnome3/mutter_git.bb |  59 ++++++++++
- .../gnome3/sassc-native_3.5.0.bb              |  15 +++
- .../packagegroups/packagegroup-gnome3-base.bb |  27 +++++
- 27 files changed, 973 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/dconf/dconf-native_0.28.0.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gdm_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gjs/0001-fix-override-allow.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gjs_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon/0001-remove-extraneous-plugins.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-tweaks_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/ibus/0001-strip-out-dbus-build-dep.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/ibus/0002-decorate-automake-for-valaflags.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/ibus_1.5.19.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/libgweather_git.bb
+Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
+---
+ .../recipes-gnome/gnome3/libsass-native_3.5.4.bb | 16 ++++++++++++++++
+ .../recipes-gnome/gnome3/sassc-native_3.5.0.bb   | 15 +++++++++++++++
+ 2 files changed, 31 insertions(+)
  create mode 100644 meta-gnome/recipes-gnome/gnome3/libsass-native_3.5.4.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/libwacom_git.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0001-disable-zenity-check.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0002-fixup-introspection-variables-with-correct-path.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0003-packageconfig-variable-fixup.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter/0004-fix-broken-includes.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/mutter_git.bb
  create mode 100644 meta-gnome/recipes-gnome/gnome3/sassc-native_3.5.0.bb
- create mode 100644 meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
 
+diff --git a/meta-gnome/recipes-gnome/gnome3/libsass-native_3.5.4.bb b/meta-gnome/recipes-gnome/gnome3/libsass-native_3.5.4.bb
+new file mode 100644
+index 000000000..37a25f085
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome3/libsass-native_3.5.4.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "A C/C++ implementation of a Sass compiler"
++LICENSE = "MIT"
++DEPENDS = " atk glib-2.0 gettext-native "
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2f8a76980411a3f1f1480b141ce06744"
++
++SRC_URI = "https://github.com/sass/${BPN}/archive/${PV}.tar.gz \
++           "
++
++SRC_URI[md5sum] = "4af3f4ffd3e8cac1cb1c90ebc2dd41b2"
++SRC_URI[sha256sum] = "5f61cbcddaf8e6ef7a725fcfa5d05297becd7843960f245197ebb655ff868770"
++
++S = "${WORKDIR}/${BPN}-${PV}"
++
++inherit autotools pkgconfig native
++
+diff --git a/meta-gnome/recipes-gnome/gnome3/sassc-native_3.5.0.bb b/meta-gnome/recipes-gnome/gnome3/sassc-native_3.5.0.bb
+new file mode 100644
+index 000000000..5ba15e194
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome3/sassc-native_3.5.0.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "libsass command line driver."
++LICENSE = "MIT"
++DEPENDS = " libsass-native "
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2f8a76980411a3f1f1480b141ce06744"
++
++SRC_URI = "https://github.com/sass/${BPN}/archive/${PV}.tar.gz \
++           "
++SRC_URI[md5sum] = "f5c6aeb4e98c96d093f20295fc490f2c"
++SRC_URI[sha256sum] = "26f54e31924b83dd706bc77df5f8f5553a84d51365f0e3c566df8de027918042"
++
++S = "${WORKDIR}/${BPN}-${PV}"
++
++inherit autotools pkgconfig distro_features_check native
++
 -- 
 2.17.1
 
