@@ -1,47 +1,47 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 68E7079C5F
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+	[209.85.167.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 61E4879C64
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 23:06:27 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id p23so9294374otf.11
+	Mon, 29 Oct 2018 23:10:04 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id f21-v6so5583865oig.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:06:28 -0700 (PDT)
+	Mon, 29 Oct 2018 16:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=TMCiKgg2OioqeIFJZx3M9tW/pG41jLwChJn0NgQ6e9k=;
-	b=g0Fs+GhHr5AvmS7nU7CDkytcdCWExNawZIRAGROum/ZhxlBviclckeFEITLFhrhavl
-	PCsBRrNXsIrpk4ytK4rcBB92yIAepgWKqAsrZS/JpKhHPjsGUt7yMZ9zigdImJ66kwC3
-	MMZgpyrFjGoFw16UwHNg0I56xIUeq6OtnFTJBFAQp4+ySnMoIUPiZTZv0jQb2YlIWXgy
-	vRjPQVeHCvBZKYzsnxDjFuZx46pfhGXXQuHyTqRN/xmkRFRJ4Y/EGVCkpwriL2Ue+R8y
-	xKiQpYv6rjjQ0GlIyzbql619W85lE3pBO4QePKkcOaBa5+sfXjThQFrqIsrkXER9k9/+
-	ge3Q==
+	:cc; bh=WWyr1ZfXpeEjE5XFtOIfWPCWQTTut3zwS/jKnIsZDkY=;
+	b=LEN5egl0glgRXZYy53HcWYSI1GA25Yd9Q8eBDc10/8S1ojswke/7g8jhfCO+MLfqds
+	god1IzHufaD4lpr5KlOeo1Ndw702sFUaCNd6z4VSXBvoUZ2q/qntcXs497G+c79pXF7N
+	IaxcAk8hQjr/WSq681FEkx5URsPsGewUf7CGJNDOZjjTgQhCEr79kR5kqxeKpSumwDn9
+	9+GwPCK1MGNrUEODTBCHubcysB/XTW9gZZb8V/CnI10/W2OX/K4k/Ep2nlsXWYVID94R
+	t8A9dQplyp/NwqUZQu9c8VpEG3tPIOAbFPlDeMgpWPCAksIw9qDTjKKLBVtg3pwfyKqy
+	Xpzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=TMCiKgg2OioqeIFJZx3M9tW/pG41jLwChJn0NgQ6e9k=;
-	b=hm7rWwwY+K1yLmNVUnisBU2nnqD/86nCsr5NLg5MnO/ZlJbrNEusDF1R2BinBo+6RH
-	VXiaQyETo9OvYBjfTRnCWX2fX4eoy3BaJhjwmSyZuVI3Fiu6JMtgygAB8gyBx+GgBO05
-	c8NFz3NTqpBPO8+/3p//ziEsx/sI0yFC4T/FrCMM0c8JAez6yqIZlbZcsOBGPuwRMC1s
-	XFp5FH37FRbg4wOGhLw+OssoJXe4pfJmfsNT6G/VTabFwy+VpAr1mf0HfGuMnmmrUvYn
-	6EtWiA4LWe3a5r2Xi6gMZYfAKAFxxRAgLguBJ/A7HLDWOB0FtMTzwyJIo2w0JuJTUP+K
-	dy7A==
-X-Gm-Message-State: AGRZ1gKxHPIVLZ5LL8qJJz19CkkunKCo8jt87OAGrk9lYsDqK6K+2q7U
-	mgO9f2tOjnMXX2hudRlQ1FsgRaFdiJIJ7GOiQlFIaD3w
-X-Google-Smtp-Source: AJdET5eYNJBDHK9egZqwaqrwwHSpwfiODIiFf4p103M72ZUf/wx0rOj7gCo/Z6/RJPha1F5gObsvvD2sA4i7r20+5i8=
-X-Received: by 2002:a9d:3c8d:: with SMTP id z13mr2319204otc.109.1540854388385; 
-	Mon, 29 Oct 2018 16:06:28 -0700 (PDT)
+	bh=WWyr1ZfXpeEjE5XFtOIfWPCWQTTut3zwS/jKnIsZDkY=;
+	b=GmUeB5EzNDEMlRl88Zhsed/rEde9pAEEBzcRpMfJZx7mraEyYwUTmZveMGoeYzf+jk
+	KhriWQxAl9aDR4/yiwgOP6954+zzVcKZbJtMLGeTR/1hvzy4x8G+pDLkiStN63+7appC
+	LG13mzbsLxO8OLksIw/u7ErfGn1SsoacG1ompSAB0Joao6bmpFk2XMqgLipEINJ3b44c
+	CmgAkc5dK23yNNOdqEyHaRNJeJ1jOlFEMeWI87aKTIUMpeNffMvBU9jTp7azwSvIuJUN
+	UqIcog2zFle0kyvmSTPugog37wmz8skRKgeXXHDEM4R6EvCk7imSdltC/TXRtwGgUnfZ
+	Ojmw==
+X-Gm-Message-State: AGRZ1gJPBLFln5JeWp2mw/v/uC1O5A9BuAFmp7OXh/j9B+qDe2u5A5zN
+	hMj+oifzlgJOcoDYC/FAMmF4tOmTX5wNWujg3FE=
+X-Google-Smtp-Source: AJdET5cWIxjYHnhDB7U9P5L0jWXKG21Xh2LTHujcBCOERZw8EV4oUtDHLOlQam1hWbHdku1xP27iT5rtad4dmBUifE0=
+X-Received: by 2002:aca:2b0a:: with SMTP id i10-v6mr9968920oik.7.1540854605390;
+	Mon, 29 Oct 2018 16:10:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<d84e5b262a493ae9fe761ee9e22fec8f6d2dc59c.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <d84e5b262a493ae9fe761ee9e22fec8f6d2dc59c.1540830650.git.brendank310@gmail.com>
+	<dd28c909c895c7e30064a9646f5ccbde1414d3fa.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <dd28c909c895c7e30064a9646f5ccbde1414d3fa.1540830650.git.brendank310@gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 30 Oct 2018 00:06:15 +0100
-Message-ID: <CALbNGRT5Ao_aXNgzjuzm7S7UrYdrYL3TbP40mVWmr+JTjKtStA@mail.gmail.com>
+Date: Tue, 30 Oct 2018 00:09:52 +0100
+Message-ID: <CALbNGRRuq_=ZFWu_Bv_TR=sWUh6u3TuJSbrKzjPJ9L_8DZDCww@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 15/16] gnome-shell-extensions: add recipe for gnome-shell-extensions
+Subject: Re: [RFC meta-gnome][PATCH 16/16] gnome-tweak-tool: add recipe for the GNOME Tweak tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,67 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 23:06:27 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 23:10:04 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 On Mon, Oct 29, 2018 at 5:42 PM brendank310 <brendank310@gmail.com> wrote:
 >
 > From: Brendan Kerrigan <kerriganb@ainfosec.com>
 >
-> Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
+> Signed-off-by:  Brendan Kerrigan <kerriganb@ainfosec.com>
 > ---
->  .../gnome3/gnome-shell-extensions_git.bb      | 40 +++++++++++++++++++
->  1 file changed, 40 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
+>  .../recipes-gnome/gnome3/gnome-tweaks_git.bb  | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-tweaks_git.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb b/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
+> diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-tweaks_git.bb b/meta-gnome/recipes-gnome/gnome3/gnome-tweaks_git.bb
 > new file mode 100644
-> index 000000000..8c02195d9
+> index 000000000..fe305c922
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
-> @@ -0,0 +1,40 @@
-> +DESCRIPTION = "GNOME Shell Extensions"
+> +++ b/meta-gnome/recipes-gnome/gnome3/gnome-tweaks_git.bb
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION = "GNOME Tweaks"
+^ Maybe I have missed this in other patches: SUMMARY is default short
+description
 > +LICENSE = "GPLv2"
 > +DEPENDS = " \
-> +            glib-2.0 \
-> +            gsettings-desktop-schemas \
-> +            gjs \
-> +            gnome-desktop3 \
-> +            gdm \
-> +            mutter \
-> +            wayland \
-> +            wayland-protocols \
-> +            evolution-data-server \
-> +            libcroco \
-> +            polkit \
-> +            gnome-bluetooth \
-> +            gstreamer \
-> +            keybinder \
-> +            gnome-settings-daemon \
-> +            ibus \
-> +            librsvg \
-> +            python3 \
-> +            sassc-native \
+> +            gnome-shell \
 > +          "
 > +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4cb3a392cbf81a9e685ec13b88c4c101"
+> +LIC_FILES_CHKSUM = "file://LICENSES/GPL-3.0;md5=9eef91148a9b14ec7f9df333daebc746"
 > +
-> +SRC_URI = " \
-> +           git://gitlab.gnome.org/GNOME/gnome-shell-extensions.git;protocol=http;branch=master;tag=3.30.1 \
-> +          "
+> +SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-tweaks.git;protocol=http;branch=master;tag=3.30.1 \
+> +           "
 > +
-> +RDEPENDS_gnome-shell = " \
-> +                         gnome-shell \
-> +                        "
-^ I think it should be RDEPENDS_gnome-shell-extensions
 > +S = "${WORKDIR}/git"
 > +
-> +EXTRA_OEMESON += " -Dextension_set=all "
-> +
+> +FILES_${PN} += "${libdir}"
 > +FILES_${PN} += "${datadir}"
-^ Put this at the end of the recipe please
+^ again libdir necessary? / one staetment / end of recipe
 > +
 > +inherit pkgconfig meson gobject-introspection gettext
+> +
+> +
 > --
 > 2.17.1
 >
