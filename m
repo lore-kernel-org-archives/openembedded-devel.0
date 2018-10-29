@@ -1,52 +1,52 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E923C79A5D
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5705379B9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:56 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id u34-v6so9996904qth.3
+	Mon, 29 Oct 2018 16:41:58 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id z20-v6so9975733qti.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:58 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=yjFpahhyr93RREU9mxWwlikvtc3Bl3g79UI/+Pa4+mo=;
-	b=HEI3gaEUqPC4+ioj7ZGb9aQMV0ZHx9+Amd83NZVOUvoKiXmNnHQdWa2G3hcKwzye36
-	CouIVftXQEhrSeG4clh1gtRScOA7akRmGwHe+FGMnX4g3aa61P/oj5qQCMOghjgpoIn7
-	wOy/EyGE0ymuFQAlr2x7RLJjEh7XPHTE5djUaavrNT2hjmrIC23PtZfCo9n4Y6XC16Qv
-	rTnlE6bsK9iAXyC/mhgJhGa1S0XKlk45r4L12PUmFQy+gUnumszAGflsXN2GD78TUTqa
-	opN3GgJ3ZDTaYYNjknoue7H5PP817V9XHmFAOezsq1briCNQqOLULmbJ52hNf34rAaV0
-	MTbg==
+	bh=wKM4dZCLHZTJU0XunLjG4M0xPusiBNSYOizFdbOeyJ4=;
+	b=H4399vK/K8ArFbTHposGnDqMPkEf6Df3fwekQCxUH1VTnYBSTwLIGVNTfE78RI4CWr
+	AcExB1GR9axwpgyGYvpcuxYI6BVMQ4nH+3fARp9NkWVJIaLfrmeI1vW8kmMF93Uj3hGg
+	7WfOYqdc2SImwh64muuyHYA4CG5wutO4VXPzw0+EzoZ9a2k79VflRpxbMzHofI4uxmTE
+	sRfT78ooMPUZLYTUDIv5x1j+WFxg1ErmnxDL9cjSBn5aaERbZWZZ6WXLtW5ao/n1hB1D
+	yYtr9v7ZoARAo+pima7d90vNcVW0aDkmZQ/HOQeE10Pw/ed1wExpM0YVxsfI21u7iNiM
+	Oleg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=yjFpahhyr93RREU9mxWwlikvtc3Bl3g79UI/+Pa4+mo=;
-	b=HBKWwCUNHYB47VTHHx2rTZXH3HYmwfNPu9+yNLKkOi2VYUoURDRaPO1TlZWEayQ8rK
-	yzFSb/U+b6F2rUOa6isIIBrO25QwMQlRf8xzXPzGF2Zb676D9yooaYJEFsBuECC11rNL
-	DQaJh1l6sqfgevupZhVzmyhTWlrI0+MXcnHcRle1Ee3G+foGZwZooXX/lDbWCnUZJnh1
-	Gm103QRYdYT7jnZPKm+RY/ZQULKSZSpRsmmYBQzSlBfs/+HtXm7gcIESIT4Wu5g1VPE9
-	3E4Vwxgfs8u3CZzI6xzL39HH8O+42+5zaaJRiaaN4oUwNvPW/ei8SBXg4crknJijUOED
-	WS8g==
-X-Gm-Message-State: AGRZ1gLDwX+Au8fcy6o7PqyEwp1r6qQDYbXw0yhhOkUD248FP8BTZGpJ
-	e3TlLtrD0DzwKSKZcx3iWruWxwcp
-X-Google-Smtp-Source: AJdET5fZDMC5zeEjoBLaLA3sxevwtHE9Wl3FJ+INnDpSSfpbO2GyZu/Cf+SHiE+a4d/SczPj2yaC5g==
-X-Received: by 2002:ac8:76d9:: with SMTP id
-	q25-v6mr13739004qtr.35.1540831317637; 
-	Mon, 29 Oct 2018 09:41:57 -0700 (PDT)
+	bh=wKM4dZCLHZTJU0XunLjG4M0xPusiBNSYOizFdbOeyJ4=;
+	b=nb3NC9fAWgGOjPUmWTWbPvZ6zGhcrDgSUb2cGm4WMyh5dtx18oHhTlhuybCXykGu79
+	BuQV2ZTHWktLnRu/2L4H5JTNQY2ZKtsnSJNdsRiHz8/hLJlQxEh0vOWphiwxdSHHvwxm
+	97os235ZYiNv0yY4o+anmC6FAEkIz3I9z/MTbx0Ba0ZwIO1+xK+KkpDS8bsgg1uMSmru
+	xEjeICYXmsNCqyg2+7YGsdaAAJDnRnSMqFIo5Wn0ohoVOsefKD6i/jS74DM7wg9dyy88
+	UM6rNb32BxfGm38tuz1C5SfyT1vj5vtz6yFMyksMtOUiYkMyZefRVsW38ovB1aWXbUMM
+	xvaQ==
+X-Gm-Message-State: AGRZ1gJupMX1Arsey+UiSkwjWZdR3ezLRyT0042DcrcjDQ3aXmyklIep
+	4rwTInAe65P+6xVz89N+sq07P0TQ
+X-Google-Smtp-Source: AJdET5dF1zD3UBnjtN7De8FdXjCYDyoT+VWUoJrogGsb5Yx3cun7A64kOwyWkJj5ZMMoQRCYg7Mqyg==
+X-Received: by 2002:aed:2f27:: with SMTP id
+	l36-v6mr13436364qtd.71.1540831319057; 
+	Mon, 29 Oct 2018 09:41:59 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.56
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:56 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:57 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:41:10 -0400
-Message-Id: <ef386b75ac95432d2fa8c4bcfcda95f16db6d555.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:41:11 -0400
+Message-Id: <9f5b028fdf90a7650a62e538889580dc31864a6b.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
 References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 13/16] gnome-shell: add recipe for gnome-shell.
+Subject: [RFC meta-gnome][PATCH 14/16] packagegroup-gnome3-base: add packagegroup for installing gnome3/gnome-shell
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,100 +59,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:57 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:58 -0000
 
 From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
 Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 ---
- .../gnome-shell/0001-dont-detect-python.patch | 24 ++++++++++
- .../recipes-gnome/gnome3/gnome-shell_git.bb   | 46 +++++++++++++++++++
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
+ .../packagegroups/packagegroup-gnome3-base.bb | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch b/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
+diff --git a/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb b/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
 new file mode 100644
-index 000000000..50d874061
+index 000000000..8484087b8
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell/0001-dont-detect-python.patch
-@@ -0,0 +1,24 @@
-+gnome-shell: Add decoration to tweak python3 path
++++ b/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "All packages required for a base install of Gnome Shell"
++SECTION = "x11/wm"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++PR = "r0"
 +
-+  The python detection used in the meson script doesn't
-+  resolve correctly. Add a decoration to allow the
-+  do_configure_prepend to sed in the correct path for
-+  python3-native.
++inherit packagegroup distro_features_check
 +
-+  Upstream-status: Innappropriate [embedded-specific]
++REQUIRED_DISTRO_FEATURES = "x11"
 +
-+  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+
-+diff --git a/src/meson.build b/src/meson.build
-+index 178e05899..d3d8df97b 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -13,7 +13,7 @@ script_data.set('libdir', libdir)
-+ script_data.set('libexecdir', libexecdir)
-+ script_data.set('pkgdatadir', pkgdatadir)
-+ script_data.set('pkglibdir', pkglibdir)
-+-script_data.set('PYTHON', python.path())
-++script_data.set('PYTHON', '@PYTHON3_PATH@')
-+ script_data.set('VERSION', meson.project_version())
-+ 
-+ foreach tool : ['gnome-shell-extension-tool', 'gnome-shell-perf-tool']
-diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb b/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
-new file mode 100644
-index 000000000..d8f8a4c77
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell_git.bb
-@@ -0,0 +1,46 @@
-+DESCRIPTION = "GNOME Shell"
-+LICENSE = "GPLv2"
-+DEPENDS = " \
-+            glib-2.0 \
-+            gsettings-desktop-schemas \
-+            gjs \
-+            gdm \
-+            gnome-desktop3 \
-+            mutter \
-+            wayland \
-+            wayland-protocols \
-+            evolution-data-server \
-+            libcroco \
-+            polkit \
-+            gnome-bluetooth \
-+            gstreamer \
-+            keybinder \
-+            gnome-settings-daemon \
-+            ibus \
-+            librsvg \
-+            sassc-native \
-+          "
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-shell.git;protocol=http;branch=master;tag=3.30.1 \
-+           file://0001-dont-detect-python.patch \
-+           "
-+
-+RDEPENDS_gnome-shell += " python3-core python3-pygobject gnome-settings-daemon gnome-bluetooth gdm "
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig meson gobject-introspection gettext
-+
-+EXTRA_OEMESON += " -Dman=false -Dnetworkmanager=false "
-+
-+FILES_${PN} += "${datadir}"
-+FILES_${PN} += "${libdir}"
-+FILES_${PN} += "${bindir}"
-+
-+do_configure_prepend() {
-+	# Fixup the gsettings version
-+	sed -i 's^3.27.90^3.24.1^g' ${S}/meson.build
-+	sed -i "s^@PYTHON3_PATH@^${RECIPE_SYSROOT_NATIVE}/${bindir}/python3^g" ${S}/meson.build
-+}
-+
++RDEPENDS_${PN} = " \
++    packagegroup-core-x11 \
++    xinit \
++    atk \
++    at-spi2-core \
++    at-spi2-atk \
++    cairo \
++    gnome-shell \
++    gnome-bluetooth \
++    upower \
++    pulseaudio \
++    librsvg \
++    ibus \
++    gnome-desktop3 \
++    accountsservice \
++    gnome-settings-daemon \
++"
 -- 
 2.17.1
 
