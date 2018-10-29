@@ -1,52 +1,52 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BCD2E799F9
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 487027964F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:52 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id i15-v6so10017595qtr.0
+	Mon, 29 Oct 2018 16:41:54 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id z20-v6so9975461qti.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:54 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9VS8eAdPU68qylJhFE6dgiFvisG8hg2Izv/xNU97YqA=;
-	b=MLDpRpsf+NIT6QPdCzvah5TwjwqtAE5lSogx6PY1lkk60YLqjZIGFQRaRcHCwt9EjJ
-	SB8cSrtx+5gVDC3I8+WbjwvfLocECAjLgb1ksLYzI6cZOEOXFuRTmPIEKgNbWQfPqvsO
-	5luIgAYwdlieC3ovzNjCgP/sfCc0RW2jto7HBc/CmpRhETgO/9ukjzvW6EqOCNbZdDmP
-	2drfj+tkfTU8+P6k9j/o4x1N+y8B0nHiSg6nh6kQzdtuTVHhAcfQDMhbl43VFSxJ/Qrf
-	sjuk1VXm8uaThItHcm8kVEPh18nKFBHO+0gRzkK2jwrbNeiYlF8RElf6lOL2Gj2MDD2Q
-	alpA==
+	bh=ILu/wziPJ7BsiEGAWVf8C+tIOrY2BGV2H6lzIe99798=;
+	b=OJbtc7hyWndW2h6c59Lb7H5ruypZ/vZB5Vja9L4IMbuP4d6fkNLAyXTS7MZbyoqHD3
+	D+T8RapaS7FxZjk6Nkg6QXL6k3j74PCQSvg39k4iyZ+RL9UneBOWlTVEgK1GsgrN9WkI
+	0F4w6KDQaCGTy32ujp8ozxRIR/HKGxAQ+z8XyrwGfu5Yo7KnY0vY91CZA/EqQUP+iMmu
+	InuILghDYkXbMCNi3wx4X5Qd3QWVOnB4/p4EPTQNs5sAvgbEfj2xgqhZpftwyaySb3vn
+	3v8e7iBNCJOjFCvlenCMFghK6MlTfbsSdwN8JFnN/5SKs7d8Igu3QmlolpYN2XIrGhrh
+	j56A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9VS8eAdPU68qylJhFE6dgiFvisG8hg2Izv/xNU97YqA=;
-	b=QfpVDHO9hzL32oDWi1N2SO8ItbBN4X3I1h4nHSnWB/8I8nIVxnGgH3edGXGWrOpF0m
-	y6NOwsrqVW4lr10NMsSP5CPHKAzWU+g0ji2I7uZnk4IjW8gpIL/VBSd1EKurHEr1TXLI
-	u6ty1tlbklLCpBFQEsgKpMy3fnE3qxxMyUeR5eaCt0gL0e1QKxyJ6XQ10aDAb3RCa18w
-	clCSIKl/8/xooYmGXtdGiX71NVPNeybcLB4XhFgiKhbP4auCazz1z/dhhYsVWFNynO9M
-	zwujcbfHOHYTVkGLNKaJC0A6pomuPcfOzimVjo544RM/5shG9xB4jNRcUReyVHWkp25R
-	zU/g==
-X-Gm-Message-State: AGRZ1gIdr2ygB9ABqIFIbgUfsbFNNYdN1hLVQb+jZyesjRVwdd2NmeKE
-	aZXJwsIXuRCZgCSZPGr8OX0kHG15
-X-Google-Smtp-Source: AJdET5fmfrEmHNW/YvC6oAtbAQyP6MMpSNDUqdWHwZ1iowpBB53de4LNphCL7Ya1K7kbmzsI7/Emcg==
-X-Received: by 2002:ac8:26a6:: with SMTP id
-	35-v6mr13547832qto.281.1540831313494; 
-	Mon, 29 Oct 2018 09:41:53 -0700 (PDT)
+	bh=ILu/wziPJ7BsiEGAWVf8C+tIOrY2BGV2H6lzIe99798=;
+	b=pLQNaGHgzmbiTqdzVoJCqMPrnp2DP8xHz4gRKVLAsZmUydYEAedJ3vgrNDPTIcwlVe
+	7zbF43SQnJeMGEobgBuxf3Ta473fBxUOUVXpu/p3xy8+ERyM2nx560L3HhPWH2Ej2XaJ
+	AvROcNO4RNFoxnDd6Gubq2ZiX1EDjWkJ7NQiNTRvkJloC75ItYEbBHM0iyN3kJ32fyaj
+	8V5ekK2Yv23pOrTidPsDX1sXSI8yUg0iG98Vj+yCtc6oC0k3jPtkq9opRD3Gp8xwwFu/
+	2ZvZ8e3E6HY8O4CsG9PK2MaOwdR5ELrUfooD+OkDrjipSzQAYL1FTkBImfbjOG5CZpPu
+	m2gQ==
+X-Gm-Message-State: AGRZ1gIO/CiNCL5X+1tQayliLL4/cNBDQ910/BsnTBxqUy1PonfG3qsp
+	+0Mg1kQS14Cy60gA+omUqb9SLG0n
+X-Google-Smtp-Source: AJdET5eKyw0Lnw05grtMZxve8n5kjbfo0UteNMUUNmUDc1Bt4DuRSAkXfXjYDh2RLXy8Zj3M2HGaJQ==
+X-Received: by 2002:ac8:2413:: with SMTP id
+	c19-v6mr13303058qtc.194.1540831314708; 
+	Mon, 29 Oct 2018 09:41:54 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.52
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:52 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:53 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:41:07 -0400
-Message-Id: <4a7b04c4d262dafef02e120102f054f64bb95c69.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:41:08 -0400
+Message-Id: <9b79042551b8a92258a425b5e05423a17cb55ab0.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
 References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 10/16] dconf-native: add dconf-native recipe
+Subject: [RFC meta-gnome][PATCH 11/16] libwacom: add recipe for libwacom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,43 +59,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:53 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:54 -0000
 
 From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
-gdm recipe requires a native dconf tool.
-
 Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 ---
- .../dconf/dconf-native_0.28.0.bb              | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/dconf/dconf-native_0.28.0.bb
+ meta-gnome/recipes-gnome/gnome3/libwacom_git.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/libwacom_git.bb
 
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf-native_0.28.0.bb b/meta-gnome/recipes-gnome/dconf/dconf-native_0.28.0.bb
+diff --git a/meta-gnome/recipes-gnome/gnome3/libwacom_git.bb b/meta-gnome/recipes-gnome/gnome3/libwacom_git.bb
 new file mode 100644
-index 000000000..ee78fbb66
+index 000000000..e60b76965
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/dconf/dconf-native_0.28.0.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "configuation database system"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+SECTION = "x11/gnome"
++++ b/meta-gnome/recipes-gnome/gnome3/libwacom_git.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "libwacom"
++LICENSE = "MIT"
++DEPENDS = " \
++            glib-2.0 \
++            libgudev \
++            libxml2 \
++          "
 +
-+SRC_URI[archive.md5sum] = "81faa8e68e5ea71ff0ee75050fc0759c"
-+SRC_URI[archive.sha256sum] = "61d3b3865ef58b729c3b39aa0979f886c014aa8362f93dcfc74bf5648ed9c742"
++LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
 +
-+DEPENDS = "dbus glib-2.0 intltool-native"
++SRC_URI = "git://github.com/linuxwacom/libwacom.git;protocol=http;branch=master;tag=libwacom-0.31 \
++           "
 +
-+GNOMEBASEBUILDCLASS = "meson"
++S = "${WORKDIR}/git"
 +
-+inherit gnomebase gsettings bash-completion vala native
++inherit autotools pkgconfig distro_features_check 
 +
-+FILES_${PN} += " \
-+    ${datadir}/dbus-1 \
-+    ${libdir}/gio/modules/*.so \
-+    ${bindir}/dconf \
-+"
 -- 
 2.17.1
 
