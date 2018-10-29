@@ -1,47 +1,47 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
-	[209.85.210.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C17679C5E
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+	[209.85.210.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 59FE279ACA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 22:46:35 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id q25so9249417otn.12
+	Mon, 29 Oct 2018 22:51:47 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id j3so3465253otl.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 15:46:36 -0700 (PDT)
+	Mon, 29 Oct 2018 15:51:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=iUrL9GIEG+iJulsBywlLUQd1ci3raJiq/0OeGmWWUQo=;
-	b=ESGpNgm7kj2IzZP6N1KhnN1lij75g0uD1reT6nQyqwglGJK5ay34BI5Mz9WfSmVtAg
-	cZtErVBwFuVZP4UyDKcPDaFAfJAYsZy/Gcxi2NyPqULysRSTLy0/PlLTSmgiJKkWxxXa
-	yG0TA18RnIaCL1rDjRrIwpUGOZSWP7y/S04rFCr5guheFrZcXyBraUEkP+z3ObBVc+MA
-	IbFy6fTHVw7+SJpNc0axarC+cJ6TMIz//i8KEqEU0dKQoTaQ2HY/Urpds/aCBYyzsZuq
-	4dr46+zRuYiVg1Pos795aMpzh8vspX7PA5UspHNvOSBgrOVkAk+h/yrRiQN2Jc17tzj5
-	Qs9Q==
+	:cc; bh=h7PcaRGFVxxHnsFKAArdw1eE92o4DX/7jekUTAsCRMk=;
+	b=T/maoh4vSJyfnnWKv2aModQU6ddKUeDMFwhSPB8hHuVVD/nnM9luPiuFOXBayeE3Ie
+	ghppEkukm0B8NT2y0yy3DFmcH789RNOaW6mbD5jflvNNnJV3fRrShgmu/oOscVzAbJJi
+	gtJ/D3GkIH75KdHASs0l3aJJAKiucqSqXnznWu3G/XPBhEeALY+ucplmI8JAZknoI6L8
+	cFzfILNNV3Zy57zTKAm0DJ9i7Kgk2CySVjVx6vxu16OeZpLJp6gEo+uk9sQI3bs2Mpf9
+	Dy0PwSWSPS6sjGgG5Lr0AOAtnqcmD3BT+QYgFM+GU7HI0FRi6cHaoYW5D8I4zeAUiSPA
+	zMpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=iUrL9GIEG+iJulsBywlLUQd1ci3raJiq/0OeGmWWUQo=;
-	b=QvVn0eJ70kHdCgSBWZMH/QZ/EA+6BxriKDH+5KpQs6xB8EWZ68w4xhWXzIBbT8nAk/
-	NFetpoCUV6si2/FF6wBYhqOCn6BZLV1YjB9x6/4Cgklw3IBNuns3+Zc1bQPDIrjOgj2b
-	W87YO5ZYFtKU7JgxCK1taOtq+1P11PG/T1CqyCoe/yx1VijPdYPID0+Hiv4CJbxeWbBk
-	aGFcaPAMDNa4lsIkJ5pxJAp+pOC/cOgP/W0/30N9Nye9dTuJahl+263slvOKSf2/66St
-	YC7cmnSlvBT81HrDTT5ukABfkMxmmzZYGqo7InsS2KwXqerXSDBxStl1uk/9VBSxjqPM
-	LJ+A==
-X-Gm-Message-State: AGRZ1gIy3AIIliVIoUkcdkpJ8pFiUfBmUQQ73zARR8cpuYpUjDSSTd7N
-	7LmH2I/zZq5GiTYJ2BAoaepdX6VqI4zILeN/1OA8Zw==
-X-Google-Smtp-Source: AJdET5f5MMb/ukdNKXcwvx8cRUkLV05fdlZCtpi8JUN1Hg28VObM+AiKlQgT0v/oqMgPyeQMVDzS2TuC/xbecbLcTS4=
-X-Received: by 2002:a9d:7006:: with SMTP id k6mr9110279otj.370.1540853196460; 
-	Mon, 29 Oct 2018 15:46:36 -0700 (PDT)
+	bh=h7PcaRGFVxxHnsFKAArdw1eE92o4DX/7jekUTAsCRMk=;
+	b=c5fo+Z16aYC4IjG8PYM7LVLhAhsXr8zJ36zO3pseB/rzV2l6apDgC0um78KLQ2LA3o
+	FMnGVZwE1qSMIf7fmdGIjENzh/yVwADlt4/tYG7utWsLujf+WdphdaOSGAFrbjJ17cFb
+	7MsiTVX4yoEzKgGHGHF+aQofk4rKf1YzLsGfpP3gfauU4gbeJFLiGhMfQ8BVYBV3JQSd
+	m9QqtZmh5V9bixQRwaNUk4x3bLri8mVYFLR6d6+CA5607TKXwEas0+Yu/3KQQF08yCZc
+	agl8+FDpCZGRLhfO4gWopmHG85lm/9PYIYUcTKVZFtrxox4UCG91tuL4A9GoKd6ykj2E
+	m1jQ==
+X-Gm-Message-State: AGRZ1gL3dC21KE63wET5CzCyjNMaCQxJnDznD7yRP1REoZH3gMIcYXcz
+	AmBH0lVn8ruFqxkiy2BU++9WtIS1sq/gU0CW15I=
+X-Google-Smtp-Source: AJdET5eaE6i1eIhekD1tZYtISMDoakIVhiot9U2BhkqbEIN/ALkvhyKRAD7Ms/hLN+Wr0xzI2nKV6IyF5sImwTRUCgg=
+X-Received: by 2002:a9d:6181:: with SMTP id g1mr4083929otk.324.1540853508306; 
+	Mon, 29 Oct 2018 15:51:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
+	<245bf6e59b04956ad91357d74a93c4ecd5326faf.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <245bf6e59b04956ad91357d74a93c4ecd5326faf.1540830650.git.brendank310@gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 29 Oct 2018 23:46:22 +0100
-Message-ID: <CALbNGRQ=BZUD+T+ADOWateSZZstLXibW504hZcbfL02M4UT3zw@mail.gmail.com>
+Date: Mon, 29 Oct 2018 23:51:33 +0100
+Message-ID: <CALbNGRRsrVdgQKQwba1hg7mJ0YadOYwoAr1gcJ98aZttTpxqEA@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 05/16] lcms2: add recipe for Little Color Management System
+Subject: Re: [RFC meta-gnome][PATCH 09/16] gdm: add recipe for gdm (Gnome Desktop Manager)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 22:46:35 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 22:51:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 On Mon, Oct 29, 2018 at 5:41 PM brendank310 <brendank310@gmail.com> wrote:
@@ -63,29 +63,51 @@ On Mon, Oct 29, 2018 at 5:41 PM brendank310 <brendank310@gmail.com> wrote:
 >
 > Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 > ---
->  meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
+>  meta-gnome/recipes-gnome/gnome3/gdm_git.bb | 33 ++++++++++++++++++++++
+>  1 file changed, 33 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/gnome3/gdm_git.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb b/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
+> diff --git a/meta-gnome/recipes-gnome/gnome3/gdm_git.bb b/meta-gnome/recipes-gnome/gnome3/gdm_git.bb
 > new file mode 100644
-> index 000000000..29947ae76
+> index 000000000..752aad13e
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "Little Color Management System"
-> +LICENSE = "MIT"
-> +#DEPENDS = " glib-2.0 gettext-native "
+> +++ b/meta-gnome/recipes-gnome/gnome3/gdm_git.bb
+> @@ -0,0 +1,33 @@
+> +DESCRIPTION = "GNOME Desktop Manager"
+> +LICENSE = "GPLv2"
+> +DEPENDS = " \
+> +           libcanberra \
+> +           glib-2.0 \
+> +           gtk+3 \
+> +           accountsservice \
+> +           plymouth \
+> +           gconf-native \
+> +           dconf-native \
+> +          "
 > +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=6c786c3b7a4afbd3c990f1b81261d516"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 > +
-> +SRC_URI = "https://sourceforge.net/projects/lcms/files/lcms/${PV}/${PN}-${PV}.tar.gz \
+> +SRC_URI = "git://gitlab.gnome.org/GNOME/gdm.git;protocol=http;branch=master;tag=3.30.1 \
 > +           "
 > +
-> +SRC_URI[md5sum] = "8de1b7724f578d2995c8fdfa35c3ad0e"
-> +SRC_URI[sha256sum] = "48c6fdf98396fa245ed86e622028caf49b96fa22f3e5734f853f806fbc8e7d20"
+> +S = "${WORKDIR}/git"
 > +
-> +inherit autotools pkgconfig distro_features_check
+> +inherit autotools pkgconfig distro_features_check gobject-introspection gettext
 > +
-There is a lcms 2.7 in meta-oe - what about upddating that?
+> +FILES_${PN} += "${systemd_system_unitdir}"
+> +FILES_${PN} += "${libdir}"
+> +FILES_${PN} += "${datadir}"
+^ Same as mentioned before
+> +
+> +do_configure_prepend() {
+> +       install -d ${S}/build-aux
+> +       sed -i '/AC_CHECK_FILE/d' ${S}/configure.ac
+> +}
+> +
+> +do_install_append() {
+> +       rm -rf ${D}/var/run
+> +}
+> --
+> 2.17.1
+>
 
