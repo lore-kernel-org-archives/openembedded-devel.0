@@ -1,48 +1,47 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
-	[209.85.167.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B8D179C64
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 68E7079C5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 23:03:18 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id e3-v6so8719404oiy.6
+	Mon, 29 Oct 2018 23:06:27 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id p23so9294374otf.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:03:20 -0700 (PDT)
+	Mon, 29 Oct 2018 16:06:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yEPWS+08OCK4S+unz0UTY7TR74wg5UWfrk3McqhgrBQ=;
-	b=qewdkoCL6PxKJm54f9A7ZfjKwYzjQdvDJ9VE8zjIhKxMj3oeEMf38xX/vDLTVUurlI
-	CCaBMfmeYFHgEn/hiij/T0xij4FkJdEf5qr/npLprrqjTS4bVBLkcxtR79V/CILWTFoj
-	2xsNbdfZ5FEDATIxNiJ1SzJcEZ04PAOx1Qvz7uDd9Lz7sVIJvCLjwp0gNwTq0GpfJ1uQ
-	8bMLzAeZSay+dgLYIUq181e/v7hVT4+iN/xQ47BrRFsJps/slqHcpGboPGJBm5mZ4ZP+
-	I7ckJ2amHwnXVdnvJj6Au5YTKbqg3r+UaUkiCzs/WQBR8WlXSQh9CIm0XVznHVNoljYb
-	5sUA==
+	:cc; bh=TMCiKgg2OioqeIFJZx3M9tW/pG41jLwChJn0NgQ6e9k=;
+	b=g0Fs+GhHr5AvmS7nU7CDkytcdCWExNawZIRAGROum/ZhxlBviclckeFEITLFhrhavl
+	PCsBRrNXsIrpk4ytK4rcBB92yIAepgWKqAsrZS/JpKhHPjsGUt7yMZ9zigdImJ66kwC3
+	MMZgpyrFjGoFw16UwHNg0I56xIUeq6OtnFTJBFAQp4+ySnMoIUPiZTZv0jQb2YlIWXgy
+	vRjPQVeHCvBZKYzsnxDjFuZx46pfhGXXQuHyTqRN/xmkRFRJ4Y/EGVCkpwriL2Ue+R8y
+	xKiQpYv6rjjQ0GlIyzbql619W85lE3pBO4QePKkcOaBa5+sfXjThQFrqIsrkXER9k9/+
+	ge3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=yEPWS+08OCK4S+unz0UTY7TR74wg5UWfrk3McqhgrBQ=;
-	b=bMghMpFD/LNvFf+nDHoC+zln9pgCJJkrYRPoXNBX9l4aWMmkHEDZc4akgbDLPRBz6o
-	T7Zwhb4nsLMjaLKpBoHAPT8IU8JFgL6bc8abt6aadsMym2YvIjQeGgDyY/9MpNoA2RJa
-	Zt9LKojMNTd25v2X7Wuliek5zjM0oxcJvEMFxu5pnQmL/Fq6I54midrYsuMp1KV+mEKi
-	oU1rMo9SDyW1oJhA6s1BYBD8Rnzh9BTniXP89NDvrhGlAisrTOuAk6FQVodtUNf8XGtm
-	X58+J7+qdjnoR7HQ2k5NTimdm0DTA/7efznpINCe7TXYiTW7Xjj6S612LMOHZ6Gf2gfH
-	huwQ==
-X-Gm-Message-State: AGRZ1gJRzzDIqV6MjEq93HxUkRg8Qa2p+VUB0DpL2JHuUpuOK3qR4Cr5
-	PZNQTZat+m+HL1tjl5EA8y7PPIBBtd5XkG2W+q19RQ==
-X-Google-Smtp-Source: AJdET5fsq0+3GqPUA9Drl4elCWD3+JO9ZbrA0CA3ayFV+/KWRlKDzPzBdrmNs1iBeFDSSerb99uz9ZP3HDXbKZYLq2I=
-X-Received: by 2002:aca:3f87:: with SMTP id
-	m129-v6mr9142034oia.228.1540854199958; 
-	Mon, 29 Oct 2018 16:03:19 -0700 (PDT)
+	bh=TMCiKgg2OioqeIFJZx3M9tW/pG41jLwChJn0NgQ6e9k=;
+	b=hm7rWwwY+K1yLmNVUnisBU2nnqD/86nCsr5NLg5MnO/ZlJbrNEusDF1R2BinBo+6RH
+	VXiaQyETo9OvYBjfTRnCWX2fX4eoy3BaJhjwmSyZuVI3Fiu6JMtgygAB8gyBx+GgBO05
+	c8NFz3NTqpBPO8+/3p//ziEsx/sI0yFC4T/FrCMM0c8JAez6yqIZlbZcsOBGPuwRMC1s
+	XFp5FH37FRbg4wOGhLw+OssoJXe4pfJmfsNT6G/VTabFwy+VpAr1mf0HfGuMnmmrUvYn
+	6EtWiA4LWe3a5r2Xi6gMZYfAKAFxxRAgLguBJ/A7HLDWOB0FtMTzwyJIo2w0JuJTUP+K
+	dy7A==
+X-Gm-Message-State: AGRZ1gKxHPIVLZ5LL8qJJz19CkkunKCo8jt87OAGrk9lYsDqK6K+2q7U
+	mgO9f2tOjnMXX2hudRlQ1FsgRaFdiJIJ7GOiQlFIaD3w
+X-Google-Smtp-Source: AJdET5eYNJBDHK9egZqwaqrwwHSpwfiODIiFf4p103M72ZUf/wx0rOj7gCo/Z6/RJPha1F5gObsvvD2sA4i7r20+5i8=
+X-Received: by 2002:a9d:3c8d:: with SMTP id z13mr2319204otc.109.1540854388385; 
+	Mon, 29 Oct 2018 16:06:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<9f5b028fdf90a7650a62e538889580dc31864a6b.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <9f5b028fdf90a7650a62e538889580dc31864a6b.1540830650.git.brendank310@gmail.com>
+	<d84e5b262a493ae9fe761ee9e22fec8f6d2dc59c.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <d84e5b262a493ae9fe761ee9e22fec8f6d2dc59c.1540830650.git.brendank310@gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 30 Oct 2018 00:03:07 +0100
-Message-ID: <CALbNGRSPpACzKV+5-RsGvJVRdMf5H_S+OTLX41YJGjGX6mJj6w@mail.gmail.com>
+Date: Tue, 30 Oct 2018 00:06:15 +0100
+Message-ID: <CALbNGRT5Ao_aXNgzjuzm7S7UrYdrYL3TbP40mVWmr+JTjKtStA@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 14/16] packagegroup-gnome3-base: add packagegroup for installing gnome3/gnome-shell
+Subject: Re: [RFC meta-gnome][PATCH 15/16] gnome-shell-extensions: add recipe for gnome-shell-extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +54,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 23:03:19 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 23:06:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 29, 2018 at 5:41 PM brendank310 <brendank310@gmail.com> wrote:
+On Mon, Oct 29, 2018 at 5:42 PM brendank310 <brendank310@gmail.com> wrote:
 >
 > From: Brendan Kerrigan <kerriganb@ainfosec.com>
 >
 > Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 > ---
->  .../packagegroups/packagegroup-gnome3-base.bb | 27 +++++++++++++++++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
+>  .../gnome3/gnome-shell-extensions_git.bb      | 40 +++++++++++++++++++
+>  1 file changed, 40 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb b/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
+> diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb b/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
 > new file mode 100644
-> index 000000000..8484087b8
+> index 000000000..8c02195d9
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/packagegroups/packagegroup-gnome3-base.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY = "All packages required for a base install of Gnome Shell"
-> +SECTION = "x11/wm"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-> +PR = "r0"
-^ Please remove - we have auto-pr
+> +++ b/meta-gnome/recipes-gnome/gnome3/gnome-shell-extensions_git.bb
+> @@ -0,0 +1,40 @@
+> +DESCRIPTION = "GNOME Shell Extensions"
+> +LICENSE = "GPLv2"
+> +DEPENDS = " \
+> +            glib-2.0 \
+> +            gsettings-desktop-schemas \
+> +            gjs \
+> +            gnome-desktop3 \
+> +            gdm \
+> +            mutter \
+> +            wayland \
+> +            wayland-protocols \
+> +            evolution-data-server \
+> +            libcroco \
+> +            polkit \
+> +            gnome-bluetooth \
+> +            gstreamer \
+> +            keybinder \
+> +            gnome-settings-daemon \
+> +            ibus \
+> +            librsvg \
+> +            python3 \
+> +            sassc-native \
+> +          "
 > +
-> +inherit packagegroup distro_features_check
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=4cb3a392cbf81a9e685ec13b88c4c101"
 > +
-> +REQUIRED_DISTRO_FEATURES = "x11"
+> +SRC_URI = " \
+> +           git://gitlab.gnome.org/GNOME/gnome-shell-extensions.git;protocol=http;branch=master;tag=3.30.1 \
+> +          "
 > +
-> +RDEPENDS_${PN} = " \
-> +    packagegroup-core-x11 \
-> +    xinit \
-> +    atk \
-> +    at-spi2-core \
-> +    at-spi2-atk \
-> +    cairo \
-> +    gnome-shell \
-> +    gnome-bluetooth \
-> +    upower \
-> +    pulseaudio \
-> +    librsvg \
-> +    ibus \
-> +    gnome-desktop3 \
-> +    accountsservice \
-> +    gnome-settings-daemon \
-> +"
+> +RDEPENDS_gnome-shell = " \
+> +                         gnome-shell \
+> +                        "
+^ I think it should be RDEPENDS_gnome-shell-extensions
+> +S = "${WORKDIR}/git"
+> +
+> +EXTRA_OEMESON += " -Dextension_set=all "
+> +
+> +FILES_${PN} += "${datadir}"
+^ Put this at the end of the recipe please
+> +
+> +inherit pkgconfig meson gobject-introspection gettext
 > --
 > 2.17.1
 >
