@@ -1,51 +1,52 @@
 Return-Path: <brendank310@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 098A5796E4
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6941C7990B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 16:41:45 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id a132so5351756qkg.1
+	Mon, 29 Oct 2018 16:41:46 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id u68so1374346qkg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 09:41:46 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=gXtpvcGTWa2Ggm8oVrIViOSuL7mu7xRC8D2m6h62rIQ=;
-	b=AZnHR3H4IJMDAkZvuQyJw1D+TImC4+/Mez+S/paYwFubEaVGhObMvhqWwSzdBtsAwU
-	CdYF1DnDmI4+kiHMeZq8Zs1XU2TpFxK1BdRkizNt2ipjJ2aRTOEYqaZyxSFt6nIdrV+N
-	bM7cgURD4/eLbAayvXKFduIVq8/CkF9F/d8dSPAh3QjuPl3tAyJmod8sGmul8ctS0pVC
-	74SkjARM8aAMOzddUFiNk6ThQ9ao51p/L3U+GQ9Hey+W4Wwn7NGfiMWtBADqiR46nSKI
-	lJXo+JsTzf9hmms/SANnDAJtEwqYnVawzyqTtnh1ipaI5CpQqA0RTonl/xoo6Ts/F7u0
-	3B8g==
+	bh=j6vgzsFms7ZExBjrHCAWNktvLpaxddGM+SI7tiYN+yw=;
+	b=aD1zv2IXtiBdUYZEAEXGHgGwyoPZLMD0eIJg8GDMEJu5wGQBbSnBcY3Act7eFQZdvE
+	auTCcm+53VoMo1D/KYXCuHvHL8gSPXRnZGEmqBKG1K4T2gWqe2mJq0X7x3AWEmlEj5Wg
+	85INk/ViXJ3EkR+0WG/ghs9DSAfst9MUUylfNINi/Xg/iEcihMW9PfUS8bVR9TYF3YkK
+	ylzCeO5YP9ZZsQBYn7wPt4MN6AJSQNixZiD6I4gAbiDaQid12qJunl1hElAc/G3hb2F0
+	A4jka0Z5aUvEdC9/ZMKAr6utCCyJJQK/iXuC4VFeuxuaqc1ThESJfphHkCXNG8LvLMFV
+	TxLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=gXtpvcGTWa2Ggm8oVrIViOSuL7mu7xRC8D2m6h62rIQ=;
-	b=AKjZk9V67W80anuJiKYCnH9mQWjGcUZStf3I6QUMAlH5CRqcs9vJaSkxTaYWDVutr9
-	WwDckq2Y2M05r+ZhsymMW0i4EVN0/fDEw6sQBkzVEjuqO5CmfEnjB5UDyr2A5VTnMg7j
-	ZEdG2IzEslmBvgqfDvm18wuMjKWPSuuwL1oHmRORFArA5nOQZgfuolJE70LyDj0n0jlA
-	NdLCcSS457T4Y8NfVy5k4h1xGmaZk267Hh0Sfc/VIXN5/aKcA5wV+oAa8m5UYigb39Wb
-	bCTWilk1rwzfM0ObmkYY2RJ9CHTYQ4Ro1dHbyig/ri12H7XcdGRopn6BcGoLGqr79Mtc
-	hs2A==
-X-Gm-Message-State: AGRZ1gLCmKiQLvMTI0hHOQJJ0mmNIpAyZKFDVMuje8KuHaHaAhs6xdDR
-	nHhAA+4zS/88B/7J04CImqrkQAuC
-X-Google-Smtp-Source: AJdET5dycc2OFZ5mkEofz2XbkQ8DW0opBL1+dVv3OlTuLzYcE31dIoaw+ze2HPsKf89lkAQzJWjeGg==
-X-Received: by 2002:a37:1bd3:: with SMTP id m80mr12538681qkh.259.1540831305614;
-	Mon, 29 Oct 2018 09:41:45 -0700 (PDT)
+	bh=j6vgzsFms7ZExBjrHCAWNktvLpaxddGM+SI7tiYN+yw=;
+	b=fALm6FvaxZ6MdmwjHb2Isuu5pm19Kxtrvj4KTJ34JUVvYODdpQ6Ra1d0He5YChFVyD
+	eVfRWeXogAzwQPgV3X9ThxsFqqEp55l6TyRN4BAcYkMGl4+CWlibg6xcb1MQJ6s0sZ8K
+	uJGygCBUiHI/CConnE8vreFt7mv0V/lVltv+MnHPUZpo/ae5CDx6Q04Q0jdV7oEPMa3j
+	0GTvHnObLx8gRATSQ3H52LHbR0xA//sl7gUbO/NBOlDRQ6fW+bvy9qchiGuFFkOvYUpG
+	LpuxVp/pzPnbEswJXmwBCzlUVT3YtnkP2jOgbexrEoCfFBfrBkL6wqe4vi9jT6cR29jB
+	lu0g==
+X-Gm-Message-State: AGRZ1gI7NExPTO8GR/M9E+3MpUye58mywhufhL626Y+xsS3rWfLw71Is
+	0zuVTWmIbog9DANWfl160gHjYk1Y
+X-Google-Smtp-Source: AJdET5fzvXJ7r8I+nBFbW6mr+ociGTybZOVbxSvTfpwkCXzG+o18XtUCr4kFOcgutV4Ax7EYg6ryoA==
+X-Received: by 2002:a37:86c1:: with SMTP id
+	i184-v6mr12842649qkd.209.1540831307154; 
+	Mon, 29 Oct 2018 09:41:47 -0700 (PDT)
 Received: from localhost.localdomain (209-217-208-226.northland.net.
 	[209.217.208.226]) by smtp.gmail.com with ESMTPSA id
-	i2-v6sm13471476qkf.42.2018.10.29.09.41.44
+	i2-v6sm13471476qkf.42.2018.10.29.09.41.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Oct 2018 09:41:44 -0700 (PDT)
+	Mon, 29 Oct 2018 09:41:45 -0700 (PDT)
 From: brendank310 <brendank310@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2018 12:41:01 -0400
-Message-Id: <a3ce539915c9a45c2b8032260ea65d6ee5b00f6b.1540830650.git.brendank310@gmail.com>
+Date: Mon, 29 Oct 2018 12:41:02 -0400
+Message-Id: <068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1540830650.git.brendank310@gmail.com>
 References: <cover.1540830650.git.brendank310@gmail.com>
 Cc: schnitzeltony@googlemail.com
-Subject: [RFC meta-gnome][PATCH 04/16] accountsservice: add recipe for Accounts Service
+Subject: [RFC meta-gnome][PATCH 05/16] lcms2: add recipe for Little Color Management System
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,157 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2018 16:41:45 -0000
+X-List-Received-Date: Mon, 29 Oct 2018 16:41:46 -0000
 
 From: Brendan Kerrigan <kerriganb@ainfosec.com>
 
 Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 ---
- .../accountsservice/0001-strip-out-intl.patch | 104 ++++++++++++++++++
- .../gnome3/accountsservice_git.bb             |  24 ++++
- 2 files changed, 128 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
+ meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch b/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
+diff --git a/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb b/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
 new file mode 100644
-index 000000000..622b3335d
+index 000000000..29947ae76
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/accountsservice/0001-strip-out-intl.patch
-@@ -0,0 +1,104 @@
-+accountsservice: Remove internationalization
++++ b/meta-gnome/recipes-gnome/gnome3/lcms2_2.9.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Little Color Management System"
++LICENSE = "MIT"
++#DEPENDS = " glib-2.0 gettext-native "
 +
-+  The i18n internationalization fails within the OE
-+  environment.
++LIC_FILES_CHKSUM = "file://COPYING;md5=6c786c3b7a4afbd3c990f1b81261d516"
 +
-+  Upstream-Status: Inappropriate [disable-feature]
-+
-+  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
-+
-+diff --git a/data/meson.build b/data/meson.build
-+index 4987937..6274e5d 100644
-+--- a/data/meson.build
-++++ b/data/meson.build
-+@@ -28,15 +28,6 @@ configure_file(
-+ 
-+ policy = act_namespace.to_lower() + '.policy'
-+ 
-+-i18n.merge_file(
-+-  policy,
-+-  input: policy + '.in',
-+-  output: policy,
-+-  po_dir: po_dir,
-+-  install: true,
-+-  install_dir: policy_dir,
-+-)
-+-
-+ if install_systemd_unit_dir
-+   service = 'accounts-daemon.service'
-+ 
-+diff --git a/meson.build b/meson.build
-+index 77b6a3f..7da5d5d 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -25,8 +25,6 @@ act_pkgincludedir = join_paths(act_includedir, act_api_name)
-+ 
-+ act_namespace = 'org.freedesktop.Accounts'
-+ 
-+-act_gettext = 'accounts-service'
-+-
-+ soversion = 0
-+ current = 0
-+ revision = 0
-+@@ -35,11 +33,9 @@ libversion = '@0@.@1@.@2@'.format(soversion, current, revision)
-+ act_buildtype = get_option('buildtype')
-+ 
-+ gnome = import('gnome')
-+-i18n = import('i18n')
-+ pkg = import('pkgconfig')
-+ 
-+ data_dir = join_paths(meson.current_source_dir(), 'data')
-+-po_dir = join_paths(meson.current_source_dir(), 'po')
-+ 
-+ top_inc = include_directories('.')
-+ 
-+@@ -52,9 +48,6 @@ config_h.set_quoted('VERSION', act_version)
-+ config_h.set('_DEFAULT_SOURCE', true)
-+ config_h.set('_GNU_SOURCE', true)
-+ 
-+-# i18n
-+-config_h.set_quoted('GETTEXT_PACKAGE', act_gettext)
-+-
-+ # headers
-+ check_headers = [
-+   'paths.h',
-+@@ -182,7 +175,6 @@ config_h.set('WITH_SYSTEMD', enable_systemd or enable_elogind)
-+ 
-+ subdir('data')
-+ subdir('src')
-+-subdir('po')
-+ 
-+ enable_docbook = get_option('docbook')
-+ if enable_docbook
-+diff --git a/src/libaccountsservice/act-user-manager.c b/src/libaccountsservice/act-user-manager.c
-+index 12be9cb..712db6c 100644
-+--- a/src/libaccountsservice/act-user-manager.c
-++++ b/src/libaccountsservice/act-user-manager.c
-+@@ -35,7 +35,6 @@
-+ #endif /* HAVE_PATHS_H */
-+ 
-+ #include <glib.h>
-+-#include <glib/gi18n-lib.h>
-+ #include <glib/gstdio.h>
-+ #include <glib-object.h>
-+ #include <gio/gio.h>
-+diff --git a/src/main.c b/src/main.c
-+index 9caec7f..acbd422 100644
-+--- a/src/main.c
-++++ b/src/main.c
-+@@ -155,7 +155,6 @@ main (int argc, char *argv[])
-+         };
-+ 
-+         setlocale (LC_ALL, "");
-+-        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-+ 
-+ #if !GLIB_CHECK_VERSION (2, 35, 3)
-+         g_type_init ();
-+@@ -167,7 +166,6 @@ main (int argc, char *argv[])
-+         }
-+ 
-+         context = g_option_context_new ("");
-+-        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-+         g_option_context_set_summary (context, _("Provides D-Bus interfaces for querying and manipulating\nuser account information."));
-+         g_option_context_add_main_entries (context, entries, NULL);
-+         if (!g_option_context_parse (context, &argc, &argv, &error)) {
-diff --git a/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
-new file mode 100644
-index 000000000..a019a8c6d
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Accounts Service"
-+LICENSE = "GPLv3"
-+DEPENDS = " \ 
-+            glib-2.0 \
-+            gsettings-desktop-schemas \
-+            polkit \
-+            dbus \
-+          "
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+SRC_URI = "git://anongit.freedesktop.org/accountsservice.git;protocol=git;branch=master \
-+           file://0001-strip-out-intl.patch \
++SRC_URI = "https://sourceforge.net/projects/lcms/files/lcms/${PV}/${PN}-${PV}.tar.gz \
 +           "
 +
-+FILES_${PN} += "${systemd_system_unitdir}"
-+FILES_${PN} += "${datadir}"
-+FILES_${PN} += "${libdir}"
++SRC_URI[md5sum] = "8de1b7724f578d2995c8fdfa35c3ad0e"
++SRC_URI[sha256sum] = "48c6fdf98396fa245ed86e622028caf49b96fa22f3e5734f853f806fbc8e7d20"
 +
-+SRCREV="${AUTOREV}"
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig meson gobject-introspection 
++inherit autotools pkgconfig distro_features_check 
 +
 -- 
 2.17.1
