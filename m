@@ -1,50 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CBE9B79C29
+Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B252079C29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 11:32:47 +0000 (UTC)
-Received: by mail-it1-f196.google.com with SMTP id e74-v6so13232373ita.2
+	Tue, 30 Oct 2018 11:33:53 +0000 (UTC)
+Received: by mail-it1-f193.google.com with SMTP id e17so11642479itk.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 04:32:49 -0700 (PDT)
+	Tue, 30 Oct 2018 04:33:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=rmqAUvU5QuhICmWP2cXKM+KFvahghJByctBdkMLpx2g=;
-	b=fRsj2h5marsPuZ5TRdon82lpv+jAfBuxz4mxZiwRn3vAopPoHcWCwx4oacJJZ0NI7C
-	DgFbdb8y3Bw47SET6ThUDtvv+gN4RyStUgi5ee1s7YxqiVC1c2NIkfaBObcg8+39PUmq
-	ezgeo589uC0ifjCInOv97Z+P8liUL8KTFhqLNaJMh8MZmqZcaPvmgsaJcbr534Fw2PR4
-	HXEjNIZJZ8TA+biFCumk9Q+Jwr7gXBCunTwerQ/mpjjtY3+ThQIPfeo+X5smdKs4blHF
-	SToMuzZXtBDwC3JVmLJ1hDa0l/Wk06IJT/dMQ8/SfyaayaEdjS/7pzcfGfdZAgc4oR5p
-	WhLg==
+	:cc; bh=o4gxZGcF5Z6hEVHc0R3uSKGeFMn7ybRXOlXhgY8QC0k=;
+	b=KA5sUDSzNQuLQID5dqHMXeP6xT8Cc1xBbSGKDVqn+a5inMvX5mkyYX8UPs1tpY1rLV
+	la0Jo5x1ha/BPXfvSJ1MMDZcCvDdf5WgBXzEZyDCaVIkQbNFJLUZ9q/3SPj53OHKhD2I
+	ihyKeRNwvUBBT6Aeak1ENSUgLGaXnx/iSHhIgilJlcvDbKzQBrm4Gbq/JqlynfbAAkim
+	VuWVWH6/ILg3GNdAECshPI8GKqqI/V64gOPJ7NpOYX2cd/PNom0LMJUktnYgnMgskipE
+	kXeLb6FI5PJG0K/iNo2TWm3pYWKS1UwoLi01dpU8+tJTN2IBvOMCb9qSwCGB67l9TTOB
+	Exug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=rmqAUvU5QuhICmWP2cXKM+KFvahghJByctBdkMLpx2g=;
-	b=U2fw6yYW8FiIr8RE5YyugbwRcAsMHJuICCscKFuVAO0VQizQT9+o7hVhTuQAfxw4Rh
-	GGmoq7beDpSZhlv/bY9gl5Br0EDm53wQCw5UquQl9E9w1VJLVvVQeWG+TrL3LOMV6OKa
-	Ub+DJdCRdE9qR3/OT4Jh8HdYc54cA7L779Q5ghGHulDaeBVJXThExSWK6x9qB0audz+4
-	PUDLw+wsicf6fcVR7wx8HigoBMAwoTfz3EFgG3AakK4PpKJ2A2G2XtYeaK6RH7RhIxKD
-	uBqw8Z4T+0ty7J620o4Umr1ziMcuJuX52Zp7lXxgj+lFjfRv4+Uuy/ngL04tpfo8s4s5
-	bg0A==
-X-Gm-Message-State: AGRZ1gIgp4ArKb1s+t0LhCKQlTyEs65ioXuGf58m7rpGNKyQnl7Gcs8J
-	ERYX5WKiI+Zs5EMVL01H0QBnQ0O4d/D7H+H+jHXvmQ==
-X-Google-Smtp-Source: AJdET5ebB1JRavpBY3s6cTvbtK7fICJpH0WwbHlbi0TCYLTIn0cGvCdRiCKpLPqyGzuy4pRgE7V5mHGOufcaDNnVy/M=
-X-Received: by 2002:a02:3b2c:: with SMTP id
-	c44-v6mr13387077jaa.31.1540899168958; 
-	Tue, 30 Oct 2018 04:32:48 -0700 (PDT)
+	bh=o4gxZGcF5Z6hEVHc0R3uSKGeFMn7ybRXOlXhgY8QC0k=;
+	b=dy9poQ5LOyzX66b8YsPPbAoOnQBgOwSqss3uECN1RaWzbip6El+8wi/g/fAbQU1212
+	uyBiIcLMFUpOJa2Lrv9dOETGrGoX0ca4SfxKjb5kmMLl8fKfBXDvjtbueQ1Lu6etItT4
+	R4WzF4jrVHEvlmsbOB+E+ZDSyBt3FvyA4i+AGWMMSEBPLcs8yyXtpkMB04pDcReEBGMt
+	UDXEJIxxkabWExTcrbQZBd4uecRK+oWI+kqbR8WjzkN8+eL1HTPac66sm5wrajR8SGf4
+	d1roR69FEIOdEX18gA/z0qougL8p21y8mATqPmaairPikxiq5004t4yKR+W1AdYT79hM
+	Yjwg==
+X-Gm-Message-State: AGRZ1gITCaW5fX0AynjOE9Xppy9lWBLegYWFn2+BJi1BoUImQqmHdnqN
+	y4LgtpXGVREqYtpboX1wEfz1RUMgrw+ef01arBrA60qN
+X-Google-Smtp-Source: AJdET5dys7lTVsAcLiOJc/wMS6m9lY6oDTvZMy/lxT0uJCsbl+BBOVhEW21+1UBUSfYwn23BGr+MkJWa9jsbIlFbz6I=
+X-Received: by 2002:a24:9287:: with SMTP id
+	l129-v6mr954397itd.26.1540899234802; 
+	Tue, 30 Oct 2018 04:33:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<9f5b028fdf90a7650a62e538889580dc31864a6b.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <9f5b028fdf90a7650a62e538889580dc31864a6b.1540830650.git.brendank310@gmail.com>
+	<245bf6e59b04956ad91357d74a93c4ecd5326faf.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <245bf6e59b04956ad91357d74a93c4ecd5326faf.1540830650.git.brendank310@gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 30 Oct 2018 11:32:37 +0000
-Message-ID: <CAJTo0LYheMm0T3BvKTiTFfhqbTPG+OrYseKLjXUEB1AHHM3F0Q@mail.gmail.com>
+Date: Tue, 30 Oct 2018 11:33:43 +0000
+Message-ID: <CAJTo0LYZEgt3NtQHxh8GzFr6vueFFCpm7H06tH=ExGgDg6p3ag@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 14/16] packagegroup-gnome3-base: add packagegroup for installing gnome3/gnome-shell
+Subject: Re: [RFC meta-gnome][PATCH 09/16] gdm: add recipe for gdm (Gnome Desktop Manager)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,17 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 11:32:47 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 11:33:53 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 29 Oct 2018 at 16:43, brendank310 <brendank310@gmail.com> wrote:
-> +inherit packagegroup distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
+On Mon, 29 Oct 2018 at 16:42, brendank310 <brendank310@gmail.com> wrote:
+> +SRC_URI = "git://gitlab.gnome.org/GNOME/gdm.git;protocol=http;branch=master;tag=3.30.1 \
 
-Everyone running GNOME 3 on Wayland will be surprised by this.  This
-packagegroup should be *just* GNOME and then the image using it can
-decide whether to pull in X11 or Weston.
+Tarball.
+
+> +FILES_${PN} += "${systemd_system_unitdir}"
+
+Use systemd class.
+
+> +FILES_${PN} += "${libdir}"
+
+Breaks library packaging.
+
+> +do_configure_prepend() {
+> +       install -d ${S}/build-aux
+> +       sed -i '/AC_CHECK_FILE/d' ${S}/configure.ac
+
+Why?  If this is needed then do it as a patch.
 
 Ross
 
