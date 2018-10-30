@@ -1,27 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CC2C748F1
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2180879C70
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 09:11:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9U9Bd0W005858
+	Tue, 30 Oct 2018 09:16:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9U9FGtI008161
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 02:11:39 -0700 (PDT)
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Tue, 30 Oct 2018 02:11:38 -0700
+	Tue, 30 Oct 2018 02:16:02 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 30 Oct 2018 02:15:21 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <20181030075927.23175-1-kai.kang@windriver.com>
-	<20181030075927.23175-4-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <0f3945c8-daaa-5555-43ec-d6e57e0b2f4f@windriver.com>
-Date: Tue, 30 Oct 2018 17:10:20 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
-MIME-Version: 1.0
+Date: Tue, 30 Oct 2018 16:33:02 +0800
+Message-ID: <20181030083302.23265-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20181030075927.23175-4-kai.kang@windriver.com>
-Subject: Re: [meta-perl][PATCH 3/4] adduser: 3.118 -> 3.119
+References: <20181030075927.23175-4-kai.kang@windriver.com>
+MIME-Version: 1.0
+Subject: [meta-perl][PATCH v2] adduser: 3.117 -> 3.118
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,54 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 09:11:38 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 30 Oct 2018 09:16:11 -0000
+Content-Type: text/plain
 
-On 2018/10/30 下午3:59, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Upgrade adduser from 3.118 to 3.119.
+From: Kai Kang <kai.kang@windriver.com>
 
-Oops. WRONG versions info. V2 will send.
+Upgrade adduser from 3.117 to 3.118.
 
---Kai
+* set S
 
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../adduser/{adduser_3.117.bb => adduser_3.118.bb}          | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/adduser/{adduser_3.117.bb => adduser_3.118.bb} (91%)
 
->
-> * set S
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   .../adduser/{adduser_3.117.bb => adduser_3.118.bb}          | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
->   rename meta-perl/recipes-perl/adduser/{adduser_3.117.bb => adduser_3.118.bb} (91%)
->
-> diff --git a/meta-perl/recipes-perl/adduser/adduser_3.117.bb b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
-> similarity index 91%
-> rename from meta-perl/recipes-perl/adduser/adduser_3.117.bb
-> rename to meta-perl/recipes-perl/adduser/adduser_3.118.bb
-> index ca96e11e4..660a7f777 100644
-> --- a/meta-perl/recipes-perl/adduser/adduser_3.117.bb
-> +++ b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
-> @@ -10,8 +10,10 @@ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${
->              file://adduser-add-M-option-for-useradd.patch \
->   "
->   
-> -SRC_URI[md5sum] = "9f36d69585e74c022aa8e22a0337507d"
-> -SRC_URI[sha256sum] = "be01881356e40c4d7dd2ce209fb4a94c0589056ac3ebe7debbbf09a6383c1411"
-> +SRC_URI[md5sum] = "44ba2475ebdaafc9613236bdda321c97"
-> +SRC_URI[sha256sum] = "3e9eea661c9aac6b2c791bfcc1de3a9c6a422d45c8f3d38ed417737ed3166ffc"
-> +
-> +S = "${WORKDIR}/${BPN}"
->   
->   inherit cpan-base update-alternatives
->   
-
-
+diff --git a/meta-perl/recipes-perl/adduser/adduser_3.117.bb b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+similarity index 91%
+rename from meta-perl/recipes-perl/adduser/adduser_3.117.bb
+rename to meta-perl/recipes-perl/adduser/adduser_3.118.bb
+index ca96e11e4..660a7f777 100644
+--- a/meta-perl/recipes-perl/adduser/adduser_3.117.bb
++++ b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+@@ -10,8 +10,10 @@ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${
+            file://adduser-add-M-option-for-useradd.patch \
+ "
+ 
+-SRC_URI[md5sum] = "9f36d69585e74c022aa8e22a0337507d"
+-SRC_URI[sha256sum] = "be01881356e40c4d7dd2ce209fb4a94c0589056ac3ebe7debbbf09a6383c1411"
++SRC_URI[md5sum] = "44ba2475ebdaafc9613236bdda321c97"
++SRC_URI[sha256sum] = "3e9eea661c9aac6b2c791bfcc1de3a9c6a422d45c8f3d38ed417737ed3166ffc"
++
++S = "${WORKDIR}/${BPN}"
+ 
+ inherit cpan-base update-alternatives
+ 
 -- 
-Regards,
-Neil | Kai Kang
+2.18.0
 
 
