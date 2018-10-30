@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B63679C98
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DC3E79C98
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 03:42:36 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id c16-v6so11912083qtj.13
+	Tue, 30 Oct 2018 03:42:38 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id u68so2453549qkg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 20:42:38 -0700 (PDT)
+	Mon, 29 Oct 2018 20:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OEVtVRfk4BLIyryhz3Y0p4Se3qcx81dRftdFTu5p0YA=;
-	b=BZYTYFksol39x54Lc9Xay9jAn0EEOhcE92gIjUCu8AcUM6WQPhPp0JMvTBTNpmIPgQ
-	AMdlwWB+qZ5/ZIEAIo3QXzNBDcyGIeD44s/2OXtQ9vf+RwGlXGnPuv+rB2rLazlLVnAD
-	6dKVqk4DwyOevQscf4dX7DEGOsQOWCot5TuhjJ+2bjL1pSRNxVBkdjLbHoChoNFT9njN
-	YSzNjnj1Z6zGoXWe1QdFrk5ESHc5qdQPGY+cV48E3J1KqDtBNA4UvlWBMzK2qCy1rayu
-	2Pnuhmue36hgo/FRSklyetgQ2PU6+/JhASlVqUQg0lP3wyQL+vvEtPz2uvV7QInmTq3y
-	Sy8A==
+	:cc; bh=3wKbuWQ+kyUJO/3BqCmecrwkKYhHG/fH2meMGW/2iBs=;
+	b=JSLOA6KbDvFVOIwV5+kD+teATns2WZ7NG3KvDjTLJ8dhQUTxl2DKtJ6wm95cnFLP5C
+	21h0TjN4PnrZFx7p3om69NgHOoCYSZeSbE7mtvnXgDUaXGIyMhP8otxHCE29gCzF6qGM
+	jaJvbC+pe734uyRnaIMlF4fiX+4Rv5BWXbXzVk751RRcRcxUSBQMryKy4HXli0Z6ARkn
+	FsZ7W0PHq2Tvl8tKDoe3yrbaiH9Od+NNqCuPF1DUSHazsCGAwFwZK7vfIasS9zUAnRgR
+	jzapnhAjyqAlqwgACoeU7BG7Imh1iA7bg52CXB/KOb3O6dmaPhzTCPMrCXi4Ev5I1Dp2
+	AHOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=OEVtVRfk4BLIyryhz3Y0p4Se3qcx81dRftdFTu5p0YA=;
-	b=k7IP5gZb5AyhGj20vHfJeODeZ5jDupHpONIFagdNTMWcNnQqHZV4LKAG02+thOUZXA
-	gq+S7sNEzCYGtdwcR3I8xzgAD4j+tTy4hHX+MMKkQctDA6UVUadNUNPqOCtJas/9ITL/
-	1+Glvr09ia0CsmFt/UNQ5/TvUSW1xsy/U2cAMxChcz3/6TgRVmPN+GcVowxCbKCOFnXW
-	OcNeyvKimIcTIi3fYwPsU4oXhVI0iRGzVNnIt8CHRzwZEhPX6KFGXEhk3nwLEprKxhqx
-	Efu4EmHkArBIxvFuRvCe2XZIMtWoVtFzYVfvc8BAjZG+HFxwT3nu06WErzXwY6yaT+s4
-	mUvw==
-X-Gm-Message-State: AGRZ1gKSTOC48ISLTE2YgcWCBdzj9oiOLhKnv/Z4pX5YmWGWQQG/T/Hd
-	1ZKL34wtkmPMIINyKB90vuvM/oo8z8CXDI5cyQK5Bg==
-X-Google-Smtp-Source: AJdET5f8R/O6FZ9mmjhhSl6PSwtAN/NBdr2xbLQTg81Tdpcj7/1ku+RCfp5OK7o1+3Eu5UbDg+c0efs4B/2Wylz3854=
-X-Received: by 2002:a0c:d585:: with SMTP id
-	g5-v6mr15611778qvi.50.1540870957924; 
-	Mon, 29 Oct 2018 20:42:37 -0700 (PDT)
+	bh=3wKbuWQ+kyUJO/3BqCmecrwkKYhHG/fH2meMGW/2iBs=;
+	b=gP6LSNiaqbTQfyLJOgCNMVa2IV6rVIk75XhJzbbNTbDspzz55CpY3fV4ISw41ui04Z
+	y0bOoerhylmEDcyEfJCjeYUtdrQuis4gQvutfUvX1JPdy6DM+yz7OQarW4u/nx/DjJrL
+	X+HndvUoLD1M5Ltv1+1K2YlZ1ZmMGosVaW268gSwAJQYkfW4+pBM4wtw9J42Hhe1F8Tt
+	+RsCtEP75mHMQ5mEfxYFtwe8yk/YzjOAhj4w6IRI8yaqdhMOqvJrkV0rwip/+T6ltf8I
+	33f/B0IgX9FVDu+jbwxk1HTV2sGngaMzCuE8cb+nvM3jaBCRyCCG1qad2/dmB2iK1air
+	NDlg==
+X-Gm-Message-State: AGRZ1gLH1HKGnW14oRHt/mo3B9K8ZrpyFAKwo49PTJqAcUU/ksaZfjN5
+	MsFK4czy11yC2FC6EVnOra0IoTOcFNoQU2or3Q0=
+X-Google-Smtp-Source: AJdET5dSuq8f0ahGOQiQ6EN5yu4xcX57grJhX8I/YYb7rhENb16RPpCDB39wyXkUWMpEdYY7Ik5cLOS58bz9bhWP2QE=
+X-Received: by 2002:a37:5003:: with SMTP id
+	e3-v6mr15019448qkb.102.1540870959114; 
+	Mon, 29 Oct 2018 20:42:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<950a5e000cdf171ed8bce8d574a7f7d4b91c1fb7.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <950a5e000cdf171ed8bce8d574a7f7d4b91c1fb7.1540830650.git.brendank310@gmail.com>
+	<eeb685e9cefb4e85e07b1a51f4e562c03dda96b7.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <eeb685e9cefb4e85e07b1a51f4e562c03dda96b7.1540830650.git.brendank310@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Oct 2018 19:49:40 -0700
-Message-ID: <CAMKF1sqYo141QcJ1kkrC1zhVnt_tz9uMfuSDjFk536gat6S4pg@mail.gmail.com>
+Date: Mon, 29 Oct 2018 19:52:47 -0700
+Message-ID: <CAMKF1sq17swAVLpY=fXkug3s7C4TvDxJd8JF4cQOknicmjnr-A@mail.gmail.com>
 To: brendank310 <brendank310@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: schnitzeltony@googlemail.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC meta-gnome][PATCH 08/16] libgweather: add recipe for libgweather
+Subject: Re: [RFC meta-gnome][PATCH 07/16] geocode-glib: add recipe for geocode-glib library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 03:42:37 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 03:42:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 On Mon, Oct 29, 2018 at 9:42 AM brendank310 <brendank310@gmail.com> wrote:
@@ -65,43 +65,49 @@ On Mon, Oct 29, 2018 at 9:42 AM brendank310 <brendank310@gmail.com> wrote:
 >
 > Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 > ---
->  .../recipes-gnome/gnome3/libgweather_git.bb   | 23 +++++++++++++++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gnome3/libgweather_git.bb
+>  .../recipes-gnome/gnome3/geocode-glib_git.bb  | 21 +++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome3/libgweather_git.bb
-> b/meta-gnome/recipes-gnome/gnome3/libgweather_git.bb
+> diff --git a/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
+> b/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
 > new file mode 100644
-> index 000000000..29ee2c90d
+> index 000000000..73332e374
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome3/libgweather_git.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "GNOME Weather Library"
+> +++ b/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "Geocode Library for glib"
 > +LICENSE = "GPLv2"
+
+
+The checksum seems to be operating on a COPYING.LIB can you confirm its not
+LGPL but rather GPL
+
+>
 > +DEPENDS = " \
-> +           gtk+3 \
 > +           glib-2.0 \
+> +           json-glib \
 > +           libsoup-2.4 \
-> +           libxml2 \
-> +           geocode-glib \
 > +          "
 > +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +LIC_FILES_CHKSUM =
+> "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
 > +
 > +SRC_URI = "git://
-> gitlab.gnome.org/GNOME/libgweather.git;protocol=http;branch=gnome-3-28 \
+> gitlab.gnome.org/GNOME/geocode-glib.git;protocol=http;branch=master;tag=3.26.0
+> \
 > +           "
 > +
-> +FILES_${PN} += "${datadir}"
-> +FILES_${PN} += "${libdir}"
+
+
+hmm tags are floating kind of commits so they would result in checking
+remote repo on every fetch task it would be better to use a hard coded SHA
+
+>
+> +EXTRA_OEMESON += " -Denable-installed-tests=false -Denable-gtk-doc=false "
 > +
-
-
-Does is make sense to package these libraries separately? I ask because if
-they are used by other packages then it will not need to pull whole package
-
-
-> +SRCREV="${AUTOREV}"
+> +FILES_${PN} += "${datadir}"
+> +
 > +S = "${WORKDIR}/git"
 > +
 > +inherit pkgconfig meson gobject-introspection
