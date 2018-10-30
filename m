@@ -1,51 +1,51 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id F1BF479C59
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 5153579C59
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 10:00:29 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id r63-v6so11081020wma.4
+	Tue, 30 Oct 2018 11:16:49 +0000 (UTC)
+Received: by mail-it1-f193.google.com with SMTP id k206-v6so13220015ite.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 03:00:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Ih7Xv/Hhu3zMN5NGi2AQwpbFebtB+RdiJFdhv0d2/Bk=;
-	b=XBJoGli69hsiO+7IHYptcTVDRZyd1s1fZDCaIwOqordpurca0FmlNL0F8ffyowqeeo
-	ADAPnsE4TEfpspswkIRHBjslbmm3B29ICZSJOL4147SfOTehoDiHGogCRE8Y/iJg/CiQ
-	BLJr0tqgoipdhdRBzZZKtYpeM7u+Isy5AnlRFo9FpnB09x/6J1NzOtTEGJK16bl+l0Kd
-	KhrAWLFhl8v11CSBrvQRaT1OJVanyF/cXP01OnVuPtShT+9/VwyTLbDnZdoACFkk3rdl
-	UOeTkNcTeTtQA4/nHPVzGPZHGbIj75s2lqNymhPqzu3I/lLAtir+m8G2MXmeU4lJWnQs
-	Em4A==
+	Tue, 30 Oct 2018 04:16:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=HnikZEAKl4TdP4J9SiWCQfm+3XNVsmg0U+cgq1Q6Bc4=;
+	b=E6FVX4QMlNQcwtNcTq+AB76MPB6l9T3dzBRy568oS9+ORC/ct8K9DdPBvFO+ty62AB
+	ne9SJ5BULgZCNYFIhf7xtSjoQsX2o6EXlqFsxGTX1rVZGiCXKco3e5fTHVj/NqgrDK2k
+	WtEZ8XQpwxxIRx7lFtxB4FSqY3TctZcQPV0niIzzTPZP861uDgV9TXTmvVBDgsiPTYIb
+	AN+ZgSMYKqkT149F0CprtDTwK6hyi7mHEn1K8wwajjhCHx8TeJ+8vYCIlaT/or3/IaKZ
+	epIJvD063DuzFbPjurrtHgk4vZ5ttKPjFvw0f0q9SuPxpOEVjuh745zOd45ZO7nagwSz
+	CrTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Ih7Xv/Hhu3zMN5NGi2AQwpbFebtB+RdiJFdhv0d2/Bk=;
-	b=FYY8gRvowFQZ0+2wzY1U+W9dLQQ0i/YfM8P4H/sz4Ae2vfsm06d4+ATLHnkrY96baj
-	C/t9ljNOIGnSeJcXKQYvPb2gyQKdyvhhrgILbKTKpt9pZ660GqPhnDCGO1/23ITo1opK
-	je1UwS1+W+dKw4rm8haTP4OOmB1d0Ud8CmsNI/tJMijkSTnmKYPJ6oWA8XrLZzPVx5Rm
-	nRfzjfihuyPyDGgibC7KiADsukqPsMtBeA6vWs3ahpLR4yfIiS4fdgZW+5lYo0cGKRKA
-	+Pk83hqjGBIOXRrJDYPEwHawZclAgZmnuFBWVclFAme0ch3a+u4Bny6ENOxg1iNx19ZE
-	qeWw==
-X-Gm-Message-State: AGRZ1gJN4aKArKd7Ytq9SR9QKsCvYoy/8lYxY/66MR5E1V7xoIkn+DEe
-	M/KdXtz/6IoLOhhcxMkhmEPhOLwm
-X-Google-Smtp-Source: AJdET5ejuKYmN5Rzi2f/otI3QYOtujqUYjG3moZHyIYzu8fsy95O9WOwxggrcQh18mOLgp9kOtPS+Q==
-X-Received: by 2002:a1c:c40a:: with SMTP id
-	u10-v6mr1157136wmf.30.1540893629933; 
-	Tue, 30 Oct 2018 03:00:29 -0700 (PDT)
-Received: from localhost.localdomain ([80.215.105.146])
-	by smtp.gmail.com with ESMTPSA id
-	12-v6sm19195538wms.11.2018.10.30.03.00.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Oct 2018 03:00:29 -0700 (PDT)
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-X-Google-Original-From: Vincent Prince
-	<vincent.prince.external@saftbatteries.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Oct 2018 11:00:20 +0100
-Message-Id: <1540893620-3600-1-git-send-email-vincent.prince.external@saftbatteries.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>
-Subject: [meta-oe][PATCH] lcov: Fix perl module dependencies
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=HnikZEAKl4TdP4J9SiWCQfm+3XNVsmg0U+cgq1Q6Bc4=;
+	b=W/QgYs6ysspO1EgzqNz8ahIDLq8s6fEnd59d4A369ndI93omIDkvUBvmLfObr3m0iR
+	+ENKgpoKGd1IVrMT4deWd2MgCzCxXX/ejBGuidI8cLlBwxZ11b+1GSjoY3cLKQ/Jn2jI
+	8vm0X5RCEFzT3RX8Oas8kV8c0JRcJoKFJZq55hCM2UXrPUUpdCLrn11nUeXwFMzePC1b
+	RGd+EDMjoGWmXEQKvFEBTNdL41uQYajzJOlmTon9XawJW+gt4qBFkahGFYMyME5j6QVQ
+	z/wzmFVCQvdfeT8gDHy8+jIHgyYFbq1GeurOlg0bYRJ2tGvsT0seXZ8A+0neqZhLwnS+
+	9W/A==
+X-Gm-Message-State: AGRZ1gJlixA+u76fSQV3j5hjvrLNG9SpzXiqO+CtwgEA1kHK0uHsaM/k
+	TMt0A+4Mh/cTDihOUhC2xSioszZ3byv9TRhjM149Pg==
+X-Google-Smtp-Source: AJdET5f53A5AyU3RISyIWOLea/QyZJIhSNiGR/eaJbFWK+of0XL0dHsYK5ME4x+iDXeAQ9L9DluTvz/52VxpBhoe5Zo=
+X-Received: by 2002:a24:9287:: with SMTP id
+	l129-v6mr921398itd.26.1540898210290; 
+	Tue, 30 Oct 2018 04:16:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1540830650.git.brendank310@gmail.com>
+	<eeb685e9cefb4e85e07b1a51f4e562c03dda96b7.1540830650.git.brendank310@gmail.com>
+	<CAMKF1sq17swAVLpY=fXkug3s7C4TvDxJd8JF4cQOknicmjnr-A@mail.gmail.com>
+In-Reply-To: <CAMKF1sq17swAVLpY=fXkug3s7C4TvDxJd8JF4cQOknicmjnr-A@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 30 Oct 2018 11:16:39 +0000
+Message-ID: <CAJTo0LYUCVUMZnPND0yA+qNCDsNoOrStvO6jZLpQVi26=nOFQA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	=?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Subject: Re: [RFC meta-gnome][PATCH 07/16] geocode-glib: add recipe for geocode-glib library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,50 +58,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 10:00:30 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 11:16:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Vincent Prince <vincent.prince.external@saftbatteries.com>
----
- meta-oe/recipes-support/lcov/lcov_1.11.bb | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+On Tue, 30 Oct 2018 at 03:43, Khem Raj <raj.khem@gmail.com> wrote:
+> > +SRC_URI = "git://
+> > gitlab.gnome.org/GNOME/geocode-glib.git;protocol=http;branch=master;tag=3.26.0
+>
+> hmm tags are floating kind of commits so they would result in checking
+> remote repo on every fetch task it would be better to use a hard coded SHA
 
-diff --git a/meta-oe/recipes-support/lcov/lcov_1.11.bb b/meta-oe/recipes-support/lcov/lcov_1.11.bb
-index 2f9ac33..56a018b 100644
---- a/meta-oe/recipes-support/lcov/lcov_1.11.bb
-+++ b/meta-oe/recipes-support/lcov/lcov_1.11.bb
-@@ -14,6 +14,31 @@ RDEPENDS_${PN} += " \
-     perl-module-filehandle \
-     perl-module-getopt-std \
-     perl-module-digest-sha \
-+    perl-module-constant \
-+    perl-module-cwd \
-+    perl-module-errno \
-+    perl-module-file-basename \
-+    perl-module-file-find \
-+    perl-module-file-path \
-+    perl-module-file-spec \
-+    perl-module-file-spec-functions \
-+    perl-module-file-spec-unix \
-+    perl-module-file-temp \
-+    perl-module-getopt-long \
-+    perl-module-list-util \
-+    perl-module-mro \
-+    perl-module-overload \
-+    perl-module-overloading \
-+    perl-module-overload-numbers \
-+    perl-module-parent \
-+    perl-module-pod-usage \
-+    perl-module-posix \
-+    perl-module-re \
-+    perl-module-safe \
-+    perl-module-scalar-util \
-+    perl-module-term-cap \
-+    perl-module-text-parsewords \
-+    perl-module-tie-hash \
- "
- 
- SRC_URI = "http://downloads.sourceforge.net/ltp/${BP}.tar.gz"
--- 
-2.7.4
+Or the tarball, https://download.gnome.org/sources/geocode-glib/3.26/
 
+Note that gnome.bbclass pretty much sets up SRC_URI for you.
+
+Ross
 
