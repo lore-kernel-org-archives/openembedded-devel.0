@@ -1,50 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 705B079C72
+Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 00CF074535
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 11:25:09 +0000 (UTC)
-Received: by mail-it1-f194.google.com with SMTP id f16-v6so5692102ita.3
+	Tue, 30 Oct 2018 11:30:48 +0000 (UTC)
+Received: by mail-it1-f195.google.com with SMTP id j9so1324511itl.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 04:25:10 -0700 (PDT)
+	Tue, 30 Oct 2018 04:30:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=TQvM7/hygcGpLhh/Y5AgB/K4jipVQPMMoNheGKgZcqQ=;
-	b=1GHJD87aS9SyQTuOhl0xkWoGU6CiuJF01AWIcHHW6E5k5u3CVmh5yf7o4+MalT1FXW
-	+aCG8C97VzUAMuWlTye3fPAdlyonobs1a3F6yMwfhDmYkys1sy885QYbVIjkhgtJIUeQ
-	E/6VAg0mGIy5rPU21yJW4iy/xYrSGVKO2YTXsxtXHEHULAkSPZZOihbpHzXr4vQ3Cexb
-	D+ydeuuWrX/pqJmgRHy0771BUORNpedu41+2WShmCUWjg8bcWWUM2e+46v4Q8StOSZ/z
-	RJma8GYOpZFYxJKvHWCHaqetkBH7G7T1xMPgjfTnIk5M10dz8m6TZZZ9Fh8+dtQyw0hX
-	Q55w==
+	:cc; bh=RhHQ569S7jZRYxZLFq8ceKkXA1D7wTRRaK9P5GYTmL8=;
+	b=tYyGJgxPQguZuu1Bum+3Fx0rQzCAQnhrSXvX8hZaL+3ix+5BIspf1obFHPTrBINlEd
+	xeDnNJXWC6i3+PUyGNphWCwYCXz/N24zZAdxSYr1CQfuhMQRj4fuS7EDA1YZ85TJa4t0
+	+OZC4GwvvEG9MBkqrRViRsxAmR5YAvT6Od9ooif438z3NpSj1rMO6Zyx0QrKbOzCAM16
+	u3aTO3gHjWUMHPfdEwkemueZQUoNA7DdRy+SxDJHP3IjCe4J+O79lrNFIGlnmTbTh0oo
+	ilKXOcUBbC+Y3ozCJwwSCQMqNALmi4yhBHTAKJbILm0pJaQd8q1Dx0edMfNP0ije1B13
+	1URg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=TQvM7/hygcGpLhh/Y5AgB/K4jipVQPMMoNheGKgZcqQ=;
-	b=Fs5/K8C9ihHFSXWykPedgMVs9CwiFmbPzD/LZgFggIfgrH6oIPAvnhOcjzQn/YObJF
-	znG2KwiTnu1dMpMmZuVQSC93O2EJRL48S1NNKC7IkJC4lGBRRBNsyKKPAbCrBHnqQ4iu
-	cuZUW65Q2qhxsX+2QCUjuz+Mm8Z2XgNjpIXnwb2kaYOMjXgZ+S6HidhZzILURLmV9I31
-	tIFQSa3/fSt4CDuQ2nu4RBhHfWLHHboDs64en0Yt3HxhsBks8bLDRo9QGu86yr13bU2T
-	WFSb0oTPRwAPjTGcu0ppp2isf4DXttCKkzm6ypem+myJI3xmpm1DZ2FQ+vzPeF/lV1lR
-	D16A==
-X-Gm-Message-State: AGRZ1gJnE858OewTFR2uhLVvwD8z3WTB00spiiFERifJ7tWKe4GOkKcn
-	Dq3nRxXu4ZTOuzHmzQUEBAt8zVAGylfEIJwNAq1zLWXK
-X-Google-Smtp-Source: AJdET5eiwsLi68YZ7jC25sCE302VZqtwx7pu3czI34MVvxVT0NmGDgCPW/1Gs7obNtuR2/vxgqBeKcQ0p83XIUZmkCk=
-X-Received: by 2002:a24:36d2:: with SMTP id
-	l201-v6mr1072668itl.130.1540898710586; 
-	Tue, 30 Oct 2018 04:25:10 -0700 (PDT)
+	bh=RhHQ569S7jZRYxZLFq8ceKkXA1D7wTRRaK9P5GYTmL8=;
+	b=RmKUFvmjfozQI/fg7B5bPU9RPY/1hFCFAGAosTMs/TawTzeHzZ2YHbe0JQMl7L46iw
+	a57KwXoDrH/7MFc2qFu3l3GVtMYnyfXCJrn3dvvxATrkRak72fIYL79WjvW8hFt56pNj
+	kHI/H3GTnsNDBVCyjFNEyKmS3atgVTJbOkxP73twLBL2+ts33X8XKL9/nD03mCoHYRre
+	Yg2N9kaLAF+1mXe5zQFRlV93cyq6tRqHNTmStKbC5ejoFq/3NFY0NANgE4S8UjcBOT0a
+	orJFoxlMQyp6gsxx0Kru8C0EPzDLwTxkUmgRiZMyRSM+zKELnsD9Mcbf0H67fgDbRRXG
+	IefQ==
+X-Gm-Message-State: AGRZ1gKk6LrejKyG9+0dh4e+sC7SttlsnKrd4zbk51VdPMAmOnMQXQ6j
+	5fTxFnoKDDn8YZYI0Q0+WcxCTr36mbDu321g8Vd3QQ==
+X-Google-Smtp-Source: AJdET5eHqXaeJ8ArtrOtL5CnpbaM4n3n022UUki/5vYzkxGqiQyEhf5PI/5jFXM8RGlA9gH39HrMo2Tw1hgUhjoBKyw=
+X-Received: by 2002:a24:9287:: with SMTP id
+	l129-v6mr947796itd.26.1540899049674; 
+	Tue, 30 Oct 2018 04:30:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<ad2a3fd59975f2af76a55c6c480bbbbc4855f49a.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <ad2a3fd59975f2af76a55c6c480bbbbc4855f49a.1540830650.git.brendank310@gmail.com>
+	<a3ce539915c9a45c2b8032260ea65d6ee5b00f6b.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <a3ce539915c9a45c2b8032260ea65d6ee5b00f6b.1540830650.git.brendank310@gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 30 Oct 2018 11:24:59 +0000
-Message-ID: <CAJTo0LZJv8Pmoqnb5-Xb2Tjms12P_Oa4S69CxdYvHd=fRSWBNA@mail.gmail.com>
+Date: Tue, 30 Oct 2018 11:30:38 +0000
+Message-ID: <CAJTo0LZ9SxbjYuw9OiHmP4W7SWX+0Uu3F6CyU5EaRFRpPh0wXw@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 02/16] ibus: add recipe for ibus to support gnome-settings-daemon and gnome-shell
+Subject: Re: [RFC meta-gnome][PATCH 04/16] accountsservice: add recipe for Accounts Service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +57,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 11:25:09 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 11:30:49 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 29 Oct 2018 at 16:41, brendank310 <brendank310@gmail.com> wrote:
-> +DESCRIPTION = "Intelligent Input Bus for Linux/Unix"
-> +LICENSE = "LGPLv2.1"
-> +DEPENDS = "prelink \
-> +           gtk+ \
+On Mon, 29 Oct 2018 at 16:42, brendank310 <brendank310@gmail.com> wrote:
+> +accountsservice: Remove internationalization
+> +
+> +  The i18n internationalization fails within the OE
+> +  environment.
+
+Probably because you don't depend on gettext-native.
+
+> +         context = g_option_context_new ("");
+> +-        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+> +         g_option_context_set_summary (context, _("Provides D-Bus interfaces for querying and manipulating\nuser account information."));
+> +         g_option_context_add_main_entries (context, entries, NULL);
+> +         if (!g_option_context_parse (context, &argc, &argv, &error)) {
+> diff --git a/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
+> new file mode 100644
+> index 000000000..a019a8c6d
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/gnome3/accountsservice_git.bb
+> @@ -0,0 +1,24 @@
+> +DESCRIPTION = "Accounts Service"
+> +LICENSE = "GPLv3"
+> +DEPENDS = " \
+> +            glib-2.0 \
+> +            gsettings-desktop-schemas \
+> +            polkit \
+> +            dbus \
 > +          "
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +
+> +SRC_URI = "git://anongit.freedesktop.org/accountsservice.git;protocol=git;branch=master \
 
-It depends on gtk+2?
+That's a mirror of
+https://gitlab.freedesktop.org/accountsservice/accountsservice.
 
-> +S = "${WORKDIR}/${PN}-${PV}"
+Also tarballs are at https://www.freedesktop.org/software/accountsservice/.
 
-This is the default.
+> +           file://0001-strip-out-intl.patch \
+> +           "
+> +
+> +FILES_${PN} += "${systemd_system_unitdir}"
 
-> +inherit autotools pkgconfig gtk-doc distro_features_check vala gobject-introspection
-
-distro_features_check isn't being used.
+Use the systemd class instead.
 
 > +FILES_${PN} += "${libdir}"
 
-Definitely wrong.
+As discussed.
+
+> +SRCREV="${AUTOREV}"
+
+As discussed.
 
 Ross
 
