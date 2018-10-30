@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 111BE79BD8
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 167A079BD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 21:05:23 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id c16-v6so15253752qtj.13
+	Tue, 30 Oct 2018 21:07:25 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id b22-v6so15278982qtr.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 14:05:25 -0700 (PDT)
+	Tue, 30 Oct 2018 14:07:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZD5cEwYbDZChwexN58JzSdJYpJF6XqB2sxzDB+a6JPY=;
-	b=eeocnzr6KBMiazDfXl1Bl3M40qloOi2q0nyPJsxceVgxV3QIxLDRRqaRz6p71TU4mH
-	Ik0ToLtHognYZlTMBtSCLBZOQ628jTM4ygYD3dtBq7eGiJOfHBfY6dY6YRnWMoSeLPTA
-	aVHg+fa8HYYQeT3f6t5g+4lCy3QzqI0IQhtxrmhnxFf+0wSDJlhQLikagkv9uYVTcuwo
-	aoFFFLu9maGxoxnmnQyXHYI7jsKugmOGvrogBwkKyoAf7SpCkY928aZOdFr0tJl38CVx
-	mVy22tQykPPaUk+WKYPTyfgcw2mXEEsW7unD0i5Ydvg0A35Hthl2eoPlXPzzLmuQGh5t
-	obgQ==
+	:cc; bh=If3sXhCG/WXhfcGYDEWhKe7Qf4fema3TcTCXtKHXW+s=;
+	b=sHUKW5+Pjt2JrSEXpmIaidr6QWoD/+/BvpR7HfTyLeEKXstODQLqyu2fLYqaWxB7yv
+	6pkYad2OzMLHCb17l7szBY/TfFuDycF67rqhSIouMV3OH59zKVlyjoWX//qQz52SPZwz
+	yIl2NeV3mY525Gn3M1V5zpuONRaVYKpsQKS6jyE5zClCnAhS1hMzC3EvQYHSma+mu9Ff
+	hHe3sVHK8oi8uh3243mZHoERJSy+SgRwEQnqtR4A2Lnlo+PubTZX5sVgNTfMmLtm200A
+	XGxx9Su1SZCAH5EyNyA4aoJPaI0ZdT6brswT4e5zPlJSntPiqXkJD8NHhdqq4XMqS4Qi
+	8TqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ZD5cEwYbDZChwexN58JzSdJYpJF6XqB2sxzDB+a6JPY=;
-	b=nsCs0jqo1eTV25tGCICKws4ewgDsFqBo9xNQ8lqlE2FqzcLlpCRKBPS5AljCt9hQhZ
-	va9//HhdD8oTynmkpucqXElqKCb29dZgwRa2vEw/7Y0MXk1DX8o5cPy6JCKd3UnhCgcw
-	tX07cGMvk9D1Jo2L6kUifwrRVL46xJjBu5+CpZ18rLVgXdeMVOzSbKQctB8wbZSMtfR3
-	W56YS1oIgpA9eLzn0u3/SWGhCdpObIXCMDEgIkYo0Wr9Rd/kYserOHciMqD1L5WedkfQ
-	RcGsrjv0Q6TmP29mX6+/wOts6rfXOQd72H9pSVErzKmfe0J+KSZIBItZgGoKwf1Y6vPB
-	xOZg==
-X-Gm-Message-State: AGRZ1gJycnfeJ9jRmT4ISTKxAuYQTrr4bQ9xb6oiKqii65715smSUsIz
-	SwIoZMYFtMtxhWqZQOOAoKjDoomodXS2wP+RAWc=
-X-Google-Smtp-Source: AJdET5fT9p90hRYCSc87hPntDvtsn88h/Gc0j5mxZPeB7jMEWCxIdv5RO0z5Unpiciqe8FEaJyDvQhVuOl7e6tN8Uko=
+	bh=If3sXhCG/WXhfcGYDEWhKe7Qf4fema3TcTCXtKHXW+s=;
+	b=l1301XRS9qCFVtpngl3Ay8btCpkW1RxsPwm2mVjTBSZx/ipCDqAACeb+IGkZ9d6UEc
+	N9fg7FA619/YKRc1x7qaxdUEKmxJCf5yYIAildxUZ6Az9MN/w4vitHzdNH4RZtC1LJ6U
+	Fdx4Ovo8HtORwAdh4NWDsnSO1+8f7e9TXEErFgqn+zwFeP9sR4iYWaZfBwzkVQBHLT1S
+	CGRAXVZ298rAh05HEj5W3MiPtOuqQLQZ/CmSG5TA7wRhpYoZSqz7fsLf1LKvRfGzoqro
+	2LQbf3XVmsYb4JyBUJ5VITEJDm/D9sxPNq7hXDBQX/0mxvwR6UBS9+PPOO6AcgO+tjlQ
+	IKuw==
+X-Gm-Message-State: AGRZ1gI9+6DTydFfzpPQrtP+pBSSyo5NJ0rzx6d9rAtK5NgU6R3MOShX
+	Q8UtmX3z5F/LazcQyh/UVlLfcwDBLVBRamu7JB05CQ==
+X-Google-Smtp-Source: AJdET5cgdDW5AWLC+etuQVPTUMaGFHlhOOhO/yp1btrIZljFLBqTkpwx4HqXEHcqh9OKS3UgeNbYpouoyeFKjJN0DvQ=
 X-Received: by 2002:aed:3e94:: with SMTP id
-	n20-v6mr333500qtf.196.1540933524531; 
-	Tue, 30 Oct 2018 14:05:24 -0700 (PDT)
+	n20-v6mr339964qtf.196.1540933646798; 
+	Tue, 30 Oct 2018 14:07:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20181030133511.2954-1-pascal.bach@siemens.com>
-	<20181030133511.2954-2-pascal.bach@siemens.com>
-In-Reply-To: <20181030133511.2954-2-pascal.bach@siemens.com>
+References: <cover.1540830650.git.brendank310@gmail.com>
+	<068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
+	<CAJTo0LbH3UCYYHCp6E1gA33fjk2xSr+ZkZjZmn-MDvabT7_EfQ@mail.gmail.com>
+	<CAKPa3c2XXz1JNFzu-voxa-O029gh-7eSf1hWAD4U=BAjMfLx9w@mail.gmail.com>
+In-Reply-To: <CAKPa3c2XXz1JNFzu-voxa-O029gh-7eSf1hWAD4U=BAjMfLx9w@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Oct 2018 15:04:58 -0600
-Message-ID: <CAMKF1sq1BgDRg+8oB2d=sUWtCo2x-4FMGyMTS-r4ZPAiD1TG0Q@mail.gmail.com>
-To: Pascal Bach <pascal.bach@siemens.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/2] civetweb: disable tests
+Date: Tue, 30 Oct 2018 15:07:00 -0600
+Message-ID: <CAMKF1sq6snZg1PyA8n667saiX2qNFD55vOtz3f8_9+MFJAsknw@mail.gmail.com>
+To: Brendan Kerrigan <brendank310@gmail.com>
+Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [RFC meta-gnome][PATCH 05/16] lcms2: add recipe for Little Color Management System
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 21:05:24 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 21:07:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 30, 2018 at 7:35 AM Pascal Bach <pascal.bach@siemens.com> wrote:
+On Tue, Oct 30, 2018 at 9:04 AM Brendan Kerrigan <brendank310@gmail.com> wrote:
 >
-> Tests try to download third party code and bypass the bitbake fetcher to
-> do that. This will not work in environments with no internet access.
+> Sounds good, I hadn't seen that. Should the existing lcms recipe be renamed
+> to lcms2? Most distros seem to package it as such and it'd also simplify
+> the recipe a bit (the PN would align with the tarball and source directory
+> name).
 >
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
-> ---
->  meta-networking/recipes-connectivity/civetweb/civetweb_git.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-> index 004cf960a..d681f7f30 100644
-> --- a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-> +++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-> @@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
->      -DCIVETWEB_ENABLE_DUKTAPE=OFF \
->      -DCIVETWEB_ENABLE_LUA=OFF \
->      -DCIVETWEB_ENABLE_ASAN=OFF \
-> +    -DCIVETWEB_BUILD_TESTING=OFF \
->  "
-Probably, it will be good to turn this into a packageconfig, I am fine
-to disable it by default
-but it might be useful to have it enabled with say images with ptest feature on.
 
+as long as we maintain upgrade path for binary feeds I would think its ok.
+
+> On Tue, Oct 30, 2018 at 7:23 AM Burton, Ross <ross.burton@intel.com> wrote:
 >
->  # Building with ninja fails on missing third_party/lib/libcheck.a (which
-> --
-> 2.11.0
->
+> > On Mon, 29 Oct 2018 at 16:42, brendank310 <brendank310@gmail.com> wrote:
+> > > +inherit autotools pkgconfig distro_features_check
+> >
+> > distro_features_check isn't being used.
+> >
+> > But mainly, just update the existing recipe.
+> >
+> > Ross
+> >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
