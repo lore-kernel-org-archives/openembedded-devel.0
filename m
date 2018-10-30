@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DC3E79C98
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C215979C9A
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 30 Oct 2018 03:42:38 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id u68so2453549qkg.9
+Received: by mail-qt1-f194.google.com with SMTP id z20-v6so11939978qti.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 20:42:39 -0700 (PDT)
+	Mon, 29 Oct 2018 20:42:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3wKbuWQ+kyUJO/3BqCmecrwkKYhHG/fH2meMGW/2iBs=;
-	b=JSLOA6KbDvFVOIwV5+kD+teATns2WZ7NG3KvDjTLJ8dhQUTxl2DKtJ6wm95cnFLP5C
-	21h0TjN4PnrZFx7p3om69NgHOoCYSZeSbE7mtvnXgDUaXGIyMhP8otxHCE29gCzF6qGM
-	jaJvbC+pe734uyRnaIMlF4fiX+4Rv5BWXbXzVk751RRcRcxUSBQMryKy4HXli0Z6ARkn
-	FsZ7W0PHq2Tvl8tKDoe3yrbaiH9Od+NNqCuPF1DUSHazsCGAwFwZK7vfIasS9zUAnRgR
-	jzapnhAjyqAlqwgACoeU7BG7Imh1iA7bg52CXB/KOb3O6dmaPhzTCPMrCXi4Ev5I1Dp2
-	AHOg==
+	:cc; bh=+v4QH7cOMVGPY4dWa6ly4kL2l7hU/FBgHvfdIfRKi14=;
+	b=TX3B7RzOtAGSKv7N37NF+kquE+0bc2g8jjYkSoI2Rx5V/Z0i20eTJMKFcF8gXfS2NP
+	usWkEqsuK4MbB/PBw/eRRO7/5uDRxGmpM5VJxb2gMbV6YNwZqkk0MzCAE3BopZ5fj6Y3
+	DzpCKnxjfb575dB8FvsXLEjFQSOh/hvqWZsQsjRxTS0T00B5f6iHTIpK9+VO2XbvPkCB
+	XeLCRAwi8Mlc8pqgkdVCwkaUcS3xTmyQb2PNdtAso5JFLXm7ktjuG+SRI2lUl6Q4rEZn
+	S5tifuuqCVus0/k7hwDmCX06+W46oOaPSUYpNwQM4mzMhN41+yE+96CrsAAcoOcytD9Z
+	wpyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=3wKbuWQ+kyUJO/3BqCmecrwkKYhHG/fH2meMGW/2iBs=;
-	b=gP6LSNiaqbTQfyLJOgCNMVa2IV6rVIk75XhJzbbNTbDspzz55CpY3fV4ISw41ui04Z
-	y0bOoerhylmEDcyEfJCjeYUtdrQuis4gQvutfUvX1JPdy6DM+yz7OQarW4u/nx/DjJrL
-	X+HndvUoLD1M5Ltv1+1K2YlZ1ZmMGosVaW268gSwAJQYkfW4+pBM4wtw9J42Hhe1F8Tt
-	+RsCtEP75mHMQ5mEfxYFtwe8yk/YzjOAhj4w6IRI8yaqdhMOqvJrkV0rwip/+T6ltf8I
-	33f/B0IgX9FVDu+jbwxk1HTV2sGngaMzCuE8cb+nvM3jaBCRyCCG1qad2/dmB2iK1air
-	NDlg==
-X-Gm-Message-State: AGRZ1gLH1HKGnW14oRHt/mo3B9K8ZrpyFAKwo49PTJqAcUU/ksaZfjN5
-	MsFK4czy11yC2FC6EVnOra0IoTOcFNoQU2or3Q0=
-X-Google-Smtp-Source: AJdET5dSuq8f0ahGOQiQ6EN5yu4xcX57grJhX8I/YYb7rhENb16RPpCDB39wyXkUWMpEdYY7Ik5cLOS58bz9bhWP2QE=
-X-Received: by 2002:a37:5003:: with SMTP id
-	e3-v6mr15019448qkb.102.1540870959114; 
+	bh=+v4QH7cOMVGPY4dWa6ly4kL2l7hU/FBgHvfdIfRKi14=;
+	b=ZInxg1O0tn03oJTpJpVjYQjQpOYiPCv7v2S03Vhdg0N9//iq4sBTyx5XlRwv2cVveI
+	X/lq1djzOh2k8VVgCam8wbfap75oVoPhY9ZkfvejHu8ucKdJox2KUHoNcZwpy2tsBLl2
+	4LI2erWhn6wvQTDBTxVY1tgsp7I6STZ9eoVYLp9YYOMalui5ZC3G61CZJxNPmsNOd5Tb
+	Os8tw1XOIfB4jUgfPDmIrsho1UCGI3NWDx4ymovR3EEUN1HobZMkAw+CLQHu8JIW2k+p
+	1qdpOdZZncfg0mcUC+rkQT4i9knShG3ruK8vnowj8/WREJyje/iNOA+NIUXRzFgT2vQS
+	mUmQ==
+X-Gm-Message-State: AGRZ1gID0b1gTH7/G8cJ9/Mbyzo2swBUBxiHb0V0sgl4eLpFnMkqjifp
+	/iLkyAtEGqdiPs75yONaH81FYokqX0ibgdhG9kDkSg==
+X-Google-Smtp-Source: AJdET5dHI5Arm87EYyxxG/uXr2vFukDYp7UGMeRjZz6A+1IHUrRxfbewo8igTyt1Qunz/UcPIk6iJ+xZ/A6XVL961J8=
+X-Received: by 2002:a0c:93e2:: with SMTP id g31mr13137204qvg.194.1540870959595;
 	Mon, 29 Oct 2018 20:42:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<eeb685e9cefb4e85e07b1a51f4e562c03dda96b7.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <eeb685e9cefb4e85e07b1a51f4e562c03dda96b7.1540830650.git.brendank310@gmail.com>
+	<16012ad2ea09d37fb7a9b8ad4b0c0f01e641d821.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <16012ad2ea09d37fb7a9b8ad4b0c0f01e641d821.1540830650.git.brendank310@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Oct 2018 19:52:47 -0700
-Message-ID: <CAMKF1sq17swAVLpY=fXkug3s7C4TvDxJd8JF4cQOknicmjnr-A@mail.gmail.com>
+Date: Mon, 29 Oct 2018 19:53:49 -0700
+Message-ID: <CAMKF1sqMoSH4TEOxk4T58jmN+ypF9hdAeXKPf6fdB8ir4v-SAg@mail.gmail.com>
 To: brendank310 <brendank310@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: schnitzeltony@googlemail.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC meta-gnome][PATCH 07/16] geocode-glib: add recipe for geocode-glib library
+Subject: Re: [RFC meta-gnome][PATCH 06/16] gnome-settings-daemon: add recipe for gnome-settings-daemon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 03:42:38 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 03:42:39 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 On Mon, Oct 29, 2018 at 9:42 AM brendank310 <brendank310@gmail.com> wrote:
@@ -65,52 +64,130 @@ On Mon, Oct 29, 2018 at 9:42 AM brendank310 <brendank310@gmail.com> wrote:
 >
 > Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
 > ---
->  .../recipes-gnome/gnome3/geocode-glib_git.bb  | 21 +++++++++++++++++++
->  1 file changed, 21 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
+>  .../0001-remove-extraneous-plugins.patch      | 52 +++++++++++++++++++
+>  .../gnome3/gnome-settings-daemon_git.bb       | 43 +++++++++++++++
+>  2 files changed, 95 insertions(+)
+>  create mode 100644
+> meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon/0001-remove-extraneous-plugins.patch
+>  create mode 100644 meta-gnome/recipes-gnome/gnome3/
+> gnome-settings-daemon_git.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
-> b/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
+> diff --git
+> a/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon/0001-remove-extraneous-plugins.patch
+> b/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon/0001-remove-extraneous-plugins.patch
 > new file mode 100644
-> index 000000000..73332e374
+> index 000000000..6f5599058
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome3/geocode-glib_git.bb
-> @@ -0,0 +1,21 @@
-> +DESCRIPTION = "Geocode Library for glib"
+> +++
+> b/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon/0001-remove-extraneous-plugins.patch
+> @@ -0,0 +1,52 @@
+> +gnome-settings-daemon: Disable plugins, dependencies, and compiler errors
+> +
+> +  * Disable 'no-deprecated-declaration' to allow build to complete
+> +  * Remove colord as a dependency
+> +  * Remove unused plugins
+> +
+> +  Upstream-status: Inappropriate [configuration]
+> +
+> +  Signed-off-by: Brendan Kerrigan <kerriganb@ainfosec.com>
+> +
+> +diff --git a/meson.build b/meson.build
+> +index d2121623..15fcc88d 100644
+> +--- a/meson.build
+> ++++ b/meson.build
+> +@@ -54,7 +54,7 @@ endforeach
+> +
+> + # compiler flags
+> + common_flags = ['-DHAVE_CONFIG_H']
+> +-compiler_flags = []
+> ++compiler_flags = ['-Wno-deprecated-declarations']
+> +
+> + if gsd_buildtype.contains('debug')
+> +   common_flags += ['-DG_ENABLE_DEBUG']
+> +@@ -82,7 +82,6 @@ endif
+> +
+> + add_project_arguments(common_flags + compiler_flags, language: 'c')
+> +
+> +-colord_dep = dependency('colord', version: '>= 1.0.2')
+> + geocode_glib_dep = dependency('geocode-glib-1.0', version: '>= 3.10.0')
+> + gio_dep = dependency('gio-2.0', version: '>= 2.53.0')
+> + gio_unix_dep = dependency('gio-unix-2.0')
+> +diff --git a/plugins/meson.build b/plugins/meson.build
+> +index 3db69da7..accb7b90 100644
+> +--- a/plugins/meson.build
+> ++++ b/plugins/meson.build
+> +@@ -1,16 +1,11 @@
+> + enabled_plugins = [
+> +   ['a11y-settings', 'A11ySettings'],
+> +   ['clipboard', 'Clipboard'],
+> +-  ['color', 'Color'],
+> +   ['datetime', 'Datetime'],
+> +   ['dummy', ''],
+> +-  ['power', 'Power'],
+> +   ['housekeeping', 'Housekeeping'],
+> +   ['keyboard', 'Keyboard'],
+> +-  ['media-keys', 'MediaKeys'],
+> +   ['mouse', 'Mouse'],
+> +-  ['screensaver-proxy', 'ScreensaverProxy'],
+> +-  ['sharing', 'Sharing'],
+> +   ['sound', 'Sound'],
+> +   ['xsettings', 'XSettings']
+> + ]
+> diff --git a/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon_git.bb
+> b/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon_git.bb
+> new file mode 100644
+> index 000000000..167db3bd2
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/gnome3/gnome-settings-daemon_git.bb
+> @@ -0,0 +1,43 @@
+> +DESCRIPTION = "GNOME Settings Daemon"
 > +LICENSE = "GPLv2"
-
-
-The checksum seems to be operating on a COPYING.LIB can you confirm its not
-LGPL but rather GPL
-
->
 > +DEPENDS = " \
+> +           libcanberra \
+> +           prelink \
 > +           glib-2.0 \
-> +           json-glib \
-> +           libsoup-2.4 \
+> +           gsettings-desktop-schemas \
+> +           gnome-desktop3 \
+> +           wayland \
+> +           wayland-protocols \
+> +           gettext-native \
+> +           polkit \
+> +           upower \
+> +           libnotify \
+> +           geocode-glib \
+> +           libgweather \
+> +           lcms2 \
+> +           libwacom \
+> +           networkmanager \
+> +           geoclue \
 > +          "
 > +
-> +LIC_FILES_CHKSUM =
-> "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 > +
 > +SRC_URI = "git://
-> gitlab.gnome.org/GNOME/geocode-glib.git;protocol=http;branch=master;tag=3.26.0
+> gitlab.gnome.org/GNOME/gnome-settings-daemon.git;protocol=http;branch=gnome-3-30
 > \
+> +           file://0001-remove-extraneous-plugins.patch \
 > +           "
 > +
-
-
-hmm tags are floating kind of commits so they would result in checking
-remote repo on every fetch task it would be better to use a hard coded SHA
-
+> +SRCREV="${AUTOREV}"
 >
-> +EXTRA_OEMESON += " -Denable-installed-tests=false -Denable-gtk-doc=false "
-> +
-> +FILES_${PN} += "${datadir}"
-> +
-> +S = "${WORKDIR}/git"
+
+No AUTOREV as we discussed earlier
+
++S = "${WORKDIR}/git"
 > +
 > +inherit pkgconfig meson gobject-introspection
+> +
+> +EXTRA_OEMESON += " -Denable-gtk-doc=false -Dcups=false "
+> +
+> +FILES_${PN} += "${datadir}"
+> +FILES_${PN} += "${libdir}"
+> +
+> +do_configure_prepend() {
+> +       # Fixup the gsettings version
+> +       sed -i 's^3.27.90^3.24.1^g' ${S}/meson.build
+> +}
 > +
 > --
 > 2.17.1
