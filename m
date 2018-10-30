@@ -1,25 +1,25 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A88779C84
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 57E4979C7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 01:50:30 +0000 (UTC)
+	Tue, 30 Oct 2018 01:50:32 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w9U1oWP2008237
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9U1oX8n001990
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 18:50:32 -0700 (PDT)
+	Mon, 29 Oct 2018 18:50:33 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 29 Oct 2018 18:50:25 -0700
+	14.3.408.0; Mon, 29 Oct 2018 18:50:33 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Oct 2018 09:07:47 +0800
-Message-ID: <20181030010748.3266-4-kai.kang@windriver.com>
+Date: Tue, 30 Oct 2018 09:07:48 +0800
+Message-ID: <20181030010748.3266-5-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20181030010748.3266-1-kai.kang@windriver.com>
 References: <20181030010748.3266-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 3/4] xfce4-notifyd: 0.4.2 -> 0.4.3
+Subject: [meta-xfce][PATCH 4/4] thunar: 1.8.1 -> 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 01:50:31 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 01:50:32 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../{xfce4-notifyd_0.4.2.bb => xfce4-notifyd_0.4.3.bb}        | 4 ++--
+ .../recipes-xfce/thunar/{thunar_1.8.1.bb => thunar_1.8.2.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.4.2.bb => xfce4-notifyd_0.4.3.bb} (84%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.1.bb => thunar_1.8.2.bb} (86%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
-similarity index 84%
-rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
-rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
-index 15ec51b2b..d7719051b 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
-@@ -15,8 +15,8 @@ DEPENDS = " \
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.8.1.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.8.2.bb
+similarity index 86%
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.8.1.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.8.2.bb
+index 726ce91bd..d2a0e30c5 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.8.1.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.8.2.bb
+@@ -9,8 +9,8 @@ inherit xfce gobject-introspection distro_features_check
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- inherit xfce-app
+ SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "f0681eccff31c027097a3e1e7db85218"
+-SRC_URI[sha256sum] = "96fabaa68db32f513e9bcb34fa2a26c1462127727fad0bc25a8a5ba9aab4c12c"
++SRC_URI[md5sum] = "51a0988625a7e2c944377e75d3effc71"
++SRC_URI[sha256sum] = "75f91045541eb5983e772a564d97f23e5995256bfb9863e0f4a015393421d428"
  
--SRC_URI[md5sum] = "ecb930ef6ae6e1f310a5afe5f638eff8"
--SRC_URI[sha256sum] = "f6f28af47fdfb41db84bd003f0d76f5f4abf2137d1e27e9d378f063bb8f82356"
-+SRC_URI[md5sum] = "4887c62dfcb4c3e4f45c9acfb3def515"
-+SRC_URI[sha256sum] = "293dda084cfca4887ae740e2725fdfc64412bc10eac7a55a924eb14482dceac0"
+ S = "${WORKDIR}/Thunar-${PV}/"
  
- # Avoid trouble with other desktops e.g KDE which also ships dbus service named
- # org.freedesktop.Notifications
 -- 
 2.18.0
 
