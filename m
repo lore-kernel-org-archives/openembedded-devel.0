@@ -1,25 +1,25 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5946479C6C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A88779C84
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 01:50:05 +0000 (UTC)
+	Tue, 30 Oct 2018 01:50:30 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w9U1o3Gu001987
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w9U1oWP2008237
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2018 18:50:03 -0700 (PDT)
+	Mon, 29 Oct 2018 18:50:32 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 29 Oct 2018 18:50:02 -0700
+	14.3.408.0; Mon, 29 Oct 2018 18:50:25 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Oct 2018 09:07:45 +0800
-Message-ID: <20181030010748.3266-2-kai.kang@windriver.com>
+Date: Tue, 30 Oct 2018 09:07:47 +0800
+Message-ID: <20181030010748.3266-4-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20181030010748.3266-1-kai.kang@windriver.com>
 References: <20181030010748.3266-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 1/4] xfconf: 4.13.5 -> 4.13.6
+Subject: [meta-xfce][PATCH 3/4] xfce4-notifyd: 0.4.2 -> 0.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,39 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 01:50:05 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 01:50:31 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Upgrade xfconf from 4.13.5 to 4.13.6.
-* update FILES
-
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../xfconf/{xfconf_4.13.5.bb => xfconf_4.13.6.bb}            | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.5.bb => xfconf_4.13.6.bb} (67%)
+ .../{xfce4-notifyd_0.4.2.bb => xfce4-notifyd_0.4.3.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.4.2.bb => xfce4-notifyd_0.4.3.bb} (84%)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.5.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.6.bb
-similarity index 67%
-rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.13.5.bb
-rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.13.6.bb
-index 615350240..191d0fd78 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.5.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.6.bb
-@@ -8,8 +8,9 @@ inherit xfce gtk-doc
+diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
+similarity index 84%
+rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
+rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
+index 15ec51b2b..d7719051b 100644
+--- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.3.bb
+@@ -15,8 +15,8 @@ DEPENDS = " \
  
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+ inherit xfce-app
  
--SRC_URI[md5sum] = "1ce1a7f694fb6a4a4a32000f72131ea9"
--SRC_URI[sha256sum] = "90b4eb0cdf407339c091e9811f7a40b4cfa215ebb03a921503b7e21f0f4f63cb"
-+SRC_URI[md5sum] = "da19df12dbc494c8a4da3974e376d639"
-+SRC_URI[sha256sum] = "d1a3d442dae188b5a7380b5815377e5488578cdafb03ae363e9426e3b01185df"
+-SRC_URI[md5sum] = "ecb930ef6ae6e1f310a5afe5f638eff8"
+-SRC_URI[sha256sum] = "f6f28af47fdfb41db84bd003f0d76f5f4abf2137d1e27e9d378f063bb8f82356"
++SRC_URI[md5sum] = "4887c62dfcb4c3e4f45c9acfb3def515"
++SRC_URI[sha256sum] = "293dda084cfca4887ae740e2725fdfc64412bc10eac7a55a924eb14482dceac0"
  
- FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
-+                ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
-                 ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+ # Avoid trouble with other desktops e.g KDE which also ships dbus service named
+ # org.freedesktop.Notifications
 -- 
 2.18.0
 
