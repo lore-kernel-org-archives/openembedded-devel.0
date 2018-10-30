@@ -1,49 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 06FBC79B30
+Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A641F79C5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 11:21:50 +0000 (UTC)
-Received: by mail-it1-f196.google.com with SMTP id f16-v6so5681658ita.3
+	Tue, 30 Oct 2018 11:23:08 +0000 (UTC)
+Received: by mail-it1-f195.google.com with SMTP id p11-v6so2726645itf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 04:21:51 -0700 (PDT)
+	Tue, 30 Oct 2018 04:23:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZXLQEmu73jfPb/oquHY8GN6Qkv37CurRyD5lgz+vLu0=;
-	b=ve/66AU0PltHuE6TXMx4bKfU+4fWDYzclBtM3YLwO2GjRb9aSbBmg62Su32SkM9i8+
-	rG8oWMFBGFfkMC2tHRKn3+jn8cv2oI+89rIKSwTOnt1y6WYdEXzM8me53zZU956YIPdn
-	u7fmR4zTUF10TLDWhKkjrIy7kP76YWjN2fSfZAmQwJxnisuNeiO4hHLWIipE7jb/ys0U
-	lxlXwnu2TYNtvRkHqlKErdSMc2nytQbAsWFfO/QgR5E5wvFnQXaUPY2am6XJHT5szV/K
-	z3Z8WiqRVP9ml5KPA3YItZPoeK8k9cXB7+iQB+lxRsrhrcsCAOubYm+mTdmfPTFORic8
-	3yqA==
+	:cc; bh=We7SEEukHchvK7KJk/NsQaMo27Ywltvkk4DdD4SDfsk=;
+	b=mD2NoxFPmmr71dYdbCrt83qKksKcEDEvb0KL/dj4c6NiPcfK0DEYDENrX/pAWlWISi
+	3JNgoInZxFF5UBAmekdC7ZsrN+O1AReEMvZCVQJzDKkhS/cfrLt5kvRzvGtNnOEE/aKm
+	IZEQttC0KEhzfq0ReMced8vf+Z9ApovKPfLRNjOsBurJXkYwBAlUEP7L6hptCv7yFhov
+	ahEox8Wtvqhpi4/RJVNKCPGpjCKvUrv52NB9m3loWu8jlVsVw7UxdzlKyjBPXGjxrSiy
+	entqJfeByp6Amzz4fxoai7SbySTFMeggHXSbUc/3QEIIxSoznL+XSzJQmyorpd8d+Hyp
+	+K8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ZXLQEmu73jfPb/oquHY8GN6Qkv37CurRyD5lgz+vLu0=;
-	b=XGbxC1diSvONwqyVHxBmln2iDB4cl45Tek1SrxsuTbpO4T3Wh7JI/EJ775yvtOT4dZ
-	LAiF7LocWpKNuGYIJdV2y1/RN8QOPBS76kETRVaA7RgPabjapHkitz5GnRzCpUKw+5Rh
-	bPimgQCOtUNgbjYqOx65gmmBaZWiNjAguMLZV6w9dyGJhu1sDnPZeT7vQeofNIRWPz0o
-	8N9W7Cr8vFqurelzR2dXxjfa7AFGRmwxDach0X8gJWLssIP2u8zWthM1rGeKS7H57+R0
-	thHiw4uOQP4xXJCvt901azup6x2JrYaaS7D+HGKDhNf8T+WER+5+y1bN9KYmLWZ49i+E
-	a6CA==
-X-Gm-Message-State: AGRZ1gITfo0IwITlszl1coU2+6UYNe6uPrBoAwXm1HZFJCI8KdhFFB6z
-	7htiS00jtJeqmlJAZZX3IyAb8j2/xICam3Ef9hGbaQ==
-X-Google-Smtp-Source: AJdET5fK0hl5T4Lf6vgZf4LAY2zt7xbpUh3NQDZib5c57Oo/+qCMpIl3HoNB+tBsyZgxrfKUBDoA02vXFhL0ymUwSfE=
-X-Received: by 2002:a05:660c:a06:: with SMTP id e6mr922919itk.62.1540898511144;
-	Tue, 30 Oct 2018 04:21:51 -0700 (PDT)
+	bh=We7SEEukHchvK7KJk/NsQaMo27Ywltvkk4DdD4SDfsk=;
+	b=pR3W5k8mdbpoFPH4zHWq5hHibNT0IRlrwXVNKUU4n3LReJEtXZQDzNy4ZKiDm/OuTx
+	1WZqI8ROaTjgibnyo2WRB9AlaLKre2U7TB7PxJYYZxbHtMvlDMnS3/Ss7qico3zrRsgO
+	Pmg7h7BaEQahLCPKGVkievsKpZyXlJXbI+qoWMd8Mcoo3sx0Ftp7O5pog+PEim0No6UU
+	NVxt6ARkIA0VhwyetFOklTII84R5+YZzS+r1yFOKcI6YBp1m6uMT+U84V9NDrbkuSbgl
+	Kpgae4xlMZQ6ncHZtNf5MEAxJ7xF95ua/vl8OS8xs74P5s0FoYZADF3Cl5C24ELjF377
+	qLYw==
+X-Gm-Message-State: AGRZ1gLcnRbg5351S5xZD6g1wISQmw6q0OJVhBRFk0h0gZnFAc6lBlFE
+	2vHk+TiQi3O6tEkSpyXrWmPx5ai2ckwcNpyZqAPFAg==
+X-Google-Smtp-Source: AJdET5cABBKctiMYqeONFjY0GBn/vB9knrSh7AvJJRgPi2Uhxq0ect+hextw8m9Uhc5HV06FQcUmHZceHGHgCBfkAwE=
+X-Received: by 2002:a24:36d2:: with SMTP id
+	l201-v6mr1068572itl.130.1540898589541; 
+	Tue, 30 Oct 2018 04:23:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1540830650.git.brendank310@gmail.com>
-	<96e86320d4d21de21552cf98eb6145a114fcd69f.1540830650.git.brendank310@gmail.com>
-In-Reply-To: <96e86320d4d21de21552cf98eb6145a114fcd69f.1540830650.git.brendank310@gmail.com>
+	<068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
+In-Reply-To: <068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 30 Oct 2018 11:21:40 +0000
-Message-ID: <CAJTo0LaxyAWT+idVwFyKUimNeANxiEfB-k7G0CMXsM=ZNuxVhg@mail.gmail.com>
+Date: Tue, 30 Oct 2018 11:22:58 +0000
+Message-ID: <CAJTo0LbH3UCYYHCp6E1gA33fjk2xSr+ZkZjZmn-MDvabT7_EfQ@mail.gmail.com>
 To: brendank310@gmail.com
 Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 12/16] mutter: add recipe for mutter window manager
+Subject: Re: [RFC meta-gnome][PATCH 05/16] lcms2: add recipe for Little Color Management System
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,22 +57,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 11:21:50 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 11:23:08 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 29 Oct 2018 at 16:43, brendank310 <brendank310@gmail.com> wrote:
+On Mon, 29 Oct 2018 at 16:42, brendank310 <brendank310@gmail.com> wrote:
+> +inherit autotools pkgconfig distro_features_check
 
-> +do_install_append() {
-> +       install -d ${D}/${datadir}/gir-1.0
-> +       install ${B}/src/Meta-3.gir ${D}/${datadir}/gir-1.0
-> +       install ${B}/cogl/cogl/Cogl-3.gir ${D}/${datadir}/gir-1.0
-> +       install ${B}/cogl/cogl-pango/CoglPango-3.gir ${D}/${datadir}/gir-1.0
-> +       install ${B}/clutter/clutter/Cally-3.gir ${D}/${datadir}/gir-1.0
-> +       install ${B}/clutter/clutter/ClutterX11-3.gir ${D}/${datadir}/gir-1.0
-> +       install ${B}/clutter/clutter/Clutter-3.gir ${D}/${datadir}/gir-1.0
-> +}
+distro_features_check isn't being used.
 
-Why is this needed?
+But mainly, just update the existing recipe.
 
 Ross
 
