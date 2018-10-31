@@ -1,28 +1,48 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 1834B79C85
+Return-Path: <brendank310@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 4447474535
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 08:07:38 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id w9V87cw8002580
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Wed, 31 Oct 2018 09:07:38 +0100
-Received: from [139.22.47.124] ([139.22.47.124])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id w9V87c31018043;
-	Wed, 31 Oct 2018 09:07:38 +0100
-To: Khem Raj <raj.khem@gmail.com>
-References: <20181030133511.2954-1-pascal.bach@siemens.com>
-	<20181030133511.2954-2-pascal.bach@siemens.com>
-	<CAMKF1sq1BgDRg+8oB2d=sUWtCo2x-4FMGyMTS-r4ZPAiD1TG0Q@mail.gmail.com>
-From: Pascal Bach <pascal.bach@siemens.com>
-Message-ID: <d534704b-616c-a328-5d21-a66ee138ebc0@siemens.com>
-Date: Wed, 31 Oct 2018 09:07:37 +0100
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Wed, 31 Oct 2018 13:17:16 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id g9-v6so16441336wrq.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2018 06:17:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=grNdnMw/T6kx36gQiQRc2Pgko7AIFdITASJHq/q/dms=;
+	b=TINXhpGkRdUqPm13jSyeR3bSfCqL95flCxSa2QK6sVVFW1NcecuSi4OP1F3fRq304B
+	pBeRHY8kwW8DrhZ2ArmvQWWX3jyC2Ntz5L1XBEw1F1uKTpdVf8/sz+//G6S7p1jU3HjG
+	stu/bgEeQtcHnOf0FTdWjqERwZeqdW1wJGJk+iDSxsJSHI0tVDN6LBGjsJS4GiwbKtN0
+	rKDMMu0Mvm0gWr3E62AmQRpKv1z/uTgEpgNLfIgQMbf3wBoBnuBVkVJfPRs/eHpFwEb5
+	yV2CR+pRi7bD7SOs8wOw3kAcm7Kke73sQRFAYVrwVyP4lTdBxURZNqogDwA4Sq9BLM6o
+	4BAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=grNdnMw/T6kx36gQiQRc2Pgko7AIFdITASJHq/q/dms=;
+	b=Iu6kvYViQTn7fCbxRDQ/aZu3Nshfbur3efGMqp+HPgLSp/lEh3tv3UFQNeUsQxFIRy
+	Qd92LuIpHGfISdW6vFJRpwe/+ttQYpnZYKn4R6QgvOsa5s8diRwmS1ABIYY2/swr7jgs
+	Lubz/CIxJByAYqIuywWVjoNyspeeGQO4WGOWfNfSO1FPD9OoXyqRwIAULLEPMTiugYvu
+	75/P5rpsd0xfM7cBn7aES5rzrPdOc/5O7nSXQ4N2ZiWL06mJYq+46/IGyCXq+qlEYYNQ
+	ODDsl2IqElkMDGeVCXExCFVpJsloFSRbxm/KFIr2SWO1V+I6ps0aAZkYwfZI1jbn7m1v
+	WYdg==
+X-Gm-Message-State: AGRZ1gL2RjA4nVVZ9pZ/MnsQ7zTgHaLCnDS3liAWEJCPHnorKCtuCpQv
+	r2kBzCHIj40T8jUWAMysbqsyA2HJDdWfL/cWD0Y=
+X-Google-Smtp-Source: AJdET5cBN//Gj+GppztGEm6nO4Fsd+Rz98ignDu47NgTHWuuqKVu9URcs8b8sHr/BARlbDoYOKeAEH49cELJjzvSxds=
+X-Received: by 2002:adf:c90e:: with SMTP id m14-v6mr2845344wrh.6.1540991836514;
+	Wed, 31 Oct 2018 06:17:16 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sq1BgDRg+8oB2d=sUWtCo2x-4FMGyMTS-r4ZPAiD1TG0Q@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/2] civetweb: disable tests
+References: <cover.1540830650.git.brendank310@gmail.com>
+	<CALbNGRRO-qQFvXDJODFn28e9AGr-AgUgDY1D52-2TdDcViYcYg@mail.gmail.com>
+In-Reply-To: <CALbNGRRO-qQFvXDJODFn28e9AGr-AgUgDY1D52-2TdDcViYcYg@mail.gmail.com>
+From: Brendan Kerrigan <brendank310@gmail.com>
+Date: Wed, 31 Oct 2018 09:17:05 -0400
+Message-ID: <CAKPa3c0ky_hpa2AhdzR2-=3dBxMjffzf+U4PZFnnbm3GYOi0Tg@mail.gmail.com>
+To: schnitzeltony@gmail.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC meta-gnome][PATCH 00/16] Add gnome-shell support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,49 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 08:07:39 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 31 Oct 2018 13:17:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Yeah the recipes still using autotools were not utilizing meson at the time
+the work was started. If some of the projects have migrated in the mean
+time, it makes sense to do that work now. At this point I think it makes
+sense to split this into two pull requests, the first set of patches will
+uprev existing recipes (e.g. lcms, dconf to support native, etc), and a
+follow on reflow of the additional recipes for supporting gnome-shell with
+the comments addressed. I expect to be able to post a v2 by early next week
+as I have other commitments that have taken priority. Thanks for all the
+comments so far.
 
-On 30.10.2018 22:04, Khem Raj wrote:
-> On Tue, Oct 30, 2018 at 7:35 AM Pascal Bach <pascal.bach@siemens.com> wrote:
->> Tests try to download third party code and bypass the bitbake fetcher to
->> do that. This will not work in environments with no internet access.
->>
->> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
->> ---
->>  meta-networking/recipes-connectivity/civetweb/civetweb_git.bb | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
->> index 004cf960a..d681f7f30 100644
->> --- a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
->> +++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
->> @@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
->>      -DCIVETWEB_ENABLE_DUKTAPE=OFF \
->>      -DCIVETWEB_ENABLE_LUA=OFF \
->>      -DCIVETWEB_ENABLE_ASAN=OFF \
->> +    -DCIVETWEB_BUILD_TESTING=OFF \
->>  "
-> Probably, it will be good to turn this into a packageconfig, I am fine
-> to disable it by default
-> but it might be useful to have it enabled with say images with ptest feature on.
-I agree it might be useful, but it needs some change as I don't think we want to have a recipe that fetches code from somewhere without bitbake knowing about it.
+Brendan
 
-Once the main CMake patches land I will try to look into how the whole ExternalProject [1] stuff works in CMake and how it could be better integrated into OE.
-So for now I suggest to just deactivate it and then later re add it once I figured out a way to properly handle ExternalProject.
+On Mon, Oct 29, 2018 at 6:34 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m>
+wrote:
 
-[1] https://cmake.org/cmake/help/latest/module/ExternalProject.html
->>  # Building with ninja fails on missing third_party/lib/libcheck.a (which
->> --
->> 2.11.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+> On Mon, Oct 29, 2018 at 5:41 PM brendank310 <brendank310@gmail.com> wrote=
+:
+> >
+> > This adds gnome3/gnome-shell support (and required dependencies)
+> > to meta-gnome.
+> >
+> > Please review the following changes for suitability for inclusion. If
+> you have
+> > any objections or suggestions for improvement, please respond to the
+> patches. If
+> > you agree with the changes, please provide your Acked-by.
+> >
+> > The following changes since commit
+> f1511d254632a34c1deb51f4bf8b8c21e7423f51:
+> >
+> Thanks for doing this! Hope to get it build/run-tested soon -
+> currently I am shaping my layers for thud and poky-users.
+>
+> Did not look much into details but I have one question: Many recipes
+> still use autotools and GNOME's target will be meson. Is there a
+> reason that most of the recipes use autotools?
+>
+> Regards
+>
+> Andreas
+>
 
