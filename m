@@ -1,50 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
-	[209.85.210.169])
-	by mail.openembedded.org (Postfix) with ESMTP id B6D3D79C41
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 12EDD79C47
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 15:03:52 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id f26-v6so7749586pfn.9
+	Wed, 31 Oct 2018 15:12:50 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id j22-v6so3955797pfh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 08:03:54 -0700 (PDT)
+	Wed, 31 Oct 2018 08:12:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=9ffRbZS0nTnb4Yiei76fhSumTKNyuKcO5yLWV6P49Bk=;
-	b=sIEdjft1aKMmAUMSossvH5xL48WmmMOu75Krak+KqZe0oFdvH74+c85TKMp00NSa1e
-	6JQVMtbqDvqZkfOL42xmEr3STvjVv1nSEZ8fyE/pbiuvt/Wo5lQd1l67VTzscfgpnbr3
-	GGGAijX7qxIG3mbB6vwE9hdNz2BHRaPr7Xg5wZsBiw21H6DShrb/CE97xIBdlS/7tGYe
-	eVh1EIYOBr4GLiIfq+PNRQjrbvVsuoFEHT7Yq8JbTEJhOSxxTjLxTpAhcX9fmiU6/fdM
-	lDAxTFpBeNxVZRlWDTttq4718G6Y5azINMtSMbXggQe5rsBAGAR5It2A4xs0R8UxS3Sl
-	PFFw==
+	b=A5pfrtjZBRT6z6IX9f9zMNTkRmfZuAcenJxbY0ercHWpLjX9vInagh3yPYP9sFhu/Z
+	1iJ15sZ58no57kYnczTHqxaFhyK/lfJAri+O3mwVS8p+TPm+p5VADNJTxQZt1SW93rIG
+	yAIJ+heYugikwd0SqgDuEgrLqOpEgHvwZ5Xs4KzmajtBINUNigK5cKZZ2lbjioCDvlqf
+	vLdPCJjJFyCyrzZcsgsyEs4o7wrMPlYe5yhlP+25rOD2HFaO8POtuin2pw6lRyh9xN9O
+	KwPlkrfTvKrS+fUTpSiJT/fZTtt56HFvtZFvB+oTgboJVZTutxV8YO1QhBIf5Fzvdiyh
+	BnwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=9ffRbZS0nTnb4Yiei76fhSumTKNyuKcO5yLWV6P49Bk=;
-	b=jdkNUCZCBwFUD1GhaD84fEkjfMLAiZAMCaRxiqeEB6PACOmvNrvwxeMhnz0iJxJZGl
-	Ht3CKVpUFCi/3h/ZgaQj8C3Ay7mPRvPDH0l0iOk/QqMKpy+b7+nuHSNUt8ebr40rLJNO
-	y+ubLf+r8xBOCU5IAESQrr7a3PixUDza/496E4s3xaMkpIy5ed4N6j8en/KkjSxsLt7T
-	qHc3yj7XcochRYqQcSrGZnMRzE4kYcgylSi7TZNpgeogoI01QenES8xUUXiwVoUTQpWO
-	4a7SfL8hkkfRzkU7SqpyB56jn79l28/elsIiPkwrTIfTjyS2G1Cp4XR8JY1TXCo48NsB
-	biKg==
-X-Gm-Message-State: AGRZ1gKH67I9euDdfnSWfkVDu58GZEW3LR8z2QJigJMkzbmB97U7NdLj
-	7IN43KK+gIkrbItk9M5H1KY44kK9
-X-Google-Smtp-Source: AJdET5fvPBF/z7L5qYimXLGj/5mQXvZPzb40tjDEymXGzCLPA3zn1Tm4wHYy4PDY5x/gBkU35LsuEQ==
-X-Received: by 2002:a62:ea03:: with SMTP id
-	t3-v6mr3975542pfh.228.1540998233294; 
-	Wed, 31 Oct 2018 08:03:53 -0700 (PDT)
+	b=o+M2i/Lda7xOaAVoMrlF0uOjVfgH/JwwDwehq6U0zbsKpp1jykWUs+kkB6Gdxerl3N
+	8sE6D7j1jrxtAUfUfSoxBk3rICGyDubLa7QNZ/3vmzL29bwLBNDshm4zva2v5Qv6RIFu
+	5g4ot3aNkalAjrq3E8EJgn8L2XI1hRAbE4xFZC6Yoe0L74hm4ba7tsnoF9/qph23NIl9
+	zsqq08clNnbl/5ZN9LDRgBR3IbcZs2Lqy0P7hhAlPXBkTQPBvYMz0RdMpqW1W7UB67RW
+	B0Z3BGPq9FVOMTHzzsxT5PBIiuFxUFrxQyRD7Iz5OWVf0jdr7gER+pZPpoMBC8wZInLx
+	0B1g==
+X-Gm-Message-State: AGRZ1gJoaVYIAVQLvgvxDvztIJzKUbdSliM7x5Q5McMsu0DhTt2TFe4+
+	j64vklxU2CrvIM9yiRAa/Kf9ozNZ
+X-Google-Smtp-Source: AJdET5dt/upnR5YKQN9EjN1WutirnBLRWqhY0JI2WxdiiFrXbym28YIIjDBRifQNiBxZuaPtbPSafA==
+X-Received: by 2002:a62:14d4:: with SMTP id
+	203-v6mr3779066pfu.221.1540998771608; 
+	Wed, 31 Oct 2018 08:12:51 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:571:f5d0:d940:5c94])
 	by smtp.gmail.com with ESMTPSA id
-	w2-v6sm25798755pfw.26.2018.10.31.08.03.52
-	for <openembedded-devel@lists.openembedded.org>
+	l16-v6sm40497704pfb.75.2018.10.31.08.12.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 31 Oct 2018 08:03:52 -0700 (PDT)
+	Wed, 31 Oct 2018 08:12:51 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Oct 2018 08:03:51 -0700
-Message-Id: <1540998231-30955-1-git-send-email-akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Wed, 31 Oct 2018 08:12:49 -0700
+Message-Id: <1540998769-25450-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 Subject: [meta-oe] README: updated Maintainers list for Thud
@@ -60,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 15:03:52 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 15:12:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
