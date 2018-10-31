@@ -1,50 +1,42 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
-	[209.85.167.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 645A8744F2
+Return-Path: <prvs=084255bac6=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id AAE2072EB0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 23:08:44 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id k19-v6so12003274oic.11
+	Wed, 31 Oct 2018 07:37:05 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w9V7ZnXn014362 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2018 02:37:06 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2netfna4s4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2018 02:37:06 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com
+	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w9V7b5ZP020084
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2018 16:08:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=f/Sj7In/QN8VqJ6Ep0o4lWwmE+3Z1RbkTuAGfEsiqeI=;
-	b=GKmLUG+sVWxWWJXkDuWztWc1+cszhcBbFt7iGgFMMFuysBJEArcCrQIspYBKROcDjj
-	03ve9+wII9J56GscP03OR0kTpKR6aiTCgYUP2QGQ466asquUGKZL85omgdvUAabWKViy
-	Am9qWJwPOOK/d/iASsHhfgJ88t8nx5ppqj2JApeeOpR/yypU0fVo0FpSSImMHxilkB7A
-	of5mMQXCDH8/fv3+uCY1pIKRtrjkB9xEswxZpRHQGHZtDMQUwBrabpDka2wYLHAE56VN
-	pNlPGF4mNbOUYcFSLNhgh9oO2AzTA2wx8z3syDXdxAIPeuk/QXOPdjwl+9VVwi/XlvR8
-	L2JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=f/Sj7In/QN8VqJ6Ep0o4lWwmE+3Z1RbkTuAGfEsiqeI=;
-	b=ZyqFyKrHSJTYo4jSASab+ZP6SaPYidZJOqIFaW6Ha0brcggQw8nUhJdtOCeCTLiyk7
-	fN/NZnHfjq/IkDIq6fVB2R3S6Mu1i7svCMbnrXI1/EDS9eqaRe/hu1VuVUYvYFU/XFqG
-	fTNGfeg9G2S0Mbuc3JvUAgLvKwNS59kPK9DCdDW6PEt9+DhaU1496kNyE/2ST5lQQwlJ
-	YPnu3wBuCG722e0XWuRoz/yQtPD3NferHAe+6/uWWzsUudd4mDmCopqBbsTfJcE+9Bnp
-	CTIcu0ZU1ExhoZBs9A7xFz+PUYTST6cA/4r8MXQwLckTP3+AA+cAMzQ0QSWg4W1HzMaG
-	myQg==
-X-Gm-Message-State: AGRZ1gITxErgpnpsPq/N+ihQyte/ZUFMwIweTvyVU1I6hnlMOWtW7lij
-	L50mVag6brlraTi63hAY84Ok9bNcMjJwR6mLizQ=
-X-Google-Smtp-Source: AJdET5cSg+UAWVXsUL/W/sXs8jHQfqIvFI6ikSI0fVB/IIPRV/QD63yC0RAvY3ZAq8g9C3rkHdOBdpf3bkSXgYX4G5E=
-X-Received: by 2002:aca:3015:: with SMTP id
-	w21-v6mr431939oiw.342.1540940925310; 
-	Tue, 30 Oct 2018 16:08:45 -0700 (PDT)
+	Wed, 31 Oct 2018 02:37:05 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 31 Oct 2018 02:37:05 -0500
+Received: from avasiu-ro.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1395.4 via Frontend Transport; Wed, 31 Oct 2018 02:37:04 -0500
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Oct 2018 09:36:51 +0200
+Message-ID: <20181031073651.6626-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-References: <cover.1540830650.git.brendank310@gmail.com>
-	<068fb23bf91af2a10eacc81156dc72dfb5d8ee79.1540830650.git.brendank310@gmail.com>
-	<CAJTo0LbH3UCYYHCp6E1gA33fjk2xSr+ZkZjZmn-MDvabT7_EfQ@mail.gmail.com>
-	<CAKPa3c2XXz1JNFzu-voxa-O029gh-7eSf1hWAD4U=BAjMfLx9w@mail.gmail.com>
-In-Reply-To: <CAKPa3c2XXz1JNFzu-voxa-O029gh-7eSf1hWAD4U=BAjMfLx9w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 31 Oct 2018 00:08:32 +0100
-Message-ID: <CALbNGRTw_P=QJ0+ybGyXNZUxAMpHYHVLOxHj4ZF1=Ps2ADzGDg@mail.gmail.com>
-To: Brendan Kerrigan <brendank310@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 05/16] lcms2: add recipe for Little Color Management System
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-10-31_04:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to 0.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,16 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 23:08:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 31 Oct 2018 07:37:05 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, Oct 30, 2018 at 4:04 PM Brendan Kerrigan <brendank310@gmail.com> wrote:
->
-> Sounds good, I hadn't seen that. Should the existing lcms recipe be renamed to lcms2? Most distros seem to package it as such and it'd also simplify the recipe a bit (the PN would align with the tarball and source directory name).
->
-If you want ro rename don't forget to set PROVIDES / RRPROVIDES /
-RREPLACES / RCONFLICTS - otherwise you break recipes depending on lcms
-(there are many) or package feeds. I wouldn't do that.
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
+ .../{python-pyiface_0.0.10.bb => python-pyiface_0.0.11.bb}    | 0
+ .../{python3-pyiface_0.0.10.bb => python3-pyiface_0.0.11.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyiface_0.0.10.bb => python-pyiface_0.0.11.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.10.bb => python3-pyiface_0.0.11.bb} (100%)
 
-Andreas
+diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
+index 087f30c22..2e398fcef 100644
+--- a/meta-python/recipes-devtools/python/python-pyiface.inc
++++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+ 
+-SRC_URI[md5sum] = "c0bf0c7eeaedb785e9fa3018158f018f"
+-SRC_URI[sha256sum] = "2b22e4ad0eb541de808d59c9d804dad0f7d07e0719ff6d701f02ea296aa0b7cc"
++SRC_URI[md5sum] = "b066aa984656742738127c9c75436ab4"
++SRC_URI[sha256sum] = "e231e5735d329c5b2d4fc8854f069fdaa5436d3ef91ed64ee49e41e3f5e8a3f5"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.11.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
+rename to meta-python/recipes-devtools/python/python-pyiface_0.0.11.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.11.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
+rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.11.bb
+-- 
+2.19.1
+
 
