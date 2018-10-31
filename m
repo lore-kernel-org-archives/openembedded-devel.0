@@ -1,53 +1,20 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
-	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 12EDD79C47
+Return-Path: <max+openembedded@blarg.de>
+Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
+	by mail.openembedded.org (Postfix) with ESMTP id ABFBA79D6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 15:12:50 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id j22-v6so3955797pfh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 08:12:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=9ffRbZS0nTnb4Yiei76fhSumTKNyuKcO5yLWV6P49Bk=;
-	b=A5pfrtjZBRT6z6IX9f9zMNTkRmfZuAcenJxbY0ercHWpLjX9vInagh3yPYP9sFhu/Z
-	1iJ15sZ58no57kYnczTHqxaFhyK/lfJAri+O3mwVS8p+TPm+p5VADNJTxQZt1SW93rIG
-	yAIJ+heYugikwd0SqgDuEgrLqOpEgHvwZ5Xs4KzmajtBINUNigK5cKZZ2lbjioCDvlqf
-	vLdPCJjJFyCyrzZcsgsyEs4o7wrMPlYe5yhlP+25rOD2HFaO8POtuin2pw6lRyh9xN9O
-	KwPlkrfTvKrS+fUTpSiJT/fZTtt56HFvtZFvB+oTgboJVZTutxV8YO1QhBIf5Fzvdiyh
-	BnwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=9ffRbZS0nTnb4Yiei76fhSumTKNyuKcO5yLWV6P49Bk=;
-	b=o+M2i/Lda7xOaAVoMrlF0uOjVfgH/JwwDwehq6U0zbsKpp1jykWUs+kkB6Gdxerl3N
-	8sE6D7j1jrxtAUfUfSoxBk3rICGyDubLa7QNZ/3vmzL29bwLBNDshm4zva2v5Qv6RIFu
-	5g4ot3aNkalAjrq3E8EJgn8L2XI1hRAbE4xFZC6Yoe0L74hm4ba7tsnoF9/qph23NIl9
-	zsqq08clNnbl/5ZN9LDRgBR3IbcZs2Lqy0P7hhAlPXBkTQPBvYMz0RdMpqW1W7UB67RW
-	B0Z3BGPq9FVOMTHzzsxT5PBIiuFxUFrxQyRD7Iz5OWVf0jdr7gER+pZPpoMBC8wZInLx
-	0B1g==
-X-Gm-Message-State: AGRZ1gJoaVYIAVQLvgvxDvztIJzKUbdSliM7x5Q5McMsu0DhTt2TFe4+
-	j64vklxU2CrvIM9yiRAa/Kf9ozNZ
-X-Google-Smtp-Source: AJdET5dt/upnR5YKQN9EjN1WutirnBLRWqhY0JI2WxdiiFrXbym28YIIjDBRifQNiBxZuaPtbPSafA==
-X-Received: by 2002:a62:14d4:: with SMTP id
-	203-v6mr3779066pfu.221.1540998771608; 
-	Wed, 31 Oct 2018 08:12:51 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:c33:571:f5d0:d940:5c94])
-	by smtp.gmail.com with ESMTPSA id
-	l16-v6sm40497704pfb.75.2018.10.31.08.12.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 31 Oct 2018 08:12:51 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Wed, 31 Oct 2018 08:12:49 -0700
-Message-Id: <1540998769-25450-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 31 Oct 2018 19:17:39 +0000 (UTC)
+Received: from heron.blarg.de (pD9EBFEED.dip0.t-ipconnect.de [217.235.254.237])
+	(Authenticated sender: max)
+	by swift.blarg.de (Postfix) with ESMTPSA id 0B7872201B5;
+	Wed, 31 Oct 2018 20:17:40 +0100 (CET)
+From: Max Kellermann <max+openembedded@blarg.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 31 Oct 2018 20:17:37 +0100
+Message-Id: <20181031191737.24419-1-max+openembedded@blarg.de>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Subject: [meta-oe] README: updated Maintainers list for Thud
+Cc: Max Kellermann <max.kellermann@gmail.com>
+Subject: [PATCH] mpd: update to 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,397 +27,235 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 15:12:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 31 Oct 2018 19:17:40 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- README                      |  2 +-
- meta-filesystems/README     | 12 ++++++------
- meta-gnome/README           | 10 +++++-----
- meta-initramfs/README       |  8 ++++----
- meta-multimedia/README      | 10 +++++-----
- meta-networking/MAINTAINERS | 32 +++-----------------------------
- meta-networking/README      |  6 +++---
- meta-oe/README              |  8 ++++----
- meta-perl/README            | 10 ++++------
- meta-python/README          | 12 +++++-------
- meta-webserver/README       |  8 ++++----
- meta-xfce/README            | 10 +++++-----
- 12 files changed, 49 insertions(+), 79 deletions(-)
+From: Max Kellermann <max.kellermann@gmail.com>
 
-diff --git a/README b/README
-index 7318f09..a716801 100644
---- a/README
-+++ b/README
-@@ -1,6 +1,6 @@
- Collection of layers for the OE-core universe
- 
--Main layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Thud maintainer: Armin Kuster  <akuster808@gmail.com>
- 
- This repository is a collection of layers to suppliment OE-Core
- with additional packages, Each layer have designated maintainer
-diff --git a/meta-filesystems/README b/meta-filesystems/README
-index 87cb685..ac0035a 100644
---- a/meta-filesystems/README
-+++ b/meta-filesystems/README
-@@ -10,30 +10,30 @@ Dependencies
- This layer depends on:
- 
-   URI: git://git.openembedded.org/bitbake
--  branch: master
-+  branch: 1.40
- 
-   URI: git://git.openembedded.org/openembedded-core
-   layers: meta
--  branch: master
-+  branch: thud
- 
-   URI: git://git.openembedded.org/meta-openembedded
-   layers: meta-oe
--  branch: master
-+  branch: thud
- 
- Patches
- =======
- 
- Please submit any patches against the filesystems layer to the
- OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
--with '[meta-filesystems]' in the subject.
-+with '[meta-filesystems][thud]' in the subject.
- 
--Layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Thud maintainer: Armin Kuster <akuster808@gmail.com>
- 
- When sending single patches, please use something like:
- 
-    git send-email -1 -M \
-         --to openembedded-devel@lists.openembedded.org \
--        --subject-prefix=meta-filesystems][PATCH
-+        --subject-prefix=meta-filesystems][thud][PATCH
- 
- 
- Table of Contents
-diff --git a/meta-gnome/README b/meta-gnome/README
-index 2a682e7..84d4f73 100644
---- a/meta-gnome/README
-+++ b/meta-gnome/README
-@@ -23,16 +23,16 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: thud
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
--branch: master
-+branch: thud
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][thud]' in the subject'
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][thud][PATCH'
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Thud maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-initramfs/README b/meta-initramfs/README
-index 79244d4..ba2ba5f 100644
---- a/meta-initramfs/README
-+++ b/meta-initramfs/README
-@@ -12,7 +12,7 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: thud
- revision: HEAD
- 
- 
-@@ -20,12 +20,12 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
--with '[meta-initramfs]' in the subject.
-+with '[meta-initramfs][thud]' in the subject.
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][thud][PATCH'
- 
--Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Thud maintainer: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-multimedia/README b/meta-multimedia/README
-index 20f4fb8..050392d 100644
---- a/meta-multimedia/README
-+++ b/meta-multimedia/README
-@@ -1,19 +1,19 @@
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: thud
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
- layers: meta-oe
--branch: master
-+branch: thud
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia][thud]' in the subject'
- 
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][thud][PATCH
- 
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Thud maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
-index 5c4c4ce..945ee86 100644
---- a/meta-networking/MAINTAINERS
-+++ b/meta-networking/MAINTAINERS
-@@ -2,38 +2,12 @@ This file contains a list of maintainers for the meta-networking layer.
- 
- Please submit any patches against meta-networking to the OpenEmbedded
- development mailing list (openembedded-devel@lists.openembedded.org) with
--'[meta-networking]' in the subject.
-+'[meta-networking][thud]' in the subject.
- 
- When sending single patches, please use something like:
- 
-    git send-email -1 -M \
-         --to openembedded-devel@lists.openembedded.org \
--        --subject-prefix=meta-networking][PATCH
-+        --subject-prefix=meta-networking][thud][PATCH
- 
--You may also contact the maintainers directly.
+Most of the changes are because of MPD's switch from autotools to
+Meson.
+
+Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
+---
+ .../recipes-multimedia/musicpd/mpd_0.20.22.bb |  99 -----------------
+ .../recipes-multimedia/musicpd/mpd_0.21.bb    | 101 ++++++++++++++++++
+ 2 files changed, 101 insertions(+), 99 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.bb
+
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+deleted file mode 100644
+index 6c6ad4237..000000000
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
++++ /dev/null
+@@ -1,99 +0,0 @@
+-SUMMARY = "Music Player Daemon"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-HOMEPAGE ="http://www.musicpd.org"
 -
--Descriptions of section entries:
+-inherit autotools useradd systemd pkgconfig
 -
--        M: Mail patches to: FullName <address@domain>
--        F: Files and directories with wildcard patterns.
--           A trailing slash includes all files and subdirectory files.
--           F: recipes-devtools/    all files in and below recipes-devtools
--           F: recipes-selinux/*    all files in recipes-selinux, but not below
--           One pattern per line.  Multiple F: lines acceptable.
+-DEPENDS += " \
+-    curl \
+-    sqlite3 \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
+-    yajl \
+-    boost \
+-    icu \
+-    dbus \
+-    expat \
+-"
 -
--Please keep this list in alphabetical order.
+-SRC_URI = " \
+-    git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
+-    file://mpd.conf.in \
+-"
+-SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
+-S = "${WORKDIR}/git"
 -
--Maintainers List (try to look for most precise areas first)
+-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 -
--COMMON
--M:      Khem Raj <raj.khem@gmail.com>
--M:      "Joe MacDonald (backup)" <joe@deserted.net>
--L:      openembedded-devel@lists.openembedded.org
--Q:      https://patchwork.openembedded.org/project/oe/
--S:      Maintained
--F:      conf
--F:      recipes-*
+-PACKAGECONFIG ??= "alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
+-PACKAGECONFIG += "${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
 -
--NETKIT
--M:      Armin Kuster <akuster808@gmail.com>
--F:      recipes-netkit
-+Thud Maintainer:      Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-networking/README b/meta-networking/README
-index e1ba27d..7a4aca4 100644
---- a/meta-networking/README
-+++ b/meta-networking/README
-@@ -18,19 +18,19 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/openembedded-core.git
--branch: master
-+branch: thud
- revision: HEAD
- 
- For some recipes, the meta-oe layer is required:
- 
- URI: git://github.com/openembedded/meta-openembedded.git
- subdirectory: meta-oe
--branch: master
-+branch: thud
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-openembedded.git
- subdirectory: meta-python
--branch: master
-+branch: thud
- revision: HEAD
- 
- Maintenance
-diff --git a/meta-oe/README b/meta-oe/README
-index 0e9f842..de351f2 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -4,13 +4,13 @@ meta-oe
- This layer depends on:
- 
- URI: git://github.com/openembedded/openembedded-core.git
--branch: master
-+branch: thud 
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][thud]' in the subject'
- 
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe[thud][PATCH'
- 
- You are encouraged to fork the mirror on GitHub https://github.com/openembedded/openembedded-core
- to share your patches, this is preferred for patch sets consisting of more than one patch.
-@@ -19,4 +19,4 @@ Other services like gitorious, repo.or.cz or self-hosted setups are of course ac
- 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
- to use, has been proven to be reliable and has a really good web GUI.
- 
--layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Thud maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-perl/README b/meta-perl/README
-index 67f2910..3c787f4 100644
---- a/meta-perl/README
-+++ b/meta-perl/README
-@@ -52,7 +52,7 @@ Dependencies
- This layer depends on:
- 
-   URI: git://git.openembedded.org/openembedded-core
--  branch: master
-+  branch: thud
-   revision: HEAD
-   prio: default
- 
-@@ -75,14 +75,12 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org with
--'[meta-perl]' in the subject.
-+'[meta-perl][thud]' in the subject.
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][thud][PATCH'
- 
--Layer maintainers:
--    Hongxu Jia <hongxu.jia@windriver.com>
--    Tim "moto-timo" Orling <ticotimo@gmail.com>
-+Thud maintainers: Armin kuster <akuster808@gmail.com>
- 
- License
- -------
-diff --git a/meta-python/README b/meta-python/README
-index 705b035..9c10c78 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -13,12 +13,12 @@ The meta-python layer depends on:
- 
- 	URI: git://git.openembedded.org/openembedded-core
- 	layers: meta
--	branch: master
-+	branch: thud
- 	revision: HEAD
- 
- 	URI: git://git.openembedded.org/meta-openembedded
- 	layers: meta-oe
--	branch: master
-+	branch: thud
- 	revision: HEAD
- 
- Please follow the recommended setup procedures of your OE distribution.
-@@ -35,15 +35,13 @@ comments and patch review. It is subscriber only, so please register
- before posting.
- 
- Send pull requests to openembedded-devel@lists.openembedded.org with
--'[meta-python]' in the subject.
-+'[meta-python][thud]' in the subject.
- 
- When sending single patches, please use something like: 
--'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
-+'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][thud][PATCH'
- 
- Maintenance
- -------------------------
- 
--Layer Maintainers:
--        Tim "moto-timo" Orling <TicoTimo@gmail.com>
--        Derek Straka <derek@asterius.io>
-+Thud Maintainers: Armin Kuster <akuster808@gmail.com>
- 
-diff --git a/meta-webserver/README b/meta-webserver/README
-index 7b60630..4d2c710 100644
---- a/meta-webserver/README
-+++ b/meta-webserver/README
-@@ -13,14 +13,14 @@ This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
- subdirectory: meta
--branch: master
-+branch: thud
- revision: HEAD
- 
- For some recipes, the meta-oe layer is required:
- 
- URI: git://github.com/openembedded/meta-oe.git
- subdirectory: meta-oe
--branch: master
-+branch: thud
- revision: HEAD
- 
- 
-@@ -52,9 +52,9 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
--with '[meta-webserver]' in the subject.
-+with '[meta-webserver][thud]' in the subject.
- 
--Layer maintainer: Derek Straka <derek@asterius.io>
-+Thud Maintainer: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-xfce/README b/meta-xfce/README
-index 7431e8b..4d8dc45 100644
---- a/meta-xfce/README
-+++ b/meta-xfce/README
-@@ -1,11 +1,11 @@
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: thud
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
--branch: master
-+branch: thud
- revision: HEAD
- meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
- 
-@@ -14,9 +14,9 @@ this to local.conf:
- 
- BBMASK = "meta-xfce/recipes-multimedia"
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce][thud]' in the subject'
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][thud][PATCH'
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Thud Maintainer: Armin Kuster <akuster808@gmail.com>
+-PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
+-PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
+-PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao"
+-PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
+-PACKAGECONFIG[bzip2] = "--enable-bzip2,--disable-bzip2,bzip2"
+-PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
+-PACKAGECONFIG[daemon] = "--enable-daemon,--disable-daemon"
+-PACKAGECONFIG[ffmpeg] = "--enable-ffmpeg,--disable-ffmpeg,ffmpeg"
+-PACKAGECONFIG[fifo] = "--enable-fifo,--disable-fifo"
+-PACKAGECONFIG[flac] = "--enable-flac,--disable-flac,flac"
+-PACKAGECONFIG[fluidsynth] = "--enable-fluidsynth,--disable-fluidsynth,fluidsynth"
+-PACKAGECONFIG[httpd] = "--enable-httpd-output,--disable-httpd-output"
+-PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
+-PACKAGECONFIG[iso9660] = "--enable-iso9660,--disable-iso9660,libcdio"
+-PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+-PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
+-PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
+-PACKAGECONFIG[libwrap] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
+-PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+-PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
+-PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
+-PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
+-PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
+-PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
+-PACKAGECONFIG[oss] = "--enable-oss,--disable-oss,"
+-PACKAGECONFIG[recorder] = "--enable-recorder-output,--disable-recorder-output"
+-PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
+-PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
+-PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
+-PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
+-PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
+-PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
+-
+-do_configure_prepend() {
+-    sed -i -e 's|libsystemd-daemon|libsystemd|' ${S}/configure.ac
+-}
+-
+-do_install_append() {
+-    install -o mpd -d \
+-        ${D}/${localstatedir}/lib/mpd \
+-        ${D}/${localstatedir}/lib/mpd/playlists
+-    install -m775 -o mpd -g mpd -d \
+-        ${D}/${localstatedir}/lib/mpd/music
+-
+-    install -d ${D}/${sysconfdir}
+-    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
+-    sed -i \
+-        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
+-        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
+-        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
+-        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
+-        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
+-        ${D}/${sysconfdir}/mpd.conf
+-
+-    # we don't need the icon
+-    rm -rf ${D}${datadir}/icons
+-}
+-
+-RPROVIDES_${PN} += "${PN}-systemd"
+-RREPLACES_${PN} += "${PN}-systemd"
+-RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "mpd.socket"
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = " \
+-    --system --no-create-home \
+-    --home ${localstatedir}/lib/mpd \
+-    --groups audio \
+-    --user-group mpd"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.bb
+new file mode 100644
+index 000000000..c18b0ea28
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.bb
+@@ -0,0 +1,101 @@
++SUMMARY = "Music Player Daemon"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++HOMEPAGE ="http://www.musicpd.org"
++
++inherit meson useradd systemd pkgconfig
++
++DEPENDS += " \
++    curl \
++    sqlite3 \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
++    yajl \
++    boost \
++    icu \
++    dbus \
++    expat \
++"
++
++SRC_URI = " \
++    git://github.com/MusicPlayerDaemon/MPD;branch=v0.21.x \
++    file://mpd.conf.in \
++"
++SRCREV = "795789e79d4ea1cc6555323ff6f8e33abc676278"
++S = "${WORKDIR}/git"
++
++EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd_system_unit_dir=${systemd_unitdir}/system -Dsystemd_user_unit_dir=${systemd_unitdir}/user', '', d)}"
++
++PACKAGECONFIG ??= "alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
++PACKAGECONFIG += "${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
++
++PACKAGECONFIG[aac] = "-Dfaad=enabled,-Dfaad=disabled,faad2"
++PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
++PACKAGECONFIG[ao] = "-Dao=enabled,-Dao=disabled,libao"
++PACKAGECONFIG[audiofile] = "-Daudiofile=enabled,-Daudiofile=disabled,audiofile"
++PACKAGECONFIG[bzip2] = "-Dbzip2=enabled,-Dbzip2=disabled,bzip2"
++PACKAGECONFIG[cdioparanoia] = "-Dcdio=enabled-paranoia,-Dcdio=disabled-paranoia,libcdio-paranoia"
++PACKAGECONFIG[daemon] = "-Ddaemon=enabled,-Ddaemon=false"
++PACKAGECONFIG[ffmpeg] = "-Dffmpeg=enabled,-Dffmpeg=disabled,ffmpeg"
++PACKAGECONFIG[fifo] = "-Dfifo=true,-Dfifo=false"
++PACKAGECONFIG[flac] = "-Dflac=enabled,-Dflac=disabled,flac"
++PACKAGECONFIG[fluidsynth] = "-Dfluidsynth=enabled,-Dfluidsynth=disabled,fluidsynth"
++PACKAGECONFIG[httpd] = "-Dhttpd=true,-Dhttpd=false"
++PACKAGECONFIG[id3tag] = "-Did3tag=enabled,-Did3tag=disabled,libid3tag"
++PACKAGECONFIG[iso9660] = "-Diso9660=enabled,-Diso9660=disabled,libcdio"
++PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack"
++PACKAGECONFIG[lame] = "-Dlame=enabled,-Dlame=disabled,lame"
++PACKAGECONFIG[libsamplerate] = "-Dlibsamplerate=enabled,-Dlibsamplerate=disabled,libsamplerate0"
++PACKAGECONFIG[libwrap] = "-Dlibwrap=enabled,-Dlibwrap=disabled,tcp-wrappers"
++PACKAGECONFIG[mad] = "-Dmad=enabled,-Dmad=disabled,libmad"
++PACKAGECONFIG[mms] = "-Dmms=enabled,-Dmms=disabled,libmms"
++PACKAGECONFIG[modplug] = "-Dmodplug=enabled,-Dmodplug=disabled,libmodplug"
++PACKAGECONFIG[mpg123] = "-Dmpg123=enabled,-Dmpg123=disabled,mpg123"
++PACKAGECONFIG[openal] = "-Dopenal=enabled,-Dopenal=disabled,openal-soft"
++PACKAGECONFIG[opus] = "-Dopus=enabled,-Dopus=disabled,libopus libogg"
++PACKAGECONFIG[oss] = "-Doss=enabled,-Doss=disabled,"
++PACKAGECONFIG[qobuz] = "-Dqobuz=enabled,-Dqobuz=disabled,curl yajl libgcrypt"
++PACKAGECONFIG[recorder] = "-Drecorder=true,-Drecorder=false"
++PACKAGECONFIG[smb] = "-Dsmbclient=enabled,-Dsmbclient=disabled,samba"
++PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
++PACKAGECONFIG[tidal] = "-Dtidal=enabled,-Dtidal=disabled,curl yajl"
++PACKAGECONFIG[udisks] = "-Dudisks=enabled,-Dudisks=disabled,dbus,udisks2"
++PACKAGECONFIG[upnp] = "-Dupnp=enabled,-Dupnp=disabled,libupnp"
++PACKAGECONFIG[vorbis] = "-Dvorbis=enabled,-Dvorbis=disabled,libvorbis libogg"
++PACKAGECONFIG[wavpack] = "-Dwavpack=enabled,-Dwavpack=disabled,wavpack"
++PACKAGECONFIG[zlib] = "-Dzlib=enabled,-Dzlib=disabled,zlib"
++
++do_install_append() {
++    install -o mpd -d \
++        ${D}/${localstatedir}/lib/mpd \
++        ${D}/${localstatedir}/lib/mpd/playlists
++    install -m775 -o mpd -g mpd -d \
++        ${D}/${localstatedir}/lib/mpd/music
++
++    install -d ${D}/${sysconfdir}
++    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
++    sed -i \
++        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
++        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
++        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
++        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
++        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
++        ${D}/${sysconfdir}/mpd.conf
++
++    # we don't need the icon
++    rm -rf ${D}${datadir}/icons
++
++    # we don't need the systemd user unit
++    rm -rf ${D}${systemd_unitdir}/user
++}
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "mpd.socket"
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${localstatedir}/lib/mpd \
++    --groups audio \
++    --user-group mpd"
 -- 
-2.7.4
+2.19.1
 
 
