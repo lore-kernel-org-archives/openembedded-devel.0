@@ -1,42 +1,28 @@
-Return-Path: <prvs=084255bac6=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id AAE2072EB0
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 1834B79C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 07:37:05 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w9V7ZnXn014362 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 02:37:06 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2netfna4s4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 02:37:06 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w9V7b5ZP020084
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 02:37:05 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 31 Oct 2018 02:37:05 -0500
-Received: from avasiu-ro.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1395.4 via Frontend Transport; Wed, 31 Oct 2018 02:37:04 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Oct 2018 09:36:51 +0200
-Message-ID: <20181031073651.6626-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.19.1
+	Wed, 31 Oct 2018 08:07:38 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id w9V87cw8002580
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Wed, 31 Oct 2018 09:07:38 +0100
+Received: from [139.22.47.124] ([139.22.47.124])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id w9V87c31018043;
+	Wed, 31 Oct 2018 09:07:38 +0100
+To: Khem Raj <raj.khem@gmail.com>
+References: <20181030133511.2954-1-pascal.bach@siemens.com>
+	<20181030133511.2954-2-pascal.bach@siemens.com>
+	<CAMKF1sq1BgDRg+8oB2d=sUWtCo2x-4FMGyMTS-r4ZPAiD1TG0Q@mail.gmail.com>
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <d534704b-616c-a328-5d21-a66ee138ebc0@siemens.com>
+Date: Wed, 31 Oct 2018 09:07:37 +0100
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-10-31_04:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to 0.0.11
+In-Reply-To: <CAMKF1sq1BgDRg+8oB2d=sUWtCo2x-4FMGyMTS-r4ZPAiD1TG0Q@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 2/2] civetweb: disable tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,42 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 07:37:05 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Oct 2018 08:07:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
- .../{python-pyiface_0.0.10.bb => python-pyiface_0.0.11.bb}    | 0
- .../{python3-pyiface_0.0.10.bb => python3-pyiface_0.0.11.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.10.bb => python-pyiface_0.0.11.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.10.bb => python3-pyiface_0.0.11.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 087f30c22..2e398fcef 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
- 
--SRC_URI[md5sum] = "c0bf0c7eeaedb785e9fa3018158f018f"
--SRC_URI[sha256sum] = "2b22e4ad0eb541de808d59c9d804dad0f7d07e0719ff6d701f02ea296aa0b7cc"
-+SRC_URI[md5sum] = "b066aa984656742738127c9c75436ab4"
-+SRC_URI[sha256sum] = "e231e5735d329c5b2d4fc8854f069fdaa5436d3ef91ed64ee49e41e3f5e8a3f5"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.11.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.11.bb
--- 
-2.19.1
+On 30.10.2018 22:04, Khem Raj wrote:
+> On Tue, Oct 30, 2018 at 7:35 AM Pascal Bach <pascal.bach@siemens.com> wrote:
+>> Tests try to download third party code and bypass the bitbake fetcher to
+>> do that. This will not work in environments with no internet access.
+>>
+>> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+>> ---
+>>  meta-networking/recipes-connectivity/civetweb/civetweb_git.bb | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
+>> index 004cf960a..d681f7f30 100644
+>> --- a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
+>> +++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
+>> @@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
+>>      -DCIVETWEB_ENABLE_DUKTAPE=OFF \
+>>      -DCIVETWEB_ENABLE_LUA=OFF \
+>>      -DCIVETWEB_ENABLE_ASAN=OFF \
+>> +    -DCIVETWEB_BUILD_TESTING=OFF \
+>>  "
+> Probably, it will be good to turn this into a packageconfig, I am fine
+> to disable it by default
+> but it might be useful to have it enabled with say images with ptest feature on.
+I agree it might be useful, but it needs some change as I don't think we want to have a recipe that fetches code from somewhere without bitbake knowing about it.
+
+Once the main CMake patches land I will try to look into how the whole ExternalProject [1] stuff works in CMake and how it could be better integrated into OE.
+So for now I suggest to just deactivate it and then later re add it once I figured out a way to properly handle ExternalProject.
+
+[1] https://cmake.org/cmake/help/latest/module/ExternalProject.html
+>>  # Building with ninja fails on missing third_party/lib/libcheck.a (which
+>> --
+>> 2.11.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
