@@ -1,42 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2057879DC6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Nov 2018 00:28:25 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id l9-v6so19305758qtj.12
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2018 17:28:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=4P4FMvUNxxy8p0ZbxKc2kaAREM53/phR/zDHZt5Eda8=;
-	b=ehF0Z3qzDX79WnCxBH1xnDjnVpJGMoQAvSrCJOck9JGsqHA3CVkM+LVvPHfbldEty2
-	KLo//z9FqLCoUk1DSups9FiJaz+cjcGkX+0X6cbdL9A2gR+GX8DFJ5tqADS8Ao8iC0zL
-	lK+9weZFMBIpJJqxyBjFhtUF7GSquH5HoNXK/SG1u88hGo7wNN1O1AwCZ0ginbccK5zZ
-	9f8zM7mMWQJCmefLmd6CZmCo7roDCkvz7JWtMqD9n1cGIfxRxW2b8Fopt7poDyz6asBF
-	9JKcfIRQJun772DXC8Za7QsRHPycGhUPft6qWd0yiQZ7/p4bNJArwwnqZOUekVmgQCDi
-	fl3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=4P4FMvUNxxy8p0ZbxKc2kaAREM53/phR/zDHZt5Eda8=;
-	b=PqZfDspsPq6R1ff2qpE6am3NmNQr08cZbfLZbH7M5oHUQKo25dya/DSauM6OjDcP0j
-	PGQTBFW1xEWYn6X1CxpaRhb9FJHLNhkTgsyCm1/0a1j11fSbe+TYZBxVEoVm7/HPwMn4
-	+1Vo6iSXnI+cYljxvqpltbh7zi3euXLZJHcxnAcXADTw9J/Lcqc8j6QMKgqXPFEVgVjo
-	r+Z3Af7+0EPDJbF2FPJkTSSdyZ6qhqfXVu+Jott6HJZhI9KtKxgI5miNBSxhXumWESR2
-	PTv2FnttZRqKdgAumHeYFt/HfHlFe62YjDC01KUZZ5RjI58DVc691TQZgJHoQXzUq/RV
-	fbuQ==
-X-Gm-Message-State: AGRZ1gJWN5wvIiw4Ssm71x9wH5F98Z5Lf+LxXkdXihwm0uYaTDkVT1HZ
-	Sph1ps1FQnGSEPPKz7YBNC/mztHxHtrqpkgMBkRYN+gL
-X-Google-Smtp-Source: AJdET5e6cKq0F8tMpv/fzHPe7eqB34LRfwWJasxByxudfozIKb70JXiu8uuD5sVoKl1Y0lvSMf28klXyJj1zsY6q8mQ=
-X-Received: by 2002:ac8:16d8:: with SMTP id y24mr134313qtk.253.1541032106591; 
-	Wed, 31 Oct 2018 17:28:26 -0700 (PDT)
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0558771993
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Nov 2018 03:13:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wA13DGGT019582
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2018 20:13:17 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Wed, 31 Oct 2018 20:13:16 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 1 Nov 2018 11:12:47 +0800
+Message-ID: <1541041968-19942-3-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1541041968-19942-1-git-send-email-changqing.li@windriver.com>
+References: <1541041968-19942-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 31 Oct 2018 17:28:00 -0700
-Message-ID: <CAMKF1spz60VvQvH2AvzEVE7fBC-GCam=wOQr=SuaZiBNFdk8Fg@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Thud branch has been created
+Subject: [meta-networking][PATCH] netkit-telnet: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,24 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Nov 2018 00:28:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Nov 2018 03:13:16 -0000
+Content-Type: text/plain
 
-Dear Friends
+From: Changqing Li <changqing.li@windriver.com>
 
-We now have thud ( 2.6 ) branched out for few days now if you have not
-already noticed.
-So far the master and thud branches are similar, so if you have
-patches that you want to include into thud release please mark it so
-and CC Armin for ack, as official release maintainer
-for thud, Please include the branch in your thud testing if you have
-been doing so,
+update SRC_URI since previous is not valid now
 
-I will keep master in sync with thud for couple of weeks while holding
-the patches like gnome3 in
-master-next until then, so we can easily do needed backports into
-release branches.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks
--Khem
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index 2fadf03..807a867 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -5,7 +5,7 @@ DEPENDS = "ncurses"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://telnet/telnet.cc;beginline=2;endline=3;md5=780868e7b566313e70cb701560ca95ef"
+ 
+-SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
++SRC_URI = "http://ftp.linux.org.uk/pub/linux/Networking/netkit/${BP}.tar.gz \
+            file://To-aviod-buffer-overflow-in-telnet.patch \
+            file://Warning-fix-in-the-step-of-install.patch \
+            file://telnet-xinetd \
+-- 
+2.7.4
+
 
