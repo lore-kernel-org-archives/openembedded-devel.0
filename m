@@ -1,34 +1,47 @@
-Return-Path: <stefan@agner.ch>
-X-Greylist: delayed 421 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 01 Nov 2018 11:07:14 UTC
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id C284879DCA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DDFC079DCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Nov 2018 11:07:14 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 7333E5C0491;
-	Thu,  1 Nov 2018 12:00:12 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1541070012;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=alSLKT8kq7d/AVeyn9nveXxtLZm4mbcS/5WUJrgDQIk=;
-	b=Kja6ZLAbq7QEAPG11s/VLsxWfx9osaohqMbF2ad9QE5oBN0vq3u3vsKj4N9oxO9dC2PwhT
-	hQlD2qTODl6XsRKT8IfXm2WrdTXkIyG8NcW4cFKtdIds7NGxekrT/LGQt6rfU7faGo5QYM
-	MP2zrlwvWrsA2ZA7g6YESm/O93grQWs=
+	Thu,  1 Nov 2018 12:53:13 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id f18-v6so12147015qkm.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Nov 2018 05:53:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=uVJ63l4ZFWUkM7iybXCutWzjt1NcBY5exe91e/phCyk=;
+	b=vMilvXpTvhZ6YG5Mzk+KINXGVkddwk5S8sDenLBa2fDYgPvVRAzgWBAbgV7ME1IFxa
+	8bFm4T7UpyexwSxBBsdpGYzVbaFtEJ7Evt3hZdyTaEQ7fSPUARtpIHULLJWMtrsOi0JC
+	c01epK/S2fOEflxuYKZNtbQIkDCeD5PtApLY3ftA+bVFV9pOGZShx2QyWCWAGQbnBsYf
+	4+J11opA7WvQv0Hij56wvIoPWbyJWrn8YyRydPN/o6cdSAlFl1EPeR0EaIwQu6MGdJ/n
+	xIliwOz0wK4b877Bc2aA/gndpsKMG3+CPFN2zhWRjmjN8lcOVhFQ6uRZoI3l6EygpnuN
+	irDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=uVJ63l4ZFWUkM7iybXCutWzjt1NcBY5exe91e/phCyk=;
+	b=Qt+md3uyynqg/lw4pRxXVkxA/nzOhZnN5b+1Nszd4ofVsC5rJOrJes5/qkf9/XWzSG
+	KOIMYCUFou25aHhWdekREpBzYtQwlHTsHsmCjHr3vFJApBZLYLjGEuAYNbyhNRfLuISP
+	g8wjJvP5aH+qvSg3A6AuN1UwY89BLfIQv7cwjqEnGC1NpRo1rBkdqTLInEERepwzyOFl
+	wRSc+osj5VKSdIP+FmtKg1X3zhx864erjGCYtDQuL7PgYYew8J/YdlZHyD7/oMkvlljB
+	dA4B+S1MEqH47dsGfyI0eoxqq2GiN+4XkikVYA8wDr62cZ/nxz/M/aPHj3MH75DCWsI1
+	behg==
+X-Gm-Message-State: AGRZ1gLKBIzrLmuFGuQCwKzDG8bwDp9PH5zqi0C+GptjXXkME99l9MZJ
+	I65ENnQtn3ePFtMwWVMzDD+80mqoPxhPzIpG1b0iF8QFK8s=
+X-Google-Smtp-Source: AJdET5ddlLO+ifJvrFWz1cqlSMO3L2avRoMxveEg2+2Q6rp6/31SaD3yWNy+hGy87uZNzIq0ko9HmPkbF8isk3rKL1I=
+X-Received: by 2002:a37:d408:: with SMTP id l8mr6223032qki.315.1541076793913; 
+	Thu, 01 Nov 2018 05:53:13 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 01 Nov 2018 12:00:12 +0100
-From: Stefan Agner <stefan@agner.ch>
-To: mingli.yu@windriver.com
-In-Reply-To: <1541055886-448901-1-git-send-email-mingli.yu@windriver.com>
-References: <1541055886-448901-1-git-send-email-mingli.yu@windriver.com>
-Message-ID: <de490c25f64fe074ecbeef22a27c0053@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.3.7
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] lvm2: update SRC_URI
+References: <20181031191737.24419-1-max+openembedded@blarg.de>
+	<CAMKF1srH+=42D=taFWYPaOAy96ihWiERRFykXEOHdNtXqNyekQ@mail.gmail.com>
+	<20181101065522.l7go4mzqij7kcwwm@swift.blarg.de>
+In-Reply-To: <20181101065522.l7go4mzqij7kcwwm@swift.blarg.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 1 Nov 2018 05:52:47 -0700
+Message-ID: <CAMKF1sqhXWUkVpw5coNY4qePxd6HJA8x0RcJ8g5+HUEsGcizTg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] mpd: update to 0.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,48 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Nov 2018 11:07:15 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Nov 2018 12:53:14 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 01.11.2018 08:04, mingli.yu@windriver.com wrote:
-> From: Mingli Yu <Mingli.Yu@windriver.com>
-> 
-> Update SRC_URI for lvm2 as the previous
-> one is invalid.
-> 
-> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-
-Hit that too, and the new URL works, so:
-
-Tested-by: Stefan Agner <stefan.agner@toradex.com>
-
-If they  move releases to old/ always maybe using a different source
-would be better?
-
---
-Stefan
+On Wed, Oct 31, 2018 at 11:55 PM Max Kellermann
+<max+openembedded@blarg.de> wrote:
+>
+> On 2018/11/01 01:16, Khem Raj <raj.khem@gmail.com> wrote:
+> > Hi Max
+> >
+> > thanks for the patch, however it will be good if this patch was detecting
+> > a move and not add/delete of files, it is easy to review the patches
+> > that way to just concentrate on what changes rather than full files
+>
+> I understand, but the lines changed are way beyond git's threshold,
+> because the majority of lines in this recipe was PACKAGECONFIGs, and
+> all of them had to be changed due to the Meson migration.  Do you have
+> an idea how to tell git to do the right thing for you?
+>
 
 
-> ---
->  meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc
-> b/meta-oe/recipes-support/lvm2/lvm2.inc
-> index 75f4d89..5728d83 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
-> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =
-> "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
->  
->  DEPENDS += "util-linux libaio"
->  
-> -SRC_URI = "ftp://sources.redhat.com/pub/lvm2/LVM2.${PV}.tgz \
-> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
->             file://lvm.conf \
->             file://0001-implement-libc-specific-reopen_stream.patch \
->             file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
-> -- 
-> 2.7.4
+try adding
+
+[diff]
+        renames = copies
+
+to ~/.gitconfig
+> Max
 
