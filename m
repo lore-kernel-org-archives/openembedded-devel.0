@@ -1,48 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A96B747F3
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E52E79EEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Nov 2018 17:25:52 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id n12so12731850qkh.11
+	Fri,  2 Nov 2018 02:22:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wA22MDD4013666
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Nov 2018 10:25:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=mPl0bsM6tOnDc6lEw6eO01ASr41/ChsbCPvtrfkSIF0=;
-	b=GnYGbErALby9iwVpmyNOysaSjJr9AVewDQyo3VaKaK+AIwFssdVcLZDuPNqUTUyKHs
-	RDxW4ta2JPx/W9yTmYT+h3XqocVHrJ+n0WDzW7RObq1R0rMt3Dm5wttIXknU+R8KiMMe
-	N5i/XDc73CD3AEezKejwydw5np1HMEOPcKB/BfJqezt1Tek4+fp2EPWYBuLrt1OKleAT
-	OgsvZhwF4WZSgtAMGNH7Nj2uRekrA2l6DSFfW1kYaVu5yxMhlsrf+1YiSSkaph+fR8yd
-	bqieR+iyZVzo/I5QBXd3s+gmTM3DCrKrGA4ul6a60muQU5r/LTk4vdQADADYRGymdSyv
-	Hh4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=mPl0bsM6tOnDc6lEw6eO01ASr41/ChsbCPvtrfkSIF0=;
-	b=QDy2vNgn8tf6HhMrzUQ1lr5hkuKOqw7IViN0VURpisG6uvXVkv/7vekxLSrE/+rs3I
-	cws58wscHwLMjVXIU2qt4uI42qnKCgcJaCX8+SwEmOhnw7gy4BcWBmEV+7uP+c4cSXPd
-	8egeW1JG4sNe7LTDIQ9KwtjonyHn/+Oy+HfszhZYSLYjwMhO1etD1TKGPRnmhMsxELaZ
-	PfWQ4CjDdMrEkUGgehF+BtKWk7O0BZTxjo+dNwF736g76jNaPC7CQMpj+91jETB1Vlzd
-	m3amXbhIGxdpp88e9EPtejjTK8g67PZypVmhy+CBtJ3rUnavyoelesbjv6f7mtxQI52g
-	0dBQ==
-X-Gm-Message-State: AGRZ1gKb1qZIPhROh2Ji/JAh8rzdz9Hcha1kJzGCgozQIawM9UHzWJ/U
-	B+w5uR25K/24GvCufS0GG5TbbBqkqHCPTqTg5eo=
-X-Google-Smtp-Source: AJdET5dd4c8Tv26hWIh/KlqEVI41hsza0xngsDu3YXER3UympWZj7JZKe6sxEaOxfaCF8WqqgjmVoKmAQkSEd0Kbmro=
-X-Received: by 2002:a37:d408:: with SMTP id l8mr7318067qki.315.1541093152860; 
-	Thu, 01 Nov 2018 10:25:52 -0700 (PDT)
+	Thu, 1 Nov 2018 19:22:13 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 1 Nov 2018 19:22:12 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Nov 2018 10:22:11 +0800
+Message-ID: <1541125331-409202-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20181023160510.19604-1-JPEWhacker@gmail.com>
-	<CA+chaQdztUVMJxae0F05=Bn4PZ1Nj+6=fK5vDR2e2_9uKcb9JQ@mail.gmail.com>
-	<b547d0e296f044f8f6b0c4552f593977c9eb5ca1.camel@gmail.com>
-In-Reply-To: <b547d0e296f044f8f6b0c4552f593977c9eb5ca1.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 1 Nov 2018 10:25:26 -0700
-Message-ID: <CAMKF1soXJ-689rO5UszO5N7kPrXq0pBkw1O4fxbUhOU1iSf75A@mail.gmail.com>
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][master][sumo][PATCH] rapidjson: Allow empty package
+Subject: [meta-gnome][PATCH V2] network-manager-applet: change default buildclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,91 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Nov 2018 17:25:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 02 Nov 2018 02:22:12 -0000
+Content-Type: text/plain
 
-On Tue, Oct 23, 2018 at 12:00 PM Joshua Watt <jpewhacker@gmail.com> wrote:
->
-> On Tue, 2018-10-23 at 19:28 +0200, Martin Jansa wrote:
-> > Why is installing useless empty packages sane?
->
-> The development packages that get installed in the SDK are picked up
-> grabbing the -dev that corresponds to each ${PN} being installed.
-> However, you can't do that with RapidJSON as there is no ${PN} package
-> because it is empty and therefore culled. Adding the empty ${PN}
-> package seems to be a pretty low-risk way of making RapidJSON behave
-> like all the other packages when it comes to building into an SDK;
-> effectively, IMAGE_INSTALL += "rapidjson" is now sufficient to get it
-> in the SDK.
-> You could of course manually add "rapidjson-dev" to
-> TOOLCHAIN_HOST_TASK, but that doesn't seem to be the precedent. This
-> change is similar to those found in other header-only and staticdev-
-> only recipes like libatomic-ops, gtest, libsrtp, tclap, ceres-solver,
-> asio, and libinih.
+From: Changqing Li <changqing.li@windriver.com>
 
-we also have
-RDEPENDS_${PN}-dev = ""
+network-manager-applet don't have good support of out-of-tree
+build. refer this link:
+https://gitlab.gnome.org/GNOME/network-manager-applet/issues/30#note_353935
 
-so we need to remove that if this is to be added.
+change default buildclass to fix below occasionally compile failed
+problem.
 
-> > On Tue, Oct 23, 2018 at 6:05 PM Joshua Watt <jpewhacker@gmail.com>
-> > wrote:
-> > > Causes the empty base package to be created so that RapidJSON can
-> > > be
-> > >
-> > > sanely included in an SDK via IMAGE_INSTALL, RDEPENDS, and the
-> > > like.
-> > >
-> > >
-> > >
-> > > Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> > >
-> > > ---
-> > >
-> > >  meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 1 +
-> > >
-> > >  1 file changed, 1 insertion(+)
-> > >
-> > >
-> > >
-> > > diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> > > b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> > >
-> > > index 8ab35d224..76e01f824 100644
-> > >
-> > > --- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> > >
-> > > +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
-> > >
-> > > @@ -19,6 +19,7 @@ inherit cmake
-> > >
-> > >  EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF
-> > > -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF"
-> > >
-> > >
-> > >
-> > >  # RapidJSON is a header-only C++ library, so the main package will
-> > > be empty.
-> > >
-> > > +ALLOW_EMPTY_${PN} = "1"
-> > >
-> > >
-> > >
-> > >  FILES_${PN}-dev += "${libdir}/cmake"
-> > >
-> > >  RDEPENDS_${PN}-dev = ""
-> > >
-> > > --
-> > >
-> > > 2.17.1
-> > >
-> > >
-> > >
-> --
-> Joshua Watt <JPEWhacker@gmail.com>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+can't write to file src/wireless-security/ws-resources.hcan't write to file
+src/wireless-security/ws-resources.cMakefile:5299: recipe for target
+'src/wireless-security/ws-resources.h' failed
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../network-manager-applet/network-manager-applet_1.8.18.bb             | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
+index fffb57f..cfb742c 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
+@@ -11,6 +11,8 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
++GNOMEBASEBUILDCLASS = "autotools-brokensep"
++
+ SRC_URI[archive.md5sum] = "34923579b39360db64649342ee6735d8"
+ SRC_URI[archive.sha256sum] = "23dc1404f1e0622b7c4718b6d978b101d5e4d9be0b92133b3863a4dc29786178"
+ 
+-- 
+2.7.4
+
 
