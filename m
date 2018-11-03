@@ -1,48 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D575F7A04F
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+	[209.85.210.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 153A979FFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Nov 2018 23:54:32 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id q19-v6so3304762wmc.2
+	Sat,  3 Nov 2018 00:59:57 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id q5so3206179otl.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Nov 2018 16:54:34 -0700 (PDT)
+	Fri, 02 Nov 2018 17:59:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=YMWGIG6vuyX1ztXZYcxUVomas4hFjvVONR6LWyTqdlQ=;
-	b=JNaCra0yq0JADFkSiQpkaVLaKCZFNtO6pz66CUMvCQVgWA/YNIzRepGJ47LyF0U8D9
-	s2zvwngjWvBcsHbpjHd6/CJhWlH4ncI0M7PB3YRV26iu6hAX27GPWQuXQHIggjROjhMf
-	NOwQ0r8YKVF5s68wz6QbMaNPqxa/7BeDeGG8pPR+14PRnIFPBnsYq4/VN8tV/Ca+MAo7
-	mSQ1poL00eAYSGMPuN41eBz1M9sW+sSvOPD8vDXMjq2hzY3+W4uWtnTnknCnC3yk2kdM
-	pM0MRQYZhn6hpbMw5ylRBb8POsk/MrW2ad3ZiPM/V7aN7IlwO1LTAIWD/ZZ8wMoftwdP
-	2jqg==
+	:cc; bh=38BwH/RHn9j0WT6iI3mQEfYwsTqSXGHOpIBximegMCM=;
+	b=YRW+HKEs6tRr4o6nDhKEFdEEnGLF23ns+4isNd/9D2rqjymlahXwgbM7WjtuqVMaBr
+	8YqF7IFXsNmyX0UiBTe6Ue/YcyEQudhDyHW+NBBG+GXPSzxzSXciumXTuG1BfoGvMH3R
+	9tvrQtIowMD0Nc6wD+gUr5nBqUjh8JD5+N6EOS/0RKhvypH8BgGR0wrgT+jhAU+hfTWI
+	z9vhd2UQw8JOvMyv30muPnN0NOjmxlDhEdkjAlTk2d8rl/C5jj2KW7RCXs2KSF0eXBJH
+	LPwZ9Beb4bCzAZE4KThZTc/51IrU35Ycn7aqbVZeK5usJnx0cKCrzVso4xnfh2Dqj3is
+	2fjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=YMWGIG6vuyX1ztXZYcxUVomas4hFjvVONR6LWyTqdlQ=;
-	b=mPtPmIDT7S/J+LxWpOyfxQ2dgwIu1nxtQorg7cIp84LobF6PxYu5TqxTugXiyfV0EI
-	tujJnCe/PQSPbn6HeKKBAzmJGNlFQYvrZ1ISTEJf40HvEskQFzM/mmEWoA2SGRjAtxGN
-	d0Rl+/jB82pCnQw9Bt3iHyghe81kKkSVzWL6iAn9ItlmFNEufptgKEiDqW+zJL2zZ/KW
-	MFY1GHrlul9vIuSX+q+IpaxTDikZ6jh6bp0xA6zmmbI14r785z+FFjJJ7AGZHAgOFvRZ
-	DmrCBuDXRYcNlB5IONp0gWXHQDiDS27L1BXb20dTVTdwXPJ5qhI/ht67NvPkZ8gdQfOy
-	i6UQ==
-X-Gm-Message-State: AGRZ1gLMfkfpDm+M17iuLlpMTrzNU/x1/BQh83+AB33pX0nePAj1+Qhp
-	6BmC24YKTYKMxmJzxvic7di4gK3VR8e0Ao5zVBo=
-X-Google-Smtp-Source: AJdET5cRusjS42kOf3b0ProddMUvKcWqVEmHWigm7EheR1FLdxJtCy9Ir8ezKcOLjvByqnm6RbrMEI8CihKfDtqql2Y=
-X-Received: by 2002:a1c:bb42:: with SMTP id l63-v6mr48004wmf.32.1541202873116; 
-	Fri, 02 Nov 2018 16:54:33 -0700 (PDT)
+	bh=38BwH/RHn9j0WT6iI3mQEfYwsTqSXGHOpIBximegMCM=;
+	b=M1NP6+4fpu/n5w7QMCoSQMdOCmJ7zYFiBEwUorJkN/his9mXvzpN4ASgMshGBmfRZF
+	nC91mj4sx+xIy18VUtXvhkE54Ub6qiM5LCKdWxM+7TA2kOInjrYVKTagrJ0c4o5daXfJ
+	zISQsIABzJmVbZUB+RyxSYx+8s1O/5V+IYTB0EK4Sl82qasoLJ5oZ2y1MIctLW4mnPup
+	9mrLoW3k5nEtXQnbhTDIKdXodFKRHPJrst0Rb4tuo5t9V11Qe/VJ45rSUWQS3/FZZCgp
+	NDsbDI2hKEiw7hnUq6awy4MFLnyQ2bhsxzUkkzsacSIu2zuqhKb5hbbDf9tZ2VhAYMd8
+	qDAA==
+X-Gm-Message-State: AGRZ1gIErHV5GTNzOUnv7y9Lp7ZXOdcQRpqnP7XSRQCVuc926cwD2nvd
+	kyVMw9Ft44VAxazrbt8JhO9JEMWdztv84fFRGEI=
+X-Google-Smtp-Source: AJdET5c0tmwcDpcM2AGkoWvgI6k+ZUOGoUEt0e7dA7c5BKZZE485B6bklQmuXS2OEdkl6vv5sa7kVQgAZ+yk2vlfidI=
+X-Received: by 2002:a9d:644c:: with SMTP id m12mr8939975otl.3.1541206798906;
+	Fri, 02 Nov 2018 17:59:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20181102193911.784-1-Martin.Jansa@gmail.com>
-	<CAJTo0LapUWEmLVDYvyR+WLrBOK=7m+TDmQ_tYGLQ=RHLtfVPOQ@mail.gmail.com>
-In-Reply-To: <CAJTo0LapUWEmLVDYvyR+WLrBOK=7m+TDmQ_tYGLQ=RHLtfVPOQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 3 Nov 2018 00:54:21 +0100
-Message-ID: <CA+chaQdFuw=hujyefJZpsZh5=eCUqMeydoT=57sy59D_dpd8QQ@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] pcsc-lite: fix SRC_URI
+References: <20181029094042.14402-1-schnitzeltony@gmail.com>
+	<20181029094042.14402-2-schnitzeltony@gmail.com>
+	<CAMKF1socj9gmSzX6xMU=_nhZGm_Q2c91F3QpKeLhE6-X8Eo+yw@mail.gmail.com>
+In-Reply-To: <CAMKF1socj9gmSzX6xMU=_nhZGm_Q2c91F3QpKeLhE6-X8Eo+yw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 3 Nov 2018 01:59:45 +0100
+Message-ID: <CALbNGRSDVQe3vkX=fsQQ0qFyr1EAqxk+gr0wmdKmH48OKh3WwQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2 2/2] networkmanager: upgrade 1.10.10 -> 1.14.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,59 +55,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Nov 2018 23:54:33 -0000
+X-List-Received-Date: Sat, 03 Nov 2018 00:59:58 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-True, maybe I should have mentioned it in commit message.
-
-https://en.wikipedia.org/wiki/Alioth_(Debian)
-In 2018, Alioth has been replaced by a GitLab
-<https://en.wikipedia.org/wiki/GitLab> based solution hosted on
-*salsa.debian.org
-<http://salsa.debian.org>*. Alioth has been finally switched off in June
-2018.
-
-On Fri, Nov 2, 2018 at 11:03 PM Burton, Ross <ross.burton@intel.com> wrote:
-
-> Just in case anyone didn't knot, it's not temporarily down, it's dead for
-> good.
+On Fri, Nov 2, 2018 at 8:53 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Ross
-> On Fri, 2 Nov 2018 at 19:39, Martin Jansa <martin.jansa@gmail.com> wrote:
-> >
-> > * alioth.debian.org is down
-> >   Connecting to alioth.debian.org (alioth.debian.org)|5.153.231.21|:443...
-> failed: No route to host.
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
-> b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
-> > index 90d58b00d9..10f724e6c8 100644
-> > --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
-> > +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
-> > @@ -11,7 +11,7 @@ LICENSE_${PN}-spy-dev = "GPLv3+"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
-> >  DEPENDS = "udev"
-> >
-> > -SRC_URI = "
-> https://alioth.debian.org/frs/download.php/file/4225/pcsc-lite-${PV}.tar.bz2
-> "
-> > +SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-> >  SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
-> >  SRC_URI[sha256sum] =
-> "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
-> >
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> it fails to build with musl as seen here
+> http://errors.yoctoproject.org/Errors/Details/198239/
 >
+> I will see if this can be fixed.
+Aargh - Yet another 'Not-Tested=Not-Working' case...
+
+Let me know the result of your musl activities  - really would like to
+see this merged.
+
+Andreas
 
