@@ -1,53 +1,34 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 75D5C79FDC
+Return-Path: <pn@denx.de>
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 026D179F6C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 09:39:07 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 349D318297
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:08 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id ks8xagp7rvym
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id A095D18293
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 898AF1E07C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 7A0351E07A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by seth.se.axis.com (Postfix) with ESMTP id 6B42425FC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
-Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id wA39d7ou012474
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 3 Nov 2018 10:39:07 +0100
-Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id wA39d7Tt012473
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 3 Nov 2018 10:39:07 +0100
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+	Sat,  3 Nov 2018 15:59:38 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 42nNtM1GPPz1qwHQ;
+	Sat,  3 Nov 2018 16:59:39 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 42nNtM13pCz1qqkn;
+	Sat,  3 Nov 2018 16:59:39 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+	port 10024)
+	with ESMTP id M8rbnjxtv3gz; Sat,  3 Nov 2018 16:59:38 +0100 (CET)
+X-Auth-Info: 3TFrRpc05Dkl8lrv2Z50YPiKm5TgaldJSlquS5ey798=
+Received: from [192.168.178.26] (unknown [62.91.105.34])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPSA;
+	Sat,  3 Nov 2018 16:59:38 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Nov 2018 10:39:05 +0100
-Message-Id: <20181103093905.12433-1-pkj@axis.com>
-X-Mailer: git-send-email 2.12.0
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCH] lvm2.inc: Correct the license (LGPL-2.0 -> LGPL-2.1)
+From: Parthiban Nallathambi <pn@denx.de>
+Organization: DENX Software Engineering GmbH
+Message-ID: <a82232e3-5514-ea37-1d90-30f6a29e0aca@denx.de>
+Date: Sat, 3 Nov 2018 16:59:37 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
+MIME-Version: 1.0
+Subject: [thud] libdevmapper: LVM2.2.02.180.tgz file not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Nov 2018 09:39:07 -0000
+X-List-Received-Date: Sat, 03 Nov 2018 15:59:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-The library parts are actually LGPL-2.1, not LGPL-2.0.
+Hello All,
 
-License-Update: The correct license is LGPL-2.1, not LGPL-2.0.
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I am currently facing compilation issue with the libdevmapper. For the compilation
+logs I understand that the SRC_URI needs to be adjusted.
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 75f4d89a0..4cb5eb138 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -1,7 +1,7 @@
- HOMEPAGE = "https://www.sourceware.org/lvm2/"
- SECTION = "utils"
- DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
--LICENSE = "GPLv2 & LGPLv2"
-+LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
-                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
- 
+Current URI: ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.180.tgz
+BUt the file resides in: ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.180.tgz
+
+Does this needs to be fixed? Or the source tarball will be moved to parent directory
+in redhat FTP? Or am i missing something?
+
+Log:
+====
+--2018-11-03 15:37:47--  ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.180.tgz
+           => ‘/work/downloads/LVM2.2.02.180.tgz’
+Resolving sources.redhat.com (sources.redhat.com)... 209.132.183.64
+Connecting to sources.redhat.com (sources.redhat.com)|209.132.183.64|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /pub/lvm2 ... done.
+==> SIZE LVM2.2.02.180.tgz ... done.
+
+==> PASV ... done.    ==> RETR LVM2.2.02.180.tgz ... 
+No such file ‘LVM2.2.02.180.tgz’.
 -- 
-2.12.0
+Thanks,
+Parthiban N
 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-22 Fax: (+49)-8142-66989-80 Email: pn@denx.de
 
