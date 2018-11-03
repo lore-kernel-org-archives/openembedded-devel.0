@@ -1,48 +1,53 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
-	[209.85.210.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 153A979FFE
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 75D5C79FDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Nov 2018 00:59:57 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id q5so3206179otl.13
+	Sat,  3 Nov 2018 09:39:07 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 349D318297
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Nov 2018 17:59:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=38BwH/RHn9j0WT6iI3mQEfYwsTqSXGHOpIBximegMCM=;
-	b=YRW+HKEs6tRr4o6nDhKEFdEEnGLF23ns+4isNd/9D2rqjymlahXwgbM7WjtuqVMaBr
-	8YqF7IFXsNmyX0UiBTe6Ue/YcyEQudhDyHW+NBBG+GXPSzxzSXciumXTuG1BfoGvMH3R
-	9tvrQtIowMD0Nc6wD+gUr5nBqUjh8JD5+N6EOS/0RKhvypH8BgGR0wrgT+jhAU+hfTWI
-	z9vhd2UQw8JOvMyv30muPnN0NOjmxlDhEdkjAlTk2d8rl/C5jj2KW7RCXs2KSF0eXBJH
-	LPwZ9Beb4bCzAZE4KThZTc/51IrU35Ycn7aqbVZeK5usJnx0cKCrzVso4xnfh2Dqj3is
-	2fjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=38BwH/RHn9j0WT6iI3mQEfYwsTqSXGHOpIBximegMCM=;
-	b=M1NP6+4fpu/n5w7QMCoSQMdOCmJ7zYFiBEwUorJkN/his9mXvzpN4ASgMshGBmfRZF
-	nC91mj4sx+xIy18VUtXvhkE54Ub6qiM5LCKdWxM+7TA2kOInjrYVKTagrJ0c4o5daXfJ
-	zISQsIABzJmVbZUB+RyxSYx+8s1O/5V+IYTB0EK4Sl82qasoLJ5oZ2y1MIctLW4mnPup
-	9mrLoW3k5nEtXQnbhTDIKdXodFKRHPJrst0Rb4tuo5t9V11Qe/VJ45rSUWQS3/FZZCgp
-	NDsbDI2hKEiw7hnUq6awy4MFLnyQ2bhsxzUkkzsacSIu2zuqhKb5hbbDf9tZ2VhAYMd8
-	qDAA==
-X-Gm-Message-State: AGRZ1gIErHV5GTNzOUnv7y9Lp7ZXOdcQRpqnP7XSRQCVuc926cwD2nvd
-	kyVMw9Ft44VAxazrbt8JhO9JEMWdztv84fFRGEI=
-X-Google-Smtp-Source: AJdET5c0tmwcDpcM2AGkoWvgI6k+ZUOGoUEt0e7dA7c5BKZZE485B6bklQmuXS2OEdkl6vv5sa7kVQgAZ+yk2vlfidI=
-X-Received: by 2002:a9d:644c:: with SMTP id m12mr8939975otl.3.1541206798906;
-	Fri, 02 Nov 2018 17:59:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20181029094042.14402-1-schnitzeltony@gmail.com>
-	<20181029094042.14402-2-schnitzeltony@gmail.com>
-	<CAMKF1socj9gmSzX6xMU=_nhZGm_Q2c91F3QpKeLhE6-X8Eo+yw@mail.gmail.com>
-In-Reply-To: <CAMKF1socj9gmSzX6xMU=_nhZGm_Q2c91F3QpKeLhE6-X8Eo+yw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 3 Nov 2018 01:59:45 +0100
-Message-ID: <CALbNGRSDVQe3vkX=fsQQ0qFyr1EAqxk+gr0wmdKmH48OKh3WwQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 2/2] networkmanager: upgrade 1.10.10 -> 1.14.4
+	Sat,  3 Nov 2018 10:39:08 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id ks8xagp7rvym
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id A095D18293
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 898AF1E07C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7A0351E07A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by seth.se.axis.com (Postfix) with ESMTP id 6B42425FC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Nov 2018 10:39:07 +0100 (CET)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id wA39d7ou012474
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 3 Nov 2018 10:39:07 +0100
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id wA39d7Tt012473
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 3 Nov 2018 10:39:07 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Nov 2018 10:39:05 +0100
+Message-Id: <20181103093905.12433-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH] lvm2.inc: Correct the license (LGPL-2.0 -> LGPL-2.1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,19 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Nov 2018 00:59:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 03 Nov 2018 09:39:07 -0000
 
-On Fri, Nov 2, 2018 at 8:53 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> it fails to build with musl as seen here
-> http://errors.yoctoproject.org/Errors/Details/198239/
->
-> I will see if this can be fixed.
-Aargh - Yet another 'Not-Tested=Not-Working' case...
+The library parts are actually LGPL-2.1, not LGPL-2.0.
 
-Let me know the result of your musl activities  - really would like to
-see this merged.
+License-Update: The correct license is LGPL-2.1, not LGPL-2.0.
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Andreas
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 75f4d89a0..4cb5eb138 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -1,7 +1,7 @@
+ HOMEPAGE = "https://www.sourceware.org/lvm2/"
+ SECTION = "utils"
+ DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+-LICENSE = "GPLv2 & LGPLv2"
++LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
+                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+ 
+-- 
+2.12.0
+
 
