@@ -1,23 +1,50 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 088AF74813
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com
+	[209.85.219.176])
+	by mail.openembedded.org (Postfix) with ESMTP id A57E874E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Nov 2018 06:20:26 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wA66KQON008219
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  6 Nov 2018 08:16:58 +0000 (UTC)
+Received: by mail-yb1-f176.google.com with SMTP id u103-v6so3413903ybi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Nov 2018 22:20:27 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 5 Nov 2018 22:20:14 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Nov 2018 14:20:13 +0800
-Message-ID: <1541485213-44314-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Tue, 06 Nov 2018 00:16:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ODwYgIAz4tBsLDooI7WHNuHf91jUed6hT1VihtJTTpM=;
+	b=sKiNIn1+L2xowWGL4i9/SozrrohGn3gMLMciQEm9ucL/vqcCyBWuk5dxor+9cQZhrs
+	OymMK5nSzb1/ixTJ3ovYwbZSxm2uYJlMH2RrfAN/kDtgfZURovudQO2opY2ScaO03WNA
+	/s3vfkYek6teRwfCTenGdH6uLisQlsyWiAOnQB+kJpW6R10RHueT8SYalC8w8SZNAf9x
+	p9XmBVUEa4kpIgmIl8XNymQMxKsDTXOvfn4tng3EbEzYiBqCRbPd0NAlj8m18ChMVy9F
+	pXkd7qCL9QceFJQFTBEoXrj2cKIBN8OfJp4tROargkAGZGoT20QvLdmQwQVih0cMgdJI
+	HbYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ODwYgIAz4tBsLDooI7WHNuHf91jUed6hT1VihtJTTpM=;
+	b=lNUxg0nkrKWMLQhj8051+EhFvk58Lp/Iz1yqtEDgFHq7Kb5nYjmf8IU3JAHTQvLUSc
+	ZM/iPCDPSlZZSpJEERI6Tpd2pboxVMU/rK7/PSrNdIGhH3MFkmKcCXZcEK4iPnLEKlHb
+	FZBhcBLzXbiPIb5UnS1slxYg+A4ZDGbXhSP2N2bVm0hmSKkr48RqWj5G11Xoly2IwKOt
+	72o3O56M/pI3eD6mu3ROQVp2hDTf1BfSU6OI27p6immRxGWwA7dWjKj9A9wDRuDBxLcd
+	z+PL6z8qTF6qc882Y3F8KSQkTt6BdgOGUR/N1lUtIsAPaeuwG+IhCu+zVka4Oojz7A7E
+	68Kg==
+X-Gm-Message-State: AGRZ1gIQdtVdTR8BjEGxUaNiOfKhUgPatVmc6EzJkNMO6TgpyVsckuKA
+	leh9q1Tkj+P0QG8/yBQ1PRVTmUGJEmNsaFp2cN8=
+X-Google-Smtp-Source: AJdET5f1N4wzJeTtabDukEl6g+JJnLJv02DCvMApDhHhcdWv4qBWeACweucoZZ7NKS6NlhRHqjthzwb9G5HX0k/PzNA=
+X-Received: by 2002:a25:308a:: with SMTP id
+	w132-v6mr24694195ybw.106.1541492219427; 
+	Tue, 06 Nov 2018 00:16:59 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] network-manager-applet: move GNOMEBASEBUILDCLASS to correct position
+References: <20181105055915.148218-1-kai.kang@windriver.com>
+	<d6c0751d-d377-f964-0310-3856116bea88@windriver.com>
+	<CALbNGRTZCP+TKaDh40aFuh8ryx=kZRZacnn+i20Ok47CvM7iig@mail.gmail.com>
+	<180b349b-52ad-c4cf-2add-69f74e2c649d@windriver.com>
+In-Reply-To: <180b349b-52ad-c4cf-2add-69f74e2c649d@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 6 Nov 2018 09:16:45 +0100
+Message-ID: <CALbNGRQDVmE1FJR3jfPdsAWDQEOFnse5UFbkpx3E8sXgm2Jh6Q@mail.gmail.com>
+To: Kang Kai <Kai.Kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH] libunique: fix installed-vs-shipped qa issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,38 +57,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2018 06:20:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Nov 2018 08:16:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Changqing Li <changqing.li@windriver.com>
+> > I think this breaks introspection - why not just pack Unique-1.0.gir?
+>
+>
+> If configure option '--disable-introspection' is set rather than
+> '--enable-introspection', no file Unique-1.0.gir is created and
+> ${D}${datadir} is empty.
+> Option '--ignore-fail-on-non-empty' of rmdir is to make sure not affect
+> introspection.
+>
+Ok - thanks.
 
-GNOMEBASEBUILDCLASS is used by gnomebase, if put it after inherit
-gnomebase, GNOMEBASEBUILDCLASS in recipe will not take effect
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../network-manager-applet/network-manager-applet_1.8.18.bb            | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-index cfb742c..0184000 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-@@ -7,12 +7,11 @@ DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
-            intltool-native \
- "
- 
-+GNOMEBASEBUILDCLASS = "autotools-brokensep"
- inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introspection
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--GNOMEBASEBUILDCLASS = "autotools-brokensep"
--
- SRC_URI[archive.md5sum] = "34923579b39360db64649342ee6735d8"
- SRC_URI[archive.sha256sum] = "23dc1404f1e0622b7c4718b6d978b101d5e4d9be0b92133b3863a4dc29786178"
- 
--- 
-2.7.4
-
+Andreas
 
