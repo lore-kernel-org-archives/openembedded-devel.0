@@ -1,44 +1,42 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yb1-f196.google.com (mail-yb1-f196.google.com
-	[209.85.219.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D427879DE9
+Return-Path: <prvs=084933045b=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id B21B66E660
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Nov 2018 11:18:27 +0000 (UTC)
-Received: by mail-yb1-f196.google.com with SMTP id g9-v6so6662395ybh.7
+	Wed,  7 Nov 2018 14:30:41 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	wA7EQg4Z005970 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 7 Nov 2018 08:30:42 -0600
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2nktgnsa73-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Nov 2018 08:30:42 -0600
+Received: from us-aus-exch2.ni.corp.natinst.com
+	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	wA7EUfEd016681
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Nov 2018 03:18:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=jWI9sS6z8daIFKkl6lXeXUbru8EIPB43x1EAEaA3izw=;
-	b=qmnJPGOB0Ap6U7ISKb2N+RUka+IFEtT0iIj3BFE1NBHkWzu4Orn3J9/toaR+qOizkx
-	RA5o3vm6KOIARF26+vT6m3QTEsIJD2Vjvn6qAoj9yBJTJaf0S+oP6g8+2LnA1meufA7Y
-	BDLmwqaJY2mbR51dcrV0UXfbHzSQIwoPJX+tL+yMS+xy0gclPJe4FNLUinbXCNFKRAz8
-	OXyrGt4t4TTT24b9Csu5rftPWt/HWl3noJCpAHbh2cf1UbFLHgxGnOoKGOevUuR/HQy1
-	9JrEzgbNCokEKyEx/RJvpcop5mB+kp5Fe5SEVprvgukBR0ld0jAlLsuJiXQYU5cIwwXD
-	LDeQ==
-X-Gm-Message-State: AGRZ1gLsYCU+D+uFnUFHTpeJvg3soU1Cr43r2Z7nRQeJQSk4c4v2ms3L
-	w11EzS1BKgU/n9r5YpOdFN2qQBZG
-X-Google-Smtp-Source: AJdET5dn4mMNn5uD6wmlhDbz9D4Zrvhn1xQKn8D3xa/PWFZhfRvK6G3K1pVShpYhPm0foHdoFb/8rg==
-X-Received: by 2002:a5b:f4a:: with SMTP id
-	y10-v6mr1065587ybr.292.1541589508537; 
-	Wed, 07 Nov 2018 03:18:28 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	m16-v6sm89724ywh.18.2018.11.07.03.18.27
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 07 Nov 2018 03:18:27 -0800 (PST)
-Message-ID: <0045d382bffd47b62629a38bcdad0105e6f230ad.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 07 Nov 2018 11:18:26 +0000
-In-Reply-To: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
-References: <CAFrQVPNLu4KJWK3hLWVC7yjq7aLmb9a1c066hTC5BHj_=qdZZg@mail.gmail.com>
-User-Agent: Evolution 3.30.1-1 
-Mime-Version: 1.0
-Subject: Re: meta-java configuration
+	Wed, 7 Nov 2018 08:30:41 -0600
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 7 Nov 2018 08:30:41 -0600
+Received: from avasiu-ro.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1395.4 via Frontend Transport; Wed, 7 Nov 2018 08:30:40 -0600
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 Nov 2018 16:30:13 +0200
+Message-ID: <20181107143013.30642-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-11-07_12:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH] python-configparser.inc: Fix SUMMARY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,58 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2018 11:18:28 -0000
+X-List-Received-Date: Wed, 07 Nov 2018 14:30:41 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2018-10-24 at 17:15 -0400, Kyle Russell wrote:
-> It looks like the only javac that meta-java exposes through its bbclasses
-> comes from libecj-bootstrap-native 3.6.2.  A few years ago, it looked like
-> there was an attempt to allow openjdk-8-native to provide
-> virtual/javac-native, but it has since been reverted.
-> 
-> I think I understand libecj is needed as part of the bootstrap process to
-> build openjdk, but if other layers want to build newer java code using
-> javac from openjdk 8 once available after bootstrap, does meta-java
-> provide
-> support for using javac from openjdk-8-native, or is the expectation that
-> other layers would depend directly on openjdk-8-native and setup
-> EXTRANATIVEPATH as needed to reach its tools?
-> 
-> Maybe this is planned future work, but I wanted to make sure I was
-> configuring the layer correctly and using it as intended.
-> 
-> Thanks!
-> 
-> Kyle
+SUMMARY contained a non-ascii char (’ instead of ') which caused
+pkg.info_installed to fail.
 
-I've tried something here
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-configparser.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119590.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119591.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119592.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119593.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119594.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119595.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119596.html
-
-[oe] [meta-java][RFC][PATCH 1/7] openjdk-8-native: add meaningful (R)PROVIDES
-[oe] [meta-java][RFC][PATCH 2/7] layer.conf: allow multiple Java SDKs & runtimes to co-exist
-[oe] [meta-java][RFC][PATCH 3/7] openjdk-8: add meaningful (R)PROVIDES
-[oe] [meta-java][RFC][PATCH 4/7] openjre-8: add meaningful (R)PROVIDES
-[oe] [meta-java][RFC][PATCH 5/7] layer.conf: set defaults for Java JRE (R)PROVIDERS
-[oe] [meta-java][RFC][PATCH 6/7] openjdk-7: (R)PROVIDE virtual Java [567] packages
-[oe] [meta-java][RFC][PATCH 7/7] ca-certificates-java: switch to more generic / more correct JAVA (R)DEPENDS
-
-
-the idea is to add virtual (R)PROVIDES that other recipes can depends on,
-similar to e.g. Debian.
-
-I'm using this locally, but I think there are some corner cases that aren't handled.
-
-
-Cheers,
-Andre'
-
+diff --git a/meta-python/recipes-devtools/python/python-configparser.inc b/meta-python/recipes-devtools/python/python-configparser.inc
+index c1fb8582c..133dbba71 100644
+--- a/meta-python/recipes-devtools/python/python-configparser.inc
++++ b/meta-python/recipes-devtools/python/python-configparser.inc
+@@ -1,4 +1,4 @@
+-SUMMARY = "This module provides the ConfigParser class which implements a basic configuration language which provides a structure similar to what’s found in Microsoft Windows INI files."
++SUMMARY = "This module provides the ConfigParser class which implements a basic configuration language which provides a structure similar to what's found in Microsoft Windows INI files."
+ SECTION = "devel/python"
+ HOMEPAGE = "https://docs.python.org/3/library/configparser.html"
+ LICENSE = "MIT"
+-- 
+2.19.1
 
 
