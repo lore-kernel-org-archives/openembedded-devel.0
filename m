@@ -1,52 +1,23 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
-	[209.85.166.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 31E466C0DC
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C9676BF3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Nov 2018 23:13:36 +0000 (UTC)
-Received: by mail-it1-f193.google.com with SMTP id e11so630052itl.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Nov 2018 15:13:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eXMyLMS2h9DrwnPwT1mBmtrtcDxHtoY1upDBcpjRXvE=;
-	b=So92tpn/LzwsLzlpPIjP0KkchDV1NVvrYkPZ0rV2VM9ICslml0oB0m7QzM/rlWDCO3
-	SAqm4JngbJdqppbkGVmuwCHftgZ5h+uQi6izHXgbhYZmNetAGGwY3rN/54CRp4X2jzED
-	9EDCfnBG5qH0SJilkRKL2CDKEhdxB56+pq5BjbVpmvMPcGWXeuoFXqqJpAIBLYNy66k7
-	25uwXsB2YBMJapijXsgk3rEK+TEzZnoQ0bPO5crnwi/UbgpesnagG+kq7hD2hoIeegjs
-	RHjNTnpz4QBg+LfSBNnAAKNxGmUngawF8DKfUCx8DISCGJjwCjxHaZNvWwPghnTZldXH
-	mlsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eXMyLMS2h9DrwnPwT1mBmtrtcDxHtoY1upDBcpjRXvE=;
-	b=drezSTTXvWRml3C2gzSafcwyX9r87TZ0Aqak5p3rV4sH7Y21A7cI5cyYz+Gzw6UG/Z
-	Le83IoaTj1puwf0HyIvPC+cYtdNzruyfD09gBiN6I9MsM26ezM9FQuv8YRBTqyqFqFyD
-	HlXiKyDSA0r8iOQwSRMCsfge2dd9ZpGOBaIyjsdeD9jYqgU4wU8GqpKSFReU5oH5K2+P
-	4rqRAllEI6RcBZPxqj/fjkiIyHWlxoBZCapp4K6g9RJHr0YyUW7DNgQeyTTX6QKkKi4A
-	1OycWzrJpgcS0joWeIaGVJdU4L4JuXsXbP7GQ4vFPJZvhS7n/+nBU1UQWwBcecRmHcWi
-	Zlmw==
-X-Gm-Message-State: AGRZ1gKqqKZM/Sgt8FENbojBnTiEs6osXCVohXbWQ6asNgx7CaM+mlWD
-	+MIEPnuHebeaQyjOKZD/nck3hmjZPWpneA+4qEzx9g==
-X-Google-Smtp-Source: AJdET5dAhdT9kaD6fnOpoGL/6Xsg9M6ogxmPtR2XPmEiuejKNjJC/WuoFYA9qKZWUgjrxwA7i5uU33Ui+zh/P6qwuoo=
-X-Received: by 2002:a02:b572:: with SMTP id
-	z47-v6mr6210381jaj.79.1541718817308; 
-	Thu, 08 Nov 2018 15:13:37 -0800 (PST)
+	Fri,  9 Nov 2018 07:14:36 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wA97Dtr5029878
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 8 Nov 2018 23:14:11 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 8 Nov 2018 23:13:33 -0800
+From: <mingli.yu@windriver.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Nov 2018 15:13:31 +0800
+Message-ID: <1541747611-30583-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <cover.1540830650.git.brendank310@gmail.com>
-	<ad2a3fd59975f2af76a55c6c480bbbbc4855f49a.1540830650.git.brendank310@gmail.com>
-	<CAJTo0LZJv8Pmoqnb5-Xb2Tjms12P_Oa4S69CxdYvHd=fRSWBNA@mail.gmail.com>
-	<CAKPa3c2N1=Q-Ay5J=iN3U0U7HcR=8LEbTRVM7AMuFSqaLi=TzQ@mail.gmail.com>
-In-Reply-To: <CAKPa3c2N1=Q-Ay5J=iN3U0U7HcR=8LEbTRVM7AMuFSqaLi=TzQ@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 8 Nov 2018 23:13:26 +0000
-Message-ID: <CAJTo0La=R27JS5BA9g9ZUZ=66pLqdHFsvAfcnG2qwBpwYQZgHw@mail.gmail.com>
-To: Brendan Kerrigan <brendank310@gmail.com>
-Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC meta-gnome][PATCH 02/16] ibus: add recipe for ibus to support gnome-settings-daemon and gnome-shell
+Subject: [meta-oe][PATCH] hwloc: Update the SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,16 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 23:13:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 09 Nov 2018 07:14:36 -0000
+Content-Type: text/plain
 
-On Thu, 8 Nov 2018 at 17:28, Brendan Kerrigan <brendank310@gmail.com> wrote:
-> Yeah it does have a build time dependency on gtk+2.
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-There's a --disable-gtk2, I'd recommend either just passing that or
-for bonus points having a disabled packageconfig to enable/disable
-gtk2.  GTK+2 is well dead now, so we shouldn't be building it out of
-the box.
+Update the SRC_URI to fix below issue:
+$ bitbake -cfetch lib32-hwloc
+ERROR: lib32-hwloc-1.11.10-r0 do_fetch: Fetcher failure for URL: 'https://www.open-mpi.org/software/lib32-hwloc/v1.11/downloads/hwloc-1.11.10.tar.bz2'. Unable to fetch URL from any source.
 
-Ross
+Actually the source located under https://www.open-mpi.org/software/hwloc/v1.11/downloads/hwloc-1.11.10.tar.bz2
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb
+index 701af15..5f4155e 100644
+--- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb
++++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb
+@@ -7,7 +7,7 @@ SECTION = "base"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
+ 
+-SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2"
++SRC_URI = "https://www.open-mpi.org/software/${BPN}/v1.11/downloads/${BP}.tar.bz2"
+ SRC_URI[md5sum] = "0981a01935982aa7e850a96e0c3057b0"
+ SRC_URI[sha256sum] = "2be808383d8337846fe77ce49c7ad3336fb6857505494d85c0ac03f22c5bd1e7"
+ 
+-- 
+2.7.4
+
 
