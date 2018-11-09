@@ -1,30 +1,30 @@
-Return-Path: <cdgarren@indesign-llc.com>
-Received: from mail02.indesign-llc.com (mail02.indesign-llc.com [207.67.30.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 000926C1F2
+Return-Path: <winfried_mb2@xmsnet.nl>
+X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 09 Nov 2018 20:24:27 UTC
+Received: from smtp-1.concepts.nl (smtp-1.concepts.nl [213.197.30.124])
+	by mail.openembedded.org (Postfix) with ESMTP id 750926C182
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Nov 2018 15:58:50 +0000 (UTC)
-Received: from VM-IND37.indesign.net (192.168.10.190) by VM-IND37.indesign.net
-	(192.168.10.190) with Microsoft SMTP Server (TLS) id 15.1.225.42;
-	Fri, 9 Nov 2018 10:58:51 -0500
-Received: from VM-IND37.indesign.net ([fe80::e895:bfb4:ee53:4249]) by
-	VM-IND37.indesign.net ([fe80::e895:bfb4:ee53:4249%12]) with mapi id
-	15.01.0225.041; Fri, 9 Nov 2018 10:58:51 -0500
-From: "Garren, Chris D." <cdgarren@indesign-llc.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-browser] Chromium missing DEPENDS
-Thread-Index: AdR4K3VweLiJ98e8TmSKUPnVTz7lBQAN1UMAAAd1PiA=
-Date: Fri, 9 Nov 2018 15:58:51 +0000
-Message-ID: <79c0982560d74ac2a99ed9b7026ea113@indesign-llc.com>
-References: <af5d8ef579cd4b05978c66c78d17e82e@indesign-llc.com>
-	<CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [192.168.40.114]
+	Fri,  9 Nov 2018 20:24:27 +0000 (UTC)
+Received: from [213.197.30.241] (helo=webmail.xmsnet.nl)
+	by smtp-1.concepts.nl with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+	(envelope-from <winfried_mb2@xmsnet.nl>) id 1gLD5q-0004U3-K5
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Nov 2018 21:09:26 +0100
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] Chromium missing DEPENDS
+Date: Fri, 09 Nov 2018 21:09:26 +0100
+From: Winfried <winfried_mb2@xmsnet.nl>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <6d0000e0ded4140378a2e54e28c3acc9@xmsnet.nl>
+X-Sender: winfried_mb2@xmsnet.nl
+User-Agent: Roundcube Webmail/1.3.6
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1gLD5q-0004U3-K5
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: winfried_mb2@xmsnet.nl
+Subject: [meta-qt5] eglfs imx6 compile errors ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,66 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Nov 2018 15:58:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 09 Nov 2018 20:24:27 -0000
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-VGhhdCBsb29rcyBsaWtlIGl0J3MgZml4ZWQgdGhlIGlzc3VlLiBJIGd1ZXNzIEknbGwgc3VibWl0
-IGEgcGF0Y2ggZm9yIGl0Lg0KDQpUaGFua3MsDQoNCkNocmlzIEdhcnJlbg0KDQoNCi0tLS0tT3Jp
-Z2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJhai5raGVtQGdtYWls
-LmNvbV0gDQpTZW50OiBGcmlkYXksIE5vdmVtYmVyIDksIDIwMTggOTozMSBBTQ0KVG86IEdhcnJl
-biwgQ2hyaXMgRC4gPGNkZ2FycmVuQGluZGVzaWduLWxsYy5jb20+DQpDYzogb3BlbmVtYmVkZWQt
-ZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KU3ViamVj
-dDogUmU6IFtvZV0gW21ldGEtYnJvd3Nlcl0gQ2hyb21pdW0gbWlzc2luZyBERVBFTkRTDQoNCk9u
-IEZyaSwgTm92IDksIDIwMTggYXQgNDo1OSBBTSBHYXJyZW4sIENocmlzIEQuDQo8Y2RnYXJyZW5A
-aW5kZXNpZ24tbGxjLmNvbT4gd3JvdGU6DQo+DQo+IEknbSB3b3JraW5nIG9uIGJ1aWxkaW5nIGFu
-IGltYWdlIHdpdGggY2hyb21pdW0gZm9yIGEgVmFyaXNjaXRlIFZBUi1TT00tTVg2LVNPTE8uIEkg
-cHJldmlvdXNseSB3YXMgYWJsZSB0byBidWlsZCBhbiBpbWFnZSBmb3IgdGhlIERBUlQtNlVMIHN1
-Y2Nlc3NmdWxseSB3aXRoIGNocm9taXVtIGluY2x1ZGVkLiBXaGVuIEkgY2hhbmdlZCBtYWNoaW5l
-cywgSSBzdGFydGVkIGdldHRpbmcgYW4gZXJyb3IgZHVyaW5nIHRoZSBkb19jb25maWd1cmUgc3Rl
-cCBvZiBjaHJvbWl1bS14MTE6DQo+DQo+IEVSUk9SOiBjaHJvbWl1bS14MTEtNjkuMC4zNDk3LjEw
-MC1yMCBkb19jb25maWd1cmU6IEZ1bmN0aW9uIGZhaWxlZDogDQo+IGRvX2NvbmZpZ3VyZSAobG9n
-IGZpbGUgaXMgbG9jYXRlZCBhdCANCj4gL2hvbWUvY2RnYXJyZW4veW9jdG8vYnVpbGQvdG1wL3dv
-cmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnV4LQ0KPiBnbnVlYWJpL2Nocm9taXUN
-Cj4gbS14MTEvNjkuMC4zNDk3LjEwMC1yMC90ZW1wL2xvZy5kb19jb25maWd1cmUuNzk4MDkpDQo+
-IEVSUk9SOiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGluOiANCj4gL2hvbWUvY2RnYXJyZW4v
-eW9jdG8vYnVpbGQvdG1wL3dvcmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnV4LQ0K
-PiBnbnVlYWJpL2Nocm9taXVtLXgxMS82OS4wLjM0OTcuMTAwLXIwL3RlbXAvbG9nLmRvX2NvbmZp
-Z3VyZS43OTgwOQ0KPiBMb2cgZGF0YSBmb2xsb3dzOg0KPiB8IERFQlVHOiBFeGVjdXRpbmcgc2hl
-bGwgZnVuY3Rpb24gZG9fY29uZmlndXJlIEVSUk9SIGF0IA0KPiB8IC8vYnVpbGQvY29uZmlnL2xp
-bnV4L3BrZ19jb25maWcuZ25pOjEwMzoxNzogU2NyaXB0IHJldHVybmVkIG5vbi16ZXJvIGV4aXQg
-Y29kZS4NCj4gfCAgICAgcGtncmVzdWx0ID0gZXhlY19zY3JpcHQocGtnX2NvbmZpZ19zY3JpcHQs
-IGFyZ3MsICJ2YWx1ZSIpDQo+IHwgICAgICAgICAgICAgICAgIF4tLS0tLS0tLS0tDQo+IHwgQ3Vy
-cmVudCBkaXI6IA0KPiB8IC9ob21lL2NkZ2FycmVuL3lvY3RvL2J1aWxkL3RtcC93b3JrL2NvcnRl
-eGE5aGYtbmVvbi1teDZxZGwtcG9reS1saW51DQo+IHwgeC1nbnVlYWJpL2Nocm9taXVtLXgxMS82
-OS4wLjM0OTcuMTAwLXIwL2Nocm9taXVtLTY5LjAuMzQ5Ny4xMDAvb3V0L1INCj4gfCBlbGVhc2Uv
-DQo+IHwgQ29tbWFuZDogcHl0aG9uIA0KPiB8IC9ob21lL2NkZ2FycmVuL3lvY3RvL2J1aWxkL3Rt
-cC93b3JrL2NvcnRleGE5aGYtbmVvbi1teDZxZGwtcG9reS1saW51eC1nbnVlYWJpL2Nocm9taXVt
-LXgxMS82OS4wLjM0OTcuMTAwLXIwL2Nocm9taXVtLTY5LjAuMzQ5Ny4xMDAvYnVpbGQvY29uZmln
-L2xpbnV4L3BrZy1jb25maWcucHkgYXRrIGF0ay1icmlkZ2UtMi4wIFJldHVybmVkIDEuDQo+IHwg
-c3RkZXJyOg0KPiB8DQo+IHwgUGFja2FnZSBhdGstYnJpZGdlLTIuMCB3YXMgbm90IGZvdW5kIGlu
-IHRoZSBwa2ctY29uZmlnIHNlYXJjaCBwYXRoLg0KPiB8IFBlcmhhcHMgeW91IHNob3VsZCBhZGQg
-dGhlIGRpcmVjdG9yeSBjb250YWluaW5nIGBhdGstYnJpZGdlLTIuMC5wYycNCj4gfCB0byB0aGUg
-UEtHX0NPTkZJR19QQVRIIGVudmlyb25tZW50IHZhcmlhYmxlIE5vIHBhY2thZ2UgDQo+IHwgJ2F0
-ay1icmlkZ2UtMi4wJyBmb3VuZCBDb3VsZCBub3QgcnVuIHBrZy1jb25maWcuDQo+IHwNCj4gfCBT
-ZWUgLy9idWlsZC9jb25maWcvbGludXgvYXRrL0JVSUxELmduOjIwOjE6IHdoZW5jZSBpdCB3YXMg
-Y2FsbGVkLg0KPiB8IHBrZ19jb25maWcoImF0a19iYXNlIikgew0KPiB8IF4tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQ0KPiB8IFNlZSAvL3VpL3ZpZXdzL0JVSUxELmduOjY4NjoyNDogd2hpY2ggY2F1
-c2VkIHRoZSBmaWxlIHRvIGJlIGluY2x1ZGVkLg0KPiB8ICAgICAgICAgICBjb25maWdzICs9IFsg
-Ii8vYnVpbGQvY29uZmlnL2xpbnV4L2F0ayIgXQ0KPiB8ICAgICAgICAgICAgICAgICAgICAgICAg
-Xi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gfCBXQVJOSU5HOiBleGl0IGNvZGUgMSBmcm9t
-IGEgc2hlbGwgY29tbWFuZC4NCj4gfCBFUlJPUjogRnVuY3Rpb24gZmFpbGVkOiBkb19jb25maWd1
-cmUgKGxvZyBmaWxlIGlzIGxvY2F0ZWQgYXQgDQo+IHwgL2hvbWUvY2RnYXJyZW4veW9jdG8vYnVp
-bGQvdG1wL3dvcmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnUNCj4gfCB4LWdudWVh
-YmkvY2hyb21pdW0teDExLzY5LjAuMzQ5Ny4xMDAtcjAvdGVtcC9sb2cuZG9fY29uZmlndXJlLjc5
-ODA5KQ0KPiBFUlJPUjogVGFzayAoL2hvbWUvY2RnYXJyZW4veW9jdG8vc291cmNlcy9tZXRhLWJy
-b3dzZXIvcmVjaXBlcy1icm93c2VyL2Nocm9taXVtL2Nocm9taXVtLXgxMV82OS4wLjM0OTcuMTAw
-LmJiOmRvX2NvbmZpZ3VyZSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPg0KPiBBbnkgaWRl
-YXMgd2hhdCBtaWdodCBiZSBjYXVzaW5nIHRoaXM/DQo+DQoNCnRyeSBhZGRpbmcgIGF0LXNwaTIt
-YXRrIHRvIERFUEVORFMNCg0KDQo+IFRoYW5rcywNCj4NCj4gQ2hyaXMgR2FycmVuDQo+DQo+IC0t
-DQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IE9w
-ZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
+Hi,
+
+I am upgrading our i.MX6 BSP (Congatec QMX6) to Yocto Sumo (using the 
+default gcc 7.3.0).
+
+Both when using sumo branch and master branch of meta-qt5 I get the 
+following compile error:
+
+| 
+/home/wdobbe/yocto/dynniq-sumo/build_v2x-m300/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.10.1+gitAUTOINC+6c6ace9d23-r0/git/src/plugins/platforms/eglfs/deviceintegration/eglfs_viv/qeglfsvivintegration.cpp: 
+In member function 'virtual void QEglFSVivIntegration::platformInit()':
+| 
+/home/wdobbe/yocto/dynniq-sumo/build_v2x-m300/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.10.1+gitAUTOINC+6c6ace9d23-r0/git/src/plugins/platforms/eglfs/deviceintegration/eglfs_viv/qeglfsvivintegration.cpp:68:41: 
+error: invalid conversion from 'void*' to 'EGLNativeDisplayType {aka 
+wl_display*}' [-fpermissive]
+|      mNativeDisplay = fbGetDisplayByIndex(framebufferIndex());
+|                       ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+
+and a few similar conversion errors.
+
+Is the Vivante eglfs support currently broken, or am I doing something 
+wrong ?
+
+thanks in advance,
+
+Winfried
 
