@@ -1,45 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
-	[209.85.222.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B6A806BD68
+Return-Path: <cdgarren@indesign-llc.com>
+Received: from mail02.indesign-llc.com (mail02.indesign-llc.com [207.67.30.40])
+	by mail.openembedded.org (Postfix) with ESMTP id 000926C1F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Nov 2018 14:31:45 +0000 (UTC)
-Received: by mail-qk1-f176.google.com with SMTP id w204so1821117qka.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Nov 2018 06:31:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=OkPTjTCJGtknreymjN/S4xN1XUnfktTTn1Rq1msSQaU=;
-	b=XsmIwKHFQNZj/lmwF1MxoZO91tI158zN50N6d4HDxwN/1WsmR5XjDEl4yfAaHdjqgA
-	eeYj2RfhkjZpLHkAfVD/1gsmz33iSvZT5lD8bzeymt8h+yXhbc7/wP0oNReUA7vYmxMA
-	IIErsVT798T/Qj+NKcD23HolSKk5oMjB384YAuo6XKQJOkW8fHf0E9choSNeBr3lGGy0
-	2wog92WnQBYOSj3gyCz/vrqimpGr4tTlEk0bl9+UYYO1RwsLzo5NfZxww7Kb34jHmY57
-	0S2nGAEie6Y3CZ5h4t///Xph+7+jyyXyovV8Lq9tRnq9LRllPi2s8o2rASQ5fvwH7EkF
-	+DOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=OkPTjTCJGtknreymjN/S4xN1XUnfktTTn1Rq1msSQaU=;
-	b=HiAgovj3oJDvV2uTWyr/HFhXqBekYzV6OrL9zujG4GME6d5GuhRu9xgCpixinmHQfo
-	OPLrqvbYvjfL73BdWQWZjHZgflu6w/eLdGhROZ67l6gu7Q+LawiJer9P1FDis3ugFYZW
-	Zzad44J0/fIG0UbNrjPeJsQ4unEOAHQF0gRYEV3X2ANc8I0xNYHQ6OSGkoLJju5//3/Q
-	TJOpy2XnCdS0vqzn5Wt83n+1GdfJvs9+6HNNmpZO1+mKwFXcKIEl8UQOSeBAgWdvEQq6
-	FgivDDZ5iGF5DWOaj3XKWUuYWrdwkdk4S04s8t3udUWz4Stv9v7bnvGYfAZiV2qW6oI0
-	3MOQ==
-X-Gm-Message-State: AGRZ1gKEaBhDP9zwUnH3S4nRp4LLiK4afVNG3WbVqgVdGV866gsAOEWT
-	YpDgD331GROJ9IzLqJbmwEE8ovGIvLQn82jwo4Y=
-X-Google-Smtp-Source: AJdET5cCGpMioGfiAbZLTSIj7waGZpcoQYWZOsxM5UviEmy1atFVlMZ2qyvCGM7qstRR0h/MeGXcrt4cbBdWrXnrumc=
-X-Received: by 2002:a0c:98a1:: with SMTP id f30mr8756301qvd.224.1541773906306; 
-	Fri, 09 Nov 2018 06:31:46 -0800 (PST)
-MIME-Version: 1.0
+	Fri,  9 Nov 2018 15:58:50 +0000 (UTC)
+Received: from VM-IND37.indesign.net (192.168.10.190) by VM-IND37.indesign.net
+	(192.168.10.190) with Microsoft SMTP Server (TLS) id 15.1.225.42;
+	Fri, 9 Nov 2018 10:58:51 -0500
+Received: from VM-IND37.indesign.net ([fe80::e895:bfb4:ee53:4249]) by
+	VM-IND37.indesign.net ([fe80::e895:bfb4:ee53:4249%12]) with mapi id
+	15.01.0225.041; Fri, 9 Nov 2018 10:58:51 -0500
+From: "Garren, Chris D." <cdgarren@indesign-llc.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-browser] Chromium missing DEPENDS
+Thread-Index: AdR4K3VweLiJ98e8TmSKUPnVTz7lBQAN1UMAAAd1PiA=
+Date: Fri, 9 Nov 2018 15:58:51 +0000
+Message-ID: <79c0982560d74ac2a99ed9b7026ea113@indesign-llc.com>
 References: <af5d8ef579cd4b05978c66c78d17e82e@indesign-llc.com>
-In-Reply-To: <af5d8ef579cd4b05978c66c78d17e82e@indesign-llc.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 9 Nov 2018 06:31:20 -0800
-Message-ID: <CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
-To: cdgarren@indesign-llc.com
+	<CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.40.114]
+MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-browser] Chromium missing DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -54,73 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Nov 2018 14:31:45 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Nov 2018 15:58:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Fri, Nov 9, 2018 at 4:59 AM Garren, Chris D.
-<cdgarren@indesign-llc.com> wrote:
->
-> I'm working on building an image with chromium for a Variscite VAR-SOM-MX=
-6-SOLO. I previously was able to build an image for the DART-6UL successful=
-ly with chromium included. When I changed machines, I started getting an er=
-ror during the do_configure step of chromium-x11:
->
-> ERROR: chromium-x11-69.0.3497.100-r0 do_configure: Function failed: do_co=
-nfigure (log file is located at /home/cdgarren/yocto/build/tmp/work/cortexa=
-9hf-neon-mx6qdl-poky-linux-gnueabi/chromiu
-> m-x11/69.0.3497.100-r0/temp/log.do_configure.79809)
-> ERROR: Logfile of failure stored in: /home/cdgarren/yocto/build/tmp/work/=
-cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/tem=
-p/log.do_configure.79809
-> Log data follows:
-> | DEBUG: Executing shell function do_configure
-> | ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned no=
-n-zero exit code.
-> |     pkgresult =3D exec_script(pkg_config_script, args, "value")
-> |                 ^----------
-> | Current dir: /home/cdgarren/yocto/build/tmp/work/cortexa9hf-neon-mx6qdl=
--poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/chromium-69.0.3497.100/ou=
-t/Release/
-> | Command: python /home/cdgarren/yocto/build/tmp/work/cortexa9hf-neon-mx6=
-qdl-poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/chromium-69.0.3497.100=
-/build/config/linux/pkg-config.py atk atk-bridge-2.0
-> | Returned 1.
-> | stderr:
-> |
-> | Package atk-bridge-2.0 was not found in the pkg-config search path.
-> | Perhaps you should add the directory containing `atk-bridge-2.0.pc'
-> | to the PKG_CONFIG_PATH environment variable
-> | No package 'atk-bridge-2.0' found
-> | Could not run pkg-config.
-> |
-> | See //build/config/linux/atk/BUILD.gn:20:1: whence it was called.
-> | pkg_config("atk_base") {
-> | ^-----------------------
-> | See //ui/views/BUILD.gn:686:24: which caused the file to be included.
-> |           configs +=3D [ "//build/config/linux/atk" ]
-> |                        ^-------------------------
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_configure (log file is located at /home/cdga=
-rren/yocto/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/chromiu=
-m-x11/69.0.3497.100-r0/temp/log.do_configure.79809)
-> ERROR: Task (/home/cdgarren/yocto/sources/meta-browser/recipes-browser/ch=
-romium/chromium-x11_69.0.3497.100.bb:do_configure) failed with exit code '1=
-'
->
-> Any ideas what might be causing this?
->
-
-try adding  at-spi2-atk to DEPENDS
-
-
-> Thanks,
->
-> Chris Garren
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+VGhhdCBsb29rcyBsaWtlIGl0J3MgZml4ZWQgdGhlIGlzc3VlLiBJIGd1ZXNzIEknbGwgc3VibWl0
+IGEgcGF0Y2ggZm9yIGl0Lg0KDQpUaGFua3MsDQoNCkNocmlzIEdhcnJlbg0KDQoNCi0tLS0tT3Jp
+Z2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJhai5raGVtQGdtYWls
+LmNvbV0gDQpTZW50OiBGcmlkYXksIE5vdmVtYmVyIDksIDIwMTggOTozMSBBTQ0KVG86IEdhcnJl
+biwgQ2hyaXMgRC4gPGNkZ2FycmVuQGluZGVzaWduLWxsYy5jb20+DQpDYzogb3BlbmVtYmVkZWQt
+ZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KU3ViamVj
+dDogUmU6IFtvZV0gW21ldGEtYnJvd3Nlcl0gQ2hyb21pdW0gbWlzc2luZyBERVBFTkRTDQoNCk9u
+IEZyaSwgTm92IDksIDIwMTggYXQgNDo1OSBBTSBHYXJyZW4sIENocmlzIEQuDQo8Y2RnYXJyZW5A
+aW5kZXNpZ24tbGxjLmNvbT4gd3JvdGU6DQo+DQo+IEknbSB3b3JraW5nIG9uIGJ1aWxkaW5nIGFu
+IGltYWdlIHdpdGggY2hyb21pdW0gZm9yIGEgVmFyaXNjaXRlIFZBUi1TT00tTVg2LVNPTE8uIEkg
+cHJldmlvdXNseSB3YXMgYWJsZSB0byBidWlsZCBhbiBpbWFnZSBmb3IgdGhlIERBUlQtNlVMIHN1
+Y2Nlc3NmdWxseSB3aXRoIGNocm9taXVtIGluY2x1ZGVkLiBXaGVuIEkgY2hhbmdlZCBtYWNoaW5l
+cywgSSBzdGFydGVkIGdldHRpbmcgYW4gZXJyb3IgZHVyaW5nIHRoZSBkb19jb25maWd1cmUgc3Rl
+cCBvZiBjaHJvbWl1bS14MTE6DQo+DQo+IEVSUk9SOiBjaHJvbWl1bS14MTEtNjkuMC4zNDk3LjEw
+MC1yMCBkb19jb25maWd1cmU6IEZ1bmN0aW9uIGZhaWxlZDogDQo+IGRvX2NvbmZpZ3VyZSAobG9n
+IGZpbGUgaXMgbG9jYXRlZCBhdCANCj4gL2hvbWUvY2RnYXJyZW4veW9jdG8vYnVpbGQvdG1wL3dv
+cmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnV4LQ0KPiBnbnVlYWJpL2Nocm9taXUN
+Cj4gbS14MTEvNjkuMC4zNDk3LjEwMC1yMC90ZW1wL2xvZy5kb19jb25maWd1cmUuNzk4MDkpDQo+
+IEVSUk9SOiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGluOiANCj4gL2hvbWUvY2RnYXJyZW4v
+eW9jdG8vYnVpbGQvdG1wL3dvcmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnV4LQ0K
+PiBnbnVlYWJpL2Nocm9taXVtLXgxMS82OS4wLjM0OTcuMTAwLXIwL3RlbXAvbG9nLmRvX2NvbmZp
+Z3VyZS43OTgwOQ0KPiBMb2cgZGF0YSBmb2xsb3dzOg0KPiB8IERFQlVHOiBFeGVjdXRpbmcgc2hl
+bGwgZnVuY3Rpb24gZG9fY29uZmlndXJlIEVSUk9SIGF0IA0KPiB8IC8vYnVpbGQvY29uZmlnL2xp
+bnV4L3BrZ19jb25maWcuZ25pOjEwMzoxNzogU2NyaXB0IHJldHVybmVkIG5vbi16ZXJvIGV4aXQg
+Y29kZS4NCj4gfCAgICAgcGtncmVzdWx0ID0gZXhlY19zY3JpcHQocGtnX2NvbmZpZ19zY3JpcHQs
+IGFyZ3MsICJ2YWx1ZSIpDQo+IHwgICAgICAgICAgICAgICAgIF4tLS0tLS0tLS0tDQo+IHwgQ3Vy
+cmVudCBkaXI6IA0KPiB8IC9ob21lL2NkZ2FycmVuL3lvY3RvL2J1aWxkL3RtcC93b3JrL2NvcnRl
+eGE5aGYtbmVvbi1teDZxZGwtcG9reS1saW51DQo+IHwgeC1nbnVlYWJpL2Nocm9taXVtLXgxMS82
+OS4wLjM0OTcuMTAwLXIwL2Nocm9taXVtLTY5LjAuMzQ5Ny4xMDAvb3V0L1INCj4gfCBlbGVhc2Uv
+DQo+IHwgQ29tbWFuZDogcHl0aG9uIA0KPiB8IC9ob21lL2NkZ2FycmVuL3lvY3RvL2J1aWxkL3Rt
+cC93b3JrL2NvcnRleGE5aGYtbmVvbi1teDZxZGwtcG9reS1saW51eC1nbnVlYWJpL2Nocm9taXVt
+LXgxMS82OS4wLjM0OTcuMTAwLXIwL2Nocm9taXVtLTY5LjAuMzQ5Ny4xMDAvYnVpbGQvY29uZmln
+L2xpbnV4L3BrZy1jb25maWcucHkgYXRrIGF0ay1icmlkZ2UtMi4wIFJldHVybmVkIDEuDQo+IHwg
+c3RkZXJyOg0KPiB8DQo+IHwgUGFja2FnZSBhdGstYnJpZGdlLTIuMCB3YXMgbm90IGZvdW5kIGlu
+IHRoZSBwa2ctY29uZmlnIHNlYXJjaCBwYXRoLg0KPiB8IFBlcmhhcHMgeW91IHNob3VsZCBhZGQg
+dGhlIGRpcmVjdG9yeSBjb250YWluaW5nIGBhdGstYnJpZGdlLTIuMC5wYycNCj4gfCB0byB0aGUg
+UEtHX0NPTkZJR19QQVRIIGVudmlyb25tZW50IHZhcmlhYmxlIE5vIHBhY2thZ2UgDQo+IHwgJ2F0
+ay1icmlkZ2UtMi4wJyBmb3VuZCBDb3VsZCBub3QgcnVuIHBrZy1jb25maWcuDQo+IHwNCj4gfCBT
+ZWUgLy9idWlsZC9jb25maWcvbGludXgvYXRrL0JVSUxELmduOjIwOjE6IHdoZW5jZSBpdCB3YXMg
+Y2FsbGVkLg0KPiB8IHBrZ19jb25maWcoImF0a19iYXNlIikgew0KPiB8IF4tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLQ0KPiB8IFNlZSAvL3VpL3ZpZXdzL0JVSUxELmduOjY4NjoyNDogd2hpY2ggY2F1
+c2VkIHRoZSBmaWxlIHRvIGJlIGluY2x1ZGVkLg0KPiB8ICAgICAgICAgICBjb25maWdzICs9IFsg
+Ii8vYnVpbGQvY29uZmlnL2xpbnV4L2F0ayIgXQ0KPiB8ICAgICAgICAgICAgICAgICAgICAgICAg
+Xi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gfCBXQVJOSU5HOiBleGl0IGNvZGUgMSBmcm9t
+IGEgc2hlbGwgY29tbWFuZC4NCj4gfCBFUlJPUjogRnVuY3Rpb24gZmFpbGVkOiBkb19jb25maWd1
+cmUgKGxvZyBmaWxlIGlzIGxvY2F0ZWQgYXQgDQo+IHwgL2hvbWUvY2RnYXJyZW4veW9jdG8vYnVp
+bGQvdG1wL3dvcmsvY29ydGV4YTloZi1uZW9uLW14NnFkbC1wb2t5LWxpbnUNCj4gfCB4LWdudWVh
+YmkvY2hyb21pdW0teDExLzY5LjAuMzQ5Ny4xMDAtcjAvdGVtcC9sb2cuZG9fY29uZmlndXJlLjc5
+ODA5KQ0KPiBFUlJPUjogVGFzayAoL2hvbWUvY2RnYXJyZW4veW9jdG8vc291cmNlcy9tZXRhLWJy
+b3dzZXIvcmVjaXBlcy1icm93c2VyL2Nocm9taXVtL2Nocm9taXVtLXgxMV82OS4wLjM0OTcuMTAw
+LmJiOmRvX2NvbmZpZ3VyZSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPg0KPiBBbnkgaWRl
+YXMgd2hhdCBtaWdodCBiZSBjYXVzaW5nIHRoaXM/DQo+DQoNCnRyeSBhZGRpbmcgIGF0LXNwaTIt
+YXRrIHRvIERFUEVORFMNCg0KDQo+IFRoYW5rcywNCj4NCj4gQ2hyaXMgR2FycmVuDQo+DQo+IC0t
+DQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IE9w
+ZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
 
