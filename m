@@ -1,25 +1,47 @@
-Return-Path: <psaavedra@igalia.com>
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id F34026C208
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+	[209.85.222.176])
+	by mail.openembedded.org (Postfix) with ESMTP id B6A806BD68
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Nov 2018 13:15:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=0Zeu3b8U6K+KrcI//TvEBdVQScx4UFV5VzEj8F/ziaw=; 
-	b=lAyWs/VMyVrUaaYZtFRdHyD38IeS7UggcI0lM3OAw7//YGwDRkYO95C6lMo+mtEaRPZI5pEBj8sLk+L44DhmGSGiHucDXzQOsYw7H4fZ0FNEfC+AWYkVYTHR28feURHMey5y7vuObunWvtkjM1W6/MQ3URStnJ1h/abnp1nIFZYb8lh2axiu0uWfPn8h5P/U92SklNxwTJBqkgeZen6VIoPmkehFhi8gChwGmJCrSNmOx1yK+n+VQ3pgF50jEag9WzTNqI2Qfdz/j56sKG1qj6j4sgk1fpHoYcobnOZj8Qis8xWXNeEcmJ/EmG/JRtBDikhGYoiQnVaa+VeV/PlOWw==;
-Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1gL6NM-0003YN-Hd
+	Fri,  9 Nov 2018 14:31:45 +0000 (UTC)
+Received: by mail-qk1-f176.google.com with SMTP id w204so1821117qka.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Nov 2018 13:59:04 +0100
-From: Pablo Saavedra <psaavedra@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Nov 2018 13:58:54 +0100
-Message-Id: <1fba7108a107251c7a300cd70decaebe642dbb5e.1541767729.git.psaavedra@igalia.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.1541767729.git.psaavedra@igalia.com>
-References: <cover.1541767729.git.psaavedra@igalia.com>
-Subject: [meta-openembedded][PATCH 2/6] ibus: add ibus recipe
+	Fri, 09 Nov 2018 06:31:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=OkPTjTCJGtknreymjN/S4xN1XUnfktTTn1Rq1msSQaU=;
+	b=XsmIwKHFQNZj/lmwF1MxoZO91tI158zN50N6d4HDxwN/1WsmR5XjDEl4yfAaHdjqgA
+	eeYj2RfhkjZpLHkAfVD/1gsmz33iSvZT5lD8bzeymt8h+yXhbc7/wP0oNReUA7vYmxMA
+	IIErsVT798T/Qj+NKcD23HolSKk5oMjB384YAuo6XKQJOkW8fHf0E9choSNeBr3lGGy0
+	2wog92WnQBYOSj3gyCz/vrqimpGr4tTlEk0bl9+UYYO1RwsLzo5NfZxww7Kb34jHmY57
+	0S2nGAEie6Y3CZ5h4t///Xph+7+jyyXyovV8Lq9tRnq9LRllPi2s8o2rASQ5fvwH7EkF
+	+DOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=OkPTjTCJGtknreymjN/S4xN1XUnfktTTn1Rq1msSQaU=;
+	b=HiAgovj3oJDvV2uTWyr/HFhXqBekYzV6OrL9zujG4GME6d5GuhRu9xgCpixinmHQfo
+	OPLrqvbYvjfL73BdWQWZjHZgflu6w/eLdGhROZ67l6gu7Q+LawiJer9P1FDis3ugFYZW
+	Zzad44J0/fIG0UbNrjPeJsQ4unEOAHQF0gRYEV3X2ANc8I0xNYHQ6OSGkoLJju5//3/Q
+	TJOpy2XnCdS0vqzn5Wt83n+1GdfJvs9+6HNNmpZO1+mKwFXcKIEl8UQOSeBAgWdvEQq6
+	FgivDDZ5iGF5DWOaj3XKWUuYWrdwkdk4S04s8t3udUWz4Stv9v7bnvGYfAZiV2qW6oI0
+	3MOQ==
+X-Gm-Message-State: AGRZ1gKEaBhDP9zwUnH3S4nRp4LLiK4afVNG3WbVqgVdGV866gsAOEWT
+	YpDgD331GROJ9IzLqJbmwEE8ovGIvLQn82jwo4Y=
+X-Google-Smtp-Source: AJdET5cCGpMioGfiAbZLTSIj7waGZpcoQYWZOsxM5UviEmy1atFVlMZ2qyvCGM7qstRR0h/MeGXcrt4cbBdWrXnrumc=
+X-Received: by 2002:a0c:98a1:: with SMTP id f30mr8756301qvd.224.1541773906306; 
+	Fri, 09 Nov 2018 06:31:46 -0800 (PST)
+MIME-Version: 1.0
+References: <af5d8ef579cd4b05978c66c78d17e82e@indesign-llc.com>
+In-Reply-To: <af5d8ef579cd4b05978c66c78d17e82e@indesign-llc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 9 Nov 2018 06:31:20 -0800
+Message-ID: <CAMKF1spZtLV-OvgdcMMZcx1b9m__68SO+aPtiynHC-mrBtD7JQ@mail.gmail.com>
+To: cdgarren@indesign-llc.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Chromium missing DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,120 +54,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Nov 2018 13:15:30 -0000
+X-List-Received-Date: Fri, 09 Nov 2018 14:31:45 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Intelligent Input Bus for Linux/Unix https://github.com/ibus/ibus/wiki
+On Fri, Nov 9, 2018 at 4:59 AM Garren, Chris D.
+<cdgarren@indesign-llc.com> wrote:
+>
+> I'm working on building an image with chromium for a Variscite VAR-SOM-MX=
+6-SOLO. I previously was able to build an image for the DART-6UL successful=
+ly with chromium included. When I changed machines, I started getting an er=
+ror during the do_configure step of chromium-x11:
+>
+> ERROR: chromium-x11-69.0.3497.100-r0 do_configure: Function failed: do_co=
+nfigure (log file is located at /home/cdgarren/yocto/build/tmp/work/cortexa=
+9hf-neon-mx6qdl-poky-linux-gnueabi/chromiu
+> m-x11/69.0.3497.100-r0/temp/log.do_configure.79809)
+> ERROR: Logfile of failure stored in: /home/cdgarren/yocto/build/tmp/work/=
+cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/tem=
+p/log.do_configure.79809
+> Log data follows:
+> | DEBUG: Executing shell function do_configure
+> | ERROR at //build/config/linux/pkg_config.gni:103:17: Script returned no=
+n-zero exit code.
+> |     pkgresult =3D exec_script(pkg_config_script, args, "value")
+> |                 ^----------
+> | Current dir: /home/cdgarren/yocto/build/tmp/work/cortexa9hf-neon-mx6qdl=
+-poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/chromium-69.0.3497.100/ou=
+t/Release/
+> | Command: python /home/cdgarren/yocto/build/tmp/work/cortexa9hf-neon-mx6=
+qdl-poky-linux-gnueabi/chromium-x11/69.0.3497.100-r0/chromium-69.0.3497.100=
+/build/config/linux/pkg-config.py atk atk-bridge-2.0
+> | Returned 1.
+> | stderr:
+> |
+> | Package atk-bridge-2.0 was not found in the pkg-config search path.
+> | Perhaps you should add the directory containing `atk-bridge-2.0.pc'
+> | to the PKG_CONFIG_PATH environment variable
+> | No package 'atk-bridge-2.0' found
+> | Could not run pkg-config.
+> |
+> | See //build/config/linux/atk/BUILD.gn:20:1: whence it was called.
+> | pkg_config("atk_base") {
+> | ^-----------------------
+> | See //ui/views/BUILD.gn:686:24: which caused the file to be included.
+> |           configs +=3D [ "//build/config/linux/atk" ]
+> |                        ^-------------------------
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_configure (log file is located at /home/cdga=
+rren/yocto/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/chromiu=
+m-x11/69.0.3497.100-r0/temp/log.do_configure.79809)
+> ERROR: Task (/home/cdgarren/yocto/sources/meta-browser/recipes-browser/ch=
+romium/chromium-x11_69.0.3497.100.bb:do_configure) failed with exit code '1=
+'
+>
+> Any ideas what might be causing this?
+>
 
-Collision with: https://patchwork.openembedded.org/patch/155947/
----
- meta-oe/recipes-support/ibus/ibus_1.5.19.bb | 97 +++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+try adding  at-spi2-atk to DEPENDS
 
-diff --git a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
-new file mode 100644
-index 000000000..598629344
---- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
-@@ -0,0 +1,97 @@
-+DESCRIPTION = "A multilingual user input method library"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+SECTION = "inputmethods"
-+
-+SRC_URI = "https://github.com/ibus/ibus/releases/download/${PV}/${PN}-${PV}.tar.gz \
-+          "
-+SRC_URI[md5sum] = "a2be6f200dd9ada2501474a6877a73ef"
-+SRC_URI[sha256sum] = "4b66c798dab093f0fa738e5c10688d395a463287d13678c208a81051af5d2429"
-+
-+inherit autotools pkgconfig gettext gtk-immodules-cache gobject-introspection gtk-doc gtk-icon-cache gsettings
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf libnotify python-pygobject python3-pygobject adwaita-icon-theme librsvg"
-+DEPENDS_append_class-target = " intltool-native python3-pygobject-native"
-+RDEPENDS_${PN} += " iso-codes adwaita-icon-theme librsvg-gtk"
-+
-+PACKAGECONFIG[gtk+] = ",--disable-gtk2,gtk+,gtk+"
-+PACKAGECONFIG[gtk+3] = ",--disable-gtk3,gtk+3,gtk+3"
-+PACKAGECONFIG[wayland] = "--enable-wayland,,wayland,wayland"
-+
-+PACKAGECONFIG ?= "gtk+ gtk+3"
-+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
-+
-+GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+', 'ibus-gtk2.0', '', d)}"
-+GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+3', 'ibus-gtk3', '', d)}"
-+
-+EXTRA_OECONF += " \
-+    --disable-emoji-dict \
-+    --disable-unicode-dict \
-+"
-+
-+BBCLASSEXTEND = "native pythonnative"
-+
-+FILES_${PN} += " \
-+    ${sysconfdir}/dconf/profile \
-+    ${sysconfdir}/dconf/db/ibus.d/00-upstream-settings \
-+    ${sysconfdir}/dconf/profile/ibus \
-+    ${libdir}/libibus-1.0.so.5.0.518 \
-+    ${libdir}/libibus-1.0.so.5 \
-+    ${libdir}/gtk-?.?/*/immodules/im-ibus.so \
-+    ${bindir}/ibus \
-+    ${bindir}/ibus-setup \
-+    ${bindir}/ibus-daemon \
-+    ${datadir}/ibus/engine \
-+    ${datadir}/ibus/component \
-+    ${datadir}/ibus/setup \
-+    ${datadir}/ibus/component/gtkpanel.xml \
-+    ${datadir}/ibus/component/simple.xml \
-+    ${datadir}/ibus/component/dconf.xml \
-+    ${datadir}/ibus/setup/emojilang.py \
-+    ${datadir}/ibus/setup/main.py \
-+    ${datadir}/ibus/setup/enginecombobox.py \
-+    ${datadir}/ibus/setup/setup.ui \
-+    ${datadir}/ibus/setup/enginedialog.py \
-+    ${datadir}/ibus/setup/i18n.py \
-+    ${datadir}/ibus/setup/engineabout.py \
-+    ${datadir}/ibus/setup/icon.py \
-+    ${datadir}/ibus/setup/keyboardshortcut.py \
-+    ${datadir}/ibus/setup/enginetreeview.py \
-+    ${datadir}/ibus/keymaps/jp \
-+    ${datadir}/ibus/keymaps/kr \
-+    ${datadir}/ibus/keymaps/common \
-+    ${datadir}/ibus/keymaps/modifiers \
-+    ${datadir}/ibus/keymaps/us \
-+    ${datadir}/ibus/keymaps/in \
-+    ${datadir}/applications/ibus-setup.desktop \
-+    ${datadir}/dbus-1/services/org.freedesktop.IBus.service \
-+    ${datadir}/dbus-1/services/org.freedesktop.portal.IBus.service \
-+    ${datadir}/vala/vapi/ibus-1.0.vapi \
-+    ${datadir}/vala/vapi/ibus-1.0.deps \
-+    ${libexecdir}/ibus-engine-simple \
-+    ${libexecdir}/ibus-portal \
-+    ${libexecdir}/ibus-dconf \
-+    ${libexecdir}/ibus-x11 \
-+    ${libexecdir}/ibus-ui-gtk3 \
-+    ${datadir}/GConf/gsettings/ibus.convert \
-+    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.gschema.xml \
-+    ${datadir}/bash-completion/* \
-+    ${datadir}/icons/* \
-+    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py \
-+    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py? \
-+"
-+
-+do_configure_prepend() {
-+    export PYTHON=python3
-+}
-+
-+do_install_append() {
-+  # Fix the installation path of the GObject Inspection overrides for Python3
-+  python_version=$(python3 -c 'import sys; print("%s.%s" % (sys.version_info.major, sys.version_info.minor))')
-+  mkdir -p ${D}/usr/lib/python${python_version}/site-packages/gi/overrides
-+  mv ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-packages/gi/overrides/IBus.py ${D}/usr/lib/python${python_version}/site-packages/gi/overrides/
-+  rm -rf ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-packages/gi/overrides
-+  find ${D} -type d -empty -delete
-+}
--- 
-2.11.0
 
+> Thanks,
+>
+> Chris Garren
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
