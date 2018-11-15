@@ -1,44 +1,47 @@
-Return-Path: <theknoppix@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AA476C184
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 84F156C193
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2018 04:53:06 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id 124-v6so17576132wmw.0
+	Thu, 15 Nov 2018 05:25:45 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id 189so30046004qkj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Nov 2018 20:53:07 -0800 (PST)
+	Wed, 14 Nov 2018 21:25:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=KoN6ahaugh6PwF90O1XctlJbEpCLi71NlGh9vYWFBu0=;
-	b=Q6/yBLFMnSMQdCCqoJr19YWUUj5wuvy7qSNuUpr5Z3jRcnRoB8RzDXq3mdcEVY75Fl
-	KlZIPCSq93QtilrZIFUvCzIaNtpRLUzXg37PnV9HjEf6bznwT+eI7qn0480LHTUiuqM+
-	c1nHuawBIo/xdccKKkPdR0bNtnuSXdnhX2Z1A45MgNmemdKfphVBlm80paMtgu30Edj1
-	yBO5GkYr9mEVy87EM2KbC0MOym69QAJs2dtttdshEVyMPIaAYCwPmLKHX/GH7xYqOyZ5
-	8Bys4MlO5izu4Cidry2nX6Ls9VAqqfMcNZiDh4qLWB/GiL26ZoKgxT4lU01WkuMIRuP2
-	sFsg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Gqaf+dvCbxIxrtQWTpKoP5OF7/ZSHvzKcAkUHTe5lUI=;
+	b=Tzd8gKE369mYzTc0uUBlAWz4cfG8k3qIer+TgW17y2NtB6R+OyQMyQY4/fiquicmww
+	s8V/M1eU3obnTA/25VpbeV0601UdE4+B/MIaFIjMz9WMl36rr64o8bebGLhQAJm/lWBS
+	aRxijUCis9rbczI6GleDTvspxufpUbEz8gR3I1cfgiSIv6qAmXX2fbWc/e4vW8A+hcb7
+	dNU66YmfA66ulvPbrLK/d/z/Dk4GtzGgpHzTeU9bA5vSR2RgjcBfwUzh7MGmbUa9k5SE
+	v59PzZLDMxhVAR5ikNZGBh2wn7pGtXFoIcXNfbUtPWTckCF4u5Usq7w2Gj2DtLTtBWXo
+	BjUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=KoN6ahaugh6PwF90O1XctlJbEpCLi71NlGh9vYWFBu0=;
-	b=SH2EtOwVPcSW25yWAVbqrp91lo7RdX+B/tmEa4aLshSN/V6gsxid6LUWhrNgvSIoQY
-	4c7X3zggtBzz3uEjnpzxWo5yr3giJODGX5gf4/qkxHtLBkEA2ugnvbsEkntUqvpqaNDh
-	ifjf8sfws0tV9+n8gGpBLmvmQPJSLJ6yiFUL1wMkpVAL0Nygy+v+AGIdRjNN681KMDRk
-	mlvtGNIZkWXcgGHsYv/tdCLQYitaJ4UgyxCTEtkPiERkOa5dzV8jiYYhvVH6bHtI2v9f
-	Dy2K+Kak+Uf2Gzc1+uIRSbQoGIb9cAFyxFrrymRZNhUDp5OwV8Ra5gbiE2vaT0Ng3+d9
-	2AhQ==
-X-Gm-Message-State: AGRZ1gJRMo/YITLFz8MxUI8C4RpjRw0G60RoWN9a9Xmdo/+AzyH317cE
-	o8nYRjjMA5e9yedrJtuVPVXeFl9VCtFOH1hcqlMF1CMa
-X-Google-Smtp-Source: AJdET5csvrnczwbzs5VrglYZt9RoFoxq8W85yXZpPJG/sRHpeO//lqGnLqnXGa8DyY3d6LVzzLextJ0dVqdJPA+jyUo=
-X-Received: by 2002:a1c:9c85:: with SMTP id
-	f127-v6mr3800029wme.73.1542257586827; 
-	Wed, 14 Nov 2018 20:53:06 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Gqaf+dvCbxIxrtQWTpKoP5OF7/ZSHvzKcAkUHTe5lUI=;
+	b=kAdtkTAmmGNRGfG6QSyrhLZRcQEtXzpIh3LnqkLcJo5yDSN/slMRpYO3OJZEcUUjqV
+	EIyQPFHyaqQxoeUA4B1ZSv6dGQ4O46SGf7/l2XfzSKh0o8RxHdE/SpV4/ZrYvzfx4dKo
+	K9sUN/gLUb3IFYdKtgFdVxs2lIFL6kPdOvVkE7xt5wNN3HtgQP5PJIB8bILtZd6aahsV
+	P3Eeg/vuC7t/PaOchoTRtyu2itBDT6npcKcqmPp2oE0MopsDMnJIZerhCNdDEPQ339Bh
+	VUt8X0yxS8SpT5tml668mToI/4D2S6KajvJFQdLztzS0CjpBm7KmXGZMYj+365FvQB+E
+	jLfw==
+X-Gm-Message-State: AGRZ1gKNO68N0fu5vC3hFWspX8ffN1+VwdUnik0aDmlgq6BarVWbQsZ2
+	mv87svZLxy0Ia63NkfuHp2zFloTTRJk1guHxiu8=
+X-Google-Smtp-Source: AJdET5dPh7U9tTd21+1LDRDLj/jzB3bG0d6wJYgDvudURBsQ4WHiNIYLtfYNOOoM78HdPtM6mdXQXrl9oCOpL4rYfcw=
+X-Received: by 2002:a37:4c41:: with SMTP id z62mr4685277qka.206.1542259546122; 
+	Wed, 14 Nov 2018 21:25:46 -0800 (PST)
 MIME-Version: 1.0
-From: Knoppix <theknoppix@gmail.com>
-Date: Thu, 15 Nov 2018 07:52:55 +0300
-Message-ID: <CAD9sEJujbJNS4Kw6eMgFk+z6HAXgnLq2a21enUuDDTkwNSy0yg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: multiarch for spesific recipe/task/bootefi
+References: <1541662837-29069-1-git-send-email-primoz.fiser@norik.com>
+	<aa286fd0-cc9f-6e8c-6d92-34ca8f4bd723@gmail.com>
+In-Reply-To: <aa286fd0-cc9f-6e8c-6d92-34ca8f4bd723@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 14 Nov 2018 21:25:20 -0800
+Message-ID: <CAMKF1sraOfemdMx0+AtVz-NUfrUBhRfB=46Rz5S5OmnMPOkc1w@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] sedutil: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,35 +54,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2018 04:53:06 -0000
+X-List-Received-Date: Thu, 15 Nov 2018 05:25:46 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-yocto: 2.5.1/sumo
-kernel=3Dlinux-yocto-4.15.18
-machine=3Dintel-corei7-64
-distro=3Dpoky
-image=3Dcore-image-x11
+On Sun, Nov 11, 2018 at 2:51 PM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 11/7/18 11:40 PM, Primoz Fiser wrote:
+> > sedutil is utility to manage self encrypting drives that conform
+> > to the Trusted Computing Group OPAL 2.0 SSC specification.
+> >
+> > Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+> > ---
+> >  meta-oe/recipes-extended/sedutil/sedutil_git.bb | 17 +++++++++++++++++
+> >  1 file changed, 17 insertions(+)
+> >  create mode 100644 meta-oe/recipes-extended/sedutil/sedutil_git.bb
+>
+> this seems security related. can we put it under recipes-security ?
 
-I Searched this question on google, stackoverflow but I did not find.
+When you move it please also look at the errors when building for big
+endian platforms like mips
+see errors here
 
-The machine which I want to install image, doesn=E2=80=99t allow bootx64 bu=
-t it
-works when I install x32 efi.
-I checked this (I copied first bootia32.efi and then bootx64.efi) and as I
-understand my machine has x64 arch but only support x32-efi.
+http://errors.yoctoproject.org/Errors/Details/200823/
 
-So how is it possible to build an image which is intel-corei7-64 but has
-EFI 32 bit?
-Would you advice me please to *what should I read to accomplish and learn *
-this?
-
-(Excuse me for my english, I am not native. And I hope, sent this mail to
-correct mail-list.)
-
-*".. The vast majority of EFI-based x86-64 computers use 64-bit EFIs and
-therefore use a bootx64.efi default boot loader file. A handful of early
-Macs and some Atom-based tablets have 64-bit CPUs but 32-bit EFIs ..."
-http://www.rodsbooks.com/efi-bootloaders/principles.html
-<http://www.rodsbooks.com/efi-bootloaders/principles.html>*
+>
+> - armin
+>
+> >
+> > diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+> > new file mode 100644
+> > index 0000000..cec569f
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+> > @@ -0,0 +1,17 @@
+> > +DESCRIPTION = "A utility to manage self encrypting drives that conform \
+> > +to the Trusted Computing Group OPAL 2.0 SSC specification."
+> > +SUMMARY = "The Drive Trust Alliance Self Encrypting Drive Utility"
+> > +HOMEPAGE = "https://github.com/Drive-Trust-Alliance/sedutil"
+> > +SECTION = "console/utils"
+> > +LICENSE = "GPLv3"
+> > +
+> > +LIC_FILES_CHKSUM = "file://Common/LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+> > +
+> > +BASEPV = "1.15.1"
+> > +PV = "${BASEPV}+git${SRCPV}"
+> > +SRCREV = "358cc758948be788284d5faba46ccf4cc1813796"
+> > +SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +inherit autotools-brokensep
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
