@@ -1,25 +1,43 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DC16D6C1DA
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com
+	[209.85.167.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 7081E6C187
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2018 09:33:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAF9XHHO021360
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 15 Nov 2018 01:33:27 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Thu, 15 Nov 2018 01:33:06 -0800
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Nov 2018 01:32:58 -0800
-Message-ID: <20181115093258.1101-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20181115093258.1101-1-mingli.yu@windriver.com>
-References: <20181115093258.1101-1-mingli.yu@windriver.com>
+	Thu, 15 Nov 2018 13:18:50 +0000 (UTC)
+Received: by mail-oi1-f182.google.com with SMTP id c206so11148984oib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Nov 2018 05:18:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=8upWKmODYhJ9+Bgn0iMC/+gHfQsZGesYYpfk3mWWiY4=;
+	b=hhiatBAJFR4SmQo5sQRr/nn6ERgnT6eH+S/eDwzjxo0phrw9FyFbdnnsuXKZY2Yfb4
+	8ZfgpY2G8QHyb0QK5PduSKtG3C/wdG27pWBAwRD/yRnmC1mWaBKzNrGW1HLxEuBu4otL
+	ojUYm1SCFJjf/WGT5GdBVUtbmKzT8SI4OXkuDi13C2gPwbAD19o/zxzvVyQOImsp7byP
+	5+HEXv5UD0GTyYrNt9LEJgZfyfFeTKD+tpMVO9zfIFxSBzG+jPTQ6gFmpjcTl4J2Q8ne
+	JSKdlQN9qBj2CCGXNXzsoCPDc9F62h8QZHNd2PNkmb5bfPsjMaWXS7pkoSkb8+XUPKiL
+	w2EA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=8upWKmODYhJ9+Bgn0iMC/+gHfQsZGesYYpfk3mWWiY4=;
+	b=L6LjwztRBW1Xa9NB9AA7WDG+cFBh5yMXNtwtrlBqJPzu/oKpM+Gk+ioL1Tq1M0mu1I
+	BTns/e4blqiL38Zn1I/+zLQOPYik+/XthY8AysVibFOGz0fVU9aOaUJTbiH8dkUEQUVz
+	jITTnHPKlH1HyfuffrZg592/5yxgy/SGyOps79xoUP/qJx7Nz/cdtQ5ALZeJFDpPn8oT
+	KcaevtmWTDstl9yJoVeQjKBv+CIxATgCxN1jjzzzSWQrI6trLIyTLrX2QBmYAXoAxQ0x
+	Ty9Plj0X7f6w+8StK2wA3/735Q8frCdGxus1mBlsE5F16SXf0+9q5y4003gm2n3BFY0c
+	er0w==
+X-Gm-Message-State: AGRZ1gL6cSaJ7tChatvp4hm9pkGb0ZlTYZqv+mCquGAs7FhAyfu8ya1t
+	2jF6GNg8Kp3q7CMMIGcwgeBEBUTw5xMQ+P2ZRSLysQIc
+X-Google-Smtp-Source: AJdET5eeoyxn2mh1R5JP0l5JeetF0MumhY6jTOnT4Y1IrOK+3B6ejyXpLrb42uxMxisG1RHWpX2RzE88MyF8IxQeNaE=
+X-Received: by 2002:aca:5842:: with SMTP id
+	m63-v6mr3756343oib.162.1542287931025; 
+	Thu, 15 Nov 2018 05:18:51 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] log4cplus: Upgrade to 2.0.2
+From: nick83ola <nick83ola@gmail.com>
+Date: Thu, 15 Nov 2018 13:18:39 +0000
+Message-ID: <CABPh3UOf31aGZHypgUFtokwjY9iBY3jrw7Mdv2H5bh_ttaJ6DA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-java][bug] java-library inherit allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2018 09:33:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 15 Nov 2018 13:18:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi all,
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../log4cplus/{log4cplus_2.0.1.bb => log4cplus_2.0.2.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/log4cplus/{log4cplus_2.0.1.bb => log4cplus_2.0.2.bb} (81%)
+got some issue compiling the rxtx package in meta java.
 
-diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.1.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb
-similarity index 81%
-rename from meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.1.bb
-rename to meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb
-index aef5978bd..d17d15c92 100644
---- a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.1.bb
-+++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb
-@@ -7,8 +7,8 @@ LICENSE = "Apache-2.0 & BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=41e8e060c26822886b592ab4765c756b"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz"
--SRC_URI[md5sum] = "2b4054b2d66c0ef0e4091df26ce8aad4"
--SRC_URI[sha256sum] = "772b268142e1c02dd346880fff06f38f693e9458d6390ce0b493395d0ca01714"
-+SRC_URI[md5sum] = "b3bbeb2dc3e170768430cf87583016f8"
-+SRC_URI[sha256sum] = "10539f2315271d370c7bc6a2b4808cbe369279837f4539ce5c789e456489fc62"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/"
- UPSTREAM_CHECK_REGEX = "log4cplus-stable/(?P<pver>\d+(\.\d+)+)/"
--- 
-2.17.1
+In particular regarding this patch
 
+https://patchwork.openembedded.org/patch/89023/
+
+this approach is still valid (inherit allarch in java-library class)?
+
+Regards
+Nicola Lunghi
+
+=======================================================
+
+[meta-java,v2,4/6] java-library: inherit allarch
+
+Use the allarch class to make every packages in the 'all' ARCH.
+Recipes inheriting java-library which build additional packages which
+don't belong in to all ARCH must manually setting PACKAGE_ARCH after
+inheritting java-library.
+
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index a74c8d3..144cd2f 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -7,8 +7,12 @@
+ # starts with "lib" and/or ends with "-java". In case the "lib"
+prefix is part of
+ # your package's normal name (e.g. liberator) the guessing is wrong
+and you have
+ # to set JPN manually!
++#
++# package archs are set to all, if the recipe builds also packages which
++# can not be used for all archs, then set the PACKAGE_ARCH of that package
++# manually, see rxtx_xx.bb for an example.
+
+-inherit java
++inherit java allarch
+
+.......
+
+ inherit java-library
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
 
