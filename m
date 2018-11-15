@@ -1,28 +1,44 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 507F86C178
+Return-Path: <theknoppix@gmail.com>
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+	[209.85.128.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AA476C184
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Nov 2018 17:04:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id wAEH4Bp3023054
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 14 Nov 2018 09:04:12 -0800 (PST)
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Wed, 14 Nov 2018 09:04:10 -0800
-To: akuster808 <akuster808@gmail.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <8ff23977-e4c4-e84a-4e88-e26a1de272f9@windriver.com>
-	<0e1002c7-bc0b-6d50-246f-4aeb90c4871a@gmail.com>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <e1dafe9c-5a3e-0e2b-c6e5-0f02b78405a8@windriver.com>
-Date: Wed, 14 Nov 2018 12:03:57 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Thu, 15 Nov 2018 04:53:06 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id 124-v6so17576132wmw.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Nov 2018 20:53:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=KoN6ahaugh6PwF90O1XctlJbEpCLi71NlGh9vYWFBu0=;
+	b=Q6/yBLFMnSMQdCCqoJr19YWUUj5wuvy7qSNuUpr5Z3jRcnRoB8RzDXq3mdcEVY75Fl
+	KlZIPCSq93QtilrZIFUvCzIaNtpRLUzXg37PnV9HjEf6bznwT+eI7qn0480LHTUiuqM+
+	c1nHuawBIo/xdccKKkPdR0bNtnuSXdnhX2Z1A45MgNmemdKfphVBlm80paMtgu30Edj1
+	yBO5GkYr9mEVy87EM2KbC0MOym69QAJs2dtttdshEVyMPIaAYCwPmLKHX/GH7xYqOyZ5
+	8Bys4MlO5izu4Cidry2nX6Ls9VAqqfMcNZiDh4qLWB/GiL26ZoKgxT4lU01WkuMIRuP2
+	sFsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=KoN6ahaugh6PwF90O1XctlJbEpCLi71NlGh9vYWFBu0=;
+	b=SH2EtOwVPcSW25yWAVbqrp91lo7RdX+B/tmEa4aLshSN/V6gsxid6LUWhrNgvSIoQY
+	4c7X3zggtBzz3uEjnpzxWo5yr3giJODGX5gf4/qkxHtLBkEA2ugnvbsEkntUqvpqaNDh
+	ifjf8sfws0tV9+n8gGpBLmvmQPJSLJ6yiFUL1wMkpVAL0Nygy+v+AGIdRjNN681KMDRk
+	mlvtGNIZkWXcgGHsYv/tdCLQYitaJ4UgyxCTEtkPiERkOa5dzV8jiYYhvVH6bHtI2v9f
+	Dy2K+Kak+Uf2Gzc1+uIRSbQoGIb9cAFyxFrrymRZNhUDp5OwV8Ra5gbiE2vaT0Ng3+d9
+	2AhQ==
+X-Gm-Message-State: AGRZ1gJRMo/YITLFz8MxUI8C4RpjRw0G60RoWN9a9Xmdo/+AzyH317cE
+	o8nYRjjMA5e9yedrJtuVPVXeFl9VCtFOH1hcqlMF1CMa
+X-Google-Smtp-Source: AJdET5csvrnczwbzs5VrglYZt9RoFoxq8W85yXZpPJG/sRHpeO//lqGnLqnXGa8DyY3d6LVzzLextJ0dVqdJPA+jyUo=
+X-Received: by 2002:a1c:9c85:: with SMTP id
+	f127-v6mr3800029wme.73.1542257586827; 
+	Wed, 14 Nov 2018 20:53:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <0e1002c7-bc0b-6d50-246f-4aeb90c4871a@gmail.com>
-X-Originating-IP: [172.25.44.4]
-Subject: Re: thud: 19 cherry-picks from master
+From: Knoppix <theknoppix@gmail.com>
+Date: Thu, 15 Nov 2018 07:52:55 +0300
+Message-ID: <CAD9sEJujbJNS4Kw6eMgFk+z6HAXgnLq2a21enUuDDTkwNSy0yg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: multiarch for spesific recipe/task/bootefi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,153 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2018 17:04:21 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 15 Nov 2018 04:53:06 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 11/14/18 11:48 AM, akuster808 wrote:
-> Randy,
-> 
-> On 11/13/18 5:30 PM, Randy MacLeod wrote:
->> Armin,
->>
->> Please consider each of the following commits to be
->> cherry-picked back to thud. I believe that they are all
->> defect fixes except in one or two case as noted.
->>
-> Thanks for this list.
-> 
-> Khem talked to me about Thud last week and we decided to sync master to
-> Thud. 
+yocto: 2.5.1/sumo
+kernel=3Dlinux-yocto-4.15.18
+machine=3Dintel-corei7-64
+distro=3Dpoky
+image=3Dcore-image-x11
 
-Super.
+I Searched this question on google, stackoverflow but I did not find.
 
-> We did not say which one of us was doing that so I will start this
-> work shortly.
+The machine which I want to install image, doesn=E2=80=99t allow bootx64 bu=
+t it
+works when I install x32 efi.
+I checked this (I copied first bootia32.efi and then bootx64.efi) and as I
+understand my machine has x64 arch but only support x32-efi.
 
-Thanks Armin.
-../Randy
+So how is it possible to build an image which is intel-corei7-64 but has
+EFI 32 bit?
+Would you advice me please to *what should I read to accomplish and learn *
+this?
 
-> 
-> kind regards,
-> 
-> Armin
-> 
->> 3cb226393 uftrace: Support x86 <-- optional I suppose.
->>
->> 4d53ab222 netcat-openbsd: update SRC_URI
->> 32e5f3506 netkit-telnet: update SRC_URI
->> 5cf604e13 vlan: update SRC_URI
->> 57bcd4df9 lvm2: update SRC_URI
->> 2aa70599d geoip: update md5sum and sha256sum
->>
->> 17a4e8269 uriparser: Allow native build <-- optional but easy
->>
->> bcbbace22 netkit-telnet: fix qa warnings of alternative target
->>
->> e9e214875 apache2: Fix CVE-2018-11763
->>
->> 40a43f59d network-manager-applet: change default buildclass
->>
->> e15f5c08a pcsc-lite: fix SRC_URI
->> 15141ab55 lvm2.inc: Correct the license (LGPL-2.0 -> LGPL-2.1)
->>
->>
->> 030c3ce91 network-manager-applet: move GNOMEBASEBUILDCLASS to
->>            correct position
->> d77cac3c5 vim-tiny: remove alternative for xxd
->> 3be07aff4 modemmanager: set udev base dir to ${nonarch_base_libdir}/udev
->>
->> 6646362e7 python-configparser.inc: Fix SUMMARY
->>
->> aea60d4cc curlpp: Fix packaging and reference to license
->>
->> 0e0104d62 libunique: fix installed-vs-shipped qa issue
->> 993da5d96 hwloc: Update the SRC_URI
->>
->>
->>
->> I've selected the fixes from the list below.
->> I looked at each commit but I haven't done any build testing yet.
->> I can do that tomorrow if you like but it seems that they are working
->> now and cherry-picked over without a problem so they should all
->> build fine.
->>
->>
->> You can get the full series cherry-picked to thud with:
->> $ for i in \
->> 3cb226393 4d53ab222 32e5f3506 5cf604e13 57bcd4df9 \
->> 2aa70599d 17a4e8269 bcbbace22 e9e214875 40a43f59d \
->> e15f5c08a 15141ab55 030c3ce91 d77cac3c5 3be07aff4 \
->> 6646362e7 aea60d4cc 0e0104d62 993da5d96; \
->> do \
->>    echo $i; \
->>    git cherry-pick $i; \
->> done
->>
->> ../Randy
->>
->>
->> $ git log --oneline  master  ^thud
->> 3d0c2d028 stress-ng: Upgrade from 0.09.37 to 0.09.45
->> 016b243f1 libgpiod: bump version to v1.2
->> 993da5d96 hwloc: Update the SRC_URI
->> 0e0104d62 libunique: fix installed-vs-shipped qa issue
->> 97f56b745 sedutil: Add recipe
->> aea60d4cc curlpp: Fix packaging and reference to license
->> b534159b1 tk: extend to nativesdk
->> 8a8808315 networkmanager: Fix build with musl
->> 317412bd1 Adding support for xscreensaver-5.39
->> b40cc1890 meta-xfce: xfconf: fixup installed-vs-shipped QA issue
->> 6646362e7 python-configparser.inc: Fix SUMMARY
->> 030c3ce91 network-manager-applet: move GNOMEBASEBUILDCLASS to
->>            correct position
->> d77cac3c5 vim-tiny: remove alternative for xxd
->> 3be07aff4 modemmanager: set udev base dir to ${nonarch_base_libdir}/udev
->> cabdfa287 cpprest: upgrade to version 2.10.7 and add support for
->>            brotli library
->> 80d37c453 brotli: add initial recipe, based on meta-webkit layer
->> c90572b2f glog: updated libunwind look up function
->> 15141ab55 lvm2.inc: Correct the license (LGPL-2.0 -> LGPL-2.1)
->> e15f5c08a pcsc-lite: fix SRC_URI
->> 40a43f59d network-manager-applet: change default buildclass
->> 7163946b5 rapidjson: Allow empty package
->> 60f3d467d mariadb: Upgrade to 5.5.62
->> 334d73dc7 v4l-utils: update to 1.16.0
->> fd23b9c95 dbus-broker: fetch submodules too
->> 4be3dce46 networkmanager: upgrade 1.10.10 -> 1.14.4
->> 1627aa060 xfce4-settings: upgrade 4.12.3 -> 4.12.4
->> e9e214875 apache2: Fix CVE-2018-11763
->> 5f94a97b0 adduser: 3.117 -> 3.118
->> 57d261cad lcov: Fix perl module dependencies
->> 6570a8d56 libio-socket-ssl-perl: 2.059 -> 2.060
->> fae12cab3 gvfs: 1.36.2 -> 1.39.1
->> 31d701261 libwnck3: 3.24.1 -> 3.30.0
->> f27c15d94 thunar: 1.8.1 -> 1.8.2
->> c1bc28f18 xfce4-notifyd: 0.4.2 -> 0.4.3
->> 76bfed565 xfce4-clipman-plugin: 1.4.2 -> 1.4.3
->> 4222cac97 xfconf: 4.13.5 -> 4.13.6
->> bcbbace22 netkit-telnet: fix qa warnings of alternative target
->> 8d7a7ad33 libyui-ncurses: fix ncurses find module
->> 2417acf4f libyui: make resulting cmake config relocatable
->> b5dd6804f civetweb: disable tests
->> a21e2ae87 civetweb: remove redundant EXTRA_OECMAKE_class-native
->> 12c394588 python-twisted: Add more python-twisted-* packages
->>            to the "meta" package
->> 2731f210c python-pyiface: Upgrade to 0.0.11
->> 17a4e8269 uriparser: Allow native build
->> 4d53ab222 netcat-openbsd: update SRC_URI
->> 32e5f3506 netkit-telnet: update SRC_URI
->> 5cf604e13 vlan: update SRC_URI
->> 57bcd4df9 lvm2: update SRC_URI
->> 2aa70599d geoip: update md5sum and sha256sum
->> 3cb226393 uftrace: Support x86
->>
-> 
+(Excuse me for my english, I am not native. And I hope, sent this mail to
+correct mail-list.)
 
-
--- 
-# Randy MacLeod
-# Wind River Linux
+*".. The vast majority of EFI-based x86-64 computers use 64-bit EFIs and
+therefore use a bootx64.efi default boot loader file. A handful of early
+Macs and some Atom-based tablets have 64-bit CPUs but 32-bit EFIs ..."
+http://www.rodsbooks.com/efi-bootloaders/principles.html
+<http://www.rodsbooks.com/efi-bootloaders/principles.html>*
 
