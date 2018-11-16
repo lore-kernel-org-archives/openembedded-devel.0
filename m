@@ -1,23 +1,50 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A4DFA600B3
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AA1C6C459
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2018 09:32:56 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAG9WK8A032566
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 16 Nov 2018 01:32:30 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Fri, 16 Nov 2018 01:32:09 -0800
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Nov 2018 01:32:09 -0800
-Message-ID: <20181116093209.123185-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fio: Upgrade to 3.12
+	Fri, 16 Nov 2018 18:51:30 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id w7so10958601pgp.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Nov 2018 10:51:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=ZdZyhJwk77bcij6rd3l040+LWedXeR0RJao3zb94yUA=;
+	b=OTty6d6sQei1gPnQHHjd8vOc4mk7hp7vaMwStHJspCnWIa9Q7HNwKCM/ZvOjv50ss0
+	rqOLI2BN0eRbVuQMt767L495T3ZDjQ7xazSU1+RS8uJ13txcUAh8HZu25j66wBa2NuPs
+	/OaBHtasDALIJpz5SrDqPtRVHBgyYXlPlThpNFpZ5BoM3g/8n+wYacuDWZqz9RxYNkYR
+	sEaAFK4tAJCzY6L7nLJyyDrfQGuxFp4lF8k8Ie+sYBAAx537HQkfkOzUMy2wOjv+CFNw
+	zb72GpELOaR5WaHXA5X9m8jgk8FU6OIyXNMJIJeyLwlbo/IT219Tr9cDMrxHvQMc48in
+	QVAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=ZdZyhJwk77bcij6rd3l040+LWedXeR0RJao3zb94yUA=;
+	b=YENU/3EcYOhRThHZLSR1rB2R+tcnimAHZl20uZ2CHNQz3J0hc4PwzOvKGCVK60huG+
+	sNgJdnBbW5afbKojLNP+uUoSj1Uhv7/Sr4Hc5kKtsAQsgrTH0/e8QY16By0IhLInEnAl
+	rPeak2tCeUhb6Isq75fUJ/Kirpg31wc+DgdNgQ+pPHdcGwhn2l9ALSzWXz/6/EP0jyEi
+	98T1FOAlSHs68vF5mBzJzFRGY2tNkl05DfMKTfu+XsmQD3TK+vrOv9orrhXbvUKtgN8o
+	YaehukDDRypJvBfXw2byYrtxcA956UySu4xmTKYiE8C29EJQrFsBxCyGrz9mqOEqfsWB
+	EJxA==
+X-Gm-Message-State: AGRZ1gLxLdn8ST6WhNGfcVcBfvnkUYG6nZ4FCb/JPIsHGWyxARAu+Mkj
+	/158vQ9Lw2uf7DGwsih3P7PNsPgb
+X-Google-Smtp-Source: AJdET5dXb1YucrPfNwJ3DZLz0bs5IL/Ht/ZrWA31PARTQUzfnjrvLQLHhQ1XE2JbaqdqFxHvYklzQg==
+X-Received: by 2002:a63:6dc8:: with SMTP id
+	i191mr10640513pgc.215.1542394291099; 
+	Fri, 16 Nov 2018 10:51:31 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:c33:f00c:90a9:e13c:6a53])
+	by smtp.gmail.com with ESMTPSA id
+	n189-v6sm36154056pfn.163.2018.11.16.10.51.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 16 Nov 2018 10:51:30 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Nov 2018 10:51:28 -0800
+Message-Id: <1542394288-28443-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [master][thud][meta-oe][PATCH] opensc: 0.18.0 version fix fetch error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,66 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2018 09:32:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 16 Nov 2018 18:51:30 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+ERROR: opensc-0.18.0-r0 do_fetch: Fetcher failure for URL: 'http://ftp.debian.org/debian/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz'. Unable to fetch URL from any source.
 
-Refresh 0001-update-the-interpreter-paths.patch as the
-folder unit_tests/ is renamed to t/ in below commit:
-c44d2c6e Move steady state unit test to t/
+This version is no longer hosted on the main debian URL so
+use the archive URL
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../fio/files/0001-update-the-interpreter-paths.patch     | 8 ++++----
- meta-oe/recipes-benchmark/fio/{fio_3.8.bb => fio_3.12.bb} | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-benchmark/fio/{fio_3.8.bb => fio_3.12.bb} (96%)
+ meta-oe/recipes-support/opensc/opensc_0.18.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch b/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-index 276a24d89..327b9f5b7 100644
---- a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-+++ b/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-@@ -16,7 +16,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  tools/hist/fiologparser_hist.py | 2 +-
-  tools/hist/half-bins.py         | 2 +-
-  tools/plot/fio2gnuplot          | 2 +-
-- unit_tests/steadystate_tests.py | 2 +-
-+ t/steadystate_tests.py | 2 +-
-  7 files changed, 7 insertions(+), 7 deletions(-)
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb b/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
+index c389e0b..45c931e 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
+@@ -9,7 +9,7 @@ eID cards have also been confirmed to work."
+ HOMEPAGE = "http://www.opensc-project.org/opensc/"
+ SECTION = "System Environment/Libraries"
  
- diff --git a/tools/fio_jsonplus_clat2csv b/tools/fio_jsonplus_clat2csv
-@@ -79,10 +79,10 @@ index 4d1815cf..509141af 100755
-  # Note: this script is python2 and python3 compatible.
-  #
-  #  Copyright (C) 2013 eNovance SAS <licensing@enovance.com>
--diff --git a/unit_tests/steadystate_tests.py b/unit_tests/steadystate_tests.py
-+diff --git a/t/steadystate_tests.py b/t/steadystate_tests.py
- index 50254dcc..95e7dfde 100755
----- a/unit_tests/steadystate_tests.py
--+++ b/unit_tests/steadystate_tests.py
-+--- a/t/steadystate_tests.py
-++++ b/t/steadystate_tests.py
- @@ -1,4 +1,4 @@
- -#!/usr/bin/python2.7
- +#!/usr/bin/env python
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.8.bb b/meta-oe/recipes-benchmark/fio/fio_3.12.bb
-similarity index 96%
-rename from meta-oe/recipes-benchmark/fio/fio_3.8.bb
-rename to meta-oe/recipes-benchmark/fio/fio_3.12.bb
-index 5bc48b052..2deb42db9 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.8.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.12.bb
-@@ -21,7 +21,7 @@ PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
- PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+-SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
++SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
+            file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
+           "
  
- # rev for v3.8
--SRCREV = "bfd986752ad053175423ffe3bbbeb07803f8ad4a"
-+SRCREV = "16500b5a0b03ee0142d592bb74a46943a223b06e"
- SRC_URI = "git://git.kernel.dk/fio.git \
-           file://0001-update-the-interpreter-paths.patch \
- "
 -- 
-2.17.1
+2.7.4
 
 
