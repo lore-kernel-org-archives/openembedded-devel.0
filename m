@@ -1,50 +1,42 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AA1C6C459
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E5B4E60102
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2018 18:51:30 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id w7so10958601pgp.13
+	Sat, 17 Nov 2018 09:57:39 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id y56so9024865edd.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2018 10:51:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=ZdZyhJwk77bcij6rd3l040+LWedXeR0RJao3zb94yUA=;
-	b=OTty6d6sQei1gPnQHHjd8vOc4mk7hp7vaMwStHJspCnWIa9Q7HNwKCM/ZvOjv50ss0
-	rqOLI2BN0eRbVuQMt767L495T3ZDjQ7xazSU1+RS8uJ13txcUAh8HZu25j66wBa2NuPs
-	/OaBHtasDALIJpz5SrDqPtRVHBgyYXlPlThpNFpZ5BoM3g/8n+wYacuDWZqz9RxYNkYR
-	sEaAFK4tAJCzY6L7nLJyyDrfQGuxFp4lF8k8Ie+sYBAAx537HQkfkOzUMy2wOjv+CFNw
-	zb72GpELOaR5WaHXA5X9m8jgk8FU6OIyXNMJIJeyLwlbo/IT219Tr9cDMrxHvQMc48in
-	QVAA==
+	Sat, 17 Nov 2018 01:57:41 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=ZdZyhJwk77bcij6rd3l040+LWedXeR0RJao3zb94yUA=;
-	b=YENU/3EcYOhRThHZLSR1rB2R+tcnimAHZl20uZ2CHNQz3J0hc4PwzOvKGCVK60huG+
-	sNgJdnBbW5afbKojLNP+uUoSj1Uhv7/Sr4Hc5kKtsAQsgrTH0/e8QY16By0IhLInEnAl
-	rPeak2tCeUhb6Isq75fUJ/Kirpg31wc+DgdNgQ+pPHdcGwhn2l9ALSzWXz/6/EP0jyEi
-	98T1FOAlSHs68vF5mBzJzFRGY2tNkl05DfMKTfu+XsmQD3TK+vrOv9orrhXbvUKtgN8o
-	YaehukDDRypJvBfXw2byYrtxcA956UySu4xmTKYiE8C29EJQrFsBxCyGrz9mqOEqfsWB
-	EJxA==
-X-Gm-Message-State: AGRZ1gLxLdn8ST6WhNGfcVcBfvnkUYG6nZ4FCb/JPIsHGWyxARAu+Mkj
-	/158vQ9Lw2uf7DGwsih3P7PNsPgb
-X-Google-Smtp-Source: AJdET5dXb1YucrPfNwJ3DZLz0bs5IL/Ht/ZrWA31PARTQUzfnjrvLQLHhQ1XE2JbaqdqFxHvYklzQg==
-X-Received: by 2002:a63:6dc8:: with SMTP id
-	i191mr10640513pgc.215.1542394291099; 
-	Fri, 16 Nov 2018 10:51:31 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:f00c:90a9:e13c:6a53])
-	by smtp.gmail.com with ESMTPSA id
-	n189-v6sm36154056pfn.163.2018.11.16.10.51.29
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sRBtjbFlbwnL+LC6WEE5U+y1m4DWB5gT6YS3pKdYAZA=;
+	b=q4NcZZV4/IGUA6fvtBgf2SSrF9J2k08wSC0je0kKhsjEApVkcOrtfxvBZPm5LHAw8s
+	0v82MSJrx7OmMVuHXzODSMH8GTh1hCiaLNwn0sNQO6mOSveTnjAMqmedq6FvmqME4b7v
+	und0tT3oV6d2iEfS+imdCJf+gMFojsdmoaBoajrZB4pbu0GFrJ/rF5XjOyPKvzkwpm8t
+	Xlx1UDYeHfpnfFmeu/es+SW7DD6XRUlWm3Ett+vG4xH0k2g7enBu6guX7dzoPcPCXeq+
+	/1/BnoTSpo97t1yTXbr4fjNQgzhChF19PgbjWjqiOHD9MPAMvhEHM65S5/1gQPMrxsEB
+	LstA==
+X-Gm-Message-State: AGRZ1gJXjoYgLdt/wv9pusVjCTOr+E+WWPPXxd/XoPri/dG4W7ZVMIPr
+	zACOX1PlfgZkK/WBXFMQGfgM/8xq
+X-Google-Smtp-Source: AJdET5cVy4XdKpe3DXp6iTErpjDJxFxHXKjWh41oP6UtWzLV0pYxSryaYllx/syzJIprSTxUUnS+Vg==
+X-Received: by 2002:a17:906:2cd3:: with SMTP id
+	r19-v6mr11036284ejr.38.1542448659985; 
+	Sat, 17 Nov 2018 01:57:39 -0800 (PST)
+Received: from tfsielt31850.jci.com (188-141-55-36.dynamic.upc.ie.
+	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
+	b42-v6sm10477296edd.81.2018.11.17.01.57.38
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Nov 2018 10:51:30 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 17 Nov 2018 01:57:39 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Nov 2018 10:51:28 -0800
-Message-Id: <1542394288-28443-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [master][thud][meta-oe][PATCH] opensc: 0.18.0 version fix fetch error
+Date: Sat, 17 Nov 2018 09:57:38 +0000
+Message-Id: <20181117095738.2217-1-git@andred.net>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] java-library: make packages overriding PACKAGE_ARCH work again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,32 +49,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2018 18:51:30 -0000
+X-List-Received-Date: Sat, 17 Nov 2018 09:57:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-ERROR: opensc-0.18.0-r0 do_fetch: Fetcher failure for URL: 'http://ftp.debian.org/debian/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz'. Unable to fetch URL from any source.
+From: André Draszik <andre.draszik@jci.com>
 
-This version is no longer hosted on the main debian URL so
-use the archive URL
+Recent changes is OE have caused the traditional approach of inheriting
+allarch and setting PACKAGE_ARCH not work anymore. Once allarch is
+inherited, PACKAGE_ARCH can not be overridden afterwards.
+See commit a23c482cab4f ("allarch: only enable allarch when multilib
+is not used") d9ba0219b2f6 in poky.
+    http://git.openembedded.org/openembedded-core/commit/?id=a23c482cab4f874f4a6a6889716123569eb5ece9
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+The error manifests itself with configure trying to
+   --host=allarch-poky-linux --target=allarch-poky-linux
+which fails.
+
+To work around this we can make java-library's allarch inherit
+conditional, as is done e.g. in OE-core for packagegroup.bbclass
+    http://git.openembedded.org/openembedded-core/commit/?id=9c826962ec8fa45c2b035427442b90a41517144e
+    http://git.openembedded.org/openembedded-core/commit/?id=2c9b1d304daade7b0907320aeb9c522e7ab9dcab
+
+So this commit does exactly that, and fixes the two users of this to
+follow the new approach.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- meta-oe/recipes-support/opensc/opensc_0.18.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ classes/java-library.bbclass           | 8 ++++++--
+ recipes-core/libmatthew/libmatthew.inc | 2 +-
+ recipes-extended/rxtx/rxtx_2.2.0.bb    | 2 +-
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb b/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
-index c389e0b..45c931e 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
-@@ -9,7 +9,7 @@ eID cards have also been confirmed to work."
- HOMEPAGE = "http://www.opensc-project.org/opensc/"
- SECTION = "System Environment/Libraries"
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index ce1cd28..e0159ba 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -10,9 +10,13 @@
+ #
+ # package archs are set to all, if the recipe builds also packages which
+ # can not be used for all archs, then set the PACKAGE_ARCH of that package
+-# manually, see rxtx_xx.bb for an example.
++# manually *before* inheriting the class, see rxtx_xx.bb for an example.
  
--SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
-+SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
-            file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
-           "
+-inherit java allarch
++inherit java
++PACKAGE_ARCH ?= "all"
++# Fully expanded - so it applies the overrides as well
++PACKAGE_ARCH_EXPANDED := "${PACKAGE_ARCH}"
++inherit ${@oe.utils.ifelse(d.getVar('PACKAGE_ARCH_EXPANDED') == 'all', 'allarch', '')}
  
+ # use java_stage for native packages
+ JAVA_NATIVE_STAGE_INSTALL = "1"
+diff --git a/recipes-core/libmatthew/libmatthew.inc b/recipes-core/libmatthew/libmatthew.inc
+index 7db979b..2119c0b 100644
+--- a/recipes-core/libmatthew/libmatthew.inc
++++ b/recipes-core/libmatthew/libmatthew.inc
+@@ -7,8 +7,8 @@ DEPENDS = "virtual/java-native classpath-native classpath"
+ 
+ S = "${WORKDIR}/libmatthew-java-${PV}"
+ 
+-inherit java-library
+ PACKAGE_ARCH = "${TUNE_PKGARCH}"
++inherit java-library
+ 
+ # Some internal version numbers which change from time to time.
+ # Allowing to override them makes this include file more
+diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
+index e54dad7..d4fbb9d 100644
+--- a/recipes-extended/rxtx/rxtx_2.2.0.bb
++++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
+@@ -28,8 +28,8 @@ S = "${WORKDIR}/rxtx-2.2pre2"
+ 
+ INSANE_SKIP_${JPN} += "dev-so"
+ 
+-inherit autotools-brokensep java-library remove-libtool
+ PACKAGE_ARCH = "${TUNE_PKGARCH}"
++inherit autotools-brokensep java-library remove-libtool
+ 
+ JARFILENAME = "RXTXcomm.jar"
+ EXTRA_OEMAKE += "RXTX_PATH=${D}${libdir_jni} \
 -- 
-2.7.4
+2.19.1
 
 
