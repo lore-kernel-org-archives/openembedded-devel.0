@@ -1,47 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CBAD86C108
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+	[209.85.214.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 190A46C102
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 18:35:33 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id q70so27847165qkh.6
+	Sun, 18 Nov 2018 22:00:15 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id b5so7173315plr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 10:35:35 -0800 (PST)
+	Sun, 18 Nov 2018 14:00:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=E4UikfSa/brp1HoOaHiQqxdSEQtXsAKpaEXtbxt0WC8=;
-	b=QsRhDt0zEw1lff5FUGSMX/RZlGczxErfNBhQ+DFkQ8IeQS/0aqngh9aBl6bv97f/fN
-	BTjioVqgwFg5h+Z9d18jCrx7HT5JBasX6CalRSnjzDuF/IBdbLcM4bymFxtSbLUOns1g
-	CB2O/93oCSwDE/q1CcZmJ+ClbR18UYASFsRpbUDRC7ZkDgPJUUKMU9QBPpfloPdci1sf
-	bGTNn10Fekas2iSliil6VSMAmIsJJMsCDyrgV5zs9ubM45Vwn2wEw8MezSyoLagDcuTV
-	PMeGqSYmX1MSemn/FlLOQsC2cc2JpbJry14Zy/of0nu8+8CTq9aOMBVosyst1LYkjE4B
-	OMlA==
+	h=from:to:subject:date:message-id;
+	bh=PPJKq1RjhY037dX2Q5y0tFo5RLMy6xENU9oLUVk3b6U=;
+	b=aC0vhI/2hbVJhl57Q54bRck3MgaVMUrSrD1vXmylAsLX/b01H5sP2m9NsdKCkOg9lZ
+	t41hi7/v19JATO2BGA4+bTQKAnq0QbQAkNksfb/MAQwG5ys6iffj+NdPVrQyQxZ0vB8C
+	xCSm6sybO5cVTz5dKHeyXJK/ecJLzXSF1k0hJwfl/h9okXZ86i1LZCF8T+CZInbAC87C
+	MUJx4J0YUsTda9VI1JWM67zFWqNNteqg0u+mZZD3Tqfby8U/iui/4lRTJFaSnqY0ALGm
+	OjPZv867Kkb4OuYpSqIpIcTwzOriqZhRXiM16NKoa5yv9vW/g1N2BNGS4UFfkYDUFoUJ
+	yjzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=E4UikfSa/brp1HoOaHiQqxdSEQtXsAKpaEXtbxt0WC8=;
-	b=sZRTGcZgxRaBjJl0dxBjBRUlxlPV/FvMsghnxzSNG0BP7E7VRWyPmpsaDJJfN6xTy8
-	G676Se/5OrgKgXaDxK4Gup7T2vP9QXC2fopoIchM6Tuak0LcYY+feGy0zTgcFfUEyuPC
-	WRalhmYbj+7BuQxGKKn9heHapwTyUSxCL1BAQogut6mIEVluNpl9KWcQz1CeVWUHitZp
-	xWT871bhgYkH+uGBUe2YZXDrlCgk37/GS5P+Hiyl5PgY+nJT35Br0ycTYz/a5TV53JP0
-	AyF2zV+BUa49OPq0FdvL/rg/45hr/GAeAYhvVefJ6x5h9boQZSfyXomM0ukzL0A1U7Cp
-	Qabg==
-X-Gm-Message-State: AGRZ1gLNNp4taoTyRcun7MQNBOyey3j3k4JoF1CPCRnNbvKDYRhq6zZn
-	+V8n+vLMwnPms5EqDkCm2MY7OdS8UGMrFPb74GY=
-X-Google-Smtp-Source: AJdET5caNAK6Vn1V8eL2ffHW2Wjk6+bq1SzkImyVy69KvnXyPTyTNkKE87d8KEYdSTuyAudIlfHVtoUyY1A5jdnTC5g=
-X-Received: by 2002:ac8:16d8:: with SMTP id y24mr18391965qtk.253.1542566134333;
-	Sun, 18 Nov 2018 10:35:34 -0800 (PST)
-MIME-Version: 1.0
-References: <20181118170442.14670-1-pbasista@gmail.com>
-In-Reply-To: <20181118170442.14670-1-pbasista@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 Nov 2018 10:35:08 -0800
-Message-ID: <CAMKF1sqGt2w+abevmJp==apK=91LLYLijHLD9GPye6d8BUkozQ@mail.gmail.com>
-To: =?UTF-8?Q?Peter_Ba=C5=A1ista?= <pbasista@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] Add a working tvheadend recipe
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=PPJKq1RjhY037dX2Q5y0tFo5RLMy6xENU9oLUVk3b6U=;
+	b=QYHask7DrpyHfhv0KLhk2n8/fTScXfHX+V6NPHBX/awLhLyCLp/YOTpXp7ZnT5R3/O
+	ANwPeIS1x2eMRLG3Q28MvtMRFFNjlWQAhxpL+wPy9dTHxJNEZZVvsAYFs5l00KbRcNqt
+	cEVIazkDsiKoGr6aYz5OT/e1pjK0YQ7VxidifMI6taqEnX0FF+I9hicqEhCUJFBS3qlR
+	4UT1JxxrSFPM1sepN7DaMd0prR795fqIPBBYnpMhM9bcqDS95Srsuz1FNk7UYndX9ux9
+	F7w7GteF7EKubNiChMBpJzcoyrBrYbeqE1mBNbyB9w1GzSE44MBOWzKRA9oaOphy4BcJ
+	W2xA==
+X-Gm-Message-State: AGRZ1gIk/T65kxGLnF2sLYzCADVG9zHqjUGAucGqwdb6YnIVn/ZoGLJT
+	81KNB921Ae0uTYR7Yx89Hwgpmmv3
+X-Google-Smtp-Source: AJdET5dkEHAtstIo42OhgQNEElB1pisMSYU9GIHXUkNvRe3tp4Xkr4VBZkzlrcq55cVVV847tRlNJQ==
+X-Received: by 2002:a17:902:2cc3:: with SMTP id
+	n61-v6mr19999737plb.76.1542578416851; 
+	Sun, 18 Nov 2018 14:00:16 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:c33:8599:3a91:5ee0:9f77])
+	by smtp.gmail.com with ESMTPSA id
+	q25sm41456009pgb.2.2018.11.18.14.00.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 18 Nov 2018 14:00:16 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 Nov 2018 14:00:14 -0800
+Message-Id: <1542578415-27437-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/2] packagegroup-meta-oe: fix build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,85 +57,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Nov 2018 18:35:33 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 18 Nov 2018 22:00:16 -0000
 
-On Sun, Nov 18, 2018 at 9:05 AM Peter Ba=C5=A1ista <pbasista@gmail.com> wro=
-te:
->
-> The original one was previously removed
-> by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
-> as part of a clean-up of blacklisted recipes.
->
-> Signed-off-by: Peter Ba=C5=A1ista <pbasista@gmail.com>
-> ---
->  .../recipes-dvb/tvheadend/tvheadend_git.bb    | 37 +++++++++++++++++++
->  1 file changed, 37 insertions(+)
->  create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.b=
-b
->
-> diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/met=
-a-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> new file mode 100644
-> index 000000000..2a76d5d34
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> @@ -0,0 +1,37 @@
-> +SUMMARY =3D "Tvheadend: TV streaming server and recorder"
-> +HOMEPAGE =3D "https://tvheadend.org/"
-> +
-> +DEPENDS =3D "avahi cmake-native gettext-native libpcre2 libdvbcsa openss=
-l zlib python-native"
+ERROR: Required build target 'meta-oe-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-oe-image', 'packagegroup-meta-oe', 'freeglut']
 
-perhaps inheriting cmake, gettext and pythonnative classes is
-appropriate here instead of adding
-them to depends
+ERROR: Required build target 'meta-oe-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-oe-image', 'packagegroup-meta-oe', 'libsdl2-ttf']
 
-> +
-> +LICENSE =3D "GPLv3+"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D9cae5acac2e9ee2fc3aec01ac8=
-8ce5db"
-> +
-> +SRC_URI =3D "git://github.com/tvheadend/tvheadend.git"
-> +
+ERROR: Required build target 'meta-oe-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-oe-image', 'packagegroup-meta-oe', 'libmad']
 
-missing SRCREV, we need a locked down SHA
+ERROR: Required build target 'meta-oe-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-oe-image', 'packagegroup-meta-oe', 'faad2']
 
-> +inherit gitpkgv
-> +SRCREV =3D "${AUTOREV}"
-> +PV =3D "4.3+git${SRCPV}"
-> +PKGV =3D "4.3+git${GITPKGV}"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +PACKAGECONFIG ?=3D ""
-> +PACKAGECONFIG[uriparser] =3D "--enable-uriparser,--disable-uriparser,uri=
-parser"
-> +
-> +do_configure() {
-> +    ./configure ${PACKAGECONFIG_CONFARGS} \
-> +                --prefix=3D${prefix} \
-> +                --libdir=3D${libdir} \
-> +                --bindir=3D${bindir} \
-> +                --datadir=3D${datadir} \
-> +                --arch=3D${TARGET_ARCH} \
-> +                --disable-libav \
-> +                --disable-ffmpeg_static \
-> +                --disable-hdhomerun_static
-> +}
-> +
-> +do_install() {
-> +    oe_runmake install DESTDIR=3D${D}
-> +}
-> +
-> +FILES_${PN} +=3D "${datadir}/${BPN}"
-> --
-> 2.19.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+ERROR: Required build target 'meta-oe-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-oe-image', 'packagegroup-meta-oe', 'mpv']
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 4526e99..08b4bbf 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -138,9 +138,9 @@ RDEPENDS_packagegroup-meta-oe-gnome ="\
+ 
+ RDEPENDS_packagegroup-meta-oe-graphics ="\
+     babl cairomm dietsplash directfb directfb-examples dnfdragora \
+-    fbgrab fbida fontforge freeglut fvwm gegl gimp glm gphoto2 libgphoto2 \
++    fbgrab fbida fontforge fvwm gegl gimp glm gphoto2 libgphoto2 \
+     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
+-    libsdl2-ttf libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
++    libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
+     libvncserver libyui libyui-ncurses lxdm numlockx openbox openjpeg \
+     packagegroup-fonts-truetype pangomm qrencode takao-fonts terminus-font \
+     tesseract tesseract-lang tigervnc tslib source-han-sans-cn-fonts \
+@@ -152,6 +152,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
+     font-adobe-100dpi font-adobe-utopia-100dpi \
+     font-bh-100dpi font-bh-lucidatypewriter-100dpi font-bitstream-100dpi font-cursor-misc \
+     font-misc-misc xorg-fonts-100dpi liblbxutil libxaw libxkbui libxpresent xserver-common \
++    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut libsdl2-ttf", "", d)} \
+     "
+ 
+ RDEPENDS_packagegroup-meta-oe-kernel ="\
+@@ -160,13 +161,14 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
+     "
+ 
+ RDEPENDS_packagegroup-meta-oe-multimedia ="\
+-    alsa-oss audiofile cdrkit esound faad2 id3lib \
++    alsa-oss audiofile cdrkit esound id3lib \
+     a2jmidid jack libass libburn libcdio libcdio-paranoia \
+-    libdvdread libmad libmms libmodplug libopus live555 \
++    libdvdread libmms libmodplug libopus live555 \
+     mplayer-common opus-tools \
+     sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol mpv xsp", "", d)} \
++    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol xsp", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libmikmod", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2 mpv", "", d)} \
+     "
+ 
+ RDEPENDS_packagegroup-meta-oe-navigation ="\
+-- 
+2.7.4
+
 
