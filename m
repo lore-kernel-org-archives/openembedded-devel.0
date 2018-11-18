@@ -1,49 +1,49 @@
-Return-Path: <pbasista@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A9EC46C106
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B63C6C100
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 17:04:57 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id u13-v6so3017004wmc.4
+	Sun, 18 Nov 2018 17:08:21 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id g62so10409825pfd.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 09:04:59 -0800 (PST)
+	Sun, 18 Nov 2018 09:08:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QGk7K+5OaUtBCT7dtY0uige5tDQJaUlbOx/+dpyGHPM=;
-	b=LohJfTjvTVMmdVFcgHWQvgQFLNKdZPYUP/kMH0AhMaAU0LHkC268q/WHJutxir7mCd
-	mk5y7noRtdjPFzZI+eAKMUtK70KoSUh7bSZbAryAYy7YmjAwD2c+Bf6ySBwd13bMTFEZ
-	3gScGFzvoGzsqG+0aqSbmZEui+dsXL+b/RcPQ32dExIayxqw0utJwmx+kbkCGSOFNGKC
-	W3hE07HJnmWYwpmbqnLMJQHYG6AJ6Ujaz23IDfAT1MuZcgu/05c27jjDm97tImbHuu6D
-	EBm3/DR7GkEFnoR20lLzJqn2M91Zs+9LBFeoMEfcPM0ifLj/A2gaOYrMgP/bjMdobi7D
-	nF/A==
+	h=from:to:subject:date:message-id;
+	bh=HaO9L/vk4c5aRW0LDgd9zQ4djk9GoLKiRlg6Y/OqPPs=;
+	b=ePkn819dmHHqy0L/7KqYsJIS5hHGVZtT/m/OxJ3NwVesylwekX3uXw03eenLUEJqVz
+	xXy0Q/+5HlqzidBYClbtVJNpq8IMAcOWvtCPB79kvI3+sfslQ/IvIG/8ZzAnmUNMHTL9
+	LkwQRJ5+xj74dI1CABLrA0t3UHkebaf2JqMYiqvQpDylD2Er7WwQ7ptTuE+I2rHISOnh
+	TjBBQvsXN3mcR1H+8o01fLa4coxQnpkxycBHlTCoTeyxRupseFsxwDJ7ZbZP6HxvsIgh
+	wkHemJp3xqGkzj2pNXagkfZ+4rg8kHY8L+dDQ2+fEI6uZHPI8zaKOL62H7IfW0BkEe5A
+	2liw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QGk7K+5OaUtBCT7dtY0uige5tDQJaUlbOx/+dpyGHPM=;
-	b=Y7FSYH4k28qijoHH5s6DWbaFR0Dal/b+2HXyB4LIOfrChaiyBGMLPkTt74R/OVGCzY
-	O1/ELh17rkvViFEibZJPZqPlKZRu6f+UQihOuFnAhBxrdS6u/wq7xtZ8ts3EGswi39N3
-	LaVJiQM/i8T/mxaAKGHI0zmvvBeo/lYmpXZOWzlb+8+dFZrxC1FNG3iJIWQspE//gqr9
-	JmRhU48bzRBuqu+bNq8IG64H168O6DsfaiBAo7yxxnxyIYSQCXk7fdvwwQvK+Z/zFd9o
-	dCJHZcqbnSdNO/sok1OAnnX+dwRHVpzPKqgGDbTA17n2ut6/+WfgyqOcWpifQvnjCDpB
-	HLsQ==
-X-Gm-Message-State: AGRZ1gK1xDxHrYPy1lIX9UgIGWqqWmbWvaxdxyacRwE42g9Mzse6ayte
-	zCMTNtcL2zxt9vqxM9KihsPGikZlWzM=
-X-Google-Smtp-Source: AJdET5fRbjRcFCSb80wcbRjuo/Mzaz3TrtLPKJ7M26AVez8b2IzsXFETTo1kcPEO3Vs33P1qyXr78Q==
-X-Received: by 2002:a1c:6a01:: with SMTP id f1mr4826906wmc.17.1542560698169;
-	Sun, 18 Nov 2018 09:04:58 -0800 (PST)
-Received: from coolbox.a ([46.150.193.209]) by smtp.gmail.com with ESMTPSA id
-	h62sm9980261wmf.11.2018.11.18.09.04.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 18 Nov 2018 09:04:57 -0800 (PST)
-From: =?UTF-8?q?Peter=20Ba=C5=A1ista?= <pbasista@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=HaO9L/vk4c5aRW0LDgd9zQ4djk9GoLKiRlg6Y/OqPPs=;
+	b=L5b9IxFAs3AhvIB8IL7Ed+E9LVEwvfPmQE8tkjSLUjn2CRERClxVbaCvG8tUzoGgxN
+	wR8gjsr0E0JOYDGNQzVP7JHy1aqEqPPws1u8/KfJ6Wcuzz8aDJlUE1Pv+fBUp+bBwxsh
+	qI3fTeZqxocRlV4aqMXH1ThIivC4WvyZ/Y0g6k575dVtWkA2BSHz2YEJj6CgQ46TYmmK
+	VoT/aF8XO+4solvG+Yhx7+GMv1z/YKIEA27p38J9xiqVeruoauckWKujRtvvjh8zWxIi
+	vq7w8z8YMLfxDAbED2Mw9zTgKvcprikWNsNS2D4AHUhYAxvO89Q2Xg1J8vRUrQ/UfSU/
+	LHyw==
+X-Gm-Message-State: AGRZ1gI1yhePJ2uGfw8/M7DIAkLyOX2+nlJu7OhmKMAkTqdBr0uuubV7
+	SsPOt1d3zYCCQ38ngZVSshg7NXu+
+X-Google-Smtp-Source: AJdET5cGtAevmovBOEPTtJtxIGtLxAAzOX+xNbVYt07nNlURY7ixYKIdqxbDVMC9vJwvkjQ15gE9tw==
+X-Received: by 2002:a63:c141:: with SMTP id p1mr17123987pgi.424.1542560901458; 
+	Sun, 18 Nov 2018 09:08:21 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:c33:8599:3a91:5ee0:9f77])
+	by smtp.gmail.com with ESMTPSA id
+	w11sm9924707pgk.16.2018.11.18.09.08.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 18 Nov 2018 09:08:20 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Nov 2018 18:04:42 +0100
-Message-Id: <20181118170442.14670-1-pbasista@gmail.com>
-X-Mailer: git-send-email 2.19.1
-MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] Add a working tvheadend recipe
+Date: Sun, 18 Nov 2018 09:08:19 -0800
+Message-Id: <1542560899-8877-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] ndctl: fix compile issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,64 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Nov 2018 17:04:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 18 Nov 2018 17:08:21 -0000
 
-The original one was previously removed
-by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
-as part of a clean-up of blacklisted recipes.
+| No package 'systemd' found
+| configure: error: systemd support requested but pkg-config unable to query systemd package
 
-Signed-off-by: Peter Bašista <pbasista@gmail.com>
+add PACKCONFIG to disable systemd
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-dvb/tvheadend/tvheadend_git.bb    | 37 +++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+ meta-oe/recipes-core/ndctl/ndctl_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-new file mode 100644
-index 000000000..2a76d5d34
---- /dev/null
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "Tvheadend: TV streaming server and recorder"
-+HOMEPAGE = "https://tvheadend.org/"
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+index b20915f..048f166 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_git.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+@@ -21,6 +21,9 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[systemd] = "--with-systemd-unit-dir=${systemd_system_unitdir}, --without-systemd-unit-dir,"
 +
-+DEPENDS = "avahi cmake-native gettext-native libpcre2 libdvbcsa openssl zlib python-native"
-+
-+LICENSE = "GPLv3+"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
-+
-+SRC_URI = "git://github.com/tvheadend/tvheadend.git"
-+
-+inherit gitpkgv
-+SRCREV = "${AUTOREV}"
-+PV = "4.3+git${SRCPV}"
-+PKGV = "4.3+git${GITPKGV}"
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG ?= ""
-+PACKAGECONFIG[uriparser] = "--enable-uriparser,--disable-uriparser,uriparser"
-+
-+do_configure() {
-+    ./configure ${PACKAGECONFIG_CONFARGS} \
-+                --prefix=${prefix} \
-+                --libdir=${libdir} \
-+                --bindir=${bindir} \
-+                --datadir=${datadir} \
-+                --arch=${TARGET_ARCH} \
-+                --disable-libav \
-+                --disable-ffmpeg_static \
-+                --disable-hdhomerun_static
-+}
-+
-+do_install() {
-+    oe_runmake install DESTDIR=${D}
-+}
-+
-+FILES_${PN} += "${datadir}/${BPN}"
+ do_configure_prepend() {
+     ${S}/autogen.sh
+ }
 -- 
-2.19.1
+2.7.4
 
 
