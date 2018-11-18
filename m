@@ -1,49 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B63C6C100
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CBAD86C108
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 17:08:21 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id g62so10409825pfd.12
+	Sun, 18 Nov 2018 18:35:33 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id q70so27847165qkh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2018 09:08:22 -0800 (PST)
+	Sun, 18 Nov 2018 10:35:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=HaO9L/vk4c5aRW0LDgd9zQ4djk9GoLKiRlg6Y/OqPPs=;
-	b=ePkn819dmHHqy0L/7KqYsJIS5hHGVZtT/m/OxJ3NwVesylwekX3uXw03eenLUEJqVz
-	xXy0Q/+5HlqzidBYClbtVJNpq8IMAcOWvtCPB79kvI3+sfslQ/IvIG/8ZzAnmUNMHTL9
-	LkwQRJ5+xj74dI1CABLrA0t3UHkebaf2JqMYiqvQpDylD2Er7WwQ7ptTuE+I2rHISOnh
-	TjBBQvsXN3mcR1H+8o01fLa4coxQnpkxycBHlTCoTeyxRupseFsxwDJ7ZbZP6HxvsIgh
-	wkHemJp3xqGkzj2pNXagkfZ+4rg8kHY8L+dDQ2+fEI6uZHPI8zaKOL62H7IfW0BkEe5A
-	2liw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=E4UikfSa/brp1HoOaHiQqxdSEQtXsAKpaEXtbxt0WC8=;
+	b=QsRhDt0zEw1lff5FUGSMX/RZlGczxErfNBhQ+DFkQ8IeQS/0aqngh9aBl6bv97f/fN
+	BTjioVqgwFg5h+Z9d18jCrx7HT5JBasX6CalRSnjzDuF/IBdbLcM4bymFxtSbLUOns1g
+	CB2O/93oCSwDE/q1CcZmJ+ClbR18UYASFsRpbUDRC7ZkDgPJUUKMU9QBPpfloPdci1sf
+	bGTNn10Fekas2iSliil6VSMAmIsJJMsCDyrgV5zs9ubM45Vwn2wEw8MezSyoLagDcuTV
+	PMeGqSYmX1MSemn/FlLOQsC2cc2JpbJry14Zy/of0nu8+8CTq9aOMBVosyst1LYkjE4B
+	OMlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=HaO9L/vk4c5aRW0LDgd9zQ4djk9GoLKiRlg6Y/OqPPs=;
-	b=L5b9IxFAs3AhvIB8IL7Ed+E9LVEwvfPmQE8tkjSLUjn2CRERClxVbaCvG8tUzoGgxN
-	wR8gjsr0E0JOYDGNQzVP7JHy1aqEqPPws1u8/KfJ6Wcuzz8aDJlUE1Pv+fBUp+bBwxsh
-	qI3fTeZqxocRlV4aqMXH1ThIivC4WvyZ/Y0g6k575dVtWkA2BSHz2YEJj6CgQ46TYmmK
-	VoT/aF8XO+4solvG+Yhx7+GMv1z/YKIEA27p38J9xiqVeruoauckWKujRtvvjh8zWxIi
-	vq7w8z8YMLfxDAbED2Mw9zTgKvcprikWNsNS2D4AHUhYAxvO89Q2Xg1J8vRUrQ/UfSU/
-	LHyw==
-X-Gm-Message-State: AGRZ1gI1yhePJ2uGfw8/M7DIAkLyOX2+nlJu7OhmKMAkTqdBr0uuubV7
-	SsPOt1d3zYCCQ38ngZVSshg7NXu+
-X-Google-Smtp-Source: AJdET5cGtAevmovBOEPTtJtxIGtLxAAzOX+xNbVYt07nNlURY7ixYKIdqxbDVMC9vJwvkjQ15gE9tw==
-X-Received: by 2002:a63:c141:: with SMTP id p1mr17123987pgi.424.1542560901458; 
-	Sun, 18 Nov 2018 09:08:21 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:8599:3a91:5ee0:9f77])
-	by smtp.gmail.com with ESMTPSA id
-	w11sm9924707pgk.16.2018.11.18.09.08.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 18 Nov 2018 09:08:20 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Nov 2018 09:08:19 -0800
-Message-Id: <1542560899-8877-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] ndctl: fix compile issue
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=E4UikfSa/brp1HoOaHiQqxdSEQtXsAKpaEXtbxt0WC8=;
+	b=sZRTGcZgxRaBjJl0dxBjBRUlxlPV/FvMsghnxzSNG0BP7E7VRWyPmpsaDJJfN6xTy8
+	G676Se/5OrgKgXaDxK4Gup7T2vP9QXC2fopoIchM6Tuak0LcYY+feGy0zTgcFfUEyuPC
+	WRalhmYbj+7BuQxGKKn9heHapwTyUSxCL1BAQogut6mIEVluNpl9KWcQz1CeVWUHitZp
+	xWT871bhgYkH+uGBUe2YZXDrlCgk37/GS5P+Hiyl5PgY+nJT35Br0ycTYz/a5TV53JP0
+	AyF2zV+BUa49OPq0FdvL/rg/45hr/GAeAYhvVefJ6x5h9boQZSfyXomM0ukzL0A1U7Cp
+	Qabg==
+X-Gm-Message-State: AGRZ1gLNNp4taoTyRcun7MQNBOyey3j3k4JoF1CPCRnNbvKDYRhq6zZn
+	+V8n+vLMwnPms5EqDkCm2MY7OdS8UGMrFPb74GY=
+X-Google-Smtp-Source: AJdET5caNAK6Vn1V8eL2ffHW2Wjk6+bq1SzkImyVy69KvnXyPTyTNkKE87d8KEYdSTuyAudIlfHVtoUyY1A5jdnTC5g=
+X-Received: by 2002:ac8:16d8:: with SMTP id y24mr18391965qtk.253.1542566134333;
+	Sun, 18 Nov 2018 10:35:34 -0800 (PST)
+MIME-Version: 1.0
+References: <20181118170442.14670-1-pbasista@gmail.com>
+In-Reply-To: <20181118170442.14670-1-pbasista@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 18 Nov 2018 10:35:08 -0800
+Message-ID: <CAMKF1sqGt2w+abevmJp==apK=91LLYLijHLD9GPye6d8BUkozQ@mail.gmail.com>
+To: =?UTF-8?Q?Peter_Ba=C5=A1ista?= <pbasista@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH] Add a working tvheadend recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +54,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Nov 2018 17:08:21 -0000
+X-List-Received-Date: Sun, 18 Nov 2018 18:35:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-| No package 'systemd' found
-| configure: error: systemd support requested but pkg-config unable to query systemd package
+On Sun, Nov 18, 2018 at 9:05 AM Peter Ba=C5=A1ista <pbasista@gmail.com> wro=
+te:
+>
+> The original one was previously removed
+> by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
+> as part of a clean-up of blacklisted recipes.
+>
+> Signed-off-by: Peter Ba=C5=A1ista <pbasista@gmail.com>
+> ---
+>  .../recipes-dvb/tvheadend/tvheadend_git.bb    | 37 +++++++++++++++++++
+>  1 file changed, 37 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.b=
+b
+>
+> diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/met=
+a-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> new file mode 100644
+> index 000000000..2a76d5d34
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> @@ -0,0 +1,37 @@
+> +SUMMARY =3D "Tvheadend: TV streaming server and recorder"
+> +HOMEPAGE =3D "https://tvheadend.org/"
+> +
+> +DEPENDS =3D "avahi cmake-native gettext-native libpcre2 libdvbcsa openss=
+l zlib python-native"
 
-add PACKCONFIG to disable systemd
+perhaps inheriting cmake, gettext and pythonnative classes is
+appropriate here instead of adding
+them to depends
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-core/ndctl/ndctl_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+> +
+> +LICENSE =3D "GPLv3+"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D9cae5acac2e9ee2fc3aec01ac8=
+8ce5db"
+> +
+> +SRC_URI =3D "git://github.com/tvheadend/tvheadend.git"
+> +
 
-diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
-index b20915f..048f166 100644
---- a/meta-oe/recipes-core/ndctl/ndctl_git.bb
-+++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
-@@ -21,6 +21,9 @@ S = "${WORKDIR}/git"
- 
- EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[systemd] = "--with-systemd-unit-dir=${systemd_system_unitdir}, --without-systemd-unit-dir,"
-+
- do_configure_prepend() {
-     ${S}/autogen.sh
- }
--- 
-2.7.4
+missing SRCREV, we need a locked down SHA
 
+> +inherit gitpkgv
+> +SRCREV =3D "${AUTOREV}"
+> +PV =3D "4.3+git${SRCPV}"
+> +PKGV =3D "4.3+git${GITPKGV}"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG ?=3D ""
+> +PACKAGECONFIG[uriparser] =3D "--enable-uriparser,--disable-uriparser,uri=
+parser"
+> +
+> +do_configure() {
+> +    ./configure ${PACKAGECONFIG_CONFARGS} \
+> +                --prefix=3D${prefix} \
+> +                --libdir=3D${libdir} \
+> +                --bindir=3D${bindir} \
+> +                --datadir=3D${datadir} \
+> +                --arch=3D${TARGET_ARCH} \
+> +                --disable-libav \
+> +                --disable-ffmpeg_static \
+> +                --disable-hdhomerun_static
+> +}
+> +
+> +do_install() {
+> +    oe_runmake install DESTDIR=3D${D}
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}/${BPN}"
+> --
+> 2.19.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
