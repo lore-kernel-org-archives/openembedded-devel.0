@@ -1,29 +1,19 @@
-Return-Path: <craig.mcqueen@innerrange.com>
-Received: from mail.innerrange.com.au (mail.innerrange.com.au [203.222.77.226])
-	by mail.openembedded.org (Postfix) with ESMTP id 530286B8D5
+Return-Path: <douglas.royds@taitradio.com>
+Received: from smtp0.taitradio.net (unknown [202.37.96.22])
+	by mail.openembedded.org (Postfix) with SMTP id CFFFE6BA9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2018 06:34:36 +0000 (UTC)
-Received: from ir-mail.corp.innerrange.com.au (192.168.4.15) by
-	ir-mail.corp.innerrange.com.au (192.168.4.15) with Microsoft SMTP
-	Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
-	15.1.1531.3; Tue, 20 Nov 2018 17:34:35 +1100
-Received: from ir-mail.corp.innerrange.com.au ([fe80::b00d:e485:459b:788f]) by
-	ir-mail.corp.innerrange.com.au ([fe80::b00d:e485:459b:788f%2]) with
-	mapi id 15.01.1531.007; Tue, 20 Nov 2018 17:34:35 +1100
-From: Craig McQueen <craig.mcqueen@innerrange.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-python] python3-multidict build failure
-Thread-Index: AdSAmsD4DydmzYbtTlCkyUcT35PCcA==
-Date: Tue, 20 Nov 2018 06:34:34 +0000
-Message-ID: <edd38f927abe4edda8a26827a2bbba05@innerrange.com>
-Accept-Language: en-AU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [192.168.105.91]
-MIME-Version: 1.0
-Subject: [meta-python] python3-multidict build failure
+	Tue, 20 Nov 2018 06:37:31 +0000 (UTC)
+Received: from acheron.taitradio.net (unknown [172.16.169.141])
+	by smtp0.taitradio.net (Postfix) with ESMTP id 227D32202D1;
+	Tue, 20 Nov 2018 19:37:31 +1300 (NZDT)
+From: Douglas Royds <douglas.royds@taitradio.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Nov 2018 19:37:16 +1300
+Message-Id: <20181120063718.28683-4-douglas.royds@taitradio.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20181120063718.28683-1-douglas.royds@taitradio.com>
+References: <20181120063718.28683-1-douglas.royds@taitradio.com>
+Subject: [meta-oe][PATCH 3/5] net-snmp: Reproducibility: Remove PKG_CONFIG paths from net-snmp-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,25 +26,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 06:34:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Nov 2018 06:37:32 -0000
 
-With python3-multidict v3.3.2, I sometimes get a build error when the build=
- does a make clean:
+PKG_CONFIG_PATH and PKG_CONFIG_LIBDIR point into the net-snmp recipe-sysroot.
 
-rm .install-deps
-rm: cannot remove '.install-deps': No such file or directory
+Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
+---
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-I reported an issue to the multidict project:
-https://github.com/aio-libs/multidict/issues/194
-
-As a work-around, I found a need to define in the recipe (or bbappend):
-
-CLEANBROKEN =3D "1"
-
---=20
-Craig McQueen
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 089946032..4b1267b3c 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -119,6 +119,8 @@ do_install_append() {
+            -e "s@\([^ ]*--sysroot=[^ ]*\)\1*@@g" \
+            -e "s@\([^ ]*--with-libtool-sysroot=[^ ]*\)\1*@@g" \
+            -e "s@\([^ ]*--with-install-prefix=[^ ]*\)\1*@@g" \
++           -e "s@\([^ ]*PKG_CONFIG_PATH=[^ ]*\)\1*@@g" \
++           -e "s@\([^ ]*PKG_CONFIG_LIBDIR=[^ ]*\)\1*@@g" \
+         -i ${D}${bindir}/net-snmp-config
+ 
+     if [ "${HAS_PERL}" = "1" ]; then
+-- 
+2.17.1
 
 
