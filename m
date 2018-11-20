@@ -1,47 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E5C506B8D5
+Return-Path: <uvv.mail@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A8AB6BA11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2018 07:28:54 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id u9-v6so808554wrr.0
+	Tue, 20 Nov 2018 07:52:15 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id n12so1397671qkh.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2018 23:28:56 -0800 (PST)
+	Mon, 19 Nov 2018 23:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=LJGNreAEseOKR0U+3mhtB4pgJrqaFYZy31ZhYwYzPKE=;
-	b=JVa9sm5wVZ7S+lHNSjOasUprmiomE/adtKyTtO8+l1vs0kigyorwAscGVppqS6l5bs
-	ffQhH3+dWhGWpYOZkKisy96BALI6dMXjgnA3PToyAkBW09l5UF5dI/oo4p+brC4tjZoM
-	DcDN7uhFqFUtlDleFESQtU2lbrBpNILWQLR98xSnLX+F1nLnE8Bl78MhQvikCgWjMrku
-	oYjcDrvwefGjKQQWQZZL4qBLQ/yqa97oMlPXflRLvN5BxkPlpaFpBxx1DDKo2GfTdGW/
-	+DmRNvSdSxiHLdpCi2A4JkjgXAkphaguul3y1jlGjJ7U/SKXvfWQ2YBVp0TdNHZ+k18g
-	9P5Q==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=/BizDqjC6u/LceBbfdq6BOPtF9OK8NgffgmsfdOpbYo=;
+	b=fcOL0i2YnTIh2zEcho4LNjCGk1oOn82oU7Rduxl+5XIJzpEM6lCy9qlteSn/Yv+Xid
+	SP+MnX8KO2RaDvYGXb1x6IKGVvGzCXrXincwG1eNmAWOmJs7CAnNoESYYF76JQtS7x/P
+	Hvf4DYevs7UjhPncKKGNDCsmKbspfl4LBivN0rumy25q48IEA3Xdl1A1VqAzH9aFpBW0
+	0cDMc+60X1tqjvgKNZ7pv12Uw/inj6MNoq/vmLJ8YgqegkrqoM1qhIUeNCi9w6TYOq/l
+	hKm47VqPdM1TgaZsTzFjar02vJLyHcnx8F8f/tA8ja3e2PTOP67MzRIyX4xNmZfUBwFl
+	LV0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=LJGNreAEseOKR0U+3mhtB4pgJrqaFYZy31ZhYwYzPKE=;
-	b=KyKeXz7791Wje2fqas3ptwQFsLF9TIE4p9Dc9tghw1BetAM9wzA7MHY+1xYSy9Zx/D
-	htsFUsaTxTo0lwQPV8zFZ8pp4rqMw9tqgYPnsDKLXeQlGOqRCaFGxQ4cg6FXAkBNd+Vz
-	V5Qj2N1ynFhfmncDILkjMIOMnXjRlLs9IqDRdyUyOWde6XBLFk4/bHRAkhzvmfqSn7Va
-	rmrQMJIZ0lYj+HSTZvBgY8ZFz1mvEhGPCLSIV6se62zfokOc/BAiER2MVHuww5nnkANd
-	x/vZzkhWEaSBCaOEIpLQao4pMmO9tb6DrTUahRofJEaz1Ex+4hRslsx/WH+n+IWHGC1s
-	yNWQ==
-X-Gm-Message-State: AA+aEWarwSJEreHbW/lkZrLKeMVJOnVRKbvNwOjGg643ZqOCrfTYtbzE
-	oE2gvjNb+dy9TMEX1HMCiUYHXfCZPwjUtukTb1AFkfKp
-X-Google-Smtp-Source: AFSGD/UrLHfhjah2cXKV3FLVu2xc+C3tIQuwG1OGXskkQy11me7X67OPevOvTz8bkXjtghbwXsgjajTiZhWV5tvKcSs=
-X-Received: by 2002:adf:da41:: with SMTP id r1-v6mr860839wrl.129.1542698935431;
-	Mon, 19 Nov 2018 23:28:55 -0800 (PST)
+	:message-id:subject:to;
+	bh=/BizDqjC6u/LceBbfdq6BOPtF9OK8NgffgmsfdOpbYo=;
+	b=l8NqXrobp6w6SXj/NA7DpSfzbuLjUTT6PVH83tlrdrxZck9/NKQ7ECBCKu1Sf8ksXy
+	mZmDS3a+kPTwWFZrpvSnJD2z4aKMUdciAVgg62ZyTDKjVZaFRSEzixFZQv5SdGWvGbdA
+	OrYnKOr4s6LyTbREoB5ZcXY/CGnsoGXMbI37ypVPBnH/G3rFNhYa1bp3ajL/wyo6F/sU
+	wQ46yzlpuA+T4sT1pJjSs4nzt+ZHDSCKtfhLjnCEz6FnBBauf32tN/6fadYmFcnI1EA1
+	2Veeddx4h+NKzLy9rINVt2onZ8V4h5ICTaMHxda5H9USW+TBX4sGn0DtwyZ6PWT6PP8P
+	BS1g==
+X-Gm-Message-State: AA+aEWZX7zBSVuYv987BmqtiP+IYHbBEcm881Oiyh6C5U8TtnwUkzB7M
+	mG5aqquCYFZzJ9dA1pP7CLlJp1DDEAX51TIXa+DZPxGB+qE=
+X-Google-Smtp-Source: AFSGD/VBy4qCKNasLYiKqkfF72ef/48DDeBjtML04VGogTfohAG9mlKRzAGSJW4Fpg1B6O+Ki6FmVFw03tGLlORYOsg=
+X-Received: by 2002:a37:7101:: with SMTP id m1mr810404qkc.353.1542700336109;
+	Mon, 19 Nov 2018 23:52:16 -0800 (PST)
 MIME-Version: 1.0
-References: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 20 Nov 2018 08:28:43 +0100
-Message-ID: <CA+chaQfK8BxE=7yh9CtbeOk5rO-Tg1siLePbfZ8C3Vh+_fk42Q@mail.gmail.com>
-To: changqing.li@windriver.com
+References: <20181119151819.124335-1-uvv.mail@gmail.com>
+	<CAMKF1spi6ndHWCrHyw6hmdZnBdDbO4UvboNvmvSwdpBgmqX-tg@mail.gmail.com>
+In-Reply-To: <CAMKF1spi6ndHWCrHyw6hmdZnBdDbO4UvboNvmvSwdpBgmqX-tg@mail.gmail.com>
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Date: Tue, 20 Nov 2018 08:52:04 +0100
+Message-ID: <CAKHfEaidQY5axU8sfg=bneSdBBU8OuM_K+jcjgs76xcJY3M0JA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] geoip: add downloadfilename for geoip database files
+Subject: Re: [meta-oe][PATCH] glog: fixed the build for mips and other platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,121 +54,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 07:28:55 -0000
+X-List-Received-Date: Tue, 20 Nov 2018 07:52:15 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Looks, good.
+I don't see that it would be supported on these architectures. At lease
+this is what first paragraph on https://github.com/libunwind/libunwind says:
 
-Adding variable for 20181120 might help with maintenance (if we need to
-change just checksums in future). And with good variable name (or a
-comment) it would also document in the recipe why we're using this in
-downloadfilename.
 
-On Tue, Nov 20, 2018 at 7:48 AM <changqing.li@windriver.com> wrote:
 
-> From: Changqing Li <changqing.li@windriver.com>
+This library supports several architecture/operating-system combinations:
+
+
+
+Linux/x86-64: Works well. Linux/x86: Works well. Linux/ARM: Works well.
+Linux/IA-64: Works well. Linux/PARISC: Works well, but C library missing
+unwind-info. HP-UX/IA-64: Mostly works but known to have some serious
+limitations. MIPS: Newly added. Linux/AArch64: Works well. Linux/PPC64:
+Newly added. Linux/SuperH: Newly added. FreeBSD/i386: Works well.
+FreeBSD/x86-64: Newly added (FreeBSD architecture is known as amd64).
+Linux/Tilegx: Newly added (64-bit mode only).
+
+
+
+I guess if someone wants to use glog on those, glog has to be compiled
+without libunwind support. In that case the libunwind check needs to fall
+through without fatal message. I will change that part.
+
+
+
+Vyacheslav
+
+
+On Mon, Nov 19, 2018 at 10:26 PM Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Mon, Nov 19, 2018 at 7:19 AM Vyacheslav Yurkov <uvv.mail@gmail.com>
+> wrote:
+> >
+> > From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+> >
+> > According to build log
+> http://errors.yoctoproject.org/Errors/Details/201286/
+> > FindLibunwind wokred only for x86, arm, and x86_64. This patch extends
+> the
+> > cmake module to work with mips, ia64, ppc(64) and other architectures
+> supported
+> > by libunwind
 >
-> previous change of checksum don't trigger archive to re-downloaded,
-> , which will cause checksum mismatch. add downloadfilename to
-> trigger re-download.
+> It would be good to add riscv64 and arc to this list as well.
 >
-> 1. for user with PREMIRROR, another benefit is it can still compile
-> success event upstream checksum change frequently.
-> 2. but for user don't use PREMIRROR, if upstream checksum changed,
-> still might have checksum mismatch problem.
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../recipes-support/geoip/geoip_1.6.12.bb          | 24
-> +++++++++++-----------
->  1 file changed, 12 insertions(+), 12 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-> b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-> index 1e1a7ff..57f0b67 100644
-> --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-> +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-> @@ -9,10 +9,10 @@ HOMEPAGE = "http://dev.maxmind.com/geoip/"
->  SECTION = "libdevel"
->
->  SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
-> -
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat
-> \
-> -
-> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat
-> \
-> -
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat
-> \
-> -
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat
-> \
-> +
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz
-> \
-> +
-> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz
-> \
-> +
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz
-> \
-> +
-> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz
-> \
->             file://run-ptest \
->  "
->  SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
-> @@ -20,14 +20,14 @@ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
->  SRC_URI[GeoIP-dat.md5sum] = "d538e57ad9268fdc7955c6cf9a37c4a9"
->  SRC_URI[GeoIP-dat.sha256sum] =
-> "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
->
-> -SRC_URI[GeoIPv6-dat.md5sum] = "00dc3b3f53eb5f7bf6915f939998f12c"
-> -SRC_URI[GeoIPv6-dat.sha256sum] =
-> "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
-> +SRC_URI[GeoIPv6-dat.md5sum] = "a908d7a51c3883eb8f693ca197c7a142"
-> +SRC_URI[GeoIPv6-dat.sha256sum] =
-> "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
->
->  SRC_URI[GeoLiteCity-dat.md5sum] = "d700c137232f8e077ac8db8577f699d9"
->  SRC_URI[GeoLiteCity-dat.sha256sum] =
-> "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
->
-> -SRC_URI[GeoLiteCityv6-dat.md5sum] = "7f6333d433d8127181ea3c5828287c98"
-> -SRC_URI[GeoLiteCityv6-dat.sha256sum] =
-> "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
-> +SRC_URI[GeoLiteCityv6-dat.md5sum] = "8ac3506ccabaae7e9f7d6301c2654313"
-> +SRC_URI[GeoLiteCityv6-dat.sha256sum] =
-> "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
->
->  LICENSE = "LGPL-2.1"
->
-> @@ -44,10 +44,10 @@ EXTRA_OECONF = "--disable-static               \
->  do_install() {
->      make DESTDIR=${D} install
->      install -d ${D}/${datadir}/GeoIP
-> -    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
-> -    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
-> -    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
-> -    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
-> +    install ${WORKDIR}/GeoIP.dat.20181120 ${D}/${datadir}/GeoIP/GeoIP.dat
-> +    install ${WORKDIR}/GeoIPv6.dat.20181120
-> ${D}/${datadir}/GeoIP/GeoIPv6.dat
-> +    install ${WORKDIR}/GeoLiteCity.dat.20181120
-> ${D}/${datadir}/GeoIP/GeoLiteCity.dat
-> +    install ${WORKDIR}/GeoLiteCityv6.dat.20181120
-> ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
->      ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
->  }
->
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> > Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+> > ---
+> >  ...0002-Find-Libunwind-during-configure.patch | 34 ++++++++++++++-----
+> >  1 file changed, 25 insertions(+), 9 deletions(-)
+> >
+> > diff --git
+> a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+> b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+> > index 3a6f824ea..4ad302cbe 100644
+> > ---
+> a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+> > +++
+> b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+> > @@ -1,11 +1,11 @@
+> >  diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
+> >  --- a/cmake/FindLibunwind.cmake        1970-01-01 01:00:00.000000000
+> +0100
+> > -+++ b/cmake/FindLibunwind.cmake        2018-11-02 14:04:35.460437058
+> +0100
+> > -@@ -0,0 +1,37 @@
+> > ++++ b/cmake/FindLibunwind.cmake        2018-11-19 16:07:17.652031645
+> +0100
+> > +@@ -0,0 +1,54 @@
+> >  +# - Try to find libunwind
+> >  +# Once done this will define
+> >  +#
+> > -+#  LIBUNWIND_FOUND - system has libunwind
+> > ++#  Libunwind_FOUND - system has libunwind
+> >  +#  unwind - cmake target for libunwind
+> >  +
+> >  +find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
+> > @@ -15,11 +15,24 @@ diff -uNr a/cmake/FindLibunwind.cmake
+> b/cmake/FindLibunwind.cmake
+> >  +
+> >  +if (CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
+> >  +    set(LIBUNWIND_ARCH "arm")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch64")
+> > ++    set(LIBUNWIND_ARCH "aarch64")
+> >  +elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
+> > -+        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64")
+> > ++        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64" OR
+> > ++        CMAKE_SYSTEM_PROCESSOR STREQUAL "corei7-64")
+> >  +    set(LIBUNWIND_ARCH "x86_64")
+> >  +elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86$")
+> >  +    set(LIBUNWIND_ARCH "x86")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc64")
+> > ++    set(LIBUNWIND_ARCH "ppc64")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
+> > ++    set(LIBUNWIND_ARCH "ppc32")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^mips")
+> > ++    set(LIBUNWIND_ARCH "mips")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^hppa")
+> > ++    set(LIBUNWIND_ARCH "hppa")
+> > ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ia64")
+> > ++    set(LIBUNWIND_ARCH "ia64")
+> >  +endif()
+> >  +
+> >  +find_library (UNWIND_LIBRARY_PLATFORM NAMES "unwind-${LIBUNWIND_ARCH}"
+> DOC "unwind library platform")
+> > @@ -35,13 +48,17 @@ diff -uNr a/cmake/FindLibunwind.cmake
+> b/cmake/FindLibunwind.cmake
+> >  +
+> >  +mark_as_advanced (UNWIND_LIBRARY UNWIND_LIBRARY_PLATFORM)
+> >  +
+> > ++if (NOT Libunwind_FOUND)
+> > ++    message(FATAL_ERROR "Can't find libunwind library")
+> > ++endif()
+> > ++
+> >  +add_library(unwind INTERFACE IMPORTED)
+> >  +set_target_properties(unwind PROPERTIES
+> >  +    INTERFACE_LINK_LIBRARIES
+> "${UNWIND_LIBRARY};${UNWIND_LIBRARY_PLATFORM}"
+> >  +)
+> >  diff -uNr a/CMakeLists.txt b/CMakeLists.txt
+> > ---- a/CMakeLists.txt   2018-11-02 14:02:21.784835854 +0100
+> > -+++ b/CMakeLists.txt   2018-11-02 14:03:16.796935594 +0100
+> > +--- a/CMakeLists.txt   2018-11-19 15:55:05.293665965 +0100
+> > ++++ b/CMakeLists.txt   2018-11-19 15:57:37.828381535 +0100
+> >  @@ -58,7 +58,6 @@
+> >   check_include_file (execinfo.h HAVE_EXECINFO_H)
+> >   check_include_file (glob.h HAVE_GLOB_H)
+> > @@ -91,10 +108,9 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
+> >     DESTINATION lib/cmake/glog)
+> >
+> >   install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
+> lib/cmake/glog)
+> > -Binary files a/.git/index and b/.git/index differ
+> >  diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
+> > ---- a/glog-config.cmake.in     2018-11-02 14:02:21.784835854 +0100
+> > -+++ b/glog-config.cmake.in     2018-11-02 14:03:16.796935594 +0100
+> > +--- a/glog-config.cmake.in     2018-11-19 15:55:05.293665965 +0100
+> > ++++ b/glog-config.cmake.in     2018-11-19 15:57:37.828381535 +0100
+> >  @@ -4,4 +4,15 @@
+> >
+> >   @gflags_DEPENDENCY@
+> > --
+> > 2.19.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
