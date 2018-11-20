@@ -1,23 +1,29 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A5B165CE9
+Return-Path: <craig.mcqueen@innerrange.com>
+Received: from mail.innerrange.com.au (mail.innerrange.com.au [203.222.77.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 530286B8D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2018 06:04:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAK63mOR031852
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 19 Nov 2018 22:03:58 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
-	Mon, 19 Nov 2018 22:03:38 -0800
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 Nov 2018 22:03:37 -0800
-Message-ID: <20181120060337.68821-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 20 Nov 2018 06:34:36 +0000 (UTC)
+Received: from ir-mail.corp.innerrange.com.au (192.168.4.15) by
+	ir-mail.corp.innerrange.com.au (192.168.4.15) with Microsoft SMTP
+	Server
+	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+	15.1.1531.3; Tue, 20 Nov 2018 17:34:35 +1100
+Received: from ir-mail.corp.innerrange.com.au ([fe80::b00d:e485:459b:788f]) by
+	ir-mail.corp.innerrange.com.au ([fe80::b00d:e485:459b:788f%2]) with
+	mapi id 15.01.1531.007; Tue, 20 Nov 2018 17:34:35 +1100
+From: Craig McQueen <craig.mcqueen@innerrange.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-python] python3-multidict build failure
+Thread-Index: AdSAmsD4DydmzYbtTlCkyUcT35PCcA==
+Date: Tue, 20 Nov 2018 06:34:34 +0000
+Message-ID: <edd38f927abe4edda8a26827a2bbba05@innerrange.com>
+Accept-Language: en-AU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.105.91]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] krb5: Upgrade to 1.16.2
+Subject: [meta-python] python3-multidict build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,36 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 06:04:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Nov 2018 06:34:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Mingli Yu <mingli.yu@windriver.com>
+With python3-multidict v3.3.2, I sometimes get a build error when the build=
+ does a make clean:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../krb5/{krb5_1.16.1.bb => krb5_1.16.2.bb}                   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/krb5/{krb5_1.16.1.bb => krb5_1.16.2.bb} (98%)
+rm .install-deps
+rm: cannot remove '.install-deps': No such file or directory
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.1.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-similarity index 98%
-rename from meta-oe/recipes-connectivity/krb5/krb5_1.16.1.bb
-rename to meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-index 11748cbd0..c770f7bbe 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.1.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-@@ -31,8 +31,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-            file://krb5-kdc.service \
-            file://krb5-admin-server.service \
- "
--SRC_URI[md5sum] = "848e9b80d6aaaa798e3f3df24b83c407"
--SRC_URI[sha256sum] = "214ffe394e3ad0c730564074ec44f1da119159d94281bbec541dc29168d21117"
-+SRC_URI[md5sum] = "ffd52595e969fb700d37313606e4dc3d"
-+SRC_URI[sha256sum] = "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
- 
- CVE_PRODUCT = "kerberos"
- 
--- 
-2.17.1
+I reported an issue to the multidict project:
+https://github.com/aio-libs/multidict/issues/194
+
+As a work-around, I found a need to define in the recipe (or bbappend):
+
+CLEANBROKEN =3D "1"
+
+--=20
+Craig McQueen
 
 
