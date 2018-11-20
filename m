@@ -1,19 +1,19 @@
 Return-Path: <douglas.royds@taitradio.com>
 Received: from smtp0.taitradio.net (unknown [202.37.96.22])
-	by mail.openembedded.org (Postfix) with SMTP id D20266C40E
+	by mail.openembedded.org (Postfix) with SMTP id F03126C444
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2018 06:37:31 +0000 (UTC)
+	Tue, 20 Nov 2018 06:37:32 +0000 (UTC)
 Received: from acheron.taitradio.net (unknown [172.16.169.141])
-	by smtp0.taitradio.net (Postfix) with ESMTP id 026A52202BA;
+	by smtp0.taitradio.net (Postfix) with ESMTP id 417E62202D8;
 	Tue, 20 Nov 2018 19:37:31 +1300 (NZDT)
 From: Douglas Royds <douglas.royds@taitradio.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Nov 2018 19:37:14 +1300
-Message-Id: <20181120063718.28683-2-douglas.royds@taitradio.com>
+Date: Tue, 20 Nov 2018 19:37:18 +1300
+Message-Id: <20181120063718.28683-6-douglas.royds@taitradio.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20181120063718.28683-1-douglas.royds@taitradio.com>
 References: <20181120063718.28683-1-douglas.royds@taitradio.com>
-Subject: [meta-oe][PATCH 1/5] Revert "net-snmp: improve reproducibility"
+Subject: [meta-oe][PATCH 5/5] net-snmp: Reproducibility: Set NETSNMP_CONFIGURE_OPTIONS null
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,90 +26,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 06:37:32 -0000
+X-List-Received-Date: Tue, 20 Nov 2018 06:37:33 -0000
 
-This reverts commit 57d8e2c673d5f5686bbf411333f1d39c3e29690e.
+To avoid build host paths being written into binaries,
+accept a null NETSNMP_CONFIGURE_OPTIONS from the environment.
 
+Upstream-Status: Submitted https://sourceforge.net/p/net-snmp/patches/1384/
 Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
 ---
- ...e-configure-options-from-versioninfo.patch | 42 -------------------
- .../net-snmp/net-snmp_5.8.bb                  |  7 ----
- 2 files changed, 49 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-remove-configure-options-from-versioninfo.patch
+ ...bility-accept-configure-options-from-env.patch | 15 +++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.8.bb    |  2 ++
+ 2 files changed, 17 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/reproducibility-accept-configure-options-from-env.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-remove-configure-options-from-versioninfo.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-remove-configure-options-from-versioninfo.patch
-deleted file mode 100644
-index 2d540967e..000000000
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-remove-configure-options-from-versioninfo.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From f592398b1c659f84168f5c84f63af3b71454b8f5 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Fri, 28 Sep 2018 22:59:23 +0800
--Subject: [PATCH] remove configure options from versioninfo
--
--Configure options contains host build paths which breaks
--binary reproducibility.
--
--It is no harm to remove it from version info.
--
--Upstream-Status: Inappropriate [cross compile specific]
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- agent/mibgroup/ucd-snmp/versioninfo.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/agent/mibgroup/ucd-snmp/versioninfo.c b/agent/mibgroup/ucd-snmp/versioninfo.c
--index a5151c1..1160382 100644
----- a/agent/mibgroup/ucd-snmp/versioninfo.c
--+++ b/agent/mibgroup/ucd-snmp/versioninfo.c
--@@ -92,7 +92,7 @@ var_extensible_version(struct variable *vp,
--     static char     errmsg[300];
--     char           *cptr;
--     time_t          curtime;
---#ifdef NETSNMP_CONFIGURE_OPTIONS
--+#if 0
--     static char     config_opts[] = NETSNMP_CONFIGURE_OPTIONS;
-- #endif
-- 
--@@ -126,7 +126,7 @@ var_extensible_version(struct variable *vp,
--         *var_len = strlen(errmsg);
--         return ((u_char *) errmsg);
--     case VERCONFIG:
---#ifdef NETSNMP_CONFIGURE_OPTIONS
--+#if 0
--         *var_len = strlen(config_opts);
--         if (*var_len > 1024)
--             *var_len = 1024;    /* mib imposed restriction */
---- 
--2.7.4
--
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/reproducibility-accept-configure-options-from-env.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/reproducibility-accept-configure-options-from-env.patch
+new file mode 100644
+index 000000000..b0dbf5ad3
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/reproducibility-accept-configure-options-from-env.patch
+@@ -0,0 +1,15 @@
++Reproducible build: To avoid build host paths being written into binaries,
++accept NETSNMP_CONFIGURE_OPTIONS from the environment.
++NETSNMP_CONFIGURE_OPTIONS can be set either null or to a fixed value.
++
++--- net-snmp-5.8.original/configure.ac	2018-11-20 17:41:39.926529072 +1300
+++++ net-snmp-5.8/configure.ac	2018-11-20 17:54:44.488180224 +1300
++@@ -28,7 +28,7 @@
++ #
++ # save the configure arguments
++ #
++-AC_DEFINE_UNQUOTED(NETSNMP_CONFIGURE_OPTIONS,"$ac_configure_args",
+++AC_DEFINE_UNQUOTED(NETSNMP_CONFIGURE_OPTIONS,"${NETSNMP_CONFIGURE_OPTIONS-$ac_configure_args}",
++   [configure options specified])
++ CONFIGURE_OPTIONS="\"$ac_configure_args\""
++ AC_SUBST(CONFIGURE_OPTIONS)
 diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index d47f9e4a3..a32d09d77 100644
+index 08015c67b..e91d80af5 100644
 --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
 +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -24,7 +24,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-            file://0004-configure-fix-incorrect-variable.patch \
+@@ -25,6 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
             file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
             file://net-snmp-fix-for-disable-des.patch \
--           file://0001-remove-configure-options-from-versioninfo.patch \
+            file://reproducibility-have-printcap.patch \
++           file://reproducibility-accept-configure-options-from-env.patch \
             "
  SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
  SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
-@@ -169,12 +168,6 @@ net_snmp_sysroot_preprocess () {
-     fi
- }
- 
--PACKAGE_PREPROCESS_FUNCS += "net_snmp_package_preprocess"
--net_snmp_package_preprocess () {
--    sed -e 's@${RECIPE_SYSROOT}@@g' \
--       -i ${PKGD}${bindir}/net-snmp-config
--}
--
- PACKAGES += "${PN}-libs ${PN}-mibs ${PN}-server ${PN}-client \
-              ${PN}-server-snmpd ${PN}-server-snmptrapd \
-              ${PN}-lib-netsnmp ${PN}-lib-agent ${PN}-lib-helpers \
+@@ -70,6 +71,7 @@ CACHED_CONFIGUREVARS = " \
+     lt_cv_shlibpath_overrides_runpath=yes \
+     ac_cv_path_UNAMEPROG=${base_bindir}/uname \
+     ac_cv_file__etc_printcap=no \
++    NETSNMP_CONFIGURE_OPTIONS= \
+ "
+ export PERLPROG="${bindir}/env perl"
+ PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}', '', d)}"
 -- 
 2.17.1
 
