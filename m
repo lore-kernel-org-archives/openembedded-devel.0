@@ -1,24 +1,24 @@
 Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 432406C480
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 507976C49A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2018 15:36:29 +0000 (UTC)
+	Tue, 20 Nov 2018 15:40:42 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	20 Nov 2018 07:36:30 -0800
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	20 Nov 2018 07:40:43 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.56,257,1539673200"; d="scan'208";a="275485290"
+X-IronPort-AV: E=Sophos;i="5.56,257,1539673200"; d="scan'208";a="251220020"
 Received: from rkubodac-desk.ger.corp.intel.com ([10.252.31.112])
-	by orsmga005.jf.intel.com with ESMTP; 20 Nov 2018 07:36:28 -0800
+	by orsmga004.jf.intel.com with ESMTP; 20 Nov 2018 07:40:42 -0800
 From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Nov 2018 16:36:27 +0100
-Message-Id: <20181120153627.8304-1-raphael.kubo.da.costa@intel.com>
+Date: Tue, 20 Nov 2018 16:40:41 +0100
+Message-Id: <20181120154041.9420-1-raphael.kubo.da.costa@intel.com>
 X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Subject: [meta-oe][rocko][PATCH] nodejs: Enable system ICU support
+Subject: [meta-oe][sumo][PATCH] nodejs: Enable system ICU support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 15:36:30 -0000
+X-List-Received-Date: Tue, 20 Nov 2018 15:40:42 -0000
 Content-Transfer-Encoding: 8bit
 
 From: Khem Raj <raj.khem@gmail.com>
@@ -39,21 +39,20 @@ From: Khem Raj <raj.khem@gmail.com>
 Latest Chromium needs it during build
 
 (cherry picked from commit d7d0cc5227d0dc7d3ff91ded9da841d65c3f3632)
-(rocko cherry-pick note: the change was added to nodejs_8.4.0.bb rather than nodejs_8.12.0.bb)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb | 6 ++++--
+ meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-index 5bcbc0007..6280fe354 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
+index 8930cd902..132ee0f2b 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
 @@ -3,7 +3,9 @@ HOMEPAGE = "http://nodejs.org"
  LICENSE = "MIT & BSD & Artistic-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e4d35c6120f175e1fbe5ff908b1cf2d6"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=270f7477a1705f7cd3e29d3d4512915d"
  
 -DEPENDS = "openssl10 zlib"
 +DEPENDS = "openssl10 zlib icu"
