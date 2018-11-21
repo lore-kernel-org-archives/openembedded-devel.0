@@ -1,18 +1,26 @@
-Return-Path: <martin@geanix.com>
-Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E4416BF3F
+Return-Path: <fabien.lahoudere@collabora.com>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id C7F076C278
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2018 08:18:41 +0000 (UTC)
-Received: from zen.localdomain (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id 281421C0812;
-	Wed, 21 Nov 2018 09:10:19 +0100 (CET)
-From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Nov 2018 09:10:10 +0100
-Message-Id: <20181121081012.118414-1-martin@geanix.com>
-X-Mailer: git-send-email 2.19.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/3] ell: remove unused patch
+	Wed, 21 Nov 2018 09:46:00 +0000 (UTC)
+Received: from laptop-1.home (unknown
+	[IPv6:2a01:cb19:8ad6:900:42dd:dd1c:19ee:7c60])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested) (Authenticated sender: aragua)
+	by bhuna.collabora.co.uk (Postfix) with ESMTPSA id 29ED6272302;
+	Wed, 21 Nov 2018 09:46:01 +0000 (GMT)
+Message-ID: <fe3ea60453e5639708e490f2581822d1f9bec293.camel@collabora.com>
+From: Fabien Lahoudere <fabien.lahoudere@collabora.com>
+To: akuster808 <akuster808@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 21 Nov 2018 10:45:58 +0100
+In-Reply-To: <45f1378d-c17c-58ab-68bb-0b030e9cd8b1@gmail.com>
+References: <1542730446-30253-1-git-send-email-fabien.lahoudere@collabora.com>
+	<CA+chaQfN9Y+0TwfdcUc0mCzibX-U94SS9gR4NKGvF-FpCR5ekg@mail.gmail.com>
+	<45f1378d-c17c-58ab-68bb-0b030e9cd8b1@gmail.com>
+User-Agent: Evolution 3.30.2 (3.30.2-2.fc29) 
+Mime-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] evince: Drop x11 requirement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,65 +33,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 08:18:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Nov 2018 09:46:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Commit cc7bce67b ('ell: update to 0.8') removed the patch from SRC_URI
-but forgot to delete it from the git tree.
+Hi
 
-Signed-off-by: Martin Hundebøll <martin@geanix.com>
----
- ...arp.h-from-libc-instead-of-linux-hea.patch | 39 -------------------
- 1 file changed, 39 deletions(-)
- delete mode 100644 meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
+Le mardi 20 novembre 2018 à 10:01 -0700, akuster808 a écrit :
+> 
+> On 11/20/18 8:36 AM, Martin Jansa wrote:
+> > This was already removed once in:
+> > 
+> > commit 33c822a7c11df08f35dda18a44aae730f93c6130
+> > Author: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+> > Date:   Wed Sep 6 18:53:07 2017 +0200
+> > 
+> >     evince: Remove X dependency
+> > 
+> >     gnome-desktop is the only X dependency for evince.
+> >     In order to build evince for Wayland based system without X
+> > support,
+> >     gnome-desktop is added to DEPENDS only if x11 exists in
+> > DISTRO_FEATURES.
+> >     So x11 is dropped from REQUIRED_DISTRO_FEATURES.
+> > 
+> >     Signed-off-by: Fabien Lahoudere <
+> > fabien.lahoudere@collabora.co.uk>
+> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > 
+> > and then returned here:
+> > commit 62376d673aa86b5f8ffb26c8a74046ee87ef4f66
+> > Author: Armin Kuster <akuster808@gmail.com>
+> > Date:   Wed Mar 7 08:08:57 2018 -0800
+> > 
+> >     evince: only include when x11 in DISTRO_FEATURES
+> > 
+> >     Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> > 
+> > What's going on? But if everybody agrees on removing it, then you
+> > should
+> > remove the distro_features_check inherit as well.
+> 
+> Please run the yocto-check-layer.  Maybe another solution needs to
+> submitted to get this to pass.
+> 
 
-diff --git a/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch b/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
-deleted file mode 100644
-index ada65401a..000000000
---- a/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From d8236d1d789f496a193dae5d2a15d706b81f6482 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
--Date: Thu, 12 Jul 2018 10:19:50 +0200
--Subject: [PATCH] dhcp: include if_arp.h from libc instead of linux headers
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--To: ell@lists.01.org
--
--Compilation with musl libc fails due to redefinition of 'struct
--arp{req,req_old,hdr}' in linux/if_arp.h, since it is already defined and
--included in net/if_arp.h (through net/ethernet.h -> net/if_ether.h).
--
--The only symbols used from if_arp.h is ARPHRD_ETHER, so it should be
--safe to avoid the compile error by including the if_arp.h header from
--the c-library instead.
--
--Upstream-Status: Backport [https://lists.01.org/pipermail/ell/2018-July/001244.html]
--Signed-off-by: Martin Hundebøll <martin@geanix.com>
-----
-- ell/dhcp.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ell/dhcp.c b/ell/dhcp.c
--index 6c90370..0d99f74 100644
----- a/ell/dhcp.c
--+++ b/ell/dhcp.c
--@@ -27,7 +27,7 @@
-- #include <netinet/ip.h>
-- #include <net/ethernet.h>
-- #include <linux/types.h>
---#include <linux/if_arp.h>
--+#include <net/if_arp.h>
-- #include <errno.h>
-- #include <time.h>
-- 
---- 
--2.18.0
--
--- 
-2.19.1
+I tested evince with two machines using wayland only and it builds and
+runs correctly. X11 is not required to build this recipe and I think
+that sanity-meta-gnome.bbclass leads to a wrong error message and is
+redundant with 'REQUIRED_DISTRO_FEATURE ="x11"'.
+Do you agree to drop this sanity check from meta-gnome?
+
+Thanks
+
+Fabien
+
+> - armin
+> > On Tue, Nov 20, 2018 at 5:24 PM Fabien Lahoudere <
+> > fabien.lahoudere@collabora.com> wrote:
+> > 
+> > > evince works fine in a wayland only distribution.
+> > > x11 requirement is not needed.
+> > > 
+> > > Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.com>
+> > > ---
+> > >  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb | 2 --
+> > >  1 file changed, 2 deletions(-)
+> > > 
+> > > diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> > > b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> > > index 8bf8a04..01f581a 100644
+> > > --- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> > > +++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> > > @@ -6,8 +6,6 @@ DEPENDS = "gtk+3 libsecret
+> > > ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-d
+> > > 
+> > >  inherit gnome pkgconfig gtk-icon-cache gsettings gobject-
+> > > introspection
+> > > distro_features_check systemd
+> > > 
+> > > -REQUIRED_DISTRO_FEATURES = "x11"
+> > > -
+> > >  SRC_URI =
+> > > "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-
+> > > ${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive
+> > > \
+> > >             file://0001-help-remove-YELP-macro.patch \
+> > >             file://0001-Add-format-attribute-to-
+> > > _synctex_malloc.patch \
+> > > --
+> > > 1.8.3.1
+> > > 
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > 
+> 
+> 
 
 
