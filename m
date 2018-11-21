@@ -1,49 +1,54 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A60576C4D5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id E106A6C510
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2018 11:16:01 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id a3so3774898ioc.4
+	Wed, 21 Nov 2018 14:18:31 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id k198so5960848wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2018 03:16:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	Wed, 21 Nov 2018 06:18:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=E5q8nulxOc+BH7AkyAhh2kmpWDYnDf5ASvBhLd3cOSc=;
-	b=bpcVFo8C+NwDDDKUUlcWye/m+YwYYVBVBS7PnabP0PM5FSRdZNlTQuF2De5PB9i1y7
-	wQrBMzErYHxsGK2Tte+W42ZAWZMwTwG1gOz3WuFiNug/VsjkFULe4Skkjv5RFMAvdBy+
-	G+2wblR5yewMTLyHqKFq/UMNKZdhSMeD+AmTA4AC+wcvHChLeTFl6mbn3p8vM+TpWx89
-	mtmsxnmCOg5EaZdd80DUiFx6d803AOCsyuTu5eZQDr9djiid8Iz7XhgBkBHrpsJL7yqb
-	DSgeihzaMU7J5YjwHxgQHc2Rb+EXmeWHDnkJ1CNCoNkQG1s75qUHlr50gpEA180T7PBm
-	Kmfg==
+	:cc; bh=Eq0kgTqYHK33YAJ6Ebch8cmF5ojV05GFEPgEF1U1sBg=;
+	b=FrbhuWDyGJljQb2pkHfUgRIRjJyELgyXa25Yu6rcQKZNLsemYVjBvKsQKhgp2Z10uv
+	c0L56BLGopk54DswZR5HqFC3Bpo7nO0UECWRGrh4f8G/XWC6iIrNN1bVPDsg+TwlDFxO
+	M0y3rQLl2pcyTQ/FFBNO0cBwOq5Z+HBTtwdrRFTjStOrbQXNN14RnO/K39vnHaKU7upH
+	Cu52M0nzWuhu4JmeJRiA2pLM2KQEJgrwrBSC3dJln4ixk2xMQmt1PEXGhBW3XTBM1hEq
+	7f6VW+GfBDxQonLWrsqmRvEeJNNpr6yozPEH4wtWv2IcFyALu+BAsuPwGF5Sz56O0fPq
+	zqbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=E5q8nulxOc+BH7AkyAhh2kmpWDYnDf5ASvBhLd3cOSc=;
-	b=QFi8AghJZp0bQWIrEVWp6UGauspwnYytZFRjt5zQmcN1LS36/AOzoiByzluGi3uM8W
-	N0xqGgn/dq8MKzIWkNeeyp8ATpx+/i+rcx3zrPqh00sfuw8qFbFHTvLr3NubAaSAMzqL
-	pczB8b/562WYzrYkNQgLXw8yLd2pSsHCk1IC1U52tfpN7+vvuWf3ZFKIyowX0LEMCoWd
-	J8wq/vE3b1l8RLmimCGRjP7kC4K8fxaBNPZ3a4glvKCuD2AP2UhH2yC/vd1ljtbb2A02
-	1pKfJ90s01SFzkSDmV1n9+kJf13dYmlHVcn2DMQn43Q/FygA++esl4rAl55lTyAWJM+L
-	E48g==
-X-Gm-Message-State: AA+aEWZ5UxEQreLSSBQTW7cjHotkjeJCEkazzrPfmgeUksv0aVu9sxWg
-	k46wKkgHCa0YWfUlMDaRU5ymASt1LHUh+Ei1CGxjTmzd7Ac=
-X-Google-Smtp-Source: AFSGD/WRh1LRuhSuox2vvnGCi3nDU2IhertI+yRgXi+r4+zJkmhMOk1vH7rcL8reTzA1sURHmMgtzjJMQJlyQie8IEU=
-X-Received: by 2002:a6b:1602:: with SMTP id 2-v6mr4176451iow.201.1542798962621;
-	Wed, 21 Nov 2018 03:16:02 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=Eq0kgTqYHK33YAJ6Ebch8cmF5ojV05GFEPgEF1U1sBg=;
+	b=b9PRTcaPvM4BQW7wMTi/beiImXPepZzYCzkvWRBbdDIfqDkSWmBwJyQeNGnwCNufYq
+	Oob9Do9rFysyl/kNFWME0sSlkyYZckAZcdyfGvb03QyNWmgkEYDoyCzpieh+bh3Sv4JV
+	IaBEVSamsmXo8OmovUJOjOCK9YQ2f3doJmYLa9EL06yqa8rKiRXkcDm7bmmKxYsUSI2u
+	FPNZiUeyZjFmbFoNvCbFvlrvkdkfR2odHmpuinmkycpg0KEr7HKkiQiQAsCMdrv/lWh1
+	l63Mv21Cs3KCw/Cz3N5Xa+dplKEYab0HoE2+w4QQl0/vks1RWVaGNtmIf28+iWd2tz8T
+	aQcw==
+X-Gm-Message-State: AA+aEWbhQACsVigUrx72k1agxN7+cJ+AwqohwNxQvyIalyy+aZpmUczd
+	LP6JtFC9Uhe5eMykeUhm8ndutas6O8eGkCq3Xfw=
+X-Google-Smtp-Source: AFSGD/U06O1m+hSH4klv4sINxxkHuZBKKog0ny4RITrEelBg0MwMV3jTWEuV6430MLqf1kZbmYwSNvMtCIJ00ZVIDsI=
+X-Received: by 2002:a1c:4485:: with SMTP id r127mr6248049wma.50.1542809911413; 
+	Wed, 21 Nov 2018 06:18:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20181121081012.118414-1-martin@geanix.com>
-	<20181121081012.118414-3-martin@geanix.com>
-In-Reply-To: <20181121081012.118414-3-martin@geanix.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 21 Nov 2018 11:15:51 +0000
-Message-ID: <CAJTo0LYg0GkLrvO4zjCi660mxs94KEd-8xxX3CeugK25Ou1CVw@mail.gmail.com>
-To: martin@geanix.com
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] iwd: add version 0.12
+References: <1542148831-30197-1-git-send-email-akuster808@gmail.com>
+	<CA+chaQfCoBFsOzLj6Vdf2tFX4hebD4bpqdXOMU4JstMScnJrBQ@mail.gmail.com>
+	<9c0a4188-2393-aa18-6139-d6600d2507f7@gmail.com>
+	<20181114151723.GA1417@jama>
+	<e9b230a1-7544-f54c-c74c-02900bd15ac3@gmail.com>
+	<CADfgfoZt=B2-3JMCdUvNvQdGvtOQYsPvypNB4TU0VXPxQ6sSaQ@mail.gmail.com>
+	<CAMKF1srPp_W_e6ospFUzjNN1d5L6OKUExCZtxV07hU1jqO=7Vw@mail.gmail.com>
+	<CA+chaQd_7P1utSGnhP6VPDSaZ_DP9gNhNx6x6TvzVVWakwXL4w@mail.gmail.com>
+In-Reply-To: <CA+chaQd_7P1utSGnhP6VPDSaZ_DP9gNhNx6x6TvzVVWakwXL4w@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 21 Nov 2018 15:18:22 +0100
+Message-ID: <CA+chaQcWFxnFZDUpxS1zsi7RCRwXecZBqCvxqj6G2tThSpZfxg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] meta-oe: add selftest for sources.oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +61,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 11:16:01 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 14:18:32 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, 21 Nov 2018 at 08:19, Martin Hundeb=C3=B8ll <martin@geanix.com> wro=
-te:
-> The iwd wireless daemon is an alternative to wpa_supplicant. It is
-> controlled using the iwctl command line client (or the dbus interface).
+I've fixed known_hosts on abaco and some archives were finally rsynced:
+http://jenkins.nas-admin.org/view/OE/job/oe_world_workspace-rsync/481/console
+
+but it doesn't seem to cover all found issues, please re-run the test to
+see what's left.
+
+
+On Tue, Nov 20, 2018 at 9:07 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+
+> The jenkins job which does the rsync (or at least how I was doing it), is
+> still failing as reported before:
 >
-> Signed-off-by: Martin Hundeb=C3=B8ll <martin@geanix.com>
-> ---
->  meta-oe/recipes-connectivity/iwd/iwd_0.12.bb | 24 ++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+> http://jenkins.nas-admin.org/view/OE/job/oe_world_workspace-rsync/480/console
 >
-> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb b/meta-oe/recip=
-es-connectivity/iwd/iwd_0.12.bb
-> new file mode 100644
-> index 000000000..a4261547e
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-> @@ -0,0 +1,24 @@
-> +DESCRIPTION =3D "Wireless daemon for Linux"
-> +LICENSE =3D "LGPL-2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb504b67c50331fc78734fed90fb0=
-e09"
-> +
-> +inherit autotools pkgconfig systemd
-> +
-> +DEPENDS =3D "ell readline dbus"
-> +
-> +SRC_URI =3D "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-> +SRCREV =3D "d7609915db4b57229f7dd4c04b4eabcce637872a"
-> +S =3D "${WORKDIR}/git"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "iwd.service"
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
-}"
-> +PACKAGECONFIG[systemd] =3D "--with-systemd-unitdir=3D${systemd_system_un=
-itdir},--disable-systemd-service,systemd"
-> +
-> +EXTRA_OECONF +=3D "--enable-external-ell"
-> +
-> +do_configure_prepend () {
-> +    mkdir -p ${S}/build-aux
-> +}
-> +
-> +FILES_${PN} +=3D "${datadir}/dbus-1"
-
-I started a recipe for this but never got around to submitting it.
-You'll find it here:
-
-http://git.yoctoproject.org/cgit.cgi/poky-contrib/commit/?h=3Dross/mutwipar=
-gh&id=3D0e7d8a005540bdc36c7af68c0fdb8670ef74a0e0
-
-I definitely think the PACKAGECONFIGs and ead.service need to be added
-before merging.  The ptest stuff wasn't tested so I don't know how
-useful it was.
-
-Ross
+> Either you're using something else now, or it still won't work.
+>
+> Regards,
+>
+> On Mon, Nov 19, 2018 at 9:18 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>> Thanks Michael for taking care of it
+>>
+>> On Mon, Nov 19, 2018 at 12:02 PM Michael Halstead <
+>> mhalstead@linuxfoundation.org> wrote:
+>>
+>> > The rsync target on on the world build machine was offline following a
+>> > reboot causing the sync to sources.oe.org to fail. The rsync target is
+>> now
+>> > configured to be available following reboots and the sync has run.
+>> Please
+>> > let me know if this test still fails.
+>> >
+>> > On Wed, Nov 14, 2018 at 8:19 AM akuster808 <akuster808@gmail.com>
+>> wrote:
+>> >
+>> > > --
+>> > > _______________________________________________
+>> > > Openembedded-devel mailing list
+>> > > Openembedded-devel@lists.openembedded.org
+>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> > >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
 
