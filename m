@@ -1,55 +1,48 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 079906C4F7
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A60576C4D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2018 10:35:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id A533018512;
-	Wed, 21 Nov 2018 11:35:50 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id iP5_w9aU0K_m; Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 71FC618293;
-	Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5F03F1A07C;
-	Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 538B51A07F;
-	Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from XBOX04.axis.com (xbox04.axis.com [10.0.5.18])
-	by seth.se.axis.com (Postfix) with ESMTP id 47D541BD5;
-	Wed, 21 Nov 2018 11:35:49 +0100 (CET)
-Received: from XBOX04.axis.com (10.0.5.18) by XBOX04.axis.com (10.0.5.18) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Wed, 21 Nov 2018 11:35:49 +0100
-Received: from XBOX04.axis.com ([fe80::210a:724b:68cb:a917]) by
-	XBOX04.axis.com ([fe80::210a:724b:68cb:a917%22]) with mapi id
-	15.00.1365.000; Wed, 21 Nov 2018 11:35:49 +0100
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: =?utf-8?B?TWFydGluIEh1bmRlYsO4bGw=?= <martin@geanix.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 3/3] iwd: add version 0.12
-Thread-Index: AQHUgXLZI0uRFezOl0qMq3dJpi7FmKVaAs3w
-Date: Wed, 21 Nov 2018 10:35:49 +0000
-Message-ID: <bb6f2afa98ad453e99aa779d7bf0c904@XBOX04.axis.com>
+	Wed, 21 Nov 2018 11:16:01 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id a3so3774898ioc.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2018 03:16:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=E5q8nulxOc+BH7AkyAhh2kmpWDYnDf5ASvBhLd3cOSc=;
+	b=bpcVFo8C+NwDDDKUUlcWye/m+YwYYVBVBS7PnabP0PM5FSRdZNlTQuF2De5PB9i1y7
+	wQrBMzErYHxsGK2Tte+W42ZAWZMwTwG1gOz3WuFiNug/VsjkFULe4Skkjv5RFMAvdBy+
+	G+2wblR5yewMTLyHqKFq/UMNKZdhSMeD+AmTA4AC+wcvHChLeTFl6mbn3p8vM+TpWx89
+	mtmsxnmCOg5EaZdd80DUiFx6d803AOCsyuTu5eZQDr9djiid8Iz7XhgBkBHrpsJL7yqb
+	DSgeihzaMU7J5YjwHxgQHc2Rb+EXmeWHDnkJ1CNCoNkQG1s75qUHlr50gpEA180T7PBm
+	Kmfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=E5q8nulxOc+BH7AkyAhh2kmpWDYnDf5ASvBhLd3cOSc=;
+	b=QFi8AghJZp0bQWIrEVWp6UGauspwnYytZFRjt5zQmcN1LS36/AOzoiByzluGi3uM8W
+	N0xqGgn/dq8MKzIWkNeeyp8ATpx+/i+rcx3zrPqh00sfuw8qFbFHTvLr3NubAaSAMzqL
+	pczB8b/562WYzrYkNQgLXw8yLd2pSsHCk1IC1U52tfpN7+vvuWf3ZFKIyowX0LEMCoWd
+	J8wq/vE3b1l8RLmimCGRjP7kC4K8fxaBNPZ3a4glvKCuD2AP2UhH2yC/vd1ljtbb2A02
+	1pKfJ90s01SFzkSDmV1n9+kJf13dYmlHVcn2DMQn43Q/FygA++esl4rAl55lTyAWJM+L
+	E48g==
+X-Gm-Message-State: AA+aEWZ5UxEQreLSSBQTW7cjHotkjeJCEkazzrPfmgeUksv0aVu9sxWg
+	k46wKkgHCa0YWfUlMDaRU5ymASt1LHUh+Ei1CGxjTmzd7Ac=
+X-Google-Smtp-Source: AFSGD/WRh1LRuhSuox2vvnGCi3nDU2IhertI+yRgXi+r4+zJkmhMOk1vH7rcL8reTzA1sURHmMgtzjJMQJlyQie8IEU=
+X-Received: by 2002:a6b:1602:: with SMTP id 2-v6mr4176451iow.201.1542798962621;
+	Wed, 21 Nov 2018 03:16:02 -0800 (PST)
+MIME-Version: 1.0
 References: <20181121081012.118414-1-martin@geanix.com>
 	<20181121081012.118414-3-martin@geanix.com>
 In-Reply-To: <20181121081012.118414-3-martin@geanix.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 21 Nov 2018 11:15:51 +0000
+Message-ID: <CAJTo0LYg0GkLrvO4zjCi660mxs94KEd-8xxX3CeugK25Ou1CVw@mail.gmail.com>
+To: martin@geanix.com
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 3/3] iwd: add version 0.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -63,46 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 10:35:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 21 Nov 2018 11:16:01 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtDQo+IGRldmVsLWJv
-dW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIE1hcnRpbiBIdW5kZWLD
-uGxsDQo+IFNlbnQ6IGRlbiAyMSBub3ZlbWJlciAyMDE4IDA5OjEwDQo+IFRvOiBvcGVuZW1iZWRk
-ZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBbb2VdIFttZXRhLW9l
-XVtQQVRDSCAzLzNdIGl3ZDogYWRkIHZlcnNpb24gMC4xMg0KPiANCj4gVGhlIGl3ZCB3aXJlbGVz
-cyBkYWVtb24gaXMgYW4gYWx0ZXJuYXRpdmUgdG8gd3BhX3N1cHBsaWNhbnQuIEl0IGlzDQo+IGNv
-bnRyb2xsZWQgdXNpbmcgdGhlIGl3Y3RsIGNvbW1hbmQgbGluZSBjbGllbnQgKG9yIHRoZSBkYnVz
-IGludGVyZmFjZSkuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBNYXJ0aW4gSHVuZGViw7hsbCA8bWFy
-dGluQGdlYW5peC5jb20+DQo+IC0tLQ0KPiAgbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9p
-d2QvaXdkXzAuMTIuYmIgfCAyNCArKysrKysrKysrKysrKysrKysrKw0KPiAgMSBmaWxlIGNoYW5n
-ZWQsIDI0IGluc2VydGlvbnMoKykNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lw
-ZXMtY29ubmVjdGl2aXR5L2l3ZC9pd2RfMC4xMi5iYg0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEt
-b2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvaXdkL2l3ZF8wLjEyLmJiIGIvbWV0YS0NCj4gb2UvcmVj
-aXBlcy1jb25uZWN0aXZpdHkvaXdkL2l3ZF8wLjEyLmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
-DQo+IGluZGV4IDAwMDAwMDAwMC4uYTQyNjE1NDdlDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIv
-bWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9pd2QvaXdkXzAuMTIuYmINCj4gQEAgLTAsMCAr
-MSwyNCBAQA0KPiArREVTQ1JJUFRJT04gPSAiV2lyZWxlc3MgZGFlbW9uIGZvciBMaW51eCINCj4g
-K0xJQ0VOU0UgPSAiTEdQTC0yLjEiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZ
-SU5HO21kNT1mYjUwNGI2N2M1MDMzMWZjNzg3MzRmZWQ5MGZiMGUwOSINCj4gKw0KPiAraW5oZXJp
-dCBhdXRvdG9vbHMgcGtnY29uZmlnIHN5c3RlbWQNCj4gKw0KPiArREVQRU5EUyA9ICJlbGwgcmVh
-ZGxpbmUgZGJ1cyINCg0KR2l2ZW4gdGhhdCB0aGUgcmVhZGxpbmUgbGlicmFyeSBpcyBHUEx2Mywg
-aXQgaXMgcHJvYmFibHkgYSBnb29kIGlkZWEgDQp0byBiZSBhYmxlIHRvIGRpc2FibGUgdGhlIHBh
-cnQgdGhhdCB1c2VzIGl0LiBJLmUuLCBzb21ldGhpbmcgbGlrZToNCg0KUEFDS0FHRUNPTkZJR1tj
-bGllbnRdID0gIi0tZW5hYmxlLWNsaWVudCwgLS1kaXNhYmxlLWNsaWVudCwgcmVhZGxpbmUsIg0K
-DQphbmQgYWRkICJjbGllbnQiIHRvIFBBQ0tBR0VDT05GSUcgYnkgZGVmYXVsdC4NCg0KPiArDQo+
-ICtTUkNfVVJJID0gImdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbmV0d29yay93aXJlbGVz
-cy9pd2QuZ2l0Ig0KPiArU1JDUkVWID0gImQ3NjA5OTE1ZGI0YjU3MjI5ZjdkZDRjMDRiNGVhYmNj
-ZTYzNzg3MmEiDQo+ICtTID0gIiR7V09SS0RJUn0vZ2l0Ig0KPiArDQo+ICtTWVNURU1EX1NFUlZJ
-Q0VfJHtQTn0gPSAiaXdkLnNlcnZpY2UiDQo+ICsNCj4gK1BBQ0tBR0VDT05GSUcgPz89ICIke0Bi
-Yi51dGlscy5maWx0ZXIoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgZCl9Ig0KPiArUEFD
-S0FHRUNPTkZJR1tzeXN0ZW1kXSA9ICItLXdpdGgtc3lzdGVtZC11bml0ZGlyPSR7c3lzdGVtZF9z
-eXN0ZW1fdW5pdGRpcn0sLS1kaXNhYmxlLXN5c3RlbWQtc2VydmljZSxzeXN0ZW1kIg0KPiArDQo+
-ICtFWFRSQV9PRUNPTkYgKz0gIi0tZW5hYmxlLWV4dGVybmFsLWVsbCINCj4gKw0KPiArZG9fY29u
-ZmlndXJlX3ByZXBlbmQgKCkgew0KPiArICAgIG1rZGlyIC1wICR7U30vYnVpbGQtYXV4DQo+ICt9
-DQo+ICsNCj4gK0ZJTEVTXyR7UE59ICs9ICIke2RhdGFkaXJ9L2RidXMtMSINCj4gLS0NCj4gMi4x
-OS4xDQoNCi8vUGV0ZXINCg0K
+On Wed, 21 Nov 2018 at 08:19, Martin Hundeb=C3=B8ll <martin@geanix.com> wro=
+te:
+> The iwd wireless daemon is an alternative to wpa_supplicant. It is
+> controlled using the iwctl command line client (or the dbus interface).
+>
+> Signed-off-by: Martin Hundeb=C3=B8ll <martin@geanix.com>
+> ---
+>  meta-oe/recipes-connectivity/iwd/iwd_0.12.bb | 24 ++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+>
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb b/meta-oe/recip=
+es-connectivity/iwd/iwd_0.12.bb
+> new file mode 100644
+> index 000000000..a4261547e
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+> @@ -0,0 +1,24 @@
+> +DESCRIPTION =3D "Wireless daemon for Linux"
+> +LICENSE =3D "LGPL-2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb504b67c50331fc78734fed90fb0=
+e09"
+> +
+> +inherit autotools pkgconfig systemd
+> +
+> +DEPENDS =3D "ell readline dbus"
+> +
+> +SRC_URI =3D "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+> +SRCREV =3D "d7609915db4b57229f7dd4c04b4eabcce637872a"
+> +S =3D "${WORKDIR}/git"
+> +
+> +SYSTEMD_SERVICE_${PN} =3D "iwd.service"
+> +
+> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
+}"
+> +PACKAGECONFIG[systemd] =3D "--with-systemd-unitdir=3D${systemd_system_un=
+itdir},--disable-systemd-service,systemd"
+> +
+> +EXTRA_OECONF +=3D "--enable-external-ell"
+> +
+> +do_configure_prepend () {
+> +    mkdir -p ${S}/build-aux
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}/dbus-1"
+
+I started a recipe for this but never got around to submitting it.
+You'll find it here:
+
+http://git.yoctoproject.org/cgit.cgi/poky-contrib/commit/?h=3Dross/mutwipar=
+gh&id=3D0e7d8a005540bdc36c7af68c0fdb8670ef74a0e0
+
+I definitely think the PACKAGECONFIGs and ead.service need to be added
+before merging.  The ptest stuff wasn't tested so I don't know how
+useful it was.
+
+Ross
 
