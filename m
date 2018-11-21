@@ -1,20 +1,22 @@
 Return-Path: <martin@geanix.com>
+X-Greylist: delayed 503 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 21 Nov 2018 08:18:41 UTC
 Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C5D26011A
+	by mail.openembedded.org (Postfix) with ESMTP id 7D6106BD73
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 21 Nov 2018 08:18:41 +0000 (UTC)
 Received: from zen.localdomain (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id E843A1C1AF3;
+	by mail.hundeboll.net (Postfix) with ESMTPSA id 442E21C1AF1;
 	Wed, 21 Nov 2018 09:11:07 +0100 (CET)
 From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Nov 2018 09:10:12 +0100
-Message-Id: <20181121081012.118414-3-martin@geanix.com>
+Date: Wed, 21 Nov 2018 09:10:11 +0100
+Message-Id: <20181121081012.118414-2-martin@geanix.com>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181121081012.118414-1-martin@geanix.com>
 References: <20181121081012.118414-1-martin@geanix.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] iwd: add version 0.12
+Subject: [meta-oe][PATCH 2/3] ell: update to 0.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +33,28 @@ X-List-Received-Date: Wed, 21 Nov 2018 08:18:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The iwd wireless daemon is an alternative to wpa_supplicant. It is
-controlled using the iwctl command line client (or the dbus interface).
-
 Signed-off-by: Martin Hundebøll <martin@geanix.com>
 ---
- meta-oe/recipes-connectivity/iwd/iwd_0.12.bb | 24 ++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+ meta-oe/recipes-core/ell/{ell_0.8.bb => ell_0.15.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/ell/{ell_0.8.bb => ell_0.15.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-new file mode 100644
-index 000000000..a4261547e
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Wireless daemon for Linux"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
-+
-+inherit autotools pkgconfig systemd
-+
-+DEPENDS = "ell readline dbus"
-+
-+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-+SRCREV = "d7609915db4b57229f7dd4c04b4eabcce637872a"
-+S = "${WORKDIR}/git"
-+
-+SYSTEMD_SERVICE_${PN} = "iwd.service"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
-+
-+EXTRA_OECONF += "--enable-external-ell"
-+
-+do_configure_prepend () {
-+    mkdir -p ${S}/build-aux
-+}
-+
-+FILES_${PN} += "${datadir}/dbus-1"
+diff --git a/meta-oe/recipes-core/ell/ell_0.8.bb b/meta-oe/recipes-core/ell/ell_0.15.bb
+similarity index 88%
+rename from meta-oe/recipes-core/ell/ell_0.8.bb
+rename to meta-oe/recipes-core/ell/ell_0.15.bb
+index 0428cab28..5dbad50f3 100644
+--- a/meta-oe/recipes-core/ell/ell_0.8.bb
++++ b/meta-oe/recipes-core/ell/ell_0.15.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
+ inherit autotools pkgconfig
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "d572281caedef357c392a7c9aa65a3b21a18cfdb"
++SRCREV = "ea0f5f42e3af3fad2b60ee87719cdd227fd89ab0"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
+ 
+ do_configure_prepend () {
 -- 
 2.19.1
 
