@@ -1,20 +1,48 @@
-Return-Path: <martin@geanix.com>
-Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id DAFF36C5B9
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
+	[209.85.161.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 88A816C5C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2018 14:12:58 +0000 (UTC)
-Received: from zen.localdomain (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id 884181C1B0D;
-	Thu, 22 Nov 2018 15:12:59 +0100 (CET)
-From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Nov 2018 15:12:55 +0100
-Message-Id: <20181122141255.61221-1-martin@geanix.com>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20181122135127.60927-1-martin@geanix.com>
-References: <20181122135127.60927-1-martin@geanix.com>
+	Thu, 22 Nov 2018 15:03:14 +0000 (UTC)
+Received: by mail-yw1-f66.google.com with SMTP id h32so3735756ywk.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Nov 2018 07:03:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=2VEvilNe5KdMqUahwpPKAoA1W7FmA6jmnR1CW/NBdiM=;
+	b=f1eH5IvX/nyjyvlJ05cbKUrYFBVF3dGzC6flwXA7CRuwDoTAf07/29cJrmZWyxe4eG
+	xNgTxdwutBn7hoTgj25ujvvHy5IPDcAXJjvWLxN9Nesg8S23mrJZsLcbNPWfmc0jdSzU
+	yOT9sgzq362vFEAKP6qTtkhUii68h6Sq5twoHmdElZD08fbILXMXqpHAbTBhN8S54Bt7
+	0iny2fpPuJEgNMO0KAUuWfAQz4mues0cLaDxO4EoB4YuITpFXlNLhLyiqI/MqT59LOjI
+	TRybLj9fVvTfY6V/XTgs1mKti/wIrzshwsGHJMziFmQNeq0Fb4ny/LJP464Y5nPSZG0o
+	5nQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=2VEvilNe5KdMqUahwpPKAoA1W7FmA6jmnR1CW/NBdiM=;
+	b=M6g4gYMdM19XpOhpg75PDf8YAJqI4Dwe/rWrRYxqnGLg9A4vbRdYrRYYUJ9kkB8ed0
+	l7NnKCBP7vmKw0A7TsR/tXexjuLUgmQUHYJTyYl4kKs1kCjKjghYuZWQ+JohwthuldjZ
+	D+efh9r491Y23VcQnHChRkPtuzzWi9h+ZrLYKrrjtEA7XqB2U28KDjxZmlDh9IcPZ8lh
+	Zp96MgRLKHj8CXvLAt/MKa+NrL5lVJ1Ieyr7YJEbCWKj9Zrkl3UIrfQLEMPtV2JKlkt/
+	Qso/KivXhz9a8kfuvrgdxwzPw/RLakdxJcmCnDOb+FxSLkZrPr3jBXU0b+rOdJRpLGgS
+	Gz4A==
+X-Gm-Message-State: AA+aEWZt8Hcx3r3FtRbJg0hZ8xHoaDDaj4RZzdxFKr1/09wW58PN0Hb1
+	aFsD/La7QRdsVKOzHMzKS38rgJUfw8lplqQ/eGBaygy+
+X-Google-Smtp-Source: AFSGD/V5h1LFaW07DS2bpqTWWCQWT8pW2mOnnOK0cSjKeXOuQi6NxNMniXvRGfjiBxciQydj9AQFyCTz8KKNBKRGU8I=
+X-Received: by 2002:a81:3e07:: with SMTP id l7mr1977947ywa.447.1542898995293; 
+	Thu, 22 Nov 2018 07:03:15 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCHv4] iwd: add version 0.12
+References: <20181112143259.11488-1-schnitzeltony@gmail.com>
+	<8a63135c-70eb-6744-fa5c-88092b63bfaf@geanix.com>
+In-Reply-To: <8a63135c-70eb-6744-fa5c-88092b63bfaf@geanix.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 22 Nov 2018 16:03:02 +0100
+Message-ID: <CALbNGRSz-nvzdtkivON5dZqRojng+MD8WYRU54ohjvUmH8FZYw@mail.gmail.com>
+To: martin@geanix.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [thud][PATCH 1/2] lvm2: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,227 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2018 14:12:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Nov 2018 15:03:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The iwd wireless daemon is an alternative to wpa_supplicant. It is
-controlled using the iwctl command line client (or the dbus interface).
+On Thu, Nov 22, 2018 at 3:02 PM Martin Hundeb=C3=B8ll <martin@geanix.com> w=
+rote:
+>
+> Hi Andreas,
+>
+> On 12/11/2018 15.32, Andreas M=C3=BCller wrote:
+> > From: Mingli Yu <Mingli.Yu@windriver.com>
+> >
+> > Update SRC_URI for lvm2 as the previous
+> > one is invalid.
+> >
+> > Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+> > Tested-by: Stefan Agner <stefan.agner@toradex.com>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >   meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-su=
+pport/lvm2/lvm2.inc
+> > index 75f4d89a0..5728d83ea 100644
+> > --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+> > +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+> > @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12713b4d9386=
+533feeb07d6e4831765a \
+> >
+> >   DEPENDS +=3D "util-linux libaio"
+> >
+> > -SRC_URI =3D "ftp://sources.redhat.com/pub/lvm2/LVM2.${PV}.tgz \
+> > +SRC_URI =3D "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+>
+> Why not use
+>    ftp://sources.redhat.com/pub/lvm2/releases/
+> or
+>    https://www.sourceware.org/pub/lvm2/releases/
+>
+> ?
+>
+> >              file://lvm.conf \
+> >              file://0001-implement-libc-specific-reopen_stream.patch \
+> >              file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
+> >
+>
+> --
+> Kind regards,
+> Martin Hundeb=C3=B8ll
+> Embedded Linux Consultant
+>
+> +45 61 65 54 61
+> martin@geanix.com
+>
+> Geanix IVS
+> https://geanix.com
+> DK39600706
 
-Signed-off-by: Martin Hundebøll <martin@geanix.com>
----
+Just forwarded a patch from master to thud.
 
-Changes since v3:
-- Update patch upstream status to backport
-
-Changes since v2:
-- add patch to make client unit test depend on packageconfig
-- remove split of packages
-
-Changes since v1:
-- add packageconfig for client, ead, and ofono
-- split out packages for iwctl, ead, and iwmon
-- add ptest support
-
- ...ient-unit-test-conditional-on-enable.patch | 59 +++++++++++++++++++
- ...ble-serial-tests-in-automake-to-supp.patch | 32 ++++++++++
- .../recipes-connectivity/iwd/iwd/run-ptest    | 30 ++++++++++
- meta-oe/recipes-connectivity/iwd/iwd_0.12.bb  | 43 ++++++++++++++
- 4 files changed, 164 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile-make-client-unit-test-conditional-on-enable.patch
- create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-configure.ac-enable-serial-tests-in-automake-to-supp.patch
- create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/run-ptest
- create mode 100644 meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile-make-client-unit-test-conditional-on-enable.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile-make-client-unit-test-conditional-on-enable.patch
-new file mode 100644
-index 000000000..7a39d05e5
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile-make-client-unit-test-conditional-on-enable.patch
-@@ -0,0 +1,59 @@
-+From b327b775db4e250d3448ab30ce97ca0acfea7603 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-+Date: Thu, 22 Nov 2018 14:31:11 +0100
-+Subject: [PATCH] Makefile: make client unit test conditional on
-+ --{enable,disable}-client
-+To: iwd@lists.01.org
-+
-+The iwctl client and its unit test depends on readline. If building on a
-+host without readline installed, default make target succeeds when
-+configured with --disable-client, but the following make check target
-+fails.
-+
-+Fix this by making the test-client target conditional on the
-+--{enable,disable}-client configure flag.
-+
-+Upstream-Status: Backport [c4803d3b12010292d719cc3bcf694def5b6eeee8]
-+Signed-Off-By: Martin Hundebøll <martin@geanix.com>
-+
-+---
-+ Makefile.am | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index db64c38..262e80d 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -297,9 +297,11 @@ unit_tests = unit/test-cmac-aes \
-+ 		unit/test-crypto unit/test-eapol unit/test-mpdu \
-+ 		unit/test-ie unit/test-ssid-to-utf8 unit/test-ssid-security \
-+ 		unit/test-arc4 unit/test-wsc unit/test-eap-mschapv2 \
-+-		unit/test-eap-sim unit/test-client unit/test-ecc \
-+-		unit/test-sae
-++		unit/test-eap-sim unit/test-ecc unit/test-sae
-+ 
-++if CLIENT
-++unit_tests += unit/test-client
-++endif
-+ 
-+ ell_pem_files = cert-ca-key.pem cert-client-key.pem cert-client-key-pkcs8.pem \
-+ 		cert-server-key.pem cert-server-key-pkcs8.pem \
-+@@ -404,6 +406,7 @@ unit_test_eap_mschapv2_SOURCES = src/eap-mschapv2.h src/eap-mschapv2.c \
-+ 				unit/test-eap-mschapv2.c
-+ unit_test_eap_mschapv2_LDADD = $(ell_ldadd)
-+ 
-++if CLIENT
-+ unit_test_client_SOURCES = unit/test-client.c \
-+ 				client/adapter.c \
-+ 				client/agent.h client/agent.c \
-+@@ -414,6 +417,7 @@ unit_test_client_SOURCES = unit/test-client.c \
-+ 				client/network.h client/network.c \
-+ 				client/properties.h client/properties.c
-+ unit_test_client_LDADD = $(ell_ldadd) -lreadline
-++endif
-+ 
-+ unit_test_ecc_SOURCES = unit/test-ecc.c src/ecc.c src/ecc.h
-+ unit_test_ecc_LDADD = $(ell_ldadd)
-+-- 
-+2.19.1
-+
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-configure.ac-enable-serial-tests-in-automake-to-supp.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-configure.ac-enable-serial-tests-in-automake-to-supp.patch
-new file mode 100644
-index 000000000..f9f073056
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-configure.ac-enable-serial-tests-in-automake-to-supp.patch
-@@ -0,0 +1,32 @@
-+From 06a21885b89675ba094b573d5af8aa74729111d6 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-+Date: Thu, 22 Nov 2018 10:03:09 +0100
-+Subject: [PATCH] configure.ac: enable serial-tests in automake to support
-+ ptest
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+Signed-off-by: Martin Hundebøll <martin@geanix.com>
-+---
-+ configure.ac | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 8deb53a..1a5330b 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -6,7 +6,8 @@ AC_CONFIG_AUX_DIR(build-aux)
-+ AC_CONFIG_MACRO_DIR(build-aux)
-+ 
-+ AM_INIT_AUTOMAKE([foreign subdir-objects color-tests silent-rules
-+-					tar-pax no-dist-gzip dist-xz])
-++					tar-pax no-dist-gzip dist-xz
-++					serial-tests])
-+ 
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-+ 
-+-- 
-+2.19.1
-+
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/run-ptest b/meta-oe/recipes-connectivity/iwd/iwd/run-ptest
-new file mode 100644
-index 000000000..f2db136b1
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iwd/iwd/run-ptest
-@@ -0,0 +1,30 @@
-+#!/bin/sh
-+
-+run_test() {
-+    test=$1
-+    name=$(basename $1)
-+
-+    log=$(./$test)
-+    res=$(echo $?)
-+
-+    # check for skipped test
-+    case "$log" in
-+        *skipping*)
-+            echo "SKIP: $name"
-+            return
-+            ;;
-+    esac
-+
-+    # check for passed / failed
-+    if [[ "$res" -eq "0" ]]; then
-+        echo "PASS: $name"
-+    else
-+        echo "FAIL: $name"
-+    fi
-+}
-+
-+for path in tests/*; do
-+    run_test $path
-+done
-+
-+exit 0
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-new file mode 100644
-index 000000000..c9aec91ce
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "Wireless daemon for Linux"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
-+
-+inherit autotools pkgconfig systemd ptest
-+
-+DEPENDS = "ell dbus"
-+
-+SRC_URI = " \
-+    git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-+    file://0001-configure.ac-enable-serial-tests-in-automake-to-supp.patch \
-+    file://0001-Makefile-make-client-unit-test-conditional-on-enable.patch \
-+    file://run-ptest \
-+"
-+SRCREV = "d7609915db4b57229f7dd4c04b4eabcce637872a"
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG ??= "client ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} wired ofono"
-+PACKAGECONFIG[client] = "--enable-client,--disable-client,readline"
-+PACKAGECONFIG[systemd] = "--enable-systemd-service,--disable-systemd-service,systemd"
-+PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
-+PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
-+
-+EXTRA_OECONF += "--enable-external-ell"
-+
-+do_configure_prepend () {
-+    mkdir -p ${S}/build-aux
-+}
-+
-+do_compile_ptest() {
-+    oe_runmake buildtest-TESTS
-+}
-+
-+do_install_ptest() {
-+    # remove intermediate object files
-+    rm -f ${B}/unit/*.o
-+    install -D -t ${D}${PTEST_PATH}/tests ${B}/unit/*
-+}
-+
-+# iwd service
-+SYSTEMD_SERVICE_${PN} = "iwd.service"
-+SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
-+FILES_${PN} += "${datadir}/dbus-1/"
--- 
-2.19.1
-
+Andreas
 
