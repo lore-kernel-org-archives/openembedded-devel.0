@@ -1,44 +1,22 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 03CB86C4E4
+Return-Path: <martin@geanix.com>
+Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
+	by mail.openembedded.org (Postfix) with ESMTP id 20A316C62B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 09:38:51 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id n32so9872774qte.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 01:38:53 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:organization:content-transfer-encoding;
-	bh=nSGHVYZob2x2TRnyujlkZ2ia1n5an+sNNMMK3fsGH0E=;
-	b=FZk/vQ6o83I/tqHZCt1rjA2euXSqfwVcIfoL+WoakDcOUAwEpD+yYrpyxQMMlXCFA0
-	rL3wPn/DA/xt3tD8mxdc7ssD7puh6Xku1/O0HQZY7JPdGdv1BWQMv60uand+s8VmoYE4
-	1+RlpQl2gK6Yif3OhYdaDh895q/7Sh0bG+Vzpa+RCwVMYE8q4EDq+C7n+EwabwjzC1+F
-	DwDEnB/3eDivGSV92nVfdfBRF50e1il+QQf5AWVdB6BjdXS7c9MlBvwgNOuCvwMnqFdg
-	/KMyYF24hkQ5tzJ/4CuPOP1CFU0UGOdC4k4x8Ull+EYkMRLQcF/I9fi+WQtxJAuI/lQ2
-	X8Jg==
-X-Gm-Message-State: AGRZ1gL9nLwiWb7LfS+waWagR337nageD+ey3iDaEUzoIXN5ser5WHd/
-	Qt+d/kdu7C6Q6PQOEKe3wK4Ok0Xb
-X-Google-Smtp-Source: AJdET5e0qhR6WK4LEM7onQW5nAPXi4uE7wQsWfBrxx25NvSoe9S3GKz3j3c2YTRGomGKOJkwR+o4GQ==
-X-Received: by 2002:ac8:1185:: with SMTP id d5mr13608184qtj.117.1542965932570; 
-	Fri, 23 Nov 2018 01:38:52 -0800 (PST)
-Received: from localhost.localdomain ([181.220.65.91])
-	by smtp.gmail.com with ESMTPSA id
-	k132sm22288512qke.36.2018.11.23.01.38.49
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 23 Nov 2018 01:38:51 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Fri, 23 Nov 2018 07:38:46 -0200
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Nov 2018 07:38:45 -0200
-Message-Id: <20181123093845.22336-1-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.19.1
+	Fri, 23 Nov 2018 09:58:57 +0000 (UTC)
+Received: from [10.0.0.10] (unknown [85.184.147.232])
+	by mail.hundeboll.net (Postfix) with ESMTPSA id E10221C1B29;
+	Fri, 23 Nov 2018 10:58:57 +0100 (CET)
+To: =?UTF-8?Q?Peter_Ba=c5=a1ista?= <pbasista@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20181118170442.14670-1-pbasista@gmail.com>
+From: =?UTF-8?Q?Martin_Hundeb=c3=b8ll?= <martin@geanix.com>
+Message-ID: <8d3cef96-99d2-a8ce-6eeb-213942b77047@geanix.com>
+Date: Fri, 23 Nov 2018 10:58:36 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.1
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [PATCH] postgresql: Allow successful run of postgresql-setup
+In-Reply-To: <20181118170442.14670-1-pbasista@gmail.com>
+Subject: Re: [meta-multimedia][PATCH] Add a working tvheadend recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,32 +29,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 09:38:52 -0000
+X-List-Received-Date: Fri, 23 Nov 2018 09:58:58 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US-large
 Content-Transfer-Encoding: 8bit
 
-The postgresql-setup utility log-in on postgres user to create the
-database, however, the shell set to the user is bash and it wasn't
-being installed as runtime dependency.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
 
- meta-oe/recipes-dbs/postgresql/postgresql.inc | 1 +
- 1 file changed, 1 insertion(+)
+On 18/11/2018 18.04, Peter Bašista wrote:
+> The original one was previously removed
+> by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
+> as part of a clean-up of blacklisted recipes.
+> 
+> Signed-off-by: Peter Bašista <pbasista@gmail.com>
+> ---
+>   .../recipes-dvb/tvheadend/tvheadend_git.bb    | 37 +++++++++++++++++++
+>   1 file changed, 37 insertions(+)
+>   create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> 
+> diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> new file mode 100644
+> index 000000000..2a76d5d34
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> @@ -0,0 +1,37 @@
+> +SUMMARY = "Tvheadend: TV streaming server and recorder"
+> +HOMEPAGE = "https://tvheadend.org/"
+> +
+> +DEPENDS = "avahi cmake-native gettext-native libpcre2 libdvbcsa openssl zlib python-native"
+> +
+> +LICENSE = "GPLv3+"
+> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
+> +
+> +SRC_URI = "git://github.com/tvheadend/tvheadend.git"
+> +
+> +inherit gitpkgv
+> +SRCREV = "${AUTOREV}"
+> +PV = "4.3+git${SRCPV}"
+> +PKGV = "4.3+git${GITPKGV}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG ?= ""
+> +PACKAGECONFIG[uriparser] = "--enable-uriparser,--disable-uriparser,uriparser"
+> +
+> +do_configure() {
+> +    ./configure ${PACKAGECONFIG_CONFARGS} \
+> +                --prefix=${prefix} \
+> +                --libdir=${libdir} \
+> +                --bindir=${bindir} \
+> +                --datadir=${datadir} \
+> +                --arch=${TARGET_ARCH} \
+> +                --disable-libav \
+> +                --disable-ffmpeg_static \
+> +                --disable-hdhomerun_static
+> +}
+> +
+> +do_install() {
+> +    oe_runmake install DESTDIR=${D}
+> +}
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index 3bf71f02e..5fc823898 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -231,6 +231,7 @@ FILES_${PN} += "${sysconfdir}/init.d/${BPN}-server \
-        if 'pam' == d.getVar('enable_pam') \
-        else ''} \
- "
-+RDEPENDS_${PN} += "bash"
- 
- FILES_${PN}-client = "${bindir}/clusterdb \
-     ${bindir}/createdb \
+do_configure() and do_install() look pretty much like the ones from 
+autotools.bbclass. Wouldn't it be prettier to do:
+
+inherit autotools
+
+EXTRA_OECONF = "--disable-libav --disable-ffmpeg_static 
+--disable-hdhomerun_static"
+
+do_compile[noexec] = "1"
+
+?
+
+// Martin
+
+> +
+> +FILES_${PN} += "${datadir}/${BPN}"
+> 
+
 -- 
-2.19.1
+Kind regards,
+Martin Hundebøll
+Embedded Linux Consultant
 
++45 61 65 54 61
+martin@geanix.com
+
+Geanix IVS
+https://geanix.com
+DK39600706
 
