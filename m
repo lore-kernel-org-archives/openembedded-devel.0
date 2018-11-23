@@ -1,54 +1,50 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 487EB6CFEC
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
+	[209.85.166.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C6B36CECE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 15:39:53 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id r63-v6so12346011wma.4
+	Fri, 23 Nov 2018 15:57:30 +0000 (UTC)
+Received: by mail-io1-f47.google.com with SMTP id r200so9074370iod.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 07:39:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
-	b=WSSg+vITJ92OC23Xry+K2jqNTjFYavYMhQDaDORZEbQPgaN+sSIT98xPwU7PwKtBYy
-	mEF6AW9C7TERjS3fLrMHe7GIiIgfueKEjMyg4c9LGSB8xajM+iSH3Lxwy1E8kaAOyMFX
-	CO/wplVswPSIgSQMzmDbF8yCtAwKcI7C+A7eYkagEDC/LHNWtZaOCaPrI65URFR3Vfay
-	bR5oLPligwZLLzFJJNKl9nIEJCXVY0YB0LAjsPmgvCsRc0wn3nqSd9S+00Fw7VtufqJW
-	Vjb8C9THlCT7bvL3CaeN6PQbGWnUPq0cd5Hl+i7LlVEVhjkEek6ygRwCqa5+z67eoHnC
-	yudA==
+	Fri, 23 Nov 2018 07:57:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=O2eE7LHbFMjau6raMeSjrmliRK0tV4ni/X5iIXRIEyo=;
+	b=IL2hQCxDhAQ5CU6ZnVLGETvyrH5gy0V2fKgJL3McV+JWouix5D+MT4rD5NNs5DamWl
+	uKexN4c+aeWPK+N775GYxRcbxy+NseDCRak7lzE1Vpkm0VOwLLhmZMdKSac/rgtdK+s4
+	aH2XD9GPwwRdDr0EB+NLDMG92NLZSOgN7FhumymjySwTDe3Nb0F35GiCaLvhPENyHJ8p
+	2kMQ2J4H/odksFo/9sKRFPiYppXsrcBQUyyYU0WSg3T5t9agqBWYcoKp+kwOc5nUc8ok
+	31B6QPPzbEziqPiuXONiLX0tJc0zBv/DdWysRTLTJ6msiXfinzWy8U7qnWiGcSBVYUK6
+	mbrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
-	b=B0knmqltSTTZqtKAQPYqJIj48T0M651VA5I4U4uTW4QSOY9+QNkz/9vjoqhJmiOaZQ
-	i5/ll+KRJe6I52dBU7k8d39VUihRWIUc4T4jdxrWolb4wo8ng5ARz+8errVdO+665cA/
-	fPd6I+66fbZAFJSHhSgRIaVabOSrONbcWUneUSZVCwfC542jX9pSSZkhr1CL3OpYa+es
-	TweCaqmgOls4zO8qDAezquHw5R2liaMXiFHZhmOFsuH00pn0F7rQnJIy+nzodHFactQb
-	nAJ4zv7HmRLakxAIdV2yLPY21XAZ8NxdT+ZGqWg5bCn+IoCXNi6Yzt4n3/p8Mi6kT9zk
-	o1fQ==
-X-Gm-Message-State: AA+aEWbtWOBZjdImW7dbqG0MypacaW5lkyjpzTUl7wpE4c56MTwvJQV+
-	hMKlmBWIyKHIwggbilElWMXUFvyfh30=
-X-Google-Smtp-Source: AFSGD/VCU1XybOghhOINVNiPP1b2mVKrDSk1z4m0NFJQdgZFyvGowG3wPg9MqndGJE+2g7gQYYWxng==
-X-Received: by 2002:a1c:d988:: with SMTP id q130mr2530804wmg.41.1542987593961; 
-	Fri, 23 Nov 2018 07:39:53 -0800 (PST)
-Received: from debian-brgl.home (lfbn-mar-1-609-89.w90-118.abo.wanadoo.fr.
-	[90.118.185.89]) by smtp.gmail.com with ESMTPSA id
-	u10sm9983953wrr.33.2018.11.23.07.39.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 23 Nov 2018 07:39:53 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>
-Date: Fri, 23 Nov 2018 16:39:41 +0100
-Message-Id: <20181123153941.10186-7-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20181123153941.10186-1-brgl@bgdev.pl>
-References: <20181123153941.10186-1-brgl@bgdev.pl>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=O2eE7LHbFMjau6raMeSjrmliRK0tV4ni/X5iIXRIEyo=;
+	b=mHgX+BYI0uHXIPz+RZg98zEUQWGiqUWmVRTnCwT6f00uXUDQXdNzEfdK4R7GeeHlYG
+	KzhrOou3/lAg28lC6vafK1APTl4MNK1pedkTWKGNl7CXyUYOI21N3NmhFSNxXiKsr8T1
+	eQFm9MqbeHsnLk5zt1SmgiDI4ZoyXU8jMUF1Mt2gbIRUKe9rSz0i9QlFqayLQYINpAu5
+	xAM6M3oAJ8A+xnXkSV1bVuy/pTnY9WoEFdh6ASwf81n3TLLYu+jV63cjhrZEXBTSlKJL
+	smMuMn9M3j2CCml+7wT6UJqYp7l/A1DP9I5edAY++Du9rzo4J+W26l/yN4V1ozR5B0oN
+	b7uQ==
+X-Gm-Message-State: AA+aEWZ2A5FST2sdGFfc1CADQwdcz6Tyn5MhHJf2s+we1hR86R8xQ9Ps
+	0YhoCaNIpiIXiBTRpptNIM+GcYw1Ck0sMnQbLpU=
+X-Google-Smtp-Source: AFSGD/VoaEo2wfwl/xo2SUvui000O/ipPL31pasJAC+8Ry4LctdnWL1RkA7a6gGeNIKjxtcOPy/FtXZjTfmCHSspqBw=
+X-Received: by 2002:a6b:38d7:: with SMTP id
+	f206mr11536805ioa.265.1542988651404; 
+	Fri, 23 Nov 2018 07:57:31 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 6/6] sigrok-cli: new package
+References: <20181003122005.26885-1-richard.leitner@skidata.com>
+In-Reply-To: <20181003122005.26885-1-richard.leitner@skidata.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Fri, 23 Nov 2018 16:57:19 +0100
+Message-ID: <CAB2nKc_Z-odztSNzmb+5H_-H+ifEWocBAXEN-teMa7WvBCek6Q@mail.gmail.com>
+To: richard.leitner@skidata.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "Maxin B. John" <maxin.john@intel.com>,
+	openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio.salvador@gmail.com>
+Subject: Re: [meta-java][PATCH] layer.conf: change LAYERSERIES_COMPAT to thud
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,40 +57,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 15:39:53 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Nov 2018 15:57:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
- .../sigrok/sigrok-cli_0.7.0.bb                 | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+Hi there,
 
-diff --git a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
-new file mode 100644
-index 000000000..d31bcd282
---- /dev/null
-+++ b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "sigrok-cli is a command-line frontend for sigrok."
-+HOMEPAGE = "http://sigrok.org/wiki/Main_Page"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+DEPENDS = "libsigrok"
-+
-+PACKAGECONFIG[decode] = "--with-libsigrokdecode,--without-libsigrokdecode,libsigrokdecode"
-+
-+PACKAGECONFIG ??= "decode"
-+
-+inherit autotools pkgconfig
-+
-+SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "77cb745e2fa239c7bd1ea81e2d67ede9"
-+SRC_URI[sha256sum] = "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
--- 
-2.19.1
+Would it be possible to create thud branch for meta-java?
 
+Best regards,
+Vincent
+
+Le mer. 3 oct. 2018 =C3=A0 14:19, Richard Leitner <richard.leitner@skidata.=
+com>
+a =C3=A9crit :
+
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 8e8a300..b03a608 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
+> ${LAYERDIR}/recipes*/*/*.bbappend"
+>  BBFILE_COLLECTIONS +=3D "meta-java"
+>  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java =3D "10"
+> -LAYERSERIES_COMPAT_meta-java =3D "sumo"
+> +LAYERSERIES_COMPAT_meta-java =3D "thud"
+>
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+>
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
