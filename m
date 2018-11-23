@@ -1,23 +1,63 @@
-Return-Path: <martin@geanix.com>
-Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A21D6C190
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com
+	[209.85.210.52])
+	by mail.openembedded.org (Postfix) with ESMTP id BE4A76C697
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 10:03:57 +0000 (UTC)
-Received: from [10.0.0.10] (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id 7076A1C1B29;
-	Fri, 23 Nov 2018 11:03:58 +0100 (CET)
-From: =?UTF-8?Q?Martin_Hundeb=c3=b8ll?= <martin@geanix.com>
-To: =?UTF-8?Q?Peter_Ba=c5=a1ista?= <pbasista@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20181118170442.14670-1-pbasista@gmail.com>
-	<8d3cef96-99d2-a8ce-6eeb-213942b77047@geanix.com>
-Message-ID: <dfb2174d-cc13-5ff1-1830-9d572cd61c3b@geanix.com>
-Date: Fri, 23 Nov 2018 11:03:36 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.3.1
+	Fri, 23 Nov 2018 10:14:22 +0000 (UTC)
+Received: by mail-ot1-f52.google.com with SMTP id v23so4790565otk.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2018 02:14:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=t/W44rkkHUCI25eRQxjTNuYpmg9YR+FAYPRy8qZV5lg=;
+	b=xeS6D2wbgO3625tWzGrEx/Jzmh9YZ3WRYvhcSVtngakPugYv1CE+SiP9LGNt4SxTHw
+	dQ9XoKKyw7qs+1Z8zabS3AcTXOmHIahQ2EvV5eAV0qHRYoFbvwXVxeu1IR811M7Yl0yS
+	450Rdw3DGxJaqAwJ9MX00cwSY7/8B4kPSG1FHHjqyQixA5GeZWSTOEtI9DIJ9Yz/TsfJ
+	oTAlUPpyhzftBsO0CKsgRXn0jRg1cTqjUMAq2AcNuSw9ZilDvevzz7BTKDkEKQgX+x4g
+	759XrsroGl8X4TLmWGXQaEpvFeb1XQhXDWB3ARd+ps/yLV2LhYaefLKRRVw4Lm1NXHno
+	OTsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=t/W44rkkHUCI25eRQxjTNuYpmg9YR+FAYPRy8qZV5lg=;
+	b=Jsev+Qk2slpS4pg+ZWU9pUpNj15cwY3r9TK+yx22JD1RmQMbpde6b/5xijvWR+BM3U
+	S6mrfO0lb7fBKsWSmGiBR7RNO4z4vc6CP56r7mVC+c8oXaqsTRYnYPIXn/jXQpAwCkSN
+	FSKSlaffBgQmUl2tblfjBwKbSG4aSdy3RxHqnXvqznmdiP3HMGboJ0EMWzIAf5fvN7ih
+	CKL9lzQnhShB0hEhuSgN9oisgUs0MydQ1mnUlBBfI+HVHTAcRMj+LWrLZFE6fImMwlsJ
+	wF6ZHiOH/ESJQ9mrvvSf3IcQHu94sVpv+C7H+rIAmNbQW+DI37w8rUdmkdKf30EgHjG9
+	sETg==
+X-Gm-Message-State: AA+aEWY7wv+EM98RAju6EQfT7TfD22E1EIOUFW/sTRyoBxcDMhOeKjXR
+	fQC8VzpHZntMvS4sR3nOzT0b29H0WknarQ==
+X-Google-Smtp-Source: AFSGD/UwVcoWoHiCkJiFI5PisZFD+B6fRFrfi0wMPpbEFy+AflW/1HeXYDZrRmizhIWbN1acBvElnA==
+X-Received: by 2002:a05:6830:1289:: with SMTP id
+	z9mr5281105otp.281.1542968062836; 
+	Fri, 23 Nov 2018 02:14:22 -0800 (PST)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com.
+	[209.85.210.53]) by smtp.gmail.com with ESMTPSA id
+	f34sm13360604otb.25.2018.11.23.02.14.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 23 Nov 2018 02:14:22 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ot1-f53.google.com with SMTP id f18so8632007otl.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2018 02:14:21 -0800 (PST)
+X-Received: by 2002:a9d:754f:: with SMTP id b15mr7982491otl.231.1542968061178; 
+	Fri, 23 Nov 2018 02:14:21 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <8d3cef96-99d2-a8ce-6eeb-213942b77047@geanix.com>
-Subject: Re: [meta-multimedia][PATCH] Add a working tvheadend recipe
+References: <20181123093845.22336-1-otavio@ossystems.com.br>
+	<7b2d9c6f-48d0-d3df-45c5-fe396b43576e@geanix.com>
+In-Reply-To: <7b2d9c6f-48d0-d3df-45c5-fe396b43576e@geanix.com>
+Date: Fri, 23 Nov 2018 08:14:05 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKo9gYL-oV2o1HLmgeE8h46aXADs3F0yJPWZUZKGCb_VAw@mail.gmail.com>
+Message-ID: <CAP9ODKo9gYL-oV2o1HLmgeE8h46aXADs3F0yJPWZUZKGCb_VAw@mail.gmail.com>
+To: martin@geanix.com
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] postgresql: Allow successful run of postgresql-setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,104 +70,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 10:03:57 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US-large
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Nov 2018 10:14:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Sorry, I hadn't noticed PATCHv3 on the list when I wrote this.
+On Fri, Nov 23, 2018 at 8:01 AM Martin Hundeb=C3=B8ll <martin@geanix.com> w=
+rote:
+> > diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/re=
+cipes-dbs/postgresql/postgresql.inc
+> > index 3bf71f02e..5fc823898 100644
+> > --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> > +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> > @@ -231,6 +231,7 @@ FILES_${PN} +=3D "${sysconfdir}/init.d/${BPN}-serve=
+r \
+> >          if 'pam' =3D=3D d.getVar('enable_pam') \
+> >          else ''} \
+> >   "
+> > +RDEPENDS_${PN} +=3D "bash"
+>
+> Is bash needed or would busybox' ash be enough? If so, then changing
+> USERADD_PARAM_${PN} to use /bin/sh instead would be leaner.
 
-// Martin
+I will prepare a v2 doing it.
 
-On 23/11/2018 10.58, Martin Hundebøll wrote:
-> 
-> 
-> On 18/11/2018 18.04, Peter Bašista wrote:
->> The original one was previously removed
->> by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
->> as part of a clean-up of blacklisted recipes.
->>
->> Signed-off-by: Peter Bašista <pbasista@gmail.com>
->> ---
->>   .../recipes-dvb/tvheadend/tvheadend_git.bb    | 37 +++++++++++++++++++
->>   1 file changed, 37 insertions(+)
->>   create mode 100644 
->> meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
->>
->> diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb 
->> b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
->> new file mode 100644
->> index 000000000..2a76d5d34
->> --- /dev/null
->> +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
->> @@ -0,0 +1,37 @@
->> +SUMMARY = "Tvheadend: TV streaming server and recorder"
->> +HOMEPAGE = "https://tvheadend.org/"
->> +
->> +DEPENDS = "avahi cmake-native gettext-native libpcre2 libdvbcsa 
->> openssl zlib python-native"
->> +
->> +LICENSE = "GPLv3+"
->> +LIC_FILES_CHKSUM = 
->> "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
->> +
->> +SRC_URI = "git://github.com/tvheadend/tvheadend.git"
->> +
->> +inherit gitpkgv
->> +SRCREV = "${AUTOREV}"
->> +PV = "4.3+git${SRCPV}"
->> +PKGV = "4.3+git${GITPKGV}"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +PACKAGECONFIG ?= ""
->> +PACKAGECONFIG[uriparser] = 
->> "--enable-uriparser,--disable-uriparser,uriparser"
->> +
->> +do_configure() {
->> +    ./configure ${PACKAGECONFIG_CONFARGS} \
->> +                --prefix=${prefix} \
->> +                --libdir=${libdir} \
->> +                --bindir=${bindir} \
->> +                --datadir=${datadir} \
->> +                --arch=${TARGET_ARCH} \
->> +                --disable-libav \
->> +                --disable-ffmpeg_static \
->> +                --disable-hdhomerun_static
->> +}
->> +
->> +do_install() {
->> +    oe_runmake install DESTDIR=${D}
->> +}
-> 
-> do_configure() and do_install() look pretty much like the ones from 
-> autotools.bbclass. Wouldn't it be prettier to do:
-> 
-> inherit autotools
-> 
-> EXTRA_OECONF = "--disable-libav --disable-ffmpeg_static 
-> --disable-hdhomerun_static"
-> 
-> do_compile[noexec] = "1"
-> 
-> ?
-> 
-> // Martin
-> 
->> +
->> +FILES_${PN} += "${datadir}/${BPN}"
->>
-> 
-
--- 
-Kind regards,
-Martin Hundebøll
-Embedded Linux Consultant
-
-+45 61 65 54 61
-martin@geanix.com
-
-Geanix IVS
-https://geanix.com
-DK39600706
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
