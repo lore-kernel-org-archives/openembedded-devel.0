@@ -1,50 +1,46 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
-	[209.85.166.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C6B36CECE
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw1-f67.google.com (mail-yw1-f67.google.com
+	[209.85.161.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DE17B6B51A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 15:57:30 +0000 (UTC)
-Received: by mail-io1-f47.google.com with SMTP id r200so9074370iod.11
+	Fri, 23 Nov 2018 21:00:03 +0000 (UTC)
+Received: by mail-yw1-f67.google.com with SMTP id h138-v6so3419852ywa.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 07:57:31 -0800 (PST)
+	Fri, 23 Nov 2018 13:00:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=O2eE7LHbFMjau6raMeSjrmliRK0tV4ni/X5iIXRIEyo=;
-	b=IL2hQCxDhAQ5CU6ZnVLGETvyrH5gy0V2fKgJL3McV+JWouix5D+MT4rD5NNs5DamWl
-	uKexN4c+aeWPK+N775GYxRcbxy+NseDCRak7lzE1Vpkm0VOwLLhmZMdKSac/rgtdK+s4
-	aH2XD9GPwwRdDr0EB+NLDMG92NLZSOgN7FhumymjySwTDe3Nb0F35GiCaLvhPENyHJ8p
-	2kMQ2J4H/odksFo/9sKRFPiYppXsrcBQUyyYU0WSg3T5t9agqBWYcoKp+kwOc5nUc8ok
-	31B6QPPzbEziqPiuXONiLX0tJc0zBv/DdWysRTLTJ6msiXfinzWy8U7qnWiGcSBVYUK6
-	mbrg==
+	:cc; bh=iyBiJJQV4xy+vu31hCkoypfRzG8LHhzxu4xTniVLhPI=;
+	b=XhnPvCInxzrrSPSTmr/RZA+7qrPyS10IHY1GPpqWcgiH1gJT7ykg7PKFpHLDEwBrf8
+	mFPabioTheYyhy93OLTyWDhM/r+48Y4r/RjESE67VDKqlGz4gsXFxPbT5nSUaFmb0Hqy
+	cDC7cEaO5HqP86QB96GkrOFWe3AMQWEcfbpFrJGDaPVz5Ky5IKkSy/jvoiKJcaSm4Pvs
+	+yLky9fyKM1/9/nweJwVCIgEc1qd2i1T6TOWaSixKRHhaSnyTpgPi7fzxYAerE46zYJX
+	YxNUWzGZ/TieRGUaZddsCe5Tbx6TqpJoempj2rU7ol4SAFVVxykL2ovCpGtuSPsU1jm6
+	Rmuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=O2eE7LHbFMjau6raMeSjrmliRK0tV4ni/X5iIXRIEyo=;
-	b=mHgX+BYI0uHXIPz+RZg98zEUQWGiqUWmVRTnCwT6f00uXUDQXdNzEfdK4R7GeeHlYG
-	KzhrOou3/lAg28lC6vafK1APTl4MNK1pedkTWKGNl7CXyUYOI21N3NmhFSNxXiKsr8T1
-	eQFm9MqbeHsnLk5zt1SmgiDI4ZoyXU8jMUF1Mt2gbIRUKe9rSz0i9QlFqayLQYINpAu5
-	xAM6M3oAJ8A+xnXkSV1bVuy/pTnY9WoEFdh6ASwf81n3TLLYu+jV63cjhrZEXBTSlKJL
-	smMuMn9M3j2CCml+7wT6UJqYp7l/A1DP9I5edAY++Du9rzo4J+W26l/yN4V1ozR5B0oN
-	b7uQ==
-X-Gm-Message-State: AA+aEWZ2A5FST2sdGFfc1CADQwdcz6Tyn5MhHJf2s+we1hR86R8xQ9Ps
-	0YhoCaNIpiIXiBTRpptNIM+GcYw1Ck0sMnQbLpU=
-X-Google-Smtp-Source: AFSGD/VoaEo2wfwl/xo2SUvui000O/ipPL31pasJAC+8Ry4LctdnWL1RkA7a6gGeNIKjxtcOPy/FtXZjTfmCHSspqBw=
-X-Received: by 2002:a6b:38d7:: with SMTP id
-	f206mr11536805ioa.265.1542988651404; 
-	Fri, 23 Nov 2018 07:57:31 -0800 (PST)
+	bh=iyBiJJQV4xy+vu31hCkoypfRzG8LHhzxu4xTniVLhPI=;
+	b=L8gsLAu82ckL51S7a8tT5LY/B39Jr+wFiEH6ksWTdFlebEEhuxLNXtcYisM60w8dZy
+	AR+drDZGCzV9fIl5sGTppw0A+ZqxxOBDrVOBAt6GSbnJDdZXqJbgaJyJIvoXPnkfYRj6
+	oxamURXgo4oe4X8Mdmm4tmsYDHm+vt6rEjibMjF9ua9xygtYwIzUbyuwGEioKvvHv9kI
+	nih8V1vf18hBeGkJv/+xiOaI7QGztmqzA6bVSK2E7HyYBF1zSy1dRT8OLowCdhV9jCwT
+	NqBRhqzk43BbZebX8RSSkkylZt3blz9IKPyGIy8GKLdCx2eQ25qrbS69/7/XJkJ6tfMv
+	8okg==
+X-Gm-Message-State: AA+aEWYye3Y/wgrvd1VlkXgGP0LijPoFN7lKFfqtcSra0sZ39yVoEMZa
+	Kv0WydWPHbIg3qX0SxJz9LrI+2kpr1dTcV84v38=
+X-Google-Smtp-Source: AFSGD/Wqx3QWuUYOiohgcqA4eyBidWkYpBGE2XELgAKuj/FDeuHsRhU0aa+MtEi8ZldUrHj0iYoVCTs7bklItoE9nms=
+X-Received: by 2002:a81:3e07:: with SMTP id l7mr8629050ywa.447.1543006804756; 
+	Fri, 23 Nov 2018 13:00:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20181003122005.26885-1-richard.leitner@skidata.com>
-In-Reply-To: <20181003122005.26885-1-richard.leitner@skidata.com>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Fri, 23 Nov 2018 16:57:19 +0100
-Message-ID: <CAB2nKc_Z-odztSNzmb+5H_-H+ifEWocBAXEN-teMa7WvBCek6Q@mail.gmail.com>
-To: richard.leitner@skidata.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "Maxin B. John" <maxin.john@intel.com>,
-	openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio.salvador@gmail.com>
-Subject: Re: [meta-java][PATCH] layer.conf: change LAYERSERIES_COMPAT to thud
+References: <20181123153941.10186-1-brgl@bgdev.pl>
+In-Reply-To: <20181123153941.10186-1-brgl@bgdev.pl>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 23 Nov 2018 21:59:52 +0100
+Message-ID: <CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
+To: brgl@bgdev.pl
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,47 +53,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 15:57:30 -0000
+X-List-Received-Date: Fri, 23 Nov 2018 21:00:04 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi there,
-
-Would it be possible to create thud branch for meta-java?
-
-Best regards,
-Vincent
-
-Le mer. 3 oct. 2018 =C3=A0 14:19, Richard Leitner <richard.leitner@skidata.=
-com>
-a =C3=A9crit :
-
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
->  conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, Nov 23, 2018 at 4:39 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 8e8a300..b03a608 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
-> ${LAYERDIR}/recipes*/*/*.bbappend"
->  BBFILE_COLLECTIONS +=3D "meta-java"
->  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-java =3D "10"
-> -LAYERSERIES_COMPAT_meta-java =3D "sumo"
-> +LAYERSERIES_COMPAT_meta-java =3D "thud"
+> This series adds recipes for libsigrok and accompanying libraries and
+> tools. The eventual goal is to add pulseview - the graphical interface
+> for sigrok - to meta-qt5-extra.
+I had started this at meta-qt5-extra but... Did you prepare already
+something for sigrok? If yes: Would be happy to receive your patches -
+if no I can try the recipe already started together with the recipes
+you sent here.
+
+Andreas
 >
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> First two patches add external packages used by libsigrok. The third
+> patch adds a recipe for native doxygen, which is needed to generate
+> libsigrok C++ bindings which will in turn be necessary to build
+> pulseview.
+>
+> Last three patches add recipes for the sigrok suite including the
+> command-line utility - sigrok-cli.
+>
+> Bartosz Golaszewski (6):
+>   libzip: new package
+>   libserialport: new package
+>   doxygen: new native package
+>   libsigrok: new package
+>   libsigrokdecode: new package
+>   sigrok-cli: new package
+>
+>  .../doxygen/doxygen-native_1.8.14.bb          | 15 ++++++++
+>  .../0001-build-don-t-look-for-Iconv.patch     | 36 +++++++++++++++++++
+>  .../libserialport/libserialport_0.1.1.bb      | 12 +++++++
+>  .../recipes-extended/libzip/libzip_1.5.1.bb   | 18 ++++++++++
+>  .../sigrok/libsigrok_0.5.1.bb                 | 23 ++++++++++++
+>  .../sigrok/libsigrokdecode_0.5.2.bb           | 14 ++++++++
+>  .../sigrok/sigrok-cli_0.7.0.bb                | 18 ++++++++++
+>  7 files changed, 136 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen-native_1.8.14.bb
+>  create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
+>  create mode 100644 meta-oe/recipes-extended/libserialport/libserialport_0.1.1.bb
+>  create mode 100644 meta-oe/recipes-extended/libzip/libzip_1.5.1.bb
+>  create mode 100644 meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb
+>  create mode 100644 meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb
+>  create mode 100644 meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
 >
 > --
-> 2.11.0
+> 2.19.1
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
