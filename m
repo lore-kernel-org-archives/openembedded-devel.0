@@ -1,50 +1,39 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-yw1-f68.google.com (mail-yw1-f68.google.com
-	[209.85.161.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C3FB76CEDC
+Return-Path: <primoz.fiser@norik.com>
+Received: from out-2.mail.amis.net (out-2.mail.amis.net [212.18.32.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 0909C6C605
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 14:38:10 +0000 (UTC)
-Received: by mail-yw1-f68.google.com with SMTP id i20so4863022ywc.5
+	Fri, 23 Nov 2018 14:49:54 +0000 (UTC)
+Received: from in-5.mail.amis.net (in-5.mail.amis.net [212.18.32.26])
+	by out-2.mail.amis.net (Postfix) with ESMTP id 4CC7780BEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 06:38:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uvreXKwUqaRLebwa4+H1Vy6K5YdE/1gXVaHvomovgQA=;
-	b=pxLglftRVrBPsWMIaujRcbct16f9/r+dcRVYmlGmymLdBZfD8U2y2iQjv8tU239fyL
-	bDRScjy+bhl/JQHzUlIrqKtGrMKlXxCpTIGzwnwHJmAz3bveXJ1b3UtLhCyXA/Nsf3eD
-	rT/gq+JltA5iy0FME9TaO1JQDHywiaP3ZaQiAgzHsQCuQsBWrhRbRhOr21SaecgxRCI5
-	bKOIkYq5Xa0bOVyENxUJezaEPU80N7saR6XI+x3CZa0xHvJda9eYrGJjugQDibsF90Ck
-	Hi80btOiZe5Km/5XduXNJItC3kHsW4dKhF+eDaPEcbai7hVuJtyjDwODKY2f1K3Kpgr3
-	dC0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uvreXKwUqaRLebwa4+H1Vy6K5YdE/1gXVaHvomovgQA=;
-	b=hZebFQ0QAjYd7k0eVStxzHkqGnqGrieN05S4JUnIT3UZjWICQf1TTX6CG4Lia5aIIa
-	MHYeNRE3wftWzI5JBtRKxxXhsSyoLO+j9eFIso7hp8O/iIWNA/ZLAtj1WYwxYp/fAvR8
-	Hxtq7iUxz9xh0A5LvrMEEuIySWeEjobYT6eOpg2XYuUHByUvZVsuWBgLAi3dr/Qg6TjD
-	YBANdkJUufd1/SaUjNP2NHmPn26sBiOmWnzJrXYFnHA3gXEldYkZhrs1jmzrcHUoI3w0
-	ER76+FrBtM4Xhn3HypRw04NcqXWLcyTC3YnpQtTRfoL165lLyXO5Yg/Yy8iHQxuHg+ts
-	2nXQ==
-X-Gm-Message-State: AA+aEWbulrcJ8wB6ETo0UKH3KHSAVmERvc+I4esQl32Heql6K16EpcJa
-	VU5vmBbrQbe4XeVUK4REKKfyU6le
-X-Google-Smtp-Source: AFSGD/UWv+RQ7e4QEKIDUfRcdtbdBA0XEO6PTBh5FW8XCjK2NBIisOAB1mAHwWSPSu2sjAOU5kgqMQ==
-X-Received: by 2002:a81:78cc:: with SMTP id t195mr1931499ywc.387.1542983891329;
-	Fri, 23 Nov 2018 06:38:11 -0800 (PST)
-Received: from nick-laptop.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id u4sm583746ywl.29.2018.11.23.06.38.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 23 Nov 2018 06:38:10 -0800 (PST)
-From: Nicola Lunghi <nick83ola@gmail.com>
+	Fri, 23 Nov 2018 15:49:55 +0100 (CET)
+Received: from in-5.mail.amis.net (localhost [127.0.0.1])
+	by in-5.mail.amis.net (Postfix) with ESMTP id 4B521C9434;
+	Fri, 23 Nov 2018 15:49:55 +0100 (CET)
+X-Virus-Scanned: amavisd-new at amis.net
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 required=5 tests=[ALL_TRUSTED=-1]
+	autolearn=disabled
+Received: from in-5.mail.amis.net ([127.0.0.1])
+	by in-5.mail.amis.net (in-5.mail.amis.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id GK1trq2omHCe; Fri, 23 Nov 2018 15:49:55 +0100 (CET)
+Received: from smtp2.amis.net (smtp2.amis.net [212.18.32.44])
+	by in-5.mail.amis.net (Postfix) with ESMTP id E4B45C940E;
+	Fri, 23 Nov 2018 15:49:54 +0100 (CET)
+Received: from probook.lan (cpe-90-157-180-95.static.amis.net [90.157.180.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp2.amis.net (Postfix) with ESMTPSA id BA8CC80A36;
+	Fri, 23 Nov 2018 15:49:54 +0100 (CET)
+From: Primoz Fiser <primoz.fiser@norik.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Nov 2018 14:38:07 +0000
-Message-Id: <20181123143807.9522-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.19.1
-MIME-Version: 1.0
-Subject: [meta-java][PATCH] java-library: make easy to override jar package name
+Date: Fri, 23 Nov 2018 15:48:43 +0100
+Message-Id: <1542984523-19704-1-git-send-email-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] sedutil: fix compile errors on big endian architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +46,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 14:38:10 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Nov 2018 14:49:55 -0000
 
-define JARFILENAME and ALTJARFILENAMES with ?= to make simple
-to override them
+Patch fixes compile errors by defining empty macros as
+hinted by TODO mark in the sources.
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 ---
- classes/java-library.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...001-Fix-build-on-big-endian-architectures.patch | 41 ++++++++++++++++++++++
+ meta-oe/recipes-extended/sedutil/sedutil_git.bb    |  4 ++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/sedutil/files/0001-Fix-build-on-big-endian-architectures.patch
 
-diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
-index ce1cd28..c69cf6b 100644
---- a/classes/java-library.bbclass
-+++ b/classes/java-library.bbclass
-@@ -42,10 +42,10 @@ PACKAGES += "${JPN}"
- FILES_${JPN} = "${datadir_java}"
+diff --git a/meta-oe/recipes-extended/sedutil/files/0001-Fix-build-on-big-endian-architectures.patch b/meta-oe/recipes-extended/sedutil/files/0001-Fix-build-on-big-endian-architectures.patch
+new file mode 100644
+index 0000000..7351197
+--- /dev/null
++++ b/meta-oe/recipes-extended/sedutil/files/0001-Fix-build-on-big-endian-architectures.patch
+@@ -0,0 +1,41 @@
++From ff98a326d5faa585f0e15e51a558cc2c49aa8099 Mon Sep 17 00:00:00 2001
++From: Primoz Fiser <primoz.fiser@norik.com>
++Date: Fri, 23 Nov 2018 08:31:29 +0100
++Subject: [PATCH] Fix build on big endian architectures
++
++Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
++---
++ Common/DtaEndianFixup.h | 13 +++++++------
++ 1 file changed, 7 insertions(+), 6 deletions(-)
++
++diff --git a/Common/DtaEndianFixup.h b/Common/DtaEndianFixup.h
++index 58eb3ff..184fce0 100644
++--- a/Common/DtaEndianFixup.h
+++++ b/Common/DtaEndianFixup.h
++@@ -31,12 +31,11 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
++ //TODO: add a test on the endianess of the system and define
++ //  empty macros if the system is big endian
++ #pragma once
++-#ifdef __gnu_linux__
++-#include <endian.h>
++-#if __BYTE_ORDER != __LITTLE_ENDIAN
++-#error This code does not support big endian architectures
++-#endif
++-#endif
+++#if defined(__BYTE_ORDER__)&&(__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+++#define SWAP16(x) x
+++#define SWAP32(x) x
+++#define SWAP64(x) x
+++#else
++ /** change the "endianess" of a 16bit field */
++ #define SWAP16(x) ((uint16_t) ((x & 0x00ff) << 8) | ((x & 0xff00) >> 8))
++ /** change the "endianess" of a 32bit field */
++@@ -47,3 +46,5 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
++ 	((uint64_t) (SWAP32((x & 0x00000000ffffffff)) << 32) | \
++ 	((uint64_t) (SWAP32((x >> 32))) )    \
++ 	)
+++
+++#endif
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+index cec569f..7656184 100644
+--- a/meta-oe/recipes-extended/sedutil/sedutil_git.bb
++++ b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://Common/LICENSE.txt;md5=d32239bcb673463ab874e80d47fae5
+ BASEPV = "1.15.1"
+ PV = "${BASEPV}+git${SRCPV}"
+ SRCREV = "358cc758948be788284d5faba46ccf4cc1813796"
+-SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git"
++SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git \
++	file://0001-Fix-build-on-big-endian-architectures.patch \
++"
  
- # File name of the libraries' main Jar file
--JARFILENAME = "${BP}.jar"
-+JARFILENAME ?= "${BP}.jar"
+ S = "${WORKDIR}/git"
  
- # Space-separated list of alternative file names.
--ALTJARFILENAMES = "${BPN}.jar"
-+ALTJARFILENAMES ?= "${BPN}.jar"
- 
- # Java "source" distributions often contain precompiled things
- # we want to delete first.
 -- 
-2.19.1
+2.7.4
 
 
