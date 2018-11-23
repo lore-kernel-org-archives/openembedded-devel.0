@@ -1,25 +1,22 @@
-Return-Path: <craig.mcqueen@innerrange.com>
-X-Greylist: delayed 329 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 23 Nov 2018 05:09:16 UTC
-Received: from remote.innerrange.com (122-143-132.dsl.connexus.net.au
-	[203.122.143.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 31AF56C645
+Return-Path: <martin@geanix.com>
+Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
+	by mail.openembedded.org (Postfix) with ESMTP id 61A936C5E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2018 05:09:16 +0000 (UTC)
-Received: from ir-craig-vm1.corp.innerrange.com.au (192.168.106.23) by
-	IR-CENTRAL.corp.innerrange.com (192.168.1.12) with Microsoft SMTP
-	Server id 8.1.436.0; Fri, 23 Nov 2018 16:03:43 +1100
-From: Craig McQueen <craig.mcqueen@innerrange.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Nov 2018 16:03:03 +1100
-Message-ID: <20181123050302.4692-1-craig.mcqueen@innerrange.com>
-X-Mailer: git-send-email 2.19.1
+	Fri, 23 Nov 2018 09:17:17 +0000 (UTC)
+Received: from [10.0.0.10] (unknown [85.184.147.232])
+	by mail.hundeboll.net (Postfix) with ESMTPSA id DBC521C1B29;
+	Fri, 23 Nov 2018 10:17:17 +0100 (CET)
+To: Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1542560899-8877-1-git-send-email-akuster808@gmail.com>
+From: =?UTF-8?Q?Martin_Hundeb=c3=b8ll?= <martin@geanix.com>
+Message-ID: <f5a22ef9-2b91-3dab-38b0-a29ad7451c70@geanix.com>
+Date: Fri, 23 Nov 2018 10:16:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.1
 MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-11.1.0.1278-8.200.1013-24240.004
-X-TM-AS-Result: No--0.733900-5.000000-31
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-Subject: [meta-python][PATCH] python3-multidict: Workaround for broken make clean
+In-Reply-To: <1542560899-8877-1-git-send-email-akuster808@gmail.com>
+Subject: Re: [meta-oe][PATCH] ndctl: fix compile issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +29,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2018 05:09:16 -0000
+X-List-Received-Date: Fri, 23 Nov 2018 09:17:17 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US-large
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Note, the issue is fixed in v4.0.0.
-https://github.com/aio-libs/multidict/issues/194
+Hi Armin,
 
-Signed-off-by: Craig McQueen <craig.mcqueen@innerrange.com>
----
- .../recipes-devtools/python/python3-multidict_3.3.2.bb        | 4 ++++
- 1 file changed, 4 insertions(+)
+On 18/11/2018 18.08, Armin Kuster wrote:
+> | No package 'systemd' found
+> | configure: error: systemd support requested but pkg-config unable to query systemd package
+> 
+> add PACKCONFIG to disable systemd
+> 
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>   meta-oe/recipes-core/ndctl/ndctl_git.bb | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+> index b20915f..048f166 100644
+> --- a/meta-oe/recipes-core/ndctl/ndctl_git.bb
+> +++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+> @@ -21,6 +21,9 @@ S = "${WORKDIR}/git"
+>   
+>   EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+>   
+> +PACKAGECONFIG ??= ""
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-index 7f9cd5564..e65d7d4f2 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-@@ -7,3 +7,7 @@ inherit pypi setuptools3
- 
- SRC_URI[md5sum] = "06ca91d993de2d04c7ee6df0cbb44ea2"
- SRC_URI[sha256sum] = "f82e61c7408ed0dce1862100db55595481911f159d6ddec0b375d35b6449509b"
-+
-+# Work-around for broken make clean. Note this is fixed in v4.0.0.
-+# https://github.com/aio-libs/multidict/issues/194
-+CLEANBROKEN = "1"
+Can you make the default PACKAGECONFIG include systemd if it is in 
+distrofeatures?
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+
+// Martin
+
+> +PACKAGECONFIG[systemd] = "--with-systemd-unit-dir=${systemd_system_unitdir}, --without-systemd-unit-dir,"
+> +
+>   do_configure_prepend() {
+>       ${S}/autogen.sh
+>   }
+> 
+
 -- 
-2.19.1
+Kind regards,
+Martin Hundebøll
+Embedded Linux Consultant
 
++45 61 65 54 61
+martin@geanix.com
+
+Geanix IVS
+https://geanix.com
+DK39600706
 
