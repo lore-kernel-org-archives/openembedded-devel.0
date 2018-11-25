@@ -1,49 +1,26 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw1-f65.google.com (mail-yw1-f65.google.com
-	[209.85.161.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D01B6D4F3
+Return-Path: <prvs=860224baf=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 139876D545
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Nov 2018 21:37:14 +0000 (UTC)
-Received: by mail-yw1-f65.google.com with SMTP id l200so6066278ywe.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Nov 2018 13:37:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=hJRUokLTQ1S+rCXvtUfepVY5axRjupvS3q1DHFl9HfI=;
-	b=UYMxiuWebkJOPAtiVbjnrKjw826yOsZpmDbw6x8a+Ps2FN4li8Z0t3Y92ADphQw5dE
-	PxhkRv2+zUtyuNZ/lWHDhq/CSGOCQwbOIQ0zPJPC62X2L7Ooqxdr0R6AwvgIVkngfG2p
-	RvkDw2Svel5gliSoIt9/N8ge+gmDWKK5YF2Tks+AKguDh2nlXOHFQor6kfxtEQApmXs6
-	YpC7eKzKHyKTSUWym1WTEtcIAgYEKehOnFxyycgPog7D5Qg36GTq+pu5kEA4kXVzgJyh
-	Svy4hrMgr33fDy700a9xrevDb6BConUOa1BJSAWCplt+Bldew4tu06QDltdrdLKgbtXm
-	PE+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=hJRUokLTQ1S+rCXvtUfepVY5axRjupvS3q1DHFl9HfI=;
-	b=hxeMLfvXTvrQXYUkY8FEGGukS8MWCS2AMgJXXDaCdTsbEFLhYv4LDHuSAIKWu7uNbt
-	Bw2n/B53GE8pCHdeo36LC4ZZw4lSUWaRkFfT1y1bT0UM9pqkqJyWTKKZj4Z0JWCaRrNl
-	aMZD+nt+04pRsB79AI+oaTmnl2HiOo0zdBHif5nOwpjvcmxp3Ti/ySXa/xeUiPanQXCg
-	fxLUWyBZ5cwzkEaXFMYLKUfiO0dww04iw9eJKdmgVglDNs1f6wOrgDpdVLC3NhXRVP25
-	ocqYYKL6SopUpl1467CRuTz1/S+r+gJn1OozgFTeFKaRGtvuJFFzEunSUOirkYglmafP
-	dAnQ==
-X-Gm-Message-State: AGRZ1gJJU4o/gGcVJgXfSW4j/qNE85as7D6xsyjBGffX9vY5hbLOwdkT
-	XV7l48TIMIEVuBotH34yxvnSS4cdRs72GwHCWQc=
-X-Google-Smtp-Source: AJdET5eK910LUnLOcF/g6nRqe1t37qABwKjnkrPB6PEo1nXm+K8fyhSq8x27MJ/ZMXwsqL52RJEH6eCvgOLHMxsHeKU=
-X-Received: by 2002:a81:294f:: with SMTP id p76mr22448095ywp.401.1543095435869;
-	Sat, 24 Nov 2018 13:37:15 -0800 (PST)
+	Sun, 25 Nov 2018 01:44:20 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,276,1539640800"; d="scan'208";a="13597673"
+To: Vincent Prince <vincent.prince.fr@gmail.com>
+References: <20181003122005.26885-1-richard.leitner@skidata.com>
+	<CAB2nKc_Z-odztSNzmb+5H_-H+ifEWocBAXEN-teMa7WvBCek6Q@mail.gmail.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <4803f6bf-d329-3011-2b9d-22417b4d2ce9@skidata.com>
+Date: Sun, 25 Nov 2018 02:44:19 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.0
 MIME-Version: 1.0
-References: <20181123153941.10186-1-brgl@bgdev.pl>
-	<CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
-	<CAMRc=MdVJYYBcB0NkQpE2O3qQ=c+mnj6+ktsxRMdjBpPALOgZw@mail.gmail.com>
-In-Reply-To: <CAMRc=MdVJYYBcB0NkQpE2O3qQ=c+mnj6+ktsxRMdjBpPALOgZw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 24 Nov 2018 22:37:03 +0100
-Message-ID: <CALbNGRRqeSVDzM8tn36t01YiAS0DJE_ExSXNRupp6esOEF7oKA@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
+In-Reply-To: <CAB2nKc_Z-odztSNzmb+5H_-H+ifEWocBAXEN-teMa7WvBCek6Q@mail.gmail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: "Maxin B.
+	John" <maxin.john@intel.com>, openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio.salvador@gmail.com>
+Subject: Re: [meta-java][PATCH] layer.conf: change LAYERSERIES_COMPAT to thud
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,39 +33,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Nov 2018 21:37:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 25 Nov 2018 01:44:21 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: de-AT
+Content-Transfer-Encoding: 7bit
 
-On Sat, Nov 24, 2018 at 9:11 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> pt., 23 lis 2018 o 22:00 Andreas M=C3=BCller <schnitzeltony@gmail.com> na=
-pisa=C5=82(a):
-> >
-> > On Fri, Nov 23, 2018 at 4:39 PM Bartosz Golaszewski <brgl@bgdev.pl> wro=
-te:
-> > >
-> > > This series adds recipes for libsigrok and accompanying libraries and
-> > > tools. The eventual goal is to add pulseview - the graphical interfac=
-e
-> > > for sigrok - to meta-qt5-extra.
-> > I had started this at meta-qt5-extra but... Did you prepare already
-> > something for sigrok? If yes: Would be happy to receive your patches -
-> > if no I can try the recipe already started together with the recipes
-> > you sent here.
-> >
-> > Andreas
->
-> I'm not sure I understood you - do you mean if I prepared something
-> for pulseview for meta-qt5-extra or if I want to put libsigrok
-> packages in meta-qt5-extra? For the latter: I think that the right
-> place for those packages in meta-openembedded and only pulseview
-> should go into meta-qt5-extra. For the former: I'll be creating the
-> recipe for pulseview on Monday probably.
->
-> Bart
-I meant first option. Like your suggestion you prepare and I wait - no
-need to get my unfinished work polished.
+Hi,
 
-Andreas
+On 11/23/18 4:57 PM, Vincent Prince wrote:
+> Hi there,
+> 
+> Would it be possible to create thud branch for meta-java?
+
+Yep will do that as soon as current master-next is tested and merged.
+
+> 
+> Best regards,
+> Vincent
+> 
+
+regards;Richard.L
 
