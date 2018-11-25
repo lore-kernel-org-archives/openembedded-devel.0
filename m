@@ -1,50 +1,33 @@
-Return-Path: <nathan@nathanrossi.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id BCEE86D1C1
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A61D6C45F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 15:40:06 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id 131so10883875qkd.4
+	Sun, 25 Nov 2018 18:55:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 432zlB5jMmz61
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 07:40:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nathanrossi.com; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=1pX4baZRjWc+or5PYV5aWiNwLqaqcRpmUtV62yTMfxw=;
-	b=Ht2MsF2aUA8wuehIER4vgRIZd65sfqwRdCrIgIU0t7xGnCY/OKeHy8RRcBns7XwO4s
-	Tjjhj94D/l2cmm/1t2VIP35eaJqzr1Nr/WTuzAaoPfuCs6uqm8xpMbx57za02Jne8bAf
-	tRwG7iWA1wLZ3hHS2UDUTMFgoiD9NWMJuJgu1eOG+oLPgKmF3o9HMTTp9Xg8v8Ej+d/o
-	RVYKu9+ZdwLqBAzscJFMmc0Tkb+T0r8PnorLmxKR/OPtRr+SsAiMzqVUzTyScgBJcinW
-	lq1UveHSKzA9AUlzTfPkEpC2AvVr4+tT7YD7TEZwIHprKyrJVr0hJThm/F/y+J1+OEH5
-	T4rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=1pX4baZRjWc+or5PYV5aWiNwLqaqcRpmUtV62yTMfxw=;
-	b=VrLO5ks4i19o+bHex1AvcuImBAt2Fg10B2XNgOgJ++egKL72S+49nQguf2pqdRb06j
-	moVN7h22x0IXnvAqv6wziunO+p18BAQPXGJkQD1C/4IKR155VpjemD6j2IEh84NLd6xV
-	eVNLaiXlENGjJDpccC854QFeUhpEpYHoj1ej+92+R23kIFV656BKy5WvMYankzlQN3Q0
-	Vl3do0PzjMISJMEcZ02pyMxB+7vb6lfANtD5Y0xrPaiu/hsNE5PmqD95bShuNZSRljXz
-	7goEVPa3Xle/6kV4f3D8bGpQRo54ncGv2cZbdz/airnUOVn42bqBWmdhx8CvbrIarjJP
-	5dYA==
-X-Gm-Message-State: AA+aEWZpkyq4QJaOwGgivx0ZUums4Wp+8OvN+7SQ9vqvhbMCEv64PAOP
-	/jQiWS8x1i8OcsFM4ZwsI6hjqZc919LNbiLn1FTsiA==
-X-Google-Smtp-Source: AFSGD/WWAH00w3yxUTPQO+5y9Q/yJjmwZDHJxKo58VRn6A6n9wW2z957nMIglihKwHMWdv8/jcN97RwFOAGJmRjGid8=
-X-Received: by 2002:a37:492:: with SMTP id 140mr21327645qke.95.1543160407604; 
-	Sun, 25 Nov 2018 07:40:07 -0800 (PST)
-MIME-Version: 1.0
-References: <20181123153941.10186-1-brgl@bgdev.pl>
-	<CA+aJhH0KL7nzmkGUgUyD-h-ghf6u65uqeGOVavjV=u1fW6QQvg@mail.gmail.com>
-	<CAMRc=MebuMRhQgzrZKU_0Gu9pNOPgJYitVMLFSPGm0B9hHfC3w@mail.gmail.com>
-In-Reply-To: <CAMRc=MebuMRhQgzrZKU_0Gu9pNOPgJYitVMLFSPGm0B9hHfC3w@mail.gmail.com>
-From: Nathan Rossi <nathan@nathanrossi.com>
-Date: Mon, 26 Nov 2018 01:39:56 +1000
-Message-ID: <CA+aJhH2_yYkLCdY6C0XSuj9vB_k+VLioKh8ArSUZqo7XYydsDg@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
+	Sun, 25 Nov 2018 19:55:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1543172134;
+	bh=wWKDwHxUOziqZgEw+7CfMYJLryDE4cQ5Wd3/tow/LDg=;
+	h=From:To:Subject:Date:From;
+	b=RovrnfQHMMxpefAI1Lw++QXcLmEI/mB2DCxh8XhK+hfqcwuoZnONtpevdS9tnwClD
+	UzWE5Msj/Qe6l71+zP0Cu6VKYLef7V5JfKeVCOI/2S6WQ6bJXjG4iHUz28sKk4yitf
+	nbv6/d0ZzmDa+GYi2tHZnXIFCBq1kmE0TP89HLGeQLC0h0Je+5suSblSImEFp06V3z
+	NGtPWcRxE04KWMzQf9ZAMCR4cKLqiE2gcJPlzzZmQ0pjkS2pPxdkQLP0WpMcIVLyDx
+	rCWN8nnnhE2QOLEcwCjeh0EXuLr8tyPKfI0q9KhXKDOrIu0XgM94XQRYPgduTJPvdr
+	eDwnaXOGeFaYtxK8bljU8EhZnUOG+FIAuDDBHjvabT8ojbFh8oP0kWztkQiPObjWbU
+	wN07Ct7iKrNqHwrPvVKfHQN+S9sGHTNMBiT11Rxi2vSurhwtH38qZz9RA87DhZGqVl
+	MVMNwjX5gsuon7N7oiVK7ILkwYn4+Xf090FA2cVp78iyVEpOpEf2Fr55l+fMHsA/ss
+	UINoWsiaM+xNJETvEHFlYAKzVMeymIyILG+4S2l7fjlA11P77Uyrmk+3RD4z0fftIF
+	FsUsf3sQWEj/PVXesqUHnertjJTy0XfoBWs+XVsgafnFlDNsrJL9qpQn7fnPIHIhrU
+	51BdaZYfF4ptPDFTaMtBNBqM=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 25 Nov 2018 20:55:36 +0200
+Message-Id: <20181125185536.11694-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] Add czmq (C bindings for ZeroMQ)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,69 +40,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Nov 2018 15:40:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 25 Nov 2018 18:55:34 -0000
 
-On Mon, 26 Nov 2018 at 01:12, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> niedz., 25 lis 2018 o 07:04 Nathan Rossi <nathan@nathanrossi.com> napisa=
-=C5=82(a):
-> >
-> > On Sat, 24 Nov 2018 at 01:39, Bartosz Golaszewski <brgl@bgdev.pl> wrote=
-:
-> > >
-> > > This series adds recipes for libsigrok and accompanying libraries and
-> > > tools. The eventual goal is to add pulseview - the graphical interfac=
-e
-> > > for sigrok - to meta-qt5-extra.
-> > >
-> > > First two patches add external packages used by libsigrok. The third
-> > > patch adds a recipe for native doxygen, which is needed to generate
-> > > libsigrok C++ bindings which will in turn be necessary to build
-> > > pulseview.
-> > >
-> > > Last three patches add recipes for the sigrok suite including the
-> > > command-line utility - sigrok-cli.
-> > >
-> > > Bartosz Golaszewski (6):
-> > >   libzip: new package
-> > >   libserialport: new package
-> > >   doxygen: new native package
-> > >   libsigrok: new package
-> > >   libsigrokdecode: new package
-> > >   sigrok-cli: new package
-> >
-> > Anything against marking all the recipes (excluding doxygen) with
-> > BBCLASSEXTEND =3D "native nativesdk"?
-> >
->
-> What would be the reason for that? Also: you'd need to do that for ALL
-> non-direct sigrok dependencies and I think there are quite a few.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb  | 30 +++++++++++++++++++++
+ .../0001-Problem-out-of-date-with-zproject.patch   | 31 ++++++++++++++++++++++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+ create mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-Problem-out-of-date-with-zproject.patch
 
-It makes it really easy to ship with a nativesdk toolset or use on
-your build host. I have personally been using it this way and made
-some recipes for it a few months ago
-(https://github.com/nathanrossi/meta-random/tree/master/recipes-toolbox/sig=
-rok).
+diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+new file mode 100644
+index 000000000..f2db0041c
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "C bindings for ZeroMQ"
++HOMEPAGE = "http://www.zeromq.org"
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
++DEPENDS = "zeromq"
++
++SRC_URI = "https://github.com/zeromq/czmq/releases/download/v${PV}/czmq-${PV}.tar.gz \
++    file://0001-Problem-out-of-date-with-zproject.patch \
++"
++
++SRC_URI[md5sum] = "6d3a6fdd25c2bb29897c53670dce97bf"
++SRC_URI[sha256sum] = "f00ff419881dc2a05d0686c8467cd89b4882677fc56f31c0e2cc81c134cbb0c0"
++
++inherit cmake
++
++PACKAGES = "lib${BPN} lib${BPN}-dev lib${BPN}-staticdev ${PN} ${PN}-dbg"
++
++FILES_${PN} = "${bindir}/*"
++FILES_lib${BPN} = "${libdir}/*.so.*"
++FILES_lib${BPN}-dev = "${libdir}/*.so ${libdir}/pkgconfig ${includedir}"
++FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
++
++RDEPENDS_lib${BPN}-dev = "zeromq-dev"
++
++PACKAGECONFIG ??= "lz4 uuid"
++PACKAGECONFIG[lz4] = ",-DCMAKE_DISABLE_FIND_PACKAGE_lz4=TRUE,lz4"
++PACKAGECONFIG[uuid] = ",-DCMAKE_DISABLE_FIND_PACKAGE_uuid=TRUE,util-linux"
++
++BBCLASSEXTEND = "nativesdk"
++
+diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-Problem-out-of-date-with-zproject.patch b/meta-oe/recipes-connectivity/zeromq/files/0001-Problem-out-of-date-with-zproject.patch
+new file mode 100644
+index 000000000..5f5702c8c
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/zeromq/files/0001-Problem-out-of-date-with-zproject.patch
+@@ -0,0 +1,31 @@
++From d155ffd33630f80b23c31b3a6e01da221dd9bd13 Mon Sep 17 00:00:00 2001
++From: Luca Boccassi <luca.boccassi@gmail.com>
++Date: Fri, 30 Mar 2018 16:36:22 +0100
++Subject: [PATCH] Problem: out of date with zproject
++
++Upstream-Status: backport
++Signed-off-by: Adrian Bunk <bunk@stusta.de>
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index a3b81722..4f203461 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -38,7 +38,7 @@ if (NOT CMAKE_BUILD_TYPE)
++             OUTPUT_STRIP_TRAILING_WHITESPACE
++         )
++         message(STATUS "git workspace root [${git_result}]: ${git_root}")
++-        if ( "${git_result}" == "0" )
+++        if ( "${git_result}" STREQUAL "0" )
++             set (CMAKE_BUILD_TYPE Debug)
++         else ()
++             set (CMAKE_BUILD_TYPE Release)
++@@ -608,7 +608,7 @@ add_custom_command(
++     TARGET  distclean
++ )
++ 
++-include(ClangFormat)
+++include(ClangFormat OPTIONAL)
++ 
++ ########################################################################
++ # summary
++
+-- 
+2.11.0
 
-With the recipes in this series the only dependency that is not also
-enabled for native/nativesdk is glibmm. However that is not enabled by
-default (since its a dependency of 'cxx' config).
-
->
-> > Also any plans to include recipes for any of the firmware data
-> > packages that sigrok provides? (e.g. sigrok-firmware-fx2lafw)
-> >
->
-> I don't personally need it and it seems like it requires integrating
-> the sdcc compiler into yocto. Probably more work than I can spend on
-> that.
-
-I was only referring to the pre-built firmware binaries that are
-released by the sigrok project.
-https://sigrok.org/download/binary/sigrok-firmware-fx2lafw/.
-
-Regards,
-Nathan
 
