@@ -1,51 +1,51 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BCA26C5D7
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+	[209.85.128.52])
+	by mail.openembedded.org (Postfix) with ESMTP id EB6006C5D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 07:35:23 +0000 (UTC)
-Received: by mail-it1-f195.google.com with SMTP id p197so531305itp.0
+	Mon, 26 Nov 2018 07:35:24 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id j207so9989364wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 23:35:25 -0800 (PST)
+	Sun, 25 Nov 2018 23:35:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=rJ3Yv0QIbym5BUFNs2l4jUGeAZCiH6w1wuvaVFyJT6c=;
-	b=pOU70HMahiK6SZgt2EN9Zgkp8CVh/p/mgEpAeDGGwR3YN8asBJuRtJwyq5C4K/vdhy
-	gR29gsGoTVVZX7dggAEdZ2rYyfaim+jX8nChc3Jsa/vdMrMJzHdpoAUJwnfXmNdeDbSV
-	CxIVTY9eYO3L/FjM2fMEXKM634bJu1MoymZoKKjCahUW1q+4wFPRMykLLN70s/yRpDUk
-	+8kO7UPESMlFT0Ytg0JRYyT8wdNH56eqWhcjamXw/uY0zZDpSfCQWJ9RLFlNNWNz7d2M
-	TkSZ7Qq1se20hZOiS4DZFbrpMdq1l4s9upwpzredFb771RxFkLo35R0rn+hFfmra3XZB
-	4wog==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8dG+O0v4uMjIfkKexDingT2QIYfIirXhrSQgNmD+QoI=;
+	b=emvIImng8TueFhawqIMMEXMRL3VnYDARkR2vz6qfpXenUv68/e+sL9dDcRcxiqaVLz
+	XiQYuf57s6r2UTqv0ysvSTYbfKrUEzwNCS77feDqGhB2ItOfrll7i1euX02pT7NrOyon
+	wpKEZk3K7PsZ1sJI2ArPmFWtlc9VHhqRl+BAln343I2syRKeyeGwUlcVZB2fA0S3ECpk
+	BgE5kAi6rnrPhsWAXD2OOfgKunDnjcY0mS7CjeSAQaVQhi2x78EvwnLlj7IwSJw25otj
+	25zwbtV5Njn4YL1+AcCAzDCV0SRr3/kK8+8TA1mXHkhYJfOWMqhV6UaZrMaSH9aNtsjA
+	qHIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=rJ3Yv0QIbym5BUFNs2l4jUGeAZCiH6w1wuvaVFyJT6c=;
-	b=iUWO1Z+zTIkYFw9DCQpGfzEe74cxIucoK43rxLHEHUntLM56aABuySHowlrZmMRPrV
-	rAABfyONumfSt+1vpLLc+xBcNFW+0/U/3WCPa3gObwfhMCgXBS9QoFX9bm6MaE8jaWcV
-	hlkkkAYR26X40A9v8n+NLOfWR7oigGc10++oBFLcAPaN0RiHfu3G+wvZLOG0mWSXxHP8
-	U/revSc4W8xoxPb5VBVey1Z7F+6trBVTkCs0rp0muYwShPceBTvvZWLQ4IjNIqThRXur
-	qOa68Rt09mCMyYISTyQgAYxo8w9xXHeETtnY/+0lshSVzB/Jt86nwP7lRyKaDdJ3Dap5
-	H9Yw==
-X-Gm-Message-State: AA+aEWZAcLHNX0+uiZWjHqtoChUno9Sh1vAFdOzskCfmoaCiz2eajaWF
-	T8CNVS2c0G61EKCaU+kbMZQyZGtYhyLbJN4gncx6Fw==
-X-Google-Smtp-Source: AJdET5cldMB4zcrf/EvMerqAtNpy9pUSxdqhcmaUXqBvhDuOiGmhCy+Si88KMRYjcQDEXA2yjIfj1P7pRcM6dgIPvSs=
-X-Received: by 2002:a24:f909:: with SMTP id l9mr21323791ith.74.1543217724902; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8dG+O0v4uMjIfkKexDingT2QIYfIirXhrSQgNmD+QoI=;
+	b=DLZrw/Ta1DIbbsBOo48djLHStGtIKq+JDC4B7HFQu5WnLzVi3wE2aZG+sXlEG5Jvx2
+	NdBNqVc5SmxZ8lM79bQkN9H64+hKcJquZh12h15pASJwzjrzGv4kMpEydYjCHODD5Q4s
+	E3Ya6TBoyjuUiSptC770erGF2aZKzSLanXPKSwq9g0zICSMwu3/P3WYoaDBLOOMRrrcE
+	MZGxfZcjPwuVF5QsUw5cH3SCCVlcdNpKmCa3bzFY+hC0BejALluOgpK+JdhUDdtuKcaH
+	uPMtDbpCnfAzaRRpHgrelwhdJMxBWR5sfqi5ilnui9L9gVLFjLRgycFCrE8MZ9beLl56
+	NdSA==
+X-Gm-Message-State: AA+aEWYrXWvniO12M9DOo80h4JKgGQqmd+i2itWqi44w6XjG1Ga/UE9z
+	g0WWDnolOZM7IwjjRie75LnGyLYgIJQ=
+X-Google-Smtp-Source: AFSGD/UCAcvv4cxzh0XDDARruKwzfX8IX0fPTye3DVcdqz/nVGznX9JdRLtgl9SP7Gthd404Phz5Ww==
+X-Received: by 2002:a1c:51:: with SMTP id 78mr6089409wma.140.1543217725171;
+	Sun, 25 Nov 2018 23:35:25 -0800 (PST)
+Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
+	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sun, 25 Nov 2018 23:35:24 -0800 (PST)
-MIME-Version: 1.0
-References: <20181123153941.10186-1-brgl@bgdev.pl>
-	<CA+aJhH0KL7nzmkGUgUyD-h-ghf6u65uqeGOVavjV=u1fW6QQvg@mail.gmail.com>
-	<CAMRc=MebuMRhQgzrZKU_0Gu9pNOPgJYitVMLFSPGm0B9hHfC3w@mail.gmail.com>
-	<CA+aJhH2_yYkLCdY6C0XSuj9vB_k+VLioKh8ArSUZqo7XYydsDg@mail.gmail.com>
-In-Reply-To: <CA+aJhH2_yYkLCdY6C0XSuj9vB_k+VLioKh8ArSUZqo7XYydsDg@mail.gmail.com>
 From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Mon, 26 Nov 2018 08:35:13 +0100
-Message-ID: <CAMRc=MfyKbLZXAqjhnOL=p-jXaCYM=+Y89eBbNYYNBeDc_b=0Q@mail.gmail.com>
-To: nathan@nathanrossi.com
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
+To: openembedded-devel@lists.openembedded.org,
+	Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Nov 2018 08:35:14 +0100
+Message-Id: <20181126073520.18859-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2 0/6] sigrok: set of new packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,80 +58,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 07:35:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 26 Nov 2018 07:35:25 -0000
+Content-Transfer-Encoding: 8bit
 
-niedz., 25 lis 2018 o 16:40 Nathan Rossi <nathan@nathanrossi.com> napisa=C5=
-=82(a):
->
-> On Mon, 26 Nov 2018 at 01:12, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> >
-> > niedz., 25 lis 2018 o 07:04 Nathan Rossi <nathan@nathanrossi.com> napis=
-a=C5=82(a):
-> > >
-> > > On Sat, 24 Nov 2018 at 01:39, Bartosz Golaszewski <brgl@bgdev.pl> wro=
-te:
-> > > >
-> > > > This series adds recipes for libsigrok and accompanying libraries a=
-nd
-> > > > tools. The eventual goal is to add pulseview - the graphical interf=
-ace
-> > > > for sigrok - to meta-qt5-extra.
-> > > >
-> > > > First two patches add external packages used by libsigrok. The thir=
-d
-> > > > patch adds a recipe for native doxygen, which is needed to generate
-> > > > libsigrok C++ bindings which will in turn be necessary to build
-> > > > pulseview.
-> > > >
-> > > > Last three patches add recipes for the sigrok suite including the
-> > > > command-line utility - sigrok-cli.
-> > > >
-> > > > Bartosz Golaszewski (6):
-> > > >   libzip: new package
-> > > >   libserialport: new package
-> > > >   doxygen: new native package
-> > > >   libsigrok: new package
-> > > >   libsigrokdecode: new package
-> > > >   sigrok-cli: new package
-> > >
-> > > Anything against marking all the recipes (excluding doxygen) with
-> > > BBCLASSEXTEND =3D "native nativesdk"?
-> > >
-> >
-> > What would be the reason for that? Also: you'd need to do that for ALL
-> > non-direct sigrok dependencies and I think there are quite a few.
->
-> It makes it really easy to ship with a nativesdk toolset or use on
-> your build host. I have personally been using it this way and made
-> some recipes for it a few months ago
-> (https://github.com/nathanrossi/meta-random/tree/master/recipes-toolbox/s=
-igrok).
->
-> With the recipes in this series the only dependency that is not also
-> enabled for native/nativesdk is glibmm. However that is not enabled by
-> default (since its a dependency of 'cxx' config).
->
+This series adds recipes for libsigrok and accompanying libraries and
+tools. The eventual goal is to add pulseview - the graphical interface
+for sigrok - to meta-qt5-extra.
 
-I guess it can always be added later on. I'll stick to target packages for =
-now.
+First two patches add external packages used by libsigrok. The third
+patch adds a recipe for doxygen, which is needed to generate libsigrok
+C++ bindings which will in turn be necessary to build pulseview.
 
-> >
-> > > Also any plans to include recipes for any of the firmware data
-> > > packages that sigrok provides? (e.g. sigrok-firmware-fx2lafw)
-> > >
-> >
-> > I don't personally need it and it seems like it requires integrating
-> > the sdcc compiler into yocto. Probably more work than I can spend on
-> > that.
->
-> I was only referring to the pre-built firmware binaries that are
-> released by the sigrok project.
-> https://sigrok.org/download/binary/sigrok-firmware-fx2lafw/.
->
+Last three patches add recipes for the sigrok suite including the
+command-line utility - sigrok-cli.
 
-Same as above, no problem adding it later.
+v1 -> v2:
+- make doxygen recipe buildable for target as well (BBCLASSEXTEND instead
+  of a native recipe)
+- use ${datadir} instead of hardcoding /usr/share
 
-Bart
+Bartosz Golaszewski (6):
+  libzip: new package
+  libserialport: new package
+  doxygen: new package
+  libsigrok: new package
+  libsigrokdecode: new package
+  sigrok-cli: new package
+
+ .../0001-build-don-t-look-for-Iconv.patch     | 36 +++++++++++++++++++
+ .../doxygen/doxygen_1.8.14.bb                 | 17 +++++++++
+ .../libserialport/libserialport_0.1.1.bb      | 12 +++++++
+ .../recipes-extended/libzip/libzip_1.5.1.bb   | 18 ++++++++++
+ .../sigrok/libsigrok_0.5.1.bb                 | 23 ++++++++++++
+ .../sigrok/libsigrokdecode_0.5.2.bb           | 14 ++++++++
+ .../sigrok/sigrok-cli_0.7.0.bb                | 18 ++++++++++
+ 7 files changed, 138 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
+ create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+ create mode 100644 meta-oe/recipes-extended/libserialport/libserialport_0.1.1.bb
+ create mode 100644 meta-oe/recipes-extended/libzip/libzip_1.5.1.bb
+ create mode 100644 meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb
+ create mode 100644 meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb
+ create mode 100644 meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+
+-- 
+2.19.1
+
 
