@@ -1,53 +1,54 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id AD1B26C62C
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BB486C637
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 07:35:29 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id r10so17695040wrs.10
+	Mon, 26 Nov 2018 07:35:30 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id r11-v6so17023528wmb.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 25 Nov 2018 23:35:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=sNqzNYPLFWRxW6EP1jygByoxjBYPOLih/6/RAnvqYcY=;
-	b=SrnqACgGBidrHg/BQk1lpMJcXlfVQ9ct/bHqaB8YHVsd2pmgkWulMyRFVMF0/TeLKC
-	3KKFFC+Wf/xLUgYUa/eE5c1c0MlrwA+RVZIz9ZWmeWdqw8Bsl5nj95tld4UxtJ9vbEae
-	cJAQzwE8JeBA48mBJOG04cLpYkTv8KPRdGaxs/QqSOaDfoWTHr3hkb5j8NNuRRXdpuOV
-	/1Z+dHSk5OpchwHY/KLdla4X4dQmkPxHYvttnENRPq1p366q+lvd8NRRrOpTMWOF700O
-	m8W0LDrMOa0A5vGidN72n82gLYb6MKIBEScuSc92pUFUJLXfkueZvHEBvmcSsNIcDKCh
-	TdJQ==
+	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
+	b=KiwGZx9Zdrus9Y5FJzVE8RUPq3A/TgVAWr8lMWkMdhJNxq10TkvIdlHdMaU9KQ/h2S
+	DhcqZoonXfWpPiaLWH2buPaFrBCWv6sw5RVAb+9rn9t9rl0QoGTLtZ7Tvf9/0RrmXk8E
+	zeBjYm8eh/wUDAUbrFd7xtmqhj3UoUbzg3axqgJFQKTkDl4scUj85mI21MnXTbBx0z8D
+	K59igEypnXmZe1SeL7HOagEObv2y1zeXK84A4avd8uSFniO35UgJ8xYtOg1Uy3I13y1i
+	0oDWRa18xP88n8wWrlUWrIsdBgN72Dk1TNu0kXVCX3UAoy6O4JI5uILB/ICUVi1/rQUI
+	IvKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sNqzNYPLFWRxW6EP1jygByoxjBYPOLih/6/RAnvqYcY=;
-	b=l2sUhICoZANntKG8Gf8C94dfb1TxJYN5lN/yLC89qjKOctMDsEKDWupYl5gm070kJL
-	U3Y0rfz0hFZMD7B3mz/wJEIqXDSis8vwvcxEwt96Xb3bfzJycJjMA/nM/ZlCtu9GgUDd
-	H3IU/ejkTdXhX+NmCn+m8A97lKBrf+75XEjaxqqX8Ubr0tEduYBC4SN+3Oa9lkonS0l1
-	+KSO9v3g2b3ZoL4WCyi8o4XQswJnw1fFC2Y441puXXXBJXZhNOjhNTaFMYWqInfg7EHi
-	NeGPPWvlwwAuYiMIyJnL4A0imayE6Gr1gm4cDoHDobRYBvrB+2IgLZSSOP4tTbtZvIin
-	8CBw==
-X-Gm-Message-State: AA+aEWapjLZ5YZJhEXT4xBKnxtZYvhRRH/yVMF/PgjSiCBcRxs2/bqrh
-	L9O1HYHM8OogNURiZM5E2tHSFZ1NYrA=
-X-Google-Smtp-Source: AFSGD/WUDwMgQ4OOrPJ+oTmTGSCzE9jVbANZT6QhrGAonv9vXtBmpaVs6lOPjPEkak7DBkBjhA3RrQ==
-X-Received: by 2002:adf:c612:: with SMTP id n18mr3969828wrg.174.1543217729994; 
-	Sun, 25 Nov 2018 23:35:29 -0800 (PST)
+	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
+	b=Wmj/R5q7e5GW0AjjextyakmlpOKPI9Aopql+Md/YXYaFvDaqED+EvpbkXzpQsxBQye
+	qHHHgayuGgsYo4BluQv97gltMThcfO2tT9Qtp26n7Oy2ZIq+HGQNYSDk3POrjBcbXU5u
+	3EJ4nLX7YWb0DQjkl4KFP2v0J1GNmFnNxiYTyiga7820+LI9S9xqNsO/80Jws94K51H+
+	R81ENlHSw//8hi4E/Pac3egbooc91Xze1z589a9G71D/lQTHcZ0pluq/KU7lNeS1znJq
+	8GsIeNEqwB79qXiKwHo+gN3aDu1UAK+V5meS1Jlg1VKvWC6klUUb3TmLOhKjdza3lXmH
+	6S0g==
+X-Gm-Message-State: AGRZ1gJYLuTQu5/7yjxBhEgmb7Lwt4xK7GM/Ru3lQ/Xiuf1/U6i7YIDV
+	NpIsw2sZEFFJ/FvmjblQPoPaF6hX/tc=
+X-Google-Smtp-Source: AFSGD/XGo0ujO7K0xRabNfI0rYFBgABZH9bFRauZFBgSBup/54xs6oM27xW9AdlGfXg6e5Qc/2nGIw==
+X-Received: by 2002:a1c:91d1:: with SMTP id
+	t200mr22320332wmd.111.1543217731048; 
+	Sun, 25 Nov 2018 23:35:31 -0800 (PST)
 Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.28
+	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Nov 2018 23:35:29 -0800 (PST)
+	Sun, 25 Nov 2018 23:35:30 -0800 (PST)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: openembedded-devel@lists.openembedded.org,
 	Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Nov 2018 08:35:19 +0100
-Message-Id: <20181126073520.18859-6-brgl@bgdev.pl>
+Date: Mon, 26 Nov 2018 08:35:20 +0100
+Message-Id: <20181126073520.18859-7-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181126073520.18859-1-brgl@bgdev.pl>
 References: <20181126073520.18859-1-brgl@bgdev.pl>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 5/6] libsigrokdecode: new package
+Subject: [meta-oe][PATCH v2 6/6] sigrok-cli: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +61,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 07:35:30 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 07:35:31 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../sigrok/libsigrokdecode_0.5.2.bb                | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb
+ .../sigrok/sigrok-cli_0.7.0.bb                 | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
 
-diff --git a/meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb b/meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb
+diff --git a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
 new file mode 100644
-index 000000000..b8e1e4705
+index 000000000..d31bcd282
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sigrok/libsigrokdecode_0.5.2.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "libsigrokdecode is a shared library written in C, which provides (streaming) protocol decoding functionality."
++++ b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "sigrok-cli is a command-line frontend for sigrok."
 +HOMEPAGE = "http://sigrok.org/wiki/Main_Page"
 +
 +LICENSE = "GPLv3"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+DEPENDS = "glib-2.0 python3"
++DEPENDS = "libsigrok"
++
++PACKAGECONFIG[decode] = "--with-libsigrokdecode,--without-libsigrokdecode,libsigrokdecode"
++
++PACKAGECONFIG ??= "decode"
 +
 +inherit autotools pkgconfig
 +
-+SRC_URI = "http://sigrok.org/download/source/libsigrokdecode/libsigrokdecode-${PV}.tar.gz"
++SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "b9033bc7e68bc17fffffd4fdd793f5a1"
-+SRC_URI[sha256sum] = "e08d9e797c54eccf3144da631b6e5f1498ac531e51520428df537a1da82583f0"
++SRC_URI[md5sum] = "77cb745e2fa239c7bd1ea81e2d67ede9"
++SRC_URI[sha256sum] = "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
 -- 
 2.19.1
 
