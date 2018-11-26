@@ -1,48 +1,29 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AA786C18F
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A02E76C18F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 18:07:00 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l11so18681473qtp.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 10:07:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=U043MUTVa427WuS5rJty37GWsJEG0nftR4l39wH3W+E=;
-	b=i/AnQSWLrb8+UNBDKtGV5PUHHoORifY5C/0wHoaCpeGLmJvKzGRqcRUgeyh/+seW6F
-	D8XeUeFXK3q91C1HjrOM9m4jSp53NHwXFrJCUr/78chCvLYKxpamTRaeKruc9t1bzPtT
-	4bnUrHnyr7ikCW8QQytiT/iqukcxiPqU4UsXF1QOk6H6R4WxgSkw6JOn0SvV4uov/aVJ
-	+2TYSk6DjTWuS7+KGZ1gY66wtYoCd8Z6uJffBock3f4eTUYfnfXaK3rJMc903pm0PKDZ
-	oiBr2OVtHKqTjXou41KMnYPri7nn/GrH2NihhfJQ61cKcugrL4udtEQhb/75VolBOjra
-	YEpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=U043MUTVa427WuS5rJty37GWsJEG0nftR4l39wH3W+E=;
-	b=k96DFs66m8kGvucNUOjW6pNaJ2goTphpxvvwdK45P4ihl0E6v62VE8Vq5lLigaBvHC
-	vuMIky7uMj0/mhs/SlCoTs87A7NQA31UliLPX/hsF4OzyltPyeLnwGrP0ugIOmyB55RO
-	qfG+8D8SZj/MK688FKcyZtBq4/jCd1zEQvFbdhdJvRJ5jxlESJlKCdm4QKNOxSMjLfBB
-	mE1UGWtqXHJgFxNNRAHJQG/AOKVnpfcJof6VwGyrGzBYUmOmlpbPIvdrFyvNRb5Ybw9I
-	wxzjfjW9QN0fo59dOm9gyplfOsMZAkHtKpT1TCLrSiWIGDHikD33A5qYvcxEHmsTdDz2
-	U57g==
-X-Gm-Message-State: AGRZ1gKcehqhCQ3UoPMPB/jX/4yOaEXxIdcF4QiTbyRvE0kJVCLnsJeW
-	dYzc+lKE1l/arhvHDnZa78L9pQG3QyA=
-X-Google-Smtp-Source: AJdET5fw7Aatr6mha33Mfklw+9wDabxC7JSc1SERgBoqUsh/0PMD8lnSP6lRm86UnhgJhY8ZP/t8jA==
-X-Received: by 2002:ac8:2d9d:: with SMTP id p29mr26163830qta.238.1543255620683;
-	Mon, 26 Nov 2018 10:07:00 -0800 (PST)
-Received: from prague.hsd1.va.comcast.net
-	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
-	by smtp.gmail.com with ESMTPSA id l30sm473533qte.44.2018.11.26.10.06.58
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 26 Nov 2018 10:06:59 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2018 13:06:53 -0500
-Message-Id: <20181126180653.11171-1-philip@balister.org>
-X-Mailer: git-send-email 2.13.6
-Subject: [meta-python][PATCH] python-tzlocal: Add new recipe.
+	Mon, 26 Nov 2018 18:07:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAQI7A8b026706
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 26 Nov 2018 10:07:20 -0800
+Received: from yow-masselst-lx1.localnet (128.224.22.201) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.408.0; Mon, 26 Nov 2018 10:06:59 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Nov 2018 13:06:58 -0500
+Message-ID: <7738387.rbd9zDMNmT@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <CAMKF1sr_QNByq6uDb_ZnjaMt_VX2tvvZCN2Eig5WEks+Dmwrww@mail.gmail.com>
+References: <20181120203814.11500-1-raj.khem@gmail.com>
+	<CAPuovEJ5cfkOzNLRmR-936-LLdm3Vkd82mM=91i-MPc6pPU-GQ@mail.gmail.com>
+	<CAMKF1sr_QNByq6uDb_ZnjaMt_VX2tvvZCN2Eig5WEks+Dmwrww@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Ivan Maidanski <ivmai@mail.ru>
+Subject: Re: [meta-oe][PATCH 06/10] bdwgc: upgrade 7.6.0 -> 7.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,49 +36,188 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 18:07:00 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 18:07:56 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-python/recipes-devtools/python/python-tzlocal.inc       | 8 ++++++++
- meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb  | 2 ++
- meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb | 2 ++
- 3 files changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-tzlocal.inc
- create mode 100644 meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb
+On Monday, November 26, 2018 12:02:41 PM EST Khem Raj wrote:
+> On Mon, Nov 26, 2018 at 7:59 AM Mark Asselstine
+> 
+> <mark.asselstine@windriver.com> wrote:
+> > On Tue, Nov 20, 2018 at 3:39 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > > From: Ivan Maidanski <ivmai@mail.ru>
+> > > 
+> > > Highlights of this upgrade:
+> > > * Fix numerous bugs (concurrency, overflow, CVE-2016-9427, etc.)
+> > > * Fix various typos in comments and documentation
+> > > * AddressSanitizer and MemorySanitizer support
+> > > * RISC-V support
+> > > 
+> > > See the following for detailed changes:
+> > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.2
+> > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.4
+> > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.6
+> > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.8
+> > > 
+> > > Signed-off-by: Ivan Maidanski <ivmai@mail.ru>
+> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > ---
+> > 
+> > This is causing my master-next builds to fail on fetching. Ivan, you need
+> > to
+> > 
+> > -SRC_URI = "git://github.com/ivmai/bdwgc.git \
+> > +SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
+> > 
+> > before this commit makes  its way to the master branch.
+> > 
+> > Khem, Ivan, let me know if you want to sort this out or have me send a
+> > patch.
+> Thansk for trying out master-next
 
-diff --git a/meta-python/recipes-devtools/python/python-tzlocal.inc b/meta-python/recipes-devtools/python/python-tzlocal.inc
-new file mode 100644
-index 000000000..42f93e6a5
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-tzlocal.inc
-@@ -0,0 +1,8 @@
-+SUMMARY = "Library to return tzinfo with the local timezone information"
-+HOMEPAGE = "https://pypi.org/project/tzlocal/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
-+
-+SRC_URI[md5sum] = "4553be891efa0812c4adfb0c6e818eec"                            
-+SRC_URI[sha256sum] = "4ebeb848845ac898da6519b9b31879cf13b6626f7184c496037b818e238f2c4e" 
-+
-diff --git a/meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb b/meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb
-new file mode 100644
-index 000000000..b7980dd55
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools
-+require python-tzlocal.inc
-diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb b/meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb
-new file mode 100644
-index 000000000..813934c81
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools3
-+require python-tzlocal.inc
--- 
-2.13.6
+I have one of our nightly builds of meta-overc use it to catch stuff like 
+this.
+
+> its already fixed in my yoe/mut branch
+> http://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
+
+Great. Thanks for taking care of this.
+
+Mark
+
+> 
+> > Thanks,
+> > Mark
+> > 
+> > >  ...d-check-for-NO_GETCONTEXT-definition.patch | 29 -------------------
+> > >  .../bdwgc/bdwgc/musl_header_fix.patch         | 27 -----------------
+> > >  .../bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}  |  6 ++--
+> > >  3 files changed, 2 insertions(+), 60 deletions(-)
+> > >  delete mode 100644
+> > >  meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO
+> > >  _GETCONTEXT-definition.patch delete mode 100644
+> > >  meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch rename
+> > >  meta-oe/recipes-support/bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb} (85%)> 
+> 
+> > > diff --git
+> > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > O_GETCONTEXT-definition.patch
+> > > b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > O_GETCONTEXT-definition.patch deleted file mode 100644
+> > > index 8ef774f0f2..0000000000
+> > > ---
+> > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > O_GETCONTEXT-definition.patch +++ /dev/null
+> > > @@ -1,29 +0,0 @@
+> > > -configure.ac: add check for NO_GETCONTEXT definition
+> > > -
+> > > -Signed-off-by: Samuel Martin <s.martin49@gmail.com>
+> > > -[yann.morin.1998@free.fr: add a comment, change variable name, use
+> > > - AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
+> > > - Thomas)]
+> > > -Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+> > > -Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+> > > -
+> > > ----
+> > > -Upstream-Status: Pending
+> > > - configure.ac | 6 ++++++
+> > > - 1 file changed, 6 insertions(+)
+> > > -
+> > > ---- bdwgc-7.2f.orig/configure.ac       2014-06-01 19:00:47.000000000
+> > > +0200
+> > > -+++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713 +0100
+> > > -@@ -365,6 +365,12 @@
+> > > -   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
+> > > - fi
+> > > -
+> > > -+# Check for getcontext (uClibc can be configured without it, for
+> > > example)
+> > > -+AC_CHECK_FUNCS([getcontext])
+> > > -+AS_IF([test "$ac_cv_func_getcontext" = "no"],
+> > > -+  [CFLAGS="$CFLAGS -DNO_GETCONTEXT"
+> > > -+   CPPFLAGS="$CPPFLAGS -DNO_GETCONTEXT"])
+> > > -+
+> > > - case "$host" in
+> > > - # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing for
+> > > N64
+> > > - # and unnecessary everywhere.
+> > > diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> > > b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch deleted
+> > > file mode 100644
+> > > index 4a18496650..0000000000
+> > > --- a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> > > +++ /dev/null
+> > > @@ -1,27 +0,0 @@
+> > > -Add missing header to avoid:
+> > > -
+> > > -| 1472659610.016355: ../git/pthread_stop_world.c: In function
+> > > 'GC_brief_async_signal_safe_sleep': -| 1472659610.0540252:
+> > > ../git/pthread_stop_world.c:397:22: error: storage size of 'tv' isn't
+> > > known -| 1472659610.0540252:        struct timeval tv;
+> > > -| 1472659610.0540252:                       ^~
+> > > -| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning:
+> > > unused variable 'tv' [-Wunused-variable] -| 1472659610.054099:       
+> > > struct timeval tv;
+> > > -| 1472659610.054099:                       ^~
+> > > -| 1472659610.054099: Makefile:1530: recipe for target
+> > > 'pthread_stop_world.lo' failed -
+> > > -in musl builds.
+> > > -
+> > > -Upstream-Status: Pending
+> > > -
+> > > -Index: git/pthread_stop_world.c
+> > > -===================================================================
+> > > ---- git.orig/pthread_stop_world.c
+> > > -+++ git/pthread_stop_world.c
+> > > -@@ -45,6 +45,7 @@
+> > > - #include <semaphore.h>
+> > > - #include <errno.h>
+> > > - #include <unistd.h>
+> > > -+#include <sys/time.h>
+> > > - #include "atomic_ops.h"
+> > > -
+> > > - /* It's safe to call original pthread_sigmask() here.   */
+> > > diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> > > b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb similarity index 85%
+> > > rename from meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> > > rename to meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
+> > > index dcb68f0282..18722fb441 100644
+> > > --- a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> > > +++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
+> > > @@ -19,12 +19,10 @@ DESCRIPTION = "The Boehm-Demers-Weiser conservative
+> > > garbage collector can be\> > 
+> > >  HOMEPAGE = "http://www.hboehm.info/gc/"
+> > >  SECTION = "devel"
+> > >  LICENSE = "MIT"
+> > > 
+> > > -LIC_FILES_CHKSUM =
+> > > "file://README.QUICK;md5=4f81f24ec69726c312487c2ac740e9e3"
+> > > +LIC_FILES_CHKSUM =
+> > > "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
+> > > 
+> > > -SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
+> > > +SRCREV = "8b2a98209a59c92e1be318e4acda507d83175f4d"
+> > > 
+> > >  SRC_URI = "git://github.com/ivmai/bdwgc.git \
+> > > 
+> > > -          
+> > > file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch \
+> > > -           file://musl_header_fix.patch \
+> > > 
+> > >            "
+> > >  
+> > >  FILES_${PN}-doc = "${datadir}"
+> > > 
+> > > --
+> > > 2.19.1
+> > > 
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
 
 
