@@ -1,54 +1,53 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 878986C643
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8117B6C5D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 07:35:27 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id z18so2379371wmc.4
+	Mon, 26 Nov 2018 07:35:28 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id c126so17128276wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 23:35:28 -0800 (PST)
+	Sun, 25 Nov 2018 23:35:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=H0d/PMsW6ENz/km3NSdKznfgqc78E/MSu4yCCDknnYk=;
-	b=jqflnAmK+TX7i5m3gv1GPIBnhbuA9wXw1rBjuiiSbfPURQQ0vbDSA+9PdUW3FKg6zP
-	r1iNyTtdq1E4rIOOb6h3Uwwt2KI94zjgetZC6hqaQ8le/wLwSEgLG5ehOj8agO5vVs5I
-	/qI3nMvlkdgB6fPOYF4HM/RDE5ro7SmTynBMsZtDJbUav8le4dLfhTASui/KlfiGFoCk
-	GsfPBpIfKm43n3lwjL5eKW1Ij172xyZGR5i12e8EetPzjadz6mNVhjx1jxXgwU8sD02J
-	4QB8FZ86YQXJxKEdFvlu9fooIg4cafwcntBB6F67w92k1b2D1TrgNyr6siWZJCYTAdUl
-	zpmg==
+	bh=yzuNp3mOCJGjeCpJ6EkcNuyZJOcEQiixhCdbmY0Z2lU=;
+	b=y1ZSlYvNXSaWNPd52mmpX7hsHTuu2ivoYiaIZg5VS4QhkQSoAai7x9cK7iFEywY84+
+	3IEDoNsXUlGvsxAYVxgaTVjd8sq6OUOUhbQCjr332rI+fLbKe9SyN7eKs/DXvb+aq+gN
+	cw8RJW32ie0sBWzDKaA7ZBG1wsEW+wKf9fvZpYn9Zs2Hzd8lpBvCXclLqWnbac8I51bX
+	Ugb1RJFAP3NLNQggjrvVuPcKwyHoFiKWkKQQWS7rOJy2Sei4nAehDA8c7Vb0Ns2sDuAB
+	Y9DiujsfPsK7PEhJbgxcJby2DvyIDpp2vU3b2Xo+Dw3dbdNs3clF45LeBk+qNoCqkfhr
+	PDIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=H0d/PMsW6ENz/km3NSdKznfgqc78E/MSu4yCCDknnYk=;
-	b=UY/hmcxHyR2NzSJRqgTywBq/XmNn3TCkhz8yOeDhhxDlAs2m9WsB7P6Hb0qwVCCdyO
-	PgiuDY7/bLEgfNASyU0kx/ukmfPunZXRGfHUTkTYB7IXpoc2oujTLQlGOKjGkOsvIr4Q
-	ei2FezLdQsRGy09u87KadAOk8ZOqVb11Jfoz5vz/6dPq0hcNaNUnYYVEtT1K9Y99JT9L
-	mGUSkONlG4CdZkB9zLRnEGcx5kVPbeLhF/B1zyWFjUoiNdP9SVGc7hg2v4TnmQT/cM9b
-	j6LLo5vIKFRFerreOyfiTzc5CNad2BAnwLXmOyl+2UVb6z5g6VtzwKxNlQQMhjgl2Md7
-	Wk2g==
-X-Gm-Message-State: AGRZ1gKoR72IrVR9AYzP+ffUjedLrqVXuQw9tQeoGFxbRbwwQZrR9ZI+
-	AOsWfZg4QgHjT1F2HdP65dXYLx++oto=
-X-Google-Smtp-Source: AJdET5dNffI7WsgYBOFI69Ri1IjRxb8GUHZWqtJ3UHFUcnFdbzcDb7c2F+KJ+Vqmg39PxGzhFTpdWQ==
-X-Received: by 2002:a1c:aacf:: with SMTP id
-	t198-v6mr21810327wme.108.1543217727968; 
-	Sun, 25 Nov 2018 23:35:27 -0800 (PST)
+	bh=yzuNp3mOCJGjeCpJ6EkcNuyZJOcEQiixhCdbmY0Z2lU=;
+	b=gCv5XCk172Do/G7cxjzYoUPMxYOS1LEF4udnqxfpRSj0A9aaYme3Mf7w1m6Y2HOm21
+	5Wuc9QS+mIbUBVw82f9G/qobkdWJSAKg5t/ArY8btzA6YNWfAYrkzbL9gFOCD3soXJBG
+	x6ge4Ci/9a07gqbj/ARGrovjJRpfa1C2pYiL9j3efrwmc8Ar4zkbV6v8aUbQSSqrq47Y
+	griXhWksAMxa/BbsRZAq3rocOWYHYXoFcmnaC/6v7R6wS1/QSABLYxGDjoDSwCojdEP4
+	wd6RiqM7aBddFbyggdnHXsSiK2b/xYoUw1bWxffnMBa7qDkfvpLLqH9Cks+kmWvOBLqy
+	GQdQ==
+X-Gm-Message-State: AGRZ1gIyQKJCEKvZmdurkiNQ7WDLm6+ZPPTvmm90G3wJqMHSiVifp1um
+	J0rP2EuAgQcVTC6UgJiAjafEWoSE/e8=
+X-Google-Smtp-Source: AJdET5c3+H9o/MEcfIGVrNBmZJC0CQ75Mvru5tFN1L+pBIFFBCHl2NUJAJK3ZzSFVxXA6UQ9oVKFsQ==
+X-Received: by 2002:a1c:8791:: with SMTP id j139mr21759866wmd.86.1543217728912;
+	Sun, 25 Nov 2018 23:35:28 -0800 (PST)
 Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.27
+	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Nov 2018 23:35:27 -0800 (PST)
+	Sun, 25 Nov 2018 23:35:28 -0800 (PST)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: openembedded-devel@lists.openembedded.org,
 	Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Nov 2018 08:35:17 +0100
-Message-Id: <20181126073520.18859-4-brgl@bgdev.pl>
+Date: Mon, 26 Nov 2018 08:35:18 +0100
+Message-Id: <20181126073520.18859-5-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181126073520.18859-1-brgl@bgdev.pl>
 References: <20181126073520.18859-1-brgl@bgdev.pl>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 3/6] doxygen: new package
+Subject: [meta-oe][PATCH v2 4/6] libsigrok: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,84 +60,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 07:35:27 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 07:35:28 -0000
 Content-Transfer-Encoding: 8bit
-
-Doxygen binary is necessary to generate C++ bindings for libsigrok.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../0001-build-don-t-look-for-Iconv.patch     | 36 +++++++++++++++++++
- .../doxygen/doxygen_1.8.14.bb                 | 17 +++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
- create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+ .../sigrok/libsigrok_0.5.1.bb                 | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb
 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch b/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
+diff --git a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb
 new file mode 100644
-index 000000000..0eefe0729
+index 000000000..8152ca7ca
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
-@@ -0,0 +1,36 @@
-+From f3a6c05e3a8afdac547c6c8176fa6b57636db65c Mon Sep 17 00:00:00 2001
-+From: Bartosz Golaszewski <brgl@bgdev.pl>
-+Date: Fri, 23 Nov 2018 11:44:56 +0100
-+Subject: [PATCH] build: don't look for Iconv
++++ b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.1.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "libsigrok is a shared library written in C, which provides the basic hardware access drivers for logic analyzers and other supported devices, as well as input/output file format support."
++HOMEPAGE = "http://sigrok.org/wiki/Main_Page"
 +
-+Drop the find_package() for Iconv. CMake is unable to find iconv.h in
-+native build but all modern systems supply it as part of the standard
-+C library. We don't need this check in meta-openembedded.
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
++DEPENDS = "glib-2.0 libzip"
 +
-+Upstream-status: Inappropriate
-+- upstream doxygen must build on many architectures, this change is
-+  too intrusive for upstream
-+---
-+ CMakeLists.txt | 4 ----
-+ 1 file changed, 4 deletions(-)
++PACKAGECONFIG[serialport] = "--with-libserialport,--without-libserialport,libserialport"
++PACKAGECONFIG[ftdi] = "--with-libftdi,--without-libftdi,libftdi"
++PACKAGECONFIG[usb] = "--with-libusb,--without-libusb,libusb"
++PACKAGECONFIG[cxx] = "--enable-cxx,--disable-cxx,glibmm doxygen-native"
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index ba105b89..16252247 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -89,10 +89,6 @@ if (sqlite3)
-+     find_package(SQLite3 REQUIRED)
-+ endif()
-+ 
-+-find_package(Iconv REQUIRED)
-+-include_directories(${ICONV_INCLUDE_DIR})
-+-
-+-
-+ #set(DOXYDOCS ${CMAKE_SOURCE_DIR}/doc CACHE INTERNAL "Path to doxygen docs")
-+ set(DOXYDOCS ${PROJECT_BINARY_DIR}/doc)
-+ set(ENV{DOXYGEN_DOCDIR} ${DOXYDOCS})
-+-- 
-+2.19.1
++PACKAGECONFIG ??= "serialport ftdi usb"
 +
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
-new file mode 100644
-index 000000000..3137c4843
---- /dev/null
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Doxygen is the de facto standard tool for generating documentation from annotated C++ sources."
-+HOMEPAGE = "http://www.doxygen.org/"
++inherit autotools pkgconfig
 +
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++SRC_URI = "http://sigrok.org/download/source/libsigrok/libsigrok-${PV}.tar.gz"
 +
-+inherit cmake python3native
++SRC_URI[md5sum] = "a3de9e52a660e51d27a6aca025d204a7"
++SRC_URI[sha256sum] = "e40fde7af98d29e922e9d3cbe0a6c0569889153fc31e47b8b1afe4d846292b9c"
 +
-+DEPENDS = "flex-native bison-native"
-+
-+SRC_URI = "ftp://ftp.stack.nl/pub/users/dimitri/doxygen-${PV}.src.tar.gz \
-+           file://0001-build-don-t-look-for-Iconv.patch"
-+
-+SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
-+SRC_URI[sha256sum] = "d1757e02755ef6f56fd45f1f4398598b920381948d6fcfa58f5ca6aa56f59d4d"
-+
-+BBCLASSEXTEND = "native"
++FILES_${PN} += "${datadir}/*"
 -- 
 2.19.1
 
