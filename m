@@ -1,54 +1,49 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BB486C637
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A78F6C590
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 07:35:30 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id r11-v6so17023528wmb.2
+	Mon, 26 Nov 2018 15:06:02 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id p4so19282347wrt.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 23:35:31 -0800 (PST)
+	Mon, 26 Nov 2018 07:06:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
-	b=KiwGZx9Zdrus9Y5FJzVE8RUPq3A/TgVAWr8lMWkMdhJNxq10TkvIdlHdMaU9KQ/h2S
-	DhcqZoonXfWpPiaLWH2buPaFrBCWv6sw5RVAb+9rn9t9rl0QoGTLtZ7Tvf9/0RrmXk8E
-	zeBjYm8eh/wUDAUbrFd7xtmqhj3UoUbzg3axqgJFQKTkDl4scUj85mI21MnXTbBx0z8D
-	K59igEypnXmZe1SeL7HOagEObv2y1zeXK84A4avd8uSFniO35UgJ8xYtOg1Uy3I13y1i
-	0oDWRa18xP88n8wWrlUWrIsdBgN72Dk1TNu0kXVCX3UAoy6O4JI5uILB/ICUVi1/rQUI
-	IvKg==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=aAQ2mKAg9BIHj33flcSPYd/Q9+G4/B3K07p4tMY4J9o=;
+	b=k4clWtaNK4aPyZQE4j0YMy1mnL4waCOAfHcSdBljtjK0dH8wP2yRNVR2zkSdWIntku
+	VAh40vqgcJH8+zovH1bk6zgSYnEK9ieP98thZCoPo6hf7gLJao7FkGPXoqesFSFdwObh
+	ZzL1sJI18GTMF+PtTswqkCYJf1bL69AD1A2IWD06tRiwCMT6s/wda8dkd0Utswe4MNs2
+	cwMeeKwA2BJ8ofcku0awwQaJGJOp0a4ocT2VKLSBWLlY9qiZsReQxAdm4Eysq8EiA0M9
+	/65Wqp9WJJHGZ7d9hIDC4ha3nFuSB0COrYAJqoC69NZZEwIqW+fvjykB7r8+UJZqlow8
+	pPHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=/9ICIib1XD8sXtC3Bl14o22Ood6Hdl95KCnOE71Hrro=;
-	b=Wmj/R5q7e5GW0AjjextyakmlpOKPI9Aopql+Md/YXYaFvDaqED+EvpbkXzpQsxBQye
-	qHHHgayuGgsYo4BluQv97gltMThcfO2tT9Qtp26n7Oy2ZIq+HGQNYSDk3POrjBcbXU5u
-	3EJ4nLX7YWb0DQjkl4KFP2v0J1GNmFnNxiYTyiga7820+LI9S9xqNsO/80Jws94K51H+
-	R81ENlHSw//8hi4E/Pac3egbooc91Xze1z589a9G71D/lQTHcZ0pluq/KU7lNeS1znJq
-	8GsIeNEqwB79qXiKwHo+gN3aDu1UAK+V5meS1Jlg1VKvWC6klUUb3TmLOhKjdza3lXmH
-	6S0g==
-X-Gm-Message-State: AGRZ1gJYLuTQu5/7yjxBhEgmb7Lwt4xK7GM/Ru3lQ/Xiuf1/U6i7YIDV
-	NpIsw2sZEFFJ/FvmjblQPoPaF6hX/tc=
-X-Google-Smtp-Source: AFSGD/XGo0ujO7K0xRabNfI0rYFBgABZH9bFRauZFBgSBup/54xs6oM27xW9AdlGfXg6e5Qc/2nGIw==
-X-Received: by 2002:a1c:91d1:: with SMTP id
-	t200mr22320332wmd.111.1543217731048; 
-	Sun, 25 Nov 2018 23:35:31 -0800 (PST)
-Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id g2sm9479986wrw.78.2018.11.25.23.35.30
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=aAQ2mKAg9BIHj33flcSPYd/Q9+G4/B3K07p4tMY4J9o=;
+	b=EFNAoQsytrd3y1M8b1/FgMq+1VkxLj2Ihu7PBeP1X3w1xxIKjQtYt7VweB4+ajRdtH
+	tRE+/EY3Pz/xTk1RrYS6uq26wTATAOZtSaaSJERiHLR1ZMFw9dK7KMsYpSDsAWWJRjns
+	8fpnYqZInTIxFd9lvq46S1TYyRNv1FtypgXj60lOnwIovKNgFBhI2Rq4VHbUIIJN5E1T
+	/zOYmBgpRDRhflf37OVHCGFqtzaBv6MrEVlvbIVBQ61OmMT6mzqCdTeomzDOSpv/oXyE
+	Scog8Q2x4XnhKmgGMfxCzTDIdv5/0Szt/DdPKexpP3HwOOFY73ojJeWI+xgMML8w+LG2
+	Q2Aw==
+X-Gm-Message-State: AA+aEWbJTEDMoclnpctqWMO6C2fYpBqytyr1eWdW7Q3OJR9rybP0KpRA
+	dbjC169q/oL0jIe+c65xk8Iw5/WcFw8=
+X-Google-Smtp-Source: AFSGD/WY2ACWBTAfBbYmtq9D3YOtFreMa6GZet6noXIetdhPOtEydwRqtt1yQhW662jMzPKNpGXj1g==
+X-Received: by 2002:a5d:570c:: with SMTP id a12mr19161160wrv.161.1543244762464;
+	Mon, 26 Nov 2018 07:06:02 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id p14sm548710wrt.37.2018.11.26.07.06.01
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Nov 2018 23:35:30 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Nov 2018 08:35:20 +0100
-Message-Id: <20181126073520.18859-7-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20181126073520.18859-1-brgl@bgdev.pl>
-References: <20181126073520.18859-1-brgl@bgdev.pl>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 6/6] sigrok-cli: new package
+	Mon, 26 Nov 2018 07:06:01 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Nov 2018 15:05:58 +0000
+Message-Id: <20181126150558.14940-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH][meta-python] bandit: add class to perform Bandit scans
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,40 +56,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 07:35:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 26 Nov 2018 15:06:02 -0000
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+Add a class to perform security scans of Python code using Bandit.
+
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../sigrok/sigrok-cli_0.7.0.bb                 | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+ meta-python/classes/bandit.bbclass | 63 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
+ create mode 100644 meta-python/classes/bandit.bbclass
 
-diff --git a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+diff --git a/meta-python/classes/bandit.bbclass b/meta-python/classes/bandit.bbclass
 new file mode 100644
-index 000000000..d31bcd282
+index 0000000000..dc1041e466
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "sigrok-cli is a command-line frontend for sigrok."
-+HOMEPAGE = "http://sigrok.org/wiki/Main_Page"
++++ b/meta-python/classes/bandit.bbclass
+@@ -0,0 +1,63 @@
++# Class to scan Python code for security issues, using Bandit.
++#
++# $ bitbake python-foo -c bandit
++#
++# Writes the report to $DEPLOY_DIR/bandit/python-foo.html.
++# No output if no issues found, a warning if issues found.
++#
++# https://github.com/PyCQA/bandit
 +
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++# Default location of sources, based on standard distutils
++BANDIT_SOURCE ?= "${S}/build"
 +
-+DEPENDS = "libsigrok"
++# The report format to use.
++# https://bandit.readthedocs.io/en/latest/formatters/index.html
++BANDIT_FORMAT ?= "html"
 +
-+PACKAGECONFIG[decode] = "--with-libsigrokdecode,--without-libsigrokdecode,libsigrokdecode"
++# Whether a scan should be done every time the recipe is built.
++#
++# By default the scanning needs to be done explicitly, but by setting BANDIT_AUTO
++# to 1 the scan will be done whenever the recipe it built.  Note that you
++# shouldn't set BANDIT_AUTO to 1 globally as it will then try to scan every
++# recipe, including non-Python recipes, causing circular loops.
++BANDIT_AUTO ?= "0"
 +
-+PACKAGECONFIG ??= "decode"
++# Whether Bandit finding issues results in a warning (0) or an error (1).
++BANDIT_FATAL ?= "0"
 +
-+inherit autotools pkgconfig
++do_bandit[depends] = "python3-bandit-native:do_populate_sysroot"
++python do_bandit() {
++    import os, subprocess
++    try:
++        report = d.expand("${DEPLOY_DIR}/bandit/${PN}-${PV}.${BANDIT_FORMAT}")
++        os.makedirs(os.path.dirname(report), exist_ok=True)
 +
-+SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
++        args = ("bandit",
++                "--format", d.getVar("BANDIT_FORMAT"),
++                "--output", report,
++                "-ll",
++                "--recursive", d.getVar("BANDIT_SOURCE"))
++        subprocess.check_output(args, stderr=subprocess.STDOUT)
++        bb.note("Bandit found no issues (report written to %s)" % report)
++    except subprocess.CalledProcessError as e:
++        if e.returncode == 1:
++            if oe.types.boolean(d.getVar("BANDIT_FATAL")):
++                bb.error("Bandit found issues (report written to %s)" % report)
++            else:
++                bb.warn("Bandit found issues (report written to %s)" % report)
++        else:
++            bb.error("Bandit failed:\n" + e.output.decode("utf-8"))
++}
 +
-+SRC_URI[md5sum] = "77cb745e2fa239c7bd1ea81e2d67ede9"
-+SRC_URI[sha256sum] = "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
++python() {
++    before = "do_build"
++    after = "do_compile"
++
++    if oe.types.boolean(d.getVar("BANDIT_AUTO")):
++        bb.build.addtask("do_bandit", before, after, d)
++    else:
++        bb.build.addtask("do_bandit", None, after, d)
++}
++
++# TODO: store report in sstate
++# TODO: a way to pass extra args or .bandit file, basically control -ll
 -- 
-2.19.1
+2.11.0
 
 
