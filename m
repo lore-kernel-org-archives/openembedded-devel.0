@@ -1,52 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E5C0B6C605
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BA3816D123
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 18:53:25 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id t3so20099496wrr.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 10:53:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7uYblrytKlRBA70vUAIUZaPKBcDwzxV+XOuTcVwLb2w=;
-	b=l+e6cpdccka3Rq142DYOJduPozGc5lydDJylgapMlCfD9GnCEyq8GIq6SQ6BNXjJH5
-	vBNi0J4jHeAyFiBDE6lrN2K43u7SpGtxmPMqfHl07PDvlqTb9Ijofn4Vb4ogBlH3wc01
-	ejgH4eLxezx5n0dGQ7OVZjt1ytzKh1G0g34gHJK+IPMHOrmlB0SNzLVZ/RghF3BfwQRq
-	JOvQhhPhdDeV87NPRpOhSvrZy5puY/1EKvozGC5ERAy3lHLY5vfpvK8gl89r70/Ha5A2
-	Lzkvfvg/4hdBWmm4AAx1Xo/HnYUfhYBjCf4KS70+tFbTeTwY5TwyzcvEhm4w+CidIb8T
-	cPPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7uYblrytKlRBA70vUAIUZaPKBcDwzxV+XOuTcVwLb2w=;
-	b=Z746mHrhCb92bjkP5ZfwIDAxMqV3g4NwD/Eh18EP6kJKWDVh6+ifT9vD10oqUIqO9H
-	vlXuErTDW7RzbUchr4zOav4kk2o3UmAeNOWpJ7c1eMahONPvp627VtipVu7cRvWsW6Qb
-	vVRAe6AKaY3JZW/pnO62tCVnrSN99JFsAqJ2Y3Z5jT3ykq8oToWct0qFpgJJpUmzRs7j
-	9fMLI/kwfg1wALJFqgEaQEGv23WuL87kWPANpR1oCNijiKKGRDKQ6qyvttw3VSJPCi3U
-	95ao0vbJFw8iJxsCYnxBjHh4q0DWrhdmP+iIIg53vaBv2p5iQC7m12lBJOPKlp7Z9RGc
-	hKWw==
-X-Gm-Message-State: AA+aEWZKxGVMt04E28JLaxwKx5ev3Px2kZ3NHv8jcE5Chd48Jh9CIi6U
-	GbOm4/VXkwtC6sQ0SUkqNX4/xLqem3bpb1ZdhtI=
-X-Google-Smtp-Source: AFSGD/VFLe0G9/eKZPV8nO8Fwr3TtQ05izFHnfLB3pMNws7GvFa/N1YH+K1feBLFzgosGpllxfDCjO1Ie25t6tYn09A=
-X-Received: by 2002:a5d:69c9:: with SMTP id s9mr18170414wrw.129.1543258406564; 
-	Mon, 26 Nov 2018 10:53:26 -0800 (PST)
-MIME-Version: 1.0
+	Mon, 26 Nov 2018 19:07:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAQJ68vE028624
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 26 Nov 2018 11:06:18 -0800
+Received: from yow-masselst-lx1.localnet (128.224.22.201) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.408.0; Mon, 26 Nov 2018 11:05:57 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Nov 2018 14:05:56 -0500
+Message-ID: <2261962.MaDmmlLXXr@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <CAMKF1sp7GQMf9KpNoOagivmY-eJ3m6nfAm5ZxsfX0-kZkcgTAg@mail.gmail.com>
 References: <20181120203814.11500-1-raj.khem@gmail.com>
-	<CAPuovEJ5cfkOzNLRmR-936-LLdm3Vkd82mM=91i-MPc6pPU-GQ@mail.gmail.com>
-	<CAMKF1sr_QNByq6uDb_ZnjaMt_VX2tvvZCN2Eig5WEks+Dmwrww@mail.gmail.com>
 	<7738387.rbd9zDMNmT@yow-masselst-lx1>
 	<CAMKF1sp7GQMf9KpNoOagivmY-eJ3m6nfAm5ZxsfX0-kZkcgTAg@mail.gmail.com>
-In-Reply-To: <CAMKF1sp7GQMf9KpNoOagivmY-eJ3m6nfAm5ZxsfX0-kZkcgTAg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Nov 2018 19:53:15 +0100
-Message-ID: <CA+chaQebWDW5VOkdPyB0nkGSBhHyDJAgKfKTw1c_L1ybrJdzNw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	ivmai@mail.ru
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Ivan Maidanski <ivmai@mail.ru>
 Subject: Re: [meta-oe][PATCH 06/10] bdwgc: upgrade 7.6.0 -> 7.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,117 +36,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 18:53:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 26 Nov 2018 19:07:02 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Makes sense to me.
-
-I was also updating master-next first to allow others to test it ASAP.
-
-My builds were using jansa/master branches which were always rebased on top
-of master-next, often identical, sometimes with some WIP changes I wanted
-to test before even merging them to master-next (or sending them to the ML).
-
-So yoe/mut might still be useful, but not to gate changes for master-next.
-
-Cheers,
-
-On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
-
+On Monday, November 26, 2018 1:10:07 PM EST Khem Raj wrote:
 > On Mon, Nov 26, 2018 at 10:07 AM Mark Asselstine
+> 
 > <mark.asselstine@windriver.com> wrote:
-> >
 > > On Monday, November 26, 2018 12:02:41 PM EST Khem Raj wrote:
 > > > On Mon, Nov 26, 2018 at 7:59 AM Mark Asselstine
-> > >
+> > > 
 > > > <mark.asselstine@windriver.com> wrote:
 > > > > On Tue, Nov 20, 2018 at 3:39 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > From: Ivan Maidanski <ivmai@mail.ru>
-> > > > >
+> > > > > 
 > > > > > Highlights of this upgrade:
 > > > > > * Fix numerous bugs (concurrency, overflow, CVE-2016-9427, etc.)
 > > > > > * Fix various typos in comments and documentation
 > > > > > * AddressSanitizer and MemorySanitizer support
 > > > > > * RISC-V support
-> > > > >
+> > > > > 
 > > > > > See the following for detailed changes:
 > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.2
 > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.4
 > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.6
 > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.8
-> > > > >
+> > > > > 
 > > > > > Signed-off-by: Ivan Maidanski <ivmai@mail.ru>
 > > > > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > > > > > ---
-> > > >
+> > > > 
 > > > > This is causing my master-next builds to fail on fetching. Ivan, you
-> need
+> > > > need
 > > > > to
-> > > >
+> > > > 
 > > > > -SRC_URI = "git://github.com/ivmai/bdwgc.git \
 > > > > +SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
-> > > >
+> > > > 
 > > > > before this commit makes  its way to the master branch.
-> > > >
-> > > > Khem, Ivan, let me know if you want to sort this out or have me send
-> a
+> > > > 
+> > > > Khem, Ivan, let me know if you want to sort this out or have me send a
 > > > > patch.
+> > > 
 > > > Thansk for trying out master-next
-> >
+> > 
 > > I have one of our nightly builds of meta-overc use it to catch stuff like
 > > this.
-> >
->
+> 
 > I think I will stop doing my local integration and directly start
 > using master-next to integrate
 > which I guess I can leverage more help with. Thoughts ?
 > currently, CI happens on a local CI branch and then gets into
 > master-next which make merge
 > cycles longer.
->
+
+I don't really have a horse in the CI/CD game but I always assumed that 
+master-next was non-fastforward whereas the CI/CD branches would be FF. In 
+which case master-next is best suited as the cooling off staging area for new 
+work.
+
+But again, I am guilty of only knowing enough to be dangerous.
+
+Mark
+
+> 
 > > > its already fixed in my yoe/mut branch
 > > > http://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
-> >
+> > 
 > > Great. Thanks for taking care of this.
-> >
+> > 
 > > Mark
-> >
-> > >
+> > 
 > > > > Thanks,
 > > > > Mark
-> > > >
+> > > > 
 > > > > >  ...d-check-for-NO_GETCONTEXT-definition.patch | 29
-> -------------------
+> > > > >  -------------------
 > > > > >  .../bdwgc/bdwgc/musl_header_fix.patch         | 27
-> -----------------
+> > > > >  -----------------
 > > > > >  .../bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}  |  6 ++--
 > > > > >  3 files changed, 2 insertions(+), 60 deletions(-)
 > > > > >  delete mode 100644
-> > > > >
-> meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO
+> > > > >  meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for
+> > > > >  -NO
 > > > > >  _GETCONTEXT-definition.patch delete mode 100644
 > > > > >  meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch rename
 > > > > >  meta-oe/recipes-support/bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}
-> (85%)>
-> > >
+> > > > >  (85%)>
+> > > > > 
 > > > > > diff --git
-> > > > >
-> a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
+> > > > > r-N
 > > > > > O_GETCONTEXT-definition.patch
-> > > > >
-> b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > > > b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
+> > > > > r-N
 > > > > > O_GETCONTEXT-definition.patch deleted file mode 100644
 > > > > > index 8ef774f0f2..0000000000
 > > > > > ---
-> > > > >
-> a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-N
+> > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
+> > > > > r-N
 > > > > > O_GETCONTEXT-definition.patch +++ /dev/null
 > > > > > @@ -1,29 +0,0 @@
 > > > > > -configure.ac: add check for NO_GETCONTEXT definition
 > > > > > -
 > > > > > -Signed-off-by: Samuel Martin <s.martin49@gmail.com>
-> > > > > -[yann.morin.1998@free.fr: add a comment, change variable name,
-> use
+> > > > > -[yann.morin.1998@free.fr: add a comment, change variable name, use
 > > > > > - AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
 > > > > > - Thomas)]
 > > > > > -Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
@@ -182,10 +153,9 @@ On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > - 1 file changed, 6 insertions(+)
 > > > > > -
 > > > > > ---- bdwgc-7.2f.orig/configure.ac       2014-06-01
-> 19:00:47.000000000
+> > > > > 19:00:47.000000000
 > > > > > +0200
-> > > > > -+++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713
-> +0100
+> > > > > -+++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713 +0100
 > > > > > -@@ -365,6 +365,12 @@
 > > > > > -   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
 > > > > > - fi
@@ -199,11 +169,11 @@ On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > -+
 > > > > > - case "$host" in
 > > > > > - # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing
-> for
+> > > > > for
 > > > > > N64
 > > > > > - # and unnecessary everywhere.
 > > > > > diff --git
-> a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
 > > > > > b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch deleted
 > > > > > file mode 100644
 > > > > > index 4a18496650..0000000000
@@ -215,7 +185,7 @@ On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > -| 1472659610.016355: ../git/pthread_stop_world.c: In function
 > > > > > 'GC_brief_async_signal_safe_sleep': -| 1472659610.0540252:
 > > > > > ../git/pthread_stop_world.c:397:22: error: storage size of 'tv'
-> isn't
+> > > > > isn't
 > > > > > known -| 1472659610.0540252:        struct timeval tv;
 > > > > > -| 1472659610.0540252:                       ^~
 > > > > > -| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning:
@@ -229,8 +199,7 @@ On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > -Upstream-Status: Pending
 > > > > > -
 > > > > > -Index: git/pthread_stop_world.c
-> > > > >
-> -===================================================================
+> > > > > -===================================================================
 > > > > > ---- git.orig/pthread_stop_world.c
 > > > > > -+++ git/pthread_stop_world.c
 > > > > > -@@ -45,6 +45,7 @@
@@ -242,55 +211,49 @@ On Mon, Nov 26, 2018 at 7:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > > > > -
 > > > > > - /* It's safe to call original pthread_sigmask() here.   */
 > > > > > diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> > > > > b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb similarity index
-> 85%
+> > > > > b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb similarity index 85%
 > > > > > rename from meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
 > > > > > rename to meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
 > > > > > index dcb68f0282..18722fb441 100644
 > > > > > --- a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
 > > > > > +++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
 > > > > > @@ -19,12 +19,10 @@ DESCRIPTION = "The Boehm-Demers-Weiser
-> conservative
+> > > > > conservative
 > > > > > garbage collector can be\> >
+> > > > > 
 > > > > >  HOMEPAGE = "http://www.hboehm.info/gc/"
 > > > > >  SECTION = "devel"
 > > > > >  LICENSE = "MIT"
-> > > > >
+> > > > > 
 > > > > > -LIC_FILES_CHKSUM =
 > > > > > "file://README.QUICK;md5=4f81f24ec69726c312487c2ac740e9e3"
 > > > > > +LIC_FILES_CHKSUM =
 > > > > > "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
-> > > > >
+> > > > > 
 > > > > > -SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
 > > > > > +SRCREV = "8b2a98209a59c92e1be318e4acda507d83175f4d"
-> > > > >
+> > > > > 
 > > > > >  SRC_URI = "git://github.com/ivmai/bdwgc.git \
-> > > > >
+> > > > > 
 > > > > > -
-> > > > >
-> file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch \
+> > > > > file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patc
+> > > > > h \
 > > > > > -           file://musl_header_fix.patch \
-> > > > >
+> > > > > 
 > > > > >            "
-> > > > >
+> > > > >  
 > > > > >  FILES_${PN}-doc = "${datadir}"
-> > > > >
+> > > > > 
 > > > > > --
 > > > > > 2.19.1
-> > > > >
+> > > > > 
 > > > > > --
 > > > > > _______________________________________________
 > > > > > Openembedded-devel mailing list
 > > > > > Openembedded-devel@lists.openembedded.org
 > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+
+
+
 
