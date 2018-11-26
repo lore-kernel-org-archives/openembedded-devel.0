@@ -1,50 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CBAF56C58C
+Return-Path: <jan.vermaete@gmail.com>
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+	[209.85.210.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F1156C0CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 20:07:35 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id d19so13126734qkg.5
+	Mon, 26 Nov 2018 20:50:13 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id a11so17971377otr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 12:07:37 -0800 (PST)
+	Mon, 26 Nov 2018 12:50:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gYARQbNmK8ti+bCnJCanAauHgxVE8B2LE+qnN8sSows=;
-	b=cNcnG5Ru5eGdmUWWQXnhh3rcMrJv+avjrwHHXwS8v5o6cDj+5+yUJeNsjlEkY+VxVf
-	Yphkgny3BfU081PD+0mBU/yVBTB74aqE6Ygfc6XiknIRQxoC+XJpuK8C6ryrDiUcccio
-	vEv+8qSkHrFiQkQRLNN2mvnQoidaIJCemb1yxd1+gyZzTBJomgQzybLsHy4AcBgDpkUM
-	R+whc3sT+DRfKVU7Ah/pUcLuMt2nJZxwNSxVo2o8WKQFGIYbuAkEiqzy3RW7ZQiuDjys
-	AVpQJjJwJuFPcC8NEwAyjVCnttgzao19ZxdHgIv+PdYkle6Btwq/TZcoXx7Sd7PWwskR
-	A7PQ==
+	:cc; bh=/ObHA8ss5RMia4tSf6bUAwxdKm1VreRb2j0F1Cz4aaY=;
+	b=MjjGGc4heujEJpEIghzX9NLY3pRsv6DPbT3coBH7wYsOmBF9LXfBo3rNdFMFA1mr+u
+	GD3hXoGD6v6xZFiOE+/Wq1jjvk27dcubcMGP/1NXBxyMnLHYi+HxtIaTDf/m0dJgamLf
+	C7uosvwgQ0TDEsv0O4sXq5AGXTcDPgMzFmDgrCKNP2uhWlZxNqi9TFOupwRfRbSxgZRL
+	cAyEyX8F/ZTKhBDw+MMyU179c0qcRGmwzviWlnkWYdm9PXMpTmgGdSOeF700gUe9sitJ
+	89z7kMDgWvEZd/NIt5AZE1ZtO9FA+ukLNjBhBU0tUlX4Bc9KO/ZBM5U6WqMNQ0rNtIjD
+	x+Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=gYARQbNmK8ti+bCnJCanAauHgxVE8B2LE+qnN8sSows=;
-	b=lz3HFhyEqp3qDmBJhAOwILBMnsrdlOwe/SxxLI26P9RTBjZbmAHr0pKOsEA0SKpl2l
-	NsBuRbSG7I6HvcENluGbbgwnLnBwIlKiMTQZxKSHqPQ0gK3Ksy+2GtQytMNLS4aUrXCC
-	5fu/vH+2625h8w0b0g5K4CMRFptaarZdMaSb+1YMiPc8NaCC+26Kg1/c3BvZLEMoE8wG
-	CCBxQMo/3eSoeKwrybW/RayHMqjoZFtiJklstHxwjowFWq9R1XSleF7fgW6vWbMdsaqw
-	T0x98OnvIgBJVv+JJ7VihylLls19DTVABkETjYVSDZre28xYxQl3APJ6voeLS1NPEmyF
-	tFdg==
-X-Gm-Message-State: AA+aEWZdxbyvBhXFt4joJ9SsGCXEQWRgPhxL1WF1n8sJUvDvKHZkOgHd
-	td6o0HpXnIYE+sgWHwbVRZcXJSp1y2oDQqM2aLI=
-X-Google-Smtp-Source: AFSGD/VHVlnuWQhVRB+O3lHAxyRgrDAriGsdLPEcBcRwNMSjSocVnkE5j/F9Abxd0st3+6SbPssDwgzOBDhJHG5gBOE=
-X-Received: by 2002:a37:a84b:: with SMTP id r72mr27685785qke.2.1543262856304; 
-	Mon, 26 Nov 2018 12:07:36 -0800 (PST)
+	bh=/ObHA8ss5RMia4tSf6bUAwxdKm1VreRb2j0F1Cz4aaY=;
+	b=Nhq2fTkSyvYUB8LIOJpF+5AoLaG3I1QmCy1Ly96p0+o4aoHpLxANKBIv6+Da0HGofT
+	rz6qfVKuwQXVQndp3Hu2iX5SXFNzv8XJbVpl2SWXAYIHmWOR2ycMR4gRjcao3vHav/8v
+	CMDRVcXYKdpYMLFcqAers+GXG4HwmV3N73vno2s1iE+5zpJpnetjOS+kn12sVJspCLek
+	g1oMc1ZSNhzEP6IIHAZyUXPBdtfjHgsxkAMXFYjS+RcwBrsBhNGsRJBHtsSDewnF832T
+	yank8KwAWOI+jsd7kj15Mv+0AthWGTwPZF3M07YPyUSgm5urzx6CJ+ZEu/nq+cSOAhXC
+	d5qA==
+X-Gm-Message-State: AA+aEWaPmDVVIw3LsXgG23BcWfpcjtBgLPNTJQyRdp4MgHPIbqHT5u9x
+	QK2Xyu8CVH+Nqk+KDvkZB0okw6MIP1m0tKp2OmFwuVUq
+X-Google-Smtp-Source: AFSGD/UBRSSX2Ks+vOnqfstpT8lED00GV+e5gkcxjv3AYMdIyyHufPPv4OjFL9/0dqHBGtTpVLmwXG8OvzRaLjmONWE=
+X-Received: by 2002:a9d:27e3:: with SMTP id c90mr15495670otb.21.1543265413913; 
+	Mon, 26 Nov 2018 12:50:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20181120203814.11500-1-raj.khem@gmail.com>
-	<7738387.rbd9zDMNmT@yow-masselst-lx1>
-	<CAMKF1sp7GQMf9KpNoOagivmY-eJ3m6nfAm5ZxsfX0-kZkcgTAg@mail.gmail.com>
-	<2261962.MaDmmlLXXr@yow-masselst-lx1>
-In-Reply-To: <2261962.MaDmmlLXXr@yow-masselst-lx1>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Nov 2018 12:07:10 -0800
-Message-ID: <CAMKF1sotq4DLg0hJ5LBv1QJ50e5TSXTZEC0PPnERAOJjdK1mZg@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Ivan Maidanski <ivmai@mail.ru>
-Subject: Re: [meta-oe][PATCH 06/10] bdwgc: upgrade 7.6.0 -> 7.6.8
+References: <CABF_=yiRrqZTGPkMEQNvm5f=LsUQTPKtbqrCrKHjBfbWuv29zQ@mail.gmail.com>
+	<CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
+	<CABF_=yjBxXZQUYgfHhr94_Kkkxnrs4UV8CJBRe30N3wRp-+eaw@mail.gmail.com>
+	<CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
+In-Reply-To: <CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Mon, 26 Nov 2018 21:49:50 +0100
+Message-ID: <CABF_=ygJedq8-jSqHmpJbqBk0=dGaL_qKMA4xa4XH2401P1BAg@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-attrs: Adjust the RDEPENDS to include crypt rather than cryptography
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,233 +57,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 20:07:36 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 20:50:13 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Nov 26, 2018 at 11:06 AM Mark Asselstine
-<mark.asselstine@windriver.com> wrote:
+At the Thud branch of meta-python, I see the python3-attrs
+(meta-python/recipes-devtools/python/python3-attrs_18.1.0.bb) recipe is
+still depending on '${PYTHON_PN}-cryptography'.
+I think depending on '${PYTHON_PN}-crypto' is enough.
+
+With 'crypto' i.s.o. 'cryptography' the following packages where not
+installed (-18%):
+  python3-distutils was removed
+  python3-cffi was removed
+  python3-asn1crypto was removed
+  cpp was removed
+  python3-setuptools was removed
+  python3-ply was removed
+  libmpfr6 was removed
+  python3-compile was removed
+  cpp-symlinks was removed
+  python3-pycparser was removed
+  libmpc3 was removed
+  python3-plistlib was removed
+  python3-cryptography was removed
+
+Br,
+
+On Thu, Apr 12, 2018 at 5:24 PM Derek Straka <derek@asterius.io> wrote:
+
+> No worries.  Does this resolve the original github issue you created?
 >
-> On Monday, November 26, 2018 1:10:07 PM EST Khem Raj wrote:
-> > On Mon, Nov 26, 2018 at 10:07 AM Mark Asselstine
-> >
-> > <mark.asselstine@windriver.com> wrote:
-> > > On Monday, November 26, 2018 12:02:41 PM EST Khem Raj wrote:
-> > > > On Mon, Nov 26, 2018 at 7:59 AM Mark Asselstine
-> > > >
-> > > > <mark.asselstine@windriver.com> wrote:
-> > > > > On Tue, Nov 20, 2018 at 3:39 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > > > > > From: Ivan Maidanski <ivmai@mail.ru>
-> > > > > >
-> > > > > > Highlights of this upgrade:
-> > > > > > * Fix numerous bugs (concurrency, overflow, CVE-2016-9427, etc.)
-> > > > > > * Fix various typos in comments and documentation
-> > > > > > * AddressSanitizer and MemorySanitizer support
-> > > > > > * RISC-V support
-> > > > > >
-> > > > > > See the following for detailed changes:
-> > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.2
-> > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.4
-> > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.6
-> > > > > > * https://github.com/ivmai/bdwgc/releases/tag/v7.6.8
-> > > > > >
-> > > > > > Signed-off-by: Ivan Maidanski <ivmai@mail.ru>
-> > > > > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > > > > ---
-> > > > >
-> > > > > This is causing my master-next builds to fail on fetching. Ivan, you
-> > > > > need
-> > > > > to
-> > > > >
-> > > > > -SRC_URI = "git://github.com/ivmai/bdwgc.git \
-> > > > > +SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
-> > > > >
-> > > > > before this commit makes  its way to the master branch.
-> > > > >
-> > > > > Khem, Ivan, let me know if you want to sort this out or have me send a
-> > > > > patch.
-> > > >
-> > > > Thansk for trying out master-next
-> > >
-> > > I have one of our nightly builds of meta-overc use it to catch stuff like
-> > > this.
-> >
-> > I think I will stop doing my local integration and directly start
-> > using master-next to integrate
-> > which I guess I can leverage more help with. Thoughts ?
-> > currently, CI happens on a local CI branch and then gets into
-> > master-next which make merge
-> > cycles longer.
+> On Thu, Apr 12, 2018 at 11:09 AM, jan vermaete <jan.vermaete@gmail.com>
+> wrote:
 >
-> I don't really have a horse in the CI/CD game but I always assumed that
-> master-next was non-fastforward whereas the CI/CD branches would be FF. In
-> which case master-next is best suited as the cooling off staging area for new
-> work.
+>> my mistake...
+>> Thanks for the info
+>>
+>> On Thu, Apr 12, 2018 at 4:12 PM, Derek Straka <derek@asterius.io> wrote:
+>> > There is a usage of hashlib (provided by ${PYTHON_PN}-crypt) in
+>> _make.py.
+>> >
+>> > derek@sparta:/tmp$ dpkg -c
+>> >
+>> upstream/build/tmp/deploy/ipk/core2-64/python-crypt_2.7.14-r1_core2-64.ipk
+>> > drwxrwxrwx root/root         0 2018-03-24 09:28 ./
+>> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/
+>> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/
+>> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/python2.7/
+>> > -rw-r--r-- root/root      7842 2018-03-24 09:28
+>> > ./usr/lib/python2.7/hashlib.py
+>> > -rw-r--r-- root/root      6891 2018-03-24 09:28
+>> > ./usr/lib/python2.7/hashlib.pyc
+>> > drwxr-xr-x root/root         0 2018-03-24 09:28
+>> > ./usr/lib/python2.7/lib-dynload/
+>> > -rwxr-xr-x root/root     25184 2018-03-24 09:28
+>> > ./usr/lib/python2.7/lib-dynload/_hashlib.so
+>> > -rwxr-xr-x root/root      6520 2018-03-24 09:28
+>> > ./usr/lib/python2.7/lib-dynload/crypt.so
+>> > -rw-r--r-- root/root       358 2018-03-24 09:28
+>> ./usr/lib/python2.7/md5.py
+>> > -rw-r--r-- root/root       376 2018-03-24 09:28
+>> ./usr/lib/python2.7/md5.pyc
+>> > -rw-r--r-- root/root       393 2018-03-24 09:28
+>> ./usr/lib/python2.7/sha.py
+>> > -rw-r--r-- root/root       419 2018-03-24 09:28
+>> ./usr/lib/python2.7/sha.pyc
+>> >
+>> > derek@sparta:/tmp$ grep -r hashlib attrs/
+>> > attrs/src/attr/_make.py:import hashlib
+>> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+>> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+>> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+>> >
+>> > On Thu, Apr 12, 2018 at 9:33 AM, jan vermaete <jan.vermaete@gmail.com>
+>> > wrote:
+>> >>
+>> >> I'm afraid this patch just revert the file to the previous state.
+>> >> As far as I can see, there is no need at all to have something of
+>> >> crypto nor crypotgraphy needed for this python package.
+>> >>
+>> >> --
+>> >> Jan Vermaete
+>> >> "For every complex problem there is an answer that is clear, simple,
+>> >> and wrong." - H.L. Mencken
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >
+>> >
+>>
+>>
+>>
+>> --
+>> Jan Vermaete
+>> "For every complex problem there is an answer that is clear, simple,
+>> and wrong." - H.L. Mencken
+>>
+>
 >
 
-yeah this would be good if there were enough testing going on in a spread
-out manner, but that is not the case, moreover the cycle is long in
-many cases, we might need to wait weeks before updating master-next, I
-would like
-to get this to daily cadence.
-
-> But again, I am guilty of only knowing enough to be dangerous.
->
-> Mark
->
-> >
-> > > > its already fixed in my yoe/mut branch
-> > > > http://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
-> > >
-> > > Great. Thanks for taking care of this.
-> > >
-> > > Mark
-> > >
-> > > > > Thanks,
-> > > > > Mark
-> > > > >
-> > > > > >  ...d-check-for-NO_GETCONTEXT-definition.patch | 29
-> > > > > >  -------------------
-> > > > > >  .../bdwgc/bdwgc/musl_header_fix.patch         | 27
-> > > > > >  -----------------
-> > > > > >  .../bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}  |  6 ++--
-> > > > > >  3 files changed, 2 insertions(+), 60 deletions(-)
-> > > > > >  delete mode 100644
-> > > > > >  meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for
-> > > > > >  -NO
-> > > > > >  _GETCONTEXT-definition.patch delete mode 100644
-> > > > > >  meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch rename
-> > > > > >  meta-oe/recipes-support/bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}
-> > > > > >  (85%)>
-> > > > > >
-> > > > > > diff --git
-> > > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
-> > > > > > r-N
-> > > > > > O_GETCONTEXT-definition.patch
-> > > > > > b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
-> > > > > > r-N
-> > > > > > O_GETCONTEXT-definition.patch deleted file mode 100644
-> > > > > > index 8ef774f0f2..0000000000
-> > > > > > ---
-> > > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-fo
-> > > > > > r-N
-> > > > > > O_GETCONTEXT-definition.patch +++ /dev/null
-> > > > > > @@ -1,29 +0,0 @@
-> > > > > > -configure.ac: add check for NO_GETCONTEXT definition
-> > > > > > -
-> > > > > > -Signed-off-by: Samuel Martin <s.martin49@gmail.com>
-> > > > > > -[yann.morin.1998@free.fr: add a comment, change variable name, use
-> > > > > > - AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
-> > > > > > - Thomas)]
-> > > > > > -Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
-> > > > > > -Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
-> > > > > > -
-> > > > > > ----
-> > > > > > -Upstream-Status: Pending
-> > > > > > - configure.ac | 6 ++++++
-> > > > > > - 1 file changed, 6 insertions(+)
-> > > > > > -
-> > > > > > ---- bdwgc-7.2f.orig/configure.ac       2014-06-01
-> > > > > > 19:00:47.000000000
-> > > > > > +0200
-> > > > > > -+++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713 +0100
-> > > > > > -@@ -365,6 +365,12 @@
-> > > > > > -   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
-> > > > > > - fi
-> > > > > > -
-> > > > > > -+# Check for getcontext (uClibc can be configured without it, for
-> > > > > > example)
-> > > > > > -+AC_CHECK_FUNCS([getcontext])
-> > > > > > -+AS_IF([test "$ac_cv_func_getcontext" = "no"],
-> > > > > > -+  [CFLAGS="$CFLAGS -DNO_GETCONTEXT"
-> > > > > > -+   CPPFLAGS="$CPPFLAGS -DNO_GETCONTEXT"])
-> > > > > > -+
-> > > > > > - case "$host" in
-> > > > > > - # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing
-> > > > > > for
-> > > > > > N64
-> > > > > > - # and unnecessary everywhere.
-> > > > > > diff --git
-> > > > > > a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
-> > > > > > b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch deleted
-> > > > > > file mode 100644
-> > > > > > index 4a18496650..0000000000
-> > > > > > --- a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
-> > > > > > +++ /dev/null
-> > > > > > @@ -1,27 +0,0 @@
-> > > > > > -Add missing header to avoid:
-> > > > > > -
-> > > > > > -| 1472659610.016355: ../git/pthread_stop_world.c: In function
-> > > > > > 'GC_brief_async_signal_safe_sleep': -| 1472659610.0540252:
-> > > > > > ../git/pthread_stop_world.c:397:22: error: storage size of 'tv'
-> > > > > > isn't
-> > > > > > known -| 1472659610.0540252:        struct timeval tv;
-> > > > > > -| 1472659610.0540252:                       ^~
-> > > > > > -| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning:
-> > > > > > unused variable 'tv' [-Wunused-variable] -| 1472659610.054099:
-> > > > > > struct timeval tv;
-> > > > > > -| 1472659610.054099:                       ^~
-> > > > > > -| 1472659610.054099: Makefile:1530: recipe for target
-> > > > > > 'pthread_stop_world.lo' failed -
-> > > > > > -in musl builds.
-> > > > > > -
-> > > > > > -Upstream-Status: Pending
-> > > > > > -
-> > > > > > -Index: git/pthread_stop_world.c
-> > > > > > -===================================================================
-> > > > > > ---- git.orig/pthread_stop_world.c
-> > > > > > -+++ git/pthread_stop_world.c
-> > > > > > -@@ -45,6 +45,7 @@
-> > > > > > - #include <semaphore.h>
-> > > > > > - #include <errno.h>
-> > > > > > - #include <unistd.h>
-> > > > > > -+#include <sys/time.h>
-> > > > > > - #include "atomic_ops.h"
-> > > > > > -
-> > > > > > - /* It's safe to call original pthread_sigmask() here.   */
-> > > > > > diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> > > > > > b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb similarity index 85%
-> > > > > > rename from meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> > > > > > rename to meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
-> > > > > > index dcb68f0282..18722fb441 100644
-> > > > > > --- a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> > > > > > +++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
-> > > > > > @@ -19,12 +19,10 @@ DESCRIPTION = "The Boehm-Demers-Weiser
-> > > > > > conservative
-> > > > > > garbage collector can be\> >
-> > > > > >
-> > > > > >  HOMEPAGE = "http://www.hboehm.info/gc/"
-> > > > > >  SECTION = "devel"
-> > > > > >  LICENSE = "MIT"
-> > > > > >
-> > > > > > -LIC_FILES_CHKSUM =
-> > > > > > "file://README.QUICK;md5=4f81f24ec69726c312487c2ac740e9e3"
-> > > > > > +LIC_FILES_CHKSUM =
-> > > > > > "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
-> > > > > >
-> > > > > > -SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
-> > > > > > +SRCREV = "8b2a98209a59c92e1be318e4acda507d83175f4d"
-> > > > > >
-> > > > > >  SRC_URI = "git://github.com/ivmai/bdwgc.git \
-> > > > > >
-> > > > > > -
-> > > > > > file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patc
-> > > > > > h \
-> > > > > > -           file://musl_header_fix.patch \
-> > > > > >
-> > > > > >            "
-> > > > > >
-> > > > > >  FILES_${PN}-doc = "${datadir}"
-> > > > > >
-> > > > > > --
-> > > > > > 2.19.1
-> > > > > >
-> > > > > > --
-> > > > > > _______________________________________________
-> > > > > > Openembedded-devel mailing list
-> > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
->
+-- 
+Jan Vermaete
+"For every complex problem there is an answer that is clear, simple, and
+wrong." - H.L. Mencken
 
