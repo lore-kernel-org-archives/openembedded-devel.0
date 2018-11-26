@@ -1,49 +1,51 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 724636C614
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BCA26C5D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 05:01:31 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c14so11805026wrr.0
+	Mon, 26 Nov 2018 07:35:23 +0000 (UTC)
+Received: by mail-it1-f195.google.com with SMTP id p197so531305itp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2018 21:01:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=XW+/Ua+J7c2hZGN3+8t/QXxxl42uFdZ5tBNgt3GJMog=;
-	b=kRcxRDOkRyT00bH3v6sB7ggOBjSh9mW5qCDVaNrhGvDdp5n0BBTZW2jCVpob2pu5OY
-	+pLvxY/uhqyChimFLpHRf88vINrotBWxol6L+RwIj9ACmRcuu47TXWrh+PaWErUThKp6
-	tPQdD0l1/Sr39rJPoh83Xpu+weG+tmDRoCB46kMWuWEkf1AZRw6kSq4pWc/drLUEft+C
-	fGGv6G3nYrdXOREZGfMulSVUMgpbTXy8BX28dRlutgLJ/vAefAvGmVZLlaZgVsDZCIsx
-	QI1xzgUnyKaWMl400EMsNyzNO11XJoU43ETuPSpMxTEiJUxp4oPklpmKtmnu0i+UPAH1
-	U7TQ==
+	Sun, 25 Nov 2018 23:35:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=rJ3Yv0QIbym5BUFNs2l4jUGeAZCiH6w1wuvaVFyJT6c=;
+	b=pOU70HMahiK6SZgt2EN9Zgkp8CVh/p/mgEpAeDGGwR3YN8asBJuRtJwyq5C4K/vdhy
+	gR29gsGoTVVZX7dggAEdZ2rYyfaim+jX8nChc3Jsa/vdMrMJzHdpoAUJwnfXmNdeDbSV
+	CxIVTY9eYO3L/FjM2fMEXKM634bJu1MoymZoKKjCahUW1q+4wFPRMykLLN70s/yRpDUk
+	+8kO7UPESMlFT0Ytg0JRYyT8wdNH56eqWhcjamXw/uY0zZDpSfCQWJ9RLFlNNWNz7d2M
+	TkSZ7Qq1se20hZOiS4DZFbrpMdq1l4s9upwpzredFb771RxFkLo35R0rn+hFfmra3XZB
+	4wog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XW+/Ua+J7c2hZGN3+8t/QXxxl42uFdZ5tBNgt3GJMog=;
-	b=VPQ9kxTrVuZxEcWDMbiifsmBz4aP3tP8MMIQlW2yBALKg8mWatBeeIr4mC1nVoiMLp
-	y7d9n5aiAUuKQsflcXGYyfBHl1xeP1TyJoJ5U75jNJSKTgjvWnltblUM24FbC5hRm/f0
-	EnJRODW8Q3x6riSIcRMKa1n47720gxSN8oStgHgqPzRh9MBN5P5vRK5j93fSKebHYG9T
-	EynEeiA1tAD/VmgU4B20eyn9kdI5/Xt0oTqTYn9wnSEjXhdadx0+85KxZraiyT/umzkG
-	q3VW819r/H4JTbOWsPsNkwgKFvJeRyJbEJ//l2lPbbaym/y4R6JBM4Hae1hPm3zNBLAK
-	RCTg==
-X-Gm-Message-State: AA+aEWbjnVlCkG2eg7h7ZXkyZ3teBPrUXuqYYYEFcZHoYzd4vZipqoJc
-	mdqP8vwopPgrry3GvTbfDZV5JmGr
-X-Google-Smtp-Source: AFSGD/XW/8fLBBzhNc0GG2BjCbGdyp6hyeQCcVXAcuKMjp8AjaePUc6xRfynGhezZL7uog7jlFfhyw==
-X-Received: by 2002:a5d:4acb:: with SMTP id y11mr21589314wrs.281.1543208491405;
-	Sun, 25 Nov 2018 21:01:31 -0800 (PST)
-Received: from localhost.localdomain ([31.159.12.14])
-	by smtp.gmail.com with ESMTPSA id
-	l3sm43733086wru.36.2018.11.25.21.01.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Nov 2018 21:01:30 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2018 06:01:25 +0100
-Message-Id: <20181126050125.17091-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] cpprest: upgrade to version 2.10.8: drop my two patches, now upstream
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=rJ3Yv0QIbym5BUFNs2l4jUGeAZCiH6w1wuvaVFyJT6c=;
+	b=iUWO1Z+zTIkYFw9DCQpGfzEe74cxIucoK43rxLHEHUntLM56aABuySHowlrZmMRPrV
+	rAABfyONumfSt+1vpLLc+xBcNFW+0/U/3WCPa3gObwfhMCgXBS9QoFX9bm6MaE8jaWcV
+	hlkkkAYR26X40A9v8n+NLOfWR7oigGc10++oBFLcAPaN0RiHfu3G+wvZLOG0mWSXxHP8
+	U/revSc4W8xoxPb5VBVey1Z7F+6trBVTkCs0rp0muYwShPceBTvvZWLQ4IjNIqThRXur
+	qOa68Rt09mCMyYISTyQgAYxo8w9xXHeETtnY/+0lshSVzB/Jt86nwP7lRyKaDdJ3Dap5
+	H9Yw==
+X-Gm-Message-State: AA+aEWZAcLHNX0+uiZWjHqtoChUno9Sh1vAFdOzskCfmoaCiz2eajaWF
+	T8CNVS2c0G61EKCaU+kbMZQyZGtYhyLbJN4gncx6Fw==
+X-Google-Smtp-Source: AJdET5cldMB4zcrf/EvMerqAtNpy9pUSxdqhcmaUXqBvhDuOiGmhCy+Si88KMRYjcQDEXA2yjIfj1P7pRcM6dgIPvSs=
+X-Received: by 2002:a24:f909:: with SMTP id l9mr21323791ith.74.1543217724902; 
+	Sun, 25 Nov 2018 23:35:24 -0800 (PST)
+MIME-Version: 1.0
+References: <20181123153941.10186-1-brgl@bgdev.pl>
+	<CA+aJhH0KL7nzmkGUgUyD-h-ghf6u65uqeGOVavjV=u1fW6QQvg@mail.gmail.com>
+	<CAMRc=MebuMRhQgzrZKU_0Gu9pNOPgJYitVMLFSPGm0B9hHfC3w@mail.gmail.com>
+	<CA+aJhH2_yYkLCdY6C0XSuj9vB_k+VLioKh8ArSUZqo7XYydsDg@mail.gmail.com>
+In-Reply-To: <CA+aJhH2_yYkLCdY6C0XSuj9vB_k+VLioKh8ArSUZqo7XYydsDg@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Mon, 26 Nov 2018 08:35:13 +0100
+Message-ID: <CAMRc=MfyKbLZXAqjhnOL=p-jXaCYM=+Y89eBbNYYNBeDc_b=0Q@mail.gmail.com>
+To: nathan@nathanrossi.com
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,116 +58,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 05:01:31 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 07:35:24 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
----
- .../cpprest/cpprest/950-fix.patch             | 26 -------------
- .../cpprest/cpprest/system-brotli.patch       | 38 -------------------
- .../{cpprest_2.10.7.bb => cpprest_2.10.8.bb}  |  6 +--
- 3 files changed, 2 insertions(+), 68 deletions(-)
- delete mode 100644 meta-oe/recipes-support/cpprest/cpprest/950-fix.patch
- delete mode 100644 meta-oe/recipes-support/cpprest/cpprest/system-brotli.patch
- rename meta-oe/recipes-support/cpprest/{cpprest_2.10.7.bb => cpprest_2.10.8.bb} (83%)
+niedz., 25 lis 2018 o 16:40 Nathan Rossi <nathan@nathanrossi.com> napisa=C5=
+=82(a):
+>
+> On Mon, 26 Nov 2018 at 01:12, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > niedz., 25 lis 2018 o 07:04 Nathan Rossi <nathan@nathanrossi.com> napis=
+a=C5=82(a):
+> > >
+> > > On Sat, 24 Nov 2018 at 01:39, Bartosz Golaszewski <brgl@bgdev.pl> wro=
+te:
+> > > >
+> > > > This series adds recipes for libsigrok and accompanying libraries a=
+nd
+> > > > tools. The eventual goal is to add pulseview - the graphical interf=
+ace
+> > > > for sigrok - to meta-qt5-extra.
+> > > >
+> > > > First two patches add external packages used by libsigrok. The thir=
+d
+> > > > patch adds a recipe for native doxygen, which is needed to generate
+> > > > libsigrok C++ bindings which will in turn be necessary to build
+> > > > pulseview.
+> > > >
+> > > > Last three patches add recipes for the sigrok suite including the
+> > > > command-line utility - sigrok-cli.
+> > > >
+> > > > Bartosz Golaszewski (6):
+> > > >   libzip: new package
+> > > >   libserialport: new package
+> > > >   doxygen: new native package
+> > > >   libsigrok: new package
+> > > >   libsigrokdecode: new package
+> > > >   sigrok-cli: new package
+> > >
+> > > Anything against marking all the recipes (excluding doxygen) with
+> > > BBCLASSEXTEND =3D "native nativesdk"?
+> > >
+> >
+> > What would be the reason for that? Also: you'd need to do that for ALL
+> > non-direct sigrok dependencies and I think there are quite a few.
+>
+> It makes it really easy to ship with a nativesdk toolset or use on
+> your build host. I have personally been using it this way and made
+> some recipes for it a few months ago
+> (https://github.com/nathanrossi/meta-random/tree/master/recipes-toolbox/s=
+igrok).
+>
+> With the recipes in this series the only dependency that is not also
+> enabled for native/nativesdk is glibmm. However that is not enabled by
+> default (since its a dependency of 'cxx' config).
+>
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/950-fix.patch b/meta-oe/recipes-support/cpprest/cpprest/950-fix.patch
-deleted file mode 100644
-index 3ae46a115..000000000
---- a/meta-oe/recipes-support/cpprest/cpprest/950-fix.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--Origin: upstream
--Bug: https://github.com/Microsoft/cpprestsdk/issues/950
--Last-Update: 2018-11-04
--
--Index: cpprest/Release/src/utilities/asyncrt_utils.cpp
--===================================================================
----- cpprest.orig/Release/src/utilities/asyncrt_utils.cpp
--+++ cpprest/Release/src/utilities/asyncrt_utils.cpp
--@@ -356,7 +356,7 @@
-- inline size_t count_utf8_to_utf16(const std::string& s)
-- {
--     const size_t sSize = s.size();
---    auto sData = reinterpret_cast<const UtilCharInternal_t* const>(s.data());
--+    auto const sData = reinterpret_cast<const UtilCharInternal_t*>(s.data());
--     size_t result{ sSize };
-- 
--     for (size_t index = 0; index < sSize;)
--@@ -441,7 +441,7 @@
-- {
--     // Save repeated heap allocations, use the length of resulting sequence.
--     const size_t srcSize = s.size();
---    auto srcData = reinterpret_cast<const UtilCharInternal_t* const>(s.data());
--+    auto const srcData = reinterpret_cast<const UtilCharInternal_t*>(s.data());
--     utf16string dest(count_utf8_to_utf16(s), L'\0');
--     utf16string::value_type* const destData = &dest[0];
--     size_t destIndex = 0;
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/system-brotli.patch b/meta-oe/recipes-support/cpprest/cpprest/system-brotli.patch
-deleted file mode 100644
-index e6f64772d..000000000
---- a/meta-oe/recipes-support/cpprest/cpprest/system-brotli.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--Description: Find system brotli
--Author: Gianfranco Costamagna <locutusofborg@debian.org>
--Forwarded: https://github.com/Microsoft/cpprestsdk/pull/952
--Last-Update: 2018-11-05
--
----- cpprest-2.10.7.orig/Release/cmake/cpprest_find_brotli.cmake
--+++ cpprest-2.10.7/Release/cmake/cpprest_find_brotli.cmake
--@@ -3,8 +3,17 @@ function(cpprest_find_brotli)
--     return()
--   endif()
-- 
---  find_package(unofficial-brotli REQUIRED)
-- 
---  add_library(cpprestsdk_brotli_internal INTERFACE)
---  target_link_libraries(cpprestsdk_brotli_internal INTERFACE unofficial::brotli::brotlienc unofficial::brotli::brotlidec unofficial::brotli::brotlicommon)
--+  find_package(PkgConfig)
--+  pkg_check_modules(BROTLIENC libbrotlienc)
--+  pkg_check_modules(BROTLIDEC libbrotlidec)
--+  if(BROTLIDEC_FOUND AND BROTLIENC_FOUND)
--+	  target_link_libraries(cpprest PRIVATE ${BROTLIDEC_LDFLAGS} ${BROTLIENC_LDFLAGS})
--+  else(BROTLIDEC_FOUND AND BROTLIENC_FOUND)
--+    find_package(unofficial-brotli REQUIRED)
--+    add_library(cpprestsdk_brotli_internal INTERFACE)
--+    target_link_libraries(cpprestsdk_brotli_internal INTERFACE unofficial::brotli::brotlienc unofficial::brotli::brotlidec unofficial::brotli::brotlicommon)
--+    target_link_libraries(cpprest PRIVATE cpprestsdk_brotli_internal)
--+  endif(BROTLIDEC_FOUND AND BROTLIENC_FOUND)
--+
-- endfunction()
----- cpprest-2.10.7.orig/Release/src/CMakeLists.txt
--+++ cpprest-2.10.7/Release/src/CMakeLists.txt
--@@ -84,7 +84,6 @@ else()
--     target_compile_definitions(cpprest PRIVATE -DCPPREST_EXCLUDE_BROTLI=1)
--   else()
--     cpprest_find_brotli()
---    target_link_libraries(cpprest PRIVATE cpprestsdk_brotli_internal)
--   endif()
-- endif()
-- 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.7.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-similarity index 83%
-rename from meta-oe/recipes-support/cpprest/cpprest_2.10.7.bb
-rename to meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-index 5cc6385df..c94038f8f 100644
---- a/meta-oe/recipes-support/cpprest/cpprest_2.10.7.bb
-+++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-@@ -11,12 +11,10 @@ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=maste
-            file://disable-outside-tests.patch \
-            file://disable-test-timeouts.patch \
-            file://disable-float-tests.patch \
--           file://950-fix.patch \
--           file://system-brotli.patch \
-            "
- 
--# tag 2.10.7
--SRCREV= "c4cef129e880a3f9c23a480e8c983793963173bb"
-+# tag 2.10.8
-+SRCREV= "204a52610234ac5180e80a6883b62c0ad085f51e"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
+I guess it can always be added later on. I'll stick to target packages for =
+now.
 
+> >
+> > > Also any plans to include recipes for any of the firmware data
+> > > packages that sigrok provides? (e.g. sigrok-firmware-fx2lafw)
+> > >
+> >
+> > I don't personally need it and it seems like it requires integrating
+> > the sdcc compiler into yocto. Probably more work than I can spend on
+> > that.
+>
+> I was only referring to the pre-built firmware binaries that are
+> released by the sigrok project.
+> https://sigrok.org/download/binary/sigrok-firmware-fx2lafw/.
+>
+
+Same as above, no problem adding it later.
+
+Bart
 
