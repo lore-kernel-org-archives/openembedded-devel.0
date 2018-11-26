@@ -1,50 +1,51 @@
-Return-Path: <jan.vermaete@gmail.com>
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
-	[209.85.210.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F1156C0CB
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
+	[209.85.219.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 12A376C4F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 20:50:13 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id a11so17971377otr.10
+	Mon, 26 Nov 2018 22:49:29 +0000 (UTC)
+Received: by mail-yb1-f195.google.com with SMTP id a67-v6so6705694ybg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 12:50:14 -0800 (PST)
+	Mon, 26 Nov 2018 14:49:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/ObHA8ss5RMia4tSf6bUAwxdKm1VreRb2j0F1Cz4aaY=;
-	b=MjjGGc4heujEJpEIghzX9NLY3pRsv6DPbT3coBH7wYsOmBF9LXfBo3rNdFMFA1mr+u
-	GD3hXoGD6v6xZFiOE+/Wq1jjvk27dcubcMGP/1NXBxyMnLHYi+HxtIaTDf/m0dJgamLf
-	C7uosvwgQ0TDEsv0O4sXq5AGXTcDPgMzFmDgrCKNP2uhWlZxNqi9TFOupwRfRbSxgZRL
-	cAyEyX8F/ZTKhBDw+MMyU179c0qcRGmwzviWlnkWYdm9PXMpTmgGdSOeF700gUe9sitJ
-	89z7kMDgWvEZd/NIt5AZE1ZtO9FA+ukLNjBhBU0tUlX4Bc9KO/ZBM5U6WqMNQ0rNtIjD
-	x+Tw==
+	:cc; bh=wFGf1pv+Q4cGI2Kana8CBxrHntDZClrXXDxu7OWUdiU=;
+	b=c6Zdg+pQrF0kdWaLmO6G88gI7zh51A4m/U5hHnkSTLFiGtsN5632eDBxFkxw70p6/d
+	xiZdTdTTj6EfXKmrbNGA5e+JsRp2xYcBSWx9pnqKd+d/QHPZ5pgAJtnuOaVdt1ZIfBxG
+	EDn5+TJ4vCu6YVvNHPtczbe8sunFF6f5fAoDAHIKgGn1Pm/3QU8o3UnzI+NrqE7P8EgV
+	soxCQ9J4czgmRkI75TBOtXJ6TAyBNXK0V+rxB/w5Zq+bnfuVG0mNbcKEMTjwazcbWIhv
+	AjEMxi7jhcdGptjXOHCq4V7a1RCPkKtNnlZEdKdQcr61yjgktM1GhBaVQE3kfYVqawES
+	gu1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=/ObHA8ss5RMia4tSf6bUAwxdKm1VreRb2j0F1Cz4aaY=;
-	b=Nhq2fTkSyvYUB8LIOJpF+5AoLaG3I1QmCy1Ly96p0+o4aoHpLxANKBIv6+Da0HGofT
-	rz6qfVKuwQXVQndp3Hu2iX5SXFNzv8XJbVpl2SWXAYIHmWOR2ycMR4gRjcao3vHav/8v
-	CMDRVcXYKdpYMLFcqAers+GXG4HwmV3N73vno2s1iE+5zpJpnetjOS+kn12sVJspCLek
-	g1oMc1ZSNhzEP6IIHAZyUXPBdtfjHgsxkAMXFYjS+RcwBrsBhNGsRJBHtsSDewnF832T
-	yank8KwAWOI+jsd7kj15Mv+0AthWGTwPZF3M07YPyUSgm5urzx6CJ+ZEu/nq+cSOAhXC
-	d5qA==
-X-Gm-Message-State: AA+aEWaPmDVVIw3LsXgG23BcWfpcjtBgLPNTJQyRdp4MgHPIbqHT5u9x
-	QK2Xyu8CVH+Nqk+KDvkZB0okw6MIP1m0tKp2OmFwuVUq
-X-Google-Smtp-Source: AFSGD/UBRSSX2Ks+vOnqfstpT8lED00GV+e5gkcxjv3AYMdIyyHufPPv4OjFL9/0dqHBGtTpVLmwXG8OvzRaLjmONWE=
-X-Received: by 2002:a9d:27e3:: with SMTP id c90mr15495670otb.21.1543265413913; 
-	Mon, 26 Nov 2018 12:50:13 -0800 (PST)
+	bh=wFGf1pv+Q4cGI2Kana8CBxrHntDZClrXXDxu7OWUdiU=;
+	b=gePqMyXhZp/kqQbd8Q2ctcfjZf/zirJ31E4JOFxlfgx0micHPVZYXZnIvBQPA/Xbqo
+	3Sh6OQ9+EzNLWz+RTOr6pnUxJ6gYxwlWJMH4mUU+udjFBPcv6QPy4/5i/ZF8ehiurmnu
+	IPpnqqnyALthk1mxQiCmDKUOHN4klL5CsXp0KB64nSYaMSWtw5MovPE0mazB3rg3QeJ5
+	o2pbNle+xojiuu+lOGM5VAg+7y3O1UDVOa8zrc7zJajdG/v+1ByVdQiVzjH4T5v3o95Y
+	HrPeER9evKebp7l3+mhzxFr0xBBuIIuWLQYNu5JT/lh4VO+QIFIkflbBf95hjoHGsGxm
+	zAnw==
+X-Gm-Message-State: AGRZ1gJCUtMi7+4WUF0cuybMO6LqPVGlzMWqIFHEslWHvXUegOBBRK3N
+	ljkcgQzVSBJQnSZLmarkQdvwEuWVUhozE5Ola7c=
+X-Google-Smtp-Source: AFSGD/UiApP1JMlrhY/0GiTnyP7cXropmnROfUDa3JUu6ELlMsDCpeJgXgu89cxcOlXRPC6tc4tpsVT1aRG/THMehPE=
+X-Received: by 2002:a25:ad4a:: with SMTP id
+	l10-v6mr30528858ybe.10.1543272570791; 
+	Mon, 26 Nov 2018 14:49:30 -0800 (PST)
 MIME-Version: 1.0
-References: <CABF_=yiRrqZTGPkMEQNvm5f=LsUQTPKtbqrCrKHjBfbWuv29zQ@mail.gmail.com>
-	<CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
-	<CABF_=yjBxXZQUYgfHhr94_Kkkxnrs4UV8CJBRe30N3wRp-+eaw@mail.gmail.com>
-	<CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
-In-Reply-To: <CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
-From: jan vermaete <jan.vermaete@gmail.com>
-Date: Mon, 26 Nov 2018 21:49:50 +0100
-Message-ID: <CABF_=ygJedq8-jSqHmpJbqBk0=dGaL_qKMA4xa4XH2401P1BAg@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+References: <20181123153941.10186-1-brgl@bgdev.pl>
+	<CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
+	<CAMRc=MdVJYYBcB0NkQpE2O3qQ=c+mnj6+ktsxRMdjBpPALOgZw@mail.gmail.com>
+	<CALbNGRRqeSVDzM8tn36t01YiAS0DJE_ExSXNRupp6esOEF7oKA@mail.gmail.com>
+	<CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
+In-Reply-To: <CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 26 Nov 2018 23:49:18 +0100
+Message-ID: <CALbNGRS2L1knaB0OuTizL5+YGGjik1nKVZGAgPdes9HGL1GQEQ@mail.gmail.com>
+To: brgl@bgdev.pl
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-attrs: Adjust the RDEPENDS to include crypt rather than cryptography
+Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,109 +58,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 20:50:13 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 22:49:30 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-At the Thud branch of meta-python, I see the python3-attrs
-(meta-python/recipes-devtools/python/python3-attrs_18.1.0.bb) recipe is
-still depending on '${PYTHON_PN}-cryptography'.
-I think depending on '${PYTHON_PN}-crypto' is enough.
+On Mon, Nov 26, 2018 at 5:26 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> This[1] recipe is enough to build pulseview, but I'm not sure how to
+> go about requiring libsigrok to have cxx set in PACKAGECONFIG. Should
+> I add a bbappend for libsigrok that would do PACKAGECONFIG_append = "
+> cxx"?
+Have no background but why not enable it by default? Both dependencies
+are in meta-oe so layer trouble is not to be expected.
 
-With 'crypto' i.s.o. 'cryptography' the following packages where not
-installed (-18%):
-  python3-distutils was removed
-  python3-cffi was removed
-  python3-asn1crypto was removed
-  cpp was removed
-  python3-setuptools was removed
-  python3-ply was removed
-  libmpfr6 was removed
-  python3-compile was removed
-  cpp-symlinks was removed
-  python3-pycparser was removed
-  libmpc3 was removed
-  python3-plistlib was removed
-  python3-cryptography was removed
+Since your patch is already in master-next: I am fine with an append
+in meta-qt5-extra.
 
-Br,
+I suggest once this series is in master please send me a pull request
+- will test and create thud for meta-qt5-extra (don't expect this
+series to land in meta-oe thud..)
 
-On Thu, Apr 12, 2018 at 5:24 PM Derek Straka <derek@asterius.io> wrote:
-
-> No worries.  Does this resolve the original github issue you created?
+Andreas
 >
-> On Thu, Apr 12, 2018 at 11:09 AM, jan vermaete <jan.vermaete@gmail.com>
-> wrote:
+> Bart
 >
->> my mistake...
->> Thanks for the info
->>
->> On Thu, Apr 12, 2018 at 4:12 PM, Derek Straka <derek@asterius.io> wrote:
->> > There is a usage of hashlib (provided by ${PYTHON_PN}-crypt) in
->> _make.py.
->> >
->> > derek@sparta:/tmp$ dpkg -c
->> >
->> upstream/build/tmp/deploy/ipk/core2-64/python-crypt_2.7.14-r1_core2-64.ipk
->> > drwxrwxrwx root/root         0 2018-03-24 09:28 ./
->> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/
->> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/
->> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/python2.7/
->> > -rw-r--r-- root/root      7842 2018-03-24 09:28
->> > ./usr/lib/python2.7/hashlib.py
->> > -rw-r--r-- root/root      6891 2018-03-24 09:28
->> > ./usr/lib/python2.7/hashlib.pyc
->> > drwxr-xr-x root/root         0 2018-03-24 09:28
->> > ./usr/lib/python2.7/lib-dynload/
->> > -rwxr-xr-x root/root     25184 2018-03-24 09:28
->> > ./usr/lib/python2.7/lib-dynload/_hashlib.so
->> > -rwxr-xr-x root/root      6520 2018-03-24 09:28
->> > ./usr/lib/python2.7/lib-dynload/crypt.so
->> > -rw-r--r-- root/root       358 2018-03-24 09:28
->> ./usr/lib/python2.7/md5.py
->> > -rw-r--r-- root/root       376 2018-03-24 09:28
->> ./usr/lib/python2.7/md5.pyc
->> > -rw-r--r-- root/root       393 2018-03-24 09:28
->> ./usr/lib/python2.7/sha.py
->> > -rw-r--r-- root/root       419 2018-03-24 09:28
->> ./usr/lib/python2.7/sha.pyc
->> >
->> > derek@sparta:/tmp$ grep -r hashlib attrs/
->> > attrs/src/attr/_make.py:import hashlib
->> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
->> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
->> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
->> >
->> > On Thu, Apr 12, 2018 at 9:33 AM, jan vermaete <jan.vermaete@gmail.com>
->> > wrote:
->> >>
->> >> I'm afraid this patch just revert the file to the previous state.
->> >> As far as I can see, there is no need at all to have something of
->> >> crypto nor crypotgraphy needed for this python package.
->> >>
->> >> --
->> >> Jan Vermaete
->> >> "For every complex problem there is an answer that is clear, simple,
->> >> and wrong." - H.L. Mencken
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
->> >
->>
->>
->>
->> --
->> Jan Vermaete
->> "For every complex problem there is an answer that is clear, simple,
->> and wrong." - H.L. Mencken
->>
->
->
-
--- 
-Jan Vermaete
-"For every complex problem there is an answer that is clear, simple, and
-wrong." - H.L. Mencken
+> [1] https://github.com/brgl/meta-qt5-extra/commit/06852587c29de7039098f9dfce52b6b4ba13b766
 
