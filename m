@@ -1,41 +1,52 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yb1-f196.google.com (mail-yb1-f196.google.com
-	[209.85.219.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E379D6C5C1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 18998600BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 15:59:22 +0000 (UTC)
-Received: by mail-yb1-f196.google.com with SMTP id g9-v6so7668497ybh.7
+	Mon, 26 Nov 2018 16:03:24 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id t13so6354302pgr.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 07:59:24 -0800 (PST)
+	Mon, 26 Nov 2018 08:03:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=message-id:from:date:subject:to;
+	bh=KHZfHErt7lxeyHohccGU2wabZpiom+ZX5ZH+L05R3xw=;
+	b=nJHPTsUBpOKMecw7Bo4YXoTSt/GDn/zvHMzqGY3paW3VhDIGUM87IybLw7hkTLrsHL
+	XQCqJ0f+nY2f60SS5RuR3M2J/zXZXskcSzY9wvFul72Tobd796dMtBHIkmaDuMdWwOnt
+	8OOo8iv6XWe4OtXWWEG5ACZE1xReuDBCAF/lRJzZhMNKjHO+J3w5qoBpACpIv5tAskPN
+	4tWmwqwbayJKkkmk3WJdTsIaGfGZdu7xhjaWuZgdrgheKglG5TFhHAKDZY5pMWUNIfM8
+	ZYuXr4UJXUQOpZV5WX3mdvZMtLWBytLxErBtDIf8iQlPuvJilIfOxCxvigJj8sYjc9Rs
+	V5Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
-	:from:date:message-id:subject:to:cc;
-	bh=pWBP4Lf1UYnsgy1QJrNTCJFPL/4red1veZLryMWlvsI=;
-	b=jOdaRpJ5jw8J20ccIlx9swwV9rxat7DVoXYzxpmG/uIj9N/w96xdfC4tTKHD2BBwaq
-	FOXU2Jkda7fNKUtzNMH/DrsZiWG5LL5f0VQcb9AsHs/jaq3O0NjhCFbVz8mzOtr5JrjG
-	/Qc7FvAzd4WJhqefardR6NHjFptrxycGdkobfHg/FxGeMcNmsAsQbVv0xXB+CXfKg8lY
-	PXQwNP48UpbnNfbddfw1AhIB55MNQl2rX6gE0eZMimms4oXtMceUMLzn/9CRAZ700Z1j
-	2QqxEr90OermHQVhaaTL5Lo58SCqjVdB3x/pleaX0gp2a2JAJP1AZDup7DQ6oe71wxDX
-	vtsg==
-X-Gm-Message-State: AA+aEWZfe9gBr8d9LkiG1Zrk1NuJrlqA4M3kbUu+dQV4OAihrhBtlpe5
-	1XwC4MZh+mIf/3U+ovLR5EE501Bx4k4ypBePvoM=
-X-Google-Smtp-Source: AFSGD/WWOX7PZQ2E4NVL1oJb6SfYqK1dG70fbyQrIFHG+bJ1k/qh2Uv6S+eUos50JozczIPZswCcMZ7tJ51mkAR885s=
-X-Received: by 2002:a25:ab4e:: with SMTP id
-	u72-v6mr29611876ybi.500.1543247963531; 
-	Mon, 26 Nov 2018 07:59:23 -0800 (PST)
-MIME-Version: 1.0
-References: <20181120203814.11500-1-raj.khem@gmail.com>
-	<20181120203814.11500-6-raj.khem@gmail.com>
-In-Reply-To: <20181120203814.11500-6-raj.khem@gmail.com>
-Reply-To: mark.asselstine@windriver.com
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Mon, 26 Nov 2018 10:59:12 -0500
-Message-ID: <CAPuovEJ5cfkOzNLRmR-936-LLdm3Vkd82mM=91i-MPc6pPU-GQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	ivmai@mail.ru
-Subject: Re: [meta-oe][PATCH 06/10] bdwgc: upgrade 7.6.0 -> 7.6.8
+	h=x-gm-message-state:message-id:from:date:subject:to;
+	bh=KHZfHErt7lxeyHohccGU2wabZpiom+ZX5ZH+L05R3xw=;
+	b=naCljkkWsmv6q30T//2gF6a3FPIHl9K+N6Py9ohnmqmFIiZjxcsJRzIW9mRMuQtZqE
+	CN6UGE6qFckFj/87p8am4J5QScuesjQ12PYf3SbAhAYDphL2nQJIteeui8ClbF28Dytr
+	Ju3mBaP2UFkZwOzfvc8aqjUxKJo+rV/aocz+X8DSw2fOeDLR9V5EjXfTZPipd9RzFoa8
+	0qeUTniPfbbERxtvi2UJoffDZDhqbxkm88Dw0lL2FSizf3eWavuCtMbV2YHkp9WKrIFI
+	ey2yhPTqbw05q7rLIxjcVgxfwdbs3aVe2eOcLc/OoL50ywIYF1yQwHF9p+++noXfqR3f
+	H1rA==
+X-Gm-Message-State: AGRZ1gI7hIVPU5lDzU+ce3WhBLolA4N9TKqVgmZ5ODvqxtY3tdzbgdYg
+	j9QCDPWpuoUTTuVTrT5z0hp7jXAB
+X-Google-Smtp-Source: AJdET5eIubApUC0TmXKPB/eZ9XwJaG0sw/k9RtHR0r4CmW74NkV0SljQdhcqL5OE3lZDtf8G5+T6Sw==
+X-Received: by 2002:a62:5bc7:: with SMTP id
+	p190-v6mr28675369pfb.175.1543248205949; 
+	Mon, 26 Nov 2018 08:03:25 -0800 (PST)
+Received: from akuster-ThinkPad-T460s (174-24-96-92.clsp.qwest.net.
+	[174.24.96.92]) by smtp.gmail.com with ESMTPSA id
+	b26sm2919322pfe.91.2018.11.26.08.03.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Nov 2018 08:03:25 -0800 (PST)
+Message-ID: <5bfc194d.1c69fb81.f2c17.56e4@mx.google.com>
+From: Armin Kuster <akuster808@gmail.com>
+X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
+Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
+	Mon, 26 Nov 2018 09:03:23 -0700
+Date: Mon, 26 Nov 2018 09:03:23 -0700
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailer: mail (GNU Mailutils 2.99.99)
+Subject: sumo][Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,145 +59,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 15:59:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 26 Nov 2018 16:03:25 -0000
 
-On Tue, Nov 20, 2018 at 3:39 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> From: Ivan Maidanski <ivmai@mail.ru>
->
-> Highlights of this upgrade:
-> * Fix numerous bugs (concurrency, overflow, CVE-2016-9427, etc.)
-> * Fix various typos in comments and documentation
-> * AddressSanitizer and MemorySanitizer support
-> * RISC-V support
->
-> See the following for detailed changes:
-> * https://github.com/ivmai/bdwgc/releases/tag/v7.6.2
-> * https://github.com/ivmai/bdwgc/releases/tag/v7.6.4
-> * https://github.com/ivmai/bdwgc/releases/tag/v7.6.6
-> * https://github.com/ivmai/bdwgc/releases/tag/v7.6.8
->
-> Signed-off-by: Ivan Maidanski <ivmai@mail.ru>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
+The following changes since commit 2bb21ef27c4b0c9d52d30b3b2c5a0160fd02b966:
 
-This is causing my master-next builds to fail on fetching. Ivan, you need to
+  poppler: Update to 0.64 (2018-09-27 08:49:10 -0700)
 
--SRC_URI = "git://github.com/ivmai/bdwgc.git \
-+SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
+are available in the git repository at:
 
-before this commit makes  its way to the master branch.
+  git://git.openembedded.org/meta-openembedded sumo-next
 
-Khem, Ivan, let me know if you want to sort this out or have me send a patch.
+for you to fetch changes up to 8760facba1bceb299b3613b8955621ddaa3d4c3f:
 
-Thanks,
-Mark
+  wireshark: 2.4.8 src moved to all-versions (2018-11-26 08:48:11 -0700)
 
->  ...d-check-for-NO_GETCONTEXT-definition.patch | 29 -------------------
->  .../bdwgc/bdwgc/musl_header_fix.patch         | 27 -----------------
->  .../bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb}  |  6 ++--
->  3 files changed, 2 insertions(+), 60 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
->  delete mode 100644 meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
->  rename meta-oe/recipes-support/bdwgc/{bdwgc_7.6.0.bb => bdwgc_7.6.8.bb} (85%)
->
-> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
-> deleted file mode 100644
-> index 8ef774f0f2..0000000000
-> --- a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
-> +++ /dev/null
-> @@ -1,29 +0,0 @@
-> -configure.ac: add check for NO_GETCONTEXT definition
-> -
-> -Signed-off-by: Samuel Martin <s.martin49@gmail.com>
-> -[yann.morin.1998@free.fr: add a comment, change variable name, use
-> - AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
-> - Thomas)]
-> -Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
-> -Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
-> -
-> ----
-> -Upstream-Status: Pending
-> - configure.ac | 6 ++++++
-> - 1 file changed, 6 insertions(+)
-> -
-> ---- bdwgc-7.2f.orig/configure.ac       2014-06-01 19:00:47.000000000 +0200
-> -+++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713 +0100
-> -@@ -365,6 +365,12 @@
-> -   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
-> - fi
-> -
-> -+# Check for getcontext (uClibc can be configured without it, for example)
-> -+AC_CHECK_FUNCS([getcontext])
-> -+AS_IF([test "$ac_cv_func_getcontext" = "no"],
-> -+  [CFLAGS="$CFLAGS -DNO_GETCONTEXT"
-> -+   CPPFLAGS="$CPPFLAGS -DNO_GETCONTEXT"])
-> -+
-> - case "$host" in
-> - # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing for N64
-> - # and unnecessary everywhere.
-> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
-> deleted file mode 100644
-> index 4a18496650..0000000000
-> --- a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
-> +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -Add missing header to avoid:
-> -
-> -| 1472659610.016355: ../git/pthread_stop_world.c: In function 'GC_brief_async_signal_safe_sleep':
-> -| 1472659610.0540252: ../git/pthread_stop_world.c:397:22: error: storage size of 'tv' isn't known
-> -| 1472659610.0540252:        struct timeval tv;
-> -| 1472659610.0540252:                       ^~
-> -| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning: unused variable 'tv' [-Wunused-variable]
-> -| 1472659610.054099:        struct timeval tv;
-> -| 1472659610.054099:                       ^~
-> -| 1472659610.054099: Makefile:1530: recipe for target 'pthread_stop_world.lo' failed
-> -
-> -in musl builds.
-> -
-> -Upstream-Status: Pending
-> -
-> -Index: git/pthread_stop_world.c
-> -===================================================================
-> ---- git.orig/pthread_stop_world.c
-> -+++ git/pthread_stop_world.c
-> -@@ -45,6 +45,7 @@
-> - #include <semaphore.h>
-> - #include <errno.h>
-> - #include <unistd.h>
-> -+#include <sys/time.h>
-> - #include "atomic_ops.h"
-> -
-> - /* It's safe to call original pthread_sigmask() here.   */
-> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
-> similarity index 85%
-> rename from meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> rename to meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
-> index dcb68f0282..18722fb441 100644
-> --- a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
-> +++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.8.bb
-> @@ -19,12 +19,10 @@ DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can be\
->  HOMEPAGE = "http://www.hboehm.info/gc/"
->  SECTION = "devel"
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://README.QUICK;md5=4f81f24ec69726c312487c2ac740e9e3"
-> +LIC_FILES_CHKSUM = "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
->
-> -SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
-> +SRCREV = "8b2a98209a59c92e1be318e4acda507d83175f4d"
->  SRC_URI = "git://github.com/ivmai/bdwgc.git \
-> -           file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch \
-> -           file://musl_header_fix.patch \
->            "
->
->  FILES_${PN}-doc = "${datadir}"
-> --
-> 2.19.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+----------------------------------------------------------------
+Armin Kuster (4):
+      boinc: refresh patches
+      postgresql: update to 9.4.20
+      sblim-sfc-common: use official SPDX license for EPL
+      wireshark: 2.4.8 src moved to all-versions
+
+Gregory Vimont (1):
+      tbb: check the version of the cross gcc instead of host gcc
+
+Leon Anavi (1):
+      rygel: Update license to LGPLv2.1
+
+Richard Purdie (1):
+      xmlstarlet: Disable PARALLEL_MAKE (again)
+
+ .../recipes-connectivity/rygel/rygel_0.34.0.bb     |  2 +-
+ .../recipes-support/wireshark/wireshark_2.4.8.bb   |  2 +-
+ ...0001-Use-pkg-config-for-libxml2-detection.patch |  8 +--
+ .../postgresql/files/not-check-libperl.patch       | 10 ++--
+ .../{postgresql_9.4.17.bb => postgresql_9.4.20.bb} |  4 +-
+ .../boinc/boinc-client/boinc-AM_CONDITIONAL.patch  | 12 +++--
+ .../sblim-sfc-common/sblim-sfc-common_1.0.1.bb     |  2 +-
+ meta-oe/recipes-support/tbb/tbb.bb                 |  1 +
+ .../tbb/tbb/0002-linux-Fix-gcc-version-check.patch | 57 ++++++++++++++++++++++
+ .../recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb |  5 ++
+ 10 files changed, 84 insertions(+), 19 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_9.4.17.bb => postgresql_9.4.20.bb} (63%)
+ create mode 100644 meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
 
