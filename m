@@ -1,52 +1,31 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 18998600BC
+Return-Path: <psaavedra@igalia.com>
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id C6CFB6B3D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 16:03:24 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id t13so6354302pgr.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 08:03:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:from:date:subject:to;
-	bh=KHZfHErt7lxeyHohccGU2wabZpiom+ZX5ZH+L05R3xw=;
-	b=nJHPTsUBpOKMecw7Bo4YXoTSt/GDn/zvHMzqGY3paW3VhDIGUM87IybLw7hkTLrsHL
-	XQCqJ0f+nY2f60SS5RuR3M2J/zXZXskcSzY9wvFul72Tobd796dMtBHIkmaDuMdWwOnt
-	8OOo8iv6XWe4OtXWWEG5ACZE1xReuDBCAF/lRJzZhMNKjHO+J3w5qoBpACpIv5tAskPN
-	4tWmwqwbayJKkkmk3WJdTsIaGfGZdu7xhjaWuZgdrgheKglG5TFhHAKDZY5pMWUNIfM8
-	ZYuXr4UJXUQOpZV5WX3mdvZMtLWBytLxErBtDIf8iQlPuvJilIfOxCxvigJj8sYjc9Rs
-	V5Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:from:date:subject:to;
-	bh=KHZfHErt7lxeyHohccGU2wabZpiom+ZX5ZH+L05R3xw=;
-	b=naCljkkWsmv6q30T//2gF6a3FPIHl9K+N6Py9ohnmqmFIiZjxcsJRzIW9mRMuQtZqE
-	CN6UGE6qFckFj/87p8am4J5QScuesjQ12PYf3SbAhAYDphL2nQJIteeui8ClbF28Dytr
-	Ju3mBaP2UFkZwOzfvc8aqjUxKJo+rV/aocz+X8DSw2fOeDLR9V5EjXfTZPipd9RzFoa8
-	0qeUTniPfbbERxtvi2UJoffDZDhqbxkm88Dw0lL2FSizf3eWavuCtMbV2YHkp9WKrIFI
-	ey2yhPTqbw05q7rLIxjcVgxfwdbs3aVe2eOcLc/OoL50ywIYF1yQwHF9p+++noXfqR3f
-	H1rA==
-X-Gm-Message-State: AGRZ1gI7hIVPU5lDzU+ce3WhBLolA4N9TKqVgmZ5ODvqxtY3tdzbgdYg
-	j9QCDPWpuoUTTuVTrT5z0hp7jXAB
-X-Google-Smtp-Source: AJdET5eIubApUC0TmXKPB/eZ9XwJaG0sw/k9RtHR0r4CmW74NkV0SljQdhcqL5OE3lZDtf8G5+T6Sw==
-X-Received: by 2002:a62:5bc7:: with SMTP id
-	p190-v6mr28675369pfb.175.1543248205949; 
-	Mon, 26 Nov 2018 08:03:25 -0800 (PST)
-Received: from akuster-ThinkPad-T460s (174-24-96-92.clsp.qwest.net.
-	[174.24.96.92]) by smtp.gmail.com with ESMTPSA id
-	b26sm2919322pfe.91.2018.11.26.08.03.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Nov 2018 08:03:25 -0800 (PST)
-Message-ID: <5bfc194d.1c69fb81.f2c17.56e4@mx.google.com>
-From: Armin Kuster <akuster808@gmail.com>
-X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
-Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
-	Mon, 26 Nov 2018 09:03:23 -0700
-Date: Mon, 26 Nov 2018 09:03:23 -0700
-To: <openembedded-devel@lists.openembedded.org>
-X-Mailer: mail (GNU Mailutils 2.99.99)
-Subject: sumo][Pull request
+	Mon, 26 Nov 2018 16:11:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
+	bh=+4hJe40g9djE8gIhDaQYb33EAUK9sbYTKViT8BalzBA=; 
+	b=N3W/k3CEoyRrgXl8ryxwjVxccI9iz/kyMDanPo/JxS/rSB/QgPgOlrb8d1Nopmk7Wg7HjGVXmFyPfQS5yGO05BA+2cqrigfqp28VnUfuDN0QCNe6xMo9o8pKx/oQX6xZl8s8IPGIBenEbTt3j/tjOOX9KZ/RzDYmK5swUzDruzPhgNMIHUWhzNA0RD320CHO6FMM/DDFPqh41O4QqG9zOddtdlp9WKj17jkXqo4QibBjTYmATIgS4prT4jpmiTcdkOreXzPcsE5LuQjCawqBAAFhfhTQnXLqNzNQv998SJXUmnJu7dpNgPVSlTK0RjTTzKZ6ajhN7Zfd1B9nOQsQ5w==;
+Received: from 6.27.165.83.dynamic.reverse-mundo-r.com ([83.165.27.6]
+	helo=[192.168.9.78]) by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1gRJTW-0006un-A8; Mon, 26 Nov 2018 17:11:06 +0100
+From: Pablo Saavedra <psaavedra@igalia.com>
+To: Khem Raj <raj.khem@gmail.com>, Changqing Li <changqing.li@windriver.com>
+References: <cover.1541767729.git.psaavedra@igalia.com>
+	<1fba7108a107251c7a300cd70decaebe642dbb5e.1541767729.git.psaavedra@igalia.com>
+	<CAMKF1srY7H72yjacOg7m4YmsiYEft57zHwyqVLVEnYTU_ov-Kg@mail.gmail.com>
+	<02227f789917fc833db31f190c896f9207c7f65b.camel@igalia.com>
+Message-ID: <4023b776-e927-4457-ac70-269853598bdb@igalia.com>
+Date: Mon, 26 Nov 2018 17:10:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <02227f789917fc833db31f190c896f9207c7f65b.camel@igalia.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openembedded][PATCH 2/6] ibus: add ibus recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,47 +38,243 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 16:03:25 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 16:11:08 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-The following changes since commit 2bb21ef27c4b0c9d52d30b3b2c5a0160fd02b966:
+I can fix this problem with this patch:
 
-  poppler: Update to 0.64 (2018-09-27 08:49:10 -0700)
 
-are available in the git repository at:
+diff --git a/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb 
+b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
+index 579773d38..d42f87ae5 100644
+--- a/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
++++ b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
+@@ -16,10 +16,10 @@ inherit autotools pkgconfig gettext 
+gobject-introspection gtk-immodules-cache gt
 
-  git://git.openembedded.org/meta-openembedded sumo-next
+  REQUIRED_DISTRO_FEATURES = "x11"
 
-for you to fetch changes up to 8760facba1bceb299b3613b8955621ddaa3d4c3f:
+-DEPENDS = " anthy ibus gobject-introspection python-pygobject 
+adwaita-icon-theme"
++DEPENDS = " anthy ibus gobject-introspection adwaita-icon-theme"
+  RDEPENDS_${PN} += " ibus takao-fonts anthy libanthy0"
 
-  wireshark: 2.4.8 src moved to all-versions (2018-11-26 08:48:11 -0700)
+-DEPENDS_append_class-target = " intltool-native python-pygobject-native 
+qemu-native"
++DEPENDS_append_class-target = " intltool-native qemu-native"
 
-----------------------------------------------------------------
-Armin Kuster (4):
-      boinc: refresh patches
-      postgresql: update to 9.4.20
-      sblim-sfc-common: use official SPDX license for EPL
-      wireshark: 2.4.8 src moved to all-versions
+  do_configure_prepend() {
+      export PYTHON=python2
+diff --git a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb 
+b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+index 598629344..85ef8489e 100644
+--- a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
++++ b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+@@ -12,8 +12,8 @@ inherit autotools pkgconfig gettext 
+gtk-immodules-cache gobject-introspection gt
 
-Gregory Vimont (1):
-      tbb: check the version of the cross gcc instead of host gcc
+  REQUIRED_DISTRO_FEATURES = "x11"
 
-Leon Anavi (1):
-      rygel: Update license to LGPLv2.1
+-DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf libnotify 
+python-pygobject python3-pygobject adwaita-icon-theme librsvg"
+-DEPENDS_append_class-target = " intltool-native python3-pygobject-native"
++DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf libnotify 
+python3-pygobject adwaita-icon-theme librsvg"
++DEPENDS_append_class-target = " intltool-native"
+  RDEPENDS_${PN} += " iso-codes adwaita-icon-theme librsvg-gtk"
 
-Richard Purdie (1):
-      xmlstarlet: Disable PARALLEL_MAKE (again)
+  PACKAGECONFIG[gtk+] = ",--disable-gtk2,gtk+,gtk+"
 
- .../recipes-connectivity/rygel/rygel_0.34.0.bb     |  2 +-
- .../recipes-support/wireshark/wireshark_2.4.8.bb   |  2 +-
- ...0001-Use-pkg-config-for-libxml2-detection.patch |  8 +--
- .../postgresql/files/not-check-libperl.patch       | 10 ++--
- .../{postgresql_9.4.17.bb => postgresql_9.4.20.bb} |  4 +-
- .../boinc/boinc-client/boinc-AM_CONDITIONAL.patch  | 12 +++--
- .../sblim-sfc-common/sblim-sfc-common_1.0.1.bb     |  2 +-
- meta-oe/recipes-support/tbb/tbb.bb                 |  1 +
- .../tbb/tbb/0002-linux-Fix-gcc-version-check.patch | 57 ++++++++++++++++++++++
- .../recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb |  5 ++
- 10 files changed, 84 insertions(+), 19 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_9.4.17.bb => postgresql_9.4.20.bb} (63%)
- create mode 100644 meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+
+
+but unfortunately I find out unexpected obstacle with the dconf 
+postinstall script. I filled a issue where I describe the issue:
+
+   https://bugzilla.yoctoproject.org/show_bug.cgi?id=13040
+
+
+On 13/11/18 10:11, psaavedra wrote:
+> It seems python3 is provided by to packages
+>
+>    conflicts between attempted installs of python-pygobject-3.28.3-
+> r0.core2_64 and python3-pygobject-3.28.3-r0.core2_64
+>
+>
+> I'll investigate about this.
+>
+> On Fri, 2018-11-09 at 17:11 -0800, Khem Raj wrote:
+>> This is failing
+>> http://errors.yoctoproject.org/Errors/Details/199681/
+>>
+>> It seems its including both py3 and py2 version of pygobject and
+>> there
+>> are conflicting files in these two
+>> I am adding Changqing touched this recipe last time so looking for
+>> some more info on that.
+>> On Fri, Nov 9, 2018 at 5:15 AM Pablo Saavedra <psaavedra@igalia.com>
+>> wrote:
+>>> Intelligent Input Bus for Linux/Unix
+>>> https://github.com/ibus/ibus/wiki
+>>>
+>>> Collision with: https://patchwork.openembedded.org/patch/155947/
+>>> ---
+>>>   meta-oe/recipes-support/ibus/ibus_1.5.19.bb | 97
+>>> +++++++++++++++++++++++++++++
+>>>   1 file changed, 97 insertions(+)
+>>>   create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+>>>
+>>> diff --git a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb b/meta-
+>>> oe/recipes-support/ibus/ibus_1.5.19.bb
+>>> new file mode 100644
+>>> index 000000000..598629344
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+>>> @@ -0,0 +1,97 @@
+>>> +DESCRIPTION = "A multilingual user input method library"
+>>> +LICENSE = "GPLv2"
+>>> +LIC_FILES_CHKSUM =
+>>> "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+>>> +SECTION = "inputmethods"
+>>> +
+>>> +SRC_URI = "
+>>> https://github.com/ibus/ibus/releases/download/${PV}/${PN}-${PV}.tar.gz
+>>>   \
+>>> +          "
+>>> +SRC_URI[md5sum] = "a2be6f200dd9ada2501474a6877a73ef"
+>>> +SRC_URI[sha256sum] =
+>>> "4b66c798dab093f0fa738e5c10688d395a463287d13678c208a81051af5d2429"
+>>> +
+>>> +inherit autotools pkgconfig gettext gtk-immodules-cache gobject-
+>>> introspection gtk-doc gtk-icon-cache gsettings
+>>> +
+>>> +REQUIRED_DISTRO_FEATURES = "x11"
+>>> +
+>>> +DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf
+>>> libnotify python-pygobject python3-pygobject adwaita-icon-theme
+>>> librsvg"
+>>> +DEPENDS_append_class-target = " intltool-native python3-pygobject-
+>>> native"
+>>> +RDEPENDS_${PN} += " iso-codes adwaita-icon-theme librsvg-gtk"
+>>> +
+>>> +PACKAGECONFIG[gtk+] = ",--disable-gtk2,gtk+,gtk+"
+>>> +PACKAGECONFIG[gtk+3] = ",--disable-gtk3,gtk+3,gtk+3"
+>>> +PACKAGECONFIG[wayland] = "--enable-wayland,,wayland,wayland"
+>>> +
+>>> +PACKAGECONFIG ?= "gtk+ gtk+3"
+>>> +PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES',
+>>> 'wayland', 'wayland', '', d)}"
+>>> +
+>>> +GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG',
+>>> 'gtk+', 'ibus-gtk2.0', '', d)}"
+>>> +GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG',
+>>> 'gtk+3', 'ibus-gtk3', '', d)}"
+>>> +
+>>> +EXTRA_OECONF += " \
+>>> +    --disable-emoji-dict \
+>>> +    --disable-unicode-dict \
+>>> +"
+>>> +
+>>> +BBCLASSEXTEND = "native pythonnative"
+>> pythonnative does not belong here. It should probably be in inherit
+>> and it should be
+>> python3native since below the recipe seems to set PYTHON=python3
+>>
+>>> +
+>>> +FILES_${PN} += " \
+>>> +    ${sysconfdir}/dconf/profile \
+>>> +    ${sysconfdir}/dconf/db/ibus.d/00-upstream-settings \
+>>> +    ${sysconfdir}/dconf/profile/ibus \
+>>> +    ${libdir}/libibus-1.0.so.5.0.518 \
+>>> +    ${libdir}/libibus-1.0.so.5 \
+>>> +    ${libdir}/gtk-?.?/*/immodules/im-ibus.so \
+>>> +    ${bindir}/ibus \
+>>> +    ${bindir}/ibus-setup \
+>>> +    ${bindir}/ibus-daemon \
+>>> +    ${datadir}/ibus/engine \
+>>> +    ${datadir}/ibus/component \
+>>> +    ${datadir}/ibus/setup \
+>>> +    ${datadir}/ibus/component/gtkpanel.xml \
+>>> +    ${datadir}/ibus/component/simple.xml \
+>>> +    ${datadir}/ibus/component/dconf.xml \
+>>> +    ${datadir}/ibus/setup/emojilang.py \
+>>> +    ${datadir}/ibus/setup/main.py \
+>>> +    ${datadir}/ibus/setup/enginecombobox.py \
+>>> +    ${datadir}/ibus/setup/setup.ui \
+>>> +    ${datadir}/ibus/setup/enginedialog.py \
+>>> +    ${datadir}/ibus/setup/i18n.py \
+>>> +    ${datadir}/ibus/setup/engineabout.py \
+>>> +    ${datadir}/ibus/setup/icon.py \
+>>> +    ${datadir}/ibus/setup/keyboardshortcut.py \
+>>> +    ${datadir}/ibus/setup/enginetreeview.py \
+>>> +    ${datadir}/ibus/keymaps/jp \
+>>> +    ${datadir}/ibus/keymaps/kr \
+>>> +    ${datadir}/ibus/keymaps/common \
+>>> +    ${datadir}/ibus/keymaps/modifiers \
+>>> +    ${datadir}/ibus/keymaps/us \
+>>> +    ${datadir}/ibus/keymaps/in \
+>>> +    ${datadir}/applications/ibus-setup.desktop \
+>>> +    ${datadir}/dbus-1/services/org.freedesktop.IBus.service \
+>>> +    ${datadir}/dbus-1/services/org.freedesktop.portal.IBus.service
+>>> \
+>>> +    ${datadir}/vala/vapi/ibus-1.0.vapi \
+>>> +    ${datadir}/vala/vapi/ibus-1.0.deps \
+>>> +    ${libexecdir}/ibus-engine-simple \
+>>> +    ${libexecdir}/ibus-portal \
+>>> +    ${libexecdir}/ibus-dconf \
+>>> +    ${libexecdir}/ibus-x11 \
+>>> +    ${libexecdir}/ibus-ui-gtk3 \
+>>> +    ${datadir}/GConf/gsettings/ibus.convert \
+>>> +    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.gschema.xml \
+>>> +    ${datadir}/bash-completion/* \
+>>> +    ${datadir}/icons/* \
+>>> +    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py \
+>>> +    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py? \
+>>> +"
+>> may be we can just package directories and avoid this long list.
+>>
+>>> +
+>>> +do_configure_prepend() {
+>>> +    export PYTHON=python3
+>>> +}
+>>> +
+>>> +do_install_append() {
+>>> +  # Fix the installation path of the GObject Inspection overrides
+>>> for Python3
+>>> +  python_version=$(python3 -c 'import sys; print("%s.%s" %
+>>> (sys.version_info.major, sys.version_info.minor))')
+>>> +  mkdir -p ${D}/usr/lib/python${python_version}/site-
+>>> packages/gi/overrides
+>>> +  mv
+>>> ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-
+>>> packages/gi/overrides/IBus.py
+>>> ${D}/usr/lib/python${python_version}/site-packages/gi/overrides/
+>> why do we need to move files from native sysroot in here ? arent they
+>> available in build area or staging
+>> area for build ?
+>>
+>>> +  rm -rf
+>>> ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-
+>>> packages/gi/overrides
+>>> +  find ${D} -type d -empty -delete
+>> dealing with native sysroot and deleting files does not look right
+>> here.
+>>
+>>> +}
+>>> --
+>>> 2.11.0
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+
+-- 
+Pablo Saavedra Rodiño
+psaavedra@igalia.com | Mail
++34 630 566 474      | Phone
+
 
