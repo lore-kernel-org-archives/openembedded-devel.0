@@ -1,26 +1,25 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E9C46D13C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 584816D145
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2018 09:38:02 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAR9bhPB020852
+	Tue, 27 Nov 2018 09:39:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wAR9ddvW024156
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2018 01:37:54 -0800
+	Tue, 27 Nov 2018 01:39:39 -0800 (PST)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 27 Nov 2018 01:37:33 -0800
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 27 Nov 2018 01:39:37 -0800
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 27 Nov 2018 17:37:15 +0800
-Message-ID: <1543311437-292979-3-git-send-email-changqing.li@windriver.com>
+Date: Tue, 27 Nov 2018 17:39:08 +0800
+Message-ID: <1543311554-293342-2-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1543311437-292979-1-git-send-email-changqing.li@windriver.com>
-References: <1543311437-292979-1-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1543311554-293342-1-git-send-email-changqing.li@windriver.com>
+References: <1543311554-293342-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/4] dnsmasq: upgrade to 2.80
+Subject: [meta-oe][PATCH 1/7] sg3-utils: upgrade to 1.44
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2018 09:38:03 -0000
+X-List-Received-Date: Tue, 27 Nov 2018 09:39:38 -0000
 Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.79.bb | 8 --------
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb | 8 ++++++++
- 2 files changed, 8 insertions(+), 8 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.79.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
+ .../sg3-utils/sg3-utils/glibc-2.28.patch           | 24 ----------------------
+ .../{sg3-utils_1.42.bb => sg3-utils_1.44.bb}       |  5 ++---
+ 2 files changed, 2 insertions(+), 27 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/sg3-utils/sg3-utils/glibc-2.28.patch
+ rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.42.bb => sg3-utils_1.44.bb} (78%)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.79.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.79.bb
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils/glibc-2.28.patch b/meta-oe/recipes-support/sg3-utils/sg3-utils/glibc-2.28.patch
 deleted file mode 100644
-index a66b9a9..0000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.79.bb
+index fbad413..0000000
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils/glibc-2.28.patch
 +++ /dev/null
-@@ -1,8 +0,0 @@
--require dnsmasq.inc
+@@ -1,24 +0,0 @@
+-Fixes:
+-http://errors.yoctoproject.org/Errors/Details/185896/
 -
--SRC_URI[dnsmasq-2.79.md5sum] = "5d7120a46d0c16a334f46757d7e2ba55"
--SRC_URI[dnsmasq-2.79.sha256sum] = "77512dd6f31ffd96718e8dcbbf54f02c083f051d4cca709bd32540aea269f789"
--SRC_URI += "\
--    file://lua.patch \
--"
+-TOPDIR/tmp-glibc/work/core2-64-oe-linux/sg3-utils/1.42-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/../../libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/8.2.0/ld: sg_map26.o: in function `nd_match_scandir_select':
+-/usr/src/debug/sg3-utils/1.42-r0/sg3_utils-1.42/src/sg_map26.c:359: undefined reference to `major'
+-TOPDIR/tmp-glibc/work/core2-64-oe-linux/sg3-utils/1.42-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/../../libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/8.2.0/ld: /usr/src/debug/sg3-utils/1.42-r0/sg3_utils-1.42/src/sg_map26.c:361: undefined reference to `minor'
+-TOPDIR/tmp-glibc/work/core2-64-oe-linux/sg3-utils/1.42-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/../../libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/8.2.0/ld: sg_map26.o: in function `nt_typ_from_filename':
+-/usr/src/debug/sg3-utils/1.42-r0/sg3_utils-1.42/src/sg_map26.c:218: undefined reference to `major'
+-TOPDIR/tmp-glibc/work/core2-64-oe-linux/sg3-utils/1.42-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/../../libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/8.2.0/ld: /usr/src/debug/sg3-utils/1.42-r0/sg3_utils-1.42/src/sg_map26.c:219: undefined reference to `minor'
+-collect2: error: ld returned 1 exit status
+-Makefile:806: recipe for target 'sg_map26' failed
 -
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-new file mode 100644
-index 0000000..fdbdefb
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-@@ -0,0 +1,8 @@
-+require dnsmasq.inc
-+
-+SRC_URI[dnsmasq-2.80.md5sum] = "1f071fd11454e1cffea73bdadcf70b21"
-+SRC_URI[dnsmasq-2.80.sha256sum] = "9e4a58f816ce0033ce383c549b7d4058ad9b823968d352d2b76614f83ea39adc"
-+SRC_URI += "\
-+    file://lua.patch \
-+"
-+
+-Upstream-Status: Pending
+-
+---- sg3_utils-1.42.orig/src/sg_map26.c	2018-08-09 11:53:26.907493996 +0000
+-+++ sg3_utils-1.42/src/sg_map26.c	2018-08-09 11:51:56.713490763 +0000
+-@@ -33,6 +33,7 @@
+- #include <sys/ioctl.h>
+- #include <sys/types.h>
+- #include <sys/stat.h>
+-+#include <sys/sysmacros.h>
+- #include <linux/major.h>
+- 
+- #ifdef HAVE_CONFIG_H
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb
+similarity index 78%
+rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bb
+rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb
+index c37c5e9..4909035 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb
+@@ -9,14 +9,13 @@ LICENSE = "GPLv2+ & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
+ 
+ SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
+-    file://glibc-2.28.patch \
+ "
+ MIRRORS += "http://sg.danny.cz/sg/p https://fossies.org/linux/misc"
+ 
+ UPSTREAM_CHECK_REGEX = "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
+ 
+-SRC_URI[md5sum] = "28080de5bf2222f8b55a29093bec8aea"
+-SRC_URI[sha256sum] = "1dcb7a0309bd0ba3d4a83acb526973b80106ee26cd9f7398186cd3f0633c9ef3"
++SRC_URI[md5sum] = "c11d2b3ca4cc2fd01796473e5330afed"
++SRC_URI[sha256sum] = "8dae684d22e71b11353a48b16c95597af90f0cbe9bbd57f98d7f5544da5cae7b"
+ 
+ inherit autotools-brokensep
+ 
 -- 
 2.7.4
 
