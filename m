@@ -1,50 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 2723D6B507
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CF4D6B507
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2018 07:46:37 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id i12so7943670pfo.7
+	Tue, 27 Nov 2018 07:46:38 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id w6so7471601pgl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 23:46:39 -0800 (PST)
+	Mon, 26 Nov 2018 23:46:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=F5TyVN5YDLbxwD9zYOBa+NrifmQr6v6WosG6RDZnDDg=;
-	b=MkxRUVKdIoFwGGY7ZczK0TzDQwMmSrLDV3hbpQl+j2FVrzZGtLQ/uzGgc5/zDKI7kl
-	dIvsA7qTKZLhsSGwXh73nY41uTtGQYD+f+qxNMWAcZCoLP0EaRAAwo/ZW7iGMrTr2/jA
-	Gh7gG8nMGcZRZ9Pryufb+ok9F07Bm/7Rfb2AM+MRE91i+IAVdAMFf+7tl5NeFuItP+lY
-	+RKTpDzpwFgalZV7sbg9YDpx0dF9wLxrVvFLYRjN6x4iFPpTtBOV1wD5r4PIhe9CtoHa
-	YiJffWv/7oFQGtNFSBJi291M3HRJYiWNrVeq+V4N7Emi7MibMmtzyaPQnLb1YiKpI3SA
-	XSAw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=JAfASQi4ZjUdP7qZasVr0I94f4997ZRZNYnpWh6vLWs=;
+	b=J59KWY8AMZ60IQRymPGQqWclC1ztYsQu07/3GhHd+Mi2Num97IE9xTM5cLwI2RaTXO
+	XRtzoyanXVrP7Vc+hZLwZqe1kXJNySib/LCe53HiRxkXB4KJPaHHj5U7CmryRU7nbRmg
+	dkZDDK38ufF3NoEFm+NN15o4UmZL+TqQ4EYabK5bdemYPcITMRd3zsRENHX3Z3x4nbjY
+	kpzVaW6xy/Y92hU8Qz+asPEmj9hC0UjmiL6PdLAGDcpFW+di/klZlilLPIImantdyvW2
+	xk+ajPvD3u5/JmNrFpOBqdcokqYLkI38sGw7CA6GpE7xQbceNljLDjeGrWSk2OcbAJsS
+	0n5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=F5TyVN5YDLbxwD9zYOBa+NrifmQr6v6WosG6RDZnDDg=;
-	b=f8buSLOwl8Hb/fgzVMW19PQeumFf3je11Al3yTgNJ2qBUoMUQvrMUc4Ks9A+7qze5n
-	YP4MpGlhBYjuZX2cXcR4GrOKL/3ShJYwmrf6DN79aKoL2eToKhnzYdZyqqjImbz0dien
-	xCzRjZAsJaqhq4eFyW5cObDF66qhm6ZLLjM/g1PG3qcmhPSVJqEDlsEZvWo48YuR7hRY
-	macVabeBIbfw0lZAtHpIpJYM9ONGlvI7h+34pACw4nE0vsWuOL5VYja42ELFiliVuWlt
-	isXgKFOjGcZLlND0xNx0oImtelJaGMSDSTIzhCVs+mg7Ter3Ph3T7leT+D+PfZVPCkv2
-	W9jQ==
-X-Gm-Message-State: AA+aEWbo6PxX36SALeKltGaRCkYqpV9kkRvlKzhOH/6pQbnfh3i3Xkbo
-	bpXLrNPQu/uQ5SdfBAkZ4Nx5cWcH+pQ=
-X-Google-Smtp-Source: AFSGD/UXy2sOouDhJR4Za7AGpMe6lZjeY51OLje8cc8kKTnc5AkB3YcTz1iRvn5E2ntLtb2bYcuGjA==
-X-Received: by 2002:a63:193:: with SMTP id 141mr28319042pgb.136.1543304798557; 
-	Mon, 26 Nov 2018 23:46:38 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=JAfASQi4ZjUdP7qZasVr0I94f4997ZRZNYnpWh6vLWs=;
+	b=p1kYO1X+r1g4RbJKVoUxEuY7IFGGs35dbHQqJpr1BYloudxnWmt/uZVEPmtcMyRiZs
+	rjxuDgc6DIgVEAVLdp5UqRrQPbilxH26/atv1oPYcQRL3WWNQn9BXinWhsR4WTBI7uKs
+	LaI7iG2O/FK+3JlLFbvWL0N3n6Rc3ersdB0IMbE5jF1WFfHht0m98sJ7muzloeWhiL6o
+	J+8z5DtU6ZgH4cd46GoTKQo5U5+d36BIFFM6uO6m7gSCLLcIeKRHYunbM2VsXBRMNGNJ
+	cS/9DyWytduzEpZ2R+AWBTro1UPqoO/iJbHrVvIP4ikHJgXKlG3nBMsaEWZO+6Df5fpU
+	jCMA==
+X-Gm-Message-State: AA+aEWYkyMw52PbNqyGcqNDXMgy+OoNDvKC68THSFyc3eBnqtf3W5tSy
+	u2ly8HUVnZ7c45EF5RNAk5fIHVmlucA=
+X-Google-Smtp-Source: AFSGD/V1DNH/NOU3W85eHNC39Gx52kv4m1xE+2jIWldkyHJ9XE8NGx1ZhtgUL5l8awtq5JBQiONj5A==
+X-Received: by 2002:a63:24c2:: with SMTP id
+	k185mr27475659pgk.406.1543304799370; 
+	Mon, 26 Nov 2018 23:46:39 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
 	by smtp.gmail.com with ESMTPSA id
-	l63-v6sm3339036pfb.75.2018.11.26.23.46.37
+	l63-v6sm3339036pfb.75.2018.11.26.23.46.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Nov 2018 23:46:37 -0800 (PST)
+	Mon, 26 Nov 2018 23:46:38 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2018 23:46:28 -0800
-Message-Id: <20181127074629.23966-1-raj.khem@gmail.com>
+Date: Mon, 26 Nov 2018 23:46:29 -0800
+Message-Id: <20181127074629.23966-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.2
+In-Reply-To: <20181127074629.23966-1-raj.khem@gmail.com>
+References: <20181127074629.23966-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] libgee: Upgrade to 0.20.1
+Subject: [meta-multimedia][PATCH 2/2] rygel: Upgrade to 0.37.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,25 +65,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libgee/{libgee_0.18.0.bb => libgee_0.20.1.bb}             | 4 ++--
+ .../rygel/{rygel_0.34.0.bb => rygel_0.37.0.bb}                | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.18.0.bb => libgee_0.20.1.bb} (83%)
+ rename meta-multimedia/recipes-connectivity/rygel/{rygel_0.34.0.bb => rygel_0.37.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
-rename to meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-index 6386f1ffb7..190e5dd4e6 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-@@ -20,5 +20,5 @@ do_configure_prepend() {
+diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
+similarity index 95%
+rename from meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+rename to meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
+index 21331ffcb0..4869d866f2 100644
+--- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
++++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
+@@ -13,8 +13,8 @@ RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+ RRECOMMENDS_${PN} = "rygel-plugin-media-export"
  
- SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
--SRC_URI[md5sum] = "29ea6125e653d7e60b49a9a9544abc96"
--SRC_URI[sha256sum] = "4ad99ef937d071b4883c061df40bfe233f7649d50c354cf81235f180b4244399"
-+SRC_URI[md5sum] = "d224dca55bb909f6730f40cc267337be"
-+SRC_URI[sha256sum] = "bb2802d29a518e8c6d2992884691f06ccfcc25792a5686178575c7111fea4630"
+ GNOME_COMPRESS_TYPE = "xz"
+-SRC_URI[archive.md5sum] = "7d8923324b280cd5452803d61176a34a"
+-SRC_URI[archive.sha256sum] = "fbb2d46cbe4e750df6610b4c66b2278f06d1f71a257c7903e676ccb394dad418"
++SRC_URI[archive.md5sum] = "f897167ad82e2e741582f2c393a76843"
++SRC_URI[archive.sha256sum] = "dfd3d885da3ac383ba0cfbf119995f4a0c2bca2cc8f8cfcd3df10cfec8f35cd7"
+ 
+ inherit gnomebase vala gobject-introspection gettext systemd
+ 
 -- 
 2.19.2
 
