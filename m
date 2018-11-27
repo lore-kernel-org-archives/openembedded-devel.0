@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A26716C108
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DCFB76D1B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2018 08:16:36 +0000 (UTC)
+	Tue, 27 Nov 2018 08:16:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wAR8GbQ4012600
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id wAR8Gdvh020292
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 27 Nov 2018 00:16:37 -0800 (PST)
+	Tue, 27 Nov 2018 00:16:39 -0800 (PST)
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 27 Nov 2018 00:16:36 -0800
+	14.3.408.0; Tue, 27 Nov 2018 00:16:39 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 27 Nov 2018 16:32:39 +0800
-Message-ID: <4200a94be4e33565aef30f99a5fd08e51c1cad8d.1543307294.git.hongxu.jia@windriver.com>
+Date: Tue, 27 Nov 2018 16:32:40 +0800
+Message-ID: <36da9f6b42ded54e40a3730abf8b250cbb38e132.1543307294.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1543307294.git.hongxu.jia@windriver.com>
 References: <cover.1543307294.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 05/12] libreport: 2.9.5 -> 2.9.6
+Subject: [meta-oe][PATCH 06/12] volume-key: 0.3.11 -> 0.3.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2018 08:16:36 -0000
+X-List-Received-Date: Tue, 27 Nov 2018 08:16:39 -0000
 Content-Type: text/plain
+
+Add PACKAGECONFIG to build with python3 rather than python2.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../libreport/{libreport_2.9.5.bb => libreport_2.9.6.bb}                | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/libreport/{libreport_2.9.5.bb => libreport_2.9.6.bb} (96%)
+ .../volume_key/{volume-key_0.3.11.bb => volume-key_0.3.12.bb}     | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/volume_key/{volume-key_0.3.11.bb => volume-key_0.3.12.bb} (71%)
 
-diff --git a/meta-oe/recipes-extended/libreport/libreport_2.9.5.bb b/meta-oe/recipes-extended/libreport/libreport_2.9.6.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/libreport/libreport_2.9.5.bb
-rename to meta-oe/recipes-extended/libreport/libreport_2.9.6.bb
-index 542956c..ce3d2db 100644
---- a/meta-oe/recipes-extended/libreport/libreport_2.9.5.bb
-+++ b/meta-oe/recipes-extended/libreport/libreport_2.9.6.bb
-@@ -17,7 +17,7 @@ SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
-             file://0003-without-build-plugins.patch \
-             file://0004-configure.ac-remove-prog-test-of-augparse.patch \
+diff --git a/meta-oe/recipes-extended/volume_key/volume-key_0.3.11.bb b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+similarity index 71%
+rename from meta-oe/recipes-extended/volume_key/volume-key_0.3.11.bb
+rename to meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+index c41b20c..398ca5c 100644
+--- a/meta-oe/recipes-extended/volume_key/volume-key_0.3.11.bb
++++ b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
  "
--SRCREV = "15f92bcaf73e5eb8958fbde655a57dcd111757a7"
-+SRCREV = "e43eb0b747f58ef9be7e2d8fc9f3fafc93fa63c6"
+-SRC_URI[md5sum] = "30df56c7743eb7c965293b3d61194232"
+-SRC_URI[sha256sum] = "e6b279c25ae477b555f938db2e41818f90c8cde942b0eec92f70b6c772095f6d"
++SRC_URI[md5sum] = "200591290173c3ea71528411838f9080"
++SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd77309b"
  
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+ SRCNAME = "volume_key"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+@@ -27,6 +27,10 @@ DEPENDS += " \
+     swig-native \
+ "
  
++PACKAGECONFIG ??= "python3"
++PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
++PACKAGECONFIG[python3] = "--with-python3,--without-python3,python3,python3"
++
+ RDEPENDS_python3-${PN} += "${PN}"
+ 
+ PACKAGES += "python3-${PN}"
 -- 
 2.7.4
 
