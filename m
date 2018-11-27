@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id AFEB16BF43
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+	[209.85.210.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 2723D6B507
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2018 06:13:20 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id 70so7351693pgh.8
+	Tue, 27 Nov 2018 07:46:37 +0000 (UTC)
+Received: by mail-pf1-f180.google.com with SMTP id i12so7943670pfo.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 22:13:22 -0800 (PST)
+	Mon, 26 Nov 2018 23:46:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=TiEiEoHCuyK96F+2ME59x0/TYHcf1Akw4LZWBnzZTGY=;
-	b=D7Iz+o5Y2+61fPFzxGmIC5vPUWIFelKfbgY+tOilu1/aUenxqTwKNLIe/ZfF3qAMxp
-	JXE2bVP3Hk0snlsaJU4Kii4Shmq/AfbIdF89l2z7S+vZAXO6M0YRcPatKawcwGgW/hB/
-	l28/iFrjL/t/3jOLRoXCrKKlwdRsyME+bIiWrQZwloWQPDiScZnrAuxVGYXP1TxSvUnl
-	6k+te9Y65JdpRQdGllGMEAzj0wfjnfDCtIHMmVMnw6+1Gl284X01r79SStX+y6gl9mmZ
-	5cnSJjDQtAGGWj1hQ7uXXW9TPX4XQz9mAELuMmE56qEXAvVAyPG/ffh3Ff2E3HAFeN0O
-	z3PA==
+	bh=F5TyVN5YDLbxwD9zYOBa+NrifmQr6v6WosG6RDZnDDg=;
+	b=MkxRUVKdIoFwGGY7ZczK0TzDQwMmSrLDV3hbpQl+j2FVrzZGtLQ/uzGgc5/zDKI7kl
+	dIvsA7qTKZLhsSGwXh73nY41uTtGQYD+f+qxNMWAcZCoLP0EaRAAwo/ZW7iGMrTr2/jA
+	Gh7gG8nMGcZRZ9Pryufb+ok9F07Bm/7Rfb2AM+MRE91i+IAVdAMFf+7tl5NeFuItP+lY
+	+RKTpDzpwFgalZV7sbg9YDpx0dF9wLxrVvFLYRjN6x4iFPpTtBOV1wD5r4PIhe9CtoHa
+	YiJffWv/7oFQGtNFSBJi291M3HRJYiWNrVeq+V4N7Emi7MibMmtzyaPQnLb1YiKpI3SA
+	XSAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=TiEiEoHCuyK96F+2ME59x0/TYHcf1Akw4LZWBnzZTGY=;
-	b=lNSq721hnSSNH4GNBKjcH543gWUGJiWBnQrt8UAdQcYbfLImfMMnyRx6mmAEYOLv4C
-	c7yFNC8FQ3Y5hjSo9yuoJeAg/4ppOxh26WxQZ3CVE+33d0jTdsjDSPw+uQFl/+6hWTNi
-	44GDwhDb++IOLb2hme8RUtQcdkV6XsM1B91Zd3AIEiDvIwCoEdkPU2q4W78nBJHhn1JR
-	Svx5QnUGuTLEQ90dX7IA9fgnmxFksCEDn69aJ/+G/8/oZNbtksGoRaI8alYYYMNaI/Rt
-	HXzWckYjejv2TNnHxEVvCI/QvSRWtBzMGMUuV+xB2UHJdblSP3RdfFL0zFnQ7Hs8VXss
-	AFpA==
-X-Gm-Message-State: AGRZ1gIZ3jYkJJAkEJe0lYXZNab+SuZScBDChiYMPLRb7Op5rALTE9zw
-	gZWERBVpMcGQkrDsDsK+y6qEXnIiA84=
-X-Google-Smtp-Source: AJdET5dPxCD5T904p6SZX/HYsjpuf3DNB5JnIMuiBDANwHaTWNZ9zCnE41s76PndCfw4zuOkr0NqLQ==
-X-Received: by 2002:a62:fc52:: with SMTP id e79mr31866194pfh.8.1543299201201; 
-	Mon, 26 Nov 2018 22:13:21 -0800 (PST)
+	bh=F5TyVN5YDLbxwD9zYOBa+NrifmQr6v6WosG6RDZnDDg=;
+	b=f8buSLOwl8Hb/fgzVMW19PQeumFf3je11Al3yTgNJ2qBUoMUQvrMUc4Ks9A+7qze5n
+	YP4MpGlhBYjuZX2cXcR4GrOKL/3ShJYwmrf6DN79aKoL2eToKhnzYdZyqqjImbz0dien
+	xCzRjZAsJaqhq4eFyW5cObDF66qhm6ZLLjM/g1PG3qcmhPSVJqEDlsEZvWo48YuR7hRY
+	macVabeBIbfw0lZAtHpIpJYM9ONGlvI7h+34pACw4nE0vsWuOL5VYja42ELFiliVuWlt
+	isXgKFOjGcZLlND0xNx0oImtelJaGMSDSTIzhCVs+mg7Ter3Ph3T7leT+D+PfZVPCkv2
+	W9jQ==
+X-Gm-Message-State: AA+aEWbo6PxX36SALeKltGaRCkYqpV9kkRvlKzhOH/6pQbnfh3i3Xkbo
+	bpXLrNPQu/uQ5SdfBAkZ4Nx5cWcH+pQ=
+X-Google-Smtp-Source: AFSGD/UXy2sOouDhJR4Za7AGpMe6lZjeY51OLje8cc8kKTnc5AkB3YcTz1iRvn5E2ntLtb2bYcuGjA==
+X-Received: by 2002:a63:193:: with SMTP id 141mr28319042pgb.136.1543304798557; 
+	Mon, 26 Nov 2018 23:46:38 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
 	by smtp.gmail.com with ESMTPSA id
-	19sm3340405pfs.108.2018.11.26.22.13.20
+	l63-v6sm3339036pfb.75.2018.11.26.23.46.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Nov 2018 22:13:20 -0800 (PST)
+	Mon, 26 Nov 2018 23:46:37 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2018 22:13:11 -0800
-Message-Id: <20181127061311.18978-1-raj.khem@gmail.com>
+Date: Mon, 26 Nov 2018 23:46:28 -0800
+Message-Id: <20181127074629.23966-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] xscreensaver: Define consistent app-defaults dir
+Subject: [meta-oe][PATCH 1/2] libgee: Upgrade to 0.20.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,42 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2018 06:13:20 -0000
+X-List-Received-Date: Tue, 27 Nov 2018 07:46:38 -0000
 Content-Transfer-Encoding: 8bit
-
-This is otherwise detected based on host machines X11 install directory
-and on builders where x11 may not be insalled this will default to
-another directory /usr/lib/X11/.. instead of /usr/share/X11...
-
-This patch makes it consistent and avoids poking at host machines
-install
-
-make clean does not work so enable CLEANBROKEN
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../libgee/{libgee_0.18.0.bb => libgee_0.20.1.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/libgee/{libgee_0.18.0.bb => libgee_0.20.1.bb} (83%)
 
-diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-index 6ebf3c798c..3a88f12ec8 100644
---- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-+++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-@@ -19,6 +19,8 @@ RDEPENDS_${PN} += "xserver-nodm-init liberation-fonts"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
+rename to meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
+index 6386f1ffb7..190e5dd4e6 100644
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.18.0.bb
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
+@@ -20,5 +20,5 @@ do_configure_prepend() {
  
- inherit systemd perlnative pkgconfig gettext autotools-brokensep distro_features_check
- 
-+EXTRA_OECONF += "--with-x-app-defaults=${datadir}/X11/app-defaults"
-+
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- do_install_append() {
-@@ -27,3 +29,5 @@ do_install_append() {
- 
- FILES_${PN} += "${datadir}/X11/app-defaults/XScreenSaver"
- SYSTEMD_SERVICE_${PN} = "xscreensaver.service"
-+
-+CLEANBROKEN = "1"
+ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "29ea6125e653d7e60b49a9a9544abc96"
+-SRC_URI[sha256sum] = "4ad99ef937d071b4883c061df40bfe233f7649d50c354cf81235f180b4244399"
++SRC_URI[md5sum] = "d224dca55bb909f6730f40cc267337be"
++SRC_URI[sha256sum] = "bb2802d29a518e8c6d2992884691f06ccfcc25792a5686178575c7111fea4630"
 -- 
 2.19.2
 
