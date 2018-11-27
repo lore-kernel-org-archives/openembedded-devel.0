@@ -1,51 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
-	[209.85.219.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 12A376C4F2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id AFEB16BF43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 22:49:29 +0000 (UTC)
-Received: by mail-yb1-f195.google.com with SMTP id a67-v6so6705694ybg.1
+	Tue, 27 Nov 2018 06:13:20 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id 70so7351693pgh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2018 14:49:31 -0800 (PST)
+	Mon, 26 Nov 2018 22:13:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wFGf1pv+Q4cGI2Kana8CBxrHntDZClrXXDxu7OWUdiU=;
-	b=c6Zdg+pQrF0kdWaLmO6G88gI7zh51A4m/U5hHnkSTLFiGtsN5632eDBxFkxw70p6/d
-	xiZdTdTTj6EfXKmrbNGA5e+JsRp2xYcBSWx9pnqKd+d/QHPZ5pgAJtnuOaVdt1ZIfBxG
-	EDn5+TJ4vCu6YVvNHPtczbe8sunFF6f5fAoDAHIKgGn1Pm/3QU8o3UnzI+NrqE7P8EgV
-	soxCQ9J4czgmRkI75TBOtXJ6TAyBNXK0V+rxB/w5Zq+bnfuVG0mNbcKEMTjwazcbWIhv
-	AjEMxi7jhcdGptjXOHCq4V7a1RCPkKtNnlZEdKdQcr61yjgktM1GhBaVQE3kfYVqawES
-	gu1Q==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TiEiEoHCuyK96F+2ME59x0/TYHcf1Akw4LZWBnzZTGY=;
+	b=D7Iz+o5Y2+61fPFzxGmIC5vPUWIFelKfbgY+tOilu1/aUenxqTwKNLIe/ZfF3qAMxp
+	JXE2bVP3Hk0snlsaJU4Kii4Shmq/AfbIdF89l2z7S+vZAXO6M0YRcPatKawcwGgW/hB/
+	l28/iFrjL/t/3jOLRoXCrKKlwdRsyME+bIiWrQZwloWQPDiScZnrAuxVGYXP1TxSvUnl
+	6k+te9Y65JdpRQdGllGMEAzj0wfjnfDCtIHMmVMnw6+1Gl284X01r79SStX+y6gl9mmZ
+	5cnSJjDQtAGGWj1hQ7uXXW9TPX4XQz9mAELuMmE56qEXAvVAyPG/ffh3Ff2E3HAFeN0O
+	z3PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wFGf1pv+Q4cGI2Kana8CBxrHntDZClrXXDxu7OWUdiU=;
-	b=gePqMyXhZp/kqQbd8Q2ctcfjZf/zirJ31E4JOFxlfgx0micHPVZYXZnIvBQPA/Xbqo
-	3Sh6OQ9+EzNLWz+RTOr6pnUxJ6gYxwlWJMH4mUU+udjFBPcv6QPy4/5i/ZF8ehiurmnu
-	IPpnqqnyALthk1mxQiCmDKUOHN4klL5CsXp0KB64nSYaMSWtw5MovPE0mazB3rg3QeJ5
-	o2pbNle+xojiuu+lOGM5VAg+7y3O1UDVOa8zrc7zJajdG/v+1ByVdQiVzjH4T5v3o95Y
-	HrPeER9evKebp7l3+mhzxFr0xBBuIIuWLQYNu5JT/lh4VO+QIFIkflbBf95hjoHGsGxm
-	zAnw==
-X-Gm-Message-State: AGRZ1gJCUtMi7+4WUF0cuybMO6LqPVGlzMWqIFHEslWHvXUegOBBRK3N
-	ljkcgQzVSBJQnSZLmarkQdvwEuWVUhozE5Ola7c=
-X-Google-Smtp-Source: AFSGD/UiApP1JMlrhY/0GiTnyP7cXropmnROfUDa3JUu6ELlMsDCpeJgXgu89cxcOlXRPC6tc4tpsVT1aRG/THMehPE=
-X-Received: by 2002:a25:ad4a:: with SMTP id
-	l10-v6mr30528858ybe.10.1543272570791; 
-	Mon, 26 Nov 2018 14:49:30 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TiEiEoHCuyK96F+2ME59x0/TYHcf1Akw4LZWBnzZTGY=;
+	b=lNSq721hnSSNH4GNBKjcH543gWUGJiWBnQrt8UAdQcYbfLImfMMnyRx6mmAEYOLv4C
+	c7yFNC8FQ3Y5hjSo9yuoJeAg/4ppOxh26WxQZ3CVE+33d0jTdsjDSPw+uQFl/+6hWTNi
+	44GDwhDb++IOLb2hme8RUtQcdkV6XsM1B91Zd3AIEiDvIwCoEdkPU2q4W78nBJHhn1JR
+	Svx5QnUGuTLEQ90dX7IA9fgnmxFksCEDn69aJ/+G/8/oZNbtksGoRaI8alYYYMNaI/Rt
+	HXzWckYjejv2TNnHxEVvCI/QvSRWtBzMGMUuV+xB2UHJdblSP3RdfFL0zFnQ7Hs8VXss
+	AFpA==
+X-Gm-Message-State: AGRZ1gIZ3jYkJJAkEJe0lYXZNab+SuZScBDChiYMPLRb7Op5rALTE9zw
+	gZWERBVpMcGQkrDsDsK+y6qEXnIiA84=
+X-Google-Smtp-Source: AJdET5dPxCD5T904p6SZX/HYsjpuf3DNB5JnIMuiBDANwHaTWNZ9zCnE41s76PndCfw4zuOkr0NqLQ==
+X-Received: by 2002:a62:fc52:: with SMTP id e79mr31866194pfh.8.1543299201201; 
+	Mon, 26 Nov 2018 22:13:21 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
+	by smtp.gmail.com with ESMTPSA id
+	19sm3340405pfs.108.2018.11.26.22.13.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Nov 2018 22:13:20 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Nov 2018 22:13:11 -0800
+Message-Id: <20181127061311.18978-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-References: <20181123153941.10186-1-brgl@bgdev.pl>
-	<CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
-	<CAMRc=MdVJYYBcB0NkQpE2O3qQ=c+mnj6+ktsxRMdjBpPALOgZw@mail.gmail.com>
-	<CALbNGRRqeSVDzM8tn36t01YiAS0DJE_ExSXNRupp6esOEF7oKA@mail.gmail.com>
-	<CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
-In-Reply-To: <CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 26 Nov 2018 23:49:18 +0100
-Message-ID: <CALbNGRS2L1knaB0OuTizL5+YGGjik1nKVZGAgPdes9HGL1GQEQ@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
+Subject: [meta-oe][PATCH] xscreensaver: Define consistent app-defaults dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 22:49:30 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 27 Nov 2018 06:13:20 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 26, 2018 at 5:26 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> This[1] recipe is enough to build pulseview, but I'm not sure how to
-> go about requiring libsigrok to have cxx set in PACKAGECONFIG. Should
-> I add a bbappend for libsigrok that would do PACKAGECONFIG_append = "
-> cxx"?
-Have no background but why not enable it by default? Both dependencies
-are in meta-oe so layer trouble is not to be expected.
+This is otherwise detected based on host machines X11 install directory
+and on builders where x11 may not be insalled this will default to
+another directory /usr/lib/X11/.. instead of /usr/share/X11...
 
-Since your patch is already in master-next: I am fine with an append
-in meta-qt5-extra.
+This patch makes it consistent and avoids poking at host machines
+install
 
-I suggest once this series is in master please send me a pull request
-- will test and create thud for meta-qt5-extra (don't expect this
-series to land in meta-oe thud..)
+make clean does not work so enable CLEANBROKEN
 
-Andreas
->
-> Bart
->
-> [1] https://github.com/brgl/meta-qt5-extra/commit/06852587c29de7039098f9dfce52b6b4ba13b766
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+index 6ebf3c798c..3a88f12ec8 100644
+--- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
++++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+@@ -19,6 +19,8 @@ RDEPENDS_${PN} += "xserver-nodm-init liberation-fonts"
+ 
+ inherit systemd perlnative pkgconfig gettext autotools-brokensep distro_features_check
+ 
++EXTRA_OECONF += "--with-x-app-defaults=${datadir}/X11/app-defaults"
++
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ do_install_append() {
+@@ -27,3 +29,5 @@ do_install_append() {
+ 
+ FILES_${PN} += "${datadir}/X11/app-defaults/XScreenSaver"
+ SYSTEMD_SERVICE_${PN} = "xscreensaver.service"
++
++CLEANBROKEN = "1"
+-- 
+2.19.2
+
 
