@@ -1,49 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C0DB36C57B
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 64CFB6C126
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 16:56:23 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id d18so26597898qto.8
+	Wed, 28 Nov 2018 17:19:33 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id r14so26741880qtp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 08:56:25 -0800 (PST)
+	Wed, 28 Nov 2018 09:19:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=GqdZIuArHT+qN3yu5Gn/cKe4BaTMWLFfgNBqaOeykmI=;
-	b=nMlasT3UEbi8pw1vWwO1JEkBMI/J8A+QqHR3TFXv6RmKPlYy9n0yWoeP1BrCZ+bJfq
-	CkRh5ulLCAOd1W2rZp4T6cRr6WgP+funpr7N7RjjzZIiej2YX5pYfZpsasH1E4E+Udt/
-	jfizy7zwkJWOLVTJdPr7ZGFhzV/X4qv/x/7NghY8aVbkRbp0ofIZ3gyy2a2IbMFWfnCb
-	KBaUJly10jeLia8BRDQpObfZ1LmTakEFvPjrURDksLp8821wsYdy41KETkDR2pRJLqJC
-	YQ0l71MIgdZwcZgNZ4CP/5Aa7MnLdlafpuKRg0fwD5b5Cf/Qe2Pnn/CYF4Fh0Cdr2x1k
-	807A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=9Rnru2uot5xON21qASsA9SGFMV8K8xsjwII5RmF3+L8=;
+	b=h4IhoTcuVrplR75IPGbMbwoZXSF0Uc2iiGXF5WRmhvTSN97J9w3HWlbxTbhnnFtIR8
+	xbXYn1siGwnx7vkQ3ew+2l4PWp2mytSwHy4Z7rgxSZG0b8SYc8df/b3yJG/CdBFRGje6
+	xlbYLVQyyGdCaSVXtIHHN9n1E1IohAK6WvTjG2PPjQZiOL+JljkQTYEPXCYznKwHpwiU
+	ajPSH2qcUnCfxdK1CKyxcz+FDQ/FJs6CFWJwfDs5vSL+26JOuAFUj+/zCEXqrK2BqxdB
+	4knvGDy0rRR+z1xegRAGXTScSROLD9Bd1BARS3qrlO3tlJ6eLFtzE+u6S5rA5qA2bQpC
+	BQyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=GqdZIuArHT+qN3yu5Gn/cKe4BaTMWLFfgNBqaOeykmI=;
-	b=ACgmOIECpVbrALY7/qEZzblG+gU4e9Mg2j6wt2YJJC/uL/BtxZGMXhxh5nsT9Hd/Ob
-	uatERnw4W1jE5VmBbpZS9bjh9/LjF3YsAj6eL2w+HR09wDi6/5R1q+CVbKMDcoEYWCaK
-	NA9U0MqUKaCWE0C9vPjvw7hgXsbuah12FstxaEKYbl5kL4qj/jsianBrhAcFy7Oae7Lg
-	lymrKRx8k5WpXl+iaLInP1LIjMqrKvXUwtg6EJepg8vvYRglvd+MQxVH4WOdI44zoOU1
-	+ijBWycm1V/8DWL/lC4BVAeEVVHQwT2NbtTlJeEoOWYJRVUyjBfxHYQOqprAdeKDOxG/
-	Z6hA==
-X-Gm-Message-State: AA+aEWarzABEJDS3Z1t1a7bI/PPwT1xBXMk0VyURW3uoA10ecqjE1fEU
-	keQaIuXDLgOuzFyr7J9k0vRS2XVfncIyLwpu5Rg=
-X-Google-Smtp-Source: AJdET5cJQ493qDbrJW3RkdE5bfMbgf1W5gGpw54+tbn5t3GlMWGsAIkBTMHwljhbzhdaQ3/AaxlTlFMJhrFvbG4L1xk=
-X-Received: by 2002:aed:3a22:: with SMTP id n31mr36241708qte.29.1543424184510; 
-	Wed, 28 Nov 2018 08:56:24 -0800 (PST)
+	:message-id:subject:to;
+	bh=9Rnru2uot5xON21qASsA9SGFMV8K8xsjwII5RmF3+L8=;
+	b=Kn0REVHns5s1Lb5+OiOMnUJ9EzE8xFDR6MV5gaSqJJa+U+Wvux+ZTRv/6eELondDdt
+	RpmmKTepNFmyWxWffb9g9ZIAwOLava+vmhgCMuzRJyN1uJHIBlk6FMzIbvVWo64EV34l
+	dExRNyh4/2ZiKzz7kaK64nmDFgbB7oqZf5PXpdOXATxgHzeYBlkp6p/CxIF3cfY7B4HG
+	di5+QvYTNVvzteXM1BlIFjeAD0YOpTmrmWPOE5CvuhQTWLpLbAzmck9dKN++lDY8V4P+
+	+h8HmIOp94ouKgSQQMY0J42b/kowZM9KVACnFGd0JUD/90kSRY0vlvyM/sM1G6nwF55Q
+	+CrA==
+X-Gm-Message-State: AA+aEWb7Wvd/hRWiBy0M6QHiCM/2o3n9W+8hrWp1+UKt91IxFkl++BM6
+	xEqHfKdJ59bfVEgK1BOxD+jQcfuaGpLYLQq5TocNHh2IK0s=
+X-Google-Smtp-Source: AFSGD/XCPcnedbUcyKn+QscjVVIdOA95BpKZj93KHg5k0dJkipIRJ3FZv9P9tUILUzqXDUsLIEdr8na6tesG59y43wc=
+X-Received: by 2002:a0c:93e2:: with SMTP id g31mr36165039qvg.194.1543425573901;
+	Wed, 28 Nov 2018 09:19:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20181123223022.30597-1-pbasista@gmail.com>
-	<CA+chaQetQT7MbnrguBOhzANeL-w734KQRzWwcaL2+6oEwp-7zQ@mail.gmail.com>
-In-Reply-To: <CA+chaQetQT7MbnrguBOhzANeL-w734KQRzWwcaL2+6oEwp-7zQ@mail.gmail.com>
+References: <20181119172519.28377-1-max+openembedded@blarg.de>
+	<CAMKF1srm_TiixkGadQhAk-dLTj2CmKoj47QmKOf=9OEtK+VjJQ@mail.gmail.com>
+	<20181128073447.t7zp2zmi4ozx4zb3@swift.blarg.de>
+In-Reply-To: <20181128073447.t7zp2zmi4ozx4zb3@swift.blarg.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 Nov 2018 08:55:58 -0800
-Message-ID: <CAMKF1srFNJ0VMMQeZkr8W1knj0R1tGgXje8tqk6kG_2c-an=-A@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: =?UTF-8?Q?Peter_Ba=C5=A1ista?= <pbasista@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v4] Add a working Tvheadend recipe
+Date: Wed, 28 Nov 2018 09:19:07 -0800
+Message-ID: <CAMKF1sokqVsg60Dm3GuVxmZ6AZvk8cTAkzi7-3q4N7Xnz4FkrQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2] mpd: update to 0.21.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,86 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 16:56:23 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 17:19:33 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Thanks Martin, I missed it. I have now send a patch to add the recipe
-for missing package.
-On Tue, Nov 27, 2018 at 2:32 PM Martin Jansa <martin.jansa@gmail.com> wrote=
-:
+On Tue, Nov 27, 2018 at 11:34 PM Max Kellermann
+<max+openembedded@blarg.de> wrote:
 >
-> What is supposed to provide libdvbcsa? It's not in any public layers
-> registered here:
-> https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dlib=
-dvbcsa
->
-> Latest world build shows the same issue:
->
-> ERROR: Nothing PROVIDES 'libdvbcsa' (but
-> /home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/reci=
-pes-dvb/tvheadend/
-> tvheadend_git.bb
-> DEPENDS on or otherwise requires it). Close matches:
->
-> On Fri, Nov 23, 2018 at 11:31 PM Peter Ba=C5=A1ista <pbasista@gmail.com> =
-wrote:
->
-> > The original one was previously removed
-> > by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
-> > as part of a clean-up of blacklisted recipes.
+> On 2018/11/28 06:53, Khem Raj <raj.khem@gmail.com> wrote:
+> > Hi Max
 > >
-> > Signed-off-by: Peter Ba=C5=A1ista <pbasista@gmail.com>
-> > ---
-> >  .../recipes-dvb/tvheadend/tvheadend_git.bb    | 23 +++++++++++++++++++
-> >  1 file changed, 23 insertions(+)
-> >  create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git=
-.bb
+> > it fails to build with systemd see
+> > http://errors.yoctoproject.org/Errors/Details/202303/
 > >
-> > diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> > b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> > new file mode 100644
-> > index 000000000..95cf10bf6
-> > --- /dev/null
-> > +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> > @@ -0,0 +1,23 @@
-> > +SUMMARY =3D "Tvheadend: TV streaming server and recorder"
-> > +HOMEPAGE =3D "https://tvheadend.org/"
-> > +
-> > +inherit autotools-brokensep gettext gitpkgv pkgconfig
-> > +
-> > +DEPENDS =3D "avahi cmake-native libdvbcsa libpcre2 openssl uriparser z=
-lib"
-> > +
-> > +LICENSE =3D "GPLv3+"
-> > +LIC_FILES_CHKSUM =3D
-> > "file://LICENSE.md;md5=3D9cae5acac2e9ee2fc3aec01ac88ce5db"
-> > +
-> > +SRC_URI =3D "git://github.com/tvheadend/tvheadend.git"
-> > +
-> > +SRCREV =3D "bdc2ae9e19520a10cdf0bec0fcc0050b32bc75ff"
-> > +PV =3D "4.3+git${SRCPV}"
-> > +PKGV =3D "4.3+git${GITPKGV}"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +EXTRA_OECONF +=3D "--arch=3D${TARGET_ARCH} \
-> > +                 --disable-hdhomerun_static \
-> > +                 --disable-ffmpeg_static \
-> > +                 --disable-libav \
-> > +                 "
-> > --
-> > 2.19.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > It seems the new meson change is not installing the system unit files
+> > and socket file during do_install properly, one way is that we explicitly
+> > install/copy them during do_install, but I think its better to fix it in mpd
+> > itself if possible
+>
+> We had this problem already when I submitted version 0.21 for the
+> first time, and my 0.21.3 patch contained more explicit options to
+> enable systemd, hoping to make it fail earlier, but it didn't.
+>
+> Packaging with systemd works perfectly fine here on my machine, all
+> the units are in the right place.  Unfortunately, your Yocto build
+> logs are devoid of any hints what went wrong.
+>
+> So yes, I agree with you that we should fix this in MPD upstream (I am
+> the MPD upstream maintainer, btw.), but I have no idea what's wrong.
+> If only I could reproduce the problem.
+>
+> Is there any way to get more verbose logs from your build bot?
+>
+
+I can reproduce it locally as well when building for
+
+MACHINE = "raspberrypi3"
+DISTRO_FEATURES_append = " systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+
+
+ERROR: mpd-0.21.3-r0 do_package: SYSTEMD_SERVICE_mpd value mpd.socket
+does not exist
+ERROR: mpd-0.21.3-r0 do_package: Function failed: systemd_populate_packages
+ERROR: Logfile of failure stored in:
+/mnt/a/yoe/build/tmp/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/mpd/0.21.3-r0/temp/log.do_package.25748
+ERROR: Task (/mnt/a/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.3.bb:do_package)
+failed with exit code '1'
+logs are here
+https://gist.github.com/b69ddd940689c5ad02bce7ef2eb89a73
+https://gist.github.com/4c1dd2c382a209b03d290447146cc9c4
+https://gist.github.com/675704fde3469895b4c6207d4c83041d
+
+
+if you are interested here is the distro setup I use.
+https://github.com/YoeDistro/yoe-distro
+
+> Max
 
