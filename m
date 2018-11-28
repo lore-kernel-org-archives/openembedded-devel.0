@@ -1,47 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 64CFB6C126
+Return-Path: <attie.grande@argentum-systems.co.uk>
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+	[209.85.208.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DF086B5AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 17:19:33 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id r14so26741880qtp.1
+	Wed, 28 Nov 2018 17:30:17 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id o10so22736342edt.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 09:19:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=9Rnru2uot5xON21qASsA9SGFMV8K8xsjwII5RmF3+L8=;
-	b=h4IhoTcuVrplR75IPGbMbwoZXSF0Uc2iiGXF5WRmhvTSN97J9w3HWlbxTbhnnFtIR8
-	xbXYn1siGwnx7vkQ3ew+2l4PWp2mytSwHy4Z7rgxSZG0b8SYc8df/b3yJG/CdBFRGje6
-	xlbYLVQyyGdCaSVXtIHHN9n1E1IohAK6WvTjG2PPjQZiOL+JljkQTYEPXCYznKwHpwiU
-	ajPSH2qcUnCfxdK1CKyxcz+FDQ/FJs6CFWJwfDs5vSL+26JOuAFUj+/zCEXqrK2BqxdB
-	4knvGDy0rRR+z1xegRAGXTScSROLD9Bd1BARS3qrlO3tlJ6eLFtzE+u6S5rA5qA2bQpC
-	BQyg==
+	Wed, 28 Nov 2018 09:30:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=argentum-systems-co-uk.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Kuu3LXQgQu3pTrByX3N2zPJIF6YPj8j+kKK67Mmv6C8=;
+	b=aLNIuD1JyLs1pgTOR67+pRa0QEmDfShwdYfkJm+WwspwWfLs7cj+5zIEuaPCt+0CPA
+	f2RQyoqysIjg/SqSBB83THGxjp2W3kFMr/IuFjsvx2jD8hXjFBdZ+15yvbVzBBt1KFI0
+	kR2HrwRyz/HepsfTRzs9E0AR0lmoxOTn2Z4t9V61qSRsa+krrh1Y52XyIHPrLU9EZCIH
+	xVbSmjeOdivluXZuKNHNGXNNUVUc6THUUF868YG31hOlKM7gK5WpOQ2YgPfd685QkZyt
+	ZcphmsiAHfuW4L+HBjCzMwV4L4vH0Zq9VcqfXAyFdUZs8p8Mmo8XsnM8A63U5BW6K1el
+	yQIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=9Rnru2uot5xON21qASsA9SGFMV8K8xsjwII5RmF3+L8=;
-	b=Kn0REVHns5s1Lb5+OiOMnUJ9EzE8xFDR6MV5gaSqJJa+U+Wvux+ZTRv/6eELondDdt
-	RpmmKTepNFmyWxWffb9g9ZIAwOLava+vmhgCMuzRJyN1uJHIBlk6FMzIbvVWo64EV34l
-	dExRNyh4/2ZiKzz7kaK64nmDFgbB7oqZf5PXpdOXATxgHzeYBlkp6p/CxIF3cfY7B4HG
-	di5+QvYTNVvzteXM1BlIFjeAD0YOpTmrmWPOE5CvuhQTWLpLbAzmck9dKN++lDY8V4P+
-	+h8HmIOp94ouKgSQQMY0J42b/kowZM9KVACnFGd0JUD/90kSRY0vlvyM/sM1G6nwF55Q
-	+CrA==
-X-Gm-Message-State: AA+aEWb7Wvd/hRWiBy0M6QHiCM/2o3n9W+8hrWp1+UKt91IxFkl++BM6
-	xEqHfKdJ59bfVEgK1BOxD+jQcfuaGpLYLQq5TocNHh2IK0s=
-X-Google-Smtp-Source: AFSGD/XCPcnedbUcyKn+QscjVVIdOA95BpKZj93KHg5k0dJkipIRJ3FZv9P9tUILUzqXDUsLIEdr8na6tesG59y43wc=
-X-Received: by 2002:a0c:93e2:: with SMTP id g31mr36165039qvg.194.1543425573901;
-	Wed, 28 Nov 2018 09:19:33 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Kuu3LXQgQu3pTrByX3N2zPJIF6YPj8j+kKK67Mmv6C8=;
+	b=oM418arLqnYUBJuTWZeR52jA71TvSyi2SzGXJ7R6QKUYIS9iJczrq0qGctFZ6hTadC
+	oPrENgDL+3OXBH2eaMt6ip9IjAwCIuCkhylDlSJ3IaGd+v74TsOMzkNp/T21YB0t0Z9A
+	6kNiyiXKmqULSrmAKEEFU70ka6zbLV1cr+NJC6o+MqK7VjAXw2xSUfIH900fz5PNx0NT
+	EzoPzYd1R7e/pHAh2yuKYgGxI1k4ioAc2BKsBlUu7rgAawuwa09Dm1S5a7KmJRZS5oJW
+	vB6jkXFigRF969zy3+GyI2sfu9LXTvU48YM6oHuxt2AI13wRMRDX51gARR78Bsae0pjT
+	9xGA==
+X-Gm-Message-State: AGRZ1gLdNyBT+TclaxNqAMT2gJvH5dCJSsw6EXAGtSxmiJgw9EvuOSXH
+	mJadLKL+sa0GmiN/SojOoYEHjrYm8CFnO2MV/kwA755PT4M=
+X-Google-Smtp-Source: AJdET5ffebrTej/00XtDYb7Y8olxvMvCgUhoi6++jvYvSpu8A/1JnJyPJRDBF/+jpwudJiCsL04CSTBvYZrviyRsAAE=
+X-Received: by 2002:a17:906:7b97:: with SMTP id
+	s23-v6mr27560529ejo.57.1543426217771; 
+	Wed, 28 Nov 2018 09:30:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20181119172519.28377-1-max+openembedded@blarg.de>
-	<CAMKF1srm_TiixkGadQhAk-dLTj2CmKoj47QmKOf=9OEtK+VjJQ@mail.gmail.com>
-	<20181128073447.t7zp2zmi4ozx4zb3@swift.blarg.de>
-In-Reply-To: <20181128073447.t7zp2zmi4ozx4zb3@swift.blarg.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 Nov 2018 09:19:07 -0800
-Message-ID: <CAMKF1sokqVsg60Dm3GuVxmZ6AZvk8cTAkzi7-3q4N7Xnz4FkrQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] mpd: update to 0.21.3
+From: Attie Grande <attie.grande@argentum-systems.co.uk>
+Date: Wed, 28 Nov 2018 17:30:08 +0000
+Message-ID: <CAAsqSTdTCM+ivCvfAahNqY35x7QDhC--j=+dR=-xSU+CwkW8=A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: OpenJDK 8 Segfault on i.MX6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,62 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 17:19:33 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 17:30:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Nov 27, 2018 at 11:34 PM Max Kellermann
-<max+openembedded@blarg.de> wrote:
->
-> On 2018/11/28 06:53, Khem Raj <raj.khem@gmail.com> wrote:
-> > Hi Max
-> >
-> > it fails to build with systemd see
-> > http://errors.yoctoproject.org/Errors/Details/202303/
-> >
-> > It seems the new meson change is not installing the system unit files
-> > and socket file during do_install properly, one way is that we explicitly
-> > install/copy them during do_install, but I think its better to fix it in mpd
-> > itself if possible
->
-> We had this problem already when I submitted version 0.21 for the
-> first time, and my 0.21.3 patch contained more explicit options to
-> enable systemd, hoping to make it fail earlier, but it didn't.
->
-> Packaging with systemd works perfectly fine here on my machine, all
-> the units are in the right place.  Unfortunately, your Yocto build
-> logs are devoid of any hints what went wrong.
->
-> So yes, I agree with you that we should fix this in MPD upstream (I am
-> the MPD upstream maintainer, btw.), but I have no idea what's wrong.
-> If only I could reproduce the problem.
->
-> Is there any way to get more verbose logs from your build bot?
->
+Hi all,
 
-I can reproduce it locally as well when building for
+I've been trying to get OpenJDK 8 162-b12 running on Linux on an ARM
+platform (i.MX6), using the Yocto Sumo recipes from meta-java [1].
 
-MACHINE = "raspberrypi3"
-DISTRO_FEATURES_append = " systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+Unfortunately, the result is a java executable that cannot startup
+without hitting a SIGSEGV. Even running "simple" things like `java` or
+`java -help` result in a segmentation fault.
 
+I've tried to investigate it, but I don't have the insight into the
+project to really be able to debug the issue properly myself.
 
-ERROR: mpd-0.21.3-r0 do_package: SYSTEMD_SERVICE_mpd value mpd.socket
-does not exist
-ERROR: mpd-0.21.3-r0 do_package: Function failed: systemd_populate_packages
-ERROR: Logfile of failure stored in:
-/mnt/a/yoe/build/tmp/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/mpd/0.21.3-r0/temp/log.do_package.25748
-ERROR: Task (/mnt/a/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/musicpd/mpd_0.21.3.bb:do_package)
-failed with exit code '1'
-logs are here
-https://gist.github.com/b69ddd940689c5ad02bce7ef2eb89a73
-https://gist.github.com/4c1dd2c382a209b03d290447146cc9c4
-https://gist.github.com/675704fde3469895b4c6207d4c83041d
+I've been in contact with jdk-dev [2], who have been helpful so far,
+but we're starting to wonder about the patches applied as part of the
+Yocto build.
 
+After enabling fastdebug, I still get a segfault with little insight
+into the issue - a fatal error log is available here [3].
 
-if you are interested here is the distro setup I use.
-https://github.com/YoeDistro/yoe-distro
+Investigating with GDB shows that the segfault is in libjvm.so, but
+there are no symbols in this region of memory, and the stack has been
+destroyed (I suspect as part of the VM's operation).
 
-> Max
+We've confirmed that another build of OpenJDK 8 runs on this platform
+[4] (currently jdk8u191-b12).
+
+I've spent some time trying to update to 191-b12, but a number of the
+patches appear to be necessary for Yocto's build environment, while
+others require major rework to apply cleanly.
+
+I see that Thud is using 172b11 [5] which is somewhere in between...
+so I could give those recipes a try - though there is a Sumo / Thud
+dependency issue with xorg-proto.
+
+Has anyone seen this before, or have any insight into the patches / Yocto build?
+
+Aleksey (from jdk-dev) mentioned [6] a user on IRC called hitendra had
+a similar sounding issue with Yocto Sumo / i.MX6 / OpenJDK 8 162-b12,
+and I've also come across a brief / frutiless IRC log in #yocto [7].
+
+Regards,
+Attie
+
+[1]: https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk?h=sumo
+[2]: http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002246.html
+[3]: https://pastebin.com/raw/iXTz8v9z
+[4]: https://builds.shipilev.net/openjdk-jdk8-redhat/openjdk-jdk8-redhat-latest-linux-arm32-hflt-zero-fastdebug.tar.xz
+[5]: https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk?h=master-next
+[6]: http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002251.html
+[7]: https://www.yoctoproject.org/irc/%23yocto.2018-10-23.log.html#t2018-10-23T09:46:21
 
