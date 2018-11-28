@@ -1,51 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DA466C1B4
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C0DB36C57B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 16:55:54 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id k8so7014039pls.11
+	Wed, 28 Nov 2018 16:56:23 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id d18so26597898qto.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 08:55:56 -0800 (PST)
+	Wed, 28 Nov 2018 08:56:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=nfbEYLgRyXjiE0PYUPB7Zi5wKfmljN6S554yqVHTQEI=;
-	b=DU43Y+GJbStzQ5WhUj38UzQZSoyCPehTgaccelGfp6s9IljDtMXewq+y6EeJ+W9Uyx
-	/7KcvTfVBdtVWrP3lx3XXpAK1bzr6NRNH3lr+ou/2FNl31l4q+gvaM0idfIbpXYWdvGd
-	YVQi9sIk3nGl7OdGkjvuqGqPvcxoC2q9B60nLpkvlFMU3h5Y9uJB8h3XVugqzI780G5R
-	NTUwHWoHzrUNm3zaT84kDt00oaBqwOawSc8H1TglwRPzML59OSH4elUy4RJ92pQ0Wu8D
-	2YniqAHLyVA7PjeR2lllVL9Zsq1XIzr23e3h1WruMCNYP9yDYMVkRvlC1iAbNr2ksue8
-	6/SA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=GqdZIuArHT+qN3yu5Gn/cKe4BaTMWLFfgNBqaOeykmI=;
+	b=nMlasT3UEbi8pw1vWwO1JEkBMI/J8A+QqHR3TFXv6RmKPlYy9n0yWoeP1BrCZ+bJfq
+	CkRh5ulLCAOd1W2rZp4T6cRr6WgP+funpr7N7RjjzZIiej2YX5pYfZpsasH1E4E+Udt/
+	jfizy7zwkJWOLVTJdPr7ZGFhzV/X4qv/x/7NghY8aVbkRbp0ofIZ3gyy2a2IbMFWfnCb
+	KBaUJly10jeLia8BRDQpObfZ1LmTakEFvPjrURDksLp8821wsYdy41KETkDR2pRJLqJC
+	YQ0l71MIgdZwcZgNZ4CP/5Aa7MnLdlafpuKRg0fwD5b5Cf/Qe2Pnn/CYF4Fh0Cdr2x1k
+	807A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=nfbEYLgRyXjiE0PYUPB7Zi5wKfmljN6S554yqVHTQEI=;
-	b=CnCdB62m/U+ngNPHds8HobaHKVbUkC2AVsCtcW9UcNZ5f445UcHl0KMYz9zJXniXW1
-	rebmKHzCgxZVvOhJlOrjZQJU7enE1B/RaNcHHyEtYjf6ADVxYcJVdpwoufdoqji3HsAL
-	Inb/8dzCzQqqlVReh+i241Zpk8XKdtprmNqHk6qZ83yxxmr84kIEkYYmoJfCsLr01QZy
-	AzxQbZF6sWX6Z0YgolMo1wAtK3rW4oT8VZzenqLx7bATvcBJ50xkKA2OHHqIPia5IDfu
-	DSL0oz3pUj7pq8wQwII6GX9V/kssrXqErIMPs3Z8pczHQQjSVxwpnStiJ7ZtMlS5fuUC
-	K1tA==
-X-Gm-Message-State: AA+aEWaP+uOcSMJ8EKArg5zQMWZH3MGdqjgxbdLydss7p5sPTMCgwGMj
-	/+zGf2i2PZBSZdHB2amQqIOxVYF8how=
-X-Google-Smtp-Source: AFSGD/UDEO7EEgS8ankR+gecoGRAMjamxoZ+r7EenpRJEPNmwHdvdbyeLoPeEv6KV/XOh0wAZD+pDg==
-X-Received: by 2002:a17:902:503:: with SMTP id
-	3mr29556496plf.233.1543424155581; 
-	Wed, 28 Nov 2018 08:55:55 -0800 (PST)
-Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
-	by smtp.gmail.com with ESMTPSA id
-	e86sm10518440pfb.6.2018.11.28.08.55.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Nov 2018 08:55:54 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Nov 2018 08:55:46 -0800
-Message-Id: <20181128165546.5265-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.2
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=GqdZIuArHT+qN3yu5Gn/cKe4BaTMWLFfgNBqaOeykmI=;
+	b=ACgmOIECpVbrALY7/qEZzblG+gU4e9Mg2j6wt2YJJC/uL/BtxZGMXhxh5nsT9Hd/Ob
+	uatERnw4W1jE5VmBbpZS9bjh9/LjF3YsAj6eL2w+HR09wDi6/5R1q+CVbKMDcoEYWCaK
+	NA9U0MqUKaCWE0C9vPjvw7hgXsbuah12FstxaEKYbl5kL4qj/jsianBrhAcFy7Oae7Lg
+	lymrKRx8k5WpXl+iaLInP1LIjMqrKvXUwtg6EJepg8vvYRglvd+MQxVH4WOdI44zoOU1
+	+ijBWycm1V/8DWL/lC4BVAeEVVHQwT2NbtTlJeEoOWYJRVUyjBfxHYQOqprAdeKDOxG/
+	Z6hA==
+X-Gm-Message-State: AA+aEWarzABEJDS3Z1t1a7bI/PPwT1xBXMk0VyURW3uoA10ecqjE1fEU
+	keQaIuXDLgOuzFyr7J9k0vRS2XVfncIyLwpu5Rg=
+X-Google-Smtp-Source: AJdET5cJQ493qDbrJW3RkdE5bfMbgf1W5gGpw54+tbn5t3GlMWGsAIkBTMHwljhbzhdaQ3/AaxlTlFMJhrFvbG4L1xk=
+X-Received: by 2002:aed:3a22:: with SMTP id n31mr36241708qte.29.1543424184510; 
+	Wed, 28 Nov 2018 08:56:24 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] libdvbcsa: Add recipe
+References: <20181123223022.30597-1-pbasista@gmail.com>
+	<CA+chaQetQT7MbnrguBOhzANeL-w734KQRzWwcaL2+6oEwp-7zQ@mail.gmail.com>
+In-Reply-To: <CA+chaQetQT7MbnrguBOhzANeL-w734KQRzWwcaL2+6oEwp-7zQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 28 Nov 2018 08:55:58 -0800
+Message-ID: <CAMKF1srFNJ0VMMQeZkr8W1knj0R1tGgXje8tqk6kG_2c-an=-A@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: =?UTF-8?Q?Peter_Ba=C5=A1ista?= <pbasista@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH v4] Add a working Tvheadend recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,61 +56,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 16:55:55 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 28 Nov 2018 16:56:23 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-tvheadend needs this library
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libdvbcsa/libdvbcsa/libdvbcsa.pc          | 10 ++++++++++
- .../libdvbcsa/libdvbcsa_1.1.0.bb              | 19 +++++++++++++++++++
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa/libdvbcsa.pc
- create mode 100644 meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa/libdvbcsa.pc b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa/libdvbcsa.pc
-new file mode 100644
-index 0000000000..57e74668eb
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa/libdvbcsa.pc
-@@ -0,0 +1,10 @@
-+prefix=/usr
-+libdir=${prefix}/lib
-+includedir=${prefix}/include
-+
-+Name: libdvbcsa
-+Description:  is a free implementation of the DVB Common Scrambling Algorithm - DVB/CSA - with encryption and decryption capabilities.
-+Version: 1.1.0
-+Requires:
-+Libs: -L${libdir} -ldvbcsa
-+
-diff --git a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-new file mode 100644
-index 0000000000..7f042c382f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Open implementation of the DVB Common Scrambling Algorithm, encrypt and decrypt "
-+SECTION = "libs/multimedia"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+SRCREV = "bc6c0b164a87ce05e9925785cc6fb3f54c02b026"
-+
-+SRC_URI = "git://code.videolan.org/videolan/libdvbcsa.git;protocol=https \
-+           file://libdvbcsa.pc \
-+"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools lib_package pkgconfig
-+
-+do_install_append() {
-+    install -D -m 0644 ${S}/src/dvbcsa/dvbcsa.h ${D}${includedir}/dvbcsa/dvbcsa.h
-+    install -D -m 0644 ${WORKDIR}/libdvbcsa.pc ${D}${libdir}/pkgconfig/libdvbcsa.pc
-+}
--- 
-2.19.2
-
+Thanks Martin, I missed it. I have now send a patch to add the recipe
+for missing package.
+On Tue, Nov 27, 2018 at 2:32 PM Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+>
+> What is supposed to provide libdvbcsa? It's not in any public layers
+> registered here:
+> https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dlib=
+dvbcsa
+>
+> Latest world build shows the same issue:
+>
+> ERROR: Nothing PROVIDES 'libdvbcsa' (but
+> /home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/reci=
+pes-dvb/tvheadend/
+> tvheadend_git.bb
+> DEPENDS on or otherwise requires it). Close matches:
+>
+> On Fri, Nov 23, 2018 at 11:31 PM Peter Ba=C5=A1ista <pbasista@gmail.com> =
+wrote:
+>
+> > The original one was previously removed
+> > by commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
+> > as part of a clean-up of blacklisted recipes.
+> >
+> > Signed-off-by: Peter Ba=C5=A1ista <pbasista@gmail.com>
+> > ---
+> >  .../recipes-dvb/tvheadend/tvheadend_git.bb    | 23 +++++++++++++++++++
+> >  1 file changed, 23 insertions(+)
+> >  create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend_git=
+.bb
+> >
+> > diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> > b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> > new file mode 100644
+> > index 000000000..95cf10bf6
+> > --- /dev/null
+> > +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+> > @@ -0,0 +1,23 @@
+> > +SUMMARY =3D "Tvheadend: TV streaming server and recorder"
+> > +HOMEPAGE =3D "https://tvheadend.org/"
+> > +
+> > +inherit autotools-brokensep gettext gitpkgv pkgconfig
+> > +
+> > +DEPENDS =3D "avahi cmake-native libdvbcsa libpcre2 openssl uriparser z=
+lib"
+> > +
+> > +LICENSE =3D "GPLv3+"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://LICENSE.md;md5=3D9cae5acac2e9ee2fc3aec01ac88ce5db"
+> > +
+> > +SRC_URI =3D "git://github.com/tvheadend/tvheadend.git"
+> > +
+> > +SRCREV =3D "bdc2ae9e19520a10cdf0bec0fcc0050b32bc75ff"
+> > +PV =3D "4.3+git${SRCPV}"
+> > +PKGV =3D "4.3+git${GITPKGV}"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +EXTRA_OECONF +=3D "--arch=3D${TARGET_ARCH} \
+> > +                 --disable-hdhomerun_static \
+> > +                 --disable-ffmpeg_static \
+> > +                 --disable-libav \
+> > +                 "
+> > --
+> > 2.19.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
