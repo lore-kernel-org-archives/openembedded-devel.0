@@ -1,23 +1,31 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B6476C49B
+Return-Path: <stefan.wiehler@missinglinkelectronics.com>
+X-Greylist: delayed 377 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 29 Nov 2018 09:33:15 UTC
+Received: from smtp.missinglinkelectronics.com
+	(smtp.missinglinkelectronics.com [94.130.14.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 84BD46C49B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Nov 2018 09:26:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAT9Q7YC004836
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 29 Nov 2018 01:26:17 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
-	Thu, 29 Nov 2018 01:25:57 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Thu, 29 Nov 2018 01:25:56 -0800
-Message-ID: <20181129092556.124890-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] vsftpd: allow getdents64 in the seccomp sandbox
+	Thu, 29 Nov 2018 09:33:15 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id BB49FE0177
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Nov 2018 10:26:59 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at missinglinkelectronics.com
+Received: from smtp.missinglinkelectronics.com ([127.0.0.1])
+	by localhost (mail.missinglinkelectronics.com [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id TLIC7NJP2uvi; Thu, 29 Nov 2018 10:26:59 +0100 (CET)
+Received: from napf-xenial1.mle (p578c5bfe.dip0.t-ipconnect.de [87.140.91.254])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested) (Authenticated sender: stefan)
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id 4C56FE0031;
+	Thu, 29 Nov 2018 10:26:59 +0100 (CET)
+From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Nov 2018 10:26:33 +0100
+Message-Id: <1543483593-134191-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] read-edid: Upgrade to 3.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,155 +38,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2018 09:26:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Nov 2018 09:33:16 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-seccomp is activated by default in vsftpd and
-this has caused compatibility issues with some
-kernel versions. This was fixed as one can see
-as https://bugzilla.redhat.com/show_bug.cgi?id=845980,
-but can still cause issues with newer kernels with
-kernel 4.18+.
-
-And there is even a patch 0034-Turn-off-seccomp-sandbox-because-it-is-too-strict.patch
-in fedora[https://dl.fedoraproject.org/pub/fedora/linux/releases/29/Everything/source/tree/Packages/v/vsftpd-3.0.3-28.fc29.src.rpm]
-turning off seccomp sandbox for vsftpd by default
-as below which means fedora doesn't limit the syscall
-any more by default.
-[snip]
- -  tunable_seccomp_sandbox = 1;
- +  tunable_seccomp_sandbox = 0;
-   tunable_allow_writeable_chroot = 0;
-
-   tunable_accept_timeout = 60;
-[snip]
-
-Refresh 0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-to allow one more syscall getdents64 in the
-seccomp sandbox apart from the previous one in
-below commit:
-fbffcf3f3 vsftpd: allow sysinfo() in the seccomp sandbox
-
-before this patch:
-root@qemux86-64:~# tnftp 127.0.0.1
-Connected to 127.0.0.1.
-220 (vsFTPd 3.0.3)
-Name (127.0.0.1:root): anonymous
-331 Please specify the password.
-Password:
-230 Login successful.
-Remote system type is UNIX.
-Using binary mode to transfer files.
-ftp> dir
-229 Entering Extended Passive Mode (|||8352|)
-150 Here comes the directory listing.
-500 OOPS: priv_sock_get_cmd
-ftp>
-
-after this patch:
-root@qemux86-64:~# tnftp 127.0.0.1
-Connected to 127.0.0.1.
-220 (vsFTPd 3.0.3)
-Name (127.0.0.1:root): anonymous
-331 Please specify the password.
-Password:
-230 Login successful.
-Remote system type is UNIX.
-Using binary mode to transfer files.
-ftp> dir
-229 Entering Extended Passive Mode (|||22610|)
-150 Here comes the directory listing.
-226 Directory send OK.
-ftp>
-
-Reference: https://wiki.archlinux.org/index.php/Very_Secure_FTP_Daemon#vsftpd:_Error_500_with_kernel_4.18+
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 ---
- ...low-syscalls-in-the-seccomp-sandbox.patch} | 33 ++++++++++---------
- .../recipes-daemons/vsftpd/vsftpd_3.0.3.bb    |  2 +-
- 2 files changed, 19 insertions(+), 16 deletions(-)
- rename meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/{0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch => 0001-vsftpd-allow-syscalls-in-the-seccomp-sandbox.patch} (47%)
+ meta-oe/licenses/read-edid                         | 17 +++++++++++++
+ .../0001-Do-not-install-license-file.patch         | 17 +++++++++++++
+ ...emove-check-for-x86.h-we-don-t-build-get-.patch | 28 ----------------------
+ .../recipes-support/read-edid/read-edid_2.0.0.bb   | 23 ------------------
+ .../recipes-support/read-edid/read-edid_3.0.2.bb   | 20 ++++++++++++++++
+ 5 files changed, 54 insertions(+), 51 deletions(-)
+ create mode 100644 meta-oe/licenses/read-edid
+ create mode 100644 meta-oe/recipes-support/read-edid/read-edid/0001-Do-not-install-license-file.patch
+ delete mode 100644 meta-oe/recipes-support/read-edid/read-edid/0001-configure-remove-check-for-x86.h-we-don-t-build-get-.patch
+ delete mode 100644 meta-oe/recipes-support/read-edid/read-edid_2.0.0.bb
+ create mode 100644 meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
 
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-syscalls-in-the-seccomp-sandbox.patch
-similarity index 47%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-syscalls-in-the-seccomp-sandbox.patch
-index c6c0f80a1..7573c967f 100644
---- a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-syscalls-in-the-seccomp-sandbox.patch
-@@ -1,15 +1,13 @@
--From 9c4826c19f04da533886209361a2caddf582d65c Mon Sep 17 00:00:00 2001
--From: Mingli Yu <Mingli.Yu@windriver.com>
--Date: Tue, 6 Sep 2016 17:17:44 +0800
--Subject: [PATCH] vsftpd: allow sysinfo() in the seccomp sandbox
-+From dd353303f62d1dfe32cb000e482616b021708fbe Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 29 Nov 2018 00:47:34 -0800
-+Subject: [PATCH] vsftpd: allow syscalls in the seccomp sandbox
- 
--Upstream-Status: Pending
--
--* Allow sysinfo() in the seccomp sandbox otherwise
--  comes below OOPS: priv_sock_get_cmd as the syscall
--  sysinfo() not allowed
-+* Allow sysinfo() and getdents64 in the seccomp
-+  sandbox otherwise comes below OOPS: priv_sock_get_cmd
-+  as the syscall sysinfo() and getdents64 not allowed
- 
--tnftp 192.168.1.1
-+root@qemux86-64:~# tnftp 192.168.1.1
- Connected to 192.168.1.1.
- 220 (vsFTPd 3.0.3)
- Name (192.168.1.1:root): anonymous
-@@ -23,21 +21,26 @@ Interactive mode off.
- ftp> mget small*
- OOPS: priv_sock_get_cmd
- 
--Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+Upstream-Status: Pending
- 
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- ---
-- seccompsandbox.c | 1 +
-- 1 file changed, 1 insertion(+)
-+ seccompsandbox.c | 2 ++
-+ 1 file changed, 2 insertions(+)
- 
- diff --git a/seccompsandbox.c b/seccompsandbox.c
--index 2c350a9..67d9ca5 100644
-+index 2c350a9..377c50e 100644
- --- a/seccompsandbox.c
- +++ b/seccompsandbox.c
--@@ -409,6 +409,7 @@ seccomp_sandbox_setup_postlogin(const struct vsf_session* p_sess)
-+@@ -409,6 +409,8 @@ seccomp_sandbox_setup_postlogin(const struct vsf_session* p_sess)
-    allow_nr(__NR_getcwd);
-    allow_nr(__NR_chdir);
-    allow_nr(__NR_getdents);
-++  allow_nr(__NR_getdents64);
- +  allow_nr(__NR_sysinfo);
-    /* Misc */
-    allow_nr(__NR_umask);
-  
-+-- 
-+2.17.1
+diff --git a/meta-oe/licenses/read-edid b/meta-oe/licenses/read-edid
+new file mode 100644
+index 0000000..2eb2c60
+--- /dev/null
++++ b/meta-oe/licenses/read-edid
+@@ -0,0 +1,17 @@
 +
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-index 2e3e0e884..df0d7f455 100644
---- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-@@ -18,7 +18,7 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
-            file://volatiles.99_vsftpd \
-            file://vsftpd.service \
-            file://vsftpd-2.1.0-filter.patch \
--           file://0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch \
-+           file://0001-vsftpd-allow-syscalls-in-the-seccomp-sandbox.patch \
-            ${@bb.utils.contains('PACKAGECONFIG', 'tcp-wrappers', 'file://vsftpd-tcp_wrappers-support.patch', '', d)} \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)} \
-            file://0001-sysdeputil.c-Fix-with-musl-which-does-not-have-utmpx.patch \
++ * This is an unofficial license. Let's call it BSD-like, with these terms:
++ *   * You are free to use this software for any purpose. I cannot guarantee
++ *     anything about this software or its fitness for any purpose. I will
++ *     offer support for this software as long as I am capable of doing so,
++ *     but this should not be interpreted as a support contract of any kind.
++ *
++ *   * You are free to modify, distribute, etc. this code under the strict
++ *     condition that you email me, Matthew Kern <pyrophobicman@gmail.com>, a
++ *     brief message on what you're doing. Nothing will be rejected, this is
++ *     simply to keep tabs on my work, and maybe we can share ideas on EDIDs.
++ *
++ *   * (C)opyright 2008-2014 Matthew Kern
++ *
++ *   Please see AUTHORS for a list of the people who made this software
++ *   possible. All of the current code is a rewrite of my own work, but
++ *   I am still indebted to those guys for a ton of the ideas.
+diff --git a/meta-oe/recipes-support/read-edid/read-edid/0001-Do-not-install-license-file.patch b/meta-oe/recipes-support/read-edid/read-edid/0001-Do-not-install-license-file.patch
+new file mode 100644
+index 0000000..a9b9476
+--- /dev/null
++++ b/meta-oe/recipes-support/read-edid/read-edid/0001-Do-not-install-license-file.patch
+@@ -0,0 +1,17 @@
++Do not install license file
++
++File name is incorrect as well; must be LICENSE instead of COPYING.
++
++Upstream-Status: Submitted [pyrophobicman@gmail.com]
++
++Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
++
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -13,5 +13,5 @@
++ add_subdirectory (parse-edid)
++ 
++ INSTALL(FILES get-edid.1 DESTINATION share/man/man1)
++-INSTALL(FILES AUTHORS ChangeLog COPYING README DESTINATION
+++INSTALL(FILES AUTHORS ChangeLog README DESTINATION
++ 	share/doc/read-edid)
+diff --git a/meta-oe/recipes-support/read-edid/read-edid/0001-configure-remove-check-for-x86.h-we-don-t-build-get-.patch b/meta-oe/recipes-support/read-edid/read-edid/0001-configure-remove-check-for-x86.h-we-don-t-build-get-.patch
+deleted file mode 100644
+index 4408002..0000000
+--- a/meta-oe/recipes-support/read-edid/read-edid/0001-configure-remove-check-for-x86.h-we-don-t-build-get-.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From eb7590cc2cdd5c35403af4567d8524e017010f1c Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Sat, 11 May 2013 07:58:17 +0200
+-Subject: [PATCH] configure: remove check for x86.h, we don't build get-edid
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+-
+-Upstream-status: Inappropriate [OE specific]
+----
+- configure.in | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/configure.in b/configure.in
+-index ac85a21..f53e904 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -8,8 +8,6 @@ dnl Checks for programs
+- 
+- AC_PROG_CC
+- 
+--AC_CHECK_HEADER([libx86.h], [], [AC_MSG_ERROR([libx86.h not found])])
+--
+- dnl Simple, huh?
+- 
+- AC_OUTPUT([Makefile])
+--- 
+-1.8.1.4
+-
+diff --git a/meta-oe/recipes-support/read-edid/read-edid_2.0.0.bb b/meta-oe/recipes-support/read-edid/read-edid_2.0.0.bb
+deleted file mode 100644
+index b002906..0000000
+--- a/meta-oe/recipes-support/read-edid/read-edid_2.0.0.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "read-edid elucidates various very useful informations from a conforming PnP monitor"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d0bf70fa1ef81fe4741ec0e6231dadfd"
+-
+-SRC_URI = "http://polypux.org/projects/read-edid/read-edid-${PV}.tar.gz \
+-           file://0001-configure-remove-check-for-x86.h-we-don-t-build-get-.patch"
+-
+-SRC_URI[md5sum] = "586e7fa1167773b27f4e505edc93274b"
+-SRC_URI[sha256sum] = "246ec14ec509e09ac26fe6862b120481b2cc881e2f142ba40886d6eec15e77e8"
+-
+-inherit autotools
+-
+-do_compile() {
+-    oe_runmake parse-edid
+-}
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 parse-edid ${D}${bindir}
+-}
+-
+-PACKAGES =+ "parse-edid"
+-FILES_parse-edid = "${bindir}/parse-edid"
+diff --git a/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb b/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
+new file mode 100644
+index 0000000..e4c2cad
+--- /dev/null
++++ b/meta-oe/recipes-support/read-edid/read-edid_3.0.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A pair of tools for reading the EDID from a monitor"
++DESCRIPTION = "read-edid is a set of two tools - get-edid, which gets the raw \
++               EDID information from the monitor, and parse-edid, which turns \
++	       the raw binary information into a xorg.conf-compatible monitor \
++	       section."
++AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
++HOMEPAGE = "http://www.polypux.org/projects/read-edid/"
++SECTION = "console/utils"
++LICENSE = "read-edid"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=292c42e2aedc4af636636bf7af0e2b26"
++
++SRC_URI = "http://polypux.org/projects/read-edid/read-edid-${PV}.tar.gz \
++           file://0001-Do-not-install-license-file.patch \
++	   "
++SRC_URI[md5sum] = "016546e438bf6c98739ff74061df9854"
++SRC_URI[sha256sum] = "c7c6d8440f5b90f98e276829271ccea5b2ff5a3413df8a0f87ec09f834af186f"
++
++EXTRA_OECMAKE = "-DCLASSICBUILD=OFF"
++
++inherit cmake
 -- 
-2.17.1
+2.7.4
 
 
