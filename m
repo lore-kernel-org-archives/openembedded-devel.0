@@ -1,51 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 741C46C578
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9171B6C335
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Nov 2018 01:55:19 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id e5so314068qtr.12
+	Thu, 29 Nov 2018 02:53:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id wAT2rcjp019586
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 17:55:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=nCSk3SVJ/WNRJaFgQMtTD8ISFa+H8Wwj7+k0AtU30LU=;
-	b=kHMLxQyS0UbKkJfQsSSOFrFyv17pU1qLe1bW3RVvYKcQC49gecORUcpHe4fGufPyPM
-	jx4pFrjy60YZOUqFro+NsyKh3F4VocvjXNmOCIfO/P/iwRW8q2d9AjrzaOaTvws+xhMH
-	7Kig035juVkHICrm0YT79f79Zovdp+vBiKUiB86ECA65T0X1HKChZtH+86+ji1Bg+M+E
-	Q1OFF25dpWasX36nrVAWQKkciL0zh+L2JAWm1bjc9Jp8f6vKz2x4HIbmbEXvbYyUeEEi
-	gtawFnIvSAyrgG4WztfhjWEYP/PiN3vI+hHWRfsjkK0GZECrj+HcO8c2//cO8pk1tIjZ
-	kHLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=nCSk3SVJ/WNRJaFgQMtTD8ISFa+H8Wwj7+k0AtU30LU=;
-	b=hqeiZYPE8oIb9dsZ5fMju8jKA2BXO5G4Ur7h/8/zqzISjs9dO1nwkr0Bxu5uQgem29
-	WSzeQc740DY1c9I1sQkxt2ApU54qTv8W/Jg1Qs7CO8PWRqyQrc/ownegjpB3lwwoyr0I
-	/nuwNxRrl+QPIwhZ0fjpSUKtuLbQS8pvPdEZmpUo5bYEolsBUWK9r7bUgjMsBZJ/p9ry
-	GhDhaRIT+eO4mwusSIR2WgxHab4vCveMXEXJbEL6uGjoDN0KbGjvFvRBlqD3DeyhxSz0
-	968rKlCy69gdlyUWh/5hUu0qK1nqsuOjWGppemcT6vsJ5SdyqvQx5SDokS8b5tGELTUA
-	A1KQ==
-X-Gm-Message-State: AA+aEWZ9xeD9VWNThtuvcWQKTtyzGDQE5uE6OZCQwjQm5bYdf/h+6z3a
-	OoGQUU31uCHr8hlYKA/U4wnIAMGFkyYMd8lnFHs=
-X-Google-Smtp-Source: AJdET5ceAVbP1nWEIEFwepn/IQ4A6pEcrxfanBTJvOvLveZta6RdT+NExc3VYeubG9Iq8mf/ZDTXrogpir5i48eQQf0=
-X-Received: by 2002:aed:3a22:: with SMTP id n31mr37824897qte.29.1543456520109; 
-	Wed, 28 Nov 2018 17:55:20 -0800 (PST)
+	Wed, 28 Nov 2018 18:53:39 -0800 (PST)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Wed, 28 Nov 2018 18:53:38 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 29 Nov 2018 10:53:37 +0800
+Message-ID: <1543460017-67865-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
-	<CA+chaQfK8BxE=7yh9CtbeOk5rO-Tg1siLePbfZ8C3Vh+_fk42Q@mail.gmail.com>
-	<CAMKF1spT8MKNMMDy1L-t4WdkNYg3Ouvbk_bj+Um=0DKqNenK-Q@mail.gmail.com>
-	<CA+chaQeD+MHPAnK646z0kbT6GzQ7-fBoG_4YPfx6Hp=VJg9WwA@mail.gmail.com>
-	<608363b5-319f-0e49-303c-48bda23c1e48@windriver.com>
-In-Reply-To: <608363b5-319f-0e49-303c-48bda23c1e48@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 Nov 2018 17:55:08 -0800
-Message-ID: <CAMKF1sqJXeW6DnwmYEWT1s984JPvvsGXQk7Rn-fUwsVd9iy0jQ@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] geoip: add downloadfilename for geoip database files
+Subject: [meta-networking][PATCH V2] autofs: upgrade to 5.1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,273 +30,377 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2018 01:55:19 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Nov 2018 02:53:38 -0000
+Content-Type: text/plain
 
-We have two options
+From: Changqing Li <changqing.li@windriver.com>
 
-Download and rename may be add a date component and save it on
-sources.oe.org
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../0001-Do-not-hardcode-path-for-pkg.m4.patch     | 19 +++--
+ .../0002-Replace-__S_IEXEC-with-S_IEXEC.patch      | 36 ++++++---
+ .../autofs-5.0.7-do-not-check-for-modprobe.patch   | 89 ----------------------
+ .../autofs/autofs/pkgconfig-libnsl.patch           | 35 +++++----
+ ...-pkg-config-to-detect-libxml-2.0-and-krb5.patch | 24 ++++--
+ .../autofs/{autofs_5.1.4.bb => autofs_5.1.5.bb}    | 10 ++-
+ 6 files changed, 83 insertions(+), 130 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
+ rename meta-networking/recipes-daemons/autofs/{autofs_5.1.4.bb => autofs_5.1.5.bb} (90%)
 
-Second option is to download the databases during build as temporary
-artifacts but this might cause reproducibility problems
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+index f3f25f4..410827b 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
++++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+@@ -1,21 +1,26 @@
+-From 6d24365f0828185fd1bb4d199209ca07eb95c41d Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 24 Aug 2018 06:24:36 +0000
+-Subject: [PATCH] Do not hardcode path for pkg.m4
++From a27217a5437da313d251b4a765bf7cb60ffaa62d Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Tue, 27 Nov 2018 15:27:47 +0800
++Subject: [PATCH] From 6d24365f0828185fd1bb4d199209ca07eb95c41d Mon Sep 17
++ 00:00:00 2001 From: Khem Raj <raj.khem@gmail.com> Date: Fri, 24 Aug 2018
++ 06:24:36 +0000 Subject: [PATCH] Do not hardcode path for pkg.m4
+ 
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++update patch to version 5.1.5
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  configure.in | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/configure.in b/configure.in
+-index 50aed15..f81767c 100644
++index 493b9f1..268d06b 100644
+ --- a/configure.in
+ +++ b/configure.in
+ @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
+- AC_INIT(.autofs-5.1.4)
++ AC_INIT(.autofs-5.1.5)
+  
+  # for pkg-config macros
+ -m4_include([/usr/share/aclocal/pkg.m4])
+@@ -24,5 +29,5 @@ index 50aed15..f81767c 100644
+  #
+  # autofs installs by default in /usr
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch b/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
+index 469027a..e7fdd10 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
++++ b/meta-networking/recipes-daemons/autofs/autofs/0002-Replace-__S_IEXEC-with-S_IEXEC.patch
+@@ -1,22 +1,26 @@
+-From 557ca399f4b3a397f20bb147ec6dc4ab9732dd1e Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 31 Mar 2017 19:12:10 -0700
+-Subject: [PATCH] Replace __S_IEXEC with S_IEXEC
++From 096e33743158e0e8c04d60d01cc66e2945d79777 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Tue, 27 Nov 2018 16:52:35 +0800
++Subject: [PATCH] From 557ca399f4b3a397f20bb147ec6dc4ab9732dd1e Mon Sep 17
++ 00:00:00 2001 From: Khem Raj <raj.khem@gmail.com> Date: Fri, 31 Mar 2017
++ 19:12:10 -0700 Subject: [PATCH] Replace __S_IEXEC with S_IEXEC
+ 
+ S_IEXEC is portable
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
++update patch to version 5.1.5
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- daemon/lookup.c        | 4 ++--
++ daemon/lookup.c        | 6 +++---
+  modules/lookup_multi.c | 2 +-
+- 2 files changed, 3 insertions(+), 3 deletions(-)
++ 2 files changed, 4 insertions(+), 4 deletions(-)
+ 
+ diff --git a/daemon/lookup.c b/daemon/lookup.c
+-index 201ccbb..d821db8 100644
++index 18df935..d35d484 100644
+ --- a/daemon/lookup.c
+ +++ b/daemon/lookup.c
+-@@ -366,7 +366,7 @@ static int read_file_source_instance(struct autofs_point *ap, struct map_source
++@@ -382,7 +382,7 @@ static int read_file_source_instance(struct autofs_point *ap, struct map_source
+  	if (!S_ISREG(st.st_mode))
+  		return NSS_STATUS_NOTFOUND;
+  
+@@ -25,7 +29,7 @@ index 201ccbb..d821db8 100644
+  		type = src_prog;
+  	else
+  		type = src_file;
+-@@ -856,7 +856,7 @@ static int lookup_name_file_source_instance(struct autofs_point *ap, struct map_
++@@ -942,7 +942,7 @@ static int lookup_name_file_source_instance(struct autofs_point *ap, struct map_
+  	if (!S_ISREG(st.st_mode))
+  		return NSS_STATUS_NOTFOUND;
+  
+@@ -34,8 +38,17 @@ index 201ccbb..d821db8 100644
+  		type = src_prog;
+  	else
+  		type = src_file;
++@@ -1118,7 +1118,7 @@ static struct map_source *lookup_get_map_source(struct master_mapent *entry)
++ 	if (!S_ISREG(st.st_mode))
++ 		return NULL;
++ 
++-	if (st.st_mode & __S_IEXEC)
+++	if (st.st_mode & S_IEXEC)
++ 		type = "program";
++ 	else
++ 		type = "file";
+ diff --git a/modules/lookup_multi.c b/modules/lookup_multi.c
+-index fadd2ea..3ecda6d 100644
++index bb9f88c..cf109de 100644
+ --- a/modules/lookup_multi.c
+ +++ b/modules/lookup_multi.c
+ @@ -247,7 +247,7 @@ static struct lookup_mod *nss_open_lookup(const char *format, int argc, const ch
+@@ -47,3 +60,6 @@ index fadd2ea..3ecda6d 100644
+  				type = src_prog;
+  			else
+  				type = src_file;
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
+deleted file mode 100644
+index 1d5c3e1..0000000
+--- a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.0.7-do-not-check-for-modprobe.patch
++++ /dev/null
+@@ -1,89 +0,0 @@
+-From 2cbc576ea1fbd1cbf4579d64b30e41d762084e7f Mon Sep 17 00:00:00 2001
+-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
+-Date: Tue, 15 Jan 2013 12:45:44 +0800
+-Subject: [PATCH] autofs: do not check for modprobe
+-
+-Description: Loading autofs module is #ifdef'ed in the source, so
+- there is no need to check for /proc (which is only used
+- to load module) or modprobe.  Both modprobe and /proc
+- are always in the fixed location so there's no need to
+- check for these to start with.
+-
+-Upstream-Status: Backport [1]
+-[1] http://www.spinics.net/lists/autofs/msg00139.html
+-
+----
+- configure.in        |  6 ------
+- daemon/module.c     |  3 +++
+- include/automount.h | 11 +++--------
+- 3 files changed, 6 insertions(+), 14 deletions(-)
+-
+-diff --git a/configure.in b/configure.in
+-index 44a1c8b..b226236 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -34,11 +34,6 @@ AC_MSG_CHECKING([for binaries in])
+- AC_MSG_RESULT([$searchpath])
+- 
+- #
+--# Make sure we have "/proc"
+--#
+--AF_LINUX_PROCFS()
+--
+--#
+- # Location of init.d directory?
+- #
+- AF_INIT_D()
+-@@ -142,7 +137,6 @@ AF_PATH_INCLUDE(UMOUNT, umount, /bin/umount, $searchpath)
+- AF_PATH_INCLUDE(E2FSCK, fsck.ext2 e2fsck, , $searchpath)
+- AF_PATH_INCLUDE(E3FSCK, fsck.ext3 e3fsck, , $searchpath)
+- AF_PATH_INCLUDE(E4FSCK, fsck.ext4 e4fsck, , $searchpath)
+--AF_PATH_INCLUDE(MODPROBE, modprobe, , $searchpath)
+- 
+- AF_CHECK_PROG(LEX, flex lex, , $searchpath)
+- AF_CHECK_PROG(YACC, bison, , $searchpath)
+-diff --git a/daemon/module.c b/daemon/module.c
+-index bed8f7a..e41a98e 100644
+---- a/daemon/module.c
+-+++ b/daemon/module.c
+-@@ -19,6 +19,8 @@
+- #include "automount.h"
+- #include "nsswitch.h"
+- 
+-+#if 0
+-+/* see comment in daemon/automount.c around load_autofs4_module() call */
+- int load_autofs4_module(void)
+- {
+- 	FILE *fp;
+-@@ -53,6 +55,7 @@ int load_autofs4_module(void)
+- 
+- 	return 1;
+- }
+-+#endif
+- 
+- int open_lookup(const char *name, const char *err_prefix, const char *mapfmt,
+- 		int argc, const char *const *argv, struct lookup_mod **lookup)
+-diff --git a/include/automount.h b/include/automount.h
+-index c0f5fbf..cc336ad 100644
+---- a/include/automount.h
+-+++ b/include/automount.h
+-@@ -51,16 +51,11 @@
+- #error Failed to locate umount(8)!
+- #endif
+- 
+--#ifndef HAVE_MODPROBE
+--#error Failed to locate modprobe(8)!
+--#endif
+--
+--#ifndef HAVE_LINUX_PROCFS
+--#error Failed to verify existence of procfs filesystem!
+--#endif
+--
+-+#if 0
+-+/* see comment in daemon/automount.c around load_autofs4_module() call */
+- #define FS_MODULE_NAME  "autofs4"
+- int load_autofs4_module(void);
+-+#endif
+- 
+- /* The -s (sloppy) option to mount is good, if we have it... */
+- 
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/pkgconfig-libnsl.patch b/meta-networking/recipes-daemons/autofs/autofs/pkgconfig-libnsl.patch
+index 1c7b119..be750ab 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs/pkgconfig-libnsl.patch
++++ b/meta-networking/recipes-daemons/autofs/autofs/pkgconfig-libnsl.patch
+@@ -1,7 +1,9 @@
+-From e3ae56cf0bb4063c31295f45d04e3c504f4b6cc7 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 24 Apr 2017 20:41:25 -0700
+-Subject: [PATCH] autofs: Upgrade to 5.1.2 release
++From 602f9ca83c2bdbf511bcb178fcb4b9fc54da955f Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Tue, 27 Nov 2018 15:20:46 +0800
++Subject: [PATCH] From e3ae56cf0bb4063c31295f45d04e3c504f4b6cc7 Mon Sep 17
++ 00:00:00 2001 From: Khem Raj <raj.khem@gmail.com> Date: Mon, 24 Apr 2017
++ 20:41:25 -0700 Subject: [PATCH] autofs: Upgrade to 5.1.2 release
+ 
+ Use pkg-config first to look for external libnsl which is now
+ split out from glibc, if it does not exist then see if its provided
+@@ -9,20 +11,27 @@ by glibc itself.
+ 
+ -Khem
+ 
++Upstream-Status: Pending
++
++update patch to version 5.1.5
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  configure.in | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/configure.in b/configure.in
+-index 9cf73b8..1016c71 100644
++index 76ecb40..493b9f1 100644
+ --- a/configure.in
+ +++ b/configure.in
+-@@ -186,7 +186,7 @@ fi
+- #
+- # glibc/libc 6 new libraries
+- #
+--AC_CHECK_LIB(nsl, yp_match, LIBNSL="-lnsl")
+-+PKG_CHECK_MODULES([NSL], [libnsl], [], [AC_CHECK_LIB([nsl],[yp_match],[LIBNSL="-lnsl"],[LIBNSL=""])])
+- AC_SUBST(LIBNSL)
++@@ -238,7 +238,7 @@ AC_SUBST(LIBCLOCK_GETTIME)
+  
+- AC_CHECK_LIB(resolv, res_query, LIBRESOLV="-lresolv")
++ PKG_CHECK_MODULES([NSL],[libnsl],,
++ [
++-AC_CHECK_LIB(nsl, yp_match, NSL_LIBS="-lnsl")
+++PKG_CHECK_MODULES([NSL], [libnsl], [], [AC_CHECK_LIB([nsl],[yp_match],[LIBNSL="-lnsl"],[LIBNSL=""])])
++ AC_SUBST(NSL_LIBS)
++ NSL_CFLAGS=""
++ ])
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+index 3d0c6bd..d1f9f34 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
++++ b/meta-networking/recipes-daemons/autofs/autofs/using-pkg-config-to-detect-libxml-2.0-and-krb5.patch
+@@ -1,22 +1,27 @@
+-From dabcbdae38038a8e4ad2c4286112381c407c5ce7 Mon Sep 17 00:00:00 2001
+-From: Roy Li <rongqing.li@windriver.com>
+-Date: Tue, 19 Aug 2014 11:31:35 +0800
+-Subject: [PATCH] using pkg-config to detect libxml-2.0 and krb5
++From dd90a690f95569b999b8ac9ab57e834b3421dcbb Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Tue, 27 Nov 2018 15:19:07 +0800
++Subject: [PATCH] From dabcbdae38038a8e4ad2c4286112381c407c5ce7 Mon Sep 17
++ 00:00:00 2001 From: Roy Li <rongqing.li@windriver.com> Date: Tue, 19 Aug 2014
++ 11:31:35 +0800 Subject: [PATCH] using pkg-config to detect libxml-2.0 and
++ krb5
+ 
+-Upstream-status: Pending
++Upstream-Status: Pending
+ 
+ Signed-off-by: Roy Li <rongqing.li@windriver.com>
+ 
++update patch to 5.1.5
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  configure.in | 16 ++++++++++++++--
+  1 file changed, 14 insertions(+), 2 deletions(-)
+ 
+ diff --git a/configure.in b/configure.in
+-index b226236..9cf73b8 100644
++index f5fbb35..76ecb40 100644
+ --- a/configure.in
+ +++ b/configure.in
+-@@ -162,8 +162,20 @@ if test x$enable_sloppy_mount = xyes; then
+- fi
++@@ -211,8 +211,20 @@ fi
++ AC_SUBST(ENABLE_FEDFS)
+  
+  # LDAP SASL auth needs libxml and Kerberos
+ -AF_CHECK_LIBXML()
+@@ -38,3 +43,6 @@ index b226236..9cf73b8 100644
+  
+  AC_SEARCH_LIBS([versionsort],[])
+  if test "$ac_cv_search_versionsort" = "no"; then
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+similarity index 90%
+rename from meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb
+rename to meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+index 8a1bcad..9e43549 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+@@ -13,7 +13,6 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
+            file://no-bash.patch \
+            file://cross.patch \
+-           file://autofs-5.0.7-do-not-check-for-modprobe.patch \
+            file://fix_disable_ldap.patch \
+            file://autofs-5.0.7-fix-lib-deps.patch \
+            file://add-the-needed-stdarg.h.patch \
+@@ -27,8 +26,10 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
+            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
+            "
+-SRC_URI[md5sum] = "17bc9d371cf39d99f400ebadfc2289bb"
+-SRC_URI[sha256sum] = "8d1c9964c8286ccb08262ad47c60bb6343492902def5399fd36d79a0ccb0e718"
++
++
++SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
++SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
+ 
+ UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+ 
+@@ -62,6 +63,9 @@ do_configure_prepend () {
+ }
+ 
+ do_install_append () {
++    # samples have been removed from SUBDIRS from 5.1.5, need to install separately
++    oe_runmake 'DESTDIR=${D}' install_samples
++
+     if [ -d ${D}/run ]; then
+         rmdir ${D}/run
+     fi
+-- 
+2.7.4
 
-Either way it is going to have some issues
-May be option 1 even though tedious can be better of two
-
-On Wed, Nov 28, 2018 at 5:31 PM Changqing Li <changqing.li@windriver.com>
-wrote:
-
-> Khem and Marthin,
->
-> The failure still caused by frequently changed checksum of the database. =
-I
-> send the patch on 11.20.
->
-> but the checksum changed on 1121, and it also changed on 1128, seems like
-> weekly change.
->
-> but it should not failed if there is a premirror saved the
->
-> Here is a result I get:
->
-> $ md5sum 1128/*v6*
-> d98a04eded0b08b945b5629106d58760  1128/GeoIPv6 (1).dat.gz
-> 4d48c102ec68298b3fc7f57763455cb5  1128/GeoLiteCityv6.dat.gz
-> $ md5sum 1121/*v6*
-> b0f82334f94ca89872e7722db3511bb9  1121/GeoIPv6.dat.gz
-> 50ad18a8a3ea4bba7c929bea6e22db75  1121/GeoLiteCityv6.dat.gz
-> $ md5sum 1120/*v6*
-> a908d7a51c3883eb8f693ca197c7a142  1120/GeoIPv6.dat.gz
-> 8ac3506ccabaae7e9f7d6301c2654313  1120/GeoLiteCityv6.dat.gz
->
->
-> On 11/28/18 3:14 AM, Martin Jansa wrote:
->
-> I'm seeing different checksum than both your builder and the recipe.
->
-> $ wget http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
-> --2018-11-27 20:06:32--
-> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
-> Resolving geolite.maxmind.com... 104.16.37.47, 104.16.38.47,
-> 2606:4700::6810:252f, ...
-> Connecting to geolite.maxmind.com|104.16.37.47|:80... connected.
-> HTTP request sent, awaiting response... 200 OK
-> Length: 1209046 (1.2M) [application/octet-stream]
-> Saving to: =E2=80=98GeoIPv6.dat.gz=E2=80=99
->
-> 2018-11-27 20:06:32 (10.3 MB/s) - =E2=80=98GeoIPv6.dat.gz=E2=80=99 saved =
-[1209046/1209046]
->
-> $ md5sum GeoIPv6.dat.gz
-> d98a04eded0b08b945b5629106d58760  GeoIPv6.dat.gz
->
-> Is this the legacy archive? Because
-> https://dev.maxmind.com/geoip/legacy/geolite/ now shows following:
->
-> Yes,  I have  pointed out this problem  the first time I changed the
-> checksum. maybe we should upgrade
->
-> to geoip2,  and  drop current geoip1.6.  but I think even with geoip2,
-> since it's database still not version,
->
-> maybe also will met similar problem.
->
->
-> //changqing
->
->
-> Updated versions of the GeoLite Legacy databases are now only available t=
-o
-> redistribution license customers, although anyone can continue to downloa=
-d
-> the March 2018 GeoLite Legacy builds. Starting January 2, 2019, the last
-> build will be removed from our website. GeoLite Legacy database users wil=
-l
-> need to switch to the GeoLite2 or commercial GeoIP databases and update
-> their integrations by January 2, 2019.
->
-> For more information, please visit our Support Center.
->
-> Note: After careful consideration, taking into account customer feedback,
-> we have decided against removing latitude and longitude coordinates from
-> the GeoLite2 databases. We are in the process of reviewing coordinates us=
-ed
-> in all of our GeoLite2 and GeoIP databases to ensure there is no risk of
-> misuse.
->
-> * GeoLite2 databases are free IP geolocation databases comparable to, but
-> less accurate than, MaxMind=E2=80=99s GeoIP2 databases. Please remember t=
-o use the
-> accuracy radius if displaying coordinates on a map.
->
-> New Database Format Available: This page is for our GeoLite Legacy
-> databases. For our latest database format, please visit our GeoLite2
-> Databases page. We offer redistribution licenses for our newer GeoLite2
-> databases that will allow you to package the databases with your commerci=
-al
-> products. For more information, please visit the GeoLite2 Commercial
-> Redistribution page.
->
->
-> On Tue, Nov 27, 2018 at 8:04 PM Khem Raj <raj.khem@gmail.com> wrote:
->
->> I am seeing errors on some builders
->>
->> http://errors.yoctoproject.org/Errors/Details/202341/
->> On Mon, Nov 19, 2018 at 11:29 PM Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->> >
->> > Looks, good.
->> >
->> > Adding variable for 20181120 might help with maintenance (if we need t=
-o
->> > change just checksums in future). And with good variable name (or a
->> > comment) it would also document in the recipe why we're using this in
->> > downloadfilename.
->> >
->> > On Tue, Nov 20, 2018 at 7:48 AM <changqing.li@windriver.com> wrote:
->> >
->> > > From: Changqing Li <changqing.li@windriver.com>
->> > >
->> > > previous change of checksum don't trigger archive to re-downloaded,
->> > > , which will cause checksum mismatch. add downloadfilename to
->> > > trigger re-download.
->> > >
->> > > 1. for user with PREMIRROR, another benefit is it can still compile
->> > > success event upstream checksum change frequently.
->> > > 2. but for user don't use PREMIRROR, if upstream checksum changed,
->> > > still might have checksum mismatch problem.
->> > >
->> > > Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> > > ---
->> > >  .../recipes-support/geoip/geoip_1.6.12.bb          | 24
->> > > +++++++++++-----------
->> > >  1 file changed, 12 insertions(+), 12 deletions(-)
->> > >
->> > > diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
->> > > b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
->> > > index 1e1a7ff..57f0b67 100644
->> > > --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
->> > > +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
->> > > @@ -9,10 +9,10 @@ HOMEPAGE =3D "http://dev.maxmind.com/geoip/"
->> > >  SECTION =3D "libdevel"
->> > >
->> > >  SRC_URI =3D "git://github.com/maxmind/geoip-api-c.git \
->> > > -
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.=
-dat.gz;apply=3Dno;name=3DGeoIP-dat
->> > > \
->> > > -
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=
-=3Dno;name=3DGeoIPv6-dat
->> > > \
->> > > -
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;ap=
-ply=3Dno;name=3DGeoLiteCity-dat
->> > > \
->> > > -
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/Ge=
-oLiteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat
->> > > \
->> > > +
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.=
-dat.gz;apply=3Dno;name=3DGeoIP-dat;downloadfilename=3DGeoIP.dat.20181120.gz
->> > > \
->> > > +
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=
-=3Dno;name=3DGeoIPv6-dat;downloadfilename=3DGeoIPv6.dat.20181120.gz
->> > > \
->> > > +
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;ap=
-ply=3Dno;name=3DGeoLiteCity-dat;downloadfilename=3DGeoLiteCity.dat.20181120=
-.gz
->> > > \
->> > > +
->> > >
->> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/Ge=
-oLiteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat;downloadfilename=3DG=
-eoLiteCityv6.dat.20181120.gz
->> > > \
->> > >             file://run-ptest \
->> > >  "
->> > >  SRCREV =3D "4b526e7331ca1d692b74a0509ddcc725622ed31a"
->> > > @@ -20,14 +20,14 @@ SRCREV =3D
->> "4b526e7331ca1d692b74a0509ddcc725622ed31a"
->> > >  SRC_URI[GeoIP-dat.md5sum] =3D "d538e57ad9268fdc7955c6cf9a37c4a9"
->> > >  SRC_URI[GeoIP-dat.sha256sum] =3D
->> > > "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
->> > >
->> > > -SRC_URI[GeoIPv6-dat.md5sum] =3D "00dc3b3f53eb5f7bf6915f939998f12c"
->> > > -SRC_URI[GeoIPv6-dat.sha256sum] =3D
->> > > "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
->> > > +SRC_URI[GeoIPv6-dat.md5sum] =3D "a908d7a51c3883eb8f693ca197c7a142"
->> > > +SRC_URI[GeoIPv6-dat.sha256sum] =3D
->> > > "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
->> > >
->> > >  SRC_URI[GeoLiteCity-dat.md5sum] =3D "d700c137232f8e077ac8db8577f699=
-d9"
->> > >  SRC_URI[GeoLiteCity-dat.sha256sum] =3D
->> > > "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
->> > >
->> > > -SRC_URI[GeoLiteCityv6-dat.md5sum] =3D
->> "7f6333d433d8127181ea3c5828287c98"
->> > > -SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
->> > > "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
->> > > +SRC_URI[GeoLiteCityv6-dat.md5sum] =3D
->> "8ac3506ccabaae7e9f7d6301c2654313"
->> > > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
->> > > "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
->> > >
->> > >  LICENSE =3D "LGPL-2.1"
->> > >
->> > > @@ -44,10 +44,10 @@ EXTRA_OECONF =3D "--disable-static              =
- \
->> > >  do_install() {
->> > >      make DESTDIR=3D${D} install
->> > >      install -d ${D}/${datadir}/GeoIP
->> > > -    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
->> > > -    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
->> > > -    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
->> > > -    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
->> > > +    install ${WORKDIR}/GeoIP.dat.20181120
->> ${D}/${datadir}/GeoIP/GeoIP.dat
->> > > +    install ${WORKDIR}/GeoIPv6.dat.20181120
->> > > ${D}/${datadir}/GeoIP/GeoIPv6.dat
->> > > +    install ${WORKDIR}/GeoLiteCity.dat.20181120
->> > > ${D}/${datadir}/GeoIP/GeoLiteCity.dat
->> > > +    install ${WORKDIR}/GeoLiteCityv6.dat.20181120
->> > > ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
->> > >      ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
->> > >  }
->> > >
->> > > --
->> > > 2.7.4
->> > >
->> > > --
->> > > _______________________________________________
->> > > Openembedded-devel mailing list
->> > > Openembedded-devel@lists.openembedded.org
->> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> > >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> BRs
->
-> Sandy(Li Changqing)
->
->
 
