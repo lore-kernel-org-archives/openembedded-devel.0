@@ -1,47 +1,32 @@
-Return-Path: <attie.grande@argentum-systems.co.uk>
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
-	[209.85.208.44])
-	by mail.openembedded.org (Postfix) with ESMTP id F27B26C648
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 699606C648
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 18:35:39 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id o10so22906214edt.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2018 10:35:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=argentum-systems-co-uk.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=5XDwE3YU6XQ/Lu/LyRbcEV062Free1GHnML18rtA7KY=;
-	b=S+SmtBB6PlkO+m7qESNaDAPNcSQjoiuqgARbSR7Y0BIYNd7DaCWeJj0m2PTahKabse
-	2FHlXrhnJy+CeDwjfhFI1MwgO1ujIw+z31S0P+zL4SOyN77x1cFrYCVguVtcf2vD0gJq
-	8fItG8fzWd+2FgSJNDjQCcdse9Q/+gIpkWnkCF2hUEWTQyIVfWn3Y3oWViCzgEah+eU2
-	txzl1Vs6KQHHtUuEvDbWrUNeCyX/6Po7jZflIKPt5tJUxqQPEp2VOuCBR/uOwMOtqTb5
-	YahxjhMiR9IWmgnhFAid1M7oo8K/q1s3LwF1bGZ7runCoYVJVjmLza7NITCR9mSDDGaP
-	xl4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=5XDwE3YU6XQ/Lu/LyRbcEV062Free1GHnML18rtA7KY=;
-	b=TYUcJAMwipRqxBtNd8pUrvlhDZ9c6uMUqPR+dZxG/nGZbf8xbHEwC8NIm6w6TFEEES
-	p3Otcqcgd49H7Fi+uhAF9j2pxpuZhnscCO0Q0qVseoa7zcFmB1uIzL5PQl7fbGNAZjD5
-	3Yfx4DMOU3LJUHmPhT6IzTfg27bLh/8wQZavymX8YYB9T2YXKaWQp1ajEkwIYxQR+kwc
-	DYVDztJgF34x+L9e5u2nPAn3k27cuYaqW++I1+aDBIeN/n+hizde4nRLPQ0JumzsLa09
-	g3rcmcG4OF9+EOYAWwTV91Acpl+fti2waqE6pqDtoa9NHApJ1Jn9roBXbAV6uUnrQvEM
-	tTdw==
-X-Gm-Message-State: AGRZ1gInfJaWx07McymuM5geC49dfOJXvkBW1TtGZEE48x+3dtnrzRE9
-	4iSCwzNoXA/Z2OSCOIsgCJYLWoyzAwvhe6fkVVFIPgsJiqk=
-X-Google-Smtp-Source: AJdET5ccfuFCrlRhcOmlHuXDpG0TaC1gJwPpG/KmHm54KAllgnxCbLuZqKac7MTWrnRZM1FLr+K8olWiwOoOVhP5bAQ=
-X-Received: by 2002:a17:906:2dc1:: with SMTP id
-	h1-v6mr27413820eji.67.1543430140273; 
-	Wed, 28 Nov 2018 10:35:40 -0800 (PST)
+	Thu, 29 Nov 2018 01:31:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wAT1V2HM024753
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 28 Nov 2018 17:31:31 -0800
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Wed, 28 Nov 2018 17:31:01 -0800
+To: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>
+References: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
+	<CA+chaQfK8BxE=7yh9CtbeOk5rO-Tg1siLePbfZ8C3Vh+_fk42Q@mail.gmail.com>
+	<CAMKF1spT8MKNMMDy1L-t4WdkNYg3Ouvbk_bj+Um=0DKqNenK-Q@mail.gmail.com>
+	<CA+chaQeD+MHPAnK646z0kbT6GzQ7-fBoG_4YPfx6Hp=VJg9WwA@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <608363b5-319f-0e49-303c-48bda23c1e48@windriver.com>
+Date: Thu, 29 Nov 2018 09:30:58 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-References: <CAAsqSTdTCM+ivCvfAahNqY35x7QDhC--j=+dR=-xSU+CwkW8=A@mail.gmail.com>
-In-Reply-To: <CAAsqSTdTCM+ivCvfAahNqY35x7QDhC--j=+dR=-xSU+CwkW8=A@mail.gmail.com>
-From: Attie Grande <attie.grande@argentum-systems.co.uk>
-Date: Wed, 28 Nov 2018 18:35:30 +0000
-Message-ID: <CAAsqSTeyCozrxNMrCh4SKLZnTwNz74wSQP=W_Lhcni87r7jWwA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenJDK 8 Segfault on i.MX6
+In-Reply-To: <CA+chaQeD+MHPAnK646z0kbT6GzQ7-fBoG_4YPfx6Hp=VJg9WwA@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] geoip: add downloadfilename for geoip database files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,75 +39,258 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 18:35:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 29 Nov 2018 01:31:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi again,
+Khem and Marthin,
 
-As a follow-up (under Aleksey's guidance) I applied the following patches:
+The failure still caused by frequently changed checksum of the database. 
+I send the patch on 11.20.
 
-- JDK-8202600 [1][2] had no effect, but I'll be keeping it applied.
-- JDK-8194739 [3][4] and things have sprung into life.
+but the checksum changed on 1121, and it also changed on 1128, seems 
+like weekly change.
 
-I'll prepare a patch and submit tomorrow.
+but it should not failed if there is a premirror saved the
 
-Attie
+Here is a result I get:
 
-[1]: https://bugs.openjdk.java.net/browse/JDK-8202600
-[2]: http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916
-[3]: https://bugs.openjdk.java.net/browse/JDK-8194739
-[4]: http://hg.openjdk.java.net/jdk/jdk10/rev/69d1a1590485
-On Wed, 28 Nov 2018 at 17:30, Attie Grande
-<attie.grande@argentum-systems.co.uk> wrote:
+$ md5sum 1128/*v6*
+d98a04eded0b08b945b5629106d58760  1128/GeoIPv6 (1).dat.gz
+4d48c102ec68298b3fc7f57763455cb5  1128/GeoLiteCityv6.dat.gz
+$ md5sum 1121/*v6*
+b0f82334f94ca89872e7722db3511bb9  1121/GeoIPv6.dat.gz
+50ad18a8a3ea4bba7c929bea6e22db75  1121/GeoLiteCityv6.dat.gz
+$ md5sum 1120/*v6*
+a908d7a51c3883eb8f693ca197c7a142  1120/GeoIPv6.dat.gz
+8ac3506ccabaae7e9f7d6301c2654313  1120/GeoLiteCityv6.dat.gz
+
+
+On 11/28/18 3:14 AM, Martin Jansa wrote:
+> I'm seeing different checksum than both your builder and the recipe.
 >
-> Hi all,
+> $ wget http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+> --2018-11-27 20:06:32-- 
+> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+> Resolving geolite.maxmind.com... 104.16.37.47, 104.16.38.47, 
+> 2606:4700::6810:252f, ...
+> Connecting to geolite.maxmind.com 
+> <http://geolite.maxmind.com>|104.16.37.47|:80... connected.
+> HTTP request sent, awaiting response... 200 OK
+> Length: 1209046 (1.2M) [application/octet-stream]
+> Saving to: ‘GeoIPv6.dat.gz’
 >
-> I've been trying to get OpenJDK 8 162-b12 running on Linux on an ARM
-> platform (i.MX6), using the Yocto Sumo recipes from meta-java [1].
+> 2018-11-27 20:06:32 (10.3 MB/s) - ‘GeoIPv6.dat.gz’ saved [1209046/1209046]
 >
-> Unfortunately, the result is a java executable that cannot startup
-> without hitting a SIGSEGV. Even running "simple" things like `java` or
-> `java -help` result in a segmentation fault.
+> $ md5sum GeoIPv6.dat.gz
+> d98a04eded0b08b945b5629106d58760 GeoIPv6.dat.gz
 >
-> I've tried to investigate it, but I don't have the insight into the
-> project to really be able to debug the issue properly myself.
+> Is this the legacy archive? Because 
+> https://dev.maxmind.com/geoip/legacy/geolite/ now shows following:
+
+Yes,  I have  pointed out this problem  the first time I changed the 
+checksum. maybe we should upgrade
+
+to geoip2,  and  drop current geoip1.6.  but I think even with geoip2,  
+since it's database still not version,
+
+maybe also will met similar problem.
+
+
+//changqing
+
 >
-> I've been in contact with jdk-dev [2], who have been helpful so far,
-> but we're starting to wonder about the patches applied as part of the
-> Yocto build.
+> Updated versions of the GeoLite Legacy databases are now only 
+> available to redistribution license customers, although anyone can 
+> continue to download the March 2018 GeoLite Legacy builds. Starting 
+> January 2, 2019, the last build will be removed from our website. 
+> GeoLite Legacy database users will need to switch to the GeoLite2 or 
+> commercial GeoIP databases and update their integrations by January 2, 
+> 2019.
 >
-> After enabling fastdebug, I still get a segfault with little insight
-> into the issue - a fatal error log is available here [3].
+> For more information, please visit our Support Center.
 >
-> Investigating with GDB shows that the segfault is in libjvm.so, but
-> there are no symbols in this region of memory, and the stack has been
-> destroyed (I suspect as part of the VM's operation).
+> Note: After careful consideration, taking into account customer 
+> feedback, we have decided against removing latitude and longitude 
+> coordinates from the GeoLite2 databases. We are in the process of 
+> reviewing coordinates used in all of our GeoLite2 and GeoIP databases 
+> to ensure there is no risk of misuse.
 >
-> We've confirmed that another build of OpenJDK 8 runs on this platform
-> [4] (currently jdk8u191-b12).
+> * GeoLite2 databases are free IP geolocation databases comparable to, 
+> but less accurate than, MaxMind’s GeoIP2 databases. Please remember to 
+> use the accuracy radius if displaying coordinates on a map.
 >
-> I've spent some time trying to update to 191-b12, but a number of the
-> patches appear to be necessary for Yocto's build environment, while
-> others require major rework to apply cleanly.
+> New Database Format Available: This page is for our GeoLite Legacy 
+> databases. For our latest database format, please visit our GeoLite2 
+> Databases page. We offer redistribution licenses for our newer 
+> GeoLite2 databases that will allow you to package the databases with 
+> your commercial products. For more information, please visit the 
+> GeoLite2 Commercial Redistribution page.
 >
-> I see that Thud is using 172b11 [5] which is somewhere in between...
-> so I could give those recipes a try - though there is a Sumo / Thud
-> dependency issue with xorg-proto.
 >
-> Has anyone seen this before, or have any insight into the patches / Yocto build?
+> On Tue, Nov 27, 2018 at 8:04 PM Khem Raj <raj.khem@gmail.com 
+> <mailto:raj.khem@gmail.com>> wrote:
 >
-> Aleksey (from jdk-dev) mentioned [6] a user on IRC called hitendra had
-> a similar sounding issue with Yocto Sumo / i.MX6 / OpenJDK 8 162-b12,
-> and I've also come across a brief / frutiless IRC log in #yocto [7].
+>     I am seeing errors on some builders
 >
-> Regards,
-> Attie
+>     http://errors.yoctoproject.org/Errors/Details/202341/
+>     On Mon, Nov 19, 2018 at 11:29 PM Martin Jansa
+>     <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>> wrote:
+>     >
+>     > Looks, good.
+>     >
+>     > Adding variable for 20181120 might help with maintenance (if we
+>     need to
+>     > change just checksums in future). And with good variable name (or a
+>     > comment) it would also document in the recipe why we're using
+>     this in
+>     > downloadfilename.
+>     >
+>     > On Tue, Nov 20, 2018 at 7:48 AM <changqing.li@windriver.com
+>     <mailto:changqing.li@windriver.com>> wrote:
+>     >
+>     > > From: Changqing Li <changqing.li@windriver.com
+>     <mailto:changqing.li@windriver.com>>
+>     > >
+>     > > previous change of checksum don't trigger archive to
+>     re-downloaded,
+>     > > , which will cause checksum mismatch. add downloadfilename to
+>     > > trigger re-download.
+>     > >
+>     > > 1. for user with PREMIRROR, another benefit is it can still
+>     compile
+>     > > success event upstream checksum change frequently.
+>     > > 2. but for user don't use PREMIRROR, if upstream checksum changed,
+>     > > still might have checksum mismatch problem.
+>     > >
+>     > > Signed-off-by: Changqing Li <changqing.li@windriver.com
+>     <mailto:changqing.li@windriver.com>>
+>     > > ---
+>     > >  .../recipes-support/geoip/geoip_1.6.12.bb
+>     <http://geoip_1.6.12.bb>         | 24
+>     > > +++++++++++-----------
+>     > >  1 file changed, 12 insertions(+), 12 deletions(-)
+>     > >
+>     > > diff --git
+>     a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>     <http://geoip_1.6.12.bb>
+>     > > b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>     <http://geoip_1.6.12.bb>
+>     > > index 1e1a7ff..57f0b67 100644
+>     > > --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>     <http://geoip_1.6.12.bb>
+>     > > +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>     <http://geoip_1.6.12.bb>
+>     > > @@ -9,10 +9,10 @@ HOMEPAGE = "http://dev.maxmind.com/geoip/"
+>     > >  SECTION = "libdevel"
+>     > >
+>     > >  SRC_URI = "git://github.com/maxmind/geoip-api-c.git
+>     <http://github.com/maxmind/geoip-api-c.git> \
+>     > > -
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat
+>     > > \
+>     > > -
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat
+>     > > \
+>     > > -
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat
+>     > > \
+>     > > -
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat
+>     > > \
+>     > > +
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz
+>     > > \
+>     > > +
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz
+>     > > \
+>     > > +
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz
+>     > > \
+>     > > +
+>     > >
+>     http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz
+>     > > \
+>     > >             file://run-ptest \
+>     > >  "
+>     > >  SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>     > > @@ -20,14 +20,14 @@ SRCREV =
+>     "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>     > >  SRC_URI[GeoIP-dat.md5sum] = "d538e57ad9268fdc7955c6cf9a37c4a9"
+>     > >  SRC_URI[GeoIP-dat.sha256sum] =
+>     > > "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
+>     > >
+>     > > -SRC_URI[GeoIPv6-dat.md5sum] = "00dc3b3f53eb5f7bf6915f939998f12c"
+>     > > -SRC_URI[GeoIPv6-dat.sha256sum] =
+>     > > "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
+>     > > +SRC_URI[GeoIPv6-dat.md5sum] = "a908d7a51c3883eb8f693ca197c7a142"
+>     > > +SRC_URI[GeoIPv6-dat.sha256sum] =
+>     > > "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
+>     > >
+>     > >  SRC_URI[GeoLiteCity-dat.md5sum] =
+>     "d700c137232f8e077ac8db8577f699d9"
+>     > >  SRC_URI[GeoLiteCity-dat.sha256sum] =
+>     > > "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
+>     > >
+>     > > -SRC_URI[GeoLiteCityv6-dat.md5sum] =
+>     "7f6333d433d8127181ea3c5828287c98"
+>     > > -SRC_URI[GeoLiteCityv6-dat.sha256sum] =
+>     > > "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
+>     > > +SRC_URI[GeoLiteCityv6-dat.md5sum] =
+>     "8ac3506ccabaae7e9f7d6301c2654313"
+>     > > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =
+>     > > "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
+>     > >
+>     > >  LICENSE = "LGPL-2.1"
+>     > >
+>     > > @@ -44,10 +44,10 @@ EXTRA_OECONF = "--disable-static         
+>          \
+>     > >  do_install() {
+>     > >      make DESTDIR=${D} install
+>     > >      install -d ${D}/${datadir}/GeoIP
+>     > > -    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+>     > > -    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
+>     > > -    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
+>     > > -    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
+>     > > +    install ${WORKDIR}/GeoIP.dat.20181120
+>     ${D}/${datadir}/GeoIP/GeoIP.dat
+>     > > +    install ${WORKDIR}/GeoIPv6.dat.20181120
+>     > > ${D}/${datadir}/GeoIP/GeoIPv6.dat
+>     > > +    install ${WORKDIR}/GeoLiteCity.dat.20181120
+>     > > ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+>     > > +    install ${WORKDIR}/GeoLiteCityv6.dat.20181120
+>     > > ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>     > >      ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+>     > >  }
+>     > >
+>     > > --
+>     > > 2.7.4
+>     > >
+>     > > --
+>     > > _______________________________________________
+>     > > Openembedded-devel mailing list
+>     > > Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     > >
+>     > --
+>     > _______________________________________________
+>     > Openembedded-devel mailing list
+>     > Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-> [1]: https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk?h=sumo
-> [2]: http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002246.html
-> [3]: https://pastebin.com/raw/iXTz8v9z
-> [4]: https://builds.shipilev.net/openjdk-jdk8-redhat/openjdk-jdk8-redhat-latest-linux-arm32-hflt-zero-fastdebug.tar.xz
-> [5]: https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk?h=master-next
-> [6]: http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002251.html
-> [7]: https://www.yoctoproject.org/irc/%23yocto.2018-10-23.log.html#t2018-10-23T09:46:21
+-- 
+BRs
+
+Sandy(Li Changqing)
+
 
