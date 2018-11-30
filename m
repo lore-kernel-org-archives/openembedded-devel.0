@@ -1,54 +1,43 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 401 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 30 Nov 2018 12:13:14 UTC
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id 890E56D682
+Return-Path: <attie.grande@argentum-systems.co.uk>
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 481E86D6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2018 12:13:14 +0000 (UTC)
-Received: (qmail 7582 invoked by uid 1003); 30 Nov 2018 12:06:38 -0000
-Received: from unknown (HELO ?172.20.2.92?) (philip@opensdr.com@38.90.133.135)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted)
-	SMTP; 30 Nov 2018 12:06:38 -0000
-To: Khem Raj <raj.khem@gmail.com>, "Eggleton, Paul" <paul.eggleton@intel.com>
-References: <2403371.OeEdUFaxhe@localhost.localdomain>
-	<CAMKF1srJiBZnB42fhoYOvutDe_Pv0sBRq79p=69UWfgt4QRckg@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <f22e2865-f2be-ecd5-5a13-e69c0a8a6891@balister.org>
-Date: Fri, 30 Nov 2018 07:06:31 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+	Fri, 30 Nov 2018 13:10:29 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id f4so4777186edq.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Nov 2018 05:10:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=argentum-systems-co-uk.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=qEl1z30GNIbsJ/9vb5Uv/d7c58LQ/XYIfrhkvsRs4O4=;
+	b=ISSXZ0muZ3Vptdg8BEuYVNkWUgQRvWPK93pu01PKomEhzF/lAijQtkQC8T1I5r5Sxv
+	1GjDgYu6C+xLFGBGF0yDukXe4nf0MVLmTlwu7dPoyljnH481vaqSLQ5FsjcfaZUHbfH2
+	CBT5NiabdLcIAcn8OLGMlP9GREAVXwQazNgPDpagMkSJR9CR11aORm+6Gd33AApBPqzf
+	MGfcxhekT5IounDPide1NCCcidbYNfS78A+NlDbf4D8zCvhJpwiyiZOgmUbVxy/KXOpL
+	uzEYnvLz1nSKhG7cPiylEFyl7LTbQxI46iqFxsUZoXU0LhJBiKQcafZgu/zAanJBu3rS
+	uz6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=qEl1z30GNIbsJ/9vb5Uv/d7c58LQ/XYIfrhkvsRs4O4=;
+	b=e+UfRuvC0BSBm0IWldRL8tPlXYhDL2J4Nw881Yo9+tQfs+Wgu5z32i0p9H6Mtroz/U
+	LjQVy+mFYOkB6FTQlhLKp5blWBeYGCkQrYS4uY/dXXi9XKXc+26ILWtnxImSiN4O/nDJ
+	X2PrWnFH2rObxOjgWprjIbM6GHB274k+lGuZODgyA2yzuyuxG/MDySuww3NPzNKg/Fxf
+	Qhk2RQ1ZyYPyz6fwol2X7KhW16FqyTfxTQPjduuuoWK6KKqvcPNG0Y3j4qprzTz/IOOz
+	urEoNBBX9jpNnuericzkwoUhT1CM+OkcNTFliadzWzn+w749wT/gpO3DLYds/nk84jij
+	X+Og==
+X-Gm-Message-State: AA+aEWZv3SM76cLxSfRZV35t0BdRmmM74TyLNFyV/Ld6dNBvlF+yUYU+
+	K8AYxmIKkLri2LOedDNLxGve03vitS02+w+vNRqa9ro5SCY=
+X-Google-Smtp-Source: AFSGD/XtYZHXPUXmSxRRW3fv/+EIbcnIMhbbtK1G+P0MAkZE1/WIbs31xVh7epsWrQazBrKwtXW8d82Rm07Q64g+m/I=
+X-Received: by 2002:a50:afa3:: with SMTP id h32mr5201079edd.150.1543583429599; 
+	Fri, 30 Nov 2018 05:10:29 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srJiBZnB42fhoYOvutDe_Pv0sBRq79p=69UWfgt4QRckg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Github pull requests
+From: Attie Grande <attie.grande@argentum-systems.co.uk>
+Date: Fri, 30 Nov 2018 13:10:19 +0000
+Message-ID: <CAAsqSTdeaUH5u4-Tjb-Z=pSXBVGftNGV6FX7VqCB7RZMZQyn1A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-java][PATCH 1/2] openjdk-8: undefined behaviour in src/os_cpu/linux_zero/vm/os_linux_zero.cpp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,46 +50,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2018 12:13:14 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Nov 2018 13:10:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 11/29/2018 09:31 PM, Khem Raj wrote:
-> On Thu, Nov 29, 2018 at 5:26 PM Paul Eggleton <paul.eggleton@intel.com> wrote:
->>
->> Hi folks
->>
->> Someone pointed out that there are quite a few pull requests on github under
->> https://github.com/openembedded/. I know we don't accept these, but it seems
->> to me we ought to clean up the ones that are there in order to avoid people
->> thinking that they might be (and probably comment on the ones where we haven't
->> done so or the submitter hasn't sent them to the mailing list already). I'll
->> volunteer to clean them up, but I don't currently have access - can someone
->> grant that to me?
-> 
-> I think that will be good. I have taken care of meta-oe ones but I can not
-> close them
+Fixes potential UB that can be exposed by newer GCC versions.
 
-Do we need to adjust github privileges so you can close them? Let's chat
-next week and see what we can do to make this easier.
+The original patch (below) has been modified to work with jdk8.
 
-Philip
+Further information:
+  https://bugs.openjdk.java.net/browse/JDK-8202600
+  http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916
 
+Signed-off-by: Attie Grande <attie.grande@argentum-systems.co.uk>
+---
+ recipes-core/openjdk/openjdk-8-release-16xbyy.inc              |  1 +
+ .../JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch | 10 ++++++++++
+ 2 files changed, 11 insertions(+)
+ create mode 100644
+recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
 
-> 
->>
->> Thanks,
->> Paul
->>
->> --
->> Paul Eggleton
->> Intel Open Source Technology Centre
->>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+index bd4a349..23c99fe 100644
+--- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
++++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+@@ -16,6 +16,7 @@ PATCHES_URI = "\
+     file://0008-jdk-use-correct-include-for-signal.patch \
+     file://0009-jdk-disable-backtrace-musl-build-fix.patch \
+     file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
++    file://JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch \
+ "
+ # some patches extracted from
+http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
+ # reported via
+http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
+diff --git a/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+new file mode 100644
+index 0000000..f01fea3
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+@@ -0,0 +1,10 @@
++--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Tue Apr 14
+11:40:13 2015 +0200
+++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Thu May 03
+18:59:48 2018 +0200
++@@ -408,6 +408,7 @@
++
++ extern "C" {
++   int SpinPause() {
+++    return 0; // Shouldn't matter.
++   }
++
++
+-- 
+2.7.4
 
