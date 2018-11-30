@@ -1,50 +1,54 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C2296D688
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 03AA760778
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2018 08:21:00 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id v13so4372476wrw.5
+	Fri, 30 Nov 2018 08:22:24 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id v13so4376245wrw.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2018 00:21:01 -0800 (PST)
+	Fri, 30 Nov 2018 00:22:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Gq28ebDOu7T+y00gOwk+Uwgs6tuRazj4LRvXKyIDim0=;
-	b=aYGfgFnXV9g3B3GYyCIHnWtw3X+DXDF1U3QV/ZnaqwTOiRX0Y5lHCzjXjrn8JNmdgN
-	uRRiW8wWNMC2BJhfZqSC/+m2oGUodojgr/ol/QwldrgjYDbewZukVvgRzv41kjkwy6ta
-	Jsv//7HnoW8glTxuwKukOkVKdbs5Z0BvINtesgmY54vCYLWPQK6m+3PM+0E5w09Pe44l
-	cJA26hgj0H80sc37KiRqdabsfwJPfHBduKe1TdUPLhPuzWGtgxxRFcaRBVmApU1YmQ9e
-	xFqyAPs40kpToEy1yCstHtn12ZDvhPt+bI/3SVpJQzNA8g4p9GlqQ4TZEcJinpJfxz0p
-	rZ1Q==
+	:cc; bh=C5T4DdCnCFR0zfq/hPnb/xiDhFBGw+EJqrdYIy5YGa8=;
+	b=uFdWf8Fp8UKbQa8drpaspxDB8CTzI/pxbrIkX2rnVRf+vsO0RYAq5Lw0nRDhiaU2Dx
+	j6jsKfvwPjZxbMbsLkbSE6G0VV6ycEtUoqVGLPgi6oVUr5JbDSZ7/eIRG6EZ5JfL9uRz
+	VT+Xzp/GW5sGIQNQq72ucqn6zck2zhU3bE+PcCSc8n33BNDfrtt2IFlpFvLRhgbDIaaW
+	HeBKvfr/Sv7BGBOr0pJ8Adv1jpIZQbVASLRi7eOPjDhgiCg7bxCLffoOc6QHyKkpKzS0
+	dZgsQw+cuERIyn5JZYBKcvSnEcB5fPf0MvEhL63AwzAwEnPgRtqFAubXug53y/ztw7CD
+	u1Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Gq28ebDOu7T+y00gOwk+Uwgs6tuRazj4LRvXKyIDim0=;
-	b=XCeBEovG9DS6VeT8nY1KRQml2qeH62Y/IyBPRcUK+btPdJgUp3aQh68PtptsdfkPIH
-	bUblCno+XRKFUxvV0QSAl0N08xZA8eKweP0Ads2cjIgSlgbVmNY7caIRZxlsdRTVlogi
-	3E1yctajWiz2ybrusoYVyfqFQmO8YsOEOxXZ8JRenTcE4sHqTxXEJm0EoBZNxFxFRbS0
-	usjFnt+QjbKhwpAykeqev3LDpKN8f5lXMd+zKkVrc1vTWOwZrSV/6oAWVpfK/9l+GuU9
-	lWbps5vkSzCaz3lfeYqxa4JetuBa+LhV+HT40FHvHYJRCyXTShCMcp2cNiieEdJ3tLwM
-	EG6g==
-X-Gm-Message-State: AA+aEWbankPfg0Csihnz04PH20BF/YXm72soWlx3OFi7Q0WIhdHywpkF
-	We4HSlqox8rwMCr25VUkWotvmOCa76sGs8+XZ24=
-X-Google-Smtp-Source: AFSGD/VlK/YwwSsVa2mzoWqN7KaP7W777RDpRLBlsrqu7wxFl4dAwnfH4lMi71oZbvb5CPUCmt+pq1VRHw+tT25bghE=
-X-Received: by 2002:a5d:5111:: with SMTP id s17mr3971903wrt.43.1543566060670; 
-	Fri, 30 Nov 2018 00:21:00 -0800 (PST)
+	bh=C5T4DdCnCFR0zfq/hPnb/xiDhFBGw+EJqrdYIy5YGa8=;
+	b=oFqMc+H1Uk3H++Wd8W6xQZDy33QMmxtQ36ymzQT1Z1PK0YTiz87zNoI14GO6Dtg0WB
+	GkYYRAmZ6fqFB14i9E3UzIzcT9lWdZLkNxDUK8lwsn9Ez9EAB5ptQghJBPBNCkFM4yy9
+	Q6uxQFqgSX5ccfNjqi/X0el2Go+Hw55Q0jAE+yWrv/yW2XCGW/bIu736hW8clq0HNmAb
+	7GmIYYQOtIYHmvRnwz607iV66hj6WnosRh6Po6zGaKX46kPwJcX43Q5qGlJTa8HhBtI/
+	ZovExWFgmHin6OXth+f9X5U2rURcxcf91NTaIib/2skzvGJIY2xRi2swcUq0/+IG128+
+	fovQ==
+X-Gm-Message-State: AA+aEWZN/P/qDKuoGg0HsfDR5qiK9Rldl/T2NYrur3pMTmQ7qWUcHI6G
+	YepmjWDRS1zoiexf3sQ7/jwnI0A01+gEn1CkHBM=
+X-Google-Smtp-Source: AFSGD/VUU+1Wb1g+cOqLfFqJ+dawgFbRVTgbLzcjR5ldO2tC4VoyCCaM1j+CU9AIGJln13REk+lQ3uDCZW044xY6PsA=
+X-Received: by 2002:a05:6000:14f:: with SMTP id
+	r15mr4324754wrx.53.1543566145620; 
+	Fri, 30 Nov 2018 00:22:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20181120145631.70102-1-uvv.mail@gmail.com>
-	<CA+chaQd8u--V+6QcD1vnH8HdLuEKp75p7rQhXfNwLOu+HAQ0Hg@mail.gmail.com>
-	<CAKHfEagnSLdftrW0WOOX_HdOqC66ciDS01o+f9par-TJapJfNQ@mail.gmail.com>
-In-Reply-To: <CAKHfEagnSLdftrW0WOOX_HdOqC66ciDS01o+f9par-TJapJfNQ@mail.gmail.com>
+References: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
+	<CA+chaQfK8BxE=7yh9CtbeOk5rO-Tg1siLePbfZ8C3Vh+_fk42Q@mail.gmail.com>
+	<CAMKF1spT8MKNMMDy1L-t4WdkNYg3Ouvbk_bj+Um=0DKqNenK-Q@mail.gmail.com>
+	<CA+chaQeD+MHPAnK646z0kbT6GzQ7-fBoG_4YPfx6Hp=VJg9WwA@mail.gmail.com>
+	<608363b5-319f-0e49-303c-48bda23c1e48@windriver.com>
+	<CAMKF1sqJXeW6DnwmYEWT1s984JPvvsGXQk7Rn-fUwsVd9iy0jQ@mail.gmail.com>
+	<2dfdfe62-c5df-f05b-cf72-c77ee75331a9@windriver.com>
+In-Reply-To: <2dfdfe62-c5df-f05b-cf72-c77ee75331a9@windriver.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 30 Nov 2018 09:20:51 +0100
-Message-ID: <CA+chaQffmqUa0Ar6pr0g-kPGeRNrhVQ8TO39HUx8FXhmFqP5wQ@mail.gmail.com>
-To: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Date: Fri, 30 Nov 2018 09:22:17 +0100
+Message-ID: <CA+chaQc-tu7J-6GYo-Y_HiEBMOgcA96giH4tDb67AbGwP5ZhKg@mail.gmail.com>
+To: changqing.li@windriver.com
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Vyacheslav.Yurkov@bruker.com,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] glog: fixed the build for mips and other platforms
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] geoip: add downloadfilename for geoip database files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,185 +61,291 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2018 08:21:00 -0000
+X-List-Received-Date: Fri, 30 Nov 2018 08:22:25 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, if you don't have mulitib build ready, I can test it as soon as you
-send it to ML.
+I think Khem meant http://sources.openembedded.org/ it returns 403, because
+listing is disabled, but the files are there.
 
-On Fri, Nov 30, 2018 at 8:55 AM Vyacheslav Yurkov <uvv.mail@gmail.com>
+On Fri, Nov 30, 2018 at 3:18 AM Changqing Li <changqing.li@windriver.com>
 wrote:
 
-> Hi Martin,
-> I guess this issue is supposed to be fixed in glog master already, because
-> it uses ${CMAKE_INSTALL_LIBDIR}, not hard-coded "lib". I will backport a
-> patch for that
 >
-> Regards,
-> Vyacheslav
+> On 11/29/18 9:55 AM, Khem Raj wrote:
 >
-> On Thu, Nov 29, 2018 at 4:51 PM Martin Jansa <martin.jansa@gmail.com>
+> We have two options
+>
+> Download and rename may be add a date component and save it on
+> sources.oe.org
+>
+> Hi,  I cannot open this website
+>
+>
+> Second option is to download the databases during build as temporary
+> artifacts but this might cause reproducibility problems
+>
+> Either way it is going to have some issues
+> May be option 1 even though tedious can be better of two
+>
+> On Wed, Nov 28, 2018 at 5:31 PM Changqing Li <changqing.li@windriver.com>
 > wrote:
 >
->> Hi,
+>> Khem and Marthin,
 >>
->> there is one more issue when multilib is enabled.
+>> The failure still caused by frequently changed checksum of the database.
+>> I send the patch on 11.20.
 >>
->> ERROR: QA Issue: glog: Files/directories were installed but not shipped
->> in any package:
->>   /usr/lib/libglog.so.0.3.5
->>   /usr/lib/libglog.so.0
->>   /usr/lib/libglog.so
->>   /usr/lib/cmake
->>   /usr/lib/cmake/glog
->>   /usr/lib/cmake/glog/glog-config-version.cmake
->>   /usr/lib/cmake/glog/FindLibunwind.cmake
->>   /usr/lib/cmake/glog/glog-targets-noconfig.cmake
->>   /usr/lib/cmake/glog/glog-config.cmake
->>   /usr/lib/cmake/glog/glog-targets.cmake
->> Please set FILES such that these items are packaged. Alternatively if
->> they are unneeded, avoid installing them or delete them within do_install.
->> glog: 10 installed and not shipped files. [installed-vs-shipped]
+>> but the checksum changed on 1121, and it also changed on 1128, seems lik=
+e
+>> weekly change.
 >>
->> It shouldn't hardcode "lib" directory and it should respect libdir from
->> OE environment instead (in this case /usr/lib64).
+>> but it should not failed if there is a premirror saved the
 >>
->> On Tue, Nov 20, 2018 at 3:57 PM Vyacheslav Yurkov <uvv.mail@gmail.com>
->> wrote:
+>> Here is a result I get:
 >>
->>> From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
->>>
->>> According to build log
->>> http://errors.yoctoproject.org/Errors/Details/201286/
->>> FindLibunwind wokred only for x86, arm, and x86_64. This patch extends
->>> the
->>> cmake module to work with mips, ia64, ppc(64) and other architectures
->>> supported
->>> by libunwind
->>>
->>> Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
->>> ---
->>>  ...0002-Find-Libunwind-during-configure.patch | 53 +++++++++++--------
->>>  1 file changed, 30 insertions(+), 23 deletions(-)
->>>
->>> diff --git
->>> a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
->>> b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
->>> index 3a6f824ea..15cf67fd2 100644
->>> ---
->>> a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
->>> +++
->>> b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
->>> @@ -1,11 +1,11 @@
->>>  diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
->>>  --- a/cmake/FindLibunwind.cmake        1970-01-01 01:00:00.000000000
->>> +0100
->>> -+++ b/cmake/FindLibunwind.cmake        2018-11-02 14:04:35.460437058
->>> +0100
->>> -@@ -0,0 +1,37 @@
->>> ++++ b/cmake/FindLibunwind.cmake        2018-11-20 15:53:48.799078114
->>> +0100
->>> +@@ -0,0 +1,54 @@
->>>  +# - Try to find libunwind
->>>  +# Once done this will define
->>>  +#
->>> -+#  LIBUNWIND_FOUND - system has libunwind
->>> ++#  Libunwind_FOUND - system has libunwind
->>>  +#  unwind - cmake target for libunwind
->>>  +
->>>  +find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
->>> @@ -15,11 +15,24 @@ diff -uNr a/cmake/FindLibunwind.cmake
->>> b/cmake/FindLibunwind.cmake
->>>  +
->>>  +if (CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
->>>  +    set(LIBUNWIND_ARCH "arm")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch64")
->>> ++    set(LIBUNWIND_ARCH "aarch64")
->>>  +elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
->>> -+        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64")
->>> ++        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64" OR
->>> ++        CMAKE_SYSTEM_PROCESSOR STREQUAL "corei7-64")
->>>  +    set(LIBUNWIND_ARCH "x86_64")
->>>  +elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86$")
->>>  +    set(LIBUNWIND_ARCH "x86")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc64")
->>> ++    set(LIBUNWIND_ARCH "ppc64")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
->>> ++    set(LIBUNWIND_ARCH "ppc32")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^mips")
->>> ++    set(LIBUNWIND_ARCH "mips")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^hppa")
->>> ++    set(LIBUNWIND_ARCH "hppa")
->>> ++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ia64")
->>> ++    set(LIBUNWIND_ARCH "ia64")
->>>  +endif()
->>>  +
->>>  +find_library (UNWIND_LIBRARY_PLATFORM NAMES "unwind-${LIBUNWIND_ARCH}"
->>> DOC "unwind library platform")
->>> @@ -35,13 +48,17 @@ diff -uNr a/cmake/FindLibunwind.cmake
->>> b/cmake/FindLibunwind.cmake
->>>  +
->>>  +mark_as_advanced (UNWIND_LIBRARY UNWIND_LIBRARY_PLATFORM)
->>>  +
->>> -+add_library(unwind INTERFACE IMPORTED)
->>> -+set_target_properties(unwind PROPERTIES
->>> -+    INTERFACE_LINK_LIBRARIES
->>> "${UNWIND_LIBRARY};${UNWIND_LIBRARY_PLATFORM}"
->>> -+)
->>> ++if (Libunwind_FOUND)
->>> ++    add_library(unwind INTERFACE IMPORTED)
->>> ++    set_target_properties(unwind PROPERTIES
->>> ++        INTERFACE_LINK_LIBRARIES
->>> "${UNWIND_LIBRARY};${UNWIND_LIBRARY_PLATFORM}"
->>> ++    )
->>> ++else()
->>> ++    message("Can't find libunwind library")
->>> ++endif()
->>>  diff -uNr a/CMakeLists.txt b/CMakeLists.txt
->>> ---- a/CMakeLists.txt   2018-11-02 14:02:21.784835854 +0100
->>> -+++ b/CMakeLists.txt   2018-11-02 14:03:16.796935594 +0100
->>> +--- a/CMakeLists.txt   2018-11-20 15:49:07.576278417 +0100
->>> ++++ b/CMakeLists.txt   2018-11-20 15:49:32.106819928 +0100
->>>  @@ -58,7 +58,6 @@
->>>   check_include_file (execinfo.h HAVE_EXECINFO_H)
->>>   check_include_file (glob.h HAVE_GLOB_H)
->>> @@ -91,23 +108,13 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
->>>     DESTINATION lib/cmake/glog)
->>>
->>>   install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
->>> lib/cmake/glog)
->>> -Binary files a/.git/index and b/.git/index differ
->>>  diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
->>> ---- a/glog-config.cmake.in     2018-11-02 14:02:21.784835854 +0100
->>> -+++ b/glog-config.cmake.in     2018-11-02 14:03:16.796935594 +0100
->>> -@@ -4,4 +4,15 @@
->>> +--- a/glog-config.cmake.in     2018-11-20 15:49:07.576278417 +0100
->>> ++++ b/glog-config.cmake.in     2018-11-20 15:52:32.330418489 +0100
->>> +@@ -4,4 +4,6 @@
->>>
->>>   @gflags_DEPENDENCY@
->>>
->>> -+# Record the state of the CMake module path when this script was
->>> -+# called so that we can ensure that we leave it in the same state on
->>> -+# exit as it was on entry, but modify it locally.
->>> -+set(UNWIND_CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
->>> -+
->>> -+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
->>>  +find_dependency (Libunwind)
->>> -+
->>> -+# Restore original module path
->>> -+set(CMAKE_MODULE_PATH "${UNWIND_CMAKE_MODULE_PATH}")
->>>  +
->>>   include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
->>> --
->>> 2.19.1
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
+>> $ md5sum 1128/*v6*
+>> d98a04eded0b08b945b5629106d58760  1128/GeoIPv6 (1).dat.gz
+>> 4d48c102ec68298b3fc7f57763455cb5  1128/GeoLiteCityv6.dat.gz
+>> $ md5sum 1121/*v6*
+>> b0f82334f94ca89872e7722db3511bb9  1121/GeoIPv6.dat.gz
+>> 50ad18a8a3ea4bba7c929bea6e22db75  1121/GeoLiteCityv6.dat.gz
+>> $ md5sum 1120/*v6*
+>> a908d7a51c3883eb8f693ca197c7a142  1120/GeoIPv6.dat.gz
+>> 8ac3506ccabaae7e9f7d6301c2654313  1120/GeoLiteCityv6.dat.gz
 >>
+>>
+>> On 11/28/18 3:14 AM, Martin Jansa wrote:
+>>
+>> I'm seeing different checksum than both your builder and the recipe.
+>>
+>> $ wget http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+>> --2018-11-27 20:06:32--
+>> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+>> Resolving geolite.maxmind.com... 104.16.37.47, 104.16.38.47,
+>> 2606:4700::6810:252f, ...
+>> Connecting to geolite.maxmind.com|104.16.37.47|:80... connected.
+>> HTTP request sent, awaiting response... 200 OK
+>> Length: 1209046 (1.2M) [application/octet-stream]
+>> Saving to: =E2=80=98GeoIPv6.dat.gz=E2=80=99
+>>
+>> 2018-11-27 20:06:32 (10.3 MB/s) - =E2=80=98GeoIPv6.dat.gz=E2=80=99 saved=
+ [1209046/1209046]
+>>
+>> $ md5sum GeoIPv6.dat.gz
+>> d98a04eded0b08b945b5629106d58760  GeoIPv6.dat.gz
+>>
+>> Is this the legacy archive? Because
+>> https://dev.maxmind.com/geoip/legacy/geolite/ now shows following:
+>>
+>> Yes,  I have  pointed out this problem  the first time I changed the
+>> checksum. maybe we should upgrade
+>>
+>> to geoip2,  and  drop current geoip1.6.  but I think even with geoip2,
+>> since it's database still not version,
+>>
+>> maybe also will met similar problem.
+>>
+>>
+>> //changqing
+>>
+>>
+>> Updated versions of the GeoLite Legacy databases are now only available
+>> to redistribution license customers, although anyone can continue to
+>> download the March 2018 GeoLite Legacy builds. Starting January 2, 2019,
+>> the last build will be removed from our website. GeoLite Legacy database
+>> users will need to switch to the GeoLite2 or commercial GeoIP databases =
+and
+>> update their integrations by January 2, 2019.
+>>
+>> For more information, please visit our Support Center.
+>>
+>> Note: After careful consideration, taking into account customer feedback=
+,
+>> we have decided against removing latitude and longitude coordinates from
+>> the GeoLite2 databases. We are in the process of reviewing coordinates u=
+sed
+>> in all of our GeoLite2 and GeoIP databases to ensure there is no risk of
+>> misuse.
+>>
+>> * GeoLite2 databases are free IP geolocation databases comparable to, bu=
+t
+>> less accurate than, MaxMind=E2=80=99s GeoIP2 databases. Please remember =
+to use the
+>> accuracy radius if displaying coordinates on a map.
+>>
+>> New Database Format Available: This page is for our GeoLite Legacy
+>> databases. For our latest database format, please visit our GeoLite2
+>> Databases page. We offer redistribution licenses for our newer GeoLite2
+>> databases that will allow you to package the databases with your commerc=
+ial
+>> products. For more information, please visit the GeoLite2 Commercial
+>> Redistribution page.
+>>
+>>
+>> On Tue, Nov 27, 2018 at 8:04 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>>> I am seeing errors on some builders
+>>>
+>>> http://errors.yoctoproject.org/Errors/Details/202341/
+>>> On Mon, Nov 19, 2018 at 11:29 PM Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>> >
+>>> > Looks, good.
+>>> >
+>>> > Adding variable for 20181120 might help with maintenance (if we need =
+to
+>>> > change just checksums in future). And with good variable name (or a
+>>> > comment) it would also document in the recipe why we're using this in
+>>> > downloadfilename.
+>>> >
+>>> > On Tue, Nov 20, 2018 at 7:48 AM <changqing.li@windriver.com> wrote:
+>>> >
+>>> > > From: Changqing Li <changqing.li@windriver.com>
+>>> > >
+>>> > > previous change of checksum don't trigger archive to re-downloaded,
+>>> > > , which will cause checksum mismatch. add downloadfilename to
+>>> > > trigger re-download.
+>>> > >
+>>> > > 1. for user with PREMIRROR, another benefit is it can still compile
+>>> > > success event upstream checksum change frequently.
+>>> > > 2. but for user don't use PREMIRROR, if upstream checksum changed,
+>>> > > still might have checksum mismatch problem.
+>>> > >
+>>> > > Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>> > > ---
+>>> > >  .../recipes-support/geoip/geoip_1.6.12.bb          | 24
+>>> > > +++++++++++-----------
+>>> > >  1 file changed, 12 insertions(+), 12 deletions(-)
+>>> > >
+>>> > > diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>> > > b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>> > > index 1e1a7ff..57f0b67 100644
+>>> > > --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>> > > +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>> > > @@ -9,10 +9,10 @@ HOMEPAGE =3D "http://dev.maxmind.com/geoip/"
+>>> > >  SECTION =3D "libdevel"
+>>> > >
+>>> > >  SRC_URI =3D "git://github.com/maxmind/geoip-api-c.git \
+>>> > > -
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP=
+.dat.gz;apply=3Dno;name=3DGeoIP-dat
+>>> > > \
+>>> > > -
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=
+=3Dno;name=3DGeoIPv6-dat
+>>> > > \
+>>> > > -
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;a=
+pply=3Dno;name=3DGeoLiteCity-dat
+>>> > > \
+>>> > > -
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/G=
+eoLiteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat
+>>> > > \
+>>> > > +
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP=
+.dat.gz;apply=3Dno;name=3DGeoIP-dat;downloadfilename=3DGeoIP.dat.20181120.g=
+z
+>>> > > \
+>>> > > +
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=
+=3Dno;name=3DGeoIPv6-dat;downloadfilename=3DGeoIPv6.dat.20181120.gz
+>>> > > \
+>>> > > +
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;a=
+pply=3Dno;name=3DGeoLiteCity-dat;downloadfilename=3DGeoLiteCity.dat.2018112=
+0.gz
+>>> > > \
+>>> > > +
+>>> > >
+>>> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/G=
+eoLiteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat;downloadfilename=3D=
+GeoLiteCityv6.dat.20181120.gz
+>>> > > \
+>>> > >             file://run-ptest \
+>>> > >  "
+>>> > >  SRCREV =3D "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>> > > @@ -20,14 +20,14 @@ SRCREV =3D
+>>> "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>> > >  SRC_URI[GeoIP-dat.md5sum] =3D "d538e57ad9268fdc7955c6cf9a37c4a9"
+>>> > >  SRC_URI[GeoIP-dat.sha256sum] =3D
+>>> > > "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
+>>> > >
+>>> > > -SRC_URI[GeoIPv6-dat.md5sum] =3D "00dc3b3f53eb5f7bf6915f939998f12c"
+>>> > > -SRC_URI[GeoIPv6-dat.sha256sum] =3D
+>>> > > "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
+>>> > > +SRC_URI[GeoIPv6-dat.md5sum] =3D "a908d7a51c3883eb8f693ca197c7a142"
+>>> > > +SRC_URI[GeoIPv6-dat.sha256sum] =3D
+>>> > > "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
+>>> > >
+>>> > >  SRC_URI[GeoLiteCity-dat.md5sum] =3D "d700c137232f8e077ac8db8577f69=
+9d9"
+>>> > >  SRC_URI[GeoLiteCity-dat.sha256sum] =3D
+>>> > > "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
+>>> > >
+>>> > > -SRC_URI[GeoLiteCityv6-dat.md5sum] =3D
+>>> "7f6333d433d8127181ea3c5828287c98"
+>>> > > -SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
+>>> > > "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
+>>> > > +SRC_URI[GeoLiteCityv6-dat.md5sum] =3D
+>>> "8ac3506ccabaae7e9f7d6301c2654313"
+>>> > > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
+>>> > > "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
+>>> > >
+>>> > >  LICENSE =3D "LGPL-2.1"
+>>> > >
+>>> > > @@ -44,10 +44,10 @@ EXTRA_OECONF =3D "--disable-static             =
+  \
+>>> > >  do_install() {
+>>> > >      make DESTDIR=3D${D} install
+>>> > >      install -d ${D}/${datadir}/GeoIP
+>>> > > -    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+>>> > > -    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
+>>> > > -    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
+>>> > > -    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
+>>> > > +    install ${WORKDIR}/GeoIP.dat.20181120
+>>> ${D}/${datadir}/GeoIP/GeoIP.dat
+>>> > > +    install ${WORKDIR}/GeoIPv6.dat.20181120
+>>> > > ${D}/${datadir}/GeoIP/GeoIPv6.dat
+>>> > > +    install ${WORKDIR}/GeoLiteCity.dat.20181120
+>>> > > ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+>>> > > +    install ${WORKDIR}/GeoLiteCityv6.dat.20181120
+>>> > > ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>>> > >      ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+>>> > >  }
+>>> > >
+>>> > > --
+>>> > > 2.7.4
+>>> > >
+>>> > > --
+>>> > > _______________________________________________
+>>> > > Openembedded-devel mailing list
+>>> > > Openembedded-devel@lists.openembedded.org
+>>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>> > >
+>>> > --
+>>> > _______________________________________________
+>>> > Openembedded-devel mailing list
+>>> > Openembedded-devel@lists.openembedded.org
+>>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>> --
+>> BRs
+>>
+>> Sandy(Li Changqing)
+>>
+>> --
+> BRs
+>
+> Sandy(Li Changqing)
+>
 >
 
