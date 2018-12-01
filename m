@@ -1,39 +1,22 @@
-Return-Path: <niko.mauno@iki.fi>
-Received: from sypressi2.dnainternet.net (sypressi3.dnainternet.net
-	[83.102.40.158])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BAC56B074
+Return-Path: <psaavedra@igalia.com>
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id A9A056B512
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Dec 2018 18:08:48 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by sypressi2.dnainternet.net (Postfix) with ESMTP id F101416CF9;
-	Sat,  1 Dec 2018 19:58:29 +0200 (EET)
-X-Virus-Scanned: DNA Internet at dnainternet.net
-X-Spam-Flag: NO
-X-Spam-Score: 0.652
-X-Spam-Level: 
-X-Spam-Status: No, score=0.652 tagged_above=-9999 required=6
-	tests=[SPF_NEUTRAL=0.652] autolearn=disabled
-Received: from sypressi2.dnainternet.net ([83.102.40.158])
-	by localhost (sypressi2.dnainternet.net [127.0.0.1]) (DNA Internet,
-	port 10041)
-	with ESMTP id wkFGZejIx90d; Sat,  1 Dec 2018 19:58:29 +0200 (EET)
-Received: from omenapuu2.dnainternet.net (omenapuu2.dnainternet.net
-	[83.102.40.54])
-	by sypressi2.dnainternet.net (Postfix) with ESMTP id 9152916CF2;
-	Sat,  1 Dec 2018 19:58:29 +0200 (EET)
-Received: from localhost.localdomain (82-181-15-94.bb.dnainternet.fi
-	[82.181.15.94])
-	by omenapuu2.dnainternet.net (Postfix) with ESMTP id 23B182B6;
-	Sat,  1 Dec 2018 19:58:25 +0200 (EET)
-From: Niko Mauno <niko.mauno@iki.fi>
+	Sat,  1 Dec 2018 19:06:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Message-Id:Date:Subject:To:From;
+	bh=CiehkrkxzuKO0YyhjMtlD8T569CovsvmCqPMY1AGASI=; 
+	b=mWhQDxvIMtXbPckvumR8RUhYHOmeylL/xs2oUIqx4vz6M10IpeldLlXve9r0mW+m/z5bNXNZ6e1ednA52P2pOSBQuTvGX6xDkdoIOvGqViD4xl3NQ4nrd4vG2JDfWo9PYCbjk3tamH9EYkKx0LZGRXjBpCfXTbpMpFg7a/ZelyKyAmkQgksVtr7/sBF2GwopaphWKIPXmGdBSUCR9/BbQpjsNUYZEBL7WoIKrO9CrhjvI0Z/hskZ8qfKjqIZtrXHT95Mb+l3Q8s6ssE7ZLxCzAdS7Z4gex2OqWfNvc3t4xnAJxObH/xE0SB4/lp3FFtB4H+tmL090moBo4qtsI79Yw==;
+Received: from buildbox.local.igalia.com ([192.168.10.88])
+	by fanzine.igalia.com with esmtp (Exim) id 1gTAbN-0001Ej-QA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Dec 2018 20:06:53 +0100
+From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Dec 2018 19:57:13 +0200
-Message-Id: <20181201175714.119435-6-niko.mauno@iki.fi>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20181201175714.119435-1-niko.mauno@iki.fi>
-References: <20181201175714.119435-1-niko.mauno@iki.fi>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 6/7] python-pygobject: Fix style issue
+Date: Sat,  1 Dec 2018 20:06:29 +0100
+Message-Id: <cover.1543690801.git.psaavedra@igalia.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-openembedded][PATCH v2 0/7] add ibus with anthy, pinyin and table support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +29,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2018 18:08:48 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 01 Dec 2018 19:06:55 -0000
 
-Add missing space characters around the operator in SRCNAME declaration
+This serie adds IBus with support for alphabetic tables (Chinese,
+Korean ...), Pinyin (Chinese), Anthy (Japanese) into meta-openembedded
+layer.
 
-Signed-off-by: Niko Mauno <niko.mauno@iki.fi>
----
- meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Motivation of the change in dconf is documented in:
 
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
-index a030df98c..87c1202a1 100644
---- a/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
-+++ b/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
-@@ -8,7 +8,7 @@ inherit gnomebase gobject-introspection distutils-base upstream-version-is-even
- 
- DEPENDS += "python glib-2.0"
- 
--SRCNAME="pygobject"
-+SRCNAME = "pygobject"
- SRC_URI = " \
-     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
- "
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=13040
+
+This serie is in conflict with:
+
+   https://patchwork.openembedded.org/patch/155947/
+
+The following changes since commit c26b10b155cf7873ffc8e966f95fd4abed8230c6:
+
+  opensc: 0.18.0 version fix fetch error (2018-11-16 14:46:44 -0800)
+
+are available in the git repository at:
+
+  git://github.com/psaavedra/meta-openembedded ibus
+  https://github.com/psaavedra/meta-openembedded/tree/ibus
+
+Pablo Saavedra (7):
+  pyzy: add pyzy recipe
+  dconf: remove gsettings inherit schemas
+  ibus: add ibus recipe
+  ibus-anthy: add ibus-anthy recipe
+  ibus-pinyin: add ibus-pinyin recipe
+  ibus-table: add ibus-table recipe
+  ibus-table-chinese: add ibus-table-chinese recipe
+
+ meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb     |    2 +-
+ .../ibus/ibus-anthy/fix_anthy_include_in_gir.patch |   19 +
+ meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb  |   37 +
+ meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb  |   30 +
+ .../0001-revert-CMakeLists.txt.patch               |  204 ++
+ .../ibus/ibus-table-chinese/0002-add-Modules.patch | 2933 ++++++++++++++++++++
+ .../0003-add-ChangeLog.prev.patch                  |   58 +
+ .../0005-fix-cmake-cross-compile.patch             |  130 +
+ .../ibus/ibus-table-chinese_1.8.2.bb               |   82 +
+ meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb  |   29 +
+ meta-oe/recipes-support/ibus/ibus_1.5.19.bb        |   97 +
+ meta-oe/recipes-support/pyzy/pyzy_git.bb           |   21 +
+ 12 files changed, 3641 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0001-revert-CMakeLists.txt.patch
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0002-add-Modules.patch
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0003-add-ChangeLog.prev.patch
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0005-fix-cmake-cross-compile.patch
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese_1.8.2.bb
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb
+ create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+ create mode 100644 meta-oe/recipes-support/pyzy/pyzy_git.bb
+
 -- 
-2.19.2
+2.11.0
 
 
