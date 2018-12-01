@@ -1,22 +1,25 @@
 Return-Path: <psaavedra@igalia.com>
 Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id A9A056B512
+	by mail.openembedded.org (Postfix) with ESMTP id 154726B512
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Dec 2018 19:06:54 +0000 (UTC)
+	Sat,  1 Dec 2018 19:09:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Message-Id:Date:Subject:To:From;
-	bh=CiehkrkxzuKO0YyhjMtlD8T569CovsvmCqPMY1AGASI=; 
-	b=mWhQDxvIMtXbPckvumR8RUhYHOmeylL/xs2oUIqx4vz6M10IpeldLlXve9r0mW+m/z5bNXNZ6e1ednA52P2pOSBQuTvGX6xDkdoIOvGqViD4xl3NQ4nrd4vG2JDfWo9PYCbjk3tamH9EYkKx0LZGRXjBpCfXTbpMpFg7a/ZelyKyAmkQgksVtr7/sBF2GwopaphWKIPXmGdBSUCR9/BbQpjsNUYZEBL7WoIKrO9CrhjvI0Z/hskZ8qfKjqIZtrXHT95Mb+l3Q8s6ssE7ZLxCzAdS7Z4gex2OqWfNvc3t4xnAJxObH/xE0SB4/lp3FFtB4H+tmL090moBo4qtsI79Yw==;
+	s=20170329; 
+	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
+	bh=908dk+5gFxOgmpFHsGgxlXQ65A+EhTDgsG1Dgufky4s=; 
+	b=eD8mDCCkNd1ktOTja4jtXDNjmBALddcsRBYDIZHbgnd+AjOI+SMtDh4aZhuFisCR1dwCt6YYOTELbh/vhj6qR9Zgygo+TWi51J2vg4FlEE55OBMDIqsYi32LuLng6Ne1qRc+auQG35qZQ0h0zQERqMhwy7OjHINT46C2h9J8z2Q9ctgppBbo8UojM2ii4qja3lcCtjOnpWstHCjN8XgirSvk3jB1xsqM8+zG32M+jQFda67Ckh/8yF3W6CIfcIQIihymnEbsjgDNda/gTO2DYAVMZHSHQ+2M8VaUsY5U2vfKcAC1TSI7LTHXlhaRhPutBPena3xoFV/zoTt1/xGxvQ==;
 Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1gTAbN-0001Ej-QA
+	by fanzine.igalia.com with esmtp (Exim) id 1gTAdW-0001Ej-RY
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Dec 2018 20:06:53 +0100
+	Sat, 01 Dec 2018 20:09:06 +0100
 From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Dec 2018 20:06:29 +0100
-Message-Id: <cover.1543690801.git.psaavedra@igalia.com>
+Date: Sat,  1 Dec 2018 20:06:30 +0100
+Message-Id: <9c7b9a0bb121ce97ea2d1a6ddde465aa8c0274d8.1543690801.git.psaavedra@igalia.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-openembedded][PATCH v2 0/7] add ibus with anthy, pinyin and table support
+In-Reply-To: <cover.1543690801.git.psaavedra@igalia.com>
+References: <cover.1543690801.git.psaavedra@igalia.com>
+Subject: [meta-openembedded][PATCH v2 1/7] pyzy: add pyzy recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,63 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2018 19:06:55 -0000
+X-List-Received-Date: Sat, 01 Dec 2018 19:09:06 -0000
 
-This serie adds IBus with support for alphabetic tables (Chinese,
-Korean ...), Pinyin (Chinese), Anthy (Japanese) into meta-openembedded
-layer.
+The chinese pinyin and bopomofo conversion library
 
-Motivation of the change in dconf is documented in:
-
-  https://bugzilla.yoctoproject.org/show_bug.cgi?id=13040
-
-This serie is in conflict with:
-
-   https://patchwork.openembedded.org/patch/155947/
-
-The following changes since commit c26b10b155cf7873ffc8e966f95fd4abed8230c6:
-
-  opensc: 0.18.0 version fix fetch error (2018-11-16 14:46:44 -0800)
-
-are available in the git repository at:
-
-  git://github.com/psaavedra/meta-openembedded ibus
-  https://github.com/psaavedra/meta-openembedded/tree/ibus
-
-Pablo Saavedra (7):
-  pyzy: add pyzy recipe
-  dconf: remove gsettings inherit schemas
-  ibus: add ibus recipe
-  ibus-anthy: add ibus-anthy recipe
-  ibus-pinyin: add ibus-pinyin recipe
-  ibus-table: add ibus-table recipe
-  ibus-table-chinese: add ibus-table-chinese recipe
-
- meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb     |    2 +-
- .../ibus/ibus-anthy/fix_anthy_include_in_gir.patch |   19 +
- meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb  |   37 +
- meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb  |   30 +
- .../0001-revert-CMakeLists.txt.patch               |  204 ++
- .../ibus/ibus-table-chinese/0002-add-Modules.patch | 2933 ++++++++++++++++++++
- .../0003-add-ChangeLog.prev.patch                  |   58 +
- .../0005-fix-cmake-cross-compile.patch             |  130 +
- .../ibus/ibus-table-chinese_1.8.2.bb               |   82 +
- meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb  |   29 +
- meta-oe/recipes-support/ibus/ibus_1.5.19.bb        |   97 +
- meta-oe/recipes-support/pyzy/pyzy_git.bb           |   21 +
- 12 files changed, 3641 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
- create mode 100644 meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0001-revert-CMakeLists.txt.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0002-add-Modules.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0003-add-ChangeLog.prev.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese/0005-fix-cmake-cross-compile.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table-chinese_1.8.2.bb
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb
- create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
+---
+ meta-oe/recipes-support/pyzy/pyzy_git.bb | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
  create mode 100644 meta-oe/recipes-support/pyzy/pyzy_git.bb
 
+diff --git a/meta-oe/recipes-support/pyzy/pyzy_git.bb b/meta-oe/recipes-support/pyzy/pyzy_git.bb
+new file mode 100644
+index 000000000..2a1df6187
+--- /dev/null
++++ b/meta-oe/recipes-support/pyzy/pyzy_git.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "The Chinese PinYin and Bopomofo conversion library"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
++SECTION = "inputmethods"
++
++SRCREV = "6d9c3cdff364e0da75e1c26222240f26370ebf73"
++SRC_URI = "git://github.com/pyzy/pyzy.git;protocol=https;branch=master"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++DEPENDS = "glib-2.0 util-linux sqlite3"
++
++EXTRA_OECONF += " \
++    --disable-opencc \
++    --disable-db-open-phrase \
++    --disable-db-android \
++"
++
++BBCLASSEXTEND = "native"
 -- 
 2.11.0
 
