@@ -1,54 +1,54 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id A1A786FFCD
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id F1BB16D523
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Dec 2018 13:48:39 +0000 (UTC)
-Received: (qmail 1094 invoked by uid 1003); 1 Dec 2018 13:48:44 -0000
-Received: from unknown (HELO ?192.168.11.100?)
-	(philip@opensdr.com@73.152.143.112)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
-	1 Dec 2018 13:48:44 -0000
-To: Khem Raj <raj.khem@gmail.com>, "Eggleton, Paul" <paul.eggleton@intel.com>
-References: <2403371.OeEdUFaxhe@localhost.localdomain>
-	<CAMKF1srJiBZnB42fhoYOvutDe_Pv0sBRq79p=69UWfgt4QRckg@mail.gmail.com>
-	<f22e2865-f2be-ecd5-5a13-e69c0a8a6891@balister.org>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <b2177fe4-6853-99ee-1177-51dfdbb74175@balister.org>
-Date: Sat, 1 Dec 2018 08:48:39 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+	Sat,  1 Dec 2018 13:53:03 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id y139so1558036wmc.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Dec 2018 05:53:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=9N4c4UyL4WhMouevUPmPFBVChZVI311P9PRLDtMhaV8=;
+	b=VRi+KOH2dz9iWs59d28vVn0s1lCXAVwerQpVeceDqF9C20eaLD0Wl9O0GgTjICAhQ+
+	+2Kt9M+wH8kZte0NiOCNfzMAlei5NC/o9M7/c6xN2UI4yEubOQVh/8s25c2pDQetTB/E
+	q8YXYmpkA8sdlvDbwJNjSTuKzM5Su3mTXRDTO01oNXWgZUkC/03WFyH58+j6K7aElwJ0
+	IiE9eW/D1thvhJi2GIVcU3bNg4aGG+Fy1E9sCAFLlRWNtzx0Ns5BIgj+KGgR111+70vz
+	ZzeSvc5kD9/bJNrrbNigSmDsilL8XPlElALmFLdnMYCp8uYrtavDyvJz7i67mCO574JN
+	761A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=9N4c4UyL4WhMouevUPmPFBVChZVI311P9PRLDtMhaV8=;
+	b=jf62Kji3Tm4Zy4d/vNwQm9fVJWT1fg01jTs8mrICvP+YA9k9i0eaHDddSJPrt6d6SD
+	7i+H9hrN2x4LXdgEnBOyM7EVMVoZPIF2jZPkT6O2Wc3Jrp70qF+PCSDOMDgh/LoBS4Cc
+	aKZ4X+LbAoibx7L7KJ9IH8+y/ElFqrg84L2tGWBshcFkyN5erBPQ3wxMZXCo0vrD10Et
+	9hhEY8CbZWyr0GNW8TqRNboAl+99KbwLG9TCJqeo7YnH7uziCrxli6dKWpzIuTuqTNNH
+	115KdGF5KC+rGYVwZs0sZRz4DrFKOYi7AKAsDnROndH2kkTNJucuXcuk7I6QZVBnShKQ
+	B04Q==
+X-Gm-Message-State: AA+aEWbr+pGDXx0jr2bvMNiLJBN8JDfv80hMYaFOwGTcP2Fa/+zBHflE
+	QzTYl2cALVbMRLoYMP/viCZ01BcO
+X-Google-Smtp-Source: AFSGD/ULUPCh60t4a+fE4Z99v7kjjsoaIEwwDuok8Rrc2N2ZCKHbzFSDw6bC/sMHGY4XQSKq68DjVQ==
+X-Received: by 2002:a1c:282:: with SMTP id 124mr2291370wmc.113.1543672384215; 
+	Sat, 01 Dec 2018 05:53:04 -0800 (PST)
+Received: from localhost.localdomain
+	(p200300F07BDAAA791E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bda:aa79:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id 5sm3489208wmw.8.2018.12.01.05.53.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 01 Dec 2018 05:53:03 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  1 Dec 2018 14:52:50 +0100
+Message-Id: <20181201135250.16390-2-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.5
+In-Reply-To: <20181201135250.16390-1-schnitzeltony@gmail.com>
+References: <20181201135250.16390-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <f22e2865-f2be-ecd5-5a13-e69c0a8a6891@balister.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Github pull requests
+Subject: [PATCH 2/2] networkmanager: move udev-rules from /usr/lib -> /lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,57 +61,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2018 13:48:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 01 Dec 2018 13:53:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 11/30/2018 07:06 AM, Philip Balister wrote:
-> On 11/29/2018 09:31 PM, Khem Raj wrote:
->> On Thu, Nov 29, 2018 at 5:26 PM Paul Eggleton <paul.eggleton@intel.com> wrote:
->>>
->>> Hi folks
->>>
->>> Someone pointed out that there are quite a few pull requests on github under
->>> https://github.com/openembedded/. I know we don't accept these, but it seems
->>> to me we ought to clean up the ones that are there in order to avoid people
->>> thinking that they might be (and probably comment on the ones where we haven't
->>> done so or the submitter hasn't sent them to the mailing list already). I'll
->>> volunteer to clean them up, but I don't currently have access - can someone
->>> grant that to me?
->>
->> I think that will be good. I have taken care of meta-oe ones but I can not
->> close them
-> 
-> Do we need to adjust github privileges so you can close them? Let's chat
-> next week and see what we can do to make this easier.
+Seems udev-rules in /usr/lib are ignored: systemd-analayse reported >3min!
+for system startup time!
 
-Does this help?
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../recipes-connectivity/networkmanager/networkmanager_1.14.4.bb       | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-http://nopullrequests.appspot.com/
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+index 4cc4dbab5..870a52814 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+@@ -50,6 +50,7 @@ EXTRA_OECONF = " \
+     --with-iptables=${sbindir}/iptables \
+     --with-tests \
+     --with-nmtui=yes \
++    --with-udev-dir=${nonarch_base_libdir}/udev \
+ "
+ 
+ # gobject-introspection related
+@@ -108,7 +109,7 @@ FILES_${PN} += " \
+     ${nonarch_libdir}/NetworkManager/conf.d \
+     ${datadir}/polkit-1 \
+     ${datadir}/dbus-1 \
+-    ${base_libdir}/udev/* \
++    ${noarch_base_libdir}/udev/* \
+     ${systemd_unitdir}/system \
+ "
+ 
+-- 
+2.14.5
 
-Philip
-
-
-
-
-> 
-> Philip
-> 
-> 
->>
->>>
->>> Thanks,
->>> Paul
->>>
->>> --
->>> Paul Eggleton
->>> Intel Open Source Technology Centre
->>>
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
