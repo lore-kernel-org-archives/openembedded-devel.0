@@ -1,25 +1,25 @@
 Return-Path: <psaavedra@igalia.com>
 Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id F25546D5B1
+	by mail.openembedded.org (Postfix) with ESMTP id 46B416D75E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Dec 2018 19:09:14 +0000 (UTC)
+	Sat,  1 Dec 2018 19:09:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; 
 	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=9RhMhf7TrSW8T0++VT2LHIpMYyhosSpKi1kqOmTHR0Y=; 
-	b=LfzL8Qtha3+owCbxeNe+1ExoTydiLUQd7P1chgAvyZC0sr4HptqmR4Pa2msyp+oDLVQyer4LLNlXIL8U4Nmk0lm6zw6Bgct6hf7hG12lj9ZQc4TNiTfltsIaOKt0xr6wfdMHGy7VmvbuCS75aWAvVE15SSpX9UPSp990VPQtYDgpY/A3gUNNPaKvFcOsq3Wv0KMn7ddoU8v9lzho9mgvjstPABOqnaGQ4tLQAMJGcLZSEmJg7v0NQKwZLYFpXhJ5Nr2nA0RmpwYOuZTUmKeOyoYlFsBHIMX/mqp44aY060iPM7PH2+N8Xo8a7SigLa0W+xGJd3NAxZtvBq7gf4TzRA==;
+	bh=tFFdbcxBqvj+za54hdqYtGvMgJqvsJwiUPfB9KpH2dg=; 
+	b=EnIPGwD6t/39KbGD0s0V/Fn0ELdfS+qDVsNaY62+Gjs9NJv9xA6Q0YjZe9Eg+oUqdXUBTK+DGX5oX4J+ER25Yax6DsbRuNS8rZbsyQtRr3/D5d+8wJSt16Zin9niHcLboctD6qkzRDarpShMQ9N9gtZZQV8OrvYemxCMXZz1XZXeCBv8IJm84tDDQCjUEOLBIS/fy6tNvpxpUH9ql04AGXsaydTINCADMAShF/9HQ630e/R44bCSPsy0kl/Rz+me8jtpS179wJBfz8KwwAlSNsZf7JFL9rDkhW/j7sga+zvmZ0f49KBXI5w+v4JgT4wcnSub+egt+1YxUSRnjV0B3g==;
 Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1gTAdf-0001Ej-Oe
+	by fanzine.igalia.com with esmtp (Exim) id 1gTAdg-0001Ej-Rs
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Dec 2018 20:09:15 +0100
+	Sat, 01 Dec 2018 20:09:16 +0100
 From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Dec 2018 20:06:33 +0100
-Message-Id: <55fe6848d4e17c69b9260c41d7f3d69a7a008243.1543690801.git.psaavedra@igalia.com>
+Date: Sat,  1 Dec 2018 20:06:34 +0100
+Message-Id: <7b97fcb5f473bf0c4ab6128825981b0959c593b2.1543690801.git.psaavedra@igalia.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1543690801.git.psaavedra@igalia.com>
 References: <cover.1543690801.git.psaavedra@igalia.com>
-Subject: [meta-openembedded][PATCH v2 4/7] ibus-anthy: add ibus-anthy recipe
+Subject: [meta-openembedded][PATCH v2 5/7] ibus-pinyin: add ibus-pinyin recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,86 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2018 19:09:15 -0000
+X-List-Received-Date: Sat, 01 Dec 2018 19:09:16 -0000
 
-It is a Japanese input engine for IBus.
+PinYin engine for IBus.
+
+Requires: pyzy
 
 Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
 ---
- .../ibus/ibus-anthy/fix_anthy_include_in_gir.patch | 19 +++++++++++
- meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb  | 37 ++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
+ meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb | 30 +++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
 
-diff --git a/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch b/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
+diff --git a/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb b/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
 new file mode 100644
-index 000000000..9812be08f
+index 000000000..a91ed33cb
 --- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
-@@ -0,0 +1,19 @@
-+Index: ibus-anthy-1.5.10/gir/Makefile.am
-+===================================================================
-+--- ibus-anthy-1.5.10.orig/gir/Makefile.am
-++++ ibus-anthy-1.5.10/gir/Makefile.am
-+@@ -68,12 +68,12 @@ Anthy_9000_gir_SCANNERFLAGS = \
-+ 	--warn-all \
-+ 	$(NULL)
-+ Anthy_9000_gir_INCLUDES = GObject-2.0
-+-Anthy_9000_gir_LIBS = $(libanthygobject) anthy
-++Anthy_9000_gir_LIBS = $(libanthygobject)
-+ Anthy_9000_gir_CFLAGS = @ANTHY_CFLAGS@
-+ Anthy_9000_gir_FILES = \
-+ 	$(libanthygobject_1_0_la_SOURCES) \
-+ 	$(anthyinclude_HEADERS) \
-+-	$(ANTHY_INCLUDEDIR)/anthy/anthy.h \
-++	$(STAGING_DIR_HOST)$(ANTHY_INCLUDEDIR)/anthy/anthy.h \
-+ 	$(NULL)
-+ INTROSPECTION_GIRS += Anthy-9000.gir
-+ 
-diff --git a/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
-new file mode 100644
-index 000000000..eea27cf30
---- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "It is a Japanese input engine for IBus."
++++ b/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "PinYin engine for IBus."
 +LICENSE = "GPLv2"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 +SECTION = "inputmethods"
 +
-+SRC_URI = "https://github.com/ibus/${PN}/releases/download/${PV}/${PN}-${PV}.tar.gz \
-+    file://fix_anthy_include_in_gir.patch \
-+"
-+SRC_URI[md5sum] = "d7c2c410619edacfbaca6a9d02ed8982"
-+SRC_URI[sha256sum] = "cc33e0d1afe7e4a1f0a092d2a4575269ac21373771e49579c434afb4eef9f84a"
++SRC_URI = "https://github.com/ibus/${PN}/archive/${PV}.tar.gz \
++          "
++SRC_URI[md5sum] = "9a794c76f3e8fa888c7a0a097de2ebf0"
++SRC_URI[sha256sum] = "79fc51517ab8dec696cbbbca9526459b59f4eb045492ea88e5f9e01160b905db"
 +
-+# Needed to find the Anthy included headers (anthy/anthy.h)
-+export STAGING_DIR_HOST
-+
-+inherit autotools pkgconfig gettext gobject-introspection gtk-immodules-cache gtk-icon-cache gsettings qemu
++inherit distro_features_check autotools lib_package
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
 +
-+DEPENDS = " anthy ibus gobject-introspection python-pygobject adwaita-icon-theme"
-+RDEPENDS_${PN} += " ibus takao-fonts anthy libanthy0"
++DEPENDS = "ibus enchant hunspell pyzy pyxdg"
++DEPENDS_append_class-target = " intltool-native glib-2.0-native"
++RDEPENDS_${PN} += " ibus enchant hunspell pyzy pyxdg"
 +
-+DEPENDS_append_class-target = " intltool-native qemu-native"
++BBCLASSEXTEND = "native"
++
++EXTRA_OECONF += "--disable-static \
++           --disable-boost \
++"
++
++FILES_${PN} += "${datadir}/ibus/component/pinyin.xml \
++"
 +
 +do_configure_prepend() {
-+    export PYTHON=python2
++    export PYTHON=python3
 +}
-+
-+
-+FILES_${PN} += " \
-+    ${datadir}/icons/* \
-+    ${datadir}/ibus \
-+    ${datadir}/appdata \
-+    ${datadir}/ibus/component/anthy.xml \
-+    ${datadir}/appdata/ibus-anthy.appdata.xml \
-+    ${datadir}/gir-1.0/Anthy-9000.gir \
-+    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.engine.anthy.gschema.xml \
-+"
 -- 
 2.11.0
 
