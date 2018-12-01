@@ -1,25 +1,25 @@
 Return-Path: <psaavedra@igalia.com>
 Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 154726B512
+	by mail.openembedded.org (Postfix) with ESMTP id B238C6D45C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Dec 2018 19:09:06 +0000 (UTC)
+	Sat,  1 Dec 2018 19:09:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; 
 	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=908dk+5gFxOgmpFHsGgxlXQ65A+EhTDgsG1Dgufky4s=; 
-	b=eD8mDCCkNd1ktOTja4jtXDNjmBALddcsRBYDIZHbgnd+AjOI+SMtDh4aZhuFisCR1dwCt6YYOTELbh/vhj6qR9Zgygo+TWi51J2vg4FlEE55OBMDIqsYi32LuLng6Ne1qRc+auQG35qZQ0h0zQERqMhwy7OjHINT46C2h9J8z2Q9ctgppBbo8UojM2ii4qja3lcCtjOnpWstHCjN8XgirSvk3jB1xsqM8+zG32M+jQFda67Ckh/8yF3W6CIfcIQIihymnEbsjgDNda/gTO2DYAVMZHSHQ+2M8VaUsY5U2vfKcAC1TSI7LTHXlhaRhPutBPena3xoFV/zoTt1/xGxvQ==;
+	bh=BqY6j4Ce7wHHsRrE/hag4Xaue5Gf5mb9PHr+TdreCdI=; 
+	b=L8RjiswmVnnC94+dbn6+rIDxBohWKzKqbhX22aGsjthtuUzKJlEjgcLxAP6oN6gawQTjs2h1MncgCkcOcI5FCK8kuK/KdUBm/MsR35BpBbnDniyogW6ooduH6TkT2U9vkK9C3u0lYDTje+S2xyjuj7REn6wI0PqgUqrEiq2v3D82KXt4/qNIwVsXq0pOT+sMP+PmOJVXuIJah5P/SpYCApY1F0x/XTLJ2H1+0eQzi1wdkFJJnLH1hY/K4BbGZltR9aaoxz/QdjOHWLXnG4vuJSnMQ4suaNmGgvQJLcesDah8NakMCK62sLEvhVFhDeilHLUy9a5eMXjkEvpQkLlZDw==;
 Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1gTAdW-0001Ej-RY
+	by fanzine.igalia.com with esmtp (Exim) id 1gTAdZ-0001Ej-Ck
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Dec 2018 20:09:06 +0100
+	Sat, 01 Dec 2018 20:09:09 +0100
 From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Dec 2018 20:06:30 +0100
-Message-Id: <9c7b9a0bb121ce97ea2d1a6ddde465aa8c0274d8.1543690801.git.psaavedra@igalia.com>
+Date: Sat,  1 Dec 2018 20:06:31 +0100
+Message-Id: <0161d589404e5d18602f671d9a3b0064910c3d0e.1543690801.git.psaavedra@igalia.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1543690801.git.psaavedra@igalia.com>
 References: <cover.1543690801.git.psaavedra@igalia.com>
-Subject: [meta-openembedded][PATCH v2 1/7] pyzy: add pyzy recipe
+Subject: [meta-openembedded][PATCH v2 2/7] dconf: remove gsettings inherit schemas
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,43 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2018 19:09:06 -0000
+X-List-Received-Date: Sat, 01 Dec 2018 19:09:09 -0000
 
-The chinese pinyin and bopomofo conversion library
+... because it doesn't install any schemas
+
+Motivation and details here:
+
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=13040
 
 Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
 ---
- meta-oe/recipes-support/pyzy/pyzy_git.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/pyzy/pyzy_git.bb
+ meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/pyzy/pyzy_git.bb b/meta-oe/recipes-support/pyzy/pyzy_git.bb
-new file mode 100644
-index 000000000..2a1df6187
---- /dev/null
-+++ b/meta-oe/recipes-support/pyzy/pyzy_git.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "The Chinese PinYin and Bopomofo conversion library"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
-+SECTION = "inputmethods"
-+
-+SRCREV = "6d9c3cdff364e0da75e1c26222240f26370ebf73"
-+SRC_URI = "git://github.com/pyzy/pyzy.git;protocol=https;branch=master"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-+
-+DEPENDS = "glib-2.0 util-linux sqlite3"
-+
-+EXTRA_OECONF += " \
-+    --disable-opencc \
-+    --disable-db-open-phrase \
-+    --disable-db-android \
-+"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
+index 99292a88c..b6f71c952 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
+@@ -10,7 +10,7 @@ DEPENDS = "dbus glib-2.0 intltool-native"
+ 
+ GNOMEBASEBUILDCLASS = "meson"
+ 
+-inherit gnomebase gsettings bash-completion vala
++inherit gnomebase bash-completion vala
+ 
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
 -- 
 2.11.0
 
