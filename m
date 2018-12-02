@@ -1,49 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D8256C4B1
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 35BAB6B79B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Dec 2018 19:10:12 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id o89so6134533qko.0
+	Sun,  2 Dec 2018 19:13:55 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id i12so5220281pfo.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2018 11:10:13 -0800 (PST)
+	Sun, 02 Dec 2018 11:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=QA5LfBxyYLkxabwsiPninMd+VVUoKZabEBLYaHxHBcQ=;
-	b=LC2t+NBdjaR4kPIbVB87xM69U/G7Jf/XHA/O/dZWBG8JQOFbWaxePoRZLpgQs4ptGo
-	MHB389bKlD0ERzpLrJJxswSB+l1e7cai9PM7Tq8IatDnk3PpLY+KFRN+9YBDWkW/IO6y
-	Wvxyb3DzRjpiTvKZ8hDvHt0GOrIbDqeplIAn1XmYlskw9aCcEEZYQ2oBx/NeB+eauLtw
-	6jXvmv13N1kcf9wtfWlmTaWHVvoWHDopk2Vu2Sl0yF1gjB3vxTI9WmIRmvo4MSTSJy8S
-	MFfSQNsuRuGqB/bgypf9oRoDIaWW3FAqWUYAFy9I+JbMm58Do4ixuyWt4+OCl12kPRoj
-	Dfww==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NoWCyna4MaMSCTHLlmoLNN30lt8OQ+5hFAWVJUNA+UA=;
+	b=b6rg1HJzVYLMfUOdTjsvdhmIy3X0Qgmg83vkhRr8ZWwIE+OJhKx6M5r/80Kw022Q4a
+	ehlNnmdtTf7qR6CsyCgUpSKH5FmIHbZG37liT4UxIpmrTDtMgf7nC2kH4BZJyp0qhpR9
+	TZivmzH009Bw7tx8qCvybj5fzxYq87QOpSM7Lo1g7yWFCo9UM+vhKOOHrHfvon/1VVlb
+	AJLOPoXx7KwPxGncmk4TUHd5tcMFwGAQXaSEgT0Ngq7t4bHEqURzfDRPJbrVGiuN5XeD
+	M4GvhfQ+KKZloHIM81svsZ9S6BFzCz8Tx7y+JvIDDJOt7wg+Vm0KdSMofj395QxaY0OR
+	2huw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=QA5LfBxyYLkxabwsiPninMd+VVUoKZabEBLYaHxHBcQ=;
-	b=XSaKLSuwo9BVdGKyd8kf5S/uz1lqhAzTy6waWVdJCS/llB+OJUXOGKEvavC41DueE+
-	S8tyJU3XVkrFekGo6r0Pc98hoOg7LV3kIyoOQ29G53LRP21AC/EZQ63coShp2TBwMzWY
-	J4QO2iwpa1zl9GmP4WzfL926qIYH1Pqc4DTbJ6YgtDDQhq8Q5iJKKSbuqSxsLvYphbBa
-	KuzngdgqH+c5q9ztuPpaXQTH+4nfRJx2l7Fz7D4rhaeUTIKRjcXpy9GVlVfshQUO1LUN
-	M3xFnGOH6epR8+YMndKvg1+s7EDD/bFmRvGTF5G3BRP0mwk9iJboojvHQB6Vtp8OyIye
-	wSsw==
-X-Gm-Message-State: AA+aEWaVvRsvkayssYE0wVo6XQ+HzkhVBQohva3CFK9eNp5hSo3sRjMJ
-	XoYchway4yPVFD+eaL2Pq+1/rzSPPldfamo4tDc=
-X-Google-Smtp-Source: AFSGD/W/xY8LqUsg0UCDQJfPvNLkjykNMUCovgdukChACJdXWk2I8ZOCHVfvdLNo6YJvEl+ob23aa+dFWihZ13nOXVI=
-X-Received: by 2002:a37:ac05:: with SMTP id e5mr12690326qkm.102.1543777812973; 
-	Sun, 02 Dec 2018 11:10:12 -0800 (PST)
-MIME-Version: 1.0
-References: <20181202102736.47401-1-alex.kanavin@gmail.com>
-	<6d78c61b-d097-8677-8f7e-f6aa3d26f1f6@gmail.com>
-	<CANNYZj8V34J0ZKWAjWtRyYV_vJVJ4YCBK2PF4dmJenF2NkgtSQ@mail.gmail.com>
-	<CANNYZj_3o662t1+4+1Xk7pSU2nnK16ZadDZkwr=aSeE974w3=w@mail.gmail.com>
-In-Reply-To: <CANNYZj_3o662t1+4+1Xk7pSU2nnK16ZadDZkwr=aSeE974w3=w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NoWCyna4MaMSCTHLlmoLNN30lt8OQ+5hFAWVJUNA+UA=;
+	b=e8tskPsKgECDBA4x7y8bFUy5i7RrdaaSvrZHffaBC7R5KgHvFByxFjumqsYESse8ZN
+	bvoAP/6e0Rd4o5/TG6ygSFMNy8AxfbXLbYhcJAtfVTF7e+G9WUl2AAsE2lyApkQGhCYB
+	JO3DDNG8mDAPGiGWywLxlorz5ToQweyR9t1eNIgpjOGnYVtrgadDRouaN6CeYIvmm9jF
+	/G/1IpSTFYezRp/FdVnzpzEwSIFdh3wPLLsN3nWERI0sBOktcETaTqFillDajgsEs4wn
+	8AoxYx6AaZQNbz3/IPG0Mk5L4e4qYHg4AtB4QYd+pLw9TYHjT1eNAvpwZSRlUH8sxRlJ
+	EAvw==
+X-Gm-Message-State: AA+aEWYZ2s3RzFkbpAYy5A5XhZGkplfo+6CpHQD/vQGr1eQEwZ1XZrCJ
+	S/0K5edwChe37xO+JBqM76e4nj6+gbk=
+X-Google-Smtp-Source: AFSGD/UAZKEhAKd0mNTSMZpNNy4Qh/OzOfxrfRXczN+B5K+MlhV39kpR+mUthAMgd65aQ/HJJL6GOQ==
+X-Received: by 2002:a63:5d14:: with SMTP id r20mr9898133pgb.329.1543778035777; 
+	Sun, 02 Dec 2018 11:13:55 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:877f:9499::26ab])
+	by smtp.gmail.com with ESMTPSA id
+	a10sm14367152pfi.138.2018.12.02.11.13.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 02 Dec 2018 11:13:55 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 2 Dec 2018 11:09:46 -0800
-Message-ID: <CAMKF1sq+iGKKHvHnNOeeM001+ATb2stsrwLwJoRdzo1o1Ed7tQ@mail.gmail.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] packagegroup-meta-oe: drop ptest groups
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  2 Dec 2018 11:13:44 -0800
+Message-Id: <20181202191346.15104-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.2
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/3] libvncserver: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,45 +57,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2018 19:10:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 02 Dec 2018 19:13:55 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sun, Dec 2, 2018 at 8:09 AM Alexander Kanavin <alex.kanavin@gmail.com> wrote:
->
-> On Sun, 2 Dec 2018 at 17:04, Alexander Kanavin <alex.kanavin@gmail.com> wrote:
-> > > My understanding all ptests are included in the auto mode. I wanted to
-> > > isolate the ones for meta-oe to get a quicker test run.
-> > >
-> > > Am I misunderstanding ptest?
-> >
-> > The problem appears when ptest is in DISTRO_FEATURES (e.g. poky
-> > default). Bitbake then throws an error due to duplicate entries in
-> > packagegroups (-ptest stuff included twice - once via explicit
-> > definition in the recipe and then again from packagegroups.bbclass):
-> >
-> > ERROR: packagegroup-meta-oe-1.0-r0 do_package: QA Issue:
-> > packagegroup-meta-oe-ptest is listed in PACKAGES multiple times, this
-> > leads to packaging errors. [packages-list]
-> > ERROR: packagegroup-meta-oe-1.0-r0 do_package: Fatal QA errors found,
-> > failing task.
-> > ERROR: packagegroup-meta-oe-1.0-r0 do_package: Function failed: do_package
-> > ERROR: Logfile of failure stored in:
-> > /home/alexander/development/poky/build/tmp/work/all-poky-linux/packagegroup-meta-oe/1.0-r0/temp/log.do_package.89890
-> > ERROR: Task (/home/alexander/development/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:do_package)
-> > failed with exit code '1'
-> >
-> > I don't think you can cherry-pick ptests at the moment.
->
-> However, maybe renaming the ptest group will work. Let me try that.
->
+From: Eddie James <eajames@linux.ibm.com>
 
-while you are at it, send all the four patches in a single series,
-current version seems to have conflicts.
+The latest release of libvncserver is almost two years old. A number of
+security fixes and enhancements have recently been committed. Since the repo
+is stable, point the recipe to the latest commit.
 
-> Alex
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+libvncserver switched from autotools to cmake, so update the recipe as
+necessary, and add PACKAGECONFIG options to allow a more minimal build and
+install.
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../libvncserver/libvncserver_0.9.11.bb       | 25 -------------------
+ .../libvncserver/libvncserver_git.bb          | 23 +++++++++++++++++
+ 2 files changed, 23 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+deleted file mode 100644
+index 38dac06e64..0000000000
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+-HOMEPAGE = "https://libvnc.github.io"
+-SECTION = "libs"
+-PRIORITY = "optional"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+-
+-DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+-
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+-PACKAGECONFIG[systemd] = ",,systemd"
+-
+-RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+-
+-inherit distro_features_check autotools binconfig pkgconfig
+-
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.tar.gz"
+-SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
+-SRC_URI[sha256sum] = "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894"
+-
+-S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
+-
+-TARGET_LDFLAGS += "-lgcrypt"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+new file mode 100644
+index 0000000000..25917756fc
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "library for easy implementation of a RDP/VNC server"
++HOMEPAGE = "https://libvnc.github.io"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
++
++PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
++PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
++PACKAGECONFIG[gnutls] = ",,gnutls"
++PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
++PACKAGECONFIG[openssl] = ",,openssl"
++PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
++PACKAGECONFIG[systemd] = ",,systemd"
++PACKAGECONFIG[sdl] = ",,libsdl2"
++PACKAGECONFIG[zlib] = ",,zlib"
++
++inherit cmake
++
++SRC_URI = "git://github.com/LibVNC/libvncserver"
++SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
++
++S = "${WORKDIR}/git"
+-- 
+2.19.2
+
 
