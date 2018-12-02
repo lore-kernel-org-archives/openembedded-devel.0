@@ -1,48 +1,47 @@
 Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
-	[209.85.210.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 07BD26C5AD
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+	[209.85.221.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E42D6C5AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Dec 2018 16:09:35 +0000 (UTC)
-Received: by mail-ot1-f46.google.com with SMTP id f18so9399724otl.11
+	Sun,  2 Dec 2018 16:19:55 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id u3so9686508wrs.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2018 08:09:37 -0800 (PST)
+	Sun, 02 Dec 2018 08:19:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wSFtOT92NSbbhQKkYQv2+iSMDq99/lvkxaIh+07QvPQ=;
-	b=PkdFpYDWBME4t9ltjYMUXEx/25FxuXzVMzY6kihRsfahggY3UV1Ajj4maE1jPXKQfU
-	IzVKGUPB2JrUOX1JGh0V0krslQmSazb69CXbNXwTHj2xvhZHXkt49YjOBRCEwd3OYGDo
-	hPrHeG4agWrY/UJuY96fjEXUZFjFWZUlgzyqBoRO6Tck2gETE8ENC9I7+d7goI2V/t8w
-	uxcELU0MfiYDjiFtUfJXiOlCvBV/89whLdoH3P76+JhQ1jQIUdk2kALgt8s7OLCfg5r5
-	ASUO+r+VPoibuKcWFQmiTl74rHqlU/fyTO6v4JqY8fq0AVRKYJkOhPhcPQq3w/bapwx3
-	aZHw==
+	h=from:to:cc:subject:date:message-id;
+	bh=uakr7Eyao+qNToqIikq00Q0VPwcA+DmHqhA6F6WZFCc=;
+	b=sW9cts6LOeBK2Ho/lHl0UrRwjNOSUoK41/3ElDq4gaKHwQNUmliPyM5ZWOYNiGlzqx
+	M/9K0oFbIWkZmDK6RpZkjNFHjNrchhZrhCiFIceW8wDkFklXOcgh/D9qz4/5y+pvKH9F
+	iNGFoCZriDjcUF1+KjZqpbjvpXrvHEYZz8AMhpdWiY25OYgjUWaMjRndbB+SBJ212pdb
+	81qGUa/DxZX8+Re/E8lMEMtfW6gOjvLfn0BV8q+MvanK24oxHOCmba1BMGQ+kKRXVUUZ
+	mWLfK9Yu82aMzS8x6qlbBdo1wVdCt37CpjFU5gS6OxmeGqmHxVa3zybQaEJ31LMQg4PC
+	CKLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wSFtOT92NSbbhQKkYQv2+iSMDq99/lvkxaIh+07QvPQ=;
-	b=Ub12hJgoM2cU5dou+nFru/FOn7j22GZBLAgGxh11EQgX4NFIPdSfVRv1DybdHj1a+A
-	bxGDF1TrDXvtF5TJFodt6tCJo2Y9R+uvhzzECg/UmT8Qo6qc3wDbgFRkKmsNRwwBDwee
-	1p45OIJrNRUWssvkKVF7wt92C9F58r/qDbNQIjBfHpxraD0b9f/BMYZF2u3QN5YgM97p
-	2J+oiDkIfh9RjtdaGXPEW74/kdOUaBZ7r0EnjMGuNQpt9FOrZm/dHKZ4kvdbNXIbYLac
-	DLlINheMatrfJ9d2EUYINsAv8k5/6xijZ5/FA7RoDmkCwfCWEWBlQpDUq94xAGBgDWhX
-	pawg==
-X-Gm-Message-State: AA+aEWY90uC7B0aTBkLRzuwWVVlBqjMGpT8RoEqRVTx1z2Wq/e2/3t+v
-	pc2av/jTevJQ9qUCb353m7BQ+hcyWtmGmdFcYnE=
-X-Google-Smtp-Source: AFSGD/UPzm2sLRUEUzmUoirbn5dOtJYTGtWOkBtX4hocaYzc9Tcx/AVMDEiQFgDeYpYR3HIYbhUYdqnyvmf/CFwDezo=
-X-Received: by 2002:a9d:5cc2:: with SMTP id r2mr8322868oti.367.1543766976842; 
-	Sun, 02 Dec 2018 08:09:36 -0800 (PST)
-MIME-Version: 1.0
-References: <20181202102736.47401-1-alex.kanavin@gmail.com>
-	<6d78c61b-d097-8677-8f7e-f6aa3d26f1f6@gmail.com>
-	<CANNYZj8V34J0ZKWAjWtRyYV_vJVJ4YCBK2PF4dmJenF2NkgtSQ@mail.gmail.com>
-In-Reply-To: <CANNYZj8V34J0ZKWAjWtRyYV_vJVJ4YCBK2PF4dmJenF2NkgtSQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uakr7Eyao+qNToqIikq00Q0VPwcA+DmHqhA6F6WZFCc=;
+	b=aKCwMcMKvLaMmjj2NTLRedW1Ek9lYBMe8AK+MyO9XYIxKXKdaEb9YxA7++daWiiQQg
+	0Y0xTOjzAD6DdpdRUyLSupYUELbcuGIQvdGelEVtVqB2bmvpxtT2bEkhZhxf5C7/Vrqe
+	8ziJUWt3yaz5DEc/gn1M1l32yZ8nY7wzC7dzQKHFMTPEUGOKAM82I+BxKFKz62rPtG+o
+	gveSqkxSp/+kq+dHdCO2uALPpd6ksqQEhYrzkdl0f8S39DvsrqE4Sfck71pFZ1XEsnhU
+	OtIY5RKvUdpnCm/htMkO7wvCiIBNEOGj4pYQMeqrUKUY69RrBzQiheiKj+WBMefI5yv1
+	CeKQ==
+X-Gm-Message-State: AA+aEWZ2tdx2/Fbn8svIQo7odrxlaap5ArIYk4u4eO4EblfQ5UQOpl7O
+	ibgdINFpnk3O69CGsBJcSEekuJD+
+X-Google-Smtp-Source: AFSGD/XM3JXpLfCvr1pjZnhLqtsi1GUPzfr85vwSjNzcvwYkTVlROjuw91AyQq1QSe+UV8mAMXBbRQ==
+X-Received: by 2002:a5d:480d:: with SMTP id l13mr12045274wrq.175.1543767595497;
+	Sun, 02 Dec 2018 08:19:55 -0800 (PST)
+Received: from alexander-box.luxoft.com ([62.96.135.139])
+	by smtp.gmail.com with ESMTPSA id
+	g67sm9928578wmd.38.2018.12.02.08.19.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 02 Dec 2018 08:19:54 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Sun, 2 Dec 2018 17:09:25 +0100
-Message-ID: <CANNYZj_3o662t1+4+1Xk7pSU2nnK16ZadDZkwr=aSeE974w3=w@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] packagegroup-meta-oe: drop ptest groups
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  2 Dec 2018 17:19:49 +0100
+Message-Id: <20181202161950.5453-1-alex.kanavin@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH 1/2] packagegroup-meta-oe: drop ptest packages that do not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,34 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2018 16:09:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 02 Dec 2018 16:19:55 -0000
 
-On Sun, 2 Dec 2018 at 17:04, Alexander Kanavin <alex.kanavin@gmail.com> wrote:
-> > My understanding all ptests are included in the auto mode. I wanted to
-> > isolate the ones for meta-oe to get a quicker test run.
-> >
-> > Am I misunderstanding ptest?
->
-> The problem appears when ptest is in DISTRO_FEATURES (e.g. poky
-> default). Bitbake then throws an error due to duplicate entries in
-> packagegroups (-ptest stuff included twice - once via explicit
-> definition in the recipe and then again from packagegroups.bbclass):
->
-> ERROR: packagegroup-meta-oe-1.0-r0 do_package: QA Issue:
-> packagegroup-meta-oe-ptest is listed in PACKAGES multiple times, this
-> leads to packaging errors. [packages-list]
-> ERROR: packagegroup-meta-oe-1.0-r0 do_package: Fatal QA errors found,
-> failing task.
-> ERROR: packagegroup-meta-oe-1.0-r0 do_package: Function failed: do_package
-> ERROR: Logfile of failure stored in:
-> /home/alexander/development/poky/build/tmp/work/all-poky-linux/packagegroup-meta-oe/1.0-r0/temp/log.do_package.89890
-> ERROR: Task (/home/alexander/development/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb:do_package)
-> failed with exit code '1'
->
-> I don't think you can cherry-pick ptests at the moment.
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-However, maybe renaming the ptest group will work. Let me try that.
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 08b4bbfc4..2a23a6170 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -234,19 +234,15 @@ RDEPENDS_packagegroup-meta-oe-test ="\
+ 
+ RDEPENDS_packagegroup-meta-oe-ptest = "\
+     zeromq-ptest \
+-    libxml-ptest \
+-    soci-ptest \
+     leveldb-ptest \
+     psqlodbc-ptest \
+     lua-ptest \
+     protobuf-ptest \
+-    libdbi-ptest \
+     rsyslog-ptest \
+     oprofile-ptest \
+     libteam-ptest \
+     uthash-ptest \
+     mcelog-ptest \
+-    openldap-ptest \
+     libee-ptest \
+     numactl-ptest \
+     poco-ptest \
+-- 
+2.17.1
 
-Alex
 
