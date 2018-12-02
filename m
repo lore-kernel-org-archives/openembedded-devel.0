@@ -1,49 +1,48 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 856306B79B
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E34146B06C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Dec 2018 20:38:27 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id c73so5257008pfe.13
+	Sun,  2 Dec 2018 20:40:48 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id z9so5284525pfi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2018 12:38:29 -0800 (PST)
+	Sun, 02 Dec 2018 12:40:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=v83M9ooTgKDzKkFaRv3vwR9AgyT9VGQ6BclMO2Pn85Q=;
-	b=GMRIltoaJq67Ph1DxhAa18yr5YxUxyKnA2HFeAX08v4Ti7zEm2TYKDqMo1b3YRR+Qg
-	B8mkezd0VuDzfep0BHqPud61JVrHGqjLgmSVbAAHlMhJYjgC4focqXkUuJ1hB6w3a0/U
-	hNDvwSjkhJjQPkjJ5AI9Nrp/cUa5wpyCGkUx9wWC8am6UCX4eh0fqzmRg7+QTyxerEJM
-	WJJ5Lo2rL7jNLcbemoPg9pZ8UqeZdweyRK40ct9FG5UDL6DTRKoAuT+sHGc+1he/ohS+
-	2yXLnZjtBpEcTOG6+Gwyp5LpVJp/K/hGeI9DvW2WEmdj5yPrtmBFdMIdLM2X3PPx+9Fa
-	Vt1g==
+	bh=UBI2pvvoE58G8/Hv3nCZF2XOhdj6XY9edaeJLNMnGP0=;
+	b=dASgWtWA/QHIrI4rRowIQ0zG1YcK7FHIADr4dMKtdDxneOjRj/P9E6TV61a0DCjr4l
+	H/qzVthmrP++wAViV/Jk/h1bFoqy5kEoWC6+E76Qq3m9dsYGccezJrsAnoqW4y3VHcXF
+	JmZYu3ORXxT4ahCXC6vgX2fXGMuL4cVx9XlE5pHdd06YQxLacmIpKQnIaDZZKaxn2DYV
+	3usy28c1oNv+SiqmVK5MMk+ekNG2Jc+54O5PozkLBevTFSnWXna2TPdUG+/unfYGFypz
+	T8gpjW3aiPYYth8gnVxAapoFaQoz3B5B1MmR9n6u2mNMD7ACpsvbeqq+4CK7mWQWiy+x
+	t5Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=v83M9ooTgKDzKkFaRv3vwR9AgyT9VGQ6BclMO2Pn85Q=;
-	b=TpXlLRCeMvE5W15C3fQ3TuChoxNhnnZlGx2K8MXMAA0mm3SbfRWN/rlow2zAPdZqFz
-	L5UaWJp0X3cg/oHESDlhvnAWgjStvTahyMyX5Bp/UYIWY7IYTtrrTYn1O7P2zW4qqAbA
-	dce3ZRJjb84Mk2ZhVMNNfZTj2OEGuMShUs1iAxiwsqeocWcMtF8sI4tHP0537A69R7/+
-	/NNSBfsy9RriqvaV8DrT1ncwRILfsCe7l6YwjRuzFuwfak1xwFDN2M37pNPnRIFwTM93
-	vc4DqjQtFQIt3hS7XI7eNDWHrDpboPzEbkMnbe06B6m18mrc2cPwE5sDaXpA0Cj2rCmq
-	1X0g==
-X-Gm-Message-State: AA+aEWaKdyUM3M5JSRSewvMIZI+9gP/drg/sJkFiYlW1KQqD4ELZCH2o
-	547amWQAjD+WQDelIxaw7Ww=
-X-Google-Smtp-Source: AFSGD/VEuzIRg+qoKD7xjuhO+xMDp7/CmCnFssC10Nserb0xfzp5IuzwMP+FrlKc5qeJyhES/sJdnQ==
-X-Received: by 2002:a63:955a:: with SMTP id t26mr11240130pgn.449.1543783108497;
-	Sun, 02 Dec 2018 12:38:28 -0800 (PST)
+	bh=UBI2pvvoE58G8/Hv3nCZF2XOhdj6XY9edaeJLNMnGP0=;
+	b=ZUpl/2IjpZVBiVeOr/yltPh+ldsuqL9nwWb73T0sVbkm7FxAWV3MgwU0uZ3q+pDDH6
+	ZHkuYvp6F9EaGyo/d1RgMbOkJqagmr3956H9qXf0iHu/2oDSZSH2cKpWJKInVgsKLmLC
+	iM5HcR20UjO1IIT3nK73gjdBcTkKWnwX/zyAagXChQa8VwKdXmu1GFSyflshtJ5YoKel
+	b+yi3g3Fi53SELwmTmGQRs1ca4dl4X7rOVuVHZ9vWi/SSbN1+J0WcGhKor57hzykBxAb
+	wmSSeyvpSK3D/Jw39YpRfypuUiBDJzW5I0fUrDiVIL6HgqGozXrDxrgzqhLy6VXC/mq+
+	LrtQ==
+X-Gm-Message-State: AA+aEWaJAu2ETLPw2OWQKYchSp+4pDrs77ZommIqG6TB900V15y0vz8A
+	QyJ0o5/4Lyxv9FWACT+6W15opVDN
+X-Google-Smtp-Source: AFSGD/Wqy1/rGgXahLJ5BQSRIKTTwt+IgIcvzCSqhqciVxgMhV/dpkkUJNaoP8bRNBEUboQC0fkthA==
+X-Received: by 2002:a65:4784:: with SMTP id e4mr10887808pgs.12.1543783249886; 
+	Sun, 02 Dec 2018 12:40:49 -0800 (PST)
 Received: from ?IPv6:2601:202:4180:c33:8459:23c4:569c:71eb?
 	([2601:202:4180:c33:8459:23c4:569c:71eb])
 	by smtp.gmail.com with ESMTPSA id
-	p2sm14871920pfb.28.2018.12.02.12.38.27
+	m198sm13539208pga.10.2018.12.02.12.40.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 02 Dec 2018 12:38:27 -0800 (PST)
+	Sun, 02 Dec 2018 12:40:49 -0800 (PST)
 To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20181202191346.15104-1-raj.khem@gmail.com>
-	<20181202191346.15104-2-raj.khem@gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,14 +88,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <7a1e89b5-fba4-ef15-a4e2-9111467c5c29@gmail.com>
-Date: Sun, 2 Dec 2018 12:38:26 -0800
+Message-ID: <eb3254e5-90c9-1bad-f187-0e95fe054e9e@gmail.com>
+Date: Sun, 2 Dec 2018 12:40:48 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181202191346.15104-2-raj.khem@gmail.com>
-Cc: Niklas Johansson <niklas.johansson@prevas.dk>
-Subject: Re: [meta-oe][PATCH 2/3] libzip: add libzip 0.9
+In-Reply-To: <20181202191346.15104-1-raj.khem@gmail.com>
+Subject: Re: [meta-oe][PATCH 1/3] libvncserver: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,7 +107,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2018 20:38:27 -0000
+X-List-Received-Date: Sun, 02 Dec 2018 20:40:49 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
@@ -117,87 +115,90 @@ Content-Language: en-US
 
 
 On 12/2/18 11:13 AM, Khem Raj wrote:
-> From: Niklas Johansson <niklas.johansson@prevas.dk>
+> From: Eddie James <eajames@linux.ibm.com>
 >
-> libzip is a C library for reading, creating, and modifying zip
-> archives. Files can be added from data buffers, files, or
-> compressed data copied directly from other zip archives.
-> Changes made without closing the archive can be reverted.
+> The latest release of libvncserver is almost two years old. A number of
+> security fixes and enhancements have recently been committed. Since the repo
+> is stable, point the recipe to the latest commit.
 >
-> Version 0.9 is a little dated and the newest version is 1.5.1.
-> However, there are some breaking API changes between versions,
-> so this older version is needed.
+> libvncserver switched from autotools to cmake, so update the recipe as
+> necessary, and add PACKAGECONFIG options to allow a more minimal build and
+> install.
 >
-> Signed-off-by: Niklas Johansson <niklas.johansson@prevas.dk>
+> Signed-off-by: Eddie James <eajames@linux.ibm.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-oe/recipes-extended/libzip/files/LICENSE | 31 +++++++++++++++++++
->  meta-oe/recipes-extended/libzip/libzip_0.9.bb | 16 ++++++++++
->  2 files changed, 47 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/libzip/files/LICENSE
->  create mode 100644 meta-oe/recipes-extended/libzip/libzip_0.9.bb
+>  .../libvncserver/libvncserver_0.9.11.bb       | 25 -------------------
+>  .../libvncserver/libvncserver_git.bb          | 23 +++++++++++++++++
+>  2 files changed, 23 insertions(+), 25 deletions(-)
+>  delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+>  create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
 >
-> diff --git a/meta-oe/recipes-extended/libzip/files/LICENSE b/meta-oe/recipes-extended/libzip/files/LICENSE
-> new file mode 100644
-> index 0000000000..e93454e883
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/libzip/files/LICENSE
-> @@ -0,0 +1,31 @@
-> +Copyright (C) 1999-2017 Dieter Baron and Thomas Klausner
-> +
-> +The authors can be contacted at <libzip@nih.at>
-> +
-> +Redistribution and use in source and binary forms, with or without
-> +modification, are permitted provided that the following conditions
-> +are met:
-> +
-> +1. Redistributions of source code must retain the above copyright
-> +  notice, this list of conditions and the following disclaimer.
-> +
-> +2. Redistributions in binary form must reproduce the above copyright
-> +  notice, this list of conditions and the following disclaimer in
-> +  the documentation and/or other materials provided with the
-> +  distribution.
-> +
-> +3. The names of the authors may not be used to endorse or promote
-> +  products derived from this software without specific prior
-> +  written permission.
-> +
-> +THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
-> +OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-> +WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-> +ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
-> +DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-> +DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-> +GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-> +INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-> +IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-> +OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
-> +IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> diff --git a/meta-oe/recipes-extended/libzip/libzip_0.9.bb b/meta-oe/recipes-extended/libzip/libzip_0.9.bb
-> new file mode 100644
-> index 0000000000..d1d7b89bd0
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/libzip/libzip_0.9.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION = "C library for reading, creating, and modifying zip archives"
-> +SECTION = "libs"
-> +HOMEPAGE = "http://www.nih.at/libzip"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file:///LICENSE;md5=01f8b1b8da6403739094396e15b1e722"
-> +DEPENDS = "zlib"
-> +PR = "r1"
-Why PR ?
+> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+> deleted file mode 100644
+> index 38dac06e64..0000000000
+> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+> -HOMEPAGE = "https://libvnc.github.io"
+> -SECTION = "libs"
+> -PRIORITY = "optional"
+> -LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+> -
+> -DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+> -
+> -PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+> -PACKAGECONFIG[systemd] = ",,systemd"
+> -
+> -RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+> -
+> -inherit distro_features_check autotools binconfig pkgconfig
+> -
+> -REQUIRED_DISTRO_FEATURES = "x11"
+
+X11 was dropped. is it handled in some on the fashion?
 
 - armin
+
+
+> -
+> -SRC_URI = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.tar.gz"
+> -SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
+> -SRC_URI[sha256sum] = "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894"
+> -
+> -S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
+> -
+> -TARGET_LDFLAGS += "-lgcrypt"
+> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> new file mode 100644
+> index 0000000000..25917756fc
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+> +HOMEPAGE = "https://libvnc.github.io"
+> +SECTION = "libs"
+> +PRIORITY = "optional"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
 > +
-> +inherit autotools
+> +PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
+> +PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
+> +PACKAGECONFIG[gnutls] = ",,gnutls"
+> +PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
+> +PACKAGECONFIG[openssl] = ",,openssl"
+> +PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
+> +PACKAGECONFIG[systemd] = ",,systemd"
+> +PACKAGECONFIG[sdl] = ",,libsdl2"
+> +PACKAGECONFIG[zlib] = ",,zlib"
 > +
-> +FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+> +inherit cmake
 > +
-> +SRC_URI = "http://www.nih.at/${PN}/${PN}-${PV}.tar.bz2"
+> +SRC_URI = "git://github.com/LibVNC/libvncserver"
+> +SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
 > +
-> +SRC_URI[md5sum] = "56b9f11c1eee5eed189a20183d7e06b0"
-> +SRC_URI[sha256sum] = "23a8c3624122a3777bb4ac3be4a867fd0bed7f3aacb8f1d0b68fc459cfb035fc"
+> +S = "${WORKDIR}/git"
 
 
