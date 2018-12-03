@@ -1,25 +1,25 @@
 Return-Path: <psaavedra@igalia.com>
 Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 77AAA6C660
+	by mail.openembedded.org (Postfix) with ESMTP id 76BB76C65C
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon,  3 Dec 2018 12:45:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; 
 	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=FWFCrzC2tgo23rey8J1wbBej2GqpMw4cg/PQiDhT+x0=; 
-	b=i7B6mO63/Q2AhhTSJ0D0a+p3twWowjnn071bPjSXUCYsqu4E/ZxjTLTjGuL5IwufRx+UTfvcouzFil6pNfMpgRCGTjD3PDzBA1W7znLF2huOLWGWkNSPrN6tfMiBdbfXUig3lw9Ub8W2dxAvU2g6P7rjFO1JE3WvVwLh3h7hC7Cp4VhCWEZpfJkW2g00M78EqUzXzIbyS/KvO+YhVc2U5l9r0R4l7CfKj/0KdQgnOhl0B05XX4HXzjOdKAQqdujE2M+aoCPd+a/CJE6doFTLUDHnQ425wX+ClTsTvHyM2FCR6x5e4Kump2PvyZdWsBluB5U2myceWOGLbj7BC9jDoQ==;
+	bh=bVFvufxFFsvoFflMwLhlvqHE+NJxBTXaRnV6XapgOvs=; 
+	b=nZMxiTASVe32VCeT3SK90L9NK9/0JNMBrwh+OariaBygFFZdqSmo+LvsxoxWN9dOPYPBMW8WZqC5AmsLO7JGpwytJaNjSkGN8ItMUnkYtv2QLKZcSk6rY9Zx2dmzpvUtObE949me1WRUwsO3h3wKjl4ERgDu7htSXhMa6Pv/QT1AF8S1Sp86EvRl5tmlQtDaAHKQQii6b18io3ahd9EEaNBjtEOc3NqOTcRNaiaQ8VRwyCgDDDrueg+JzJ8ZrtUduovqxpWdiSTmPK8AgOCLeEVYawQpZG0o8fBXV7cQfKAGBmfuvjuwJ1TjenJH25+VZQQ2Ziw3v/byh1cR3a3rHQ==;
 Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1gTnb5-0007Lt-UH
+	by fanzine.igalia.com with esmtp (Exim) id 1gTnb5-0007Lt-SO
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 03 Dec 2018 13:45:11 +0100
 From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Dec 2018 13:45:06 +0100
-Message-Id: <8b31d1e2ae4c91f272c1793e287e79a5f9deac4b.1543840903.git.psaavedra@igalia.com>
+Date: Mon,  3 Dec 2018 13:45:05 +0100
+Message-Id: <db75b6498a90988d97f9fd2b13643e2cbfc66518.1543840903.git.psaavedra@igalia.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1543840903.git.psaavedra@igalia.com>
 References: <cover.1543840903.git.psaavedra@igalia.com>
-Subject: [meta-openembedded][PATCH v4 4/7] ibus-anthy: add ibus-anthy recipe
+Subject: [meta-openembedded][PATCH v4 3/7] ibus: add ibus recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,84 +34,119 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 03 Dec 2018 12:45:13 -0000
 
-It is a Japanese input engine for IBus.
+Intelligent Input Bus for Linux/Unix https://github.com/ibus/ibus/wiki
+
+Collision with: https://patchwork.openembedded.org/patch/155947/
 
 Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
 ---
- .../ibus/ibus-anthy/fix_anthy_include_in_gir.patch | 19 +++++++++++
- meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb  | 37 ++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
- create mode 100644 meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
+ meta-oe/recipes-support/ibus/ibus_1.5.19.bb | 97 +++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
 
-diff --git a/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch b/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
+diff --git a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
 new file mode 100644
-index 000000000..9812be08f
+index 000000000..57afe0ade
 --- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus-anthy/fix_anthy_include_in_gir.patch
-@@ -0,0 +1,19 @@
-+Index: ibus-anthy-1.5.10/gir/Makefile.am
-+===================================================================
-+--- ibus-anthy-1.5.10.orig/gir/Makefile.am
-++++ ibus-anthy-1.5.10/gir/Makefile.am
-+@@ -68,12 +68,12 @@ Anthy_9000_gir_SCANNERFLAGS = \
-+ 	--warn-all \
-+ 	$(NULL)
-+ Anthy_9000_gir_INCLUDES = GObject-2.0
-+-Anthy_9000_gir_LIBS = $(libanthygobject) anthy
-++Anthy_9000_gir_LIBS = $(libanthygobject)
-+ Anthy_9000_gir_CFLAGS = @ANTHY_CFLAGS@
-+ Anthy_9000_gir_FILES = \
-+ 	$(libanthygobject_1_0_la_SOURCES) \
-+ 	$(anthyinclude_HEADERS) \
-+-	$(ANTHY_INCLUDEDIR)/anthy/anthy.h \
-++	$(STAGING_DIR_HOST)$(ANTHY_INCLUDEDIR)/anthy/anthy.h \
-+ 	$(NULL)
-+ INTROSPECTION_GIRS += Anthy-9000.gir
-+ 
-diff --git a/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
-new file mode 100644
-index 000000000..d42f87ae5
---- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus-anthy_1.5.10.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "It is a Japanese input engine for IBus."
++++ b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+@@ -0,0 +1,97 @@
++DESCRIPTION = "A multilingual user input method library"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +SECTION = "inputmethods"
 +
-+SRC_URI = "https://github.com/ibus/${PN}/releases/download/${PV}/${PN}-${PV}.tar.gz \
-+    file://fix_anthy_include_in_gir.patch \
-+"
-+SRC_URI[md5sum] = "d7c2c410619edacfbaca6a9d02ed8982"
-+SRC_URI[sha256sum] = "cc33e0d1afe7e4a1f0a092d2a4575269ac21373771e49579c434afb4eef9f84a"
++SRC_URI = "https://github.com/ibus/ibus/releases/download/${PV}/${BPN}-${PV}.tar.gz \
++          "
++SRC_URI[md5sum] = "a2be6f200dd9ada2501474a6877a73ef"
++SRC_URI[sha256sum] = "4b66c798dab093f0fa738e5c10688d395a463287d13678c208a81051af5d2429"
 +
-+# Needed to find the Anthy included headers (anthy/anthy.h)
-+export STAGING_DIR_HOST
-+
-+inherit autotools pkgconfig gettext gobject-introspection gtk-immodules-cache gtk-icon-cache gsettings qemu
++inherit autotools pkgconfig gettext gtk-immodules-cache gobject-introspection gtk-doc gtk-icon-cache gsettings
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
 +
-+DEPENDS = " anthy ibus gobject-introspection adwaita-icon-theme"
-+RDEPENDS_${PN} += " ibus takao-fonts anthy libanthy0"
++DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf libnotify python3-pygobject adwaita-icon-theme librsvg"
++DEPENDS_append_class-target = " intltool-native python-pygobject-native"
++RDEPENDS_${PN} += " iso-codes adwaita-icon-theme librsvg-gtk"
 +
-+DEPENDS_append_class-target = " intltool-native qemu-native"
++PACKAGECONFIG[gtk+] = ",--disable-gtk2,gtk+,gtk+"
++PACKAGECONFIG[gtk+3] = ",--disable-gtk3,gtk+3,gtk+3"
++PACKAGECONFIG[wayland] = "--enable-wayland,,wayland,wayland"
 +
-+do_configure_prepend() {
-+    export PYTHON=python2
-+}
++PACKAGECONFIG ?= "gtk+ gtk+3"
++PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
 +
++GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+', 'ibus-gtk2.0', '', d)}"
++GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+3', 'ibus-gtk3', '', d)}"
++
++EXTRA_OECONF += " \
++    --disable-emoji-dict \
++    --disable-unicode-dict \
++"
++
++BBCLASSEXTEND = "native pythonnative"
 +
 +FILES_${PN} += " \
++    ${sysconfdir}/dconf/profile \
++    ${sysconfdir}/dconf/db/ibus.d/00-upstream-settings \
++    ${sysconfdir}/dconf/profile/ibus \
++    ${libdir}/libibus-1.0.so.5.0.518 \
++    ${libdir}/libibus-1.0.so.5 \
++    ${libdir}/gtk-?.?/*/immodules/im-ibus.so \
++    ${bindir}/ibus \
++    ${bindir}/ibus-setup \
++    ${bindir}/ibus-daemon \
++    ${datadir}/ibus/engine \
++    ${datadir}/ibus/component \
++    ${datadir}/ibus/setup \
++    ${datadir}/ibus/component/gtkpanel.xml \
++    ${datadir}/ibus/component/simple.xml \
++    ${datadir}/ibus/component/dconf.xml \
++    ${datadir}/ibus/setup/emojilang.py \
++    ${datadir}/ibus/setup/main.py \
++    ${datadir}/ibus/setup/enginecombobox.py \
++    ${datadir}/ibus/setup/setup.ui \
++    ${datadir}/ibus/setup/enginedialog.py \
++    ${datadir}/ibus/setup/i18n.py \
++    ${datadir}/ibus/setup/engineabout.py \
++    ${datadir}/ibus/setup/icon.py \
++    ${datadir}/ibus/setup/keyboardshortcut.py \
++    ${datadir}/ibus/setup/enginetreeview.py \
++    ${datadir}/ibus/keymaps/jp \
++    ${datadir}/ibus/keymaps/kr \
++    ${datadir}/ibus/keymaps/common \
++    ${datadir}/ibus/keymaps/modifiers \
++    ${datadir}/ibus/keymaps/us \
++    ${datadir}/ibus/keymaps/in \
++    ${datadir}/applications/ibus-setup.desktop \
++    ${datadir}/dbus-1/services/org.freedesktop.IBus.service \
++    ${datadir}/dbus-1/services/org.freedesktop.portal.IBus.service \
++    ${datadir}/vala/vapi/ibus-1.0.vapi \
++    ${datadir}/vala/vapi/ibus-1.0.deps \
++    ${libexecdir}/ibus-engine-simple \
++    ${libexecdir}/ibus-portal \
++    ${libexecdir}/ibus-dconf \
++    ${libexecdir}/ibus-x11 \
++    ${libexecdir}/ibus-ui-gtk3 \
++    ${datadir}/GConf/gsettings/ibus.convert \
++    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.gschema.xml \
++    ${datadir}/bash-completion/* \
 +    ${datadir}/icons/* \
-+    ${datadir}/ibus \
-+    ${datadir}/appdata \
-+    ${datadir}/ibus/component/anthy.xml \
-+    ${datadir}/appdata/ibus-anthy.appdata.xml \
-+    ${datadir}/gir-1.0/Anthy-9000.gir \
-+    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.engine.anthy.gschema.xml \
++    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py \
++    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py? \
 +"
++
++do_configure_prepend() {
++    export PYTHON=python3
++}
++
++do_install_append() {
++  # Fix the installation path of the GObject Inspection overrides for Python3
++  python_version=$(python3 -c 'import sys; print("%s.%s" % (sys.version_info.major, sys.version_info.minor))')
++  mkdir -p ${D}/usr/lib/python${python_version}/site-packages/gi/overrides
++  cp ${S}/bindings/pygobject/gi/overrides/IBus.py ${D}/usr/lib/python${python_version}/site-packages/gi/overrides/
++  rm -rf ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-packages/gi/overrides
++  find ${D} -type d -empty -delete
++}
 -- 
 2.11.0
 
