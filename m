@@ -1,53 +1,25 @@
-Return-Path: <brendank310@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id DBB4C6C64B
+Return-Path: <andrej.valek@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CFAD6C50E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Dec 2018 13:41:38 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id i7so13661018qtj.10
+	Mon,  3 Dec 2018 15:13:25 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id wB3FDPCs016520
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2018 05:41:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=UBrgRzRVX5CXNZnqyM3gfqnLcYjxN4qg4NlQojwSvwo=;
-	b=DlHWyYuXgjTKAWjSJ2vHql3wle3RVm2re4XvJHlOj2ZCI6VFH3O5i4auxYv/AHfoCU
-	MjWzhtuDVeHWcG/wz7M3WmK9POmkbkL42X/vExQbCWU7tRhF0Q0lPlCSTdWgv4TtfBUx
-	z+UDlrJ8/zL6ludW5kbpZ7pbhMa51GwLEes/RNzFqB2AHDxqVYYpHnc6ZIDGr3TjEn9e
-	kjzO6lA4Nqs8R0SHkKHA/+q2qnPEEssCByfddt4eXbErxZcvFLp4bdBJlfgKwnjq+I5t
-	8r8yU0dPU/jP+fLLHmEE3OrtT+Igv5MsedsNojfOaNXHHbVLMMS4tAHtGMbQbZfyeZ03
-	CEfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=UBrgRzRVX5CXNZnqyM3gfqnLcYjxN4qg4NlQojwSvwo=;
-	b=L2n/2FnvyTt7FvUmQTQ2Ph199u4IPs/VQ5ZB+SHTZIiT96kyn5QpGsJZSb6YMCnppl
-	+XNiNpo4RcnIZWA9oxeEe4D8p14wG0DfwWI++C+pkPmGzWRM1Weaby1jg77F3Bi3QoUs
-	X/DecI4X1XjkYG2qnzBbSBuWU8s5TB2AL8c2KnWeH9Nklqv0rvgZdVdeYY2JID9Pep1Z
-	i3w0FmG+PeTsJX/3qJfK1vGCJzOBdVJYOJwrdQyxkdOhFLiL2tcf1c/l8kSeMI38tvPJ
-	z3KrEYbaGqrNo1lkTNPZ8YLqtf7xRdW53G3/KQB1kEOjRlIvvRduhjRTpssExtD3Vimt
-	FlNg==
-X-Gm-Message-State: AA+aEWaY47hLtFM60/Ci7LL4LpKBbKwHnSzQsst/dzQuah/CaPuJpIGf
-	H4cQU/ffY+e8UdJc0koWAjc=
-X-Google-Smtp-Source: AFSGD/WwVLZnz5tEBOBjze4QYtiVgLKc9QHk255/ez9164xu4YAtSguRiAgzB1rHOXQHTAAEKZwvVQ==
-X-Received: by 2002:a0c:d29b:: with SMTP id q27mr15754651qvh.62.1543844499653; 
-	Mon, 03 Dec 2018 05:41:39 -0800 (PST)
-Received: from ?IPv6:2600:1017:b001:14ea:a01b:5883:6042:6d3f?
-	([2600:1017:b001:14ea:a01b:5883:6042:6d3f])
-	by smtp.gmail.com with ESMTPSA id 20sm8189859qtp.54.2018.12.03.05.41.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Dec 2018 05:41:38 -0800 (PST)
-Mime-Version: 1.0 (1.0)
-From: brendank310@gmail.com
-X-Mailer: iPhone Mail (16A404)
-In-Reply-To: <CAD9sEJvYu=QUUraaJmXtYNnFgU8Hex1_H3dKA84KOU1Sma3bkw@mail.gmail.com>
-Date: Mon, 3 Dec 2018 08:41:37 -0500
-Message-Id: <1A48FFA9-1E49-4892-BD92-8C1200DB3D45@gmail.com>
-References: <CAD9sEJvYu=QUUraaJmXtYNnFgU8Hex1_H3dKA84KOU1Sma3bkw@mail.gmail.com>
-To: Knoppix <theknoppix@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: progress of gnome3-full-desktop-environment
+	Mon, 3 Dec 2018 16:13:26 +0100
+Received: from dev.vm6.ccp.siemens.com ([163.242.53.42])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id wB3FDPnn009902;
+	Mon, 3 Dec 2018 16:13:25 +0100
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 7716395179E;
+	Mon,  3 Dec 2018 16:13:25 +0100 (CET)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Dec 2018 16:13:18 +0100
+Message-Id: <20181203151318.8401-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] nodejs: 8.12.0 -> 8.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,29 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2018 13:41:39 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 03 Dec 2018 15:13:26 -0000
 
-The initial patch series has been posted and I have the revisions in progres=
-s. I should have a v2 series posted this week.
+Update nodejs to latest 8.x stable release 8.14.0.
 
--Brendan=20
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ .../recipes-devtools/nodejs/{nodejs_8.12.0.bb => nodejs_8.14.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_8.12.0.bb => nodejs_8.14.0.bb} (96%)
 
-> On Dec 2, 2018, at 11:59 PM, Knoppix <theknoppix@gmail.com> wrote:
->=20
-> Hi,
-> How can I learn what is the progress of gnome3 DE support? I know that
-> there are serios work to implement full-gnome3 on oe-devel but I dont know=
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.14.0.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_8.14.0.bb
+index 8c3397821..14837b763 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.14.0.bb
+@@ -14,8 +14,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+ "
+-SRC_URI[md5sum] = "8b3abd033dae96b6fadcb6a872a44d3c"
+-SRC_URI[sha256sum] = "5a9dff58016c18fb4bf902d963b124ff058a550ebcd9840c677757387bce419a"
++SRC_URI[md5sum] = "07b05463e479a69750e7f9e33745ddd7"
++SRC_URI[sha256sum] = "8ce252913c9f6aaa9871f2d9661b6e54858dae2f0064bd3c624676edb09083c4"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.11.0
 
-> how can I check last status (I mean which recipes has not implemented yet
-> etc)
->=20
-> Regards.
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
