@@ -1,100 +1,35 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E34146B06C
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F7DC6BD15
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Dec 2018 20:40:48 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id z9so5284525pfi.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Dec 2018 12:40:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=UBI2pvvoE58G8/Hv3nCZF2XOhdj6XY9edaeJLNMnGP0=;
-	b=dASgWtWA/QHIrI4rRowIQ0zG1YcK7FHIADr4dMKtdDxneOjRj/P9E6TV61a0DCjr4l
-	H/qzVthmrP++wAViV/Jk/h1bFoqy5kEoWC6+E76Qq3m9dsYGccezJrsAnoqW4y3VHcXF
-	JmZYu3ORXxT4ahCXC6vgX2fXGMuL4cVx9XlE5pHdd06YQxLacmIpKQnIaDZZKaxn2DYV
-	3usy28c1oNv+SiqmVK5MMk+ekNG2Jc+54O5PozkLBevTFSnWXna2TPdUG+/unfYGFypz
-	T8gpjW3aiPYYth8gnVxAapoFaQoz3B5B1MmR9n6u2mNMD7ACpsvbeqq+4CK7mWQWiy+x
-	t5Pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=UBI2pvvoE58G8/Hv3nCZF2XOhdj6XY9edaeJLNMnGP0=;
-	b=ZUpl/2IjpZVBiVeOr/yltPh+ldsuqL9nwWb73T0sVbkm7FxAWV3MgwU0uZ3q+pDDH6
-	ZHkuYvp6F9EaGyo/d1RgMbOkJqagmr3956H9qXf0iHu/2oDSZSH2cKpWJKInVgsKLmLC
-	iM5HcR20UjO1IIT3nK73gjdBcTkKWnwX/zyAagXChQa8VwKdXmu1GFSyflshtJ5YoKel
-	b+yi3g3Fi53SELwmTmGQRs1ca4dl4X7rOVuVHZ9vWi/SSbN1+J0WcGhKor57hzykBxAb
-	wmSSeyvpSK3D/Jw39YpRfypuUiBDJzW5I0fUrDiVIL6HgqGozXrDxrgzqhLy6VXC/mq+
-	LrtQ==
-X-Gm-Message-State: AA+aEWaJAu2ETLPw2OWQKYchSp+4pDrs77ZommIqG6TB900V15y0vz8A
-	QyJ0o5/4Lyxv9FWACT+6W15opVDN
-X-Google-Smtp-Source: AFSGD/Wqy1/rGgXahLJ5BQSRIKTTwt+IgIcvzCSqhqciVxgMhV/dpkkUJNaoP8bRNBEUboQC0fkthA==
-X-Received: by 2002:a65:4784:: with SMTP id e4mr10887808pgs.12.1543783249886; 
-	Sun, 02 Dec 2018 12:40:49 -0800 (PST)
-Received: from ?IPv6:2601:202:4180:c33:8459:23c4:569c:71eb?
-	([2601:202:4180:c33:8459:23c4:569c:71eb])
-	by smtp.gmail.com with ESMTPSA id
-	m198sm13539208pga.10.2018.12.02.12.40.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 02 Dec 2018 12:40:49 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20181202191346.15104-1-raj.khem@gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <eb3254e5-90c9-1bad-f187-0e95fe054e9e@gmail.com>
-Date: Sun, 2 Dec 2018 12:40:48 -0800
+	Mon,  3 Dec 2018 02:06:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id wB326CCK018227
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 2 Dec 2018 18:06:13 -0800 (PST)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Sun, 2 Dec 2018 18:06:12 -0800
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1542696483-278773-1-git-send-email-changqing.li@windriver.com>
+	<CA+chaQfK8BxE=7yh9CtbeOk5rO-Tg1siLePbfZ8C3Vh+_fk42Q@mail.gmail.com>
+	<CAMKF1spT8MKNMMDy1L-t4WdkNYg3Ouvbk_bj+Um=0DKqNenK-Q@mail.gmail.com>
+	<CA+chaQeD+MHPAnK646z0kbT6GzQ7-fBoG_4YPfx6Hp=VJg9WwA@mail.gmail.com>
+	<608363b5-319f-0e49-303c-48bda23c1e48@windriver.com>
+	<CAMKF1sqJXeW6DnwmYEWT1s984JPvvsGXQk7Rn-fUwsVd9iy0jQ@mail.gmail.com>
+	<2dfdfe62-c5df-f05b-cf72-c77ee75331a9@windriver.com>
+	<CA+chaQc-tu7J-6GYo-Y_HiEBMOgcA96giH4tDb67AbGwP5ZhKg@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <9029c2cd-a68f-53ba-5a2f-ff41c5fbdffa@windriver.com>
+Date: Mon, 3 Dec 2018 10:06:09 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181202191346.15104-1-raj.khem@gmail.com>
-Subject: Re: [meta-oe][PATCH 1/3] libvncserver: Update to latest version
+In-Reply-To: <CA+chaQc-tu7J-6GYo-Y_HiEBMOgcA96giH4tDb67AbGwP5ZhKg@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] geoip: add downloadfilename for geoip database files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -107,98 +42,344 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Dec 2018 20:40:49 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 03 Dec 2018 02:06:13 -0000
 Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+On 11/30/18 4:22 PM, Martin Jansa wrote:
+> I think Khem meant http://sources.openembedded.org/ it returns 403, 
+> because listing is disabled, but the files are there.
+
+Thanks.  But  I cannot upload file to that website.  so I prefer use 
+http://downloads.yoctoproject.org/mirror/sources/ as SRC_URI.
+
+but currently,  it is like below, so I need patch 2 times to fix this.   
+1st,  correct the right checksum;
+
+2nd,  correct SRC_URI to yocto mirror after it have correct file 
+there.     Do you have any comments about work like this?
+
+GeoIP.dat.gz  <http://downloads.yoctoproject.org/mirror/sources/GeoIP.dat.gz>                                        27-Mar-2018 12:17              711428
+GeoIPv6.dat.gz_bad-checksum_a908d7a51c3883eb8f6..>  <http://downloads.yoctoproject.org/mirror/sources/GeoIPv6.dat.gz_bad-checksum_a908d7a51c3883eb8f693ca197c7a142>  13-Nov-2018 18:55             1202833
+GeoIPv6.dat.gz_bad-checksum_b0f82334f94ca89872e..>  <http://downloads.yoctoproject.org/mirror/sources/GeoIPv6.dat.gz_bad-checksum_b0f82334f94ca89872e7722db3511bb9>  21-Nov-2018 00:42             1207062
 
 
 
-On 12/2/18 11:13 AM, Khem Raj wrote:
-> From: Eddie James <eajames@linux.ibm.com>
 >
-> The latest release of libvncserver is almost two years old. A number of
-> security fixes and enhancements have recently been committed. Since the repo
-> is stable, point the recipe to the latest commit.
+> On Fri, Nov 30, 2018 at 3:18 AM Changqing Li 
+> <changqing.li@windriver.com <mailto:changqing.li@windriver.com>> wrote:
 >
-> libvncserver switched from autotools to cmake, so update the recipe as
-> necessary, and add PACKAGECONFIG options to allow a more minimal build and
-> install.
 >
-> Signed-off-by: Eddie James <eajames@linux.ibm.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../libvncserver/libvncserver_0.9.11.bb       | 25 -------------------
->  .../libvncserver/libvncserver_git.bb          | 23 +++++++++++++++++
->  2 files changed, 23 insertions(+), 25 deletions(-)
->  delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
->  create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+>     On 11/29/18 9:55 AM, Khem Raj wrote:
+>>     We have two options
+>>
+>>     Download and rename may be add a date component and save it on
+>>     sources.oe.org <http://sources.oe.org>
 >
-> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> deleted file mode 100644
-> index 38dac06e64..0000000000
-> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -DESCRIPTION = "library for easy implementation of a RDP/VNC server"
-> -HOMEPAGE = "https://libvnc.github.io"
-> -SECTION = "libs"
-> -PRIORITY = "optional"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
-> -
-> -DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
-> -
-> -PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
-> -PACKAGECONFIG[systemd] = ",,systemd"
-> -
-> -RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
-> -
-> -inherit distro_features_check autotools binconfig pkgconfig
-> -
-> -REQUIRED_DISTRO_FEATURES = "x11"
+>     Hi,  I cannot open this website
+>
+>>
+>>     Second option is to download the databases during build as
+>>     temporary artifacts but this might cause reproducibility problems
+>>
+>>     Either way it is going to have some issues
+>>     May be option 1 even though tedious can be better of two
+>>
+>>     On Wed, Nov 28, 2018 at 5:31 PM Changqing Li
+>>     <changqing.li@windriver.com <mailto:changqing.li@windriver.com>>
+>>     wrote:
+>>
+>>         Khem and Marthin,
+>>
+>>         The failure still caused by frequently changed checksum of
+>>         the database. I send the patch on 11.20.
+>>
+>>         but the checksum changed on 1121, and it also changed on
+>>         1128, seems like weekly change.
+>>
+>>         but it should not failed if there is a premirror saved the
+>>
+>>         Here is a result I get:
+>>
+>>         $ md5sum 1128/*v6*
+>>         d98a04eded0b08b945b5629106d58760  1128/GeoIPv6 (1).dat.gz
+>>         4d48c102ec68298b3fc7f57763455cb5 1128/GeoLiteCityv6.dat.gz
+>>         $ md5sum 1121/*v6*
+>>         b0f82334f94ca89872e7722db3511bb9 1121/GeoIPv6.dat.gz
+>>         50ad18a8a3ea4bba7c929bea6e22db75 1121/GeoLiteCityv6.dat.gz
+>>         $ md5sum 1120/*v6*
+>>         a908d7a51c3883eb8f693ca197c7a142 1120/GeoIPv6.dat.gz
+>>         8ac3506ccabaae7e9f7d6301c2654313 1120/GeoLiteCityv6.dat.gz
+>>
+>>
+>>         On 11/28/18 3:14 AM, Martin Jansa wrote:
+>>>         I'm seeing different checksum than both your builder and the
+>>>         recipe.
+>>>
+>>>         $ wget
+>>>         http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+>>>         --2018-11-27 20:06:32--
+>>>         http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+>>>         Resolving geolite.maxmind.com... 104.16.37.47, 104.16.38.47,
+>>>         2606:4700::6810:252f, ...
+>>>         Connecting to geolite.maxmind.com
+>>>         <http://geolite.maxmind.com>|104.16.37.47|:80... connected.
+>>>         HTTP request sent, awaiting response... 200 OK
+>>>         Length: 1209046 (1.2M) [application/octet-stream]
+>>>         Saving to: ‘GeoIPv6.dat.gz’
+>>>
+>>>         2018-11-27 20:06:32 (10.3 MB/s) - ‘GeoIPv6.dat.gz’ saved
+>>>         [1209046/1209046]
+>>>
+>>>         $ md5sum GeoIPv6.dat.gz
+>>>         d98a04eded0b08b945b5629106d58760 GeoIPv6.dat.gz
+>>>
+>>>         Is this the legacy archive? Because
+>>>         https://dev.maxmind.com/geoip/legacy/geolite/ now shows
+>>>         following:
+>>
+>>         Yes,  I have  pointed out this problem  the first time I
+>>         changed the checksum. maybe we should upgrade
+>>
+>>         to geoip2,  and  drop current geoip1.6.  but I think even
+>>         with geoip2,  since it's database still not version,
+>>
+>>         maybe also will met similar problem.
+>>
+>>
+>>         //changqing
+>>
+>>>
+>>>         Updated versions of the GeoLite Legacy databases are now
+>>>         only available to redistribution license customers, although
+>>>         anyone can continue to download the March 2018 GeoLite
+>>>         Legacy builds. Starting January 2, 2019, the last build will
+>>>         be removed from our website. GeoLite Legacy database users
+>>>         will need to switch to the GeoLite2 or commercial GeoIP
+>>>         databases and update their integrations by January 2, 2019.
+>>>
+>>>         For more information, please visit our Support Center.
+>>>
+>>>         Note: After careful consideration, taking into account
+>>>         customer feedback, we have decided against removing latitude
+>>>         and longitude coordinates from the GeoLite2 databases. We
+>>>         are in the process of reviewing coordinates used in all of
+>>>         our GeoLite2 and GeoIP databases to ensure there is no risk
+>>>         of misuse.
+>>>
+>>>         * GeoLite2 databases are free IP geolocation databases
+>>>         comparable to, but less accurate than, MaxMind’s GeoIP2
+>>>         databases. Please remember to use the accuracy radius if
+>>>         displaying coordinates on a map.
+>>>
+>>>         New Database Format Available: This page is for our GeoLite
+>>>         Legacy databases. For our latest database format, please
+>>>         visit our GeoLite2 Databases page. We offer redistribution
+>>>         licenses for our newer GeoLite2 databases that will allow
+>>>         you to package the databases with your commercial products.
+>>>         For more information, please visit the GeoLite2 Commercial
+>>>         Redistribution page.
+>>>
+>>>
+>>>         On Tue, Nov 27, 2018 at 8:04 PM Khem Raj <raj.khem@gmail.com
+>>>         <mailto:raj.khem@gmail.com>> wrote:
+>>>
+>>>             I am seeing errors on some builders
+>>>
+>>>             http://errors.yoctoproject.org/Errors/Details/202341/
+>>>             On Mon, Nov 19, 2018 at 11:29 PM Martin Jansa
+>>>             <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>>
+>>>             wrote:
+>>>             >
+>>>             > Looks, good.
+>>>             >
+>>>             > Adding variable for 20181120 might help with
+>>>             maintenance (if we need to
+>>>             > change just checksums in future). And with good
+>>>             variable name (or a
+>>>             > comment) it would also document in the recipe why
+>>>             we're using this in
+>>>             > downloadfilename.
+>>>             >
+>>>             > On Tue, Nov 20, 2018 at 7:48 AM
+>>>             <changqing.li@windriver.com
+>>>             <mailto:changqing.li@windriver.com>> wrote:
+>>>             >
+>>>             > > From: Changqing Li <changqing.li@windriver.com
+>>>             <mailto:changqing.li@windriver.com>>
+>>>             > >
+>>>             > > previous change of checksum don't trigger archive to
+>>>             re-downloaded,
+>>>             > > , which will cause checksum mismatch. add
+>>>             downloadfilename to
+>>>             > > trigger re-download.
+>>>             > >
+>>>             > > 1. for user with PREMIRROR, another benefit is it
+>>>             can still compile
+>>>             > > success event upstream checksum change frequently.
+>>>             > > 2. but for user don't use PREMIRROR, if upstream
+>>>             checksum changed,
+>>>             > > still might have checksum mismatch problem.
+>>>             > >
+>>>             > > Signed-off-by: Changqing Li
+>>>             <changqing.li@windriver.com
+>>>             <mailto:changqing.li@windriver.com>>
+>>>             > > ---
+>>>             > >  .../recipes-support/geoip/geoip_1.6.12.bb
+>>>             <http://geoip_1.6.12.bb>         | 24
+>>>             > > +++++++++++-----------
+>>>             > >  1 file changed, 12 insertions(+), 12 deletions(-)
+>>>             > >
+>>>             > > diff --git
+>>>             a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>             <http://geoip_1.6.12.bb>
+>>>             > >
+>>>             b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>             <http://geoip_1.6.12.bb>
+>>>             > > index 1e1a7ff..57f0b67 100644
+>>>             > > ---
+>>>             a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>             <http://geoip_1.6.12.bb>
+>>>             > > +++
+>>>             b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>             <http://geoip_1.6.12.bb>
+>>>             > > @@ -9,10 +9,10 @@ HOMEPAGE =
+>>>             "http://dev.maxmind.com/geoip/"
+>>>             > >  SECTION = "libdevel"
+>>>             > >
+>>>             > >  SRC_URI = "git://github.com/maxmind/geoip-api-c.git
+>>>             <http://github.com/maxmind/geoip-api-c.git> \
+>>>             > > -
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat
+>>>             > > \
+>>>             > > -
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat
+>>>             > > \
+>>>             > > -
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat
+>>>             > > \
+>>>             > > -
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat
+>>>             > > \
+>>>             > > +
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz
+>>>             > > \
+>>>             > > +
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz
+>>>             > > \
+>>>             > > +
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz
+>>>             > > \
+>>>             > > +
+>>>             > >
+>>>             http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz
+>>>             > > \
+>>>             > > file://run-ptest \
+>>>             > >  "
+>>>             > >  SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>>             > > @@ -20,14 +20,14 @@ SRCREV =
+>>>             "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>>             > >  SRC_URI[GeoIP-dat.md5sum] =
+>>>             "d538e57ad9268fdc7955c6cf9a37c4a9"
+>>>             > >  SRC_URI[GeoIP-dat.sha256sum] =
+>>>             > >
+>>>             "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
+>>>             > >
+>>>             > > -SRC_URI[GeoIPv6-dat.md5sum] =
+>>>             "00dc3b3f53eb5f7bf6915f939998f12c"
+>>>             > > -SRC_URI[GeoIPv6-dat.sha256sum] =
+>>>             > >
+>>>             "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
+>>>             > > +SRC_URI[GeoIPv6-dat.md5sum] =
+>>>             "a908d7a51c3883eb8f693ca197c7a142"
+>>>             > > +SRC_URI[GeoIPv6-dat.sha256sum] =
+>>>             > >
+>>>             "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
+>>>             > >
+>>>             > >  SRC_URI[GeoLiteCity-dat.md5sum] =
+>>>             "d700c137232f8e077ac8db8577f699d9"
+>>>             > > SRC_URI[GeoLiteCity-dat.sha256sum] =
+>>>             > >
+>>>             "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
+>>>             > >
+>>>             > > -SRC_URI[GeoLiteCityv6-dat.md5sum] =
+>>>             "7f6333d433d8127181ea3c5828287c98"
+>>>             > > -SRC_URI[GeoLiteCityv6-dat.sha256sum] =
+>>>             > >
+>>>             "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
+>>>             > > +SRC_URI[GeoLiteCityv6-dat.md5sum] =
+>>>             "8ac3506ccabaae7e9f7d6301c2654313"
+>>>             > > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =
+>>>             > >
+>>>             "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
+>>>             > >
+>>>             > >  LICENSE = "LGPL-2.1"
+>>>             > >
+>>>             > > @@ -44,10 +44,10 @@ EXTRA_OECONF =
+>>>             "--disable-static               \
+>>>             > >  do_install() {
+>>>             > >      make DESTDIR=${D} install
+>>>             > >      install -d ${D}/${datadir}/GeoIP
+>>>             > > -    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+>>>             > > -    install ${WORKDIR}/GeoIPv6.dat
+>>>             ${D}/${datadir}/GeoIP/
+>>>             > > -    install ${WORKDIR}/GeoLiteCity.dat
+>>>             ${D}/${datadir}/GeoIP/
+>>>             > > -    install ${WORKDIR}/GeoLiteCityv6.dat
+>>>             ${D}/${datadir}/GeoIP/
+>>>             > > +    install ${WORKDIR}/GeoIP.dat.20181120
+>>>             ${D}/${datadir}/GeoIP/GeoIP.dat
+>>>             > > +    install ${WORKDIR}/GeoIPv6.dat.20181120
+>>>             > > ${D}/${datadir}/GeoIP/GeoIPv6.dat
+>>>             > > +    install ${WORKDIR}/GeoLiteCity.dat.20181120
+>>>             > > ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+>>>             > > +    install ${WORKDIR}/GeoLiteCityv6.dat.20181120
+>>>             > > ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>>>             > >      ln -s GeoLiteCity.dat
+>>>             ${D}${datadir}/GeoIP/GeoIPCity.dat
+>>>             > >  }
+>>>             > >
+>>>             > > --
+>>>             > > 2.7.4
+>>>             > >
+>>>             > > --
+>>>             > > _______________________________________________
+>>>             > > Openembedded-devel mailing list
+>>>             > > Openembedded-devel@lists.openembedded.org
+>>>             <mailto:Openembedded-devel@lists.openembedded.org>
+>>>             > >
+>>>             http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>             > >
+>>>             > --
+>>>             > _______________________________________________
+>>>             > Openembedded-devel mailing list
+>>>             > Openembedded-devel@lists.openembedded.org
+>>>             <mailto:Openembedded-devel@lists.openembedded.org>
+>>>             >
+>>>             http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>         -- 
+>>         BRs
+>>
+>>         Sandy(Li Changqing)
+>>
+>     -- 
+>     BRs
+>
+>     Sandy(Li Changqing)
+>
+-- 
+BRs
 
-X11 was dropped. is it handled in some on the fashion?
-
-- armin
-
-
-> -
-> -SRC_URI = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.tar.gz"
-> -SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
-> -SRC_URI[sha256sum] = "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894"
-> -
-> -S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
-> -
-> -TARGET_LDFLAGS += "-lgcrypt"
-> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> new file mode 100644
-> index 0000000000..25917756fc
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "library for easy implementation of a RDP/VNC server"
-> +HOMEPAGE = "https://libvnc.github.io"
-> +SECTION = "libs"
-> +PRIORITY = "optional"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
-> +
-> +PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
-> +PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
-> +PACKAGECONFIG[gnutls] = ",,gnutls"
-> +PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
-> +PACKAGECONFIG[openssl] = ",,openssl"
-> +PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
-> +PACKAGECONFIG[systemd] = ",,systemd"
-> +PACKAGECONFIG[sdl] = ",,libsdl2"
-> +PACKAGECONFIG[zlib] = ",,zlib"
-> +
-> +inherit cmake
-> +
-> +SRC_URI = "git://github.com/LibVNC/libvncserver"
-> +SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
-> +
-> +S = "${WORKDIR}/git"
+Sandy(Li Changqing)
 
 
