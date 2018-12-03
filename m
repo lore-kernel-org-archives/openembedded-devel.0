@@ -1,50 +1,25 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
-	[209.85.167.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 386BB6C548
+Return-Path: <psaavedra@igalia.com>
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id 720FC6C641
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Dec 2018 10:47:59 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id y23so10479184oia.4
+	Mon,  3 Dec 2018 12:45:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
+	bh=rII+k8ERcxoG/ME1jhDkJcJLSGqvWkeyhY438de/6T8=; 
+	b=DequjJDkp37xaT++UTDJ/uqlXddEz1/wBYeI6hTY1YU14DYgD6C+qhNUCmhAp1Uqnp97514mgAMf8IH1zAL8c1Ow5Dz1bZmr4Zt2/ixApkjuepNrNBXO2fpdFTnwxDw4XQ+1AHEzAWMHInOGIQG1pXIMBObSuJsjT+s+vXmSbI7pW/kexz57kSu68uzIZdFiAvt6xsFmMzbc2RMAQSaXfcLmxmUASdcQLRITnbVSm7qcWr4SERHqGCKP4d3JnZtA6I08Flyr913sKW+Bi2rdQlieXNoNMgNDHSp4xJm6DTEYwHOPEfjJlaKbkwS38I1FKfL1EpShx3tTU00p3vkRLw==;
+Received: from buildbox.local.igalia.com ([192.168.10.88])
+	by fanzine.igalia.com with esmtp (Exim) id 1gTnb5-0007Lt-Ot
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2018 02:48:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NpLERKbhK1BbQRmnn4sPx6lBtxwI5pp2xc2RLjXTl6E=;
-	b=DG4khlP6LSdz2EeNzkMvQ+nWzAQOLxMkntiAY6lrdkz50U8mj4boVnaBz3scckdkXN
-	LNKV2ARMT18intsmwB7F7yQGMqS2KwM5kl38063bw+QVlbmh3tJ4vT7mchu5THnySnrp
-	iRXnO4EOf2HevlARVfoBVRDpEvBtN+X26gFZ91Wvv8p0BhNxBT7l7NX9hvNKAmakMhVl
-	XigJj16K/m/L+Caixqr+tSqDW5tZ0JEkr1YLXwaeaZ544QISIy/HQS3cW7jRLJm+6u4u
-	+rSgrwk6ACvlYmm8zEMs2iZWvp4/oLKfr8yeQEiWQjJOdUBrD/INVMnhGS73e7+Hef9J
-	kUvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=NpLERKbhK1BbQRmnn4sPx6lBtxwI5pp2xc2RLjXTl6E=;
-	b=O8QFTMjrT9Nv1U2ckmAvI7dR2HdYMc3S1xoKQCypQuSiFkLtheFYT2TwNcHF1eagx+
-	/rEBcuIY5eM+2heaut5qtByn2KrEl/Es1Ww/OTCwOepr3qX2ISeGTUhq+t+kQ/DMv8n6
-	J914oi3a8Rv9U02dJXgUWeDb7GCUGXzHvhrE6NxYoJykm8K/qQ/w3EsSG1rng6/akqK0
-	ekDVK9k6sX/wQYiEZhk5B8SPBaaVrQW1WL+IMqL3ECnXsNYT/A+AaJzwSmBRD7G0xNNo
-	ga+wG8z9mp2YDu5Rgq0zohDJTZrhOVRUue16tFtkfeGdiLccH9M4F+zDwq1pemktV0ep
-	0GsQ==
-X-Gm-Message-State: AA+aEWYBTGmLdlSnjT5lyjitzCwAwPYyXECRUVKPsmW3JzHL99UEax97
-	CgOXlNPdVWdSNZlOqoJO20t0+gwVfS0lpkv/HSo=
-X-Google-Smtp-Source: AFSGD/Vb/QAeyepyb7BWs4DvKNDYgr+MfQqHPTox5T+SMRCOZQqEvEy+TUjiYQvqB0KwcRXerZ7WCPXh4zsniz+To9s=
-X-Received: by 2002:aca:544:: with SMTP id 65mr9116681oif.302.1543834080447;
-	Mon, 03 Dec 2018 02:48:00 -0800 (PST)
-MIME-Version: 1.0
-References: <20181202102736.47401-1-alex.kanavin@gmail.com>
-	<6d78c61b-d097-8677-8f7e-f6aa3d26f1f6@gmail.com>
-	<CANNYZj8V34J0ZKWAjWtRyYV_vJVJ4YCBK2PF4dmJenF2NkgtSQ@mail.gmail.com>
-	<CANNYZj_3o662t1+4+1Xk7pSU2nnK16ZadDZkwr=aSeE974w3=w@mail.gmail.com>
-	<CAMKF1sq+iGKKHvHnNOeeM001+ATb2stsrwLwJoRdzo1o1Ed7tQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sq+iGKKHvHnNOeeM001+ATb2stsrwLwJoRdzo1o1Ed7tQ@mail.gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Mon, 3 Dec 2018 11:47:49 +0100
-Message-ID: <CANNYZj8YGUxi6-UzdkcNVY+3xFga+QhmqR5YrcSTfoVi_gvUpA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] packagegroup-meta-oe: drop ptest groups
+	Mon, 03 Dec 2018 13:45:11 +0100
+From: Pablo Saavedra <psaavedra@igalia.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Dec 2018 13:45:04 +0100
+Message-Id: <4359a79b1ca1bd7e480f342359c001bc34310965.1543840903.git.psaavedra@igalia.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.1543840903.git.psaavedra@igalia.com>
+References: <cover.1543840903.git.psaavedra@igalia.com>
+Subject: [meta-openembedded][PATCH v4 2/7] dconf: remove gsettings inherit schemas
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,19 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2018 10:48:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 03 Dec 2018 12:45:12 -0000
 
-On Sun, 2 Dec 2018 at 20:10, Khem Raj <raj.khem@gmail.com> wrote:
+... because it doesn't install any schemas
 
-> > However, maybe renaming the ptest group will work. Let me try that.
-> >
->
-> while you are at it, send all the four patches in a single series,
-> current version seems to have conflicts.
+Motivation and details here:
 
-Sorry for the confusion - drop the first two patches, and take the
-last two only.
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=13040
 
-Alex
+Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
+---
+ meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb
+index 38d3ec9b4..9f67673b1 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb
+@@ -10,7 +10,7 @@ DEPENDS = "dbus glib-2.0 intltool-native"
+ 
+ GNOMEBASEBUILDCLASS = "meson"
+ 
+-inherit gnomebase gsettings bash-completion vala
++inherit gnomebase bash-completion vala
+ 
+ SRC_URI += "file://0001-meson.build-do-not-compile-docs.patch \
+            "
+-- 
+2.11.0
+
 
