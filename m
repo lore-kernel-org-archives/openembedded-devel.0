@@ -1,47 +1,50 @@
 Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
-	[209.85.210.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C2156BDD0
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
+	[209.85.167.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 386BB6C548
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Dec 2018 10:47:18 +0000 (UTC)
-Received: by mail-ot1-f45.google.com with SMTP id i20so11143889otl.0
+	Mon,  3 Dec 2018 10:47:59 +0000 (UTC)
+Received: by mail-oi1-f196.google.com with SMTP id y23so10479184oia.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2018 02:47:19 -0800 (PST)
+	Mon, 03 Dec 2018 02:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=pPY3EoNk4+QcwvHKhdQsCv1JYai2oYFC6CbVP18LUPk=;
-	b=CdMm3nyLSk4DtPlMDbOonq9shZm5rRxkAROIT0t2xfeB9zFp7k9M/IdT8Zx3szvjON
-	67NEWmAlgvM1h91yLOeeEGiDT+XbnB50WEn+65apMvShj1v1aEQ9pHspBvdUBPru3igb
-	H3XsWf3l99vrtIEgRJhFWKL12VhobH/UoVJIjox+1VsWvl+u967i5I6M8Lv60VbgxGEX
-	cxECzVBqr4u+nmjj9mb5M1G9zjhr9yQWdyLuw3MtgeBhsqBxhYBKzItt1qQo0j4GQLn6
-	tdoP7Toiw/HrYrHKWbH8mXq+uetg7GnPn0QGrifBOJwV8KcHnctPZ9T/7+c5xC0Ik9y6
-	D2gA==
+	:cc; bh=NpLERKbhK1BbQRmnn4sPx6lBtxwI5pp2xc2RLjXTl6E=;
+	b=DG4khlP6LSdz2EeNzkMvQ+nWzAQOLxMkntiAY6lrdkz50U8mj4boVnaBz3scckdkXN
+	LNKV2ARMT18intsmwB7F7yQGMqS2KwM5kl38063bw+QVlbmh3tJ4vT7mchu5THnySnrp
+	iRXnO4EOf2HevlARVfoBVRDpEvBtN+X26gFZ91Wvv8p0BhNxBT7l7NX9hvNKAmakMhVl
+	XigJj16K/m/L+Caixqr+tSqDW5tZ0JEkr1YLXwaeaZ544QISIy/HQS3cW7jRLJm+6u4u
+	+rSgrwk6ACvlYmm8zEMs2iZWvp4/oLKfr8yeQEiWQjJOdUBrD/INVMnhGS73e7+Hef9J
+	kUvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=pPY3EoNk4+QcwvHKhdQsCv1JYai2oYFC6CbVP18LUPk=;
-	b=LvbJ5fUgs54sEI5MmznAUuhvGQV4BZR+nH18hrtChOOS0zlJk8nmnU3/vfyTc2ckUu
-	t187NYxnwBRv9ds24ycycM8sUdbjxe+KQgyJzFhtnb5paLGuB4euW/GM97JrYXf+mSOP
-	C3SBWUio4vEgxnxsCjup3aqbkZkRhtv7HYlgMl2TJ94FDI5vzkDCQ9VV5j8gxJy1PSwy
-	Gwe3M7GmAEFjJAtJQVlYhrNcibZDDKfYCAoq9FBboryDr3NP2y+cnYtJ92wvfD0EKYBm
-	epSbyjzBtY08++eVv9f6isc+8G6R61HeKDQK7Dm6rehtC88H5JkyfZzGPKXBzpU51fdE
-	XFxg==
-X-Gm-Message-State: AA+aEWbWu/rJYpkiQMStOYouTc9ylwmRBBIMD1UMk8olCanWrWEpvtFP
-	whEtREyPdmzidQPAWH87W9MUBFP+KDQOLqJXbFk=
-X-Google-Smtp-Source: AFSGD/UoNZCVoPxTXciDBVbablKAY75UkSgTHTaEwrp45J3UO9sBpa8w8aGqP7ilVWTZsyL8I0HDGi2uJn8cNT4LPgA=
-X-Received: by 2002:a9d:640d:: with SMTP id h13mr10116837otl.153.1543834039100;
-	Mon, 03 Dec 2018 02:47:19 -0800 (PST)
+	bh=NpLERKbhK1BbQRmnn4sPx6lBtxwI5pp2xc2RLjXTl6E=;
+	b=O8QFTMjrT9Nv1U2ckmAvI7dR2HdYMc3S1xoKQCypQuSiFkLtheFYT2TwNcHF1eagx+
+	/rEBcuIY5eM+2heaut5qtByn2KrEl/Es1Ww/OTCwOepr3qX2ISeGTUhq+t+kQ/DMv8n6
+	J914oi3a8Rv9U02dJXgUWeDb7GCUGXzHvhrE6NxYoJykm8K/qQ/w3EsSG1rng6/akqK0
+	ekDVK9k6sX/wQYiEZhk5B8SPBaaVrQW1WL+IMqL3ECnXsNYT/A+AaJzwSmBRD7G0xNNo
+	ga+wG8z9mp2YDu5Rgq0zohDJTZrhOVRUue16tFtkfeGdiLccH9M4F+zDwq1pemktV0ep
+	0GsQ==
+X-Gm-Message-State: AA+aEWYBTGmLdlSnjT5lyjitzCwAwPYyXECRUVKPsmW3JzHL99UEax97
+	CgOXlNPdVWdSNZlOqoJO20t0+gwVfS0lpkv/HSo=
+X-Google-Smtp-Source: AFSGD/Vb/QAeyepyb7BWs4DvKNDYgr+MfQqHPTox5T+SMRCOZQqEvEy+TUjiYQvqB0KwcRXerZ7WCPXh4zsniz+To9s=
+X-Received: by 2002:aca:544:: with SMTP id 65mr9116681oif.302.1543834080447;
+	Mon, 03 Dec 2018 02:48:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20181202191346.15104-1-raj.khem@gmail.com>
-	<20181202191346.15104-3-raj.khem@gmail.com>
-In-Reply-To: <20181202191346.15104-3-raj.khem@gmail.com>
+References: <20181202102736.47401-1-alex.kanavin@gmail.com>
+	<6d78c61b-d097-8677-8f7e-f6aa3d26f1f6@gmail.com>
+	<CANNYZj8V34J0ZKWAjWtRyYV_vJVJ4YCBK2PF4dmJenF2NkgtSQ@mail.gmail.com>
+	<CANNYZj_3o662t1+4+1Xk7pSU2nnK16ZadDZkwr=aSeE974w3=w@mail.gmail.com>
+	<CAMKF1sq+iGKKHvHnNOeeM001+ATb2stsrwLwJoRdzo1o1Ed7tQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sq+iGKKHvHnNOeeM001+ATb2stsrwLwJoRdzo1o1Ed7tQ@mail.gmail.com>
 From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Mon, 3 Dec 2018 11:47:07 +0100
-Message-ID: <CANNYZj9g4mW=tk0fTYzK7rHes5GDVVgXtm2wNeE0eLoOOC3X7w@mail.gmail.com>
+Date: Mon, 3 Dec 2018 11:47:49 +0100
+Message-ID: <CANNYZj8YGUxi6-UzdkcNVY+3xFga+QhmqR5YrcSTfoVi_gvUpA@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] packagegroup-meta-oe.bb: Exclude from world builds
+Subject: Re: [PATCH] packagegroup-meta-oe: drop ptest groups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,39 +57,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2018 10:47:18 -0000
+X-List-Received-Date: Mon, 03 Dec 2018 10:48:00 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-My patches fix this issue though, no need to exclude if you take them.
+On Sun, 2 Dec 2018 at 20:10, Khem Raj <raj.khem@gmail.com> wrote:
+
+> > However, maybe renaming the ptest group will work. Let me try that.
+> >
+>
+> while you are at it, send all the four patches in a single series,
+> current version seems to have conflicts.
+
+Sorry for the confusion - drop the first two patches, and take the
+last two only.
 
 Alex
-On Sun, 2 Dec 2018 at 20:14, Khem Raj <raj.khem@gmail.com> wrote:
->
-> It does not parse, since it has many unmet rdepends
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index 08b4bbfc48..2d24653b1d 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -1,5 +1,7 @@
->  SUMMARY = "Meta-oe ptest packagegroups"
->
-> +EXCLUDE_FROM_WORLD = "1"
-> +
->  inherit packagegroup
->
->  PROVIDES = "${PACKAGES}"
-> --
-> 2.19.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
