@@ -1,52 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EFD936C56D
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com
+	[209.85.219.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C8CE605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Dec 2018 20:13:02 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id q1so6934137pfi.5
+	Mon,  3 Dec 2018 21:27:41 +0000 (UTC)
+Received: by mail-yb1-f175.google.com with SMTP id f125so1201564ybc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2018 12:13:04 -0800 (PST)
+	Mon, 03 Dec 2018 13:27:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=5FaL11dTu/wbWNSaKDURPSCMySs9VFcFK0xK1oUCCGk=;
-	b=LKBky1bxMbjoKTEz9CerMJVNiJoL0EOfF2XzinKghmH38VUr6l2ZrvmPWS4qahBNUF
-	/o28NkkRT8zu2CnbsKkaH8qwt6wjYpuFFlGnx9Prx5WTdk9ycUpmAqvMC5B4tjY8+9r+
-	mTpjajOHwLalPvOdoeCqFoUF1djOkFgT6bqGNXOWFEx3RGDfyq/FSv2XCmP9OcEYm8z/
-	gtDqvlxcBAehkK76sKTCujAlBDyPGFO/ZtGLx4r1s9AJLtuR5S0Ig2ReifiqanxHojVn
-	1pjwKDSoPbzrL1439MgjHVMlk+qG6mO5nX5RYje7iSS93tLw0Xjh+6po0Ird9F8efVeH
-	J9yg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=P2XUkC7YDiCvBqcsnoRPaa/9ND1NZ4yBHmq4/+tHWO0=;
+	b=EIXpDJuwDZV3YQxEBQHSUq654DcXR+scW0Hg8e+iykV4CzAwcbn+pzN8aJl+XfNR/q
+	yE0JwjHVWsHMtrAM9HKYBo2KEkvOdqsuQUt2G8iTY7R4UBurfzXcteKwsp6T4JRKR5PI
+	1rXeM4aHNmzR8rYeULo5Bt5NPBwAfQ2/RHVjLgxJF5A7nOATeQptjmNF2W5gtqpSGkcZ
+	qhnsuALJQj2/m4h6TAtBisnoRyESYhghiUxrpYzShMxZQah/zVx9WGySdv4KiadL0qPl
+	raq+zUiCZ/YZfRFuGZx4balYGILMayihPtQ1BukCcUD7AjGqNewOqBtWChGpNPVogDhI
+	FSqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=5FaL11dTu/wbWNSaKDURPSCMySs9VFcFK0xK1oUCCGk=;
-	b=LGBz4EGF0FnD/+lyxXvt4O79QSkVT18AiFOL8cXV3zfUojXnkQXhR2iUtLBJeI6Zzg
-	NIaX1UDntqbGoKSBTAjs8AoVwILlFX+ao0LibK7/jxrP4zvopMyYC/vntCRS6XGxGZ4i
-	LjmutT7QnJXeE7nmfeDunkMbBHzLoqW+LKqO/8Q0ByteHKSn1j1vQWRqZvXNROaUqQQt
-	XQz2k1HJ0yWoNl6x+Oe47Gjb2ISHjSfDpXj8lgCk8gbC1cJ6aEUdEnrlHLowibUANXUi
-	D2G793gmhCIu1nRdXNCarQOZTLp33/+17rPtGVefig5WacmjZTrSVJ45yCFK9eFqNRa1
-	zyQg==
-X-Gm-Message-State: AA+aEWYZyOCMOT20Km2+/zZYIW+zPsjoCBaylbxPVqZTHP59NsK3zUUI
-	7zfxmsD31xKCm9ADgi7z9mY/PRZZ0vI=
-X-Google-Smtp-Source: AFSGD/UMPGhIToASoBZUUBb8NoAmuziqZr7jdg/6uRfoVytEM8vqsZsg8FaSrc2isOOrXLcjUXKT/Q==
-X-Received: by 2002:a65:5088:: with SMTP id r8mr13990667pgp.15.1543867983439; 
-	Mon, 03 Dec 2018 12:13:03 -0800 (PST)
-Received: from localhost.localdomain ([2601:646:877f:9499::5f84])
-	by smtp.gmail.com with ESMTPSA id
-	z191sm16769677pgd.74.2018.12.03.12.13.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Dec 2018 12:13:03 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Dec 2018 12:12:50 -0800
-Message-Id: <20181203201250.23144-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20181203201250.23144-1-raj.khem@gmail.com>
-References: <20181203201250.23144-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=P2XUkC7YDiCvBqcsnoRPaa/9ND1NZ4yBHmq4/+tHWO0=;
+	b=Svo2QreE2vwn/tIo+Dwtc1/uzHWYGj1ld1YRzlV9TB39/6KzwnlqHlF7LItyfy3bzt
+	eEOYuiyptdGtTRlu5m7aSiXQS/jLjlwJ7Gxzr1Vg8MHUV8vP2CV+/fxM77BGQH/RyhRG
+	H3BbHiZEOTrWeTrLZ0iChfXiA8w58ftR6ozXjl2mkF+wPzgyz56p+Nk0smvobgmekk7Z
+	54kZKU6pLouJJoHVWLqvnh4oXQ/6zXS9aP3N20Q40elyjf2ZzclH2gYAPmF+xR353z3G
+	jwh6D5ahU/aItwLWWLnNGUBKWSIv6QxnR5BmbsY5Qa2CZkTOELsqrob+TTqql32bCepi
+	awEw==
+X-Gm-Message-State: AA+aEWZ+4fs1lqPhvTWPlrEa+9W6AVKh6qWry1MtlgFGVsoWeGhrnw/y
+	dWZ4pv0BWq8oMbmFnFlsDOrrHE1Axhltlqaohjs=
+X-Google-Smtp-Source: AFSGD/VDj0eWqRU46J+vpuE03Pz7SI+UJqE4OkH67qzt+miwsUXywqB6Khge7GYyJIATuSuLSsOF0GRr0ZQ8YkTle9U=
+X-Received: by 2002:a25:5a46:: with SMTP id o67mr9319560ybb.215.1543872462088; 
+	Mon, 03 Dec 2018 13:27:42 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] a2jmidid: Define own do_configure
+References: <20181203201250.23144-1-raj.khem@gmail.com>
+	<20181203201250.23144-2-raj.khem@gmail.com>
+In-Reply-To: <20181203201250.23144-2-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 3 Dec 2018 22:27:28 +0100
+Message-ID: <CALbNGRSDw8uUhu49OgeSMrqyjW+69-M888zKr55rr4mHTsjmKA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] a2jmidid: Define own do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,34 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2018 20:13:03 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 03 Dec 2018 21:27:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-waf script here does not support -o switch so define own which can
-be run in B
+On Mon, Dec 3, 2018 at 9:13 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> waf script here does not support -o switch so define own which can
+> be run in B
+>
+> Secondly, ensure to use python2
+1. Why?
+2. There is no python2 in sysroot Maybe it was doing it before but now
+I think it makes recipe use host's python2.
 
-Secondly, ensure to use python2
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-multimedia/jack/a2jmidid_8.bb | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-index 59b73f8e8b..7dcaaf6828 100644
---- a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-+++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-@@ -23,4 +23,9 @@ LDFLAGS_append_libc-musl = " -lexecinfo"
- 
- export LINKFLAGS="${LDFLAGS}"
- 
-+do_configure() {
-+    sed -i 's|/usr/bin/.*python$|/usr/bin/env python2|' ${S}/a2j_control ${S}/waf ${S}/wscript
-+    (cd ${B} && ${S}/waf configure --prefix=${prefix} ${WAF_EXTRA_CONF} ${EXTRA_OECONF})
-+}
-+
- FILES_${PN} += "${datadir}/dbus-1/services"
--- 
-2.19.2
-
+Andreas
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/jack/a2jmidid_8.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+> index 59b73f8e8b..7dcaaf6828 100644
+> --- a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+> +++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+> @@ -23,4 +23,9 @@ LDFLAGS_append_libc-musl = " -lexecinfo"
+>
+>  export LINKFLAGS="${LDFLAGS}"
+>
+> +do_configure() {
+> +    sed -i 's|/usr/bin/.*python$|/usr/bin/env python2|' ${S}/a2j_control ${S}/waf ${S}/wscript
+> +    (cd ${B} && ${S}/waf configure --prefix=${prefix} ${WAF_EXTRA_CONF} ${EXTRA_OECONF})
+> +}
+> +
+>  FILES_${PN} += "${datadir}/dbus-1/services"
+> --
+> 2.19.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
