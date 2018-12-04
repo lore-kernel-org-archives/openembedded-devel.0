@@ -1,53 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E1726D268
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+	[209.85.160.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 868236D226
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 17:46:31 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id z23so8661619plo.0
+	Tue,  4 Dec 2018 17:59:46 +0000 (UTC)
+Received: by mail-qt1-f182.google.com with SMTP id l11so19123451qtp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2018 09:46:33 -0800 (PST)
+	Tue, 04 Dec 2018 09:59:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=BeAZJXPTT3xQk60jklJoTR4CfRkRtTi/gy4vsmfvDFE=;
-	b=Ze5979A79aVQEFqJTAmEcNjZqGTvG0LGHtg4vJ9Ybtpg0FfF6FSEvSBpa27L00/GNn
-	w8oDe5HD2VgxcqCZdqyHlcvv0/2UYDrph5qtLDqhjvrNmCWlfFQQcfNqLyfql/KhBgkD
-	ybEJNboyBlm5Kt87hQpXUJh1MW53Qvb4PTh0f+SLxi+idRg2LCVREwDv98aPnqj604Kv
-	Pi5esw2QIOn1BDUir0sMu+lE8zvBn661d54fsSEB6SIA82eSnhFdJFrnPm6eNAjg2xZ/
-	JAAisccWFZYp7LApBDBKSP9ak8fpdTzPYXMowhdlRbzH4y72CDPfKcx3MNvD4V+LXd3E
-	QDsA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=stC3cMyGeu4zRF3QUDCIJ6AzpG54AXJRI5XTL2eXLbY=;
+	b=EWLkxYK2ci0HCuo2KFrwsvq5gDNtk0iV0b8rz/WcO7RtbcSlXVfaIABSjj2rPv9GD7
+	LlkGrlBEtl5LqMXNvHPMjfK8TKh5RAep/qYk9q1r5OyPAd4IMFWlvxxrdQwcTLnUmRDU
+	v5tJ42G6PyGGLkVVN8i1nMXmmGlQsQiI/tf1tTRB2gSEWwNuN4Kt98oL285kPRg1z86q
+	Hsh5SNq+86fOJ6kMxq+cwk32okYUcKozisOb3zoXCk5T6AMfjyzKLzK6lNAMzVMJpfEI
+	F29LHrGsMa8pSNoE3fJBYxZNgezfTNZkGLbFV/k30X76SNrvjoeU3N/QT4BXlmY8F+Mb
+	wJmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=BeAZJXPTT3xQk60jklJoTR4CfRkRtTi/gy4vsmfvDFE=;
-	b=SQjylPYWXEbKcWjFjJd00auzDax1hYwrdx9/apHPsEY3JPOvyAh3nqHSFpumsPPW6i
-	7hUQMNkjogjmTJKCGSHEy1M0iIMOyPYPqthKlUVYR86HTRPLdXqboMrFRkAzNeMUGYnE
-	z7YbUeJO73UgpH5pqPB3ZN463K17KLotbhyQNJZK7OsrtoT/qqrQuU+tU/Obb3cR/it1
-	LEk+8szsb1JCJ40p/8sFgEXh83+nc3EgZ6MFrs1IQuwbHo+t3d5DNlLPjVqPC/OSVyJv
-	pfezh813JqKjd5BgBnCgS13ecO6L/RLwMur6dSz0x/VBQ+R+pHLz1K2fwWYj0Ig8uADy
-	DPag==
-X-Gm-Message-State: AA+aEWb/CMVP0NJveoazS7gwZ4q8FAP6B9dbkirw4cDnL6ondNU3EScO
-	17msaoNghIt1ptHBxZMEC5FSbMJuN3w=
-X-Google-Smtp-Source: AFSGD/WX5f9+j6VwHch52/+Ruva209U1bAgtq7tW24Xua1Bzqcw8slAoZD1kdCc5NMyw2FTJg7inpA==
-X-Received: by 2002:a17:902:8641:: with SMTP id
-	y1mr20963897plt.159.1543945592324; 
-	Tue, 04 Dec 2018 09:46:32 -0800 (PST)
-Received: from localhost.localdomain ([2601:646:877f:9499::5f84])
-	by smtp.gmail.com with ESMTPSA id
-	i62sm20503065pge.44.2018.12.04.09.46.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 04 Dec 2018 09:46:31 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2018 09:46:18 -0800
-Message-Id: <20181204174618.6271-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20181204174618.6271-1-raj.khem@gmail.com>
-References: <20181204174618.6271-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=stC3cMyGeu4zRF3QUDCIJ6AzpG54AXJRI5XTL2eXLbY=;
+	b=tysx2uCxvrCkMozMzjHM41tR/nj26BfBAEypQHe4iYcE0bjQiR4GeWkl05lixWu3kV
+	+4lRD96G/kTEFqLO6Kl9z0yhK0zl2JY/wwUOccRISdXtQlanYaPBg3NtLlPBbKOpnjLU
+	01OIH/Zo1kW66C9QLmsEhm5rYZWSDMnEAqadX9+VpZ9LxIxEM5+TOKZuwO78a4YRgyOF
+	xcblMxbycjcS7SmDthyybspcCc3RtTe5a3UUvXO7pZUuGcdWW3XhHMxr2DDs4HQvOX2t
+	EDtjGA8oCI++FiGrO7/UlMzn9ldQNE0CWvcAjGrb1r5HsNN8R5ph4vZ35UTvHXovAr0e
+	2qRw==
+X-Gm-Message-State: AA+aEWbpAhaTUO6BaHNUH895e+22qv6Dk20zoXL6/7wvEoaeCjBvenz/
+	g/vUwqv/H4mAa73ol2IWr/7CEl3xBWxCVYi13wM=
+X-Google-Smtp-Source: AFSGD/VzRwMMoj4RwBjXiXD33JxLj9Fd1l8myaZaiYlLHFmuIHsdB6FdC0C489WQ6SlXDW3mUUpM9F7gth3uDwBo/v8=
+X-Received: by 2002:a0c:98a1:: with SMTP id f30mr20191550qvd.224.1543946387191;
+	Tue, 04 Dec 2018 09:59:47 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] packagegroup-meta-oe: Remove packages which don't build for musl
+References: <cover.1543840903.git.psaavedra@igalia.com>
+	<20587d4b524b590f8bb3c067cf680d82333e35ca.1543840903.git.psaavedra@igalia.com>
+In-Reply-To: <20587d4b524b590f8bb3c067cf680d82333e35ca.1543840903.git.psaavedra@igalia.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 4 Dec 2018 09:59:21 -0800
+Message-ID: <CAMKF1srUpaYgrowqGVOdjzm+Ryyf93VB1HKCMSNM5rBX80FJew@mail.gmail.com>
+To: Pablo Saavedra <psaavedra@igalia.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openembedded][PATCH v4 1/7] pyzy: add pyzy recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,44 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2018 17:46:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 04 Dec 2018 17:59:46 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index e79d6ee217..bd4ed9c8e7 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -171,6 +171,7 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
-     agent-proxy bpftool broadcom-bt-firmware cpupower \
-     crash ipmitool minicoredumper oprofile \
-     "
-+RDEPENDS_packagegroup-meta-oe-kerne_remove_libc-musl = "bpftool crash minicoredumper"
- 
- RDEPENDS_packagegroup-meta-oe-multimedia ="\
-     alsa-oss audiofile cdrkit esound id3lib \
-@@ -182,6 +183,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
-     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libmikmod", "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2 mpv", "", d)} \
-     "
-+RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
- 
- RDEPENDS_packagegroup-meta-oe-navigation ="\
-     geoclue geos libspatialite proj \
-@@ -246,7 +248,7 @@ RDEPENDS_packagegroup-meta-oe-test ="\
-     catch2 cppunit cunit cxxtest evtest fb-test \
-     fwts gtest pm-qa stress-ng testfloat \
-     "
--
-+RDEPENDS_packagegroup-meta-oe-test_remove_libc-musl = "pm-qa"
- RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
- RDEPENDS_packagegroup-meta-oe-test_remove_mipsarch = "fwts"
- RDEPENDS_packagegroup-meta-oe-test_remove_powerpc = "fwts"
--- 
-2.19.2
-
+this fails too - http://errors.yoctoproject.org/Errors/Details/203335/
+On Mon, Dec 3, 2018 at 4:46 AM Pablo Saavedra <psaavedra@igalia.com> wrote:
+>
+> The chinese pinyin and bopomofo conversion library
+>
+> Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
+> ---
+>  meta-oe/recipes-support/pyzy/pyzy_git.bb | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/pyzy/pyzy_git.bb
+>
+> diff --git a/meta-oe/recipes-support/pyzy/pyzy_git.bb b/meta-oe/recipes-support/pyzy/pyzy_git.bb
+> new file mode 100644
+> index 000000000..2a1df6187
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/pyzy/pyzy_git.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "The Chinese PinYin and Bopomofo conversion library"
+> +LICENSE = "LGPL-2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
+> +SECTION = "inputmethods"
+> +
+> +SRCREV = "6d9c3cdff364e0da75e1c26222240f26370ebf73"
+> +SRC_URI = "git://github.com/pyzy/pyzy.git;protocol=https;branch=master"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit autotools pkgconfig
+> +
+> +DEPENDS = "glib-2.0 util-linux sqlite3"
+> +
+> +EXTRA_OECONF += " \
+> +    --disable-opencc \
+> +    --disable-db-open-phrase \
+> +    --disable-db-android \
+> +"
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
