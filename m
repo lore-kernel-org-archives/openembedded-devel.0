@@ -1,21 +1,51 @@
-Return-Path: <eduardas.m@fods.com>
-Received: from pastas.balt.net (lex.balt.net [217.117.28.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 890826BA7C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CD8F6D22D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 16:53:13 +0000 (UTC)
-Received: from eduardas-HP-EliteDesk-800-G2-TWR.lifodas.local (unknown
-	[213.197.143.19]) (Authenticated sender: eduardas.m@fods.com)
-	by pastas.balt.net (Postfix) with ESMTPA id C11371BE6F
+	Tue,  4 Dec 2018 17:46:29 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id b5so8665508plr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 18:53:11 +0200 (EET)
-From: Eduardas Meile <eduardas.m@fods.com>
+	Tue, 04 Dec 2018 09:46:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=/fhXtxKSoyM87Yg/yLI4s2nfduMaGMld3c1h2ztDR1o=;
+	b=jPprgF3Z7pbNpzo0Q2OKj+tv5elqLleUaBig7KbjGNe/AfEzdtbElReulEZAdLXGz8
+	P3lh3bj82P1TgxLY3voddDPZ0QjziiNj1VEWw30HwY+Vh//WWXSk2nmZIoOuPW6ebK13
+	B37FLkY2HvgmsJ/ZZE1MIHvQ8QZCcEfdkAYaOhIUzEi/cDDqZrivlXiqSPAyMMdjCmqk
+	gZDsdrfWzk4MAa1Y1Hx48mJ0cbkEe6/Y75SRmVTw9Kw0ByzozokAztxyqRkShY7FSFGF
+	ZM11srM3CpIjh8KUNYkJ+jSS2GO53xN7QxbaeZ248TxKv2TPkDh9MThZ8DJBXoz8UOav
+	6NDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=/fhXtxKSoyM87Yg/yLI4s2nfduMaGMld3c1h2ztDR1o=;
+	b=bqsi/yzCmg1ePDLnUq6anYAi501elxyC6SwkXR6bRM0T1gnPuQJ+I89ZpMDQsRHtQM
+	2QKwF9fsdNl6na6+fjNp4Ol5uRHD7y+kuypSGTT1Q9XXvjhHhicxPi4CEEiiTmDmvOvW
+	5xa4Bayt9k2ZWC6axS8GA/nqfnMHypol+tF4n7FnzXM6YzCmLfX/Nk1mmGTWwdbRcEP9
+	QvzTANeOQadi60i82x0ainFRQRLxo2uVtVTuqkvqvTRqRNkMdrxy5KD/hPjinFqLMRa0
+	QOkZNsNG9vDk5Rxkn24+s5PRDveBnCOOKeBxTZvdH3KrLlrtM6ujhaTLGDB3TNiW1g+z
+	2NJQ==
+X-Gm-Message-State: AA+aEWbmyxolmGIQ5ZGzh4vqLm618NR31ix3OcadEEZrnvBbvyjMGeAb
+	xRhSmjoNpdWS94E/qXff1/wfLzomM50=
+X-Google-Smtp-Source: AFSGD/VHtLGBY1S6jsAr6pYOkG0gfrSntjUFvFmSHU7m5fwtXkLW348/XMeVSJ+2seDjAN4/xwo14Q==
+X-Received: by 2002:a17:902:b48b:: with SMTP id
+	y11mr20146479plr.200.1543945590651; 
+	Tue, 04 Dec 2018 09:46:30 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:877f:9499::5f84])
+	by smtp.gmail.com with ESMTPSA id
+	i62sm20503065pge.44.2018.12.04.09.46.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 04 Dec 2018 09:46:29 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2018 18:52:57 +0200
-Message-Id: <20181204165257.11634-1-eduardas.m@fods.com>
-X-Mailer: git-send-email 2.17.1
-X-Virus-Scanned: clamav-milter 0.99.4 at neptunas3.balt.net
-X-Virus-Status: Clean
-Subject: [meta-oe][PATCH] toybox: use cml1.bbclass to add a proper menuconfig task
+Date: Tue,  4 Dec 2018 09:46:16 -0800
+Message-Id: <20181204174618.6271-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.2
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/3] bpftool: don't build under musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,29 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2018 16:53:13 -0000
+X-List-Received-Date: Tue, 04 Dec 2018 17:46:30 -0000
+Content-Transfer-Encoding: 8bit
 
-It is sometimes convenient to use "bitbake toybox -c menuconfig".
+uses FTW_SKIP_SUBTREE which is GNU extentions, available in glibc but
+not in musl
 
-Signed-off-by: Eduardas Meile <eduardas.m@fods.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-core/toybox/toybox_0.7.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-kernel/bpftool/bpftool.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-index 1ea868f67..614136e27 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-@@ -48,7 +48,7 @@ do_install() {
-     install -m 0644 ${B}/toybox.links ${D}${sysconfdir}
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index fd0653ab87..dd7eaa2aa6 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -14,6 +14,8 @@ EXTRA_OEMAKE = "-C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC
+ 
+ do_configure[depends] += "virtual/kernel:do_shared_workdir"
+ 
++COMPATIBLE_HOST_libc-musl = 'null'
++
+ do_compile() {
+     oe_runmake
  }
- 
--inherit update-alternatives
-+inherit cml1 update-alternatives
- 
- # If you've chosen to install toybox you probably want it to take precedence
- # over busybox where possible but not over other packages
 -- 
-2.17.1
+2.19.2
 
 
