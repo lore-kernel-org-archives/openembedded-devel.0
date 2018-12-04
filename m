@@ -1,23 +1,21 @@
 Return-Path: <eduardas.m@fods.com>
-X-Greylist: delayed 1971 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 04 Dec 2018 13:33:38 UTC
-Received: from pastas.balt.net (pastas.balt.net [217.117.28.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E6816C50C
+Received: from pastas.balt.net (lex.balt.net [217.117.28.48])
+	by mail.openembedded.org (Postfix) with ESMTP id F27856C4CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 13:33:38 +0000 (UTC)
+	Tue,  4 Dec 2018 14:15:53 +0000 (UTC)
 Received: from eduardas-HP-EliteDesk-800-G2-TWR.lifodas.local (unknown
 	[213.197.143.19]) (Authenticated sender: eduardas.m@fods.com)
-	by pastas.balt.net (Postfix) with ESMTPA id 82E4E1DDAB
+	by pastas.balt.net (Postfix) with ESMTPA id 5F0721DE2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 15:00:46 +0200 (EET)
+	Tue,  4 Dec 2018 16:15:52 +0200 (EET)
 From: Eduardas Meile <eduardas.m@fods.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2018 15:00:48 +0200
-Message-Id: <20181204130048.19432-1-eduardas.m@fods.com>
+Date: Tue,  4 Dec 2018 16:15:12 +0200
+Message-Id: <20181204141512.25927-1-eduardas.m@fods.com>
 X-Mailer: git-send-email 2.17.1
 X-Virus-Scanned: clamav-milter 0.99.4 at neptunas1.balt.net
 X-Virus-Status: Clean
-Subject: [PATCH 1/1] Add MirBSD Korn Shell recipe
+Subject: [meta-openembedded][PATCH] mksh: add version 56
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,8 +28,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2018 13:33:39 -0000
+X-List-Received-Date: Tue, 04 Dec 2018 14:15:54 -0000
 
+The MirBSD Korn Shell is a permissively licensed shell currently used
+by Android.
+
+Signed-off-by: Eduardas Meile <eduardas.m@fods.com>
 ---
  meta-oe/recipes-shells/mksh/mksh_56.bb | 34 ++++++++++++++++++++++++++
  1 file changed, 34 insertions(+)
