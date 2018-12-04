@@ -1,21 +1,48 @@
-Return-Path: <eduardas.m@fods.com>
-Received: from pastas.balt.net (lex.balt.net [217.117.28.48])
-	by mail.openembedded.org (Postfix) with ESMTP id F27856C4CF
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id EB7586C479
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 14:15:53 +0000 (UTC)
-Received: from eduardas-HP-EliteDesk-800-G2-TWR.lifodas.local (unknown
-	[213.197.143.19]) (Authenticated sender: eduardas.m@fods.com)
-	by pastas.balt.net (Postfix) with ESMTPA id 5F0721DE2D
+	Tue,  4 Dec 2018 15:01:00 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id c126so9637976wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 16:15:52 +0200 (EET)
-From: Eduardas Meile <eduardas.m@fods.com>
+	Tue, 04 Dec 2018 07:01:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=G1+c8ik6BMJXamPEPWmbSeX9RdAASrz3iMB5PmSQ0uw=;
+	b=HiK4l1JnAV83SytigIdNxTAqKefV/vRFyD0sFz3z8shAyHsmA9tuDnBIHPs/a4chgV
+	Rfut5kbycDFB+oTgeb6G6Pt26K1TIYva6CQZxetEk0RhNtzG4YwAVMI/7DO0tCemQZkH
+	dqIor5QSpVhKYQHIqfkQJcs50WmFYWkFuuT1rQr4HSmJpUNX5MMfTQvUsyKuMwgY8aCg
+	otM73/GA4BTuBYtTVlM61eYUUtPzS0kyoijj8tdXnaLlw7l4tahTfpOBnO9H9xN6b9fd
+	pw143xBQ7MMk0mV7gT1g03syLo9ip8mucvNPxfA0cN/6jvhEsvg86AKkZDRxdX3Q9yD4
+	gqAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=G1+c8ik6BMJXamPEPWmbSeX9RdAASrz3iMB5PmSQ0uw=;
+	b=leKa6B/oIAsNHxzm7++GZ/Q4vbCK+Nrn/AqDqVF2eoO4aCTiMCtOpCUjnp1bXm0OmQ
+	OQEGWacjh6EVmRjs6fsT8fSejdDSd0b5TbTB9UBEZFBnzxTO6ztLiA3WiyUf/+InFpMC
+	/ydT9cJWnBkaZzTPYCyVe9F0LKpFvPKXi2v3nwsHsVz12RbGNaQ4XIPWZteMj4dS7/G3
+	hoom6H7vHXfcTQI8fTtMtHNlxLCzi4iTfTKqQ+Xc9ExOqbGYomI5qRvPGGnWJh9uxkgq
+	nbJrBegBA+OT538N7C15ddTGzIcfFDoclOh5h2DVRnrfupkmlQJMRiS3EowihHA/79hl
+	nyAA==
+X-Gm-Message-State: AA+aEWZ8E+v+8Wbf5UauyJUBr1uL8sQCz3vMbHB+JR0XuM1NMNFYtPQa
+	nayFprWv9OUP692iDiYK+Ne5wj2L
+X-Google-Smtp-Source: AFSGD/XVsr4kxPUKDSryLXby0iSkavtVJzcxVB8Xfk1Naa0p3pE14rkOFGqmIly2RxRYJns/R2KTnw==
+X-Received: by 2002:a1c:e287:: with SMTP id z129mr12527105wmg.71.1543935661326;
+	Tue, 04 Dec 2018 07:01:01 -0800 (PST)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host184-22-dynamic.15-87-r.retail.telecomitalia.it. [87.15.22.184])
+	by smtp.gmail.com with ESMTPSA id
+	n9sm18905067wrx.80.2018.12.04.07.00.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 04 Dec 2018 07:01:00 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2018 16:15:12 +0200
-Message-Id: <20181204141512.25927-1-eduardas.m@fods.com>
+Date: Tue,  4 Dec 2018 16:00:57 +0100
+Message-Id: <20181204150057.3249-1-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.17.1
-X-Virus-Scanned: clamav-milter 0.99.4 at neptunas1.balt.net
-X-Virus-Status: Clean
-Subject: [meta-openembedded][PATCH] mksh: add version 56
+Subject: [meta-initramfs][PATCH] klibc: fix build for mipsel and mips64el with security flags enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,57 +55,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2018 14:15:54 -0000
+X-List-Received-Date: Tue, 04 Dec 2018 15:01:01 -0000
 
-The MirBSD Korn Shell is a permissively licensed shell currently used
-by Android.
+Fix relocations like:
+| mipsel-oe-linux-musl-ld.bfd: usr/klibc/libc.a(kill.o):
+ relocation R_MIPS_26 against `__syscall_common' can not be used when making a shared object; recompile with -fPIC
 
-Signed-off-by: Eduardas Meile <eduardas.m@fods.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-shells/mksh/mksh_56.bb | 34 ++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-shells/mksh/mksh_56.bb
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-shells/mksh/mksh_56.bb b/meta-oe/recipes-shells/mksh/mksh_56.bb
-new file mode 100644
-index 000000000..2ddcc6607
---- /dev/null
-+++ b/meta-oe/recipes-shells/mksh/mksh_56.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION = "The MirBSD Korn Shell - an enhanced version of the public domain ksh"
-+HOMEPAGE = "http://www.mirbsd.org/mksh.htm"
-+SECTION = "base/shell"
-+
-+LICENSE = "MirOS & ISC"
-+LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=25;md5=7204fec4d12912f2a13fe8745bc356f9 \
-+                    file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
-+                   "
-+
-+SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R56c.tgz"
-+
-+SRC_URI[md5sum] = "4799a9ac6d55871d79ba66713d928663"
-+SRC_URI[sha256sum] = "dd86ebc421215a7b44095dc13b056921ba81e61b9f6f4cdab08ca135d02afb77"
-+
-+inherit autotools update-alternatives
-+
-+S = "${WORKDIR}/${PN}"
-+
-+ALTERNATIVE_${PN} = "sh"
-+ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
-+ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
-+ALTERNATIVE_PRIORITY = "100"
-+
-+do_compile() {
-+    chmod +x ${S}/Build.sh
-+    ${S}/Build.sh
-+}
-+
-+do_install() {
-+    install -d ${D}${base_bindir}
-+    install -m 0755 ${S}/mksh ${D}${base_bindir}/mksh
-+}
-+
-+RPROVIDES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/sh', '', d)}"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index be01c2f58..398dfd1cf 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -69,6 +69,7 @@ KLIBC_ARCH = "${TARGET_ARCH}"
+ KLIBC_ARCH_aarch64 = "arm64"
+ KLIBC_ARCH_armeb = "arm"
+ KLIBC_ARCH_mipsel = "mips"
++KLIBC_ARCH_mips64el = "mips64"
+ KLIBC_ARCH_x86 = "i386"
+ KLIBC_ARCH_x86-64 = "x86_64"
+ KLIBC_ARCH_powerpc = "ppc"
+@@ -78,4 +79,6 @@ THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
+ GCCPIE ?= ""
+ SECURITY_LDFLAGS = "${@'-z relro -z now -pie' if '${GCCPIE}' else ''}"
+ SECURITY_LDFLAGS_mips = ""
++SECURITY_LDFLAGS_mipsel = ""
+ SECURITY_LDFLAGS_mips64 = ""
++SECURITY_LDFLAGS_mips64el = ""
 -- 
 2.17.1
 
