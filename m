@@ -1,47 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
-	[209.85.160.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 868236D226
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+	[209.85.222.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CCB266B96C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2018 17:59:46 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id l11so19123451qtp.0
+	Tue,  4 Dec 2018 22:59:51 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id w204so10746653qka.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2018 09:59:47 -0800 (PST)
+	Tue, 04 Dec 2018 14:59:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=stC3cMyGeu4zRF3QUDCIJ6AzpG54AXJRI5XTL2eXLbY=;
-	b=EWLkxYK2ci0HCuo2KFrwsvq5gDNtk0iV0b8rz/WcO7RtbcSlXVfaIABSjj2rPv9GD7
-	LlkGrlBEtl5LqMXNvHPMjfK8TKh5RAep/qYk9q1r5OyPAd4IMFWlvxxrdQwcTLnUmRDU
-	v5tJ42G6PyGGLkVVN8i1nMXmmGlQsQiI/tf1tTRB2gSEWwNuN4Kt98oL285kPRg1z86q
-	Hsh5SNq+86fOJ6kMxq+cwk32okYUcKozisOb3zoXCk5T6AMfjyzKLzK6lNAMzVMJpfEI
-	F29LHrGsMa8pSNoE3fJBYxZNgezfTNZkGLbFV/k30X76SNrvjoeU3N/QT4BXlmY8F+Mb
-	wJmw==
+	:cc; bh=elgGnjMtcCt+3tWcK0apbmXXXdHbKklfVRhVaSRj7R0=;
+	b=HiN2dtabS6tV4ApySPV52KT1km4gYPc4m6d/7YYKQormJjCqUTISNkgMFaq3syULBj
+	jp/TsN5c80UMiDC70oE+xxdSzslTNq7B8hbL5Q6Y/SAl2gAPgVQb2WE5VZzrB4wJGGvf
+	OUynCBM3lsZG7jJY3zvgxXKDCNgo6Z2GbEJnQntl52q24+qBF19Li8vu3lFoKeYZOhAO
+	eSJRIKH9Aa5Rf0MDPqmyo8EPSbH6HNEIQz5/1GYXXrhnu3OumkH83x6RUs9745IA1Y0h
+	gRAZIfOuZWiAtfS/6zfY3hTmAdwnRP37EQc1uB0t/xzQaRoyR8OglwPZxAqkEqdzlZtu
+	5G3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=stC3cMyGeu4zRF3QUDCIJ6AzpG54AXJRI5XTL2eXLbY=;
-	b=tysx2uCxvrCkMozMzjHM41tR/nj26BfBAEypQHe4iYcE0bjQiR4GeWkl05lixWu3kV
-	+4lRD96G/kTEFqLO6Kl9z0yhK0zl2JY/wwUOccRISdXtQlanYaPBg3NtLlPBbKOpnjLU
-	01OIH/Zo1kW66C9QLmsEhm5rYZWSDMnEAqadX9+VpZ9LxIxEM5+TOKZuwO78a4YRgyOF
-	xcblMxbycjcS7SmDthyybspcCc3RtTe5a3UUvXO7pZUuGcdWW3XhHMxr2DDs4HQvOX2t
-	EDtjGA8oCI++FiGrO7/UlMzn9ldQNE0CWvcAjGrb1r5HsNN8R5ph4vZ35UTvHXovAr0e
-	2qRw==
-X-Gm-Message-State: AA+aEWbpAhaTUO6BaHNUH895e+22qv6Dk20zoXL6/7wvEoaeCjBvenz/
-	g/vUwqv/H4mAa73ol2IWr/7CEl3xBWxCVYi13wM=
-X-Google-Smtp-Source: AFSGD/VzRwMMoj4RwBjXiXD33JxLj9Fd1l8myaZaiYlLHFmuIHsdB6FdC0C489WQ6SlXDW3mUUpM9F7gth3uDwBo/v8=
-X-Received: by 2002:a0c:98a1:: with SMTP id f30mr20191550qvd.224.1543946387191;
-	Tue, 04 Dec 2018 09:59:47 -0800 (PST)
+	bh=elgGnjMtcCt+3tWcK0apbmXXXdHbKklfVRhVaSRj7R0=;
+	b=foE+XRAE3FQlo7cGKSKPwXJMb7pLoTE2o90SvsM2A9SXSj6bxXSUn4kPGRWfU037uu
+	UfSgzLsHIdqFnYP+KEPmlLkDP4E+oqNbnRWOmGID3prChx/31dM8ADdg8fnROYzbepcb
+	IDA60Kun9I3DOHs4lkKyghJnAI2hL0FkCu7HedCJz5e6PGqptO3RTqxEz/SoAnuqRg5v
+	ngdHYgxnH04Y/r/E7w7dWYqXVzHWAMJIxBn/G2whfdj2JNu59B2fnWHBCXLj4DirWJjt
+	QnwahR9JoUi0zPwOVNWT6XMoXVYjsW+B1wgA/j6j6PXA3+AanXgfhamXa9mBdC5sL/2Q
+	K2MA==
+X-Gm-Message-State: AA+aEWaH/qRYFvR/IZcpSZ5aZsq/DQwSM5QYWEbA+tGo18aiskU8fAIA
+	bPi7/J0nED3M1GuvefzDhepiXWyAgH/5PKYcYbOEZ5/6n68=
+X-Google-Smtp-Source: AFSGD/UBf3SKH9J7tx3k4Sgxq17CkGpv6S4AIw4+UIZai0blIVdeiw24pDtBptBPRbWWHN+gUGDKMqqxVWrj5x3UsYQ=
+X-Received: by 2002:ae9:dc43:: with SMTP id q64mr20078244qkf.223.1543964392388;
+	Tue, 04 Dec 2018 14:59:52 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1543840903.git.psaavedra@igalia.com>
-	<20587d4b524b590f8bb3c067cf680d82333e35ca.1543840903.git.psaavedra@igalia.com>
-In-Reply-To: <20587d4b524b590f8bb3c067cf680d82333e35ca.1543840903.git.psaavedra@igalia.com>
+References: <20181204141512.25927-1-eduardas.m@fods.com>
+In-Reply-To: <20181204141512.25927-1-eduardas.m@fods.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Dec 2018 09:59:21 -0800
-Message-ID: <CAMKF1srUpaYgrowqGVOdjzm+Ryyf93VB1HKCMSNM5rBX80FJew@mail.gmail.com>
-To: Pablo Saavedra <psaavedra@igalia.com>
+Date: Tue, 4 Dec 2018 14:59:26 -0800
+Message-ID: <CAMKF1sphTtnuYGNFsWAPoeitakGJNxkt+ZzHGd6J8wOgG+DBJA@mail.gmail.com>
+To: eduardas.m@fods.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-openembedded][PATCH v4 1/7] pyzy: add pyzy recipe
+Subject: Re: [meta-openembedded][PATCH] mksh: add version 56
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +53,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2018 17:59:46 -0000
+X-List-Received-Date: Tue, 04 Dec 2018 22:59:52 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-this fails too - http://errors.yoctoproject.org/Errors/Details/203335/
-On Mon, Dec 3, 2018 at 4:46 AM Pablo Saavedra <psaavedra@igalia.com> wrote:
+Fails to build with musl - http://errors.yoctoproject.org/Errors/Details/203419/
+On Tue, Dec 4, 2018 at 6:16 AM Eduardas Meile <eduardas.m@fods.com> wrote:
 >
-> The chinese pinyin and bopomofo conversion library
+> The MirBSD Korn Shell is a permissively licensed shell currently used
+> by Android.
 >
-> Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
+> Signed-off-by: Eduardas Meile <eduardas.m@fods.com>
 > ---
->  meta-oe/recipes-support/pyzy/pyzy_git.bb | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->  create mode 100644 meta-oe/recipes-support/pyzy/pyzy_git.bb
+>  meta-oe/recipes-shells/mksh/mksh_56.bb | 34 ++++++++++++++++++++++++++
+>  1 file changed, 34 insertions(+)
+>  create mode 100644 meta-oe/recipes-shells/mksh/mksh_56.bb
 >
-> diff --git a/meta-oe/recipes-support/pyzy/pyzy_git.bb b/meta-oe/recipes-support/pyzy/pyzy_git.bb
+> diff --git a/meta-oe/recipes-shells/mksh/mksh_56.bb b/meta-oe/recipes-shells/mksh/mksh_56.bb
 > new file mode 100644
-> index 000000000..2a1df6187
+> index 000000000..2ddcc6607
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/pyzy/pyzy_git.bb
-> @@ -0,0 +1,21 @@
-> +DESCRIPTION = "The Chinese PinYin and Bopomofo conversion library"
-> +LICENSE = "LGPL-2.1"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
-> +SECTION = "inputmethods"
+> +++ b/meta-oe/recipes-shells/mksh/mksh_56.bb
+> @@ -0,0 +1,34 @@
+> +DESCRIPTION = "The MirBSD Korn Shell - an enhanced version of the public domain ksh"
+> +HOMEPAGE = "http://www.mirbsd.org/mksh.htm"
+> +SECTION = "base/shell"
 > +
-> +SRCREV = "6d9c3cdff364e0da75e1c26222240f26370ebf73"
-> +SRC_URI = "git://github.com/pyzy/pyzy.git;protocol=https;branch=master"
+> +LICENSE = "MirOS & ISC"
+> +LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=25;md5=7204fec4d12912f2a13fe8745bc356f9 \
+> +                    file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
+> +                   "
 > +
-> +S = "${WORKDIR}/git"
+> +SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R56c.tgz"
 > +
-> +inherit autotools pkgconfig
+> +SRC_URI[md5sum] = "4799a9ac6d55871d79ba66713d928663"
+> +SRC_URI[sha256sum] = "dd86ebc421215a7b44095dc13b056921ba81e61b9f6f4cdab08ca135d02afb77"
 > +
-> +DEPENDS = "glib-2.0 util-linux sqlite3"
+> +inherit autotools update-alternatives
 > +
-> +EXTRA_OECONF += " \
-> +    --disable-opencc \
-> +    --disable-db-open-phrase \
-> +    --disable-db-android \
-> +"
+> +S = "${WORKDIR}/${PN}"
 > +
-> +BBCLASSEXTEND = "native"
+> +ALTERNATIVE_${PN} = "sh"
+> +ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
+> +ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
+> +ALTERNATIVE_PRIORITY = "100"
+> +
+> +do_compile() {
+> +    chmod +x ${S}/Build.sh
+> +    ${S}/Build.sh
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${base_bindir}
+> +    install -m 0755 ${S}/mksh ${D}${base_bindir}/mksh
+> +}
+> +
+> +RPROVIDES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/sh', '', d)}"
 > --
-> 2.11.0
+> 2.17.1
 >
 > --
 > _______________________________________________
