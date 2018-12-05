@@ -1,67 +1,41 @@
-Return-Path: <prvs=87061c946=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 09FDF6D39C
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yw1-f65.google.com (mail-yw1-f65.google.com
+	[209.85.161.65])
+	by mail.openembedded.org (Postfix) with ESMTP id DAB4A60939
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Dec 2018 08:24:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,317,1539640800"; d="scan'208";a="13792733"
-To: <openembedded-devel@lists.openembedded.org>, Dave Buchwald
-	<dbuchwald@protedyne.com>
-References: <18DB423D160957498153A71956CACF8222223254@EXCHSVR3.protedyne.protedyne.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <acb12f56-472a-6bd3-5a9a-1bef0be316ce@skidata.com>
-Date: Wed, 5 Dec 2018 09:24:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.3.2
+	Wed,  5 Dec 2018 11:02:34 +0000 (UTC)
+Received: by mail-yw1-f65.google.com with SMTP id h32so8339465ywk.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Dec 2018 03:02:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=A6vVwZpKDuCpPoeBrGH35ZSyNu6/T11eZ9PDfhy8HGc=;
+	b=M5M8dIn7Ze8XVGoano/vxPnxpFNIkTQiAwH/8JlXVgC/HXI5Cq5uS22vLn77xQ6u1N
+	e4Ker4P2kSOFbkenAjyKws0BPff45JhAjRsyX4rn8f8dVqdjGJTUAb2osl9qbqMMbUDQ
+	i3OneY7qEoXSykyxx0VYVcLAEiPJ9J8I+RG747PIeZ8FhWYq/RBUa23SD80uu3y5EJx5
+	ghOyVsdA6+Q6Ci6fozCmm8CJLWldxpe+/dayKvU0JhikMKWJoptHf9XkW+BQDPJway46
+	sAjg8tZFCmSCmBkcch/cPRJF5OTHB83/iEAmH6Dpl6CuruthX1qB5xErAqIegXdokIkh
+	abFA==
+X-Gm-Message-State: AA+aEWZlnsbL/Um98pH5fnYleosui1INxLHu/VyQdoJqOlehNTq8fz1i
+	66hfZGs4P4yX1Yis1rU6Tgypp2j/
+X-Google-Smtp-Source: AFSGD/XnJ+QIGOGfDOBklCwrGDiI1v36s0DEsQtaPZpPF/EkxSTchPGPW191HyvkyT3U1bqyX9nPkQ==
+X-Received: by 2002:a81:4412:: with SMTP id r18mr23445289ywa.204.1544007755704;
+	Wed, 05 Dec 2018 03:02:35 -0800 (PST)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	n16sm7880109ywn.31.2018.12.05.03.02.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 05 Dec 2018 03:02:35 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Dec 2018 11:02:32 +0000
+Message-Id: <20181205110232.30393-1-git@andred.net>
+X-Mailer: git-send-email 2.20.0.rc2
 MIME-Version: 1.0
-In-Reply-To: <18DB423D160957498153A71956CACF8222223254@EXCHSVR3.protedyne.protedyne.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: Yocto and OpenJDK
+Subject: [meta-networking][PATCH] mosquitto: fix build in systemd environments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,52 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2018 08:24:27 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Wed, 05 Dec 2018 11:02:35 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi Dave,
+From: André Draszik <andre.draszik@jci.com>
 
-On 03.12.18 22:37, Dave Buchwald wrote:
-> I have a question about Java versions for Yocto. As we know, starting in January 2019, Oracle will
-> basically start crapping on the open source licensing availability for the JDK and will start charging for
-> updates starting with JDK11.  I build software and hardware using Yocto-built images for the imx7 using
-> Java and various Java-based technologies.
-> 
-> 
-> -        Will the Yocto project go to newer versions of OpenJDK? 9, 10, 11?
+The mosquitto systemd service file instructs systemd to wait
+for mosquitto to notify systemd that mosquitto has started
+correctly. This isn't working as mosquitto is not *compiled*
+with systemd support enabled. As such, systemd restarts
+mosquitto every few seconds.
 
-We are open for any submissions regarding newer OpenJDK versions. Although AFAIK 9 and 10 are already out of support again.
-Therefore if you plan to contribute a newer OpenJDK version: 11 would be preferred from our side ;-)
+For reference, this was introduced in commit a483d344d9fb
+("mosquitto: Make enabling systemd also enable build dep on systemd")
 
-Nonetheless at least I currently have no time and use-case to look into OpenJDK11 for meta-java.
+Because we build mosquitto using the provided Makefile
+infrastructure, the solution is to add PACKAGECONFIG_CONFARGS
+to EXTRA_OEMAKE, so that the required make flags are added
+to the make command line.
 
-> 
-> -        How will the Yocto project and meta-java go forward due to Oracle's actions?
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ .../recipes-connectivity/mosquitto/mosquitto_1.5.4.bb            | 1 +
+ 1 file changed, 1 insertion(+)
 
-Regarding OpenJDK8: We will follow the jdk8u releases [1].
-Concerning 6 & 7: AFAIK we are stuck with the versions currently available.
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
+index ee4cab728..e32f30d6e 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
+@@ -37,6 +37,7 @@ EXTRA_OEMAKE = " \
+     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', 'WITH_TLS=yes WITH_TLS_PSK=yes', 'WITH_TLS=no WITH_TLS_PSK=no', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'uuid', 'WITH_UUID=yes', 'WITH_UUID=no', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'websockets', 'WITH_WEBSOCKETS=yes', 'WITH_WEBSOCKETS=no', d)} \
++    ${PACKAGECONFIG_CONFARGS} \
+     STRIP=/bin/true \
+     WITH_DOCS=no \
+     WITH_BUNDLED_DEPS=no \
+-- 
+2.20.0.rc2
 
-> 
-> -        Will newer versions be tied to newer BSP's?
-
-Normally we are only developing on master. Nonetheless if someone sends backport patches for older branches we will happily apply them.
-
-Hope that helps...
-If you have any further question just ask ;-)
-
-regards;Richard.L
-
-[1] https://openjdk.java.net/projects/jdk8u/
-
-> 
-> 
-> 
-> 
-> thanks,
-> Dave Buchwald
-> Protedyne Corp.
-> Windsor, CT
-> 
 
