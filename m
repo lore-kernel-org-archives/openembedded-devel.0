@@ -1,52 +1,49 @@
-Return-Path: <uvv.mail@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DF3B6C455
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B06997458B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Dec 2018 12:14:20 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id d39so16777549edb.12
+	Wed,  5 Dec 2018 12:51:05 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id 96so19591490wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2018 04:14:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KDaUp5F1sSK62y4yYZ8NzR52G3di1D7z91BTnOwVzLs=;
-	b=JoFsi+Iy8wlnisgyV1SfsdTGVI9xxc7XwZVyuWoz1bKH3+E29e/C2q+HLDjs8toLfW
-	b29PVvxhr+bE0SUSm5kdni4Rk79gjs7asTGViZjwTS07mvPE5RyzdUG7lVusHA3CqRF2
-	iFQHDZqpItrd8omG9aZTocIbzgJxljgwS8ymLXA+d20h/bBcxic3yovKgg9sOVatrV1k
-	6vVAvCFv7GkA11c+nFemPUILvTXWsN1Otk8VbUGyIrTBKSz3WLvi7jEos6eqfEcGlwjY
-	v1+KClGG8n2OwuSOH6W83vgZAEEVKgO9bIIiegaE3rQxh//y6Z0QM1UphI+6GkDcV/qJ
-	VRTQ==
+	Wed, 05 Dec 2018 04:51:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=03JqRJrcNHSkkcOftEqTonFnjRH5Xt4hUguD7TJvi2Y=;
+	b=AHdccC1h22euz1hibydZ1ST+ofV/j25AjmCoFWr9FhnbIt82SGEQNbCCzvAJ6eGiO9
+	nOxoNpW3EGCWc09WfBCtoFT1J9hFnNu3swkSrBSZED9Tv5sbm5eaNQazREqjEkk79nIB
+	KsSGVpyxU5Kl7Y5mZPQBIHV2fi/graxQBXIYEf4qTQCDvfZr9gwvq73doxTsyNXlIqsH
+	iP4hnUrT9PZZmARUusmiElQBfG8El7XJEbPM7kE2Xm8pqy68jZ4c/x22hDqNyRns/wC7
+	TJk0UTbh6/V/APAfBKprMP6+6ck/qVLZCHrBK1v26iiyOsHf98ZiPFTVclruIArTjafq
+	H9cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KDaUp5F1sSK62y4yYZ8NzR52G3di1D7z91BTnOwVzLs=;
-	b=Y91i/TBZ0p5Msac7FgJ8c3NLEFxqCjtLT9sreHWNNoRnD7ML1zt/z+S/50DmWSQttN
-	0mOIeA+ws2cBBkG+ymA9IiOLdo5q14RSj3iEuU1CJEPQ33YB8sYYuR+38hJZOemYJU4f
-	LttHO1aW87bK7T3u+ZGUuKjQ46CoJxMzDywk/ZgjQ69QGSa611f/Jc9h1DWXEniJH3zQ
-	R0MaZu0wRtpxVeIObu6H/nMg9i4hmKhHwjQ+AmlHk2pyyORHiI5bcEa+MsSSDnk9M2sl
-	yHfxuLFQM6xo/Bs7TM0wKC80hb6yXfPblpWygwyA7EaD75iMruxpSwDacfXlMVcNZ+EZ
-	HidQ==
-X-Gm-Message-State: AA+aEWZJP6J071LszC6urr/YVcpYV6HdOXBmjy9FoUPKrtRWICAPJt2u
-	jqAYncvO7ru/YoF9j4dJQ22y/sZEMtY=
-X-Google-Smtp-Source: AFSGD/VUPGY11W8JVVoZiRw4F5bwAsllhkmLYZzSjVvgp3PyLuh8GJVonldTQQjKaSBjvqM/hoh8oQ==
-X-Received: by 2002:a17:906:1001:: with SMTP id
-	1-v6mr18555955ejm.91.1544012060743; 
-	Wed, 05 Dec 2018 04:14:20 -0800 (PST)
-Received: from localhost.localdomain (ip-109-42-0-94.web.vodafone.de.
-	[109.42.0.94]) by smtp.gmail.com with ESMTPSA id
-	gp22-v6sm3211234ejb.4.2018.12.05.04.14.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 05 Dec 2018 04:14:20 -0800 (PST)
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=03JqRJrcNHSkkcOftEqTonFnjRH5Xt4hUguD7TJvi2Y=;
+	b=sXyDPjpQVz4Maymd/zeM/ZA4ct4KvswqeFvfNNHfdcvUSfZQBWUpA7hzCl/GQZ56eu
+	JqMC9CZTOV/7R5g4RIV0zgNORSKDpGa6fYosbWVOPZjCi6NkYclOtrB9DU/xhnKLwbiS
+	2be1oU83EFUhm2HOWPe9wsn++6klk+OAhrNZaqvNb3nvWU4y58o2veVgZfuxRTHvDbhk
+	WM/bwq8Y8w1joJhwFLQxdcoV+wx5OJKSnhoEC2X67h15qYU9gfSyRUZVqXL9YlCv6O87
+	v0CAdV2OpexczxKKU+IlQF9riSyCRmEcmiia4mur0tP5ieS8JetytbpXurTBaSmTbQYi
+	xUUg==
+X-Gm-Message-State: AA+aEWYVnAyZ6PmCOpulCZDt3iCeQYJ/1BoYeLRqLR9c6viBcSdQ/Duy
+	pm5J7RbjH24Gbp6nJzV0jhH6HuHJDd4=
+X-Google-Smtp-Source: AFSGD/XEjAIQ6v+RWSYsZwRMHd9DepJ7lCyzK9f1KLOXOUIZcv1hry0sclKgd6IKxXWoQ8bwoLHFiw==
+X-Received: by 2002:adf:d112:: with SMTP id a18mr22810577wri.17.1544014266097; 
+	Wed, 05 Dec 2018 04:51:06 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	v16sm17771582wrs.75.2018.12.05.04.51.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 05 Dec 2018 04:51:05 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2018 13:13:57 +0100
-Message-Id: <20181205121357.116604-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.19.1
-MIME-Version: 1.0
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Subject: [meta-oe][PATCH] glog: fix installation path
+Date: Wed,  5 Dec 2018 12:50:59 +0000
+Message-Id: <20181205125100.32765-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH 1/2] iwd: add more PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,106 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2018 12:14:21 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 05 Dec 2018 12:51:06 -0000
 
-From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Disabled by default (as per upstream defaults), but expose ofono and wired
+options (wired installs the EAD service).
 
-When glog is compiled with multilib support, it shouldn't use hardcoded paths.
-Paths substitued by CMake should be used instead.
-
-Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Tested-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../glog/0003-installation-path-fix.patch     | 65 +++++++++++++++++++
- meta-oe/recipes-support/glog/glog_0.3.5.bb    |  1 +
- 2 files changed, 66 insertions(+)
- create mode 100644 meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
+ meta-oe/recipes-connectivity/iwd/iwd_0.12.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch b/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
-new file mode 100644
-index 000000000..641f70cb2
---- /dev/null
-+++ b/meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
-@@ -0,0 +1,65 @@
-+diff -uNr a/CMakeLists.txt b/CMakeLists.txt
-+--- a/CMakeLists.txt	2018-12-05 12:55:59.630792054 +0100
-++++ b/CMakeLists.txt	2018-12-05 13:00:22.922269200 +0100
-+@@ -403,10 +403,15 @@
-+ 
-+ set_target_properties (glog PROPERTIES PUBLIC_HEADER "${GLOG_PUBLIC_H}")
-+ 
-++set (_glog_CMake_BINDIR ${CMAKE_INSTALL_BINDIR})
-++set (_glog_CMake_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR})
-++set (_glog_CMake_LIBDIR ${CMAKE_INSTALL_LIBDIR})
-++set (_glog_CMake_INSTALLDIR ${_glog_CMake_LIBDIR}/cmake/glog)
-++
-+ target_include_directories (glog BEFORE PUBLIC
-+   "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
-+   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>"
-+-  "$<INSTALL_INTERFACE:include>"
-++  "$<INSTALL_INTERFACE:${_glog_CMake_INCLUDE_DIR}>"
-+   PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
-+   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-+ 
-+@@ -543,10 +548,10 @@
-+ 
-+ install (TARGETS glog
-+   EXPORT glog-targets
-+-  RUNTIME DESTINATION bin
-+-  PUBLIC_HEADER DESTINATION include/glog
-+-  LIBRARY DESTINATION lib
-+-  ARCHIVE DESTINATION lib)
-++  RUNTIME DESTINATION ${_glog_CMake_BINDIR}
-++  PUBLIC_HEADER DESTINATION ${_glog_CMake_INCLUDE_DIR}/glog
-++  LIBRARY DESTINATION ${_glog_CMake_LIBDIR}
-++  ARCHIVE DESTINATION ${_glog_CMake_LIBDIR})
-+ 
-+ if (gflags_FOUND)
-+   set (gflags_DEPENDENCY "find_dependency (gflags ${gflags_VERSION})")
-+@@ -554,7 +559,7 @@
-+ 
-+ configure_package_config_file (glog-config.cmake.in
-+   ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
-+-  INSTALL_DESTINATION lib/cmake/glog
-++  INSTALL_DESTINATION ${_glog_CMake_INSTALLDIR}
-+   NO_CHECK_REQUIRED_COMPONENTS_MACRO)
-+ 
-+ write_basic_package_version_file (glog-config-version.cmake VERSION
-+@@ -567,6 +572,7 @@
-+   ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
-+   ${CMAKE_CURRENT_BINARY_DIR}/glog-config-version.cmake
-+   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindLibunwind.cmake
-+-  DESTINATION lib/cmake/glog)
-++  DESTINATION ${_glog_CMake_INSTALLDIR})
-+ 
-+-install (EXPORT glog-targets NAMESPACE glog:: DESTINATION lib/cmake/glog)
-++install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
-++  ${_glog_CMake_INSTALLDIR})
-+diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
-+--- a/glog-config.cmake.in	2018-12-05 12:55:59.630792054 +0100
-++++ b/glog-config.cmake.in	2018-12-05 13:05:19.547196843 +0100
-+@@ -4,6 +4,7 @@
-+ 
-+ @gflags_DEPENDENCY@
-+ 
-++list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-+ find_dependency (Libunwind)
-+ 
-+ include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
-diff --git a/meta-oe/recipes-support/glog/glog_0.3.5.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-index 5e58450c2..3de01ef5b 100644
---- a/meta-oe/recipes-support/glog/glog_0.3.5.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
-@@ -12,6 +12,7 @@ SRC_URI = " \
-     git://github.com/google/glog.git;branch=v035 \
-     file://0001-Rework-CMake-glog-VERSION-management.patch \
-     file://0002-Find-Libunwind-during-configure.patch \
-+    file://0003-installation-path-fix.patch \
- "
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+index a4261547e4..3caad20a40 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_0.12.bb
+@@ -10,9 +10,9 @@ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+ SRCREV = "d7609915db4b57229f7dd4c04b4eabcce637872a"
+ S = "${WORKDIR}/git"
  
- SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
+-SYSTEMD_SERVICE_${PN} = "iwd.service"
+-
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
++PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
+ PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
+ 
+ EXTRA_OECONF += "--enable-external-ell"
+@@ -22,3 +22,5 @@ do_configure_prepend () {
+ }
+ 
+ FILES_${PN} += "${datadir}/dbus-1"
++
++SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
 -- 
-2.19.1
+2.11.0
 
 
