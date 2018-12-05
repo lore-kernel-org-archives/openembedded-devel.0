@@ -1,47 +1,66 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-io1-f53.google.com (mail-io1-f53.google.com
-	[209.85.166.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B7C3C6D44F
+Return-Path: <prvs=87061c946=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 09FDF6D39C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Dec 2018 08:09:13 +0000 (UTC)
-Received: by mail-io1-f53.google.com with SMTP id r9so8500850ioa.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2018 00:09:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oNiXgAWwBFCNRy4kL+DDgcTGClp4hKnEyJVA9ZucUKc=;
-	b=DCVwq4/doJkgv7369uidpaZ0NdU8NTAhfC0hDYfgZgSg4fx+oZrn8mE5qmCrUNht5T
-	FF5RR6NMxtPjJoMU1BRyR6CHrasSVPAXe7VKLFDOGB7E52xUSj9zGjitbx1dBH2OVep8
-	4CcRkdgtLMrcp7lunApHS/BayMr7IkSlRmOjTqwLXkAgK4tKohMZwCkHsO6YmSa7M23J
-	dzBbOHpDHT1ygyJ1EAyL8cqD16nHyindQGQGnshqaTxP9yO3wUnnGk9HheydtTgjhpcQ
-	oCR7bkAXD1EEiv0F1M8r98UqmhgpW57R48CuF30UhPq1XCEbQOULsZJuNMCbNnFWfcYT
-	D2Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=oNiXgAWwBFCNRy4kL+DDgcTGClp4hKnEyJVA9ZucUKc=;
-	b=RK46OkNBZZ4uvkjXAbKT8q53W0p54yF8Ml4/HU/xmp9U7jMt9k6uDiu43tuIvHeoFb
-	JU3H4K6ykxeKdAyRjLTP+L81wmmOjX0WMzFPEacHr5RBL4gR2jirrEPDq0z65Zj2C10x
-	wo+IfMZ/T+QWMH8E4UOBi5WX+FuPn34aD2HWSLm6zyaX522j8jEgXPlQPMz3xYbd1oSA
-	0kgqwnnLlRSsde21IKkl426YZqMhY7BwVov1kJPR4+NH+G52/9pnq8MBjYMNo9lw1se3
-	O3UFX5rLoAbeg+JkhHnC+ZxNgcBiW9eb+qxFrIe3oqNlXz/DWG/i2QMpUMLlQS6TyN4m
-	MIHg==
-X-Gm-Message-State: AA+aEWYZW7CGiv+WjfAXatuTgwkIVUK0DJDPB3TL1nnNqXciQ687lXp4
-	lNUM9hq8O7AnDW9dgJR7g80BGzjHuMMwnAf2bOY=
-X-Google-Smtp-Source: AFSGD/XNVtR8j+vJDLLqJp4WIyBDFVRDj/NEE1qkT3FnLyQkdyhMEmG+zHuSdzJVbkkc5W/mhJF1IKsWg/Njn+lxE7g=
-X-Received: by 2002:a5d:954c:: with SMTP id a12mr11163577ios.176.1543997354776;
-	Wed, 05 Dec 2018 00:09:14 -0800 (PST)
-MIME-Version: 1.0
+	Wed,  5 Dec 2018 08:24:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,317,1539640800"; d="scan'208";a="13792733"
+To: <openembedded-devel@lists.openembedded.org>, Dave Buchwald
+	<dbuchwald@protedyne.com>
 References: <18DB423D160957498153A71956CACF8222223254@EXCHSVR3.protedyne.protedyne.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <acb12f56-472a-6bd3-5a9a-1bef0be316ce@skidata.com>
+Date: Wed, 5 Dec 2018 09:24:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.2
+MIME-Version: 1.0
 In-Reply-To: <18DB423D160957498153A71956CACF8222223254@EXCHSVR3.protedyne.protedyne.com>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Wed, 5 Dec 2018 09:09:02 +0100
-Message-ID: <CAB2nKc80sfF40PBS3vegh5_o0E7Gac0Z6z9=0bT_v_c27M-2OQ@mail.gmail.com>
-To: dbuchwald@protedyne.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto-mailing-list <yocto@yoctoproject.org>,
-	openembedded-devel@lists.openembedded.org
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
 Subject: Re: Yocto and OpenJDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,51 +74,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2018 08:09:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 05 Dec 2018 08:24:27 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
 Hi Dave,
 
-I think this question belong to yocto ML as stated here:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-oracle-java/about/
-
-Best regards,
-Vincent
-
-Le lun. 3 d=C3=A9c. 2018 =C3=A0 22:38, Dave Buchwald <dbuchwald@protedyne.c=
-om> a
-=C3=A9crit :
-
-> I have a question about Java versions for Yocto. As we know, starting in
-> January 2019, Oracle will
-> basically start crapping on the open source licensing availability for th=
-e
-> JDK and will start charging for
-> updates starting with JDK11.  I build software and hardware using
-> Yocto-built images for the imx7 using
+On 03.12.18 22:37, Dave Buchwald wrote:
+> I have a question about Java versions for Yocto. As we know, starting in January 2019, Oracle will
+> basically start crapping on the open source licensing availability for the JDK and will start charging for
+> updates starting with JDK11.  I build software and hardware using Yocto-built images for the imx7 using
 > Java and various Java-based technologies.
->
->
-> -        Will the Yocto project go to newer versions of OpenJDK? 9, 10, 1=
-1?
->
-> -        How will the Yocto project and meta-java go forward due to
-> Oracle's actions?
->
+> 
+> 
+> -        Will the Yocto project go to newer versions of OpenJDK? 9, 10, 11?
+
+We are open for any submissions regarding newer OpenJDK versions. Although AFAIK 9 and 10 are already out of support again.
+Therefore if you plan to contribute a newer OpenJDK version: 11 would be preferred from our side ;-)
+
+Nonetheless at least I currently have no time and use-case to look into OpenJDK11 for meta-java.
+
+> 
+> -        How will the Yocto project and meta-java go forward due to Oracle's actions?
+
+Regarding OpenJDK8: We will follow the jdk8u releases [1].
+Concerning 6 & 7: AFAIK we are stuck with the versions currently available.
+
+> 
 > -        Will newer versions be tied to newer BSP's?
->
->
->
->
+
+Normally we are only developing on master. Nonetheless if someone sends backport patches for older branches we will happily apply them.
+
+Hope that helps...
+If you have any further question just ask ;-)
+
+regards;Richard.L
+
+[1] https://openjdk.java.net/projects/jdk8u/
+
+> 
+> 
+> 
+> 
 > thanks,
 > Dave Buchwald
 > Protedyne Corp.
 > Windsor, CT
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> 
 
