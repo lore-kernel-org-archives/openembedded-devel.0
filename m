@@ -1,23 +1,24 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A30976C484
+Return-Path: <Haiqing.Bai@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0810E6C1DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Dec 2018 06:21:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id wB66LxPG003394
+	Thu,  6 Dec 2018 09:55:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wB69t1Tn005109
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Dec 2018 22:22:00 -0800 (PST)
-Received: from pek-lpg-core1-vm1.wrs.com (128.224.156.106) by
+	Thu, 6 Dec 2018 01:55:42 -0800
+Received: from pek-lpgtest5.wrs.com (128.224.153.85) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Wed, 5 Dec 2018 22:21:59 -0800
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 6 Dec 2018 14:39:30 +0800
-Message-ID: <1544078370-1896-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	14.3.408.0; Thu, 6 Dec 2018 01:55:03 -0800
+From: Haiqing Bai <Haiqing.Bai@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
+Date: Thu, 6 Dec 2018 17:55:01 +0800
+Message-ID: <20181206095501.2985-1-Haiqing.Bai@windriver.com>
+X-Mailer: git-send-email 2.14.4
 MIME-Version: 1.0
-Subject: [PATCH] mce-test: add it
+Subject: [meta-networking][PATCH] ptpd: fixed the issue of ptpd2 daemon takes 100% CPU
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,83 +31,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Dec 2018 06:21:59 -0000
+X-List-Received-Date: Thu, 06 Dec 2018 09:55:52 -0000
 Content-Type: text/plain
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
----
- .../mcelog/mce-test/makefile-remove-ldflags.patch  | 23 +++++++++++++++++
- meta-oe/recipes-support/mcelog/mce-test_git.bb     | 30 ++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/mcelog/mce-test/makefile-remove-ldflags.patch
- create mode 100644 meta-oe/recipes-support/mcelog/mce-test_git.bb
+The ptpd2 daemon consumes 100% CPU (of a single core) after
+some amount of stable runtime. This fix added minimum POSIX
+timer interval to prevent from timers firing to quickly for
+the process to handle, resulting in 100% CPU and endless signal queue.
 
-diff --git a/meta-oe/recipes-support/mcelog/mce-test/makefile-remove-ldflags.patch b/meta-oe/recipes-support/mcelog/mce-test/makefile-remove-ldflags.patch
+Reference: https://github.com/ptpd/ptpd/blob/master/ChangeLog
+
+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+---
+ ...PU-using-issue-by-adding-minimum-POSIX-ti.patch | 68 ++++++++++++++++++++++
+ meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb |  1 +
+ 2 files changed, 69 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd/Fixed-100-CPU-using-issue-by-adding-minimum-POSIX-ti.patch
+
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd/Fixed-100-CPU-using-issue-by-adding-minimum-POSIX-ti.patch b/meta-networking/recipes-daemons/ptpd/ptpd/Fixed-100-CPU-using-issue-by-adding-minimum-POSIX-ti.patch
 new file mode 100644
-index 0000000..0ffedd2
+index 000000000..1d2a5368c
 --- /dev/null
-+++ b/meta-oe/recipes-support/mcelog/mce-test/makefile-remove-ldflags.patch
-@@ -0,0 +1,23 @@
-+Remove the default CFLAGS and LDFLAGS in Makefile. Ensure the extra linker flags can be passed.
++++ b/meta-networking/recipes-daemons/ptpd/ptpd/Fixed-100-CPU-using-issue-by-adding-minimum-POSIX-ti.patch
+@@ -0,0 +1,68 @@
++From e00d3f52ccc6496a60992ac5a9d771b1d067eceb Mon Sep 17 00:00:00 2001
++From: Haiqing Bai <Haiqing.Bai@windriver.com>
++Date: Thu, 22 Nov 2018 08:42:48 +0000
++Subject: [PATCH] Fixed 100% CPU using issue by adding minimum POSIX timer
++ interval
 +
-+Upstream-Status: Inappropriate [embedded specific]
++Added minimum POSIX timer interval to prevent from timers firing
++to quickly for the process to handle, resulting in 100% CPU and
++endless signal queue.
 +
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++Upstream-status: Backport
++[From commit 1f0baae98a7b23e85f2bfd8f5de64795421c270e:
++  - critical: added minimum POSIX timer interval to prevent from
++    timers firing to quickly for the process to handle,
++    resulting in 100% CPU and endless signal queue]
 +
-+diff --git a/cases/stress/hwpoison/Makefile b/cases/stress/hwpoison/Makefile
-+index da1cbd8..dec5b14 100644
-+--- a/cases/stress/hwpoison/Makefile
-++++ b/cases/stress/hwpoison/Makefile
-+@@ -1,8 +1,8 @@
-+-CFLAGS := -g -Wall
-+-LDFLAGS := -g
-++#CFLAGS := -g -Wall
-++#LDFLAGS := -g
++Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
++---
++ src/dep/eventtimer.h        | 3 ++-
++ src/dep/eventtimer_itimer.c | 2 +-
++ src/dep/eventtimer_posix.c  | 4 ++++
++ 3 files changed, 7 insertions(+), 2 deletions(-)
++
++diff --git a/src/dep/eventtimer.h b/src/dep/eventtimer.h
++index 64e483a..0a21318 100644
++--- a/src/dep/eventtimer.h
+++++ b/src/dep/eventtimer.h
++@@ -30,7 +30,8 @@
++  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++  */
 + 
-+-export CFLAGS
-+-export LDFLAGS
-++#export CFLAGS
-++#export LDFLAGS
++-#define EVENTTIMER_MAX_DESC           20
+++#define EVENTTIMER_MAX_DESC		20
+++#define EVENTTIMER_MIN_INTERVAL_US	250 /* 4000/sec */
 + 
-+ all:
-+ 	mkdir -p bin
-diff --git a/meta-oe/recipes-support/mcelog/mce-test_git.bb b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-new file mode 100644
-index 0000000..888c729
---- /dev/null
-+++ b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-@@ -0,0 +1,30 @@
-+#
-+# Copyright (C) 2012 Wind River Systems, Inc.
-+#
-+SUMMARY = "MCE test suite"
++ typedef struct EventTimer EventTimer;
++ 
++diff --git a/src/dep/eventtimer_itimer.c b/src/dep/eventtimer_itimer.c
++index cf3c6db..3bb7ec6 100644
++--- a/src/dep/eventtimer_itimer.c
+++++ b/src/dep/eventtimer_itimer.c
++@@ -53,7 +53,7 @@
++ 
++ #include "../ptpd.h"
++ 
++-#define US_TIMER_INTERVAL (62500)
+++#define US_TIMER_INTERVAL (31250)
++ 
++ static volatile unsigned int elapsed;
++ 
++diff --git a/src/dep/eventtimer_posix.c b/src/dep/eventtimer_posix.c
++index 637eef3..f4a702d 100644
++--- a/src/dep/eventtimer_posix.c
+++++ b/src/dep/eventtimer_posix.c
++@@ -100,6 +100,10 @@ eventTimerStart_posix(EventTimer *timer, double interval)
++ 	ts.tv_sec = interval;
++ 	ts.tv_nsec = (interval - ts.tv_sec) * 1E9;
++ 
+++	if(!ts.tv_sec && ts.tv_nsec < EVENTTIMER_MIN_INTERVAL_US * 1000) {
+++	    ts.tv_nsec = EVENTTIMER_MIN_INTERVAL_US * 1000;
+++	}
+++
++ 	DBGV("Timer %s start requested at %d.%4d sec interval\n", timer->id, ts.tv_sec, ts.tv_nsec);
++ 
++ 	its.it_interval = ts;
++-- 
++2.11.0
 +
-+DESCRIPTION = "The MCE test suite is a collection of tools and test scripts for \
-+testing the Linux RAS related features, including CPU/Memory error \
-+containment and recovery, ACPI/APEI support etc."
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mce-test.git;protocol=git \
-+           file://makefile-remove-ldflags.patch \
-+          "
-+SRCREV = "74bffd8b0aa27051aeaa1983a7b23975ca8d8726"
-+PV = "20171030+git${SRCPV}"
-+
-+RDEPENDS_${PN} = "mcelog mce-inject dialog bash"
-+
-+COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
-+
-+S ="${WORKDIR}/git"
-+
-+do_install_append(){
-+   install -d ${D}/opt/mce-test
-+   cp -rf ${S}/* ${D}/opt/mce-test/
-+}
-+
-+FILES_${PN} += "/opt"
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+index e13619320..58625c809 100644
+--- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+@@ -23,6 +23,7 @@ def get_sub(d):
+ 
+ SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
+            file://ptpd-use-pkgconfig.patch \
++           file://Fixed-100-CPU-using-issue-by-adding-minimum-POSIX-ti.patch \
+            file://ptpd.service \
+            file://ptpd.conf \
+ "
 -- 
-2.7.4
+2.14.4
 
 
