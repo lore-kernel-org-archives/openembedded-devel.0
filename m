@@ -1,54 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A3446C511
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8562D6025E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2018 22:51:09 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id q70so3400553qkh.6
+	Fri,  7 Dec 2018 22:51:50 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id 17so2335934pgg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Dec 2018 14:51:10 -0800 (PST)
+	Fri, 07 Dec 2018 14:51:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=FXHENlpQXoHWnqLLztZqaVFWWZtxQ1kgTjFN7cK9cr4=;
-	b=ohyk591qmu7Nb1G92dVzkjS77a1Zxaqu6/zyig8yYqPW/q28kAzO8v7M99z6+jtyl0
-	Us27/g7lpVI6GaWOrjusmQeOCpYdbWElpitcZDYyQlGoKE1T28LNZrLrS4kN3L9ILnmM
-	+X6q2MwJxHSk/RfUhmpw6jfWHaxHcUFfxdFT7CzpthRIJ2UF5qHa89vqAzwW/tZ0lEnm
-	mUeTHRXpfN6nOLjfye4JIO7TSc0fAaZC5H0ef+WKEygwV2cETwvPr+cTox823N6Aq1Fg
-	YYougN29eB+y+h0uXkZ/0D/1+c2m0/6BJ6H7UlPlhTyx12QMAG0cw6viWq+UUXa9ssly
-	Gp2w==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2SfXv0dA4NKG/ZKKovpbSrKjPNywGQ5iOOgHpn6S3c8=;
+	b=a/c5YcIykGUr5ELyQl1ORnAyosQ9flNmncw7ewHeiu1z1fRLBlc5495OcNQGy0l77a
+	TPvOupTMj5hhy9oBKMOK1XJf0adRtkMSG/UqH+2nJ62EnhKvceKR6EH6sPTsbecWegyO
+	SGSv+GoJZ5vq0w7UiPcUBjZ1JNVlX5ztuWL4Uu1giIm4uTJoJg0UDWxdJXCm762dTQls
+	YxaMoBWLlIVhycwbBjKywa6iWuJFzEeBdjtdywVQnO9XKfvyiguB7sxcRGzP0kj58V4k
+	83CFix/1LGGej1ZsesaTZ2wH1Ct4xvXKqG7IEoW2oRRwHwV4b/EZssUaBJPZgSV5MhIx
+	PWUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=FXHENlpQXoHWnqLLztZqaVFWWZtxQ1kgTjFN7cK9cr4=;
-	b=bOSbws1929lq5KYN0DsSr/cVbzADhaFu5aSUIlQV4e/Z8LuFjCTQ+XJp15l9ZKpCNQ
-	L9P8zoQ4oVwqvI7MPn2HxqjVcMLgy8z6NIDPmnRLxIDi7BIcgLGWcIlzgMAQhqGS34t3
-	115lVJN6l4hk/vQ7WCoPmti6iFELwDsWWXgQu+Cd2WNkTae8m4AIkd4fruJX2PnN+3D3
-	mNv3aJFCF6BpsYcVKH2nKxwIgfKhWhF6oSI+efnnsmk3ePfNYSvMryMaFwRbYqleid4d
-	vskzKoTP6YaFfRvHdb95zxelxHKmku7t1gCPrvs+SHXzJR1TdO/xVfaCIy6jrsZ5urJU
-	IPgA==
-X-Gm-Message-State: AA+aEWYNJgXL2PU1tQjmMLgvjCcfpd/NgDNgBPMYl1ckUl1t2d1RG7DQ
-	2Bb8coL4TUclJ3SlYNZ2UpPDxg5pqu8px+GlGJg=
-X-Google-Smtp-Source: AFSGD/UVfaEkT/4KBmX+5uQhEFE0weJ4n+uy6jFckCSVjfcD4GZLgYQKXsjYMDOVCrxFqM6WGI8MxLZjte+rhJZ7sNo=
-X-Received: by 2002:a37:d408:: with SMTP id l8mr3496189qki.315.1544223069888; 
-	Fri, 07 Dec 2018 14:51:09 -0800 (PST)
-MIME-Version: 1.0
-References: <20181123153941.10186-1-brgl@bgdev.pl>
-	<CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
-	<CAMRc=MdVJYYBcB0NkQpE2O3qQ=c+mnj6+ktsxRMdjBpPALOgZw@mail.gmail.com>
-	<CALbNGRRqeSVDzM8tn36t01YiAS0DJE_ExSXNRupp6esOEF7oKA@mail.gmail.com>
-	<CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
-	<CALbNGRS2L1knaB0OuTizL5+YGGjik1nKVZGAgPdes9HGL1GQEQ@mail.gmail.com>
-	<CAMRc=McBw2yvOHzWnc7-fhrO=6K-gzZFb6R7dOhUDYh6uGQbcA@mail.gmail.com>
-	<CALbNGRRmfvTJMzQprAUZy4g3KawtZ3=ufgwiyprxrxgjfBX-QA@mail.gmail.com>
-In-Reply-To: <CALbNGRRmfvTJMzQprAUZy4g3KawtZ3=ufgwiyprxrxgjfBX-QA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2SfXv0dA4NKG/ZKKovpbSrKjPNywGQ5iOOgHpn6S3c8=;
+	b=Zh7yaQVMeXuxlCz2aZRoMCJD8NP0yqbYRT15Al/3fP66YAb6nz8R4tlqp6H3lgz9ZK
+	MQZS91aOZaQEu8henKW70KEh6wQjtcoPaJDNan+XeW0HrxUDtkokU1yI0wY8hNezG+eQ
+	l/urdlglFR1TBEjUz62O+BQMORR3Z5NbujU9JOEqtsiNyAsKRKqSyzuSOeAbyuiKDZaS
+	hM50gXRyuu2dX19O4Jbt5SdHjftmva9BKU2FXQVyFtb/DjamA29TVDX7Vo1+xprVjB+9
+	PYRyajeqkZKHDNEZ6t6xnY+Jg2s2v/bS8jV79+oFFv2wlrtaj12NWDj+doBDG2HC88jc
+	jdBA==
+X-Gm-Message-State: AA+aEWYtNo0oLrTp3j33DcAoyDcS/zygz75zOukQE9kl9DbdJXRfTpmi
+	nEDR2OMeIy7Xwv5RQ2YbXf7mtye4nTo=
+X-Google-Smtp-Source: AFSGD/WCTPTKPLU2pu2XJFyVkOEpteP6yfwPlqnWw7KRCmYIMLFfF+DvH1Tn7qXbmYEIyjjSqFuyrw==
+X-Received: by 2002:a63:6f0d:: with SMTP id k13mr3548884pgc.42.1544223111128; 
+	Fri, 07 Dec 2018 14:51:51 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:877f:9499::5f84])
+	by smtp.gmail.com with ESMTPSA id a73sm6929710pfa.7.2018.12.07.14.51.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 07 Dec 2018 14:51:50 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Dec 2018 14:50:43 -0800
-Message-ID: <CAMKF1spvAEpkkCod4NvURV-A63N-5xM6D6R=73RbgwEpCANfKQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Dec 2018 14:51:37 -0800
+Message-Id: <20181207225137.38477-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.2
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] doxygen: Use SOURCEFORGE_MIRROR for SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,50 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2018 22:51:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Dec 2018 22:51:50 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Dec 7, 2018 at 2:30 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
-> wrote:
->
-> On Fri, Dec 7, 2018 at 11:00 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote=
-:
-> >
-> > pon., 26 lis 2018 o 23:49 Andreas M=C3=BCller <schnitzeltony@gmail.com>=
- napisa=C5=82(a):
-> > >
-> > > On Mon, Nov 26, 2018 at 5:26 PM Bartosz Golaszewski <brgl@bgdev.pl> w=
-rote:
-> > > > This[1] recipe is enough to build pulseview, but I'm not sure how t=
-o
-> > > > go about requiring libsigrok to have cxx set in PACKAGECONFIG. Shou=
-ld
-> > > > I add a bbappend for libsigrok that would do PACKAGECONFIG_append =
-=3D "
-> > > > cxx"?
-> > > Have no background but why not enable it by default? Both dependencie=
-s
-> > > are in meta-oe so layer trouble is not to be expected.
-> > >
-> > > Since your patch is already in master-next: I am fine with an append
-> > > in meta-qt5-extra.
-> > >
-> > > I suggest once this series is in master please send me a pull request
-> > > - will test and create thud for meta-qt5-extra (don't expect this
-> > > series to land in meta-oe thud..)
-> > >
-> >
-> > PR sent.
-> >
-> > Bart
-> LOL - am testing build currently. Off topic: doxgen ftp download fails
-> - try http...
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-yes I have fixed it locally see
-https://github.com/YoeDistro/meta-openembedded/commit/ff6bead1624a1e2614085=
-16b3d064a04aab5f592
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+index 3137c48439..7c7024ecf4 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+@@ -8,7 +8,7 @@ inherit cmake python3native
+ 
+ DEPENDS = "flex-native bison-native"
+ 
+-SRC_URI = "ftp://ftp.stack.nl/pub/users/dimitri/doxygen-${PV}.src.tar.gz \
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+            file://0001-build-don-t-look-for-Iconv.patch"
+ 
+ SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
+-- 
+2.19.2
 
->
-> Andreas
 
