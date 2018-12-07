@@ -1,48 +1,46 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CCF4971C42
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw1-f45.google.com (mail-yw1-f45.google.com
+	[209.85.161.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 235B5605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2018 23:11:05 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id z5so5207627wrt.11
+	Fri,  7 Dec 2018 23:14:59 +0000 (UTC)
+Received: by mail-yw1-f45.google.com with SMTP id x2so1725498ywc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Dec 2018 15:11:07 -0800 (PST)
+	Fri, 07 Dec 2018 15:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=eLT8KvR8/UfIwHbxR23rhqmxpRsN9CQQeCG4vXTCMo8=;
-	b=JJ8IM+ug1k1fSCMI5FJN28D9fdu16Nxb77tAqnjH0LY1pYdxtA6CghugjfutLFxFmK
-	vDzn6YPXbRPLJq0cjtxpJ8eQ9LhH8uRIwMeCCAGeycMq2htZlXFRvui7mXReUIdzG6zl
-	x6Pe71P/ly4/TotZNt8N0oq6eUQk4yg3hoAiCCdiz6kZoka1aaEsYsbVofAIwfboBlV4
-	husOIWWQ8Sqxb0O7oVTqJgliK4nKeoqKsB/POLrDfSqDH4O8lArlnTTEG/WSXspUeYtc
-	DoYgSdqFxwysm2hibPV6NsZm/bDijSWthcHzqiltsdHBwSP4oSHOHoiPpwS/hROZca23
-	E2jA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=t0sVGDSBuF2pWPilQCEXCHIZfkKYCp3qJmzI+vItnD8=;
+	b=EYLetx4vEB8lnAJWXnCLSc04c5UOFRvkdddu9MuQs02LtmeiTyNv1iKsuPs/JtQfHX
+	pPMR6eviN3E3G0axSk/It/VGzxROVdB9sPZbqKicujh98X0zEJGtoj6u50ftN8qzobng
+	BxMD44s9D5j/QpS6KwNZJqhPwlEMigDvR3H2qdI59PtQSs56vQvudPoDx5NenrQDMTzu
+	twr6bNI0Ut6t0m5K8kp1OQgmGO22Oiz8zr8oE0JVcd7a+GKQ4J5yMdnW2B9E6oLnlY8D
+	J7xymTdl0ShAOXgP+6Mwk8P0InLZLgip1pNPb4IR8ZrVO6QGAWPyAyks01K/Pq+/8Jk9
+	s/EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eLT8KvR8/UfIwHbxR23rhqmxpRsN9CQQeCG4vXTCMo8=;
-	b=V0k5MU73dTkARZJaWsx7dhiV4MX+gbjDy4O1h5VQx2W6Lb9SRtwHWGcxYwrwiikdii
-	g0wqBUTuzcQLzfUCY6k82OUs60h3IlbZnztfFFYb+ed6QB5HNu58Pv0LoKxwi24yTfcm
-	p2Yu5Qq9GcXB15D7AGjNUg+iHE8vyHyBqXstZjfbPlegOPc2vdg8s9PWm+wsCb6rciqx
-	fxpzQJ2G5SXjw51DRh4H55qlCe0PubXBcd5HL1HrQd+MfmkFUEir+MTDvras6YJTi3AG
-	Je0xOKzqxppgn5zDveYRvPYKskqs/k9oieLn7txlUNWFUxDSoGA/8XH9T3KTfS+CFQn7
-	MW/g==
-X-Gm-Message-State: AA+aEWZRn3XcQCyDupv6mPjVKj4lNuxEQxnI4RWPEVfov4LYbwdkKhh1
-	QnDfWD2yBjNUBD5duHnTm9jT9N/k
-X-Google-Smtp-Source: AFSGD/WEnO9u0JawGaQuXjX+J7l2DLtwV4O2LAhfODce6qE59gD2Z4AYajJJn2hP1tDVna2FnzFNmA==
-X-Received: by 2002:adf:dd06:: with SMTP id a6mr3512207wrm.2.1544224265957;
-	Fri, 07 Dec 2018 15:11:05 -0800 (PST)
-Received: from localhost.localdomain
-	(host55-101-dynamic.58-82-r.retail.telecomitalia.it. [82.58.101.55])
-	by smtp.gmail.com with ESMTPSA id
-	x8sm12204092wmd.45.2018.12.07.15.11.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Dec 2018 15:11:05 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  8 Dec 2018 00:11:00 +0100
-Message-Id: <20181207231100.3181-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] waf-cross-answers: Add cross-answers-mips64el.txt
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=t0sVGDSBuF2pWPilQCEXCHIZfkKYCp3qJmzI+vItnD8=;
+	b=ewZ6pDbXqD7IVACpfggBgz5I9/B5NepvpJAMLix01kbPzYwuWWtTjhvuboDZJEmwWv
+	pSgpwP0b9lpydckYrrW4YJnehjt7WXj1CiEkeKnP5R+E628UpBaOoqAyxTQB/OJRCaAk
+	PCYWWRjwnoPkZKNpvpFhg2mRqx3Ww4xLukoYBSOAcDmOx5akmEJs6dJhiXxDY0dRx2zA
+	FSpciPtNSzqrRUdINoA4CBTu6uVWwzmFpS+46vBIp/HtHwlQ5kCS3fvty4VBlVe8xDhb
+	DPssB8Oy3PxC/RCo0ZSbuOQJCqVOkfvDTXjVh9uWCG7svtiAdlvzzuxnQ0AEBGO01ZkJ
+	aPrA==
+X-Gm-Message-State: AA+aEWYPPedFKBE3GOkE2haViv/xYCgD06y645bKwDXK17U0hHtkISoB
+	gl0two7q3x+7MH2CjAYOF1hTJ75FQeK89XyD+Qs=
+X-Google-Smtp-Source: AFSGD/WjaKhjTWi74sq+3ABnBNHRuG5WEkukbx8L3jZ/ykOs4iP+if1goRzRv5IJA5oXHsm+nUPmY7gO2pylTnTl/6I=
+X-Received: by 2002:a81:514c:: with SMTP id f73mr4195419ywb.272.1544224500049; 
+	Fri, 07 Dec 2018 15:15:00 -0800 (PST)
+MIME-Version: 1.0
+References: <20181207225137.38477-1-raj.khem@gmail.com>
+In-Reply-To: <20181207225137.38477-1-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 8 Dec 2018 00:14:46 +0100
+Message-ID: <CALbNGRTMmovcLAqpa-5nCrjYvNp0k2tUUO-GUjOfVZP2xvcVQA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] doxygen: Use SOURCEFORGE_MIRROR for SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,62 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2018 23:11:06 -0000
+X-List-Received-Date: Fri, 07 Dec 2018 23:14:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fix build failure on mips64el platforms (missing waf-cross-answers-mips64el).
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../cross-answers-mips64el.txt                | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
- create mode 100644 meta-networking/files/waf-cross-answers/cross-answers-mips64el.txt
-
-diff --git a/meta-networking/files/waf-cross-answers/cross-answers-mips64el.txt b/meta-networking/files/waf-cross-answers/cross-answers-mips64el.txt
-new file mode 100644
-index 000000000..82e694fda
---- /dev/null
-+++ b/meta-networking/files/waf-cross-answers/cross-answers-mips64el.txt
-@@ -0,0 +1,39 @@
-+Checking uname sysname type: "Linux"
-+Checking uname version type: "# Wed May 20 10:34:39 UTC 2015"
-+Checking simple C program: "hello world"
-+rpath library support: OK
-+-Wl,--version-script support: OK
-+Checking getconf LFS_CFLAGS: NO
-+Checking correct behavior of strtoll: NO
-+Checking for working strptime: OK
-+Checking for C99 vsnprintf: "1"
-+Checking for HAVE_SHARED_MMAP: OK
-+Checking for HAVE_MREMAP: OK
-+Checking for HAVE_SECURE_MKSTEMP: OK
-+Checking for HAVE_IFACE_GETIFADDRS: NO
-+Checking for HAVE_IFACE_IFCONF: NO
-+Checking for HAVE_IFACE_IFREQ: NO
-+Checking for large file support without additional flags: OK
-+Checking for HAVE_INCOHERENT_MMAP: OK
-+Checking value of NSIG: "128"
-+Checking value of _NSIG: "128"
-+Checking value of SIGRTMAX: "127"
-+Checking value of SIGRTMIN: "34"
-+Checking whether the WRFILE -keytab is supported: OK
-+Checking for kernel change notify support: OK
-+Checking for Linux kernel oplocks: OK
-+Checking for kernel share modes: OK
-+Checking whether POSIX capabilities are available: OK
-+Checking if can we convert from CP850 to UCS-2LE: OK
-+Checking if can we convert from UTF-8 to UCS-2LE: OK
-+vfs_fileid checking for statfs() and struct statfs.f_fsid: OK
-+Checking whether we can use Linux thread-specific credentials: OK
-+Checking whether fcntl locking is available: OK
-+Checking for the maximum value of the 'time_t' type: OK
-+Checking whether the realpath function allows a NULL argument: OK
-+Checking for ftruncate extend: OK
-+getcwd takes a NULL argument: OK
-+Checking for small off_t: NO
-+Checking whether blkcnt_t is 32 bit: NO
-+Checking whether blkcnt_t is 64 bit: OK
-+Checking whether fcntl lock supports open file description locks: OK
--- 
-2.17.1
-
+On Fri, Dec 7, 2018 at 11:51 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+> index 3137c48439..7c7024ecf4 100644
+> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
+> @@ -8,7 +8,7 @@ inherit cmake python3native
+>
+>  DEPENDS = "flex-native bison-native"
+>
+> -SRC_URI = "ftp://ftp.stack.nl/pub/users/dimitri/doxygen-${PV}.src.tar.gz \
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+>             file://0001-build-don-t-look-for-Iconv.patch"
+>
+>  SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
+> --
+> 2.19.2
+>
+Works fine - Thanks :)
 
