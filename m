@@ -1,39 +1,38 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D0AA79C7A
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb1-f193.google.com (mail-yb1-f193.google.com
+	[209.85.219.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C7B4748F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2018 22:00:27 +0000 (UTC)
-Received: by mail-it1-f196.google.com with SMTP id a6so9374448itl.4
+	Fri,  7 Dec 2018 22:30:56 +0000 (UTC)
+Received: by mail-yb1-f193.google.com with SMTP id z2-v6so2989614ybj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Dec 2018 14:00:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	Fri, 07 Dec 2018 14:30:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=EJTM3+0qJlQgMw4vhBWq4tcevKmFFI7I4iLh17sjzqI=;
-	b=PGmn3P3pKhVrZJ6J7C36MHuqyHoCQLVLj4n/Co5O6kFJEWakwOzqi6Dk4CLyT624q4
-	QRgQRAYMutiETsMedSiVaipEPErwyRSqCftmC1SaqStHQESWxx6qwf8ZlaEvyiZIjmUq
-	cCG0N2Q8oply9NfUMnlnNCwcAHAVRUMC+ado7nlM9E99eSQqjzzk1XwUu2VjRAJvRR65
-	CvHotkxtjWm7y9CFPUgDRRlCeq+B0YBqjNp0UFfe2tey3S1p+SMQ1NIVmcPytpC8GPDT
-	NyZPFYWlu04kF95xABIDkO+DDUtBNtl04Dc+M3O//Wn1qxZ9kCj3T5z8o92QNoq7cg1K
-	5r1g==
+	bh=DbfCotlXPF+4f766cAIrQnKmb2NnPoOzMQguRSJ5lYY=;
+	b=au/3vagiKJ8RrNHw2XrV+aLK/9pxJz4wLS4GOIZ7sNPxQoY3NXYfzBssbFvPfbSfUO
+	LOSNz0knHzjMsBP6Mn5uOa7geW1kOY8goFjM5n+biDzzzGFr8X/8G3k4HRdu7ClWfKSU
+	ZwHqs1QJGzGpzdxN+pTaIUND54l3mxFIHIqtnDqpL/Z7bPL7fAB1WiSnP3COe6GN7wEs
+	520tWEvUQFk+uIKbMErOhqW14ZR5CiLNC25TxCCTeercMju0Wscp1js9Ou3r2mjPxU4d
+	NZaiCuqDrjPxrFYDMUPxEdVOL1JemR5KzjrDlntjH3/tisqdv4IS5TfJxo/qTXjAe2+N
+	iBQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=EJTM3+0qJlQgMw4vhBWq4tcevKmFFI7I4iLh17sjzqI=;
-	b=FDw83wSZ8USLajdAUITwVLhBVAJ1CvjrwVuQPaQ5xDSeyhIq3ku3ztZBADNeanKfoN
-	07ITY1XURG80h9EUf1+KWFIc18+66QVGN0MecLCF0SMcKnWI4cFMDspAv2OQnhO3Rz5i
-	7fjkEeOCUNSlQAk21r6gmCmS1KlDv1pASH5kevksAK1u43zZ7WRYjZaNmIPg9+FTg73f
-	bIIVciDz0zTxZBCDCq9ncnxek9+GOSRNnKm6Jc2XHS6pJGzSGODsDPWrZ3sTUo8CfVVU
-	ZpX/w119s3J7pwxkUYEjOVu/DlNcmS/20kjRqaK9Usi6Yr/cyofqu/j8csqJXmJYfIkk
-	LyCA==
-X-Gm-Message-State: AA+aEWYDr8ohq2HYoyGb+gVhQtO/8iAOZYG32/PbFaEdC1Zs4XEtGS5M
-	Pw+FvMa2hNbHlJVDmjBhceGM/LSO45ulaGLkai/Vuw==
-X-Google-Smtp-Source: AFSGD/XnVJzz3FdETCjjiuluItHiGMLGxzIgI5DMy10nWqmDeA+BmapQUfWHzX5WTgQiMJhs9H3nyXEto5fFcB9x0f0=
-X-Received: by 2002:a02:3d42:: with SMTP id n63mr3555927jan.136.1544220028888; 
-	Fri, 07 Dec 2018 14:00:28 -0800 (PST)
+	bh=DbfCotlXPF+4f766cAIrQnKmb2NnPoOzMQguRSJ5lYY=;
+	b=E0voNQG0SPMvn66HzFNtnWngrZYoCMTNRwV9FqqScrFnj5NC7BPychb8BQ811O8qhm
+	Y0TChHTGSWO6GfZdThfUjeT+3uLbehID6YCv+2PEimC/7CU/dPQJcHqe5NpgC54J+pta
+	ZM56+dufEZPiryUWpZNBhQpXdhXz4qPuNZNSEDoPo/l24EGDyaezr8u/yMF5EVIjF9P9
+	APf3sowBDEqRSCqfXSG2x6MonFrmKJXujGMWhLy0QDyG03Q75Af2C1FFvAEkDdk1/w52
+	ze5RcGLtQghogCVW5I357A9h6ZCasT9DKxxwf4Z5nFpLr2SmTsEXehxIm6NWmwrnaBAP
+	4nug==
+X-Gm-Message-State: AA+aEWanAPd8RqMSQa0Wxpkp6PSQ33DwGDx5dowEKPie2hWnI+0EmrH7
+	bLgLRIEFu6pwlXaf6T64TUy6XR5qhn6L5KiLPMMgVw==
+X-Google-Smtp-Source: AFSGD/XNqGLqDMQWAQ/W0lULk/OolvbkurbQRutcP7NVk3ZQlOviSZeLvxOopxFH1675+HD+jqGHGdMimQz/lgsrPcY=
+X-Received: by 2002:a25:4b86:: with SMTP id y128mr4024874yba.10.1544221856859; 
+	Fri, 07 Dec 2018 14:30:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20181123153941.10186-1-brgl@bgdev.pl>
 	<CALbNGRR8iKjx6PW52HjmPVi-DeyOG2L41==Tnj3AjZaFFrxR5g@mail.gmail.com>
@@ -41,12 +40,13 @@ References: <20181123153941.10186-1-brgl@bgdev.pl>
 	<CALbNGRRqeSVDzM8tn36t01YiAS0DJE_ExSXNRupp6esOEF7oKA@mail.gmail.com>
 	<CAMRc=MeRzY9U89thd5CV4GZFdq2TzCFP609vOuvcnQkJhxeTnw@mail.gmail.com>
 	<CALbNGRS2L1knaB0OuTizL5+YGGjik1nKVZGAgPdes9HGL1GQEQ@mail.gmail.com>
-In-Reply-To: <CALbNGRS2L1knaB0OuTizL5+YGGjik1nKVZGAgPdes9HGL1GQEQ@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Fri, 7 Dec 2018 23:00:17 +0100
-Message-ID: <CAMRc=McBw2yvOHzWnc7-fhrO=6K-gzZFb6R7dOhUDYh6uGQbcA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMRc=McBw2yvOHzWnc7-fhrO=6K-gzZFb6R7dOhUDYh6uGQbcA@mail.gmail.com>
+In-Reply-To: <CAMRc=McBw2yvOHzWnc7-fhrO=6K-gzZFb6R7dOhUDYh6uGQbcA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 7 Dec 2018 23:30:42 +0100
+Message-ID: <CALbNGRRmfvTJMzQprAUZy4g3KawtZ3=ufgwiyprxrxgjfBX-QA@mail.gmail.com>
+To: brgl@bgdev.pl
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 0/6] sigrok: set of new packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,31 +60,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2018 22:00:28 -0000
+X-List-Received-Date: Fri, 07 Dec 2018 22:30:56 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-pon., 26 lis 2018 o 23:49 Andreas M=C3=BCller <schnitzeltony@gmail.com> nap=
-isa=C5=82(a):
+On Fri, Dec 7, 2018 at 11:00 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
-> On Mon, Nov 26, 2018 at 5:26 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote=
-:
-> > This[1] recipe is enough to build pulseview, but I'm not sure how to
-> > go about requiring libsigrok to have cxx set in PACKAGECONFIG. Should
-> > I add a bbappend for libsigrok that would do PACKAGECONFIG_append =3D "
-> > cxx"?
-> Have no background but why not enable it by default? Both dependencies
-> are in meta-oe so layer trouble is not to be expected.
+> pon., 26 lis 2018 o 23:49 Andreas M=C3=BCller <schnitzeltony@gmail.com> n=
+apisa=C5=82(a):
+> >
+> > On Mon, Nov 26, 2018 at 5:26 PM Bartosz Golaszewski <brgl@bgdev.pl> wro=
+te:
+> > > This[1] recipe is enough to build pulseview, but I'm not sure how to
+> > > go about requiring libsigrok to have cxx set in PACKAGECONFIG. Should
+> > > I add a bbappend for libsigrok that would do PACKAGECONFIG_append =3D=
+ "
+> > > cxx"?
+> > Have no background but why not enable it by default? Both dependencies
+> > are in meta-oe so layer trouble is not to be expected.
+> >
+> > Since your patch is already in master-next: I am fine with an append
+> > in meta-qt5-extra.
+> >
+> > I suggest once this series is in master please send me a pull request
+> > - will test and create thud for meta-qt5-extra (don't expect this
+> > series to land in meta-oe thud..)
+> >
 >
-> Since your patch is already in master-next: I am fine with an append
-> in meta-qt5-extra.
+> PR sent.
 >
-> I suggest once this series is in master please send me a pull request
-> - will test and create thud for meta-qt5-extra (don't expect this
-> series to land in meta-oe thud..)
->
+> Bart
+LOL - am testing build currently. Off topic: doxgen ftp download fails
+- try http...
 
-PR sent.
-
-Bart
+Andreas
 
