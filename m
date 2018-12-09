@@ -1,46 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw1-f45.google.com (mail-yw1-f45.google.com
-	[209.85.161.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 235B5605BA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B9B2D6C46D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2018 23:14:59 +0000 (UTC)
-Received: by mail-yw1-f45.google.com with SMTP id x2so1725498ywc.9
+	Sun,  9 Dec 2018 09:24:02 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id c14so7612557wrr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Dec 2018 15:15:00 -0800 (PST)
+	Sun, 09 Dec 2018 01:24:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=t0sVGDSBuF2pWPilQCEXCHIZfkKYCp3qJmzI+vItnD8=;
-	b=EYLetx4vEB8lnAJWXnCLSc04c5UOFRvkdddu9MuQs02LtmeiTyNv1iKsuPs/JtQfHX
-	pPMR6eviN3E3G0axSk/It/VGzxROVdB9sPZbqKicujh98X0zEJGtoj6u50ftN8qzobng
-	BxMD44s9D5j/QpS6KwNZJqhPwlEMigDvR3H2qdI59PtQSs56vQvudPoDx5NenrQDMTzu
-	twr6bNI0Ut6t0m5K8kp1OQgmGO22Oiz8zr8oE0JVcd7a+GKQ4J5yMdnW2B9E6oLnlY8D
-	J7xymTdl0ShAOXgP+6Mwk8P0InLZLgip1pNPb4IR8ZrVO6QGAWPyAyks01K/Pq+/8Jk9
-	s/EA==
+	h=from:to:cc:subject:date:message-id;
+	bh=wwf/M1nydVNvuek2uRI+R+sQFk/bjN71KBqEw5uUh4s=;
+	b=Tr7bg+rY7B6Nf7QJ093t6opnV/nmDBsoXwx08nPuDAy8yQNECm7GvFRuQMhs8fg1VR
+	EnmJd5DiObUMrRnO2giWogTa6FFHQtG040XzoyqiiOPSt7Qnt6QGpeW2XsuGCXeTf9RO
+	TcUmqLTfnBCmRe5Da3VYt4AecCBBPfJuyTls2v+7f6aj4H5jl3DHUJFzpvX+njhF2qhd
+	xpHEKHx8lWxLDY5OVF19d9EvF4wM5szKHaVM+675pOpZiE6335EjSokVl8MXphxUbqYi
+	1b3HD1y7LyLAXMYCrfudF3TAEqFla3ZNwIwKg9t7VH0tnmcPUTPuc3fOB1gldPIZRSVE
+	QXGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=t0sVGDSBuF2pWPilQCEXCHIZfkKYCp3qJmzI+vItnD8=;
-	b=ewZ6pDbXqD7IVACpfggBgz5I9/B5NepvpJAMLix01kbPzYwuWWtTjhvuboDZJEmwWv
-	pSgpwP0b9lpydckYrrW4YJnehjt7WXj1CiEkeKnP5R+E628UpBaOoqAyxTQB/OJRCaAk
-	PCYWWRjwnoPkZKNpvpFhg2mRqx3Ww4xLukoYBSOAcDmOx5akmEJs6dJhiXxDY0dRx2zA
-	FSpciPtNSzqrRUdINoA4CBTu6uVWwzmFpS+46vBIp/HtHwlQ5kCS3fvty4VBlVe8xDhb
-	DPssB8Oy3PxC/RCo0ZSbuOQJCqVOkfvDTXjVh9uWCG7svtiAdlvzzuxnQ0AEBGO01ZkJ
-	aPrA==
-X-Gm-Message-State: AA+aEWYPPedFKBE3GOkE2haViv/xYCgD06y645bKwDXK17U0hHtkISoB
-	gl0two7q3x+7MH2CjAYOF1hTJ75FQeK89XyD+Qs=
-X-Google-Smtp-Source: AFSGD/WjaKhjTWi74sq+3ABnBNHRuG5WEkukbx8L3jZ/ykOs4iP+if1goRzRv5IJA5oXHsm+nUPmY7gO2pylTnTl/6I=
-X-Received: by 2002:a81:514c:: with SMTP id f73mr4195419ywb.272.1544224500049; 
-	Fri, 07 Dec 2018 15:15:00 -0800 (PST)
-MIME-Version: 1.0
-References: <20181207225137.38477-1-raj.khem@gmail.com>
-In-Reply-To: <20181207225137.38477-1-raj.khem@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 8 Dec 2018 00:14:46 +0100
-Message-ID: <CALbNGRTMmovcLAqpa-5nCrjYvNp0k2tUUO-GUjOfVZP2xvcVQA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] doxygen: Use SOURCEFORGE_MIRROR for SRC_URI
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wwf/M1nydVNvuek2uRI+R+sQFk/bjN71KBqEw5uUh4s=;
+	b=Ewm+ssyRFm1IGjtdDTwy9kwuNC5UJs86e2W6lFMIvBOdoMRhfc6aPt1d4sR2Dzyl8t
+	QeTdsIbrUediWmYnL+H7C37OzCM8IMZ9oDh4UnGHXc5vFRmV4AmgfDjdH8YMB/upoSYy
+	KylfBgyksuRW5YIh0TlH7jstVEd6mZyAuFp/1V2p6YPKIvx5w+FSPiK2T7I7n1QJxIpb
+	4jEqSyUnOGVzqAYumtTCYPiRlPIVeRu/I8qkevqRTvzw9DJscaACw1YImNy6wdlh26OB
+	h0n1xBbMymgjo3iVZtgKFAFAu0Y5nBpjZ2sGQGw091UaQ3Lfmbiwv4uwv11nISdvyeRC
+	6JXg==
+X-Gm-Message-State: AA+aEWZv/ctPT6zl2zDGikAZpCS7Ah8DTIcSa5IhN/TTihyh9CVR35EH
+	u4K83bmj7Xqb6k2K1rsap1TCPiWP
+X-Google-Smtp-Source: AFSGD/ULNWOtSKtp99gRmGe4dIX/TGKApwZ2CU6KS9K60tEWQ2Ky2uytBWzhtGOd5ErPmYnfUtb3oA==
+X-Received: by 2002:adf:f308:: with SMTP id i8mr6160838wro.219.1544347442896; 
+	Sun, 09 Dec 2018 01:24:02 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id n9sm7410408wrx.80.2018.12.09.01.24.01
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 09 Dec 2018 01:24:01 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Dec 2018 09:24:01 +0000
+Message-Id: <20181209092402.10939-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Subject: [PATCH][thud][meta-oe 1/2] glog: fixed the build for mips and other platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,31 +55,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2018 23:14:59 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 09 Dec 2018 09:24:03 -0000
 
-On Fri, Dec 7, 2018 at 11:51 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
-> index 3137c48439..7c7024ecf4 100644
-> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
-> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.14.bb
-> @@ -8,7 +8,7 @@ inherit cmake python3native
->
->  DEPENDS = "flex-native bison-native"
->
-> -SRC_URI = "ftp://ftp.stack.nl/pub/users/dimitri/doxygen-${PV}.src.tar.gz \
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
->             file://0001-build-don-t-look-for-Iconv.patch"
->
->  SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
-> --
-> 2.19.2
->
-Works fine - Thanks :)
+From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+
+According to build log http://errors.yoctoproject.org/Errors/Details/201286/
+FindLibunwind wokred only for x86, arm, and x86_64. This patch extends the
+cmake module to work with mips, ia64, ppc(64) and other architectures supported
+by libunwind
+
+Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...0002-Find-Libunwind-during-configure.patch | 53 +++++++++++--------
+ 1 file changed, 30 insertions(+), 23 deletions(-)
+
+diff --git a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+index 3a6f824ea7..15cf67fd2e 100644
+--- a/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
++++ b/meta-oe/recipes-support/glog/glog/0002-Find-Libunwind-during-configure.patch
+@@ -1,11 +1,11 @@
+ diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
+ --- a/cmake/FindLibunwind.cmake	1970-01-01 01:00:00.000000000 +0100
+-+++ b/cmake/FindLibunwind.cmake	2018-11-02 14:04:35.460437058 +0100
+-@@ -0,0 +1,37 @@
+++++ b/cmake/FindLibunwind.cmake	2018-11-20 15:53:48.799078114 +0100
++@@ -0,0 +1,54 @@
+ +# - Try to find libunwind
+ +# Once done this will define
+ +#
+-+#  LIBUNWIND_FOUND - system has libunwind
+++#  Libunwind_FOUND - system has libunwind
+ +#  unwind - cmake target for libunwind
+ +
+ +find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
+@@ -15,11 +15,24 @@ diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
+ +
+ +if (CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
+ +    set(LIBUNWIND_ARCH "arm")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch64")
+++    set(LIBUNWIND_ARCH "aarch64")
+ +elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
+-+        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64")
+++        CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64" OR
+++        CMAKE_SYSTEM_PROCESSOR STREQUAL "corei7-64")
+ +    set(LIBUNWIND_ARCH "x86_64")
+ +elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86$")
+ +    set(LIBUNWIND_ARCH "x86")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc64")
+++    set(LIBUNWIND_ARCH "ppc64")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
+++    set(LIBUNWIND_ARCH "ppc32")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^mips")
+++    set(LIBUNWIND_ARCH "mips")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^hppa")
+++    set(LIBUNWIND_ARCH "hppa")
+++elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^ia64")
+++    set(LIBUNWIND_ARCH "ia64")
+ +endif()
+ +
+ +find_library (UNWIND_LIBRARY_PLATFORM NAMES "unwind-${LIBUNWIND_ARCH}" DOC "unwind library platform")
+@@ -35,13 +48,17 @@ diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
+ +
+ +mark_as_advanced (UNWIND_LIBRARY UNWIND_LIBRARY_PLATFORM)
+ +
+-+add_library(unwind INTERFACE IMPORTED)
+-+set_target_properties(unwind PROPERTIES
+-+    INTERFACE_LINK_LIBRARIES "${UNWIND_LIBRARY};${UNWIND_LIBRARY_PLATFORM}"
+-+)
+++if (Libunwind_FOUND)
+++    add_library(unwind INTERFACE IMPORTED)
+++    set_target_properties(unwind PROPERTIES
+++        INTERFACE_LINK_LIBRARIES "${UNWIND_LIBRARY};${UNWIND_LIBRARY_PLATFORM}"
+++    )
+++else()
+++    message("Can't find libunwind library")
+++endif()
+ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
+---- a/CMakeLists.txt	2018-11-02 14:02:21.784835854 +0100
+-+++ b/CMakeLists.txt	2018-11-02 14:03:16.796935594 +0100
++--- a/CMakeLists.txt	2018-11-20 15:49:07.576278417 +0100
+++++ b/CMakeLists.txt	2018-11-20 15:49:32.106819928 +0100
+ @@ -58,7 +58,6 @@
+  check_include_file (execinfo.h HAVE_EXECINFO_H)
+  check_include_file (glob.h HAVE_GLOB_H)
+@@ -91,23 +108,13 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
+    DESTINATION lib/cmake/glog)
+  
+  install (EXPORT glog-targets NAMESPACE glog:: DESTINATION lib/cmake/glog)
+-Binary files a/.git/index and b/.git/index differ
+ diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
+---- a/glog-config.cmake.in	2018-11-02 14:02:21.784835854 +0100
+-+++ b/glog-config.cmake.in	2018-11-02 14:03:16.796935594 +0100
+-@@ -4,4 +4,15 @@
++--- a/glog-config.cmake.in	2018-11-20 15:49:07.576278417 +0100
+++++ b/glog-config.cmake.in	2018-11-20 15:52:32.330418489 +0100
++@@ -4,4 +4,6 @@
+  
+  @gflags_DEPENDENCY@
+  
+-+# Record the state of the CMake module path when this script was
+-+# called so that we can ensure that we leave it in the same state on
+-+# exit as it was on entry, but modify it locally.
+-+set(UNWIND_CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
+-+
+-+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+ +find_dependency (Libunwind)
+-+
+-+# Restore original module path
+-+set(CMAKE_MODULE_PATH "${UNWIND_CMAKE_MODULE_PATH}")
+ +
+  include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
+-- 
+2.17.1
+
 
