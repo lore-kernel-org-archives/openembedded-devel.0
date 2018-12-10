@@ -1,25 +1,33 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 981586D193
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 3ADEE6C149
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2018 08:29:11 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id wBA8TBP4016203
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2018 09:29:11 +0100
-Received: from dev.vm6.ccp.siemens.com ([163.242.53.42])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id wBA8TBSY019024;
-	Mon, 10 Dec 2018 09:29:11 +0100
-Received: from dev.localdomain (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 69EF895179E;
-	Mon, 10 Dec 2018 09:29:07 +0100 (CET)
-From: Andrej Valek <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Dec 2018 09:29:03 +0100
-Message-Id: <20181210082903.10565-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] nginx: update to version 1.15.7
+	Mon, 10 Dec 2018 09:22:05 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	10 Dec 2018 01:22:06 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.56,337,1539673200"; d="scan'208";a="106251270"
+Received: from nivgi-mobl1.ger.corp.intel.com (HELO
+	rkubodac-desk.ger.corp.intel.com) ([10.251.84.159])
+	by fmsmga007.fm.intel.com with ESMTP; 10 Dec 2018 01:22:05 -0800
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: akuster808 <akuster808@gmail.com>
+In-Reply-To: <871s75joud.fsf@rkubodac-desk.ger.corp.intel.com> (Raphael Kubo
+	da Costa's message of "Wed, 28 Nov 2018 14:47:38 +0100")
+Organization: Intel Corporation
+References: <20181120154041.9420-1-raphael.kubo.da.costa@intel.com>
+	<CAMKF1soR+4fXBd1q0bLCndQjROO-zTnvcQSs80TmDP=KKZcMuQ@mail.gmail.com>
+	<b443dc91-db87-f835-7a33-98cd9ccf2bea@gmail.com>
+	<871s75joud.fsf@rkubodac-desk.ger.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+Date: Mon, 10 Dec 2018 10:22:05 +0100
+Message-ID: <877eghka82.fsf@rkubodac-desk.ger.corp.intel.com>
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][sumo][PATCH] nodejs: Enable system ICU support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2018 08:29:12 -0000
+X-List-Received-Date: Mon, 10 Dec 2018 09:22:06 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb | 6 ------
- meta-webserver/recipes-httpd/nginx/nginx_1.15.7.bb | 6 ++++++
- 2 files changed, 6 insertions(+), 6 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.15.7.bb
+Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
-deleted file mode 100644
-index 3694f5b58..000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require nginx.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
--
--SRC_URI[md5sum] = "d063f746d3dc4298aed9c518f1684166"
--SRC_URI[sha256sum] = "eeba09aecfbe8277ac33a5a2486ec2d6731739f3c1c701b42a0c3784af67ad90"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.15.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.15.7.bb
-new file mode 100644
-index 000000000..5e6dc33e9
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.15.7.bb
-@@ -0,0 +1,6 @@
-+require nginx.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
-+
-+SRC_URI[md5sum] = "719b2e3d416f111fecc9db6625553658"
-+SRC_URI[sha256sum] = "8f22ea2f6c0e0a221b6ddc02b6428a3ff708e2ad55f9361102b1c9f4142bdf93"
--- 
-2.11.0
+> akuster808 <akuster808@gmail.com> writes:
+>
+>> On 11/26/18 10:45 AM, Khem Raj wrote:
+>>> Armin
+>>>
+>>> This is ok for rocko
+>>> On Tue, Nov 20, 2018 at 7:40 AM Raphael Kubo da Costa
+>>> <raphael.kubo.da.costa@intel.com> wrote:
+>>>> From: Khem Raj <raj.khem@gmail.com>
+>>>>
+>>>> Latest Chromium needs it during build
+>>
+>> Is this keeping chromium from building.
+>
+> Yes.
 
+ping...
 
