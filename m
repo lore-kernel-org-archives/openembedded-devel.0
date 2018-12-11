@@ -1,48 +1,28 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 20B4560777
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5127365D48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2018 22:40:01 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id c14so12197927wrr.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2018 14:40:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=ApEZjUPpWhZi13KwfhI0V3bmKuLUeWpX5yDQZLZxDNI=;
-	b=NzTJP/4fYVJZVhhoc6zeZFCfThyqWvPYXzvg93JehUtH4SlPS8tONuLQvZZ/uIsDn6
-	jTj3N9o68w+7SkiiRQ0MAS/J6VsCnOw4E4D4CAqdtz6VvLxhhz4q9rpRAweJn4k8AWlh
-	i5Cy4ZIMtMdONH+8yGKi3vO6f2UgqRr4Lh5wqJ0QcudHvFrmOQ1bkVnfzT1+q10I63mj
-	u4MFSKFm59cFUNjwCCXzU88XtN0tYhcjehqPagE6OxVRPXJns/A4bT2e+gZYr1KW9fwZ
-	oLm0Fmm0VzFOkof0jxzq1ZhEEgpTgygRf3O4Zc46Okwb9iwvxo7ckb+q3NcRLWCoJYye
-	/Hrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ApEZjUPpWhZi13KwfhI0V3bmKuLUeWpX5yDQZLZxDNI=;
-	b=t/XBcxW+oOYuslJc2MKCw5z/g2WaFRbNN5FjSqUYXuE/J3lV4cBWODF9rISq1uUKCF
-	Bxqyp7/+AoqqXPQU/aBCO6tQdvE1wh0Sf60SWtiWvc0jUfWToqmCPH6Hx1vPDFyx1MqD
-	D/xpaZ47cIe6wZ7D1yf9U9/fkOEYofF7W7Mpa10UCIZvus1rRJMTm+LlIQ00K52U2jMJ
-	S6IgK/ztSJSpmUJSKdWjWCdgKzH2wvyQp6U27uPyZE5VV0PZWK3GWSHdC/Pxa0Kej64C
-	ajinKKtG2nlcVrx/ZcfgArNJw0pZQeeYFRoxs3uDXXcmXfDCiHbtLFhp+LoY6TCEzaN6
-	Mwbw==
-X-Gm-Message-State: AA+aEWZg6Pv+6H0vDq4vpzS9vnV6Ozxelx8u2RlMKiVZscskAw89u1wA
-	6Ibu8V5nH+XE1ikUMVp/zU+JZhXh
-X-Google-Smtp-Source: AFSGD/W6zDDwUlArCkGqKMYLRpO4HDa1XU0G7b8OLCF+TL0YfTVZ0gcYeOPX1tLgYMNipGkk+yrmyw==
-X-Received: by 2002:adf:80cf:: with SMTP id 73mr11334799wrl.57.1544481602310; 
-	Mon, 10 Dec 2018 14:40:02 -0800 (PST)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
-	(host55-101-dynamic.58-82-r.retail.telecomitalia.it. [82.58.101.55])
-	by smtp.gmail.com with ESMTPSA id
-	c10sm12047374wrw.49.2018.12.10.14.40.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Dec 2018 14:40:01 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Dec 2018 23:39:36 +0100
-Message-Id: <20181210223936.31201-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-initramfs][PATCH] kexec-tools-klibc: fix build for mipsel and mips64el
+	Tue, 11 Dec 2018 05:26:22 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id wBB5PPAQ020287
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 10 Dec 2018 21:25:56 -0800
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Mon, 10 Dec 2018 21:25:39 -0800
+To: <openembedded-devel@lists.openembedded.org>, Khem Raj
+	<raj.khem@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
+References: <1543997256-46343-1-git-send-email-changqing.li@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <24c4dd68-8e62-dd2b-357f-d6e5a9ce833f@windriver.com>
+Date: Tue, 11 Dec 2018 13:25:35 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
+MIME-Version: 1.0
+In-Reply-To: <1543997256-46343-1-git-send-email-changqing.li@windriver.com>
+X-Originating-IP: [128.224.162.228]
+Subject: Re: [meta-networking][PATCH V2] geoip: update geolite database checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +35,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2018 22:40:02 -0000
+X-List-Received-Date: Tue, 11 Dec 2018 05:26:22 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Builds with little endianness were not tested before.
+Hi,  Khem and Martin
 
-Fix for:
-purgatory.c:2:10: fatal error: limits.h:
- No such file or directory
+I noticed Khem have merge this patch to master yesterday,  but the 
+mirror on http://downloads.yoctoproject.org/mirror/sources/
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+still not generated yet, do you know how to trigger the build and 
+generate a mirror on above link?   I think the checksum will change
 
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-index 25f5da48d..cc1c5518b 100644
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-+++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-@@ -66,9 +66,12 @@ CFLAGS_x86-64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/i
- CFLAGS_arm_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
- CFLAGS_aarch64_append = "${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
- CFLAGS_mips_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
-+CFLAGS_mipsel_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
- CFLAGS_mips64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
-+CFLAGS_mips64el_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
- CFLAGS_powerpc_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
- 
-+
- do_compile_prepend() {
-     # Remove the prepackaged config.h from the source tree as it overrides
-     # the same file generated by configure and placed in the build tree
+again tomorrow,  seem we don't have time to change SRC_URI to the 
+http://downloads.yoctoproject.org/mirror/sources/, :-(
+
+
+On 12/5/18 4:07 PM, changqing.li@windriver.com wrote:
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Geolite database checksum changed today, so update it
+> to the lastest one.
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>   .../recipes-support/geoip/geoip_1.6.12.bb          | 26 ++++++++++++----------
+>   1 file changed, 14 insertions(+), 12 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+> index 57f0b67..c3ce4d8 100644
+> --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+> +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+> @@ -8,11 +8,13 @@ using reverse DNS lookups."
+>   HOMEPAGE = "http://dev.maxmind.com/geoip/"
+>   SECTION = "libdevel"
+>   
+> +GEOIP_DATABASE_VERSION = "20181205"
+> +
+>   SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
+> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz \
+> -           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz \
+> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz \
+> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz \
+> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz \
+> +           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz \
+> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz \
+> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz \
+>              file://run-ptest \
+>   "
+>   SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+> @@ -20,14 +22,14 @@ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>   SRC_URI[GeoIP-dat.md5sum] = "d538e57ad9268fdc7955c6cf9a37c4a9"
+>   SRC_URI[GeoIP-dat.sha256sum] = "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
+>   
+> -SRC_URI[GeoIPv6-dat.md5sum] = "a908d7a51c3883eb8f693ca197c7a142"
+> -SRC_URI[GeoIPv6-dat.sha256sum] = "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
+> +SRC_URI[GeoIPv6-dat.md5sum] = "52d6aa0aac1adbfa5eb7fa4742197c11"
+> +SRC_URI[GeoIPv6.sha256sum] = "416ac92fcc35a21d5efbb32e5c88e609c37aec1aa1af6247d088b8da1af6e9bf"
+>   
+>   SRC_URI[GeoLiteCity-dat.md5sum] = "d700c137232f8e077ac8db8577f699d9"
+>   SRC_URI[GeoLiteCity-dat.sha256sum] = "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
+>   
+> -SRC_URI[GeoLiteCityv6-dat.md5sum] = "8ac3506ccabaae7e9f7d6301c2654313"
+> -SRC_URI[GeoLiteCityv6-dat.sha256sum] = "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
+> +SRC_URI[GeoLiteCityv6-dat.md5sum] = "6734ccdc644fc0ba76eb276dce73d005"
+> +SRC_URI[GeoLiteCityv6-dat.sha256sum] = "c95a9d2643b7f53d7abeed2114388870e13fbbad4653f450a49efa7e4b86aca4"
+>   
+>   LICENSE = "LGPL-2.1"
+>   
+> @@ -44,10 +46,10 @@ EXTRA_OECONF = "--disable-static               \
+>   do_install() {
+>       make DESTDIR=${D} install
+>       install -d ${D}/${datadir}/GeoIP
+> -    install ${WORKDIR}/GeoIP.dat.20181120 ${D}/${datadir}/GeoIP/GeoIP.dat
+> -    install ${WORKDIR}/GeoIPv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoIPv6.dat
+> -    install ${WORKDIR}/GeoLiteCity.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+> -    install ${WORKDIR}/GeoLiteCityv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+> +    install ${WORKDIR}/GeoIP.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoIP.dat
+> +    install ${WORKDIR}/GeoIPv6.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoIPv6.dat
+> +    install ${WORKDIR}/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+> +    install ${WORKDIR}/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>       ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+>   }
+>   
+
 -- 
-2.17.1
+BRs
+
+Sandy(Li Changqing)
 
 
