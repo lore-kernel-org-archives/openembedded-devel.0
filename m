@@ -1,49 +1,49 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DF56D6093A
+Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 511E36076F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2018 12:56:18 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id a62so5664440wmh.4
+	Wed, 12 Dec 2018 13:05:05 +0000 (UTC)
+Received: by mail-it1-f193.google.com with SMTP id x124so13607010itd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2018 04:56:20 -0800 (PST)
+	Wed, 12 Dec 2018 05:05:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=WlD4XiI+d+Psdtm/k18ae/s4+RFpCcOAiSvE0pcCUHo=;
-	b=EXvKeheUJ6IkmpM2dNF7Arj4riXZI9K7o0R6fvCFBTEoMOz8BX/X+dVCvilgVmrrtf
-	jZt1sMsz4hc0pFA6XHf1T2BVarxRfqHVyS01dSPNCH5CuA9M2pBwrwsgi/rVW89P1dQp
-	9VT0qJJGVEnq4aFjkOURWdNRDE1xhNXf9vbTqCVA9YRN/A9GkQcQAT87ZqoA6SqyyxIS
-	8NBthGAVJyGpT7uAPKscAMoG7si0vhC1tPHFjcWsCYdToySRZGUv0XOrsLk7TXygV8jQ
-	8ri5ZiGZana/UaAI6wgBqrqpXFEbiP+guH8eMZ/y+zLFoVlYOxtVfrdioBU5TYb3wF3y
-	1ZQQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=YIFPBOUshjPH/GfR8kWh8S3usbnuYIXzfu0ff0ueheQ=;
+	b=m6Lg15SOp6tq35zmP2RtXuGINUUrWHiwRUfUx7979Kt4e+5lCnI0rP4RZflkXszTyb
+	c9Nl0rYNAzE3U4koFC9fRwh4a2Ik2oZxtBl9DjMHwErzOF/q6qu8godzzoOSOpC8TJEE
+	oa2BuIlJV+6KL1zKo2BjWWr6W4Q8cdmf/WQZkycCA8dMppQIk7X55FqCDK+7eu496Otk
+	nMxy6qWifWktw8NiBcOyMtyPZoD0aVEIY7rdgdHbPqNQxGc6GLCMMSr+8ISGst7Ac8NH
+	1D9YAUaNxSQ2N8lz1p1kvOU4fHQCmZUxRkfSvzPj7otD16BIZ8k7uVj9KP6eLtfcPSeD
+	MnGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WlD4XiI+d+Psdtm/k18ae/s4+RFpCcOAiSvE0pcCUHo=;
-	b=TFp447sJMfZ73sIzXIafBkW0ah4QaX7PMTiQFOBaj+eCnXcsmqomHd4nj0MlLURTwO
-	sVJH7OGQySGGRTMz3j3OjA5cH6NUyaLZ69C0l7a66kI5/Cl12rJlf1eVtXx3MU+zHtWi
-	khbBtpDGPCnGSlJPbQqe7ggvz9URSckGKhdOu+15PkkLS9ymG4Ol01QK/Vizb/EpRrhC
-	jMRztegxZBAPO7ARAzYFCI6qI2LbjhveZXiCCUJvCPKGM0b183y/X+NzoWehE+JTtl6T
-	sPSZBMgTQ1PQVUO3IrkK/2HX++pQd6guJtfPrIhIh8gjA7xiNL/7xi1UJt+rDqwM3H/S
-	QusQ==
-X-Gm-Message-State: AA+aEWaTPMn74/oEIwOUK+Q1Ri8+pcc3rfbyV2uC9S0g2z4oStfKTiB0
-	+F9tWDTst+vR/0V7NYYcNg6DjIdO
-X-Google-Smtp-Source: AFSGD/W7BImYEvX3kiwpy9ZFMNevWTzarGbkLa6sBzzxeGGlKwaoB3ncpHD55zKWRMkn8n2IZcaTEg==
-X-Received: by 2002:a1c:770c:: with SMTP id t12mr6276793wmi.101.1544619379007; 
-	Wed, 12 Dec 2018 04:56:19 -0800 (PST)
-Received: from Unimatrix04-Bionic.ivecoeurope.ivecogroup.iveco.com
-	([5.170.17.183]) by smtp.gmail.com with ESMTPSA id
-	v6sm17095849wro.57.2018.12.12.04.56.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Dec 2018 04:56:18 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=YIFPBOUshjPH/GfR8kWh8S3usbnuYIXzfu0ff0ueheQ=;
+	b=PJYKVxYkNh7u5k2j5wR/qy8Ogx+Jebyu3bm1FNuUjpapDyEG+o7TQQU8lVereVyuOe
+	eHpMa2STZFhCnRSNuFrpSCTOVBrzZ3+tU/PWNWF3FavPC2Ihzj6GUf8ZaLw/e7dVpHyq
+	iILkJaq5NtSFUWQi6DPNm17oqa86g6OI9quLNFRREY/WL858P+4ia7/mhMEeDEpPxUp8
+	gK9Vxg0tyj5CQGlDwOqhJBnbJibapFDU0NGJesloGO/oKDDrO9Z7An5X9BAGJw3N204+
+	tux/PDD8sv+R8oGL5lP+t3VHKn86FWljpi+xtB3jCT4P+4hqXX6kFUHr+z5cpbG4OpRM
+	CVxg==
+X-Gm-Message-State: AA+aEWbcynVCMzeaMud4PIsbYAh0cMLSruDxk4yes1CtY3aSbNj8pCQm
+	SHvaKFpVCSTjCL+hw9ff40R4GuPTzkfyHSgL4A8=
+X-Google-Smtp-Source: AFSGD/U2GCWya8bUzyMFJdFQZm/pDhrefJQWGsPF/gT3FJQQg7C9XCdwG+j33kZtFy5a4wcjFf5s94dUqgzyJtiPhEQ=
+X-Received: by 2002:a24:4c8e:: with SMTP id a136mr5946995itb.108.1544619906168;
+	Wed, 12 Dec 2018 05:05:06 -0800 (PST)
+MIME-Version: 1.0
+References: <20181212123756.6539-1-costamagnagianfranco@yahoo.it>
+	<CA+chaQdrxbMXHmttTBnOYqU5M=tY4NkkGQLqFMEzdiaQwQFZyQ@mail.gmail.com>
+In-Reply-To: <CA+chaQdrxbMXHmttTBnOYqU5M=tY4NkkGQLqFMEzdiaQwQFZyQ@mail.gmail.com>
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Dec 2018 13:56:15 +0100
-Message-Id: <20181212125615.3370-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] cpprest: inherit pkg-config to find brotli library
+Date: Wed, 12 Dec 2018 14:04:54 +0100
+Message-ID: <CAATN8PUvdvwMVUAZMtcnXkgzNXvcd36g2LXurH+F0zS5eYgNqA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: costamagnagianfranco@yahoo.it,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cpprest: inherit pkg-config to find brotli library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2018 12:56:19 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 13:05:05 -0000
+Content-Type: text/plain; charset="UTF-8"
 
----
- meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hello Martin, you are right, I was not paying enough attention at the
+commit :)
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-index c94038f8f..b4b1c81e8 100644
---- a/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-+++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
-@@ -18,4 +18,4 @@ SRCREV= "204a52610234ac5180e80a6883b62c0ad085f51e"
- 
- S = "${WORKDIR}/git"
- 
--inherit cmake
-+inherit cmake pkgconfig
--- 
-2.17.1
+thanks and resubmitted!
 
+G.
+
+Il giorno mer 12 dic 2018 alle ore 13:49 Martin Jansa <
+martin.jansa@gmail.com> ha scritto:
+
+> Why does it need target pkgconfig to find brotli?
+>
+> Doesn't it need pkgconfig-native (through pkgconfig inherit) instead?
+>
+> On Wed, Dec 12, 2018 at 1:44 PM Gianfranco Costamagna <
+> costamagna.gianfranco@gmail.com> wrote:
+>
+>> ---
+>>  meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
+>> b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
+>> index c94038f8f..49da6d35c 100644
+>> --- a/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
+>> +++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.8.bb
+>> @@ -3,7 +3,7 @@ SECTION = "libs/network"
+>>  HOMEPAGE = "https://github.com/Microsoft/cpprestsdk/"
+>>  LICENSE = "MIT"
+>>  LIC_FILES_CHKSUM =
+>> "file://${S}/license.txt;md5=a2e15b954769218ff912468eecd6a02f"
+>> -DEPENDS = "openssl websocketpp zlib boost brotli"
+>> +DEPENDS = "openssl websocketpp zlib boost brotli pkgconfig"
+>>
+>>  EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
+>>
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
 
