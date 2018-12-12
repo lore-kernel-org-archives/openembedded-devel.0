@@ -1,17 +1,105 @@
-Return-Path: <bradleyb@fuzziesquirrel.com>
-Received: from bajor.fuzziesquirrel.com (mail.fuzziesquirrel.com
-	[173.167.31.197])
-	by mail.openembedded.org (Postfix) with ESMTP id C46D76067D
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 086596093A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2018 20:48:27 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at fuzziesquirrel.com
-Sender: bradleyb@bajor.fuzziesquirrel.com
-From: Brad Bishop <bradleyb@fuzziesquirrel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Dec 2018 15:47:54 -0500
-Message-Id: <20181211204754.25956-1-bradleyb@fuzziesquirrel.com>
+	Wed, 12 Dec 2018 02:31:19 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id c72so8095581pfc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Dec 2018 18:31:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=dc1ZeDmu80JPTp0GKa9MiVIRcPuBYg7yS2KhCGyvuYs=;
+	b=iaEHP7MAg3MhaOfEaMqggBm/RHqqgsJnRbEevBNQ+AV7fSZm4THuPzHuzXFiMPmiDN
+	EdVSjo0BIH/gzMYX3JlUiIskF6y+8GXDe70RHbRJr0eBt5EHaGKS/ZB0Bn+jAUkIIhyh
+	idaW4JhKaXVyh8HFUq5GOKPwcYgxiDaxrUqzQ069CcYpfcWlcy0a4PlqhygznIrfg8VL
+	COxQjMqgRLKdB1QBO9MXRkW1iCetj172KkEv5DDYjqcGUQ3ZEzXSCQ0UEsqe02uUOIUT
+	BrLVEfZcwg36t9Wg1iU4rrHDA1EF2epVzq8TS/tXetkhupLl1Cjbowy/GjG6QDIN26JT
+	K5XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=dc1ZeDmu80JPTp0GKa9MiVIRcPuBYg7yS2KhCGyvuYs=;
+	b=X/OIM6TDyzSjY1r1AxYTPyMrrB7rbGGk63+jT8jtsAcwtNSYpaS147TI+JV8QCnHXi
+	77O2ahzsE8AKvedSbnauZOQaWQY7PLvXHvwXzvKamZArNxb3BIc6BWhr+8PolyckEnHR
+	PVdSMW0NuokrZaHnuV2tmYqKSWq1dhADBEaw2hbKoVlGIyij1XzNrP6xiJ5tRFPHPYl2
+	JW1IjUidcGYHpJi3qxYBOVcBa3NFu1M5XrXfT5wNDngJN3IelGSIpSZY/6zlWYMAGVAa
+	mjDp2YKAqQ6Czr2oZ6aRk45AXJ2fKJFTgKrWW0pqwPEJ0j86nIy0KjyFoaEb+uzVcyMP
+	rAjw==
+X-Gm-Message-State: AA+aEWYRsXC1KXyGMb1CwfBUeznawkicrF54IVPIvPHddYdq2MAd6pcy
+	U199jZWYCe6mgCA/GEsZc/tGaL+D
+X-Google-Smtp-Source: AFSGD/W4PL3jUuE+ALj9poy/iWdUo3CXC6Hb2C+7m6+FjhDkWrPJjCutWQZbgB/bl8lOAiIJvj+VSg==
+X-Received: by 2002:a65:55ca:: with SMTP id k10mr16613802pgs.448.1544581880624;
+	Tue, 11 Dec 2018 18:31:20 -0800 (PST)
+Received: from [10.20.245.5] ([45.19.219.177])
+	by smtp.gmail.com with ESMTPSA id
+	g11sm19976601pfo.139.2018.12.11.18.31.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Dec 2018 18:31:19 -0800 (PST)
+To: Khem Raj <raj.khem@gmail.com>, Changqing Li <changqing.li@windriver.com>, 
+	Michael Halstead <mhalstead@linuxfoundation.org>
+References: <1543997256-46343-1-git-send-email-changqing.li@windriver.com>
+	<24c4dd68-8e62-dd2b-357f-d6e5a9ce833f@windriver.com>
+	<CA+chaQeaEWUr36Gn1YMuSRebyNQBFd0k-hW3k5rcxjvXb1xisA@mail.gmail.com>
+	<02491310-20e8-39d6-78d6-2536d664e5e6@windriver.com>
+	<CAMKF1soEqsNpW+rX6+ySrgCHXSMrsfjQVmCBYao_+koxiBax+w@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <51a4e824-d1b8-cfbe-f727-192d87b46de5@gmail.com>
+Date: Tue, 11 Dec 2018 18:31:18 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gtest: update to 1.8.1
+In-Reply-To: <CAMKF1soEqsNpW+rX6+ySrgCHXSMrsfjQVmCBYao_+koxiBax+w@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH V2] geoip: update geolite database checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,175 +112,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2018 20:48:28 -0000
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Dec 2018 02:31:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Update to 1.8.1, which has proper pkg-config support (so
-Add-pkg-config-support.patch can be dropped).
 
-Also the canonical gtest seems to have moved out of the google github
-organization into something called abseil.  Update HOMEPAGE and SRC_URI
-to match.
 
-Signed-off-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
----
- .../gtest/gtest/Add-pkg-config-support.patch  | 106 ------------------
- .../gtest/{gtest_1.8.0.bb =3D> gtest_1.8.1.bb}  |   7 +-
- 2 files changed, 3 insertions(+), 110 deletions(-)
- delete mode 100644 meta-oe/recipes-test/gtest/gtest/Add-pkg-config-suppo=
-rt.patch
- rename meta-oe/recipes-test/gtest/{gtest_1.8.0.bb =3D> gtest_1.8.1.bb} (=
-69%)
+On 12/11/18 7:09 AM, Khem Raj wrote:
+> adding Michael
+> On Tue, Dec 11, 2018 at 1:47 AM Changqing Li <changqing.li@windriver.com> wrote:
+>> On 12/11/18 5:21 PM, Martin Jansa wrote:
+>>
+>> http://downloads.yoctoproject.org/mirror/sources/ is updated only by Yocto autobuilder which doesn't include meta-oe layers.
+>>
+>> Someone will need to upload it there manually.
+>>
+>> http://sources.openembedded.org is the one updated by world builds Khem is running.
+>>
+>> Thanks.
+>>
+>> Khem, can you help to check if there is already a mirror on http://sources.openembedded.org?
+>>
+>> I cannot see it,   403 forbidden.   if it is there,  maybe we can change SRC_URI point to there.
 
-diff --git a/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patc=
-h b/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch
-deleted file mode 100644
-index 4c8977b49..000000000
---- a/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch
-+++ /dev/null
-@@ -1,106 +0,0 @@
--From ec9256bb704e94f41407fc8ace6a580491430196 Mon Sep 17 00:00:00 2001
--From: Andre McCurdy <armccurdy@gmail.com>
--Date: Thu, 15 Dec 2016 04:35:41 -0800
--Subject: [PATCH] Add pkg-config support
--
--Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
--Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
--Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-----
-- googlemock/CMakeLists.txt | 9 +++++++--
-- googlemock/gmock.pc.in    | 9 +++++++++
-- googletest/CMakeLists.txt | 9 +++++++--
-- googletest/gtest.pc.in    | 9 +++++++++
-- 4 files changed, 32 insertions(+), 4 deletions(-)
-- create mode 100644 googlemock/gmock.pc.in
-- create mode 100644 googletest/gtest.pc.in
--
--diff --git a/googlemock/CMakeLists.txt b/googlemock/CMakeLists.txt
--index beb259a..f17e2d7 100644
----- a/googlemock/CMakeLists.txt
--+++ b/googlemock/CMakeLists.txt
--@@ -27,6 +27,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
--   pre_project_set_up_hermetic_build()
-- endif()
--=20
--+# pkg-config support
--+configure_file("gmock.pc.in" "gmock.pc" @ONLY)
--+
-- #######################################################################=
-#
-- #
-- # Project-wide settings
--@@ -104,9 +107,11 @@ endif()
-- #
-- # Install rules
-- install(TARGETS gmock gmock_main
---  DESTINATION lib)
--+  DESTINATION ${CMAKE_INSTALL_LIBDIR})
-- install(DIRECTORY ${gmock_SOURCE_DIR}/include/gmock
---  DESTINATION include)
--+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
--+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gmock.pc"
--+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
--=20
-- #######################################################################=
-#
-- #
--diff --git a/googlemock/gmock.pc.in b/googlemock/gmock.pc.in
--new file mode 100644
--index 0000000..04bc0b4
----- /dev/null
--+++ b/googlemock/gmock.pc.in
--@@ -0,0 +1,9 @@
--+Name: libgmock
--+Version: 1.8.0
--+Description: Google's framework for writing C++ tests on a variety of p=
-latforms
--+
--+prefix=3D@CMAKE_INSTALL_PREFIX@
--+includedir=3D@CMAKE_INSTALL_INCLUDEDIR@
--+libdir=3D@CMAKE_INSTALL_LIBDIR@
--+Cflags:-I${includedir}/gmock
--+Libs: -L${libdir} -lgmock -lgmock_main
--diff --git a/googletest/CMakeLists.txt b/googletest/CMakeLists.txt
--index 621d0f0..58aaf54 100644
----- a/googletest/CMakeLists.txt
--+++ b/googletest/CMakeLists.txt
--@@ -34,6 +34,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
--   pre_project_set_up_hermetic_build()
-- endif()
--=20
--+# pkg-config support
--+configure_file("gtest.pc.in" "gtest.pc" @ONLY)
--+
-- #######################################################################=
-#
-- #
-- # Project-wide settings
--@@ -103,9 +106,11 @@ endif()
-- #
-- # Install rules
-- install(TARGETS gtest gtest_main
---  DESTINATION lib)
--+  DESTINATION ${CMAKE_INSTALL_LIBDIR})
-- install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
---  DESTINATION include)
--+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
--+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
--+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
--=20
-- #######################################################################=
-#
-- #
--diff --git a/googletest/gtest.pc.in b/googletest/gtest.pc.in
--new file mode 100644
--index 0000000..fb95152
----- /dev/null
--+++ b/googletest/gtest.pc.in
--@@ -0,0 +1,9 @@
--+Name: libgtest
--+Version: 1.8.0
--+Description: Google's framework for writing C++ tests on a variety of p=
-latforms
--+
--+prefix=3D@CMAKE_INSTALL_PREFIX@
--+includedir=3D@CMAKE_INSTALL_INCLUDEDIR@
--+libdir=3D@CMAKE_INSTALL_LIBDIR@
--+Cflags:-I${includedir}/gtest
--+Libs: -L${libdir} -lgtest -lgtest_main
----=20
--1.9.1
--
-diff --git a/meta-oe/recipes-test/gtest/gtest_1.8.0.bb b/meta-oe/recipes-=
-test/gtest/gtest_1.8.1.bb
-similarity index 69%
-rename from meta-oe/recipes-test/gtest/gtest_1.8.0.bb
-rename to meta-oe/recipes-test/gtest/gtest_1.8.1.bb
-index 48cf4e04b..23862c930 100644
---- a/meta-oe/recipes-test/gtest/gtest_1.8.0.bb
-+++ b/meta-oe/recipes-test/gtest/gtest_1.8.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION =3D "Google's framework for writing C++ tests"
--HOMEPAGE =3D "https://github.com/google/googletest"
-+HOMEPAGE =3D "https://github.com/abseil/googletest"
- SECTION =3D "libs"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://googlemock/LICENSE;md5=3Dcbbd27594afd089daa=
-160d3a16dd515a \
-@@ -8,10 +8,9 @@ LIC_FILES_CHKSUM =3D "file://googlemock/LICENSE;md5=3Dcb=
-bd27594afd089daa160d3a16dd51
- PROVIDES +=3D "gmock"
-=20
- S =3D "${WORKDIR}/git"
--SRCREV =3D "ec44c6c1675c25b9827aacd08c02433cccde7780"
-+SRCREV =3D "2fe3bd994b3189899d93f1d5a881e725e046fdc2"
- SRC_URI =3D "\
--    git://github.com/google/googletest.git;protocol=3Dhttps; \
--    file://Add-pkg-config-support.patch \
-+    git://github.com/abseil/googletest.git;protocol=3Dhttps; \
- "
-=20
- inherit cmake
---=20
-2.19.2
+did anyone run?
+
+oe-selftest -r meta_oe_sources.MetaOESourceMirroring.test_oe_source_mirror
+
+- armin
+>>
+>>
+>> On Tue, Dec 11, 2018 at 6:26 AM Changqing Li <changqing.li@windriver.com> wrote:
+>>> Hi,  Khem and Martin
+>>>
+>>> I noticed Khem have merge this patch to master yesterday,  but the
+>>> mirror on http://downloads.yoctoproject.org/mirror/sources/
+>>>
+>>> still not generated yet, do you know how to trigger the build and
+>>> generate a mirror on above link?   I think the checksum will change
+>>>
+>>> again tomorrow,  seem we don't have time to change SRC_URI to the
+>>> http://downloads.yoctoproject.org/mirror/sources/, :-(
+>>>
+>>>
+>>> On 12/5/18 4:07 PM, changqing.li@windriver.com wrote:
+>>>> From: Changqing Li <changqing.li@windriver.com>
+>>>>
+>>>> Geolite database checksum changed today, so update it
+>>>> to the lastest one.
+>>>>
+>>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>>> ---
+>>>>   .../recipes-support/geoip/geoip_1.6.12.bb          | 26 ++++++++++++----------
+>>>>   1 file changed, 14 insertions(+), 12 deletions(-)
+>>>>
+>>>> diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>> index 57f0b67..c3ce4d8 100644
+>>>> --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>> +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+>>>> @@ -8,11 +8,13 @@ using reverse DNS lookups."
+>>>>   HOMEPAGE = "http://dev.maxmind.com/geoip/"
+>>>>   SECTION = "libdevel"
+>>>>
+>>>> +GEOIP_DATABASE_VERSION = "20181205"
+>>>> +
+>>>>   SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
+>>>> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz \
+>>>> -           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz \
+>>>> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz \
+>>>> -           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz \
+>>>> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz \
+>>>> +           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz \
+>>>> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz \
+>>>> +           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz \
+>>>>              file://run-ptest \
+>>>>   "
+>>>>   SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>>> @@ -20,14 +22,14 @@ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+>>>>   SRC_URI[GeoIP-dat.md5sum] = "d538e57ad9268fdc7955c6cf9a37c4a9"
+>>>>   SRC_URI[GeoIP-dat.sha256sum] = "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
+>>>>
+>>>> -SRC_URI[GeoIPv6-dat.md5sum] = "a908d7a51c3883eb8f693ca197c7a142"
+>>>> -SRC_URI[GeoIPv6-dat.sha256sum] = "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
+>>>> +SRC_URI[GeoIPv6-dat.md5sum] = "52d6aa0aac1adbfa5eb7fa4742197c11"
+>>>> +SRC_URI[GeoIPv6.sha256sum] = "416ac92fcc35a21d5efbb32e5c88e609c37aec1aa1af6247d088b8da1af6e9bf"
+>>>>
+>>>>   SRC_URI[GeoLiteCity-dat.md5sum] = "d700c137232f8e077ac8db8577f699d9"
+>>>>   SRC_URI[GeoLiteCity-dat.sha256sum] = "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
+>>>>
+>>>> -SRC_URI[GeoLiteCityv6-dat.md5sum] = "8ac3506ccabaae7e9f7d6301c2654313"
+>>>> -SRC_URI[GeoLiteCityv6-dat.sha256sum] = "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
+>>>> +SRC_URI[GeoLiteCityv6-dat.md5sum] = "6734ccdc644fc0ba76eb276dce73d005"
+>>>> +SRC_URI[GeoLiteCityv6-dat.sha256sum] = "c95a9d2643b7f53d7abeed2114388870e13fbbad4653f450a49efa7e4b86aca4"
+>>>>
+>>>>   LICENSE = "LGPL-2.1"
+>>>>
+>>>> @@ -44,10 +46,10 @@ EXTRA_OECONF = "--disable-static               \
+>>>>   do_install() {
+>>>>       make DESTDIR=${D} install
+>>>>       install -d ${D}/${datadir}/GeoIP
+>>>> -    install ${WORKDIR}/GeoIP.dat.20181120 ${D}/${datadir}/GeoIP/GeoIP.dat
+>>>> -    install ${WORKDIR}/GeoIPv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoIPv6.dat
+>>>> -    install ${WORKDIR}/GeoLiteCity.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+>>>> -    install ${WORKDIR}/GeoLiteCityv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>>>> +    install ${WORKDIR}/GeoIP.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoIP.dat
+>>>> +    install ${WORKDIR}/GeoIPv6.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoIPv6.dat
+>>>> +    install ${WORKDIR}/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoLiteCity.dat
+>>>> +    install ${WORKDIR}/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION} ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+>>>>       ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+>>>>   }
+>>>>
+>>> --
+>>> BRs
+>>>
+>>> Sandy(Li Changqing)
+>>>
+>> --
+>> BRs
+>>
+>> Sandy(Li Changqing)
+
 
