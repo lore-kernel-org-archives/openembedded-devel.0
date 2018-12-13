@@ -1,44 +1,38 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 127CA6C4C9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 84B806C4F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 19:13:04 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c14so3178218wrr.0
+	Thu, 13 Dec 2018 21:00:01 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id n12so1992511qkh.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 11:13:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=b/eP9ViIzkMBL/p7J68uo2w7H5unEYCngIgtRygd9tA=;
-	b=JpgQuF6W8GPecZbhMkytYDC4xkKyZiYqzDdUkIwtxu5V8kYhzjDGC72Vg1iYIOXFRJ
-	0sDMQpvV3r1ZGvxSPXNqhTnoPVjzdYvowwodB9LuQScYq2TAtFI0lPGFdMAfsHmMxh9c
-	6MNcOWItg7cpHlE8bhmdebsAEXppcBhKsCn7Q=
+	Thu, 13 Dec 2018 13:00:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XXnIYrqrPiwQA8EcA6yr9gDwuKh3/xyJttUJcxXSY8E=;
+	b=t+Gwzn9P8oIfyQ/9ncSGYKfZjOwIWE0rtHHgqZwE8Xd2Skv6qrKzPV0eUBqYZY9YFx
+	DBzgKU71sfD4Zc4VaSRhlaf6rmWUvkF/ewFUcXFEvZxGveoqzes1pfUhM0C9QC3/Y0cd
+	j+7l9umHmzFE92vM+tBU0fTzMswAksGQ6U3BZ+qLkqmQ51cUCWvD67qqEJpb51xeLg7I
+	UgLgX0lk53zl9Uv9ae0TiZ0tCNPvG9Ns/CAJbFA/c2qR57yrUfohW/10dKvccFPb0wUl
+	K8lMR8TAWRGmOviDi/NQzaFde8H8lIAAUtlOGqqLm57X1AE8i+Sk2stXl65NWe7nSrle
+	H25Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=b/eP9ViIzkMBL/p7J68uo2w7H5unEYCngIgtRygd9tA=;
-	b=cpKyd5/IAqpZPgbPrTgHvNscR6lnja9pBFYla4gdeSxpw4WkoUEZGFTHeagOfeJz82
-	iWrr4rkdzjwirHXPidnOM6G8roIAp7qtBmqemuTg3sSWoz8mRe7RVdkJ5TzurCTtVjUg
-	2fj3D9lHc5qc2cVfWcWpA/L7CdCTjRF1MX+uMOkjLm+GzYkhWfiHxhb2eOEgQmDakzkU
-	GFNRxeGLN2JgfADX5RUVczkZJNQSJZr4pvc8xsWveF+E3jKClTAht74Y1g38xhc+N6kP
-	j5oPJ8Mu8V11YPritksmMqNIHgCp0fw5HrjjkBBlBHhxNJGJxOfRtgWmG4sakYhic1nU
-	QY5A==
-X-Gm-Message-State: AA+aEWbF5FxDaK+al/G7n36oORszmzPkRFR6pqa+yZgl9D3lKd68Vne0
-	ZJQr5E0HMpn9DpYED3G+lolQ6Q==
-X-Google-Smtp-Source: AFSGD/Vdsz2h1A+fDEN3jVH0vI+y0OHCEnljtLzxJpamurkUjuLcOKEJh1ru/Srp42aZssl6UD3Fdw==
-X-Received: by 2002:adf:83e7:: with SMTP id 94mr8748wre.278.1544728385522;
-	Thu, 13 Dec 2018 11:13:05 -0800 (PST)
-Received: from [192.168.0.101] (146-241-196-218.dyn.eolo.it. [146.241.196.218])
-	by smtp.gmail.com with ESMTPSA id r3sm3316634wrs.78.2018.12.13.11.13.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Dec 2018 11:13:04 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 12.1 \(3445.101.1\))
-From: Paolo Valente <paolo.valente@linaro.org>
-In-Reply-To: <CAMKF1srVtW2Utpj1PBsYRo6xMuUuiXVTzN+9t_nxcVHg-=PXFg@mail.gmail.com>
-Date: Thu, 13 Dec 2018 20:13:03 +0100
-Message-Id: <57748E3B-3B23-4BEC-9673-EB348494EAD5@linaro.org>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XXnIYrqrPiwQA8EcA6yr9gDwuKh3/xyJttUJcxXSY8E=;
+	b=AMUcFA/yJjxO31SVww4ojj4wLkLtkM74Hmo8oXUudaS8pxrWKGQO3rxNDD6PWrVmly
+	JRvWAftO4fvS747r0w0xiREQFqyTOhxGDZvFcX03Cx8rb1bt86xBBXf6Wwyr6wHxXHok
+	mRiJXo6hVFpzpqo4E2IPgCZa8FpH91a3mC59RxSLxVjkE/Xtp/EKvqnLpix4Wfl6se5L
+	D3+3j6NBz7gG7YC2eM2/PMBKdwnNanEMyQVCKO2gHkYzIpUOgL4LSOl44bht3fAsPZVC
+	/YH0UbuXHUv+dOpS6acSFjYtfCURjUl6SL7geep72K4XHtDY5THixErvwAx5WA5KCqEY
+	GGKg==
+X-Gm-Message-State: AA+aEWZs3EX/Wz/0xYMBjmroM6yGkP6vgp/ImO798y+fVJSLh17gnaes
+	weh97IhGwaTBZ9msdI9/vJycL7yeAiOk5hdX/aI=
+X-Google-Smtp-Source: AFSGD/XrNzTUgQjhIzzirWOImeYdXFIafJEskzsoBl7dPk028N7/DsWccuw0Bvm4SzhaJltxfs7/8Z+vlEb0Wp7e8f8=
+X-Received: by 2002:a37:a80a:: with SMTP id r10mr362095qke.2.1544734802106;
+	Thu, 13 Dec 2018 13:00:02 -0800 (PST)
+MIME-Version: 1.0
 References: <20181213151533.13730-1-paolo.valente@linaro.org>
 	<CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
 	<6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
@@ -47,8 +41,12 @@ References: <20181213151533.13730-1-paolo.valente@linaro.org>
 	<CAMKF1spYyDAxBCHrcA6jTYYT7v8tprHWF6ZOxBkQJc+n1_eQ6w@mail.gmail.com>
 	<3B9426AF-6E9F-45D7-9D6C-AA0B83188CEF@linaro.org>
 	<CAMKF1srVtW2Utpj1PBsYRo6xMuUuiXVTzN+9t_nxcVHg-=PXFg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.3445.101.1)
+	<57748E3B-3B23-4BEC-9673-EB348494EAD5@linaro.org>
+In-Reply-To: <57748E3B-3B23-4BEC-9673-EB348494EAD5@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Dec 2018 12:59:36 -0800
+Message-ID: <CAMKF1sq93eTKUi-X9hK2co1SRTPf0UUbRZgOHzqbvfO=fq5+vA@mail.gmail.com>
+To: paolo.valente@linaro.org
 Cc: Ulf Hansson <ulf.hansson@linaro.org>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Mark Brown <broonie@linaro.org>
@@ -65,134 +63,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 19:13:05 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Dec 2018 21:00:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+On Thu, Dec 13, 2018 at 11:13 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+>
+>
+>
+> > Il giorno 13 dic 2018, alle ore 18:24, Khem Raj <raj.khem@gmail.com> ha scritto:
+> >
+> > On Thu, Dec 13, 2018 at 9:20 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+> >>
+> >>
+> >>
+> >>> Il giorno 13 dic 2018, alle ore 18:18, Khem Raj <raj.khem@gmail.com> ha scritto:
+> >>>
+> >>> On Thu, Dec 13, 2018 at 9:16 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+> >>>>
+> >>>>
+> >>>>
+> >>>>> Il giorno 13 dic 2018, alle ore 18:11, Khem Raj <raj.khem@gmail.com> ha scritto:
+> >>>>>
+> >>>>> On Thu, Dec 13, 2018 at 7:33 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>>> Il giorno 13 dic 2018, alle ore 16:27, Khem Raj <raj.khem@gmail.com> ha scritto:
+> >>>>>>>
+> >>>>>>> On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+> >>>>>>>>
+> >>>>>>>> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+> >>>>>>>> ---
+> >>>>>>>> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
+> >>>>>>>> 1 file changed, 3 insertions(+), 2 deletions(-)
+> >>>>>>>>
+> >>>>>>>> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >>>>>>>> index 77d172814..166f3000a 100644
+> >>>>>>>> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >>>>>>>> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >>>>>>>> @@ -2,7 +2,7 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+> >>>>>>>> LICENSE = "GPLv2"
+> >>>>>>>> LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
+> >>>>>>>>
+> >>>>>>>> -SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
+> >>>>>>>> +SRCREV = "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
+> >>>>>>>> PV = "0.0+git${SRCPV}"
+> >>>>>>>> SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+> >>>>>>>>
+> >>>>>>>> @@ -21,7 +21,8 @@ do_install() {
+> >>>>>>>>  install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
+> >>>>>>>> }
+> >>>>>>>>
+> >>>>>>>> -RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
+> >>>>>>>> +RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat \
+> >>>>>>>> +                 psmisc git"
+> >>>>>>>
+> >>>>>>> why these new rdeps
+> >>>>>>
+> >>>>>> psmisc is for killall, git is for ... git :)
+> >>>>>
+> >>>>> I think busybox provides killall too.
+> >>>>
+> >>>> Ok, I'll remove this dep.
+> >>>>
+> >>>>>>
+> >>>>>> Some weeks ago, I bumped into this missing dependencies that made the
+> >>>>>> automatic execution of a test fail on a system without either killall
+> >>>>>> or git.
+> >>>>>
+> >>>>> OK. so I wonder if we dont have killall enabled in oe-core by default in
+> >>>>> busybox ? or does it need ps-misc one specifically ?
+> >>>>>
+> >>>>> git is interesting, does it clone some sources during executing tests ?
+> >>>>>
+> >>>> In kernel-task benchmarks a mainline Linux is cloned.  But maybe such
+> >>>> benchmarks do not make sense in oe.  Let me know, and I'll remove this
+> >>>> dep too.
+> >>>
+> >>> they are fine. We just need to understand that they are well meaning changes.
+> >>>
+> >>
+> >> So, is the patch ok, or shall I remove the psmisc dep?
+> >
+> > I think it will be good to understand why killall went missing without
+> > ps-misc package. As such patch is ok. Since I think killall should always
+> > be there, either from ps-misc or a backfill from busybox.
+> >
+>
+> Sorry, I created a lot of confusion.
+>
+> 1) killall *was not* missing in any of the oe rootfs that I tested
+> (rootfs made by Anders, in CC).  killall was missing on a non-oe
+> remote machine, made available for my tests by a company.  So, I added
+> that dependency (in my S suite) to make it work on that machine.  For
+> this reason, I thought of adding this dependency to this recipe.  But,
+> if it is not needed, I'll remove it.
 
+ok lets remove it
 
-> Il giorno 13 dic 2018, alle ore 18:24, Khem Raj <raj.khem@gmail.com> =
-ha scritto:
->=20
-> On Thu, Dec 13, 2018 at 9:20 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>=20
->>=20
->>=20
->>> Il giorno 13 dic 2018, alle ore 18:18, Khem Raj <raj.khem@gmail.com> =
-ha scritto:
->>>=20
->>> On Thu, Dec 13, 2018 at 9:16 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>=20
->>>>=20
->>>>=20
->>>>> Il giorno 13 dic 2018, alle ore 18:11, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>>=20
->>>>> On Thu, Dec 13, 2018 at 7:33 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>>=20
->>>>>>=20
->>>>>>=20
->>>>>>> Il giorno 13 dic 2018, alle ore 16:27, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>>>>=20
->>>>>>> On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>>>>=20
->>>>>>>> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
->>>>>>>> ---
->>>>>>>> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
->>>>>>>> 1 file changed, 3 insertions(+), 2 deletions(-)
->>>>>>>>=20
->>>>>>>> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb =
-b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>> index 77d172814..166f3000a 100644
->>>>>>>> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>> @@ -2,7 +2,7 @@ SUMMARY =3D "Small collection of benchmarks for =
-storage I/O"
->>>>>>>> LICENSE =3D "GPLv2"
->>>>>>>> LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3Db529aaa6a0c50f15d29f89609b5c22f3"
->>>>>>>>=20
->>>>>>>> -SRCREV =3D "79698f645bfb28d0d966484ddad3a1efb562246d"
->>>>>>>> +SRCREV =3D "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
->>>>>>>> PV =3D "0.0+git${SRCPV}"
->>>>>>>> SRC_URI =3D =
-"git://github.com/Algodev-github/S.git;protocol=3Dhttps;branch=3Dmaster"
->>>>>>>>=20
->>>>>>>> @@ -21,7 +21,8 @@ do_install() {
->>>>>>>>  install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
->>>>>>>> }
->>>>>>>>=20
->>>>>>>> -RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
-libaio-dev sysstat"
->>>>>>>> +RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
-libaio-dev sysstat \
->>>>>>>> +                 psmisc git"
->>>>>>>=20
->>>>>>> why these new rdeps
->>>>>>=20
->>>>>> psmisc is for killall, git is for ... git :)
->>>>>=20
->>>>> I think busybox provides killall too.
->>>>=20
->>>> Ok, I'll remove this dep.
->>>>=20
->>>>>>=20
->>>>>> Some weeks ago, I bumped into this missing dependencies that made =
-the
->>>>>> automatic execution of a test fail on a system without either =
-killall
->>>>>> or git.
->>>>>=20
->>>>> OK. so I wonder if we dont have killall enabled in oe-core by =
-default in
->>>>> busybox ? or does it need ps-misc one specifically ?
->>>>>=20
->>>>> git is interesting, does it clone some sources during executing =
-tests ?
->>>>>=20
->>>> In kernel-task benchmarks a mainline Linux is cloned.  But maybe =
-such
->>>> benchmarks do not make sense in oe.  Let me know, and I'll remove =
-this
->>>> dep too.
->>>=20
->>> they are fine. We just need to understand that they are well meaning =
-changes.
->>>=20
->>=20
->> So, is the patch ok, or shall I remove the psmisc dep?
->=20
-> I think it will be good to understand why killall went missing without
-> ps-misc package. As such patch is ok. Since I think killall should =
-always
-> be there, either from ps-misc or a backfill from busybox.
->=20
+>
+> 2) git is needed only if you want to run kernel-development tests.
+>
 
-Sorry, I created a lot of confusion.
+lets keep it.
 
-1) killall *was not* missing in any of the oe rootfs that I tested
-(rootfs made by Anders, in CC).  killall was missing on a non-oe
-remote machine, made available for my tests by a company.  So, I added
-that dependency (in my S suite) to make it work on that machine.  For
-this reason, I thought of adding this dependency to this recipe.  But,
-if it is not needed, I'll remove it.
+> That said, just tell me whether the patch is ok, or tell me what
+> dependencies to remove, and I'll make a V2.
 
-2) git is needed only if you want to run kernel-development tests.
+yes please.
 
-That said, just tell me whether the patch is ok, or tell me what
-dependencies to remove, and I'll make a V2.
-
-Thanks,
-Paolo
-
->>=20
->> Thanks,
->> Paolo
-
+>
+> Thanks,
+> Paolo
+>
+> >>
+> >> Thanks,
+> >> Paolo
+>
 
