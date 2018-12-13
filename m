@@ -1,44 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 540F86C45F
+Return-Path: <paolo.valente@linaro.org>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id EC3EB6C45D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 15:27:50 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id y20so2497814qtm.13
+	Thu, 13 Dec 2018 15:33:35 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id q18so2446449wrx.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 07:27:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=l2DGoZIU0OrexW8/AMhUcYI22tgEYbMDSKSR2fj2lJk=;
-	b=nlidGBP2E+eB6pLN0WHba6hH7Og0bWh1mvMo4XIibwMfXANyv0GvVGRFN4yPK95ySM
-	esVXyE31UJpMYKA079xTl54CEHKP4UUGBZWnEgQICU+o6FTlGtIAaxzlzhssNQ+3YJgv
-	5rlKCmonb7m0T9xUotUue4iKEI+cnzf80Ct1CvXeWaHE/N1NVNaIuU+ksWNUufqwCGu6
-	BBoBY7MsNwCmBvyiG+X3EqSJghXZY7RQIpQZVB+8sxQl4V/YFR0az04e1rqiT3F55yHU
-	VsQaw90q0NBnDJ7D/H4gf3QByHlNwf+B+YdJFWpqWbozxtpRoRJU0N/lKkWOY2FGkw/e
-	v5Ew==
+	Thu, 13 Dec 2018 07:33:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=kGlEwA2D8sRhi8qaonEcLEsRHxhYl/dnzSsUNAtQcLM=;
+	b=fhejRJ8/iZDT+sqtWrYwx/QFTk8RC/fuFP04lCge87z49a7Cgy/SeBLW3u0fWgpsur
+	ATrQJrP57b8++nnFcionLAypyaA8ChXTN+XCzRQkC7KNOMho9E2+JhNzDfI+tmElslV+
+	P1CaaE4H3U3qkVDrktgHmlEn/5BSix/UgHZOY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=l2DGoZIU0OrexW8/AMhUcYI22tgEYbMDSKSR2fj2lJk=;
-	b=ZdVIUuSlTHNp5KAsGRLtSJQvNZ4H+oNtqTy2I9n55lLvr613EJ8eaVn0jrCL8wsKvZ
-	+zhYZ33cfjHYh4/kfHm0duP3lAOAzaIGtxifwgNzx++QD+yLFITv60YUHPyjCQNaQzr3
-	OccdSclV4ZfAUG5xUzh5k32h7CAxNgddAbsYPWXWm5kAjGqgaedpVj8gpf0NmUBg0xl7
-	I9/l8QUVL0Cq4J0uslF4NbZjmwaTFCxZ6bwvoCzqZMJdtxCIUxvSI4FiAd707D6w0p4/
-	AKTa/76jVLmsap43HHFuidhoBReHJ6O/J6sbNVvASjlqq1WCjvri1a4pQrwuTK2pB5nC
-	e7QA==
-X-Gm-Message-State: AA+aEWakIw2QkZpf/sFLUcZrgnIHtTqYOI5g03DQJseOPhV869C/Ap9d
-	LihJEpjYZAgtULLwLTRbFTiKNAG7RnOyZvu5fZM=
-X-Google-Smtp-Source: AFSGD/XLprn6OifHXgD1kqq24/AGYTsySbN0bBc2ORRLOR897ItVbCDK6UYKgzXvQQcTdy3PfyYScN40fEFZxt9dImE=
-X-Received: by 2002:ac8:36ba:: with SMTP id a55mr23980766qtc.236.1544714870967;
-	Thu, 13 Dec 2018 07:27:50 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=kGlEwA2D8sRhi8qaonEcLEsRHxhYl/dnzSsUNAtQcLM=;
+	b=RqqiV2hGhKYlzklm1sibRvl2EC2W7ylwrwe/GXxEWqfJIBIxkjMeleVxE+lL7t6Yu/
+	i7EprTJFQjbN8GdqAQLsgwetBA/huvcpYGjRxrexNnng2PtEvuTsGUkd1iDxgusFTY3/
+	f6PMN1sO8QCTJbmA7UeFCsSirfTA3reC7zcSEQ9CVfowN2DkmF5iPYiEItXKsIimLBLj
+	v7Y7Xg/yqb54CQW+tZAa112vJWQ08t4oZWVY3gjJ8F3TmwIgtNg9UVH/V0cGoE/T/y8Z
+	0R7I+76TyIQF0e8m7xMqbg43Q/i8xLUno9I8yyCM1jfm5T74NoGx+/w6ibyHCkdEMST4
+	tmaQ==
+X-Gm-Message-State: AA+aEWYnCLyC6IHF1QvccQvj+gd6SsXSHhKiilYmG6Nop/RdLluzvCGJ
+	rKSrF9oWULRqmt6arGzJ3aGgSQ==
+X-Google-Smtp-Source: AFSGD/Xh2ccaYc1HgyuOr2Qjlo18g6Qqh/1y+JTkP/4Tw8hhFY9FdySonktjYIUZSsYl7TW2JwGimw==
+X-Received: by 2002:adf:b592:: with SMTP id c18mr21343800wre.89.1544715216184; 
+	Thu, 13 Dec 2018 07:33:36 -0800 (PST)
+Received: from [192.168.0.101] (146-241-196-218.dyn.eolo.it. [146.241.196.218])
+	by smtp.gmail.com with ESMTPSA id
+	x186sm2390589wmg.41.2018.12.13.07.33.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Dec 2018 07:33:35 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 12.1 \(3445.101.1\))
+From: Paolo Valente <paolo.valente@linaro.org>
+In-Reply-To: <CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
+Date: Thu, 13 Dec 2018 16:33:34 +0100
+Message-Id: <6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
 References: <20181213151533.13730-1-paolo.valente@linaro.org>
-In-Reply-To: <20181213151533.13730-1-paolo.valente@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Dec 2018 07:27:24 -0800
-Message-ID: <CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
-To: paolo.valente@linaro.org
+	<CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.3445.101.1)
 Cc: ulf.hansson@linaro.org,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	broonie@linaro.org
@@ -55,47 +60,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 15:27:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 13 Dec 2018 15:33:36 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente <paolo.valente@linaro.org> wrote:
->
-> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
-> ---
->  meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> index 77d172814..166f3000a 100644
-> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
->
-> -SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
-> +SRCREV = "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
->  PV = "0.0+git${SRCPV}"
->  SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
->
-> @@ -21,7 +21,8 @@ do_install() {
->      install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
->  }
->
-> -RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
-> +RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat \
-> +                 psmisc git"
 
-why these new rdeps
->
->  FILES_${PN} = "/opt/S-suite/"
->
-> --
-> 2.16.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+> Il giorno 13 dic 2018, alle ore 16:27, Khem Raj <raj.khem@gmail.com> =
+ha scritto:
+>=20
+> On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente =
+<paolo.valente@linaro.org> wrote:
+>>=20
+>> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+>> ---
+>> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
+>> 1 file changed, 3 insertions(+), 2 deletions(-)
+>>=20
+>> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb =
+b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+>> index 77d172814..166f3000a 100644
+>> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+>> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+>> @@ -2,7 +2,7 @@ SUMMARY =3D "Small collection of benchmarks for =
+storage I/O"
+>> LICENSE =3D "GPLv2"
+>> LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Db529aaa6a0c50f15d29f89609b5c22f3"
+>>=20
+>> -SRCREV =3D "79698f645bfb28d0d966484ddad3a1efb562246d"
+>> +SRCREV =3D "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
+>> PV =3D "0.0+git${SRCPV}"
+>> SRC_URI =3D =
+"git://github.com/Algodev-github/S.git;protocol=3Dhttps;branch=3Dmaster"
+>>=20
+>> @@ -21,7 +21,8 @@ do_install() {
+>>     install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
+>> }
+>>=20
+>> -RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
+libaio-dev sysstat"
+>> +RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
+libaio-dev sysstat \
+>> +                 psmisc git"
+>=20
+> why these new rdeps
+
+psmisc is for killall, git is for ... git :)
+
+Some weeks ago, I bumped into this missing dependencies that made the
+automatic execution of a test fail on a system without either killall
+or git.
+
+If these dependencies are certainly useless for oe, then I'll remove =
+them.
+
+Thanks,
+Paolo
+
+>>=20
+>> FILES_${PN} =3D "/opt/S-suite/"
+>>=20
+>> --
+>> 2.16.1
+>>=20
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
