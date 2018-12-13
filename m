@@ -1,23 +1,45 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D3F16BDCE
+Return-Path: <paolo.valente@linaro.org>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9580D6C0B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 01:23:24 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id wBD1NOeQ013749
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Dec 2018 15:15:51 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id m1so2734060wml.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2018 17:23:25 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Wed, 12 Dec 2018 17:23:24 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Dec 2018 09:23:23 +0800
-Message-ID: <1544664203-22510-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] geoip: update SRC_URI
+	Thu, 13 Dec 2018 07:15:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=X1LA3XlJ/OtQLNnKr/Tq0t3IYOGJtQYHAVe4vTajBZU=;
+	b=cKKT1dRz9fznIgDRKDix7wuBkHE027OFpYQ058cSU+ckhzDFP7Is+8I8CeXKtoX1pK
+	Oy0UgnDtoZDxHRf7mofloHeGN6XejJ3m5bW3iXKzktYufqNP82t4H4inZZmmFHxzJH6M
+	NxOZz7FtHqgInbUEmdOyl6Yy1WgvWtJlYwj/k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=X1LA3XlJ/OtQLNnKr/Tq0t3IYOGJtQYHAVe4vTajBZU=;
+	b=Kc4/zgzBlFLsJ3XXL8UuBOAwfHeDeOqBCECekOv5fhx6dtCzZEeRNW1UFjCr9Hi70P
+	LemVUpD75RrKlrdPSBR8/Zq9vOcw7usKI4Bj93U7r/jqCRdpYTkG25Wjt68lggUM7wC/
+	vguJ5xqsca+zm59MNoWnErSABKCcd0t0vYqIrRF3P1olghfSw1E7q3gnI4vkqwtH6HHz
+	YWujZZgMADKzxhOi2C0uannvyfPxod7MnlOeh0jj87MJBr1XFk1CYri7qiRs1n0z0VRF
+	Ggr7ZlADnsQFe2X1iQOyosqT8VslgXfeAnid+mZ/buDMFt4tHJjp6m78HbaWeCiQVuCY
+	FE2g==
+X-Gm-Message-State: AA+aEWbn0lViaa6KgauhWVek0cFZgQNz1LNhoyEk0M2YKBvVGEtC0PO1
+	aGa+pwXWjAB9GFzXIBT1BQ7Qxf8UR8k=
+X-Google-Smtp-Source: AFSGD/XOCkJq2TMIiaPsuRoKEnXPh/q0VIRbZaVFo38eNEqrh7fSjvuwm+wIGslB3W7w1rbeq1Wutg==
+X-Received: by 2002:a1c:864f:: with SMTP id i76mr10279892wmd.83.1544714151845; 
+	Thu, 13 Dec 2018 07:15:51 -0800 (PST)
+Received: from localhost.localdomain (146-241-196-218.dyn.eolo.it.
+	[146.241.196.218]) by smtp.gmail.com with ESMTPSA id
+	i186sm2689240wmd.19.2018.12.13.07.15.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Dec 2018 07:15:51 -0800 (PST)
+From: Paolo Valente <paolo.valente@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Dec 2018 16:15:33 +0100
+Message-Id: <20181213151533.13730-1-paolo.valente@linaro.org>
+X-Mailer: git-send-email 2.16.1
+Cc: ulf.hansson@linaro.org, broonie@linaro.org
+Subject: [meta-oe][PATCH] s-suite: push SRCREV to version 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,40 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 01:23:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 13 Dec 2018 15:15:51 -0000
 
-From: Changqing Li <changqing.li@windriver.com>
-
-previous database on maxmind website will be removed from January 2, 2019.
-and also we met checksum weekly change problem, so update the SRC_URI to
-http://sources.openembedded.org/
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
 ---
- meta-networking/recipes-support/geoip/geoip_1.6.12.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-index c3ce4d8..4271c2e 100644
---- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-+++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-@@ -11,10 +11,10 @@ SECTION = "libdevel"
- GEOIP_DATABASE_VERSION = "20181205"
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 77d172814..166f3000a 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
  
- SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz \
-+           http://sources.openembedded.org/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
-+           http://sources.openembedded.org/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
-+           http://sources.openembedded.org/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
-+           http://sources.openembedded.org/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
-            file://run-ptest \
- "
- SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+-SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
++SRCREV = "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
+ PV = "0.0+git${SRCPV}"
+ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+ 
+@@ -21,7 +21,8 @@ do_install() {
+     install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
+ }
+ 
+-RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
++RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat \
++		  psmisc git"
+ 
+ FILES_${PN} = "/opt/S-suite/"
+ 
 -- 
-2.7.4
+2.16.1
 
 
