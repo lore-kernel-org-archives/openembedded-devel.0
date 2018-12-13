@@ -1,53 +1,54 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id EC3EB6C45D
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 02EEE6C0B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 15:33:35 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id q18so2446449wrx.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 07:33:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=kGlEwA2D8sRhi8qaonEcLEsRHxhYl/dnzSsUNAtQcLM=;
-	b=fhejRJ8/iZDT+sqtWrYwx/QFTk8RC/fuFP04lCge87z49a7Cgy/SeBLW3u0fWgpsur
-	ATrQJrP57b8++nnFcionLAypyaA8ChXTN+XCzRQkC7KNOMho9E2+JhNzDfI+tmElslV+
-	P1CaaE4H3U3qkVDrktgHmlEn/5BSix/UgHZOY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=kGlEwA2D8sRhi8qaonEcLEsRHxhYl/dnzSsUNAtQcLM=;
-	b=RqqiV2hGhKYlzklm1sibRvl2EC2W7ylwrwe/GXxEWqfJIBIxkjMeleVxE+lL7t6Yu/
-	i7EprTJFQjbN8GdqAQLsgwetBA/huvcpYGjRxrexNnng2PtEvuTsGUkd1iDxgusFTY3/
-	f6PMN1sO8QCTJbmA7UeFCsSirfTA3reC7zcSEQ9CVfowN2DkmF5iPYiEItXKsIimLBLj
-	v7Y7Xg/yqb54CQW+tZAa112vJWQ08t4oZWVY3gjJ8F3TmwIgtNg9UVH/V0cGoE/T/y8Z
-	0R7I+76TyIQF0e8m7xMqbg43Q/i8xLUno9I8yyCM1jfm5T74NoGx+/w6ibyHCkdEMST4
-	tmaQ==
-X-Gm-Message-State: AA+aEWYnCLyC6IHF1QvccQvj+gd6SsXSHhKiilYmG6Nop/RdLluzvCGJ
-	rKSrF9oWULRqmt6arGzJ3aGgSQ==
-X-Google-Smtp-Source: AFSGD/Xh2ccaYc1HgyuOr2Qjlo18g6Qqh/1y+JTkP/4Tw8hhFY9FdySonktjYIUZSsYl7TW2JwGimw==
-X-Received: by 2002:adf:b592:: with SMTP id c18mr21343800wre.89.1544715216184; 
-	Thu, 13 Dec 2018 07:33:36 -0800 (PST)
-Received: from [192.168.0.101] (146-241-196-218.dyn.eolo.it. [146.241.196.218])
-	by smtp.gmail.com with ESMTPSA id
-	x186sm2390589wmg.41.2018.12.13.07.33.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Dec 2018 07:33:35 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 12.1 \(3445.101.1\))
-From: Paolo Valente <paolo.valente@linaro.org>
-In-Reply-To: <CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
-Date: Thu, 13 Dec 2018 16:33:34 +0100
-Message-Id: <6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
-References: <20181213151533.13730-1-paolo.valente@linaro.org>
-	<CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
+	Thu, 13 Dec 2018 16:08:52 +0000 (UTC)
+Received: (qmail 27661 invoked by uid 1003); 13 Dec 2018 16:08:53 -0000
+Received: from unknown (HELO ?192.168.11.100?)
+	(philip@opensdr.com@73.152.143.112)
+	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
+	13 Dec 2018 16:08:53 -0000
 To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.3445.101.1)
-Cc: ulf.hansson@linaro.org,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	broonie@linaro.org
-Subject: Re: [meta-oe][PATCH] s-suite: push SRCREV to version 3.0
+References: <3045fc0b-288e-322f-e4eb-d6ff637abf2f@linuxfoundation.org>
+	<CAMKF1sqqSqzXoEYO==L6t_3t6BEHFsUC75Tv9H-2pHdmv-7mtg@mail.gmail.com>
+	<2d3cdfda-317a-1f8f-3018-411dc7acd7d5@linuxfoundation.org>
+	<CAMKF1spLVorCU+gv3ikyVTJcUrFUF=64Rs1RpSFZpyA-vy9XuA@mail.gmail.com>
+	<be4e03f6-90c2-85c2-53d2-cdf573185e6d@balister.org>
+	<CAMKF1sr4Sj9BbdajfztNZovjVe3mytK_Vzk7D_J6f74sDa=Amg@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <94543fa4-596d-28c8-30a4-648b721a92ac@balister.org>
+Date: Thu, 13 Dec 2018 11:08:52 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sr4Sj9BbdajfztNZovjVe3mytK_Vzk7D_J6f74sDa=Amg@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Shall we remove bad-checksum files on http://sources.openembedded.org/?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,75 +61,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 15:33:36 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Dec 2018 16:08:53 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 7bit
 
+On 12/12/2018 07:57 PM, Khem Raj wrote:
+> On Wed, Dec 12, 2018 at 3:40 PM Philip Balister <philip@balister.org> wrote:
+>>
+>> Can you look at what files get downloaded? mirrors exists to provide a
+>> place to download files that have disappeared from their original
+>> locations. People maintaining old systems should have saved local
+>> copies, but if not they depend on our source mirrors for GPL compliance
+>> exercises.
+>>
+>> It would be useful to know what "old"files are being downloaded to give
+>> us an idea how many people are using older "versions" of OpenEmbedded.
+>>
+> 
+> what purpose would it serve ?
 
+I'm always curious :) But it could give us usage imformation for old
+releases that we could use to make support decisions. Also give Michael
+an idea of how long we should mirror files.
 
-> Il giorno 13 dic 2018, alle ore 16:27, Khem Raj <raj.khem@gmail.com> =
-ha scritto:
->=20
-> On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>=20
->> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
->> ---
->> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
->> 1 file changed, 3 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb =
-b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->> index 77d172814..166f3000a 100644
->> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->> @@ -2,7 +2,7 @@ SUMMARY =3D "Small collection of benchmarks for =
-storage I/O"
->> LICENSE =3D "GPLv2"
->> LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3Db529aaa6a0c50f15d29f89609b5c22f3"
->>=20
->> -SRCREV =3D "79698f645bfb28d0d966484ddad3a1efb562246d"
->> +SRCREV =3D "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
->> PV =3D "0.0+git${SRCPV}"
->> SRC_URI =3D =
-"git://github.com/Algodev-github/S.git;protocol=3Dhttps;branch=3Dmaster"
->>=20
->> @@ -21,7 +21,8 @@ do_install() {
->>     install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
->> }
->>=20
->> -RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
-libaio-dev sysstat"
->> +RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio libaio =
-libaio-dev sysstat \
->> +                 psmisc git"
->=20
-> why these new rdeps
+Philip
 
-psmisc is for killall, git is for ... git :)
-
-Some weeks ago, I bumped into this missing dependencies that made the
-automatic execution of a test fail on a system without either killall
-or git.
-
-If these dependencies are certainly useless for oe, then I'll remove =
-them.
-
-Thanks,
-Paolo
-
->>=20
->> FILES_${PN} =3D "/opt/S-suite/"
->>=20
->> --
->> 2.16.1
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+> 
+>> Philip
+>>
+>> On 12/12/2018 05:07 PM, Khem Raj wrote:
+>>> Not that I can think of.
+>>> On Wed, Dec 12, 2018 at 1:18 PM Michael Halstead
+>>> <mhalstead@linuxfoundation.org> wrote:
+>>>>
+>>>> I've removed all of those files and prevented them from being mirrored in the future.
+>>>>
+>>>> Are there any other files we should remove?
+>>>>
+>>>> On 12/12/18 10:48 AM, Khem Raj wrote:
+>>>>
+>>>> Yes they serve no purpose deleting them is in order
+>>>>
+>>>> I should also check the Jenkins job to ignore them
+>>>>
+>>>> On Wed, Dec 12, 2018 at 10:32 AM Michael Halstead <mhalstead@linuxfoundation.org> wrote:
+>>>>>
+>>>>> With the current setup files will accumulate on
+>>>>> http://sources.openembedded.org/ over time and none will be removed. Are
+>>>>> there any patterns that should be removed over time? *bad-checksum*
+>>>>> files seem like an obvious choice. Please share concerns or suggust
+>>>>> other patterns to remove.
+>>>>>
+>>>>> Thank you,
+>>>>>
+>>>>> --
+>>>>> Michael Halstead
+>>>>> Linux Foundation / SysAdmin
+>>>>>
+>>>> --
+>>>> Michael Halstead
+>>>> Linux Foundation / SysAdmin
+> 
 
