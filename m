@@ -1,54 +1,50 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 02EEE6C0B1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+	[209.85.222.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 06E0A6D470
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2018 16:08:52 +0000 (UTC)
-Received: (qmail 27661 invoked by uid 1003); 13 Dec 2018 16:08:53 -0000
-Received: from unknown (HELO ?192.168.11.100?)
-	(philip@opensdr.com@73.152.143.112)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
-	13 Dec 2018 16:08:53 -0000
-To: Khem Raj <raj.khem@gmail.com>
-References: <3045fc0b-288e-322f-e4eb-d6ff637abf2f@linuxfoundation.org>
-	<CAMKF1sqqSqzXoEYO==L6t_3t6BEHFsUC75Tv9H-2pHdmv-7mtg@mail.gmail.com>
-	<2d3cdfda-317a-1f8f-3018-411dc7acd7d5@linuxfoundation.org>
-	<CAMKF1spLVorCU+gv3ikyVTJcUrFUF=64Rs1RpSFZpyA-vy9XuA@mail.gmail.com>
-	<be4e03f6-90c2-85c2-53d2-cdf573185e6d@balister.org>
-	<CAMKF1sr4Sj9BbdajfztNZovjVe3mytK_Vzk7D_J6f74sDa=Amg@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <94543fa4-596d-28c8-30a4-648b721a92ac@balister.org>
-Date: Thu, 13 Dec 2018 11:08:52 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+	Thu, 13 Dec 2018 17:11:27 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id y16so1552128qki.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Dec 2018 09:11:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Vr3IuXJnTKczLs2ID3rw06cqXUmrDiAyPDL9oLF2DWI=;
+	b=i8xb7xttOwqQ55A3fM6olsrKSkastWpj6P5veFL74W58W/PQo/TnsCZOvidlzJQyoC
+	GlGsKXS2mBY0TS4wMsF+i6ENdDsYtLEzT6TMIf2sMMChD8g/oxVLSRMvu3WyZL6UKw97
+	ruldYo51JvQjX/vSH1E1Pw23Gy/qbNyHlyouNYpzWE4J7eDqSU8X7wuPPEpd+HTRZ9Ps
+	Lw6euFZ8O+yPWVOyRgZ6QBgpFYc2tk2Xg+A3wTqIi8m8g7n72by2Qeq52pqY7F4xVOGw
+	HaivFLhTvZyjWjb1GpwgGSjrKDFSjc1eCZ1gOM94qjGyBZkATkZ9m5L+1bazVpxXX4xP
+	AkSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Vr3IuXJnTKczLs2ID3rw06cqXUmrDiAyPDL9oLF2DWI=;
+	b=XX29yEJYm/ThR9F4sgM+5n+eDFdEpMEKRBogNS7551NlFHYeAAU6FVpL7Emr7NBJXW
+	zn2V487lxBAcerSSJk6CafRmB1c4RtzXGSZ9j0kHgHVWfriUr2TsqwGWUBF8DAOz1ppl
+	9QJhZfXwADL1sCtEZxQOxwWhfo8DFKzW5Nlf/9r23CSbm+1cuWvFooArI30KR2eXr7Cb
+	BMUzBCiFXE5RFAVQnCQHJvUhXro+i4jVQNeKvgX8p+NURp9Jj6CWf0biZaKRr8XGf0dS
+	+Ci24mSY1P2eXP4C/Tb2Om7XaGgQ+fpz8ViJtSbyUKJnD2GSC0QohviiP3b71z9jn+JA
+	zbPw==
+X-Gm-Message-State: AA+aEWbKNMQR+HAIa8ubmvxQuhjAxmYghoQC4wgBMNZX7YkIgnOhbjh4
+	iCqvau4JiEDYROEULE9Fk4108MSIlC37iFLRONQ=
+X-Google-Smtp-Source: AFSGD/W7ugygVhJZbapyEG+tVgCNtk8FlpIDlPEitLSRcbnc1cWBnrTEqR9XSJKd0+E45QvqN8Qh2CSq6LM9esCrtfM=
+X-Received: by 2002:a37:4c41:: with SMTP id z62mr22570840qka.206.1544721088760;
+	Thu, 13 Dec 2018 09:11:28 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sr4Sj9BbdajfztNZovjVe3mytK_Vzk7D_J6f74sDa=Amg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Shall we remove bad-checksum files on http://sources.openembedded.org/?
+References: <20181213151533.13730-1-paolo.valente@linaro.org>
+	<CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
+	<6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
+In-Reply-To: <6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Dec 2018 09:11:02 -0800
+Message-ID: <CAMKF1sqpeovnSSpswY4s2ZzZfE15tQoVhdu4m6rjuDkgP7ODfw@mail.gmail.com>
+To: paolo.valente@linaro.org
+Cc: Ulf Hansson <ulf.hansson@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Mark Brown <broonie@linaro.org>
+Subject: Re: [meta-oe][PATCH] s-suite: push SRCREV to version 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,66 +57,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 16:08:53 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Dec 2018 17:11:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 12/12/2018 07:57 PM, Khem Raj wrote:
-> On Wed, Dec 12, 2018 at 3:40 PM Philip Balister <philip@balister.org> wrote:
->>
->> Can you look at what files get downloaded? mirrors exists to provide a
->> place to download files that have disappeared from their original
->> locations. People maintaining old systems should have saved local
->> copies, but if not they depend on our source mirrors for GPL compliance
->> exercises.
->>
->> It would be useful to know what "old"files are being downloaded to give
->> us an idea how many people are using older "versions" of OpenEmbedded.
->>
-> 
-> what purpose would it serve ?
+On Thu, Dec 13, 2018 at 7:33 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+>
+>
+>
+> > Il giorno 13 dic 2018, alle ore 16:27, Khem Raj <raj.khem@gmail.com> ha scritto:
+> >
+> > On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente <paolo.valente@linaro.org> wrote:
+> >>
+> >> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+> >> ---
+> >> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
+> >> 1 file changed, 3 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >> index 77d172814..166f3000a 100644
+> >> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> >> @@ -2,7 +2,7 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+> >> LICENSE = "GPLv2"
+> >> LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
+> >>
+> >> -SRCREV = "79698f645bfb28d0d966484ddad3a1efb562246d"
+> >> +SRCREV = "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
+> >> PV = "0.0+git${SRCPV}"
+> >> SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+> >>
+> >> @@ -21,7 +21,8 @@ do_install() {
+> >>     install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
+> >> }
+> >>
+> >> -RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat"
+> >> +RDEPENDS_${PN} = "bash bc coreutils gawk g++ gcc fio libaio libaio-dev sysstat \
+> >> +                 psmisc git"
+> >
+> > why these new rdeps
+>
+> psmisc is for killall, git is for ... git :)
 
-I'm always curious :) But it could give us usage imformation for old
-releases that we could use to make support decisions. Also give Michael
-an idea of how long we should mirror files.
+I think busybox provides killall too.
+>
+> Some weeks ago, I bumped into this missing dependencies that made the
+> automatic execution of a test fail on a system without either killall
+> or git.
 
-Philip
+OK. so I wonder if we dont have killall enabled in oe-core by default in
+busybox ? or does it need ps-misc one specifically ?
 
-> 
->> Philip
->>
->> On 12/12/2018 05:07 PM, Khem Raj wrote:
->>> Not that I can think of.
->>> On Wed, Dec 12, 2018 at 1:18 PM Michael Halstead
->>> <mhalstead@linuxfoundation.org> wrote:
->>>>
->>>> I've removed all of those files and prevented them from being mirrored in the future.
->>>>
->>>> Are there any other files we should remove?
->>>>
->>>> On 12/12/18 10:48 AM, Khem Raj wrote:
->>>>
->>>> Yes they serve no purpose deleting them is in order
->>>>
->>>> I should also check the Jenkins job to ignore them
->>>>
->>>> On Wed, Dec 12, 2018 at 10:32 AM Michael Halstead <mhalstead@linuxfoundation.org> wrote:
->>>>>
->>>>> With the current setup files will accumulate on
->>>>> http://sources.openembedded.org/ over time and none will be removed. Are
->>>>> there any patterns that should be removed over time? *bad-checksum*
->>>>> files seem like an obvious choice. Please share concerns or suggust
->>>>> other patterns to remove.
->>>>>
->>>>> Thank you,
->>>>>
->>>>> --
->>>>> Michael Halstead
->>>>> Linux Foundation / SysAdmin
->>>>>
->>>> --
->>>> Michael Halstead
->>>> Linux Foundation / SysAdmin
-> 
+git is interesting, does it clone some sources during executing tests ?
+
+>
+> If these dependencies are certainly useless for oe, then I'll remove them.
+>
+> Thanks,
+> Paolo
+>
+> >>
+> >> FILES_${PN} = "/opt/S-suite/"
+> >>
+> >> --
+> >> 2.16.1
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
