@@ -1,17 +1,42 @@
-Return-Path: <douglas.royds@taitradio.com>
-Received: from smtp1.taitradio.net (unknown [202.37.96.23])
-	by mail.openembedded.org (Postfix) with SMTP id 3A0A57964F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2018 00:59:52 +0000 (UTC)
-Received: from acheron.taitradio.net (unknown [172.16.169.141])
-	by smtp1.taitradio.net (Postfix) with ESMTP id 169931C001F;
-	Fri, 14 Dec 2018 13:59:53 +1300 (NZDT)
-From: Douglas Royds <douglas.royds@taitradio.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Dec 2018 13:59:50 +1300
-Message-Id: <20181214005950.11870-1-douglas.royds@taitradio.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] net-snmp: reproducibility: Strip host paths from ptest files
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 733AE79DCA;
+	Fri, 14 Dec 2018 04:45:04 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id t13so4932760qtn.3;
+	Thu, 13 Dec 2018 20:45:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=BqsbtGoX9FT2A/OwGsltwamI9YQ593Ym42zrsEMBHT8=;
+	b=ms9aCUTWpjOh2WPqZ4nUb/UXgWEhkf2R8erh8ldt6al9Y3FTpQjDUEL5danUriNp/N
+	Mm4UdF9I6eY51DszXc/w7AzOS1iFrkmDCyfZ2OIODEUM4mWq2TI4P0WixAb/7RlZJOhx
+	9ABUhRJIcGH1BigAyVGipkzJZPLDhceCzsnjkbnZMGylQaeNqpoalSnmpzW26FWv1vtw
+	twzOv7ILh01qbN+z0rZ8aI3iYN7eYi9sKs6yT+wpeRQdAigvdDOKPLof40FBz5XfQxYn
+	by2oVeBjpHX6GvPCIYzpzyIBZJz2wOSoLLgT0HkX0JMJ/4QH/OnBYlVvlMLqW34gNCvE
+	q4EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=BqsbtGoX9FT2A/OwGsltwamI9YQ593Ym42zrsEMBHT8=;
+	b=N053S13BppbBz2ko4G+4aZF0B1Vf0fHsFbC0JvAW8dBQ8oG2T+bpL/VvE2hbC3DgjW
+	BrdMuQRK7bB9R7rlcIDE+AhmpXtEE4FScX5jYV/+IBn/luEWhG52UEuuqdIpmKn0gTKc
+	28LXCDrwZhRQg8RUvbSnT9ra0HjQg16vKb+uMYlCW0uhqzu6YgVUTo91JbOKjBgdH6gy
+	RGnjhGVlEfpc8g7INT3mpwBAovzmh1ng0W10oW8sbpLY2zt8dn2RMdJPQ+SNVgF59INJ
+	8e+J4lcJc5fKc/qgWrWeyDbXPgx8jT+wId7TuHlKk5zmiUGdvdt59M4VnqTQ3HOZ0m06
+	Cu5Q==
+X-Gm-Message-State: AA+aEWZQIp1dZb+WasOt/I5/FjvLblzaNp7jjHBV1lRS8l/tpg3qmjHg
+	HHsS0isb9Jh7g3jqsb+sSoo58DkbfnRpYMtcdnBq3blRZgA=
+X-Google-Smtp-Source: AFSGD/UwWgKhtAfKWGEGbaaYroMGh3WK65DnQDvi+HLiC9GdJ64HI5bMwTJSxH48liUwZYbStADAJ+rzkB9HvglcWio=
+X-Received: by 2002:ac8:16d8:: with SMTP id y24mr1420589qtk.253.1544762705001; 
+	Thu, 13 Dec 2018 20:45:05 -0800 (PST)
+MIME-Version: 1.0
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Dec 2018 20:44:39 -0800
+Message-ID: <CAMKF1sqqqGtPnzWNnGSvRkpDuuqRmBr1O3i6pLzN_A7asQUS-A@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: [RFT] Glibc 2.29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,28 +49,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2018 00:59:53 -0000
+X-List-Received-Date: Fri, 14 Dec 2018 04:45:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-net-snmp also installs net-snmp-config and gen-variables files
-that need to have host paths stripped.
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Hi All
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 0250743e7..e1c780b4d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -78,6 +78,8 @@ PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}'
- 
- HAS_PERL = "${@bb.utils.contains('PACKAGECONFIG', 'perl', '1', '0', d)}"
- 
-+PTEST_BUILD_HOST_FILES += "net-snmp-config gen-variables"
-+
- do_configure_prepend() {
-     sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
-         "${S}"/configure \
--- 
-2.17.1
+I have put together recipes for upcoming glibc 2.29 release early next year
+since its such a core package, I thought it would be good for us to give it a go
+and iron out regressions still when there is time to report and fix
 
+Please git this patch a shot in your spare time on your machines/distros
+
+http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/glibc-2.29
+
+Thanks
+-Khem
 
