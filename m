@@ -1,62 +1,49 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E3EDD751D2
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7534A7BE60
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2018 08:23:30 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id s14so7716704wmh.1
+	Sun, 16 Dec 2018 13:38:11 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id y56so8542723edd.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Dec 2018 00:23:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=7q3OIHZq0L0rfyshgZAAIR992bsgPsnkYtzMk8NwG9k=;
-	b=ChCYY+qa4Iaw5ugfjtZLPMkEcrkCSw61PW8yuncbTXibqjZplQecfXO5HFkURW0O96
-	G37s203zvdY6X6mtvSX9o0yDGJVODsa/T/+CSbDoI5UFhNUVXDbGU6jEEztIISfbvxMA
-	uRjk9YBmy8UjjMd90pDr72X0+EvRGxLb8tdgk=
+	Sun, 16 Dec 2018 05:38:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=BA2oWCYNhxrBfqnhKJO2g6UeRx81Shz0DE/ghRW7E9A=;
+	b=TT35YP9o0JxX9dk3ZLOsxpWipU+k3MZ/St+0rpTAwJaIOEf7IZL2fCZDbMSpKCZPvp
+	aAlm09CXfE9cRuTwOkmZHJ6jMGb0W8DCqyp0QRxz+peTNSdnyAoAiprEakuPoZaIY5pa
+	HcGgXSJb3zMoQpAFgldopaPDn28kI6IZtQIugtaZN0wooYVsxqClqnwLKu/GptNH+a6/
+	gSGrzfrra26u+w4LJSSDEvrlJoJ+ZBg5OsQRzAZjezBPDhwiyxeUi4O9znR515Tq/m+H
+	ZspdZJJ02/lp2JFZW8w14ka9QtTLa2gLGxkqaspIwVZiQvqaWC3UIz7qwkuSTz3nI56C
+	1aWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=7q3OIHZq0L0rfyshgZAAIR992bsgPsnkYtzMk8NwG9k=;
-	b=jh9J9ASIUE5JeVwQYGPlVHyU0B9/50C9P/L4p61PG5xxita+Ap+F256Y3yR6uqvzjZ
-	VwGkyjuflwwsLWu5EOLBSmJLiGhEsvdhYSS9t/RV5P5+C0zJLUpJYiTjQ7r4kbYPImGR
-	tTU2uj9Hp+9D8oHcDiuaPngADlX0egH4/zIgImgYLf8Q44aupf/FtZ/HwEQ2rMdudUEp
-	k78fOEUyvaLXZht3lYruZwiY3CpZ3aa8BdANxYFDZCehgMyJ+7nPCrswYfNMDOHKZDqK
-	S64ITa+qyjgGnJaQgqsG7xLTPCYJWUUGbsGZId7tsRevut9uferArZw+5GzA90BqhOqZ
-	o9ig==
-X-Gm-Message-State: AA+aEWbGNXZq8qHsrlxNuoKUl4167BCzm7KwyhISX1aMWKWWaNP+3ngQ
-	HWi2gFSb9PyuVBeZqPq4G3VzIA==
-X-Google-Smtp-Source: AFSGD/XB0mhn6aAXRmw2wYYQ/kA8dTKZRXwHOmN5IzPf0SklwG6gF2E9IbmCW/Dh3RU19A7Cj0A9jg==
-X-Received: by 2002:a1c:90cb:: with SMTP id s194mr5429933wmd.57.1544862211255; 
-	Sat, 15 Dec 2018 00:23:31 -0800 (PST)
-Received: from [192.168.0.102] (146-241-179-194.dyn.eolo.it. [146.241.179.194])
-	by smtp.gmail.com with ESMTPSA id
-	o5sm12810756wmg.25.2018.12.15.00.23.30
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=BA2oWCYNhxrBfqnhKJO2g6UeRx81Shz0DE/ghRW7E9A=;
+	b=exazcQYXS3LLLh9TuGu3Zk14zAO/GeF26M7GZFGiPYeu1Y0oVyCgcM1/LcemQahNr9
+	87Dc0u5t/1gK/oU0GgCwYlzTScPe2Aw+4H/rtcbIgSr/MzpqexvIAhjZTUsS9xO+fUZl
+	JYXFxhB4U+7MYsD8HPf0VhVmZV/ttQY120BKzTJVA1YDshJ9WJdnF5xSR3VRnoio3X0q
+	6eLgQ7a7oNrFyjg2Vp85aKzGsdLp7n/DKbXoInisae4zLQnm1/Caz8Vlh6yucaLvEV1E
+	2Kembh/FsqsDjKhez5yJw2cJwKruN7sHllYgfMKPwT7sIklmsf6r4b0/6wQ4KgumEE+N
+	x5kg==
+X-Gm-Message-State: AA+aEWYXYsWsLZVU8XosvD7/AmV3m9QSVpdxyqd5PnoHywNdaiLMofGT
+	WZFiYN5NQQaCtjCVUQn/CZs3+uEt
+X-Google-Smtp-Source: AFSGD/V0h8hODrdnjix/JEoNjW/0MnMm1tv5X7DLq20uUSlXFtLUjDiXFHk2/g2wyeBLEK3XqBtsyg==
+X-Received: by 2002:a17:906:46c7:: with SMTP id
+	k7-v6mr7373022ejs.71.1544967491315; 
+	Sun, 16 Dec 2018 05:38:11 -0800 (PST)
+Received: from localhost.localdomain (c-93-184-18-27.customer.ggaweb.ch.
+	[93.184.18.27]) by smtp.gmail.com with ESMTPSA id
+	g13-v6sm1494979ejr.1.2018.12.16.05.38.10
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 15 Dec 2018 00:23:30 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 12.1 \(3445.101.1\))
-From: Paolo Valente <paolo.valente@linaro.org>
-In-Reply-To: <CAMKF1srpE-9svv0bSzD1s-GZ1Z5qHjEmuOsU7hZWap8MZz9pSA@mail.gmail.com>
-Date: Sat, 15 Dec 2018 09:23:29 +0100
-Message-Id: <3A17F30D-06AE-46AA-A7FB-D35D60A47DE5@linaro.org>
-References: <20181213151533.13730-1-paolo.valente@linaro.org>
-	<CAMKF1srK53HOyMG4+773eELKOigsqHwK0-bMkQnZagwR1gYssw@mail.gmail.com>
-	<6C5A8DD4-110A-43D6-9976-0B429273AB26@linaro.org>
-	<CAMKF1sqpeovnSSpswY4s2ZzZfE15tQoVhdu4m6rjuDkgP7ODfw@mail.gmail.com>
-	<47F5AE94-3A9F-4C6E-86C4-F56E4E7ADA18@linaro.org>
-	<CAMKF1spYyDAxBCHrcA6jTYYT7v8tprHWF6ZOxBkQJc+n1_eQ6w@mail.gmail.com>
-	<3B9426AF-6E9F-45D7-9D6C-AA0B83188CEF@linaro.org>
-	<CAMKF1srVtW2Utpj1PBsYRo6xMuUuiXVTzN+9t_nxcVHg-=PXFg@mail.gmail.com>
-	<57748E3B-3B23-4BEC-9673-EB348494EAD5@linaro.org>
-	<CAMKF1sq93eTKUi-X9hK2co1SRTPf0UUbRZgOHzqbvfO=fq5+vA@mail.gmail.com>
-	<CAMKF1srpE-9svv0bSzD1s-GZ1Z5qHjEmuOsU7hZWap8MZz9pSA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.3445.101.1)
-Cc: Ulf Hansson <ulf.hansson@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Mark Brown <broonie@linaro.org>
-Subject: Re: [meta-oe][PATCH] s-suite: push SRCREV to version 3.0
+	Sun, 16 Dec 2018 05:38:10 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 16 Dec 2018 14:38:01 +0100
+Message-Id: <20181216133801.56483-1-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH] flatbuffers: update to 1.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,164 +56,254 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Dec 2018 08:23:31 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 16 Dec 2018 13:38:11 -0000
 
-Yep, sorry. I've just sent a V2 which should hopefully work.
+From: Adrian Freihofer <adrian.freihofer@scs.ch>
 
-Thanks for your patience,
-Paolo
+This is in fact an update from 1.7.1 to 1.10.0. (The git hash
+of the 1.9.0 recipe referred flatbuffers release 1.7.1.)
 
-> Il giorno 13 dic 2018, alle ore 22:33, Khem Raj <raj.khem@gmail.com> =
-ha scritto:
->=20
-> btw. it fails on mips/musl
-> http://errors.yoctoproject.org/Errors/Details/211648/
-> On Thu, Dec 13, 2018 at 12:59 PM Khem Raj <raj.khem@gmail.com> wrote:
->>=20
->> On Thu, Dec 13, 2018 at 11:13 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>=20
->>>=20
->>>=20
->>>> Il giorno 13 dic 2018, alle ore 18:24, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>=20
->>>> On Thu, Dec 13, 2018 at 9:20 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>=20
->>>>>=20
->>>>>=20
->>>>>> Il giorno 13 dic 2018, alle ore 18:18, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>>>=20
->>>>>> On Thu, Dec 13, 2018 at 9:16 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>>>=20
->>>>>>>=20
->>>>>>>=20
->>>>>>>> Il giorno 13 dic 2018, alle ore 18:11, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>>>>>=20
->>>>>>>> On Thu, Dec 13, 2018 at 7:33 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>>>>>=20
->>>>>>>>>=20
->>>>>>>>>=20
->>>>>>>>>> Il giorno 13 dic 2018, alle ore 16:27, Khem Raj =
-<raj.khem@gmail.com> ha scritto:
->>>>>>>>>>=20
->>>>>>>>>> On Thu, Dec 13, 2018 at 7:16 AM Paolo Valente =
-<paolo.valente@linaro.org> wrote:
->>>>>>>>>>>=20
->>>>>>>>>>> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
->>>>>>>>>>> ---
->>>>>>>>>>> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 5 +++--
->>>>>>>>>>> 1 file changed, 3 insertions(+), 2 deletions(-)
->>>>>>>>>>>=20
->>>>>>>>>>> diff --git =
-a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb =
-b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>>>>> index 77d172814..166f3000a 100644
->>>>>>>>>>> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>>>>> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
->>>>>>>>>>> @@ -2,7 +2,7 @@ SUMMARY =3D "Small collection of benchmarks =
-for storage I/O"
->>>>>>>>>>> LICENSE =3D "GPLv2"
->>>>>>>>>>> LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3Db529aaa6a0c50f15d29f89609b5c22f3"
->>>>>>>>>>>=20
->>>>>>>>>>> -SRCREV =3D "79698f645bfb28d0d966484ddad3a1efb562246d"
->>>>>>>>>>> +SRCREV =3D "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
->>>>>>>>>>> PV =3D "0.0+git${SRCPV}"
->>>>>>>>>>> SRC_URI =3D =
-"git://github.com/Algodev-github/S.git;protocol=3Dhttps;branch=3Dmaster"
->>>>>>>>>>>=20
->>>>>>>>>>> @@ -21,7 +21,8 @@ do_install() {
->>>>>>>>>>> install -m0755 ${S}/def_config_params.sh ${D}/opt/S-suite
->>>>>>>>>>> }
->>>>>>>>>>>=20
->>>>>>>>>>> -RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio =
-libaio libaio-dev sysstat"
->>>>>>>>>>> +RDEPENDS_${PN} =3D "bash bc coreutils gawk g++ gcc fio =
-libaio libaio-dev sysstat \
->>>>>>>>>>> +                 psmisc git"
->>>>>>>>>>=20
->>>>>>>>>> why these new rdeps
->>>>>>>>>=20
->>>>>>>>> psmisc is for killall, git is for ... git :)
->>>>>>>>=20
->>>>>>>> I think busybox provides killall too.
->>>>>>>=20
->>>>>>> Ok, I'll remove this dep.
->>>>>>>=20
->>>>>>>>>=20
->>>>>>>>> Some weeks ago, I bumped into this missing dependencies that =
-made the
->>>>>>>>> automatic execution of a test fail on a system without either =
-killall
->>>>>>>>> or git.
->>>>>>>>=20
->>>>>>>> OK. so I wonder if we dont have killall enabled in oe-core by =
-default in
->>>>>>>> busybox ? or does it need ps-misc one specifically ?
->>>>>>>>=20
->>>>>>>> git is interesting, does it clone some sources during executing =
-tests ?
->>>>>>>>=20
->>>>>>> In kernel-task benchmarks a mainline Linux is cloned.  But maybe =
-such
->>>>>>> benchmarks do not make sense in oe.  Let me know, and I'll =
-remove this
->>>>>>> dep too.
->>>>>>=20
->>>>>> they are fine. We just need to understand that they are well =
-meaning changes.
->>>>>>=20
->>>>>=20
->>>>> So, is the patch ok, or shall I remove the psmisc dep?
->>>>=20
->>>> I think it will be good to understand why killall went missing =
-without
->>>> ps-misc package. As such patch is ok. Since I think killall should =
-always
->>>> be there, either from ps-misc or a backfill from busybox.
->>>>=20
->>>=20
->>> Sorry, I created a lot of confusion.
->>>=20
->>> 1) killall *was not* missing in any of the oe rootfs that I tested
->>> (rootfs made by Anders, in CC).  killall was missing on a non-oe
->>> remote machine, made available for my tests by a company.  So, I =
-added
->>> that dependency (in my S suite) to make it work on that machine.  =
-For
->>> this reason, I thought of adding this dependency to this recipe.  =
-But,
->>> if it is not needed, I'll remove it.
->>=20
->> ok lets remove it
->>=20
->>>=20
->>> 2) git is needed only if you want to run kernel-development tests.
->>>=20
->>=20
->> lets keep it.
->>=20
->>> That said, just tell me whether the patch is ok, or tell me what
->>> dependencies to remove, and I'll make a V2.
->>=20
->> yes please.
->>=20
->>>=20
->>> Thanks,
->>> Paolo
->>>=20
->>>>>=20
->>>>> Thanks,
->>>>> Paolo
->>>=20
+This patch is obsolete, a similar fix has been applied upstream:
+- 0001-correct-version-for-so-lib.patch
+These two patches have been applied upstream:
+- 0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
+- 0002-use-__builtin_bswap16-when-building-with-clang.patch
+
+Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+---
+ .../0001-correct-version-for-so-lib.patch     |  26 ----
+ ...-EndianSwap-template-to-flatbuffers-.patch | 113 ------------------
+ ...tin_bswap16-when-building-with-clang.patch |  30 -----
+ ...buffers_1.9.0.bb => flatbuffers_1.10.0.bb} |  13 +-
+ 4 files changed, 5 insertions(+), 177 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
+ delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
+ delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
+ rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_1.9.0.bb => flatbuffers_1.10.0.bb} (61%)
+
+diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
+deleted file mode 100644
+index a7a42f981..000000000
+--- a/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 8b44dc65d98d50b462843ac9dab6fe3fc25abe36 Mon Sep 17 00:00:00 2001
+-From: Pascal Bach <pascal.bach@siemens.com>
+-Date: Fri, 12 May 2017 13:54:49 +0200
+-Subject: [PATCH] correct version for so lib
+-
+-Upstream-Status: Pending
+-
+----
+- CMakeLists.txt | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 3670afe..f4fcd2c 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -172,6 +172,7 @@ endif()
+- if(FLATBUFFERS_BUILD_SHAREDLIB)
+-   add_library(flatbuffers_shared SHARED ${FlatBuffers_Library_SRCS})
+-   set_target_properties(flatbuffers_shared PROPERTIES OUTPUT_NAME flatbuffers)
+-+  set_target_properties(flatbuffers_shared PROPERTIES VERSION "${PV}")
+- endif()
+- 
+- function(compile_flatbuffers_schema_to_cpp SRC_FBS)
+--- 
+-2.1.4
+-
+diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
+deleted file mode 100644
+index d736f012b..000000000
+--- a/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
++++ /dev/null
+@@ -1,113 +0,0 @@
+-From a614d8e20fa9e4fd16b699d581ddac2956c120f5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 19 Sep 2017 10:04:02 -0700
+-Subject: [PATCH 1/2] flatbuffers: Move EndianSwap template to
+- flatbuffers/base.h
+-
+-Clang complains
+-call to function 'EndianSwap' that is neither visible in the template definition nor found by argument-dependent lookup
+-     return EndianSwap(t);
+-
+-This seems to be due to limitation of two-phase lookup of dependent names in template definitions
+-
+-Its not being found using associated namespaces therefore
+-it has to be made visible at the template definition site as well
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Submitted
+-
+- include/flatbuffers/base.h        | 33 +++++++++++++++++++++++++++++++++
+- include/flatbuffers/flatbuffers.h | 32 --------------------------------
+- 2 files changed, 33 insertions(+), 32 deletions(-)
+-
+-diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
+-index f051755..c73fb2d 100644
+---- a/include/flatbuffers/base.h
+-+++ b/include/flatbuffers/base.h
+-@@ -150,6 +150,39 @@ typedef uintmax_t largest_scalar_t;
+- // We support aligning the contents of buffers up to this size.
+- #define FLATBUFFERS_MAX_ALIGNMENT 16
+- 
+-+template<typename T> T EndianSwap(T t) {
+-+  #if defined(_MSC_VER)
+-+    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
+-+    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
+-+    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
+-+  #else
+-+    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
+-+      // __builtin_bswap16 was missing prior to GCC 4.8.
+-+      #define FLATBUFFERS_BYTESWAP16(x) \
+-+        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
+-+    #else
+-+      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
+-+    #endif
+-+    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
+-+    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
+-+  #endif
+-+  if (sizeof(T) == 1) {   // Compile-time if-then's.
+-+    return t;
+-+  } else if (sizeof(T) == 2) {
+-+    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
+-+    return *reinterpret_cast<T *>(&r);
+-+  } else if (sizeof(T) == 4) {
+-+    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
+-+    return *reinterpret_cast<T *>(&r);
+-+  } else if (sizeof(T) == 8) {
+-+    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
+-+    return *reinterpret_cast<T *>(&r);
+-+  } else {
+-+    assert(0);
+-+  }
+-+}
+-+
+-+
+- template<typename T> T EndianScalar(T t) {
+-   #if FLATBUFFERS_LITTLEENDIAN
+-     return t;
+-diff --git a/include/flatbuffers/flatbuffers.h b/include/flatbuffers/flatbuffers.h
+-index 9216cf4..f749dcb 100644
+---- a/include/flatbuffers/flatbuffers.h
+-+++ b/include/flatbuffers/flatbuffers.h
+-@@ -37,38 +37,6 @@ inline void EndianCheck() {
+-   (void)endiantest;
+- }
+- 
+--template<typename T> T EndianSwap(T t) {
+--  #if defined(_MSC_VER)
+--    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
+--    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
+--    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
+--  #else
+--    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
+--      // __builtin_bswap16 was missing prior to GCC 4.8.
+--      #define FLATBUFFERS_BYTESWAP16(x) \
+--        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
+--    #else
+--      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
+--    #endif
+--    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
+--    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
+--  #endif
+--  if (sizeof(T) == 1) {   // Compile-time if-then's.
+--    return t;
+--  } else if (sizeof(T) == 2) {
+--    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
+--    return *reinterpret_cast<T *>(&r);
+--  } else if (sizeof(T) == 4) {
+--    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
+--    return *reinterpret_cast<T *>(&r);
+--  } else if (sizeof(T) == 8) {
+--    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
+--    return *reinterpret_cast<T *>(&r);
+--  } else {
+--    assert(0);
+--  }
+--}
+--
+- template<typename T> FLATBUFFERS_CONSTEXPR size_t AlignOf() {
+-   #ifdef _MSC_VER
+-     return __alignof(T);
+--- 
+-2.14.1
+-
+diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch b/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
+deleted file mode 100644
+index 460159f27..000000000
+--- a/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 626fe5e043de25e970ebdf061b88c646fa689113 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 19 Sep 2017 10:09:31 -0700
+-Subject: [PATCH 2/2] use __builtin_bswap16 when building with clang
+-
+-clang pretends to be gcc 4.2.0 and therefore the code does
+-not use __builtin_bswap16 but tries to synthesize it
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Submitted
+- include/flatbuffers/base.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
+-index c73fb2d..13e8fac 100644
+---- a/include/flatbuffers/base.h
+-+++ b/include/flatbuffers/base.h
+-@@ -156,7 +156,7 @@ template<typename T> T EndianSwap(T t) {
+-     #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
+-     #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
+-   #else
+--    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
+-+    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408 && !defined(__clang__)
+-       // __builtin_bswap16 was missing prior to GCC 4.8.
+-       #define FLATBUFFERS_BYTESWAP16(x) \
+-         static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
+--- 
+-2.14.1
+-
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
+similarity index 61%
+rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb
+rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
+index a8df44485..452e1e65a 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
+@@ -10,22 +10,19 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
+ 
+-SRCREV = "25a15950f5a24d7217689739ed8f6dac64912d62"
++SRCREV = "c0698cc33f1e534bb59c455909b88cc2726089af"
+ 
+-SRC_URI = "git://github.com/google/flatbuffers.git \
+-           file://0001-correct-version-for-so-lib.patch \
+-           file://0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch \
+-           file://0002-use-__builtin_bswap16-when-building-with-clang.patch \
+-           "
++SRC_URI = "git://github.com/google/flatbuffers.git"
+ 
+ # Make sure C++11 is used, required for example for GCC 4.9
+ CXXFLAGS += "-std=c++11"
+ BUILD_CXXFLAGS += "-std=c++11"
+ 
++# BUILD_TYPE=Release is required, otherwise flatc is not installed
+ EXTRA_OECMAKE += "\
+-    -DFLATBUFFERS_BUILD_TESTS=OFF \
++    -DCMAKE_BUILD_TYPE=Release \
++    -DFLATBUFFERS_BUILD_TESTS=OFF \    
+     -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+-    -DPV=${PV} \
+ "
+ 
+ inherit cmake
+-- 
+2.17.1
 
 
