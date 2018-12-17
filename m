@@ -1,49 +1,48 @@
-Return-Path: <adrian.freihofer@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7534A7BE60
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E83E7BD8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2018 13:38:11 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id y56so8542723edd.11
+	Mon, 17 Dec 2018 10:35:40 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id 96so11720194wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2018 05:38:12 -0800 (PST)
+	Mon, 17 Dec 2018 02:35:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=BA2oWCYNhxrBfqnhKJO2g6UeRx81Shz0DE/ghRW7E9A=;
-	b=TT35YP9o0JxX9dk3ZLOsxpWipU+k3MZ/St+0rpTAwJaIOEf7IZL2fCZDbMSpKCZPvp
-	aAlm09CXfE9cRuTwOkmZHJ6jMGb0W8DCqyp0QRxz+peTNSdnyAoAiprEakuPoZaIY5pa
-	HcGgXSJb3zMoQpAFgldopaPDn28kI6IZtQIugtaZN0wooYVsxqClqnwLKu/GptNH+a6/
-	gSGrzfrra26u+w4LJSSDEvrlJoJ+ZBg5OsQRzAZjezBPDhwiyxeUi4O9znR515Tq/m+H
-	ZspdZJJ02/lp2JFZW8w14ka9QtTLa2gLGxkqaspIwVZiQvqaWC3UIz7qwkuSTz3nI56C
-	1aWw==
+	h=from:to:cc:subject:date:message-id;
+	bh=5Lfx9j5sWLNDIjc58bL4glslX7wquxVtRIIJ270md4k=;
+	b=CXqIm6eND/DKksle2OgOkFa+vokKEn5kaoorzd3jf1YUfnKws5wqRB00KiGKAJ0Ax9
+	5+RzXBnQ5AODXfs0ueREaoyhNOUo7RqLNls+agHO7CCqOadGwUpuof4vU1Rqtiuyml7W
+	WOFcYMKmLZ4rTkEGtIJvF2s6LA1IurM2d/BDTCtZr6m85nCzOhL9qeyneEwDj5kuV/Mp
+	MbN+GldM/R/LK+od91WUCoMDiwSm/Djxb5t/3pYkUiQJQFf0WAxlz4XZxcs3BPcrU71K
+	51/TABTswwx2PzANtMqJQkGhyE0ahvly5qpYqM2ZFQCgtSyDXDNgsUEzli7/A1IhudZo
+	rvoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=BA2oWCYNhxrBfqnhKJO2g6UeRx81Shz0DE/ghRW7E9A=;
-	b=exazcQYXS3LLLh9TuGu3Zk14zAO/GeF26M7GZFGiPYeu1Y0oVyCgcM1/LcemQahNr9
-	87Dc0u5t/1gK/oU0GgCwYlzTScPe2Aw+4H/rtcbIgSr/MzpqexvIAhjZTUsS9xO+fUZl
-	JYXFxhB4U+7MYsD8HPf0VhVmZV/ttQY120BKzTJVA1YDshJ9WJdnF5xSR3VRnoio3X0q
-	6eLgQ7a7oNrFyjg2Vp85aKzGsdLp7n/DKbXoInisae4zLQnm1/Caz8Vlh6yucaLvEV1E
-	2Kembh/FsqsDjKhez5yJw2cJwKruN7sHllYgfMKPwT7sIklmsf6r4b0/6wQ4KgumEE+N
-	x5kg==
-X-Gm-Message-State: AA+aEWYXYsWsLZVU8XosvD7/AmV3m9QSVpdxyqd5PnoHywNdaiLMofGT
-	WZFiYN5NQQaCtjCVUQn/CZs3+uEt
-X-Google-Smtp-Source: AFSGD/V0h8hODrdnjix/JEoNjW/0MnMm1tv5X7DLq20uUSlXFtLUjDiXFHk2/g2wyeBLEK3XqBtsyg==
-X-Received: by 2002:a17:906:46c7:: with SMTP id
-	k7-v6mr7373022ejs.71.1544967491315; 
-	Sun, 16 Dec 2018 05:38:11 -0800 (PST)
-Received: from localhost.localdomain (c-93-184-18-27.customer.ggaweb.ch.
-	[93.184.18.27]) by smtp.gmail.com with ESMTPSA id
-	g13-v6sm1494979ejr.1.2018.12.16.05.38.10
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5Lfx9j5sWLNDIjc58bL4glslX7wquxVtRIIJ270md4k=;
+	b=fjzxUvD+X6UspWsqxO4JmdmwBKIfzedty96mmrH6b6BR7XB1YoZmiN1vGQJlbRbxAU
+	c8fS5hKncoOewqazTC2pNBy5pN7C1VBZvF3APgrWO8QopKfiUsEFF+LEqjhlWnaUQaWc
+	YoI7X5Gm7NvGs0v7pMG2UBklEAVlOwuTDuf7Uzm+wxWlmN8bHyPnkUnJlZ5zI1H/2dUE
+	G5RQU/C/3uZ197DgV7ZvXIhIIeHc585qeUo06fNpKeQjQfZ3YvwVgU8YMBAJ+RZRWq5O
+	CuDi1jzYzbmgq5NnqEorWiNZhJA7krPa7oDHYlsQ4MDF1Dpsz5eNr+1UYoiqbDC+A1NJ
+	8gXA==
+X-Gm-Message-State: AA+aEWa7v+Tb6UWIpO4apVI6mAnVUPz2vhvsY3w9DV3JehmHzO8TvRZG
+	xSKjGHxXPDd+MLIXsXsV6VvZMyYo
+X-Google-Smtp-Source: AFSGD/WHxZlOdg9GlCpxNRrHbz19LTP9h/N2lnKsT+F6fh4XSiQd6rgKu3PCXaeMLfNfI4OZkd91fA==
+X-Received: by 2002:adf:9168:: with SMTP id j95mr9744094wrj.217.1545042940673; 
+	Mon, 17 Dec 2018 02:35:40 -0800 (PST)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host184-22-dynamic.15-87-r.retail.telecomitalia.it. [87.15.22.184])
+	by smtp.gmail.com with ESMTPSA id
+	202sm20165364wmt.8.2018.12.17.02.35.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 16 Dec 2018 05:38:10 -0800 (PST)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
+	Mon, 17 Dec 2018 02:35:39 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2018 14:38:01 +0100
-Message-Id: <20181216133801.56483-1-adrian.freihofer@gmail.com>
+Date: Mon, 17 Dec 2018 11:35:26 +0100
+Message-Id: <20181217103526.29343-1-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [PATCH] flatbuffers: update to 1.10.0
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: implement the --no-dtb option for older mips kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,253 +55,225 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2018 13:38:11 -0000
+X-List-Received-Date: Mon, 17 Dec 2018 10:35:40 -0000
 
-From: Adrian Freihofer <adrian.freihofer@scs.ch>
+Fix borrowed from LEDE-DEV.
 
-This is in fact an update from 1.7.1 to 1.10.0. (The git hash
-of the 1.9.0 recipe referred flatbuffers release 1.7.1.)
-
-This patch is obsolete, a similar fix has been applied upstream:
-- 0001-correct-version-for-so-lib.patch
-These two patches have been applied upstream:
-- 0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
-- 0002-use-__builtin_bswap16-when-building-with-clang.patch
-
-Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../0001-correct-version-for-so-lib.patch     |  26 ----
- ...-EndianSwap-template-to-flatbuffers-.patch | 113 ------------------
- ...tin_bswap16-when-building-with-clang.patch |  30 -----
- ...buffers_1.9.0.bb => flatbuffers_1.10.0.bb} |  13 +-
- 4 files changed, 5 insertions(+), 177 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
- delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
- delete mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
- rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_1.9.0.bb => flatbuffers_1.10.0.bb} (61%)
+ .../140-mips_disable_devicetree_support.patch | 163 ++++++++++++++++++
+ .../kexec/kexec-tools-klibc_git.bb            |   8 +-
+ 2 files changed, 169 insertions(+), 2 deletions(-)
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/140-mips_disable_devicetree_support.patch
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
-deleted file mode 100644
-index a7a42f981..000000000
---- a/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 8b44dc65d98d50b462843ac9dab6fe3fc25abe36 Mon Sep 17 00:00:00 2001
--From: Pascal Bach <pascal.bach@siemens.com>
--Date: Fri, 12 May 2017 13:54:49 +0200
--Subject: [PATCH] correct version for so lib
--
--Upstream-Status: Pending
--
-----
-- CMakeLists.txt | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 3670afe..f4fcd2c 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -172,6 +172,7 @@ endif()
-- if(FLATBUFFERS_BUILD_SHAREDLIB)
--   add_library(flatbuffers_shared SHARED ${FlatBuffers_Library_SRCS})
--   set_target_properties(flatbuffers_shared PROPERTIES OUTPUT_NAME flatbuffers)
--+  set_target_properties(flatbuffers_shared PROPERTIES VERSION "${PV}")
-- endif()
-- 
-- function(compile_flatbuffers_schema_to_cpp SRC_FBS)
---- 
--2.1.4
--
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
-deleted file mode 100644
-index d736f012b..000000000
---- a/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
-+++ /dev/null
-@@ -1,113 +0,0 @@
--From a614d8e20fa9e4fd16b699d581ddac2956c120f5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 19 Sep 2017 10:04:02 -0700
--Subject: [PATCH 1/2] flatbuffers: Move EndianSwap template to
-- flatbuffers/base.h
--
--Clang complains
--call to function 'EndianSwap' that is neither visible in the template definition nor found by argument-dependent lookup
--     return EndianSwap(t);
--
--This seems to be due to limitation of two-phase lookup of dependent names in template definitions
--
--Its not being found using associated namespaces therefore
--it has to be made visible at the template definition site as well
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Submitted
--
-- include/flatbuffers/base.h        | 33 +++++++++++++++++++++++++++++++++
-- include/flatbuffers/flatbuffers.h | 32 --------------------------------
-- 2 files changed, 33 insertions(+), 32 deletions(-)
--
--diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
--index f051755..c73fb2d 100644
----- a/include/flatbuffers/base.h
--+++ b/include/flatbuffers/base.h
--@@ -150,6 +150,39 @@ typedef uintmax_t largest_scalar_t;
-- // We support aligning the contents of buffers up to this size.
-- #define FLATBUFFERS_MAX_ALIGNMENT 16
-- 
--+template<typename T> T EndianSwap(T t) {
--+  #if defined(_MSC_VER)
--+    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
--+    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
--+    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
--+  #else
--+    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
--+      // __builtin_bswap16 was missing prior to GCC 4.8.
--+      #define FLATBUFFERS_BYTESWAP16(x) \
--+        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
--+    #else
--+      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
--+    #endif
--+    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
--+    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
--+  #endif
--+  if (sizeof(T) == 1) {   // Compile-time if-then's.
--+    return t;
--+  } else if (sizeof(T) == 2) {
--+    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
--+    return *reinterpret_cast<T *>(&r);
--+  } else if (sizeof(T) == 4) {
--+    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
--+    return *reinterpret_cast<T *>(&r);
--+  } else if (sizeof(T) == 8) {
--+    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
--+    return *reinterpret_cast<T *>(&r);
--+  } else {
--+    assert(0);
--+  }
--+}
--+
--+
-- template<typename T> T EndianScalar(T t) {
--   #if FLATBUFFERS_LITTLEENDIAN
--     return t;
--diff --git a/include/flatbuffers/flatbuffers.h b/include/flatbuffers/flatbuffers.h
--index 9216cf4..f749dcb 100644
----- a/include/flatbuffers/flatbuffers.h
--+++ b/include/flatbuffers/flatbuffers.h
--@@ -37,38 +37,6 @@ inline void EndianCheck() {
--   (void)endiantest;
-- }
-- 
---template<typename T> T EndianSwap(T t) {
---  #if defined(_MSC_VER)
---    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
---    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
---    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
---  #else
---    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
---      // __builtin_bswap16 was missing prior to GCC 4.8.
---      #define FLATBUFFERS_BYTESWAP16(x) \
---        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
---    #else
---      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
---    #endif
---    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
---    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
---  #endif
---  if (sizeof(T) == 1) {   // Compile-time if-then's.
---    return t;
---  } else if (sizeof(T) == 2) {
---    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
---    return *reinterpret_cast<T *>(&r);
---  } else if (sizeof(T) == 4) {
---    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
---    return *reinterpret_cast<T *>(&r);
---  } else if (sizeof(T) == 8) {
---    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
---    return *reinterpret_cast<T *>(&r);
---  } else {
---    assert(0);
---  }
---}
---
-- template<typename T> FLATBUFFERS_CONSTEXPR size_t AlignOf() {
--   #ifdef _MSC_VER
--     return __alignof(T);
---- 
--2.14.1
--
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch b/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
-deleted file mode 100644
-index 460159f27..000000000
---- a/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 626fe5e043de25e970ebdf061b88c646fa689113 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 19 Sep 2017 10:09:31 -0700
--Subject: [PATCH 2/2] use __builtin_bswap16 when building with clang
--
--clang pretends to be gcc 4.2.0 and therefore the code does
--not use __builtin_bswap16 but tries to synthesize it
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Submitted
-- include/flatbuffers/base.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
--index c73fb2d..13e8fac 100644
----- a/include/flatbuffers/base.h
--+++ b/include/flatbuffers/base.h
--@@ -156,7 +156,7 @@ template<typename T> T EndianSwap(T t) {
--     #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
--     #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
--   #else
---    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
--+    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408 && !defined(__clang__)
--       // __builtin_bswap16 was missing prior to GCC 4.8.
--       #define FLATBUFFERS_BYTESWAP16(x) \
--         static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
---- 
--2.14.1
--
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
-similarity index 61%
-rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb
-rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
-index a8df44485..452e1e65a 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.9.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
-@@ -10,22 +10,19 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/140-mips_disable_devicetree_support.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/140-mips_disable_devicetree_support.patch
+new file mode 100644
+index 000000000..b3ef3c82d
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/140-mips_disable_devicetree_support.patch
+@@ -0,0 +1,163 @@
++From 5ea7cd78cd252ffd3a9f3fbc8dc795d6e1596084 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Mon, 17 Dec 2018 11:25:20 +0100
++Subject: [PATCH] kexec-tools: fix non-device tree devices on mips
++
++Add additional argument '--no-dtb' which disables device tree
++search in currently loaded kernel.
++
++Taken from LEDE-DEV:
++https://patchwork.ozlabs.org/patch/852961/
++
++Rebased for kexec-tools 2.0.18
++Removed ppc change (unwanted ?)
++
++Signed-off-by: Konstantin Kuzov <master.nosferatu@gmail.com>
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ kexec/arch/mips/include/arch/options.h |  4 +-
++ kexec/arch/mips/kexec-elf-mips.c       | 58 ++++++++++++++------------
++ kexec/arch/mips/kexec-mips.c           |  4 ++
++ kexec/arch/mips/kexec-mips.h           |  1 +
++ 4 files changed, 39 insertions(+), 28 deletions(-)
++
++diff --git a/kexec/arch/mips/include/arch/options.h b/kexec/arch/mips/include/arch/options.h
++index 416e224..18d2811 100644
++--- a/kexec/arch/mips/include/arch/options.h
+++++ b/kexec/arch/mips/include/arch/options.h
++@@ -5,6 +5,7 @@
++ #define OPT_APPEND	(OPT_ARCH_MAX+0)
++ #define OPT_DTB		(OPT_ARCH_MAX+1)
++ #define OPT_RAMDISK	(OPT_ARCH_MAX+2)
+++#define OPT_NO_DTB	(OPT_ARCH_MAX+3)
++ 
++ /* Options relevant to the architecture (excluding loader-specific ones),
++  * in this case none:
++@@ -14,7 +15,8 @@
++ 	{"command-line", 1, 0, OPT_APPEND}, \
++ 	{"append",	 1, 0, OPT_APPEND}, \
++ 	{"dtb",		1, 0, OPT_DTB }, \
++-	{"initrd",	1, 0, OPT_RAMDISK },
+++	{"initrd",	1, 0, OPT_RAMDISK }, \
+++	{"no-dtb",	0, 0, OPT_NO_DTB },
++ 
++ 
++ #define KEXEC_ARCH_OPT_STR KEXEC_OPT_STR ""
++diff --git a/kexec/arch/mips/kexec-elf-mips.c b/kexec/arch/mips/kexec-elf-mips.c
++index 849a7ba..5c0e535 100644
++--- a/kexec/arch/mips/kexec-elf-mips.c
+++++ b/kexec/arch/mips/kexec-elf-mips.c
++@@ -141,35 +141,37 @@ int elf_mips_load(int argc, char **argv, const char *buf, off_t len,
++ 	else
++ 		cmdline_addr = 0;
++ 
++-	/* MIPS systems that have been converted to use device tree
++-	 * passed through UHI will use commandline in the DTB and
++-	 * the DTB passed as a separate buffer. Note that
++-	 * CMDLINE_PREFIX is skipped here intentionally, as it is
++-	 * used only in the legacy method */
++-
++-	if (arch_options.dtb_file) {
++-		dtb_buf = slurp_file(arch_options.dtb_file, &dtb_length);
++-	} else {
++-		create_flatten_tree(&dtb_buf, &dtb_length, cmdline_buf + strlen(CMDLINE_PREFIX));
++-	}
++ 
++-	if (arch_options.initrd_file) {
++-		initrd_buf = slurp_file(arch_options.initrd_file, &initrd_size);
+++	if (!arch_options.no_dtb) {
+++		/* MIPS systems that have been converted to use device tree
+++		 * passed through UHI will use commandline in the DTB and
+++		 * the DTB passed as a separate buffer. Note that
+++		 * CMDLINE_PREFIX is skipped here intentionally, as it is
+++		 * used only in the legacy method */
+++
+++		if (arch_options.dtb_file) {
+++			dtb_buf = slurp_file(arch_options.dtb_file, &dtb_length);
+++		} else {
+++			create_flatten_tree(&dtb_buf, &dtb_length, cmdline_buf + strlen(CMDLINE_PREFIX));
+++		}
++ 
++-		/* Create initrd entries in dtb - although at this time
++-		 * they would not point to the correct location */
++-		dtb_set_initrd(&dtb_buf, &dtb_length, initrd_buf, initrd_buf + initrd_size);
+++		if (arch_options.initrd_file) {
+++			initrd_buf = slurp_file(arch_options.initrd_file, &initrd_size);
++ 
++-		initrd_base = add_buffer(info, initrd_buf, initrd_size,
++-					initrd_size, sizeof(void *),
++-					_ALIGN_UP(kernel_addr + kernel_size + dtb_length,
++-						pagesize), 0x0fffffff, 1);
+++			/* Create initrd entries in dtb - although at this time
+++			 * they would not point to the correct location */
+++			dtb_set_initrd(&dtb_buf, &dtb_length, initrd_buf, initrd_buf + initrd_size);
++ 
++-		/* Now that the buffer for initrd is prepared, update the dtb
++-		 * with an appropriate location */
++-		dtb_set_initrd(&dtb_buf, &dtb_length, initrd_base, initrd_base + initrd_size);
++-	}
+++			initrd_base = add_buffer(info, initrd_buf, initrd_size,
+++						initrd_size, sizeof(void *),
+++						_ALIGN_UP(kernel_addr + kernel_size + dtb_length,
+++							pagesize), 0x0fffffff, 1);
++ 
+++			/* Now that the buffer for initrd is prepared, update the dtb
+++			 * with an appropriate location */
+++			dtb_set_initrd(&dtb_buf, &dtb_length, initrd_base, initrd_base + initrd_size);
+++		}
+++	}
++ 
++ 	/* This is a legacy method for commandline passing used
++ 	 * currently by Octeon CPUs only */
++@@ -177,9 +179,11 @@ int elf_mips_load(int argc, char **argv, const char *buf, off_t len,
++ 			sizeof(cmdline_buf), sizeof(void *),
++ 			cmdline_addr, 0x0fffffff, 1);
++ 
++-	add_buffer(info, dtb_buf, dtb_length, dtb_length, 0,
++-		_ALIGN_UP(kernel_addr + kernel_size, pagesize),
++-		0x0fffffff, 1);
+++	if (!arch_options.no_dtb) {
+++		add_buffer(info, dtb_buf, dtb_length, dtb_length, 0,
+++			_ALIGN_UP(kernel_addr + kernel_size, pagesize),
+++			0x0fffffff, 1);
+++	}
++ 
++ 	return 0;
++ }
++diff --git a/kexec/arch/mips/kexec-mips.c b/kexec/arch/mips/kexec-mips.c
++index 415c2ed..e557f8b 100644
++--- a/kexec/arch/mips/kexec-mips.c
+++++ b/kexec/arch/mips/kexec-mips.c
++@@ -89,6 +89,7 @@ void arch_usage(void)
++ 	"    --append=STRING       Set the kernel command line to STRING.\n"
++ 	"    --dtb=FILE            Use FILE as the device tree blob.\n"
++ 	"    --initrd=FILE         Use FILE as initial ramdisk.\n"
+++	"    --no-dtb              Don't try to find device tree\n"
++ 	);
++ }
++ 
++@@ -121,6 +122,9 @@ int arch_process_options(int argc, char **argv)
++ 		case OPT_RAMDISK:
++ 			arch_options.initrd_file = optarg;
++ 			break;
+++		case OPT_NO_DTB:
+++			arch_options.no_dtb = 1;
+++			break;
++ 		default:
++ 			break;
++ 		}
++diff --git a/kexec/arch/mips/kexec-mips.h b/kexec/arch/mips/kexec-mips.h
++index 222c815..90b21c3 100644
++--- a/kexec/arch/mips/kexec-mips.h
+++++ b/kexec/arch/mips/kexec-mips.h
++@@ -22,6 +22,7 @@ struct arch_options_t {
++ 	char *dtb_file;
++ 	char *initrd_file;
++ 	int core_header_type;
+++	int no_dtb;
++ };
++ 
++ extern struct memory_ranges usablemem_rgns;
++-- 
++2.17.1
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index 25f5da48d..e6e1d4bd3 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -6,14 +6,14 @@ SECTION = "kernel/userland"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a \
+                     file://kexec/kexec.c;beginline=1;endline=20;md5=af10f6ae4a8715965e648aa687ad3e09"
+-PV = "2.0.17+git${SRCPV}"
++PV = "2.0.18+git${SRCPV}"
  
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
+ DEPENDS = "zlib xz"
  
--SRCREV = "25a15950f5a24d7217689739ed8f6dac64912d62"
-+SRCREV = "c0698cc33f1e534bb59c455909b88cc2726089af"
+ inherit klibc autotools
  
--SRC_URI = "git://github.com/google/flatbuffers.git \
--           file://0001-correct-version-for-so-lib.patch \
--           file://0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch \
--           file://0002-use-__builtin_bswap16-when-building-with-clang.patch \
--           "
-+SRC_URI = "git://github.com/google/flatbuffers.git"
+ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
+-SRCREV = "b9de21ef51a7ceab7122a707c188602eae22c4ee"
++SRCREV = "5750980cdbbc33ef75bfba6660295b932376ce15"
  
- # Make sure C++11 is used, required for example for GCC 4.9
- CXXFLAGS += "-std=c++11"
- BUILD_CXXFLAGS += "-std=c++11"
+ BUILD_PATCHES = "file://0001-force-static-build.patch \
+                  file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
+@@ -42,6 +42,9 @@ SRC_URI += "${BUILD_PATCHES} ${KLIBC_PATCHES} ${WARNING_FIXES} ${FROM_OE_CORE}"
  
-+# BUILD_TYPE=Release is required, otherwise flatc is not installed
- EXTRA_OECMAKE += "\
--    -DFLATBUFFERS_BUILD_TESTS=OFF \
-+    -DCMAKE_BUILD_TYPE=Release \
-+    -DFLATBUFFERS_BUILD_TESTS=OFF \    
-     -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
--    -DPV=${PV} \
- "
+ SRC_URI_append_arm = " file://arm_crashdump.patch"
  
- inherit cmake
++SRC_URI_append_mips = " file://140-mips_disable_devicetree_support.patch"
++SRC_URI_append_mipsel = " file://140-mips_disable_devicetree_support.patch"
++
+ SRC_URI_append_x86 = " file://x86_sys_io.patch file://x86_basename.patch \
+                        file://x86_vfscanf.patch file://x86_kexec_test.patch"
+ 
+@@ -66,6 +69,7 @@ CFLAGS_x86-64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/i
+ CFLAGS_arm_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
+ CFLAGS_aarch64_append = "${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
+ CFLAGS_mips_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
++CFLAGS_mipsel_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
+ CFLAGS_mips64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
+ CFLAGS_powerpc_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
+ 
 -- 
 2.17.1
 
