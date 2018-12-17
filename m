@@ -1,13 +1,12 @@
 Return-Path: <prvs=882a403e9=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id DBDA179C90
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FB967BE6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 13:53:13 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; 
-   d="scan'208";a="1872082"
+	Mon, 17 Dec 2018 13:55:20 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; d="scan'208";a="14026060"
 To: <openembedded-devel@lists.openembedded.org>, Attie Grande
 	<attie.grande@argentum-systems.co.uk>
-References: <CAAsqSTdeaUH5u4-Tjb-Z=pSXBVGftNGV6FX7VqCB7RZMZQyn1A@mail.gmail.com>
+References: <CAAsqSTcN2Bkk_k_MLEWSTesEFEJURrXvHdyY2TzuA_fEh4iJUw@mail.gmail.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <750aadd1-5255-0ba4-b802-f33cc1cf7d63@skidata.com>
-Date: Mon, 17 Dec 2018 14:53:13 +0100
+Message-ID: <6c8e0af4-bb46-ba48-eafb-a91a60bc837d@skidata.com>
+Date: Mon, 17 Dec 2018 14:54:59 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.3
 MIME-Version: 1.0
-In-Reply-To: <CAAsqSTdeaUH5u4-Tjb-Z=pSXBVGftNGV6FX7VqCB7RZMZQyn1A@mail.gmail.com>
+In-Reply-To: <CAAsqSTcN2Bkk_k_MLEWSTesEFEJURrXvHdyY2TzuA_fEh4iJUw@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 1/2] openjdk-8: undefined behaviour in src/os_cpu/linux_zero/vm/os_linux_zero.cpp
+Subject: Re: [meta-java][PATCH 2/2] openjdk-8: better interface invocations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,7 +74,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 13:53:14 -0000
+X-List-Received-Date: Mon, 17 Dec 2018 13:55:21 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -87,55 +86,117 @@ Please take a look at it. Thanks!
 regards;Richard.L
 
 On 30.11.18 14:10, Attie Grande wrote:
-> Fixes potential UB that can be exposed by newer GCC versions.
+> Fixes a SEGFAULT when OpenJDK 8 is build for an i.MX6 platform, possibly
+> others.
+
+Do you have any logs of these segfaults?
+I have no issues during my i.MX6 builds. What libc are you using?
+
 > 
 > The original patch (below) has been modified to work with jdk8.
 > 
 > Further information:
->   https://bugs.openjdk.java.net/browse/JDK-8202600
->   http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916
+>   https://bugs.openjdk.java.net/browse/JDK-8194739
+>   http://hg.openjdk.java.net/jdk/jdk10/rev/69d1a1590485
 > 
 > Signed-off-by: Attie Grande <attie.grande@argentum-systems.co.uk>
 > ---
->  recipes-core/openjdk/openjdk-8-release-16xbyy.inc              |  1 +
->  .../JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch | 10 ++++++++++
->  2 files changed, 11 insertions(+)
+>  recipes-core/openjdk/openjdk-8-release-16xbyy.inc  |  1 +
+>  .../JDK-8194739-better-interface-invocations.patch | 62 ++++++++++++++++++++++
+>  2 files changed, 63 insertions(+)
 >  create mode 100644
-> recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+> recipes-core/openjdk/patches-openjdk-8/JDK-8194739-better-interface-invocations.patch
 > 
 > diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
 > b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> index bd4a349..23c99fe 100644
+> index 23c99fe..b7cdede 100644
 > --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
 > +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> @@ -16,6 +16,7 @@ PATCHES_URI = "\
->      file://0008-jdk-use-correct-include-for-signal.patch \
+> @@ -17,6 +17,7 @@ PATCHES_URI = "\
 >      file://0009-jdk-disable-backtrace-musl-build-fix.patch \
 >      file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
-> +    file://JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch \
+>      file://JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch \
+> +    file://JDK-8194739-better-interface-invocations.patch \
 >  "
 >  # some patches extracted from
 > http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
 >  # reported via
 > http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
-> diff --git a/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
-> b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/JDK-8194739-better-interface-invocations.patch
+> b/recipes-core/openjdk/patches-openjdk-8/JDK-8194739-better-interface-invocations.patch
 > new file mode 100644
-> index 0000000..f01fea3
+> index 0000000..a185dac
 > --- /dev/null
-> +++ b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
-> @@ -0,0 +1,10 @@
-> +--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Tue Apr 14
-> 11:40:13 2015 +0200
-> ++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Thu May 03
-> 18:59:48 2018 +0200
-> +@@ -408,6 +408,7 @@
-> +
-> + extern "C" {
-> +   int SpinPause() {
-> ++    return 0; // Shouldn't matter.
+> +++ b/recipes-core/openjdk/patches-openjdk-8/JDK-8194739-better-interface-invocations.patch
+> @@ -0,0 +1,62 @@
+> +--- a/hotspot/src/cpu/zero/vm/methodHandles_zero.cpp Tue Dec 19
+> 17:31:53 2017 -0500
+> ++++ b/hotspot/src/cpu/zero/vm/methodHandles_zero.cpp Mon Jan 22
+> 15:19:02 2018 +0000
+> +@@ -180,3 +180,9 @@
+> +     return NULL;
 > +   }
+> + }
+> ++
+> ++#ifndef PRODUCT
+> ++void MethodHandles::trace_method_handle(MacroAssembler* _masm, const
+> char* adaptername) {
+> ++  // This is just a stub.
+> ++}
+> ++#endif //PRODUCT
+> +--- a/hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp Tue
+> Dec 19 17:31:53 2017 -0500
+> ++++ b/hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp Mon
+> Jan 22 15:19:02 2018 +0000
+> +@@ -2569,13 +2569,35 @@
 > +
-> +
+> +         // this could definitely be cleaned up QQQ
+> +         Method* callee;
+> +-        Klass* iclass = cache->f1_as_klass();
+> +-        // InstanceKlass* interface = (InstanceKlass*) iclass;
+> ++        Method *interface_method = cache->f2_as_interface_method();
+> ++        InstanceKlass* iclass = interface_method->method_holder();
+> ++
+> +         // get receiver
+> +         int parms = cache->parameter_size();
+> +         oop rcvr = STACK_OBJECT(-parms);
+> +         CHECK_NULL(rcvr);
+> +         InstanceKlass* int2 = (InstanceKlass*) rcvr->klass();
+> ++
+> ++        // Receiver subtype check against resolved interface klass (REFC).
+> ++        {
+> ++          Klass* refc = cache->f1_as_klass();
+> ++          itableOffsetEntry* scan;
+> ++          for (scan = (itableOffsetEntry*) int2->start_of_itable();
+> ++               scan->interface_klass() != NULL;
+> ++               scan++) {
+> ++            if (scan->interface_klass() == refc) {
+> ++              break;
+> ++            }
+> ++          }
+> ++          // Check that the entry is non-null.  A null entry means
+> ++          // that the receiver class doesn't implement the
+> ++          // interface, and wasn't the same as when the caller was
+> ++          // compiled.
+> ++          if (scan->interface_klass() == NULL) {
+> ++            VM_JAVA_ERROR(vmSymbols::java_lang_IncompatibleClassChangeError(),
+> "", note_no_trap);
+> ++          }
+> ++        }
+> ++
+> +         itableOffsetEntry* ki = (itableOffsetEntry*) int2->start_of_itable();
+> +         int i;
+> +         for ( i = 0 ; i < int2->itable_length() ; i++, ki++ ) {
+> +@@ -2587,7 +2608,8 @@
+> +         if (i == int2->itable_length()) {
+> +           VM_JAVA_ERROR(vmSymbols::java_lang_IncompatibleClassChangeError(),
+> "", note_no_trap);
+> +         }
+> +-        int mindex = cache->f2_as_index();
+> ++        int mindex = interface_method->itable_index();
+> ++
+> +         itableMethodEntry* im = ki->first_method_entry(rcvr->klass());
+> +         callee = im[mindex].method();
+> +         if (callee == NULL) {
 > 
 
