@@ -1,13 +1,13 @@
 Return-Path: <prvs=882a403e9=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 27C4F7BE7F
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id DBDA179C90
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 13:45:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; d="scan'208";a="14025823"
-To: <openembedded-devel@lists.openembedded.org>, Fang Jia
-	<fang.jia@windriver.com>
-References: <1543488504-15595-1-git-send-email-fang.jia@windriver.com>
-	<1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+	Mon, 17 Dec 2018 13:53:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; 
+   d="scan'208";a="1872082"
+To: <openembedded-devel@lists.openembedded.org>, Attie Grande
+	<attie.grande@argentum-systems.co.uk>
+References: <CAAsqSTdeaUH5u4-Tjb-Z=pSXBVGftNGV6FX7VqCB7RZMZQyn1A@mail.gmail.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <f6ec2ce8-9119-bc7f-61d9-10c45a35ff5e@skidata.com>
-Date: Mon, 17 Dec 2018 14:45:18 +0100
+Message-ID: <750aadd1-5255-0ba4-b802-f33cc1cf7d63@skidata.com>
+Date: Mon, 17 Dec 2018 14:53:13 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.3
 MIME-Version: 1.0
-In-Reply-To: <1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+In-Reply-To: <CAAsqSTdeaUH5u4-Tjb-Z=pSXBVGftNGV6FX7VqCB7RZMZQyn1A@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 2/2] openjdk-common: Define JAVA_HOME by default
+Subject: Re: [meta-java][PATCH 1/2] openjdk-8: undefined behaviour in src/os_cpu/linux_zero/vm/os_linux_zero.cpp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,50 +75,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 13:45:19 -0000
+X-List-Received-Date: Mon, 17 Dec 2018 13:53:14 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 Hi,
-thanks for the patch!
-
-Just one question: what happens when the package gets removed?
-Is there any mechanism to remove the JAVA_HOME definition again?
-
-If not: may you please implement one? Thanks!
+thanks for the patch. Nonetheless this patch doesn't apply neither to master nor to master-next.
+Please take a look at it. Thanks!
 
 regards;Richard.L
 
-On 29.11.18 11:48, Fang Jia wrote:
-> Use postinst script to set the JAVA_HOME by default.
+On 30.11.18 14:10, Attie Grande wrote:
+> Fixes potential UB that can be exposed by newer GCC versions.
 > 
-> Signed-off-by: Fang Jia <fang.jia@windriver.com>
+> The original patch (below) has been modified to work with jdk8.
+> 
+> Further information:
+>   https://bugs.openjdk.java.net/browse/JDK-8202600
+>   http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916
+> 
+> Signed-off-by: Attie Grande <attie.grande@argentum-systems.co.uk>
 > ---
->  recipes-core/openjdk/openjdk-common.inc | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
+>  recipes-core/openjdk/openjdk-8-release-16xbyy.inc              |  1 +
+>  .../JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch | 10 ++++++++++
+>  2 files changed, 11 insertions(+)
+>  create mode 100644
+> recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
 > 
-> diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
-> index 01a0a2a..aaf81f6 100644
-> --- a/recipes-core/openjdk/openjdk-common.inc
-> +++ b/recipes-core/openjdk/openjdk-common.inc
-> @@ -5,3 +5,17 @@ JDK_ARCH = "${@openjdk_build_helper_get_jdk_arch(d)}"
->  
->  # Provides the target architecture to the configure script.
->  export LLVM_CONFIGURE_ARCH="${@openjdk_build_helper_get_llvm_configure_arch(d)}"
+> diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> index bd4a349..23c99fe 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> @@ -16,6 +16,7 @@ PATCHES_URI = "\
+>      file://0008-jdk-use-correct-include-for-signal.patch \
+>      file://0009-jdk-disable-backtrace-musl-build-fix.patch \
+>      file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
+> +    file://JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch \
+>  "
+>  # some patches extracted from
+> http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
+>  # reported via
+> http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+> b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+> new file mode 100644
+> index 0000000..f01fea3
+> --- /dev/null
+> +++ b/recipes-core/openjdk/patches-openjdk-8/JDK-8202600-undefined-behaviour-in-os_linux_zero.cpp.patch
+> @@ -0,0 +1,10 @@
+> +--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Tue Apr 14
+> 11:40:13 2015 +0200
+> ++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp Thu May 03
+> 18:59:48 2018 +0200
+> +@@ -408,6 +408,7 @@
 > +
-> +pkg_postinst_${PN}() {
-> +	cat >> $D${sysconfdir}/profile << EOT
-> +JAVA_HOME=""
-> +for dir in ${libdir}/jvm/*; do
-> +        if [ -x "\${dir}/bin/java" ]; then
-> +                [ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
-> +        fi
-> +done
-> +if [ -n "\${JAVA_HOME}" ]; then
-> +        export JAVA_HOME=\${JAVA_HOME}
-> +fi
-> +EOT
-> +}
+> + extern "C" {
+> +   int SpinPause() {
+> ++    return 0; // Shouldn't matter.
+> +   }
+> +
+> +
 > 
 
