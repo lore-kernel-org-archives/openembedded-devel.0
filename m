@@ -1,66 +1,50 @@
-Return-Path: <prvs=882a403e9=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 219667BEA8
+Return-Path: <attie.grande@argentum-systems.co.uk>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5390C7BE39
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 14:53:54 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; d="scan'208";a="14027673"
-To: <openembedded-devel@lists.openembedded.org>
-References: <CABPh3UPXB=MzAUwMgmfaKZ100Fqgp7juiv1R61AaYfpFCFeefw@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <27d7d7bf-e203-5f67-0d19-0207f4adc970@skidata.com>
-Date: Mon, 17 Dec 2018 15:53:55 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.3.3
+	Mon, 17 Dec 2018 15:12:50 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id b3so11061703ede.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Dec 2018 07:12:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=argentum-systems-co-uk.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=obAG19fXeBjayiwDmAyer+JZBfF4P1abtj9Vtya2WJg=;
+	b=XHNA/OuOHj3I8sq7cFpcyl7I1aj2O/GDNCYxu3b1+G06AtD3LRbvdZ/31MeTalbmg0
+	L57n0n+Gdp5L9A7izX7/qJ615x7bLvQBVGVZwGP+GgNXJ3f4+9sBhkSH7AX6jJlkv7O+
+	TzF2z1usSWARJnNmOeVMCl2C0tDobKHbIDXHeHnJvn9ST8W6R5sWsN8IDJjSnic45h6N
+	18f1D5wP23v8otqqO3nX/OePU+e630ftkIYhNtS5uQBqQauzz0+CeCc0mQ5kme4rBpSA
+	A37ZGXvzgmakiuGMc8NizbhykQWFyiBqp8AW2bkhI1WjMQyYfc3zMzj7o+VQ8jh3Ehmx
+	xGHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=obAG19fXeBjayiwDmAyer+JZBfF4P1abtj9Vtya2WJg=;
+	b=fhDxyJCCH4ONY9QsC3hJVb+Bm2mYiUfGaDmxGECdCihfJsxCXQqnmhnxZ+kt+4k+UO
+	ZWJWJUHMNpfy7daXNSfxfP5qOzFPdLxV2o+fjuvHlN1u2AFaZ4oOtbxoc9fOQPzFHGQf
+	BbSiIpZQFDh6L76bI1CDZKMU4toQbEyxJ8hArkJ1YSwyJr1zZshSGjdhuXM6zPJake12
+	WVlhY69WbR0/0+pOu6K55YdZV0O6oT9RikGIsJWAXQ83G8Vx3y8t5C0dlT41u/ar9Few
+	gu/bsZEut/cwq6OD4/TmUJYTBUSs6dyJXd+OC0bkBdaagNhyFrxoHlfpyQiKdIO07NLB
+	o9vA==
+X-Gm-Message-State: AA+aEWbaFAdIyI42oIw92U5qRo5n+JREmCHPSZmjbtQTpEvlOE7za8YS
+	hmxirqUvvu5M2PtGOjTpKhuziEECfyAv/o+O/84rng==
+X-Google-Smtp-Source: AFSGD/V0Lq1xK+r+Pkgr9vshOxtKrSTAMd7KH2kRyPfcUHEgJvAH6w+/tUOiW7g+hlUphGPdN5Qj8arvqAYI4JjgAOY=
+X-Received: by 2002:a50:98a6:: with SMTP id j35mr13064076edb.141.1545059570907;
+	Mon, 17 Dec 2018 07:12:50 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CABPh3UPXB=MzAUwMgmfaKZ100Fqgp7juiv1R61AaYfpFCFeefw@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] java-library: make easy to override jar package name
+References: <CAAsqSTcN2Bkk_k_MLEWSTesEFEJURrXvHdyY2TzuA_fEh4iJUw@mail.gmail.com>
+	<6c8e0af4-bb46-ba48-eafb-a91a60bc837d@skidata.com>
+	<CAAsqSTdT-+0y=m_Oo2+8JEAmcGfVWLktUgXLG5LZ5qSmkHfVSw@mail.gmail.com>
+	<ae008457-e85f-59b8-07cd-fbe13eb55cdf@skidata.com>
+In-Reply-To: <ae008457-e85f-59b8-07cd-fbe13eb55cdf@skidata.com>
+From: Attie Grande <attie.grande@argentum-systems.co.uk>
+Date: Mon, 17 Dec 2018 15:12:40 +0000
+Message-ID: <CAAsqSTcUVka9cWOueYVEKQj=tzx0Xuge3oED3dVdp9M-CXZPzw@mail.gmail.com>
+To: Richard Leitner <richard.leitner@skidata.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH 2/2] openjdk-8: better interface invocations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,45 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 14:53:55 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Dec 2018 15:12:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-thanks for the patch.
+> No problem, please just put [sumo] in the subject then.
 
-Two things:
+Sure, thanks for letting me know
 
-First can you please use your real name in the From: (or prepend the From: line to the email body).
+> Ok. Just fyi: We will likely update to 8u181b13 soon
+> (see https://patchwork.openembedded.org/patch/156314/)
 
-Second: would you please describe the reasons for changing = to ?= in more detail?
-What's the purpose/benefit you get from it?
+Great - I'll keep a lookout!
 
-thanks & regards;Richard.L
+There is further information about my issue on jdk-dev.
+The thread starts here:
 
-On 23.11.18 16:09, nick83ola wrote:
-> define JARFILENAME and ALTJARFILENAMES with ?= to make simple
-> to override them
-> 
-> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
-> ---
-> classes/java-library.bbclass | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
-> index ce1cd28..c69cf6b 100644
-> --- a/classes/java-library.bbclass
-> +++ b/classes/java-library.bbclass
-> @@ -42,10 +42,10 @@ PACKAGES += "${JPN}"
-> FILES_${JPN} = "${datadir_java}"
-> # File name of the libraries' main Jar file
-> -JARFILENAME = "${BP}.jar"
-> +JARFILENAME ?= "${BP}.jar"
-> # Space-separated list of alternative file names.
-> -ALTJARFILENAMES = "${BPN}.jar"
-> +ALTJARFILENAMES ?= "${BPN}.jar"
-> # Java "source" distributions often contain precompiled things
-> # we want to delete first.
-> 
+  http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002246.html
+
+Attie
 
