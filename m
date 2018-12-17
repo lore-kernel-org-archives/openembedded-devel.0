@@ -1,49 +1,68 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E063B7BE39
+Return-Path: <prvs=882a403e9=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 27C4F7BE7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 10:35:59 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id q18so11690780wrx.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 02:36:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=zTJ+w1AseFfFrF39MWij3G6xxIsZ9inD07wnRUXsCHE=;
-	b=IqX6bpkqNV3NHKRCaQzRHx8ZBXiDOER7vuAB2fuRazf4J3uz3M/ou4VAUTeeKxNLJZ
-	eblxSE8ln1L1fahcgZxWE6AgflaG9iQU88Mf0GscBG5WegnBBxk2Otn2IfXVk0enbaUj
-	SSL5qYIe1zKT8JDzDNi2dlFXxYLREYSQMzHZrAYhfXiskl/QzwwrBMB1YlNPwG94CBTZ
-	eluUj01iwP5Uyf/9gMKWv+HjDl4feK3ArQOpYzcyXJZ+rnmgG9SC+jcw8PkAcsliwDH5
-	9XKuU6PQKamgNAN80Jks8Q0dmrf0Egl9ShM7sAcz23b7uVCi7PQIDpOQL/zhBVgfw8bj
-	oYnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=zTJ+w1AseFfFrF39MWij3G6xxIsZ9inD07wnRUXsCHE=;
-	b=T5ODBVPAvAJ+CJ2qJiBO+C7ebXKHR51O9jQs7UqdARZms4uhliyiiFJjPWMN2ZTh10
-	pfaDzraMrS4bHZBlEqBDX/RoIXl+to1cb7aGxSPbl8idpFhvx3kDr+GIH0oD/UhKhPYf
-	VsgvEOqd1cxEjqFGAL4Rm7KO5WwdvMqs4/594fJ2ZH6fSfCZHEsAb3IkKcykOGzlV1TT
-	I7LgvcOxLsq4F5C0PjV8JVIDBUFElLjzvzkp0bXkbHROx4GSY4C6DBROLS1oP4mKK7UV
-	mmmP1GRnIYGizX+Cy2i63aC8sWeG1xdjaKAxIf0tWAkATqU+2ug+nPt4KhA3Zdli9UUs
-	l8NA==
-X-Gm-Message-State: AA+aEWbehGKzr3ZATDPn9tXm8uJaS1uCSVglxZAwxFJzQUK6YTmgvUdP
-	5gdtOJqgg/SDjaR8cOabIBFBc2M+
-X-Google-Smtp-Source: AFSGD/WCzMnwuhMJuZ1zkzE2mpfG3lxpsR+9OEBA/z1b+XPv0m5VRBZecC04bFKqwsJR8FBJ13GHaQ==
-X-Received: by 2002:a05:6000:14f:: with SMTP id
-	r15mr10856035wrx.53.1545042959540; 
-	Mon, 17 Dec 2018 02:35:59 -0800 (PST)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
-	(host184-22-dynamic.15-87-r.retail.telecomitalia.it. [87.15.22.184])
-	by smtp.gmail.com with ESMTPSA id
-	w6sm16366615wme.46.2018.12.17.02.35.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Dec 2018 02:35:58 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Dec 2018 11:35:55 +0100
-Message-Id: <20181217103555.29398-1-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-initramfs][PATCH] kexecboot: update to latest master (7409a1e0aaea)
+	Mon, 17 Dec 2018 13:45:18 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; d="scan'208";a="14025823"
+To: <openembedded-devel@lists.openembedded.org>, Fang Jia
+	<fang.jia@windriver.com>
+References: <1543488504-15595-1-git-send-email-fang.jia@windriver.com>
+	<1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <f6ec2ce8-9119-bc7f-61d9-10c45a35ff5e@skidata.com>
+Date: Mon, 17 Dec 2018 14:45:18 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.3
+MIME-Version: 1.0
+In-Reply-To: <1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH 2/2] openjdk-common: Define JAVA_HOME by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +75,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 10:36:00 -0000
+X-List-Received-Date: Mon, 17 Dec 2018 13:45:19 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-implemening --no-dtb option for older mips/mipsel
+Hi,
+thanks for the patch!
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Just one question: what happens when the package gets removed?
+Is there any mechanism to remove the JAVA_HOME definition again?
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index 6d79e8f83..61210e768 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- PV = "0.6+git${SRCPV}"
- S = "${WORKDIR}/git"
- SRC_URI = "git://github.com/kexecboot/kexecboot.git"
--SRCREV = "4c01d6960aa6a9d03675605062469ab777fa2b01"
-+SRCREV = "7409a1e0aaea61af87c4eca0149cec18a9f58ab6"
- inherit autotools
- 
- EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
--- 
-2.17.1
+If not: may you please implement one? Thanks!
 
+regards;Richard.L
+
+On 29.11.18 11:48, Fang Jia wrote:
+> Use postinst script to set the JAVA_HOME by default.
+> 
+> Signed-off-by: Fang Jia <fang.jia@windriver.com>
+> ---
+>  recipes-core/openjdk/openjdk-common.inc | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
+> index 01a0a2a..aaf81f6 100644
+> --- a/recipes-core/openjdk/openjdk-common.inc
+> +++ b/recipes-core/openjdk/openjdk-common.inc
+> @@ -5,3 +5,17 @@ JDK_ARCH = "${@openjdk_build_helper_get_jdk_arch(d)}"
+>  
+>  # Provides the target architecture to the configure script.
+>  export LLVM_CONFIGURE_ARCH="${@openjdk_build_helper_get_llvm_configure_arch(d)}"
+> +
+> +pkg_postinst_${PN}() {
+> +	cat >> $D${sysconfdir}/profile << EOT
+> +JAVA_HOME=""
+> +for dir in ${libdir}/jvm/*; do
+> +        if [ -x "\${dir}/bin/java" ]; then
+> +                [ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
+> +        fi
+> +done
+> +if [ -n "\${JAVA_HOME}" ]; then
+> +        export JAVA_HOME=\${JAVA_HOME}
+> +fi
+> +EOT
+> +}
+> 
 
