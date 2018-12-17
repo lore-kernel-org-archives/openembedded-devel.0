@@ -1,14 +1,11 @@
 Return-Path: <prvs=882a403e9=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 23F867BEB8
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 219667BEA8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2018 14:47:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; 
-   d="scan'208";a="1872275"
-To: Attie Grande <attie.grande@argentum-systems.co.uk>
-References: <CAAsqSTcN2Bkk_k_MLEWSTesEFEJURrXvHdyY2TzuA_fEh4iJUw@mail.gmail.com>
-	<6c8e0af4-bb46-ba48-eafb-a91a60bc837d@skidata.com>
-	<CAAsqSTdT-+0y=m_Oo2+8JEAmcGfVWLktUgXLG5LZ5qSmkHfVSw@mail.gmail.com>
+	Mon, 17 Dec 2018 14:53:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,365,1539640800"; d="scan'208";a="14027673"
+To: <openembedded-devel@lists.openembedded.org>
+References: <CABPh3UPXB=MzAUwMgmfaKZ100Fqgp7juiv1R61AaYfpFCFeefw@mail.gmail.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,17 +51,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <ae008457-e85f-59b8-07cd-fbe13eb55cdf@skidata.com>
-Date: Mon, 17 Dec 2018 15:47:24 +0100
+Message-ID: <27d7d7bf-e203-5f67-0d19-0207f4adc970@skidata.com>
+Date: Mon, 17 Dec 2018 15:53:55 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.3
 MIME-Version: 1.0
-In-Reply-To: <CAAsqSTdT-+0y=m_Oo2+8JEAmcGfVWLktUgXLG5LZ5qSmkHfVSw@mail.gmail.com>
+In-Reply-To: <CABPh3UPXB=MzAUwMgmfaKZ100Fqgp7juiv1R61AaYfpFCFeefw@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: better interface invocations
+Subject: Re: [meta-java][PATCH] java-library: make easy to override jar package name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -77,37 +73,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 14:47:24 -0000
+X-List-Received-Date: Mon, 17 Dec 2018 14:53:55 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 Hi,
+thanks for the patch.
 
-On 17.12.18 15:07, Attie Grande wrote:
-> Hi Richard,
+Two things:
+
+First can you please use your real name in the From: (or prepend the From: line to the email body).
+
+Second: would you please describe the reasons for changing = to ?= in more detail?
+What's the purpose/benefit you get from it?
+
+thanks & regards;Richard.L
+
+On 23.11.18 16:09, nick83ola wrote:
+> define JARFILENAME and ALTJARFILENAMES with ?= to make simple
+> to override them
 > 
-> It looks like gmail has helpfully wrapped some of the lines...
-> Also, my patch was intended to go on top of the sumo branch - apologies.
-
-No problem, please just put [sumo] in the subject then.
-
+> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+> ---
+> classes/java-library.bbclass | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> It looks like you've bumped to 172b11 on master-next already.
-> I'll try this and report back - possibly in the new year...
-
-Ok. Just fyi: We will likely update to 8u181b13 soon
-(see https://patchwork.openembedded.org/patch/156314/)
-
+> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+> index ce1cd28..c69cf6b 100644
+> --- a/classes/java-library.bbclass
+> +++ b/classes/java-library.bbclass
+> @@ -42,10 +42,10 @@ PACKAGES += "${JPN}"
+> FILES_${JPN} = "${datadir_java}"
+> # File name of the libraries' main Jar file
+> -JARFILENAME = "${BP}.jar"
+> +JARFILENAME ?= "${BP}.jar"
+> # Space-separated list of alternative file names.
+> -ALTJARFILENAMES = "${BPN}.jar"
+> +ALTJARFILENAMES ?= "${BPN}.jar"
+> # Java "source" distributions often contain precompiled things
+> # we want to delete first.
 > 
-> Some crashes are available here:
->   - https://pastebin.com/raw/f1PB4uJm
->   - https://pastebin.com/raw/iXTz8v9z
-
-Thanks, i will take a look at them.
-
-> 
-> Attie
-
-regards;Richard.L
 
