@@ -1,12 +1,9 @@
 Return-Path: <prvs=883751090=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id E31EB7BFE3
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 06B966C46D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2018 15:08:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,368,1539640800"; 
-   d="scan'208";a="1875321"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20181218150224.23910-1-richard.leitner@skidata.com>
+	Tue, 18 Dec 2018 16:16:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,368,1539640800"; d="scan'208";a="14057663"
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -52,16 +49,17 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <04d8502d-70a6-80c0-090f-9d2921dce22f@skidata.com>
-Date: Tue, 18 Dec 2018 16:08:47 +0100
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <78f50f96-daa1-dfe8-26ab-1e33362b2418@skidata.com>
+Date: Tue, 18 Dec 2018 17:16:43 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.3
 MIME-Version: 1.0
-In-Reply-To: <20181218150224.23910-1-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] oeqa: runtime: java: skip java7 comp test for powerpc
+Subject: [meta-java] merged changes to master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,40 +72,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2018 15:08:48 -0000
+X-List-Received-Date: Tue, 18 Dec 2018 16:16:44 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+this is a note to let you know that I've just merged the following patches from master-next to the master branch of the meta-java repository at git://git.yoctoproject.org/meta-java.
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+If any of them should be backported to any stable branches please get in contact with us by replying to this email. Thanks.
+
+Andreas Obergschwandtner (1):
+      openjdk-8-native: hotspot: handle format-overflow error for gcc >= 7
+
+André Draszik (3):
+      openjdk-8: support rm_work disabled
+      openjdk: remove incorrect PROVIDES (java2-vm java2-runtime)
+      java-library: make packages overriding PACKAGE_ARCH work again
+
+Richard Leitner (2):
+      layer.conf: change LAYERSERIES_COMPAT to thud
+      oeqa: runtime: java: skip java7 comp test for powerpc
 
 If you have any questions, please let me know.
-
-regards;Richard.L
-
-On 18.12.18 16:02, Richard Leitner wrote:
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
->  lib/oeqa/runtime/cases/java.py | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
-> index 6bcdd03..142a49c 100644
-> --- a/lib/oeqa/runtime/cases/java.py
-> +++ b/lib/oeqa/runtime/cases/java.py
-> @@ -59,6 +59,7 @@ class JavaTest(OERuntimeTestCase):
->      @skipIfDataVar('ARCH', 'x86', 'OpenJDK 7 compiled mode not yet supported for x86')
->      @skipIfDataVar('ARCH', 'x86-64', 'OpenJDK 7 compiled mode not yet supported for x86-64')
->      @skipIfDataVar('ARCH', 'ppc', 'OpenJDK 7 compiled mode not yet supported for ppc')
-> +    @skipIfDataVar('ARCH', 'powerpc', 'OpenJDK 7 compiled mode not yet supported for powerpc')
->      def test_java7_jar_comp_mode(self):
->          status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
->          msg = 'Exit status was not 0. Output: %s' % output
-> 
+regards;Richard.L 
 
