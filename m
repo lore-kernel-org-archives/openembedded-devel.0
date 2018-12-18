@@ -1,11 +1,12 @@
 Return-Path: <prvs=883751090=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 772F47BD8B
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id E31EB7BFE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2018 15:08:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,368,1539640800"; d="scan'208";a="14055656"
+	Tue, 18 Dec 2018 15:08:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.56,368,1539640800"; 
+   d="scan'208";a="1875321"
 To: <openembedded-devel@lists.openembedded.org>
-References: <20181117095738.2217-1-git@andred.net>
+References: <20181218150224.23910-1-richard.leitner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -51,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <70098677-5acb-ddce-1570-2a9e4a4d43fe@skidata.com>
-Date: Tue, 18 Dec 2018 16:08:41 +0100
+Message-ID: <04d8502d-70a6-80c0-090f-9d2921dce22f@skidata.com>
+Date: Tue, 18 Dec 2018 16:08:47 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.3
 MIME-Version: 1.0
-In-Reply-To: <20181117095738.2217-1-git@andred.net>
+In-Reply-To: <20181218150224.23910-1-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] java-library: make packages overriding PACKAGE_ARCH work again
+Subject: Re: [meta-java][PATCH] oeqa: runtime: java: skip java7 comp test for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,10 +74,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2018 15:08:42 -0000
+X-List-Received-Date: Tue, 18 Dec 2018 15:08:48 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 Hi,
 this is a note to let you know that I've just added this patch to the
@@ -90,83 +91,23 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-
-On 17.11.18 10:57, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> Recent changes is OE have caused the traditional approach of inheriting
-> allarch and setting PACKAGE_ARCH not work anymore. Once allarch is
-> inherited, PACKAGE_ARCH can not be overridden afterwards.
-> See commit a23c482cab4f ("allarch: only enable allarch when multilib
-> is not used") d9ba0219b2f6 in poky.
->     http://git.openembedded.org/openembedded-core/commit/?id=a23c482cab4f874f4a6a6889716123569eb5ece9
-> 
-> The error manifests itself with configure trying to
->    --host=allarch-poky-linux --target=allarch-poky-linux
-> which fails.
-> 
-> To work around this we can make java-library's allarch inherit
-> conditional, as is done e.g. in OE-core for packagegroup.bbclass
->     http://git.openembedded.org/openembedded-core/commit/?id=9c826962ec8fa45c2b035427442b90a41517144e
->     http://git.openembedded.org/openembedded-core/commit/?id=2c9b1d304daade7b0907320aeb9c522e7ab9dcab
-> 
-> So this commit does exactly that, and fixes the two users of this to
-> follow the new approach.
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
+On 18.12.18 16:02, Richard Leitner wrote:
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  classes/java-library.bbclass           | 8 ++++++--
->  recipes-core/libmatthew/libmatthew.inc | 2 +-
->  recipes-extended/rxtx/rxtx_2.2.0.bb    | 2 +-
->  3 files changed, 8 insertions(+), 4 deletions(-)
+>  lib/oeqa/runtime/cases/java.py | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
-> index ce1cd28..e0159ba 100644
-> --- a/classes/java-library.bbclass
-> +++ b/classes/java-library.bbclass
-> @@ -10,9 +10,13 @@
->  #
->  # package archs are set to all, if the recipe builds also packages which
->  # can not be used for all archs, then set the PACKAGE_ARCH of that package
-> -# manually, see rxtx_xx.bb for an example.
-> +# manually *before* inheriting the class, see rxtx_xx.bb for an example.
->  
-> -inherit java allarch
-> +inherit java
-> +PACKAGE_ARCH ?= "all"
-> +# Fully expanded - so it applies the overrides as well
-> +PACKAGE_ARCH_EXPANDED := "${PACKAGE_ARCH}"
-> +inherit ${@oe.utils.ifelse(d.getVar('PACKAGE_ARCH_EXPANDED') == 'all', 'allarch', '')}
->  
->  # use java_stage for native packages
->  JAVA_NATIVE_STAGE_INSTALL = "1"
-> diff --git a/recipes-core/libmatthew/libmatthew.inc b/recipes-core/libmatthew/libmatthew.inc
-> index 7db979b..2119c0b 100644
-> --- a/recipes-core/libmatthew/libmatthew.inc
-> +++ b/recipes-core/libmatthew/libmatthew.inc
-> @@ -7,8 +7,8 @@ DEPENDS = "virtual/java-native classpath-native classpath"
->  
->  S = "${WORKDIR}/libmatthew-java-${PV}"
->  
-> -inherit java-library
->  PACKAGE_ARCH = "${TUNE_PKGARCH}"
-> +inherit java-library
->  
->  # Some internal version numbers which change from time to time.
->  # Allowing to override them makes this include file more
-> diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
-> index e54dad7..d4fbb9d 100644
-> --- a/recipes-extended/rxtx/rxtx_2.2.0.bb
-> +++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
-> @@ -28,8 +28,8 @@ S = "${WORKDIR}/rxtx-2.2pre2"
->  
->  INSANE_SKIP_${JPN} += "dev-so"
->  
-> -inherit autotools-brokensep java-library remove-libtool
->  PACKAGE_ARCH = "${TUNE_PKGARCH}"
-> +inherit autotools-brokensep java-library remove-libtool
->  
->  JARFILENAME = "RXTXcomm.jar"
->  EXTRA_OEMAKE += "RXTX_PATH=${D}${libdir_jni} \
+> diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
+> index 6bcdd03..142a49c 100644
+> --- a/lib/oeqa/runtime/cases/java.py
+> +++ b/lib/oeqa/runtime/cases/java.py
+> @@ -59,6 +59,7 @@ class JavaTest(OERuntimeTestCase):
+>      @skipIfDataVar('ARCH', 'x86', 'OpenJDK 7 compiled mode not yet supported for x86')
+>      @skipIfDataVar('ARCH', 'x86-64', 'OpenJDK 7 compiled mode not yet supported for x86-64')
+>      @skipIfDataVar('ARCH', 'ppc', 'OpenJDK 7 compiled mode not yet supported for ppc')
+> +    @skipIfDataVar('ARCH', 'powerpc', 'OpenJDK 7 compiled mode not yet supported for powerpc')
+>      def test_java7_jar_comp_mode(self):
+>          status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+>          msg = 'Exit status was not 0. Output: %s' % output
 > 
 
