@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 00AD079E2B
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 679C079E2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 14:41:57 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id c126so6704716wmh.0
+	Wed, 19 Dec 2018 14:41:59 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id s12so19351379wrt.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 06:41:59 -0800 (PST)
+	Wed, 19 Dec 2018 06:42:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=onbb910BVoQY7Vs45N5iyjkZplzEYxGm+31A2ScLeDI=;
-	b=SGaNOUzIXA80HNh6neIZdIMC+qAY7YW1EnLB89K4Xb7/An52xbFkaueehf7qA96gSg
-	BgpDwRk+4KrbV6X5OdC5Jq43Mx1oWL7NZi1EgXdVE3W/hjDEZ1zWKlVfn1qSxdduuaf4
-	65imzbeLIRUp2xIoe73UlTKa/jAU4gLBNUJWACCGhdlrhfk7gk/CUxcoqHR1YNu7kpXX
-	ZtiNlbDKvaAG9yRR1Luu/Umx+vxBOPr5onUVGseV4fjBhxTry5n7RAMlhcYhafcBB8iV
-	T6+p9laag9c3xxJC45/7AtKkb/dtPIHgSkklECSmwdS9un78/ghIEvKMvjpn/8LlsOog
-	NCIA==
+	bh=WghFQBGBKhg34yGpUGir4IBuT0en9ttSCr00G5RzFjE=;
+	b=r4b+6vbeU2vwZ9ccm+J398EWZq5x0TD4iRn7wxHAzJ70p/044sG7zY2gkzgQeT36Ng
+	iFE60wtrCmPJzFDns3bf25o+NHFuyXqAMAEdlZfiKdeDJv/PpVmaatO2wgxvWlLc4waO
+	/F2M1CSIqZeCTYidjqhITaiUTxv0JGlqHoZ6V1lEDJG5nrSHBn9bNzi6WAHMTUZ6dVOA
+	xk8R+BcguP4GWhppyBLF+AOsEDClkgAycA5bJXCUdH+2ljz0YreysQXE/8kgOycHsW88
+	Cu2gpfbTCuWcWbPxvxfFEKwSFKh2ouTQP49O82ucHJTQC1lfhfQwa/boHoYgDytSML7Q
+	j0sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=onbb910BVoQY7Vs45N5iyjkZplzEYxGm+31A2ScLeDI=;
-	b=uDpjwCxZsUAUPRmjzyDwWIqP6hgbpirGwKvDAZU158week1WgDKwgS2LOwag9KAimW
-	sEyuhIEK+I8rdeTtnAR50qee2JZPcH38Xg5CYcni3ZTyg/WtrLRVFkLfsDFJb0u5pljg
-	TuVWI8k8rYwVgTUu6/RlHpmvkKWk0FGXZRMus2/8jfLSl9N9vBaJYJze5hAiC07Mu1pS
-	qXr310y0+1ODaX3vXbX0mshBbSjDwaid4c+Mowfubl0j7J3Vd1JpLiZeM/m8ExDTb6dF
-	gJYe5/xnlON35K+Jobfw1/k3zAuwSc5qB8vnTdUcJZJ8JZ2VVOmLl4w3VujW/txgsO0R
-	SplQ==
-X-Gm-Message-State: AA+aEWbnJLd3fWZ5qiARbmVHs3uF0pfhoSnLM8ZgoEwVXHN7AzGyfnt5
-	FTitX7saIJcFoFyMUvRC5QjJdn/m
-X-Google-Smtp-Source: AFSGD/W/cB8Bs/A8MyAWA/v4MwKwjBQgmotytTeBpHlQarwoTe1bLB71emKRYhtfpJLe8tuoT9y9IA==
-X-Received: by 2002:a7b:c7c2:: with SMTP id z2mr7174205wmk.47.1545230518661;
-	Wed, 19 Dec 2018 06:41:58 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id d2sm5336575wrs.97.2018.12.19.06.41.57
+	bh=WghFQBGBKhg34yGpUGir4IBuT0en9ttSCr00G5RzFjE=;
+	b=elbMqoobXsJ4J5H8yy142EeubGmdye8MFzAKoQH3wK+sjwoYFx6PbcK8/hrxe20Qrf
+	qCoMCSAXYkLZ/YKDccYhGX1RybPmL0Hfe8HL8zp7KWRQiMegfbEcz5Q2LKGuI+MkMM/L
+	SNe6RYWjVMiM5tYwA8Y4yc+zxS2nU6zn21OzWyNO6eyPyXTpQx/mcoug06pqkiPjoj3b
+	3Oef1n53sei1uJxcRifXM5ek0bAhDThaLERobHZUynqyC90con3WIYT/jwDuu1JEoBKu
+	yPgFTDCtLSUvYEqvxfcCb26mEtTP3vdHvY1hVWhjjP/c3JoyMaHXb4kMdwd+opcIafBq
+	6DjA==
+X-Gm-Message-State: AA+aEWaIhuNQfJDTxn5MfIm0h5FQNl0xlz46WhRTs5wtHTjbyDEUIuir
+	T8sjEmR7/apVhUGDNP7VL4Ac1OZ1
+X-Google-Smtp-Source: AFSGD/UjYWLh5xA5loFe65yx6nyM26oQDHxC/X0TZVFZiLiYketYBcHADBHBV/xt4O4qwL0TPeGslg==
+X-Received: by 2002:a5d:47d1:: with SMTP id l17mr18667899wrs.319.1545230519883;
+	Wed, 19 Dec 2018 06:41:59 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	e27sm6752527wra.67.2018.12.19.06.41.59
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 19 Dec 2018 06:41:57 -0800 (PST)
+	Wed, 19 Dec 2018 06:41:59 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Dec 2018 14:41:52 +0000
-Message-Id: <20181219144155.31236-3-Martin.Jansa@gmail.com>
+Date: Wed, 19 Dec 2018 14:41:53 +0000
+Message-Id: <20181219144155.31236-4-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20181219144155.31236-1-Martin.Jansa@gmail.com>
 References: <20181219144155.31236-1-Martin.Jansa@gmail.com>
-Subject: [sumo][meta-oe][PATCH 3/6] geoip: update GeoLite Database checksum
+Subject: [sumo][meta-oe][PATCH 4/6] geoip: add downloadfilename for geoip database files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +57,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2018 14:41:58 -0000
+X-List-Received-Date: Wed, 19 Dec 2018 14:41:59 -0000
 
 From: Changqing Li <changqing.li@windriver.com>
 
-GeoLite Database checksum changed again recently, so
-update it.
+previous change of checksum don't trigger archive to re-downloaded,
+, which will cause checksum mismatch. add downloadfilename to
+trigger re-download.
+
+1. for user with PREMIRROR, another benefit is it can still compile
+success event upstream checksum change frequently.
+2. but for user don't use PREMIRROR, if upstream checksum changed,
+still might have checksum mismatch problem.
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/geoip/geoip_1.6.12.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ .../recipes-support/geoip/geoip_1.6.12.bb     | 24 +++++++++----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-index 0657369914..1e1a7ff677 100644
+index 1e1a7ff677..57f0b67ddb 100644
 --- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
 +++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+@@ -9,10 +9,10 @@ HOMEPAGE = "http://dev.maxmind.com/geoip/"
+ SECTION = "libdevel"
+ 
+ SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
+-           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat \
+-           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat \
+-           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat \
+-           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat \
++           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.20181120.gz \
++           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.20181120.gz \
++           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.20181120.gz \
++           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.20181120.gz \
+            file://run-ptest \
+ "
+ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
 @@ -20,14 +20,14 @@ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
  SRC_URI[GeoIP-dat.md5sum] = "d538e57ad9268fdc7955c6cf9a37c4a9"
  SRC_URI[GeoIP-dat.sha256sum] = "b9c05eb8bfcf90a6ddfdc6815caf40a8db2710f0ce3dd48fbd6c24d485ae0449"
  
--SRC_URI[GeoIPv6-dat.md5sum] = "a685e71ab129b6ca4cba75f7eaeb5335"
--SRC_URI[GeoIPv6-dat.sha256sum] = "a94398430701c8458fedbd20aa2a5d460858441f2ca495f32621f6d16154171f"
-+SRC_URI[GeoIPv6-dat.md5sum] = "00dc3b3f53eb5f7bf6915f939998f12c"
-+SRC_URI[GeoIPv6-dat.sha256sum] = "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
+-SRC_URI[GeoIPv6-dat.md5sum] = "00dc3b3f53eb5f7bf6915f939998f12c"
+-SRC_URI[GeoIPv6-dat.sha256sum] = "e72221fc630094d7256521b307e9142fb77d2167a27de2c11da536a2ba1d1480"
++SRC_URI[GeoIPv6-dat.md5sum] = "a908d7a51c3883eb8f693ca197c7a142"
++SRC_URI[GeoIPv6-dat.sha256sum] = "1b06e34eed2c539606a9ab4d97b2140ac80bf9f528d16ad2e3831c75014c2710"
  
  SRC_URI[GeoLiteCity-dat.md5sum] = "d700c137232f8e077ac8db8577f699d9"
  SRC_URI[GeoLiteCity-dat.sha256sum] = "90db2e52195e3d1bcdb2c2789209006d09de5c742812dbd9a1b36c12675ec4cd"
  
--SRC_URI[GeoLiteCityv6-dat.md5sum] = "f6dff70c99f8449af1b7a33073eaa743"
--SRC_URI[GeoLiteCityv6-dat.sha256sum] = "8b6f065ed68bed2a03d61b8d6c7e2f1c52ebd00c0d4a00f6cdc04195c03e32e3"
-+SRC_URI[GeoLiteCityv6-dat.md5sum] = "7f6333d433d8127181ea3c5828287c98"
-+SRC_URI[GeoLiteCityv6-dat.sha256sum] = "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
+-SRC_URI[GeoLiteCityv6-dat.md5sum] = "7f6333d433d8127181ea3c5828287c98"
+-SRC_URI[GeoLiteCityv6-dat.sha256sum] = "c339e20cdf326c18aa3571bcd27845e6daf41ca5bfe9401bc472908aaeb42ac7"
++SRC_URI[GeoLiteCityv6-dat.md5sum] = "8ac3506ccabaae7e9f7d6301c2654313"
++SRC_URI[GeoLiteCityv6-dat.sha256sum] = "1c5fced1657d09448b3ecc14b65c9536228a627d93ed4159d3438b2c6faa8506"
  
  LICENSE = "LGPL-2.1"
+ 
+@@ -44,10 +44,10 @@ EXTRA_OECONF = "--disable-static               \
+ do_install() {
+     make DESTDIR=${D} install
+     install -d ${D}/${datadir}/GeoIP
+-    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+-    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
+-    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
+-    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/
++    install ${WORKDIR}/GeoIP.dat.20181120 ${D}/${datadir}/GeoIP/GeoIP.dat
++    install ${WORKDIR}/GeoIPv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoIPv6.dat
++    install ${WORKDIR}/GeoLiteCity.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCity.dat
++    install ${WORKDIR}/GeoLiteCityv6.dat.20181120 ${D}/${datadir}/GeoIP/GeoLiteCityv6.dat
+     ln -s GeoLiteCity.dat ${D}${datadir}/GeoIP/GeoIPCity.dat
+ }
  
 -- 
 2.17.1
