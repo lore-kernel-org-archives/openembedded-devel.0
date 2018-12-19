@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7374D6B7CD
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C03C6B7CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 02:51:29 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id c25so7246941pgb.4
+	Wed, 19 Dec 2018 02:51:30 +0000 (UTC)
+Received: by mail-pg1-f181.google.com with SMTP id w7so8731262pgp.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2018 18:51:30 -0800 (PST)
+	Tue, 18 Dec 2018 18:51:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=XTTu/MvuN2o+a/vSJRRj4E0dKQhaS7QxEhNhJzbyIoM=;
-	b=qSnYwY3MBWHLT3x0VFqDWCOyscZfUVwXTwhXPEZ6Qn39ugO2SdCxxaAQ9go7wvZcAx
-	iSR61ZfKdcMoEBYvKa5vNWTFDj1F9zx9ynWeFW+5ca0x6h1VXCHPI13wd1Z1yslkMkEU
-	L2iEx2WDNPqmQdR63SB55IJA94IEN+uFXfNJ5uPWYfPUT/TsaGi+tCSY0ncSVsMHHk8z
-	s0FO8Gt91+g8ByPLkA/UbrdAlqKfppxLjJa2z9KRhNJ4iKilS0Wlqzh3M+zGxYwoh3x2
-	HqYF1H+FUrkber70wn1Sc7qmTBC8lHSCoVwb5GB9+YF1xm21tC5p5oMM6cAITZsQO6Ee
-	bsdQ==
+	bh=hKBiJbefj9R0URzWzp13SUCgAp3KzUdvWyTWObp9UNk=;
+	b=KKY8v2KkVu3MW8k9VGguPDReJxBMTUTUSs+RluHiM0BUNeIUej9Z1mEpnJCavADJIN
+	4IsAAZw/UAP3bblbhO+9JY4gWBYYJLi5URRoVQml+niRtj4URuMlKepqBbvR4QP/SwNQ
+	ECZb5+UXSSM6jh8Du5UHS7VSS9YdZkdmOML7lQaWlxmjihmb8vRb+xZrAWtqGe3Jph1J
+	zF77khZM7SQdh6mZhpNYpcO37edv7b5R30fQOUexiFaFomnwk0g4GEhqULsomgOEvnFk
+	MKu882mchXDwcTkbzmeYYyhRE8f/eu1LmnxKpJdL36JAlHUh66DFz0BFupT9BFaX95bk
+	4tIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=XTTu/MvuN2o+a/vSJRRj4E0dKQhaS7QxEhNhJzbyIoM=;
-	b=CZRn54LZ5lKYGQBLBl7DYPJEspVkJRmpD8gtJSZO28Qx4N7O6iK9hT7m+Qd8t/dDwv
-	NXKpvm5iP2YnpK9NZyyI31+PAd3BMpX//rj9EY+/0K3Amn8OmVHaR6pKqkWeefa2CsBp
-	EqnQNo88HwFJCXPchGSZ0sIBMIxrQLwMbEod95GhziQ0IVFlq1nfRFRyRxP10ZVWFeMP
-	TtMSFwjj4b313viUu+8h822ZeT4SBNc58XoQYUz1vg+sk6pEKAeeJSUT4yA7zNofuPIC
-	Gw/GWTQwfaDF36+Ctzkg2H4Ry+rxwh71BNU8XxocJKguHPIAu7vw26+y+6dDA2oHvvtr
-	X05g==
-X-Gm-Message-State: AA+aEWZT2b/tRmg+ih11VfyBdz0n89Tx/NKJIGUVZ8KtxBomM5gKGg2W
-	DB74z0ySFdRPQY/50VOMlXYL6++W/s8=
-X-Google-Smtp-Source: AFSGD/U6AK28WaSj2uVPNuOvdYbVTnr8v8xsBVi584+6Ob5rKr92YrXPk7RA50TpuvSp0PJOjPz5Bw==
-X-Received: by 2002:a63:24c2:: with SMTP id
-	k185mr17240861pgk.406.1545187890093; 
+	bh=hKBiJbefj9R0URzWzp13SUCgAp3KzUdvWyTWObp9UNk=;
+	b=AJ50Z31tx+omXc3VtwFsQEp+BDLo0h+b0Af7NcrnlKYHze1A4YeVpERTK32gN39JSF
+	ZBouyHRte4OYc8PR6ObahGLbG44RI3r4oo1PLeUsts6OxB4U1aXgy9n4ThEBI6gNndYy
+	ovitnuUALl/Y3cVWYVjmL0ehtiyiNTbuzOwKgnpXZSp0zz8XPjacj149lvzXtv6XJ5sR
+	QThNXTPqGcIr64fBnkzpQj8pLxa/4x5Tx/DB9dxd0bc3zm8sDk5DbciTmuS0DKoTEPYm
+	+vVIRPNR98+5oWK3D8BLbdFkz4PQAY1XYonavauyC+evCnpgmY5RhVX6DeRtymFPgIVk
+	vkjw==
+X-Gm-Message-State: AA+aEWatWVHSST3eoKHUVr/VEXG8GpSmzBoBFnpnbx0X+evenB3Z7s5W
+	zfW5BwxLLFcUmV7C4T7jgA9z+39KsGU=
+X-Google-Smtp-Source: AFSGD/VasUrywJXhsgbL/FxK4hUPxM1Lt6F7JHaLMte/Q+Y+FiGaE8738E2bzlXBVn/jW8mHkQBKBw==
+X-Received: by 2002:a63:a401:: with SMTP id c1mr17983243pgf.403.1545187890937; 
 	Tue, 18 Dec 2018 18:51:30 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:877f:9499::19ec])
 	by smtp.gmail.com with ESMTPSA id
-	m3sm28000563pff.173.2018.12.18.18.51.28
+	m3sm28000563pff.173.2018.12.18.18.51.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Dec 2018 18:51:28 -0800 (PST)
+	Tue, 18 Dec 2018 18:51:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Dec 2018 18:51:08 -0800
-Message-Id: <20181219025109.19159-5-raj.khem@gmail.com>
+Date: Tue, 18 Dec 2018 18:51:09 -0800
+Message-Id: <20181219025109.19159-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20181219025109.19159-1-raj.khem@gmail.com>
 References: <20181219025109.19159-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 5/6] opensc: Upgrade to 0.19.0
+Subject: [meta-oe][PATCH 6/6] rocksdb: Upgrade to 5.17.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,182 +59,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2018 02:51:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Dec 2018 02:51:30 -0000
 Content-Transfer-Encoding: 8bit
-
-Switch fetcher to use github
-Add patch to build with gcc9
-Remove upstreamed patch
-Inherit bash-completion
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Fixed-gcc-8-compilation-errors-1353.patch | 73 -------------------
- .../0001-Remove-redundant-logging.patch       | 34 +++++++++
- .../{opensc_0.18.0.bb => opensc_0.19.0.bb}    | 19 ++---
- 3 files changed, 42 insertions(+), 84 deletions(-)
- delete mode 100644 meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
- create mode 100644 meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
- rename meta-oe/recipes-support/opensc/{opensc_0.18.0.bb => opensc_0.19.0.bb} (74%)
+ ...Fix-GitHub-issue-3716-gcc-8-warnings.patch | 194 ------------------
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |   7 +-
+ 2 files changed, 3 insertions(+), 198 deletions(-)
+ delete mode 100644 meta-oe/recipes-dbs/rocksdb/rocksdb/0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch
 
-diff --git a/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch b/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb/0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch b/meta-oe/recipes-dbs/rocksdb/rocksdb/0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch
 deleted file mode 100644
-index 48d8327546..0000000000
---- a/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
+index be498974af..0000000000
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb/0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch
 +++ /dev/null
-@@ -1,73 +0,0 @@
--From 87857d5cae7db94fdd776904886392b1e86053bd Mon Sep 17 00:00:00 2001
--From: Florian Bezdeka <1119693+fbezdeka@users.noreply.github.com>
--Date: Fri, 18 May 2018 18:54:56 +0200
--Subject: [PATCH] Fixed gcc 8 compilation errors (#1353)
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,194 +0,0 @@
+-From 8d65d70b54d1d306a0a0b00e036bc8ddd39d8ec1 Mon Sep 17 00:00:00 2001
+-From: "przemyslaw.skibinski@percona.com" <przemyslaw.skibinski@percona.com>
+-Date: Fri, 20 Apr 2018 13:28:05 -0700
+-Subject: [PATCH] Fix GitHub issue #3716: gcc-8 warnings
 -
--The following errors occured during a compilation using gcc 8:
+-Summary:
+-Fix the following gcc-8 warnings:
+-- conflicting C language linkage declaration [-Werror]
+-- writing to an object with no trivial copy-assignment [-Werror=class-memaccess]
+-- array subscript -1 is below array bounds [-Werror=array-bounds]
 -
--In function »gids_create_file.constprop«,
--    inserted by »gids_save_certificate.isra.8« beicard-gids.c:1548:7:
--card-gids.c:465:2: Error: »strncpy« output may be truncated copying 8 bytes from a string of length 8 [-Werror=stringop-truncation]
--  strncpy(record->filename, filename, 8);
--  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Solves https://github.com/facebook/rocksdb/issues/3716
+-Closes https://github.com/facebook/rocksdb/pull/3736
 -
--pkcs15-oberthur.c: In function »sc_pkcs15emu_oberthur_add_prvkey«:
--pkcs15-oberthur.c:741:5: Error: »strncpy« output may be truncated copying 254 bytes from a string of length 254 [-Werror=stringop-truncation]
--     strncpy(kobj.label, objs[ii]->label, sizeof(kobj.label) - 1);
--     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Differential Revision: D7684161
 -
--Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/pull/1353]
--Signed-off-by Khem Raj <raj.khem@gmail.com>
+-Pulled By: yiwu-arbug
+-
+-fbshipit-source-id: 47c0423d26b74add251f1d3595211eee1e41e54a
 ----
-- src/libopensc/card-gids.c       | 3 ++-
-- src/libopensc/pkcs15-oberthur.c | 3 ++-
-- 2 files changed, 4 insertions(+), 2 deletions(-)
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Backport [https://github.com/facebook/rocksdb/commit/dee95a1afc6c63515e7d94dec33acdb79638b6d7.patch]
 -
--diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
--index fc5d2a7..ac3e579 100644
----- a/src/libopensc/card-gids.c
--+++ b/src/libopensc/card-gids.c
--@@ -33,6 +33,7 @@ Some features are undocumented like the format used to store certificates. They
+- db/c.cc                   | 77 ++++++++++++++-------------------------
+- memtable/inlineskiplist.h | 12 +++---
+- 2 files changed, 33 insertions(+), 56 deletions(-)
+-
+-diff --git a/db/c.cc b/db/c.cc
+-index 064103ed4..0d485d096 100644
+---- a/db/c.cc
+-+++ b/db/c.cc
+-@@ -1388,23 +1388,24 @@ void rocksdb_writebatch_put_log_data(
+-   b->rep.PutLogData(Slice(blob, len));
+- }
 - 
-- #include <stdlib.h>
-- #include <string.h>
--+#include "../common/compat_strlcpy.h"
+-+class H : public WriteBatch::Handler {
+-+ public:
+-+  void* state_;
+-+  void (*put_)(void*, const char* k, size_t klen, const char* v, size_t vlen);
+-+  void (*deleted_)(void*, const char* k, size_t klen);
+-+  virtual void Put(const Slice& key, const Slice& value) override {
+-+    (*put_)(state_, key.data(), key.size(), value.data(), value.size());
+-+  }
+-+  virtual void Delete(const Slice& key) override {
+-+    (*deleted_)(state_, key.data(), key.size());
+-+  }
+-+};
+-+
+- void rocksdb_writebatch_iterate(
+-     rocksdb_writebatch_t* b,
+-     void* state,
+-     void (*put)(void*, const char* k, size_t klen, const char* v, size_t vlen),
+-     void (*deleted)(void*, const char* k, size_t klen)) {
+--  class H : public WriteBatch::Handler {
+--   public:
+--    void* state_;
+--    void (*put_)(void*, const char* k, size_t klen, const char* v, size_t vlen);
+--    void (*deleted_)(void*, const char* k, size_t klen);
+--    virtual void Put(const Slice& key, const Slice& value) override {
+--      (*put_)(state_, key.data(), key.size(), value.data(), value.size());
+--    }
+--    virtual void Delete(const Slice& key) override {
+--      (*deleted_)(state_, key.data(), key.size());
+--    }
+--  };
+-   H handler;
+-   handler.state_ = state;
+-   handler.put_ = put;
+-@@ -1649,18 +1650,6 @@ void rocksdb_writebatch_wi_iterate(
+-     void* state,
+-     void (*put)(void*, const char* k, size_t klen, const char* v, size_t vlen),
+-     void (*deleted)(void*, const char* k, size_t klen)) {
+--  class H : public WriteBatch::Handler {
+--   public:
+--    void* state_;
+--    void (*put_)(void*, const char* k, size_t klen, const char* v, size_t vlen);
+--    void (*deleted_)(void*, const char* k, size_t klen);
+--    virtual void Put(const Slice& key, const Slice& value) override {
+--      (*put_)(state_, key.data(), key.size(), value.data(), value.size());
+--    }
+--    virtual void Delete(const Slice& key) override {
+--      (*deleted_)(state_, key.data(), key.size());
+--    }
+--  };
+-   H handler;
+-   handler.state_ = state;
+-   handler.put_ = put;
+-@@ -3109,20 +3098,21 @@ void rocksdb_slicetransform_destroy(rocksdb_slicetransform_t* st) {
+-   delete st;
+- }
 - 
-- #ifdef ENABLE_OPENSSL
-- /* openssl only needed for card administration */
--@@ -462,7 +463,7 @@ static int gids_create_file(sc_card_t *card, char* directory, char* filename) {
-- 	memset(masterfilebuffer + offset, 0, sizeof(gids_mf_record_t));
-- 	record = (gids_mf_record_t*) (masterfilebuffer + offset);
-- 	strncpy(record->directory, directory, 8);
---	strncpy(record->filename, filename, 8);
--+	strlcpy(record->filename, filename, sizeof(record->filename));
-- 	record->fileIdentifier = fileIdentifier;
-- 	record->dataObjectIdentifier = dataObjectIdentifier;
+-+struct Wrapper : public rocksdb_slicetransform_t {
+-+  const SliceTransform* rep_;
+-+  ~Wrapper() { delete rep_; }
+-+  const char* Name() const override { return rep_->Name(); }
+-+  Slice Transform(const Slice& src) const override {
+-+    return rep_->Transform(src);
+-+  }
+-+  bool InDomain(const Slice& src) const override {
+-+    return rep_->InDomain(src);
+-+  }
+-+  bool InRange(const Slice& src) const override { return rep_->InRange(src); }
+-+  static void DoNothing(void*) { }
+-+};
+-+
+- rocksdb_slicetransform_t* rocksdb_slicetransform_create_fixed_prefix(size_t prefixLen) {
+--  struct Wrapper : public rocksdb_slicetransform_t {
+--    const SliceTransform* rep_;
+--    ~Wrapper() { delete rep_; }
+--    const char* Name() const override { return rep_->Name(); }
+--    Slice Transform(const Slice& src) const override {
+--      return rep_->Transform(src);
+--    }
+--    bool InDomain(const Slice& src) const override {
+--      return rep_->InDomain(src);
+--    }
+--    bool InRange(const Slice& src) const override { return rep_->InRange(src); }
+--    static void DoNothing(void*) { }
+--  };
+-   Wrapper* wrapper = new Wrapper;
+-   wrapper->rep_ = rocksdb::NewFixedPrefixTransform(prefixLen);
+-   wrapper->state_ = nullptr;
+-@@ -3131,19 +3121,6 @@ rocksdb_slicetransform_t* rocksdb_slicetransform_create_fixed_prefix(size_t pref
+- }
 - 
--diff --git a/src/libopensc/pkcs15-oberthur.c b/src/libopensc/pkcs15-oberthur.c
--index 4f841ed..3415be7 100644
----- a/src/libopensc/pkcs15-oberthur.c
--+++ b/src/libopensc/pkcs15-oberthur.c
--@@ -29,6 +29,7 @@
-- #include <stdlib.h>
-- #include <string.h>
-- #include <stdio.h>
--+#include "../common/compat_strlcpy.h"
+- rocksdb_slicetransform_t* rocksdb_slicetransform_create_noop() {
+--  struct Wrapper : public rocksdb_slicetransform_t {
+--    const SliceTransform* rep_;
+--    ~Wrapper() { delete rep_; }
+--    const char* Name() const override { return rep_->Name(); }
+--    Slice Transform(const Slice& src) const override {
+--      return rep_->Transform(src);
+--    }
+--    bool InDomain(const Slice& src) const override {
+--      return rep_->InDomain(src);
+--    }
+--    bool InRange(const Slice& src) const override { return rep_->InRange(src); }
+--    static void DoNothing(void*) { }
+--  };
+-   Wrapper* wrapper = new Wrapper;
+-   wrapper->rep_ = rocksdb::NewNoopTransform();
+-   wrapper->state_ = nullptr;
+-diff --git a/memtable/inlineskiplist.h b/memtable/inlineskiplist.h
+-index 702a7336d..eadda1dc1 100644
+---- a/memtable/inlineskiplist.h
+-+++ b/memtable/inlineskiplist.h
+-@@ -280,7 +280,7 @@ struct InlineSkipList<Comparator>::Node {
+-   // next_[0].  This is used for passing data from AllocateKey to Insert.
+-   void StashHeight(const int height) {
+-     assert(sizeof(int) <= sizeof(next_[0]));
+--    memcpy(&next_[0], &height, sizeof(int));
+-+    memcpy(static_cast<void*>(&next_[0]), &height, sizeof(int));
+-   }
 - 
-- #include "pkcs15.h"
-- #include "log.h"
--@@ -738,7 +739,7 @@ sc_pkcs15emu_oberthur_add_prvkey(struct sc_pkcs15_card *p15card,
-- 			unsigned int id = path.value[path.len - 2] * 0x100 + path.value[path.len - 1];
+-   // Retrieves the value passed to StashHeight.  Undefined after a call
+-@@ -300,30 +300,30 @@ struct InlineSkipList<Comparator>::Node {
+-     assert(n >= 0);
+-     // Use an 'acquire load' so that we observe a fully initialized
+-     // version of the returned Node.
+--    return (next_[-n].load(std::memory_order_acquire));
+-+    return ((&next_[0] - n)->load(std::memory_order_acquire));
+-   }
 - 
-- 			if (id == ccont.id_cert)   {
---				strncpy(kobj.label, objs[ii]->label, sizeof(kobj.label) - 1);
--+				strlcpy(kobj.label, objs[ii]->label, sizeof(kobj.label));
-- 				break;
-- 			}
-- 		}
+-   void SetNext(int n, Node* x) {
+-     assert(n >= 0);
+-     // Use a 'release store' so that anybody who reads through this
+-     // pointer observes a fully initialized version of the inserted node.
+--    next_[-n].store(x, std::memory_order_release);
+-+    (&next_[0] - n)->store(x, std::memory_order_release);
+-   }
+- 
+-   bool CASNext(int n, Node* expected, Node* x) {
+-     assert(n >= 0);
+--    return next_[-n].compare_exchange_strong(expected, x);
+-+    return (&next_[0] - n)->compare_exchange_strong(expected, x);
+-   }
+- 
+-   // No-barrier variants that can be safely used in a few locations.
+-   Node* NoBarrier_Next(int n) {
+-     assert(n >= 0);
+--    return next_[-n].load(std::memory_order_relaxed);
+-+    return (&next_[0] - n)->load(std::memory_order_relaxed);
+-   }
+- 
+-   void NoBarrier_SetNext(int n, Node* x) {
+-     assert(n >= 0);
+--    next_[-n].store(x, std::memory_order_relaxed);
+-+    (&next_[0] - n)->store(x, std::memory_order_relaxed);
+-   }
+- 
+-   // Insert node after prev on specific level.
 --- 
--2.18.0
+-2.17.0
 -
-diff --git a/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch b/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
-new file mode 100644
-index 0000000000..291f1a239a
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
-@@ -0,0 +1,34 @@
-+From c012f46965b3fe24e31367796e52c2d0b14ca5d9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 17 Dec 2018 18:44:23 -0800
-+Subject: [PATCH] Remove redundant logging
-+
-+Same information is printed a few line below in same function, the only
-+difference is that there it takes care of case when label is NULL pointer
-+unlike this line
-+
-+secondly, every function call to cosm_write_tokeninfo() in this file
-+passes label=NULL, and then it tries to print a null pointer
-+
-+Fixes errors like
-+src/libopensc/log.h:48:47: error: '%s' directive argument is null
-+[-Werror=format-overflow=]
-+
-+Upstream-Status: Submitted [https://github.com/OpenSC/OpenSC/pull/1557]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/pkcs15init/pkcs15-oberthur.c | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+Index: git/src/pkcs15init/pkcs15-oberthur.c
-+===================================================================
-+--- git.orig/src/pkcs15init/pkcs15-oberthur.c
-++++ git/src/pkcs15init/pkcs15-oberthur.c
-+@@ -70,7 +70,6 @@ cosm_write_tokeninfo (struct sc_pkcs15_c
-+ 	ctx = p15card->card->ctx;
-+ 
-+ 	SC_FUNC_CALLED(ctx, SC_LOG_DEBUG_VERBOSE);
-+-	sc_debug(ctx, SC_LOG_DEBUG_NORMAL, "cosm_write_tokeninfo() label '%s'; flags 0x%X", label, flags);
-+ 	if (sc_profile_get_file(profile, COSM_TITLE"-token-info", &file)) {
-+ 		rv = SC_ERROR_INCONSISTENT_PROFILE;
-+ 		SC_TEST_GOTO_ERR(ctx, SC_LOG_DEBUG_NORMAL, rv, "Cannot find "COSM_TITLE"-token-info");
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
-similarity index 74%
-rename from meta-oe/recipes-support/opensc/opensc_0.18.0.bb
-rename to meta-oe/recipes-support/opensc/opensc_0.19.0.bb
-index 45c931e7bd..bc1722e394 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
-@@ -8,22 +8,19 @@ eID cards have also been confirmed to work."
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 594d1a9c77..67822477ee 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
  
- HOMEPAGE = "http://www.opensc-project.org/opensc/"
- SECTION = "System Environment/Libraries"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+-SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
+-SRCBRANCH = "5.13.fb"
+-PV = "5.13.1"
++SRCREV = "f438b98e552010613cff8684a7d84191ed785148"
++SRCBRANCH = "5.17.fb"
++PV = "5.17.2"
  
--SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
--           file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
-+#v0.19.0
-+SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
-+SRC_URI = "git://github.com/OpenSC/OpenSC \
-+           file://0001-Remove-redundant-logging.patch \
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+-           file://0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch \
            "
--
--SRC_URI[md5sum] = "bce516f752e0db5327aa06cc0136fe27"
--SRC_URI[sha256sum] = "6ef62b00e8fdbe3e386c3ee25c2cadb56c1931ea42f1a11dce8c947f51b45033"
--
- DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
  
--LICENSE = "LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
--
--inherit autotools pkgconfig
-+S = "${WORKDIR}/git"
-+inherit autotools pkgconfig bash-completion
- 
--S = "${WORKDIR}/OpenSC-${PV}"
- EXTRA_OECONF = " \
-     --disable-static \
-     --enable-openct \
+ S = "${WORKDIR}/git"
 -- 
 2.20.1
 
