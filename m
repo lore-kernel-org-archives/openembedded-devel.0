@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 98CD179E05
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 7374D6B7CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 02:51:27 +0000 (UTC)
-Received: by mail-pg1-f177.google.com with SMTP id z10so8747489pgp.7
+	Wed, 19 Dec 2018 02:51:29 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id c25so7246941pgb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2018 18:51:29 -0800 (PST)
+	Tue, 18 Dec 2018 18:51:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=F3XToJ4YYz8t8s+CFrIXHDUlQe71J3s3gn0ZjytFCVM=;
-	b=X0HZGsKwr3YBQx2t+XE1Y0V0mHJjDvE92K0gSFMFFU1Aa4ulMahLvNhtim1MJakeoA
-	dMpks6tnhPPFPnFu5qj2RY1rVVCS4sFPtLp0kFbDysdU0xSM1ndmPyY26Dcgi/IpSvFL
-	m/NieT0gXUY77r7IvwuHPAHu+0PmktRExPF5OxHpPaClUqxg5NOAGyepvZoh9n2DU/M7
-	iTRKMSVi9Ur8RpIoCVx+rFpZFw+laaGGD9tyztFiJa1NvMijaAUtPfSCuN9DFWu5FEfx
-	3r3YwLBQkDALRrcOSbqOIxZZYfOJEfVqeSm3kHSo9D/Cf9OzTUcVJrdd39QJXUshF4bm
-	EZoQ==
+	bh=XTTu/MvuN2o+a/vSJRRj4E0dKQhaS7QxEhNhJzbyIoM=;
+	b=qSnYwY3MBWHLT3x0VFqDWCOyscZfUVwXTwhXPEZ6Qn39ugO2SdCxxaAQ9go7wvZcAx
+	iSR61ZfKdcMoEBYvKa5vNWTFDj1F9zx9ynWeFW+5ca0x6h1VXCHPI13wd1Z1yslkMkEU
+	L2iEx2WDNPqmQdR63SB55IJA94IEN+uFXfNJ5uPWYfPUT/TsaGi+tCSY0ncSVsMHHk8z
+	s0FO8Gt91+g8ByPLkA/UbrdAlqKfppxLjJa2z9KRhNJ4iKilS0Wlqzh3M+zGxYwoh3x2
+	HqYF1H+FUrkber70wn1Sc7qmTBC8lHSCoVwb5GB9+YF1xm21tC5p5oMM6cAITZsQO6Ee
+	bsdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=F3XToJ4YYz8t8s+CFrIXHDUlQe71J3s3gn0ZjytFCVM=;
-	b=VRdbAjGdTzeKM2j7B9jtr1sJlW25Kfe/WJ3PmRLu3Xh43FZ+d1njfV65Ig0vQp8zxl
-	hsDmlV1QC/erKmT3KLLwLnbW43lTok2ztNHtlGAu0ETuClFp32xcRsk/3Et/nLNYrkFb
-	QZ9ip4Ki2XOCAJrcdzvKCSLG6vbwTjAcsWKmG8Vptq6k+5dsk5SnK3elfdhppplS8wZ2
-	fGVyvqoG22AVMBR0LsN6u8UNQRv/odT0mp8scsd9BpP0gYHMArEg+sx5CHTqPGCgRhU7
-	fP/Moixv6GJMfeNZxoWTqQjxP5sFazOqL9IHnP8G6dE9h0oP5B9acRuvSnHgKaMRN9Aw
-	V+qQ==
-X-Gm-Message-State: AA+aEWaXbZo4J4OcTcJigVigxbOecIOX+yleNNr/6enkmrVJO8/8phLz
-	x74R9kQej4HPOnaMjgRGJ3UZezcm1pU=
-X-Google-Smtp-Source: AFSGD/VuTpCowQ2RN3cf4v32XhCEmOqwyQZUo2M7CIxmMws1rcgNn+zhUOG4yDL5Ba08bOu49f0uWg==
-X-Received: by 2002:a63:374e:: with SMTP id g14mr14989816pgn.59.1545187888201; 
-	Tue, 18 Dec 2018 18:51:28 -0800 (PST)
+	bh=XTTu/MvuN2o+a/vSJRRj4E0dKQhaS7QxEhNhJzbyIoM=;
+	b=CZRn54LZ5lKYGQBLBl7DYPJEspVkJRmpD8gtJSZO28Qx4N7O6iK9hT7m+Qd8t/dDwv
+	NXKpvm5iP2YnpK9NZyyI31+PAd3BMpX//rj9EY+/0K3Amn8OmVHaR6pKqkWeefa2CsBp
+	EqnQNo88HwFJCXPchGSZ0sIBMIxrQLwMbEod95GhziQ0IVFlq1nfRFRyRxP10ZVWFeMP
+	TtMSFwjj4b313viUu+8h822ZeT4SBNc58XoQYUz1vg+sk6pEKAeeJSUT4yA7zNofuPIC
+	Gw/GWTQwfaDF36+Ctzkg2H4Ry+rxwh71BNU8XxocJKguHPIAu7vw26+y+6dDA2oHvvtr
+	X05g==
+X-Gm-Message-State: AA+aEWZT2b/tRmg+ih11VfyBdz0n89Tx/NKJIGUVZ8KtxBomM5gKGg2W
+	DB74z0ySFdRPQY/50VOMlXYL6++W/s8=
+X-Google-Smtp-Source: AFSGD/U6AK28WaSj2uVPNuOvdYbVTnr8v8xsBVi584+6Ob5rKr92YrXPk7RA50TpuvSp0PJOjPz5Bw==
+X-Received: by 2002:a63:24c2:: with SMTP id
+	k185mr17240861pgk.406.1545187890093; 
+	Tue, 18 Dec 2018 18:51:30 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:877f:9499::19ec])
 	by smtp.gmail.com with ESMTPSA id
-	m3sm28000563pff.173.2018.12.18.18.51.27
+	m3sm28000563pff.173.2018.12.18.18.51.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Dec 2018 18:51:27 -0800 (PST)
+	Tue, 18 Dec 2018 18:51:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Dec 2018 18:51:07 -0800
-Message-Id: <20181219025109.19159-4-raj.khem@gmail.com>
+Date: Tue, 18 Dec 2018 18:51:08 -0800
+Message-Id: <20181219025109.19159-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20181219025109.19159-1-raj.khem@gmail.com>
 References: <20181219025109.19159-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/6] collectd: Upgrade to 5.8.1 release
+Subject: [meta-oe][PATCH 5/6] opensc: Upgrade to 0.19.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,144 +60,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2018 02:51:27 -0000
+X-List-Received-Date: Wed, 19 Dec 2018 02:51:29 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fix build with gcc9
+Switch fetcher to use github
+Add patch to build with gcc9
+Remove upstreamed patch
+Inherit bash-completion
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0005-Disable-new-gcc8-warnings.patch      | 18 +++++------
- ...ctdclient-Fix-string-overflow-errors.patch | 31 +++++++++++++++++++
- .../{collectd_5.8.0.bb => collectd_5.8.1.bb}  |  5 +--
- 3 files changed, 43 insertions(+), 11 deletions(-)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/0006-libcollectdclient-Fix-string-overflow-errors.patch
- rename meta-oe/recipes-extended/collectd/{collectd_5.8.0.bb => collectd_5.8.1.bb} (95%)
+ ...-Fixed-gcc-8-compilation-errors-1353.patch | 73 -------------------
+ .../0001-Remove-redundant-logging.patch       | 34 +++++++++
+ .../{opensc_0.18.0.bb => opensc_0.19.0.bb}    | 19 ++---
+ 3 files changed, 42 insertions(+), 84 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
+ create mode 100644 meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
+ rename meta-oe/recipes-support/opensc/{opensc_0.18.0.bb => opensc_0.19.0.bb} (74%)
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0005-Disable-new-gcc8-warnings.patch b/meta-oe/recipes-extended/collectd/collectd/0005-Disable-new-gcc8-warnings.patch
-index b12690b327..13510cdea0 100644
---- a/meta-oe/recipes-extended/collectd/collectd/0005-Disable-new-gcc8-warnings.patch
-+++ b/meta-oe/recipes-extended/collectd/collectd/0005-Disable-new-gcc8-warnings.patch
-@@ -1,4 +1,4 @@
--From d65e48b68076d5b304e6d865967003ae1fea0e6c Mon Sep 17 00:00:00 2001
-+From f82f8faf9942f51e9c3c773b56574652695bef5a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 9 May 2018 21:45:38 -0700
- Subject: [PATCH] Disable new gcc8 warnings
-@@ -7,17 +7,17 @@ GCC seems to be not able to detect the checks for size are
- already in place
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
--Upstream-Status: Submitted [https://github.com/collectd/collectd/pull/2768]
-  src/libcollectdclient/network_parse.c | 7 +++++++
-  src/write_sensu.c                     | 7 +++++++
-  2 files changed, 14 insertions(+)
- 
- diff --git a/src/libcollectdclient/network_parse.c b/src/libcollectdclient/network_parse.c
--index 2365ab0a..79e6ed96 100644
-+index aa753ce..fef43a9 100644
- --- a/src/libcollectdclient/network_parse.c
- +++ b/src/libcollectdclient/network_parse.c
--@@ -163,6 +163,11 @@ static int parse_int(void *payload, size_t payload_size, uint64_t *out) {
-+@@ -148,6 +148,11 @@ static int parse_int(void *payload, size_t payload_size, uint64_t *out) {
-    return 0;
-  }
-  
-@@ -29,7 +29,7 @@ index 2365ab0a..79e6ed96 100644
-  static int parse_string(void *payload, size_t payload_size, char *out,
-                          size_t out_size) {
-    char *in = payload;
--@@ -175,6 +180,8 @@ static int parse_string(void *payload, size_t payload_size, char *out,
-+@@ -160,6 +165,8 @@ static int parse_string(void *payload, size_t payload_size, char *out,
-    return 0;
-  }
-  
-@@ -39,22 +39,22 @@ index 2365ab0a..79e6ed96 100644
-                              lcc_value_list_t *state) {
-    char buf[LCC_NAME_LEN];
- diff --git a/src/write_sensu.c b/src/write_sensu.c
--index ce23e654..63e1f599 100644
-+index bd7a56d..6cb59d5 100644
- --- a/src/write_sensu.c
- +++ b/src/write_sensu.c
--@@ -569,6 +569,11 @@ static char *sensu_value_to_json(struct sensu_host const *host, /* {{{ */
-+@@ -570,6 +570,11 @@ static char *sensu_value_to_json(struct sensu_host const *host, /* {{{ */
-    return ret_str;
-  } /* }}} char *sensu_value_to_json */
-  
- +#pragma GCC diagnostic push
--+#if __GNUC__ == 8
-++#if __GNUC__ > 7
- +#pragma GCC diagnostic ignored "-Wstringop-overflow"
- +#pragma GCC diagnostic ignored "-Wstringop-truncation"
- +#endif
-  /*
-   * Uses replace_str2() implementation from
-   * http://creativeandcritical.net/str-replace-c/
--@@ -631,6 +636,8 @@ static char *replace_str(const char *str, const char *old, /* {{{ */
-+@@ -632,6 +637,8 @@ static char *replace_str(const char *str, const char *old, /* {{{ */
-    return ret;
-  } /* }}} char *replace_str */
-  
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0006-libcollectdclient-Fix-string-overflow-errors.patch b/meta-oe/recipes-extended/collectd/collectd/0006-libcollectdclient-Fix-string-overflow-errors.patch
+diff --git a/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch b/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
+deleted file mode 100644
+index 48d8327546..0000000000
+--- a/meta-oe/recipes-support/opensc/opensc/0001-Fixed-gcc-8-compilation-errors-1353.patch
++++ /dev/null
+@@ -1,73 +0,0 @@
+-From 87857d5cae7db94fdd776904886392b1e86053bd Mon Sep 17 00:00:00 2001
+-From: Florian Bezdeka <1119693+fbezdeka@users.noreply.github.com>
+-Date: Fri, 18 May 2018 18:54:56 +0200
+-Subject: [PATCH] Fixed gcc 8 compilation errors (#1353)
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-The following errors occured during a compilation using gcc 8:
+-
+-In function »gids_create_file.constprop«,
+-    inserted by »gids_save_certificate.isra.8« beicard-gids.c:1548:7:
+-card-gids.c:465:2: Error: »strncpy« output may be truncated copying 8 bytes from a string of length 8 [-Werror=stringop-truncation]
+-  strncpy(record->filename, filename, 8);
+-  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-pkcs15-oberthur.c: In function »sc_pkcs15emu_oberthur_add_prvkey«:
+-pkcs15-oberthur.c:741:5: Error: »strncpy« output may be truncated copying 254 bytes from a string of length 254 [-Werror=stringop-truncation]
+-     strncpy(kobj.label, objs[ii]->label, sizeof(kobj.label) - 1);
+-     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/pull/1353]
+-Signed-off-by Khem Raj <raj.khem@gmail.com>
+----
+- src/libopensc/card-gids.c       | 3 ++-
+- src/libopensc/pkcs15-oberthur.c | 3 ++-
+- 2 files changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
+-index fc5d2a7..ac3e579 100644
+---- a/src/libopensc/card-gids.c
+-+++ b/src/libopensc/card-gids.c
+-@@ -33,6 +33,7 @@ Some features are undocumented like the format used to store certificates. They
+- 
+- #include <stdlib.h>
+- #include <string.h>
+-+#include "../common/compat_strlcpy.h"
+- 
+- #ifdef ENABLE_OPENSSL
+- /* openssl only needed for card administration */
+-@@ -462,7 +463,7 @@ static int gids_create_file(sc_card_t *card, char* directory, char* filename) {
+- 	memset(masterfilebuffer + offset, 0, sizeof(gids_mf_record_t));
+- 	record = (gids_mf_record_t*) (masterfilebuffer + offset);
+- 	strncpy(record->directory, directory, 8);
+--	strncpy(record->filename, filename, 8);
+-+	strlcpy(record->filename, filename, sizeof(record->filename));
+- 	record->fileIdentifier = fileIdentifier;
+- 	record->dataObjectIdentifier = dataObjectIdentifier;
+- 
+-diff --git a/src/libopensc/pkcs15-oberthur.c b/src/libopensc/pkcs15-oberthur.c
+-index 4f841ed..3415be7 100644
+---- a/src/libopensc/pkcs15-oberthur.c
+-+++ b/src/libopensc/pkcs15-oberthur.c
+-@@ -29,6 +29,7 @@
+- #include <stdlib.h>
+- #include <string.h>
+- #include <stdio.h>
+-+#include "../common/compat_strlcpy.h"
+- 
+- #include "pkcs15.h"
+- #include "log.h"
+-@@ -738,7 +739,7 @@ sc_pkcs15emu_oberthur_add_prvkey(struct sc_pkcs15_card *p15card,
+- 			unsigned int id = path.value[path.len - 2] * 0x100 + path.value[path.len - 1];
+- 
+- 			if (id == ccont.id_cert)   {
+--				strncpy(kobj.label, objs[ii]->label, sizeof(kobj.label) - 1);
+-+				strlcpy(kobj.label, objs[ii]->label, sizeof(kobj.label));
+- 				break;
+- 			}
+- 		}
+--- 
+-2.18.0
+-
+diff --git a/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch b/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
 new file mode 100644
-index 0000000000..3ed652f71f
+index 0000000000..291f1a239a
 --- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/0006-libcollectdclient-Fix-string-overflow-errors.patch
-@@ -0,0 +1,31 @@
-+From 98719ea7f717750c790a1f9384ea8d0117e7f52d Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/opensc/opensc/0001-Remove-redundant-logging.patch
+@@ -0,0 +1,34 @@
++From c012f46965b3fe24e31367796e52c2d0b14ca5d9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 17 Dec 2018 18:15:05 -0800
-+Subject: [PATCH] libcollectdclient: Fix string overflow errors
++Date: Mon, 17 Dec 2018 18:44:23 -0800
++Subject: [PATCH] Remove redundant logging
 +
-+Ensure that string has a space for ending null char
++Same information is printed a few line below in same function, the only
++difference is that there it takes care of case when label is NULL pointer
++unlike this line
 +
-+Upstream-Status: Pending
++secondly, every function call to cosm_write_tokeninfo() in this file
++passes label=NULL, and then it tries to print a null pointer
 +
++Fixes errors like
++src/libopensc/log.h:48:47: error: '%s' directive argument is null
++[-Werror=format-overflow=]
++
++Upstream-Status: Submitted [https://github.com/OpenSC/OpenSC/pull/1557]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/libcollectdclient/network_parse.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ src/pkcs15init/pkcs15-oberthur.c | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/src/libcollectdclient/network_parse.c b/src/libcollectdclient/network_parse.c
-+index fef43a9..6d65266 100644
-+--- a/src/libcollectdclient/network_parse.c
-++++ b/src/libcollectdclient/network_parse.c
-+@@ -169,9 +169,9 @@ static int parse_string(void *payload, size_t payload_size, char *out,
++Index: git/src/pkcs15init/pkcs15-oberthur.c
++===================================================================
++--- git.orig/src/pkcs15init/pkcs15-oberthur.c
+++++ git/src/pkcs15init/pkcs15-oberthur.c
++@@ -70,7 +70,6 @@ cosm_write_tokeninfo (struct sc_pkcs15_c
++ 	ctx = p15card->card->ctx;
 + 
-+ static int parse_identifier(uint16_t type, void *payload, size_t payload_size,
-+                             lcc_value_list_t *state) {
-+-  char buf[LCC_NAME_LEN];
-+-
-+-  if (parse_string(payload, payload_size, buf, sizeof(buf)) != 0)
-++  char buf[LCC_NAME_LEN+1];
-++  buf[LCC_NAME_LEN] = '\0';
-++  if (parse_string(payload, payload_size, buf, LCC_NAME_LEN) != 0)
-+     return EINVAL;
-+ 
-+   switch (type) {
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.8.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/collectd/collectd_5.8.0.bb
-rename to meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-index df9fa233cd..6dff18c16b 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.8.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-@@ -13,9 +13,10 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://0001-fix-to-build-with-glibc-2.25.patch \
-            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
-            file://0005-Disable-new-gcc8-warnings.patch \
-+           file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
-            "
--SRC_URI[md5sum] = "a841159323624f18bf03198e9f5aa364"
--SRC_URI[sha256sum] = "b06ff476bbf05533cb97ae6749262cc3c76c9969f032bd8496690084ddeb15c9"
-+SRC_URI[md5sum] = "bfce96c42cede5243028510bcc57c1e6"
-+SRC_URI[sha256sum] = "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
++ 	SC_FUNC_CALLED(ctx, SC_LOG_DEBUG_VERBOSE);
++-	sc_debug(ctx, SC_LOG_DEBUG_NORMAL, "cosm_write_tokeninfo() label '%s'; flags 0x%X", label, flags);
++ 	if (sc_profile_get_file(profile, COSM_TITLE"-token-info", &file)) {
++ 		rv = SC_ERROR_INCONSISTENT_PROFILE;
++ 		SC_TEST_GOTO_ERR(ctx, SC_LOG_DEBUG_NORMAL, rv, "Cannot find "COSM_TITLE"-token-info");
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+similarity index 74%
+rename from meta-oe/recipes-support/opensc/opensc_0.18.0.bb
+rename to meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+index 45c931e7bd..bc1722e394 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.18.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+@@ -8,22 +8,19 @@ eID cards have also been confirmed to work."
  
- inherit autotools pythonnative update-rc.d pkgconfig systemd
+ HOMEPAGE = "http://www.opensc-project.org/opensc/"
+ SECTION = "System Environment/Libraries"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
  
+-SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
+-           file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
++#v0.19.0
++SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
++SRC_URI = "git://github.com/OpenSC/OpenSC \
++           file://0001-Remove-redundant-logging.patch \
+           "
+-
+-SRC_URI[md5sum] = "bce516f752e0db5327aa06cc0136fe27"
+-SRC_URI[sha256sum] = "6ef62b00e8fdbe3e386c3ee25c2cadb56c1931ea42f1a11dce8c947f51b45033"
+-
+ DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
+ 
+-LICENSE = "LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+-
+-inherit autotools pkgconfig
++S = "${WORKDIR}/git"
++inherit autotools pkgconfig bash-completion
+ 
+-S = "${WORKDIR}/OpenSC-${PV}"
+ EXTRA_OECONF = " \
+     --disable-static \
+     --enable-openct \
 -- 
 2.20.1
 
