@@ -1,50 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DD39D7C0D7
+Return-Path: <ranshalit@gmail.com>
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+	[209.85.222.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EB8D36FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 14:42:01 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id g67so6694669wmd.2
+	Wed, 19 Dec 2018 15:26:50 +0000 (UTC)
+Received: by mail-qk1-f170.google.com with SMTP id 189so11863109qkj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2018 06:42:03 -0800 (PST)
+	Wed, 19 Dec 2018 07:26:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=kvCAHDWAIJh1EYoQV+z1pMJoxV9E15gGddtEhkJ3QYY=;
-	b=AZPk5rL4a0nq+WacTRHQEeZMtot/vhIkV+z89DS7mliDHu+iKHtE6NQ9H6PGVjAnly
-	7eWL+u3rC/SfWvOqdnblUr7io6+PIZD0Y0O4e79UfJABOr8RLSngerul5gKYSSvAnzj9
-	k1exodh127rYUyXiap2QihzFCJBUIv/KGy55+SXWerXA9q059byIMSwxjYBLfCfJk8rW
-	0uWocPU948v4qMCdAIpHo5O7rlxi/l9xbdB1revGedOwYNSz06blric36Mxl9t8TKQnx
-	739z4/PSaVvc+FU4uQpraYUx6J/leFyGXkT7ZB3bKmehM6NwgH/MUJnL78r35G+z9/2q
-	42gA==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=2mr9YtiCKOmRdolluyhLW+Q1lCVfARe7A7zbbg6+Dbw=;
+	b=QtFj7WXFN2GhFQ1Z+SuDjeqsVwRHc/oGMHrjgI+NxK+GoWfnqbnEhhoOJlmlJYSrVb
+	HntsZWfglC4eJvu+x8BJYE7mq8PcKJ8Anj+gZsAGkzGIJ3BxURHT5rrSTvFCxnk04UDe
+	OvOD+WucqW2vJ2I8X9Y9/ZojO7TCtKgbrykOAzvkzB+e2HTi6SAJNb+aZ1EqcS7ZXEyE
+	nwxA7D7aNptPzpvZylM+fhzCSeiqaLziSPirp77VotiLBveop6b13bYe0oTYTU7lZiXX
+	0vbMCPwcdyxrkuichqMoLFoWEO38E12N1HRmcfS3xjr1KLU6TSn9mP2kXIBuG5iJ+FTV
+	6/Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=kvCAHDWAIJh1EYoQV+z1pMJoxV9E15gGddtEhkJ3QYY=;
-	b=coduXpTBUnjWjhpVfCDKni8ntiP/edLuJI4B+/F3ieeWPZxs7m+frR61mCTodWdixv
-	hLz9OC2lMY5XHS9gruLVnkNx4Jhq2jwy3aiD6H2c7NzUoqrqXt2aowsRarraxg38a35T
-	JZ1TkJhzM4mV+yvVYnsFrMUHYYsqMKHOwRn8tmcPNRw7N5hX995o5JfC9UetrrG6Cgnb
-	P/crQs4RU3zmD3f6kYkSLRmFgOukgMcYgkB2Adxi2R7t6rIvlX76351gGuRY7Sdhlz3d
-	cGgLzfN0RrlB3M8D2Vx6VmnP/qMD8MIiSdxEbO5SYCX6RotwTW6o4BdiPjVOlGm+I68U
-	XbqQ==
-X-Gm-Message-State: AA+aEWa5RoOSNCYL0J8JljMtlqFB/TDWenZ5iaYtqXfBgmQit/MIwAjo
-	owlPbhj5vyoRHmzth0Snb68wRGAe
-X-Google-Smtp-Source: AFSGD/U9/3+Zl1LM1G3FxQDDOVMg6Tjw0fXIM3MLeJLu7+mu0HkLqxgWeCEwRy9rMQaK0tUo4NCe/g==
-X-Received: by 2002:a1c:bb04:: with SMTP id l4mr6899708wmf.142.1545230522450; 
-	Wed, 19 Dec 2018 06:42:02 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	l37sm10111471wre.69.2018.12.19.06.42.01
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 19 Dec 2018 06:42:01 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=2mr9YtiCKOmRdolluyhLW+Q1lCVfARe7A7zbbg6+Dbw=;
+	b=eGjyEB/oDTmnOBF6KQxe1kLvNeMO6cu9IpfF8c1toh4uAWci7AqWPdv5T4wDERl3Nf
+	JTMSnvhbK9+Uhhg0uhVO8Tr2qOk8Bgq16ZjvV9mURxf/Jo7gopziqjjPc/JrRZ1uZ6lz
+	btyinUO1kCyFw+Gqa+VYuZQXGsZFeDyyDHblqbCRyvnErk2P1R/EhhrFbLIIhoeV5P2S
+	rtDOmOzgfjgkRoTUOYnCl4b7zXNFoWG5A899TLnYqrINb0L7FepbnIllhUn/oEaE+uKG
+	sRcI8GiHrN1JAMi/HXmpPhKQICVV1wYS3RrGY6gkrSdFu+Y3bZSVWbLm1fw4yPcThfyl
+	V/WA==
+X-Gm-Message-State: AA+aEWa6R/fuQn1d6OmwX6KN4wSob9shZ6b0ezEioicnAzrK2fJ3sQ/6
+	7hk43azWHXPxbx44KlBtis7LkdoJs12qA42DPKQtOXW4
+X-Google-Smtp-Source: AFSGD/UCWGwdu3TqEh1+beY0B65kNAkLuttshq/UC1iMs9wgwrVOq3grGrswKq/9ZerCrkEvTZlZDfezf4qx3D7ozQw=
+X-Received: by 2002:a37:bd47:: with SMTP id n68mr20526481qkf.203.1545233211553;
+	Wed, 19 Dec 2018 07:26:51 -0800 (PST)
+MIME-Version: 1.0
+From: Ranran <ranshalit@gmail.com>
+Date: Wed, 19 Dec 2018 17:26:40 +0200
+Message-ID: <CAJ2oMhKm02QeiF5dqpvYqeXBRCo+jWh=cjb2Sj2DjAt+ZqirTg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Dec 2018 14:41:55 +0000
-Message-Id: <20181219144155.31236-6-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20181219144155.31236-1-Martin.Jansa@gmail.com>
-References: <20181219144155.31236-1-Martin.Jansa@gmail.com>
-Subject: [sumo][meta-oe][PATCH 6/6] geoip: update SRC_URI
+Subject: Build suddenly stops and desktop logouts !
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2018 14:42:02 -0000
+X-List-Received-Date: Wed, 19 Dec 2018 15:26:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Changqing Li <changqing.li@windriver.com>
+Hello,
 
-previous database on maxmind website will be removed from January 2, 2019.
-and also we met checksum weekly change problem, so update the SRC_URI to
-http://sources.openembedded.org/
+I have strange behavior with ubuntu16.04 LTS, in which after building
+for couple of hours, suddenly the ubuntu OS logouts.
+I see that others also have the same issue but seems that there is no solution:
+http://lists.openembedded.org/pipermail/openembedded-core/2016-December/130617.html
+and
+https://stackoverflow.com/questions/48148169/whenever-running-bitbake-stops-all-application-and-locks-the-system
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-support/geoip/geoip_1.6.12.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+I have increased my virtualbox memory to 11G, (no swap in my ubuntu)
+but it still happens (might be less than before not sure), also
+strangely even after increase with "free" command I see that it get
+sometimes below ~150M free.
 
-diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-index c3ce4d88a9..4271c2e155 100644
---- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-+++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
-@@ -11,10 +11,10 @@ SECTION = "libdevel"
- GEOIP_DATABASE_VERSION = "20181205"
- 
- SRC_URI = "git://github.com/maxmind/geoip-api-c.git \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat;downloadfilename=GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=no;name=GeoIPv6-dat;downloadfilename=GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;apply=no;name=GeoLiteCity-dat;downloadfilename=GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz \
--           http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz;apply=no;name=GeoLiteCityv6-dat;downloadfilename=GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz \
-+           http://sources.openembedded.org/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
-+           http://sources.openembedded.org/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
-+           http://sources.openembedded.org/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
-+           http://sources.openembedded.org/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
-            file://run-ptest \
- "
- SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
--- 
-2.17.1
+Is there any idea what's wrong?
 
+Thank you,
+ran
 
