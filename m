@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 965836D3A2
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A575F6D73C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2018 21:36:12 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id gn14so4862341plb.10
+	Sun, 23 Dec 2018 21:36:13 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id w6so4866975pgl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2018 13:36:14 -0800 (PST)
+	Sun, 23 Dec 2018 13:36:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=/+XSWgNEA9pl41O5Dlta2LCjbO5n4lq0do9qxgdZbMs=;
-	b=BkgriNTbR/t/d7B2CspbHsjnb+yxwBRH4jCqA7tsj1Nkzwv7IMNFLCUQpKmQxnaZou
-	OsabDmqAmwVMj3iZn19gK0ttY6BHBUglo7HilaxMcPSQGzLbWunZjUyiUTQ9h+VNhPig
-	bab4tdMNb/BGqkFhLi/TNcYdia7FSUGqjcmOR1SiCGC9KrJWljkw+3gPLdoQKdHd0gE1
-	GyEmPBUqb4i8oEg3XH4mRfaGb5cPDiuaFy4jce3fUK3/3GWC4jHYPoqzmYSKR5wwZJ7x
-	1h00oK+Vab8Syr+pvCxoZwef23oJUZFrKHbartRskX7Yyc/Sfxz7OkckWRQmAU5Ja4zA
-	dNug==
+	bh=GajNc8hB/dbq6quOf62FkwzX/vbBLHeUEAxHP1D6zRU=;
+	b=e5H+DsjhOX/5bhgrDlQyC/FTLLNIWV4xBOkOPDRBRFuGEVvgVG95yMW5Nwt5STRyio
+	5TgwlAxRb4DC8QDD7jWqLStIIR6C1pzw+UsDiDtjw/JPW78goihZbCgC67B7GjrPQWKE
+	Bw4E4gJ3rCrtvVjo9BLeAGeGoBKXVboKpr7skl0HrJg6bQbB9wrOMdCTseh/5H/+dlJi
+	RFi2qZNBYlFAx7CMPUj6ekeEchjJVGRIAbD72jl5JtKhep1GDWIDohd/B5RdaefGsDTd
+	UBI3oQm3T46pswJghE3dp3GHPxELMpx/n+HirzdtzkJ3LcguyU9LN7nH58MbmG4nbKW1
+	8yPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=/+XSWgNEA9pl41O5Dlta2LCjbO5n4lq0do9qxgdZbMs=;
-	b=lTvQyDv53m0wa4PoYQKKqpi94k4OJiitcMmV1z+v1agWl9X82AHZTwrLyWFVs1lZ2c
-	A3SmO65wQ3t4gdG6eYW28850Va25vomA9RMmFYiZYgg2GuwsDpHv5rz1LxlfJZ7hE2yb
-	2TJjg0j2/RpQq49j+3oOQ2FZzZmwtjP+oy3j1Pqgq1BNuQZzVbxZf/CYz6njyMNt3CRQ
-	qn7+5agyWoy5841kNbpwl6ijMoNfwmBmyD93GBeXZ3yIP2S04Xo/vqtFxs9SV4ycomup
-	q0kgA3nocvecjSxII40R9eqyK3ad7tWlgDy+5Z4b89k33oGWZzhIplT+rqlp4vgVA4Br
-	ISkA==
-X-Gm-Message-State: AJcUukeB9qAZWW92F1u+7KDZn6lO+JpxT/dcRGz/cRLCua1mu6wIWTLs
-	rE1aPr/wTZSQmyVa7xP2rXPVAbzZlv4=
-X-Google-Smtp-Source: ALg8bN49+nSgGLlp7KnHsbUGXJ/ydx9MaZyYo94rzwe29aVTJP9V8xWuplHgvNj4UGV40SCz5rOOFw==
-X-Received: by 2002:a17:902:6a8c:: with SMTP id
-	n12mr10898061plk.85.1545600973349; 
-	Sun, 23 Dec 2018 13:36:13 -0800 (PST)
+	bh=GajNc8hB/dbq6quOf62FkwzX/vbBLHeUEAxHP1D6zRU=;
+	b=mmBS2nNCPstueb8GwjdzJS1NqkUj0wl7NvBv1bx8XWSzTNtjAIZfdUImUqICJMCsvl
+	aN/nV/ducyiudMNe5Rb1CCn9s8WS5XcXcgq4KSRv9MgtmU13o0R3krjT8EGdpbrJj7DZ
+	F0plaac9UN96ObUF7sVQollVNavL/li1JnCajizBzu0sTU3Xo5bPmu2SicholVS6A3a+
+	LJ9/YKXFLDVKv+6+OLG0Zqjy2CKLr1yfyHCHbGSc7EicZvGz9fEHrl8DfO27KayWZKDx
+	cFa5SLzP9+8c57VZvYR8q0oYvBvfQk6pINqggtMuUUuLo6TSac5iY+kZJwL23EQc5h1L
+	Kq9Q==
+X-Gm-Message-State: AJcUukffC456Wyp4RCanptQEwP9RBBOyHlGl5BdZqH4KtLeHt6b3j2Vq
+	bclfLnskZGAzhDYi3PrxVnUib57l6+A=
+X-Google-Smtp-Source: ALg8bN5Hvg254allSYJOJam37y6CBSLP8VVuFUkm+C1mlPY74nEnOKn3D3EuEjedMjNgfqovUmPeRQ==
+X-Received: by 2002:a63:de04:: with SMTP id f4mr10140924pgg.292.1545600974431; 
+	Sun, 23 Dec 2018 13:36:14 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:877f:9499::19ec])
 	by smtp.gmail.com with ESMTPSA id
-	m9sm33340800pgd.32.2018.12.23.13.36.12
+	m9sm33340800pgd.32.2018.12.23.13.36.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Dec 2018 13:36:12 -0800 (PST)
+	Sun, 23 Dec 2018 13:36:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2018 13:35:44 -0800
-Message-Id: <20181223213557.7834-5-raj.khem@gmail.com>
+Date: Sun, 23 Dec 2018 13:35:45 -0800
+Message-Id: <20181223213557.7834-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20181223213557.7834-1-raj.khem@gmail.com>
 References: <20181223213557.7834-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 05/18] libgpiod: Rrecommend python3 only for PN-python package
+Subject: [meta-oe][PATCH 06/18] srecord: GPL-3.0 and LGPL-3.0 is correct license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2018 21:36:12 -0000
+X-List-Received-Date: Sun, 23 Dec 2018 21:36:13 -0000
 Content-Transfer-Encoding: 8bit
-
-Fixes overdependency on PN
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/srecord/srecord_1.64.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
-index 30289b983b..dd080ff9d2 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
-@@ -7,10 +7,10 @@ SRC_URI[sha256sum] = "b6b9079c933f7c8524815437937dda6b795a16141bca202a9eec70ba58
+diff --git a/meta-oe/recipes-support/srecord/srecord_1.64.bb b/meta-oe/recipes-support/srecord/srecord_1.64.bb
+index fe1af476f2..d3488df2cf 100644
+--- a/meta-oe/recipes-support/srecord/srecord_1.64.bb
++++ b/meta-oe/recipes-support/srecord/srecord_1.64.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A collection of powerful tools for manipulating EPROM load files."
+ SECTION = "devel"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv3+ & LGPLv3+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8dfcbf2f0a144b97f0931b6394debea7"
  
- PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
- 
--PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3,python3-core"
-+PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,"
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
- 
- PACKAGES =+ "${PN}-python"
- FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
- RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
--RRECOMMENDS_${PN} += "${RRECOMMENDS_PYTHON}"
-+RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
+ SRC_URI = " \
 -- 
 2.20.1
 
