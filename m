@@ -1,46 +1,45 @@
 Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C476F60778
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id B8A0960778
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Dec 2018 16:59:43 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id u18so5756981plq.7
+	Mon, 24 Dec 2018 17:01:28 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id n2so5769086pgm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Dec 2018 08:59:45 -0800 (PST)
+	Mon, 24 Dec 2018 09:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=G0EdWyNKToEsB81r3HdN7NkLYYLLJJHYJFUHO/BJ5Vk=;
-	b=tYMX306zYv5XodNGc0Lun8Vn9OLesX1jwepNX1Sab57ppqI2j5O6NSzReaTPLsGuo6
-	eG/H6wl86h6+W/Cf37MCn+MxOxSKZvDyyKxUbWLLht8je2ypjztxctSxxZ09Y8qDZMrX
-	jIPk1fncZ5r+GSps+zSbZoxr7kw6Ij+0Rp+ymYnQxUPwCh/RJeoy1TnuPLdGOPFe84Hc
-	lzlQ9TZTK5jM1qHZeXND41G2vvAyM1mZjcbWzKuknwCjIdtswQpIiuQEgLhYTR3VPlti
-	peS8qI4HtGYxbGWlhz/QUyYu6I9tDBJhYXCnNIM6HU/iGXLFRR0ec5oqMBJC/6wdF0FE
-	+23w==
+	:cc; bh=DiOxDTUiP6QxuFA6IpI7i7nIcmk/kqlHniZQtR47/wI=;
+	b=ST3uC13WYbu0254U0cJS41NdWSN5bgHvsG9qdEzUDON+8tEMBE6LdwpHII75enKDk/
+	yiBgJzEGDRv+3N1GI4+qhbpO39oYOkQi/u9dKPa9VVGOC4mO9udrtXCc9uxAyQG5Rzt+
+	JYMZNMfunFitwvk5jJau/GpFR774zkjIzlBY3WD3A07eiWfdBchm43mRYNHhBSvRZNzk
+	qHZa06MFT4oQLSIusXuSTvN3biPQg34SbaqdxCBZ3xuK+23Uyd0JA2h45y6kdZfXu4Zn
+	OOvU3jIcIvfGlAt9mTovVnfP+v+hv3hncDCzltd8E3+ulpE+xRxjSvpC3cMHNyQGFeDD
+	Rj0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=G0EdWyNKToEsB81r3HdN7NkLYYLLJJHYJFUHO/BJ5Vk=;
-	b=goQT6bDgORcyyrEi1F1uwOUJrPSrie/uGjHNGIqCTlAuVrAQxqFd/AxX9ciJ6yfS/x
-	JkyX0Io/Zf0jaawq7EOCjF9u9RqWXhLhgL/wFJczkg3+qx/ccIxJu2PIbPJ7B/HAuTAE
-	8TKAQEfRUx9gzyMfWRHCSbIiMymPFfQg6u6PyKLvQpMgMzQ77BmfQPtvUPf5lWf8vCwB
-	d4oT0j27NSBdnR+Q26RQX7uXextMmNeoBm4NjoJf/Phf2Y9bqUb2RS5uHADcqs46Mi2y
-	J6eH8WhDUBE53KIOnpE4KmFbcio2kng9AetaJKSpyxiJrHkeSq0ghHBcSU7whdbrdHnd
-	7pEQ==
-X-Gm-Message-State: AJcUukeN6XrXknLKsf0wfdw9RK1ANSvlfl89Gv/DYvLbgxKfTZGYRNFp
-	bBc0r08bEFFEhr1bHxzn0WLegJE92RFIsgZxS8M=
-X-Google-Smtp-Source: ALg8bN5qjWkObdNa7BwIxcKFdUDLwcOswmtMhmSLa7xvnJ/Li3QRosnxXctSeV16T/RGvebL1ZGl/zxRG14O6WYlLBQ=
-X-Received: by 2002:a17:902:b112:: with SMTP id
-	q18mr13678308plr.255.1545670784622; 
-	Mon, 24 Dec 2018 08:59:44 -0800 (PST)
+	bh=DiOxDTUiP6QxuFA6IpI7i7nIcmk/kqlHniZQtR47/wI=;
+	b=Eb2kn2D4nXWyCa+o6TmUCgD4kdWJxttjk/a7vbujd+4SRf8lWNbfokU4wM7zF8swuO
+	RAiwQKwwxDbqod+XgO85x8Tk3tvGMvROje1CpXX7AJ31FYN37BZTKYxhqL3gARcD4WMH
+	U+FcMVZphLLs/khMvdQ/8erGkTjEd1IOTljSxiSMEdWoa+ejJwTSUS5DFLmeukvAsz1o
+	tS6e2XnMvcsZHWRMxcBudemP43QU2PtB9ESKyvbA+WOFovFY56fGp/M/HGyKn13el+md
+	fxlrJaxNLMNwHuddLloRGqwu8UZsY0uabFmhQd+9eNfohk/8Rvd/K2LaXnNjYPUAHyhE
+	yzmQ==
+X-Gm-Message-State: AJcUukcSlhKqsd7TEEiRPDmMxQK5tCGh5tgk/0rgxJ2KCoY/tWhqs66J
+	P5INNqwX8VlIKNrI9DyMkrn0pBsa5PwAoTauBjLQKgTE
+X-Google-Smtp-Source: ALg8bN4RgEQz+Jswfjod/4Wb0c4Su/HJjF75lKgTfLOkjIUsX/mkkEpRKBuCnhnV8MlpIQ8qVYulBfi7JpSWI4lRgQU=
+X-Received: by 2002:a63:c503:: with SMTP id f3mr12572036pgd.431.1545670889672; 
+	Mon, 24 Dec 2018 09:01:29 -0800 (PST)
 MIME-Version: 1.0
 References: <1545553483-17422-1-git-send-email-ankit.tarot@gmail.com>
-	<CAMKF1sqo8kCOvSQMFvo_zHvmriS9HOJC3i20a=0_oFQoXxRNuQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqo8kCOvSQMFvo_zHvmriS9HOJC3i20a=0_oFQoXxRNuQ@mail.gmail.com>
+	<2ae1112d-2917-dca0-4656-aa692dce6e27@reto-schneider.ch>
+In-Reply-To: <2ae1112d-2917-dca0-4656-aa692dce6e27@reto-schneider.ch>
 From: Ankit Navik <ankit.tarot@gmail.com>
-Date: Mon, 24 Dec 2018 22:29:33 +0530
-Message-ID: <CAM_RqkNE5L7HckOym-qgpbPEraupK_s0NyDtmJvwJ1efTFMm0g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Dec 2018 22:31:18 +0530
+Message-ID: <CAM_RqkNmUh=9cf7WYPFZ1n0kOkLqpgXOfUeAK0haQ9WzsVBEbA@mail.gmail.com>
+To: Reto Schneider <code@reto-schneider.ch>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] wifi-test-suite: Initial recipe for wifi test suite.
@@ -56,107 +55,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2018 16:59:44 -0000
+X-List-Received-Date: Mon, 24 Dec 2018 17:01:28 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Raj,
+Hi Schneider,
+Thank you for your valuable feedback.
 
-On Mon, Dec 24, 2018 at 2:34 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Sun, Dec 23, 2018 at 9:52 PM Reto Schneider <code@reto-schneider.ch>
+wrote:
 
-> Fails on mips
->
-> http://errors.yoctoproject.org/Errors/Details/213432/
->
-> musl
-> http://errors.yoctoproject.org/Errors/Details/213424/
-
-
-Let me fix it in v2 patch.
-Regards,
-Ankit
-
->
->
-> On Sun, Dec 23, 2018 at 12:23 AM Ankit Navik <ankit.tarot@gmail.com>
-> wrote:
-> >
+> On 12/23/18 9:24 AM, Ankit Navik wrote:
 > > Add generic recipe for wifi test suite from wifi alliance.
 > > Suite is to support certification program development and device
 > certification.
-> >
-> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-> > ---
-> >  .../wifi-test-suite/wifi-test-suite_git.bb         | 43
-> ++++++++++++++++++++++
-> >  1 file changed, 43 insertions(+)
-> >  create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/
-> wifi-test-suite_git.bb
-> >
-> > diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/
-> wifi-test-suite_git.bb b/meta-oe/recipes-connectivity/wifi-test-suite/
-> wifi-test-suite_git.bb
-> > new file mode 100644
-> > index 0000000..3890f2f
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/wifi-test-suite/
-> wifi-test-suite_git.bb
-> > @@ -0,0 +1,43 @@
-> > +SUMMARY  = "Wi-Fi Test Suite Linux Control Agent"
-> > +DESCRIPTION = "Wi-Fi Test Suite is a software platform originally
-> developed \
-> > +by Wi-Fi Alliance, the global non-profit industry association that
-> brings you \
-> > +Wi-Fi, to support certification program development and device
-> certification."
-> > +HOMEPAGE = "https://www.wi-fi.org/certification/wi-fi-test-suite"
-> > +LICENSE  = "ISC"
-> > +LIC_FILES_CHKSUM =
-> "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
-> > +SECTION = "test"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +SRCREV = "f7a8d7ef7d1a831c1bb47de21fa083536ea2f3a9"
-> > +SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git
-> "
-> > +
-> > +
+>
+> I did pretty much the same a few weeks ago [1] for a MIPS/musl based IoT
+> gateway [2] (DUT).
+>
+> What I learned:
+>  - You will need some patches for the makefiles [3]
+>
+
+You patch got failed when I tried to compile using
+bitbake wifi-test-suite -c compile -f
+CC ?= gcc --> I think, this is not required.
+It is better to use as implicit variable itself.
+
+ - When using musl, you will need something like this (parts of it) [4] too
+>  - If you are using the Busybox utils, those scripts will not work an
+> need to be adapted. Our Testhouse did do this for us, so I do not know
+> exactly what changes where needed.
+>
+> Let me check this and other comments as well.
+
+Regards, Ankit
+
+
 > > +do_compile () {
-> > +       oe_runmake
+> > +     oe_runmake
 > > +}
-> > +
+>
+> Pretty sure this is not needed. My recipe at least does have this.
+>
 > > +do_install () {
-> > +       install -d ${D}${libdir}
-> > +       install -m 0644 ${S}/lib/libwfa.a ${D}${libdir}
-> > +       install -m 0644 ${S}/lib/libwfa_ca.a ${D}${libdir}
-> > +       install -m 0644 ${S}/lib/libwfa_dut.a ${D}${libdir}
-> > +       install -d ${D}${sbindir}
-> > +       install -m 0755 ${S}/dut/wfa_dut ${D}${sbindir}
-> > +       install -m 0755 ${S}/ca/wfa_ca ${D}${sbindir}
-> > +       install -m 0755 ${S}/WTGService/WTG ${D}${sbindir}
-> > +       install -m 0755 ${S}/console_src/wfa_con ${D}${sbindir}
+> > +     install -d ${D}${libdir}
+> > +     install -m 0644 ${S}/lib/libwfa.a ${D}${libdir}
+> > +     install -m 0644 ${S}/lib/libwfa_ca.a ${D}${libdir}
+> > +     install -m 0644 ${S}/lib/libwfa_dut.a ${D}${libdir}
+>
+> I do not think that you need the static libraries.
+>
+> > +     install -d ${D}${sbindir}
+> > +     install -m 0755 ${S}/dut/wfa_dut ${D}${sbindir}
+> > +     install -m 0755 ${S}/ca/wfa_ca ${D}${sbindir}
+> > +     install -m 0755 ${S}/WTGService/WTG ${D}${sbindir}
+> > +     install -m 0755 ${S}/console_src/wfa_con ${D}${sbindir}
 > > +# Test scripts
-> > +       install -m 0644 ${S}/scripts/getipconfig.sh ${D}${sbindir} #
-> Must copy
-> > +       install -m 0644 ${S}/scripts/arp_neigh_loop ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/dev_send_frame ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/findprocess.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/getpid.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/getpstats.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/gpstats.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/sta_reset_parm ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/stoping.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/updatepid.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/wfaping6.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/wfaping.sh ${D}${sbindir}
-> > +       install -m 0644 ${S}/scripts/wfa_test_cli.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/getipconfig.sh ${D}${sbindir} # Must
+> copy
+>
+> They have hard coded the path to this script [5][6]. You will need to
+> fix the installation location or their C code.
+>
+> > +     install -m 0644 ${S}/scripts/arp_neigh_loop ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/dev_send_frame ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/findprocess.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/getpid.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/getpstats.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/gpstats.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/sta_reset_parm ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/stoping.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/updatepid.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/wfaping6.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/wfaping.sh ${D}${sbindir}
+> > +     install -m 0644 ${S}/scripts/wfa_test_cli.sh ${D}${sbindir}
 > > +}
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> How about "install -m 0755 -D ${S}/scripts/*.sh ${D}${bindir}" for the
+> scripts?
+>
+> [1]
+>
+> https://github.com/husqvarnagroup/smart-garden-gateway-yocto-meta-gardena/blob/master/recipes-wifi-alliance/wifi-testsuite/wifi-testsuite_git.bb
+> [2] https://github.com/husqvarnagroup/smart-garden-gateway-public
+> [3] https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/pull/42
+> [4]
+>
+> https://github.com/husqvarnagroup/smart-garden-gateway-wifi-alliance-test-suite/compare/eb2799fbc28a2e5b309e2e85d0fa0b8e9cd0d100...master
+> [5]
+>
+> https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/blob/master/lib/wfa_cs.c#L322
+> [6]
+>
+> https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/blob/master/lib/wfa_cs.c#L2118
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
