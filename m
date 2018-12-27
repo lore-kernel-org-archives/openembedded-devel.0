@@ -1,54 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CCA86C16F
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C4B146B7DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2018 02:29:42 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id u18so8167766plq.7
+	Thu, 27 Dec 2018 07:13:08 +0000 (UTC)
+Received: by mail-pg1-f173.google.com with SMTP id s198so8478647pgs.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Dec 2018 18:29:44 -0800 (PST)
+	Wed, 26 Dec 2018 23:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=b1JIDjfbTh6o1gMGAyy0ircxhDFOSpUNdQCTlJ8aSXY=;
-	b=G1fCMtXd0+5T8O9vO3JciBZnXclLrvQt8WFfkz5nAEj5mfu/xEoBxekzKeGcB2xWUF
-	q19BRZ12BJ5SyfuYzjaKeku56uAtuaZvsW993NcY8ZhBq0xVrkzXueujwZaRrsPUSNae
-	Cq/N5mU50eev7QXoT/90rao7b802UtTfedwHDaKTby+ZbsQ09U+1pyEzUSVQsBqEXuQC
-	OtkL5WPIff52Izz0/3FRrw5weFTMN1IzqBVi3Ikc8yHHTjPVSXKVoreJWeDydAa71eB4
-	uW3JJV16mKR1DfG2DFRGbOD97klZvUGettsBUS7/FKj27RiBfQgt6hWKE5x4Tf4JJOMc
-	HhHw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=YlsoybFdTdr0W29AchSGZdmYs9gf9GOBeM3WNdLpqtk=;
+	b=rpjnwROGj8K/adKuANmgvx+224LKk7jFU6ulxBzo6x539a5ZpgPRJbrL0OegoB9u/m
+	pf2SncBV5b0sBh3YkYEzDawgPoRZY9VpDApJCu16I37XO5T7m7h4GW+Gr8SpCcSK36dK
+	lGPloT8o+W88C/BdKO3QZpaunBE1WqGS09sSZBUHZHTlVNB2AKF8ueebBwFNaLMVJtaj
+	RGonny/1Fpfko5Pei3nX0RmseG5Pd3Y2RU9tmyL2seukaRg+dW4SO3iKwLQ8V5w2TN0E
+	jXeGq1GiN/ChgQZTgA76Z+HioW+T4XNEbpNRr8vqfKKXJmrnIv0E91bIO2Z6Ojy6rkiY
+	3B7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=b1JIDjfbTh6o1gMGAyy0ircxhDFOSpUNdQCTlJ8aSXY=;
-	b=tyiJ8JS7TxGBNyipGMU6ZoxJKiC3i8JmeRFekU7+jUVWACule+XtSe2qvd6Aj621+K
-	oa4/o8159E/O/eHxzlAK8MeYsViyyenFcEJWvGPD58uePxTVtdmtbcbSIEKzXVs5BOlQ
-	I+5QK0wkUhfLvzBf0hryKGlDnZCVA+KdRUifruvn2yF8X1yU9nko2+pueWoW1umkiXY/
-	lb0UJbLgFCO7h/KWy6cxH4dAo4IJxR21JSN7ux/Ggtf+pXZFWk7GPZ51ON7Fb/yWBqyr
-	tTwWSmaSEA+aOXxGy8cRQ6WAGdHg9K8VyKa6QXdvKh2YDlnv0h1ahdln1QFMakVokzIN
-	3scA==
-X-Gm-Message-State: AJcUukctSog7r9i6C7R6Ng2367m4Jp8209qGQRX600DQMT2Tt/qg7f3Y
-	NiBl6lxzHRaqbOmb0nNQKWul96ebPGo=
-X-Google-Smtp-Source: ALg8bN7495DHIA03FnZdmwS1/Z7jC9Fo/+Ye0P1nxrtGvpGF2SV+Tts6IJBM0bJpLS49O/gLN6FmIg==
-X-Received: by 2002:a17:902:7791:: with SMTP id
-	o17mr21697157pll.60.1545877783420; 
-	Wed, 26 Dec 2018 18:29:43 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net
-	([2601:646:877f:9499:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	p2sm50666072pfp.125.2018.12.26.18.29.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Dec 2018 18:29:42 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Dec 2018 18:29:25 -0800
-Message-Id: <20181227022925.5920-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20181227022925.5920-1-raj.khem@gmail.com>
-References: <20181227022925.5920-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=YlsoybFdTdr0W29AchSGZdmYs9gf9GOBeM3WNdLpqtk=;
+	b=ceui0aKVPJlLqbWBqiT91C/MIwO8EsTDYjfKLPtq6Ph55KHZ/QskEjOjGLXEC2ZCPP
+	MUp4a8qxKpgxOtu+uVtgs1Z+uLgX5HqhGnjgF7smTqrLynUPlxIcpIBzTc0VziDqMREU
+	tw/+KCJwkplra+whocN7J6OBhUaMhpAgW9GSZq2q4jVFOefzPbzstbCFtKX+liNjOzKi
+	86diXQcIJ9X2bL7u0yDXIC5DBn71nj8SnaAjgCZLvUQOvm0mMXDnXPvIBnZmNvUpuLNi
+	4mylCZSD/R9KSp2V8HZTiuPoc0TFxESGBjEz6BOVweVYG+y5Z6/WarQebYYDdx0i6+AU
+	2twA==
+X-Gm-Message-State: AJcUukfdc/1GXWowE7SG9RSikYl5Eb6pIZpp5XA5J1jPEN/HP0AG0LCK
+	vW4gEZsAGv/YHYGrlUTD3bCtT0M+khVcs3bNQZw=
+X-Google-Smtp-Source: ALg8bN6jjt4yhI1mKGnjtgjyxVmytswkkVx1IlPOn4iwa+WJE4m6R9l10/hlWNFc28FqjQisopDg1iDJTTockhlx6FE=
+X-Received: by 2002:a63:f241:: with SMTP id d1mr21761263pgk.2.1545894789476;
+	Wed, 26 Dec 2018 23:13:09 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH 4/4] libedit: Upgrade to 20181209
+References: <1545726268-30773-1-git-send-email-ankit.tarot@gmail.com>
+	<CAMKF1sqqNB5H2FTszWnA2B7_TSHmYcoS3yvjgg8f9F6q-VaLdQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqqNB5H2FTszWnA2B7_TSHmYcoS3yvjgg8f9F6q-VaLdQ@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Thu, 27 Dec 2018 12:42:58 +0530
+Message-ID: <CAM_RqkPXmvWxtgqbs6BgRMwyRMMBire38JGSQu3cFjNeU8cDkg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v3] wifi-test-suite: Initial recipe for wifi test suite.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,37 +55,337 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Dec 2018 02:29:42 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Dec 2018 07:13:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add native and nativesdk incarnations as well since clang needs it
+Hi Raj,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../{libedit_20180525-3.1.bb => libedit_20181209-3.1.bb}    | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/libedit/{libedit_20180525-3.1.bb => libedit_20181209-3.1.bb} (76%)
+On Tue, Dec 25, 2018 at 11:45 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb b/meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
-similarity index 76%
-rename from meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-rename to meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
-index 8cc0e959e0..c0a3d21360 100644
---- a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-+++ b/meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
-@@ -15,7 +15,9 @@ FETCHCMD_wget += "-U bitbake"
- SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
-            file://stdc-predef.patch \
-           "
--SRC_URI[md5sum] = "97679319742f45d6cdcd6075511b14ac"
--SRC_URI[sha256sum] = "c41bea8fd140fb57ba67a98ec1d8ae0b8ffa82f4aba9c35a87e5a9499e653116"
-+SRC_URI[md5sum] = "22e945a0476e388e6f78bfc8d6e1192c"
-+SRC_URI[sha256sum] = "2811d70c0b000f2ca91b7cb1a37203134441743c4fcc9c37b0b687f328611064"
- 
- S = "${WORKDIR}/${BPN}-${PV}"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.20.1
+> Hi Ankit
+>
+> I provided some additional comments inline
 
+
+> On Tue, Dec 25, 2018 at 12:23 AM Ankit Navik <ankit.tarot@gmail.com>
+> wrote:
+> >
+> > Add generic recipe for wifi test suite from wifi alliance.
+> > Suite is to support certification program development and device
+> certification.
+> >
+> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > ---
+> >  ...-Use-toolchain-from-environment-variables.patch | 92
+> ++++++++++++++++++++++
+> >  ...-include-removes-unnedded-stuff-and-add-n.patch | 45 +++++++++++
+> >  .../0003-fix-path-to-usr-sbin-for-script.patch     | 35 ++++++++
+> >  .../wifi-test-suite/wifi-test-suite_git.bb         | 35 ++++++++
+> >  4 files changed, 207 insertions(+)
+> >  create mode 100644
+> meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
+> >  create mode 100644
+> meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
+> >  create mode 100644
+> meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script.patch
+> >  create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/
+> wifi-test-suite_git.bb
+> >
+> > diff --git
+> a/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
+> > new file mode 100644
+> > index 0000000..9ee4a51
+> > --- /dev/null
+> > +++
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
+> > @@ -0,0 +1,92 @@
+> > +From 6b822b36739222d0c864249992b5d28e3ff4d948 Mon Sep 17 00:00:00 2001
+> > +From: Adrian Friedli <adrian.friedli@husqvarnagroup.com>
+> > +Date: Mon, 3 Sep 2018 17:58:27 +0200
+> > +Subject: [PATCH] Use toolchain from environment variables
+> > +
+> > +Upstream-Status: Submitted [
+> https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/pull/42]
+> > +Signed-off-by: Adrian Friedli <adrian.friedli@husqvarnagroup.com>
+> > +Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > +---
+> > + Makefile.inc         | 7 ++++---
+> > + WTGService/Makefile  | 2 +-
+> > + console_src/Makefile | 2 +-
+> > + lib/Makefile         | 6 +++---
+> > + 4 files changed, 9 insertions(+), 8 deletions(-)
+> > +
+> > +diff --git a/Makefile.inc b/Makefile.inc
+> > +index b0edf5a..0094bdf 100644
+> > +--- a/Makefile.inc
+> > ++++ b/Makefile.inc
+> > +@@ -13,14 +13,15 @@
+> > + # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+> WITH THE
+> > + # USE OR PERFORMANCE OF THIS SOFTWARE.
+> > + #
+> > +-CC = gcc
+> > ++CC ?= gcc
+> > ++AR ?= ar
+> > + LIB=lib
+> > + DUT=dut
+> > + CA=ca
+> > + UCC=ucc
+> > + CON=console_src
+> > + WTG=WTGService
+> > +-MAKE=make
+> > ++MAKE?=make
+> > +
+> > + # This is for WMM-PS
+> > + #for Ext TG
+> > +@@ -46,7 +47,7 @@ CFLAGS = -g -O2 -D_REENTRANT -Wall -I../inc
+> > +
+> > + DUTLIBS = ../lib/libwfa_dut.a -lpthread
+> > + CALIBS = ../lib/libwfa_ca.a -lpthread
+> > +-RANLIB = ranlib
+> > ++RANLIB ?= ranlib
+> > +
+> > + LIBWFA_NAME_DUT = libwfa_dut.a
+> > + LIBWFA_NAME_CA = libwfa_ca.a
+> > +diff --git a/WTGService/Makefile b/WTGService/Makefile
+> > +index 5312eb6..4855771 100644
+> > +--- a/WTGService/Makefile
+> > ++++ b/WTGService/Makefile
+> > +@@ -13,7 +13,7 @@
+> > + # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+> WITH THE
+> > + # USE OR PERFORMANCE OF THIS SOFTWARE.
+> > + #
+> > +-CC=gcc
+> > ++CC?=gcc
+> > + CFLAGS= -Wall
+> > + LIB=-lpthread
+> > +
+> > +diff --git a/console_src/Makefile b/console_src/Makefile
+> > +index 8282283..d1098eb 100644
+> > +--- a/console_src/Makefile
+> > ++++ b/console_src/Makefile
+> > +@@ -14,7 +14,7 @@
+> > + # USE OR PERFORMANCE OF THIS SOFTWARE.
+> > + #
+> > +
+> > +-CC    = gcc
+> > ++CC    ?= gcc
+> > + CFLAGS        = -g -DWFA_DEBUG -pthread
+> > +
+> > + TARGETS = wfa_con
+> > +diff --git a/lib/Makefile b/lib/Makefile
+> > +index ffcef94..299b8d6 100644
+> > +--- a/lib/Makefile
+> > ++++ b/lib/Makefile
+> > +@@ -17,9 +17,9 @@
+> > + include ../Makefile.inc
+> > +
+> > + all:    ${LIB_OBJS}
+> > +-              ar crv ${LIBWFA_NAME} $?
+> > +-              ar crv ${LIBWFA_NAME_DUT} ${LIB_OBJS_DUT}
+> > +-              ar crv ${LIBWFA_NAME_CA} ${LIB_OBJS_CA}
+> > ++              $(AR) crv ${LIBWFA_NAME} $?
+> > ++              $(AR) crv ${LIBWFA_NAME_DUT} ${LIB_OBJS_DUT}
+> > ++              $(AR) crv ${LIBWFA_NAME_CA} ${LIB_OBJS_CA}
+> > +               ${RANLIB} ${LIBWFA_NAME} ${LIBWFA_NAME_DUT}
+> ${LIBWFA_NAME_CA}
+> > +
+> > + wfa_tg.o: wfa_tg.c ../inc/wfa_agt.h ../inc/wfa_types.h
+> ../inc/wfa_rsp.h ../inc/wfa_tlv.h  ../inc/wfa_tg.h
+> > +--
+> > +2.7.4
+> > +
+> > diff --git
+> a/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
+> > new file mode 100644
+> > index 0000000..43be917
+> > --- /dev/null
+> > +++
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
+> > @@ -0,0 +1,45 @@
+> > +From 451b162c903a1ef070a75dc18171620f3beef7b3 Mon Sep 17 00:00:00 2001
+> > +From: Ankit Navik <ankit.tarot@gmail.com>
+> > +Date: Tue, 25 Dec 2018 00:36:59 +0530
+> > +Subject: [PATCH 2/3] Add missing include, removes unnedded stuff and
+> add non
+> > + glib rpc
+>
+> typo here, I guess you mean glibc.
+>
+> > +
+> > +Upstream-Status: Inappropriate [embedded specific]
+> > +
+> > +Signed-off-by: Reto Schneider <code@reto-schneider.ch>
+> > +Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > +---
+> > + Makefile     | 2 +-
+> > + inc/wfa_tg.h | 3 +++
+> > + 2 files changed, 4 insertions(+), 1 deletion(-)
+> > +
+> > +diff --git a/Makefile b/Makefile
+> > +index 2c41a17..5c4ad8c 100644
+> > +--- a/Makefile
+> > ++++ b/Makefile
+> > +@@ -15,7 +15,7 @@
+> > + #
+> > + include Makefile.inc
+> > +
+> > +-DIRS= ${LIB} ${DUT} ${CA} ${TC} ${WTG} ${CON}
+> > ++DIRS= ${LIB} ${DUT} ${CA} ${TC}
+> > +
+> > + all:
+> > +       for i in ${DIRS}; do \
+> > +diff --git a/inc/wfa_tg.h b/inc/wfa_tg.h
+> > +index 799bf9f..a1804dd 100644
+> > +--- a/inc/wfa_tg.h
+> > ++++ b/inc/wfa_tg.h
+> > +@@ -24,6 +24,9 @@
+> > + #ifndef _WFA_TG_H
+> > + #define _WFA_TG_H
+> > +
+> > ++#ifndef _WINDOWS
+> > ++#include <pthread.h>
+> > ++#endif
+> > + #include <sys/time.h>
+> > +
+> > + /* maximum number of streams to support */
+> > +--
+> > +2.7.4
+> > +
+> > diff --git
+> a/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script.patch
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script.patch
+> > new file mode 100644
+> > index 0000000..23dae6a
+> > --- /dev/null
+> > +++
+> b/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script.patch
+> > @@ -0,0 +1,35 @@
+> > +From ee5ffceb8c29cb66f323158123c9103d47965184 Mon Sep 17 00:00:00 2001
+> > +From: Ankit Navik <ankit.tarot@gmail.com>
+> > +Date: Tue, 25 Dec 2018 01:12:32 +0530
+> > +Subject: [PATCH 3/3] fix path to /usr/sbin for script
+> > +
+> > +Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > +---
+> > + lib/wfa_cs.c | 4 ++--
+> > + 1 file changed, 2 insertions(+), 2 deletions(-)
+> > +
+> > +diff --git a/lib/wfa_cs.c b/lib/wfa_cs.c
+> > +index 6b1f5a2..2a18533 100644
+> > +--- a/lib/wfa_cs.c
+> > ++++ b/lib/wfa_cs.c
+> > +@@ -319,7 +319,7 @@ int wfaStaGetIpConfig(int len, BYTE *caCmdBuf, int
+> *respLen, BYTE *respBuf)
+> > +     /*
+> > +      * check a script file (the current implementation specific)
+> > +      */
+> > +-    ret = access("/usr/local/sbin/getipconfig.sh", F_OK);
+> > ++    ret = access("/usr/sbin/getipconfig.sh", F_OK);
+> > +     if(ret == -1)
+> > +     {
+> > +         ipconfigResp->status = STATUS_ERROR;
+> > +@@ -2115,7 +2115,7 @@ int wfaStaPresetParams(int len, BYTE *caCmdBuf,
+> int *respLen, BYTE *respBuf)
+> > +           st = remove("/tmp/processid.txt");
+> > +       }
+> > +
+> > +-      sprintf(cmdStr, "/usr/local/sbin/findprocess.sh %s
+> /tmp/processid.txt\n", "wpa_supplicant");
+> > ++      sprintf(cmdStr, "/usr/sbin/findprocess.sh %s
+> /tmp/processid.txt\n", "wpa_supplicant");
+> > +       st = system(cmdStr);
+> > +
+> > +       tmpfd = fopen("/tmp/processid.txt", "r+");
+> > +--
+> > +2.7.4
+> > +
+> > diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/
+> wifi-test-suite_git.bb b/meta-oe/recipes-connectivity/wifi-test-suite/
+> wifi-test-suite_git.bb
+> > new file mode 100644
+> > index 0000000..164d5d6
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/wifi-test-suite/
+> wifi-test-suite_git.bb
+> > @@ -0,0 +1,35 @@
+> > +SUMMARY  = "Wi-Fi Test Suite Linux Control Agent"
+> > +DESCRIPTION = "Wi-Fi Test Suite is a software platform originally
+> developed \
+> > +by Wi-Fi Alliance, the global non-profit industry association that
+> brings you \
+> > +Wi-Fi, to support certification program development and device
+> certification."
+> > +HOMEPAGE = "https://www.wi-fi.org/certification/wi-fi-test-suite"
+> > +LICENSE  = "ISC"
+> > +LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
+> > +SECTION = "test"
+>
+> I see above that some scripts are calling wpa_supplicant, but its not
+> in RDEPENDS
+> probably that needs to be added here via RDEPENDS_${PN}
+>
+> > +
+> > +S = "${WORKDIR}/git"
+> > +SRCREV = "f7a8d7ef7d1a831c1bb47de21fa083536ea2f3a9"
+> > +SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git
+> \
+> > +       file://0001-Use-toolchain-from-environment-variables.patch \
+> > +
+>  file://0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch \
+> > +       file://0003-fix-path-to-usr-sbin-for-script.patch \
+> > +"
+> > +
+> > +# Fix for non glib based rpc and to avoid host path QA error
+>
+> latest glibc uses tirpc too. so this comment should not call out glibc
+> host path QA could still be valid.
+>
+> > +CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+> > +
+> > +do_install () {
+> > +       install -d ${D}${libdir}
+> > +       install -m 0644 ${S}/lib/libwfa.a ${D}${libdir}
+> > +       install -m 0644 ${S}/lib/libwfa_ca.a ${D}${libdir}
+> > +       install -m 0644 ${S}/lib/libwfa_dut.a ${D}${libdir}
+> > +       install -d ${D}${sbindir}
+> > +       install -m 0755 ${S}/dut/wfa_dut ${D}${sbindir}
+> > +       install -m 0755 ${S}/ca/wfa_ca ${D}${sbindir}
+> > +       install -m 0644 ${S}/scripts/*.sh ${D}${sbindir}
+>
+> scripts should be 0755
+>
+> > +       install -m 0644 ${S}/scripts/arp_neigh_loop ${D}${sbindir}
+> > +       install -m 0644 ${S}/scripts/dev_send_frame ${D}${sbindir}
+> > +       install -m 0644 ${S}/scripts/sta_reset_parm ${D}${sbindir}
+>
+> are these config files or scripts which are executed, in case of scripts
+> then 0755 is right mode
+>
+>
+> > +}
+> > +
+> > +INSANE_SKIP_${PN} = "ldflags"
+>
+> why do we need this ?
+>
+There was an error " No GNU_HASH in the ELF binary" and  "didn't pass
+LDFLAGS? [ldflags]"
+
+Regards, Ankit
+
+>
+> > --
+> > 2.7.4
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
