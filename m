@@ -1,54 +1,54 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
 	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CFB46C16F
+	by mail.openembedded.org (Postfix) with ESMTP id 7CCA86C16F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2018 02:29:41 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id w4so8189263plz.1
+	Thu, 27 Dec 2018 02:29:42 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id u18so8167766plq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Dec 2018 18:29:43 -0800 (PST)
+	Wed, 26 Dec 2018 18:29:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=j6ABKu75pDGL6tMw7E6lAQwlPtgXnfWlMgAMAYG3uUA=;
-	b=lWxqL1REiHxKBc9RVdM7iNXqIDpF90h7aL7f6i6YTJ9zTk0AQSqVmTa17TfZHYys3x
-	Ey36WbqXKK1IiBsZZxdcDaHx2X1G1bDhOE4uBB2slXJ6GsnX0iEpA9Whrlb17vhoF/xg
-	D8HiBWus3h1jci6Sd/dHq/bP1ZOm0Yx7nscw38JsEktQSsmBuglvwZMt1t4YkcxKAnNb
-	u3tpEBr1z3qCFMb37mQtyh60uwS+GgOkEnyIcDZuR3F46ZFGoRzlfHAjZnuDiMC9qyX/
-	FSbm5uFewsa+7HhN2a/7yLvOP6VsTDLsVqAUzvxcIuGgSpZFm/wQtkOGPARjTnV6QM0f
-	9ZsA==
+	bh=b1JIDjfbTh6o1gMGAyy0ircxhDFOSpUNdQCTlJ8aSXY=;
+	b=G1fCMtXd0+5T8O9vO3JciBZnXclLrvQt8WFfkz5nAEj5mfu/xEoBxekzKeGcB2xWUF
+	q19BRZ12BJ5SyfuYzjaKeku56uAtuaZvsW993NcY8ZhBq0xVrkzXueujwZaRrsPUSNae
+	Cq/N5mU50eev7QXoT/90rao7b802UtTfedwHDaKTby+ZbsQ09U+1pyEzUSVQsBqEXuQC
+	OtkL5WPIff52Izz0/3FRrw5weFTMN1IzqBVi3Ikc8yHHTjPVSXKVoreJWeDydAa71eB4
+	uW3JJV16mKR1DfG2DFRGbOD97klZvUGettsBUS7/FKj27RiBfQgt6hWKE5x4Tf4JJOMc
+	HhHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=j6ABKu75pDGL6tMw7E6lAQwlPtgXnfWlMgAMAYG3uUA=;
-	b=nsDxDFER8SkXJ8+slz1/B49Qwb7uOmgyKbvju/qfUC0sv2552HmVc7TgQn5c4W+VxS
-	U9mm731ETh0onUhG+wkalEK3KI2tl8i3eh/cde9VtVevRSVarqc4tAmzqp2Zl5jhJ9jc
-	Ujk1BCUqgg6Cfps50qCDKl+o31MDOA+j7VSk7lV+/e6rtnfFH6Mo5yhqz5LVD3UIQKLy
-	XT198SPgtLJD3RT7nTpNak+u+1dCa9Ofc/+uZ4WkvGVx6p7GyoknYLp0iup+9bSzs8Iv
-	g1NuK7+i6Pe1M6KBTLPn4gWE4XSWc68Vjx6Edzv/+li9i4azNqW189A3D27qzmbCndRH
-	PIIw==
-X-Gm-Message-State: AJcUukeSCvmbCZ6k2ujFEu8GzXTRl+kXprEAxyG99ebkD7X82nrJ3S5y
-	8WwISI/o4tL50bqS8Qjf/ZDaguRL/XQ=
-X-Google-Smtp-Source: ALg8bN7yzOQasMaIUyoJnSBiyolOJydmQOtbrAppiZ55ukirogdk7Ts0RGgOE49+oSwNjCbzXW2lvA==
-X-Received: by 2002:a17:902:5982:: with SMTP id
-	p2mr21830809pli.39.1545877782488; 
-	Wed, 26 Dec 2018 18:29:42 -0800 (PST)
+	bh=b1JIDjfbTh6o1gMGAyy0ircxhDFOSpUNdQCTlJ8aSXY=;
+	b=tyiJ8JS7TxGBNyipGMU6ZoxJKiC3i8JmeRFekU7+jUVWACule+XtSe2qvd6Aj621+K
+	oa4/o8159E/O/eHxzlAK8MeYsViyyenFcEJWvGPD58uePxTVtdmtbcbSIEKzXVs5BOlQ
+	I+5QK0wkUhfLvzBf0hryKGlDnZCVA+KdRUifruvn2yF8X1yU9nko2+pueWoW1umkiXY/
+	lb0UJbLgFCO7h/KWy6cxH4dAo4IJxR21JSN7ux/Ggtf+pXZFWk7GPZ51ON7Fb/yWBqyr
+	tTwWSmaSEA+aOXxGy8cRQ6WAGdHg9K8VyKa6QXdvKh2YDlnv0h1ahdln1QFMakVokzIN
+	3scA==
+X-Gm-Message-State: AJcUukctSog7r9i6C7R6Ng2367m4Jp8209qGQRX600DQMT2Tt/qg7f3Y
+	NiBl6lxzHRaqbOmb0nNQKWul96ebPGo=
+X-Google-Smtp-Source: ALg8bN7495DHIA03FnZdmwS1/Z7jC9Fo/+Ye0P1nxrtGvpGF2SV+Tts6IJBM0bJpLS49O/gLN6FmIg==
+X-Received: by 2002:a17:902:7791:: with SMTP id
+	o17mr21697157pll.60.1545877783420; 
+	Wed, 26 Dec 2018 18:29:43 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net
 	([2601:646:877f:9499:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	p2sm50666072pfp.125.2018.12.26.18.29.41
+	p2sm50666072pfp.125.2018.12.26.18.29.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Dec 2018 18:29:41 -0800 (PST)
+	Wed, 26 Dec 2018 18:29:42 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Dec 2018 18:29:24 -0800
-Message-Id: <20181227022925.5920-3-raj.khem@gmail.com>
+Date: Wed, 26 Dec 2018 18:29:25 -0800
+Message-Id: <20181227022925.5920-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20181227022925.5920-1-raj.khem@gmail.com>
 References: <20181227022925.5920-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/4] packagegroup-meta-oe: Remove unbuildable packages on risc-v from rdep
+Subject: [PATCH 4/4] libedit: Upgrade to 20181209
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,60 +64,33 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 27 Dec 2018 02:29:42 -0000
 Content-Transfer-Encoding: 8bit
 
+Add native and nativesdk incarnations as well since clang needs it
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-oe.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ .../{libedit_20180525-3.1.bb => libedit_20181209-3.1.bb}    | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/libedit/{libedit_20180525-3.1.bb => libedit_20181209-3.1.bb} (76%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index eb461297d5..62f1c77591 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -56,6 +56,8 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
- RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mipsarch = "libhugetlbfs"
- RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64 = "tinymembench"
- RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64el = "tinymembench"
-+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_riscv64 = "libhugetlbfs"
-+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_riscv32 = "libhugetlbfs"
+diff --git a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb b/meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
+similarity index 76%
+rename from meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+rename to meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
+index 8cc0e959e0..c0a3d21360 100644
+--- a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
++++ b/meta-oe/recipes-devtools/libedit/libedit_20181209-3.1.bb
+@@ -15,7 +15,9 @@ FETCHCMD_wget += "-U bitbake"
+ SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
+            file://stdc-predef.patch \
+           "
+-SRC_URI[md5sum] = "97679319742f45d6cdcd6075511b14ac"
+-SRC_URI[sha256sum] = "c41bea8fd140fb57ba67a98ec1d8ae0b8ffa82f4aba9c35a87e5a9499e653116"
++SRC_URI[md5sum] = "22e945a0476e388e6f78bfc8d6e1192c"
++SRC_URI[sha256sum] = "2811d70c0b000f2ca91b7cb1a37203134441743c4fcc9c37b0b687f328611064"
  
- RDEPENDS_packagegroup-meta-oe-connectivity ="\
-     gammu hostapd irssi krb5 libev libimobiledevice \
-@@ -90,6 +92,8 @@ RDEPENDS_packagegroup-meta-oe-bsp ="\
-     "
- RDEPENDS_packagegroup-meta-oe-bsp_remove_mipsarch = "efivar efibootmgr"
- RDEPENDS_packagegroup-meta-oe-bsp_remove_powerpc = "efivar efibootmgr"
-+RDEPENDS_packagegroup-meta-oe-bsp_remove_riscv64 = "efivar efibootmgr"
-+RDEPENDS_packagegroup-meta-oe-bsp_remove_riscv32 = "efivar efibootmgr"
- 
- RDEPENDS_packagegroup-meta-oe-dbs ="\
-     leveldb libdbi mariadb mariadb-native \
-@@ -119,6 +123,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "uftrace lshw"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64 = "nodejs"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "nodejs"
- RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad uftrace lshw"
-+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "uftrace lshw"
-+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "uftrace lshw"
- 
- RDEPENDS_packagegroup-meta-oe-extended ="\
-     byacc cfengine cfengine-masterfiles cmpi-bindings \
-@@ -146,6 +152,8 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-     "
- RDEPENDS_packagegroup-meta-oe-extended_remove_mipsarch = "upm mraa tiptop"
- RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc = "upm mraa"
-+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm mraa tiptop"
-+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm mraa tiptop"
- RDEPENDS_packagegroup-meta-oe-extended_remove_libc-musl = "lcdproc"
- 
- RDEPENDS_packagegroup-meta-oe-gnome ="\
-@@ -260,6 +268,8 @@ RDEPENDS_packagegroup-meta-oe-test_remove_libc-musl = "pm-qa"
- RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
- RDEPENDS_packagegroup-meta-oe-test_remove_mipsarch = "fwts"
- RDEPENDS_packagegroup-meta-oe-test_remove_powerpc = "fwts"
-+RDEPENDS_packagegroup-meta-oe-test_remove_riscv64 = "fwts"
-+RDEPENDS_packagegroup-meta-oe-test_remove_riscv32 = "fwts"
- 
- RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
-     zeromq-ptest \
+ S = "${WORKDIR}/${BPN}-${PV}"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.20.1
 
