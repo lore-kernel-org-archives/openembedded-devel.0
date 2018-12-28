@@ -1,55 +1,60 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
-	[209.85.221.44])
-	by mail.openembedded.org (Postfix) with ESMTP id B4E3A6C4E2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BD748601F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2018 15:17:26 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id z5so21174861wrt.11
+	Fri, 28 Dec 2018 17:13:28 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id g189so10286899pgc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2018 07:17:28 -0800 (PST)
+	Fri, 28 Dec 2018 09:13:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=vbzs3uyjVUDqe+RvdxrzXTn0o4qUd5G8XzrHmx1+jGo=;
-	b=Gcj6cFXpeUaHrfsoxi1MXTmRkVCnWdgvEduqP0wvY6p/TQXUhS55/6Y+cAjFSQV1TO
-	7l1RA1YDhaqw/Y3+pcpS/WL8/ihnNPDuFrQ8dS990l1mOujxF5EMvomX99R8HM6p3+Ox
-	6QgIQZ/YTiOzVd0vBklK7XOtkdEIrKBjoHEEAkBrBg/PztmtIjPRBrlUlg+P9v+Y7M2T
-	aijfN1VRFqgl/LkeBuTFYRiT2tMiDeTvUPQGSSo3XYhV3BJFEG4IDQqSrCPkWCE+xgNy
-	2oWFO8I//sqwZ140OxC68+5aIPthQ+P7MdKkjZJ1kCSSsQWvbioKg/yG7cLrp0ULu+CP
-	3QyA==
+	bh=x9JTuH+F/VW3mYAikb6BVGhpU8lptTG3baq3XEpqSSE=;
+	b=WwyNP4qOtXr2tjc6Bj2rG+VHm2RiqXDurZJ6aPHE2qs49urxSDs6LkKMJjI9g+2nEo
+	UjY2RuioXog9GuAW8TcZ5v1yFc7nOs2d4zA4OQWnD2E/qmLtJKhSus3LzoLVJiqQSOOe
+	Bwvp9Q7E5WB9T1g/bwGdoyRBnj5aOAOW1srORb6QRsGb0/qCAgeJJGdVYYDdut5eQazB
+	KWwrItzsX7TvWyoe2ZsnCF4Ho5KF16z+L53Ojqmc/kufMUbMxtGkFYuUoE31mjJ1CZPt
+	cecmndpEHRrNVTlEgFfxhEF6FqZuUTc0E+XbhSx+DEMzTEFKUq2XzOpLUQrvWcN6wcny
+	aWVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=vbzs3uyjVUDqe+RvdxrzXTn0o4qUd5G8XzrHmx1+jGo=;
-	b=ATx9mIhxh/Qe+oRRRSKOaXwAXi2AjsyqLnCvu+clBSZ/hfp1U74kGWYfLowfZ3WfFH
-	dfJTEoauIf6v14eVFPvrLQ6jotFNf4/WoWp8K3TwrcO+Q8fO+kbFyKp7mt61iKPdFCbu
-	Yjg2zKqIhM/Dain7XbJ1uIk1PmdgMhfeG66IKMDJMTZ/GYVRAU3aIEO3b7zKKoG5+774
-	OG5zAi626xZY2q7GuOy3HTR4vfv4hP2QnOgTUTuIVVHJIfx1MGGxapNxYyr0D3aKQnPn
-	dqMbkdKkbjA2c/7miJ4uRhlSfxtlEJaSATEz6lBNyi/g12Bv5a2malgJWk9S6j8gH9iL
-	6Yfg==
-X-Gm-Message-State: AJcUukeEtMUXcJjIRI8+GycTi2KIAwehsElqggJxnT8I3mDyAKibAIjv
-	+2hNdkYIxfXVuAXN3OoIpcvEWPGf
-X-Google-Smtp-Source: ALg8bN79rMKbtjHhHhIZaWGkiohX4BWf6TN5cAHoKQVTfloTxbzSZfgQGLVg3xRZWtnzpOKEgZEcOg==
-X-Received: by 2002:adf:eec9:: with SMTP id a9mr24897602wrp.242.1546010247003; 
-	Fri, 28 Dec 2018 07:17:27 -0800 (PST)
-Received: from localhost.localdomain
-	(p200300F07BC09E931E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc0:9e93:1e6f:65ff:fe3e:7f61])
+	h=x-gm-message-state:subject:to:cc:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=x9JTuH+F/VW3mYAikb6BVGhpU8lptTG3baq3XEpqSSE=;
+	b=mxECu97ciRydaExLlHaqC9yfRBCmZ+eVyzsJvGTo36QLrpxmJPpUYeFyiapM99dMw9
+	SiqnK2k0zQUFOs/7BIbyqVFKWVXVGPN2z8bQY3VSmgBBrYuoxU18ylnSs5rX5on4r/om
+	DI1Duf9tfNAFlY6CajUP3XUMHl9WvZl/YBRSOpy8kz+885EN6yh/Izq74cQT9zlacf+w
+	6I+cTxnzyE7bgu1hnSK4HFfaBbLvIYOmzxTUHByi3WRq7eZtt6vE9EASc+kyg+QIlScZ
+	PDIiJV1d7CAUWXHXrGUZbVxydIRo6jx87QcNnYgygisOs5d99RKECUd5MJ+e9ZLLLkkl
+	vDpw==
+X-Gm-Message-State: AA+aEWYvfKuijRY0WIw2umMvJNTcYOAURw933an8shuZVTqHpLx++3Y9
+	0cYjKHIZORYy3166ZdhcZI9MpfKTtRk=
+X-Google-Smtp-Source: AFSGD/UXe/sZTbw/G1EuClzNn/O5utZ4cvhOH+okr3N5k2K/wIogMMlE649JK8QUFv3vvQKCVtQyEA==
+X-Received: by 2002:a62:2082:: with SMTP id m2mr28276431pfj.163.1546017209333; 
+	Fri, 28 Dec 2018 09:13:29 -0800 (PST)
+Received: from hermes.local ([2601:646:877f:9499:3c66:e24:63f5:7a43])
 	by smtp.gmail.com with ESMTPSA id
-	v1sm39228834wrw.90.2018.12.28.07.17.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 28 Dec 2018 07:17:25 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Dec 2018 16:17:13 +0100
-Message-Id: <20181228151713.19266-5-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20181228151713.19266-1-schnitzeltony@gmail.com>
-References: <20181228151713.19266-1-schnitzeltony@gmail.com>
+	z9sm122228681pfd.99.2018.12.28.09.13.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 28 Dec 2018 09:13:28 -0800 (PST)
+To: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
+	<athoik@gmail.com>
+References: <1545978520-30261-1-git-send-email-athoik@gmail.com>
+	<CAMKF1spWKvTezgKLyEs6m=tY_GcXA6fz_E-LN6fvQCZc0evtOg@mail.gmail.com>
+	<CANDbA3fwBSiK6zL-+-OH3BNJE0bvD1cWt+HqdmGSofW6-OWbtw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <1ceb5a5d-cbd0-3b43-8115-a7502e0e7729@gmail.com>
+Date: Fri, 28 Dec 2018 09:13:27 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:64.0)
+	Gecko/20100101 Thunderbird/64.0
 MIME-Version: 1.0
-Subject: [thud][PATCH 4/4] openjpeg: fix build for multilib
+In-Reply-To: <CANDbA3fwBSiK6zL-+-OH3BNJE0bvD1cWt+HqdmGSofW6-OWbtw@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH] faac: update 1.29 -> 1.29.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,48 +67,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2018 15:17:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Dec 2018 17:13:28 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-| ERROR: openjpeg-2.3.0-r0 do_package: QA Issue: openjpeg: Files/directories were installed but not shipped in any package:
-|   /usr/lib/libopenjp2.a
-|   /usr/lib/libopenjp2.so
-|   /usr/lib/libopenjp2.so.2.3.0
-|   /usr/lib/libopenjp2.so.7
-|   /usr/lib/cmake
-|   /usr/lib/pkgconfig
-|   /usr/lib/cmake/openjpeg-2.3
-|   /usr/lib/cmake/openjpeg-2.3/OpenJPEGConfig.cmake
-|   /usr/lib/cmake/openjpeg-2.3/OpenJPEGTargets.cmake
-|   /usr/lib/cmake/openjpeg-2.3/OpenJPEGTargets-noconfig.cmake
-|   /usr/lib/pkgconfig/libopenjp2.pc
 
-* Addresses [1]
-* Build tested with poppler in multilib and non-multilib environment
 
-(From master: a96e6d71)
+On 12/28/18 5:24 AM, Αθανάσιος Οικονόμου wrote:
+> Στις Παρ, 28 Δεκ 2018 στις 8:51 π.μ., ο/η Khem Raj <raj.khem@gmail.com> έγραψε:
+>>
+>> On Thu, Dec 27, 2018 at 10:32 PM Athanasios Oikonomou <athoik@gmail.com> wrote:
+>>>
+>>> Remove not required patch and extra EXTRA_OECONF "--without-mp4v2".
+>>
+>> have you build tested this patch on a musl platform ?
+>> if not please try one and report back.
+>>
+> 
+> bitbake faac was tested using TCLIBC = "musl"
+> (39e933936e11e186f21dacf4bccedddaa0a122df)
+> for machines qemuarm and qemuarm64. Build was successful.
+> 
+> Please let me know if above test case is enough or further actions required.
+> 
 
-[1] https://github.com/openembedded/meta-openembedded/issues/103
+Thanks for confirming.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+>>> Previously not required mp4v2 library was dropped on 1.29.9.2.
+>>>
+>>> While being there also fix issue with multilib build on aarch64
+>>> using FILES_lib${BPN} instead of FILES_lib${PN}.
+>>>
+>>> WARNING: lib32-faac-1.29.9.2-r0 do_package: QA Issue: lib32-faac: Files/directories were installed but not shipped in any package:
+>>>    /usr/lib/libfaac.so.0
+>>>    /usr/lib/libfaac.so.0.0.0
+>>> Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+>>> lib32-faac: 2 installed and not shipped files. [installed-vs-shipped]
+>>>
+>>> Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+>>> ---
+>>>   .../faac/{faac_1.29.bb => faac_1.29.9.2.bb}        | 14 ++++-------
+>>>   ...Define-__STRING-if-cdefs.h-does-not-exist.patch | 28 ----------------------
+>>>   2 files changed, 4 insertions(+), 38 deletions(-)
+>>>   rename meta-multimedia/recipes-multimedia/faac/{faac_1.29.bb => faac_1.29.9.2.bb} (56%)
+>>>   delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+>>>
+>>> diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+>>> similarity index 56%
+>>> rename from meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+>>> rename to meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+>>> index d36f2f4..4fc1121 100644
+>>> --- a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+>>> +++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+>>> @@ -1,29 +1,23 @@
+>>>   SUMMARY = "Freeware Advanced Audio Coder (MPEG2-AAC, MPEG4-AAC)"
+>>>   SECTION = "libs"
+>>>   LICENSE = "LGPLv2+"
+>>> -HOMEPAGE = "http://www.audiocoding.com/faac.html"
+>>>   LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+>>>                       file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
+>>>
+>>> -LICENSE_FLAGS = "commercial"
+>>> -
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-index c50d55e4b..d30ff4825 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-@@ -14,3 +14,6 @@ SRCREV = "081de4b15f54cb4482035b7bf5e3fb443e4bc84b"
- S = "${WORKDIR}/git"
- 
- inherit cmake
-+
-+# for multilib
-+EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_LIB_DIR=${@d.getVar('baselib').replace('/', '')}"
--- 
-2.20.1
+why is this dropped. May be document it in commit message
 
 
