@@ -1,48 +1,48 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 294386B5B4
+Return-Path: <athoik@gmail.com>
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+	[209.85.208.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B02EF6C45D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2018 03:54:44 +0000 (UTC)
-Received: by mail-pf1-f182.google.com with SMTP id c73so9916594pfe.13
+	Fri, 28 Dec 2018 06:31:57 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id g22so16787420edr.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2018 19:54:45 -0800 (PST)
+	Thu, 27 Dec 2018 22:31:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=5x0xjoKgLY1Ep3qFtephqNaLQGfZ0GGDoqmqSbB4A7w=;
-	b=iM3QnhaFRiBz0ttiZA1OLXnLDdrbAFcS0KYER32KgUkMezGm63XWDhRwMzR2ju3a1l
-	zsiBcFaP5kxeRs7IrWrTWYSdR4FQEEMlJSZFtBKMXFMOob5p8Q81opBZP+r/wth4FHii
-	j8Mvy7TyOhIlJsmRiRq5GXf2cnx6aZqyyarwzovRZNn22maJ/ZN6gq9bBuLj3yN6go9O
-	BRvF5w5xTbbqFDSj7qbtZz0TF56oOpdKGPO/HfgNApMB00nMQbLQyrkT8PMHhiPZvJBa
-	HqyMYGNo6Zlouu0b6yABPXj+xk3pA4D3mZ5JPZUbU0OthZw2V3peNHvmXtqEUr+12eAM
-	GHhA==
+	h=from:to:cc:subject:date:message-id;
+	bh=kJBteG1QSdApu1r+hQ12yEIme5iKP6DpM2ydgCeYQQc=;
+	b=Aa8c7JsMDxU4DSsthEP8YeoAqHRUiX2DHPxDPel7k24pxpW2kbeVY0O4qs73QendSn
+	l4gQ0g13sexeYXEnAUxQ6be5+6H8B/28415pwvA+Hxf58oigLHXIFTpL4zfHFKxnTWaT
+	xli/r+Zlz9KmpWmmFreTpWYXqGzrDcsD8vC6zCceHrpbG3WfhHyGV4kM+K19oMHleocj
+	H1OelvY6NErTUOQQPrNtryrWZBzaPWfsLU0ZbO0g7BpZfxk8fYOltz9KU2i9HmJrZbOr
+	A5gyQi7MfV1f+4Ar9rxTX3Ye7Md5y6K9g1ZnAXinHRedHjA/c0QZ7nL/eTdL6DC7Cnif
+	2qhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=5x0xjoKgLY1Ep3qFtephqNaLQGfZ0GGDoqmqSbB4A7w=;
-	b=BG1txt/Ih4VHUfaHzsABNoIABqnV3HDq8xKihnXdKt7wjNAkOauvDf829A8bUhTr8J
-	YpPG7eJU0mQ8214qaleTlbaMSbxXnrejrw1uBFrWTr2UUSHvUET9KZX82/GBBbA1FdFG
-	rlioOf8+6wvMzuajN0BvnnyExuxv/K8kfOLUZCCB9dz0j5iJ3Ql4Lge6Hq2JM1jnQKMr
-	V9BEUqo+QxOrCons3h4sbap0XfiLAOJ3DVXCUTS/qUYCnQOJX1yLPpI41ZpSfDDS1CtK
-	5bh58TlIPkNVeNXhrcPIHZ7h5oQSJcLhKp6p2eNpKY4TiaT0IF5L6UQyYIYQ5cBmyuJZ
-	xKUg==
-X-Gm-Message-State: AA+aEWbKjpsG+HBMqb9CnCh+WS+trt7QbdnhNBvX+Lhu4kTfd0QfioQH
-	yD8Xo2clm83ws200d6noqaNEpv31DJZBQA==
-X-Google-Smtp-Source: AFSGD/VtGVgQzds5jb5m/jt9oDkR/5dkMYLxWe7paK9d5R/gBSLqyjQVHz5CjyHoanPkzadttDlOIg==
-X-Received: by 2002:a62:7e13:: with SMTP id z19mr26609353pfc.94.1545969284937; 
-	Thu, 27 Dec 2018 19:54:44 -0800 (PST)
-Received: from apnavik-DESK.iind.intel.com ([192.55.54.40])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=kJBteG1QSdApu1r+hQ12yEIme5iKP6DpM2ydgCeYQQc=;
+	b=hbBvqrOwXfYTgvHS/0miK+P+7PRPTk4o1YMNDeR/TBUEgHOB95pD9vBC1bHyDpWirA
+	8a+pSG4EdvPbdtt9WUBhngdyv4oLa8uB8Hl/m2ryHNGtoqFvsUu3+RaKF58/JjLBMhwk
+	toSXrjWZx/LHXXWnh34ebL4F4Ax94QNUvPYS64tc2LwecekEZNtvn+p0BvwvS+DzlmOv
+	CHVFU+Rm0GY7aH6NcZWrj0+2hyd6MF1R8Iq+Zv5Xk5Ty2C1E0Rr3A45/croIvCkAmS+B
+	d/qVlz/kaVERbfIfYsMxu02v1/oo5Py6xaOpqN751qmrFhgtT+pYl3YZ/DIoCr71KAUV
+	Suqg==
+X-Gm-Message-State: AA+aEWbX6VyZzvPCNHK2K4dE7biweXUX+Eq/d5l6xVLAvYieiz4ErQVG
+	EKRudmxBM4C+DH1SHq+++T//4wmPKOQW
+X-Google-Smtp-Source: AFSGD/Wgcr4+oodlAZT81JEfqIEMJD2D5A1Yl/WONS92Lfno3Nsg3LmoSllXUIPIm8Wg7Oh0NrpGVg==
+X-Received: by 2002:aa7:d35a:: with SMTP id m26mr20422355edr.244.1545978717852;
+	Thu, 27 Dec 2018 22:31:57 -0800 (PST)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
 	by smtp.gmail.com with ESMTPSA id
-	w185sm58371544pfb.135.2018.12.27.19.54.42
-	for <openembedded-devel@lists.openembedded.org>
+	v14sm11836703edq.74.2018.12.27.22.31.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Dec 2018 19:54:43 -0800 (PST)
-From: Ankit Navik <ankit.tarot@gmail.com>
+	Thu, 27 Dec 2018 22:31:57 -0800 (PST)
+From: Athanasios Oikonomou <athoik@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Dec 2018 09:26:23 +0530
-Message-Id: <1545969383-31548-1-git-send-email-ankit.tarot@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH v2] spirv-tools: Initial recipe for spirv tools
+Date: Fri, 28 Dec 2018 08:28:40 +0200
+Message-Id: <1545978520-30261-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-multimedia][PATCH] faac: update 1.29 -> 1.29.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,87 +55,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2018 03:54:45 -0000
+X-List-Received-Date: Fri, 28 Dec 2018 06:31:58 -0000
 
-Add generic recipe for spirv tools.
+Remove not required patch and extra EXTRA_OECONF "--without-mp4v2".
+Previously not required mp4v2 library was dropped on 1.29.9.2.
 
-Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+While being there also fix issue with multilib build on aarch64
+using FILES_lib${BPN} instead of FILES_lib${PN}.
+
+WARNING: lib32-faac-1.29.9.2-r0 do_package: QA Issue: lib32-faac: Files/directories were installed but not shipped in any package:
+  /usr/lib/libfaac.so.0
+  /usr/lib/libfaac.so.0.0.0
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+lib32-faac: 2 installed and not shipped files. [installed-vs-shipped]
+
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
 ---
- .../0001-tools-lesspipe-Allow-generic-shell.patch  | 24 ++++++++++++++++
- meta-oe/recipes-graphics/spir/spirv-tools_git.bb   | 32 ++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
- create mode 100644 meta-oe/recipes-graphics/spir/spirv-tools_git.bb
+ .../faac/{faac_1.29.bb => faac_1.29.9.2.bb}        | 14 ++++-------
+ ...Define-__STRING-if-cdefs.h-does-not-exist.patch | 28 ----------------------
+ 2 files changed, 4 insertions(+), 38 deletions(-)
+ rename meta-multimedia/recipes-multimedia/faac/{faac_1.29.bb => faac_1.29.9.2.bb} (56%)
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
 
-diff --git a/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch b/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
-new file mode 100644
-index 0000000..e9a45c2
---- /dev/null
-+++ b/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
-@@ -0,0 +1,24 @@
-+From 03127fd5a6eff5ae2ebea2e9c6c01fbf1a0a421a Mon Sep 17 00:00:00 2001
-+From: Ankit Navik <ankit.tarot@gmail.com>
-+Date: Tue, 25 Dec 2018 14:34:09 +0530
-+Subject: [PATCH] tools/lesspipe: Allow generic shell
-+
-+Upstream-Status: Submitted [https://github.com/KhronosGroup/SPIRV-Tools/pull/2255]
-+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-+---
-+ tools/lesspipe/spirv-lesspipe.sh | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/tools/lesspipe/spirv-lesspipe.sh b/tools/lesspipe/spirv-lesspipe.sh
-+index 81e3355..f955259 100644
-+--- a/tools/lesspipe/spirv-lesspipe.sh
-++++ b/tools/lesspipe/spirv-lesspipe.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/usr/bin/env sh
-+ # Copyright (c) 2016 The Khronos Group Inc.
-+ 
-+ # Licensed under the Apache License, Version 2.0 (the "License");
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
-new file mode 100644
-index 0000000..aae11df
---- /dev/null
-+++ b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
-@@ -0,0 +1,32 @@
-+SUMMARY  = "The SPIR-V Tools project provides an API and commands for \
-+processing SPIR-V modules"
-+DESCRIPTION = "The project includes an assembler, binary module parser, \
-+disassembler, validator, and optimizer for SPIR-V."
-+LICENSE  = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+SECTION = "graphics"
-+
-+S = "${WORKDIR}/git"
-+DEST_DIR = "${S}/external" 
-+SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
-+	file://0001-tools-lesspipe-Allow-generic-shell.patch \
-+	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
-+	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
-+	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
-+	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
-+"
-+SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
-+SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
-+SRCREV_effcee = "8f0a61dc95e0df18c18e0ac56d83b3fa9d2fe90b"
-+SRCREV_re2 = "2cf86e5ab6dcfe045a1f510c2b9a8b012a4158cd"
-+SRCREV_googletest = "150613166524c474a8a97df4c01d46b72050c495"
-+
-+inherit cmake python3native
-+
-+do_install_append() {
-+	install -d ${D}/${includedir}/spirv
-+	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
-+}
-+
-+FILES_SOLIBSDEV = ""
-+FILES_${PN} += "${libdir}/*.so"
+diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+similarity index 56%
+rename from meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+rename to meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+index d36f2f4..4fc1121 100644
+--- a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
++++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+@@ -1,29 +1,23 @@
+ SUMMARY = "Freeware Advanced Audio Coder (MPEG2-AAC, MPEG4-AAC)"
+ SECTION = "libs"
+ LICENSE = "LGPLv2+"
+-HOMEPAGE = "http://www.audiocoding.com/faac.html"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+                     file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
+ 
+-LICENSE_FLAGS = "commercial"
+-
+ inherit autotools
+ 
+ SRC_URI = " \
+     ${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
+-    file://0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch \
+ "
+ 
+-SRC_URI[md5sum] = "78603720f655180059d6970c582a3005"
+-SRC_URI[sha256sum] = "8cc7b03ceb2722223a6457e95d4c994731d80214a03ba33d1af76ba53f4b3197"
+-
+-EXTRA_OECONF += "--without-mp4v2"
++SRC_URI[md5sum] = "2b58d621fad8fda879f07b7cad8bfe10"
++SRC_URI[sha256sum] = "d45f209d837c49dae6deebcdd87b8cc3b04ea290880358faecf5e7737740c771"
+ 
+ PACKAGES =+ "lib${BPN} lib${BPN}-dev"
+ 
+ FILES_${PN} = " ${bindir}/faac "
+-FILES_lib${PN} = " ${libdir}/*.so.*"
+-FILES_lib${PN}-dev = " \
++FILES_lib${BPN} = " ${libdir}/*.so.*"
++FILES_lib${BPN}-dev = " \
+     ${includedir} \
+     ${libdir}/*.so \
+     ${libdir}/*.la \
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch b/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+deleted file mode 100644
+index d845ddf..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 46cc9298c38b9dd735fec3f39aa2d6e56a362410 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 28 Mar 2017 21:33:36 -0700
+-Subject: [PATCH 2/2] mp4v2: Define __STRING if cdefs.h does not exist
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- common/mp4v2/mp4util.h | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/common/mp4v2/mp4util.h b/common/mp4v2/mp4util.h
+-index 1f9cb64..1e7aced 100644
+---- a/common/mp4v2/mp4util.h
+-+++ b/common/mp4v2/mp4util.h
+-@@ -23,6 +23,10 @@
+- #define __MP4_UTIL_INCLUDED__
+- #include <assert.h>
+- 
+-+#ifndef __STRING
+-+#define __STRING(x)     #x
+-+#endif
+-+
+- #ifndef ASSERT
+- #define ASSERT(expr) \
+- 	if (!(expr)) { \
+--- 
+-2.12.1
+-
 -- 
-2.7.4
+2.1.4
 
 
