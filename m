@@ -1,48 +1,48 @@
 Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B20A6B5AA
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+	[209.85.210.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 294386B5B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2018 08:31:17 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id s198so8553620pgs.2
+	Fri, 28 Dec 2018 03:54:44 +0000 (UTC)
+Received: by mail-pf1-f182.google.com with SMTP id c73so9916594pfe.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Dec 2018 00:31:18 -0800 (PST)
+	Thu, 27 Dec 2018 19:54:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id;
-	bh=PMjpHT7Qf1WiV76lxBPWuFcHpe6I5+feVtpmqTqiEoI=;
-	b=in5PpA+p743IlPBjlIMTd7CLuvLskgNDDnPnYj1evDukZL/YSPtTsK1q431O77BlIf
-	d+l0Hc6vHZkKLqbE8DCBvMMUNRoVO1BQxqZg6cNp9IwLS8oN1E81hoK1rberrKPZN8NL
-	LMZNziyaeIml8H/0aI4yF8cHvn5VuP1OoulELJctY4dpUh++nFQJANGZZiYsGnhIOAte
-	ciacVPAOnJYTYeZAX2r9ydZwr6fhlPpil7Nizg0VIdbJmppVka4GPgCRvHJgUVNlucyg
-	yv7QzLAyWxRStMeKMOlKa8FRXz8gnSpfKL3lG+FKvsGUAzoUhH5ZxuDW82MD1NVAFW+D
-	kfjg==
+	bh=5x0xjoKgLY1Ep3qFtephqNaLQGfZ0GGDoqmqSbB4A7w=;
+	b=iM3QnhaFRiBz0ttiZA1OLXnLDdrbAFcS0KYER32KgUkMezGm63XWDhRwMzR2ju3a1l
+	zsiBcFaP5kxeRs7IrWrTWYSdR4FQEEMlJSZFtBKMXFMOob5p8Q81opBZP+r/wth4FHii
+	j8Mvy7TyOhIlJsmRiRq5GXf2cnx6aZqyyarwzovRZNn22maJ/ZN6gq9bBuLj3yN6go9O
+	BRvF5w5xTbbqFDSj7qbtZz0TF56oOpdKGPO/HfgNApMB00nMQbLQyrkT8PMHhiPZvJBa
+	HqyMYGNo6Zlouu0b6yABPXj+xk3pA4D3mZ5JPZUbU0OthZw2V3peNHvmXtqEUr+12eAM
+	GHhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=PMjpHT7Qf1WiV76lxBPWuFcHpe6I5+feVtpmqTqiEoI=;
-	b=msrjbTmmQ2da+ZdIxLnJ0jz2SeBgj3MVJ6mf/LybNIvfeOGDCSodEigVfa9R1+Ydf3
-	obgpHMngkJMSKgfCRaShmIGontbeTgSUUncwLQKOjo8PQyGCSzDbbzCin7ZuYSgFABFp
-	9nKGMnD5VPQbEQRuLI0tdXCIhG7lIymn49DOLUO0znKlS5YkiHt9Db/Y+nB49mEdEzW7
-	1a/P97xAetg/kgPzaP+gLgSQf17/MtD50IOyCxgvEv/v+Xtdz72Mj6hFQKhci2DWDUCL
-	oQt1B7Ph2141Y5pR5pRStvNL/vwWYHSZ2ApeLN7Ht+USTGKoBNxzSJMnhA7kzxbbWQ/0
-	q+ug==
-X-Gm-Message-State: AJcUuke9KYrGgA+FsoWIaBL7MmdQnvxEJ98s8PxsgY+6wmMzpXjA1Yf1
-	0k91mpDlCZDSD+9aMgDlc/LwG1NdtErvKQ==
-X-Google-Smtp-Source: ALg8bN4QksKZHutHxwQY7yKMVBP6eXHnqigVySE6hIEmxvvSK+ldH4KAdrC0Y4wzQL0rdHibUKlpTw==
-X-Received: by 2002:a63:5153:: with SMTP id r19mr21809779pgl.281.1545899478144;
-	Thu, 27 Dec 2018 00:31:18 -0800 (PST)
-Received: from apnavik-DESK.iind.intel.com (fmdmzpr04-ext.fm.intel.com.
-	[192.55.54.39])
-	by smtp.gmail.com with ESMTPSA id w3sm56041436pge.8.2018.12.27.00.31.15
+	bh=5x0xjoKgLY1Ep3qFtephqNaLQGfZ0GGDoqmqSbB4A7w=;
+	b=BG1txt/Ih4VHUfaHzsABNoIABqnV3HDq8xKihnXdKt7wjNAkOauvDf829A8bUhTr8J
+	YpPG7eJU0mQ8214qaleTlbaMSbxXnrejrw1uBFrWTr2UUSHvUET9KZX82/GBBbA1FdFG
+	rlioOf8+6wvMzuajN0BvnnyExuxv/K8kfOLUZCCB9dz0j5iJ3Ql4Lge6Hq2JM1jnQKMr
+	V9BEUqo+QxOrCons3h4sbap0XfiLAOJ3DVXCUTS/qUYCnQOJX1yLPpI41ZpSfDDS1CtK
+	5bh58TlIPkNVeNXhrcPIHZ7h5oQSJcLhKp6p2eNpKY4TiaT0IF5L6UQyYIYQ5cBmyuJZ
+	xKUg==
+X-Gm-Message-State: AA+aEWbKjpsG+HBMqb9CnCh+WS+trt7QbdnhNBvX+Lhu4kTfd0QfioQH
+	yD8Xo2clm83ws200d6noqaNEpv31DJZBQA==
+X-Google-Smtp-Source: AFSGD/VtGVgQzds5jb5m/jt9oDkR/5dkMYLxWe7paK9d5R/gBSLqyjQVHz5CjyHoanPkzadttDlOIg==
+X-Received: by 2002:a62:7e13:: with SMTP id z19mr26609353pfc.94.1545969284937; 
+	Thu, 27 Dec 2018 19:54:44 -0800 (PST)
+Received: from apnavik-DESK.iind.intel.com ([192.55.54.40])
+	by smtp.gmail.com with ESMTPSA id
+	w185sm58371544pfb.135.2018.12.27.19.54.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Dec 2018 00:31:17 -0800 (PST)
+	Thu, 27 Dec 2018 19:54:43 -0800 (PST)
 From: Ankit Navik <ankit.tarot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Dec 2018 14:02:55 +0530
-Message-Id: <1545899575-21434-1-git-send-email-ankit.tarot@gmail.com>
+Date: Fri, 28 Dec 2018 09:26:23 +0530
+Message-Id: <1545969383-31548-1-git-send-email-ankit.tarot@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH v4] wifi-test-suite: Initial recipe for wifi test suite.
+Subject: [PATCH v2] spirv-tools: Initial recipe for spirv tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,279 +55,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Dec 2018 08:31:17 -0000
+X-List-Received-Date: Fri, 28 Dec 2018 03:54:45 -0000
 
-Add generic recipe for wifi test suite from wifi alliance.
-Suite is to support certification program development and device certification.
+Add generic recipe for spirv tools.
 
 Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 ---
- ...-Use-toolchain-from-environment-variables.patch | 92 ++++++++++++++++++++++
- ...-include-removes-unnedded-stuff-and-add-n.patch | 45 +++++++++++
- ...-usr-sbin-for-script-and-make-script-for-.patch | 58 ++++++++++++++
- .../wifi-test-suite/wifi-test-suite_git.bb         | 37 +++++++++
- 4 files changed, 232 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
- create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
- create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch
- create mode 100644 meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
+ .../0001-tools-lesspipe-Allow-generic-shell.patch  | 24 ++++++++++++++++
+ meta-oe/recipes-graphics/spir/spirv-tools_git.bb   | 32 ++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
+ create mode 100644 meta-oe/recipes-graphics/spir/spirv-tools_git.bb
 
-diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch b/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
+diff --git a/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch b/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
 new file mode 100644
-index 0000000..9ee4a51
+index 0000000..e9a45c2
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/wifi-test-suite/files/0001-Use-toolchain-from-environment-variables.patch
-@@ -0,0 +1,92 @@
-+From 6b822b36739222d0c864249992b5d28e3ff4d948 Mon Sep 17 00:00:00 2001
-+From: Adrian Friedli <adrian.friedli@husqvarnagroup.com>
-+Date: Mon, 3 Sep 2018 17:58:27 +0200
-+Subject: [PATCH] Use toolchain from environment variables
-+
-+Upstream-Status: Submitted [https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/pull/42]
-+Signed-off-by: Adrian Friedli <adrian.friedli@husqvarnagroup.com>
-+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-+---
-+ Makefile.inc         | 7 ++++---
-+ WTGService/Makefile  | 2 +-
-+ console_src/Makefile | 2 +-
-+ lib/Makefile         | 6 +++---
-+ 4 files changed, 9 insertions(+), 8 deletions(-)
-+
-+diff --git a/Makefile.inc b/Makefile.inc
-+index b0edf5a..0094bdf 100644
-+--- a/Makefile.inc
-++++ b/Makefile.inc
-+@@ -13,14 +13,15 @@
-+ # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
-+ # USE OR PERFORMANCE OF THIS SOFTWARE.
-+ #
-+-CC = gcc
-++CC ?= gcc
-++AR ?= ar
-+ LIB=lib
-+ DUT=dut
-+ CA=ca
-+ UCC=ucc
-+ CON=console_src
-+ WTG=WTGService
-+-MAKE=make
-++MAKE?=make
-+ 
-+ # This is for WMM-PS
-+ #for Ext TG
-+@@ -46,7 +47,7 @@ CFLAGS = -g -O2 -D_REENTRANT -Wall -I../inc
-+ 
-+ DUTLIBS = ../lib/libwfa_dut.a -lpthread
-+ CALIBS = ../lib/libwfa_ca.a -lpthread
-+-RANLIB = ranlib
-++RANLIB ?= ranlib
-+ 
-+ LIBWFA_NAME_DUT = libwfa_dut.a
-+ LIBWFA_NAME_CA = libwfa_ca.a
-+diff --git a/WTGService/Makefile b/WTGService/Makefile
-+index 5312eb6..4855771 100644
-+--- a/WTGService/Makefile
-++++ b/WTGService/Makefile
-+@@ -13,7 +13,7 @@
-+ # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
-+ # USE OR PERFORMANCE OF THIS SOFTWARE.
-+ #
-+-CC=gcc
-++CC?=gcc
-+ CFLAGS= -Wall
-+ LIB=-lpthread
-+ 
-+diff --git a/console_src/Makefile b/console_src/Makefile
-+index 8282283..d1098eb 100644
-+--- a/console_src/Makefile
-++++ b/console_src/Makefile
-+@@ -14,7 +14,7 @@
-+ # USE OR PERFORMANCE OF THIS SOFTWARE.
-+ #
-+ 
-+-CC	= gcc
-++CC	?= gcc
-+ CFLAGS	= -g -DWFA_DEBUG -pthread
-+ 
-+ TARGETS = wfa_con
-+diff --git a/lib/Makefile b/lib/Makefile
-+index ffcef94..299b8d6 100644
-+--- a/lib/Makefile
-++++ b/lib/Makefile
-+@@ -17,9 +17,9 @@
-+ include ../Makefile.inc
-+ 
-+ all:    ${LIB_OBJS}
-+-		ar crv ${LIBWFA_NAME} $?
-+-		ar crv ${LIBWFA_NAME_DUT} ${LIB_OBJS_DUT}
-+-		ar crv ${LIBWFA_NAME_CA} ${LIB_OBJS_CA} 
-++		$(AR) crv ${LIBWFA_NAME} $?
-++		$(AR) crv ${LIBWFA_NAME_DUT} ${LIB_OBJS_DUT}
-++		$(AR) crv ${LIBWFA_NAME_CA} ${LIB_OBJS_CA}
-+ 		${RANLIB} ${LIBWFA_NAME} ${LIBWFA_NAME_DUT} ${LIBWFA_NAME_CA}
-+ 
-+ wfa_tg.o: wfa_tg.c ../inc/wfa_agt.h ../inc/wfa_types.h ../inc/wfa_rsp.h ../inc/wfa_tlv.h  ../inc/wfa_tg.h
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch b/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
-new file mode 100644
-index 0000000..20fb647
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wifi-test-suite/files/0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch
-@@ -0,0 +1,45 @@
-+From 451b162c903a1ef070a75dc18171620f3beef7b3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/spir/files/0001-tools-lesspipe-Allow-generic-shell.patch
+@@ -0,0 +1,24 @@
++From 03127fd5a6eff5ae2ebea2e9c6c01fbf1a0a421a Mon Sep 17 00:00:00 2001
 +From: Ankit Navik <ankit.tarot@gmail.com>
-+Date: Tue, 25 Dec 2018 00:36:59 +0530
-+Subject: [PATCH 2/3] Add missing include, removes unnedded stuff and add non
-+ glibc rpc
++Date: Tue, 25 Dec 2018 14:34:09 +0530
++Subject: [PATCH] tools/lesspipe: Allow generic shell
 +
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Reto Schneider <code@reto-schneider.ch>
++Upstream-Status: Submitted [https://github.com/KhronosGroup/SPIRV-Tools/pull/2255]
 +Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 +---
-+ Makefile     | 2 +-
-+ inc/wfa_tg.h | 3 +++
-+ 2 files changed, 4 insertions(+), 1 deletion(-)
++ tools/lesspipe/spirv-lesspipe.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/Makefile b/Makefile
-+index 2c41a17..5c4ad8c 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -15,7 +15,7 @@
-+ #
-+ include Makefile.inc
-+ 
-+-DIRS= ${LIB} ${DUT} ${CA} ${TC} ${WTG} ${CON}
-++DIRS= ${LIB} ${DUT} ${CA} ${TC}
-+ 
-+ all:
-+ 	for i in ${DIRS}; do \
-+diff --git a/inc/wfa_tg.h b/inc/wfa_tg.h
-+index 799bf9f..a1804dd 100644
-+--- a/inc/wfa_tg.h
-++++ b/inc/wfa_tg.h
-+@@ -24,6 +24,9 @@
-+ #ifndef _WFA_TG_H
-+ #define _WFA_TG_H
-+ 
-++#ifndef _WINDOWS
-++#include <pthread.h>
-++#endif
-+ #include <sys/time.h>
-+ 
-+ /* maximum number of streams to support */
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch b/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch
-new file mode 100644
-index 0000000..a51302a
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wifi-test-suite/files/0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch
-@@ -0,0 +1,58 @@
-+From fc7b7106dd0d8d123f20cbd8d408637fbc315e17 Mon Sep 17 00:00:00 2001
-+From: Ankit Navik <ankit.tarot@gmail.com>
-+Date: Tue, 25 Dec 2018 01:12:32 +0530
-+Subject: [PATCH 3/3] fix path to /usr/sbin for script and make script for
-+ generic shell
-+
-+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-+---
-+ lib/wfa_cs.c           | 4 ++--
-+ scripts/dev_send_frame | 2 +-
-+ scripts/sta_reset_parm | 2 +-
-+ 3 files changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/lib/wfa_cs.c b/lib/wfa_cs.c
-+index 6b1f5a2..2a18533 100644
-+--- a/lib/wfa_cs.c
-++++ b/lib/wfa_cs.c
-+@@ -319,7 +319,7 @@ int wfaStaGetIpConfig(int len, BYTE *caCmdBuf, int *respLen, BYTE *respBuf)
-+     /*
-+      * check a script file (the current implementation specific)
-+      */
-+-    ret = access("/usr/local/sbin/getipconfig.sh", F_OK);
-++    ret = access("/usr/sbin/getipconfig.sh", F_OK);
-+     if(ret == -1)
-+     {
-+         ipconfigResp->status = STATUS_ERROR;
-+@@ -2115,7 +2115,7 @@ int wfaStaPresetParams(int len, BYTE *caCmdBuf, int *respLen, BYTE *respBuf)
-+ 	    st = remove("/tmp/processid.txt");
-+ 	}
-+ 	
-+-	sprintf(cmdStr, "/usr/local/sbin/findprocess.sh %s /tmp/processid.txt\n", "wpa_supplicant");
-++	sprintf(cmdStr, "/usr/sbin/findprocess.sh %s /tmp/processid.txt\n", "wpa_supplicant");
-+ 	st = system(cmdStr);
-+ 	
-+ 	tmpfd = fopen("/tmp/processid.txt", "r+");
-+diff --git a/scripts/dev_send_frame b/scripts/dev_send_frame
-+index 9e6afd3..3c37d61 100644
-+--- a/scripts/dev_send_frame
-++++ b/scripts/dev_send_frame
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash 
-++#!/usr/bin/env sh 
-+ 
-+ #
-+ # Copyright (c) 2016 Wi-Fi Alliance
-+diff --git a/scripts/sta_reset_parm b/scripts/sta_reset_parm
-+index 2aff1f1..2c1c31e 100644
-+--- a/scripts/sta_reset_parm
-++++ b/scripts/sta_reset_parm
++diff --git a/tools/lesspipe/spirv-lesspipe.sh b/tools/lesspipe/spirv-lesspipe.sh
++index 81e3355..f955259 100644
++--- a/tools/lesspipe/spirv-lesspipe.sh
+++++ b/tools/lesspipe/spirv-lesspipe.sh
 +@@ -1,4 +1,4 @@
 +-#!/bin/bash
 ++#!/usr/bin/env sh
++ # Copyright (c) 2016 The Khronos Group Inc.
 + 
-+ #
-+ # Copyright (c) 2016 Wi-Fi Alliance
++ # Licensed under the Apache License, Version 2.0 (the "License");
 +-- 
 +2.7.4
 +
-diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
+diff --git a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
 new file mode 100644
-index 0000000..b866c55
+index 0000000..aae11df
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb
-@@ -0,0 +1,37 @@
-+SUMMARY  = "Wi-Fi Test Suite Linux Control Agent"
-+DESCRIPTION = "Wi-Fi Test Suite is a software platform originally developed \
-+by Wi-Fi Alliance, the global non-profit industry association that brings you \
-+Wi-Fi, to support certification program development and device certification."
-+HOMEPAGE = "https://www.wi-fi.org/certification/wi-fi-test-suite"
-+LICENSE  = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
-+SECTION = "test"
++++ b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
+@@ -0,0 +1,32 @@
++SUMMARY  = "The SPIR-V Tools project provides an API and commands for \
++processing SPIR-V modules"
++DESCRIPTION = "The project includes an assembler, binary module parser, \
++disassembler, validator, and optimizer for SPIR-V."
++LICENSE  = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++SECTION = "graphics"
 +
 +S = "${WORKDIR}/git"
-+SRCREV = "f7a8d7ef7d1a831c1bb47de21fa083536ea2f3a9"
-+SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git \
-+	file://0001-Use-toolchain-from-environment-variables.patch \
-+	file://0002-Add-missing-include-removes-unnedded-stuff-and-add-n.patch \
-+	file://0003-fix-path-to-usr-sbin-for-script-and-make-script-for-.patch \
++DEST_DIR = "${S}/external" 
++SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
++	file://0001-tools-lesspipe-Allow-generic-shell.patch \
++	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
++	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
++	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
++	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
 +"
++SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
++SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
++SRCREV_effcee = "8f0a61dc95e0df18c18e0ac56d83b3fa9d2fe90b"
++SRCREV_re2 = "2cf86e5ab6dcfe045a1f510c2b9a8b012a4158cd"
++SRCREV_googletest = "150613166524c474a8a97df4c01d46b72050c495"
 +
-+# to avoid host path QA error
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+# Fix GNU HASH error
-+TARGET_CC_ARCH += "${LDFLAGS}"
++inherit cmake python3native
 +
-+do_install () {
-+	install -d ${D}${libdir}
-+	install -m 0644 ${S}/lib/libwfa.a ${D}${libdir}
-+	install -m 0644 ${S}/lib/libwfa_ca.a ${D}${libdir}
-+	install -m 0644 ${S}/lib/libwfa_dut.a ${D}${libdir}
-+	install -d ${D}${sbindir}
-+	install -m 0755 ${S}/dut/wfa_dut ${D}${sbindir}
-+	install -m 0755 ${S}/ca/wfa_ca ${D}${sbindir}
-+	install -m 0755 ${S}/scripts/*.sh ${D}${sbindir}
-+	install -m 0755 ${S}/scripts/arp_neigh_loop ${D}${sbindir}
-+	install -m 0755 ${S}/scripts/dev_send_frame ${D}${sbindir}
-+	install -m 0755 ${S}/scripts/sta_reset_parm ${D}${sbindir}
++do_install_append() {
++	install -d ${D}/${includedir}/spirv
++	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
 +}
 +
-+RDEPENDS_${PN} = "wpa-supplicant"
++FILES_SOLIBSDEV = ""
++FILES_${PN} += "${libdir}/*.so"
 -- 
 2.7.4
 
