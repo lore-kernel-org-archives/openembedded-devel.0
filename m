@@ -1,53 +1,48 @@
 Return-Path: <athoik@gmail.com>
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
-	[209.85.167.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EA416BC98
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+	[209.85.208.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C17F6B12B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2018 18:34:05 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id u18so17898393oie.10
+	Fri, 28 Dec 2018 19:42:09 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id y56so18225617edd.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Dec 2018 10:34:06 -0800 (PST)
+	Fri, 28 Dec 2018 11:42:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=uTapjfUP3ovnwJOcPYJqau7ARWOC1QJlbGvr3L05rxI=;
-	b=HVRwPG8PSxrQP2fwFGaJbhFNfr97g4VUh3W5stVXdlwcY5V6aNz5YtKy1cYK4+AQQV
-	hnx4C75dUjIb3M37ym+kUTtxd/WLbQILifEnv09rpUDMcvJdLNX58pTj1D0szYBE6Gz/
-	iG81wrMZ/TqGznTVGQG9V4NiHDsvUcK7pdFc/JOPPZwF+7Tn/IJVPBxT8e2YG2RX6ZNO
-	jjj9idw89Vm6WwetYNEgb0MpShghdDMapX+jRFCjkF/dlTh35KamS7JJ94Mg3IP14ba+
-	dLxo6EwWoaXpk7qV3Z4BM6DG5kcXL1WRYAAcIs+Tk4hd0arWbjbm6pmzyFQGL4U53PDX
-	IVXA==
+	h=from:to:cc:subject:date:message-id;
+	bh=3CXRZeSy227gvzvsNAH1h8kIAdf6wiA/2F3B60FoYfc=;
+	b=GkipO89eWpKWdw6l2Z2xXLcnMVtvQt0Dn48LCkshlahcjZ0IFcLK3COl/30fZAu2vX
+	HX+yMXQV6/Ciya+Oh4ZxVSpPJndF57+vKFK+49hfV7o1A5SVZA4Hty90h39jZaA4a/Wp
+	DrEiSBlnwKX4fjQS4MZxgUg+L/PSs81vdM3DM/15lgLQTJ2UnETE/Fl7a1ooC8DuRC7c
+	xQWfKi9yzPyAEbha1akZxgUVNVEmBbcDw6trXEq3ZvC0IMy31DG+MthKGXKAo4E0nxn8
+	jHW+YPVfjP1LUp5Whr6kw5jzyqC8k+gB2IahAWpG5wW6cv0SJHl8UbarBwoyXxxusOa7
+	lRgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=uTapjfUP3ovnwJOcPYJqau7ARWOC1QJlbGvr3L05rxI=;
-	b=mIIWZIhqzzZTVwd+xezZGRMIBO2Adw6Gt8Knla99ZiGEDjDDWPGpPeBB43ZEbg/t4H
-	ViqckZVSz5uME7vQDXs4OXwQIyYgKTwLVIh7m+vN+YwYp/7Dvru8XRcfPqiZvnUmgb1s
-	pjnK6CuReK4DscyJU34P1JtcQOULsrnD48+1JvXOOdo7gEXPvXIVcxTTBrTCrfRWj16C
-	V2yKtAhMG6OuThYXevdUXS4aAHtTse73M6doZpoLrEWFs6zGHB23+NsiQIWXVN+Ih2Ao
-	kXmMtsHgOR01tq0CluMq5EzM4FDLmjJz31g4zNZ3kO9RN6ggtXE0lkXQxMnmbzT3+SUT
-	aMDQ==
-X-Gm-Message-State: AA+aEWYgTYRIykyzUt7Rx//Ev2M4iWZ4oJXY463GgPJNZEZtCDS1ykLd
-	/cS/sSejV9mGpDpG2VHCS7/ehA9Z0L7RTyDO7A==
-X-Google-Smtp-Source: AFSGD/VBV3pqJImwviicqZEQAHgOilDp3AtbElpzieAbYm6bfvr83Kb1AORPQNntsxLc22ocY1VRBBW1zgm2JrsKNxw=
-X-Received: by 2002:aca:6545:: with SMTP id j5mr18633333oiw.70.1546022046070; 
-	Fri, 28 Dec 2018 10:34:06 -0800 (PST)
-MIME-Version: 1.0
-References: <1545978520-30261-1-git-send-email-athoik@gmail.com>
-	<CAMKF1spWKvTezgKLyEs6m=tY_GcXA6fz_E-LN6fvQCZc0evtOg@mail.gmail.com>
-	<CANDbA3fwBSiK6zL-+-OH3BNJE0bvD1cWt+HqdmGSofW6-OWbtw@mail.gmail.com>
-	<1ceb5a5d-cbd0-3b43-8115-a7502e0e7729@gmail.com>
-	<CANDbA3cabGWeE0Zdf2oKmUsSFiM1rbL_efUCYpNEshkNPwq9rQ@mail.gmail.com>
-	<CAMKF1sp9UU5wuYpf3RFkBdAVR1G+S6aCQS_uadOOgAkVsuS_FA@mail.gmail.com>
-In-Reply-To: <CAMKF1sp9UU5wuYpf3RFkBdAVR1G+S6aCQS_uadOOgAkVsuS_FA@mail.gmail.com>
-From: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
-	<athoik@gmail.com>
-Date: Fri, 28 Dec 2018 20:33:54 +0200
-Message-ID: <CANDbA3fRGRCshSK67KFkU+ZUdkCEumY=Qhrp_KqW6ip46RYz7Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] faac: update 1.29 -> 1.29.9.2
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3CXRZeSy227gvzvsNAH1h8kIAdf6wiA/2F3B60FoYfc=;
+	b=XnJjhtK88d3pitHYislX/4gMLfL39naQvCcbHe1udKlrf0CUUUCZ9d3hNfodpTf+in
+	1HpIJsLXAmxCXlZf9QYVGaNQm5cdiRI3b6XK+HE47QvbUqoGy0Qozl3yESc+UkEH8zDo
+	SzNGh5tGhTdAGE13F14PAk4/8R6usd5e0Ju1f3pTQcoaa00aDRrwnX6H1CRcUXm1kos6
+	g+dr2EGaswQN8J3Qbxjc403ybHRYFzBDng11pJo0WMALUecdPOcN4m86mh3duBs0D/vb
+	1u6QfY7C+SBWiGagtCUE7pjE2mLe9JA5o72PEBUjNgLIdTge88LSQ3hVVzYk6Ufhq1mE
+	GNiA==
+X-Gm-Message-State: AA+aEWaxFJ3gpgd4Y82FODybYIQBTQ5kC9lvsEjw4KvtuTDeqMjTSOib
+	0alKwtSkczlPsqLsBLGUeT46XUShj9s7
+X-Google-Smtp-Source: AFSGD/XgOKuzz4c4GvbJ8KUz92v1ggwbLbtVZMFESAvtH2ykeOEI3NonbitJwpNI5em11sY6PQHxYg==
+X-Received: by 2002:a50:c408:: with SMTP id v8mr23316613edf.144.1546026130316; 
+	Fri, 28 Dec 2018 11:42:10 -0800 (PST)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
+	by smtp.gmail.com with ESMTPSA id
+	g21sm13614077edc.63.2018.12.28.11.42.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 28 Dec 2018 11:42:09 -0800 (PST)
+From: Athanasios Oikonomou <athoik@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 28 Dec 2018 21:37:42 +0200
+Message-Id: <1546025862-17332-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-multimedia][PATCH v2] faac: update 1.29 -> 1.29.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,114 +55,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2018 18:34:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 28 Dec 2018 19:42:10 -0000
 
-=CE=A3=CF=84=CE=B9=CF=82 =CE=A0=CE=B1=CF=81, 28 =CE=94=CE=B5=CE=BA 2018 =CF=
-=83=CF=84=CE=B9=CF=82 8:04 =CE=BC.=CE=BC., =CE=BF/=CE=B7 Khem Raj <raj.khem=
-@gmail.com> =CE=AD=CE=B3=CF=81=CE=B1=CF=88=CE=B5:
->
-> On Fri, Dec 28, 2018 at 9:35 AM =CE=91=CE=B8=CE=B1=CE=BD=CE=AC=CF=83=CE=
-=B9=CE=BF=CF=82 =CE=9F=CE=B9=CE=BA=CE=BF=CE=BD=CF=8C=CE=BC=CE=BF=CF=85 <ath=
-oik@gmail.com> wrote:
-> >
-> > =CE=A3=CF=84=CE=B9=CF=82 =CE=A0=CE=B1=CF=81, 28 =CE=94=CE=B5=CE=BA 2018=
- =CF=83=CF=84=CE=B9=CF=82 7:13 =CE=BC.=CE=BC., =CE=BF/=CE=B7 Khem Raj <raj.=
-khem@gmail.com> =CE=AD=CE=B3=CF=81=CE=B1=CF=88=CE=B5:
-> > >
-> > >
-> > >
-> > > On 12/28/18 5:24 AM, =CE=91=CE=B8=CE=B1=CE=BD=CE=AC=CF=83=CE=B9=CE=BF=
-=CF=82 =CE=9F=CE=B9=CE=BA=CE=BF=CE=BD=CF=8C=CE=BC=CE=BF=CF=85 wrote:
-> > > > =CE=A3=CF=84=CE=B9=CF=82 =CE=A0=CE=B1=CF=81, 28 =CE=94=CE=B5=CE=BA =
-2018 =CF=83=CF=84=CE=B9=CF=82 8:51 =CF=80.=CE=BC., =CE=BF/=CE=B7 Khem Raj <=
-raj.khem@gmail.com> =CE=AD=CE=B3=CF=81=CE=B1=CF=88=CE=B5:
-> > > >>
-> > > >> On Thu, Dec 27, 2018 at 10:32 PM Athanasios Oikonomou <athoik@gmai=
-l.com> wrote:
-> > > >>>
-> > > >>> Remove not required patch and extra EXTRA_OECONF "--without-mp4v2=
-".
-> > > >>
-> > > >> have you build tested this patch on a musl platform ?
-> > > >> if not please try one and report back.
-> > > >>
-> > > >
-> > > > bitbake faac was tested using TCLIBC =3D "musl"
-> > > > (39e933936e11e186f21dacf4bccedddaa0a122df)
-> > > > for machines qemuarm and qemuarm64. Build was successful.
-> > > >
-> > > > Please let me know if above test case is enough or further actions =
-required.
-> > > >
-> > >
-> > > Thanks for confirming.
-> > >
-> > > >>> Previously not required mp4v2 library was dropped on 1.29.9.2.
-> > > >>>
-> > > >>> While being there also fix issue with multilib build on aarch64
-> > > >>> using FILES_lib${BPN} instead of FILES_lib${PN}.
-> > > >>>
-> > > >>> WARNING: lib32-faac-1.29.9.2-r0 do_package: QA Issue: lib32-faac:=
- Files/directories were installed but not shipped in any package:
-> > > >>>    /usr/lib/libfaac.so.0
-> > > >>>    /usr/lib/libfaac.so.0.0.0
-> > > >>> Please set FILES such that these items are packaged. Alternativel=
-y if they are unneeded, avoid installing them or delete them within do_inst=
-all.
-> > > >>> lib32-faac: 2 installed and not shipped files. [installed-vs-ship=
-ped]
-> > > >>>
-> > > >>> Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
-> > > >>> ---
-> > > >>>   .../faac/{faac_1.29.bb =3D> faac_1.29.9.2.bb}        | 14 ++++-=
-------
-> > > >>>   ...Define-__STRING-if-cdefs.h-does-not-exist.patch | 28 -------=
----------------
-> > > >>>   2 files changed, 4 insertions(+), 38 deletions(-)
-> > > >>>   rename meta-multimedia/recipes-multimedia/faac/{faac_1.29.bb =
-=3D> faac_1.29.9.2.bb} (56%)
-> > > >>>   delete mode 100644 meta-multimedia/recipes-multimedia/faac/file=
-s/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
-> > > >>>
-> > > >>> diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb=
- b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
-> > > >>> similarity index 56%
-> > > >>> rename from meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
-> > > >>> rename to meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.b=
-b
-> > > >>> index d36f2f4..4fc1121 100644
-> > > >>> --- a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
-> > > >>> +++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
-> > > >>> @@ -1,29 +1,23 @@
-> > > >>>   SUMMARY =3D "Freeware Advanced Audio Coder (MPEG2-AAC, MPEG4-AA=
-C)"
-> > > >>>   SECTION =3D "libs"
-> > > >>>   LICENSE =3D "LGPLv2+"
-> > > >>> -HOMEPAGE =3D "http://www.audiocoding.com/faac.html"
-> > > >>>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D3bf50002aefd002f49e7=
-bb854063f7e7 \
-> > > >>>                       file://libfaac/coder.h;beginline=3D5;endlin=
-e=3D17;md5=3Dfa1fd6a5fa8cdc877d63a12530d273e0"
-> > > >>>
-> > > >>> -LICENSE_FLAGS =3D "commercial"
-> > > >>> -
-> > >
-> > > why is this dropped. May be document it in commit message
-> > >
-> >
-> > The faac author didn't provide further information, commit message
-> > contains only "removed unused library"
-> > (https://github.com/knik0/faac/commit/82bfa6eba494c0374aaef91b61a1876d6=
-95d2ead).
-> > The bitbake recipe didn't use also that library, it was disabled with
-> > EXTRA_OECONF "--without-mp4v2".
-> >
-> > I can open an issue on github page and ask why it was dropped.
->
-> Thats good. My question was also about dropping
-> LICENSE_FLAGS =3D "commercial"
+Remove not required patch and extra EXTRA_OECONF "--without-mp4v2".
+Previously not required mp4v2 library was dropped on 1.29.9.2.
 
-You are right, my mistake. I will create v2 ASAP!
+While being there also fix issue with multilib build on aarch64
+using FILES_lib${BPN} instead of FILES_lib${PN}.
+
+WARNING: lib32-faac-1.29.9.2-r0 do_package: QA Issue: lib32-faac: Files/directories were installed but not shipped in any package:
+  /usr/lib/libfaac.so.0
+  /usr/lib/libfaac.so.0.0.0
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+lib32-faac: 2 installed and not shipped files. [installed-vs-shipped]
+
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+---
+ .../faac/{faac_1.29.bb => faac_1.29.9.2.bb}        | 11 ++++-----
+ ...Define-__STRING-if-cdefs.h-does-not-exist.patch | 28 ----------------------
+ 2 files changed, 4 insertions(+), 35 deletions(-)
+ rename meta-multimedia/recipes-multimedia/faac/{faac_1.29.bb => faac_1.29.9.2.bb} (65%)
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+
+diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+similarity index 65%
+rename from meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+rename to meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+index d36f2f4..278bda9 100644
+--- a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
++++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.9.2.bb
+@@ -11,19 +11,16 @@ inherit autotools
+ 
+ SRC_URI = " \
+     ${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
+-    file://0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch \
+ "
+ 
+-SRC_URI[md5sum] = "78603720f655180059d6970c582a3005"
+-SRC_URI[sha256sum] = "8cc7b03ceb2722223a6457e95d4c994731d80214a03ba33d1af76ba53f4b3197"
+-
+-EXTRA_OECONF += "--without-mp4v2"
++SRC_URI[md5sum] = "2b58d621fad8fda879f07b7cad8bfe10"
++SRC_URI[sha256sum] = "d45f209d837c49dae6deebcdd87b8cc3b04ea290880358faecf5e7737740c771"
+ 
+ PACKAGES =+ "lib${BPN} lib${BPN}-dev"
+ 
+ FILES_${PN} = " ${bindir}/faac "
+-FILES_lib${PN} = " ${libdir}/*.so.*"
+-FILES_lib${PN}-dev = " \
++FILES_lib${BPN} = " ${libdir}/*.so.*"
++FILES_lib${BPN}-dev = " \
+     ${includedir} \
+     ${libdir}/*.so \
+     ${libdir}/*.la \
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch b/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+deleted file mode 100644
+index d845ddf..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 46cc9298c38b9dd735fec3f39aa2d6e56a362410 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 28 Mar 2017 21:33:36 -0700
+-Subject: [PATCH 2/2] mp4v2: Define __STRING if cdefs.h does not exist
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- common/mp4v2/mp4util.h | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/common/mp4v2/mp4util.h b/common/mp4v2/mp4util.h
+-index 1f9cb64..1e7aced 100644
+---- a/common/mp4v2/mp4util.h
+-+++ b/common/mp4v2/mp4util.h
+-@@ -23,6 +23,10 @@
+- #define __MP4_UTIL_INCLUDED__
+- #include <assert.h>
+- 
+-+#ifndef __STRING
+-+#define __STRING(x)     #x
+-+#endif
+-+
+- #ifndef ASSERT
+- #define ASSERT(expr) \
+- 	if (!(expr)) { \
+--- 
+-2.12.1
+-
+-- 
+2.1.4
+
 
