@@ -1,51 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B0E960079
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7758F60079
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Dec 2018 16:50:47 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id q1so12419037pfi.5
+	Sun, 30 Dec 2018 16:50:48 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id g189so11940049pgc.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 30 Dec 2018 08:50:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0TUaZjid8PkrLsJ0akBdaYYQAmZJJDLXUwdfFEgaYZk=;
-	b=bEOfoGHqguvUbwH2v+bV2KdctUI2ilBfPmPkEpXF+wi3pKNVljPeiP+enrrUau7NnO
-	RojgAsvIbiqyONgjfQaV4WOHVsGjY6e1bX2xJU5TAjBhLKJGz1sw7RuJkTKzqaOfDxLN
-	wsGg7ZcqvvWSbi4LPFQf38msogcVxrw5idluU53vG1sjDbZjOVXKdPjDvfE29ss60nb/
-	HMXKg98yGjm80QjLMYpwGsOStjIhY4TaEeNxJ05V/yKDlsg/gLinoPTSDPbNhM5as34z
-	2qK9s6KDdepDDD0fPiS4JdHD93w6iKFT8E/es8Kgf/FeDQX1y+zqjDVZfk/f9bFSkVCc
-	yZvQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=dz14GtTaDn8XqCj71eAdwl71AwZ0isThJl15OBcAS7U=;
+	b=cfZos1j2RA7n63uKIPJU23FaVRk1+ymFyH7crYPC5fCrAQZBGlAELGw+RtUp5U1dcD
+	Be7oy8DhyHnaY5zfwf8BXMRMApBDoIL5VI//1nHezggsUxmHfzuYhoI+8WwXK3lkmnIS
+	LaKtq1NMf5ln9VxxtS31ys5D92y9vAPesZNBlrHFVsI4MFd7JT5gEJXtAHT6O4dDvn4i
+	5ybsq75tY6EweEkdejNquZ977MlhzWRRe2OlslxCRCEu3tWz9WoySOG4wUY/AxZ0278N
+	7NYpJmeYxCurHMzjsQNRtO3Qy/ZNcF0SzafYf2JAbmfy+JHB4PBbP4i8FFmO+nb7OMbC
+	Hcnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0TUaZjid8PkrLsJ0akBdaYYQAmZJJDLXUwdfFEgaYZk=;
-	b=nUnJeZdHXjKdTp0cPT0koGY1U0SPMtsagSb02NMjz0RHF1S7LrXIWqLRRkEVS2FWvF
-	IVARdW09A2m3yobi2EVlPvHhBpsMea9M4xiBOn8CHxzADqBgzXbW6zWKcRDOdK0OlAH1
-	tXjil0kz1hGZuavnzi5UayKiSfnsBZVRPDCi/hSZKbsW3alxpyhM5LpkPLx6xExyx/mk
-	vWYyqhc6UxcJrpX3UBSWDDDqDXbkMFwcmWK+a+ineeqzl/FfRSfij2faiLROPfEmKOYM
-	m0olcAWNqNHuKwBzFFGigrS1M/5RHqgPbu753vHVVnpFfTmTnP4pZUWmhOcOR2iWSJvk
-	OcNA==
-X-Gm-Message-State: AJcUukclYLZ8PHBGnQ5vDSY/d1FIgqamrQF3bthBI2V1o6O0PnhSyaaI
-	Y+xFQTVeH68gug28tc2/sEo8+eHpUp8=
-X-Google-Smtp-Source: ALg8bN4Na55EZxl+DRMyX+Otbh55PwMbu+X3kUn2OyW39SqQhn/Uxvbs1CRL+FZud6m3XA/PyaELFQ==
-X-Received: by 2002:a63:960a:: with SMTP id c10mr4941225pge.106.1546188648519; 
-	Sun, 30 Dec 2018 08:50:48 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=dz14GtTaDn8XqCj71eAdwl71AwZ0isThJl15OBcAS7U=;
+	b=SYDYSgx0+JUb646LMUdFfgIIw7OMW+0cLGKzZIAwlLvv+2kxu5d0sPmcMGmDid6rdE
+	I+eOY0l3fA65X19OLfu1KuMWIe/0lvKI1SjzM6deLJPtbQUdhkkXLbKti/fJfokhzotb
+	r5r6dPZgH7h4mkDmiYg174n83qeZjl9uLS05xlXA/mMcIpYVK1tLjErvCOodt0A1kXdB
+	Lmw3GAN4T/0EbkJpAm3q/Tap2Ch+DnSqjuwukUidLbRMXYjEXqv9KwCAuXe9cgW4bGSO
+	Z0sdLrwlBaX5vY3Towp12bFBJPyMxKDJKv2NPNDbqaW/Wp0DJVCI2/Rc4q7OCkKUHABD
+	bfEw==
+X-Gm-Message-State: AJcUukdO4puZisKplwZlheYXFwdHnSkoE0zK010j6uGEgagpWOe4ZJAv
+	15uKqL6WcYLnRRpJiCcrpfxbsw6etXU=
+X-Google-Smtp-Source: ALg8bN4QUTF7Z+SfVwQ5jrGxHNx+n3MOmqzalVkLCnQheZ+oiLGdzEy5GZnSDCrnTW+4P2kz1v8TWA==
+X-Received: by 2002:a63:e915:: with SMTP id i21mr4875980pgh.409.1546188649264; 
+	Sun, 30 Dec 2018 08:50:49 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:877f:9499::9c8c])
 	by smtp.gmail.com with ESMTPSA id
-	w5sm59111465pfn.89.2018.12.30.08.50.47
+	w5sm59111465pfn.89.2018.12.30.08.50.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 30 Dec 2018 08:50:47 -0800 (PST)
+	Sun, 30 Dec 2018 08:50:48 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Dec 2018 08:50:31 -0800
-Message-Id: <20181230165033.8850-1-raj.khem@gmail.com>
+Date: Sun, 30 Dec 2018 08:50:32 -0800
+Message-Id: <20181230165033.8850-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20181230165033.8850-1-raj.khem@gmail.com>
+References: <20181230165033.8850-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Cc: Peace Lee <iipeace5@gmail.com>
-Subject: [meta-oe][PATCH 1/3] guider: add a new runtime profiler package
+Subject: [meta-oe][PATCH 2/3] tinymembench: Update to tip of master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,62 +62,24 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sun, 30 Dec 2018 16:50:48 -0000
 Content-Transfer-Encoding: 8bit
 
-From: Peace Lee <iipeace5@gmail.com>
-
-guider [1] is a system-wide performance analyzer for platforms based
-on linux kernel. it can measure vary system resource usage and
-trace thread/process activities. and it reports vary meaningful
-output to analyze system status.
-
-[1] https://github.com/iipeace/guider
-
-Signed-off-by: Peace Lee <iipeace5@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/guider/guider_3.9.3.bb   | 34 +++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/guider/guider_3.9.3.bb
+ meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.3.bb b/meta-oe/recipes-devtools/guider/guider_3.9.3.bb
-new file mode 100644
-index 0000000000..96d6c62ae2
---- /dev/null
-+++ b/meta-oe/recipes-devtools/guider/guider_3.9.3.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "runtime performance analyzer"
-+HOMEPAGE = "https://github.com/iipeace/guider"
-+BUGTRACKER = "https://github.com/iipeace/guider/issues"
-+AUTHOR = "Peace Lee <ipeace5@gmail.com>"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
-+
-+SRC_URI = "git://github.com/iipeace/${BPN}"
-+SRCREV = "ac05a2ce0ab480957d642d947d8f617bd224031d"
-+
-+S = "${WORKDIR}/git"
-+R = "${RECIPE_SYSROOT_NATIVE}"
-+
-+inherit distutils
-+
-+GUIDER_OBJ = "guider.pyc"
-+GUIDER_SCRIPT = "guider"
-+
-+do_install() {
-+    python ${S}/setup.py install
-+
-+    install -d ${D}${bindir}
-+    install -v -m 0755 ${R}/${bindir}/${GUIDER_SCRIPT} ${D}${bindir}/${GUIDER_SCRIPT}
-+
-+    install -d ${D}${datadir}/${BPN}
-+    install -v -m 0755 ${R}/${datadir}/${BPN}/${GUIDER_OBJ} ${D}${datadir}/${BPN}/${GUIDER_OBJ}
-+}
-+
-+RDEPENDS_${PN} = "python-ctypes python-shell \
-+                  python-json python-subprocess"
-+
-+FILES_SOLIBSDEV = ""
-+#FILES_${PN} = "usr"
+diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+index 8cb59da737..842644b8a1 100644
+--- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
++++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://main.c;endline=22;md5=879b9bbb60851454885b5fa47eb6b34
+ 
+ PV = "0.4.0+git${SRCPV}"
+ 
+-SRCREV = "2c789849709d837b4bd114c11ed2d9bdc65afbc6"
++SRCREV = "a2cf6d7e382e3aea1eb39173174d9fa28cad15f3"
+ SRC_URI = "git://github.com/ssvb/tinymembench.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.20.1
 
