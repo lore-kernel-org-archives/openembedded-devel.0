@@ -1,50 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 57AB56BDB2
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 83BA16BDE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jan 2019 19:25:15 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id p8so14887742plo.2
+	Wed,  2 Jan 2019 20:06:44 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id y20so27156900edw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jan 2019 11:25:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0ovadp66phppGU69HYCCXWGfW7LwV0j/uS7CMQkDoM0=;
-	b=OZqX9byd8/bVtuFl5fvLUe6P5SnLzm3yEGhY9x/kzuCYO4WRwQ2FOWZuHpNkP/DN5C
-	IiaZU8IeHc4OreMwN7AbLHavNC54KABK1L85K2XzqnRVCCyieCV+fr3PpIW8wvoFQ+MM
-	9zWpJBy6/d3YuGJDtGVwF0DNrXtyTOaSEJMqnu1GRJDlALDrqKJetU98AUt4w/o6FDM8
-	ahUMRGp/C5hBD7kN34w/dGWKnh0E6U+FaZ6n4bqJvMjWW8OvUC5hBNHRl4yUgPikjhQm
-	2XnDoaSl+HLxYI4ps/BmEEOLq8muj4eLg0llsi0/S9mlThQ6EWh8NaHNSwdVDmg12Bgo
-	JehA==
+	Wed, 02 Jan 2019 12:06:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0ovadp66phppGU69HYCCXWGfW7LwV0j/uS7CMQkDoM0=;
-	b=WyZlOqYQpSsI3EfUjArP3bnORudNO3lZ9cEi6eImTkAK4C60TaXb3w8fvErz1i8mzZ
-	j0qHqZ/tuCY93+zXuvzqS5h3BgtA0i8JyFQvrWUf7/7mDZSK68zZV3z6fFLAKjWSuIrr
-	wz3G/vVQp3nmGqgaH2tuQ887i7wzgC8CSUfnJP4ADj7OJhwaYJKjRpORX/SktPZbqcL5
-	sLET7zYidoC1dkq61IvU1tXK8lmYAMjoZ1Ujv5kyOwMaHiCFwYJamfsG3EgeJosB/LNi
-	GUuaRkN0sZSx0QDU0Nvh1FR6yuBZJ1CZ5Ri0D9qbaEyGKHS1/Pj4aqvzZrlrQX9n5E1l
-	KFkw==
-X-Gm-Message-State: AJcUukd5UPoksySw/EemtW84s9GAxJySYMLNP5c7u3C4zLRgcYK+oA+j
-	gvxjXhN9K/tAfRASGYaBxtvri5ZnTzw=
-X-Google-Smtp-Source: ALg8bN5OuY03C4vqgioXV0xbozbrPIy412Iuif6ZvkVsFXohErqAYIVrKtogSlws5zBQNYz0olC6HQ==
-X-Received: by 2002:a17:902:d83:: with SMTP id 3mr43558561plv.43.1546457115989;
-	Wed, 02 Jan 2019 11:25:15 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:877f:9499::6ee7])
-	by smtp.gmail.com with ESMTPSA id
-	l5sm65096423pgp.82.2019.01.02.11.25.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Jan 2019 11:25:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:user-agent:mime-version:content-transfer-encoding;
+	bh=b0jxkbtjP0mMLa4+pih7o8PojLpaUIhjQrBCWzg7So0=;
+	b=KlFnTjmeqRqOW2gJqrzmEE/l7k4iU+wpTopzC/6iyyh4d4faYO14AAo0sXDqD6Msbu
+	vT2LiaEp7DcITCrbZFyZTlj8hVL+ZDHt837UnowYGA9zorsm0MLfiQAZ+wu6Ick3JWUv
+	afg4idLAhZaHFiwSxLJT/MG+MUPqWVyDg5VwcB53wLjI4ZhWG+1Fg3gqO8KJVtaO8SHn
+	3+qVXVXxaZ/l0G9HhYSsbZuJ2ncVzw32J1rzl05JG9NLYSx/egMakdaF06Ksi1Q3Kvos
+	5jDzbEVPaCW4tsbsYl0Vv6KQXsRUHHaDVUuDiGxuvapIwF5XFuvPdp8vm7myt/kG5X3X
+	OqGQ==
+X-Gm-Message-State: AA+aEWaaMi+DsmsBuow8UhyFI6NFuNXoUmb1n+/tDfQkyVMKocheB6/z
+	lgbMzuemPhX0DQjQ5DlkOzJaw6/x
+X-Google-Smtp-Source: AFSGD/W8Jf9BNA79CjWEjn006gC8foI6MkXDQGe0rieF0YeMXym2Yt315mbY++gMaa6uHRtk1anSgg==
+X-Received: by 2002:a50:c408:: with SMTP id v8mr40197649edf.144.1546459604936; 
+	Wed, 02 Jan 2019 12:06:44 -0800 (PST)
+Received: from tfsielt31850.fritz.box (188-141-55-36.dynamic.upc.ie.
+	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
+	c38sm22808781edb.15.2019.01.02.12.06.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 02 Jan 2019 12:06:44 -0800 (PST)
+Message-ID: <d174a2d09c754593507de4135c8a056d6eab1e7f.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jan 2019 11:25:08 -0800
-Message-Id: <20190102192508.11764-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] luajit: Disable for mips64 hosts
+Date: Wed, 02 Jan 2019 20:06:42 +0000
+In-Reply-To: <1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+References: <1543488504-15595-1-git-send-email-fang.jia@windriver.com>
+	<1543488504-15595-2-git-send-email-fang.jia@windriver.com>
+User-Agent: Evolution 3.30.3-1 
+Mime-Version: 1.0
+Subject: Re: [meta-java][PATCH 2/2] openjdk-common: Define JAVA_HOME by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jan 2019 19:25:15 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 02 Jan 2019 20:06:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-mips64 port does not exist
+On Thu, 2018-11-29 at 18:48 +0800, Fang Jia wrote:
+> Use postinst script to set the JAVA_HOME by default.
+> 
+> Signed-off-by: Fang Jia <fang.jia@windriver.com>
+> ---
+>  recipes-core/openjdk/openjdk-common.inc | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-
+> core/openjdk/openjdk-common.inc
+> index 01a0a2a..aaf81f6 100644
+> --- a/recipes-core/openjdk/openjdk-common.inc
+> +++ b/recipes-core/openjdk/openjdk-common.inc
+> @@ -5,3 +5,17 @@ JDK_ARCH = "${@openjdk_build_helper_get_jdk_arch(d)}"
+>  
+>  # Provides the target architecture to the configure script.
+>  export LLVM_CONFIGURE_ARCH="${@openjdk_build_helper_get_llvm_configure_ar
+> ch(d)}"
+> +
+> +pkg_postinst_${PN}() {
+> +	cat >> $D${sysconfdir}/profile << EOT
+> +JAVA_HOME=""
+> +for dir in ${libdir}/jvm/*; do
+> +        if [ -x "\${dir}/bin/java" ]; then
+> +                [ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
+> +        fi
+> +done
+> +if [ -n "\${JAVA_HOME}" ]; then
+> +        export JAVA_HOME=\${JAVA_HOME}
+> +fi
+> +EOT
+> +}
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I'd say this should be done via adding a file to ${sysconfdir}/profile.d/
+instead. Have a look at e.g. the DistCC recipe
+ poky.git/meta/recipes-devtools/devel-config/distcc-config.bb
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-index 3052eb0484..897b26dd95 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-@@ -90,5 +90,6 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
- "
- FILES_luajit-common = "${datadir}/${BPN}-${PV}"
- 
--# Aarch64 is not supported in this release 
-+# Aarch64/mips64 is not supported in this release 
- COMPATIBLE_HOST = "^(?!aarch64).*"
-+COMPATIBLE_HOST = "^(?!mips64).*"
--- 
-2.20.1
+
+Cheers,
+Andre'
+
 
 
