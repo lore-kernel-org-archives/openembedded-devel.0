@@ -1,44 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
-	[209.85.160.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 246AA79F39;
-	Thu,  3 Jan 2019 22:02:07 +0000 (UTC)
-Received: by mail-qt1-f170.google.com with SMTP id k12so38532106qtf.7;
-	Thu, 03 Jan 2019 14:02:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=UKC7/hVLoLid7jbPTHjVBXuZIAPTIr5FMrfog+UcSt8=;
-	b=m0aAN0pVeNQpKfkwLaqTGHhw+GvYvnswtlBvCrMvjK/ldcNuwvmSYp8lPkJ4CHAEOQ
-	dkrHNulTTMLr15scyH7BlUdoIyYeNEBp350gw2GTrM8Zkvn/K8ZGnGYxaZTL1B32HBoj
-	UcWo2DbNEoRKZRV+6bEWvCPVxwBr8IR/W3sN+8iJpc55bKJkqVKw9zp+OEnSE9FlhxlE
-	op5nyR973KUSTDnbVVJN9mVMpFzujVJurOcWVNA43XebQ6rrg5OptLF0EDsnfAHPSTNr
-	onnBgV5CIkrOJ9djtbosHEQsqQuXMlVGxyAxdDgEQsS5+95K931PUaHrPLA5RC9NZ2ks
-	6ikQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=UKC7/hVLoLid7jbPTHjVBXuZIAPTIr5FMrfog+UcSt8=;
-	b=Cs7nr8DgpZnU34j4SZdutF5M13jP5g0U0QUyGGkzpguXx3BEGYUesIOuw9HD87wfeG
-	hXZvH+omITi1CByPblbFANfkLYV7pPOE4fGjFcWHYU1iDU+TF1bcgHYns8FX5xy41btB
-	YB1MIJFNjLTcaUohXerlFh2+l3GVxoKNC6D+7PE4zzKm2UaMoI6ehYkIHxyZxeuzJafx
-	pI2yo4X2P3j4+DJoMT38RvceXy69emQrkgmKotasjvAH3koHTwQIW/t4PdK6EspOnaFA
-	Cg3VQ30vS8XFBWfvNimPsTY+OffIa+7AviIe83AQeYKl0ymKAb90PrOMjCr9KxkZXiMP
-	BGsw==
-X-Gm-Message-State: AJcUukdZ6/u33D1eoJKgyAVtvWxIwBwRHwgsKpdOLlEHFIErtusBlqD3
-	uXEcxJ8ylYwlgXHzstTNZjWWq8og6NfzEK8SJpg64O/ah9k=
-X-Google-Smtp-Source: AFSGD/XSBMxKhwDeUeDNgwCmpwRfiNfdccDGwTQ4a3InB+3dktQE5vFCJvcNZpRMPirGW3gZwsvmJCsxDk6Y6XF5i+w=
-X-Received: by 2002:aed:3eac:: with SMTP id n41mr47642289qtf.196.1546552928200;
-	Thu, 03 Jan 2019 14:02:08 -0800 (PST)
+Return-Path: <bunk@stusta.de>
+X-Greylist: delayed 319 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 03 Jan 2019 23:04:33 UTC
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id EDFDB747E7;
+	Thu,  3 Jan 2019 23:04:33 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43W3JL0W3mz5B;
+	Thu,  3 Jan 2019 23:59:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1546556354;
+	bh=uV9nh7BpWzLqEQhsgw6Ha53gTDf9G+yS+7zhVIBZxnI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ljsMbDzZiASzlxO17jxqGPEn2v7x+VRbU8+pySpzI/bDy0UExs71wV7nhxtQ0wEND
+	ED7a64VgcLhZsnyogpqNdP5NukQM6Aio7BEX2+OEaY96yEiI2LvKjH3/RDCPZYZ3Lt
+	B0D3jzseWQM+A+8BfqiBG4QvdYZi5uqUBn1Og86SzKnwjQItMX9OhzFTilYGbbSS/P
+	kEIve94aV4Tfvh888JkhQxq3HoXh2V6qbzCwS4SgSJvj31EIG+gPNviFmyJWEiM9ex
+	6/CcxnHql56vBDlKymCPkdch8CttQiRZf7+2U9wXq6BoCsa8eARaW4Rbd5+NtAkuTC
+	L6GQg3OscIt6zndb25M8D0XQ89tgL4kN1NGKKj5FZcEBmLko22LI//hNVtxT1z8UOG
+	Y9O8hbfaJd/xy2PFFkeLaY5j72mFx+nlWqB/0U+scgla7kN67vtdRcpmm1DJdvK1ig
+	V4pd6esTMMBxovRp+bNELXqibGMU/njC1X9OOPPQ9WF14f7knIOPGJAN0VhhOCxx5k
+	WmHMDeETRekTL31KKyhokyd+BCYOVpkwx3+u/f//YuerGeKxPwYgGt6ZkdkVzZs7u2
+	it/NB+kdWT/GTw4s9yySe6svkNfKOKGM73CV5AGAvTAe/bZ8s+zyPp2sdhiVMuYN3Y
+	4j43UJkJr8brJjPUaFz2QNN8=
+Date: Fri, 4 Jan 2019 00:59:15 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190103225915.GB29139@localhost>
+References: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Jan 2019 14:01:42 -0800
-Message-ID: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Dropping armv5 and armv5e tunes in 2.7
+In-Reply-To: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Yocto Project <yocto@yoctoproject.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [Openembedded-architecture] Dropping armv5 and armv5e tunes in 2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,36 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jan 2019 22:02:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 03 Jan 2019 23:04:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Hello All
+On Thu, Jan 03, 2019 at 02:01:42PM -0800, Khem Raj wrote:
+> Hello All
+> 
+> You might have noticed a recent commit in gcc trunk
+> 
+> https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=b232e6b58e3766bc66fe08fdb7bcba1bdadda8a2
+> 
+> Which removed support for deprecated -march=armv5 and armv5e, this
+> will be released along with gcc-9 release which is upcoming and we
+> might be able to add gcc9 to 2.7 release or 2.8 release for sure.
+> 
+> We still have non-thumb tunes for armv5 and armv4 in our tune pack, I
+> would like to propose a patch to remove them.
+>...
 
-You might have noticed a recent commit in gcc trunk
+Note that gcc 9 does *not* remove non-thumb armv4 support.
 
-https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=b232e6b58e3766bc66fe08fdb7bcba1bdadda8a2
+Non-thumb armv5/armv5e have been removed due to
+"have no known implementations".
 
-Which removed support for deprecated -march=armv5 and armv5e, this
-will be released along with gcc-9 release which is upcoming and we
-might be able to add gcc9 to 2.7 release or 2.8 release for sure.
+Non-thumb armv4 support was deprecated in gcc 6 together with armv2/armv3,
+but there are still people using recent gcc on StrongARM - which is 
+non-thumb armv4.
 
-We still have non-thumb tunes for armv5 and armv4 in our tune pack, I
-would like to propose a patch to remove them.
+> Thanks
+> -Khem
 
-Secondly, I would also like to drop armv4t, and keep armv5te as lowest
-supported tune, I know some of us do have machines using armv4t, if
-you still maintain them and have need to keep armv4t going, please
-chime into this thread.
+cu
+Adrian
 
-I have also already posted a related patch here
+-- 
 
-https://patchwork.openembedded.org/patch/157529/
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
-which uses 't' variants for -mtune explicitly for armv4 and armv5 tunes.
-
-I will prepare patches if there is agreement here, and a no reply is
-deemed to be 'yes' :)
-
-Thanks
--Khem
 
