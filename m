@@ -1,49 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BD627BDB1;
-	Thu,  3 Jan 2019 23:21:36 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id c21so4684081qkl.6;
-	Thu, 03 Jan 2019 15:21:37 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+	[209.85.214.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E7AA7BDA9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Jan 2019 02:13:55 +0000 (UTC)
+Received: by mail-pl1-f171.google.com with SMTP id p8so16719246plo.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Jan 2019 18:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=WvVDdGYiHJOi+gKag2tmLZPxTu1//oH9tpca0/Qg5mY=;
-	b=JEvmigDJRD60CztcyzsjzV150x6gfpwCGgJXa2KsfXLMCLE1Bjfy7ROyUFnyaRll/Y
-	OsDsnG2R5uiqcxNZCy0BoWHNdhpR+90RYGPYp/b/FnNqmQlB8x12gAneAtj6y90Fy04g
-	AT193BoLALcWc2USDEPWBNxsV+AWsK7UxMrYwtXNNXZIJSMP5wh45UC14Cd2lliYFLku
-	yZbJ1Od7TXfUCcp4Up/UO3ovYXw2vxB1M8qaKRhsy7DbgJNijg7Stb7h44o+3acK6u+Y
-	wl6+GCEDxJ/B/7wr2RcQH+0oVsl09OyMLjCzg5kldeg86+krC9uBatnrPPSl5+5nLuvT
-	bscw==
+	h=message-id:from:date:subject:to;
+	bh=wojD+yxjE86rgekcFPXT1N6q6I5NIcUgCbO1mPKBKls=;
+	b=tKwdonzChoj2IQlKrBV/ymBeTtyTA8q1x9G6bJdd9YI39uUhLNvhcQYud3dm2CgE4S
+	Wcul7/HZnUkxr7YAes7ON1LqAD5P1y88LzOiyWPqkHzI7Z+ZYcNAorBAK0v/8O3VX0Og
+	+TgNv/u/b4KkWL5IHT3bTsNhd00rHWC/pn63ogpcKMttiRn+QH7kt6AjkMnp4n1CB7+a
+	jD0pmZpT5IQaj2unTLv70l0pouSkemM3efD7QEUdnGuvNmNYUJYL65GW5D/x7tUQXdym
+	PkILHBZMvPzeL/tl5fsB7nFKHYfK85jV1WVjsTJGSlPPUAHph72sqlTlzkrwz1Vqk6Ca
+	3weg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=WvVDdGYiHJOi+gKag2tmLZPxTu1//oH9tpca0/Qg5mY=;
-	b=h/llX57/vvjD6l1uaapc+fbfSo2CUApYESqn1BUz61gIvbtsoWqJn2Efk4VdLpR0MF
-	b3oTped1oQUVbSEcdooyrMZXscFYwE8BhEQ96shJ06zcAF/l9Lv6YR741+W6NscsxiDx
-	gcvmnAnryhyjc0c73tOExyJ3qegutR7oPDWThc41ZNEtSwKN4CKXDUycy/7qBO4hMZbR
-	YuNu6mOOhrkW9yORS6O1ZhNt/NvN5m/r3HEtho6DN8/aVo1XRSIeMhpXJcD5aZDcUdss
-	ma4UKYAcUHoYobHdtHUOPs5t4/RyR+FdHmL0V5O/22KVrg69hq7yhVZ2B7P96qQX0xQD
-	3+GQ==
-X-Gm-Message-State: AJcUukeerTAg7PcuPYa1iq1NCaTmUPVIweuYKwzgajqAumI7iXhIf1GS
-	zxpXon24433fCKNESmPSIZlK/FW8+GsFZjHS1HI=
-X-Google-Smtp-Source: ALg8bN6cNwk6kk6xyH1q1UdWzGk4bKWCYWF6bgUSyrGj4Th2Bnr4ebQbxy/04FrtRfWsMUmztKMvxboUP7sYON/D+Rs=
-X-Received: by 2002:a37:4c41:: with SMTP id z62mr45328456qka.206.1546557697105;
-	Thu, 03 Jan 2019 15:21:37 -0800 (PST)
-MIME-Version: 1.0
-References: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
-	<20190103225915.GB29139@localhost>
-In-Reply-To: <20190103225915.GB29139@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Jan 2019 15:21:11 -0800
-Message-ID: <CAMKF1sqhDzQL9P1Vaw5Xczo0co_=NcP1-efnzW=tDnJT9cAq_A@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: Yocto Project <yocto@yoctoproject.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [Openembedded-architecture] Dropping armv5 and armv5e tunes in 2.7
+	h=x-gm-message-state:message-id:from:date:subject:to;
+	bh=wojD+yxjE86rgekcFPXT1N6q6I5NIcUgCbO1mPKBKls=;
+	b=me3iN1Wy3FVI8GdMuaA5DRO7y+XZ39nEXejjtlmKFWW3bFZ8LEYWa1/N5ExCdyalor
+	0BJEqMUTbyxMg0yveGs1BEx9zT3iNLQ1nJcsHmH2vggDXD7TPC2h3jwiduJLjsPFA+9L
+	WROh4vEtyauUBgB1+mhLrIXgwlKOkEFet6FVgUzGHFVXJjL7NsJ5MfApiOIOxQOntyjJ
+	7W7o2YFYbkxS0EojjpQPOgpllJvjQ83M9WFLvZMYLcg1xefsCUWEvrCTHzGYVZ62R+Tg
+	5EPZ+vb8n5Af4kGJSy9ra9PCJhOZHL9TCm1HbVKOeb3cxp6cDz/hGeSTBF2Vw525NMfx
+	O3YA==
+X-Gm-Message-State: AJcUukfbpzE7TnJGukomwH93lHKyY1iSeZ+XrXSKfxozo+4h5+gvdv/W
+	mxZhL59sdJzQ+IIpunbaNUo=
+X-Google-Smtp-Source: ALg8bN4p7RjvLO1QRwCj+62CW6RjY3Rx1CXMlp9herxHPNBIqLeN51e4kEa92GNxns/Pse8ikLrXzw==
+X-Received: by 2002:a17:902:e002:: with SMTP id
+	ca2mr49946165plb.103.1546568036170; 
+	Thu, 03 Jan 2019 18:13:56 -0800 (PST)
+Received: from akuster-ThinkPad-T460s ([2601:202:4180:c33:7144:30fa:a7a1:7688])
+	by smtp.gmail.com with ESMTPSA id
+	62sm67787753pgc.61.2019.01.03.18.13.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 03 Jan 2019 18:13:55 -0800 (PST)
+Message-ID: <5c2ec163.1c69fb81.19992.e9c1@mx.google.com>
+From: Armin Kuster <akuster808@gmail.com>
+X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
+Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
+	Thu, 03 Jan 2019 18:13:53 -0800
+Date: Thu, 03 Jan 2019 18:13:53 -0800
+To: <akuster808@gmail.com>,<openembedded-devel@lists.openembedded.org>
+X-Mailer: mail (GNU Mailutils 2.99.99)
+Subject: ][THUD][Pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,59 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jan 2019 23:21:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 04 Jan 2019 02:13:55 -0000
 
-Thanks Adrian
+The following changes since commit a15d7f6ebcb0ed76c83c28f854d55e3f9d5b3677:
 
-On Thu, Jan 3, 2019 at 2:59 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Thu, Jan 03, 2019 at 02:01:42PM -0800, Khem Raj wrote:
-> > Hello All
-> >
-> > You might have noticed a recent commit in gcc trunk
-> >
-> > https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=b232e6b58e3766bc66fe08fdb7bcba1bdadda8a2
-> >
-> > Which removed support for deprecated -march=armv5 and armv5e, this
-> > will be released along with gcc-9 release which is upcoming and we
-> > might be able to add gcc9 to 2.7 release or 2.8 release for sure.
-> >
-> > We still have non-thumb tunes for armv5 and armv4 in our tune pack, I
-> > would like to propose a patch to remove them.
-> >...
->
-> Note that gcc 9 does *not* remove non-thumb armv4 support.
->
+  sblim-sfc-common: use official SPDX license for EPL (2018-11-22 11:34:44 -0700)
 
-yes that's right. However, I was taking this time to find out if we can drop all
-the ones besides armv5te even if gcc supported it unless there were OE users
-who are still interested in supporting them and had devices running OE
-which need them
+are available in the git repository at:
 
-> Non-thumb armv5/armv5e have been removed due to
-> "have no known implementations".
->
-> Non-thumb armv4 support was deprecated in gcc 6 together with armv2/armv3,
-> but there are still people using recent gcc on StrongARM - which is
-> non-thumb armv4.
+  git://git.openembedded.org/meta-openembedded thud-next
 
-OK, that's a fair point, however, in OE's case I only have reports from users
-with armv4t devices, but it we can keep the armv4 arm-only tunes around along
-with the arm-thumb v4 ones
+for you to fetch changes up to 6094ae18c8a35e5cc9998ac39869390d7f3bb1e2:
 
->
-> > Thanks
-> > -Khem
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
+  geoip: update SRC_URI (2018-12-22 08:14:11 -0800)
+
+----------------------------------------------------------------
+Changqing Li (3):
+      geoip: add downloadfilename for geoip database files
+      geoip: update geolite database checksum
+      geoip: update SRC_URI
+
+Vyacheslav Yurkov (2):
+      glog: fixed the build for mips and other platforms
+      glog: fix installation path
+
+ .../recipes-support/geoip/geoip_1.6.12.bb          | 26 +++++----
+ .../0002-Find-Libunwind-during-configure.patch     | 53 ++++++++++--------
+ .../glog/glog/0003-installation-path-fix.patch     | 65 ++++++++++++++++++++++
+ meta-oe/recipes-support/glog/glog_0.3.5.bb         |  1 +
+ 4 files changed, 110 insertions(+), 35 deletions(-)
+ create mode 100644 meta-oe/recipes-support/glog/glog/0003-installation-path-fix.patch
 
