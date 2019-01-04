@@ -1,46 +1,46 @@
-Return-Path: <thc.fr13nd@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C36C6BD4E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+	[209.85.222.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 890C47BE1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jan 2019 17:24:37 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id g67so1885321wmd.2
+	Fri,  4 Jan 2019 17:53:54 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id o125so21957884qkf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jan 2019 09:24:38 -0800 (PST)
+	Fri, 04 Jan 2019 09:53:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=q6RVS1nHs5h04IiQhizqkzcgHUWC6LwvNO0ot7PyWiI=;
-	b=GzH2RJOf6z5N9/NMYylpPscLEFNcDCSLMvT3EJIBHYRAw3+zNeG+djkDSW/V59wCuv
-	wX1DUOYRZiqPG2zK1Hn0kh5JYctBjgvU7BpdKwQIRKOP5ZtOPJFqdGXfofkjuWrSJmO8
-	z+v0kSjo3Csj2jtUEeIM+VPfxXGfh6o6qaWE9CBojWBwlKWEY6XruRYLn5IOQN+jWURB
-	7IprzdXLZR6ot/8x4T/9y5IQFNJopAj2ed6skYt0w2orefd8cwyBmOtFv0UYqZVUC36w
-	T5c+Kkvqu+TGlTcgC28WMLmq1sW8naJsqCEJJNUABvBjWuZzVPpRGhz5+TQJFmVTEd6H
-	Jnqw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Icy8Y1LdCm7raZFpI3Nwzr/fQDNcnWUGQd8znilu07o=;
+	b=CGHV+ffIuebOPbPkFxgibkVinSCmxabjbiIXCcoPK679CDg6N0D7iGEh/8KBqCfRAx
+	gbgw8rd41g4SOcej/eVEntx4x7Pk2LIMF0mz8nY4+j1XDPX3Yd9TV3o1OEiXL29xDFFg
+	8sPjkv1H+zV+hfGL7Ao7qaiP4L5xtHSShOJYhej8ESDuSrC0Of2Y2Nr3x36y+VYOYHPZ
+	sOzJzM362ZPz/bUp6V1g7dAR1qUvlLsq8hBhClyiYFfT9e3fGV3JT71z46fwg3j9uQvZ
+	j4u6HBhScaC937soYuIwN4oz4OfJm5psp7750hcL9lWG5bjB//LQC0H9oi5OsqZYTLk6
+	lcig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=q6RVS1nHs5h04IiQhizqkzcgHUWC6LwvNO0ot7PyWiI=;
-	b=dJw6suVk6OrcpwXedVir/PHHNiyAVxoPzQcZg2uf4pW3+1Yly5/6yEFO1vZb/LcZRq
-	rvr0HelvOsCHmZrvwYZ0qD4rRB8B4GgosCh3K91CV3Z+I8dl0tXJ0F7YnQQ2vfLWdHpv
-	HUeAPymzzCW5w61orzrLH6UIEn8duXOEfNeobpJqEKUlk1IL7cqG9DXVB6TdnbplQkgl
-	/Y8sFZP8evBPHQutoK+XP0Br5BpzjEl9U080eqZBsu67hra4tv2KUxpCl+tKtoCvaTpS
-	ZBrbfOZ0/Vn2EhWc7YgRrI2fZyEG61YR3cZqhCQKSTnkvopUrEYz2qKx/1Cfs8IyOiSb
-	hdvg==
-X-Gm-Message-State: AJcUukfJErwhLiyaoHWMq59x1XXz0SQrN+0OEXVdVsq4okfNHcJU8gIU
-	KM9xoWOIWtQRdeDoJ1Y4g+vFkdVp
-X-Google-Smtp-Source: ALg8bN42oFxsOWGQ4Nf6ISn7C/LlhqgKeoq8zhgpE9QdwsIQgUiUIvHf8V3+AG0Nsd8yk730pFS+vQ==
-X-Received: by 2002:a1c:868a:: with SMTP id i132mr1888043wmd.49.1546622677875; 
-	Fri, 04 Jan 2019 09:24:37 -0800 (PST)
-Received: from pc-lx-hgc-002.peiker-cee.de ([82.119.189.133])
-	by smtp.gmail.com with ESMTPSA id j3sm1553303wmb.39.2019.01.04.09.24.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Jan 2019 09:24:37 -0800 (PST)
-From: Thomas <thc.fr13nd@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Jan 2019 18:24:31 +0100
-Message-Id: <20190104172431.24771-1-thc.fr13nd@gmail.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-gnome][PATCH] fix networkmanager apppend
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Icy8Y1LdCm7raZFpI3Nwzr/fQDNcnWUGQd8znilu07o=;
+	b=LLoapsaHPky+738aE/XTUdCy1IgBNPzkznZWeLqxuJJ25l6JnQzf4eJy3VTW/T976v
+	Vf4FeJaoesIuNuuiQwTbP8OFuDTytQit/QmHpsKWa1mJJGyvHiW38DMkjcyWZ5uCwx9s
+	EIYn+thLCLlxepU+38PgDPZ2CgMBJ4EVa6UcgPUiVnbqnG4ETTq/tqecY4ZXUrob1TCB
+	W2GDbIRsmNV8oCl2fQ/IpEtFyHsJXJHxulRvzNwoEyv8WhZ4HkS+OkflQV1XTQAsazM7
+	qIFABdQQcpm0aG/auM8tAD5VP76tX77cZV3e70XAAgKVrNJpkracD0s6qTcZhkHRZ2SH
+	SonA==
+X-Gm-Message-State: AJcUukcRHpd16RMWtBsgCQFKtBE94+RWyQukdGlqLqnDqU8iJN5p+sxa
+	CuOD3W+JWFM9CM/AJzh/Yqt8m0TZXD6U7a7OOEg=
+X-Google-Smtp-Source: ALg8bN7RTSKNbOoPB8mP+RXLu2Fful0JKXWQoL3jNWbcgPO7YEEXgFeTUGZ6Dmb+LiWA3G/B0qHslp4KNgs/r7H/rkM=
+X-Received: by 2002:ae9:dc43:: with SMTP id q64mr47484065qkf.223.1546624435011;
+	Fri, 04 Jan 2019 09:53:55 -0800 (PST)
+MIME-Version: 1.0
+References: <1546597268-28446-1-git-send-email-athoik@gmail.com>
+In-Reply-To: <1546597268-28446-1-git-send-email-athoik@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Jan 2019 09:53:29 -0800
+Message-ID: <CAMKF1spPv3_R+0AEJqNhryyweBYS+_tEXDdGHALT8mWDsx_VMg@mail.gmail.com>
+To: Athanasios Oikonomou <athoik@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH] fuse-exfat: fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,38 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jan 2019 17:24:37 -0000
+X-List-Received-Date: Fri, 04 Jan 2019 17:53:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: thc <thc.fr13nd@gmail.com>
+On Fri, Jan 4, 2019 at 2:25 AM Athanasios Oikonomou <athoik@gmail.com> wrote:
+>
+> Replace the PN with BPN to fix the multilib build.
+> ---
+>  meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> index 99bf2be..ea00222 100644
+> --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> @@ -17,5 +17,5 @@ inherit autotools pkgconfig
+>  SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
+>  SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
+>
+> -S = "${WORKDIR}/${PN}-${PV}"
+> +S = "${WORKDIR}/${BPN}-${PV}"
 
-Fix following warning:
-  WARNING:
-   networkmanager-1.14.4-r0 do_configure:
-   QA Issue: networkmanager:
-     invalid PACKAGECONFIG: bluez5glib [invalid-packageconfig]
+Could you try using S = "${WORKDIR}/${BP}
 
-  if conf/local.conf:
-   PACKAGECONFIG_append_pn-networkmanager = " ifupdown wifi bluez5"
-  bluez5 is not compiled into nm
-
-  appending variable should use a prepending space, see
-  https://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html
-
-Signed-off-by: Thomas Csovcsity <thc.fr13nd@gmail.com>
----
- .../recipes-connectivity/networkmanager/networkmanager_%.bbappend       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend b/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
-index 291a61605..1abb5bbcd 100644
---- a/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
-+++ b/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
-@@ -1,3 +1,3 @@
- # networkmanager-applet requires glib support
--PACKAGECONFIG_append = "glib"
-+PACKAGECONFIG_append = " glib"
- 
--- 
-2.11.0
-
+>  EXTRA_OECONF += "sbindir=${base_sbindir}"
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
