@@ -1,46 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb1-f193.google.com (mail-yb1-f193.google.com
-	[209.85.219.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C58D979EF8
+Return-Path: <athoik@gmail.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 877246BDDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jan 2019 16:53:59 +0000 (UTC)
-Received: by mail-yb1-f193.google.com with SMTP id x201so11139473ybg.7
+	Fri,  4 Jan 2019 17:13:49 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id p6so32464722eds.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jan 2019 08:54:01 -0800 (PST)
+	Fri, 04 Jan 2019 09:13:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DBVW41+d9zyzF3XM8D0FKhXh+IYHIIXD6YhF3TURVt4=;
-	b=eAkXT5gPYATQi70GC/vwB3PDKbVfk+TuICfXlPPZ+uN3fWNvI5wsiywAHgXvyWbT1t
-	a4UWf9ydv+YyWrrY35fS/rWSxmAIpZt+Yxzf6dPWufLSWwv1eG1xXd2reLCcs4DB3REA
-	omac7+X7IZHqZsEBsjff5bfsMEy8V8IqzaiphMEDNmPNr3NTAHowo2LfCh98CAOlZY84
-	MqXbUJ4hz+CbFPwJ9qlmTtMUlE5IV+OK9wlEC3WE2zhXmp9HXGLE7ARow6q71ZRwCZYK
-	bNvciPV8+jAkQ/hE4xyCcHxKIFz9Zf3bz24dwc7seZqnTJExHEyomjeniRlGvMnhCpVQ
-	oLWw==
+	h=from:to:cc:subject:date:message-id;
+	bh=j5iaol9NmIlj3xw5WBRx4m+XNzDPx5zq8iJjfAn0Ob8=;
+	b=liHXxSdCRjeFe64fbEU7NmuS1VEAMB9Y/51WjLZSsZIcgY1cuMFHlC3igkPR7zKw7V
+	xLC6xloxex7TLQJRX2y4b1YnbyAhbXcgkzqYE+T0UJvwL9pVCfdEtWCjC3CwfBsnhsWp
+	hG0zBZiolTW6rm3PsrnlPDTS69dAu6Sn2bnWDT1jynELtOv6gxyOcP8P1TG5V0umJLl4
+	RoiERF25PTpLBWDiaNfvn3P/cde1NRtjVtIJkhLQ9C262EFSU3dFZZtjMxs9vH0ze8bs
+	NY84WODWxNAR5LkaMYNI4Xi4WdBUX6bjKoWJpas+BWNrjc6M2njOtZJAaVVJv4lZlV+i
+	34Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DBVW41+d9zyzF3XM8D0FKhXh+IYHIIXD6YhF3TURVt4=;
-	b=K7MvBco4FZn3+gSjjsJKJNGyufEk8pKoyrToysFs+h+2lyJc2wspFFM6Wn2WcQbzT/
-	M6Ey1gAorI+cUaxz0uUR76PXUPwDh9WT2K/q85JTgY9vV/99qlhEYsowizZE4RFd/Vri
-	ewE/yzG9ya/69ed1RC5msv6D9gdO5HIoupNTz/p441OKX1f5yxmy/UZT6WR1PYKcQwjR
-	W5griygqsv079ZPAivP0jqhVZh6KDeBNDe0FCg6l+o4HPmu4gBw4y8OqWFT/8LxYSSH+
-	wuy61zYA+pSivzpjmN/Fi/RTMPJfu53XZSERIkiYOYhURb+NJVEsUAJ1zWyP8B3pzutR
-	73vw==
-X-Gm-Message-State: AJcUuke31OZWCW2oNx4I5VoG9ZRbcB070p8VV3DSS/mLULYuIAHDl1WQ
-	sxRdH/SiUaAxrk+5akWYd+N5NKPMLiVEyIkKzlY=
-X-Google-Smtp-Source: ALg8bN7Ph0KP73xipi5HcYI/noleiU8n8+3GpEMSZTV0+eVm40E7SAPPgDTY3HZI9Kc2AvT21TAaSOizxdsEWwQsEo8=
-X-Received: by 2002:a25:cc4a:: with SMTP id l71mr5440993ybf.10.1546620840440; 
-	Fri, 04 Jan 2019 08:54:00 -0800 (PST)
-MIME-Version: 1.0
-References: <20190104164210.20675-1-thc.fr13nd@gmail.com>
-In-Reply-To: <20190104164210.20675-1-thc.fr13nd@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 4 Jan 2019 17:53:47 +0100
-Message-ID: <CALbNGRQEPtv++=pRKW9V2p_CSY_vqkt2U1XwAc2cYNrSoZwy8w@mail.gmail.com>
-To: thc <thc.fr13nd@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH] fix networkmanager apppend
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=j5iaol9NmIlj3xw5WBRx4m+XNzDPx5zq8iJjfAn0Ob8=;
+	b=rzQrecRJiMp1NK6P7lZ4VX9RVrx3VLXlyZ53UZQlpCW2GIVNQDGOXY9/jyEcED7o4h
+	U9Q0xuFWa9/eS4CwGHNOIv4CxvkHg188auL/YbIKVLAWQpvytqpiZrO6rLMPUXrcXJ4P
+	g0iRmXdf2StfHKwwzcKDWxg694c5rZJTdTIEUHwOQWs87s4pm1vslBsz9FNbNaxuYmMy
+	RAbVBnom1xKHo0ORJFUpaHeXM0/BiPZ+mM0L33WR/lgNIWbJyNFg2x42cEy5AJOLJKs0
+	z/4dFTJHFbo/KoGywAgFuT53Ea/EERop49XU9jRavoKb/B2OxKwTlV6TraYUEUuArz97
+	Wcdw==
+X-Gm-Message-State: AA+aEWZwBj5RURvC6Ak2P7Na5rMotxyZVnZ+XA/89tk5yPO8aAR6IB4n
+	cTg0xkB1SQcbv9Bmy4OfdpEgRIkbjA==
+X-Google-Smtp-Source: AFSGD/W0dtuSrJfwrfSMJTbGpzPZOYFebBnDoUEGxXUiy7UgIkPbBfX7Myntu1CoZafW1OkCNCFivA==
+X-Received: by 2002:aa7:d7cf:: with SMTP id e15mr45143340eds.69.1546622029657; 
+	Fri, 04 Jan 2019 09:13:49 -0800 (PST)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
+	by smtp.gmail.com with ESMTPSA id
+	a11sm28522543edc.28.2019.01.04.09.13.48
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 04 Jan 2019 09:13:48 -0800 (PST)
+From: Athanasios Oikonomou <athoik@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Jan 2019 19:10:34 +0200
+Message-Id: <1546621834-18222-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-filesystems][PATCH v2] fuse-exfat: fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,30 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jan 2019 16:54:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 04 Jan 2019 17:13:50 -0000
 
-On Fri, Jan 4, 2019 at 5:42 PM thc <thc.fr13nd@gmail.com> wrote:
->
-> Fix following warning:
->   WARNING:
->    networkmanager-1.14.4-r0 do_configure:
->    QA Issue: networkmanager:
->      invalid PACKAGECONFIG: bluez5glib [invalid-packageconfig]
->
->   if conf/local.conf:
->    PACKAGECONFIG_append_pn-networkmanager = " ifupdown wifi bluez5"
->   bluez5 is not compiled into nm
->
->   appending variable should use a prepending space, see
->   https://www.yoctoproject.org/docs/2.0/ref-manual/ref-manual.html
-> ---
->  .../recipes-connectivity/networkmanager/networkmanager_%.bbappend       | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-Thanks (I was the one who introduced this bug...)
+Replace the PN with BPN to fix the multilib build.
 
-Please add "Signed-off-by" to your commit message
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+---
+ meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Andreas
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+index 99bf2be..ea00222 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+@@ -17,5 +17,5 @@ inherit autotools pkgconfig
+ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
+ SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
+ 
+-S = "${WORKDIR}/${PN}-${PV}"
++S = "${WORKDIR}/${BPN}-${PV}"
+ EXTRA_OECONF += "sbindir=${base_sbindir}"
+-- 
+2.1.4
+
 
