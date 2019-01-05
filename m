@@ -1,51 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B4857BFB6
+Return-Path: <athoik@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id AE9867BF88
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Jan 2019 03:07:34 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id 101so18227561pld.6
+	Sat,  5 Jan 2019 07:50:00 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id o10so33533451edt.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jan 2019 19:07:35 -0800 (PST)
+	Fri, 04 Jan 2019 23:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uHmklYZhIjBxEIRZ9aOKVWmdtOE4c9jnhpiWIJAHHIY=;
-	b=gyVz88IMA4NHiHkfzpQqsY96bMdDPLu4RP/3lzOIF+WQrtfu4yBoSNRDg0b85mAs8V
-	ib6CulTs5juifdSlK/xcd7BEwUZajMHh8LFDQW0jjXq3NThcdYZKb0hZUoghCwNUHLOM
-	/pIujUP4RB6cUB+Z8P9ZmGmkk0subGbOg6HTl8fVW/2RcQirtHjOVMG/r5P1Ypc8REjT
-	7SY0VLqHjRWkT/rncbldYRepEWZx+lgoijBuUvO5LQrK2RDLLAyPZL0QUX0GaTDpb/Gj
-	NlMPzsha2j5X55B4Aj7yqQCQgt4cqV3DtIrlY9NXThlD+ONTiHyWqxJZ2JSEVOIUFxp5
-	rv8A==
+	h=from:to:cc:subject:date:message-id;
+	bh=q65CBVvV5Se/dR91dyoK2alP3DJxxUD3Wb2ElUpPnp4=;
+	b=MyzynNgRv6h+LA+fObkKCgz+x/gR8nkehcmK1nTfqJToxmTcZVd52LVcnfuGqc2meH
+	bE5dvVlWWUZAAkHyyBTCHOMTEqvr9P2jaxyH+JKYj3AAnEOUpSy08uDKYqo36np0ztBy
+	AIaaq+H/3VYU69bzqDEFUPdzhAG0eO3oA7c5yvFzF2dQM8c8BmcQLrefwkLLMyJuQ+76
+	yse2eCWihlcyR7J1IPl0+mQMlt2P4effAGefDfbvhabSyRAgxx4GTAYkx2OQIg4OYEJp
+	q4oViq1qGofXI0K0Yp2aDEe1mN3CWcKlvKtqUnrPTye6ZuG+bvi8R9o0Vi6ZcRjDCKm6
+	ZDNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uHmklYZhIjBxEIRZ9aOKVWmdtOE4c9jnhpiWIJAHHIY=;
-	b=FMNZGJV18wTAibfZKwPxlLueGpEgSHuwRHbWF7kxzTt0QDubgoc1vs3SESEfoM7QNN
-	5ilrB191XXGCL6QLcbpz4K7rTFaYihQckax/qqi9bmzXEKliriyEfIb/ZKbmTGHTb0Xr
-	67HN6NmEkT64TSCsr+sBJN/wPqAIk3FLnWps6P2CZTgV32S//KoXFgOu1mBVcJ9bCG1E
-	Yz8UJpSeywk8hZJ7Hg2jB/n7OB63WiLU2LKteDbH4GIGjUOgVGE1kEjpFGhEWA0XbTUz
-	BHQu86Fb9KyPTh393l6/doG8ww0UfL2MRApP0Db8dWT5Wzn05eVJaeXysKNkGGsx3+Hg
-	hn0g==
-X-Gm-Message-State: AJcUukcW8mQousxwGyaR6GgDL2OOnx18bFXaaaxl6iFPkFLn/YC9lQNs
-	05Cl/EkCNMayeIcTtUu4MlRZd9fCH1o=
-X-Google-Smtp-Source: ALg8bN7Lw7aIX2MrpJ51Cw3+nJutqdMFuU0is4u8fcdLc5MnYtx86Um5yv3+CZRI0SG6VRws6e/HJQ==
-X-Received: by 2002:a17:902:765:: with SMTP id
-	92mr53189027pli.242.1546657654688; 
-	Fri, 04 Jan 2019 19:07:34 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:877f:9499::6ee7])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=q65CBVvV5Se/dR91dyoK2alP3DJxxUD3Wb2ElUpPnp4=;
+	b=czB75OzEUbddH0qdd10vZcVVdaG/C3O7m1rguvRfdNjBSqcu5D6Bv7HmTgldRpOXzC
+	4stWVwLTkt9dB0Kt/6UNSyQ7yNc2+sJiTl4Q6pWvP9/siYW0+8p4s3Iu8e69dkwpz4P3
+	jFshOXStXn8WizPBXRLGXQZS6WLLYdtZH2eRmW5lS4I8X8AEDyubyunjNYefb+BM9ilN
+	2J7U9GOuT/2HqjNuudhzrBYz9bmTlhIgkKg4DPMQ1v0L2/TPjyGQxxqbQZleBAGqbaWK
+	oLdTvLUMKH9kYZnD4fyRixVBL98OAIEip998VYFg9/YcifIaiQcenZ2h5sEbT7VWkvBz
+	tOXA==
+X-Gm-Message-State: AA+aEWZKv5HNHqzW9G5+M8Yz0iHaAE14iukBaNBU9h/DK5npMZI8gqm3
+	hG9KgOVnifzWGGbKxG1ZIyTCpI0Gcw==
+X-Google-Smtp-Source: AFSGD/XkQvsVtDXBql9xmihbrasN8CAe+wH54eCdOxhKq5afjdBbl5Z7KGRHFABt0gep3uJEEGJ81w==
+X-Received: by 2002:a50:ee1a:: with SMTP id g26mr47862524eds.266.1546674600838;
+	Fri, 04 Jan 2019 23:50:00 -0800 (PST)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
 	by smtp.gmail.com with ESMTPSA id
-	m85sm97325536pfj.171.2019.01.04.19.07.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 04 Jan 2019 19:07:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	x30sm23700017edd.30.2019.01.04.23.49.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 04 Jan 2019 23:50:00 -0800 (PST)
+From: Athanasios Oikonomou <athoik@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Jan 2019 19:07:22 -0800
-Message-Id: <20190105030722.7975-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] luajit: Disable for mips n64/n32 hosts
+Date: Sat,  5 Jan 2019 09:46:45 +0200
+Message-Id: <1546674405-10061-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-filesystems][PATCH v3] fuse-exfat: fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jan 2019 03:07:34 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 05 Jan 2019 07:50:00 -0000
 
-- mips64 port does not exist
-- Also convert aarch64 compatible host case to an override
+The PN in S causes issues when expanded in multilib build.
+Using the default "S = "${WORKDIR}/${BP}" fixes the problem.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
 ---
- meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-index 3052eb0484..f3a0f70ee2 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-@@ -90,5 +90,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
- "
- FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+index 99bf2be..18fc9cd 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+@@ -17,5 +17,4 @@ inherit autotools pkgconfig
+ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
+ SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
  
--# Aarch64 is not supported in this release 
--COMPATIBLE_HOST = "^(?!aarch64).*"
-+# Aarch64/mips64 is not supported in this release
-+COMPATIBLE_HOST_aarch64 = "null"
-+COMPATIBLE_HOST_mipsarchn32 = "null"
-+COMPATIBLE_HOST_mipsarchn64 = "null"
+-S = "${WORKDIR}/${PN}-${PV}"
+ EXTRA_OECONF += "sbindir=${base_sbindir}"
 -- 
-2.20.1
+2.1.4
 
 
