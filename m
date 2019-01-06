@@ -1,50 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id F423260248
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Jan 2019 20:41:05 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id t13so43975312qtn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Jan 2019 12:41:07 -0800 (PST)
+Return-Path: <twoerner@gmail.com>
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+	[209.85.167.47])
+	by mail.openembedded.org (Postfix) with ESMTP id B66717BDDE;
+	Sun,  6 Jan 2019 03:57:44 +0000 (UTC)
+Received: by mail-lf1-f47.google.com with SMTP id y14so8958191lfg.13;
+	Sat, 05 Jan 2019 19:57:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zRyS29nEc2KEcTlMbn9M2knnygerhp3xdFSQ+wGKt20=;
-	b=TPF7TUBE19yliWBA1l5etwu5zo7oUqpFy9uK/LSPp4Bo1GpCw6BfflNHYGwbH4SsOX
-	+bJpe8UBRHPgXip1PZCRad7cPlLNBUrWSGwdOkUkWYx3W6SZ6Vwr3BDbFZ/Jc0Oi/gUa
-	6ix83K7L+a5fjeWA2B9bQhx+0snmYbsfDzP8jPgEHsKHbqXwGKpgaw6HLVUryLeUrPvh
-	wiXrhrw76jA/D+8PMIfBfyPZ1kZ0tLpcC2MHR7iyzYnIx4M4Gz7qlfblI/h4Y7HmoMBJ
-	mPEc0nzbrTRCtOZOOHp9AU3XxUdJuUVaTlZfIIbTP4NRn0QRpJFAArOclmy/5Jr5LoLO
-	XstA==
+	:cc; bh=i5I9PsN9eJN6SYxAmf/URdoPeP5WmXCjw296EX16RXI=;
+	b=h4WbKd2Cklx4e3RGMi8hUQ0urOz7yZgD7TdD9SnTvaw4ijWAirE+XQx2ZOtRYYloY9
+	BueYtyqDxmydYZv5Wq97JKWjx4uMO6osgQ4ZrwOTjdUTG9Ry+avfE8MoDN8bZoDLSWSo
+	XwrtadqZgPIgcL0ZC43iY5sJJf+UX4Vg48yxaUwRc8VJgGTrvAToPAAEOP/g/SdanNPx
+	0bszZhK8wDGSkRJLvZ6CA/Z2n7PraBduH5xDHAVjYp67By8J7X51IZXiSRg6GsQzrwj7
+	KHmxU2TsQQeZi/sac0ukiH4VQygOBRZ6fJ3uN/u+ApAMajzAz/u1nYVmsXg4cYhA3N43
+	B2wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zRyS29nEc2KEcTlMbn9M2knnygerhp3xdFSQ+wGKt20=;
-	b=nzaFmul4/frl4gw/FvCVBuHRmnygaJOVX5siNCBUTg4CVW0Ik4Zx5WltBybLO4ku0a
-	JRcJY8SNwEaR8ZdR58fABSs7+TXTJ5lzkAr2piHIqa1rIACOdzqyjxFSe84eaJdNlbNE
-	JyQ2+pVMl7je0BN5AjjzMt7oOsOnlMAELutF8MTZPnvxQxiHyykzJhIQhsWV9pfaM5Ry
-	Ndrzp+LNk4GLHQcCVXvbL7s19wxMwjlmLFUVL/+gHLbtbOMYgzz3xvRxsp0REBKmo0Ua
-	RfXZpd+qemKwrm3aem9oAwNc6RYYpKVG7Pmk/zcXSTZE4qSNuM5zgq0GFjKInZme+In0
-	59CA==
-X-Gm-Message-State: AA+aEWYHcU1ucydOxed1uc06oS6673qxVACxkBI+wbNakFKmot+FlY5z
-	jiYTnjLOPOOgZ/UVh8C85TKjZnk56PUF1iPwPHk=
-X-Google-Smtp-Source: AFSGD/UPLCygIDcQJtTt28yy6EQ1pt9Z2Nbk842xsn9qa3lyGCUId0eVZne/t8MiBkb3QRrMzChkLE+Ye/7ODpjYoI0=
-X-Received: by 2002:ac8:518d:: with SMTP id c13mr53198163qtn.254.1546720866496;
-	Sat, 05 Jan 2019 12:41:06 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=i5I9PsN9eJN6SYxAmf/URdoPeP5WmXCjw296EX16RXI=;
+	b=sqATOMQll/6x1MWEVt8tEeOIacoV2e3eE2GUQ9nVE5kBogXtilgOKmUvzj0lgl+WAT
+	Rwb+cYDJ30Xsq7AJlIvbA0dOK+6W+dxotE3X1hJf2b+wdM9naJ6dfJQliFZnOmAWgvJD
+	CV8rLzcjZA5XeSoBiYKd1ZHlPWuioTNPawPMecfhxeAgerXbOtAOG9Q/m0hR0I/0A214
+	A/iIhAnrgywq9AFAkH9zkjDizfZMspUc83wklNdWqaWzSl/sYFGwa11l2tyQGcyMIuMP
+	NOM1aO5LueHgJCvmUKJb2odvN9wRUmCK4ic9mwYopiafFGc8kdGSdgHhqy41QLUiS32m
+	iluQ==
+X-Gm-Message-State: AJcUukdNU3AK3HRaRqxgPwulRe7TUneV2NtQYclafOkMxxbs+N0JctMv
+	oO4bOpDEwsbLfMoHKI6yfrlZi8FkbuFfVpO3zNs=
+X-Google-Smtp-Source: ALg8bN7zLE4USX5j2ouJRDmIc5bzddefRQaNHAZ+HxXNUNW/dJIle170ClgHGvi8nZ0MlISEsXdvIjoPLbh5LxsxW50=
+X-Received: by 2002:a19:e01e:: with SMTP id x30mr2490214lfg.89.1546747065104; 
+	Sat, 05 Jan 2019 19:57:45 -0800 (PST)
 MIME-Version: 1.0
-References: <1546597268-28446-1-git-send-email-athoik@gmail.com>
-	<CAMKF1spPv3_R+0AEJqNhryyweBYS+_tEXDdGHALT8mWDsx_VMg@mail.gmail.com>
-	<CANDbA3fiuUPbBB52C=yONOkFhJ_p6KFf7fbgkfaf6YG2sMDUPA@mail.gmail.com>
-In-Reply-To: <CANDbA3fiuUPbBB52C=yONOkFhJ_p6KFf7fbgkfaf6YG2sMDUPA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 5 Jan 2019 12:40:40 -0800
-Message-ID: <CAMKF1spe-wjwUFz7=hBS3hZWQ-AV7PVZ_rPx9vNcQ1dDD68PDA@mail.gmail.com>
-To: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
-	<athoik@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] fuse-exfat: fix multilib build
+References: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
+In-Reply-To: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Sat, 5 Jan 2019 22:57:33 -0500
+Message-ID: <CAHUNapTmVvPad7YjTt4CyLPA9tiNiTy-vF7hQ53chVV_Y3-RLA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [Openembedded-architecture] Dropping armv5 and armv5e tunes in 2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,48 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jan 2019 20:41:06 -0000
+X-List-Received-Date: Sun, 06 Jan 2019 03:57:45 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 4, 2019 at 11:52 PM =CE=91=CE=B8=CE=B1=CE=BD=CE=AC=CF=83=CE=B9=
-=CE=BF=CF=82 =CE=9F=CE=B9=CE=BA=CE=BF=CE=BD=CF=8C=CE=BC=CE=BF=CF=85 <athoik=
-@gmail.com> wrote:
->
-> =CE=A3=CF=84=CE=B9=CF=82 =CE=A0=CE=B1=CF=81, 4 =CE=99=CE=B1=CE=BD 2019 =
-=CF=83=CF=84=CE=B9=CF=82 7:53 =CE=BC.=CE=BC., =CE=BF/=CE=B7 Khem Raj <raj.k=
-hem@gmail.com> =CE=AD=CE=B3=CF=81=CE=B1=CF=88=CE=B5:
-> >
-> > On Fri, Jan 4, 2019 at 2:25 AM Athanasios Oikonomou <athoik@gmail.com> =
-wrote:
-> > >
-> > > Replace the PN with BPN to fix the multilib build.
-> > > ---
-> > >  meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb =
-| 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exf=
-at_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.=
-2.3.bb
-> > > index 99bf2be..ea00222 100644
-> > > --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.=
-3.bb
-> > > +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.=
-3.bb
-> > > @@ -17,5 +17,5 @@ inherit autotools pkgconfig
-> > >  SRC_URI[md5sum] =3D "fca71e6598f79d037a3c7c969cb5710c"
-> > >  SRC_URI[sha256sum] =3D "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9=
-c8acd357dd463c2355d9"
-> > >
-> > > -S =3D "${WORKDIR}/${PN}-${PV}"
-> > > +S =3D "${WORKDIR}/${BPN}-${PV}"
-> >
-> > Could you try using S =3D "${WORKDIR}/${BP}
-> >
->
-> Default S seems to work fine. Pushed a newer version that completely
-> removes S in order to use the default one.
+Hello Khem,
 
-queued up for master-next
+Thanks for pointing this out.
+
+On Thu, Jan 3, 2019 at 5:02 PM Khem Raj <raj.khem@gmail.com> wrote:
+
+> Secondly, I would also like to drop armv4t, and keep armv5te as lowest
+> supported tune
+>
+
+Fortunately I don't have any ARMv4 boards.
+
+But, just for informational purposes, I wanted to point out that I do have
+a couple ARM926EJ-S boards (i.MX233, LPC32xx) which are ARMv5TE which I am
+actively working with and maintaining. Therefore, thank you for keeping
+this one around.
 
