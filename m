@@ -1,27 +1,51 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 667177BE38
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id DBED67BFAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Jan 2019 21:44:10 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x08Li6H6021271
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 8 Jan 2019 13:44:07 -0800 (PST)
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Tue, 8 Jan 2019 13:44:06 -0800
-To: Pierre-Jean Texier <pjtexier@koncepto.io>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1546982720-31704-1-git-send-email-pjtexier@koncepto.io>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <6613407c-f7e7-38d3-c373-270ce55376bc@windriver.com>
-Date: Tue, 8 Jan 2019 16:44:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Tue,  8 Jan 2019 22:05:18 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id s198so2343258pgs.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Jan 2019 14:05:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=joDd5x1rkRXJKJXBtYBilKSUJ8qCuo7jQDkwua9ZxCc=;
+	b=JTi2mmzjiY7+3NVze6Q64jG2asxuha3uSUK6yQUOuT2oHZIuda9AXb4KE5gkCHozDL
+	ov4xQHO8Q14R50XcPheXQ2kohi0dly56p4CvZ27d1v2Hted8iwJ5owBS2jspstJTjJG6
+	B3QavsAdXE6pOVASMIfNIGuxAcqBEqYMXC6SHd9U33tJOk02OQXbehEFxDv/jZH8I1cW
+	S79G4+XvzFwrmt4DzhQskua8zeVxJz5uzP/ejNPPhRD2ba+dEUefusNupu+plu9J5QBM
+	aR+OUbsCPD1PNJFKQJc5q9CT9+mWXPI+on0j1a5WbGW6s5BVszK7rremITi4/kgb+rjX
+	phOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=joDd5x1rkRXJKJXBtYBilKSUJ8qCuo7jQDkwua9ZxCc=;
+	b=ubDTk2UMSIR6MJ1K+Bs1bvD2cPAB+kfZYix03NciVLFzHdGY00wHTuYBML0umJwexD
+	uEsfF0AbkNm3bhAqR+Q6OnydoDyybxEr7ESzbdQdRmCt+CqK+sM3FTAkX4bBr+ZmTLuG
+	lj0ZIySfaBus65iJzF0LMzh7uZO+mbCYjJGtZDjfKsBMR+8hPJz/LAWn/b3PdZwaZTda
+	48MLsijBlf/lpt3bdXTGBgwJ7IXFVnhiq8dHnXSshSgCKAUvBcz+X4VPGlO6HxoQGe4p
+	xDIifOJ8rdAdvdekkxnHFeHgxg/miJDGjDwC5erAJw1EVKgRtpr2ySF9EQ5Cz4Ji+f6z
+	3O/Q==
+X-Gm-Message-State: AJcUukdDnnerJ5I3j/U1jiuc1ILa7a6NZg0YYSVSERRpFM/ttGioQmZj
+	wl4FyWLixVPkryfwbC7jF9u0tA+wAGA=
+X-Google-Smtp-Source: ALg8bN4bT07jrNig/mVXoVUmvZnSkO6gF97iDWA7Dj8iHqFpYTindUmXNj8aX3umyYH1jvA7ChRenQ==
+X-Received: by 2002:a63:4002:: with SMTP id n2mr3034786pga.137.1546985119398; 
+	Tue, 08 Jan 2019 14:05:19 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:877f:9499::6e98])
+	by smtp.gmail.com with ESMTPSA id
+	b27sm104995752pfh.113.2019.01.08.14.05.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 08 Jan 2019 14:05:18 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Jan 2019 14:05:11 -0800
+Message-Id: <20190108220512.44077-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <1546982720-31704-1-git-send-email-pjtexier@koncepto.io>
-X-Originating-IP: [172.25.44.4]
-Subject: Re: [meta-oe][PATCH 1/2] minicoredumper: Update to 2.0.1
+Cc: Ferry Toth <ftoth@exalondelft.nl>, Ferry <ftoth@telfort.nl>
+Subject: [meta-oe][PATCH 1/2] libgpiod_1.2: add dependency on python when building python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,65 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2019 21:44:10 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jan 2019 22:05:19 -0000
+Content-Transfer-Encoding: 8bit
 
-On 1/8/19 4:25 PM, Pierre-Jean Texier wrote:
-> - Drop upstreamed patch
-> - Update COPYING
+From: Ferry <ftoth@telfort.nl>
 
-Please add a few words to the long log to explain why
-the COPYING chksum needed to be changed.
-Was it just copyright date changes?
+Commit ab54dd75 "libgpiod: Rrecommend python3 only for PN-python package" also removes the build dependency
+on python3 however this results in fatal error: Python.h: No such file or directory #include <Python.h>
 
-Thanks,
-../Randy
+Signed-off-by: Ferry Toth <ftoth@exalondelft.nl>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
-> ---
->   .../{minicoredumper_2.0.0.bb => minicoredumper_2.0.1.bb}             | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
->   rename meta-oe/recipes-kernel/minicoredumper/{minicoredumper_2.0.0.bb => minicoredumper_2.0.1.bb} (88%)
-> 
-> diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-> similarity index 88%
-> rename from meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-> rename to meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-> index bae5cf4..50dab8d 100644
-> --- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-> +++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-> @@ -1,7 +1,7 @@
->   SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
->   to allow minimal and customized crash dumps"
->   LICENSE = " LGPLv2.1 & BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=aa846ae365f71b69e9fa0d21a56391ec \
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=71827c617ec7b45a0dd23658347cc1e9 \
->                       file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
->                       file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
->                      "
-> @@ -9,14 +9,13 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
->   
->   inherit autotools pkgconfig systemd update-rc.d
->   
-> -SRCREV = "1c0d5960b0bb4bac7566e6afe8bc9705399cc76b"
-> +SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
->   
->   PR .= "+git${SRCPV}"
->   
->   SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
->              file://minicoredumper.service \
->              file://minicoredumper.init \
-> -           file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
->              "
->   
->   S = "${WORKDIR}/git"
-> 
-
-
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
+index dd080ff9d2..93165a0c2d 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.2.bb
+@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "b6b9079c933f7c8524815437937dda6b795a16141bca202a9eec70ba58
+ 
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+ 
+-PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,"
++PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
+ 
+ PACKAGES =+ "${PN}-python"
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.20.1
+
 
