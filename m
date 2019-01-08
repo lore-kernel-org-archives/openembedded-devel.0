@@ -1,49 +1,28 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
-	[209.85.167.47])
-	by mail.openembedded.org (Postfix) with ESMTP id B66717BDDE;
-	Sun,  6 Jan 2019 03:57:44 +0000 (UTC)
-Received: by mail-lf1-f47.google.com with SMTP id y14so8958191lfg.13;
-	Sat, 05 Jan 2019 19:57:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=i5I9PsN9eJN6SYxAmf/URdoPeP5WmXCjw296EX16RXI=;
-	b=h4WbKd2Cklx4e3RGMi8hUQ0urOz7yZgD7TdD9SnTvaw4ijWAirE+XQx2ZOtRYYloY9
-	BueYtyqDxmydYZv5Wq97JKWjx4uMO6osgQ4ZrwOTjdUTG9Ry+avfE8MoDN8bZoDLSWSo
-	XwrtadqZgPIgcL0ZC43iY5sJJf+UX4Vg48yxaUwRc8VJgGTrvAToPAAEOP/g/SdanNPx
-	0bszZhK8wDGSkRJLvZ6CA/Z2n7PraBduH5xDHAVjYp67By8J7X51IZXiSRg6GsQzrwj7
-	KHmxU2TsQQeZi/sac0ukiH4VQygOBRZ6fJ3uN/u+ApAMajzAz/u1nYVmsXg4cYhA3N43
-	B2wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=i5I9PsN9eJN6SYxAmf/URdoPeP5WmXCjw296EX16RXI=;
-	b=sqATOMQll/6x1MWEVt8tEeOIacoV2e3eE2GUQ9nVE5kBogXtilgOKmUvzj0lgl+WAT
-	Rwb+cYDJ30Xsq7AJlIvbA0dOK+6W+dxotE3X1hJf2b+wdM9naJ6dfJQliFZnOmAWgvJD
-	CV8rLzcjZA5XeSoBiYKd1ZHlPWuioTNPawPMecfhxeAgerXbOtAOG9Q/m0hR0I/0A214
-	A/iIhAnrgywq9AFAkH9zkjDizfZMspUc83wklNdWqaWzSl/sYFGwa11l2tyQGcyMIuMP
-	NOM1aO5LueHgJCvmUKJb2odvN9wRUmCK4ic9mwYopiafFGc8kdGSdgHhqy41QLUiS32m
-	iluQ==
-X-Gm-Message-State: AJcUukdNU3AK3HRaRqxgPwulRe7TUneV2NtQYclafOkMxxbs+N0JctMv
-	oO4bOpDEwsbLfMoHKI6yfrlZi8FkbuFfVpO3zNs=
-X-Google-Smtp-Source: ALg8bN7zLE4USX5j2ouJRDmIc5bzddefRQaNHAZ+HxXNUNW/dJIle170ClgHGvi8nZ0MlISEsXdvIjoPLbh5LxsxW50=
-X-Received: by 2002:a19:e01e:: with SMTP id x30mr2490214lfg.89.1546747065104; 
-	Sat, 05 Jan 2019 19:57:45 -0800 (PST)
-MIME-Version: 1.0
-References: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
-In-Reply-To: <CAMKF1sooPOtN-Y=0_cZ=Qv2viS5mwJAsm+yVsHpOJ5gpN65eZw@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sat, 5 Jan 2019 22:57:33 -0500
-Message-ID: <CAHUNapTmVvPad7YjTt4CyLPA9tiNiTy-vF7hQ53chVV_Y3-RLA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [Openembedded-architecture] Dropping armv5 and armv5e tunes in 2.7
+Return-Path: <pjtexier@koncepto.io>
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id 4ED277BFDB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Jan 2019 21:25:22 +0000 (UTC)
+Received: from localhost.localdomain (lfbn-1-8921-123.w193-250.abo.wanadoo.fr
+	[193.250.63.123])
+	by koncepto.io (Postfix) with ESMTPSA id 4FE1760566;
+	Tue,  8 Jan 2019 22:25:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1546982722;
+	bh=HLsnno9zTSx9pltzJVawXD5Bm2DIVNqIVrgAW/IcZuQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=M2srCrBwhp6o3cuPFfA5rvZ3us0X/E2KOZOHWgrnEAef8DKAAgI8DQfrzsVCw14MO
+	f+dzYy6yjkviXwPsrs/jOTaKQkRu2CsJRjwF+uEmpnrMzRJFEKOhuhBV/0fXF5phZb
+	qTcoPGR0pRXuvU4eN2OR8TqeWxHoQFNa9SX/Xd7/eGe7G0Ru+zpjY0Fo/62/yzD6jN
+	UY5vS73+iOnziizBKAm6r1nb5CvN4/lJu7yQapKYhzyQWJ69rIMfoQK/+iab4E8SYH
+	wHYu3J+AfoK+xHIGRoqprsjyhv8l5deLEgBR6sh/88xX3iHwAHzW7kEei7P3ryKXlO
+	A0d2+L5GRGJ4A==
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Jan 2019 22:25:19 +0100
+Message-Id: <1546982720-31704-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/2] minicoredumper: Update to 2.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2019 03:57:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 08 Jan 2019 21:25:22 -0000
 
-Hello Khem,
+- Drop upstreamed patch
+- Update COPYING
 
-Thanks for pointing this out.
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ .../{minicoredumper_2.0.0.bb => minicoredumper_2.0.1.bb}             | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-kernel/minicoredumper/{minicoredumper_2.0.0.bb => minicoredumper_2.0.1.bb} (88%)
 
-On Thu, Jan 3, 2019 at 5:02 PM Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+similarity index 88%
+rename from meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+rename to meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+index bae5cf4..50dab8d 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
+ to allow minimal and customized crash dumps"
+ LICENSE = " LGPLv2.1 & BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=aa846ae365f71b69e9fa0d21a56391ec \
++LIC_FILES_CHKSUM = "file://COPYING;md5=71827c617ec7b45a0dd23658347cc1e9 \
+                     file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
+                     file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
+                    "
+@@ -9,14 +9,13 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
+ 
+ inherit autotools pkgconfig systemd update-rc.d
+ 
+-SRCREV = "1c0d5960b0bb4bac7566e6afe8bc9705399cc76b"
++SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
+ 
+ PR .= "+git${SRCPV}"
+ 
+ SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+-           file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.7.4
 
-> Secondly, I would also like to drop armv4t, and keep armv5te as lowest
-> supported tune
->
-
-Fortunately I don't have any ARMv4 boards.
-
-But, just for informational purposes, I wanted to point out that I do have
-a couple ARM926EJ-S boards (i.MX233, LPC32xx) which are ARMv5TE which I am
-actively working with and maintaining. Therefore, thank you for keeping
-this one around.
 
