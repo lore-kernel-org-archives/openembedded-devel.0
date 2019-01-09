@@ -1,44 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id D26716C12D
+Return-Path: <Yongxin.Liu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 971706C455
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jan 2019 10:06:26 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id y20so7631953qtm.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2019 02:06:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=XxASwV6nuiJUkU0FOV6YbRFeYXJ0lhzPj1QBd7+QoGg=;
-	b=iFkp4flr71tRgOlbbl9uU4fCgbCDjfGTgrM6XhpHPLcyQS7KNII3qMbZ9xIoKOi0iY
-	V5tPSIceyQuAXFVRsxi/bLkhwBh0JUZSCnO32n6LXRkzDqeVUseedezrEdY6xVhkT1eF
-	SV+3TFspmHllC0kjTQZ74ZeMCOe8jPKn4b86ccUugpeM/5FH7oae8KNLGNhCnm7iPDtv
-	6e2YQpimIr09t79L8B+n6RnCQIJmRmymwzGSl6jRbOK9JvmqJBjODx54RCA5esQnARHF
-	ZwobGtFQO87dlWH500RseaBeOlJHQvwtmoznSZSn8x23eBdRGO2uDzFQpDT7fHrnd7AO
-	M6Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=XxASwV6nuiJUkU0FOV6YbRFeYXJ0lhzPj1QBd7+QoGg=;
-	b=Xu0Kv79Ges/xnS/tExxiqqxhETyNMHrmrNL3Xtb8Mf1meQcqGATZFsrskZ9cY7YiZO
-	QL3fyKN+2W6w6rAKPbumjAtCJ60hmpquuBrVZQi8j5eh9qv9Jczlu/QhNixNNBIPtkh7
-	RF/3pdX2FupWku/DYuPKm8YvK6hhDoVjVP7fcwLbIyS6Ia77Ci6vN+0N9qVJObOuDEhD
-	e0W9JKkaZXYXSzb1hKeJgpjd74hct/bRPVRporigcKkj4hL/DdMqCds2T6VKyJd39nxT
-	un9NxcfQMBmP7EUoAXsI4J+EGkBb9jD8XsdxJXCctN7sv7osqONiG4aN8Vvu2KXtSFYh
-	BAdw==
-X-Gm-Message-State: AJcUukdrYA3dQHYUW8Fe7lHurBr1+mJza3tq1hZVHULONk++NTg92mMT
-	ohv7hUwQW4+Z8xpIhE6Lev5Ak7qhR0G1M01oK6B/n/jr
-X-Google-Smtp-Source: ALg8bN7dPZKVxS/t6cQkGqg/OQMeQ8xvQ72HjSqMnISsfZONqn4v083UBzPsLajr7V/c8g0sZU0+DGkLBr0bEUvlegg=
-X-Received: by 2002:aed:3eac:: with SMTP id n41mr4987432qtf.196.1547028387317; 
-	Wed, 09 Jan 2019 02:06:27 -0800 (PST)
-MIME-Version: 1.0
+	Wed,  9 Jan 2019 10:17:13 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x09AHDlG028839
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 9 Jan 2019 02:17:13 -0800 (PST)
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.249]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0415.000;
+	Wed, 9 Jan 2019 02:17:12 -0800
+From: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH] pmdk: fix install error
+Thread-Index: AQHUp+NdqedK10XUdkWS1jyEzHU+hqWnPC6A//98DbA=
+Date: Wed, 9 Jan 2019 10:17:12 +0000
+Message-ID: <597B109EC20B76429F71A8A97770610D129ED63A@ALA-MBD.corp.ad.wrs.com>
 References: <20190109061610.34471-1-yongxin.liu@windriver.com>
-In-Reply-To: <20190109061610.34471-1-yongxin.liu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 9 Jan 2019 02:06:01 -0800
-Message-ID: <CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
-To: Yongxin Liu <yongxin.liu@windriver.com>
+	<CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.171]
+MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] pmdk: fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -53,44 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2019 10:06:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 09 Jan 2019 10:17:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, Jan 8, 2019 at 10:20 PM Yongxin Liu <yongxin.liu@windriver.com> wrote:
->
-> .so files are not generated in usr/local/lib/ but in usr/local/lib64.
->
-> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
-> ---
->  meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> index 3da22a970..af2229f1c 100644
-> --- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> @@ -43,10 +43,10 @@ do_install() {
->         mv ${D}/usr/local/bin/daxio ${D}${bindir}/
->
->         install -d ${D}${libdir}
-> -       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-> +       mv ${D}/usr/local/lib64/*so* ${D}${libdir}/
->
-
-I wonder if this should be using /usr/local/${base_libdir} here
-
->         install -d ${D}${libdir}/pkgconfig
-> -       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-> +       mv ${D}/usr/local/lib64/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
->
->         install -d ${D}${includedir}
->         mv ${D}/usr/local/include/* ${D}${includedir}/
-> --
-> 2.14.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJh
+ai5raGVtQGdtYWlsLmNvbV0NCj4gU2VudDogV2VkbmVzZGF5LCBKYW51YXJ5IDksIDIwMTkgMTg6
+MDYNCj4gVG86IExpdSwgWW9uZ3hpbg0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwNCj4gU3ViamVj
+dDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIXSBwbWRrOiBmaXggaW5zdGFsbCBlcnJvcg0KPiAN
+Cj4gT24gVHVlLCBKYW4gOCwgMjAxOSBhdCAxMDoyMCBQTSBZb25neGluIExpdSA8eW9uZ3hpbi5s
+aXVAd2luZHJpdmVyLmNvbT4NCj4gd3JvdGU6DQo+ID4NCj4gPiAuc28gZmlsZXMgYXJlIG5vdCBn
+ZW5lcmF0ZWQgaW4gdXNyL2xvY2FsL2xpYi8gYnV0IGluIHVzci9sb2NhbC9saWI2NC4NCj4gPg0K
+PiA+IFNpZ25lZC1vZmYtYnk6IFlvbmd4aW4gTGl1IDx5b25neGluLmxpdUB3aW5kcml2ZXIuY29t
+Pg0KPiA+IC0tLQ0KPiA+ICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9wbWRrXzEuNC4y
+LmJiIHwgNCArKy0tDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVs
+ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
+L3BtZGsvcG1ka18xLjQuMi5iYiBiL21ldGEtDQo+IG9lL3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9w
+bWRrXzEuNC4yLmJiDQo+ID4gaW5kZXggM2RhMjJhOTcwLi5hZjIyMjlmMWMgMTAwNjQ0DQo+ID4g
+LS0tIGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18xLjQuMi5iYg0KPiA+ICsr
+KyBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3BtZGtfMS40LjIuYmINCj4gPiBAQCAt
+NDMsMTAgKzQzLDEwIEBAIGRvX2luc3RhbGwoKSB7DQo+ID4gICAgICAgICBtdiAke0R9L3Vzci9s
+b2NhbC9iaW4vZGF4aW8gJHtEfSR7YmluZGlyfS8NCj4gPg0KPiA+ICAgICAgICAgaW5zdGFsbCAt
+ZCAke0R9JHtsaWJkaXJ9DQo+ID4gLSAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9saWIvKnNvKiAk
+e0R9JHtsaWJkaXJ9Lw0KPiA+ICsgICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliNjQvKnNvKiAk
+e0R9JHtsaWJkaXJ9Lw0KPiA+DQo+IA0KPiBJIHdvbmRlciBpZiB0aGlzIHNob3VsZCBiZSB1c2lu
+ZyAvdXNyL2xvY2FsLyR7YmFzZV9saWJkaXJ9IGhlcmUNCg0KU2luY2UgJHtiYXNlX2xpYmRpcn0g
+aXMgIi9saWI2NCIsIHNob3VsZCB3ZSB1c2UgIi91c3IvbG9jYWwke2Jhc2VfbGliZGlyfSIgPw0K
+T3IgaXQgaXMgZmluZSB0byBnbyB3aXRoICIvdXNyL2xvY2FsLy9saWI2NCIgYWZ0ZXIgcGFyc2lu
+Zz8NCg0KDQpUaGFua3MsDQpZb25neGluDQoNCj4gPiAgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7
+bGliZGlyfS9wa2djb25maWcNCj4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2xpYi9wa2dj
+b25maWcvKi5wYyAke0R9JHtsaWJkaXJ9L3BrZ2NvbmZpZy8NCj4gPiArICAgICAgIG12ICR7RH0v
+dXNyL2xvY2FsL2xpYjY0L3BrZ2NvbmZpZy8qLnBjICR7RH0ke2xpYmRpcn0vcGtnY29uZmlnLw0K
+PiA+DQo+ID4gICAgICAgICBpbnN0YWxsIC1kICR7RH0ke2luY2x1ZGVkaXJ9DQo+ID4gICAgICAg
+ICBtdiAke0R9L3Vzci9sb2NhbC9pbmNsdWRlLyogJHtEfSR7aW5jbHVkZWRpcn0vDQo+ID4gLS0N
+Cj4gPiAyLjE0LjQNCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0
+DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRw
+Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1k
+ZXZlbA0K
 
