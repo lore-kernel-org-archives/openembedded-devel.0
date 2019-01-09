@@ -1,29 +1,46 @@
-Return-Path: <Yongxin.Liu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 971706C455
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A59279CC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jan 2019 10:17:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x09AHDlG028839
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 9 Jan 2019 02:17:13 -0800 (PST)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.249]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0415.000;
-	Wed, 9 Jan 2019 02:17:12 -0800
-From: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] pmdk: fix install error
-Thread-Index: AQHUp+NdqedK10XUdkWS1jyEzHU+hqWnPC6A//98DbA=
-Date: Wed, 9 Jan 2019 10:17:12 +0000
-Message-ID: <597B109EC20B76429F71A8A97770610D129ED63A@ALA-MBD.corp.ad.wrs.com>
+	Wed,  9 Jan 2019 18:19:24 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id n32so9332838qte.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Jan 2019 10:19:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=PQWbA1inRX0FZQFvJ8A/kgT5a3sElPWRfqhQcSwoeh4=;
+	b=X1JN9CeLDcCqYk8/554Ih8zrSGpEGyaoyQ5OUI1L+hoOsGLl1vZUztIjq8eVlcmTSN
+	5s05Zt5xdp4QwTt1ZLlT1p10xwtZk6oH0vvoSH+DwhwinrNT930iyDQhZQQrH9m88o80
+	SdB+LOkyUNMyBsQNKGoY9gMotb961uB+3bUhvczywW5r+LSyRgsZntCD7Ta05nMUXCJM
+	H2qPkF4MZJsRMJUAWGtlUuOCq7fV92fo9kDvr6AzsDRKeRLcBCkqOfutAC3gNjTCAWus
+	gaej05HdnnlQyfp/4ZMZ73OQ6pBMMfCJdukz4J2IXDMj0IBBLkvl2vXjBrkxKSx815AX
+	SJZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=PQWbA1inRX0FZQFvJ8A/kgT5a3sElPWRfqhQcSwoeh4=;
+	b=X9txgi0WaM+ra5ab4EVoWYw7yjEjFxRUDVduyRRcgVYit++cT1M26q81j3wHsyjXOD
+	+aWQermQINH0k6RnhwL7fpUSe8oaiCw31YcRdQyjrQxm4XvRCHhEr+BxSYoKA2n4wtr5
+	znr++jlrRgijEh0NYiJiqiToePd54geqmZVHHJY89K4juivrYxTLGOsCCioKC6KbgG7L
+	Ofo3j9cPo1uVyzpSLDmlqJKRB1ckDHpPpYXRVxqXzAFtaotgVf3qgqik9ZG02dfQh/7/
+	+F6zC4LFbT09O9gghsW/MNlJatRLPjIppaACt9/0he0L71T0Ep5hhIGVWbRAeNp4mMbC
+	nBFQ==
+X-Gm-Message-State: AJcUukdrhSN+5kgi+ad1IXvKvRxcvbQXYmAshiHESCTzkAb7+9IEQebv
+	CgVmNnEWBesSdk7GmapcMlB/b6Zp7E/Kj5j1IUgExO9prdo=
+X-Google-Smtp-Source: ALg8bN4BV0Yk/LgEn+BEtnq3/1+6WdpTYh+wgICB9eNU4bhqRC7TZyTKXErFSMW14BHp0mren6/+XdgHdwpg8n/c60c=
+X-Received: by 2002:aed:3a22:: with SMTP id n31mr6733626qte.29.1547057964911; 
+	Wed, 09 Jan 2019 10:19:24 -0800 (PST)
+MIME-Version: 1.0
 References: <20190109061610.34471-1-yongxin.liu@windriver.com>
 	<CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
-In-Reply-To: <CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.171]
-MIME-Version: 1.0
+	<597B109EC20B76429F71A8A97770610D129ED63A@ALA-MBD.corp.ad.wrs.com>
+In-Reply-To: <597B109EC20B76429F71A8A97770610D129ED63A@ALA-MBD.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Jan 2019 10:18:58 -0800
+Message-ID: <CAMKF1sqJTnt6R7F83Ta47Kbt3nzyeT5-LYYgyzAm2Q6y0j2Gaw@mail.gmail.com>
+To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] pmdk: fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -38,43 +55,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2019 10:17:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 09 Jan 2019 18:19:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJh
-ai5raGVtQGdtYWlsLmNvbV0NCj4gU2VudDogV2VkbmVzZGF5LCBKYW51YXJ5IDksIDIwMTkgMTg6
-MDYNCj4gVG86IExpdSwgWW9uZ3hpbg0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwNCj4gU3ViamVj
-dDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIXSBwbWRrOiBmaXggaW5zdGFsbCBlcnJvcg0KPiAN
-Cj4gT24gVHVlLCBKYW4gOCwgMjAxOSBhdCAxMDoyMCBQTSBZb25neGluIExpdSA8eW9uZ3hpbi5s
-aXVAd2luZHJpdmVyLmNvbT4NCj4gd3JvdGU6DQo+ID4NCj4gPiAuc28gZmlsZXMgYXJlIG5vdCBn
-ZW5lcmF0ZWQgaW4gdXNyL2xvY2FsL2xpYi8gYnV0IGluIHVzci9sb2NhbC9saWI2NC4NCj4gPg0K
-PiA+IFNpZ25lZC1vZmYtYnk6IFlvbmd4aW4gTGl1IDx5b25neGluLmxpdUB3aW5kcml2ZXIuY29t
-Pg0KPiA+IC0tLQ0KPiA+ICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9wbWRrXzEuNC4y
-LmJiIHwgNCArKy0tDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVs
-ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
-L3BtZGsvcG1ka18xLjQuMi5iYiBiL21ldGEtDQo+IG9lL3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9w
-bWRrXzEuNC4yLmJiDQo+ID4gaW5kZXggM2RhMjJhOTcwLi5hZjIyMjlmMWMgMTAwNjQ0DQo+ID4g
-LS0tIGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18xLjQuMi5iYg0KPiA+ICsr
-KyBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3BtZGtfMS40LjIuYmINCj4gPiBAQCAt
-NDMsMTAgKzQzLDEwIEBAIGRvX2luc3RhbGwoKSB7DQo+ID4gICAgICAgICBtdiAke0R9L3Vzci9s
-b2NhbC9iaW4vZGF4aW8gJHtEfSR7YmluZGlyfS8NCj4gPg0KPiA+ICAgICAgICAgaW5zdGFsbCAt
-ZCAke0R9JHtsaWJkaXJ9DQo+ID4gLSAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9saWIvKnNvKiAk
-e0R9JHtsaWJkaXJ9Lw0KPiA+ICsgICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliNjQvKnNvKiAk
-e0R9JHtsaWJkaXJ9Lw0KPiA+DQo+IA0KPiBJIHdvbmRlciBpZiB0aGlzIHNob3VsZCBiZSB1c2lu
-ZyAvdXNyL2xvY2FsLyR7YmFzZV9saWJkaXJ9IGhlcmUNCg0KU2luY2UgJHtiYXNlX2xpYmRpcn0g
-aXMgIi9saWI2NCIsIHNob3VsZCB3ZSB1c2UgIi91c3IvbG9jYWwke2Jhc2VfbGliZGlyfSIgPw0K
-T3IgaXQgaXMgZmluZSB0byBnbyB3aXRoICIvdXNyL2xvY2FsLy9saWI2NCIgYWZ0ZXIgcGFyc2lu
-Zz8NCg0KDQpUaGFua3MsDQpZb25neGluDQoNCj4gPiAgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7
-bGliZGlyfS9wa2djb25maWcNCj4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2xpYi9wa2dj
-b25maWcvKi5wYyAke0R9JHtsaWJkaXJ9L3BrZ2NvbmZpZy8NCj4gPiArICAgICAgIG12ICR7RH0v
-dXNyL2xvY2FsL2xpYjY0L3BrZ2NvbmZpZy8qLnBjICR7RH0ke2xpYmRpcn0vcGtnY29uZmlnLw0K
-PiA+DQo+ID4gICAgICAgICBpbnN0YWxsIC1kICR7RH0ke2luY2x1ZGVkaXJ9DQo+ID4gICAgICAg
-ICBtdiAke0R9L3Vzci9sb2NhbC9pbmNsdWRlLyogJHtEfSR7aW5jbHVkZWRpcn0vDQo+ID4gLS0N
-Cj4gPiAyLjE0LjQNCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0
-DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRw
-Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1k
-ZXZlbA0K
+On Wed, Jan 9, 2019 at 2:17 AM Liu, Yongxin <Yongxin.Liu@windriver.com> wrote:
+>
+> > -----Original Message-----
+> > From: Khem Raj [mailto:raj.khem@gmail.com]
+> > Sent: Wednesday, January 9, 2019 18:06
+> > To: Liu, Yongxin
+> > Cc: openembeded-devel
+> > Subject: Re: [oe] [meta-oe][PATCH] pmdk: fix install error
+> >
+> > On Tue, Jan 8, 2019 at 10:20 PM Yongxin Liu <yongxin.liu@windriver.com>
+> > wrote:
+> > >
+> > > .so files are not generated in usr/local/lib/ but in usr/local/lib64.
+> > >
+> > > Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+> > > ---
+> > >  meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb | 4 ++--
+> > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-
+> > oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > index 3da22a970..af2229f1c 100644
+> > > --- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > @@ -43,10 +43,10 @@ do_install() {
+> > >         mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+> > >
+> > >         install -d ${D}${libdir}
+> > > -       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+> > > +       mv ${D}/usr/local/lib64/*so* ${D}${libdir}/
+> > >
+> >
+> > I wonder if this should be using /usr/local/${base_libdir} here
+>
+> Since ${base_libdir} is "/lib64", should we use "/usr/local${base_libdir}" ?
+> Or it is fine to go with "/usr/local//lib64" after parsing?
+
+using /usr/local${base_libdir} is fine
+
+>
+>
+> Thanks,
+> Yongxin
+>
+> > >         install -d ${D}${libdir}/pkgconfig
+> > > -       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
+> > > +       mv ${D}/usr/local/lib64/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
+> > >
+> > >         install -d ${D}${includedir}
+> > >         mv ${D}/usr/local/include/* ${D}${includedir}/
+> > > --
+> > > 2.14.4
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
