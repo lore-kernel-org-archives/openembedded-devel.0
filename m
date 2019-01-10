@@ -1,33 +1,31 @@
-Return-Path: <Yongxin.Liu@windriver.com>
+Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A9F087BE9A
+	by mail.openembedded.org (Postfix) with ESMTP id 058CD6B50B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2019 02:59:48 +0000 (UTC)
+	Thu, 10 Jan 2019 03:42:15 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0A2xCBU028770
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0A3fYXB029744
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 9 Jan 2019 18:59:22 -0800
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.249]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0415.000;
-	Wed, 9 Jan 2019 18:59:02 -0800
-From: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
-To: "MacLeod, Randy" <Randy.MacLeod@windriver.com>
-Thread-Topic: [oe] [meta-oe][PATCH] pmdk: fix install error
-Thread-Index: AQHUp+NdqedK10XUdkWS1jyEzHU+hqWnPC6A//98DbCAAQ2tAIAANvSA///QZzA=
-Date: Thu, 10 Jan 2019 02:59:01 +0000
-Message-ID: <597B109EC20B76429F71A8A97770610D129EDC9A@ALA-MBD.corp.ad.wrs.com>
+	Wed, 9 Jan 2019 19:41:50 -0800
+Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
+	Wed, 9 Jan 2019 19:41:36 -0800
+To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
 References: <20190109061610.34471-1-yongxin.liu@windriver.com>
 	<CAMKF1sqOE7M7boiRNyqjtNXJxECv5bZyD2SG9MXNOwet+8ZJdw@mail.gmail.com>
 	<597B109EC20B76429F71A8A97770610D129ED63A@ALA-MBD.corp.ad.wrs.com>
 	<CAMKF1sqJTnt6R7F83Ta47Kbt3nzyeT5-LYYgyzAm2Q6y0j2Gaw@mail.gmail.com>
 	<83702874-3257-4d80-e601-6e2f770eeb42@windriver.com>
-In-Reply-To: <83702874-3257-4d80-e601-6e2f770eeb42@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.171]
+	<597B109EC20B76429F71A8A97770610D129EDC9A@ALA-MBD.corp.ad.wrs.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <ddc7f272-8e2e-58f5-f664-949234ed67bb@windriver.com>
+Date: Wed, 9 Jan 2019 22:41:34 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
+In-Reply-To: <597B109EC20B76429F71A8A97770610D129EDC9A@ALA-MBD.corp.ad.wrs.com>
+X-Originating-IP: [172.25.44.4]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] pmdk: fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,71 +40,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2019 02:59:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 10 Jan 2019 03:42:16 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IE1hY0xlb2QsIFJhbmR5DQo+
-IFNlbnQ6IFRodXJzZGF5LCBKYW51YXJ5IDEwLCAyMDE5IDA1OjM2DQo+IFRvOiBMaXUsIFlvbmd4
-aW4NCj4gQ2M6IEtoZW0gUmFqOyBvcGVuZW1iZWRlZC1kZXZlbA0KPiBTdWJqZWN0OiBSZTogW29l
-XSBbbWV0YS1vZV1bUEFUQ0hdIHBtZGs6IGZpeCBpbnN0YWxsIGVycm9yDQo+IA0KPiBPbiAxLzkv
-MTkgMToxOCBQTSwgS2hlbSBSYWogd3JvdGU6DQo+ID4gT24gV2VkLCBKYW4gOSwgMjAxOSBhdCAy
-OjE3IEFNIExpdSwgWW9uZ3hpbiA8WW9uZ3hpbi5MaXVAd2luZHJpdmVyLmNvbT4NCj4gd3JvdGU6
-DQo+ID4+DQo+ID4+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+Pj4gRnJvbTogS2hl
-bSBSYWogW21haWx0bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+ID4+PiBTZW50OiBXZWRuZXNkYXks
-IEphbnVhcnkgOSwgMjAxOSAxODowNg0KPiA+Pj4gVG86IExpdSwgWW9uZ3hpbg0KPiA+Pj4gQ2M6
-IG9wZW5lbWJlZGVkLWRldmVsDQo+ID4+PiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFU
-Q0hdIHBtZGs6IGZpeCBpbnN0YWxsIGVycm9yDQo+ID4+Pg0KPiA+Pj4gT24gVHVlLCBKYW4gOCwg
-MjAxOSBhdCAxMDoyMCBQTSBZb25neGluIExpdQ0KPiA8eW9uZ3hpbi5saXVAd2luZHJpdmVyLmNv
-bT4NCj4gPj4+IHdyb3RlOg0KPiA+Pj4+DQo+ID4+Pj4gLnNvIGZpbGVzIGFyZSBub3QgZ2VuZXJh
-dGVkIGluIHVzci9sb2NhbC9saWIvIGJ1dCBpbiB1c3IvbG9jYWwvbGliNjQuDQo+ID4+Pj4NCj4g
-Pj4+PiBTaWduZWQtb2ZmLWJ5OiBZb25neGluIExpdSA8eW9uZ3hpbi5saXVAd2luZHJpdmVyLmNv
-bT4NCj4gPj4+PiAtLS0NCj4gPj4+PiAgIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3Bt
-ZGtfMS40LjIuYmIgfCA0ICsrLS0NCj4gPj4+PiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKyksIDIgZGVsZXRpb25zKC0pDQo+ID4+Pj4NCj4gPj4+PiBkaWZmIC0tZ2l0IGEvbWV0YS1v
-ZS9yZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18xLjQuMi5iYiBiL21ldGEtDQo+ID4+PiBvZS9y
-ZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18xLjQuMi5iYg0KPiA+Pj4+IGluZGV4IDNkYTIyYTk3
-MC4uYWYyMjI5ZjFjIDEwMDY0NA0KPiA+Pj4+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRl
-ZC9wbWRrL3BtZGtfMS40LjIuYmINCj4gPj4+PiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
-ZWQvcG1kay9wbWRrXzEuNC4yLmJiDQo+ID4+Pj4gQEAgLTQzLDEwICs0MywxMCBAQCBkb19pbnN0
-YWxsKCkgew0KPiA+Pj4+ICAgICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2Jpbi9kYXhpbyAke0R9
-JHtiaW5kaXJ9Lw0KPiA+Pj4+DQo+ID4+Pj4gICAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtsaWJk
-aXJ9DQo+ID4+Pj4gLSAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9saWIvKnNvKiAke0R9JHtsaWJk
-aXJ9Lw0KPiA+Pj4+ICsgICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliNjQvKnNvKiAke0R9JHts
-aWJkaXJ9Lw0KPiA+Pj4+DQo+ID4+Pg0KPiA+Pj4gSSB3b25kZXIgaWYgdGhpcyBzaG91bGQgYmUg
-dXNpbmcgL3Vzci9sb2NhbC8ke2Jhc2VfbGliZGlyfSBoZXJlDQo+ID4+DQo+ID4+IFNpbmNlICR7
-YmFzZV9saWJkaXJ9IGlzICIvbGliNjQiLCBzaG91bGQgd2UgdXNlDQo+ICIvdXNyL2xvY2FsJHti
-YXNlX2xpYmRpcn0iID8NCj4gPj4gT3IgaXQgaXMgZmluZSB0byBnbyB3aXRoICIvdXNyL2xvY2Fs
-Ly9saWI2NCIgYWZ0ZXIgcGFyc2luZz8NCj4gPg0KPiA+IHVzaW5nIC91c3IvbG9jYWwke2Jhc2Vf
-bGliZGlyfSBpcyBmaW5lDQo+IA0KPiBJdCdzIGEgbGl0dGxlIG9kZCB0aGF0IHRoZSBkZWZhdWx0
-IHByZWZpeCBpcyAvdXNyL2xvY2FsIHJhdGhlcg0KPiB0aGFuIC91c3IgLiBJdCB3b3VsZCBtYWtl
-IHNlbnNlIHRvIHN0YXJ0IHdpdGggL3Vzci9sb2NhbCBpbg0KPiBlYXJseSBkZXZlbG9wbWVudCBi
-dXQgdGhlIGZpcnN0IGNvbW1pdCB0byBwbWRrIG9uIGdpdGh1YiB3YXMNCj4gaW4gMjAxNC4uLg0K
-PiANCj4gSWYgdGhpcyBpcyBwYXJ0IG9mIHRoZSBzeXN0ZW0sIHVzZSAvdXNyLCBpZiBpdCdzIGEg
-aGFjayBvcg0KPiBhbiBpbnN0YWxsIG93bmVkIGJ5IHRoZSBsb2NhbCBzeXN0ZW0gYWRtaW4sIHVz
-ZSAvdXNyL2xvY2FsLg0KPiBBcyBwZXIsIGZvciBleGFtcGxlOg0KPiAgICBodHRwczovL3JlZnNw
-ZWNzLmxpbnV4Zm91bmRhdGlvbi5vcmcvRkhTXzMuMC9maHMvY2gwNHMwOS5odG1sDQoNCkluIGNv
-bmZpZ3VyZSBmaWxlIG9mIHBtZGssIEkgZmluZCB0aGUgZm9sbG93aW5nIHNlbnRlbmNlcy4NCg0K
-ICAgIGlmIHRlc3QgIngkcHJlZml4IiA9ICJ4Tk9ORSIgOyB0aGVuIA0KICAgICAgcHJlZml4PSIv
-dXNyL2xvY2FsIg0KICAgIGZpDQogICAgaWYgdGVzdCAieCRleGVjX3ByZWZpeCIgPSAieE5PTkUi
-IDsgdGhlbiANCiAgICAgIGV4ZWNfcHJlZml4PSRwcmVmaXgNCiAgICBmaQ0KICAgIFBSRUZJWD0k
-cHJlZml4DQoNClNvIGluIGJiIGZpbGUsIGV2ZW4gJHtwcmVmaXh9IGlzIC91c3IsICJvZV9ydW5t
-YWtlIFBSRUZJWD0ke3ByZWZpeH0gREVTVERJUj0ke0R9IGluc3RhbGwiIA0KZG9lc24ndCBzZXQg
-UFJFRklYIHRvIC91c3IgZm9yIHBtZGsgaW5zdGFsbGF0aW9uLg0KDQoib2VfcnVubWFrZSBwcmVm
-aXg9L3VzciBERVNURElSPSR7RH0gaW5zdGFsbCIgd29ya3MuIA0KDQpJZiB5b3UgYXJlIE9LIHdp
-dGggdGhpcyBjaGFuZ2UsIEkgd2lsbCBzZW5kIHBhdGNoIFYyLg0KDQoNClRoYW5rcywNCllvbmd4
-aW4NCg0KDQo+IA0KPiAuLi9SYW5keQ0KPiANCj4gPg0KPiA+Pg0KPiA+Pg0KPiA+PiBUaGFua3Ms
-DQo+ID4+IFlvbmd4aW4NCj4gPj4NCj4gPj4+PiAgICAgICAgICBpbnN0YWxsIC1kICR7RH0ke2xp
-YmRpcn0vcGtnY29uZmlnDQo+ID4+Pj4gLSAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9saWIvcGtn
-Y29uZmlnLyoucGMNCj4gJHtEfSR7bGliZGlyfS9wa2djb25maWcvDQo+ID4+Pj4gKyAgICAgICBt
-diAke0R9L3Vzci9sb2NhbC9saWI2NC9wa2djb25maWcvKi5wYw0KPiAke0R9JHtsaWJkaXJ9L3Br
-Z2NvbmZpZy8NCj4gPj4+Pg0KPiA+Pj4+ICAgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7aW5jbHVk
-ZWRpcn0NCj4gPj4+PiAgICAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9pbmNsdWRlLyogJHtEfSR7
-aW5jbHVkZWRpcn0vDQo+ID4+Pj4gLS0NCj4gPj4+PiAyLjE0LjQNCj4gPj4+Pg0KPiA+Pj4+IC0t
-DQo+ID4+Pj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cj4gPj4+PiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4+Pj4gT3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPj4+PiBodHRwOi8vbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4g
-DQo+IC0tDQo+ICMgUmFuZHkgTWFjTGVvZA0KPiAjIFdpbmQgUml2ZXIgTGludXgNCg==
+On 1/9/19 9:59 PM, Liu, Yongxin wrote:
+> 
+>> -----Original Message-----
+>> From: MacLeod, Randy
+>> Sent: Thursday, January 10, 2019 05:36
+>> To: Liu, Yongxin
+>> Cc: Khem Raj; openembeded-devel
+>> Subject: Re: [oe] [meta-oe][PATCH] pmdk: fix install error
+>>
+>> On 1/9/19 1:18 PM, Khem Raj wrote:
+>>> On Wed, Jan 9, 2019 at 2:17 AM Liu, Yongxin <Yongxin.Liu@windriver.com>
+>> wrote:
+>>>>
+>>>>> -----Original Message-----
+>>>>> From: Khem Raj [mailto:raj.khem@gmail.com]
+>>>>> Sent: Wednesday, January 9, 2019 18:06
+>>>>> To: Liu, Yongxin
+>>>>> Cc: openembeded-devel
+>>>>> Subject: Re: [oe] [meta-oe][PATCH] pmdk: fix install error
+>>>>>
+>>>>> On Tue, Jan 8, 2019 at 10:20 PM Yongxin Liu
+>> <yongxin.liu@windriver.com>
+>>>>> wrote:
+>>>>>>
+>>>>>> .so files are not generated in usr/local/lib/ but in usr/local/lib64.
+>>>>>>
+>>>>>> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+>>>>>> ---
+>>>>>>    meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb | 4 ++--
+>>>>>>    1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>>
+>>>>>> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-
+>>>>> oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+>>>>>> index 3da22a970..af2229f1c 100644
+>>>>>> --- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+>>>>>> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+>>>>>> @@ -43,10 +43,10 @@ do_install() {
+>>>>>>           mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+>>>>>>
+>>>>>>           install -d ${D}${libdir}
+>>>>>> -       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+>>>>>> +       mv ${D}/usr/local/lib64/*so* ${D}${libdir}/
+>>>>>>
+>>>>>
+>>>>> I wonder if this should be using /usr/local/${base_libdir} here
+>>>>
+>>>> Since ${base_libdir} is "/lib64", should we use
+>> "/usr/local${base_libdir}" ?
+>>>> Or it is fine to go with "/usr/local//lib64" after parsing?
+>>>
+>>> using /usr/local${base_libdir} is fine
+>>
+>> It's a little odd that the default prefix is /usr/local rather
+>> than /usr . It would make sense to start with /usr/local in
+>> early development but the first commit to pmdk on github was
+>> in 2014...
+>>
+>> If this is part of the system, use /usr, if it's a hack or
+>> an install owned by the local system admin, use /usr/local.
+>> As per, for example:
+>>     https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s09.html
+> 
+> In configure file of pmdk, I find the following sentences.
+> 
+>      if test "x$prefix" = "xNONE" ; then
+>        prefix="/usr/local"
+>      fi
+>      if test "x$exec_prefix" = "xNONE" ; then
+>        exec_prefix=$prefix
+>      fi
+>      PREFIX=$prefix
+> 
+> So in bb file, even ${prefix} is /usr, "oe_runmake PREFIX=${prefix} DESTDIR=${D} install"
+> doesn't set PREFIX to /usr for pmdk installation.
+> 
+> "oe_runmake prefix=/usr DESTDIR=${D} install" works.
+> 
+> If you are OK with this change, I will send patch V2.
+
+
+Fine with me. Other recipes do similar things:
+
+$ cd .../oe-core.git
+$ rg e_runmake |grep prefix | tail -3
+meta/recipes-devtools/opkg-utils/opkg-utils_0.4.0.bb:	oe_runmake 
+PREFIX=${prefix} DESTDIR=${D} install
+meta/recipes-kernel/blktrace/blktrace_git.bb:	oe_runmake ARCH="${ARCH}" 
+prefix=${prefix} \
+meta/recipes-devtools/unifdef/unifdef_2.11.bb:	oe_runmake install 
+DESTDIR=${D} prefix=${prefix}
+
+
+../Randy
+> 
+> 
+> Thanks,
+> Yongxin
+> 
+> 
+>>
+>> ../Randy
+>>
+>>>
+>>>>
+>>>>
+>>>> Thanks,
+>>>> Yongxin
+>>>>
+>>>>>>           install -d ${D}${libdir}/pkgconfig
+>>>>>> -       mv ${D}/usr/local/lib/pkgconfig/*.pc
+>> ${D}${libdir}/pkgconfig/
+>>>>>> +       mv ${D}/usr/local/lib64/pkgconfig/*.pc
+>> ${D}${libdir}/pkgconfig/
+>>>>>>
+>>>>>>           install -d ${D}${includedir}
+>>>>>>           mv ${D}/usr/local/include/* ${D}${includedir}/
+>>>>>> --
+>>>>>> 2.14.4
+>>>>>>
+>>>>>> --
+>>>>>> _______________________________________________
+>>>>>> Openembedded-devel mailing list
+>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
+>> --
+>> # Randy MacLeod
+>> # Wind River Linux
+
+
+-- 
+# Randy MacLeod
+# Wind River Linux
 
