@@ -1,44 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw1-f68.google.com (mail-yw1-f68.google.com
-	[209.85.161.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EEE317BD8A
+Return-Path: <Yongxin.Liu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BE71C7C049
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2019 06:45:50 +0000 (UTC)
-Received: by mail-yw1-f68.google.com with SMTP id h32so4000658ywk.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2019 22:45:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=bEqtw9a13lSnj3mALU/Y6GXdqVWk+1WS69tH5gKUbak=;
-	b=Qinb3AKI1pWcddagbhk/npkHdAzUl1nI5y/5nzmy4hC9f69w78zW8xhtllHg5TIiEc
-	B99GSFYNPZEyl9A2x+7uStHT8FczFHr+tEbWYrMl6VpKrfOs1dBrUQ3EyqxravczCJWP
-	K54qGkDbJOwJn1Fvj+wOLyLKDSOi6wmxKTFVT5fQv6oGh6VlVEpV/DTU73L6WpVSes8E
-	LS3zzLlMihPgkWjbIQBIRkD2ifvpjrHmjxDDsT+aV0nx5Ptx9wXqqjdZHObA14THiBLC
-	vCr+SbrG1DBdSyHj1HaJ6uZ3kVqRFCilsHOXxVachJjooE7t8cTmPAnu8GYktJE8NElF
-	p+Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=bEqtw9a13lSnj3mALU/Y6GXdqVWk+1WS69tH5gKUbak=;
-	b=mAL4JqQsVNmUoDHnA6ym0MlIQOAv0SCXHEk0rRial4KPqZzbHRzEUwj3soFEOVpQqY
-	dWXsaQg2mWk+gAV/nwyanY81TPF8PoWjmsebGyaMmS7lFNUmuceflXhPY7LrI8zkRSA3
-	EA4QUJklja8F3or1j+FE7TDvMLxB+wMCR1HOLWssXDovSED4JJyR1eexbYLlCeBzacE/
-	n1iiE8r56QUjQaF5mQQ8cAPjVA4pulm0K0OKm34Ah/WpV5e+Wwxc1mpMttNnvT89K5/W
-	6u0JaPDUvfFMzG54xqce5Y3nc2/ZQJAyB0TAti3YaXxoF8VyOYj2IC8WZ4NoSKwxCNQn
-	srDw==
-X-Gm-Message-State: AJcUukdJtEAfPC4q97sFQ/7NlBFCUe63jNivvCDzmi4S04IEaoEnp1Jd
-	vRFCnWvOHZ51ePTD5UQUkFPilvSApahgdakBB04=
-X-Google-Smtp-Source: ALg8bN6iKtwY8NDSVLCEnwRmteKhcRp8esHI6ESoOhF2yDwH7k+oNTeYkjFqikJaEUjfmMORCIDs/hMVJBdR5nAsFh8=
-X-Received: by 2002:a81:202:: with SMTP id 2mr8788461ywc.291.1547102751810;
-	Wed, 09 Jan 2019 22:45:51 -0800 (PST)
-MIME-Version: 1.0
+	Thu, 10 Jan 2019 07:43:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0A7gwRV002993
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 9 Jan 2019 23:43:09 -0800
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.249]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0415.000;
+	Wed, 9 Jan 2019 23:42:48 -0800
+From: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
+To: =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH V2] pmdk: fix install error
+Thread-Index: AQHUqKcTDdK+CMtDJkyOgTzIs6MepaWolQCA//+IJPA=
+Date: Thu, 10 Jan 2019 07:42:47 +0000
+Message-ID: <597B109EC20B76429F71A8A97770610D129EDEF0@ALA-MBD.corp.ad.wrs.com>
 References: <20190110053633.40604-1-yongxin.liu@windriver.com>
-In-Reply-To: <20190110053633.40604-1-yongxin.liu@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 10 Jan 2019 07:45:39 +0100
-Message-ID: <CALbNGRQoS517_VZR081ZYTJOj=hzxJeMuNw2tBo0WqOBcUbTgg@mail.gmail.com>
-To: Yongxin Liu <yongxin.liu@windriver.com>
+	<CALbNGRQoS517_VZR081ZYTJOj=hzxJeMuNw2tBo0WqOBcUbTgg@mail.gmail.com>
+In-Reply-To: <CALbNGRQoS517_VZR081ZYTJOj=hzxJeMuNw2tBo0WqOBcUbTgg@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.171]
+MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH V2] pmdk: fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -53,57 +39,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2019 06:45:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 10 Jan 2019 07:43:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Jan 10, 2019 at 6:40 AM Yongxin Liu <yongxin.liu@windriver.com> wrote:
->
-> Install files to /usr instead of /usr/local by replacing
-> PREFIX=${prefix} with prefix=${prefix}.
-> Remove unnecessary files which are only for debugging.
-> Set FILES to package /usr/etc/bash_completion.d/pmempool.
->
-> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
-> ---
->  meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb | 20 ++++----------------
->  1 file changed, 4 insertions(+), 16 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> index 3da22a970..8c3ead2ef 100644
-> --- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
-> @@ -34,25 +34,13 @@ EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}'"
->  # Fix the missing fts libs when using musl
->  EXTRA_OEMAKE_append_libc-musl = " EXTRA_LIBS='-lfts'"
->
-> -do_install() {
-> -       oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> -
-> -       # Copy these into the standard directories
-> -       install -d ${D}${bindir}/
-> -       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
-> -       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
-> -
-> -       install -d ${D}${libdir}
-> -       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-> +FILES_${PN} = "/usr/etc"
-^ This looks wrong: Seems config path is prefixed too
->
-> -       install -d ${D}${libdir}/pkgconfig
-> -       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-> -
-> -       install -d ${D}${includedir}
-> -       mv ${D}/usr/local/include/* ${D}${includedir}/
-> +do_install() {
-> +       oe_runmake prefix=${prefix} DESTDIR=${D} install
->
->         # Remove uneeded files
-> -       rm -rf ${D}/usr/local/
-> +       rm -rf ${D}/usr/lib64/pmdk_debug
->  }
->
->  # Include these by default otherwise the SDK is not very useful
-> --
-> 2.14.4
-Andreas
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBBbmRyZWFzIE3DvGxsZXIgW21h
+aWx0bzpzY2huaXR6ZWx0b255QGdtYWlsLmNvbV0NCj4gU2VudDogVGh1cnNkYXksIEphbnVhcnkg
+MTAsIDIwMTkgMTQ6NDYNCj4gVG86IExpdSwgWW9uZ3hpbg0KPiBDYzogb3BlbmVtYmVkZWQtZGV2
+ZWwNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIFYyXSBwbWRrOiBmaXggaW5z
+dGFsbCBlcnJvcg0KPiANCj4gT24gVGh1LCBKYW4gMTAsIDIwMTkgYXQgNjo0MCBBTSBZb25neGlu
+IExpdSA8eW9uZ3hpbi5saXVAd2luZHJpdmVyLmNvbT4NCj4gd3JvdGU6DQo+ID4NCj4gPiBJbnN0
+YWxsIGZpbGVzIHRvIC91c3IgaW5zdGVhZCBvZiAvdXNyL2xvY2FsIGJ5IHJlcGxhY2luZw0KPiA+
+IFBSRUZJWD0ke3ByZWZpeH0gd2l0aCBwcmVmaXg9JHtwcmVmaXh9Lg0KPiA+IFJlbW92ZSB1bm5l
+Y2Vzc2FyeSBmaWxlcyB3aGljaCBhcmUgb25seSBmb3IgZGVidWdnaW5nLg0KPiA+IFNldCBGSUxF
+UyB0byBwYWNrYWdlIC91c3IvZXRjL2Jhc2hfY29tcGxldGlvbi5kL3BtZW1wb29sLg0KPiA+DQo+
+ID4gU2lnbmVkLW9mZi1ieTogWW9uZ3hpbiBMaXUgPHlvbmd4aW4ubGl1QHdpbmRyaXZlci5jb20+
+DQo+ID4gLS0tDQo+ID4gIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3BtZGtfMS40LjIu
+YmIgfCAyMCArKysrLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgNCBpbnNl
+cnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9l
+L3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9wbWRrXzEuNC4yLmJiIGIvbWV0YS0NCj4gb2UvcmVjaXBl
+cy1leHRlbmRlZC9wbWRrL3BtZGtfMS40LjIuYmINCj4gPiBpbmRleCAzZGEyMmE5NzAuLjhjM2Vh
+ZDJlZiAxMDA2NDQNCj4gPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcG1kay9wbWRr
+XzEuNC4yLmJiDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18x
+LjQuMi5iYg0KPiA+IEBAIC0zNCwyNSArMzQsMTMgQEAgRVhUUkFfT0VNQUtFID0gIkhPU1RfU1lT
+PScke0hPU1RfU1lTfScNCj4gRVhUUkFfQ0ZMQUdTPScke1NFTEVDVEVEX09QVElNSVpBVElPTn0n
+Ig0KPiA+ICAjIEZpeCB0aGUgbWlzc2luZyBmdHMgbGlicyB3aGVuIHVzaW5nIG11c2wNCj4gPiAg
+RVhUUkFfT0VNQUtFX2FwcGVuZF9saWJjLW11c2wgPSAiIEVYVFJBX0xJQlM9Jy1sZnRzJyINCj4g
+Pg0KPiA+IC1kb19pbnN0YWxsKCkgew0KPiA+IC0gICAgICAgb2VfcnVubWFrZSBQUkVGSVg9JHtw
+cmVmaXh9IERFU1RESVI9JHtEfSBpbnN0YWxsDQo+ID4gLQ0KPiA+IC0gICAgICAgIyBDb3B5IHRo
+ZXNlIGludG8gdGhlIHN0YW5kYXJkIGRpcmVjdG9yaWVzDQo+ID4gLSAgICAgICBpbnN0YWxsIC1k
+ICR7RH0ke2JpbmRpcn0vDQo+ID4gLSAgICAgICBtdiAke0R9L3Vzci9sb2NhbC9iaW4vcG1lbXBv
+b2wgJHtEfSR7YmluZGlyfS8NCj4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2Jpbi9kYXhp
+byAke0R9JHtiaW5kaXJ9Lw0KPiA+IC0NCj4gPiAtICAgICAgIGluc3RhbGwgLWQgJHtEfSR7bGli
+ZGlyfQ0KPiA+IC0gICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliLypzbyogJHtEfSR7bGliZGly
+fS8NCj4gPiArRklMRVNfJHtQTn0gPSAiL3Vzci9ldGMiDQo+IF4gVGhpcyBsb29rcyB3cm9uZzog
+U2VlbXMgY29uZmlnIHBhdGggaXMgcHJlZml4ZWQgdG9vDQoNCldpdGhvdXQgdGhpcyBJIGdvdCB0
+aGUgZm9sbG93aW5nIHdhcm5pbmcuDQoNCiAgICBXQVJOSU5HOiBwbWRrLTEuNC4yLXIwIGRvX3Bh
+Y2thZ2U6IFFBIElzc3VlOiBwbWRrOiBGaWxlcy9kaXJlY3RvcmllcyB3ZXJlIGluc3RhbGxlZCBi
+dXQgbm90IHNoaXBwZWQgaW4gYW55IHBhY2thZ2U6DQogICAgICAvdXNyL2V0Yw0KICAgICAgL3Vz
+ci9ldGMvYmFzaF9jb21wbGV0aW9uLmQNCiAgICAgIC91c3IvZXRjL2Jhc2hfY29tcGxldGlvbi5k
+L3BtZW1wb29sDQogICAgUGxlYXNlIHNldCBGSUxFUyBzdWNoIHRoYXQgdGhlc2UgaXRlbXMgYXJl
+IHBhY2thZ2VkLiBBbHRlcm5hdGl2ZWx5IGlmIHRoZXkgYXJlIHVubmVlZGVkLCBhdm9pZCBpbnN0
+YWxsaW5nIHRoZW0gb3IgZGVsZXRlIHRoZW0gd2l0aGluIGRvX2luc3RhbGwuDQogICAgcG1kazog
+MyBpbnN0YWxsZWQgYW5kIG5vdCBzaGlwcGVkIGZpbGVzLiBbaW5zdGFsbGVkLXZzLXNoaXBwZWRd
+DQoNCldpdGggaXQsIHRoZSBpc3N1ZSBpcyBnb25lLiBBbmQgdGhvc2UgZmlsZXMgY2FuIGJlIHNo
+aXBwZWQgaW4gUlBNIHBhY2thZ2VzLg0KDQogICAgJCBycG0gLXFwbCBwbWRrLTEuNC4yLXIwLnNr
+eWxha2VfYXZ4NTEyXzY0LnJwbSANCiAgICAvdXNyDQogICAgL3Vzci9iaW4NCiAgICAvdXNyL2Jp
+bi9kYXhpbw0KICAgIC91c3IvYmluL3BtZW1wb29sDQogICAgL3Vzci9ldGMNCiAgICAvdXNyL2V0
+Yy9iYXNoX2NvbXBsZXRpb24uZA0KICAgIC91c3IvZXRjL2Jhc2hfY29tcGxldGlvbi5kL3BtZW1w
+b29sDQoNCkkgc2VlIHNpbWlsYXIgdXNhZ2UsIHN1Y2ggYXMgIm1ldGEtb3BlbmVtYmVkZGVkL21l
+dGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpby11dGlscy9saW8tdXRpbHNfNC4xLmJiOkZJTEVTXyR7
+UE59ICs9ICIke3NiaW5kaXJ9LyogL2V0Yy9pbml0LmQvKiAvZXRjL3RhcmdldC8qIiINCg0KDQpU
+aGFua3MsDQpZb25neGluDQoNCj4gPg0KPiA+IC0gICAgICAgaW5zdGFsbCAtZCAke0R9JHtsaWJk
+aXJ9L3BrZ2NvbmZpZw0KPiA+IC0gICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliL3BrZ2NvbmZp
+Zy8qLnBjICR7RH0ke2xpYmRpcn0vcGtnY29uZmlnLw0KPiA+IC0NCj4gPiAtICAgICAgIGluc3Rh
+bGwgLWQgJHtEfSR7aW5jbHVkZWRpcn0NCj4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2lu
+Y2x1ZGUvKiAke0R9JHtpbmNsdWRlZGlyfS8NCj4gPiArZG9faW5zdGFsbCgpIHsNCj4gPiArICAg
+ICAgIG9lX3J1bm1ha2UgcHJlZml4PSR7cHJlZml4fSBERVNURElSPSR7RH0gaW5zdGFsbA0KPiA+
+DQo+ID4gICAgICAgICAjIFJlbW92ZSB1bmVlZGVkIGZpbGVzDQo+ID4gLSAgICAgICBybSAtcmYg
+JHtEfS91c3IvbG9jYWwvDQo+ID4gKyAgICAgICBybSAtcmYgJHtEfS91c3IvbGliNjQvcG1ka19k
+ZWJ1Zw0KPiA+ICB9DQo+ID4NCj4gPiAgIyBJbmNsdWRlIHRoZXNlIGJ5IGRlZmF1bHQgb3RoZXJ3
+aXNlIHRoZSBTREsgaXMgbm90IHZlcnkgdXNlZnVsDQo+ID4gLS0NCj4gPiAyLjE0LjQNCj4gQW5k
+cmVhcw0K
 
