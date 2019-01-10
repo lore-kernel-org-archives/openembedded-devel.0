@@ -1,28 +1,30 @@
 Return-Path: <pjtexier@koncepto.io>
 Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id E4AB17C08D
+	by mail.openembedded.org (Postfix) with ESMTP id 5C0FA7C09E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2019 20:13:22 +0000 (UTC)
+	Thu, 10 Jan 2019 20:13:23 +0000 (UTC)
 Received: from localhost.localdomain (lfbn-1-8921-123.w193-250.abo.wanadoo.fr
 	[193.250.63.123])
-	by koncepto.io (Postfix) with ESMTPSA id 0B5DB60566;
-	Thu, 10 Jan 2019 21:13:22 +0100 (CET)
+	by koncepto.io (Postfix) with ESMTPSA id 15EC1605EA;
+	Thu, 10 Jan 2019 21:13:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1547151202;
-	bh=VEXQa5s8ynfuOfB3S1U5qKhlUuUiGJnHvkcjsb+9XOk=;
-	h=From:To:Cc:Subject:Date:From;
-	b=c2I0MEJ6ESUzVn8dpkYOaYioBHYBLzq0p2AqIvVWXqNcKvy7Pnfs+Xqex7oBJXTYr
-	4LAD3XjGTpJcKR/RjwY+gX4JXe+p9708FeoDOgS3GJPYG2EO3grNIPZiiLoRGNDJC+
-	SBCfU2UKXNKaqdX+9jetNn6h0YbhW17JdSnaBDUPUNmjnn2O6SM3zFjX9nLEd5pOvs
-	7+eAxCmA9OVwJgSS1amE7ULUw9nu78KAEBSyN1pmipSfJiqIPFbIMOqGbUNqBIyA0Y
-	EL+NTV8+hNF2awSNMcAsK1TwD67/GxULYR8folWR3fue1za4w+wE35WtBaKw0s0Vmy
-	vMcYwQZnPTygQ==
+	s=default; t=1547151204;
+	bh=KvSQe9h9oKMF7OskMCMXo7eza87Dwp2qcNDgHA0BmUE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ouDLNOmg5yOCzqarIQb5zgE/epcl546Gm6/3xIavQnIUcB3HwonlOB1YHaUbV7Yjb
+	P43cHHnDpBURAU6GXAqZPupN+0x3l0RM2EktiSxH+dMzGb8n1s1/WqmXJRWmhYbIUJ
+	b7dP5T0ZrZUhFQW3B2OKIX03Di/vsmj13O1pabUBOBfuWLHThCEA5qVeUckzN2bfGe
+	ntPO2PYka+b141Mia1dx2d0voOupVCLM5IERqMDLWR4GlduWTHm6OV+wFZe/pAUnYf
+	66IwHLBVYuaDSzqouWIXL+9FkT092iT0hlqVY6kSbjpNTiss+QlJVEADcmpFNzs0Ey
+	kLIIPEYHrsXdQ==
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Jan 2019 21:12:40 +0100
-Message-Id: <1547151161-31217-1-git-send-email-pjtexier@koncepto.io>
+Date: Thu, 10 Jan 2019 21:12:41 +0100
+Message-Id: <1547151161-31217-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH v2 1/2] minicoredumper: Update to 2.0.1
+In-Reply-To: <1547151161-31217-1-git-send-email-pjtexier@koncepto.io>
+References: <1547151161-31217-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH v2 2/2] qrencode: 4.0.0 -> 4.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,126 +39,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 10 Jan 2019 20:13:23 -0000
 
-- Drop upstreamed patch
-- Update COPYING file checksum: the copyright date changes
-	 and there is a convertion to SPDX Format.
+Upgrade qrencode from 4.0.0 to 4.0.1
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
 
-Changes in v2: Commit Log
+Changes in v2: None
 
- .../minicoredumper/minicoredumper_2.0.0.bb         | 47 ----------------------
- .../minicoredumper/minicoredumper_2.0.1.bb         | 46 +++++++++++++++++++++
- 2 files changed, 46 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
+ meta-oe/recipes-graphics/qrencode/qrencode_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-deleted file mode 100644
-index bae5cf4..0000000
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-+++ /dev/null
-@@ -1,47 +0,0 @@
--SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
--to allow minimal and customized crash dumps"
--LICENSE = " LGPLv2.1 & BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=aa846ae365f71b69e9fa0d21a56391ec \
--                    file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
--                    file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
--                   "
--DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
--
--inherit autotools pkgconfig systemd update-rc.d
--
--SRCREV = "1c0d5960b0bb4bac7566e6afe8bc9705399cc76b"
--
--PR .= "+git${SRCPV}"
--
--SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
--           file://minicoredumper.service \
--           file://minicoredumper.init \
--           file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
--           "
--
--S = "${WORKDIR}/git"
--
--SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
--SYSTEMD_AUTO_ENABLE = "enable"
--
--INITSCRIPT_PACKAGES = "${PN}"
--INITSCRIPT_NAME_${PN} = "minicoredumper"
--INITSCRIPT_PARAMS_${PN} = "defaults 89"
--
--do_install_append() {
--    rmdir ${D}${localstatedir}/run
--    install -d ${D}/${sysconfdir}/minicoredumper
--    cp -rf ${S}/etc/* ${D}/${sysconfdir}/
--
--    install -d ${D}${systemd_system_unitdir}
--    install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
--    install -d ${D}${sysconfdir}/init.d
--    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
--
--    # correct path of minicoredumper
--    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
--    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${systemd_system_unitdir}/minicoredumper.service
--}
--
--# http://errors.yoctoproject.org/Errors/Details/186966/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-new file mode 100644
-index 0000000..50dab8d
---- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -0,0 +1,46 @@
-+SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
-+to allow minimal and customized crash dumps"
-+LICENSE = " LGPLv2.1 & BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=71827c617ec7b45a0dd23658347cc1e9 \
-+                    file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
-+                    file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
-+                   "
-+DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
-+
-+inherit autotools pkgconfig systemd update-rc.d
-+
-+SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
-+
-+PR .= "+git${SRCPV}"
-+
-+SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
-+           file://minicoredumper.service \
-+           file://minicoredumper.init \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
-+
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME_${PN} = "minicoredumper"
-+INITSCRIPT_PARAMS_${PN} = "defaults 89"
-+
-+do_install_append() {
-+    rmdir ${D}${localstatedir}/run
-+    install -d ${D}/${sysconfdir}/minicoredumper
-+    cp -rf ${S}/etc/* ${D}/${sysconfdir}/
-+
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
-+
-+    # correct path of minicoredumper
-+    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
-+    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${systemd_system_unitdir}/minicoredumper.service
-+}
-+
-+# http://errors.yoctoproject.org/Errors/Details/186966/
-+EXCLUDE_FROM_WORLD_libc-musl = "1"
+diff --git a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
+index f539775..108c339 100644
+--- a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
++++ b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
+@@ -4,9 +4,9 @@ HOMEPAGE = "http://fukuchi.org/works/qrencode/"
+ SECTION = "libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-PV = "4.0.0+git${SRCPV}"
++PV = "4.0.1+git${SRCPV}"
+ 
+-SRCREV = "07f3c5d4bf9136711422cc7dbf28aff469da220a"
++SRCREV = "7c83deb8f562ae6013fea4c3e65278df93f98fb7"
+ SRC_URI = "git://github.com/fukuchi/libqrencode.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.7.4
 
