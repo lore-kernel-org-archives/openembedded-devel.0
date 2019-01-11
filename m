@@ -1,30 +1,48 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C0FA7C09E
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
+	[209.85.219.194])
+	by mail.openembedded.org (Postfix) with ESMTP id F08276D74B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2019 20:13:23 +0000 (UTC)
-Received: from localhost.localdomain (lfbn-1-8921-123.w193-250.abo.wanadoo.fr
-	[193.250.63.123])
-	by koncepto.io (Postfix) with ESMTPSA id 15EC1605EA;
-	Thu, 10 Jan 2019 21:13:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1547151204;
-	bh=KvSQe9h9oKMF7OskMCMXo7eza87Dwp2qcNDgHA0BmUE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ouDLNOmg5yOCzqarIQb5zgE/epcl546Gm6/3xIavQnIUcB3HwonlOB1YHaUbV7Yjb
-	P43cHHnDpBURAU6GXAqZPupN+0x3l0RM2EktiSxH+dMzGb8n1s1/WqmXJRWmhYbIUJ
-	b7dP5T0ZrZUhFQW3B2OKIX03Di/vsmj13O1pabUBOBfuWLHThCEA5qVeUckzN2bfGe
-	ntPO2PYka+b141Mia1dx2d0voOupVCLM5IERqMDLWR4GlduWTHm6OV+wFZe/pAUnYf
-	66IwHLBVYuaDSzqouWIXL+9FkT092iT0hlqVY6kSbjpNTiss+QlJVEADcmpFNzs0Ey
-	kLIIPEYHrsXdQ==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Jan 2019 21:12:41 +0100
-Message-Id: <1547151161-31217-2-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1547151161-31217-1-git-send-email-pjtexier@koncepto.io>
-References: <1547151161-31217-1-git-send-email-pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH v2 2/2] qrencode: 4.0.0 -> 4.0.1
+	Fri, 11 Jan 2019 00:59:35 +0000 (UTC)
+Received: by mail-yb1-f194.google.com with SMTP id n187so5221671yba.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jan 2019 16:59:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=yop/LAgNG/piLgarAjTV3NnahwCwgtRHL2skqkbGs/s=;
+	b=I1emDHWluhamwGVh5mdv7zZGKdEiYtI5IXMO9jc4UQciwiCwLa46lA0HkWWOViyX1Y
+	WXXogR2ZLrMG4ejy1DYgRsvxHER3jmCQgrv7gK/icPDwE7P6RrrKrx3OrrcQZTI+EM3S
+	n/kmWgwH1DuRTnFCC9q1JK2zbtp2FwhviUvM3rCqKR1JPTWIDyN7Zn8SP267QCUOIRUH
+	zKrKTgYG9bcIR3jfuEE0wnUambfOEXKR7eCWGrn/tFtlsEU9t0wMreTJRfhnsK1iFg3D
+	R9jb3IcrQrpKbV91gjBxzdh9s6WOPYAQEaB0+PiBJNNdMcH3nRLCdE56C0ZuIqxKNdeS
+	iHzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=yop/LAgNG/piLgarAjTV3NnahwCwgtRHL2skqkbGs/s=;
+	b=ti+Xk633KIhs4MtKIqAnnjyuHSuIf2iebqg8+Y42tPPD5hlTb29yqwPsp68Tb60vlW
+	2y8iuJsQ+JovXDwWFDNFnALn5nZzjxZDluJTRr0gCTpYKTDBszA+F8e9U/KhqC3N9ppL
+	OA7t7NnKuWCrFtBDHDuWs5AEviFWU2nxgwJu0PN4Yb2UYxIOkY8Za9u3vpwMUAV5PHAy
+	00NVbB8hdWQZlCBYSeKp82Wk3X0KY943XMtZmw/5h1WcZrnSF4bMzODuW0YZt/Kfbpb4
+	kRb+3XCuS43e7OLs2hnmkR3b0vhHIFIdkj7se1PLnuQc+NpRBULRFuqIkXYjsUqs6qpS
+	X6Tw==
+X-Gm-Message-State: AJcUukcRSDovqULSFPHWyY+tmhpwoX1A6/FjKjRvTWiAUo+FO6pb1MhG
+	qqDLh/pnXQUB2LFsosVuHQiB+KlRwScX5RNnZeZZYw==
+X-Google-Smtp-Source: ALg8bN6FXB7kU8uD0sZ9bQhi7nZitwibhmThv/Q7BsldXgsof7v/X/FOpRpdSi7j8tyyAfK+roPZjW5KonL48I4nR5o=
+X-Received: by 2002:a25:bb04:: with SMTP id z4mr12798683ybg.38.1547168376745; 
+	Thu, 10 Jan 2019 16:59:36 -0800 (PST)
+MIME-Version: 1.0
+References: <20190110094212.16763-1-richard@nod.at>
+	<20190110094212.16763-2-richard@nod.at>
+In-Reply-To: <20190110094212.16763-2-richard@nod.at>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 11 Jan 2019 01:59:24 +0100
+Message-ID: <CALbNGRSKj12yY5NMN+msKbuKQTRcCOd3V5q196orVCTh8Mg6xg@mail.gmail.com>
+To: Richard Weinberger <richard@nod.at>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/6] [meta-gnome] wv: Don't use ${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2019 20:13:23 -0000
+X-List-Received-Date: Fri, 11 Jan 2019 00:59:36 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upgrade qrencode from 4.0.0 to 4.0.1
+On Thu, Jan 10, 2019 at 10:42 AM Richard Weinberger <richard@nod.at> wrote:
+>
+> Don't use ${PN} for the source dir, it will break multilib builds.
+> The correct variable is ${BPN}.
+>
+> The bitbake defaults are:
+> BP =3D "${BPN}-${PV}"
+> S =3D "${WORKDIR}/${BP}"
+>
+> Therefore we can remove this line.
+>
+> Cc: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
+> ---
+>  meta-gnome/recipes-gnome/wv/wv_1.2.4.bb | 2 --
+>  1 file changed, 2 deletions(-)
+>
+> diff --git a/meta-gnome/recipes-gnome/wv/wv_1.2.4.bb b/meta-gnome/recipes=
+-gnome/wv/wv_1.2.4.bb
+> index 8ed1fcd15ca8..03ee5b4ac4aa 100644
+> --- a/meta-gnome/recipes-gnome/wv/wv_1.2.4.bb
+> +++ b/meta-gnome/recipes-gnome/wv/wv_1.2.4.bb
+> @@ -16,6 +16,4 @@ SRC_URI[sha256sum] =3D "673109910e22d4cf94cc8be4dcb9a0c=
+41b5fbdb1736d4b7bdc7778894d
+>
+>  inherit autotools pkgconfig
+>
+> -S =3D "${WORKDIR}/${PN}-${PV}"
+> -
+>  EXTRA_OECONF =3D ""
+> --
+> 2.20.1
+>
+From a quick glance these patches look good to me - should invest more
+on multilib tests...
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
-
-Changes in v2: None
-
- meta-oe/recipes-graphics/qrencode/qrencode_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
-index f539775..108c339 100644
---- a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
-+++ b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
-@@ -4,9 +4,9 @@ HOMEPAGE = "http://fukuchi.org/works/qrencode/"
- SECTION = "libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
--PV = "4.0.0+git${SRCPV}"
-+PV = "4.0.1+git${SRCPV}"
- 
--SRCREV = "07f3c5d4bf9136711422cc7dbf28aff469da220a"
-+SRCREV = "7c83deb8f562ae6013fea4c3e65278df93f98fb7"
- SRC_URI = "git://github.com/fukuchi/libqrencode.git"
- 
- S = "${WORKDIR}/git"
--- 
-2.7.4
-
+Andreas
 
