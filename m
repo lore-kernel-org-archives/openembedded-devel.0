@@ -1,51 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id EF1247C113
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B6D0D7C127
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jan 2019 21:31:35 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id g189so7800814pgc.5
+	Sat, 12 Jan 2019 21:31:36 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id b85so8565375pfc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jan 2019 13:31:37 -0800 (PST)
+	Sat, 12 Jan 2019 13:31:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=huyWeKsQMkLm6m3WYP0z4D8th79yGIbCrpgVbVxL+Qo=;
-	b=oxgjClaq1NedAvOaHnHf3fwUtFdU31HzOR8xLqI0LsY/jaXkg/HW5t40BnI4ILqtR1
-	qcdIVRRxy8EYxJ1W8qjOzfNWu3mgQDLYJIGhmz4Ot88qy33oNH9yO/KRfSES9wkOBLbr
-	rPEx/Svd5K1a44iS2gjUegKYYXcNeVYrwLzT3p6WOlZG1JrvDBvjxqDvWZUPZdcXUr40
-	Xjq+SOrYAmLmEvlMx2R4NL+lPK4Edc/6pNu0kkYu57paQjXbDOLJzhxkNFnNtRiLWox5
-	cQMjloRliS5rpCzKpOWo44T25grZUtHBDiFEgTBRk77nGv1QoO4A6SpXE0QBhwAJBD3X
-	lTZw==
+	bh=hBbFo4gTLdIQIV74jjJqTqunBBW2WbcK/zVGDjBymlQ=;
+	b=mj64V6tqmHVQC2KPnAJS8hF+r6qmj7cL2ZAk/i5khY2WxdeyiA73/sEcMLaF7YGYBy
+	i4DZO/idp8vsD1MJHR41hhKWcDUMpx7tJJpRB3VC6EFjQv5KlE6drJ8I0WixijQvE8ai
+	MXwZ4YzrN/rQQRAw3vmQI1873RaI1b/07XvqeXTYvSQbuUZqgezpu526urGowegGo7BT
+	lFklutB5d3CVtgKXyiHMXXTWEX61akiu6w+RfSksHPxTAvOUQ6IiPYTIUXD8x/p4GyrS
+	7Fns9H4+ISF3TMGgpbb+EjsC4Zya4izKPg2ewsXMUXyMbTbfMnqwCOIFFhrT4KOGlYjv
+	yFDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=huyWeKsQMkLm6m3WYP0z4D8th79yGIbCrpgVbVxL+Qo=;
-	b=SRsCi/X7Hsc0gliVpFIj9r9+hqb4sJBKcvblu7YixeJGdZOnd5WDyo4MNZy8J7o17K
-	DGCB2z7ibj1ve+rXbgQpDneNl8eizZYx5VnwDtnQwuKVGYkOhJQmLOu6DI7ELdNhIzfw
-	O3A1JNigWApftMNdqqYgftwmtEJHg4W5K9sbJl3LKcCmcRRjwY6SgoUKHvbDj9E1vMEA
-	R9Tl4l/1ydYRCmDZ6x6D+U8i3PQao7iYWFOcj+mbaZnC0nZdAQ7svVKN2YyqdyBVkCl+
-	qMTLuflK+UP+sSzlhB6bV96erUPuPz4h03bD2HPzyjqWesR18/0rksxKiM8lmuffsLPf
-	73Aw==
-X-Gm-Message-State: AJcUukdhXMocBT8F8xR/7itLnR8V7I/9EcbsHCCyPCIalJMfA1qTKQM2
-	PTZb9+BCIu/w3vNs6g3ShLvRCSjh
-X-Google-Smtp-Source: ALg8bN41ubxl8pU0xD+smiEZNjVaGcIoUjbeJ0Ow6kk63frrwpM162NSQbnZTfJ5tbqKb0t/5k95EQ==
-X-Received: by 2002:a63:1408:: with SMTP id u8mr18062972pgl.271.1547328697034; 
+	bh=hBbFo4gTLdIQIV74jjJqTqunBBW2WbcK/zVGDjBymlQ=;
+	b=d6NnE63+dZnoFOIVWk0dZIvBU5+vO6n99K+uo3f+LYuwQiFns1WnrwGs5jvWGntJCC
+	hPWJQM3IpKzrHmHq4Ixrhdn57VFJPz2p9VrGHVnmNwcC149Hm1qfsyPxKXPfVroV3UVt
+	h3DQ/XiCclqv+lJ5PL36KJNRuEjCOu6Yhe/fI+Jw5Qv4s07OJ2vZCL5GI3VGSHMzvuBE
+	0jQTSrDTc/aG4+IneCpjjYq0thGtMyVCoS0rGuaUmpt6P/XQ9eIahvKdc9qLnT7ZkeJP
+	BFjClWIfSR70UzugY3oFZRpDQqGNh1FFQohLrW0wBWHX6bv1CiantCFoLcHnC1wu5MBB
+	nbVQ==
+X-Gm-Message-State: AJcUukdXkLrcLTSGHpja91pGmjcM6ZgC5aTKmfFNyOYw7KXTFGiy39L6
+	LPbRCPWh3R1nyj7h66fCbyxi9l/c
+X-Google-Smtp-Source: ALg8bN6BnV6gcuMtE8u8EOHlPkgdAvRcjMDp52rFkzi7UsHLJjk74cTJBoVFBP0106kcVx9Z9zvMCw==
+X-Received: by 2002:a62:7792:: with SMTP id s140mr19666150pfc.26.1547328697870;
 	Sat, 12 Jan 2019 13:31:37 -0800 (PST)
 Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
 	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
-	4sm134935166pfq.10.2019.01.12.13.31.36
+	4sm134935166pfq.10.2019.01.12.13.31.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 12 Jan 2019 13:31:36 -0800 (PST)
+	Sat, 12 Jan 2019 13:31:37 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Jan 2019 13:31:27 -0800
-Message-Id: <20190112213132.2501-4-akuster808@gmail.com>
+Date: Sat, 12 Jan 2019 13:31:28 -0800
+Message-Id: <20190112213132.2501-5-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190112213132.2501-1-akuster808@gmail.com>
 References: <20190112213132.2501-1-akuster808@gmail.com>
-Subject: [PATCH 4/9] meta-filesystems: add pkg groups and test image
+Subject: [PATCH 5/9] meta-multimedia: add pgk group and images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,77 +62,95 @@ X-List-Received-Date: Sat, 12 Jan 2019 21:31:36 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../images/meta-filesystems-image-base.bb     |  7 ++++
- .../images/meta-filesystems-image.bb          |  3 ++
- .../packagegroup-meta-filesystems.bb          | 35 +++++++++++++++++++
- 3 files changed, 45 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
- create mode 100644 meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
- create mode 100644 meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
+ .../images/meta-multimedia-image-base.bb      |  7 +++
+ .../images/meta-multimedia-image.bb           |  3 ++
+ .../packagegroup-meta-multimedia.bb           | 53 +++++++++++++++++++
+ 3 files changed, 63 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
 
-diff --git a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
+diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
 new file mode 100644
-index 0000000000..c89b1e1362
+index 0000000000..249f989a4b
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
++++ b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
 @@ -0,0 +1,7 @@
-+SUMMARY = "meta-filesystems build test image"
++SUMMARY = "meta-multimedia build test image"
 +
 +IMAGE_INSTALL = "packagegroup-core-boot"
 +
 +LICENSE = "MIT"
 +
 +inherit core-image
-diff --git a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
+diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
 new file mode 100644
-index 0000000000..ca21d2a0ed
+index 0000000000..9f2fda9fef
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
++++ b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
 @@ -0,0 +1,3 @@
-+require  meta-filesystems-image-base.bb
++require  meta-multimedia-image-base.bb
 +
-+IMAGE_INSTALL += "packagegroup-meta-filesystems"
-diff --git a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
++IMAGE_INSTALL += "packagegroup-meta-multimedia"
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
 new file mode 100644
-index 0000000000..86b1c9b36f
+index 0000000000..1251ac0a09
 --- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "Meta-filesystem packagegroups"
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "Meta-multimedia packagegroups"
 +
 +inherit packagegroup
 +
 +PROVIDES = "${PACKAGES}"
 +PACKAGES = ' \
-+    packagegroup-meta-filesystems \
-+    packagegroup-meta-filesystems-support \
-+    packagegroup-meta-filesystems-utls \
++    packagegroup-meta-multimedia \
++    packagegroup-meta-multimedia-connectivity \
++    packagegroup-meta-multimedia-dvb \
++    packagegroup-meta-multimedia-mkv \
++    packagegroup-meta-multimedia-support \
 +'
 +
-+RDEPENDS_packagegroup-meta-filesystems = "\
-+    packagegroup-meta-filesystems \
-+    packagegroup-meta-filesystems-support \
-+    packagegroup-meta-filesystems-utls \
++RDEPENDS_packagegroup-meta-multimedia = "\
++    packagegroup-meta-multimedia \
++    packagegroup-meta-multimedia-connectivity \
++    packagegroup-meta-multimedia-dvb \
++    packagegroup-meta-multimedia-mkv \
++    packagegroup-meta-multimedia-support \
 +"
 +
-+RDEPENDS_packagegroup-meta-filesystems = "\
-+    ntfs-3g-ntfsprogs ifuse sshfs-fuse \
-+    logfsprogs owfs simple-mtpfs \
-+    unionfs-fuse fuse-exfat yaffs2-utils \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "smbnetfs", "", d)} \
++RDEPENDS_packagegroup-meta-multimedia = "\
++    libdvbpsi libdc1394 gstd gst-shark \
++    bigbuckbunny-720p tearsofsteel-1080p bigbuckbunny-1080p bigbuckbunny-480p \
++    openal-soft dleyna-core dleyna-renderer dleyna-server dleyna-connector-dbus \
++    gst-meta-base gstreamer gst-plugins-base gst-plugins-good \
++    gst-rtsp gst-plugins-bad alsa-equal libdvdnav libmusicbrainz tinyalsa \
++    fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
++    opusfile gerbera libdvdcss webrtc-audio-processing \
++    rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
++    ncmpc libmpd libsquish dcadec libiec61883 \
++    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper gst-plugins-ugly gst-fluendo-mp3 gst-plugins-gl", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "openh264 opencore-amr faac vo-amrwbenc", "", d)} \
 +    "
 +
-+RDEPENDS_packagegroup-meta-filesystems-support = "\
-+    physfs fuse \
++RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
++    rygel gupnp gupnp-igd gssdp gupnp-dlna gupnp-av libupnp \
++    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
 +    "
 +
-+RDEPENDS_packagegroup-meta-filesystems-utils = "\
-+    xorriso aufs-util xfsprogs \
-+    f2fs-tools exfat-utils udevil \
-+    xfsdump \
++RDEPENDS_packagegroup-meta-multimedia-dvb = "\
++    oscam "
++
++RDEPENDS_packagegroup-meta-multimedia-mkv = "\
++    libmatroska libebml \
 +    "
 +
-+EXCLUDE_FROM_WORLD = "1"
++RDEPENDS_packagegroup-meta-multimedia-support = "\
++    liboil libmediaart libmediaart-2.0 gst-instruments libsrtp crossguid \
++    "
 -- 
 2.17.1
 
