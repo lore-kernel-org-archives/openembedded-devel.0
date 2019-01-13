@@ -1,42 +1,41 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EBF27C0E4
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E8947C113
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 10:55:13 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id y20so16426210edw.9
+	Sun, 13 Jan 2019 10:55:52 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id y20so16426844edw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 02:55:14 -0800 (PST)
+	Sun, 13 Jan 2019 02:55:53 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=0+fyhsKNOJm1hR7TO/TUK9D62ggQQDDqK2WnG1EAZV4=;
-	b=HGjefthVWac73zcYA/J8zVqvWqSjKoS7EkZ+Vo3qlcGbTbiF5L1aXLe+gGJlkXRG9K
-	QmAZXAOMZxYw4B81n8J1pPQMHHhiKVr+38xzChbb1u1lwL0YbcaqMPn4C2vR66Ypqkb9
-	Jsw9yQMpdi0qDiFPhFLJpA82pSEQ/f8v/SIbnbrloOSt4ybDIb6P3E6VxlFox6/oNUvs
-	3uOmbl8xs0q0IZEls3hM9ya2WZIo7e2BvO+jLpSAOHlAhb3beY2gUmDd2a12XGewEvBm
-	8EGUzqD8tIS8YK26Rg/15RZ+oiiAJVe4vUyG1fu/hLBKkp7w1Ux5Bi5QccQqnoCb01ba
-	mHAQ==
-X-Gm-Message-State: AJcUukc/5PYqPu4icvBwgzyWXGweatlh6N+43xJlx39S7OeUaekWAVWE
-	7x8tNFHo5oyiMtMhFupt6dYed9+l
-X-Google-Smtp-Source: ALg8bN4gJQc4pvesxnhfw8eSWxVqJWe+1J8RRsSIm9/Uhfl7O0ZUpW+msrj+bp7nAr7F1xqNYA4zhQ==
-X-Received: by 2002:a17:906:94c3:: with SMTP id
-	d3-v6mr16923672ejy.104.1547376913488; 
-	Sun, 13 Jan 2019 02:55:13 -0800 (PST)
+	bh=JBW3eOls1SRygmu7p1l+++3eUQ4qrxCJZEMv9FcodeU=;
+	b=o1yHIRxy8F1TlV2uJhFHYdJ1QltjJnqdNlK/L+KZvdVSSFYGIhAw/wpl+TNkBTuoOX
+	WoMvK+hlFbMpPv7xNdPs17lYH+fvxqyDuPnZKJ7ddj++gItShtzfzqMSWQ4d0tupabEY
+	qfVaBN4laZbtjTp7hvYt1wLTUfBl3rfmArB+inc2q+LZLdyA7KLQENowe1kB4r+Z+QTZ
+	I68evkNq87fR0jsgBSJYPQC4A/LqvjN9y6xysUJSciL873xWlDLdQdC4pjR23rOWljbu
+	TikiLEGS+p2KSHw1DPcSmB0wKFkI2pY78aVBM2JwHhoHOGxV7IqRJZy/5gWUsr/H0mMg
+	xORw==
+X-Gm-Message-State: AJcUukdjxYMiPpLOCADL3xanA6oML1XyJQA0sXqaoxIukRGMive9gmFx
+	Q6FPjhRaZ4+Pk5i3aj7pweTZWkHW
+X-Google-Smtp-Source: ALg8bN5ACO98Vk38xNxB+cNakxhS1O6ff9K0tuKrtGemTYgQem6j2XN495p6HTU69y7ZLhiLQjQ3oA==
+X-Received: by 2002:a50:ce0f:: with SMTP id y15mr18545350edi.207.1547376952788;
+	Sun, 13 Jan 2019 02:55:52 -0800 (PST)
 Received: from tfsielt31850.fritz.box (188-141-55-36.dynamic.upc.ie.
 	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
-	e35sm3584871eda.13.2019.01.13.02.55.12
+	p1-v6sm1912798ejo.49.2019.01.13.02.55.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Jan 2019 02:55:12 -0800 (PST)
+	Sun, 13 Jan 2019 02:55:52 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Jan 2019 10:55:11 +0000
-Message-Id: <20190113105511.11946-1-git@andred.net>
+Date: Sun, 13 Jan 2019 10:55:51 +0000
+Message-Id: <20190113105551.12243-1-git@andred.net>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] meta-networking: remove True option to getVar calls (again)
+Subject: [meta-oe][PATCH] meta-oe: remove True option to getVar calls (again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,7 +48,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2019 10:55:13 -0000
+X-List-Received-Date: Sun, 13 Jan 2019 10:55:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -66,85 +65,130 @@ Search & replace made using the following command:
 
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .../recipes-connectivity/mosquitto/mosquitto_1.5.4.bb       | 2 +-
- meta-networking/recipes-connectivity/samba/samba_4.8.4.bb   | 6 +++---
- meta-networking/recipes-support/nis/nis.inc                 | 2 +-
- .../recipes-support/strongswan/strongswan_5.7.1.bb          | 6 +++---
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ meta-oe/classes/scancode.bbclass                  | 10 +++++-----
+ meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb   |  2 +-
+ meta-oe/recipes-devtools/php/php.inc              |  2 +-
+ meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb |  2 +-
+ meta-oe/recipes-kernel/bpftool/bpftool.bb         |  2 +-
+ meta-oe/recipes-kernel/cpupower/cpupower.bb       |  2 +-
+ meta-oe/recipes-support/opencv/opencv_3.4.3.bb    |  4 ++--
+ 7 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
-index 01562aad1..8f406ff9c 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.4.bb
-@@ -39,7 +39,7 @@ EXTRA_OEMAKE = " \
-     WITH_BUNDLED_DEPS=no \
- "
+diff --git a/meta-oe/classes/scancode.bbclass b/meta-oe/classes/scancode.bbclass
+index 701660f57..e0f0dbca4 100644
+--- a/meta-oe/classes/scancode.bbclass
++++ b/meta-oe/classes/scancode.bbclass
+@@ -3,18 +3,18 @@
+ # For more informaiton https://github.com/nexB/scancode-toolkit
  
--export LIB_SUFFIX = "${@d.getVar('baselib', True).replace('lib', '')}"
-+export LIB_SUFFIX = "${@d.getVar('baselib').replace('lib', '')}"
+ SCANCODE_FORMAT ?= "html-app"
+-EXT = "${@'html' if d.getVar('SCANCODE_FORMAT', True) == 'html-app' else 'json'}"
++EXT = "${@'html' if d.getVar('SCANCODE_FORMAT') == 'html-app' else 'json'}"
+ SCANCODE_TOOLKIT = "${@get_scancode_toolkit(d)}"
+ SCANCODE_TAG = "v2.2.1"
+ SCANCODE_GIT_LOCATION ?= "https://github.com/nexB/scancode-toolkit.git"
+ SCANCODE_SRC_LOCATION ?= "${DL_DIR}/scancode"
  
- do_install() {
-     oe_runmake 'DESTDIR=${D}' install
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-index f1aaeb83d..e86ed96a5 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-@@ -193,15 +193,15 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
+ def get_scancode_toolkit(d):
+-    lf = bb.utils.lockfile(d.getVar('SCANCODE_SRC_LOCATION', True) + ".lock")
+-    if (not os.path.exists(d.getVar('SCANCODE_SRC_LOCATION', True))):
+-        os.system("git clone %s %s -b %s" % (d.getVar('SCANCODE_GIT_LOCATION', True), d.getVar('SCANCODE_SRC_LOCATION', True), d.getVar('SCANCODE_TAG', True)))
++    lf = bb.utils.lockfile(d.getVar('SCANCODE_SRC_LOCATION') + ".lock")
++    if (not os.path.exists(d.getVar('SCANCODE_SRC_LOCATION'))):
++        os.system("git clone %s %s -b %s" % (d.getVar('SCANCODE_GIT_LOCATION'), d.getVar('SCANCODE_SRC_LOCATION'), d.getVar('SCANCODE_TAG')))
+     bb.utils.unlockfile(lf)
+-    return (d.getVar('SCANCODE_SRC_LOCATION', True))
++    return (d.getVar('SCANCODE_SRC_LOCATION'))
  
- python samba_populate_packages() {
-     def module_hook(file, pkg, pattern, format, basename):
--        pn = d.getVar('PN', True)
-+        pn = d.getVar('PN')
-         d.appendVar('RRECOMMENDS_%s-base' % pn, ' %s' % pkg)
+ do_scancode() {
+ 	mkdir -p ${DEPLOY_DIR_IMAGE}/scancode
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+index f3a0f70ee..c2d2180ba 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+@@ -22,7 +22,7 @@ BBCLASSEXTEND = "native"
+ # you need to install the multilib development package (e.g.
+ # libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
+ # (HOST_CC="gcc -m32").
+-BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS', True) != '32']}"
++BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
  
--    mlprefix = d.getVar('MLPREFIX', True) or ''
-+    mlprefix = d.getVar('MLPREFIX') or ''
-     pam_libdir = d.expand('${base_libdir}/security')
-     pam_pkgname = mlprefix + 'pam-plugin%s'
-     do_split_packages(d, pam_libdir, '^pam_(.*)\.so$', pam_pkgname, 'PAM plugin for %s', extra_depends='', prepend=True)
+ # The lua makefiles expect the TARGET_SYS to be from uname -s
+ # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index bfd0ddfb8..ca7bd91b2 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -8,7 +8,7 @@ BBCLASSEXTEND = "native"
+ DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
+ DEPENDS_class-native = "zlib-native libxml2-native"
  
--    libdir = d.getVar('libdir', True)
-+    libdir = d.getVar('libdir')
-     do_split_packages(d, libdir, '^lib(.*)\.so\..*$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True, allow_links=True)
-     pkglibdir = '%s/samba' % libdir
-     do_split_packages(d, pkglibdir, '^lib(.*)\.so$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True)
-diff --git a/meta-networking/recipes-support/nis/nis.inc b/meta-networking/recipes-support/nis/nis.inc
-index 200eaf74d..a968af174 100644
---- a/meta-networking/recipes-support/nis/nis.inc
-+++ b/meta-networking/recipes-support/nis/nis.inc
-@@ -25,7 +25,7 @@ do_install() {
- # so force the package to be skipped here (this will cause a
- # 'nothing provides' error)
- python () {
--    os = d.getVar("TARGET_OS", True)
-+    os = d.getVar("TARGET_OS")
-     if os == "linux-uclibc":
-         raise bb.parse.SkipRecipe("NIS functionality requires rpcsvc/yp.h, uClibC does not provide this")
+-PHP_MAJOR_VERSION = "${@d.getVar('PV', True).split('.')[0]}"
++PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
+ 
+ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
+index ca38e6aa2..30c850365 100644
+--- a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
++++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
+@@ -21,7 +21,7 @@ LDFLAGS_append_libc-musl = " -largp"
+ 
+ def set_target_arch(d):
+     import re
+-    arch = d.getVar('TARGET_ARCH', True)
++    arch = d.getVar('TARGET_ARCH')
+     if re.match(r'i.86', arch, re.I):
+         return 'i386'
+     else:
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index dd7eaa2aa..f75ac6f81 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -27,7 +27,7 @@ do_install() {
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ python do_package_prepend() {
+-    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
  }
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-index c8bb17c5b..5a4e2d36f 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-@@ -66,8 +66,8 @@ python split_strongswan_plugins () {
-     dbglibdir = os.path.join(libdir, '.debug')
  
-     def add_plugin_conf(f, pkg, file_regex, output_pattern, modulename):
--        dvar = d.getVar('PKGD', True)
--        oldfiles = d.getVar('CONFFILES_' + pkg, True)
-+        dvar = d.getVar('PKGD')
-+        oldfiles = d.getVar('CONFFILES_' + pkg)
-         newfile = '/' + os.path.relpath(f, dvar)
+ B = "${WORKDIR}/${BPN}-${PV}"
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index 4544f5b2e..928973871 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -30,7 +30,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ RDEPENDS_${PN} = "bash"
  
-         if not oldfiles:
-@@ -83,7 +83,7 @@ python split_strongswan_plugins () {
-     split_staticdev_packages = do_split_packages(d, libdir, 'libstrongswan-(.*)\.a', '${PN}-plugin-%s-staticdev', 'strongSwan %s plugin - Development files (Static Libraries)', prepend=True, extra_depends='${PN}-staticdev')
+ python do_package_prepend() {
+-    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
+ }
  
-     if split_packages:
--        pn = d.getVar('PN', True)
-+        pn = d.getVar('PN')
-         d.setVar('RRECOMMENDS_' + pn + '-plugins', ' '.join(split_packages))
-         d.appendVar('RRECOMMENDS_' + pn + '-dbg', ' ' + ' '.join(split_dbg_packages))
-         d.appendVar('RRECOMMENDS_' + pn + '-dev', ' ' + ' '.join(split_dev_packages))
+ B = "${WORKDIR}/${BPN}-${PV}"
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.4.3.bb b/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
+index 0a99700b4..2b25e39dc 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
+@@ -20,7 +20,7 @@ SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5
+ 
+ def ipp_filename(d):
+     import re
+-    arch = d.getVar('TARGET_ARCH', True)
++    arch = d.getVar('TARGET_ARCH')
+     if re.match("i.86$", arch):
+         return "ippicv_2017u3_lnx_ia32_general_20180518.tgz"
+     else:
+@@ -28,7 +28,7 @@ def ipp_filename(d):
+ 
+ def ipp_md5sum(d):
+     import re
+-    arch = d.getVar('TARGET_ARCH', True)
++    arch = d.getVar('TARGET_ARCH')
+     if re.match("i.86$", arch):
+         return "ea72de74dae3c604eb6348395366e78e"
+     else:
 -- 
 2.20.1
 
