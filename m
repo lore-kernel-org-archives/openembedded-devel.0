@@ -1,49 +1,50 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 244707C076
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id B6BD47C080
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 18:00:06 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id y1so9054650plp.9
+	Sun, 13 Jan 2019 18:36:24 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id m1so8488811pgq.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 10:00:08 -0800 (PST)
+	Sun, 13 Jan 2019 10:36:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=iBeB/c5jpvpxnrxpFV8QPaQToIwWOdWDyClXGuY72jQ=;
-	b=W7Oag0TAnJp08sBTta92sMbqdmcj0L6Bh9JDBhRTxojL2uCsoICyRiFoqjK8MEoxA3
-	ZYhMxsXnnEWTAVPhyNu9P2p+PWe6xy+2atu/5DORAXVVGQihaEk7NDeNwKYQiww94SvA
-	TigppZWuyhJapJeeg9fkOs2drObSC0ZLaptoo0GzsP6Fj8Pb9VzO3/zlLpHFEzQUEzUK
-	kZYTeaszH6UYzhmCm9PjIFEtwosL5DQS2y5aBuJMOezc8Kx0q3KJMZs/QyDPx8iJwcgt
-	WUxMbJ0evJB2WQZZKpoT9CvrwnySrVKb4mYjov/9Yi1ybXJf1LfHOHxRbmX4b/IInc09
-	MCpw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pOOfFMjQiFQRAO0DQxI9pqdiY16H7K08QMZo1OjWYy4=;
+	b=fcZDdHoKLNqZnivnOdcAsY7XO3wfkcFlct5kNXjdmhLbIOvtTVDUb/jgCpRLsRDr4m
+	YU91MPdTnoInpPjKvhCH1ERXDh1L5jX/dFRcuxWR73yZ/t7+3rNAffjm5LNIsVoklPHI
+	3yH9mcdypkSI2RBRiWHbelG2HY5e6s0rbQl6Yrrrw2B/OlxVwHzuKeXcrYkHmr/sh2cQ
+	hKqqI10J/wO2YRygvKfDzw/aQuz5s9QfdPlBWnzRHZ6GUGMAA+ISemTnFoJ/rdEvZwyn
+	loPqISuI8EH3pK1DDBD85o+H6NP9XKOmgODhavd6QxDUrn4iPYxGwnlWjM+ZEcSprzdV
+	MEkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=iBeB/c5jpvpxnrxpFV8QPaQToIwWOdWDyClXGuY72jQ=;
-	b=gBnfk/4ntINF71+HgYvslllYJvGqFWguHFZfBaRAK+FpqXBAk9rnPieRTcnJiPWzsC
-	Qch71bSUeZr7Y7C5IXlv+VYGysW6t56cXtXTWKAyubYNL/A+IjWcSeuH5ZoDjjApWa8u
-	GSidSQoa10HDk0A8BsPvb9qmfE/JFet3MlRJvSSQZpufAYSMrY8I+iGlbShbdm44dGlN
-	GtOhVOX9uoCJAKJC8Jk48ASEOY6iLdIYDPPtjpNRioSGrIpfrmeIm7+tQ+7RTngQDPgm
-	zJGF8Vq0gK7hE3aQfVDt8cJ1CtD60XBpAKWYn1x137+kl0g9t4Mr5utwjz6RdljWGHEP
-	eXTQ==
-X-Gm-Message-State: AJcUukfN6DlGr00RWQosUmCX4QFjF7ZXodAbhAWev6jUt5ePuPSMx10c
-	mnxzyttLh/Sq+clOcaxLQ35jVlU4XeZlT4F+Nb0=
-X-Google-Smtp-Source: ALg8bN5Q8hyIp1t9edSqApTnTC5gfuRDkg2dNsPj15ED/g6XfTD/2arqmu2RE8hfvaU2k2/cL8KsiGIjYXzyNitezZU=
-X-Received: by 2002:a17:902:bb05:: with SMTP id
-	l5mr22945063pls.230.1547402408144; 
-	Sun, 13 Jan 2019 10:00:08 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pOOfFMjQiFQRAO0DQxI9pqdiY16H7K08QMZo1OjWYy4=;
+	b=DKISv6N9LwVkQifcmNtu9u6LJYuT2c3MjeUNpwMW9qPsY7QDb9dxTOy4xU7nyFQGbw
+	6xlTu7Sxbsp0Mw0S/htKr/J0VkGj9ncTdsQbCZy7fTKkEd4sHztgCU8MKrqy1JxFRcK4
+	0A9sjlgyJ+kdQoviHSyaUAh286KhI1jDdsZaVjMQtD1Zjn1jqP5pBZb23Zs5e3PN1u5P
+	oBAyFKQLiYWpoIeiApeLuhfWyUOGHKK0bcGTGDypgi90VA5/i9XNUVGzS2xRYUkN1+2L
+	1zGvUsu+Mlb176NiZ/JQzlmIQS+NlSJ51Mp8YDcqGbpM2+biPTDsmKfsrgI5hfZlRpK+
+	poBQ==
+X-Gm-Message-State: AJcUukeSEI5tJ5uOaMRQNHH+G1+74JlNvbx9O4dFXV8wb+e8cFeug0Jz
+	cEQcoAxN/YxKAk/Z1qv/KLlB9VU5PkI=
+X-Google-Smtp-Source: ALg8bN4Atwh9I/xz8QcRhNWqLGznP6QA3iKSDP05jOw+zuf4ezOhDJsQczaI72h0tTD9Cu9wL90smw==
+X-Received: by 2002:a63:c748:: with SMTP id v8mr10450506pgg.108.1547404585364; 
+	Sun, 13 Jan 2019 10:36:25 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::4107])
+	by smtp.gmail.com with ESMTPSA id
+	b10sm125519877pfj.183.2019.01.13.10.36.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 13 Jan 2019 10:36:24 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 13 Jan 2019 10:36:15 -0800
+Message-Id: <20190113183616.16462-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190112213132.2501-1-akuster808@gmail.com>
-	<20190112213132.2501-8-akuster808@gmail.com>
-	<CAAQYJAts5xaLN8NRFx=fBPeiyd-_rRpCq204XGW=mNWrDHNZfw@mail.gmail.com>
-In-Reply-To: <CAAQYJAts5xaLN8NRFx=fBPeiyd-_rRpCq204XGW=mNWrDHNZfw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Sun, 13 Jan 2019 18:59:57 +0100
-Message-ID: <CAAQYJAsQmXe09ry7DF2z5nuSK_LpLMz==y2WYs2mT3=OHOcC5A@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 8/9] meta-initramfs: add pkg group and image
+Subject: [meta-python][PATCH V2 1/2] python-pbr_4.2.0.bb: Define src uri checksums in recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,104 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2019 18:00:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 13 Jan 2019 18:36:25 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sun, Jan 13, 2019 at 6:53 PM Andrea Adami <andrea.adami@gmail.com> wrote:
->
-> On Sat, Jan 12, 2019 at 10:33 PM Armin Kuster <akuster808@gmail.com> wrote:
-> >
-> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> > ---
-> >  .../images/meta-initramfs-image.bb            |  8 +++++
-> >  .../packagegroup-meta-initramfs.bb            | 36 +++++++++++++++++++
-> >  2 files changed, 44 insertions(+)
-> >  create mode 100644 meta-initramfs/recipes-core/images/meta-initramfs-image.bb
-> >  create mode 100644 meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> >
-> > diff --git a/meta-initramfs/recipes-core/images/meta-initramfs-image.bb b/meta-initramfs/recipes-core/images/meta-initramfs-image.bb
-> > new file mode 100644
-> > index 0000000000..9d70d6d02d
-> > --- /dev/null
-> > +++ b/meta-initramfs/recipes-core/images/meta-initramfs-image.bb
-> > @@ -0,0 +1,8 @@
-> > +SUMMARY = "meta-initramfs build test image"
-> > +
-> > +IMAGE_INSTALL = "packagegroup-core-boot \
-> > +                 packagegroup-meta-initramfs"
-> > +
-> > +LICENSE = "MIT"
-> > +
-> > +inherit core-image
-> > diff --git a/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> > new file mode 100644
-> > index 0000000000..bfede5a749
-> > --- /dev/null
-> > +++ b/meta-initramfs/recipes-core/packagegroups/packagegroup-meta-initramfs.bb
-> > @@ -0,0 +1,36 @@
-> > +SUMMARY = "Meta-initramfs packagegroups"
-> > +
-> > +inherit packagegroup
-> > +
-> > +PROVIDES = "${PACKAGES}"
-> > +PACKAGES = ' \
-> > +    packagegroup-meta-initramfs \
-> > +    packagegroup-meta-initramfs-devtools \
-> > +    packagegroup-meta-initramfs-kernel \
-> > +'
-> > +
-> > +RDEPENDS_packagegroup-meta-initramfs = "\
-> > +    packagegroup-meta-initramfs-devtools \
-> > +    packagegroup-meta-initramfs-kernel \
-> > +"
-> > +
-> > +RDEPENDS_packagegroup-meta-initramfs-devtools = "\
-> > +    libklibc  dracut \
-> > +    klibc-utils-cat klibc-utils-losetup klibc-utils-readlink klibc-utils-chroot \
-> > +    klibc-utils-ls klibc-utils-reboot klibc-utils-cpio klibc-utils-minips \
-> > +    klibc-utils-resume klibc-utils-dd klibc-utils-mkdir klibc-utils-run-init \
-> > +    klibc-utils-dmesg klibc-utils-mkfifo klibc-utils-sh.shared klibc-utils-false \
-> > +    klibc-utils-mknod klibc-utils-sleep klibc-utils-fstype klibc-utils-mount \
-> > +    klibc-utils-sync klibc-utils-halt klibc-utils-mv klibc-utils-true klibc-utils-ipconfig \
-> > +    klibc-utils-nfsmount klibc-utils-umount klibc-utils-kill klibc-utils-nuke klibc-utils-uname \
-> > +    mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
-> > +    ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
-> > +    ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc \
-> > +    ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "grubby", "", d)} \
-> > +    "
-> > +
-> > +RDEPENDS_packagegroup-meta-initramfs-kernel = "\
-> > +    kexec-klibc vmcore-dmesg-klibc \
-> > +    "
-> > +
-> > +EXCLUDE_FROM_WORLD = "1"
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
-> Armin,
->
-> nice work, we had something similar once in oe-classic.
->
-> About the klibc utilities, I fear there might be some runtime bugs
-> because there are many uncommitted patches around.
-> See i.e. the last one of Ben  https://salsa.debian.org/kernel-team/klibc
-> Let's hope for a new release.
->
-> Cheers
-> Andrea
+There moved out from inc file in oe-core
 
-Armin,
-just a small note: the other images reside in /meta-initramfs/recipes-bsp/images
-Can we keep the images unified?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Correct the checksums for real
 
-Cheers
-Andrea
+ meta-python/recipes-devtools/python/python-pbr_4.2.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
+index a4b56cdbdf..32487723b1 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
+@@ -1,3 +1,7 @@
+ inherit setuptools
+ # The inc file is in oe-core
+ require recipes-devtools/python/python-pbr.inc
++
++SRC_URI[md5sum] = "6619780896ca81c7cd19c6e2f439b6c9"
++SRC_URI[sha256sum] = "1b8be50d938c9bb75d0eaf7eda111eec1bf6dc88a62a6412e33bf077457e0f45"
++
+-- 
+2.20.1
+
 
