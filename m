@@ -1,50 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id B6BD47C080
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 668627C080
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 18:36:24 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id m1so8488811pgq.8
+	Sun, 13 Jan 2019 18:36:25 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id r136so9282625pfc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jan 2019 10:36:26 -0800 (PST)
+	Sun, 13 Jan 2019 10:36:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pOOfFMjQiFQRAO0DQxI9pqdiY16H7K08QMZo1OjWYy4=;
-	b=fcZDdHoKLNqZnivnOdcAsY7XO3wfkcFlct5kNXjdmhLbIOvtTVDUb/jgCpRLsRDr4m
-	YU91MPdTnoInpPjKvhCH1ERXDh1L5jX/dFRcuxWR73yZ/t7+3rNAffjm5LNIsVoklPHI
-	3yH9mcdypkSI2RBRiWHbelG2HY5e6s0rbQl6Yrrrw2B/OlxVwHzuKeXcrYkHmr/sh2cQ
-	hKqqI10J/wO2YRygvKfDzw/aQuz5s9QfdPlBWnzRHZ6GUGMAA+ISemTnFoJ/rdEvZwyn
-	loPqISuI8EH3pK1DDBD85o+H6NP9XKOmgODhavd6QxDUrn4iPYxGwnlWjM+ZEcSprzdV
-	MEkg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=JDW48TcFDt2Tvek0N7DtYJIVjmXRWm9OssEbmPE67+o=;
+	b=QarPZWNi7rlKEGF7SUETcqEmS3DOtEA9Bv2p83UQlaFXH7Lk2cIg3ox3+RybWVTsb0
+	/7cQbtyBfRoMzLNqDR25dplNud0eh+t7jWwxpN8zpIAXXHtDxgFa/iNodFuLugA6OpwI
+	ADXRcp4oq9q0WJlRWyzMr1Ls9zAg2KIcOJTJaBKfYnaqQ6ODvlSk4Voi3UWPrrL3VJdK
+	LZ2JE+aoXonn0ORDq8gT9uvh4scotgBIQ6csT4Z00N7Ati78Xca1Of8gOsoge5spjgBc
+	ecUMBMHn8wUSPJUp3BV37d6FwIgurWWIDfENWsNNZscIaVEuAn3KdPXLkwoLLX71dNEd
+	Hh0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pOOfFMjQiFQRAO0DQxI9pqdiY16H7K08QMZo1OjWYy4=;
-	b=DKISv6N9LwVkQifcmNtu9u6LJYuT2c3MjeUNpwMW9qPsY7QDb9dxTOy4xU7nyFQGbw
-	6xlTu7Sxbsp0Mw0S/htKr/J0VkGj9ncTdsQbCZy7fTKkEd4sHztgCU8MKrqy1JxFRcK4
-	0A9sjlgyJ+kdQoviHSyaUAh286KhI1jDdsZaVjMQtD1Zjn1jqP5pBZb23Zs5e3PN1u5P
-	oBAyFKQLiYWpoIeiApeLuhfWyUOGHKK0bcGTGDypgi90VA5/i9XNUVGzS2xRYUkN1+2L
-	1zGvUsu+Mlb176NiZ/JQzlmIQS+NlSJ51Mp8YDcqGbpM2+biPTDsmKfsrgI5hfZlRpK+
-	poBQ==
-X-Gm-Message-State: AJcUukeSEI5tJ5uOaMRQNHH+G1+74JlNvbx9O4dFXV8wb+e8cFeug0Jz
-	cEQcoAxN/YxKAk/Z1qv/KLlB9VU5PkI=
-X-Google-Smtp-Source: ALg8bN4Atwh9I/xz8QcRhNWqLGznP6QA3iKSDP05jOw+zuf4ezOhDJsQczaI72h0tTD9Cu9wL90smw==
-X-Received: by 2002:a63:c748:: with SMTP id v8mr10450506pgg.108.1547404585364; 
-	Sun, 13 Jan 2019 10:36:25 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=JDW48TcFDt2Tvek0N7DtYJIVjmXRWm9OssEbmPE67+o=;
+	b=E9Jioh9JpOQ/yfH7OEpHrGyhDjq2sS0ntCpqHfZf+CsshWOOksX/QpH1t3lK1nQWjf
+	27b5OWBOQjgqEaqAyzIy/Nj0aHrN5Xp+3XeO126nmfCgNovIbvJaqXSb7H4P+80urPPL
+	1E0Pa1VTMddf6gUR5PsjX4SgwYMs14uksgIs4PdudT42EIrqFqyxScunq3shEi8IJc+y
+	2YmEzl2w2ohjr1bwQaw1a6jRJ28yKUqo6DBB2VIa5kwif3VEQRCGbYQWwmsZ73jwIe3z
+	F/hkcpi20076YZJrcppw8/yeY1v/aK9wY43R8YlPCRB1lrhyL2n6cVVSlf4KRnRnqrIX
+	XQdQ==
+X-Gm-Message-State: AJcUukdnrwEQWaqpfaeYnJ+8AynvYT3qrOzkPtA8s+ZuQds43lFs6g2a
+	f+KdSCw1LgXgdUb0yRl6Y8nGFh1EdAs=
+X-Google-Smtp-Source: ALg8bN4toD4X/hHTdTMhlxDkqAXvTWwIFgPMl7m3nu14stIGia30PsczhRVpPcRppy5otUX0IhKhtQ==
+X-Received: by 2002:a62:8dd9:: with SMTP id p86mr22229626pfk.143.1547404586230;
+	Sun, 13 Jan 2019 10:36:26 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::4107])
 	by smtp.gmail.com with ESMTPSA id
-	b10sm125519877pfj.183.2019.01.13.10.36.24
+	b10sm125519877pfj.183.2019.01.13.10.36.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Jan 2019 10:36:24 -0800 (PST)
+	Sun, 13 Jan 2019 10:36:25 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Jan 2019 10:36:15 -0800
-Message-Id: <20190113183616.16462-1-raj.khem@gmail.com>
+Date: Sun, 13 Jan 2019 10:36:16 -0800
+Message-Id: <20190113183616.16462-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190113183616.16462-1-raj.khem@gmail.com>
+References: <20190113183616.16462-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH V2 1/2] python-pbr_4.2.0.bb: Define src uri checksums in recipe
+Cc: Stefano Cappa <stefano.cappa.ks89@gmail.com>
+Subject: [meta-networking][PATCH 2/2] dhcpcd: upgrade to dhcpcd 7.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +60,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2019 18:36:25 -0000
+X-List-Received-Date: Sun, 13 Jan 2019 18:36:26 -0000
 Content-Transfer-Encoding: 8bit
 
-There moved out from inc file in oe-core
+From: Stefano Cappa <stefano.cappa.ks89@gmail.com>
 
+Signed-off-by: Stefano Cappa <stefano.cappa.ks89@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Correct the checksums for real
+ .../{dhcpcd_6.11.5.bb => dhcpcd_7.0.8.bb}     |  8 ++--
+ ...e-INCLUDEDIR-to-prevent-build-issues.patch | 45 +++++++++++++++++++
+ 2 files changed, 50 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_6.11.5.bb => dhcpcd_7.0.8.bb} (70%)
+ create mode 100644 meta-networking/recipes-connectivity/dhcpcd/files/0001-remove-INCLUDEDIR-to-prevent-build-issues.patch
 
- meta-python/recipes-devtools/python/python-pbr_4.2.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-index a4b56cdbdf..32487723b1 100644
---- a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-@@ -1,3 +1,7 @@
- inherit setuptools
- # The inc file is in oe-core
- require recipes-devtools/python/python-pbr.inc
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
+similarity index 70%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
+index 885c6c0e2b..84c3db7a5c 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
+@@ -5,12 +5,14 @@ DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer
+ HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
+ 
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=77c40d671aff804ca91ea99556da8e9b"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1e8f17e4edcccc38152ccf60374e0f89"
+ 
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "2465624b62c1154f0e89dc69c42c849b"
+-SRC_URI[sha256sum] = "6f9674dc7e27e936cc787175404a6171618675ecfb6903ab9887b1b66a87d69e"
++SRC_URI[md5sum] = "77bbb1d73b6f30d6ddcc8b0fd3eae266"
++SRC_URI[sha256sum] = "96968e883369ab4afd11eba9dfd9bb109f5dfff65b2814ce6c432f36362dc9b5"
 +
-+SRC_URI[md5sum] = "6619780896ca81c7cd19c6e2f439b6c9"
-+SRC_URI[sha256sum] = "1b8be50d938c9bb75d0eaf7eda111eec1bf6dc88a62a6412e33bf077457e0f45"
++SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
+ 
+ inherit autotools-brokensep
+ 
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/files/0001-remove-INCLUDEDIR-to-prevent-build-issues.patch b/meta-networking/recipes-connectivity/dhcpcd/files/0001-remove-INCLUDEDIR-to-prevent-build-issues.patch
+new file mode 100644
+index 0000000000..37d2344438
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/dhcpcd/files/0001-remove-INCLUDEDIR-to-prevent-build-issues.patch
+@@ -0,0 +1,45 @@
++From aa9e3982c1e75ad49945a62f5e262279c7a905a4 Mon Sep 17 00:00:00 2001
++From: Stefano Cappa <stefano.cappa.ks89@gmail.com>
++Date: Sun, 13 Jan 2019 01:50:52 +0100
++Subject: [PATCH] remove INCLUDEDIR to prevent build issues
++
++Upstream-Status: Pending
++
++Signed-off-by: Stefano Cappa <stefano.cappa.ks89@gmail.com>
++---
++ configure | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/configure b/configure
++index 6c81e0db..32dea2b4 100755
++--- a/configure
+++++ b/configure
++@@ -20,7 +20,6 @@ BUILD=
++ HOST=
++ HOSTCC=
++ TARGET=
++-INCLUDEDIR=
++ DEBUG=
++ FORK=
++ STATIC=
++@@ -72,7 +71,6 @@ for x do
++ 	--mandir) MANDIR=$var;;
++ 	--datadir) DATADIR=$var;;
++ 	--with-ccopts|CFLAGS) CFLAGS=$var;;
++-	-I|--includedir) INCLUDEDIR="$INCLUDEDIR${INCLUDEDIR:+ }-I$var";;
++ 	CC) CC=$var;;
++ 	CPPFLAGS) CPPFLAGS=$var;;
++ 	PKG_CONFIG) PKG_CONFIG=$var;;
++@@ -309,9 +307,6 @@ if [ -n "$CPPFLAGS" ]; then
++ 	echo "CPPFLAGS=" >>$CONFIG_MK
++ 	echo "CPPFLAGS+=	$CPPFLAGS" >>$CONFIG_MK
++ fi
++-if [ -n "$INCLUDEDIR" ]; then
++-	echo "CPPFLAGS+=	$INCLUDEDIR" >>$CONFIG_MK
++-fi
++ if [ -n "$LDFLAGS" ]; then
++ 	echo "LDFLAGS=" >>$CONFIG_MK
++ 	echo "LDFLAGS+=	$LDFLAGS" >>$CONFIG_MK
++-- 
++2.17.2 (Apple Git-113)
 +
 -- 
 2.20.1
