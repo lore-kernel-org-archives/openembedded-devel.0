@@ -1,48 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FEF67C119
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+	[209.85.160.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DE156C4DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jan 2019 21:32:43 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id c123so8576678pfb.0
+	Sun, 13 Jan 2019 06:19:09 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id u47so23351292qtj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jan 2019 13:32:45 -0800 (PST)
+	Sat, 12 Jan 2019 22:19:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=E5knSliweMOeInF3E8RBsYd8lfTdmhW7idnTcJSMNzY=;
-	b=ga/1YcxJiwKrnws7mJydHDDaWuObg0ocnsPeuaHntadW9oM0bwsnu/yy3Ume7G8+T/
-	6ozfc9fGTwd4R0y5nWfAi81Ax7M8hjevys2kScKKoDjzjiGPpYDKIILlk3FnBmDt9fnG
-	X+p8zFmxW+i1xm4l6pA/6S7Ddhg1Fzmd2/ufHFc096be3PVpvk6lXvuq42kzprBWHqU1
-	D4rgBEXj+lyLuD8ONFwGiHLzmOK8njI8M1590Yf1QOeoIq5lvPo+ntdX7+3Cof4hZDdP
-	RhYF+ZOib4rhUu/xLIncdxwsEOmmupUNuFYsRA1Bec8Eq9x1Vqx3J2jK+ChvWVPjQd5D
-	DJ5g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=/m1xotR9cqBFiMuh8SUrzIMzIp+V4rtXg/Qj4+ThdDw=;
+	b=OCFJgCOiyRoCAURiTIVIN2c++Z46sCMVEkYRk//W3QTjArH8pYtQ9cDX+y9RQiwOaX
+	oTI0owkzi4bdg4DsobNZrhecL6j6TW+vHUGMmyWdhYvIWr9PB/gM3pVSgRAtTuhWRUUA
+	3D2dJ0SUmSxkMo/51JyaXX4UuLhBvBDrscCQZjJn7nexXVR98dxXu7pWwkeLe3FufoXX
+	D3naATDCkGmPhHvRwpPFIIzfwq8pJV+D84Ssr2+FgXPjaiWi8PcqOFqJqw8nVB1Nid7u
+	Y7OyBkWmULvg8HfIYAw/X5jl31wtAvLXAdMhsNyVLtw26ozjhNpsISe3cOnCeE1CBGkn
+	SjAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=E5knSliweMOeInF3E8RBsYd8lfTdmhW7idnTcJSMNzY=;
-	b=oQaAXGeNRL8kBNAHVp/ewfOt+2L68/DkNZyzouad/NWeLfFor7trlMdymDonBSYCGy
-	6TfLFExrI7E+JjSADbXKBDbvPPAOA7ncXF3Y5acMusyf+pdA+KUUXHA0KCrUO6uQ3Lcb
-	dfOHK6/MF+5487JolN1eNoPvUJzxZ1uFe941QA7SrVrPjCVHYNJbbxeF/zMCGfz6Gnw6
-	TIixKUecQzQY2TLDCxui6OCvp6O/8FiCiJtKbrB8K4H2AtaSdpckQR9S8Uae2OSc8dvB
-	b2pCCVMa/ATvTl00vdYRIqcRzUv4h56piwmIXWFy1cBFIOTNGVKrICNY2XetIyqM+J4g
-	b9qQ==
-X-Gm-Message-State: AJcUukcycnffuBaG3+qT7JfqFeoYtMo1uzbKDWd9ZwItwZqtom2q2YSS
-	1lrsrJhQQ7TE7tiWBcM7/7s=
-X-Google-Smtp-Source: ALg8bN6B9UNCHY7iqvp2dQOd+nDinEeTmHdkJgfBsHPXKdXtkjSh0eEKqTWGwb3zYg5no1CGamJmwA==
-X-Received: by 2002:a63:170c:: with SMTP id x12mr17537319pgl.364.1547328764822;
-	Sat, 12 Jan 2019 13:32:44 -0800 (PST)
-Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
-	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
-	n22sm168086179pfh.166.2019.01.12.13.32.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 12 Jan 2019 13:32:44 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Jan 2019 13:32:43 -0800
-Message-Id: <20190112213243.2564-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [v2][PATCH] wireshark: update to 2.6.6
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=/m1xotR9cqBFiMuh8SUrzIMzIp+V4rtXg/Qj4+ThdDw=;
+	b=hJ5bS5hRHp7Oopk6eDdzx6Pm28ISUYxByLohwhKHmGzbubitURhIYLr/VMc37nuXfq
+	sEn/1PTzCzOyMHZfQR5YFMtBff3y1Y9DDU4/4LZrs29XPzBFFF1yTnzeqUpZjhtM9Aaz
+	0NTkhOKR/s5KnYEf4a56kDV+ykm63cb9ifh8ARPs96Ue2hRiCvICOGGu6TBMDyi03HS2
+	9NnW7U8QUahb2yPbgEy9Ey8X0lQ4Nzt1LQOTVQGe3antwrjexlIgYXK2Q6h9TO+PVlBA
+	T/fRohYrGzS0XqT5y1tz18nbjtkS2UYTWIGi1NL7YaYLQmNmjES5ZxaqrfQClNTSakad
+	Ztlg==
+X-Gm-Message-State: AJcUukccmcV4nHXUR6nDix9w/mc2LHiElv9kmM8WPTaAIJUPY5Hd4ugN
+	s+SqOnYi6zmhTN4OHUmvitTVR826D2Q3P2xbIGg=
+X-Google-Smtp-Source: ALg8bN5cqdb4yv/d15S3IV/aP3J8i6KY24ts1uGtYVnx31wduSTdySuOAsWupGtyS5a9FWKQmBIAC3TIVo03VlFtHqk=
+X-Received: by 2002:aed:3a22:: with SMTP id n31mr19727697qte.29.1547360349850; 
+	Sat, 12 Jan 2019 22:19:09 -0800 (PST)
+MIME-Version: 1.0
+References: <20190112213132.2501-1-akuster808@gmail.com>
+	<20190112213132.2501-5-akuster808@gmail.com>
+In-Reply-To: <20190112213132.2501-5-akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 12 Jan 2019 22:18:44 -0800
+Message-ID: <CAMKF1sqFoVK7ndgQ4msBjsHrFLmGbHbyPWZLs3grEvPhLwjMTg@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 5/9] meta-multimedia: add pgk group and images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,42 +54,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jan 2019 21:32:43 -0000
+X-List-Received-Date: Sun, 13 Jan 2019 06:19:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-includes:
+On Sat, Jan 12, 2019 at 1:32 PM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  .../images/meta-multimedia-image-base.bb      |  7 +++
+>  .../images/meta-multimedia-image.bb           |  3 ++
+>  .../packagegroup-meta-multimedia.bb           | 53 +++++++++++++++++++
+>  3 files changed, 63 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+>
+> diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
+> new file mode 100644
+> index 0000000000..249f989a4b
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
+> @@ -0,0 +1,7 @@
+> +SUMMARY = "meta-multimedia build test image"
+> +
+> +IMAGE_INSTALL = "packagegroup-core-boot"
+> +
+> +LICENSE = "MIT"
+> +
+> +inherit core-image
+> diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+> new file mode 100644
+> index 0000000000..9f2fda9fef
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+> @@ -0,0 +1,3 @@
+> +require  meta-multimedia-image-base.bb
+> +
+> +IMAGE_INSTALL += "packagegroup-meta-multimedia"
+> diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+> new file mode 100644
+> index 0000000000..1251ac0a09
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+> @@ -0,0 +1,53 @@
+> +SUMMARY = "Meta-multimedia packagegroups"
+> +
+> +inherit packagegroup
+> +
+> +PROVIDES = "${PACKAGES}"
+> +PACKAGES = ' \
+> +    packagegroup-meta-multimedia \
+> +    packagegroup-meta-multimedia-connectivity \
+> +    packagegroup-meta-multimedia-dvb \
+> +    packagegroup-meta-multimedia-mkv \
+> +    packagegroup-meta-multimedia-support \
+> +'
+> +
+> +RDEPENDS_packagegroup-meta-multimedia = "\
+> +    packagegroup-meta-multimedia \
+> +    packagegroup-meta-multimedia-connectivity \
+> +    packagegroup-meta-multimedia-dvb \
+> +    packagegroup-meta-multimedia-mkv \
+> +    packagegroup-meta-multimedia-support \
+> +"
+> +
+> +RDEPENDS_packagegroup-meta-multimedia = "\
+> +    libdvbpsi libdc1394 gstd gst-shark \
+> +    bigbuckbunny-720p tearsofsteel-1080p bigbuckbunny-1080p bigbuckbunny-480p \
 
-wnpa-sec-2019-01 The 6LoWPAN dissector could crash. Bug 15217. CVE-2019-5716.
-wnpa-sec-2019-02 The P_MUL dissector could crash. Bug 15337. CVE-2019-5717.
-wnpa-sec-2019-03 The RTSE dissector and other dissectors could crash. Bug 15373. CVE-2019-5718.
-wnpa-sec-2019-04 The ISAKMP dissector could crash. Bug 15374. CVE-2019-5719.
+some of these large'ish packages are blacklisted in world builds and I get
 
-For more info see: https://www.wireshark.org/docs/relnotes/wireshark-2.6.6.html
+http://jenkins.nas-admin.org/view/OE/job/oe_world_qemux86/987/console
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/{wireshark_2.6.5.bb => wireshark_2.6.6.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.6.5.bb => wireshark_2.6.6.bb} (96%)
+so my question is should these packagegroups be excluded from world builds ?
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.5.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
-similarity index 96%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.6.5.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
-index b3e0dd4d08..4699f67982 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.6.5.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
-@@ -14,8 +14,8 @@ SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[md5sum] = "e25257d5969705f2a18cae627ed42d80"
--SRC_URI[sha256sum] = "93155b798544b2f07693920f4ac1b531c952965ee4eb1d98419961240177438a"
-+SRC_URI[md5sum] = "b30ba5b9b48ed2ff91c0ce357d33b46b"
-+SRC_URI[sha256sum] = "487933ea075bdbb25d8df06017d9c4f49fc20eb7f6ec80af086718ed5550e863"
- 
- PE = "1"
- 
--- 
-2.17.1
-
+> +    openal-soft dleyna-core dleyna-renderer dleyna-server dleyna-connector-dbus \
+> +    gst-meta-base gstreamer gst-plugins-base gst-plugins-good \
+> +    gst-rtsp gst-plugins-bad alsa-equal libdvdnav libmusicbrainz tinyalsa \
+> +    fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
+> +    opusfile gerbera libdvdcss webrtc-audio-processing \
+> +    rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
+> +    ncmpc libmpd libsquish dcadec libiec61883 \
+> +    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
+> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
+> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
+> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper gst-plugins-ugly gst-fluendo-mp3 gst-plugins-gl", "", d)} \
+> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "openh264 opencore-amr faac vo-amrwbenc", "", d)} \
+> +    "
+> +
+> +RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
+> +    rygel gupnp gupnp-igd gssdp gupnp-dlna gupnp-av libupnp \
+> +    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
+> +    "
+> +
+> +RDEPENDS_packagegroup-meta-multimedia-dvb = "\
+> +    oscam "
+> +
+> +RDEPENDS_packagegroup-meta-multimedia-mkv = "\
+> +    libmatroska libebml \
+> +    "
+> +
+> +RDEPENDS_packagegroup-meta-multimedia-support = "\
+> +    liboil libmediaart libmediaart-2.0 gst-instruments libsrtp crossguid \
+> +    "
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
