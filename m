@@ -1,42 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
-	[209.85.222.181])
-	by mail.openembedded.org (Postfix) with ESMTP id B169B7C043
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2019 18:11:23 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id 189so11087182qkj.8
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2019 10:11:25 -0800 (PST)
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5505B6D549
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2019 18:43:24 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id r14so93991qtp.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2019 10:43:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=2rktnYyUXWg6VqF7ZodERu70Lz485kPj1EbWRKc/g0w=;
-	b=R+5dkaXn3dImNL8ry1AgrnYGWKOQV1tM3GeRbwn6N/ZonYG+P4FVl6iQsRXnCL5z9k
-	2tdGRPoXGAA1YbXR9QFQhdfdfniAqKycBN5rCsbwr02tUrIm2JP378DSckCQM+n1vL4z
-	TkYoiQSNnARrfo8Ibix+pKYOlAVxDUFfub7uENcr3M5lwn1mBfXHFifYbMBFCoPB2BMd
-	JFoEzyqUNg0tFIjdXX4P/9SZmVZLREnU4oQmwlTqTZSDOJ8rzXyheWUixLBmXY20w/0J
-	dwTgCqj16V3WjDlI/wEsTdr0gTKxFaISlT05G8mv5OW27ItKBLXovtKrcStjX7sKopcf
-	+Z6Q==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=yI2r4NqXa+hpPhnX5dBTzBvk3FzEAaaxF7Iw/IYP9M0=;
+	b=KNfePrxcC6PfjHlywObRwYgTyoZ9a/LwNcrAnsKSg8Y4AXNwxXq+NnKhSFcs9zB4ki
+	selMON/bHP+iIddgCYUDE8oVNyZpDGEAXojjBuAoQXImcQ+iiCIbWxl/FzXMm+SADiHO
+	X0lTVKWP1UZ4N1bHks+3XGaPnqXhPgNFOPG90fqBbZ/OMhhkYLmlqc11nrIjVAPFT2HJ
+	TSxoUlWEuPy4B0KhA/NX42dY74De1KsZ9L2QVcuEyCqdJNrhqCVynJ40OJcmPakUsauT
+	RBLqUFJWPT7yeF7h7aY+BA2EMRtnZ3PjyrskPaURcepvDFBFJQU8/auXXB5kp6BoILQd
+	AUDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=2rktnYyUXWg6VqF7ZodERu70Lz485kPj1EbWRKc/g0w=;
-	b=LJs0OrDGGwb3/zfTSROyO/+reiZxvWakzMJkzOZtxrZwdt7o3W9nqTSfWj7orz0Sr+
-	YyuPZZQ+ucoJSOD22m6Y5uBtHBqwO6xaYNrHu1RlA0XXr5goUTYRJQZvZ5bnPqxGHSHJ
-	xfCIVHemcb9rvpEdKZjQ0C+Fp8jC9TISkTTwpic8OrSFD3d+HqBJbuPbAwt81C6tEzIX
-	CT9CTuOnyABcb+9JI4xW9V8pfpriggSZXmoOjccqmO/e5/3L/3QOkFG1Km1nC55HOl94
-	Eg2NbvsPFgV9J+FS66pNXHnpEJvuh/53dm1Gmqjp8YDoDPZ0i70bv7Zzl0KyCmL13AC8
-	VrDw==
-X-Gm-Message-State: AJcUukeGLOE20nwupM2y95tv2UaJCGNdcHmZolnOMGXMc6QjxK4pivcr
-	kasJ6qoE3MRAZfPh0BJqw9azmm1j4dhqxxpIfrpX6XOSPrA=
-X-Google-Smtp-Source: ALg8bN5Qb614ztIZCrVcoXPm+O4K2JJ8FrP7K30vPXzI7vpOQYbo7Xxab0u7YvKp3vNv4gPqQ1smODjdmkmf9RE1ZTo=
-X-Received: by 2002:a37:4c41:: with SMTP id z62mr23042508qka.206.1547489484276;
-	Mon, 14 Jan 2019 10:11:24 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=yI2r4NqXa+hpPhnX5dBTzBvk3FzEAaaxF7Iw/IYP9M0=;
+	b=NMn1kRb5IECRi/T60s6OavabsODIe3I8lySMCTwZRC13cGW4HoguQxZIKtmNmEbMwr
+	/IkqYhIuLfwppBYD0zLF6ShGJwo7RREMc8ncJS6brR7Sg3LdkXxSsD24EsHGz/dbGSU9
+	SqUnmvMq2+EpmLu/upQWM0iUmL+w+VyKp+IuMDbXi6T3aaPj469OoL99sarac0IlF8Mb
+	rSXtRUezgVF29NuRT41Mby/ejMsixOZ75yG1gPc8gmSk/7JlMXmmgw9mDqhuVZFx6uT3
+	0bt1tS0U1cJabG9qGnabYeTXPb4W/Gkun2EiKxMLo2liGk8JhnCM9bHREbaRI5jNJk5h
+	5+0Q==
+X-Gm-Message-State: AJcUukfU/gTampGX/y6skCZ2qFfweI/Wtax1/+PIG+v8QcBiAWrX7gxG
+	ACVx4wI27K24ZvFOOd4xJLbl6YIbuxnb6T1uJvY=
+X-Google-Smtp-Source: ALg8bN5mVkdoNMgVASrItBZN+lqe9rS59LEU8LapTkQTPI7EQbfrHWU+T1sMzuRJW1l3tgiHCP60/KqnNgohwySDLhU=
+X-Received: by 2002:a0c:93e2:: with SMTP id g31mr25304372qvg.194.1547491404967;
+	Mon, 14 Jan 2019 10:43:24 -0800 (PST)
 MIME-Version: 1.0
+References: <20190112213132.2501-1-akuster808@gmail.com>
+In-Reply-To: <20190112213132.2501-1-akuster808@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 14 Jan 2019 10:10:58 -0800
-Message-ID: <CAMKF1sov1wQAYpuwEGEq4f3gasM7Dd5PHfjgFpPcPMCGfPn7=w@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of the world, 2019-01-13
+Date: Mon, 14 Jan 2019 10:42:58 -0800
+Message-ID: <CAMKF1sqtcs=7nnqtiimDX8m9hWGofeY-2zp7_MkCNt5kss+wfQ@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/9] drbd: update to 9.0.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,18 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2019 18:11:24 -0000
+X-List-Received-Date: Mon, 14 Jan 2019 18:43:24 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi all
+On Sat, Jan 12, 2019 at 1:31 PM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  .../drbd/{drbd_9.0.8-1.bb => drbd_9.0.16-1.bb}             | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
+>  rename meta-networking/recipes-support/drbd/{drbd_9.0.8-1.bb => drbd_9.0.16-1.bb} (75%)
+>
+> diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.16-1.bb
+> similarity index 75%
+> rename from meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb
+> rename to meta-networking/recipes-support/drbd/drbd_9.0.16-1.bb
+> index fa4d10b4c1..8794c4f917 100644
+> --- a/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb
+> +++ b/meta-networking/recipes-support/drbd/drbd_9.0.16-1.bb
+> @@ -11,8 +11,9 @@ DEPENDS = "virtual/kernel"
+>  SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
+>             file://check_existence_of_modules_before_installing.patch"
+>
+> -SRC_URI[md5sum] = "c1dd58043f46e9926b579aa65d4ea980"
+> -SRC_URI[sha256sum] = "87f72d46db9bad926415b3ab9f5f1397de8c581d2e2ec1addbdd5ce2604e6123"
+> +SRC_URI[md5sum] = "6414a9eef2807c8210b6403e36ce3ea4"
+> +SRC_URI[sha256sum] = "6074b0d643f4bbae4641d3b4bc30f4840e74f2a212dd9c6555b8141e530e5789"
+> +
+>  inherit module
+>
+>  EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
+> @@ -20,5 +21,3 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
+>  do_install () {
+>      oe_runmake install DESTDIR="${D}"
+>  }
+> -
+> -PNBLACKLIST[drbd] = "implicit declaration of function 'setup_timer'; 4.15 head file issue?"
 
-Below is the latest status of OE-World, due to glibc version going
-backward issue the
-logs are too large for wiki. So just posting the jenkins link for
-everyones reference.
+This is going to now mean that kernels whic enable this module by
+default will end up with mutliple providers
+see http://errors.yoctoproject.org/Errors/Details/216468/
+but I guess thats upto distros to decide. So I will accept this
 
-http://jenkins.nas-admin.org/view/OE/job/oe_world_workspace-parse-results/474/consoleFull
-
-Thanks
--Khem
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
