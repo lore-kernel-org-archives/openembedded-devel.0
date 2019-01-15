@@ -1,50 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E8EB7C085
+Return-Path: <stefan@agner.ch>
+X-Greylist: delayed 344 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Jan 2019 14:52:27 UTC
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 719366BE2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jan 2019 09:40:25 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id z10so1009976pgp.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jan 2019 01:40:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=F3RB33vJbwyDutDQFA2uGx4VCuOjgRwst4sKRhY8OTs=;
-	b=p2UA0UyDohzO/LdGkv95ERp7+5i8HyPnFnjd/ly+ANSKYM9AQ+h1JjbxAe3H/y6/So
-	oHUQBSSPM+8F1abLOXyxk5I3KDyxTRSVJBkB8gXEIVynQ6+HQsnZ75WT1vr6k3ZGSOZk
-	6IvSe62hcFxySxWc/x+gydS26jkM2lIPrgZ3aW6lRz2YFbZ0VM0/oVNduc550t/hi9Hc
-	kh6tb40e07ImB4YYnSCCTPFlWd0MPXs+1qFY9WkiSMGMJdZKM/hFobvnBDZsVJnjaMKm
-	x/kTcWcRQyLV+5zE0LGIPbOMZzaMLaHBJxKgk6n5ri1DYNvNuwAg0z5zD3gcRYCB2K7V
-	wUIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=F3RB33vJbwyDutDQFA2uGx4VCuOjgRwst4sKRhY8OTs=;
-	b=iKtqxMIN48ZuMa00MFOBX/yN9js0l3PdC5fNxUfnQzYx+ezsFWD7z0SgxwkcDFYKDh
-	hmzQQg7H/qBDmIB4IbGPlpQ5BfCDHcPjUE6V4IaIVgGW+Z8HU+7COnMNdww/k7DFmGFt
-	Grhi1tfXSPFfL21WiSAGmIJ/MFgUsLmEHHfYF+TYH4CndPkJkBwYQstRfQCJK44kC7SF
-	zpPNY3C06lXtoRuZ8iCsRCyS5/0tF8s3mNJs/SUXVvLQbR6phB0kLc1wD25Voeo3Xx7h
-	cXejdP3K4WJt9uTMP6VRLcpnlFskrJBNLN07pndshW3JAmfBDupQDLsma2+j4wtAraFX
-	yKDQ==
-X-Gm-Message-State: AJcUukcKfLcWzitPJG9CKfy0OrE97+EOklPgd6qCDblRIRwPAhdr/kQg
-	mSscwCfyPaXOxLQctwfrXFhi80DA8gM=
-X-Google-Smtp-Source: ALg8bN4tnreMsnP+PTElYEF8pRVL03aLIOcKv2r9OlMHsS+pZwiPCFWwklHYxYzrb5MP1jQ1cl57Ig==
-X-Received: by 2002:a62:fb07:: with SMTP id x7mr3061201pfm.71.1547545225868;
-	Tue, 15 Jan 2019 01:40:25 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::4107])
-	by smtp.gmail.com with ESMTPSA id
-	b10sm3451262pfj.183.2019.01.15.01.40.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jan 2019 01:40:25 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jan 2019 01:40:16 -0800
-Message-Id: <20190115094016.33349-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [thud][PATCH] mozjs: Avoid use of X11 from host when X11 is disabled
+	Tue, 15 Jan 2019 14:52:27 +0000 (UTC)
+Received: from linuxdev2.toradex.int (unknown [46.140.72.82])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 802B85C01E8;
+	Tue, 15 Jan 2019 15:46:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1547563603;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
+	in-reply-to:references; bh=mAp89TzKQDwwo1LxZYPOcK2F//HwLee101P86E7LkZk=;
+	b=OkqZhGiFshR5ynIJXZMuOcS9iUQQZq3guBKC5XZvWNz37pzGJ8MmrDzfuevZujDqP3RLjB
+	6LzlbZqQ8QnHhgD5zHHLRH6J+TbnQuIPlA4KJ0bpItVBV0fveXkfGkNhpZ+sEqmP6vB67R
+	dxBwtEg818/dDlO6VAqdbG33+82Zlg4=
+From: Stefan Agner <stefan@agner.ch>
+To: raj.khem@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Jan 2019 15:46:40 +0100
+Message-Id: <20190115144640.3750-1-stefan@agner.ch>
+X-Mailer: git-send-email 2.13.6
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-oe][PATCH] python-cryptography: drop python-pycparser dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jan 2019 09:40:25 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 Jan 2019 14:52:27 -0000
 
-From: Otavio Salvador <otavio@ossystems.com.br>
+From: Stefan Agner <stefan.agner@toradex.com>
 
-The mozjs build system makes use of host headers and libraries if not
-passed an invalid path for `--x-includes` and `--x-libraries`. This
-fixes host contamination while building in a development host.
+The python-cryptography package is in fact not depending on
+python-pycparser.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-cryptography.inc | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-index 0dfe2f848..440a25b74 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-@@ -49,7 +49,7 @@ EXTRA_OECONF = " \
+diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
+index dbbfe2cbe..415e823f8 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography.inc
++++ b/meta-python/recipes-devtools/python/python-cryptography.inc
+@@ -17,7 +17,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-cffi \
+     ${PYTHON_PN}-idna \
+     ${PYTHON_PN}-asn1crypto \
+-    ${PYTHON_PN}-pycparser \
+     ${PYTHON_PN}-setuptools \
+     ${PYTHON_PN}-six \
  "
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
--PACKAGECONFIG[x11] = "--x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},,virtual/libx11"
-+PACKAGECONFIG[x11] = "--x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--x-includes=no --x-libraries=no,virtual/libx11"
- 
- EXTRA_OEMAKE_task-compile += "OS_LDFLAGS='-Wl,-latomic ${LDFLAGS}'"
- EXTRA_OEMAKE_task-install += "STATIC_LIBRARY_NAME=js_static"
+@@ -27,7 +26,6 @@ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-idna \
+     ${PYTHON_PN}-numbers \
+     ${PYTHON_PN}-asn1crypto \
+-    ${PYTHON_PN}-pycparser \
+     ${PYTHON_PN}-setuptools \
+     ${PYTHON_PN}-six \
+     ${PYTHON_PN}-threading \
 -- 
-2.20.1
+2.13.6
 
 
