@@ -1,31 +1,49 @@
-Return-Path: <Yongxin.Liu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 530016B513
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 474BF7C0BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jan 2019 03:22:32 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x0F3MVob014705
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 14 Jan 2019 19:22:32 -0800 (PST)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.249]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0415.000;
-	Mon, 14 Jan 2019 19:22:31 -0800
-From: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH V2] pmdk: fix install error
-Thread-Index: AQHUqKcTDdK+CMtDJkyOgTzIs6MepaWolQCA//+IJPCAB822gP//xKBA
-Date: Tue, 15 Jan 2019 03:22:30 +0000
-Message-ID: <597B109EC20B76429F71A8A97770610D129EF610@ALA-MBD.corp.ad.wrs.com>
+	Tue, 15 Jan 2019 03:38:37 +0000 (UTC)
+Received: by mail-qt1-f171.google.com with SMTP id r14so1599912qtp.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jan 2019 19:38:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Vv/B70iZgjh0gNpPZhBHoCoXksD1I+kri15q2s1n0tQ=;
+	b=pwSdTqdXN6vv4tbLJFlSdwEyh3LsFjQJdGGmvJdkGyENxSyaxMdxvvuZKVynCGczw3
+	6ZErU8qjvp/3Vm47lrgY34ZwBi1uQsBHStE3NyBD1i5hVhjXzm+S1rHqxkdrgQ4/+w40
+	IFVFQFbRPvgbtgqXkldBjD1i231xr9CbaTzMEs16BMPpE6lktHx6vwJ8hQTjK0l8jmhf
+	O1lI1q/M4c0po201S+TEmY+NMsGLruleyz82UsU07C/WbCpaDMV5d45gdpDhrRCAt4Lk
+	efF7OI19fOjW7L0fJPKGlJkJ1MNy11cvbmVz5hfxYBXnl7hdH0miCt2KD/2wBf2CR9Q6
+	tNbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Vv/B70iZgjh0gNpPZhBHoCoXksD1I+kri15q2s1n0tQ=;
+	b=U4O8p3xE122RNPwBMDSQNBdoXcThDLu/v7pVdlkNHY7LkdByGL2oz8BBnYNT+tlN+g
+	P+VlIHyEcYsMtHcLzDbt7JBdsJ/FWUqRYeP0JdWw42MusNt3DxA+YJ542jIIHqPHNG2J
+	yOStkDqOIQr5dkdQ0wLkt211ieh5cMGGYOgRmsDGpZiuO4GR2rvq1J9NXuFXU8My+gLr
+	Zudi5Mu7/h0zU1cPYZFwaRhZR7GLkCMlDzuXRFbjDxnwRkSl+A2E6apdZqlg/wfbFe2v
+	cXkIXLEI7PwhaegAse0sYO6fAwm+91lCuOolhEoqrs6V1jWdJzVLTXh3AjrQmKTtPJqm
+	wCCA==
+X-Gm-Message-State: AJcUukfSzxLq/0TIhepO3mwo5aMNM3H8d+Kr5o8vjQSiNiZiP1l02bp5
+	YLM3cni29QkSzmVRnlLWvBBPIDQxeKDYGbjHhwU=
+X-Google-Smtp-Source: ALg8bN7XVn1bQPKIqZ0VI9+nr0eccPzWUbB9Gl4/CS4znN/yjPPUX1ItfuV9s7qHghKRns5Evoae0LcoQ+ygMBgsxkE=
+X-Received: by 2002:aed:3a22:: with SMTP id n31mr1340621qte.29.1547523517886; 
+	Mon, 14 Jan 2019 19:38:37 -0800 (PST)
+MIME-Version: 1.0
 References: <20190110053633.40604-1-yongxin.liu@windriver.com>
 	<CALbNGRQoS517_VZR081ZYTJOj=hzxJeMuNw2tBo0WqOBcUbTgg@mail.gmail.com>
 	<597B109EC20B76429F71A8A97770610D129EDEF0@ALA-MBD.corp.ad.wrs.com>
 	<CAMKF1sr4vvxS=9zNJn2ZYLh4-9=7pjFbiBUEvLFDdims86eUgg@mail.gmail.com>
-In-Reply-To: <CAMKF1sr4vvxS=9zNJn2ZYLh4-9=7pjFbiBUEvLFDdims86eUgg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.171]
-MIME-Version: 1.0
+	<597B109EC20B76429F71A8A97770610D129EF610@ALA-MBD.corp.ad.wrs.com>
+In-Reply-To: <597B109EC20B76429F71A8A97770610D129EF610@ALA-MBD.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 14 Jan 2019 19:38:11 -0800
+Message-ID: <CAMKF1sr6cQuEqEoaGvWPCP6Q93eU+DYHcbkVkmtRdRt5LRo0Hg@mail.gmail.com>
+To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH V2] pmdk: fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,91 +58,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jan 2019 03:22:32 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 15 Jan 2019 03:38:37 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEtoZW0gUmFqIFttYWlsdG86
-cmFqLmtoZW1AZ21haWwuY29tXQ0KPiBTZW50OiBUdWVzZGF5LCBKYW51YXJ5IDE1LCAyMDE5IDA2
-OjQ3DQo+IFRvOiBMaXUsIFlvbmd4aW4NCj4gQ2M6IEFuZHJlYXMgTcO8bGxlcjsgb3BlbmVtYmVk
-ZWQtZGV2ZWwNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIFYyXSBwbWRrOiBm
-aXggaW5zdGFsbCBlcnJvcg0KPiANCj4gT24gV2VkLCBKYW4gOSwgMjAxOSBhdCAxMTo0MyBQTSBM
-aXUsIFlvbmd4aW4gPFlvbmd4aW4uTGl1QHdpbmRyaXZlci5jb20+DQo+IHdyb3RlOg0KPiA+DQo+
-ID4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+ID4gRnJvbTogQW5kcmVhcyBNw7xs
-bGVyIFttYWlsdG86c2Nobml0emVsdG9ueUBnbWFpbC5jb21dDQo+ID4gPiBTZW50OiBUaHVyc2Rh
-eSwgSmFudWFyeSAxMCwgMjAxOSAxNDo0Ng0KPiA+ID4gVG86IExpdSwgWW9uZ3hpbg0KPiA+ID4g
-Q2M6IG9wZW5lbWJlZGVkLWRldmVsDQo+ID4gPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
-UEFUQ0ggVjJdIHBtZGs6IGZpeCBpbnN0YWxsIGVycm9yDQo+ID4gPg0KPiA+ID4gT24gVGh1LCBK
-YW4gMTAsIDIwMTkgYXQgNjo0MCBBTSBZb25neGluIExpdQ0KPiA8eW9uZ3hpbi5saXVAd2luZHJp
-dmVyLmNvbT4NCj4gPiA+IHdyb3RlOg0KPiA+ID4gPg0KPiA+ID4gPiBJbnN0YWxsIGZpbGVzIHRv
-IC91c3IgaW5zdGVhZCBvZiAvdXNyL2xvY2FsIGJ5IHJlcGxhY2luZw0KPiA+ID4gPiBQUkVGSVg9
-JHtwcmVmaXh9IHdpdGggcHJlZml4PSR7cHJlZml4fS4NCj4gPiA+ID4gUmVtb3ZlIHVubmVjZXNz
-YXJ5IGZpbGVzIHdoaWNoIGFyZSBvbmx5IGZvciBkZWJ1Z2dpbmcuDQo+ID4gPiA+IFNldCBGSUxF
-UyB0byBwYWNrYWdlIC91c3IvZXRjL2Jhc2hfY29tcGxldGlvbi5kL3BtZW1wb29sLg0KPiA+ID4g
-Pg0KPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBZb25neGluIExpdSA8eW9uZ3hpbi5saXVAd2luZHJp
-dmVyLmNvbT4NCj4gPiA+ID4gLS0tDQo+ID4gPiA+ICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-cG1kay9wbWRrXzEuNC4yLmJiIHwgMjAgKysrKy0tLS0tLS0tLS0tLS0NCj4gLS0tDQo+ID4gPiA+
-ICAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkNCj4gPiA+
-ID4NCj4gPiA+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3Bt
-ZGtfMS40LjIuYmIgYi9tZXRhLQ0KPiA+ID4gb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3BtZGtf
-MS40LjIuYmINCj4gPiA+ID4gaW5kZXggM2RhMjJhOTcwLi44YzNlYWQyZWYgMTAwNjQ0DQo+ID4g
-PiA+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9wbWRrL3BtZGtfMS40LjIuYmINCj4g
-PiA+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3BtZGsvcG1ka18xLjQuMi5iYg0K
-PiA+ID4gPiBAQCAtMzQsMjUgKzM0LDEzIEBAIEVYVFJBX09FTUFLRSA9ICJIT1NUX1NZUz0nJHtI
-T1NUX1NZU30nDQo+ID4gPiBFWFRSQV9DRkxBR1M9JyR7U0VMRUNURURfT1BUSU1JWkFUSU9OfSci
-DQo+ID4gPiA+ICAjIEZpeCB0aGUgbWlzc2luZyBmdHMgbGlicyB3aGVuIHVzaW5nIG11c2wNCj4g
-PiA+ID4gIEVYVFJBX09FTUFLRV9hcHBlbmRfbGliYy1tdXNsID0gIiBFWFRSQV9MSUJTPSctbGZ0
-cyciDQo+ID4gPiA+DQo+ID4gPiA+IC1kb19pbnN0YWxsKCkgew0KPiA+ID4gPiAtICAgICAgIG9l
-X3J1bm1ha2UgUFJFRklYPSR7cHJlZml4fSBERVNURElSPSR7RH0gaW5zdGFsbA0KPiA+ID4gPiAt
-DQo+ID4gPiA+IC0gICAgICAgIyBDb3B5IHRoZXNlIGludG8gdGhlIHN0YW5kYXJkIGRpcmVjdG9y
-aWVzDQo+ID4gPiA+IC0gICAgICAgaW5zdGFsbCAtZCAke0R9JHtiaW5kaXJ9Lw0KPiA+ID4gPiAt
-ICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2Jpbi9wbWVtcG9vbCAke0R9JHtiaW5kaXJ9Lw0KPiA+
-ID4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2Jpbi9kYXhpbyAke0R9JHtiaW5kaXJ9Lw0K
-PiA+ID4gPiAtDQo+ID4gPiA+IC0gICAgICAgaW5zdGFsbCAtZCAke0R9JHtsaWJkaXJ9DQo+ID4g
-PiA+IC0gICAgICAgbXYgJHtEfS91c3IvbG9jYWwvbGliLypzbyogJHtEfSR7bGliZGlyfS8NCj4g
-PiA+ID4gK0ZJTEVTXyR7UE59ID0gIi91c3IvZXRjIg0KPiA+ID4gXiBUaGlzIGxvb2tzIHdyb25n
-OiBTZWVtcyBjb25maWcgcGF0aCBpcyBwcmVmaXhlZCB0b28NCj4gPg0KPiA+IFdpdGhvdXQgdGhp
-cyBJIGdvdCB0aGUgZm9sbG93aW5nIHdhcm5pbmcuDQo+ID4NCj4gPiAgICAgV0FSTklORzogcG1k
-ay0xLjQuMi1yMCBkb19wYWNrYWdlOiBRQSBJc3N1ZTogcG1kazoNCj4gRmlsZXMvZGlyZWN0b3Jp
-ZXMgd2VyZSBpbnN0YWxsZWQgYnV0IG5vdCBzaGlwcGVkIGluIGFueSBwYWNrYWdlOg0KPiA+ICAg
-ICAgIC91c3IvZXRjDQo+ID4gICAgICAgL3Vzci9ldGMvYmFzaF9jb21wbGV0aW9uLmQNCj4gPiAg
-ICAgICAvdXNyL2V0Yy9iYXNoX2NvbXBsZXRpb24uZC9wbWVtcG9vbA0KPiA+ICAgICBQbGVhc2Ug
-c2V0IEZJTEVTIHN1Y2ggdGhhdCB0aGVzZSBpdGVtcyBhcmUgcGFja2FnZWQuIEFsdGVybmF0aXZl
-bHkNCj4gaWYgdGhleSBhcmUgdW5uZWVkZWQsIGF2b2lkIGluc3RhbGxpbmcgdGhlbSBvciBkZWxl
-dGUgdGhlbSB3aXRoaW4NCj4gZG9faW5zdGFsbC4NCj4gPiAgICAgcG1kazogMyBpbnN0YWxsZWQg
-YW5kIG5vdCBzaGlwcGVkIGZpbGVzLiBbaW5zdGFsbGVkLXZzLXNoaXBwZWRdDQo+ID4NCj4gPiBX
-aXRoIGl0LCB0aGUgaXNzdWUgaXMgZ29uZS4gQW5kIHRob3NlIGZpbGVzIGNhbiBiZSBzaGlwcGVk
-IGluIFJQTQ0KPiBwYWNrYWdlcy4NCj4gPg0KPiA+ICAgICAkIHJwbSAtcXBsIHBtZGstMS40LjIt
-cjAuc2t5bGFrZV9hdng1MTJfNjQucnBtDQo+ID4gICAgIC91c3INCj4gPiAgICAgL3Vzci9iaW4N
-Cj4gPiAgICAgL3Vzci9iaW4vZGF4aW8NCj4gPiAgICAgL3Vzci9iaW4vcG1lbXBvb2wNCj4gPiAg
-ICAgL3Vzci9ldGMNCj4gPiAgICAgL3Vzci9ldGMvYmFzaF9jb21wbGV0aW9uLmQNCj4gPiAgICAg
-L3Vzci9ldGMvYmFzaF9jb21wbGV0aW9uLmQvcG1lbXBvb2wNCj4gPg0KPiANCj4gSXRzIGJldHRl
-ciB0byBtb3ZlIGJhc2hfY29tcGxldGlvbiBmaWxlcyB1bmRlciB1c3Ivc2hhcmUgaW4NCj4gZG9f
-aW5zdGFsbA0KPg0KDQpIb3cgYWJvdXQgaW5zdGFsbCBiYXNoX2NvbXBsZXRpb24gZmlsZXMgZGly
-ZWN0bHkgdG8gL2V0Yz8NCkl0IHNlZW1zIC9ldGMvYmFzaF9jb21wbGV0aW9uLmQgaXMgdGhlIG1v
-cmUgY29tbW9uIHBsYWNlIHRvIGhvbGQgc3VjaCBmaWxlcy4gDQoNCkFsbCBJIG5lZWQgdG8gZG8g
-aXMgdG8gc3BlY2lmeSBzeXNjb25mZGlyIGluIGluc3RhbGwgY29tbWFuZCwNCnN1Y2ggYXMgIiBv
-ZV9ydW5tYWtlIHByZWZpeD0ke3ByZWZpeH0gREVTVERJUj0ke0R9IHN5c2NvbmZkaXI9L2V0YyBp
-bnN0YWxsIi4NCkFuZCBhZGQgRklMRVNfJHtQTn0gKz0gIiR7c3lzY29uZmRpcn0iIHRvIGF2b2lk
-IFFBIGlzc3VlLg0KDQpXaGF0IGRvIHlvdSB0aGluaz8NCg0KDQotLVlvbmd4aW4NCg0KPiA+IEkg
-c2VlIHNpbWlsYXIgdXNhZ2UsIHN1Y2ggYXMgIm1ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVj
-aXBlcy0NCj4gc3VwcG9ydC9saW8tdXRpbHMvbGlvLXV0aWxzXzQuMS5iYjpGSUxFU18ke1BOfSAr
-PSAiJHtzYmluZGlyfS8qDQo+IC9ldGMvaW5pdC5kLyogL2V0Yy90YXJnZXQvKiIiDQo+ID4NCj4g
-Pg0KPiA+IFRoYW5rcywNCj4gPiBZb25neGluDQo+ID4NCj4gPiA+ID4NCj4gPiA+ID4gLSAgICAg
-ICBpbnN0YWxsIC1kICR7RH0ke2xpYmRpcn0vcGtnY29uZmlnDQo+ID4gPiA+IC0gICAgICAgbXYg
-JHtEfS91c3IvbG9jYWwvbGliL3BrZ2NvbmZpZy8qLnBjDQo+ICR7RH0ke2xpYmRpcn0vcGtnY29u
-ZmlnLw0KPiA+ID4gPiAtDQo+ID4gPiA+IC0gICAgICAgaW5zdGFsbCAtZCAke0R9JHtpbmNsdWRl
-ZGlyfQ0KPiA+ID4gPiAtICAgICAgIG12ICR7RH0vdXNyL2xvY2FsL2luY2x1ZGUvKiAke0R9JHtp
-bmNsdWRlZGlyfS8NCj4gPiA+ID4gK2RvX2luc3RhbGwoKSB7DQo+ID4gPiA+ICsgICAgICAgb2Vf
-cnVubWFrZSBwcmVmaXg9JHtwcmVmaXh9IERFU1RESVI9JHtEfSBpbnN0YWxsDQo+ID4gPiA+DQo+
-ID4gPiA+ICAgICAgICAgIyBSZW1vdmUgdW5lZWRlZCBmaWxlcw0KPiA+ID4gPiAtICAgICAgIHJt
-IC1yZiAke0R9L3Vzci9sb2NhbC8NCj4gPiA+ID4gKyAgICAgICBybSAtcmYgJHtEfS91c3IvbGli
-NjQvcG1ka19kZWJ1Zw0KPiA+ID4gPiAgfQ0KPiA+ID4gPg0KPiA+ID4gPiAgIyBJbmNsdWRlIHRo
-ZXNlIGJ5IGRlZmF1bHQgb3RoZXJ3aXNlIHRoZSBTREsgaXMgbm90IHZlcnkgdXNlZnVsDQo+ID4g
-PiA+IC0tDQo+ID4gPiA+IDIuMTQuNA0KPiA+ID4gQW5kcmVhcw0KPiA+IC0tDQo+ID4gX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRk
-ZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+yes you can do that
+
+On Mon, Jan 14, 2019 at 7:22 PM Liu, Yongxin <Yongxin.Liu@windriver.com> wr=
+ote:
+>
+>
+> > -----Original Message-----
+> > From: Khem Raj [mailto:raj.khem@gmail.com]
+> > Sent: Tuesday, January 15, 2019 06:47
+> > To: Liu, Yongxin
+> > Cc: Andreas M=C3=BCller; openembeded-devel
+> > Subject: Re: [oe] [meta-oe][PATCH V2] pmdk: fix install error
+> >
+> > On Wed, Jan 9, 2019 at 11:43 PM Liu, Yongxin <Yongxin.Liu@windriver.com=
+>
+> > wrote:
+> > >
+> > > > -----Original Message-----
+> > > > From: Andreas M=C3=BCller [mailto:schnitzeltony@gmail.com]
+> > > > Sent: Thursday, January 10, 2019 14:46
+> > > > To: Liu, Yongxin
+> > > > Cc: openembeded-devel
+> > > > Subject: Re: [oe] [meta-oe][PATCH V2] pmdk: fix install error
+> > > >
+> > > > On Thu, Jan 10, 2019 at 6:40 AM Yongxin Liu
+> > <yongxin.liu@windriver.com>
+> > > > wrote:
+> > > > >
+> > > > > Install files to /usr instead of /usr/local by replacing
+> > > > > PREFIX=3D${prefix} with prefix=3D${prefix}.
+> > > > > Remove unnecessary files which are only for debugging.
+> > > > > Set FILES to package /usr/etc/bash_completion.d/pmempool.
+> > > > >
+> > > > > Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+> > > > > ---
+> > > > >  meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb | 20 ++++-----------=
+--
+> > ---
+> > > > >  1 file changed, 4 insertions(+), 16 deletions(-)
+> > > > >
+> > > > > diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-
+> > > > oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > > > index 3da22a970..8c3ead2ef 100644
+> > > > > --- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > > > +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+> > > > > @@ -34,25 +34,13 @@ EXTRA_OEMAKE =3D "HOST_SYS=3D'${HOST_SYS}'
+> > > > EXTRA_CFLAGS=3D'${SELECTED_OPTIMIZATION}'"
+> > > > >  # Fix the missing fts libs when using musl
+> > > > >  EXTRA_OEMAKE_append_libc-musl =3D " EXTRA_LIBS=3D'-lfts'"
+> > > > >
+> > > > > -do_install() {
+> > > > > -       oe_runmake PREFIX=3D${prefix} DESTDIR=3D${D} install
+> > > > > -
+> > > > > -       # Copy these into the standard directories
+> > > > > -       install -d ${D}${bindir}/
+> > > > > -       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
+> > > > > -       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+> > > > > -
+> > > > > -       install -d ${D}${libdir}
+> > > > > -       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+> > > > > +FILES_${PN} =3D "/usr/etc"
+> > > > ^ This looks wrong: Seems config path is prefixed too
+> > >
+> > > Without this I got the following warning.
+> > >
+> > >     WARNING: pmdk-1.4.2-r0 do_package: QA Issue: pmdk:
+> > Files/directories were installed but not shipped in any package:
+> > >       /usr/etc
+> > >       /usr/etc/bash_completion.d
+> > >       /usr/etc/bash_completion.d/pmempool
+> > >     Please set FILES such that these items are packaged. Alternativel=
+y
+> > if they are unneeded, avoid installing them or delete them within
+> > do_install.
+> > >     pmdk: 3 installed and not shipped files. [installed-vs-shipped]
+> > >
+> > > With it, the issue is gone. And those files can be shipped in RPM
+> > packages.
+> > >
+> > >     $ rpm -qpl pmdk-1.4.2-r0.skylake_avx512_64.rpm
+> > >     /usr
+> > >     /usr/bin
+> > >     /usr/bin/daxio
+> > >     /usr/bin/pmempool
+> > >     /usr/etc
+> > >     /usr/etc/bash_completion.d
+> > >     /usr/etc/bash_completion.d/pmempool
+> > >
+> >
+> > Its better to move bash_completion files under usr/share in
+> > do_install
+> >
+>
+> How about install bash_completion files directly to /etc?
+> It seems /etc/bash_completion.d is the more common place to hold such fil=
+es.
+>
+> All I need to do is to specify sysconfdir in install command,
+> such as " oe_runmake prefix=3D${prefix} DESTDIR=3D${D} sysconfdir=3D/etc =
+install".
+> And add FILES_${PN} +=3D "${sysconfdir}" to avoid QA issue.
+>
+> What do you think?
+>
+>
+> --Yongxin
+>
+> > > I see similar usage, such as "meta-openembedded/meta-oe/recipes-
+> > support/lio-utils/lio-utils_4.1.bb:FILES_${PN} +=3D "${sbindir}/*
+> > /etc/init.d/* /etc/target/*""
+> > >
+> > >
+> > > Thanks,
+> > > Yongxin
+> > >
+> > > > >
+> > > > > -       install -d ${D}${libdir}/pkgconfig
+> > > > > -       mv ${D}/usr/local/lib/pkgconfig/*.pc
+> > ${D}${libdir}/pkgconfig/
+> > > > > -
+> > > > > -       install -d ${D}${includedir}
+> > > > > -       mv ${D}/usr/local/include/* ${D}${includedir}/
+> > > > > +do_install() {
+> > > > > +       oe_runmake prefix=3D${prefix} DESTDIR=3D${D} install
+> > > > >
+> > > > >         # Remove uneeded files
+> > > > > -       rm -rf ${D}/usr/local/
+> > > > > +       rm -rf ${D}/usr/lib64/pmdk_debug
+> > > > >  }
+> > > > >
+> > > > >  # Include these by default otherwise the SDK is not very useful
+> > > > > --
+> > > > > 2.14.4
+> > > > Andreas
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
