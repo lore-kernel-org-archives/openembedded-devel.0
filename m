@@ -1,70 +1,26 @@
-Return-Path: <lewis.muhlenkamp@stryker.com>
-X-Greylist: delayed 27035 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 16 Jan 2019 09:32:10 UTC
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
-	(mail-eopbgr800089.outbound.protection.outlook.com [40.107.80.89])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E8B66D9AB
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C1FF7C121
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jan 2019 09:32:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stryker.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=CyLwVSjW9mJfN0FOgzhdXy9yS2W/EhgU8y+JA1bYP7U=;
-	b=Owu0FI63M+0bnDX8MNwkIDDPVTkFwcijP0Dnis514uQRvu96k0aA1rNv/PE8JcLGOPG820gQO+62dpY6W3Th71Z8HSyQ0lFW53/SZBfTWvs3XDHUVuBtj2aR11hQGD29kQjw3+QRy+RuZXwKsU1S2QdsMfgVa1zjA3329m3VY2k=
-Received: from DM6PR01MB4636.prod.exchangelabs.com (20.177.216.161) by
-	DM6PR01MB3657.prod.exchangelabs.com (20.176.64.146) with Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1516.14; Tue, 15 Jan 2019 18:26:32 +0000
-Received: from DM6PR01MB4636.prod.exchangelabs.com
-	([fe80::9147:8c0b:ee2:6d33]) by DM6PR01MB4636.prod.exchangelabs.com
-	([fe80::9147:8c0b:ee2:6d33%2]) with mapi id 15.20.1516.019;
-	Tue, 15 Jan 2019 18:26:32 +0000
-From: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
-To: "mark.asselstine@windriver.com" <mark.asselstine@windriver.com>
-Thread-Topic: [oe] Kernel modules being built, but not being included in image
-Thread-Index: AdSo/YZJsbDelO6ySpe6eA6PkwapeADVnikAACLYtVA=
-Date: Tue, 15 Jan 2019 18:26:31 +0000
-Message-ID: <DM6PR01MB4636C8BD15F7EF3A4D121F7D8F810@DM6PR01MB4636.prod.exchangelabs.com>
+	Wed, 16 Jan 2019 15:20:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0GFJtnk008127
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 16 Jan 2019 07:20:06 -0800
+Received: from yow-masselst-lx1.localnet (128.224.60.115) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.408.0; Wed, 16 Jan 2019 07:19:45 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
+Date: Wed, 16 Jan 2019 10:19:44 -0500
+Message-ID: <1747961.HFadKpmvWh@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <DM6PR01MB46363A1A50A4C063A2A59A788F820@DM6PR01MB4636.prod.exchangelabs.com>
 References: <DM6PR01MB4636DE2DFD81ED5926A24F9F8F840@DM6PR01MB4636.prod.exchangelabs.com>
-	<CAPuovEJS2oTwaNGpD3th3efTwx2DufdyT_E5gUfa3S7bh9azOw@mail.gmail.com>
-In-Reply-To: <CAPuovEJS2oTwaNGpD3th3efTwx2DufdyT_E5gUfa3S7bh9azOw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=lewis.muhlenkamp@stryker.com; 
-x-originating-ip: [165.225.32.61]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; DM6PR01MB3657;
-	20:hMENvpGaGU/JhzrSv3a47/bQmAPxl90PGBGrfDkWm5ImlJQlvu/4kynP6coyzAx1iNGrxUHp2dIWLkk+wCTZXXswkGuKvd/lApD2zt/Bf4pQcaUQse6vXuKNe9imlFJSfYctXguQmeUi0KlhQvWEUt0+rd5To+JfC83CCR2FN/mIDAOse6b/2zjrQ6+7oZL/NJxOjiWA3jrUECme9UDwmHyu3HSKBKjLwf9Df9AOrs9XgxOea3yyQtDGmK0WNdic;
-	23:DAkx2OeYBSMInqo8yTu3MMzlzKG33FCTfy3bx79osM9Rg8boKaIiEmzL2o+2/K9kZSo+RPv9SbzrEkb7+57ejTJ449eZCtMn0SO9y/6bkwbRTmcPoX0LTzPKxO+iull9xN9RwRK99zlAatxt4ClC/A==
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-correlation-id: 3ee47dd7-c47f-4c5c-fe55-08d67b16f949
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600109)(711020)(4618075)(2017052603328)(7167020)(7153060)(7193020);
-	SRVR:DM6PR01MB3657; 
-X-MS-TrafficTypeDiagnostic: DM6PR01MB3657:|DM6PR01MB3657:
-x-microsoft-antispam-prvs: <DM6PR01MB3657ADD3542AF0BCBF89D42C8F810@DM6PR01MB3657.prod.exchangelabs.com>
-x-forefront-prvs: 0918748D70
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(979002)(39860400002)(376002)(136003)(346002)(396003)(366004)(189003)(199004)(13464003)(7736002)(3846002)(305945005)(6116002)(66066001)(6916009)(33656002)(55016002)(68736007)(6436002)(81156014)(81166006)(8676002)(99286004)(8936002)(5640700003)(476003)(478600001)(966005)(486006)(2501003)(256004)(14444005)(2906002)(86362001)(6306002)(316002)(446003)(229853002)(71190400001)(9686003)(30864003)(25786009)(14454004)(4744004)(71200400001)(53936002)(4326008)(102836004)(55236004)(97736004)(106356001)(105586002)(11346002)(7696005)(5660300001)(53546011)(6506007)(26005)(2351001)(186003)(76176011)(74316002)(6246003)(969003)(989001)(999001)(1009001)(1019001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR01MB3657;
-	H:DM6PR01MB4636.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: stryker.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: Ah1nTVWXxO3RyLo1N+fsK7j+uKpXYamXCC3ClXMT6k9rM22JkDy4VOmtKeX7/PIMoghnoW1Dwg5zFPD11V+tXBFDUjws7tDoSTVWkPdtml/zm7lDxA1o5cFNRNo+a66qpnCRAMoLLyMuzCxuYOgH4naQ5ZHs8GtzrW1S3j+I9X4LcYPuXdwWCBFmygVw5YNTWXzwLHNfZLQH4yJ6x4IgTEfCDaZj+ZzO1B+nfZ9yZwkNB/URH4zaRKoodCfERj6EQEH13i3qTI3biJIciDl6U35eydpvBAZZUhKAtttcgDM8XYuobWF5foVGRmMpL+KI+nwywYv0wwMpnrivU//kSjMpyBgf9837e7s9CAL5D7p6zxrNeM7sPgRQqF7VAp2ryUCvlGItyFjIqCFJGHj7P8PTipYsX1fz86+hFFPwi+8=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	<24204196.tQc3WnnfOQ@yow-masselst-lx1>
+	<DM6PR01MB46363A1A50A4C063A2A59A788F820@DM6PR01MB4636.prod.exchangelabs.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ee47dd7-c47f-4c5c-fe55-08d67b16f949
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2019 18:26:32.0439 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4e9dbbfb-394a-4583-8810-53f81f819e3b
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR01MB3657
-X-OriginatorOrg: stryker.com
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: Kernel modules being built, but not being included in image
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -79,219 +35,552 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2019 09:32:10 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 16 Jan 2019 15:20:26 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-TWFyaywNCg0KSSBnb3QgdGhlIGRvY2tlciBkYWVtb24gdG8gc3RhcnQgdXAuICBJIGZpZ3VyZWQg
-b3V0IHdoYXQgSSBuZWVkZWQgdG8gcHV0IGludG8gbXkgLi4uL3JlY2lwZXMta2VybmVsL2xpbnV4
-L2xpbnV4LWludGVsL2RvY2tlci5jZmcgZmlsZSB0byBtYWtlIHN1cmUgYWxsIG9mIHRoZSBrZXJu
-ZWwgbW9kdWxlcyB3ZXJlIGJ1aWx0cy4gIEkgYWxzbyBmb3VuZCB0aGF0IGp1c3QgYWRkaW5nDQoN
-CiAgICBDT1JFX0lNQUdFX0VYVFJBX0lOU1RBTEwgKz0gImtlcm5lbC1tb2R1bGVzIGRvY2tlciIN
-Cg0Kd2lsbCBhZGQgYWxsIG9mIHRoZSBrZXJuZWwgbW9kdWxlcyBhcyB3ZWxsIGFzIHRoZSBkb2Nr
-ZXIgc29mdHdhcmUuDQoNClNvLCB0aGUgZG9ja2VyIGRhZW1vbiBpcyBydW5uaW5nLiAgSSBjYW4g
-cnVuIGRvY2tlciBjb21tYW5kcyBsaWtlICJkb2NrZXIgaW1hZ2UgbHMiICBJIGNhbiBidWlsZCBh
-IGRvY2tlciBpbWFnZSwgYnV0IEkgY2Fubm90IHJ1biB0aGUgZG9ja2VyIGltYWdlLiAgRm9yIGV4
-YW1wbGUsIEkgY3JlYXRlZCBhIHNpbXBsZSBkb2NrZXJmaWxlIHRoYXQganVzdCBoYXMgdGhlIGxp
-bmUgIkZST00gdWJ1bnR1Ii4gIEkgY2FuIHN1Y2Nlc3NmdWxseSBydW4gImRvY2tlciBidWlsZCAu
-IiBpbiB0aGF0IGRpcmVjdG9yeS4gIEl0IGNyZWF0ZXMgYW4gaW1hZ2UuICBJIGNhbiBydW4gImRv
-Y2tlciBpbWFnZSBscyIgYW5kIHNlZSB0aGUgaW1hZ2UuICBXaGVuIEkgcnVuDQoNCiAgICBkb2Nr
-ZXIgcnVuIC1JIC10IHVidW50dSAiL2Jpbi9iYXNoIg0KDQp0aG91Z2gsIEkgZ2V0IGFuIGVycm9y
-IG1lc3NhZ2UNCg0KZG9ja2VyOiBFcnJvciByZXNwb25zZSBmcm9tIGRhZW1vbjogZmFpbGVkIHRv
-IGNyZWF0ZSBlbmRwb2ludCBlbGF0ZWRfYXJ5YWJoYXRhZG9jIG9uIG5ldHdvcmsgYnJpZGdlOyBm
-YWlsZWQgdG8gYWRkIHRoZSBob3N0ICh2ZXRoM2JlZmE3MikgPCs+IHNhbmRib3ggKHZldGg0MGEz
-ZTFjKSBwYWlyIGludGVyZmFjZXM6IG9wZXJhdGlvbiBub3Qgc3VwcG9ydGVkLg0KDQoNCkkgaGF2
-ZSBiZWVuIGRvaW5nIGFsbCBvZiBteSB0ZXN0aW5nIG9uIGEgVmlydHVhbEJveCBWTS4gIEknbSBu
-b3Qgc3VyZSBpZiB0aGVyZSBpcyBzb21ldGhpbmcgbWlzc2luZyBpbiBWaXJ0dWFsQm94IHRoYXQg
-bWF5IGJlIGNhdXNpbmcgdGhpcywgb3Igc29tZSBWTSBzZXR0aW5nIHRoYXQncyBub3QgcHJvcGVy
-bHkgY29uZmlndXJlZC4gIEknbSBnb2luZyB0byB0cnkgb24gcGh5c2ljYWwgaGFyZHdhcmUgYXMg
-d2VsbCB0byBzZWUgaWYgdGhhdCBmaXhlcyB0aGUgaXNzdWUuDQoNCklmIHRoZXJlIGlzIHNvbWV0
-aGluZyB0aGF0IEkgYW0gbWlzc2luZyB0aG91Z2ggd2l0aGluIG15IG9wZW5lbWJlZGRlZCBidWls
-ZCB0aGF0IHdpbGwgZml4IHRoaXMsIHBsZWFzZSBsZXQgbWUga25vdy4NCg0KVGhhbmsgeW91DQoN
-Ckxld2lzIE11aGxlbmthbXANCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IE1h
-cmsgQXNzZWxzdGluZSA8bWFyay5hc3NlbHN0aW5lQHdpbmRyaXZlci5jb20+IA0KU2VudDogTW9u
-ZGF5LCBKYW51YXJ5IDE0LCAyMDE5IDQ6NTYgUE0NClRvOiBNdWhsZW5rYW1wLCBMZXdpcyA8bGV3
-aXMubXVobGVua2FtcEBzdHJ5a2VyLmNvbT4NCkNjOiBvcGVuZW1iZWRkZWQtZGV2ZWwgPG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KU3ViamVjdDogUmU6IFtvZV0g
-S2VybmVsIG1vZHVsZXMgYmVpbmcgYnVpbHQsIGJ1dCBub3QgYmVpbmcgaW5jbHVkZWQgaW4gaW1h
-Z2UNCg0KVGhpcyBoYXMgYmVlbiBhc2tlZCBpbiB0aGUgcGFzdCBhbmQgSSBkaWQgaGF2ZSBhICJt
-aW5pIiBsYXllciB0aGF0IGNvdWxkIGJlIHVzZWQgaW4gYWRkaXRpb24gdG8gbWV0YS12aXJ0IHRv
-IGFsbG93IHlvdSB0byBnZXQgd2hhdCB5b3UgbmVlZCBpbiBhbiBpbWFnZSBmYWlybHkgZWFzaWx5
-LiBXZSB3ZXJlIGdvaW5nIHRvIGRvIHNvbWUgd29yayB0byBtYWtlIHRoaXMgZWFzaWVyIGJ1dCBJ
-IGhhdmVuJ3QgbG9va2VkIGluIGEgd2hpbGUgc28gSSBjYW4ndCBzYXkgd2hlcmUgdGhpbmdzIGFy
-ZSBhdCBvZmYgdGhlIHRvcCBvZiBteSBoZWFkLiBBdCBhbnkgcmF0ZSBJIGFtIGp1c3QgYmFjayBm
-cm9tIHNvbWUgdHJhdmVsIGJ1dCBJIHdpbGwgdHJ5IHRvIHRha2UgYSBsb29rIGF0IHRoaXMgdG9t
-b3Jyb3csIGFmdGVyIHdoaWNoIEkgc2hvdWxkIGJlIGFibGUgdG8gcHJvdmlkZSBzb21lIGJldHRl
-ciBndWlkYW5jZS4NCg0KTWFyaw0KT24gRnJpLCBKYW4gMTEsIDIwMTkgYXQgNzozOSBQTSBNdWhs
-ZW5rYW1wLCBMZXdpcyA8bGV3aXMubXVobGVua2FtcEBzdHJ5a2VyLmNvbT4gd3JvdGU6DQo+DQo+
-IEhlbGxvLA0KPg0KPiBUTERSOiBIb3cgZG8gSSBnZXQgZG9ja2VyIGZ1bGx5IGZ1bmN0aW9uYWwg
-aW4gbXkgb3BlbmVtYmVkZGVkIGxpbnV4IGltYWdlPw0KPg0KPiBJJ3ZlIGJlZW4gdHJ5aW5nIHRv
-IGdldCBkb2NrZXIgaW5jbHVkZWQgaW50byBteSBpbWFnZS4gIEFsbCBvZiBteSBhdHRlbXB0cyBs
-ZWFkIHRvIHRoZSBzYW1lIGVycm9yIG1lc3NhZ2VzIGFwcGVhcmluZyBpbiB0aGUgbG9nIGZpbGUs
-IGFuZCBkb2NrZXIgbm90IHN0YXJ0aW5nLg0KPg0KPiBUaGUgZXJyb3IgbWVzc2FnZXMgYXJlDQo+
-DQo+ID09PSBTdGFydCBkb2NrZXIgbWVzc2FnZXMgPT09DQo+IEphbiAxMCAxNTo1NjoyNSBpbnRl
-bC1jb3JlaTctNjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIyMDE5LTAxLTEwVDE1OjU2OjI1LjQxNDc3
-ODI5OVoiIGxldmVsPWVycm9yIG1zZz0iRmFpbGVkIHRvIGJ1aWx0LWluIEdldERyaXZlciBncmFw
-aCBidHJmcyAvdmFyL2xpYi9kb2NrZXIiDQo+IEphbiAxMCAxNTo1NjoyNSBpbnRlbC1jb3JlaTct
-NjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIyMDE5LTAxLTEwVDE1OjU2OjI1LjQ2MDY5NTcyMFoiIGxl
-dmVsPXdhcm5pbmcgbXNnPSJZb3VyIGtlcm5lbCBkb2VzIG5vdCBzdXBwb3J0IGNncm91cCBjZnMg
-cGVyaW9kIg0KPiBKYW4gMTAgMTU6NTY6MjUgaW50ZWwtY29yZWk3LTY0IGRvY2tlcmRbMjEwXTog
-dGltZT0iMjAxOS0wMS0xMFQxNTo1NjoyNS40NjA3OTUxODVaIiBsZXZlbD13YXJuaW5nIG1zZz0i
-WW91ciBrZXJuZWwgZG9lcyBub3Qgc3VwcG9ydCBjZ3JvdXAgY2ZzIHF1b3RhcyINCj4gSmFuIDEw
-IDE1OjU2OjI1IGludGVsLWNvcmVpNy02NCBkb2NrZXJkWzIxMF06IHRpbWU9IjIwMTktMDEtMTBU
-MTU6NTY6MjUuNDYwODk2NTM5WiIgbGV2ZWw9d2FybmluZyBtc2c9IllvdXIga2VybmVsIGRvZXMg
-bm90IHN1cHBvcnQgY2dyb3VwIGNmcyBibGtpbyB3ZWlnaHQiDQo+IEphbiAxMCAxNTo1NjoyNSBp
-bnRlbC1jb3JlaTctNjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIyMDE5LTAxLTEwVDE1OjU2OjI1LjQ2
-MTI1NTY0M1oiIGxldmVsPXdhcm5pbmcgbXNnPSJZb3VyIGtlcm5lbCBkb2VzIG5vdCBzdXBwb3J0
-IGNncm91cCBjZnMgYmxraW8gdGhyb3R0bGUucmVhZF9icHNfZGV2aWNlIg0KPiBKYW4gMTAgMTU6
-NTY6MjUgaW50ZWwtY29yZWk3LTY0IGRvY2tlcmRbMjEwXTogdGltZT0iMjAxOS0wMS0xMFQxNTo1
-NjoyNS40NjEzODE2MTZaIiBsZXZlbD13YXJuaW5nIG1zZz0iWW91ciBrZXJuZWwgZG9lcyBub3Qg
-c3VwcG9ydCBjZ3JvdXAgY2ZzIGJsa2lvIHRocm90dGxlLndyaXRlX2Jwc19kZXZpY2UiDQo+IEph
-biAxMCAxNTo1NjoyNSBpbnRlbC1jb3JlaTctNjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIyMDE5LTAx
-LTEwVDE1OjU2OjI1LjQ2MTUwMzc0NloiIGxldmVsPXdhcm5pbmcgbXNnPSJZb3VyIGtlcm5lbCBk
-b2VzIG5vdCBzdXBwb3J0IGNncm91cCBjZnMgYmxraW8gdGhyb3R0bGUucmVhZF9pb3BzX2Rldmlj
-ZSINCj4gSmFuIDEwIDE1OjU2OjI1IGludGVsLWNvcmVpNy02NCBkb2NrZXJkWzIxMF06IHRpbWU9
-IjIwMTktMDEtMTBUMTU6NTY6MjUuNDYxNjAxODc5WiIgbGV2ZWw9d2FybmluZyBtc2c9IllvdXIg
-a2VybmVsIGRvZXMgbm90IHN1cHBvcnQgY2dyb3VwIGNmcyBibGtpbyB0aHJvdHRsZS53cml0ZV9p
-b3BzX2RldmljZSINCj4gSmFuIDEwIDE1OjU2OjI1IGludGVsLWNvcmVpNy02NCBkb2NrZXJkWzIx
-MF06IHRpbWU9IjIwMTktMDEtMTBUMTU6NTY6MjUuNDc1NzQ3NjY1WiIgbGV2ZWw9d2FybmluZyBt
-c2c9IlJ1bm5pbmcgbW9kcHJvYmUgYnJpZGdlIGJyX25ldGZpbHRlciBmYWlsZWQgd2l0aCBtZXNz
-YWdlOiBtb2Rwcm9iZTogV0FSTklORzogTW9kdWxlIGJyX25ldGZpbHRlciBub3QgZm91bmQgaW4g
-ZGlyZWN0b3J5IC9saWIvbW9kdWxlcy80LjE0Ljc4LWludGVsLXBrLXN0YW5kYXJkXG5pbnNtb2Qg
-L2xpYi9tb2R1bGVzLzQuMTQuNzgtaW50ZWwtcGstc3RhbmRhcmQva2VybmVsL25ldC9sbGMua28g
-XG5pbnNtb2QgL2xpYi9tb2R1bGVzLzQuMTQuNzgtaW50ZWwtcGstc3RhbmRhcmQva2VybmVsL25l
-dC84MDIvc3RwLmtvIFxuaW5zbW9kIC9saWIvbW9kdWxlcy80LjE0Ljc4LWludGVsLXBrLXN0YW5k
-YXJkL2tlcm5lbC9uZXQvYnJpZGdlL2JyaWRnZS5rbyBcbiwgZXJyb3I6IGV4aXQgc3RhdHVzIDEi
-DQo+IEphbiAxMCAxNTo1NjoyNSBpbnRlbC1jb3JlaTctNjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIy
-MDE5LTAxLTEwVDE1OjU2OjI1LjY1OTg0NDcyM1oiIGxldmVsPXdhcm5pbmcgbXNnPSJDb3VsZCBu
-b3QgbG9hZCBuZWNlc3NhcnkgbW9kdWxlcyBmb3IgSVBTRUMgcnVsZXM6IFJ1bm5pbmcgbW9kcHJv
-YmUgeGZybV91c2VyIGZhaWxlZCB3aXRoIG1lc3NhZ2U6IGBtb2Rwcm9iZTogV0FSTklORzogTW9k
-dWxlIHhmcm1fdXNlciBub3QgZm91bmQgaW4gZGlyZWN0b3J5IC9saWIvbW9kdWxlcy80LjE0Ljc4
-LWludGVsLXBrLXN0YW5kYXJkYCwgZXJyb3I6IGV4aXQgc3RhdHVzIDEiDQo+IEphbiAxMCAxNTo1
-NjoyNSBpbnRlbC1jb3JlaTctNjQgZG9ja2VyZFsyMTBdOiB0aW1lPSIyMDE5LTAxLTEwVDE1OjU2
-OjI1LjY2MjQ5NDE2N1oiIGxldmVsPXdhcm5pbmcgbXNnPSJDb3VsZCBub3QgbG9hZCBuZWNlc3Nh
-cnkgbW9kdWxlcyBmb3IgQ29ubnRyYWNrOiBSdW5uaW5nIG1vZHByb2JlIG5mX2Nvbm50cmFja19u
-ZXRsaW5rIGZhaWxlZCB3aXRoIG1lc3NhZ2U6IGBtb2Rwcm9iZTogV0FSTklORzogTW9kdWxlIG5m
-X2Nvbm50cmFja19uZXRsaW5rIG5vdCBmb3VuZCBpbiBkaXJlY3RvcnkgL2xpYi9tb2R1bGVzLzQu
-MTQuNzgtaW50ZWwtcGstc3RhbmRhcmRgLCBlcnJvcjogZXhpdCBzdGF0dXMgMSINCj4gSmFuIDEw
-IDE1OjU2OjI1IGludGVsLWNvcmVpNy02NCBkb2NrZXJkWzIxMF06IGZhaWxlZCB0byBzdGFydCBk
-YWVtb246IEVycm9yIGluaXRpYWxpemluZyBuZXR3b3JrIGNvbnRyb2xsZXI6IEVycm9yIGNyZWF0
-aW5nIGRlZmF1bHQgImJyaWRnZSIgbmV0d29yazogRmFpbGVkIHRvIHByb2dyYW0gTkFUIGNoYWlu
-OiBGYWlsZWQgdG8gaW5qZWN0IERPQ0tFUiBpbiBQUkVST1VUSU5HIGNoYWluOiBpcHRhYmxlcyBm
-YWlsZWQ6IGlwdGFibGVzIC13YWl0IC10IG5hdCAtQSBQUkVST1VUSU5HIC1tIGFkZHJ0eXBlIC1k
-c3QtdHlwZSBMT0NBTCAtaiBET0NLRVI6IGlwdGFibGVzOiBObyBjaGFpbi90YXJnZXQvbWF0Y2gg
-YnkgdGhhdCBuYW1lLg0KPiA9PT0gRW5kIGRvY2tlciBtZXNzYWdlcyA9PT0NCj4NCj4gSSB3YXMg
-dXNpbmcgbXkgb3duIGN1c3RvbSBpbWFnZSB0eXBlLCBidXQgSSBnb3QgdGhlIHNhbWUgcmVzdWx0
-cyB3aGVuIHRyeWluZyB0byBidWlsZCBhbmQgdXNlIGNvcmUtaW1hZ2UtbWluaW1hbC4NCj4NCj4g
-SSB0cmllZCBpbmNsdWRpbmcgdGhlIG1ldGEtdmlydHVhbGl6YXRpb24vcmVjaXBlcy9rZXJuZWwv
-bGludXgvbGludXgteW9jdG8vZG9ja2VyLnNjYyBzdHVmZiBpbiwgYnV0IHNpbmNlIEkgc2V0IE1B
-Q0hJTkUgdG8gaW50ZWwtY29yZWk3LTY0LCBJIGNvcGllZCB0aGUgZG9ja2VyLnNjYyBhbmQgZG9j
-a2VyLmNmZyBpbnRvIG15IGN1c3RvbSBsYXllcjoNCj4NCj4gbWV0YS1zdHJ5a2VyL2NvbW1vbi9y
-ZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC1pbnRlbC9kb2NrZXIuY2ZnDQo+IG1ldGEtc3RyeWtl
-ci9jb21tb24vcmVjaXBlcy1rZXJuZWwvbGludXgvbGludXgtaW50ZWwva2VybmVsX2Jhc2VsaW5l
-LnMNCj4gY2MgbWV0YS1zdHJ5a2VyL2NvbW1vbi9yZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC1p
-bnRlbF8lLmJiYXBwZW5kDQo+DQo+IFRoYXQgZGlkbid0IHNlZW0gdG8gd29yayBlaXRoZXIuICBU
-aGUgbW9kdWxlcyBhbHdheXMgZ290IGJ1aWx0LiAgRm9yIGV4YW1wbGUsIGJyX25ldGZpbHRlci5r
-byBpcyBidWlsdDoNCj4NCj4gbG11aGxlbmthbXBAYzcxNzAzYjNiYTdkOn4vYnVpbGQtMjAxODEy
-MTNhL3RtcC1nbGliYyQgZmluZCAuIC1uYW1lIA0KPiBicl9uZXRmaWx0ZXIua28gDQo+IC4vd29y
-ay9jb3JlaTctNjQtaW50ZWwtY29tbW9uLW9lLWxpbnV4L2xpbnV4LWludGVsLzQuMTQuNzgrZ2l0
-QVVUT0lOQysNCj4gNmEzMjU0ZTdiM181NmYxNTE0NmNmLXIwL2ltYWdlL2xpYi9tb2R1bGVzLzQu
-MTQuNzgtaW50ZWwtcGstc3RhbmRhcmQvaw0KPiBlcm5lbC9uZXQvYnJpZGdlL2JyX25ldGZpbHRl
-ci5rbyANCj4gLi93b3JrL2NvcmVpNy02NC1pbnRlbC1jb21tb24tb2UtbGludXgvbGludXgtaW50
-ZWwvNC4xNC43OCtnaXRBVVRPSU5DKw0KPiA2YTMyNTRlN2IzXzU2ZjE1MTQ2Y2YtcjAvcGFja2Fn
-ZXMtc3BsaXQva2VybmVsLW1vZHVsZS1ici1uZXRmaWx0ZXItNC4xDQo+IDQuNzgtaW50ZWwtcGst
-c3RhbmRhcmQvbGliL21vZHVsZXMvNC4xNC43OC1pbnRlbC1way1zdGFuZGFyZC9rZXJuZWwvbmUN
-Cj4gdC9icmlkZ2UvYnJfbmV0ZmlsdGVyLmtvIA0KPiAuL3dvcmsvY29yZWk3LTY0LWludGVsLWNv
-bW1vbi1vZS1saW51eC9saW51eC1pbnRlbC80LjE0Ljc4K2dpdEFVVE9JTkMrDQo+IDZhMzI1NGU3
-YjNfNTZmMTUxNDZjZi1yMC9saW51eC1jb3JlaTctNjQtaW50ZWwtY29tbW9uLXN0YW5kYXJkLWJ1
-aWxkL24NCj4gZXQvYnJpZGdlL2JyX25ldGZpbHRlci5rbyANCj4gLi93b3JrL2NvcmVpNy02NC1p
-bnRlbC1jb21tb24tb2UtbGludXgvbGludXgtaW50ZWwvNC4xNC43OCtnaXRBVVRPSU5DKw0KPiA2
-YTMyNTRlN2IzXzU2ZjE1MTQ2Y2YtcjAvcGFja2FnZS9saWIvbW9kdWxlcy80LjE0Ljc4LWludGVs
-LXBrLXN0YW5kYXJkDQo+IC9rZXJuZWwvbmV0L2JyaWRnZS9icl9uZXRmaWx0ZXIua28NCj4NCj4g
-QnV0IHRoZXNlIG1vZHVsZXMgYXJlIG5vdCBpbmNsdWRlZCBpbiBteSBpbWFnZS4gIEZvciBleGFt
-cGxlLCBpZiBJIGRvICJmaW5kIC8gLW5hbWUgYnJfbmV0ZmlsdGVyLmtvIiBvbiBteSB0YXJnZXQg
-aW5zdGFsbCwgbm90aGluZyBpcyByZXR1cm5lZC4NCj4NCj4gTXkgYmJsYXllcnMuY29uZiBpcyBh
-cyBmb2xsb3dzOg0KPg0KPiA9PT0gU3RhcnQgY29uZi9iYmxheWVycy5jb25mID09PQ0KPiAjIExB
-WUVSX0NPTkZfVkVSU0lPTiBpcyBpbmNyZWFzZWQgZWFjaCB0aW1lIGJ1aWxkL2NvbmYvYmJsYXll
-cnMuY29uZiAjIA0KPiBjaGFuZ2VzIGluY29tcGF0aWJseSBMQ09ORl9WRVJTSU9OID0gIjciDQo+
-DQo+IEJCUEFUSCA9ICIke1RPUERJUn0iDQo+IEJCRklMRVMgPz0gIiINCj4NCj4gQkJMQVlFUlMg
-Pz0gIiBcDQo+ICAgL2hvbWUvbG11aGxlbmthbXAvb2UtY29yZS9tZXRhIFwNCj4gICAvaG9tZS9s
-bXVobGVua2FtcC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLXB5dGhvbiBcDQo+ICAgL2hvbWUvbG11
-aGxlbmthbXAvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1nbm9tZSBcDQo+ICAgL2hvbWUvbG11aGxl
-bmthbXAvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1maWxlc3lzdGVtcyBcDQo+ICAgL2hvbWUvbG11
-aGxlbmthbXAvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZSBcDQo+ICAgL2hvbWUvbG11aGxlbmth
-bXAvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1uZXR3b3JraW5nIFwNCj4gICAvaG9tZS9sbXVobGVu
-a2FtcC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLWluaXRyYW1mcyBcDQo+ICAgL2hvbWUvbG11aGxl
-bmthbXAvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS13ZWJzZXJ2ZXIgXA0KPiAgIC9ob21lL2xtdWhs
-ZW5rYW1wL21ldGEtaW50ZWwgXA0KPiAgIC9ob21lL2xtdWhsZW5rYW1wL21ldGEtdmlydHVhbGl6
-YXRpb24gXA0KPiAgIC9ob21lL2xtdWhsZW5rYW1wL21ldGEtY2xvdWQtc2VydmljZXMgXA0KPiAg
-IC9ob21lL2xtdWhsZW5rYW1wL21ldGEtY2xvdWQtc2VydmljZXMvbWV0YS1vcGVuc3RhY2sgXA0K
-PiAgIC9ob21lL2xtdWhsZW5rYW1wL21ldGEtaW90LWNsb3VkIFwNCj4gICAvaG9tZS9sbXVobGVu
-a2FtcC9tZXRhLXNlY3VyZS1jb3JlL21ldGEtdHBtIFwNCj4gICAvaG9tZS9sbXVobGVua2FtcC9t
-ZXRhLXN0cnlrZXIvY29tbW9uIFwNCj4gICAvaG9tZS9sbXVobGVua2FtcC9tZXRhLXN0cnlrZXIv
-dGVzdGluZyBcDQo+ICAgIg0KPiA9PT0gRW5kIGNvbmYvYmJsYXllcnMuY29uZiA9PT0NCj4NCj4g
-VGhlIGN1c3RvbWl6YXRpb25zIHRvIG15IGxvY2FsLmNvbmYgZmlsZSBhcmUgYXMgZm9sbG93czoN
-Cj4NCj4gPT09IFN0YXJ0IGxvY2FsLmNvbmYgZXhjZXJwdCA9PT0NCj4gTUFDSElORSA/PSAiaW50
-ZWwtY29yZWk3LTY0Ig0KPiBJTUFHRV9GU1RZUEVTICs9ICJsaXZlIg0KPiBOT0lTTyA9ICIwIg0K
-PiBJTUFHRV9JTlNUQUxMX2FwcGVuZCA9ICIgZ2xpYmMtdXRpbHMgbG9jYWxlZGVmIg0KPiBHTElC
-Q19HRU5FUkFURV9MT0NBTEVTID0gImVsX0dSLlVURi04IGVuX0dCLlVURi04IGVuX1VTLlVURi04
-IGVzX0VTLlVURi04IGRlX0RFLlVURi04IGZhX0lSIGZyX0ZSLlVURi04IGhyX0hSLlVURi04IGph
-X0pQLlVURi04IGphX0pQLkVVQy1KUCBsdF9MVC5VVEYtOCBydV9SVS5VVEYtOCB0cl9UUi5VVEYt
-OCINCj4gSU1BR0VfTElOR1VBUyA9ICJlbC1nciBlbi1nYiBlbi11cyBlcy1lcyBkZS1kZSBmYS1p
-ciBmci1mciBoci1ociBqYS1qcCBqYS1qcC5ldWMtanAgbHQtbHQgcnUtcnUgdHItdHIiDQo+IERJ
-U1RST19GRUFUVVJFU19hcHBlbmQgPSAiIHN5c3RlbWQgdmlydHVhbGl6YXRpb24iDQo+IERJU1RS
-T19GRUFUVVJFU19CQUNLRklMTF9DT05TSURFUkVEICs9ICJzeXN2aW5pdCINCj4gVklSVFVBTC1S
-VU5USU1FX2luaXRfbWFuYWdlciA9ICJzeXN0ZW1kIg0KPiBWSVJUVUFMLVJVTlRJTUVfaW5pdHNj
-cmlwdHMgPSAic3lzdGVtZC1jb21wYXQtdW5pdHMiDQo+IERJU1RST19GRUFUVVJFU19hcHBlbmQg
-PSAiIG9wZW5nbCINCj4gQ09SRV9JTUFHRV9FWFRSQV9JTlNUQUxMICs9ICJycG0gcHl0aG9uMyBw
-eXRob24zLXBpcCBweXRob24zLWZsYXNrIHB5dGhvbjMtcmVxdWVzdHMgcHl0aG9uMy1jb3ZlcmFn
-ZSBweXRob24zLXB5bGludCINCj4gQ09SRV9JTUFHRV9FWFRSQV9JTlNUQUxMICs9ICJweXRob24t
-c3BoaW54Ig0KPiBDT1JFX0lNQUdFX0VYVFJBX0lOU1RBTEwgKz0gInB5dGhvbi1mbGFrZTgiDQo+
-IENPUkVfSU1BR0VfRVhUUkFfSU5TVEFMTCArPSAicHl0aG9uMy1kb3h5cHlweSINCj4gQ09SRV9J
-TUFHRV9FWFRSQV9JTlNUQUxMICs9ICJ0cm91c2VycyB0cG0tdG9vbHMgb3BlbnNzbC10cG0tZW5n
-aW5lIg0KPiBLRVJORUxfRkVBVFVSRVNfYXBwZW5kID0gIiBmZWF0dXJlcy9uZXRmaWx0ZXIvbmV0
-ZmlsdGVyLnNjYyBmZWF0dXJlcy9vdmVybGF5ZnMvb3ZlcmxheWZzLnNjYyINCj4gS0VSTkVMX0VO
-QUJMRV9DR1JPVVBTID0gIjEiDQo+IENPUkVfSU1BR0VfRVhUUkFfSU5TVEFMTCArPSAiZG9ja2Vy
-Ig0KPiBTRVJJQUxfQ09OU09MRVMgPSAiMzg0MDAgdHR5MSINCj4gQ09SRV9JTUFHRV9FWFRSQV9J
-TlNUQUxMICs9ICJmbGFza2hlbGxvIg0KPiA9PT0gRW5kIGxvY2FsLmNvbmYgZXhjZXJwdCA9PT0N
-Cj4NCj4gSSBkaWQgbm90IGhhdmUgdGhlIEtFUk5FTF9GRUFUVVJFU19hcHBlbmQgbGluZSBpbiB3
-aGVuIHVzaW5nIHRoZSByZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC1pbnRlbCBzdHVmZi4gIEkg
-ZGlkbid0IGhhdmUgdGhlIHJlY2lwZXMta2VybmVsL2xpbnV4L2xpbnV4LWludGVsIGRpcmVjdG9y
-eSBhdmFpbGFibGUgd2hlbiB1c2luZyB0aGUgS0VSTkVMX0ZFQVRVUkVTX2FwcGVuZCBsaW5lIGlu
-IGxvY2FsLmNvbmYuICBCYXNlZCBvbiB3aGF0IEkgcmVhZCwgdGhleSB3ZXJlIG11dHVhbGx5IGV4
-Y2x1c2l2ZS4NCj4NCj4gV2hhdCBhbSBJIG1pc3Npbmc/ICBXaHkgYXJlIHRoZSBrZXJuZWwgbW9k
-dWxlcyBub3QgYmVpbmcgaW5jbHVkZWQgaW4gbXkgaW1hZ2U/DQo+DQo+IEkgZGlkIHRyeSB0d2Vh
-a2luZyBteSBkb2NrZXIuY2ZnIGZpbGUgaW4gbXkgY3VzdG9tIGtlcm5lbCByZWNpcGUgdG8gDQo+
-IGluY2x1ZGUgY2dyb3VwcywgYnV0IHRoYXQgZGlkIG5vdCBzZWVtIHRvIGNoYW5nZSBhbnl0aGlu
-Zy4gIEhlcmUgYXJlIA0KPiB0aGUgY29udGVudHMgb2YgbXkgY3VzdG9tIGRvY2tlci5jZmcgZmls
-ZQ0KPg0KPiA9PT0gU3RhcnQgDQo+IG1ldGEtc3RyeWtlci9jb21tb24vcmVjaXBlcy1rZXJuZWwv
-bGludXgvbGludXgtaW50ZWwvZG9ja2VyL2RvY2tlci5jZmcgDQo+ID09PSBDT05GSUdfQ0dST1VQ
-X0RFVklDRT15DQo+DQo+IENPTkZJR19ORVRGSUxURVJfWFRfTUFUQ0hfQUREUlRZUEU9bQ0KPiBD
-T05GSUdfSVBfTkZfRklMVEVSPW0NCj4gQ09ORklHX05GX05BVD1tDQo+IENPTkZJR19ORl9DT05O
-VFJBQ0tfSVBWND15DQo+IENPTkZJR19ORl9DVF9ORVRMSU5LPXkNCj4NCj4gQ09ORklHX0JSSURH
-RV9ORVRGSUxURVI9bQ0KPiBDT05GSUdfWEZSTV9VU0VSPW0NCj4NCj4gQ09ORklHX0RNX1RISU5f
-UFJPVklTSU9OSU5HPW0NCj4NCj4NCj4gQ09ORklHX0lQX05GX05BVD1tDQo+IENPTkZJR19JUF9O
-Rl9UQVJHRVRfTUFTUVVFUkFERT1tDQo+DQo+IENPTkZJR19PVkVSTEFZX0ZTPXkNCj4gPT09IEVu
-ZCANCj4gbWV0YS1zdHJ5a2VyL2NvbW1vbi9yZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC1pbnRl
-bC9kb2NrZXIvZG9ja2VyLmNmZyANCj4gPT09DQo+DQo+IEFuZCBmb3IgY29tcGxldGVuZXNzLCBo
-ZXJlIGFyZSB0aGUgY29udGVudHMgb2YgdGhlIG90aGVyIDIgZmlsZXMgaW4gDQo+IHRoYXQgcmVj
-aXBlDQo+DQo+ID09PSBTdGFydCANCj4gbWV0YS1zdHJ5a2VyL2NvbW1vbi9yZWNpcGVzLWtlcm5l
-bC9saW51eC9saW51eC1pbnRlbF8lLmJiYXBwZW5kID09PSBGSUxFU0VYVFJBUEFUSFNfcHJlcGVu
-ZCA6PSAiJHtUSElTRElSfS8ke1BOfToiDQo+IFNSQ19VUkkgKz0gImZpbGU6Ly9rZXJuZWxfYmFz
-ZWxpbmUuc2NjIg0KPiA9PT0gRW5kIA0KPiBtZXRhLXN0cnlrZXIvY29tbW9uL3JlY2lwZXMta2Vy
-bmVsL2xpbnV4L2xpbnV4LWludGVsXyUuYmJhcHBlbmQgPT09DQo+DQo+ID09PSBTdGFydCANCj4g
-bWV0YS1zdHJ5a2VyL2NvbW1vbi9yZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC1pbnRlbC9rZXJu
-ZWxfYmFzZWxpbmUuc2NjID09PSBkZWZpbmUgS0ZFQVRVUkVfREVTQ1JJUFRJT04gIkVuYWJsZSBG
-ZWF0dXJlcyBuZWVkZWQgYnkgZG9ja2VyIGluIGFkZGl0aW9uIHRvIExYQyBmZWF0dXJlcyINCj4g
-ZGVmaW5lIEtGRUFUVVJFX0NPTVBBVElCSUxJVFkgYm9hcmQNCj4NCj4ga2NvbmYgbm9uLWhhcmR3
-YXJlIGRvY2tlci5jZmcNCj4gPT09IEVuZCANCj4gbWV0YS1zdHJ5a2VyL2NvbW1vbi9yZWNpcGVz
-LWtlcm5lbC9saW51eC9saW51eC1pbnRlbC9rZXJuZWxfYmFzZWxpbmUucw0KPiBjYyA9PT0NCj4N
-Cj4gQW55IGhlbHAgdGhhdCB3b3VsZCBhbGxvdyBtZSB0byBnZXQgZG9ja2VyIGZ1bmN0aW9uYWxp
-dHkgd29ya2luZyBpbiBteSBvcGVuZW1iZWRkZWQgbGludXggaW1hZ2Ugd291bGQgYmUgZ3JlYXRs
-eSBhcHByZWNpYXRlZC4NCj4NCj4gVGhhbmsgeW91DQo+DQo+IExld2lzIE11aGxlbmthbXANCj4N
-Cj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+On Wednesday, January 16, 2019 8:39:08 AM EST Muhlenkamp, Lewis wrote:
+> Mark,
+> 
+> I haven't changed my bblayers.conf file since my original post.  I have
+> everything that you have, and then some.
+> 
+> My DISTRO_FEATURES_append for virtualization and system are on one line.  I
+> have the other systemd lines in my local.conf too.
+> 
+> I have CORE_IMAGE_EXTRA_INSTALL += "kernel-modules docker" instead of
+> IMAGE_INSTALL_append.  The two seem to be interchangeable to me.  If that
+> is not the case, please let me know.
+> 
+> I do not have any KERNEL_MODULE_AUTOLOAD lines in my local.conf.  I'm not
+> sure I need to since the modules appear in the lsmod output.
+> 
+> I thought it might be virtualbox that was not allowing me to create these
+> virtual interfaces for some reason.  So, I installed on my target hardware.
+>  I got the same issue.
+> 
+> Nothing appears in any log when I run the docker command.  There is no debug
+> output when I run docker -D.
+> 
+> It seems like my docker instance does not have permission to create new
+> virtual ethernet interfaces.  What is the best way to test this?
+
+I would recommend that you try to reproduce my findings in a second build, 
+dropping your custom layer and using qemux86-64. You can never go wrong with 
+having a working scenario next to your failing one.
+
+Also since we have moved on from your initial issue regarding kernel modules 
+we should move this conversation over to the meta-virtualization list instead 
+of here. We are more likely to catch the eyes of others who are using docker 
+there and might get additional suggestions as to the cause.
+
+MarkA
+
+> 
+> Thanks
+> 
+> Lewis Muhlenkamp
+> 
+> -----Original Message-----
+> From: Mark Asselstine <mark.asselstine@windriver.com>
+> Sent: Tuesday, January 15, 2019 9:55 PM
+> To: Muhlenkamp, Lewis <lewis.muhlenkamp@stryker.com>
+> Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+> Subject: Re: [oe] Kernel modules being built, but not being included in
+> image
+> On Tuesday, January 15, 2019 5:57:34 PM EST Mark Asselstine wrote:
+> > On Tuesday, January 15, 2019 1:26:31 PM EST Muhlenkamp, Lewis wrote:
+> > > Mark,
+> > > 
+> > > I got the docker daemon to start up.  I figured out what I needed to
+> > > put into my .../recipes-kernel/linux/linux-intel/docker.cfg file to
+> > > make sure all of the kernel modules were builts.  I also found that
+> > > just adding
+> > > 
+> > >     CORE_IMAGE_EXTRA_INSTALL += "kernel-modules docker"
+> > > 
+> > > will add all of the kernel modules as well as the docker software.
+> > > 
+> > > So, the docker daemon is running.  I can run docker commands like
+> > > "docker image ls"  I can build a docker image, but I cannot run the
+> > > docker image. For example, I created a simple dockerfile that just has
+> > > the line
+> > > "FROM ubuntu".  I can successfully run "docker build ." in that
+> > > directory.  It creates an image.  I can run "docker image ls" and
+> > > see the image.  When I run
+> > > 
+> > >     docker run -I -t ubuntu "/bin/bash"
+> > > 
+> > > though, I get an error message
+> > > 
+> > > docker: Error response from daemon: failed to create endpoint
+> > > elated_aryabhatadoc on network bridge; failed to add the host
+> > > (veth3befa72)
+> > > <+> sandbox (veth40a3e1c) pair interfaces: operation not supported.
+> > 
+> > Not surprisingly a container failed to start because of networking :).
+> > I would guess that 90% of the time I have a container fail to start it
+> > is networking related.
+> > 
+> > The veth pair should be independent from your network interface,
+> > either real on real hw or virtual in your case. Whenever you see a
+> > veth or a pair of veth interfaces just visualize the classic blue cat5
+> > cable with two ends to it, where each end is plugged into "something".
+> > This is essentially what the veth pair represents. By default, when
+> > you run docker as you have the one end becomes the interface inside of
+> > the container, the other end is 'plugged' into the docker bridge on
+> > the host. Based on the message I am guessing the veth which is
+> > supposed to be 'plugged' into the docker bridge has failed to do so.
+> > 
+> > My day was a bit messed up so I only got a build put together now so
+> > unfortunately I won't be able to get anything more helpful put
+> > together until tomorrow sometime. In the mean time ensure the docker0
+> > bridge is up and available. And if not figure out why it is not.
+> 
+> I was able to validate things. First here are my changes after I source oe-
+> init-build-env.
+> 
+> bblayers.conf
+> ---
+>   /home/masselst/git/poky/layers/meta-virtualization \
+>   /home/masselst/git/poky/layers/meta-openembedded/meta-oe \
+>   /home/masselst/git/poky/layers/meta-openembedded/meta-networking \
+>   /home/masselst/git/poky/layers/meta-openembedded/meta-filesystems \
+>   /home/masselst/git/poky/layers/meta-openembedded/meta-python \
+> 
+> 
+> local.conf
+> ---
+> DISTRO_FEATURES_append = " virtualization"
+> IMAGE_INSTALL_append = "docker \
+>  kernel-module-xt-conntrack \
+>  kernel-module-nf-nat \
+>  kernel-module-xt-addrtype"
+> 
+> KERNEL_MODULE_AUTOLOAD += "xt_conntrack"
+> KERNEL_MODULE_AUTOLOAD += "xt_addrtype"
+> 
+> DISTRO_FEATURES_append = " systemd"
+> DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+> VIRTUAL-RUNTIME_init_manager = "systemd"
+> VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+> 
+> I also set the machine to "qemux86-64".
+> 
+> 
+> After using 'docker pull hello-world' I run it
+> ---
+> root@qemux86-64:~# docker run -it hello-world [  434.530556] docker0: port
+> 1(veth2c4037e) entered blocking state [  434.533810] docker0: port
+> 1(veth2c4037e) entered disabled state [  434.538888] device veth2c4037e
+> entered promiscuous mode [  434.552937] IPv6: ADDRCONF(NETDEV_UP):
+> veth2c4037e: link is not ready [  435.645525] eth0: renamed from
+> veth6909d78 [  435.648422] IPv6: ADDRCONF(NETDEV_CHANGE): veth2c4037e: link
+> becomes ready [  435.649944] docker0: port 1(veth2c4037e) entered blocking
+> state [  435.651224] docker0: port 1(veth2c4037e) entered forwarding state
+> [  435.654061] IPv6: ADDRCONF(NETDEV_CHANGE): docker0: link becomes ready
+> 
+> Hello from Docker!
+> This message shows that your installation appears to be working correctly.
+> 
+> To generate this message, Docker took the following steps:
+>  1. The Docker client contacted the Docker daemon.
+>  2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+>     (amd64)
+>  3. The Docker daemon created a new container from that image which runs the
+> executable that produces the output you are currently reading. 4. The
+> Docker daemon streamed that output to the Docker client, which sent it to
+> your terminal.
+> 
+> To try something more ambitious, you can run an Ubuntu container with:
+>  $ docker run -it ubuntu bash
+> 
+> Share images, automate workflows, and more with a free Docker ID:
+>  https://hub.docker.com/
+> 
+> For more examples and ideas, visit:
+>  https://docs.docker.com/get-started/
+> 
+> [  435.899076] docker0: port 1(veth2c4037e) entered disabled state [ 
+> 435.904659] veth6909d78: renamed from eth0 [  435.960366] docker0: port
+> 1(veth2c4037e) entered disabled state [  435.967155] device veth2c4037e
+> left promiscuous mode [  435.970292] docker0: port 1(veth2c4037e) entered
+> disabled state ---
+> I am running it from the console so you get the pollution of the veth being
+> created and torn down but in this case you might be interested in seeing
+> this so it is good that it is captured here.
+> 
+> Anyways, take a look at the above, see how it maps for you and if you
+> continue to have issues I can try to assist more. You might want to run
+> things such that you get more logs. I am pretty busy but possibly put your
+> image somewhere and if I get the chance I can have a look.
+> 
+> MarkA
+> 
+> > MarkA
+> > 
+> > > I have been doing all of my testing on a VirtualBox VM.  I'm not
+> > > sure if there is something missing in VirtualBox that may be causing
+> > > this, or some VM setting that's not properly configured.  I'm going
+> > > to try on physical hardware as well to see if that fixes the issue.
+> > > 
+> > > If there is something that I am missing though within my
+> > > openembedded build that will fix this, please let me know.
+> > > 
+> > > Thank you
+> > > 
+> > > Lewis Muhlenkamp
+> > > 
+> > > -----Original Message-----
+> > > From: Mark Asselstine <mark.asselstine@windriver.com>
+> > > Sent: Monday, January 14, 2019 4:56 PM
+> > > To: Muhlenkamp, Lewis <lewis.muhlenkamp@stryker.com>
+> > > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+> > > Subject: Re: [oe] Kernel modules being built, but not being included
+> > > in image
+> > > 
+> > > This has been asked in the past and I did have a "mini" layer that
+> > > could be used in addition to meta-virt to allow you to get what you
+> > > need in an image fairly easily. We were going to do some work to
+> > > make this easier but I haven't looked in a while so I can't say
+> > > where things are at off the top of my head. At any rate I am just
+> > > back from some travel but I will try to take a look at this
+> > > tomorrow, after which I should be able to provide some better
+> > > guidance.
+> > > 
+> > > Mark
+> > > On Fri, Jan 11, 2019 at 7:39 PM Muhlenkamp, Lewis
+> > > 
+> > > <lewis.muhlenkamp@stryker.com> wrote:
+> > > > Hello,
+> > > > 
+> > > > 
+> > > > 
+> > > > TLDR: How do I get docker fully functional in my openembedded
+> > > > linux image?
+> > > > 
+> > > > 
+> > > > 
+> > > > I've been trying to get docker included into my image.  All of my
+> > > > attempts lead to the same error messages appearing in the log
+> > > > file, and docker not starting.
+> > > > 
+> > > > 
+> > > > 
+> > > > The error messages are
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start docker messages ===
+> > > > Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
+> > > > time="2019-01-10T15:56:25.414778299Z" level=error msg="Failed to
+> > > > built-in GetDriver graph btrfs /var/lib/docker"
+> >  
+> >  Jan 10 15:56:25 intel-corei7-64
+> >  
+> > > > dockerd[210]: time="2019-01-10T15:56:25.460695720Z" level=warning
+> > > > msg="Your kernel does not support cgroup cfs period" Jan 10
+> > > > 15:56:25
+> > > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.460795185Z"
+> > > > level=warning msg="Your kernel does not support cgroup cfs quotas"
+> > > > Jan
+> > > > 10
+> > > > 15:56:25 intel-corei7-64 dockerd[210]:
+> > > > time="2019-01-10T15:56:25.460896539Z" level=warning msg="Your
+> > > > kernel does not support cgroup cfs blkio weight" Jan 10 15:56:25
+> > > > intel-corei7-64
+> > > > dockerd[210]: time="2019-01-10T15:56:25.461255643Z" level=warning
+> > > > msg="Your kernel does not support cgroup cfs blkio
+> > > > throttle.read_bps_device" Jan 10 15:56:25 intel-corei7-64
+> > > > dockerd[210]:
+> > > > time="2019-01-10T15:56:25.461381616Z" level=warning msg="Your
+> > > > kernel does not support cgroup cfs blkio
+> > > > throttle.write_bps_device" Jan 10 15:56:25
+> > > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.461503746Z"
+> > > > level=warning msg="Your kernel does not support cgroup cfs blkio
+> > > > throttle.read_iops_device" Jan 10 15:56:25 intel-corei7-64
+> > > > dockerd[210]:
+> > > > time="2019-01-10T15:56:25.461601879Z" level=warning msg="Your
+> > > > kernel does not support cgroup cfs blkio
+> > > > throttle.write_iops_device" Jan 10 15:56:25
+> > > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.475747665Z"
+> > > > level=warning msg="Running modprobe bridge br_netfilter failed
+> > > > with
+> > > > message: modprobe: WARNING: Module br_netfilter not found in
+> > > > directory /lib/modules/4.14.78-intel-pk-standard\ninsmod
+> > > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/llc.ko \ninsmod
+> > > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/802/stp.ko
+> > > > \ninsmod
+> > > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/bridge/bridge.ko
+> > > > \n,
+> > > > error: exit status 1" Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
+> > > > time="2019-01-10T15:56:25.659844723Z" level=warning msg="Could not
+> > > > load necessary modules for IPSEC rules: Running modprobe xfrm_user
+> > > > failed with
+> > > > message: `modprobe: WARNING: Module xfrm_user not found in
+> > > > directory /lib/modules/4.14.78-intel-pk-standard`, error: exit
+> > > > status 1" Jan 10
+> > > > 15:56:25 intel-corei7-64 dockerd[210]:
+> > > > time="2019-01-10T15:56:25.662494167Z" level=warning msg="Could not
+> > > > load necessary modules for Conntrack: Running modprobe
+> > > > nf_conntrack_netlink failed with message: `modprobe: WARNING:
+> > > > Module nf_conntrack_netlink not found in directory
+> > > > /lib/modules/4.14.78-intel-pk-standard`, error: exit status 1" Jan
+> > > > 10 15:56:25 intel-corei7-64 dockerd[210]: failed to start
+> > > > daemon: Error initializing network controller: Error creating
+> > > > default "bridge" network: Failed to program NAT chain: Failed to
+> > > > inject DOCKER in PREROUTING chain: iptables failed: iptables -wait
+> > > > -t nat -A PREROUTING -m addrtype -dst-type LOCAL -j DOCKER:
+> > > > iptables: No chain/target/match by that name. === End docker
+> > > > messages ===
+> > > > 
+> > > > 
+> > > > 
+> > > > I was using my own custom image type, but I got the same results
+> > > > when trying to build and use core-image-minimal.
+> > > > 
+> > > > 
+> > > > 
+> > > > I tried including the
+> > > > meta-virtualization/recipes/kernel/linux/linux-yocto/docker.scc
+> > > > stuff in, but since I set MACHINE to intel-corei7-64, I copied the
+> > > > docker.scc and docker.cfg into my custom layer:
+> > > > 
+> > > > 
+> > > > 
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker.cfg
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseli
+> > > > ne.s cc
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend
+> > > > 
+> > > > 
+> > > > 
+> > > > That didn't seem to work either.  The modules always got built.
+> > > > For example, br_netfilter.ko is built:
+> > > > 
+> > > > 
+> > > > 
+> > > > lmuhlenkamp@c71703b3ba7d:~/build-20181213a/tmp-glibc$ find . -name
+> > > > br_netfilter.ko
+> > > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTO
+> > > > INC+
+> > > > 6a3254e7b3_56f15146cf-r0/image/lib/modules/4.14.78-intel-pk-standa
+> > > > rd/k
+> > > > ernel/net/bridge/br_netfilter.ko
+> > > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTO
+> > > > INC+
+> > > > 6a3254e7b3_56f15146cf-r0/packages-split/kernel-module-br-netfilter
+> > > > -4.1
+> > > > 4.78-intel-pk-standard/lib/modules/4.14.78-intel-pk-standard/kerne
+> > > > l/ne
+> > > > t/bridge/br_netfilter.ko
+> > > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTO
+> > > > INC+
+> > > > 6a3254e7b3_56f15146cf-r0/linux-corei7-64-intel-common-standard-bui
+> > > > ld/n
+> > > > et/bridge/br_netfilter.ko
+> > > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTO
+> > > > INC+
+> > > > 6a3254e7b3_56f15146cf-r0/package/lib/modules/4.14.78-intel-pk-stan
+> > > > dard /kernel/net/bridge/br_netfilter.ko
+> > > > 
+> > > > 
+> > > > 
+> > > > But these modules are not included in my image.  For example, if I
+> > > > do "find / -name br_netfilter.ko" on my target install, nothing is
+> > > > returned.
+> > > > 
+> > > > 
+> > > > 
+> > > > My bblayers.conf is as follows:
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start conf/bblayers.conf ===
+> > > > # LAYER_CONF_VERSION is increased each time
+> > > > build/conf/bblayers.conf # changes incompatibly LCONF_VERSION = "7"
+> > > > 
+> > > > 
+> > > > 
+> > > > BBPATH = "${TOPDIR}"
+> > > > BBFILES ?= ""
+> > > > 
+> > > > 
+> > > > 
+> > > > BBLAYERS ?= " \
+> > > > 
+> > > >   /home/lmuhlenkamp/oe-core/meta \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-python \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-gnome \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-filesystems \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-oe \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-networking \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-initramfs \
+> > > >   /home/lmuhlenkamp/meta-openembedded/meta-webserver \
+> > > >   /home/lmuhlenkamp/meta-intel \
+> > > >   /home/lmuhlenkamp/meta-virtualization \
+> > > >   /home/lmuhlenkamp/meta-cloud-services \
+> > > >   /home/lmuhlenkamp/meta-cloud-services/meta-openstack \
+> > > >   /home/lmuhlenkamp/meta-iot-cloud \
+> > > >   /home/lmuhlenkamp/meta-secure-core/meta-tpm \
+> > > >   /home/lmuhlenkamp/meta-stryker/common \
+> > > >   /home/lmuhlenkamp/meta-stryker/testing \
+> > > >   "
+> > > > 
+> > > > === End conf/bblayers.conf ===
+> > > > 
+> > > > 
+> > > > 
+> > > > The customizations to my local.conf file are as follows:
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start local.conf excerpt ===
+> > > > MACHINE ?= "intel-corei7-64"
+> > > > IMAGE_FSTYPES += "live"
+> > > > NOISO = "0"
+> > > > IMAGE_INSTALL_append = " glibc-utils localedef"
+> > > > GLIBC_GENERATE_LOCALES = "el_GR.UTF-8 en_GB.UTF-8 en_US.UTF-8
+> > > > es_ES.UTF-8
+> > > > de_DE.UTF-8 fa_IR fr_FR.UTF-8 hr_HR.UTF-8 ja_JP.UTF-8 ja_JP.EUC-JP
+> > > > lt_LT.UTF-8 ru_RU.UTF-8 tr_TR.UTF-8"
+> >  
+> >  IMAGE_LINGUAS = "el-gr en-gb en-us
+> >  
+> > > > es-es de-de fa-ir fr-fr hr-hr ja-jp ja-jp.euc-jp lt-lt ru-ru tr-tr"
+> > > > DISTRO_FEATURES_append = " systemd virtualization"
+> > > > DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+> > > > VIRTUAL-RUNTIME_init_manager = "systemd"
+> > > > VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+> > > > DISTRO_FEATURES_append = " opengl"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "rpm python3 python3-pip python3-flask
+> > > > python3-requests python3-coverage python3-pylint"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "python-sphinx"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "python-flake8"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "python3-doxypypy"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "trousers tpm-tools openssl-tpm-engine"
+> > > > KERNEL_FEATURES_append = " features/netfilter/netfilter.scc
+> > > > features/overlayfs/overlayfs.scc"
+> >  
+> >  KERNEL_ENABLE_CGROUPS = "1"
+> >  
+> > > > CORE_IMAGE_EXTRA_INSTALL += "docker"
+> > > > SERIAL_CONSOLES = "38400 tty1"
+> > > > CORE_IMAGE_EXTRA_INSTALL += "flaskhello"
+> > > > === End local.conf excerpt ===
+> > > > 
+> > > > 
+> > > > 
+> > > > I did not have the KERNEL_FEATURES_append line in when using the
+> > > > recipes-kernel/linux/linux-intel stuff.  I didn't have the
+> > > > recipes-kernel/linux/linux-intel directory available when using
+> > > > the KERNEL_FEATURES_append line in local.conf.  Based on what I
+> > > > read, they were mutually exclusive.
+> > > > 
+> > > > 
+> > > > 
+> > > > What am I missing?  Why are the kernel modules not being included
+> > > > in my image?
+> > > > 
+> > > > 
+> > > > 
+> > > > I did try tweaking my docker.cfg file in my custom kernel recipe
+> > > > to include cgroups, but that did not seem to change anything.
+> > > > Here are the contents of my custom docker.cfg file
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker/docker
+> > > > .cfg
+> > > > === CONFIG_CGROUP_DEVICE=y
+> > > > 
+> > > > 
+> > > > 
+> > > > CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=m
+> > > > CONFIG_IP_NF_FILTER=m
+> > > > CONFIG_NF_NAT=m
+> > > > CONFIG_NF_CONNTRACK_IPV4=y
+> > > > CONFIG_NF_CT_NETLINK=y
+> > > > 
+> > > > 
+> > > > 
+> > > > CONFIG_BRIDGE_NETFILTER=m
+> > > > CONFIG_XFRM_USER=m
+> > > > 
+> > > > 
+> > > > 
+> > > > CONFIG_DM_THIN_PROVISIONING=m
+> > > > 
+> > > > 
+> > > > 
+> > > > 
+> > > > CONFIG_IP_NF_NAT=m
+> > > > CONFIG_IP_NF_TARGET_MASQUERADE=m
+> > > > 
+> > > > 
+> > > > 
+> > > > CONFIG_OVERLAY_FS=y
+> > > > === End
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker/docker
+> > > > .cfg
+> > > > ===
+> > > > 
+> > > > 
+> > > > 
+> > > > And for completeness, here are the contents of the other 2 files
+> > > > in that recipe
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend
+> > > > === FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+> >  
+> >  SRC_URI +=
+> >  
+> > > > "file://kernel_baseline.scc"
+> > > > === End
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend
+> > > > ===
+> > > > 
+> > > > 
+> > > > 
+> > > > === Start
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseli
+> > > > ne.scc === define KFEATURE_DESCRIPTION "Enable Features needed by
+> > > > docker in addition to LXC features"
+> >  
+> >  define KFEATURE_COMPATIBILITY board
+> >  
+> > > > kconf non-hardware docker.cfg
+> > > > === End
+> > > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseli
+> > > > ne.s
+> > > > cc ===
+> > > > 
+> > > > 
+> > > > 
+> > > > Any help that would allow me to get docker functionality working
+> > > > in my openembedded linux image would be greatly appreciated.
+> > > > 
+> > > > 
+> > > > 
+> > > > Thank you
+> > > > 
+> > > > 
+> > > > 
+> > > > Lewis Muhlenkamp
+> > > > 
+> > > > 
+> > > > 
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
+
 
