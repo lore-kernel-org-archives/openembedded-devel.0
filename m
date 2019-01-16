@@ -1,27 +1,42 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AFE4271985
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jan 2019 02:54:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x0G2sY8X028622
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 15 Jan 2019 18:54:34 -0800 (PST)
-Received: from yow-masselst-lx1.localnet (128.224.20.207) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 15 Jan 2019 18:54:33 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
-Date: Tue, 15 Jan 2019 21:54:32 -0500
-Message-ID: <24204196.tQc3WnnfOQ@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <12403577.rzAvi41Ldg@yow-masselst-lx1>
-References: <DM6PR01MB4636DE2DFD81ED5926A24F9F8F840@DM6PR01MB4636.prod.exchangelabs.com>
-	<DM6PR01MB4636C8BD15F7EF3A4D121F7D8F810@DM6PR01MB4636.prod.exchangelabs.com>
-	<12403577.rzAvi41Ldg@yow-masselst-lx1>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+	[209.85.222.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 85DB57C035
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jan 2019 06:01:40 +0000 (UTC)
+Received: by mail-qk1-f170.google.com with SMTP id o8so3068768qkk.11
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jan 2019 22:01:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=M8GfQqZy5qRegLPP1gGqB+3450ctb6uWkrhDZNeYHX4=;
+	b=qIPZeQ5V0YjZ1er/V7oNNksAPMpK9zCO5c1BB8MFbkyE+wvrKntyZ1/sBOzNa5CLGp
+	MjjVdb6Pu2PmVOyOujgtGXTlR2Q4NjKdx4kIoeFbv4oCUp0JIpGiD7jTEr/e7A2WZFLE
+	juH5L0CvlbvNcUgzbQlncvWwxN+FiVcwcU06qvw5PTNKtYUadsE8X6T1d+TE7bdrPfmk
+	yc2SfVPp5YoZICfN6Cvxd58HvOuxPckap9MXmkvsJOrAE/kgnhHAe72OycgRjWJEMnk2
+	k47WmZ3z4emiJFKdzrSem/TDGHFe+2AMXdhDwnK6uf7wBTo8lEWM4OIe9q7bzDFnF3zo
+	cIjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=M8GfQqZy5qRegLPP1gGqB+3450ctb6uWkrhDZNeYHX4=;
+	b=bJ2UCUL1H2v2BJHY3POZKlakLxw8pEm7L2MPWJcbsgGTHrr2QVeJscGdaQSyTAYOTF
+	JbZJI66HI+XdXhdX6oMaT+VMsE3euLIpcY4QiKDooS2Q6VAjwAc9+jR3hQAc2epSCKBQ
+	Ke9jBiNDs0vrJ5aHe6R/XPXDlxmHggSpbca9PogYnAyl8W11nu4MxSo54F5ExYh4S6KY
+	oVHR0Ld131OEI3xyKL2NKSRz5r7PqNVZXq5PseteCbuTgyC6WtJS2CWBQwuHACoVJGIa
+	8uxFbz9QRKtEl1QvCnklTwhJXHXzBjXYM3JNKcz4l0oWODpPH3aMfcA3RzOEPinixfRZ
+	2esg==
+X-Gm-Message-State: AJcUukcFZwNowcMxNHsw0fBv/D4XgLGVszkoyudRwfUHjlFI/rCQ+BSj
+	4QvreyJ4Zgc3V1y4Iukz0BmgK68gn39esoi/YPTUMl6LHIs=
+X-Google-Smtp-Source: ALg8bN7UXwEncqp83iFhUf3RYYrKTPxg/74LEtIc2EuEg9vBhnQlQCC5VZ4/niTHTPc20t+B5kHXifGha8KauFj/fkI=
+X-Received: by 2002:a37:4c41:: with SMTP id z62mr5404953qka.206.1547618500728; 
+	Tue, 15 Jan 2019 22:01:40 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Kernel modules being built, but not being included in image
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Jan 2019 22:01:14 -0800
+Message-ID: <CAMKF1sotBuWAOPzpbkeSGdB1YkPRDA_sHyy-6gSmT4bfA_rxPg@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of the world, 2019-01-15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,493 +49,264 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2019 02:54:33 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 16 Jan 2019 06:01:40 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tuesday, January 15, 2019 5:57:34 PM EST Mark Asselstine wrote:
-> On Tuesday, January 15, 2019 1:26:31 PM EST Muhlenkamp, Lewis wrote:
-> > Mark,
-> > 
-> > I got the docker daemon to start up.  I figured out what I needed to put
-> > into my .../recipes-kernel/linux/linux-intel/docker.cfg file to make sure
-> > all of the kernel modules were builts.  I also found that just adding
-> > 
-> >     CORE_IMAGE_EXTRA_INSTALL += "kernel-modules docker"
-> > 
-> > will add all of the kernel modules as well as the docker software.
-> > 
-> > So, the docker daemon is running.  I can run docker commands like "docker
-> > image ls"  I can build a docker image, but I cannot run the docker image.
-> > For example, I created a simple dockerfile that just has the line "FROM
-> > ubuntu".  I can successfully run "docker build ." in that directory.  It
-> > creates an image.  I can run "docker image ls" and see the image.  When I
-> > run
-> > 
-> >     docker run -I -t ubuntu "/bin/bash"
-> > 
-> > though, I get an error message
-> > 
-> > docker: Error response from daemon: failed to create endpoint
-> > elated_aryabhatadoc on network bridge; failed to add the host
-> > (veth3befa72)
-> > <+> sandbox (veth40a3e1c) pair interfaces: operation not supported.
-> 
-> Not surprisingly a container failed to start because of networking :). I
-> would guess that 90% of the time I have a container fail to start it is
-> networking related.
-> 
-> The veth pair should be independent from your network interface, either real
-> on real hw or virtual in your case. Whenever you see a veth or a pair of
-> veth interfaces just visualize the classic blue cat5 cable with two ends to
-> it, where each end is plugged into "something". This is essentially what
-> the veth pair represents. By default, when you run docker as you have the
-> one end becomes the interface inside of the container, the other end is
-> 'plugged' into the docker bridge on the host. Based on the message I am
-> guessing the veth which is supposed to be 'plugged' into the docker bridge
-> has failed to do so.
-> 
-> My day was a bit messed up so I only got a build put together now so
-> unfortunately I won't be able to get anything more helpful put together
-> until tomorrow sometime. In the mean time ensure the docker0 bridge is up
-> and available. And if not figure out why it is not.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
+== Number of issues - stats ==
+{| class='wikitable'
+!|Date     !!colspan='4'|Failed tasks    !!|Signatures
+!!colspan='15'|QA !!Comment
+|-
+|| ||qemuarm ||qemuarm64 ||qemux86 ||qemux86_64 ||all
+||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps
+||version-going-backwards ||host-user-contaminated
+||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot
+||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path
+||qa_pseudo ||
+|-
+||2019-01-15 ||7 ||9 ||6 ||8 ||0 ||0 ||0 ||1 ||4 ||0 ||0 ||1 ||0 ||0
+||0 ||0 ||0 ||0 ||0 ||0 ||
+|}
 
-I was able to validate things. First here are my changes after I source oe-
-init-build-env.
+== Failed tasks 2019-01-15 ==
 
-bblayers.conf
----
-  /home/masselst/git/poky/layers/meta-virtualization \
-  /home/masselst/git/poky/layers/meta-openembedded/meta-oe \
-  /home/masselst/git/poky/layers/meta-openembedded/meta-networking \
-  /home/masselst/git/poky/layers/meta-openembedded/meta-filesystems \
-  /home/masselst/git/poky/layers/meta-openembedded/meta-python \
+INFO: jenkins-job.sh-1.8.45 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190115_214142.log
 
+=== common (2) ===
+    * sources/meta-openembedded/meta-oe/recipes-support/espeak/espeak-data_1.48.04.bb:do_compile
+    * sources/meta-rust/recipes-devtools/rust/rust_1.31.1.bb:do_compile
 
-local.conf
----
-DISTRO_FEATURES_append = " virtualization"
-IMAGE_INSTALL_append = "docker \
- kernel-module-xt-conntrack \
- kernel-module-nf-nat \
- kernel-module-xt-addrtype"
+=== common-x86 (1) ===
+    * sources/meta-browser/recipes-browser/firefox/firefox_60.1.0esr.bb:do_configure
 
-KERNEL_MODULE_AUTOLOAD += "xt_conntrack"
-KERNEL_MODULE_AUTOLOAD += "xt_addrtype"
+=== qemuarm (5) ===
+    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
+    * sources/openembedded-core/meta/recipes-gnome/gobject-introspection/gobject-introspection_1.58.2.bb:do_compile
+    * sources/openembedded-core/meta/recipes-multimedia/mpeg2dec/mpeg2dec_0.5.1.bb:do_package_qa
 
-DISTRO_FEATURES_append = " systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+=== qemuarm64 (4) ===
+    * sources/openembedded-core/meta/recipes-core/glibc/glibc-locale_2.29.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/glide/glide_0.13.2.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/go/go-dep_0.5.0.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-extended/go-examples/go-helloworld_0.1.bb:do_package_qa
 
-I also set the machine to "qemux86-64".
+=== qemux86 (2) ===
+    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
+    * sources/meta-rust/recipes-devtools/cargo/cargo_0.31.0.bb:do_compile
 
+=== qemux86_64 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_package_qa
 
-After using 'docker pull hello-world' I run it
----
-root@qemux86-64:~# docker run -it hello-world
-[  434.530556] docker0: port 1(veth2c4037e) entered blocking state
-[  434.533810] docker0: port 1(veth2c4037e) entered disabled state
-[  434.538888] device veth2c4037e entered promiscuous mode
-[  434.552937] IPv6: ADDRCONF(NETDEV_UP): veth2c4037e: link is not ready
-[  435.645525] eth0: renamed from veth6909d78
-[  435.648422] IPv6: ADDRCONF(NETDEV_CHANGE): veth2c4037e: link becomes ready
-[  435.649944] docker0: port 1(veth2c4037e) entered blocking state
-[  435.651224] docker0: port 1(veth2c4037e) entered forwarding state
-[  435.654061] IPv6: ADDRCONF(NETDEV_CHANGE): docker0: link becomes ready
+=== Number of failed tasks (30) ===
+{| class=wikitable
+|-
+|| qemuarm || 7 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190114_101213.log/
+||
+|-
+|| qemuarm64 || 9 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190114_205201.log/
+||
+|-
+|| qemux86 || 6 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190114_101223.log/
+||
+|-
+|| qemux86_64 || 8 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190115_000202.log/
+||
+|}
+./jenkins-job.sh: line 546: cd: too many arguments
 
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
+=== PNBLACKLISTs (0) ===
 
-To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-    (amd64)
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-
-[  435.899076] docker0: port 1(veth2c4037e) entered disabled state
-[  435.904659] veth6909d78: renamed from eth0
-[  435.960366] docker0: port 1(veth2c4037e) entered disabled state
-[  435.967155] device veth2c4037e left promiscuous mode
-[  435.970292] docker0: port 1(veth2c4037e) entered disabled state
----
-I am running it from the console so you get the pollution of the veth being 
-created and torn down but in this case you might be interested in seeing this 
-so it is good that it is captured here.
-
-Anyways, take a look at the above, see how it maps for you and if you continue 
-to have issues I can try to assist more. You might want to run things such 
-that you get more logs. I am pretty busy but possibly put your image somewhere 
-and if I get the chance I can have a look.
-
-MarkA
-
-
-> 
-> MarkA
-> 
-> > I have been doing all of my testing on a VirtualBox VM.  I'm not sure if
-> > there is something missing in VirtualBox that may be causing this, or some
-> > VM setting that's not properly configured.  I'm going to try on physical
-> > hardware as well to see if that fixes the issue.
-> > 
-> > If there is something that I am missing though within my openembedded
-> > build
-> > that will fix this, please let me know.
-> > 
-> > Thank you
-> > 
-> > Lewis Muhlenkamp
-> > 
-> > -----Original Message-----
-> > From: Mark Asselstine <mark.asselstine@windriver.com>
-> > Sent: Monday, January 14, 2019 4:56 PM
-> > To: Muhlenkamp, Lewis <lewis.muhlenkamp@stryker.com>
-> > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-> > Subject: Re: [oe] Kernel modules being built, but not being included in
-> > image
-> > 
-> > This has been asked in the past and I did have a "mini" layer that could
-> > be
-> > used in addition to meta-virt to allow you to get what you need in an
-> > image
-> > fairly easily. We were going to do some work to make this easier but I
-> > haven't looked in a while so I can't say where things are at off the top
-> > of
-> > my head. At any rate I am just back from some travel but I will try to
-> > take
-> > a look at this tomorrow, after which I should be able to provide some
-> > better guidance.
-> > 
-> > Mark
-> > On Fri, Jan 11, 2019 at 7:39 PM Muhlenkamp, Lewis
-> > 
-> > <lewis.muhlenkamp@stryker.com> wrote:
-> > > Hello,
-> > > 
-> > > 
-> > > 
-> > > TLDR: How do I get docker fully functional in my openembedded linux
-> > > image?
-> > > 
-> > > 
-> > > 
-> > > I've been trying to get docker included into my image.  All of my
-> > > attempts
-> > > lead to the same error messages appearing in the log file, and docker
-> > > not
-> > > starting.
-> > > 
-> > > 
-> > > 
-> > > The error messages are
-> > > 
-> > > 
-> > > 
-> > > === Start docker messages ===
-> > > Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.414778299Z" level=error msg="Failed to
-> > > built-in
-> > > GetDriver graph btrfs /var/lib/docker"
-> 
->  Jan 10 15:56:25 intel-corei7-64
-> 
-> > > dockerd[210]: time="2019-01-10T15:56:25.460695720Z" level=warning
-> > > msg="Your kernel does not support cgroup cfs period" Jan 10 15:56:25
-> > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.460795185Z"
-> > > level=warning msg="Your kernel does not support cgroup cfs quotas" Jan
-> > > 10
-> > > 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.460896539Z" level=warning msg="Your kernel
-> > > does
-> > > not support cgroup cfs blkio weight" Jan 10 15:56:25 intel-corei7-64
-> > > dockerd[210]: time="2019-01-10T15:56:25.461255643Z" level=warning
-> > > msg="Your kernel does not support cgroup cfs blkio
-> > > throttle.read_bps_device" Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.461381616Z" level=warning msg="Your kernel
-> > > does
-> > > not support cgroup cfs blkio throttle.write_bps_device" Jan 10 15:56:25
-> > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.461503746Z"
-> > > level=warning msg="Your kernel does not support cgroup cfs blkio
-> > > throttle.read_iops_device" Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.461601879Z" level=warning msg="Your kernel
-> > > does
-> > > not support cgroup cfs blkio throttle.write_iops_device" Jan 10 15:56:25
-> > > intel-corei7-64 dockerd[210]: time="2019-01-10T15:56:25.475747665Z"
-> > > level=warning msg="Running modprobe bridge br_netfilter failed with
-> > > message: modprobe: WARNING: Module br_netfilter not found in directory
-> > > /lib/modules/4.14.78-intel-pk-standard\ninsmod
-> > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/llc.ko \ninsmod
-> > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/802/stp.ko \ninsmod
-> > > /lib/modules/4.14.78-intel-pk-standard/kernel/net/bridge/bridge.ko \n,
-> > > error: exit status 1" Jan 10 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.659844723Z" level=warning msg="Could not load
-> > > necessary modules for IPSEC rules: Running modprobe xfrm_user failed
-> > > with
-> > > message: `modprobe: WARNING: Module xfrm_user not found in directory
-> > > /lib/modules/4.14.78-intel-pk-standard`, error: exit status 1" Jan 10
-> > > 15:56:25 intel-corei7-64 dockerd[210]:
-> > > time="2019-01-10T15:56:25.662494167Z" level=warning msg="Could not load
-> > > necessary modules for Conntrack: Running modprobe nf_conntrack_netlink
-> > > failed with message: `modprobe: WARNING: Module nf_conntrack_netlink not
-> > > found in directory /lib/modules/4.14.78-intel-pk-standard`, error: exit
-> > > status 1" Jan 10 15:56:25 intel-corei7-64 dockerd[210]: failed to start
-> > > daemon: Error initializing network controller: Error creating default
-> > > "bridge" network: Failed to program NAT chain: Failed to inject DOCKER
-> > > in
-> > > PREROUTING chain: iptables failed: iptables -wait -t nat -A PREROUTING
-> > > -m
-> > > addrtype -dst-type LOCAL -j DOCKER: iptables: No chain/target/match by
-> > > that name. === End docker messages ===
-> > > 
-> > > 
-> > > 
-> > > I was using my own custom image type, but I got the same results when
-> > > trying to build and use core-image-minimal.
-> > > 
-> > > 
-> > > 
-> > > I tried including the
-> > > meta-virtualization/recipes/kernel/linux/linux-yocto/docker.scc stuff
-> > > in,
-> > > but since I set MACHINE to intel-corei7-64, I copied the docker.scc and
-> > > docker.cfg into my custom layer:
-> > > 
-> > > 
-> > > 
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker.cfg
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseline.s
-> > > cc meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend
-> > > 
-> > > 
-> > > 
-> > > That didn't seem to work either.  The modules always got built.  For
-> > > example, br_netfilter.ko is built:
-> > > 
-> > > 
-> > > 
-> > > lmuhlenkamp@c71703b3ba7d:~/build-20181213a/tmp-glibc$ find . -name
-> > > br_netfilter.ko
-> > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTOINC+
-> > > 6a3254e7b3_56f15146cf-r0/image/lib/modules/4.14.78-intel-pk-standard/k
-> > > ernel/net/bridge/br_netfilter.ko
-> > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTOINC+
-> > > 6a3254e7b3_56f15146cf-r0/packages-split/kernel-module-br-netfilter-4.1
-> > > 4.78-intel-pk-standard/lib/modules/4.14.78-intel-pk-standard/kernel/ne
-> > > t/bridge/br_netfilter.ko
-> > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTOINC+
-> > > 6a3254e7b3_56f15146cf-r0/linux-corei7-64-intel-common-standard-build/n
-> > > et/bridge/br_netfilter.ko
-> > > ./work/corei7-64-intel-common-oe-linux/linux-intel/4.14.78+gitAUTOINC+
-> > > 6a3254e7b3_56f15146cf-r0/package/lib/modules/4.14.78-intel-pk-standard
-> > > /kernel/net/bridge/br_netfilter.ko
-> > > 
-> > > 
-> > > 
-> > > But these modules are not included in my image.  For example, if I do
-> > > "find / -name br_netfilter.ko" on my target install, nothing is
-> > > returned.
-> > > 
-> > > 
-> > > 
-> > > My bblayers.conf is as follows:
-> > > 
-> > > 
-> > > 
-> > > === Start conf/bblayers.conf ===
-> > > # LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf #
-> > > changes incompatibly LCONF_VERSION = "7"
-> > > 
-> > > 
-> > > 
-> > > BBPATH = "${TOPDIR}"
-> > > BBFILES ?= ""
-> > > 
-> > > 
-> > > 
-> > > BBLAYERS ?= " \
-> > > 
-> > >   /home/lmuhlenkamp/oe-core/meta \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-python \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-gnome \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-filesystems \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-oe \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-networking \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-initramfs \
-> > >   /home/lmuhlenkamp/meta-openembedded/meta-webserver \
-> > >   /home/lmuhlenkamp/meta-intel \
-> > >   /home/lmuhlenkamp/meta-virtualization \
-> > >   /home/lmuhlenkamp/meta-cloud-services \
-> > >   /home/lmuhlenkamp/meta-cloud-services/meta-openstack \
-> > >   /home/lmuhlenkamp/meta-iot-cloud \
-> > >   /home/lmuhlenkamp/meta-secure-core/meta-tpm \
-> > >   /home/lmuhlenkamp/meta-stryker/common \
-> > >   /home/lmuhlenkamp/meta-stryker/testing \
-> > >   "
-> > > 
-> > > === End conf/bblayers.conf ===
-> > > 
-> > > 
-> > > 
-> > > The customizations to my local.conf file are as follows:
-> > > 
-> > > 
-> > > 
-> > > === Start local.conf excerpt ===
-> > > MACHINE ?= "intel-corei7-64"
-> > > IMAGE_FSTYPES += "live"
-> > > NOISO = "0"
-> > > IMAGE_INSTALL_append = " glibc-utils localedef"
-> > > GLIBC_GENERATE_LOCALES = "el_GR.UTF-8 en_GB.UTF-8 en_US.UTF-8
-> > > es_ES.UTF-8
-> > > de_DE.UTF-8 fa_IR fr_FR.UTF-8 hr_HR.UTF-8 ja_JP.UTF-8 ja_JP.EUC-JP
-> > > lt_LT.UTF-8 ru_RU.UTF-8 tr_TR.UTF-8"
-> 
->  IMAGE_LINGUAS = "el-gr en-gb en-us
-> 
-> > > es-es de-de fa-ir fr-fr hr-hr ja-jp ja-jp.euc-jp lt-lt ru-ru tr-tr"
-> > > DISTRO_FEATURES_append = " systemd virtualization"
-> > > DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-> > > VIRTUAL-RUNTIME_init_manager = "systemd"
-> > > VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
-> > > DISTRO_FEATURES_append = " opengl"
-> > > CORE_IMAGE_EXTRA_INSTALL += "rpm python3 python3-pip python3-flask
-> > > python3-requests python3-coverage python3-pylint"
-> > > CORE_IMAGE_EXTRA_INSTALL += "python-sphinx"
-> > > CORE_IMAGE_EXTRA_INSTALL += "python-flake8"
-> > > CORE_IMAGE_EXTRA_INSTALL += "python3-doxypypy"
-> > > CORE_IMAGE_EXTRA_INSTALL += "trousers tpm-tools openssl-tpm-engine"
-> > > KERNEL_FEATURES_append = " features/netfilter/netfilter.scc
-> > > features/overlayfs/overlayfs.scc"
-> 
->  KERNEL_ENABLE_CGROUPS = "1"
-> 
-> > > CORE_IMAGE_EXTRA_INSTALL += "docker"
-> > > SERIAL_CONSOLES = "38400 tty1"
-> > > CORE_IMAGE_EXTRA_INSTALL += "flaskhello"
-> > > === End local.conf excerpt ===
-> > > 
-> > > 
-> > > 
-> > > I did not have the KERNEL_FEATURES_append line in when using the
-> > > recipes-kernel/linux/linux-intel stuff.  I didn't have the
-> > > recipes-kernel/linux/linux-intel directory available when using the
-> > > KERNEL_FEATURES_append line in local.conf.  Based on what I read, they
-> > > were mutually exclusive.
-> > > 
-> > > 
-> > > 
-> > > What am I missing?  Why are the kernel modules not being included in my
-> > > image?
-> > > 
-> > > 
-> > > 
-> > > I did try tweaking my docker.cfg file in my custom kernel recipe to
-> > > include cgroups, but that did not seem to change anything.  Here are
-> > > the contents of my custom docker.cfg file
-> > > 
-> > > 
-> > > 
-> > > === Start
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker/docker.cfg
-> > > === CONFIG_CGROUP_DEVICE=y
-> > > 
-> > > 
-> > > 
-> > > CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=m
-> > > CONFIG_IP_NF_FILTER=m
-> > > CONFIG_NF_NAT=m
-> > > CONFIG_NF_CONNTRACK_IPV4=y
-> > > CONFIG_NF_CT_NETLINK=y
-> > > 
-> > > 
-> > > 
-> > > CONFIG_BRIDGE_NETFILTER=m
-> > > CONFIG_XFRM_USER=m
-> > > 
-> > > 
-> > > 
-> > > CONFIG_DM_THIN_PROVISIONING=m
-> > > 
-> > > 
-> > > 
-> > > 
-> > > CONFIG_IP_NF_NAT=m
-> > > CONFIG_IP_NF_TARGET_MASQUERADE=m
-> > > 
-> > > 
-> > > 
-> > > CONFIG_OVERLAY_FS=y
-> > > === End
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/docker/docker.cfg
-> > > ===
-> > > 
-> > > 
-> > > 
-> > > And for completeness, here are the contents of the other 2 files in
-> > > that recipe
-> > > 
-> > > 
-> > > 
-> > > === Start
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend ===
-> > > FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-> 
->  SRC_URI +=
-> 
-> > > "file://kernel_baseline.scc"
-> > > === End
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel_%.bbappend ===
-> > > 
-> > > 
-> > > 
-> > > === Start
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseline.scc
-> > > === define KFEATURE_DESCRIPTION "Enable Features needed by docker in
-> > > addition to LXC features"
-> 
->  define KFEATURE_COMPATIBILITY board
-> 
-> > > kconf non-hardware docker.cfg
-> > > === End
-> > > meta-stryker/common/recipes-kernel/linux/linux-intel/kernel_baseline.s
-> > > cc ===
-> > > 
-> > > 
-> > > 
-> > > Any help that would allow me to get docker functionality working in my
-> > > openembedded linux image would be greatly appreciated.
-> > > 
-> > > 
-> > > 
-> > > Thank you
-> > > 
-> > > 
-> > > 
-> > > Lewis Muhlenkamp
-> > > 
-> > > 
-> > > 
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+=== QA issues (6) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||unknown-configure-option
+|-
+||0 ||version-going-backwards
+|-
+||1 ||host-user-contaminated
+|-
+||1 ||textrel
+|-
+||4 ||build-deps
+|}
 
 
 
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
 
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190115_140523.log/
+
+
+    * ERROR: no sigdata files were generated for MACHINE qemux86copy
+in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: no sigdata files were generated for MACHINE qemux86 in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: no sigdata files were generated for MACHINE qemuarm in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+
+
+PNBLACKLISTs:
+./jenkins-job.sh: line 546: cd: too many arguments
+openembedded-core:
+meta-*:
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
+PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
+PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 1 issue: textrel
+mpeg2dec-0.5.1: ELF binary
+'/tmp/work/armv5e-yoe-linux-gnueabi/mpeg2dec/0.5.1-r0/packages-split/libmpeg2/usr/lib/libmpeg2.so.0.1.0'
+has relocations in .text [textrel]
+
+
+count: 4 issue: build-deps
+glide-0.13.2: glide rdepends on libstd-rs, but it isn't a build
+dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+go-dep-0.5.0: go-dep rdepends on libstd-rs, but it isn't a build
+dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+go-helloworld-0.1: go-helloworld rdepends on libstd-rs, but it isn't a
+build dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+sysdig-0.24.2+gitAUTOINC+831d167d4f: sysdig rdepends on libcurl, but
+it isn't a build dependency, missing curl in DEPENDS or PACKAGECONFIG?
+[build-deps]
+
+
+count: 0 issue: file-rdeps
+
+
+count: 0 issue: version-going-backwards
+
+
+count: 1 issue: host-user-contaminated
+glibc-locale: /glibc-binary-localedata-pap-aw/usr/lib/locale/pap_AW/LC_MESSAGES/SYS_LC_MESSAGES
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+52a144a7 bs4/element: Fix DeprecationWarning
+not included in master yet:
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+06662be193 strace: add lost Upstream-Status
+not included in master yet:
+b9d780c7ee classes/buildhistory: display modified git branches
+fa7020c040 perl: fix yet another race failure
+ff01fcdf3c meta: Fix Deprecated warnings from regexs
+4518c01a08 binutils: Use master ( would be 2.32 )
+41315506af gcc-9.0: Add recipes for upcoming gcc 9.0 release in mid-2019
+6d29d2b359 glibc: Use master ( would be 2.29 release )
+40f96ced68 recipes: Add runit and related recipes
+32f037577c oeqa: Recognise svlogd as another logger
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+612128b46 dhcpcd: upgrade to dhcpcd 7.0.8
+not included in master yet:
+eb6cf3686 haveged: Upgrade 1.9.4
+6fc561ce1 openal-soft: Upgrade to 1.19.1
+1ed152e32 lockdev: Switch to use archive tarballs for SRC_URI
+070fb5825 sysdig: Upgrade to 0.24.2+
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+82abc2b qtbase: fix incomplete recipe changes from previous commit
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+a01bbed chromium-x11: Update to 71.0.3578.98.
+not included in master yet:
+8410145 firefox: Fix cmsghdr errors with musl
 
