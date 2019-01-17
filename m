@@ -1,38 +1,38 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb1-f196.google.com (mail-yb1-f196.google.com
-	[209.85.219.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DFECF748F1
+Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
+	[209.85.219.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C3BA07C1ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2019 19:57:19 +0000 (UTC)
-Received: by mail-yb1-f196.google.com with SMTP id o73so3500406ybc.0
+	Thu, 17 Jan 2019 20:01:36 +0000 (UTC)
+Received: by mail-yb1-f194.google.com with SMTP id s17so3485676ybp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2019 11:57:21 -0800 (PST)
+	Thu, 17 Jan 2019 12:01:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=4hiS3OpHA00AgW9EBvk5n7yHaAXdstKvoWJzruq24YY=;
-	b=iBdCkagFK4WJA318446u2JAwc5JkKIFhDful50aT9tb0jHJft6jQ+DR7CvpNDx6HeF
-	iE9thX0qah8mpNZUOFO97xnlBxosPumfHMNS8/BlCXpSpuFw3BWOrcNVnsTaHZGPlCgF
-	TSw+LRxc1EKCjr9UFmOJy4r4lfL9D1vPwW83SgeBaHLbnvZso6tOfNO249Kq/Ruu7QKN
-	d9PpsvdTMdc2oRQiBKG9xYmk1tbEFIWustpl2DQfVcqJXffSicXRjVtquUKynxyUKchn
-	CHha0gNnj/MV/9DvzwcyoaMUMbNcUqMVmzvgvi99os5X0rsUSl64PgTVTvAHw/bSWIyK
-	dbHw==
+	bh=4G5/+JkFeYEpCUVHJ2xa+asPwVZcFpjbHY9X8Uc+mAU=;
+	b=cmQiTXGaAbCGZgtbIVtLKYAqCTmtOz5emEeVgfiZNmNlRFiDDizJj8n6sPYPeDXPOs
+	A69ZCQ8Ca1cy+0kgvakH+VZ1w0NqoqfFGDqABMhTt+No7CQWGT2eVl/h2Ejo9wMhvYoE
+	ULXMDEUVYItqCtv9nxUTcvgIbW7oQnpNy/1gq37MPxrDBLgbkt9OZsGIV8WUHO4CzzJb
+	Ze8pgzOf6yd2zpZ9vTR/tvK0gwZ5wdGJbV/3830wTtjy8t+skPooozrx14oW9W3kynsa
+	tRhEVlIMZMKyFp84SWQOlo1t0UmujXRzuGPRqr77BwPqdSNz7OsCrWE/7mtOe+Fij2Iq
+	iGUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4hiS3OpHA00AgW9EBvk5n7yHaAXdstKvoWJzruq24YY=;
-	b=qcpWbMmdxOVXTPua0mzp5ATXiTve3UKZsdYzkqJwhXuN5GxTsBfvgW0IxC26HA9ZkN
-	DjqYi7UtVIG2r8l8a3uIvlxXE+O249ld5mNZpP+rVjyvhg3pvoqWK/XNbu2vTL09NiKa
-	1qFssdlzp+ia9IT6gy7ORLwWq0lUQ4saj8v7/hR+L0/QZQZ/Dtj19pY3x24BPLUufO+v
-	/VbjlRrMR76d3nTIeM/oAGCX6TBllA1kqaq4zOQh9hPv1/Xz4CttshZ0Swr/9ilpU+zk
-	P9W0I/5lku72CpXNtYxicxF0eHWFwSzeO8Vu/JPUSQNGuZPq22vSrqrUjTHRb3ZM+Nyc
-	JSaw==
-X-Gm-Message-State: AJcUuke/miNMHV/i5BJp9mj2okVlYmA7jJ3J69spqijXOgNa/s2oLDTF
-	myroO7kbUp1BQQKH732PwfoPdrt4ivH2FGnRrN3khqRM
-X-Google-Smtp-Source: ALg8bN6o8m2Yw09SWhz8y/yBVXdU3ZIX8vzHdgEaVNCF6AnONlGUbIf788FtifrZ0Hn60zbc5WPhUMROCfEMBZfzdhE=
-X-Received: by 2002:a25:ad87:: with SMTP id z7mr3453704ybi.106.1547755040782; 
-	Thu, 17 Jan 2019 11:57:20 -0800 (PST)
+	bh=4G5/+JkFeYEpCUVHJ2xa+asPwVZcFpjbHY9X8Uc+mAU=;
+	b=DfwsUhbEea3MOTxqP/lvPrxrWzfRsxgT8isZz8TFT8dreVPY/d3g0YW94Gx3GjEX9S
+	kADBneSIbuo2c5/8XwUzVIketMgTQs+pewUSfd740YW5NM00nLr3kSNEZ1L/hKo/tFYF
+	U5gtRqAy0iwCG/HbGYwQZdxnBP8n8xCAVKZC6+P08J3E3SeFlHJ+qFCViSuOIZNoVC6S
+	6b+x7fy9ww1x19/iEO3pOatk1q4ltlITV5KWgrhPZyuqiKLrHWa8O+X78lY0KHSyj4OK
+	Vv8AzKzkUtGDHhA4TqQDFybS3PnF1yMs2JTXNVisTYgyLN8SFeMB978dHUptG7rcCCOI
+	44Aw==
+X-Gm-Message-State: AJcUukcPF4KUvn5Zpxdf0xiKIOcE/l5fCCinjFEO8BbkniV/Fz7fMUu4
+	+yPV1jDltvlIy395IFThco+qv8GySiXE6P4pcHvajA==
+X-Google-Smtp-Source: ALg8bN5aYEV4fwInfFvQkfc3MEfZgbPtsGMzYR2ixdBao6LShLZgJir+ZrXVdmpl5m9brTEdpQpWqCFmUFZngmRh1po=
+X-Received: by 2002:a25:bb04:: with SMTP id z4mr3598790ybg.38.1547755297531;
+	Thu, 17 Jan 2019 12:01:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20190117162629.47677-1-stefan@agner.ch>
 	<20190117162629.47677-2-stefan@agner.ch>
@@ -40,8 +40,8 @@ References: <20190117162629.47677-1-stefan@agner.ch>
 	<8079727a69d7f33cc1936930d52fb55d@agner.ch>
 In-Reply-To: <8079727a69d7f33cc1936930d52fb55d@agner.ch>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 17 Jan 2019 20:57:08 +0100
-Message-ID: <CALbNGRQ5D47zG-pFSPmD6obfmF_G8pdCdT8JT3dy6BA3ctWdsQ@mail.gmail.com>
+Date: Thu, 17 Jan 2019 21:01:23 +0100
+Message-ID: <CALbNGRQ=wGD6j3zH7y1P4JDFzQ9jOShsbBV2rpTaC_CNPA3Mig@mail.gmail.com>
 To: Stefan Agner <stefan@agner.ch>
 Cc: Stefan Agner <stefan.agner@toradex.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>
@@ -58,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2019 19:57:20 -0000
+X-List-Received-Date: Thu, 17 Jan 2019 20:01:37 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -126,18 +126,8 @@ On Thu, Jan 17, 2019 at 8:09 PM Stefan Agner <stefan@agner.ch> wrote:
 > http://lists.openembedded.org/pipermail/openembedded-core/2019-January/27=
 8021.html
 >
-Am aware of what you want: Reduce image size.
-Still don't like changing defaults because settings cannot be changed
-by unprivileged users (and machines connected to network should not
-run as root and this is what might be the consequence for lazy
-people). And this would be another OE/Yocto default many other distros
-don't have. BTW: The connection to systemd DISTRO_FEATURE was
-introduced by me and there was a reason for it - but I don't remember
-- it is long time ago and maybe it is not necessary any more.
-
-How about inverting the logic: As long as no 'extra-setting' is done,
-polkit is enabled by default (as suggested by the packets). Would a
-DISTRO feature 'no-polkit' be something you could reach your target?
+Ahh - I see am too late in the game - decision was already made - go
+on and forget my last email.
 
 Andreas
 
