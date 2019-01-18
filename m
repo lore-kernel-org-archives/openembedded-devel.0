@@ -1,27 +1,41 @@
-Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 491 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 18 Jan 2019 13:28:56 UTC
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 8142B7C232
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com
+	[209.85.219.176])
+	by mail.openembedded.org (Postfix) with ESMTP id BF44C7BDA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2019 13:28:56 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x0IDKjH0012963
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Fri, 18 Jan 2019 14:26:13 +0000 (UTC)
+Received: by mail-yb1-f176.google.com with SMTP id 2so4404029ybw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2019 14:20:45 +0100
-Received: from dev.vm6.ccp.siemens.com ([167.87.26.5])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x0IDKjoV030823;
-	Fri, 18 Jan 2019 14:20:45 +0100
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 6717810D47AA;
-	Fri, 18 Jan 2019 14:20:44 +0100 (CET)
-From: Pascal Bach <pascal.bach@siemens.com>
+	Fri, 18 Jan 2019 06:26:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Qqw+v55c8DZPcBXT87BiEI3/9QC+d71sjXa1Issr7DM=;
+	b=eKsMCPswQdEqN/L7JtSzvBxFYISl/qtdtBieUOS6rwJGlCih7qitS3nCtzGRvbBj2D
+	RTu+4thvoquYygJvJ+Kzb3VHubYNEwGB0IoPqEVi8FNZdn5LL7BYaoH3YUEeD9W0ec9w
+	UHTAc3HVPDx9DfpbQ/mNrIL72Qf1nOvxckYTpyL/EXf3T+OvOHjh5MvtWOThwIXy6v6z
+	QiT7QBMAoGxnNLQ1vCrB8efg4W4l1sOkELfsUOzTCXUwFL/DW3Lx3RECffSClQ3LVX0z
+	5p3YD9jrNeTdqfXM+VCcMWCr65SiaWMIYxgAN9aNnoynAHaA+u6TUVd8lWlAdUTvgsCb
+	nOqA==
+X-Gm-Message-State: AJcUukdbKuWpOMK+5Fl/FxqrIdzvtaFNa+IcC0ydE2QWjoYjsQyzmopQ
+	mjGqUCxP6lhFWTi+qj7AbvEyTmmX
+X-Google-Smtp-Source: ALg8bN4mwLqfXUIpSknzIeSVIHtWhTgEB2HZXZCLRdzE66feHaDZAungB2K2aSVdow/uU98dCdhc9A==
+X-Received: by 2002:a25:d81:: with SMTP id 123mr6370822ybn.155.1547821574344; 
+	Fri, 18 Jan 2019 06:26:14 -0800 (PST)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	b144sm2618229ywa.33.2019.01.18.06.26.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Jan 2019 06:26:13 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jan 2019 14:19:39 +0100
-Message-Id: <20190118131939.1845-1-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] rocksdb: make resulting cmake config relocatable
+Date: Fri, 18 Jan 2019 14:26:10 +0000
+Message-Id: <20190118142611.21544-1-git@andred.net>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-webserver][PATCH 1/2] nginx: update systemd unit using nginx recommendation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,39 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2019 13:28:57 -0000
+X-List-Received-Date: Fri, 18 Jan 2019 14:26:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-RocksDB is still using CMake 2.8 and thus does not make use of importet targets.
-This leads to hardcoded paths to the build directory in the resulting packaged files.
+From: André Draszik <andre.draszik@jci.com>
 
-The workaround for the issue is to bypass CMakes detection and let the linker deal with finding the right library.
+Our systemd unit doesn't follow the official
+recommendation, see
+    https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
 
-This is necessary until RocksDB moves to a more modern CMake.
-It's also applied in the Poco recipe right now.
+Most importantly:
+* it should start after some additional specific
+  targets/units
+* using PrivateTmp is a useful security feature, in
+  particular to avoid cross domain scripting via the
+  temp folder
+* using systemd's $MAINPID, we can distinguish between
+  multiple running nginx instances correctly
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-webserver/recipes-httpd/nginx/files/nginx.service | 10 +++++++---
+ meta-webserver/recipes-httpd/nginx/nginx.inc           |  1 +
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 67822477e..60afa7147 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -18,9 +18,9 @@ S = "${WORKDIR}/git"
- inherit cmake
- 
- PACKAGECONFIG ??= "bzip2 zlib lz4"
--PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
--PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
--PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
-+PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON -DBZIP2_LIBRARIES:STRING=bz2,-DWITH_BZ2=OFF,bzip2"
-+PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON -DLZ4_LIBRARIES:STRING=lz4,-DWITH_LZ4=OFF,lz4"
-+PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON -DZLIB_LIBRARIES:STRING=z,-DWITH_ZLIB=OFF,zlib"
- PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
- 
- # Tools and tests currently don't compile on armv5 so we disable them
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+index ce9906171..c6fc0495f 100644
+--- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+@@ -1,11 +1,15 @@
+ [Unit]
+-Description=Nginx Server
+-After=network.target
++Description=The NGINX HTTP and reverse proxy server
++After=syslog.target network.target remote-fs.target nss-lookup.target
++
+ [Service]
+ Type=forking
+ PIDFile=/run/nginx/nginx.pid
++ExecStartPre=@SBINDIR@/nginx -t
+ ExecStart=@SBINDIR@/nginx
+-ExecStop=@SBINDIR@/nginx -s stop
+ ExecReload=@SBINDIR@/nginx -s reload
++ExecStop=@BINDIR@/kill -s QUIT $MAINPID
++PrivateTmp=true
++
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 24c2cedf5..ea1c1f782 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -117,6 +117,7 @@ do_install () {
+         sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+             -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+             -e 's,@SBINDIR@,${sbindir},g' \
++            -e 's,@BINDIR@,${bindir},g' \
+             ${D}${systemd_unitdir}/system/nginx.service
+     fi
+ }
 -- 
-2.11.0
+2.20.1
 
 
