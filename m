@@ -1,48 +1,46 @@
-Return-Path: <shantanu@senic.com>
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BB007C041
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A9966B899
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jan 2019 17:45:54 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id y4so7536341pgc.12
+	Sat, 19 Jan 2019 22:34:54 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id i7so19167003qtj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jan 2019 09:45:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=senic-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=8x5AYIB6+tKpzLA62UFdZG9vJdoElB3GRiAHf2F5yCo=;
-	b=mFfMLgBROS5ba5UU3Tzf9TGqoA8q24dnyi5jLuC6dJvM6lTLm0jVHeN/xOa6XEPpxC
-	laQFrgD+fbT94d6OqKbINrv2vbFZCVt6ns0xPg3CeVfN/uEYfU7pbgElphzk2LmcOGb4
-	aV91L8PvDWLdMmHwHN31NMTf5DsHBqMhwHdYL2UTocMkY75DNvg3MOPD6a33dqUXHpnP
-	IEQRqLPsgeKNotJPV9jOSebUs8GLis8TPmm/WEQnLcnTWzUuo4pjcNlvqY51w4kr5kqi
-	bMpqDNMzNKV3c+q3iMJhq5qMWDGat6MY1CIKOIw1lGfYDnMLOqXjLMlCYuORubGOMCPX
-	zHUQ==
+	Sat, 19 Jan 2019 14:34:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3lOdAw5a/SJnpshs7fMTzzyNlRrjs2jjEQFODtOAdsM=;
+	b=fq76KF6yQW+MLSU02Tt+YbJouZaqGNVFMwQ2JpyFT6Oj+JLgMNAKpFRk0rb0+OkkRK
+	HKsO8gHQ5QLo99Cw5HgLo2IOQKaAXOpBO9e/kCCyqrVYg+WMQKU6ZGD4wLySmt+SyusE
+	syzrQ5mottKH+l1LGhh37RdqhOMz7FGHh9z0+w+Pb+xUPYwdG1cBQmrGv+SRDSNOwtZ2
+	m+29hOMUeAoGgE+8cieOisx7hFOldNifH8wmJb+Vw4P1h2g4rbNyR3UimOCMhffQhSea
+	y+EnHLuu8RcEbVtbqttmWMipJoDyJvYg9fJBh/o4FgJOXNCE5YrTVz20s5guQu2TA/Cz
+	dl8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8x5AYIB6+tKpzLA62UFdZG9vJdoElB3GRiAHf2F5yCo=;
-	b=nQKqh8pT3Aq0lkxIi2jbsw/3mR0gcIb1jzqYXUs43hOS7fHDUzFx3B/6gCOl3pYBnf
-	XrY7HyCHiRCVcEgULL6r5QSwNBiHOsI/pO3IczKzhNxH2FGNHwWcg/l8BJ6gH32rfGDp
-	vNwgbqjyzKpsGGto23I+nnmbQcC9/3Mtl6wDPBdJBvGhivAoHcKqAXNQFBvHvH9/aFRv
-	+0VewPmmjda3VvTblOdavTkSby11j5STG38G46gsZECL5T24PaUZdxFxy8vTl9H4Zvw5
-	oUv3pz5lGaYZA7CA76+CTD0OIjY/q8trxsNVsYAb1CsUwGVvMX6tmx+v5HXUjCrgoDRq
-	VJIg==
-X-Gm-Message-State: AJcUukfFNhI1NUwsT2g7BYqU2mKbGGWo5HhsqR9+oP0DFEiXxYWlpqhG
-	oXDy3hYueMB584CvUCp6sjii/jZF5kA=
-X-Google-Smtp-Source: ALg8bN5+mvm8lcEf/wjnc0G3WRN8eAq2KqO/9Gams5/kjp415XIZ4tgW3EbbQ4PqHaiGt0irER91ug==
-X-Received: by 2002:a62:1212:: with SMTP id a18mr24693415pfj.217.1547919955516;
-	Sat, 19 Jan 2019 09:45:55 -0800 (PST)
-Received: from localhost.localdomain ([117.241.130.152])
-	by smtp.gmail.com with ESMTPSA id
-	r80sm12483347pfa.111.2019.01.19.09.45.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 19 Jan 2019 09:45:54 -0800 (PST)
-From: Shantanu <shantanu@senic.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jan 2019 23:15:44 +0530
-Message-Id: <20190119174544.19389-1-shantanu@senic.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] Add recipe for python bindings of Berkeley DB
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=3lOdAw5a/SJnpshs7fMTzzyNlRrjs2jjEQFODtOAdsM=;
+	b=ZdsQ0qHCV4Ct2iIcXEkL/qmi8K2DC58c7HEnHSWlYW2nz4HNq/BbXLpEYGmTpPiRXs
+	+1B4n6rz18BiyrrJjD4Tz4GtpOx3n4NNpYvEJBTDcFSimqsNj7QxNA5zWaI5cu0cqfVF
+	VfGLQ82qWcUMMvCEnVamTTzMty875532+QdIpgZqoOwAHQdOvK0MD3bEogInpOE7/+l5
+	SBOs921P2IE3crruLGVkhPk6W6ICG9GkAHmN3qxaDMMgKvOtNgXK5rdUpvwzx5TBBe8v
+	jDAxjhjSJNC/hGgVnHeFuq8UcoRMBiD31JDZIuknzN1MfSJYc8mPDsFW4wJ3r+huKF02
+	TV8w==
+X-Gm-Message-State: AJcUukcn1kqCX0r7OGmRcmHkXbRUTYXTufEAZLQC/lmMH/FcwX9/JbY+
+	ZTnCXW6caMZxj/XEhG0ZyLeEQYL0xP4kIdCoapv4KYo2y1o=
+X-Google-Smtp-Source: ALg8bN4jRKIXnMCvtxWXuViy04v0V3Yq2BW428ddRIChj4T8JHG2WHn8Dpu8v/y6zO2mfNkjNjcrQ5wnrs0PFAI9shM=
+X-Received: by 2002:ac8:518d:: with SMTP id c13mr20870303qtn.254.1547937294888;
+	Sat, 19 Jan 2019 14:34:54 -0800 (PST)
+MIME-Version: 1.0
+References: <20190119174544.19389-1-shantanu@senic.com>
+In-Reply-To: <20190119174544.19389-1-shantanu@senic.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 19 Jan 2019 14:34:28 -0800
+Message-ID: <CAMKF1sokeASo4H1JC6oFmZwvM2F_-PHZH0T-nYz04kaEaGd8xw@mail.gmail.com>
+To: Shantanu <shantanu@senic.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] Add recipe for python bindings of Berkeley DB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,43 +53,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jan 2019 17:45:55 -0000
+X-List-Received-Date: Sat, 19 Jan 2019 22:34:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Included correction suggested from Khem of using STAGING_EXECPREFIXDIR
+This does not address the build problem that I mentioned, please send
+a fix the dep should be converted into rdep
 
-Signed-off-by: Shantanu <shantanu@senic.com>
----
- .../python/python3-bsddb3_6.2.6.bb            | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+RDEPENDS_${PN} = "python3-core"
 
-diff --git a/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
-new file mode 100644
-index 000000000..81baf98fd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "pybsddb is the Python binding for the Oracle Berkeley DB"
-+HOMEPAGE = "https://www.jcea.es/programacion/pybsddb.htm"
-+SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b3c8796b7e1f8eda0aef7e242e18ed43"
-+SRC_URI[sha256sum] = "42d621f4037425afcb16b67d5600c4556271a071a9a7f7f2c2b1ba65bc582d05"
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE = "bsddb3"
-+
-+DEPENDS = "db \
-+  python3-core \
-+"
-+
-+DISTUTILS_BUILD_ARGS = "--berkeley-db=${STAGING_EXECPREFIXDIR}"
-+DISTUTILS_INSTALL_ARGS = "--berkeley-db=${STAGING_EXECPREFIXDIR}"
-+
-+RDEPENDS_${PN} = "db"
-\ No newline at end of file
--- 
-2.17.1
-
+On Sat, Jan 19, 2019 at 9:46 AM Shantanu <shantanu@senic.com> wrote:
+>
+> Included correction suggested from Khem of using STAGING_EXECPREFIXDIR
+>
+> Signed-off-by: Shantanu <shantanu@senic.com>
+> ---
+>  .../python/python3-bsddb3_6.2.6.bb            | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+> new file mode 100644
+> index 000000000..81baf98fd
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY = "pybsddb is the Python binding for the Oracle Berkeley DB"
+> +HOMEPAGE = "https://www.jcea.es/programacion/pybsddb.htm"
+> +SECTION = "devel/python"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b3c8796b7e1f8eda0aef7e242e18ed43"
+> +SRC_URI[sha256sum] = "42d621f4037425afcb16b67d5600c4556271a071a9a7f7f2c2b1ba65bc582d05"
+> +
+> +inherit pypi setuptools3
+> +
+> +PYPI_PACKAGE = "bsddb3"
+> +
+> +DEPENDS = "db \
+> +  python3-core \
+> +"
+> +
+> +DISTUTILS_BUILD_ARGS = "--berkeley-db=${STAGING_EXECPREFIXDIR}"
+> +DISTUTILS_INSTALL_ARGS = "--berkeley-db=${STAGING_EXECPREFIXDIR}"
+> +
+> +RDEPENDS_${PN} = "db"
+> \ No newline at end of file
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
