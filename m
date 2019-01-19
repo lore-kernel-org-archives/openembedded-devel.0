@@ -1,56 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 436E27C21D
+Return-Path: <shantanu@senic.com>
+Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
+	[209.85.219.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 118137BDB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jan 2019 12:22:44 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id s12so18171966wrt.4
+	Sat, 19 Jan 2019 13:43:52 +0000 (UTC)
+Received: by mail-yb1-f195.google.com with SMTP id k189so215953yba.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jan 2019 04:22:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=Fm8/pyB7EnxIGox1pSYNKhs1qWUQMkkHcLJIXTD3Xc0=;
-	b=qiTTpg0X/EgfeFrNSirU3k3a5vv6dEBekSKMNZuJlrquT+68auNSFyWrHFk2eOWlXj
-	ktbdNQ6GrOdBYrUcBfAFKoGlKMjOuZB/QxnqsnE0xWxsChu0qQek4tzG4A3o4B+AJx0F
-	C8F8MsZOEaMtLTqxzqYM4tBelmHvurI9ZTpmxBKmNFmblLwWYVKPbSzodpqUriHZJC86
-	/zsiWBzvOA0it5s/qf5Sm41J/erUx9uAUs605ftq0t4OaTWgFCqVsw6e3EB+Coanf5Se
-	2aveRsidBn2ATr+IlLArRE6SmpcTqtwuejAGBc9bD/+q/VIo8aT+fbs7NT593U6I7cVA
-	moJA==
+	Sat, 19 Jan 2019 05:43:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=senic-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=gXgDg2MxcDW4osD4TdAzP6/Gxs6XZ/96l8TVnpgk/vY=;
+	b=uNpn+rbrSjI5gXpDAz4w+mpN9Ke4IlZvWOh6ERVso5XJ9xUo3Vtq5afxDhrx9ejfe2
+	dunpafD+TuvUbQcBgK8dhX34XNkLU6AKVfLXpd3lSOGTG4lwNsW96iSBVG7PJlqvUFgZ
+	MmX87g56/EJuXZ+ZcH1oA9MeSB/I0YNyI5/hiQRZ5YrSo6R4RGgumdYyngyWmT4AP5AV
+	y2uLLvulm5J4bqFh4fz4oL6sYA0aJ+vJbpuC8TQcyxZjRDpDmMkpKyb/y+ORVGVNHrSU
+	xaQmCecC/vVccJxtTR9kSX8+DEVu+qYFmv4K4mgiCejtioZEBy+LZ8XtC3SCB1EBkfz1
+	Mn6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Fm8/pyB7EnxIGox1pSYNKhs1qWUQMkkHcLJIXTD3Xc0=;
-	b=AMFBuk0PS4NA0XktKtwD/48Ymsy+e7YXUebgdtzge2zOAUYGR10Q+T693Oip8KuLia
-	kfGvN98zhPl0RGhEwU1mvWDPClt+Af8LSxX9DHaiNdti9GehA32o9UNTwVbUOg3egXlD
-	Z5rCqbf7359jCIRLxRkQo593ZegCA6347O8B+cnULqXTgAZjdOEmaCybBApc5OCZ2XfN
-	2pSG757iIADuCa1ydY6cKEZf9TJnZIB7DddM79zSZJ9lJxG63KNdljEXTAC1e7fjIpmH
-	wrjvLStu+NvtoT22kjUQC8cIbvMmoKPCBQIIgETT4EkhSvZuPH0yr3jd2YAgQfdQnytM
-	TMqg==
-X-Gm-Message-State: AJcUukfhV2zTCl6+bATdnHrJ1uNcSnv5AKPcaxziZxWvOWSYk/tZE1it
-	6EqFkXYBd6wf3dR3XQ8B0SNx9JMV
-X-Google-Smtp-Source: ALg8bN78w9tq+oP4Si4+IDp3lN1iyGmA8aHEbcPMY86B4qGuLVuzZxxjgnAp6LzdpzPVT4mcg8xeMA==
-X-Received: by 2002:a05:6000:10d1:: with SMTP id
-	b17mr20284578wrx.306.1547900565399; 
-	Sat, 19 Jan 2019 04:22:45 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F1BE998930CD041FFEA0CD4.dip0.t-ipconnect.de.
-	[2003:f0:7f1b:e998:930c:d041:ffea:cd4])
-	by smtp.gmail.com with ESMTPSA id
-	v6sm52697393wrd.88.2019.01.19.04.22.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 19 Jan 2019 04:22:44 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=gXgDg2MxcDW4osD4TdAzP6/Gxs6XZ/96l8TVnpgk/vY=;
+	b=DqgnQ1SfKA66fmd6r1vefJZ6UpRMjNCZ77JIyFxthT/b1ftRPgMP+y6geSe0CE+m0M
+	hhHPxCUmMfNCG+y44EapUEHh9B+elcOyoyBf1lBvJQtlVjlKnh9LYySK820T+z5ON9jd
+	0VEJGus9+T+14meK/e6ZHZhtBi3l9Wi9m6hWTItP/T6aq86QeH3c3lTYwMoQIhBf0E1Y
+	fKHGMy/bI/jHclyLUoEiGBZvMvVqx+pV0A2IE+M9gQdBX2pbqJdNQ1qJ+Otw6uybF29A
+	AtFbelQ+H2lga3bMx4JEXPk7gu73J0hdZVwb4JgzrGXy5m/wpFaBInHmeaBGaYLZAyld
+	UD5A==
+X-Gm-Message-State: AJcUukcrz7eMGxS7bWu3cIGYRGgnecr8e9iPnflzzz/uz33KVoiM1NHo
+	kGLNtjeiYXDzZ9zlQcfdu9ciDtDqXto=
+X-Google-Smtp-Source: ALg8bN6e8+AQbpAQNxQApMiuBmT5sNvlSioUs59VbF5ZLd2DW0sWzs8lupUZ6GvgexSRKtVuXqNz6g==
+X-Received: by 2002:a25:9b01:: with SMTP id y1mr10724438ybn.465.1547905433408; 
+	Sat, 19 Jan 2019 05:43:53 -0800 (PST)
+Received: from localhost.localdomain ([117.241.130.152])
+	by smtp.gmail.com with ESMTPSA id v9sm3187810ywh.2.2019.01.19.05.43.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Jan 2019 05:43:52 -0800 (PST)
+From: Shantanu <shantanu@senic.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jan 2019 13:22:33 +0100
-Message-Id: <20190119122233.5388-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190119122233.5388-1-schnitzeltony@gmail.com>
-References: <20190119122233.5388-1-schnitzeltony@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] atkmm: upgrade 2.24.2 -> 2.28.0
+Date: Sat, 19 Jan 2019 19:13:20 +0530
+Message-Id: <20190119134320.9082-1-shantanu@senic.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Shantanu <baali@muse-amuse.in>
+Subject: [meta-oe][PATCH] Add recipe for python bindings of Berkeley DB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,35 +55,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jan 2019 12:22:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 19 Jan 2019 13:43:53 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+From: Shantanu <baali@muse-amuse.in>
+
+Signed-off-by: Shantanu <shantanu@senic.com>
 ---
- .../recipes-gnome/atk/{atkmm_2.24.2.bb => atkmm_2.28.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-gnome/atk/{atkmm_2.24.2.bb => atkmm_2.28.0.bb} (74%)
+ .../python/python3-bsddb3_6.2.6.bb            | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
 
-diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
-similarity index 74%
-rename from meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb
-rename to meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
-index 307774b37..63f4f09ba 100644
---- a/meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb
-+++ b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
-@@ -11,8 +11,8 @@ inherit distro_features_check gnome autotools pkgconfig
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "d53b60b0f1be597e86070954a49cf0c3"
--SRC_URI[archive.sha256sum] = "ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd"
-+SRC_URI[archive.md5sum] = "6194ac577f15567adfa3c923944c6651"
-+SRC_URI[archive.sha256sum] = "4c4cfc917fd42d3879ce997b463428d6982affa0fb660cafcc0bc2d9afcedd3a"
- 
- EXTRA_OECONF = " --disable-documentation "
- 
+diff --git a/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+new file mode 100644
+index 000000000..4697f0070
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "pybsddb is the Python binding for the Oracle Berkeley DB"
++HOMEPAGE = "https://www.jcea.es/programacion/pybsddb.htm"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b3c8796b7e1f8eda0aef7e242e18ed43"
++SRC_URI[sha256sum] = "42d621f4037425afcb16b67d5600c4556271a071a9a7f7f2c2b1ba65bc582d05"
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE = "bsddb3"
++
++DEPENDS = "db \
++  python3-core \
++"
++
++DISTUTILS_BUILD_ARGS = "--berkeley-db=${STAGING_DIR_HOST}/usr"
++DISTUTILS_INSTALL_ARGS = "--berkeley-db=${STAGING_DIR_HOST}/usr"
++
++RDEPENDS_${PN} = "db"
+\ No newline at end of file
 -- 
-2.20.1
+2.17.1
 
 
