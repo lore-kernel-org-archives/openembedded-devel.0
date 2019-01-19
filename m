@@ -1,40 +1,38 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f68.google.com (mail-yw1-f68.google.com
-	[209.85.161.68])
-	by mail.openembedded.org (Postfix) with ESMTP id BFB6A7C26A
+Return-Path: <albert_zhang@xtev.cn>
+X-Greylist: delayed 426 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 19 Jan 2019 07:07:15 UTC
+Received: from smtpbg368.qq.com (smtpbg368.qq.com [163.177.87.252])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AF857BEF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2019 15:03:25 +0000 (UTC)
-Received: by mail-yw1-f68.google.com with SMTP id x2so5318945ywc.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2019 07:03:27 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=1FuelzbxEWG2AAiFNg216coYkwfK6JUY17XtmzqFvT4=;
-	b=KBkim0kT6UEL9KNVk7zEWco2kIgdoQjWnHUfywBg1xP7vG3A315pkw+Nx4pUfbf0EG
-	S7SbDxsbjgcF/HOr2lzwNTMEtGOtM1nK8iEJpKqt4np9P6p0bvff+Te2Re9/mXaMUcRW
-	lPxQsyw1lIWsC9fJMifFp1acKUtG1zn0jWRE1ogOlNar7OSwPqVl8kV2jfFDV9hua/Ii
-	ls/FFau2/IIbRfJr6+PPQrKaq9Uxvfq84IqUBP+TCbpb8yOuaGOpPOCuNYFJsNAxYQjT
-	9Y166C3UyAOFkQrleip/THVKdWjdT9y8F0KFTsGdrWwr2r2v7ifEz1oYgLAIG5ysEO6p
-	88HA==
-X-Gm-Message-State: AJcUukdRH0hFOX3CU4WwyGGQV54+VMcDEo3/dEVkO0lB3Ep0R2aMvwhS
-	H+2w8AZXVrup2qbHr/Ryjc1H65vV
-X-Google-Smtp-Source: ALg8bN4bWJGCbL6vh1kRkwpjsBguEkB02uolQHJL8Huu5ODr1HxSlXZmaQGcQUGcgf8f3Q5RSofV/g==
-X-Received: by 2002:a81:3707:: with SMTP id e7mr18032602ywa.377.1547823806292; 
-	Fri, 18 Jan 2019 07:03:26 -0800 (PST)
-Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id w2sm2761511ywl.10.2019.01.18.07.03.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Jan 2019 07:03:25 -0800 (PST)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jan 2019 15:03:23 +0000
-Message-Id: <20190118150323.17306-1-git@andred.net>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-webserver][PATCH] nginx: add default proxy_params
+	Sat, 19 Jan 2019 07:07:15 +0000 (UTC)
+X-QQ-GoodBg: 2
+X-QQ-SSF: 00400000000000F0
+X-QQ-FEAT: /A5Igf99+LSDyoadXvgk5VAC/K786izPuICJBZlD8/rIX6OWFD8DXKEeCScHX
+	8I/hjVerA3imX334CuerJ9v1hNmcNeF8eUapL4v0mL/Ia4xBtaMsLIJ6L8dU0Z4fH3WxBG3
+	mjGgDbMhcXs2f6pN0j3zcgUXS3Ak/E6lRCEHxbcA+n5MJh8uCnuDmnc1AHh20l5ABYK3oJt
+	1KMTk2BLBCivhy2ooaalB479YkqXMZ9hJcm7/PV4dzeXEVsUTIrr35X0gO0AWFqXXsIxxZh
+	WV7idUH0LCvy10ABzYxQC20x8=
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 101.254.31.0
+X-QQ-STYLE: 
+X-QQ-mid: bizmailvip86t1547881174t20603
+From: "=?utf-8?B?5byg5YGl6b6Z?=" <albert_zhang@xtev.cn>
+To: "=?utf-8?B?b3BlbmVtYmVkZGVkLWRldmVs?="
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0
+Date: Sat, 19 Jan 2019 14:59:34 +0800
+X-Priority: 3
+Message-ID: <tencent_24F5095019CF14775C33C5CE@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-SENDSIZE: 520
+Received: from qq.com (unknown [127.0.0.1]) by smtp.qq.com (ESMTP) with SMTP
+	id ; Sat, 19 Jan 2019 14:59:35 +0800 (CST)
+Feedback-ID: bizmailvip:xtev.cn:qybgforeign:qybgforeign1
+X-QQ-Bgrelay: 1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: About Qualcomm mdm9607 armv7a-neon-vfp-oe cross-compile toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,59 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2019 15:03:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 19 Jan 2019 07:07:16 -0000
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: André Draszik <andre.draszik@jci.com>
-
-As per Debian packaging - to use it, see
-    https://wiki.debian.org/Nginx/DirectoryStructure#Extra_Parameters
-
-    This file is most commonly included when Nginx is acting
-    as a reverse proxy:
-        include /etc/nginx/proxy_params;
-        proxy_pass http://localhost:8000;
-
-Signed-off-by: André Draszik <andre.draszik@jci.com>
----
- meta-webserver/recipes-httpd/nginx/files/proxy_params | 4 ++++
- meta-webserver/recipes-httpd/nginx/nginx.inc          | 3 +++
- 2 files changed, 7 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/proxy_params
-
-diff --git a/meta-webserver/recipes-httpd/nginx/files/proxy_params b/meta-webserver/recipes-httpd/nginx/files/proxy_params
-new file mode 100644
-index 000000000..df75bc5d7
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/proxy_params
-@@ -0,0 +1,4 @@
-+proxy_set_header Host $http_host;
-+proxy_set_header X-Real-IP $remote_addr;
-+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-+proxy_set_header X-Forwarded-Proto $scheme;
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 522942504..29e7efc14 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -17,6 +17,7 @@ SRC_URI = " \
-     file://0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch \
-     file://nginx.conf \
-     file://default_server.site \
-+    file://proxy_params \
-     file://nginx.init \
-     file://nginx-volatile.conf \
-     file://nginx.service \
-@@ -111,6 +112,8 @@ do_install () {
-     install -d ${D}${sysconfdir}/nginx/sites-enabled
-     ln -s ../sites-available/default_server ${D}${sysconfdir}/nginx/sites-enabled/
- 
-+    install -m 0644 ${WORKDIR}/proxy_params ${D}${sysconfdir}/nginx/proxy_params
-+
-     install -d ${D}${sysconfdir}/default/volatiles
-     install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
-     sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
--- 
-2.20.1
-
+SGksDQpXaGVuIGkgd2FubmEgdG8gYnVpbGQgYXJtdjdhLW5lb24tdmZwLW9lIGNyb3NzLWNv
+bXBpbGUgdG9vbGNoYWluIGZvciBxdWFsY29tbSBtZG05NjA3LCBiZWNhdXNlIGkganVzdCB3
+YW5uYSBidWlsZCB0aGlyZC1wYXJ0eSBzb2Z0d2FyZSBvbiB0aGlzIHRhcmdldCBtYWNoaW5l
+LiBCdXQgaSBhbHdheXMgYnVpbHQgZmFpbGVkIHdoZW4gaSB1c2Ugb2UtY29yZS4NCg0KDQpB
+dCBmaXJzdCwgaSBjbG9uZSB0aGUgb2UtY29yZSBmcm9tIGNvZGVhdXJvcmE6DQokIHJlcG8g
+aW5pdCAtdSBnaXQ6Ly9jb2RlYXVyb3JhLm9yZy9xdWljL2xlL21hbmlmZXN0LmdpdCAtYiBy
+ZWxlYXNlIC1tIExFLkJSLjEuMi4xLTg0MDAwLTl4MDcueG1sIC0tcmVwby11cmw9Z2l0Oi8v
+Y29kZWF1cm9yYS5vcmcvdG9vbHMvcmVwby5naXQNCiQgcmVwbyBzeW5jDQpBZnRlciBpIGdl
+dCB0aGlzIHJlY2lwZXMsIGkgZm9sbG93IHRoZSBXaWtpIG9mIE9wZW5FbWJlZGRlZCBGb3Ig
+TVNNLDoNCiQgc291cmNlIG9lLWNvcmUvYnVpbGQvY29uZi9zZXRfYmJfZW52LnNoDQokIGJp
+dGJha2UgIC12IG1ldGEtdG9vbGNoYWluDQpCdXQgaSBhbHdheXMgZ2V0IGFuIGVycm9yIHRo
+YXQgbWVudGlvbiBtZSBjYW4ndCBpbmhlcml0IHFjb21tb24uYmJjbGFzcywgYmVjYXVzZSBp
+biB0aGUgcHJvamVjdCwgaSBjYW4ndCBmaW5kIHRoZSBmaWxlLCBpIGRvbid0IGtub3cgaG93
+IHRvIGZpeCB0aGlzIGVycm9yLCBhbmQgd2hpY2ggcmVjaXBlIHNob3VsZCBpIHVzZSB0byBz
+ZXR1cCB0aGUgbWFjaGluZSBpbiBiYmxheWVycy5jb25mLg0KDQoNCkkgdHJ5IG1hbnkgbWV0
+aG9kIHRvIGdldCB0aGUgdG9vbGNoYWluLCBpIGFsc2UgY2hlY2sgdGhlIGVtYWlsOg0KaHR0
+cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvcGlwZXJtYWlsL29wZW5lbWJlZGRlZC1kZXZl
+bC8yMDE0LUFwcmlsLzA5NTIyMi5odG1sDQphbmQgT3BlbkVtYmVkZGVkIGRvY3VtZW50cyBh
+bmQgR05VUmFkaW8sIGkgZ290IG90aGVycyB0b29sY2hhaW4gc2NyaXB0ZSwgaSBkaWRuJ3Qg
+Z2V0IHRoZSBxdWFsY29tbSBtZG05NjA3IHRvb2xjaGFpbi4NCg0KDQpIb3cgY2FuIGkgYnVp
+bGQgdGhlIGFybXY3YS1uZW9uLXZmcC1vZSB0b29sY2hhaW4/DQoNCg0KVGhhbmtzDQphbGJl
+cnQ=
 
