@@ -1,54 +1,53 @@
-Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 224067BDE3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id ECAB779E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2019 22:13:02 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id o8so13122400qkk.11
+	Tue, 22 Jan 2019 00:38:12 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id q18so25364235wrx.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2019 14:13:03 -0800 (PST)
+	Mon, 21 Jan 2019 16:38:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=ol7P4SgAk1BhsjAs0J8EIJ5y36SMOS2cqlxXCTOw8Uk=;
-	b=riCXuL9ptFDBjBQ6pkBjZlzMJKPYmP1wq0tAs+DEvDQcm39P7/E/fXUlqOdc3YTIdh
-	oOrT9C6WYIQ5bmryxeaJa1jLK8iANMrI5mGfM2SbtQAW/fEhAs5tFQEJ6ehQ3mzdS200
-	tqLKzQa0IGNoUpbn2NTz77YysM77djSmTIFfUXgtYNhUfU3blJJtTYdQR9/moCEsm+ei
-	eufdeiz/+fGZAJ1xbT0soKBPeCOJdqzb6/WKME/67Ms2I9cFqHgJ/wSB//lnLpF+lxyM
-	rzmPzjYnNDuoIOVIM4yeFzlQunbsiwVGkGJgFdgeNQeFP6A9eNQBOd0GI2dZg7gS72g+
-	KdAQ==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=uCcvPJgyKzfzZ4NrsoodKtpVhWjCuolmno4ZgXzkqLY=;
+	b=IMZU2e9Nx8RsWVntT+F9Q1BnIa144HNrODHcuzzqdBvK86Nzmxg5uXC5wO6mETbPfk
+	VynhFhdbkkjeRe6VQpa5Ovst5Ufl21VeIokNrsMR4Buj6uY/wcBUSA/DYnKqlplaWj/e
+	8Rg7CBNcAnQZfpzIZPPpKgRs2N1VR89vMYO1hotx6rLV6EHPLgK9LewVfgHd9eXtBYFO
+	dqrZQznZ/ybg49Yq7uNJbtROiC1INdqpNdMjrkOi/i2Igf1oEIoKYviqfjd8/2ygJDzL
+	tAob67hKNSIu+a5eO+BztfRpJn7Kg7yh8gFD5O6xhE4VrrDeC1zdNYLjibU8MrQTcb5x
+	PAYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ol7P4SgAk1BhsjAs0J8EIJ5y36SMOS2cqlxXCTOw8Uk=;
-	b=Hca/fj8Evpy7aAuG53M8QEsrsfP6LzHKIgqj047sV2bGxLDtq4aKzVUbXygHiwS4z/
-	HpvJ+7VhJoJYNNijawmslGtVRyx10CBRd3CZCJPjm8yIx1YeBPCRCQnpBmuxv5w0gjtE
-	XTyp47tKTVWs9iYoKompHXVxbPfUQlV6bKl0gQ/sKMtTI/jJrkWIRdMqBFl8gYQ2O4mi
-	FYlf3SccoZwqD+8YPLzpdRXPIGqofwYZFpTWxS9LyoB5f5DVpILvCOCVldme9PLbNtvK
-	N5SupWZTn16Hvc8Jr8OFp3CoJC+hexWfUhefuPHYNwmwPA6JtV9we4x7w1QolXS6FWrF
-	o1ow==
-X-Gm-Message-State: AJcUukcpe/Wq+0V0sXVjgJrKakXGFEP55M5LYKgr9iMuNhvEWRNDym9p
-	fFhI023GRyGHKXZDxtjZm6SxCqfx
-X-Google-Smtp-Source: ALg8bN4Ejp+6CV3KXGyYb6OEXAFZ0L16UWam+cjBLkkrtkTf0RSgLHrVL8WOl6RG8eTLYPUfPWOMqQ==
-X-Received: by 2002:a37:5b47:: with SMTP id p68mr25733703qkb.299.1548108782926;
-	Mon, 21 Jan 2019 14:13:02 -0800 (PST)
-Received: from mbedesk.Sonatest.net
-	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
-	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
-	v50sm64083489qtc.7.2019.01.21.14.13.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Jan 2019 14:13:02 -0800 (PST)
-From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
-	<maxime.roussinbelanger@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=uCcvPJgyKzfzZ4NrsoodKtpVhWjCuolmno4ZgXzkqLY=;
+	b=o5LRkK8scltPYTzRPRy3SOTeYUFjcOgH4DGEXnq/eDCYsVWZgE6RnGD01iNE/lO+Do
+	eHqvjjSArPxZTzx7uD+x2W9r+jwIvYdn7XUnMqZRFzkigxiLFUEEzrrXpLa3F6UxXzBt
+	pjabAzzzu0/PSsk/pKwKuQNkVX0TecXnKHoddCqVJ2Y3ek/oW/zLYoAUKBRois1ycHb7
+	c+XzaXsXnm38KyNkZrze1qDPaokE9XEMPxqZIzsK1tyt5zKlHoj3pblALf3gpibOkWkx
+	Yw4iOhDgLv14YBnPeEjdkiUndTcTRHIdX64hmo6B8AwPHtBRrScieV2DbZLzulnTtSpo
+	dnmQ==
+X-Gm-Message-State: AJcUukcO6Sc7dVQ63GUnLd5otyfefLwpuwJnRqiH2ZrPMPpPal48cmch
+	waTF67GBCLdE/u6jf9DtGyaktTlD
+X-Google-Smtp-Source: ALg8bN6FmMQ6Dc5YgODNSad1lItz+REW0zXV4YFAGRj5Hy912KrUwL9/WsU7BNFVbygu5QelT4nBuw==
+X-Received: by 2002:adf:e149:: with SMTP id f9mr32781334wri.42.1548117492613; 
+	Mon, 21 Jan 2019 16:38:12 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F275D236F96ED284BAEF9F7.dip0.t-ipconnect.de.
+	[2003:f0:7f27:5d23:6f96:ed28:4bae:f9f7])
+	by smtp.gmail.com with ESMTPSA id
+	j8sm134645303wmd.0.2019.01.21.16.38.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 21 Jan 2019 16:38:11 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jan 2019 17:12:43 -0500
-Message-Id: <20190121221243.26254-2-maxime.roussinbelanger@gmail.com>
+Date: Tue, 22 Jan 2019 01:37:58 +0100
+Message-Id: <20190122003802.19373-1-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190121221243.26254-1-maxime.roussinbelanger@gmail.com>
-References: <20190121221243.26254-1-maxime.roussinbelanger@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] libvncserver: fix configure argument on openssl when disabled
+Subject: [PATCH 1/5] graphviz(-native): initial add 2.40.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,35 +60,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2019 22:13:02 -0000
+X-List-Received-Date: Tue, 22 Jan 2019 00:38:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-When openssl is not included in the PACKAGECONFIG it
-shouldn't try to compile with openssl.
+Graphviz is helpful for creating docs with doxygen (at least)
 
-libvncserver CMakeLists.txt activates all of its options and
-tries to find libssl.so. CMake finds it inside the native
-sysroot which could be the wrong architecture when linking.
-
-Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../graphviz/0001-Use-native-mkdefs.patch     | 31 ++++++++++++
+ .../graphviz/graphviz_2.40.1.bb               | 49 +++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-index d8f51c751d..b493f7f01e 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-@@ -17,7 +17,7 @@ PACKAGECONFIG ??= " \
- PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
- PACKAGECONFIG[gnutls] = ",,gnutls"
- PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
--PACKAGECONFIG[openssl] = ",,openssl"
-+PACKAGECONFIG[openssl] = ",-DWITH_OPENSSL=OFF,openssl"
- PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
- PACKAGECONFIG[systemd] = ",,systemd"
- PACKAGECONFIG[sdl] = ",,libsdl2"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
+new file mode 100644
+index 000000000..eb51d03d2
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Use-native-mkdefs.patch
+@@ -0,0 +1,31 @@
++From 5e53b643615fd53f3ff960521bbe9d95641e5f68 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Sun, 20 Jan 2019 23:58:29 +0100
++Subject: [PATCH] Use native mkdefs
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ lib/gvpr/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/lib/gvpr/Makefile.am b/lib/gvpr/Makefile.am
++index ac3c098..4914854 100644
++--- a/lib/gvpr/Makefile.am
+++++ b/lib/gvpr/Makefile.am
++@@ -57,7 +57,7 @@ endif
++ mkdefs_SOURCES = mkdefs.c
++ 
++ gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs$(EXEEXT)
++-	./mkdefs$(EXEEXT) gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
+++	mkdefs$(EXEEXT) gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
++ 
++ EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcxproj*
++ 
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+new file mode 100644
+index 000000000..96f1efc60
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+@@ -0,0 +1,49 @@
++SUMMARY = "Graph Visualization Tools"
++HOMEPAGE = "http://www.graphviz.org"
++LICENSE = "EPL-1.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=9109f5fc16cf963fb3cdd32781b3ce04"
++
++DEPENDS = " \
++    intltool-native \
++    bison-native \
++    groff-native \
++    libtool \
++    gdk-pixbuf \
++    librsvg \
++    cairo \
++    pango \
++    expat \
++    freetype \
++"
++DEPENDS_append_class-target = " ${BPN}-native"
++
++inherit autotools-brokensep pkgconfig gtk-doc gettext
++
++# The source tarball suggested at
++# https://graphviz.gitlab.io/_pages/Download/Download_source.html has no
++# version in its name. So once graphviz is updgraded, only first time users will
++# get checksum errors. Fedora people seem to expect same so they use a versioned
++# source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
++
++SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz"
++SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
++SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
++# Use native mkdefs
++SRC_URI_append_class-target = " file://0001-Use-native-mkdefs.patch"
++
++S = "${WORKDIR}/${BPN}-stable_release_${PV}"
++
++do_configure_prepend() {
++    cd ${S}
++    # create version.m4 and ignore libtoolize errors
++    ./autogen.sh NOCONFIG || true
++}
++
++do_install_append_class-native() {
++    # install mkdefs for target build
++    install -m755 ${B}/lib/gvpr/mkdefs ${D}${bindir}
++}
++
++FILES_SOLIBSDEV_append = " ${libdir}/graphviz/lib*${SOLIBSDEV}"
++
++BBCLASSEXTEND = "native"
 -- 
 2.20.1
 
