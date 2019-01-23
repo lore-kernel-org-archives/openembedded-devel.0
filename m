@@ -1,55 +1,34 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A0F87BFEE
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2387B6BE2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2019 00:38:16 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id t6so25349667wrr.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2019 16:38:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=LUPN72WjsI5BCSuCzNucYFaSZEv+/RHRc80UCUMQT4o=;
-	b=DS8YizYsKaGuZEf0TUKzBsOqcCn6tX58NURwlBrpg/5ryH0HO8i99dZT4Zw1LLnc6N
-	G/ji8aY/OPJI66MqzQiDXrigKygRepW3F7kz7z3Rsl/Y+dJfcnXfQ5gdjDdRaw1qdhgx
-	RDm8SxYub1x503VeIpTH8thsdbZ8tuJFDJorKtxLularZwR1ZbiDQmnbGuPlFknTyxVk
-	SOv2Jq241+WQ4Ndmby2PbzyN4we3Ah/aAWPth3tOVku2YEOAXTm242+wubgq35BCeTkS
-	+Ax/OYLRRe4mWrT1BomS5jnGWzwq7/SSlWTBY6MkRb0MREOjFoPEuH2XvozXrdRZOsz1
-	u4vQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=LUPN72WjsI5BCSuCzNucYFaSZEv+/RHRc80UCUMQT4o=;
-	b=uMzosaAQVJIGqU2qFgYvnSaZRGFwnRGbMx2J5M+mquXwHtET1DkRrXx0uVk1GmC+ox
-	s3reB/vQCzGJG0nGiRJCuaJ5fofJ1ISR9U8g+R7fGoqmMo1VxLCZDOLEzMtUFjqIT6uh
-	hUT8hTonNI7dJgzJei2+t1RTv4h1jpgQ74pUACXvANe1YQ6d2yimN1MHZaMk3U4I73f6
-	wJmOD6Bg/kftuTcwkqjylXkn8FWVlD4d5gJVSkwBT+ZLPNyEzfeExchOrAvZJvQIXiAG
-	uYL0+D/Kh2x9p23i05HvSJkJDBqARecmmeGf/jhywx64P65O3h+BvtAVnkPpU2VQ97bV
-	rCWA==
-X-Gm-Message-State: AJcUukfA+UFq1ezXLcrRIGh4ycRWSTXcB0Xn2Ct98fxwdAr8EZe09VEf
-	NmvZaoXXsik2BLexncf2ty46yeRA
-X-Google-Smtp-Source: ALg8bN6PhnnTnjYpnHDdganrWB7LjHXYfFJnGO05+ROBj4vWL0C3C9CbbTiHkmqEqItnuWnDqmHcbQ==
-X-Received: by 2002:adf:c888:: with SMTP id k8mr31816638wrh.6.1548117496614;
-	Mon, 21 Jan 2019 16:38:16 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F275D236F96ED284BAEF9F7.dip0.t-ipconnect.de.
-	[2003:f0:7f27:5d23:6f96:ed28:4bae:f9f7])
-	by smtp.gmail.com with ESMTPSA id
-	j8sm134645303wmd.0.2019.01.21.16.38.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 21 Jan 2019 16:38:15 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2019 01:38:02 +0100
-Message-Id: <20190122003802.19373-5-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190122003802.19373-1-schnitzeltony@gmail.com>
-References: <20190122003802.19373-1-schnitzeltony@gmail.com>
+	Wed, 23 Jan 2019 03:03:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0N32eOL023557
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 22 Jan 2019 19:02:51 -0800
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Tue, 22 Jan 2019 19:02:30 -0800
+To: Khem Raj <raj.khem@gmail.com>, Randy MacLeod <randy.macleod@windriver.com>
+References: <20190117162629.47677-1-stefan@agner.ch>
+	<20190117162629.47677-3-stefan@agner.ch>
+	<CALbNGRTLbuAi7czFzrSw4knWDR4t4Nq_pzsuTT6pVeY3vLYTig@mail.gmail.com>
+	<d198417638781fb108e77e953ae95550@agner.ch>
+	<6021b113-7a55-7bb7-c813-b7d768147f57@windriver.com>
+	<CAMKF1spfqh71NCqVa4SweQehNMGMgezBJdnkMdoGAErt5f2g6A@mail.gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5C47D961.6080605@windriver.com>
+Date: Wed, 23 Jan 2019 11:02:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Subject: [PATCH 5/5] python(3)-rdflib(-native(sdk)): initial add 4.2.2
+In-Reply-To: <CAMKF1spfqh71NCqVa4SweQehNMGMgezBJdnkMdoGAErt5f2g6A@mail.gmail.com>
+X-Originating-IP: [128.224.162.194]
+Cc: Stefan Agner <stefan.agner@toradex.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/5] xfce4-power-manager: enable polkit depending on distro feature
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,58 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2019 00:38:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Jan 2019 03:03:47 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../recipes-devtools/python/python-rdflib.inc     | 15 +++++++++++++++
- .../python/python-rdflib_4.2.2.bb                 |  2 ++
- .../python/python3-rdflib_4.2.2.bb                |  2 ++
- 3 files changed, 19 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-rdflib.inc
- create mode 100644 meta-python/recipes-devtools/python/python-rdflib_4.2.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-rdflib.inc b/meta-python/recipes-devtools/python/python-rdflib.inc
-new file mode 100644
-index 000000000..f92734aa7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-rdflib.inc
-@@ -0,0 +1,15 @@
-+SUMMARY = "Character encoding aliases for legacy web content"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=68c1a3bb687bd63b8e5552f3ea249840"
-+
-+SRC_URI[md5sum] = "534fe35b13c5857d53fa1ac5a41eca67"
-+SRC_URI[sha256sum] = "da1df14552555c5c7715d8ce71c08f404c988c58a1ecd38552d0da4fc261280d"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-isodate \
-+    ${PYTHON_PN}-pyparsing \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-rdflib_4.2.2.bb b/meta-python/recipes-devtools/python/python-rdflib_4.2.2.bb
-new file mode 100644
-index 000000000..7ed0f5f9a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-rdflib_4.2.2.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-rdflib.inc
-diff --git a/meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb b/meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb
-new file mode 100644
-index 000000000..6511df3ce
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-rdflib_4.2.2.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-rdflib.inc
--- 
-2.20.1
 
+On 2019年01月21日 02:07, Khem Raj wrote:
+> On Thu, Jan 17, 2019 at 4:30 PM Randy MacLeod
+> <randy.macleod@windriver.com> wrote:
+>>
+>> On 1/17/19 1:39 PM, Stefan Agner wrote:
+>>> On 17.01.2019 18:53, Andreas Müller wrote:
+>>>> On Thu, Jan 17, 2019 at 5:27 PM Stefan Agner <stefan@agner.ch> wrote:
+>>>>>
+>>>>> From: Stefan Agner <stefan.agner@toradex.com>
+>>>>>
+>>>>> systemd and polkit are not directly related. It is just fine to build
+>>>>> with systemd but without polkit.
+>>>> Surely it builds but is it still usable as unpriviledged user?
+>>>
+>>> TBH, I don't know, did not run XFCE.
+>>
+>> We do! :)
+>>
+>>>
+>>> If it is unusable, we probably should not make it an option anyway? Just
+>>> enable it always and make polkit a fixed dependency?
+>>
+>> Grace,
+>> Please apply this series of patches and check if
+>> xfce4-power-manager is usable as an unprivileged user?
+>
+> Thanks for testing it out, I will wait to hear from you
+
+Hi Randy and Khem:
+
+It's usable as an unprivileged user when project configured with below 
+items altogether:
+1, with systemd DISTRO_FEATURES
+2, without polkit DISTRO_FEATURES
+3, polkit package installed.
+BTW, if we don't install polkit, there comes below error:
+Missing or unbuildable dependency chain was: ['packagegroup-xfce-base', 
+'xfce4-session', 'polkit']
+
+And there also comes a question about
+"[oe] [PATCH 1/5] polkit: add polkit as a required distro feature" as 
+there is a logic as REQUIRED_DISTRO_FEATURES = "polkit" added, but why 
+does it inherit distro_features_check?
+
+Thanks,
+
+>
 
