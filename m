@@ -1,23 +1,24 @@
-Return-Path: <Mingli.Yu@windriver.com>
+Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B8DC66BC88
+	by mail.openembedded.org (Postfix) with ESMTP id 1573F6BD1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jan 2019 09:38:05 +0000 (UTC)
+	Thu, 24 Jan 2019 03:58:19 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0N9bU7g001425
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 23 Jan 2019 01:37:40 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0O3w0SR028902
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jan 2019 19:58:10 -0800
+Received: from fidler.wrs.com (172.25.44.4) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Wed, 23 Jan 2019 01:37:19 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Wed, 23 Jan 2019 01:37:19 -0800
-Message-ID: <20190123093719.122459-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 23 Jan 2019 19:57:37 -0800
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Jan 2019 22:57:36 -0500
+Message-ID: <20190124035736.14187-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openldap: improve reproducibility
+Subject: [PATCH] libvncserver: Update to latest commit post 0.9.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,34 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jan 2019 09:38:06 -0000
+X-List-Received-Date: Thu, 24 Jan 2019 03:58:20 -0000
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Update to latest git HEAD which includes a fix for CVE-2018-15127.
 
-Rework remove-user-host-pwd-from-version.patch to
-fix below buildpath warning:
-| WARNING: openldap-2.4.46-r0 do_package_qa: QA Issue: File /work/core2-64-wrs-linux/openldap/2.4.46-r0/packages-split/openldap-bin/usr/bin/ldappasswd in package contained reference to tmpdir [buildpaths]
+Support for lzo in addition to a bundled minilzo was added so
+add a PACKAGECONFIG[lzo] and add it to the default config.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../openldap/openldap/remove-user-host-pwd-from-version.patch   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch b/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-index 4eb389797..ac18f0830 100644
---- a/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/remove-user-host-pwd-from-version.patch
-@@ -11,7 +11,7 @@ diff -ru openldap-2.4.46.orig/build/mkversion openldap-2.4.46/build/mkversion
- +   DATE=$(date -d@$SOURCE_DATE_EPOCH +' %b %d %Y ')
- +   TIME=$(date -d@$SOURCE_DATE_EPOCH +' %H:%M:%S ')
- +else
--+   WHOWHERE="$USER@$(uname -n):$(pwd)"
-++   WHOWHERE="openldap"
- +   DATE='" __DATE__ "'
- +   TIME='" __TIME__ "'
- +fi
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+index 25917756f..b789055bb 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+@@ -5,10 +5,11 @@ PRIORITY = "optional"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+ 
+-PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
++PACKAGECONFIG ??= "gcrypt gnutls jpeg png lzo ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
+ PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
+ PACKAGECONFIG[gnutls] = ",,gnutls"
+ PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
++PACKAGECONFIG[lzo] = ",,lzo"
+ PACKAGECONFIG[openssl] = ",,openssl"
+ PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
+ PACKAGECONFIG[systemd] = ",,systemd"
+@@ -18,6 +19,6 @@ PACKAGECONFIG[zlib] = ",,zlib"
+ inherit cmake
+ 
+ SRC_URI = "git://github.com/LibVNC/libvncserver"
+-SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
++SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.17.0
 
 
