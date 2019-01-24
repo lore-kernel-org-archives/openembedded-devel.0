@@ -1,21 +1,20 @@
 Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1573F6BD1C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DE27E71E5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 03:58:19 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x0O3w0SR028902
+	Thu, 24 Jan 2019 03:58:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x0O3wYGc027414
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jan 2019 19:58:10 -0800
+	Wed, 23 Jan 2019 19:58:34 -0800 (PST)
 Received: from fidler.wrs.com (172.25.44.4) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Wed, 23 Jan 2019 19:57:37 -0800
+	Wed, 23 Jan 2019 19:58:33 -0800
 From: Randy MacLeod <Randy.MacLeod@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Jan 2019 22:57:36 -0500
-Message-ID: <20190124035736.14187-1-Randy.MacLeod@windriver.com>
+Date: Wed, 23 Jan 2019 22:58:32 -0500
+Message-ID: <20190124035832.14257-1-Randy.MacLeod@windriver.com>
 X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
 Subject: [PATCH] libvncserver: Update to latest commit post 0.9.12
@@ -31,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2019 03:58:20 -0000
+X-List-Received-Date: Thu, 24 Jan 2019 03:58:34 -0000
 Content-Type: text/plain
 
 Update to latest git HEAD which includes a fix for CVE-2018-15127.
