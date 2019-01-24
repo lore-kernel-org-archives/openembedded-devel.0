@@ -1,47 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 149CB60807
+Return-Path: <gstroz@uber.com>
+Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
+	[209.85.217.65])
+	by mail.openembedded.org (Postfix) with ESMTP id F000E7C31F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 18:18:01 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l12so7716442qtf.8
+	Thu, 24 Jan 2019 22:44:05 +0000 (UTC)
+Received: by mail-vs1-f65.google.com with SMTP id z3so4562980vsf.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 10:18:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=L9Og5y4jY6KIPvhYybvrEkx0F3timeGxmCjYLTLVzHk=;
-	b=nlQJFgLLF13Dyb4HEVVOIj5xlSvE8raGfQDIB6sdSvMj/uAtTd0SUOwVm2GWBJlxUZ
-	20sCNwIVbMJfWzIjwkDMe9sIs2fOxg6cyVEFM9XCxVNzKOADFpTw6l2pBG17FEDPe9mK
-	SQHrRHVNFbwfZiYYZ5JyudleT0c3/rImOXFzO1fA9U0JMOBX5zM9iD9Lq4WfwlybxV8y
-	BVPKWNGPLNDw2+s82bb2Jj/Gk7csDhN79doal2QxnmkCmR7yFtyrNJBOaZQlZ4nGhutN
-	/96KV4Vvjq9DRaDKl64dWyL3IzxlZfGW26fUJp5+XNY7MCu2K/nrxqQLmc4qf1Iz10A1
-	yE8w==
+	Thu, 24 Jan 2019 14:44:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uber.com; s=google;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Nqm+7Nntvq1FMHRO4IeFkuj70rZ5XHck/vun/zjtS/M=;
+	b=pSpKrkjYFwamrjz38+pqbi4CuZKFNxVif0WN+iA/Q6JlEZM5+Vk2bR3j1T9Ti1MhdG
+	+Dgcs95sjvjkmq4HgRJIWc3pFwAXAm6c20+FczHC2+anKG54ZZ6tJyOoT7Z7Arjh+De4
+	v85/09nPFivJXXBfmz7lhX+wtPkgz8CmoWEXU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=L9Og5y4jY6KIPvhYybvrEkx0F3timeGxmCjYLTLVzHk=;
-	b=Ld0BrVj/oGYwF7ioO155XA9dkLU/Y76asYS2vwOfBiwhWWzH5Iz42568h1TSoPvS67
-	nzSVQ8tvkzIBSorhkySGDNYLJlbk93lCeWgXfUjmOiQUOT5kOY2/5Y9U8oXoQttRytsj
-	db2sk5w0XQY0vXCB3QlKwVxVUq0GpraxyV/VqU/Cut0wG8BYOz/W7NIMQtZimSESuS2r
-	bx7IhSAx5fbjlfHR6cCwAbVU5dqrmgfRN8SbBR/EmIIDnGR4uIz8VnMscwS3yrVdGJyF
-	ijXaG7LI9VkZkePPAPe764iqb2JM9iOlW9Wx53nnpTSUWrL5LI+zUWznjaDbpDlUZahE
-	Ks9A==
-X-Gm-Message-State: AJcUukf5VjG4XqevDSEt/MzDxzVsiEiLfzAxHmofYaqeluqDlm9OVFO1
-	D5IOl0Bwr7V7SByepsPME/sFbpsHKcnz+G/asOk=
-X-Google-Smtp-Source: ALg8bN7qnGvlLqg0JohXwohaFHNKnL3JTgj86+M++SU/Nz9jrSmLgxup/jQ5XE243kNf04hwH5aTyaGrUTLShn4AJtw=
-X-Received: by 2002:a0c:a144:: with SMTP id d62mr7214649qva.50.1548353882643; 
-	Thu, 24 Jan 2019 10:18:02 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Nqm+7Nntvq1FMHRO4IeFkuj70rZ5XHck/vun/zjtS/M=;
+	b=NcuMgIwO5TOsuI/x5o2b9boG0CzzHYQBPjmJlK5hqs82plQM/iqlJ1rMSFXDZmnGrZ
+	xNvvCnXCoCDt2spSTE9T8dUqFaROizwOJZy6BuWoWCQkEZwKDnQhZV9VYRnObmSEWOIO
+	pSopefQUb9N0WvPee9kO8CfRaXGbyE3dwV8qhuXyM23QTzbVl6U10JzkeLMv2AjQlJeQ
+	Foq2FXw5/tW6cTtcEmNTxM2OpGeL6FsDsuicU0wOkeuPokvGfV3pjUqtbRWd8duWvx3A
+	CXLyXg+a7wMxpC6CS49LkvuXpD2tQ0IaIY2ms9OfXtI/iH3/0uMV9uGamu+VMF79oNkU
+	TGRA==
+X-Gm-Message-State: AJcUukdBcFmnkikvbppg3PIhYrTucsslnubT7jnRAJCxhrioc5+9B8WX
+	PNFgcui6+uRbiegZyLpvh2l6D3cC8dpWia6shrC7cFgTTU4=
+X-Google-Smtp-Source: ALg8bN7ixMIF+0yjvnqS73H2tbeUNfRbFS4IBqC67sAlMfg2dPgBSnLooVbDCz1oX/4cnw+LAA4YqQyF6Vvivia34WE=
+X-Received: by 2002:a67:e34e:: with SMTP id s14mr3439420vsm.95.1548369846395; 
+	Thu, 24 Jan 2019 14:44:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20190124035832.14257-1-Randy.MacLeod@windriver.com>
-	<4dec5db8-8391-9c4f-74b0-a06c974358fc@windriver.com>
-In-Reply-To: <4dec5db8-8391-9c4f-74b0-a06c974358fc@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Jan 2019 13:17:36 -0500
-Message-ID: <CAMKF1spnopnSTz0BH2J7cJcpRRhd0ZdwWWSBFc3XKWm7FF553g@mail.gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] libvncserver: Update to latest commit post 0.9.12
+From: Glenn Stroz <gstroz@uber.com>
+Date: Thu, 24 Jan 2019 17:43:55 -0500
+Message-ID: <CAGvkhO+GZg6q2fXNzUeWJ1RW9Xmb0DyC3NEuBreUU-gk95N24w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] libqmi: Update to 1.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,80 +46,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2019 18:18:02 -0000
+X-List-Received-Date: Thu, 24 Jan 2019 22:44:06 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jan 23, 2019 at 11:28 PM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
->
-> On 1/23/19 10:58 PM, Randy MacLeod wrote:
-> > Update to latest git HEAD which includes a fix for CVE-2018-15127.
-> >
-> > Support for lzo in addition to a bundled minilzo was added so
-> > add a PACKAGECONFIG[lzo] and add it to the default config.
-> >
-> > Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> > ---
-> >   meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb | 5 +++--
-> >   1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> > index 25917756f..b789055bb 100644
-> > --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> > +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> > @@ -5,10 +5,11 @@ PRIORITY = "optional"
-> >   LICENSE = "GPLv2"
-> >   LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
-> >
-> > -PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
-> > +PACKAGECONFIG ??= "gcrypt gnutls jpeg png lzo ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
-> >   PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
-> >   PACKAGECONFIG[gnutls] = ",,gnutls"
-> >   PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
-> > +PACKAGECONFIG[lzo] = ",,lzo"
-> >   PACKAGECONFIG[openssl] = ",,openssl"
-> >   PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
-> >   PACKAGECONFIG[systemd] = ",,systemd"
-> > @@ -18,6 +19,6 @@ PACKAGECONFIG[zlib] = ",,zlib"
-> >   inherit cmake
-> >
-> >   SRC_URI = "git://github.com/LibVNC/libvncserver"
-> > -SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
-> > +SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
-> >
-> >   S = "${WORKDIR}/git"
-> >
->
-> glibc builds are fine,
-> musl builds are underway.
->
->
-> There are some packaging warnings that I haven't fixed.
->
-> It would seem to me that the .so files should be separated
-> into:
-> libvncserver
-> libvncclient
-> along with a single -dev/dgb package just like debian does:
->
-> $ apt show libvnc<TAB>
-> libvncclient1        libvncclient1-dbg    libvncserver1
-> libvncserver1-dbg    libvncserver-config  libvncserver-dev
->
-> I'm not sure what's in the -config package yet.
->
-> I'll make these packaging changes in another commit in a few days
-> unless someone objects or beats me to it.
->
+Signed-off-by: Glenn Stroz <gstroz@uber.com>
+---
+ ...t-create-invalid-wds-start-network-w.patch | 41 -------------------
+ .../{libqmi_1.20.2.bb => libqmi_1.22.0.bb}    |  6 +--
+ 2 files changed, 3 insertions(+), 44 deletions(-)
+ delete mode 100644
+meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.20.2.bb =>
+libqmi_1.22.0.bb} (78%)
 
-I will wait for v2 but give it a shot in local build but this patch
-does not apply on master.
-> --
-> # Randy MacLeod
-> # Wind River Linux
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+deleted file mode 100644
+index d230d6803..000000000
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 8269f4d86927fbe19e78776a12736680fe9169b6 Mon Sep 17 00:00:00 2001
+-From: Adrian Bunk <bunk@stusta.de>
+-Date: Mon, 1 Oct 2018 16:53:31 +0300
+-Subject: [PATCH] qmi-network: Don't create invalid --wds-start-network when
+- APN is not set
+-
+-In 1.20.2 the warning for this was turned into an error.
+-
+-(cherry picked from commit 289d8ad6419895e2e1fba3d78a54a0db65da521d)
+----
+-Upstream-Status: Backport
+-
+- utils/qmi-network.in | 12 +++++++-----
+- 1 file changed, 7 insertions(+), 5 deletions(-)
+-
+-diff --git a/utils/qmi-network.in b/utils/qmi-network.in
+-index bf7bed9..a9e5299 100755
+---- a/utils/qmi-network.in
+-+++ b/utils/qmi-network.in
+-@@ -334,11 +334,13 @@ start_network ()
+-
+-     setup_data_format
+-
+--    START_NETWORK_ARGS="apn='$APN'"
+--    if [ -n "$APN_USER" ]; then
+--        START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
+--        if [ -n "$APN_PASS" ]; then
+--            START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
+-+    if [ -n "$APN" ]; then
+-+        START_NETWORK_ARGS="apn='$APN'"
+-+        if [ -n "$APN_USER" ]; then
+-+            START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
+-+            if [ -n "$APN_PASS" ]; then
+-+
+START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
+-+            fi
+-         fi
+-     fi
+-
+---
+-2.7.4
+-
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+b/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
+similarity index 78%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
+index f0bc81cc9..c15dfb472 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
+@@ -12,12 +12,12 @@ DEPENDS = "glib-2.0 glib-2.0-native"
+ inherit autotools pkgconfig bash-completion
+
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+-           file://0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
+\
+            file://0001-Detect-clang.patch \
+            "
+-SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
+-SRC_URI[sha256sum] =
+"c73459ca8bfe1213f8047858d4946fc1f58e164d4f488a7a6904edee25e2ca44"
++SRC_URI[md5sum] = "35f7e1b03f9b6218a30c78422f72c6ac"
++SRC_URI[sha256sum] =
+"21c198b481f1617bb7edb1960d823569de3e38b269dbf513af1b56048cafaa17"
+
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+ PACKAGECONFIG[mbim] = "--enable-mbim-qmux,--disable-mbim-qmux,libmbim"
++
+-- 
+2.20.1
 
