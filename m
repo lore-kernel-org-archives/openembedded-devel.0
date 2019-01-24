@@ -1,39 +1,39 @@
 Return-Path: <gstroz@uber.com>
-Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
-	[209.85.217.65])
-	by mail.openembedded.org (Postfix) with ESMTP id F000E7C31F
+Received: from mail-vk1-f178.google.com (mail-vk1-f178.google.com
+	[209.85.221.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 743EC7C2FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 22:44:05 +0000 (UTC)
-Received: by mail-vs1-f65.google.com with SMTP id z3so4562980vsf.7
+	Thu, 24 Jan 2019 22:57:40 +0000 (UTC)
+Received: by mail-vk1-f178.google.com with SMTP id b18so1727100vke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 14:44:07 -0800 (PST)
+	Thu, 24 Jan 2019 14:57:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uber.com; s=google;
 	h=mime-version:from:date:message-id:subject:to;
 	bh=Nqm+7Nntvq1FMHRO4IeFkuj70rZ5XHck/vun/zjtS/M=;
-	b=pSpKrkjYFwamrjz38+pqbi4CuZKFNxVif0WN+iA/Q6JlEZM5+Vk2bR3j1T9Ti1MhdG
-	+Dgcs95sjvjkmq4HgRJIWc3pFwAXAm6c20+FczHC2+anKG54ZZ6tJyOoT7Z7Arjh+De4
-	v85/09nPFivJXXBfmz7lhX+wtPkgz8CmoWEXU=
+	b=IZrluGw8U3rBaFSidQET8RqzAA/rvqSU0iLjnsTWDmhmFobhEZFmX0avvhD9xqjoyu
+	N4HPsIU67pW+ABep1wG2go5ps1jVEP9R7Z8GeLLwKeNmuZXgZMGFVtpFCp8y6XwHFIQQ
+	XAdju40RYYzg1fFbB3TrSilWSbRxrPn4yNqKU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
 	bh=Nqm+7Nntvq1FMHRO4IeFkuj70rZ5XHck/vun/zjtS/M=;
-	b=NcuMgIwO5TOsuI/x5o2b9boG0CzzHYQBPjmJlK5hqs82plQM/iqlJ1rMSFXDZmnGrZ
-	xNvvCnXCoCDt2spSTE9T8dUqFaROizwOJZy6BuWoWCQkEZwKDnQhZV9VYRnObmSEWOIO
-	pSopefQUb9N0WvPee9kO8CfRaXGbyE3dwV8qhuXyM23QTzbVl6U10JzkeLMv2AjQlJeQ
-	Foq2FXw5/tW6cTtcEmNTxM2OpGeL6FsDsuicU0wOkeuPokvGfV3pjUqtbRWd8duWvx3A
-	CXLyXg+a7wMxpC6CS49LkvuXpD2tQ0IaIY2ms9OfXtI/iH3/0uMV9uGamu+VMF79oNkU
-	TGRA==
-X-Gm-Message-State: AJcUukdBcFmnkikvbppg3PIhYrTucsslnubT7jnRAJCxhrioc5+9B8WX
-	PNFgcui6+uRbiegZyLpvh2l6D3cC8dpWia6shrC7cFgTTU4=
-X-Google-Smtp-Source: ALg8bN7ixMIF+0yjvnqS73H2tbeUNfRbFS4IBqC67sAlMfg2dPgBSnLooVbDCz1oX/4cnw+LAA4YqQyF6Vvivia34WE=
-X-Received: by 2002:a67:e34e:: with SMTP id s14mr3439420vsm.95.1548369846395; 
-	Thu, 24 Jan 2019 14:44:06 -0800 (PST)
+	b=HC2cxgl3tRbSbBpPOV9pqLuRgnGJ7QFtkEWhZFqT6l2YaoJgnS9G8ccne3Kf2IS/QI
+	rIrRhfZ+/dY99gC8eAaPgbl6LJJtRlQu67T8qzEEHPoOaf884uHmvEa5L1FuFg4jgdzq
+	u2mFVVNyZVMIFhlKaKIbQ2uOeVDrE0Cq9pz8SsLaPgwZnbuNepUOCY0jt7XJY1p+xbOZ
+	YQJYWHCs/ySccp9FTClh7QBIfjkY/3XXTQwtP3MjNu7sAzLg5eUS0fNVDjMGDKqW+5kO
+	Dk6ouZdcRgVAi/g2fYvUa2eZHuRIeeCvJth3ZQWvJhoYzazTXxx8QS+20DTvZ/09XJ6c
+	2QlA==
+X-Gm-Message-State: AJcUukdLEtQ9mqj+nXpddYuPseqeoGpgDN3nYcJ5wBrykawvIOQf7U4Q
+	5f41YlarNgEEWIlIX12IYvQLVk06WrvVC2L5rRzYQoDXmAA=
+X-Google-Smtp-Source: ALg8bN72Vora00DpuWG1tr42RFIYSQlC4MOaGOB/OHShAorCmtDiwZHuVtBwvFBAKfJde7TAWAzGmGcNnzZnFfPmrP4=
+X-Received: by 2002:a1f:2145:: with SMTP id h66mr3585862vkh.65.1548370660785; 
+	Thu, 24 Jan 2019 14:57:40 -0800 (PST)
 MIME-Version: 1.0
 From: Glenn Stroz <gstroz@uber.com>
-Date: Thu, 24 Jan 2019 17:43:55 -0500
-Message-ID: <CAGvkhO+GZg6q2fXNzUeWJ1RW9Xmb0DyC3NEuBreUU-gk95N24w@mail.gmail.com>
+Date: Thu, 24 Jan 2019 17:57:29 -0500
+Message-ID: <CAGvkhOKAJbq++7QHCU_qOSgDiQWLYusfD9P02Xk8r=a3XpPMkQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libqmi: Update to 1.22.0
+Subject: [meta-oe][PATCH v2] libqmi: Update to 1.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2019 22:44:06 -0000
+X-List-Received-Date: Thu, 24 Jan 2019 22:57:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 Signed-off-by: Glenn Stroz <gstroz@uber.com>
