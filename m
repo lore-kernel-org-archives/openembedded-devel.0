@@ -1,26 +1,33 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id F21377C2AA
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 139507C2E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2019 14:47:21 +0000 (UTC)
-Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id B0933218CD;
-	Fri, 25 Jan 2019 14:47:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1548427643;
-	bh=vNTntjXggMFRcMgrX16uHkJsNbe4q0VNw10ymuHmIlk=;
-	h=From:To:Cc:Subject:Date:From;
-	b=yKn15dKVIwoz3DbjJDjTiQUM1ge5PZssvwRHOz49nAoSUKSrL81uCUndu7rlrC8UT
-	J75TWVk1bpbTP8BcGp+LHdts8BZ62J37CL6f6eyJ0U0dkM842uSe+0eYYOYa2+JgkX
-	eNy0GGAp3dnpS4Lt/w//l+GPsVJx1Hiw/g6mmp6I=
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jan 2019 15:46:47 +0100
-Message-Id: <1548427607-12485-1-git-send-email-krzk@kernel.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] civetweb: Bump to v1.11
+	Fri, 25 Jan 2019 17:26:02 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 8AF8A5C078F;
+	Fri, 25 Jan 2019 18:26:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1548437163;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=5usW/vvneBQw8XJuhUCjNUqQ9cP8YB+Daf+HwTl3CtM=;
+	b=T6e/JLleeg60PsyTzzlfWHIl1e+1gS5/817JO7Neem0gTIcp2fpUZ51263C++S1DiRh0vQ
+	Ba7CeFLzxXJj9xLBl/zQvJYDLPoHD98KJpLsl7PdwEUkD5q0F+9vaKui0hLQzVwAsmV1fP
+	2G278fw0HlaqElpqCoEPOXb9U/ChUG4=
+MIME-Version: 1.0
+Date: Fri, 25 Jan 2019 18:26:03 +0100
+From: Stefan Agner <stefan@agner.ch>
+To: Mike Looijmans <mike.looijmans@topic.nl>
+In-Reply-To: <c0e76ec3-4cc9-38cc-bdac-eadd69eab14a@topic.nl>
+References: <4f3f8463750770c686b010b7270351b2@agner.ch>
+	<c0e76ec3-4cc9-38cc-bdac-eadd69eab14a@topic.nl>
+Message-ID: <afcb2f61ca3adfef2e312fc3b8f23215@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.3.7
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Python3 bytecode is stale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,77 +40,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2019 14:47:22 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 17:26:03 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Drop upstream accepted patch.
+On 25.01.2019 15:35, Mike Looijmans wrote:
+> Most likely the date/time stamps on the files are such that the "py" files 
+> appear to be newer.
 
-Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
----
- .../0001-undefine-macro-before-redefining.patch    | 26 ----------------------
- .../recipes-connectivity/civetweb/civetweb_git.bb  |  7 +++---
- 2 files changed, 3 insertions(+), 30 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/0001-undefine-macro-before-redefining.patch
+Indeed, this seems to be the issue. We are using OSTree, which removes
+mtimes. Ricardo (now on CC) also pointed me to the relevant issue in
+OSTree:
+https://github.com/ostreedev/ostree/issues/1469
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-undefine-macro-before-redefining.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-undefine-macro-before-redefining.patch
-deleted file mode 100644
-index 8653302130e8..000000000000
---- a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-undefine-macro-before-redefining.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 59f65235a7a690f50d1686e9977908c053697d8c Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 28 Aug 2018 22:59:13 -0700
--Subject: [PATCH] undefine macro before redefining
--
--Fixes
--src/main.c:89:9: error: 'printf' macro redefined [-Werror,-Wmacro-redefined]
--
--Upstream-Stats: Submitted [https://github.com/civetweb/civetweb/pull/649]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/main.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/src/main.c b/src/main.c
--index bbcb0aec..01191a3c 100644
----- a/src/main.c
--+++ b/src/main.c
--@@ -86,6 +86,7 @@
-- 
-- #include "civetweb.h"
-- 
--+#undef printf
-- #define printf                                                                 \
-- 	DO_NOT_USE_THIS_FUNCTION__USE_fprintf /* Required for unit testing */
-- 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-index d681f7f30ca0..c8fe24c6375f 100644
---- a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-@@ -4,11 +4,10 @@ HOMEPAGE = "https://github.com/civetweb/civetweb"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f28fdcba0dda735eed62bac6a397562"
- 
--SRCREV = "19f31ba8dd8443e86c7028a4b4c37f4b299aa68c"
--PV = "1.10+git${SRCPV}"
-+SRCREV = "ce8f6d38a60eb16c996afee1e5340f76ef4d0923"
-+PV = "1.11+git${SRCPV}"
- SRC_URI = "git://github.com/civetweb/civetweb.git \
-            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
--           file://0001-undefine-macro-before-redefining.patch \
-            "
- 
- S = "${WORKDIR}/git"
-@@ -36,7 +35,7 @@ PACKAGECONFIG[cgi] = "-DCIVETWEB_DISABLE_CGI=OFF,-DCIVETWEB_DISABLE_CGI=ON,"
- PACKAGECONFIG[cpp] = "-DCIVETWEB_ENABLE_CXX=ON,-DCIVETWEB_ENABLE_CXX=OFF,"
- PACKAGECONFIG[debug] = "-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=ON,-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=OFF,"
- PACKAGECONFIG[ipv6] = "-DCIVETWEB_ENABLE_IPV6=ON,-DCIVETWEB_ENABLE_IPV6=OFF,"
--PACKAGECONFIG[server] = "-DCIVETWEB_INSTALL_EXECUTABLE=ON,-DCIVETWEB_INSTALL_EXECUTABLE=OFF,"
-+PACKAGECONFIG[server] = "-DCIVETWEB_ENABLE_SERVER_EXECUTABLE=ON -DCIVETWEB_INSTALL_EXECUTABLE=ON,-DCIVETWEB_ENABLE_SERVER_EXECUTABLE=OFF -DCIVETWEB_INSTALL_EXECUTABLE=OFF,"
- PACKAGECONFIG[ssl] = "-DCIVETWEB_ENABLE_SSL=ON -DCIVETWEB_SSL_OPENSSL_API_1_1=OFF -DCIVETWEB_ENABLE_SSL_DYNAMIC_LOADING=OFF,-DCIVETWEB_ENABLE_SSL=OFF,openssl (=1.0.2%),"
- PACKAGECONFIG[websockets] = "-DCIVETWEB_ENABLE_WEBSOCKETS=ON,-DCIVETWEB_ENABLE_WEBSOCKETS=OFF,"
- 
--- 
-2.7.4
+> 
+> A very simple fix would be to simply delete the ".py" files, they aren't 
+> really needed anyway so you'll save a lot of space in the process.
+> 
+> To do this compile-time, you could add something like this in a bbappend:
+> PACKAGES =+ "${PN}-src"
+> FILES_${PN}-src = "{installdir}/*.py {installdir}/*/*.py"
+> 
+> That'll push the "py" files into another package and prevent them being 
+> installed by default. Change "{installdir}" into something more appropriate.
+> Of just delete them in a do_install_append.
 
+Hm, interesting idea, will give this a try.
+
+Wouldn't be something like this be a nice OpenEmbedded addition in
+general? Optimizing embedded rootfs size by deleting py files seems to
+be a common use case.
+
+In a simple test deleting all py files on my rootfs did not go well (the
+application does not start anymore). I need to investigate further.
+
+--
+Stefan
+
+> 
+> 
+> On 25-01-19 14:46, Stefan Agner wrote:
+>> Hi,
+>>
+>> Recently I noticed that Python3 programs got rather slow. Running the
+>> test application took 12.5 seconds. We are using a read-only file system
+>> and I immediately suspected the bytecode cache. After mounting the
+>> rootfs rw, from the second execution on running the test application
+>> took below 4 seconds.
+>>
+>> By simply executing a Hello World, Python declares all code objects as
+>> being stale and tries to rewrite them:
+>>
+>> # python3 -v -c 'print("Hello World")'
+>> import _frozen_importlib # frozen
+>> import _imp # builtin
+>> import sys # builtin
+>> import '_warnings' # <class '_frozen_importlib.BuiltinImporter'>
+>> import '_thread' # <class '_frozen_importlib.BuiltinImporter'>
+>> import '_weakref' # <class '_frozen_importlib.BuiltinImporter'>
+>> import '_frozen_importlib_external' # <class
+>> '_frozen_importlib.FrozenImporter'>
+>> import '_io' # <class '_frozen_importlib.BuiltinImporter'>
+>> import 'marshal' # <class '_frozen_importlib.BuiltinImporter'>
+>> import 'posix' # <class '_frozen_importlib.BuiltinImporter'>
+>> import _thread # previously loaded ('_thread')
+>> import '_thread' # <class '_frozen_importlib.BuiltinImporter'>
+>> import _weakref # previously loaded ('_weakref')
+>> import '_weakref' # <class '_frozen_importlib.BuiltinImporter'>
+>> # installing zipimport hook
+>> import 'zipimport' # <class '_frozen_importlib.BuiltinImporter'>
+>> # installed zipimport hook
+>> # bytecode is stale for 'encodings'
+>> # code object from /usr/lib/python3.5/encodings/__init__.py
+>> # could not create
+>> '/usr/lib/python3.5/encodings/__pycache__/__init__.cpython-35.pyc':
+>> OSError(30, 'Read-only file system')
+>> # wrote
+>> '/usr/lib/python3.5/encodings/__pycache__/__init__.cpython-35.pyc'
+>> # bytecode is stale for 'codecs'
+>> # code object from /usr/lib/python3.5/codecs.py
+>> # could not create
+>> '/usr/lib/python3.5/__pycache__/codecs.cpython-35.pyc': OSError(30,
+>> 'Read-only file system')
+>> # wrote '/usr/lib/python3.5/__pycache__/codecs.cpython-35.pyc'
+>> import '_codecs' # <class '_frozen_importlib.BuiltinImporter'>
+>> import 'codecs' # <_frozen_importlib_external.SourceFileLoader object at
+>> 0xb6b33130>
+>> # bytecode is stale for 'encodings.aliases'
+>> # code object from /usr/lib/python3.5/encodings/aliases.py
+>> # could not create
+>> '/usr/lib/python3.5/encodings/__pycache__/aliases.cpython-35.pyc':
+>> OSError(30, 'Read-only file system')
+>> # wrote
+>> '/usr/lib/python3.5/encodings/__pycache__/aliases.cpython-35.pyc'
+>> import 'encodings.aliases' #
+>> <_frozen_importlib_external.SourceFileLoader object at 0xb6b3d9d0>
+>> import 'encodings' # <_frozen_importlib_external.SourceFileLoader object
+>> at 0xb6b154b0>
+>> # bytecode is stale for 'encodings.ascii'
+>> # code object from /usr/lib/python3.5/encodings/ascii.py
+>> # could not create
+>> '/usr/lib/python3.5/encodings/__pycache__/ascii.cpython-35.pyc':
+>> OSError(30, 'Read-only file system')
+>> # wrote '/usr/lib/python3.5/encodings/__pycache__/ascii.cpython-35.pyc'
+>> import 'encodings.ascii' # <_frozen_importlib_external.SourceFileLoader
+>> object at 0xb6b3db10>
+>> import '_signal' # <class '_frozen_importlib.BuiltinImporter'>
+>> ....
+>>
+>>
+>> This is on a Armv7 device. OpenEmbedded layers are current master.
+>> Python version is 3.5.6. Is this a known issue? Any idea?
+>>
+>> --
+>> Stefan
+>>
 
