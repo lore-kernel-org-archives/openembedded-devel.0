@@ -1,40 +1,41 @@
 Return-Path: <gstroz@uber.com>
-Received: from mail-vs1-f47.google.com (mail-vs1-f47.google.com
-	[209.85.217.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D14357C346
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com
+	[209.85.217.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FA82748F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2019 03:32:24 +0000 (UTC)
-Received: by mail-vs1-f47.google.com with SMTP id x28so4878141vsh.12
+	Fri, 25 Jan 2019 03:39:53 +0000 (UTC)
+Received: by mail-vs1-f51.google.com with SMTP id n13so4921021vsk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2019 19:32:26 -0800 (PST)
+	Thu, 24 Jan 2019 19:39:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uber.com; s=google;
 	h=mime-version:from:date:message-id:subject:to;
-	bh=IfCyF91CkJ0+2jLOXnU558h5vr+6crYhvljpfXraBx4=;
-	b=4XsnIDUh1aBDtOmrVS7FQysHqwgP1LqjCvLP3QhNr1WDl3q7JbrsNvVTGvfxOjaLbZ
-	Rs2ED34q0TgqP4QRm5gyI4zHrXbxwTUxPv3nxUmDsjWJwRPKji1TgUSHovgMmL6DApMe
-	IXnKmhZJKC9bAMN0UqQJe+IodGM2EJcJwfyn8=
+	bh=+EqK1eh9zSv+XaslmrLMMHxttWUaVXz5IVKUIxURfSc=;
+	b=ztHz8q3f0r1DdjMZwb3Yx4ZLP2Z5BaKk1BO78mw0LQp6TORMLMd2EpBhTgV9R/EZA5
+	GGdEC3UNeHWsu+/zia3bpRFLyzobeeNBpZ96qFbFb/mnz17tFk40VAL61HHKLvlZsqdy
+	x1/2OZ+RG4JJLjvEA8jYkx7QpcSvBQxWMhX8M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=IfCyF91CkJ0+2jLOXnU558h5vr+6crYhvljpfXraBx4=;
-	b=Sk+C7SgxX8BhCB96iHg/ws0NVjP7vQtyo1W8dkZY+McAjWHPxC9sQexLQjRwqWmlHJ
-	zVCHTJeK/sEFqiSE59MZcbEW6PoWvFvpGqvrZRxyM6eQ3zeTKHYta0m9Dv/A7OFHe7ad
-	DJNJ455UENiggeAala0suNSaXu/CmgQ9n163AOu0VHSN2gLb73ljEdhhEVnlH8r4YWHv
-	bQUxSVOeIAtPfakDd8iPC5zRWqQ6hBEjwQj5TP9QiJ2UaRjXedePEeNc/GXMOKe2Obup
-	/qgFVWtlCXkwQqd/47kRQmJjgcrIxH+q3yq/KnBtEvgbpRhdQWRgxerrhyjYgDm9W59/
-	58Ug==
-X-Gm-Message-State: AJcUukfP9ItNoQlacIwoUqhmsv7XpBMbYSCHWJ3yAT8E36DDmD80XkJe
-	ng1zpgbAY8x3N/UHb3a3onP+kLAOtelszFVvv7LIs9+WK+4=
-X-Google-Smtp-Source: ALg8bN7B4ieJI5V8bvZdAYocsKRdenUo9uLNgdukWVo5yBhlY6iYCqZ5EzGru0bv0MFQerd3GP6qzlaat1r2tYoEVJ4=
-X-Received: by 2002:a67:edd8:: with SMTP id e24mr4054936vsp.169.1548387145239; 
-	Thu, 24 Jan 2019 19:32:25 -0800 (PST)
+	bh=+EqK1eh9zSv+XaslmrLMMHxttWUaVXz5IVKUIxURfSc=;
+	b=ooNZsJvTF65JdNKo8PKCz4akQXJazE5JqA7BHlSBia8LQY2hjbDZQFlyNBXtCi14lP
+	q1AHHc2y28Ud1Oe0mvf/u02pShTroGSlE11z0JFhylzVO17KPBwqPZy29JpELSwtzfiM
+	Czst019Bm5Ix3jgAXBzAoDLtj6txRoEXHwQqrpOUU3EyqsBnQ4OH3PwvCtyMxvwM+efC
+	2VWhWbmJi8rG1/4LPXMAik/Nf0R6V5u/0ME5lwMXRA5oVH6IFHBwLK6dh+NhXyBLPBp/
+	JDd8ywHF+jd2Qam9DfCK5Gf5znEvWaCnGFkjPfFrNzLOFmDJBJmjrvdIOfVBLRBUH4Tj
+	sDmQ==
+X-Gm-Message-State: AJcUukezTmEEiqjngb0B2dkrCH8J5eTRSATmjuLbPmYsBMOiQhF5mwzQ
+	YegZ7DFawDNRWsVA0yFi8bv+JTgh++JwMrCe7A4WcLBO
+X-Google-Smtp-Source: ALg8bN7U6nvhNP+11wAhor0qsXyifpJJ/RteDvK1j7DrCnMwp3LqzqoFXrSUjMuqVkjyrExS8rLKPNgADPEI6xEr/tc=
+X-Received: by 2002:a67:edd8:: with SMTP id e24mr4063506vsp.169.1548387593825; 
+	Thu, 24 Jan 2019 19:39:53 -0800 (PST)
 MIME-Version: 1.0
 From: Glenn Stroz <gstroz@uber.com>
-Date: Thu, 24 Jan 2019 22:32:14 -0500
-Message-ID: <CAGvkhOKeZDU985PGVoAPqYebaN3x3bs2Y_MKjrGOmpnuSWSAOw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Jan 2019 22:39:42 -0500
+Message-ID: <CAGvkhOKTk5jicBPL66GY--+g=ZcJ-MO_PY_8iwrXC=Nyc7WaJQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][PATCH v3] libqmi: Update to 1.22.0
+Subject: [meta-oe][PATCH v4] libqmi: Update to 1.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,99 +48,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2019 03:32:25 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 03:39:53 -0000
+X-Groupsio-MsgNum: 76127
+Content-Type: multipart/mixed; boundary="000000000000826bc90580401486"
+
+--000000000000826bc90580401486
 Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Glenn Stroz <gstroz@uber.com>
----
- ...t-create-invalid-wds-start-network-w.patch | 41 -------------------
- .../{libqmi_1.20.2.bb => libqmi_1.22.0.bb}    |  6 +--
- 2 files changed, 3 insertions(+), 44 deletions(-)
- delete mode 100644
-meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.20.2.bb =>
-libqmi_1.22.0.bb} (78%)
+Giving up on inline patches for now.
 
-diff --git
-a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
-b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
-deleted file mode 100644
-index d230d6803..000000000
----
-a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 8269f4d86927fbe19e78776a12736680fe9169b6 Mon Sep 17 00:00:00 2001
--From: Adrian Bunk <bunk@stusta.de>
--Date: Mon, 1 Oct 2018 16:53:31 +0300
--Subject: [PATCH] qmi-network: Don't create invalid --wds-start-network when
-- APN is not set
--
--In 1.20.2 the warning for this was turned into an error.
--
--(cherry picked from commit 289d8ad6419895e2e1fba3d78a54a0db65da521d)
-----
--Upstream-Status: Backport
--
-- utils/qmi-network.in | 12 +++++++-----
-- 1 file changed, 7 insertions(+), 5 deletions(-)
--
--diff --git a/utils/qmi-network.in b/utils/qmi-network.in
--index bf7bed9..a9e5299 100755
----- a/utils/qmi-network.in
--+++ b/utils/qmi-network.in
--@@ -334,11 +334,13 @@ start_network ()
--
--     setup_data_format
--
---    START_NETWORK_ARGS="apn='$APN'"
---    if [ -n "$APN_USER" ]; then
---        START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
---        if [ -n "$APN_PASS" ]; then
---
- START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
--+    if [ -n "$APN" ]; then
--+        START_NETWORK_ARGS="apn='$APN'"
--+        if [ -n "$APN_USER" ]; then
--+
- START_NETWORK_ARGS="${START_NETWORK_ARGS},username='$APN_USER'"
--+            if [ -n "$APN_PASS" ]; then
--+
- START_NETWORK_ARGS="${START_NETWORK_ARGS},password='$APN_PASS'"
--+            fi
--         fi
--     fi
--
----
--2.7.4
--
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
-b/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
-similarity index 78%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
-index f0bc81cc9..c15dfb472 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.0.bb
-@@ -12,12 +12,12 @@ DEPENDS = "glib-2.0 glib-2.0-native"
- inherit autotools pkgconfig bash-completion
+--000000000000826bc90580401486
+Content-Type: text/x-patch; charset="US-ASCII"; name="0001-libqmi-Upgrade-to-1.22.0.patch"
+Content-Disposition: attachment; 
+	filename="0001-libqmi-Upgrade-to-1.22.0.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_jrbhzbx70>
+X-Attachment-Id: f_jrbhzbx70
 
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
--
-file://0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch \
-            file://0001-Detect-clang.patch \
-            "
--SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
--SRC_URI[sha256sum] =
-"c73459ca8bfe1213f8047858d4946fc1f58e164d4f488a7a6904edee25e2ca44"
-+SRC_URI[md5sum] = "35f7e1b03f9b6218a30c78422f72c6ac"
-+SRC_URI[sha256sum] =
-"21c198b481f1617bb7edb1960d823569de3e38b269dbf513af1b56048cafaa17"
+RnJvbSBiMWZhMDgxZmNkNzk1Mzg0ZTM3ZGQyMDc4MDcyZTc3MDcwNTU5Y2YxIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBHbGVubiBTdHJveiA8Z3N0cm96QHViZXIuY29tPgpEYXRlOiBX
+ZWQsIDIzIEphbiAyMDE5IDE5OjU4OjAxIC0wNTAwClN1YmplY3Q6IFtQQVRDSF0gbGlicW1pOiBV
+cGdyYWRlIHRvIDEuMjIuMAoKU2lnbmVkLW9mZi1ieTogR2xlbm4gU3Ryb3ogPGdzdHJvekB1YmVy
+LmNvbT4KLS0tCiAuLi50LWNyZWF0ZS1pbnZhbGlkLXdkcy1zdGFydC1uZXR3b3JrLXcucGF0Y2gg
+fCA0MSAtLS0tLS0tLS0tLS0tLS0tLS0tCiAuLi4ve2xpYnFtaV8xLjIwLjIuYmIgPT4gbGlicW1p
+XzEuMjIuMC5iYn0gICAgfCAgNiArLS0KIDIgZmlsZXMgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCsp
+LCA0NCBkZWxldGlvbnMoLSkKIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtY29u
+bmVjdGl2aXR5L2xpYnFtaS9saWJxbWkvMDAwMS1xbWktbmV0d29yay1Eb24tdC1jcmVhdGUtaW52
+YWxpZC13ZHMtc3RhcnQtbmV0d29yay13LnBhdGNoCiByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLWNv
+bm5lY3Rpdml0eS9saWJxbWkve2xpYnFtaV8xLjIwLjIuYmIgPT4gbGlicW1pXzEuMjIuMC5iYn0g
+KDc4JSkKCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L2xpYnFtaS9s
+aWJxbWkvMDAwMS1xbWktbmV0d29yay1Eb24tdC1jcmVhdGUtaW52YWxpZC13ZHMtc3RhcnQtbmV0
+d29yay13LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9saWJxbWkvbGlicW1p
+LzAwMDEtcW1pLW5ldHdvcmstRG9uLXQtY3JlYXRlLWludmFsaWQtd2RzLXN0YXJ0LW5ldHdvcmst
+dy5wYXRjaApkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggZDIzMGQ2ODAzLi4wMDAwMDAw
+MDAKLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9saWJxbWkvbGlicW1pLzAwMDEt
+cW1pLW5ldHdvcmstRG9uLXQtY3JlYXRlLWludmFsaWQtd2RzLXN0YXJ0LW5ldHdvcmstdy5wYXRj
+aAorKysgL2Rldi9udWxsCkBAIC0xLDQxICswLDAgQEAKLUZyb20gODI2OWY0ZDg2OTI3ZmJlMTll
+Nzg3NzZhMTI3MzY2ODBmZTkxNjliNiBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKLUZyb206IEFk
+cmlhbiBCdW5rIDxidW5rQHN0dXN0YS5kZT4KLURhdGU6IE1vbiwgMSBPY3QgMjAxOCAxNjo1Mzoz
+MSArMDMwMAotU3ViamVjdDogW1BBVENIXSBxbWktbmV0d29yazogRG9uJ3QgY3JlYXRlIGludmFs
+aWQgLS13ZHMtc3RhcnQtbmV0d29yayB3aGVuCi0gQVBOIGlzIG5vdCBzZXQKLQotSW4gMS4yMC4y
+IHRoZSB3YXJuaW5nIGZvciB0aGlzIHdhcyB0dXJuZWQgaW50byBhbiBlcnJvci4KLQotKGNoZXJy
+eSBwaWNrZWQgZnJvbSBjb21taXQgMjg5ZDhhZDY0MTk4OTVlMmUxZmJhM2Q3OGE1NGEwZGI2NWRh
+NTIxZCkKLS0tLQotVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydAotCi0gdXRpbHMvcW1pLW5ldHdv
+cmsuaW4gfCAxMiArKysrKysrLS0tLS0KLSAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCsp
+LCA1IGRlbGV0aW9ucygtKQotCi1kaWZmIC0tZ2l0IGEvdXRpbHMvcW1pLW5ldHdvcmsuaW4gYi91
+dGlscy9xbWktbmV0d29yay5pbgotaW5kZXggYmY3YmVkOS4uYTllNTI5OSAxMDA3NTUKLS0tLSBh
+L3V0aWxzL3FtaS1uZXR3b3JrLmluCi0rKysgYi91dGlscy9xbWktbmV0d29yay5pbgotQEAgLTMz
+NCwxMSArMzM0LDEzIEBAIHN0YXJ0X25ldHdvcmsgKCkKLSAKLSAgICAgc2V0dXBfZGF0YV9mb3Jt
+YXQKLSAKLS0gICAgU1RBUlRfTkVUV09SS19BUkdTPSJhcG49JyRBUE4nIgotLSAgICBpZiBbIC1u
+ICIkQVBOX1VTRVIiIF07IHRoZW4KLS0gICAgICAgIFNUQVJUX05FVFdPUktfQVJHUz0iJHtTVEFS
+VF9ORVRXT1JLX0FSR1N9LHVzZXJuYW1lPSckQVBOX1VTRVInIgotLSAgICAgICAgaWYgWyAtbiAi
+JEFQTl9QQVNTIiBdOyB0aGVuCi0tICAgICAgICAgICAgU1RBUlRfTkVUV09SS19BUkdTPSIke1NU
+QVJUX05FVFdPUktfQVJHU30scGFzc3dvcmQ9JyRBUE5fUEFTUyciCi0rICAgIGlmIFsgLW4gIiRB
+UE4iIF07IHRoZW4KLSsgICAgICAgIFNUQVJUX05FVFdPUktfQVJHUz0iYXBuPSckQVBOJyIKLSsg
+ICAgICAgIGlmIFsgLW4gIiRBUE5fVVNFUiIgXTsgdGhlbgotKyAgICAgICAgICAgIFNUQVJUX05F
+VFdPUktfQVJHUz0iJHtTVEFSVF9ORVRXT1JLX0FSR1N9LHVzZXJuYW1lPSckQVBOX1VTRVInIgot
+KyAgICAgICAgICAgIGlmIFsgLW4gIiRBUE5fUEFTUyIgXTsgdGhlbgotKyAgICAgICAgICAgICAg
+ICBTVEFSVF9ORVRXT1JLX0FSR1M9IiR7U1RBUlRfTkVUV09SS19BUkdTfSxwYXNzd29yZD0nJEFQ
+Tl9QQVNTJyIKLSsgICAgICAgICAgICBmaQotICAgICAgICAgZmkKLSAgICAgZmkKLSAKLS0tIAot
+Mi43LjQKLQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9saWJxbWkv
+bGlicW1pXzEuMjAuMi5iYiBiL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvbGlicW1pL2xp
+YnFtaV8xLjIyLjAuYmIKc2ltaWxhcml0eSBpbmRleCA3OCUKcmVuYW1lIGZyb20gbWV0YS1vZS9y
+ZWNpcGVzLWNvbm5lY3Rpdml0eS9saWJxbWkvbGlicW1pXzEuMjAuMi5iYgpyZW5hbWUgdG8gbWV0
+YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9saWJxbWkvbGlicW1pXzEuMjIuMC5iYgppbmRleCBm
+MGJjODFjYzkuLmMxNWRmYjQ3MiAxMDA2NDQKLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rp
+dml0eS9saWJxbWkvbGlicW1pXzEuMjAuMi5iYgorKysgYi9tZXRhLW9lL3JlY2lwZXMtY29ubmVj
+dGl2aXR5L2xpYnFtaS9saWJxbWlfMS4yMi4wLmJiCkBAIC0xMiwxMiArMTIsMTIgQEAgREVQRU5E
+UyA9ICJnbGliLTIuMCBnbGliLTIuMC1uYXRpdmUiCiBpbmhlcml0IGF1dG90b29scyBwa2djb25m
+aWcgYmFzaC1jb21wbGV0aW9uCiAKIFNSQ19VUkkgPSAiaHR0cDovL3d3dy5mcmVlZGVza3RvcC5v
+cmcvc29mdHdhcmUvJHtCUE59LyR7QlBOfS0ke1BWfS50YXIueHogXAotICAgICAgICAgICBmaWxl
+Oi8vMDAwMS1xbWktbmV0d29yay1Eb24tdC1jcmVhdGUtaW52YWxpZC13ZHMtc3RhcnQtbmV0d29y
+ay13LnBhdGNoIFwKICAgICAgICAgICAgZmlsZTovLzAwMDEtRGV0ZWN0LWNsYW5nLnBhdGNoIFwK
+ICAgICAgICAgICAgIgotU1JDX1VSSVttZDVzdW1dID0gIjU4NDIxNDQ3NmFiNzVjMzk0MTYwY2I4
+NWZiY2NhYTFkIgotU1JDX1VSSVtzaGEyNTZzdW1dID0gImM3MzQ1OWNhOGJmZTEyMTNmODA0Nzg1
+OGQ0OTQ2ZmMxZjU4ZTE2NGQ0ZjQ4OGE3YTY5MDRlZGVlMjVlMmNhNDQiCitTUkNfVVJJW21kNXN1
+bV0gPSAiMzVmN2UxYjAzZjliNjIxOGEzMGM3ODQyMmY3MmM2YWMiCitTUkNfVVJJW3NoYTI1NnN1
+bV0gPSAiMjFjMTk4YjQ4MWYxNjE3YmI3ZWRiMTk2MGQ4MjM1NjlkZTNlMzhiMjY5ZGJmNTEzYWYx
+YjU2MDQ4Y2FmYWExNyIKIAogUEFDS0FHRUNPTkZJRyA/Pz0gInVkZXYgbWJpbSIKIFBBQ0tBR0VD
+T05GSUdbdWRldl0gPSAiLC0td2l0aG91dC11ZGV2LGxpYmd1ZGV2IgogUEFDS0FHRUNPTkZJR1tt
+YmltXSA9ICItLWVuYWJsZS1tYmltLXFtdXgsLS1kaXNhYmxlLW1iaW0tcW11eCxsaWJtYmltIgor
+Ci0tIAoyLjIwLjEKCg==
 
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
- PACKAGECONFIG[mbim] = "--enable-mbim-qmux,--disable-mbim-qmux,libmbim"
-+
--- 
-2.20.1
-
+--000000000000826bc90580401486--
