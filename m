@@ -1,27 +1,41 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 0ED756C494
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 45B757C309
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2019 09:45:44 +0000 (UTC)
-Received: from linuxdev2.toradex.int (unknown [46.140.72.82])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 185615C0231;
-	Mon, 28 Jan 2019 10:45:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1548668745;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
-	in-reply-to:references; bh=ZYpW1zGn+lQczzUhPLTH+wMo4HGrD+Hbb1vgYhzbvgc=;
-	b=u5+Up0K7j8DK+HJTEqwGTHYWL5KEqikkgFfJUB/UL4AodQQda4OQ/pZ3SFGttQojNKZYiy
-	Io9ShzwLKX01JGY33ES/TQunXHA7Tt02mKuxdQ0fsuw1PnABHIxRefS6HBCNxvV3I2vnce
-	nh8q8bEhMqbQjn02sPRqMAZS+/9wwK4=
-From: Stefan Agner <stefan@agner.ch>
-To: raj.khem@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Jan 2019 10:45:41 +0100
-Message-Id: <20190128094541.63253-1-stefan@agner.ch>
-X-Mailer: git-send-email 2.13.6
-Cc: Stefan Agner <stefan.agner@toradex.com>
-Subject: [PATCH] polkit: inherit distro_features_check
+	Mon, 28 Jan 2019 10:01:50 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
+	[209.85.167.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 50B03214DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jan 2019 10:01:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1548669711;
+	bh=AqAu1suG2DpbSxFDKy+FsdFQuDoq2EpixTSmZ8WFkDk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=j2dpn+ctTI/xAVxHRkQK4KEznSpxosyWRR5ESC8PDzosN8PTUMRRXSlkaFa4G51f3
+	dLVOEyBo61DziCXrlc0qMluh/ifjw+skFTXkz4NswNOrCb6MkdgeGUffTUb3lM86Ei
+	gFbwlJ7OG4UDVSRKm+MrcZdbalroMYsYuV5tMeQ0=
+Received: by mail-lf1-f43.google.com with SMTP id v5so11354650lfe.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jan 2019 02:01:51 -0800 (PST)
+X-Gm-Message-State: AJcUuke3jNdai7nkNA5C6qtu7mNO4Y7pcKuAb6o1aghqWNjhetdh3+9c
+	jACKYd2YMEUc8dedtzPVytd+Bp9PvHvaPwLghWs=
+X-Google-Smtp-Source: ALg8bN4zZo7NS4yUFjyVTgLtY+Vt/H7qSR7iQfiEXHnQ3std40w87I/JhxvvePdCZK8IuJV5kCZexLfEXAHtJ9kiPtE=
+X-Received: by 2002:a19:4948:: with SMTP id l8mr5390905lfj.156.1548669709416; 
+	Mon, 28 Jan 2019 02:01:49 -0800 (PST)
+MIME-Version: 1.0
+References: <1548421517-28338-1-git-send-email-krzk@kernel.org>
+	<CAMKF1sp4PvP_U_DLYQitq-n_i__U9+ntKcPrg8Hin2Z3fq0StQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sp4PvP_U_DLYQitq-n_i__U9+ntKcPrg8Hin2Z3fq0StQ@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Mon, 28 Jan 2019 11:01:38 +0100
+X-Gmail-Original-Message-ID: <CAJKOXPeNfLmapyJRYpWJzjq5p0CHYrAs2jkadmE5=2iCVMiu+A@mail.gmail.com>
+Message-ID: <CAJKOXPeNfLmapyJRYpWJzjq5p0CHYrAs2jkadmE5=2iCVMiu+A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] libkcapi: Fix missing bash (for apps) and unneeded checksums (for testapp) when building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2019 09:45:45 -0000
+X-List-Received-Date: Mon, 28 Jan 2019 10:01:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Stefan Agner <stefan.agner@toradex.com>
+On Fri, 25 Jan 2019 at 21:51, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Another approach could be remove bashism from the shell script which is demanding it and ask for simple bin/sh
 
-Make the recently added REQUIRED_DISTRO_FEATURES effective by
-inheriting distro_features_check.
+I took a look at this approach and it would be not trivial work.
+Bashism appears in multiple places, starting from trivial function
+keyword up to [[ ]] operators. On the other hand, these scripts are
+enabled only for testapps package config which are useful during
+development, not production. Therefore I expect that final image will
+not have testapps and bash.
 
-Fixes: 97a1a55f4755 ("polkit: add polkit as a required distro feature")
-Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
----
- meta-oe/recipes-extended/polkit/polkit_0.115.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.115.bb b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-index 90c2fb152..13c4b0259 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
- 
- DEPENDS = "expat glib-2.0 intltool-native mozjs"
- 
--inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
-+inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection distro_features_check
- 
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
--- 
-2.13.6
-
+Best regards,
+Krzysztof
 
