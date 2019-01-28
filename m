@@ -1,175 +1,23 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-X-Greylist: delayed 111424 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 26 Jan 2019 21:32:18 UTC
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr70059.outbound.protection.outlook.com [40.107.7.59])
-	by mail.openembedded.org (Postfix) with ESMTP id B2F9C7C41B
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C5C2C7C361
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jan 2019 21:32:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=topicbv.onmicrosoft.com; s=selector1-TopicProducts-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=eZ9S7gdSTkxnBzMXJCFHXS7zrhwJX1d3z9EI/0ldu40=;
-	b=fhNvQwKCucSreGQ205vZiBNnCMAD179eAPFbaDEU/3MN1QFFGq3kZTOyJ3q6osmaSrj32jxBujibe2yTUz4UBmLCuuPLMfsmc3oDs3snMNx3lDz5NwfjxzEucnAQIaHhclWS62D6+LuVj8BD7ScIFqF9Oq7JALxpW8RuCPSYblU=
-Received: from VI1PR04CA0059.eurprd04.prod.outlook.com (2603:10a6:802:2::30)
-	by VI1PR04MB4270.eurprd04.prod.outlook.com (2603:10a6:803:3e::33) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1558.16;
-	Sat, 26 Jan 2019 16:59:05 +0000
-Received: from HE1EUR01FT036.eop-EUR01.prod.protection.outlook.com
-	(2a01:111:f400:7e1f::209) by VI1PR04CA0059.outlook.office365.com
-	(2603:10a6:802:2::30) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1558.16 via
-	Frontend Transport; Sat, 26 Jan 2019 16:59:05 +0000
-Authentication-Results: spf=pass (sender IP is 52.236.92.113)
-	smtp.mailfrom=topicproducts.com; foundries.io; dkim=pass (signature was
-	verified) header.d=topicbv.onmicrosoft.com;foundries.io; dmarc=none
-	action=none header.from=topic.nl;
-Received-SPF: Pass (protection.outlook.com: domain of topicproducts.com
-	designates 52.236.92.113 as permitted sender)
-	receiver=protection.outlook.com; client-ip=52.236.92.113;
-	helo=eu2-emailsignatures-cloud.codetwo.com;
-Received: from eu2-emailsignatures-cloud.codetwo.com (52.236.92.113) by
-	HE1EUR01FT036.mail.protection.outlook.com (10.152.1.30) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1580.10 via Frontend Transport; Sat, 26 Jan 2019 16:59:04 +0000
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com (104.47.1.58) by
-	eu2-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server
-	(TLS12) via SMTP; Sat, 26 Jan 2019 16:58:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=topicbv.onmicrosoft.com; s=selector1-TopicProducts-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=eZ9S7gdSTkxnBzMXJCFHXS7zrhwJX1d3z9EI/0ldu40=;
-	b=fhNvQwKCucSreGQ205vZiBNnCMAD179eAPFbaDEU/3MN1QFFGq3kZTOyJ3q6osmaSrj32jxBujibe2yTUz4UBmLCuuPLMfsmc3oDs3snMNx3lDz5NwfjxzEucnAQIaHhclWS62D6+LuVj8BD7ScIFqF9Oq7JALxpW8RuCPSYblU=
-Received: from AM0PR04MB5348.eurprd04.prod.outlook.com (20.178.112.145) by
-	AM0PR04MB5380.eurprd04.prod.outlook.com (20.178.115.212) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1558.21; Sat, 26 Jan 2019 16:58:35 +0000
-Received: from AM0PR04MB5348.eurprd04.prod.outlook.com
-	([fe80::1c68:e546:f90f:bc05]) by
-	AM0PR04MB5348.eurprd04.prod.outlook.com
-	([fe80::1c68:e546:f90f:bc05%3]) with mapi id 15.20.1558.021;
-	Sat, 26 Jan 2019 16:58:35 +0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
-To: Stefan Agner <stefan@agner.ch>
-Thread-Topic: [oe] Python3 bytecode is stale
-Thread-Index: AQHUtLRsqSN+w0VRpkSjzihaJ0lY36XADOqAgAAvxICAAYqmgA==
-Date: Sat, 26 Jan 2019 16:58:34 +0000
-Message-ID: <e0f6dd64-bb31-ec0c-63dc-ae24c39e2594@topic.nl>
-References: <4f3f8463750770c686b010b7270351b2@agner.ch>
-	<c0e76ec3-4cc9-38cc-bdac-eadd69eab14a@topic.nl>
-	<afcb2f61ca3adfef2e312fc3b8f23215@agner.ch>
-In-Reply-To: <afcb2f61ca3adfef2e312fc3b8f23215@agner.ch>
-Accept-Language: nl-NL, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
-x-clientproxiedby: AM6PR0202CA0053.eurprd02.prod.outlook.com
-	(2603:10a6:20b:3a::30) To AM0PR04MB5348.eurprd04.prod.outlook.com
-	(2603:10a6:208:111::17)
-Authentication-Results-Original: spf=none (sender IP is )
-	smtp.mailfrom=mike.looijmans@topicproducts.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [85.150.144.104]
-x-ms-publictraffictype: Email
-X-Microsoft-Exchange-Diagnostics-untrusted: 1; AM0PR04MB5380;
-	6:wf0B7UppxOjGDIeEUma+Yyh75TowkEJUEoJ6K5xYG3ULteq2EvZs0KEwhFbqumfvZVSdPqmMfzgHHQWRGvbDOK4IKPB9FFsQniRUThkZUhe8f0sJbTc2HHmBYQASMmVsrVnrqjJ8WFF6Ymwnfi1G2DU/SswPMtSWXRwbPA+08Vv2INjSThdy9bfvgaBTEKBX1EXzt+5L4NNYylieGDAfFcDMBJQHJaV0qK+IHQSAd1Aj2/JpvkNb4dqJs0mu+HwHDxVIZFtGTgPN8SiWjbB2Qc5j7cCIwGHyTu3YlbkHvz7CID1FmVYrDHe1D8N4iHHLka/kU/pgwnZB1VKP6EXQIVPietGhsi3toNXFkgaiC6LDvduwxEoBZ92HkhYtpG71wBrb07i2jhWnHpcb53qxmERN/4UVTlJesefFfRSGwkx7F55bWqQo2NWiW7mn99mrILlDfHrzUtAfqHLLzY4q5Q==;
-	5:tKyU49smmsaRH/D6Mbp5Cc82v+t1yCBbW5plnGfHS2gs7WXB3iyhJxUR4wXorShbcIXQFtQa0NiaUrH+ZTh3SlmBWSnuODy2NVCHhqGCzKHJy/wM/h6F3tGwJ2MYP8qg1kEOZFaBgq6iqsv32I9Ia6TtpWiS4+Uwrp8lWqp2VzS2Biaonqer+1jnMMOQfAF4wsp+eTNycxn1HaB1pwILWA==;
-	7:LM24JeIl21lC9hE+0zk/51OQcXvGRLzX+LUvwAqNvZu2jAbZxIido6GQt45NSscECGKmoC0X63q8TLVfojSNHSQ5Hy1jsyS95CX8eJRNXUCBClIn4ZolqMUE8dmVLBtYU4wtq9xDYqfV+Gin5Op6vQ==
-X-MS-Office365-Filtering-Correlation-Id: 36607bf5-b43c-49c8-3ab1-08d683af9416
-X-Microsoft-Antispam-Untrusted: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600110)(711020)(4605077)(2017052603328)(7153060)(7193020);
-	SRVR:AM0PR04MB5380; 
-X-MS-TrafficTypeDiagnostic: AM0PR04MB5380:|VI1PR04MB4270:
-X-Microsoft-Antispam-PRVS: <VI1PR04MB42708130065B5D354ABF2FCC96940@VI1PR04MB4270.eurprd04.prod.outlook.com>
-x-forefront-prvs: 0929F1BAED
-X-Forefront-Antispam-Report-Untrusted: SFV:NSPM;
-	SFS:(10009020)(396003)(376002)(39830400003)(136003)(366004)(346002)(199004)(189003)(6306002)(74482002)(446003)(31686004)(11346002)(14444005)(256004)(44832011)(476003)(2616005)(486006)(106356001)(6486002)(186003)(26005)(53546011)(102836004)(105586002)(6506007)(386003)(42882007)(7736002)(6512007)(71200400001)(14454004)(6436002)(305945005)(71190400001)(966005)(6246003)(52116002)(53936002)(229853002)(99286004)(4326008)(25786009)(36756003)(68736007)(81156014)(2906002)(8676002)(81166006)(508600001)(58126008)(54906003)(65956001)(66066001)(65806001)(316002)(6916009)(97736004)(31696002)(8936002)(65826007)(6116002)(3846002)(76176011)(64126003);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:AM0PR04MB5380;
-	H:AM0PR04MB5348.eurprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: topicproducts.com does not
-	designate permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info-Original: YmHFGF3HCaoYwD2gfvVE7gE/HCSO1hwhJFyvDAfH35Ovl01aG7Wscy6AHJqBEJnvBOYHVnnv39IaEiq3cslGHzpvP1YH0qxiaGGzbMzPYGG9hwktgS5la6x+1j+OBawlrllJDFDySdg0pyyE5b4KqN5Qdu6p0zOYH177Dzjvgq2eQiv1pOMcUT2vIaFsKRDrREJdXCjgsaYfS6OCxGnOM6ysWKmC92/ZCDmMBkmRSYSjYa1kyEJnCJjZuyGd+31rmMXA5vQKyfVkGaMVlODl4v7Qr8e/oCEMboa/HnnkCN7m/llqnZSXLpFG03Q5AIWhLuAKPkPknG4kOfjZDZF9RYMzA8q/31ihrn+vKFRbs9FvSJvPHQgMpMgHZtHOKgolHEBL0ZCoqleD7vVOU9g8c+E7p1XOqNfpVavvKO+mRdc=
+	Mon, 28 Jan 2019 02:27:19 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x0S2RK8D019681
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Jan 2019 18:27:20 -0800 (PST)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.435.0; Sun, 27 Jan 2019 18:27:07 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Jan 2019 10:27:06 +0800
+Message-ID: <1548642426-371647-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB5380
-X-CodeTwo-MessageID: 20190126165837.2aa061af-af5d-4cc6-b45c-5cb18762ec68@eu2-emailsignatures-cloud.codetwo.com
-X-CodeTwoProcessed: true
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: HE1EUR01FT036.eop-EUR01.prod.protection.outlook.com
-X-Forefront-Antispam-Report: CIP:52.236.92.113; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(376002)(39830400003)(396003)(346002)(136003)(2980300002)(199004)(189003)(336012)(6486002)(47776003)(229853002)(2906002)(14444005)(8676002)(23676004)(31696002)(76176011)(386003)(36756003)(246002)(64126003)(486006)(6506007)(106466001)(44832011)(186003)(7736002)(65956001)(53546011)(2486003)(102836004)(26005)(42882007)(4326008)(7596002)(65806001)(7636002)(8936002)(305945005)(316002)(446003)(6116002)(3846002)(11346002)(65826007)(66066001)(99286004)(6306002)(436003)(74482002)(2616005)(126002)(476003)(58126008)(31686004)(54906003)(6512007)(6246003)(508600001)(356004)(106002)(25786009)(966005)(6916009)(14454004)(50466002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR04MB4270;
-	H:eu2-emailsignatures-cloud.codetwo.com; FPR:; SPF:Pass; LANG:en;
-	PTR:eu2-emailsignatures-cloud.codetwo.com; A:1; MX:1; 
-X-Microsoft-Exchange-Diagnostics: 1; HE1EUR01FT036;
-	1:sNI21Rbcqsx0L1ZXfNd5HvPQ3he22I3cbW7GzfFlGMA3Sa8U9CjXdJlswUf3zhBHtRKdIE16OGa87UMGycyx8x09DlP22mV1fMgc3BwYC2by1skRe1Q4kfxJaOdPal7pM7ous84eMeTQGbV2qEbFW+SZEBOWQO56YtxSBhyLFYM=
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 2317e70e-7773-449f-137f-08d683af823e
-X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600110)(710020)(711020)(4605077)(2017052603328)(7153060)(7193020);
-	SRVR:VI1PR04MB4270; 
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB4270;
-	3:pJY7mxae9LjhQAPrzkB5v7HX56/U4jwr31jKiLODDKKKK6lLyseQrg6snFWcBf/zKRw0winZ908Qc9mkoIEHNVkGljP4HyyNNhkyR4xIayE8kPp+uTQP+nXVxLSdHxjm16r0By4u2S+V33lnDJSJfcNv/Wbi5O4152KbvrTvHCYnOgpnyMeSrlOslDGs8jiGWdmW/FwtvuBaeDQtwoXPUnnZFj4X+zXGCdn9fjPp4QJqPmB/LLORYCon2OxkZJWoqiAqSmHRPGeDnNPAFnfXfBLpDbg/7yemRJAUjTQI2jKIS1Hl89mfs/Tuo9ZeSCTo9gpWSdu6ryeAvtAcMKriDHDuvkUvLDly3LNfsIlmGXF32R18G0hRR0xgyfocxtic;
-	25:10lHljsebJ6/58TdKWdE1XxV2oub5A0aUn1weH4ZTzXk91U6yoLu/DS4BygbNq4xev8HmkVyqJgCesbfEX3DwtRekStA3C3f/vroltUbABm8itWlNwFbn2106jc/wnoQYoxvgEfflsI7oCFNip6bcPBnjuM/hWT9wOX7VZQIISjmXSFCWAPWHn7z1mifRbE59kkhbLY69/weY4jnJFpif5SENxkNPqfIWqT+84NIeKlXPXrDBV6tfr3xp20T1zr29VvmQvfHH7SejGHwf2G9HGopk31nW23UgjK40WYF77d9bvHUF39lmdx8Vrk4CFh3Ly0830ztmKnNw0oHetBlrA==
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB4270;
-	31:CDdGDDmPle1RGIMysuDixNFcxSI5lOnny8bm6meU1Y7YEMx+tFcoYaJzWjApMo2VwdKzwrYiSitUMOhZo7oPW6vfElGHHfkTuABGmk3ZACTDBgSicAwU11IGhurYhvBnUQMcap2mnzl1tiInL+TrPRpIEUbEAZtg75A0z44EMZQ7Df4OGZBGSIXiBURvFpnqidRYkWorj+ZQt1SZgJ1SSvTXOURHjOEYMR/444l5kAs=;
-	20:/rTmY9CuMpSurZ2SNa8gS/CwHmQr2s4tNS1C79YYEjhYyOWRATig2mGtcg6lSipQup5RHm71z2JVI0Hk56bjexxJX1gbnCt8XtdmxYpneIFIsMuRzX/tKKgTlLJfZ3xYWNF36y9zOOyMvJM6X6M2f071xMpuQZo3PU5PXw5qlt4=;
-	4:r0A6AuKSHVrHnULwM6Kj/FpYvdfLxOaoxJdU9Vk7ZzPdzXzqE9zkAgVWCUztSOep2hAp3xq/AaCg1fsIC9DF8AAe0vUoAFVFI1cz+12V3nOhant8si8Dy1Hq9hS2YJuyv4zoKezWLMYbpC3K0nQ/THSSK29xvtup9OYYA1Q/f0m8oOB1+8BFo9SZa7SoMh3/pbtiLp5/fkB0tjpOfXYQZxGijVuFJ4nNFByg3RR48bG8uLvysfc+m8TEoh9i+DzPcTFdnPIjATUMIrw7nDUYGcfg9TtQDlZcCYcIo2igXzSP/MlC4jOPxU/DNovSDonw
-X-Forefront-PRVS: 0929F1BAED
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtWSTFQUjA0TUI0MjcwOzIzOmtRaU5JYnpTZWZ0T0tTcW9IUVU0UlEvOXFK?=
-	=?utf-8?B?VTFHdU4wN0xYRFNFb2hyak0rc2Qrd3hBMmcvS3h0SFBPQXRhRTJzUTdkRHVt?=
-	=?utf-8?B?VXlPTnltODgyTTl3Z0xqVWE5eGVHM3RkMS93Uzczd1pxZUszSjBybzBseFI5?=
-	=?utf-8?B?UnZoMUxjcTVPRFVXTC84WGNuR251aE1rd1JoVS93d3cvT2szS08xSngwRnM4?=
-	=?utf-8?B?cjVwdTdmRkNnQ2tnWGl5UW1CUHdRU3NqVjhkVEdQSlQyd2o4ZWpuSmJyM1JG?=
-	=?utf-8?B?N2p0VjdKTWJlamdlKzhBVUFLRDczL3lqNlFDMVA3NG9oelp3Q2VvS3VLeFVl?=
-	=?utf-8?B?b1VyUlB6eEYxYm9aSFVwNnBNdzlocUlBVUNITkI2Qnh4SDFWei85cEZLWHBH?=
-	=?utf-8?B?cjk3OUY0eEpxejRWY2dvNUtONGZRZENzaUpPaFZtcXNpTU40WmozeXNHT1Bs?=
-	=?utf-8?B?OFRHV0NnTGlmWWtZK2kya01CUE5HeTdPZnBKTDkwSEpRWnhqV1lmRSsya1ZW?=
-	=?utf-8?B?VlBCMEIzSTlVTUhWU1p1am9FR0JyYVlrcUJIS2FTZExXOFROQVZYZkpsVnYz?=
-	=?utf-8?B?YzNXblBzcTFmQXlGaVBZVUllZG1veEJzbXB3OEtFY1pKOUVvKzJtZjRHNWJl?=
-	=?utf-8?B?YjVIaDhiNXBWTHdhTU1INitFeWwzSk5zVG1BSXNHZkVQSDBrbXNuOGJzVXJr?=
-	=?utf-8?B?YU5YTGJodzZxRkpuSnJvcXNjUmZITlZtdCtobzRubWJLSXhFTkU2dE5CYnp4?=
-	=?utf-8?B?ZWt1dG9ya056ampwUnJ6eW0rRXd4N1ZNZldkc1VWeHdBQllKNUdoSGpKcjF3?=
-	=?utf-8?B?N1FNOEJ5MnFVd2FjRTV5b0hhOUR3V2U2T0JPSTFKTTQvL3llMkU4MUNPNy84?=
-	=?utf-8?B?ZHJrM2ozNmRlUWM4NWZnQWdIaml1ZlRSVlMvVkMwV0RSdTE1T1JlclBKNEdp?=
-	=?utf-8?B?MHV0TWE1bzVSQ1QrcFZiNDdaNmlWTG1iWEpjUUpIaXJWSlF5MEI5NVlaR2RY?=
-	=?utf-8?B?RlRqVVZnV05yQ21qb0Nzc0J2bTNTMjY0VW9kKzdOWnY1VThXd0tOSHZWbXBu?=
-	=?utf-8?B?ZzBKQTZZZEV4Wm0wOWtUZ0RacGVrWEEranNXbE15SC9hYzQrNHBjY3BFeWpQ?=
-	=?utf-8?B?MUNNa0lVK3RtVEZiZytxSmJ4WWtjZGZkSzJLRkF6TmhzUVYvZnNUc3g5SU4v?=
-	=?utf-8?B?V0h1UkVSa2VOTnpGWVBLalp1M0xkUlBzM0MvdFNXb3EyVGVJSjJETEEwSnpq?=
-	=?utf-8?B?aGFjdFVuWkZaSzNlaVdVOEJXbGF4UHdJc1FoVVlVQlJrMS9rV1JuZEhEVS9R?=
-	=?utf-8?B?ZGVvTTlIYWlONVpicUNMSm1rR2x3YVBtMDZvZFRmL25aQlkrS2MxMmZGdnhQ?=
-	=?utf-8?B?SnNKYk5oTVUvdmxoNzA1YmZHZ3lIYi9ZdWpQU1gvRjk2Z0Jwejl4RGxZdTd3?=
-	=?utf-8?B?bTU5YkJKQlEwVzF6Z21WT0V0NWFod042TFZxa0lZbzJIaEoyYjlyaTlHWUtn?=
-	=?utf-8?B?OWhZWVBkOTV3UXFCMjgyUnorOGZ1MEkweU41VGZKelFsVkJuNGV5WE1yenhq?=
-	=?utf-8?B?UW9pU0JuQW5WVE1aZFV4a21adDVSM3I0My8rTUMvTnFZbVhEdk84aUU0Tklv?=
-	=?utf-8?B?dyttc095cFFDaG55eTBtQlRzM0pzYlRVU25MM2pGajRPMkh0TjdkL1AyMk5n?=
-	=?utf-8?B?d2RGRlhPSkM1RGYrc3JybUJGR3FwckllQkxPS1E4Tzl0VjkwRUNyNHFIcmdD?=
-	=?utf-8?B?MnVWQ3paSjZKeWF4cHlOMXdKWis2M3h5TG9iM3BXbG9qck56V0lwckZhZTBq?=
-	=?utf-8?B?K00va3VSb2poVklZMXNxc1Y1elFoQkduR1IvdGF6NjJOZTllV0hidzBHbFZ4?=
-	=?utf-8?B?WEVOSEhnbzJjbkpmWDU1MkplRlBYd1IyOTB1dE9GVlV6V3pjOVUxMjVkY254?=
-	=?utf-8?B?Z2d1UU9kSitRPT0=?=
-X-Microsoft-Antispam-Message-Info: ODX4yAlumv/ef7m7az8nAsHi9Q5JLWJpBcaWxLa7/U2CLIzzdVBaYDEqaexORdpr0yQPzwieMmwV+8Ps1gyhaPOlIY01kVFbVaoVV8+386WnXmNVMP0x7D8NIT/2r/DmW3w/3gWmY2BC5gkYGCS35B4rVtqx/rNJttBUDPtja54Wx1SkTwFqTViapnQf9CHLRyGt04pryi/29Payf07tJ3rQnfGyOPSzjAkTyxtWYpU0E8BYYoonTsRGtaKwClx2uGseKr8XnTqbeBq8kufYPv6H0OEs3tb5IOUKs01Ym10YHbBlxIPABFl+GNxrW0fIhaU38iIblBOiTXtAcX3FCWRrnqX9PqXC+gftau1ymTpmslmG+9U2hr55maunYkBgC1zhJumADbspSQHZKSzHhQ0ng7md1AmkCYdPkVTjXlc=
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB4270;
-	6:nm9sYn5pl9EDyXoRWPDjootkyXEb36FlRfZTyNoEAy5kuuxY54Vu9qP+JVaQCr+z/Le8vckMFK0hP+jGYu0s5qGTXcRrckoeF3RNbcW8O41UkzXpkOXb0pL+ay0dLoVfiDnHSojRs8a3yzv8AWwyBu6xmn0GYL5PaXEtcgXqg/SIbcxnr3jz+I0ztEQrOwXBGLj2/tijyAztfX4Swk2EEYp29gvbOIteS9V1aeHrPhYjKE/IwNkplswpa3OWG5fKIe5BEsl7IqfwS3sOEiYn2NIvpNfKSvzCC7aMuUt6I0w3ibEH1LLp+qMb5BuBij7Q56EBhZjwOzEg+W3uGtQZS4QI4SbLKt/fKCDuihm9J+5ZUEqkcfn/8d901nurc1531mOmdMBVAMa4UPlry0zcVD/F7u/OvrMlxZNjFu4RJjtZoMPZLj4SIBdA3pGZuJGCRLzBqxzqX5lIBO+pPPtGWw==;
-	5:+c6FEWTbipaqhrY7JJbl1ctcZMnmsaQNcYc5U3A+KIgsPDBSkLxmllnM31OyRoEBy/t0+sT2oOZID2GV/HfcLToeseYbHuQ2C4/tsi/GBVR0VjJWgDwWi7lLaeIteiZ8JKY6b6QO88lqOd4Esfc/fhXzItz2Lhxh6zR3CzdnFTiwZVKarglgKHHlEKM/7+JKJjxqdJ7lQwjXkWJs4oTS0w==;
-	7:4STU01c5rYRqndKnhl8mkQwkn360MRQ1FqvuB5gFQMU7Jz9YuVxYEE+yiIRNaJkofayIXoaGtVlTaMzYko2EuKL1cB/3/mq1oaeHA4jroX8oi5hTulBa4GhKHbSVhycri4axVeJDTYsbA16HEZg0MQ==
-X-OriginatorOrg: topic.nl
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2019 16:59:04.3111 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36607bf5-b43c-49c8-3ab1-08d683af9416
-X-MS-Exchange-CrossTenant-Id: 449607a5-3517-482d-8d16-41dd868cbda3
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=449607a5-3517-482d-8d16-41dd868cbda3;
-	Ip=[52.236.92.113]; Helo=[eu2-emailsignatures-cloud.codetwo.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4270
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Python3 bytecode is stale
+Subject: [PATCH] libtdb: upgrade from 1.3.16 -> 1.3.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -182,108 +30,290 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jan 2019 21:32:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D9828C6435415C4B9ACD79C4FD6EB780@eurprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 28 Jan 2019 02:27:20 -0000
+Content-Type: text/plain
 
-T24gMjUtMDEtMTkgMTg6MjYsIFN0ZWZhbiBBZ25lciB3cm90ZToNCj4gT24gMjUuMDEuMjAxOSAx
-NTozNSwgTWlrZSBMb29pam1hbnMgd3JvdGU6DQo+PiBNb3N0IGxpa2VseSB0aGUgZGF0ZS90aW1l
-IHN0YW1wcyBvbiB0aGUgZmlsZXMgYXJlIHN1Y2ggdGhhdCB0aGUgInB5IiBmaWxlcw0KPj4gYXBw
-ZWFyIHRvIGJlIG5ld2VyLg0KPiANCj4gSW5kZWVkLCB0aGlzIHNlZW1zIHRvIGJlIHRoZSBpc3N1
-ZS4gV2UgYXJlIHVzaW5nIE9TVHJlZSwgd2hpY2ggcmVtb3Zlcw0KPiBtdGltZXMuIFJpY2FyZG8g
-KG5vdyBvbiBDQykgYWxzbyBwb2ludGVkIG1lIHRvIHRoZSByZWxldmFudCBpc3N1ZSBpbg0KPiBP
-U1RyZWU6DQo+IGh0dHBzOi8vZ2l0aHViLmNvbS9vc3RyZWVkZXYvb3N0cmVlL2lzc3Vlcy8xNDY5
-DQo+IA0KPj4NCj4+IEEgdmVyeSBzaW1wbGUgZml4IHdvdWxkIGJlIHRvIHNpbXBseSBkZWxldGUg
-dGhlICIucHkiIGZpbGVzLCB0aGV5IGFyZW4ndA0KPj4gcmVhbGx5IG5lZWRlZCBhbnl3YXkgc28g
-eW91J2xsIHNhdmUgYSBsb3Qgb2Ygc3BhY2UgaW4gdGhlIHByb2Nlc3MuDQo+Pg0KPj4gVG8gZG8g
-dGhpcyBjb21waWxlLXRpbWUsIHlvdSBjb3VsZCBhZGQgc29tZXRoaW5nIGxpa2UgdGhpcyBpbiBh
-IGJiYXBwZW5kOg0KPj4gUEFDS0FHRVMgPSsgIiR7UE59LXNyYyINCj4+IEZJTEVTXyR7UE59LXNy
-YyA9ICJ7aW5zdGFsbGRpcn0vKi5weSB7aW5zdGFsbGRpcn0vKi8qLnB5Ig0KPj4NCj4+IFRoYXQn
-bGwgcHVzaCB0aGUgInB5IiBmaWxlcyBpbnRvIGFub3RoZXIgcGFja2FnZSBhbmQgcHJldmVudCB0
-aGVtIGJlaW5nDQo+PiBpbnN0YWxsZWQgYnkgZGVmYXVsdC4gQ2hhbmdlICJ7aW5zdGFsbGRpcn0i
-IGludG8gc29tZXRoaW5nIG1vcmUgYXBwcm9wcmlhdGUuDQo+PiBPZiBqdXN0IGRlbGV0ZSB0aGVt
-IGluIGEgZG9faW5zdGFsbF9hcHBlbmQuDQo+IA0KPiBIbSwgaW50ZXJlc3RpbmcgaWRlYSwgd2ls
-bCBnaXZlIHRoaXMgYSB0cnkuDQo+IA0KPiBXb3VsZG4ndCBiZSBzb21ldGhpbmcgbGlrZSB0aGlz
-IGJlIGEgbmljZSBPcGVuRW1iZWRkZWQgYWRkaXRpb24gaW4NCj4gZ2VuZXJhbD8gT3B0aW1pemlu
-ZyBlbWJlZGRlZCByb290ZnMgc2l6ZSBieSBkZWxldGluZyBweSBmaWxlcyBzZWVtcyB0bw0KPiBi
-ZSBhIGNvbW1vbiB1c2UgY2FzZS4NCg0KSGVyZSdzIGEgYmJhcHBlbmQgZXhhbXBsZSBmb3IgcHl0
-aG9uOg0KDQpodHRwczovL2dpdGh1Yi5jb20vT3BlblBMaS9vcGVucGxpLW9lLWNvcmUvYmxvYi9k
-ZXZlbG9wL21ldGEtb3BlbnBsaS9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob25fMi43LjEz
-LmJiYXBwZW5kI0wyMA0KDQo+IEluIGEgc2ltcGxlIHRlc3QgZGVsZXRpbmcgYWxsIHB5IGZpbGVz
-IG9uIG15IHJvb3RmcyBkaWQgbm90IGdvIHdlbGwgKHRoZQ0KPiBhcHBsaWNhdGlvbiBkb2VzIG5v
-dCBzdGFydCBhbnltb3JlKS4gSSBuZWVkIHRvIGludmVzdGlnYXRlIGZ1cnRoZXIuDQoNClRoZSAi
-bWFpbiIgbW9kdWxlICh0aGUgb25lIHN0YXJ0ZWQgZnJvbSBjb21tYW5kbGluZSkgbmVlZHMgdG8g
-YmUgaW4gLnB5IA0KZm9ybWF0IHN0aWxsLCBvdGhlcndpc2UgeW91IGNhbm5vdCAicnVuIiBpdC4g
-QXMgYSB3b3JrYXJvdW5kLCB5b3UgY2FuIA0KcnVuIGl0IHVzaW5nICJweXRob24gLW0iLCBvciBt
-YWtlIHN1cmUgdGhhdCB0aGF0IG9uZSAucHkgZmlsZSBnZXRzIA0KaW5zdGFsbGVkLg0KDQpJdCdz
-IGFjdHVhbGx5IGV2ZW4gcG9zc2libGUgdG8gcHV0IHRoZSBweWMgZmlsZXMgaW50byBhIFpJUCBm
-aWxlIGFuZCANCmxvYWQgZGlyZWN0bHkgZnJvbSB0aGF0IGF0IHJ1bnRpbWUuIFRoaXMgcmVkdWNl
-cyB0aGUgbnVtYmVyIG9mIGZpbGVzLiBPbiANCmEgY29tcHJlc3NlZCBmaWxlc3lzdGVtLCB0aGlz
-IHdvbid0IG1ha2UgYSBkaWZmZXJlbmNlIG9mIGNvdXJzZSwgYW5kIGlzIA0KbGlrZWx5IHRvIGlu
-Y3JlYXNlIHRoZSB0b3RhbCBzaXplLg0KDQotLQ0KTS4NCg0KPiANCj4gLS0NCj4gU3RlZmFuDQo+
-IA0KPj4NCj4+DQo+PiBPbiAyNS0wMS0xOSAxNDo0NiwgU3RlZmFuIEFnbmVyIHdyb3RlOg0KPj4+
-IEhpLA0KPj4+DQo+Pj4gUmVjZW50bHkgSSBub3RpY2VkIHRoYXQgUHl0aG9uMyBwcm9ncmFtcyBn
-b3QgcmF0aGVyIHNsb3cuIFJ1bm5pbmcgdGhlDQo+Pj4gdGVzdCBhcHBsaWNhdGlvbiB0b29rIDEy
-LjUgc2Vjb25kcy4gV2UgYXJlIHVzaW5nIGEgcmVhZC1vbmx5IGZpbGUgc3lzdGVtDQo+Pj4gYW5k
-IEkgaW1tZWRpYXRlbHkgc3VzcGVjdGVkIHRoZSBieXRlY29kZSBjYWNoZS4gQWZ0ZXIgbW91bnRp
-bmcgdGhlDQo+Pj4gcm9vdGZzIHJ3LCBmcm9tIHRoZSBzZWNvbmQgZXhlY3V0aW9uIG9uIHJ1bm5p
-bmcgdGhlIHRlc3QgYXBwbGljYXRpb24NCj4+PiB0b29rIGJlbG93IDQgc2Vjb25kcy4NCj4+Pg0K
-Pj4+IEJ5IHNpbXBseSBleGVjdXRpbmcgYSBIZWxsbyBXb3JsZCwgUHl0aG9uIGRlY2xhcmVzIGFs
-bCBjb2RlIG9iamVjdHMgYXMNCj4+PiBiZWluZyBzdGFsZSBhbmQgdHJpZXMgdG8gcmV3cml0ZSB0
-aGVtOg0KPj4+DQo+Pj4gIyBweXRob24zIC12IC1jICdwcmludCgiSGVsbG8gV29ybGQiKScNCj4+
-PiBpbXBvcnQgX2Zyb3plbl9pbXBvcnRsaWIgIyBmcm96ZW4NCj4+PiBpbXBvcnQgX2ltcCAjIGJ1
-aWx0aW4NCj4+PiBpbXBvcnQgc3lzICMgYnVpbHRpbg0KPj4+IGltcG9ydCAnX3dhcm5pbmdzJyAj
-IDxjbGFzcyAnX2Zyb3plbl9pbXBvcnRsaWIuQnVpbHRpbkltcG9ydGVyJz4NCj4+PiBpbXBvcnQg
-J190aHJlYWQnICMgPGNsYXNzICdfZnJvemVuX2ltcG9ydGxpYi5CdWlsdGluSW1wb3J0ZXInPg0K
-Pj4+IGltcG9ydCAnX3dlYWtyZWYnICMgPGNsYXNzICdfZnJvemVuX2ltcG9ydGxpYi5CdWlsdGlu
-SW1wb3J0ZXInPg0KPj4+IGltcG9ydCAnX2Zyb3plbl9pbXBvcnRsaWJfZXh0ZXJuYWwnICMgPGNs
-YXNzDQo+Pj4gJ19mcm96ZW5faW1wb3J0bGliLkZyb3plbkltcG9ydGVyJz4NCj4+PiBpbXBvcnQg
-J19pbycgIyA8Y2xhc3MgJ19mcm96ZW5faW1wb3J0bGliLkJ1aWx0aW5JbXBvcnRlcic+DQo+Pj4g
-aW1wb3J0ICdtYXJzaGFsJyAjIDxjbGFzcyAnX2Zyb3plbl9pbXBvcnRsaWIuQnVpbHRpbkltcG9y
-dGVyJz4NCj4+PiBpbXBvcnQgJ3Bvc2l4JyAjIDxjbGFzcyAnX2Zyb3plbl9pbXBvcnRsaWIuQnVp
-bHRpbkltcG9ydGVyJz4NCj4+PiBpbXBvcnQgX3RocmVhZCAjIHByZXZpb3VzbHkgbG9hZGVkICgn
-X3RocmVhZCcpDQo+Pj4gaW1wb3J0ICdfdGhyZWFkJyAjIDxjbGFzcyAnX2Zyb3plbl9pbXBvcnRs
-aWIuQnVpbHRpbkltcG9ydGVyJz4NCj4+PiBpbXBvcnQgX3dlYWtyZWYgIyBwcmV2aW91c2x5IGxv
-YWRlZCAoJ193ZWFrcmVmJykNCj4+PiBpbXBvcnQgJ193ZWFrcmVmJyAjIDxjbGFzcyAnX2Zyb3pl
-bl9pbXBvcnRsaWIuQnVpbHRpbkltcG9ydGVyJz4NCj4+PiAjIGluc3RhbGxpbmcgemlwaW1wb3J0
-IGhvb2sNCj4+PiBpbXBvcnQgJ3ppcGltcG9ydCcgIyA8Y2xhc3MgJ19mcm96ZW5faW1wb3J0bGli
-LkJ1aWx0aW5JbXBvcnRlcic+DQo+Pj4gIyBpbnN0YWxsZWQgemlwaW1wb3J0IGhvb2sNCj4+PiAj
-IGJ5dGVjb2RlIGlzIHN0YWxlIGZvciAnZW5jb2RpbmdzJw0KPj4+ICMgY29kZSBvYmplY3QgZnJv
-bSAvdXNyL2xpYi9weXRob24zLjUvZW5jb2RpbmdzL19faW5pdF9fLnB5DQo+Pj4gIyBjb3VsZCBu
-b3QgY3JlYXRlDQo+Pj4gJy91c3IvbGliL3B5dGhvbjMuNS9lbmNvZGluZ3MvX19weWNhY2hlX18v
-X19pbml0X18uY3B5dGhvbi0zNS5weWMnOg0KPj4+IE9TRXJyb3IoMzAsICdSZWFkLW9ubHkgZmls
-ZSBzeXN0ZW0nKQ0KPj4+ICMgd3JvdGUNCj4+PiAnL3Vzci9saWIvcHl0aG9uMy41L2VuY29kaW5n
-cy9fX3B5Y2FjaGVfXy9fX2luaXRfXy5jcHl0aG9uLTM1LnB5YycNCj4+PiAjIGJ5dGVjb2RlIGlz
-IHN0YWxlIGZvciAnY29kZWNzJw0KPj4+ICMgY29kZSBvYmplY3QgZnJvbSAvdXNyL2xpYi9weXRo
-b24zLjUvY29kZWNzLnB5DQo+Pj4gIyBjb3VsZCBub3QgY3JlYXRlDQo+Pj4gJy91c3IvbGliL3B5
-dGhvbjMuNS9fX3B5Y2FjaGVfXy9jb2RlY3MuY3B5dGhvbi0zNS5weWMnOiBPU0Vycm9yKDMwLA0K
-Pj4+ICdSZWFkLW9ubHkgZmlsZSBzeXN0ZW0nKQ0KPj4+ICMgd3JvdGUgJy91c3IvbGliL3B5dGhv
-bjMuNS9fX3B5Y2FjaGVfXy9jb2RlY3MuY3B5dGhvbi0zNS5weWMnDQo+Pj4gaW1wb3J0ICdfY29k
-ZWNzJyAjIDxjbGFzcyAnX2Zyb3plbl9pbXBvcnRsaWIuQnVpbHRpbkltcG9ydGVyJz4NCj4+PiBp
-bXBvcnQgJ2NvZGVjcycgIyA8X2Zyb3plbl9pbXBvcnRsaWJfZXh0ZXJuYWwuU291cmNlRmlsZUxv
-YWRlciBvYmplY3QgYXQNCj4+PiAweGI2YjMzMTMwPg0KPj4+ICMgYnl0ZWNvZGUgaXMgc3RhbGUg
-Zm9yICdlbmNvZGluZ3MuYWxpYXNlcycNCj4+PiAjIGNvZGUgb2JqZWN0IGZyb20gL3Vzci9saWIv
-cHl0aG9uMy41L2VuY29kaW5ncy9hbGlhc2VzLnB5DQo+Pj4gIyBjb3VsZCBub3QgY3JlYXRlDQo+
-Pj4gJy91c3IvbGliL3B5dGhvbjMuNS9lbmNvZGluZ3MvX19weWNhY2hlX18vYWxpYXNlcy5jcHl0
-aG9uLTM1LnB5Yyc6DQo+Pj4gT1NFcnJvcigzMCwgJ1JlYWQtb25seSBmaWxlIHN5c3RlbScpDQo+
-Pj4gIyB3cm90ZQ0KPj4+ICcvdXNyL2xpYi9weXRob24zLjUvZW5jb2RpbmdzL19fcHljYWNoZV9f
-L2FsaWFzZXMuY3B5dGhvbi0zNS5weWMnDQo+Pj4gaW1wb3J0ICdlbmNvZGluZ3MuYWxpYXNlcycg
-Iw0KPj4+IDxfZnJvemVuX2ltcG9ydGxpYl9leHRlcm5hbC5Tb3VyY2VGaWxlTG9hZGVyIG9iamVj
-dCBhdCAweGI2YjNkOWQwPg0KPj4+IGltcG9ydCAnZW5jb2RpbmdzJyAjIDxfZnJvemVuX2ltcG9y
-dGxpYl9leHRlcm5hbC5Tb3VyY2VGaWxlTG9hZGVyIG9iamVjdA0KPj4+IGF0IDB4YjZiMTU0YjA+
-DQo+Pj4gIyBieXRlY29kZSBpcyBzdGFsZSBmb3IgJ2VuY29kaW5ncy5hc2NpaScNCj4+PiAjIGNv
-ZGUgb2JqZWN0IGZyb20gL3Vzci9saWIvcHl0aG9uMy41L2VuY29kaW5ncy9hc2NpaS5weQ0KPj4+
-ICMgY291bGQgbm90IGNyZWF0ZQ0KPj4+ICcvdXNyL2xpYi9weXRob24zLjUvZW5jb2RpbmdzL19f
-cHljYWNoZV9fL2FzY2lpLmNweXRob24tMzUucHljJzoNCj4+PiBPU0Vycm9yKDMwLCAnUmVhZC1v
-bmx5IGZpbGUgc3lzdGVtJykNCj4+PiAjIHdyb3RlICcvdXNyL2xpYi9weXRob24zLjUvZW5jb2Rp
-bmdzL19fcHljYWNoZV9fL2FzY2lpLmNweXRob24tMzUucHljJw0KPj4+IGltcG9ydCAnZW5jb2Rp
-bmdzLmFzY2lpJyAjIDxfZnJvemVuX2ltcG9ydGxpYl9leHRlcm5hbC5Tb3VyY2VGaWxlTG9hZGVy
-DQo+Pj4gb2JqZWN0IGF0IDB4YjZiM2RiMTA+DQo+Pj4gaW1wb3J0ICdfc2lnbmFsJyAjIDxjbGFz
-cyAnX2Zyb3plbl9pbXBvcnRsaWIuQnVpbHRpbkltcG9ydGVyJz4NCj4+PiAuLi4uDQo+Pj4NCj4+
-Pg0KPj4+IFRoaXMgaXMgb24gYSBBcm12NyBkZXZpY2UuIE9wZW5FbWJlZGRlZCBsYXllcnMgYXJl
-IGN1cnJlbnQgbWFzdGVyLg0KPj4+IFB5dGhvbiB2ZXJzaW9uIGlzIDMuNS42LiBJcyB0aGlzIGEg
-a25vd24gaXNzdWU/IEFueSBpZGVhPw0KPj4+DQo+Pj4gLS0NCj4+PiBTdGVmYW4NCj4+Pg0KDQoN
-Ci0tIA0KTWlrZSBMb29pam1hbnMNCg==
+From: Changqing Li <changqing.li@windriver.com>
+
+Fix 3 problems after upgrade to 1.3.17
+
+1. Disable prefork of process
+2. Fix problem of waf cannot be found
+3. Fix problem of cross-compile not support well
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ ...akefile-fix-problem-that-waf-cannot-found.patch | 35 ++++++++++++
+ .../0001-waf-add-support-of-cross_compile.patch    | 63 ++++++++++++++++++++++
+ .../tdb-Add-configure-options-for-packages.patch   | 43 +++++++++------
+ .../libtdb/{libtdb_1.3.16.bb => libtdb_1.3.17.bb}  | 11 +++-
+ 4 files changed, 133 insertions(+), 19 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
+ create mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.3.16.bb => libtdb_1.3.17.bb} (78%)
+
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
+new file mode 100644
+index 0000000..10f2ef8
+--- /dev/null
++++ b/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
+@@ -0,0 +1,35 @@
++From 7205761d654636a6c1fad03a3ca40d38e253e192 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 25 Jan 2019 16:01:07 +0800
++Subject: [PATCH] Makefile: fix problem that waf cannot found
++
++tdb is subfolder of samba, but it can also build independently.
++so both path need to be added into PATH
++
++Upsteam-Status: Inappropriate [oe specific]
++
++Fix reject by upstream since upsteam need to support both python2/3,
++so drop add append PATH. refer link:
++https://gitlab.com/samba-team/samba/merge_requests/209
++https://gitlab.com/samba-team/samba/merge_requests/211
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 3e70146..64bb393 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -1,6 +1,6 @@
++ # simple makefile wrapper to run waf
++ 
++-WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf
+++WAF_BINARY=PATH=buildtools/bin:../../buildtools/bin:$$PATH waf
++ WAF=PYTHONHASHSEED=1 WAF_MAKE=1 $(WAF_BINARY)
++ 
++ all:
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
+new file mode 100644
+index 0000000..e20c9a2
+--- /dev/null
++++ b/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
+@@ -0,0 +1,63 @@
++From 4b8463ff43f8983a706b181c5292491f9f954be1 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 25 Jan 2019 15:00:59 +0800
++Subject: [PATCH] waf: add support of cross_compile
++
++After upgrade libtdb from 1.3.16 to 1.3.17, waf build system
++which used by libtdb upgrade from 1.5.19 to 2.0.8
++
++on 1.5.19, for cross_compile, subprocess.Popen is set to be
++samba_cross.cross_Popen, which will not execute testprog on
++host, but only read result from cross-answers.txt which is
++passed by option --cross-answer
++
++part of old code:
++    args = Utils.to_list(kw.get('exec_args', []))
++    proc = Utils.pproc.Popen([lastprog] + args, stdout=Utils.pproc.PIPE, stderr=Utils.pproc.PIPE)
++
++but on 2.0.8, exec_args is not used and cause do_configure
++failed with Exec format error
++
++fixed by append cross anser related args to cmd
++
++Upstream-Status: Submitted [https://gitlab.com/samba-team/samba/merge_requests/211]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ third_party/waf/waflib/Tools/c_config.py | 11 ++++++-----
++ 1 file changed, 6 insertions(+), 5 deletions(-)
++
++diff --git a/third_party/waf/waflib/Tools/c_config.py b/third_party/waf/waflib/Tools/c_config.py
++index 7608215..767cf33 100644
++--- a/third_party/waf/waflib/Tools/c_config.py
+++++ b/third_party/waf/waflib/Tools/c_config.py
++@@ -660,20 +660,21 @@ class test_exec(Task.Task):
++ 	"""
++ 	color = 'PINK'
++ 	def run(self):
+++		args = self.generator.bld.kw.get('exec_args', [])
++ 		if getattr(self.generator, 'rpath', None):
++ 			if getattr(self.generator, 'define_ret', False):
++-				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()])
++-			else:
++-				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()])
+++				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args)
+++			else: 
+++				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args)
++ 		else:
++ 			env = self.env.env or {}
++ 			env.update(dict(os.environ))
++ 			for var in ('LD_LIBRARY_PATH', 'DYLD_LIBRARY_PATH', 'PATH'):
++ 				env[var] = self.inputs[0].parent.abspath() + os.path.pathsep + env.get(var, '')
++ 			if getattr(self.generator, 'define_ret', False):
++-				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()], env=env)
+++				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args, env=env)
++ 			else:
++-				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()], env=env)
+++				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args, env=env)
++ 
++ @feature('test_exec')
++ @after_method('apply_link')
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
+index 365b92d..e6e1023 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
+@@ -1,6 +1,6 @@
+-From 6de1affddde4003a956523c330ecf24e22e094ac Mon Sep 17 00:00:00 2001
++From 13bbc851d9fd7396f087758e614abba60eeb2aad Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+-Date: Thu, 19 Jul 2018 16:20:32 +0800
++Date: Wed, 23 Jan 2019 10:14:05 +0800
+ Subject: [PATCH] tdb: Add configure options for packages
+ 
+ Add configure options for the following packages:
+@@ -21,16 +21,19 @@ Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+ 
+ Update for libtdb_1.3.16
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Update for libtdb_1.3.17
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- lib/replace/wscript | 89 +++++++++++++++++++++++++++++++++++++++++------------
++ lib/replace/wscript | 95 ++++++++++++++++++++++++++++++++++++++++-------------
+  wscript             |  6 ++++
+- 2 files changed, 75 insertions(+), 20 deletions(-)
++ 2 files changed, 79 insertions(+), 22 deletions(-)
+ 
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index fd00a42..2df83cd 100644
++index 6cbae93..7aeaf46 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+-@@ -23,6 +23,41 @@ def set_options(opt):
++@@ -25,6 +25,41 @@ def options(opt):
+      opt.PRIVATE_EXTENSION_DEFAULT('')
+      opt.RECURSE('buildtools/wafsamba')
+  
+@@ -72,7 +75,7 @@ index fd00a42..2df83cd 100644
+  @Utils.run_once
+  def configure(conf):
+      conf.RECURSE('buildtools/wafsamba')
+-@@ -32,12 +67,25 @@ def configure(conf):
++@@ -34,12 +69,25 @@ def configure(conf):
+      conf.DEFINE('HAVE_LIBREPLACE', 1)
+      conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+  
+@@ -103,21 +106,24 @@ index fd00a42..2df83cd 100644
+      conf.CHECK_HEADERS('port.h')
+      conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
+      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
+-@@ -108,7 +156,9 @@ def configure(conf):
++@@ -110,8 +158,10 @@ def configure(conf):
+      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+  
+--    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
++-    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
++-    conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
+ +    if Options.options.enable_valgrind:
+-+        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+++        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
+++        conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
+ +
+      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+-@@ -342,20 +392,19 @@ def configure(conf):
++@@ -379,21 +429,22 @@ def configure(conf):
++     conf.CHECK_FUNCS('prctl dirname basename')
+  
+      strlcpy_in_bsd = False
+- 
++-
+ -    # libbsd on some platforms provides strlcpy and strlcat
+ -    if not conf.CHECK_FUNCS('strlcpy strlcat'):
+ -        if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+@@ -132,27 +138,30 @@ index fd00a42..2df83cd 100644
+ -
+ -    if not conf.CHECK_FUNCS('closefrom'):
+ -        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
+++    
+ +    if Options.options.enable_libbsd:
+ +        # libbsd on some platforms provides strlcpy and strlcat
+ +        if not conf.CHECK_FUNCS('strlcpy strlcat'):
+-+            conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+-+                    checklibc=True)
+++            if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+++                                   checklibc=True):
+++                strlcpy_in_bsd = True
+ +        if not conf.CHECK_FUNCS('getpeereid'):
+ +            conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
+ +        if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
+ +            conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
+++        if not conf.CHECK_FUNCS('setproctitle_init'):
+++            conf.CHECK_FUNCS_IN('setproctitle_init', 'bsd', headers='sys/types.h bsd/unistd.h')
+ +
+ +        if not conf.CHECK_FUNCS('closefrom'):
+ +            conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
+-+    
+  
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+ diff --git a/wscript b/wscript
+-index 6505648..6608481 100644
++index bc5ee26..9ac10b6 100644
+ --- a/wscript
+ +++ b/wscript
+-@@ -63,6 +63,12 @@ def set_options(opt):
++@@ -69,6 +69,12 @@ def options(opt):
+                     action="store_true", dest='disable_tdb_mutex_locking',
+                     default=False)
+  
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.16.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb
+similarity index 78%
+rename from meta-networking/recipes-support/libtdb/libtdb_1.3.16.bb
+rename to meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb
+index 0579ed6..4c7755c 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.3.16.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb
+@@ -9,15 +9,18 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
+ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://do-not-check-xsltproc-manpages.patch \
+            file://tdb-Add-configure-options-for-packages.patch \
++           file://0001-waf-add-support-of-cross_compile.patch \
++           file://0001-Makefile-fix-problem-that-waf-cannot-found.patch \
+ "
+ 
+-SRC_URI[md5sum] = "7d06d8709188e07df853d9e91db88927"
+-SRC_URI[sha256sum] = "6a3fc2616567f23993984ada3cea97d953a27669ffd1bfbbe961f26e0cf96cc5"
++SRC_URI[md5sum] = "519d373ac72a66b0a2739dbb495de127"
++SRC_URI[sha256sum] = "1cb4399394c60a773430ca54848359adcf54fb6f136afdcfcbbe62b5f4245614"
+ 
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
+ "
++
+ PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
+ PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
+ PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
+@@ -29,6 +32,10 @@ S = "${WORKDIR}/tdb-${PV}"
+ 
+ inherit waf-samba
+ 
++#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
++#to cross Popen
++export WAF_NO_PREFORK="yes"
++
+ EXTRA_OECONF += "--disable-rpath \
+                  --bundled-libraries=NONE \
+                  --builtin-libraries=replace \
+-- 
+2.7.4
+
 
