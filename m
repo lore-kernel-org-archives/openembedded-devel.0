@@ -1,27 +1,30 @@
 Return-Path: <stefan@agner.ch>
 Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 08D1D748F1
+	by mail.openembedded.org (Postfix) with ESMTP id 969167C308
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jan 2019 12:12:47 +0000 (UTC)
+	Tue, 29 Jan 2019 12:12:51 +0000 (UTC)
 Received: from linuxdev2.toradex.int (unknown [46.140.72.82])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id DDB565C0AC6;
-	Tue, 29 Jan 2019 13:12:47 +0100 (CET)
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 3E7E55C1501;
+	Tue, 29 Jan 2019 13:12:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
 	t=1548763968;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
-	in-reply-to:references; bh=zyEGgSbuLhjgGhToYLfwN/xo3S7/UqZWVEHjwIkTgl8=;
-	b=rCXgGAb2OeJbktmxWh/IucZxW8p9gdgt0s3BIn+UHwiLtlrnhC4IoeJdvTgS27kLlNUjc1
-	Bu1M50ZDbSCKjaPw169J2tKpB6xdoDgMRbLGLANuw8gqiwWVwqcsekPM1SIUmQ3MooNFpn
-	g6x1JPGf/hrf0flBNuRr+DHYxs+ZlMY=
+	in-reply-to:in-reply-to:references:references;
+	bh=cYRb1eotQrVhpiHS069Cy/T4vxKlNCG+BZ9Rn/qH0P8=;
+	b=FFIxpk6qMpu8yWi3zCnbNRhRixIzBV2xg/aB7nl6VcEwWSNnLTqlFnxuDOiUeUhw3ERpZ5
+	JS6VKV/4H9HSudoPjJy8aTiEtl7Ifw3GHGQ8m6lnfBOXCA7H3nX/JP7FNjOA8QddhabH1l
+	MoWkQE6Lh0Wgq4wV+kSpsTdcd03JXlQ=
 From: Stefan Agner <stefan@agner.ch>
 To: raj.khem@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Jan 2019 13:12:40 +0100
-Message-Id: <20190129121241.38883-1-stefan@agner.ch>
+Date: Tue, 29 Jan 2019 13:12:41 +0100
+Message-Id: <20190129121241.38883-2-stefan@agner.ch>
 X-Mailer: git-send-email 2.13.6
+In-Reply-To: <20190129121241.38883-1-stefan@agner.ch>
+References: <20190129121241.38883-1-stefan@agner.ch>
 Cc: Stefan Agner <stefan.agner@toradex.com>, lixin.fnst@cn.fujitsu.com
-Subject: [PATCH 1/2] python-vcversioner: remove egg generation
+Subject: [PATCH 2/2] python3-vcversioner: remove egg generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2019 12:12:48 -0000
+X-List-Received-Date: Tue, 29 Jan 2019 12:12:51 -0000
 
 From: Stefan Agner <stefan.agner@toradex.com>
 
@@ -52,16 +55,16 @@ Python egg packaging.
 
 Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- .../recipes-devtools/python/python-vcversioner_2.16.0.0.bb        | 8 --------
+ .../recipes-devtools/python/python3-vcversioner_2.16.0.0.bb       | 8 --------
  1 file changed, 8 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-vcversioner_2.16.0.0.bb b/meta-python/recipes-devtools/python/python-vcversioner_2.16.0.0.bb
-index cd6fa8dff..e6cc4acce 100644
---- a/meta-python/recipes-devtools/python/python-vcversioner_2.16.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python-vcversioner_2.16.0.0.bb
-@@ -9,14 +9,6 @@ SRC_URI[sha256sum] = "dae60c17a479781f44a4010701833f1829140b1eeccd258762a74974aa
+diff --git a/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb b/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
+index f6372c8d5..149078c51 100644
+--- a/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
+@@ -9,12 +9,4 @@ SRC_URI[sha256sum] = "dae60c17a479781f44a4010701833f1829140b1eeccd258762a74974aa
  
- inherit pypi setuptools
+ inherit pypi setuptools3
  
 -do_compile_append() {
 -    ${PYTHON} setup.py -q bdist_egg --dist-dir ./
@@ -71,9 +74,7 @@ index cd6fa8dff..e6cc4acce 100644
 -    install -m 0644 ${S}/vcversioner*.egg ${D}/${PYTHON_SITEPACKAGES_DIR}/
 -}
 -
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-subprocess \
-     "
+ BBCLASSEXTEND = "native"
 -- 
 2.13.6
 
