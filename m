@@ -1,51 +1,52 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-vk1-f196.google.com (mail-vk1-f196.google.com
-	[209.85.221.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 271217C585
+Return-Path: <maxime.roussinbelanger@gmail.com>
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E0DF60107
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2019 18:50:39 +0000 (UTC)
-Received: by mail-vk1-f196.google.com with SMTP id h128so3908612vkg.11
+	Tue, 29 Jan 2019 00:15:12 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id r14so20521821qtp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2019 10:50:40 -0800 (PST)
+	Mon, 28 Jan 2019 16:15:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=iV4pP1RrfVIajhsW9yU/ipzMYuTjR/wk2q21WHwo4Kc=;
-	b=sTovgdrre7nLbeAEuHY1/98tFmqXL6glIWxDrwGeI9ZMiPTi20Qc3rfr2aJ4oN6czk
-	bhZjHCZ53mqG2A19JNTrTDhAS0TMDY0GrCuZpxoO4/IIzXg0Ww2e8ocGiQJEu9WsJvJG
-	/ifxoXxs2wq7+wXO/suEXbfVbHlokWnzQ25+skC/be98G8kF/4epZN5UvLPKkKZiUzE1
-	wcC3LS7jyt/QlD3ajn5wgsa+YzADpjEamiXBNdKCr2X+mzKOeI33AuNGIiE9+i47WbUq
-	Md8JRK1Kh7VGlHiooM57ry9mn3O1UfRF6tKTIOETV8hg2cK73DqGyTSoVlIUBZmSofFo
-	r5tg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TsZ3hGdyzkGefwjjtfNadUYCM/hmAHZJUVt9EYF2/1g=;
+	b=MwuK+512Ep9Ff7VemN8G4T3mSuyO55yzByBG7/fxRy507bUdWBZAoOET3lY0gNumHG
+	QNNXE3OcqXQND9Nhxtsbre+nWcD8MtzJAU1YivxfZLFMnYAglvaRuNyHITaxS7renPTm
+	CIwoFb8WYuxHzoXtDSpZl5G2fjTsi82ydkatGebPqQA5wuCCTD9wgsMeZKJtaytpbKuH
+	X33cVAgGgmxZYbLJTXUpY9FPuP8mZlbb/5UQjFgT6DOX3Jhqlhyq2TTQ+LWKpWwAeCjt
+	byN9kRa381c9NW4IGhesv7nAvKvJUUOHVoxZXlh07kMg7G54qvx8T+g7heUQ2Mxy52zv
+	xWrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=iV4pP1RrfVIajhsW9yU/ipzMYuTjR/wk2q21WHwo4Kc=;
-	b=kXwYLy1KzruKS9elOItZckp1S7I3ElxYP+0uD4zWBIisg+2Hn3zXz9iD5s28YGN2vC
-	i07fquyd7gPd32cQNDkUcBVhWVDt0fXfBuoIC7Ze7jtI5fIz9XtYXr1xqRZa/sezWJq0
-	/hYXMwf5qzz1LilBMW8ldkfZItD3w1MxmMfP2PtqNI9FQmzdGuMYmJbzQVL8Bg8lZw8o
-	6HXpClgtcImytzfvZkDp20lYHbP5GOua/qSv5v5foVZG9WIBsm2GlcUOw8eC5KUs/MIi
-	tst5DXXSoZwKXqI6kO5Cti5DFl6rnFH4c0yCUFyFhdOc0oMXHUZ/i7ULkKFhgt/71kux
-	Mhvw==
-X-Gm-Message-State: AJcUukcLeMdjY83tz3eNKsLs/G3OXyRRRisgnHu0ifiSRlnTa9JHKmVf
-	wzPcNCQenD8U7f3TMp7SOsLAoNTBdObea071hqc=
-X-Google-Smtp-Source: ALg8bN4awTeytptSFCSdleJ41vcXhzKtXnhFiVBIXd1eSbQwkQ72RTsBWL4RLu4fbVYFc0A1GhSV4wrqY+2pkNU6qlA=
-X-Received: by 2002:a1f:2f48:: with SMTP id v69mr9349989vkv.20.1548701439514; 
-	Mon, 28 Jan 2019 10:50:39 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TsZ3hGdyzkGefwjjtfNadUYCM/hmAHZJUVt9EYF2/1g=;
+	b=GUI/WXTU0jY2x7xRNHKmibMJ/iuBXT4BwFGg9dJo2RBsWy46fo5Vh1aasJP1Wqci6U
+	n0agHDXoVvDklCbicGqsv2qQFY4S1+X7sn6FH/7RU3A1rZy5k70KQGHywk5k/JjHGDlG
+	Bf+wd6W0YiBb8FVWB279Z543sxvK8wpPgHEfdV9pqUhhaQ0HHBYAy3dg5rwHyHZoxQVu
+	BiUTD29RvwktUD9u2XUi3XDc0hadjODU40Yy2UQmN3o+NJlxMOq1Z9BFInK0blGoH642
+	ISCOfIbOR8ur7BNc2CfSJErWvaMtVvW89pehCK9BGzZOSZ/y8NC6KPZ7pvr2Yd+h8O2F
+	SoNg==
+X-Gm-Message-State: AJcUukdzjrsepVFoWJ4yDFHZ2FD6H/B5sCJsyHB8VKHci0/KH9X1CK5w
+	M+Y6RMOZ/kMQcO28+ASEaluY32Ek
+X-Google-Smtp-Source: ALg8bN6xQZSK7DRv01eTGp60Af3Jgb6WEAY5ft3ka9edHsjuzlTC5n8HJhlLQji/Ipszhq6YJhwHrQ==
+X-Received: by 2002:ac8:7308:: with SMTP id x8mr23960581qto.284.1548720912810; 
+	Mon, 28 Jan 2019 16:15:12 -0800 (PST)
+Received: from mbedesk.Sonatest.net
+	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
+	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
+	e49sm79870797qta.0.2019.01.28.16.15.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 28 Jan 2019 16:15:11 -0800 (PST)
+From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Jan 2019 19:13:28 -0500
+Message-Id: <20190129001328.15320-1-maxime.roussinbelanger@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <CAAsqSTcN2Bkk_k_MLEWSTesEFEJURrXvHdyY2TzuA_fEh4iJUw@mail.gmail.com>
-	<6c8e0af4-bb46-ba48-eafb-a91a60bc837d@skidata.com>
-	<CAAsqSTdT-+0y=m_Oo2+8JEAmcGfVWLktUgXLG5LZ5qSmkHfVSw@mail.gmail.com>
-	<ae008457-e85f-59b8-07cd-fbe13eb55cdf@skidata.com>
-	<CAAsqSTcUVka9cWOueYVEKQj=tzx0Xuge3oED3dVdp9M-CXZPzw@mail.gmail.com>
-In-Reply-To: <CAAsqSTcUVka9cWOueYVEKQj=tzx0Xuge3oED3dVdp9M-CXZPzw@mail.gmail.com>
-From: Kyle Russell <bkylerussell@gmail.com>
-Date: Mon, 28 Jan 2019 13:50:27 -0500
-Message-ID: <CAFrQVPP5yfGuW=pQM7W0TLEO-SA1t0w9mVLcZ1piPNtNpt+ZHA@mail.gmail.com>
-To: attie.grande@argentum-systems.co.uk
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: better interface invocations
+Subject: [meta-oe][PATCH] libeigen: update from 3.3.5 -> 3.3.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,36 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2019 18:50:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 29 Jan 2019 00:15:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-I encountered the same problem on ARM, and arrived at the same upstream
-patch independently.  Would you like me to send my meta-java patch prefixed
-with [sumo]?  I'd be interested in having this fix backported, if you're
-still taking fixes for sumo.
+Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
+---
+ .../libeigen/{libeigen_3.3.5.bb => libeigen_3.3.7.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libeigen/{libeigen_3.3.5.bb => libeigen_3.3.7.bb} (79%)
 
-On Mon, Dec 17, 2018 at 10:12 AM Attie Grande <
-attie.grande@argentum-systems.co.uk> wrote:
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+similarity index 79%
+rename from meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb
+rename to meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+index 7078e50bb0..3be04478b0 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.5.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+@@ -5,10 +5,10 @@ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
+ 
+ SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
+-SRC_URI[md5sum] = "e83549a79d1b721da0f8899ab34edf95"
+-SRC_URI[sha256sum] = "7352bff3ea299e4c7d7fbe31c504f8eb9149d7e685dec5a12fbaa26379f603e2"
++SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
++SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
+ 
+-S = "${WORKDIR}/eigen-eigen-b3f3d4950030"
++S = "${WORKDIR}/eigen-eigen-323c052e1731"
+ 
+ inherit cmake
+ 
+-- 
+2.20.1
 
-> > No problem, please just put [sumo] in the subject then.
->
-> Sure, thanks for letting me know
->
-> > Ok. Just fyi: We will likely update to 8u181b13 soon
-> > (see https://patchwork.openembedded.org/patch/156314/)
->
-> Great - I'll keep a lookout!
->
-> There is further information about my issue on jdk-dev.
-> The thread starts here:
->
->   http://mail.openjdk.java.net/pipermail/jdk-dev/2018-November/002246.html
->
-> Attie
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
