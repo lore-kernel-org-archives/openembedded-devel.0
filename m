@@ -1,50 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EE876C514
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f41.google.com (mail-io1-f41.google.com
+	[209.85.166.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C5B9D7C3BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 21:37:29 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id m1so390078pgq.8
+	Wed, 30 Jan 2019 22:32:03 +0000 (UTC)
+Received: by mail-io1-f41.google.com with SMTP id b16so1013586ior.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 13:37:30 -0800 (PST)
+	Wed, 30 Jan 2019 14:32:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=XG2kMsQ2FLqVY6w6MuRMNlMEOFFvr3dKHZyBB4tKBeI=;
-	b=qSt8XrCNsUyOQeRzWl0v38iIaQZ711GUpQ91ltIkScO0/5ENAj43Y2aFoxsGcGNv4p
-	fx63w/j65vw5Sk7bhZcrOYVfKpWG2UE9x1v/3msCAFdVaI1wth4vvyIyNO3lZztyROwS
-	vIZpkF6pyXzoZptwaAaZkunyLD9fZxwCRdgYWIadE634WuFi8P8TwuqT0curFGR7Dq9q
-	UgHAPtEOHBC3qfTE2dSDOIjgaryx50LTri3fItALg/fCFHoWVpjsXvV+PCb+WpYwyNta
-	/oK3ON5r7Yf7wBtFQKBV7yNxr4EYErfQScZ04aheZkQrdeQv459gUje7WT0T9/s7oVJM
-	F8Mw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=kIUCGbFXYjYZ9sfVHh+DYAgkp1oWby/MY1Yx00BVX4g=;
+	b=E56u9zMoq7XV7uKP6wY5D8+Y4oZL5SUUbSdG1EnQZdAGdiOby+EzqD0F1y16Ym3p1I
+	KZowu9OUM9RjTyv2ECSGX1nhPCysGi0Rf5WdPao/nAlikTj4342liohzfMEej7mmTIJr
+	mNG6F89tplGxtzJgvUlhcmZc8GR7k6YHiDqpmUzBuvPEOcW6FD+fx/SZKgkD05WSANEG
+	E9mmQRRSXsaPtO9hDvuTB1R5lhGKoqCJSYPkAAA2qKLcnvixu8ghF9FzlDnhypFRipJI
+	LS7d8ECCy9Dcy/NdhLKjAHoTThSd3cmSdqylHZIHCVBJ9s5OGPKUlgKUSVl4WmKmXUMe
+	fClg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=XG2kMsQ2FLqVY6w6MuRMNlMEOFFvr3dKHZyBB4tKBeI=;
-	b=eLwkHZ2hMhmTTOTcQE5qYvUv9Qunk4Qt4oOx1dIvj42RIK75mualcN/YvHatSqC7hN
-	RaHQEsIMyQGt6oKvjeA6wc7XAkbRarRdTFZC5LtIx5x9J7xiW6eIvair1AevewkM33nW
-	kmxyrRQOtff6OfOiRU0mCnyLLfTJDF6Gk+cd2ulBg5KqjNwWKlySBGBngKzutMO4vnbE
-	rSc8ZuU0UjLYWfNdvbHDqgf6cMF0QbplyS8xXmBmA41oDuEp5W5x/ylXUoiPVcmWRS2j
-	lLl3OQZRqdm3UxnB4Je+eYUO81oefz+iyo1YYYUVEh63am40f3iKClwqFkI+ZKIfepeI
-	eO/Q==
-X-Gm-Message-State: AJcUukeKXi2Iev5WLKL+3xVA7gJts+iM7o0KT9dzbaYbR7minc0tLx9A
-	i0QX3kSqN5+I5K8m7aC1PntdHjQ1MP8=
-X-Google-Smtp-Source: ALg8bN721Knj42xrKTMVuURfrTZTmHnZ1t7txIROeLy4cdrIcC68pJDamKn1VgOVHI776Xd7l7m8bg==
-X-Received: by 2002:a63:c00b:: with SMTP id h11mr29654432pgg.429.1548884249989;
-	Wed, 30 Jan 2019 13:37:29 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::26b6])
-	by smtp.gmail.com with ESMTPSA id
-	184sm3505702pfe.106.2019.01.30.13.37.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Jan 2019 13:37:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 13:37:18 -0800
-Message-Id: <20190130213718.18451-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=kIUCGbFXYjYZ9sfVHh+DYAgkp1oWby/MY1Yx00BVX4g=;
+	b=f+GW+55eXb3Q0qsg2LYaeZxavElAWGQvCgKQWXNyk1d/jUYQNG3pMyxnz0Dwn41cvn
+	P5kGg5a4ALs9CJttFOnwZrIJh38/84T8e53rZ/ONNmF2bC4NHF0H1E1TW3TRzhiOWrnz
+	YKHysGemPt80aZohkLvFrpz86tyXk6bgx2adt5sew4A4Bpq6Vxof9EEpgpS7k6RbCyp8
+	+j8+h0+M8EtjWc50u2L++Od3B/nXv+jTcGeUdUT+HYOTfXVdeGGVr5aze9adRctPa17i
+	a/e5+hY1HGV+ps4Iqdp5+EoL+tC74rDeRiSPuHg8dOf0Ubmcpa45DJYxpAMQXngxxXrX
+	FGBg==
+X-Gm-Message-State: AJcUukc0dyZR1fRqwLwcdHVY/CLkwbNX/HsIxeOexoee0ZkYTgUyiGzz
+	xNiWz9BCe7d3zuKaAWS54yEf/dV+vNxvx6PjWBbgD8Uh
+X-Google-Smtp-Source: AHgI3IaUvhf//9lbhpoHUkbGYuPW2bGU7l723DIwknVS3Mm5Rf32Xjy6ilgROGjTsrOOIfbqipYR6k95tvusyuf3tY8=
+X-Received: by 2002:a5e:cb09:: with SMTP id p9mr19602097iom.91.1548887524746; 
+	Wed, 30 Jan 2019 14:32:04 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] botan: Upgrade to 2.9.0
+References: <20190130095201.11965-2-bunk@stusta.de>
+In-Reply-To: <20190130095201.11965-2-bunk@stusta.de>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 30 Jan 2019 23:31:52 +0100
+Message-ID: <CALbNGRQTaFFC1P1zQvjwO=-Kr1s61UPTGBv1w0+5YcCaXsnzFA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] Fix the libnm* packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,55 +53,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 21:37:29 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 30 Jan 2019 22:32:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-License-Update: Update copyright years to 2019
+On Wed, Jan 30, 2019 at 10:52 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> - libnmutil, libnmglib and libnmglib-vpn no longer exist
+>   after the 1.10.10 -> 1.14.4 upgrade
+Checked (OK am on thud environment) but it is 1.14.4. All packages you
+want to remove contain files on my build! Are you sure that you have
+the required PACKAGECONFIGS set (please set all and test) and the
+nasty new 'polkit' in your distro features?
 
-https://github.com/randombit/botan/commit/d5edb39e968893bafe87a6a5ef12af45914c0d70#diff-98cd14c95bb22f9d397da0603a77d950
+So Khem - have seen this on master-next - please block this one - I
+expect fallout.
 
-Swith to tarball fetcher
+Andreas
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../botan/{botan_2.7.0.bb => botan_2.9.0.bb}         | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-crypto/botan/{botan_2.7.0.bb => botan_2.9.0.bb} (78%)
 
-diff --git a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb b/meta-oe/recipes-crypto/botan/botan_2.9.0.bb
-similarity index 78%
-rename from meta-oe/recipes-crypto/botan/botan_2.7.0.bb
-rename to meta-oe/recipes-crypto/botan/botan_2.9.0.bb
-index 92853d00e8..a7d25d5674 100644
---- a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
-+++ b/meta-oe/recipes-crypto/botan/botan_2.9.0.bb
-@@ -4,15 +4,14 @@
- DESCRIPTION = "Crypto and TLS for C++11"
- HOMEPAGE = "https://botan.randombit.net"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://license.txt;md5=bf361fc63df3fa25652ee82c43b7601a"
-+LIC_FILES_CHKSUM = "file://license.txt;md5=f4c145d4d70a3244a053c9f90d4841fc"
- SECTION = "libs"
- 
-+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tgz"
-+SRC_URI[md5sum] = "db8403d6a2f10c20fde3f3c76be9a045"
-+SRC_URI[sha256sum] = "305564352334dd63ae63db039077d96ae52dfa57a3248871081719b6a9f2d119"
- 
--#v2.7.0
--SRCREV = "5874000d42c338ec95a7ff24cdc0c64e70f967b5"
--SRC_URI = "git://github.com/randombit/botan.git"
--
--S = "${WORKDIR}/git"
-+S = "${WORKDIR}/Botan-${PV}"
- 
- inherit python3native siteinfo lib_package
- 
-@@ -52,4 +51,3 @@ PACKAGES += "${PN}-python3"
- FILES_${PN}-python3 = "${libdir}/python3"
- 
- RDEPENDS_${PN}-python3 += "python3"
--
--- 
-2.20.1
-
+> - add a package for libnm
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>  .../recipes-connectivity/networkmanager/networkmanager_1.14.4.bb    | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+> index f1826c68e..9efe1fe49 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+> @@ -90,14 +90,12 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
+>  PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+>  PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+>
+> -PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
+> +PACKAGES =+ "libnm \
+>    ${PN}-nmtui ${PN}-nmtui-doc \
+>    ${PN}-adsl \
+>  "
+>
+> -FILES_libnmutil += "${libdir}/libnm-util.so.*"
+> -FILES_libnmglib += "${libdir}/libnm-glib.so.*"
+> -FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
+> +FILES_libnm += "${libdir}/libnm.so.*"
+>
+>  FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
+>
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
