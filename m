@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FC676C4A5
+	by mail.openembedded.org (Postfix) with ESMTP id A29457C2C9
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 30 Jan 2019 09:52:02 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43qJYZ6Xxvz4x
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43qJYb1ryDz5k
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 10:52:02 +0100 (CET)
+	Wed, 30 Jan 2019 10:52:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1548841923;
-	bh=4YQRl8bcC+4lXKSB9BulQnrdTYOfa78EiIqdT5QTKWo=;
+	bh=16WUvItM3CPafCFKJ8Z4OFS4n9wusbGe8pq1ppmhJcU=;
 	h=From:To:Subject:Date:From;
-	b=Oz5YzrvsQB89eRxrvpKd6Z7BbdsWBkTGmedSKImLrznpAvvTOM+wrrT9mn0I7W3K6
-	mE4AkkAYktO4XZ1UkpL9kvZqN1yHI4Wp6oRzw6CenNO0uPMZrBqinZ7XSXxpJ+yadT
-	12iCVCj+nkTFW5oaCS0s0ixW6V5nQ+FUhaCGtetZTC+5mB5vFmwtC+YTHpzMlMwNbA
-	StaCRo/DbVZD9iGSGoMKND7wfqbEbL5mQoU4NRH56R2YUu4G9lXXouE92S8MvOMG2q
-	62snXx5KuGI5Q8RqOyCL+ApL3xcOdJFf7PX2j0Q2tJO43lTNJubV5WkId1rxCjAUo9
-	PUvqg52WwUs5bm5mGZEgxMvGOj7Gn4Bv6FDVBWrS29fmtVAyPPs6rnCqui2kasOkRK
-	P2AffauHiBNwQy1rm/IFb/eX7w/TOG0vy+oqVyv9YKz7SKeBU0A7AtSUoVC29V8C3F
-	kaVc7vIooK5R2r/Z66H8jvDy91kkO3huJ6Im1Vg1n8AQxv3UpdqNzGVa1UuNmU7ZyO
-	HmB5V/UawuZENb9477FaBf+02cdOP8Q8Nrwb78EJD6t/mA2879tsqx/RQJElnzujeO
-	dfFe6x8bGepFOXVeYybPS4OOiwCUJU1TxNgKcjFHx1GoELOUA2Qtx/3wdOo77/I2CP
-	/RXgF5bKP5llUTpozsvQTQRU=
+	b=JoJSzo1A37M9/4raz9DEU601i8h/DYs8ElRqU3MI9chlxEPWoUaqV43DcVv1IuHs7
+	hAst4aJt7aoLA27sA3WfXqGBcf9KKGUMFWfBfk8zlYDhtRDZpFmH3oUBOMbJseCzEt
+	D1sIs9tHtxe9IzGdmuVLZLyV7fqfB3MtQCXULLByxdmYOFSLF/czpTX0Eo70o2jptY
+	6YvkJS5J3Kem8IW4ivpWKRqk8XZ9qnIXONZVfSu85tAQqpWq7zAt+6jUOqiksmyWyl
+	fuUaS0ft7C0Jyi+5zuDWLrKroJ8w3TfVV8cToGnESji5qaaQkcibKzLRq+rkdWQIZb
+	kjYoEpod+ftVjDH2TltKnRGmFds8dxx6LkDzCpI5ge9d/LSJOnvkfEJ4RhrvfOotSe
+	hJS/jNuo8kQv1EswU0gtgTy5/UScSOFw6zyTkb9Ai/6TUJIacGGaKS9PKc31sd8I3O
+	PlQreU/F76gR1+8Qn/L3bFS4J5Ii12y9jq3pADrDHMhr29nOhbajxEZhPl1ViWF0vJ
+	eV85DMfrbd6X2fwY7UEZz+kcsFFEDApTENGJii4sUca2o5EVU4rpHX8Uwq0BtMHniD
+	56EPaEeKSHm4t4xxP6KfLERITuCDELJ1N9tzsHM20MBWGKxTq5WObb9bbdMHxEjRyc
+	OpgmXfKo4SSsOsZPkMeRs2g0=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 11:52:00 +0200
-Message-Id: <20190130095201.11965-2-bunk@stusta.de>
+Date: Wed, 30 Jan 2019 11:52:01 +0200
+Message-Id: <20190130095201.11965-3-bunk@stusta.de>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][PATCH] Fix the libnm* packages
+Subject: [meta-networking][PATCH] wireless-regdb: update 2018.05.31 -> 2018.10.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +42,29 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 30 Jan 2019 09:52:02 -0000
 
-- libnmutil, libnmglib and libnmglib-vpn no longer exist
-  after the 1.10.10 -> 1.14.4 upgrade
-- add a package for libnm
-
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../recipes-connectivity/networkmanager/networkmanager_1.14.4.bb    | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ .../{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb} (91%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-index f1826c68e..9efe1fe49 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-@@ -90,14 +90,12 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
- PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
- PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
+rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+index 2b990db3c..e1aa9a517 100644
+--- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
++++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+@@ -5,8 +5,8 @@ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
  
--PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
-+PACKAGES =+ "libnm \
-   ${PN}-nmtui ${PN}-nmtui-doc \
-   ${PN}-adsl \
- "
+ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "0cbbdc21186c76cf58aba01b03f3dc5b"
+-SRC_URI[sha256sum] = "e1dfbc3b97771373077f430c3c05082fae883145b37db5b2cfd12c56676fbe7b"
++SRC_URI[md5sum] = "b81bd1f6525a4806a707881aa3dda63f"
++SRC_URI[sha256sum] = "0d3e845ac77d21aac9b88642c3dd043a83e3920d706b63d5e5c31dffdbec9116"
  
--FILES_libnmutil += "${libdir}/libnm-util.so.*"
--FILES_libnmglib += "${libdir}/libnm-glib.so.*"
--FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
-+FILES_libnm += "${libdir}/libnm.so.*"
- 
- FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
+ inherit bin_package allarch
  
 -- 
 2.11.0
