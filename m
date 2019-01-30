@@ -1,30 +1,23 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 63619607DE
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C46586B06D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 00:44:03 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.56,538,1539619200"; d="scan'208";a="53161504"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 30 Jan 2019 08:44:03 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C74EC4C4A8BE
+	Wed, 30 Jan 2019 02:38:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x0U2c77i021016
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 08:43:58 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.47) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.408.0; Wed, 30 Jan 2019 08:44:04 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
+	Tue, 29 Jan 2019 18:38:07 -0800 (PST)
+Received: from fidler.wrs.com (172.25.44.4) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
+	Tue, 29 Jan 2019 18:38:06 -0800
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Jan 2019 08:44:45 +0800
-Message-ID: <20190130004445.21000-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+Date: Tue, 29 Jan 2019 21:38:04 -0500
+Message-ID: <20190130023804.2337-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.47]
-X-yoursite-MailScanner-ID: C74EC4C4A8BE.A27D0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-oe][PATCH] php: upgrade to 5.6.39
+Subject: [PATCH] irssi: Upgrade from 1.0.4 to 1.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 00:44:04 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 02:38:06 -0000
 Content-Type: text/plain
 
-1.Upgrade php from 5.6.38 to 5.6.39.
-
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- meta-oe/recipes-devtools/php/{php_5.6.38.bb => php_5.6.39.bb} | 4 ++--
+ .../irssi/{irssi_1.0.4.bb => irssi_1.1.2.bb}                  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_5.6.38.bb => php_5.6.39.bb} (86%)
+ rename meta-oe/recipes-connectivity/irssi/{irssi_1.0.4.bb => irssi_1.1.2.bb} (77%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.6.38.bb b/meta-oe/recipes-devtools/php/php_5.6.39.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/php/php_5.6.38.bb
-rename to meta-oe/recipes-devtools/php/php_5.6.39.bb
-index d6f51454f..a1e7dcdec 100644
---- a/meta-oe/recipes-devtools/php/php_5.6.38.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.6.39.bb
-@@ -16,8 +16,8 @@ SRC_URI_append_class-target = " \
-                                 file://php5-0001-opcache-config.m4-enable-opcache.patch \
-                                 "
+diff --git a/meta-oe/recipes-connectivity/irssi/irssi_1.0.4.bb b/meta-oe/recipes-connectivity/irssi/irssi_1.1.2.bb
+similarity index 77%
+rename from meta-oe/recipes-connectivity/irssi/irssi_1.0.4.bb
+rename to meta-oe/recipes-connectivity/irssi/irssi_1.1.2.bb
+index 10b04bb52..e2867e84b 100644
+--- a/meta-oe/recipes-connectivity/irssi/irssi_1.0.4.bb
++++ b/meta-oe/recipes-connectivity/irssi/irssi_1.1.2.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55fdc1113306167d6ea2561404ce02f8"
+ DEPENDS = "glib-2.0 ncurses openssl"
  
--SRC_URI[md5sum] = "5b98aa066567eca8e5738b8ef4a3545c"
--SRC_URI[sha256sum] = "d65b231bbdd63be4439ef5ced965cfd63e62983429dbd4dfcfb49981593ebc03"
-+SRC_URI[md5sum] = "6951d66bf07ce35beda3be0a66bd8e7c"
-+SRC_URI[sha256sum] = "b3db2345f50c010b01fe041b4e0f66c5aa28eb325135136f153e18da01583ad5"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "46d4ac2a7ab472e5dc800e5d7bd9a879"
+-SRC_URI[sha256sum] = "b85c07dbafe178213eccdc69f5f8f0ac024dea01c67244668f91ec1c06b986ca"
++SRC_URI[md5sum] = "271d2fd875cddd34526234d8a766d82c"
++SRC_URI[sha256sum] = "5ccc2b89a394e91bea0aa83a951c3b1d471c76da87b4169ec435530a31bf9732"
  
- DEPENDS += "libmcrypt"
- EXTRA_OECONF += "--with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
+ inherit autotools pkgconfig
+ 
 -- 
-2.17.2
-
-
+2.17.0
 
 
