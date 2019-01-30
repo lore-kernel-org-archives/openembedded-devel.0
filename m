@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 50BFE7C2AA
+	by mail.openembedded.org (Postfix) with ESMTP id 4FC676C4A5
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 30 Jan 2019 09:52:02 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43qJYZ40mZz4v
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43qJYZ6Xxvz4x
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 10:52:01 +0100 (CET)
+	Wed, 30 Jan 2019 10:52:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1548841922;
-	bh=SUYuNPZikvywQXUL38foL9iV//wp+4wdJhLS45wtu54=;
+	s=default; t=1548841923;
+	bh=4YQRl8bcC+4lXKSB9BulQnrdTYOfa78EiIqdT5QTKWo=;
 	h=From:To:Subject:Date:From;
-	b=dinQ7eUGWuxv7DwtE3vG/9KlZTm6xmQgHKq0jAj2fbJRhRENNt9XFSABsgFuLu3Ui
-	7doKZbNqXwSdpE7KyufPJYE29ITa6AgQr1QQimEzKy4kjB60ih6KMKNkRGb6cv5Zvt
-	a26eHDlDCkLCSwnCksoz92/zpER+i8SyVJNYlOsybIlWv+yePAgb43r4+hB9oug8zp
-	1IUp+pvl0DICG1dtwfTR3BiFeRbIeKLL6NNsRNxdc9z6JTOuPlCGdFOalSWOM02RlN
-	E6Rn6QueqTotp5i2vDNCKkjzbvK3IEJgfbV6/Qq0AVSM1ry+n1tO9I0UEEDZGGOn9a
-	96ohpbzksAYKsQ3CRMWv7jnkyQUcDFdoIB+2R3DTL+MYj8oscSJjmvL0Z80J5eUz4X
-	+o6y9XQ+rm+MPnNLDDTdF7yuIBbcp32+2eL07RPE6JZyscXDdRTskR8Jhe0NLU8uRn
-	cgpSI+Z5full/lbqRs2jmBmWsySZyaeAejW8l59y1xFFI0qnKE+0lrxIZqJwaHjeGL
-	eIyxobG5EkxHbbCsH3SdSdEBbcbdHPyvjjX1xqHdH5DpCQd+hSe3fhp+6SYUnC7CPz
-	D7mWMkjiKwgZRF41nv1Bfv8Z8L1jPVYAATu+9NCMWHcytrjE3Db+vSXDgLAcVzJW2d
-	FOvN8ViGh9o8MCoZBnZOQ9/E=
+	b=Oz5YzrvsQB89eRxrvpKd6Z7BbdsWBkTGmedSKImLrznpAvvTOM+wrrT9mn0I7W3K6
+	mE4AkkAYktO4XZ1UkpL9kvZqN1yHI4Wp6oRzw6CenNO0uPMZrBqinZ7XSXxpJ+yadT
+	12iCVCj+nkTFW5oaCS0s0ixW6V5nQ+FUhaCGtetZTC+5mB5vFmwtC+YTHpzMlMwNbA
+	StaCRo/DbVZD9iGSGoMKND7wfqbEbL5mQoU4NRH56R2YUu4G9lXXouE92S8MvOMG2q
+	62snXx5KuGI5Q8RqOyCL+ApL3xcOdJFf7PX2j0Q2tJO43lTNJubV5WkId1rxCjAUo9
+	PUvqg52WwUs5bm5mGZEgxMvGOj7Gn4Bv6FDVBWrS29fmtVAyPPs6rnCqui2kasOkRK
+	P2AffauHiBNwQy1rm/IFb/eX7w/TOG0vy+oqVyv9YKz7SKeBU0A7AtSUoVC29V8C3F
+	kaVc7vIooK5R2r/Z66H8jvDy91kkO3huJ6Im1Vg1n8AQxv3UpdqNzGVa1UuNmU7ZyO
+	HmB5V/UawuZENb9477FaBf+02cdOP8Q8Nrwb78EJD6t/mA2879tsqx/RQJElnzujeO
+	dfFe6x8bGepFOXVeYybPS4OOiwCUJU1TxNgKcjFHx1GoELOUA2Qtx/3wdOo77/I2CP
+	/RXgF5bKP5llUTpozsvQTQRU=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 11:51:59 +0200
-Message-Id: <20190130095201.11965-1-bunk@stusta.de>
+Date: Wed, 30 Jan 2019 11:52:00 +0200
+Message-Id: <20190130095201.11965-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][PATCH] Split ntpq into an own package
+Subject: [meta-networking][PATCH] Fix the libnm* packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,44 +42,36 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 30 Jan 2019 09:52:02 -0000
 
-ntpq is the standard query program for ntp,
-but ntp-utils depends on perl.
+- libnmutil, libnmglib and libnmglib-vpn no longer exist
+  after the 1.10.10 -> 1.14.4 upgrade
+- add a package for libnm
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../recipes-connectivity/networkmanager/networkmanager_1.14.4.bb    | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-index 53e41297a..289d2645b 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-@@ -105,7 +105,7 @@ do_install_append() {
-     rmdir --ignore-fail-on-non-empty ${D}${libexecdir}
- }
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+index f1826c68e..9efe1fe49 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
+@@ -90,14 +90,12 @@ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
+ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+ PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
  
--PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-+PACKAGES += "ntpdate sntp ntpq ${PN}-tickadj ${PN}-utils"
- # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
+-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
++PACKAGES =+ "libnm \
+   ${PN}-nmtui ${PN}-nmtui-doc \
+   ${PN}-adsl \
+ "
  
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-@@ -117,6 +117,8 @@ RDEPENDS_${PN} += "libgcc"
- RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
- RCONFLICTS_${PN}-utils = "${PN}-bin"
-+# ntpq was split out of ntp-utils
-+RDEPENDS_${PN}-utils = "ntpq"
+-FILES_libnmutil += "${libdir}/libnm-util.so.*"
+-FILES_libnmglib += "${libdir}/libnm-glib.so.*"
+-FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
++FILES_libnm += "${libdir}/libnm.so.*"
  
- SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
- SYSTEMD_SERVICE_${PN} = "ntpd.service"
-@@ -151,6 +153,7 @@ FILES_sntp = "${sbindir}/sntp \
-               ${sysconfdir}/default/sntp \
-               ${systemd_unitdir}/system/sntp.service \
-              "
-+FILES_ntpq = "${sbindir}/ntpq"
+ FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
  
- CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
- CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
 -- 
 2.11.0
 
