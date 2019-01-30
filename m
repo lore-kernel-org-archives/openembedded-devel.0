@@ -1,52 +1,53 @@
-Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 97AE07C31B
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 3836D6C4A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 19:00:16 +0000 (UTC)
-Received: by mail-qt1-f177.google.com with SMTP id u47so735201qtj.6
+	Wed, 30 Jan 2019 21:35:20 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id b11so401550wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 11:00:17 -0800 (PST)
+	Wed, 30 Jan 2019 13:35:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=QOpxQ+SaNoiGaJQR3Sg788S7LZwE7o4A53JjaRF7KCU=;
-	b=n9upd/u0+SWsJ5Dj4n2c4Y2Tqfzs6EySbSPzhJVvxEAHRUaGp/V8o4w9Ykd1kywXc2
-	Be/CHC2KqsiwzAmjAGBJduKVC9RCXjK36chYVpApXS60coSH2PT6uw6PWADEi/cXJYcs
-	C9tdKkfcOgPFy4yoNrk5FcX5IYQv07+NgY9FIuyAUP7o0m3KjgLasqD1c6l9LJNYeE6y
-	3UNqGfz2UtIUhd2OStHya5zJI+FeeTllN8xdGjjZ4QernnVpgmq9WdHeYKzZHN95eYjZ
-	xjKLCLUCKubfoXzAkn/Ei5uAuMd7H5HvADt9MoJbOlOVo+W9HRuWebFd9vYh8deCJ8wX
-	GlqQ==
+	bh=JOBOMx13q6YHMYi1Bvq/xzYmBSMWUvP73EIQysrgh1Y=;
+	b=mAPKPPZVRE8ocX3Au7CrMU4e077TmLz1AlnT80Q7GEs3I2GT45ALsK+YShnJBFqgb0
+	UA8Mig4JojwaThr5DL9FahXSx5CI5Yqz7eTkyDVhaKdUevCHnXiANh5yIhu6KWF2tvTR
+	QyBJ5/KO3viWZ/3awSswv8B7a0WyCewsWomcRkoeHIk9bg2R3kGjVVtnJ0lhWyDvLLnR
+	uQwSsqYmnCyPMpIhbouLnjNF4l9WtHypf70EwGrJJrF8Stx45CjKZ5MX1nqa4yxKYla9
+	hxBmAWmVsJjIKnIqKZw+JiQphKM/UMJAtoGaqb6Cdr4nARU8t5a+YkDs1etEQNuAMFIq
+	k4wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=QOpxQ+SaNoiGaJQR3Sg788S7LZwE7o4A53JjaRF7KCU=;
-	b=l2UVOpViOnkDrtGfiiPKfzR/rvN6Hs5bXzZ3gno4/fn6tRz5pE8e0MmN9xJTI6sRHp
-	kDY9VOP7gBMujj1P5orRM7IZiHSLeH5aIg9oNbHDDPRlcBZ9adykMmD1eBg8nfS7/0b/
-	aPI4vnZH9FkdZINwSu6G0z2rS1fMCuKtHLzlMKhIJbbt/N9kisge4kzvhnCAyjKgdc5/
-	1OtRP+sRcVGfSskfT+z1K4yW+avQskLnC57wlziWIpF8mMkwUhDQdpcibNjFcoOGh0Iu
-	QXq34rPcmdMWPxE84U9vP0lbpyjYNLg773BjAxzJCF76kr7fNnqQaPshuPUqCw1jLM+d
-	DO/Q==
-X-Gm-Message-State: AJcUukcolQytN9dfZ5XVW2FM9C7keS+Vuo3u6ZmDMpkaY4fNEXasre9L
-	xYPmWxqBMaXUkxwSi1X/V1NcKiXR
-X-Google-Smtp-Source: ALg8bN49kPIg2YQIWr0yqkAXXM9c9WYhyXxBYydVrAPrOz2ZQdLtXDD/XDRYckDiQ1AyOz6Z57l9kA==
-X-Received: by 2002:a0c:9659:: with SMTP id 25mr29089312qvy.3.1548874817117;
-	Wed, 30 Jan 2019 11:00:17 -0800 (PST)
-Received: from mbedesk.Sonatest.net
-	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
-	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
-	b134sm1300825qkg.78.2019.01.30.11.00.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Jan 2019 11:00:16 -0800 (PST)
-From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
-	<maxime.roussinbelanger@gmail.com>
+	bh=JOBOMx13q6YHMYi1Bvq/xzYmBSMWUvP73EIQysrgh1Y=;
+	b=JJhORw19/gh+zDaLSs9ztfzvPwXF2Dhxup89dztF+B8y4XxaZOepr86yuYN+a/mKeG
+	zuyjsuznzclmIUhPsUYgaeG3QW3MmhFJb+Av0bwxpGDg/bJ1pEVs+iZYKPJnM57YyCEp
+	ltCDLuMVCvTxNbmzynQPC8lvoJoLuv5UW2/rE0snh/gHsaKbFly4GvxfWB6Bx78zK8ru
+	VaTQwq7arGES0MXkC+05EQXNilcz0KJ8fCXH07ldqGtnqtKnjjWCwoemn9HUI6bI0dB+
+	Aa5w2GLZxPSr+NvoPwOm6Fv/lbnMTdeKJT+1osmqgx3RmsPDBTdjb9tNM4RMeY3T4uKJ
+	MSyQ==
+X-Gm-Message-State: AJcUukeML9H+NquDw+lOmpcMUrOtGbDMG0w8bRQtm7cufpw0rLeo/R8J
+	+TJobuuevCNea0uKNHX9qwXE8hd2
+X-Google-Smtp-Source: ALg8bN4es7pncgnjjSYvDNUxw/ttJ/i7B7t8YDdUo8vh09SeWFmE26LbhmAFiUy34ZtTp8buQGJRhQ==
+X-Received: by 2002:a7b:c156:: with SMTP id z22mr26707951wmi.24.1548884120088; 
+	Wed, 30 Jan 2019 13:35:20 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F017D32603632896313B27F.dip0.t-ipconnect.de.
+	[2003:f0:7f01:7d32:6036:3289:6313:b27f])
+	by smtp.gmail.com with ESMTPSA id
+	z14sm1418054wrm.48.2019.01.30.13.35.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 30 Jan 2019 13:35:19 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 13:46:56 -0500
-Message-Id: <20190130184656.745-1-maxime.roussinbelanger@gmail.com>
+Date: Wed, 30 Jan 2019 22:35:09 +0100
+Message-Id: <20190130213510.18227-1-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libeigen: switch from http to https
+Subject: [PATCH 1/2] libgit2: Fix install for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,28 +60,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 19:00:17 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 21:35:20 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
----
- meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+| ERROR: libgit2-0.27.4-r0 do_package: QA Issue: libgit2: Files/directories were installed but not shipped in any package:
+|   /usr/lib/libgit2.so.0.27.5
+|   /usr/lib/libgit2.so.27
+|   /usr/lib/libgit2.so
+|   /usr/lib/pkgconfig
+|   /usr/lib/pkgconfig/libgit2.pc
+| Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
 
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-index 3be04478b0..e1deb662ae 100644
---- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
++ reduce 8 spaces by 4
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
+index e7f768892..816ae5e2e 100644
+--- a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
++++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
+@@ -14,11 +14,12 @@ S = "${WORKDIR}/git"
+ inherit cmake
  
--SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
-+SRC_URI = "https://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
- SRC_URI[md5sum] = "05b1f7511c93980c385ebe11bd3c93fa"
- SRC_URI[sha256sum] = "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
+ EXTRA_OECMAKE = "\
+-        -DTHREADSAFE=ON \
+-        -DBUILD_CLAR=OFF \
+-        -DSHA1_TYPE="builtin" \
+-        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+-        -DBUILD_EXAMPLES=OFF \
++    -DTHREADSAFE=ON \
++    -DBUILD_CLAR=OFF \
++    -DSHA1_TYPE="builtin" \
++    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
++    -DBUILD_EXAMPLES=OFF \
++    -DLIB_INSTALL_DIR=${libdir} \
+ "
  
+ BBCLASSEXTEND = "native"
 -- 
 2.20.1
 
