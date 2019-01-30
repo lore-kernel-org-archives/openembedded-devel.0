@@ -1,56 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id BA43C6C4A5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EE876C514
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 21:35:20 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id y185so605229wmd.1
+	Wed, 30 Jan 2019 21:37:29 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id m1so390078pgq.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 13:35:22 -0800 (PST)
+	Wed, 30 Jan 2019 13:37:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=a0sK23Cf0+jV3arvVLuI1ujPmrM7wVGjyi+DsfqFQAI=;
-	b=mjT99rGGhtSuyZ388MTcxaSu9O4NPlIKb5KzgVHRnujDQE1mw8oI2ho+P/LPrsRLb1
-	VJSZ46WJ0TEtkYZgslPsPWPxLS38fumEydyBiAIaC2brEl8Bp+gvFLuuMDzsIfJQGxax
-	Ml2L9tDsacp/cbnermPuxY0gm22YIrvSmXMt7x2F8fzV6uLU91gfcCPTjEQyHxu0gjpo
-	Asj8KQHMUaVFqCiQvSa2CwwhT50APTeAvdHxapVYTRHpc6621ROcv1+6P+w8F9YZDzgc
-	bERzm4573qs2W2Wooz2GInYUR95dyO1g2LgyJREhM9OQEfWvzM81+pJohTcZ99FQgzG1
-	xn5A==
+	bh=XG2kMsQ2FLqVY6w6MuRMNlMEOFFvr3dKHZyBB4tKBeI=;
+	b=qSt8XrCNsUyOQeRzWl0v38iIaQZ711GUpQ91ltIkScO0/5ENAj43Y2aFoxsGcGNv4p
+	fx63w/j65vw5Sk7bhZcrOYVfKpWG2UE9x1v/3msCAFdVaI1wth4vvyIyNO3lZztyROwS
+	vIZpkF6pyXzoZptwaAaZkunyLD9fZxwCRdgYWIadE634WuFi8P8TwuqT0curFGR7Dq9q
+	UgHAPtEOHBC3qfTE2dSDOIjgaryx50LTri3fItALg/fCFHoWVpjsXvV+PCb+WpYwyNta
+	/oK3ON5r7Yf7wBtFQKBV7yNxr4EYErfQScZ04aheZkQrdeQv459gUje7WT0T9/s7oVJM
+	F8Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=a0sK23Cf0+jV3arvVLuI1ujPmrM7wVGjyi+DsfqFQAI=;
-	b=DbhZd/gH1mgXxtZV0Fzf45OzBgzrGOfC3/943MJZVil0pee1QSXMCwZ9yBseWox96j
-	dnhS10R3uzF9KdNqaukdQDEiTrbQD4NtZOnBz3VSNJbNVjesb5S62DriLgdDfTpspu9N
-	VA9fWZxaG5L7/lg+L6Su2BAesOlz6knLDW0mAhTO3flqaH/gcer3SNWLK+2FYe+rjj+D
-	HZjL7o7DqreYZLImlO574k/eaT+QnbbAojwqDGDDQ4GPe2Ujkmieqh0ODn30pzdD4UIG
-	9ZvD/mGqrcOwOjg0r9JTw48DXgwWcvGhswomfwSugyCYsIQAuHoVMqKDi9iNlLIwoKYp
-	IHBA==
-X-Gm-Message-State: AJcUukfdEmZ50gaz1k4sbmI52R9GMlS0cWyNvirKWFPyDTY5Tkj/sCNr
-	VxZKpQfqBk8lgCznxF+YqSY3Ha46
-X-Google-Smtp-Source: ALg8bN5lLQ5GEmCYJuekybFINgliokYZAFusHw1vdbKY5SKm8eq+J7FPOTpNeu1mmobuf4zpmYgX9Q==
-X-Received: by 2002:a1c:e484:: with SMTP id
-	b126mr25751148wmh.119.1548884121132; 
-	Wed, 30 Jan 2019 13:35:21 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F017D32603632896313B27F.dip0.t-ipconnect.de.
-	[2003:f0:7f01:7d32:6036:3289:6313:b27f])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XG2kMsQ2FLqVY6w6MuRMNlMEOFFvr3dKHZyBB4tKBeI=;
+	b=eLwkHZ2hMhmTTOTcQE5qYvUv9Qunk4Qt4oOx1dIvj42RIK75mualcN/YvHatSqC7hN
+	RaHQEsIMyQGt6oKvjeA6wc7XAkbRarRdTFZC5LtIx5x9J7xiW6eIvair1AevewkM33nW
+	kmxyrRQOtff6OfOiRU0mCnyLLfTJDF6Gk+cd2ulBg5KqjNwWKlySBGBngKzutMO4vnbE
+	rSc8ZuU0UjLYWfNdvbHDqgf6cMF0QbplyS8xXmBmA41oDuEp5W5x/ylXUoiPVcmWRS2j
+	lLl3OQZRqdm3UxnB4Je+eYUO81oefz+iyo1YYYUVEh63am40f3iKClwqFkI+ZKIfepeI
+	eO/Q==
+X-Gm-Message-State: AJcUukeKXi2Iev5WLKL+3xVA7gJts+iM7o0KT9dzbaYbR7minc0tLx9A
+	i0QX3kSqN5+I5K8m7aC1PntdHjQ1MP8=
+X-Google-Smtp-Source: ALg8bN721Knj42xrKTMVuURfrTZTmHnZ1t7txIROeLy4cdrIcC68pJDamKn1VgOVHI776Xd7l7m8bg==
+X-Received: by 2002:a63:c00b:: with SMTP id h11mr29654432pgg.429.1548884249989;
+	Wed, 30 Jan 2019 13:37:29 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::26b6])
 	by smtp.gmail.com with ESMTPSA id
-	z14sm1418054wrm.48.2019.01.30.13.35.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 30 Jan 2019 13:35:20 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	184sm3505702pfe.106.2019.01.30.13.37.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jan 2019 13:37:29 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 22:35:10 +0100
-Message-Id: <20190130213510.18227-2-schnitzeltony@gmail.com>
+Date: Wed, 30 Jan 2019 13:37:18 -0800
+Message-Id: <20190130213718.18451-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190130213510.18227-1-schnitzeltony@gmail.com>
-References: <20190130213510.18227-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] libgit2: upgrade 0.27.4 -> 0.27.8
+Subject: [meta-oe][PATCH] botan: Upgrade to 2.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,34 +57,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 21:35:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Jan 2019 21:37:29 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../libgit2/{libgit2_0.27.4.bb => libgit2_0.27.8.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgit2/{libgit2_0.27.4.bb => libgit2_0.27.8.bb} (90%)
+License-Update: Update copyright years to 2019
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-similarity index 90%
-rename from meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
-rename to meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-index 816ae5e2e..a43408908 100644
---- a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
- DEPENDS = "curl openssl zlib libssh2 libgcrypt"
+https://github.com/randombit/botan/commit/d5edb39e968893bafe87a6a5ef12af45914c0d70#diff-98cd14c95bb22f9d397da0603a77d950
+
+Swith to tarball fetcher
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../botan/{botan_2.7.0.bb => botan_2.9.0.bb}         | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-crypto/botan/{botan_2.7.0.bb => botan_2.9.0.bb} (78%)
+
+diff --git a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb b/meta-oe/recipes-crypto/botan/botan_2.9.0.bb
+similarity index 78%
+rename from meta-oe/recipes-crypto/botan/botan_2.7.0.bb
+rename to meta-oe/recipes-crypto/botan/botan_2.9.0.bb
+index 92853d00e8..a7d25d5674 100644
+--- a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
++++ b/meta-oe/recipes-crypto/botan/botan_2.9.0.bb
+@@ -4,15 +4,14 @@
+ DESCRIPTION = "Crypto and TLS for C++11"
+ HOMEPAGE = "https://botan.randombit.net"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://license.txt;md5=bf361fc63df3fa25652ee82c43b7601a"
++LIC_FILES_CHKSUM = "file://license.txt;md5=f4c145d4d70a3244a053c9f90d4841fc"
+ SECTION = "libs"
  
- SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
--#v0.27.5
--SRCREV = "8e0b172981a046d19f1d9efa5acd6186bccbd3ce"
-+#v0.27.8
-+SRCREV = "2882803ca2b2cdedd069746422155a23fdd002b2"
++SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tgz"
++SRC_URI[md5sum] = "db8403d6a2f10c20fde3f3c76be9a045"
++SRC_URI[sha256sum] = "305564352334dd63ae63db039077d96ae52dfa57a3248871081719b6a9f2d119"
  
- S = "${WORKDIR}/git"
+-#v2.7.0
+-SRCREV = "5874000d42c338ec95a7ff24cdc0c64e70f967b5"
+-SRC_URI = "git://github.com/randombit/botan.git"
+-
+-S = "${WORKDIR}/git"
++S = "${WORKDIR}/Botan-${PV}"
  
+ inherit python3native siteinfo lib_package
+ 
+@@ -52,4 +51,3 @@ PACKAGES += "${PN}-python3"
+ FILES_${PN}-python3 = "${libdir}/python3"
+ 
+ RDEPENDS_${PN}-python3 += "python3"
+-
 -- 
 2.20.1
 
