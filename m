@@ -1,53 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3836D6C4A5
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+	[209.85.128.49])
+	by mail.openembedded.org (Postfix) with ESMTP id BA43C6C4A5
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 30 Jan 2019 21:35:20 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id b11so401550wmj.1
+Received: by mail-wm1-f49.google.com with SMTP id y185so605229wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 13:35:21 -0800 (PST)
+	Wed, 30 Jan 2019 13:35:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=JOBOMx13q6YHMYi1Bvq/xzYmBSMWUvP73EIQysrgh1Y=;
-	b=mAPKPPZVRE8ocX3Au7CrMU4e077TmLz1AlnT80Q7GEs3I2GT45ALsK+YShnJBFqgb0
-	UA8Mig4JojwaThr5DL9FahXSx5CI5Yqz7eTkyDVhaKdUevCHnXiANh5yIhu6KWF2tvTR
-	QyBJ5/KO3viWZ/3awSswv8B7a0WyCewsWomcRkoeHIk9bg2R3kGjVVtnJ0lhWyDvLLnR
-	uQwSsqYmnCyPMpIhbouLnjNF4l9WtHypf70EwGrJJrF8Stx45CjKZ5MX1nqa4yxKYla9
-	hxBmAWmVsJjIKnIqKZw+JiQphKM/UMJAtoGaqb6Cdr4nARU8t5a+YkDs1etEQNuAMFIq
-	k4wA==
+	bh=a0sK23Cf0+jV3arvVLuI1ujPmrM7wVGjyi+DsfqFQAI=;
+	b=mjT99rGGhtSuyZ388MTcxaSu9O4NPlIKb5KzgVHRnujDQE1mw8oI2ho+P/LPrsRLb1
+	VJSZ46WJ0TEtkYZgslPsPWPxLS38fumEydyBiAIaC2brEl8Bp+gvFLuuMDzsIfJQGxax
+	Ml2L9tDsacp/cbnermPuxY0gm22YIrvSmXMt7x2F8fzV6uLU91gfcCPTjEQyHxu0gjpo
+	Asj8KQHMUaVFqCiQvSa2CwwhT50APTeAvdHxapVYTRHpc6621ROcv1+6P+w8F9YZDzgc
+	bERzm4573qs2W2Wooz2GInYUR95dyO1g2LgyJREhM9OQEfWvzM81+pJohTcZ99FQgzG1
+	xn5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=JOBOMx13q6YHMYi1Bvq/xzYmBSMWUvP73EIQysrgh1Y=;
-	b=JJhORw19/gh+zDaLSs9ztfzvPwXF2Dhxup89dztF+B8y4XxaZOepr86yuYN+a/mKeG
-	zuyjsuznzclmIUhPsUYgaeG3QW3MmhFJb+Av0bwxpGDg/bJ1pEVs+iZYKPJnM57YyCEp
-	ltCDLuMVCvTxNbmzynQPC8lvoJoLuv5UW2/rE0snh/gHsaKbFly4GvxfWB6Bx78zK8ru
-	VaTQwq7arGES0MXkC+05EQXNilcz0KJ8fCXH07ldqGtnqtKnjjWCwoemn9HUI6bI0dB+
-	Aa5w2GLZxPSr+NvoPwOm6Fv/lbnMTdeKJT+1osmqgx3RmsPDBTdjb9tNM4RMeY3T4uKJ
-	MSyQ==
-X-Gm-Message-State: AJcUukeML9H+NquDw+lOmpcMUrOtGbDMG0w8bRQtm7cufpw0rLeo/R8J
-	+TJobuuevCNea0uKNHX9qwXE8hd2
-X-Google-Smtp-Source: ALg8bN4es7pncgnjjSYvDNUxw/ttJ/i7B7t8YDdUo8vh09SeWFmE26LbhmAFiUy34ZtTp8buQGJRhQ==
-X-Received: by 2002:a7b:c156:: with SMTP id z22mr26707951wmi.24.1548884120088; 
-	Wed, 30 Jan 2019 13:35:20 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=a0sK23Cf0+jV3arvVLuI1ujPmrM7wVGjyi+DsfqFQAI=;
+	b=DbhZd/gH1mgXxtZV0Fzf45OzBgzrGOfC3/943MJZVil0pee1QSXMCwZ9yBseWox96j
+	dnhS10R3uzF9KdNqaukdQDEiTrbQD4NtZOnBz3VSNJbNVjesb5S62DriLgdDfTpspu9N
+	VA9fWZxaG5L7/lg+L6Su2BAesOlz6knLDW0mAhTO3flqaH/gcer3SNWLK+2FYe+rjj+D
+	HZjL7o7DqreYZLImlO574k/eaT+QnbbAojwqDGDDQ4GPe2Ujkmieqh0ODn30pzdD4UIG
+	9ZvD/mGqrcOwOjg0r9JTw48DXgwWcvGhswomfwSugyCYsIQAuHoVMqKDi9iNlLIwoKYp
+	IHBA==
+X-Gm-Message-State: AJcUukfdEmZ50gaz1k4sbmI52R9GMlS0cWyNvirKWFPyDTY5Tkj/sCNr
+	VxZKpQfqBk8lgCznxF+YqSY3Ha46
+X-Google-Smtp-Source: ALg8bN5lLQ5GEmCYJuekybFINgliokYZAFusHw1vdbKY5SKm8eq+J7FPOTpNeu1mmobuf4zpmYgX9Q==
+X-Received: by 2002:a1c:e484:: with SMTP id
+	b126mr25751148wmh.119.1548884121132; 
+	Wed, 30 Jan 2019 13:35:21 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F017D32603632896313B27F.dip0.t-ipconnect.de.
 	[2003:f0:7f01:7d32:6036:3289:6313:b27f])
 	by smtp.gmail.com with ESMTPSA id
-	z14sm1418054wrm.48.2019.01.30.13.35.18
+	z14sm1418054wrm.48.2019.01.30.13.35.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 30 Jan 2019 13:35:19 -0800 (PST)
+	Wed, 30 Jan 2019 13:35:20 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2019 22:35:09 +0100
-Message-Id: <20190130213510.18227-1-schnitzeltony@gmail.com>
+Date: Wed, 30 Jan 2019 22:35:10 +0100
+Message-Id: <20190130213510.18227-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190130213510.18227-1-schnitzeltony@gmail.com>
+References: <20190130213510.18227-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] libgit2: Fix install for multilib
+Subject: [PATCH 2/2] libgit2: upgrade 0.27.4 -> 0.27.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,47 +63,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 21:35:20 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 21:35:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-| ERROR: libgit2-0.27.4-r0 do_package: QA Issue: libgit2: Files/directories were installed but not shipped in any package:
-|   /usr/lib/libgit2.so.0.27.5
-|   /usr/lib/libgit2.so.27
-|   /usr/lib/libgit2.so
-|   /usr/lib/pkgconfig
-|   /usr/lib/pkgconfig/libgit2.pc
-| Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-
-+ reduce 8 spaces by 4
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ .../libgit2/{libgit2_0.27.4.bb => libgit2_0.27.8.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libgit2/{libgit2_0.27.4.bb => libgit2_0.27.8.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
-index e7f768892..816ae5e2e 100644
+diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
+similarity index 90%
+rename from meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
+rename to meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
+index 816ae5e2e..a43408908 100644
 --- a/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.4.bb
-@@ -14,11 +14,12 @@ S = "${WORKDIR}/git"
- inherit cmake
++++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+ DEPENDS = "curl openssl zlib libssh2 libgcrypt"
  
- EXTRA_OECMAKE = "\
--        -DTHREADSAFE=ON \
--        -DBUILD_CLAR=OFF \
--        -DSHA1_TYPE="builtin" \
--        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
--        -DBUILD_EXAMPLES=OFF \
-+    -DTHREADSAFE=ON \
-+    -DBUILD_CLAR=OFF \
-+    -DSHA1_TYPE="builtin" \
-+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-+    -DBUILD_EXAMPLES=OFF \
-+    -DLIB_INSTALL_DIR=${libdir} \
- "
+ SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
+-#v0.27.5
+-SRCREV = "8e0b172981a046d19f1d9efa5acd6186bccbd3ce"
++#v0.27.8
++SRCREV = "2882803ca2b2cdedd069746422155a23fdd002b2"
  
- BBCLASSEXTEND = "native"
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.20.1
 
