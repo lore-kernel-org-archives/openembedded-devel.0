@@ -1,49 +1,29 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FB927C3B7
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 71A987C3E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 23:31:20 +0000 (UTC)
-Received: by mail-it1-f196.google.com with SMTP id d11so1090608itf.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2019 15:31:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=ECdUp/SMbjyqPRxxViqMwdqdLj3KfyDJgLAtw4ME0fI=;
-	b=Rao5HS8DAr6XTOKymMdrwpymxBqEKgH1cSwd/ts+mzY/sQDK+pWgxFJPYmVSjMSFkj
-	t7cUj9y+bARFoPbQ267+CXCTgsdlVsG0RUIQTEI6yTWTBJvnKtHy9wn14MHVNPwcg4WE
-	J+PFr+QyDby2hYXBLLF3MDThBz94+gnQShWsfemQsGu4AH/KR3m/Lp9A4yQGYW2wSyCJ
-	ZMFSZoXFkp+nUeG6iVgUnL+dhE8ta4yDfh2ycHtqeFQ8Yhx/F7ayzGecIukEarb5CqU/
-	LwCJM5YMgEa3ap0npziAaBAbYEcUXrgh/4fUkbasAWGPtke0U8rPteT2ed9x5pGRxIbT
-	8jkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=ECdUp/SMbjyqPRxxViqMwdqdLj3KfyDJgLAtw4ME0fI=;
-	b=bUXduEZ995OPZnVdNQ58ngTtI/II9hoVYLBKoQLRGOxxY5G/0HbrURSIZOro25MnoN
-	cS6A926p9itRO/8of5X6O+jw28PCBj7nXh+Tz5+ywgC96c/Rwrtwg9b/8N5/U7pZgyNL
-	oq8XBLYv/x5p+vg6qx62OPerrj5vrdQp9RQsApsMf4Uovp1nosH5ug07p/QMuF1LSZl1
-	Kn8k5XJgUvY9OtFReGn3isVV2BXKAp6Z/hAkhkJbcMkRrBH/wRVyiWltlSx6qPW/P1W1
-	J9d9zs9iHwpz6Ea5Q021mZNpcKVujRS54BBq9K/SfkiuygkFFob08cXTpwHMiT/Q6Jfz
-	ALEA==
-X-Gm-Message-State: AJcUukdsnqLSsosdU9EEBZFNO8dJmk+/KUNtmJ8nkx3e3qcSeNewznwu
-	zhAdCfcIQ6CgjGS6gyQS1jIgObNIEa8A504W5hc=
-X-Google-Smtp-Source: ALg8bN5TBBKKwbMWUDrkpUvCZz32/PU9vEM+ouNnyBnEm08ZO6v+oQvfLkyzoSlahaNGJUhIjkDI3142GP6map4xlcQ=
-X-Received: by 2002:a24:1dce:: with SMTP id 197mr18319899itj.154.1548891081509;
-	Wed, 30 Jan 2019 15:31:21 -0800 (PST)
+	Thu, 31 Jan 2019 01:26:21 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x0V1QLu3004630
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 30 Jan 2019 17:26:21 -0800 (PST)
+Received: from [128.224.163.169] (128.224.163.169) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
+	Wed, 30 Jan 2019 17:26:08 -0800
+To: Randy MacLeod <randy.macleod@windriver.com>, Khem Raj <raj.khem@gmail.com>
+References: <1537974727-33976-1-git-send-email-hongxu.jia@windriver.com>
+	<576ae4d4-e072-bdcb-ac85-7f3cd14a7352@windriver.com>
+	<CAMKF1sqpB=Ymvc1bb=tr+if1+9hkb4fOjNV_1xsHr=SPz6npMg@mail.gmail.com>
+	<865340f5-30d3-9110-3799-709babb2cf9b@windriver.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <4f5552c0-730c-46ca-3ea6-88fb2c326cc4@windriver.com>
+Date: Thu, 31 Jan 2019 09:26:07 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-References: <20181228151713.19266-1-schnitzeltony@gmail.com>
-	<CALbNGRQSDpsjP8=2wyuo_f9kdK3ekXrA4q8Tp0iqhmB5jjfhrg@mail.gmail.com>
-	<bbc1dade-81c0-6c17-f275-c7786e7a725a@gmail.com>
-In-Reply-To: <bbc1dade-81c0-6c17-f275-c7786e7a725a@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 31 Jan 2019 00:31:09 +0100
-Message-ID: <CALbNGRSFkaE_FqEtved6bCTWSyypuydRwEvSKZ4-R=EFzBYfhQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+In-Reply-To: <865340f5-30d3-9110-3799-709babb2cf9b@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [thud][PATCH 0/4] Fixes
+Subject: Re: [meta-oe][PATCH] php5: 5.6.36 -> 5.6.38
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,32 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 23:31:20 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 31 Jan 2019 01:26:21 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Fri, Jan 11, 2019 at 8:09 PM akuster808 <akuster808@gmail.com> wrote:
+On 2019/1/31 上午12:43, Randy MacLeod wrote:
+> On 1/30/19 11:33 AM, Khem Raj wrote:
+>> Hi Randy
+>>
+>> It would better to put it on the list of deprecated packages for a
+>> release before removing it.
 >
-> Andreas,
+> Khem,
 >
-> On 1/11/19 3:15 AM, Andreas M=C3=BCller wrote:
-> > On Fri, Dec 28, 2018 at 4:17 PM Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com> wrote:
-> >> Patch 2 is an update but necessary to build gvfs with libmtp in PACKAG=
-ECONFIG
-> >>
-> >> Andreas M=C3=BCller (4):
-> >>   libxklavier: Fix keyboard layout bug for xfce4-settings
-> >>   libmtp: upgrade 1.1.5 -> 1.1.16 and rework
-> >>   networkmanager: move udev-rules from /usr/lib -> /lib
-> >>   openjpeg: fix build for multilib
-> >>
-> > Ping?
-> I have them stagged for some build testing.
+> That works for me.
+> Where is the list of deprecated packages?
+> Neither google nor I could find it.
 >
-> thanks,
-> Armin
-Did something go wrong?
+> Hongxu,
+> Will you update to 5.6.40 sometime please?
 
-Andreas
+I am afraid no, the reason why I upgraded it is the compiling failure
+
+with new openssl 1.1.x, after fix the build failure, I am no longer to
+
+maintain php5.
+
+//Hongxu
+
 
