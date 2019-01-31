@@ -1,45 +1,48 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
-	[209.85.167.44])
-	by mail.openembedded.org (Postfix) with ESMTP id B36236C4F2;
-	Thu, 31 Jan 2019 07:26:15 +0000 (UTC)
-Received: by mail-lf1-f44.google.com with SMTP id a16so1549699lfg.3;
-	Wed, 30 Jan 2019 23:26:16 -0800 (PST)
+Return-Path: <gizero@gmail.com>
+Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
+	[209.85.166.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 462D87C471;
+	Thu, 31 Jan 2019 10:40:41 +0000 (UTC)
+Received: by mail-it1-f196.google.com with SMTP id w18so3034998ite.1;
+	Thu, 31 Jan 2019 02:40:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=jJdIzAK0xRlmPbsM+2f0JTkyevzALH20AG2uP+tf+ig=;
-	b=ueS5maEIE/kHwNKHUFL0iRQKVf+jNjSSHX+brbzbq6/P7OOrJftawQ/4Ap+2titp3K
-	SbsVM5/lH9mx3p2HLZd/KTmJP9FozSNVnnajPFpKti0QMs+5jaAH0gzA0PXitL32HW+u
-	ncD6JdAJyHU1TkbE7vKT97ZErydgektEp5LgQunlGUxvOgBRnugMUheJkOUzsjFNOkRF
-	V43DD6P1lfvx9vB9OTWszGgAHXphHfYKrVNuzb7KbBnutY0g8mkrUKz9ZnqKexHqwaT2
-	tKEZMXzwsXdqxug+HhVPFQtwBuUMbCe4uOhkaUI5WUT7Lje2ydT0EhEv1O1pXrqVpSgP
-	x6Bg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XWnWZHjNQZ1RexnzVP6cH9iVeojuPJlwqvqlTc8qF6o=;
+	b=qXcCwGJcaILCNxUJFb+/2Rl3Ud/A55sFcGywaQozcK+myiyYzh3I7QYiABvGBZxZFW
+	/WDM7mDEQgTIPfwVTHNWLL4Ny0v4ZXBqpnPv74XN+qKnsd81hzaA1OGjcpR2Nj43wPYT
+	2IPcyPWPXjhu0oXyvYVCm9hTUGlygOtoraK2ODkM23PUxFsPl/SUPOL2aQiGNKQ3+wnj
+	Q206AG4wwz79mwW+GwONN1zodw0/r+dwP1EYGPjNjI1LVe8sGWlF5PWQHqisiwAVKqGm
+	oA0p8rFR98ws6yxvzrHGIkB5uHqS15ANs5/EI+R7QFW1ECmZbAvysZypJNOKutkRmUG3
+	V50w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=jJdIzAK0xRlmPbsM+2f0JTkyevzALH20AG2uP+tf+ig=;
-	b=DdvsYxUzFP48cPV7eLcR8Tfnw9brdc8a6Qm8yw5dQnGSW+0HsXVNfnTXmB/C47hAxs
-	omjusJV0PpCriU6W3zAoDCsquXi9YtarPlXR4+vQoC9PEqW0mjpsaDnMxCb3dhKrBAyK
-	ESfsKIaMvUKQ9LdvGNz/53ZDN5cCo6haKsNfWnyQwTrf0S/a8moe5ncPiwkKjoWmZi53
-	McXL69p3zTHOjLLSzNRZPLjrM0EOdH1FeYI8xN5PP+mfJa8rOG3hqswqvvbmxep4RxhI
-	ZZxkCoV+8Rgd8fbTSNpAdZmRKMCy8sjJghS43/aBFPEaOrFgYtsuYh01bE6e+IJvdhoL
-	xqpA==
-X-Gm-Message-State: AJcUukeGCgGy0fcvnmWJoRwofQaE5EI18TQ2Z1364OLg23RoQ3dpwal3
-	EpUobn9DQ6GEn9gBdxXsRQQPMJi6lyfsTtxZXEE=
-X-Google-Smtp-Source: ALg8bN4df1O8FqsZ6G6KGDKkD+1yNFMIsZYn/+v1U3IEv2rGWSM7kKwmMckD7yiKtietQTuygiHSoI5k92XG2OnUfNA=
-X-Received: by 2002:a19:c995:: with SMTP id z143mr25731433lff.79.1548919575961;
-	Wed, 30 Jan 2019 23:26:15 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XWnWZHjNQZ1RexnzVP6cH9iVeojuPJlwqvqlTc8qF6o=;
+	b=TG6DQMOzI8vRchYZleyfhTNP549XiHoTxJCAqWrAHIOeaAyMHvNhIdCK5/iQ8rxS7d
+	Zrw/FMsb2hMOVjGy2oxVpmnHjo7SQc7OVe6Rm/XSB/boxc6bcory1yZsfXJdLU4rd7TE
+	YXj7EFHMGCQrpDzZkwB0AtoYFpmfE1JXkylRf3yEd1RnrOmBKJu5aCbKENO1YGmqZPUE
+	e+2xTM78m9AMK8JRqbCXHdLCeJkF9Fgh5dnLa42HazPAoBOg8kw6Zs1jKrHB4wTuCGdW
+	+WkYTxJONPrfNblrFbu1UCfr5bZ0oQD8m6pm58mnxsoRqqyYzlgpW+TnF2eh5KN2D8cg
+	UuAw==
+X-Gm-Message-State: AJcUukdhiuZurb7FffTKwRMphaOifJ8F9Nx/PSIZNxvWp4c6W14OriUt
+	jRMCDl+WPjGZJFkc6Qtp26fHDJcsVW28UxvRu2w=
+X-Google-Smtp-Source: ALg8bN7ttKyHKTy9b4mGMsuTGd16kh1Bz2/AAkvnDQKPIfZ3jphvdPzVhSC85SieUN5giuQVfj7NItoKbcOUqwN1xJ4=
+X-Received: by 2002:a02:b381:: with SMTP id p1mr20238505jan.46.1548931241970; 
+	Thu, 31 Jan 2019 02:40:41 -0800 (PST)
 MIME-Version: 1.0
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Thu, 31 Jan 2019 02:26:04 -0500
-Message-ID: <CAHUNapTBZZRA4+RiFLVHYX6CAkAC8_s9jA0KrFc8Rvs0ksLG-Q@mail.gmail.com>
-To: Yocto discussion list <yocto@yoctoproject.org>, 
+References: <CAHUNapTBZZRA4+RiFLVHYX6CAkAC8_s9jA0KrFc8Rvs0ksLG-Q@mail.gmail.com>
+In-Reply-To: <CAHUNapTBZZRA4+RiFLVHYX6CAkAC8_s9jA0KrFc8Rvs0ksLG-Q@mail.gmail.com>
+From: Andrea Galbusera <gizero@gmail.com>
+Date: Thu, 31 Jan 2019 11:40:30 +0100
+Message-ID: <CAC+thW3KsvrR3X++ywQRQvqjNcs7z7pocq9CBH_s7-jYJXe9bg@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: Yocto discussion list <yocto@yoctoproject.org>,
+	openembedded-members@lists.openembedded.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-members@lists.openembedded.org, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: OE Summit @ SCaLE 17x - Sunday March 10th 2019 - Pasadena CA
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: OE Summit @ SCaLE 17x - Sunday March 10th 2019 - Pasadena CA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,36 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2019 07:26:16 -0000
+X-List-Received-Date: Thu, 31 Jan 2019 10:40:41 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-We're excited to announce the inaugural "OpenEmbedded Summit" taking place
-Sunday March 10th 2019 as part of the Southern California Linux Expo
-(SCaLE) 17x at the Pasadena Convention Center.
+On Thu, Jan 31, 2019 at 8:26 AM Trevor Woerner <twoerner@gmail.com> wrote:
+>
+> We're excited to announce the inaugural "OpenEmbedded Summit" taking place
+> Sunday March 10th 2019 as part of the Southern California Linux Expo
+> (SCaLE) 17x at the Pasadena Convention Center.
+>
+> For the past few years there's been an ever-growing OpenEmbedded event as
+> part of SCaLE. This year, with the missing Spring ELC, we felt it was time
+> to do something more "formally" so OE enthusiasts could get together
+> without having to wait until August.
+>
+> The initial suggestion for this summit came at last year's OEDEM in
+> Edinburgh. At that time an idea was also floated to hold this year's OEDAM
+> at the same time. Just to be absolutely clear: this suggestion was
+> rejected; there will be no OEDAM at the OE Summit at SCaLE 17x. However,
+> this summit is taking place with the full approval of the OpenEmbedded
+> Board of Directors, many of whom have also been helping out with its
+> organization.
+>
+> The schedule for the OE Summit has been posted:
+> https://www.socallinuxexpo.org/scale/17x/schedule/sunday
+> https://www.socallinuxexpo.org/scale/17x/open-embedded-summit-0
 
-For the past few years there's been an ever-growing OpenEmbedded event as
-part of SCaLE. This year, with the missing Spring ELC, we felt it was time
-to do something more "formally" so OE enthusiasts could get together
-without having to wait until August.
+To whoever can double check and fix the schedule... it looks like
+there's a typo at the second link, where Alistair's talk is listed
+twice. From the first link "Lokesh Kumar Goel
+OpenEmbedded in LG Products" should be at 11.30am instead.
 
-The initial suggestion for this summit came at last year's OEDEM in
-Edinburgh. At that time an idea was also floated to hold this year's OEDAM
-at the same time. Just to be absolutely clear: this suggestion was
-rejected; there will be no OEDAM at the OE Summit at SCaLE 17x. However,
-this summit is taking place with the full approval of the OpenEmbedded
-Board of Directors, many of whom have also been helping out with its
-organization.
-
-The schedule for the OE Summit has been posted:
-https://www.socallinuxexpo.org/scale/17x/schedule/sunday
-https://www.socallinuxexpo.org/scale/17x/open-embedded-summit-0
-
-So if you're in the Southern California area, or are generally interested
-in hanging out with some OpenEmbedded people, please join us in Pasadena on
-March 10th!
-
-Your OE Summit organizing committee:
-  Tom King
-  Behan Webster
-  Trevor Woerner
+>
+> So if you're in the Southern California area, or are generally interested
+> in hanging out with some OpenEmbedded people, please join us in Pasadena on
+> March 10th!
+>
+> Your OE Summit organizing committee:
+>   Tom King
+>   Behan Webster
+>   Trevor Woerner
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
