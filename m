@@ -1,48 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B6B76D3A2
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 618177C3A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2019 17:28:28 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id i7so4298048qtj.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2019 09:28:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xkex3seS3arHSAhOcMAxaNSYsqizVhF8aIYICPC4u50=;
-	b=V/wfpUAG3B4XrYS7HP1jok9O4yBeelFMFCn0X8p0bmISiSVxGRYyi6XjOJPPCFPutW
-	PIMrtDNt7Uoe0S1slXYuPjqi8sMKAYrSZV8+ufz1UK0XUEweKEbTats+fA/zmoI2FKvX
-	Yv09vdAGzMAkDUsv3N6ene64u2QOPIyikbkaygQYzeH9lLbvrYIsHfZjTWh5W3viijuY
-	zn17sDUtXFhjhqbYpNOWaaxCJqIwWKvNgjQoyNkj+bjNIXJzAYSDD8yNXEIb7trpQumf
-	+gCblp5mwMUE3HU+F4ZZuqoqqsjw5ZUHuNMEfL7jrawtif1f3zh+2uxXyv8AwGF6ZSNj
-	DD2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xkex3seS3arHSAhOcMAxaNSYsqizVhF8aIYICPC4u50=;
-	b=CO6yUXNcu4vVIr+zrbeVC76vS1Jgi3Oh22vSTCgSB2H+bN2+GbJ37UvSsMbyICjGZH
-	jD3Ta+1UbYSX9s7CjTmRFtg+B5IZT9snp1bmmZKG6dubWevcEonhGNYqwVxdhSUtHZTn
-	rZTWlajGCIiOKyji0wWAto3ZEhlboyhAw9TWaHCv7EP73heXmYOayzuCzmayKQxjmNoU
-	P9qQ2SvF9GR7WATOKnwoddkaR6ZHBfvRSb1aUzzv1S9dj1oOFjII8mPXl+7ANNLNsqcd
-	YtJ7zAW7JdhmZfRgj7gPaHUPr34Zc281DhZc38RP91vSIQXieIEbIf8cshOkpcnpjmft
-	u/3g==
-X-Gm-Message-State: AJcUukdciAPugD6MgFIURZRv3uR09YCU8TmhG/7w4IObBFHVnGoNsHhi
-	TPX33U6DZSUoAY4sxx2qMc9wM8v7kQs4OZr+Fyo=
-X-Google-Smtp-Source: ALg8bN75+ZDA+cyyMmQgnT33ZcRe2WERsyWCcC3wddLqz0gKREjaVSYNB0uITH/VBuvTw8vFW0XdFRLxgOzkzMnRsQ4=
-X-Received: by 2002:a0c:98a1:: with SMTP id f30mr32395773qvd.224.1548955708672;
-	Thu, 31 Jan 2019 09:28:28 -0800 (PST)
+	Thu, 31 Jan 2019 18:10:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43r7Zc6r5JzMs;
+	Thu, 31 Jan 2019 19:10:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1548958250;
+	bh=hwNTD8wbRW1YdwYFR6YfOVTOTdk1o1UkHgrU773iGss=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=BA/4/oGPSqRZBNyu7GCYfNOjm+34Xnw2lBvc7Hlce0q3G34D+HXexuVh/W6d9Lnt6
+	p1bGaRU9r6nyC8Ak8eZRO5b5zFL90901HwllIL9re5kiZaxgXtiIgKwVpkSge3SHv7
+	8VLp5j3vyKS6Iz9GVpcaN0nRv5l76CABiAycUoJkE97wRR+yTXAWgDQ0b1U0BSdG0w
+	zOYXh1UmePorDJXO/iv+miyZgN1LYYofIipSbVFxwTwePZdkF6+ONDQIHZvUlOTauv
+	SEjVbPI5OXAdiJAwsonkdebh06R3IKxKTrcGj606oludMTavcSlqq6172ADJtCNu54
+	zWOX8CzKM94d0BRjp8aQaPRZ38Ok86G42lIeP3fdMIMWesK3zAjeKDQnrFHUgEZxt3
+	8d9GMEJcFmLwlb/69oDUebNRO2JfiJ3BCNKzTFU6GIyOZvXrc1bTBbjPITG0O/wzet
+	n8PjXdsuuAyCww8ZcEuL4tmXpXP7sJ7eEHrw9cFVU/KzXxojEmpVfdl67xyafT18DQ
+	dHPrJaHh8wqUes9VUmyvRX/cWohxFG0yxW6TZ5vAEZH6Tz7uUEjGsHPtx5DFwBGQK6
+	Y69CgFCAyxUqlvqJxVe3Mwl6BdmWGaLn3zcQGaNJyNb52UWh+5fDPWIIAx0JKVM59P
+	3H9WDzdb5zqC3D++WZRN23Q4=
+Date: Thu, 31 Jan 2019 20:10:47 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>
+Message-ID: <20190131181047.GA28875@localhost>
+References: <20190130095201.11965-2-bunk@stusta.de>
+	<CALbNGRQTaFFC1P1zQvjwO=-Kr1s61UPTGBv1w0+5YcCaXsnzFA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20190130072152.27331-1-dan.callaghan@opengear.com>
-	<20190130072152.27331-2-dan.callaghan@opengear.com>
-In-Reply-To: <20190130072152.27331-2-dan.callaghan@opengear.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Jan 2019 09:28:02 -0800
-Message-ID: <CAMKF1spFaYBgu308Xy59wWC5yksRr2Rib=gj_hN_FoM7Gh0e=w@mail.gmail.com>
-To: "Callaghan, Dan" <dan.callaghan@opengear.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 2/2] python-slip-dbus: add a python3 version of the recipe
+In-Reply-To: <CALbNGRQTaFFC1P1zQvjwO=-Kr1s61UPTGBv1w0+5YcCaXsnzFA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] Fix the libnm* packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,104 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2019 17:28:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 31 Jan 2019 18:10:50 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 31, 2019 at 7:43 AM Callaghan, Dan
-<dan.callaghan@opengear.com> wrote:
->
-> Signed-off-by: Dan Callaghan <dan.callaghan@opengear.com>
-> ---
->  .../python/python-slip-dbus.inc               | 29 +++++++++++++++++
->  .../python/python-slip-dbus_0.6.5.bb          | 31 +------------------
->  .../python/python3-slip-dbus_0.6.5.bb         |  2 ++
->  3 files changed, 32 insertions(+), 30 deletions(-)
->  create mode 100644 meta-python/recipes-devtools/python/python-slip-dbus.inc
->  create mode 100644 meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
->
+On Wed, Jan 30, 2019 at 11:31:52PM +0100, Andreas Müller wrote:
+> On Wed, Jan 30, 2019 at 10:52 AM Adrian Bunk <bunk@stusta.de> wrote:
+> >
+> > - libnmutil, libnmglib and libnmglib-vpn no longer exist
+> >   after the 1.10.10 -> 1.14.4 upgrade
+> Checked (OK am on thud environment) but it is 1.14.4. All packages you
+> want to remove contain files on my build! Are you sure that you have
+> the required PACKAGECONFIGS set (please set all and test) and the
+> nasty new 'polkit' in your distro features?
+>...
 
-this patch does not apply cleanly, secondly it says patch 2/2 which
-seems to be part of series
-where 1/2 is missing.
+Thanks for spotting my mistake.
 
-> diff --git a/meta-python/recipes-devtools/python/python-slip-dbus.inc b/meta-python/recipes-devtools/python/python-slip-dbus.inc
-> new file mode 100644
-> index 000000000..0933b4559
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-slip-dbus.inc
-> @@ -0,0 +1,29 @@
-> +SUMMARY = "Convenience functions for dbus services in Python 2.x"
-> +HOMEPAGE = "https://github.com/nphilipp/python-slip"
-> +DESCRIPTION = "\
-> +The Simple Library for Python 2.x packages contain miscellaneous code for \
-> +convenience, extension and workaround purposes. \
-> +\
-> +This package provides slip.dbus.service.Object, which is a dbus.service.Object \
-> +derivative that ends itself after a certain time without being used and/or if \
-> +there are no clients anymore on the message bus, as well as convenience \
-> +functions and decorators for integrating a dbus service with PolicyKit."
-> +
-> +SECTION = "devel/python"
-> +LICENSE = "GPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
-> +SRCNAME = "python-slip"
-> +
-> +SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
-> +SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
-> +
-> +do_compile_prepend() {
-> +    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
-> +}
-> +
-> +# http://errors.yoctoproject.org/Errors/Details/184713/
-> +# python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory
-> +CLEANBROKEN = "1"
-> diff --git a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.5.bb
-> index c2675cbdd..330fa1ba4 100644
-> --- a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.5.bb
-> +++ b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.5.bb
-> @@ -1,31 +1,2 @@
-> -SUMMARY = "Convenience functions for dbus services in Python 2.x"
-> -HOMEPAGE = "https://github.com/nphilipp/python-slip"
-> -DESCRIPTION = "\
-> -The Simple Library for Python 2.x packages contain miscellaneous code for \
-> -convenience, extension and workaround purposes. \
-> -\
-> -This package provides slip.dbus.service.Object, which is a dbus.service.Object \
-> -derivative that ends itself after a certain time without being used and/or if \
-> -there are no clients anymore on the message bus, as well as convenience \
-> -functions and decorators for integrating a dbus service with PolicyKit."
-> -
-> -SECTION = "devel/python"
-> -LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
-> -SRCNAME = "python-slip"
-> -
-> -SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
-> -S = "${WORKDIR}/${SRCNAME}-${PV}"
-> -
->  inherit setuptools
-> -
-> -SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
-> -SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
-> -
-> -do_compile_prepend() {
-> -    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
-> -}
-> -
-> -# http://errors.yoctoproject.org/Errors/Details/184713/
-> -# python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory
-> -CLEANBROKEN = "1"
-> +require python-slip-dbus.inc
-> diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-> new file mode 100644
-> index 000000000..2402a7a74
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools3
-> +require python-slip-dbus.inc
+The problem is actually not related to polkit, my mistake was due to the 
+glib PACKAGECONFIG: I misremembered that it was removed in NM 1.12, but
+it is actually only strongly deprecated (and no longer shipped in 
+distributions like Debian/Ubuntu).
+
+> Andreas
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
