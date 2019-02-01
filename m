@@ -1,39 +1,48 @@
-Return-Path: <marc.ferland@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id F0E4C7BFE6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+	[209.85.160.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 09C4F7C400
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2019 19:57:08 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id y16so4834344qki.7
+	Fri,  1 Feb 2019 20:56:56 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id d19so9180487qtq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Feb 2019 11:57:10 -0800 (PST)
+	Fri, 01 Feb 2019 12:56:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=MJw0OEpJn1Se1uJH92+8otJ0c9Xz8kZ+JzzTDmf7D5o=;
+	b=vYlHgLizKu0R1FT18unIvUh74e1/KfW0ISc7qYQz+E4Z0c7hvfiGIiQCWpz6LNXkHA
+	LE+9ApTxOclOGhYXIipbVJ3vjQravQPoAZ+HDrfEqpoFTcpdQ/nuTQW7JTc/bke3PAbp
+	qLCV5/giaSAeraehMjsGX5M3iCfBWtRubW86T5SQ+kOXjGrF8XTWYe7MvoW3z6dB6KC7
+	SPYZWxDYdJ4E/bW8Oi1RwBcly2hg1kVs4IJrnXdrBWFynSqpllwqVfvZIYvzuZYdEtsr
+	+0V6LAmefd087dVyBQ2HWcaObQoJNto6/Xf524rDswhxxjmqfhWgjYO+lNTQ2sevt1kE
+	s2Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rLlDgjcj15OlypQP742o7p3sowTIzEUmroAHUVDlyXE=;
-	b=e0vJvvV/0yLImDhdgQGS5Nr09X1Lpm/a16H8Q7tnHHSfjO54PqsakI43e0nE0NORDX
-	odTfEmF6mfZU8En5766FxGZhVFqzIouvxo288NangflgeNUS9XxkMHmn0dMkYI0ZC1Yw
-	9NrzoGCNlpgO4B1cY4kewR8koZPyc+LMjVMbCzebAagaffEEv3Qxd3CIL1/PMb7cT6c9
-	4Dcu82lRiwW1D3U1KOjULyywY0j4A2lO7JY9kEHxu9QmGJkgukvgiq//rxCBiTwJHjhy
-	359IeKXybxLTimt0aq/R9JifIA6LfJTnnQIIniwuZXBFpACfMtItWjAbxPD9Ws0X4uib
-	JkoQ==
-X-Gm-Message-State: AHQUAuZJYhizVfeYGeU3tc9+9tzWgMXoySl4fb5cSDrDA5RVzFaLL9Mg
-	RZY4ENLIA/Ov6+uEkWcTRK+m6ZQr
-X-Google-Smtp-Source: AHgI3Ibka+Y880MVRoraddiVihPcJs/UZbluddzJDI8DQD/85eiG30f+m8xRf/y3cFXWNoe26zSsXg==
-X-Received: by 2002:a37:9b41:: with SMTP id d62mr9550186qke.215.1549051029656; 
-	Fri, 01 Feb 2019 11:57:09 -0800 (PST)
-Received: from mfe-desktop.AMOTUS.local
-	(modemcable182.194-37-24.static.videotron.ca. [24.37.194.182])
-	by smtp.googlemail.com with ESMTPSA id
-	e4sm13014789qka.31.2019.02.01.11.57.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Feb 2019 11:57:08 -0800 (PST)
-From: ferlandm@amotus.ca
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Feb 2019 14:56:24 -0500
-Message-Id: <20190201195624.16760-1-ferlandm@amotus.ca>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] networkmanager: fix QA issue when using modemmanager and ppp in PACKAGECONFIG
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=MJw0OEpJn1Se1uJH92+8otJ0c9Xz8kZ+JzzTDmf7D5o=;
+	b=r/XPM/mXfekwiNCXuqrb6Fob8hWMcVhajeYBO7yK6EWUfPV17vbldKJ352QkxRYM2O
+	l0LpugW3Nd4T4JcNReW54cLnDQWz8WGFVgThXG11AkSkxODf4qLu3COxv9RiPmAVWtQS
+	4DKutr7sCzfI3HtSEQXv1Kw2Ucxe8U8YXJbA6Hdl2RDWHN39FUYliJTp19QnEHRNOpBz
+	v4VyGSauuuERW7CEVgSZNc5B+tM71ztAErpj/nimeFts/mWxZuYkN3278BM+JTeMUXnc
+	CvDFuCGBiSODhqlwWbZddWsmVYiLFPChZ58zHNJFfZqAXwXBRmsJirYBM+X/ICj2MqQQ
+	rsdA==
+X-Gm-Message-State: AJcUukc+RivWYsnoJMnqnbXdWm3YyM94Vv1p+2b49yz9lhUeDcLAmuwO
+	erIqyiHebHJ92jH3jhU92+FpJ7QRU4/Wck1jcuQ=
+X-Google-Smtp-Source: ALg8bN51pQEV12oMu2agFJwlMS6M4khtmq4r6S1c6LSGaKOQL3ek7OUSyxkJWwtycprkojwTfUb7pt2yOujSfXG54N4=
+X-Received: by 2002:ac8:36ba:: with SMTP id a55mr39645371qtc.236.1549054617809;
+	Fri, 01 Feb 2019 12:56:57 -0800 (PST)
+MIME-Version: 1.0
+References: <f00069dd-43f6-4938-1e6c-7a2ff3dcb836@gmail.com>
+In-Reply-To: <f00069dd-43f6-4938-1e6c-7a2ff3dcb836@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Feb 2019 12:56:31 -0800
+Message-ID: <CAMKF1soyL8GPwKoDhHvmWsPnUE8aOAeWR6M8-gfzYb5hvYd8ZQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org >> OpenEmbedded Devel List"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: thud][Pull request]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2019 19:57:09 -0000
+X-List-Received-Date: Fri, 01 Feb 2019 20:56:57 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Marc Ferland <ferlandm@amotus.ca>
+On Thu, Jan 31, 2019 at 11:00 PM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit 6094ae18c8a35e5cc9998ac39869390d7f3bb1=
+e2:
+>
+>   geoip: update SRC_URI (2018-12-22 08:14:11 -0800)
+>
+> are available in the git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded thud-next
+>
+> for you to fetch changes up to cca27b5ea7569d2730ee5da7ee7f47b39d775d89:
+>
+>   polkit: Fix CVE-2019-6133 (2019-01-23 08:17:23 -0800)
+>
+> ----------------------------------------------------------------
+> Andreas M=C3=BCller (4):
+>       libxklavier: Fix keyboard layout bug for xfce4-settings
+>       libmtp: upgrade 1.1.5 -> 1.1.16 and rework
+>       networkmanager: move udev-rules from /usr/lib -> /lib
+>       openjpeg: fix build for multilib
+>
+> Ovidiu Panait (1):
+>       polkit: Fix CVE-2019-6133
+>
 
-Got the following error when I activated both ppp and modemmanager
-options:
+LGTM, merged thusly, thanks for doing this. I think
+we have more pending thud requests on patchwork.
 
-ERROR: networkmanager-1.14.4-r0 do_package: QA Issue: networkmanager: Files/directories were installed but not shipped in any package:
-  /usr/lib/pppd/2.4.5/nm-pppd-plugin.so
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-
-Signed-off-by: Marc Ferland <ferlandm@amotus.ca>
----
- .../recipes-connectivity/networkmanager/networkmanager_1.14.4.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-index f1826c68e..26c40a5fe 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.14.4.bb
-@@ -110,6 +110,7 @@ FILES_${PN} += " \
-     ${datadir}/dbus-1 \
-     ${noarch_base_libdir}/udev/* \
-     ${systemd_unitdir}/system \
-+    ${libdir}/pppd \
- "
- 
- RRECOMMENDS_${PN} += "iptables \
--- 
-2.17.1
-
+>  ...nfig_xkb.c-Fix-keyboard-layout-settings-f.patch |  39 +
+>  .../fix-do_installe-failure.patch                  |   0
+>  .../recipes-gnome/libxklavier/libxklavier_5.4.bb   |   1 +
+>  .../networkmanager/networkmanager_1.14.4.bb        |   3 +-
+>  .../libmtp/libmtp-1.1.5/69-libmtp.rules            | 999
+> ---------------------
+>  .../libmtp/libmtp-1.1.5/glibc-2.20.patch           |  36 -
+>  .../libmtp/0001-Use-native-mtp-hotplug.patch       |  43 +
+>  .../recipes-connectivity/libmtp/libmtp_1.1.16.bb   |  50 ++
+>  .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |  58 --
+>  .../polkit/polkit/CVE-2019-6133.patch              | 190 ++++
+>  meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   1 +
+>  .../recipes-graphics/openjpeg/openjpeg_2.3.0.bb    |   3 +
+>  12 files changed, 329 insertions(+), 1094 deletions(-)
+>  create mode 100644
+> meta-gnome/recipes-gnome/libxklavier/libxklavier/0001-xklavier_config_xkb=
+.c-Fix-keyboard-layout-settings-f.patch
+>  rename meta-gnome/recipes-gnome/libxklavier/{files =3D>
+> libxklavier}/fix-do_installe-failure.patch (100%)
+>  delete mode 100644
+> meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/69-libmtp.rules
+>  delete mode 100644
+> meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/glibc-2.20.patch
+>  create mode 100644
+> meta-oe/recipes-connectivity/libmtp/libmtp/0001-Use-native-mtp-hotplug.pa=
+tch
+>  create mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.16.bb
+>  delete mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+>  create mode 100644
+> meta-oe/recipes-extended/polkit/polkit/CVE-2019-6133.patch
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
