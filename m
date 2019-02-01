@@ -1,23 +1,99 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B5787C1FB
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id C292371BB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2019 05:56:00 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x115tPRs030980
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 31 Jan 2019 21:55:35 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
-	Thu, 31 Jan 2019 21:55:14 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Thu, 31 Jan 2019 21:55:14 -0800
-Message-ID: <20190201055514.125049-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Fri,  1 Feb 2019 07:00:06 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id c123so2727621pfb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Jan 2019 23:00:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=KM5zv029OqxKUfYSCjnwVAcXujlnbiftd936/sQXZic=;
+	b=oHM01fAynHokQd6vgLIt8EkzMQKDDCGwnnwba2gOBUMWCdOanceFlofg9pBCoLT4zn
+	6p308tvbaTP3ClFc5qlG8FcTI4Tvpe1g5vEhhpw1hT7FBKen+KheWHA0jcW67usIBg95
+	ky3yQkFThhAaM92iX6YnMsWKuAmOkdk/7GYuhNlRG+AqDsdu+r1KWg3AeDNadfsnQHAL
+	dvWQpto3ktecGRvwANWPLfj8j7oG4DX5pKU49cSPzMqV+VBAT73ZeHcHnEKWAxaxf8hA
+	YAXdGmZjona8FbS59dpzzm/z7IbnFQkTnR++xv6DXwSF4Q8LCe1jh9saVC5S2jElkn6R
+	1odA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=KM5zv029OqxKUfYSCjnwVAcXujlnbiftd936/sQXZic=;
+	b=BtvHUtw4Ka5auSKdayMqwX9giK6uF++d3y8691rL3ELbE+9Te6rXrznrc+rqGsLiU6
+	R7ElbFcjlvKTFy+CxKDjbGLAyCbWzDxXHqOqTFMgPPsyDYzcDmK0HLHiTKYxROF6Gy4V
+	IFsrxb2/JTx/pc+WHHi2sk0mQQLM/O1erycekPbmTHa2h68GKvLswqbu77bk+z0B5asO
+	gG7g7fc+GhFNxKDDmCsXnD6vZXJRXufa52smmouyZR5v89hhpDbOm+MPfXxN5yHXJkbN
+	Pyme4hYMvwJAwP/LUGVk8J5YLOJyEi1jwPNp8B91Iqjhrd+zCISxk2kUP1XOPsW52767
+	pygw==
+X-Gm-Message-State: AHQUAuZgz52DoFLNk5Zs9p2xyvdSwDvOzy8nZOOtHnFgB/LbvtPeToAP
+	VBbSo0RhdM+AK3Sm7eb6SFLNYP9UJSI=
+X-Google-Smtp-Source: AHgI3IbPm8bclvhhYxijPXqdumExkYstAPrlN0nrtZyiAAACsP8Mj24EfgCnQX2Rc6jN/j9Z5jMGIw==
+X-Received: by 2002:a63:5d20:: with SMTP id r32mr1066572pgb.329.1549004407382; 
+	Thu, 31 Jan 2019 23:00:07 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:c33:6073:5cf1:82c1:31b1?
+	([2601:202:4180:c33:6073:5cf1:82c1:31b1])
+	by smtp.gmail.com with ESMTPSA id
+	l85sm16496518pfg.161.2019.01.31.23.00.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 31 Jan 2019 23:00:06 -0800 (PST)
+To: "openembedded-devel@lists.openembedded.org >> OpenEmbedded Devel List"
+	<openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <f00069dd-43f6-4938-1e6c-7a2ff3dcb836@gmail.com>
+Date: Thu, 31 Jan 2019 23:00:05 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] vim: improve reproducibility
+Subject: thud][Pull request]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,89 +106,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2019 05:56:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Feb 2019 07:00:07 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: Mingli Yu <mingli.yu@windriver.com>
+The following changes since commit 6094ae18c8a35e5cc9998ac39869390d7f3bb1e2:
 
-Clear all_cflags, all_lflags, compiled_user
-and compiled_sys to avoid introducing build
-info to improve reproducibility as below:
+  geoip: update SRC_URI (2018-12-22 08:14:11 -0800)
 
-WARNING: vim-8.1.0347-r0 do_package_qa: QA Issue: File /work/core2-64-wrs-linux/vim/8.1.0347-r0/packages-split/vim/usr/bin/vim.vim in package contained reference to tmpdir [buildpaths]
+are available in the git repository at:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...src-Makefile-improve-reproducibility.patch | 46 +++++++++++++++++++
- meta-oe/recipes-support/vim/vim_8.1.0347.bb   |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-support/vim/files/0001-src-Makefile-improve-reproducibility.patch
+  git://git.openembedded.org/meta-openembedded thud-next
 
-diff --git a/meta-oe/recipes-support/vim/files/0001-src-Makefile-improve-reproducibility.patch b/meta-oe/recipes-support/vim/files/0001-src-Makefile-improve-reproducibility.patch
-new file mode 100644
-index 000000000..63a7b78f1
---- /dev/null
-+++ b/meta-oe/recipes-support/vim/files/0001-src-Makefile-improve-reproducibility.patch
-@@ -0,0 +1,46 @@
-+From 133ab27cdb17ca20ef6b0304cf30621d2bcbe757 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 31 Jan 2019 21:32:26 -0800
-+Subject: [PATCH] src/Makefile: improve reproducibility
-+
-+Clear all_cflags, all_lflags, compiled_user
-+and compiled_sys to avoid introducing build
-+info to improve reproducibility as below:
-+
-+WARNING: vim-8.1.0347-r0 do_package_qa: QA Issue: File /work/core2-64-wrs-linux/vim/8.1.0347-r0/packages-split/vim/usr/bin/vim.vim in package contained reference to tmpdir [buildpaths]
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ src/Makefile | 14 ++++----------
-+ 1 file changed, 4 insertions(+), 10 deletions(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index f2fafa4dc..7148d4bd9 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -2845,16 +2845,10 @@ auto/pathdef.c: Makefile auto/config.mk
-+ 	-@echo '#include "vim.h"' >> $@
-+ 	-@echo 'char_u *default_vim_dir = (char_u *)"$(VIMRCLOC)";' | $(QUOTESED) >> $@
-+ 	-@echo 'char_u *default_vimruntime_dir = (char_u *)"$(VIMRUNTIMEDIR)";' | $(QUOTESED) >> $@
-+-	-@echo 'char_u *all_cflags = (char_u *)"$(CC) -c -I$(srcdir) $(ALL_CFLAGS)";' | $(QUOTESED) >>  $@
-+-	-@echo 'char_u *all_lflags = (char_u *)"$(CC) $(ALL_LIB_DIRS) $(LDFLAGS) -o $(VIMTARGET) $(ALL_LIBS) ";' | $(QUOTESED) >>  $@
-+-	-@echo 'char_u *compiled_user = (char_u *)"' | tr -d $(NL) >> $@
-+-	-@if test -n "$(COMPILEDBY)"; then \
-+-		echo "$(COMPILEDBY)" | tr -d $(NL) >> $@; \
-+-		else ((logname) 2>/dev/null || whoami) | tr -d $(NL) >> $@; fi
-+-	-@echo '";' >> $@
-+-	-@echo 'char_u *compiled_sys = (char_u *)"' | tr -d $(NL) >> $@
-+-	-@if test -z "$(COMPILEDBY)"; then hostname | tr -d $(NL) >> $@; fi
-+-	-@echo '";' >> $@
-++	-@echo 'char_u *all_cflags = (char_u *)"";' | $(QUOTESED) >>  $@
-++	-@echo 'char_u *all_lflags = (char_u *)"";' | $(QUOTESED) >>  $@
-++	-@echo 'char_u *compiled_user = (char_u *)"";' >> $@
-++	-@echo 'char_u *compiled_sys = (char_u *)"";' >> $@
-+ 	-@sh $(srcdir)/pathdef.sh
-+ 
-+ GUI_GTK_RES_INPUTS = \
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-support/vim/vim_8.1.0347.bb b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-index 46d229e03..4de4d8e38 100644
---- a/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-+++ b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;endline=287;md5=f1f82b42360
- SRC_URI = "git://github.com/vim/vim.git \
-            file://disable_acl_header_check.patch;patchdir=.. \
-            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
-+           file://0001-src-Makefile-improve-reproducibility.patch;patchdir=.. \
- "
- SRCREV = "f1c118be93184e8e57e3e80b1b3383f464ed649e"
- 
--- 
-2.17.1
+for you to fetch changes up to cca27b5ea7569d2730ee5da7ee7f47b39d775d89:
+
+  polkit: Fix CVE-2019-6133 (2019-01-23 08:17:23 -0800)
+
+----------------------------------------------------------------
+Andreas Müller (4):
+      libxklavier: Fix keyboard layout bug for xfce4-settings
+      libmtp: upgrade 1.1.5 -> 1.1.16 and rework
+      networkmanager: move udev-rules from /usr/lib -> /lib
+      openjpeg: fix build for multilib
+
+Ovidiu Panait (1):
+      polkit: Fix CVE-2019-6133
+
+ ...nfig_xkb.c-Fix-keyboard-layout-settings-f.patch |  39 +
+ .../fix-do_installe-failure.patch                  |   0
+ .../recipes-gnome/libxklavier/libxklavier_5.4.bb   |   1 +
+ .../networkmanager/networkmanager_1.14.4.bb        |   3 +-
+ .../libmtp/libmtp-1.1.5/69-libmtp.rules            | 999
+---------------------
+ .../libmtp/libmtp-1.1.5/glibc-2.20.patch           |  36 -
+ .../libmtp/0001-Use-native-mtp-hotplug.patch       |  43 +
+ .../recipes-connectivity/libmtp/libmtp_1.1.16.bb   |  50 ++
+ .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |  58 --
+ .../polkit/polkit/CVE-2019-6133.patch              | 190 ++++
+ meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   1 +
+ .../recipes-graphics/openjpeg/openjpeg_2.3.0.bb    |   3 +
+ 12 files changed, 329 insertions(+), 1094 deletions(-)
+ create mode 100644
+meta-gnome/recipes-gnome/libxklavier/libxklavier/0001-xklavier_config_xkb.c-Fix-keyboard-layout-settings-f.patch
+ rename meta-gnome/recipes-gnome/libxklavier/{files =>
+libxklavier}/fix-do_installe-failure.patch (100%)
+ delete mode 100644
+meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/69-libmtp.rules
+ delete mode 100644
+meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/glibc-2.20.patch
+ create mode 100644
+meta-oe/recipes-connectivity/libmtp/libmtp/0001-Use-native-mtp-hotplug.patch
+ create mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.16.bb
+ delete mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+ create mode 100644
+meta-oe/recipes-extended/polkit/polkit/CVE-2019-6133.patch
 
 
