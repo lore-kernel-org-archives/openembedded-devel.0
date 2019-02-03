@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D7097C2F6
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id F039079CCB
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun,  3 Feb 2019 15:06:25 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id b7so5577871pfi.8
+Received: by mail-pg1-f193.google.com with SMTP id z11so5175804pgu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Feb 2019 07:06:26 -0800 (PST)
+	Sun, 03 Feb 2019 07:06:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=JhYFSbE+oEMz69jC2FB8adwBJFP1T/YWtTLxKRKSQPc=;
-	b=hUc373j2XbwuMUdt1mfNPzJ/bu9WZZCo9HE3xNDeHTVlld/hc2o5H3i+R+HPUldONe
-	yzXE+xulGDsNO32QW+Mfk52rGNzU7d7goF9GA/upKw19fFoftWP/334BlnkfYegi13Om
-	t/3Rw8r/ZR5oCcRWEmwyVP+cOPP9tGFFnEy2454U9gDFs9RBaPP0yX/kIG1bwaIYrqNj
-	0+CWo8n1Q3ybn+PryRUgAJz0JEJtRl6VTnus9s+05bPTt6IwKIr/3OswDfGhc6CuqYrP
-	mkfmWy6Inr5Fdtjmh/2Zdxu0LE3QeF/plbn/HicXovgVSdX7CKKN3duZBUCLyVaLhgZI
-	fpZg==
+	bh=wL1XKtp3mrtbuAcuIlStw3sW6VpbIs0HPEscNmkQ648=;
+	b=O3tusN00NCbmBAcavX3H4aJfBhqjRLzHcMNyVm2F6xQ7QT42+1qPk9Amt9uSnYXPKi
+	eKFV2XZcEoKJaMMNRgeLRtDt48RaEirVIoTkfzxMnKMXs/Lhn/MSZ8kJbCqK5ZiBWXq0
+	3cuo8QYQPDpxVAJTS1ffMR1gp2Xhtlo65IhXVwvuCyT55PxTfz0GFg7Gbjg8M4uQrOZj
+	r5KyD2oeObw7LX33v9LDQxtw83qS83vnUT7GEeVoGkb3AglXNPs2AiMmHPyTnFi+cPGn
+	k/OrxLnpxNGnBM55U9GHGjmMIqq/0CFBxqpFTZj3rx5gFHRZcQzaiGeWYVmsVWp3ndyD
+	qC7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=JhYFSbE+oEMz69jC2FB8adwBJFP1T/YWtTLxKRKSQPc=;
-	b=qmYPid/76G+I84ErLfhTA4xZywxEKCecLB6zqKQtlPTfrwbE7DDeLoHecW096F1R/h
-	DT/vhPpXaklyvC7gWksHR8niyswYv6B4Te7fSPq5U4tRUQWPYgwkzPAgLHHkNaNnbrGy
-	obPfiwCrDfj5IDfMM7szZ73CtV25RRrYYMutJ8mWG0OVJiPY+ESB9JqLko467hAUFOEh
-	NxM5ideiCrRvzhWDVKv6fN0joYUvpVosgdPVx8v98d879gNSGONv2DENPYJSvD4S9U/2
-	eNwqrBdDc2ufk04TIQluREzZa61Q2h+X1wjqtp8AXK6TtKRa87C1MoFR6ehcR5WyfeTI
-	/Dzg==
-X-Gm-Message-State: AHQUAuZF8kYBkzI593R+wOx6cCPUJugk3DQrWmyy/obdUxmpxnr8sPwj
-	WMPeLMmA79OkqYu+z8Kf2/SSKItB
-X-Google-Smtp-Source: AHgI3IbTNE0sm1lseBCiWytRiVsy4d1QofGYIRYZDFHeBIfORo+M/e/fEkWeQHv5MU2RYgRLpbLQqw==
-X-Received: by 2002:a63:f515:: with SMTP id w21mr9665473pgh.220.1549206385810; 
-	Sun, 03 Feb 2019 07:06:25 -0800 (PST)
+	bh=wL1XKtp3mrtbuAcuIlStw3sW6VpbIs0HPEscNmkQ648=;
+	b=tOMRWY/1OEX8JU9CJpyc8a4YUOhpHEgqqRx6bNjvbIfjigsqX6S3ZkfTWaC2NMPdPh
+	uw0HHKHbGPri4CzpR5ZlzUiJtJbVxPKjr7N1HbE1GiIgwbCA9tLgMyQSD2meu09rgqIO
+	ge4cbTtqSJmZWhLEi5nMUNkZ17DDj4kkWGr8S7wgz9SYV1FiulH5qZicoT4efV2hjM5I
+	5KHHLb9Y4FWSI91NRqB2JDhPKQqdwJMC2fkqDbORfYrHLmYnOLjfMxxTZFrejtD6iMwE
+	lNgXb64UiJLRmS0l04SdW9Cp+qWcpkjKahMkE3hmgRf6NAQZ4PaMAWb2DQHSpWClH1a7
+	Iakg==
+X-Gm-Message-State: AJcUukd654/2t8ybMQl2NoQ4Bf9PBoiUdyjOfgD0sV8mSurMYsJE2pRc
+	3MhF/ME6Ps51BQmwGqI7PhM0DDjr
+X-Google-Smtp-Source: ALg8bN4rzEzGiSEyjczCvjXKj6WdrE8jry5u5ReFSFxyFgMJGKY+mJN3+M5CdUorTliPC+mqjTNT4w==
+X-Received: by 2002:a62:b24a:: with SMTP id x71mr48627514pfe.148.1549206386611;
+	Sun, 03 Feb 2019 07:06:26 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::1609])
 	by smtp.gmail.com with ESMTPSA id
-	a90sm24349645pfj.109.2019.02.03.07.06.24
+	a90sm24349645pfj.109.2019.02.03.07.06.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Feb 2019 07:06:24 -0800 (PST)
+	Sun, 03 Feb 2019 07:06:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Feb 2019 07:06:05 -0800
-Message-Id: <20190203150606.2484-3-raj.khem@gmail.com>
+Date: Sun,  3 Feb 2019 07:06:06 -0800
+Message-Id: <20190203150606.2484-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190203150606.2484-1-raj.khem@gmail.com>
 References: <20190203150606.2484-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH 3/4] owfs: Inherit systemd
+Subject: [meta-multimedia][PATCH 4/4] oscam: Update to latest svn revision 11491
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,38 +59,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2019 15:06:25 -0000
+X-List-Received-Date: Sun, 03 Feb 2019 15:06:26 -0000
 Content-Transfer-Encoding: 8bit
 
-Fix
-ERROR: QA Issue: owfs: Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/owfs.service
-  /lib/systemd/system/owftpd.service
-  /lib/systemd/system/owhttpd.service
-  /lib/systemd/system/owserver.service
-  /lib/systemd/system/owserver.socket
+Supports openssl 1.1.x
+Drop upstreamed patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...macros.h-for-major-minor-definitions.patch | 26 -------------------
+ .../recipes-dvb/oscam/oscam_svn.bb            |  5 ++--
+ 2 files changed, 2 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-dvb/oscam/oscam/0001-include-sys-sysmacros.h-for-major-minor-definitions.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-index 50865cccda..326ce0aea8 100644
---- a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-+++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/owfs/owfs \
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam/0001-include-sys-sysmacros.h-for-major-minor-definitions.patch b/meta-multimedia/recipes-dvb/oscam/oscam/0001-include-sys-sysmacros.h-for-major-minor-definitions.patch
+deleted file mode 100644
+index d3d89e333b..0000000000
+--- a/meta-multimedia/recipes-dvb/oscam/oscam/0001-include-sys-sysmacros.h-for-major-minor-definitions.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From a372fe467495a674ad6244b67e83dfbfa8455f51 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 11 Aug 2018 13:54:32 -0700
+-Subject: [PATCH] include sys/sysmacros.h for major/minor definitions
+-
+-csctapi/ifd_db2com.c:27: undefined reference to `minor'
+-collect2: error: ld returned 1 exit status
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- globals.h | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/globals.h b/globals.h
+-index bd12244..9e10225 100644
+---- a/globals.h
+-+++ b/globals.h
+-@@ -36,6 +36,7 @@
+- #include <termios.h>
+- #include <inttypes.h>
+- #include <sys/utsname.h>
+-+#include <sys/sysmacros.h>
+- 
+- /*
+-  * The following hack is taken from Linux: include/linux/kconfig.h
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+index a8aec113cd..5acdd7ebc7 100644
+--- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
++++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+@@ -4,12 +4,11 @@ HOMEPAGE = "http://www.streamboard.tv/oscam/"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- S = "${WORKDIR}/git"
+-DEPENDS = "libusb1 openssl10 pcsc-lite"
++DEPENDS = "libusb1 openssl pcsc-lite"
  
--inherit autotools-brokensep update-rc.d pkgconfig
-+inherit autotools-brokensep update-rc.d pkgconfig systemd
+ SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http \
+-           file://0001-include-sys-sysmacros.h-for-major-minor-definitions.patch \
+            "
+-SRCREV = "11431"
++SRCREV = "11491"
+ PV = "1.10+${SRCPV}"
  
- EXTRA_OECONF = " \
-                  --with-fuseinclude=${STAGING_INCDIR} \
+ S = "${WORKDIR}/trunk"
 -- 
 2.20.1
 
