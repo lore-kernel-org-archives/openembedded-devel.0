@@ -1,50 +1,48 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
-	[209.85.167.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8441060721
+Return-Path: <scottellis.developer@gmail.com>
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
+	[209.85.219.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5938A6C10E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Feb 2019 12:05:33 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id n23so2933233lfl.4
+	Sun,  3 Feb 2019 13:38:05 +0000 (UTC)
+Received: by mail-yb1-f177.google.com with SMTP id 64so4598826ybf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Feb 2019 04:05:34 -0800 (PST)
+	Sun, 03 Feb 2019 05:38:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=bsLzdUDHszIbZ1nDFxjENm1sw906JWRXkMEoQT603lI=;
-	b=dDZszHWApiMBOP/ux5Xy104deJx3NUSHq3FO9zWL5AVt3mwJLvBG07uRA3X9Ndzchz
-	tKFhiCDUhDzSzWTQevROoNHBH+ocZZbg2sHLtZqH1z1VqejYdp/uvlOMHEVjlltKUgKa
-	gt6o1KbgP2LXnfwiDyxkmQFCOz8dDq+NpWgtGKAq9nRc5RaLDCp+SC+aqrTXRR/6FJJz
-	UFxLHhTGY3GL/I9Yw57LROxLxUNbj+FAS6DuXMQiHcD0Mjgole0QXnDZLf60HIb98SU6
-	ZxlTYW1abhyh8PBHev2FRivJ4xggSgBSUQ2FsdT1KYtLK2yGgcwf7n8NXvkEW8r75Hq7
-	uaYQ==
+	bh=UJCQLUUK9fDhYfcZwLxDOidhLT37WYjEkWvwm7Et70Y=;
+	b=Bj+vDZkDIFD5AqJPZvxgq9gLb3D/AAnuVosVRVKZyxKvLFyUvnYxGqNnHSJup8M75A
+	MMr0NeoO3J82u+eGwecz/NNEzmaxNBpn3fAcDpXxZoF/RVqJAbxD9BBtVHRgBuSj/9t2
+	YPJww0vuyulvIE05REcsBD0kwGnXR8YzWGkXgHAeLbmZkeVfU0FuAWhi/8e8LwZtydaf
+	cwBCjsp3TnsedPeHbwsZwrD+ohj3LaF3w1y58NHtJHWF9c2+Ic8lOfJue2nY11HukMfG
+	eeiQO67cqrqPYka5np3/9HVBkRfTey71JGOdcs79Sq84taCE/XV29vj80/GUIgrjeAAs
+	GfwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bsLzdUDHszIbZ1nDFxjENm1sw906JWRXkMEoQT603lI=;
-	b=o1DD+fpAgqjWU0JzxdEeZOnXJMJDwBK+3w9OBz+vdQvxcquK2j7BmaP/wkPLC70sKU
-	OCXRTqYMWj2zMDHWkTzQnvAaYUd6CIAn4Nt3alIbNzUJFZebk8lX/e3ev1lpZrVSgDDP
-	z9zZWz6RVHCRViCOgYyx5/sQdVOn/BcjHBDbizpvLx+QtGuHQwS86yay2xmJbLFZtojk
-	z3F1gN9pKdihWAeup9P1VDAtDHAaQE0eYqzePEF8v6K69+5hO2rrYAFeN5RKpS2R2NY6
-	FFJaD1KoPqD1WjF9D19pHDaBtG6WaboZpTc2sg1iG+8b3vrlWcqI0jeNX/CyHGNVpZYv
-	lRgg==
-X-Gm-Message-State: AJcUukdKTdsPL82HnjIPq1RB01w5D2UqJePnFT4rkwgxsMmsrVR38YpH
-	0AL5R4kkp1KVtwGzZg2v8dIuTbbh
-X-Google-Smtp-Source: ALg8bN6UnX0dFFllKUDOIGLiJojrJOKU7QlbNy/ew9VLOQQDfATfC/NFkJtnmUaGlkPyg81u2GKBBw==
-X-Received: by 2002:a19:a28e:: with SMTP id l136mr36361028lfe.87.1549195533662;
-	Sun, 03 Feb 2019 04:05:33 -0800 (PST)
-Received: from peterliu-Precision-M4800.lan
-	(c-b09ee253.022-417-73746f13.bbcust.telenor.se. [83.226.158.176])
-	by smtp.gmail.com with ESMTPSA id
-	j18-v6sm2213238ljc.52.2019.02.03.04.05.32
+	bh=UJCQLUUK9fDhYfcZwLxDOidhLT37WYjEkWvwm7Et70Y=;
+	b=EY2WJGfw35HLdovJx5ZTBPXbePOJBNEfg8glJjm8qrTt6rMRc9y+qhlrqxSM15K9a6
+	wvOiELjUeZrpWJw2MWGQhYp83mYvN+mQze62fnmdjN65k8jOJrSqs5kukBP3NxkGg08a
+	rp5NbI9WaC5V0ZlhvtAT/gHVWtCPQagOqY49/hVJVR5jVSOF1CK1VIORWwCoqqmxL/5T
+	n+iPf5SXKh8uY4xCjJoq3sQV40YcbswQ6df3L905zGuycCpu1tex8L/P3vU40yIrkgA2
+	T8DyM9j2P1oYQZOU5x91UMrv/z+b7tDZoIkunqIsPeA0nxlUsK623YjfzQg4CRO572uS
+	jHhw==
+X-Gm-Message-State: AJcUukf+a0Jtm6rlIQEnKLq3NIAZrATiLd8GVL0/w03VMjOWvNesVOXt
+	AhBnYUZZgx+w6qEquas5k9dm8E8M
+X-Google-Smtp-Source: ALg8bN78YxUzeoaxj3sDyWgIgfkmhOq14EXiTDMfRHGvMCMrFujVwTJIY3BCbvboLz3G5qJ44X4Zrg==
+X-Received: by 2002:a25:2801:: with SMTP id o1mr38657459ybo.298.1549201086122; 
+	Sun, 03 Feb 2019 05:38:06 -0800 (PST)
+Received: from fractal.jumpnow (c-73-234-253-132.hsd1.me.comcast.net.
+	[73.234.253.132]) by smtp.gmail.com with ESMTPSA id
+	z74sm6186557ywz.51.2019.02.03.05.38.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 Feb 2019 04:05:32 -0800 (PST)
-From: liu.ming50@gmail.com
+	Sun, 03 Feb 2019 05:38:05 -0800 (PST)
+From: Scott Ellis <scottellis.developer@gmail.com>
+X-Google-Original-From: Scott Ellis <scott@jumpnowtek.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Feb 2019 13:05:23 +0100
-Message-Id: <1549195523-5426-1-git-send-email-liu.ming50@gmail.com>
+Date: Sun,  3 Feb 2019 08:37:52 -0500
+Message-Id: <1549201073-6116-1-git-send-email-scott@jumpnowtek.com>
 X-Mailer: git-send-email 2.7.4
-Cc: patrickvacek@gmail.com, luka.pivk@toradex.com, stefan.agner@toradex.com,
-	Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] lshw: BBCLASSEXTEND to native
+Subject: [meta-oe][PATCH 1/2] nmap: Fix typo in pcre PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,28 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2019 12:05:33 -0000
+X-List-Received-Date: Sun, 03 Feb 2019 13:38:05 -0000
 
-From: Ming Liu <liu.ming50@gmail.com>
-
-In case some recipes might need it, for instance, the aktualizr-native
-of meta-updater.
-
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
 ---
- meta-oe/recipes-devtools/lshw/lshw_02.18.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-security/nmap/nmap_7.70.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/lshw/lshw_02.18.bb b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
-index b344fbf..d1a7334 100644
---- a/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
-+++ b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
-@@ -30,3 +30,5 @@ do_compile() {
- do_install() {
-     oe_runmake install DESTDIR=${D}
- }
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.70.bb b/meta-oe/recipes-security/nmap/nmap_7.70.bb
+index 01be151..1b4163a 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.70.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.70.bb
+@@ -18,7 +18,7 @@ inherit autotools-brokensep pkgconfig pythonnative
+ PACKAGECONFIG ?= "ncat nping ndiff pcap"
+ 
+ PACKAGECONFIG[pcap] = "--with-pcap=linux, --without-pcap, libpcap, libpcap"
+-PACKAGECONFIG[pcre] = "--with-libpcre=${STAGING_LIBDIR}/.., --with-libpcre=included, libpre"
++PACKAGECONFIG[pcre] = "--with-libpcre=${STAGING_LIBDIR}/.., --with-libpcre=included, libpcre"
+ PACKAGECONFIG[ssl] = "--with-openssl=${STAGING_LIBDIR}/.., --without-openssl, openssl, openssl"
+ PACKAGECONFIG[ssh2] = "--with-openssh2=${STAGING_LIBDIR}/.., --without-openssh2, libssh2, libssh2"
+ PACKAGECONFIG[libz] = "--with-libz=${STAGING_LIBDIR}/.., --without-libz, zlib, zlib"
 -- 
 2.7.4
 
