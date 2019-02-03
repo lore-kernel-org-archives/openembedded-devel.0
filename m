@@ -1,48 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 09C4F7C400
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+	[209.85.167.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8441060721
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2019 20:56:56 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id d19so9180487qtq.9
+	Sun,  3 Feb 2019 12:05:33 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id n23so2933233lfl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Feb 2019 12:56:58 -0800 (PST)
+	Sun, 03 Feb 2019 04:05:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=MJw0OEpJn1Se1uJH92+8otJ0c9Xz8kZ+JzzTDmf7D5o=;
-	b=vYlHgLizKu0R1FT18unIvUh74e1/KfW0ISc7qYQz+E4Z0c7hvfiGIiQCWpz6LNXkHA
-	LE+9ApTxOclOGhYXIipbVJ3vjQravQPoAZ+HDrfEqpoFTcpdQ/nuTQW7JTc/bke3PAbp
-	qLCV5/giaSAeraehMjsGX5M3iCfBWtRubW86T5SQ+kOXjGrF8XTWYe7MvoW3z6dB6KC7
-	SPYZWxDYdJ4E/bW8Oi1RwBcly2hg1kVs4IJrnXdrBWFynSqpllwqVfvZIYvzuZYdEtsr
-	+0V6LAmefd087dVyBQ2HWcaObQoJNto6/Xf524rDswhxxjmqfhWgjYO+lNTQ2sevt1kE
-	s2Jw==
+	h=from:to:cc:subject:date:message-id;
+	bh=bsLzdUDHszIbZ1nDFxjENm1sw906JWRXkMEoQT603lI=;
+	b=dDZszHWApiMBOP/ux5Xy104deJx3NUSHq3FO9zWL5AVt3mwJLvBG07uRA3X9Ndzchz
+	tKFhiCDUhDzSzWTQevROoNHBH+ocZZbg2sHLtZqH1z1VqejYdp/uvlOMHEVjlltKUgKa
+	gt6o1KbgP2LXnfwiDyxkmQFCOz8dDq+NpWgtGKAq9nRc5RaLDCp+SC+aqrTXRR/6FJJz
+	UFxLHhTGY3GL/I9Yw57LROxLxUNbj+FAS6DuXMQiHcD0Mjgole0QXnDZLf60HIb98SU6
+	ZxlTYW1abhyh8PBHev2FRivJ4xggSgBSUQ2FsdT1KYtLK2yGgcwf7n8NXvkEW8r75Hq7
+	uaYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=MJw0OEpJn1Se1uJH92+8otJ0c9Xz8kZ+JzzTDmf7D5o=;
-	b=r/XPM/mXfekwiNCXuqrb6Fob8hWMcVhajeYBO7yK6EWUfPV17vbldKJ352QkxRYM2O
-	l0LpugW3Nd4T4JcNReW54cLnDQWz8WGFVgThXG11AkSkxODf4qLu3COxv9RiPmAVWtQS
-	4DKutr7sCzfI3HtSEQXv1Kw2Ucxe8U8YXJbA6Hdl2RDWHN39FUYliJTp19QnEHRNOpBz
-	v4VyGSauuuERW7CEVgSZNc5B+tM71ztAErpj/nimeFts/mWxZuYkN3278BM+JTeMUXnc
-	CvDFuCGBiSODhqlwWbZddWsmVYiLFPChZ58zHNJFfZqAXwXBRmsJirYBM+X/ICj2MqQQ
-	rsdA==
-X-Gm-Message-State: AJcUukc+RivWYsnoJMnqnbXdWm3YyM94Vv1p+2b49yz9lhUeDcLAmuwO
-	erIqyiHebHJ92jH3jhU92+FpJ7QRU4/Wck1jcuQ=
-X-Google-Smtp-Source: ALg8bN51pQEV12oMu2agFJwlMS6M4khtmq4r6S1c6LSGaKOQL3ek7OUSyxkJWwtycprkojwTfUb7pt2yOujSfXG54N4=
-X-Received: by 2002:ac8:36ba:: with SMTP id a55mr39645371qtc.236.1549054617809;
-	Fri, 01 Feb 2019 12:56:57 -0800 (PST)
-MIME-Version: 1.0
-References: <f00069dd-43f6-4938-1e6c-7a2ff3dcb836@gmail.com>
-In-Reply-To: <f00069dd-43f6-4938-1e6c-7a2ff3dcb836@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Feb 2019 12:56:31 -0800
-Message-ID: <CAMKF1soyL8GPwKoDhHvmWsPnUE8aOAeWR6M8-gfzYb5hvYd8ZQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org >> OpenEmbedded Devel List"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: thud][Pull request]
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bsLzdUDHszIbZ1nDFxjENm1sw906JWRXkMEoQT603lI=;
+	b=o1DD+fpAgqjWU0JzxdEeZOnXJMJDwBK+3w9OBz+vdQvxcquK2j7BmaP/wkPLC70sKU
+	OCXRTqYMWj2zMDHWkTzQnvAaYUd6CIAn4Nt3alIbNzUJFZebk8lX/e3ev1lpZrVSgDDP
+	z9zZWz6RVHCRViCOgYyx5/sQdVOn/BcjHBDbizpvLx+QtGuHQwS86yay2xmJbLFZtojk
+	z3F1gN9pKdihWAeup9P1VDAtDHAaQE0eYqzePEF8v6K69+5hO2rrYAFeN5RKpS2R2NY6
+	FFJaD1KoPqD1WjF9D19pHDaBtG6WaboZpTc2sg1iG+8b3vrlWcqI0jeNX/CyHGNVpZYv
+	lRgg==
+X-Gm-Message-State: AJcUukdKTdsPL82HnjIPq1RB01w5D2UqJePnFT4rkwgxsMmsrVR38YpH
+	0AL5R4kkp1KVtwGzZg2v8dIuTbbh
+X-Google-Smtp-Source: ALg8bN6UnX0dFFllKUDOIGLiJojrJOKU7QlbNy/ew9VLOQQDfATfC/NFkJtnmUaGlkPyg81u2GKBBw==
+X-Received: by 2002:a19:a28e:: with SMTP id l136mr36361028lfe.87.1549195533662;
+	Sun, 03 Feb 2019 04:05:33 -0800 (PST)
+Received: from peterliu-Precision-M4800.lan
+	(c-b09ee253.022-417-73746f13.bbcust.telenor.se. [83.226.158.176])
+	by smtp.gmail.com with ESMTPSA id
+	j18-v6sm2213238ljc.52.2019.02.03.04.05.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 03 Feb 2019 04:05:32 -0800 (PST)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  3 Feb 2019 13:05:23 +0100
+Message-Id: <1549195523-5426-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: patrickvacek@gmail.com, luka.pivk@toradex.com, stefan.agner@toradex.com,
+	Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH] lshw: BBCLASSEXTEND to native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,73 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2019 20:56:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 03 Feb 2019 12:05:33 -0000
 
-On Thu, Jan 31, 2019 at 11:00 PM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 6094ae18c8a35e5cc9998ac39869390d7f3bb1=
-e2:
->
->   geoip: update SRC_URI (2018-12-22 08:14:11 -0800)
->
-> are available in the git repository at:
->
->   git://git.openembedded.org/meta-openembedded thud-next
->
-> for you to fetch changes up to cca27b5ea7569d2730ee5da7ee7f47b39d775d89:
->
->   polkit: Fix CVE-2019-6133 (2019-01-23 08:17:23 -0800)
->
-> ----------------------------------------------------------------
-> Andreas M=C3=BCller (4):
->       libxklavier: Fix keyboard layout bug for xfce4-settings
->       libmtp: upgrade 1.1.5 -> 1.1.16 and rework
->       networkmanager: move udev-rules from /usr/lib -> /lib
->       openjpeg: fix build for multilib
->
-> Ovidiu Panait (1):
->       polkit: Fix CVE-2019-6133
->
+From: Ming Liu <liu.ming50@gmail.com>
 
-LGTM, merged thusly, thanks for doing this. I think
-we have more pending thud requests on patchwork.
+In case some recipes might need it, for instance, the aktualizr-native
+of meta-updater.
 
->  ...nfig_xkb.c-Fix-keyboard-layout-settings-f.patch |  39 +
->  .../fix-do_installe-failure.patch                  |   0
->  .../recipes-gnome/libxklavier/libxklavier_5.4.bb   |   1 +
->  .../networkmanager/networkmanager_1.14.4.bb        |   3 +-
->  .../libmtp/libmtp-1.1.5/69-libmtp.rules            | 999
-> ---------------------
->  .../libmtp/libmtp-1.1.5/glibc-2.20.patch           |  36 -
->  .../libmtp/0001-Use-native-mtp-hotplug.patch       |  43 +
->  .../recipes-connectivity/libmtp/libmtp_1.1.16.bb   |  50 ++
->  .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |  58 --
->  .../polkit/polkit/CVE-2019-6133.patch              | 190 ++++
->  meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   1 +
->  .../recipes-graphics/openjpeg/openjpeg_2.3.0.bb    |   3 +
->  12 files changed, 329 insertions(+), 1094 deletions(-)
->  create mode 100644
-> meta-gnome/recipes-gnome/libxklavier/libxklavier/0001-xklavier_config_xkb=
-.c-Fix-keyboard-layout-settings-f.patch
->  rename meta-gnome/recipes-gnome/libxklavier/{files =3D>
-> libxklavier}/fix-do_installe-failure.patch (100%)
->  delete mode 100644
-> meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/69-libmtp.rules
->  delete mode 100644
-> meta-oe/recipes-connectivity/libmtp/libmtp-1.1.5/glibc-2.20.patch
->  create mode 100644
-> meta-oe/recipes-connectivity/libmtp/libmtp/0001-Use-native-mtp-hotplug.pa=
-tch
->  create mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.16.bb
->  delete mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
->  create mode 100644
-> meta-oe/recipes-extended/polkit/polkit/CVE-2019-6133.patch
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
+ meta-oe/recipes-devtools/lshw/lshw_02.18.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-devtools/lshw/lshw_02.18.bb b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
+index b344fbf..d1a7334 100644
+--- a/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
++++ b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
+@@ -30,3 +30,5 @@ do_compile() {
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
++
++BBCLASSEXTEND = "native"
+-- 
+2.7.4
+
 
