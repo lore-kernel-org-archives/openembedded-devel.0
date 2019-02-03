@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AC8E07C323
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D7097C2F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Feb 2019 15:06:23 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id e5so5609819plb.5
+	Sun,  3 Feb 2019 15:06:25 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id b7so5577871pfi.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Feb 2019 07:06:25 -0800 (PST)
+	Sun, 03 Feb 2019 07:06:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=vzcdQosakZkUbZ88sflNpCMSruLC3VeOOlv4T+OvCQE=;
-	b=t8WSsVkWKdSMTpWJCoscGuBYFnBcvjm1FhQE58Zv2yH3qmJ6afiUxLRiBZbx+R1Q3N
-	ZlH3z68rn5O3lFsXT9iGZb4LPlv677vWNr7f2QkPYTzf9LHgapoUv4zM6S7aRcIK6V6u
-	JHasr77a2q3i/6knfVWBjakkri+kX5q0scJzw4HbV1DEqN6EnFvPf7md6WY4A6DU+u7p
-	PRizvgAVMCyWqaQ0j0Q3amA60x3Ir3F8TUlXE3xJ6wbJNeF5uKlIl4RX4Cxv+nilt0+K
-	BUL9LN0p5pUwujpZCGQcuY8eugm4Q0c5J7o1Yn0dqOkKJGSAYPLmLT24R03sbfxWRyL8
-	7a9Q==
+	bh=JhYFSbE+oEMz69jC2FB8adwBJFP1T/YWtTLxKRKSQPc=;
+	b=hUc373j2XbwuMUdt1mfNPzJ/bu9WZZCo9HE3xNDeHTVlld/hc2o5H3i+R+HPUldONe
+	yzXE+xulGDsNO32QW+Mfk52rGNzU7d7goF9GA/upKw19fFoftWP/334BlnkfYegi13Om
+	t/3Rw8r/ZR5oCcRWEmwyVP+cOPP9tGFFnEy2454U9gDFs9RBaPP0yX/kIG1bwaIYrqNj
+	0+CWo8n1Q3ybn+PryRUgAJz0JEJtRl6VTnus9s+05bPTt6IwKIr/3OswDfGhc6CuqYrP
+	mkfmWy6Inr5Fdtjmh/2Zdxu0LE3QeF/plbn/HicXovgVSdX7CKKN3duZBUCLyVaLhgZI
+	fpZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=vzcdQosakZkUbZ88sflNpCMSruLC3VeOOlv4T+OvCQE=;
-	b=taZ/hBmf1HuMJXnyGMPXeXZps+U1h3U41lp0RXTBCzNFLnMQE9WOUp+5TnFFFKU1gq
-	EX/IEdsELatVlbGsJByP6ItqSkn1+MLyUPJbCXUVvREpjk9KW0dsIg1LiZyNcmuHx/YA
-	nd+ggj8QSzLaoGu/6kVrZFqhDnzt8jEvH0QOpIoA4jhA2Jypq2gd7f3l8MhCIYMaWK3q
-	DEEIUCRqg2aloY7Oo9XKkMUK7q8DBwjRcsssbvbgPLeqGGNJC3pyN3CbE5cGH42yE4nB
-	8xd/XFIn4dU2h0VlWw53Gn9FX9VsZb2jvUdRZza8ZrIxLsFYvWl4lXyNNJyrWAPnyjRT
-	lnog==
-X-Gm-Message-State: AJcUukf2exHcnDs7CVklZ+v8fh82oO2kGgpD4DwUNG++iPeBq9ysyB/U
-	IphSiYrLnfnBzhB/wEExvQsuTxPk
-X-Google-Smtp-Source: ALg8bN5a+T6TNDVVX3Jq+PGNNBkNxhd63a4mRbmfEMHAXdWK+LZmmqCli7op7TX+6g2as+mmdUGdtQ==
-X-Received: by 2002:a17:902:128c:: with SMTP id
-	g12mr45976474pla.146.1549206384232; 
-	Sun, 03 Feb 2019 07:06:24 -0800 (PST)
+	bh=JhYFSbE+oEMz69jC2FB8adwBJFP1T/YWtTLxKRKSQPc=;
+	b=qmYPid/76G+I84ErLfhTA4xZywxEKCecLB6zqKQtlPTfrwbE7DDeLoHecW096F1R/h
+	DT/vhPpXaklyvC7gWksHR8niyswYv6B4Te7fSPq5U4tRUQWPYgwkzPAgLHHkNaNnbrGy
+	obPfiwCrDfj5IDfMM7szZ73CtV25RRrYYMutJ8mWG0OVJiPY+ESB9JqLko467hAUFOEh
+	NxM5ideiCrRvzhWDVKv6fN0joYUvpVosgdPVx8v98d879gNSGONv2DENPYJSvD4S9U/2
+	eNwqrBdDc2ufk04TIQluREzZa61Q2h+X1wjqtp8AXK6TtKRa87C1MoFR6ehcR5WyfeTI
+	/Dzg==
+X-Gm-Message-State: AHQUAuZF8kYBkzI593R+wOx6cCPUJugk3DQrWmyy/obdUxmpxnr8sPwj
+	WMPeLMmA79OkqYu+z8Kf2/SSKItB
+X-Google-Smtp-Source: AHgI3IbTNE0sm1lseBCiWytRiVsy4d1QofGYIRYZDFHeBIfORo+M/e/fEkWeQHv5MU2RYgRLpbLQqw==
+X-Received: by 2002:a63:f515:: with SMTP id w21mr9665473pgh.220.1549206385810; 
+	Sun, 03 Feb 2019 07:06:25 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::1609])
 	by smtp.gmail.com with ESMTPSA id
-	a90sm24349645pfj.109.2019.02.03.07.06.23
+	a90sm24349645pfj.109.2019.02.03.07.06.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Feb 2019 07:06:23 -0800 (PST)
+	Sun, 03 Feb 2019 07:06:24 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Feb 2019 07:06:04 -0800
-Message-Id: <20190203150606.2484-2-raj.khem@gmail.com>
+Date: Sun,  3 Feb 2019 07:06:05 -0800
+Message-Id: <20190203150606.2484-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190203150606.2484-1-raj.khem@gmail.com>
 References: <20190203150606.2484-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 2/4] rtmpdump: Switch to using GNU TLS instead of openssl10
+Subject: [meta-filesystems][PATCH 3/4] owfs: Inherit systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Feb 2019 15:06:24 -0000
+X-List-Received-Date: Sun, 03 Feb 2019 15:06:25 -0000
 Content-Transfer-Encoding: 8bit
+
+Fix
+ERROR: QA Issue: owfs: Files/directories were installed but not shipped in any package:
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/owfs.service
+  /lib/systemd/system/owftpd.service
+  /lib/systemd/system/owhttpd.service
+  /lib/systemd/system/owserver.service
+  /lib/systemd/system/owserver.socket
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb b/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb
-index a72b0d651e..5f78be4f51 100644
---- a/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb
-+++ b/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://rtmpdump.mplayerhq.hu/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
+index 50865cccda..326ce0aea8 100644
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
++++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/owfs/owfs \
  
--DEPENDS = "openssl10 zlib"
-+DEPENDS = "gnutls zlib"
+ S = "${WORKDIR}/git"
  
- SRCREV = "fa8646daeb19dfd12c181f7d19de708d623704c0"
- SRC_URI = " \
-@@ -18,5 +18,5 @@ inherit autotools-brokensep
+-inherit autotools-brokensep update-rc.d pkgconfig
++inherit autotools-brokensep update-rc.d pkgconfig systemd
  
- EXTRA_OEMAKE = " \
-     CC='${CC}' LD='${LD} ${STAGING_LIBDIR}' XCFLAGS='${CFLAGS}' XLDFLAGS='${LDFLAGS}' \
--    SYS=posix INC=-I=/usr/include DESTDIR=${D} \
-+    SYS=posix INC=-I=/usr/include DESTDIR=${D} CRYPTO=GNUTLS \
-     prefix=${prefix} libdir=${libdir} incdir=${includedir}/librtmp bindir=${bindir} mandir=${mandir}"
+ EXTRA_OECONF = " \
+                  --with-fuseinclude=${STAGING_INCDIR} \
 -- 
 2.20.1
 
