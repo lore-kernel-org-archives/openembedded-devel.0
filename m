@@ -1,34 +1,37 @@
-Return-Path: <scott@jumpnowtek.com>
-X-Greylist: delayed 500 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 04 Feb 2019 22:11:39 UTC
-Received: from smtp113.ord1c.emailsrvr.com (smtp113.ord1c.emailsrvr.com
-	[108.166.43.113])
-	by mail.openembedded.org (Postfix) with ESMTP id C39067C0F4
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AB5B7C039
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 22:11:39 +0000 (UTC)
-Received: from smtp15.relay.ord1c.emailsrvr.com (localhost [127.0.0.1])
-	by smtp15.relay.ord1c.emailsrvr.com (SMTP Server) with ESMTP id
-	52B8120256; Mon,  4 Feb 2019 17:03:20 -0500 (EST)
-X-Auth-ID: scott@jumpnowtek.com
-Received: by smtp15.relay.ord1c.emailsrvr.com (Authenticated sender:
-	scott-AT-jumpnowtek.com) with ESMTPSA id 1661C20324; 
-	Mon,  4 Feb 2019 17:03:20 -0500 (EST)
-X-Sender-Id: scott@jumpnowtek.com
-Received: from [192.168.10.4] (c-73-234-253-132.hsd1.me.comcast.net
-	[73.234.253.132]) (using TLSv1.2 with cipher AES128-SHA)
-	by 0.0.0.0:465 (trex/5.7.12); Mon, 04 Feb 2019 17:03:20 -0500
-To: Scott Ellis <scottellis.developer@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1549201073-6116-1-git-send-email-scott@jumpnowtek.com>
-	<1549201073-6116-2-git-send-email-scott@jumpnowtek.com>
-From: Scott Ellis <scott@jumpnowtek.com>
-Message-ID: <78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
-Date: Mon, 4 Feb 2019 17:03:18 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.0
+	Mon,  4 Feb 2019 22:14:54 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43thpR0WGlz4d;
+	Mon,  4 Feb 2019 23:14:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1549318495;
+	bh=9Hrr1llIHxfq3iYPlED/VT1nnt0rtzKQ0fyuvw5Kxh4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=kkN8sSBq/JDNkLHI7Y7I4U6z6xzX9p1fOsTLHVJofNCHhsDGg0bs+uRiTA8KV0wz8
+	PdLZgFato4576themA4W5jjsKii0S3yfZCgpPm2oYunlqnrsqlnp64oHf8MqtmoFoL
+	3zvLdZUFYQwWELbHBy0YZ/RkzeduNeoD6njjjHL9bK0gl8HGCxJAu+/bvSEcBagpNA
+	6k94N01R2qwr5/92YhRc9aEC8+QgSqfPsgJmm6JRzZAVXf3XJ/FrgasT7K+RMpGF0B
+	7Yj/BvBfnwEkWFRnRwzO/TDONUKj2ak+EiuxXVI0Q9/RbAk/Vkp63/Tm+CkhnmSipH
+	6c8cLrzoa73HR5xAmTq139uQybsRpV84sX5vfHSBMfXU12ly+sG9amRLLmD1GjcOSG
+	2GvR8y1yG2vmvq1Ef9b1DXVtNXR86asOwSRNoGLMl1HT9st/Z9yjR4ueZcSq4rnvbq
+	15Gm4HfYd4OaubYz6UP0VUKZfqPg+dmDlHFEB7jruVGHyElu9oc0mkCIfpWund5IPA
+	ymxl2YZjYG0pURVNYDD/6DTOaBqMNfQrPIxy9D4aAwm2hTs9YLXB1Af+Yb2jCQiqvN
+	ADPfZM4Ijh7nwFeEOCZOZCLoHhPdbvifcBZfhxfHzBCZeAXZMjL4pvFEizmwQYM1ZR
+	X9QFHRrSKpyiWbxRciwkQyOg=
+Date: Tue, 5 Feb 2019 00:14:53 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Philip Balister <philip@balister.org>
+Message-ID: <20190204221453.GE17997@localhost>
+References: <20190204145940.17783-1-bunk@stusta.de>
+	<a8c5c5d2-886e-5689-2a43-b4615df3a0bf@balister.org>
 MIME-Version: 1.0
-In-Reply-To: <1549201073-6116-2-git-send-email-scott@jumpnowtek.com>
-Subject: Re: [meta-oe][PATCH 2/2] nmap: Include additional FILES path for certs
+In-Reply-To: <a8c5c5d2-886e-5689-2a43-b4615df3a0bf@balister.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][thud][PATCH] Add czmq (C bindings for ZeroMQ)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,15 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2019 22:11:39 -0000
+X-List-Received-Date: Mon, 04 Feb 2019 22:14:55 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-These nmap patches got applied to master, thanks.
+On Mon, Feb 04, 2019 at 06:23:05PM +0100, Philip Balister wrote:
+> How are zmq bindings versioned? Just curious why this has a different
+> version to:
+> 
+> http://layers.openembedded.org/layerindex/recipe/28410/
 
-Do I need to send additional patches to get them into thud?
+These are different bindings (C versus C++) maintained separately.
 
-They are both bug fixes only and should both apply cleanly. The nmap
-recipe for master and thud were the same.
+> Thanks,
+> 
+> Philip
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
