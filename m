@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 139337C2F3
+	by mail.openembedded.org (Postfix) with ESMTP id 2F0F37C324
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 15:02:04 +0000 (UTC)
+	Mon,  4 Feb 2019 15:02:05 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43tWC13c1sz1M
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43tWC166Rqz28
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon,  4 Feb 2019 16:02:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1549292525;
-	bh=SUYuNPZikvywQXUL38foL9iV//wp+4wdJhLS45wtu54=;
+	s=default; t=1549292526;
+	bh=16WUvItM3CPafCFKJ8Z4OFS4n9wusbGe8pq1ppmhJcU=;
 	h=From:To:Subject:Date:From;
-	b=F4vZy94DGGtyVmKSo2yX3LGMojXAW61NppWZwNeqwdEErT8qsOf+9UrlrDDA6Aqsx
-	/o/dDNXEzaJbODReO81Zwy2Cx1KTmDsN8UGBKRDYEREAbjQbmMq6mpjv2Pta54s2pO
-	tKPI1WZeFFun3arlBRALw01H30gIGb0I9Xpey8rg617RdLOcW8w/OPe2iWRMfiv3az
-	696ZWmYi1RZ6Po22FlS9b57SnbR5idra49W1DagG0HrIY5VzLw1ujGj2GYvWm99k49
-	Ui/fFO/OaPNdb/+RAJsfu14uSZZBKBNMBKgO/eJnqfzYDtWeFhN+c+ZC7KP4hERrr2
-	A5fJ6Ig3jhBkeKxYcWjGwdyLIYz6WernpC/QHiloUK26d+LhMOG4519Q2eJr/4NUvY
-	Q6zVKLKRf5QR1I9oO8I5sFLjSLYciYTKK5mitAhh3wUNqlEDpXqGI3AMEl1bllckYp
-	HrDl/6qUPyB1NI8g1Gi58X00Pke36uWBKbC6FrDpVTe8mkJV2LF3S5HbRESHrxi6rL
-	1LEwOnF3Dd3cMig0PUHtN3MeXoZWrB448JA7/y+j/cfypeWqjpSSaUkiDo6TH+wUhH
-	uB1pxkr//YkigSSqvm6VWM+MYOp5LF7LS8dKcE5sbTs/ZLTCRtr4rXBWM0eqPwKbGR
-	xTvrQ+4M8/Z4G1sUFc79i3nE=
+	b=myKspMf6oiO9tj1oER8gLJPXL+aLqudXdLNvD2mjWNCPpltVUqokoR9wdfGDsac4V
+	x9F08gxdKl+XHHEIx7HldqQhkWbnSYfGoq6kwBnnhd+1uyONPg3XDTCGT93patWxMG
+	BNt/3VwPUW7DfZIeKbuQf3+GDYDRz+KPE0fXXUjBNNH6Ik4JOkTYd+5kpdQymX0XId
+	LNzp5JhLBUevByTNSH3XpYS48OCqF4u+xjYnBUPrg3mcrp36G24EuQZicmrSQYztgE
+	yMN+6h3+GHbFAWRBXRwM9osxx7Hb/l1aNtUuV8KutobYnGygoaBQT2V7C/nYkRXAKx
+	qCCqgfkp52zbaaoG4mJiodkYw9zYne2CPqUMrQd8mymlB4zV6B+4vE5+Kkrki64wq/
+	MQPnJv5oCpjR77CMVugjjNnYIFxwjlN9QHKiRgVKXYiaxRt2YygX4VHeLBpCojIIuq
+	s+d7l+jWFS+S5ek+zT7YHCA/7n66r3xw0uFZazv2njevyUF5mU0OY92Nto+7x5FheP
+	jJhxUXnq6A8eKH93q3LLVtt4tWQR+aTE9OvnzBuZLLHi9XHcX+JMQQySWmqAU0+uzH
+	bhzQdesGEWW5CkNRfMOBubRI/rWFLv+maw7fU5uNYYlMPgIuYZztmbD0DnEr+bEZH7
+	0cWGwQnL5M6rtr6YKPXJ4/JQ=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Feb 2019 17:02:03 +0200
-Message-Id: <20190204150204.18007-1-bunk@stusta.de>
+Date: Mon,  4 Feb 2019 17:02:04 +0200
+Message-Id: <20190204150204.18007-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][thud][PATCH] Split ntpq into an own package
+Subject: [meta-networking][thud][PATCH] wireless-regdb: update 2018.05.31 -> 2018.10.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,44 +42,30 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 04 Feb 2019 15:02:05 -0000
 
-ntpq is the standard query program for ntp,
-but ntp-utils depends on perl.
-
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb} (91%)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-index 53e41297a..289d2645b 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-@@ -105,7 +105,7 @@ do_install_append() {
-     rmdir --ignore-fail-on-non-empty ${D}${libexecdir}
- }
+diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
+rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+index 2b990db3c..e1aa9a517 100644
+--- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
++++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
+@@ -5,8 +5,8 @@ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
  
--PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-+PACKAGES += "ntpdate sntp ntpq ${PN}-tickadj ${PN}-utils"
- # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
+ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "0cbbdc21186c76cf58aba01b03f3dc5b"
+-SRC_URI[sha256sum] = "e1dfbc3b97771373077f430c3c05082fae883145b37db5b2cfd12c56676fbe7b"
++SRC_URI[md5sum] = "b81bd1f6525a4806a707881aa3dda63f"
++SRC_URI[sha256sum] = "0d3e845ac77d21aac9b88642c3dd043a83e3920d706b63d5e5c31dffdbec9116"
  
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-@@ -117,6 +117,8 @@ RDEPENDS_${PN} += "libgcc"
- RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
- RCONFLICTS_${PN}-utils = "${PN}-bin"
-+# ntpq was split out of ntp-utils
-+RDEPENDS_${PN}-utils = "ntpq"
+ inherit bin_package allarch
  
- SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
- SYSTEMD_SERVICE_${PN} = "ntpd.service"
-@@ -151,6 +153,7 @@ FILES_sntp = "${sbindir}/sntp \
-               ${sysconfdir}/default/sntp \
-               ${systemd_unitdir}/system/sntp.service \
-              "
-+FILES_ntpq = "${sbindir}/ntpq"
- 
- CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
- CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
 -- 
 2.11.0
 
