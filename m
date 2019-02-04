@@ -1,33 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F0F37C324
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 49A277C296
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 15:02:05 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43tWC166Rqz28
+	Mon,  4 Feb 2019 15:16:04 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id z5so256269wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 16:02:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1549292526;
-	bh=16WUvItM3CPafCFKJ8Z4OFS4n9wusbGe8pq1ppmhJcU=;
-	h=From:To:Subject:Date:From;
-	b=myKspMf6oiO9tj1oER8gLJPXL+aLqudXdLNvD2mjWNCPpltVUqokoR9wdfGDsac4V
-	x9F08gxdKl+XHHEIx7HldqQhkWbnSYfGoq6kwBnnhd+1uyONPg3XDTCGT93patWxMG
-	BNt/3VwPUW7DfZIeKbuQf3+GDYDRz+KPE0fXXUjBNNH6Ik4JOkTYd+5kpdQymX0XId
-	LNzp5JhLBUevByTNSH3XpYS48OCqF4u+xjYnBUPrg3mcrp36G24EuQZicmrSQYztgE
-	yMN+6h3+GHbFAWRBXRwM9osxx7Hb/l1aNtUuV8KutobYnGygoaBQT2V7C/nYkRXAKx
-	qCCqgfkp52zbaaoG4mJiodkYw9zYne2CPqUMrQd8mymlB4zV6B+4vE5+Kkrki64wq/
-	MQPnJv5oCpjR77CMVugjjNnYIFxwjlN9QHKiRgVKXYiaxRt2YygX4VHeLBpCojIIuq
-	s+d7l+jWFS+S5ek+zT7YHCA/7n66r3xw0uFZazv2njevyUF5mU0OY92Nto+7x5FheP
-	jJhxUXnq6A8eKH93q3LLVtt4tWQR+aTE9OvnzBuZLLHi9XHcX+JMQQySWmqAU0+uzH
-	bhzQdesGEWW5CkNRfMOBubRI/rWFLv+maw7fU5uNYYlMPgIuYZztmbD0DnEr+bEZH7
-	0cWGwQnL5M6rtr6YKPXJ4/JQ=
-From: Adrian Bunk <bunk@stusta.de>
+	Mon, 04 Feb 2019 07:16:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=72vOyQvNGBUaZ3UfeS6CgN3CLriH0Q1tUPzLkbjeLpI=;
+	b=S+7RNQJsRta4cM167eial8Zdi8C5yaMO2H7ftUiPRx+azRkZxvDivudprEDB9awRL4
+	N4TBDKP+6NpAEn6ab7xi0yB6tBR+CGnO2lsZzJ60F5HMuyBEe8ao7yzmoKP5i517AH5c
+	Naul6PVxfdKGQXz/LiwxffCzCycgtinFz50Z5onXNNylSdsN2daXbcSH9CL+vqreaHx9
+	alzObnMXFbJ+Ux3xvw05GnJPCSE/4loJ/TbBgz5E4tqQZPOXvNRC8tP4D9G37fR2Lfgq
+	quTyJs0R5i2AMVlaliWcAeNXSiM9z2NCenSE/7C/61MCprr+IEE3mpckMOMeyokR7WGL
+	C4WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=72vOyQvNGBUaZ3UfeS6CgN3CLriH0Q1tUPzLkbjeLpI=;
+	b=g7O2qLFjEoY9ALUThLGTlQ88g5GP+xlz4fLN9W+lEiYB20qY7Tw+MquEmojy9yVBfp
+	3k/S7Mqq2WAmNWysqtadJ5hvrem9bxDDgLrR5lBmupLLGX2LStFLSRO1r8rwxX4+oUgF
+	QH6ZCM9oNa2khgueXBMVL+VtxdSNalQT6YkOVofeJOoI6YviqH1t9UpHe1U1LMjaEdfZ
+	U0BDZMxpnZL6bwGpSd5jzZS2gqR1hMTEviB4DxBI6egdsJ8GNadw7uFqj3cFGMuSDyik
+	bHQdAnG5I+q1wYLVRoRXuwZ8Y7hCndnVdmTIIXj0CZKn5GIUi+iEFiFD7q83ZO/scM4F
+	1PHg==
+X-Gm-Message-State: AHQUAuYSnfJjqfkpHB/Bf87nkPqO3OnaXcAP7oHBm50ZkXZBzBNU0Xtj
+	VmQ2qmMWt/7kpZYHkiK8VRvbn7AT
+X-Google-Smtp-Source: AHgI3Ib/n8un3coJTGAg2r1BweSVOMkRSap84Mt7P7vGfBFZnb2yXNKC4rOxdKYTE31Q/d2k5p7RMA==
+X-Received: by 2002:a1c:7a16:: with SMTP id v22mr12859732wmc.131.1549293364160;
+	Mon, 04 Feb 2019 07:16:04 -0800 (PST)
+Received: from localhost.localdomain ([5.170.140.54])
+	by smtp.gmail.com with ESMTPSA id
+	m14sm7924595wrx.59.2019.02.04.07.16.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Feb 2019 07:16:03 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Feb 2019 17:02:04 +0200
-Message-Id: <20190204150204.18007-2-bunk@stusta.de>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][thud][PATCH] wireless-regdb: update 2018.05.31 -> 2018.10.24
+Date: Mon,  4 Feb 2019 16:16:00 +0100
+Message-Id: <20190204151600.31213-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] cpprest: update to 2.10.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,33 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2019 15:02:05 -0000
+X-List-Received-Date: Mon, 04 Feb 2019 15:16:04 -0000
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb}    | 4 ++--
+ .../cpprest/{cpprest_2.10.9.bb => cpprest_2.10.10.bb}         | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb} (91%)
+ rename meta-oe/recipes-support/cpprest/{cpprest_2.10.9.bb => cpprest_2.10.10.bb} (89%)
 
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
-rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
-index 2b990db3c..e1aa9a517 100644
---- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
-+++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.10.24.bb
-@@ -5,8 +5,8 @@ LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.9.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb
+similarity index 89%
+rename from meta-oe/recipes-support/cpprest/cpprest_2.10.9.bb
+rename to meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb
+index 4bdc5c682..cc9d5e105 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.9.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb
+@@ -10,8 +10,8 @@ EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
+ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
+            "
  
- SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
--SRC_URI[md5sum] = "0cbbdc21186c76cf58aba01b03f3dc5b"
--SRC_URI[sha256sum] = "e1dfbc3b97771373077f430c3c05082fae883145b37db5b2cfd12c56676fbe7b"
-+SRC_URI[md5sum] = "b81bd1f6525a4806a707881aa3dda63f"
-+SRC_URI[sha256sum] = "0d3e845ac77d21aac9b88642c3dd043a83e3920d706b63d5e5c31dffdbec9116"
+-# tag 2.10.9
+-SRCREV= "8f0393dd7be08f2d9b44cc09b8b97f9bafb109a5"
++# tag 2.10.10
++SRCREV= "91f66c625b6361d2edabf76eae30887b326b2447"
  
- inherit bin_package allarch
+ S = "${WORKDIR}/git"
  
 -- 
-2.11.0
+2.17.1
 
 
