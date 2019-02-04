@@ -1,49 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
-	[209.85.222.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 58C84600B3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 159087C1DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 17:36:51 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id d15so456968qkj.0
+	Mon,  4 Feb 2019 17:46:39 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id y139so783359wmc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2019 09:36:52 -0800 (PST)
+	Mon, 04 Feb 2019 09:46:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0IsSnbSk3I3la/zETbXr1xREPjQwq3OH10OYskibHPQ=;
-	b=dQS7XVi7ZxHqmndp1h4WLNQYizSAXKU4Qu3iLuXvFS3lN52Zlb7NVnXaaHgkNkSVgR
-	GDZLJA5WCvWQwm/crjEc7jOPCMQrYbiByHoYc+m/r3ozv6Yx4VdWTUjWMhNTjZigmFK3
-	lHjY272NF34Yo/8B6yLBwW06vZA1ZIBJxL0N4PepseVtb7z8HIzU4V6272OOnJS436qe
-	yfQWfqVZz/rWpq4b7QF378B+XeKhogpvM7ItCiBK+gMesppBrkN79Z7Rb3SMP2vCM392
-	bB3d50FYdRCnQHCj1Hwwse7AB7CGu8ND6MgkducGk1Fy+wZBuEdrwap8BTtAb/FPp9rq
-	3AZw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u7/ubF1MqMFChTQdez5QCy2r0sZ1+dqWlmZr8Fg/4cY=;
+	b=hhq4cCaGX6xWKbpRjZMeeRZf+oGX7upS2XNdttc8EfevGrHwA+fYFHh42mFnhnbF6U
+	+FjEdwAC8k5MJV+pWE3v1V30vOTdprE90Y4gC29/u9lsPvWGFYA4ZFXWdOveD/Q0CNx/
+	yt2JFLqqj/t5Om2hxklZc0p8IcBdDia59Cza8nM1a1tkxOclQgtOJMrQ1w/JnybTW5k0
+	m/kNnr9I26XxBI1a3xyI6uP7BqvIDwJC6FDXtUOp4FMaDE7Nk49Ling4gNvTWxaw9OMC
+	3y1TT8QD7XYaOUrghoOjjfthiSd7n3QCP7tscpSAg9dire0RMQ4SEaeWfKS6u/WEp1HI
+	YDHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0IsSnbSk3I3la/zETbXr1xREPjQwq3OH10OYskibHPQ=;
-	b=qbnnT8NQAqr/6snnIF/ktiTV3vFRJBEy4c1vHvt4vLyEZayCsSf9N8jR/bNH5SCzFg
-	7oJAxCuxhDIGoCfR7Wl80hyPUofgukvkfTYRMZcYA/BbEgwU2BInOBn/3q5wepXMQXzC
-	AlGUWpdZzKDLvihJtfAIaR+1YmzMskF5/8Hwyx3smh5u4B8QEiMri5uhAaZR4TgLpsQc
-	AZ7y4ElM+e/HdFAqE0BV6r2hBK858dotaWvwRMw5/JI4MHdqeNlFOq3CU6GkN24Sa+r8
-	uI/JUswxXPN1nO45oEgew3XQ3D7JzcqXTgkI8TKGlgV+ybmAspf1xoCN7u6aGI/HMZSt
-	SqWA==
-X-Gm-Message-State: AHQUAuaSXyYZcsBUVZX+CFSLPc/Fm6z8J48k+t7mCndivKc7pVkG/2vf
-	l5qS2zIat1UTO4y1W8OQJkMC9aqmWUIKr3CySI0=
-X-Google-Smtp-Source: AHgI3IYMhMwqdMqQ5q7uTKFfiMe1Kw6x16V/rVo1A54iQMWphNv4ZF67mzPn3k0oh+eW/+tlJatyJD+jDai+0mJMmwc=
-X-Received: by 2002:ae9:ef88:: with SMTP id d130mr441932qkg.2.1549301812049;
-	Mon, 04 Feb 2019 09:36:52 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u7/ubF1MqMFChTQdez5QCy2r0sZ1+dqWlmZr8Fg/4cY=;
+	b=nr7I1d2++uJhR0t3ZTgUHLFwgefgZxZXBxhyrPGdrncSEgPqt+qw9uUewBNqMFDI44
+	818LMPVNSej4wH9qIo3rz56y97j3lw0gNQAakOJ+sx0wdljXHVGdfHjtlL03Wi0wwPLg
+	Fe7l+MKmPbAv4sjObCBH3NBFPcEV+wFTYkyoCWn4iiqxe+m119bngBT4IJPUYW6kQeXL
+	oOynv3DNOeEvytxoBOG/LgfblNwD57EafgubSFMswJen3ozoAKylJIVhGfLYpHNZX1BF
+	HtUt9qeCixCzuHjlgyBK4clRyj8eaLSQzguEEthI6os3hROOO3jKK26IJyEoxj7P15+9
+	Cd0A==
+X-Gm-Message-State: AHQUAuZ4v6OTlQUksPOCa4512JEknMq5ukWavB1D1FYh52NLrFKPlr03
+	miCmeFr280uoKwvfJQ9KE4qNv7Ht
+X-Google-Smtp-Source: AHgI3Ia8czdfc1e07femnLhXlTVTO01e5+9VAZCxV/8M8GkweoUu/0QxEEV64w2Rldp+0HLRBloeGw==
+X-Received: by 2002:a1c:a9d4:: with SMTP id s203mr413334wme.132.1549302399311; 
+	Mon, 04 Feb 2019 09:46:39 -0800 (PST)
+Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
+	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
+	o6sm10097649wra.55.2019.02.04.09.46.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 04 Feb 2019 09:46:38 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Feb 2019 18:46:21 +0100
+Message-Id: <20190204174621.21008-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190204150204.18007-2-bunk@stusta.de>
-	<e8244752-a10d-1ae1-5b9b-2854532e4a24@gmail.com>
-	<20190204161028.GA17997@localhost>
-In-Reply-To: <20190204161028.GA17997@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Feb 2019 09:36:41 -0800
-Message-ID: <CAMKF1sr=_6Vin43mFPGbsCH1x3180iQwbVHa=wtH00_w2dp=8A@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][thud][PATCH] wireless-regdb: update 2018.05.31 -> 2018.10.24
+Subject: [PATCH] evolution-data-server: fix multilib install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,39 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2019 17:36:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Feb 2019 17:46:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 4, 2019 at 8:10 AM Adrian Bunk <bunk@stusta.de> wrote:
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-> On Mon, Feb 04, 2019 at 08:00:18AM -0800, akuster808 wrote:
-> >
-> > This is a big jump. Is this a bug fix only update ?
->
-> This is data describing what your wireless device can legally do
-> in your country.
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
+index db5dca95b..1949fc7fd 100644
+--- a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
+@@ -38,6 +38,7 @@ EXTRA_OECMAKE = " \
+     -DENABLE_GOOGLE_AUTH=OFF \
+     -DENABLE_WEATHER=OFF \
+     -D${LKSTRFTIME} \
++    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+ "
+ 
+ PACKAGECONFIG ??= ""
+-- 
+2.20.1
 
-
-Armin this should be safe to bring in
-
->
->
-> > - armin
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
