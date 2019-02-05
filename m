@@ -1,46 +1,101 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
-	[209.85.160.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E4327BFE6
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A0D96BC44
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Feb 2019 00:32:22 +0000 (UTC)
-Received: by mail-qt1-f169.google.com with SMTP id b8so2147594qtj.1
+	Tue,  5 Feb 2019 06:18:48 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id b7so1043631pfi.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2019 16:32:24 -0800 (PST)
+	Mon, 04 Feb 2019 22:18:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=AZugSDf3TUy4uuR8y+8RqFvq3byPg1R/rykPxd/yZl8=;
-	b=tWudgPEmvK5MIRQMEYlhvK0jpqZcumCWMM6Ozz17UrPTBRBdqpP22gLlmtkKVZOkjB
-	LDo2wLMoW7+AFtPgWCP44s5Gk9jREamR5o1TCvl0uPDvGieM5ty7puWGcEz+aM3wn2/U
-	nXhiudXL2Gyj7gZC31sed3c7PHVp8kVPwJaLgmgyXgBJLdrr9E87hNqW+quzR6tB8ktK
-	QuFZktofmuq8dTGm5yp8tWz4UTKK1kjC4tZTVF0S5mAQEGmwd4+SOYB3nw1cyp0/H9/n
-	eDQ5ZhYNRRkt1Nhr7LNnKWWhc7Miknkb1ECqi638zF6I0/l1whpjJHtH6RCToRcd1Tbl
-	wObw==
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=JLORqyzBowVuav7XpBMgS9ixc0Ki3VuIMkPMyGO2y2E=;
+	b=NsElimknCZTmA9jGDddcsQpCW7hMfvlGBLki7oFGsT2XGUNRtNsKOPb/QEBQUQOaj9
+	+G3qWcZ22ahSMl6+AjtFChjl8rANR+7qPpxmZAaqk+ZitCbKdmx6dqvFQ+v4gOzy2IRP
+	5I8n2K+HZHVmMTsDPo56PdnVpgUD8eB+kcNHKEsdD6PzQL2lMkzD58Gnt1eNqM2c54H/
+	DBBwG/blfc+W4UotFHnfdMl7SvuMdPHRKT3rJxyXfjd2as8nErq8LfsorhYWEnOVm0LE
+	/7A9FLidALj1+0a+KwAeWTCoceZ6puoRTKGAcrpU2FpZGOa+74TI95zpyi50yIr7RBag
+	ir7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=AZugSDf3TUy4uuR8y+8RqFvq3byPg1R/rykPxd/yZl8=;
-	b=Dygxwahgkn1GZLElsCWftYpHhW4WPvrWzbq0lZaFGMNhciAjtcbdkFi47eQuXGi6Fa
-	0DRbuYqghKTnu5aWdZP/xqKm+U8671NxhElkDBkzhjHH78/+b5wY8kAI/8TaSiSut7+E
-	8iDf++fVbgVJe1SVjwJZrPcVgjcqNgG/Enz5/wCJ0z04xT+TL65rTxOeYDDmmevGbvah
-	W4CnKEgUXL9t+Njeh/+hdgsIII27m+0whw+aqdAAmZc/2TSvu3gePYe+8tlWrL68ACBV
-	2q+kEQivqB9Re9ob0t6DFiAWxsAA9GyQNtE8wS4IFYz40RhXdi/nHZAf/KfGvH1YNH08
-	xUXg==
-X-Gm-Message-State: AHQUAuZWMqdHrDdufm/SI9Vty0eHrePfU62rf2O1AaydvvIcNztyI3WT
-	EkMGYLiDhKFl6VJ9ywboFjWxzMm6r7gB82ChAKA=
-X-Google-Smtp-Source: AHgI3Ib7Pv4M/8cgyYZCBynB3TB4GKbXxeOrL+R27//YTTVJlNZlflGWNIxRiEt0h+foDKWmQ3hQGi7SCTJFOUGIvFE=
-X-Received: by 2002:a0c:9498:: with SMTP id j24mr374341qvj.194.1549326743545; 
-	Mon, 04 Feb 2019 16:32:23 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=JLORqyzBowVuav7XpBMgS9ixc0Ki3VuIMkPMyGO2y2E=;
+	b=KlBr+jmqaSFLnBzmNnbbOm4ak+c/0bSbLuLZOZHXobrryHFWiIHi8+iEhh2umqvUH5
+	ovJFPE4aL6BNwfak7RKv09lHfO84Cs8pOLeLlLKCboVTnxe1oQRHpJMeopmw0nm6dVLY
+	+6tf6dnIMRsw/lVCdNZH/F2BKc5wU9M3rYJhayaLwEczXrNmGdI2d1YKfBlgPBpHEu5B
+	NHyRGVXlD2i6Z3umvSQkg7/x5E2Bx2gWOsaxvQhLZAi56TGlRiny4VBXmDDlM9aTJNms
+	4X6Nd3Smk8ctEvLCU11Pn7uXnHVp1NRUo+ljtc0jfw0SJo1QIqgvXbFMc3h+I6qqOgmJ
+	lixg==
+X-Gm-Message-State: AHQUAubEJP6siu3O8QWptwcboaCdqzkYsAJQv8M5vTkDyU/cGcZspNHb
+	6MUUpQRsqIinyD0UhSHjVkuzNQ6R1UA=
+X-Google-Smtp-Source: AHgI3IY2GF4shP2SEJjQJhGQ84+NZESWKLaJYB9/0Vc+VIxY6KjXkeSkvUW8RKfonS4iXtu+3CDV8A==
+X-Received: by 2002:a65:6542:: with SMTP id a2mr3016692pgw.389.1549347529300; 
+	Mon, 04 Feb 2019 22:18:49 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:c33:a556:75ec:241a:9733?
+	([2601:202:4180:c33:a556:75ec:241a:9733])
+	by smtp.gmail.com with ESMTPSA id r1sm2632286pgo.17.2019.02.04.22.18.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Feb 2019 22:18:47 -0800 (PST)
+To: Khem Raj <raj.khem@gmail.com>, Scott Ellis <scott@jumpnowtek.com>
 References: <1549201073-6116-1-git-send-email-scott@jumpnowtek.com>
 	<1549201073-6116-2-git-send-email-scott@jumpnowtek.com>
 	<78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
-In-Reply-To: <78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Feb 2019 16:31:57 -0800
-Message-ID: <CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
-To: Scott Ellis <scott@jumpnowtek.com>
+	<CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <bb1e8982-6402-2c9d-18a3-9d367059e110@gmail.com>
+Date: Mon, 4 Feb 2019 22:18:46 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 2/2] nmap: Include additional FILES path for certs
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,23 +110,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2019 00:32:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 05 Feb 2019 06:18:48 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Mon, Feb 4, 2019 at 2:11 PM Scott Ellis <scott@jumpnowtek.com> wrote:
->
-> These nmap patches got applied to master, thanks.
->
-> Do I need to send additional patches to get them into thud?
->
-> They are both bug fixes only and should both apply cleanly. The nmap
-> recipe for master and thud were the same.
-> --
 
-Yes please send a thud pull request and CC Armin who maintains the releases
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 2/4/19 4:31 PM, Khem Raj wrote:
+> On Mon, Feb 4, 2019 at 2:11 PM Scott Ellis <scott@jumpnowtek.com> wrote:
+>> These nmap patches got applied to master, thanks.
+>>
+>> Do I need to send additional patches to get them into thud?
+>>
+>> They are both bug fixes only and should both apply cleanly. The nmap
+>> recipe for master and thud were the same.
+>> --
+> Yes please send a thud pull request and CC Armin who maintains the releases
+
+got it stagged already.
+
+thanks.
+
+>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
