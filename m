@@ -1,103 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A0D96BC44
+Return-Path: <bkylerussell@gmail.com>
+Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A64667C0D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Feb 2019 06:18:48 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id b7so1043631pfi.8
+	Tue,  5 Feb 2019 15:53:32 +0000 (UTC)
+Received: by mail-it1-f194.google.com with SMTP id m62so9465441ith.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2019 22:18:49 -0800 (PST)
+	Tue, 05 Feb 2019 07:53:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=JLORqyzBowVuav7XpBMgS9ixc0Ki3VuIMkPMyGO2y2E=;
-	b=NsElimknCZTmA9jGDddcsQpCW7hMfvlGBLki7oFGsT2XGUNRtNsKOPb/QEBQUQOaj9
-	+G3qWcZ22ahSMl6+AjtFChjl8rANR+7qPpxmZAaqk+ZitCbKdmx6dqvFQ+v4gOzy2IRP
-	5I8n2K+HZHVmMTsDPo56PdnVpgUD8eB+kcNHKEsdD6PzQL2lMkzD58Gnt1eNqM2c54H/
-	DBBwG/blfc+W4UotFHnfdMl7SvuMdPHRKT3rJxyXfjd2as8nErq8LfsorhYWEnOVm0LE
-	/7A9FLidALj1+0a+KwAeWTCoceZ6puoRTKGAcrpU2FpZGOa+74TI95zpyi50yIr7RBag
-	ir7g==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=JU59kcbPZbfyL8cUV9mwkAj9+OoX3wFarpDPOvzLoms=;
+	b=DOdkm31fz9M/dJ+MxH4I/oz9DbAcCRGOO35DzKdvgVqG72pYhxebPFflPNkEwhRwGx
+	qnZKWWBc49wGgns7z+sYRJSAh1ieflpY+fw8Z4n2Oix19MsMVsWsOTmK2o+NmUo08MP7
+	DFZnK+8WEtYllEuZmQBTamNhaLM5NuAXTMBEMUANwa6jkGu2VR1LCT4TbdH0ufOtxAQ6
+	uk1PQmWIdZAIBx5EgXKo5w0O3s8FPzRjalrSNFzsSNY6TEpVd5IzAume6CP44TEtIh/P
+	17qVXjVLOdv5tiAKJlehSilUMSmltTkXLOywezfX/K1Of6dMhEcyBx+gVdF/pKSah3Q5
+	C5aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=JLORqyzBowVuav7XpBMgS9ixc0Ki3VuIMkPMyGO2y2E=;
-	b=KlBr+jmqaSFLnBzmNnbbOm4ak+c/0bSbLuLZOZHXobrryHFWiIHi8+iEhh2umqvUH5
-	ovJFPE4aL6BNwfak7RKv09lHfO84Cs8pOLeLlLKCboVTnxe1oQRHpJMeopmw0nm6dVLY
-	+6tf6dnIMRsw/lVCdNZH/F2BKc5wU9M3rYJhayaLwEczXrNmGdI2d1YKfBlgPBpHEu5B
-	NHyRGVXlD2i6Z3umvSQkg7/x5E2Bx2gWOsaxvQhLZAi56TGlRiny4VBXmDDlM9aTJNms
-	4X6Nd3Smk8ctEvLCU11Pn7uXnHVp1NRUo+ljtc0jfw0SJo1QIqgvXbFMc3h+I6qqOgmJ
-	lixg==
-X-Gm-Message-State: AHQUAubEJP6siu3O8QWptwcboaCdqzkYsAJQv8M5vTkDyU/cGcZspNHb
-	6MUUpQRsqIinyD0UhSHjVkuzNQ6R1UA=
-X-Google-Smtp-Source: AHgI3IY2GF4shP2SEJjQJhGQ84+NZESWKLaJYB9/0Vc+VIxY6KjXkeSkvUW8RKfonS4iXtu+3CDV8A==
-X-Received: by 2002:a65:6542:: with SMTP id a2mr3016692pgw.389.1549347529300; 
-	Mon, 04 Feb 2019 22:18:49 -0800 (PST)
-Received: from ?IPv6:2601:202:4180:c33:a556:75ec:241a:9733?
-	([2601:202:4180:c33:a556:75ec:241a:9733])
-	by smtp.gmail.com with ESMTPSA id r1sm2632286pgo.17.2019.02.04.22.18.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Feb 2019 22:18:47 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>, Scott Ellis <scott@jumpnowtek.com>
-References: <1549201073-6116-1-git-send-email-scott@jumpnowtek.com>
-	<1549201073-6116-2-git-send-email-scott@jumpnowtek.com>
-	<78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
-	<CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <bb1e8982-6402-2c9d-18a3-9d367059e110@gmail.com>
-Date: Mon, 4 Feb 2019 22:18:46 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=JU59kcbPZbfyL8cUV9mwkAj9+OoX3wFarpDPOvzLoms=;
+	b=JsjJoidnuQBD2EiBhtebhAFDZ0b7I6oExN4j64QbvB1KrIspDDiSiIGc3qs8qgGj+d
+	F8N7+no+fjXoOJIHLzuJGoagJjsSSAFcoYnlDjGa+eL8TuZheNx5o6yY9DEiQNzEBdco
+	D+zYlMlkabKXhmoV3XULKkiRk7E19s8RTUV8j1WfQZMS9v0ev+fcFuLxjS0p420fbI4s
+	AaYOIgRduEz6WNE0+dtrjv2+6Hht9w3c1p7YWhGnaKQcSk3BfDVreLFhh44Ch4xs5Wum
+	He2jFkDXiYkhMS1SswkqkRasEVudxK0yjWDTCfEiMtHgcHFow/1SRMyATX64ElzXM3Qo
+	Utig==
+X-Gm-Message-State: AHQUAuavJVt4mtZCoscNSFA9kJio+fMUws0mJf/cbOL5NxVe/BHEDzJx
+	4o8+7pWfFacSwK5DCboGdfG+xoNW
+X-Google-Smtp-Source: AHgI3Ib8Htn69w/tU5ms0nomhlg9Du6fBx3/vJNpMhcMeRnZ1+5N2pxskkH0KdSWuc1XVnRHDJjSPA==
+X-Received: by 2002:a02:8244:: with SMTP id q4mr2985460jag.43.1549382013353;
+	Tue, 05 Feb 2019 07:53:33 -0800 (PST)
+Received: from napoli.dhcp.lexmark.com ([192.146.101.90])
+	by smtp.gmail.com with ESMTPSA id z6sm441985iop.73.2019.02.05.07.53.32
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 05 Feb 2019 07:53:32 -0800 (PST)
+From: Kyle Russell <bkylerussell@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Feb 2019 10:53:23 -0500
+Message-Id: <20190205155325.7493-1-bkylerussell@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] nmap: Include additional FILES path for certs
+Subject: [PATCH 0/2] RFC: Support building Java recipes with openjdk-8-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,32 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2019 06:18:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 05 Feb 2019 15:53:32 -0000
+Content-Transfer-Encoding: 8bit
 
+This series spun out of a request on the mailing list last October on
+configuring meta-java for using openjdk-8-native to compile other Java
+recipes that might require modern API features not provided by the
+bootstrap VM classes.
 
+http://lists.openembedded.org/pipermail/openembedded-devel/2018-October/197186.html
+[oe] meta-java configuration
 
-On 2/4/19 4:31 PM, Khem Raj wrote:
-> On Mon, Feb 4, 2019 at 2:11 PM Scott Ellis <scott@jumpnowtek.com> wrote:
->> These nmap patches got applied to master, thanks.
->>
->> Do I need to send additional patches to get them into thud?
->>
->> They are both bug fixes only and should both apply cleanly. The nmap
->> recipe for master and thud were the same.
->> --
-> Yes please send a thud pull request and CC Armin who maintains the releases
+I've been running with this series on sumo, but I wanted to send it out
+to get other thoughts on the approach.
 
-got it stagged already.
+It seems like there's already precedent for this format with perlnative
+and pythonnative.  That was more or less how I expected java-native to
+behave initially until I understood more about the bootstrap process.
 
-thanks.
+If I've missed a valid use case of java-native and this change would
+cause breakage to someone else's layer, I'd be fine with introducing
+javanative.bbclass as a new class that provides the same functionality
+as the following patch to java-native.bbclass.  (Its name would be more
+closely aligned to perlnative and pythonnative without the dash.)
+However, it appeared that java-native was essentially unused, and I
+thought having both a java-native and javanative class would be
+confusing.
 
->
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Kyle Russell (2):
+  Add support for building Java recipes using java-native
+  ant-native: only use classpath tools if no JDK
+
+ README                                          |  7 +++++++
+ classes/java-native.bbclass                     | 17 ++++++++++-------
+ .../ant-contrib/ant-contrib-native_1.0b3.bb     |  2 +-
+ recipes-core/ant/ant-native_1.8.1.bb            |  4 ++--
+ recipes-core/ant/files/ant                      |  9 +++++++++
+ recipes-core/openjdk/openjdk-8-native.inc       |  2 ++
+ 6 files changed, 31 insertions(+), 10 deletions(-)
+
+-- 
+2.20.1
 
 
