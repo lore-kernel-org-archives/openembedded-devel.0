@@ -1,26 +1,26 @@
 Return-Path: <ckalluri@xilinx.com>
-X-Greylist: delayed 7731 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Feb 2019 10:46:33 UTC
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
-	(mail-eopbgr800047.outbound.protection.outlook.com [40.107.80.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 9900C7C05B
+X-Greylist: delayed 37068 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 06 Feb 2019 11:20:51 UTC
+Received: from NAM03-BY2-obe.outbound.protection.outlook.com
+	(mail-eopbgr780043.outbound.protection.outlook.com [40.107.78.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 667107BEAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Feb 2019 10:46:33 +0000 (UTC)
+	Wed,  6 Feb 2019 11:20:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=jmmiEPKxfroL4e3/LzFLPa70oUIXZVoUZ5tzHDXXEiM=;
-	b=0Nxa8l5FwcLu/P5nBA8YpQtm+2gpvDtWpCj1GMEN+zjKrejWq92k7piPBBYc7+UDpNC/o4Thk5rtxQQdWutwBqIWqUYgVJwyTza04E9rXWSOm8z/uTUOkAdFDlE15jCQ3bhdqJVK1d5KJWqI+ob6WawW3bUhjlxSjqEWnGqIDZY=
-Received: from BYAPR02CA0027.namprd02.prod.outlook.com (2603:10b6:a02:ee::40)
-	by BYAPR02MB5015.namprd02.prod.outlook.com (2603:10b6:a03:71::20)
+	bh=2Gl46rr9+qAGdQWfK/CkpcWAUcDC2XEYQQc1yNWbfto=;
+	b=pccsGjWIC5UzaRxNsT7jY/rrvu7D+2tImBFVvT39/2EcKFHmmIFmQNLAstQOh0YaCGDcvts1CUVeShepXyfmgFExG6H1Rq0vi+dp9zE/s6xR60FWH0/V69mJP5TNEmzrVP3Yru+nifeOGJQ23ZUvNqkNcE6fEYnLgPIUQWDF7uw=
+Received: from BL0PR02CA0119.namprd02.prod.outlook.com (2603:10b6:208:35::24)
+	by SN1PR02MB2158.namprd02.prod.outlook.com (2a01:111:e400:7a48::20)
 	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1580.22;
-	Mon, 4 Feb 2019 22:10:52 +0000
-Received: from CY1NAM02FT034.eop-nam02.prod.protection.outlook.com
-	(2a01:111:f400:7e45::200) by BYAPR02CA0027.outlook.office365.com
-	(2603:10b6:a02:ee::40) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1580.17 via
-	Frontend Transport; Mon, 4 Feb 2019 22:10:52 +0000
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1580.20;
+	Tue, 5 Feb 2019 19:57:46 +0000
+Received: from CY1NAM02FT006.eop-nam02.prod.protection.outlook.com
+	(2a01:111:f400:7e45::208) by BL0PR02CA0119.outlook.office365.com
+	(2603:10b6:208:35::24) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1580.20 via
+	Frontend Transport; Tue, 5 Feb 2019 19:57:45 +0000
 Authentication-Results: spf=pass (sender IP is 149.199.60.100)
 	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
 	signed) header.d=none; lists.openembedded.org;
@@ -29,32 +29,31 @@ Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
 	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
 	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
 Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
-	CY1NAM02FT034.mail.protection.outlook.com (10.152.75.190) with
+	CY1NAM02FT006.mail.protection.outlook.com (10.152.74.104) with
 	Microsoft SMTP Server (version=TLS1_0,
 	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.1580.10
-	via Frontend Transport; Mon, 4 Feb 2019 22:10:52 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66]:58531
+	via Frontend Transport; Tue, 5 Feb 2019 19:57:45 +0000
+Received: from unknown-38-66.xilinx.com ([149.199.38.66]:36820
 	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
-	(envelope-from <chandana.kalluri@xilinx.com>) id 1gqmS3-0004N7-IX
+	(envelope-from <chandana.kalluri@xilinx.com>) id 1gr6ql-0002LP-70
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2019 14:10:51 -0800
+	Tue, 05 Feb 2019 11:57:43 -0800
 Received: from [127.0.0.1] (helo=localhost)
 	by xsj-pvapsmtp01 with smtp (Exim 4.63)
-	(envelope-from <chandana.kalluri@xilinx.com>) id 1gqmRy-0001os-EA
+	(envelope-from <chandana.kalluri@xilinx.com>) id 1gr6qg-00032t-3J
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2019 14:10:46 -0800
-Received: from xsj-pvapsmtp01 (smtp-fallback.xilinx.com [149.199.38.66] (may
-	be forged))
-	by xsj-smtp-dlp1.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
-	x14MAdVb006767; Mon, 4 Feb 2019 14:10:39 -0800
+	Tue, 05 Feb 2019 11:57:38 -0800
+Received: from xsj-pvapsmtp01 (xsj-smtp1.xilinx.com [149.199.38.66])
+	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
+	x15JvbIR030964; Tue, 5 Feb 2019 11:57:37 -0800
 Received: from [172.19.2.12] (helo=xsjckalluri50.xilinx.com)
 	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
 	(envelope-from <chandana.kalluri@xilinx.com>)
-	id 1gqmRr-0001oF-JP; Mon, 04 Feb 2019 14:10:39 -0800
+	id 1gr6qf-00032j-3P; Tue, 05 Feb 2019 11:57:37 -0800
 From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Feb 2019 14:10:34 -0800
-Message-ID: <1549318234-20497-1-git-send-email-chandana.kalluri@xilinx.com>
+Date: Tue, 5 Feb 2019 11:57:35 -0800
+Message-ID: <1549396655-24256-1-git-send-email-chandana.kalluri@xilinx.com>
 X-Mailer: git-send-email 2.7.4
 X-RCIS-Action: ALLOW
 X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
@@ -63,65 +62,66 @@ X-EOPAttributedMessage: 0
 X-MS-Office365-Filtering-HT: Tenant
 X-Forefront-Antispam-Report: CIP:149.199.60.100; IPV:NLI; CTRY:US; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10009020)(396003)(136003)(376002)(346002)(39860400002)(2980300002)(189003)(199004)(54906003)(305945005)(47776003)(478600001)(36386004)(50226002)(8936002)(16586007)(8676002)(2906002)(316002)(81156014)(81166006)(426003)(50466002)(336012)(9786002)(48376002)(476003)(126002)(2616005)(486006)(6916009)(106466001)(356004)(6666004)(2351001)(186003)(63266004)(77096007)(26005)(36756003)(106002)(7696005)(51416003)(107886003)(4326008)(107986001)(42866002)(5001870100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BYAPR02MB5015; H:xsj-pvapsmtpgw02;
+	SFS:(10009020)(346002)(39860400002)(136003)(376002)(396003)(2980300002)(189003)(199004)(8676002)(476003)(126002)(81166006)(486006)(478600001)(2616005)(426003)(356004)(106002)(316002)(54906003)(16586007)(48376002)(47776003)(50466002)(336012)(2351001)(186003)(6916009)(26005)(77096007)(50226002)(106466001)(9786002)(51416003)(4326008)(107886003)(7696005)(63266004)(2906002)(36386004)(305945005)(36756003)(8936002)(81156014)(107986001)(5001870100001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:SN1PR02MB2158; H:xsj-pvapsmtpgw02;
 	FPR:; SPF:Pass; LANG:en;
 	PTR:xapps1.xilinx.com,unknown-60-100.xilinx.com; MX:1; A:1; 
-X-Microsoft-Exchange-Diagnostics: 1; CY1NAM02FT034;
-	1:G+Q4mRTlhrs7es4AHKRMIGMbyUemz6TjvyltvTXsLbwNy0yNWOhfh5mG0Eue4H1zmd0QBPnZp1Pg2OzFZKaBxzjx6d11ibH8QOZgbuMxbCgnjZTvDhvsjkHGv9Ie3ZkuUvmjYCgtgKxd8+2g/qb1WA==
+X-Microsoft-Exchange-Diagnostics: 1; CY1NAM02FT006;
+	1:ybNVKMICv2co4FD0J3TPr1i7gTdR8eloX4r2FWAOdurRxpI+5PQBxX1KDwNwlCsX/mtTNFauT8nrzrUvS7bj9Kn+RqPhozpc9POkDZ19NjJ2tOOAWy1dvqYQcm3fiRGcHUsERWduPXEZ4rC89V1ZDA==
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 28fc0ab6-c6e0-4f5c-d6ad-08d68aeda06f
+X-MS-Office365-Filtering-Correlation-Id: c822c9f5-300f-431d-415b-08d68ba43266
 X-Microsoft-Antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605077)(4608076)(4709027)(2017052603328)(7153060);
-	SRVR:BYAPR02MB5015; 
-X-Microsoft-Exchange-Diagnostics: 1; BYAPR02MB5015;
-	3:PtQFsckBfEVkzNkDhVnhLU44cvbVUnMkNuBUMIkwvqZUzLgzLBxjqOfdntylCWis/g9FjHwmph9rpRDKxtYOO885AFkh9L28tPJK1PyNpkvbkIsajmj7N9XN8xlNkfR2M9itPSWVmBqs5xDR030WMatF3tJ216qkamxpUka3hYzEyLNTcGMUMrgLAhGnFMt0vMto0EAs1KgPTh93B1zAlQSSJ1GmyAoQW4KzWlAtbMmrYkLQejNKzsHUPPDl0Erh4/BBXVQksWNH0xuFWnnKgUAocrh0D7AT+8xLKmtQNJoF85HxmIjkvhBWAZTs/ti2qktz7pvHEUwVnFoYnJy0iR1XVWde2tc6kLLHgipQlLMg7KG8gL7fOQUl0fMvcK+9;
-	25:1hr+/uTroDnzmuXYUrWiu0w4nU45ZXiNB2mN7Ne5dSA5DGPA9gWkFkfg6YwXPeBSTP/PGKlK+goGbeB716cD0juAP5DkshQiB09hzuUDfCGbKRXUFoswdo3gaP6ek35vld7daTCOzw+L+D4yZCs7tBQjCL/Hnhx3LyYTATcA0qpHptdqzdfPPmd8KAMgCkM62CphKHbv7ZGZvG6tr3IA80YlPCGUYnl26URUhAoGVeEEe6ulic1GmqHzIR+2fE24EVxGRHJs2zEf8mpHcNMHCLodmFekf/rPyuzl5eI9zhVp12iHTwJO7AVCoYTOZdy/ajUBjgz8qCsPSkPk5l2rHQ==
-X-MS-TrafficTypeDiagnostic: BYAPR02MB5015:
-X-Microsoft-Exchange-Diagnostics: 1; BYAPR02MB5015;
-	31:i80GCvYJouQ6D9Ku8jJzy+8jx1Pk7OwYP+dO65BMEcHmK+i96WPPCFwjZZBnjJssxw9hBj6tiisgX0LkAaHDrYHRYxwBcvSFdeGybtYHawpCmCzyrMxzNO+L6Uij0QTzNkNqt6o7FVRl6NojIC1+iEx8lqsqQbTBb1msq4B+gfhI0q9auFJx3r7KdjPWLX3PS9cClgjNxzV/xLRcqf0NgTMI3AoXqE7RFpjF5QTZk7M=;
-	20:7PSLEgKVnZxmeULyUqve2P1M50CyKWUSPKjqHNaHc+HUBB2KVyXlwcFgkMajqo7B6o72YPQJugaDEvFX6blRCpxF3Lb95AHROpLdjPFv8RkX4AIK9ko0mlI0VMXjiBmpi5tAcxjX9s0j/8AAb5zj7uzcNZFSkkDPvFhViihWKk832JE87wSFSDZ3LKHugJVm70C7yrVMmRkKyLM74CHTro7ILxg7GWd7cwSmSbn0meAmGeSclbI6+FJoQ7kpuy7GZe9SfrEBeaIuKbri1f0NtRg7v3wSYvtMQvmms60xMHwVTtWcfPwy4ofieMFnPru0VZTLfMyaDaN66dP0yo6EG+y6Xx6JqHJYDPRmFbQRz93JKj9etbwu8mHrVeWw4PCuzwwhidEDufgENEbkqEqziFp+BL3WreXpmn5RiHOj03/zZostnahG57r3xP54QAxGzaQVuUlGfa5uZPp2TmIHzLcpXTH14vMxSVxsnRlbgab7iXexGX8GrryzC6ZvroYs
+	SRVR:SN1PR02MB2158; 
+X-Microsoft-Exchange-Diagnostics: 1; SN1PR02MB2158;
+	3:vWO9H7/3eMwA+elQyyLYY+Q9gW7sEJ0SGijoaBQxB6/Sk3hsxwIVhPaQotzfqC8bDoLKbrrbvJFk8pflam2hZc3rxIRAD5T2f/Kf40+hUZLITIN2GMVYVgLN5HgF9l1vNe6I0STnDiH+5cqVnSWnuPr0gRupXqOKe3aqKon6nRMzKoIkdtaOzVUXIuGqbx6qPTbvhEd2TBcR/tauNpRe+L0xRecV1uOe5RXKXpEi/4MUwPj6usQMm6ZuuYCnofB0rLUCV/uEMLDqrlmHDAIlnuOnmmwNU8AgsznCWj5s07MFLDTxx1DHk3S2bmb0JTyF5PkQQ+Jcd+aWxmhtyzYCiiadxRidgDV59GhgTeBQJjn5tyh7GsU4mk6JTx/naQnV;
+	25:zRI4+Mjn29m6+SuPqzOa+w0d0db+rMkO4X6GsnFh4aKAP0Mw7g2i2oXCjd0YAQxtg1brJFy4TeAntPaIwHNaDcM/n5leGacyAeiO6qaqek0QqxXeWYX7rHS0x453PBanh04jZeuL5fPTHNwa3EMQKIyzh2gEN42JBE+E2/6Xb3o7xQ3zA2hLwQVIXWy3C/4dtskeAmfyKlyy3w5fPzso8InHZwIuzU6VarVW/2o4HNd2W2CiENvr/kiJ8icwV1d5SMdMqi9TB2X950lTWg9Q9vOUGiPufz96SgY4WkvvrMMpOjcN+riyzrgthvsPJrz8w6fciIGFkI4l4FYgEO4Nwg==
+X-MS-TrafficTypeDiagnostic: SN1PR02MB2158:|SN1PR02MB2158:
+X-Microsoft-Exchange-Diagnostics: 1; SN1PR02MB2158;
+	31:3Kfn3iKBbKJmelqoLy7QnhhYVVNHAiHNy87eTbRjfN92Lxkk6hyHobubl6CAjZaX+Cg49Vuo4VJr1KoEcWYbuT1m/aGcAIT+dDkBtGI5tUzg4Gi0zTQb99/R9t1wKdJYbdxfvEYGsBqqi5yn3xHETVSTqqTTIqhDaxwxJoXx8nMvKKeDDJnGFWoS+lRO0j4jkjUhqm4Rmq2+ZcbYKU/JlxRr9hN1Fq+Fe00wFSFH0io=;
+	20:emYR+AykVkzT9dUbB9S7uUed+ziy/qnSPran2EEGitOkOb/PsiICp431bx0t+mtaTIEhG5W9oCgj8NuQkCm3u47YW/NMldYiQ+BJc8TNxgmXXsDlD+ofXUD2n+cZDIW20rdDPgfkJ+K7AFdxzDj8tfiNUgA+i8XRfy9gUY4Mc2kACY3xG6/OcJv+VZrKpjAjPiGBcirShhhPiOWPuZ6lm+1JNHu9YITzQxGfVE7CHpBCYt9Eq07atiZl65knK8jgkQ5qgJufnvB4Ct2Gm2i3pXayB57BDRsDEYNElGeEqoGXXAWmvAi20ss+2L1iVkJ/aSqTZ7oEa3THY+64h7jklJSnByv39Tbfi6vpkVsEd0znwgc6sjncUmFktqo3RQHshwo0qjTRO6GUPOO3fZYzdVZFh8zqiv039NgcvEdWWWpYFXwgwsmd6u3ixqFJ/QmXwuuNcSEAuc0BU5rq1c2COUBHorEYU8tGQPseQHjbI8+4ZYYT1FCC4OsSb8prH6zu
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-Microsoft-Antispam-PRVS: <BYAPR02MB50155AFC411D8E83773F47BEB06D0@BYAPR02MB5015.namprd02.prod.outlook.com>
-X-Microsoft-Exchange-Diagnostics: 1; BYAPR02MB5015;
-	4:qAt4SSwyjPF+MtidRHIxFkggx6wZR30Nu/EVbtPLu98nSmzoLFWMB52DeHBu6T+1uJkkyRF4p0zAG90MqOFByRghdi1SAD10sHnXetWoutaW64Ij4oFtOLyljMF/zdsIICU62IVNNZIIDhzg7n86PwE1fdPeVoijZCslyVx8P+/QVf8ERJBQbnpmndj/+hJOMKcJ9ccGRAn295ZMKLhx99fUlAvk065XSEkLQAwhxlke4eV2S5zd16I4NfUiesV8THR4IY5h34S8G66X8AK71333rj/kz7fLWqbwtbl2yJWPs1Chg8RdkVAQiZyVuKeM
-X-Forefront-PRVS: 0938781D02
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; BYAPR02MB5015;
-	23:dpZBrqAit0/YPY7HgVQcQ+7IwA6J7+vpW2eRPS4Z6?=
-	=?us-ascii?Q?P2Kg11UGZXDN/11/HpmvyKD/S4K+I9sk0kC1n9QR005Y81pm75W7mSQILp+d?=
-	=?us-ascii?Q?YYKl4ik9PE2YD2iBnu107td7GC8gQICnvWwy+umgoGipbBzRd4EZb1fg3IFS?=
-	=?us-ascii?Q?GUcC6zZ/eKnVnIKY6tzvwjxTv+WVFSjw7q3iftk84mImt4+NhC8LsFv847qG?=
-	=?us-ascii?Q?7wmhZzNaAjKhKsnglN+9Y2wp4E2C5lp1UjgK1SJcDyAn4prHN0JzHG6OY6Hq?=
-	=?us-ascii?Q?LAyJnITdqF3iYeIOtn4Pt7PFXAzO3FEI9M5OSlut7+Pb0hjEtd8hstVqskvA?=
-	=?us-ascii?Q?Rxkywok9lkdkcjkdfAAGAgfe0jzHkphZCJMqci323a+Jv6OU+gT6W9jd25BA?=
-	=?us-ascii?Q?39I8/dy7RyBx+mhr24U04eQPL6FmV9bE4GKK02rr8NCBwhT0j5CK5z9WTlzh?=
-	=?us-ascii?Q?azWWsvtqfGeCTPU3GgyXTMJh/6suRaAGDEgwtUX9y1wTEbJ7HfI/U1gM6PSh?=
-	=?us-ascii?Q?D/Cbl/1GhK562JLj2aiCvguQnEUzWe2B+M5sCbu60EmBljbC8p8i+3Duh2Jx?=
-	=?us-ascii?Q?nQO3Ytbl3qd4aBE5uHgaeW+nGfJ38BL0WILd1QKFxCVqAiCVBZIP+ORtXh/N?=
-	=?us-ascii?Q?0SkNqJPnQZ0np0WfDOEtieB4/Y7HbC3PtB+9DJ6DhtQQcyaU8skVapg2+raJ?=
-	=?us-ascii?Q?dt33rbbJvwfl9ZjK3nDuNDiKWq9jSdRvzNva4GTECUBQkMYDHW05lJsUQIF5?=
-	=?us-ascii?Q?A6CIQQx4FGIUj/3IbpvQah/TlQVt8C/hRRNqDfJyjZwVWHaKttNljO9UflRo?=
-	=?us-ascii?Q?1bkVc9zKktVjKgmvFz3QWcbCII0k9EY3u1i2JuDB+MJHSublSh2lL8ah5CW9?=
-	=?us-ascii?Q?/rNBCS8iTakNiIVYCg2CY1aggOw3L4wXvhU9Bnr7dAiV29gXeppLwREf1Y15?=
-	=?us-ascii?Q?uh8fCwnBUPdR5osmK/pFIhl1rmGALz8ZgKP4ebyhyBlLKc0hoS3LTlQFXbTj?=
-	=?us-ascii?Q?mLVK45z+9I3SK3fGBZaQSQMFlGs4HaLLqRzCYJF3Vc/d/ANKlsZl+MeS6TMA?=
-	=?us-ascii?Q?1OJnqb9q5lephIKnGg6rqK5DBwk?=
+X-Microsoft-Antispam-PRVS: <SN1PR02MB2158E182973620F9D6BD9335B06E0@SN1PR02MB2158.namprd02.prod.outlook.com>
+X-Microsoft-Exchange-Diagnostics: 1; SN1PR02MB2158;
+	4:nEd9e1E/NjLtkTchGhuyelDfnNhDyUC3wkGagYiyIWXOYPuZh74uOhxnkSRNcDZrtQXB61vXDI0ixhr9/ZllZITtwxS5mcKQ0znAHot1cUXf24I4Nzbj96WM86pU+BWhLxUfXC28rVa6bjqKegH/jP/ZBfZKyzjTjSJWDCfqqibDRTqZzBaU28mHU3DOfa7mmZBHVR1frqDzmuQngYQXtCuuNx8dmw8ffQNTAyh7KsQ/RzkBsGiWA22JbPIU70e/uid6n2KAIqa9p4SM4ZKGzj6P0QFTwS5yCROIRylt0hoi6CN05r1DGdSi5NjLxrsl
+X-Forefront-PRVS: 0939529DE2
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; SN1PR02MB2158;
+	23:it7W50i8+RUzo99laFG65+1kMIT5nAifZoNOzPsIN?=
+	=?us-ascii?Q?VG2D+/uBoJ8kLrrBuM1wPyyTRvUWWk7LI7uFRUrdlV2zYmH486F/B13vfBwS?=
+	=?us-ascii?Q?iJEWyCagjlqGCXB+koqPcxX/95rmvpJ5HBfdLYxH0j2UUL34ze0THrdmXLp4?=
+	=?us-ascii?Q?MVRBcc+S9ImvmNVKPWzKTDA2nDizEcuunHDmSys04O9e2+eJtcMI2aXe2kjo?=
+	=?us-ascii?Q?nfiXwANehfcIArTEznsqKiF3CnwWDFdPDN+G4zacaoaaK9RdJ1W08HuMBybJ?=
+	=?us-ascii?Q?7lqZ9sDHHy4v0x+x6War+SXEGycWP9TaRZBqt0W2jGjpYsbuHIq8ksII35yI?=
+	=?us-ascii?Q?bqDtoyNt6icD+ZcPF5WVnjVwGO8qv039CRJ54iO3+PIiGPc0fnNc261rgsk4?=
+	=?us-ascii?Q?ZuEBLUf/kAv++D7GGDTHoHKghG9h9Sb8pv+InIovwb2y/nyNkebQX6U9rylG?=
+	=?us-ascii?Q?QGLCK+fEL3GSv0lWKjMrXAyItyzXQrVpDV0L2KBWcEOMxvnPziwXvqCbulJF?=
+	=?us-ascii?Q?KsD7DGZL+XkfiUqmqn31rI/UhgshZsQ0HxRoB7oNFVvuYvlkPfEInmn95P8p?=
+	=?us-ascii?Q?igjQsB/X3FVpdL3WO4e+ugLtI0pZEZhung4NU0n6RZEy/AlWQF5IbKNLJDPv?=
+	=?us-ascii?Q?y5alf53bftD/JMAAA0ksaFh+/hvE9TgXndvUwtOYjzjaNRylwhsa+EaaLzn+?=
+	=?us-ascii?Q?nAMOZN28qP/MBx7yjsZ+hbweCJ4Y1lte9Xqxy5cNOdjaSjr6W7T3p3w83TVu?=
+	=?us-ascii?Q?eOEPVMhdI/0xgtQh2vakUl9CCHzrW3LlQD748LXvLXEs7l1PMjJT45Vc+Bsa?=
+	=?us-ascii?Q?tcodHRW3lw92G1Vvb9qUlnO0Hu2yUtO00CsbDTqhZQsUkYzea8cX+1JQsnYL?=
+	=?us-ascii?Q?mFTdMATBxbabp23ybStxNwyu1nMIanW3H1AJKMRWgCuzkpD/dwstoQAeDHdu?=
+	=?us-ascii?Q?3F5eDPSI4zBJ6DIKSzNCPB+WPRFnqQs5w6vDXzqREW36wgJN8cW3TGhGtYIl?=
+	=?us-ascii?Q?vr884jiRGOgBwIqlWzOW2W34iGTADfk2L2rrX/mcqMeDw=3D=3D?=
 X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: 5pZylUW0bHh4NExxMeFnbsZi26QmogcM4ai8vAD5x7znSLKmxfkMNTG60DVKZbSN9O2+LBntyF2IrS7eacOyhjv1/IRCfoUKH9VbhkCkirwIqTBM9dK401zhaBNUe0ciFJ8FAFrl5WRUGPl4/M6nGaCv76IKffIRRUV6UhZtgxpuOkUJFY9xJG5hWNcTMTnw4OdmyAyDnGtkljabrXTjHEcttfpNy0aBBb/CmNle0ohVE7AcctwfdkmbPUfLO/YZZT8Dk5zwfi6b16wNXnz/oFe1Q9GRDtN0lSKGxvwmoCGKpFmc87AmdQ10Df3G2fJz+74Kp+U/G6ApySNHbfOulso6T4nkKB9H5w5cSdEvM0VyIjiys8s5JEupqN/BCpjF7EnIEi2RTjZi9uwMviaVvUxZBb7fk8vuEGEAQQTegpE=
-X-Microsoft-Exchange-Diagnostics: 1; BYAPR02MB5015;
-	6:V61qFV5Poy5nbLXwLjYQmp+rljT/fc8LHasvJabzg3mo2d/LV2m0I7c91Ac3bsF94+O2l+JjnaIyQeHU/d1gNR8TjUOzqPnMPYIIqsE73KDE2NZmmqKR6dp13YTjyD6WA+2A5t9G1JQ7Zjhhxhrxrz2queC2rAkufhyEBYjbG7+qSYNxFuuwoqAZ4KVLCHDaPOVaI4a4sCTRz5iuX7f3u0Gpbc+i5Zy9O/Pumzxed5E8J17OobAOt+p0eKPTBL9eKa41kbn7AJCGdjMaKorNlt2mmpukN8D7kOqqdwV/5dEnYPe1edOxsePqLt/7+7GCSRJ8xOdNCaU0nfolIqb5PaOi9W8aVtLkZJbJT4KGLgU/DcNDaAxgmWCglr3XjkO8dCE3vkzewOrDNzTIMCmSaSjxR8rtQTQxod0fZ2g7ShlktuvzrkbdQjsHu4CFkI1C6lc7HWKQsYo1FqctuYm07w==;
-	5:wAXz9JMYcDbPxGwxr/J+SNyG6zAev3G2aNT5OtbsMKtiNL/CN7myvoWTxtV4BMtbDcXF2wKZVR8WbrqQ+MnwJHtYshmfb3c1XestIQPB4A8soyzt9sWuSgOTH03lErnaJs6SAC4Y95MY8ReQEtA6qxQOxYu2juPRNCir6ohFB3LCUJ1hELoI2nrzh9/Q8qYHA6SU+1ouItDkRKQ7r5AG5Q==;
-	7:QMq4UttehElcFBLShidkMl0/2ag88tlSWACcRw+8dLbkute4JPojBWwkglRdzy1RKH30sK17HPUBKbZ3ONiD1m1SUtvMVDUi/EUsDWTQwey3vHEN0GkTGqeg5Y5f11sGVJnfnD3vQ/fxSsVEwY2S3A==
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2019 22:10:52.1819 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28fc0ab6-c6e0-4f5c-d6ad-08d68aeda06f
+X-Microsoft-Antispam-Message-Info: LW7fzLvMOO2B2dcYxAew+2yhxJw5V5zpeS0QOSzo9OjJWCA4uPdrgQrnF8DB5kEaj8a6V5BR+KVUC/ErUJRUddberCoaV8MY1wWxNEJXYRKemCH1fIU8VzpVIQdBsUej+tpiCCLZkQ1GI5QNF9h1/8LTY99RiQs1wdgkf5Yzr9kxvTTaDwNAxW7uYWngQ//quDgF5j4QW00hFClov3KwkNcNUdPg2NPR8IBqIfkQq9dBEQbJobb5QIYzpfbYmi667O0dl6LllLnmp/8+ILgwQ9fQLIMRb0TedRzNXeK+RusdjQTJr3Cy+rkrxhIHxgJObAA9kWhmhC/D9HWsocJ7sspjDw3PpUCB+G4YgMzVZzatTqD8MhoXoEn9wCmnLqwirkwQ3Ijaa/m/MgUAGZtx583O1LZogrzPYvW45FAsBic=
+X-Microsoft-Exchange-Diagnostics: 1; SN1PR02MB2158;
+	6:APxjPI6QErh5WANki5XwL+s85jOK8i2obegxicwDtDAZkKI73M3WYvVj5X0Mib4Vcefen6eQztXXTFOHS5RnVix401IWeY22YLciEMe85PhAp3hFpdGEZ7sKqNB5t51E02dg+4MIOsjKLL8SFMGVaSWVfadnRPFGiESiB49IPvOsR4xnM/QURyhsOnCBzDLiLb8Z2ssLYX+e8I8nKRM1LLlYGu1phVu1NoO9AkvbgOlIDcQULWQm+BD6IwjqijXdFunFyEzYOJc+tedlB+NDbYqZJGB5qUFUg4MBIi/s8UiokLQS84F/dEvcPsGzuV3o0nOuMYcWI8bYI6U0z6Kmt/LTtKQCnfq83rHQwxXF/iN7xA2WBsjYdl+gn4LVJehgVOs1r3JqOJxhK+Tnkvag6szdWlMQ7xdIlUtYaYVOJWDBJopQ7oF2D/oPfcJDBFskxAhuWp9I1n14nRkXsQXfuQ==;
+	5:/jEdgPoxgDXs/nB19jxWRYMLmJBvZe4qNyFgZ0H1DQMngBDX/pQ0qYeOpfC7wIJhqPjAT9hWcf5AGSg0ScIzzLRTmBcADthpsKMi7ovC8iGEzN+VUiqcPK+nE6QKFV+RAyBEqBLsZK+kBPJZa+6P/wTRtCJybxwOuRYrCG+AF4vy8wT5Yxn7KRSN1NveHsF+mQSNA9pc6EHnqHSizW67/A==;
+	7:R897o5qa3kMh+Sv2+T13RHpuFvwKQq9gr6Sxo8H1ka/jM87kocZ6c0yKwN14C2wRN9Z7aqVNIXL5gG7tALhiU5Z4OS7HuSPHrNeqkLTbpPF+Ot6aPS7T1VC0HU2KMbq0PlaOxDcOYmDiBSXaQjzmFA==
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2019 19:57:45.0869 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c822c9f5-300f-431d-415b-08d68ba43266
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
 	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR02MB5015
-Subject: [meta-python][master][PATCH] python-requests-oauthlib: Recipes to provide support for Requests-Oauthlib libraries
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN1PR02MB2158
+X-Microsoft-Exchange-Diagnostics: 1; SN1PR02MB2158;
+	23:HGUX0AvuFAdopv2wz9A26W/sy3kisg8kMx1jWkz3RjvVFb2pRE78Tq9/SDvvozV2m6Utuf7GJThcX3loJbDcJH0EcAKjeF5GpZuvUXhsnmbwd0ogfny5RUbizMbCwQy3BQ5FIZdJ6Xjv6yVA0/LsXQ==
+X-OriginatorOrg: xilinx.com
+Subject: [meta-python][master][PATCH] python3-twitter_3.7.0.bb: Yocto recipes for tweepy packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -134,52 +134,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2019 10:46:33 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 11:20:51 -0000
 Content-Type: text/plain
 
-Yocto recipes for Python Requests and Oauthlib libraries to provide
-easy-to-use Python 2 and Python 3 interfaces for building OAuth1 and
-OAuth2 clients.
+Yocto recipes for easy to use python2 and python3 libraries for accessing twitter APIs
 
 Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
 ---
- meta-python/recipes-devtools/python/python-requests-oauthlib.inc   | 7 +++++++
- .../recipes-devtools/python/python-requests-oauthlib_0.8.0.bb      | 3 +++
- .../recipes-devtools/python/python3-requests-oauthlib_0.8.0.bb     | 3 +++
- 3 files changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-requests-oauthlib.inc
- create mode 100644 meta-python/recipes-devtools/python/python-requests-oauthlib_0.8.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-requests-oauthlib_0.8.0.bb
+ meta-python/recipes-devtools/python/python-twitter.inc  | 17 +++++++++++++++++
+ .../recipes-devtools/python/python-twitter_3.7.0.bb     |  3 +++
+ .../recipes-devtools/python/python3-twitter_3.7.0.bb    |  3 +++
+ 3 files changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-twitter.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-twitter_3.7.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-twitter_3.7.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-requests-oauthlib.inc b/meta-python/recipes-devtools/python/python-requests-oauthlib.inc
+diff --git a/meta-python/recipes-devtools/python/python-twitter.inc b/meta-python/recipes-devtools/python/python-twitter.inc
 new file mode 100644
-index 0000000..4bc6a36
+index 0000000..f5657ee
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-requests-oauthlib.inc
-@@ -0,0 +1,7 @@
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=22d117a849df10d047ed9b792838e863"
++++ b/meta-python/recipes-devtools/python/python-twitter.inc
+@@ -0,0 +1,17 @@
++SUMMARY = "Twitter for Python"
++DESCRIPTION = "Python module to support twitter API"
 +
-+SRC_URI[md5sum] = "4358a879a4377393bcfd37d0f9ae6d4d"
-+SRC_URI[sha256sum] = "883ac416757eada6d3d07054ec7092ac21c7f35cb1d2cf82faf205637081f468"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=0307fffd8c4d9946c029daa1426d26e7"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-requests"
-diff --git a/meta-python/recipes-devtools/python/python-requests-oauthlib_0.8.0.bb b/meta-python/recipes-devtools/python/python-requests-oauthlib_0.8.0.bb
++SRC_URI[md5sum] = "c6dc2f315ded761aafc96bea3351c7f6"
++SRC_URI[sha256sum] = "fe85a79f58a01dd335968523b91c5fce760e7fe78bf25a6e71c72204fe499d0b"
++
++PYPI_PACKAGE = "tweepy"
++
++RDEPENDS_${PN} += "\
++        ${PYTHON_PN}-pip \
++        ${PYTHON_PN}-pysocks \
++        ${PYTHON_PN}-requests \
++        ${PYTHON_PN}-six \
++        "
+diff --git a/meta-python/recipes-devtools/python/python-twitter_3.7.0.bb b/meta-python/recipes-devtools/python/python-twitter_3.7.0.bb
 new file mode 100644
-index 0000000..4318915
+index 0000000..6a28b08
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-requests-oauthlib_0.8.0.bb
++++ b/meta-python/recipes-devtools/python/python-twitter_3.7.0.bb
 @@ -0,0 +1,3 @@
-+require python-requests-oauthlib.inc
++require python-twitter.inc
 +inherit pypi setuptools
 +
-diff --git a/meta-python/recipes-devtools/python/python3-requests-oauthlib_0.8.0.bb b/meta-python/recipes-devtools/python/python3-requests-oauthlib_0.8.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twitter_3.7.0.bb b/meta-python/recipes-devtools/python/python3-twitter_3.7.0.bb
 new file mode 100644
-index 0000000..1294661
+index 0000000..c2e4d2e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-requests-oauthlib_0.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twitter_3.7.0.bb
 @@ -0,0 +1,3 @@
-+require python-requests-oauthlib.inc
++require python-twitter.inc
 +inherit pypi setuptools3
 +
 -- 
