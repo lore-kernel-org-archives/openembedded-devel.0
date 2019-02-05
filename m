@@ -1,37 +1,48 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AB5B7C039
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E4327BFE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Feb 2019 22:14:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 43thpR0WGlz4d;
-	Mon,  4 Feb 2019 23:14:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1549318495;
-	bh=9Hrr1llIHxfq3iYPlED/VT1nnt0rtzKQ0fyuvw5Kxh4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=kkN8sSBq/JDNkLHI7Y7I4U6z6xzX9p1fOsTLHVJofNCHhsDGg0bs+uRiTA8KV0wz8
-	PdLZgFato4576themA4W5jjsKii0S3yfZCgpPm2oYunlqnrsqlnp64oHf8MqtmoFoL
-	3zvLdZUFYQwWELbHBy0YZ/RkzeduNeoD6njjjHL9bK0gl8HGCxJAu+/bvSEcBagpNA
-	6k94N01R2qwr5/92YhRc9aEC8+QgSqfPsgJmm6JRzZAVXf3XJ/FrgasT7K+RMpGF0B
-	7Yj/BvBfnwEkWFRnRwzO/TDONUKj2ak+EiuxXVI0Q9/RbAk/Vkp63/Tm+CkhnmSipH
-	6c8cLrzoa73HR5xAmTq139uQybsRpV84sX5vfHSBMfXU12ly+sG9amRLLmD1GjcOSG
-	2GvR8y1yG2vmvq1Ef9b1DXVtNXR86asOwSRNoGLMl1HT9st/Z9yjR4ueZcSq4rnvbq
-	15Gm4HfYd4OaubYz6UP0VUKZfqPg+dmDlHFEB7jruVGHyElu9oc0mkCIfpWund5IPA
-	ymxl2YZjYG0pURVNYDD/6DTOaBqMNfQrPIxy9D4aAwm2hTs9YLXB1Af+Yb2jCQiqvN
-	ADPfZM4Ijh7nwFeEOCZOZCLoHhPdbvifcBZfhxfHzBCZeAXZMjL4pvFEizmwQYM1ZR
-	X9QFHRrSKpyiWbxRciwkQyOg=
-Date: Tue, 5 Feb 2019 00:14:53 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Philip Balister <philip@balister.org>
-Message-ID: <20190204221453.GE17997@localhost>
-References: <20190204145940.17783-1-bunk@stusta.de>
-	<a8c5c5d2-886e-5689-2a43-b4615df3a0bf@balister.org>
+	Tue,  5 Feb 2019 00:32:22 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id b8so2147594qtj.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Feb 2019 16:32:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=AZugSDf3TUy4uuR8y+8RqFvq3byPg1R/rykPxd/yZl8=;
+	b=tWudgPEmvK5MIRQMEYlhvK0jpqZcumCWMM6Ozz17UrPTBRBdqpP22gLlmtkKVZOkjB
+	LDo2wLMoW7+AFtPgWCP44s5Gk9jREamR5o1TCvl0uPDvGieM5ty7puWGcEz+aM3wn2/U
+	nXhiudXL2Gyj7gZC31sed3c7PHVp8kVPwJaLgmgyXgBJLdrr9E87hNqW+quzR6tB8ktK
+	QuFZktofmuq8dTGm5yp8tWz4UTKK1kjC4tZTVF0S5mAQEGmwd4+SOYB3nw1cyp0/H9/n
+	eDQ5ZhYNRRkt1Nhr7LNnKWWhc7Miknkb1ECqi638zF6I0/l1whpjJHtH6RCToRcd1Tbl
+	wObw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=AZugSDf3TUy4uuR8y+8RqFvq3byPg1R/rykPxd/yZl8=;
+	b=Dygxwahgkn1GZLElsCWftYpHhW4WPvrWzbq0lZaFGMNhciAjtcbdkFi47eQuXGi6Fa
+	0DRbuYqghKTnu5aWdZP/xqKm+U8671NxhElkDBkzhjHH78/+b5wY8kAI/8TaSiSut7+E
+	8iDf++fVbgVJe1SVjwJZrPcVgjcqNgG/Enz5/wCJ0z04xT+TL65rTxOeYDDmmevGbvah
+	W4CnKEgUXL9t+Njeh/+hdgsIII27m+0whw+aqdAAmZc/2TSvu3gePYe+8tlWrL68ACBV
+	2q+kEQivqB9Re9ob0t6DFiAWxsAA9GyQNtE8wS4IFYz40RhXdi/nHZAf/KfGvH1YNH08
+	xUXg==
+X-Gm-Message-State: AHQUAuZWMqdHrDdufm/SI9Vty0eHrePfU62rf2O1AaydvvIcNztyI3WT
+	EkMGYLiDhKFl6VJ9ywboFjWxzMm6r7gB82ChAKA=
+X-Google-Smtp-Source: AHgI3Ib7Pv4M/8cgyYZCBynB3TB4GKbXxeOrL+R27//YTTVJlNZlflGWNIxRiEt0h+foDKWmQ3hQGi7SCTJFOUGIvFE=
+X-Received: by 2002:a0c:9498:: with SMTP id j24mr374341qvj.194.1549326743545; 
+	Mon, 04 Feb 2019 16:32:23 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <a8c5c5d2-886e-5689-2a43-b4615df3a0bf@balister.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][thud][PATCH] Add czmq (C bindings for ZeroMQ)
+References: <1549201073-6116-1-git-send-email-scott@jumpnowtek.com>
+	<1549201073-6116-2-git-send-email-scott@jumpnowtek.com>
+	<78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
+In-Reply-To: <78a59c5f-bbf4-dcf4-e258-dc2eb53e7ef5@jumpnowtek.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 4 Feb 2019 16:31:57 -0800
+Message-ID: <CAMKF1srJY6ndy7WZWKTsWCO1_vBSunTcE97BD2qVFGDwgK6zjw@mail.gmail.com>
+To: Scott Ellis <scott@jumpnowtek.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] nmap: Include additional FILES path for certs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2019 22:14:55 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Feb 2019 00:32:23 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Feb 04, 2019 at 06:23:05PM +0100, Philip Balister wrote:
-> How are zmq bindings versioned? Just curious why this has a different
-> version to:
-> 
-> http://layers.openembedded.org/layerindex/recipe/28410/
+On Mon, Feb 4, 2019 at 2:11 PM Scott Ellis <scott@jumpnowtek.com> wrote:
+>
+> These nmap patches got applied to master, thanks.
+>
+> Do I need to send additional patches to get them into thud?
+>
+> They are both bug fixes only and should both apply cleanly. The nmap
+> recipe for master and thud were the same.
+> --
 
-These are different bindings (C versus C++) maintained separately.
+Yes please send a thud pull request and CC Armin who maintains the releases
 
-> Thanks,
-> 
-> Philip
-
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
