@@ -1,52 +1,51 @@
-Return-Path: <bkylerussell@gmail.com>
-Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C56517C387
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0177E6D4C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Feb 2019 15:53:38 +0000 (UTC)
-Received: by mail-it1-f195.google.com with SMTP id d11so9522022itf.2
+	Wed,  6 Feb 2019 00:45:53 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id s1so2307580plp.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2019 07:53:40 -0800 (PST)
+	Tue, 05 Feb 2019 16:45:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=CCWLCMicr/Ls9uhPq2T3gONDy8ZmafZ9Dqi5H6tj58w=;
-	b=gh26PRWxYnOgZ0VXmI7nHAVTxqj2kugiMzI7udwzn2SaR5ImXLE/21hszZsfN5RHAh
-	9aGOfRAZUpPHU7TBdkS9lLM0rZDEMQaOczzP0J0E1YKSN6rl09aEdq3InwMMpAFKbjlU
-	QszlJ83+P5JW7MnUcQIXYR9sG/Yx2liZEOfGxj1Jtey6mURGn3JIO1qxBdrk8DURdhfX
-	S7Eu/9/Fd3d7ZlMLK9Yf2XNA/PnWNk9EjLwh3fjMklSt+2CHY6oHvPoo8v+RB0os2oEc
-	w0Lqydsl0pOSOS5MaFOnZYTCjjyYUhW5+He+tgP2XVjZ3usSPbAQnnW2hsCR7Zo1snZp
-	UxVw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rXIb6Zhpiex6gZpMeyqbavoG8AzBICoNhd+uFf5apVk=;
+	b=OlecX2QjIt9J6Q3+S3tLw/JYUthNRge/BwXKAWZJ7NPA9HSuNBg4D2Pvd6vit/tuWo
+	JfBTtYC+IIm/d72cQonLY6dnzTFwU9i5CCmKWLlMoy/rRq22vmHmQJyEyF2e/NXw20LZ
+	A1ROwWe7O9pNOAz/SnEhzP2TgQg84w8K/t84TQxK5MABno16eoZtqWZ9EKwWvX7YacvN
+	fmeWNr83/dQFyiasCUbiQQ7+pbFICMZBg6Jbo35Ch48JFNgQz9ca1Ro90HSW2++hmNjw
+	21IWbHG6gG1onHRFfckrdihS1HF1BOuHRfN2JY/NJDJ769L74zZe7b9udMI2QTWFTCIq
+	liAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=CCWLCMicr/Ls9uhPq2T3gONDy8ZmafZ9Dqi5H6tj58w=;
-	b=B0qG0he414nM/FhoFbriEu38w1A4axrZIybuoXSGvJxLkq4FFHISXyn5/QouJRQy0S
-	0t+PmdPpgmNyKs4/KyzQP1malRCIlQO6tWfW3O8+mORpSxoUK9atQnSH9HwLx15T/2JP
-	Q+NlOA9L3xvZnRR7w3YvCPmJdRAwCcRb5vJs+6s0kdOOXGe5EmmD0ItuQ8imt/VGp9dR
-	dvlgFivPva1Yv1IJmMxAQrERng6Xa6fbN4cgrbtRr/FSzv6e649xmCq5evE0wQPVBwIy
-	rceX4Et/xOFlGgP/YhaGqs2TBH6RvCbq4teOPxpqlCkSGtp4vOcAnnfbAmwrHNElbR3O
-	bxhA==
-X-Gm-Message-State: AHQUAuZIQ2r7+VKgHLZbCLKy55SyMIpQAcXzhs3f0kGx2x0p9s0Dt/TS
-	tABEnHhuJmOVa6m+dtYY2dNywERd
-X-Google-Smtp-Source: AHgI3IYRsUf+arqV+HxCbqeiE0IRyMhDHBQou46TpMajTuZj7WvPCRJ8S62Ks646YmRsMWaSqQJoig==
-X-Received: by 2002:a05:660c:283:: with SMTP id
-	s3mr3098062itl.135.1549382019667; 
-	Tue, 05 Feb 2019 07:53:39 -0800 (PST)
-Received: from napoli.dhcp.lexmark.com ([192.146.101.90])
-	by smtp.gmail.com with ESMTPSA id z6sm441985iop.73.2019.02.05.07.53.39
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 05 Feb 2019 07:53:39 -0800 (PST)
-From: Kyle Russell <bkylerussell@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rXIb6Zhpiex6gZpMeyqbavoG8AzBICoNhd+uFf5apVk=;
+	b=VNfq1Y9rHKzbyw+Lls+DfFzBeKsB2H4CLropqQnE9ppLyDL0LyJKngegHXD2ASNTs2
+	QZtq3oRChZ0DVAFaCIbemQafocZErhiw4uZVjkZIYSJXtNDweT5WS57ye3TTdcsn7N4H
+	KJ6I+RJagsAK/1W6NnV0sMa0uGDwxMGUU8C0KBdBXou4zTnWfDetKtqlIaNzBi7T7YqE
+	n+lQFjOVX7RrfnD7ljF+V+8sWKWidLeiZVEndK/8eWWvAs9UBu7lhd5yya4hWBqDC8Kw
+	b8tFOnS8ngGJUVXNG3hXo7SNmCpEjlMDTTv/MDkomVoZ40UdwdR7BJTQnd0bJRHACaYR
+	XQhg==
+X-Gm-Message-State: AHQUAubk61WmSaWpPvbrLBAk4O4ojxAG2otyLrsOWZcaIPohWArv0aLh
+	0NuREKIaWwhqZcVZvnl3cK8WEMaD
+X-Google-Smtp-Source: AHgI3IYG1FGWICyFJVCqyF3raSOG1HRxUMLMC/LXILzaHmUujmaq5SI5wqx21c2prh+ISg4044nSXg==
+X-Received: by 2002:a17:902:b943:: with SMTP id
+	h3mr8031599pls.12.1549413954241; 
+	Tue, 05 Feb 2019 16:45:54 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::a005])
+	by smtp.gmail.com with ESMTPSA id
+	l74sm7684098pfb.145.2019.02.05.16.45.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 05 Feb 2019 16:45:53 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Feb 2019 10:53:25 -0500
-Message-Id: <20190205155325.7493-3-bkylerussell@gmail.com>
+Date: Tue,  5 Feb 2019 16:45:42 -0800
+Message-Id: <20190206004547.32351-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190205155325.7493-1-bkylerussell@gmail.com>
-References: <20190205155325.7493-1-bkylerussell@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] ant-native: only use classpath tools if no JDK
+Subject: [meta-oe][PATCH 1/6] catch2: Upgrade to 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,55 +58,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2019 15:53:38 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 00:45:54 -0000
 Content-Transfer-Encoding: 8bit
 
-If ant gets invoked with a $JAVA_HOME that points to a JDK (for example,
-from an 'inherit java-native'), use the tools.jar from the JDK instead
-of the classpath-initial tools.
+Drop backported patch
 
-Once a native JDK has been bootstrapped, other Java recipes should be
-able to use a more featureful set of classes if needed.
-
-Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-core/ant/ant-native_1.8.1.bb | 2 +-
- recipes-core/ant/files/ant           | 9 +++++++++
- 2 files changed, 10 insertions(+), 1 deletion(-)
+ .../catch2/0001-Remove-redundant-move.patch   | 37 -------------------
+ .../{catch2_2.5.0.bb => catch2_2.6.0.bb}      |  6 +--
+ 2 files changed, 2 insertions(+), 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
+ rename meta-oe/recipes-test/catch2/{catch2_2.5.0.bb => catch2_2.6.0.bb} (80%)
 
-diff --git a/recipes-core/ant/ant-native_1.8.1.bb b/recipes-core/ant/ant-native_1.8.1.bb
-index 7839abd..67cb5fc 100644
---- a/recipes-core/ant/ant-native_1.8.1.bb
-+++ b/recipes-core/ant/ant-native_1.8.1.bb
-@@ -53,7 +53,7 @@ do_compile() {
-   fastjar cf ${JARFILENAME} -C build .
+diff --git a/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch b/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
+deleted file mode 100644
+index dc8a8915eb..0000000000
+--- a/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 7d7428fd09d1bcee281f7b678df8fb71e9365b17 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Martin=20Ho=C5=99e=C5=88ovsk=C3=BD?=
+- <martin.horenovsky@gmail.com>
+-Date: Thu, 27 Dec 2018 16:08:04 +0100
+-Subject: [PATCH] A different approach
+-
+----
+- include/internal/catch_session.cpp | 15 ++++++++++-----
+- 1 file changed, 10 insertions(+), 5 deletions(-)
+-
+---- a/include/internal/catch_session.cpp
+-+++ b/include/internal/catch_session.cpp
+-@@ -42,14 +42,20 @@ namespace Catch {
+-                 return createReporter(config->getReporterName(), config);
+-             }
+- 
+--            auto multi = std::unique_ptr<ListeningReporter>(new ListeningReporter);
+-+            // On older platforms, returning std::unique_ptr<ListeningReporter>
+-+            // when the return type is std::unique_ptr<IStreamingReporter>
+-+            // doesn't compile without a std::move call. However, this causes
+-+            // a warning on newer platforms. Thus, we have to work around
+-+            // it a bit and downcast the pointer manually.
+-+            auto ret = std::unique_ptr<IStreamingReporter>(new ListeningReporter);
+-+            auto& multi = static_cast<ListeningReporter&>(*ret);
+- 
+-             auto const& listeners = Catch::getRegistryHub().getReporterRegistry().getListeners();
+-             for (auto const& listener : listeners) {
+--                multi->addListener(listener->create(Catch::ReporterConfig(config)));
+-+                multi.addListener(listener->create(Catch::ReporterConfig(config)));
+-             }
+--            multi->addReporter(createReporter(config->getReporterName(), config));
+--            return std::move(multi);
+-+            multi.addReporter(createReporter(config->getReporterName(), config));
+-+            return ret;
+-         }
+- 
+- 
+diff --git a/meta-oe/recipes-test/catch2/catch2_2.5.0.bb b/meta-oe/recipes-test/catch2/catch2_2.6.0.bb
+similarity index 80%
+rename from meta-oe/recipes-test/catch2/catch2_2.5.0.bb
+rename to meta-oe/recipes-test/catch2/catch2_2.6.0.bb
+index 26149b31e4..13beb9e8b5 100644
+--- a/meta-oe/recipes-test/catch2/catch2_2.5.0.bb
++++ b/meta-oe/recipes-test/catch2/catch2_2.6.0.bb
+@@ -6,11 +6,9 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
  
-   oe_makeclasspath cp -s ecj-bootstrap jsch bsf xalan2 xercesImpl resolver gnumail gnujaf bcel regexp log4j1.2 antlr oro junit jdepend commons-net commons-logging
--  cp=${STAGING_DATADIR_JAVA_NATIVE}/ant.jar:${STAGING_DATADIR}/classpath/tools.zip:$cp
-+  sed -i -e"s|@ANT_JAR@|${STAGING_DATADIR_JAVA_NATIVE}/ant.jar|" ${WORKDIR}/ant
-   sed -i -e"s|@JAR_FILE@|$cp|" ${WORKDIR}/ant
- }
+ SRC_URI = "git://github.com/catchorg/Catch2.git \
+-           file://0001-Remove-redundant-move.patch \
+           "
+-# v2.5.0
+-#SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
+-SRCREV = "461843b1f02a4bf5c59db88ff201d2c56fabf3a4"
++# v2.6.0
++SRCREV = "d75e9b3c0f24fe42553131873459611ed155e297"
  
-diff --git a/recipes-core/ant/files/ant b/recipes-core/ant/files/ant
-index bb282a9..939f3ec 100755
---- a/recipes-core/ant/files/ant
-+++ b/recipes-core/ant/files/ant
-@@ -1,6 +1,15 @@
- #!/bin/sh
+ S = "${WORKDIR}/git"
  
- export CLASSPATH
-+
-+CLASSPATH=$CLASSPATH:@ANT_JAR@
-+
-+if [ -f "$JAVA_HOME/lib/tools.jar" ] ; then
-+        CLASSPATH="$CLASSPATH:$JAVA_HOME/lib/tools.jar"
-+else
-+        CLASSPATH="$CLASSPATH:${STAGING_DATADIR}/classpath/tools.zip"
-+fi
-+
- CLASSPATH=$CLASSPATH:@JAR_FILE@
- 
- if [ ! $JAVA ];then
 -- 
 2.20.1
 
