@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id A83EE7C29A
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E2BDB7C035
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Feb 2019 00:45:59 +0000 (UTC)
-Received: by mail-pf1-f182.google.com with SMTP id b85so2316431pfc.3
+	Wed,  6 Feb 2019 00:46:00 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id 64so2303711pfr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2019 16:46:01 -0800 (PST)
+	Tue, 05 Feb 2019 16:46:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=XSVYkLcfeJZiOhH5pRUjWhnITlo3iMkcw1zyAMw25vU=;
-	b=YYb1C9TvueTs2PKT3P4VGYmIXUilBvjdA/rbkQrCKeFK6kv46JTL4jrsoZNgFAwra4
-	ROTqNkgZrUMe29EX96j8gftkpLcVtTSKeKbSIKH3MUXnbP9UvA/+6wGHKLENGjwsWB1D
-	Pn2VXjZaupCZjpV+aJPvyeLC8ZYguZiUUFlCK6CSCHdO/CLHn+1IOU0jd1R+7L6Zt4br
-	rOLIOkNgze/7mBd/Rm9rQTFfnKSXQz3GSB6o3un5Obh3XzST0eKLBavIZzurEvJVBfD2
-	p2kB22HeVoiAGip0tGhM3Xc1ibtE1W3hrm/hgUpgZm2MyLFu6ELfGBYu9+v1b9w/rLjq
-	tVyg==
+	bh=GPW8SVPmE8QW2l61lYf4BL+76AdHOQTi09ylzACUcJ4=;
+	b=h7WM4lGUAElCQPCQYHDJ32hRyZ3IpwdEyk8hWmPlZw54irMcmknoW/lJfQfeBzb9zv
+	lnrlCI8vKoLE3jKFQklS3tAZJjzcwnJuYbXhA+qRV48julYwsN+fliW02X80LaViPgXU
+	ws/WhDQ7EBOnbP/xCedEUisAtuzqmgwnvwxB3fzeZ5Yby3Wqs3k9yQ6kpz0MUjydgxlk
+	KdmBLy/52NY/RCpAfNBHzY9mm6sKVV1vZm47WstvmSE4EvFa4b8+R7xR3tUmyJef8wMp
+	RSuJ3e/fWpdfRKBdu4N6ubTNQmab3EBSZn09BHu0h0XCkjIAS23PFrq1/E+bUkebD0Wt
+	BVCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=XSVYkLcfeJZiOhH5pRUjWhnITlo3iMkcw1zyAMw25vU=;
-	b=jLa+COwUZy4PO43Bq3pKDacOXRZMNk/ceXFtKAn5IXc9sXsKCmyUPyZws7z86QJFRw
-	31umb2+K+y0JKHHeUOkUyC9uOM2fqfCbF9PODVx+/bjvW1qW9SS6tM9RIY6AdzfTOd9e
-	xKaa68z4BctCRcMKDYenFdH+t38H+SqZkw5Hj62D2rN8feQNFqHQqhAWd0BFL/bDZBX+
-	gseHZnuGgHokBj3Dw5TOTDEhqlvAnd1fCqG17Z17YhHYumYdxOJ0SznF/YuMaxYNh+7L
-	/3e5PBcimiAdaH73g/d0toNgJUGAVTDb/C4p1tlejnDc5PCMeybtYk6W1XiIUYUysbU1
-	rqgw==
-X-Gm-Message-State: AHQUAubakaB6xjHahXpipEPS5ivF04mnQYyoINiR9prGWBbfjcYJXxEG
-	9pC850z6TfOcjQLaolV7d9w2Ma3f
-X-Google-Smtp-Source: AHgI3IbB6g1QK1YaNczDV6IXz9IpqY3sszv45dGiZeEwJS6mW/KybXAuXl1e1Ru0dQf0/ZqMq+DJtw==
-X-Received: by 2002:a63:555b:: with SMTP id f27mr2342213pgm.313.1549413960369; 
-	Tue, 05 Feb 2019 16:46:00 -0800 (PST)
+	bh=GPW8SVPmE8QW2l61lYf4BL+76AdHOQTi09ylzACUcJ4=;
+	b=uYcWJiJp7HxTg85Q0V4heT2TxH2GZ3u6mehsUJKlBc3UaAXeyxwU7mCNRPJPvjt8UA
+	2kSAAyEMQnps1wMMozKiRQkh6XgUCtLR1tigvIUOQQnH1NHI16GQIuKNvmg1ZHZJfJ5Y
+	SeHcIxhOK94Z4z+Q50s4NTN6u1zge9C13JolSl4xyQneJezP0HJDeibKkJ7WaAubOPAx
+	CG9WvnJOAdcy3/VGro0lJxCKa+WrpRzbRMEoTWj4gA6MadaAGyg7GzIJBpQtGPol8rGe
+	4nQZhaFyRc6J82njtsrKbSp8nq0FdMUYPytE06kMa1NK6GVr5RE5eU7OZytL/4QvoGhm
+	KrlA==
+X-Gm-Message-State: AHQUAubq5DkKTQEYSSW+HRLkK+erwWTKsYexISdezLUoPwx7P7sQYR/r
+	hdlOhpU2fvZkBUrhYMb8R2niuJPl
+X-Google-Smtp-Source: AHgI3IY3Q8oplqgrQnkvNB4rTa1UBNTooCsaXpuSvUCzzG9Y57n3mT2brIQPARNZ09BCYk6aHEuvfQ==
+X-Received: by 2002:a62:6503:: with SMTP id z3mr7581244pfb.169.1549413961610; 
+	Tue, 05 Feb 2019 16:46:01 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::a005])
 	by smtp.gmail.com with ESMTPSA id
-	l74sm7684098pfb.145.2019.02.05.16.45.59
+	l74sm7684098pfb.145.2019.02.05.16.46.00
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Feb 2019 16:45:59 -0800 (PST)
+	Tue, 05 Feb 2019 16:46:00 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Feb 2019 16:45:46 -0800
-Message-Id: <20190206004547.32351-5-raj.khem@gmail.com>
+Date: Tue,  5 Feb 2019 16:45:47 -0800
+Message-Id: <20190206004547.32351-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190206004547.32351-1-raj.khem@gmail.com>
 References: <20190206004547.32351-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 5/6] mongodb: Fix build with clang
+Subject: [meta-oe][PATCH V2 6/6] ltrace: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,62 +59,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2019 00:46:00 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 00:46:01 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...sio-Dont-use-experimental-with-clang.patch | 28 +++++++++++++++++++
- meta-oe/recipes-dbs/mongodb/mongodb_git.bb    |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-with-clang.patch
+v2: Fix build regression with gcc
 
-diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-with-clang.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-with-clang.patch
+ ...hook-Do-not-append-int-to-std-string.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
+
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
 new file mode 100644
-index 0000000000..b597422e40
+index 0000000000..8f1c4b9b9b
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-with-clang.patch
-@@ -0,0 +1,28 @@
-+From 31ca5c563f1d9a3f70258be3dd2b1e547a65a550 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
+@@ -0,0 +1,33 @@
++From 8321f8b3befbaa355cfed988fdd8494133989676 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 5 Feb 2019 00:21:12 -0800
-+Subject: [PATCH] asio: Dont use experimental with clang
++Date: Mon, 4 Feb 2019 00:38:16 -0800
++Subject: [PATCH] hook: Do not append int to std::string
 +
++Clang find this error
++
++| ../../../git/sysdeps/linux-gnu/hooks.c:205:51: error: adding 'int' to a string does not append to the string [-Werror,-Wstring-plus
++-int]
++|                     || sprintf(syspath, "%s/%s", sysconfdir, FN + 1) < 0)
++|                                                              ~~~^~~
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ .../asio-master/asio/include/asio/detail/string_view.hpp      | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ sysdeps/linux-gnu/hooks.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp b/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
-+index 222c02186d..3bf7494529 100644
-+--- a/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
-++++ b/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
-+@@ -28,8 +28,8 @@
-+ namespace asio {
++--- a/sysdeps/linux-gnu/hooks.c
+++++ b/sysdeps/linux-gnu/hooks.c
++@@ -200,9 +200,10 @@ os_get_ltrace_conf_filenames(struct vect
++ 	const char *sysconfdir = SYSCONFDIR;
++ 	if (sysconfdir != NULL && *sysconfdir != '\0') {
++ 		/* No +1, we skip the initial period.  */
++-		syspath = malloc(strlen(sysconfdir) + sizeof FN);
+++		syspath = malloc(strlen(sysconfdir) + sizeof FN + 1);
+++		syspath[strlen(sysconfdir) + sizeof FN + 1] = '\0';
++ 		if (syspath == NULL
++-		    || sprintf(syspath, "%s/%s", sysconfdir, FN + 1) < 0)
+++		    || sprintf(syspath, "%s/%s", sysconfdir, FN) < 0)
++ 			goto fail;
++ 	}
 + 
-+ #if defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
-+-using std::experimental::basic_string_view;
-+-using std::experimental::string_view;
-++using std::basic_string_view;
-++using std::string_view;
-+ #else // defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
-+ using std::basic_string_view;
-+ using std::string_view;
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-index 6494e25bf0..53a9f66117 100644
---- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.0 \
-            file://arm64-support.patch \
-            file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
-            file://0001-Support-deprecated-resolver-functions.patch \
-+           file://0001-asio-Dont-use-experimental-with-clang.patch \
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 83043cd212..3dc269c80e 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http
+            file://0001-configure-Recognise-linux-musl-as-a-host-OS.patch \
+            file://0001-mips-plt.c-Delete-include-error.h.patch \
+            file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
++           file://0001-hook-Do-not-append-int-to-std-string.patch \
             "
- SRC_URI_append_libc-musl ="\
-            file://0002-Fix-default-stack-size-to-256K.patch \
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.20.1
 
