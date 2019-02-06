@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0177E6D4C6
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 89C686D4C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Feb 2019 00:45:53 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id s1so2307580plp.9
+	Wed,  6 Feb 2019 00:45:54 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id b5so2317215plr.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 05 Feb 2019 16:45:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=rXIb6Zhpiex6gZpMeyqbavoG8AzBICoNhd+uFf5apVk=;
-	b=OlecX2QjIt9J6Q3+S3tLw/JYUthNRge/BwXKAWZJ7NPA9HSuNBg4D2Pvd6vit/tuWo
-	JfBTtYC+IIm/d72cQonLY6dnzTFwU9i5CCmKWLlMoy/rRq22vmHmQJyEyF2e/NXw20LZ
-	A1ROwWe7O9pNOAz/SnEhzP2TgQg84w8K/t84TQxK5MABno16eoZtqWZ9EKwWvX7YacvN
-	fmeWNr83/dQFyiasCUbiQQ7+pbFICMZBg6Jbo35Ch48JFNgQz9ca1Ro90HSW2++hmNjw
-	21IWbHG6gG1onHRFfckrdihS1HF1BOuHRfN2JY/NJDJ769L74zZe7b9udMI2QTWFTCIq
-	liAA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=EkTl6oxCbcxsgI14zQAXFqIfyQMthotIa0zdsAsjnf8=;
+	b=Dqvni+0FCIUha6e8c9okspGEXAC3c7CkRiKlKFzIWqhN61y7GGXD2Xg/3X5508moca
+	Q57oBSjQwgEE62B2H7zHLDyEgdZYQO9K9Shv85yHHjiq933OSUOfN/pTIVL7W43ZvorU
+	mmXn5CremPQyNLxssx3w7ErLWCjeBFL1mJ373sIEML0Ayjx0v79ddcZPQVpvsc7JaIbm
+	PWmn/hHROFx7X+qrpz+9VPdpgMZ5axXmNI9YzoQzROJi9BpEsvH+0GfsgsLjhzNf87Ow
+	xEPWP09eiUhsJUu3H73FMtuHyc7c1Or3+/WvRS46cVsE/AODZaHzClN/JCgSX5yoxOCG
+	6eMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=rXIb6Zhpiex6gZpMeyqbavoG8AzBICoNhd+uFf5apVk=;
-	b=VNfq1Y9rHKzbyw+Lls+DfFzBeKsB2H4CLropqQnE9ppLyDL0LyJKngegHXD2ASNTs2
-	QZtq3oRChZ0DVAFaCIbemQafocZErhiw4uZVjkZIYSJXtNDweT5WS57ye3TTdcsn7N4H
-	KJ6I+RJagsAK/1W6NnV0sMa0uGDwxMGUU8C0KBdBXou4zTnWfDetKtqlIaNzBi7T7YqE
-	n+lQFjOVX7RrfnD7ljF+V+8sWKWidLeiZVEndK/8eWWvAs9UBu7lhd5yya4hWBqDC8Kw
-	b8tFOnS8ngGJUVXNG3hXo7SNmCpEjlMDTTv/MDkomVoZ40UdwdR7BJTQnd0bJRHACaYR
-	XQhg==
-X-Gm-Message-State: AHQUAubk61WmSaWpPvbrLBAk4O4ojxAG2otyLrsOWZcaIPohWArv0aLh
-	0NuREKIaWwhqZcVZvnl3cK8WEMaD
-X-Google-Smtp-Source: AHgI3IYG1FGWICyFJVCqyF3raSOG1HRxUMLMC/LXILzaHmUujmaq5SI5wqx21c2prh+ISg4044nSXg==
-X-Received: by 2002:a17:902:b943:: with SMTP id
-	h3mr8031599pls.12.1549413954241; 
-	Tue, 05 Feb 2019 16:45:54 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=EkTl6oxCbcxsgI14zQAXFqIfyQMthotIa0zdsAsjnf8=;
+	b=mDwDxriUitiesJGdFssx3KxLVUPObjsy2rXG3G1wW85CrvBABJXrmz42t6yUSIYrni
+	D/PobI5EfCLNFpQ6AFhgI29Klb8y1CFZeKSLGrsBsKF034tSeJ5NFvn+KxZv/Rgrkqy1
+	J7VZMTyNj6guQx1W2jsFjb6B2pqohAoMru8ylMS0ZwntbAWUUw/H2I3HOPT4MFk19UdA
+	VNd+2JdxuWZRdyx7rtH/IirfdBZZietFPaMnlchbxa7uGVmwrRLhCFwfvQ0n0H9VzXX/
+	6cghwTy7LTpyYfxhb9OJ/qfkIasEQdTqsavn3/+J0+fcnzKCNZmWGNE4eeJuRJzlPfuc
+	CzrQ==
+X-Gm-Message-State: AHQUAubwgzKQnaFXbVIG4Y8oWEwXD1/wWUU70YlD+Mh0kT57y6lRp1I6
+	yUQROIeCmi2Z1p/wJzmy0g5QEpb+
+X-Google-Smtp-Source: AHgI3IaYUHk1x8cpzc02eUXCuyJDwLhc3jkTfWacOJCzaz4+EPMwxZ1w4nk0fn4lYI4kyQLKDhTazQ==
+X-Received: by 2002:a17:902:14b:: with SMTP id
+	69mr7710158plb.120.1549413955143; 
+	Tue, 05 Feb 2019 16:45:55 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::a005])
 	by smtp.gmail.com with ESMTPSA id
-	l74sm7684098pfb.145.2019.02.05.16.45.53
+	l74sm7684098pfb.145.2019.02.05.16.45.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Feb 2019 16:45:53 -0800 (PST)
+	Tue, 05 Feb 2019 16:45:54 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Feb 2019 16:45:42 -0800
-Message-Id: <20190206004547.32351-1-raj.khem@gmail.com>
+Date: Tue,  5 Feb 2019 16:45:43 -0800
+Message-Id: <20190206004547.32351-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190206004547.32351-1-raj.khem@gmail.com>
+References: <20190206004547.32351-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/6] catch2: Upgrade to 2.6.0
+Subject: [meta-oe][PATCH 2/6] graphviz: Fix cross-build failures with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,80 +63,66 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 06 Feb 2019 00:45:54 -0000
 Content-Transfer-Encoding: 8bit
 
-Drop backported patch
+It is detecting cross compile badness for -lexpat since
+the check finds it on build host, so aide the build ssytem
+to find it in staging sysroot
+
+Disable internal ltdl, use libtool provided one
+
+Define defines to indicate that platform has ssize_t and long_double
+
+Disable java,r,c-sharp, as it is unused
+
+Arrange source URIs before checksums
+
+gtk-doc is not needed, morever it ends up in unknown configure options
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../catch2/0001-Remove-redundant-move.patch   | 37 -------------------
- .../{catch2_2.5.0.bb => catch2_2.6.0.bb}      |  6 +--
- 2 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
- rename meta-oe/recipes-test/catch2/{catch2_2.5.0.bb => catch2_2.6.0.bb} (80%)
+ .../graphviz/graphviz_2.40.1.bb                | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch b/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
-deleted file mode 100644
-index dc8a8915eb..0000000000
---- a/meta-oe/recipes-test/catch2/catch2/0001-Remove-redundant-move.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 7d7428fd09d1bcee281f7b678df8fb71e9365b17 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Martin=20Ho=C5=99e=C5=88ovsk=C3=BD?=
-- <martin.horenovsky@gmail.com>
--Date: Thu, 27 Dec 2018 16:08:04 +0100
--Subject: [PATCH] A different approach
--
-----
-- include/internal/catch_session.cpp | 15 ++++++++++-----
-- 1 file changed, 10 insertions(+), 5 deletions(-)
--
----- a/include/internal/catch_session.cpp
--+++ b/include/internal/catch_session.cpp
--@@ -42,14 +42,20 @@ namespace Catch {
--                 return createReporter(config->getReporterName(), config);
--             }
-- 
---            auto multi = std::unique_ptr<ListeningReporter>(new ListeningReporter);
--+            // On older platforms, returning std::unique_ptr<ListeningReporter>
--+            // when the return type is std::unique_ptr<IStreamingReporter>
--+            // doesn't compile without a std::move call. However, this causes
--+            // a warning on newer platforms. Thus, we have to work around
--+            // it a bit and downcast the pointer manually.
--+            auto ret = std::unique_ptr<IStreamingReporter>(new ListeningReporter);
--+            auto& multi = static_cast<ListeningReporter&>(*ret);
-- 
--             auto const& listeners = Catch::getRegistryHub().getReporterRegistry().getListeners();
--             for (auto const& listener : listeners) {
---                multi->addListener(listener->create(Catch::ReporterConfig(config)));
--+                multi.addListener(listener->create(Catch::ReporterConfig(config)));
--             }
---            multi->addReporter(createReporter(config->getReporterName(), config));
---            return std::move(multi);
--+            multi.addReporter(createReporter(config->getReporterName(), config));
--+            return ret;
--         }
-- 
-- 
-diff --git a/meta-oe/recipes-test/catch2/catch2_2.5.0.bb b/meta-oe/recipes-test/catch2/catch2_2.6.0.bb
-similarity index 80%
-rename from meta-oe/recipes-test/catch2/catch2_2.5.0.bb
-rename to meta-oe/recipes-test/catch2/catch2_2.6.0.bb
-index 26149b31e4..13beb9e8b5 100644
---- a/meta-oe/recipes-test/catch2/catch2_2.5.0.bb
-+++ b/meta-oe/recipes-test/catch2/catch2_2.6.0.bb
-@@ -6,11 +6,9 @@ LICENSE = "BSL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+index 96f1efc60a..a9efffaca2 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+@@ -17,7 +17,7 @@ DEPENDS = " \
+ "
+ DEPENDS_append_class-target = " ${BPN}-native"
  
- SRC_URI = "git://github.com/catchorg/Catch2.git \
--           file://0001-Remove-redundant-move.patch \
-           "
--# v2.5.0
--#SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
--SRCREV = "461843b1f02a4bf5c59db88ff201d2c56fabf3a4"
-+# v2.6.0
-+SRCREV = "d75e9b3c0f24fe42553131873459611ed155e297"
+-inherit autotools-brokensep pkgconfig gtk-doc gettext
++inherit autotools-brokensep pkgconfig gettext
  
- S = "${WORKDIR}/git"
+ # The source tarball suggested at
+ # https://graphviz.gitlab.io/_pages/Download/Download_source.html has no
+@@ -25,14 +25,24 @@ inherit autotools-brokensep pkgconfig gtk-doc gettext
+ # get checksum errors. Fedora people seem to expect same so they use a versioned
+ # source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
  
+-SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz"
+-SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
+-SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
++SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
++"
+ # Use native mkdefs
+ SRC_URI_append_class-target = " file://0001-Use-native-mkdefs.patch"
++SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
++SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
+ 
+ S = "${WORKDIR}/${BPN}-stable_release_${PV}"
+ 
++EXTRA_OECONF_class-target = "\
++                --with-expatincludedir=${STAGING_INCDIR} \
++                --with-expatlibdir=${STAGING_LIBDIR} \
++                --without-included-ltdl \
++                --disable-java \
++                --disable-r \
++                --disable-sharp \
++                "
++CFLAGS_append_class-target = " -D_typ_ssize_t=1 -D_long_double=1"
+ do_configure_prepend() {
+     cd ${S}
+     # create version.m4 and ignore libtoolize errors
 -- 
 2.20.1
 
