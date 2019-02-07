@@ -1,48 +1,43 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
-	[209.85.217.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F1B16BD1C
+Return-Path: <rbilovol@cisco.com>
+X-Greylist: delayed 657 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 07 Feb 2019 11:11:06 UTC
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A7A17C3E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Feb 2019 03:01:30 +0000 (UTC)
-Received: by mail-vs1-f65.google.com with SMTP id u11so5800029vsp.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Feb 2019 19:01:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wo3F1r20NzIDIm2K92AEmgBrfPDLYEj4po/MxI8InY4=;
-	b=uDVC/u7l9tb05bpFo0ZI3RdyIby9ntIwMoMfBDc4Uv5sHC8TS+zvX9Gu9K3O7jew0f
-	4TgPgsbIk9wN0d7SjnQuk6XhDXIv0GKD5is231nJG8S+7hNr3NQyYtR7mBcHTpW8+Zsh
-	2m+7OMPno+i/3TraaoRb2QcuEW/wItceOExEi9ZZ6b+5YS8VNlDn33cqlrugbzpqoE09
-	KMNFR1I8yliyUE1CHuPHZTcShRCCGErmhCOvS6mdwiDv8Lykmz5S+0PJ5UV9DVPh3HaR
-	epupXLVwQ90r+1HCe7h+XHGUC/UUvxJyy4JNpwfgXvC/OiPNwcVhv99ohH/kzVCQjpf+
-	JSfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wo3F1r20NzIDIm2K92AEmgBrfPDLYEj4po/MxI8InY4=;
-	b=TtMAn552wDJV+33ziZH9Wze5LgIrLT4Ug5E5NLn4DG+1W9nXLnD2PmellXzBanSos7
-	K84yaCkICYQTttFiO6WK1EZ+xrTPCDLc79GLhISTESh/k/LPHY6Z/xIg3MtKDiffAtVN
-	i+6Kk90SftTpQ7vrI76fCLqYg7rsHzRPCDq/iIzqHJAAyqbkoCFEU15EbXJD8ORwR1pq
-	crPgfHiX67T3Rw0i3448EnghdHWdSFLKY6wXIcCxfLEl7sUz9HrZfdXwwv0Zwk9nWgfV
-	luJfTW9RhZdiEhwVGxjSoQo92TC1zIglxnn+JT2BsTt9qVY4gjJW/O3hbgVtzXBFjwmI
-	zxXg==
-X-Gm-Message-State: AHQUAuYYtrURPTZKk2iVEj7zgXtLIrRAnwgvJPPkYradozXTCKdHDxrL
-	kz927hIpLvCSdVDtZ/Xybp0zPt/wLfeMrTRZs6k=
-X-Google-Smtp-Source: AHgI3Ia6lvH4axNyFCZG/+Tph0L0f6GsS3qEaMAhmlexs8rYdDx7wEfYmhcYVyui6rKMB30IsZKFZCv7TPC/xf8R0S4=
-X-Received: by 2002:a67:808a:: with SMTP id b132mr5971753vsd.224.1549508490891;
-	Wed, 06 Feb 2019 19:01:30 -0800 (PST)
-MIME-Version: 1.0
-References: <20180727132923.15149-1-git@andred.net>
-	<20180727132923.15149-7-git@andred.net>
-In-Reply-To: <20180727132923.15149-7-git@andred.net>
-From: Kyle Russell <bkylerussell@gmail.com>
-Date: Wed, 6 Feb 2019 22:01:18 -0500
-Message-ID: <CAFrQVPOv8j1yOZs6DfLsK6QD69F4uVj0=wFJX5bQ_44Oj9S5-g@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][RFC][PATCH 7/7] ca-certificates-java: switch to more generic / more correct JAVA (R)DEPENDS
+	Thu,  7 Feb 2019 11:11:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=3930; q=dns/txt; s=iport;
+	t=1549537868; x=1550747468;
+	h=from:to:cc:subject:date:message-id;
+	bh=0juFdli/q/mSAT9vWC9WjizZ0q7ScM+AU5NSa40rL+I=;
+	b=BmAvXN77dlQJ1wVDSMtheVWAIly9KT8yHxa5XYz+RUOiHiERuDUrXGGz
+	LS85dHGaIfvwumhjD5H/+q4E6lHEB5WoZLafkgdwuD42laS3QJuuKfQkZ
+	skJZIpeznewamwmw6fpRdeobj3ovNTJ/Z+ABxrM+XOOlIUiExvvyRqUA7 I=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0AEAAA+D1xc/xbLJq1kGQEBAQEBAQE?=
+	=?us-ascii?q?BAQEBAQcBAQEBAQGBUQQBAQEBAQsBgmpQASASJ4wdX4w1mHmBew0lhAFGg0Q?=
+	=?us-ascii?q?0CQ0BAwEBAgEBAm0cDIVKAX8sAwECfg4BEoMkAYIBD640hC8BgRSEZxSHboR?=
+	=?us-ascii?q?YgUA/gRGGMAKHQQKjEAmHN4sOAheCP5AWii2FOIw+gUY4gVYzGggbFYMnCYI?=
+	=?us-ascii?q?gFhODOIJWh389AzAKjnABAQ?=
+X-IronPort-AV: E=Sophos;i="5.58,343,1544486400"; 
+   d="scan'208";a="9933299"
+Received: from aer-iport-nat.cisco.com (HELO aer-core-2.cisco.com)
+	([173.38.203.22])
+	by aer-iport-1.cisco.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	07 Feb 2019 11:00:01 +0000
+Received: from localhost ([10.63.15.137])
+	by aer-core-2.cisco.com (8.15.2/8.15.2) with ESMTP id x17B01Pm027078;
+	Thu, 7 Feb 2019 11:00:01 GMT
+From: Ruslan Bilovol <rbilovol@cisco.com>
+To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+Date: Thu,  7 Feb 2019 13:00:01 +0200
+Message-Id: <1549537201-4781-1-git-send-email-rbilovol@cisco.com>
+X-Mailer: git-send-email 1.9.1
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-SMTP-Client: 10.63.15.137, [10.63.15.137]
+X-Outbound-Node: aer-core-2.cisco.com
+Cc: xe-linux-external@cisco.com
+Subject: [meta-oe] [PATCH] rapidjson: fix cmake artifacts installation for non-default BASELIB case
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,46 +50,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 03:01:31 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Feb 2019 11:11:06 -0000
 
-On Fri, Jul 27, 2018 at 9:29 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
+If BASELIB is set to non-default value (like lib64),
+next 'installed but not shipped' issue happens:
+  /usr/lib
+  /usr/lib/cmake
+  /usr/lib/pkgconfig
+  /usr/lib/cmake/RapidJSON
+  /usr/lib/cmake/RapidJSON/RapidJSONConfigVersion.cmake
+  /usr/lib/cmake/RapidJSON/RapidJSONConfig.cmake
+  /usr/lib/pkgconfig/RapidJSON.pc
 
-> From: Andr=C3=A9 Draszik <andre.draszik@jci.com>
->
-> This recipe here actually depends on Java7 upwards, not Java2 upwards,
-> so state that dependency correctly using the newly introduced (virtual)
-> RPROVIDES of the OpenJDK8/OpenJRE8 recipes.
->
-> At the same time, we can remove hard-coded references to openjdk-8 and
-> openjre-8, and thusly make the build more flexible.
->
-> Signed-off-by: Andr=C3=A9 Draszik <andre.draszik@jci.com>
-> ---
->  .../ca-certificates-java_20180516.bb                   | 10 ++--------
->  1 file changed, 2 insertions(+), 8 deletions(-)
->
-> diff --git a/recipes-core/ca-certificates-java/
-> ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/
-> ca-certificates-java_20180516.bb
-> index a2d7abd..2ae7352 100644
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> @@ -14,7 +14,7 @@ DEPENDS =3D "virtual/javac-native fastjar-native"
->
+This is because rapidjson has library installation dir set
+to 'lib' by default and hardcoded in another place.
+Fix this by next changes:
+ - set appropriate LIB_INSTALL_DIR
+ - fix hardcoded 'lib' in CMAKECONFIG_INSTALL_DIR case
 
-Should this DEPEND on virtual/java7-sdk-native instead?
+Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+---
+ ...ve-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch | 36 ++++++++++++++++++++++
+ .../recipes-devtools/rapidjson/rapidjson_git.bb    |  5 +--
+ 2 files changed, 39 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
 
- # We can't use virtual/javac-native, because that would create a
->  # keystore that can't be read on the target (as virtual/javac-native
->  # usually is either too old, or plain incompatible with this)
-> -PACKAGE_WRITE_DEPS +=3D "openjdk-8-native"
-> +PACKAGE_WRITE_DEPS +=3D "virtual/java7-runtime-native"
->
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+new file mode 100644
+index 0000000..745f5d0
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+@@ -0,0 +1,36 @@
++From 8d272e53a4d1dc405e08ce2dd50159c58f4451e9 Mon Sep 17 00:00:00 2001
++From: Ruslan Bilovol <rbilovol@cisco.com>
++Date: Thu, 24 Jan 2019 18:11:39 +0200
++Subject: [PATCH] CMake: remove hardcoded CMAKECONFIG_INSTALL_DIR path
++
++Currently this path is hardcoded to lib/cmake.
++Some distributions have different library path (like lib64).
++So reuse LIB_INSTALL_DIR for that to make CMAKECONFIG_INSTALL_DIR
++configurable and usable in such distros.
++
++Upstream-Status: Backport [https://github.com/Tencent/rapidjson/commit/8d272e53a4d1dc405e08ce2dd50159c58f4451e9]
++
++Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
++---
++ CMakeLists.txt | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 7c60407..0275672 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -199,9 +199,9 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}ConfigVersion.cmake.in
++     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake @ONLY)
++ 
++ # ... for the install tree
++-SET( CMAKECONFIG_INSTALL_DIR lib/cmake/${PROJECT_NAME} )
+++SET( CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME} )
++ FILE( RELATIVE_PATH REL_INCLUDE_DIR
++-    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
+++    "${CMAKECONFIG_INSTALL_DIR}"
++     "${CMAKE_INSTALL_PREFIX}/include" )
++ 
++ SET( ${PROJECT_NAME}_INCLUDE_DIR "\${${PROJECT_NAME}_CMAKE_DIR}/${REL_INCLUDE_DIR}" )
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index c90eab0..e3ed9c6 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -4,7 +4,8 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
+ 
+-SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1"
++SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
++           file://0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
+ 
+ SRCREV = "6a905f9311f82d306da77bd963ec5aa5da07da9c"
+ 
+@@ -14,7 +15,7 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+-EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF"
++EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
+ 
+ # RapidJSON is a header-only C++ library, so the main package will be empty.
+ 
+-- 
+1.9.1
 
-Would you still need the PACKAGE_WRITE_DEPS if the DEPENDS above was
-changed?  I thought virtual/javac-native was "too old" because it was
-reserved for the bootstrap process, so I've been considering it as a
-special case.
 
