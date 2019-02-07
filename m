@@ -1,48 +1,48 @@
 Return-Path: <krussell7711@gmail.com>
-Received: from mail-vs1-f66.google.com (mail-vs1-f66.google.com
-	[209.85.217.66])
-	by mail.openembedded.org (Postfix) with ESMTP id B6E657BFF5
+Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
+	[209.85.217.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1B16BD1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Feb 2019 02:42:14 +0000 (UTC)
-Received: by mail-vs1-f66.google.com with SMTP id t17so5801553vsc.8
+	Thu,  7 Feb 2019 03:01:30 +0000 (UTC)
+Received: by mail-vs1-f65.google.com with SMTP id u11so5800029vsp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Feb 2019 18:42:16 -0800 (PST)
+	Wed, 06 Feb 2019 19:01:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gWbMiveR4tEe51wcQBxg2HyfHaQrD0y75siEdzAUSqI=;
-	b=jaTZePwn/a9l30i0jeFqA8viQydmn762Hk5wCThxWB2j5nmEPL+CQttePAv0VxPQ1Y
-	/flGQq9/VCBK/gdu44L4kvlOp2QeuY+rKtAvx8LnYXpEfBNtefUiKnjpRfD2gm7bDN6Y
-	IXAP0OqUztoPxZaCSw6SB+WOWV7Ei2dbg75VmvUPeJ9H3CrWKHoYsevS6sHusWMr1e5k
-	CY7t7s1Sa/BP8BEjkQhYIwP7oauCmXx0TrWIiQoUydRrvOR5X6XwHYc+IGyTXR1TYC0i
-	Mrf25htRurH8yQUDkRlKluXSlfHjq/EWRxoGk7uhxQGXXJP07vBgY+3iDMQoFPz3zMQe
-	jy7w==
+	:cc; bh=wo3F1r20NzIDIm2K92AEmgBrfPDLYEj4po/MxI8InY4=;
+	b=uDVC/u7l9tb05bpFo0ZI3RdyIby9ntIwMoMfBDc4Uv5sHC8TS+zvX9Gu9K3O7jew0f
+	4TgPgsbIk9wN0d7SjnQuk6XhDXIv0GKD5is231nJG8S+7hNr3NQyYtR7mBcHTpW8+Zsh
+	2m+7OMPno+i/3TraaoRb2QcuEW/wItceOExEi9ZZ6b+5YS8VNlDn33cqlrugbzpqoE09
+	KMNFR1I8yliyUE1CHuPHZTcShRCCGErmhCOvS6mdwiDv8Lykmz5S+0PJ5UV9DVPh3HaR
+	epupXLVwQ90r+1HCe7h+XHGUC/UUvxJyy4JNpwfgXvC/OiPNwcVhv99ohH/kzVCQjpf+
+	JSfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=gWbMiveR4tEe51wcQBxg2HyfHaQrD0y75siEdzAUSqI=;
-	b=ba25AUwa7lJc3EeLFAneCj7g55S6sg2RACNO9jOOM6AqIRtQ5C5tw38M4YEPSSf2nu
-	egFD23wSL1S62/+TtWtMtTcNRRfxU/DTPbI+jR7sreDub5nYyFcBNXPkv5rOMSkVaH19
-	aez4TJW4RIyS78AHhi2aTd4+98NchF1bUhktioQl8ErrchAXue2uJV4Xgp2Gvz2RgcuB
-	Jzi8iIzrC6il6/buncmYWFt6EXx74c458SbY+YN4eVP74dk6PWVBGjqATN3/YfipoYI2
-	kjhZM7Oo7n0mv1/aHC3TGE7t3GS3wstFCaR3t/loUY3gtuQh87PsgWAUrGXXhowuAnMN
-	NK9g==
-X-Gm-Message-State: AHQUAuY7+5yMuO7BN+45318H3BsJDFyw0G+1pq6Tz0WFyFiqjrt3QNKq
-	F9mQO1n1DzKwvwml4xuzDAcs9lEFW/5/ltbXsuMq/Q==
-X-Google-Smtp-Source: AHgI3IbV4rHq2gMt6rYAWAEfsWWZyrl26Q+ecI2N7raAa/kFzxRCjyd2IEC2JY7nKdXK0A27+dOUxy/3RDDmXC9+l3U=
-X-Received: by 2002:a67:d804:: with SMTP id e4mr5931995vsj.7.1549507335359;
-	Wed, 06 Feb 2019 18:42:15 -0800 (PST)
+	bh=wo3F1r20NzIDIm2K92AEmgBrfPDLYEj4po/MxI8InY4=;
+	b=TtMAn552wDJV+33ziZH9Wze5LgIrLT4Ug5E5NLn4DG+1W9nXLnD2PmellXzBanSos7
+	K84yaCkICYQTttFiO6WK1EZ+xrTPCDLc79GLhISTESh/k/LPHY6Z/xIg3MtKDiffAtVN
+	i+6Kk90SftTpQ7vrI76fCLqYg7rsHzRPCDq/iIzqHJAAyqbkoCFEU15EbXJD8ORwR1pq
+	crPgfHiX67T3Rw0i3448EnghdHWdSFLKY6wXIcCxfLEl7sUz9HrZfdXwwv0Zwk9nWgfV
+	luJfTW9RhZdiEhwVGxjSoQo92TC1zIglxnn+JT2BsTt9qVY4gjJW/O3hbgVtzXBFjwmI
+	zxXg==
+X-Gm-Message-State: AHQUAuYYtrURPTZKk2iVEj7zgXtLIrRAnwgvJPPkYradozXTCKdHDxrL
+	kz927hIpLvCSdVDtZ/Xybp0zPt/wLfeMrTRZs6k=
+X-Google-Smtp-Source: AHgI3Ia6lvH4axNyFCZG/+Tph0L0f6GsS3qEaMAhmlexs8rYdDx7wEfYmhcYVyui6rKMB30IsZKFZCv7TPC/xf8R0S4=
+X-Received: by 2002:a67:808a:: with SMTP id b132mr5971753vsd.224.1549508490891;
+	Wed, 06 Feb 2019 19:01:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20190205155325.7493-1-bkylerussell@gmail.com>
-	<90ad3a48bf6811135ebf4893757d3254c95b44e0.camel@andred.net>
-In-Reply-To: <90ad3a48bf6811135ebf4893757d3254c95b44e0.camel@andred.net>
+References: <20180727132923.15149-1-git@andred.net>
+	<20180727132923.15149-7-git@andred.net>
+In-Reply-To: <20180727132923.15149-7-git@andred.net>
 From: Kyle Russell <bkylerussell@gmail.com>
-Date: Wed, 6 Feb 2019 21:42:02 -0500
-Message-ID: <CAFrQVPNb2U3GUaSbhuOzCdHofpdxL+kA+iGUq3bWMGVQx5kFDw@mail.gmail.com>
+Date: Wed, 6 Feb 2019 22:01:18 -0500
+Message-ID: <CAFrQVPOv8j1yOZs6DfLsK6QD69F4uVj0=wFJX5bQ_44Oj9S5-g@mail.gmail.com>
 To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 0/2] RFC: Support building Java recipes with openjdk-8-native
+Subject: Re: [meta-java][RFC][PATCH 7/7] ca-certificates-java: switch to more generic / more correct JAVA (R)DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,121 +55,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 02:42:14 -0000
+X-List-Received-Date: Thu, 07 Feb 2019 03:01:31 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-It seems like a question of how many JDK versions meta-java plans on
-providing, and for how long.  To me the number of different per-version
-providers feels like a maintenance point that could quickly get out of
-hand.  I guess my assumption has been that all of the embedded Java code
-for the distribution would compile with the same JDK (either the latest JDK
-provided by meta-java, or perhaps one behind the latest version; similar to
-how oe-core handles gcc upgrades, for example), and that compile would pass
-in the appropriate -target or -bootclasspath parameters for the preferred
-JVM.
+On Fri, Jul 27, 2018 at 9:29 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
 
-I hope I understand what you're saying, because I'd like to work together
-toward a solution.
+> From: Andr=C3=A9 Draszik <andre.draszik@jci.com>
+>
+> This recipe here actually depends on Java7 upwards, not Java2 upwards,
+> so state that dependency correctly using the newly introduced (virtual)
+> RPROVIDES of the OpenJDK8/OpenJRE8 recipes.
+>
+> At the same time, we can remove hard-coded references to openjdk-8 and
+> openjre-8, and thusly make the build more flexible.
+>
+> Signed-off-by: Andr=C3=A9 Draszik <andre.draszik@jci.com>
+> ---
+>  .../ca-certificates-java_20180516.bb                   | 10 ++--------
+>  1 file changed, 2 insertions(+), 8 deletions(-)
+>
+> diff --git a/recipes-core/ca-certificates-java/
+> ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/
+> ca-certificates-java_20180516.bb
+> index a2d7abd..2ae7352 100644
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> @@ -14,7 +14,7 @@ DEPENDS =3D "virtual/javac-native fastjar-native"
+>
 
-Does your distribution require specifying different providers per runtime
-version?
+Should this DEPEND on virtual/java7-sdk-native instead?
 
-On Wed, Feb 6, 2019 at 8:38 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
+ # We can't use virtual/javac-native, because that would create a
+>  # keystore that can't be read on the target (as virtual/javac-native
+>  # usually is either too old, or plain incompatible with this)
+> -PACKAGE_WRITE_DEPS +=3D "openjdk-8-native"
+> +PACKAGE_WRITE_DEPS +=3D "virtual/java7-runtime-native"
+>
 
-> Hi,
->
-> First, I agree the current state isn't great at all.
->
-> It does appear to me though that Java world seems to be a bit different, =
-in
-> that even today there are big Java projects out there that still only
-> compile using Java 8, which others do compile fine using more recent
-> versions.
->
-> With your suggested approach it becomes impossible to properly support
-> that,
-> you still have to pick the lowest denominator globally.
->
-> Other distributions, Debian based ones in particular are taking a differe=
-nt
-> approach:
-> Each Java compiler/runtime provides virtual properties, and recipes can
-> depend on the required version easily, something like e.g.
-> virtual/java8-sdk virtual/java9-sdk virtual/java10-sdk etc.
->
-> I'had posted a patch series trying to mimic that before, but not really h=
-ad
-> time to work on that any more:
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-41.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-42.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-43.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-44.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-45.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-46.html
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
-47.html
->
-> What do you think?
->
-> Cheers,
-> Andre'
->
-> On Tue, 2019-02-05 at 10:53 -0500, Kyle Russell wrote:
-> > This series spun out of a request on the mailing list last October on
-> > configuring meta-java for using openjdk-8-native to compile other Java
-> > recipes that might require modern API features not provided by the
-> > bootstrap VM classes.
-> >
-> >
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-October/1=
-97186.html
-> > [oe] meta-java configuration
-> >
-> > I've been running with this series on sumo, but I wanted to send it out
-> > to get other thoughts on the approach.
-> >
-> > It seems like there's already precedent for this format with perlnative
-> > and pythonnative.  That was more or less how I expected java-native to
-> > behave initially until I understood more about the bootstrap process.
-> >
-> > If I've missed a valid use case of java-native and this change would
-> > cause breakage to someone else's layer, I'd be fine with introducing
-> > javanative.bbclass as a new class that provides the same functionality
-> > as the following patch to java-native.bbclass.  (Its name would be more
-> > closely aligned to perlnative and pythonnative without the dash.)
-> > However, it appeared that java-native was essentially unused, and I
-> > thought having both a java-native and javanative class would be
-> > confusing.
-> >
-> > Kyle Russell (2):
-> >   Add support for building Java recipes using java-native
-> >   ant-native: only use classpath tools if no JDK
-> >
-> >  README                                          |  7 +++++++
-> >  classes/java-native.bbclass                     | 17 ++++++++++-------
-> >  .../ant-contrib/ant-contrib-native_1.0b3.bb     |  2 +-
-> >  recipes-core/ant/ant-native_1.8.1.bb            |  4 ++--
-> >  recipes-core/ant/files/ant                      |  9 +++++++++
-> >  recipes-core/openjdk/openjdk-8-native.inc       |  2 ++
-> >  6 files changed, 31 insertions(+), 10 deletions(-)
-> >
-> > --
-> > 2.20.1
-> >
->
->
+Would you still need the PACKAGE_WRITE_DEPS if the DEPENDS above was
+changed?  I thought virtual/javac-native was "too old" because it was
+reserved for the bootstrap process, so I've been considering it as a
+special case.
 
