@@ -1,127 +1,48 @@
-Return-Path: <ckalluri@xilinx.com>
-X-Greylist: delayed 141970 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 07 Feb 2019 01:10:26 UTC
-Received: from NAM05-BY2-obe.outbound.protection.outlook.com
-	(mail-eopbgr710047.outbound.protection.outlook.com [40.107.71.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 65C0D79D13
+Return-Path: <krussell7711@gmail.com>
+Received: from mail-vs1-f66.google.com (mail-vs1-f66.google.com
+	[209.85.217.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B6E657BFF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Feb 2019 01:10:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=90MyL3HcR106kXUTdkv1sCWmRtPUgnJtub2FZ+fVDTs=;
-	b=gNlooLWq1PAiaopWMMBpOwdjXRQzLipmoFW01ecOAUbm9Mm62Xhbp7iuFJ+6maAfjrDMb24zbnw3tUzQDNH5/OP8Rc4/zdAsr4/KBXbe/WcOc8uI/rWuVDnMU1wtrYbrfPQSBdMCA0odzyesxrBj2JuC0yOmtiXS7uLz5dWULDw=
-Received: from BL0PR02CA0054.namprd02.prod.outlook.com (2603:10b6:207:3d::31)
-	by BN6PR02MB2644.namprd02.prod.outlook.com (2603:10b6:404:54::20)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1580.22;
-	Wed, 6 Feb 2019 19:37:37 +0000
-Received: from SN1NAM02FT019.eop-nam02.prod.protection.outlook.com
-	(2a01:111:f400:7e44::200) by BL0PR02CA0054.outlook.office365.com
-	(2603:10b6:207:3d::31) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1601.19 via
-	Frontend Transport; Wed, 6 Feb 2019 19:37:37 +0000
-Authentication-Results: spf=pass (sender IP is 149.199.60.100)
-	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none; lists.openembedded.org;
-	dmarc=bestguesspass action=none header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
-	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
-	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
-Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
-	SN1NAM02FT019.mail.protection.outlook.com (10.152.72.130) with
-	Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.1580.10
-	via Frontend Transport; Wed, 6 Feb 2019 19:37:37 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66]:59150
-	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
-	(envelope-from <chandana.kalluri@xilinx.com>) id 1grT0q-0003w7-Mn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Feb 2019 11:37:36 -0800
-Received: from [127.0.0.1] (helo=localhost)
-	by xsj-pvapsmtp01 with smtp (Exim 4.63)
-	(envelope-from <chandana.kalluri@xilinx.com>) id 1grT0l-0005eQ-J9
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Feb 2019 11:37:31 -0800
-Received: from xsj-pvapsmtp01 (mail.xilinx.com [149.199.38.66] (may be forged))
-	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
-	x16JbOdq023926; Wed, 6 Feb 2019 11:37:25 -0800
-Received: from [172.19.2.12] (helo=xsjckalluri50.xilinx.com)
-	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-	(envelope-from <chandana.kalluri@xilinx.com>)
-	id 1grT0e-0005d9-Rc; Wed, 06 Feb 2019 11:37:24 -0800
-From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Feb 2019 11:37:23 -0800
-Message-ID: <1549481843-24095-1-git-send-email-chandana.kalluri@xilinx.com>
-X-Mailer: git-send-email 2.7.4
-X-RCIS-Action: ALLOW
-X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
-X-TM-AS-User-Approved-Sender: Yes;Yes
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:149.199.60.100; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(396003)(376002)(136003)(39860400002)(346002)(2980300002)(199004)(189003)(7696005)(51416003)(126002)(107886003)(54906003)(47776003)(106002)(48376002)(36386004)(106466001)(2351001)(316002)(63266004)(16586007)(478600001)(9786002)(50466002)(6916009)(81166006)(486006)(36756003)(2616005)(8676002)(81156014)(476003)(2906002)(50226002)(305945005)(8936002)(426003)(336012)(77096007)(186003)(356004)(26005)(4326008)(107986001)(42866002)(5001870100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR02MB2644; H:xsj-pvapsmtpgw02;
-	FPR:; SPF:Pass; LANG:en;
-	PTR:xapps1.xilinx.com,unknown-60-100.xilinx.com; A:1; MX:1; 
-X-Microsoft-Exchange-Diagnostics: 1; SN1NAM02FT019;
-	1:R+BG6RAmf+ydisYf0m/PPjxXhwWvl4yGGc0j6S8sFFjdph1KsFWfmkNTpbbY3zn28oXqH3y4ddpA7LQT/OH2u0wQ+5FJ45qADxkgaAGne34Ekg4M0r8Sz7YYkSng1qHXhpUx38Q88KqPjQUfcIiTIttnt+U7Jne4xCXKrsOM590=
+	Thu,  7 Feb 2019 02:42:14 +0000 (UTC)
+Received: by mail-vs1-f66.google.com with SMTP id t17so5801553vsc.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Feb 2019 18:42:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=gWbMiveR4tEe51wcQBxg2HyfHaQrD0y75siEdzAUSqI=;
+	b=jaTZePwn/a9l30i0jeFqA8viQydmn762Hk5wCThxWB2j5nmEPL+CQttePAv0VxPQ1Y
+	/flGQq9/VCBK/gdu44L4kvlOp2QeuY+rKtAvx8LnYXpEfBNtefUiKnjpRfD2gm7bDN6Y
+	IXAP0OqUztoPxZaCSw6SB+WOWV7Ei2dbg75VmvUPeJ9H3CrWKHoYsevS6sHusWMr1e5k
+	CY7t7s1Sa/BP8BEjkQhYIwP7oauCmXx0TrWIiQoUydRrvOR5X6XwHYc+IGyTXR1TYC0i
+	Mrf25htRurH8yQUDkRlKluXSlfHjq/EWRxoGk7uhxQGXXJP07vBgY+3iDMQoFPz3zMQe
+	jy7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=gWbMiveR4tEe51wcQBxg2HyfHaQrD0y75siEdzAUSqI=;
+	b=ba25AUwa7lJc3EeLFAneCj7g55S6sg2RACNO9jOOM6AqIRtQ5C5tw38M4YEPSSf2nu
+	egFD23wSL1S62/+TtWtMtTcNRRfxU/DTPbI+jR7sreDub5nYyFcBNXPkv5rOMSkVaH19
+	aez4TJW4RIyS78AHhi2aTd4+98NchF1bUhktioQl8ErrchAXue2uJV4Xgp2Gvz2RgcuB
+	Jzi8iIzrC6il6/buncmYWFt6EXx74c458SbY+YN4eVP74dk6PWVBGjqATN3/YfipoYI2
+	kjhZM7Oo7n0mv1/aHC3TGE7t3GS3wstFCaR3t/loUY3gtuQh87PsgWAUrGXXhowuAnMN
+	NK9g==
+X-Gm-Message-State: AHQUAuY7+5yMuO7BN+45318H3BsJDFyw0G+1pq6Tz0WFyFiqjrt3QNKq
+	F9mQO1n1DzKwvwml4xuzDAcs9lEFW/5/ltbXsuMq/Q==
+X-Google-Smtp-Source: AHgI3IbV4rHq2gMt6rYAWAEfsWWZyrl26Q+ecI2N7raAa/kFzxRCjyd2IEC2JY7nKdXK0A27+dOUxy/3RDDmXC9+l3U=
+X-Received: by 2002:a67:d804:: with SMTP id e4mr5931995vsj.7.1549507335359;
+	Wed, 06 Feb 2019 18:42:15 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f826c2e4-4657-4a1a-932f-08d68c6a8c91
-X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605077)(4608076)(4709027)(2017052603328)(7153060);
-	SRVR:BN6PR02MB2644; 
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR02MB2644;
-	3:LK13WlQ9Igg0/O6PA37Xz9OIj+4krVnVuPV9mE5ehQGJdrNfLmh3KszkPQSEls3xfbhbEy3/qEhVBKv+QaY5K8cuNLwJmVPBUPQuJ1muVPbRu6f11bFy8AbWso6aFgnxemexmVehyM2Uscgtxd/ABZSdoibZZ+ddRToNTE0Gg1XqfJnGzWM+ct0W2G2X3dk1Cwx2zFEMZF8PdziMk2LNuUNpLvEIKf0c2S+HVDSXSLripYiQU8guqEgDrhTD46nZ7xYFIG24M+Ym6jNlYuB9vrJF+c5gtzy0/8htJj4xdnH/Hv2pHNsMqapLYTicgX84iZBHUcLk5qpJamMhYIkNWsFHJusLPi55tf4mwG4lCZy95denak4BAJUuFX7ZaOn9;
-	25:y0kvWESgfpXLbGlSPeQdAF+WrNBU9DzOJTCVLHyaj8/Gg+NxmX5B2SJ5IXtlY4YOufoGt1Ku8j/6B4fTsZLRul+vXNAK7PzF8mAYaTpBqzcVsbpQ3ll8Ghia0fexR39kZuytk3XsuI+ytIIe2pWvLrQwPiuwegp2WaHbhH5O2uZL0Cr8kKq6U69pZD+dlc+WeWw34z/3Egw+z7CHR+ITAZLc9YdkP4HevX3jqnLKnU0Q1q/psJqLDUu5SlILc2znWNbEkv06s/cJzvNImwfYyZGKm78TLMCMeSi0cpHE0EM6EsozoEU+2GZwMxsidP+5UdkjZvMoLVcEx36Kd1Rq2Q==
-X-MS-TrafficTypeDiagnostic: BN6PR02MB2644:
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR02MB2644;
-	31:TJW1/gLOnPe09i4IjPvYoUUr7JzCbJMrSNFMngGxp4SrXYHQuKB2DewPOLFQ7hesvHl/oA4aPq5q7EX7YH7GHoPt1g9xNxpiH1fJaJTtamtgLu7/XP94pU65A/C0qKIAg6LEpdUyIwBm9ODSlcyPKRvpSGnU1wgUTaEhv3f849e78BtH7yx3V1BoBHQ4R3ChhUy8mxYkM093+rPom0OAQ1/D8Q/gwy6p/yzAzKxnml8=;
-	20:0GylspWxCTViNXU2bW/M9WiBsHg/uyFo4s9Ix5cKad1ECd52c8og5Ry4wUHoXLFgL490cZB0N6GT5flj0LN2J2ShX95O7LRM1g9FVtjfIA68YKrzKclplwOeS3uHpzsLAOWrxabuGwqo2YfuwphUPhcs3LZjaYXWF4fO6eYVtULeYy3R8EqcvzjrWXCQ3K8FVWKC7X2KwHus+9rKW7OWYtwJaZzRmCzSpxMLxjGCgEKbOltFCox+OqsLlOVIn/+3IqC+uTwGi7+LAQGT3Y2KS4+YehxMBnB4OF1nUHt3LBg8RyZFm036ZcNgZLCkT1+Nud/5tpBLHjijdoD4kybD2qvB5Lyligs4mZFYUdWxv2fr7myoFLTGkdvVrAKNYhsuydWZCsk/8RTiIDxzOtMvKeXIvuvL3LloqZSAXjuRG4yLOztywM3lZ0gydp3LLpy8PJ7MclCz8l8PXv21wfbNPx1VXQdvVdxHlHit94aVs5/DlmO3h1V/T2idnXzrtIwX
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-Microsoft-Antispam-PRVS: <BN6PR02MB2644B21088033AE84C8F66E1B06F0@BN6PR02MB2644.namprd02.prod.outlook.com>
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR02MB2644;
-	4:I3CDOeQwPR+JiMaV/dFya+H7MgQWbRbXJ2Q/qpZBBKiDqVZ1eRXG1ad+aNqmVyXzjrcHdnY5zRSj6sm0p/1bnjGiPqqgCE33/CuaMNASVswTI1OCGoXop5JIgJQOXxKdfKy3zLNBQ70ZTK8FOBeOzVBOrRqEmGyWz3jyqu3wxbuw4RuoVjCFnwL+1TTG5tHMSb8zIr9yzH2NwwC5sg0BP6Vz10c7xtu7Z4lBewpa50Lizq287QrGp0Zf1+AApRm+ys3LJ39QDsRED4661VMpbQBylkS6+Ao2JL++5GLyzl4ZpBvoiAt7AquFv+lUNeA0
-X-Forefront-PRVS: 0940A19703
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; BN6PR02MB2644;
-	23:jaM4NGRCuBfn5GHUiKYvd0KaWPyE1BMdjlHaEjtBf?=
-	=?us-ascii?Q?qjNWlPR74gHe+MKOncJz8RyiTfauo87hrLIfG6CecWkcDU9Z7TeqYauSQANX?=
-	=?us-ascii?Q?5577nPgsvLkpkhCz+9M2nNYZzEpHkMxMu6qlL9MEEFaIummWgiwGqC1YnmBC?=
-	=?us-ascii?Q?u6hKHmdBQMphAIvwFL4g3k6rL1mY0WZPva+5SXFI/4SLA1frqyETsSNC+IeS?=
-	=?us-ascii?Q?WvYPOuAtgl7BRmXcnMc2vRuFnmG/EqMAet0TIj1V76yVdJQhN8rxt5sCc3ya?=
-	=?us-ascii?Q?ZDMy7WUll71vzRbr/6jmZ4u4NyaCxbXT4CssQkjVBO6kj+Uf2yhH3RGvkwmV?=
-	=?us-ascii?Q?f44MJCD5DJI86e8AnvDpN6EOkd1dA+2OYQPV1cB3LnqBROQqNCdgo+DVHQYr?=
-	=?us-ascii?Q?eoYdo1HNmsuOUuGbg+5GeBamxtbe1oFt8D1z4vUKadc+AovKwd2RiIjss0J4?=
-	=?us-ascii?Q?4NXJsuUGUTypv327/geX8mGpybWXoBuQ/GHQUkT3TXLiDvtAJCxa6AvvSFlL?=
-	=?us-ascii?Q?Jvt0TwSSgACkys7QKvmPhiNYUNv3I2opU6oCFmO4rDXF1mzULBMKtUtAvZRU?=
-	=?us-ascii?Q?OJBdvAby5GFwWE58ALpsn9rWA6V2Y3/aope17bUwxexbQPYBz7Zj/Vn1em/K?=
-	=?us-ascii?Q?qC+CjoIvnw3x0C4RB0kNb6deJ7nRPRj3Rm9NqFZe8T7iSWBHInEl7DVPvAVi?=
-	=?us-ascii?Q?YzDig0BEkSxBHSzHbNfH2jmqMvuB3bCVIhzCHYzurEMtq5YgmdNI6Yh3vQEA?=
-	=?us-ascii?Q?kfI2W9kMTQhVuy6v9pCkqfUIxzjI7c13njJtaW/FsbgoHjZftdRa0zzvZn7i?=
-	=?us-ascii?Q?a03y0K03BeUs/LXwPq5Z61qJxWmG3PC8h6/oVjyehFIiQ93VQffhd2GLqFOX?=
-	=?us-ascii?Q?2YAs1Lvbi1MMkVIhCLNVm7hEhQzQIFHdQhBLLNo+a25RLIPYwvYef2xOqQXt?=
-	=?us-ascii?Q?OMkePLxOancA6hgx4sZi8tvunixSB945OI9xoRvvtJI2Wt1EpqXf21p1NZ5a?=
-	=?us-ascii?Q?Wa4vHVCTVPNpXxleHeQc617Xmg3sDvGt6ck0HZ0DKmbTiTjv4np3s8x6Czav?=
-	=?us-ascii?Q?lLfS/4=3D?=
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: JVjigzxFS+Tz7f0A+gpFmIi1nBggUng1icoBbWBBhS/yUNlmaXfbBuBv17wBlXcAWErTTXb0OKcHSCYfq/mqsyiGieRvzDAUeAXAjCAjOqn6YRTcZS5aUHg5zHDEVCSgRU34zpoFXhtBYT6iSOjs5/YuuO1u8+pgYZ4lc/yV7KlVfBd3Fbw/7kmAEzFkTePMILLAZIEer1uU+/ZDZJwN5QXtaM7p5H3zLcL1M8gkXlBDaH0YR+s/tRY3LpsqWQdHhQKEFernOoM9gMNuS+XQ0G7en/ikQ3FUL6zo5w73tv2f/PNN2JieqpBubGvcSNPuvS0SnkVCfkg1q6EJSf53EmS+6ygkuzBOjT1AspiE5aUAqbd3W5h86ZzJaPKYO8dGMyategQ9n5qrxAcEzJdL29mw2Xn8coiTF3mCFNxrwSo=
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR02MB2644;
-	6:z9ygrshUmIfkwSEKqi1fEyIAvwH7Z6SldJ8cGGCgW0+tNFcbFm5LrUp09Aw357WkNS3JiEkWEw6dkZiECKOPHHjL5nvaV92Ni02fiLNVdzQAFPcLwaIrur6fVmI+CfA67JBc5GH2WD5VvaSGDycXwRGQXD7w9WzmnBneLm0iY7ZNaMTeWxWPnm7h4t8T37FY411kex1yFTSBS0ilDALdAaODoqcdctkhXD6LhgO4Qgy3kG8rR30p8iQVO/Og6WOf5yiJq8iZA2ySBZLqYjhSEHej4yd49V7gduTWBoMMNW1M0SSw04HkXXmyTBf0Jl0LKsidboFbWOE4yhYyYTdquNyc3xa4j5lX2TjXvCNsSUuvCWNMGZQD9tbaQ7K6ieZAyNGkImI7muFevjhhjzOiiYr+yN04wQTRh/cJnq1wn/3wTff3AyNqGOgAY/sjtmK3mkW9KGq8Gj/JuJiTEIRhiQ==;
-	5:YF2dEMIh0fw3nga9C+7LRcHlZjUQVXdKYfU+zGiKCa35XnZFNtZ92IfRDbd22KEiwLS8oaJe4FAEB9RK1i3iA+I/O1iLaOXo0AsmzJVmUPb5Q11UYPwmRFNj4wkjB9OyZ6sOOWH2stdirR/51to+LAAjk+psRn9OEUAQngtuQQoarHufpnx3sdvvgd0393yY0Rt43IVAOfAH1kxIAfTVGA==;
-	7:o52T7jhUeR1iPzXWy+O0gKj10fTt219gJayBxQCYPnxrwmo+WG4jgVO0v7vc7BtPVB3HLumh0Pl61dFqnKUPykecHFarCFkLGU8IVk9MqtRERNPf6UxriUK1JnN30XGeGtdzDjhBeoTY5ZoU6ivNxQ==
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2019 19:37:37.1045 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f826c2e4-4657-4a1a-932f-08d68c6a8c91
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
-	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR02MB2644
-Cc: Bhargava Sreekantappa Gayathri <bhargava.sreekantappa-gayathri@xilinx.com>
-Subject: [meta-oe][master][PATCH] ace-cloud-editor_git.bb: Add recipe for ace cloud editor
+References: <20190205155325.7493-1-bkylerussell@gmail.com>
+	<90ad3a48bf6811135ebf4893757d3254c95b44e0.camel@andred.net>
+In-Reply-To: <90ad3a48bf6811135ebf4893757d3254c95b44e0.camel@andred.net>
+From: Kyle Russell <bkylerussell@gmail.com>
+Date: Wed, 6 Feb 2019 21:42:02 -0500
+Message-ID: <CAFrQVPNb2U3GUaSbhuOzCdHofpdxL+kA+iGUq3bWMGVQx5kFDw@mail.gmail.com>
+To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 0/2] RFC: Support building Java recipes with openjdk-8-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -134,50 +55,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 01:10:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Feb 2019 02:42:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yocto recipe for Ace-code-editor an open source embeddable code editor written
-in JavaScript. It can be easily embedded in any webpage and JavaScript
-application.
+It seems like a question of how many JDK versions meta-java plans on
+providing, and for how long.  To me the number of different per-version
+providers feels like a maintenance point that could quickly get out of
+hand.  I guess my assumption has been that all of the embedded Java code
+for the distribution would compile with the same JDK (either the latest JDK
+provided by meta-java, or perhaps one behind the latest version; similar to
+how oe-core handles gcc upgrades, for example), and that compile would pass
+in the appropriate -target or -bootclasspath parameters for the preferred
+JVM.
 
-Signed-off-by: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
-Signed-off-by: Bhargava Sreekantappa Gayathri <bhargava.sreekantappa-gayathri@xilinx.com>
-Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
----
- .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+I hope I understand what you're saying, because I'd like to work together
+toward a solution.
 
-diff --git a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb b/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
-new file mode 100644
-index 0000000..4ea6c8a
---- /dev/null
-+++ b/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Ace is a code editor written in JavaScript."
-+SUMMARY = "Ace is a code editor written in JavaScript. This repository has only generated files"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=794d11c5219c59c9efa2487c2b4066b2"
-+
-+SRC_URI = "git://github.com/ajaxorg/ace-builds.git;protocol=https"
-+
-+PV = "02.07.17+git${SRCPV}"
-+SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
-+
-+FILES_${PN} = "${datadir}/ace-builds"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS += "rsync-native"
-+
-+do_install () {
-+    install -d ${D}/${datadir}/ace-builds/src-noconflict
-+    rsync -r --exclude=".*" ${S}/src-noconflict/* ${D}/${datadir}/ace-builds/src-noconflict
-+}
-+
--- 
-2.7.4
+Does your distribution require specifying different providers per runtime
+version?
 
+On Wed, Feb 6, 2019 at 8:38 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
+
+> Hi,
+>
+> First, I agree the current state isn't great at all.
+>
+> It does appear to me though that Java world seems to be a bit different, =
+in
+> that even today there are big Java projects out there that still only
+> compile using Java 8, which others do compile fine using more recent
+> versions.
+>
+> With your suggested approach it becomes impossible to properly support
+> that,
+> you still have to pick the lowest denominator globally.
+>
+> Other distributions, Debian based ones in particular are taking a differe=
+nt
+> approach:
+> Each Java compiler/runtime provides virtual properties, and recipes can
+> depend on the required version easily, something like e.g.
+> virtual/java8-sdk virtual/java9-sdk virtual/java10-sdk etc.
+>
+> I'had posted a patch series trying to mimic that before, but not really h=
+ad
+> time to work on that any more:
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+41.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+42.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+43.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+44.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+45.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+46.html
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/1956=
+47.html
+>
+> What do you think?
+>
+> Cheers,
+> Andre'
+>
+> On Tue, 2019-02-05 at 10:53 -0500, Kyle Russell wrote:
+> > This series spun out of a request on the mailing list last October on
+> > configuring meta-java for using openjdk-8-native to compile other Java
+> > recipes that might require modern API features not provided by the
+> > bootstrap VM classes.
+> >
+> >
+> http://lists.openembedded.org/pipermail/openembedded-devel/2018-October/1=
+97186.html
+> > [oe] meta-java configuration
+> >
+> > I've been running with this series on sumo, but I wanted to send it out
+> > to get other thoughts on the approach.
+> >
+> > It seems like there's already precedent for this format with perlnative
+> > and pythonnative.  That was more or less how I expected java-native to
+> > behave initially until I understood more about the bootstrap process.
+> >
+> > If I've missed a valid use case of java-native and this change would
+> > cause breakage to someone else's layer, I'd be fine with introducing
+> > javanative.bbclass as a new class that provides the same functionality
+> > as the following patch to java-native.bbclass.  (Its name would be more
+> > closely aligned to perlnative and pythonnative without the dash.)
+> > However, it appeared that java-native was essentially unused, and I
+> > thought having both a java-native and javanative class would be
+> > confusing.
+> >
+> > Kyle Russell (2):
+> >   Add support for building Java recipes using java-native
+> >   ant-native: only use classpath tools if no JDK
+> >
+> >  README                                          |  7 +++++++
+> >  classes/java-native.bbclass                     | 17 ++++++++++-------
+> >  .../ant-contrib/ant-contrib-native_1.0b3.bb     |  2 +-
+> >  recipes-core/ant/ant-native_1.8.1.bb            |  4 ++--
+> >  recipes-core/ant/files/ant                      |  9 +++++++++
+> >  recipes-core/openjdk/openjdk-8-native.inc       |  2 ++
+> >  6 files changed, 31 insertions(+), 10 deletions(-)
+> >
+> > --
+> > 2.20.1
+> >
+>
+>
 
