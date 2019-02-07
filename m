@@ -1,55 +1,49 @@
-Return-Path: <fabio.berton@ossystems.com.br>
+Return-Path: <raj.khem@gmail.com>
 Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
 	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D5E3E7C4C0
+	by mail.openembedded.org (Postfix) with ESMTP id 14FBB7C4BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Feb 2019 17:37:07 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id 2so802010qtb.5
+	Thu,  7 Feb 2019 17:59:39 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id y4so845023qtc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Feb 2019 09:37:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:organization:content-transfer-encoding;
-	bh=LbjwvYU2OoxbhckCrzyz2qMNAHCujY7vYpAr8Nm1aqU=;
-	b=nMmDVCdV+SAW9YFOcVu5imlBXF2NJCRdf2iz9mk+VcMv70/uNtISKC1FYTpMYkOKF9
-	fr6qsJ63ODYd0g/236LXns7QZ4VuB1JsSUvwFGXz22he2DAMdqwN8H14dQg7Wbt4J0r9
-	k8uAX9yACYDsNU1ZGT0MhMXfRqXS6iX4WsI1eBGpwCpXEig6K+amIn9PKRj/2bO2n0Xa
-	nLIOtVLSBbfvZ6/fsniXotnQASQpnqCvOquNaHjmACI/t9jZmH/nJ30mrETsnG+ViE8/
-	kC8VK/cF55RqMO3WgubGP7IXV2JnPyK1TBH59sPFTOp690BaEv86WBk25SaYOh8JNk6O
-	eRvQ==
+	Thu, 07 Feb 2019 09:59:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XLvthqhdBL5J+8kqmrocHumze1bls7+HyJltJW/Ad68=;
+	b=JfGA+y8rQKr0o6I9t3bL2Xdg48l6sqVQfV5XEpkWdn1WC1z/Dlz6HIj3ffTHU5pKZa
+	ZpNhilUrbRHSA5uUN7GrI4022vh7QwWF41y6x+5+9wOa2GznwYMss/0JgnUfu0Jc+Ur0
+	wyhJhD3iEg9C643ni8LTtZoHM3X5mk1IAcf68tKPAjuCKI+dsT4RnWz7+FKN+GC5A+oV
+	zhJGQylJdcGw0onFisMkdCWm1tsJKiLdGmel/WIuDFYG+nHdTWK9S0KgKX3IR7xLK6VK
+	1efLgY05YI6aqFU2etOHfSgY+ro6QGaVcPIGN6j3ZxD0BLC0Lr4vCBTtRJ0eO5O/9yYn
+	Kiqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:organization:content-transfer-encoding;
-	bh=LbjwvYU2OoxbhckCrzyz2qMNAHCujY7vYpAr8Nm1aqU=;
-	b=txXSc3Y4VryK+qO+/TB5uf+Rknb5HlFHg7qpCmoi5aiEQ+/l/iqo944LJKhrnBvhZw
-	SnR9842nQdBYUqSSHMylWfTMDdQzy/qQhyKrNgne7iiEH1bCTVdvdM8wJjLt3jlAOwIJ
-	3ZQep19WJBIEzskECXgh5qzczivWQf5B3sR4/cmAje5bvacOZzu4hlWO6eQ39P1O3oMc
-	l1JhBp5XXvRhEOa8q/mh5jmSJEA5b7nWh8uAMUVk3/FUIxcrcWwCXJROUu5wgzi6taHX
-	R132YM71zN/8n9QRZlI9c7WNS6PsT72RKn0KarpSLbl6VzGBX5iEyuXK8VDSFnX29i9r
-	7HgA==
-X-Gm-Message-State: AHQUAubpsb9AiHhKXAnHILc8cay8Zv1IztRtAFhxCRNEmsHw89pa+Thl
-	J4+BmQyErdmDHQqG2x3/gT/FE0+lrvTdBw==
-X-Google-Smtp-Source: AHgI3IbrIMFpzPdt/s0pw/kyJhEiNE76nwPguPQdSdeqJbgZo4IFQfJ0mr4XVbrywq1JnpYyW/BBrA==
-X-Received: by 2002:a0c:e84f:: with SMTP id l15mr12692011qvo.124.1549561028665;
-	Thu, 07 Feb 2019 09:37:08 -0800 (PST)
-Received: from centrium.lab.ossystems ([181.220.86.121])
-	by smtp.gmail.com with ESMTPSA id
-	n9sm10983987qtn.59.2019.02.07.09.37.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Feb 2019 09:37:07 -0800 (PST)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Feb 2019 15:36:43 -0200
-Message-Id: <20190207173643.20893-4-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190207173643.20893-1-fabio.berton@ossystems.com.br>
-References: <20190207173643.20893-1-fabio.berton@ossystems.com.br>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XLvthqhdBL5J+8kqmrocHumze1bls7+HyJltJW/Ad68=;
+	b=foMy2/E7okQyxroIBs5IB2VuxPG9GwI4wGlhvtHSa2nIohbmmYQDsJoLv6LqNJvuwL
+	y4gfTYOiBgyFnRVQexS04D2X3ZpgXe8uY6168OU8LgfnkVv5V1nVEFuGPRe0HXQ1EjII
+	UoHo+uROS7LyS0Xu3fpeMs+NAzv1YEXNZOpaF5TotKQaj5R56VZbBJvXaaKB9N+M7UQK
+	98CylaaCYOZ6dpxOOejsL8AFESbDO/r/yYhchs3Bz+kMDDO4v+mpTtYJFDfJwCAiRbvN
+	ShfiUW8uKV3jRuZQ7dNvrmP/WzYSi8qoNqKU6NELFdiED3JgDbX/1p6w1s4fKKlSp4Hr
+	0Z8w==
+X-Gm-Message-State: AHQUAuZhHqLtgUd2eNKSR3rTR0CpGzbdfHjsvXi9L0smoUBZ8iFbl77v
+	TRE0EQJX4i1TUBqdsLv3k/hLacJeeJqU8JcWYe0=
+X-Google-Smtp-Source: AHgI3IZXansjd2SY+FqJwXe35qvaRylTNDwwfs4arayzAW+xEFwhEbI+JHngHwvBu2OZKRK7C9F/PXpqK7cdhzzuFCM=
+X-Received: by 2002:ac8:518d:: with SMTP id c13mr12607198qtn.254.1549562380851;
+	Thu, 07 Feb 2019 09:59:40 -0800 (PST)
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-python][PATCH 4/4] python-protobuf: Add nativesdk to BBCLASSEXTEND
+References: <1549537201-4781-1-git-send-email-rbilovol@cisco.com>
+	<9c35bb5b-c262-c482-8cb8-08bd76df1c43@cisco.com>
+In-Reply-To: <9c35bb5b-c262-c482-8cb8-08bd76df1c43@cisco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 7 Feb 2019 09:59:14 -0800
+Message-ID: <CAMKF1soVDFdftCQCJmU6TvwUJibQmSCLC1kTwCNBs5QLD=qtYA@mail.gmail.com>
+To: Ruslan Bilovol <rbilovol@cisco.com>,
+	Michael Halstead <mhalstead@linuxfoundation.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	XE-Linux <xe-linux-external@cisco.com>
+Subject: Re: [meta-oe] [PATCH] rapidjson: fix cmake artifacts installation for non-default BASELIB case
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,25 +56,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 17:37:08 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Feb 2019 17:59:40 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- meta-python/recipes-devtools/python/python-protobuf.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Feb 7, 2019 at 9:31 AM Ruslan Bilovol <rbilovol@cisco.com> wrote:
+>
+> Hi Khem,
+>
+> I see you picked up this patch to master-next, but the patch's author
+> is incorrect:
+> https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=cf54629463841242ce1faa90f6ad4a2383df3b2c
+>
+> Could you please fix it?
+>
 
-diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc b/meta-python/recipes-devtools/python/python-protobuf.inc
-index b617904d2..51037915d 100644
---- a/meta-python/recipes-devtools/python/python-protobuf.inc
-+++ b/meta-python/recipes-devtools/python/python-protobuf.inc
-@@ -28,4 +28,4 @@ RDEPENDS_${PN} += " \
- "
- 
- # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.20.1
+sure
 
+
+> This is the same issue we faced with oe-core mailing list, I remember
+> Richard Purdie had some scripts to fix it automatically
+>
+
+I wonder why is this happening? May be Michael can help us understand,
+why patchwork would feed a worng author or is it
+some email client error somewhere?
+> Thanks,
+> Ruslan
+>
+> On 2/7/19 1:00 PM, Ruslan Bilovol wrote:
+> > If BASELIB is set to non-default value (like lib64),
+> > next 'installed but not shipped' issue happens:
+> >    /usr/lib
+> >    /usr/lib/cmake
+> >    /usr/lib/pkgconfig
+> >    /usr/lib/cmake/RapidJSON
+> >    /usr/lib/cmake/RapidJSON/RapidJSONConfigVersion.cmake
+> >    /usr/lib/cmake/RapidJSON/RapidJSONConfig.cmake
+> >    /usr/lib/pkgconfig/RapidJSON.pc
+> >
+> > This is because rapidjson has library installation dir set
+> > to 'lib' by default and hardcoded in another place.
+> > Fix this by next changes:
+> >   - set appropriate LIB_INSTALL_DIR
+> >   - fix hardcoded 'lib' in CMAKECONFIG_INSTALL_DIR case
+> >
+> > Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+> > ---
+> >   ...ve-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch | 36 ++++++++++++++++++++++
+> >   .../recipes-devtools/rapidjson/rapidjson_git.bb    |  5 +--
+> >   2 files changed, 39 insertions(+), 2 deletions(-)
+> >   create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+> >
+> > diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+> > new file mode 100644
+> > index 0000000..745f5d0
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch
+> > @@ -0,0 +1,36 @@
+> > +From 8d272e53a4d1dc405e08ce2dd50159c58f4451e9 Mon Sep 17 00:00:00 2001
+> > +From: Ruslan Bilovol <rbilovol@cisco.com>
+> > +Date: Thu, 24 Jan 2019 18:11:39 +0200
+> > +Subject: [PATCH] CMake: remove hardcoded CMAKECONFIG_INSTALL_DIR path
+> > +
+> > +Currently this path is hardcoded to lib/cmake.
+> > +Some distributions have different library path (like lib64).
+> > +So reuse LIB_INSTALL_DIR for that to make CMAKECONFIG_INSTALL_DIR
+> > +configurable and usable in such distros.
+> > +
+> > +Upstream-Status: Backport [https://github.com/Tencent/rapidjson/commit/8d272e53a4d1dc405e08ce2dd50159c58f4451e9]
+> > +
+> > +Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+> > +---
+> > + CMakeLists.txt | 4 ++--
+> > + 1 file changed, 2 insertions(+), 2 deletions(-)
+> > +
+> > +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> > +index 7c60407..0275672 100644
+> > +--- a/CMakeLists.txt
+> > ++++ b/CMakeLists.txt
+> > +@@ -199,9 +199,9 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}ConfigVersion.cmake.in
+> > +     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake @ONLY)
+> > +
+> > + # ... for the install tree
+> > +-SET( CMAKECONFIG_INSTALL_DIR lib/cmake/${PROJECT_NAME} )
+> > ++SET( CMAKECONFIG_INSTALL_DIR ${LIB_INSTALL_DIR}/cmake/${PROJECT_NAME} )
+> > + FILE( RELATIVE_PATH REL_INCLUDE_DIR
+> > +-    "${CMAKE_INSTALL_PREFIX}/${CMAKECONFIG_INSTALL_DIR}"
+> > ++    "${CMAKECONFIG_INSTALL_DIR}"
+> > +     "${CMAKE_INSTALL_PREFIX}/include" )
+> > +
+> > + SET( ${PROJECT_NAME}_INCLUDE_DIR "\${${PROJECT_NAME}_CMAKE_DIR}/${REL_INCLUDE_DIR}" )
+> > +--
+> > +1.9.1
+> > +
+> > diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> > index c90eab0..e3ed9c6 100644
+> > --- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> > +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> > @@ -4,7 +4,8 @@ SECTION = "libs"
+> >   LICENSE = "MIT"
+> >   LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
+> >
+> > -SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1"
+> > +SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
+> > +           file://0001-CMake-remove-hardcoded-CMAKECONFIG_INSTALL_DIR-path.patch"
+> >
+> >   SRCREV = "6a905f9311f82d306da77bd963ec5aa5da07da9c"
+> >
+> > @@ -14,7 +15,7 @@ S = "${WORKDIR}/git"
+> >
+> >   inherit cmake
+> >
+> > -EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF"
+> > +EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
+> >
+> >   # RapidJSON is a header-only C++ library, so the main package will be empty.
+> >
+> >
 
