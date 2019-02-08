@@ -1,54 +1,54 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id BB1817C3EA
+Return-Path: <alistair23@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A34C7C4F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Feb 2019 21:03:06 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id z5so1352447wmf.0
+	Fri,  8 Feb 2019 06:08:00 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id e5so1193889plb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Feb 2019 13:03:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:user-agent:mime-version:content-transfer-encoding;
-	bh=4qhiRMhPGUTylcZuNVUl/YMUpH5RkhfQxCPDr0Np74w=;
-	b=SwLGK+E00Yf2ua6+FTostLdCneOnXaQZn+olH8BcHda+bC0nnDkXr29UnjzDGpGetO
-	SLanNb5NIg1l0/qQ+PiLPy1sMUQA4ZDQH08apdAQGXLp9qQcTL+DD03GmNbSSY+TJ1nV
-	8CrkyjOQ+/76zOuZhkWkB5dOis15EFp8+BNXc=
+	Thu, 07 Feb 2019 22:08:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=jE8tXSEeAMC5s0FPVQ8e773EN8nP/taM7vCS5TAySF4=;
+	b=EddyhJi0xMQa+RGzYAoSV4Sg9BcqL4tag4SXWk7vq2QQGUDtmgCF20WzsmpjbAb1Q2
+	JWjRJw8ThkI2DhWHr+EG2BONcCbMRJ+BcMQcG+iksx+6+xEjzIxf+QgwLBj8NaOM3a4a
+	nJBdv0SAyoVPspx+opMp0sQkpGGXuvvr6cSFhTADoRj4aCXSMZOAfjdBlP8B6P/K7GEN
+	XpWuDuQrXU4iks75/hnuz7aNWbNcvo8CiCzIXYlx73+0BnIGOcZ4VOOtocJc2j1KiL3A
+	wIsujw6mwOaLTNtJmOxVG82gCF9gAEYJQWwQRB24m1kIoHWnH4NNWa6gyHObqQpNunso
+	2L0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=4qhiRMhPGUTylcZuNVUl/YMUpH5RkhfQxCPDr0Np74w=;
-	b=bv+R3lV6HLT+MgyHBcYW/QTvU2XAhXdZk6tOcVALF6ihj6A3DgR5A6QijAShlHJEzR
-	A7yfIIS1Yr9ljNcZ29Gy+VAlEzcMGDb+R72smBTW210+A8aFMDFrv7dYVd0twZCW7qXM
-	LvyG9xpPUi8u8kmAI8uOeqM5GiV+21iwTDALzg8Pilm/8PwrDGelCdlYrUtVQYD9SuHB
-	/QH1M6nf9WMbajIkVYz+YeRIp7uYPkezUD1KB4oZt6Qyj7qo30aKNQGIj+PrLx4SmhYN
-	e51HZXBXsWa+w66UpHft1mXTMCIeC6qjkQ6efZ1ECZWu46oVd26XnM/Yw1vprtKxvz7Y
-	hCuQ==
-X-Gm-Message-State: AHQUAuYig9mURprQVEckePstbF2jw8ZEOeXmYKYizu3wfR6BJaPpQEYk
-	XR6IxMecCI8D3v4SjAF7z7OnVA==
-X-Google-Smtp-Source: AHgI3IYNtr7iw3MQ7QNowrxmf9dxaSPOT1I+3qsoCNpSxS1FTxui6Sv7RIIzIitIFk19+E/wwMrKYA==
-X-Received: by 2002:a1c:2856:: with SMTP id o83mr9540443wmo.45.1549573387222; 
-	Thu, 07 Feb 2019 13:03:07 -0800 (PST)
-Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
-	by smtp.gmail.com with ESMTPSA id x3sm74704wrd.19.2019.02.07.13.03.05
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 07 Feb 2019 13:03:06 -0800 (PST)
-Message-ID: <5c5103b3390bbebc7f352ae6c82d33adea812847.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>, Ruslan Bilovol <rbilovol@cisco.com>, 
-	Michael Halstead <mhalstead@linuxfoundation.org>
-Date: Thu, 07 Feb 2019 21:03:05 +0000
-In-Reply-To: <CAMKF1soVDFdftCQCJmU6TvwUJibQmSCLC1kTwCNBs5QLD=qtYA@mail.gmail.com>
-References: <1549537201-4781-1-git-send-email-rbilovol@cisco.com>
-	<9c35bb5b-c262-c482-8cb8-08bd76df1c43@cisco.com>
-	<CAMKF1soVDFdftCQCJmU6TvwUJibQmSCLC1kTwCNBs5QLD=qtYA@mail.gmail.com>
-User-Agent: Evolution 3.30.4-1 
-Mime-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	XE-Linux <xe-linux-external@cisco.com>
-Subject: Re: [meta-oe] [PATCH] rapidjson: fix cmake artifacts installation for non-default BASELIB case
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=jE8tXSEeAMC5s0FPVQ8e773EN8nP/taM7vCS5TAySF4=;
+	b=L0DF2RSFp/cDXLtuPkF6x+0p5gBr1Q1ujhZEqI/nfH4LJ8ompckRDEChqy/JWZk7HT
+	q2gZJ/OOM/d2Z3cPGLhYZ9ZdMzNm37brzjQDiPLl75njiCCv3UxaKXkPGQNV/xD73ktW
+	uw/ri6K8BCzfa8owtnrOlZsRy+nWIZv4Euls0G6e3qua4JZDpKpKTS5djUKNmTzD3+EG
+	UYYaXDIZfJpT9az0+b+/ucbLGh8V3m5Y40n6G0lb/Z8jDLNUsFSTTDunpd2bkQtkfXEE
+	pVL1QGiDpgEJpMkLLhoev++/M/HxrJEZheoQXeb02dccKesQEL5PwX58VM7BlBJQN1tN
+	EogQ==
+X-Gm-Message-State: AHQUAuZLLIoxFSn4IKhTXJanHCd6ZqliLFYrpVllVPYMd3+Ip2QLRowS
+	CBAqUyQobJlKjB3tpcpyP+GcvuuR
+X-Google-Smtp-Source: AHgI3IZEC8OaYhKy1A0u2p9ElR/NJBKItgMyomrOgtT3FphfTad7nA7EKP+dd9/y0qu+1Zurcz9+dg==
+X-Received: by 2002:a17:902:28aa:: with SMTP id
+	f39mr20968949plb.297.1549606081277; 
+	Thu, 07 Feb 2019 22:08:01 -0800 (PST)
+Received: from alistairs-fedora-xps14z.alistair23.me
+	([2601:646:8e00:dca:3867:a4d:995f:259d])
+	by smtp.gmail.com with ESMTPSA id
+	e11sm1030562pgv.14.2019.02.07.22.07.59
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 07 Feb 2019 22:08:00 -0800 (PST)
+From: Alistair Francis <alistair23@gmail.com>
+X-Google-Original-From: Alistair Francis <alistair@alistair23.me>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Feb 2019 22:07:58 -0800
+Message-Id: <20190208060758.6171-1-alistair@alistair23.me>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Cc: Alistair Francis <alistair@alistair23.me>
+Subject: [PATCH] vncx11: Fix dev package do_rootfs failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,43 +61,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 21:03:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Feb 2019 06:08:00 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2019-02-07 at 09:59 -0800, Khem Raj wrote:
-> On Thu, Feb 7, 2019 at 9:31 AM Ruslan Bilovol <rbilovol@cisco.com>
-> wrote:
-> > I see you picked up this patch to master-next, but the patch's
-> > author
-> > is incorrect:
-> > https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=cf54629463841242ce1faa90f6ad4a2383df3b2c
-> > 
-> > Could you please fix it?
-> > 
-> 
-> sure
-> 
-> 
-> > This is the same issue we faced with oe-core mailing list, I
-> > remember
-> > Richard Purdie had some scripts to fix it automatically
-> > 
-> 
-> I wonder why is this happening? May be Michael can help us
-> understand,
-> why patchwork would feed a worng author or is it
-> some email client error somewhere?
+When building the dev package I see these errors:
+Collected errors:
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/rfbproto.h
+        But that file is already provided by package  * libvncserver-dev
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/rfb.h
+        But that file is already provided by package  * libvncserver-dev
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/rfbregion.h
+        But that file is already provided by package  * libvncserver-dev
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/rfbconfig.h
+        But that file is already provided by package  * libvncserver-dev
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/keysym.h
+        But that file is already provided by package  * libvncserver-dev
+ * check_data_file_clashes: Package x11vnc-dev wants to install file /home/alistair/oe-master/build/tmp-glibc/wor
+k/sopine_a64-oe-linux/core-image-weston/1.0-r0/rootfs/usr/include/rfb/rfbclient.h
+        But that file is already provided by package  * libvncserver-dev
 
-Its an email client problem. Roughly speaking the email was sent from
-an IP address which according to DMARC shouldn't be sending email. The
-list servers therefore rewrite it to a valid address to stop it being
-stopped as spam.
+as both libvncserver and x11vnx try to install the same files let's just
+remove them from x11vnc.
 
-Cheers,
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
+---
+ meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Richard
-
-
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+index b047bc462..774d2c9cb 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+@@ -32,3 +32,7 @@ do_prepare_sources () {
+     sed -i -e '/^# libtool.m4/q' ${S}/acinclude.m4
+ }
+ do_patch[postfuncs] += "do_prepare_sources"
++
++do_install_append() {
++    rm -rf ${D}/usr/include/rfb
++}
+-- 
+2.20.1
 
 
