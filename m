@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8455E6C538
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DBD4C7C5CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Feb 2019 02:02:16 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id y1so2341063pgk.11
+	Sat,  9 Feb 2019 18:58:05 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id c25so3030011pgb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2019 18:02:17 -0800 (PST)
+	Sat, 09 Feb 2019 10:58:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=KkaUo7KBk5patc39UvDq4HWHTWhsoOPGrl7Qv1qaULg=;
-	b=JdY3PCoe5Ot8V+l2rIavS7A0N1tSv9ZH5XSJJeOEKfTOdtkcOdk78u55ejgFFwyo3Q
-	wyMC82pCkcb3uzFTk+L3U3tpdNy1aB/QI8QDTiKgrn4Gt9+mRCivaQyKOyXaThRadeQz
-	E41cocSLNZceBrDNok/5YvjwMNdU/z1hk6FaoOEKbtllRwNbcFYTko/q9GZDtlQ0h9i+
-	mmdoGk2u2/v2MXM+3bpjTj68J2KlQULUv+kflD6ZnTFkVhzXFC9T5UxoJd4joREM1mS7
-	vttYYIVKYFWLdh6SsKLRLu0oDDXD52klqCveTXyiOa+K9ev//x/olVyOUvk1ila7zpRS
-	fNZg==
+	bh=pD1obns3jwmmk4gxCGMnvNPa91xWQSNSo0VKJ6hLzrY=;
+	b=RgadBHZnvbcovZqS2IijnsPyKkf4YkgoyJNbYhtFAF5CbHoY6cpTRhWL/dFlowNDOV
+	bUl594qzF+ARTLIGxf7Ig5YJHqNPMRE6iKcKc7CSLWJt4KVqEcoOMDLNkN3UbujkmbRw
+	Ujly/l6XjtDyk7MAVJZ1wwzv28UzzZVEO7epoTxMF+GD90kVBsuaowuDFYVCFdI4d6HV
+	GZGS2e1N1z9WB4RZDytcnmMQN83v33mUROC4DDiypYfvRs3jeOTU+p8WK56mP+9iMrkZ
+	34pxeuGt+MWlSTqSsA1bF0cg6H90OiZVvymH3GRQ/VTmWapOieIIyTl+utp9oMwNEWC0
+	3PgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=KkaUo7KBk5patc39UvDq4HWHTWhsoOPGrl7Qv1qaULg=;
-	b=nY7skt1VTsxGd/tz4LJTUHUKzZSM5t8Jzj2fA+dabfgQ9IeLZjZxn/uvMZ4JZeOYAn
-	fYIWTrf7jxQkTVKPBC+3eYh9HJNJB1dnjyM8RFHk66RMfael8f6Qsuy0GdG+NXalb4aA
-	CKvMw+imAKdHHHXW/svZ76uClAPIrImQZd9KIbY4fF2aDRRKd5X5z/UsEz91obBKb5i4
-	XZyOorH3HCQZKac6vTyrppvyTWQPwBWKwpODZZpE58BBV5dvGJP5547wrfjsPxZ+zWtU
-	sLlRhxyCpvjJb/hkHAC7/3MIT2KtmaMWokAk2w/ZxvhizA8FAmS8Hu4wsIV70wY4hfXU
-	oTtg==
-X-Gm-Message-State: AHQUAuaG7eA8NH8Ar+GP5HgvsG3J7LNRzLlR/GcVMoOXQKdT3kSzNZaf
-	Y3YT2vPslwpEIwSB+weiHQhhBqrR
-X-Google-Smtp-Source: AHgI3IauO8/f5nm7fQocsBZ4Paoku2R3Yiuqvo25La5ZRT0Z/tqXjRwIX0r2k63qN/q9DHdu0esHpA==
-X-Received: by 2002:a62:178f:: with SMTP id 137mr25145767pfx.226.1549677736805;
-	Fri, 08 Feb 2019 18:02:16 -0800 (PST)
+	bh=pD1obns3jwmmk4gxCGMnvNPa91xWQSNSo0VKJ6hLzrY=;
+	b=FYcSaMhnQDSnWExcvoaam7+hMbnKcj5EAok3Raaaz6NfcTeKbcc6O/biWd2IkJkH9N
+	F4zcvwa+llUYg9hbiBxh2jFzy1ms4fsRw7MflTZzAtMkOx/e6/fCE02Q/1TxbbxnV1iI
+	TXtpu/k/ZjaLQKGzmUq8XiwxCpjXa1I2NFFkonXMqnj5U/nR9Jyjgw//nUIlv4WySaWZ
+	zNwByVj794+ym5LxID79INKZ6y4uwokPMePNI2dcC2ZQH2uWRHUtY4/GzeHub+VMH8D6
+	oqKJLn9JjjL3djuSsRmG9uO7nOTD+KafUDWh4/5y9NT5NmZUBdRPxZXf9Dda1e2S4u3p
+	+/sQ==
+X-Gm-Message-State: AHQUAuYV+lAEFoWbohSY8kDLYK+d+E8a5lXUWPQEKerLU55+MU1uxyOW
+	24y4E2u+cJs7t/+crmQG/guh425o
+X-Google-Smtp-Source: AHgI3IYbco/Kr4u9YsYpbCS75AYjlvycVL8LEAPw1dtFiTGvaIGUuSbpRzdIrTGwdOlCUwp9mufWrA==
+X-Received: by 2002:a63:2744:: with SMTP id n65mr26425585pgn.65.1549738686447; 
+	Sat, 09 Feb 2019 10:58:06 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::dc44])
 	by smtp.gmail.com with ESMTPSA id
-	g26sm4221184pfh.61.2019.02.08.18.02.15
+	f14sm6165839pgv.23.2019.02.09.10.58.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Feb 2019 18:02:16 -0800 (PST)
+	Sat, 09 Feb 2019 10:58:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Feb 2019 18:02:06 -0800
-Message-Id: <20190209020206.11491-1-raj.khem@gmail.com>
+Date: Sat,  9 Feb 2019 10:57:58 -0800
+Message-Id: <20190209185758.19856-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH V2] libupnp: Upgrade to 1.8.4
+Subject: [PATCH V2] image_types.bbclass: Set 70% RAM memory usage limit and -T for xz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +57,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2019 02:02:16 -0000
+X-List-Received-Date: Sat, 09 Feb 2019 18:58:06 -0000
 Content-Transfer-Encoding: 8bit
 
-License-Update: Renamed and deleted empty line
+when building with opkg backend and huge packages e.g. chromium/llvm all
+going in parallel, memory pressure causes xz to catapult with
 
-License file is now called COPYING
-https://github.com/mrjimenez/pupnp/commit/d3a04002e5e5220f88b43d979505bb3156532e83#diff-7116ef0705885343c9e1b2171a06be0e
+do_package_write_ipk: Failed to create package, opkg-build failed with: xz: (stdin): Cannot allocate memory
 
-This is 3 Clause BSD license so make it accurate
+since there are many tasks going on in parallel, xz adds to memory pressure
+and it wants it all, put an upper limit for memory xz can use
+
+We add a variable XZ_MAXRAM with 30% of RAM limit and can be customized
+if builders have more memory one can set it like
+
+XZ_DEFAULTS = "-M 0 -T 0"
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Fix license checksums
+V2: Consider all locations of xz use
 
- .../recipes-connectivity/libupnp/libupnp_git.bb       | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ meta/classes/image_types.bbclass       | 9 ++++-----
+ meta/classes/package_ipk.bbclass       | 2 +-
+ meta/classes/populate_sdk_base.bbclass | 2 +-
+ meta/conf/bitbake.conf                 | 3 +++
+ 4 files changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-index 7a524f2d50..50d19de675 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb
-@@ -5,16 +5,17 @@ protocols along with a UPnP-specific eXtensible Markup Language (XML) parser \
- supporting the Document Object Model (DOM) Level 2 API and an optional, \
- integrated mini web server for serving UPnP related documents."
- HOMEPAGE = "http://pupnp.sourceforge.net/"
--LICENSE = "BSD"
-+LICENSE = "BSD-3-Clause"
+diff --git a/meta/classes/image_types.bbclass b/meta/classes/image_types.bbclass
+index 70bd315306..b12420310f 100644
+--- a/meta/classes/image_types.bbclass
++++ b/meta/classes/image_types.bbclass
+@@ -56,7 +56,6 @@ def imagetypes_getdepends(d):
  
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+ XZ_COMPRESSION_LEVEL ?= "-3"
+ XZ_INTEGRITY_CHECK ?= "crc32"
+-XZ_THREADS ?= "-T 0"
  
--PV = "1.8.2+git${SRCPV}"
--SRCREV = "56d6042abae861e8838a4e6b6b5b575b99e38f34"
-+PV = "1.8.4+git${SRCPV}"
-+# release-1.8.4
-+SRCREV = "d5a01fc9895daae98a0c5a8c7d3afce46add529d"
- SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https"
+ ZIP_COMPRESSION_LEVEL ?= "-9"
  
- S="${WORKDIR}/git"
+@@ -152,12 +151,12 @@ UBI_VOLNAME ?= "${MACHINE}-rootfs"
+ multiubi_mkfs() {
+ 	local mkubifs_args="$1"
+ 	local ubinize_args="$2"
+-    
++
+         # Added prompt error message for ubi and ubifs image creation.
+         if [ -z "$mkubifs_args" ] || [ -z "$ubinize_args" ]; then
+             bbfatal "MKUBIFS_ARGS and UBINIZE_ARGS have to be set, see http://www.linux-mtd.infradead.org/faq/ubifs.html for details"
+         fi
+-    
++
+ 	if [ -z "$3" ]; then
+ 		local vname=""
+ 	else
+@@ -284,7 +283,7 @@ CONVERSIONTYPES = "gz bz2 lzma xz lz4 lzo zip sum md5sum sha1sum sha224sum sha25
+ CONVERSION_CMD_lzma = "lzma -k -f -7 ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+ CONVERSION_CMD_gz = "pigz -f -9 -n -c ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} > ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.gz"
+ CONVERSION_CMD_bz2 = "pbzip2 -f -k ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+-CONVERSION_CMD_xz = "xz -f -k -c ${XZ_COMPRESSION_LEVEL} ${XZ_THREADS} --check=${XZ_INTEGRITY_CHECK} ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} > ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.xz"
++CONVERSION_CMD_xz = "xz -f -k -c ${XZ_COMPRESSION_LEVEL} ${XZ_DEFAULTS} --check=${XZ_INTEGRITY_CHECK} ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} > ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.xz"
+ CONVERSION_CMD_lz4 = "lz4 -9 -z -l ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.lz4"
+ CONVERSION_CMD_lzo = "lzop -9 ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+ CONVERSION_CMD_zip = "zip ${ZIP_COMPRESSION_LEVEL} ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.zip ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+@@ -317,7 +316,7 @@ CONVERSION_DEPENDS_qcow2 = "qemu-native"
+ RUNNABLE_IMAGE_TYPES ?= "ext2 ext3 ext4"
+ RUNNABLE_MACHINE_PATTERNS ?= "qemu"
  
- inherit autotools
+-DEPLOYABLE_IMAGE_TYPES ?= "hddimg iso" 
++DEPLOYABLE_IMAGE_TYPES ?= "hddimg iso"
  
--EXTRA_OECONF += "--enable-reuseaddr"
-\ No newline at end of file
-+EXTRA_OECONF += "--enable-reuseaddr"
+ # The IMAGE_TYPES_MASKED variable will be used to mask out from the IMAGE_FSTYPES,
+ # images that will not be built at do_rootfs time: vmdk, vdi, qcow2, hdddirect, hddimg, iso, etc.
+diff --git a/meta/classes/package_ipk.bbclass b/meta/classes/package_ipk.bbclass
+index 508b7dcaff..d1b317b42b 100644
+--- a/meta/classes/package_ipk.bbclass
++++ b/meta/classes/package_ipk.bbclass
+@@ -8,7 +8,7 @@ IPKGCONF_SDK =  "${WORKDIR}/opkg-sdk.conf"
+ PKGWRITEDIRIPK = "${WORKDIR}/deploy-ipks"
+ 
+ # Program to be used to build opkg packages
+-OPKGBUILDCMD ??= 'opkg-build -Z xz -a "--threads 0"'
++OPKGBUILDCMD ??= 'opkg-build -Z xz -a "${XZ_DEFAULTS}"'
+ 
+ OPKG_ARGS += "--force_postinstall --prefer-arch-to-version"
+ OPKG_ARGS += "${@['', '--no-install-recommends'][d.getVar("NO_RECOMMENDATIONS") == "1"]}"
+diff --git a/meta/classes/populate_sdk_base.bbclass b/meta/classes/populate_sdk_base.bbclass
+index 80fa443e4c..ebc30d39b3 100644
+--- a/meta/classes/populate_sdk_base.bbclass
++++ b/meta/classes/populate_sdk_base.bbclass
+@@ -226,7 +226,7 @@ fakeroot tar_sdk() {
+ 	# Package it up
+ 	mkdir -p ${SDKDEPLOYDIR}
+ 	cd ${SDK_OUTPUT}/${SDKPATH}
+-	tar ${SDKTAROPTS} -cf - . | xz -T 0 > ${SDKDEPLOYDIR}/${TOOLCHAIN_OUTPUTNAME}.tar.xz
++	tar ${SDKTAROPTS} -cf - . | xz ${XZ_DEFAULTS} > ${SDKDEPLOYDIR}/${TOOLCHAIN_OUTPUTNAME}.tar.xz
+ }
+ 
+ TOOLCHAIN_SHAR_EXT_TMPL ?= "${COREBASE}/meta/files/toolchain-shar-extract.sh"
+diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
+index 9452d5ac4f..3f5d84d348 100644
+--- a/meta/conf/bitbake.conf
++++ b/meta/conf/bitbake.conf
+@@ -791,6 +791,9 @@ BB_NUMBER_THREADS ?= "${@oe.utils.cpu_count()}"
+ # Default to setting automatically based on cpu count
+ PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
+ 
++# Default parallelism and resource usage for xz
++XZ_DEFAULTS ?= "--memlimit=30% --threads=${BB_NUMBER_THREADS}"
++
+ ##################################################################
+ # Magic Cookie for SANITY CHECK
+ ##################################################################
 -- 
 2.20.1
 
