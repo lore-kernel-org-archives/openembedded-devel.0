@@ -1,55 +1,42 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 43A796C56B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Feb 2019 23:55:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id BAC7F181DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:56:00 +0100 (CET)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Z_vN1bXKBiyF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:59 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 1F202181C4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:59 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id F1AAB1A060
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:58 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E64641A05C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:58 +0100 (CET)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:58 +0100 (CET)
-Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by thoth.se.axis.com (Postfix) with ESMTP id DA9272C1C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:58 +0100 (CET)
-Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x1ANtvZD002116
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 00:55:57 +0100
-Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x1ANtvYM002115
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2019 00:55:57 +0100
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Feb 2019 00:55:55 +0100
-Message-Id: <20190210235555.2070-1-pkj@axis.com>
-X-Mailer: git-send-email 2.12.0
-X-TM-AS-GCONF: 00
-Subject: [PATCH] atop: Update to 2.4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 9746A79CB2
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Feb 2019 15:28:58 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id r9so12569233qtt.3
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Feb 2019 07:29:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=mGSJob1zwg/FX0HCiftBpRplIbZ66NOJOGMqy+DVuq4=;
+	b=HrFHW1qp0t/EhQ8/t9DBM7eNUQla1xj0VL/e+2cghYHJW1xmT9UGzzIdUbEvTp4u6F
+	mvZZLPMybB0JSVuEGWLy8yslCgDR3zJKyWMK0ymmii1vamlBE6ijJecqfzo/WlYzxvvN
+	0YEkbT3KrdWV+AZPOY5ke8+uJC50zUl2yyDF7hfUT9V+5gMxJtHhC322lTyXw5DOzy23
+	aNonH6LFAqor4YLHWi211747wobdxgNL5VO4u1z19DwS5uDJexf+WwwspCXHIgaaXOPp
+	/xonP9p1whhRLBgRgjSPH7UV8SYTwnT+XIf+2yuMm6P1oqWM1zJlbEoz6h/W1dS4qfIP
+	ij2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=mGSJob1zwg/FX0HCiftBpRplIbZ66NOJOGMqy+DVuq4=;
+	b=p/0xO6DQ1IG/2y6smPUHTYkNi+Xc05mtPjlj/JIArYbAGRvWIeqeDSxY+61R5W+RG/
+	nxlEDG0ZoK+7T/DKRfu6mFmuiaiQOhEcrdouGFV1jkb9xcKitFDgVOW+AGIbPaP/yjYJ
+	uOXuZcfYopViEZmnSfO0qt2YIIaIVTq8Iee2zrFzU2IdujraI9NKOVd0xiHNyQcMLK0g
+	WRGhuDe44weuM6RIEF7l6mrU7iF/6nMaUX6Np7J89lajk0yT81Wslvt9qnk4nutv4ET4
+	xe39hu4Bp+Bp9eOa04Oe+SpxvdcZeTfUlxH2cxioWa9RcW7PdSWSlEjuVQoG12/2jzjv
+	AyDw==
+X-Gm-Message-State: AHQUAuaGpNkGOvksXYKRVo6Zug2fDwSy67qOYlKQrZ65qpw3zrXP4wnG
+	PXtCTPLIsCdVFO0DgU6IKdwmmG7TiUQvCH8LzlpA6ade
+X-Google-Smtp-Source: AHgI3IaTc2Oa18zi6ip1uz1t0J2jIAfD2fEnRy1+Ofvn2/QTsELvhtgpzVM7epB6Ahm2vDKwKCIiuMOU85E9prM/j98=
+X-Received: by 2002:a0c:94cf:: with SMTP id k15mr7205195qvk.55.1549898938032; 
+	Mon, 11 Feb 2019 07:28:58 -0800 (PST)
+MIME-Version: 1.0
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Feb 2019 07:28:32 -0800
+Message-ID: <CAMKF1sqokSYX8YnFvx2rOrpbFZM5VZYeS3aQYsVULEuJjTSA2w@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of the world, 2019-02-10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,222 +49,497 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2019 23:56:00 -0000
+X-List-Received-Date: Mon, 11 Feb 2019 15:28:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* Remove 0001-add-sys-sysmacros.h-for-major-minor-macros.patch as it
-  is no longer needed.
-* Update the remaining patches to avoid fuzz.
+== Failed tasks 2019-02-10 ==
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- ...dd-sys-sysmacros.h-for-major-minor-macros.patch | 26 -------------------
- .../atop/atop/fix-permissions.patch                | 29 ++++++++++++++--------
- .../atop/atop/remove-bashisms.patch                | 20 ++++++++++-----
- .../atop/atop/sysvinit-implement-status.patch      | 11 ++++++--
- .../atop/{atop_2.3.0.bb => atop_2.4.0.bb}          |  7 +++---
- 5 files changed, 44 insertions(+), 49 deletions(-)
- delete mode 100644 meta-oe/recipes-support/atop/atop/0001-add-sys-sysmacros.h-for-major-minor-macros.patch
- rename meta-oe/recipes-support/atop/{atop_2.3.0.bb => atop_2.4.0.bb} (89%)
+INFO: jenkins-job.sh-1.8.45 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190211_072305.log
 
-diff --git a/meta-oe/recipes-support/atop/atop/0001-add-sys-sysmacros.h-for-major-minor-macros.patch b/meta-oe/recipes-support/atop/atop/0001-add-sys-sysmacros.h-for-major-minor-macros.patch
-deleted file mode 100644
-index 564606197..000000000
---- a/meta-oe/recipes-support/atop/atop/0001-add-sys-sysmacros.h-for-major-minor-macros.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 13f3771655f859d5e0332dd65b9c43f572f6359d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 11 Aug 2018 16:02:06 -0700
--Subject: [PATCH] add sys/sysmacros.h for major/minor macros
--
--photosyst.c:1465:19: error: called object 'major' is not a function or function pointer
--     dmp->major  = major(statbuf.st_rdev);
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- photosyst.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/photosyst.c b/photosyst.c
--index 38828ec..caed352 100644
----- a/photosyst.c
--+++ b/photosyst.c
--@@ -152,6 +152,7 @@
-- static const char rcsid[] = "$Id: photosyst.c,v 1.38 2010/11/19 07:40:40 gerlof Exp $";
-- 
-- #include <sys/types.h>
--+#include <sys/sysmacros.h>
-- #include <stdio.h>
-- #include <string.h>
-- #include <unistd.h>
-diff --git a/meta-oe/recipes-support/atop/atop/fix-permissions.patch b/meta-oe/recipes-support/atop/atop/fix-permissions.patch
-index ee7419993..8488b3800 100644
---- a/meta-oe/recipes-support/atop/atop/fix-permissions.patch
-+++ b/meta-oe/recipes-support/atop/atop/fix-permissions.patch
-@@ -1,15 +1,22 @@
--Update permissions of executable files that remove setuid bit and make everyone
--could read.
-+From d9498d10d0e8241749835dbc9fa229465d4fdfd7 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Wed, 6 Feb 2019 13:58:04 +0000
-+Subject: [PATCH] Fix permissions
- 
--Upstream-Status: Inappropriate [embedded specific]
-+Update permissions of executable files that remove setuid bit and make
-+everyone could read.
- 
-+Upstream-Status: Inappropriate [embedded specific]
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-+ Makefile | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
- diff --git a/Makefile b/Makefile
--index a65b9b6..21d9828 100644
-+index 3bf5929..1221ee4 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -66,7 +66,7 @@ systemdinstall:	genericinstall
-+@@ -72,7 +72,7 @@ systemdinstall:	genericinstall
-  		chmod 0644            $(DESTDIR)$(SYSDPATH)/atopacct.service
-  		cp atop.cronsystemd   $(DESTDIR)$(CRNPATH)/atop
-  		cp atop-pm.sh         $(DESTDIR)$(PMPATHD)
-@@ -18,7 +25,7 @@ index a65b9b6..21d9828 100644
-  		#
-  		# only when making on target system:
-  		#
--@@ -91,11 +91,11 @@ sysvinstall:	genericinstall
-+@@ -97,11 +97,11 @@ sysvinstall:	genericinstall
-  		#
-  		if [   -d $(DESTDIR)$(PMPATH1) ]; 			\
-  		then	cp 45atoppm $(DESTDIR)$(PMPATH1); 		\
-@@ -32,7 +39,7 @@ index a65b9b6..21d9828 100644
-  		fi
-  		#
-  		#
--@@ -139,7 +139,7 @@ genericinstall:	atop atopacctd
-+@@ -145,7 +145,7 @@ genericinstall:	atop atopacctd atopconvert
-  		#
-  		cp atop   		$(DESTDIR)$(BINPATH)/atop
-  		chown root		$(DESTDIR)$(BINPATH)/atop
-@@ -41,12 +48,12 @@ index a65b9b6..21d9828 100644
-  		ln -sf atop             $(DESTDIR)$(BINPATH)/atopsar
-  		cp atopacctd  		$(DESTDIR)$(SBINPATH)/atopacctd
-  		chown root		$(DESTDIR)$(SBINPATH)/atopacctd
--@@ -147,7 +147,7 @@ genericinstall:	atop atopacctd
-- 		cp atop   		$(DESTDIR)$(BINPATH)/atop-$(VERS)
-- 		ln -sf atop-$(VERS)     $(DESTDIR)$(BINPATH)/atopsar-$(VERS)
-+@@ -159,7 +159,7 @@ genericinstall:	atop atopacctd atopconvert
-+ 		chown root		$(DESTDIR)$(BINPATH)/atopconvert
-+ 		chmod 0711 		$(DESTDIR)$(BINPATH)/atopconvert
-  		cp atop.daily    	$(DESTDIR)$(SCRPATH)
- -		chmod 0711 	 	$(DESTDIR)$(SCRPATH)/atop.daily
- +		chmod 0755 	 	$(DESTDIR)$(SCRPATH)/atop.daily
-  		cp man/atop.1    	$(DESTDIR)$(MAN1PATH)
-  		cp man/atopsar.1 	$(DESTDIR)$(MAN1PATH)
-- 		cp man/atoprc.5  	$(DESTDIR)$(MAN5PATH)
-+ 		cp man/atopconvert.1 	$(DESTDIR)$(MAN1PATH)
-diff --git a/meta-oe/recipes-support/atop/atop/remove-bashisms.patch b/meta-oe/recipes-support/atop/atop/remove-bashisms.patch
-index f1fcbfed7..2aa3b2db4 100644
---- a/meta-oe/recipes-support/atop/atop/remove-bashisms.patch
-+++ b/meta-oe/recipes-support/atop/atop/remove-bashisms.patch
-@@ -1,7 +1,15 @@
--Upstream-Status: Inappropriate [embedded specific]
-+From 71c377a37d3505a9eaaf26b952d48cffd7411f3b Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Wed, 6 Feb 2019 13:58:04 +0000
-+Subject: [PATCH] Remove bashisms
- 
-+Upstream-Status: Inappropriate [embedded specific]
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-+ atop-pm.sh | 2 +-
-+ atop.daily | 4 ++--
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
-+
- diff --git a/atop-pm.sh b/atop-pm.sh
- index 7f41a86..3ff4ab5 100755
- --- a/atop-pm.sh
-@@ -13,18 +21,18 @@ index 7f41a86..3ff4ab5 100755
-  case "$1" in
-  	pre)	/usr/bin/systemctl stop atop
- diff --git a/atop.daily b/atop.daily
--index 24d33bd..f29bd94 100755
-+index 57a9507..ec58d7f 100755
- --- a/atop.daily
- +++ b/atop.daily
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-- CURDAY=`date +%Y%m%d`
-- LOGPATH=/var/log/atop
--@@ -16,7 +16,7 @@ then
-+ LOGOPTS="-R"				# default options
-+ LOGINTERVAL=600				# default interval in seconds
-+@@ -38,7 +38,7 @@ then
-  
-- 	while ps -p `cat $PIDFILE` > /dev/null
-+ 	while ps -p `cat "$PIDFILE"` > /dev/null
-  	do
- -		let CNT+=1
- +		CNT=$((CNT+1))
-diff --git a/meta-oe/recipes-support/atop/atop/sysvinit-implement-status.patch b/meta-oe/recipes-support/atop/atop/sysvinit-implement-status.patch
-index 5994d3e08..1145a2493 100644
---- a/meta-oe/recipes-support/atop/atop/sysvinit-implement-status.patch
-+++ b/meta-oe/recipes-support/atop/atop/sysvinit-implement-status.patch
-@@ -1,11 +1,18 @@
-+From bdd068873ed0979027c21773939bdb18046a8756 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Wed, 6 Feb 2019 13:58:04 +0000
-+Subject: [PATCH] sysvinit: Implement status
-+
- Implement the sub-command status.
- 
- Upstream-Status: Pending
--
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-+ atop.init | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
- diff --git a/atop.init b/atop.init
--index 108bdc5..9f89fad 100755
-+index e6e11dc..e7b226d 100755
- --- a/atop.init
- +++ b/atop.init
- @@ -18,6 +18,8 @@
-diff --git a/meta-oe/recipes-support/atop/atop_2.3.0.bb b/meta-oe/recipes-support/atop/atop_2.4.0.bb
-similarity index 89%
-rename from meta-oe/recipes-support/atop/atop_2.3.0.bb
-rename to meta-oe/recipes-support/atop/atop_2.4.0.bb
-index 302813c2e..89e0eba36 100644
---- a/meta-oe/recipes-support/atop/atop_2.3.0.bb
-+++ b/meta-oe/recipes-support/atop/atop_2.4.0.bb
-@@ -20,10 +20,9 @@ SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
-            file://remove-bashisms.patch \
-            file://fix-permissions.patch \
-            file://sysvinit-implement-status.patch \
--           file://0001-add-sys-sysmacros.h-for-major-minor-macros.patch \
-            "
--SRC_URI[md5sum] = "48e1dbef8c7d826e68829a8d5fc920fc"
--SRC_URI[sha256sum] = "73e4725de0bafac8c63b032e8479e2305e3962afbe977ec1abd45f9e104eb264"
-+SRC_URI[md5sum] = "1077da884ed94f2bc3c81ac3ab970436"
-+SRC_URI[sha256sum] = "be1c010a77086b7d98376fce96514afcd73c3f20a8d1fe01520899ff69a73d69"
- 
- do_compile() {
-     oe_runmake all
-@@ -49,7 +48,7 @@ do_install() {
- 
- inherit systemd
- 
--SYSTEMD_SERVICE_${PN} = "atop.service"
-+SYSTEMD_SERVICE_${PN} = "atop.service atopgpu.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
- FILES_${PN} += "${systemd_unitdir}/system-sleep"
--- 
-2.12.0
+=== common (5) ===
+    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
+    * sources/meta-rust/recipes-devtools/rust/rust_1.31.1.bb:do_compile
+    * sources/openembedded-core/meta/recipes-bsp/grub/grub_2.02.bb:do_configure
+    * sources/openembedded-core/meta/recipes-bsp/grub/grub-efi_2.02.bb:do_configure
+    * sources/openembedded-core/meta/recipes-graphics/virglrenderer/virglrenderer_git.bb:do_compile
 
+=== common-x86 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-devtools/glade/glade_3.22.1.bb:do_configure
+
+=== qemuarm (10) ===
+    * sources/meta-openembedded/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-support/espeak/espeak_1.48.04.bb:do_compile
+    * sources/openembedded-core/meta/recipes-core/glibc/glibc-locale_2.29.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/glide/glide_0.13.2.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/go/go-dep_0.5.0.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-extended/go-examples/go-helloworld_0.1.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-gnome/gobject-introspection/gobject-introspection_1.58.3.bb:do_compile
+    * sources/openembedded-core/meta/recipes-multimedia/mpeg2dec/mpeg2dec_0.5.1.bb:do_package_qa
+
+=== qemuarm64 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb:do_compile
+
+=== qemux86 (3) ===
+    * sources/meta-browser/recipes-browser/firefox/firefox_60.1.0esr.bb:do_compile
+    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
+    * sources/meta-rust/recipes-devtools/cargo/cargo_0.31.0.bb:do_compile
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (47) ===
+{| class=wikitable
+|-
+|| qemuarm || 15 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190210_121151.log/
+||
+|-
+|| qemuarm64 || 11 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190210_132905.log/
+||
+|-
+|| qemux86 || 9 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190210_121200.log/
+||
+|-
+|| qemux86_64 || 12 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190210_134256.log/
+||
+|}
+ls: cannot access 'openembedded-core': No such file or directory
+ls: cannot access 'meta-*': No such file or directory
+
+=== PNBLACKLISTs (0) ===
+
+=== QA issues (55) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||unknown-configure-option
+|-
+||1 ||textrel
+|-
+||2 ||host-user-contaminated
+|-
+||3 ||build-deps
+|-
+||49 ||version-going-backwards
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190210_231035.log/
+
+
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-1080p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemux86copy
+in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-480p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemux86 in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-720p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemuarm in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+
+
+PNBLACKLISTs:
+ls: cannot access 'openembedded-core': No such file or directory
+ls: cannot access 'meta-*': No such file or directory
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
+PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
+PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 1 issue: textrel
+mpeg2dec-0.5.1: ELF binary
+'/tmp/work/armv5e-yoe-linux-gnueabi/mpeg2dec/0.5.1-r0/packages-split/libmpeg2/usr/lib/libmpeg2.so.0.1.0'
+has relocations in .text [textrel]
+
+
+count: 3 issue: build-deps
+glide-0.13.2: glide rdepends on libstd-rs, but it isn't a build
+dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+go-dep-0.5.0: go-dep rdepends on libstd-rs, but it isn't a build
+dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+go-helloworld-0.1: go-helloworld rdepends on libstd-rs, but it isn't a
+build dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
+[build-deps]
+
+
+count: 0 issue: file-rdeps
+
+
+count: 49 issue: version-going-backwards
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dbg went backwards which would break package feeds
+from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dev went backwards which would break package feeds
+from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-doc went backwards which would break package feeds
+from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-locale went backwards which would break package
+feeds from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-src went backwards which would break package feeds
+from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-staticdev went backwards which would break package
+feeds from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
+went backwards which would break package feeds from (0:1.1-r2.46 to
+0:1.1-r2.45) [version-going-backwards]
+os-release-1.0: Package version for package os-release-dbg went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release-dev went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release-doc went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release-locale went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release-src went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release-staticdev went
+backwards which would break package feeds from (0:1.0-r0.70 to
+0:1.0-r0.69) [version-going-backwards]
+os-release-1.0: Package version for package os-release went backwards
+which would break package feeds from (0:1.0-r0.70 to 0:1.0-r0.69)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dbg went backwards
+which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dev went backwards
+which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-ptest went backwards
+which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-src went backwards
+which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target went backwards which
+would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dbg went backwards which would break
+package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dev went backwards which would break
+package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-ptest went backwards which would break
+package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-src went backwards which would break
+package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug went backwards which would break package
+feeds from (0:1.0-r3.120 to 0:1.0-r3.119) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dbg went backwards which would break package
+feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dbg went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dev went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-ptest went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dev went backwards which would break package
+feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dbg went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dev went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-ptest went backwards which would
+break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dbg went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dev went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-ptest went backwards which would
+break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dbg went backwards which would
+break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dev went backwards which would
+break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-ptest went backwards which would
+break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-ptest went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dbg went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dev went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-ptest went backwards which would break
+package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk went backwards which would break package
+feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-src went backwards which would break package
+feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted went backwards which would break package
+feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
+
+
+count: 2 issue: host-user-contaminated
+glibc-locale-2.29: glibc-locale:
+/glibc-binary-localedata-gez-er+abegede/usr/lib/locale/gez_ER@abegede/LC_CTYPE.tmp
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+glibc-locale-2.29: glibc-locale:
+/glibc-binary-localedata-th-th/usr/lib/locale/th_TH/LC_MEASUREMENT is
+owned by uid 3004, which is the same as the user running bitbake. This
+may be due to host contamination [host-user-contaminated]
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+d73dbc35 server/process: Add missing exception raise
+not included in master yet:
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+594f858426 arch-armv7*.inc: Add Cortex vfpv4-d16 support
+not included in master yet:
+aea24d949e oe-build-perf-report: Improve branch comparision handling
+5bcd9c6f46 virglrenderer: add a recipe
+051f72ce53 qemu: enable virglrenderer and glx options for
+native/nativesdk builds
+5ed14dc26a qemu: build target variant with gtk+, and nativesdk variant
+without sdl
+859be99467 qemu: remove support for building against host sdl
+b7fe86730b qemu: add a gettext-native dependency to gtk option
+577dbbee95 qemu: add a patch to avoid a missing definition error
+1a52fd64cf qemu: add environment variable wrappers to make qemu look
+good with gtk frontend
+738c9308b2 qemu: add a backported patch to fix egl-headless support
+7ad7f33115 runqemu: add options for enabling virgl GL acceleration
+86b1839e96 runqemu: do not check for GL libraries
+4048c59f6b selftest: add tests for virgl GL acceleration
+8b48284205 grub2: Disable address-of-packed-member warnings
+9d6f48b233 recipes: Add runit and related recipes
+8130e24da7 oeqa: Recognise svlogd as another logger
+58ccf109ef gcc-9.0: Add recipes for upcoming gcc 9.0 release in mid-2019
+f2e1feda6a libunwind: Upgrade to 1.3.1 release
+69ba0c6669 image_types.bbclass: Set 70% RAM memory usage limit and -T for xz
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+78f210eb3 owfs: Inherit systemd
+not included in master yet:
+c8e411dfa cpprest: update to 2.10.10
+cfa4bb240 evolution-data-server: fix multilib install
+6bcca1626 opencv: Upgrade to 3.4.5
+3a0a0024b breakpad: Drop SRCPV from PV
+8f6995ddc catch2: Upgrade to 2.6.0
+a07c969ae graphviz: Fix cross-build failures with clang
+984526c4b rocksdb: Update to 5.18 branch ( 5.18.2 )
+4603ff974 mongodb: Upgrade to 4.0.6
+cde3ede25 mongodb: Fix build with clang
+1a502b308 ltrace: Fix build with clang
+c19f3a771 python-requests-oauthlib: Recipes to provide support for
+Requests-Oauthlib libraries
+f6e0ee746 python3-twitter_3.7.0.bb: Yocto recipes for tweepy packages
+7baf5c363 glmark2: update to current git
+c245374fa ace-cloud-editor_git.bb: Add recipe for ace cloud editor
+2e0fd7862 rapidjson: fix cmake artifacts installation for non-default
+BASELIB case
+20e56eb00 python3-gevent: update to 1.4.0
+bc3560c8e python*-jinja2: Add native and nativesdk to BBCLASSEXTEND
+d51d78ee7 python*-markupsafe: Add native and nativesdk to BBCLASSEXTEND
+d09996e63 python*-xlrd: Add native and nativesdk to BBCLASSEXTEND
+dd893a009 python-protobuf: Add nativesdk to BBCLASSEXTEND
+a600bc8a8 python-gevent: Upgrade to 1.4.0
+74554d3cc python-mprpc: Upgrade to 0.1.17
+3d7f68c30 libupnp: Upgrade to 1.8.4
+e0fe1b047 gerbera: Update to 1.3.0
+5b5fae3a0 vncx11: Fix dev package do_rootfs failure
+47e16ad6d menulibre: Fix multilib fetch
+f75c5e048 physfs: Fix multilib install
+61ee9cc00 faenza-icon-theme: Fix multilib fetch
+d3f57ebd5 ftgl: initial add 2.1.3-rc5
+5c2db1ccc wifi-test-suite: Fix build with LTO
+357573db8 ftgl: Fix build errors with clang
+06d4a5427 espeak: Generate phondata based on endianness of targer
+c4ce63b43 sysdig: Upgrade to 0.24.2+
+a9d34e00c packagegroup-meta-oe: espeak-data is gone
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+82abc2b qtbase: fix incomplete recipe changes from previous commit
+not included in master yet:
+fa27c56 qtconnectivity: Fix build with clang/libc++
+7ef1089 maliit-framework,maliit-plugins: Fix build with libc++
+264066e qt5-plugin-generic-vboxtouch: Fix build with clang/libc++
+e1194dc qtbase: Export host compiler and linker
+6d61d1b qtwebengine: Fix build with clang/libc++ on aarch64/arm
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+e48bd11 firefox: Backport the patch to accept "triplet" strings with
+only two parts
+not included in master yet:
+be5eaf4 firefox: Fix cmsghdr errors with musl
+4daa687 XXX
+~/oe/world/yoe
 
