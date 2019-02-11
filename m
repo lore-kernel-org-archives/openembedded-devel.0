@@ -1,42 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 9746A79CB2
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 15:28:58 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id r9so12569233qtt.3
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2019 07:29:00 -0800 (PST)
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D74A179CCB
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Feb 2019 15:30:16 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id q17so2043856pfh.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Feb 2019 07:30:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=mGSJob1zwg/FX0HCiftBpRplIbZ66NOJOGMqy+DVuq4=;
-	b=HrFHW1qp0t/EhQ8/t9DBM7eNUQla1xj0VL/e+2cghYHJW1xmT9UGzzIdUbEvTp4u6F
-	mvZZLPMybB0JSVuEGWLy8yslCgDR3zJKyWMK0ymmii1vamlBE6ijJecqfzo/WlYzxvvN
-	0YEkbT3KrdWV+AZPOY5ke8+uJC50zUl2yyDF7hfUT9V+5gMxJtHhC322lTyXw5DOzy23
-	aNonH6LFAqor4YLHWi211747wobdxgNL5VO4u1z19DwS5uDJexf+WwwspCXHIgaaXOPp
-	/xonP9p1whhRLBgRgjSPH7UV8SYTwnT+XIf+2yuMm6P1oqWM1zJlbEoz6h/W1dS4qfIP
-	ij2A==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ETJZonBE15Ds/XyeLvQh/4nE9bV8ja/0KwcxhX85k7g=;
+	b=A+LIGSDgSgMddRkTds7vyfxcTibldQMbDT+/HB6v5AbPGrWQzj9YXLQV/YqYn8uoh8
+	RQkXGpnxdCec9X1yd88+j/F+/OwTyWgIIamkV/qXMhJ191bAcNpwR7ZbesdkH8kehhic
+	YsFXsxtdlxL2S4tb28DfO0YS/0c1PkmLSHKOfEIfX1mRVxKwWAJeB/q+TxmJF0Yk58Cr
+	bLE/2D8KdN0k1u4DcxDwrnUvsPdXLDkZf0/Aia4yTD/Qi005wi77F8u/dVfVUjl5x2qd
+	chE4yuwnQ7Ru3qg+h7npLkQVawS451Nr9mo46s+3WbOn/MzmEYjt++9OvDauRfCec5WZ
+	OsIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=mGSJob1zwg/FX0HCiftBpRplIbZ66NOJOGMqy+DVuq4=;
-	b=p/0xO6DQ1IG/2y6smPUHTYkNi+Xc05mtPjlj/JIArYbAGRvWIeqeDSxY+61R5W+RG/
-	nxlEDG0ZoK+7T/DKRfu6mFmuiaiQOhEcrdouGFV1jkb9xcKitFDgVOW+AGIbPaP/yjYJ
-	uOXuZcfYopViEZmnSfO0qt2YIIaIVTq8Iee2zrFzU2IdujraI9NKOVd0xiHNyQcMLK0g
-	WRGhuDe44weuM6RIEF7l6mrU7iF/6nMaUX6Np7J89lajk0yT81Wslvt9qnk4nutv4ET4
-	xe39hu4Bp+Bp9eOa04Oe+SpxvdcZeTfUlxH2cxioWa9RcW7PdSWSlEjuVQoG12/2jzjv
-	AyDw==
-X-Gm-Message-State: AHQUAuaGpNkGOvksXYKRVo6Zug2fDwSy67qOYlKQrZ65qpw3zrXP4wnG
-	PXtCTPLIsCdVFO0DgU6IKdwmmG7TiUQvCH8LzlpA6ade
-X-Google-Smtp-Source: AHgI3IaTc2Oa18zi6ip1uz1t0J2jIAfD2fEnRy1+Ofvn2/QTsELvhtgpzVM7epB6Ahm2vDKwKCIiuMOU85E9prM/j98=
-X-Received: by 2002:a0c:94cf:: with SMTP id k15mr7205195qvk.55.1549898938032; 
-	Mon, 11 Feb 2019 07:28:58 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ETJZonBE15Ds/XyeLvQh/4nE9bV8ja/0KwcxhX85k7g=;
+	b=d7DoYTTDfkDpga2bNxQbYamgCc5wcBY05n0yH3BtUoG0eplu8DKMwh1HWo0anC4Xru
+	3CCz0vBUIfHfyr4MEqoZWfKyx80+n1ZyH+Ii7PF/JfxBFuX3VI8kK5IY/8+ogVhTTy9o
+	v8AG+6kx1T27fEOet4a9Wvqm/CI3cvswBIn2hOT2O0MMsrGBwiVAV7bePHZh5NEAxocy
+	aX3OdNiSfv9VmHriKcxlJsNqAUF8oG2FgrkBl+IVkG+/l8cKNsqWtKTAAp7KHX0ldCm4
+	Uu3IOssV6gcYwODmgxUb4ukWeF6hvS47j/wrMX4kNE2PbUGIpvy5oW9Bp9QNuOMmDvoa
+	pNnw==
+X-Gm-Message-State: AHQUAuYOS3yAmFVPa0800K4AsmA+shPs1KzopH7pRSKCpFgMHpvwAc3v
+	aEUdotX8dcE+dq5AUETMO4NK1x6R
+X-Google-Smtp-Source: AHgI3IZtG8Qnx7jhrwUErM8GNhkLAbPO+cRj0V1mAe7venohB9YV4W57TClGccymjsHDExJtDmJdxw==
+X-Received: by 2002:a63:ce08:: with SMTP id y8mr28955313pgf.388.1549899017251; 
+	Mon, 11 Feb 2019 07:30:17 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::dc44])
+	by smtp.gmail.com with ESMTPSA id
+	a187sm9341860pfb.61.2019.02.11.07.30.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Feb 2019 07:30:16 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 11 Feb 2019 07:28:32 -0800
-Message-ID: <CAMKF1sqokSYX8YnFvx2rOrpbFZM5VZYeS3aQYsVULEuJjTSA2w@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of the world, 2019-02-10
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Feb 2019 07:30:08 -0800
+Message-Id: <20190211153009.24991-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/2] espeak: Generate phondata based on endianness of targer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,497 +57,212 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2019 15:28:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 11 Feb 2019 15:30:17 -0000
+Content-Transfer-Encoding: 8bit
 
-== Failed tasks 2019-02-10 ==
+Use qemu usermode to generate it, so we are always in correct
+endian-ness
 
-INFO: jenkins-job.sh-1.8.45 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190211_072305.log
+espeak-data is no longer needed now, since sole purpose of it was to
+provide the data for bigendian systems
 
-=== common (5) ===
-    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
-    * sources/meta-rust/recipes-devtools/rust/rust_1.31.1.bb:do_compile
-    * sources/openembedded-core/meta/recipes-bsp/grub/grub_2.02.bb:do_configure
-    * sources/openembedded-core/meta/recipes-bsp/grub/grub-efi_2.02.bb:do_configure
-    * sources/openembedded-core/meta/recipes-graphics/virglrenderer/virglrenderer_git.bb:do_compile
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../espeak/espeak-data_1.48.04.bb             | 24 ----------
+ meta-oe/recipes-support/espeak/espeak.inc     | 15 ------
+ .../recipes-support/espeak/espeak_1.48.04.bb  | 47 +++++++++++++++----
+ ...ages-cast-string_ordinal-init-values.patch | 34 ++++++++++++++
+ .../espeak/files/espeak-1.48-gcc-6-fix.patch  | 12 -----
+ 5 files changed, 71 insertions(+), 61 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/espeak/espeak-data_1.48.04.bb
+ delete mode 100644 meta-oe/recipes-support/espeak/espeak.inc
+ create mode 100644 meta-oe/recipes-support/espeak/files/0002-tr_languages-cast-string_ordinal-init-values.patch
+ delete mode 100644 meta-oe/recipes-support/espeak/files/espeak-1.48-gcc-6-fix.patch
 
-=== common-x86 (1) ===
-    * sources/meta-openembedded/meta-oe/recipes-devtools/glade/glade_3.22.1.bb:do_configure
+diff --git a/meta-oe/recipes-support/espeak/espeak-data_1.48.04.bb b/meta-oe/recipes-support/espeak/espeak-data_1.48.04.bb
+deleted file mode 100644
+index a4e5d14d17..0000000000
+--- a/meta-oe/recipes-support/espeak/espeak-data_1.48.04.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-require espeak.inc
+-
+-inherit native
+-
+-PACKAGES = "${PN}"
+-FILES_${PN} = "${layout_datadir}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-TARGET_ARCH = "${MACHINE_ARCH}"
+-
+-do_compile() {
+-    # Fixing byte order of phoneme data files
+-    cd "${S}/platforms/big_endian"
+-    sed -i '/^ *CC *=/d' Makefile
+-    sed -i 's/\(.*BYTE_ORDER\)/#undef BYTE_ORDER\n#define BYTE_ORDER BIG_ENDIAN\n\1/' espeak-phoneme-data.c
+-    oe_runmake
+-    ./espeak-phoneme-data "${S}/espeak-data" "." "${S}/espeak-data/phondata-manifest"
+-    cp -f phondata phonindex phontab "${S}/espeak-data"
+-}
+-
+-do_install() {
+-    install -d ${D}${layout_datadir}/espeak-data
+-    install -m 0644 ${S}/espeak-data/phon* ${D}${layout_datadir}/espeak-data
+-}
+diff --git a/meta-oe/recipes-support/espeak/espeak.inc b/meta-oe/recipes-support/espeak/espeak.inc
+deleted file mode 100644
+index f45455c7e1..0000000000
+--- a/meta-oe/recipes-support/espeak/espeak.inc
++++ /dev/null
+@@ -1,15 +0,0 @@
+-DESCRIPTION = "eSpeak is a compact open source software speech synthesizer"
+-SECTION = "base"
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
+-
+-SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
+-           file://0001-Fix-build-of-shared-library-on-architectures-needing.patch \
+-           file://espeak-1.48-gcc-6-fix.patch \
+-"
+-SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
+-SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
+-
+-S = "${WORKDIR}/espeak-${PV}-source"
+-
+-DEPENDS = "portaudio-v19"
+diff --git a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+index 57e30f0710..78f8f85c96 100644
+--- a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
++++ b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+@@ -1,8 +1,20 @@
+-require espeak.inc
+-inherit siteinfo
++DESCRIPTION = "eSpeak is a compact open source software speech synthesizer"
++SECTION = "base"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
++
++SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
++           file://0001-Fix-build-of-shared-library-on-architectures-needing.patch \
++           file://0002-tr_languages-cast-string_ordinal-init-values.patch \
++"
++SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
++SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
++
++S = "${WORKDIR}/espeak-${PV}-source"
++
++DEPENDS = "portaudio-v19 qemu-helper-native"
++inherit siteinfo qemu
+ 
+-EXTRA_PHONEMES = '${@bb.utils.contains("SITEINFO_ENDIANNESS", "be",  "espeak-data (= ${PV})", "", d)}'
+-RDEPENDS_${PN} = "portaudio-v19 ${EXTRA_PHONEMES}"
+ 
+ CXXFLAGS += "-DUSE_PORTAUDIO"
+ TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -11,12 +23,30 @@ FILES_${PN} += "${datadir}/espeak-data"
+ 
+ do_configure() {
+     #  "speak" binary, a TTS engine, uses portaudio in either APIs V18 or V19, use V19
+-    cp "${S}/src/portaudio19.h" "${S}/src/portaudio.h"
++    install -m 0644 "${S}/src/portaudio19.h" "${S}/src/portaudio.h"
+ }
+ 
+ do_compile() {
+     cd src
+     oe_runmake
++
++    cd "${S}/platforms/big_endian"
++    qemu_binary="${@qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}', ['${S}/platforms/big_endian', '${STAGING_DIR_TARGET}${base_libdir}'])}"
++    cat >qemuwrapper <<EOF
++#!/bin/sh
++$qemu_binary "\$@"
++EOF
++    chmod +x qemuwrapper
++    sed -i '/^ *CC *=/d' Makefile
++    # Fixing byte order of phoneme data files
++    if [ "${SITEINFO_ENDIANNESS}" = "be" ]; then
++        sed -i 's/\(.*BYTE_ORDER\)/#undef BYTE_ORDER\n#define BYTE_ORDER BIG_ENDIAN\n\1/' espeak-phoneme-data.c
++    else
++        sed -i 's/\(.*BYTE_ORDER\)/#undef BYTE_ORDER\n#define BYTE_ORDER LITTLE_ENDIAN\n\1/' espeak-phoneme-data.c
++    fi
++    oe_runmake
++    ./qemuwrapper ./espeak-phoneme-data "${S}/espeak-data" "." "${S}/espeak-data/phondata-manifest"
++    cp -f phondata phonindex phontab "${S}/espeak-data"
+ }
+ 
+ do_install() {
+@@ -31,10 +61,7 @@ do_install() {
+     ln -sf espeak/espeak.h ${D}${includedir}/
+     oe_libinstall -so -C src libespeak ${D}${libdir}
+ 
+-    if [ "${SITEINFO_ENDIANNESS}" = "be" ] ; then
+-        # the big-endian phon* files are provided by the package espeak-data
+-        rm -f ${S}/espeak-data/phon*
+-    fi
+-
+     cp -R --no-dereference --preserve=mode,links ${S}/espeak-data/* ${D}${datadir}/espeak-data
+ }
++
++RDEPENDS_${PN} = "portaudio-v19"
+diff --git a/meta-oe/recipes-support/espeak/files/0002-tr_languages-cast-string_ordinal-init-values.patch b/meta-oe/recipes-support/espeak/files/0002-tr_languages-cast-string_ordinal-init-values.patch
+new file mode 100644
+index 0000000000..cef360eaef
+--- /dev/null
++++ b/meta-oe/recipes-support/espeak/files/0002-tr_languages-cast-string_ordinal-init-values.patch
+@@ -0,0 +1,34 @@
++From 451330d09a6a3500b40bc4f5896ba790ab46cd6c Mon Sep 17 00:00:00 2001
++From: Romain Naour <romain.naour@gmail.com>
++Date: Sun, 15 Jan 2017 19:37:31 +0100
++Subject: [PATCH 2/2] tr_languages: cast string_ordinal init values
++
++On some architecture, "char" is signed (x86_64, nios2...) so the
++compiler try to convert int 0xc2 and 0xba to a signed char.
++This is an error since gcc6 (Wnarrowing).
++
++Fixes:
++http://autobuild.buildroot.net/results/bae/baef9888b1979d18171668a675985e3f3b45fda6
++
++Upstream-Status: Pending [imported from BR]
++Signed-off-by: Romain Naour <romain.naour@gmail.com>
++---
++ src/tr_languages.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/tr_languages.cpp b/src/tr_languages.cpp
++index 5c80286..dbc6e36 100644
++--- a/src/tr_languages.cpp
+++++ b/src/tr_languages.cpp
++@@ -200,7 +200,7 @@ static const unsigned short chars_ignore_zwnj_hyphen[] = {
++ 	0x200d,  1, // zero width joiner
++ 	0, 0 };
++ 
++-const char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
+++const char string_ordinal[] = {(char)0xc2,(char)0xba,0};  // masculine ordinal character, UTF-8
++ 
++ 
++ static Translator* NewTranslator(void)
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-support/espeak/files/espeak-1.48-gcc-6-fix.patch b/meta-oe/recipes-support/espeak/files/espeak-1.48-gcc-6-fix.patch
+deleted file mode 100644
+index 6e59c7892f..0000000000
+--- a/meta-oe/recipes-support/espeak/files/espeak-1.48-gcc-6-fix.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-diff --git a/src/tr_languages.cpp b/src/tr_languages.cpp
+---- a/src/tr_languages.cpp
+-+++ b/src/tr_languages.cpp
+-@@ -198,7 +198,7 @@ static const unsigned short chars_ignore_zwnj_hyphen[] = {
+- 	0x200d,  1, // zero width joiner
+- 	0, 0 };
+- 
+--const char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
+-+const char string_ordinal[] = {'\xc2','\xba',0};  // masculine ordinal character, UTF-8
+- 
+- 
+- static Translator* NewTranslator(void)
+-- 
+2.20.1
 
-=== qemuarm (10) ===
-    * sources/meta-openembedded/meta-multimedia/recipes-connectivity/libupnp/libupnp_git.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/espeak/espeak_1.48.04.bb:do_compile
-    * sources/openembedded-core/meta/recipes-core/glibc/glibc-locale_2.29.bb:do_package_qa
-    * sources/openembedded-core/meta/recipes-devtools/glide/glide_0.13.2.bb:do_package_qa
-    * sources/openembedded-core/meta/recipes-devtools/go/go-dep_0.5.0.bb:do_package_qa
-    * sources/openembedded-core/meta/recipes-extended/go-examples/go-helloworld_0.1.bb:do_package_qa
-    * sources/openembedded-core/meta/recipes-gnome/gobject-introspection/gobject-introspection_1.58.3.bb:do_compile
-    * sources/openembedded-core/meta/recipes-multimedia/mpeg2dec/mpeg2dec_0.5.1.bb:do_package_qa
-
-=== qemuarm64 (1) ===
-    * sources/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb:do_compile
-
-=== qemux86 (3) ===
-    * sources/meta-browser/recipes-browser/firefox/firefox_60.1.0esr.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
-    * sources/meta-rust/recipes-devtools/cargo/cargo_0.31.0.bb:do_compile
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (47) ===
-{| class=wikitable
-|-
-|| qemuarm || 15 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190210_121151.log/
-||
-|-
-|| qemuarm64 || 11 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190210_132905.log/
-||
-|-
-|| qemux86 || 9 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190210_121200.log/
-||
-|-
-|| qemux86_64 || 12 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190210_134256.log/
-||
-|}
-ls: cannot access 'openembedded-core': No such file or directory
-ls: cannot access 'meta-*': No such file or directory
-
-=== PNBLACKLISTs (0) ===
-
-=== QA issues (55) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||0 ||unknown-configure-option
-|-
-||1 ||textrel
-|-
-||2 ||host-user-contaminated
-|-
-||3 ||build-deps
-|-
-||49 ||version-going-backwards
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190210_231035.log/
-
-
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-1080p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemux86copy
-in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-480p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemux86 in
-/home/jenkins/oe/world/yoe/build/tmpfs/stamps
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-720p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemuarm in
-/home/jenkins/oe/world/yoe/build/tmpfs/stamps
-
-
-PNBLACKLISTs:
-ls: cannot access 'openembedded-core': No such file or directory
-ls: cannot access 'meta-*': No such file or directory
-PNBLACKLIST[android-system] = "depends on lxc from
-meta-virtualiazation which isn't included in my world builds"
-PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-directory in /home/builder/poky :/"
-PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
-PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
-PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
-PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
-PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
-PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 1 issue: textrel
-mpeg2dec-0.5.1: ELF binary
-'/tmp/work/armv5e-yoe-linux-gnueabi/mpeg2dec/0.5.1-r0/packages-split/libmpeg2/usr/lib/libmpeg2.so.0.1.0'
-has relocations in .text [textrel]
-
-
-count: 3 issue: build-deps
-glide-0.13.2: glide rdepends on libstd-rs, but it isn't a build
-dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
-[build-deps]
-go-dep-0.5.0: go-dep rdepends on libstd-rs, but it isn't a build
-dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
-[build-deps]
-go-helloworld-0.1: go-helloworld rdepends on libstd-rs, but it isn't a
-build dependency, missing libstd-rs in DEPENDS or PACKAGECONFIG?
-[build-deps]
-
-
-count: 0 issue: file-rdeps
-
-
-count: 49 issue: version-going-backwards
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dbg went backwards which would break package feeds
-from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dev went backwards which would break package feeds
-from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-doc went backwards which would break package feeds
-from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-locale went backwards which would break package
-feeds from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-src went backwards which would break package feeds
-from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-staticdev went backwards which would break package
-feeds from (0:1.1-r2.46 to 0:1.1-r2.45) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
-went backwards which would break package feeds from (0:1.1-r2.46 to
-0:1.1-r2.45) [version-going-backwards]
-os-release-1.0: Package version for package os-release-dbg went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release-dev went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release-doc went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release-locale went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release-src went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release-staticdev went
-backwards which would break package feeds from (0:1.0-r0.70 to
-0:1.0-r0.69) [version-going-backwards]
-os-release-1.0: Package version for package os-release went backwards
-which would break package feeds from (0:1.0-r0.70 to 0:1.0-r0.69)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dbg went backwards
-which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dev went backwards
-which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-ptest went backwards
-which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-src went backwards
-which would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target went backwards which
-would break package feeds from (0:1.0-r8.120 to 0:1.0-r8.119)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dbg went backwards which would break
-package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dev went backwards which would break
-package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-ptest went backwards which would break
-package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-src went backwards which would break
-package feeds from (0:1.0-r3.120 to 0:1.0-r3.119)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug went backwards which would break package
-feeds from (0:1.0-r3.120 to 0:1.0-r3.119) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dbg went backwards which would break package
-feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dbg went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dev went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-ptest went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dev went backwards which would break package
-feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dbg went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dev went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-ptest went backwards which would
-break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dbg went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dev went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-ptest went backwards which would
-break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dbg went backwards which would
-break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dev went backwards which would
-break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-ptest went backwards which would
-break package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-ptest went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dbg went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dev went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-ptest went backwards which would break
-package feeds from (0:1.0-r13.120 to 0:1.0-r13.119)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk went backwards which would break package
-feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-src went backwards which would break package
-feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted went backwards which would break package
-feeds from (0:1.0-r13.120 to 0:1.0-r13.119) [version-going-backwards]
-
-
-count: 2 issue: host-user-contaminated
-glibc-locale-2.29: glibc-locale:
-/glibc-binary-localedata-gez-er+abegede/usr/lib/locale/gez_ER@abegede/LC_CTYPE.tmp
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination [host-user-contaminated]
-glibc-locale-2.29: glibc-locale:
-/glibc-binary-localedata-th-th/usr/lib/locale/th_TH/LC_MEASUREMENT is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination [host-user-contaminated]
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 0 issue: unknown-configure-option
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/yoe ~/oe/world/yoe
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-d73dbc35 server/process: Add missing exception raise
-not included in master yet:
-
-== Tested changes (not included in master yet) - openembedded-core ==
-latest upstream commit:
-594f858426 arch-armv7*.inc: Add Cortex vfpv4-d16 support
-not included in master yet:
-aea24d949e oe-build-perf-report: Improve branch comparision handling
-5bcd9c6f46 virglrenderer: add a recipe
-051f72ce53 qemu: enable virglrenderer and glx options for
-native/nativesdk builds
-5ed14dc26a qemu: build target variant with gtk+, and nativesdk variant
-without sdl
-859be99467 qemu: remove support for building against host sdl
-b7fe86730b qemu: add a gettext-native dependency to gtk option
-577dbbee95 qemu: add a patch to avoid a missing definition error
-1a52fd64cf qemu: add environment variable wrappers to make qemu look
-good with gtk frontend
-738c9308b2 qemu: add a backported patch to fix egl-headless support
-7ad7f33115 runqemu: add options for enabling virgl GL acceleration
-86b1839e96 runqemu: do not check for GL libraries
-4048c59f6b selftest: add tests for virgl GL acceleration
-8b48284205 grub2: Disable address-of-packed-member warnings
-9d6f48b233 recipes: Add runit and related recipes
-8130e24da7 oeqa: Recognise svlogd as another logger
-58ccf109ef gcc-9.0: Add recipes for upcoming gcc 9.0 release in mid-2019
-f2e1feda6a libunwind: Upgrade to 1.3.1 release
-69ba0c6669 image_types.bbclass: Set 70% RAM memory usage limit and -T for xz
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-latest upstream commit:
-78f210eb3 owfs: Inherit systemd
-not included in master yet:
-c8e411dfa cpprest: update to 2.10.10
-cfa4bb240 evolution-data-server: fix multilib install
-6bcca1626 opencv: Upgrade to 3.4.5
-3a0a0024b breakpad: Drop SRCPV from PV
-8f6995ddc catch2: Upgrade to 2.6.0
-a07c969ae graphviz: Fix cross-build failures with clang
-984526c4b rocksdb: Update to 5.18 branch ( 5.18.2 )
-4603ff974 mongodb: Upgrade to 4.0.6
-cde3ede25 mongodb: Fix build with clang
-1a502b308 ltrace: Fix build with clang
-c19f3a771 python-requests-oauthlib: Recipes to provide support for
-Requests-Oauthlib libraries
-f6e0ee746 python3-twitter_3.7.0.bb: Yocto recipes for tweepy packages
-7baf5c363 glmark2: update to current git
-c245374fa ace-cloud-editor_git.bb: Add recipe for ace cloud editor
-2e0fd7862 rapidjson: fix cmake artifacts installation for non-default
-BASELIB case
-20e56eb00 python3-gevent: update to 1.4.0
-bc3560c8e python*-jinja2: Add native and nativesdk to BBCLASSEXTEND
-d51d78ee7 python*-markupsafe: Add native and nativesdk to BBCLASSEXTEND
-d09996e63 python*-xlrd: Add native and nativesdk to BBCLASSEXTEND
-dd893a009 python-protobuf: Add nativesdk to BBCLASSEXTEND
-a600bc8a8 python-gevent: Upgrade to 1.4.0
-74554d3cc python-mprpc: Upgrade to 0.1.17
-3d7f68c30 libupnp: Upgrade to 1.8.4
-e0fe1b047 gerbera: Update to 1.3.0
-5b5fae3a0 vncx11: Fix dev package do_rootfs failure
-47e16ad6d menulibre: Fix multilib fetch
-f75c5e048 physfs: Fix multilib install
-61ee9cc00 faenza-icon-theme: Fix multilib fetch
-d3f57ebd5 ftgl: initial add 2.1.3-rc5
-5c2db1ccc wifi-test-suite: Fix build with LTO
-357573db8 ftgl: Fix build errors with clang
-06d4a5427 espeak: Generate phondata based on endianness of targer
-c4ce63b43 sysdig: Upgrade to 0.24.2+
-a9d34e00c packagegroup-meta-oe: espeak-data is gone
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-82abc2b qtbase: fix incomplete recipe changes from previous commit
-not included in master yet:
-fa27c56 qtconnectivity: Fix build with clang/libc++
-7ef1089 maliit-framework,maliit-plugins: Fix build with libc++
-264066e qt5-plugin-generic-vboxtouch: Fix build with clang/libc++
-e1194dc qtbase: Export host compiler and linker
-6d61d1b qtwebengine: Fix build with clang/libc++ on aarch64/arm
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-e48bd11 firefox: Backport the patch to accept "triplet" strings with
-only two parts
-not included in master yet:
-be5eaf4 firefox: Fix cmsghdr errors with musl
-4daa687 XXX
-~/oe/world/yoe
 
