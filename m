@@ -1,48 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
-	[209.85.160.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B2AD86B06A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 13:59:33 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id w4so3027401qtc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 05:59:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=kH9ITvjsEEkKDJIaCyTxfB/Vfq12pmSMDQ7EE+olTfM=;
-	b=NHv6goo1j7RVkQSB9+I9rr/qtg+lq2v6I2V1ickcZ4HTAmbH+w0iG8wO28TftCUAk0
-	BPH74wpd3bP9IkxYcYkp1wxZTO70apLH5z+tf8OWAjw+YvEuNPI5PoV0/riYZHV5MiFx
-	92Q8SzVea/Op74bp1eaMoo/ZSVaQ5W6rAzIG/+1X7+nnUH5xnytgy65oU/jd0bvfTeXD
-	0XWPjJYpmefOxfVTNLNMyHBl9dNd+FWaiZxVNxqgA0RZGVsZl2kJuoRaXrlTxdcqzR/g
-	+Cf//IUz8CLC3gh+YpnHdZvihN3CMjxwQiUvh6MjUjjc1D3mbcgF1WwO7kjY8jsoqOgp
-	MbFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=kH9ITvjsEEkKDJIaCyTxfB/Vfq12pmSMDQ7EE+olTfM=;
-	b=jnuZZh2/xR6Zf7R6VzYlhcHMo8OhJucJ6w25D3LQO+w/UQ0JbRm+nu9fMP1pnDIPyf
-	860Gr8zE/MKLWwsgBIgtSnDxsqrkF5n1Pg/2sHwOACCJgsDNgkE+PjIkQS7PDD8Y6qUb
-	Fa6pJFcN4V46c3G9x7i250g2/g1Cc7bakajAtNhCEEFQ1OYijskL6oau+7KP5Y35I70c
-	qJDuWasZpUyKqV0SH7drCnQC51JrfToyMPxYu9UYgf7bXPI2OmyXN8kuJwDLxJINTQVI
-	lZ7ouGgRTKyHZ4SoPifaTLKrMr6rbMV1fjWKcbRjVoGjRUSxzxJW9CdUayEFhHZK4htZ
-	I/jA==
-X-Gm-Message-State: AHQUAuZAWVbIVIngFcFzkMV35tBsYfsZNgdMGvfA0szS6ms9+866KBxV
-	MEaRFi+09vWhvd9NJCNi7GnM6hpojrTom1JJULk=
-X-Google-Smtp-Source: AHgI3Ia1ru1RtIqXjwnxtM+kI+i85jnmp0BFTnj6awfTOpMC5QTn4kD9HIdoFSQBAqdtyYKugtMbXpuuQVIBgaY+Byc=
-X-Received: by 2002:a0c:98a1:: with SMTP id f30mr2653834qvd.224.1549979974229; 
-	Tue, 12 Feb 2019 05:59:34 -0800 (PST)
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0FC6D6EA;
+	Tue, 12 Feb 2019 18:06:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1CI6Jnl015279
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 12 Feb 2019 10:06:19 -0800 (PST)
+Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.435.0;
+	Tue, 12 Feb 2019 10:06:18 -0800
+To: Felix Snow <fsnow@phoenixcontact.com>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <AM6PR05MB6357644B9FBDB2505BE9F0D3DB650@AM6PR05MB6357.eurprd05.prod.outlook.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <89277db3-0af7-419d-6b49-66a8f42434e8@windriver.com>
+Date: Tue, 12 Feb 2019 13:06:17 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-References: <2d621cbdb1134320a6218f37871269c0@XBOX01.axis.com>
-In-Reply-To: <2d621cbdb1134320a6218f37871269c0@XBOX01.axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 12 Feb 2019 05:59:07 -0800
-Message-ID: <CAMKF1soGJVjBYCba3UGUyCtSrtcTj76XkbWRsXfmfZdpjH_5zg@mail.gmail.com>
-To: Santhosh Nadig <santhosh.nadig@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Santhosh Nadig <santhosn@axis.com>
-Subject: Re: libgfortran license
+In-Reply-To: <AM6PR05MB6357644B9FBDB2505BE9F0D3DB650@AM6PR05MB6357.eurprd05.prod.outlook.com>
+X-Originating-IP: [172.25.44.4]
+Subject: Re: [OE-core] version upgrade to python-click
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,30 +36,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2019 13:59:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 12 Feb 2019 18:06:19 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 11, 2019 at 11:58 PM Santhosh Nadig <santhosh.nadig@axis.com> wrote:
->
-> Hello!
->
-> It appears that libgfortran.inc does not have the license set to"GPL-3.0-with-GCC-exception", whereas libgcc.inc has it
-> (http://cgit.openembedded.org/openembedded-core/tree/meta/recipes-devtools/gcc/libgcc.inc#n24).
->
-> Is there any particular reason?
-> Can an exception be added to libgfortran too?
+On 2/12/19 5:02 AM, Felix Snow wrote:
+> Hello,
+> 
+> it seems that the latest version of python-click in open-embedded is 6.7 :
+> 
+> https://layers.openembedded.org/layerindex/recipe/52136/
+> 
+> This was released in January 2017, but 7.0 came out in September 2018:
+> 
+> https://pypi.org/project/click/#history
+> 
+> I have had a considerable struggle with click on our embedded linux 
+> around locale.
+> 
+> It was a hard requirement and there are were a lot of complaints prior 
+> to version 7.0
+> 
+> Here are a few examples:
+> 
+> https://github.com/NixOS/nixpkgs/pull/41843
+> 
+> https://github.com/NixOS/nixpkgs/issues/40146
+> 
+> https://github.com/NixOS/nixpkgs/issues/38991
+> 
+> I believe they removed the hard dependency in this pull request - 
+> https://github.com/pallets/click/pull/880
+> 
+> which went into version 7.0
+> 
+> If you look at the code of that request there is very little which fixes 
+> this, but it would probably still be cleaner at least long term to have 
+> the newer version of click than to patch that in our system.  The locale 
+> issue is one of a long list of changes in 7.0 
+> http://click.palletsprojects.com/en/7.x/changelog/
 
-yes. Send a patch
+Thanks for pointing that out.
 
->
-> Thank you.
->
-> Kind regards,
-> Santhosh
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Can you update the recipe, test it and send a patch to:
+    openembedded-devel@lists.openembedded.org
+as per:
+    https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+
+../Randy
+
+> 
+> Actually, click is not explicitly mentioned in the bb file, but 
+> python-flask is, and that somehow installs click with it, I think as 
+> there is another recipe for python-flask which includes click.
+> 
+> Cheers,
+> 
+> Felix
+> 
+> .......................................................................................
+> 
+> PHOENIX CONTACT Cyber Security GmbH　
+> 
+> Richard-Willstätter-Straße 6 　
+> 
+> D-12489 Berlin 　
+> 
+> 　
+> 
+> Register Court: AG Charlottenburg, HR B 202908　
+> 
+> Geschäftsführer/General Manager: Kilian Golm
+> 
+> //
+> 
+
+
+-- 
+# Randy MacLeod
+# Wind River Linux
 
