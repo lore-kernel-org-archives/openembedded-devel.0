@@ -1,55 +1,55 @@
 Return-Path: <peter.kjellerstedt@axis.com>
 Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 430366BCA9
+	by mail.openembedded.org (Postfix) with ESMTP id D8ECC6C45E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 21:11:07 +0000 (UTC)
+	Tue, 12 Feb 2019 21:25:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id A8EAF18095
+	by bastet.se.axis.com (Postfix) with ESMTP id 5A190184A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:08 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:17 +0100 (CET)
 X-Axis-User: NO
 X-Axis-NonUser: YES
 X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
 Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
 	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id JV2aaBA9fs69
+	port 10024) with LMTP id s5ETAqJFd6Yp
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:15 +0100 (CET)
 Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id A5F79182B3
+	by bastet.se.axis.com (Postfix) with ESMTPS id 67061183C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:15 +0100 (CET)
 Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 68F5E1E075
+	by IMSVA (Postfix) with ESMTP id 085311E080
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:15 +0100 (CET)
 Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5D9E41E072
+	by IMSVA (Postfix) with ESMTP id E73CA1E07D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:14 +0100 (CET)
 Received: from seth.se.axis.com (unknown [10.0.2.172])
 	by boulder03.se.axis.com (Postfix) with ESMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:14 +0100 (CET)
 Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by seth.se.axis.com (Postfix) with ESMTP id 51BC2F03
+	by seth.se.axis.com (Postfix) with ESMTP id DB6F92F24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:06 +0100 (CET)
+	Tue, 12 Feb 2019 22:25:14 +0100 (CET)
 Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x1CLB5Y2027757
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x1CLPDqn028253
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2019 22:11:05 +0100
+	Tue, 12 Feb 2019 22:25:13 +0100
 Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x1CLB5i7027753
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x1CLPDFf028249
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Feb 2019 22:11:05 +0100
+	Tue, 12 Feb 2019 22:25:13 +0100
 From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Feb 2019 22:11:02 +0100
-Message-Id: <20190212211102.27069-1-pkj@axis.com>
+Date: Tue, 12 Feb 2019 22:25:12 +0100
+Message-Id: <20190212212512.27745-1-pkj@axis.com>
 X-Mailer: git-send-email 2.12.0
 X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCHv3] atop: Update to 2.4
+Subject: [meta-oe][PATCHv4] atop: Update to 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,26 +62,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2019 21:11:09 -0000
+X-List-Received-Date: Tue, 12 Feb 2019 21:25:17 -0000
 
 * Replace remove-bashisms.patch with
-  0001-atop.init-Avoid-using-bash.patch to avoid a bashism in
-  atop.init in addition to those already fixed.
+  0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch to avoid
+  a bashism in atop.init in addition to those already fixed.
 * Remove 0001-add-sys-sysmacros.h-for-major-minor-macros.patch as it
   is no longer needed.
 * Update the remaining patches to avoid fuzz.
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- ...dd-sys-sysmacros.h-for-major-minor-macros.patch | 26 --------
- ...atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch | 78 ++++++++++++++++++++++
- .../atop/atop/fix-permissions.patch                | 29 +++++---
- .../atop/atop/remove-bashisms.patch                | 33 ---------
- .../atop/atop/sysvinit-implement-status.patch      | 11 ++-
+ ...dd-sys-sysmacros.h-for-major-minor-macros.patch | 26 ---------
+ ...ily-atop.init-atop-pm.sh-Avoid-using-bash.patch | 67 ++++++++++++++++++++++
+ .../atop/atop/fix-permissions.patch                | 29 ++++++----
+ .../atop/atop/remove-bashisms.patch                | 33 -----------
+ .../atop/atop/sysvinit-implement-status.patch      | 11 +++-
  .../atop/{atop_2.3.0.bb => atop_2.4.0.bb}          |  9 ++-
- 6 files changed, 109 insertions(+), 77 deletions(-)
+ 6 files changed, 98 insertions(+), 77 deletions(-)
  delete mode 100644 meta-oe/recipes-support/atop/atop/0001-add-sys-sysmacros.h-for-major-minor-macros.patch
- create mode 100644 meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch
+ create mode 100644 meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
  delete mode 100644 meta-oe/recipes-support/atop/atop/remove-bashisms.patch
  rename meta-oe/recipes-support/atop/{atop_2.3.0.bb => atop_2.4.0.bb} (87%)
 
@@ -117,16 +117,16 @@ index 564606197..000000000
 - #include <stdio.h>
 - #include <string.h>
 - #include <unistd.h>
-diff --git a/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch b/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch
+diff --git a/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch b/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
 new file mode 100644
-index 000000000..94cbb1ef9
+index 000000000..facb257be
 --- /dev/null
-+++ b/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch
-@@ -0,0 +1,78 @@
++++ b/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
+@@ -0,0 +1,67 @@
 +From ffc8ba8d324243a923abe48e9758adecb03d24a4 Mon Sep 17 00:00:00 2001
 +From: Peter Kjellerstedt <pkj@axis.com>
 +Date: Tue, 12 Feb 2019 21:25:23 +0100
-+Subject: [PATCH] atop.daily, atop.init, atop-pm.sh, mkdate: Avoid using bash
++Subject: [PATCH] atop.daily, atop.init, atop-pm.sh: Avoid using bash
 +
 +Avoid using bash and bashisms when not necesary. On some systems,
 +e.g., embedded products, bash may not be available by default.
@@ -137,8 +137,7 @@ index 000000000..94cbb1ef9
 + atop-pm.sh | 2 +-
 + atop.daily | 4 ++--
 + atop.init  | 4 ++--
-+ mkdate     | 2 +-
-+ 4 files changed, 6 insertions(+), 6 deletions(-)
++ 3 files changed, 5 insertions(+), 5 deletions(-)
 +
 +diff --git a/atop-pm.sh b/atop-pm.sh
 +index 7f41a86..3ff4ab5 100755
@@ -188,16 +187,6 @@ index 000000000..94cbb1ef9
 + 
 + 			if [ $CNT -gt 5 ]
 + 			then
-+diff --git a/mkdate b/mkdate
-+index e03db8d..fb00d2b 100755
-+--- a/mkdate
-++++ b/mkdate
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+ 
-+ # Make a new versdate.h with the current date filled
-+ #
 +-- 
 +2.12.0
 +
@@ -336,7 +325,7 @@ diff --git a/meta-oe/recipes-support/atop/atop_2.3.0.bb b/meta-oe/recipes-suppor
 similarity index 87%
 rename from meta-oe/recipes-support/atop/atop_2.3.0.bb
 rename to meta-oe/recipes-support/atop/atop_2.4.0.bb
-index 302813c2e..bd337f6fe 100644
+index 302813c2e..5bde96519 100644
 --- a/meta-oe/recipes-support/atop/atop_2.3.0.bb
 +++ b/meta-oe/recipes-support/atop/atop_2.4.0.bb
 @@ -17,13 +17,12 @@ DEPENDS = "ncurses zlib"
@@ -347,7 +336,7 @@ index 302813c2e..bd337f6fe 100644
             file://fix-permissions.patch \
             file://sysvinit-implement-status.patch \
 -           file://0001-add-sys-sysmacros.h-for-major-minor-macros.patch \
-+           file://0001-atop.daily-atop.init-atop-pm.sh-mkdate-Avoid-using-b.patch \
++           file://0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch \
             "
 -SRC_URI[md5sum] = "48e1dbef8c7d826e68829a8d5fc920fc"
 -SRC_URI[sha256sum] = "73e4725de0bafac8c63b032e8479e2305e3962afbe977ec1abd45f9e104eb264"
