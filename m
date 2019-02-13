@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EF9117BD97
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id E43AB79D62
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Feb 2019 17:31:28 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id e5so1494945plb.5
+	Wed, 13 Feb 2019 17:31:29 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id d72so1442472pga.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Feb 2019 09:31:30 -0800 (PST)
+	Wed, 13 Feb 2019 09:31:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=QOB3YfI0Q8s3aT3FufQrd1gxRITWgz781stltFHz7U4=;
-	b=fKDBcjDsKXilgqGMiV8s14N+GxaOxQIUcnYx9ObN57qL5srZ09VI6gl30NxWeL7Urf
-	8/501lMrN8DLMJD8zaqDNB8kxrVi1C+3jEOraQb06u0poXkSl0r3UAW5Me/VKb/HHNSd
-	ugcuCPK2ih9EA2A/bAUhVXp3GhuxUfBzX37y1twn0FcEqI46QMpYZ5iGWePAF75622L9
-	U3TQhhv4DqU7VhLieBQIjPd/jrnE58bNaR11wJN+U8LJMcx5IR0iQ8FHTwjir4qGP6bb
-	o0lirSsdFFqhJT2ixO3uq2G+iJVxz0fMU7hmwdYMU5PrYrB6rM5qS8P2GmMPs8I8larf
-	yDUg==
+	bh=SwC8bEhLme/pKmXgaw2/Qan9YrmCcueq2Tjd5iU6/C4=;
+	b=nAwAqZ1bolQcUNqzxy2K1i/z8G66u0Mc7nlkjLr+caGVIROgYHCSYQvu/IKJ1b/uBB
+	CzIx6UOl2sjuTWC5tqVUwx+kngqv+IHkrFoIhwPL47RCDeBtTxwm0uznuK20tVl+k+DV
+	Ad5rXrxQySLN8pBEei7zpIfzS2P1Vd/LpBp3tifaNl5mwNFL2iSVPDL28y29gBGUVnGZ
+	sy7sDw/9v15aox6N91UO6KKjt6n+WSvbPLuG6AiqCV7y62pTt4XmIWcKBuf/fSECzY7z
+	WR7SUNwUBSObPd+bodYQE/U8KJOWI8C2bEjyQnOpbbJDms5HEJx4o3+WPwLEI6eYp7Hm
+	rvyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=QOB3YfI0Q8s3aT3FufQrd1gxRITWgz781stltFHz7U4=;
-	b=EoUy9M5eNT6uOmxzWMcJRzADhh6HrVWtbnjLuwkIicxMGSOekzHaE1Cph+fwHNZDOu
-	7Sco8N+t1/fpVQJURjz1bR6lsutEN6Gu36Qe+wabXHtMUj0hLNR+1NQOVD96LWEcl2PT
-	yBpH7+KF2FK+kQdbF2j6XwC8i4sOP8SiWoqcu2kXBBV2gdSpEQmj6F2bxMQGIYPvO/qp
-	Zaeo1pkMZbzE4uH4qVksgA6qpBO3wT2ZkwY+A5yaNxcMcrzOCAWqfXibzwFK4R75Vgqr
-	TAFGmnnnxrs+bUL4aeRvFzi4iPWeGXDbdoOpPuUIebXmFwGjoijsditMaOI+BYCcI69+
-	yncg==
-X-Gm-Message-State: AHQUAua29vzKqFxnuBXZbQNLphs2URtvGBoyFY8TrGAZQ1dmYZNl8Rx8
-	P6zrp3PVwb0Ae3n7xL1dozKsdkFv
-X-Google-Smtp-Source: AHgI3IbJv2y73EM8+3toQ6xF8287UkmXLlpIcCd8euRr/JJu8vdrNF67Cnb5nnyNcUNGu/GWUoOhvQ==
-X-Received: by 2002:a17:902:bcc2:: with SMTP id
-	o2mr1517261pls.69.1550079089545; 
-	Wed, 13 Feb 2019 09:31:29 -0800 (PST)
+	bh=SwC8bEhLme/pKmXgaw2/Qan9YrmCcueq2Tjd5iU6/C4=;
+	b=S5OxgcIGM4n4SOkMMyCkxO0Ax/aUIQLeN5XNaF8xO5ZQZGy+K//GJ6QH+NLhZWCo8U
+	/0uMkaQ1bBLk66UWaLLAxzXfIix+to74d0+jEiFojEdvnDD4yMAojmKL0rl0XMpOoorH
+	3OAWNt+jDmZSfiErR2zSZ6tAl2l/TeKQERzAX+fAcdWs+cO5Ab+MKvw4zud5w0TxIYpS
+	f31SkA601k41Pp76KS6k+MmyiJyf4SUmRgOPaYJa8htQEMUgzPHxP2YRf+6P4n29sPtb
+	+gBsXSLvML7Y0pRr4abaUqel2Iw4I1EHr7ezVmPza/iFeB3i9qDGEaOS0fVxhelg59va
+	hKXA==
+X-Gm-Message-State: AHQUAuZlnN4JzyXP678tuOB9M58Dk0muqrdXZ5PJLlaRJ7Urue3+/xr4
+	cZPtKhvCm8PRioxPOypJnKbmEdU9
+X-Google-Smtp-Source: AHgI3IaeopcmB18mnktJQiYqd65NDVxJtN6bQLwZYTW13Vl8fnt8TxcXlsYojaSeMCKB8UZf/VOoaQ==
+X-Received: by 2002:a63:1321:: with SMTP id i33mr1470952pgl.380.1550079090621; 
+	Wed, 13 Feb 2019 09:31:30 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::dc44])
 	by smtp.gmail.com with ESMTPSA id
-	h15sm21528945pgl.43.2019.02.13.09.31.28
+	h15sm21528945pgl.43.2019.02.13.09.31.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 09:31:28 -0800 (PST)
+	Wed, 13 Feb 2019 09:31:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Feb 2019 09:31:17 -0800
-Message-Id: <20190213173118.44597-5-raj.khem@gmail.com>
+Date: Wed, 13 Feb 2019 09:31:18 -0800
+Message-Id: <20190213173118.44597-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190213173118.44597-1-raj.khem@gmail.com>
 References: <20190213173118.44597-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 5/6] cli11: Add knob to Enable/Disable clang-tidy explicity
+Subject: [meta-oe][PATCH 6/6] rocksdb: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,79 +59,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 17:31:29 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 17:31:30 -0000
 Content-Transfer-Encoding: 8bit
-
-When building with clang otherwise this gets enabled and we have
-problems with headers especially due to OEs multilibbing effort on arm
-where headers like bits/wordsize.h are hijacked and some wrappers are
-translanted, these transplants have additional requirements/constraints
-e.g. compiler internal arch defines e.g. __arm__ etc. which may not be
-passed by tools like clang-tidy which are arch independent.
-
-Ideally we should not require to disable clang-tidy here but we make a
-compromise, since OEs headers are the way as explained above
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/cli11/cli11_1.6.2.bb  |  5 +++-
- .../files/0001-Add-CLANG_TIDY-check.patch     | 27 +++++++++++++++++++
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
+ ...and-do-not-mark-default-copy-constru.patch | 57 +++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |  1 +
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
 
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb b/meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-index 6899b1264b..e62c1d3d13 100644
---- a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-@@ -6,11 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c271fee3ae28e11b24b97284d9f82887"
- SRCREV = "bd4dc911847d0cde7a6b41dfa626a85aab213baf"
- PV .= "+git${SRCPV}"
- 
--SRC_URI += "gitsm://github.com/CLIUtils/CLI11"
-+SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
-+            file://0001-Add-CLANG_TIDY-check.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
- inherit cmake
- inherit ptest
- 
-+EXTRA_OECMAKE += "-DCLANG_TIDY=OFF"
- DEPENDS += "boost"
-diff --git a/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch b/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
 new file mode 100644
-index 0000000000..bef3548a29
+index 0000000000..eccaa3a37a
 --- /dev/null
-+++ b/meta-oe/recipes-support/cli11/files/0001-Add-CLANG_TIDY-check.patch
-@@ -0,0 +1,27 @@
-+From ef6310bc726a53ff6b45071633fa7b37224cae96 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
+@@ -0,0 +1,57 @@
++From ee728434124b9b7d17abbd060a62aac79a9b79c0 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 12 Feb 2019 13:22:21 -0800
-+Subject: [PATCH] Add CLANG_TIDY check
++Date: Tue, 12 Feb 2019 14:31:24 -0800
++Subject: [PATCH] Disable -Wshadow and do not mark default copy constructors
 +
-+Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ CMakeLists.txt                                     | 2 +-
++ utilities/persistent_cache/block_cache_tier.h      | 4 ++--
++ utilities/persistent_cache/block_cache_tier_file.h | 2 +-
++ 3 files changed, 4 insertions(+), 4 deletions(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 79404b8..f68217d 100644
++index 98e2e1973..3a24a075b 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -39,7 +39,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-+         add_definitions(-Wall -Wextra -pedantic)
-+     endif()
++@@ -254,7 +254,7 @@ if(FAIL_ON_WARNINGS)
++   if(MSVC)
++     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
++   else() # assume GCC
++-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")
++   endif()
++ endif()
 + 
-+-    if(CMAKE_VERSION VERSION_GREATER 3.6)
-++    if(CMAKE_VERSION VERSION_GREATER 3.6 AND CLANG_TIDY)
-+         # Add clang-tidy if available
-+         option(CLANG_TIDY_FIX "Perform fixes for Clang-Tidy" OFF)
-+         find_program(
++diff --git a/utilities/persistent_cache/block_cache_tier.h b/utilities/persistent_cache/block_cache_tier.h
++index 2b2c0ef4f..96d0540a4 100644
++--- a/utilities/persistent_cache/block_cache_tier.h
+++++ b/utilities/persistent_cache/block_cache_tier.h
++@@ -91,9 +91,9 @@ class BlockCacheTier : public PersistentCacheTier {
++         : key_(std::move(key)), data_(data) {}
++     ~InsertOp() {}
++ 
++-    InsertOp() = delete;
+++    InsertOp() = default;
++     InsertOp(InsertOp&& /*rhs*/) = default;
++-    InsertOp& operator=(InsertOp&& rhs) = default;
+++    InsertOp& operator=(InsertOp&& rhs) = delete;
++ 
++     // used for estimating size by bounded queue
++     size_t Size() { return data_.size() + key_.size(); }
++diff --git a/utilities/persistent_cache/block_cache_tier_file.h b/utilities/persistent_cache/block_cache_tier_file.h
++index e38b6c9a1..d9b89a4f7 100644
++--- a/utilities/persistent_cache/block_cache_tier_file.h
+++++ b/utilities/persistent_cache/block_cache_tier_file.h
++@@ -262,7 +262,7 @@ class ThreadedWriter : public Writer {
++         : file_(file), buf_(buf), file_off_(file_off), callback_(callback) {}
++ 
++     IO(const IO&) = default;
++-    IO& operator=(const IO&) = default;
+++    IO& operator=(const IO&) = delete;
++     size_t Size() const { return sizeof(IO); }
++ 
++     WritableFile* file_ = nullptr;           // File to write to
 +-- 
 +2.20.1
 +
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index ebe50a58ec..78520f99b0 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -11,6 +11,7 @@ SRCBRANCH = "5.18.fb"
+ PV = "5.18.2"
+ 
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
++           file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.20.1
 
