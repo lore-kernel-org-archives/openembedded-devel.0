@@ -1,51 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id E984E7C0AB
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AF307C0AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2019 09:35:47 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id o17so5689737wrw.3
+	Thu, 14 Feb 2019 09:35:48 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id m1so5520703wml.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 14 Feb 2019 01:35:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=ZHbMi/v+1a0pWyqq70P8QR5HtS66dUDZ1I2txsH+OGM=;
-	b=dpBZLsGMUI2L7ycW4IrynU0cKxuxTMgytRfFxGqkyYHZJ1jV3jBChwAnjIj/ZUlLi5
-	zmrDTU88judcowPkTasNqMSgWOIcCp+0psbnlyNiOjY9i2MmDmyq0YoRJeFXd2wCliQE
-	ImeX6AHgBnXRwN37D4t9wzdFGIf2VmaFzxrc0BSMcWVJ1nY6fhZOffnM/OEu7orJGeAg
-	eUoxJjazydlb6/Ffr7Mz7RPd/EmXOkNxuirXUz+3rSU3PvBjYyDGQWuPH1YoRjKSkR3J
-	YNs8QZeixG+LwsQDcNv++/Xn3UZttbjs8EedIxpgnDj+2qkJ571h/45xlivAXyX+e3sx
-	ZAVA==
+	bh=L9qnsrRWLEO9HJ7prD6qbnkNvO4HjzIEWp5ncV1s9NE=;
+	b=RaHzwHmrJtSHvwj2EsZC/BmCIg3RPNrYq3NZTHJ2zqP+MoLPw33sqIR9JCX/z9p8Fw
+	bELAL0R2KaQ4go/FpMZgAJLtglR+BWzYcBSwmWYtewnbLejehV6aUE5ftozR5gFPvoyn
+	A9B1LXoRz2MMxc5vTVUxYO5m9MyivcoUI44d4SHEq4MjLgKVfemF+hTSBH7ZFXGplKql
+	ZGZlxmy8odO/kCtIwKSOLiBtZmRmfhNmDWcsZkMfQoNP+6vwIgtas7JvGndOv/8QU639
+	FATkizTOGzpOJA1Dbp5x7n8tq/8tESf1XGaszV5CWslcJrGxGPaXnddKrHB5/yP9lZg3
+	9yPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ZHbMi/v+1a0pWyqq70P8QR5HtS66dUDZ1I2txsH+OGM=;
-	b=s3hxwN3OCGdoDXrW4f3utP2OVzkxFoAMm4ba5+6j42g9h41yeMCbxd7oPqOvwFXOtm
-	ml6uYnrKpaAY+f/3HsKnspxE0sykG3JbZqSd742TyRisD5cjTk1EzGjZui28iZ6o86J9
-	3yxGlGy4SJuL+e//LgoI7RzWewREvPRIr8s9FYjb31j1mEI8w07/5HNqv9o60zS0w1Qt
-	cjBZbiTkeGSGsqbWa4qxre9x8YCBWYcK73cH94p18jas8/n9RuZGvhrZNH17N/x310L5
-	rnfwdx6iJ/XBWrvna1cRoaYwNpolxoKCQx5Qou8xjrcZdN9+w6G8/gcvClFAl3LLNE/o
-	PzyQ==
-X-Gm-Message-State: AHQUAubTUaf68DDiAqpR7/LamZrkqmtxUb6ZR+uxVrpKH6Bo8eBR+wMb
-	P9x9GbOhimaviPO3II1LGH12HZsy
-X-Google-Smtp-Source: AHgI3IZCg7epQKGEuu87OeLi7sl5FSzszDCC36Tv8cCdGBQT3+RKGb/yt71lHaVRR3nYd4RV1s1LNA==
-X-Received: by 2002:a5d:52c3:: with SMTP id r3mr1997519wrv.163.1550136947867; 
-	Thu, 14 Feb 2019 01:35:47 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=L9qnsrRWLEO9HJ7prD6qbnkNvO4HjzIEWp5ncV1s9NE=;
+	b=nCW4qctzWHyFvx1BNhHfZsKK6fZde3K+AN08YX6TT08T2wLVCfILYqb/gkY0szSVe7
+	GCYI8rdIG2hpnzHKVqkdk9U9OxKxiJKyiaODSHp/2e/yXoU7FDqeptQ7d4W0EdF533Mf
+	D2xODy23OX+0iO3ArwKomwArVBIDf5UMKRqFikCH4GqSE++9/ISqr95u71jVp87OjgBS
+	JcJieBTwz6CNkVBqUcjoB71nZSxAaJ0pYRGB+cXDPr623Jg65t1+5nMor/ZbzfqmTLO6
+	jvRyGWyLPirra245jNH+fakKPcwN2de3StWgHDQx0cFp36SwDBW0Feubm6DD6W3Dn7cP
+	qHlQ==
+X-Gm-Message-State: AHQUAua6IHVtuMZhO8Sh/xF13JExUlJG13ycAe4UNR+r7FUQ7r7387Z8
+	TiahOjAJEyqQw3gP59kb5GAc0GkF
+X-Google-Smtp-Source: AHgI3IbePHibXSGR14S9L2SCgTdRKCXoiPFI/zMxmN00GFktlID0f4S3eGY3qJQvCvshXAZVog1Dzw==
+X-Received: by 2002:a1c:9e94:: with SMTP id h142mr1824244wme.4.1550136948917; 
+	Thu, 14 Feb 2019 01:35:48 -0800 (PST)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id e6sm1258232wrt.14.2019.02.14.01.35.46
+	by smtp.gmail.com with ESMTPSA id e6sm1258232wrt.14.2019.02.14.01.35.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 14 Feb 2019 01:35:46 -0800 (PST)
+	Thu, 14 Feb 2019 01:35:48 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Feb 2019 10:35:30 +0100
-Message-Id: <20190214093534.10835-1-schnitzeltony@gmail.com>
+Date: Thu, 14 Feb 2019 10:35:31 +0100
+Message-Id: <20190214093534.10835-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190214093534.10835-1-schnitzeltony@gmail.com>
+References: <20190214093534.10835-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/5] catfish: upgrade 1.4.6 -> 1.4.7
+Subject: [PATCH 2/5] jack: Add packageconfig for dbus add files generated to jack-server package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,28 +66,35 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../catfish/{catfish_1.4.6.bb => catfish_1.4.7.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/catfish/{catfish_1.4.6.bb => catfish_1.4.7.bb} (72%)
+ meta-oe/recipes-multimedia/jack/jack_git.bb | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb b/meta-xfce/recipes-apps/catfish/catfish_1.4.7.bb
-similarity index 72%
-rename from meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb
-rename to meta-xfce/recipes-apps/catfish/catfish_1.4.7.bb
-index 229f882d0..84d5692ef 100644
---- a/meta-xfce/recipes-apps/catfish/catfish_1.4.6.bb
-+++ b/meta-xfce/recipes-apps/catfish/catfish_1.4.7.bb
-@@ -9,8 +9,8 @@ DEPENDS += "python3-distutils-extra-native"
+diff --git a/meta-oe/recipes-multimedia/jack/jack_git.bb b/meta-oe/recipes-multimedia/jack/jack_git.bb
+index 52559cb36..4fc9d12b6 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_git.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_git.bb
+@@ -25,6 +25,8 @@ inherit waf pkgconfig
  
- B = "${S}"
+ PACKAGECONFIG ??= "alsa"
+ PACKAGECONFIG[alsa] = "--alsa=yes,--alsa=no,alsa-lib"
++# --dbus only stops building jackd -> add --classic
++PACKAGECONFIG[dbus] = "--dbus --classic,,dbus"
+ PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
  
--SRC_URI[md5sum] = "879197c9400be2a80d51abf494bfffb6"
--SRC_URI[sha256sum] = "e1caee14c5268ac781434701c0eb26eddfced2c0f1ae066549583ed05f99adbf"
-+SRC_URI[md5sum] = "f4c1c2b2c560824cab8d7f6c7bd624ca"
-+SRC_URI[sha256sum] = "48caaac872d29e2762e31e59ade1310cb860af55f1a36f2520ce1d90c39227e9"
+ # portaudio is for windows builds only
+@@ -35,6 +37,11 @@ PACKAGES =+ "libjack jack-server jack-utils"
+ RDEPENDS_jack-dev_remove = "${PN} (= ${EXTENDPKGV})"
  
- FILES_${PN} += "${datadir}/metainfo"
- 
+ FILES_libjack = "${libdir}/*.so.* ${libdir}/jack/*.so"
+-FILES_jack-server = "${bindir}/jackd"
++FILES_jack-server = " \
++    ${datadir}/dbus-1/services \
++    ${bindir}/jackdbus \
++    ${bindir}/jackd \
++"
+ FILES_jack-utils = "${bindir}/*"
++
+ FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/* "
 -- 
 2.20.1
 
