@@ -1,46 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
-	[209.85.222.176])
-	by mail.openembedded.org (Postfix) with ESMTP id E75D86C45D
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EE5A7C654
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2019 23:42:13 +0000 (UTC)
-Received: by mail-qk1-f176.google.com with SMTP id y140so4695537qkb.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2019 15:42:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=GxWzhT/dMiXtO1VQaVVyJ46X0uaRQvSx6z4r3yEvy88=;
-	b=WpJVzPkbTPvQG1WBnm8kIZdK+DJ62nkSxloYpcGC388qyBF5hm+/Jh6GYiFNOJ6p+K
-	dZCKLvLWFk218lWAV/u+PPamLmRaA9qtjoF+KftMIj9Mz3lF683V3AU9FEeIYqEQrb6O
-	8t6lMEyTtykWp1qgtZcJXakBI8ysMu9GYzWAxarly5tDhdxbhqckAoqHhYMJBG/Nom2V
-	xnRDEYCLX8OsU9rvKytSRCZ0dPhvgAuwaO5vJZapQ42ICHZt+0HvjgKnaq/+Su1Jz13r
-	9Bd/O2VYJnPPsCCfcJMtAC6AlasXQ50YVm4XVzWRuQPKg2Stzcm+TOPb3klVaUgrNPoG
-	4ymQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=GxWzhT/dMiXtO1VQaVVyJ46X0uaRQvSx6z4r3yEvy88=;
-	b=dImYQJ+r/mDzivgyU6FE0yO4+K+Kzs1Qj22UtlsoZEkY3W77PCI+qIuRXoE2layI20
-	/44g0Wg5Gfz+FT+i0knklxKfIVezDATNIjuzTI61qohDRWrHJTnfodrbvnFHa4xwzpmF
-	ruF6wfI/EblH1awi0z4Ejx0GBfJ1XhRXV7IqRELS6XaMsgdHUXW0qmCtgdZ/6xC9M7oF
-	SbZuWp0yrd63YTKmKbLJsx3acBfZfdic/cIkgdWTx7kDlnOqerXes0UoZkFjT1GEMTsi
-	LBT/1p8+HIH/WqPn45uHjmDTWfya1KJbvqI0z6+R1ANG8h+Dg4EnEaeinq/puI1pPMxi
-	X0+Q==
-X-Gm-Message-State: AHQUAubwB21oOnetjGdRPmrmKKvGeJ/mEAdkaS4IhFfmb+2bAZq6iwgI
-	Oo0+0xE7ABhg7JSLN7jlXQFTvwJGobYAGrdqUNE=
-X-Google-Smtp-Source: AHgI3IYMnozuU6H8/6tZaP3qC8BrgWcOqZSzw1reVCfpUKTY6X/OZAYb4e9NrBUzyIv+6fta2cIi8+CbRMv15Ps6heQ=
-X-Received: by 2002:a37:4c41:: with SMTP id z62mr4889620qka.206.1550187734473; 
-	Thu, 14 Feb 2019 15:42:14 -0800 (PST)
+	Fri, 15 Feb 2019 01:32:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1F1W2uO027414
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 14 Feb 2019 17:32:03 -0800 (PST)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.435.0;
+	Thu, 14 Feb 2019 17:32:02 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Thu, 14 Feb 2019 17:32:02 -0800
+Message-ID: <20190215013202.126333-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20190214015858.30115-1-hongl.fnst@cn.fujitsu.com>
-In-Reply-To: <20190214015858.30115-1-hongl.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Feb 2019 15:41:48 -0800
-Message-ID: <CAMKF1soP_s+hup0CC1UUhdZ+8aEokrCdZgTARiD3C7B9T=Wubw@mail.gmail.com>
-To: Hong Liu <hongl.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] [meta-python][PATCH] python-pycparser: upgrade to 2.19
+Subject: [meta-oe][PATCH] cryptsetup: Upgrade to 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,35 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2019 23:42:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 15 Feb 2019 01:32:03 -0000
+Content-Type: text/plain
 
-there is py3 version as well, so when such recipe is upgraded then
-both should be done together. This time I have done it on top of this.
-But please keep that in mind next time.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-On Wed, Feb 13, 2019 at 5:58 PM Hong Liu <hongl.fnst@cn.fujitsu.com> wrote:
->
-> 1.Upgrade python-pycparser from 2.18 to 2.19
->
-> Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
-> ---
->  .../python/{python-pycparser_2.18.bb => python-pycparser_2.19.bb} | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-pycparser_2.18.bb => python-pycparser_2.19.bb} (100%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-pycparser_2.18.bb b/meta-python/recipes-devtools/python/python-pycparser_2.19.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-pycparser_2.18.bb
-> rename to meta-python/recipes-devtools/python/python-pycparser_2.19.bb
-> --
-> 2.17.2
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Instead of hardcoding the version in SRC_URI,
+get the version for the folder of the source
+dynamically in SRC_URI.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ .../cryptsetup/{cryptsetup_2.0.4.bb => cryptsetup_2.1.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.0.4.bb => cryptsetup_2.1.0.bb} (83%)
+
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
+similarity index 83%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
+index cc7bc6e01..cf1d22242 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
+@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+ 
+ DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
+ 
+-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
+-SRC_URI[md5sum] = "ed42b31f67d05b05e392d1943d467b8d"
+-SRC_URI[sha256sum] = "9d3a3c7033293e0c97f0ad0501fd5b4d4913ae497cbf70cca06633ccc54b5734"
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
++SRC_URI[md5sum] = "41d8b985ef69242852b93e95d53e8e28"
++SRC_URI[sha256sum] = "a3eeb2741f8f3376d16585191f3c60e067dd987e096c3c4b073fab7748b1c897"
+ 
+ inherit autotools gettext pkgconfig
+ 
+-- 
+2.17.1
+
 
