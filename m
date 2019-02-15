@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BC08F7C6A3
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D2896BE2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2019 06:06:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1F66YrZ021898
+	Fri, 15 Feb 2019 06:06:51 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1F66GcA008992
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Feb 2019 22:06:34 -0800 (PST)
+	Thu, 14 Feb 2019 22:06:26 -0800
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
-	Thu, 14 Feb 2019 22:06:34 -0800
+	Thu, 14 Feb 2019 22:06:05 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Fri, 15 Feb 2019 01:04:52 -0500
-Message-ID: <87aaeb8cf86ba1b169ebd831e9f5b0bae5662d26.1550210289.git.hongxu.jia@windriver.com>
+Date: Fri, 15 Feb 2019 01:04:50 -0500
+Message-ID: <fe9b17af46281ae6c9a1ea351d686ab8fd1f46a7.1550210289.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1550210289.git.hongxu.jia@windriver.com>
 References: <cover.1550210289.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 08/12] python3-absl: add version 0.7.0
+Subject: [PATCH 06/12] python3-markdown: add version 3.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2019 06:06:33 -0000
+X-List-Received-Date: Fri, 15 Feb 2019 06:06:51 -0000
 Content-Type: text/plain
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-absl_0.7.0.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-absl_0.7.0.bb
+ .../recipes-devtools/python/python3-markdown_3.0.1.bb        | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-absl_0.7.0.bb b/meta-python/recipes-devtools/python/python3-absl_0.7.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb b/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
 new file mode 100644
-index 0000000..c65a6d7
+index 0000000..b6d2f18
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-absl_0.7.0.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Abseil Python Common Libraries"
-+HOMEPAGE = "https://github.com/abseil/abseil-py"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++++ b/meta-python/recipes-devtools/python/python3-markdown_3.0.1.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "A Python implementation of John Gruber's Markdown."
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=745aaad0c69c60039e638bff9ffc59ed"
 +
-+SRC_URI = "git://github.com/abseil/abseil-py.git"
-+SRCREV ?= "e3ce504183c57fc4eca52fe84732c11cda99d131"
++inherit pypi setuptools3
 +
-+inherit setuptools3
-+
-+S = "${WORKDIR}/git"
++PYPI_PACKAGE = "Markdown"
++PYPI_SRC_URI = "https://files.pythonhosted.org/packages/3c/52/7bae9e99a7a4be6af4a713fe9b692777e6468d28991c54c273dfb6ec9fb2/Markdown-${PV}.tar.gz"
++SRC_URI[md5sum] = "72219f46ca440b657bf227500731bdf1"
++SRC_URI[sha256sum] = "d02e0f9b04c500cde6637c11ad7c72671f359b87b9fe924b2383649d8841db7c"
 +
 +BBCLASSEXTEND = "native"
 -- 
