@@ -1,50 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 761936010B
+Return-Path: <ckalluri@xilinx.com>
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com
+	(mail-eopbgr760049.outbound.protection.outlook.com [40.107.76.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 9AEE1600E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2019 02:27:29 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id u9so520296pgo.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2019 18:27:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=2Ce26+FEudiUeF6uqqj9yNaBB5wLOe6zIFFbyyX3/Xc=;
-	b=FhADfmZ4dpEY0l6AOvOkgxxE1pQCQ0WQa0EGo4JYiBb81M07VMkQXANyXQoGTSJGq+
-	MRC5Qw+vuV40msbPNHKQsraENov5eipAI1oVclT0tCX/yWEpWxRDlnFOtzPiPQXAOBec
-	/Idyl/p1NqaACdb65tTRDxSgJsjq+YB2iVw3VKHV5+vn7y0qrLqEZnHGvriOhg/pSLeI
-	VmNV0kasjR+pde60JTTOW9Z2H5q1LwjWdOgzS+DbxlX2R+j5m03U2vx2mWgxwa50Yjp0
-	ID44BGTtXxwZQ4bjsHo7WQ1rjXSRjQl3ZMV3kCiUEQAkxfOlNCkS8oUVgfIJKRLNHEGh
-	OE8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=2Ce26+FEudiUeF6uqqj9yNaBB5wLOe6zIFFbyyX3/Xc=;
-	b=HpeJWlzoCF6hMeiNdzfJn2PlhtRiIurJNh1Xe7qeTOvxJEMNE5aoVthGnS5NGqKRmo
-	U5dTUf4vRkJ4jhhOuVp1tUehSTObFb6IJqqzjpYUTgc1NeZp1xYmIkaGt6mWfo68YJIg
-	f3ZCO4HxWJanziLlreT/x/3SaJhd1TFmDEVEYvbRJskq9t3s7Dne5KBU/arjpsgN+k0P
-	8iZooUDvPXHp4nOy0Tn59Qw/08husm6nWUmFae7/5xA9JBuxc3BoKFC/p8oA1xMNknTc
-	iGkRVknKtgMOEPap6x5hMt+fV8HMRTbQamUIK3cADg2abCMxzRbxXZIswZMB7bMGVcqj
-	8Y2Q==
-X-Gm-Message-State: AHQUAuZ++Lli6ZUv0mjsE1qh2rIBhLQNBijPZiReWDhkQ4fok8RzxhlP
-	tqWkVaLCA4IjwSnJFvMhjSX2eFGJ
-X-Google-Smtp-Source: AHgI3IYuTQe0tkzb/3BCw8iQxYPM5NSBH7bXsBpD1g2nNHgNCqTC41eHvA2cRLMHyXxtS2jN0GFLTw==
-X-Received: by 2002:a62:444b:: with SMTP id r72mr7491482pfa.184.1550197649880; 
-	Thu, 14 Feb 2019 18:27:29 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::dc44])
-	by smtp.gmail.com with ESMTPSA id
-	d13sm5374658pfd.58.2019.02.14.18.27.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Feb 2019 18:27:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Feb 2019 18:27:18 -0800
-Message-Id: <20190215022718.24488-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	Fri, 15 Feb 2019 03:31:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=IZbBhh8k+HbZbg4ro/PS2U7HhNBhZFJpFhmmgaHOV1E=;
+	b=zxoI1yrE2+t7vpXH6nd7pyccqJPLaAkJN5Giuph27cEAxbr8RsICEM/w4RAD+eq5vxeWll1gMX6RuL6Jc8wu4yNsGCkPwFxTiGCm20ci7Wo6Oe9MROFj7H7BwqlwOYIdE2TNcnrHZ3wVcJrh7YPtrWK36a1Zvv+Di4QJhz3hkCM=
+Received: from CY4PR02CA0005.namprd02.prod.outlook.com (2603:10b6:903:18::15)
+	by DM6PR02MB5019.namprd02.prod.outlook.com (2603:10b6:5:52::20) with
+	Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.1601.19;
+	Fri, 15 Feb 2019 03:16:30 +0000
+Received: from SN1NAM02FT044.eop-nam02.prod.protection.outlook.com
+	(2a01:111:f400:7e44::204) by CY4PR02CA0005.outlook.office365.com
+	(2603:10b6:903:18::15) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1622.16 via
+	Frontend Transport; Fri, 15 Feb 2019 03:16:30 +0000
+Authentication-Results: spf=pass (sender IP is 149.199.60.100)
+	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
+	signed) header.d=none; lists.openembedded.org;
+	dmarc=bestguesspass action=none header.from=xilinx.com;
+Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
+	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
+	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
+Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
+	SN1NAM02FT044.mail.protection.outlook.com (10.152.72.173) with
+	Microsoft SMTP Server (version=TLS1_0,
+	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.1580.10
+	via Frontend Transport; Fri, 15 Feb 2019 03:16:29 +0000
+Received: from unknown-38-66.xilinx.com ([149.199.38.66]:44492
+	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
+	(envelope-from <chandana.kalluri@xilinx.com>) id 1guTzJ-00011e-Ev
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Feb 2019 19:16:29 -0800
+Received: from [127.0.0.1] (helo=localhost)
+	by xsj-pvapsmtp01 with smtp (Exim 4.63)
+	(envelope-from <chandana.kalluri@xilinx.com>) id 1guTzE-0003uO-Ac
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Feb 2019 19:16:24 -0800
+Received: from xsj-pvapsmtp01 (mail.xilinx.com [149.199.38.66] (may be forged))
+	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
+	x1F3GJNc007416; Thu, 14 Feb 2019 19:16:19 -0800
+Received: from [172.19.2.12] (helo=xsjckalluri50.xilinx.com)
+	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
+	(envelope-from <chandana.kalluri@xilinx.com>)
+	id 1guTz9-0003tv-MU; Thu, 14 Feb 2019 19:16:19 -0800
+From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Feb 2019 19:16:14 -0800
+Message-ID: <1550200574-9614-1-git-send-email-chandana.kalluri@xilinx.com>
+X-Mailer: git-send-email 2.7.4
+X-RCIS-Action: ALLOW
+X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
+X-TM-AS-User-Approved-Sender: Yes;Yes
+X-EOPAttributedMessage: 0
+X-MS-Office365-Filtering-HT: Tenant
+X-Forefront-Antispam-Report: CIP:149.199.60.100; IPV:NLI; CTRY:US; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10009020)(346002)(396003)(39850400004)(136003)(376002)(2980300002)(189003)(199004)(50466002)(186003)(2906002)(356004)(6666004)(47776003)(8936002)(16586007)(6916009)(4326008)(426003)(478600001)(106002)(316002)(336012)(476003)(2616005)(51416003)(63266004)(126002)(9786002)(2351001)(48376002)(26005)(36386004)(486006)(305945005)(8676002)(107886003)(81156014)(106466001)(14444005)(50226002)(7696005)(36756003)(77096007)(81166006)(42866002)(107986001)(5001870100001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR02MB5019; H:xsj-pvapsmtpgw02;
+	FPR:; SPF:Pass; LANG:en;
+	PTR:unknown-60-100.xilinx.com,xapps1.xilinx.com; MX:1; A:1; 
+X-Microsoft-Exchange-Diagnostics: 1; SN1NAM02FT044;
+	1:FaAAPTZqjQaJ4jhcThWRm0oHY6bJbrmSATiDp3O/bYo3gjemGxHGuNEyicoXL6qVhBBhjY237MolP1MOiDWB1cFtEPmG8ByCjiDJMW/da9wkwNTPNXEs2qJTeSWeJAivKHXCG8Pd2a7D6lT4/0BN1A==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] php_7.3.2.bb: Fix cross build on hosts which have libxml2 installed
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 20031c60-ceff-4085-d5ca-08d692f3fab0
+X-Microsoft-Antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605077)(4608076)(4709027)(2017052603328)(7153060);
+	SRVR:DM6PR02MB5019; 
+X-MS-TrafficTypeDiagnostic: DM6PR02MB5019:
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
+X-Microsoft-Exchange-Diagnostics: 1; DM6PR02MB5019;
+	20:iEorzqJ96nN9KgcNMJbuH2vzzDNoZUZGeR7taxEzhzWTzglQsBw6NK/CD8xdmJmbe0WyKP2D+Zrr1k76dotXP+EDDfK4jvWgBreY5q6hJUDOIZTfsgj64ljJ6wJUCDCB03FzZu+X8Tul7eWsUc/3sroKIOhEKHwWtRnKwomjY8sJYppecpkGCCaHGb9DDFEEwJqy0oE5POgJZMez96WGidVJX8m8c9JG/kzSbOsBcG+0qjyNaEOYGJ4shgPAgxcmMR6fk57hyeeRG4c5OHVxCOU0Gapr3p99JHF86KcXENj7WO1tfc89IpX2nRH/1R2SZr4DhJzuErW6+7tmp66amfPm5i7FwlYP5IijNVE7ODf+LsO03oj91nXg+gKq9Aoz22Rs6R0plnO8AKHKpH3k9SH0WWAFC/ZxbiagYq/iJPs8d43u7ypxNnXXS3QwmNTe0z3Xoq4cnie1sLLNtBfczE2oCUgAt7aJrchg9bcBxZJ9oUr80UENUVWXtTL8/GU3
+X-Microsoft-Antispam-PRVS: <DM6PR02MB5019F6557FE56FED406B7DDBB0600@DM6PR02MB5019.namprd02.prod.outlook.com>
+X-Forefront-PRVS: 09497C15EB
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DM6PR02MB5019;
+	23:ZQwPuZW/0EY90DHYgBRkOzPjfnIDR9aqpNzqLxpkR?=
+	=?us-ascii?Q?B0Ns5pkJhyzZXLpOwbtF4OHojtLrq+koXYU1DR2nWSH8AI1laX42h67O4ANR?=
+	=?us-ascii?Q?CULvuxW/eDfI+0NbyEed3vgfiZMN+Qwca+VPS4Bo1FlXf52Ez9Ahs5IUV3je?=
+	=?us-ascii?Q?gofq8P0VpSOhjhnKy92Xd7VkRZtTmjGOttMRwSCYF318/xIKGWLrIeaIidtH?=
+	=?us-ascii?Q?HKhAnUItaIIBdaCsOc0UCfgb7IwlrEQ0jFzYVL0hkBDesS3osK6SyArJqa7X?=
+	=?us-ascii?Q?6gVps1FTEa5dqtyp/4HhMN6jPMnXoSa2seqaj8RFyjRVeVtK4qCfXvf433bq?=
+	=?us-ascii?Q?rdQ9Mhy8vBAr6pnz6D/a4Kf50jMe2G8eidW4PP/dFrkrzerbXu1obYxTbBgM?=
+	=?us-ascii?Q?n7Vezlg3+WIN+FN2h0+RlqFmv1IlXZfNy3t6X+4xJHhBW1hRVKnpFWqMNUTg?=
+	=?us-ascii?Q?MoooOwazJnXS+flSs1UdCnzmgZHuysa64PH+FK1qEU8Fgwo6GYhJ05haE/uI?=
+	=?us-ascii?Q?bzE791fkE8oY6KycQOPWcFATrObmbrpaP3yg9InHMKJaPYgAssB144N/auQj?=
+	=?us-ascii?Q?ztszhILpzGeh3J8MvOKArl1ldd8LtOenbPyIQ+3C3GN4UdJbnpIG99WXDpmk?=
+	=?us-ascii?Q?/DiFahskhAZMaVWDF98IUagXx0848F1DIdV0Wb8srAfpGEhyMsCFHU7ty0qT?=
+	=?us-ascii?Q?NN+KgSJi6G/U0zAF0FMCV3UvXfxrS9N71sDCzpp7obO2RiBUqYFkmUwvMVgi?=
+	=?us-ascii?Q?fvEz7ux0p5UclO1ZAkRNkejk4XPPrYb9839GpG5h6RMLRFjB0HIFron+EttG?=
+	=?us-ascii?Q?FFMckzE6eaDzElpjiFfLVmiiEpzUgwPl2NbNvOEjnc+T0FdfBG4k7IAsHcVm?=
+	=?us-ascii?Q?Bue5o93n6cbEV5wEkYtEjPlQo1rSRSiSxYmP2K2lFLd5zBm87e7xB3NOiq/X?=
+	=?us-ascii?Q?QqE1NgBXaBkLkkeXG0Se5wAyJ13n5+X8ZJIu+lDmUIznoBny0YwzEYpuwcTq?=
+	=?us-ascii?Q?5avei0xjww6cIF1UU9Z3mj3v138bESQIjMrfYgHGZytDYxvwxpN3V8B3VMxC?=
+	=?us-ascii?Q?+KOU23N693VGSSfoDteyPqDm7py?=
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: dsoVNxwej+u//lvD22NUHS+wJ4f6EUr0mwY9RadGyX92w1raUVtBiB27Ue/hgXIuVppclhg+0Rf+LHanBH4BUEmM81z2uVgB/+irLuMM8IzI7mrDYT89FQoS4cSjj/nuVQ4n3b6IGMuaEGfgOcV1njjJsvdR/siHwJ5glnsJhYbaKAz2k5ixCdn7VzR+lWGsemrnFwNyJLvchGQ2BAD5oVrtMvecPMlTCUpiDAYV7fo4KzhdWb/NTsqzN6unOq8QIgkoB/2QXuSqA+cm6/ngJR0tTU/FrinGyEVXZWJrHLkT3WuP8aolYbhuitgl0lfcDpg5HcwrUb4BlfTgpN3ETqLquECk1wxSR83pjB8kIVPIMEEuXZ+toCDlJP5dMrJBSpPOF505gCGeZrB0YdnXfoIJiQs00Z3UgS3TjRPTxQQ=
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2019 03:16:29.8884 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20031c60-ceff-4085-d5ca-08d692f3fab0
+X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
+	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR02MB5019
+Subject: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor recipe to meta-oe/recipes-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,254 +121,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2019 02:27:29 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 15 Feb 2019 03:31:18 -0000
+Content-Type: text/plain
 
-libxml2 is not detected properly, it pokes at host and takes the
-libraries and header files added to build which links in libraries like
-libicu which may not be available in sysroot causing configure failures
-like
-
-checking for sqlite3 files in default path... found in TOPDIR/build/tmp/work/aarch64-yoe-linux/php/7.3.2-r0/recipe-sysroot/usr/lib/..
-checking for SQLite 3.3.9+... checking for sqlite3_prepare_v2 in -lsqlite3... no
-not found
-configure: error: Please install SQLite 3.3.9 first or check libsqlite3 is present
-
-the reason is configure test fails to find icu libraries since they were
-added based on build host's libxml2.pc
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Changqing Li <changqing.li@windriver.com>
+This commit c245374fafbc4769e0c98ae18ac9ff71f9f14169 places
+ace-cloud-editor recipe in an incorrect location. This commit moves the
+recipe to the right location.
 ---
- ...Use-pkg-config-for-libxml2-detection.patch |  23 ++++
- ...e-pkg-config-for-FreeType2-detection.patch |  53 +++++++++
- ...xt-intl-Use-pkg-config-to-detect-icu.patch | 111 ++++++++++++++++++
- meta-oe/recipes-devtools/php/php_7.3.2.bb     |   3 +
- 4 files changed, 190 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-libxml2-detection.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-FreeType2-detection.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
+ .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ++++++++++++++++++++++
+ .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ----------------------
+ 2 files changed, 22 insertions(+), 22 deletions(-)
+ create mode 100644 meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+ delete mode 100644 recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-libxml2-detection.patch b/meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-libxml2-detection.patch
+diff --git a/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
 new file mode 100644
-index 0000000000..ccc6d4ede1
+index 0000000..4ea6c8a
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/0001-Use-pkg-config-for-libxml2-detection.patch
-@@ -0,0 +1,23 @@
-+Use pkg-config for libxml2 detection.
++++ b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Ace is a code editor written in JavaScript."
++SUMMARY = "Ace is a code editor written in JavaScript. This repository has only generated files"
 +
-+xml2-config does not work. Use pkgconfig to set CPPFLAGS and LIBS.
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=794d11c5219c59c9efa2487c2b4066b2"
 +
-+Upstream-Status: Inappropriate [configuration]
++SRC_URI = "git://github.com/ajaxorg/ace-builds.git;protocol=https"
 +
-+Signed-off-by:  Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.in | 15 ++-------------
-+ 1 file changed, 2 insertions(+), 13 deletions(-)
-+--- a/acinclude.m4
-++++ b/acinclude.m4
-+@@ -2481,8 +2481,8 @@ AC_DEFUN([PHP_SETUP_LIBXML], [
-+     LIBXML_VERSION=`expr [$]1 \* 1000000 + [$]2 \* 1000 + [$]3`
-+     if test "$LIBXML_VERSION" -ge "2006011"; then
-+       found_libxml=yes
-+-      LIBXML_LIBS=`$XML2_CONFIG --libs`
-+-      LIBXML_INCS=`$XML2_CONFIG --cflags`
-++      LIBXML_LIBS=`pkg-config --libs libxml-2.0`
-++      LIBXML_INCS=`pkg-config --cflags libxml-2.0`
-+     else
-+       AC_MSG_ERROR([libxml2 version 2.6.11 or greater required.])
-+     fi
-diff --git a/meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-FreeType2-detection.patch b/meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-FreeType2-detection.patch
-new file mode 100644
-index 0000000000..f36ddac262
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/0048-Use-pkg-config-for-FreeType2-detection.patch
-@@ -0,0 +1,53 @@
-+From: =?utf-8?b?T25kxZllaiBTdXLDvQ==?= <ondrej@sury.org>
-+Date: Mon, 22 Oct 2018 06:54:31 +0000
-+Subject: Use pkg-config for FreeType2 detection
++PV = "02.07.17+git${SRCPV}"
++SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
 +
-+---
-+ ext/gd/config.m4 | 30 +++++++++++++++++++-----------
-+ 1 file changed, 19 insertions(+), 11 deletions(-)
++FILES_${PN} = "${datadir}/ace-builds"
 +
-+diff --git a/ext/gd/config.m4 b/ext/gd/config.m4
-+index 498d870..d28c6ae 100644
-+--- a/ext/gd/config.m4
-++++ b/ext/gd/config.m4
-+@@ -184,21 +184,29 @@ AC_DEFUN([PHP_GD_XPM],[
-+ AC_DEFUN([PHP_GD_FREETYPE2],[
-+   if test "$PHP_FREETYPE_DIR" != "no"; then
-+ 
-+-    for i in $PHP_FREETYPE_DIR /usr/local /usr; do
-+-      if test -f "$i/bin/freetype-config"; then
-+-        FREETYPE2_DIR=$i
-+-        FREETYPE2_CONFIG="$i/bin/freetype-config"
-+-        break
-++    if test -z "$PKG_CONFIG"; then
-++      AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-++    fi
-++    if test -x "$PKG_CONFIG" && $PKG_CONFIG --exists freetype2 ; then
-++      FREETYPE2_CFLAGS=`$PKG_CONFIG --cflags freetype2`
-++      FREETYPE2_LIBS=`$PKG_CONFIG --libs freetype2`
-++    else
-++      for i in $PHP_FREETYPE_DIR /usr/local /usr; do
-++        if test -f "$i/bin/freetype-config"; then
-++          FREETYPE2_DIR=$i
-++          FREETYPE2_CONFIG="$i/bin/freetype-config"
-++          break
-++        fi
-++      done
-++
-++      if test -z "$FREETYPE2_DIR"; then
-++        AC_MSG_ERROR([freetype-config not found.])
-+       fi
-+-    done
-+ 
-+-    if test -z "$FREETYPE2_DIR"; then
-+-      AC_MSG_ERROR([freetype-config not found.])
-++      FREETYPE2_CFLAGS=`$FREETYPE2_CONFIG --cflags`
-++      FREETYPE2_LIBS=`$FREETYPE2_CONFIG --libs`
-+     fi
-+ 
-+-    FREETYPE2_CFLAGS=`$FREETYPE2_CONFIG --cflags`
-+-    FREETYPE2_LIBS=`$FREETYPE2_CONFIG --libs`
-+-
-+     PHP_EVAL_INCLINE($FREETYPE2_CFLAGS)
-+     PHP_EVAL_LIBLINE($FREETYPE2_LIBS, GD_SHARED_LIBADD)
-+     AC_DEFINE(HAVE_LIBFREETYPE,1,[ ])
-diff --git a/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch b/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
-new file mode 100644
-index 0000000000..deada1ff97
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
-@@ -0,0 +1,111 @@
-+From: Hugh McMaster <hugh.mcmaster@outlook.com>
-+Date: Wed, 5 Dec 2018 23:27:30 +1100
-+Subject: ext/intl: Use pkg-config to detect icu
++S = "${WORKDIR}/git"
 +
-+The developers of icu recommend using pkg-config to detect icu,
-+because icu-config is deprecated.
-+---
-+ acinclude.m4       | 56 +++++++-----------------------------------------------
-+ ext/intl/config.m4 | 16 ++++++----------
-+ 2 files changed, 13 insertions(+), 59 deletions(-)
++DEPENDS += "rsync-native"
 +
-+--- php7.3.orig/acinclude.m4
-++++ php7.3/acinclude.m4
-+@@ -2168,58 +2168,16 @@ dnl
-+ dnl Common setup macro for ICU
-+ dnl
-+ AC_DEFUN([PHP_SETUP_ICU],[
-+-  PHP_ARG_WITH(icu-dir,,
-+-  [  --with-icu-dir=DIR      Specify where ICU libraries and headers can be found], DEFAULT, no)
-++  PKG_CHECK_MODULES([ICU], [icu-io >= 50.1])
-+ 
-+-  if test "$PHP_ICU_DIR" = "no"; then
-+-    PHP_ICU_DIR=DEFAULT
-+-  fi
-+-
-+-  if test "$PHP_ICU_DIR" = "DEFAULT"; then
-+-    dnl Try to find icu-config
-+-    AC_PATH_PROG(ICU_CONFIG, icu-config, no, [$PATH:/usr/local/bin])
-+-  else
-+-    ICU_CONFIG="$PHP_ICU_DIR/bin/icu-config"
-+-  fi
-+-
-+-  AC_MSG_CHECKING([for location of ICU headers and libraries])
-+-
-+-  dnl Trust icu-config to know better what the install prefix is..
-+-  icu_install_prefix=`$ICU_CONFIG --prefix 2> /dev/null`
-+-  if test "$?" != "0" || test -z "$icu_install_prefix"; then
-+-    AC_MSG_RESULT([not found])
-+-    AC_MSG_ERROR([Unable to detect ICU prefix or $ICU_CONFIG failed. Please verify ICU install prefix and make sure icu-config works.])
-+-  else
-+-    AC_MSG_RESULT([$icu_install_prefix])
-+-
-+-    dnl Check ICU version
-+-    AC_MSG_CHECKING([for ICU 4.0 or greater])
-+-    icu_version_full=`$ICU_CONFIG --version`
-+-    ac_IFS=$IFS
-+-    IFS="."
-+-    set $icu_version_full
-+-    IFS=$ac_IFS
-+-    icu_version=`expr [$]1 \* 1000 + [$]2`
-+-    AC_MSG_RESULT([found $icu_version_full])
-+-
-+-    if test "$icu_version" -lt "4000"; then
-+-      AC_MSG_ERROR([ICU version 4.0 or later is required])
-+-    fi
-++  PHP_EVAL_INCLINE($ICU_CFLAGS)
-++  PHP_EVAL_LIBLINE($ICU_LIBS, $1)
-+ 
-+-    ICU_VERSION=$icu_version
-+-    ICU_INCS=`$ICU_CONFIG --cppflags-searchpath`
-+-    ICU_LIBS=`$ICU_CONFIG --ldflags --ldflags-icuio`
-+-    PHP_EVAL_INCLINE($ICU_INCS)
-+-    PHP_EVAL_LIBLINE($ICU_LIBS, $1)
-++  ICU_CFLAGS="$ICU_CFLAGS -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
-++  ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
-+ 
-+-    ICU_CXXFLAGS=`$ICU_CONFIG --cxxflags`
-+-    if test "$icu_version" -ge "49000"; then
-+-      ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
-+-      ICU_CFLAGS="-DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
-+-    fi
-+-    if test "$icu_version" -ge "60000"; then
-+-      ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
-+-    fi
-++  if $PKG_CONFIG icu-io --atleast-version=60; then
-++    ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
-+   fi
-+ ])
-+ 
-+--- php7.3.orig/ext/intl/config.m4
-++++ php7.3/ext/intl/config.m4
-+@@ -9,15 +9,7 @@ if test "$PHP_INTL" != "no"; then
-+   PHP_SETUP_ICU(INTL_SHARED_LIBADD)
-+   PHP_SUBST(INTL_SHARED_LIBADD)
-+   PHP_REQUIRE_CXX()
-+-  INTL_COMMON_FLAGS="$ICU_INCS $ICU_CFLAGS -Wno-write-strings -D__STDC_LIMIT_MACROS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
-+-  if test "$icu_version" -ge "4002"; then
-+-    icu_spoof_src=" spoofchecker/spoofchecker_class.c \
-+-    spoofchecker/spoofchecker.c\
-+-    spoofchecker/spoofchecker_create.c\
-+-    spoofchecker/spoofchecker_main.c"
-+-  else
-+-    icu_spoof_src=""
-+-  fi
-++  INTL_COMMON_FLAGS="$ICU_CFLAGS -Wno-write-strings -D__STDC_LIMIT_MACROS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
-+   PHP_NEW_EXTENSION(intl, php_intl.c \
-+     intl_error.c \
-+     intl_convert.c \
-+@@ -68,7 +60,11 @@ if test "$PHP_INTL" != "no"; then
-+     transliterator/transliterator_methods.c \
-+     uchar/uchar.c \
-+     idn/idn.c \
-+-    $icu_spoof_src, $ext_shared,,$INTL_COMMON_FLAGS,cxx)
-++    spoofchecker/spoofchecker_class.c \
-++    spoofchecker/spoofchecker.c\
-++    spoofchecker/spoofchecker_create.c\
-++    spoofchecker/spoofchecker_main.c \
-++    , $ext_shared,,$INTL_COMMON_FLAGS,cxx)
-+ 
-+   PHP_INTL_CXX_SOURCES="intl_convertcpp.cpp \
-+     common/common_enum.cpp \
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.2.bb b/meta-oe/recipes-devtools/php/php_7.3.2.bb
-index fdd08ebc9c..db04ce3756 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.2.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.2.bb
-@@ -3,6 +3,9 @@ require php.inc
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
- 
- SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
-+            file://0048-Use-pkg-config-for-FreeType2-detection.patch \
-+            file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
-+            file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            "
- SRC_URI_append_class-target = " \
-                                 file://pear-makefile.patch \
++do_install () {
++    install -d ${D}/${datadir}/ace-builds/src-noconflict
++    rsync -r --exclude=".*" ${S}/src-noconflict/* ${D}/${datadir}/ace-builds/src-noconflict
++}
++
+diff --git a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb b/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+deleted file mode 100644
+index 4ea6c8a..0000000
+--- a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Ace is a code editor written in JavaScript."
+-SUMMARY = "Ace is a code editor written in JavaScript. This repository has only generated files"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=794d11c5219c59c9efa2487c2b4066b2"
+-
+-SRC_URI = "git://github.com/ajaxorg/ace-builds.git;protocol=https"
+-
+-PV = "02.07.17+git${SRCPV}"
+-SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
+-
+-FILES_${PN} = "${datadir}/ace-builds"
+-
+-S = "${WORKDIR}/git"
+-
+-DEPENDS += "rsync-native"
+-
+-do_install () {
+-    install -d ${D}/${datadir}/ace-builds/src-noconflict
+-    rsync -r --exclude=".*" ${S}/src-noconflict/* ${D}/${datadir}/ace-builds/src-noconflict
+-}
+-
 -- 
-2.20.1
+2.7.4
 
 
