@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E12AB6BE2A
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 629E27C6A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2019 06:07:01 +0000 (UTC)
+	Fri, 15 Feb 2019 06:07:03 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1F672D4029325
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1F674Gl021901
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Feb 2019 22:07:02 -0800 (PST)
+	Thu, 14 Feb 2019 22:07:04 -0800 (PST)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
-	Thu, 14 Feb 2019 22:07:02 -0800
+	Thu, 14 Feb 2019 22:07:03 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Fri, 15 Feb 2019 01:04:54 -0500
-Message-ID: <4494d24a8c9f4d37a69d88fb06edeb6227998ebe.1550210289.git.hongxu.jia@windriver.com>
+Date: Fri, 15 Feb 2019 01:04:55 -0500
+Message-ID: <f1c281963369fd58f2f1f4cb151f51c1a43524ae.1550210289.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1550210289.git.hongxu.jia@windriver.com>
 References: <cover.1550210289.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 10/12] python3-gast: add version 0.2.2
+Subject: [PATCH 11/12] python3-keras-applications: add version 1.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2019 06:07:02 -0000
+X-List-Received-Date: Fri, 15 Feb 2019 06:07:03 -0000
 Content-Type: text/plain
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-gast_0.2.2.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-gast_0.2.2.bb
+ .../python/python3-keras-applications_1.0.6.bb        | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-keras-applications_1.0.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-gast_0.2.2.bb b/meta-python/recipes-devtools/python/python3-gast_0.2.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-keras-applications_1.0.6.bb b/meta-python/recipes-devtools/python/python3-keras-applications_1.0.6.bb
 new file mode 100644
-index 0000000..6e08a19
+index 0000000..d38b992
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gast_0.2.2.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "A generic AST to represent Python2 and Python3's Abstract Syntax Tree(AST)."
-+HOMEPAGE = "https://github.com/serge-sans-paille/gast"
++++ b/meta-python/recipes-devtools/python/python3-keras-applications_1.0.6.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Reference implementations of popular deep learning models"
++HOMEPAGE = "https://github.com/keras-team/keras-applications"
 +SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a3ad9b6802e713fc5e307e1230f1ea90"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=366e2fd3c9714f162d3663b6f97cfe41"
 +
-+SRC_URI = "git://github.com/serge-sans-paille/gast.git"
-+SRCREV ?= "ed82e2a507505c6b18eb665d3738b6c0602da5e7"
++SRC_URI = "git://github.com/keras-team/keras-applications.git"
++SRCREV ?= "61de21815728aa66377ebb2a7b4c2f5492a34dd2"
++
 +
 +inherit setuptools3
 +
 +S = "${WORKDIR}/git"
 +
 +BBCLASSEXTEND = "native"
++
++RDEPENDS_${PN} = "python3-numpy \
++                  python3-h5py \
++                 "
 -- 
 2.8.1
 
