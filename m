@@ -1,51 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 89F887C80A
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1651 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 16 Feb 2019 17:31:34 UTC
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id D4C5C6C0E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2019 16:40:50 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id b8so14507900qtr.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2019 08:40:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yPWvFJG8p54DwhHVHU/KVP0Q3Fj/Nd7zD1bGH6EIi8A=;
-	b=hSVM71BXSWgtYwMp/UcHE00hSkrJkzMN/OwuirQhI7MkjFBrWwaBnLApGYP4dAVryo
-	mt5ESxs377bNboRJnXSYsSi6UdaqZO+0gAIaJqNirTACgm9dUB0aBOXfmdze2tY1VJRd
-	x5be40PQJh2nKy3WnBMHO1tA7DlmcHU6kHJGMogUkvbwFNUIh5jsHs5Tcv7u1v0Qki13
-	z8QqxuqjZMADz/5nFqhqt8b53CMHMeCXmKPRJBRPAYii5OX9Jynqan1BDRjmDxCQPMzO
-	bUP+oopvoxPgXp2EjU8Oi6c3mpabBYN4rB9N7BtsHIdcDc1b226RWvzV93lWHZe2yhYg
-	PiXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=yPWvFJG8p54DwhHVHU/KVP0Q3Fj/Nd7zD1bGH6EIi8A=;
-	b=tWYG89jpfYnJnG9wk7qceqHxTaVIoHqTX/HBMC2zPsWwuUv+kgHpjCIvMK41+jxHKo
-	eGm5nzkvGVAjcr2UxbfLFukkR6Yl2Doo7HsjuhYoEasDsjTc8ezrAw7MKO/xU4NDCZtM
-	RasjwQ5gBCpAboaMI8axIR7ParmrI7KdV2ne5XjpDKgRJwsvo+VgMeefiOuqYkj+B7WU
-	lwFR6llrRsYDQbvNQjwmu7CKcgHPMAZ9lOM4ugfR17ilMsUV/CSHQz7VJbe4pRa8El9E
-	b8+iNRvttNRtU+ehAFsYpkgCmBvX7Z2z8AszCmL355sE3f/+tvgCdVZ2V6mgGN0U3DUF
-	AbkA==
-X-Gm-Message-State: AHQUAuZot5wOXVI7XoRWbpyIWX+yeozKj0Gq4Pi2IPFO1UhDki++Aztq
-	jcRe216YY9G67HQyS8GzvvrwsT8QRPbPjrdbU7s=
-X-Google-Smtp-Source: AHgI3IYBHVI1dYFa6lwGy6w0d+Jk2jfd3uAzoX6ATBeR4dDI6dJ8eGSO8Md660rFZz0PlWXWrg7PgooMjCQ/XTxn42I=
-X-Received: by 2002:ac8:67d3:: with SMTP id r19mr11848534qtp.196.1550335251071;
-	Sat, 16 Feb 2019 08:40:51 -0800 (PST)
+	Sat, 16 Feb 2019 17:31:34 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1gv3Np-0005de-Nx; Sat, 16 Feb 2019 18:04:09 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=vZcsR5uuvz4wNTjRWV/AoZ9/C0u04fRf6fZmx7pLyBw=;
+	b=IkRM4XUQF9G9n72/eG6MjYGGEN
+	4KL1ZZ2yIGUFa/gJkwL6UCMVy/qUcAkQ25NjNVLfqGOWW4J4CzkUIW2IAUEoLWrB+JKi9tyXzHUaY
+	FWlutajMzy4b4rwcLGLHkzl8urLoZzDj/YXCxBnu7qcE2BwudEXUgeNY5omYBRZY5AJV6CSaIyEJP
+	a1pEhn/hLcrkRSe3x7qLSS2DeH030ledOygVvBfW+ZNgseRwqnLlkqOTJbGdcidmQ+TxjLqlTRqC1
+	iFvnqnKNJEd4HdF8mbVfGjx6QKpmo3JcZpKvlnKz/BfHHIVItsLnWdjlia46QaQ0Os9v5quMjEdi1
+	dmqRxdPQ==;
+Received: from host-87-242-20-26.prtelecom.hu ([87.242.20.26]
+	helo=zolilaptop.sicom.com) by mail.pr.hu with esmtpa (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1gv3Nm-0006ng-09; Sat, 16 Feb 2019 18:04:07 +0100
+From: =?UTF-8?q?B=C3=B6sz=C3=B6rm=C3=A9nyi=20Zolt=C3=A1n?= <zboszor@pr.hu>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Feb 2019 18:03:51 +0100
+Message-Id: <20190216170354.10645-4-zboszor@pr.hu>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190216170354.10645-1-zboszor@pr.hu>
+References: <20190216170354.10645-1-zboszor@pr.hu>
 MIME-Version: 1.0
-References: <20190214145313.5406-1-andrej.valek@siemens.com>
-	<20190215204204.4302-1-andrej.valek@siemens.com>
-	<CAMKF1spvT8t80HN3cL-pMBLEySePtZWOkTNcKrpGvCgckgFWhQ@mail.gmail.com>
-	<CAMKF1spmwwQnKNSrdbDPGq2d4SPOe4SP92TrdhqXLHrsEgLAwg@mail.gmail.com>
-	<60803d1c-1198-69d6-a7c8-52cf87ac2885@siemens.com>
-	<955c6534-1f4c-f127-d103-9e75207e61e9@siemens.com>
-In-Reply-To: <955c6534-1f4c-f127-d103-9e75207e61e9@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Feb 2019 08:40:25 -0800
-Message-ID: <CAMKF1srhy8cQOxZHnBJprBkH1xZBAUo4dA+Qma_T9qOBag-fcg@mail.gmail.com>
-To: Andrej Valek <andrej.valek@siemens.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] nodejs 8.15.0 -> 10.15.1
+X-Spam-Score: -1.7 (-)
+X-Scan-Signature: 3da8dd007c9bc004c124c5756b0fc9e5
+X-Spam-Tracer: backend.mail.pr.hu -1.7 20190216170407Z
+Subject: [meta-initramfs][PATCH 3/6] dracut: Add execute-dracut opkg intercept script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,220 +51,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2019 16:40:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 16 Feb 2019 17:31:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 16, 2019 at 12:34 AM Andrej Valek <andrej.valek@siemens.com> wrote:
->
-> Hi Khem,
->
-> Maybe I have another question. Was it working before atomic, or is it a
-> different error?
->
+Signed-off-by: Böszörményi Zoltán <zboszor@pr.hu>
+---
+ .../dracut/dracut/execute-dracut              | 21 +++++++++++++++++++
+ .../recipes-devtools/dracut/dracut_git.bb     |  5 +++++
+ 2 files changed, 26 insertions(+)
+ create mode 100755 meta-initramfs/recipes-devtools/dracut/dracut/execute-dracut
 
-it is different and happens with v2
-> Looks like, that c++11 support is required.
->
->
-> Andrej
->
-> On 2/16/19 8:54 AM, Andrej Valek wrote:
-> > Hi,
-> >
-> > I have set-up qemumips build, to check, if it's working or not.
-> > But, is it really strange, isn't it?
-> >
-> > What about just add it directly into ldflags, like "-Wl,--as-needed" ?
-> >
-> > Andrej
-> >
-> > On 2/16/19 7:35 AM, Khem Raj wrote:
-> >> here is link https://errors.yoctoproject.org/Errors/Details/228122/
-> >> On Fri, Feb 15, 2019 at 10:35 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >>>
-> >>> On Fri, Feb 15, 2019 at 12:43 PM Andrej Valek <andrej.valek@siemens.com> wrote:
-> >>>>
-> >>>> Update nodejs to active 10.x LTS release 10.15.1.
-> >>>>
-> >>>
-> >>> nodejs-native fails on ubuntu 14.04 which has gcc 4.8, I wonder
-> >>> if there is a fix for this or do we expect it to not work
-> >>> with 4.8 compiler
-> >>>
-> >>>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> >>>> ---
-> >>>>  ...isable-running-gyp-files-for-bundled-deps.patch | 23 ++++++--------
-> >>>>  .../nodejs/nodejs/0002-Using-native-torque.patch   | 36 ++++++++++++++++++++++
-> >>>>  .../nodejs/nodejs/0003-Link-atomic-library.patch   | 20 ++++++++++++
-> >>>>  .../nodejs/{nodejs_8.15.0.bb => nodejs_10.15.1.bb} | 18 ++++++++---
-> >>>>  4 files changed, 80 insertions(+), 17 deletions(-)
-> >>>>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
-> >>>>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Link-atomic-library.patch
-> >>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs_8.15.0.bb => nodejs_10.15.1.bb} (86%)
-> >>>>
-> >>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-> >>>> index 324a4683d..5d0dc03b6 100644
-> >>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-> >>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-> >>>> @@ -4,26 +4,23 @@ Date: Thu, 27 Apr 2017 14:25:42 +0200
-> >>>>  Subject: [PATCH] Disable running gyp on shared deps
-> >>>>
-> >>>>  ---
-> >>>> - Makefile | 7 +++----
-> >>>> - 1 file changed, 3 insertions(+), 4 deletions(-)
-> >>>> + Makefile | 4 ++--
-> >>>> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> >>>>
-> >>>>  diff --git a/Makefile b/Makefile
-> >>>> -index 0a217bd893..e1229ad07f 100644
-> >>>> +index a98772f..f5663e2 100644
-> >>>>  --- a/Makefile
-> >>>>  +++ b/Makefile
-> >>>> -@@ -79,10 +79,9 @@ $(NODE_G_EXE): config.gypi out/Makefile
-> >>>> -       $(MAKE) -C out BUILDTYPE=Debug V=$(V)
-> >>>> -       if [ ! -r $@ -o ! -L $@ ]; then ln -fs out/Debug/$(NODE_EXE) $@; fi
-> >>>> +@@ -123,8 +123,8 @@ with-code-cache:
-> >>>> + test-code-cache: with-code-cache
-> >>>> +       $(PYTHON) tools/test.py $(PARALLEL_ARGS) --mode=$(BUILDTYPE_LOWER) code-cache
-> >>>>
-> >>>>  -out/Makefile: common.gypi deps/uv/uv.gyp deps/http_parser/http_parser.gyp \
-> >>>>  -              deps/zlib/zlib.gyp deps/v8/gypfiles/toolchain.gypi \
-> >>>> --              deps/v8/gypfiles/features.gypi deps/v8/src/v8.gyp node.gyp \
-> >>>> --              config.gypi
-> >>>>  +out/Makefile: common.gypi deps/http_parser/http_parser.gyp \
-> >>>> -+              deps/v8/gypfiles/toolchain.gypi deps/v8/gypfiles/features.gypi \
-> >>>> -+                        deps/v8/src/v8.gyp node.gyp config.gypi
-> >>>> ++              deps/v8/gypfiles/toolchain.gypi \
-> >>>> +               deps/v8/gypfiles/features.gypi deps/v8/gypfiles/v8.gyp node.gyp \
-> >>>> +               config.gypi
-> >>>>         $(PYTHON) tools/gyp_node.py -f make
-> >>>> -
-> >>>> - config.gypi: configure
-> >>>>  --
-> >>>> -2.12.2
-> >>>> +2.19.2
-> >>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
-> >>>> new file mode 100644
-> >>>> index 000000000..e9035f9eb
-> >>>> --- /dev/null
-> >>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
-> >>>> @@ -0,0 +1,36 @@
-> >>>> +From 4bbee5e3d58bc4911999f3ec2cc5aab8ded6717b Mon Sep 17 00:00:00 2001
-> >>>> +From: "Winker Matthias (TT-CA/ENG1)" <Matthias.Winker@de.bosch.com>
-> >>>> +Date: Tue, 11 Dec 2018 10:44:29 +0100
-> >>>> +Subject: [PATCH] Using native torque
-> >>>> +
-> >>>> +---
-> >>>> + deps/v8/gypfiles/v8.gyp | 6 ++++--
-> >>>> + 1 file changed, 4 insertions(+), 2 deletions(-)
-> >>>> +
-> >>>> +diff --git a/deps/v8/gypfiles/v8.gyp b/deps/v8/gypfiles/v8.gyp
-> >>>> +index 8c78f02255..434168844e 100644
-> >>>> +--- a/deps/v8/gypfiles/v8.gyp
-> >>>> ++++ b/deps/v8/gypfiles/v8.gyp
-> >>>> +@@ -2831,7 +2831,6 @@
-> >>>> +         {
-> >>>> +           'action_name': 'run_torque',
-> >>>> +           'inputs': [  # Order matters.
-> >>>> +-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFFIX)',
-> >>>> +             '../src/builtins/base.tq',
-> >>>> +             '../src/builtins/array.tq',
-> >>>> +             '../src/builtins/typed-array.tq',
-> >>>> +@@ -2845,7 +2844,10 @@
-> >>>> +             '<(SHARED_INTERMEDIATE_DIR)/torque-generated/builtins-typed-array-from-dsl-gen.cc',
-> >>>> +             '<(SHARED_INTERMEDIATE_DIR)/torque-generated/builtins-typed-array-from-dsl-gen.h',
-> >>>> +           ],
-> >>>> +-          'action': ['<@(_inputs)', '-o', '<(SHARED_INTERMEDIATE_DIR)/torque-generated'],
-> >>>> ++          'action': [
-> >>>> ++            'torque',
-> >>>> ++            '<@(_inputs)',
-> >>>> ++            '-o', '<(SHARED_INTERMEDIATE_DIR)/torque-generated'],
-> >>>> +         },
-> >>>> +       ],
-> >>>> +     }, # torque
-> >>>> +--
-> >>>> +2.19.2
-> >>>> +
-> >>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Link-atomic-library.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Link-atomic-library.patch
-> >>>> new file mode 100644
-> >>>> index 000000000..66ff18b4a
-> >>>> --- /dev/null
-> >>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Link-atomic-library.patch
-> >>>> @@ -0,0 +1,20 @@
-> >>>> +Link atomic library to fix missing undefined referrences
-> >>>> +like "undefined reference to `__atomic_fetch_add_8'"
-> >>>> +
-> >>>> +Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> >>>> +
-> >>>> +diff -Naur node-v10.15.1/deps/v8/gypfiles/v8.gyp node-v10.15.1/deps/v8/gypfiles/v8.gyp
-> >>>> +--- node-v10.15.1/deps/v8/gypfiles/v8.gyp      2019-02-13 09:02:21.000000000 +0100
-> >>>> ++++ node-v10.15.1/deps/v8/gypfiles/v8.gyp      2019-02-15 21:27:11.755679660 +0100
-> >>>> +@@ -452,6 +452,11 @@
-> >>>> +         '<(DEPTH)',
-> >>>> +         '<(SHARED_INTERMEDIATE_DIR)'
-> >>>> +       ],
-> >>>> ++      'link_settings': {
-> >>>> ++        'libraries': [
-> >>>> ++          '-latomic'
-> >>>> ++        ],
-> >>>> ++      },
-> >>>> +       'sources': [
-> >>>> +         '<@(inspector_all_sources)',
-> >>>> +         '../include//v8-inspector-protocol.h',
-> >>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> >>>> similarity index 86%
-> >>>> rename from meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb
-> >>>> rename to meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> >>>> index 44eaee974..f2bfe8abe 100644
-> >>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb
-> >>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> >>>> @@ -1,9 +1,10 @@
-> >>>>  DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> >>>>  HOMEPAGE = "http://nodejs.org"
-> >>>>  LICENSE = "MIT & BSD & Artistic-2.0"
-> >>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=fde91d5c5bbd1e0389623e1ac018d9e8"
-> >>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=9ceeba79eb2ea1067b7b3ed16fff8bab"
-> >>>>
-> >>>>  DEPENDS = "openssl zlib icu"
-> >>>> +DEPENDS_append_class-target = " nodejs-native"
-> >>>>
-> >>>>  inherit pkgconfig
-> >>>>
-> >>>> @@ -13,9 +14,14 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
-> >>>>
-> >>>>  SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-> >>>>             file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
-> >>>> -"
-> >>>> -SRC_URI[md5sum] = "bfc5da493c72ded3a7f43b5662bfc53c"
-> >>>> -SRC_URI[sha256sum] = "968523333947cc3f769d73dedc6c9c60580826d8714bc0e62ca4589de6a7c633"
-> >>>> +           file://0003-Link-atomic-library.patch \
-> >>>> +           "
-> >>>> +SRC_URI_append_class-target = " \
-> >>>> +           file://0002-Using-native-torque.patch \
-> >>>> +           "
-> >>>> +
-> >>>> +SRC_URI[md5sum] = "1cad7963255de53509bfa560221bdc88"
-> >>>> +SRC_URI[sha256sum] = "1a55f7b9fb80442182d9e1eba4fca4dac3c781cdcb25d6be37b24d253f61c858"
-> >>>>
-> >>>>  S = "${WORKDIR}/node-v${PV}"
-> >>>>
-> >>>> @@ -74,6 +80,10 @@ do_install_append_class-native() {
-> >>>>      # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
-> >>>>      # npm-cli.js continues to use old shebang
-> >>>>      sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-> >>>> +
-> >>>> +    # Install the native torque to provide it within sysroot for the target compilation
-> >>>> +    install -d ${D}${bindir}
-> >>>> +    install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
-> >>>>  }
-> >>>>
-> >>>>  do_install_append_class-target() {
-> >>>> --
-> >>>> 2.11.0
-> >>>>
-> >>>> --
-> >>>> _______________________________________________
-> >>>> Openembedded-devel mailing list
-> >>>> Openembedded-devel@lists.openembedded.org
-> >>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/execute-dracut b/meta-initramfs/recipes-devtools/dracut/dracut/execute-dracut
+new file mode 100755
+index 000000000..96bcc92ed
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/dracut/dracut/execute-dracut
+@@ -0,0 +1,21 @@
++#!/bin/sh
++
++if [ ! -f $OPKG_INTERCEPT_DIR/execute-dracut ]; then
++	KERNEL_VERSION=$1
++	shift
++	MY_KERNEL_VERSION=$(readlink /boot/bzimage | sed 's,^.*bzImage-,,')
++	if [[ -z "$MY_KERNEL_VERSION" ]]; then
++		if [[ -d /lib/modules/$KERNEL_VERSION ]]; then
++			MY_KERNEL_VERSION="${KERNEL_VERSION}"
++		fi
++	fi
++	[[ -z "$MY_KERNEL_VERSION" ]] && echo COULD NOT DETERMINE KERNEL VERSION TO RUN DEPMOD AND DRACUT && echo PLEASE DO IT MANUALLY && exit 0
++	cat <<EOF > $OPKG_INTERCEPT_DIR/execute-dracut
++echo RUNNING: depmod -a $MY_KERNEL_VERSION
++depmod -a $MY_KERNEL_VERSION
++echo RUNNING: dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
++echo "dracut: $(dracut --help | grep 'Version:')"
++dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
++EOF
++	chmod +x $OPKG_INTERCEPT_DIR/execute-dracut
++fi
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index 71926c3b8..c3a0383ff 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -12,6 +12,7 @@ PV = "049"
+ SRCREV = "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
+            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
++           file://execute-dracut \
+            "
+ 
+ DEPENDS += "kmod"
+@@ -49,11 +50,15 @@ do_install() {
+     # Its Makefile uses cp -arx to install modules.d, so fix the owner
+     # to root:root
+     chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
++
++    install -d -m0755 ${D}${datadir}/opkg/intercept
++    install -m0755 ${WORKDIR}/execute-dracut ${D}${datadir}/opkg/intercept
+ }
+ 
+ FILES_${PN} += "${prefix}/lib/kernel \
+                 ${prefix}/lib/dracut \
+                 ${systemd_unitdir} \
++                ${datadir}/opkg/intercept \
+                "
+ FILES_${PN}-dbg += "${prefix}/lib/dracut/.debug"
+ 
+-- 
+2.20.1
+
 
