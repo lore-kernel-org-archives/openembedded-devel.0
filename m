@@ -1,28 +1,28 @@
 Return-Path: <andrej.valek@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id C125E6BE46
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id B7EAD7C811
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2019 09:13:36 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x1H9Da2s021233
+	Sun, 17 Feb 2019 11:04:18 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x1HB4Iwe005164
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2019 10:13:36 +0100
+	Sun, 17 Feb 2019 12:04:18 +0100
 Received: from dev.vm6.ccp.siemens.com ([167.87.35.82])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id x1H9Da4N007084;
-	Sun, 17 Feb 2019 10:13:36 +0100
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x1HB4IKv025536;
+	Sun, 17 Feb 2019 12:04:18 +0100
 Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id A49D098F566;
-	Sun, 17 Feb 2019 10:13:35 +0100 (CET)
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id E574998F566;
+	Sun, 17 Feb 2019 12:04:17 +0100 (CET)
 From: Andrej Valek <andrej.valek@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Feb 2019 10:12:35 +0100
-Message-Id: <20190217091235.8329-1-andrej.valek@siemens.com>
+Date: Sun, 17 Feb 2019 12:03:21 +0100
+Message-Id: <20190217110321.10280-1-andrej.valek@siemens.com>
 X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
 In-Reply-To: <20190214145313.5406-1-andrej.valek@siemens.com>
 References: <20190214145313.5406-1-andrej.valek@siemens.com>
-Subject: [meta-oe][PATCH v3] nodejs 8.15.0 -> 10.15.1
+Subject: [meta-oe][PATCH v4] nodejs 8.15.0 -> 10.15.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,7 +35,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2019 09:13:37 -0000
+X-List-Received-Date: Sun, 17 Feb 2019 11:04:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -48,10 +48,10 @@ Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
  ...isable-running-gyp-files-for-bundled-deps.patch |  23 ++--
  .../nodejs/nodejs/0002-Using-native-torque.patch   |  36 ++++++
  ...3-Crypto-reduce-memory-usage-of-SignFinal.patch | 122 +++++++++++++++++++++
- .../0004-Make-compatibility-with-gcc-4.8.patch     |  28 +++++
+ .../0004-Make-compatibility-with-gcc-4.8.patch     |  26 +++++
  .../nodejs/nodejs/0005-Link-atomic-library.patch   |  20 ++++
  .../nodejs/{nodejs_8.15.0.bb => nodejs_10.15.1.bb} |  20 +++-
- 6 files changed, 232 insertions(+), 17 deletions(-)
+ 6 files changed, 230 insertions(+), 17 deletions(-)
  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
@@ -271,10 +271,10 @@ index 000000000..ed3bac39b
 +       const char* passphrase,
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
 new file mode 100644
-index 000000000..7d23076df
+index 000000000..2b325b675
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,26 @@
 +Implement function as wrapper for std::make_unique
 +method to be compatible with gcc < 4.9 .
 +"error::make_unique is not a member of 'std'"
@@ -284,20 +284,18 @@ index 000000000..7d23076df
 +diff -Naur node-v10.15.1/src/cares_wrap.cc node-v10.15.1/src/cares_wrap.cc
 +--- node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:40:36.040538319 +0100
 ++++ node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:39:57.883668702 +0100
-+@@ -52,6 +52,18 @@
++@@ -52,6 +52,16 @@
 + # define AI_V4MAPPED 0
 + #endif
 + 
-++// implement make_unique for gcc < 4.9
-++#if defined(__GNUC__) && (__GNUC___ < 4 || \
-++  (__GNUC__ == 4 && __GNUC_MINOR__ < 9))
-++namespace std {
-++  template<typename T, typename... Args>
-++  std::unique_ptr<T> make_unique(Args&&... args)
-++  {
-++    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+++#ifndef __cpp_lib_make_unique
+++  namespace std {
+++    /// make_unique implementation
+++    template<typename T, typename... Args>
+++    std::unique_ptr<T> make_unique(Args&&... args) {
+++      return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+++    }
 ++  }
-++}
 ++#endif
 ++
 + namespace node {
