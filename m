@@ -1,28 +1,46 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id B7EAD7C811
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 7025A6C514
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2019 11:04:18 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x1HB4Iwe005164
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Sun, 17 Feb 2019 20:04:51 +0000 (UTC)
+Received: by mail-qt1-f172.google.com with SMTP id p48so17063647qtk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Feb 2019 12:04:18 +0100
-Received: from dev.vm6.ccp.siemens.com ([167.87.35.82])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x1HB4IKv025536;
-	Sun, 17 Feb 2019 12:04:18 +0100
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id E574998F566;
-	Sun, 17 Feb 2019 12:04:17 +0100 (CET)
-From: Andrej Valek <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Feb 2019 12:03:21 +0100
-Message-Id: <20190217110321.10280-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
+	Sun, 17 Feb 2019 12:04:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=JyKETdpU1vzosVs19rKfvj1NnRGAvR3SojiirB/bXCM=;
+	b=JhoumSBFmGj3u9ojmSV+YAmvsj8VWocNP3z8qfGRq/msCouHyB99irOw4Q6L8vRcEm
+	Zac8lAUH6Jsf8K49LO2yFiOCQpeElkhy8vy0Ai2pxvpTg+9ac4PeiCoWluulchNLOLKZ
+	HoDo+mxjXO681/acTaa9P2X47RGiZJnHdPNuwPWiLU0+UdhVnj/cAtONYNazU0R08Zcp
+	D9+tRb0SNwavVTVP65amnMOFoUozJ3peddRPhF34UCic6c1ih+rFTmwMcwK1HHarKmdl
+	oosomT6vmyrd9Lf2+tLDS+Hkz3UTkS3Sg6POiYmbcW3tgDX8D74zv9DCvRstCh8UKATi
+	YLlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=JyKETdpU1vzosVs19rKfvj1NnRGAvR3SojiirB/bXCM=;
+	b=ZQRRfyM/Fc2p8woJnoFlgimaMPVc9OYOld8oPPYKC2cWZTlDlS+L48b/T0W1Y+R7w5
+	821PLaBtk3563hzmIbtfOQZb9j+WBCoXo7H7dpkF2flD0Zs3rrvdK1qzMGeJz745NtPo
+	VdNziQb/xFhGeQtH2eiAMIfYM+xs/55S/GeTfEUcUrgPNb7WvyOVZWt529moUCJqHdtN
+	UDlW4bsVIZydHQDUfqkB//wur2J8n3h0LZ986BN2V6vLRpUvXTPDjOOtg3yvLs5YoCr2
+	O7vgNGOYF+jwyVX8ef50QQWW4XzM/QqMiFByWnVYiM+4iJMWu8K+u7p5qIfeKVgduaj4
+	yOJA==
+X-Gm-Message-State: AHQUAua2Y5qYg+hd0Ww/qrErQhDTJ01BxK81OIiJmjoNCXqRnmvtdDfL
+	YCOpJkH3c1PkEjj3a+Y14uYYYcvEGRX5K/GdSQg=
+X-Google-Smtp-Source: AHgI3IaGYKUg0QYXfIvH45Vb/CA3nHi+/qPObZKiCNvbQNAUUZFOTJAPyre06kyOhOhTl4yY8O2gwqkQlvg9WSmamaU=
+X-Received: by 2002:a0c:a144:: with SMTP id d62mr15260989qva.50.1550433892187; 
+	Sun, 17 Feb 2019 12:04:52 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20190214145313.5406-1-andrej.valek@siemens.com>
-References: <20190214145313.5406-1-andrej.valek@siemens.com>
-Subject: [meta-oe][PATCH v4] nodejs 8.15.0 -> 10.15.1
+References: <20190215014113.52315-1-wak@google.com>
+In-Reply-To: <20190215014113.52315-1-wak@google.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 17 Feb 2019 12:04:26 -0800
+Message-ID: <CAMKF1sqT-TRTXdzPA=-abmMrBE0X2PrW9J9pECNNckm7C0Y7sQ@mail.gmail.com>
+To: "William A. Kennington III" <wak@google.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] dbus-broker: 16 -> 17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,349 +53,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2019 11:04:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 17 Feb 2019 20:04:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update nodejs to active 10.x LTS release 10.15.1.
-- link atomic library
-- make it compatible with gcc < 4.9
+Fails with musl/qemux86
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- ...isable-running-gyp-files-for-bundled-deps.patch |  23 ++--
- .../nodejs/nodejs/0002-Using-native-torque.patch   |  36 ++++++
- ...3-Crypto-reduce-memory-usage-of-SignFinal.patch | 122 +++++++++++++++++++++
- .../0004-Make-compatibility-with-gcc-4.8.patch     |  26 +++++
- .../nodejs/nodejs/0005-Link-atomic-library.patch   |  20 ++++
- .../nodejs/{nodejs_8.15.0.bb => nodejs_10.15.1.bb} |  20 +++-
- 6 files changed, 230 insertions(+), 17 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0005-Link-atomic-library.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_8.15.0.bb => nodejs_10.15.1.bb} (83%)
+| [45/177] /home/jenkins/oe/world/yoe/build/tmpfs/work/i586-yoe-linux-musl/dbus-broker/17-r0/recipe-sysroot-native/usr/bin/meson
+--internal symbolextractor subprojects/c-utf8/src/libcutf8.so.0
+'subprojects/c-utf8/src/8c544e0@@cutf8@sha/libcutf8.so.0.symbols'
+--cross-host=linux-musl
+| ninja: build stopped: subcommand failed.
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-index 324a4683d..5d0dc03b6 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-@@ -4,26 +4,23 @@ Date: Thu, 27 Apr 2017 14:25:42 +0200
- Subject: [PATCH] Disable running gyp on shared deps
- 
- ---
-- Makefile | 7 +++----
-- 1 file changed, 3 insertions(+), 4 deletions(-)
-+ Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/Makefile b/Makefile
--index 0a217bd893..e1229ad07f 100644
-+index a98772f..f5663e2 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -79,10 +79,9 @@ $(NODE_G_EXE): config.gypi out/Makefile
-- 	$(MAKE) -C out BUILDTYPE=Debug V=$(V)
-- 	if [ ! -r $@ -o ! -L $@ ]; then ln -fs out/Debug/$(NODE_EXE) $@; fi
-+@@ -123,8 +123,8 @@ with-code-cache:
-+ test-code-cache: with-code-cache
-+ 	$(PYTHON) tools/test.py $(PARALLEL_ARGS) --mode=$(BUILDTYPE_LOWER) code-cache
-  
- -out/Makefile: common.gypi deps/uv/uv.gyp deps/http_parser/http_parser.gyp \
- -              deps/zlib/zlib.gyp deps/v8/gypfiles/toolchain.gypi \
---              deps/v8/gypfiles/features.gypi deps/v8/src/v8.gyp node.gyp \
---              config.gypi
- +out/Makefile: common.gypi deps/http_parser/http_parser.gyp \
--+              deps/v8/gypfiles/toolchain.gypi deps/v8/gypfiles/features.gypi \
--+			  deps/v8/src/v8.gyp node.gyp config.gypi
-++              deps/v8/gypfiles/toolchain.gypi \
-+               deps/v8/gypfiles/features.gypi deps/v8/gypfiles/v8.gyp node.gyp \
-+               config.gypi
-  	$(PYTHON) tools/gyp_node.py -f make
-- 
-- config.gypi: configure
- -- 
--2.12.2
-+2.19.2
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
-new file mode 100644
-index 000000000..e9035f9eb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-torque.patch
-@@ -0,0 +1,36 @@
-+From 4bbee5e3d58bc4911999f3ec2cc5aab8ded6717b Mon Sep 17 00:00:00 2001
-+From: "Winker Matthias (TT-CA/ENG1)" <Matthias.Winker@de.bosch.com>
-+Date: Tue, 11 Dec 2018 10:44:29 +0100
-+Subject: [PATCH] Using native torque
-+
-+---
-+ deps/v8/gypfiles/v8.gyp | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/deps/v8/gypfiles/v8.gyp b/deps/v8/gypfiles/v8.gyp
-+index 8c78f02255..434168844e 100644
-+--- a/deps/v8/gypfiles/v8.gyp
-++++ b/deps/v8/gypfiles/v8.gyp
-+@@ -2831,7 +2831,6 @@
-+         {
-+           'action_name': 'run_torque',
-+           'inputs': [  # Order matters.
-+-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFFIX)',
-+             '../src/builtins/base.tq',
-+             '../src/builtins/array.tq',
-+             '../src/builtins/typed-array.tq',
-+@@ -2845,7 +2844,10 @@
-+             '<(SHARED_INTERMEDIATE_DIR)/torque-generated/builtins-typed-array-from-dsl-gen.cc',
-+             '<(SHARED_INTERMEDIATE_DIR)/torque-generated/builtins-typed-array-from-dsl-gen.h',
-+           ],
-+-          'action': ['<@(_inputs)', '-o', '<(SHARED_INTERMEDIATE_DIR)/torque-generated'],
-++          'action': [
-++            'torque',
-++            '<@(_inputs)',
-++            '-o', '<(SHARED_INTERMEDIATE_DIR)/torque-generated'],
-+         },
-+       ],
-+     }, # torque
-+-- 
-+2.19.2
-+
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
-new file mode 100644
-index 000000000..ed3bac39b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
-@@ -0,0 +1,122 @@
-+From 20282b1cb0389553421c4c5b14de198c5dfff50b Mon Sep 17 00:00:00 2001
-+From: Anna Henningsen <anna@addaleax.net>
-+Date: Sat, 20 Oct 2018 05:24:54 +0200
-+Subject: [PATCH] src: use more explicit return type in Sign::SignFinal()
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Using the non-indexed variant of `std::get<>` broke Travis CI.
-+Also, this allows us to be a bit more concise when returning
-+from `SignFinal()` due to some error condition.
-+
-+Refs: https://github.com/nodejs/node/pull/23427
-+
-+PR-URL: https://github.com/nodejs/node/pull/23779
-+Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>
-+Reviewed-By: Tobias Nießen <tniessen@tnie.de>
-+Reviewed-By: Refael Ackermann <refack@gmail.com>
-+Reviewed-By: Colin Ihrig <cjihrig@gmail.com>
-+---
-+ src/node_crypto.cc | 23 +++++++++++------------
-+ src/node_crypto.h  | 12 +++++++++++-
-+ 2 files changed, 22 insertions(+), 13 deletions(-)
-+
-+diff --git a/src/node_crypto.cc b/src/node_crypto.cc
-+index bd8d9e032554..ec7d4f2bb5be 100644
-+--- a/src/node_crypto.cc
-++++ b/src/node_crypto.cc
-+@@ -3562,22 +3562,20 @@ static MallocedBuffer<unsigned char> Node_SignFinal(EVPMDPointer&& mdctx,
-+   return MallocedBuffer<unsigned char>();
-+ }
-+ 
-+-std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
-++Sign::SignResult Sign::SignFinal(
-+     const char* key_pem,
-+     int key_pem_len,
-+     const char* passphrase,
-+     int padding,
-+     int salt_len) {
-+-  MallocedBuffer<unsigned char> buffer;
-+-
-+   if (!mdctx_)
-+-    return std::make_pair(kSignNotInitialised, std::move(buffer));
-++    return SignResult(kSignNotInitialised);
-+ 
-+   EVPMDPointer mdctx = std::move(mdctx_);
-+ 
-+   BIOPointer bp(BIO_new_mem_buf(const_cast<char*>(key_pem), key_pem_len));
-+   if (!bp)
-+-    return std::make_pair(kSignPrivateKey, std::move(buffer));
-++    return SignResult(kSignPrivateKey);
-+ 
-+   EVPKeyPointer pkey(PEM_read_bio_PrivateKey(bp.get(),
-+                                              nullptr,
-+@@ -3588,7 +3586,7 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
-+   // without `pkey` being set to nullptr;
-+   // cf. the test of `test_bad_rsa_privkey.pem` for an example.
-+   if (!pkey || 0 != ERR_peek_error())
-+-    return std::make_pair(kSignPrivateKey, std::move(buffer));
-++    return SignResult(kSignPrivateKey);
-+ 
-+ #ifdef NODE_FIPS_MODE
-+   /* Validate DSA2 parameters from FIPS 186-4 */
-+@@ -3612,9 +3610,10 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
-+   }
-+ #endif  // NODE_FIPS_MODE
-+ 
-+-  buffer = Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
-++  MallocedBuffer<unsigned char> buffer =
-++      Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
-+   Error error = buffer.is_empty() ? kSignPrivateKey : kSignOk;
-+-  return std::make_pair(error, std::move(buffer));
-++  return SignResult(error, std::move(buffer));
-+ }
-+ 
-+ 
-+@@ -3639,18 +3638,18 @@ void Sign::SignFinal(const FunctionCallbackInfo<Value>& args) {
-+ 
-+   ClearErrorOnReturn clear_error_on_return;
-+ 
-+-  std::pair<Error, MallocedBuffer<unsigned char>> ret = sign->SignFinal(
-++  SignResult ret = sign->SignFinal(
-+       buf,
-+       buf_len,
-+       len >= 2 && !args[1]->IsNull() ? *passphrase : nullptr,
-+       padding,
-+       salt_len);
-+ 
-+-  if (std::get<Error>(ret) != kSignOk)
-+-    return sign->CheckThrow(std::get<Error>(ret));
-++  if (ret.error != kSignOk)
-++    return sign->CheckThrow(ret.error);
-+ 
-+   MallocedBuffer<unsigned char> sig =
-+-      std::move(std::get<MallocedBuffer<unsigned char>>(ret));
-++      std::move(ret.signature);
-+ 
-+   Local<Object> rc =
-+       Buffer::New(env, reinterpret_cast<char*>(sig.release()), sig.size)
-+diff --git a/src/node_crypto.h b/src/node_crypto.h
-+index 6fcf737f6c43..0c26c1f6ff1d 100644
-+--- a/src/node_crypto.h
-++++ b/src/node_crypto.h
-+@@ -518,7 +518,17 @@ class Sign : public SignBase {
-+  public:
-+   static void Initialize(Environment* env, v8::Local<v8::Object> target);
-+ 
-+-  std::pair<Error, MallocedBuffer<unsigned char>> SignFinal(
-++  struct SignResult {
-++    Error error;
-++    MallocedBuffer<unsigned char> signature;
-++
-++    explicit SignResult(
-++        Error err,
-++        MallocedBuffer<unsigned char>&& sig = MallocedBuffer<unsigned char>())
-++      : error(err), signature(std::move(sig)) {}
-++  };
-++
-++  SignResult SignFinal(
-+       const char* key_pem,
-+       int key_pem_len,
-+       const char* passphrase,
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
-new file mode 100644
-index 000000000..2b325b675
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
-@@ -0,0 +1,26 @@
-+Implement function as wrapper for std::make_unique
-+method to be compatible with gcc < 4.9 .
-+"error::make_unique is not a member of 'std'"
-+
-+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-+
-+diff -Naur node-v10.15.1/src/cares_wrap.cc node-v10.15.1/src/cares_wrap.cc
-+--- node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:40:36.040538319 +0100
-++++ node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:39:57.883668702 +0100
-+@@ -52,6 +52,16 @@
-+ # define AI_V4MAPPED 0
-+ #endif
-+ 
-++#ifndef __cpp_lib_make_unique
-++  namespace std {
-++    /// make_unique implementation
-++    template<typename T, typename... Args>
-++    std::unique_ptr<T> make_unique(Args&&... args) {
-++      return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-++    }
-++  }
-++#endif
-++
-+ namespace node {
-+ namespace cares_wrap {
-+ 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0005-Link-atomic-library.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0005-Link-atomic-library.patch
-new file mode 100644
-index 000000000..66ff18b4a
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0005-Link-atomic-library.patch
-@@ -0,0 +1,20 @@
-+Link atomic library to fix missing undefined referrences
-+like "undefined reference to `__atomic_fetch_add_8'"
-+
-+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-+
-+diff -Naur node-v10.15.1/deps/v8/gypfiles/v8.gyp node-v10.15.1/deps/v8/gypfiles/v8.gyp
-+--- node-v10.15.1/deps/v8/gypfiles/v8.gyp	2019-02-13 09:02:21.000000000 +0100
-++++ node-v10.15.1/deps/v8/gypfiles/v8.gyp	2019-02-15 21:27:11.755679660 +0100
-+@@ -452,6 +452,11 @@
-+         '<(DEPTH)',
-+         '<(SHARED_INTERMEDIATE_DIR)'
-+       ],
-++      'link_settings': {
-++        'libraries': [
-++          '-latomic'
-++        ],
-++      },
-+       'sources': [
-+         '<@(inspector_all_sources)',
-+         '../include//v8-inspector-protocol.h',
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-index 44eaee974..17c9bb0c4 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.15.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-@@ -1,9 +1,10 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=fde91d5c5bbd1e0389623e1ac018d9e8"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9ceeba79eb2ea1067b7b3ed16fff8bab"
- 
- DEPENDS = "openssl zlib icu"
-+DEPENDS_append_class-target = " nodejs-native"
- 
- inherit pkgconfig
- 
-@@ -13,9 +14,16 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- 
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
--"
--SRC_URI[md5sum] = "bfc5da493c72ded3a7f43b5662bfc53c"
--SRC_URI[sha256sum] = "968523333947cc3f769d73dedc6c9c60580826d8714bc0e62ca4589de6a7c633"
-+           file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
-+           file://0004-Make-compatibility-with-gcc-4.8.patch \
-+           file://0005-Link-atomic-library.patch \
-+           "
-+SRC_URI_append_class-target = " \
-+           file://0002-Using-native-torque.patch \
-+           "
-+
-+SRC_URI[md5sum] = "1cad7963255de53509bfa560221bdc88"
-+SRC_URI[sha256sum] = "1a55f7b9fb80442182d9e1eba4fca4dac3c781cdcb25d6be37b24d253f61c858"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -74,6 +82,10 @@ do_install_append_class-native() {
-     # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
-     # npm-cli.js continues to use old shebang
-     sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-+
-+    # Install the native torque to provide it within sysroot for the target compilation
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
- }
- 
- do_install_append_class-target() {
--- 
-2.11.0
 
+On Thu, Feb 14, 2019 at 5:41 PM William A. Kennington III via
+Openembedded-devel <openembedded-devel@lists.openembedded.org> wrote:
+>
+> This change cleans up a number of things about the build
+>  - Upstream no longer depends on glib
+>  - We dont ever runtime depend on reference dbus
+>  - Docs are disabled by default so we don't need to specify the option
+>  - There is no native tooling so we shouldn't need a native bbclass
+>  - No longer depend on gitsm since upstream provides release tarballs
+>
+> Signed-off-by: William A. Kennington III <wak@google.com>
+> ---
+>  .../{dbus-broker_git.bb => dbus-broker_17.bb}   | 17 +++--------------
+>  1 file changed, 3 insertions(+), 14 deletions(-)
+>  rename meta-oe/recipes-core/dbus/{dbus-broker_git.bb => dbus-broker_17.bb} (60%)
+>
+> diff --git a/meta-oe/recipes-core/dbus/dbus-broker_git.bb b/meta-oe/recipes-core/dbus/dbus-broker_17.bb
+> similarity index 60%
+> rename from meta-oe/recipes-core/dbus/dbus-broker_git.bb
+> rename to meta-oe/recipes-core/dbus/dbus-broker_17.bb
+> index ac0f325a4..e940bb656 100644
+> --- a/meta-oe/recipes-core/dbus/dbus-broker_git.bb
+> +++ b/meta-oe/recipes-core/dbus/dbus-broker_17.bb
+> @@ -6,18 +6,12 @@ SECTION = "base"
+>  LICENSE = "Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
+>
+> -DEPENDS = "dbus glib-2.0 expat"
+> -
+> -PV = "16+git${SRCPV}"
+> -SRCREV = "fc874afa0992d0c75ec25acb43d344679f0ee7d2"
+> -
+> -SRC_URI = "gitsm://github.com/bus1/dbus-broker;protocol=git"
+> -
+> -S = "${WORKDIR}/git"
+> +SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
+> +SRC_URI[sha256sum] = "4ec7491745a88ec5112644b0e2b9a0abe9107c85d7650be8988d88efb52da84b"
+>
+>  inherit meson pkgconfig systemd distro_features_check
+>
+> -EXTRA_OEMESON += "-Ddocs=false"
+> +DEPENDS = "expat systemd"
+>
+>  REQUIRED_DISTRO_FEATURES = "systemd"
+>
+> @@ -25,8 +19,3 @@ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+>
+>  FILES_${PN} += "${systemd_system_unitdir}"
+>  FILES_${PN} += "${systemd_user_unitdir}"
+> -
+> -RDEPENDS_${PN} = "dbus"
+> -
+> -BBCLASSEXTEND = "native"
+> -
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
