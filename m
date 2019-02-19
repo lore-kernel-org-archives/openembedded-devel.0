@@ -1,50 +1,53 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 58F317C9ED
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id A98A27C9A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2019 18:45:59 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps
-	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1gwAP2-0007cq-GC; Tue, 19 Feb 2019 19:46:00 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=8Qi2OPdiulvQR6wfkdYB909gxnoIwcvD9VHRy8J57bE=;
-	b=hTHsNvPLN4Sb9a7DBFM+ZxaAT2
-	VwIZ5d7hvB+JsfL9YEvpPBCn5t1m4lSEPyyupJjpWfPlZPOk5WbE6KRt3RFZjL6sfW6WrUXOjxb1u
-	9gOfV4UnZo1CJ6Pdpauf0xwhgoK5NvL/C146I2vv3aM+EWP8/ejm1AsLBT0MvVGdFGKbwjpWF0hGG
-	DBeR5+b3kms9jtnqb/Iuh74fDXGNm41jWqAhcvfPd18ZaeXOvpaz+NefaoYHjh4cxlvCc0jfGm0Qs
-	bH8f0Y5hJPAf8I3k1CIupGB6tA6pBWbZieO6xF2fMPha9lwCklgon3WSFJnebOWlt6n1o22pY5Otm
-	BiYTue3g==;
-Received: from host-87-242-20-26.prtelecom.hu ([87.242.20.26]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
-	id 1gwAOy-0006ql-Bf; Tue, 19 Feb 2019 19:45:58 +0100
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190216170354.10645-1-zboszor@pr.hu>
-	<20190218104704.14623-1-zboszor@pr.hu>
-	<CAMKF1spwdGaXKr51oZM-g5Pmw8jNsUQLOs=DRsOfD3pYfAYRZg@mail.gmail.com>
-	<CAMKF1spGuo6q450qviwopWk4LMpqDNzVAgAUrQbLQPBwc-zyNw@mail.gmail.com>
-	<6bc2f073-19bf-85c4-0f0f-581700557c4e@pr.hu>
-	<CAMKF1srzbagvGiRSAT2shAzgxD19qLeN2tZbnHaPA-vOrAJtig@mail.gmail.com>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Message-ID: <38db22d0-840f-1759-206b-43a28efd106c@pr.hu>
-Date: Tue, 19 Feb 2019 19:45:53 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.0
+	Tue, 19 Feb 2019 22:23:29 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id t18so23785542wrx.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Feb 2019 14:23:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zhPoVthSWdWcgeq1J3t6qCBe4kEbOu3nds6efM8s/FM=;
+	b=elTqW11wLux6jAiYpa03oR+I+OYu21JR3vCk+dno5YC3ERAf03j8oeqa7asCR1Nv2u
+	gWVPMxL2roJ7K6vu+cIHrLq/9R9Ms09ISLiNzbvNFldOT+3gCHaVihgtf0xc9rLuqCWY
+	Nqd0NJauyKA1OjExuMg8nYZbYwfY49WMgob9M83JbL4am9H4lCkfPwU66AUXeejeteJr
+	oypOar98y6sdN4QxBKHVji4BhhG2T3eU4aCj2uNTM1179hFrvMwelkzgx7zACMSODUWY
+	BoUoXp8vQdBbK6flBfiWQ1NtwvgpeJAetxuRR5U70R88+Ltxx1KW5mxhIQn3SF05u/u+
+	95kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zhPoVthSWdWcgeq1J3t6qCBe4kEbOu3nds6efM8s/FM=;
+	b=nU9LcBECCvp5Fjh6ua9KCdtgOCXg7+0O5tUQUinpdnZ2CDgRBG64qudYpQHRfWlFss
+	a7I1S23evXV8WsvXfMNfFZ3hrdNNn3+MJjV3jttYT5WHYWuDOigHOAxKC4Rk+GqQ1WIw
+	pkyqX18QGbUIydYwAZvNDut1MqZ0+R3RT+INmbOhesBDVowx4RGwkXzBf1uFa5cK5POx
+	+LSATW8LA6oQ+shzHZgh14AaqoBi/0+UbHnlABv7ATwa9eqizGsV09onlzdAFQPfvOjx
+	9qN/38fSX9Zn//BjTqBilZdjtTv9NZ0Gbm4PZ1AG2ga0RAVfUVGwKsikv4uYfC+STPE3
+	xTtg==
+X-Gm-Message-State: AHQUAuYBw8v04YSUxbXALw9A6GtOhc/Fzeq4ya81OnxbZb0a6yNEKUz5
+	vhT5L4RDz7NzSuuam/XDKuUIFFzo
+X-Google-Smtp-Source: AHgI3Ib9oWkQkcu9aSThGgHlKxcX/kWldzphk1rbsz+V5yJO23YgYVOQlo3F6J/XOr4wl2biAFuNbw==
+X-Received: by 2002:a5d:4412:: with SMTP id z18mr21848025wrq.111.1550615009751;
+	Tue, 19 Feb 2019 14:23:29 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F065789FB9A06193E8AB1B8.dip0.t-ipconnect.de.
+	[2003:f0:7f06:5789:fb9a:619:3e8a:b1b8])
+	by smtp.gmail.com with ESMTPSA id
+	d24sm55158896wrb.47.2019.02.19.14.23.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 19 Feb 2019 14:23:28 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Feb 2019 23:23:16 +0100
+Message-Id: <20190219222319.21370-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srzbagvGiRSAT2shAzgxD19qLeN2tZbnHaPA-vOrAJtig@mail.gmail.com>
-X-Spam-Score: -1.3 (-)
-X-Scan-Signature: 6c6402755417442baa8ae6568c2b564b
-X-Spam-Tracer: backend.mail.pr.hu -1.3 20190219184558Z
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 0/6 v2] Run dracut from rootfs
+Subject: [PATCH 1/4] libpeas: initial add 1.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,131 +60,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2019 18:46:00 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+X-List-Received-Date: Tue, 19 Feb 2019 22:23:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-2019. 02. 19. 17:51 keltezéssel, Khem Raj írta:
-> On Tue, Feb 19, 2019 at 12:43 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
->>
->> 2019. 02. 19. 8:14 keltezéssel, Khem Raj írta:
->>> more here
->>>
->>> NOTE: Started PRServer with DBfile: /mnt/a/yoe/cache/prserv.sqlite3,
->>> IP: 127.0.0.1, PORT: 45089, PID: 43331
->>> Parsing recipes...done.
->>> Parsing of 3233 .bb files complete (0 cached, 3233 parsed). 4441
->>> targets, 574 skipped, 0 masked, 0 errors.
->>> NOTE: Resolving any missing task queue dependencies
->>> ERROR: Nothing RPROVIDES 'plymouth-initrd' (but
->>> /mnt/a/yoe/sources/meta-openembedded/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
->>> RDEPENDS on or otherwise requires it)
->>> NOTE: Runtime target 'plymouth-initrd' is unbuildable, removing...
->>
->> Questions:
->>
->> 1. What removes "initrd" from the plymouth PACKAGECONFIG for this setup?
->>
-> 
-> 
-> 
->> 2. Can a PACKAGECONFIG string of one recipe queried from another recipe?
->>      E.g. would bb.utils.contains("PACKAGECONFIG_pn-plymouth", ...) work
->>      from the dracut recipe if the variable does not exit at a layer level
->>      but only in a plymouth bbappend?
-> 
-> I dont think so, but you can tie it into a DISTRO_CONFIG
+Am working on a rebirth of midori (no it's not dead) at meta-browser. To avoid
+an additional layer dependency for meta-browser, put libpeas to meta-oe.
 
-You mean, instead of checking for PACKAGECONFIG, plymouth and dracut
-should both test for "dracut" in DISTRO_FEATURES, right?
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../recipes-gnome/libpeas/libpeas_1.22.0.bb   | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
 
-Or should they check for the other one?
-
-Or both should check for both strings?
-
-Which one is preferred?
-
-> 
->>
->> 3. Would moving plymouth-initrd from RDEPENDS to RRECOMMENDS in the dracut
->>      recipe solve this problem? If not, why? intel-microcode is also in
->>      RRECOMMENDS, but it's mentioned in the errors below. Why?
-> 
-> recommendations still have to be built, for feeds.
-
-Okay, so I need a function to check for an x86(_64) target
-and conditionally include intel-microcode.
-
-> 
->>
->>> Missing or unbuildable dependency chain was: ['plymouth-initrd']
->>> NOTE: Runtime target 'dracut' is unbuildable, removing...
->>> Missing or unbuildable dependency chain was: ['dracut', 'plymouth-initrd']
->>> NOTE: Runtime target 'dracut-dev' is unbuildable, removing...
->>> Missing or unbuildable dependency chain was: ['dracut-dev', 'plymouth-initrd']
->>> ERROR: Nothing RPROVIDES 'intel-microcode' (but
->>> /mnt/a/yoe/sources/meta-openembedded/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
->>> RDEPENDS on or otherwise requires it)
->>> NOTE: Runtime target 'intel-microcode' is unbuildable, removing...
->>> Missing or unbuildable dependency chain was: ['intel-microcode']
->>>
->>> Build Configuration:
->>> BB_VERSION           = "1.40.0"
->>> BUILD_SYS            = "x86_64-linux"
->>> NATIVELSBSTRING      = "arch"
->>> TARGET_SYS           = "arm-yoe-linux-musleabi"
->>> MACHINE              = "sama5d27-som1-ek-sd"
->>> DISTRO               = "yoe-musl-sysvinit-wayland"
->>> DISTRO_VERSION       = "2.6"
->>> TUNE_FEATURES        = "arm vfp cortexa5 neon vfpv4 thumb callconvention-hard"
->>> TARGET_FPU           = "hard"
->>> meta-yoe             = "yoe/mut:f14a20d6c6b23391aa0b8636d0b20752e074830a"
->>> meta-96boards        = "HEAD:6e8a11ea878698742e83832ef06df2c11604c338"
->>> meta-atmel           = "HEAD:ac803d348433d7755803f5429c7c40f4883a5ae4"
->>> meta-freescale       = "HEAD:2e83203ebd8439a45bc7a931ace6871e6b238658"
->>> meta-freescale-3rdparty = "HEAD:8b38f230d4d7cd6c283d75c17eddfbe51eca90a5"
->>> meta-odroid
->>> meta-odroid-extras   = "yoe/mut:688ff9c5f549f072af204ee64d5ad3ee18b9e47f"
->>> meta-qcom            = "yoe/mut:f708a3a9b6a61cd4d83a32dec4532453a127b54a"
->>> meta-raspberrypi     = "HEAD:6305aa7b693fb3423bd40921144666dadd7185b8"
->>> meta-riscv           = "yoe/mut:2ec848f8f37ea3c0d3538f32a59133294a9234cc"
->>> meta-ti              = "yoe/mut:04c4fef39d62396ea855b5f086a969269d740562"
->>> meta-browser         = "yoe/mut:974e22e9ffcba92a1d7e7aab90a6cb88b9c3e77f"
->>> meta-qt5             = "HEAD:fb71293f257c6fd02ccc06765a96dbf11d4569a0"
->>> meta-rust            = "HEAD:f4517aaba8026b44576c6407adf0175663d5a7b4"
->>> meta-filesystems
->>> meta-gnome
->>> meta-initramfs
->>> meta-multimedia
->>> meta-networking
->>> meta-oe
->>> meta-perl
->>> meta-python
->>> meta-webserver
->>> meta-xfce            = "yoe/mut:6adca5007190518de21ff406a141944c9d601588"
->>> meta                 = "yoe/mut:36242003ab8ff7e5dd93206ff672d92f9dbbd6e4"
->>> meta-clang           = "master:e96a34778c238692769c488fbe0d7781f0b929ce"
->>> workspace            = "kraj/master:8a94ccf193a33feb1546455fd190ac880ff66fb2"
->>>
->>> On Mon, Feb 18, 2019 at 11:01 PM Khem Raj <raj.khem@gmail.com> wrote:
->>>>
->>>> https://errors.yoctoproject.org/Errors/Details/228793/
->>>>
->>>> On Mon, Feb 18, 2019 at 2:47 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
->>>>>
->>>>> This patchset adds the necessary pieces to create the initramfs
->>>>> with dracut during do_rootfs.
->>>>>
->>>>> The 6th patch references a GitHub branch for which a pull request
->>>>> was made against dracut. See https://github.com/dracutdevs/dracut/pull/535
->>>>>
->>>>> Best regards,
->>>>> Zoltán Böszörményi
->>>>>
->>>>>
->>>
->>
-> 
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+new file mode 100644
+index 000000000..c1ead0670
+--- /dev/null
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "libpeas is a gobject-based plugins engine"
++HOMEPAGE = "https://wiki.gnome.org/Projects/Libpeas"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
++
++DEPENDS = "gnome-common gtk+3 intltool-native"
++
++inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
++
++SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
++SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
++
++PACKAGECONFIG[python3] = "--enable-python3,--disable-python3,python3-pygobject"
++
++export GIR_EXTRA_LIBS_PATH = "${B}/libpeas/.libs"
++
++PACKAGES =+ "${PN}-demo ${PN}-python3"
++FILES_${PN}-demo = " \
++    ${bindir}/peas-demo \
++    ${libdir}/peas-demo \
++"
++
++RDEPENDS_${PN}-python3 = "python3-pygobject"
++FILES_${PN}-python3 = "${libdir}/libpeas-1.0/loaders/libpython3loader.so"
+-- 
+2.20.1
 
 
