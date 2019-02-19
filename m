@@ -1,53 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id A98A27C9A4
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id CB7377C9C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2019 22:23:29 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id t18so23785542wrx.2
+	Tue, 19 Feb 2019 22:23:30 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id n2so11554971wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2019 14:23:30 -0800 (PST)
+	Tue, 19 Feb 2019 14:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=zhPoVthSWdWcgeq1J3t6qCBe4kEbOu3nds6efM8s/FM=;
-	b=elTqW11wLux6jAiYpa03oR+I+OYu21JR3vCk+dno5YC3ERAf03j8oeqa7asCR1Nv2u
-	gWVPMxL2roJ7K6vu+cIHrLq/9R9Ms09ISLiNzbvNFldOT+3gCHaVihgtf0xc9rLuqCWY
-	Nqd0NJauyKA1OjExuMg8nYZbYwfY49WMgob9M83JbL4am9H4lCkfPwU66AUXeejeteJr
-	oypOar98y6sdN4QxBKHVji4BhhG2T3eU4aCj2uNTM1179hFrvMwelkzgx7zACMSODUWY
-	BoUoXp8vQdBbK6flBfiWQ1NtwvgpeJAetxuRR5U70R88+Ltxx1KW5mxhIQn3SF05u/u+
-	95kg==
+	bh=c+tNlGWk4iNz00o3IHPDjqnu11PE3ftZflDDwwLzLQw=;
+	b=tmlB66ulmH0xWfpRNcGlQ2LxMnogagKcQjuDwtu31vUSplvFkFuxO5Tp/VlEeXzYLI
+	B8bbvAtYe2jniy6B/bsAzuma+Nb5iGdh+ivRtpUC2gVL33KMfAb6drrE8CZ4f+yQbhjb
+	eOE+8MKXFPBsD7CD/5ynGE+8Nym7bF6u9h3eAVJsDweZWWu62Dy2kiKj47DhLQsaFpxz
+	KbHqMInjH3RnxAsMH4d+JrsVbq9WCWW+AEm8UWAED6A2J+rtK61qN6S4eRsjyV/NVLJD
+	cdDSQ1p/EBwrUdPsMNy+JO8JMge1AO5qEzgDa0z1YrInTGN+8VynFnMH8bhgNPvI3NJM
+	MBkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zhPoVthSWdWcgeq1J3t6qCBe4kEbOu3nds6efM8s/FM=;
-	b=nU9LcBECCvp5Fjh6ua9KCdtgOCXg7+0O5tUQUinpdnZ2CDgRBG64qudYpQHRfWlFss
-	a7I1S23evXV8WsvXfMNfFZ3hrdNNn3+MJjV3jttYT5WHYWuDOigHOAxKC4Rk+GqQ1WIw
-	pkyqX18QGbUIydYwAZvNDut1MqZ0+R3RT+INmbOhesBDVowx4RGwkXzBf1uFa5cK5POx
-	+LSATW8LA6oQ+shzHZgh14AaqoBi/0+UbHnlABv7ATwa9eqizGsV09onlzdAFQPfvOjx
-	9qN/38fSX9Zn//BjTqBilZdjtTv9NZ0Gbm4PZ1AG2ga0RAVfUVGwKsikv4uYfC+STPE3
-	xTtg==
-X-Gm-Message-State: AHQUAuYBw8v04YSUxbXALw9A6GtOhc/Fzeq4ya81OnxbZb0a6yNEKUz5
-	vhT5L4RDz7NzSuuam/XDKuUIFFzo
-X-Google-Smtp-Source: AHgI3Ib9oWkQkcu9aSThGgHlKxcX/kWldzphk1rbsz+V5yJO23YgYVOQlo3F6J/XOr4wl2biAFuNbw==
-X-Received: by 2002:a5d:4412:: with SMTP id z18mr21848025wrq.111.1550615009751;
-	Tue, 19 Feb 2019 14:23:29 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=c+tNlGWk4iNz00o3IHPDjqnu11PE3ftZflDDwwLzLQw=;
+	b=sSyqp8fh5zzklPDqdDpLj3NyufpsvH2WKo/uPQv0glT0DyUO6X8sgoBeLPdGTVEMrT
+	NtZV44gVFqzZggRlmYIiLhkfMWKBBnCfu890UG5aMoT0lhSzKlUMkQs/CRSUfduNLsBE
+	GSsucsIPyUMEtemB95o5Mi0Nx7fKEG95UdBE/8pIBjL53jDonusbmyYbmkud8zcFt/YU
+	AH3Fv/i7CDap+YZX8s2SMXoNQB5+33JvR7tgsnphjXSGFbFlEIqeCHHPzVyqFxd7uHfu
+	NKTOvUph2bmNWETNxSdlvgbp7K2+GkQYLdLZ3ZvA7ssAV60AYKsNCGFSZJkM0olUkTOl
+	fW7w==
+X-Gm-Message-State: AHQUAuYbgIo8BFH1i6ZnG6/v7xfFUWZS0CjZoGa+pjFjpD0l6tWi2Ie0
+	vAWe+NYWK60ls/UA7YxF7K1xuxsl
+X-Google-Smtp-Source: AHgI3IZHoIUTmNXXr/Tua2dgGyO62SQwdnM87l4zEYF02CA564ByKjAVw/KJrIOVPW301zPC2+bltA==
+X-Received: by 2002:a5d:604d:: with SMTP id j13mr14788411wrt.194.1550615011286;
+	Tue, 19 Feb 2019 14:23:31 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F065789FB9A06193E8AB1B8.dip0.t-ipconnect.de.
 	[2003:f0:7f06:5789:fb9a:619:3e8a:b1b8])
 	by smtp.gmail.com with ESMTPSA id
-	d24sm55158896wrb.47.2019.02.19.14.23.28
+	d24sm55158896wrb.47.2019.02.19.14.23.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 19 Feb 2019 14:23:28 -0800 (PST)
+	Tue, 19 Feb 2019 14:23:30 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Feb 2019 23:23:16 +0100
-Message-Id: <20190219222319.21370-1-schnitzeltony@gmail.com>
+Date: Tue, 19 Feb 2019 23:23:17 +0100
+Message-Id: <20190219222319.21370-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190219222319.21370-1-schnitzeltony@gmail.com>
+References: <20190219222319.21370-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4] libpeas: initial add 1.22.0
+Subject: [PATCH 2/4] geany: upgrade 1.31 -> 1.34.1 and build with gtk+3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,49 +62,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2019 22:23:30 -0000
+X-List-Received-Date: Tue, 19 Feb 2019 22:23:31 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Am working on a rebirth of midori (no it's not dead) at meta-browser. To avoid
-an additional layer dependency for meta-browser, put libpeas to meta-oe.
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/libpeas/libpeas_1.22.0.bb   | 24 +++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+ .../geany/{geany_1.31.bb => geany_1.34.1.bb}                | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/geany/{geany_1.31.bb => geany_1.34.1.bb} (64%)
 
-diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
-new file mode 100644
-index 000000000..c1ead0670
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "libpeas is a gobject-based plugins engine"
-+HOMEPAGE = "https://wiki.gnome.org/Projects/Libpeas"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
-+
-+DEPENDS = "gnome-common gtk+3 intltool-native"
-+
-+inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
-+
-+SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
-+SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
-+
-+PACKAGECONFIG[python3] = "--enable-python3,--disable-python3,python3-pygobject"
-+
-+export GIR_EXTRA_LIBS_PATH = "${B}/libpeas/.libs"
-+
-+PACKAGES =+ "${PN}-demo ${PN}-python3"
-+FILES_${PN}-demo = " \
-+    ${bindir}/peas-demo \
-+    ${libdir}/peas-demo \
-+"
-+
-+RDEPENDS_${PN}-python3 = "python3-pygobject"
-+FILES_${PN}-python3 = "${libdir}/libpeas-1.0/loaders/libpython3loader.so"
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.31.bb b/meta-oe/recipes-devtools/geany/geany_1.34.1.bb
+similarity index 64%
+rename from meta-oe/recipes-devtools/geany/geany_1.31.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.34.1.bb
+index bb9d8bc29..aab535d85 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.31.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.34.1.bb
+@@ -3,15 +3,15 @@ HOMEPAGE = "http://www.geany.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
+ 
+-DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native intltool-native"
++DEPENDS = "gtk+3 libxml-parser-perl-native python3-docutils-native intltool-native"
+ 
+ inherit distro_features_check autotools pkgconfig perlnative pythonnative gettext
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "386000be6b26972c6a699939c37cda34"
+-SRC_URI[sha256sum] = "30fdb906bb76c4251a8bcf83ee267db28c26ef6ab867668a782cec1164a3aba5"
++SRC_URI[md5sum] = "87220f4a0e03623ab9d86820f6be7b5d"
++SRC_URI[sha256sum] = "e765efd89e759defe3fd797d8a2052afbb4b23522efbcc72e3a72b7f1093ec11"
+ 
+ FILES_${PN} += "${datadir}/icons"
+ 
 -- 
 2.20.1
 
