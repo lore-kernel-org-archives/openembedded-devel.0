@@ -1,47 +1,48 @@
 Return-Path: <zboszor@pr.hu>
 Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 98CA77C810
+	by mail.openembedded.org (Postfix) with ESMTP id 58F317C9ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2019 17:08:42 +0000 (UTC)
+	Tue, 19 Feb 2019 18:45:59 +0000 (UTC)
 Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
 	by frontdoor.pr.hu with esmtps
 	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
 	(envelope-from <zboszor@pr.hu>)
-	id 1gw8st-0000Sg-BT; Tue, 19 Feb 2019 18:08:43 +0100
+	id 1gwAP2-0007cq-GC; Tue, 19 Feb 2019 19:46:00 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
 	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=WB14sTlmMWEWxHMUSgqHWdEjFwGT1uL7X4aBxHp6lQY=;
-	b=X3foWaKTVbqPBbiWyTcnq6E4ja
-	4wqMqFXmUc7Lwf5izMktPoPgpdpjQVBMvstzWrGB+Ij5gYcK6vWuzr9xieu5JHl0+D6KmL/LusIb9
-	lj1ECyi9QiTGHMltdK3q+uQXLqHTSSuv2FmzlVZH53H1NPIbYqJTDKkl/ktrpZwO1L+C1FLhtx1oC
-	kaJsjFNPxfvn2PV4Ov/GN1qDrhQpsxTM9hMDuXRl1BFuEX/y4NT0A3CqNVFNX7jebVOWk5qRmgpH4
-	OuEbvIfdvWegyvhkG1X1OW4tHcWFabu+4RqHQ3YN7VpfNUY+OiVnYNCxsp11p8J8RUmGnw/zk4cMP
-	Gjvvt5wg==;
+	bh=8Qi2OPdiulvQR6wfkdYB909gxnoIwcvD9VHRy8J57bE=;
+	b=hTHsNvPLN4Sb9a7DBFM+ZxaAT2
+	VwIZ5d7hvB+JsfL9YEvpPBCn5t1m4lSEPyyupJjpWfPlZPOk5WbE6KRt3RFZjL6sfW6WrUXOjxb1u
+	9gOfV4UnZo1CJ6Pdpauf0xwhgoK5NvL/C146I2vv3aM+EWP8/ejm1AsLBT0MvVGdFGKbwjpWF0hGG
+	DBeR5+b3kms9jtnqb/Iuh74fDXGNm41jWqAhcvfPd18ZaeXOvpaz+NefaoYHjh4cxlvCc0jfGm0Qs
+	bH8f0Y5hJPAf8I3k1CIupGB6tA6pBWbZieO6xF2fMPha9lwCklgon3WSFJnebOWlt6n1o22pY5Otm
+	BiYTue3g==;
 Received: from host-87-242-20-26.prtelecom.hu ([87.242.20.26]
 	helo=localhost.localdomain)
 	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
-	id 1gw8sp-0003wb-E5; Tue, 19 Feb 2019 18:08:41 +0100
+	id 1gwAOy-0006ql-Bf; Tue, 19 Feb 2019 19:45:58 +0100
 To: Khem Raj <raj.khem@gmail.com>
 References: <20190216170354.10645-1-zboszor@pr.hu>
 	<20190218104704.14623-1-zboszor@pr.hu>
 	<CAMKF1spwdGaXKr51oZM-g5Pmw8jNsUQLOs=DRsOfD3pYfAYRZg@mail.gmail.com>
-	<5ed76350-b384-bfa8-5e21-5373a9bf4a91@pr.hu>
-	<CAMKF1sqhjRVsLSqPQwoPRnO5hndaoHXar7zY+ZnRyMjwp0FU5g@mail.gmail.com>
+	<CAMKF1spGuo6q450qviwopWk4LMpqDNzVAgAUrQbLQPBwc-zyNw@mail.gmail.com>
+	<6bc2f073-19bf-85c4-0f0f-581700557c4e@pr.hu>
+	<CAMKF1srzbagvGiRSAT2shAzgxD19qLeN2tZbnHaPA-vOrAJtig@mail.gmail.com>
 From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Message-ID: <72a30c42-6f38-6786-7a42-121f28f935a8@pr.hu>
-Date: Tue, 19 Feb 2019 18:08:37 +0100
+Message-ID: <38db22d0-840f-1759-206b-43a28efd106c@pr.hu>
+Date: Tue, 19 Feb 2019 19:45:53 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.5.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqhjRVsLSqPQwoPRnO5hndaoHXar7zY+ZnRyMjwp0FU5g@mail.gmail.com>
+In-Reply-To: <CAMKF1srzbagvGiRSAT2shAzgxD19qLeN2tZbnHaPA-vOrAJtig@mail.gmail.com>
 X-Spam-Score: -1.3 (-)
-X-Scan-Signature: e081fa8d8559a8dbbf6ac9ab9b6e2a4c
-X-Spam-Tracer: backend.mail.pr.hu -1.3 20190219170841Z
+X-Scan-Signature: 6c6402755417442baa8ae6568c2b564b
+X-Spam-Tracer: backend.mail.pr.hu -1.3 20190219184558Z
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-initramfs][PATCH 0/6 v2] Run dracut from rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -56,43 +57,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2019 17:08:42 -0000
+X-List-Received-Date: Tue, 19 Feb 2019 18:46:00 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-2019. 02. 19. 17:46 keltezéssel, Khem Raj írta:
-> On Tue, Feb 19, 2019 at 1:00 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
+2019. 02. 19. 17:51 keltezéssel, Khem Raj írta:
+> On Tue, Feb 19, 2019 at 12:43 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
 >>
->> Please fix the author for my patches in Patchwork and in GIT history.
-> 
-> Don't worry, I am aware of this problem, and I will fix that once that
-> patches are in good shape.
-> you should enquire your email provider also on this issue since it
-> might also be related to them.
-
-I think it's more likely caused by that I have not had a patchwork
-account when I sent the patches and it assigned some bad default.
-
-> 
->>
->> Who is this William A. Kennington III who claimed ownership over my patches?
->>
->> 2019. 02. 19. 8:01 keltezéssel, Khem Raj írta:
->>> https://errors.yoctoproject.org/Errors/Details/228793/
+>> 2019. 02. 19. 8:14 keltezéssel, Khem Raj írta:
+>>> more here
 >>>
->>> On Mon, Feb 18, 2019 at 2:47 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
+>>> NOTE: Started PRServer with DBfile: /mnt/a/yoe/cache/prserv.sqlite3,
+>>> IP: 127.0.0.1, PORT: 45089, PID: 43331
+>>> Parsing recipes...done.
+>>> Parsing of 3233 .bb files complete (0 cached, 3233 parsed). 4441
+>>> targets, 574 skipped, 0 masked, 0 errors.
+>>> NOTE: Resolving any missing task queue dependencies
+>>> ERROR: Nothing RPROVIDES 'plymouth-initrd' (but
+>>> /mnt/a/yoe/sources/meta-openembedded/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+>>> RDEPENDS on or otherwise requires it)
+>>> NOTE: Runtime target 'plymouth-initrd' is unbuildable, removing...
+>>
+>> Questions:
+>>
+>> 1. What removes "initrd" from the plymouth PACKAGECONFIG for this setup?
+>>
+> 
+> 
+> 
+>> 2. Can a PACKAGECONFIG string of one recipe queried from another recipe?
+>>      E.g. would bb.utils.contains("PACKAGECONFIG_pn-plymouth", ...) work
+>>      from the dracut recipe if the variable does not exit at a layer level
+>>      but only in a plymouth bbappend?
+> 
+> I dont think so, but you can tie it into a DISTRO_CONFIG
+
+You mean, instead of checking for PACKAGECONFIG, plymouth and dracut
+should both test for "dracut" in DISTRO_FEATURES, right?
+
+Or should they check for the other one?
+
+Or both should check for both strings?
+
+Which one is preferred?
+
+> 
+>>
+>> 3. Would moving plymouth-initrd from RDEPENDS to RRECOMMENDS in the dracut
+>>      recipe solve this problem? If not, why? intel-microcode is also in
+>>      RRECOMMENDS, but it's mentioned in the errors below. Why?
+> 
+> recommendations still have to be built, for feeds.
+
+Okay, so I need a function to check for an x86(_64) target
+and conditionally include intel-microcode.
+
+> 
+>>
+>>> Missing or unbuildable dependency chain was: ['plymouth-initrd']
+>>> NOTE: Runtime target 'dracut' is unbuildable, removing...
+>>> Missing or unbuildable dependency chain was: ['dracut', 'plymouth-initrd']
+>>> NOTE: Runtime target 'dracut-dev' is unbuildable, removing...
+>>> Missing or unbuildable dependency chain was: ['dracut-dev', 'plymouth-initrd']
+>>> ERROR: Nothing RPROVIDES 'intel-microcode' (but
+>>> /mnt/a/yoe/sources/meta-openembedded/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+>>> RDEPENDS on or otherwise requires it)
+>>> NOTE: Runtime target 'intel-microcode' is unbuildable, removing...
+>>> Missing or unbuildable dependency chain was: ['intel-microcode']
+>>>
+>>> Build Configuration:
+>>> BB_VERSION           = "1.40.0"
+>>> BUILD_SYS            = "x86_64-linux"
+>>> NATIVELSBSTRING      = "arch"
+>>> TARGET_SYS           = "arm-yoe-linux-musleabi"
+>>> MACHINE              = "sama5d27-som1-ek-sd"
+>>> DISTRO               = "yoe-musl-sysvinit-wayland"
+>>> DISTRO_VERSION       = "2.6"
+>>> TUNE_FEATURES        = "arm vfp cortexa5 neon vfpv4 thumb callconvention-hard"
+>>> TARGET_FPU           = "hard"
+>>> meta-yoe             = "yoe/mut:f14a20d6c6b23391aa0b8636d0b20752e074830a"
+>>> meta-96boards        = "HEAD:6e8a11ea878698742e83832ef06df2c11604c338"
+>>> meta-atmel           = "HEAD:ac803d348433d7755803f5429c7c40f4883a5ae4"
+>>> meta-freescale       = "HEAD:2e83203ebd8439a45bc7a931ace6871e6b238658"
+>>> meta-freescale-3rdparty = "HEAD:8b38f230d4d7cd6c283d75c17eddfbe51eca90a5"
+>>> meta-odroid
+>>> meta-odroid-extras   = "yoe/mut:688ff9c5f549f072af204ee64d5ad3ee18b9e47f"
+>>> meta-qcom            = "yoe/mut:f708a3a9b6a61cd4d83a32dec4532453a127b54a"
+>>> meta-raspberrypi     = "HEAD:6305aa7b693fb3423bd40921144666dadd7185b8"
+>>> meta-riscv           = "yoe/mut:2ec848f8f37ea3c0d3538f32a59133294a9234cc"
+>>> meta-ti              = "yoe/mut:04c4fef39d62396ea855b5f086a969269d740562"
+>>> meta-browser         = "yoe/mut:974e22e9ffcba92a1d7e7aab90a6cb88b9c3e77f"
+>>> meta-qt5             = "HEAD:fb71293f257c6fd02ccc06765a96dbf11d4569a0"
+>>> meta-rust            = "HEAD:f4517aaba8026b44576c6407adf0175663d5a7b4"
+>>> meta-filesystems
+>>> meta-gnome
+>>> meta-initramfs
+>>> meta-multimedia
+>>> meta-networking
+>>> meta-oe
+>>> meta-perl
+>>> meta-python
+>>> meta-webserver
+>>> meta-xfce            = "yoe/mut:6adca5007190518de21ff406a141944c9d601588"
+>>> meta                 = "yoe/mut:36242003ab8ff7e5dd93206ff672d92f9dbbd6e4"
+>>> meta-clang           = "master:e96a34778c238692769c488fbe0d7781f0b929ce"
+>>> workspace            = "kraj/master:8a94ccf193a33feb1546455fd190ac880ff66fb2"
+>>>
+>>> On Mon, Feb 18, 2019 at 11:01 PM Khem Raj <raj.khem@gmail.com> wrote:
 >>>>
->>>> This patchset adds the necessary pieces to create the initramfs
->>>> with dracut during do_rootfs.
+>>>> https://errors.yoctoproject.org/Errors/Details/228793/
 >>>>
->>>> The 6th patch references a GitHub branch for which a pull request
->>>> was made against dracut. See https://github.com/dracutdevs/dracut/pull/535
->>>>
->>>> Best regards,
->>>> Zoltán Böszörményi
->>>>
->>>>
+>>>> On Mon, Feb 18, 2019 at 2:47 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
+>>>>>
+>>>>> This patchset adds the necessary pieces to create the initramfs
+>>>>> with dracut during do_rootfs.
+>>>>>
+>>>>> The 6th patch references a GitHub branch for which a pull request
+>>>>> was made against dracut. See https://github.com/dracutdevs/dracut/pull/535
+>>>>>
+>>>>> Best regards,
+>>>>> Zoltán Böszörményi
+>>>>>
+>>>>>
 >>>
 >>
 > 
