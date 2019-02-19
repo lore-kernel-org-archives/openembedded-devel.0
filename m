@@ -1,47 +1,52 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id ACBE87C788
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 12F296C198
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2019 09:00:26 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps
-	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
-	(envelope-from <zboszor@pr.hu>)
-	id 1gw1GN-0007FK-69; Tue, 19 Feb 2019 10:00:27 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=LGAjjeEDKVAW02qXwGIKcLu/JROXA4Yibg8p+ahNoKU=;
-	b=KDXglKTfbQjPngTiG8X90WRCHD
-	48fRT0AyVXCTUKNCg/AQs88xkMO/p5P7s8AVvmxtaeU5iWTdbNdIcz6yjj12KJYKPZT1BQ+Yf8eMs
-	U+CjUOEGLcdeWEZ9aqR359baAY90ViCtahZ8mCfjYzPFaK+oaAK0WEEpLZ0cbkbhr5vLMuFhRgSGI
-	aoP1tXwitO/ZXGphfJ+ISN9UtgA/MJY/+YJw5Dz2KigW5g784Ok59j8WkNJ4SOUny76pUAx5bPdgH
-	xLxDYJnWxnztZ6RtLgYea3pD3Nb82cufVQiTzBagotUSt8rVbJIPJ0dMxtRt2DxbT8CYV+Z8+dLdG
-	NyNK1z6Q==;
-Received: from host-87-242-20-26.prtelecom.hu ([87.242.20.26]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
-	id 1gw1GI-0002wI-7d; Tue, 19 Feb 2019 10:00:25 +0100
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190216170354.10645-1-zboszor@pr.hu>
-	<20190218104704.14623-1-zboszor@pr.hu>
-	<CAMKF1spwdGaXKr51oZM-g5Pmw8jNsUQLOs=DRsOfD3pYfAYRZg@mail.gmail.com>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Message-ID: <5ed76350-b384-bfa8-5e21-5373a9bf4a91@pr.hu>
-Date: Tue, 19 Feb 2019 10:00:20 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.0
+	Tue, 19 Feb 2019 13:50:42 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id w17so22005478wrn.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Feb 2019 05:50:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+XA6kBhydktzdlgGJA2KMHxBFZh6hXzVGJaA+8JFbkA=;
+	b=Qp0+cyjChUniFEcp8stwKOAr5f/bWlRR7hFJrybvNxrAA0mYmIgdp8PVX19Q0IU455
+	SqHbWIc/329QSuh1F7x2aLY1zOclqXWAALV63gSfjeJwnn3NMwbWUwLfLdyHF1Zuf9Jl
+	Fjt/5XWZsLTgZG3bXHhsp0fwerOuBtXoOryreer2hx4aGTEf/TZ/jqnshbNRLxvkmaum
+	oi0ZDc/o4r+OuxQpv1C/3KR7OGjXqpiRgDaZI/0AO/28NcolO5zb57thPZavMBX77I5z
+	EbrxtDI4hEr+hDk0ws7sw7MYc9CwjfhudJ93/I7+qXLX2YXXGkVHVssvcIQAh3H9cXYh
+	e0XA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+XA6kBhydktzdlgGJA2KMHxBFZh6hXzVGJaA+8JFbkA=;
+	b=nCiNeSxbgdGPfe4d9OqNoK2tFwq+PR4hDp0LlvTbphh6clKW73Mjpea8gp41xRFows
+	iifVUj7EvkKnST+fgmc9wVFvEVO6H76ezXnIoZhX+e225pIYsbi0PHvOt23TrSqLuIss
+	pcW1E2NTSPbvC0F49ipTFoR95kLa02mZFXCavoOn8jA0TGf7lcmCEsedgQzIscXdlq09
+	HFhfGvCLcME1iCrQYm6t0zA8ZbR1owCnJz5g4yl7IJtyNSx7amNaQLL0qT5myU4+VCx+
+	GaRLmCJHS2leUSDB8udMoXiU/Eoyt8GgWyaZuvEmD79gV7Dc2c9S5YD2wfYYRxzTMynJ
+	L7bw==
+X-Gm-Message-State: AHQUAua5NYN3bJBgSo6I3GAlLqd9nWmgYg167rSzIRPP2ljJTfmUIdJr
+	Ec3fZkgUjmuMyXVe4U2KQdfqeQ==
+X-Google-Smtp-Source: AHgI3IaAqHf7x2XIJe4pborORSJ3kBu++SmWMs8OkYFqT/HrgtpYUlQfkKSSbDBhqe4RlR4SigMvmw==
+X-Received: by 2002:a5d:6846:: with SMTP id o6mr20328806wrw.160.1550584243432; 
+	Tue, 19 Feb 2019 05:50:43 -0800 (PST)
+Received: from localhost.localdomain (lns-bzn-59-82-252-132-4.adsl.proxad.net.
+	[82.252.132.4]) by smtp.gmail.com with ESMTPSA id
+	z15sm23737495wrh.18.2019.02.19.05.50.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 19 Feb 2019 05:50:42 -0800 (PST)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Feb 2019 14:50:06 +0100
+Message-Id: <20190219135006.20859-1-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spwdGaXKr51oZM-g5Pmw8jNsUQLOs=DRsOfD3pYfAYRZg@mail.gmail.com>
-X-Spam-Score: -1.3 (-)
-X-Scan-Signature: 61dc834c4512bbdac06a43d8f23e4555
-X-Spam-Tracer: backend.mail.pr.hu -1.3 20190219090025Z
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 0/6 v2] Run dracut from rootfs
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-oe][thud][PATCH] packagegroup-meta-oe: drop ptest packages that do not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2019 09:00:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+X-List-Received-Date: Tue, 19 Feb 2019 13:50:43 -0000
 Content-Transfer-Encoding: 8bit
 
-Please fix the author for my patches in Patchwork and in GIT history.
+From: Alexander Kanavin <alex.kanavin@gmail.com>
 
-Who is this William A. Kennington III who claimed ownership over my patches?
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit bbde0a3d3012da1d6be824959b0ad0a930573650)
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-2019. 02. 19. 8:01 keltezéssel, Khem Raj írta:
-> https://errors.yoctoproject.org/Errors/Details/228793/
-> 
-> On Mon, Feb 18, 2019 at 2:47 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
->>
->> This patchset adds the necessary pieces to create the initramfs
->> with dracut during do_rootfs.
->>
->> The 6th patch references a GitHub branch for which a pull request
->> was made against dracut. See https://github.com/dracutdevs/dracut/pull/535
->>
->> Best regards,
->> Zoltán Böszörményi
->>
->>
-> 
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 08b4bbfc4..2a23a6170 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -234,19 +234,15 @@ RDEPENDS_packagegroup-meta-oe-test ="\
+ 
+ RDEPENDS_packagegroup-meta-oe-ptest = "\
+     zeromq-ptest \
+-    libxml-ptest \
+-    soci-ptest \
+     leveldb-ptest \
+     psqlodbc-ptest \
+     lua-ptest \
+     protobuf-ptest \
+-    libdbi-ptest \
+     rsyslog-ptest \
+     oprofile-ptest \
+     libteam-ptest \
+     uthash-ptest \
+     mcelog-ptest \
+-    openldap-ptest \
+     libee-ptest \
+     numactl-ptest \
+     poco-ptest \
+-- 
+2.20.1
 
 
