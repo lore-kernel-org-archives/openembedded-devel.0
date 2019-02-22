@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
-	[209.85.222.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 618A37CA66
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+	[209.85.160.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E7A317CBCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 04:25:47 +0000 (UTC)
-Received: by mail-qk1-f177.google.com with SMTP id r21so417589qkl.11
+	Fri, 22 Feb 2019 04:25:53 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id y4so1127452qtc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2019 20:25:48 -0800 (PST)
+	Thu, 21 Feb 2019 20:25:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yahM24lqg93M02cyu6loOckOffH67KvMw8rOcUS7ilM=;
-	b=KmzbhwPNWzHUulJNO0NyZEwpZFZcmRaWlTWlRAFW7VA8sjr/Pb/iAIT0ivWdGnf1TQ
-	q6MWSbYvHhfH2eoKaMR+xE4wPQ/XaGypTQPllzHnkCK8QyaKeOjrLGfroe5XnLm3vXCR
-	qC8OYu8kvoWcHLr+sIEEByZ/qrtFMOa3C+5fUL3EAycy5noYkf94KUuivB5eSGLJfYTi
-	b0AS0XVogcpI7UD9bggmpomfJhj5qV0MgxPV6aJ4jtUK632DwhIJgOG0a5yuTegOVYWS
-	zYTvmOZDy56zHOuBe+7eKFLiXxJWfaeQTcZCv3cQU58V3DR6WKunHQ+KE6bQV4hroP7T
-	oedg==
+	:cc; bh=jwp8FG5bEysyncsbEnlYH1saEWws92U3fUB455zRpZw=;
+	b=NRr0eF6S//NykbzUskbfrBcz1Yp+Wn7nhaGx9hEIucJfF8gtTMm71ZEt7/ipCNs0t+
+	s/0v0SN4J4ZpX1AHeoOzUyFDj8o3/nV+wqgFe7+8pWZSIOvHgn1fBxasKT75Yn6uasg/
+	l/ZBq08RorDh3tJNaZlKRikmoPMKnzfNeIIpPmAD56cCdvpY5FQ7K4T8sFvImGM+JJAN
+	BbUQmKvwgKsQDaq+IvxjUE8ycHynIIrExRAYCajVh86Ekka1oIS3dWXAadefr6PpUZXj
+	rMz3kEUC2i2uKql6KqU6GP85prkOioUrDSgVMTA9kXOgy+p/3inSdh9V42mmnzF/CvcA
+	FDOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=yahM24lqg93M02cyu6loOckOffH67KvMw8rOcUS7ilM=;
-	b=hC84lEFXTt9n/3fPp0+327sR5zy8A1mUSQhXlZdFHZSOqk/RYG8LEpJO1ahi2socor
-	+fFbu1h/MqkCG8PkmtcIT3w7l1ZyfICz0RZr1245K+Yc3M2/s6fehAN2PGAdTlPoWkWq
-	F9B09287NsjmyVpAHkhAhjRPPW83SGGc+CW7twx+f/frUoFbBbotsA3yR/+ysaWB0Ijl
-	7Gr/Foa37XBkRUUSo73LePOlN8R+azHlkKzzHzdz/kx7YNdl+pch5WjajRlLoN4ZSPRR
-	kxgyPBNfwPd6hgaJUEqoNU1H+fVXUgv4Exhvroia+XcVOAXUJ5K3hgSUlXgL0uXxyMp+
-	Lc5Q==
-X-Gm-Message-State: AHQUAuZgaPQYOg2oD16M6ZLFjD+ulSrVk8VREwvht4Vop5V20E8EJY8p
-	PXZwulW7kz8CQ6pFtxDIe48pXULHGip9dlvf/SE=
-X-Google-Smtp-Source: AHgI3IZyNerHKOgHX/Ig8MKa6eqZxrOrr0gmvW0sL1FAGnzRkp93bmE+avxEKtDK0NY+pSTXT6yq9Qng7mykoiHmErM=
-X-Received: by 2002:a37:3d6:: with SMTP id 205mr1505547qkd.223.1550809547765; 
-	Thu, 21 Feb 2019 20:25:47 -0800 (PST)
+	bh=jwp8FG5bEysyncsbEnlYH1saEWws92U3fUB455zRpZw=;
+	b=Le0GLCn6aELhHM/GY0mQGmaRFcUe+Df2PdZChVEuWwfvyDw3ztSX0q0M+1RqLurQtP
+	jdTmEmXcLXqCCRmwxyyHi7LMcgcZ1ZeqpTOVVgJq7vf8xydqwvPxRf10PkdSws+LDce2
+	jwXPjKZdQT7GJJ2bqaRn0HvhLZe4t1rHECQfUei0pB/2aSGPJ44XjdIhppOL8mFG5fA5
+	xZmyyWateTJVX1i+k5iJxczrp/z8GufZUWoh97hFH0qKPMj4Ql/oZ7voMB0QPuaV+aGi
+	levxu7YMEJNbwcpPAy8xDyXpUOGS1Wvm2OteIKeO20+1Bly6zNjCGkDiyaVDcgHHiIFK
+	FH3Q==
+X-Gm-Message-State: AHQUAuYAnlGvClJdzDc4xTBoJyNmgb+sAmHcVRwXy4p7VPxcjQD3ITss
+	H3j/VXtNAE2nHjdZoYr4mJ60DZ3iiPGS4WKsq9E=
+X-Google-Smtp-Source: AHgI3IZsyfTmsg9qaEsB6WdtvilX2LsmG9Npnzy+TissO/DvX2bwZ31oCUmHVfNo4URz+gVyB3zGhm8ofSDr2ErxMEM=
+X-Received: by 2002:a0c:d80f:: with SMTP id h15mr1637592qvj.228.1550809554631; 
+	Thu, 21 Feb 2019 20:25:54 -0800 (PST)
 MIME-Version: 1.0
-References: <a6e14d32-59d5-c567-3d45-3c3cabd6a940@viosoft.com>
-In-Reply-To: <a6e14d32-59d5-c567-3d45-3c3cabd6a940@viosoft.com>
+References: <35f095b0-e865-3794-e16f-f7d7ca17c770@viosoft.com>
+In-Reply-To: <35f095b0-e865-3794-e16f-f7d7ca17c770@viosoft.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 21 Feb 2019 20:25:21 -0800
-Message-ID: <CAMKF1srL+jzhbi2Ko_sC9KQZoUMDpZM=FJEWjA4Kr02VG_dkxA@mail.gmail.com>
+Date: Thu, 21 Feb 2019 20:25:28 -0800
+Message-ID: <CAMKF1sowGDE5y80P=U7oo-k7SQdz5gfm=sHw6XULE0KO4EWfXw@mail.gmail.com>
 To: Hoang Anh Tuan <tuanha@viosoft.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH 2/2] gtkwave: add version 3.3.98
+Subject: Re: [meta-oe] [PATCH 1/2] tk_8.6.9: Add tkConfig.sh in crossscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 04:25:47 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 04:25:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 Does not apply. Please rebase it on top of master or master-next and resend.
@@ -63,42 +63,50 @@ On Thu, Feb 21, 2019 at 6:11 PM Hoang Anh Tuan <tuanha@viosoft.com> wrote:
 >
 > Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
 > ---
->   meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 19
-> +++++++++++++++++++
->   1 file changed, 19 insertions(+)
->   create mode 100644 meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+>   meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb | 25 +++++++++++++++++++++++++
+>   1 file changed, 25 insertions(+)
 >
-> diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> new file mode 100644
-> index 0000000..6fd9392
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "VCD (Value Change Dump) file waveform viewer"
-> +DESCRIPTION = "gtkwave is a viewer for VCD (Value Change Dump) files
-> which are usually created by digital circuit simulators. (These files
-> have no connection to video CDs!) "
-> +HOMEPAGE = "http://gtkwave.sourceforge.net/"
+> diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+> b/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+> index 9eec4bb..459ae82 100644
+> --- a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+> +++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+> @@ -50,6 +50,11 @@ do_install_append() {
+>       ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
+>       oe_libinstall -so libtk${VER} ${D}${libdir}
+>       ln -sf wish${VER} ${D}${bindir}/wish
 > +
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+> +    sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tkConfig.sh
+> +    sed -i "s;'${WORKDIR};'${STAGING_INCDIR};g" tkConfig.sh
+> +    install -d ${D}${bindir_crossscripts}
+> +    install -m 0755 tkConfig.sh ${D}${bindir_crossscripts}
+>   }
+>
+>   PACKAGECONFIG ??= "xft"
+> @@ -69,3 +74,23 @@ BBCLASSEXTEND = "native nativesdk"
+>
+>   # Fix the path in sstate
+>   SSTATE_SCAN_FILES += "*Config.sh"
 > +
-> +SRC_URI = "http://gtkwave.sourceforge.net/${PN}-${PV}.tar.gz"
+> +inherit binconfig
 > +
-> +SRC_URI[md5sum] = "eac3073ef381e0c09da33590296ca37f"
-> +SRC_URI[sha256sum] =
-> "efa6bbbeb3bd54104425a69a2aa0d079bb5c3ecc1c420ba57dcaa1c97c5a22f6"
+> +SYSROOT_DIRS += "${bindir_crossscripts}"
 > +
-> +inherit pkgconfig autotools gettext texinfo
-> +DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf
-> glib-2.0"
-> +RDEPENDS_${PN} = "tk-lib"
+> +# Fix some paths that might be used by Tcl extensions
+> +BINCONFIG_GLOB = "*Config.sh"
 > +
-> +EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS}
-> --with-tk=${STAGING_BINDIR_CROSS}"
+> +# Cleanup host path from ${libdir}/tclConfig.sh and remove the
+> +# ${bindir_crossscripts}/tclConfig.sh from target
+> +PACKAGE_PREPROCESS_FUNCS += "tcl_package_preprocess"
+> +tcl_package_preprocess() {
+> +        sed -i -e "s;${DEBUG_PREFIX_MAP};;g" \
+> +               -e "s;-L${STAGING_LIBDIR};-L${libdir};g" \
+> +               -e "s;${STAGING_INCDIR};${includedir};g" \
+> +               -e "s;--sysroot=${RECIPE_SYSROOT};;g" \
+> +               ${PKGD}${libdir}/tkConfig.sh
 > +
-> +FILES_${PN} = "${bindir} ${datadir}"
+> +        rm -f ${PKGD}${bindir_crossscripts}/tkConfig.sh
+> +}
 > --
 > 2.7.4
 >
