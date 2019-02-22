@@ -1,26 +1,26 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8173E7CBE1
+Return-Path: <andrej.valek@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B5DC7CBA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 06:56:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1M6uUeM026951
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 22 Feb 2019 07:16:44 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x1M7GimO022729
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2019 22:56:40 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.435.0; Thu, 21 Feb 2019 22:56:19 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Feb 2019 14:56:16 +0800
-Message-ID: <1550818577-425600-2-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1550818577-425600-1-git-send-email-changqing.li@windriver.com>
-References: <1550818577-425600-1-git-send-email-changqing.li@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] cim-schema-docs: remove do_unpack
+	Fri, 22 Feb 2019 08:16:44 +0100
+Received: from dev.vm6.ccp.siemens.com (MD1JJJ2C.ad001.siemens.net
+	[163.242.44.88])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x1M7Gi48000321;
+	Fri, 22 Feb 2019 08:16:44 +0100
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 0B5A3980210;
+	Fri, 22 Feb 2019 08:16:44 +0100 (CET)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Feb 2019 08:16:37 +0100
+Message-Id: <20190222071637.32111-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] nodejs: fix additional compatibility with older gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +33,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 06:56:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Feb 2019 07:16:45 -0000
 
-From: Changqing Li <changqing.li@windriver.com>
+ - replace all occurrences of std::make_unique with wrapper
+ - sync indent level
 
-Use subdir=${BP}, rather than write do_unpack manually.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- .../recipes-support/cim-schema/cim-schema-docs_2.40.0.bb           | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ .../0004-Make-compatibility-with-gcc-4.8.patch     | 36 +++++++++++++++++-----
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
-index 31875ea..4ecaabd 100644
---- a/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
-@@ -4,18 +4,13 @@ SECTION = "doc"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
+index 2b325b675..cb38362e4 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with-gcc-4.8.patch
+@@ -5,22 +5,42 @@ method to be compatible with gcc < 4.9 .
+ Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
  
- LICENSE = "DMTF"
- 
--SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-Doc.zip \
-+SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-Doc.zip;subdir=${BP} \
-            file://LICENSE \
-           "
- SRC_URI[md5sum] = "3d01940bc1085c6c42184c25fb61f739"
- SRC_URI[sha256sum] = "3174cf0f8657b19d80dc59e184778d8e553da424728cb2966fe9d5428dd84267"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
- 
--do_unpack() {
--        unzip -q ${DL_DIR}/cim_schema_${PV}Final-Doc.zip -d ${S}
--        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
--}
--
- do_install() {
-         install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}-docs
-         cp -R --no-dereference --preserve=mode,links -v ${S}/* ${D}${datadir}/doc/cim-schema-${PV}-docs
+ diff -Naur node-v10.15.1/src/cares_wrap.cc node-v10.15.1/src/cares_wrap.cc
+---- node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:40:36.040538319 +0100
+-+++ node-v10.15.1/src/cares_wrap.cc	2019-02-17 09:39:57.883668702 +0100
++--- node-v10.15.1/src/cares_wrap.cc	2019-01-29 08:20:50.000000000 +0100
+++++ node-v10.15.1/src/cares_wrap.cc	2019-02-21 16:22:25.489131665 +0100
+ @@ -52,6 +52,16 @@
+  # define AI_V4MAPPED 0
+  #endif
+  
+ +#ifndef __cpp_lib_make_unique
+-+  namespace std {
+-+    /// make_unique implementation
+-+    template<typename T, typename... Args>
+-+    std::unique_ptr<T> make_unique(Args&&... args) {
+-+      return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+-+    }
+++namespace std {
+++  /// make_unique implementation
+++  template<typename T, typename... Args>
+++  std::unique_ptr<T> make_unique(Args&&... args) {
+++    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+ +  }
+++}
+ +#endif
+ +
+  namespace node {
+  namespace cares_wrap {
+  
++diff -Naur node-v10.15.1/src/inspector_agent.cc node-v10.15.1/src/inspector_agent.cc
++--- node-v10.15.1/src/inspector_agent.cc	2019-01-29 08:20:50.000000000 +0100
+++++ node-v10.15.1/src/inspector_agent.cc	2019-02-21 16:22:09.000185992 +0100
++@@ -24,6 +24,16 @@
++ #include <pthread.h>
++ #endif  // __POSIX__
++ 
+++#ifndef __cpp_lib_make_unique
+++namespace std {
+++  /// make_unique implementation
+++  template<typename T, typename... Args>
+++  std::unique_ptr<T> make_unique(Args&&... args) {
+++    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+++  }
+++}
+++#endif
+++
++ namespace node {
++ namespace inspector {
++ namespace {
 -- 
-2.7.4
+2.11.0
 
 
