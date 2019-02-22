@@ -1,53 +1,53 @@
 Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E2DA47CC28
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+	[209.85.128.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B8E087CC30
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 17:30:11 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id v13so3243122wrw.5
+	Fri, 22 Feb 2019 17:30:13 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id h22so9368578wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 09:30:13 -0800 (PST)
+	Fri, 22 Feb 2019 09:30:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=sgpluaMc5W0Mt4q1CeFNBXPru9zQ14/C3sUlFHbPKLY=;
-	b=Naw8olDaDlM6hrFA6GwOxuyOVucJQD26pLv7rDwI/guejkOYB/ysdTH3g7MQPVqOdP
-	X+6fURIcL/zhXgsp8d5QMqn1aHcht8uVKYU4zbG/yEJzPZYB8SeKNV3nL2F4AVSgnes0
-	NDMDWOlug8JrNYdKhc29VSdzSTfWRO0LxAyJJYSigmeSInXjvF8DePEaYgFKKxIiFuaD
-	8vgr3H3QQa2xko+GRn9jCRXwJykEE59+xKecQ2DVYTkXPDONuqXQBWiTrwCqROmK0xuN
-	LYBE/3+yVQa6J3jPPgf9zU2Dy2h5lH5Hz8R3KpAuJzlpKdALCjFrkzffcuxpvmzWMI4P
-	EdFw==
+	bh=0T8w1seKTJqXS00GX9xdrtlQzT5QX5o4tDMgHtUHEIU=;
+	b=uVF2Tkjuq8xHku/TPSiI0JKOpfqUFYEvUWkledqZDZOMIE33mdh87W12n7n/2LbV2N
+	UPzfDJWOnB2MrGNA15ra+wXpJQoXl95eF0rQSTcB6v6vQoTaI6rBvBJ6bobOA0LuDYgS
+	B9OYn80NGCvVJUDxo7tMgzBDGow31+6CXk0HBgd+qQfIq+SN23bN6u4BM28psR+g7x5A
+	dY9BynD0MLWgaq+Evn4qyzZ6P8vTIjbLwh1XM6DaHrNQQ41pcNuNZ5T6a0DCczh9I4ni
+	EvOCSddcUsSFTE4+dID7AohkmmAmhUPVBYSrmFnYPFxrHVuAYTWd8jgTb619KWjh5MAY
+	IZLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sgpluaMc5W0Mt4q1CeFNBXPru9zQ14/C3sUlFHbPKLY=;
-	b=apuDvJfq1fDhLJkuxP5lg4pxZHyJyuHKhgNDNoUs+CTyPzBiNGFuUrYrfcVLH/rx2Q
-	lCxYsFkG6Lylf8DNflmgN7pGqj7gQvd1+/zqnIF/reEWFDf7B4bxT+Ae/WJArlLaqwUy
-	8xV+Sm7h9kmACDYeXl5dHz82Ujk/9N+gFWiZjSydx9OzRpLaTek1sJdmpWwRUHpha3MC
-	VZbtNRIRqFBxkEsw4ducrNGFx6AdqRTtaJDlqV0oI/lD3pDgcYu+DUQHmyrzTMUoqzuK
-	RTXF8Vby5xWoZTPNYMVjYWAwzl8kxiGRXgKmowXCM5n4GFEnXLQMZqj9wWFd6mq2KQRb
-	NLcg==
-X-Gm-Message-State: AHQUAuYEOjJeMHV+gh0FoECDkLtJOdzbLFIHRJNU+ePvDbibZuH+qTek
-	HZaBDIurCHY50ktbEbcFRgBFepmX36NWFA==
-X-Google-Smtp-Source: AHgI3IZE7oUBCHNtuzlsLBdTmIyCBpDuB8F20Jo6vjAv5GoeGZNcOwP+mH4kFJc1xk8qQvHiQhnY4A==
-X-Received: by 2002:a5d:6346:: with SMTP id b6mr3872043wrw.118.1550856612338; 
-	Fri, 22 Feb 2019 09:30:12 -0800 (PST)
+	bh=0T8w1seKTJqXS00GX9xdrtlQzT5QX5o4tDMgHtUHEIU=;
+	b=Jgsbv7SlFOXoFT8lBQqGnXfxKrLffWbE7nBDeAG6CZcOcF1PS0cy1xKHbDUpGzM80J
+	OPRfeetVu7nI0is3Jv44t07k6bAqobFFecM+OXUhI69QXaO2sZ2BIYtklbB0pc+4xMDs
+	1KsJ68CthPdGoBY86yOiJQ8F0ihxSUz04NHEV0TJVDbiNjba1MmWTEKLRDPZv8UHnaiX
+	NwYU8AN/a7gfjtucq/NwxXZlu0VpD9h9m+hbYSUhaVvQ1RM3CMdPHqch2r5qTmA+n3uH
+	WANuZ7hHIPom70dA8mX286w5O9QVVEhdKVk5kSen/iDaGv2OKsL2LAUnCH8uHONUm/FU
+	sSOw==
+X-Gm-Message-State: AHQUAuY2bCIa9HEuj8eSY0kiwv33lEtnxiby+MqhGC4R0BflhWXnYJ2Z
+	pUZS9vX7KqBXMgcL9z6F1+Or088kprh6Wg==
+X-Google-Smtp-Source: AHgI3IZfOBymfYKhG2kJa3qZOOaQ7UeziNLq2XYb3yyiuEZ5KdJ/WrPJ5P/ESJfP1eJ1bKV4qpg1HA==
+X-Received: by 2002:a1c:2358:: with SMTP id j85mr2978222wmj.130.1550856614027; 
+	Fri, 22 Feb 2019 09:30:14 -0800 (PST)
 Received: from localhost.localdomain (static.8.26.4.46.clients.your-server.de.
 	[46.4.26.8]) by smtp.gmail.com with ESMTPSA id
-	q24sm1337597wmq.16.2019.02.22.09.30.11
+	q24sm1337597wmq.16.2019.02.22.09.30.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Feb 2019 09:30:11 -0800 (PST)
+	Fri, 22 Feb 2019 09:30:12 -0800 (PST)
 From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Feb 2019 18:29:48 +0100
-Message-Id: <20190222172949.3661-4-nicolas.dechesne@linaro.org>
+Date: Fri, 22 Feb 2019 18:29:49 +0100
+Message-Id: <20190222172949.3661-5-nicolas.dechesne@linaro.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
 References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
 Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-oe][PATCH 3/4] packagegroup-meta-oe: fixup package that now require polkit
+Subject: [meta-oe][PATCH 4/4] udisks: add REQUIRED_DISTRO_FEATURES for polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,42 +60,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 17:30:12 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 17:30:14 -0000
 Content-Transfer-Encoding: 8bit
 
 After below commits to add polkit as a required distro feature:
 97a1a55 polkit: add polkit as a required distro feature
 c049e02 polkit: inherit distro_features_check
 
-We need to propagate that to all recipes that use/need them, such as
-this packagegroup, otherwise 'world' will fail.
+Need to add REQUIRED_DISTRO_FEATURES for polkit to avoid error when
+trying to build 'world'
 
 Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 96672db9a0..5fcf9899b6 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -243,7 +243,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     sjf2410-linux-native satyr sdparm pty-forward-native serial-forward \
-     sg3-utils sharutils smem spitools srecord ssiapi start-stop-daemon stm32flash \
-     syslog-ng system-config-keyboard tbb thin-provisioning-tools tokyocabinet \
--    tree udisks udisks2 uhubctl unixodbc upower uriparser usb-modeswitch \
-+    tree uhubctl unixodbc uriparser usb-modeswitch \
-     usb-modeswitch-data usbpath uthash utouch-evemu utouch-frame \
-     vim vim-tiny websocketpp wmiconfig xdelta3 xdg-user-dirs xmlstarlet \
-     zbar zile \
-@@ -251,6 +251,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libcanberra", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xorgxrdp xrdp", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "bluez4", "procmail", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks udisks2 upower", "", d)} \
-     ${NE10} \
-     "
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+index 7cd9992214..3ae8ecc15c 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+@@ -22,7 +22,10 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+ SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
+ SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
  
+-inherit autotools-brokensep systemd gtk-doc
++inherit autotools-brokensep systemd gtk-doc distro_features_check
++
++REQUIRED_DISTRO_FEATURES = "polkit"
++
+ 
+ PACKAGECONFIG ??= "libdevmapper"
+ PACKAGECONFIG[libdevmapper] = "--enable-devmapper,--disable-devmapper,libdevmapper"
 -- 
 2.20.1
 
