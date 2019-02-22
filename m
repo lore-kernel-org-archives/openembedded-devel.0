@@ -1,47 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id CDF557CB0B
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+	[209.85.222.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 431877CBA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 18:07:55 +0000 (UTC)
-Received: by mail-qt1-f174.google.com with SMTP id w4so3563525qtc.1
+	Fri, 22 Feb 2019 18:14:45 +0000 (UTC)
+Received: by mail-qk1-f170.google.com with SMTP id x6so1689954qki.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 10:07:57 -0800 (PST)
+	Fri, 22 Feb 2019 10:14:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eyjKqXElbvlWi6QmWb6J5pILYubnn/Is8ppaRDgFo5s=;
-	b=RbbSfmUro1Bd6XbqBuZAudtY0DxlpXExCmOnUKQ2RvVahrrSJvVYhWU8gZaUAPsG7I
-	WzUfD7XO+b3NXKESsP95iDijN4tqQyw+H2HKOZsymDZal6qul9TUuGMlikl5wrRtCXLE
-	1RVOoNMgjk1EDBha/qSqmhxOLgrL93k7sBvjNdNhMWUWC+RHRxwXMHRFvHQ27wn44wfk
-	9+8Alk+3rmt8roi/J4IgO8MXhgZW71ZMbwdCHfNzQ4OXLz2/nEjl7UafN5zzXsFi0w5u
-	g5A8+0FaWuYD+XzXXPw0gH9OjC1dEjmIMvoxqnrlob+bdJAsJhnJw1XNZ3nYNv52/6Ns
-	6tfA==
+	:cc; bh=ALYTQC18zjB3lJb4HimvgJ5wLIm/aAQhtTKQn5afdFg=;
+	b=bXUNFL+hxT7rbOR0/kEQHtW4cJrZ3ydnF0Ujv+qEUpnsQWuAp4wTcSUrqzYgmn8IaC
+	McW0Ckxj0TKhq8K5t6UZFUdTYxeRsgGEmk7Mk96j36bI6Q3anCA+dW63jUTc54mEDs4C
+	2aQEF9R285ReFkL4N1pJmRB/9V1YXacvOEA5J6pX5r7XVeeIdpeyrLTLIwVqKjzhYNJX
+	3qxi9du8GkbT9TJVp4ElWWa39UgdGXz3ieTFpFYQCRWwuY3PjQIyM6WQvruBWvs7fCgG
+	soz9498CTx1oQBGnRyzbm1LOXkO8ukMcHSIgTYmWiZOvS59eY2KIsl8shMUZ9OzAppRY
+	d7YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eyjKqXElbvlWi6QmWb6J5pILYubnn/Is8ppaRDgFo5s=;
-	b=ftuCA6nDaupnaNnrzPu032S9GkiwoGLxMtlqUNyaIBYt/8Z0JIjLMHHszBRoblEcyV
-	fjpiveIyuJCDVm3wSUGvwqkLFxXaoN4YFjGQuKJmM86OAasi/lTyXLX+8KVq228eGS3V
-	o65WPdxGb2jvt+Wov+T5Q1/mNVfDgRiVvfXopVO3XmWAJx9/+DkeliR4omgaBjB0mUFU
-	olqnd2IJrR7wsgzuc7fLWSJtE0N6VFh6FjGth76Cvq0MQwt4MDghq2qAUhfHgXBPL48j
-	CGk8t/cnOMpMf8AGJH+BQbTEZRPky/CC6iXVX1WoP4vgWaSOz4woqZayoqRq+DPCAUo2
-	z8sA==
-X-Gm-Message-State: AHQUAubfxYvWR38kiApqBFVxnI2pVgQYIeRn35HQDAb1ljCZWvyXIiCN
-	SErslTBc20oC9e3vFLztvX6FZ8OLhNU3XL6rbJM=
-X-Google-Smtp-Source: AHgI3IaW7C9B0SF/fDNRkBi91CjeJdZ74iCT5TLyUdXuQ7WHG1LUsF1VhAkuUvJBYP+bUIb9ZuyBhIv+tVdDBv7nDD4=
-X-Received: by 2002:a0c:d80f:: with SMTP id h15mr4138617qvj.228.1550858876392; 
-	Fri, 22 Feb 2019 10:07:56 -0800 (PST)
+	bh=ALYTQC18zjB3lJb4HimvgJ5wLIm/aAQhtTKQn5afdFg=;
+	b=OMOXatw1H2maAn6g/Mv1m5ER+oQXLwEncFY2Q8pqMY7oXVTUphAQIFtEdOMQI8QI+y
+	Rfg/YfZK8mpXS9klD3+VEGrQ0KyCoYMbVELw7Bq+DA9YEwrxLjtVW5Urqo7dtXxZ4OcM
+	d3yI8S+GnJ39okg/MRErGoPRpW1M4vHwUgJc0p0+FsQl7Lc0PN1RQR3IaU1DFWMLSrfb
+	FbtZ6N/m+FJrWsbhLpH1xrKFX1jB9VwbmGHOiP4V7++D0iRd/u5J4dvV3BVWa5yNTo+p
+	vZyyRzCI3IymRD7UdIeqL1veD8Kh/xPVm1aQMDZEAvdy9jKO8qCHpjQ6p8GGbOs1T15J
+	cI6w==
+X-Gm-Message-State: AHQUAuZiYKO3dJbatuKr8Ow7kH637OO8QpK1BuSmOGtvGp1r88WjakwQ
+	rICNUbtmSgC62N88sFas7fUM8h51C8T9e3nh+aI=
+X-Google-Smtp-Source: AHgI3IbBlgcHwY5qC7k6HNLOWfwc3f9HB9eMcVvWeec23F7P1cgixOkOcty32hMCJ+5J+jqLCclaO+CJVI1RPsfMHu4=
+X-Received: by 2002:a37:3d6:: with SMTP id 205mr3869304qkd.223.1550859285910; 
+	Fri, 22 Feb 2019 10:14:45 -0800 (PST)
 MIME-Version: 1.0
-References: <1550652980-292761-1-git-send-email-changqing.li@windriver.com>
-	<1550652980-292761-4-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1550652980-292761-4-git-send-email-changqing.li@windriver.com>
+References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
+In-Reply-To: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 Feb 2019 10:07:30 -0800
-Message-ID: <CAMKF1soyUbWgfoDTJFCQVWhMpM10aWHnqd6Qz2E=L+MUujArRQ@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
+Date: Fri, 22 Feb 2019 10:14:20 -0800
+Message-ID: <CAMKF1soDj0s94rB5AtbhxYnO+G3zgB=gsK8-Up18Lea-jQGvpA@mail.gmail.com>
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/5] rrdtool: upgrade 1.7.0 -> 1.7.1
+Subject: Re: [meta-oe][PATCH 0/4] A few fixes when trying to run yocto-check-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,51 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 18:07:56 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 18:14:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Feb 20, 2019 at 12:57 AM <changqing.li@windriver.com> wrote:
+On Fri, Feb 22, 2019 at 9:30 AM Nicolas Dechesne
+<nicolas.dechesne@linaro.org> wrote:
 >
-> From: Changqing Li <changqing.li@windriver.com>
+> I was trying to run yocto-check-layer script and it has caught some issues.
 >
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb}   | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb} (98%)
+> Note that I was able to get a PASS status for meta-oe, using two additional patches
+> from Mingli Yu <Mingli.Yu@windriver.com>, i found on the list:
 >
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
-> similarity index 98%
-> rename from meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
-> rename to meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
-> index ff99574..1a1ca54 100644
-> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
-> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
->
->  DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
->
-> -SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
-> -PV = "1.7.0"
-> +SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
-> +PV = "1.7.1"
+> upower: add REQUIRED_DISTRO_FEATURES for polkit
+> udisks2: add REQUIRED_DISTRO_FEATURES for polkit
 >
 
-seeing some packaging failures on qemux86/musl e.g.
+they are in master-next
 
-ERROR: SYSTEMD_SERVICE_rrdcached value rrdcached.socket does not exist
-
-see
-
-https://errors.yoctoproject.org/Errors/Details/229882/
-
-
-Can you take care of this as a separate fix ?
-
->  SRC_URI = "\
->      git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
+> Nicolas Dechesne (4):
+>   meta-oe: fixup LAYERDEPENDS to include meta-python
+>   polkit: add REQUIRED_DISTRO_FEATURES for polkit
+>   packagegroup-meta-oe: fixup package that now require polkit
+>   udisks: add REQUIRED_DISTRO_FEATURES for polkit
+>
+>  meta-oe/conf/layer.conf                                    | 1 +
+>  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
+>  meta-oe/recipes-extended/polkit/polkit-group-rule.inc      | 3 +++
+>  meta-oe/recipes-support/udisks/udisks_1.0.5.bb             | 5 ++++-
+>  4 files changed, 10 insertions(+), 2 deletions(-)
+>
 > --
-> 2.7.4
+> 2.20.1
 >
 > --
 > _______________________________________________
