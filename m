@@ -1,47 +1,47 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 37EEB7CA71
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 90EA87CA71
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 18:18:34 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id z20so2402966ljj.10
+	Fri, 22 Feb 2019 18:19:20 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id r21so1665962qkl.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 10:18:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	Fri, 22 Feb 2019 10:19:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=FBWhNIV6BOiqD2fOnghEWKjO81tx1ENUJKyA2wP/9OQ=;
-	b=kcTcfJ6aj39dDoyAUiwma1yJHEv4q4cTowBw5xAdkTH8f7gPvN9Mg2yWUB9Bt49KYU
-	/emz4ay0V5qVhFbqP83UI7ANEeU5blKVPHpl0Z/kmDWZG7/DpulCM27LIjZ71vK2kur6
-	OSRin3pZDUMNgwpuIYYaxIkZ3nu/m2FZ/tkhJqHo7MmJwgozMiOBg7++IejhU5JD6xjX
-	0Pt6EdeKl5W9z2cV+qZkk+3DlLNTuwPeZKVs1hy1CT9GdLkDLXRTCjbo6mIHVlLPAOBi
-	nb2nu+zMTpeVsvRAuBwy5xf0JU5vN+y8WCV9fGtbvt/cYq2mdrSpJfE8gVNaXEW/Q14A
-	54tg==
+	:cc; bh=gZHyBbUKDNAEYhCTZEI98B4wq6BON1crQ9gmf6O1KB8=;
+	b=HixAUjTIGYnMiy6A/S3edmCI4Cm5lDUDYeDQ3oz+SebUpoNUjYlsG7uEQVS5fHaz/S
+	2c5+76Wdr2RXKKWKPyN2uLYryCPuqRrmXG9NvAZ4rxmaP1JMNPip3CLDlxZ+9+QPhO9n
+	Lp+O7RYWwWH1AVRpbatTn4cZ4CqPRCsaSYd55b5xfrmnyTRfs7DqrgkUdv9LNp/7BYWf
+	GR0/BKPQF3AU3jZNSi45pNfYvEFtJRHrYnwUE7cvWcPx8c9FJ4uKgjaO3EFkwcRxk4lY
+	/f+OrDafZQZddUPL1ZX4woPR5E/GZP55Nyg/JW2LO5gI86E3bKaf0kKek1WGJahwZdb+
+	hKHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=FBWhNIV6BOiqD2fOnghEWKjO81tx1ENUJKyA2wP/9OQ=;
-	b=EAMkcsFJVvjwQKsLLzWgEoZg0dyGQz6nq4RlPglpr17OvYwzo9AJfcNpjstRYsmJC0
-	IpL4UaPh9prhd19DTanvdl1YcVMLeQb6CxwcXEE4k62GYHR/DTMgZs2JR/MdyUJ84oEw
-	4s1vqYY1KxinzJ7Jg3cbOoUYLbrtjG6X0sWbFt8NdU+GD/XH4+VLkwXemMCGDjfMdGdW
-	YCpOQ1G/0rVRqfXi2fQnjRf5J/zGHQff+S5Vs/ghWNZ4ayKPDoMzZCx9p9gMuoDUHFad
-	Xn3RAnIvVG+v8qTO0iKxgijC8rh8pK+xyR3FSCeF0mwM6GCfVx0gwZny/pFq1bcctcof
-	RbHA==
-X-Gm-Message-State: AHQUAuZHB5tQ+EBlVU+y/fQBWHPUFGaCXiwpIZiIP71ZfusisiTJm8Py
-	kYdrHFZocG4peY9+Y5EIK4BOfPJWOaQuHO2QiEbsPQ==
-X-Google-Smtp-Source: AHgI3IbfSiJChP5QwKCeEyBlDFNSZnT691cUJFoVIOiKLjc3QyES4MKLlK3Mu2zerQnnK9yd3if9AA2w/XAe1lXWqCc=
-X-Received: by 2002:a2e:9a8b:: with SMTP id p11mr3104327lji.66.1550859514616; 
-	Fri, 22 Feb 2019 10:18:34 -0800 (PST)
+	bh=gZHyBbUKDNAEYhCTZEI98B4wq6BON1crQ9gmf6O1KB8=;
+	b=Nxmt2djJAIfkVciQG7+jJbdcixNujqxikLqiV0tHwSl8Jt96cgeFOPfLbzxoUfCvLj
+	U8aP67pZa33efXesLj8efQ7U0spINfj3YDtSvLvAfljquni6Wrrjm3t4eIVpWAHphDkF
+	rstQloQ/F/WJN41Zsc4RVuDlcB4aCuHXqIIRkzXJAU+GkdoykF2i9RnKpouBJ0hwN8Sb
+	otgAipX9O1rNoGlso8XW8HaLd6+nOIxpMIabI3dYWp7hgBn9El6gqKmeRJCATVih+4LM
+	hrpdjSQFCiIHzJ85rOyxqq1NPR5J9MJmbhaDL6UiQaKr5TU/Nld5h43wbnISeueKKp/Z
+	KnKQ==
+X-Gm-Message-State: AHQUAuaIihX8o3d1zdR6ayC6NJg9abaly7jP1LggonYG3i4LDXd6+hYc
+	d6s2YkPL7xS+FUdb/9lNyKCqhB3q3mO9aje/vaw=
+X-Google-Smtp-Source: AHgI3IZ8S39tTzJR26qcVu0zzJSa3F4IuElFf3cqJMKsXMeOo4JA/U1A7s2a0uPvCT+UUGiRj/Z6GUAdNuW+iTPSOew=
+X-Received: by 2002:a37:3d6:: with SMTP id 205mr3885796qkd.223.1550859561368; 
+	Fri, 22 Feb 2019 10:19:21 -0800 (PST)
 MIME-Version: 1.0
 References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
-	<CAMKF1soDj0s94rB5AtbhxYnO+G3zgB=gsK8-Up18Lea-jQGvpA@mail.gmail.com>
-In-Reply-To: <CAMKF1soDj0s94rB5AtbhxYnO+G3zgB=gsK8-Up18Lea-jQGvpA@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 22 Feb 2019 19:18:23 +0100
-Message-ID: <CAP71Wjys=BuA8-c=5dymEF9CD3uqNJTDvF6Uc12zFBmA6Wc+pA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<20190222172949.3661-2-nicolas.dechesne@linaro.org>
+In-Reply-To: <20190222172949.3661-2-nicolas.dechesne@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Feb 2019 10:18:55 -0800
+Message-ID: <CAMKF1sqPdBOQSq8Aejj5ji_yOGk3qPU_n8C_TqzEou4H0kuKpw@mail.gmail.com>
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/4] A few fixes when trying to run yocto-check-layer
+Subject: Re: [meta-oe][PATCH 1/4] meta-oe: fixup LAYERDEPENDS to include meta-python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +54,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 18:18:34 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 18:19:20 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Feb 22, 2019 at 7:14 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Fri, Feb 22, 2019 at 9:30 AM Nicolas Dechesne
+<nicolas.dechesne@linaro.org> wrote:
 >
-> On Fri, Feb 22, 2019 at 9:30 AM Nicolas Dechesne
-> <nicolas.dechesne@linaro.org> wrote:
-> >
-> > I was trying to run yocto-check-layer script and it has caught some issues.
-> >
-> > Note that I was able to get a PASS status for meta-oe, using two additional patches
-> > from Mingli Yu <Mingli.Yu@windriver.com>, i found on the list:
-> >
-> > upower: add REQUIRED_DISTRO_FEATURES for polkit
-> > udisks2: add REQUIRED_DISTRO_FEATURES for polkit
-> >
+> meta-oe depends on meta-python, for mongodb recipe, since
+> 5cf9a144ad16 (mongodb: Upgrade to 4.0.1 release)
 >
-> they are in master-next
 
-right. that's actually where I took them. Just wanted to highlight
-that with these 2 patches + my 4 patches, the script passes.
+The dependency was always there, but I wonder if there is a better
+place for mongodb than meta-oe
 
+> Trying to run the yocto-check-layer script fails with:
 >
-> > Nicolas Dechesne (4):
-> >   meta-oe: fixup LAYERDEPENDS to include meta-python
-> >   polkit: add REQUIRED_DISTRO_FEATURES for polkit
-> >   packagegroup-meta-oe: fixup package that now require polkit
-> >   udisks: add REQUIRED_DISTRO_FEATURES for polkit
-> >
-> >  meta-oe/conf/layer.conf                                    | 1 +
-> >  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
-> >  meta-oe/recipes-extended/polkit/polkit-group-rule.inc      | 3 +++
-> >  meta-oe/recipes-support/udisks/udisks_1.0.5.bb             | 5 ++++-
-> >  4 files changed, 10 insertions(+), 2 deletions(-)
-> >
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> ERROR: Nothing PROVIDES 'python-cheetah-native' (but /work/yocto/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+> DEPENDS on or otherwise requires it). Close matches:
+>   python3-git-native
+>   python-nose-native
+>   python-native
+> ERROR: Required build target 'meta-world-pkgdata' has no buildable
+> providers.
+> Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+> 'mongodb', 'python-cheetah-native']
+>
+> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+> ---
+>  meta-oe/conf/layer.conf | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+> index 23c10ce339..8cedcf0d0b 100644
+> --- a/meta-oe/conf/layer.conf
+> +++ b/meta-oe/conf/layer.conf
+> @@ -28,6 +28,7 @@ BBFILE_PRIORITY_openembedded-layer = "6"
+>  LAYERVERSION_openembedded-layer = "1"
+>
+>  LAYERDEPENDS_openembedded-layer = "core"
+> +LAYERDEPENDS_openembedded-layer = "meta-python"
+>
+>  LAYERSERIES_COMPAT_openembedded-layer = "thud"
+>
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
