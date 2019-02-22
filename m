@@ -1,51 +1,53 @@
 Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 04AE97CC0C
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+	[209.85.221.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 17A767CC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 17:30:05 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id v26so2690620wmh.3
+	Fri, 22 Feb 2019 17:30:09 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id t18so3240264wrx.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 09:30:07 -0800 (PST)
+	Fri, 22 Feb 2019 09:30:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QELnbAvjZSwx1BweYinJ42OK0vAJ6XDLAX3SxdcBfZs=;
-	b=jwShEvCecds7D2nYAFYY/guRe/5ezdgfuMDNp3f+9Pv1K9qYFC5z0+rxjY2wOIYmLM
-	T/BtyEIvhvPeG3se69yLRvq8JrBEZVJB/pSudLMIBPBOhF5TJR7T6zzfDDpTJwTgjODd
-	qqhWqu+Sr/wuhnj3l2JxmE+Yty1qq0safvyOb9c8hdNRN2Y4gvWjiSlW9umEO0hp1S96
-	WBMbBEcLuhoMMHkfoNdXVdum1saXDQbAVdGhfJbGehSKiy+vyzNFuomo/HaK6tOKteNm
-	80vWVcMNEY1fiBP3RHPP3LXuMV7QbsRJbZ/m4nSOo8uieOAV5UODV5hITu4WL/XR4Lor
-	4pOA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=BO7xUtSOf7F3q51BQ7yR7+eopshbXn4ofugmHd3uw5c=;
+	b=ZtWnk1AkEgiJ8Pr71V1ZgkGohUayamnFdv2I6xSC9vNOgmrOFzcXerb0ZD8lOurxjE
+	ChqeL+4Zer3YB/Airsf/yI7coXI8wf2n04dE5m7ywF+QErj6HyT6pySasIyTRjFOUQjr
+	3n/7pxTzGKF5Iz4/rVzckVF1RXxC89m+HAay6xTkGsdw/1W9xzkv8JJ7igm5vkUGjMvs
+	o/bQ1kyy8K37UMI3+Z+6bY/w9qyIPVjCBvIfFgqY96B0r29zqmfNec/K/75ZI8UxpS0O
+	lVGAfBllfrcG3SCFB9kLttWMNXP5pMstu3yx6Nrm/b575+S1wv18Eq8zEQCNOdGuHam7
+	a6Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QELnbAvjZSwx1BweYinJ42OK0vAJ6XDLAX3SxdcBfZs=;
-	b=qwUE62Tz76ZPzqay/Kzn+vum2Hu9kKsRSTtrOtvsK//VODyPLiI9Osehq1bMalWIO5
-	SAlAZyMLXD1KX1NhBBthMZ0+fPorEVwAqXnOrp/7BonNEau9/+FcnxiQ05o+q+7J6neL
-	9zG+eal6Bq/MA3+bPLBDqs4OYNRMFCYi5SDKHmnpUYtu3b/cMs8/uqIP7k3uJ3Jx9fVU
-	jeQJMT84hBM5m6awaUYafpK9R6R8Kz8VbY3qImDwp8ignpd1YNjLTiH53Sfep9SQYiWG
-	QaAemWMgWpzACP0OJ6ZV2MIy1MH0G3KiZcsuqh9LW72UJAqHNGCm8mku8W3t0+6mWJ+3
-	BpWg==
-X-Gm-Message-State: AHQUAua31lPJZrunfoZFPi3HDMxkd+gNjZY6ZtrJ7zfsuMtQeI2Z3son
-	C206MaxXtdEfr5X8Kr+aYPyfQph1ew4=
-X-Google-Smtp-Source: AHgI3IYycPTylOvpw7vmBMtNY02kmdluS3feLqVssbWTCYUBmH4UFQj998o90nAaC6mx0IIrjSSG4g==
-X-Received: by 2002:a1c:1b4e:: with SMTP id b75mr3364644wmb.88.1550856605815; 
-	Fri, 22 Feb 2019 09:30:05 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=BO7xUtSOf7F3q51BQ7yR7+eopshbXn4ofugmHd3uw5c=;
+	b=PpzqmI7vqhjTEqcEDj5cEPR+5Wm9nIS4cu3hFmXMpP/WltGkdy5YlmWj2a5DCbnmxw
+	BLsHhuc+lZHU+sZsKp9/QY2JzlJ2PZwNC2v/NZ+nXJQSdV8vyqoYVvUgHYlkXRVh08F1
+	L1gm4rRwXQSNguV2gnbFUkBUlCRlLzvqaqgVFS1fO3YJLOdXz5TtZOLKq5xGg+lI24hO
+	WTWixoM6phB2O0Ec7U7I52p2TNh1Wxt668G7rCu6NxV46kV2AlVCaL3VKvOuRjmjvp6r
+	9gKOAqnX/+grwxVfdiwDZea4AdNfUDUA8vZJUCnDKkwFXZTri2nYe3q0MidGvy/U8u4i
+	Tszw==
+X-Gm-Message-State: AHQUAuaFCnRargWFC4URuYOIsfehTnqbCsOboOI/aoOAtL6IUT3f1eDP
+	WtaHM+J2IYzKf4w6tpgSLLupAhodn2c=
+X-Google-Smtp-Source: AHgI3Iagd/VJWoO/V3lqYm9ph/jcVPhcSW4WqI1xQu0xbp8+lZMooSfkSzICJIj766U3yf1NjER+/g==
+X-Received: by 2002:adf:ee0f:: with SMTP id y15mr3632069wrn.197.1550856609369; 
+	Fri, 22 Feb 2019 09:30:09 -0800 (PST)
 Received: from localhost.localdomain (static.8.26.4.46.clients.your-server.de.
 	[46.4.26.8]) by smtp.gmail.com with ESMTPSA id
-	q24sm1337597wmq.16.2019.02.22.09.30.04
+	q24sm1337597wmq.16.2019.02.22.09.30.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Feb 2019 09:30:04 -0800 (PST)
+	Fri, 22 Feb 2019 09:30:08 -0800 (PST)
 From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Feb 2019 18:29:45 +0100
-Message-Id: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
+Date: Fri, 22 Feb 2019 18:29:46 +0100
+Message-Id: <20190222172949.3661-2-nicolas.dechesne@linaro.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
+References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
 Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-oe][PATCH 0/4] A few fixes when trying to run yocto-check-layer
+Subject: [meta-oe][PATCH 1/4] meta-oe: fixup LAYERDEPENDS to include meta-python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +60,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 17:30:06 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 17:30:09 -0000
 Content-Transfer-Encoding: 8bit
 
-I was trying to run yocto-check-layer script and it has caught some issues. 
+meta-oe depends on meta-python, for mongodb recipe, since
+5cf9a144ad16 (mongodb: Upgrade to 4.0.1 release)
 
-Note that I was able to get a PASS status for meta-oe, using two additional patches 
-from Mingli Yu <Mingli.Yu@windriver.com>, i found on the list:
+Trying to run the yocto-check-layer script fails with:
 
-upower: add REQUIRED_DISTRO_FEATURES for polkit
-udisks2: add REQUIRED_DISTRO_FEATURES for polkit
+ERROR: Nothing PROVIDES 'python-cheetah-native' (but /work/yocto/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+DEPENDS on or otherwise requires it). Close matches:
+  python3-git-native
+  python-nose-native
+  python-native
+ERROR: Required build target 'meta-world-pkgdata' has no buildable
+providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+'mongodb', 'python-cheetah-native']
 
-Nicolas Dechesne (4):
-  meta-oe: fixup LAYERDEPENDS to include meta-python
-  polkit: add REQUIRED_DISTRO_FEATURES for polkit
-  packagegroup-meta-oe: fixup package that now require polkit
-  udisks: add REQUIRED_DISTRO_FEATURES for polkit
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ meta-oe/conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
- meta-oe/conf/layer.conf                                    | 1 +
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
- meta-oe/recipes-extended/polkit/polkit-group-rule.inc      | 3 +++
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb             | 5 ++++-
- 4 files changed, 10 insertions(+), 2 deletions(-)
-
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 23c10ce339..8cedcf0d0b 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -28,6 +28,7 @@ BBFILE_PRIORITY_openembedded-layer = "6"
+ LAYERVERSION_openembedded-layer = "1"
+ 
+ LAYERDEPENDS_openembedded-layer = "core"
++LAYERDEPENDS_openembedded-layer = "meta-python"
+ 
+ LAYERSERIES_COMPAT_openembedded-layer = "thud"
+ 
 -- 
 2.20.1
 
