@@ -1,53 +1,47 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id B8E087CC30
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id CDF557CB0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 17:30:13 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id h22so9368578wmb.0
+	Fri, 22 Feb 2019 18:07:55 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id w4so3563525qtc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 09:30:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=0T8w1seKTJqXS00GX9xdrtlQzT5QX5o4tDMgHtUHEIU=;
-	b=uVF2Tkjuq8xHku/TPSiI0JKOpfqUFYEvUWkledqZDZOMIE33mdh87W12n7n/2LbV2N
-	UPzfDJWOnB2MrGNA15ra+wXpJQoXl95eF0rQSTcB6v6vQoTaI6rBvBJ6bobOA0LuDYgS
-	B9OYn80NGCvVJUDxo7tMgzBDGow31+6CXk0HBgd+qQfIq+SN23bN6u4BM28psR+g7x5A
-	dY9BynD0MLWgaq+Evn4qyzZ6P8vTIjbLwh1XM6DaHrNQQ41pcNuNZ5T6a0DCczh9I4ni
-	EvOCSddcUsSFTE4+dID7AohkmmAmhUPVBYSrmFnYPFxrHVuAYTWd8jgTb619KWjh5MAY
-	IZLQ==
+	Fri, 22 Feb 2019 10:07:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=eyjKqXElbvlWi6QmWb6J5pILYubnn/Is8ppaRDgFo5s=;
+	b=RbbSfmUro1Bd6XbqBuZAudtY0DxlpXExCmOnUKQ2RvVahrrSJvVYhWU8gZaUAPsG7I
+	WzUfD7XO+b3NXKESsP95iDijN4tqQyw+H2HKOZsymDZal6qul9TUuGMlikl5wrRtCXLE
+	1RVOoNMgjk1EDBha/qSqmhxOLgrL93k7sBvjNdNhMWUWC+RHRxwXMHRFvHQ27wn44wfk
+	9+8Alk+3rmt8roi/J4IgO8MXhgZW71ZMbwdCHfNzQ4OXLz2/nEjl7UafN5zzXsFi0w5u
+	g5A8+0FaWuYD+XzXXPw0gH9OjC1dEjmIMvoxqnrlob+bdJAsJhnJw1XNZ3nYNv52/6Ns
+	6tfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=0T8w1seKTJqXS00GX9xdrtlQzT5QX5o4tDMgHtUHEIU=;
-	b=Jgsbv7SlFOXoFT8lBQqGnXfxKrLffWbE7nBDeAG6CZcOcF1PS0cy1xKHbDUpGzM80J
-	OPRfeetVu7nI0is3Jv44t07k6bAqobFFecM+OXUhI69QXaO2sZ2BIYtklbB0pc+4xMDs
-	1KsJ68CthPdGoBY86yOiJQ8F0ihxSUz04NHEV0TJVDbiNjba1MmWTEKLRDPZv8UHnaiX
-	NwYU8AN/a7gfjtucq/NwxXZlu0VpD9h9m+hbYSUhaVvQ1RM3CMdPHqch2r5qTmA+n3uH
-	WANuZ7hHIPom70dA8mX286w5O9QVVEhdKVk5kSen/iDaGv2OKsL2LAUnCH8uHONUm/FU
-	sSOw==
-X-Gm-Message-State: AHQUAuY2bCIa9HEuj8eSY0kiwv33lEtnxiby+MqhGC4R0BflhWXnYJ2Z
-	pUZS9vX7KqBXMgcL9z6F1+Or088kprh6Wg==
-X-Google-Smtp-Source: AHgI3IZfOBymfYKhG2kJa3qZOOaQ7UeziNLq2XYb3yyiuEZ5KdJ/WrPJ5P/ESJfP1eJ1bKV4qpg1HA==
-X-Received: by 2002:a1c:2358:: with SMTP id j85mr2978222wmj.130.1550856614027; 
-	Fri, 22 Feb 2019 09:30:14 -0800 (PST)
-Received: from localhost.localdomain (static.8.26.4.46.clients.your-server.de.
-	[46.4.26.8]) by smtp.gmail.com with ESMTPSA id
-	q24sm1337597wmq.16.2019.02.22.09.30.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Feb 2019 09:30:12 -0800 (PST)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Feb 2019 18:29:49 +0100
-Message-Id: <20190222172949.3661-5-nicolas.dechesne@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
-References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=eyjKqXElbvlWi6QmWb6J5pILYubnn/Is8ppaRDgFo5s=;
+	b=ftuCA6nDaupnaNnrzPu032S9GkiwoGLxMtlqUNyaIBYt/8Z0JIjLMHHszBRoblEcyV
+	fjpiveIyuJCDVm3wSUGvwqkLFxXaoN4YFjGQuKJmM86OAasi/lTyXLX+8KVq228eGS3V
+	o65WPdxGb2jvt+Wov+T5Q1/mNVfDgRiVvfXopVO3XmWAJx9/+DkeliR4omgaBjB0mUFU
+	olqnd2IJrR7wsgzuc7fLWSJtE0N6VFh6FjGth76Cvq0MQwt4MDghq2qAUhfHgXBPL48j
+	CGk8t/cnOMpMf8AGJH+BQbTEZRPky/CC6iXVX1WoP4vgWaSOz4woqZayoqRq+DPCAUo2
+	z8sA==
+X-Gm-Message-State: AHQUAubfxYvWR38kiApqBFVxnI2pVgQYIeRn35HQDAb1ljCZWvyXIiCN
+	SErslTBc20oC9e3vFLztvX6FZ8OLhNU3XL6rbJM=
+X-Google-Smtp-Source: AHgI3IaW7C9B0SF/fDNRkBi91CjeJdZ74iCT5TLyUdXuQ7WHG1LUsF1VhAkuUvJBYP+bUIb9ZuyBhIv+tVdDBv7nDD4=
+X-Received: by 2002:a0c:d80f:: with SMTP id h15mr4138617qvj.228.1550858876392; 
+	Fri, 22 Feb 2019 10:07:56 -0800 (PST)
 MIME-Version: 1.0
-Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-oe][PATCH 4/4] udisks: add REQUIRED_DISTRO_FEATURES for polkit
+References: <1550652980-292761-1-git-send-email-changqing.li@windriver.com>
+	<1550652980-292761-4-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1550652980-292761-4-git-send-email-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Feb 2019 10:07:30 -0800
+Message-ID: <CAMKF1soyUbWgfoDTJFCQVWhMpM10aWHnqd6Qz2E=L+MUujArRQ@mail.gmail.com>
+To: Changqing Li <changqing.li@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/5] rrdtool: upgrade 1.7.0 -> 1.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,38 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 17:30:14 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 22 Feb 2019 18:07:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-After below commits to add polkit as a required distro feature:
-97a1a55 polkit: add polkit as a required distro feature
-c049e02 polkit: inherit distro_features_check
+On Wed, Feb 20, 2019 at 12:57 AM <changqing.li@windriver.com> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  .../recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb}   | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb} (98%)
+>
+> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+> similarity index 98%
+> rename from meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+> rename to meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+> index ff99574..1a1ca54 100644
+> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
+>
+>  DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
+>
+> -SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
+> -PV = "1.7.0"
+> +SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
+> +PV = "1.7.1"
+>
 
-Need to add REQUIRED_DISTRO_FEATURES for polkit to avoid error when
-trying to build 'world'
+seeing some packaging failures on qemux86/musl e.g.
 
-Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
----
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ERROR: SYSTEMD_SERVICE_rrdcached value rrdcached.socket does not exist
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index 7cd9992214..3ae8ecc15c 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -22,7 +22,10 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
- SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
- SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
- 
--inherit autotools-brokensep systemd gtk-doc
-+inherit autotools-brokensep systemd gtk-doc distro_features_check
-+
-+REQUIRED_DISTRO_FEATURES = "polkit"
-+
- 
- PACKAGECONFIG ??= "libdevmapper"
- PACKAGECONFIG[libdevmapper] = "--enable-devmapper,--disable-devmapper,libdevmapper"
--- 
-2.20.1
+see
 
+https://errors.yoctoproject.org/Errors/Details/229882/
+
+
+Can you take care of this as a separate fix ?
+
+>  SRC_URI = "\
+>      git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
