@@ -1,29 +1,23 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C876B7CBC6
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EA737CB03
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 06:24:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.58,398,1544457600"; d="scan'208";a="54942615"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 22 Feb 2019 14:24:38 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9793F4C47E75
+	Fri, 22 Feb 2019 06:56:18 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1M6uIbU023489
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 14:24:32 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.227) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.408.0; Fri, 22 Feb 2019 14:24:42 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
+	Thu, 21 Feb 2019 22:56:19 -0800 (PST)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.435.0; Thu, 21 Feb 2019 22:56:18 -0800
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1549095907-56985-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 22 Feb 2019 14:56:15 +0800
+Message-ID: <1550818577-425600-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-yoursite-MailScanner-ID: 9793F4C47E75.ACD6E
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] uftrace: Support armeb.
+Subject: [PATCH 0/2] cim-schema-docs/final: remove do_unpack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,32 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Fri, 22 Feb 2019 06:24:39 -0000
-X-Original-Date: Sat, 2 Feb 2019 16:25:07 +0800
-X-List-Received-Date: Fri, 22 Feb 2019 06:24:39 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 06:56:18 -0000
 Content-Type: text/plain
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+From: Changqing Li <changqing.li@windriver.com>
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-index 30c8503..5963e5d 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-@@ -24,6 +24,8 @@ def set_target_arch(d):
-     arch = d.getVar('TARGET_ARCH')
-     if re.match(r'i.86', arch, re.I):
-         return 'i386'
-+    elif re.match('armeb', arch, re.I):
-+        return 'arm'
-     else:
-         return arch
- 
+remove do_unpack, same as recipe cim-schema-exper, 
+use subdir in SRC_URI 
+
+Changqing Li (2):
+  cim-schema-docs: remove do_unpack
+  cim-schema-final: remove do_unpack
+
+ .../recipes-support/cim-schema/cim-schema-docs_2.40.0.bb           | 7 +------
+ .../recipes-support/cim-schema/cim-schema-final_2.40.0.bb          | 7 +------
+ 2 files changed, 2 insertions(+), 12 deletions(-)
+
 -- 
 2.7.4
-
-
 
 
