@@ -1,46 +1,22 @@
-Return-Path: <hmen.56@gmail.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id EDE096BA0E
+Return-Path: <prvs=949748c37=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id DA1697CC04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 08:06:01 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id y185so8323374wmd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 00:06:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=iqhGZSX5UIn1auO2I6QwHHZ1k0aPXieiqjWU2ONLpes=;
-	b=U/7EHWb+Y+SJm5mLUhqdZrOwKywx0QfkkdMgpPrzXvVOeFbXpE4upIHk6ITrsdZ4hR
-	/E6lYSfuJoZYVRgngL9LYse3ljsN8sbclVCu0lvBVOzfXNi7Nta5j/+jqyw6RtNgP72B
-	6dn1vmeFywBgFqf+qQDEYIYdEbcBd7tX+KBnKbJKSM4zblbcmPj+aHcmLdyOSVzb3imk
-	Lh+CqIQkCKmp2S/Rmr2pebhEKNTgp6e8/lRCZJvyH5ppkTtvStzu2/OK1gMN2PNnLSaq
-	xjSz0b48oA2WdeV7MTKimwKRv0pYc4tXCgEeaauLb5l55aE/4diQZBd5356zPORLtyH7
-	DlUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iqhGZSX5UIn1auO2I6QwHHZ1k0aPXieiqjWU2ONLpes=;
-	b=pSC/MTW+tGN66PLAnVM9DCjy9vStQyP6mUjOG670w/q/E3NCh+iAFQqTuyOWheb2RR
-	6vmirjQ2Qw5DfxmQbyQwRtQ6eVRW9rIINeArUhfWEvz4rsJoAynj28pvZEu9i/tTGlr5
-	6s9Yfp5NbqbqHscFlE8CLT3BzFNah+gYdEqbMJMnzc1VCLdDpEQkrUTCNSVtTyWob9GT
-	ZJLkND13hPMUea101YUwSYBUgYjSusUGh7jN2j+NJjgVVnbIUQtkhUrJKZK/HDOzLHuo
-	1ne0rft96DfgHtcWfZx7mS7fMseC+BEKufDxX1bQ7dDW1v5gdcvsPWuPbvQE/q628WGu
-	bR/Q==
-X-Gm-Message-State: AHQUAuZb5WEGOcKArgAytsstpulOKmajtU2/wutAQJwL/wUyBWMkshRM
-	FOfXWeJq/6JKBFy0oFmcluQdsj9N
-X-Google-Smtp-Source: AHgI3IZjo/abbUjpKEFcJYvl8bhOz5zZwqPWUgXZy0boiPqQ9MFxpZukSjMg7pcsauYBIpe9wh6cBQ==
-X-Received: by 2002:a1c:2dc9:: with SMTP id t192mr606776wmt.119.1550822761537; 
-	Fri, 22 Feb 2019 00:06:01 -0800 (PST)
-Received: from localhost.localdomain ([81.214.38.25])
-	by smtp.gmail.com with ESMTPSA id p4sm400310wrs.74.2019.02.22.00.06.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Feb 2019 00:06:01 -0800 (PST)
-From: hmenn <hmen.56@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Feb 2019 08:05:56 +0000
-Message-Id: <1550822756-20371-1-git-send-email-hmen.56@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [[meta-oe]] add spdlog recipe
+	Fri, 22 Feb 2019 08:52:34 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.58,398,1544482800"; d="scan'208";a="15307583"
+To: <openembedded-devel@lists.openembedded.org>
+References: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <cee583cc-c120-8198-8322-d917f6ae1266@skidata.com>
+Date: Fri, 22 Feb 2019 09:52:34 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.0
+MIME-Version: 1.0
+In-Reply-To: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [PATCH 1/2] Revert "base-files: Define JAVA_HOME by default"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +29,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 08:06:03 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 08:52:35 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-* Now, spdlog library is enable under recipes-support. Just install with "spdlog-dev".
-* It's also tested with populate-sdk.
----
- meta-oe/recipes-support/spdlog/spdlog_1.3.1.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-support/spdlog/spdlog_1.3.1.bb
+Hi,
+thanks for the patch. Looks good to me now.
+I'll add it to my tests and will give feedback.
 
-diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.3.1.bb b/meta-oe/recipes-support/spdlog/spdlog_1.3.1.bb
-new file mode 100644
-index 0000000..27fa2be
---- /dev/null
-+++ b/meta-oe/recipes-support/spdlog/spdlog_1.3.1.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Very fast, header only, C++ logging library."
-+HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+PR="r0"
-+SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x;tag=v${PV}"
-+
-+S = "${WORKDIR}/git"
-+
-+BBCLASSEXTEND = "native"
-+# no need to build example&text&benchmarks on pure yocto
-+EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_EXAMPLES=off -DSPDLOG_BUILD_TESTS=off -DSPDLOG_BUILD_BENCH=off"
-+
-+inherit cmake
-+
-+# Header-only library
-+RDEPENDS_${PN}-dev = ""
-+RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
-\ No newline at end of file
--- 
-2.7.4
+Nonetheless things to improve for your next contribution:
+  a) Please add [meta-java] to the subject
+  b) Please version the patchset when it updates an existing one
+     on the mailinglist
 
+Therefore the correct subject prefix for this patchset would have been:
+  [oe][meta-java][PATCH V2 1/2]
+
+No problem for this one as I found it, but please keep an eye on that 
+for the next time. Thanks.
+
+regards;Richard.L
+
+On 21/02/2019 04:23, Fang Jia wrote:
+> This reverts commit ada652564f09756a81f54495cbc2091125239625.
+> 
+> When enable multilib on a 64-bit system, probably both base-file and
+> lib32-base-files are installed.
+> Then both packages want to modify the file "profile", there will be
+> an error like:
+> "
+> Error: Transaction check error:
+> file /etc/profile conflicts between attempted installs of
+> lib32-base-files-3.0.14-r148.gpb_virt and
+> base-files-3.0.14-r148.gpb_virt
+> "
+> 
+> The task can be added by adding a file to ${sysconfdir}/profile.d/.
+> 
+> Signed-off-by: Fang Jia <fang.jia@windriver.com>
+> ---
+>   recipes-core/base-files/base-files_3.0.14.bbappend | 13 -------------
+>   1 file changed, 13 deletions(-)
+>   delete mode 100644 recipes-core/base-files/base-files_3.0.14.bbappend
+> 
+> diff --git a/recipes-core/base-files/base-files_3.0.14.bbappend b/recipes-core/base-files/base-files_3.0.14.bbappend
+> deleted file mode 100644
+> index 4651185..0000000
+> --- a/recipes-core/base-files/base-files_3.0.14.bbappend
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -do_install_append() {
+> -	cat >> ${D}${sysconfdir}/profile << EOT
+> -JAVA_HOME=""
+> -for dir in ${libdir}/jvm/*; do
+> -	if [ -x "\${dir}/bin/java" ]; then
+> -		[ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
+> -	fi
+> -done
+> -if [ -n "\${JAVA_HOME}" ]; then
+> -	export JAVA_HOME=\${JAVA_HOME}
+> -fi
+> -EOT
+> -}
+> 
 
