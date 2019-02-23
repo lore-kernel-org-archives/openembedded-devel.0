@@ -1,45 +1,53 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
-	[209.85.222.176])
-	by mail.openembedded.org (Postfix) with ESMTP id DFFE37CBED
+Return-Path: <tuanha@viosoft.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 26E6B7CBCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 21:19:38 +0000 (UTC)
-Received: by mail-qk1-f176.google.com with SMTP id y15so2007211qki.8
+	Sat, 23 Feb 2019 03:56:22 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id y4so1960941pgc.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 13:19:40 -0800 (PST)
+	Fri, 22 Feb 2019 19:56:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=viosoft-com.20150623.gappssmtp.com; s=20150623;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding:content-language;
+	bh=uMuMowTSCcQA7Y/OmEXt4hqyiZQfrqxiyC9jIt83tUw=;
+	b=OuWHD34V6LjvH0TkJYe0vgV17VU6raicaWMThcxv+w8gxROSO5QQHyh8TbTKs9/B2u
+	DoshpUNHyRWpqAwEDqVijL1jT+un+K1IDi/nVIBqtfY+fJgbKRUnQOx0FzVvsQ4OUUhN
+	/lekBVk+1QBSX9iXkHQ397sFL95HnTDtIVhgBO6Yj7ukK7NUgnSACfsJ88tY7yuVYYdt
+	+GNJ7rnwv07/O11krt1xHi0eDF2N/5/Tcmvh6fxtQ7JCtxTU56/o8/rAo4PZge8S7Yyl
+	Kdu2W4zF8suPBJarr2muvEAKIJxLHKYGncXJF9wWK/PuYRcWh5WFMyfWTnuTJAMpzmSh
+	eHEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:organization:content-transfer-encoding;
-	bh=H1fXPImfB0A5mfuLYcsjQVlnKlgIwN/lXVcvbw7ONK8=;
-	b=KQGO5ricqU96/Ca3l0K2N9oaUgYUL3PekL84DPUjkydQGNHfK/oEdLLvbuHNVF00DY
-	8d5QRoCLi6xWDEctNG2kbIlZB82Entbv9q56vdyCQjpU3i1ufSxWIXQ86f4SBMvhWnz/
-	+6xF0SG856zuK8raIJdo9AcZmpG1z8tf9YbnondhUa8flLr3hCCp9T9ktETB6lY6BPpn
-	T2eDWFwrfyEa8fbrpllwtwKYwdkYt7t7250KCyUnoo74/CWFgKhBHGi7taOjeYHyBGsY
-	ZMI+VIIYbXoyu8H0cxhMvzqGnUZ2Z7vAQxF5U3vNYhKJ/aY2J9mVlffmtCFr4eVTT2ts
-	2VpA==
-X-Gm-Message-State: AHQUAubvDeMF0m5sM91Qr3/S6x2NiSGTGIv299d3Cm6kTi7WVgMuU8Ij
-	CNhWkSQMymgUr3vWJLYIu1sCKFb0
-X-Google-Smtp-Source: AHgI3Ib+Q2j7O2FJ8YCeh309HGC/h06odv+QzhGDGI/LxxcxwuTdCNeKWjEho8rsQgHDS78cbr4NZQ==
-X-Received: by 2002:a37:b482:: with SMTP id d124mr4656731qkf.168.1550870379510;
-	Fri, 22 Feb 2019 13:19:39 -0800 (PST)
-Received: from localhost.localdomain ([177.194.204.148])
-	by smtp.gmail.com with ESMTPSA id 46sm1493611qty.59.2019.02.22.13.19.36
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Feb 2019 13:19:38 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Fri, 22 Feb 2019 18:19:34 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Feb 2019 18:19:26 -0300
-Message-Id: <20190222211926.19877-2-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190222211926.19877-1-otavio@ossystems.com.br>
-References: <20190222211926.19877-1-otavio@ossystems.com.br>
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=uMuMowTSCcQA7Y/OmEXt4hqyiZQfrqxiyC9jIt83tUw=;
+	b=MH2/hSpFXAhj+Ej/a0g0Jn8N3zsz5Kv1CSrU82j3Nuy2MPCW/AtKrG3e7nuQno3/qi
+	Xy9V0RVcF6CroY7CFet4aXKA+1+SekZIWpTVEIVbNtvr7yIfcDpjSu6f6EOjepAfkwPA
+	BbQTMBTVJvBqvKEWAmtC4NdNS5JSkXg1wBpSnpmBn8hsqEyMQdR/S6Z6PTjHC+p0PEJS
+	WUpmIB/ydKzf0ywfs/cm6NPTwBbtIUOxaJWQ4jDLK2eeYw+u+AKcrdtsBmtF3fq7mwiT
+	z6m+GgoNgBvIIzn/kGUUDhD79pS1VOPOfq0KCY1h4jy+l1da0/Os+IL8nGSAuWImiRdG
+	NjIA==
+X-Gm-Message-State: AHQUAuYjtLPgu7mGZtqnMuKZYK0LseFrdPDDr20ZoWxuu/gW3YNph6HM
+	gS/Zojfv9du0ZtsDP+MGGDlToghLdBb5XA==
+X-Google-Smtp-Source: AHgI3IYVMkeKKWGwGYDimTTQIL03zfL7ZeEQbU1UR44MEeAys20xSBD/ypRaKt/EkPzpjyYYJEhDlQ==
+X-Received: by 2002:a63:e447:: with SMTP id i7mr7149216pgk.70.1550894182613;
+	Fri, 22 Feb 2019 19:56:22 -0800 (PST)
+Received: from [192.168.100.8] ([123.16.252.182])
+	by smtp.gmail.com with ESMTPSA id
+	g67sm7688271pfg.13.2019.02.22.19.56.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Feb 2019 19:56:21 -0800 (PST)
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: Hoang Anh Tuan <tuanha@viosoft.com>
+Message-ID: <830a09f3-5527-799e-d2f8-f296899ff382@viosoft.com>
+Date: Sat, 23 Feb 2019 10:56:19 +0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe PATCH 2/2] python-idna: Upgrade 2.7 -> 2.8
+Subject: [meta-oe] [PATCH] tk_8.6.9: Add tkConfig.sh in crossscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,43 +60,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 21:19:39 -0000
+X-List-Received-Date: Sat, 23 Feb 2019 03:56:22 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
 ---
+  meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb | 25 +++++++++++++++++++++++++
+  1 file changed, 25 insertions(+)
 
- meta-python/recipes-devtools/python/python-idna.inc           | 4 ++--
- .../python/{python-idna_2.7.bb => python-idna_2.8.bb}         | 0
- .../python/{python3-idna_2.7.bb => python3-idna_2.8.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-idna_2.7.bb => python-idna_2.8.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-idna_2.7.bb => python3-idna_2.8.bb} (100%)
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb 
+b/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+index 9eec4bb..459ae82 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+@@ -50,6 +50,11 @@ do_install_append() {
+      ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
+      oe_libinstall -so libtk${VER} ${D}${libdir}
+      ln -sf wish${VER} ${D}${bindir}/wish
++
++    sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tkConfig.sh
++    sed -i "s;'${WORKDIR};'${STAGING_INCDIR};g" tkConfig.sh
++    install -d ${D}${bindir_crossscripts}
++    install -m 0755 tkConfig.sh ${D}${bindir_crossscripts}
+  }
 
-diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
-index 519812ddc..13b0cdb62 100644
---- a/meta-python/recipes-devtools/python/python-idna.inc
-+++ b/meta-python/recipes-devtools/python/python-idna.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/kjd/idna"
- LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=782775b32f96098512e283fb5d4546cd"
- 
--SRC_URI[md5sum] = "0e5bb69018ddef1b9d95f681182be82c"
--SRC_URI[sha256sum] = "684a38a6f903c1d71d6d5fac066b58d7768af4de2b832e426ec79c30daa94a16"
-+SRC_URI[md5sum] = "2e9ae0b4a0b26d1747c6127cdb060bc1"
-+SRC_URI[sha256sum] = "c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407"
- 
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-codecs \
-diff --git a/meta-python/recipes-devtools/python/python-idna_2.7.bb b/meta-python/recipes-devtools/python/python-idna_2.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-idna_2.7.bb
-rename to meta-python/recipes-devtools/python/python-idna_2.8.bb
-diff --git a/meta-python/recipes-devtools/python/python3-idna_2.7.bb b/meta-python/recipes-devtools/python/python3-idna_2.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-idna_2.7.bb
-rename to meta-python/recipes-devtools/python/python3-idna_2.8.bb
+  PACKAGECONFIG ??= "xft"
+@@ -69,3 +74,23 @@ BBCLASSEXTEND = "native nativesdk"
+
+  # Fix the path in sstate
+  SSTATE_SCAN_FILES += "*Config.sh"
++
++inherit binconfig
++
++SYSROOT_DIRS += "${bindir_crossscripts}"
++
++# Fix some paths that might be used by Tcl extensions
++BINCONFIG_GLOB = "*Config.sh"
++
++# Cleanup host path from ${libdir}/tclConfig.sh and remove the
++# ${bindir_crossscripts}/tclConfig.sh from target
++PACKAGE_PREPROCESS_FUNCS += "tcl_package_preprocess"
++tcl_package_preprocess() {
++        sed -i -e "s;${DEBUG_PREFIX_MAP};;g" \
++               -e "s;-L${STAGING_LIBDIR};-L${libdir};g" \
++               -e "s;${STAGING_INCDIR};${includedir};g" \
++               -e "s;--sysroot=${RECIPE_SYSROOT};;g" \
++               ${PKGD}${libdir}/tkConfig.sh
++
++        rm -f ${PKGD}${bindir_crossscripts}/tkConfig.sh
++}
 -- 
-2.20.1
+2.7.4
 
+-- 
 
