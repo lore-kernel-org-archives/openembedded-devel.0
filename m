@@ -1,51 +1,48 @@
 Return-Path: <tuanhoanganh.dev@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E5EE67CC0B
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D21EC7C92D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Feb 2019 04:25:04 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id n74so1989075pfi.9
+	Sun, 24 Feb 2019 06:23:25 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id i130so3019005pgd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Feb 2019 20:25:06 -0800 (PST)
+	Sat, 23 Feb 2019 22:23:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=JrVaK9AMhZoxjujVTMFiH5taLbDVmGnVbbqlRFnqkxQ=;
-	b=RGniKuKk/RJmN77xYC1FYvhXZovP0uUxRQL2LT8R62xdUVEIxLWJTBiPg3GnFaAlzp
-	QoQqFekialJg5X6Z4hB8RqQQWBLWePB3pLT4If7WAWJLzQs770Rf9TdFqUQ+NZohvzwj
-	pq9ucXUI3SGn3ycNdzLEmP2TW21SQDPmoAaw57iQj2VtMCaKN1hCkSWJ8TomxlB2po4k
-	AgxPSVquC6O3xm60DAXBa/2w5L/y1ikm1VHLshrzktNkFEwINzK7FJ/jFJg8HIL5XPDL
-	tnaM1vKksT9j2QzqO1CMNQF6GHll11VzrsKXxLUESydLovCgZ0l45EMlxw3MGds/4AJU
-	/BhQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=7kX2+uvpG507qki6vTSmWknfoFrSH5OoE0nUJZDBshE=;
+	b=VQVxZ446FK8p54+bY0HrZuVUsUagUowea9CfcgQ3yTZiXNLHqMQSa5dhFghhZYls2A
+	mXxb4+X5t6ai7Zf6rU6Cfs4KmR+8cb8DRmoRN8P8twoRuYucymPxJEVynRend1MfVnN8
+	7qkR18U1WAPVRWM9enGJyAVCAbfbtJJvJwugKdqY4YO9+f/RMK0chgVDUKWhrVUa6/N9
+	cdLBPpvWuuk45sr6aqvaeySk+RZYG4Zd43ysqLOqJbpn2YPd22dnnIm/by8s4j5XfKJF
+	5SCYtJ3QVtggAnWrHjP1zqR+ayC5kEniv4ZGIZ0WCQYI9druH5iJRyviL2eKHgLrL3n1
+	euww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=JrVaK9AMhZoxjujVTMFiH5taLbDVmGnVbbqlRFnqkxQ=;
-	b=WUpRun+zyZwoGz79aAC4FJ5ffel0DfhGS4NGpxaPeRWIZiboW1lOboy7p2Oibhg2QH
-	/a1n3KjpXRqwKObyrPcjBXxTKBg00hf6glo2d9jrUNUW54C8RaPIPDC5yfHvDXQD6SRA
-	0KuUHrLnks6+1edt7mzA70uExxfqxza9HSsMla3meCyi0SVqYpMXTocWah2yMG0T+TJl
-	CNfchD2FN8/PlghsbD2TqqFIGGMPMnCkHYhKYXgdcmt7uG4cMkAOjM7r3XqqW0o9Bbsd
-	pHI2ZiQ/pgMSMwrghQXI0GBY3ynD+YYwZcxGF9b7u7v7NSdIapfGRRtPnx8a7TqxHFIv
-	4AFw==
-X-Gm-Message-State: AHQUAuZUfbzHEg8wx0PxzZvWlEHHRem+29AXvuzqb4ld6RTOJ2VHNx27
-	JL+6A6ClmtL79jnNopHWuLkyPA3X3wU=
-X-Google-Smtp-Source: AHgI3IZ9J9k/mU0c8JhfIRgE35nK//NELkjYZeglnTUNsqJfZ4CqitQ2rYw7nm9oSz0/v+7WATUx6A==
-X-Received: by 2002:a63:1a03:: with SMTP id a3mr7304129pga.192.1550895905865; 
-	Fri, 22 Feb 2019 20:25:05 -0800 (PST)
-Received: from localhost.localdomain ([123.16.252.182])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7kX2+uvpG507qki6vTSmWknfoFrSH5OoE0nUJZDBshE=;
+	b=YxsRBo134Cmj1YqgrjCa+bvgEwTaIgS8g5Ms9F109mVlNDHl8HtWRwUdX4aSQXLgH6
+	QdVeM3RV/pIg6953FmmGPHurpdMyFIvbII3BElLzSLoNnf/YeBoBVo8W9zZm+JshpQwb
+	8jgRIwIiOKUm6Upws2917ccMy9S6I0w2mZr/qDVUC7WhiiOqFaNNAOGG25uM1iK1+e3R
+	GPAjI3id1bwYQt0UcfgwaoP7kvREC4di//tJhZQHQInrhNI9nv5V4eH0hYIbgxW3B4KJ
+	XCmZpkfhD/DiKCnJC/eOvlYov+RhwMh68cnTcrf4WK7CJ/B/E81up6W2aSLmNRdqinag
+	vxZg==
+X-Gm-Message-State: AHQUAuZ4RtfnvPTPRVPLjh4sqH/sUyXspruKwDYmchE+aDkdxeipEWWI
+	nFf1naubY5N2KoEEi6mtxqH4YuPVxHtOwg==
+X-Google-Smtp-Source: AHgI3IaYmJbZkbrM0wKIykuYTKlN4rkjjfSmPQj5umdY5aEh3UeBM1ORIjdaO2zOAWop+s8S66X6dQ==
+X-Received: by 2002:a65:6397:: with SMTP id h23mr11365932pgv.347.1550989406612;
+	Sat, 23 Feb 2019 22:23:26 -0800 (PST)
+Received: from localhost.localdomain ([128.242.105.20])
 	by smtp.gmail.com with ESMTPSA id
-	k74sm7128249pfb.172.2019.02.22.20.25.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Feb 2019 20:25:05 -0800 (PST)
+	z1sm10011315pfi.155.2019.02.23.22.23.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 23 Feb 2019 22:23:25 -0800 (PST)
 From: Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
 X-Google-Original-From: Hoang Anh Tuan <tuanha@viosoft.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Feb 2019 11:24:52 +0700
-Message-Id: <20190223042452.8704-2-tuanha@viosoft.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190223042452.8704-1-tuanha@viosoft.com>
-References: <20190223042452.8704-1-tuanha@viosoft.com>
-Subject: [meta-oe][PATCH 2/2] gtkwave: add version 3.3.98
+Date: Sun, 24 Feb 2019 06:23:19 +0000
+Message-Id: <1550989399-20227-1-git-send-email-tuanha@viosoft.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] mscgen: add version 0.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Feb 2019 04:25:05 -0000
+X-List-Received-Date: Sun, 24 Feb 2019 06:23:26 -0000
 
 Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
 ---
- .../gtkwave/gtkwave_3.3.98.bb                 | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+ meta-oe/recipes-support/mscgen/mscgen_0.20.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mscgen/mscgen_0.20.bb
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+diff --git a/meta-oe/recipes-support/mscgen/mscgen_0.20.bb b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
 new file mode 100644
-index 000000000..60df6f773
+index 0000000..6ead015
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "VCD (Value Change Dump) file waveform viewer"
-+DESCRIPTION = "gtkwave is a viewer for VCD (Value Change Dump) files which are usually created by digital circuit simulators. (These files have no connection to video CDs!) "
-+HOMEPAGE = "http://gtkwave.sourceforge.net/"
++++ b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Mscgen is a small program that parses Message Sequence Chart descriptions and produces PNG, SVG, EPS or server side image maps (ismaps) as the output."
++HOMEPAGE = "http://www.mcternan.me.uk/mscgen/"
 +
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b1e6a340187c1cf716513439d07c1d79"
 +
-+SRC_URI = "http://gtkwave.sourceforge.net/${PN}-${PV}.tar.gz"
++SRC_URI = "http://www.mcternan.me.uk/mscgen/software/${PN}-src-${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "eac3073ef381e0c09da33590296ca37f"
-+SRC_URI[sha256sum] = "efa6bbbeb3bd54104425a69a2aa0d079bb5c3ecc1c420ba57dcaa1c97c5a22f6"
++SRC_URI[md5sum] = "65c90fb5150d7176b65b793f0faa7377"
++SRC_URI[sha256sum] = "3c3481ae0599e1c2d30b7ed54ab45249127533ab2f20e768a0ae58d8551ddc23"
 +
-+inherit pkgconfig autotools gettext texinfo
-+DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
-+RDEPENDS_${PN} = "tk-lib"
++DEPENDS = "gd "
 +
-+EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS}"
++inherit autotools gettext
 +
-+FILES_${PN} = "${bindir} ${datadir}"
++do_configure_prepend() {
++	sed -i "s#AC_PATH_PROG(GDLIB_CONFIG,gdlib-config)#AC_PATH_PROG([GDLIB_CONFIG],[gdlib-config], ,[${STAGING_BINDIR_CROSS}])#" ${S}/configure.ac
++}
 -- 
-2.17.1
+2.7.4
 
 
