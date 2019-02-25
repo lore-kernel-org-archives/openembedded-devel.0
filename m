@@ -1,27 +1,44 @@
-Return-Path: <jma1@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 03D746C17F
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4336D7CA5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 08:18:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1P8IZh4016496
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 25 Feb 2019 14:00:21 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id o6so10502399qtk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 00:18:35 -0800 (PST)
-Received: from pek-lpggp2 (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
-	Mon, 25 Feb 2019 00:18:35 -0800
-Received: by pek-lpggp2 (Postfix, from userid 20544)	id D6CA7720A72; Mon, 25
-	Feb 2019 16:01:06 +0800 (CST)
-From: Jiping Ma <jiping.ma2@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Feb 2019 16:01:02 +0800
-Message-ID: <1551081662-134703-2-git-send-email-jiping.ma2@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
-References: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
+	Mon, 25 Feb 2019 06:00:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:organization:content-transfer-encoding;
+	bh=xknJ4cPdJ+Z1isHOexYwdMJ7QLKcu6G5hYUKSauFuP0=;
+	b=Ojbkj/UPyGO4qqpKtOoAd3V5b4VLCBD0tO5KOzRUzaNXP6L5zJoKCcxfi698uGkk/K
+	I/wOmM6LedxbwFC1cDAoa9vypH+wMuXM2UdjCm8nOOBtAu4zU/eHPPvsgrE3D+o8WAZB
+	zTk5YulTuSwiqz0k5BkRn5Jz9JfD1zCcRVjDTZQN5Cdtph+IbFE6CVGaYexqY8TWg7Aj
+	ZRxUnxivtSZlvHQpNDiCIbSWY3IO25+Lp02v/gkHxMOO1Ul/j9Qh2ml9Q3yL5TERVFd5
+	91WzGfPUYsIT56uyg5qO6Tqjx0jpSG6WTHt4gJTCJwWTcE1UXQrOn7NWJRX3JeDmT59w
+	1WWA==
+X-Gm-Message-State: AHQUAuYpkwwIfON6vB1SAe4Yro4ZBHZ3ZatIbXhFC2hzZfn038AMnGDu
+	6HDIlmYexhw6D2WBBnpIPcT1lLGX
+X-Google-Smtp-Source: AHgI3IY2P6DLgBwFOCpReQ/z2cVlu/zxjlckanryU2qQx4EC55VqecK+Gmc/ZLSnnBZyGYz98mTFRA==
+X-Received: by 2002:ac8:1aeb:: with SMTP id h40mr13703991qtk.309.1551103221738;
+	Mon, 25 Feb 2019 06:00:21 -0800 (PST)
+Received: from localhost.localdomain ([177.194.204.148])
+	by smtp.gmail.com with ESMTPSA id
+	c19sm3822451qkg.88.2019.02.25.06.00.18
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 25 Feb 2019 06:00:20 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Mon, 25 Feb 2019 11:00:15 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Feb 2019 11:00:08 -0300
+Message-Id: <20190225140010.19025-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH] lvm2: lvmdiskscan always print out "/dev/hdc: open failed: No medium found".
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,72 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2019 08:18:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Feb 2019 14:00:21 -0000
+Content-Transfer-Encoding: 8bit
 
-commit [57bb46c5e7f8] introduce this issue.
-"/dev/hdc: open failed: No medium found" will be print out
-after run lvmdiskscan. change dev_open_readonly()
-to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
+The chmod was removing the executing bit from the directory and then
+the native version was failing to build.
 
-Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- ...n-failed-No-medium-found-will-print-out-i.patch | 32 ++++++++++++++++++++++
- meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb       |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
-new file mode 100644
-index 0000000..24d5b1b
---- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
-@@ -0,0 +1,32 @@
-+From 93c93e3b85492e58f9451841e6079d00c497efa4 Mon Sep 17 00:00:00 2001
-+From: Jiping Ma <jiping.ma2@windriver.com>
-+Date: Mon, 25 Feb 2019 13:29:12 +0800
-+Subject: [PATCH] "/dev/hdc: open failed: No medium found" will print out in
-+ lvmdiskscan.
-+
-+commit [57bb46c5e7f8] introduce this issue.
-+"/dev/hdc: open failed: No medium found" will be print out
-+after run lvmdiskscan. change dev_open_readonly()
-+to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
-+
-+Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
-+---
-+ lib/device/dev-io.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/device/dev-io.c b/lib/device/dev-io.c
-+index dc95131..81a66b0 100644
-+--- a/lib/device/dev-io.c
-++++ b/lib/device/dev-io.c
-+@@ -338,7 +338,7 @@ static int _dev_get_size_dev(struct device *dev, uint64_t *size)
-+ 	}
-+ 
-+ 	if (fd <= 0) {
-+-		if (!dev_open_readonly(dev))
-++		if (!dev_open_readonly_quiet(dev))
-+ 			return_0;
-+ 		fd = dev_fd(dev);
-+ 		do_close = 1;
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
-index c38c381..0df624b 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
-@@ -4,6 +4,7 @@ SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
+ meta-python/recipes-devtools/python/python-idna.inc | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
+index 436b58606..519812ddc 100644
+--- a/meta-python/recipes-devtools/python/python-idna.inc
++++ b/meta-python/recipes-devtools/python/python-idna.inc
+@@ -16,7 +16,3 @@ do_compile_prepend() {
+ }
  
- SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch \
-             file://0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch \
-+	    file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-            "
- 
- DEPENDS += "autoconf-archive-native"
+ BBCLASSEXTEND = "native nativesdk"
+-
+-do_install_append() {
+-    chmod 664 -R ${D}${PYTHON_SITEPACKAGES_DIR}/*.egg-info/
+-}
+\ No newline at end of file
 -- 
-1.9.1
+2.20.1
 
 
