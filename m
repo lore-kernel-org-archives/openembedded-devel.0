@@ -1,49 +1,48 @@
-Return-Path: <tuanhoanganh.dev@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 47D4C71E5A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 110776BE21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Feb 2019 13:19:01 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id y10so3233758plp.0
+	Mon, 25 Feb 2019 01:52:54 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id v10so8783477qtp.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Feb 2019 05:19:02 -0800 (PST)
+	Sun, 24 Feb 2019 17:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=SrJ++CjinTen17wNRiniRd1JO5qAMNWA2VAwopThtKo=;
-	b=C5pBIohIiJhSUhFFvgCAzHfPMgd0O7QtxuI3kH6qE9cI/Bmh/MPIZUPiyRLbbwHjIu
-	cjZkwK8K/0oE14ih0jvOq7/jzpauk1LDBvvs7l3D/Ku/TwaZoAwj3UL4h3DnGICeV4dW
-	ka1w4SzJw9dCJ2MUnOPYGNdfGhCAdxk0Yy9OeSKvWRX59OpdZxOag+ob0VDe/3NaXV7U
-	xIvjExjMU2FZv4gMSupU/K+w8tyzcxLexpiAJkFET1uIhTWtOYcu8x9aJSg2WVBg2jWk
-	8SePH8yK1fn7121LJQu4CyD5Lcn5aTb7bw4vRnEAclYo1bOeJMq+i6ijHtMn8VbKgMNw
-	Fblg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=KhKH2tBr5/oC351gQIyNVIG+1bYUvERd3BZd+GN+wVs=;
+	b=G2NhZFCMJaztpUM49VELExSQmHbINhm6xaAK0eZAtzMSHkC/9NMqRNb5a0CuzTag6C
+	MidWkmNqBE+kGZp9gAtxNcrOPsZiBi+tcvpxsD0T05kBl39PW7iG2fCfo7BzvflPj+vd
+	YEYpnOKaOEO1ov1d4n7QSdpAadghi5kd2NpVsZ9xF12cUxgiQ2xgajarXzXfJ1hJQTaq
+	FVYtnxFIHjFvhtsdjgd2UIeUbtYnECVi2JmZTuEM3b2cwjV7iSvUUbByYQhiZgevj0aq
+	MwS23dYg23Lee6R44uHIfq/E1InpUnNLlbfPL7haujURNZ5b0P46DBpZscezXaR0D0JU
+	1zzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SrJ++CjinTen17wNRiniRd1JO5qAMNWA2VAwopThtKo=;
-	b=Q16L/kWLQlrv9YQgLDO+b3bXsU+i9uaVN5vh1iP6nWBpMD7ba0OIi8rMN4/c41byej
-	B95SuFimS9lM7MHfQduxn+s6w5a4qjJ5vP2FHEemdk9Bc+JBpMpodN671rxAR9K3bqVT
-	YrPVH8CYqB39X+AhWOPYPoz8X1+aaiN7UJrvhPAV9FMd0Y1fp1x410XRoyH3uWq3y+oZ
-	mFBvxlwoc7Vjej1S48Sv/BCAaZCubvX3ExQGmp3HjLILpOn3htM+vCP/FfB84wxeADE5
-	FHfytxgxOwuFRXAL9miG+fYcQJtrbU5nMI5tBAN/ochKj2FihrSh/rrn22pvDUf7Zk/d
-	PUpw==
-X-Gm-Message-State: AHQUAuYDisEBQFezC3XxPaLVHirUob2WWOOhCdE8w4E4NRTHxiLZ6Ugj
-	oRPsvK5eMrHqLY5hEMkVH7KX0EAuOEs=
-X-Google-Smtp-Source: AHgI3IYDpJxpXLaCE0GjpAoI9SNTofBrSFVFoutQZZsqdBIkOl84JKv9E5QgEnWc/IsugSYSqwMzTw==
-X-Received: by 2002:a17:902:765:: with SMTP id
-	92mr12641815pli.95.1551014342104; 
-	Sun, 24 Feb 2019 05:19:02 -0800 (PST)
-Received: from localhost.localdomain ([128.242.105.20])
-	by smtp.gmail.com with ESMTPSA id
-	t185sm10724509pfd.165.2019.02.24.05.19.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 24 Feb 2019 05:19:01 -0800 (PST)
-From: Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
-X-Google-Original-From: Hoang Anh Tuan <tuanha@viosoft.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Feb 2019 13:18:52 +0000
-Message-Id: <1551014332-1608-1-git-send-email-tuanha@viosoft.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] libforms: add version 1.2.3
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=KhKH2tBr5/oC351gQIyNVIG+1bYUvERd3BZd+GN+wVs=;
+	b=eBwtrZ1YPx1NZ1XZPmRAhPHJmR9VG/SGfYFzW2JjW3PddUpUKF/k580BTPJiidCg1U
+	QXLdeXdGfm5jMMzvvaZhV4ORBaG+tgHDrkKb66jn+0aj2LMw5X/kXni+DjUHkss/tMN+
+	Sm9RN+dZpBmzKHKb9x+UaR59c+uuZJ8thxp9H+GMjL87Im/IqVklolPOPdrxnQUmfOQV
+	ib3yTJATYCzX9/lDeS6t4HxkYE0qLkY/G/l6fH55kcv12jiK71PCVwMqWOR7dSi6aKax
+	tW1TL+UYjm7MIfLue1jKxbMJVPFRPr0Mpqvidesn/o0iNKNpXUoR3TcsExuutPKhYhso
+	KcEA==
+X-Gm-Message-State: AHQUAubKbGVdfqHxzFjK282NMPdbcbGC4XqAfwvdpv9rzp+f//BxA3/g
+	w4FpGG6ZXjNLM+i5wQAz9hEevJTmFQPe1Vtji6wd9qfU
+X-Google-Smtp-Source: AHgI3IYrRr+Z/QV9ACbYBFIwQbQCtlNZXStpzBqCajQ1geHdqjjHn+/w0uhT/b/CFZCCBsF57BmaP5jqNEnHYaqKsdk=
+X-Received: by 2002:ac8:2c51:: with SMTP id e17mr11574012qta.254.1551059575512;
+	Sun, 24 Feb 2019 17:52:55 -0800 (PST)
+MIME-Version: 1.0
+References: <1550200574-9614-1-git-send-email-chandana.kalluri@xilinx.com>
+	<MWHPR02MB2576AFB4217110298F064C3CB07A0@MWHPR02MB2576.namprd02.prod.outlook.com>
+In-Reply-To: <MWHPR02MB2576AFB4217110298F064C3CB07A0@MWHPR02MB2576.namprd02.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 24 Feb 2019 17:52:29 -0800
+Message-ID: <CAMKF1sqo907AihyvtOH2cZHSft2iTzkAhnRFmA3B7ZmPsSgAEA@mail.gmail.com>
+To: Chandana Kalluri <ckalluri@xilinx.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor recipe to meta-oe/recipes-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,105 +55,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Feb 2019 13:19:01 -0000
+X-List-Received-Date: Mon, 25 Feb 2019 01:52:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
----
- .../files/add-absolute-path-for-include-dir.patch  | 12 +++++++++++
- .../libforms/files/fix-link-to-xforms-man.patch    | 12 +++++++++++
- .../libforms/files/fix-path-fdesign_LDADD.patch    | 12 +++++++++++
- .../recipes-graphics/libforms/libforms_1.2.3.bb    | 24 ++++++++++++++++++++++
- 4 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
- create mode 100644 meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
- create mode 100644 meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
- create mode 100644 meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+On Sun, Feb 24, 2019 at 5:21 PM Chandana Kalluri <ckalluri@xilinx.com> wrote:
+>
+> Ping
 
-diff --git a/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch b/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
-new file mode 100644
-index 0000000..db400f7
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
-@@ -0,0 +1,12 @@
-+diff -Naur xforms-1.2.3.orig/fdesign/Makefile.am xforms-1.2.3/fdesign/Makefile.am
-+--- xforms-1.2.3.orig/fdesign/Makefile.am	2019-02-24 12:58:51.968645873 +0000
-++++ xforms-1.2.3/fdesign/Makefile.am	2019-02-24 13:00:48.500635163 +0000
-+@@ -11,7 +11,7 @@
-+ fdesign.1:
-+ 	cp -p $(srcdir)/fdesign.man fdesign.1
-+ 
-+-INCLUDES = -I./xpm $(X_CFLAGS)
-++INCLUDES = -I./xpm -I$(srcdir)/xpm $(X_CFLAGS)
-+ 
-+ bin_PROGRAMS = fdesign
-+ 
-diff --git a/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch b/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
-new file mode 100644
-index 0000000..c95bd18
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
-@@ -0,0 +1,12 @@
-+diff -Naur xforms-1.2.3.orig/lib/Makefile.am xforms-1.2.3/lib/Makefile.am
-+--- xforms-1.2.3.orig/lib/Makefile.am	2019-02-24 12:53:58.340678373 +0000
-++++ xforms-1.2.3/lib/Makefile.am	2019-02-24 12:54:33.096674102 +0000
-+@@ -25,7 +25,7 @@
-+ man_MANS = xforms.5
-+ 
-+ xforms.5:
-+-	cp -p ./xforms.man xforms.5
-++	cp -p $(srcdir)/xforms.man xforms.5
-+ 
-+ libforms_la_SOURCES = \
-+ 	align.c \
-diff --git a/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch b/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
-new file mode 100644
-index 0000000..73956de
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
-@@ -0,0 +1,12 @@
-+diff -Naur xforms-1.2.3.orig/fdesign/Makefile.am xforms-1.2.3/fdesign/Makefile.am
-+--- xforms-1.2.3.orig/fdesign/Makefile.am	2019-02-24 13:08:48.412603250 +0000
-++++ xforms-1.2.3/fdesign/Makefile.am	2019-02-24 13:09:18.412601874 +0000
-+@@ -15,7 +15,7 @@
-+ 
-+ bin_PROGRAMS = fdesign
-+ 
-+-fdesign_LDADD = $(top_srcdir)/lib/libforms.la $(X_LIBS) $(X_PRE_LIBS) $(XPM_LIB) -lX11 $(LIBS) $(X_EXTRA_LIBS)
-++fdesign_LDADD = $(top_builddir)/lib/libforms.la $(X_LIBS) $(X_PRE_LIBS) $(XPM_LIB) -lX11 $(LIBS) $(X_EXTRA_LIBS)
-+ 
-+ fdesign_SOURCES = \
-+ 	fd_attribs.c \
-diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-new file mode 100644
-index 0000000..8a214d1
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "The XForms graphical interface widget library	"
-+HOMEPAGE = "http://savannah.nongnu.org/projects/xforms/"
-+PR = "r0"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=ade9a053df81f5b9408d2f4f5546df86"
-+
-+SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.gz \
-+           file://fix-link-to-xforms-man.patch \
-+           file://add-absolute-path-for-include-dir.patch \
-+           file://fix-path-fdesign_LDADD.patch \
-+          "
-+
-+SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
-+SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c2def61"
-+
-+inherit autotools
-+
-+S = "${WORKDIR}/xforms-${PV}"
-+
-+DEPENDS = "libxpm jpeg libx11 mesa"
-+RDEPENDS_${PN} = "bash"
-+
-+EXTRA_OECONF = "--with-extra-inc=${S}/lib" 
--- 
-2.7.4
 
+did you check latest master ?
+https://git.openembedded.org/meta-openembedded/commit/?id=cb1b5130441b79473fde4083c07ac5d18dd28561
+>
+> -----Original Message-----
+> From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>
+> Sent: Thursday, February 14, 2019 7:16 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Chandana Kalluri <ckalluri@xilinx.com>
+> Subject: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor recipe to meta-oe/recipes-support
+>
+> This commit c245374fafbc4769e0c98ae18ac9ff71f9f14169 places ace-cloud-editor recipe in an incorrect location. This commit moves the recipe to the right location.
+> ---
+>  .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ++++++++++++++++++++++
+>  .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ----------------------
+>  2 files changed, 22 insertions(+), 22 deletions(-)  create mode 100644 meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+>  delete mode 100644 recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+>
+> diff --git a/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+> new file mode 100644
+> index 0000000..4ea6c8a
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION = "Ace is a code editor written in JavaScript."
+> +SUMMARY = "Ace is a code editor written in JavaScript. This repository has only generated files"
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=794d11c5219c59c9efa2487c2b4066b2"
+> +
+> +SRC_URI = "git://github.com/ajaxorg/ace-builds.git;protocol=https"
+> +
+> +PV = "02.07.17+git${SRCPV}"
+> +SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
+> +
+> +FILES_${PN} = "${datadir}/ace-builds"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS += "rsync-native"
+> +
+> +do_install () {
+> +    install -d ${D}/${datadir}/ace-builds/src-noconflict
+> +    rsync -r --exclude=".*" ${S}/src-noconflict/*
+> +${D}/${datadir}/ace-builds/src-noconflict
+> +}
+> +
+> diff --git a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb b/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+> deleted file mode 100644
+> index 4ea6c8a..0000000
+> --- a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -DESCRIPTION = "Ace is a code editor written in JavaScript."
+> -SUMMARY = "Ace is a code editor written in JavaScript. This repository has only generated files"
+> -
+> -LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=794d11c5219c59c9efa2487c2b4066b2"
+> -
+> -SRC_URI = "git://github.com/ajaxorg/ace-builds.git;protocol=https"
+> -
+> -PV = "02.07.17+git${SRCPV}"
+> -SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
+> -
+> -FILES_${PN} = "${datadir}/ace-builds"
+> -
+> -S = "${WORKDIR}/git"
+> -
+> -DEPENDS += "rsync-native"
+> -
+> -do_install () {
+> -    install -d ${D}/${datadir}/ace-builds/src-noconflict
+> -    rsync -r --exclude=".*" ${S}/src-noconflict/* ${D}/${datadir}/ace-builds/src-noconflict
+> -}
+> -
+> --
+> 2.7.4
+>
 
