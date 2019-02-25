@@ -1,52 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 96EDE7C8DB
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com
+	[209.85.166.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 49A2660017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 19:06:17 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id y140so6006905qkb.9
+	Mon, 25 Feb 2019 19:46:13 +0000 (UTC)
+Received: by mail-io1-f54.google.com with SMTP id p18so8503586ioh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 11:06:19 -0800 (PST)
+	Mon, 25 Feb 2019 11:46:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=qCZugwzwZPc2WFoqoTQc4R/AC66Y6OpMuR1Q+7eZPgw=;
-	b=Z1hJFlPvrtMFYqw3BEEMHBITTXUBbBcPdf+65G+bIGAW/ELsx4dlZ+lEsXqen+4FZ1
-	repzr/DY1CVPmZfRmQitn0YhJU153L9fJb9frPC8B3KDM4yNClfdqlfF6ojcOZUgM12o
-	3ZXBLEy0Mt/kFoMj3dnYPHxiVx3etNB2h1mt0HpiOaD9zzaxG2syLHDk4ZENJpqeLK72
-	+uPIOPROe2Wqn6jlTAA47gosCg3X7Bzd4VFjFLOWumAGkdwO25LO0e6LeBr8ibOnn/B7
-	lOeAytEl8OU24WpjBjh/z9K7dnRtTOBbDtsiVjczixjzsKwjM0OZKD2ruBYC+7JIyO/+
-	ozDA==
+	:cc; bh=t4LjiXnHUVBVZPsBWcJI7gScYoQq+kPXPVDhZbS0OX4=;
+	b=Z3bQ+5MLAd5mGzYqKgBP2e3sH1A/TaKQeeQCL9WJp1KooOnQ/E/FiIgoeFmnNfSPO+
+	RncpICXpNA2QhFBwydqtE/d5Uq0tEnTDVPNyGof3I7KEMqeR3NzQgnt9k+2s1WzblIin
+	iRIFqMohJcUMGD0NNIoiN2FPIUhCFTHGWnBSBA7r+vhQYqwMr/v2omhksckDojeYbaWh
+	86Q7U+QwJO3I9WUjq4NBB64AO7vdP5vZgUQZKA29tsyTKm+RpmQzVwlOLxP9oL7qyb3S
+	0tLN712cxnDBFjndh+ZUo1hruLk/GhjGITNX9usFI2l9IS+hgymNSgV+fHttuBcLsks1
+	FnZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=qCZugwzwZPc2WFoqoTQc4R/AC66Y6OpMuR1Q+7eZPgw=;
-	b=UtG6X1qGq4tqs9yyG4YoYS2qfk9jbgQMKraXHPHQSJ6gXJ46wF9pdadj+aUCfru9sf
-	/SB2hSj1l5Li/FmZcnnnQUn4djTBoG5OGKp4SyuwsJ7a0UOCh4g86tUUCgCeA7Tr4vCX
-	nMOjjQQz8qTS4f/nr7K5ZD5fzk52WS6pEPT3XRKpvcva04Wyx7IIPtYg1mE9a/sCg9WB
-	6yzo72EgauUPmwH+mjxhoCBMU5rxKJD1TryCAsxt2bfZgXxd5aCWVSFj3biiGGHLQIWV
-	ynp+t2dh+mR6W3kpDWmwmsT744vAmL9wfZtASVA18GLObmzuF4lnILwGeIEh8yQRIMSc
-	IzQQ==
-X-Gm-Message-State: AHQUAubCf1VWqJU7nmnZMsOuRxqEZaJPFdehkD6YGaYTgg0Ox3EBz4wr
-	ajp7VoJiBevWM3bAtY1akuTIVQSPJUxY6PYrJhk=
-X-Google-Smtp-Source: AHgI3IZNO/3N7L4HahBiAG7B5aHONspXpKE/sZ+OOfhGSUGdw8CAExi+xmhxKehXCh2aUdA/vB/7l+2f+7Lry1jcf54=
-X-Received: by 2002:a37:a7ca:: with SMTP id
-	q193mr14213750qke.102.1551121578453; 
-	Mon, 25 Feb 2019 11:06:18 -0800 (PST)
+	bh=t4LjiXnHUVBVZPsBWcJI7gScYoQq+kPXPVDhZbS0OX4=;
+	b=hb4H1fYcUtVxgYPBDPf7pKpRX8Q7/1sfZinsbD1TS2IkFQjhxlbc5WwYSG21+52nC/
+	65Rre8XahzWW6qwOZqRE66QFFrb+PUqaXea7F3MTTTNk3MyyaumfqBCp1EnzvvKRUfxy
+	L2Y9Tmxn8z99OtRWncjLGiOgKHq1lvCUt3A5gzSRlTx9DqozfYAv5hfq6b9Mn5M2WN0n
+	vc9fSobG6jeAWLsWpwTQiEc2OvbaAYTbL50tnqbhWivZk6OHrOGVNKn1mpjzqKRk9aLa
+	OnCCPAgq7zWduuk3CZZgsoqWwfl6cGCh/RuD1gg8irla2s2uAwnVHRsx/AgzMBjmA7tn
+	hfJQ==
+X-Gm-Message-State: AHQUAuYlWODb13tx9M0qqiwpTLHKiD2R9DXi0X0dr0AeV3bVnFME4mer
+	jQJJ5wzYXxRKAaaxPV8awQcmetmLYnVZjhbiwiE=
+X-Google-Smtp-Source: AHgI3IbXcI7MMWGnGZR9UguZDQajTHzpqWFBWJssqvtakeeWU7j0EFJDeaB8l+c1/w29RvZOXgDbiX4luqlg7OxGNjw=
+X-Received: by 2002:a6b:7108:: with SMTP id q8mr10374645iog.7.1551123974175;
+	Mon, 25 Feb 2019 11:46:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20190225140010.19025-1-otavio@ossystems.com.br>
-	<CAMKF1sr88He+DDgyaRWdabY8d0xuV5jM8faQgBSeYOCY0zpaYg@mail.gmail.com>
-	<CAJTo0LZFz3mLSROPrV3y09L4ZTSZ5T+uO=8MRKmrReDoLLDf7w@mail.gmail.com>
-	<CAP9ODKroyRVLaK640+UZv2idv3FnZ2NC8hgMqQDQU63f9-QQiA@mail.gmail.com>
-In-Reply-To: <CAP9ODKroyRVLaK640+UZv2idv3FnZ2NC8hgMqQDQU63f9-QQiA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Feb 2019 11:05:52 -0800
-Message-ID: <CAMKF1sqbAFbXdeJTL=gtJU4QzdPwdwEW5R01gpnUx4OhB_YtjQ@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>, 
-	Maxime Borges <maxime.borges@strataggem.com>
-Cc: Meta-OpenEmbedded Mailing listing
+References: <20190225172823.4030-1-michael.davis@essvote.com>
+In-Reply-To: <20190225172823.4030-1-michael.davis@essvote.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 25 Feb 2019 20:46:02 +0100
+Message-ID: <CALbNGRTxkytzRsu4MaB4vy=0k8gEDWytqsaq-6YydBPDhBik6A@mail.gmail.com>
+To: "Davis, Michael" <michael.davis@essvote.com>
+Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
+Subject: Re: [meta-oe][PATCH] plymouth: Update to version 0.9.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,23 +54,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2019 19:06:17 -0000
+X-List-Received-Date: Mon, 25 Feb 2019 19:46:13 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Feb 25, 2019 at 10:38 AM Otavio Salvador
-<otavio.salvador@ossystems.com.br> wrote:
+On Mon, Feb 25, 2019 at 6:28 PM Davis, Michael
+<michael.davis@essvote.com> wrote:
 >
-> On Mon, Feb 25, 2019 at 2:03 PM Burton, Ross <ross.burton@intel.com> wrote:
-> >
-> > The original patch doesn't explain what it's doing and is clearly
-> > going to remove executable bits from directories, which clearly isn't
-> > right.
-> >
-> > I'd say remove it, and *then* if it breaks again fix properly.
+> Signed-off-by: Michael Davis <michael.davis@essvote.com>
+> ---
+>  .../0002-Fix-build-with-glibc-2.28.patch      | 34 -------------------
+>  .../{plymouth_0.9.2.bb => plymouth_0.9.4.bb}  | 10 +++---
+>  2 files changed, 5 insertions(+), 39 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/plymouth/files/0002-Fix-build-with-glibc-2.28.patch
+>  rename meta-oe/recipes-core/plymouth/{plymouth_0.9.2.bb => plymouth_0.9.4.bb} (91%)
 >
-> I am with Ross here. It is a really ugly patch and if need, we need a
-> comment on the code and a proper reason to add it back.
->
+I have tried similar long time ago but plymouth did not work. Did you
+run-test this?
 
-+Maxime for information on the original patch
+Andreas
 
