@@ -1,55 +1,93 @@
-Return-Path: <michael.davis@essvote.com>
-X-Greylist: delayed 900 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 25 Feb 2019 17:43:39 UTC
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 879687C719
+Return-Path: <ckalluri@xilinx.com>
+X-Greylist: delayed 21508 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 25 Feb 2019 17:52:17 UTC
+Received: from NAM03-CO1-obe.outbound.protection.outlook.com
+	(mail-eopbgr790040.outbound.protection.outlook.com [40.107.79.40])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B8617CAA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 17:43:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; d=essvote.com; s=omaha.092018;
-	c=relaxed/relaxed; 
-	q=dns/txt; i=@essvote.com; t=1551115719; x=1553707719;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=2ZMcJHpBCSF+ihUEp1sYtH8jW/RRzDl90PDpa62jWII=;
-	b=cdJFDrWSasvOIWa9TE78pLm9EIBH+pHhDXOmbgxu8o/3GHYyFtGY3S9iUm4Urrcx
-	56yhYq8YopyOJJlVRfgzRpw1v4JdlgIIZTUHVnx3jS7pdfz5yYhhshzC68yk4MY5
-	0Ot6U/U4s/uQJPU1eb6tCaqHsvrNLAbPh7kxW758Mpbyi4E9L2kHkLTlagKLU8RB
-	IlpfojPWq2o5MFyHuKfCoRZhnmC6RDRKQEWnS0iluMHXyaPUu+cwR2Z9Ix7xhdzK
-	1CgMYnmhDTWkI8wr3UWK4ve4/6B+uyjQ0EiWWuO4/4dsn5KuYnN1EdqbL1ZYL5v5
-	1xY3BYvUkpB5+KTxQqUvDw==;
-X-AuditID: 0a000213-b09ff70000005a86-14-5c7425c7b514
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	AF.2E.23174.7C5247C5; Mon, 25 Feb 2019 11:28:39 -0600 (CST)
-Received: from ESS-EX01.essvote.corp.local ([fe80::b1d4:5b04:bc85:956e]) by
-	ESS-EX01.essvote.corp.local ([fe80::b1d4:5b04:bc85:956e%16]) with mapi
-	id 14.03.0301.000; Mon, 25 Feb 2019 11:28:39 -0600
-From: "Davis, Michael" <michael.davis@essvote.com>
+	Mon, 25 Feb 2019 17:52:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=5057hHql+0JCaP5Rz8w7TdI653X/kdsFtts5RIkz0cY=;
+	b=NabM74iFlY2R8VPlo7jqWFuuJYMwhQ5MMsq+Ib3GZlzClrmhcF5wRz+//aKOVteZEabFtMGBjIOF+op2WOVSLQmm4+V1RNtyuDBoMskY7VChOH3QMT3MSJgVmQ+cfqsxyWB6IJ/YD63YCPOrSJAMz1wvg2AgvoG5a9dDKvfrqKo=
+Received: from MWHPR02MB2576.namprd02.prod.outlook.com (10.168.205.142) by
+	MWHPR02MB2848.namprd02.prod.outlook.com (10.175.50.135) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1643.16; Mon, 25 Feb 2019 01:21:32 +0000
+Received: from MWHPR02MB2576.namprd02.prod.outlook.com
+	([fe80::1507:8ac:7899:47b2]) by MWHPR02MB2576.namprd02.prod.outlook.com
+	([fe80::1507:8ac:7899:47b2%6]) with mapi id 15.20.1643.019;
+	Mon, 25 Feb 2019 01:21:32 +0000
+From: Chandana Kalluri <ckalluri@xilinx.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] plymouth: Update to version 0.9.4
-Thread-Index: AQHUzS+K26r+GlOmQkmWUAnekV8NMw==
-Date: Mon, 25 Feb 2019 17:28:37 +0000
-Message-ID: <20190225172823.4030-1-michael.davis@essvote.com>
+Thread-Topic: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor
+	recipe to meta-oe/recipes-support
+Thread-Index: AQHUxNzc9ZP55llv2EyjWGDQNDr3Y6XvxoiA
+Date: Mon, 25 Feb 2019 01:21:32 +0000
+Message-ID: <MWHPR02MB2576AFB4217110298F064C3CB07A0@MWHPR02MB2576.namprd02.prod.outlook.com>
+References: <1550200574-9614-1-git-send-email-chandana.kalluri@xilinx.com>
+In-Reply-To: <1550200574-9614-1-git-send-email-chandana.kalluri@xilinx.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.20.120]
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=ckalluri@xilinx.com; 
+x-originating-ip: [69.181.219.205]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: b78fdcf0-2e04-43cf-9529-08d69abf93af
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600110)(711020)(4605104)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR02MB2848; 
+x-ms-traffictypediagnostic: MWHPR02MB2848:
+x-microsoft-exchange-diagnostics: =?us-ascii?Q?1; MWHPR02MB2848;
+	23:03jmh1Y2aB2ISkC4Q8u76PKemIQT6a3Gw4u5o0YGR?=
+	=?us-ascii?Q?EGTn74so74GjaysML6IsifZdejOGg7uFOlr9udEAhlJGTHZXOeURcMqAUXcy?=
+	=?us-ascii?Q?1WHxJilxlDE3V6HEjFFMRXPkIz24VzDk5zqM8KyCeGmsnE8kwTJQTAuYrbA8?=
+	=?us-ascii?Q?pIDq7568FML+9V3DwojzOrcOr5GuF+lt9JfBKJ+9yL2AUmPIPmPj/K+8foQ0?=
+	=?us-ascii?Q?IyqpFpfBO75thVkZEDlqVF7m3JbLkN1mJHl6TaeX8A8F46+t33Pbdp1Zxp8c?=
+	=?us-ascii?Q?FzfKiML0JUjl1lpQ/KhEhPKa0Z97IlYtXyYhDqPwS9//ts1Z+bWdGJlhzhfB?=
+	=?us-ascii?Q?JX+syfEE8pT1jo++1Cm8U/M9/Qey3rytJsPE11dPhF78F6OLA7fo/RvpI0T3?=
+	=?us-ascii?Q?8bWxr/+MWuzMjGFrIFKxfubU5tLVRw5t8DEdqxvwxO+uYK5yufqRW8JgxgDe?=
+	=?us-ascii?Q?P/VnyiyfjYdh2ofetks+kDm08/2MkXx08EpNTd8rkVuSUhsWC1HtBJ3cIqp+?=
+	=?us-ascii?Q?C/u9+1Xq/rdWhdKOXgRl6iTTyPH+bChHbmkhTDgyy+CGwj225DhkZwaY5AC6?=
+	=?us-ascii?Q?aLgqExT1jVE1gOnOLoNARBVI3VxkudDiqDT1g8KV5INt5zhbZr0FRcC6iYBK?=
+	=?us-ascii?Q?CoWIBACiaO6/F5L9SkikMpGH/d9wwtpI8PXQLHtxkBhJTazoRahU+Nep7vMx?=
+	=?us-ascii?Q?GxGUGV44c84LnQmmPTw0Se1Baxr211O+rGYjGLCZGuCqccGutaoT6E2HK8vs?=
+	=?us-ascii?Q?AvH1I7w6wDC4tQgQ2y1d46svftU1H24vjlt2XBB0p3a0v6xnMuzNKXCAeNCY?=
+	=?us-ascii?Q?2Rjcmi95BJJ8lWFWudUjvwtKlW1DCNTIRKfa4znxViQhWWlwkwLGyrROvWF6?=
+	=?us-ascii?Q?Y1fenozOZni42vKBAEv5YsARhM101JU/cYRODQrEkLoB9XZmEFEAIqe7OXfn?=
+	=?us-ascii?Q?vH5Zhubw4wcX+6dpGdtuSE6C4PWPoZ8U/FzV+SoyZrvPn6HSQbWrg5YUvc8I?=
+	=?us-ascii?Q?tgUO6iJBImU9gWwC+ZACTlrYHkzJnqjCtlJlP5pVLkSQB2AeyhSFmQlWc0H1?=
+	=?us-ascii?Q?ulp0g6TfJpZO5kbTAkTaqst8FlIBKCNV6jAWLabKSthC3Djy+3xUOZb0oexS?=
+	=?us-ascii?Q?yDqFCyMjs/o/KuSEtgQn9z1Y30qPY7jA80rurO4D9WxzJ+nQ4V9NK5d70U6c?=
+	=?us-ascii?Q?f9ULPFfXFfbas/dBhW83pxqIxd1R8vOtXoOwW7sgFn4ZnwAEYAXMV1mJAT9y?=
+	=?us-ascii?Q?w3Gm490md+mh/eALkMUqRL3NpOLUnBQICENb96Ii5vd4Hb29iKvji+lJWrDf?=
+	=?us-ascii?Q?AmgHPQNYs5vz2ZUPIUSMM0=3D?=
+x-microsoft-antispam-prvs: <MWHPR02MB2848BEFB6985F8E07A8FB9A0B07A0@MWHPR02MB2848.namprd02.prod.outlook.com>
+x-forefront-prvs: 095972DF2F
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(396003)(136003)(366004)(376002)(39860400002)(346002)(13464003)(189003)(199004)(25786009)(86362001)(7736002)(106356001)(305945005)(105586002)(186003)(8936002)(316002)(99286004)(74316002)(2351001)(4326008)(14444005)(33656002)(256004)(6246003)(52536013)(97736004)(5660300002)(229853002)(7696005)(14454004)(76176011)(6916009)(2906002)(53546011)(446003)(6116002)(3846002)(6436002)(478600001)(486006)(5640700003)(6506007)(11346002)(66066001)(102836004)(476003)(71190400001)(71200400001)(81166006)(55016002)(26005)(8676002)(81156014)(9686003)(2501003)(53936002)(68736007);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:MWHPR02MB2848;
+	H:MWHPR02MB2576.namprd02.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: xilinx.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: oRfqvGcZ0mopkBnWvD2yILjN/hUNs0bRx3DGucev8M6U1R5bjsH+N45yNdoX/5Ax5zzLGuAWFNPMQVLFeRswi0RsVZMIvv1pD63H18T4FhDYjy0X7dGYma3KIJd1CEaLx0Z0L6KbM/D1R1bEvWr8m+T6HisczJJDXpd/lItlfI5OXZDrlTMZJmuCcfZSJlMQbmBXYVLxxZ9qltbCgI6u21meuS3th4VHTjQ9gKkUhlmFfES2UoZAWK5xWgCy/DePQqKWLq+7uVOqZ5+RduAO40O0ta5PDNLnsrJ5uVRyiRCMyN0q9Rt+HmF23+MTfbxpkSHPh/Hse3K5qTGJm4hgdPJ6sLFipKAS6wCRpFU27PAxA8ZdiwOLAT5azutbS9GRaHuju2vJtkvCDimbqIKTkWKAGl2yL0q0HyCPXxPqmtA=
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHLMWRmVeSWpSXmKPExsWyRiBPQ/e4akmMwaOlJhYXDy9ltrj54Buz
-	A5PHzll32T3ObVzBGMAUxWWTkpqTWZZapG+XwJXxe4pbwRWFimX77jI2ML6Q72Lk5JAQMJF4
-	0tnD3MXIxSEkcIJR4uLt2SwQzklGif2nTrCAVLEJGEmcu76JEcQWEYiVmLdpJhOIzSyQJ3Hs
-	3lE2EFtYwFqi/d4OoEkcQDUOEss/5kGU60nMfTgJrJxFQFVi58ap7CAlvAK2Es9WlIOEGQXE
-	JL6fWgM1UVzi1pP5TBC3CUgs2XOeGcIWlXj5+B8rhC0v0banmRFkDLOApsT6XfoQrVYS7w8e
-	ZoGwFSWmdD9kB7F5BQQlTs58wjKBUWQWkg2zELpnIemehaR7FpLuBYysqxgFcxMzcwz1UouL
-	y/JLUvWS83M3MQLjgouBSXgH44IZsYcYBTgYlXh4RYRLYoRYE8uKK3MPMUpzsCiJ87bw5cQI
-	CaQnlqRmp6YWpBbFF5XmpBYfYmTi4AQRXFINjJxOodeFqtqnsHXwypSopzsfcau9qbeO9Ueb
-	ydx7fK2vZ+59OP8rt/+cK0xNLZVr1Cdrqa4v655a8mXRh4sNOuahc7jn/L3KMmsWm0vBiuWp
-	nhmHfh8XPz+DIV1pxf5jmqcX/1EoOHby4hXdIIVPt424u48yvNcp2RJ41uump5rMwQiZo3f3
-	LVViKc5INNRiLipOBADG09jicQIAAA==
-Subject: [meta-oe][PATCH] plymouth: Update to version 0.9.4
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b78fdcf0-2e04-43cf-9529-08d69abf93af
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Feb 2019 01:21:32.5932 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR02MB2848
+Subject: Re: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor recipe to meta-oe/recipes-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,64 +100,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2019 17:43:40 -0000
+X-List-Received-Date: Mon, 25 Feb 2019 17:52:17 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <046A36D78B913848A52480950B81F606@essvote.com>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-U2lnbmVkLW9mZi1ieTogTWljaGFlbCBEYXZpcyA8bWljaGFlbC5kYXZpc0Blc3N2b3RlLmNvbT4N
-Ci0tLQ0KIC4uLi8wMDAyLUZpeC1idWlsZC13aXRoLWdsaWJjLTIuMjgucGF0Y2ggICAgICB8IDM0
-IC0tLS0tLS0tLS0tLS0tLS0tLS0NCiAuLi4ve3BseW1vdXRoXzAuOS4yLmJiID0+IHBseW1vdXRo
-XzAuOS40LmJifSAgfCAxMCArKystLS0NCiAyIGZpbGVzIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygr
-KSwgMzkgZGVsZXRpb25zKC0pDQogZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1j
-b3JlL3BseW1vdXRoL2ZpbGVzLzAwMDItRml4LWJ1aWxkLXdpdGgtZ2xpYmMtMi4yOC5wYXRjaA0K
-IHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMtY29yZS9wbHltb3V0aC97cGx5bW91dGhfMC45LjIuYmIg
-PT4gcGx5bW91dGhfMC45LjQuYmJ9ICg5MSUpDQoNCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lw
-ZXMtY29yZS9wbHltb3V0aC9maWxlcy8wMDAyLUZpeC1idWlsZC13aXRoLWdsaWJjLTIuMjgucGF0
-Y2ggYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9wbHltb3V0aC9maWxlcy8wMDAyLUZpeC1idWlsZC13
-aXRoLWdsaWJjLTIuMjgucGF0Y2gNCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggODYz
-OGY3NWIzLi4wMDAwMDAwMDANCi0tLSBhL21ldGEtb2UvcmVjaXBlcy1jb3JlL3BseW1vdXRoL2Zp
-bGVzLzAwMDItRml4LWJ1aWxkLXdpdGgtZ2xpYmMtMi4yOC5wYXRjaA0KKysrIC9kZXYvbnVsbA0K
-QEAgLTEsMzQgKzAsMCBAQA0KLUZyb20gMGMwMzQ1MzAzYjc5NzFkNmNlYzQ3OGZkOGI4MWQ2NGJj
-MWZiZTBmNiBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDENCi1Gcm9tOiA9P1VURi04P3E/QW5kcmVh
-cz0yME09QzM9QkNsbGVyPz0gPHNjaG5pdHplbHRvbnlAZ21haWwuY29tPg0KLURhdGU6IFR1ZSwg
-MjEgQXVnIDIwMTggMjM6MjY6NDUgKzAyMDANCi1TdWJqZWN0OiBbUEFUQ0hdIEZpeCBidWlsZCB3
-aXRoID49IGdsaWJjIDIuMjgNCi1NSU1FLVZlcnNpb246IDEuMA0KLUNvbnRlbnQtVHlwZTogdGV4
-dC9wbGFpbjsgY2hhcnNldD1VVEYtOA0KLUNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQN
-Ci0NCi1TdG9sZW4gZnJvbSBbMV0NCi0NCi1bMV0gaHR0cHM6Ly9idWdzLmZyZWVkZXNrdG9wLm9y
-Zy9zaG93X2J1Zy5jZ2k/aWQ9MTAyMTkxDQotDQotVXBzdHJlYW0tU3RhdHVzOiBQZW5kaW5nDQot
-DQotU2lnbmVkLW9mZi1ieTogQW5kcmVhcyBNw7xsbGVyIDxzY2huaXR6ZWx0b255QGdtYWlsLmNv
-bT4NCi0tLS0NCi0gc3JjL2xpYnBseS1zcGxhc2gtY29yZS9wbHktdGVybWluYWwuYyB8IDEgKw0K
-LSAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykNCi0NCi1kaWZmIC0tZ2l0IGEvc3JjL2xp
-YnBseS1zcGxhc2gtY29yZS9wbHktdGVybWluYWwuYyBiL3NyYy9saWJwbHktc3BsYXNoLWNvcmUv
-cGx5LXRlcm1pbmFsLmMNCi1pbmRleCBhMDk1NGYyLi5mM2IzMmZlIDEwMDY0NA0KLS0tLSBhL3Ny
-Yy9saWJwbHktc3BsYXNoLWNvcmUvcGx5LXRlcm1pbmFsLmMNCi0rKysgYi9zcmMvbGlicGx5LXNw
-bGFzaC1jb3JlL3BseS10ZXJtaW5hbC5jDQotQEAgLTMyLDYgKzMyLDcgQEANCi0gI2luY2x1ZGUg
-PHN5cy9zb2NrZXQuaD4NCi0gI2luY2x1ZGUgPHN5cy9zdGF0Lmg+DQotICNpbmNsdWRlIDxzeXMv
-dHlwZXMuaD4NCi0rI2luY2x1ZGUgPHN5cy9zeXNtYWNyb3MuaD4NCi0gI2luY2x1ZGUgPHRlcm1p
-b3MuaD4NCi0gI2luY2x1ZGUgPHVuaXN0ZC5oPg0KLSAjaW5jbHVkZSA8d2NoYXIuaD4NCi0tLSAN
-Ci0yLjE0LjQNCi0NCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9wbHltb3V0aC9w
-bHltb3V0aF8wLjkuMi5iYiBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL3BseW1vdXRoL3BseW1vdXRo
-XzAuOS40LmJiDQpzaW1pbGFyaXR5IGluZGV4IDkxJQ0KcmVuYW1lIGZyb20gbWV0YS1vZS9yZWNp
-cGVzLWNvcmUvcGx5bW91dGgvcGx5bW91dGhfMC45LjIuYmINCnJlbmFtZSB0byBtZXRhLW9lL3Jl
-Y2lwZXMtY29yZS9wbHltb3V0aC9wbHltb3V0aF8wLjkuNC5iYg0KaW5kZXggYTViMTZjOTc5Li4z
-MDU5NzdlNWUgMTAwNjQ0DQotLS0gYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9wbHltb3V0aC9wbHlt
-b3V0aF8wLjkuMi5iYg0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvcGx5bW91dGgvcGx5bW91
-dGhfMC45LjQuYmINCkBAIC0xNywxMiArMTcsMTIgQEAgUFJPVklERVMgPSAidmlydHVhbC9wc3Bs
-YXNoIg0KIFJQUk9WSURFU18ke1BOfSA9ICJ2aXJ0dWFsLXBzcGxhc2ggdmlydHVhbC1wc3BsYXNo
-LXN1cHBvcnQiDQogDQogU1JDX1VSSSA9ICIgXA0KLSAgICBodHRwOi8vd3d3LmZyZWVkZXNrdG9w
-Lm9yZy9zb2Z0d2FyZS9wbHltb3V0aC9yZWxlYXNlcy8ke0JQTn0tJHtQVn0udGFyLmJ6MiBcDQor
-ICAgIGh0dHA6Ly93d3cuZnJlZWRlc2t0b3Aub3JnL3NvZnR3YXJlL3BseW1vdXRoL3JlbGVhc2Vz
-LyR7QlBOfS0ke1BWfS50YXIueHogXA0KICAgICBmaWxlOi8vMDAwMS1NYWtlLWZ1bGwtcGF0aC10
-by1zeXN0ZW1kLXR0eS1hc2stcGFzc3dvcmQtYWdlbnQtY29uLnBhdGNoIFwNCi0gICAgZmlsZTov
-LzAwMDItRml4LWJ1aWxkLXdpdGgtZ2xpYmMtMi4yOC5wYXRjaCBcDQotIg0KLVNSQ19VUklbbWQ1
-c3VtXSA9ICJmZjQyMDk5NGRlYjdlYTIwM2RmNjc4ZGY5MmU3YWI3ZCINCi1TUkNfVVJJW3NoYTI1
-NnN1bV0gPSAiMmYwY2U4MjA0MmNmOWM3ZWFkZDI1MTdhMWY3NGM4YTg1ZmE4Njk5NzgxZDlmMjk0
-YTA2ZWFkZTI5ZmJlZDU3ZiINCisgICAgICAgICINCisNCitTUkNfVVJJW21kNXN1bV0gPSAiNGVm
-YTU1NTFkMjMwMTY1OTgxYjEwNWU3YzZhNTBhYTciDQorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjRh
-MTk3YTRmMWEwNTc4NWQ3NDUzZGQ4MjliMjMxMzUyZmIyZDA5MTcxYmQ4NmM1ZmZhYWZiYjJkZDY3
-OTEzNTEiDQogDQogRVhUUkFfT0VDT05GICs9ICIgLS1lbmFibGUtc2hhcmVkIC0tZGlzYWJsZS1z
-dGF0aWMgLS1kaXNhYmxlLWd0ayAtLWRpc2FibGUtZG9jdW1lbnRhdGlvbiBcDQogICAgIC0td2l0
-aC1sb2dvPSR7TE9HT30gXA0KLS0gDQoyLjIwLjENCg==
+Ping
+
+-----Original Message-----
+From: Sai Hari Chandana Kalluri <chandana.kalluri@xilinx.com>=20
+Sent: Thursday, February 14, 2019 7:16 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Chandana Kalluri <ckalluri@xilinx.com>
+Subject: [meta-oe][master][PATCH] ace-cloud-editor: move ace-cloud-editor r=
+ecipe to meta-oe/recipes-support
+
+This commit c245374fafbc4769e0c98ae18ac9ff71f9f14169 places ace-cloud-edito=
+r recipe in an incorrect location. This commit moves the recipe to the righ=
+t location.
+---
+ .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ++++++++++++++++++=
+++++
+ .../ace-cloud-editor/ace-cloud-editor_git.bb       | 22 ------------------=
+----
+ 2 files changed, 22 insertions(+), 22 deletions(-)  create mode 100644 met=
+a-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+ delete mode 100644 recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+
+diff --git a/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.=
+bb b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+new file mode 100644
+index 0000000..4ea6c8a
+--- /dev/null
++++ b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION =3D "Ace is a code editor written in JavaScript."
++SUMMARY =3D "Ace is a code editor written in JavaScript. This repository h=
+as only generated files"
++
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D794d11c5219c59c9efa2487c2b4066b=
+2"
++
++SRC_URI =3D "git://github.com/ajaxorg/ace-builds.git;protocol=3Dhttps"
++
++PV =3D "02.07.17+git${SRCPV}"
++SRCREV =3D "812e2c56aed246931a667f16c28b096e34597016"
++
++FILES_${PN} =3D "${datadir}/ace-builds"
++
++S =3D "${WORKDIR}/git"
++
++DEPENDS +=3D "rsync-native"
++
++do_install () {
++    install -d ${D}/${datadir}/ace-builds/src-noconflict
++    rsync -r --exclude=3D".*" ${S}/src-noconflict/*=20
++${D}/${datadir}/ace-builds/src-noconflict
++}
++
+diff --git a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb b/recip=
+es-utils/ace-cloud-editor/ace-cloud-editor_git.bb
+deleted file mode 100644
+index 4ea6c8a..0000000
+--- a/recipes-utils/ace-cloud-editor/ace-cloud-editor_git.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION =3D "Ace is a code editor written in JavaScript."
+-SUMMARY =3D "Ace is a code editor written in JavaScript. This repository h=
+as only generated files"
+-
+-LICENSE =3D "BSD-3-Clause"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D794d11c5219c59c9efa2487c2b4066b=
+2"
+-
+-SRC_URI =3D "git://github.com/ajaxorg/ace-builds.git;protocol=3Dhttps"
+-
+-PV =3D "02.07.17+git${SRCPV}"
+-SRCREV =3D "812e2c56aed246931a667f16c28b096e34597016"
+-
+-FILES_${PN} =3D "${datadir}/ace-builds"
+-
+-S =3D "${WORKDIR}/git"
+-
+-DEPENDS +=3D "rsync-native"
+-
+-do_install () {
+-    install -d ${D}/${datadir}/ace-builds/src-noconflict
+-    rsync -r --exclude=3D".*" ${S}/src-noconflict/* ${D}/${datadir}/ace-bu=
+ilds/src-noconflict
+-}
+-
+--
+2.7.4
+
 
