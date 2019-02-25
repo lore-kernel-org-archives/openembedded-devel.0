@@ -1,27 +1,25 @@
-Return-Path: <Fang.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EF6B7C168
+Return-Path: <jma1@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EABC6C17F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 01:59:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1P1xgER012104
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 24 Feb 2019 17:59:42 -0800 (PST)
-Received: from [0.0.0.0] (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.435.0;
-	Sun, 24 Feb 2019 17:59:42 -0800
-To: Richard Leitner <richard.leitner@skidata.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
-	<cee583cc-c120-8198-8322-d917f6ae1266@skidata.com>
-From: "Jia, Fang" <fang.jia@windriver.com>
-Message-ID: <1fe84823-ee0b-e93d-f004-e6cc8905eb12@windriver.com>
-Date: Mon, 25 Feb 2019 10:05:25 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+	Mon, 25 Feb 2019 08:18:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1P8IYfc010149
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Feb 2019 00:18:34 -0800 (PST)
+Received: from pek-lpggp2 (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
+	Mon, 25 Feb 2019 00:18:33 -0800
+Received: by pek-lpggp2 (Postfix, from userid 20544)	id 16B93720A72; Mon, 25
+	Feb 2019 16:01:05 +0800 (CST)
+From: Jiping Ma <jiping.ma2@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Feb 2019 16:01:01 +0800
+Message-ID: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <cee583cc-c120-8198-8322-d917f6ae1266@skidata.com>
-Subject: Re: [PATCH 1/2] Revert "base-files: Define JAVA_HOME by default"
+Subject: [meta-oe][PATCH] lvm2: lvmdiskscan always print out "/dev/hdc: open failed: No medium found".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +32,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2019 01:59:43 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 Feb 2019 08:18:33 -0000
+Content-Type: text/plain
 
-Hi,
-Thank you so much.
-Next time will do as your instruction definitely. Thanks again.
+commit [57bb46c5e7f8] introduce this issue.
+"/dev/hdc: open failed: No medium found" will be print out
+after run lvmdiskscan. change dev_open_readonly()
+to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
 
-Regards,
-Fang
+Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
+---
+ ...n-failed-No-medium-found-will-print-out-i.patch | 32 ++++++++++++++++++++++
+ meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb       |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
 
-On 22/02/2019 16:52, Richard Leitner wrote:
-> Hi,
-> thanks for the patch. Looks good to me now.
-> I'll add it to my tests and will give feedback.
-> 
-> Nonetheless things to improve for your next contribution:
->  a) Please add [meta-java] to the subject
->  b) Please version the patchset when it updates an existing one
->     on the mailinglist
-> 
-> Therefore the correct subject prefix for this patchset would have been:
->  [oe][meta-java][PATCH V2 1/2]
-> 
-> No problem for this one as I found it, but please keep an eye on that for the
-> next time. Thanks.
-> 
-> regards;Richard.L
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
+new file mode 100644
+index 0000000..24d5b1b
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch
+@@ -0,0 +1,32 @@
++From 93c93e3b85492e58f9451841e6079d00c497efa4 Mon Sep 17 00:00:00 2001
++From: Jiping Ma <jiping.ma2@windriver.com>
++Date: Mon, 25 Feb 2019 13:29:12 +0800
++Subject: [PATCH] "/dev/hdc: open failed: No medium found" will print out in
++ lvmdiskscan.
++
++commit [57bb46c5e7f8] introduce this issue.
++"/dev/hdc: open failed: No medium found" will be print out
++after run lvmdiskscan. change dev_open_readonly()
++to dev_open_readonly_quiet() in fuction _dev_get_size_dev().
++
++Signed-off-by: Jiping Ma <jiping.ma2@windriver.com>
++---
++ lib/device/dev-io.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/lib/device/dev-io.c b/lib/device/dev-io.c
++index dc95131..81a66b0 100644
++--- a/lib/device/dev-io.c
+++++ b/lib/device/dev-io.c
++@@ -338,7 +338,7 @@ static int _dev_get_size_dev(struct device *dev, uint64_t *size)
++ 	}
++ 
++ 	if (fd <= 0) {
++-		if (!dev_open_readonly(dev))
+++		if (!dev_open_readonly_quiet(dev))
++ 			return_0;
++ 		fd = dev_fd(dev);
++ 		do_close = 1;
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
+index c38c381..0df624b 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
+@@ -4,6 +4,7 @@ SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
+ 
+ SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch \
+             file://0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch \
++	    file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
+            "
+ 
+ DEPENDS += "autoconf-archive-native"
+-- 
+1.9.1
+
 
