@@ -1,25 +1,27 @@
 Return-Path: <jma1@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EABC6C17F
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 03D746C17F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 08:18:33 +0000 (UTC)
+	Mon, 25 Feb 2019 08:18:34 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1P8IYfc010149
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1P8IZh4016496
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 00:18:34 -0800 (PST)
+	Mon, 25 Feb 2019 00:18:35 -0800 (PST)
 Received: from pek-lpggp2 (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.435.0;
-	Mon, 25 Feb 2019 00:18:33 -0800
-Received: by pek-lpggp2 (Postfix, from userid 20544)	id 16B93720A72; Mon, 25
-	Feb 2019 16:01:05 +0800 (CST)
+	Mon, 25 Feb 2019 00:18:35 -0800
+Received: by pek-lpggp2 (Postfix, from userid 20544)	id D6CA7720A72; Mon, 25
+	Feb 2019 16:01:06 +0800 (CST)
 From: Jiping Ma <jiping.ma2@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Feb 2019 16:01:01 +0800
-Message-ID: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
+Date: Mon, 25 Feb 2019 16:01:02 +0800
+Message-ID: <1551081662-134703-2-git-send-email-jiping.ma2@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
+References: <1551081662-134703-1-git-send-email-jiping.ma2@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] lvm2: lvmdiskscan always print out "/dev/hdc: open failed: No medium found".
+Subject: [PATCH] lvm2: lvmdiskscan always print out "/dev/hdc: open failed: No medium found".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2019 08:18:33 -0000
+X-List-Received-Date: Mon, 25 Feb 2019 08:18:35 -0000
 Content-Type: text/plain
 
 commit [57bb46c5e7f8] introduce this issue.
