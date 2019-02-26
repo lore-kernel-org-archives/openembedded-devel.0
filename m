@@ -1,50 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B8BB7CBA2
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 810417C70C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2019 18:15:18 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id c2so7461105qkb.3
+	Tue, 26 Feb 2019 18:17:20 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id y4so15991182qtc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2019 10:15:19 -0800 (PST)
+	Tue, 26 Feb 2019 10:17:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=XMLYsok+JDhTPUIC8d7aWTxzFo3LPE/7WYGv24fo+gM=;
-	b=THk5tv9+MzEHD72ctZ74R2H54zkMHd/UsP3Z8zWfoJvhkD+XbvrI4/inwOyFxC6JlA
-	QEhZj9zbQ4mxlY3+TJ++9p4wEXFPvQtxjBsWf1Bfd7A3dHGfBPCQ89OkW8lTa++jHfia
-	S0ws6ozju0OnlqFbqPJi9FmxzT/2VfzPh9hJ65ouPdkeS7TuoBMofCBb/83iDHOkuKB2
-	liKAOZZKIl6VLxYJ0imSlISARIBAbtGBIA3uXI+gL3P2bIavE4QE/EIenr3P2r/VDpGX
-	TU+YTXSu1G/21FKR8bkaM2W52o6aUn4xdcMq8QlwQtIBDwnMRobqcPTsoUJ0qOJatOoh
-	vgSw==
+	:cc:content-transfer-encoding;
+	bh=dmTADV6ZmZqzuFi1OjA7YETpYtw9e2k62JxaYF8mnec=;
+	b=dfrKrnaQuOhMKL3TI5EyQ5K/rRr3gKi5pgmXw2SceN0P21V647ikJtUG34zqCh20vN
+	Szboeao6jHLdyb3AJ/pvjJaEwJ6STzahzVoehzGgSRcReLjz9jyq7KGDTLZ8XOXPYtA0
+	isiv5/MRlq9Ky4rd9dKXaMBHB71XpDu6DNqJszvNxWq8kXqjcr/Dwr42MvSwPZSSADVR
+	Q+se+YiZPFDHp0uE5Kzb2/yykQFAwuO3sxNozM+AY/Snq3x8Yk+i+NBVn5SdAYxjMwah
+	4XNErcMKvyOr9rO7R9RH9fKghgnsIptVuP7wptFJ4WCkyDznbsCGzsaNQE4VTixOUG1s
+	50Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=XMLYsok+JDhTPUIC8d7aWTxzFo3LPE/7WYGv24fo+gM=;
-	b=Rf5doIYE3wja9/WvwJFcaCugs6yxwQf6V7CDf9ZHcNNUIvWWLlLltCoAelXy/mToFs
-	Y0EWIeoYB+w8ke9UAkVtkawhcx3B47Ga7nfGRPssQsIyMCl/LEwNU8G/i9r8UEWwSwXx
-	jx2NNHZ+j3EQZnktchhILx/FZG8Ey7ghErr/tTRo/WPAoR8ooZ/h4jCUKSHl5sGDwuJh
-	6iWNkouPTOjnQWNrY2uFM/duhSwbkDSPRSAGD8XE6XOzue2dWqfMHbjXUz+Y3JuZ95f5
-	xEp2rxKaPhU0QhqADMhZAvE7nrP9SiabRf+12beA4Vj3iJCunzmhRENvTMuO417+G6Hq
-	W9nA==
-X-Gm-Message-State: AHQUAubF141EpEZ+/rZfLuDfpiGYlMZED8y4icdTo2nD+vZ2DgPQIy8h
-	NyjPYcvto2K4dGgrC9IJJ/k//hmJQEudBVljhIY=
-X-Google-Smtp-Source: AHgI3IZ7aWhKEP3cWFCruy/DF++hAIPwGJGvxXpyvZow5PDyIGxin6GL0LKDpSKUd8YYHy1Jd7w7k0tefxihZ4eRyao=
-X-Received: by 2002:a37:4c88:: with SMTP id
-	z130mr17797493qka.206.1551204918891; 
-	Tue, 26 Feb 2019 10:15:18 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=dmTADV6ZmZqzuFi1OjA7YETpYtw9e2k62JxaYF8mnec=;
+	b=rgLCCvfw6bOCr8RCFwnOD6Am5cefLHoDledgRNtur4xzTIMgK86/Md2htnCrG9bVZm
+	OODLOAPYmsk2Y/FB4+ueVbNJq7l2WWhJjfe7hU45fKcvxlkL/YoqUxav/gNW8C+UWY+5
+	V0M7vUP+ilHAQZ4JC75rPMQQpBZj9VO0m75EsogHt96x71tBlv25aKiDQmN3QiM8eHkm
+	16c5uAQw9O0gJLOdRt61sqaExyVcBEDp5rPrnW5a29EgRKq/d+dd2oBcQl2gI7aDwKaJ
+	xdgJWPKU2XXqcfiPB5OpB+qoU8u1tNQojok/mgr/YPrC5MvlxRMeVLfuopOgW5YPzkXY
+	Fy1A==
+X-Gm-Message-State: AHQUAuZCPC2Y0C2o/FhIlqpKVfqYrV/YYwMLeeorg3VzKtPT3amLbAMH
+	z+aWSV3ZggjjwNLpbndCt2S1bN7fKjFZi4sd3D7WEw==
+X-Google-Smtp-Source: AHgI3IY+zAnDyoC/mNKW3CC5JtjiVAaq/5Oac/2NuMqYywh5CPQ/Sm/v4NkhT7ocJy5OyVXS3Ftx/RNLc0Kk/la3/q8=
+X-Received: by 2002:ac8:300a:: with SMTP id f10mr18890753qte.236.1551205041255;
+	Tue, 26 Feb 2019 10:17:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20190222172949.3661-1-nicolas.dechesne@linaro.org>
-	<20190222172949.3661-2-nicolas.dechesne@linaro.org>
-	<CAMKF1sqPdBOQSq8Aejj5ji_yOGk3qPU_n8C_TqzEou4H0kuKpw@mail.gmail.com>
-	<870da333acd14eaab709707238e1ac7d@XBOX04.axis.com>
-In-Reply-To: <870da333acd14eaab709707238e1ac7d@XBOX04.axis.com>
+References: <20190220043740.27952-1-zboszor@pr.hu>
+	<20190226095502.5499-1-zboszor@pr.hu>
+	<20190226095502.5499-7-zboszor@pr.hu>
+In-Reply-To: <20190226095502.5499-7-zboszor@pr.hu>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Feb 2019 10:14:52 -0800
-Message-ID: <CAMKF1sq1BGdFgMckYTjZPta5tMz7iVwBj09Re9h_tFjVd5B+5g@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Date: Tue, 26 Feb 2019 10:16:55 -0800
+Message-ID: <CAMKF1sp9y6+7Qk_vgunPtZDXSfx=YcZfWsa9x1ZO0AgASUht7Q@mail.gmail.com>
+To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/4] meta-oe: fixup LAYERDEPENDS to include meta-python
+Subject: Re: [meta-oe][PATCH 6/7] plymouth: Use plymouth_initrd DISTRO_FEATURE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,44 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2019 18:15:19 -0000
+X-List-Received-Date: Tue, 26 Feb 2019 18:17:20 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 26, 2019 at 9:39 AM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
+On Tue, Feb 26, 2019 at 1:55 AM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbo=
+szor@pr.hu> wrote:
 >
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> > devel-bounces@lists.openembedded.org> On Behalf Of Khem Raj
-> > Sent: den 22 februari 2019 19:19
-> > To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> > Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-> > Subject: Re: [oe] [meta-oe][PATCH 1/4] meta-oe: fixup LAYERDEPENDS to
-> > include meta-python
-> >
-> > On Fri, Feb 22, 2019 at 9:30 AM Nicolas Dechesne
-> > <nicolas.dechesne@linaro.org> wrote:
-> > >
-> > > meta-oe depends on meta-python, for mongodb recipe, since
-> > > 5cf9a144ad16 (mongodb: Upgrade to 4.0.1 release)
-> > >
-> >
-> > The dependency was always there, but I wonder if there is a better
-> > place for mongodb than meta-oe
+> dracut conditionally depends plymouth-initrd using the same
+> DISTRO_FEATURE knob.
 >
-> Can we please revert this? Making meta-oe depend on meta-python
-> is not the right thing to do. Either move mongodb to another layer
-> that already depends on meta-python or where it is fine to do so,
-> or move python-cheetah to meta-oe. The latter seems like the easier
-> choice.
 
-I am fine with dropping mongodb from meta-oe and revert this patch
-and the problem I see is that now meta-oe depends on meta-python
-and meta-python depends on meta-oe, which is not good. Although
-having meta-python as a dependency for meta-oe is fine or vice-versa
-but no loops.
+cant apply this on top of master-next, can you rebase and resend
 
+> Signed-off-by: B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zboszor@pr.hu>
+> ---
+>  meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> //Peter
+> diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/re=
+cipes-core/plymouth/plymouth_0.9.2.bb
+> index a5b16c979..b7be9f04b 100644
+> --- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+> +++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+> @@ -36,7 +36,6 @@ PACKAGECONFIG_append_x86-64 =3D " drm"
+>  PACKAGECONFIG[drm] =3D "--enable-drm,--disable-drm,libdrm"
+>  PACKAGECONFIG[pango] =3D "--enable-pango,--disable-pango,pango"
+>  PACKAGECONFIG[gtk] =3D "--enable-gtk,--disable-gtk,gtk+3"
+> -PACKAGECONFIG[initrd] =3D ",,,"
+>
+>  LOGO ??=3D "${datadir}/plymouth/bizcom.png"
+>
+> @@ -46,12 +45,12 @@ do_install_append() {
+>      # Remove /var/run from package as plymouth will populate it on start=
+up
+>      rm -fr "${D}${localstatedir}/run"
+>
+> -    if ! ${@bb.utils.contains('PACKAGECONFIG', 'initrd', 'true', 'false'=
+, d)}; then
+> +    if ! ${@bb.utils.contains('DISTRO_FEATURES', 'plymouth_initrd', 'tru=
+e', 'false', d)}; then
+>          rm -rf "${D}${libexecdir}"
+>      fi
+>  }
+>
+> -PACKAGES =3D. "${@bb.utils.contains('PACKAGECONFIG', 'initrd', '${PN}-in=
+itrd ', '', d)}"
+> +PACKAGES =3D. "${@bb.utils.contains('DISTRO_FEATURES', 'plymouth_initrd'=
+, '${PN}-initrd ', '', d)}"
+>  PACKAGES =3D+ "${PN}-set-default-theme"
+>
+>  FILES_${PN}-initrd =3D "${libexecdir}/plymouth/*"
+> --
+> 2.20.1
 >
 
