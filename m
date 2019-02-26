@@ -1,30 +1,30 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E607A7CC8D
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 44ED87CC65
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2019 01:01:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.58,413,1544457600"; d="scan'208";a="55236835"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Feb 2019 09:01:19 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4927F40269D9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2019 09:01:09 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.47) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.408.0; Tue, 26 Feb 2019 09:01:27 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Feb 2019 09:02:34 +0800
-Message-ID: <20190226010234.4667-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+	Tue, 26 Feb 2019 02:44:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1Q2hZVl031618
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 25 Feb 2019 18:43:45 -0800
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.435.0;
+	Mon, 25 Feb 2019 18:43:25 -0800
+To: Khem Raj <raj.khem@gmail.com>
+References: <1550652980-292761-1-git-send-email-changqing.li@windriver.com>
+	<1550652980-292761-4-git-send-email-changqing.li@windriver.com>
+	<CAMKF1soyUbWgfoDTJFCQVWhMpM10aWHnqd6Qz2E=L+MUujArRQ@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <7b91482a-f086-5668-973d-47cbb787e639@windriver.com>
+Date: Tue, 26 Feb 2019 10:43:21 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.47]
-X-yoursite-MailScanner-ID: 4927F40269D9.ADB4C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-networking][PATCH]dovecot:upgrade to 2.2.36
+In-Reply-To: <CAMKF1soyUbWgfoDTJFCQVWhMpM10aWHnqd6Qz2E=L+MUujArRQ@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/5] rrdtool: upgrade 1.7.0 -> 1.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +37,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2019 01:01:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Feb 2019 02:44:11 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-1.Upgrade dovecot from 2.2.33 to 2.2.36.
 
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
----
- .../dovecot/{dovecot_2.2.33.bb => dovecot_2.2.36.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/dovecot/{dovecot_2.2.33.bb => dovecot_2.2.36.bb} (95%)
+On 2/23/19 2:07 AM, Khem Raj wrote:
+> On Wed, Feb 20, 2019 at 12:57 AM <changqing.li@windriver.com> wrote:
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> ---
+>>   .../recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb}   | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>   rename meta-oe/recipes-extended/rrdtool/{rrdtool_1.7.0.bb => rrdtool_1.7.1.bb} (98%)
+>>
+>> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+>> similarity index 98%
+>> rename from meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+>> rename to meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+>> index ff99574..1a1ca54 100644
+>> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+>> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
+>> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
+>>
+>>   DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
+>>
+>> -SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
+>> -PV = "1.7.0"
+>> +SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
+>> +PV = "1.7.1"
+>>
+> seeing some packaging failures on qemux86/musl e.g.
+>
+> ERROR: SYSTEMD_SERVICE_rrdcached value rrdcached.socket does not exist
+>
+> see
+>
+> https://errors.yoctoproject.org/Errors/Details/229882/
+>
+>
+> Can you take care of this as a separate fix ?
+OK,  I will  check this.
+>
+>>   SRC_URI = "\
+>>       git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
-similarity index 95%
-rename from meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
-rename to meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
-index 882d5d554..39bfb912e 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
-            file://0001-doveadm-Fix-parallel-build.patch \
-            "
- 
--SRC_URI[md5sum] = "d61d1e923a22f9062cc9f47696882666"
--SRC_URI[sha256sum] = "e9483d68a7698d701bc06124fcf6e1b1f16380c2986c7ec0cf4e1475b9d0c218"
-+SRC_URI[md5sum] = "a8d6492584025b2413e82ea48de3cd5f"
-+SRC_URI[sha256sum] = "e9aba89bb1ac1e9581b84e4a7a50f53142539614eaf7cc4c80007ebea4988be5"
- 
- DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
- CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 -- 
-2.17.2
+BRs
 
-
+Sandy(Li Changqing)
 
 
