@@ -1,51 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C14F7CB9A
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F5166D3A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2019 06:52:32 +0000 (UTC)
-Received: by mail-pl1-f169.google.com with SMTP id c4so5736297pls.11
+	Tue, 26 Feb 2019 07:46:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1Q7iTSA006285
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2019 22:52:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7Ojvwa1hC61Mhg8p1eb537z7P8s51TNlAOyG1LdO404=;
-	b=oDq5v5acp+oAdjccS6R+8ZFa4meOhjs/YSujT1kgBOWa+qNFci+tkHDKP6ZwRkwGkJ
-	qTI0jNI4aZ4TQUelGaMp1jBQHHTUTLar6g+ZQGzwE6rFLYnzLlcnkpkOkrKPn+f8FUlG
-	8P7WV2uInDicK42dSpldRXRe1IKVXEwLXTpz6nKQAy/2QnMeIGkCBS27pVnn2WPye6EU
-	t99eFJE56zD76g+TX66unFNNyj7KIox8Od5K7YnQJzGroVb4Ng43kzVOR+g7AKGRGp8n
-	FqktI0t7AsYvUx4JnLqau7EOSJ/LBNnSaJum3I5+H6Xa/I9fGpc1c6VyZ6s4QbXlwp62
-	rC8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7Ojvwa1hC61Mhg8p1eb537z7P8s51TNlAOyG1LdO404=;
-	b=RktHY++BrzRr7qW2Q0WCv/UQ2pWXTzO4zVPAQRjRODvFq4vLmoGz3bFpH1Amd9zsRv
-	cJ4vGsk2ffOOczM2pc//AYQx2G8+rijWyqrh21FycRbHCh4NMkmxSYNaqrfSW7ATyHnN
-	2sfSfDXpvTmPP8F7DmE04eQBdiV8BwpBReg0fXkq/gbCLfrrSb+73lh918zGIFxdYg4I
-	nie8WkPTdNh10ZKWgLDg3qXKXIDfODHmTVQNRZxjleboM+d2VkfznHtXScT0BVOg8S8R
-	7+CHwnpZWhJNv+/b2ffXNipj08RcOS7INjKHQPMfYMzDKMgJgErnzRjA/vIIq/qzGl2F
-	7nRA==
-X-Gm-Message-State: AHQUAuatmqG/lGEyyaCKUDjn/8KAuFRHh0H8cjPuYnmQsNczD5TgTJO/
-	XQvaEsTPHa/23g6M6BcRqekaOL41
-X-Google-Smtp-Source: AHgI3IZ/gpB26qGaBKoprg3GjGkbrcwpYpnbtJqATwVwWwmlR7gouz3yhWbXP8EIERrJ/GTdKoWzig==
-X-Received: by 2002:a17:902:b117:: with SMTP id
-	q23mr25105818plr.160.1551163953385; 
-	Mon, 25 Feb 2019 22:52:33 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::1cf2])
-	by smtp.gmail.com with ESMTPSA id
-	z185sm20728875pfb.17.2019.02.25.22.52.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 25 Feb 2019 22:52:32 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Feb 2019 22:52:22 -0800
-Message-Id: <20190226065222.9281-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Mon, 25 Feb 2019 23:46:00 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.435.0; Mon, 25 Feb 2019 23:45:53 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 Feb 2019 15:45:51 +0800
+Message-ID: <1551167151-192268-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mozjs: Fix cross-builds of nsinstall
+Subject: [PATCH] net-snmp: fix compile error with --disable-des
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,52 +31,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2019 06:52:33 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 26 Feb 2019 07:46:10 -0000
+Content-Type: text/plain
 
-nsinstall must be built for host, so we need to define HOST_* compiler
-defines so, it gets built using native compiler correctly
+From: Changqing Li <changqing.li@windriver.com>
 
-Disable stripping, OE will do it
+| scapi.c: In function 'sc_encrypt':
+| scapi.c:1256:5: error: 'pad_size' undeclared (first use in this function); did you mean 'dysize'?
+|      pad_size = pai->pad_size;
+|      ^~~~~~~~
+|      dysize
 
-Disable optimizing, set BUILD_OPT
+pad_size is defined only without --disable-des
+[snip]
+    int             pad, plast, pad_size = 0;
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+but used when disable-des
+[snip]
+        QUITFUN(SNMPERR_GENERR, sc_encrypt_quit);
+    }
+    pad_size = pai->pad_size;
+
+    memset(my_iv, 0, sizeof(my_iv));
+
+    if (USM_CREATE_USER_PRIV_DES == (pai->type & USM_PRIV_MASK_ALG)) {
+
+        /*
+
+fix by move it into #ifndef NETSNMP_DISABLE_DES
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ ...01-net-snmp-fix-compile-error-disable-des.patch | 62 ++++++++++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.8.bb     |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-net-snmp-fix-compile-error-disable-des.patch
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-index 74dd15bfcb..92d15724fb 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
-@@ -45,7 +45,7 @@ EXTRA_OECONF = " \
-     --host=${BUILD_SYS} \
-     --prefix=${prefix} \
-     --libdir=${libdir} \
--    --disable-tests \
-+    --disable-tests --disable-strip --disable-optimize \
-     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
- "
-@@ -53,9 +53,15 @@ EXTRA_OECONF = " \
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
- PACKAGECONFIG[x11] = "--x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--x-includes=no --x-libraries=no,virtual/libx11"
- 
--EXTRA_OEMAKE_task-compile += "OS_LDFLAGS='-Wl,-latomic ${LDFLAGS}'"
-+EXTRA_OEMAKE_task-compile += "BUILD_OPT=1 OS_LDFLAGS='-Wl,-latomic ${LDFLAGS}'"
- EXTRA_OEMAKE_task-install += "STATIC_LIBRARY_NAME=js_static"
- 
-+export HOST_CC = "${BUILD_CC}"
-+export HOST_CXX = "${BUILD_CXX}"
-+export HOST_CFLAGS = "${BUILD_CFLAGS}"
-+export HOST_CPPFLAGS = "${BUILD_CPPFLAGS}"
-+export HOST_CXXFLAGS = "${BUILD_CXXFLAGS}"
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-net-snmp-fix-compile-error-disable-des.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-net-snmp-fix-compile-error-disable-des.patch
+new file mode 100644
+index 0000000..7e686ce
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-net-snmp-fix-compile-error-disable-des.patch
+@@ -0,0 +1,62 @@
++From e38c508ef401593b1d4fe42b62e42a49cfec82af Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Tue, 26 Feb 2019 14:26:07 +0800
++Subject: [PATCH] net-snmp: fix compile error with --disable-des
 +
- do_configure() {
-     export SHELL="/bin/sh"
-     export TMP="${B}"
++| scapi.c: In function 'sc_encrypt':
++| scapi.c:1256:5: error: 'pad_size' undeclared (first use in this function); did you mean 'dysize'?
++|      pad_size = pai->pad_size;
++|      ^~~~~~~~
++|      dysize
++
++pad_size is defined only without --disable-des
++[snip]
++#ifndef NETSNMP_DISABLE_DES
++    int             pad, plast, pad_size = 0; 
++
++but used when disable-des,
++[snip]
++        QUITFUN(SNMPERR_GENERR, sc_encrypt_quit);
++    }    
++    pad_size = pai->pad_size;
++
++    memset(my_iv, 0, sizeof(my_iv));
++
++#ifndef NETSNMP_DISABLE_DES
++    if (USM_CREATE_USER_PRIV_DES == (pai->type & USM_PRIV_MASK_ALG)) {
++
++        /*
++
++fix by move it into #ifndef NETSNMP_DISABLE_DES
++
++Upstream-Status: Submitted [https://sourceforge.net/p/net-snmp/bugs/2927/]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ snmplib/scapi.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/snmplib/scapi.c b/snmplib/scapi.c
++index 43caddf..c09deb0 100644
++--- a/snmplib/scapi.c
+++++ b/snmplib/scapi.c
++@@ -1253,7 +1253,6 @@ sc_encrypt(const oid * privtype, size_t privtypelen,
++ 
++         QUITFUN(SNMPERR_GENERR, sc_encrypt_quit);
++     }
++-    pad_size = pai->pad_size;
++ 
++     memset(my_iv, 0, sizeof(my_iv));
++ 
++@@ -1263,6 +1262,8 @@ sc_encrypt(const oid * privtype, size_t privtypelen,
++         /*
++          * now calculate the padding needed 
++          */
+++
+++       pad_size = pai->pad_size;
++         pad = pad_size - (ptlen % pad_size);
++         plast = (int) ptlen - (pad_size - pad);
++         if (pad == pad_size)
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index e1c780b..1e87fd0 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+            file://net-snmp-fix-for-disable-des.patch \
+            file://reproducibility-have-printcap.patch \
+            file://reproducibility-accept-configure-options-from-env.patch \
++           file://0001-net-snmp-fix-compile-error-disable-des.patch \
+            "
+ SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
+ SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
 -- 
-2.21.0
+2.7.4
 
 
