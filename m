@@ -1,25 +1,36 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ED6E37CC69
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 654A27CBEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2019 08:42:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1R8go3O015836
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2019 00:42:50 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.435.0; Wed, 27 Feb 2019 00:42:38 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Feb 2019 16:41:50 +0800
-Message-ID: <1551256910-119653-5-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1551256910-119653-1-git-send-email-changqing.li@windriver.com>
+	Wed, 27 Feb 2019 09:11:57 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 448VLN4m43z5Q;
+	Wed, 27 Feb 2019 10:11:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1551258717;
+	bh=3nMyU8cAU80PDrLnmtNW5RJKy/94MnYqHNrl27NX8j8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=dp7UE81wFIYPP5P3UN1JQt9MNjkNbMvZQEohswrJ75tLrFhv6y38Gp2PNN/CZCf6P
+	V+bHNqUzN0lqcybSqoLqo3TkaX0OcituisHHxKDO+qqmw3PSD2FHhtNM1PGN99uLMR
+	GI12Hg1naAODn1WAzIuH2iW095KD6SgS0vWXAcf4Zajyn9vYUqw+b+PVTRjdWDEBXE
+	v+aaw/xK5l/KG9378joo/6BlI+0Hk8d3U+ELvUobeCSXP3jtK+7Z0t4kqFjKVc9lwe
+	JPGXCaoYb8z3szzwnqPz2CgKrZYfYk879QKbyjsjDT6Y7Vv3FFNty1qT5o1fy5rOpq
+	a5/x6CMxoU9bzvcuC552CkiOzCmLAuxn/mC/1txMuOqe+tAcp/fXF9FfXFYLxhTazH
+	KU6M0VRyWXGUWnY+b581Xti2QUU0bB9VmOBhM31nPnBXS4fVTNn345DGrgpM5Oi9Bj
+	1BUgQb7Kq2cce8yPouM/LU00zLxp6mRPnUJQlCa/mSdxnGXfvyThQbNwjPiUYUg1vL
+	VikbEK41Ehp/MbjYIpGaf6yXlNeeXRNbFGofL6pjpT5M5Ad41tJzuSZAvAkfJBy4n2
+	BL3Cc6rUfFektx8DZJt9Bz90nDQwIrd4JwwBcL8sllpURxZAGc0ffD79MTOa4Zg3+n
+	acEGdLcrAWT9k3TLH4y9rT+s=
+Date: Wed, 27 Feb 2019 11:11:53 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: changqing.li@windriver.com
+Message-ID: <20190227091153.GA10723@localhost>
 References: <1551256910-119653-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 4/4] freeradius: add PACKAGECONFIGs
+In-Reply-To: <1551256910-119653-1-git-send-email-changqing.li@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 0/4] Add PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2019 08:42:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Feb 2019 09:11:57 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Changqing Li <changqing.li@windriver.com>
+On Wed, Feb 27, 2019 at 04:41:46PM +0800, changqing.li@windriver.com wrote:
+> From: Changqing Li <changqing.li@windriver.com>
+> 
+> Add PACKAGECONFIG for 4 recipes
+> 
+> Changqing Li (4):
+>   net-snmp: add PACKAGECONFIG disable-des
+>   krb5: add PACKAGECONFIG disable-pkinit
+>   openhpi: add PACKAGECONFIG disable-snmpbc
+>   freeradius: add PACKAGECONFIGs
+>...
 
-add 3 PACKAGECONFIG
+It would be better having all variables consistently as enable-options,
+instead of having some as disable/no negative options.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb | 3 +++
- 1 file changed, 3 insertions(+)
+Keeping options enabled by default can instead be done with the
+PACKAGECONFIG default.
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
-index c17d56d..cee3b47 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
-@@ -83,6 +83,9 @@ PACKAGECONFIG[perl] = "--with-perl=${STAGING_BINDIR_NATIVE}/perl-native/perl --w
- PACKAGECONFIG[python] = "--with-rlm_python --with-rlm-python-bin=${STAGING_BINDIR_NATIVE}/python-native/python --with-rlm-python-include-dir=${STAGING_INCDIR}/${PYTHON_DIR},--without-rlm_python,python-native python"
- PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest,curl json-c"
- PACKAGECONFIG[ruby] = "--with-rlm_ruby,--without-rlm_ruby,ruby"
-+PACKAGECONFIG[no-ssl] = "--without-openssl,--with-openssl"
-+PACKAGECONFIG[no-rlm-eap-fast] = "--without-rlm_eap_fast,--with-rlm_eap_fast"
-+PACKAGECONFIG[no-rlm-eap-pwd] = "--without-rlm_eap_pwd,--with-rlm_eap_pwd"
- 
- inherit useradd autotools-brokensep update-rc.d systemd
- 
+In other words, instead of
+  PACKAGECONFIG ??= "libgcrypt non32bit"
+  ...
+  PACKAGECONFIG[disable-snmp-bc] = "--disable-snmp_bc,--enable-snmp_bc"
+
+to do
+  PACKAGECONFIG ??= "libgcrypt non32bit snmp-bc"
+  ...
+  PACKAGECONFIG[snmp-bc] = "--enable-snmp_bc,--disable-snmp_bc"
+
+
+cu
+Adrian
+
 -- 
-2.7.4
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
