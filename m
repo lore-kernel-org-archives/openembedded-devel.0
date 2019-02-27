@@ -1,25 +1,25 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BC6B871B99
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 601C171B99
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2019 08:42:13 +0000 (UTC)
+	Wed, 27 Feb 2019 08:42:14 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x1R8gDLR015766
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x1R8gFkv027990
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2019 00:42:14 -0800 (PST)
+	Wed, 27 Feb 2019 00:42:15 -0800 (PST)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.435.0; Wed, 27 Feb 2019 00:42:13 -0800
+	14.3.435.0; Wed, 27 Feb 2019 00:42:15 -0800
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Feb 2019 16:41:47 +0800
-Message-ID: <1551256910-119653-2-git-send-email-changqing.li@windriver.com>
+Date: Wed, 27 Feb 2019 16:41:48 +0800
+Message-ID: <1551256910-119653-3-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1551256910-119653-1-git-send-email-changqing.li@windriver.com>
 References: <1551256910-119653-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/4] net-snmp: add PACKAGECONFIG disable-des
+Subject: [meta-oe][PATCH 2/4] krb5: add PACKAGECONFIG disable-pkinit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,21 +39,21 @@ From: Changqing Li <changqing.li@windriver.com>
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 1 +
+ meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 1e87fd0..6c16dce 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -52,6 +52,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
+index c770f7b..f0561df 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
+@@ -44,6 +44,7 @@ PACKAGECONFIG[openssl] = "--with-crypto-impl=openssl,,openssl"
+ PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
+ PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
++PACKAGECONFIG[disable-pkinit] = "--disable-pkinit,--enable-pkinit"
  
- PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
-                        perl, perl perl-lib"
-+PACKAGECONFIG[disable-des] = "--disable-des,--enable-des"
- 
- EXTRA_OECONF = "--enable-shared \
-                 --disable-manuals \
+ EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
+ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
 -- 
 2.7.4
 
