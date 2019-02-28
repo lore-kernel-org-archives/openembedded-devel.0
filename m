@@ -1,24 +1,49 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 66A297C4BB
+Return-Path: <tuanhoanganh.dev@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B7016C149
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 08:28:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1S8RABr016893
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 28 Feb 2019 10:19:28 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id v11so4115074plg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 00:28:06 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.435.0;
-	Thu, 28 Feb 2019 00:27:27 -0800
-From: Wenlin Kang <wenlin.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 28 Feb 2019 00:27:27 -0800
-Message-ID: <20190228082727.104009-1-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] krb5: fix CVE-2018-20217
+	Thu, 28 Feb 2019 02:19:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=JjL8M12//EzQqzSq+y7tf38xi+7kG8YPeCuzitucl70=;
+	b=Xub/vDnOyjBAQRZIuDhwL9uYQTelHmTW/kgJLrLJ/r0gJge9yQGv4K91FbFxPyazCm
+	fS3dCAXd3vukoTjwDmfA07x5VFEOfssZPSA5D15mmvzNB5Uo2mkFsXfKYuUnP6Ab1nLu
+	P8PpCw5sUxf2mCUawUXdi02/7HfSnUqWaGsqTjDO/Tzqnab+4n7CWERLWTyKYOeM1H/N
+	cOYGmPE6nwzYYMC4oexSl+dVYJAKMNS1cuPAAMUVzxbtxiWfog1vT138PcJs2BFGlY8j
+	5ebj0iIKeJAO8dpvvLcPBQJnRqdWcFBEYXcEEWL68YprsWjHkRv+ah8ZVjHYddMj8XM+
+	U8YQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=JjL8M12//EzQqzSq+y7tf38xi+7kG8YPeCuzitucl70=;
+	b=VzygeyseHOzPQM6ReSEpDaqjYMEG1bdVPgmDLmRwJuVFrzmiRANSWdp8ZzDxXJJ2Ej
+	q+ub+GfkqKeijDArjQzcEma9T+iwiuBaqXhE6VPr44HFqrKZ4EJCRkJX4x1/yj6mU0du
+	Td5xAdjuyNCWLwr4kulB3MTSC0DxJtAK7hGM17eVx1jhWJ0lLMwknBsCfwnyEMN9wyOn
+	68aposC+T10KXbRyP9hLbbxp6UAVjjD3fNzAeWpMK09ugjKzk4tKxzA1tcs2GxRc4TKD
+	ccEOiKyU8Eye4YNwdAIc+TcWzDVmQEhMyNlA0dCIcNPH+/Rnt0H2AHG3107EO2nH0pet
+	zNQQ==
+X-Gm-Message-State: AHQUAuYg+pE3z6+x+4GCJAGiYc0c67iAZDzpjuebr5a0jW9ZGCvAP5N4
+	x2CzYtI5/gacytTZwakhd6ohNN+Xc5c=
+X-Google-Smtp-Source: AHgI3IbmE3mybE5Bb/8szhGjGKLPtsD+PfE+Sq30ih9k804Pjf7g7xIlWtCQjobTESMyqqj5lDZlRA==
+X-Received: by 2002:a17:902:ab8e:: with SMTP id
+	f14mr7141475plr.84.1551349170044; 
+	Thu, 28 Feb 2019 02:19:30 -0800 (PST)
+Received: from localhost.localdomain ([128.242.105.20])
+	by smtp.gmail.com with ESMTPSA id
+	s79sm10222034pfa.61.2019.02.28.02.19.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 28 Feb 2019 02:19:29 -0800 (PST)
+From: Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
+X-Google-Original-From: Hoang Anh Tuan <tuanha@viosoft.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Feb 2019 10:19:24 +0000
+Message-Id: <1551349164-20937-1-git-send-email-tuanha@viosoft.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-openwrt][PATCH] odhcpd: Fix strncpy bounds in gcc-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,117 +56,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2019 08:28:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 28 Feb 2019 10:19:29 -0000
 
-Fix CVE-2018-20217
+Backport from git://git.openwrt.org/project/odhcpd.git
+Commit 4983ee551a743e55bb2f2ec12ceab0ddba13eb2d
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
 ---
- ...ord-attributes-for-S4U2Self-requests.patch | 80 +++++++++++++++++++
- .../recipes-connectivity/krb5/krb5_1.16.2.bb  |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Ignore-password-attributes-for-S4U2Self-requests.patch
+ .../odhcpd/0001-odhcpd-fix-strncpy-bounds.patch    | 51 ++++++++++++++++++++++
+ recipes-core/odhcpd/odhcpd_git.bb                  |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Ignore-password-attributes-for-S4U2Self-requests.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Ignore-password-attributes-for-S4U2Self-requests.patch
+diff --git a/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch b/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
 new file mode 100644
-index 000000000..8d1e14358
+index 0000000..2438d64
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-Ignore-password-attributes-for-S4U2Self-requests.patch
-@@ -0,0 +1,80 @@
-+From 6fad7d45701234c8e81300d50dd5b8037d846d11 Mon Sep 17 00:00:00 2001
-+From: Isaac Boukris <iboukris@gmail.com>
-+Date: Wed, 27 Feb 2019 23:59:59 -0800
-+Subject: [PATCH] Ignore password attributes for S4U2Self requests
++++ b/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
+@@ -0,0 +1,51 @@
++From 4983ee551a743e55bb2f2ec12ceab0ddba13eb2d Mon Sep 17 00:00:00 2001
++From: Hans Dedecker <dedeckeh@gmail.com>
++Date: Thu, 3 May 2018 17:21:15 +0200
++Subject: [PATCH] odhcpd: fix strncpy bounds
 +
-+For consistency with Windows KDCs, allow protocol transition to work
-+even if the password has expired or needs changing.
++Fix strncpy bounds as reported by Coverity in CID 1412278 and 1412293
 +
-+Also, when looking up an enterprise principal with an AS request,
-+treat ERR_KEY_EXP as confirmation that the client is present in the
-+realm.
-+
-+[ghudson@mit.edu: added comment in kdc_process_s4u2self_req(); edited
-+commit message]
-+
-+ticket: 8763 (new)
-+tags: pullup
-+target_version: 1.17
-+
-+Upsteam-Status: Backport [https://github.com/krb5/krb5/commit/5e6d1796106df8ba6bc1973ee0917c170d929086]
-+CVE: CVE-2018-20217
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
++Signed-off-by: Hans Dedecker <dedeckeh@gmail.com>
 +---
-+ src/kdc/kdc_util.c           | 5 +++++
-+ src/lib/krb5/krb/s4u_creds.c | 2 +-
-+ src/tests/gssapi/t_s4u.py    | 8 ++++++++
-+ 3 files changed, 14 insertions(+), 1 deletion(-)
++ src/dhcpv4.c | 6 ++++--
++ src/odhcpd.c | 4 +++-
++ 2 files changed, 7 insertions(+), 3 deletions(-)
 +
-+diff --git a/src/kdc/kdc_util.c b/src/kdc/kdc_util.c
-+index 754570c..034c979 100644
-+--- a/src/kdc/kdc_util.c
-++++ b/src/kdc/kdc_util.c
-+@@ -1574,6 +1574,11 @@ kdc_process_s4u2self_req(kdc_realm_t *kdc_active_realm,
++diff --git a/src/dhcpv4.c b/src/dhcpv4.c
++index db5f138..35a3ad0 100644
++--- a/src/dhcpv4.c
+++++ b/src/dhcpv4.c
++@@ -779,8 +779,10 @@ static void handle_dhcpv4(void *addr, void *data, size_t len,
++ 		}
++ 	}
 + 
-+         memset(&no_server, 0, sizeof(no_server));
-+ 
-++        /* Ignore password expiration and needchange attributes (as Windows
-++         * does), since S4U2Self is not password authentication. */
-++        princ->pw_expiration = 0;
-++        clear(princ->attributes, KRB5_KDB_REQUIRES_PWCHANGE);
++-	struct ifreq ifr = {.ifr_name = ""};
++-	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name));
+++	struct ifreq ifr;
 ++
-+         code = validate_as_request(kdc_active_realm, request, *princ,
-+                                    no_server, kdc_time, status, &e_data);
-+         if (code) {
-+diff --git a/src/lib/krb5/krb/s4u_creds.c b/src/lib/krb5/krb/s4u_creds.c
-+index 91c02aa..2037984 100644
-+--- a/src/lib/krb5/krb/s4u_creds.c
-++++ b/src/lib/krb5/krb/s4u_creds.c
-+@@ -117,7 +117,7 @@ s4u_identify_user(krb5_context context,
-+     code = k5_get_init_creds(context, &creds, client, NULL, NULL, 0, NULL,
-+                              opts, krb5_get_as_key_noop, &userid, &use_master,
-+                              NULL);
-+-    if (code == 0 || code == KRB5_PREAUTH_FAILED) {
-++    if (!code || code == KRB5_PREAUTH_FAILED || code == KRB5KDC_ERR_KEY_EXP) {
-+         *canon_user = userid.user;
-+         userid.user = NULL;
-+         code = 0;
-+diff --git a/src/tests/gssapi/t_s4u.py b/src/tests/gssapi/t_s4u.py
-+index 3da6544..ba0469e 100755
-+--- a/src/tests/gssapi/t_s4u.py
-++++ b/src/tests/gssapi/t_s4u.py
-+@@ -20,6 +20,14 @@ pservice2 = 'p:' + service2
-+ # Get forwardable creds for service1 in the default cache.
-+ realm.kinit(service1, None, ['-f', '-k'])
+++	memset(&ifr, 0, sizeof(ifr));
+++	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name) - 1);
 + 
-++# Try S4U2Self for user with a restricted password.
-++realm.run([kadminl, 'modprinc', '+needchange', realm.user_princ])
-++realm.run(['./t_s4u', 'e:user', '-'])
-++realm.run([kadminl, 'modprinc', '-needchange',
-++          '-pwexpire', '1/1/2000', realm.user_princ])
-++realm.run(['./t_s4u', 'e:user', '-'])
-++realm.run([kadminl, 'modprinc', '-pwexpire', 'never', realm.user_princ])
++ 	if (!ioctl(sock, SIOCGIFMTU, &ifr)) {
++ 		uint16_t mtu = htons(ifr.ifr_mtu);
++diff --git a/src/odhcpd.c b/src/odhcpd.c
++index 71b803d..8aa4571 100644
++--- a/src/odhcpd.c
+++++ b/src/odhcpd.c
++@@ -143,10 +143,12 @@ int odhcpd_get_interface_config(const char *ifname, const char *what)
++ int odhcpd_get_mac(const struct interface *iface, uint8_t mac[6])
++ {
++ 	struct ifreq ifr;
 ++
-+ # Try krb5 -> S4U2Proxy with forwardable user creds.  This should fail
-+ # at the S4U2Proxy step since the DB2 back end currently has no
-+ # support for allowing it.
++ 	memset(&ifr, 0, sizeof(ifr));
++-	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name));
+++	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name) - 1);
++ 	if (ioctl(ioctl_sock, SIOCGIFHWADDR, &ifr) < 0)
++ 		return -1;
+++
++ 	memcpy(mac, ifr.ifr_hwaddr.sa_data, 6);
++ 	return 0;
++ }
 +-- 
-+2.17.1
++2.7.4
 +
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-index c770f7bbe..d6381a6a1 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.2.bb
-@@ -30,6 +30,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-            file://etc/default/krb5-admin-server \
-            file://krb5-kdc.service \
-            file://krb5-admin-server.service \
-+           file://0001-Ignore-password-attributes-for-S4U2Self-requests.patch;striplevel=2 \
+diff --git a/recipes-core/odhcpd/odhcpd_git.bb b/recipes-core/odhcpd/odhcpd_git.bb
+index 745ee6f..e220bda 100644
+--- a/recipes-core/odhcpd/odhcpd_git.bb
++++ b/recipes-core/odhcpd/odhcpd_git.bb
+@@ -13,6 +13,7 @@ FILESEXTRAPATHS_prepend = "${THIDIR}/${PN}:"
+ SRC_URI = "\
+     git://git.openwrt.org/project/odhcpd.git;name=odhcpd \
+     file://0100-OE-build-fails-due-to-libnl-tiny-dependency-in-CMakeLists.patch \
++    file://0001-odhcpd-fix-strncpy-bounds.patch \
  "
- SRC_URI[md5sum] = "ffd52595e969fb700d37313606e4dc3d"
- SRC_URI[sha256sum] = "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
+ 
+ SRCREV_odhcpd = "750e457e3000187b85906814a2529ede24775325"
 -- 
-2.17.1
+2.7.4
 
 
