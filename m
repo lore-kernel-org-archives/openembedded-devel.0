@@ -1,26 +1,24 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A8A07C4BB
+	by mail.openembedded.org (Postfix) with ESMTP id 38B737C4BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 08:17:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1S8HKFa016607
+	Thu, 28 Feb 2019 08:21:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1S8K2ED016662
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 00:17:30 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.435.0; Thu, 28 Feb 2019 00:17:09 -0800
-From: <changqing.li@windriver.com>
+	Thu, 28 Feb 2019 00:21:04 -0800
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.435.0;
+	Thu, 28 Feb 2019 00:20:53 -0800
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 28 Feb 2019 16:17:08 +0800
-Message-ID: <1551341828-451293-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1551332535-158589-1-git-send-email-changqing.li@windriver.com>
-References: <1551332535-158589-1-git-send-email-changqing.li@windriver.com>
+Date: Thu, 28 Feb 2019 03:20:49 -0500
+Message-ID: <20190228082049.156017-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/4 V2] net-snmp: Add PACKAGECONFIG des
+Subject: [PATCH] xmlrpc-c: inherit binconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,48 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2019 08:17:40 -0000
+X-List-Received-Date: Thu, 28 Feb 2019 08:21:13 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+libreport calls xmlrpc-c-config from package xmlrpc-c-native to get
+cflags and libs. But it gets dirs in ${STAGING_DIR_NATIVE} which make
+lib32-libreport compile failed with config:
+
+  require conf/multilib.conf
+  MACHINE = "qemuarm64"
+  MULTILIBS = "multilib:lib32"
+  DEFAULTTUNE_virtclass-multilib-lib32 = "armv7vethf"
+
+| arm-wrs-linux-gnueabi-libtool: link: (cd ".libs" && rm -f "libabrt_dbus.so"
+  && ln -s "libabrt_dbus.so.0.0.1" "libabrt_dbus.so")
+| .../tmp-glibc/work/armv5e-wrs-linux-gnueabi/libreport/2.9.7-r0/recipe-sysroot-native/usr/lib/libxml2.so:
+  file not recognized: file format not recognized
+| collect2: error: ld returned 1 exit status
+| make[3]: *** [Makefile:780: libreport-web.la] Error 1
+
+Make xmlrpc-c inherit binconfig to avoid such kind of errors.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index e1c780b..f6ab73a 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-            file://net-snmp-fix-for-disable-des.patch \
-            file://reproducibility-have-printcap.patch \
-            file://reproducibility-accept-configure-options-from-env.patch \
-+           file://0001-net-snmp-fix-compile-error-disable-des.patch \
-            "
- SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
- SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
-@@ -42,15 +43,16 @@ CCACHE = ""
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
+index 02ea8cc5f..524263760 100644
+--- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
+@@ -17,7 +17,7 @@ S = "${WORKDIR}/git/stable"
+ DEPENDS = "libxml2"
+ RDEPENDS_${PN} = "perl"
  
- TARGET_CC_ARCH += "${LDFLAGS}"
+-inherit autotools-brokensep pkgconfig
++inherit autotools-brokensep binconfig pkgconfig
  
--PACKAGECONFIG ??= ""
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}, des"
- PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
- PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
+ TARGET_CFLAGS += "-Wno-narrowing"
  
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
- 
- PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
-                        perl, perl perl-lib"
-+PACKAGECONFIG[des] = "--enable-des,--disable-des"
- 
- EXTRA_OECONF = "--enable-shared \
-                 --disable-manuals \
 -- 
-2.7.4
+2.20.0
 
 
