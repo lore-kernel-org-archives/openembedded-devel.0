@@ -1,24 +1,24 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 14CCE7CCB9
+	by mail.openembedded.org (Postfix) with ESMTP id 1B6157CCB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 01:40:00 +0000 (UTC)
+	Thu, 28 Feb 2019 01:40:16 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1S1dQge006978
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2019 17:39:51 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.435.0; Wed, 27 Feb 2019 17:39:20 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 28 Feb 2019 09:39:19 +0800
-Message-ID: <1551317959-85504-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x1S1dQgg006978
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 27 Feb 2019 17:39:56 -0800
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.435.0;
+	Wed, 27 Feb 2019 17:39:53 -0800
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Wed, 27 Feb 2019 20:39:49 -0500
+Message-ID: <20190228013950.136750-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] vim: remove xfce vim bbappend
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v3 0/1] lvm2/libdevmapper: 2.03.01 -> 2.03.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,75 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2019 01:40:01 -0000
+X-List-Received-Date: Thu, 28 Feb 2019 01:40:16 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Mark Hatle <mark.hatle@windriver.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Changing the behavior of a recipe by including a layer is not allowed
-by the yocto-check-layer script.
+v3:
+* sorry, fix confusing typo in commit message s/removed/released/
 
-INFO: ======================================================================
-INFO: FAIL: test_signatures (common.CommonCheckLayer)
-INFO: ----------------------------------------------------------------------
-INFO: Traceback (most recent call last):
-  File "/poky/scripts/lib/checklayer/cases/common.py", line 53, in test_signatures
-    self.fail('Adding layer %s changed signatures.\n%s' % (self.tc.layer['name'], msg))
-AssertionError: Adding layer meta-xfce changed signatures.
-19 signatures changed, initial differences (first hash before, second after):
-   vim:do_install: 7f165dbd724ca0127dfb653ef0ecd8e7fb882713adedfd0e14f59d7f54cb645e -> 6e4a49063534d67f70186bf8bdb313184f42426e2c42b12b127638b586c7ffe8
-      bitbake-diffsigs --task vim do_install --signature 7f165dbd724ca0127dfb653ef0ecd8e7fb882713adedfd0e14f59d7f54cb645e
+Kai Kang (1):
+  lvm2/libdevmapper: 2.03.01 -> 2.03.02
 
-fix by move the logic into recipe vim
+ ...h-for-O_-defines-and-fcntl-signature.patch | 30 -----------------
+ .../lvm2/files/0005-do-not-build-manual.patch | 13 +++++---
+ ...lvm2-monitor.service-after-tmp.mount.patch | 13 +++++---
+ ...per_2.03.01.bb => libdevmapper_2.03.02.bb} |  0
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  7 ++--
+ ...0001-explicitly-do-not-install-libdm.patch | 32 ++++++++++++-------
+ ...g-service-shouldn-t-refer-to-lvmetad.patch | 31 ------------------
+ .../lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} |  3 +-
+ 8 files changed, 44 insertions(+), 85 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
+ rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.01.bb => libdevmapper_2.03.02.bb} (100%)
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch
+ rename meta-oe/recipes-support/lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} (92%)
 
-Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-support/vim/vim_8.1.0347.bb  | 7 +++++++
- meta-xfce/recipes-support/vim/vim_%.bbappend | 1 -
- meta-xfce/recipes-support/vim/vim_xfce.inc   | 6 ------
- 3 files changed, 7 insertions(+), 7 deletions(-)
- delete mode 100644 meta-xfce/recipes-support/vim/vim_%.bbappend
- delete mode 100644 meta-xfce/recipes-support/vim/vim_xfce.inc
-
-diff --git a/meta-oe/recipes-support/vim/vim_8.1.0347.bb b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-index 0705831..654741e 100644
---- a/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-+++ b/meta-oe/recipes-support/vim/vim_8.1.0347.bb
-@@ -79,6 +79,13 @@ do_install() {
- 
-     # we use --with-features=big as default
-     mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'true', 'false', d)}; then
-+	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-+	# drag make vim go into visual mode and there is no right click menu),
-+	# delete the block.
-+	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
-+    fi
- }
- 
- PARALLEL_MAKEINST = ""
-diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/recipes-support/vim/vim_%.bbappend
-deleted file mode 100644
-index 7b44963..0000000
---- a/meta-xfce/recipes-support/vim/vim_%.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--require ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '${BPN}_xfce.inc', '', d)}
-diff --git a/meta-xfce/recipes-support/vim/vim_xfce.inc b/meta-xfce/recipes-support/vim/vim_xfce.inc
-deleted file mode 100644
-index 25403e6..0000000
---- a/meta-xfce/recipes-support/vim/vim_xfce.inc
-+++ /dev/null
-@@ -1,6 +0,0 @@
--do_install_append() {
--	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
--	# drag make vim go into visual mode and there is no right click menu),
--	# delete the block.
--	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
--}
 -- 
-2.7.4
+2.20.0
 
 
