@@ -1,49 +1,47 @@
-Return-Path: <tuanhoanganh.dev@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B7016C149
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 74A6C7C67E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 10:19:28 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id v11so4115074plg.9
+	Thu, 28 Feb 2019 12:54:03 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id z13so11975623qki.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 02:19:30 -0800 (PST)
+	Thu, 28 Feb 2019 04:54:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=JjL8M12//EzQqzSq+y7tf38xi+7kG8YPeCuzitucl70=;
-	b=Xub/vDnOyjBAQRZIuDhwL9uYQTelHmTW/kgJLrLJ/r0gJge9yQGv4K91FbFxPyazCm
-	fS3dCAXd3vukoTjwDmfA07x5VFEOfssZPSA5D15mmvzNB5Uo2mkFsXfKYuUnP6Ab1nLu
-	P8PpCw5sUxf2mCUawUXdi02/7HfSnUqWaGsqTjDO/Tzqnab+4n7CWERLWTyKYOeM1H/N
-	cOYGmPE6nwzYYMC4oexSl+dVYJAKMNS1cuPAAMUVzxbtxiWfog1vT138PcJs2BFGlY8j
-	5ebj0iIKeJAO8dpvvLcPBQJnRqdWcFBEYXcEEWL68YprsWjHkRv+ah8ZVjHYddMj8XM+
-	U8YQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=s+RKBZhkwX6nXshMxI+yebHm60DlgMODPP3bb7god7w=;
+	b=GKULRFKnFGvsjw3nsw2m1B0hXO12qkrIAHWdAzEYuJGwiAN3+ljhXX0SdBEuKTskeN
+	XEM5HyoTcbBQ0q6j88qIy0PpDwdq4LMek3uUPnQM3W6Ds41MDen+lLxKNAmElN3gxFu1
+	07oeH2KSR0M8eKGSOGk1XNt/TGSnzBtOBqqkmW0Vto2Oqsqo430NVJY4cvddLOSxjv5i
+	FGv2YJ1c6tzNhJ2R9AGTNwUzQ/yyqJ0lZvpXSEMGuCoKdDJgpRGKgjmPyc3VzU8dh+n6
+	3d7G/F8so2verCAcmLFe1Tn9t4PQXDVHMYsFTV8eHh5qf11hdBP4C28mICvmpg56xSdh
+	T1GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=JjL8M12//EzQqzSq+y7tf38xi+7kG8YPeCuzitucl70=;
-	b=VzygeyseHOzPQM6ReSEpDaqjYMEG1bdVPgmDLmRwJuVFrzmiRANSWdp8ZzDxXJJ2Ej
-	q+ub+GfkqKeijDArjQzcEma9T+iwiuBaqXhE6VPr44HFqrKZ4EJCRkJX4x1/yj6mU0du
-	Td5xAdjuyNCWLwr4kulB3MTSC0DxJtAK7hGM17eVx1jhWJ0lLMwknBsCfwnyEMN9wyOn
-	68aposC+T10KXbRyP9hLbbxp6UAVjjD3fNzAeWpMK09ugjKzk4tKxzA1tcs2GxRc4TKD
-	ccEOiKyU8Eye4YNwdAIc+TcWzDVmQEhMyNlA0dCIcNPH+/Rnt0H2AHG3107EO2nH0pet
-	zNQQ==
-X-Gm-Message-State: AHQUAuYg+pE3z6+x+4GCJAGiYc0c67iAZDzpjuebr5a0jW9ZGCvAP5N4
-	x2CzYtI5/gacytTZwakhd6ohNN+Xc5c=
-X-Google-Smtp-Source: AHgI3IbmE3mybE5Bb/8szhGjGKLPtsD+PfE+Sq30ih9k804Pjf7g7xIlWtCQjobTESMyqqj5lDZlRA==
-X-Received: by 2002:a17:902:ab8e:: with SMTP id
-	f14mr7141475plr.84.1551349170044; 
-	Thu, 28 Feb 2019 02:19:30 -0800 (PST)
-Received: from localhost.localdomain ([128.242.105.20])
-	by smtp.gmail.com with ESMTPSA id
-	s79sm10222034pfa.61.2019.02.28.02.19.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 28 Feb 2019 02:19:29 -0800 (PST)
-From: Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
-X-Google-Original-From: Hoang Anh Tuan <tuanha@viosoft.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Feb 2019 10:19:24 +0000
-Message-Id: <1551349164-20937-1-git-send-email-tuanha@viosoft.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-openwrt][PATCH] odhcpd: Fix strncpy bounds in gcc-8
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=s+RKBZhkwX6nXshMxI+yebHm60DlgMODPP3bb7god7w=;
+	b=KyRcJaFFkcXFFQX6QnqtV10eyAot3b0OaXLgVq9jWv5zt+jZJg+TKaccWX6V5aR7tU
+	MDeeNb8CJdVLpx5HxpDYnOr4QZUXsGRlHlI02DNX0WDfauQP+VaOhiMDGwz/Z85ncLCi
+	WbuDfcmke84g29SbmQZoT8ojpwuspI7XUPCek4k39Sdcl3PhKRGaU81Qi0FQvOR4BvKs
+	f9JAsuLEdiXDq+iap39RHiSv4MZSJajUMljeuitknIHbrblswLNRWKvhridLUJjxI2ca
+	k6w2qFw9c+DOlZHhSUJySzK1bKZdnBVuvE1Wqi941wfDAzpkYcUTg5Dlf1IBjL+8wQfY
+	VPSQ==
+X-Gm-Message-State: AHQUAub4tqMIAHOCua7K2Nh8M2yfctv040YMQBg6/fe/jSMUz6WpVily
+	JbJl2wYYfHr5DbzF+ooMvMD2PkUkrdE9LImzshzzcw==
+X-Google-Smtp-Source: APXvYqxHog9k9ZGkK4aNxShbIW9EBjgJQLyKU/e1j7TBuZHE4xSSbu5p+NFnr78vdRwjpY+hrd4F4am8BPdxpam8zoc=
+X-Received: by 2002:a37:3d6:: with SMTP id 205mr6181483qkd.223.1551358443758; 
+	Thu, 28 Feb 2019 04:54:03 -0800 (PST)
+MIME-Version: 1.0
+References: <1551332535-158589-1-git-send-email-changqing.li@windriver.com>
+	<1551341828-451293-1-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1551341828-451293-1-git-send-email-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 28 Feb 2019 04:53:37 -0800
+Message-ID: <CAMKF1spcyPcCXVLNwLjV7j8L0f8y+coz=VPa=7L1f4i+-whKoA@mail.gmail.com>
+To: Changqing Li <changqing.li@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 3/4 V2] net-snmp: Add PACKAGECONFIG des
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,88 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2019 10:19:29 -0000
+X-List-Received-Date: Thu, 28 Feb 2019 12:54:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Backport from git://git.openwrt.org/project/odhcpd.git
-Commit 4983ee551a743e55bb2f2ec12ceab0ddba13eb2d
+On Thu, Feb 28, 2019 at 12:18 AM <changqing.li@windriver.com> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> index e1c780b..f6ab73a 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> @@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+>             file://net-snmp-fix-for-disable-des.patch \
+>             file://reproducibility-have-printcap.patch \
+>             file://reproducibility-accept-configure-options-from-env.patch \
+> +           file://0001-net-snmp-fix-compile-error-disable-des.patch \
+>             "
 
-Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
----
- .../odhcpd/0001-odhcpd-fix-strncpy-bounds.patch    | 51 ++++++++++++++++++++++
- recipes-core/odhcpd/odhcpd_git.bb                  |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
+this patch is missing. Please rebase on master-next and resend
 
-diff --git a/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch b/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
-new file mode 100644
-index 0000000..2438d64
---- /dev/null
-+++ b/recipes-core/odhcpd/odhcpd/0001-odhcpd-fix-strncpy-bounds.patch
-@@ -0,0 +1,51 @@
-+From 4983ee551a743e55bb2f2ec12ceab0ddba13eb2d Mon Sep 17 00:00:00 2001
-+From: Hans Dedecker <dedeckeh@gmail.com>
-+Date: Thu, 3 May 2018 17:21:15 +0200
-+Subject: [PATCH] odhcpd: fix strncpy bounds
-+
-+Fix strncpy bounds as reported by Coverity in CID 1412278 and 1412293
-+
-+Signed-off-by: Hans Dedecker <dedeckeh@gmail.com>
-+---
-+ src/dhcpv4.c | 6 ++++--
-+ src/odhcpd.c | 4 +++-
-+ 2 files changed, 7 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/dhcpv4.c b/src/dhcpv4.c
-+index db5f138..35a3ad0 100644
-+--- a/src/dhcpv4.c
-++++ b/src/dhcpv4.c
-+@@ -779,8 +779,10 @@ static void handle_dhcpv4(void *addr, void *data, size_t len,
-+ 		}
-+ 	}
-+ 
-+-	struct ifreq ifr = {.ifr_name = ""};
-+-	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name));
-++	struct ifreq ifr;
-++
-++	memset(&ifr, 0, sizeof(ifr));
-++	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name) - 1);
-+ 
-+ 	if (!ioctl(sock, SIOCGIFMTU, &ifr)) {
-+ 		uint16_t mtu = htons(ifr.ifr_mtu);
-+diff --git a/src/odhcpd.c b/src/odhcpd.c
-+index 71b803d..8aa4571 100644
-+--- a/src/odhcpd.c
-++++ b/src/odhcpd.c
-+@@ -143,10 +143,12 @@ int odhcpd_get_interface_config(const char *ifname, const char *what)
-+ int odhcpd_get_mac(const struct interface *iface, uint8_t mac[6])
-+ {
-+ 	struct ifreq ifr;
-++
-+ 	memset(&ifr, 0, sizeof(ifr));
-+-	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name));
-++	strncpy(ifr.ifr_name, iface->ifname, sizeof(ifr.ifr_name) - 1);
-+ 	if (ioctl(ioctl_sock, SIOCGIFHWADDR, &ifr) < 0)
-+ 		return -1;
-++
-+ 	memcpy(mac, ifr.ifr_hwaddr.sa_data, 6);
-+ 	return 0;
-+ }
-+-- 
-+2.7.4
-+
-diff --git a/recipes-core/odhcpd/odhcpd_git.bb b/recipes-core/odhcpd/odhcpd_git.bb
-index 745ee6f..e220bda 100644
---- a/recipes-core/odhcpd/odhcpd_git.bb
-+++ b/recipes-core/odhcpd/odhcpd_git.bb
-@@ -13,6 +13,7 @@ FILESEXTRAPATHS_prepend = "${THIDIR}/${PN}:"
- SRC_URI = "\
-     git://git.openwrt.org/project/odhcpd.git;name=odhcpd \
-     file://0100-OE-build-fails-due-to-libnl-tiny-dependency-in-CMakeLists.patch \
-+    file://0001-odhcpd-fix-strncpy-bounds.patch \
- "
- 
- SRCREV_odhcpd = "750e457e3000187b85906814a2529ede24775325"
--- 
-2.7.4
-
+>  SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
+>  SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
+> @@ -42,15 +43,16 @@ CCACHE = ""
+>
+>  TARGET_CC_ARCH += "${LDFLAGS}"
+>
+> -PACKAGECONFIG ??= ""
+> +
+> +PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}, des"
+>  PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
+>  PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
+>
+> -PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+>  PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
+>
+>  PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
+>                         perl, perl perl-lib"
+> +PACKAGECONFIG[des] = "--enable-des,--disable-des"
+>
+>  EXTRA_OECONF = "--enable-shared \
+>                  --disable-manuals \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
