@@ -1,49 +1,43 @@
-Return-Path: <alistair23@gmail.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 379F97CD59
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+	[209.85.160.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 434577CDAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 17:47:05 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id g80so21157534ljg.6
+	Fri,  1 Mar 2019 17:55:03 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id a48so28766052qtb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2019 09:47:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=LZhbcLz0HJRekRBGP0CpowPDSB2oTEr0b6WQkllu4P8=;
-	b=rb33n0/3P2KyP/xmd+IvQOOde1pkvn3yF47ZsqinX2ZeTID1K2dqvNZ0O37xNQNI7k
-	9kE7VPbww6zgdYwctKcCXgUHsCuioAtDJXIlD0ZAajEazm4XN1CT+3wNT+0QcytRpx7p
-	MmzcXF7cjUbYC2BT7WWFtygvSV25u5eudIt1OHNSg16Tkcq0bFfIMcPCYlY7Z9+aaB1A
-	mkxQofZuculVgLwz+puZcX6bLFEPHa2K8v5ybG9DqzdLK1ZxmvBSSzww6l0uKnnBRrnW
-	DCMKfrk9I/Csv1s790I3/BmPL2A6FCApO34UWpOxAxgo9+tYittKysLnDcDYL6tnMjDo
-	jOwQ==
+	Fri, 01 Mar 2019 09:55:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=LZhbcLz0HJRekRBGP0CpowPDSB2oTEr0b6WQkllu4P8=;
-	b=iM78/F07ywWKXiEnj8ar+F4N4Gc47QhaJos9PFeW9E5p8X1m5zO/tRUMS2zRQYaXYu
-	+OkuK4WRDkzHMmzRX6f0GxqGxZYjfVgdd15crweHn9NPXQQBCDXVDy2h6+aZC4WjTDxu
-	gH6+bKAI20y62MaeN533axGieZZ/tx3ruFTBCCa8fvEBcBUgGjlTOkAdMHwjYmtJv4lD
-	eME1mPJC0arn410fgGc249OQovElUAfV+0Dse17cDexVzcW05nfzQoZC+37G+omwiA49
-	36Qd4PcyoXxPxH8l181O+tD6Gg2/aNGTTRBhsI+dz17NRoM8LQ9Vr/gxhTOkeUVNJhDy
-	VVoQ==
-X-Gm-Message-State: APjAAAVaoBalCFRYBjd585oSwSet2T5Hdlz0WevjrmOamvshkW4YKCi+
-	CDcqpJX72y3x1u/QZRh7H7MQnbmR5i9gLrXE6+E=
-X-Google-Smtp-Source: APXvYqw1Z/LLRGRY7QxyVfSJNE97z2Y9QXPG4tZ5DrDEtiICr1wh9GrfwqMfoiqzlJoqUzjEtrB/6EPpOsCPC7QzWUI=
-X-Received: by 2002:a2e:9a55:: with SMTP id k21mr3445320ljj.191.1551462425458; 
-	Fri, 01 Mar 2019 09:47:05 -0800 (PST)
-MIME-Version: 1.0
-References: <20190301001504.4459-1-alistair.francis@wdc.com>
-	<CAMKF1sqGWbQVoU+YTrgW3yWYwJ=sS1ujxv_YM-k9Fv_nEgPJLA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqGWbQVoU+YTrgW3yWYwJ=sS1ujxv_YM-k9Fv_nEgPJLA@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 1 Mar 2019 09:46:07 -0800
-Message-ID: <CAKmqyKM=6cBxpGpBxsYixDZpu--8bY7VgV7-9p+QRAtHBHkb1Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:organization:content-transfer-encoding;
+	bh=8aZfADJvUtkeSAK8hDRtJhgT7z9k0gL9B40pv7vsWpM=;
+	b=gVxGfxWCQ6kMmRBxjYgncbyLQc65ru0Dip6ZCJFpP5DlfS5uffoWj0907anHy1zIWP
+	N/FypM7AlC3/MhM2uNdzu3GgnQEujN9jb8b/kx/S78O9UlX5wpS5smYZni4XvRBJahxn
+	24jCv/du4Hx6NOtnZXMWGugDxNFER4bZlByke2ud/UTpNkVYcSzLxIiq5HP/Q3KLc6eF
+	CtZnpDGDrABSyLDi+7yClR/l+nitRsyavTjoMUPhnw1XKzal+XJOxQIrELOmDj/zbLX8
+	MdFqxIZEWwp9gW00PFZi2ttgyO/j7GHo79Li+dhQUMIiWSGSdjmWzvYIVWoz3JA4+Yrv
+	3FnQ==
+X-Gm-Message-State: APjAAAU9br3AIQCuvVYOP/53eEHCyDJULu0epCSNiXrsMVGVXPXhDD2T
+	muLmMt6a4vSDlBlFa9yAEcpY0gMH
+X-Google-Smtp-Source: APXvYqwwoJE/N8tB6WU+8LrLUFEdMaigBtmZRMcD0IwQmMAfIkloPYfUHXGtw3L7xm65gdObSwZgJw==
+X-Received: by 2002:ac8:3931:: with SMTP id s46mr4994098qtb.357.1551462903508; 
+	Fri, 01 Mar 2019 09:55:03 -0800 (PST)
+Received: from localhost.localdomain ([177.194.204.148])
+	by smtp.gmail.com with ESMTPSA id t1sm3092754qki.65.2019.03.01.09.55.00
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 01 Mar 2019 09:55:02 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Fri, 01 Mar 2019 14:54:58 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] mimic: Initial commit of version 1.2.0.2
+Date: Fri,  1 Mar 2019 14:54:56 -0300
+Message-Id: <20190301175457.12210-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe PATCH 1/2] python-idna: Avoid removing executing bit from `.egg-info/` directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,73 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 17:47:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Mar 2019 17:55:03 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, Feb 28, 2019 at 6:30 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Thu, Feb 28, 2019 at 4:26 PM Alistair Francis
-> <Alistair.Francis@wdc.com> wrote:
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> > I was not sure what the license should be, it's a little confusing:
-> > https://github.com/MycroftAI/mimic/blob/development/COPYING
-> >
->
-> ideally list them all with &
+The chmod was removing the executing bit from the directory and then
+the native version was failing to build.
 
-Ok, it looks like there is a Sun, BellBird and CMU license that Yocto
-doesn't understand. Should I add those licenses to the meta layer
-first?
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-Alistair
+ meta-python/recipes-devtools/python/python-idna.inc | 4 ----
+ 1 file changed, 4 deletions(-)
 
->
-> >  .../recipes-multimedia/mimic/mimic_1.2.0.2.bb    | 16 ++++++++++++++++
-> >  1 file changed, 16 insertions(+)
-> >  create mode 100644 meta-multimedia/recipes-multimedia/mimic/mimic_1.2.=
-0.2.bb
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb =
-b/meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb
-> > new file mode 100644
-> > index 000000000..bd43fe389
-> > --- /dev/null
-> > +++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb
-> > @@ -0,0 +1,16 @@
-> > +SUMMARY =3D "A fast lightweight Text-to-speech engine"
-> > +DESCRIPTION =3D "Mimic is a fast, lightweight Text-to-speech engine de=
-veloped by Mycroft A.I. and VocaliD, based on Carnegie Mellon University=E2=
-=80=99s Flite (Festival-Lite) software. Mimic takes in text and reads it ou=
-t loud to create a high quality voice."
-> > +HOMEPAGE =3D "https://mimic.mycroft.ai/"
-> > +SECTION =3D "multimedia"
-> > +
-> > +LICENSE =3D "BSD-like"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D416ef1ca5167707fe381d7be336=
-64a33"
-> > +
-> > +DEPENDS =3D "curl-native icu"
-> > +
-> > +SRCREV =3D "67e43bf0fa56008276b878ec3790aa5f32eb2a16"
-> > +SRC_URI =3D "git://github.com/MycroftAI/mimic.git"
-> > +
-> > +inherit autotools
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
+index 436b58606..519812ddc 100644
+--- a/meta-python/recipes-devtools/python/python-idna.inc
++++ b/meta-python/recipes-devtools/python/python-idna.inc
+@@ -16,7 +16,3 @@ do_compile_prepend() {
+ }
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-
+-do_install_append() {
+-    chmod 664 -R ${D}${PYTHON_SITEPACKAGES_DIR}/*.egg-info/
+-}
+\ No newline at end of file
+-- 
+2.21.0
+
 
