@@ -1,25 +1,48 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EB477CCBD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 896716D196
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 01:28:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x211SorA027820
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  1 Mar 2019 02:30:21 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id u7so16914594qtg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2019 17:28:50 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.435.0; Thu, 28 Feb 2019 17:28:49 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Mar 2019 09:28:48 +0800
-Message-ID: <1551403728-80562-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <CAMKF1spcyPcCXVLNwLjV7j8L0f8y+coz=VPa=7L1f4i+-whKoA@mail.gmail.com>
-References: <CAMKF1spcyPcCXVLNwLjV7j8L0f8y+coz=VPa=7L1f4i+-whKoA@mail.gmail.com>
+	Thu, 28 Feb 2019 18:30:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=sPAtdHhJ0tz3NepqIw4VzN8Gycj95L0i1ubO4GCA0KQ=;
+	b=ZZx96Rvx+VO66ZNMwGMcyKtPAoPMtxkjdAYluRN2YdB8w6M0vgAe7cTzwOQDwPAXOS
+	PQ3JoOY9jqgCf9e6Da4R+AM3bTWGYDSwB/LLwNhXGW0wCkBF8vCJ4uIx9Sn30Aizx4/T
+	CsRjF/WGPua+9JKXpiZC4h18nimKTWuLdV3zdA9dxy8ITwp3XnAYU9ceXc73Hca8bdFN
+	sAu4S9PH+D/oKmWYWXDG4sFoP2+M9NkldJaVzdoc/Jy7/cUypQCKsy2ENR5+ypqGZmpF
+	iJjYb3/JXSnY042hnj7uh1pW6cVJeo+oglVgASg1PTdhW3pK+RprKiPRfwYx5BnsQceC
+	P0iQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=sPAtdHhJ0tz3NepqIw4VzN8Gycj95L0i1ubO4GCA0KQ=;
+	b=NcDJGw3jvlVl5Wvs1+VzPiLX4xuhEneMaOxBVD4SrS0ezDXchtxamY0nToJQDWFZtf
+	+rl76Urg2f07QWBbFGMmWidTd9omGuPVQc7udjIRty7IgYhnQ+g2w7mqBhxpSHEzfo4x
+	Hf0EPe/UcbVLOwWGwvhkh1Gzn422+guC7lE82EeuaNFwfVsHxWCnRWmK06LWKeVXm2fh
+	/Xl/dODzyIgwsAGYFHgEnWhy7CDsfo3TjTDk9rV0P38vTezYCP6KBf8gYij6snllHoes
+	bcIiDccROaAoTbOiuzOwypf2r2HiyBQgfqlHjIwxR44/wl1sU8ZnhkYAKpxMEMT4za/5
+	bxfA==
+X-Gm-Message-State: APjAAAXzmlO0t2oScjoy05Lf8Ku4cGWVQI+5pYQCYxi1Mu3a4mI+/klB
+	M5WP+yUHAb72h2PV7Vu8RAoAr3ZCMcA+9Un7GeY=
+X-Google-Smtp-Source: APXvYqyWZOMLeE3Z1ON/hgJw7rEwpW+uTVF8dpe25kb+KKR7peORUIVOwfvNwxwJBOREsJnoqNzuj2Z6UixULGqCzu4=
+X-Received: by 2002:aed:2268:: with SMTP id o37mr2123958qtc.29.1551407422111; 
+	Thu, 28 Feb 2019 18:30:22 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH V3] net-snmp: Add PACKAGECONFIG des
+References: <20190301001504.4459-1-alistair.francis@wdc.com>
+In-Reply-To: <20190301001504.4459-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 28 Feb 2019 18:29:56 -0800
+Message-ID: <CAMKF1sqGWbQVoU+YTrgW3yWYwJ=sS1ujxv_YM-k9Fv_nEgPJLA@mail.gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] mimic: Initial commit of version 1.2.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,39 +55,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 01:28:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Mar 2019 02:30:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Changqing Li <changqing.li@windriver.com>
+On Thu, Feb 28, 2019 at 4:26 PM Alistair Francis
+<Alistair.Francis@wdc.com> wrote:
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> I was not sure what the license should be, it's a little confusing:
+> https://github.com/MycroftAI/mimic/blob/development/COPYING
+>
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ideally list them all with &
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 1e87fd0..482eaf2 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -43,15 +43,15 @@ CCACHE = ""
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} des"
- PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
- PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
- 
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
- 
- PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
-                        perl, perl perl-lib"
-+PACKAGECONFIG[des] = "--enable-des,--disable-des"
- 
- EXTRA_OECONF = "--enable-shared \
-                 --disable-manuals \
--- 
-2.7.4
-
+>  .../recipes-multimedia/mimic/mimic_1.2.0.2.bb    | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.=
+2.bb
+>
+> diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb b/=
+meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb
+> new file mode 100644
+> index 000000000..bd43fe389
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.2.0.2.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "A fast lightweight Text-to-speech engine"
+> +DESCRIPTION =3D "Mimic is a fast, lightweight Text-to-speech engine deve=
+loped by Mycroft A.I. and VocaliD, based on Carnegie Mellon University=E2=
+=80=99s Flite (Festival-Lite) software. Mimic takes in text and reads it ou=
+t loud to create a high quality voice."
+> +HOMEPAGE =3D "https://mimic.mycroft.ai/"
+> +SECTION =3D "multimedia"
+> +
+> +LICENSE =3D "BSD-like"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D416ef1ca5167707fe381d7be33664=
+a33"
+> +
+> +DEPENDS =3D "curl-native icu"
+> +
+> +SRCREV =3D "67e43bf0fa56008276b878ec3790aa5f32eb2a16"
+> +SRC_URI =3D "git://github.com/MycroftAI/mimic.git"
+> +
+> +inherit autotools
+> +
+> +S =3D "${WORKDIR}/git"
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
