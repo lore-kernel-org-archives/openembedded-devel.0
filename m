@@ -1,46 +1,67 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id AC2FB7CD8C
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com
+	[209.85.167.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 841417CD8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 16:54:46 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id d2so28447869qti.11
+	Fri,  1 Mar 2019 16:55:09 +0000 (UTC)
+Received: by mail-oi1-f173.google.com with SMTP id b4so20026791oif.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2019 08:54:48 -0800 (PST)
+	Fri, 01 Mar 2019 08:55:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=s2zMPUiw4yGWb6SoTK7hw/7XlOHxaG/EiI9mTse+03I=;
+	b=EemAvERMVavQUIBf0M8EljjBXRszaPm3O4rWgSK/vwDMphmqA3WADYocv8/xrQxWUB
+	lFWHMBcnnMQSTZfCat3J/QA1IsEUHeg6iMOA/iEOZaL+MrUtSsJSkUwBANGDsjdbgZXF
+	sPN6VB1FXzNOWNVHGImFLPQ/iIsb6eJFpXb+khVJzqFnpKy4KP/NEhnqU3cfFdoqlAiP
+	s4r+8b1NqaFflftsoOJJxPaJVEm74xcKwr/yFlIM1AyDeZn/NjP9E3PD6AqFTkjsFGvf
+	UDuQQFwJyH4qYbapm/UNUOF1bNeG3rJ6b9BweGipHi3UyI8V6N/xQ2wbPyfCFJucDEAw
+	qydA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:organization:content-transfer-encoding;
-	bh=ZRaqk/JUpz8p6y4sw0QH77bCmdlJtlsvrhTYOfzzau8=;
-	b=ccwhSq4eWqvajFSYnyfNy80o0eOQjcxXKWPkVuxpLqvlhuFqhXIF8LB+tLZgnxDYC+
-	X3ACa/ftUGNKhVQRpzXHuIZNcOP6aKA7Ut/OeQQhoSU6R+aZOuWZ/Af5jZ+ENWOHRzBK
-	ILJjsc/NlGE/qFvJuahhA6wdnOJAeD1KM15xz0GwrZPo8Rk5w/OWmlAWK9PTYsj0g4/k
-	Gw32tfqKMrocUd4o2Y4teKG91t4gyEIDtbNjWRR/WO2eaxWNx7/tPWo2ssPFysoJMYVs
-	6t5ThFD7clRd5gL32Zxrk/v4OZAb5UcRqJCdA7OJE2mH1vt1ftruqxBukgaCeT3PqQIm
-	h3vA==
-X-Gm-Message-State: APjAAAWqsVOiauhINE1M33dbw3pE/cpWss9sLhzsDqC04/xoYTnNMsDm
-	+qz/FLJfcVm0ilt1eno2w9A2pXfl
-X-Google-Smtp-Source: APXvYqxt6oIz3WjGnfdFppWVsY8drmSUvcaK3/4tQnF4u5E1An0sw9Icuh40q09UdIgSm+U3Yuc85g==
-X-Received: by 2002:a0c:b64a:: with SMTP id q10mr4506526qvf.6.1551459287310;
-	Fri, 01 Mar 2019 08:54:47 -0800 (PST)
-Received: from localhost.localdomain ([177.194.204.148])
-	by smtp.gmail.com with ESMTPSA id
-	h58sm15170793qtb.89.2019.03.01.08.54.44
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 01 Mar 2019 08:54:46 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Fri, 01 Mar 2019 13:54:42 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  1 Mar 2019 13:54:35 -0300
-Message-Id: <20190301165435.8367-2-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190301165435.8367-1-otavio@ossystems.com.br>
-References: <20190301165435.8367-1-otavio@ossystems.com.br>
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+	:message-id:subject:to:cc;
+	bh=s2zMPUiw4yGWb6SoTK7hw/7XlOHxaG/EiI9mTse+03I=;
+	b=FomcS0mokurZotuW98wQNRA6p5G4slm68gSaw/Urvmz0oT1uX3mEundzbM7HddHrmC
+	jDCp2qzZxV37mF+ldi3K+WYNixuza5D/b27WlwbzOBNEUOAIc79CibeolN7HJ9LaET4C
+	vaJMuicWY1HH35VT/ivWoytqjQ5/AnydR8PyzqjnzSvtR1pXCik+a9ikhPwNt1P3+BpG
+	K+vkoS7rJ0r8j6Yc0Olmih9R/8c7fthPIxlv88lHYP94VCYGo/3WugAbWHYvRI1e4mCF
+	lWBqrbud5NP/eV7kCLk5er4GzWYxynPH5bvJg9FW0QdogJdBAly0fLmWwiO8c5tMp/47
+	t6rw==
+X-Gm-Message-State: AHQUAuayFJ6t/IM3f7GMQmZPp0a39J3RmalqwT4TUWGotT71Q2cAQ1tX
+	JVyQ+XLGD5yj7ahFBuE/KuNyRRk11ZU+nA==
+X-Google-Smtp-Source: APXvYqw/R8TxIso9j0e+/cjGPy6qEX0JYRfYGKlChmknAnNqQXuK5CatY8cNA1gR83SZLaTFVoFK4w==
+X-Received: by 2002:aca:5648:: with SMTP id k69mr3921469oib.107.1551459309766; 
+	Fri, 01 Mar 2019 08:55:09 -0800 (PST)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com.
+	[209.85.167.172]) by smtp.gmail.com with ESMTPSA id
+	g3sm10185725otb.66.2019.03.01.08.55.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 Mar 2019 08:55:08 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi1-f172.google.com with SMTP id i8so20001620oib.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Mar 2019 08:55:08 -0800 (PST)
+X-Received: by 2002:aca:54c5:: with SMTP id i188mr3957823oib.16.1551459308297; 
+	Fri, 01 Mar 2019 08:55:08 -0800 (PST)
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe PATCH 2/2] python-idna: Upgrade 2.7 -> 2.8
+References: <20190225140010.19025-1-otavio@ossystems.com.br>
+	<CAMKF1sr88He+DDgyaRWdabY8d0xuV5jM8faQgBSeYOCY0zpaYg@mail.gmail.com>
+	<CAJTo0LZFz3mLSROPrV3y09L4ZTSZ5T+uO=8MRKmrReDoLLDf7w@mail.gmail.com>
+	<CAP9ODKroyRVLaK640+UZv2idv3FnZ2NC8hgMqQDQU63f9-QQiA@mail.gmail.com>
+	<CAMKF1sqbAFbXdeJTL=gtJU4QzdPwdwEW5R01gpnUx4OhB_YtjQ@mail.gmail.com>
+	<CAMKF1sp61cfBXHTuPzMeQGfuK3SXv2h8kdDq5z1nAhC9_hUTLw@mail.gmail.com>
+In-Reply-To: <CAMKF1sp61cfBXHTuPzMeQGfuK3SXv2h8kdDq5z1nAhC9_hUTLw@mail.gmail.com>
+Date: Fri, 1 Mar 2019 13:54:55 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKoj1oH2CaE8jzd5kKz7mv_6sdD-R2YZC_uAK_ezyfHs4w@mail.gmail.com>
+Message-ID: <CAP9ODKoj1oH2CaE8jzd5kKz7mv_6sdD-R2YZC_uAK_ezyfHs4w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>,
+	Maxime Borges <maxime.borges@strataggem.com>
+Subject: Re: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,43 +74,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 16:54:46 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 01 Mar 2019 16:55:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
+On Fri, Mar 1, 2019 at 12:56 PM Khem Raj <raj.khem@gmail.com> wrote:
+> Can you resend this patch series, its missing in patchwork, so
+> hopefully, it will catch it this time.
 
- meta-python/recipes-devtools/python/python-idna.inc           | 4 ++--
- .../python/{python-idna_2.7.bb => python-idna_2.8.bb}         | 0
- .../python/{python3-idna_2.7.bb => python3-idna_2.8.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-idna_2.7.bb => python-idna_2.8.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-idna_2.7.bb => python3-idna_2.8.bb} (100%)
+Resent.
 
-diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
-index 519812ddc..13b0cdb62 100644
---- a/meta-python/recipes-devtools/python/python-idna.inc
-+++ b/meta-python/recipes-devtools/python/python-idna.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/kjd/idna"
- LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=782775b32f96098512e283fb5d4546cd"
- 
--SRC_URI[md5sum] = "0e5bb69018ddef1b9d95f681182be82c"
--SRC_URI[sha256sum] = "684a38a6f903c1d71d6d5fac066b58d7768af4de2b832e426ec79c30daa94a16"
-+SRC_URI[md5sum] = "2e9ae0b4a0b26d1747c6127cdb060bc1"
-+SRC_URI[sha256sum] = "c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407"
- 
- RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-codecs \
-diff --git a/meta-python/recipes-devtools/python/python-idna_2.7.bb b/meta-python/recipes-devtools/python/python-idna_2.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-idna_2.7.bb
-rename to meta-python/recipes-devtools/python/python-idna_2.8.bb
-diff --git a/meta-python/recipes-devtools/python/python3-idna_2.7.bb b/meta-python/recipes-devtools/python/python3-idna_2.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-idna_2.7.bb
-rename to meta-python/recipes-devtools/python/python3-idna_2.8.bb
 -- 
-2.21.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
