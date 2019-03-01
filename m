@@ -1,38 +1,44 @@
-Return-Path: <fsnow@phoenixcontact.com>
-X-Greylist: delayed 318 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 01 Mar 2019 16:12:13 UTC
-Received: from mail2.phoenixcontact.com (mail2.phoenixcontact.com
-	[62.157.123.121])
-	by mail.openembedded.org (Postfix) with ESMTP id AA3007CD78
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+	[209.85.222.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D6B97CD73
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 16:12:13 +0000 (UTC)
-Received: from home.innominate.com ([149.208.95.240])
-	by de-nice01.europe.phoenixcontact.com
-	with ESMTP id 2019030117065548-486284 ;
-	Fri, 1 Mar 2019 17:06:55 +0100 
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by home.innominate.com (Postfix) with ESMTP id 4B13722D3
+	Fri,  1 Mar 2019 16:54:41 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id h28so14669435qkk.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
-Received: from home.innominate.com ([127.0.0.1])
-	by localhost (innominate.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZvExZjkUbIQN
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
-Received: from pc-10467.de.innominate.com (mdickopp1.de.innominate.com
-	[10.1.47.1]) by home.innominate.com (Postfix) with ESMTP id 2D59721F4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
-Received: by pc-10467.de.innominate.com (Postfix, from userid 1001)
-	id 1D5CB2019E; Fri,  1 Mar 2019 17:06:54 +0100 (CET)
-From: Felix Snow <fsnow@phoenixcontact.com>
-To: openembedded-devel@lists.openembedded.org
+	Fri, 01 Mar 2019 08:54:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:organization:content-transfer-encoding;
+	bh=8aZfADJvUtkeSAK8hDRtJhgT7z9k0gL9B40pv7vsWpM=;
+	b=gFNzAJWAW9DgMq6ip2xSw8D9Tm+KhdF8ixCqYHh8xjViZjEaZCnTL23SEl2h8bPwrv
+	W1G9igK9sZhBsmzdAqeFUAV6Rp4Uh9z9qGIaiTnOcHBaWKN7rVTdMpgcc+gYvRglSPYi
+	R9umi8ANElt5O7PcNYEGR491ntqgLckGcMBST1mOI8N/aZ1e1Tg7SlxNs7XM83vQRf5T
+	mITWLUnDbebc+rodujJibQpF2uZoTjrBYLzxv/SmdZBCM1WEoPuLelKXArTk2EP4rS5A
+	YT1Fl2mbS4j53MZ75rHtDRyIQ9lbIvMIk+QjiAOeeZSTv46exkq3gYYI8jQf15CScK0S
+	pbUA==
+X-Gm-Message-State: APjAAAXagVcRD2wsXym3ph+b31Z7fsjd8SNu+O3JxN8PpkDTOvYVu4d2
+	QR7bBuP+BSqOEEEdq4/HZGj1Cy04
+X-Google-Smtp-Source: APXvYqzuAdLx2hOSk6nYK4n6zQi+nlw3W0jPpBwCcqWYjGmy/N3tnkNpTGzjshC4WjDTyvxqWyhDiA==
+X-Received: by 2002:a37:e30a:: with SMTP id y10mr4563741qki.208.1551459281985; 
+	Fri, 01 Mar 2019 08:54:41 -0800 (PST)
+Received: from localhost.localdomain ([177.194.204.148])
+	by smtp.gmail.com with ESMTPSA id
+	d32sm14147576qtc.88.2019.03.01.08.54.39
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 01 Mar 2019 08:54:41 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Fri, 01 Mar 2019 13:54:36 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri,  1 Mar 2019 13:54:34 -0300
+Message-Id: <20190301165435.8367-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-TNEFEvaluated: 1
-Message-ID: <20190301160653.d4rqgalu6rquukds@pc-10467.de.innominate.com>
-Date: Fri, 1 Mar 2019 17:06:54 +0100
-Subject: [meta-oe][PATCH] upgrade python-click from 6.7 to 7.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,53 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 16:12:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Mar 2019 16:54:41 -0000
+Content-Transfer-Encoding: 8bit
 
+The chmod was removing the executing bit from the directory and then
+the native version was failing to build.
 
-Signed-off-by: Felix Snow <fsnow@phoenixcontact.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-python/recipes-devtools/python/python-click.inc              | 8 +++++---
- .../python/{python-click_6.7.bb => python-click_7.0.bb}           | 0
- .../python/{python3-click_6.7.bb => python3-click_7.0.bb}         | 0
- 3 files changed, 5 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-click_6.7.bb => python-click_7.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-click_6.7.bb => python3-click_7.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-click.inc b/meta-python/recipes-devtools/python/python-click.inc
-index c81545b15..60bc46f82 100644
---- a/meta-python/recipes-devtools/python/python-click.inc
-+++ b/meta-python/recipes-devtools/python/python-click.inc
-@@ -6,10 +6,10 @@ Line Interface Creation Kit". It's highly configurable but comes with \
- sensible defaults out of the box."
- HOMEPAGE = "http://click.pocoo.org/"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=09e8b7869f94ba9e9a7b260d53c65dab"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c13ed890b210a882c1778216694c98c7"
- 
--SRC_URI[md5sum] = "fc4cc00c4863833230d3af92af48abd4"
--SRC_URI[sha256sum] = "f15516df478d5a56180fbf80e68f206010e6d160fc39fa508b65e035fd75130b"
-+SRC_URI[md5sum] = "7f53d50f7b7373ebc7963f9ff697450a"
-+SRC_URI[sha256sum] = "5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
- 
- UPSTREAM_CHECK_REGEX = "click/(?P<pver>\d+(\.\d+)+)/"
- 
-@@ -21,3 +21,5 @@ RDEPENDS_${PN} += "\
-     "
+ meta-python/recipes-devtools/python/python-idna.inc | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
+index 436b58606..519812ddc 100644
+--- a/meta-python/recipes-devtools/python/python-idna.inc
++++ b/meta-python/recipes-devtools/python/python-idna.inc
+@@ -16,7 +16,3 @@ do_compile_prepend() {
+ }
  
  BBCLASSEXTEND = "native nativesdk"
-+
-+PYPI_PACKAGE = "Click"
-diff --git a/meta-python/recipes-devtools/python/python-click_6.7.bb b/meta-python/recipes-devtools/python/python-click_7.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-click_6.7.bb
-rename to meta-python/recipes-devtools/python/python-click_7.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-click_6.7.bb b/meta-python/recipes-devtools/python/python3-click_7.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-click_6.7.bb
-rename to meta-python/recipes-devtools/python/python3-click_7.0.bb
+-
+-do_install_append() {
+-    chmod 664 -R ${D}${PYTHON_SITEPACKAGES_DIR}/*.egg-info/
+-}
+\ No newline at end of file
 -- 
-2.11.0
+2.21.0
 
 
