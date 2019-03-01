@@ -1,44 +1,46 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D6B97CD73
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id AC2FB7CD8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 16:54:41 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id h28so14669435qkk.7
+	Fri,  1 Mar 2019 16:54:46 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id d2so28447869qti.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2019 08:54:42 -0800 (PST)
+	Fri, 01 Mar 2019 08:54:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:organization:content-transfer-encoding;
-	bh=8aZfADJvUtkeSAK8hDRtJhgT7z9k0gL9B40pv7vsWpM=;
-	b=gFNzAJWAW9DgMq6ip2xSw8D9Tm+KhdF8ixCqYHh8xjViZjEaZCnTL23SEl2h8bPwrv
-	W1G9igK9sZhBsmzdAqeFUAV6Rp4Uh9z9qGIaiTnOcHBaWKN7rVTdMpgcc+gYvRglSPYi
-	R9umi8ANElt5O7PcNYEGR491ntqgLckGcMBST1mOI8N/aZ1e1Tg7SlxNs7XM83vQRf5T
-	mITWLUnDbebc+rodujJibQpF2uZoTjrBYLzxv/SmdZBCM1WEoPuLelKXArTk2EP4rS5A
-	YT1Fl2mbS4j53MZ75rHtDRyIQ9lbIvMIk+QjiAOeeZSTv46exkq3gYYI8jQf15CScK0S
-	pbUA==
-X-Gm-Message-State: APjAAAXagVcRD2wsXym3ph+b31Z7fsjd8SNu+O3JxN8PpkDTOvYVu4d2
-	QR7bBuP+BSqOEEEdq4/HZGj1Cy04
-X-Google-Smtp-Source: APXvYqzuAdLx2hOSk6nYK4n6zQi+nlw3W0jPpBwCcqWYjGmy/N3tnkNpTGzjshC4WjDTyvxqWyhDiA==
-X-Received: by 2002:a37:e30a:: with SMTP id y10mr4563741qki.208.1551459281985; 
-	Fri, 01 Mar 2019 08:54:41 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:organization:content-transfer-encoding;
+	bh=ZRaqk/JUpz8p6y4sw0QH77bCmdlJtlsvrhTYOfzzau8=;
+	b=ccwhSq4eWqvajFSYnyfNy80o0eOQjcxXKWPkVuxpLqvlhuFqhXIF8LB+tLZgnxDYC+
+	X3ACa/ftUGNKhVQRpzXHuIZNcOP6aKA7Ut/OeQQhoSU6R+aZOuWZ/Af5jZ+ENWOHRzBK
+	ILJjsc/NlGE/qFvJuahhA6wdnOJAeD1KM15xz0GwrZPo8Rk5w/OWmlAWK9PTYsj0g4/k
+	Gw32tfqKMrocUd4o2Y4teKG91t4gyEIDtbNjWRR/WO2eaxWNx7/tPWo2ssPFysoJMYVs
+	6t5ThFD7clRd5gL32Zxrk/v4OZAb5UcRqJCdA7OJE2mH1vt1ftruqxBukgaCeT3PqQIm
+	h3vA==
+X-Gm-Message-State: APjAAAWqsVOiauhINE1M33dbw3pE/cpWss9sLhzsDqC04/xoYTnNMsDm
+	+qz/FLJfcVm0ilt1eno2w9A2pXfl
+X-Google-Smtp-Source: APXvYqxt6oIz3WjGnfdFppWVsY8drmSUvcaK3/4tQnF4u5E1An0sw9Icuh40q09UdIgSm+U3Yuc85g==
+X-Received: by 2002:a0c:b64a:: with SMTP id q10mr4506526qvf.6.1551459287310;
+	Fri, 01 Mar 2019 08:54:47 -0800 (PST)
 Received: from localhost.localdomain ([177.194.204.148])
 	by smtp.gmail.com with ESMTPSA id
-	d32sm14147576qtc.88.2019.03.01.08.54.39
+	h58sm15170793qtb.89.2019.03.01.08.54.44
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 01 Mar 2019 08:54:41 -0800 (PST)
+	Fri, 01 Mar 2019 08:54:46 -0800 (PST)
 Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Fri, 01 Mar 2019 13:54:36 -0300
+	Fri, 01 Mar 2019 13:54:42 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  1 Mar 2019 13:54:34 -0300
-Message-Id: <20190301165435.8367-1-otavio@ossystems.com.br>
+Date: Fri,  1 Mar 2019 13:54:35 -0300
+Message-Id: <20190301165435.8367-2-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190301165435.8367-1-otavio@ossystems.com.br>
+References: <20190301165435.8367-1-otavio@ossystems.com.br>
 MIME-Version: 1.0
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
+Subject: [meta-oe PATCH 2/2] python-idna: Upgrade 2.7 -> 2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,31 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 16:54:41 -0000
+X-List-Received-Date: Fri, 01 Mar 2019 16:54:46 -0000
 Content-Transfer-Encoding: 8bit
-
-The chmod was removing the executing bit from the directory and then
-the native version was failing to build.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- meta-python/recipes-devtools/python/python-idna.inc | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-python/recipes-devtools/python/python-idna.inc           | 4 ++--
+ .../python/{python-idna_2.7.bb => python-idna_2.8.bb}         | 0
+ .../python/{python3-idna_2.7.bb => python3-idna_2.8.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-idna_2.7.bb => python-idna_2.8.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-idna_2.7.bb => python3-idna_2.8.bb} (100%)
 
 diff --git a/meta-python/recipes-devtools/python/python-idna.inc b/meta-python/recipes-devtools/python/python-idna.inc
-index 436b58606..519812ddc 100644
+index 519812ddc..13b0cdb62 100644
 --- a/meta-python/recipes-devtools/python/python-idna.inc
 +++ b/meta-python/recipes-devtools/python/python-idna.inc
-@@ -16,7 +16,3 @@ do_compile_prepend() {
- }
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/kjd/idna"
+ LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=782775b32f96098512e283fb5d4546cd"
  
- BBCLASSEXTEND = "native nativesdk"
--
--do_install_append() {
--    chmod 664 -R ${D}${PYTHON_SITEPACKAGES_DIR}/*.egg-info/
--}
-\ No newline at end of file
+-SRC_URI[md5sum] = "0e5bb69018ddef1b9d95f681182be82c"
+-SRC_URI[sha256sum] = "684a38a6f903c1d71d6d5fac066b58d7768af4de2b832e426ec79c30daa94a16"
++SRC_URI[md5sum] = "2e9ae0b4a0b26d1747c6127cdb060bc1"
++SRC_URI[sha256sum] = "c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407"
+ 
+ RDEPENDS_${PN}_class-target = "\
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-idna_2.7.bb b/meta-python/recipes-devtools/python/python-idna_2.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-idna_2.7.bb
+rename to meta-python/recipes-devtools/python/python-idna_2.8.bb
+diff --git a/meta-python/recipes-devtools/python/python3-idna_2.7.bb b/meta-python/recipes-devtools/python/python3-idna_2.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-idna_2.7.bb
+rename to meta-python/recipes-devtools/python/python3-idna_2.8.bb
 -- 
 2.21.0
 
