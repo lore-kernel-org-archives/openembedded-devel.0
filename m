@@ -1,52 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D89037CD7D
+Return-Path: <fsnow@phoenixcontact.com>
+X-Greylist: delayed 318 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 01 Mar 2019 16:12:13 UTC
+Received: from mail2.phoenixcontact.com (mail2.phoenixcontact.com
+	[62.157.123.121])
+	by mail.openembedded.org (Postfix) with ESMTP id AA3007CD78
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Mar 2019 15:56:56 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id v10so28275277qtp.8
+	Fri,  1 Mar 2019 16:12:13 +0000 (UTC)
+Received: from home.innominate.com ([149.208.95.240])
+	by de-nice01.europe.phoenixcontact.com
+	with ESMTP id 2019030117065548-486284 ;
+	Fri, 1 Mar 2019 17:06:55 +0100 
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by home.innominate.com (Postfix) with ESMTP id 4B13722D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2019 07:56:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=lXJXQV6rFNFxLq19hj0zYSFj+0xSYNhYtUyzKB4fg90=;
-	b=WWiB9SjxX87wH+q+SECkP4GKhELzRxq1jIEOpVSLH8SDkxhCAFWNfzN83tYlaylT9I
-	zhLlT19qXAtmNT+YAxDaLNmVqKMVIunFt0A0pVdS4GbqLdE8leASHMh9LcKeX8lXZSje
-	7wCfR6ppj1oy00bb72rKfBLT+kxXe/rhATE6qHcEM8SLQLuZPtnk5VCsddxGvwSSJAhP
-	yZ1i02Yyp0iBoRsLz4xshybduEm9iGDD3/BvU6rCrULs1v5pQKfEdq//mYhMDh89xFKG
-	gJd26gTIsx4QrcexfTPDEKttoFFvyHdciLppndV8WrzUqcLYtgpGWap08mF3PsTCCAGZ
-	1IAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=lXJXQV6rFNFxLq19hj0zYSFj+0xSYNhYtUyzKB4fg90=;
-	b=du2AxEXOPupubX3P5fYhuLPp2Ly+kZW/aHp/AJoCcBNW57R0NYWx4sCHRhZMJIe07k
-	tyoIFoUZj5GOLKZh92IhUUoZ/1FcBo/+iXZEX/x6T1vE9+xx9UoyY5cSndZV0CFlaJp9
-	X8YB9MAjvk9nZYMIMmPxrUbPbpfQBOYN5rdfrDyHUc0ghCjQK9WQVBEOHlNgtqcUu2Eq
-	mJ4FePBJ0s3fXZ3cEc0aIliHmP9Nh3mCih2qvCBMSkxoGRGMkmK1fwpIHq6RvUVGt6hQ
-	44VChJdMBBWcfzVhtjKlRWd+gqCqBJLApkJ2YlGQqJJlTWco67IQDpgum9KZKUXIQ2cf
-	DUjw==
-X-Gm-Message-State: APjAAAXt67lZt029UzWoSwflhunwjEGGbydlOOY1QyLfYVxlW8/IDx0Y
-	EDvO9l6RfmvYc26f6xkagjaTYg9GzYujvqsF3FI=
-X-Google-Smtp-Source: APXvYqzX/wfIGe3BhNi80kEUCQvAu5l8uUhOJudUi7ZbGgcyUbXOZytRqu7qhY4b97BPacltWbbPOKylwq4c1fBRZu4=
-X-Received: by 2002:a0c:94cf:: with SMTP id k15mr4317236qvk.55.1551455817474; 
-	Fri, 01 Mar 2019 07:56:57 -0800 (PST)
+	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
+Received: from home.innominate.com ([127.0.0.1])
+	by localhost (innominate.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZvExZjkUbIQN
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
+Received: from pc-10467.de.innominate.com (mdickopp1.de.innominate.com
+	[10.1.47.1]) by home.innominate.com (Postfix) with ESMTP id 2D59721F4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Mar 2019 17:06:55 +0100 (CET)
+Received: by pc-10467.de.innominate.com (Postfix, from userid 1001)
+	id 1D5CB2019E; Fri,  1 Mar 2019 17:06:54 +0100 (CET)
+From: Felix Snow <fsnow@phoenixcontact.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-References: <20190225140010.19025-1-otavio@ossystems.com.br>
-	<CAMKF1sr88He+DDgyaRWdabY8d0xuV5jM8faQgBSeYOCY0zpaYg@mail.gmail.com>
-	<CAJTo0LZFz3mLSROPrV3y09L4ZTSZ5T+uO=8MRKmrReDoLLDf7w@mail.gmail.com>
-	<CAP9ODKroyRVLaK640+UZv2idv3FnZ2NC8hgMqQDQU63f9-QQiA@mail.gmail.com>
-	<CAMKF1sqbAFbXdeJTL=gtJU4QzdPwdwEW5R01gpnUx4OhB_YtjQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqbAFbXdeJTL=gtJU4QzdPwdwEW5R01gpnUx4OhB_YtjQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Mar 2019 07:56:31 -0800
-Message-ID: <CAMKF1sp61cfBXHTuPzMeQGfuK3SXv2h8kdDq5z1nAhC9_hUTLw@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>, 
-	Maxime Borges <maxime.borges@strataggem.com>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
+User-Agent: NeoMutt/20170113 (1.7.2)
+X-TNEFEvaluated: 1
+Message-ID: <20190301160653.d4rqgalu6rquukds@pc-10467.de.innominate.com>
+Date: Fri, 1 Mar 2019 17:06:54 +0100
+Subject: [meta-oe][PATCH] upgrade python-click from 6.7 to 7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,30 +45,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 15:56:57 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Mar 2019 16:12:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Otavio
 
-Can you resend this patch series, its missing in patchwork, so
-hopefully, it will catch it this time.
+Signed-off-by: Felix Snow <fsnow@phoenixcontact.com>
+---
+ meta-python/recipes-devtools/python/python-click.inc              | 8 +++++---
+ .../python/{python-click_6.7.bb => python-click_7.0.bb}           | 0
+ .../python/{python3-click_6.7.bb => python3-click_7.0.bb}         | 0
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-click_6.7.bb => python-click_7.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-click_6.7.bb => python3-click_7.0.bb} (100%)
 
-On Mon, Feb 25, 2019 at 11:05 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Mon, Feb 25, 2019 at 10:38 AM Otavio Salvador
-> <otavio.salvador@ossystems.com.br> wrote:
-> >
-> > On Mon, Feb 25, 2019 at 2:03 PM Burton, Ross <ross.burton@intel.com> wrote:
-> > >
-> > > The original patch doesn't explain what it's doing and is clearly
-> > > going to remove executable bits from directories, which clearly isn't
-> > > right.
-> > >
-> > > I'd say remove it, and *then* if it breaks again fix properly.
-> >
-> > I am with Ross here. It is a really ugly patch and if need, we need a
-> > comment on the code and a proper reason to add it back.
-> >
->
-> +Maxime for information on the original patch
+diff --git a/meta-python/recipes-devtools/python/python-click.inc b/meta-python/recipes-devtools/python/python-click.inc
+index c81545b15..60bc46f82 100644
+--- a/meta-python/recipes-devtools/python/python-click.inc
++++ b/meta-python/recipes-devtools/python/python-click.inc
+@@ -6,10 +6,10 @@ Line Interface Creation Kit". It's highly configurable but comes with \
+ sensible defaults out of the box."
+ HOMEPAGE = "http://click.pocoo.org/"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=09e8b7869f94ba9e9a7b260d53c65dab"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c13ed890b210a882c1778216694c98c7"
+ 
+-SRC_URI[md5sum] = "fc4cc00c4863833230d3af92af48abd4"
+-SRC_URI[sha256sum] = "f15516df478d5a56180fbf80e68f206010e6d160fc39fa508b65e035fd75130b"
++SRC_URI[md5sum] = "7f53d50f7b7373ebc7963f9ff697450a"
++SRC_URI[sha256sum] = "5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
+ 
+ UPSTREAM_CHECK_REGEX = "click/(?P<pver>\d+(\.\d+)+)/"
+ 
+@@ -21,3 +21,5 @@ RDEPENDS_${PN} += "\
+     "
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++PYPI_PACKAGE = "Click"
+diff --git a/meta-python/recipes-devtools/python/python-click_6.7.bb b/meta-python/recipes-devtools/python/python-click_7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-click_6.7.bb
+rename to meta-python/recipes-devtools/python/python-click_7.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-click_6.7.bb b/meta-python/recipes-devtools/python/python3-click_7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-click_6.7.bb
+rename to meta-python/recipes-devtools/python/python3-click_7.0.bb
+-- 
+2.11.0
+
 
