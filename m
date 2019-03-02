@@ -1,46 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E3C417C93F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CDE57C83A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Mar 2019 15:20:10 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id p17so667857iol.7
+	Sat,  2 Mar 2019 15:57:49 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id y140so537779qkb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Mar 2019 07:20:12 -0800 (PST)
+	Sat, 02 Mar 2019 07:57:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Q6YDBBV5ufAF0ZypFSKWXN/lJ3CmUSbH59YJ7VxE3OM=;
-	b=DoBrJExfLL8P1yCXxVxTIuIxvCVVto+14tmHUdbyADPdfjjWMTOcBZHAvgNRMq48TL
-	3Hw+rYRK0ygLtXAOBCfMyxLO7EXqw3Jvc6P37SesfSyVPF769eGXBxBE+82mVHLYAF5S
-	bPjX2S3aKpMLs/myg/vv1RY4gQSgMJYm9wn2XEqTnJLuI7iinyYX5R6voxXpcOGPXpJE
-	fomJN0Q7vQBrN/nHRhrWkUjjCb2sfcyCJyGYglpVCkgIU3GGs4/oG/AbNGfOMmAte88U
-	OVd2aoICT0kmcYcpaADd47mI58FfRBIQa8sVRtOArjVKfSgfvHFl14wLzzr/XfTkw7g/
-	3ukA==
+	:cc:content-transfer-encoding;
+	bh=8bTibfQacJ3sUibNNX/MkQCECjGPmyin5Ia9LBdIdD8=;
+	b=kNNdDBemHGOpzVx60vlelfDiiirdtE5twhVTl0ghzBxkNd9RE8So2XRtiBn36Z6vdO
+	GDBpWU2sMC56vZ07wP3pHkQAc5ksznqMP5MTQfs4mkuCljq6AOJIPxfBGBHU1XshtWXW
+	tJOEPinoHuOiercOI0Ku+aR814pes+HcejtJnPmdBunNxkW2iR50WbSd0q9/hndNgfzz
+	GI1EOi0H4jj3zBSbNWCgi2+lU36e0iTKs3rm3GxLxlws3OabqpAP7rk5qlW0CIq3reZx
+	boAljoiCLbarIjBAg6l0o6aYYB15Ao0Hy3DEeCw8OLWWYqPQ9qF2/iikqUqe6aEK3gGK
+	lOMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Q6YDBBV5ufAF0ZypFSKWXN/lJ3CmUSbH59YJ7VxE3OM=;
-	b=Ge31WKVbUJVDwzeg+aNzWL8bGsjjV+HxypDfBTHtfMw56D1yFVe/1c+xQiTidxa51y
-	tHsuwZAG9vds39pmLvoc0kW0Jh/6vh1O+OAXQW23gpP6kPlktij2QXZY/LncJKlyl/oN
-	Fg/ovtP/fTCo/od8y0LjttOcJdg1QfU+nIpesqZRZal4cZsIvh5dvvQVe0nGhB1YFzYc
-	5eMi/MrqrznLX+cLm7x03Y1xUCfZlKIn66oz+mNGQq7eZ80oCFv61Ee+SzlxUwQ4cdM6
-	Txg1+jqt/Ie41tQwIKVQaXjvcFxGHoetg3mQFoeImAKUL+jFJ/XvB7yFgVrAfikCYt1F
-	cyhg==
-X-Gm-Message-State: APjAAAXpbPfhm7aIb3JpRF9ZfXwF4zCvkpPUN/czCC13NkRdMuxLjecZ
-	rPOdvOEaQsReXQOMcRTGnbiJjnOHbrmIM7erPUI=
-X-Google-Smtp-Source: APXvYqxa9Vuvq/pe4mdLNyO93xZZgyUce27opBbGCluk867nB8bCD+3LdrpAL28bSz5vcNaREAfF1hrjsOXflW+LscQ=
-X-Received: by 2002:a5d:9a08:: with SMTP id s8mr4867542iol.99.1551540011773;
-	Sat, 02 Mar 2019 07:20:11 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=8bTibfQacJ3sUibNNX/MkQCECjGPmyin5Ia9LBdIdD8=;
+	b=cU6hx2QTsuSkXdL75oZLpkfs0hJ7PWACQA1rBLZ5IhjowYTJO8n1Pj2tYrLk3/Cz7r
+	s7DPLD5+KLJKKEZCMEL4sjaVha2Zrm40HcVpr7hUeftgP8GMZkL07uBgMMdOKoxw45p8
+	NQntHaV1TXKmUu/kEBF/1yM4at51fj2YN4fw7I87UxVjkjqkwy9ePs286Y+b6dI+sUtn
+	S7P9/uvrCQu7R7bHrjajz7ThRxEHP51m7LJBdTKPBjg8PjbaveXPE2aKHbIYrNbeqrY6
+	tggtGvOEqr2zf3rl+Yfie9wongqrt/K1b1Q9gTK1EbUdTWJVOoAX5nNgdygA7+sR930i
+	fg9Q==
+X-Gm-Message-State: APjAAAV/PoQUnp7X8InJD5FbxYrU/ROvWPzUQgfI1pLaPmtdmb5YOuce
+	nbrtDPvTBk5qqvHz2vxbInYxlYeaksFgzPd4rig=
+X-Google-Smtp-Source: APXvYqwPR/HVsnozNnS3yF4kIajEUkzYgGKxhmWoxrS9f7F99D2olEwPdH08d5JeaaI3WeGQ1J6e1PmM9Vjo9xVHgWE=
+X-Received: by 2002:a37:e10c:: with SMTP id c12mr7935566qkm.315.1551542269860; 
+	Sat, 02 Mar 2019 07:57:49 -0800 (PST)
 MIME-Version: 1.0
 References: <20190302025034.10954-1-raj.khem@gmail.com>
 	<CALbNGRTf6TvxoQmC=fxGyVo31xn8w5p2sdJ3+aHmpPVn=EAEEA@mail.gmail.com>
 	<CAMKF1sp9AYu_skZBkVXw8ezFpVF2mS4w41EFFvQDdTEuXBHs8Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sp9AYu_skZBkVXw8ezFpVF2mS4w41EFFvQDdTEuXBHs8Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 2 Mar 2019 16:19:59 +0100
-Message-ID: <CALbNGRTtHwWWDGK7ebDgqw3Q03fzMaTfG14S-gWq0_MEjTUT7g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CALbNGRTtHwWWDGK7ebDgqw3Q03fzMaTfG14S-gWq0_MEjTUT7g@mail.gmail.com>
+In-Reply-To: <CALbNGRTtHwWWDGK7ebDgqw3Q03fzMaTfG14S-gWq0_MEjTUT7g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 2 Mar 2019 07:57:24 -0800
+Message-ID: <CAMKF1sq5MzbwSp-Rtqw8AuaS11TrdXa_hRxgJR-o2CX=JCjjdw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 1/3] glm: Upgrade to 0.9.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,15 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Mar 2019 15:20:11 -0000
+X-List-Received-Date: Sat, 02 Mar 2019 15:57:49 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 2, 2019 at 2:50 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > Dropping the patch breaks several packages for me.
-> >
+On Sat, Mar 2, 2019 at 7:20 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
 >
-> can you forward port and submit upstream as well
-No I can't. Would you accept a simple upgrade patch removing all musl patches?
+> On Sat, Mar 2, 2019 at 2:50 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > > Dropping the patch breaks several packages for me.
+> > >
+> >
+> > can you forward port and submit upstream as well
+> No I can't. Would you accept a simple upgrade patch removing all musl pat=
+ches?
 
-Andreas
+I am asking for help since I don't understand these patches, and they are
+largish and the code around those area have changed a bit. It wont be
+good to hold a upgrade for these, since this will mean it will break
+building with gcc 9.x which is what prompted me to upgrade this in
+first place.
+
+>
+> Andreas
 
