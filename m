@@ -1,50 +1,44 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C59A47C863
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 242937CA73
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Mar 2019 16:56:52 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id a17so2237614ljd.4
+	Sun,  3 Mar 2019 19:45:35 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id y15so2717543wma.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Mar 2019 08:56:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=qpaEVHvx0WyQ/y+Bz3rX7JaY9oCElX78OxOFL3LZvgU=;
-	b=afsC211gcdIyrAI48cWPVaJwYqzcN5g8nhQrUUfP0Z1PAHNAephE+o/7K2mWekp5sM
-	J4JIa94fIYq65J2uzjEN2k6r4jkmRZPJWtue5ScAzCA4+vTk6d7MQVsRM4AtklE16IQo
-	sKTBGlHejhRA30wv3LjjuzRLfiJDm0/6pZcPmeMBokRg3vZedy2A0d6+c5EGpEItgS/l
-	yMi2FbwLJNMPfrdxHnP7Iti3Qs4sYKqzQRYZaDGyvYdeOaZfCA3JgquFF6yH2RES8tzV
-	vLyxVpVAafFJEhu8+c4Kz1vLW+J76Jq41TPSRMFvPNDZf65hI8CGgvH+1qqI61PKbq4w
-	+GEA==
+	Sun, 03 Mar 2019 11:45:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=gVvfYrdLlt0JVcVLSpspd4lMGzDAVIeiZ23Bvn/VFeI=;
+	b=U5E/2/qBGfdRbxt8dljz7AeazL7TPG8eexXLzJ3VFuI4JFci/qvkiSU7nqLIq0p1Tl
+	7rfYFxksq8sFvEyB1hf8HO+TZnbBEyWPS2eQ2iZrs1SdQkuLlvZXfyCwUhdhcp26ycru
+	Nv4EGvZGWmBXs2tAda0t9FsoKZA2dJsokxkCmIrae3sZ9uZJteLGehPKE2OCzOaW8czy
+	JdDGa0C3ug6Y7qPoxVv1PlD/D/eaBoPBBOAmq5Kk9XijxRkA1J8ViQPOs//CrH6MMgRr
+	/Aw2IzZzJ8+lrlMRh/tfWo9GS9hGxy9EsxwxA32BYmCAvsgkpMLEOZoLYVvLOJS63Z9t
+	m0oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qpaEVHvx0WyQ/y+Bz3rX7JaY9oCElX78OxOFL3LZvgU=;
-	b=L13YEh5psfoHu/5VfasAO1/onf9CuJCXARWqHiXfBxlRHrsPoqurT7B9MFS6Vbdt9q
-	k1y+67yX9ON3wBVnocouEAgfaG1LYECRyPcVzJgoPWEzAKryYLKdLVa7gKvkJHvGV8CW
-	EH1QW8AzjLNwjcnaVv9c5FR3yfkz5yjh5Cad+dYG1jPJHJflXlmTe9+a6PBohh+arxJO
-	lMqbY0smmv7dTbbIPnM7bNKeVlN4tN6uvbFhovpmRKCPMfSj0J91H9b+gaIiLbUCSFn/
-	3kfCGW/TALfxowFJ7kZ3/laYyX2z4Nu32JV11dJzS8wlr7ydB4/HTR7Cf0rSaiDcJZ5c
-	v7Wg==
-X-Gm-Message-State: APjAAAUI+A+u66V1LdgnT7dNnW9eLSXZxvzui8WnbZmIhrbIvWTBVvve
-	2rBWLsLhGCXxqPum3G/lKc1fr7xARt8=
-X-Google-Smtp-Source: APXvYqyyrdqux5VeWC5cb7vVwH7Y0H44TW76IRIWjDPgPNn5RFmPZhLwBA0VGYI5dEcWSvRFRtNaMQ==
-X-Received: by 2002:a2e:131a:: with SMTP id
-	26-v6mr7968882ljt.107.1551632212753; 
-	Sun, 03 Mar 2019 08:56:52 -0800 (PST)
-Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id p3sm1047656lfc.64.2019.03.03.08.56.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Mar 2019 08:56:52 -0800 (PST)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Mar 2019 17:55:30 +0100
-Message-Id: <20190303165530.22532-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] nghttp2: update to 1.36
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=gVvfYrdLlt0JVcVLSpspd4lMGzDAVIeiZ23Bvn/VFeI=;
+	b=gaIXtlhpLPsa5zCWyHfZm8fqDswtx/exBYGtJME0hiEnsaqQxRxGCShy2nyWIsy80N
+	ro7FZT7NRvd8H6gBPKJbjw6o1iQ5wcdyUxx2IgJlj0DD3/3Y9QxZPY7KZdsdfHnuFzi6
+	Zc4vBt/re3mGXm7u8bAk8eZHVRULrPseAQeUsRUsXy2U9Ifigy8TZT06l/nAJ/zDypFX
+	gCtiQ8GLL3tYKzS0t5Ucw0gPoknF19K0oeDTAByAkFpFTEuYJS7hwaFhSZGneSaH55IN
+	S5ZeHlLB2l/CWQ8dgxGNKHEGirsW5NcZoktybasRpng+rVoLqU6n0JjH4srRrM+pwi21
+	Mb3g==
+X-Gm-Message-State: AHQUAuZVqQzTRzne0GTLCtBvTP+uaq18ocvh6ANZ3shNFPW8vH+DtgvD
+	TWOwMFm7F/9cSf3Zw6JORdrOiHVe9HxfWinECyZ6I5TfkPY=
+X-Google-Smtp-Source: APXvYqwjOoXB20wHUwPs83nlhxVHqOAQRQEkOQkykxZ9m6Ct8dZ4g8LkSyPHldbiZDPUCc+jUBLWSQVF0XMo1CL86q0=
+X-Received: by 2002:a1c:e0d7:: with SMTP id x206mr9359456wmg.152.1551642336401;
+	Sun, 03 Mar 2019 11:45:36 -0800 (PST)
+MIME-Version: 1.0
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Sun, 3 Mar 2019 20:45:25 +0100
+Message-ID: <CAAfyv34gwyZ_OQYw96owsFZ5A=vZ94X3oGGD6Nw6jXMU++hOHw@mail.gmail.com>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-java] Illegal instruction (core dumped) when compiling jaxp1.3-native-1.4.01-r0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +51,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Mar 2019 16:56:53 -0000
+X-List-Received-Date: Sun, 03 Mar 2019 19:45:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../nghttp2/{nghttp2_1.26.0.bb => nghttp2_1.36.0.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/nghttp2/{nghttp2_1.26.0.bb => nghttp2_1.36.0.bb} (66%)
+Hi,
 
-diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.36.0.bb
-similarity index 66%
-rename from meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
-rename to meta-networking/recipes-support/nghttp2/nghttp2_1.36.0.bb
-index 3ccd486be..920e78280 100644
---- a/meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
-+++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.36.0.bb
-@@ -4,9 +4,9 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
- 
--SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.bz2"
--SRC_URI[md5sum] = "926f07ad3b50f38f7d8935ced04716cf"
--SRC_URI[sha256sum] = "0df4229f4123b5aa96e834ebcfdffe954e93d986f0252fd10123d50c6f010983"
-+SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
-+SRC_URI[md5sum] = "f2ef3dd1e9fc6dc29fcdd4a465ebc020"
-+SRC_URI[sha256sum] = "e9bb86157b88eda5a6844a232e039febbb52c1aa44b640acbbfabe729b8287fc"
- 
- DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
- 
+forwarding from yocto mailing list as after reading README from meta-java
+realised that this should be correct one :).
+
+I'm using meta-java sumo branch and on ubuntu 18.04 I have this issue
+(building for beaglebone-yocto machine):
+ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile
+(log file is located at
+/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390)
+ERROR: Logfile of failure stored in:
+/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| Illegal instruction (core dumped)
+| WARNING: exit code 132 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at
+/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390)
+ERROR: Task
+(virtual:native:/home/jenkins/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile)
+failed with exit code '1'
+ERROR: gnujaf-native-1.1.1-r1 do_compile: Function failed: do_compile (log
+file is located at
+/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475)
+ERROR: Logfile of failure stored in:
+/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| Illegal instruction (core dumped)
+| WARNING: exit code 132 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at
+/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475)
+
+Looks like javac is failing (when run devshell and call java it will print
+help though). I tried same setup on ubuntu 16.04 and here it works
+perfectly fine. Any ides what can cause this - different toolchain or?
+
+Also looks like when use this proposal [0] it start working (juts need to
+update multiple recipes which calls javac in configure phase with
+-Xnoinlining). Compiletime disable inlining doesn't work.
+
+It thee some pending fix for that? When use host gcc 5.5 (from ubuntu
+16.04) all works good (while not with gcc 7.3).
+
+[0] - https://sourceforge.net/p/jamvm/mailman/message/25051239/
+
+BR,
+
+marek
+
 -- 
-2.17.1
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
 
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
 
