@@ -1,44 +1,49 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 242937CA73
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 56C377C8A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Mar 2019 19:45:35 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id y15so2717543wma.0
+	Sun,  3 Mar 2019 22:05:50 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id x6so1816543qki.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Mar 2019 11:45:37 -0800 (PST)
+	Sun, 03 Mar 2019 14:05:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=gVvfYrdLlt0JVcVLSpspd4lMGzDAVIeiZ23Bvn/VFeI=;
-	b=U5E/2/qBGfdRbxt8dljz7AeazL7TPG8eexXLzJ3VFuI4JFci/qvkiSU7nqLIq0p1Tl
-	7rfYFxksq8sFvEyB1hf8HO+TZnbBEyWPS2eQ2iZrs1SdQkuLlvZXfyCwUhdhcp26ycru
-	Nv4EGvZGWmBXs2tAda0t9FsoKZA2dJsokxkCmIrae3sZ9uZJteLGehPKE2OCzOaW8czy
-	JdDGa0C3ug6Y7qPoxVv1PlD/D/eaBoPBBOAmq5Kk9XijxRkA1J8ViQPOs//CrH6MMgRr
-	/Aw2IzZzJ8+lrlMRh/tfWo9GS9hGxy9EsxwxA32BYmCAvsgkpMLEOZoLYVvLOJS63Z9t
-	m0oQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=oXYSnEPL61FUNcB4Dit/RX3oAenKpneyiGOmHT0hUNQ=;
+	b=srxOu8hoYNHpIh3THTHCbCOF4KXH6NlI360sECwOO5lpn5MMuJEJhjnhc956U2mqH+
+	GksZWKIQEf+n3/ZXvL6lovEZoq06mlSzhIvkqv8wOp8Xk8IqXBUNtpBU7VirjaLBga4W
+	WOV2zNtjlwSaw9NFICg7XoZ5pw0ol9JCgoGYcyAuJjwL9ms5KotPE4We4qjgQFr3eViM
+	u7mePV57yFPMlf7/c4qIhhF4oiGLZkc67CPkXkAzsKcxu2QGexwJof0wjHjYu21T8O3B
+	igNk/WHTgCNzrS2iq8jY+C+kDPuLu1LkxrjQxltOzAcWuQ76hc+EXLZi11C7IDX82qEN
+	SJEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=gVvfYrdLlt0JVcVLSpspd4lMGzDAVIeiZ23Bvn/VFeI=;
-	b=gaIXtlhpLPsa5zCWyHfZm8fqDswtx/exBYGtJME0hiEnsaqQxRxGCShy2nyWIsy80N
-	ro7FZT7NRvd8H6gBPKJbjw6o1iQ5wcdyUxx2IgJlj0DD3/3Y9QxZPY7KZdsdfHnuFzi6
-	Zc4vBt/re3mGXm7u8bAk8eZHVRULrPseAQeUsRUsXy2U9Ifigy8TZT06l/nAJ/zDypFX
-	gCtiQ8GLL3tYKzS0t5Ucw0gPoknF19K0oeDTAByAkFpFTEuYJS7hwaFhSZGneSaH55IN
-	S5ZeHlLB2l/CWQ8dgxGNKHEGirsW5NcZoktybasRpng+rVoLqU6n0JjH4srRrM+pwi21
-	Mb3g==
-X-Gm-Message-State: AHQUAuZVqQzTRzne0GTLCtBvTP+uaq18ocvh6ANZ3shNFPW8vH+DtgvD
-	TWOwMFm7F/9cSf3Zw6JORdrOiHVe9HxfWinECyZ6I5TfkPY=
-X-Google-Smtp-Source: APXvYqwjOoXB20wHUwPs83nlhxVHqOAQRQEkOQkykxZ9m6Ct8dZ4g8LkSyPHldbiZDPUCc+jUBLWSQVF0XMo1CL86q0=
-X-Received: by 2002:a1c:e0d7:: with SMTP id x206mr9359456wmg.152.1551642336401;
-	Sun, 03 Mar 2019 11:45:36 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=oXYSnEPL61FUNcB4Dit/RX3oAenKpneyiGOmHT0hUNQ=;
+	b=oVIwl/x2UwlPA0tf8EkCgoIY58LSDHtGOTSBCQhd5E+03nSXmb6pr4t+hkU2DsEK/z
+	/PvsbehXr6e+DI8OVB8Nej8gVB6McgmDn4dScLOoW4q9Na8KWH2ezVh1xwViNfUtK/E5
+	Nj50IZxf+Mtof0NonGz2Kaqz7RRnVB9YP/Ei0gkBmA4cQuWRZEjX/Hk6GCYznHWe39yT
+	SneurtlmTdOhCDsiZm7uyFFoVsunIZRWU0jjTo1aWLgyAf1H0KDyFG3aSPfWeJV2elsg
+	LDj2jNe+BIc04C+5lZzv+CqnU1CdroV5vxH0L1H9meVROOTUJSpwty5OwJmy0OLfeTwO
+	RMrg==
+X-Gm-Message-State: APjAAAVruXvX0Gs30zi4fzLGbgDBTZoJzHxH3FwfKMb2GhYCbhC9a577
+	B0gjw5uQwaTQ1pYe2BpnE6/p/ZU6YLPDhIGrowbGJ9+4
+X-Google-Smtp-Source: APXvYqzTosPoDhUV8bPCdRgpvK3bPQfUMdNVDQYKjui76S2npogWLpwxsYBkDY25PT/nsbQFvvF0l58JlUOqLLFi+/A=
+X-Received: by 2002:a37:e10c:: with SMTP id c12mr11556974qkm.315.1551650750873;
+	Sun, 03 Mar 2019 14:05:50 -0800 (PST)
 MIME-Version: 1.0
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Sun, 3 Mar 2019 20:45:25 +0100
-Message-ID: <CAAfyv34gwyZ_OQYw96owsFZ5A=vZ94X3oGGD6Nw6jXMU++hOHw@mail.gmail.com>
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-java] Illegal instruction (core dumped) when compiling jaxp1.3-native-1.4.01-r0
+References: <20190220043740.27952-1-zboszor@pr.hu>
+	<20190226095502.5499-1-zboszor@pr.hu>
+	<20190226095502.5499-4-zboszor@pr.hu>
+In-Reply-To: <20190226095502.5499-4-zboszor@pr.hu>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 3 Mar 2019 14:05:25 -0800
+Message-ID: <CAMKF1sqkihWR1Ye=idgGM3m6fq59KtY1_BpAJPK3oKmUwbddrQ@mail.gmail.com>
+To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH 3/7 v2] dracut: Add execute_dracut opkg intercept script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,68 +56,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Mar 2019 19:45:36 -0000
+X-List-Received-Date: Sun, 03 Mar 2019 22:05:50 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Tue, Feb 26, 2019 at 1:55 AM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbo=
+szor@pr.hu> wrote:
+>
+> Signed-off-by: B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zboszor@pr.hu>
+> ---
+> v2: The script name is execute_dracut, not execute-dracut
+>     so it is identical to the postinst-intercepts variant.
+>
+>  .../dracut/dracut/execute_dracut              | 21 +++++++++++++++++++
+>  .../recipes-devtools/dracut/dracut_git.bb     |  5 +++++
+>  2 files changed, 26 insertions(+)
+>  create mode 100755 meta-initramfs/recipes-devtools/dracut/dracut/execute=
+_dracut
+>
+> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut=
+ b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
+> new file mode 100755
+> index 000000000..96bcc92ed
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
+> @@ -0,0 +1,21 @@
+> +#!/bin/sh
+> +
+> +if [ ! -f $OPKG_INTERCEPT_DIR/execute-dracut ]; then
+> +       KERNEL_VERSION=3D$1
+> +       shift
+> +       MY_KERNEL_VERSION=3D$(readlink /boot/bzimage | sed 's,^.*bzImage-=
+,,')
 
-forwarding from yocto mailing list as after reading README from meta-java
-realised that this should be correct one :).
+this assumption breaks all image builds for qemux86 and qemux86_64
+unless that is fixed, it will be hard to accept this series. bzImage
+is not the kernel name always and may not be present in rootfs all the
+time.
 
-I'm using meta-java sumo branch and on ubuntu 18.04 I have this issue
-(building for beaglebone-yocto machine):
-ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile
-(log file is located at
-/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390)
-ERROR: Logfile of failure stored in:
-/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| Illegal instruction (core dumped)
-| WARNING: exit code 132 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at
-/home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.15390)
-ERROR: Task
-(virtual:native:/home/jenkins/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile)
-failed with exit code '1'
-ERROR: gnujaf-native-1.1.1-r1 do_compile: Function failed: do_compile (log
-file is located at
-/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475)
-ERROR: Logfile of failure stored in:
-/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| Illegal instruction (core dumped)
-| WARNING: exit code 132 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at
-/home/jenkins/my_build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.15475)
+ERROR: yoe-simple-image-1.0-r0 do_rootfs: The postinstall intercept
+hook 'execute_dracut' failed, details in
+/mnt/a/yoe/build/tmp/work/qemux86-yoe-linux/yoe-s
+imple-image/1.0-r0/temp/log.do_rootfs
+ERROR: yoe-simple-image-1.0-r0 do_rootfs:
+ERROR: yoe-simple-image-1.0-r0 do_rootfs: Function failed: do_rootfs
 
-Looks like javac is failing (when run devshell and call java it will print
-help though). I tried same setup on ubuntu 16.04 and here it works
-perfectly fine. Any ides what can cause this - different toolchain or?
 
-Also looks like when use this proposal [0] it start working (juts need to
-update multiple recipes which calls javac in configure phase with
--Xnoinlining). Compiletime disable inlining doesn't work.
 
-It thee some pending fix for that? When use host gcc 5.5 (from ubuntu
-16.04) all works good (while not with gcc 7.3).
-
-[0] - https://sourceforge.net/p/jamvm/mailman/message/25051239/
-
-BR,
-
-marek
-
--- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
-
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
+> +       if [[ -z "$MY_KERNEL_VERSION" ]]; then
+> +               if [[ -d /lib/modules/$KERNEL_VERSION ]]; then
+> +                       MY_KERNEL_VERSION=3D"${KERNEL_VERSION}"
+> +               fi
+> +       fi
+> +       [[ -z "$MY_KERNEL_VERSION" ]] && echo COULD NOT DETERMINE KERNEL =
+VERSION TO RUN DEPMOD AND DRACUT && echo PLEASE DO IT MANUALLY && exit 0
+> +       cat <<EOF > $OPKG_INTERCEPT_DIR/execute-dracut
+> +echo RUNNING: depmod -a $MY_KERNEL_VERSION
+> +depmod -a $MY_KERNEL_VERSION
+> +echo RUNNING: dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
+> +echo "dracut: $(dracut --help | grep 'Version:')"
+> +dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
+> +EOF
+> +       chmod +x $OPKG_INTERCEPT_DIR/execute-dracut
+> +fi
+> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-=
+initramfs/recipes-devtools/dracut/dracut_git.bb
+> index a1d7cb119..cb49d9539 100644
+> --- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> +++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> @@ -12,6 +12,7 @@ PV =3D "049"
+>  SRCREV =3D "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
+>  SRC_URI =3D "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protoco=
+l=3Dhttp \
+>             file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+> +           file://execute_dracut \
+>             "
+>
+>  DEPENDS +=3D "kmod"
+> @@ -49,11 +50,15 @@ do_install() {
+>      # Its Makefile uses cp -arx to install modules.d, so fix the owner
+>      # to root:root
+>      chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
+> +
+> +    install -d -m0755 ${D}${datadir}/opkg/intercept
+> +    install -m0755 ${WORKDIR}/execute_dracut ${D}${datadir}/opkg/interce=
+pt
+>  }
+>
+>  FILES_${PN} +=3D "${prefix}/lib/kernel \
+>                  ${prefix}/lib/dracut \
+>                  ${systemd_unitdir} \
+> +                ${datadir}/opkg/intercept \
+>                 "
+>  FILES_${PN}-dbg +=3D "${prefix}/lib/dracut/.debug"
+>
+> --
+> 2.20.1
+>
 
