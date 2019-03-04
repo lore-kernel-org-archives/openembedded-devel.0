@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
-	[209.85.210.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C89676C1BE
+Return-Path: <zboszor@pr.hu>
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id B8C3560107
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Mar 2019 04:28:05 +0000 (UTC)
-Received: by mail-pf1-f173.google.com with SMTP id n22so2043237pfa.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Mar 2019 20:28:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=i7bpISbgkeZICDv9HB39C5JU5srTNurDH2H5VJlcpWw=;
-	b=tWfuR1i2So0JhcBtYkgOHXWL+LH+P3Ch0h7ujh8vQIIBjdJBrlxB2YGcB0Msizqf0E
-	PS91h2bsXde9SbagGN/WntnuKFYAIbbGwOKcj2rT79MvYXARwINI6Iv4Px0IAix1qHkr
-	OrYZWsHKwiQTMELMk7gbJyJ8ATdSHO66/3LK6mlVRTU0EloWSgmFSGEIzH5n4tl15FsH
-	0zL/3+1tgsOrDW6FBr1vaHgcsCnTmsm+biSBNqdE9eHFRdFDYgzY8jjlu93OLonXqX4S
-	BRfCYYfMVKagqpDD2jbrkUNo6bnQQ3nQDhissfsbugFnN31Nd+KrtHLym+9/7It1fRGt
-	uvWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=i7bpISbgkeZICDv9HB39C5JU5srTNurDH2H5VJlcpWw=;
-	b=YcfNUpsPly3wmGMwZg0UXRcWq+OXl82E8yTVIIX9sqWB42UDCa5Z3fO9UJ/qTzBciH
-	N6cpEdGhMwHSDVIrZJL9UkzmjM9LzgL0v3gAc0PVCeWao0kvmbJoDo+vg+u5jQeBSIE1
-	7vguoo0weaNNaEaPNXRUOxYiwyr64sLEwBuwu5/CkTZczBBvGaH7Nsb09EeGw8WmdzP6
-	k8LEKVN/fDFeyreyJly8OYbeZXOGete3sXukKyD1CsKRGMiSb+0LJYKbwV38l5M2j4ps
-	BwySul7k7+lrS12rwO3w7vQL2WtfI1uqNDntNUNFAYtirsZgpdj6hOe/Y9rEHv4BmCTU
-	n/vg==
-X-Gm-Message-State: APjAAAVhNLtOQQ9hNh9KQEplwdWFvTk1EzdDsyA0ag0vgIb0+y5efe78
-	76Ki2X4xsa06UDmMkatxnPQZJcNS
-X-Google-Smtp-Source: APXvYqxB5ydgS+5C7+NDsIz2RYsuGUkrMAlDEMFBzwcdXqM6m4K8aTXMqjCUFwsv2QxiCJkbK23PAQ==
-X-Received: by 2002:a65:62c2:: with SMTP id m2mr16705884pgv.348.1551673685877; 
-	Sun, 03 Mar 2019 20:28:05 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::5fa3])
-	by smtp.gmail.com with ESMTPSA id
-	m64sm11661915pfi.149.2019.03.03.20.28.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 03 Mar 2019 20:28:05 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Mar 2019 20:27:58 -0800
-Message-Id: <20190304042758.30133-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Mon,  4 Mar 2019 09:04:21 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1h0jWH-0004uC-P1; Mon, 04 Mar 2019 10:04:21 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=TKClgbPmZrOkVbcit9S68QkVqWQGRrWtSr1ZlIA15I8=;
+	b=CmB3qqHR5bvZZAajFnA2HeHak/
+	IY663r2N/drWdwAbEeyh1jkTlddKod2GHeMwAYGv/8irKqyC4dKzlb4b4sd8F0rxdXqLvTUKXFCCj
+	YNoUwfS0YBAMNXPtcq9qV2w74Y3HnOGzmksYYv0GzPQGz+uCHWK2Upi5GGnacd8znbdUTmHZ5iLXs
+	ky/BW+tn8vsE0PBLbRaHuNfEIQOx3Viqu48RC5UbecQhTpGQ6C/cnd9vqsX32pcD2Bwn1sm4vqDAh
+	kq1aA2yt+ag6A/x6VtcuytUWWbaZUszAUK47rrQZa9JkpR4ItsGXLyTo31UVGfesCZHiPBWfot1+8
+	t2p14M9w==;
+Received: from host-87-242-20-26.prtelecom.hu ([87.242.20.26]
+	helo=localhost.localdomain)
+	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
+	id 1h0jWC-0008UF-Uz; Mon, 04 Mar 2019 10:04:19 +0100
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190220043740.27952-1-zboszor@pr.hu>
+	<20190226095502.5499-1-zboszor@pr.hu>
+	<20190226095502.5499-4-zboszor@pr.hu>
+	<CAMKF1sqkihWR1Ye=idgGM3m6fq59KtY1_BpAJPK3oKmUwbddrQ@mail.gmail.com>
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Message-ID: <4f84ab3c-0344-5060-2c77-6577d62e4570@pr.hu>
+Date: Mon, 4 Mar 2019 10:04:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: Upgrade to 5.5.63
+In-Reply-To: <CAMKF1sqkihWR1Ye=idgGM3m6fq59KtY1_BpAJPK3oKmUwbddrQ@mail.gmail.com>
+X-Spam-Score: -1.4 (-)
+X-Scan-Signature: b29d38d33be9dc2ab4a61579471bb751
+X-Spam-Tracer: backend.mail.pr.hu -1.4 20190304090419Z
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH 3/7 v2] dracut: Add execute_dracut opkg intercept script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +55,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 04:28:06 -0000
+X-List-Received-Date: Mon, 04 Mar 2019 09:04:22 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../{mariadb-native_5.5.62.bb => mariadb-native_5.5.63.bb}  | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                       | 6 +++---
- .../mysql/{mariadb_5.5.62.bb => mariadb_5.5.63.bb}          | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.62.bb => mariadb-native_5.5.63.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.62.bb => mariadb_5.5.63.bb} (100%)
+2019. 03. 03. 23:05 keltezéssel, Khem Raj írta:
+> On Tue, Feb 26, 2019 at 1:55 AM Böszörményi Zoltán <zboszor@pr.hu> wrote:
+>>
+>> Signed-off-by: Böszörményi Zoltán <zboszor@pr.hu>
+>> ---
+>> v2: The script name is execute_dracut, not execute-dracut
+>>      so it is identical to the postinst-intercepts variant.
+>>
+>>   .../dracut/dracut/execute_dracut              | 21 +++++++++++++++++++
+>>   .../recipes-devtools/dracut/dracut_git.bb     |  5 +++++
+>>   2 files changed, 26 insertions(+)
+>>   create mode 100755 meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
+>>
+>> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
+>> new file mode 100755
+>> index 000000000..96bcc92ed
+>> --- /dev/null
+>> +++ b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
+>> @@ -0,0 +1,21 @@
+>> +#!/bin/sh
+>> +
+>> +if [ ! -f $OPKG_INTERCEPT_DIR/execute-dracut ]; then
+>> +       KERNEL_VERSION=$1
+>> +       shift
+>> +       MY_KERNEL_VERSION=$(readlink /boot/bzimage | sed 's,^.*bzImage-,,')
+> 
+> this assumption breaks all image builds for qemux86 and qemux86_64
+> unless that is fixed, it will be hard to accept this series. bzImage
+> is not the kernel name always
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.63.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.63.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 8ca5b2ba42..f715542038 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
-+SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz \
-            file://fix-cmake-module-path.patch \
-            file://remove-bad-path.patch \
-            file://fix-mysqlclient-r-version.patch \
-@@ -18,8 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
-            file://change-cc-to-cc-version.patch \
-            file://0001-disable-ucontext-on-musl.patch \
-           "
--SRC_URI[md5sum] = "6375d577e9539b839f44d857e70f82b9"
--SRC_URI[sha256sum] = "56a365af71b8a9ec8bfee0801e2dec95011da8ee7507986ca329be11296411db"
-+SRC_URI[md5sum] = "f91b31638d4dc47ed43172e56bec2cb7"
-+SRC_URI[sha256sum] = "ef1cf79eec32ced9d1051998a8e458bb33dfbc62de297cba37ee8e9f952b21ea"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.63.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.63.bb
--- 
-2.21.0
+I have read kernel.bbclass more closely and I can use ${KERNEL_IMAGETYPE}
+and ${KERNEL_IMAGEDEST} to remove these assumptions.
+
+> and may not be present in rootfs all the
+> time.
+
+Now, based on the code of kernel.bbclass, it's hard to believe that
+the kernel image is not always present in rootfs.
+
+According to the code in kernel.bbclass
+${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} will always be
+a symlink to ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} in the same
+directory.
+
+> 
+> ERROR: yoe-simple-image-1.0-r0 do_rootfs: The postinstall intercept
+> hook 'execute_dracut' failed, details in
+> /mnt/a/yoe/build/tmp/work/qemux86-yoe-linux/yoe-s
+> imple-image/1.0-r0/temp/log.do_rootfs
+> ERROR: yoe-simple-image-1.0-r0 do_rootfs:
+> ERROR: yoe-simple-image-1.0-r0 do_rootfs: Function failed: do_rootfs
+> 
+> 
+> 
+>> +       if [[ -z "$MY_KERNEL_VERSION" ]]; then
+>> +               if [[ -d /lib/modules/$KERNEL_VERSION ]]; then
+>> +                       MY_KERNEL_VERSION="${KERNEL_VERSION}"
+>> +               fi
+>> +       fi
+>> +       [[ -z "$MY_KERNEL_VERSION" ]] && echo COULD NOT DETERMINE KERNEL VERSION TO RUN DEPMOD AND DRACUT && echo PLEASE DO IT MANUALLY && exit 0
+>> +       cat <<EOF > $OPKG_INTERCEPT_DIR/execute-dracut
+>> +echo RUNNING: depmod -a $MY_KERNEL_VERSION
+>> +depmod -a $MY_KERNEL_VERSION
+>> +echo RUNNING: dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
+>> +echo "dracut: $(dracut --help | grep 'Version:')"
+>> +dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
+>> +EOF
+>> +       chmod +x $OPKG_INTERCEPT_DIR/execute-dracut
+>> +fi
+>> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+>> index a1d7cb119..cb49d9539 100644
+>> --- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+>> +++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+>> @@ -12,6 +12,7 @@ PV = "049"
+>>   SRCREV = "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
+>>   SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
+>>              file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+>> +           file://execute_dracut \
+>>              "
+>>
+>>   DEPENDS += "kmod"
+>> @@ -49,11 +50,15 @@ do_install() {
+>>       # Its Makefile uses cp -arx to install modules.d, so fix the owner
+>>       # to root:root
+>>       chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
+>> +
+>> +    install -d -m0755 ${D}${datadir}/opkg/intercept
+>> +    install -m0755 ${WORKDIR}/execute_dracut ${D}${datadir}/opkg/intercept
+>>   }
+>>
+>>   FILES_${PN} += "${prefix}/lib/kernel \
+>>                   ${prefix}/lib/dracut \
+>>                   ${systemd_unitdir} \
+>> +                ${datadir}/opkg/intercept \
+>>                  "
+>>   FILES_${PN}-dbg += "${prefix}/lib/dracut/.debug"
+>>
+>> --
+>> 2.20.1
+>>
+> 
 
 
