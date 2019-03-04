@@ -1,49 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 56C377C8A2
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DC766D13A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Mar 2019 22:05:50 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id x6so1816543qki.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Mar 2019 14:05:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=oXYSnEPL61FUNcB4Dit/RX3oAenKpneyiGOmHT0hUNQ=;
-	b=srxOu8hoYNHpIh3THTHCbCOF4KXH6NlI360sECwOO5lpn5MMuJEJhjnhc956U2mqH+
-	GksZWKIQEf+n3/ZXvL6lovEZoq06mlSzhIvkqv8wOp8Xk8IqXBUNtpBU7VirjaLBga4W
-	WOV2zNtjlwSaw9NFICg7XoZ5pw0ol9JCgoGYcyAuJjwL9ms5KotPE4We4qjgQFr3eViM
-	u7mePV57yFPMlf7/c4qIhhF4oiGLZkc67CPkXkAzsKcxu2QGexwJof0wjHjYu21T8O3B
-	igNk/WHTgCNzrS2iq8jY+C+kDPuLu1LkxrjQxltOzAcWuQ76hc+EXLZi11C7IDX82qEN
-	SJEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=oXYSnEPL61FUNcB4Dit/RX3oAenKpneyiGOmHT0hUNQ=;
-	b=oVIwl/x2UwlPA0tf8EkCgoIY58LSDHtGOTSBCQhd5E+03nSXmb6pr4t+hkU2DsEK/z
-	/PvsbehXr6e+DI8OVB8Nej8gVB6McgmDn4dScLOoW4q9Na8KWH2ezVh1xwViNfUtK/E5
-	Nj50IZxf+Mtof0NonGz2Kaqz7RRnVB9YP/Ei0gkBmA4cQuWRZEjX/Hk6GCYznHWe39yT
-	SneurtlmTdOhCDsiZm7uyFFoVsunIZRWU0jjTo1aWLgyAf1H0KDyFG3aSPfWeJV2elsg
-	LDj2jNe+BIc04C+5lZzv+CqnU1CdroV5vxH0L1H9meVROOTUJSpwty5OwJmy0OLfeTwO
-	RMrg==
-X-Gm-Message-State: APjAAAVruXvX0Gs30zi4fzLGbgDBTZoJzHxH3FwfKMb2GhYCbhC9a577
-	B0gjw5uQwaTQ1pYe2BpnE6/p/ZU6YLPDhIGrowbGJ9+4
-X-Google-Smtp-Source: APXvYqzTosPoDhUV8bPCdRgpvK3bPQfUMdNVDQYKjui76S2npogWLpwxsYBkDY25PT/nsbQFvvF0l58JlUOqLLFi+/A=
-X-Received: by 2002:a37:e10c:: with SMTP id c12mr11556974qkm.315.1551650750873;
-	Sun, 03 Mar 2019 14:05:50 -0800 (PST)
+	Mon,  4 Mar 2019 01:34:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x241Ythv003410
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 3 Mar 2019 17:34:56 -0800 (PST)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Sun, 3 Mar 2019 17:34:55 -0800
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Sun, 3 Mar 2019 20:34:51 -0500
+Message-ID: <20190304013452.38047-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-References: <20190220043740.27952-1-zboszor@pr.hu>
-	<20190226095502.5499-1-zboszor@pr.hu>
-	<20190226095502.5499-4-zboszor@pr.hu>
-In-Reply-To: <20190226095502.5499-4-zboszor@pr.hu>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 3 Mar 2019 14:05:25 -0800
-Message-ID: <CAMKF1sqkihWR1Ye=idgGM3m6fq59KtY1_BpAJPK3oKmUwbddrQ@mail.gmail.com>
-To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 3/7 v2] dracut: Add execute_dracut opkg intercept script
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v4 0/1] lvm2/libdevmapper: 2.03.01 -> 2.03.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,101 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Mar 2019 22:05:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Mar 2019 01:34:56 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, Feb 26, 2019 at 1:55 AM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbo=
-szor@pr.hu> wrote:
->
-> Signed-off-by: B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zboszor@pr.hu>
-> ---
-> v2: The script name is execute_dracut, not execute-dracut
->     so it is identical to the postinst-intercepts variant.
->
->  .../dracut/dracut/execute_dracut              | 21 +++++++++++++++++++
->  .../recipes-devtools/dracut/dracut_git.bb     |  5 +++++
->  2 files changed, 26 insertions(+)
->  create mode 100755 meta-initramfs/recipes-devtools/dracut/dracut/execute=
-_dracut
->
-> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut=
- b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
-> new file mode 100755
-> index 000000000..96bcc92ed
-> --- /dev/null
-> +++ b/meta-initramfs/recipes-devtools/dracut/dracut/execute_dracut
-> @@ -0,0 +1,21 @@
-> +#!/bin/sh
-> +
-> +if [ ! -f $OPKG_INTERCEPT_DIR/execute-dracut ]; then
-> +       KERNEL_VERSION=3D$1
-> +       shift
-> +       MY_KERNEL_VERSION=3D$(readlink /boot/bzimage | sed 's,^.*bzImage-=
-,,')
+From: Kai Kang <kai.kang@windriver.com>
 
-this assumption breaks all image builds for qemux86 and qemux86_64
-unless that is fixed, it will be hard to accept this series. bzImage
-is not the kernel name always and may not be present in rootfs all the
-time.
+v4:
+* handle install but not packaged file lvm2-pvscan@.service
 
-ERROR: yoe-simple-image-1.0-r0 do_rootfs: The postinstall intercept
-hook 'execute_dracut' failed, details in
-/mnt/a/yoe/build/tmp/work/qemux86-yoe-linux/yoe-s
-imple-image/1.0-r0/temp/log.do_rootfs
-ERROR: yoe-simple-image-1.0-r0 do_rootfs:
-ERROR: yoe-simple-image-1.0-r0 do_rootfs: Function failed: do_rootfs
+v3:
+* sorry, fix confusing typo in commit message s/removed/released/
 
+Kai Kang (1):
+  lvm2/libdevmapper: 2.03.01 -> 2.03.02
 
+ ...h-for-O_-defines-and-fcntl-signature.patch | 30 -----------------
+ .../lvm2/files/0005-do-not-build-manual.patch | 13 +++++---
+ ...lvm2-monitor.service-after-tmp.mount.patch | 13 +++++---
+ ...per_2.03.01.bb => libdevmapper_2.03.02.bb} |  0
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  7 ++--
+ ...0001-explicitly-do-not-install-libdm.patch | 32 ++++++++++++-------
+ ...g-service-shouldn-t-refer-to-lvmetad.patch | 31 ------------------
+ .../lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} |  5 ++-
+ 8 files changed, 45 insertions(+), 86 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
+ rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.01.bb => libdevmapper_2.03.02.bb} (100%)
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch
+ rename meta-oe/recipes-support/lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} (90%)
 
-> +       if [[ -z "$MY_KERNEL_VERSION" ]]; then
-> +               if [[ -d /lib/modules/$KERNEL_VERSION ]]; then
-> +                       MY_KERNEL_VERSION=3D"${KERNEL_VERSION}"
-> +               fi
-> +       fi
-> +       [[ -z "$MY_KERNEL_VERSION" ]] && echo COULD NOT DETERMINE KERNEL =
-VERSION TO RUN DEPMOD AND DRACUT && echo PLEASE DO IT MANUALLY && exit 0
-> +       cat <<EOF > $OPKG_INTERCEPT_DIR/execute-dracut
-> +echo RUNNING: depmod -a $MY_KERNEL_VERSION
-> +depmod -a $MY_KERNEL_VERSION
-> +echo RUNNING: dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
-> +echo "dracut: $(dracut --help | grep 'Version:')"
-> +dracut -f $@ /boot/initramfs.img $MY_KERNEL_VERSION
-> +EOF
-> +       chmod +x $OPKG_INTERCEPT_DIR/execute-dracut
-> +fi
-> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-=
-initramfs/recipes-devtools/dracut/dracut_git.bb
-> index a1d7cb119..cb49d9539 100644
-> --- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> +++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> @@ -12,6 +12,7 @@ PV =3D "049"
->  SRCREV =3D "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
->  SRC_URI =3D "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protoco=
-l=3Dhttp \
->             file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
-> +           file://execute_dracut \
->             "
->
->  DEPENDS +=3D "kmod"
-> @@ -49,11 +50,15 @@ do_install() {
->      # Its Makefile uses cp -arx to install modules.d, so fix the owner
->      # to root:root
->      chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
-> +
-> +    install -d -m0755 ${D}${datadir}/opkg/intercept
-> +    install -m0755 ${WORKDIR}/execute_dracut ${D}${datadir}/opkg/interce=
-pt
->  }
->
->  FILES_${PN} +=3D "${prefix}/lib/kernel \
->                  ${prefix}/lib/dracut \
->                  ${systemd_unitdir} \
-> +                ${datadir}/opkg/intercept \
->                 "
->  FILES_${PN}-dbg +=3D "${prefix}/lib/dracut/.debug"
->
-> --
-> 2.20.1
->
+-- 
+2.20.0
+
 
