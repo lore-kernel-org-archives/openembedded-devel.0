@@ -1,50 +1,43 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
-	[209.85.210.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C6AE7C892
+Return-Path: <jan.vermaete@gmail.com>
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com
+	[209.85.210.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 34B7A7C876
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Mar 2019 15:49:46 +0000 (UTC)
-Received: by mail-pf1-f179.google.com with SMTP id s22so3301792pfh.4
+	Mon,  4 Mar 2019 19:01:05 +0000 (UTC)
+Received: by mail-ot1-f48.google.com with SMTP id t7so5146384otk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Mar 2019 07:49:48 -0800 (PST)
+	Mon, 04 Mar 2019 11:01:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=H67qYDHHHTI8l0DfPxMJxtHYWN3vZKKBsYCqHOOjMgU=;
-	b=IltLUxASrOHkKCjIQ8sQPdI2u3wP+gj54I7btNirCoZumqF/UznN8vjNQAbdcejlwr
-	qd8cEl9SyYZRFPpjR5z1CNWSDlPE5OBPegNxmPokoGNF1UHS2GflDSmp7jUKh73CHGzz
-	/WGDO5YtKUN78KEOfUk9fbjv6ZEEeDc6NJ9x6zWgTKRziuGnhd6SZIfVa8rJ0UR5c7i+
-	uA5/nPknen+M5+EpVdSqIqlUu11QXM7s11MXEvbk3AiTewqzPNMkhJpfgOp7YuFfl3+n
-	oJj/I8WSi2d9PQTZpgL48zIsS/Xibj3V6zC3wlWehUgJlDkFdmWt+P+ZEI4baD7OWTHx
-	H2aQ==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Q+mL3QF1ecJ4o7FHmCvs188SAaHSi4gjz6lmk04099Y=;
+	b=ELAz+3AcLYIKFn/SJkxysu9/WYHzuygtV1hrKQ3J7EVwtEi2ioE0lJQ4RVljJr1yRB
+	HwssprSchprgTGcWOSC1nepRvl6pJKzo+ds9LXeUjlxytciP4wuU6imUS5Pjda+zmeW5
+	Ja+kR+H6ATqnVvVcQ49gQmnASYNNb0OUTfukQRlT3VsU5YL5Y2k1SmTL4+E8lpYQc085
+	NEJ8n8sPn+E2DuxChrTpmYcNx9ZDipU7XeggBQSKywwWf524pp9y5gaYmu3i0W/LVrMF
+	hNhofjmevjsGDw6IiE3YVlGOyoTyJr6TjCvmQx9gGAUJ6c7ut2G+ESXiFlaBR2Q545T7
+	iEsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=H67qYDHHHTI8l0DfPxMJxtHYWN3vZKKBsYCqHOOjMgU=;
-	b=DcREigISlS89BEEZ/dEuUD4wd+Vra3PGKH1emCj8PJPwtBkGz4ERKOZNUds3hm5FHd
-	6dwhOro7TfrwZneV6o9kNdTxktejjCCk6E18ggGF8PyYx4FRBn2tqy13128HHG5kpwhy
-	j1Tfwt5+hhtD+aq+A8bObmsMepd3S17HAmCtoxCW3PfJ1jc7qVKEgSoTWSNI5NWvd4+v
-	sgLjc/YK+zWAD4FRm4vzysLVRuxmmGf5xjGC4nHjqBdHcamkgbOMsckNNSGErPYv2L48
-	GmoXhiwlh0EiUIK0DIUD4VznPRp60vgrxHpCFNj1gzF5L06FRtklDt1aMLwNe/Fi8mZz
-	xoCA==
-X-Gm-Message-State: APjAAAXjR74ivTpQs+Tb+Eh6tMtC9i+X6m/6ApLlKeIy6WKdjTdCa0rD
-	htyBYFYB+2UpxBLzS7w2wamUqLZq
-X-Google-Smtp-Source: APXvYqwy1GykFyBJHvfCFzu5Jshr2z20135gf1ENSht3Lx2ge9hXyebP8KTtpnnl4U4qRyglsuxvkQ==
-X-Received: by 2002:a63:94:: with SMTP id 142mr429846pga.277.1551714587652;
-	Mon, 04 Mar 2019 07:49:47 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::caa9])
-	by smtp.gmail.com with ESMTPSA id
-	f193sm9826781pgc.3.2019.03.04.07.49.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Mar 2019 07:49:46 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Mar 2019 07:49:37 -0800
-Message-Id: <20190304154937.30548-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Q+mL3QF1ecJ4o7FHmCvs188SAaHSi4gjz6lmk04099Y=;
+	b=cUZIYObj8DHj5jgwvHDkzjcBF9+MokYEe7GrBMq3UdAUD1uhfmXLRt+JokvZ87VjU/
+	Q/REPp/grMIV6WCAm2o95Zu+oUFEbYwjygH74kK1ciY6ZewkYM8xneMaQ6p1wjR+gZfS
+	+7+MYkZBl01wMs+VSM44lwgPpYiChu1lVMs4kkhcxN+H1nCi9aj9uR38hBmh1DyAy35w
+	Gih/uK1qQQz55kgKBeMl/dNXdN3p1IokWZDrUOGITGo6VeGMXwTK2yxDdlaXV37MicTP
+	Ot7a/IBEmQCmZWs8ou49AXIxR+Vk4ejSVt26vF+u/Br/DnTgtlkMFOpXfSKbk9O1JN8E
+	+CPw==
+X-Gm-Message-State: APjAAAUtxGYBIOaPoFNpmok2LEeExCN67GDPTRQbvpvaLpywq09IZXL6
+	6xbGfx9SPhGI4yzjbqYPzvxFOvsue3qUEnR6LdLrYvEQ
+X-Google-Smtp-Source: APXvYqwU02k+K8uBuf3pdo4sjjdaG2R9zMWscIBUyYkuH+aIZInavB3QhRKy76cYfSX7aemxTwPRlGe4Crao+682DfA=
+X-Received: by 2002:a05:6830:20da:: with SMTP id
+	z26mr13977028otq.204.1551726065896; 
+	Mon, 04 Mar 2019 11:01:05 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] octave: Exclude from world builds
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Mon, 4 Mar 2019 20:00:54 +0100
+Message-ID: <CABF_=yi=0_kWsS9LJt931jnDUv6e9mr+UGyq=ZK7ikhiaeN+0w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] [meta-python] Replaced cryptograpy by crypt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +50,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 15:49:47 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Mar 2019 19:01:05 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-it needs lapack which inturn needs libgfortran
-and fortran support in compiler is not on by default
+Replaced 'cryptography' by the much small 'crypto' package.
+With cryptography, the build is too big with e.g. cpp included.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+PS: this was already a long time the mailinglist.  I guess with my
+attempt to attach a patch, this could be processed.
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- meta-oe/recipes-devtools/octave/octave_4.4.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python-attrs.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/octave/octave_4.4.1.bb b/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-index c91556c760..1ec32ce89a 100644
---- a/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-+++ b/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-@@ -37,3 +37,4 @@ FILES_liboctave-dbg = "${libdir}/${PN}/${PV}/.debug"
- 
- FILES_${PN}-dbg = "${bindir}/.debug ${libdir}/${PN}/${PV}/oct/${TARGET_SYS}/.debug"
- 
-+EXCLUDE_FROM_WORLD = "1"
+diff --git a/meta-python/recipes-devtools/python/python-attrs.inc
+b/meta-python/recipes-devtools/python/python-attrs.inc
+index fa73ea5..6de14e5 100644
+--- a/meta-python/recipes-devtools/python/python-attrs.inc
++++ b/meta-python/recipes-devtools/python/python-attrs.inc
+@@ -9,6 +9,6 @@ SRC_URI[md5sum] = "3f3f3e0750dab74cfa1dc8b0fd7a5f86"
+ inherit pypi
+
+ RDEPENDS_${PN}_class-target += " \
+-    ${PYTHON_PN}-cryptography \
++    ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-ctypes \
+ "
 -- 
-2.21.0
-
+2.7.4
 
