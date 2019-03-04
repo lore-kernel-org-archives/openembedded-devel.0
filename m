@@ -1,26 +1,50 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AC1367C8B8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+	[209.85.210.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C89676C1BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Mar 2019 01:35:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x241Z6Pm011408
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 3 Mar 2019 17:35:17 -0800
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Sun, 3 Mar 2019 17:34:56 -0800
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Sun, 3 Mar 2019 20:34:52 -0500
-Message-ID: <20190304013452.38047-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190304013452.38047-1-kai.kang@windriver.com>
-References: <20190304013452.38047-1-kai.kang@windriver.com>
+	Mon,  4 Mar 2019 04:28:05 +0000 (UTC)
+Received: by mail-pf1-f173.google.com with SMTP id n22so2043237pfa.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Mar 2019 20:28:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=i7bpISbgkeZICDv9HB39C5JU5srTNurDH2H5VJlcpWw=;
+	b=tWfuR1i2So0JhcBtYkgOHXWL+LH+P3Ch0h7ujh8vQIIBjdJBrlxB2YGcB0Msizqf0E
+	PS91h2bsXde9SbagGN/WntnuKFYAIbbGwOKcj2rT79MvYXARwINI6Iv4Px0IAix1qHkr
+	OrYZWsHKwiQTMELMk7gbJyJ8ATdSHO66/3LK6mlVRTU0EloWSgmFSGEIzH5n4tl15FsH
+	0zL/3+1tgsOrDW6FBr1vaHgcsCnTmsm+biSBNqdE9eHFRdFDYgzY8jjlu93OLonXqX4S
+	BRfCYYfMVKagqpDD2jbrkUNo6bnQQ3nQDhissfsbugFnN31Nd+KrtHLym+9/7It1fRGt
+	uvWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=i7bpISbgkeZICDv9HB39C5JU5srTNurDH2H5VJlcpWw=;
+	b=YcfNUpsPly3wmGMwZg0UXRcWq+OXl82E8yTVIIX9sqWB42UDCa5Z3fO9UJ/qTzBciH
+	N6cpEdGhMwHSDVIrZJL9UkzmjM9LzgL0v3gAc0PVCeWao0kvmbJoDo+vg+u5jQeBSIE1
+	7vguoo0weaNNaEaPNXRUOxYiwyr64sLEwBuwu5/CkTZczBBvGaH7Nsb09EeGw8WmdzP6
+	k8LEKVN/fDFeyreyJly8OYbeZXOGete3sXukKyD1CsKRGMiSb+0LJYKbwV38l5M2j4ps
+	BwySul7k7+lrS12rwO3w7vQL2WtfI1uqNDntNUNFAYtirsZgpdj6hOe/Y9rEHv4BmCTU
+	n/vg==
+X-Gm-Message-State: APjAAAVhNLtOQQ9hNh9KQEplwdWFvTk1EzdDsyA0ag0vgIb0+y5efe78
+	76Ki2X4xsa06UDmMkatxnPQZJcNS
+X-Google-Smtp-Source: APXvYqxB5ydgS+5C7+NDsIz2RYsuGUkrMAlDEMFBzwcdXqM6m4K8aTXMqjCUFwsv2QxiCJkbK23PAQ==
+X-Received: by 2002:a65:62c2:: with SMTP id m2mr16705884pgv.348.1551673685877; 
+	Sun, 03 Mar 2019 20:28:05 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::5fa3])
+	by smtp.gmail.com with ESMTPSA id
+	m64sm11661915pfi.149.2019.03.03.20.28.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 03 Mar 2019 20:28:05 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  3 Mar 2019 20:27:58 -0800
+Message-Id: <20190304042758.30133-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] lvm2/libdevmapper: 2.03.01 -> 2.03.02
+Subject: [meta-oe][PATCH] mariadb: Upgrade to 5.5.63
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,318 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 01:35:42 -0000
+X-List-Received-Date: Mon, 04 Mar 2019 04:28:06 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
-
-Upgrade lvm2/libdevmapper from 2.03.01 to 2.03.02.
-
-* update SRC_URI back to use ftp url
-  - 2.03.02 has been released but no such tag in git repo
-  - subdir 'releases' on ftp site should be a persistent place for tarballs
-* drop 0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
-  which is not needed any longer
-* remove backpoort patch
-* update patch contexts
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...h-for-O_-defines-and-fcntl-signature.patch | 30 -----------------
- .../lvm2/files/0005-do-not-build-manual.patch | 13 +++++---
- ...lvm2-monitor.service-after-tmp.mount.patch | 13 +++++---
- ...per_2.03.01.bb => libdevmapper_2.03.02.bb} |  0
- meta-oe/recipes-support/lvm2/lvm2.inc         |  7 ++--
- ...0001-explicitly-do-not-install-libdm.patch | 32 ++++++++++++-------
- ...g-service-shouldn-t-refer-to-lvmetad.patch | 31 ------------------
- .../lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} |  5 ++-
- 8 files changed, 45 insertions(+), 86 deletions(-)
- delete mode 100644 meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
- rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.01.bb => libdevmapper_2.03.02.bb} (100%)
- delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch
- rename meta-oe/recipes-support/lvm2/{lvm2_2.03.01.bb => lvm2_2.03.02.bb} (90%)
+ .../{mariadb-native_5.5.62.bb => mariadb-native_5.5.63.bb}  | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                       | 6 +++---
+ .../mysql/{mariadb_5.5.62.bb => mariadb_5.5.63.bb}          | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.62.bb => mariadb-native_5.5.63.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.62.bb => mariadb_5.5.63.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch b/meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
-deleted file mode 100644
-index 9ab1c06d2..000000000
---- a/meta-oe/recipes-support/lvm2/files/0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From b1ad91a059d99afd1ce25823b7c0a8d3ac63d2fd Mon Sep 17 00:00:00 2001
--From: Dengke Du <dengke.du@windriver.com>
--Date: Tue, 25 Oct 2016 11:55:49 +0000
--Subject: [PATCH 3/4] include fcntl.h for O_* defines and fcntl() signature
--
--On glibc _somehow_ this header gets pulled in indirectly
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Signed-off-by: Dengke Du <dengke.du@windriver.com>
-----
--Upstream-Status: Pending
-----
-- libdaemon/server/daemon-server.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/libdaemon/server/daemon-server.c b/libdaemon/server/daemon-server.c
--index 6af6de9..a9590e7 100644
----- a/libdaemon/server/daemon-server.c
--+++ b/libdaemon/server/daemon-server.c
--@@ -18,6 +18,7 @@
-- #include "daemon-server.h"
-- #include "daemon-log.h"
-- 
--+#include <fcntl.h>
-- #include <dlfcn.h>
-- #include <errno.h>
-- #include <pthread.h>
---- 
--2.9.3
--
-diff --git a/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch b/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-index 2124ebafe..7117d99a3 100644
---- a/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-+++ b/meta-oe/recipes-support/lvm2/files/0005-do-not-build-manual.patch
-@@ -14,6 +14,11 @@ Do not build man to workaround the issue.
- Upstream-Status: Pending
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
-+
-+Update context for lvm2 2.03.02.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-  Makefile.in  | 6 +++---
-  configure.ac | 1 -
-@@ -41,7 +46,7 @@ index 6a1a990..80cba91 100644
-      libdaemon lib tools daemons libdm \
-      udev po
-  tools.distclean: test.distclean
--@@ -59,7 +59,7 @@ libdm.device-mapper: include.device-mapper
-+@@ -65,7 +65,7 @@ libdm.device-mapper: include.device-mapper
-  daemons.device-mapper: libdm.device-mapper
-  tools.device-mapper: libdm.device-mapper
-  scripts.device-mapper: include.device-mapper
-@@ -51,17 +56,17 @@ index 6a1a990..80cba91 100644
-  ifeq ("@INTL@", "yes")
-  lib.pofile: include.pofile
- diff --git a/configure.ac b/configure.ac
--index 9c45745..8fee4c4 100644
-+index 7fd0561..4154dc0 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1806,7 +1806,6 @@ libdaemon/server/Makefile
-+@@ -1812,7 +1812,6 @@ libdaemon/server/Makefile
-  libdm/Makefile
-  libdm/dm-tools/Makefile
-  libdm/libdevmapper.pc
- -man/Makefile
-  po/Makefile
-+ scripts/lvm2-pvscan.service
-  scripts/blkdeactivate.sh
-- scripts/blk_availability_init_red_hat
- -- 
- 2.7.4
- 
-diff --git a/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch b/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
-index 0e68d62fc..e5ad4eaf2 100644
---- a/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
-+++ b/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
-@@ -10,20 +10,25 @@ So start lvm2-monitor.service after tmp.mount
- Upstream-Status: Inappropriate [oe specific]
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
-+
-+Update context for lvm2 2.03.02.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-  scripts/lvm2_monitoring_systemd_red_hat.service.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/scripts/lvm2_monitoring_systemd_red_hat.service.in b/scripts/lvm2_monitoring_systemd_red_hat.service.in
--index 22238b7..93b2bee 100644
-+index 7ec4e4e..3282a95 100644
- --- a/scripts/lvm2_monitoring_systemd_red_hat.service.in
- +++ b/scripts/lvm2_monitoring_systemd_red_hat.service.in
- @@ -2,7 +2,7 @@
-  Description=Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
-  Documentation=man:dmeventd(8) man:lvcreate(8) man:lvchange(8) man:vgchange(8)
-- Requires=dm-event.socket lvm2-lvmetad.socket
---After=dm-event.socket dm-event.service lvm2-lvmetad.socket lvm2-activation.service lvm2-lvmetad.service
--+After=dm-event.socket dm-event.service lvm2-lvmetad.socket lvm2-activation.service lvm2-lvmetad.service tmp.mount
-+ Requires=dm-event.socket
-+-After=dm-event.socket dm-event.service lvm2-activation.service
-++After=dm-event.socket dm-event.service lvm2-activation.service tmp.mount
-  Before=local-fs-pre.target
-  DefaultDependencies=no
-  Conflicts=shutdown.target
-diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.01.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.02.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.63.bb
 similarity index 100%
-rename from meta-oe/recipes-support/lvm2/libdevmapper_2.03.01.bb
-rename to meta-oe/recipes-support/lvm2/libdevmapper_2.03.02.bb
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 1961dca1e..8617f25cb 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -7,18 +7,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.63.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 8ca5b2ba42..f715542038 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- DEPENDS += "util-linux libaio"
+-SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
++SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz \
+            file://fix-cmake-module-path.patch \
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+@@ -18,8 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+            file://change-cc-to-cc-version.patch \
+            file://0001-disable-ucontext-on-musl.patch \
+           "
+-SRC_URI[md5sum] = "6375d577e9539b839f44d857e70f82b9"
+-SRC_URI[sha256sum] = "56a365af71b8a9ec8bfee0801e2dec95011da8ee7507986ca329be11296411db"
++SRC_URI[md5sum] = "f91b31638d4dc47ed43172e56bec2cb7"
++SRC_URI[sha256sum] = "ef1cf79eec32ced9d1051998a8e458bb33dfbc62de297cba37ee8e9f952b21ea"
  
--SRC_URI = "git://github.com/lvmteam/lvm2.git;protocol=https;branch=master \
-+SRC_URI = "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.${PV}.tgz \
-            file://lvm.conf \
-            file://0001-implement-libc-specific-reopen_stream.patch \
-            file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
--           file://0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
-            file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
-            file://0001-Avoid-bashisms-in-init-scripts.patch \
-            file://0005-do-not-build-manual.patch \
-            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
-            "
-+SRC_URI[md5sum] = "5fc07da5461a3794a751dcfc355827d5"
-+SRC_URI[sha256sum] = "550ba750239fd75b7e52c9877565cabffef506bbf6d7f6f17b9700dee56c720f"
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
  
--S = "${WORKDIR}/git"
-+S = "${WORKDIR}/LVM2.${PV}"
- 
- inherit autotools-brokensep pkgconfig systemd license
- 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-index 8b805fc1a..24160b405 100644
---- a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-@@ -9,16 +9,21 @@ explicitly do not do the installation here.
- Upstream-Status: Inappropriate [meta-oe specific]
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
-+
-+Update context for lvm2 2.03.02.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-  libdm/Makefile.in          | 6 ++++--
-  libdm/dm-tools/Makefile.in | 6 ++++--
-  2 files changed, 8 insertions(+), 4 deletions(-)
- 
- diff --git a/libdm/Makefile.in b/libdm/Makefile.in
--index 8c8334a..effcf25 100644
-+index e9bb5ae..4e9ae3f 100644
- --- a/libdm/Makefile.in
- +++ b/libdm/Makefile.in
--@@ -81,9 +81,11 @@ ifeq ("@PKGCONFIG@", "yes")
-+@@ -82,9 +82,11 @@ ifeq ("@PKGCONFIG@", "yes")
-    INSTALL_TYPE += install_pkgconfig
-  endif
-  
-@@ -31,25 +36,30 @@ index 8c8334a..effcf25 100644
- +	echo "Do not install device mapper in lvm2"
-  
-  install_include: $(srcdir)/libdevmapper.h
-- 	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
-+ 	@echo "    [INSTALL] $<"
- diff --git a/libdm/dm-tools/Makefile.in b/libdm/dm-tools/Makefile.in
--index 39d411d..4a0f61a 100644
-+index 15a9d8e..65e1306 100644
- --- a/libdm/dm-tools/Makefile.in
- +++ b/libdm/dm-tools/Makefile.in
--@@ -60,9 +60,11 @@ install_dmsetup_static: dmsetup.static
-- 	$(Q) $(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
-- 	$(Q) $(LN_S) -f $(<F) $(staticdir)/dmstats
-+@@ -20,7 +20,8 @@ all: device-mapper
-  
---install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
-+ SOURCES2 = dmsetup.c
-+ TARGETS_DM = dmsetup
-+-install_device-mapper: install_dmsetup_dynamic
- +install_device-mapper:
- +	echo "Do not install device mapper in lvm2"
-  
---install: install_device-mapper
-+ ifeq ("@STATIC_LINK@", "yes")
-+   TARGETS_DM += dmsetup.static
-+@@ -93,6 +94,7 @@ install_dmfilemapd_static: dmfilemapd.static
-+ .PHONY: install_dmsetup_dynamic install_dmsetup_static
-+ .PHONY: install_dmfilemapd install_dmfilemapd_static
-+ 
-+-install: install_device-mapper install_dmfilemapd
- +install:
- +	echo "Do not install device mapper in lvm2"
-  
-- # dmfilemapd support
-- ifeq ("@BUILD_DMFILEMAPD@", "yes")
-+ device-mapper: $(TARGETS_DM)
- -- 
- 2.7.4
- 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch
-deleted file mode 100644
-index 4eeac1c57..000000000
---- a/meta-oe/recipes-support/lvm2/lvm2/0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From b922f4a4e7e1c6c64a235bae4c575540bc4a12df Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Thu, 21 Feb 2019 14:00:34 +0800
--Subject: [PATCH] lvm2-monitoring service shouldn't refer to lvmetad
--
--Upstream-Status: Backport [https://sourceware.org/git/?p=lvm2.git;
--a=commit;h=df2fa88e631b13f0f2cfff4aeab80f12bd93ab72]
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- scripts/lvm2_monitoring_systemd_red_hat.service.in | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/scripts/lvm2_monitoring_systemd_red_hat.service.in b/scripts/lvm2_monitoring_systemd_red_hat.service.in
--index 2b87479..3282a95 100644
----- a/scripts/lvm2_monitoring_systemd_red_hat.service.in
--+++ b/scripts/lvm2_monitoring_systemd_red_hat.service.in
--@@ -1,8 +1,8 @@
-- [Unit]
-- Description=Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
-- Documentation=man:dmeventd(8) man:lvcreate(8) man:lvchange(8) man:vgchange(8)
---Requires=dm-event.socket lvm2-lvmetad.socket
---After=dm-event.socket dm-event.service lvm2-lvmetad.socket lvm2-activation.service lvm2-lvmetad.service tmp.mount
--+Requires=dm-event.socket
--+After=dm-event.socket dm-event.service lvm2-activation.service tmp.mount
-- Before=local-fs-pre.target
-- DefaultDependencies=no
-- Conflicts=shutdown.target
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-similarity index 90%
-rename from meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
-rename to meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-index 0df624b73..e2ce95c81 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.01.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-@@ -3,8 +3,7 @@ require lvm2.inc
- SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
- 
- SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch \
--            file://0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch \
--	    file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-+            file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-            "
- 
- DEPENDS += "autoconf-archive-native"
-@@ -34,7 +33,7 @@ PACKAGE_BEFORE_PN = "${PN}-scripts ${PN}-udevrules"
- 
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
--                         blk-availability.service"
-+                         blk-availability.service lvm2-pvscan@.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.63.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.63.bb
 -- 
-2.20.0
+2.21.0
 
 
