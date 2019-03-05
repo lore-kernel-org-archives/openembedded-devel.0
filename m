@@ -1,30 +1,52 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EAF2D6D5B1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 98D967C5CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Mar 2019 03:58:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.58,442,1544457600"; d="scan'208";a="55923502"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Mar 2019 11:58:15 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9153A4C7F2A8
+	Tue,  5 Mar 2019 04:59:16 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id i19so4730053pfd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Mar 2019 11:57:57 +0800 (CST)
-Received: from localhost.local (10.167.225.47) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.408.0; Tue, 5 Mar 2019 11:58:20 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Mar 2019 11:59:36 +0800
-Message-ID: <20190305035936.24600-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Mon, 04 Mar 2019 20:59:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WGbEF9k1R4PQrjEjx/KBAp9feCEX1igQql2FDi0DAVc=;
+	b=gukcQlORZ8kYwwrUNvFkfj/2GH5XQPjJfKzHtyMnheNadi7PqPoTGcXmKkhuqOIh+P
+	dyoohI/O0TTcFTcvZtDabLNq1p6tS2l2l6gUlPuaYGleKh7GPzRYL6P08UVnS/M+2fGm
+	IM5QKzk8nubtrWhYCAT8WQ5f2yGMh09qJEvdwO4gPy0Vp1wjivBXyPzBuGCM4NqBf90o
+	o/IY3yz68Rjk3xyEqQvhCFrhZWtuOhJTJ9iwBR1tDVfJ446820bWgebsWxI8faLFRQN8
+	KIqeukubjzfjcnFmsfU56bg6foBHlD+L0v6rFBfUC54BjOaG5zU1eLV/KMvKrMYdYdEj
+	vA+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WGbEF9k1R4PQrjEjx/KBAp9feCEX1igQql2FDi0DAVc=;
+	b=VH0abATi2zI/y5XI4u52MAxnnHUOz4bUE+dipqkWOKw/2hB6V8l7UU1Vtu16DA6guU
+	PdYx4eVmB6N1/upzg0spgtBygt64EF7WyimoT3xSKvrALCMBbYc/8pLvWzVpXfQZf5g1
+	LAo8kNOzUFp6EUNKI+VGQSEFM8xO2Gpal+5FeTffkZQdV1gE9Zo7WkAI9RSsz5Y0wZOc
+	AxXPimfXhV6qXioOqGicDLZCs6a+q445g8w5EqUHLwnoy28oob8CzUhDSkfZOZGP22EM
+	dGrJWRbSFT4WBrqc0ktyQZlg+/vD1i1NLN/SEkA2ypN/jUCgX+0qErW2XwSXR6AcpK+y
+	BFuQ==
+X-Gm-Message-State: APjAAAWMPv0XACs0ss6CTTnFEQ9F4rKwrnCJeo/mzuUHA7HbX8jLsovZ
+	vNsLbM2SD/3ymqEx91ZenNHk6EnY
+X-Google-Smtp-Source: APXvYqyu+gRKRFCGVez9qdo+rGR9pFlWkhWw8MWaYxGiquEdbXoEhSZDt/S5WcEVXunARySPojAjZw==
+X-Received: by 2002:a17:902:784c:: with SMTP id
+	e12mr24038298pln.117.1551761957264; 
+	Mon, 04 Mar 2019 20:59:17 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::caa9])
+	by smtp.gmail.com with ESMTPSA id
+	e9sm16750269pfh.42.2019.03.04.20.59.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Mar 2019 20:59:16 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Mar 2019 20:59:06 -0800
+Message-Id: <20190305045907.40923-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.47]
-X-yoursite-MailScanner-ID: 9153A4C7F2A8.A92E8
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-oe][PATCH] twm: upgrade to 1.0.10
+Cc: Ivan Maidanski <ivmai@mail.ru>
+Subject: [meta-oe][PATCH] bdwgc: upgrade 7.6.10 -> 7.6.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2019 03:58:17 -0000
+X-List-Received-Date: Tue, 05 Mar 2019 04:59:16 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-1.Upgrade tem from 1.0.9 to 1.0.10
+From: Ivan Maidanski <ivmai@mail.ru>
 
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+Highlights of this upgrade:
+* Fix 'unexpected mark stack overflow' abort
+* Fix executable memory allocation
+
+See the following for detailed changes:
+* https://github.com/ivmai/bdwgc/releases/tag/v7.6.12
+
+Signed-off-by: Ivan Maidanski <ivmai@mail.ru>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-graphics/xorg-app/{twm_1.0.9.bb => twm_1.0.10.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{twm_1.0.9.bb => twm_1.0.10.bb} (75%)
+ .../recipes-support/bdwgc/{bdwgc_7.6.10.bb => bdwgc_7.6.12.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/bdwgc/{bdwgc_7.6.10.bb => bdwgc_7.6.12.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.9.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb
-similarity index 75%
-rename from meta-oe/recipes-graphics/xorg-app/twm_1.0.9.bb
-rename to meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb
-index 41c804bb3..3a2267ae9 100644
---- a/meta-oe/recipes-graphics/xorg-app/twm_1.0.9.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.10.bb
-@@ -5,8 +5,8 @@ DEPENDS += " libxext libxt libxmu bison-native"
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.10.bb b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.12.bb
+similarity index 96%
+rename from meta-oe/recipes-support/bdwgc/bdwgc_7.6.10.bb
+rename to meta-oe/recipes-support/bdwgc/bdwgc_7.6.12.bb
+index fdf3d6c16d..b1c1099bb8 100644
+--- a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.10.bb
++++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.12.bb
+@@ -21,7 +21,7 @@ SECTION = "devel"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
+ LIC_FILES_CHKSUM = "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
  
--SRC_URI[md5sum] = "59a6f076cdacb5f6945dac809bcf4906"
--SRC_URI[sha256sum] = "c575167ac33edf3bd1592f1bedfe0559debb128ed5fb4873c1278e3be166310a"
-+SRC_URI[md5sum] = "e322c08eeb635f924ede5b8eba3db54e"
-+SRC_URI[sha256sum] = "6449eadca16ce0f0d900605b0cc020b95f40619261b7beccfb46bcc1836445d7"
+-SRCREV = "cef9cbed83f2b5101d4e65ca0f158600d26cbd34"
++SRCREV = "a46546f40d18e60c31077c2e7c8bb4e44bf1bef1"
+ SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
+           "
  
- FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
- ALTERNATIVE_NAME = "x-window-manager"
 -- 
-2.20.1
-
-
+2.21.0
 
 
