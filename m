@@ -1,22 +1,35 @@
-Return-Path: <Mingli.Yu@windriver.com>
+Return-Path: <joe.slater@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BFB0E7C810
+	by mail.openembedded.org (Postfix) with ESMTP id CBF417CDAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 09:12:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x269Cwab024796
+	Wed,  6 Mar 2019 16:37:59 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x26GbxQZ003846
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 Mar 2019 01:12:58 -0800 (PST)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 6 Mar 2019 01:12:58 -0800
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Mar 2019 01:12:58 -0800
-Message-ID: <20190306091258.59600-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 6 Mar 2019 08:37:59 -0800 (PST)
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.68]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0439.000;
+	Wed, 6 Mar 2019 08:37:59 -0800
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: "Kang, Kai" <Kai.Kang@windriver.com>, Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH v2] leveldb: fix compile errors for mips
+	with DEFAULTTUNE mips
+Thread-Index: AQHU08+s45Yb99h75k2GuZpcOgZpKKX+lbCAgAAEeICAAAOcAIAALsPg
+Date: Wed, 6 Mar 2019 16:37:58 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84F3768FB8@ALA-MBD.corp.ad.wrs.com>
+References: <20190306033908.173027-1-kai.kang@windriver.com>
+	<e887e9d9-62fb-20fb-f753-4567b197ba20@gmail.com>
+	<7e344437-fa22-0312-c211-c250f9f5ff2f@windriver.com>
+	<CAMKF1srqqd3vgpyF9+pVEaXqjMK3X5x3uj9gB-0_YFHe69mTsQ@mail.gmail.com>,
+	<420bfc59-242c-ce16-1e7e-cc3dedb49a03@windriver.com>
+In-Reply-To: <420bfc59-242c-ce16-1e7e-cc3dedb49a03@windriver.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.119.62]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mysql-python: fix compilation with MariaDB 10.3.13
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] leveldb: fix compile errors for mips with DEFAULTTUNE mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,86 +42,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 09:12:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Mar 2019 16:37:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Use standard API function MYSQL_OPT_RECONNECT
-instead of direct modification of internal structures
-which does not work for MariaDB to fix below compile
-issue.
-| _mysql.c: In function '_mysql_ConnectionObject_ping':
-| _mysql.c:2005:41: error: 'MYSQL' {aka 'struct st_mysql'} has no member named 'reconnect'
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...ompilation-with-MariaDB-with-10.3.13.patch | 39 +++++++++++++++++++
- .../recipes-dbs/mysql/mysql-python_1.2.5.bb   |  4 +-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
-
-diff --git a/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch b/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
-new file mode 100644
-index 000000000..b816618c7
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
-@@ -0,0 +1,39 @@
-+From 45436592aa64308b2ab46f84c6107c6d7de0a3ec Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Wed, 6 Mar 2019 00:16:17 -0800
-+Subject: [PATCH] _mysql.c: fix compilation with MariaDB 10.3.13
-+
-+Use standard API function MYSQL_OPT_RECONNECT
-+instead of direct modification of internal structures
-+which does not work for MariaDB.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ _mysql.c | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/_mysql.c b/_mysql.c
-+index f081346..2262e9e 100644
-+--- a/_mysql.c
-++++ b/_mysql.c
-+@@ -2002,7 +2002,14 @@ _mysql_ConnectionObject_ping(
-+ 	int r, reconnect = -1;
-+ 	if (!PyArg_ParseTuple(args, "|I", &reconnect)) return NULL;
-+ 	check_connection(self);
-+-	if ( reconnect != -1 ) self->connection.reconnect = reconnect;
-++	if ( reconnect != -1 ) {
-++             #if MYSQL_VERSION_ID >= 50013
-++		 my_bool recon = reconnect;
-++		 mysql_options(&self->connection, MYSQL_OPT_RECONNECT, &recon);
-++             #else
-++                 self->connection.reconnect = reconnect;
-++             #endif
-++        }
-+ 	Py_BEGIN_ALLOW_THREADS
-+ 	r = mysql_ping(&(self->connection));
-+ 	Py_END_ALLOW_THREADS
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-index ac0df4f06..f2faec1c1 100644
---- a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-+++ b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-@@ -8,7 +8,9 @@ DEPENDS = "mysql5"
- 
- SRCNAME = "MySQL-python"
- 
--SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip"
-+SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip \
-+           file://0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch \
-+"
- SRC_URI[md5sum] = "654f75b302db6ed8dc5a898c625e030c"
- SRC_URI[sha256sum] = "811040b647e5d5686f84db415efd697e6250008b112b6909ba77ac059e140c74"
- 
--- 
-2.17.1
-
+If we assume we do not really have "sync" for the failing case here, lib32-=
+leveldb, shouldn't we apply the no-sync patch with something like=0A=
+=0A=
+SRC_URI_pn-lib32-leveldb_mipsarcho32 +=3D "..."=0A=
+=0A=
+Joe=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Kang Kai [Kai.Kang@windriver.=
+com]=0A=
+Sent: Tuesday, March 05, 2019 9:44 PM=0A=
+To: Khem Raj=0A=
+Cc: openembeded-devel=0A=
+Subject: Re: [oe] [meta-oe][PATCH v2] leveldb: fix compile errors for mips =
+with DEFAULTTUNE mips=0A=
+=0A=
+On 2019/3/6 =1B$B2<8a=1B(B1:31, Khem Raj wrote:=0A=
+> On Tue, Mar 5, 2019 at 9:16 PM Kang Kai <Kai.Kang@windriver.com> wrote:=
+=0A=
+>> On 2019/3/6 =1B$B>e8a=1B(B11:49, Khem Raj wrote:=0A=
+>>>=0A=
+>>> On 3/5/19 7:39 PM, kai.kang@windriver.com wrote:=0A=
+>>>> From: Kai Kang <kai.kang@windriver.com>=0A=
+>>>>=0A=
+>>>> It fails to compile leveldb for qemumips with DEFAULTTUNE 'mips':=0A=
+>>>>=0A=
+>>>> | {standard input}: Assembler messages:=0A=
+>>>> | {standard input}:8004: Error: opcode not supported on this processor=
+:=0A=
+>>>>     mips1 (mips1) `sync'=0A=
+>>>> | {standard input}:10296: Error: opcode not supported on this processo=
+r:=0A=
+>>>>     mips1 (mips1) `sync'=0A=
+>>>> | make: *** [out-shared/db/db_bench.o] Error 1=0A=
+>>>>=0A=
+>>>> Asm instruction 'sync' is called in platform-specific function=0A=
+>>>> MemoryBarrier() which is used by AtomicPointer(). Comment out the=0A=
+>>>> definition of MemoryBarrier() for mips to avoid the errors. And turn t=
+o=0A=
+>>>> use AtomicPointer() based on C++11 <atomc>.=0A=
+>>>>=0A=
+>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>=0A=
+>>>> ---=0A=
+>>>>    ...fine-function-MemoryBarrier-for-mips.patch | 43 ++++++++++++++++=
++++=0A=
+>>>>    meta-oe/recipes-dbs/leveldb/leveldb_git.bb    |  1 +=0A=
+>>>>    2 files changed, 44 insertions(+)=0A=
+>>>>    create mode 100644=0A=
+>>>> meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarri=
+er-for-mips.patch=0A=
+>>>>=0A=
+>>>> diff --git=0A=
+>>>> a/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
+rier-for-mips.patch=0A=
+>>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
+rier-for-mips.patch=0A=
+>>>>=0A=
+>>>> new file mode 100644=0A=
+>>>> index 000000000..fc7743030=0A=
+>>>> --- /dev/null=0A=
+>>>> +++=0A=
+>>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
+rier-for-mips.patch=0A=
+>>>> @@ -0,0 +1,43 @@=0A=
+>>>> +It fails to compile leveldb for qemumips with default tune 'mips':=0A=
+>>>> +=0A=
+>>>> +| {standard input}: Assembler messages:=0A=
+>>>> +| {standard input}:8004: Error: opcode not supported on this processo=
+r:=0A=
+>>>> +  mips1 (mips1) `sync'=0A=
+>>>> +| {standard input}:10296: Error: opcode not supported on this=0A=
+>>>> processor:=0A=
+>>>> +  mips1 (mips1) `sync'=0A=
+>>>> +| make: *** [out-shared/db/db_bench.o] Error 1=0A=
+>>>> +=0A=
+>>>> +Asm instruction 'sync' is called in platform-specific function=0A=
+>>>> +MemoryBarrier() which is used by AtomicPointer(). Comment out the=0A=
+>>>> +definition of MemoryBarrier() for mips to avoid the errors. And turn =
+to=0A=
+>>>> +use AtomicPointer() based on C++11 <atomic>.=0A=
+>>>> +=0A=
+>>>> +Upstream-Status: Inappropriate [oe specific]=0A=
+>>>> +=0A=
+>>>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>=0A=
+>>>> +=0A=
+>>>> +---=0A=
+>>>> + port/atomic_pointer.h | 10 +++++-----=0A=
+>>>> + 1 file changed, 5 insertions(+), 5 deletions(-)=0A=
+>>>> +=0A=
+>>>> +diff --git a/port/atomic_pointer.h b/port/atomic_pointer.h=0A=
+>>>> +index 1c4c7aa..7025ac3 100644=0A=
+>>>> +--- a/port/atomic_pointer.h=0A=
+>>>> ++++ b/port/atomic_pointer.h=0A=
+>>>> +@@ -113,11 +113,11 @@ inline void MemoryBarrier() {=0A=
+>>>> + #define LEVELDB_HAVE_MEMORY_BARRIER=0A=
+>>>> +=0A=
+>>>> + // MIPS=0A=
+>>>> +-#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)=0A=
+>>>> +-inline void MemoryBarrier() {=0A=
+>>>> +-  __asm__ __volatile__("sync" : : : "memory");=0A=
+>>>> +-}=0A=
+>>>> +-#define LEVELDB_HAVE_MEMORY_BARRIER=0A=
+>>>> ++//#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)=0A=
+>>>> ++//inline void MemoryBarrier() {=0A=
+>>>> ++//  __asm__ __volatile__("sync" : : : "memory");=0A=
+>>>> ++//}=0A=
+>>>> ++//#define LEVELDB_HAVE_MEMORY_BARRIER=0A=
+>>>> +=0A=
+>>> this is punishing all mips o32 variants.=0A=
+>> How about only apply the patch when DEFAULTTUNE is 'mips', such as=0A=
+>> something looks like:=0A=
+>>=0A=
+>> python ()  {=0A=
+>>=0A=
+>>       if d.getVar('DEFAULTTUNE') =3D=3D 'mips':=0A=
+>>=0A=
+>>           d.appendVar('SRC_URI', '=0A=
+>> file://do-not-define-function-MemoryBarrier-for-mips.patch')=0A=
+>>=0A=
+>> }=0A=
+>=0A=
+> None of these are as good as first patch. Ideally you should change=0A=
+> the defaulttune=0A=
+=0A=
+=0A=
+But defaulttune could be overridden by user configure. Even could=0A=
+configure qemumips64 with defaulttune 'mips'.=0A=
+I'll try to fix it from oe side based on first patch.=0A=
+=0A=
+Kai=0A=
+=0A=
+=0A=
+>=0A=
+=0A=
+--=0A=
+Kai Kang=0A=
+=0A=
+--=0A=
+_______________________________________________=0A=
+Openembedded-devel mailing list=0A=
+Openembedded-devel@lists.openembedded.org=0A=
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
 
