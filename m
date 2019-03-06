@@ -1,33 +1,50 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CBF417CDAA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B9087C6B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 16:37:59 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x26GbxQZ003846
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 Mar 2019 08:37:59 -0800 (PST)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.68]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0439.000;
-	Wed, 6 Mar 2019 08:37:59 -0800
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: "Kang, Kai" <Kai.Kang@windriver.com>, Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] leveldb: fix compile errors for mips
-	with DEFAULTTUNE mips
-Thread-Index: AQHU08+s45Yb99h75k2GuZpcOgZpKKX+lbCAgAAEeICAAAOcAIAALsPg
-Date: Wed, 6 Mar 2019 16:37:58 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF84F3768FB8@ALA-MBD.corp.ad.wrs.com>
+	Wed,  6 Mar 2019 17:21:40 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id p25so13723294qtb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Mar 2019 09:21:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=10sEAvHfz2TxdNqD5ePU8c6wm03RQSceary+PqWhBY4=;
+	b=hQ+8NdKUGqvdk45zGK7SpzI6/IhCaRH1QuwsKtEKEDE3z0h7pqsY0Mx3Wu0jxsZws8
+	UU30aGWvC9Ina86KMGIX8XFzsPgu5o29TxycpHAs3cmt3C9FGH9JSxz505kWzYXO6dwH
+	14xLi6/EZBFwHh3SZfn4VygPzcL7bPH04nDr8e5gyElK+ibIFBlFLF9mtwBr4GrXmMwS
+	I0KUVxtHWCxurt6bTGbg8bju/1Lkp97mVjvOZV0fds+PYRcrpwhkMHmJgHuJZCiFeuUZ
+	3a6RpVhq30MVFCa21Z5M2Bf6o9mU3FuuvI7KOKXlS4oziuaGA7pYeXjLT0fKO7DBPfds
+	C5uA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=10sEAvHfz2TxdNqD5ePU8c6wm03RQSceary+PqWhBY4=;
+	b=AdL1ttLSNRkIUCKd+QM9/QsRtHN/vFo7GSrvMU+AzDbqmjX1orexlDlDkd3Eo7MOgH
+	rSV342T4yL1InRQSYDZQiEwNlHRjJX8kQFNrf0rXFxnVlqMd++aJi8iuKhaON7/yJm5h
+	0WRjT1g5qPO4/7fKw/nw6kawxpz0TbOsbDmoFQIcGtmdIjK5NZdmV2kDeTedY9XrHwaF
+	ingDgy9ykCUTVaAr7dZJOvs1LkeAVBNtNk/ic914RgqpPD6r4c8+lqbRR5+o5dFueg22
+	QkBjZfpqI8skt6GAtuIx7g8fOFHIzG0dG1V1YSufMxMffGsGF9hj0VSWvliQBCorwyJP
+	DP7g==
+X-Gm-Message-State: APjAAAWulQpKFc9dHzKI49rrfADF3QkEQWAFhi+UiXZDWlfAbETIH64g
+	QXLtwXW/l1KxCYVD+CSMUwZrf5HI67HpySowUOE=
+X-Google-Smtp-Source: APXvYqwzY96ipru3Oq7TeHUdRWtvMu+UOTSOpD+pBxzSYVsEhmwv2RPC825zhaqaVZ3pIL/L6mbU2zRJ8OfOD2Q/aSg=
+X-Received: by 2002:ac8:2562:: with SMTP id 31mr6708360qtn.253.1551892901618; 
+	Wed, 06 Mar 2019 09:21:41 -0800 (PST)
+MIME-Version: 1.0
 References: <20190306033908.173027-1-kai.kang@windriver.com>
 	<e887e9d9-62fb-20fb-f753-4567b197ba20@gmail.com>
 	<7e344437-fa22-0312-c211-c250f9f5ff2f@windriver.com>
-	<CAMKF1srqqd3vgpyF9+pVEaXqjMK3X5x3uj9gB-0_YFHe69mTsQ@mail.gmail.com>,
+	<CAMKF1srqqd3vgpyF9+pVEaXqjMK3X5x3uj9gB-0_YFHe69mTsQ@mail.gmail.com>
 	<420bfc59-242c-ce16-1e7e-cc3dedb49a03@windriver.com>
-In-Reply-To: <420bfc59-242c-ce16-1e7e-cc3dedb49a03@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.119.62]
-MIME-Version: 1.0
+	<007BD92917A2324FA403BCF9A464CF84F3768FB8@ALA-MBD.corp.ad.wrs.com>
+In-Reply-To: <007BD92917A2324FA403BCF9A464CF84F3768FB8@ALA-MBD.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Mar 2019 09:21:15 -0800
+Message-ID: <CAMKF1spq-9_i74p0OcfgGJfk7u_htw0vQD1H6PVKsqVBr86g0w@mail.gmail.com>
+To: "Slater, Joseph" <joe.slater@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH v2] leveldb: fix compile errors for mips with DEFAULTTUNE mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,151 +59,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 16:37:59 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-2022-jp"
+X-List-Received-Date: Wed, 06 Mar 2019 17:21:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-If we assume we do not really have "sync" for the failing case here, lib32-=
-leveldb, shouldn't we apply the no-sync patch with something like=0A=
-=0A=
-SRC_URI_pn-lib32-leveldb_mipsarcho32 +=3D "..."=0A=
-=0A=
-Joe=0A=
-________________________________________=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Kang Kai [Kai.Kang@windriver.=
-com]=0A=
-Sent: Tuesday, March 05, 2019 9:44 PM=0A=
-To: Khem Raj=0A=
-Cc: openembeded-devel=0A=
-Subject: Re: [oe] [meta-oe][PATCH v2] leveldb: fix compile errors for mips =
-with DEFAULTTUNE mips=0A=
-=0A=
-On 2019/3/6 =1B$B2<8a=1B(B1:31, Khem Raj wrote:=0A=
-> On Tue, Mar 5, 2019 at 9:16 PM Kang Kai <Kai.Kang@windriver.com> wrote:=
-=0A=
->> On 2019/3/6 =1B$B>e8a=1B(B11:49, Khem Raj wrote:=0A=
->>>=0A=
->>> On 3/5/19 7:39 PM, kai.kang@windriver.com wrote:=0A=
->>>> From: Kai Kang <kai.kang@windriver.com>=0A=
->>>>=0A=
->>>> It fails to compile leveldb for qemumips with DEFAULTTUNE 'mips':=0A=
->>>>=0A=
->>>> | {standard input}: Assembler messages:=0A=
->>>> | {standard input}:8004: Error: opcode not supported on this processor=
-:=0A=
->>>>     mips1 (mips1) `sync'=0A=
->>>> | {standard input}:10296: Error: opcode not supported on this processo=
-r:=0A=
->>>>     mips1 (mips1) `sync'=0A=
->>>> | make: *** [out-shared/db/db_bench.o] Error 1=0A=
->>>>=0A=
->>>> Asm instruction 'sync' is called in platform-specific function=0A=
->>>> MemoryBarrier() which is used by AtomicPointer(). Comment out the=0A=
->>>> definition of MemoryBarrier() for mips to avoid the errors. And turn t=
-o=0A=
->>>> use AtomicPointer() based on C++11 <atomc>.=0A=
->>>>=0A=
->>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>=0A=
->>>> ---=0A=
->>>>    ...fine-function-MemoryBarrier-for-mips.patch | 43 ++++++++++++++++=
-+++=0A=
->>>>    meta-oe/recipes-dbs/leveldb/leveldb_git.bb    |  1 +=0A=
->>>>    2 files changed, 44 insertions(+)=0A=
->>>>    create mode 100644=0A=
->>>> meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarri=
-er-for-mips.patch=0A=
->>>>=0A=
->>>> diff --git=0A=
->>>> a/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
-rier-for-mips.patch=0A=
->>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
-rier-for-mips.patch=0A=
->>>>=0A=
->>>> new file mode 100644=0A=
->>>> index 000000000..fc7743030=0A=
->>>> --- /dev/null=0A=
->>>> +++=0A=
->>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
-rier-for-mips.patch=0A=
->>>> @@ -0,0 +1,43 @@=0A=
->>>> +It fails to compile leveldb for qemumips with default tune 'mips':=0A=
->>>> +=0A=
->>>> +| {standard input}: Assembler messages:=0A=
->>>> +| {standard input}:8004: Error: opcode not supported on this processo=
-r:=0A=
->>>> +  mips1 (mips1) `sync'=0A=
->>>> +| {standard input}:10296: Error: opcode not supported on this=0A=
->>>> processor:=0A=
->>>> +  mips1 (mips1) `sync'=0A=
->>>> +| make: *** [out-shared/db/db_bench.o] Error 1=0A=
->>>> +=0A=
->>>> +Asm instruction 'sync' is called in platform-specific function=0A=
->>>> +MemoryBarrier() which is used by AtomicPointer(). Comment out the=0A=
->>>> +definition of MemoryBarrier() for mips to avoid the errors. And turn =
-to=0A=
->>>> +use AtomicPointer() based on C++11 <atomic>.=0A=
->>>> +=0A=
->>>> +Upstream-Status: Inappropriate [oe specific]=0A=
->>>> +=0A=
->>>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>=0A=
->>>> +=0A=
->>>> +---=0A=
->>>> + port/atomic_pointer.h | 10 +++++-----=0A=
->>>> + 1 file changed, 5 insertions(+), 5 deletions(-)=0A=
->>>> +=0A=
->>>> +diff --git a/port/atomic_pointer.h b/port/atomic_pointer.h=0A=
->>>> +index 1c4c7aa..7025ac3 100644=0A=
->>>> +--- a/port/atomic_pointer.h=0A=
->>>> ++++ b/port/atomic_pointer.h=0A=
->>>> +@@ -113,11 +113,11 @@ inline void MemoryBarrier() {=0A=
->>>> + #define LEVELDB_HAVE_MEMORY_BARRIER=0A=
->>>> +=0A=
->>>> + // MIPS=0A=
->>>> +-#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)=0A=
->>>> +-inline void MemoryBarrier() {=0A=
->>>> +-  __asm__ __volatile__("sync" : : : "memory");=0A=
->>>> +-}=0A=
->>>> +-#define LEVELDB_HAVE_MEMORY_BARRIER=0A=
->>>> ++//#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)=0A=
->>>> ++//inline void MemoryBarrier() {=0A=
->>>> ++//  __asm__ __volatile__("sync" : : : "memory");=0A=
->>>> ++//}=0A=
->>>> ++//#define LEVELDB_HAVE_MEMORY_BARRIER=0A=
->>>> +=0A=
->>> this is punishing all mips o32 variants.=0A=
->> How about only apply the patch when DEFAULTTUNE is 'mips', such as=0A=
->> something looks like:=0A=
->>=0A=
->> python ()  {=0A=
->>=0A=
->>       if d.getVar('DEFAULTTUNE') =3D=3D 'mips':=0A=
->>=0A=
->>           d.appendVar('SRC_URI', '=0A=
->> file://do-not-define-function-MemoryBarrier-for-mips.patch')=0A=
->>=0A=
->> }=0A=
->=0A=
-> None of these are as good as first patch. Ideally you should change=0A=
-> the defaulttune=0A=
-=0A=
-=0A=
-But defaulttune could be overridden by user configure. Even could=0A=
-configure qemumips64 with defaulttune 'mips'.=0A=
-I'll try to fix it from oe side based on first patch.=0A=
-=0A=
-Kai=0A=
-=0A=
-=0A=
->=0A=
-=0A=
---=0A=
-Kai Kang=0A=
-=0A=
---=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
+On Wed, Mar 6, 2019 at 8:38 AM Slater, Joseph <joe.slater@windriver.com> wr=
+ote:
+>
+> If we assume we do not really have "sync" for the failing case here, lib3=
+2-leveldb, shouldn't we apply the no-sync patch with something like
+>
+> SRC_URI_pn-lib32-leveldb_mipsarcho32 +=3D "..."
+>
+
+my problem is that we have mips32r2 which is also mipsarcho32
+and does have sync, I would rather suggest that you switch the
+defaulttune for multilib to use mips32r2 since thats more or less
+whats out there
+
+> Joe
+> ________________________________________
+> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
+el-bounces@lists.openembedded.org] on behalf of Kang Kai [Kai.Kang@windrive=
+r.com]
+> Sent: Tuesday, March 05, 2019 9:44 PM
+> To: Khem Raj
+> Cc: openembeded-devel
+> Subject: Re: [oe] [meta-oe][PATCH v2] leveldb: fix compile errors for mip=
+s with DEFAULTTUNE mips
+>
+> On 2019/3/6 =E4=B8=8B=E5=8D=881:31, Khem Raj wrote:
+> > On Tue, Mar 5, 2019 at 9:16 PM Kang Kai <Kai.Kang@windriver.com> wrote:
+> >> On 2019/3/6 =E4=B8=8A=E5=8D=8811:49, Khem Raj wrote:
+> >>>
+> >>> On 3/5/19 7:39 PM, kai.kang@windriver.com wrote:
+> >>>> From: Kai Kang <kai.kang@windriver.com>
+> >>>>
+> >>>> It fails to compile leveldb for qemumips with DEFAULTTUNE 'mips':
+> >>>>
+> >>>> | {standard input}: Assembler messages:
+> >>>> | {standard input}:8004: Error: opcode not supported on this process=
+or:
+> >>>>     mips1 (mips1) `sync'
+> >>>> | {standard input}:10296: Error: opcode not supported on this proces=
+sor:
+> >>>>     mips1 (mips1) `sync'
+> >>>> | make: *** [out-shared/db/db_bench.o] Error 1
+> >>>>
+> >>>> Asm instruction 'sync' is called in platform-specific function
+> >>>> MemoryBarrier() which is used by AtomicPointer(). Comment out the
+> >>>> definition of MemoryBarrier() for mips to avoid the errors. And turn=
+ to
+> >>>> use AtomicPointer() based on C++11 <atomc>.
+> >>>>
+> >>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> >>>> ---
+> >>>>    ...fine-function-MemoryBarrier-for-mips.patch | 43 ++++++++++++++=
++++++
+> >>>>    meta-oe/recipes-dbs/leveldb/leveldb_git.bb    |  1 +
+> >>>>    2 files changed, 44 insertions(+)
+> >>>>    create mode 100644
+> >>>> meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBar=
+rier-for-mips.patch
+> >>>>
+> >>>> diff --git
+> >>>> a/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryB=
+arrier-for-mips.patch
+> >>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryB=
+arrier-for-mips.patch
+> >>>>
+> >>>> new file mode 100644
+> >>>> index 000000000..fc7743030
+> >>>> --- /dev/null
+> >>>> +++
+> >>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryB=
+arrier-for-mips.patch
+> >>>> @@ -0,0 +1,43 @@
+> >>>> +It fails to compile leveldb for qemumips with default tune 'mips':
+> >>>> +
+> >>>> +| {standard input}: Assembler messages:
+> >>>> +| {standard input}:8004: Error: opcode not supported on this proces=
+sor:
+> >>>> +  mips1 (mips1) `sync'
+> >>>> +| {standard input}:10296: Error: opcode not supported on this
+> >>>> processor:
+> >>>> +  mips1 (mips1) `sync'
+> >>>> +| make: *** [out-shared/db/db_bench.o] Error 1
+> >>>> +
+> >>>> +Asm instruction 'sync' is called in platform-specific function
+> >>>> +MemoryBarrier() which is used by AtomicPointer(). Comment out the
+> >>>> +definition of MemoryBarrier() for mips to avoid the errors. And tur=
+n to
+> >>>> +use AtomicPointer() based on C++11 <atomic>.
+> >>>> +
+> >>>> +Upstream-Status: Inappropriate [oe specific]
+> >>>> +
+> >>>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> >>>> +
+> >>>> +---
+> >>>> + port/atomic_pointer.h | 10 +++++-----
+> >>>> + 1 file changed, 5 insertions(+), 5 deletions(-)
+> >>>> +
+> >>>> +diff --git a/port/atomic_pointer.h b/port/atomic_pointer.h
+> >>>> +index 1c4c7aa..7025ac3 100644
+> >>>> +--- a/port/atomic_pointer.h
+> >>>> ++++ b/port/atomic_pointer.h
+> >>>> +@@ -113,11 +113,11 @@ inline void MemoryBarrier() {
+> >>>> + #define LEVELDB_HAVE_MEMORY_BARRIER
+> >>>> +
+> >>>> + // MIPS
+> >>>> +-#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
+> >>>> +-inline void MemoryBarrier() {
+> >>>> +-  __asm__ __volatile__("sync" : : : "memory");
+> >>>> +-}
+> >>>> +-#define LEVELDB_HAVE_MEMORY_BARRIER
+> >>>> ++//#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
+> >>>> ++//inline void MemoryBarrier() {
+> >>>> ++//  __asm__ __volatile__("sync" : : : "memory");
+> >>>> ++//}
+> >>>> ++//#define LEVELDB_HAVE_MEMORY_BARRIER
+> >>>> +
+> >>> this is punishing all mips o32 variants.
+> >> How about only apply the patch when DEFAULTTUNE is 'mips', such as
+> >> something looks like:
+> >>
+> >> python ()  {
+> >>
+> >>       if d.getVar('DEFAULTTUNE') =3D=3D 'mips':
+> >>
+> >>           d.appendVar('SRC_URI', '
+> >> file://do-not-define-function-MemoryBarrier-for-mips.patch')
+> >>
+> >> }
+> >
+> > None of these are as good as first patch. Ideally you should change
+> > the defaulttune
+>
+>
+> But defaulttune could be overridden by user configure. Even could
+> configure qemumips64 with defaulttune 'mips'.
+> I'll try to fix it from oe side based on first patch.
+>
+> Kai
+>
+>
+> >
+>
+> --
+> Kai Kang
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
