@@ -1,30 +1,23 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D9C36D7BA
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 450C17CC14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 06:02:14 +0000 (UTC)
+	Wed,  6 Mar 2019 07:14:46 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x2662Fsg028065
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x267Eka8023144
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 5 Mar 2019 22:02:15 -0800 (PST)
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Tue, 5 Mar 2019 22:02:14 -0800
-To: Khem Raj <raj.khem@gmail.com>
-References: <1550652980-292761-1-git-send-email-changqing.li@windriver.com>
-	<1550652980-292761-4-git-send-email-changqing.li@windriver.com>
-	<CAMKF1soyUbWgfoDTJFCQVWhMpM10aWHnqd6Qz2E=L+MUujArRQ@mail.gmail.com>
-	<7b91482a-f086-5668-973d-47cbb787e639@windriver.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <e93e4db2-c647-4962-4c52-3cd05012f85b@windriver.com>
-Date: Wed, 6 Mar 2019 14:02:11 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Tue, 5 Mar 2019 23:14:47 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 5 Mar 2019 23:14:41 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Wed, 6 Mar 2019 02:14:25 -0500
+Message-ID: <1551856465-257148-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <7b91482a-f086-5668-973d-47cbb787e639@windriver.com>
-X-Originating-IP: [128.224.162.228]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/5] rrdtool: upgrade 1.7.0 -> 1.7.1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] hdf5: support 32-bit target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,73 +30,1035 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 06:02:14 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 06 Mar 2019 07:14:47 -0000
+Content-Type: text/plain
 
+Add pre-generated 32-bit H5Tinit.c to support 32-bit target
 
-On 2/26/19 10:43 AM, Changqing Li wrote:
->
-> On 2/23/19 2:07 AM, Khem Raj wrote:
->> On Wed, Feb 20, 2019 at 12:57 AM <changqing.li@windriver.com> wrote:
->>> From: Changqing Li <changqing.li@windriver.com>
->>>
->>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->>> ---
->>>   .../recipes-extended/rrdtool/{rrdtool_1.7.0.bb => 
->>> rrdtool_1.7.1.bb}   | 4 ++--
->>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>   rename meta-oe/recipes-extended/rrdtool/{rrdtool_1.7.0.bb => 
->>> rrdtool_1.7.1.bb} (98%)
->>>
->>> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb 
->>> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
->>> similarity index 98%
->>> rename from meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
->>> rename to meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
->>> index ff99574..1a1ca54 100644
->>> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
->>> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.1.bb
->>> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = 
->>> "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
->>>
->>>   DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native 
->>> python-setuptools-native"
->>>
->>> -SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
->>> -PV = "1.7.0"
->>> +SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
->>> +PV = "1.7.1"
->>>
->> seeing some packaging failures on qemux86/musl e.g.
->>
->> ERROR: SYSTEMD_SERVICE_rrdcached value rrdcached.socket does not exist
->>
->> see
->>
->> https://errors.yoctoproject.org/Errors/Details/229882/
->>
->>
->> Can you take care of this as a separate fix ?
-> OK,  I will  check this.
-This problem caused by  bug of rrdtool,  will fix in next release. So I 
-will upgrade to next  release when it is ready.
->>
->>>   SRC_URI = "\
->>> git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
->>> -- 
->>> 2.7.4
->>>
->>> -- 
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-oe/recipes-support/hdf5/files/H5Tinit-32.c    | 975 +++++++++++++++++++++
+ .../hdf5/files/{H5Tinit.c => H5Tinit-64.c}         |   0
+ meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb        |   7 +-
+ 3 files changed, 979 insertions(+), 3 deletions(-)
+ create mode 100755 meta-oe/recipes-support/hdf5/files/H5Tinit-32.c
+ rename meta-oe/recipes-support/hdf5/files/{H5Tinit.c => H5Tinit-64.c} (100%)
+
+diff --git a/meta-oe/recipes-support/hdf5/files/H5Tinit-32.c b/meta-oe/recipes-support/hdf5/files/H5Tinit-32.c
+new file mode 100755
+index 0000000..8057a7a
+--- /dev/null
++++ b/meta-oe/recipes-support/hdf5/files/H5Tinit-32.c
+@@ -0,0 +1,975 @@
++/* Generated automatically by H5detect -- do not edit */
++
++
++
++/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
++ * Copyright by The HDF Group.                                               *
++ * Copyright by the Board of Trustees of the University of Illinois.         *
++ * All rights reserved.                                                      *
++ *                                                                           *
++ * This file is part of HDF5.  The full HDF5 copyright notice, including     *
++ * terms governing use, modification, and redistribution, is contained in    *
++ * the COPYING file, which can be found at the root of the source code       *
++ * distribution tree, or in https://support.hdfgroup.org/ftp/HDF5/releases.  *
++ * If you do not have access to either file, you may request a copy from     *
++ * help@hdfgroup.org.                                                        *
++ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
++ *
++ * Created:		Mar  5, 2019
++ *			root <root@qemuarm>
++ *
++ * Purpose:		This machine-generated source code contains
++ *			information about the various integer and
++ *			floating point numeric formats found on this
++ *			architecture.  The parameters below should be
++ *			checked carefully and errors reported to the
++ *			HDF5 maintainer.
++ *			
++ *			Each of the numeric formats listed below are
++ *			printed from most significant bit to least
++ *			significant bit even though the actual bytes
++ *			might be stored in a different order in
++ *			memory.	 The integers above each binary byte
++ *			indicate the relative order of the bytes in
++ *			memory; little-endian machines have
++ *			decreasing numbers while big-endian machines
++ *			have increasing numbers.
++ *			
++ *			The fields of the numbers are printed as
++ *			letters with `S' for the mantissa sign bit,
++ *			`M' for the mantissa magnitude, and `E' for
++ *			the exponent.  The exponent has an associated
++ *			bias which can be subtracted to find the
++ *			true exponent.	The radix point is assumed
++ *			to be before the first `M' bit.	 Any bit
++ *			of a floating-point value not falling into one
++ *			of these categories is printed as a question
++ *			mark.  Bits of integer types are printed as
++ *			`I' for 2's complement and `U' for magnitude.
++ *			
++ *			If the most significant bit of the normalized
++ *			mantissa (always a `1' except for `0.0') is
++ *			not stored then an `implicit=yes' appears
++ *			under the field description.  In thie case,
++ *			the radix point is still assumed to be
++ *			before the first `M' but after the implicit
++ *			bit.
++ *
++ * Modifications:
++ *
++ *	DO NOT MAKE MODIFICATIONS TO THIS FILE!
++ *	It was generated by code in `H5detect.c'.
++ *
++ *-------------------------------------------------------------------------
++ */
++
++/****************/
++/* Module Setup */
++/****************/
++
++#define H5T_PACKAGE /*suppress error about including H5Tpkg.h*/
++
++
++/***********/
++/* Headers */
++/***********/
++#include "H5private.h"		/* Generic Functions			*/
++#include "H5Eprivate.h"		/* Error handling		  	*/
++#include "H5FLprivate.h"	/* Free Lists				*/
++#include "H5Iprivate.h"		/* IDs			  		*/
++#include "H5Tpkg.h"		/* Datatypes 				*/
++
++
++/****************/
++/* Local Macros */
++/****************/
++
++
++/******************/
++/* Local Typedefs */
++/******************/
++
++
++/********************/
++/* Package Typedefs */
++/********************/
++
++
++/********************/
++/* Local Prototypes */
++/********************/
++
++
++/********************/
++/* Public Variables */
++/********************/
++
++
++/*****************************/
++/* Library Private Variables */
++/*****************************/
++
++
++/*********************/
++/* Package Variables */
++/*********************/
++
++
++
++/*******************/
++/* Local Variables */
++/*******************/
++
++
++
++/*-------------------------------------------------------------------------
++ * Function:	H5TN_init_interface
++ *
++ * Purpose:	Initialize pre-defined native datatypes from code generated
++ *              during the library configuration by H5detect.
++ *
++ * Return:	Success:	non-negative
++ *		Failure:	negative
++ *
++ * Programmer:	Robb Matzke
++ *              Wednesday, December 16, 1998
++ *
++ *-------------------------------------------------------------------------
++ */
++herr_t
++H5TN_init_interface(void)
++{
++    H5T_t	*dt = NULL;
++    herr_t	ret_value = SUCCEED;
++
++    FUNC_ENTER_NOAPI(FAIL)
++
++   /*
++    *    0
++    * IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_SCHAR_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_SCHAR_ALIGN_g = 1;
++    H5T_NATIVE_SCHAR_COMP_ALIGN_g = 1;
++
++   /*
++    *    0
++    * UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UCHAR_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UCHAR_ALIGN_g = 1;
++
++   /*
++    *    1        0
++    * IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_SHORT_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_SHORT_ALIGN_g = 1;
++    H5T_NATIVE_SHORT_COMP_ALIGN_g = 2;
++
++   /*
++    *    1        0
++    * UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_USHORT_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_USHORT_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_ALIGN_g = 1;
++    H5T_NATIVE_INT_COMP_ALIGN_g = 4;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_LONG_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_LONG_ALIGN_g = 1;
++    H5T_NATIVE_LONG_COMP_ALIGN_g = 4;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_ULONG_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_ULONG_ALIGN_g = 1;
++
++   /*
++    *    0
++    * IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT8_ALIGN_g = 1;
++
++   /*
++    *    0
++    * UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT8_ALIGN_g = 1;
++
++   /*
++    *    0
++    * IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_LEAST8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_LEAST8_ALIGN_g = 1;
++
++   /*
++    *    0
++    * UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_LEAST8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_LEAST8_ALIGN_g = 1;
++
++   /*
++    *    0
++    * IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_FAST8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_FAST8_ALIGN_g = 1;
++
++   /*
++    *    0
++    * UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 1;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 8;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_FAST8_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_FAST8_ALIGN_g = 1;
++
++   /*
++    *    1        0
++    * IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT16_ALIGN_g = 1;
++
++   /*
++    *    1        0
++    * UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT16_ALIGN_g = 1;
++
++   /*
++    *    1        0
++    * IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_LEAST16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_LEAST16_ALIGN_g = 1;
++
++   /*
++    *    1        0
++    * UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 2;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 16;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_LEAST16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_LEAST16_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_FAST16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_FAST16_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_FAST16_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_FAST16_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT32_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT32_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_LEAST32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_LEAST32_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_LEAST32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_LEAST32_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_FAST32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_FAST32_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_FAST32_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_FAST32_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_LEAST64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_LEAST64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_LEAST64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_LEAST64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_INT_FAST64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_INT_FAST64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_UINT_FAST64_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_UINT_FAST64_ALIGN_g = 1;
++
++   /*
++    *    7        6        5        4
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    *    3        2        1        0
++    * IIIIIIII IIIIIIII IIIIIIII IIIIIIII
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_2;
++    if((H5T_NATIVE_LLONG_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_LLONG_ALIGN_g = 1;
++    H5T_NATIVE_LLONG_COMP_ALIGN_g = 8;
++
++   /*
++    *    7        6        5        4
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    *    3        2        1        0
++    * UUUUUUUU UUUUUUUU UUUUUUUU UUUUUUUU
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_INTEGER;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.i.sign = H5T_SGN_NONE;
++    if((H5T_NATIVE_ULLONG_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_ULLONG_ALIGN_g = 1;
++
++   /*
++    *    3        2        1        0
++    * SEEEEEEE EMMMMMMM MMMMMMMM MMMMMMMM
++    * Implicit bit? yes
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_FLOAT;
++    dt->shared->size = 4;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 32;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.f.sign = 31;
++    dt->shared->u.atomic.u.f.epos = 23;
++    dt->shared->u.atomic.u.f.esize = 8;
++    dt->shared->u.atomic.u.f.ebias = 0x0000007f;
++    dt->shared->u.atomic.u.f.mpos = 0;
++    dt->shared->u.atomic.u.f.msize = 23;
++    dt->shared->u.atomic.u.f.norm = H5T_NORM_IMPLIED;
++    dt->shared->u.atomic.u.f.pad = H5T_PAD_ZERO;
++    if((H5T_NATIVE_FLOAT_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_FLOAT_ALIGN_g = 1;
++    H5T_NATIVE_FLOAT_COMP_ALIGN_g = 4;
++
++   /*
++    *    7        6        5        4
++    * SEEEEEEE EEEEMMMM MMMMMMMM MMMMMMMM
++    *    3        2        1        0
++    * MMMMMMMM MMMMMMMM MMMMMMMM MMMMMMMM
++    * Implicit bit? yes
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_FLOAT;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.f.sign = 63;
++    dt->shared->u.atomic.u.f.epos = 52;
++    dt->shared->u.atomic.u.f.esize = 11;
++    dt->shared->u.atomic.u.f.ebias = 0x000003ff;
++    dt->shared->u.atomic.u.f.mpos = 0;
++    dt->shared->u.atomic.u.f.msize = 52;
++    dt->shared->u.atomic.u.f.norm = H5T_NORM_IMPLIED;
++    dt->shared->u.atomic.u.f.pad = H5T_PAD_ZERO;
++    if((H5T_NATIVE_DOUBLE_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_DOUBLE_ALIGN_g = 1;
++    H5T_NATIVE_DOUBLE_COMP_ALIGN_g = 8;
++
++   /*
++    *    7        6        5        4
++    * SEEEEEEE EEEEMMMM MMMMMMMM MMMMMMMM
++    *    3        2        1        0
++    * MMMMMMMM MMMMMMMM MMMMMMMM MMMMMMMM
++    * Implicit bit? yes
++    * Alignment: none
++    */
++    if(NULL == (dt = H5T__alloc()))
++        HGOTO_ERROR(H5E_DATATYPE, H5E_NOSPACE, FAIL, "datatype allocation failed")
++    dt->shared->state = H5T_STATE_IMMUTABLE;
++    dt->shared->type = H5T_FLOAT;
++    dt->shared->size = 8;
++    dt->shared->u.atomic.order = H5T_ORDER_LE;
++    dt->shared->u.atomic.offset = 0;
++    dt->shared->u.atomic.prec = 64;
++    dt->shared->u.atomic.lsb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.msb_pad = H5T_PAD_ZERO;
++    dt->shared->u.atomic.u.f.sign = 63;
++    dt->shared->u.atomic.u.f.epos = 52;
++    dt->shared->u.atomic.u.f.esize = 11;
++    dt->shared->u.atomic.u.f.ebias = 0x000003ff;
++    dt->shared->u.atomic.u.f.mpos = 0;
++    dt->shared->u.atomic.u.f.msize = 52;
++    dt->shared->u.atomic.u.f.norm = H5T_NORM_IMPLIED;
++    dt->shared->u.atomic.u.f.pad = H5T_PAD_ZERO;
++    if((H5T_NATIVE_LDOUBLE_g = H5I_register(H5I_DATATYPE, dt, FALSE)) < 0)
++        HGOTO_ERROR(H5E_DATATYPE, H5E_CANTINIT, FAIL, "can't register ID for built-in datatype")
++    H5T_NATIVE_LDOUBLE_ALIGN_g = 1;
++    H5T_NATIVE_LDOUBLE_COMP_ALIGN_g = 8;
++
++    /* Set the native order for this machine */
++    H5T_native_order_g = H5T_ORDER_LE;
++
++    /* Structure alignment for pointers, hvl_t, hobj_ref_t, hdset_reg_ref_t */
++    H5T_POINTER_COMP_ALIGN_g = 4;
++    H5T_HVL_COMP_ALIGN_g = 4;
++    H5T_HOBJREF_COMP_ALIGN_g = 8;
++    H5T_HDSETREGREF_COMP_ALIGN_g = 1;
++
++done:
++    if(ret_value < 0) {
++        if(dt != NULL) {
++            dt->shared = H5FL_FREE(H5T_shared_t, dt->shared);
++            dt = H5FL_FREE(H5T_t, dt);
++        } /* end if */
++    } /* end if */
++
++    FUNC_LEAVE_NOAPI(ret_value);
++} /* end H5TN_init_interface() */
++
++/****************************************/
++/* ALIGNMENT and signal-handling status */
++/****************************************/
++/* Signal() support: yes */
++/* setjmp() support: yes */
++/* longjmp() support: yes */
++/* sigsetjmp() support: yes */
++/* siglongjmp() support: yes */
++/* sigprocmask() support: yes */
++
++/******************************/
++/* signal handlers statistics */
++/******************************/
++/* signal_handlers tested: 15 times */
++/* sigbus_handler called: 5 times */
++/* sigsegv_handler called: 5 times */
++/* sigill_handler called: 5 times */
+diff --git a/meta-oe/recipes-support/hdf5/files/H5Tinit.c b/meta-oe/recipes-support/hdf5/files/H5Tinit-64.c
+similarity index 100%
+rename from meta-oe/recipes-support/hdf5/files/H5Tinit.c
+rename to meta-oe/recipes-support/hdf5/files/H5Tinit-64.c
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb b/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
+index 7ea6f64..ccef36c 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
+@@ -6,12 +6,13 @@ SECTION = "libs"
+ LICENSE = "HDF5"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=57e5351b17591e659eedae107265c606"
+ 
+-inherit cmake
++inherit cmake siteinfo
+ 
+ SRC_URI = " \
+     https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
+     file://H5lib_settings.c \
+-    file://H5Tinit.c \
++    file://H5Tinit-64.c \
++    file://H5Tinit-32.c \
+     file://0001-cross-compiling-support.patch \
+     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
+ "
+@@ -42,7 +43,7 @@ EXTRA_OECMAKE = " \
+ do_unpack[postfuncs] += "gen_hd5file"
+ gen_hd5file() {
+     install -m 544 ${WORKDIR}/H5lib_settings.c ${S}
+-    install -m 544 ${WORKDIR}/H5Tinit.c ${S}
++    install -m 544 ${WORKDIR}/H5Tinit-${SITEINFO_BITS}.c ${S}/H5Tinit.c
+ }
+ 
+ do_install_append() {
 -- 
-BRs
-
-Sandy(Li Changqing)
+2.8.1
 
 
