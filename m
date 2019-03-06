@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id D36357C61E
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AC7C7C7D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 05:46:00 +0000 (UTC)
-Received: by mail-pg1-f178.google.com with SMTP id r124so7438986pgr.3
+	Wed,  6 Mar 2019 05:46:02 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id j3so7424510pgm.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Mar 2019 21:46:02 -0800 (PST)
+	Tue, 05 Mar 2019 21:46:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=vEYoDWpdqa6zfbEJJrN78P6BuI74q/5vwlkSkMxiw0o=;
-	b=T/bHY8HjzgVhfkq5T7LPOJ4ZJGTgJcyHjGBw3IsGtQhsqn97/yOMYd4ndpPP13dy+j
-	XFIXRvUxGcGy2pzrj4qIo32XgChO1jWiWiO0MQZeFKcp7z60pmd2Jk8S3xMvSVRHOJRX
-	dErWpnpMOMhgeNNrGcERp9OTR1hBA7qsvbAX37MaX1B63glwCuUQZKgeyY0k+QGkjzMr
-	6bJketB+NqW7NaxKWJDsXMWf3Zsfxm75SZwhOl5BnJfuo5MzENM0TQbqCDGjwjorG2OO
-	+QYie8AmxZANhWVSIaIFIEJ2s+NQXHFiP/cA8J/S5SUiSwwLwx/+4JE044Ju2klJmrFd
-	/1Yg==
+	bh=ZCtB/khMBXmG65XSSR1dIthmQCYXc0lsL7v5iuA01N4=;
+	b=JNhg8wkaWImlyHwi/zbH7wuVUv8BHzOfCTfAIY1zfg7Z7WruJdthKJM7R5EOXOtLBV
+	M9UDzjyQJzoJQ3joQtq7tjsZa3ED3jM9Jm1uHp+sgmfwh8cnUBez9l3XjKuoiLje7Zqe
+	0Hv9/PIf5VFPVZuQVI6tXJL00NQT7EHRZ4EXZIrnc6bTRgLQvAK+/tBmc2iXoj2SCGGO
+	GOFPPELrIPPUmQ6QvTYKKiZnmycCEdZRwQhuwtob2S2uS1XxycreraQDAtW2zpkQtygL
+	F+YD2S0fS75VfZAhJOEzJVgOoJOrddbIqRgyXRG6byh7N7Tc4rEGIKmVf1/CwXOtjZQ/
+	vwtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=vEYoDWpdqa6zfbEJJrN78P6BuI74q/5vwlkSkMxiw0o=;
-	b=SwSj9SmOOur9anGGNcoLSLtZwb5GgBqp/0rKc+mFi46se4T9zZwuohsrEKuWY4OWXb
-	SUuiqdgkR2yaVE+dwQQt3xngEKgQO+5stbrxut7FvGD1UywNae81WsR7EZ95lBj8jPqe
-	cntHjoP5c9eSZlqlIyKTUoW66ncnJXhxoh8vB+rVhaJ2tzJSRLvhcDf4xhC6KKEBIwJ4
-	Ab8Ew3t1KS0n1XVmJ6EUG7wknMYlXKVF/Pa/qIf/p7w6hHwohsRWw4hr4nXPKUgnO4Fe
-	5kt5gNw6se+oOl6rqjgbFq68f4T/T49peXUrgRr34vk4g6E9pXHeBJlGcP8OIwBoupzz
-	lQPQ==
-X-Gm-Message-State: APjAAAXZX/rBkHZmL9SmyukAlQCdSntdKT52D1O+68ATC9m7ifQjip0Y
-	65YZ2WlR466UAaj79OvJzbGg/rMZ
-X-Google-Smtp-Source: APXvYqwsBdevQyLXvdu5ZioDpeU4R9EXkZNPeexGUPfNaVTTwBdPbdEPgyHHljLkZs+fmz4L9wooyg==
-X-Received: by 2002:a63:8743:: with SMTP id i64mr4755617pge.69.1551851161622; 
-	Tue, 05 Mar 2019 21:46:01 -0800 (PST)
+	bh=ZCtB/khMBXmG65XSSR1dIthmQCYXc0lsL7v5iuA01N4=;
+	b=e9AbKweRHproEV8D1M1vYoeNZmjhGZkXbLXyr6HTdHMWCqMeLMbC4vRC0zrnQP9MQ9
+	5mzELIVz4X2gha4OsiGcQIzjuTJ77pLFjdNtBTkA/ZZm4ePft+vmeOpX9AXNZbeEo9Ba
+	pMG6kdGXKym6CZeanzhZsyV+goKyGYm8fuBIJN2M1HQ1inE9ldipssGz8OJQJ6HwnSra
+	PXadzgcbs+OxcZyi6Hl7UfEZl0j1MITWru2R9DIUkGc71gWYoBS0rbXuhyb4c1ewIfPf
+	RvCngnftbOnIR8sUKTV7+gCnD3lxgzpsi7X71AxxxNvNRQzFk0n4DkKTMd7d42/8dD9v
+	uR/w==
+X-Gm-Message-State: APjAAAXgfcwyegLqIM9Il2LksbPdbIQxyNbSJSIh/XIz1GWjkgLZGZQT
+	7/WnKo5QdnBdDFQC0/+Ti1ZbiLAV
+X-Google-Smtp-Source: APXvYqxKede0neGDMziKNjv7rfqPw3zS+r6hV8JfPqZjHSnVLwMhgMzduygsiLtPFRuD7SPmAO3Asg==
+X-Received: by 2002:a63:4e57:: with SMTP id o23mr4501706pgl.368.1551851162734; 
+	Tue, 05 Mar 2019 21:46:02 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.46.00
+	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.46.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Mar 2019 21:46:00 -0800 (PST)
+	Tue, 05 Mar 2019 21:46:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2019 21:45:45 -0800
-Message-Id: <20190306054548.16430-9-raj.khem@gmail.com>
+Date: Tue,  5 Mar 2019 21:45:46 -0800
+Message-Id: <20190306054548.16430-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190306054548.16430-1-raj.khem@gmail.com>
 References: <20190306054548.16430-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 09/12] webrtc-audio-processing: Add support for risc-v
+Subject: [meta-oe][PATCH 10/12] openocd: Fix build for risc-v
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,67 +58,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 05:46:01 -0000
+X-List-Received-Date: Wed, 06 Mar 2019 05:46:02 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../riscv_support.patch                       | 33 +++++++++++++++++++
- .../webrtc-audio-processing_0.3.bb            |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing/riscv_support.patch
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing/riscv_support.patch b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing/riscv_support.patch
-new file mode 100644
-index 0000000000..576b9860a8
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing/riscv_support.patch
-@@ -0,0 +1,33 @@
-+Add support for RISC-V
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/webrtc/base/basictypes.h
-++++ b/webrtc/base/basictypes.h
-+@@ -29,6 +29,10 @@
-+ #define CPU_ARM 1
-+ #endif
-+ 
-++#if defined(__riscv) || defined(_M_RISCV)
-++#define CPU_RISCV 1
-++#endif
-++
-+ #if defined(CPU_X86) && defined(CPU_ARM)
-+ #error CPU_X86 and CPU_ARM both defined.
-+ #endif
-+--- a/webrtc/typedefs.h
-++++ b/webrtc/typedefs.h
-+@@ -56,6 +56,13 @@
-+ #elif defined(__powerpc__)
-+ #define WEBRTC_ARCH_32_BITS
-+ #define WEBRTC_ARCH_BIG_ENDIAN
-++#elif defined(__riscv)
-++#if __riscv_xlen == 64
-++# define WEBRTC_ARCH_64_BITS
-++#else
-++# define WEBRTC_ARCH_32_BITS
-++#endif
-++#define WEBRTC_ARCH_LITTLE_ENDIAN
-+ #elif defined(__pnacl__)
-+ #define WEBRTC_ARCH_32_BITS
-+ #define WEBRTC_ARCH_LITTLE_ENDIAN
-diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
-index 2b0f7c6840..dbba2f488c 100644
---- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
-+++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/${
-            file://0004-typedefs.h-add-support-for-64-bit-and-big-endian-MIP.patch \
-            file://0005-typedefs.h-add-support-for-PowerPC.patch \
-            file://0006-common_audio-implement-endianness-conversion-in-wav-.patch \
-+           file://riscv_support.patch \
- "
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 21a86de390..4377e88e47 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -29,6 +29,8 @@ EXTRA_OECONF = "--enable-ftdi --disable-doxygen-html"
  
- SRC_URI[md5sum] = "336ae032f608e65808ac577cde0ab72c"
+ do_configure() {
+     ./bootstrap nosubmodule
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/jimtcl/autosetup
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/jimtcl/autosetup
+     oe_runconf ${EXTRA_OECONF}
+ }
+ 
 -- 
 2.21.0
 
