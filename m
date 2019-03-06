@@ -1,64 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 1515F71984
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BA3457C752
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 01:50:26 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id n22so7169167pfa.3
+	Wed,  6 Mar 2019 01:53:20 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id h8so7000228pgp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Mar 2019 17:50:27 -0800 (PST)
+	Tue, 05 Mar 2019 17:53:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=gwkd3udu7lACJtyL9+m6Gmrn0G0TT13j1T2E5Y4n6E8=;
-	b=ZZKNOAILEAJy/QREn9lrIU9HXDHPQ897W+ym4TEAMh9yaXSGDf18op/FYdWTMy37+S
-	8A8uuTOdxe7YrIwdIEsIxBT8u3kZ+GTsmpE4IaucudOS646GJhQVGMb6fG9wRj1dtjVJ
-	+N31R9z0v3d6oDNtD68I+kSyOQuAinGNaQbj3b6nD+rpWsdFf6SYecDvTw74XtGhRf69
-	f9/iBI6MMXQrcE+HitAfeTe3BFVr42w88APRV/2NaL+9z7WCXxjTICTm+bti46Wm6RTo
-	fPfZU3pnGf78grlu3YshilFecAZyH5eabOS9HWIuoSgELsg2qsx02XUFLZMn1r2KcxcK
-	F4BA==
+	bh=qpO0kT4C9v5a4PUFFL8Y8C70I9v2UTAxtMNLmExC+Wg=;
+	b=Ts6CjuJeXel2HZUjvMyueBJtdlF2TizQibGUgiz0vtRVCU0ixKahwrgtXXtW2tFchI
+	hXlOy0kDyMc3qJvRoZqDtGz/VVaXc7TW1kQNrzAJzS/VqIh876hGSGMRxD8uRc9FJb8D
+	oeo08uwXBw6/ZOrNSt5azTnBOtcs/3nKhgOSNJqHUxFFo6NlhomsjFmd/34xXiz5G1YF
+	aPFE+F2ZVZM9RLc+u6oebS2u43xJfBFs9q4WY6sqtfnHKdDFNidyCEuLmMGr3A35xDVq
+	4Ljgr1BzXm71YlH6eNyIuOBTa+2vy5u212jtSgoaxS9HONzH0sn1bm2+MDoVb/ELqPuz
+	QlyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=gwkd3udu7lACJtyL9+m6Gmrn0G0TT13j1T2E5Y4n6E8=;
-	b=hB288hfDS/GR8yQUHAf7woN15ZYvskKhEINohKToJywhr3bj5x3XBodjZ1sg6kvMkH
-	qZqwZjsweLEqTyrETnR5CdQ28NMSLZxGgXULkI7w52NHqN5vX36ID9RAY9a9CQKsZO8g
-	Jq9nG77VsIaknMn/XIf1NBAOlSVTf8TKs1aDfQfWA2zw+2vpN82GWWhruFTvCKYrg7CH
-	W4zDuOB+HmZtVJeRF3B1SE1mPodsyqKi1V8SbdbzUB8wtPgZsbKNVBHm9h2vxIiPgLw6
-	70xIDRlujeTb3kEYC5nBxrXVs9Qd5V+YIH88K9V97GJDdtx0FPyoZEWfvEpB2A+qq7F/
-	HlAw==
-X-Gm-Message-State: APjAAAXLjUMMaKNrj829ldT3SAsljs8I9kD+S/04TluJYUKfzQgpin5I
-	+8o+VOU7di+BX9uvf8FVIXfSH7s5
-X-Google-Smtp-Source: APXvYqwWjG8nAgIy56bxTjk2Ja0INmP0h7P+w5q7ILlXZY9ZLfL9PWOCN5GQX/qoaJ2c48a7v2gFAg==
-X-Received: by 2002:a63:ce4a:: with SMTP id r10mr3849320pgi.336.1551837026810; 
-	Tue, 05 Mar 2019 17:50:26 -0800 (PST)
-Received: from hermes.local ([2601:646:8500:6bc6:e91a:c092:698a:a99])
-	by smtp.gmail.com with ESMTPSA id g6sm248922pgq.54.2019.03.05.17.50.25
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qpO0kT4C9v5a4PUFFL8Y8C70I9v2UTAxtMNLmExC+Wg=;
+	b=H93BpU66joeh+Gq3D92mn44lqrKutHIt0nFd5KWX2AkcS+IHMGx9lD0a49mbtNxIvt
+	50k7w5OWNe/DmQCcH7pS/p9mxSErrubha/mRvZxNWAn6A9aVVL3BgKVsGOPmZYcU0FVd
+	Xo8OUNzMnpbtFmMyt0GTxRZi/WI9u7cSFh2YlR654vm0lW6OOnv/hQL659heL/sGcOHE
+	3t5gSkq16OY2r1KyLdp/pEgQfUqhyfPPSPud11T6e0fxJfJ3Yn1FT289RRDgxuXrmVNW
+	MoUUWhZkei+MD30jgZuXMTNzMkWVtq4AmMsbZyGQ51iErfncCFHJU9IcegNx+uaYm9ue
+	kNdQ==
+X-Gm-Message-State: APjAAAWYOhJylG1U4boJHP+IL5KjIoK2jJGVmbPaapkhhuN57ZaZ6gWx
+	sfJInxixFN8h/Z8B9s1qs1CshXuV
+X-Google-Smtp-Source: APXvYqyQ5hcDJrVszA4Q3ulOWI0y0XngesPoOG/iPH4wZLwVeZtD09mHKg/bvFNztPbQM07z1YMTLw==
+X-Received: by 2002:a62:1c45:: with SMTP id c66mr4842305pfc.90.1551837201299; 
+	Tue, 05 Mar 2019 17:53:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
+	by smtp.gmail.com with ESMTPSA id c13sm524624pfm.34.2019.03.05.17.53.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Mar 2019 17:50:25 -0800 (PST)
-To: Maxime BORGES <maxime.borges@strataggem.com>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-References: <20190225140010.19025-1-otavio@ossystems.com.br>
-	<CAMKF1sr88He+DDgyaRWdabY8d0xuV5jM8faQgBSeYOCY0zpaYg@mail.gmail.com>
-	<CAJTo0LZFz3mLSROPrV3y09L4ZTSZ5T+uO=8MRKmrReDoLLDf7w@mail.gmail.com>
-	<CAP9ODKroyRVLaK640+UZv2idv3FnZ2NC8hgMqQDQU63f9-QQiA@mail.gmail.com>
-	<CAMKF1sqbAFbXdeJTL=gtJU4QzdPwdwEW5R01gpnUx4OhB_YtjQ@mail.gmail.com>
-	<CAMKF1sp61cfBXHTuPzMeQGfuK3SXv2h8kdDq5z1nAhC9_hUTLw@mail.gmail.com>
-	<7351b76e423f4e2897e99b536e8c0efd@strataggem.com>
+	Tue, 05 Mar 2019 17:53:20 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <edac37cd-bc5c-fffd-e818-57369eed244a@gmail.com>
-Date: Tue, 5 Mar 2019 17:50:24 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:65.0)
-	Gecko/20100101 Thunderbird/65.0
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Mar 2019 17:53:13 -0800
+Message-Id: <20190306015313.25163-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <7351b76e423f4e2897e99b536e8c0efd@strataggem.com>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' from `.egg-info/` directory
+Subject: [meta-filesystems][PATCH] xfsprogs: Fix build with riscv/musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,51 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 01:50:26 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Language: en-US
+X-List-Received-Date: Wed, 06 Mar 2019 01:53:20 -0000
 Content-Transfer-Encoding: 8bit
 
-Hi Maxime,
+The riscv tuples do not exist in older gnu-config
 
-I think we need to understand it a bit better, eg. should we need to 
-change the mode for directories or just files. I Think it deserves a new 
-patch, I am going to apply Otavio's patch and then you can try if that
-does not work then lets fix it by changing perms for files.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On 3/1/19 8:38 AM, Maxime BORGES wrote:
-> For reference:
-> 
-> https://github.com/openembedded/meta-openembedded/pull/92#issue-216348464
-> 
-> ------------------------------------------------------------------------
-> *De :* Khem Raj <raj.khem@gmail.com>
-> *Envoyé :* vendredi 1 mars 2019 16:56:31
-> *À :* Otavio Salvador; Maxime BORGES
-> *Cc :* Burton, Ross; Otavio Salvador; Meta-OpenEmbedded Mailing listing
-> *Objet :* Re: [oe] [meta-oe PATCH 1/2] python-idna: Avoid removing '+x' 
-> from `.egg-info/` directory
-> Otavio
-> 
-> Can you resend this patch series, its missing in patchwork, so
-> hopefully, it will catch it this time.
-> 
-> On Mon, Feb 25, 2019 at 11:05 AM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Mon, Feb 25, 2019 at 10:38 AM Otavio Salvador
->> <otavio.salvador@ossystems.com.br> wrote:
->> >
->> > On Mon, Feb 25, 2019 at 2:03 PM Burton, Ross <ross.burton@intel.com> wrote:
->> > >
->> > > The original patch doesn't explain what it's doing and is clearly
->> > > going to remove executable bits from directories, which clearly isn't
->> > > right.
->> > >
->> > > I'd say remove it, and *then* if it breaks again fix properly.
->> >
->> > I am with Ross here. It is a really ugly patch and if need, we need a
->> > comment on the code and a proper reason to add it back.
->> >
->>
->> +Maxime for information on the original patch
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
+index 0a1bacb935..88603db805 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
+@@ -58,6 +58,8 @@ do_configure () {
+     rm -f ${B}/include/builddefs ${B}/include/platform_defs.h ${B}/configure
+     # Recreate configure script.
+     oe_runmake configure
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+     oe_runconf
+ }
+ 
+-- 
+2.21.0
+
 
