@@ -1,49 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id BA3457C752
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 726C97C6B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 01:53:20 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id h8so7000228pgp.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Mar 2019 17:53:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qpO0kT4C9v5a4PUFFL8Y8C70I9v2UTAxtMNLmExC+Wg=;
-	b=Ts6CjuJeXel2HZUjvMyueBJtdlF2TizQibGUgiz0vtRVCU0ixKahwrgtXXtW2tFchI
-	hXlOy0kDyMc3qJvRoZqDtGz/VVaXc7TW1kQNrzAJzS/VqIh876hGSGMRxD8uRc9FJb8D
-	oeo08uwXBw6/ZOrNSt5azTnBOtcs/3nKhgOSNJqHUxFFo6NlhomsjFmd/34xXiz5G1YF
-	aPFE+F2ZVZM9RLc+u6oebS2u43xJfBFs9q4WY6sqtfnHKdDFNidyCEuLmMGr3A35xDVq
-	4Ljgr1BzXm71YlH6eNyIuOBTa+2vy5u212jtSgoaxS9HONzH0sn1bm2+MDoVb/ELqPuz
-	QlyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qpO0kT4C9v5a4PUFFL8Y8C70I9v2UTAxtMNLmExC+Wg=;
-	b=H93BpU66joeh+Gq3D92mn44lqrKutHIt0nFd5KWX2AkcS+IHMGx9lD0a49mbtNxIvt
-	50k7w5OWNe/DmQCcH7pS/p9mxSErrubha/mRvZxNWAn6A9aVVL3BgKVsGOPmZYcU0FVd
-	Xo8OUNzMnpbtFmMyt0GTxRZi/WI9u7cSFh2YlR654vm0lW6OOnv/hQL659heL/sGcOHE
-	3t5gSkq16OY2r1KyLdp/pEgQfUqhyfPPSPud11T6e0fxJfJ3Yn1FT289RRDgxuXrmVNW
-	MoUUWhZkei+MD30jgZuXMTNzMkWVtq4AmMsbZyGQ51iErfncCFHJU9IcegNx+uaYm9ue
-	kNdQ==
-X-Gm-Message-State: APjAAAWYOhJylG1U4boJHP+IL5KjIoK2jJGVmbPaapkhhuN57ZaZ6gWx
-	sfJInxixFN8h/Z8B9s1qs1CshXuV
-X-Google-Smtp-Source: APXvYqyQ5hcDJrVszA4Q3ulOWI0y0XngesPoOG/iPH4wZLwVeZtD09mHKg/bvFNztPbQM07z1YMTLw==
-X-Received: by 2002:a62:1c45:: with SMTP id c66mr4842305pfc.90.1551837201299; 
-	Tue, 05 Mar 2019 17:53:21 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id c13sm524624pfm.34.2019.03.05.17.53.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Mar 2019 17:53:20 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2019 17:53:13 -0800
-Message-Id: <20190306015313.25163-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Wed,  6 Mar 2019 03:39:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x263dAo9014896
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 5 Mar 2019 19:39:11 -0800 (PST)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 5 Mar 2019 19:39:10 -0800
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Tue, 5 Mar 2019 22:39:08 -0500
+Message-ID: <20190306033908.173027-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH] xfsprogs: Fix build with riscv/musl
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2] leveldb: fix compile errors for mips with DEFAULTTUNE mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +30,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 01:53:20 -0000
+X-List-Received-Date: Wed, 06 Mar 2019 03:39:11 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-The riscv tuples do not exist in older gnu-config
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+It fails to compile leveldb for qemumips with DEFAULTTUNE 'mips':
+
+| {standard input}: Assembler messages:
+| {standard input}:8004: Error: opcode not supported on this processor:
+  mips1 (mips1) `sync'
+| {standard input}:10296: Error: opcode not supported on this processor:
+  mips1 (mips1) `sync'
+| make: *** [out-shared/db/db_bench.o] Error 1
+
+Asm instruction 'sync' is called in platform-specific function
+MemoryBarrier() which is used by AtomicPointer(). Comment out the
+definition of MemoryBarrier() for mips to avoid the errors. And turn to
+use AtomicPointer() based on C++11 <atomc>.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...fine-function-MemoryBarrier-for-mips.patch | 43 +++++++++++++++++++
+ meta-oe/recipes-dbs/leveldb/leveldb_git.bb    |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-index 0a1bacb935..88603db805 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-@@ -58,6 +58,8 @@ do_configure () {
-     rm -f ${B}/include/builddefs ${B}/include/platform_defs.h ${B}/configure
-     # Recreate configure script.
-     oe_runmake configure
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
-     oe_runconf
- }
+diff --git a/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+new file mode 100644
+index 000000000..fc7743030
+--- /dev/null
++++ b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+@@ -0,0 +1,43 @@
++It fails to compile leveldb for qemumips with default tune 'mips':
++
++| {standard input}: Assembler messages:
++| {standard input}:8004: Error: opcode not supported on this processor:
++  mips1 (mips1) `sync'
++| {standard input}:10296: Error: opcode not supported on this processor:
++  mips1 (mips1) `sync'
++| make: *** [out-shared/db/db_bench.o] Error 1
++
++Asm instruction 'sync' is called in platform-specific function
++MemoryBarrier() which is used by AtomicPointer(). Comment out the
++definition of MemoryBarrier() for mips to avoid the errors. And turn to
++use AtomicPointer() based on C++11 <atomic>.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++---
++ port/atomic_pointer.h | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/port/atomic_pointer.h b/port/atomic_pointer.h
++index 1c4c7aa..7025ac3 100644
++--- a/port/atomic_pointer.h
+++++ b/port/atomic_pointer.h
++@@ -113,11 +113,11 @@ inline void MemoryBarrier() {
++ #define LEVELDB_HAVE_MEMORY_BARRIER
++ 
++ // MIPS
++-#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
++-inline void MemoryBarrier() {
++-  __asm__ __volatile__("sync" : : : "memory");
++-}
++-#define LEVELDB_HAVE_MEMORY_BARRIER
+++//#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
+++//inline void MemoryBarrier() {
+++//  __asm__ __volatile__("sync" : : : "memory");
+++//}
+++//#define LEVELDB_HAVE_MEMORY_BARRIER
++ 
++ #endif
++ 
+diff --git a/meta-oe/recipes-dbs/leveldb/leveldb_git.bb b/meta-oe/recipes-dbs/leveldb/leveldb_git.bb
+index 8fec89c6f..10988726a 100644
+--- a/meta-oe/recipes-dbs/leveldb/leveldb_git.bb
++++ b/meta-oe/recipes-dbs/leveldb/leveldb_git.bb
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/google/${BPN}.git \
+            file://0001-build_detect_platform-Check-for-__SSE4_2__.patch \
+            file://0002-makefile-build-SHARED_MEMENVLIB.patch \
+            file://0001-Makefile-Fix-parallel-build.patch \
++           file://do-not-define-function-MemoryBarrier-for-mips.patch \
+            "
  
+ S = "${WORKDIR}/git"
 -- 
-2.21.0
+2.20.0
 
 
