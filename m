@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C8AD47CCA4
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+	[209.85.210.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E8127CC9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 05:46:02 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id u9so7625247pfn.1
+	Wed,  6 Mar 2019 05:46:03 +0000 (UTC)
+Received: by mail-pf1-f179.google.com with SMTP id q17so7613685pfh.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 05 Mar 2019 21:46:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=Olhy15v3TNNRisM8UkEhyOr5x3bA/F/7ZRgc9YNJUCY=;
-	b=SeGW/rVTQ5XRmgl/oBsVCbnCDw+o+RhuqRpU+V48di8oujF/6Y1e0WFKBQMQH8WPUn
-	Rk2o6eMVCMsjAdGl0c6CfKScKRWIa7KGRST4Ty5ZP3xmACFTT0fSpFQj9k5YPm1FxiSJ
-	mKZOOQsZZWgT9U2Paxh5Sn1z+Em6r6Wbm7VzDXzSyLyUuR1SQ2nyazSKJwYFGJztWrwr
-	dCK92r15oMt/CNETVCWjuNrqjbI4TuTws/UDwCWAm/R18EMiTQDcIRbDq1krpGmq0BjN
-	shzMPHHEP/mEGmqUNaCqViBKqHzTtG2kmbsDt8Fv7ZoaNBnWR6dLwllp0qH6CoOYIdmZ
-	e5xw==
+	bh=HRCNJWl2X3LqO4wjLjBlAvxZli7nuiv5wS1oAEupoqM=;
+	b=e/Reu9JNRC5kzueHFhPdiZ1suXkp3MAEWQcg4kOHZT/SFF/2PiPEcKjxyurJq0sjos
+	zJs1cZ9t5rkNIBSVBsKrzZ6exWbQbSbrZV6HlYK0wrG5eREMPIHWkWmOEyid4lSxb9cN
+	o+CMvXw6PJgQBwhpRpKMVC252BoabX7a5+IYhu+ncK9IJlkJde8K2kWd1anCOcgUUy44
+	XRy1ZcS+i1ugO5vAvemxvDNEQBKEpHpDx0vUoP8O9g5OWjKdb6zkSHLlGhKNg15HioX9
+	wjl+vovwxSR12X2ojcxZ/rutsctwM6e6I8+mhiErNOMQBfC1HbLQ4pBuoP0w6YgolWsn
+	6YCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Olhy15v3TNNRisM8UkEhyOr5x3bA/F/7ZRgc9YNJUCY=;
-	b=JQFji/UfhyQanr7MY1V/Dc0PhffcDt52JlfDXejDIt2NbNpMUKP0f7P7Ka+ayWK7Xi
-	HK3CXqTpGibCxhv9cmeLQSFP02x9DdmPGPzbvUeToAhl+vth+GdPhG9NBVb2kZMTls/9
-	+r5mEfnDwSc+E3i572QS3nedBViulYQZVh2lJahkeskwq+nj08YsoGLK4piwJl95pVLB
-	YJWrsDXItLF/JciWKHK4j34hTzlX4E8B6lOcQBjA0xkRouiDsJqi9WJYLI+ZyfyNwC/C
-	tzIa+SIIcAzwUBJwwwmFXCjoX1Fje+uqv/vMu7fdeIzfJy8L5FyVyLO5l886/GRnOtjX
-	5MyQ==
-X-Gm-Message-State: APjAAAWGG06Ftr2hSJ5VWb5Tr5Z0hA9h3WFleHF9fxvDT/GYOsyZXS/+
-	Qe3adqN1amiOMmMurrSLMgqG7Y/l
-X-Google-Smtp-Source: APXvYqzI3+G+rMta7suwVUyPHmWjGK4dMXeTv2xfPXi7bsN0/Fz8H7ipxrVlmRZZTYUGcR6SaOYlGA==
-X-Received: by 2002:a63:4e1d:: with SMTP id c29mr4816700pgb.433.1551851163429; 
-	Tue, 05 Mar 2019 21:46:03 -0800 (PST)
+	bh=HRCNJWl2X3LqO4wjLjBlAvxZli7nuiv5wS1oAEupoqM=;
+	b=FH4IlvKc33U0wjuMMDRo6nJ9CieYubMr3Mz8n5h0zcTnT4ImX65ompvPLvTG5Ka6I+
+	L1zksyUIGzEWz1dYS0dGiTKXWtpJ23a94mRxTZ/IONq8f+F0tlxW32maZEc+HpL23JTb
+	uW7b+2JnUuFkT9u+zDttezrCTvjdtamK+k/iVF8ip77t4exij5PGz9QfOlxUIlAz9LCj
+	6NtKkaAV1RrtiBhlvGOPwAxBreT4vq0sJEUkCCmPL3NX4ebpeDQwz1tABU0Zj6Oc0eiY
+	a33pDgVOGhI5HlqTf4WW9REAb+xDD96OIENv0UEv6R86wJ3jJduXp7Mfh1PfbQ4m4Q/C
+	EfHQ==
+X-Gm-Message-State: APjAAAVlYm/YS7IJwfFmu3yqQZTiGwEQrbkOvjb5LEzXBYkZa825nFr4
+	QtMdWwvkgnMlhSgLwnhLEg6GT7WA
+X-Google-Smtp-Source: APXvYqxK6yTv4vSNxJKpeYyGqM3+OC/44o++VrnlHWMIjGK2NmBEBepsTgIx4vVxnlSqiNo0Xk1uNQ==
+X-Received: by 2002:a65:6259:: with SMTP id q25mr4783945pgv.235.1551851164097; 
+	Tue, 05 Mar 2019 21:46:04 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.46.02
+	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.46.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Tue, 05 Mar 2019 21:46:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2019 21:45:47 -0800
-Message-Id: <20190306054548.16430-11-raj.khem@gmail.com>
+Date: Tue,  5 Mar 2019 21:45:48 -0800
+Message-Id: <20190306054548.16430-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190306054548.16430-1-raj.khem@gmail.com>
 References: <20190306054548.16430-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 11/12] rabbitmq-c: Upgrade to 0.9.0
+Subject: [meta-oe][PATCH 12/12] libmxml: Upgrade to 3.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,41 +61,49 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 06 Mar 2019 05:46:03 -0000
 Content-Transfer-Encoding: 8bit
 
-Switch to Cmake
+License-Update: Switch to Apache-2.0 as upstream has switched
+
+https://github.com/michaelrsweet/mxml/commit/f166ad1977f2f13295689772a5d9e442f73d46f1#diff-9879d6db96fd29134fc802214163b95a
+
+Fix build on risc-v
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{rabbitmq-c_0.7.0.bb => rabbitmq-c_0.9.0.bb}           | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/rabbitmq-c/{rabbitmq-c_0.7.0.bb => rabbitmq-c_0.9.0.bb} (67%)
+ meta-oe/recipes-support/libmxml/libmxml_git.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb
-similarity index 67%
-rename from meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb
-rename to meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb
-index e9846fdea5..5096d6cd3a 100644
---- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb
-+++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb
-@@ -4,15 +4,16 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
- LICENSE = "MIT"
+diff --git a/meta-oe/recipes-support/libmxml/libmxml_git.bb b/meta-oe/recipes-support/libmxml/libmxml_git.bb
+index 542fe81575..b17fc67e0a 100644
+--- a/meta-oe/recipes-support/libmxml/libmxml_git.bb
++++ b/meta-oe/recipes-support/libmxml/libmxml_git.bb
+@@ -1,13 +1,14 @@
+ DESCRIPTION = "Tiny XML Library"
+-LICENSE = "Mini-XML-License"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a6ba38606d63bb042c5d8cfee182e120"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ HOMEPAGE = "https://www.msweet.org/mxml/"
+ BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
  
- SRC_URI = "git://github.com/alanxz/rabbitmq-c.git"
--SRCREV = "4dde30ce8d984edda540349f57eb7995a87ba9de"
-+# v0.9.0-master
-+SRCREV = "7e693a23f7fb7120f85995d3c922814495be30db"
- 
+ SRC_URI = "git://github.com/michaelrsweet/mxml.git"
+-SRCREV = "ba3cca82e15a88a9cc6afb60f059288a99afc703"
++SRCREV = "c7755b6992a2afdd34dde47fc9be97f1237cfded"
  S = "${WORKDIR}/git"
+-PV = "2.12+git${SRCPV}"
++# v3.0
++PV = "3.0"
  
- DEPENDS = "popt openssl"
+ CONFIGUREOPTS = " --prefix=${prefix} \
+                   --bindir=${bindir} \
+@@ -28,6 +29,8 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+                 "
  
--EXTRA_OECONF = "--disable-examples --enable-tools --disable-docs"
-+EXTRA_OECMAKE = "-DBUILD_EXAMPLES=OFF -DBUILD_TOOLS=ON -DBUILD_TOOLS_DOCS=OFF -DBUILD_API_DOCS=OFF"
+ do_configure() {
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+     ./configure ${CONFIGUREOPTS} --enable-shared
+ }
  
--inherit autotools pkgconfig
-+inherit cmake pkgconfig
- 
- PACKAGE_BEFORE_PN += "${PN}-tools"
- FILES_${PN}-tools = "${bindir}"
 -- 
 2.21.0
 
