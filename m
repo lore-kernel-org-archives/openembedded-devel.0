@@ -1,51 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
-	[209.85.210.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E8127CC9F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 548657CCB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 05:46:03 +0000 (UTC)
-Received: by mail-pf1-f179.google.com with SMTP id q17so7613685pfh.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Mar 2019 21:46:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=HRCNJWl2X3LqO4wjLjBlAvxZli7nuiv5wS1oAEupoqM=;
-	b=e/Reu9JNRC5kzueHFhPdiZ1suXkp3MAEWQcg4kOHZT/SFF/2PiPEcKjxyurJq0sjos
-	zJs1cZ9t5rkNIBSVBsKrzZ6exWbQbSbrZV6HlYK0wrG5eREMPIHWkWmOEyid4lSxb9cN
-	o+CMvXw6PJgQBwhpRpKMVC252BoabX7a5+IYhu+ncK9IJlkJde8K2kWd1anCOcgUUy44
-	XRy1ZcS+i1ugO5vAvemxvDNEQBKEpHpDx0vUoP8O9g5OWjKdb6zkSHLlGhKNg15HioX9
-	wjl+vovwxSR12X2ojcxZ/rutsctwM6e6I8+mhiErNOMQBfC1HbLQ4pBuoP0w6YgolWsn
-	6YCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=HRCNJWl2X3LqO4wjLjBlAvxZli7nuiv5wS1oAEupoqM=;
-	b=FH4IlvKc33U0wjuMMDRo6nJ9CieYubMr3Mz8n5h0zcTnT4ImX65ompvPLvTG5Ka6I+
-	L1zksyUIGzEWz1dYS0dGiTKXWtpJ23a94mRxTZ/IONq8f+F0tlxW32maZEc+HpL23JTb
-	uW7b+2JnUuFkT9u+zDttezrCTvjdtamK+k/iVF8ip77t4exij5PGz9QfOlxUIlAz9LCj
-	6NtKkaAV1RrtiBhlvGOPwAxBreT4vq0sJEUkCCmPL3NX4ebpeDQwz1tABU0Zj6Oc0eiY
-	a33pDgVOGhI5HlqTf4WW9REAb+xDD96OIENv0UEv6R86wJ3jJduXp7Mfh1PfbQ4m4Q/C
-	EfHQ==
-X-Gm-Message-State: APjAAAVlYm/YS7IJwfFmu3yqQZTiGwEQrbkOvjb5LEzXBYkZa825nFr4
-	QtMdWwvkgnMlhSgLwnhLEg6GT7WA
-X-Google-Smtp-Source: APXvYqxK6yTv4vSNxJKpeYyGqM3+OC/44o++VrnlHWMIjGK2NmBEBepsTgIx4vVxnlSqiNo0Xk1uNQ==
-X-Received: by 2002:a65:6259:: with SMTP id q25mr4783945pgv.235.1551851164097; 
-	Tue, 05 Mar 2019 21:46:04 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.46.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Mar 2019 21:46:03 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2019 21:45:48 -0800
-Message-Id: <20190306054548.16430-12-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190306054548.16430-1-raj.khem@gmail.com>
-References: <20190306054548.16430-1-raj.khem@gmail.com>
+	Wed,  6 Mar 2019 05:46:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x265jCdm016495
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 5 Mar 2019 21:45:42 -0800
+Received: from [128.224.163.218] (128.224.163.218) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 5 Mar 2019 21:45:09 -0800
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190306033908.173027-1-kai.kang@windriver.com>
+	<e887e9d9-62fb-20fb-f753-4567b197ba20@gmail.com>
+	<7e344437-fa22-0312-c211-c250f9f5ff2f@windriver.com>
+	<CAMKF1srqqd3vgpyF9+pVEaXqjMK3X5x3uj9gB-0_YFHe69mTsQ@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <420bfc59-242c-ce16-1e7e-cc3dedb49a03@windriver.com>
+Date: Wed, 6 Mar 2019 13:44:18 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 12/12] libmxml: Upgrade to 3.0 release
+In-Reply-To: <CAMKF1srqqd3vgpyF9+pVEaXqjMK3X5x3uj9gB-0_YFHe69mTsQ@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] leveldb: fix compile errors for mips with DEFAULTTUNE mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,53 +37,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 05:46:03 -0000
+X-List-Received-Date: Wed, 06 Mar 2019 05:46:08 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-License-Update: Switch to Apache-2.0 as upstream has switched
+On 2019/3/6 下午1:31, Khem Raj wrote:
+> On Tue, Mar 5, 2019 at 9:16 PM Kang Kai <Kai.Kang@windriver.com> wrote:
+>> On 2019/3/6 上午11:49, Khem Raj wrote:
+>>>
+>>> On 3/5/19 7:39 PM, kai.kang@windriver.com wrote:
+>>>> From: Kai Kang <kai.kang@windriver.com>
+>>>>
+>>>> It fails to compile leveldb for qemumips with DEFAULTTUNE 'mips':
+>>>>
+>>>> | {standard input}: Assembler messages:
+>>>> | {standard input}:8004: Error: opcode not supported on this processor:
+>>>>     mips1 (mips1) `sync'
+>>>> | {standard input}:10296: Error: opcode not supported on this processor:
+>>>>     mips1 (mips1) `sync'
+>>>> | make: *** [out-shared/db/db_bench.o] Error 1
+>>>>
+>>>> Asm instruction 'sync' is called in platform-specific function
+>>>> MemoryBarrier() which is used by AtomicPointer(). Comment out the
+>>>> definition of MemoryBarrier() for mips to avoid the errors. And turn to
+>>>> use AtomicPointer() based on C++11 <atomc>.
+>>>>
+>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>> ---
+>>>>    ...fine-function-MemoryBarrier-for-mips.patch | 43 +++++++++++++++++++
+>>>>    meta-oe/recipes-dbs/leveldb/leveldb_git.bb    |  1 +
+>>>>    2 files changed, 44 insertions(+)
+>>>>    create mode 100644
+>>>> meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+>>>>
+>>>> diff --git
+>>>> a/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+>>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+>>>>
+>>>> new file mode 100644
+>>>> index 000000000..fc7743030
+>>>> --- /dev/null
+>>>> +++
+>>>> b/meta-oe/recipes-dbs/leveldb/leveldb/do-not-define-function-MemoryBarrier-for-mips.patch
+>>>> @@ -0,0 +1,43 @@
+>>>> +It fails to compile leveldb for qemumips with default tune 'mips':
+>>>> +
+>>>> +| {standard input}: Assembler messages:
+>>>> +| {standard input}:8004: Error: opcode not supported on this processor:
+>>>> +  mips1 (mips1) `sync'
+>>>> +| {standard input}:10296: Error: opcode not supported on this
+>>>> processor:
+>>>> +  mips1 (mips1) `sync'
+>>>> +| make: *** [out-shared/db/db_bench.o] Error 1
+>>>> +
+>>>> +Asm instruction 'sync' is called in platform-specific function
+>>>> +MemoryBarrier() which is used by AtomicPointer(). Comment out the
+>>>> +definition of MemoryBarrier() for mips to avoid the errors. And turn to
+>>>> +use AtomicPointer() based on C++11 <atomic>.
+>>>> +
+>>>> +Upstream-Status: Inappropriate [oe specific]
+>>>> +
+>>>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>> +
+>>>> +---
+>>>> + port/atomic_pointer.h | 10 +++++-----
+>>>> + 1 file changed, 5 insertions(+), 5 deletions(-)
+>>>> +
+>>>> +diff --git a/port/atomic_pointer.h b/port/atomic_pointer.h
+>>>> +index 1c4c7aa..7025ac3 100644
+>>>> +--- a/port/atomic_pointer.h
+>>>> ++++ b/port/atomic_pointer.h
+>>>> +@@ -113,11 +113,11 @@ inline void MemoryBarrier() {
+>>>> + #define LEVELDB_HAVE_MEMORY_BARRIER
+>>>> +
+>>>> + // MIPS
+>>>> +-#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
+>>>> +-inline void MemoryBarrier() {
+>>>> +-  __asm__ __volatile__("sync" : : : "memory");
+>>>> +-}
+>>>> +-#define LEVELDB_HAVE_MEMORY_BARRIER
+>>>> ++//#elif defined(ARCH_CPU_MIPS_FAMILY) && defined(__GNUC__)
+>>>> ++//inline void MemoryBarrier() {
+>>>> ++//  __asm__ __volatile__("sync" : : : "memory");
+>>>> ++//}
+>>>> ++//#define LEVELDB_HAVE_MEMORY_BARRIER
+>>>> +
+>>> this is punishing all mips o32 variants.
+>> How about only apply the patch when DEFAULTTUNE is 'mips', such as
+>> something looks like:
+>>
+>> python ()  {
+>>
+>>       if d.getVar('DEFAULTTUNE') == 'mips':
+>>
+>>           d.appendVar('SRC_URI', '
+>> file://do-not-define-function-MemoryBarrier-for-mips.patch')
+>>
+>> }
+>
+> None of these are as good as first patch. Ideally you should change
+> the defaulttune
 
-https://github.com/michaelrsweet/mxml/commit/f166ad1977f2f13295689772a5d9e442f73d46f1#diff-9879d6db96fd29134fc802214163b95a
 
-Fix build on risc-v
+But defaulttune could be overridden by user configure. Even could 
+configure qemumips64 with defaulttune 'mips'.
+I'll try to fix it from oe side based on first patch.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/libmxml/libmxml_git.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+Kai
 
-diff --git a/meta-oe/recipes-support/libmxml/libmxml_git.bb b/meta-oe/recipes-support/libmxml/libmxml_git.bb
-index 542fe81575..b17fc67e0a 100644
---- a/meta-oe/recipes-support/libmxml/libmxml_git.bb
-+++ b/meta-oe/recipes-support/libmxml/libmxml_git.bb
-@@ -1,13 +1,14 @@
- DESCRIPTION = "Tiny XML Library"
--LICENSE = "Mini-XML-License"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a6ba38606d63bb042c5d8cfee182e120"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- HOMEPAGE = "https://www.msweet.org/mxml/"
- BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
- 
- SRC_URI = "git://github.com/michaelrsweet/mxml.git"
--SRCREV = "ba3cca82e15a88a9cc6afb60f059288a99afc703"
-+SRCREV = "c7755b6992a2afdd34dde47fc9be97f1237cfded"
- S = "${WORKDIR}/git"
--PV = "2.12+git${SRCPV}"
-+# v3.0
-+PV = "3.0"
- 
- CONFIGUREOPTS = " --prefix=${prefix} \
-                   --bindir=${bindir} \
-@@ -28,6 +29,8 @@ CONFIGUREOPTS = " --prefix=${prefix} \
-                 "
- 
- do_configure() {
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
-     ./configure ${CONFIGUREOPTS} --enable-shared
- }
- 
+
+>
+
 -- 
-2.21.0
+Kai Kang
 
 
