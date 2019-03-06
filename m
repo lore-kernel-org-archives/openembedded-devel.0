@@ -1,51 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id B158A7C7D6
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+	[209.85.210.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 80FD17C793
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Mar 2019 05:45:57 +0000 (UTC)
-Received: by mail-pg1-f172.google.com with SMTP id j3so7424367pgm.11
+	Wed,  6 Mar 2019 05:45:58 +0000 (UTC)
+Received: by mail-pf1-f171.google.com with SMTP id q17so7613505pfh.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 05 Mar 2019 21:45:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=RK79ibkvizPNsdyFAStiEMzFDvqDak9/tq9HZUQFyHU=;
-	b=cJkD8OQVhNzmFH8tnksS8TzIgeo1llvsWIuSN420nLSGBO+iQp4ZqhfjDPPXZzcqOn
-	usr3BDYlAYvKVhKPN9ThR5x9vCq0sZHxMnPtCzLkPlGfGjG56Iyh9ARmpRCQeessFpQx
-	UGxi2+hqQjPIlyzukVpMW8Ch9izKlYErb5DRzPWsUzlGwla3OODdUjM4YG4E6cCO2uwL
-	4U0ZPUIz+d5LtTvpgoeUdiwhbF66SAH+UuKtYZYHV67t0UQVpHH/3yirSdYwwG1qvDCf
-	nEp/l7Bmoa0PBpmahbGt0UNnGPhXa/19RSt4jss/mQZlDvUTZVZpltPybGv7d8Uw/8NV
-	aAxw==
+	bh=dCvhblyl/K77KUyUHRknfO3et0P93hGJEJEJuhiItsU=;
+	b=VT9Z+Ny+duLHwhYPgC2V6H5Lk/LjrO+JciNGYF5hyuAIX6oTbYdgoobY1mpDMqmQ/m
+	TRvISlrTcVgB9w6MB2rkGYmVRNHZYAeF0fsVHsOBAa0Sisc4h5lW32fu1z+oGzRZHtw2
+	jOOZaC8f/gEDxjtCqkOGMuismB8phXBi4RLKfpDAiotIM17RObkb+f5KBTeSC+L/jI9O
+	qjeQVnzlixOLMc7czHURmW340Y+gLxlq5KvZgYd66asJE97eOAF1lLJJMqZzyoq1HlvO
+	ue+fC4IAXTI99Vvkar5wkSpKNRlCoHeu4Dw67J3HYlSzlQoseR/rQ3bpb1bNCxbXNsOq
+	DOOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=RK79ibkvizPNsdyFAStiEMzFDvqDak9/tq9HZUQFyHU=;
-	b=hEc1jvx6H1p8D3pev7lyEPIQlvT8ty36DUr7GtPECHQIJYjSsleWAl6yuRF4WfXoId
-	CN/adBvqL6+U5pLysygpSnCCxS5+YPstzYYBTKGEc2nlc8EvM1WJDE/UqC/nPr8KYRjQ
-	pY+moNdUInqbop8WGghxCDdhJ0cLkDDhGFVys6zpQlbkRsYzxSkcWx6Me/p9E2GPkHtR
-	8apDTlRaq2MX2s4k2wZe3pGwfynIwV2hnpdrJ5C4aR4YLWGB4AsgVfGxXlEASOhV1r6b
-	aEksur8XR4mrOohCdJePgb6FqSNIu8IRzqu90Zhea6k0ZWYv49Ziw71Ttu8rg46eFy/A
-	V+Jg==
-X-Gm-Message-State: APjAAAXg7OwgqbBQgNfFugGxIGCU0RF/+IqRGeosiA7FDSNbQ9hxbT73
-	iS0b3mOk1pz315xuTp+1EzAaNPcy
-X-Google-Smtp-Source: APXvYqxT5OQaI1uQyuxp+LrGlT0LiaAnHvicyrOcBC/tZt7Gs+LSX5pA9CfQbafpn6dDHS4b2A1y+Q==
-X-Received: by 2002:a63:1241:: with SMTP id 1mr4742061pgs.211.1551851158350;
-	Tue, 05 Mar 2019 21:45:58 -0800 (PST)
+	bh=dCvhblyl/K77KUyUHRknfO3et0P93hGJEJEJuhiItsU=;
+	b=WLz4hcVgePgtmQjxxYOT9R7ud/wfZ0K2eMwakYshqbTV7NsZnM+BEOrwD1jYOL0bBq
+	Jt3eFALmeV+6dqT/7xfD0RuyfEAWAkgnfYRrHU3NbhEP7n7pRamHglO0nBpMhKxzYuVr
+	UCdGwtEy6QKuNAVDoyB8tJd/JkjKAEAzvzMnyaqZn85Fp9q/7xBbngDuhtSftAcMs4mf
+	S/2HAlHTSY6m8P9ddcRZL7ucuGT0pMDE2UGIpqvWzs0lriOJBXv4BaCb8FXmPy7KjFgW
+	ypNsFKQwYggJ9FB3E85pEYx2djHf270PNddJH++22rEka2rIvzipDv5jgpQimQ5lp/As
+	qbyA==
+X-Gm-Message-State: APjAAAXTYuhPB9UHuaeIlt4fJZaxaVwvWVolX/s2Jvv5w/4nzj99ILdD
+	IrFnukmUZZLsYkeI3GZKjJ49ekcO
+X-Google-Smtp-Source: APXvYqxH4zqAZsbThHJYwTcXpaQRcFeJAAgZlsKMyP/wH8SBcxrzLH3+0HtY0KZBKDIDTLQf9BHDDg==
+X-Received: by 2002:a17:902:7b85:: with SMTP id
+	w5mr5258816pll.288.1551851159030; 
+	Tue, 05 Mar 2019 21:45:59 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.45.57
+	by smtp.gmail.com with ESMTPSA id m24sm1001144pgv.1.2019.03.05.21.45.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Mar 2019 21:45:57 -0800 (PST)
+	Tue, 05 Mar 2019 21:45:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2019 21:45:41 -0800
-Message-Id: <20190306054548.16430-5-raj.khem@gmail.com>
+Date: Tue,  5 Mar 2019 21:45:42 -0800
+Message-Id: <20190306054548.16430-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190306054548.16430-1-raj.khem@gmail.com>
 References: <20190306054548.16430-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 05/12] python-grpcio: Upgrade to 1.19.0
+Subject: [meta-networking][PATCH 06/12] inetutils: Fix build on RISC-V
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,112 +59,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2019 05:45:57 -0000
+X-List-Received-Date: Wed, 06 Mar 2019 05:45:58 -0000
 Content-Transfer-Encoding: 8bit
-
-Refresh patch to apply cleanly
-Fix build for RISC-V
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python-grpcio.inc    |  6 ++++--
- ....py-Do-not-mix-C-and-C-compiler-options.patch | 12 +++++-------
- .../python/python-grpcio/riscv64_support.patch   | 16 ++++++++++++++++
- ...-grpcio_1.17.1.bb => python-grpcio_1.19.0.bb} |  0
- ...grpcio_1.17.1.bb => python3-grpcio_1.19.0.bb} |  0
- 5 files changed, 25 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-grpcio/riscv64_support.patch
- rename meta-python/recipes-devtools/python/{python-grpcio_1.17.1.bb => python-grpcio_1.19.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-grpcio_1.17.1.bb => python3-grpcio_1.19.0.bb} (100%)
+ .../recipes-connectivity/inetutils/inetutils_1.9.4.bb           | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-grpcio.inc b/meta-python/recipes-devtools/python/python-grpcio.inc
-index 0cef0dda02..fd341f5de7 100644
---- a/meta-python/recipes-devtools/python/python-grpcio.inc
-+++ b/meta-python/recipes-devtools/python/python-grpcio.inc
-@@ -8,6 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-grpcio:"
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+index a27dbae2e6..453f485d1c 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+@@ -54,6 +54,8 @@ EXTRA_OECONF_append_libc-musl = " --disable-rsh --disable-rcp --disable-rlogin "
+ do_configure_prepend () {
+     export HELP2MAN='true'
+     cp ${STAGING_DATADIR_NATIVE}/gettext/config.rpath ${S}/build-aux/config.rpath
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+     rm -f ${S}/glob/configure*
+ }
  
- SRC_URI_append_class-target = " file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
-                                 file://ppc-boringssl-support.patch \
-+                                file://riscv64_support.patch \
- "
- 
- RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
-@@ -19,8 +20,9 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
- 
- inherit pypi
--SRC_URI[md5sum] = "dd46d7270dfce713c03f45fae999cae3"
--SRC_URI[sha256sum] = "fd6774bbb6c717f725b39394757445ead4f69c471118364933aadb81a4f16961"
-+
-+SRC_URI[md5sum] = "188565f150f34d1927b87e014f0f4b73"
-+SRC_URI[sha256sum] = "2ddbca16c2e7b3f2ffc6e34c7cfa6886fb01de9f156ad3f77b72ad652d632097"
- 
- CLEANBROKEN = "1"
- 
-diff --git a/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-index 996597b146..f17f048de8 100644
---- a/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-+++ b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-@@ -18,11 +18,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  setup.py | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--Index: grpcio-1.14.1/setup.py
--===================================================================
----- grpcio-1.14.1.orig/setup.py
--+++ grpcio-1.14.1/setup.py
--@@ -123,7 +123,7 @@ ENABLE_DOCUMENTATION_BUILD = os.environ.
-+--- a/setup.py
-++++ b/setup.py
-+@@ -145,7 +145,7 @@ ENABLE_DOCUMENTATION_BUILD = os.environ.
-  EXTRA_ENV_COMPILE_ARGS = os.environ.get('GRPC_PYTHON_CFLAGS', None)
-  EXTRA_ENV_LINK_ARGS = os.environ.get('GRPC_PYTHON_LDFLAGS', None)
-  if EXTRA_ENV_COMPILE_ARGS is None:
-@@ -31,7 +29,7 @@ Index: grpcio-1.14.1/setup.py
-    if 'win32' in sys.platform and sys.version_info < (3, 5):
-      EXTRA_ENV_COMPILE_ARGS += ' -D_hypot=hypot'
-      # We use define flags here and don't directly add to DEFINE_MACROS below to
--@@ -135,7 +135,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
-+@@ -157,7 +157,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
-      else:
-        EXTRA_ENV_COMPILE_ARGS += ' -D_ftime=_ftime64 -D_timeb=__timeb64'
-    elif "linux" in sys.platform:
-@@ -39,4 +37,4 @@ Index: grpcio-1.14.1/setup.py
- +    EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
-    elif "darwin" in sys.platform:
-      EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
-- EXTRA_ENV_COMPILE_ARGS += ' -DPB_FIELD_16BIT'
-+ EXTRA_ENV_COMPILE_ARGS += ' -DPB_FIELD_32BIT'
-diff --git a/meta-python/recipes-devtools/python/python-grpcio/riscv64_support.patch b/meta-python/recipes-devtools/python/python-grpcio/riscv64_support.patch
-new file mode 100644
-index 0000000000..fef7d9e757
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-grpcio/riscv64_support.patch
-@@ -0,0 +1,16 @@
-+Add RISC-V 64bit support
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/third_party/boringssl/include/openssl/base.h
-++++ b/third_party/boringssl/include/openssl/base.h
-+@@ -104,6 +104,9 @@ extern "C" {
-+ #elif defined(__mips__) && defined(__LP64__)
-+ #define OPENSSL_64_BIT
-+ #define OPENSSL_MIPS64
-++#elif defined(__riscv) && defined(__riscv_xlen)
-++#define OPENSSL_64_BIT
-++#define OPENSSL_RISCV64
-+ #elif defined(__pnacl__)
-+ #define OPENSSL_32_BIT
-+ #define OPENSSL_PNACL
-diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.17.1.bb b/meta-python/recipes-devtools/python/python-grpcio_1.19.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-grpcio_1.17.1.bb
-rename to meta-python/recipes-devtools/python/python-grpcio_1.19.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.17.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.19.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-grpcio_1.17.1.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio_1.19.0.bb
 -- 
 2.21.0
 
