@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 00A6E7CE3D
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 547D57CE44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 01:51:01 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id v16so12691147ljg.13
+	Thu,  7 Mar 2019 01:53:51 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id z20so12733701ljj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Mar 2019 17:51:03 -0800 (PST)
+	Wed, 06 Mar 2019 17:53:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=FFGeYb/wbcaZbFkWpUjFxdOjUWa769tygThrNRCuS5U=;
-	b=urJ4HMgNq3QsH7WyzQbQCEzSHMuWb1+u8oVfBcXp9atjo5C4EP4+QZFyw9IwSV4kiB
-	0oimWLNIY5lqMYvKegZcWyb9ScodlrS1PQvinJd92C7H5tA4lesE1uaTv/yd1OYo96Zo
-	MVIUedqFJCSx3C1iDdelbKLk4j4Oy0al5xSci52rpYu324Xcbf8z2PQQ6EkByuMiourZ
-	RBqujR2/GfVfUA0sZiPjSXriE2KGVaOF3GvuehCbipVJ2dftRaY5V5LrXEtDY3J9PVUs
-	pml5+w8wUIDZKTx4d1ONN5xyABmvJGnFWNaq4phAGnGZYFrD6Hpzrz6xmHrxpEjKvEQv
-	Jufw==
+	bh=5KwT68LyJw81+v+cZpGqE2nPkU7j+BGmoeZvT3X/67w=;
+	b=tF0jRy0VBR/O/ETKIyZeae5PcVIZYCcngA/gjvPBpLR3X9wet2OnsDpYC10axkI0Qa
+	oL7CB7LLOAYOk4qZWESsVZawlaw9p33nMUSIGymnnWx075nAnb5r5uskDUJCecvNIKDZ
+	TOODOelVwCcc09meUy7ZV+KnRjyh5itVvOq3vi2W26GtBsfqt+U87tIfsx5JkgFYOQLf
+	ChzoKtdtrG0FJ9fbbdwDoSp0TwhyH0Pzdpe2W7Yyu6IcQFxE5UmR0qXEf0tTmw7Ubr1m
+	BSQlKB+xmpIsFXSk/JLFof3rbIIKAZtl5McoH31UwCGAZXWpI7ULqHWlwhQ6SMGhDNyf
+	epag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=FFGeYb/wbcaZbFkWpUjFxdOjUWa769tygThrNRCuS5U=;
-	b=XVkUkirr16ALlWO2cwuEpRuUrR+tyHj1XjWz7kei5/gJwxEnu69XW1hZGsfuB6NAZZ
-	FTQ/ZAzwjUrMj03GhVbfxEtobjtA5yAf+7G+SjhRC3HM55n8N/yQVtnXwh2DjFf9PINS
-	QM3ivS8vp+1odGLUTdv6+MdZRNPvif4C91CF25S0/rLoMZeQnVlkPdCWm9GMHsvAWpz8
-	rY5/wyUuwXmDC+z99Ohprskj+au6xm3qBbmEYt8f+ZT31cAy2lrnrNw4ilb+EaWU6rS0
-	wNbcdh2BXSjqJW4qOwk/lk1b3yhG/yfp7/SDuTv4J+Nfw0r5va/JOj5rCh1bF0imPzJz
-	D6Fw==
-X-Gm-Message-State: APjAAAWbhB8mGxFiDgNKmY3Qg89nndj60u6ZPygC9UXXzN6cYHBs5N9F
-	O12maSUlfO21Arfd+zNH1xy1/srWNbM=
-X-Google-Smtp-Source: APXvYqxQI9lZVXJp8Ir7I5BCT6exDnUrfGlA3ONjHEq9QJhdUbgIY37i8uOSee9cHFJ4SJYqMgZ91Q==
-X-Received: by 2002:a2e:2c0d:: with SMTP id s13mr4433255ljs.96.1551923462147; 
-	Wed, 06 Mar 2019 17:51:02 -0800 (PST)
+	bh=5KwT68LyJw81+v+cZpGqE2nPkU7j+BGmoeZvT3X/67w=;
+	b=b7qGXTPg1Hf5gwrO1OLj9vJGF3zvDNOLc+smDZPDbTVrgCOgeSRQMt8uuwBchCqMHO
+	U0iHkAKYvQRwyQfbbPSP8fhvDMIoaYOzCwQ1zmdwL2+0BlcM4DqHj7RNyjHJzkCYL/mD
+	Au1KggWI0Z/WY3QD4Ot9Gl96bZcoK0HvXEj1YtGW8+fUpK0PiNDvQxVtC580vIa48xVL
+	jrYw6tjgQbMANTe5TbYlwpNVhapRPMiG8p/8++m0X0U0M5t1HVKiehlftPtdYHP5WFpo
+	6++Y69fSIjC+FNzBSpyc8vWYynvkI+aKYGTZmuqOgPyRk4n2Qne82dAFvq0kFIoWtZBC
+	py1A==
+X-Gm-Message-State: APjAAAUtgVtYgW2PK84Z0GgLONKlN7hDz5qxYFWhbJx+ubcz284Ez/H9
+	SmLkallr3+pT/V6sp9BkoF+woxYQZhk=
+X-Google-Smtp-Source: APXvYqwfBCSPSRO/BoSR2ptmVoaa31EdL8JLcD30eVzkFeYvWaRwDxSbcRULH0RvXrD1bRs/Sgacbg==
+X-Received: by 2002:a2e:9cc7:: with SMTP id g7mr4142921ljj.33.1551923631577;
+	Wed, 06 Mar 2019 17:53:51 -0800 (PST)
 Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id z22sm585961lfb.66.2019.03.06.17.51.01
+	by smtp.gmail.com with ESMTPSA id p10sm588358lfk.35.2019.03.06.17.53.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Mar 2019 17:51:01 -0800 (PST)
+	Wed, 06 Mar 2019 17:53:51 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2019 02:50:59 +0100
-Message-Id: <20190307015059.18407-1-open.source@oleksandr-kravchuk.com>
+Date: Thu,  7 Mar 2019 02:53:48 +0100
+Message-Id: <20190307015348.21142-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH v2] wireshark: upgrade to 3.0.0
+Subject: [meta-oe][PATCH] nano: upgrade to 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,48 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 01:51:02 -0000
+X-List-Received-Date: Thu, 07 Mar 2019 01:53:51 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{wireshark_2.6.6.bb => wireshark_3.0.0.bb}       | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.6.6.bb => wireshark_3.0.0.bb} (89%)
+ meta-oe/recipes-support/nano/{nano_3.0.bb => nano_3.2.bb} | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/nano/{nano_3.0.bb => nano_3.2.bb} (79%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
-similarity index 89%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
-index 4699f6798..d940a4567 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
-@@ -4,22 +4,20 @@ SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
+diff --git a/meta-oe/recipes-support/nano/nano_3.0.bb b/meta-oe/recipes-support/nano/nano_3.2.bb
+similarity index 79%
+rename from meta-oe/recipes-support/nano/nano_3.0.bb
+rename to meta-oe/recipes-support/nano/nano_3.2.bb
+index 2c7fbd549..dbc548793 100644
+--- a/meta-oe/recipes-support/nano/nano_3.0.bb
++++ b/meta-oe/recipes-support/nano/nano_3.2.bb
+@@ -2,9 +2,10 @@ DESCRIPTION = "GNU nano (Nano's ANOther editor, or \
+ Not ANOther editor) is an enhanced clone of the \
+ Pico text editor."
+ HOMEPAGE = "http://www.nano-editor.org/"
++SECTION = "console/utils"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+-SECTION = "console/utils"
++
+ DEPENDS = "ncurses file"
+ RDEPENDS_${PN} = "ncurses-terminfo-base"
  
--DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native"
-+DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native git"
+@@ -12,8 +13,8 @@ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
  
- DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
  
--SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
--           file://0001-Add-libm-to-link-for-fmod-API.patch \
--          "
-+SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+-SRC_URI[md5sum] = "74196427a09ec2f82a88facd220d2787"
+-SRC_URI[sha256sum] = "e0a5bca354514e64762c987c200a8758b05e7bcced3b00b3e48ea0a2d383c8a0"
++SRC_URI[md5sum] = "2606dc0dc31a088f16c7d603b42d23d0"
++SRC_URI[sha256sum] = "d12773af3589994b2e4982c5792b07c6240da5b86c5aef2103ab13b401fe6349"
  
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[md5sum] = "b30ba5b9b48ed2ff91c0ce357d33b46b"
--SRC_URI[sha256sum] = "487933ea075bdbb25d8df06017d9c4f49fc20eb7f6ec80af086718ed5550e863"
-+SRC_URI[md5sum] = "258d62ac7434d126dc497303c8f7961b"
-+SRC_URI[sha256sum] = "bc4f30f5b2e94f3a696fef9de44673cdf402db90aac5299966da647f708f009e"
- 
- PE = "1"
- 
--inherit cmake pkgconfig pythonnative perlnative upstream-version-is-even
-+inherit cmake pkgconfig python3native perlnative upstream-version-is-even
- 
- ARM_INSTRUCTION_SET = "arm"
+ inherit autotools gettext pkgconfig
  
 -- 
 2.17.1
