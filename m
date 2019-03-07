@@ -1,33 +1,30 @@
 Return-Path: <sean@geanix.com>
 Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A1AA7C75E
+	by mail.openembedded.org (Postfix) with ESMTP id CC1827CE8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 09:03:11 +0000 (UTC)
-Received: from [192.168.100.161] (unknown [95.138.208.137])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id 2683D1C3F7B;
-	Thu,  7 Mar 2019 10:03:12 +0100 (CET)
+	Thu,  7 Mar 2019 09:06:18 +0000 (UTC)
+Received: from localhost.localdomain (unknown [95.138.208.137])
+	by mail.hundeboll.net (Postfix) with ESMTPSA id 1CC8D1C3F94;
+	Thu,  7 Mar 2019 10:06:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com;
-	s=hundeboll; t=1551949392;
-	bh=bVrulEQ4xgE8hr3rNxw4h7ZKzaU3fulXj0yyOSVQQuU=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To;
-	b=EtZd9kypK/9InUB25/jY1MvMl3uvf0gwxQ+u0n7o8VqmCABuVW8lYKKaknskJrKib
-	yjh1x3ABuGleOIYsNnFc87Um8fImZ3HsS5JuRnoMKNpp48kmAKDO0aRYKCi2ZLZKRN
-	PdDGf9o9Yg2T4P6xX5EjpBKCFsySbU/+rWmKEyWWNaJUGhCBkvPw7ldqpb+CMX+a6G
-	JwjZ9K3RDy9uQ78rciHagRy2fRQrqQ4BI2k9do8oalI5gekZorgCudQ5UM0UNZvphF
-	Ras6YYPK+J5gkSmveX3f25G+RVVmxxw5ydXGPepCHHNTfezcdZfw0MILtugjwXgg7t
-	4rR0tuEyARmEw==
-To: Adrian Bunk <bunk@stusta.de>
-References: <20190307082917.18118-1-sean@geanix.com>
-	<20190307085338.GA28605@localhost>
+	s=hundeboll; t=1551949579;
+	bh=+zePhT1+3Z9l9Ze2nW4hwlf0mBEPcBXpao9+VX6dtyQ=;
+	h=From:To:Cc:Subject:Date;
+	b=lrMMfVCWOHBhqt21TUzs5Hzh8DN7vCSbhouTlqSLFhijAMHs0KMLf7x3NHmrJlkSW
+	60Kd65YSJ2nl06Vd3Q//a3ufP4d1KZfWo/gmxeTtwy5kRmj9mzy8IWsaE+rxFRH/SX
+	SROyiSlgycmvfwrlhWesmrjx8yFKvZUXKKUQYX/LQYk6ABe2IW2No5A1oOJ+w1r4Me
+	6Eynvg5BXROiYAXsDPjMPfh5uEassgOeSU4UDSFDc4YE3MgEX6q5ULlYAWe4hS0Klq
+	YTxruoBPWt4mr1xIlwb+6GSNS49Kpi+TRdwwKpq/hS+V/tLoLWb1Fal9GgWuHCmcNZ
+	ypEe25E1QU5ug==
 From: Sean Nyekjaer <sean@geanix.com>
-Message-ID: <c15ece8b-c647-34ca-8f5b-17fac9518081@geanix.com>
-Date: Thu, 7 Mar 2019 10:03:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.1
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Date: Thu,  7 Mar 2019 10:06:04 +0100
+Message-Id: <20190307090604.18747-1-sean@geanix.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190307085338.GA28605@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] asio: add PACKAGECONFIG boost
+Cc: bunk@stusta.de
+Subject: [meta-oe][PATCHv2] asio: add PACKAGECONFIG boost
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,51 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 09:03:12 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US-large
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Mar 2019 09:06:19 -0000
+Content-Transfer-Encoding: 8bit
 
+Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+---
+ meta-oe/recipes-support/asio/asio_1.12.2.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-support/asio/asio_1.12.2.bb b/meta-oe/recipes-support/asio/asio_1.12.2.bb
+index ee548fd3a..35f875fdc 100644
+--- a/meta-oe/recipes-support/asio/asio_1.12.2.bb
++++ b/meta-oe/recipes-support/asio/asio_1.12.2.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://think-async.com/Asio"
+ SECTION = "libs"
+ LICENSE = "BSL-1.0"
+ 
+-DEPENDS = "boost openssl"
++DEPENDS = "openssl"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
+ 
+@@ -20,3 +20,7 @@ SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
+ SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
++
++PACKAGECONFIG ??= "boost"
++
++PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
+-- 
+2.21.0
 
-On 07/03/2019 09.53, Adrian Bunk wrote:
-> On Thu, Mar 07, 2019 at 09:29:17AM +0100, Sean Nyekjaer wrote:
->> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
->> ---
->>   meta-oe/recipes-support/asio/asio_1.12.2.bb | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/meta-oe/recipes-support/asio/asio_1.12.2.bb b/meta-oe/recipes-support/asio/asio_1.12.2.bb
->> index ee548fd3a..ec705c275 100644
->> --- a/meta-oe/recipes-support/asio/asio_1.12.2.bb
->> +++ b/meta-oe/recipes-support/asio/asio_1.12.2.bb
->> @@ -20,3 +20,7 @@ SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
->>   SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
->>   
->>   SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
->> +
->> +PACKAGECONFIG ??= "boost"
->> +
->> +PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost,boost"
-> 
-> Adding an RDEPENDS in the PACKAGECONFIG looks wrong.
-> boost should also be removed from the DEPENDS above when it is disabled.
-> 
-> This would be on top of your patch:
-> -DEPENDS = "boost openssl"
-> +DEPENDS = "openssl"
-> -PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost,boost"
-> +PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
-> 
-> cu
-> Adrian
-> 
-Hi Adrian,
-
-I missed the DEPENDS, thanks :-)
-But why does the extra RDEPENDS looks wrong?
-
-I'll send a PATCHv2
-
-/Sean
 
