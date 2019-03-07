@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id DC7887C675
+	by mail.openembedded.org (Postfix) with ESMTP id D4C397C675
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 07:24:41 +0000 (UTC)
+	Thu,  7 Mar 2019 07:26:58 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44FMZx0nb2z5p
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44FMdb36PGz4x
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 08:24:40 +0100 (CET)
+	Thu,  7 Mar 2019 08:26:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1551943481;
-	bh=5Y0UxJ3eaC1XLOFnWjBCxzB4bjyq1Vlc2p2yzN91hRY=;
+	s=default; t=1551943619;
+	bh=SoQYPHIU+7qSqtI4jVsiVYRLfn1RHCdO9A8G3U/+uYo=;
 	h=From:To:Subject:Date:From;
-	b=d9O4Dy3W2vhdIPR27jTr2sEJveVdDoa/n8Xt8Eru6BF0tn6/fwIZzraN905v2/MOM
-	fve9UMxOzOY57zZuMojmggN+DJ0orsaiiz4CZE5qgoj5wrLn8qOyO1a8c9xheqI0VF
-	1RLZhZD5OZ02rEHePBl6um1NfNvxUSYsgPTPG/0PEFX3it2z0UWQZqAdlgl8awh6yb
-	RzzgLKdKaHA+oy1M4j48Au1IuP6XzJQ42g4CQjx/wYNyNHhWRzT2KzwBC8NHidSWEH
-	UGuAnzvxeZUe2EWN7zQslIeez5ekXFdRWnRMkPEYf3OTl79Kb0SpqC3mwe/apxKRkM
-	Gj2dsK2IFMkm7akDNPVK43lrzhxQ51SHDSOa+Fq13gkbTdwQXOGn2BDKO7m9LPVMCp
-	WIg0ZixG4L937Ru6tLluVcLGAJ3WUEzlx67UCX9gp1vXaLjqamrpfm6CHoUQ6itK55
-	TNavd8DoVBTzmJMZ0iJwEbpGVkd/k1N938ZMGiT5zbsLFuyxiH6P4Ei/ECi+drxPac
-	lvbwtEjxMurl9C2SiCxqEzRZtoYQ530JMEWXF8hCESOiuEQNeXZXoiqdlTjFGPMuRX
-	eGUF3EzO8SCBmj4kUFmGI/rHnLQKBSLEkl+ap1iUGpGBLD/KulSLZnai0poL8EOwli
-	g5FmwyqsSubvmNvwyxBQzVCo=
+	b=mfITxGcXgpkv7EnTHyjEnMOBVG9c5hDNxxUMBCWX2fvC9A92t/g36uka12xyJ+OZD
+	29whZskZdpjk54HvV/ILtJAyRl09fAEoZ9/mrHvR4QcE07x7njgiMDO6EKUWvJJghw
+	vNA0Dl5Qoz6wTxP8Aj9X70HidST0vNf085aOdCh6nNsECbqmdwmI9oaiQZrLoT8PN3
+	fg8og5nIWqOk2ROXCqj4VsZgZGA/lmE49iw74RvWsq0xvB1Fhu7hElC8De6TpqHaHV
+	oiDaUH/F+vOsaLq8I1lUkhXRfuucQWJKxJMixv02rkJY9C885xd15M1aL/lwYwa/8m
+	ABMnWUHiPK4iXF2HgpzqM9MfZKqGm/chWz2eam424tztL2QQjaHVJ61vv/fALWhWKw
+	1z1w24x5tK3RfM1kakjY4CEr7HyfCVf8oMFOl2++v11zowUMj5ecAx3v67I7nOdCXA
+	Z+GIFcmQeyGyeFL4r1IR52p4xVlu3u01RuinpPZxfy+TN9l1mran4rON38UY6YEf7e
+	AxSLBj/IvlQEggIsEiyOYsNXdp5QAd52iidG4TzNXUPSpppoZlpt0rjGT1EqsXQdSd
+	2wu9R+OUDrIMdw6nKGiQICxk2zCEpRHLFZwpq/Pnd0hz/4V4+v1ajc8fI39Le+HQy8
+	G2MRIy6nkI7ZW70Ht9/BwLKg=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2019 09:24:39 +0200
-Message-Id: <20190307072439.26527-1-bunk@stusta.de>
+Date: Thu,  7 Mar 2019 09:26:58 +0200
+Message-Id: <20190307072658.26656-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] crda: Remove alternative option to build with the obsolete OpenSSL 1.0
+Subject: [meta-oe][PATCH] android-tools: Add patch from Debian to build with OpenSSL 1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,46 +40,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 07:24:42 -0000
-
-Note that crda is mainly a legacy package for older kernels,
-wireless-regdb-static is recommended instead for kernels >= 4.15.
+X-List-Received-Date: Thu, 07 Mar 2019 07:26:59 -0000
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ .../android-tools/core/adb_libssl_11.diff     | 39 +++++++++++++++++++
+ .../android-tools/android-tools_5.1.1.r37.bb  |  3 +-
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index d5d2ab68c..c93905ea7 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -4,10 +4,7 @@ SECTION = "net"
- LICENSE = "copyleft-next-0.3.0"
- LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff b/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
+new file mode 100644
+index 000000000..3ead649b1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
+@@ -0,0 +1,39 @@
++Description: adb: Make compatible with openssl 1.1
++ OpenSSL version 1.1 brought some API changes which broke the build here,
++ fix that by accessing rsa->n (and e) directly, using RSA_get0_key instead.
++Author: Chirayu Desai <chirayudesai1@gmail.com
++Last-Update: 2016-11-10
++---
++This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
++---
++ system/core/adb/adb_auth_host.c |    5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++--- a/adb/adb_auth_host.c
+++++ b/adb/adb_auth_host.c
++@@ -75,6 +75,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
++     BIGNUM* rem = BN_new();
++     BIGNUM* n = BN_new();
++     BIGNUM* n0inv = BN_new();
+++    BIGNUM* e = BN_new();
++ 
++     if (RSA_size(rsa) != RSANUMBYTES) {
++         ret = 0;
++@@ -82,7 +83,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
++     }
++ 
++     BN_set_bit(r32, 32);
++-    BN_copy(n, rsa->n);
+++    RSA_get0_key(rsa, &n, &e, NULL);
++     BN_set_bit(r, RSANUMWORDS * 32);
++     BN_mod_sqr(rr, r, n, ctx);
++     BN_div(NULL, rem, n, r32, ctx);
++@@ -96,7 +97,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
++         BN_div(n, rem, n, r32, ctx);
++         pkey->n[i] = BN_get_word(rem);
++     }
++-    pkey->exponent = BN_get_word(rsa->e);
+++    pkey->exponent = BN_get_word(e);
++ 
++ out:
++     BN_free(n0inv);
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index d49e53714..e09cd829d 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
+     file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+ "
+ DEPENDS = "libbsd libpcre zlib libcap"
+-DEPENDS_append_class-target = " openssl10"
++DEPENDS_append_class-target = " openssl"
  
--DEPENDS = "python-m2crypto-native python-typing-native python-native libnl \
--           ${@oe.utils.conditional("DEFAULT_CRYPT", "gcrypt", "libgcrypt", "", d)} \
--           ${@oe.utils.conditional("DEFAULT_CRYPT", "openssl", "openssl10", "", d)} \
--          "
-+DEPENDS = "python-m2crypto-native python-typing-native python-native libnl libgcrypt"
+ ANDROID_MIRROR = "android.googlesource.com"
  
- SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
-            file://do-not-run-ldconfig-if-destdir-is-set.patch \
-@@ -23,13 +20,9 @@ SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e
- 
- inherit python-dir pythonnative siteinfo
- 
--# "gcrypt" or "openssl"
--DEFAULT_CRYPT ??= "gcrypt"
--
- # Recursive make problem
- EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg' \
-                 UDEV_RULE_DIR=${nonarch_libdir}/udev/rules.d/"
--EXTRA_OEMAKE_append = " ${@oe.utils.conditional("DEFAULT_CRYPT", "openssl", "USE_OPENSSL=1", "", d)}"
- TARGET_BITS = "${SITEINFO_BITS}"
- export TARGET_BITS
- 
+@@ -37,6 +37,7 @@ SRC_URI = " \
+     file://core/0010-Use-linux-capability.h-on-linux-systems-too.patch;patchdir=system/core \
+     file://core/0011-Remove-bionic-specific-calls.patch;patchdir=system/core \
+     file://core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch;patchdir=system/core \
++    file://core/adb_libssl_11.diff;patchdir=system/core \
+     file://extras/0001-ext4_utils-remove-selinux-extensions.patch;patchdir=system/extras \
+     file://extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch;patchdir=system/extras \
+     file://libselinux/0001-Remove-bionic-specific-calls.patch;patchdir=external/libselinux \
 -- 
 2.17.1
 
