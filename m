@@ -1,24 +1,49 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BA847C611
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id CB8887CE3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 01:10:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x271AZcR026355
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  7 Mar 2019 01:48:53 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id z7so12742069lji.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Mar 2019 17:10:36 -0800 (PST)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Wed, 6 Mar 2019 17:10:35 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Mar 2019 09:10:33 +0800
-Message-ID: <1551921033-22958-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-oe][PATCH] makedumpfile: Upgrade to 1.6.5 to support kernel 4.18 and 4.19
+	Wed, 06 Mar 2019 17:48:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=NZeYvu5LXWkgaf7k76U1Ykk/jP9Msz2bApvgqEzxyJg=;
+	b=cHJCpab9fUoLaml2jUOJxIhiHQ3bOr/rfU4CnB+VWDM+BaH0SG33eNTgfNWZM9hKuD
+	Vfmlo90IY5KUo7td3KehQkwmTke/i31EQN1D02+4UFTRHvnPVgddw2vmuTazBKrpZMQs
+	RJyQFge5JxPQpPXC5OrfYHMSgTXzuFoQhGfSEvOpG2KesyJllSOh7zldZBQpy5+dzPY6
+	kOVMPa/gBwH9yfJVGGtVk6Afw+AfWIEmmQZdi41ue5I/DuPbRVd1WkIZAcQW6FgjM3NX
+	7BRPW1a9kdy3m/U6lTGEgWMA13CpqiOZSdMExaGIWGw+nGKwzgroF8lTFgnoKVGQYxRe
+	t4FQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=NZeYvu5LXWkgaf7k76U1Ykk/jP9Msz2bApvgqEzxyJg=;
+	b=kqEjClVDhn+/rAA/6nf/rzf1xyai5d0FOLVtENg/GPr/cApw0YddeKhBTHGbRzmDnL
+	7T94xSgLxfLY7KNgnQUy1kilFCFl8279KAGaf8um+hgTyjHX51QLjFFa0nDdQQYEcmu+
+	zhThemkBXeVofjhG2nmwZ0jCvrpl6m/p3b04CbwDBOIyU71skCh3FT54dZUqaMhmD5Sm
+	NEZf+Y2vft+DZfFk+waQLf8Pp4wVH+Ds0AEQP2D9LBm+Wn1ZJabjw79IfGjS5pNHjeg5
+	Dc7yWr0ufRaftqsfTrsPF6AdfLk16/ksT3zt/LM7t44nf7u5TYA1OCW7AIlGfGiT9Wo8
+	E01w==
+X-Gm-Message-State: APjAAAXVOnyu/9hERvHelVvQq74UDqc0htjbCjhxH4tQ5VyP9Rb4hjh2
+	0jMl+FreCaET1qmpo9ZJ8He5JH/as2A=
+X-Google-Smtp-Source: APXvYqybSMX0joC/H9cvsYy19nNG0O84RFczcQWbblCCBFj1zowgtKo7v9PDp2BKyrZIC0nbIIzVBw==
+X-Received: by 2002:a2e:81c1:: with SMTP id s1mr3821579ljg.29.1551923333587;
+	Wed, 06 Mar 2019 17:48:53 -0800 (PST)
+Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id t14sm585486lfe.51.2019.03.06.17.48.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Mar 2019 17:48:53 -0800 (PST)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2019 02:48:42 +0100
+Message-Id: <20190307014842.5560-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] wireshark: upgrade to 3.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,103 +56,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 01:10:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Mar 2019 01:48:54 -0000
 
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
-
-This upgrade fixed the below issue:
-When run '$makedumpfile -E -d 1 /proc/vmcore /root/vmcore_dumpfile'
-shows 'The kernel version is not supported.'
-
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch | 25 +++++++++++++++-------
- ...makedumpfile_1.6.4.bb => makedumpfile_1.6.5.bb} |  4 ++--
- 2 files changed, 19 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.6.4.bb => makedumpfile_1.6.5.bb} (92%)
+ .../{wireshark_2.6.6.bb => wireshark_3.0.0.bb}       | 12 +++++-------
+ .../nano/{nano_3.0.bb => nano_3.2.bb}                |  0
+ 2 files changed, 5 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.6.6.bb => wireshark_3.0.0.bb} (89%)
+ rename meta-oe/recipes-support/nano/{nano_3.0.bb => nano_3.2.bb} (100%)
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-index 766f4fc..156b4d5 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-@@ -1,4 +1,4 @@
--From ba123fa6b2aa0ac62d1b78f327339635ae87201a Mon Sep 17 00:00:00 2001
-+From 0d1cdb59da3603e0a80913617ece0164b05380d2 Mon Sep 17 00:00:00 2001
- From: Alexandru Moise <alexandru.moise@windriver.com>
- Date: Fri, 29 Apr 2016 07:40:46 +0000
- Subject: [PATCH] mem_section: Support only 46 bit for MAX_PHYSMEM_BITS on
-@@ -21,19 +21,20 @@ Upstream-Status: Pending
- Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+similarity index 89%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+index 4699f6798..d940a4567 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+@@ -4,22 +4,20 @@ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
  
-+[hqBai: adjusted patch for context, no logical change]
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
- ---
-- arch/ppc64.c | 28 ++--------------------------
-- 1 file changed, 2 insertions(+), 26 deletions(-)
-+ arch/ppc64.c | 33 ++-------------------------------
-+ 1 file changed, 2 insertions(+), 31 deletions(-)
+-DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native"
++DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native git"
  
- diff --git a/arch/ppc64.c b/arch/ppc64.c
--index 8b6f7d5..458f06b 100644
-+index 947a125..458f06b 100644
- --- a/arch/ppc64.c
- +++ b/arch/ppc64.c
--@@ -462,38 +462,14 @@ ppc64_vtop_level4(unsigned long vaddr)
-- 	return paddr;
-+@@ -463,42 +463,13 @@ ppc64_vtop_level4(unsigned long vaddr)
-  }
-  
---int
-+ int
- -set_ppc64_max_physmem_bits(void)
- -{
- -	long array_len = ARRAY_LENGTH(mem_section);
-@@ -52,10 +53,15 @@ index 8b6f7d5..458f06b 100644
- -		|| (array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT())))
- -		return TRUE;
- -
-+-	info->max_physmem_bits  = _MAX_PHYSMEM_BITS_4_19;
-+-	if ((array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT_EXTREME()))
-+-		|| (array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT())))
-+-		return TRUE;
-+-
- -	return FALSE;
- -}
- -
-- int
-+-int
-  get_machdep_info_ppc64(void)
-  {
-  	unsigned long vmlist, vmap_area_list, vmalloc_start;
-@@ -70,3 +76,6 @@ index 8b6f7d5..458f06b 100644
-  	info->page_offset = __PAGE_OFFSET;
-  
-  	if (SYMBOL(_stext) == NOT_FOUND_SYMBOL) {
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.5.bb
-similarity index 92%
-rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb
-rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.5.bb
-index 33194b8..413b413 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.5.bb
-@@ -25,8 +25,8 @@ SRC_URI = "\
-     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
- "
--SRC_URI[md5sum] = "7dfbca19f487604c271e2892ba07f4bd"
--SRC_URI[sha256sum] = "7e06f72d5f291fcab9e92975f405a76e37d4f7fc8fa4172f199636398ae812b1"
-+SRC_URI[md5sum] = "1737f8e8904d565629f0c9e702f92d02"
-+SRC_URI[sha256sum] = "5d4f1d6ded8dca6951eeabcf4bb1ebf6575288fee947529397103c040eb5c760"
+ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
- UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
+-SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
+-           file://0001-Add-libm-to-link-for-fmod-API.patch \
+-          "
++SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "b30ba5b9b48ed2ff91c0ce357d33b46b"
+-SRC_URI[sha256sum] = "487933ea075bdbb25d8df06017d9c4f49fc20eb7f6ec80af086718ed5550e863"
++SRC_URI[md5sum] = "258d62ac7434d126dc497303c8f7961b"
++SRC_URI[sha256sum] = "bc4f30f5b2e94f3a696fef9de44673cdf402db90aac5299966da647f708f009e"
+ 
+ PE = "1"
+ 
+-inherit cmake pkgconfig pythonnative perlnative upstream-version-is-even
++inherit cmake pkgconfig python3native perlnative upstream-version-is-even
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+diff --git a/meta-oe/recipes-support/nano/nano_3.0.bb b/meta-oe/recipes-support/nano/nano_3.2.bb
+similarity index 100%
+rename from meta-oe/recipes-support/nano/nano_3.0.bb
+rename to meta-oe/recipes-support/nano/nano_3.2.bb
 -- 
-2.7.4
+2.17.1
 
 
