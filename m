@@ -1,38 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 71AB27CE92
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+	[209.85.128.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 42F397CE8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 10:00:17 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44FR2S02bZz5p;
-	Thu,  7 Mar 2019 11:00:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1551952817;
-	bh=QSALd3U3tHnbCbvG+gaee58F92WWaFhUgDUyOBAE+Ok=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=R+wd5DIr0dzNu3KRB0GYDQm431+AcNBewcs+WQ77NprjYyIBuMhBZkRA3FN+jFnbe
-	IiXtOCMiC1EyA71BY/gUYWF1baRCvNzySsf5jjAYgxcfzZY/X/cY03UWukNcJWcdNM
-	xWVYyfjmauhj6DzYqIWJtA9YoBLC0u7Gv7OeyZICizSm+5/kRZnw0FA4L6nmAbT0uP
-	v8MGtRdxQGwFrgDC9b71DQXquW22qUd1OshGYNjkJgylMeVD8axf/0HJ2K9kqPlsFG
-	BjifaaA79RbTiGHOQxycbgk0kAdRuky/AIxkBuxjmZLQewG7Tsu/cjKdy1hEIzwZBo
-	WAjtOtVH/t0HGZYL4bPzP4CJADTZHLa2uoPIFebAgDqhCrATRFKG8OGRXi68pUewVl
-	4SR7sqMX4Qqx+IYS8Iw4ckrEhSHOu4CMIDOGtic8Dn/M467xQPzdufhax4E0ZxVNv4
-	qkkHdxXAtnE4VbOB4lUgEWFiTIYjMYjqkaB7dK9umy/rjU30e31osCootsVKFoJPAs
-	wffisaGlh94KUt/FFA65KgxucHefwIG8wM0MIiZCsYLaaszGkW2Mxj1n1CaJJiPc/s
-	a8JbY1MpKnZbPu6nqIUmM6e4ILYOd0e/3sQdGJgwccM2rze9oHCw/lhtFD8RcO+dfM
-	2jijNL85evuwC50xKVaCGn4k=
-Date: Thu, 7 Mar 2019 12:00:13 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Sean Nyekjaer <sean@geanix.com>
-Message-ID: <20190307100013.GA759@localhost>
-References: <20190307082917.18118-1-sean@geanix.com>
-	<20190307085338.GA28605@localhost>
-	<c15ece8b-c647-34ca-8f5b-17fac9518081@geanix.com>
-MIME-Version: 1.0
-In-Reply-To: <c15ece8b-c647-34ca-8f5b-17fac9518081@geanix.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] asio: add PACKAGECONFIG boost
+	Thu,  7 Mar 2019 11:57:54 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id j125so8995182wmj.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2019 03:57:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=TJoqTsZFsLc9mhLuN9hehbaJlHs2FTrbLNCWMAQO42Q=;
+	b=Ui4Nd9mN/R+8rzW/3EHV9ammCyXiUAcSePQGMje9hM3DgajFKKVeT6KEajGutOycgQ
+	idmg9/R1y+v2PTI6q1HvCEM4pfZ9fnYtguGu+TRcz/mvOcfHuPx2cNiDpMjr6kYJuDXL
+	POW09vl2kNn0DHongOVi546WwH9Iv62LPhptxqXxa9FD894ATNzQOVAvGG7+34t4GMPi
+	nnpfbA8yfF2ue+R+z8+nvYgsY7Hta17WA3y2sVJDx/BKO4Blv8+Vh0+wnSOaQVj5LKYy
+	WhkF2Gpa+6O4P1dn/4ues5pLcywOf0pg2lPV7VHoSFp3trOW7MGjUnj0ZIovwRmOVo3r
+	AMsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=TJoqTsZFsLc9mhLuN9hehbaJlHs2FTrbLNCWMAQO42Q=;
+	b=INatapStxO4u8x0tuJzMyKGo3Hf67bKTaQEoQypgRwpNEAyHgUy+mPZd3sr6skhjPT
+	mWEumPfyVoD/r4/WvYKjgkLc0vtfHllGQdfulBdFdPRSIT0h9IR7fGP2FLztz+lawUrf
+	jX6iI4LnxyzatgjCvkL2nSrdhSEFG7eQ9dTjRIKQ0U5JA1MJqex5gFanyMLVnZz+s09f
+	uPRNcDdcIenjb/mS/dC5vN8MPqrJzCanovYhD6KymZf5NSgPBcrL1OAp9QOuP2jvpoUo
+	E+9RWe+2TPcqLM5q1YEKPbtFwmvf6XnKbP6/AxmQZZZF/u0h/wBzBfNXjF9/gP0oxjYW
+	gQng==
+X-Gm-Message-State: APjAAAVLHk33Y3+UTku/aiTf3RzyR+t8ZQDvFPA9dbzx9Kcl5//fEWDP
+	xMmXVQvb2D+mSyvMvdfrKGwRD4wIJ2U=
+X-Google-Smtp-Source: APXvYqxWp31ibMH7BZwRBPqKvYAWkGYJn0hXpABPOw9CKemRr3LLNYIFJl6PW60cG5clqHBRhUQOVg==
+X-Received: by 2002:a1c:e084:: with SMTP id x126mr5665335wmg.39.1551959874364; 
+	Thu, 07 Mar 2019 03:57:54 -0800 (PST)
+Received: from localhost.localdomain (178-143-25-215.dynamic.orange.sk.
+	[178.143.25.215])
+	by smtp.gmail.com with ESMTPSA id o8sm7804200wma.1.2019.03.07.03.57.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 07 Mar 2019 03:57:53 -0800 (PST)
+Sender: Belisko Marek <marek.belisko@gmail.com>
+From: Marek Belisko <marek.belisko@open-nandra.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2019 12:57:51 +0100
+Message-Id: <1551959871-9647-1-git-send-email-marek.belisko@open-nandra.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Marek Belisko <marek.belisko@open-nandra.com>
+Subject: [meta-java][PATCH] jamvm: Disable inlining
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,62 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 10:00:17 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Mar 2019 11:57:54 -0000
 
-On Thu, Mar 07, 2019 at 10:03:08AM +0100, Sean Nyekjaer wrote:
-> 
-> 
-> On 07/03/2019 09.53, Adrian Bunk wrote:
-> > On Thu, Mar 07, 2019 at 09:29:17AM +0100, Sean Nyekjaer wrote:
-> > > Signed-off-by: Sean Nyekjaer <sean@geanix.com>
-> > > ---
-> > >   meta-oe/recipes-support/asio/asio_1.12.2.bb | 4 ++++
-> > >   1 file changed, 4 insertions(+)
-> > > 
-> > > diff --git a/meta-oe/recipes-support/asio/asio_1.12.2.bb b/meta-oe/recipes-support/asio/asio_1.12.2.bb
-> > > index ee548fd3a..ec705c275 100644
-> > > --- a/meta-oe/recipes-support/asio/asio_1.12.2.bb
-> > > +++ b/meta-oe/recipes-support/asio/asio_1.12.2.bb
-> > > @@ -20,3 +20,7 @@ SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
-> > >   SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
-> > >   SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
-> > > +
-> > > +PACKAGECONFIG ??= "boost"
-> > > +
-> > > +PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost,boost"
-> > 
-> > Adding an RDEPENDS in the PACKAGECONFIG looks wrong.
-> > boost should also be removed from the DEPENDS above when it is disabled.
-> > 
-> > This would be on top of your patch:
-> > -DEPENDS = "boost openssl"
-> > +DEPENDS = "openssl"
-> > -PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost,boost"
-> > +PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
-> > 
-> > 
-> Hi Adrian,
-> 
-> I missed the DEPENDS, thanks :-)
-> But why does the extra RDEPENDS looks wrong?
+This will fix crashes seen when build openjdk-8:
 
-It forces all boost libraries to be installed on the target,
-no matter whether or not they are used.
+ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile (log file is located at /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
+ERROR: Logfile of failure stored in: /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| Illegal instruction (core dumped)
+| WARNING: exit code 132 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
+ERROR: Task (virtual:native:/home/jenkins/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile) failed with exit code '1'
 
-> I'll send a PATCHv2
-> 
-> /Sean
 
-cu
-Adrian
+Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+---
+ recipes-core/jamvm/jamvm.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index fc21380..8a1ed63 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -29,7 +29,7 @@ do_configure_append_class-native() {
+ }
+ 
+ 
+-EXTRA_OECONF = "--with-classpath-install-dir=${prefix} --libdir=${libdir}/jamvm --enable-ffi"
++EXTRA_OECONF = "--with-classpath-install-dir=${prefix} --libdir=${libdir}/jamvm --enable-ffi --disable-int-inlining"
+ 
+ # Needed for big compilation targets like OpenJDK
+ CFLAGS_append_class-native = " -DDEFAULT_MAX_HEAP=1024*MB"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.7.4
 
 
