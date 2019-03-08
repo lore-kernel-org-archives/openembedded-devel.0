@@ -1,48 +1,51 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-it1-f175.google.com (mail-it1-f175.google.com
-	[209.85.166.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B2E757CC0C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B0BFF6C248
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 15:41:23 +0000 (UTC)
-Received: by mail-it1-f175.google.com with SMTP id f186so6730034ita.0
+	Fri,  8 Mar 2019 19:01:05 +0000 (UTC)
+Received: by mail-pg1-f180.google.com with SMTP id b2so14828573pgl.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2019 07:41:24 -0800 (PST)
+	Fri, 08 Mar 2019 11:01:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6tpaqX2G5DHrRCM3rBU+0mIRB+6q5/Ls+fU/vGOrYx4=;
-	b=ClWY4owZMCsygnxtCgGobEeemdWti54wZMKXy+JtH7du20o3ysO3u+ltC90H27ttLG
-	UhFdkgLR1r4UvuY4v01qJ9oMEewIAk3xWEjej4Wz/jyg40HL77Kkd4Ir8Y4BDzUBAnz4
-	KEVE2c2Ti9MnDDi8AkRHAJ7rzfrvCgoQQly9pvEi6wvPdGHWo/X+46zK4+XT+iHqUwDy
-	kcis8jSbUPyFqV0tBUfYSq4p9zG3OAa0yx4QinagL+jBEaICyQrIOkDBj4JTX+J8HVS1
-	xjiffHzLl7IKey6DQfJTU6Nj3ugVMLLFn3tBwU2QD6bBdUDixp+HpLMei3VqgcMRgAYc
-	o1nA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=t8sdYMBsPvpGcR1DTh1wvubNTJrqZzfCyD43tC0owZo=;
+	b=VFfWwNfQ1eBJh9egoFrpVdx65y5u3s0W7kCA7qI6NpqDG828O8ClIQCBX1CisGc2lv
+	2vk8ND+Tn35jnvvF0s5XsvKIElJ7y/SGsAMXjFYI0uCuSdOx8ngL2ETBV+aWC//TsDyJ
+	zw1gDuSNLM/lh1jh0GaoylNTfRTDbyU0DQEKek39MkoXhcrvq1zJHP/UaXzlManfXZoA
+	c/Vo+ReTFZhmo6JiRtxQH+Hn2mM143SdDGmM3DI5BZAOyNhYN2MdT1rGBgmhGctMiIqo
+	3CkpPxbT9DwyCTR8gfCLK+qQwmygDjYyawdySQRnofGyesfuzSc5V7vKoBLVa8wtjU9/
+	phfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=6tpaqX2G5DHrRCM3rBU+0mIRB+6q5/Ls+fU/vGOrYx4=;
-	b=aHz7ulTI042jHUBd8BYPQ/xIEeWzuPq3Qd0iqObZ9DOe2AblErFvgc/pPnKz/Y8tIc
-	dsy0RRU+UvaWsfIIxqIbWQ7qe/kLRKeQivaJo+ITKZyfUJ4i5qEq9sJeXn8M+LJ1vfLV
-	zbNMHEADnWPDOaVZeKijp6cxnSDqvIyVBJjSVCdOiT7BnRMh9xHxcTCALU0NJLXiXLQj
-	VfsEXVzmdzAhP/yhJvSg01UTDiBJ51tnGub9WykaVoo5Z086kmyZoGuSCH+ax5SeTYI2
-	C4rLu3JRZ6XueC4GnFJFisKsQhVNmUFSUP/a1d8ecfk4Lrab8GhQBRb++U+FvlxtE0uq
-	b2Lw==
-X-Gm-Message-State: APjAAAWIP+zwgG50goI6LIUYWl3S7RBsB3cy2otZXDsjD7Pe+GLB8Oiy
-	w1gQOdMf5zMWquthueeGYlqaAoVIDJPY1XErB+o=
-X-Google-Smtp-Source: APXvYqxD4koSGM3xRtyxynEyUbfVBgDEYOr0ZBlA1asyK8kwpJAYy+KL3Jz5YJHMOL3yFy/QO5LpbI04csMM4pB1NKo=
-X-Received: by 2002:a24:f001:: with SMTP id s1mr8490370ith.60.1552059684444;
-	Fri, 08 Mar 2019 07:41:24 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=t8sdYMBsPvpGcR1DTh1wvubNTJrqZzfCyD43tC0owZo=;
+	b=K0IXyEqf+OqeMtgsPzz+FoEp8+D+mrmHGAn5emPs6JpKdzGnHS5OAU+Bc2qb0yQY7g
+	ph/JxAV1LUFie358S+zVI+Ez5uXCxeRM/Yf1iC1xZIpVwwgUdOCv97Bz1Do3UJmRLh28
+	EeRRRYbM8rpR1W+PsetPPPRBArq+suDiHm4MSk+cgV8MddpH6f3pO8AnYlz00zSy09WR
+	AI9fHbbFy7zOLYHnx0W91JQiCEMx05+xo8k55V6Au48yOadoF2qnLS/FA6H4tzOPsRdv
+	YBOMjgxQql44BRj8RWIFxl5Rw59V5nH1K5GOAjv+1S6HGK4EVhU4Mw4mdj0Ve8E2elSO
+	4m8Q==
+X-Gm-Message-State: APjAAAX5K7bohfjEcGti8dMqyi6iiY+DBXcV0e/22TVoUDGPaK4kLk07
+	oLcZJ4lo3jf6Ir9rpMc5Wv0kYGr5
+X-Google-Smtp-Source: APXvYqwS8oxXKxuoVN8p3flCa3/FKuadKi934jlQhkPFeMQajN/f1g7pghDfZTeh9aIfsBwIJ0PR8g==
+X-Received: by 2002:a17:902:aa87:: with SMTP id
+	d7mr19643072plr.146.1552071666170; 
+	Fri, 08 Mar 2019 11:01:06 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
+	by smtp.gmail.com with ESMTPSA id
+	u18sm13933654pfa.176.2019.03.08.11.01.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 08 Mar 2019 11:01:05 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  8 Mar 2019 11:00:56 -0800
+Message-Id: <20190308190058.18583-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <trinity-c0b64e17-7878-4cf2-b46c-881a1b38055e-1552051786391@3c-app-webde-bs44>
-	<CA+chaQePK29qJaYxfkkaYTs4S5z+i=bdFQSe8npP0f6HY=3Y-Q@mail.gmail.com>
-	<trinity-4571896f-c682-4775-a201-8fcb128244b2-1552055246508@3c-app-webde-bs44>
-In-Reply-To: <trinity-4571896f-c682-4775-a201-8fcb128244b2-1552055246508@3c-app-webde-bs44>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Fri, 8 Mar 2019 17:41:13 +0200
-Message-ID: <CABXoSoUk5CpFVWQf_FWXmwbvxWrih1JbFOLGCt+FY=G2k8UhMw@mail.gmail.com>
-To: JK.Behnke@web.de
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-qt5 - support for QT 5.12.1?
+Subject: [meta-networking][PATCH 1/2] miniupnpd: Upgrade to 2.1.20190210 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,17 +58,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 15:41:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 08 Mar 2019 19:01:05 -0000
+Content-Transfer-Encoding: 8bit
 
-Plan is to release Qt 5.12.2 next week, we'll send a pull merge request then.
+Fixes build with kernel 5.x as well
 
-On Fri, 8 Mar 2019 at 16:27, <JK.Behnke@web.de> wrote:
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../{miniupnpd_2.1.20180706.bb => miniupnpd_2.1.20190210.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/miniupnpd/{miniupnpd_2.1.20180706.bb => miniupnpd_2.1.20190210.bb} (92%)
+
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20180706.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190210.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20180706.bb
+rename to meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190210.bb
+index ff40daaac9..302f5072d9 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20180706.bb
++++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190210.bb
+@@ -15,8 +15,8 @@ SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${P}.tar.gz;dow
+            file://miniupnpd.service \
+            file://0001-Add-OpenEmbedded-cross-compile-case.patch \
+            "
+-SRC_URI[md5sum] = "a84b3647c871802abeccfc2771e8db21"
+-SRC_URI[sha256sum] = "fc2d2fd044d8c3f8d02b63d70489bb35ece836a4fc1b6386865ac8fbe8d8b006"
++SRC_URI[md5sum] = "03b00c27106835e728a3b858ecf83390"
++SRC_URI[sha256sum] = "1aaecd25cf152d99557dfe80c7508af9cb06e97ecad4786ce5dafb4c958d196b"
+ 
+ IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
+ 
+-- 
+2.21.0
+
 
