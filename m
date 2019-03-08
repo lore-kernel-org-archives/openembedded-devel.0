@@ -1,51 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D5E147CF0C
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B7D87CF4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 02:23:47 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id a3so12945307pff.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2019 18:23:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PnXlZNsYLtoNaXJ6CfUENMIS+q7wooQRfuH/VStqYSw=;
-	b=gtB6vDyQaJajVhJEOekPasgB3oOZD8Ky1s/Qyyti8PBV7sKdracrFo7ByjT/nNp3Z6
-	7B3BBvoyalP2eQXIc7RZyPfcVv9avUaeFJ+5KiEq/KJCkQmdXH9M6ON2qZQXIajjpmhw
-	kjHszbzkrBNQEh7RuQCHOJLzGUHBbxdq+2AatkcHqnuji+jW1qBnnx8StdqiR2tgbDSB
-	pA+D9LtrTz79Ts1zygvTVhT+LrMESwn5GVI1SWXDlU1gSY6qun2JhaWkPj8hCzEvMYJf
-	R42nQHzomQum7vo187qqBJrTTuNg+8B6JHsk2/llE4NdiLuTA513ukr1AbJjhGGoPdbF
-	8Ukw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PnXlZNsYLtoNaXJ6CfUENMIS+q7wooQRfuH/VStqYSw=;
-	b=M+4gZXGW+M6NBi6up4CsarOMMo8Z6sAv4TQ6LFamXggQdeOHzNWArVHRuqcD3O7VXF
-	8QqL4y2/i7R+03t1CDKyR3h9hoC8Kt3StL+XggnM+RqVgKD/u7cEeHxVvPm7PadphwTv
-	CQd5+A79wb9kLoEhg0BXa/HT5kP60+0pxMKfrfz/3Vjr2p6jYPP4dniWWghIRx1spzpZ
-	8vZJqIuDjd7v+AcAU94IWw57eUKeWJpM5weSSo9Qb10CHkpo6UT7wIyEb/SiJNAXjv7A
-	XyS1toJWYej5h6NksAtrygqzDD7xl2gGGc6Y7x6ix+xWq18Fh+VRr6QsnIOKsCSPQga0
-	IESQ==
-X-Gm-Message-State: APjAAAUb9gAHAiX7UZWwMT1SKofCVdLYffRfwt6QguTM+GkGBJ43eSzw
-	xfmigb6Kb58kcUhripT9yNHgo+zU
-X-Google-Smtp-Source: APXvYqxz3KRphUXTp4YWTx9h9Q0OOTvxe5d3Xmdlqd6DYeKdmwlCKI9GXnATZWx21RCjN8DPlm6yWA==
-X-Received: by 2002:a17:902:7042:: with SMTP id
-	h2mr15992046plt.323.1552011828428; 
-	Thu, 07 Mar 2019 18:23:48 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id
-	n75sm17685600pfb.39.2019.03.07.18.23.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Mar 2019 18:23:48 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2019 18:23:40 -0800
-Message-Id: <20190308022340.35951-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Fri,  8 Mar 2019 02:44:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x282hpwb003538
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 7 Mar 2019 18:44:01 -0800
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Thu, 7 Mar 2019 18:43:40 -0800
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190306091258.59600-1-mingli.yu@windriver.com>
+	<CAMKF1soBAMksYZCBgzhoWsmgz7EpG8G2_VXHqJgV3GPyi1Z5NA@mail.gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5C81D868.2090903@windriver.com>
+Date: Fri, 8 Mar 2019 10:50:16 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] postfix: Upgrade to 3.4.1 release
+In-Reply-To: <CAMKF1soBAMksYZCBgzhoWsmgz7EpG8G2_VXHqJgV3GPyi1Z5NA@mail.gmail.com>
+X-Originating-IP: [128.224.162.194]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mysql-python: fix compilation with MariaDB 10.3.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,73 +36,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 02:23:48 -0000
+X-List-Received-Date: Fri, 08 Mar 2019 02:44:27 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Fix build with kernel >= 5.x
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../postfix/files/linux_5.x.patch             | 27 +++++++++++++++++++
- .../{postfix_3.3.1.bb => postfix_3.4.1.bb}    |  6 ++---
- 2 files changed, 30 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
- rename meta-networking/recipes-daemons/postfix/{postfix_3.3.1.bb => postfix_3.4.1.bb} (66%)
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch b/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
-new file mode 100644
-index 0000000000..fbb811c06b
---- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
-@@ -0,0 +1,27 @@
-+Recognise kernel 5.x versioning scheme
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/makedefs
-++++ b/makedefs
-+@@ -543,7 +543,7 @@ EOF
-+ 		: ${SHLIB_ENV="LD_LIBRARY_PATH=`pwd`/lib"}
-+ 		: ${PLUGIN_LD="${CC-gcc} -shared"}
-+ 		;;
-+-  Linux.[34].*)	SYSTYPE=LINUX$RELEASE_MAJOR
-++  Linux.[345].*)	SYSTYPE=LINUX$RELEASE_MAJOR
-+ 		case "$CCARGS" in
-+ 		 *-DNO_DB*) ;;
-+ 		 *-DHAS_DB*) ;;
-+--- a/src/util/sys_defs.h
-++++ b/src/util/sys_defs.h
-+@@ -749,7 +749,7 @@ extern int initgroups(const char *, int)
-+  /*
-+   * LINUX.
-+   */
-+-#if defined(LINUX2) || defined(LINUX3) || defined(LINUX4)
-++#if defined(LINUX2) || defined(LINUX3) || defined(LINUX4) || defined(LINUX5)
-+ #define SUPPORTED
-+ #define UINT32_TYPE	unsigned int
-+ #define UINT16_TYPE	unsigned short
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb
-similarity index 66%
-rename from meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
-rename to meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb
-index 6718b7ef93..73380d8c63 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb
-@@ -4,9 +4,9 @@ SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patc
-             file://postfix-install.patch \
-             file://icu-config.patch \
-             file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
-+            file://linux_5.x.patch \
-            "
--
--SRC_URI[md5sum] = "4381c6492f415e4a69cf5099d4acea76"
--SRC_URI[sha256sum] = "54f514dae42b5275cb4bc9c69283f16c06200b71813d0bb696568c4ba7ae7e3b"
-+SRC_URI[md5sum] = "d292bb49a1c79ff6d2eb9c5e88c51425"
-+SRC_URI[sha256sum] = "8c9763f7a8ec70d499257b7f25bb50e1f3da8a4c43e59826ba8a26c4a778d0ce"
- 
- UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
--- 
-2.21.0
+On 2019年03月07日 23:29, Khem Raj wrote:
+> Applying patch 0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
+> patching file _mysql.c
+> Hunk #1 FAILED at 2002 (different line endings).
+> 1 out of 1 hunk FAILED -- saving rejects to file _mysql.c.rej
 
+Hi Khem,
+
+It's strange that I can't reproduce the Hunk issue as you mentioned 
+while I pull the commit[5173929d7 mysql-python: fix compilation with 
+MariaDB 10.3.13] from master-next.
+
+Does this issue still exist in your env?
+
+Thanks,
+
+>
+> On Wed, Mar 6, 2019 at 1:12 AM <mingli.yu@windriver.com> wrote:
+>>
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>
+>> Use standard API function MYSQL_OPT_RECONNECT
+>> instead of direct modification of internal structures
+>> which does not work for MariaDB to fix below compile
+>> issue.
+>> | _mysql.c: In function '_mysql_ConnectionObject_ping':
+>> | _mysql.c:2005:41: error: 'MYSQL' {aka 'struct st_mysql'} has no member named 'reconnect'
+>>
+>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> ---
+>>   ...ompilation-with-MariaDB-with-10.3.13.patch | 39 +++++++++++++++++++
+>>   .../recipes-dbs/mysql/mysql-python_1.2.5.bb   |  4 +-
+>>   2 files changed, 42 insertions(+), 1 deletion(-)
+>>   create mode 100644 meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
+>>
+>> diff --git a/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch b/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
+>> new file mode 100644
+>> index 000000000..b816618c7
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
+>> @@ -0,0 +1,39 @@
+>> +From 45436592aa64308b2ab46f84c6107c6d7de0a3ec Mon Sep 17 00:00:00 2001
+>> +From: Mingli Yu <mingli.yu@windriver.com>
+>> +Date: Wed, 6 Mar 2019 00:16:17 -0800
+>> +Subject: [PATCH] _mysql.c: fix compilation with MariaDB 10.3.13
+>> +
+>> +Use standard API function MYSQL_OPT_RECONNECT
+>> +instead of direct modification of internal structures
+>> +which does not work for MariaDB.
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> +---
+>> + _mysql.c | 9 ++++++++-
+>> + 1 file changed, 8 insertions(+), 1 deletion(-)
+>> +
+>> +diff --git a/_mysql.c b/_mysql.c
+>> +index f081346..2262e9e 100644
+>> +--- a/_mysql.c
+>> ++++ b/_mysql.c
+>> +@@ -2002,7 +2002,14 @@ _mysql_ConnectionObject_ping(
+>> +       int r, reconnect = -1;
+>> +       if (!PyArg_ParseTuple(args, "|I", &reconnect)) return NULL;
+>> +       check_connection(self);
+>> +-      if ( reconnect != -1 ) self->connection.reconnect = reconnect;
+>> ++      if ( reconnect != -1 ) {
+>> ++             #if MYSQL_VERSION_ID >= 50013
+>> ++               my_bool recon = reconnect;
+>> ++               mysql_options(&self->connection, MYSQL_OPT_RECONNECT, &recon);
+>> ++             #else
+>> ++                 self->connection.reconnect = reconnect;
+>> ++             #endif
+>> ++        }
+>> +       Py_BEGIN_ALLOW_THREADS
+>> +       r = mysql_ping(&(self->connection));
+>> +       Py_END_ALLOW_THREADS
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
+>> index ac0df4f06..f2faec1c1 100644
+>> --- a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
+>> +++ b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
+>> @@ -8,7 +8,9 @@ DEPENDS = "mysql5"
+>>
+>>   SRCNAME = "MySQL-python"
+>>
+>> -SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip"
+>> +SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip \
+>> +           file://0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch \
+>> +"
+>>   SRC_URI[md5sum] = "654f75b302db6ed8dc5a898c625e030c"
+>>   SRC_URI[sha256sum] = "811040b647e5d5686f84db415efd697e6250008b112b6909ba77ac059e140c74"
+>>
+>> --
+>> 2.17.1
+>>
+>
 
