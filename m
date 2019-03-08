@@ -1,53 +1,47 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
-	[209.85.208.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 984A0747E7
+Return-Path: <JK.Behnke@web.de>
+X-Greylist: delayed 303 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 08 Mar 2019 13:34:48 UTC
+Received: from mout.web.de (mout.web.de [212.227.15.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 6135C7CE85
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 12:26:00 +0000 (UTC)
-Received: by mail-ed1-f43.google.com with SMTP id f2so16235786edy.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2019 04:26:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=9XS1ogKAQJI8E+byq/lG4lU+pzei2iBc+PxnhcJYIbk=;
-	b=TDv/u0Iy3FKCkfu/h6HhjZHX/gdhm/bYzTakFS2znK+a8/4t83bu2LtJOBacI8fWo3
-	pX8lTEF+c0NP0PcQqeGUAZnUqcYK0yoIORuxD1edDzfam1cDqtjqHLXdhaamcng/lezl
-	jr6+UjXYn7R3zEDiZ8swkwB9C9NgFztQXA34s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=9XS1ogKAQJI8E+byq/lG4lU+pzei2iBc+PxnhcJYIbk=;
-	b=fTVTEdPVXl52/gHUqVpKvB+HJsXmxxuYEmRZKNVZuVyL1xtWhPWIW6HMG2eHGec9TR
-	O9XKP/KvJKd0M/mdzQSFyI4ACP0bSJe+xqxOjsuWNwCwC5CG27u9GWtKi7DcW17sIl5A
-	0DfIcb/lrAqXvLMvtTFp4ook46X7wZKa3/b6sKZ0aQQ7kL7p8tzUc942Efvgp18YZfKE
-	7Qsgp090L9TWELq+Dpy7CSlQoCL0U/jX6x1jYSRV9yj5nMmP9M+3A00522b48vjjjNC/
-	+9bRWzBQ+5buqyBdLkRX7w6sWiOFHNCrzrdM7ay+GP1IwGPLa4qDirJcAtOhSmOb+5BD
-	KIuA==
-X-Gm-Message-State: APjAAAUL/H6GZkR0b9Bc+KTOeaWPJGNyo1+OuObQRVd0o8PZzJogOLky
-	qNaG0H7l+lB/4jc2eO3OQBiHDcWKzTeqpg==
-X-Google-Smtp-Source: APXvYqzOEAa/1e4H3OPhYjPpyfZKQJdvMN9kq6BmMNWw61pnpt0ijr5deE/OpLZpDcXBqn2c0c1sTQ==
-X-Received: by 2002:a17:906:4cc9:: with SMTP id
-	q9mr11648075ejt.54.1552047961106; 
-	Fri, 08 Mar 2019 04:26:01 -0800 (PST)
-Received: from bill-the-cat
-	(cpe-2606-A000-1401-880D-606A-AF5B-88B1-B23A.dyn6.twc.com.
-	[2606:a000:1401:880d:606a:af5b:88b1:b23a])
-	by smtp.gmail.com with ESMTPSA id
-	l53sm2154989eda.66.2019.03.08.04.25.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Mar 2019 04:26:00 -0800 (PST)
-Date: Fri, 8 Mar 2019 07:25:56 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Adrian Bunk <bunk@stusta.de>
-Message-ID: <20190308122556.GC5026@bill-the-cat>
-References: <20190308090657.4180-1-bunk@stusta.de>
+	Fri,  8 Mar 2019 13:34:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1552052088;
+	bh=mxHq4DpjJ1sp6TIMasgDwc/G4EXX/axI2SomL0F4zEQ=;
+	h=X-UI-Sender-Class:From:To:Subject:Date;
+	b=MbETR4AtB3807K0aMp/KzVJ+x2EczyqT8broA/1McnPcLKyOc4ir5yFIb/t1KA3Xu
+	ygbcAazRZsibYSxnK/88BmzkHNWMKdSaHfb08t/jv5ho0s125tPH8K68OmmhFshrZt
+	iUlTtVVW9bPrfWQtcdd6cVjBL0U+BZJC9sXSBGTk=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [212.185.41.2] ([212.185.41.2]) by web-mail.web.de
+	(3c-app-webde-bs44.server.lan [172.19.170.44]) (via HTTP);
+	Fri, 8 Mar 2019 14:29:46 +0100
+Message-ID: <trinity-c0b64e17-7878-4cf2-b46c-881a1b38055e-1552051786391@3c-app-webde-bs44>
+From: JK.Behnke@web.de
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 8 Mar 2019 14:29:46 +0100
+Importance: normal
+Sensitivity: Normal
+X-Priority: 3
+X-Provags-ID: V03:K1:tPFVftzdYA08ZgLYQVMqhWoXZKfNX/ftoLq+wFdXejpl6CR1sLBJDFVL8cqc9ic78YhvM
+	1vx0DKLLqnXnemEK0TEZC+z3ILS8Vx6GMyptyvDvDPTaXb30ay2JKBkF2GumTbE4uKY+a8L7YIzx
+	JWAk4Gj3HRa/fEBQSMbwucYP2xWMJ/yV9DPII+Cyw2QUoHMKVTplYSuxrE9HkI5VTSS2XRKb3MB+
+	LCh62YBlbany2sw6aStMil4IUPaPV3JwYXKseQ5IqzHoh6djEb0ZhwdSCvsePmzkwdcUxpMW1tdV
+	jE=
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:tg1/jN8NJx8=:S2Cv8Fd1zUmWNBtR8fO36q
+	fGxtSxPw1fpPWYzN1sEvsRZXcbDZqsQ5l1pkJlJOi442MUAg+bAvoi4Mzt4QsklJUd+XIV1oI
+	CsG2Uzp+PyL7egKsRYXScPfzsopz2vk9/GiCdKCGGYEwTlReJtZDlNV4B0i6GZukOvON5Meul
+	Y4X8x+SJAzcRQJTbKvAIOxzKbh2b2uTPaZ+6Iece1wNxRbmlIApNZHgQX5WUPQtWApIVFlAKy
+	X7nYOePlVnX+THBXycVKbEXB/JUsKkd33yGm6osdTyoV/JadyBIjFdrpK4N4cp9T2pl3/TjG4
+	n0JlQxm9ZWKnN5RCWh0CNVYSzbBPpLbI7T7S7JCt3ymQ088wikoV4u1Q9MFJ/iK+OvUvNGW7X
+	Pf7Y+jXW2i6l0p+56XnLg2X970I1kI2OlEYTisrhlOdHcui7ilmdsqSnelikPD/i72eEdvFoU
+	6f3v2b4uyLOvO6wF5fMMBrQjvj6jd1k1kmDNP8W7luBPCqiaZv3aRj+NEfk1ZzQIho1a0edIl
+	H69WFalVyBJ7PgmPbR4/AGF6GhBU7R4Ytxg8csfq1p1jILem+H22KepVj+CXQ2wZUQvCtOLH/
+	sxUTZQuJtSbYo=
 MIME-Version: 1.0
-In-Reply-To: <20190308090657.4180-1-bunk@stusta.de>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] Also remove meta-oe/licenses/vim
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: meta-qt5 - support for QT 5.12.1?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,18 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 12:26:01 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 08 Mar 2019 13:34:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Mar 08, 2019 at 11:06:57AM +0200, Adrian Bunk wrote:
-
-> vim moved to OE-core.
-> 
-> Signed-off-by: Adrian Bunk <bunk@stusta.de>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
--- 
-Tom
 
