@@ -1,44 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B4B707CB8A
+Return-Path: <JK.Behnke@web.de>
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+	by mail.openembedded.org (Postfix) with ESMTP id C13807CF54
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 14:02:26 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id z84so12509050wmg.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2019 06:02:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ahtAz+pyeWuKipmwg7gT5rpNLnoIMhSz7IyKk4Y0hgc=;
-	b=U4nRXXwr4dkDZHS0maBGsg/Ze/9+bLBfdkBgVXd1kTD9/FIZgTqhz12wl5t78E8lSt
-	DbyWDO1vCouw1TxAVSIMGUkNOIuvocgXQe7/SMqy+HwVx9UXffpFljQGHQXzxTCYVCOK
-	pxn4rbZkl7w48g6dYq7ALIiW/A9j+D7gLr9un4a+MbTnr9S6ueFaaV0p8sDLOnPAipNt
-	43Sf31QFcZ+dtvS4Nh6gmxKLazbfNkXjbsQatVM7VnET5hNq7QsDBqtWByw/9UMgwyOB
-	oqY+RaUAY/h489RzcMvoUwSSWmuZWtb2Qx6ahL0W5HHWPoB4ctjsQlg/kWTalIwSbdVE
-	1/Ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ahtAz+pyeWuKipmwg7gT5rpNLnoIMhSz7IyKk4Y0hgc=;
-	b=IYdmIpbiNAHM4T4cuwEhi26PdZtdX2vwFjkTU+jMZRJL+R7yMLeAo+pRRLUAL1K1uq
-	SK5KDezYL9nNXO3hF7V+L+EMcWdqbkG4OE5mbdDw30Vy/O/Ppf5OOJSctwNpCgl+Yt2Q
-	ysI+8nAdU8MenLLI6aWAIp8NWz6+mTt6xFLktJkaDCdzaiXbUNlIrJ3JUpUXJDzkJxG+
-	aYBOVxomZPP94vJWNBkB/wU1dyLvaMVmWUGvGpo/STVdLJr0iVUoQYzA+/V5i32CQq6a
-	0xc+Jy+Q/9jie3Ik00MwngUFKqywRNVnpIxUj7dTlJLK0W5Qbfut7FKkMUqEV0GL5UiL
-	DdQA==
-X-Gm-Message-State: APjAAAXdWPellFkqGXyhxh7lvjVxsPkrXEJNruu4d5L9BCDrSIviyeKP
-	rpwyi6MewL/cR8s9kdJM2hgm5n0/mPdL6xH5sFfYVg==
-X-Google-Smtp-Source: APXvYqwZA06uuqB6GoGLapwyNLC4MyTCt07Larb0eznRrCFyLtEWnn5Nf6bQ7sUCcs8LGnoQkDMVybjwqH6QGWHvkms=
-X-Received: by 2002:a1c:4946:: with SMTP id w67mr8780946wma.20.1552053747187; 
-	Fri, 08 Mar 2019 06:02:27 -0800 (PST)
-MIME-Version: 1.0
+	Fri,  8 Mar 2019 14:27:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+	s=dbaedf251592; t=1552055246;
+	bh=bqYkro4lwHhqm+WYQARTw3HrYDU35VqS/2QP4tqpWk0=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=NfPAFagga1NykoOujy0Xau5gdinb50ZtvYl9daNbtGqv9WY0OIwPss6mtMlmaimY7
+	6Wtw7xDAwtqcXOnzdkbP9uev1zbCU6Rjbxqxer0GaqB8a1+TZc2p+YAdk4Fu+5RsTv
+	gh782nvypK47n3bFpV4N+A0YkK3r11OQM7nTKB5w=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [212.185.41.2] ([212.185.41.2]) by web-mail.web.de
+	(3c-app-webde-bs44.server.lan [172.19.170.44]) (via HTTP);
+	Fri, 8 Mar 2019 15:27:26 +0100
+Message-ID: <trinity-4571896f-c682-4775-a201-8fcb128244b2-1552055246508@3c-app-webde-bs44>
+From: JK.Behnke@web.de
+To: "Martin Jansa" <martin.jansa@gmail.com>
+Date: Fri, 8 Mar 2019 15:27:26 +0100
+Importance: normal
+Sensitivity: Normal
+In-Reply-To: <CA+chaQePK29qJaYxfkkaYTs4S5z+i=bdFQSe8npP0f6HY=3Y-Q@mail.gmail.com>
 References: <trinity-c0b64e17-7878-4cf2-b46c-881a1b38055e-1552051786391@3c-app-webde-bs44>
-In-Reply-To: <trinity-c0b64e17-7878-4cf2-b46c-881a1b38055e-1552051786391@3c-app-webde-bs44>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 8 Mar 2019 15:02:17 +0100
-Message-ID: <CA+chaQePK29qJaYxfkkaYTs4S5z+i=bdFQSe8npP0f6HY=3Y-Q@mail.gmail.com>
-To: JK.Behnke@web.de
+	<CA+chaQePK29qJaYxfkkaYTs4S5z+i=bdFQSe8npP0f6HY=3Y-Q@mail.gmail.com>
+X-UI-Message-Type: mail
+X-Priority: 3
+X-Provags-ID: V03:K1:GNIJNOffh+nt61fdfuGQLpM7tmq6+KVc+0TgS5m8c8ykHpeDPXYeboe8Nq0g+5mxQ797K
+	G4CXsme7h0S/BVn/ETyRF+KGyJL3vCCKfAFSoNXJMcd0FWuwnVi3BX6kCIB/llrdDhyeeY0+ckW3
+	ItsqhLgZth8QGxjfWN5K7/ktuIXgm08VNuIu9+mVB++iXf1BQhxjXI1Rhsr6EAO6XBuhgbXI0QZj
+	grKDKihJqTphm/nzZ77zANsBZAdSIXQC5pm1/jlqDY7sc4IHPnUdLAkqjaF+rZ9dX8UD03L/4CVZ
+	eg=
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:NsM7Iiy/AU8=:u5Fs3HALTV6LH66iqs0ssg
+	Ewk3pANpGqHdb0S4/H2V6JGinhwE/QrIIfEII3+tDMZHQGY4voBMKkZnD/0Ozb6Jk9JvK6jyn
+	no+at6SdOOwUuEx2RW9ScmxiEknF7imxuaM3ODhd4NLgUjYMeHxbSU+ep5K6VYI3XsZ/pFVbb
+	+73bXi7RfCgCwXpNVJmH6LxOO7R1AuURKLD4COJXDCpoKTVJYpnAp6wYeSYeF6QWZ7x3LjaMT
+	v88r5H9MvIhi29v8HKeEPTVpUHW/CJ8sPWEXzj9DMZR8V3q0k4QVxuvLi3jMQMLFJJLrZST2R
+	NTzbGno61dw0Md9u+aqBvWFFKkSGVqSVU4etOmRV32dioHBTfG4+nnnYCoJBf7/51t+Y9hl9o
+	P5tY9EFUG+JI6SaJX/9h2blGX+eynu7gepVNrEFc8HOuY9lVdBFOmDc57fxgV9CKa/T2fKH0b
+	oT9MyJN8Ibsai9BNo1d/9kB3ITPRZWpUBWOoh4Io7xYXwpUnqvhePnMxnO/No4DzE/wANwqEX
+	w1sFjibD8a7WBKgGLz/32MGzUcg6UphSOan91o2eJnrgD8c8qgu8/Vwi15tunos02NV5zGO/t
+	+WLwybF8PwhiY=
+MIME-Version: 1.0
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: meta-qt5 - support for QT 5.12.1?
@@ -54,18 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 14:02:27 -0000
+X-List-Received-Date: Fri, 08 Mar 2019 14:27:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-not yet
-
-On Fri, Mar 8, 2019 at 2:34 PM <JK.Behnke@web.de> wrote:
-
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
