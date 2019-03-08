@@ -1,25 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1278F7CF0E
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 642BC7CF31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 01:33:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x281XS8r027058
+	Fri,  8 Mar 2019 01:33:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x281XHWO002145
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Mar 2019 17:33:28 -0800 (PST)
+	Thu, 7 Mar 2019 17:33:27 -0800
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 7 Mar 2019 17:33:27 -0800
+	Thu, 7 Mar 2019 17:33:06 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Mar 2019 20:32:37 -0500
-Message-ID: <20190308013237.194105-6-kai.kang@windriver.com>
+Date: Thu, 7 Mar 2019 20:32:36 -0500
+Message-ID: <20190308013237.194105-5-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.20.0
 In-Reply-To: <20190308013237.194105-1-kai.kang@windriver.com>
 References: <20190308013237.194105-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 5/5] libgtop: 2.38.0 -> 2.39.91
+Subject: [meta-gnome][PATCH 4/5] metacity: 3.28.0 -> 3.30.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 01:33:27 -0000
+X-List-Received-Date: Fri, 08 Mar 2019 01:33:36 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Update libgtop from 2.38.0 to 2.39.91.
-
-* reset LIBGTOP_LIBS to avoid compile-host-path qa issue
-
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../libgtop/{libgtop_2.38.0.bb => libgtop_2.39.91.bb}       | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.38.0.bb => libgtop_2.39.91.bb} (60%)
+ .../metacity/{metacity_3.28.0.bb => metacity_3.30.1.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.28.0.bb => metacity_3.30.1.bb} (95%)
 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.38.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.39.91.bb
-similarity index 60%
-rename from meta-gnome/recipes-gnome/libgtop/libgtop_2.38.0.bb
-rename to meta-gnome/recipes-gnome/libgtop/libgtop_2.39.91.bb
-index 494934fe7..fa5a1d394 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.38.0.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.39.91.bb
-@@ -7,7 +7,9 @@ inherit gnomebase lib_package gtk-doc distro_features_check gobject-introspectio
- # depends on libxau
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
+rename to meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb
+index 189f6ec55..253f7ef36 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb
+@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/GNOME/metacity.git;branch=master \
+ "
  
--SRC_URI[archive.md5sum] = "bb0ce7de6b28694b40405eedac8a31b5"
--SRC_URI[archive.sha256sum] = "4f6c0e62bb438abfd16b4559cd2eca0251de19e291c888cdc4dc88e5ffebb612"
-+SRC_URI[archive.md5sum] = "b50a24e8c70af532c5616f42f4ec71b7"
-+SRC_URI[archive.sha256sum] = "3428e3901c80a572d7f7bdf29cc0ecb733cc314038ba3d45093a84f314271f0f"
+ S = "${WORKDIR}/git"
+-SRCREV = "c0d4b2fc0fcd6f2d3c37da935923f9e9ed5eb99f"
++SRCREV = "d69fba052cdd0aa8348dc1bbbbb1ecbadfbebbd8"
  
- DEPENDS = "glib-2.0 libxau"
-+
-+EXTRA_OEMAKE += "LIBGTOP_LIBS="
+ EXTRA_OECONF += "--disable-xinerama"
+ 
 -- 
 2.20.0
 
