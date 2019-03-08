@@ -1,53 +1,23 @@
-Return-Path: <damien.riegel@gmail.com>
-Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C49B37C7D6
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 87DAE7C763
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2019 21:11:22 +0000 (UTC)
-Received: by mail-it1-f195.google.com with SMTP id v83so18177666itf.1
+	Fri,  8 Mar 2019 01:32:42 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x281WhUf006712
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2019 13:11:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=5gC5+5MGQXUH7dO9l1NHnmCm3rC2TGLOrD2WOTYHpic=;
-	b=ipJ6fZm6RxrqfAj2FNMmQMuzYpNP+xv7iURBXidPVhDQ+XTK+jA+ZmdGnvHmdjQyIe
-	qaxyqeFI8PU9nHfpdMKGSyh+Xyi3pU3AvwVVckLfKxHN2qii4RiLlBUuAyFeKMR9A8f5
-	76xIB+FWosmUa1p57y/N5dJjhft5fIgoWOO2ff2HxtwNcR+H0f/mKuNGP1sdge5Y1FUF
-	edQSjOeGW7dI51qdP8DVflRwnuYl8OkT5DZnEgIvy+edVnUvXSVQlGyysx9t9FvcKRb7
-	QGoLJD9dcx4aBC12pmJQrOYtwHMzeM25+UC4UXr7RmmKz9EZeAw9WXPr8SLFTBn/ubSl
-	PWvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=5gC5+5MGQXUH7dO9l1NHnmCm3rC2TGLOrD2WOTYHpic=;
-	b=KIDlslE3Al+uJFbKaJr2gfMgGm1z/At0g6RRdqV0sCdJhsOzH69dbP+L4pPsSKGuOL
-	GJchfGSMrf+/lbrNUTaZkSykJh2aAeCEtKfKi0tqPzfE6ipXpEcGz7/vHKA6NdNaW1wW
-	tLSlwtGOer+vBRFxjDwAibcZ4XiZeMf+eRhSNWRbkCWe23jAemYeu1JqzvR6QOXNiAdz
-	OLlAigW4tHKPesLPzhCrjyR/FWkvQvdyhsjG2d2SKW/cV9yjMBrPW8BXiAJMAOvpAr5N
-	uCq24V6aG8PRuwFheJe3l09KBGVkfSWrVG8+LQDvceS8vt6Usu2FfkQYptYKQGJu0mbB
-	0epg==
-X-Gm-Message-State: APjAAAXGYtlh06Q/YL5oPHkxI6i4ZOEBzdrWG3F8PaYnu9/U9qzX+erQ
-	g6pT9b1rOVQiGEw1Cs5rQS++YeGZ25M=
-X-Google-Smtp-Source: APXvYqw73CfdqhBNuC9p9Tg1SiJJ+qG/Q8bmGTeDmD1E9X3Aw/hMwh+MdzUrN/w5G+CdXp1OIxu9Uw==
-X-Received: by 2002:a24:6581:: with SMTP id u123mr6764965itb.42.1551993083750; 
-	Thu, 07 Mar 2019 13:11:23 -0800 (PST)
-Received: from workotop.localdomain ([67.218.223.154])
-	by smtp.gmail.com with ESMTPSA id
-	p141sm3036343itb.39.2019.03.07.13.11.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Mar 2019 13:11:23 -0800 (PST)
-From: Damien Riegel <damien.riegel@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2019 16:11:12 -0500
-Message-Id: <20190307211112.30386-2-damien.riegel@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190307211112.30386-1-damien.riegel@gmail.com>
-References: <20190307211112.30386-1-damien.riegel@gmail.com>
+	Thu, 7 Mar 2019 17:32:43 -0800 (PST)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 7 Mar 2019 17:32:42 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 7 Mar 2019 20:32:32 -0500
+Message-ID: <20190308013237.194105-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
-Subject: [meta-networking][thud][PATCH 2/2] mosquitto: fully switch over to using PACKAGECONFIG_CONFARGS
+Subject: [meta-gnome][meta-xfce][PATCH 0/5] Upgrade packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,53 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2019 21:11:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 08 Mar 2019 01:32:42 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: André Draszik <andre.draszik@jci.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Convert all other instances of explicit PACKAGECONFIG uses
-to the PACKAGECONFIG_CONFARGS infrastructure.
 
-Signed-off-by: André Draszik <andre.draszik@jci.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Damien Riegel <damien.riegel@gmail.com>
-[Damien Riegel: backport from master]
----
- .../mosquitto/mosquitto_1.5.1.bb                     | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+Kai Kang (5):
+  thunar: 1.8.2 -> 1.8.4
+  libtimezonemap: 0.4.5 -> 0.4.6
+  gvfs: 1.39.1 -> 1.39.92
+  metacity: 3.28.0 -> 3.30.1
+  libgtop: 2.38.0 -> 2.39.91
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-index 52252787d..06c1d67da 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-@@ -24,20 +24,16 @@ PACKAGECONFIG ??= "ssl uuid \
-                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
-                   "
- 
--PACKAGECONFIG[dns-srv] = ",,c-ares"
--PACKAGECONFIG[ssl] = ",,openssl"
--PACKAGECONFIG[uuid] = ",,util-linux"
-+PACKAGECONFIG[dns-srv] = "WITH_SRV=yes,WITH_SRV=no,c-ares"
-+PACKAGECONFIG[ssl] = "WITH_TLS=yes WITH_TLS_PSK=yes,WITH_TLS=no WITH_TLS_PSK=no,openssl"
-+PACKAGECONFIG[uuid] = "WITH_UUID=yes,WITH_UUID=no,util-linux"
- PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
--PACKAGECONFIG[websockets] = ",,libwebsockets"
-+PACKAGECONFIG[websockets] = "WITH_WEBSOCKETS=yes,WITH_WEBSOCKETS=no,libwebsockets"
- 
- EXTRA_OEMAKE = " \
-     prefix=${prefix} \
-     mandir=${mandir} \
-     localedir=${localedir} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dns-srv', 'WITH_SRV=yes', 'WITH_SRV=no', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'ssl', 'WITH_TLS=yes WITH_TLS_PSK=yes', 'WITH_TLS=no WITH_TLS_PSK=no', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'uuid', 'WITH_UUID=yes', 'WITH_UUID=no', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'websockets', 'WITH_WEBSOCKETS=yes', 'WITH_WEBSOCKETS=no', d)} \
-     ${PACKAGECONFIG_CONFARGS} \
-     STRIP=/bin/true \
-     WITH_DOCS=no \
+ .../gvfs/{gvfs_1.39.1.bb => gvfs_1.39.92.bb}          |  4 ++--
+ .../libgtop/{libgtop_2.38.0.bb => libgtop_2.39.91.bb} |  6 ++++--
+ ...ibtimezonemap_0.4.5.bb => libtimezonemap_0.4.6.bb} | 11 ++++-------
+ .../{metacity_3.28.0.bb => metacity_3.30.1.bb}        |  2 +-
+ .../thunar/{thunar_1.8.2.bb => thunar_1.8.4.bb}       |  4 ++--
+ 5 files changed, 13 insertions(+), 14 deletions(-)
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.39.1.bb => gvfs_1.39.92.bb} (93%)
+ rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.38.0.bb => libgtop_2.39.91.bb} (60%)
+ rename meta-gnome/recipes-gnome/libtimezonemap/{libtimezonemap_0.4.5.bb => libtimezonemap_0.4.6.bb} (74%)
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.28.0.bb => metacity_3.30.1.bb} (95%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.2.bb => thunar_1.8.4.bb} (86%)
+
 -- 
-2.21.0
+2.20.0
 
 
