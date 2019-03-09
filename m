@@ -1,95 +1,51 @@
-Return-Path: <bassem.boubaker@actia.fr>
-X-Greylist: delayed 3613 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 09 Mar 2019 10:55:14 UTC
-Received: from FRA01-PR2-obe.outbound.protection.outlook.com
-	(mail-eopbgr120077.outbound.protection.outlook.com [40.107.12.77])
-	by mail.openembedded.org (Postfix) with ESMTP id C8AE17CF7F
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E72CE7C3C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Mar 2019 10:55:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=actia.fr; s=selector2; 
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=FjME/wrS6TGUpW46RdC0Lu/AhVIWBP28xSB7dssuA/Y=;
-	b=hwZg1w5z/DRMfwDiUViigtuUtzsfMBUtEifZoZslQF9Ef5+g/qw86tlFDmmvehgtXIU58CIV2w7tSbggv9+Ls1XUM4q9bh5FmVRd6WwLpeeBW6jrCww9wmEtS0gf8zb7ZbZxmlP0zPxx5A8pYI7ig3CS7tWwaPFRu+FGoa6FIqU=
-Received: from MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM (52.134.38.15) by
-	MR2P264MB0113.FRAP264.PROD.OUTLOOK.COM (52.134.40.149) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1686.18; Sat, 9 Mar 2019 00:44:20 +0000
-Received: from MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
-	([fe80::4124:2bff:600f:6fe2]) by MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
-	([fe80::4124:2bff:600f:6fe2%5]) with mapi id 15.20.1686.018;
-	Sat, 9 Mar 2019 00:44:20 +0000
-From: BOUBAKER Bassem <bassem.boubaker@actia.fr>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH]     cpulimit: introduce support for this package
-Thread-Index: AQHU1hE74JkJYg2SdkCEQfLVefzWlA==
-Date: Sat, 9 Mar 2019 00:44:20 +0000
-Message-ID: <1552092251-25129-1-git-send-email-bassem.boubaker@actia.fr>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: DB6PR0202CA0031.eurprd02.prod.outlook.com
-	(2603:10a6:4:a5::17) To MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
-	(2603:10a6:500:c::15)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.7.4
-x-originating-ip: [185.69.189.94]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 8c89f330-f6ed-4389-235a-08d6a4285dcb
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600127)(711020)(4605104)(2017052603328)(7153060)(7193020);
-	SRVR:MR2P264MB0113; 
-X-MS-TrafficTypeDiagnostic: MR2P264MB0113:|MR2P264MB0113:|MR2P264MB0113:|MR2P264MB0113:
-x-ms-exchange-purlcount: 1
-x-microsoft-exchange-diagnostics: =?iso-8859-1?Q?1; MR2P264MB0113;
-	23:3ECETVPiR4U+smOBPE7IqiEY6vg4xdXnh+U+v8y?=
-	=?iso-8859-1?Q?Jg190Kqs9/crE2vzZaR6KpFFDiapt4DMuwYSQSSfsHVMNPhBMkgHvuQKcT?=
-	=?iso-8859-1?Q?0ESWO1gQ8hT58rZpMzPXP3KQdiHL1vp3S2zYI8AazXWg7IL1XABeA6Wqdi?=
-	=?iso-8859-1?Q?dHCR1QV/s8MQ1UAm83ZJ2n7RajwXScvAyItw7xmWPhOruqxmR8+OCmA12O?=
-	=?iso-8859-1?Q?NHdYFLByFkFjPfdTcyVb3tBpCgy/ktBWerbs//ItEEzzsgY+wmXn5Q0RDb?=
-	=?iso-8859-1?Q?ecAWVehH+UIWJd8I5yZFtt0JQc1t5jXahVKuaTT9u8C9cNUwR5ybkqNcyi?=
-	=?iso-8859-1?Q?shosRl2Hl0sWnu4sNK0WVDTtJ5cDU4x8FDFBeHYc0aG68kvfOJhOaN9iNJ?=
-	=?iso-8859-1?Q?VkmFIWDjAjCOwGEVoEEN30ymiqJtun5hjyzegBk2EZyKn1RoqdINeEOYt9?=
-	=?iso-8859-1?Q?hgsfJzYbTZr+XxpjCA1zv561KPjwsmepT/odKOt+GJJWhrABd8IG8fxyeJ?=
-	=?iso-8859-1?Q?iqphrzcaFxSKdDAdoCjDS7ZzfTUL6jZ+eo1Kwyc4QIRsY2LbFHsUDTkXww?=
-	=?iso-8859-1?Q?Zt5UXMprNvlDRFgoA6+VvnKGADr9YhxuI0jPYEhio82devWahBOPCh4s6Y?=
-	=?iso-8859-1?Q?LqqRMB3+dempx0L2co2T2IHakl/fUoCi6Z1kqSZjOjxacE0qR5D3t/ywBu?=
-	=?iso-8859-1?Q?lqYML3JQBGHWf/51hOwxQ5cbtdhrArO1i9VoS/CeNMj2v971tF+plLNTAH?=
-	=?iso-8859-1?Q?COhwRRsxSQCIjISWucU7W+A+FhGhakFUCJg/XfRC3o/CoWKnu9OWUh8NKW?=
-	=?iso-8859-1?Q?JW6GuXw32Pi7J5Rco3O7CcCJRZAn7xjHEeG+i73Z0DkbSzzCEJoveT+3MC?=
-	=?iso-8859-1?Q?ZwIjpZnaU4co3VbAey+xarDAQQIcIW7WMLVAVLsLVVw2nFqxMcd1GDKfX0?=
-	=?iso-8859-1?Q?Gbw8IrMMUJO/8HySsrxQgYTgyuae/lwByyl0g6h+1ejcYbzl8IHIBTMrhN?=
-	=?iso-8859-1?Q?6Hr3gpbn6TW/F/s27tNxiyeKnZmEwtfzdx9T2/RbqfFKMF6R+ipb1VXF6p?=
-	=?iso-8859-1?Q?ckZI53Ni4BlO7Ihol2kYKTbMTimNZvXfjfJKlXQuGlmVqQYPWTUCSfvd3z?=
-	=?iso-8859-1?Q?SD0qsYzcitc9xLGkVH1iifScPTRnD030h8KaVq3N8n+dTjGf6CTtZaip+E?=
-	=?iso-8859-1?Q?xvfua8VZJxjcbNAzCbGOhMJ1X+b7zyeaKz1gKQSe8ULF680ZUaWDq0UZ2q?=
-	=?iso-8859-1?Q?/gyUfCy2GTI+v2dUbFrly1671zNFf+kN+9YxeKJ8LOsTcK14jr6Je8ToRf?=
-	=?iso-8859-1?Q?fgTk2/XN7x/mVrk32gKTKwlrudIGt9J2/wWXKjDoU1ctg=3D=3D?=
-x-microsoft-antispam-prvs: <MR2P264MB0113066AD9DC1AFA88B638579C4E0@MR2P264MB0113.FRAP264.PROD.OUTLOOK.COM>
-x-forefront-prvs: 0971922F40
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(396003)(39850400004)(346002)(376002)(366004)(136003)(199004)(189003)(25786009)(86362001)(53386004)(107886003)(4326008)(486006)(52116002)(386003)(8936002)(6506007)(81156014)(186003)(5660300002)(7736002)(8676002)(81166006)(305945005)(2906002)(14444005)(2616005)(476003)(6116002)(102836004)(26005)(3846002)(6346003)(99286004)(6306002)(5640700003)(105586002)(106356001)(68736007)(2501003)(97736004)(6486002)(316002)(6512007)(256004)(6916009)(36756003)(74482002)(50226002)(53936002)(6436002)(71200400001)(14454004)(66066001)(2351001)(478600001)(71190400001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:MR2P264MB0113;
-	H:MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: actia.fr does not designate
-	permitted sender hosts)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=bassem.boubaker@actia.fr; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: sQ5QQzsDoyDqw6zDiC9fVjsr8/4JT3BycTdKlkGJ2txSh74oISpwB9OJ4fMtsIJFDUkN1zD5GF0JZ7JGpJZ9K8+PGyIe3rTJ720QIHbB7UP54t8WKQm2nYGEjWAiI5ehnaASKRVbq2cAL0bMat1E3yeRoPrNiMYXFpsqOSfsRRqoxa6JdH723iaprSjYkO74HavkKlmM4uSKZz8hqxYafaKEI+thFJbI4b6x9bKy8j8Uu35Xx55ERZiX9G7/CissvK/Tqts9qJdL5MsYnFcIEz218ScnXQI5I24qG+9f4cqkhWriL8Dfyy6TTMyuEKxnx2FmtGOpde0jwH9TZzdpRkTH0TIPQkJUuumISxBslGhbiyT1ewBgVdcNjFlrG6t78ccxb9tH2rYNqjwBLtf2e9/W1gKG4eKvERbXZFMrZ1M=
-MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c89f330-f6ed-4389-235a-08d6a4285dcb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Mar 2019 00:44:20.1997 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 86314f06-03e8-4460-82f3-a44f992a19c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR2P264MB0113
-X-Microsoft-Exchange-Diagnostics: 1; MR2P264MB0113;
-	23:HePN1pDk2cYuwq66JVkXCGvQX92rBF7+37fXuVeCh8S3McQMlQJT+Xemk7xYc8DcehQn0tL3JwacQl40Cqw7IVerjddK/FAtJBwWSPRnRubrSo/Tz5NnAdk8ZHjLHutCzJor5qkMS/L5MF7n8hW20w==
-X-OriginatorOrg: actia.fr
-Subject: [meta-oe][PATCH] cpulimit: introduce support for this package
+	Sat,  9 Mar 2019 14:18:56 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id f2so387465edy.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Mar 2019 06:18:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=0AD6oPCxVRiJ8fP0p3Y3+QyPK8AgCbT/CbI6YCoFIhE=;
+	b=p7Dtc6RGqYzUXFwUFhAHWApOJRnaXs6fOWmaYWbNUlbR6zpqHOpb8yWEAI+ne2ISa9
+	qY73FnhOMll6XNja8RHKDXcL6HsJGBTnzKcHpkhgeIqGKLzg6xRytimbR45LQML+6saI
+	JUKoK0MRfb1w7P66mlhrKmnUTzsW5/L5ZHhytBBvoWQLfXVK+PpL9D3kMrMGP8DzEd4+
+	s0RfBNo2aeTeVK+YE3md66VPVRR/rj8YNOXvTiKpshSasmJ9/ufED5qvosfsXHjbG2xN
+	tpftBrRLFHR8kfG8NsvZrm4OhgokDYcxoL1VoL5wN4QYoBATXelAJCvv6s2v3hCf5f8N
+	7utg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0AD6oPCxVRiJ8fP0p3Y3+QyPK8AgCbT/CbI6YCoFIhE=;
+	b=dMbIRf+EWYfQIIOougjx29t9BaJqHE50P/Jp71TDl/v5Qemai6siJp6FlU6dAJnuTn
+	24vmrcoG94TJ02hPTJ9LcnUTCFsJDsv5LNhdo1WrTYTqtL2RE8/SsoKM3sYN/YcgGk9e
+	f4MCadhMTDqycbhqHIoePpwI7j1HG5Qi5gcaagFC0U0JEenxiXn/VT/iplDv5hbLCcS9
+	rpKUUQaqL4Wkf3iFHyO6sJ48ibnwZa6n/g86BrwFS2YCAcUka1HAbtWZCd33j6vRoagQ
+	9o2zfEQKJKXX9vkk4YIIebpc3bOjBapMXlC0XBcyXG/zec6in2XR37UUbvDUgw2KDTfS
+	HVpA==
+X-Gm-Message-State: APjAAAUZyj0foYZTESh48bkfhJLBl0R0UH2fl34E9Vx+lAAF4S2CXDYJ
+	9DQQCpsiKl/gfV5zmldQRspXaohaL6o=
+X-Google-Smtp-Source: APXvYqxf6YDftsyYmNOoElERPpX12ZS5ClV7uvM3pH7fc5MxC19fe0GpgO1HzVSD7edLMK7fIfn0Bw==
+X-Received: by 2002:a17:906:3450:: with SMTP id
+	d16mr15337696ejb.51.1552141136957; 
+	Sat, 09 Mar 2019 06:18:56 -0800 (PST)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	t25sm1944764ejr.30.2019.03.09.06.18.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 09 Mar 2019 06:18:56 -0800 (PST)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  9 Mar 2019 15:17:26 +0100
+Message-Id: <20190309141726.9429-1-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH v2] wireshark: upgrade to 3.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -102,61 +58,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Mar 2019 10:55:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 09 Mar 2019 14:18:57 -0000
 
-    * Now, cpulimit recipe is put under recipes-support. Binary will be ins=
-talled by the recipe under /usr/sbin
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
-	# cpulimit -h
-	Usage: cpulimit [OPTIONS...] TARGET
-		OPTIONS
-		-l, --limit=3DN          percentage of cpu allowed from 0 to 100 (require=
-d)
-		-v, --verbose          show control statistics
-		-z, --lazy             exit if there is no target process, or if it dies
-		-i, --include-children limit also the children processes
-		-h, --help             display this help and exit
-		TARGET must be exactly one of these:
-		-p, --pid=3DN            pid of the process (implies -z)
-		-e, --exe=3DFILE         name of the executable program file or path name
-		COMMAND [ARGS]         run this command and limit it (implies -z)
-
-		Report bugs to <marlonx80@hotmail.com>.
-
-Signed-off-by: Bassem Boubaker <bassem.boubaker@actia.fr>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+ .../0001-Add-libm-to-link-for-fmod-API.patch  | 29 -------------------
+ ...{wireshark_2.6.6.bb => wireshark_3.0.0.bb} | 21 +++-----------
+ 2 files changed, 4 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/wireshark/wireshark/0001-Add-libm-to-link-for-fmod-API.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.6.6.bb => wireshark_3.0.0.bb} (71%)
 
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/rec=
-ipes-support/cpulimit/cpulimit_0.2.bb
-new file mode 100644
-index 0000000..2ac82b8
---- /dev/null
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-@@ -0,0 +1,16 @@
-+SUMMARY =3D "cpulimit is a tool which limits the CPU usage of a process"
-+HOMEPAGE =3D "http://cpulimit.sourceforge.net"
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D86c1c0d961a437e529db93aa3bb32dc=
-4"
-+SRCREV ?=3D "f4d2682804931e7aea02a869137344bb5452a3cd"
-+
-+SRC_URI =3D "git://git@github.com/opsengine/cpulimit.git;protocol=3Dhttps"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit autotools
-+
-+do_install() {
-+        install -d ${D}${sbindir}
-+        install -m 0755 ${B}/src/${PN} ${D}${sbindir}/
-+}
---=20
-2.7.4
+diff --git a/meta-networking/recipes-support/wireshark/wireshark/0001-Add-libm-to-link-for-fmod-API.patch b/meta-networking/recipes-support/wireshark/wireshark/0001-Add-libm-to-link-for-fmod-API.patch
+deleted file mode 100644
+index e65ef9b10..000000000
+--- a/meta-networking/recipes-support/wireshark/wireshark/0001-Add-libm-to-link-for-fmod-API.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 1a6a5d2bcb1adec9ba138c2ebee7bbc994620aff Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 12 Jun 2018 23:23:44 -0700
+-Subject: [PATCH] Add libm to link for fmod() API
+-
+-fixes
+-ld: CMakeFiles/tshark.dir/ui/cli/tap-comparestat.c.o: undefined reference to symbol 'fmod@@GLIBC_2.2.5'
+-| /mnt/a/oe/build/tmp/work/core2-64-bec-linux/wireshark/1_2.6.1-r0/recipe-sysroot/lib/libm.so.6: error adding symbols: DSO missing from command line
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- CMakeLists.txt | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 7950e85..acee140 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -2494,6 +2494,7 @@ if(BUILD_tshark)
+- 		${LIBEPAN_LIBS}
+- 		${APPLE_CORE_FOUNDATION_LIBRARY}
+- 		${APPLE_SYSTEM_CONFIGURATION_LIBRARY}
+-+		m
+- 	)
+- 	set(tshark_FILES
+- 		capture_opts.c
+--- 
+-2.17.1
+-
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+similarity index 71%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+index 4699f6798..dc55e3de0 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.6.6.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.0.bb
+@@ -8,26 +8,20 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
+ 
+ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+ 
+-SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
+-           file://0001-Add-libm-to-link-for-fmod-API.patch \
+-          "
++SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "b30ba5b9b48ed2ff91c0ce357d33b46b"
+-SRC_URI[sha256sum] = "487933ea075bdbb25d8df06017d9c4f49fc20eb7f6ec80af086718ed5550e863"
++SRC_URI[md5sum] = "258d62ac7434d126dc497303c8f7961b"
++SRC_URI[sha256sum] = "bc4f30f5b2e94f3a696fef9de44673cdf402db90aac5299966da647f708f009e"
+ 
+ PE = "1"
+ 
+-inherit cmake pkgconfig pythonnative perlnative upstream-version-is-even
++inherit cmake pkgconfig python3native perlnative upstream-version-is-even
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+-# Options: gtk+, gtk+3 and qt5
+-GTK = "gtk+3"
+-
+ PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
+-PACKAGECONFIG_append_class-target = " ${@bb.utils.contains("DISTRO_FEATURES", "x11", " ${GTK}", "", d)}"
+ 
+ PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
+ 
+@@ -36,8 +30,6 @@ PACKAGECONFIG[libpcap] = "-DENABLE_PCAP=ON,-DENABLE_PCAP=OFF -DENABLE_PCAP_NG_DE
+ PACKAGECONFIG[libsmi] = "-DENABLE_SMI=ON,-DENABLE_SMI=OFF,libsmi"
+ PACKAGECONFIG[libnl] = ",,libnl"
+ PACKAGECONFIG[portaudio] = "-DENABLE_PORTAUDIO=ON,-DENABLE_PORTAUDIO=OFF, portaudio-v19"
+-PACKAGECONFIG[gtk+] = "-DENABLE_GTK=ON -DBUILD_wireshark_gtk=ON, -DENABLE_GTK=OFF, gtk+"
+-PACKAGECONFIG[gtk+3] = "-DENABLE_GTK3=ON -DBUILD_wireshark_gtk=ON, -DENABLE_GTK3=OFF, gtk+3"
+ PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON,-DENABLE_GNUTLS=OFF, gnutls"
+ PACKAGECONFIG[ssl] = ",,openssl"
+ PACKAGECONFIG[krb5] = "-DENABLE_KRB5=ON,-DENABLE_KRB5=OFF, krb5"
+@@ -79,16 +71,11 @@ do_install_append_class-target() {
+ }
+ 
+ PACKAGE_BEFORE_PN += "tshark"
+-PACKAGE_BEFORE_PN += "${PN}-gtk"
+ 
+ FILES_tshark = "${bindir}/tshark ${mandir}/man1/tshark.*"
+-FILES_${PN}-gtk = "${bindir}/wireshark-gtk ${datadir}/icons ${datadir}/appdata \
+-                   ${datadir}/applications ${datadir}/wireshark ${datadir}/mime \
+-                   ${mandir}/man1/wireshark.* "
+ 
+ FILES_${PN} += "${datadir}*"
+ 
+ RDEPENDS_tshark = "wireshark"
+-RDEPENDS_${PN}-gtk = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "${GTK}", "", d)} wireshark"
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.17.1
 
 
