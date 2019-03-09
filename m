@@ -1,52 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 67B506C248
+Return-Path: <bassem.boubaker@actia.fr>
+X-Greylist: delayed 3613 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 09 Mar 2019 10:55:14 UTC
+Received: from FRA01-PR2-obe.outbound.protection.outlook.com
+	(mail-eopbgr120077.outbound.protection.outlook.com [40.107.12.77])
+	by mail.openembedded.org (Postfix) with ESMTP id C8AE17CF7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Mar 2019 19:01:06 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id e17so14848246pgd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2019 11:01:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=PlW477UkB2nfeYoMq5wNCoFwg1h4n6MATAd6y70k3+o=;
-	b=k1ygbFizYGuJUf3dkj8Q3V8G8VtfxnLIHvsiDEnHwUcxEW9HRmcB7P56am3lhe/11B
-	IrSNDwIRGXleC67uQUkz8iXJ1lcvl9i3epPSohfDSzxKDKxwhaGZlqUlFozMncgR0ojJ
-	HV92ToYQ+dA7MJhqi6u/vhwG6FIfLmTSdH4QnfdVS6rjt0GtJ6i8DJGUdqActBXMrHek
-	TAu+L4bZU4PopkIOeVWebySIyb/X/DG+Jj8qXD4WhiIS4N72zhmLTyUjRUXeh++fZR8i
-	fecn4YE/gc7AFQwBWC9sYxnoiIIVYtYbXSSR2TBiN/3xnVvlBdap2OEwkeMovZWRwxgS
-	tvzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=PlW477UkB2nfeYoMq5wNCoFwg1h4n6MATAd6y70k3+o=;
-	b=hgxZqRNGF7jvtDNMUCxF/jmLs8Mqi/aLyLrdGn63xVTFU4O08uYHhq3ABdxMZBSlFC
-	Gmg8Ha2q+ako6r21mp+XVvSgVJ1L2H78lZWpMPMVacP+FqXX+HDT4hMcEiXdaeofMh1R
-	AidwAYb2qVnYYUqThnQEzwJXjHFWVTcRH7PUzh/mo+ZhK101SNOG8nWAv9GMHDW8JbVW
-	TqZK3SSfeMi2P9Ki7F1uXd+NFzkU2nIDFAmObdFDl2tEVw2E56RG49+mFtg60Ar+gY7w
-	3W4hCKPUrsxQnRiqofuUQVBoFjZpvR9f8PXh1vHaJer4PBp3GZ9+q27LZKFX1789kANl
-	+rnQ==
-X-Gm-Message-State: APjAAAVKJ3ljFqqJYLxNoR4VWlnphbMxIX/iQgkk6dRxNAUgU2v6Bq0w
-	oUbVj1trebvH2+l8GoZqMAd5UasQ
-X-Google-Smtp-Source: APXvYqwgoyvaYuKNSr99uni6MONbqPe3DUZAuYKNDQWl01G4mb9tZTWYKw9xpmqT1DVkX7AJVWQ/3Q==
-X-Received: by 2002:a65:4104:: with SMTP id w4mr4583527pgp.415.1552071666922; 
-	Fri, 08 Mar 2019 11:01:06 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
-	by smtp.gmail.com with ESMTPSA id
-	u18sm13933654pfa.176.2019.03.08.11.01.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Mar 2019 11:01:06 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Mar 2019 11:00:57 -0800
-Message-Id: <20190308190058.18583-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190308190058.18583-1-raj.khem@gmail.com>
-References: <20190308190058.18583-1-raj.khem@gmail.com>
+	Sat,  9 Mar 2019 10:55:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=actia.fr; s=selector2; 
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=FjME/wrS6TGUpW46RdC0Lu/AhVIWBP28xSB7dssuA/Y=;
+	b=hwZg1w5z/DRMfwDiUViigtuUtzsfMBUtEifZoZslQF9Ef5+g/qw86tlFDmmvehgtXIU58CIV2w7tSbggv9+Ls1XUM4q9bh5FmVRd6WwLpeeBW6jrCww9wmEtS0gf8zb7ZbZxmlP0zPxx5A8pYI7ig3CS7tWwaPFRu+FGoa6FIqU=
+Received: from MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM (52.134.38.15) by
+	MR2P264MB0113.FRAP264.PROD.OUTLOOK.COM (52.134.40.149) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1686.18; Sat, 9 Mar 2019 00:44:20 +0000
+Received: from MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
+	([fe80::4124:2bff:600f:6fe2]) by MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
+	([fe80::4124:2bff:600f:6fe2%5]) with mapi id 15.20.1686.018;
+	Sat, 9 Mar 2019 00:44:20 +0000
+From: BOUBAKER Bassem <bassem.boubaker@actia.fr>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH]     cpulimit: introduce support for this package
+Thread-Index: AQHU1hE74JkJYg2SdkCEQfLVefzWlA==
+Date: Sat, 9 Mar 2019 00:44:20 +0000
+Message-ID: <1552092251-25129-1-git-send-email-bassem.boubaker@actia.fr>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: DB6PR0202CA0031.eurprd02.prod.outlook.com
+	(2603:10a6:4:a5::17) To MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM
+	(2603:10a6:500:c::15)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.7.4
+x-originating-ip: [185.69.189.94]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 8c89f330-f6ed-4389-235a-08d6a4285dcb
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600127)(711020)(4605104)(2017052603328)(7153060)(7193020);
+	SRVR:MR2P264MB0113; 
+X-MS-TrafficTypeDiagnostic: MR2P264MB0113:|MR2P264MB0113:|MR2P264MB0113:|MR2P264MB0113:
+x-ms-exchange-purlcount: 1
+x-microsoft-exchange-diagnostics: =?iso-8859-1?Q?1; MR2P264MB0113;
+	23:3ECETVPiR4U+smOBPE7IqiEY6vg4xdXnh+U+v8y?=
+	=?iso-8859-1?Q?Jg190Kqs9/crE2vzZaR6KpFFDiapt4DMuwYSQSSfsHVMNPhBMkgHvuQKcT?=
+	=?iso-8859-1?Q?0ESWO1gQ8hT58rZpMzPXP3KQdiHL1vp3S2zYI8AazXWg7IL1XABeA6Wqdi?=
+	=?iso-8859-1?Q?dHCR1QV/s8MQ1UAm83ZJ2n7RajwXScvAyItw7xmWPhOruqxmR8+OCmA12O?=
+	=?iso-8859-1?Q?NHdYFLByFkFjPfdTcyVb3tBpCgy/ktBWerbs//ItEEzzsgY+wmXn5Q0RDb?=
+	=?iso-8859-1?Q?ecAWVehH+UIWJd8I5yZFtt0JQc1t5jXahVKuaTT9u8C9cNUwR5ybkqNcyi?=
+	=?iso-8859-1?Q?shosRl2Hl0sWnu4sNK0WVDTtJ5cDU4x8FDFBeHYc0aG68kvfOJhOaN9iNJ?=
+	=?iso-8859-1?Q?VkmFIWDjAjCOwGEVoEEN30ymiqJtun5hjyzegBk2EZyKn1RoqdINeEOYt9?=
+	=?iso-8859-1?Q?hgsfJzYbTZr+XxpjCA1zv561KPjwsmepT/odKOt+GJJWhrABd8IG8fxyeJ?=
+	=?iso-8859-1?Q?iqphrzcaFxSKdDAdoCjDS7ZzfTUL6jZ+eo1Kwyc4QIRsY2LbFHsUDTkXww?=
+	=?iso-8859-1?Q?Zt5UXMprNvlDRFgoA6+VvnKGADr9YhxuI0jPYEhio82devWahBOPCh4s6Y?=
+	=?iso-8859-1?Q?LqqRMB3+dempx0L2co2T2IHakl/fUoCi6Z1kqSZjOjxacE0qR5D3t/ywBu?=
+	=?iso-8859-1?Q?lqYML3JQBGHWf/51hOwxQ5cbtdhrArO1i9VoS/CeNMj2v971tF+plLNTAH?=
+	=?iso-8859-1?Q?COhwRRsxSQCIjISWucU7W+A+FhGhakFUCJg/XfRC3o/CoWKnu9OWUh8NKW?=
+	=?iso-8859-1?Q?JW6GuXw32Pi7J5Rco3O7CcCJRZAn7xjHEeG+i73Z0DkbSzzCEJoveT+3MC?=
+	=?iso-8859-1?Q?ZwIjpZnaU4co3VbAey+xarDAQQIcIW7WMLVAVLsLVVw2nFqxMcd1GDKfX0?=
+	=?iso-8859-1?Q?Gbw8IrMMUJO/8HySsrxQgYTgyuae/lwByyl0g6h+1ejcYbzl8IHIBTMrhN?=
+	=?iso-8859-1?Q?6Hr3gpbn6TW/F/s27tNxiyeKnZmEwtfzdx9T2/RbqfFKMF6R+ipb1VXF6p?=
+	=?iso-8859-1?Q?ckZI53Ni4BlO7Ihol2kYKTbMTimNZvXfjfJKlXQuGlmVqQYPWTUCSfvd3z?=
+	=?iso-8859-1?Q?SD0qsYzcitc9xLGkVH1iifScPTRnD030h8KaVq3N8n+dTjGf6CTtZaip+E?=
+	=?iso-8859-1?Q?xvfua8VZJxjcbNAzCbGOhMJ1X+b7zyeaKz1gKQSe8ULF680ZUaWDq0UZ2q?=
+	=?iso-8859-1?Q?/gyUfCy2GTI+v2dUbFrly1671zNFf+kN+9YxeKJ8LOsTcK14jr6Je8ToRf?=
+	=?iso-8859-1?Q?fgTk2/XN7x/mVrk32gKTKwlrudIGt9J2/wWXKjDoU1ctg=3D=3D?=
+x-microsoft-antispam-prvs: <MR2P264MB0113066AD9DC1AFA88B638579C4E0@MR2P264MB0113.FRAP264.PROD.OUTLOOK.COM>
+x-forefront-prvs: 0971922F40
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(396003)(39850400004)(346002)(376002)(366004)(136003)(199004)(189003)(25786009)(86362001)(53386004)(107886003)(4326008)(486006)(52116002)(386003)(8936002)(6506007)(81156014)(186003)(5660300002)(7736002)(8676002)(81166006)(305945005)(2906002)(14444005)(2616005)(476003)(6116002)(102836004)(26005)(3846002)(6346003)(99286004)(6306002)(5640700003)(105586002)(106356001)(68736007)(2501003)(97736004)(6486002)(316002)(6512007)(256004)(6916009)(36756003)(74482002)(50226002)(53936002)(6436002)(71200400001)(14454004)(66066001)(2351001)(478600001)(71190400001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:MR2P264MB0113;
+	H:MR2P264MB0196.FRAP264.PROD.OUTLOOK.COM; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: actia.fr does not designate
+	permitted sender hosts)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=bassem.boubaker@actia.fr; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: sQ5QQzsDoyDqw6zDiC9fVjsr8/4JT3BycTdKlkGJ2txSh74oISpwB9OJ4fMtsIJFDUkN1zD5GF0JZ7JGpJZ9K8+PGyIe3rTJ720QIHbB7UP54t8WKQm2nYGEjWAiI5ehnaASKRVbq2cAL0bMat1E3yeRoPrNiMYXFpsqOSfsRRqoxa6JdH723iaprSjYkO74HavkKlmM4uSKZz8hqxYafaKEI+thFJbI4b6x9bKy8j8Uu35Xx55ERZiX9G7/CissvK/Tqts9qJdL5MsYnFcIEz218ScnXQI5I24qG+9f4cqkhWriL8Dfyy6TTMyuEKxnx2FmtGOpde0jwH9TZzdpRkTH0TIPQkJUuumISxBslGhbiyT1ewBgVdcNjFlrG6t78ccxb9tH2rYNqjwBLtf2e9/W1gKG4eKvERbXZFMrZ1M=
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/2] linux-atm: Fix build with linux 5.x headers
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c89f330-f6ed-4389-235a-08d6a4285dcb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Mar 2019 00:44:20.1997 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 86314f06-03e8-4460-82f3-a44f992a19c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR2P264MB0113
+X-Microsoft-Exchange-Diagnostics: 1; MR2P264MB0113;
+	23:HePN1pDk2cYuwq66JVkXCGvQX92rBF7+37fXuVeCh8S3McQMlQJT+Xemk7xYc8DcehQn0tL3JwacQl40Cqw7IVerjddK/FAtJBwWSPRnRubrSo/Tz5NnAdk8ZHjLHutCzJor5qkMS/L5MF7n8hW20w==
+X-OriginatorOrg: actia.fr
+Subject: [meta-oe][PATCH] cpulimit: introduce support for this package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,86 +102,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2019 19:01:06 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 09 Mar 2019 10:55:16 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Fixes
-error: 'IFNAMSIZ' undeclared here
+    * Now, cpulimit recipe is put under recipes-support. Binary will be ins=
+talled by the recipe under /usr/sbin
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+	# cpulimit -h
+	Usage: cpulimit [OPTIONS...] TARGET
+		OPTIONS
+		-l, --limit=3DN          percentage of cpu allowed from 0 to 100 (require=
+d)
+		-v, --verbose          show control statistics
+		-z, --lazy             exit if there is no target process, or if it dies
+		-i, --include-children limit also the children processes
+		-h, --help             display this help and exit
+		TARGET must be exactly one of these:
+		-p, --pid=3DN            pid of the process (implies -z)
+		-e, --exe=3DFILE         name of the executable program file or path name
+		COMMAND [ARGS]         run this command and limit it (implies -z)
+
+		Report bugs to <marlonx80@hotmail.com>.
+
+Signed-off-by: Bassem Boubaker <bassem.boubaker@actia.fr>
 ---
- ...0001-IFNAMSIZ-is-defined-in-net-if.h.patch | 48 +++++++++++++++++++
- .../linux-atm/linux-atm_2.5.2.bb              |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-IFNAMSIZ-is-defined-in-net-if.h.patch
+ meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-IFNAMSIZ-is-defined-in-net-if.h.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-IFNAMSIZ-is-defined-in-net-if.h.patch
+diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/rec=
+ipes-support/cpulimit/cpulimit_0.2.bb
 new file mode 100644
-index 0000000000..a7c7093e09
+index 0000000..2ac82b8
 --- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-IFNAMSIZ-is-defined-in-net-if.h.patch
-@@ -0,0 +1,48 @@
-+From 29b37e45577c0921846c1709a190f08a3b032666 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 8 Mar 2019 09:08:38 -0800
-+Subject: [PATCH] IFNAMSIZ is defined in net/if.h
++++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY =3D "cpulimit is a tool which limits the CPU usage of a process"
++HOMEPAGE =3D "http://cpulimit.sourceforge.net"
++LICENSE =3D "GPLv2"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D86c1c0d961a437e529db93aa3bb32dc=
+4"
++SRCREV ?=3D "f4d2682804931e7aea02a869137344bb5452a3cd"
 +
-+Fixes
-+/mnt/a/yoe/build/tmp/work/qemuriscv64-yoe-linux-musl/linux-atm/2.5.2-r0/recipe-sysroot/usr/include/linux/if_arp.h:121:16: error: 'IFNAMSIZ' undeclared here (not in a function)
-+|  char  arp_dev[IFNAMSIZ];
-+|                ^~~~~~~~
-+In file included from ../../../linux-atm-2.5.2/src/arpd/itf.c:17:
-+/mnt/a/yoe/build/tmp/work/qemuriscv64-yoe-linux-musl/linux-atm/2.5.2-r0/recipe-sysroot/usr/include/linux/if_arp.h:121:16: error: 'IFNAMSIZ' undeclared here (not in a function)
-+|  char  arp_dev[IFNAMSIZ];
-+|                ^~~~~~~~
++SRC_URI =3D "git://git@github.com/opsengine/cpulimit.git;protocol=3Dhttps"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/arpd/arp.c | 1 +
-+ src/arpd/itf.c | 1 +
-+ 2 files changed, 2 insertions(+)
++S =3D "${WORKDIR}/git"
 +
-+diff --git a/src/arpd/arp.c b/src/arpd/arp.c
-+index 92d3787..ff1574c 100644
-+--- a/src/arpd/arp.c
-++++ b/src/arpd/arp.c
-+@@ -17,6 +17,7 @@
-+ #include <netinet/in.h> /* for ntohs, etc. */
-+ #define _LINUX_NETDEVICE_H /* very crude hack for glibc2 */
-+ #include <linux/types.h>
-++#include <net/if.h>
-+ #include <linux/if_arp.h>
-+ #include <linux/if_ether.h>
-+ #include <atm.h>
-+diff --git a/src/arpd/itf.c b/src/arpd/itf.c
-+index 92f0951..d285e3b 100644
-+--- a/src/arpd/itf.c
-++++ b/src/arpd/itf.c
-+@@ -14,6 +14,7 @@
-+ #include <sys/socket.h>
-+ #define _LINUX_NETDEVICE_H /* glibc2 */
-+ #include <linux/types.h>
-++#include <net/if.h>
-+ #include <linux/if_arp.h>
-+ 
-+ #include "atmd.h"
-+-- 
-+2.21.0
++inherit autotools
 +
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index 9fce4fba63..51682b1ed1 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -14,6 +14,7 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
-            file://0001-ttcp-Add-printf-format-string.patch \
-            file://0002-sigd-Replace-on_exit-API-with-atexit.patch \
-            file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
-+           file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
- "
- 
- SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
--- 
-2.21.0
++do_install() {
++        install -d ${D}${sbindir}
++        install -m 0755 ${B}/src/${PN} ${D}${sbindir}/
++}
+--=20
+2.7.4
 
 
