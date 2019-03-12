@@ -1,25 +1,26 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3396E7C66B
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 655447C70C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 09:39:07 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x2C9d724022819
+	Tue, 12 Mar 2019 09:47:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x2C9j1rP024490
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 12 Mar 2019 02:39:07 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 12 Mar 2019 02:39:06 -0700
+	Tue, 12 Mar 2019 02:46:28 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 12 Mar 2019 02:46:26 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>,
 	<anuj.mittal@intel.com>
-Date: Tue, 12 Mar 2019 02:39:06 -0700
-Message-ID: <20190312093906.22801-1-mingli.yu@windriver.com>
+Date: Tue, 12 Mar 2019 02:46:26 -0700
+Message-ID: <20190312094626.33914-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <C0207330DF60C5409302EC78C3FE68F30230FEA0@PGSMSX105.gar.corp.intel.com>
 References: <C0207330DF60C5409302EC78C3FE68F30230FEA0@PGSMSX105.gar.corp.intel.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/3 v2] librelp: Upgrade to 1.4.0
+Subject: [meta-oe][PATCH 2/3 v3] librelp: Upgrade to 1.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,20 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 09:39:08 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 09:47:09 -0000
 Content-Type: text/plain
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
 Remove one backported patch.
 
+Add openssl to Depends.
+
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
  .../librelp/0001-testbench-improvements.patch | 164 ------------------
- .../{librelp_1.2.18.bb => librelp_1.4.0.bb}   |   3 +-
- 2 files changed, 1 insertion(+), 166 deletions(-)
+ .../{librelp_1.2.18.bb => librelp_1.4.0.bb}   |   5 +-
+ 2 files changed, 2 insertions(+), 167 deletions(-)
  delete mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch
- rename meta-oe/recipes-extended/rsyslog/{librelp_1.2.18.bb => librelp_1.4.0.bb} (76%)
+ rename meta-oe/recipes-extended/rsyslog/{librelp_1.2.18.bb => librelp_1.4.0.bb} (66%)
 
 diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch
 deleted file mode 100644
@@ -218,14 +221,18 @@ index 6b60bd748..000000000
 -2.17.1
 -
 diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-similarity index 76%
+similarity index 66%
 rename from meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb
 rename to meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-index e4838fa5b..5b5b3b6a3 100644
+index e4838fa5b..9e57dd520 100644
 --- a/meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb
 +++ b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
- DEPENDS = "gmp nettle libidn zlib gnutls"
+@@ -4,13 +4,12 @@ HOMEPAGE = "https://github.com/rsyslog/librelp"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
+ 
+-DEPENDS = "gmp nettle libidn zlib gnutls"
++DEPENDS = "gmp nettle libidn zlib gnutls openssl"
  
  SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
 -           file://0001-testbench-improvements.patch \
