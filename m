@@ -1,26 +1,49 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 655447C70C
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
+	[209.85.167.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A52306093F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 09:47:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x2C9j1rP024490
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 12 Mar 2019 02:46:28 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 12 Mar 2019 02:46:26 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>,
-	<anuj.mittal@intel.com>
-Date: Tue, 12 Mar 2019 02:46:26 -0700
-Message-ID: <20190312094626.33914-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <C0207330DF60C5409302EC78C3FE68F30230FEA0@PGSMSX105.gar.corp.intel.com>
-References: <C0207330DF60C5409302EC78C3FE68F30230FEA0@PGSMSX105.gar.corp.intel.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/3 v3] librelp: Upgrade to 1.4.0
+	Tue, 12 Mar 2019 15:28:21 +0000 (UTC)
+Received: by mail-lf1-f43.google.com with SMTP id y18so2422741lfe.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Mar 2019 08:28:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=tkr0ID93kdOgy9wYOsANz0YCnipT/ab5KfyGSNoHFvA=;
+	b=XPdREB6bm4agnVLg8fo/MFZwPE4mxe6keploNzvuB6ElyCnfKd5FmPJlemxva4INBv
+	x47dNPzzwesdLS1cCS3NdwI9VkY1+kqDkfwIwGNKhgLhIF2IludvWq9smECQVtYuGm6w
+	FC68dHXqGkSovBgxSzVDSVOYqrz15SXvx8mtoE6a4kl9AN0TZ4NYSpwGuDknBnNy7SBy
+	2El9FEhQ6Qs1gFJKySALI5LWp+YRNfeUAMEEvKD/yp7chqxW2ZdXHzvlMUU3FgSIZm/+
+	ap0BwCttBWb66I4KfOWOPQGrjeA281Oy9V6276iMiRHd7Oltd+W09cdxGhEC4lkFK4V+
+	pZ6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tkr0ID93kdOgy9wYOsANz0YCnipT/ab5KfyGSNoHFvA=;
+	b=RdgMPYBETWC5e+P2GjUW3ZUtqID1bYnOjPhaykB1sUHFNWYrFGVGt5LlcXtLlaUT0o
+	I3+NcIG6Kr6HblEUHvjfd/eUIpLB6Qi6/crAq4vpnuyufuFupf+olqNQc1GiM7qQDz1J
+	NTnuU55tgmdcF+u2Z4DIRMhCF0LcY7uDUTQ0yfjVfAuomkwVCLdgU3zTMDX/8BdYvh4J
+	G+5XjJDdzv92vjwCt6e0Bedqts5sKpWL2g7ANuVmc+qb+F2DA8Jsyx5IPozBATk4JFh2
+	jjiRPSBYF3sLuNrP9Su+CiiH5lhQ04wyZ9w4TY62tMbeE+1jvP9Uds58wnIkxJ7Cfe1u
+	HK0A==
+X-Gm-Message-State: APjAAAXd0KNtt5H6MpZexBhSK9wgESqDeBY3LNEXWwWTO2Oi+Aeq99wD
+	hxaf7/kcAG6JuWwRx+UVVJ5wzJAPMTo=
+X-Google-Smtp-Source: APXvYqyIl9/i7VZDpeWvMNsybI0gTrSI3e/97YL2i9LwPdPuojqphpc9vgpHmGPvQc0l4VQpqd/IEg==
+X-Received: by 2002:ac2:4424:: with SMTP id w4mr7401578lfl.148.1552404501569; 
+	Tue, 12 Mar 2019 08:28:21 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	(m77-218-241-108.cust.tele2.se. [77.218.241.108])
+	by smtp.gmail.com with ESMTPSA id
+	f141sm1623522lff.71.2019.03.12.08.28.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 12 Mar 2019 08:28:20 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Mar 2019 16:28:12 +0100
+Message-Id: <1552404492-13477-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH] librcf: bump to 3.0.251
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,217 +56,528 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 09:47:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 12 Mar 2019 15:28:22 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Ming Liu <liu.ming50@gmail.com>
 
-Remove one backported patch.
+Drop obsolete patches.
 
-Add openssl to Depends.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- .../librelp/0001-testbench-improvements.patch | 164 ------------------
- .../{librelp_1.2.18.bb => librelp_1.4.0.bb}   |   5 +-
- 2 files changed, 2 insertions(+), 167 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch
- rename meta-oe/recipes-extended/rsyslog/{librelp_1.2.18.bb => librelp_1.4.0.bb} (66%)
+ .../librcf/librcf/0001-Add-CMake-build-files.patch | 135 +++++----------------
+ .../librcf/0001-Check-for-__powerpc__-define.patch |  28 -----
+ ...lientStub.hpp-fix-a-clang-compiling-issue.patch |  35 ------
+ ...yptionFilter.cpp-replace-old-state-define.patch |  38 ++++++
+ .../librcf/librcf/aarch64-support.patch            |  13 --
+ .../librcf/librcf/mips-support.patch               |  19 ---
+ meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb  |  53 --------
+ meta-oe/recipes-devtools/librcf/librcf_3.0.251.bb  |  40 ++++++
+ 8 files changed, 108 insertions(+), 253 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
+ delete mode 100644 meta-oe/recipes-devtools/librcf/librcf/0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch
+ create mode 100644 meta-oe/recipes-devtools/librcf/librcf/0001-OpenSslEncryptionFilter.cpp-replace-old-state-define.patch
+ delete mode 100644 meta-oe/recipes-devtools/librcf/librcf/aarch64-support.patch
+ delete mode 100644 meta-oe/recipes-devtools/librcf/librcf/mips-support.patch
+ delete mode 100644 meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+ create mode 100644 meta-oe/recipes-devtools/librcf/librcf_3.0.251.bb
 
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch
-deleted file mode 100644
-index 6b60bd748..000000000
---- a/meta-oe/recipes-extended/rsyslog/librelp/0001-testbench-improvements.patch
-+++ /dev/null
-@@ -1,164 +0,0 @@
--From 1e6be18ed243dc562ff2976b46850bfd2e576664 Mon Sep 17 00:00:00 2001
--From: Rainer Gerhards <rgerhards@adiscon.com>
--Date: Thu, 15 Nov 2018 12:23:41 +0100
--Subject: [PATCH] testbench improvements
--
--Most importantly, the test receiver process is now terminated
--gracefully. Without that, gcov can never pick up correct
--coverage data.
--
--Upstream-Status: Backport[https://github.com/rsyslog/librelp/commit/1e6be18ed243dc562ff2976b46850bfd2e576664]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- src/tcp.c                       |  4 ++--
-- tests/Makefile.am               |  3 ++-
-- tests/receive.c                 | 29 +++++++++++++++++++++++++++--
-- tests/selftest_receive_usage.sh |  5 +++++
-- tests/test-framework.sh         |  4 ++--
-- 5 files changed, 38 insertions(+), 7 deletions(-)
-- create mode 100755 tests/selftest_receive_usage.sh
--
--diff --git a/src/tcp.c b/src/tcp.c
--index f10a720..0ea92ea 100644
----- a/src/tcp.c
--+++ b/src/tcp.c
--@@ -3027,7 +3027,7 @@ relpTcpConnect(relpTcp_t *const pThis,
-- 	struct addrinfo hints;
-- 	struct addrinfo *reslocal = NULL;
-- 	struct pollfd pfd;
---	char errmsg[1024];
--+	char errmsg[1424];
-- 	int so_error;
-- 	socklen_t len = sizeof so_error;
-- 	int r;
--@@ -3067,7 +3067,7 @@ relpTcpConnect(relpTcp_t *const pThis,
-- 	}
-- 	if(connect(pThis->sock, res->ai_addr, res->ai_addrlen) == -1) {
-- 		if(errno != EINPROGRESS) {
---			char errStr[1024];
--+			char errStr[1200];
-- 			_relpEngine_strerror_r(errno, errStr, sizeof(errStr));
-- 			snprintf(errmsg, sizeof(errmsg), "error connecting: '%s'", errStr);
-- 			callOnErr(pThis, errmsg, RELP_RET_IO_ERR);
--diff --git a/tests/Makefile.am b/tests/Makefile.am
--index 64deb19..51fd78f 100644
----- a/tests/Makefile.am
--+++ b/tests/Makefile.am
--@@ -25,7 +25,8 @@ TESTS=  basic.sh \
-- 	long-msg.sh \
-- 	oversize-msg-abort-errmsg.sh \
-- 	oversize-msg-accept-errmsg.sh \
---	truncate-oversize-msg.sh
--+	truncate-oversize-msg.sh \
--+	selftest_receive_usage.sh
-- # OpenSSL tests only!
-- if ENABLE_TLS_OPENSSL
-- TESTS += tls-wrong-permittedPeer.sh \
--diff --git a/tests/receive.c b/tests/receive.c
--index e56e59c..4b69c99 100644
----- a/tests/receive.c
--+++ b/tests/receive.c
--@@ -1,6 +1,7 @@
-- /* A minimal RELP receiver using librelp
--  *
--  * Copyright 2014 Mathias Nyman
--+ * Copyright 2018 Adiscon GmbH
--  *
--  * Licensed under the Apache License, Version 2.0 (the "License");
--  * you may not use this file except in compliance with the License.
--@@ -24,6 +25,7 @@
-- #include <string.h>
-- #include <limits.h>
-- #include <errno.h>
--+#include <signal.h>
-- #include "librelp.h"
-- 
-- #define TRY(f) if(f != RELP_RET_OK) { fprintf(stderr, "receive.c: FAILURE in '%s'\n", #f); ret = 1; goto done; }
--@@ -31,6 +33,24 @@
-- static FILE *errFile = NULL;
-- static relpEngine_t *pRelpEngine;
-- 
--+static void
--+hdlr_enable(int sig, void (*hdlr)())
--+{
--+	struct sigaction sigAct;
--+	memset(&sigAct, 0, sizeof (sigAct));
--+	sigemptyset(&sigAct.sa_mask);
--+	sigAct.sa_handler = hdlr;
--+	sigaction(sig, &sigAct, NULL);
--+}
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
+index 560c3a6..b841f6b 100644
+--- a/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
++++ b/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
+@@ -1,28 +1,28 @@
+-From 613297214d78ee10111e74e90e025166ebbcad9f Mon Sep 17 00:00:00 2001
+-From: Peter Liu <peter.x.liu@external.atlascopco.com>
+-Date: Sun, 5 Mar 2017 16:15:40 +0100
++From b377a914a8771e89eb6eaad939f1088f45b68244 Mon Sep 17 00:00:00 2001
++From: Ming Liu <liu.ming50@gmail.com>
++Date: Tue, 12 Mar 2019 15:00:17 +0100
+ Subject: [PATCH] Add CMake build files
+ 
+-Upstream-Status: Pending
++Upstream-Status: Inappropriate [specific to oe setup]
+ 
+-Signed-off-by: Peter Liu <peter.x.liu@external.atlascopco.com>
++Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+ ---
+- CMakeLists.txt     | 147 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+- FindLibRcf.cmake   |  63 +++++++++++++++++++++++
+- VERSION.cmake      |  21 ++++++++
+- src/CMakeLists.txt |  25 +++++++++
+- 4 files changed, 256 insertions(+)
++ CMakeLists.txt     | 72 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ FindLibRcf.cmake   | 63 +++++++++++++++++++++++++++++++++++++++++++++++
++ VERSION.cmake      | 21 ++++++++++++++++
++ src/CMakeLists.txt | 25 +++++++++++++++++++
++ 4 files changed, 181 insertions(+)
+  create mode 100644 CMakeLists.txt
+  create mode 100644 FindLibRcf.cmake
+  create mode 100644 VERSION.cmake
+- create mode 100755 src/CMakeLists.txt
++ create mode 100644 src/CMakeLists.txt
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+ new file mode 100644
+-index 0000000..f6e24be
++index 0000000..16e1765
+ --- /dev/null
+ +++ b/CMakeLists.txt
+-@@ -0,0 +1,147 @@
++@@ -0,0 +1,72 @@
+ +PROJECT (librcf)
+ +
+ +CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+@@ -31,22 +31,14 @@ index 0000000..f6e24be
+ +# OPTION                                                           #
+ +####################################################################
+ +OPTION (LIBRCF_USE_OPENSSL "Build with OpenSSL support?" OFF)
+-+OPTION (LIBRCF_OPENSSL_STATIC "Enable static linking to OpenSSL?" OFF)
+ +OPTION (LIBRCF_USE_ZLIB "Build with zlib support?" OFF)
+-+OPTION (LIBRCF_ZLIB_STATIC "Enable static linking to zlib?" OFF)
+++OPTION (LIBRCF_USE_FILETRANSFER "Build with filetransfer support?" OFF)
+ +OPTION (LIBRCF_USE_SF_SERIALIZATION "Build with SF serialization support?" ON)
+-+OPTION (LIBRCF_USE_BOOST_SERIALIZATION "Build with Boost.Serialization support?" OFF)
+-+OPTION (LIBRCF_USE_BOOST_FILESYSTEM "Build with Boost.Filesystem support (required for file transfer support)?" OFF)
+-+OPTION (LIBRCF_USE_BOOST_ASIO "Build with Boost asio support?" ON)
+ +OPTION (LIBRCF_USE_PROTOBUF "Build with Protocol Buffer support?" OFF)
+-+OPTION (LIBRCF_USE_JSON "Build with JSON Spirit (required for JSON-RPC support)?" OFF)
+ +OPTION (LIBRCF_USE_IPV6 "Build with IPv6 support?" OFF)
+ +OPTION (LIBRCF_USE_CUSTOM_ALLOCATOR "Build with custom allocator support?" OFF)
+-+OPTION (LIBRCF_BUILD_DLL "Build a DLL exporting RCF?" OFF)
+-+OPTION (LIBRCF_AUTO_INIT_DEINIT "Enable automatic RCF initialization and deinitialization?" OFF)
+ +OPTION (LIBRCF_BUILD_STATIC_LIBS "Build the static library?" ON)
+ +OPTION (LIBRCF_BUILD_SHARED_LIBS "Build the shared library?" ON)
+-+OPTION (LIBRCF_BUILD_DEMOS "Build demo programs?" ON)
+ +
+ +####################################################################
+ +# CONFIGURATION                                                    #
+@@ -61,114 +53,47 @@ index 0000000..f6e24be
+ +    FIND_PACKAGE (OpenSSL REQUIRED)
+ +  ENDIF (NOT OPENSSL_FOUND)
+ +  INCLUDE_DIRECTORIES (${OPENSSL_INCLUDE_DIR})
+-+  ADD_DEFINITIONS (-DRCF_USE_OPENSSL)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_OPENSSL)
+ +ENDIF (LIBRCF_USE_OPENSSL)
+ +
+-+IF (LIBRCF_OPENSSL_STATIC)
+-+  LIST (APPEND LIBRCF_LIBRARIES ${OPENSSL_LIBRARIES})
+-+  ADD_DEFINITIONS (-DRCF_OPENSSL_STATIC)
+-+ENDIF (LIBRCF_OPENSSL_STATIC)
 -+
--+void
--+terminate(int sig)
--+{
--+	fprintf(stderr, "terminating on signal %d\n", sig);
--+	relpEngineSetStop(pRelpEngine);
--+}
+ +IF (LIBRCF_USE_ZLIB)
+ +  IF (NOT ZLIB_FOUND)
+ +    FIND_PACKAGE (ZLIB REQUIRED)
+ +  ENDIF (NOT ZLIB_FOUND)
+ +  INCLUDE_DIRECTORIES (${ZLIB_INCLUDE_DIR})
+-+  ADD_DEFINITIONS (-DRCF_USE_ZLIB)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_ZLIB)
+ +ENDIF (LIBRCF_USE_ZLIB)
+ +
+-+IF (LIBRCF_ZLIB_STATIC)
+-+  LIST (APPEND LIBRCF_LIBRARIES ${ZLIB_LIBRARIES})
+-+  ADD_DEFINITIONS (-DRCF_ZLIB_STATIC)
+-+ENDIF (LIBRCF_ZLIB_STATIC)
+++IF (LIBRCF_USE_FILETRANSFER)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_FILETRANSFER)
+++ENDIF (LIBRCF_USE_FILETRANSFER)
+ +
+ +IF (LIBRCF_USE_SF_SERIALIZATION)
+-+  IF (NOT Boost_SYSTEM_FOUND)
+-+    FIND_PACKAGE (Boost REQUIRED COMPONENTS system)
+-+  ENDIF (NOT Boost_SYSTEM_FOUND)
+-+  INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIR})
+-+  LIST (APPEND LIBRCF_LIBRARIES ${Boost_SYSTEM_LIBRARY})
+-+  ADD_DEFINITIONS (-DRCF_USE_SF_SERIALIZATION)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_SF)
+ +ENDIF (LIBRCF_USE_SF_SERIALIZATION)
+ +
+-+IF (LIBRCF_USE_BOOST_SERIALIZATION)
+-+  IF (NOT Boost_SERIALIZATION_FOUND)
+-+    FIND_PACKAGE (Boost REQUIRED COMPONENTS serialization)
+-+  ENDIF (NOT Boost_SERIALIZATION_FOUND)
+-+  INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIR})
+-+  LIST (APPEND LIBRCF_LIBRARIES ${Boost_SERIALIZATION_LIBRARY})
+-+  ADD_DEFINITIONS (-DRCF_USE_BOOST_SERIALIZATION)
+-+ENDIF (LIBRCF_USE_BOOST_SERIALIZATION)
 -+
+-+IF (LIBRCF_USE_BOOST_FILESYSTEM)
+-+  IF (NOT Boost_FILESYSTEM_FOUND)
+-+    FIND_PACKAGE (Boost REQUIRED COMPONENTS filesystem system)
+-+  ENDIF (NOT Boost_FILESYSTEM_FOUND)
+-+  INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIR})
+-+  LIST (APPEND LIBRCF_LIBRARIES ${Boost_FILESYSTEM_LIBRARY})
+-+  LIST (APPEND LIBRCF_LIBRARIES ${Boost_SYSTEM_LIBRARY})
+-+  ADD_DEFINITIONS (-DRCF_USE_BOOST_FILESYSTEM)
+-+ENDIF (LIBRCF_USE_BOOST_FILESYSTEM)
 -+
-- static void __attribute__((format(printf, 1, 2)))
-- dbgprintf(char *fmt, ...)
-- {
--@@ -237,6 +257,8 @@ int main(int argc, char *argv[]) {
-- 		}
-- 	}
-- 
--+	hdlr_enable(SIGTERM, terminate);
+-+IF (LIBRCF_USE_BOOST_ASIO)
+-+  IF (NOT Boost_FOUND)
+-+    FIND_PACKAGE (Boost REQUIRED)
+-+  ENDIF (NOT Boost_FOUND)
+-+  INCLUDE_DIRECTORIES (${Boost_INCLUDE_DIR})
+-+  ADD_DEFINITIONS (-DRCF_USE_BOOST_ASIO)
+-+ENDIF (LIBRCF_USE_BOOST_ASIO)
 -+
-- 	TRY(relpEngineConstruct(&pRelpEngine));
-- 	TRY(relpEngineSetDbgprint(pRelpEngine, verbose ? dbgprintf : NULL));
-- 	TRY(relpEngineSetEnableCmd(pRelpEngine, (unsigned char*) "syslog", eRelpCmdState_Required));
--@@ -294,11 +316,14 @@ int main(int argc, char *argv[]) {
-- 		fclose(fp);
-- 	}
-- 
---	TRY(relpEngineRun(pRelpEngine)); /* Abort with ctrl-c */
--+	TRY(relpEngineRun(pRelpEngine)); /* Abort via SIGHUP */
-- 
---	TRY(relpEngineSetStop(pRelpEngine));
-- 	TRY(relpEngineDestruct(&pRelpEngine));
-- 
--+	if(pidFileName != NULL) {
--+		unlink(pidFileName);
--+	}
+ +IF (LIBRCF_USE_PROTOBUF)
+ +  IF(NOT Protobuf_FOUND)
+ +    FIND_PACKAGE (Protobuf REQUIRED)
+ +  ENDIF (NOT Protobuf_FOUND)
+ +  INCLUDE_DIRECTORIES (${Protobuf_INCLUDE_DIR})
+ +  LIST (APPEND LIBRCF_LIBRARIES ${Protobuf_LIBRARIES})
+-+  ADD_DEFINITIONS (-DRCF_USE_PROTOBUF)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_PROTOBUF)
+ +ENDIF (LIBRCF_USE_PROTOBUF)
+ +
+-+IF (LIBRCF_USE_JSON)
+-+  IF (NOT LibJsonSpirit_FOUND)
+-+    FIND_PACKAGE (LibJsonSpirit REQUIRED)
+-+  ENDIF (NOT LibJsonSpirit_FOUND)
+-+  INCLUDE_DIRECTORIES (${LibJsonSpirit_INCLUDE_DIR})
+-+  LIST (APPEND LIBRCF_LIBRARIES ${LibJsonSpirit_LIBRARIES})
+-+  ADD_DEFINITIONS (-DRCF_USE_JSON)
+-+ENDIF (LIBRCF_USE_JSON)
 -+
-- done:
-- 	return ret;
-- }
--diff --git a/tests/selftest_receive_usage.sh b/tests/selftest_receive_usage.sh
+ +IF (LIBRCF_USE_IPV6)
+-+  ADD_DEFINITIONS (-DRCF_USE_IPV6)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_IPV6)
+ +ENDIF (LIBRCF_USE_IPV6)
+ +
+ +IF (LIBRCF_USE_CUSTOM_ALLOCATOR)
+-+  ADD_DEFINITIONS (-DRCF_USE_CUSTOM_ALLOCATOR)
+++  ADD_DEFINITIONS (-DRCF_FEATURE_CUSTOM_ALLOCATOR)
+ +ENDIF (LIBRCF_USE_CUSTOM_ALLOCATOR)
+ +
+-+IF (LIBRCF_BUILD_DLL)
+-+  ADD_DEFINITIONS (-DRCF_BUILD_DLL)
+-+ENDIF (LIBRCF_BUILD_DLL)
+-+
+-+IF (LIBRCF_AUTO_INIT_DEINIT)
+-+  ADD_DEFINITIONS (-DRCF_AUTO_INIT_DEINIT)
+-+ENDIF (LIBRCF_AUTO_INIT_DEINIT)
+-+
+ +####################################################################
+ +# SUBDIRECTORY                                                     #
+ +####################################################################
+ +ADD_SUBDIRECTORY (src)
+ +
+-+IF (LIBRCF_BUILD_DEMOS)
+-+  # Server
+-+  ADD_EXECUTABLE (RcfServer demo/Server.cpp)
+-+  TARGET_LINK_LIBRARIES (RcfServer rcf ${LIBRCF_LIBRARIES})
+-+  INSTALL (TARGETS RcfServer DESTINATION ${CMAKE_INSTALL_BINDIR})
+-+
+-+  # Client
+-+  ADD_EXECUTABLE (RcfClient demo/Client.cpp)
+-+  TARGET_LINK_LIBRARIES (RcfClient rcf ${LIBRCF_LIBRARIES})
+-+  INSTALL (TARGETS RcfClient DESTINATION ${CMAKE_INSTALL_BINDIR})
+-+ENDIF (LIBRCF_BUILD_DEMOS)
+-+
+ +INSTALL (FILES ${CMAKE_SOURCE_DIR}/FindLibRcf.cmake DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/cmake/Modules)
+ diff --git a/FindLibRcf.cmake b/FindLibRcf.cmake
+ new file mode 100644
+@@ -241,7 +166,7 @@ index 0000000..9d7d8cd
+ +ENDIF()
+ diff --git a/VERSION.cmake b/VERSION.cmake
+ new file mode 100644
+-index 0000000..8b4bcdc
++index 0000000..5313a81
+ --- /dev/null
+ +++ b/VERSION.cmake
+ @@ -0,0 +1,21 @@
+@@ -263,12 +188,12 @@ index 0000000..8b4bcdc
+ +# - The package VERSION will be MAJOR.MINOR.PATCH.
+ +#
+ +
+-+SET (LIBRCF_SOVERSION_MAJOR "2")
+-+SET (LIBRCF_SOVERSION_MINOR "2")
+-+SET (LIBRCF_SOVERSION_PATCH "0")
+++SET (LIBRCF_SOVERSION_MAJOR "3")
+++SET (LIBRCF_SOVERSION_MINOR "0")
+++SET (LIBRCF_SOVERSION_PATCH "251")
+ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 -new file mode 100755
--index 0000000..c4ac8bb
----- /dev/null
--+++ b/tests/selftest_receive_usage.sh
--@@ -0,0 +1,5 @@
--+#!/bin/bash
--+. ${srcdir:=$(pwd)}/test-framework.sh
--+./receive &>librelp.out.log
--+check_output "Port is missing"
--+terminate
--diff --git a/tests/test-framework.sh b/tests/test-framework.sh
--index 6abdcf2..d4ab3ec 100644
----- a/tests/test-framework.sh
--+++ b/tests/test-framework.sh
--@@ -32,7 +32,7 @@ function wait_process_startup_via_pidfile() {
-- # start receiver WITH valgrind, add receiver command line parameters after function name
-- function startup_receiver_valgrind() {
-- 	printf 'Starting Receiver...\n'
---	$valgrind ./receive -p $TESTPORT -F receive.pid $OPT_VERBOSE $* 1>>librelp.out.log &
--+	$valgrind ./receive -p $TESTPORT -F receive.pid $OPT_VERBOSE $* 1>librelp.out.log &
-- 	export RECEIVE_PID=$!
-- 	printf "got receive pid $RECEIVE_PID\n"
-- 	wait_process_startup_via_pidfile receive.pid
--@@ -43,7 +43,7 @@ function startup_receiver_valgrind() {
-- # start receiver, add receiver command line parameters after function name
-- function startup_receiver() {
-- 	printf 'Starting Receiver...\n'
---	./receive -p $TESTPORT -F receive.pid $OPT_VERBOSE $* 1>>librelp.out.log &
--+	./receive -p $TESTPORT -F receive.pid $OPT_VERBOSE $* 1>librelp.out.log &
-- 	export RECEIVE_PID=$!
-- 	printf "got receive pid $RECEIVE_PID\n"
-- 	wait_process_startup_via_pidfile receive.pid
---- 
--2.17.1
+-index 0000000..c227901
++new file mode 100644
++index 0000000..898e9a6
+ --- /dev/null
+ +++ b/src/CMakeLists.txt
+ @@ -0,0 +1,25 @@
+@@ -298,5 +223,5 @@ index 0000000..c227901
+ +  INSTALL (TARGETS rcf_static LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ +ENDIF (LIBRCF_BUILD_STATIC_LIBS AND LIBRCF_BUILD_SHARED_LIBS)
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
+deleted file mode 100644
+index d91accf..0000000
+--- a/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From ac7316679e30f7013604b19aa0949a0744e91d2f Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 1 Jul 2017 13:06:30 -0700
+-Subject: [PATCH] Check for __powerpc__ define
 -
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-similarity index 66%
-rename from meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb
-rename to meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-index e4838fa5b..9e57dd520 100644
---- a/meta-oe/recipes-extended/rsyslog/librelp_1.2.18.bb
-+++ b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-@@ -4,13 +4,12 @@ HOMEPAGE = "https://github.com/rsyslog/librelp"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
- 
--DEPENDS = "gmp nettle libidn zlib gnutls"
-+DEPENDS = "gmp nettle libidn zlib gnutls openssl"
- 
- SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
--           file://0001-testbench-improvements.patch \
- "
- 
--SRCREV = "4b6a81061bccf68cba6fddd27f99fb5dc0d0c3a3"
-+SRCREV = "e96443dda3c080fa991decec26bc4ac98d24b9a2"
- 
- S = "${WORKDIR}/git"
- 
+-Also check for gcc's internal define for ppc platform
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/RCF/ByteOrdering.cpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/RCF/ByteOrdering.cpp b/src/RCF/ByteOrdering.cpp
+-index 278ca80..9f9c446 100755
+---- a/src/RCF/ByteOrdering.cpp
+-+++ b/src/RCF/ByteOrdering.cpp
+-@@ -36,7 +36,7 @@ namespace RCF {
+- 
+-     const ByteOrder MachineByteOrder = BigEndian;
+- 
+--#elif defined( __ppc__ )
+-+#elif defined( __ppc__ ) || defined( __powerpc__ )
+- 
+-     const ByteOrder MachineByteOrder = BigEndian;
+- 
+--- 
+-2.13.2
+-
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch
+deleted file mode 100644
+index e949dee..0000000
+--- a/meta-oe/recipes-devtools/librcf/librcf/0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From d78851b6f87f2472f041102d7b3726ffc009bfad Mon Sep 17 00:00:00 2001
+-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+-Date: Tue, 6 Jun 2017 05:54:20 +0200
+-Subject: [PATCH] ClientStub.hpp: fix a clang compiling issue
+-
+-A error was observed with clang compiler, as follows:
+-| src/RCF/RCF.cpp:49:
+-| src/RCF/ClientStub.cpp:28:
+-| include/RCF/Future.hpp:49:26: error: 'enrol' is a private member of 'RCF::ClientStub'
+-
+-it can be fixed by declaring Future as a friend class of ClientStub.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+----
+- include/RCF/ClientStub.hpp | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/include/RCF/ClientStub.hpp b/include/RCF/ClientStub.hpp
+-index 9882cf4..8465625 100755
+---- a/include/RCF/ClientStub.hpp
+-+++ b/include/RCF/ClientStub.hpp
+-@@ -372,6 +372,8 @@ namespace RCF {
+- 
+-     private:
+- 
+-+        template<typename U>
+-+        friend class Future;
+-         friend class FutureImplBase;
+- 
+-         template<
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-OpenSslEncryptionFilter.cpp-replace-old-state-define.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-OpenSslEncryptionFilter.cpp-replace-old-state-define.patch
+new file mode 100644
+index 0000000..4437436
+--- /dev/null
++++ b/meta-oe/recipes-devtools/librcf/librcf/0001-OpenSslEncryptionFilter.cpp-replace-old-state-define.patch
+@@ -0,0 +1,38 @@
++From 82a86be2f7f273f5eedc376453f814cae8a907c7 Mon Sep 17 00:00:00 2001
++From: Ming Liu <liu.ming50@gmail.com>
++Date: Tue, 12 Mar 2019 14:45:46 +0100
++Subject: [PATCH] OpenSslEncryptionFilter.cpp: replace old state defines with
++ new ones
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Ming Liu <liu.ming50@gmail.com>
++---
++ src/RCF/OpenSslEncryptionFilter.cpp | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/RCF/OpenSslEncryptionFilter.cpp b/src/RCF/OpenSslEncryptionFilter.cpp
++index 0b60f0d..5c69b5d 100755
++--- a/src/RCF/OpenSslEncryptionFilter.cpp
+++++ b/src/RCF/OpenSslEncryptionFilter.cpp
++@@ -939,7 +939,7 @@ namespace RCF {
++         RCF_ASSERT(mPreState == Reading || mPreState == Writing);
++ 
++         int sslState = SSL_get_state(mSsl.get());
++-        if (!mHandshakeOk && sslState == SSL_ST_OK)
+++        if (!mHandshakeOk && sslState == TLS_ST_OK)
++         {
++             mHandshakeOk = true;
++ 
++@@ -980,7 +980,7 @@ namespace RCF {
++                 }
++             }
++         }
++-        else if (mHandshakeOk && sslState != SSL_ST_OK)
+++        else if (mHandshakeOk && sslState != TLS_ST_OK)
++         {
++             mHandshakeOk = false;
++         }
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/aarch64-support.patch b/meta-oe/recipes-devtools/librcf/librcf/aarch64-support.patch
+deleted file mode 100644
+index e08efb9..0000000
+--- a/meta-oe/recipes-devtools/librcf/librcf/aarch64-support.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: RCF-2.2.0.0/src/RCF/ByteOrdering.cpp
+-===================================================================
+---- RCF-2.2.0.0.orig/src/RCF/ByteOrdering.cpp
+-+++ RCF-2.2.0.0/src/RCF/ByteOrdering.cpp
+-@@ -60,7 +60,7 @@ namespace RCF {
+- 
+-     const ByteOrder MachineByteOrder = LittleEndian;
+- 
+--#elif defined(__arm__)
+-+#elif defined(__arm__) || defined(__aarch64__)
+- 
+-     const ByteOrder MachineByteOrder = LittleEndian;
+- 
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/mips-support.patch b/meta-oe/recipes-devtools/librcf/librcf/mips-support.patch
+deleted file mode 100644
+index 4a327f7..0000000
+--- a/meta-oe/recipes-devtools/librcf/librcf/mips-support.patch
++++ /dev/null
+@@ -1,19 +0,0 @@
+-Index: RCF-2.2.0.0/src/RCF/ByteOrdering.cpp
+-===================================================================
+---- RCF-2.2.0.0.orig/src/RCF/ByteOrdering.cpp
+-+++ RCF-2.2.0.0/src/RCF/ByteOrdering.cpp
+-@@ -64,6 +64,14 @@ namespace RCF {
+- 
+-     const ByteOrder MachineByteOrder = LittleEndian;
+- 
+-+#elif defined(__mipsel__) || defined(__mips64el__)
+-+
+-+    const ByteOrder MachineByteOrder = LittleEndian;
+-+
+-+#elif defined( __mips__ ) || defined(__mips64__)
+-+
+-+    const ByteOrder MachineByteOrder = BigEndian;
+-+
+- #elif defined(__bfin__)
+- 
+-     const ByteOrder MachineByteOrder = LittleEndian;
+diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+deleted file mode 100644
+index dcd47a4..0000000
+--- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
++++ /dev/null
+@@ -1,53 +0,0 @@
+-SUMMARY = "RCF (Remote Call Framework) is a cross-platform interprocess communication framework for C++"
+-DESCRIPTION = "Unlike other communication frameworks, RCF doesn't use a separate \
+-IDL (Interface Definition Language). RCF interfaces are defined directly in C++, \
+-and serialization for user-defined data types likewise is implemented in C++. \
+-Instead of a separate IDL compiler tool, RCF uses the C++ compiler to generate \
+-client and server stubs."
+-HOMEPAGE = "http://www.deltavsoft.com/"
+-SECTION = "libs"
+-PRIORITY = "optional"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://license.txt;md5=7586a312b9e978f9d6fac9a5780d1f84"
+-
+-SRC_URI = "http://www.deltavsoft.com/downloads/RCF-${PV}.tar.gz \
+-           file://0001-Add-CMake-build-files.patch \
+-           file://aarch64-support.patch \
+-           file://0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch \
+-           file://mips-support.patch \
+-           file://0001-Check-for-__powerpc__-define.patch \
+-           "
+-
+-SRC_URI[md5sum] = "7ecb3c73f7eb66dba8790b659374f690"
+-SRC_URI[sha256sum] = "bbfcc88de502c39604878c395f516b03fff4eac63eb4f7f44c07d433839712dd"
+-
+-S = "${WORKDIR}/RCF-${PV}"
+-
+-inherit cmake dos2unix
+-
+-PACKAGECONFIG ?= "zlib openssl sf-serialization boost-filesystem boost-asio protobuf json dll static shared demos"
+-PACKAGECONFIG[zlib] = "-DLIBRCF_USE_ZLIB=ON,-DLIBRCF_USE_ZLIB=OFF,zlib,zlib"
+-PACKAGECONFIG[zlib-static] = "-DLIBRCF_USE_ZLIB=ON -DLIBRCF_ZLIB_STATIC=ON,-DLIBRCF_ZLIB_STATIC=OFF,zlib,"
+-PACKAGECONFIG[openssl] = "-DLIBRCF_USE_OPENSSL=ON,-DLIBRCF_USE_OPENSSL=OFF,openssl,libssl libcrypto"
+-PACKAGECONFIG[openssl-static] = "-DLIBRCF_USE_OPENSSL=ON -DLIBRCF_OPENSSL_STATIC=ON,-DLIBRCF_OPENSSL_STATIC=OFF,openssl,"
+-PACKAGECONFIG[sf-serialization] = "-DLIBRCF_USE_SF_SERIALIZATION=ON,-DLIBRCF_USE_SF_SERIALIZATION=OFF,boost,"
+-PACKAGECONFIG[boost-serialization] = "-DLIBRCF_USE_BOOST_SERIALIZATION=ON,-DLIBRCF_USE_BOOST_SERIALIZATION=OFF,boost,"
+-PACKAGECONFIG[boost-filesystem] = "-DLIBRCF_USE_BOOST_FILESYSTEM=ON,-DLIBRCF_USE_BOOST_FILESYSTEM=OFF,boost,"
+-PACKAGECONFIG[boost-asio] = "-DLIBRCF_USE_BOOST_ASIO=ON,-DLIBRCF_USE_BOOST_ASIO=OFF,boost,"
+-PACKAGECONFIG[protobuf] = "-DLIBRCF_USE_PROTOBUF=ON,-DLIBRCF_USE_PROTOBUF=OFF,protobuf,protobuf"
+-PACKAGECONFIG[json] = "-DLIBRCF_USE_JSON=ON,-DLIBRCF_USE_JSON=OFF,json-spirit,json-spirit"
+-PACKAGECONFIG[ipv6] = "-DLIBRCF_USE_IPV6=ON,-DLIBRCF_USE_IPV6=OFF,"
+-PACKAGECONFIG[custom-allocator] = "-DLIBRCF_USE_CUSTOM_ALLOCATOR=ON,-DLIBRCF_USE_CUSTOM_ALLOCATOR=OFF,"
+-PACKAGECONFIG[dll] = "-DLIBRCF_BUILD_DLL=ON,-DLIBRCF_BUILD_DLL=OFF,"
+-PACKAGECONFIG[auto-init-deinit] = "-DLIBRCF_AUTO_INIT_DEINIT=ON,-DLIBRCF_AUTO_INIT_DEINIT=OFF,"
+-PACKAGECONFIG[static] = "-DLIBRCF_BUILD_STATIC_LIBS=ON,-DLIBRCF_BUILD_STATIC_LIBS=OFF,"
+-PACKAGECONFIG[shared] = "-DLIBRCF_BUILD_SHARED_LIBS=ON,-DLIBRCF_BUILD_SHARED_LIBS=OFF,"
+-PACKAGECONFIG[demos] = "-DLIBRCF_BUILD_DEMOS=ON,-DLIBRCF_BUILD_DEMOS=OFF,"
+-
+-PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'demos', '${PN}-demos', '', d)}"
+-
+-FILES_${PN}-demos = "${bindir}/*"
+-
+-BBCLASSEXTEND = "nativesdk"
+-
+-PNBLACKLIST[librcf] = " error: invalid use of incomplete type 'RCF::AsioIoService {aka class boost::asio::io_service}; among others?" 
+diff --git a/meta-oe/recipes-devtools/librcf/librcf_3.0.251.bb b/meta-oe/recipes-devtools/librcf/librcf_3.0.251.bb
+new file mode 100644
+index 0000000..d34e8e2
+--- /dev/null
++++ b/meta-oe/recipes-devtools/librcf/librcf_3.0.251.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "RCF (Remote Call Framework) is a cross-platform interprocess communication framework for C++"
++DESCRIPTION = "Unlike other communication frameworks, RCF doesn't use a separate \
++IDL (Interface Definition Language). RCF interfaces are defined directly in C++, \
++and serialization for user-defined data types likewise is implemented in C++. \
++Instead of a separate IDL compiler tool, RCF uses the C++ compiler to generate \
++client and server stubs."
++HOMEPAGE = "http://www.deltavsoft.com/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57c8b244761965bfff3b2a8f3eeefde3"
++
++SRC_URI = "http://www.deltavsoft.com/downloads/RCF-${PV}.tar.gz \
++           file://0001-Add-CMake-build-files.patch \
++           file://0001-OpenSslEncryptionFilter.cpp-replace-old-state-define.patch \
++           "
++
++SRC_URI[md5sum] = "9032c5ae9e26253d7cbc4ac77d0095a9"
++SRC_URI[sha256sum] = "419420f0fb9879b27477e818f0fe52597a4ea16cf9a33b7c284699e35d013e0e"
++
++S = "${WORKDIR}/RCF-${PV}"
++
++DEPENDS = "util-linux"
++
++inherit cmake dos2unix
++
++PACKAGECONFIG ?= "zlib openssl sf-serialization protobuf static shared ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
++PACKAGECONFIG[zlib] = "-DLIBRCF_USE_ZLIB=ON,-DLIBRCF_USE_ZLIB=OFF,zlib,zlib"
++PACKAGECONFIG[openssl] = "-DLIBRCF_USE_OPENSSL=ON,-DLIBRCF_USE_OPENSSL=OFF,openssl,libssl libcrypto"
++PACKAGECONFIG[filetransfer] = "-DLIBRCF_USE_FILETRANSFER=ON,-DLIBRCF_USE_FILETRANSFER=OFF,"
++PACKAGECONFIG[sf-serialization] = "-DLIBRCF_USE_SF_SERIALIZATION=ON,-DLIBRCF_USE_SF_SERIALIZATION=OFF,"
++PACKAGECONFIG[protobuf] = "-DLIBRCF_USE_PROTOBUF=ON,-DLIBRCF_USE_PROTOBUF=OFF,protobuf,protobuf"
++PACKAGECONFIG[ipv6] = "-DLIBRCF_USE_IPV6=ON,-DLIBRCF_USE_IPV6=OFF,"
++PACKAGECONFIG[custom-allocator] = "-DLIBRCF_USE_CUSTOM_ALLOCATOR=ON,-DLIBRCF_USE_CUSTOM_ALLOCATOR=OFF,"
++PACKAGECONFIG[static] = "-DLIBRCF_BUILD_STATIC_LIBS=ON,-DLIBRCF_BUILD_STATIC_LIBS=OFF,"
++PACKAGECONFIG[shared] = "-DLIBRCF_BUILD_SHARED_LIBS=ON,-DLIBRCF_BUILD_SHARED_LIBS=OFF,"
++
++FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibRcf.cmake"
++
++BBCLASSEXTEND = "nativesdk"
 -- 
-2.17.1
+2.7.4
 
 
