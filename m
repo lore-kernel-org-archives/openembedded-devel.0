@@ -1,40 +1,50 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
-	[209.85.208.44])
-	by mail.openembedded.org (Postfix) with ESMTP id CC2397C692
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+	[209.85.210.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 890B77C665
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 19:26:51 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id g19so3344962edp.2
+	Tue, 12 Mar 2019 21:01:54 +0000 (UTC)
+Received: by mail-pf1-f169.google.com with SMTP id v21so2685733pfm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 12:26:53 -0700 (PDT)
+	Tue, 12 Mar 2019 14:01:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=eEZMeA9++AhRtjGhTccQMQ1VWfElBmLmOaa+QpQoios=;
+	b=H+NJgfe13ErLp73P7gs7xlvqmLX9rslcp+XK+TEigLwPWhB1Xsed4Z1M3Xx4HVNQAn
+	bFKv5kv4K5wY3h8oMBLBwv5F/HZmbfanMwmneoH9vIRm/xlN3bTw3gCDEbzugylNSE9i
+	G3aboLlWjAifrPO3NtsmYf/wj9hLARDg1JFPyARHsu+6H/zGJyLI/mj5YPrFZiRJcykv
+	19JPUj0gEonXBCoq8LqDSbHuXGgVZO0zitb0WjY9hWCxEmLc1NCeQ+St5ZOXsTsYpVy4
+	o+VOHwXznVsFIn9aKznhg5jV62sN2RK1YZCXp7MP+oWy2mzINwY1B5whWa7BdMShUAap
+	mROg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XsYDY5UpfquyWICa7DAz2IuA5eu5ssNENPftI8NNJnE=;
-	b=pcbaj0f0QmNpsmTlcBaNjRuh+pOUGkI50G65Ahou62atB7+EReeW/4Y/t15wDOIW8v
-	toAtlI9R9dg0keNs4Kb6GuqbCb55VErmwtPZS4XVw2cg6lRRcxmRMW4RNtOkDSt+cPBc
-	Zyi6rS/mth7zhr1EJalS5NvKJZtPOq7Qo59nmuLvgrvnH4hMLCyFWBnqhuzntWju4BAt
-	QyAMEAc4/JdoGia/ts1v/f8OFqYAIGfT7k6RrXhLS3/ZA6XmRhsBce9DXuYusPoXdGzy
-	vOZOeAuUOUmy14gvYySVeF7edPQmaABVJ61DN6Y+baEaAyY2LiCQw7AqEDeFFQiZktvF
-	H+wA==
-X-Gm-Message-State: APjAAAXRuQ7QIyyc8ktPojZHBI1Mvxshw8Ut0xUgNpxTgqw9SKpgvpd6
-	k2vXOfQpzE7ZbgaPVAZLKIXp0/k=
-X-Google-Smtp-Source: APXvYqzB+EynuoTPXadLs57Yv4BoqxM5IsQsfpJ0oRjFxjUBLx1qCesk2SKJ8qoXeyez/gPZusRr4A==
-X-Received: by 2002:aa7:d80b:: with SMTP id v11mr4702404edq.6.1552418812103;
-	Tue, 12 Mar 2019 12:26:52 -0700 (PDT)
-Received: from bill-the-cat.local
-	(cpe-2606-A000-1401-8115-A588-1A0B-A41-7B0D.dyn6.twc.com.
-	[2606:a000:1401:8115:a588:1a0b:a41:7b0d])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=eEZMeA9++AhRtjGhTccQMQ1VWfElBmLmOaa+QpQoios=;
+	b=sNf56M6x6o9s/Cws6N6cHM/n9UqiP57EGPtZSfvvZuCq3/gCb1aKGHCOykkkf/gMLr
+	rT1R3uRc3cCYX75K7Mn0y1dJqDf0xxxtlRYeQYE7Va+kg8TdDnKYdQom2GsFrZNagC7W
+	1QvcGjDyMuR8+/iu7b+XfdxHFdtIajKaBoRm+c2ZwGIq+3Pp9fBS1wgWJ0Y5XO/EBPko
+	oshTYIOtL3XYfg9oHTUdZUQkjEtS4xI8VkmBzTPrinGb0Qbf6Zc099VhypT4yK1c5gJm
+	2WCTwxA972+GCLzxIJaBsaWeEknGToTLhcU//0gz/kiyV1is4s2568gcUm34aR5o5tGH
+	22PA==
+X-Gm-Message-State: APjAAAU93wODl4XZYVirMiTsa/InFGXEaHJZrXzrARggAUAb932oy2mZ
+	vDmALe2pX3xrqBe2wJWoYCoON9v8
+X-Google-Smtp-Source: APXvYqxBHhLxGjInjGqEBhZwYW8Jv7WckMEvtL+TJ7h128VZpK79N05ymfdK2kU16cjxAi7QboNLjQ==
+X-Received: by 2002:a62:b242:: with SMTP id x63mr40560989pfe.4.1552424514835; 
+	Tue, 12 Mar 2019 14:01:54 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
 	by smtp.gmail.com with ESMTPSA id
-	fy6sm3864739ejb.52.2019.03.12.12.26.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 12 Mar 2019 12:26:51 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+	17sm13284699pfj.80.2019.03.12.14.01.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Mar 2019 14:01:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Mar 2019 15:26:46 -0400
-Message-Id: <1552418806-20911-1-git-send-email-trini@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] netkit-rsh: don't build under musl
+Date: Tue, 12 Mar 2019 14:01:46 -0700
+Message-Id: <20190312210147.1560-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-python][PATCH 1/2] python-pyflame: Disable for risv architecture
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,31 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 19:26:52 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 21:01:54 -0000
+Content-Transfer-Encoding: 8bit
 
-Uses iruserok and ruserok which are GNU extensions available in glibc
-but not in musl
+Not yet supported
 
-Cc: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb | 2 ++
+ meta-python/recipes-devtools/python/python-pyflame.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-index 03dd96338a1a..d034cd8eda99 100644
---- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-@@ -39,6 +39,8 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
- PACKAGECONFIG[pam] = " , --without-pam, libpam, libpam"
- 
-+COMPATIBLE_HOST_libc-musl = 'null'
-+
- do_configure () {
-     ./configure --prefix=${prefix} --exec-prefix=${exec_prefix}
-     echo "INSTALLROOT=${D}" > MCONFIG
+diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/meta-python/recipes-devtools/python/python-pyflame.inc
+index b3b153c57b..d8d8349df1 100644
+--- a/meta-python/recipes-devtools/python/python-pyflame.inc
++++ b/meta-python/recipes-devtools/python/python-pyflame.inc
+@@ -14,3 +14,5 @@ COMPATIBLE_HOST_libc-musl_class-target = "null"
+ COMPATIBLE_HOST_mipsarch_class-target = "null"
+ COMPATIBLE_HOST_aarch64_class-target = "null"
+ COMPATIBLE_HOST_powerpc_class-target = "null"
++COMPATIBLE_HOST_riscv64_class-target = "null"
++COMPATIBLE_HOST_riscv32_class-target = "null"
 -- 
-2.7.4
+2.21.0
 
 
