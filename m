@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B4B927C6AD
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8941D7C629
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 21:01:55 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id s23so2676692pfe.13
+	Wed, 13 Mar 2019 04:38:02 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id u9so592115pgo.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2019 14:01:57 -0700 (PDT)
+	Tue, 12 Mar 2019 21:38:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=F96YnIb7RJWm4s3eg0OesDPFYrsiKrFtP3ZPy329kUU=;
-	b=Kmoh6KkXJHQgcmGubcdNKbWFz4xsNmcIJsIfBMYGvdSdO0kl85vaNbxlIHDm0zMnHt
-	ZeWNVtjmUlr2sB/G6yUT/kQP4UzX1+nGzoZJza2bPF1d6mRCInqsT4xhX0Z+O51Ujd2f
-	GESWXB7cNC4gEOqAqaaWE14gVuRCi8qpvOQ5IVuLirmCH0xnNBTX/Fcixdy4InCgGfWL
-	eu+P8pg4xaZNrKeV5mkRmuWZLOkunD+SuHyjSMaCx+ehCx1tZzNlBfkvc+X3fzBJ/X+C
-	a3mL8+296Zmo2FB9NY6tv2CQNW+437zA7n0u52io9RuEuujOelgFUTVO1sOhTZVJw9EA
-	NtBA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=J7lE/KNQmbUgVIP8xyYF7HW3MrC1HZPbY6ID3xDAE8g=;
+	b=MhgWkwo3B2Z/tnCjuNiVAl6w7fG7aP0mJzutSr9q3SbUZXYOrdo+M0VytuA5b4BszT
+	peHuQ7eBz75oZQf/V1i7IxlwxNVbsg7q4ZtKAy6S6hzXwTpcEcs3wn6UO1dZ/7dqg5nA
+	nz0iZDL9Z98VilHLJuTSTGooFX+ykWU5RvxpwgbNnqCXdPLFrEYFymxvjBx8XJ6S6cI+
+	WEY2jIznQxCTcSajnwjicv1VU4uu///apO4G/RbVthjqUSfriS20EM5VjrI+vGeyOVGo
+	zjSt32tI1HyYjR3k+01lUoLuxMzJ9HWXXA7OvjuXTpD8AbsH8wP1FBRBTyOpnVuUfcvE
+	MfBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=F96YnIb7RJWm4s3eg0OesDPFYrsiKrFtP3ZPy329kUU=;
-	b=W7BwMFf9uWPDKkQL2fUXnZPzZf+dfKa8nDpbbyz7WkVwVl9YNRcCSKveZxxs8RaJtG
-	0pcTFtAfsVN6/LpKbdWuOiFxJkB77kDp04v/ayw6+4c8sl6ea7d3HifdcSt8+YO+MLAL
-	Cwr5/IneAAC4Q2/l4DwbrKlEn7gIv5Rn0FBq3cmVRwKbdUSHaMMO9wlQrWkmi1zX4Kic
-	LY9AGaoalU44jLX07lijUb2nD1aM8UJ+pmjEQuv73tgbvo4vTPBlo64stjVgky5SPhPY
-	BECbHBDToXFVx8W/INJSx9N2vk8Asy47EyghUan3VewzeOjeirETsM/pdOsL0wx3YEUH
-	RQaA==
-X-Gm-Message-State: APjAAAVZ1NQdY/bT1bIMFCLI44KT6ZcUQK5fBPloQfTJ2fa/VhwTDdgG
-	fiH07pw4MJ14bopnD8evdN9OdpzH
-X-Google-Smtp-Source: APXvYqy/60RyClWk17dkHhLd9ds0fyVA7IzZx7uuRbANAPKRE12dgVGDKKv301I6puM4ZYUXLFajXA==
-X-Received: by 2002:a62:489d:: with SMTP id q29mr40266572pfi.119.1552424515753;
-	Tue, 12 Mar 2019 14:01:55 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=J7lE/KNQmbUgVIP8xyYF7HW3MrC1HZPbY6ID3xDAE8g=;
+	b=RRrpAGxAuUiuhwkI69oZ0q/mhPomy3L7vtZS2v0bhMZqaVvxze+Sa0zYhJnU8JSO0W
+	kuuyxi9voZ30eK8edYt0InDLvmEE4MQzXi4K6t8d3M/ggaGAsa0MS1KczdpsCXutYkbT
+	8mIU270qmHg1fn4pmA6yGZgoshCSuQBUUfiw+2sL5D9ZUU+hSfFf8HVcdTdqvyABGi9b
+	emvER9WwEmNcR43af8y4IaLXIfc0v2wRvjwYjolYh/+LyvXAPF9tha12VQuBuiw53DzQ
+	vaYgKF4FmXe/JPr92fDx5JVmFpg+wmyg/HiBUwbSrNNNjDpKkIT7R0RmLswyir7cz2+F
+	ZIdQ==
+X-Gm-Message-State: APjAAAWjVQ40Dld59XZxtZcSFiFMXWQPdPqFzYKZpfvz4bQPvx29ftwg
+	krHv/Dp6uN3mQBTzmsrCjPq5FQnE
+X-Google-Smtp-Source: APXvYqyq5aWL+4B/TZIiXdWVxIO7rj4CjtqParnFs6CYV9vKVJeEbm36f1QkJAkdcq7MbTd272qxzg==
+X-Received: by 2002:a62:ea08:: with SMTP id t8mr41783864pfh.60.1552451882711; 
+	Tue, 12 Mar 2019 21:38:02 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3401])
 	by smtp.gmail.com with ESMTPSA id
-	17sm13284699pfj.80.2019.03.12.14.01.54
+	k72sm29195838pfb.122.2019.03.12.21.38.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Mar 2019 14:01:55 -0700 (PDT)
+	Tue, 12 Mar 2019 21:38:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Mar 2019 14:01:47 -0700
-Message-Id: <20190312210147.1560-2-raj.khem@gmail.com>
+Date: Tue, 12 Mar 2019 21:37:54 -0700
+Message-Id: <20190313043754.26859-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190312210147.1560-1-raj.khem@gmail.com>
-References: <20190312210147.1560-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Cc: Thomas Kunze <thommycheck@gmx.de>
-Subject: [meta-initramfs][PATCH 2/2] klibc: Upgrade to 2.0.6 release
+Subject: [meta-initramfs][PATCH v2] klibc: Upgrade to 2.0.6 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 21:01:55 -0000
+X-List-Received-Date: Wed, 13 Mar 2019 04:38:02 -0000
 Content-Transfer-Encoding: 8bit
 
 Drop staging related patches which are not needed anymore
@@ -68,6 +66,8 @@ Drop staging related patches which are not needed anymore
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Andrea Adami <andrea.adami@gmail.com>
 ---
+v2: Fix build with arm
+
  ...n_-structs-for-non-glibc-system-libs.patch |   0
  ...-ulocked_-fgets-fread-fwrite-aliases.patch |   0
  ...-path-to-compiler-headers-via-isyste.patch |   0
@@ -80,21 +80,21 @@ Cc: Andrea Adami <andrea.adami@gmail.com>
  .../0001-klibc-add-getrandom-syscall.patch    |   0
  ...bc_2.0.4-add-kexec_file_load-syscall.patch |   0
  .../0001-mkfifo-Implement-mkfifo.patch        |   0
- .../armv4-fix-v4bx.patch                      |   0
+ .../armv4-fix-v4bx.patch                      |   4 +-
  .../klcc-consider-sysroot.patch               |   0
  .../klcc-cross-accept-clang-options.patch     |   0
- .../klibc-config-eabi.patch                   |   0
+ .../klibc-config-eabi.patch                   |   5 +-
  .../use-env-for-perl.patch                    |   0
- ...lcc-cross_2.0.4.bb => klcc-cross_2.0.6.bb} |   0
+ ...lcc-cross_2.0.4.bb => klcc-cross_2.0.6.bb} |   2 -
  ...c-utils-do-not-build-shared-binaries.patch | 213 ------------------
  .../klibc-2.0.4/klibc-linux-libc-dev.patch    |  29 ---
  .../klibc/klibc-2.0.4/staging.patch           | 151 -------------
- ...s_2.0.4.bb => klibc-static-utils_2.0.6.bb} |   2 -
+ ...s_2.0.4.bb => klibc-static-utils_2.0.6.bb} |   6 -
  .../recipes-devtools/klibc/klibc-utils.inc    |   8 +-
  ...bc-utils_2.0.4.bb => klibc-utils_2.0.6.bb} |   0
- .../recipes-devtools/klibc/klibc.inc          |   4 +-
+ .../recipes-devtools/klibc/klibc.inc          |  13 +-
  .../klibc/{klibc_2.0.4.bb => klibc_2.0.6.bb}  |   2 +
- 26 files changed, 7 insertions(+), 402 deletions(-)
+ 26 files changed, 10 insertions(+), 423 deletions(-)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-Define-in_-structs-for-non-glibc-system-libs.patch (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch (100%)
@@ -107,16 +107,16 @@ Cc: Andrea Adami <andrea.adami@gmail.com>
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-klibc-add-getrandom-syscall.patch (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-klibc_2.0.4-add-kexec_file_load-syscall.patch (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/0001-mkfifo-Implement-mkfifo.patch (100%)
- rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/armv4-fix-v4bx.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/armv4-fix-v4bx.patch (84%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/klcc-consider-sysroot.patch (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/klcc-cross-accept-clang-options.patch (100%)
- rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/klibc-config-eabi.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/klibc-config-eabi.patch (85%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.4 => files}/use-env-for-perl.patch (100%)
- rename meta-initramfs/recipes-devtools/klibc/{klcc-cross_2.0.4.bb => klcc-cross_2.0.6.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klcc-cross_2.0.4.bb => klcc-cross_2.0.6.bb} (96%)
  delete mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-static-utils-do-not-build-shared-binaries.patch
  delete mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
  delete mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
- rename meta-initramfs/recipes-devtools/klibc/{klibc-static-utils_2.0.4.bb => klibc-static-utils_2.0.6.bb} (80%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-static-utils_2.0.4.bb => klibc-static-utils_2.0.6.bb} (61%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc-utils_2.0.4.bb => klibc-utils_2.0.6.bb} (100%)
  rename meta-initramfs/recipes-devtools/klibc/{klibc_2.0.4.bb => klibc_2.0.6.bb} (91%)
 
@@ -169,9 +169,26 @@ similarity index 100%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch
 rename to meta-initramfs/recipes-devtools/klibc/files/0001-mkfifo-Implement-mkfifo.patch
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/files/armv4-fix-v4bx.patch
-similarity index 100%
+similarity index 84%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
 rename to meta-initramfs/recipes-devtools/klibc/files/armv4-fix-v4bx.patch
+index e842353061..4a334fa252 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/armv4-fix-v4bx.patch
+@@ -12,12 +12,10 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  usr/klibc/arch/arm/MCONFIG | 1 +
+  1 file changed, 1 insertion(+)
+ 
+-diff --git a/usr/klibc/arch/arm/MCONFIG b/usr/klibc/arch/arm/MCONFIG
+-index 53bc1dc..303c6ac 100644
+ --- a/usr/klibc/arch/arm/MCONFIG
+ +++ b/usr/klibc/arch/arm/MCONFIG
+ @@ -29,6 +29,7 @@ else
+- KLIBCSHAREDFLAGS = -Ttext 0x01800200
++ KLIBCSHAREDFLAGS = -Ttext-segment 0x01800000
+  ifeq ($(CONFIG_AEABI),y)
+  KLIBCREQFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
+ +KLIBCLDFLAGS += $(FIX_ARMV4_EABI_BX)
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-consider-sysroot.patch
 similarity index 100%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
@@ -181,17 +198,48 @@ similarity index 100%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-cross-accept-clang-options.patch
 rename to meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch b/meta-initramfs/recipes-devtools/klibc/files/klibc-config-eabi.patch
-similarity index 100%
+similarity index 85%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
 rename to meta-initramfs/recipes-devtools/klibc/files/klibc-config-eabi.patch
+index f28cd54233..a6998f86d6 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/klibc-config-eabi.patch
+@@ -12,13 +12,12 @@ Signed-off-by: Thomas Kunze <thommycheck@gmx.de>
+  defconfig | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/defconfig b/defconfig
+-index 04b98e9..0cb23d0 100644
+ --- a/defconfig
+ +++ b/defconfig
+-@@ -6,4 +6,4 @@ CONFIG_KLIBC_ZLIB=y
++@@ -6,5 +6,5 @@ CONFIG_KLIBC_ZLIB=y
+  CONFIG_REGPARM=y
+  # ARM options
+  # CONFIG_KLIBC_THUMB is not set
+ -# CONFIG_AEABI is not set
+ +CONFIG_AEABI=y
++ # CONFIG_DEBUG_INFO is not set
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/use-env-for-perl.patch b/meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch
 similarity index 100%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/use-env-for-perl.patch
 rename to meta-initramfs/recipes-devtools/klibc/files/use-env-for-perl.patch
 diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.6.bb
-similarity index 100%
+similarity index 96%
 rename from meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.4.bb
 rename to meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.6.bb
+index ab2afb7f84..4011aa231e 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.4.bb
++++ b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.6.bb
+@@ -7,8 +7,6 @@ DEPENDS = "klibc"
+ PACKAGES = ""
+ inherit nopackages
+ 
+-FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
+-
+ SRC_URI += "file://use-env-for-perl.patch"
+ 
+ # disable task already run in klibc recipe
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-static-utils-do-not-build-shared-binaries.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-static-utils-do-not-build-shared-binaries.patch
 deleted file mode 100644
 index 2f7cd35564..0000000000
@@ -604,21 +652,22 @@ index 5c7a6625b5..0000000000
 --# install only install the shared binaries
 --install-y := $(shared-y) shared/reboot shared/poweroff
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.6.bb
-similarity index 80%
+similarity index 61%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb
 rename to meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.6.bb
-index 16778630c4..35e17b2cc4 100644
+index 16778630c4..c835fd647a 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb
 +++ b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.6.bb
-@@ -11,8 +11,6 @@ KLIBC_UTILS_PKGNAME = "klibc-static-utils"
+@@ -10,9 +10,3 @@ KLIBC_UTILS_PKGNAME = "klibc-static-utils"
+ 
  require klibc-utils.inc
  require klibc.inc
- 
+-
 -SRC_URI += "file://0001-klibc-static-utils-do-not-build-shared-binaries.patch"
 -
- # avoid textrel if linking with -pie
- SECURITY_CFLAGS = ""
- SECURITY_LDFLAGS = ""
+-# avoid textrel if linking with -pie
+-SECURITY_CFLAGS = ""
+-SECURITY_LDFLAGS = ""
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
 index 2aac9e6ebf..00cb86d3e6 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
@@ -644,7 +693,7 @@ similarity index 100%
 rename from meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
 rename to meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.6.bb
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index ec52e9734f..096d4a25bd 100644
+index ec52e9734f..5805448671 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
 +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
 @@ -5,12 +5,10 @@ SECTION = "libs"
@@ -661,6 +710,26 @@ index ec52e9734f..096d4a25bd 100644
             file://klcc-consider-sysroot.patch \
             file://klcc-cross-accept-clang-options.patch \
             file://0001-dash-Specify-format-string-in-fmtstr.patch \
+@@ -48,8 +46,6 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+                 'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
+                  V=1 \
+                 "
+-EXTRA_OEMAKE += "'EXTRA_KLIBCAFLAGS=${SECURITY_CFLAGS} -Wa,--noexecstack' \
+-                 'EXTRA_KLIBCLDFLAGS=${SECURITY_LDFLAGS} -z noexecstack'"
+ 
+ export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
+ KLIBCTHUMB = "${@['CONFIG_KLIBC_THUMB=n', 'CONFIG_KLIBC_THUMB=y'][(d.getVar('ARM_INSTRUCTION_SET') == 'thumb')]}"
+@@ -76,10 +72,3 @@ KLIBC_ARCH_x86-64 = "x86_64"
+ KLIBC_ARCH_powerpc = "ppc"
+ KLIBC_ARCH_powerpc64 = "ppc64"
+ THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
+-
+-GCCPIE ?= ""
+-SECURITY_LDFLAGS = "${@'-z relro -z now -pie' if '${GCCPIE}' else ''}"
+-SECURITY_LDFLAGS_mips = ""
+-SECURITY_LDFLAGS_mipsel = ""
+-SECURITY_LDFLAGS_mips64 = ""
+-SECURITY_LDFLAGS_mips64el = ""
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klibc_2.0.6.bb
 similarity index 91%
 rename from meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb
