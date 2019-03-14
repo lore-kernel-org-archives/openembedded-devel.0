@@ -1,23 +1,23 @@
-Return-Path: <Hongxu.Jia@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B9296C149
+	by mail.openembedded.org (Postfix) with ESMTP id 5520B7C699
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2019 05:56:43 +0000 (UTC)
+	Thu, 14 Mar 2019 05:58:31 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x2D5uh7I026995
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 12 Mar 2019 22:56:44 -0700 (PDT)
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x2E5wVFR025695
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2019 22:58:32 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 12 Mar 2019 22:56:43 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Wed, 13 Mar 2019 13:56:41 +0800
-Message-ID: <1552456601-5383-1-git-send-email-hongxu.jia@windriver.com>
+	14.3.439.0; Wed, 13 Mar 2019 22:58:31 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Mar 2019 13:50:49 +0800
+Message-ID: <1552542649-8497-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] hdf5: fix installed-vs-shipped QA WARNING
+Subject: [meta-networking][PATCH] dnsmasq: avoid conflict with systemd-resolved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,35 +30,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2019 05:56:44 -0000
+X-List-Received-Date: Thu, 14 Mar 2019 05:58:31 -0000
 Content-Type: text/plain
 
-While baselib = 'lib64', there is a installed-vs-shipped QA WARNING
-...
-WARNING: QA Issue: hdf5: Files/directories were installed but not shipped in any package:
-  /usr/lib/libhdf5_hl_cpp.so.1.8.19
-  /usr/lib/libhdf5.so
-...
+Add a drop-in configuration file for systemd-resolved to avoid
+conflict about port 53. The error message is as below.
 
-Set variable HDF5_INSTALL_LIB_DIR to replace hardcode `lib'.
+  failed to create listening socket for port 53: Address already in us
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc                 | 3 +++
+ meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolved.conf | 3 +++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolved.conf
 
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb b/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
-index 7ea6f64..cec3432 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.8.19.bb
-@@ -37,6 +37,7 @@ EXTRA_OECMAKE = " \
-     -DH5_NO_ALIGNMENT_RESTRICTIONS_RUN=0 \
-     -DH5_NO_ALIGNMENT_RESTRICTIONS_RUN__TRYRUN_OUTPUT= \
-     -DCMAKE_INSTALL_PREFIX='${prefix}' \
-+    -DHDF5_INSTALL_LIB_DIR='${baselib}' \
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index 4f4bbf1..33678e2 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -12,6 +12,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
+            file://dnsmasq.conf \
+            file://dnsmasq-resolvconf.service \
+            file://dnsmasq-noresolvconf.service \
++           file://dnsmasq-resolved.conf \
  "
  
- do_unpack[postfuncs] += "gen_hd5file"
+ inherit pkgconfig update-rc.d systemd
+@@ -58,6 +59,8 @@ do_install () {
+     else
+         install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+     fi
++    install -d ${D}${sysconfdir}/systemd/resolved.conf.d/
++    install -m 0644 ${WORKDIR}/dnsmasq-resolved.conf ${D}${sysconfdir}/systemd/resolved.conf.d/
+ 
+     install -m 0755 ${S}/contrib/lease-tools/dhcp_release ${D}${bindir}
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolved.conf b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolved.conf
+new file mode 100644
+index 0000000..33f4649
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolved.conf
+@@ -0,0 +1,3 @@
++# Avoid conflicts between dnsmasq and systemd-resolved about port 53
++[Resolve]
++DNSStubListener=no
 -- 
 2.7.4
 
