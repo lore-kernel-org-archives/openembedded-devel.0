@@ -1,22 +1,47 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CF6360557
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Mar 2019 09:50:07 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x2F9o7uf017272
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 15 Mar 2019 02:50:07 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 15 Mar 2019 02:50:06 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Fri, 15 Mar 2019 02:50:06 -0700
-Message-ID: <20190315095006.29889-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io1-f42.google.com (mail-io1-f42.google.com
+	[209.85.166.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 110896B8AC;
+	Fri, 15 Mar 2019 14:27:59 +0000 (UTC)
+Received: by mail-io1-f42.google.com with SMTP id y6so8355356ioq.10;
+	Fri, 15 Mar 2019 07:28:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=8FruvjQVq6OjAI+Ss43BhvwoLFs/UkFHL2pwOCYKkwE=;
+	b=UuOMRyM3Y/Ll9ew5btSTh5/WBPosHh2NUhZNqzuCfKTu0cvLIH3AvylAH97WbCVGYc
+	bLqsNREE5Ilo/Wnaznk0x8A5updUJNXe3+OSOxo5Du3G3TtUiIB1ALyF9j0rbhO7WxNH
+	NddXbZBp8CZBvXBbEVPVJ5qff+AV1rJsunixhZRjF1R33vNwFlBoG0LqGdVQMls0VPHJ
+	ab3yWyDwSuzNV7aB3bxdRvvA/OlA1mrEZsFyHotnr75L6NGpd/i3/zCj8/p8vDP94N0U
+	mrGjfOP+lGIWTsn3kBSCMwEGmU2CEhVcQpyXJ5UuwmFy1raKg5p0UJMNHW0dPxvlPZW+
+	WXpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=8FruvjQVq6OjAI+Ss43BhvwoLFs/UkFHL2pwOCYKkwE=;
+	b=jIEoSndhd1FO8kRYmUEFLPmws9H0GJdu52VXCWTTVbjZXDFn5CTwCfno5MMvLadpU3
+	Sjj5Xu3jy1g1iyGiixk+dQg0sVuKJ/ve3UhHebpN6OEHJNw5TFHn3QJeUQEMoyfFzkRJ
+	ftqvcZSDoEtnNe9Bp62qeSWm2HfYJKQgnUvIQqhUkwk9ldI6hGA8RJUU5ffHEz1Fue0o
+	v1YzolmHUXK0dx4MLgQYKl1nb5HKVuwr2+BeeoviS8eFTF1WMdohfkIjJLWcFsZ1FiWj
+	xqZz6oy5qeNYtW0R/HQFkWxB8Yo2YZ2xfnMUKxKvCfoY7R+aFHkIr7qY14BvM7R9izAS
+	eIqQ==
+X-Gm-Message-State: APjAAAUP96dHK5UrZyFv7R+YxbFzcQscgmhUn2w7Kwc5/U57uR/nwMld
+	y4cbaJVtHztrPzz9gN9hAPI=
+X-Google-Smtp-Source: APXvYqyyfc6DHU+v11X4L3NgLwkrzw7z6BvYVSJ/Tt9lq7OV2QiC7lKEZ47oNfso7YCy/a6LccJ39w==
+X-Received: by 2002:a5e:c004:: with SMTP id u4mr2511376iol.13.1552660079990;
+	Fri, 15 Mar 2019 07:27:59 -0700 (PDT)
+Received: from linux-uys3 ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id i26sm776078ioj.86.2019.03.15.07.27.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 15 Mar 2019 07:27:58 -0700 (PDT)
+Date: Fri, 15 Mar 2019 10:27:53 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: yocto@yoctoproject.org, openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20190315142753.GA10387@linux-uys3>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: fix atomic support on arm
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: OE Summit report from SCaLE17x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,84 +54,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Mar 2019 09:50:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Mar 2019 14:28:00 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi,
 
-Check to link with libatomic to enable C11
-atomics support to fix below build error on arm:
-| /build/tmp/work/armv5e-wrs-linux-gnueabi/mariadb/10.3.13-r0/recipe-sysroot-native/usr/bin/arm-wrs-linux-gnueabi/../../libexec/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/8.3.0/ld.bfd: librocksdblib.a(env_posix.cc.o): in function `std::__atomic_base<unsigned long long>::store(unsigned long long, std::memory_order)':
-| /usr/include/c++/8.3.0/bits/atomic_base.h:374: undefined reference to `__atomic_store_8'
+Earlier this week I got back from SCaLE17x during which I taught an E-ALE
+class on Buildroot, was a TA for the other E-ALE classes, organized and ran
+the first ever (hopefully of more to come) OE Summit, and gave a general intro
+talk on OE. I wasn't planning on giving an OE talk at SCaLE, but the person
+who was supposed to talk wasn't able to make it. I had travelled to SCaLE with
+a backup talk prepared as a "plan B", and it was good that I did.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +-
- .../mysql/mariadb/fix-arm-atomic.patch        | 34 +++++++++++++++++++
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
+I'm quite happy with how the inaugural OpenEmbedded Summit went. Everything
+went off without a hitch, and there was a lot of interaction and feedback
+between the speakers and the audience.
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 00a9d668c..fca74d448 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -17,6 +17,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
-            file://0001-disable-ucontext-on-musl.patch \
-            file://c11_atomics.patch \
-            file://clang_version_header_conflict.patch \
-+           file://fix-arm-atomic.patch \
-           "
- SRC_URI[md5sum] = "603ce42e35b9a688f2cca05275acb5cb"
- SRC_URI[sha256sum] = "b2aa857ef5b84f85a7ea60a1eac7b34c0ca5151c71a0d44ce2d7fb028d71459a"
-@@ -63,7 +64,6 @@ PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
- # https://mariadb.atlassian.net/browse/MDEV-5982
- TARGET_CFLAGS += "-fuse-ld=bfd"
- LDFLAGS += " -pthread"
--LDFLAGS_append_armv5 = " -latomic"
- BUILD_CFLAGS += "-fuse-ld=bfd"
- BUILD_CXXFLAGS += "-fuse-ld=bfd"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-new file mode 100644
-index 000000000..34d31148b
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-arm-atomic.patch
-@@ -0,0 +1,34 @@
-+From ffaaf4d43ebf2ef6d0229a60f407c1f5a06e5c53 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Fri, 15 Mar 2019 01:46:05 -0700
-+Subject: [PATCH] build_rocksdb.cmake: fix atomic support on arm
-+
-+Check to link with libatomic to enable C11 atomics support
-+to fix below build error on arm:
-+| /build/tmp/work/armv5e-wrs-linux-gnueabi/mariadb/10.3.13-r0/recipe-sysroot-native/usr/bin/arm-wrs-linux-gnueabi/../../libexec/arm-wrs-linux-gnueabi/gcc/arm-wrs-linux-gnueabi/8.3.0/ld.bfd: librocksdblib.a(env_posix.cc.o): in function `std::__atomic_base<unsigned long long>::store(unsigned long long, std::memory_order)':
-+| /usr/include/c++/8.3.0/bits/atomic_base.h:374: undefined reference to `__atomic_store_8'
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+---
-+ storage/rocksdb/build_rocksdb.cmake | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/storage/rocksdb/build_rocksdb.cmake b/storage/rocksdb/build_rocksdb.cmake
-+index c36c761..2b539ff 100644
-+--- a/storage/rocksdb/build_rocksdb.cmake
-++++ b/storage/rocksdb/build_rocksdb.cmake
-+@@ -424,6 +424,9 @@ list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_version.cc)
-+ 
-+ ADD_CONVENIENCE_LIBRARY(rocksdblib ${SOURCES})
-+ target_link_libraries(rocksdblib ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-++IF (HAVE_GCC_C11_ATOMICS_WITH_LIBATOMIC)
-++  TARGET_LINK_LIBRARIES(rocksdblib atomic)
-++ENDIF()
-+ IF(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-+   set_target_properties(rocksdblib PROPERTIES COMPILE_FLAGS "-fPIC -fno-builtin-memcmp -frtti")
-+ endif()
-+-- 
-+2.17.1
-+
--- 
-2.17.1
+We had 4 speakers:
 
+	myself (Togan Labs): Using OE
+	Drew Moseley (mender.io): Mechanisms for Enabling and Configuring WiFi in OE
+	Alistair Francis (Western Digital): RISC-V and OE
+	Jon Mason (ARM): Kernel Development Workflows Using OE
+
+Counting attendance is a bit tricky because people sometimes wander in and
+out. Do we count someone who wanders in partway through but leaves before the
+end? My talk was the least attended. I forgot to count the audience members
+(since I was giving the talk), but I did notice that a couple people wandered
+in during the talk. Behan counted 12; like I said, I didn't think to get a
+specific number myself. In any case, my talk wasn't in the programme, since I
+was filling in for someone who didn't make it to the conference. Drew's and
+Jon's talks had roughly 20 audience members each, and Alistair's talk was
+about 30.
+
+It's too bad the OE Summit was pitted against SCaLE's "Embedded Track". I
+think we ended up "competing" for audience members between the two of us. The
+OE Summit was put in a rather large room. Between teaching and helping out
+with E-ALE and running the OE Summit, I didn't attend a single talk at the
+conference nor spend time in any other part of the conference except for
+these two rooms (which were beside each other). I have been told anecdotally,
+however, that the attendance numbers we saw for the OE Summit were in-line
+with the numbers of attendees for several of the other talks, but I can't
+comment personally.
+
+As we were still setting up for my OE talk, the very first talk of the OE
+Summit, one of the audience members put up his hand and asked what the
+difference is between "Yocto" and "OE". We weren't specifically prepared to
+comment off-the-cuff about the relationship between the two projects; it's not
+as if we had a prepared statement to read on the topic. We tried to fumble
+through a satisfactory answer while remaining as neutral as possible on the
+topic. But it sure would be great if the two projects could get together and
+put out an official statement on the matter to which we could point all such
+curious people. Interestingly enough, this person was sure that The Yocto
+Project pre-dated OE, which we had to correct. Then he assumed these were
+two projects that had simply forked from each other at some point in the
+past. It was probably actually more confusing to him that OE and YP are
+two separate projects, but with almost all the same developers, working on
+almost all the same code. In any case, The Yocto Project's Community Manager
+was on-hand, thankfully, and I don't think he had any objections to any of
+the things we said in answering this question.
+
+My talk was a general introduction talk about OE, but all the other talks
+assumed the audience knew something about OE. This turned out to not be the
+case. Pretty much all the speakers had to field questions along the lines of
+"so what is OE anyway?". Sadly, in many cases, saying "it's like Buildroot" is
+often what would help the person asking the question the most. I think it's
+noteworthy that more people seem to know what Buildroot is, but not OE/YP.
+Although I realize this is just one conference, and a very small sample set,
+so it wouldn't be fair to generalize from these numbers. But it is true that
+these are the sorts of questions we were frequently asked, so it's noteworthy
+in that respect.
+
+Oddly enough, when I was finished the slides portion of the Buildroot class,
+the very first statement a student made was to complain about how terribly
+difficult Yocto is to learn and use. Why this came up in a class about
+Buildroot is confusing to me too, maybe he looked me up online and found my
+affiliation with OE? I don't know. I was careful to not mention the words "OE"
+or "Yocto" at all in my Buildroot talk. In any case, in his opinion, using
+Yocto requires a masters degree. Obviously he's exaggerating for effect.
+
+I'd like to personally thank the speakers who agreed to give a talk at a
+conference that didn't exist prior to last weekend, who worked hard on their
+talks, and who put together some very interesting presentations. I think we
+all walked away having learned a bit more about OE. I'd like to thank Behan
+and Tom King who helped organize. Behan who setup his recording equipment to
+record the talks (just in case there's an issue with SCaLE's recordings).
+SCaLE who hosted the mini-conference and helped with advertising (i.e. putting
+up a page and re-tweeting). I'd like to thank the OE Board of Directors who
+gave me permission to create and run a mini-conference on their behalf.
+Finally, but not lastly, I'd like to thank everyone who attended!
+
+Thank you, and best regards,
+    Trevor
 
