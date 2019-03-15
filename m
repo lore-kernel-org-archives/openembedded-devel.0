@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
-	[209.85.208.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 146ED7C740
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+	[209.85.208.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 43E8B7C724
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Mar 2019 18:18:22 +0000 (UTC)
-Received: by mail-lj1-f173.google.com with SMTP id j25so2334508lji.1
+	Fri, 15 Mar 2019 18:22:40 +0000 (UTC)
+Received: by mail-lj1-f171.google.com with SMTP id v10so8779675lji.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Mar 2019 11:18:24 -0700 (PDT)
+	Fri, 15 Mar 2019 11:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=y6O1oaPE6FlDvBvPU4XOwumChU77hWXNlxgBKIw3ZMI=;
-	b=DVzeEGN940cTTZ4Mrbgz1kZVpOQltMZDQO7aU9Pk407/ju76ht3wHCDn/l6eY8rOfu
-	QxmEn/H/rtkE4bLj4VXS9YCyW/kIGtvhnrU/DKnhnuaDomwkpch5VjfMew4VGnl9RHrG
-	4dFdMNtvG1iFKkzTM5I8c2loGIFWvr2jRhurSkTmljp4kd6QnS7r0ge1A08ZNcxvo4d+
-	gFmfrKwcgKxY+xBffUnZWA3BsjHrrzkTmBJ0GOwhMsGTtO93PnOKAS6c/g61qFv125tV
-	ii1OtVQQVH7+pJUyvfwfG3k97SF6rIkSHUeUoUfd362ai/JvtASap87n4cfLSdo0m1WR
-	VkIQ==
+	bh=ASuvlNVUk8EDXHaEZR9hNecWXqWzdw0A06r2Tch8FdA=;
+	b=R4LpxgmzubTb5K511Olui3mtnYJpvnwcRVh2x+WB7zItvtU3scD0cPsFEqDWK6Mw5q
+	tBvuKc6gU+o0ZXTJgxZVoSAx6Ev7pdDU8YDhFfkvHBj+8AcGfj5LOyUj/Yq1Y5QwkM/l
+	sYDbtWJh7KNZBxsEfzgtQLgoFNIeuwDqoYYTKTL7QShemiPw47GTiSFiHdoCQI1cFpD0
+	RWA5eYiojf5MkwMecupobyYRst/PrVWigUuVCknwnFUm68ffddjGMuJ7+9C53AK6O1nL
+	B1Ot2bue5CcGSDPZd6D5hCguOclvrmbAAud1iXbIDuUs9vOkM4IuK9zNSCry0VgYDO+E
+	L3uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=y6O1oaPE6FlDvBvPU4XOwumChU77hWXNlxgBKIw3ZMI=;
-	b=ebDvdqgIxB3n6jNeEoOAcz99i9fASfTqRal5sX4kcsKgLU2dP/szUN12mZ8Xhv+8iv
-	1+lvQemUV/uKdcYTU0Mn4TbiJz58AiV/AegKSLDsS++9z8B4ygqy7a0Pnuh9R2CJS2xN
-	99VH0y0u1q3ww4tX39LrqBopVCbDVVKS9ttHMIgpuGFbMmb/ojemRCAH6CBZcL2vPxGv
-	6Z8FvTdkYIUi0LJ40AGHuuSHlgNB0Qng+46HDRls0BHNR9XIXxamPwsrFKB+ZWVL+9dj
-	8LuGgsW0y4RQ8MswxtZZcATIJYpfo6O/3uNzHSrquai07aF8qi3AqtEly7khy6bG8lP/
-	azDw==
-X-Gm-Message-State: APjAAAV9ClznEwzn2AHdIDNVLYMZhIGCqXrEobs4NrwwYypDi89O+uVF
-	0hG5do4vts0WqLjqAZY/QGbJ9fVvHDg=
-X-Google-Smtp-Source: APXvYqxPtKaA5OVXhKQ5sg06yb0uIptwhOxNQZVk4pQol3YhqNzia5azA5q8r8+6mCqUDUk0EokUBQ==
-X-Received: by 2002:a2e:2ce:: with SMTP id y75mr2895308lje.126.1552673902635; 
-	Fri, 15 Mar 2019 11:18:22 -0700 (PDT)
+	bh=ASuvlNVUk8EDXHaEZR9hNecWXqWzdw0A06r2Tch8FdA=;
+	b=UBW12lCJUkhBL3dnOrXChS2osS1Yjm5Pm1tlj81sAg3E0iFS0zPTEs6XAmNtb6l6Dn
+	MgVix6zjkiP0wxXu01rs4blzENqR4iRf7hOh3vFt27Puh41XuoIfO9DlllP+5asFv47d
+	1j8Itrjrybrao0nCNQKDla9kEdq6SA3PTpaqRBIiSvyL9ibu9Vq17HrA2Zc6TpvGYUif
+	fmiMYJlMr8M7FxZm7Tsi8adHBFgu3duGnPUdKBWRxvFcbHJAFGxdj29vp1S3Slf+7h0z
+	VRkL9m6LrBMyEvx58tw8FtXX93KYlkhLO/1pzJPhP4p3vQnqsSUBIk/V3GdL282FD0x7
+	u2mw==
+X-Gm-Message-State: APjAAAUkidxsv5z0uIbKuAiKL9u4bAORFm67b9RfIJ+msju1gqcqU8rX
+	d6fKGm4eHlOjM5/tfswMqAMw4ct8pYs=
+X-Google-Smtp-Source: APXvYqxRphAKAgetyDMjke+U+eEBtu4U4YaAO46Ahe/TO17dqr2D21TdccZiEuLtYtCCRolFUzRgYw==
+X-Received: by 2002:a2e:86d2:: with SMTP id n18mr2911827ljj.128.1552674160578; 
+	Fri, 15 Mar 2019 11:22:40 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id 10sm534126ljg.91.2019.03.15.11.18.21
+	by smtp.gmail.com with ESMTPSA id l21sm548879lfh.30.2019.03.15.11.22.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Mar 2019 11:18:22 -0700 (PDT)
+	Fri, 15 Mar 2019 11:22:39 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Mar 2019 19:17:53 +0100
-Message-Id: <20190315181753.15834-1-open.source@oleksandr-kravchuk.com>
+Date: Fri, 15 Mar 2019 19:22:34 +0100
+Message-Id: <20190315182234.19250-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] python-networkmanager: update to 2.1
+Subject: [meta-networking][PATCH] mbedtls: update to 2.16.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,32 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Mar 2019 18:18:23 -0000
+X-List-Received-Date: Fri, 15 Mar 2019 18:22:40 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...n-networkmanager_2.0.1.bb => python-networkmanager_2.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/python-networkmanager/{python-networkmanager_2.0.1.bb => python-networkmanager_2.1.bb} (70%)
+ .../mbedtls/{mbedtls_2.13.0.bb => mbedtls_2.16.0.bb}         | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.13.0.bb => mbedtls_2.16.0.bb} (92%)
 
-diff --git a/meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.0.1.bb b/meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.1.bb
-similarity index 70%
-rename from meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.0.1.bb
-rename to meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.1.bb
-index 4e41aa576..3aa41f1ad 100644
---- a/meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.0.1.bb
-+++ b/meta-networking/recipes-connectivity/python-networkmanager/python-networkmanager_2.1.bb
-@@ -4,8 +4,8 @@ LICENSE = "Zlib"
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.13.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.13.0.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb
+index ff3f7f0c1..2e9d01e14 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.13.0.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb
+@@ -23,9 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
+ SECTION = "libs"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4"
+ SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
+-
+-SRC_URI[md5sum] = "659d96bb03012ca6db414a9137fcdbd6"
+-SRC_URI[sha256sum] = "593b4e4d2e1629fc407ab4750d69fa309a0ddb66565dc3deb5b60eddbdeb06da"
++SRC_URI[md5sum] = "eae9cf16114f4491dbbc0fe36bb7e6c3"
++SRC_URI[sha256sum] = "e3dab56e9093c790b7d5e0f7eb19451010fe680649d25cf1dcca9d5441669ae2"
  
--SRC_URI[md5sum] = "5fc644a65463031295c6b7dd51a0f1bd"
--SRC_URI[sha256sum] = "bc36507506ad29bfdac941b0987ebd1cc9633c9a9291d7378e229e4515a0a517"
-+SRC_URI[md5sum] = "f638d854a3639fb37c0e06d1092a771e"
-+SRC_URI[sha256sum] = "aef1e34d98d7bec7cc368e0ca0f2e97493f9b5ebe6d7103f8f6460cfca3dc6fc"
+ inherit cmake
  
- PYPI_PACKAGE = "python-networkmanager"
- inherit pypi setuptools
 -- 
 2.17.1
 
