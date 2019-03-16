@@ -1,50 +1,62 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 216BD6C1D5
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com
+	[209.85.167.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D3EB600BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 17:35:03 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id u12so10960284iop.11
+	Sat, 16 Mar 2019 19:51:41 +0000 (UTC)
+Received: by mail-oi1-f178.google.com with SMTP id t82so10022562oie.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 10:35:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=yAtWCr20xehEJTQkTtU7Z6dIO0sfN5dpWQHsn1LOZgQ=;
-	b=SeZZFntZR4Rnpbd3jCK2EvwyV7bcLDHLdig65PDJynL/DVIupiKK+ZJeDNy00u8yIJ
-	ZkYb+7buPDuN3O9cJLqgdnVvigZTf7IaJ1UbRfEFcihx4v30blgh0f1Mxd3TYhJLGXge
-	gbDHkKdHJ3beStpkhcTLuOLg29XXCq+oI2VLsizz61Lm+DbtjCY2VTNUWLankp1j6Gg/
-	ehrsVCVIbKcOfK5sEJYnqapuCQmYaxiRbBoiEj9+794KrfFm7dpR2QOLIY2DObsDDicI
-	8d+5Crljb2pE703SUG06cFcA5owDhYyovlrWOfFm8aPa1fpEHI1jci9XBrq2+dCdHRlP
-	C5wA==
+	Sat, 16 Mar 2019 12:51:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=HxHrIT446NdxLuUPRWflN2jsJxhkpIlUOs/qIpZDxbY=;
+	b=dj06XIkP+JwxkKYcAv5LFBr5xKAMFwF772qIsZNHdbkqAWJe5R5cRJqPzJsDIlixxR
+	dGS+Nhtf94+LwfDHns+bBRaYLeq8SiRRdfXx8DOLqM3bDdPlkSOX9Iz8by32ty/ZCK2b
+	7r2Gz49cS8l4hqaSlYMt6o52J/pImZ4rL6JwkwmIi66Zm+RGAbXpfkUmHcaKclUk2k9X
+	rHjOTeQrT2GSd7yxL7YEjiILRpx6ZeeOFrijYjyXi9xpAUrEZW1VEEOD+QXoJnhGqi4U
+	hT1rTB8szI0wvAYMByxN4Zw3rxm8RYJOfSZIoRW/WJ8uu0lDLdv6kOSvE4IlS8DgySO8
+	FDXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=yAtWCr20xehEJTQkTtU7Z6dIO0sfN5dpWQHsn1LOZgQ=;
-	b=bQrzxFYTFEAcuq00nH3R03od/S3BMbUWsVCxe+NR1rLCqgTKcg0t6ydfEfxWF9yDoh
-	tie8v9raIPleAEb4a5Sui9/JPpe4ptoGBIG+fe2LmBORJlIT0AI6zpoY1/kwrXN9//sv
-	wKrlK/q4FJwKRAXG2cNAC0rmUZbUHtbzQS60EEaOR/7jaZqsF5TsI2OO172bgdNRSC0S
-	f8EXuVGTHkOXEiqm18stcsNfywX7BqOs19+c8MN1zugxEHOWrcg7cLTo+mPH+m/Cu6MI
-	o2LkTNBcnTCvYXIptkM9YUx+KJjujO8D+ePw3aqG19bO4WYMK8NF8wdfwapVuR1FG1BO
-	3f5Q==
-X-Gm-Message-State: APjAAAWZI6xSXW+I8qO4TJJHjDHlgQYUQXWRrAK2KN8XRaOLUqPyQsW+
-	YyhimLqfC58rcGvgy3+WMQhlGZ/panyyp5+eM8w=
-X-Google-Smtp-Source: APXvYqwGsRtZBxNqcEWYku433qHF6RRa+qvS+cPdvAZilrwf/1feOGutyyfxzq+GebWjPko9feeB5ExVJy0YlUVBs4o=
-X-Received: by 2002:a5d:8d92:: with SMTP id b18mr5702728ioj.272.1552757704028; 
-	Sat, 16 Mar 2019 10:35:04 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+	:message-id:subject:to:cc;
+	bh=HxHrIT446NdxLuUPRWflN2jsJxhkpIlUOs/qIpZDxbY=;
+	b=NSdlEWHM7xuXKyuRGDl0F712g1GtK8SOa3HIx/8rhBJplpaQT5mOnN3uRva44WBCzP
+	gIFwDjI3byDHdX38SJRyx3SqEGKoXqufYdYivwrOcC2V1UUHxb+npLEJKmctITH5Nz6L
+	pW0aJ3DSnQCIeQUe543Y1ID4WnnJ1MVJ/r334+PJluMJAdIvC+MySLoKIqhquBCoZPc6
+	i90Rv3fVAohRAyR+wnrw3qqMHoJRMu9mgaQZyLJgjRb9sF5au71r1L09ADV/2TJgGF14
+	wRgLPTNVPMb6c4jat4jq7Oa0+4QSUqIDBm25/jqWby2YiAhKHYaoeELg85UuPG1BEnbF
+	O7Xg==
+X-Gm-Message-State: APjAAAVUEkvYXgSG1VGHZB/asqkdaEXFAwi+6zCBsrhAQj3FSo6S13fP
+	9nVqm6vTb48TVfYX61m5QVHOBnZ3SS1xBg==
+X-Google-Smtp-Source: APXvYqzSWKC+w3psqPv7eHHz0HgHzqmfyXryS57h7iKp6/FQbjk1agEM5gQdba08zKo4M5Zg54Akmg==
+X-Received: by 2002:a54:4f0f:: with SMTP id e15mr5171244oiy.66.1552765902261; 
+	Sat, 16 Mar 2019 12:51:42 -0700 (PDT)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com.
+	[209.85.167.176]) by smtp.gmail.com with ESMTPSA id
+	o17sm2087792otl.27.2019.03.16.12.51.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi1-f176.google.com with SMTP id t206so10054649oib.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
+X-Received: by 2002:aca:ac45:: with SMTP id v66mr5029929oie.134.1552765900025; 
+	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190316080428.36688-1-raj.khem@gmail.com>
-	<CALbNGRQwWcwBjXPmtusLirywo=Tw2gV40PFDxCF6Kn8ZkS5F1A@mail.gmail.com>
-	<CALbNGRRz4k-xRCBSOOF1PsoJ1p_porgc7kKcOoW4ctXCD9HFvg@mail.gmail.com>
-	<CAMKF1spX7gfga6kz6mzigtLwv4nMOfhHtNRBeM_b9XU1kmeD4Q@mail.gmail.com>
-In-Reply-To: <CAMKF1spX7gfga6kz6mzigtLwv4nMOfhHtNRBeM_b9XU1kmeD4Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 16 Mar 2019 18:34:52 +0100
-Message-ID: <CALbNGRRm1JTNQqwrKkS2i+mrTWPxvPJRJRiw=ZF7R4XPtwdv0Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-mixer: Remove recipe
+References: <1552692315-22023-1-git-send-email-peter.griffin@linaro.org>
+In-Reply-To: <1552692315-22023-1-git-send-email-peter.griffin@linaro.org>
+Date: Sat, 16 Mar 2019 16:51:25 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKp0e=g=Awom-aqRKmP-QXwCL-Rr=JM31PQ+avQcMCb2jQ@mail.gmail.com>
+Message-ID: <CAP9ODKp0e=g=Awom-aqRKmP-QXwCL-Rr=JM31PQ+avQcMCb2jQ@mail.gmail.com>
+To: Peter Griffin <peter.griffin@linaro.org>
+Cc: stanimir.varbanov@linaro.org, Denis Carikli <denis@eukrea.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	=?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+Subject: Re: [meta-browser][PATCH] chromium: add 2 fixes for v4l2 VDA support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +69,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 17:35:03 -0000
+X-List-Received-Date: Sat, 16 Mar 2019 19:51:41 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 16, 2019 at 5:55 PM Khem Raj <raj.khem@gmail.com> wrote:
+Hello Peter,
+
+On Fri, Mar 15, 2019 at 8:25 PM Peter Griffin <peter.griffin@linaro.org> wrote:
 >
-> On Sat, Mar 16, 2019 at 2:32 AM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
-> >
-> > On Sat, Mar 16, 2019 at 10:09 AM Andreas M=C3=BCller <schnitzeltony@gma=
-il.com> wrote:
-> > >
-> > > On Sat, Mar 16, 2019 at 9:04 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > > >
-> > > > xfce4-mixer can be replaced with xfce4-pulseaudio-plugin
-> > > >
-> > > NAK - it works perfectly fine and xfce4-pulseaudio-plugin is not a
-> > > replacement because it is sitting on top of pulseaudio. Pulseaudio is
-> > > poison if you want to produce music (alll the jack based  stuff)
-> > >
-> > I am tired of useless discussions - seems the priorities of this
-> > project do not match mine anymore: I'll create a layer for gstreamer /
-> > xfce-mixer and all the music stuff I collected in meta-qt5-extra.
-> >
-> There is a reason why I Cc'ed you on the patches and that is to
-> consider your priorities on the contrary.
-> Adrian summed it up, but the motivation was to remove gstreamer 0.10
-> and this is only recipe which require it, so I was wondering if there was
-> a better way to deal with it, e.g. may be xfc4-mixer has  support for
-> gstreamer 1.x or some such. as gst 0.10.x get aged, it is often that
-> it
-> has to be fixed to keep going as we change things like compiler verisons
-> adding new architectures which don't support it etc.
-Problem with xfce4-mixer is that it uses the mixer interface which was
-removed in gstreamer 1.0 [1]. I would like to port xfce4-mixer to use
-alsa directly but did not find enough time yet.
+> The first patch allows GpuVideoDecoder to actually get created.
+> Without it chrome://gpu report hardware video acceleration is
+> enabled, but actually ffmpegVideoDecoder is used for the decode.
+>
+> The second adds NV12 & YVU420 formats for all ARM platforms,
+> otherwise V4L2 VDA on dragonboard will error with NV12 buffers.
+>
+> Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
 
-For oe: I have created a layer meta-musicians (not published yet)
-where I added xfce-mixer together with a very reduced set of gstreamer
-0.10 and much stuff from meta-qt5-extra because that layer grew too
-big over the time.
+Thank you for working on this; please open a PR on github as we have
+been using it for the layer as a way to get more people to contribute
+to it.
 
-So I'm fine - no problem in removing.
-
-[1] https://simon.shimmerproject.org/2016/10/
-
-Andreas
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
