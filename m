@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DD9607BFB3
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id EC07E6B50B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 14:50:05 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id h6so8817302lfc.2
+	Sat, 16 Mar 2019 14:59:41 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id z7so10415949lji.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 07:50:07 -0700 (PDT)
+	Sat, 16 Mar 2019 07:59:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=eY0papp2K3f/c0uj0ZwnZYtjy0m7QDGak5mS901NJ2A=;
-	b=bZdCIR8BWXAvVyKmv3ppnl9gk8x1ib9wGvPqDFFXOoZ89asEyFCcwnlGiJwPhKFQ9n
-	rwbdgHZY4d2vDHMh2c3nk4rdOpJLQMjvh2rI9m7Ic0LHhAf+plTuVvlLCjj34NjADbbH
-	odIKFs1UhvvKAK/G0adRnxpn2eR2qFpeVK211Jo1BxsJrOGmKnHHosP3Sr/HnRBqf8pX
-	WwIcnFG5A9eZjmhlAlMvX60QJCm/t0EZ2PcdN/xHdReKd1LK2xUGcqVTFAkQzKu8/Rgb
-	ZzbVpSLdqWy4Vvn7UJ3tfBP6mqv1Ss4VpXQHc72YKdGQ/Mv3d6UzXCR3gGVr54v6b6RS
-	50Xg==
+	bh=HgHmlanzQssGZPkxVSDLRdu3DBOCjc9Dj6RdypBdzso=;
+	b=gIQTtOAmhyFme6uFloEf4FMBHiDD9NcuF6tIuRZl9Ww+k+yLLO68WDloQLKsPeIEBf
+	dDfz0SxlxVxvYiU7yjgMHvTS/6l8QYAbWDJuPxydKDwMP6NXeyimZgNkkcsQKmhPodQB
+	edcDwnNSmtyC3MIPI42B311wJWiN5FvrS4Ph/B1AF4Bw7/CfIxYAvxYbjVDkwKlNLUPO
+	yY705BzCibz6zVqRTIsDV4rEQeNyUmyNR710NgGANc1i6goG2EQ55VuCevcz/CC0yunx
+	KhKOl1Hgg6OQxXsDdKmvoG9kmZSJhw0yqngZMsjYZ/ezpCW+uNejW7wFz2DQ+sm08JbE
+	aenw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eY0papp2K3f/c0uj0ZwnZYtjy0m7QDGak5mS901NJ2A=;
-	b=EZKTipghsKsUHVSdjqUjXhX3/w50a//mpuLw8YXxuOQtYsO/FfWquRfLopbP1embEY
-	C8cG8J7I3OvupaA+aryJgdZj2WcE5TH2aJ/y/i2cOhBEmIAyDZV2kR1lRATfRALCakAH
-	D7SOK2VVQDq9tXsH9ymHl4vPGsN48OT8hrVa5dsvwOv2ei8zb9RtYRIH5Kfkz3pjwCSA
-	VmpOrCUjA0QDz7dyUuJriS0og9EAcLjw1vCc50mXkiNKhzjUxvE+xs3jMptQ0RSqp8XX
-	9gIVyytNG8HRWEQjMpPQdVPJ6Ukd7W422I8CUHkmJhWWW9dNCeAsF7+613x9mbmdTKWj
-	ooeg==
-X-Gm-Message-State: APjAAAXPduUL/rAxskmG3u4/sNPWSAajUwqyPEqCp6DiIiKYnud6LlU7
-	uaDuBpTUNCWLbHpik7HDMNp2kBID/+o=
-X-Google-Smtp-Source: APXvYqxAX6nZFkmLrnoDpsB2FN1AnG/7FqZ/diqnDMd5bK3MPSiNgHaNLNMIPMM5DbpPNPeK61fR9w==
-X-Received: by 2002:a19:7613:: with SMTP id c19mr4950059lff.105.1552747806043; 
-	Sat, 16 Mar 2019 07:50:06 -0700 (PDT)
+	bh=HgHmlanzQssGZPkxVSDLRdu3DBOCjc9Dj6RdypBdzso=;
+	b=gziqx9MforZ1RtKR5UprJeQBdNdjFnxNYhXB5DO6Xsx8r0ed5TAFxYl6B707mW0bk4
+	nYXGcNXIxV+tQmh3RiyKha7V0iDX55hmgMqA4M9cX0ZnS+ljqMCZuzGF1SZseKlaoONP
+	yhcXyKF/TsLgO6l8ojZ7g4BbARH/kBoPJixEvPb/poprdOG3NiXcmuwzz53Em3kzIIKz
+	buhcqG9ic1xZLTwzuLLtSubJmOqVDavWYBb6ClC21a9dKK7pqxJt3HEP1FGHTStmbujR
+	5rgwkzxI7gaAM86ZJOrhOeMlat25V/9gCI7EpIffw8yihXMY3IGuDl4+rqvT11F2IaxH
+	o6rA==
+X-Gm-Message-State: APjAAAVUwAimblwFOTZ88D/rk44slaiA8gLdnyyhv1CtRQvI0tINR4vj
+	9+jiCv2QIu67NnP+22/Fem95uxCpUZc=
+X-Google-Smtp-Source: APXvYqyKe+US3dizPBCB21qf8K6f10S4CpqJ7jLfZPG36TvDX8bO0gbqeTQLX7XiV61/ffb+ztjIgQ==
+X-Received: by 2002:a2e:8e8e:: with SMTP id z14mr5312241ljk.86.1552748382097; 
+	Sat, 16 Mar 2019 07:59:42 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	s73sm1014204lfs.62.2019.03.16.07.50.05
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id 21sm1029506ljw.95.2019.03.16.07.59.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 16 Mar 2019 07:50:05 -0700 (PDT)
+	Sat, 16 Mar 2019 07:59:41 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Mar 2019 15:49:36 +0100
-Message-Id: <20190316144936.4768-1-open.source@oleksandr-kravchuk.com>
+Date: Sat, 16 Mar 2019 15:59:24 +0100
+Message-Id: <20190316145924.16486-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] openconnect: update to 8.02
+Subject: [meta-networking][PATCH] wolfssl: update to 3.15.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 14:50:06 -0000
+X-List-Received-Date: Sat, 16 Mar 2019 14:59:42 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../openconnect/openconnect_git.bb                 | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ .../wolfssl/{wolfssl_3.15.5.bb => wolfssl_3.15.7.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.15.5.bb => wolfssl_3.15.7.bb} (77%)
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-index c944144e2..050a2833c 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-@@ -2,7 +2,11 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.5.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
+similarity index 77%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.5.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
+index 37ba4aa32..0a0a6075d 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.5.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
+@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ PROVIDES += "cyassl"
+ RPROVIDES_${PN} = "cyassl"
  
-+SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
-+SRCREV = "6487ee8763e1b6345718684909aca970befbc49d"
-+
- DEPENDS = "vpnc libxml2 krb5 gettext-native"
-+RDEPENDS_${PN} = "bash python"
+-SRC_URI[md5sum] = "bc2dff70ba6e91aa3748d36ae6c6bc3d"
+-SRC_URI[sha256sum] = "f6c04c25355b340373931f43f8041b3cef78b61122e8a8edf9ee63c07b7a58be"
+-SRC_URI = "https://www.wolfssl.com/wolfssl-3.15.5.zip"
++SRC_URI = "https://www.wolfssl.com/wolfssl-${PV}.zip"
++SRC_URI[md5sum] = "6ec08c09e3f51cccbb1686b4fd45f92f"
++SRC_URI[sha256sum] = "4cc318c49580d3b9c361fe258fac6106624aa744f1d34e03977b587766a753ee"
  
- PACKAGECONFIG ??= "gnutls lz4 libproxy"
+ inherit autotools
  
-@@ -14,10 +18,7 @@ PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
- # not config defaults
- PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
- 
--PV = "7.08"
--
--SRCREV = "9697bea0e50952cab57063238b43a7099e498cbb"
--SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
-+PV = "8.02"
- 
- S = "${WORKDIR}/git"
- 
-@@ -25,3 +26,8 @@ inherit autotools pkgconfig
- 
- EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
-                  --disable-static"
-+
-+do_configure_append() {
-+    # script has /usr/bin/python2 path hardcoded
-+    sed -i -e 's=python2\.*=python=g' ${S}/trojans/tncc-wrapper.py
-+}
 -- 
 2.17.1
 
