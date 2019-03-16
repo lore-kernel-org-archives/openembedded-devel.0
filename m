@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
-	[209.85.208.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C6F847C2F4
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+	[209.85.208.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B37C607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 17:10:33 +0000 (UTC)
-Received: by mail-lj1-f195.google.com with SMTP id x13so10538709ljj.5
+	Sat, 16 Mar 2019 17:23:05 +0000 (UTC)
+Received: by mail-lj1-f180.google.com with SMTP id n18so8621670ljg.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 10:10:35 -0700 (PDT)
+	Sat, 16 Mar 2019 10:23:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=VqeC9+UVfRFYAI81vG3aFUudF2kZxlTV2w5x/35ZQ5o=;
-	b=DbC/BocJEtdDvNQeQQ+okC3jgzGsKUkHaPKS9sSS4SB6rMCGCYRHHyLfjh0hXiA+E4
-	pyVPAzlkTUDgyaz8YldwAAeSgAKI6E5PJs0Ww/w8WnTPY5ib+C8aYw96QnEMuL3dhR5P
-	SILc6pcG9AkePqJhlZCuNg3fYOCKCMUYT2bf+7KL5X06AlDoJuMPFx27wsW7BdMz5Fsv
-	1qwVkMX8Q342Xj39OE8IAOU6E/5zvjgGjvvAd4+BCOtEGuzbnGbXxR3yV2HHYOMzKSKt
-	CvAyCLAmhwdd6q2Hq4VoBIve1etAxyHfUpj42Fu7sEiCFhJWlM8TqwNJqosp1B+VIrYD
-	dkuw==
+	bh=deonSZxV1QUiGwIwLr9oW7KAsEduIfhvYBbNXu07QIs=;
+	b=aMoblrILo5QkUJ+2/wn32UXeHGHifA5/zqOS3g7/EN+T9iXG58ojIriM9J8r13sqtU
+	+n/ksZyDnpdiyBCZUHRvUKFdAULLwNsjMIUz+E2r31dH46wOay7JNZQUPbCr+FjKfZ6t
+	AXFbSum0/0RaOEBVObIywTZVG+8juPoWl9iisayIim0O2Hau39hWTPeNzIGTIJ+5FMoU
+	CHhsc5FGLg5nOZcDs++c1DzcBxU+4LX2+EzcPRRZ+nKGYz40DB/UMS1r3JWTVCKwc2YM
+	KnE0ImsSeeMfUU6S/cJCvx95Mo+xXb2yidkct6m8Um5kWqeg3ON4EBZLymNpTKMewpUa
+	oWLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VqeC9+UVfRFYAI81vG3aFUudF2kZxlTV2w5x/35ZQ5o=;
-	b=TX98MXdQyLd6F+pG7Iy6xSzc7yT3qleZsX57XFnr6VIy1Ad8Ne4LOaNvbc5Byh/kVD
-	ksOVADNxzibaOlVYREljuMbf0JM/S6DwBq4hG3Z/3la7C81cB+op/1xD88IzqXl3hOHt
-	jJpsffqsMoE4iukziuXls8WTE8fEAfoSgIc+SQRTnKsc6RSOqV7fHAG03R6vQVUGt/SY
-	pPusl2LJlGqgYbNN5xdCzJyf87ZjImbzt53wLWL8p0F0XpXf0FC9oqjfTmNDnzT1h9Tq
-	2FqMF5AosQDveZ2UPJm0ii2HgppKMVy94EiA+xmUbLcMKWA2PIcaY9bCAVDiYiwCKNQE
-	whlQ==
-X-Gm-Message-State: APjAAAVSZbcqCUjEFKz5yQWLL27YKVi5wi6Jole33QhcqUoYZNNyaBF9
-	lEA+nHOwkFiwBxTeviUy5af3IREkHFU=
-X-Google-Smtp-Source: APXvYqxenJuXFxAZbuZPgd2aR6+MjaQ9GTOspcU/5wp7IwkmFmR2Xw2jBPU3YZF7hwJdgQEPyptUzw==
-X-Received: by 2002:a2e:20cf:: with SMTP id g76mr5534820lji.36.1552756233935; 
-	Sat, 16 Mar 2019 10:10:33 -0700 (PDT)
+	bh=deonSZxV1QUiGwIwLr9oW7KAsEduIfhvYBbNXu07QIs=;
+	b=lzfj0xVAVvNJYsUGthCxiX3GluZq7qBPdmIN0GYva1QK4TwjbbdAqbiX/2u9M+Iux6
+	X/dd9AN6DRnj8NC7oixKvmhztYyHtVZ+ESXE2c0jd26U8q1ZiNWjZoOYoJrvMAT2dOxi
+	X7zDhSadTU41YhY9yBa+ILZZl2YlIjMXFrmdevqmfZaJAionLC5tIgukMdtJ/EFdl9ja
+	XbQEZWrW5PHG4wZ7Oy+iXdeZ0+PB7k4VA6kB3ZOZjiEumM05xw8JKnXT0qbtiWRIIyNN
+	ghieWdpYVt3s/FndSX0bs5RIAloyQaYbwR/WlLs88G++DgB79iMsiJIBiFzQ7X9m8YIx
+	6ekw==
+X-Gm-Message-State: APjAAAXYpxLzx3/RoKDFLdOEFBkd/EMcUWpqg6pUuf0R0DtdHVKDvmfn
+	Ffs8DEUWJY2SJuELEIM+lzJUYnSJ8Q4=
+X-Google-Smtp-Source: APXvYqwMxdfE+ArQHF/PM674InemM3em9E4MbI/GBnWitinRYeEhIeBaC3jUUXITcOdNR+9uZ5iwXA==
+X-Received: by 2002:a2e:8844:: with SMTP id z4mr5523210ljj.187.1552756986216; 
+	Sat, 16 Mar 2019 10:23:06 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id z26sm151592ljz.66.2019.03.16.10.10.33
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	a29sm1063685lfi.19.2019.03.16.10.23.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 16 Mar 2019 10:10:33 -0700 (PDT)
+	Sat, 16 Mar 2019 10:23:05 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Mar 2019 18:10:23 +0100
-Message-Id: <20190316171023.16955-1-open.source@oleksandr-kravchuk.com>
+Date: Sat, 16 Mar 2019 18:22:59 +0100
+Message-Id: <20190316172259.10822-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] packagegroup-tools-bluetooth: fix rdepends
+Subject: [meta-networking][PATCH] igmpproxy: update to 0.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +56,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 17:10:34 -0000
-
-RDEPENDS are already specified separately for bluez4 and bluez5.
+X-List-Received-Date: Sat, 16 Mar 2019 17:23:06 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../packagegroups/packagegroup-tools-bluetooth.bb             | 4 ----
- 1 file changed, 4 deletions(-)
+ .../recipes-daemons/igmpproxy/igmpproxy_0.1.bb   | 16 ----------------
+ .../recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
+ create mode 100644 meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
 
-diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-index f2a16dcf7..913e31111 100644
---- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-+++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-@@ -31,7 +31,3 @@ RDEPENDS_bluez5 = " \
-          pulseaudio-module-loopback', \
-         '', d)} \
- "
+diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
+deleted file mode 100644
+index 5424dc455..000000000
+--- a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "simple dynamic multicast routing daemon that only uses IGMP signalling"
+-HOMEPAGE = "http://sourceforge.net/projects/igmpproxy/"
 -
--# Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
--# Otherwise install nothing.
--RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1e995e2799bb0d27d63069b97f805420"
+-
+-SRC_URI = "http://sourceforge.net/projects/igmpproxy/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+-           file://0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch \
+-           "
+-
+-SRC_URI[md5sum] = "c56f41ec195bc1fe016369bf74efc5a1"
+-SRC_URI[sha256sum] = "ee18ff3d8c3ae3a29dccb7e5eedf332337330020168bd95a11cece8d7d7ee6ae"
+-
+-inherit autotools pkgconfig
+-
+-CFLAGS += "-D_GNU_SOURCE"
+diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
+new file mode 100644
+index 000000000..c99ebe0e9
+--- /dev/null
++++ b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "simple dynamic multicast routing daemon that only uses IGMP signalling"
++HOMEPAGE = "http://sourceforge.net/projects/igmpproxy/"
++
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=432040ff3a55670c1dec0c32b209ad69"
++
++SRC_URI = "https://github.com/pali/igmpproxy/releases/download/${PV}/igmpproxy-${PV}.tar.gz \
++           file://0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch \
++"
++SRC_URI[md5sum] = "3a9c2cb42c1f5ee0cb769a4884545641"
++SRC_URI[sha256sum] = "d351e623037390f575c1203d9cbb7ba33a8bdef85a3c5e1d2901c5a2a38449a1"
++
++inherit autotools pkgconfig
++
++CFLAGS += "-D_GNU_SOURCE"
 -- 
 2.17.1
 
