@@ -1,62 +1,49 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com
-	[209.85.167.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D3EB600BB
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A5DF6BA9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 19:51:41 +0000 (UTC)
-Received: by mail-oi1-f178.google.com with SMTP id t82so10022562oie.12
+	Sat, 16 Mar 2019 20:24:21 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id l7so953543ljg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 12:51:43 -0700 (PDT)
+	Sat, 16 Mar 2019 13:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-	:cc; bh=HxHrIT446NdxLuUPRWflN2jsJxhkpIlUOs/qIpZDxbY=;
-	b=dj06XIkP+JwxkKYcAv5LFBr5xKAMFwF772qIsZNHdbkqAWJe5R5cRJqPzJsDIlixxR
-	dGS+Nhtf94+LwfDHns+bBRaYLeq8SiRRdfXx8DOLqM3bDdPlkSOX9Iz8by32ty/ZCK2b
-	7r2Gz49cS8l4hqaSlYMt6o52J/pImZ4rL6JwkwmIi66Zm+RGAbXpfkUmHcaKclUk2k9X
-	rHjOTeQrT2GSd7yxL7YEjiILRpx6ZeeOFrijYjyXi9xpAUrEZW1VEEOD+QXoJnhGqi4U
-	hT1rTB8szI0wvAYMByxN4Zw3rxm8RYJOfSZIoRW/WJ8uu0lDLdv6kOSvE4IlS8DgySO8
-	FDXg==
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=ycEm+Sl7LqMgQhzT+XFhvfGc7kfUstS+ECFGNvVUyog=;
+	b=1kHMAeAPwaFIsR79UKkG2cuAMZbrk25kZhjBsv+/WJ1Dm6fjvrk1EX6fkjRk1NdCIk
+	dZmTXn+LbdiPwmJ5K2QS1edyDD3LKQQny5sjx3Rw2NiuJVMXVDXBe54no8o3MCcrtsec
+	ITEpuRkEHuBrCzlAB55+Y4q61dmI+uNpRSyj/UbFhIzTjpNy6GZwSZN/3kSntRH+Kr72
+	3l/T9DldZhDmGeqFZwD3WDkhjdXZ2W1doCiMlG1tSkD60gG3AZrD59n1Nb9ryQhsEyBC
+	OcORJZlbcqpeqof7YwYKBRRhJw795bN8lNoORFKuCVDjCMpCTwDrSXC4/+PgG1NsKfXT
+	rf+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-	:message-id:subject:to:cc;
-	bh=HxHrIT446NdxLuUPRWflN2jsJxhkpIlUOs/qIpZDxbY=;
-	b=NSdlEWHM7xuXKyuRGDl0F712g1GtK8SOa3HIx/8rhBJplpaQT5mOnN3uRva44WBCzP
-	gIFwDjI3byDHdX38SJRyx3SqEGKoXqufYdYivwrOcC2V1UUHxb+npLEJKmctITH5Nz6L
-	pW0aJ3DSnQCIeQUe543Y1ID4WnnJ1MVJ/r334+PJluMJAdIvC+MySLoKIqhquBCoZPc6
-	i90Rv3fVAohRAyR+wnrw3qqMHoJRMu9mgaQZyLJgjRb9sF5au71r1L09ADV/2TJgGF14
-	wRgLPTNVPMb6c4jat4jq7Oa0+4QSUqIDBm25/jqWby2YiAhKHYaoeELg85UuPG1BEnbF
-	O7Xg==
-X-Gm-Message-State: APjAAAVUEkvYXgSG1VGHZB/asqkdaEXFAwi+6zCBsrhAQj3FSo6S13fP
-	9nVqm6vTb48TVfYX61m5QVHOBnZ3SS1xBg==
-X-Google-Smtp-Source: APXvYqzSWKC+w3psqPv7eHHz0HgHzqmfyXryS57h7iKp6/FQbjk1agEM5gQdba08zKo4M5Zg54Akmg==
-X-Received: by 2002:a54:4f0f:: with SMTP id e15mr5171244oiy.66.1552765902261; 
-	Sat, 16 Mar 2019 12:51:42 -0700 (PDT)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com.
-	[209.85.167.176]) by smtp.gmail.com with ESMTPSA id
-	o17sm2087792otl.27.2019.03.16.12.51.40
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ycEm+Sl7LqMgQhzT+XFhvfGc7kfUstS+ECFGNvVUyog=;
+	b=flT9rk9CUMlpoC8oYwEeOSrn/OFam7RpTsJ/BUasnAfnBt4rgQtOlW0thPdftRixbq
+	+m9icDv3Gm9oxruUGOTKOfLcSmBQTsR8usQybq4Uask3DsTAIGUfSzYGzTIZzfAZBYBC
+	21gGL80IqVxKlh5jdRyb5OKM4OVDtx/QEZxoQmFoK46meUZpqqrNgbOxHrSQ/j5mvxIO
+	LGXhdwLMvsnaBMlhsh0HFx5y4Ij3mKMY2+jlZW6QuLK+yEyF7DB4B2gOeZkZW6BbQmA7
+	E8fU9VLg8ewQGepQNUE2F1ig3SKS4k7m9Z7GtVFCAegOba7m4Ta7Kfurd2HoyB5KPIEI
+	tOKw==
+X-Gm-Message-State: APjAAAVY93gB2yvJcaw1u8nils/NAWIt+oLD+5zZPe+kLmdyE2mjxsm1
+	GsPwk90OTvFqg1qJ9DkUnp5sJHpuOYY=
+X-Google-Smtp-Source: APXvYqxghwr0ijSBcVa6rEgrlNDZRHktz0diU0p8GEd+B+2Fdpr3ZAnvBrwW30zM7DXjB4emWKhorg==
+X-Received: by 2002:a2e:9850:: with SMTP id e16mr6248352ljj.121.1552767861683; 
+	Sat, 16 Mar 2019 13:24:21 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	l141sm1096176lfe.92.2019.03.16.13.24.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi1-f176.google.com with SMTP id t206so10054649oib.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
-X-Received: by 2002:aca:ac45:: with SMTP id v66mr5029929oie.134.1552765900025; 
-	Sat, 16 Mar 2019 12:51:40 -0700 (PDT)
-MIME-Version: 1.0
-References: <1552692315-22023-1-git-send-email-peter.griffin@linaro.org>
-In-Reply-To: <1552692315-22023-1-git-send-email-peter.griffin@linaro.org>
-Date: Sat, 16 Mar 2019 16:51:25 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKp0e=g=Awom-aqRKmP-QXwCL-Rr=JM31PQ+avQcMCb2jQ@mail.gmail.com>
-Message-ID: <CAP9ODKp0e=g=Awom-aqRKmP-QXwCL-Rr=JM31PQ+avQcMCb2jQ@mail.gmail.com>
-To: Peter Griffin <peter.griffin@linaro.org>
-Cc: stanimir.varbanov@linaro.org, Denis Carikli <denis@eukrea.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	=?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] chromium: add 2 fixes for v4l2 VDA support
+	Sat, 16 Mar 2019 13:24:21 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Mar 2019 21:24:10 +0100
+Message-Id: <20190316202410.31173-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] libev: update to 4.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,28 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 19:51:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 16 Mar 2019 20:24:24 -0000
 
-Hello Peter,
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../libev/{libev_4.24.bb => libev_4.25.bb}                   | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/libev/{libev_4.24.bb => libev_4.25.bb} (79%)
 
-On Fri, Mar 15, 2019 at 8:25 PM Peter Griffin <peter.griffin@linaro.org> wrote:
->
-> The first patch allows GpuVideoDecoder to actually get created.
-> Without it chrome://gpu report hardware video acceleration is
-> enabled, but actually ffmpegVideoDecoder is used for the decode.
->
-> The second adds NV12 & YVU420 formats for all ARM platforms,
-> otherwise V4L2 VDA on dragonboard will error with NV12 buffers.
->
-> Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
-
-Thank you for working on this; please open a PR on github as we have
-been using it for the layer as a way to get more people to contribute
-to it.
-
+diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.25.bb
+similarity index 79%
+rename from meta-oe/recipes-connectivity/libev/libev_4.24.bb
+rename to meta-oe/recipes-connectivity/libev/libev_4.25.bb
+index a5838d368..9456e51f1 100644
+--- a/meta-oe/recipes-connectivity/libev/libev_4.24.bb
++++ b/meta-oe/recipes-connectivity/libev/libev_4.25.bb
+@@ -5,9 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
+ 
+ SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
+-
+-SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
+-SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
++SRC_URI[md5sum] = "911daf566534f745726015736a04f04a"
++SRC_URI[sha256sum] = "78757e1c27778d2f3795251d9fe09715d51ce0422416da4abb34af3929c02589"
+ 
+ inherit autotools
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+2.17.1
+
 
