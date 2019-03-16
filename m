@@ -1,49 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A2F3605BA
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F2586C460
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 16:55:26 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id v20so13562643qtv.12
+	Sat, 16 Mar 2019 17:10:12 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id d18so9008043lfn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 09:55:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=xi7pIHd3cuAtChisR3b3AjIu3FRRLoB7jlYSusBe4Ys=;
-	b=Uys2hE388OaAnPP3UmKCf9IgrM3fUDCHoaNhxJwUXdCAdw4F7Ty4hRZUVqe51ZFaVY
-	8vfgjT0PaWnCQgUYk+jPPgnnLtHHDxiLMGqQFDy3hDkABJpMQaE6mBH1sC0QhZPZ2ui7
-	4c8X/Cc293QKgIhIThh2JA+9GpkOJWfABoyS6CNTTjAl1yBWVqrX491LWRjCAshUWqgA
-	L9Kpkx3a38GYeXbSc3cbBmJYDQ5sOvG7RSkCwPWmEWryQ+xYWYlLm7dnhPPBQ0/MgtAm
-	lx6Otyf1q1wrl/OH9Brrc1beTxzdy3SoMA+wW3ttQELuHRSX86jJeNkdRMqbW1ZG88KM
-	3sWg==
+	Sat, 16 Mar 2019 10:10:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=w7vslsV2DrEFSA3rjXltDpN5eX5o3+LIFdl0VmxwDyg=;
+	b=YgncejG3txPBdkAPM5s4I4jJIyadx6W/2ouw2q6bjqUshMo1VadMi853J4fP669dJj
+	RS73pWLk+68R3nTFgMhqarCdsf7Fi1MzgK2j5BPMxyqMC/uyEbx8APoQw12HCqUGji9Z
+	Tlchn1DyK41BMulZFIHyuLuP+X56jVbdd7pwW2ryHHeJ2HXKii5NFNQWDkZO3WbadIzo
+	Ga9S0nzmcp1k9LBG3nyL/JRUfoHIrwZuavl8Vjv0fdOrkDscxDCIX9qOSHgFddeO4F7S
+	gRUvt9N4O+0+b5Km3g1+QCHjwUeclNne8oJCiVK+voNDBKMKolGMbzz/biz5a9yQ4i7+
+	+4sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=xi7pIHd3cuAtChisR3b3AjIu3FRRLoB7jlYSusBe4Ys=;
-	b=YmE6gQ0LxGgItefDhaLCagVMOv90U6ZoMg/B/267nQEgCDZSNqp5zx66iERK9bkPJw
-	fwrvEKG8ODA0j5uT9SExALd5zSMcUHJ4l5aRV9noYFr2BnBFw2EOnHYsKLaUJMr3M/gw
-	0YCg4MxOK0yVQFHZuoyCODmOCulX75hrdHH88WBot2AfFItNTMktLT8nV5UIEslakwXz
-	xs3ttnKct6DPvOmLGhwgNUnajxogttBoFkru/0ZQ4z79Q+hOcPUXFjiJej+6a5l7wfpt
-	qa17oZlx2Wtcrp0uoNxH/fHUbm+3pRsyPD4Wcm+7MGR99kXjjx3s3AReNUGcVLMYfBTi
-	YnsA==
-X-Gm-Message-State: APjAAAWDdebgJlL9nyAbNxjrObXoJIDISMERTwsp0pTo6+KMbAisde43
-	dTJr4XKxZCNz0kE/QpCnQgvXYVHMTbaTgtm53pc=
-X-Google-Smtp-Source: APXvYqxP3o2E3BfODfIZ/5H4UxQd88C16oQ7YontqfoAKO6LC1Gm+n/0j9nxxkb1gcoqc+NcIsIwNdFAuCnr0mPobOg=
-X-Received: by 2002:aed:3a09:: with SMTP id n9mr7323886qte.196.1552755327107; 
-	Sat, 16 Mar 2019 09:55:27 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190316080428.36688-1-raj.khem@gmail.com>
-	<CALbNGRQwWcwBjXPmtusLirywo=Tw2gV40PFDxCF6Kn8ZkS5F1A@mail.gmail.com>
-	<CALbNGRRz4k-xRCBSOOF1PsoJ1p_porgc7kKcOoW4ctXCD9HFvg@mail.gmail.com>
-In-Reply-To: <CALbNGRRz4k-xRCBSOOF1PsoJ1p_porgc7kKcOoW4ctXCD9HFvg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Mar 2019 09:55:01 -0700
-Message-ID: <CAMKF1spX7gfga6kz6mzigtLwv4nMOfhHtNRBeM_b9XU1kmeD4Q@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-mixer: Remove recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=w7vslsV2DrEFSA3rjXltDpN5eX5o3+LIFdl0VmxwDyg=;
+	b=CNM+DeZnxLH0us9JvB+AUd/OpokUPF7Atc/h75XJ5HmWbuydXrpMEC4+CnPByo9VbC
+	3tMVE1m/ubfZem85lLvL3n3KYdasvPR9+3Xau8DdJI30drSj0Ngk3sM0BXqIxy0PaBGD
+	5Tl0joT2IDEucySwDyR/rm7V9JF/Gmp5MPiUCqjk2Bhdt/cxJ+NjQxk3QwBxqlGmBTBB
+	lgrkK+ho9N55vFoNatwT+Q6JyvXU/xOKrzXVHInQC41lK2/edJnObPUpBs8UC6pt0aHN
+	zuke8+XXa0AcLpso9SMUOMjCFWxkZparbvpQZXnKa8wRDw/JJnbtUuRIOF4+wVWgI+PC
+	IDFA==
+X-Gm-Message-State: APjAAAUqyLKzWxdDbDiUsc8u0dwO5W/zPHizXNvaTRYuEHC49B6GzN0w
+	6Ijbgtr33M8PweXD2qd8Ps9WwWgzFCY=
+X-Google-Smtp-Source: APXvYqxY9LMoHs1/w1kHI5F9CvCJhfnHXLkJtkQJih6VqfgUfIQbZCCDPDd0rLkkQz1hCVS3VdFy3g==
+X-Received: by 2002:a19:6d01:: with SMTP id i1mr5251543lfc.118.1552756212216; 
+	Sat, 16 Mar 2019 10:10:12 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	r12sm1074249ljc.97.2019.03.16.10.10.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 16 Mar 2019 10:10:11 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Mar 2019 18:10:06 +0100
+Message-Id: <20190316171006.16245-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] blueman: update to 2.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,39 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 16:55:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 16 Mar 2019 17:10:12 -0000
 
-On Sat, Mar 16, 2019 at 2:32 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Sat, Mar 16, 2019 at 10:09 AM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
-> >
-> > On Sat, Mar 16, 2019 at 9:04 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > xfce4-mixer can be replaced with xfce4-pulseaudio-plugin
-> > >
-> > NAK - it works perfectly fine and xfce4-pulseaudio-plugin is not a
-> > replacement because it is sitting on top of pulseaudio. Pulseaudio is
-> > poison if you want to produce music (alll the jack based  stuff)
-> >
-> I am tired of useless discussions - seems the priorities of this
-> project do not match mine anymore: I'll create a layer for gstreamer /
-> xfce-mixer and all the music stuff I collected in meta-qt5-extra.
->
-There is a reason why I Cc'ed you on the patches and that is to
-consider your priorities on the contrary.
-Adrian summed it up, but the motivation was to remove gstreamer 0.10
-and this is only recipe which require it, so I was wondering if there was
-a better way to deal with it, e.g. may be xfc4-mixer has  support for
-gstreamer 1.x or some such. as gst 0.10.x get aged, it is often that
-it
-has to be fixed to keep going as we change things like compiler verisons
-adding new architectures which don't support it etc.
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../blueman/{blueman_git.bb => blueman_2.0.8.bb}           | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-connectivity/blueman/{blueman_git.bb => blueman_2.0.8.bb} (80%)
 
-> So have fun...
->
-> Andreas
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+similarity index 80%
+rename from meta-networking/recipes-connectivity/blueman/blueman_git.bb
+rename to meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+index 947db7836..8993aaa3c 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+@@ -7,12 +7,11 @@ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-nat
+ inherit autotools systemd gsettings python3native gtk-icon-cache
+ 
+ SRC_URI = " \
+-    git://github.com/blueman-project/blueman.git \
++    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
+     file://0001-Search-for-cython3.patch \
+ "
+-SRCREV = "c4a03417e81e21543d4568e8e7f7de307582eb50"
+-PV = "2.0.5+git${SRCPV}"
+-S = "${WORKDIR}/git"
++SRC_URI[md5sum] = "51dc07d48125ee9600e7f6168d6e67f6"
++SRC_URI[sha256sum] = "04afd07b4c900a401f39e711dedbf8b9cf12000ddeda0d8ef3c3327caf34704e"
+ 
+ EXTRA_OECONF = " \
+     --disable-runtime-deps-check \
+-- 
+2.17.1
+
 
