@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A5DF6BA9D
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
+	[209.85.208.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C1E079D13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 20:24:21 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id l7so953543ljg.6
+	Sat, 16 Mar 2019 20:29:44 +0000 (UTC)
+Received: by mail-lj1-f169.google.com with SMTP id t13so10788218lji.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 13:24:22 -0700 (PDT)
+	Sat, 16 Mar 2019 13:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=ycEm+Sl7LqMgQhzT+XFhvfGc7kfUstS+ECFGNvVUyog=;
-	b=1kHMAeAPwaFIsR79UKkG2cuAMZbrk25kZhjBsv+/WJ1Dm6fjvrk1EX6fkjRk1NdCIk
-	dZmTXn+LbdiPwmJ5K2QS1edyDD3LKQQny5sjx3Rw2NiuJVMXVDXBe54no8o3MCcrtsec
-	ITEpuRkEHuBrCzlAB55+Y4q61dmI+uNpRSyj/UbFhIzTjpNy6GZwSZN/3kSntRH+Kr72
-	3l/T9DldZhDmGeqFZwD3WDkhjdXZ2W1doCiMlG1tSkD60gG3AZrD59n1Nb9ryQhsEyBC
-	OcORJZlbcqpeqof7YwYKBRRhJw795bN8lNoORFKuCVDjCMpCTwDrSXC4/+PgG1NsKfXT
-	rf+Q==
+	bh=E60L5VNgZUMErO9r0C8jNO3U9XX1NiJsLaRU4+YYJYw=;
+	b=ZnVJpex0XoEHa1dqW8tNnRgse3MnN32DUS1m90TOo06kXRSse3MOAsQeujg4jNAx8r
+	djLAgYsd0hzcc6VG2fB3aZ0PIkO7HujzRWIWtk7aex4Gog8RWExvzPXKstISYp5bUUNZ
+	sYkootZo64BR5pfhr2bKXai76KidN5sXl7aBGxHNyotmN0raBn2C/0egL5kXqJ9zRiw9
+	SR6edTwCVGrLibG9NNKzGyKVwsDt57nfBoAvMiQ5UGMNYg3+hogQ210JgRzPIHriM6YF
+	UI5vJW2B9yGlBb2Iqhq+uIkvdMaW7v5Max57gapZw2ExkH69KpneltrLjDlFEab05vWc
+	th7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ycEm+Sl7LqMgQhzT+XFhvfGc7kfUstS+ECFGNvVUyog=;
-	b=flT9rk9CUMlpoC8oYwEeOSrn/OFam7RpTsJ/BUasnAfnBt4rgQtOlW0thPdftRixbq
-	+m9icDv3Gm9oxruUGOTKOfLcSmBQTsR8usQybq4Uask3DsTAIGUfSzYGzTIZzfAZBYBC
-	21gGL80IqVxKlh5jdRyb5OKM4OVDtx/QEZxoQmFoK46meUZpqqrNgbOxHrSQ/j5mvxIO
-	LGXhdwLMvsnaBMlhsh0HFx5y4Ij3mKMY2+jlZW6QuLK+yEyF7DB4B2gOeZkZW6BbQmA7
-	E8fU9VLg8ewQGepQNUE2F1ig3SKS4k7m9Z7GtVFCAegOba7m4Ta7Kfurd2HoyB5KPIEI
-	tOKw==
-X-Gm-Message-State: APjAAAVY93gB2yvJcaw1u8nils/NAWIt+oLD+5zZPe+kLmdyE2mjxsm1
-	GsPwk90OTvFqg1qJ9DkUnp5sJHpuOYY=
-X-Google-Smtp-Source: APXvYqxghwr0ijSBcVa6rEgrlNDZRHktz0diU0p8GEd+B+2Fdpr3ZAnvBrwW30zM7DXjB4emWKhorg==
-X-Received: by 2002:a2e:9850:: with SMTP id e16mr6248352ljj.121.1552767861683; 
-	Sat, 16 Mar 2019 13:24:21 -0700 (PDT)
+	bh=E60L5VNgZUMErO9r0C8jNO3U9XX1NiJsLaRU4+YYJYw=;
+	b=Yp3jF8K5v81U5nTxNoXIGHXhwg7zJQp70OY/EJ57nj8VYVlaSlRDrLbRVGcSByyRqj
+	+veG0g+QCjGU8UQxXlxKhXIJhlPyQVvqOsFJufVR2+EeLpqmpByiaedBUuBWcsUq39Jd
+	UeO1rTS9W7u8idpjad5WbxedASwL7XWMYts/QRWl5yrMrFuuoSLXtojgZ2wfx3Sy3FUv
+	8yCdVOjuma6Y8LPR42Ue3dyEvnG2WEyA+bKopLjkf8E+RQIi7vakX0B+kuYNHAh+jsJe
+	lbC/0a712AGtxqRQEjCo2nII142+owCEPPOTConLmF1An6yoyfVaNGgvmTHgyohLTUYM
+	lNEQ==
+X-Gm-Message-State: APjAAAX7kpW3LbJ4dqB+CeN2zmlFlJl1QANdPejD9IyZ7/CNS9nsQf5u
+	6O6jarmnMb50GxfQsMM6nMlVkzMKSf0=
+X-Google-Smtp-Source: APXvYqwI1+MrxJ1llDmF6ERdhiaDEZTB8KbEBhkaNyq2zAtKnNmt+vCI3blmRWzXEKji6dcZuac+9g==
+X-Received: by 2002:a2e:8089:: with SMTP id i9mr1184552ljg.137.1552768184312; 
+	Sat, 16 Mar 2019 13:29:44 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	l141sm1096176lfe.92.2019.03.16.13.24.20
+	t81sm1099864lff.21.2019.03.16.13.29.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 16 Mar 2019 13:24:21 -0700 (PDT)
+	Sat, 16 Mar 2019 13:29:43 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Mar 2019 21:24:10 +0100
-Message-Id: <20190316202410.31173-1-open.source@oleksandr-kravchuk.com>
+Date: Sat, 16 Mar 2019 21:29:40 +0100
+Message-Id: <20190316202940.11888-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] libev: update to 4.25
+Subject: [meta-oe][PATCH] libuv: update to 1.27.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 20:24:24 -0000
+X-List-Received-Date: Sat, 16 Mar 2019 20:29:44 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libev/{libev_4.24.bb => libev_4.25.bb}                   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/libev/{libev_4.24.bb => libev_4.25.bb} (79%)
+ .../libuv/{libuv_1.20.3.bb => libuv_1.27.0.bb}             | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-connectivity/libuv/{libuv_1.20.3.bb => libuv_1.27.0.bb} (66%)
 
-diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.25.bb
-similarity index 79%
-rename from meta-oe/recipes-connectivity/libev/libev_4.24.bb
-rename to meta-oe/recipes-connectivity/libev/libev_4.25.bb
-index a5838d368..9456e51f1 100644
---- a/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-+++ b/meta-oe/recipes-connectivity/libev/libev_4.25.bb
-@@ -5,9 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
+diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.20.3.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb
+similarity index 66%
+rename from meta-oe/recipes-connectivity/libuv/libuv_1.20.3.bb
+rename to meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb
+index a11ff9d2c..c8239443c 100644
+--- a/meta-oe/recipes-connectivity/libuv/libuv_1.20.3.bb
++++ b/meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb
+@@ -4,10 +4,9 @@ BUGTRACKER = "https://github.com/libuv/libuv/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
  
- SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
--
--SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
--SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
-+SRC_URI[md5sum] = "911daf566534f745726015736a04f04a"
-+SRC_URI[sha256sum] = "78757e1c27778d2f3795251d9fe09715d51ce0422416da4abb34af3929c02589"
+-S = "${WORKDIR}/git"
+-SRCREV = "8cfd67e59195251dff793ee47c185c9d6a8f3818"
+-BRANCH = "v1.x"
+-SRC_URI = "git://github.com/libuv/libuv.git;protocol=https;branch=${BRANCH};"
++SRC_URI = "https://github.com/libuv/libuv/archive/v${PV}.tar.gz"
++SRC_URI[md5sum] = "cc2cf259442fbe85404e75691e8244e1"
++SRC_URI[sha256sum] = "4afcdc84cd315b77c8e532e7b3fde43d536af0e2e835eafbd0e75518ed26dbed"
  
  inherit autotools
  
