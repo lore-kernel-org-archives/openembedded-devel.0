@@ -1,38 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 92E797C4BF
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
+	[209.85.167.68])
+	by mail.openembedded.org (Postfix) with ESMTP id DD9607BFB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2019 09:58:01 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44LyYh5YZvz5m;
-	Sat, 16 Mar 2019 10:58:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1552730281;
-	bh=jZX/y7RAf8R2lKvYD53ArsbzCioD7QsX7sas3SKReKY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=meRnIt6BjQ/tFTo7wYJPyczzKTyoy1bkHT61RnE00Avx0FmHfbvZTF6kvXvhzBlAZ
-	j4ct3mXvUeJt+/Tq3bahjVS9f8dzdXfATJIHIDiahabBqQYZ5nxoqi8RNsphnKEJFp
-	TOxo0lvxAhsdBIHaMGkvZvRKpmX/B+El36CK7Vk+25ZwLvHRgr0wnoPbrnM45TyW2X
-	wlOOL0TLOmdhpL3P0agWDJfGbcShwMKefJBkoS4TRLmw799b9AnzRWRRKff7tBgUoM
-	4a4ps/Um2vzLwei3NoTTD2WoczgmNEucFVdhxb/Q5Bs7ejwT40AYyvtUJah30UqtW8
-	4YVMhwgeOeXwG6cpz5kM0LqkbBVeOHjBYYN6307lZgCThU6494v2m9U1YLdge9YUua
-	zFt4vivi0mFC0tA/idwhYuIx84r1+Uh4Jdyp8RYO0dDx1YiF7CTvoNzpZmw/xZTGub
-	UFEFWGdYGWJ8WFx+j2trXkeHPtzPXw+NdAUVHXDsdWtevRcB+OHYXiEcbE33UNtPNf
-	nvkksNT/5y0QYCKhY3H7sdpphXWyKOabxvwPujLqn3YLZ5zdDY57wNNSACKAc/oe4Z
-	cmdBnGW+O9JwIS3TBGaEy/d/VP2E9PKs9pxg0UDF1PRcA08urGSvOOMNWExgBrRsvm
-	xxnOo5CLjkFB7THVPw24dszw=
-Date: Sat, 16 Mar 2019 11:57:58 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>
-Message-ID: <20190316095758.GB19622@localhost>
-References: <20190316080428.36688-1-raj.khem@gmail.com>
-	<CALbNGRQwWcwBjXPmtusLirywo=Tw2gV40PFDxCF6Kn8ZkS5F1A@mail.gmail.com>
-	<CALbNGRRz4k-xRCBSOOF1PsoJ1p_porgc7kKcOoW4ctXCD9HFvg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRRz4k-xRCBSOOF1PsoJ1p_porgc7kKcOoW4ctXCD9HFvg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-mixer: Remove recipe
+	Sat, 16 Mar 2019 14:50:05 +0000 (UTC)
+Received: by mail-lf1-f68.google.com with SMTP id h6so8817302lfc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Mar 2019 07:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=eY0papp2K3f/c0uj0ZwnZYtjy0m7QDGak5mS901NJ2A=;
+	b=bZdCIR8BWXAvVyKmv3ppnl9gk8x1ib9wGvPqDFFXOoZ89asEyFCcwnlGiJwPhKFQ9n
+	rwbdgHZY4d2vDHMh2c3nk4rdOpJLQMjvh2rI9m7Ic0LHhAf+plTuVvlLCjj34NjADbbH
+	odIKFs1UhvvKAK/G0adRnxpn2eR2qFpeVK211Jo1BxsJrOGmKnHHosP3Sr/HnRBqf8pX
+	WwIcnFG5A9eZjmhlAlMvX60QJCm/t0EZ2PcdN/xHdReKd1LK2xUGcqVTFAkQzKu8/Rgb
+	ZzbVpSLdqWy4Vvn7UJ3tfBP6mqv1Ss4VpXQHc72YKdGQ/Mv3d6UzXCR3gGVr54v6b6RS
+	50Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eY0papp2K3f/c0uj0ZwnZYtjy0m7QDGak5mS901NJ2A=;
+	b=EZKTipghsKsUHVSdjqUjXhX3/w50a//mpuLw8YXxuOQtYsO/FfWquRfLopbP1embEY
+	C8cG8J7I3OvupaA+aryJgdZj2WcE5TH2aJ/y/i2cOhBEmIAyDZV2kR1lRATfRALCakAH
+	D7SOK2VVQDq9tXsH9ymHl4vPGsN48OT8hrVa5dsvwOv2ei8zb9RtYRIH5Kfkz3pjwCSA
+	VmpOrCUjA0QDz7dyUuJriS0og9EAcLjw1vCc50mXkiNKhzjUxvE+xs3jMptQ0RSqp8XX
+	9gIVyytNG8HRWEQjMpPQdVPJ6Ukd7W422I8CUHkmJhWWW9dNCeAsF7+613x9mbmdTKWj
+	ooeg==
+X-Gm-Message-State: APjAAAXPduUL/rAxskmG3u4/sNPWSAajUwqyPEqCp6DiIiKYnud6LlU7
+	uaDuBpTUNCWLbHpik7HDMNp2kBID/+o=
+X-Google-Smtp-Source: APXvYqxAX6nZFkmLrnoDpsB2FN1AnG/7FqZ/diqnDMd5bK3MPSiNgHaNLNMIPMM5DbpPNPeK61fR9w==
+X-Received: by 2002:a19:7613:: with SMTP id c19mr4950059lff.105.1552747806043; 
+	Sat, 16 Mar 2019 07:50:06 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	s73sm1014204lfs.62.2019.03.16.07.50.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 16 Mar 2019 07:50:05 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Mar 2019 15:49:36 +0100
+Message-Id: <20190316144936.4768-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-networking][PATCH] openconnect: update to 8.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,45 +56,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2019 09:58:01 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 16 Mar 2019 14:50:06 -0000
 
-On Sat, Mar 16, 2019 at 10:31:56AM +0100, Andreas Müller wrote:
-> On Sat, Mar 16, 2019 at 10:09 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
-> >
-> > On Sat, Mar 16, 2019 at 9:04 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > xfce4-mixer can be replaced with xfce4-pulseaudio-plugin
-> > >
-> > NAK - it works perfectly fine and xfce4-pulseaudio-plugin is not a
-> > replacement because it is sitting on top of pulseaudio. Pulseaudio is
-> > poison if you want to produce music (alll the jack based  stuff)
-> >
-> I am tired of useless discussions - seems the priorities of this
-> project do not match mine anymore: I'll create a layer for gstreamer /
-> xfce-mixer and all the music stuff I collected in meta-qt5-extra.
->...
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../openconnect/openconnect_git.bb                 | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-Looking at the other recent commits in master-next the main motivation
-for this patch seems to be
-    gstreamer-0.10: Remove recipes
-    It has been over 5+ years for migration to gstreamer 1.x
-
-The actual problem seems to be unrelated to audio output, but this was 
-the last recipe in meta-openembedded that required GStreamer 0.10.
-
-> Andreas
-
-cu
-Adrian
-
+diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+index c944144e2..050a2833c 100644
+--- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
++++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+@@ -2,7 +2,11 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
+ 
++SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
++SRCREV = "6487ee8763e1b6345718684909aca970befbc49d"
++
+ DEPENDS = "vpnc libxml2 krb5 gettext-native"
++RDEPENDS_${PN} = "bash python"
+ 
+ PACKAGECONFIG ??= "gnutls lz4 libproxy"
+ 
+@@ -14,10 +18,7 @@ PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
+ # not config defaults
+ PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
+ 
+-PV = "7.08"
+-
+-SRCREV = "9697bea0e50952cab57063238b43a7099e498cbb"
+-SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
++PV = "8.02"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -25,3 +26,8 @@ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
+                  --disable-static"
++
++do_configure_append() {
++    # script has /usr/bin/python2 path hardcoded
++    sed -i -e 's=python2\.*=python=g' ${S}/trojans/tncc-wrapper.py
++}
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.17.1
 
 
