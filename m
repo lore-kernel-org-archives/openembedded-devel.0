@@ -1,24 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BE43C79CE4
+Return-Path: <Zhe.He@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6929D60807
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Mar 2019 02:09:35 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x2I28sSZ031662
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 17 Mar 2019 19:09:05 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Sun, 17 Mar 2019 19:08:32 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Sun, 17 Mar 2019 22:08:27 -0400
-Message-ID: <20190318020829.35542-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Mon, 18 Mar 2019 02:33:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x2I2XIIF022840
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Mar 2019 19:33:18 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Sun, 17 Mar 2019 19:33:17 -0700
+From: <zhe.he@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 18 Mar 2019 10:33:16 +0800
+Message-ID: <1552876396-183037-1-git-send-email-zhe.he@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH v3 0/2] Update gvfs and libgtop
+Subject: [meta-oe][PATCH] utilities: Fix build failure with -Werror=maybe-uninitialized
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,29 +30,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2019 02:09:36 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 18 Mar 2019 02:33:17 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: He Zhe <zhe.he@windriver.com>
 
-v3:
-* remove inherit upstream-version-is-even which has been done by previous patch
+Initialize magic_number to zero to avoid such failure.
+utilities/blob_db/blob_log_format.cc:91:3: error: 'magic_number' may be used
+uninitialized in this function [-Werror=maybe-uninitialized]
+   if (magic_number != kMagicNumber) {
+   ^~
 
-v2:
-* correct libgtop commit message
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ ...ix-build-failure-with-Werror-maybe-uninit.patch | 35 ++++++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb         |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
 
-Kai Kang (2):
-  libgtop: 2.38.0 -> 2.40.0
-  gvfs: 1.39.92 -> 1.40.0
-
- .../recipes-gnome/gvfs/{gvfs_1.39.92.bb => gvfs_1.40.0.bb}  | 4 ++--
- .../libgtop/{libgtop_2.38.0.bb => libgtop_2.40.0.bb}        | 6 ++++--
- 2 files changed, 6 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.39.92.bb => gvfs_1.40.0.bb} (94%)
- rename meta-gnome/recipes-gnome/libgtop/{libgtop_2.38.0.bb => libgtop_2.40.0.bb} (62%)
-
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
+new file mode 100644
+index 0000000..ef0429a
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
+@@ -0,0 +1,35 @@
++From 8996f075e64da0e6ffeda57632ef31f8710defcc Mon Sep 17 00:00:00 2001
++From: He Zhe <zhe.he@windriver.com>
++Date: Fri, 15 Mar 2019 16:47:03 +0800
++Subject: [PATCH] utilities: Fix build failure with -Werror=maybe-uninitialized
++
++Summary:
++Initialize magic_number to zero to avoid such failure.
++utilities/blob_db/blob_log_format.cc:91:3: error: 'magic_number' may be used
++uninitialized in this function [-Werror=maybe-uninitialized]
++   if (magic_number != kMagicNumber) {
++   ^~
++
++Upstream-Status: Accepted [expected version 5.19]
++
++Signed-off-by: He Zhe <zhe.he@windriver.com>
++---
++ utilities/blob_db/blob_log_format.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/utilities/blob_db/blob_log_format.cc b/utilities/blob_db/blob_log_format.cc
++index 2bf7028..8726cb8 100644
++--- a/utilities/blob_db/blob_log_format.cc
+++++ b/utilities/blob_db/blob_log_format.cc
++@@ -82,7 +82,7 @@ Status BlobLogFooter::DecodeFrom(Slice src) {
++   uint32_t src_crc = 0;
++   src_crc = crc32c::Value(src.data(), BlobLogFooter::kSize - sizeof(uint32_t));
++   src_crc = crc32c::Mask(src_crc);
++-  uint32_t magic_number;
+++  uint32_t magic_number = 0;
++   if (!GetFixed32(&src, &magic_number) || !GetFixed64(&src, &blob_count) ||
++       !GetFixed64(&src, &expiration_range.first) ||
++       !GetFixed64(&src, &expiration_range.second) || !GetFixed32(&src, &crc)) {
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 78520f9..27c7b20 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -12,6 +12,7 @@ PV = "5.18.2"
+ 
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
++           file://0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.20.0
+2.7.4
 
 
