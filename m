@@ -1,28 +1,46 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id CE43C7C51E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+	[209.85.160.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C11856C1BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Mar 2019 15:47:19 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x2IFlJSF022088
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Mon, 18 Mar 2019 16:47:19 +0100
-Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
-	[163.242.44.88])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x2IFlILe000526;
-	Mon, 18 Mar 2019 16:47:19 +0100
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id A5A5D95182D;
-	Mon, 18 Mar 2019 16:47:17 +0100 (CET)
-From: Andrej Valek <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Mar 2019 16:47:07 +0100
-Message-Id: <20190318154707.20242-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190318144440.11580-1-andrej.valek@siemens.com>
-References: <20190318144440.11580-1-andrej.valek@siemens.com>
-Cc: vkc@connectedcars.dk
-Subject: [OE-core][PATCH v2] nodejs: fix target ldflags using
+	Mon, 18 Mar 2019 17:02:57 +0000 (UTC)
+Received: by mail-qt1-f182.google.com with SMTP id x12so2645215qts.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Mar 2019 10:02:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=QIygU/zgog+eT0xOvPG1BQYu4cbxEwfH1MgLkcAG4YM=;
+	b=gNE82K51DG+4K0iXOxd5tiLGBSq6f/OJMZNPrx6y5hKnTlwDkf+VvlTSo8TIAiE2jm
+	8Obgge+7DbB4zJBEYFrQ53KLPobcy3fujxA8dz1b/QvIp63N2gwoh5iKKP4+fdQWwJ6+
+	FrbkBP4ornh+I6Wa/oUNN8mRpyhMDpFxzqpTrIxZK13nIwbH+pMDUky0RkiB9I2xY2Ie
+	c6MIt2+BIOrD6pFnXr+KveYyA0WtE3vExGYvyfd53leVBsNN8BWz1Wb3EOkNWw5iINlz
+	AKYYVoK9JVAVhowkBErkIFEVOoLb3uSub8FBqU0xUX+6aIZqOeb+XE9jyAqAqLjiahAM
+	/wYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=QIygU/zgog+eT0xOvPG1BQYu4cbxEwfH1MgLkcAG4YM=;
+	b=MIsI2ix38vSC4po3JRV+A8ZZoQbtw2M4YROufgNpag9iObYiXb0PrAVUrapX65nAbT
+	morLdYpv9R4tf4TwAUUCww+qNhLprxJRmdFnOn9B1735hbuqbaT+BHqDrUJn/09kl5uY
+	zt+l0JwzTZDd7/5OoqvmFbsbQaRL76Y89VGYduVuG4PfQCyIlPTIaqHQkl//YwQywHpM
+	JWNvloARBfo2fw0d8j8M0a781hhwEBhUaeV/l9QgSzyMXaheq3INCUg2HGNEeNUiRmGO
+	3Ba92/1UCOcGy0fEtoNPvuhdB0RY0qZ0n5jseQAhDHPjM8IxT1x9SZJnHurUgGgcl0yN
+	muYA==
+X-Gm-Message-State: APjAAAWYj2MFMUjj9qYj698ozpIvpNR98fFItCB8fcuw5U0odO1JF3WS
+	wHQ0y54shgtE900nw9fg4R4RMp6XBwJ+u6CFLmzKsDng
+X-Google-Smtp-Source: APXvYqwaqOS+BzGHOCbJ2GSv4GHgpDJpaTJ5I1K6wBpXlcXk3PbiIadkTUJb40XHVNrfw+Z70KwA56xP1ano3w0e36Q=
+X-Received: by 2002:ac8:2562:: with SMTP id 31mr10665241qtn.253.1552928578453; 
+	Mon, 18 Mar 2019 10:02:58 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190316171006.16245-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190316171006.16245-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 18 Mar 2019 10:02:32 -0700
+Message-ID: <CAMKF1squDfYi+EMoVF4Y=BDGWn32D4N_gAt37=RB_GFvoH7nmA@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] blueman: update to 2.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,62 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2019 15:47:20 -0000
+X-List-Received-Date: Mon, 18 Mar 2019 17:02:57 -0000
+Content-Type: text/plain; charset="UTF-8"
 
- - do not drop target LDFLAGS
-  - even if the target LDFLAGS have been specified, tools like torque was
-    linked with system libraries
+Fails
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- .../nodejs/nodejs/0006-Use-target-ldflags.patch    | 24 ++++++++++++++++++++++
- meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb  |  1 +
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
+https://errors.yoctoproject.org/Errors/Details/233473/
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-new file mode 100644
-index 000000000..c6d0cec4b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-@@ -0,0 +1,24 @@
-+The target LDFLAGS have been ignored. Tools like torque
-+have been loaded from system libraries, even if a native
-+one was the target.
-+|$ ldd torque 
-+|    libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
-+|    libcrypto.so.1.1 => /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
-+|    libssl.so.1.1 => /usr/lib/x86_64-linux-gnu/libssl.so.1.1
-+|    libicui18n.so.63 => not found
-+|    libicuuc.so.63 => not found
-+...
-+
-+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-+
-+diff -Naur node-v10.15.1/deps/v8/gypfiles/common.gypi node-v10.15.1/deps/v8/gypfiles/common.gypi
-+--- node-v10.15.1/deps/v8/gypfiles/common.gypi	2019-03-18 15:01:39.000000000 +0100
-++++ node-v10.15.1/deps/v8/gypfiles/common.gypi	2019-03-18 15:04:08.628361308 +0100
-+@@ -1106,6 +1106,7 @@
-+             'cflags': [ '-fno-strict-aliasing' ],
-+           }],
-+         ],  # conditions
-++        'ldflags+': [ '$(LDFLAGS)' ],
-+       }],
-+       ['OS=="solaris"', {
-+         'defines': [ '__C99FEATURES__=1' ],  # isinf() etc.
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-index 17c9bb0c4..672cd8440 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-@@ -17,6 +17,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
-            file://0004-Make-compatibility-with-gcc-4.8.patch \
-            file://0005-Link-atomic-library.patch \
-+           file://0006-Use-target-ldflags.patch \
-            "
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
--- 
-2.11.0
-
+On Sat, Mar 16, 2019 at 10:10 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../blueman/{blueman_git.bb => blueman_2.0.8.bb}           | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
+>  rename meta-networking/recipes-connectivity/blueman/{blueman_git.bb => blueman_2.0.8.bb} (80%)
+>
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+> similarity index 80%
+> rename from meta-networking/recipes-connectivity/blueman/blueman_git.bb
+> rename to meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+> index 947db7836..8993aaa3c 100644
+> --- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
+> +++ b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
+> @@ -7,12 +7,11 @@ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-nat
+>  inherit autotools systemd gsettings python3native gtk-icon-cache
+>
+>  SRC_URI = " \
+> -    git://github.com/blueman-project/blueman.git \
+> +    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
+>      file://0001-Search-for-cython3.patch \
+>  "
+> -SRCREV = "c4a03417e81e21543d4568e8e7f7de307582eb50"
+> -PV = "2.0.5+git${SRCPV}"
+> -S = "${WORKDIR}/git"
+> +SRC_URI[md5sum] = "51dc07d48125ee9600e7f6168d6e67f6"
+> +SRC_URI[sha256sum] = "04afd07b4c900a401f39e711dedbf8b9cf12000ddeda0d8ef3c3327caf34704e"
+>
+>  EXTRA_OECONF = " \
+>      --disable-runtime-deps-check \
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
