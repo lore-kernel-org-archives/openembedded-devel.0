@@ -1,23 +1,26 @@
-Return-Path: <Zhe.He@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6929D60807
+Return-Path: <andrej.valek@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 499427C62D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Mar 2019 02:33:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x2I2XIIF022840
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Mar 2019 19:33:18 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Sun, 17 Mar 2019 19:33:17 -0700
-From: <zhe.he@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Mar 2019 10:33:16 +0800
-Message-ID: <1552876396-183037-1-git-send-email-zhe.he@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] utilities: Fix build failure with -Werror=maybe-uninitialized
+	Mon, 18 Mar 2019 14:45:36 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x2IEjasb005989
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Mon, 18 Mar 2019 15:45:36 +0100
+Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
+	[163.242.44.88])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x2IEjaDO001464;
+	Mon, 18 Mar 2019 15:45:36 +0100
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 951CB95182D;
+	Mon, 18 Mar 2019 15:45:35 +0100 (CET)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Mar 2019 15:44:40 +0100
+Message-Id: <20190318144440.11580-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Cc: vkc@connectedcars.dk
+Subject: [OE-core][PATCH] nodejs: fix target ldflags using
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,78 +33,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2019 02:33:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 18 Mar 2019 14:45:37 -0000
 
-From: He Zhe <zhe.he@windriver.com>
+ - do not drop target LDFLAGS
+  - even if the target LDFLAGS have been specified, tools like torque was
+    linked with system libraries
 
-Initialize magic_number to zero to avoid such failure.
-utilities/blob_db/blob_log_format.cc:91:3: error: 'magic_number' may be used
-uninitialized in this function [-Werror=maybe-uninitialized]
-   if (magic_number != kMagicNumber) {
-   ^~
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- ...ix-build-failure-with-Werror-maybe-uninit.patch | 35 ++++++++++++++++++++++
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb         |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
+ .../nodejs/nodejs/0006-Use-target-ldflags.patch    | 26 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb  |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
 new file mode 100644
-index 0000000..ef0429a
+index 000000000..2e3eba5e8
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
-@@ -0,0 +1,35 @@
-+From 8996f075e64da0e6ffeda57632ef31f8710defcc Mon Sep 17 00:00:00 2001
-+From: He Zhe <zhe.he@windriver.com>
-+Date: Fri, 15 Mar 2019 16:47:03 +0800
-+Subject: [PATCH] utilities: Fix build failure with -Werror=maybe-uninitialized
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
+@@ -0,0 +1,26 @@
++The target LDFLAGS have been ignored. Tools like torque
++have been loaded from system libraries, even if a native
++one was the target.
++|$ ldd torque 
++|    libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
++|    libcrypto.so.1.1 => /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
++|    libssl.so.1.1 => /usr/lib/x86_64-linux-gnu/libssl.so.1.1
++|    libicui18n.so.63 => not found
++|    libicuuc.so.63 => not found
++...
 +
-+Summary:
-+Initialize magic_number to zero to avoid such failure.
-+utilities/blob_db/blob_log_format.cc:91:3: error: 'magic_number' may be used
-+uninitialized in this function [-Werror=maybe-uninitialized]
-+   if (magic_number != kMagicNumber) {
-+   ^~
++Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 +
-+Upstream-Status: Accepted [expected version 5.19]
-+
-+Signed-off-by: He Zhe <zhe.he@windriver.com>
-+---
-+ utilities/blob_db/blob_log_format.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/utilities/blob_db/blob_log_format.cc b/utilities/blob_db/blob_log_format.cc
-+index 2bf7028..8726cb8 100644
-+--- a/utilities/blob_db/blob_log_format.cc
-++++ b/utilities/blob_db/blob_log_format.cc
-+@@ -82,7 +82,7 @@ Status BlobLogFooter::DecodeFrom(Slice src) {
-+   uint32_t src_crc = 0;
-+   src_crc = crc32c::Value(src.data(), BlobLogFooter::kSize - sizeof(uint32_t));
-+   src_crc = crc32c::Mask(src_crc);
-+-  uint32_t magic_number;
-++  uint32_t magic_number = 0;
-+   if (!GetFixed32(&src, &magic_number) || !GetFixed64(&src, &blob_count) ||
-+       !GetFixed64(&src, &expiration_range.first) ||
-+       !GetFixed64(&src, &expiration_range.second) || !GetFixed32(&src, &crc)) {
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 78520f9..27c7b20 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -12,6 +12,7 @@ PV = "5.18.2"
- 
- SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
-+           file://0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch \
-           "
- 
- S = "${WORKDIR}/git"
++diff -Naur node-v10.15.1/common.gypi node-v10.15.1/common.gypi
++--- node-v10.15.1/common.gypi	2019-03-18 15:01:39.000000000 +0100
+++++ node-v10.15.1/common.gypi	2019-03-18 15:04:08.628361308 +0100
++@@ -364,6 +364,9 @@
++           'BUILDING_UV_SHARED=1',
++         ],
++       }],
+++      [ 'OS in "linux freebsd openbsd solaris aix cloudabi"', {
+++        'ldflags': [ '$(LDFLAGS)' ],
+++      }],
++       [ 'OS in "linux freebsd openbsd solaris aix"', {
++         'cflags': [ '-pthread' ],
++         'ldflags': [ '-pthread' ],
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
+index 17c9bb0c4..672cd8440 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
+@@ -17,6 +17,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
+            file://0004-Make-compatibility-with-gcc-4.8.patch \
+            file://0005-Link-atomic-library.patch \
++           file://0006-Use-target-ldflags.patch \
+            "
+ SRC_URI_append_class-target = " \
+            file://0002-Using-native-torque.patch \
 -- 
-2.7.4
+2.11.0
 
 
