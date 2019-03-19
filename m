@@ -1,49 +1,50 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9ADB47CE5C
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
+	[209.85.208.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C42D17CDF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2019 18:51:00 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id m35so17517757ede.10
+	Tue, 19 Mar 2019 19:07:30 +0000 (UTC)
+Received: by mail-ed1-f54.google.com with SMTP id d6so17002989eds.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2019 11:51:01 -0700 (PDT)
+	Tue, 19 Mar 2019 12:07:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=lTQXCRTiOUzLVJM+MGcNBmUApF6A3yYulj1O/nHwS84=;
-	b=0BfaoKkiRvO2yEoiQmIXqSeEgSCsuorMLuCGCC0QEUNjb78NNb3ZV+IfhYug3CeCtd
-	x/AlL7lAyqFujo0IGWL/gSco8DEsKrvGHZSTljhzmbVI6GikWbigURKx9I+gXZ523Rhr
-	6oiTrrX6mhrWK6XYdLHr2t9HDIFR3Kadh0ppJCJP8grspQfSN6kyKaJLPVcfgxjdwLIV
-	WGCsTEtJS6ki2+Gky/4onnPBDXmnd0MBpFj/h1hZ5mKjTe8Y0f12/dutyqgjXXIZCzuc
-	uMGv6GJkznkUqqcnSWTb8FPZRcYYlDPlj1zKs30LRmcA4xVJleZpeLgngEKK7k+DxFQW
-	9qBA==
+	bh=X8baPFpFYx/fnC9DnnNTcaIdnZ+Y5dncdc1enlV6gbE=;
+	b=HxqrujDI5fU9/niEcL0EWLxzjJiEujuSc45CntS09HBoYdZPh49CCSysPmProRnWhW
+	tXBx/hyapJUC/8ybBRbz70dOzMBO3X0eFN+i6iknv4WI7CbH4dW5vpRo2hIiPpj7aJwV
+	zoaiomx3nxbDAqYNDpx8uxjeaj/WTkcIX0d5TmZBl3mYAqQqBaPZgJaYU9ChtKyKW5oe
+	3UZV1kimpL6sV5aBAKHRvLl8cH40U7z47GxJDxvinUux4U0QW2P4ZJ9plpE7RVdLREYs
+	Bb1eLuuRfTptfz4/1Bwap9H/ZVCPcMw40ZFvI7fyi6zwBTRI20X/+zOoqqR47roeA5PT
+	D5BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lTQXCRTiOUzLVJM+MGcNBmUApF6A3yYulj1O/nHwS84=;
-	b=WK59AkdGXG1nXMszSM5xXTlw56cXXPZ4xC/EqAimhNFJ2lGlxncxMsWK488iQ8o0VM
-	Ncm6/+F2+Wf5I0Wq7D4sbmm7Mo/g3lteJenIeGIiqKcRaQ/ka0YCEq33xKHdLCP2E4nb
-	I57wFT0/L/HPbqkVXIKqG94T9k5FRmRJgAzxUtaOYo8N1uiptUw16bRQdeqDxB+V9z2Z
-	59762C5DUwgBtTVbnl2v1PsLOIM+8odtb/0HQqCt30cxQWZJtzDyVojMKto+870hYmVp
-	X0oqCLCXMGEth4Ov0Ygwo9KR+C1W/lC5kpjTs7uuJPIkmnjDvXObTAigfCebcgIghfnM
-	iklg==
-X-Gm-Message-State: APjAAAVpLpWOoEsMFSxlnlEI3sN/D3OlOfflQs4awLCQv6PEPnRIn2NB
-	XMFyylgVh+NszyhARcWDwOYNVC9tf4A=
-X-Google-Smtp-Source: APXvYqxXxxUXE0SOPZfhD01w00NF9r2rtWaWklMNML9D/Nix+MioVbEbrxOLRFUKMWJ4SK+nhuNBbw==
-X-Received: by 2002:a50:ba24:: with SMTP id g33mr4030593edc.164.1553021460826; 
-	Tue, 19 Mar 2019 11:51:00 -0700 (PDT)
+	bh=X8baPFpFYx/fnC9DnnNTcaIdnZ+Y5dncdc1enlV6gbE=;
+	b=NQYZlnaqJnSKTD3O1x7kcPQa1wCYc7Ej7toFK9gRHoCh5eWTqIrRQU7wc0mXcG379x
+	5/Qo45eVpgLWQN7+sylUWqN3oT33VpNeSrQDzqo0zUXK9xBQtbntPoHhhat0eetUMmZl
+	6QEJlXCslpT/0OUpQDcItGtvA8FR5jYV2i1ZJAWNe0Pxi/quc8myaraAVD+XpQwUpWSI
+	x74zvB6/qIKVN6G6CUwmIZoV6WFNJ1wD5ZlJX/HltTB0qx3MTKBDaoKScES9rTHpvjcO
+	0Sf/UNWJG9ChdWX8aMMlMgiXL2mSsw53R0cLr0Hf2YS58u+dm60vfaRitJsFuGFhpKAe
+	ZIzw==
+X-Gm-Message-State: APjAAAXoEtizKt0iOph477l1SbhpYTp6/a64D0pld+TxBYwDKzMuYytq
+	yWUELahhv47YU6yeJV9mII+J6qkVm5w=
+X-Google-Smtp-Source: APXvYqyCRm7M7MalRMQPtfXJwEFXYx0UuxMY0TK+UWOUU0hcuT11wl9458Uxah3sYi7aWy3MwH3WXQ==
+X-Received: by 2002:a17:906:3fd1:: with SMTP id
+	k17mr14808431ejj.87.1553022451373; 
+	Tue, 19 Mar 2019 12:07:31 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	i14sm4658447edk.20.2019.03.19.11.50.59
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id v12sm936850eda.55.2019.03.19.12.07.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Mar 2019 11:51:00 -0700 (PDT)
+	Tue, 19 Mar 2019 12:07:30 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Mar 2019 19:50:54 +0100
-Message-Id: <20190319185054.28570-1-open.source@oleksandr-kravchuk.com>
+Date: Tue, 19 Mar 2019 20:07:13 +0100
+Message-Id: <20190319190713.12321-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH v2] blueman: update to 2.0.8
+Subject: [meta-oe][PATCH] log4cplus: update to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,102 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 18:51:00 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 19:07:32 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../blueman/0001-Fix-building-on-musl.patch   | 56 +++++++++++++++++++
- .../{blueman_git.bb => blueman_2.0.8.bb}      |  8 +--
- 2 files changed, 60 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
- rename meta-networking/recipes-connectivity/blueman/{blueman_git.bb => blueman_2.0.8.bb} (78%)
+ .../log4cplus/{log4cplus_2.0.2.bb => log4cplus_2.0.3.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/log4cplus/{log4cplus_2.0.2.bb => log4cplus_2.0.3.bb} (81%)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch b/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
-new file mode 100644
-index 000000000..beef5d7c5
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
-@@ -0,0 +1,56 @@
-+From ff03542e1ff24646ef16754157a6eb6437172153 Mon Sep 17 00:00:00 2001
-+From: Kylie McClain <somasis@exherbo.org>
-+Date: Sun, 13 Dec 2015 21:32:05 -0500
-+Subject: [PATCH] Fix building on musl libc
-+
-+The addition of sys/time.h to libblueman.c is needed for `tv`'s usage,
-+which is defined by musl's time.h.
-+
-+In addition, XCASE must be defined since it is normally provided by
-+glibc's termios.h.
-+---
-+ blueman/main/PPPConnection.py | 2 +-
-+ module/libblueman.c           | 1 +
-+ module/modem-prober.c         | 4 ++++
-+ 3 files changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/blueman/main/PPPConnection.py b/blueman/main/PPPConnection.py
-+index 0aab1d98..1a3a9925 100644
-+--- a/blueman/main/PPPConnection.py
-++++ b/blueman/main/PPPConnection.py
-+@@ -131,7 +131,7 @@ def Connect(self):
-+         attrs[0] &= ~(termios.IGNCR | termios.ICRNL | termios.IUCLC | termios.INPCK | termios.IXON | termios.IXANY |
-+                       termios.IGNPAR)
-+         attrs[1] &= ~(termios.OPOST | termios.OLCUC | termios.OCRNL | termios.ONLCR | termios.ONLRET)
-+-        attrs[3] &= ~(termios.ICANON | termios.XCASE | termios.ECHO | termios.ECHOE | termios.ECHONL)
-++        attrs[3] &= ~(termios.ICANON | getattr(termios, 'XCASE', 4) | termios.ECHO | termios.ECHOE | termios.ECHONL)
-+         attrs[3] &= ~(termios.ECHO | termios.ECHOE)
-+         attrs[6][termios.VMIN] = 1
-+         attrs[6][termios.VTIME] = 0
-+diff --git a/module/libblueman.c b/module/libblueman.c
-+index 7f1626bc..a86fad59 100644
-+--- a/module/libblueman.c
-++++ b/module/libblueman.c
-+@@ -28,6 +28,7 @@
-+ #include <string.h>
-+ #include <sys/ioctl.h>
-+ #include <sys/socket.h>
-++#include <sys/time.h>
-+ #include <unistd.h>
-+ #include <linux/sockios.h>
-+ #include <linux/if.h>
-+diff --git a/module/modem-prober.c b/module/modem-prober.c
-+index daffaa4e..972ec146 100644
-+--- a/module/modem-prober.c
-++++ b/module/modem-prober.c
-+@@ -34,6 +34,10 @@
-+ 
-+ #include "modem-prober.h"
-+ 
-++#ifndef XCASE
-++#define XCASE 0000004
-++#endif
-++
-+ #if PY_MAJOR_VERSION >= 3
-+ #define PyString_FromString PyUnicode_FromString
-+ #endif
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-similarity index 78%
-rename from meta-networking/recipes-connectivity/blueman/blueman_git.bb
-rename to meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-index 947db7836..459db2a73 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-@@ -7,12 +7,12 @@ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-nat
- inherit autotools systemd gsettings python3native gtk-icon-cache
+diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.3.bb
+similarity index 81%
+rename from meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb
+rename to meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.3.bb
+index d17d15c92..56c62f1f2 100644
+--- a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.2.bb
++++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.3.bb
+@@ -7,8 +7,8 @@ LICENSE = "Apache-2.0 & BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=41e8e060c26822886b592ab4765c756b"
  
- SRC_URI = " \
--    git://github.com/blueman-project/blueman.git \
-+    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
-     file://0001-Search-for-cython3.patch \
-+    file://0001-Fix-building-on-musl.patch \
- "
--SRCREV = "c4a03417e81e21543d4568e8e7f7de307582eb50"
--PV = "2.0.5+git${SRCPV}"
--S = "${WORKDIR}/git"
-+SRC_URI[md5sum] = "51dc07d48125ee9600e7f6168d6e67f6"
-+SRC_URI[sha256sum] = "04afd07b4c900a401f39e711dedbf8b9cf12000ddeda0d8ef3c3327caf34704e"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "b3bbeb2dc3e170768430cf87583016f8"
+-SRC_URI[sha256sum] = "10539f2315271d370c7bc6a2b4808cbe369279837f4539ce5c789e456489fc62"
++SRC_URI[md5sum] = "20a87090cd8ec34ea11b3e59954234cb"
++SRC_URI[sha256sum] = "2d8f627aa6417e6c6a100bc09dc407684ca4605c929defc1690ee7d6a575ce6a"
  
- EXTRA_OECONF = " \
-     --disable-runtime-deps-check \
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/"
+ UPSTREAM_CHECK_REGEX = "log4cplus-stable/(?P<pver>\d+(\.\d+)+)/"
 -- 
 2.17.1
 
