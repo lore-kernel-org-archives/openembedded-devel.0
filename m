@@ -1,48 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 94E306C17F
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F00A86C132
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2019 04:34:28 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id y36so10902866qtb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Mar 2019 21:34:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=EFZiNhJS03rcPLz6tWtm9feLq9Thl491DWXvCGj5UQg=;
-	b=jQmTBi2ir+No8j4ZGj63VFqDoBVWdPPNeOtdshqbP/rlaSJA8v6AX1PA7v39+Yusfp
-	cNcOlC3GZ2MXPqz5grAANWiDwlkUM4jXYQpXNNL9BzRW5VjugdbFS9AgU5EnqsukOBn2
-	Hb56G68lTjMHnetgsr6QOs2vLqbptiURXkLYKQedu0jtP7TuO+IJHnEERrss/t1k+aS/
-	dXewQCpAoqvlOfWs8HiO18aXCl9HxXkFm+s5HIfO/pV6q7VKx2xWjtAmVKMsOZII6VOH
-	OG/vGdbcntnHgi0dZeNxV2IR37FgnJWBlRmrWqgLVjdctjlCn922tN7q1dHAoN5UEolk
-	W0NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=EFZiNhJS03rcPLz6tWtm9feLq9Thl491DWXvCGj5UQg=;
-	b=nnrbh6PXEO1LExNqXWtr5dmOb6nzSvZUhA8DPsOvGOyGv7GshVUWYnAPP/dGQ1r9Nw
-	lp1IO5s8jEPA72swJ5hKasrq7sbNNW8Iry5YZsGO941a9BOdtwDNqzSs+7tzWadoje55
-	9nKKcfyEusDuv5AwTRtKjjnw2NnDHlRgoIq82N6eu5LzCjiIxteItlyfgI68yMAymx7e
-	cXp3PzStaXqDWWhJbLUPYVI5ipwXLAUgUkANQPVr9BMWm/8D51kglIn92Dtf3REDPGKs
-	qfM0OdHFbcVic1k4K6M5vUnjQfDKPfeX3BQGes8883Jf0ov4DxmtjasrVbTpDKOfqnUD
-	7JAg==
-X-Gm-Message-State: APjAAAWja7ff59NZ3LVVvdACQ+s05OCqMbsSpDfGAFr7i/JAvBMNOCqw
-	eo0a4/DNVh5E5OC9MKZmk+Q8qH22F+2tzM8N42c=
-X-Google-Smtp-Source: APXvYqys4DgujxHlDKM3RE7sVuqEwNXy3xEz3EvYURW60/E/UZ0dpRmdArt0ktyRggZzvF8F6B3iW6Yeuvu0WoCcnus=
-X-Received: by 2002:ac8:2f10:: with SMTP id j16mr338125qta.29.1552970069266;
-	Mon, 18 Mar 2019 21:34:29 -0700 (PDT)
+	Tue, 19 Mar 2019 06:01:03 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x2J612Ac011010
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 18 Mar 2019 23:01:03 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Mon, 18 Mar 2019 23:01:02 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Tue, 19 Mar 2019 14:01:00 +0800
+Message-ID: <1552975260-25374-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <CAMKF1spo7b2DF7LY=nm4hDqC-3i1Zmt0XODVPZqdyZPWGmr-zA@mail.gmail.com>
+References: <CAMKF1spo7b2DF7LY=nm4hDqC-3i1Zmt0XODVPZqdyZPWGmr-zA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20190318144440.11580-1-andrej.valek@siemens.com>
-	<20190318154707.20242-1-andrej.valek@siemens.com>
-In-Reply-To: <20190318154707.20242-1-andrej.valek@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 19 Mar 2019 00:34:02 -0400
-Message-ID: <CAMKF1sr8jmJVMF5xxH2QbPSVsJLLVWhke3tYtpW2n5ivb8=pBQ@mail.gmail.com>
-To: Andrej Valek <andrej.valek@siemens.com>
-Cc: vkc@connectedcars.dk,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core][PATCH v2] nodejs: fix target ldflags using
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH V2] python3-pillow: add 5.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,78 +32,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 04:34:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 19 Mar 2019 06:01:04 -0000
+Content-Type: text/plain
 
-On Mon, Mar 18, 2019 at 11:47 AM Andrej Valek <andrej.valek@siemens.com> wrote:
->
->  - do not drop target LDFLAGS
->   - even if the target LDFLAGS have been specified, tools like torque was
->     linked with system libraries
->
-> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> ---
->  .../nodejs/nodejs/0006-Use-target-ldflags.patch    | 24 ++++++++++++++++++++++
->  meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb  |  1 +
->  2 files changed, 25 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
->
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-> new file mode 100644
-> index 000000000..c6d0cec4b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
+- Set option by modify setup.py
 
-cant apply this patch on a ubuntu 14.04 host, can you fix it ? may be
-use git format-patch to generate the patch itself.
+- Do not override do_compile to call `setup.py build_ext', it will
+  missing options at do_install time which causing host contamination
+  ...
+  Found webp/demux.h
+  Found library webpmux at /usr/lib/libwebpmux.so
+  Found library webpdemux at /usr/lib/libwebpdemux.so
+  /usr/include/pthread.h:682:6: error: 'regparm' is not valid on this platform
+  ...
 
-https://errors.yoctoproject.org/Errors/Details/233590/
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../0001-explicitly-set-compile-options.patch      | 39 ++++++++++++++
+ .../0001-support-cross-compiling.patch             | 61 ++++++++++++++++++++++
+ .../python/python3-pillow_5.4.1.bb                 | 28 ++++++++++
+ 3 files changed, 128 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
 
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+new file mode 100644
+index 0000000..de89ba0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+@@ -0,0 +1,39 @@
++From 52879439f2976662140b76951f43f16e1d5ef08e Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Mon, 18 Mar 2019 23:23:55 -0400
++Subject: [PATCH] explicitly set compile options
++
++OE does not support to install egg package, so
++explicitly set build_ext options for oe-core's
++`setup.py install'
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ setup.cfg | 12 ++++++++++++
++ 1 file changed, 12 insertions(+)
++
++diff --git a/setup.cfg b/setup.cfg
++index 95900ff..27da313 100644
++--- a/setup.cfg
+++++ b/setup.cfg
++@@ -9,3 +9,15 @@ addopts = -vx Tests
++ 
++ [flake8]
++ max-line-length = 88
+++
+++[build_ext]
+++disable-platform-guessing = 1
+++enable-zlib = 1
+++enable-jpeg = 1
+++enable-tiff = 1
+++enable-freetype = 1
+++enable-lcms = 1
+++enable-jpeg2000 = 1
+++disable-webp = 1
+++disable-webpmux = 1
+++disable-imagequant = 1
++-- 
++2.8.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
+new file mode 100644
+index 0000000..e862934
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
+@@ -0,0 +1,61 @@
++From a78411402c824668283beb94db4bf7e206a4cf60 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Thu, 14 Mar 2019 03:48:10 -0400
++Subject: [PATCH] support cross compiling
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ setup.py | 13 +++----------
++ 1 file changed, 3 insertions(+), 10 deletions(-)
++
++diff --git a/setup.py b/setup.py
++index 79f912b..37e5827 100755
++--- a/setup.py
+++++ b/setup.py
++@@ -50,7 +50,7 @@ _LIB_IMAGING = (
++     "ZipEncode", "TiffDecode", "Jpeg2KDecode", "Jpeg2KEncode", "BoxBlur",
++     "QuantPngQuant", "codec_fd")
++ 
++-DEBUG = False
+++DEBUG = True
++ 
++ 
++ class DependencyException(Exception):
++@@ -345,21 +345,16 @@ class pil_build_ext(build_ext):
++                     _add_directory(library_dirs, match.group(1))
++ 
++         # include, rpath, if set as environment variables:
++-        for k in ('C_INCLUDE_PATH', 'CPATH', 'INCLUDE'):
+++        for k in ('C_INCLUDE_PATH', 'CPATH', 'INCLUDE', 'STAGING_INCDIR'):
++             if k in os.environ:
++                 for d in os.environ[k].split(os.path.pathsep):
++                     _add_directory(include_dirs, d)
++ 
++-        for k in ('LD_RUN_PATH', 'LIBRARY_PATH', 'LIB'):
+++        for k in ('LD_RUN_PATH', 'LIBRARY_PATH', 'LIB', 'STAGING_LIBDIR'):
++             if k in os.environ:
++                 for d in os.environ[k].split(os.path.pathsep):
++                     _add_directory(library_dirs, d)
++ 
++-        prefix = sysconfig.get_config_var("prefix")
++-        if prefix:
++-            _add_directory(library_dirs, os.path.join(prefix, "lib"))
++-            _add_directory(include_dirs, os.path.join(prefix, "include"))
++-
++         #
++         # add platform directories
++ 
++@@ -413,8 +408,6 @@ class pil_build_ext(build_ext):
++         elif sys.platform.startswith("linux") or \
++                 sys.platform.startswith("gnu") or \
++                 sys.platform.startswith("freebsd"):
++-            for dirname in _find_library_dirs_ldconfig():
++-                _add_directory(library_dirs, dirname)
++             if sys.platform.startswith("linux") and \
++                     os.environ.get('ANDROID_ROOT', None):
++                 # termux support for android.
++-- 
++2.8.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb b/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
+new file mode 100644
+index 0000000..746c184
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Python Imaging Library (Fork). Pillow is the friendly PIL fork by Alex \
++Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
++Contributors."
++HOMEPAGE = "https://pillow.readthedocs.io"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c6379001ecb47e2a0420c40177fc1125"
++
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=5.4.x \
++           file://0001-support-cross-compiling.patch \
++           file://0001-explicitly-set-compile-options.patch \
++"
++SRCREV ?= "f38f01bbe3a0a9f49ce592c86ff20c01c9655133"
++
++
++inherit setuptools3
++
++DEPENDS += " \
++    zlib \
++    jpeg \
++    tiff \
++    freetype \
++    lcms \
++    openjpeg \
++"
++
++S = "${WORKDIR}/git"
++
++BBCLASSEXTEND = "native"
+-- 
+2.7.4
 
-
-> @@ -0,0 +1,24 @@
-> +The target LDFLAGS have been ignored. Tools like torque
-> +have been loaded from system libraries, even if a native
-> +one was the target.
-> +|$ ldd torque
-> +|    libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
-> +|    libcrypto.so.1.1 => /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
-> +|    libssl.so.1.1 => /usr/lib/x86_64-linux-gnu/libssl.so.1.1
-> +|    libicui18n.so.63 => not found
-> +|    libicuuc.so.63 => not found
-> +...
-> +
-> +Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> +
-> +diff -Naur node-v10.15.1/deps/v8/gypfiles/common.gypi node-v10.15.1/deps/v8/gypfiles/common.gypi
-> +--- node-v10.15.1/deps/v8/gypfiles/common.gypi 2019-03-18 15:01:39.000000000 +0100
-> ++++ node-v10.15.1/deps/v8/gypfiles/common.gypi 2019-03-18 15:04:08.628361308 +0100
-> +@@ -1106,6 +1106,7 @@
-> +             'cflags': [ '-fno-strict-aliasing' ],
-> +           }],
-> +         ],  # conditions
-> ++        'ldflags+': [ '$(LDFLAGS)' ],
-> +       }],
-> +       ['OS=="solaris"', {
-> +         'defines': [ '__C99FEATURES__=1' ],  # isinf() etc.
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> index 17c9bb0c4..672cd8440 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-> @@ -17,6 +17,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
->             file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
->             file://0004-Make-compatibility-with-gcc-4.8.patch \
->             file://0005-Link-atomic-library.patch \
-> +           file://0006-Use-target-ldflags.patch \
->             "
->  SRC_URI_append_class-target = " \
->             file://0002-Using-native-torque.patch \
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
