@@ -1,28 +1,45 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 113097CD2C
+Return-Path: <matthias.schiffer@ew.tq-group.com>
+X-Greylist: delayed 591 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 19 Mar 2019 09:44:51 UTC
+Received: from mx1.tq-group.com (mx1.tq-group.com [62.157.118.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B6A086C42C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2019 07:05:53 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x2J75q2c028715
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Tue, 19 Mar 2019 08:05:53 +0100
-Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
-	[163.242.44.88])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x2J75qla026437;
-	Tue, 19 Mar 2019 08:05:52 +0100
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 3146B95182D;
-	Tue, 19 Mar 2019 08:05:52 +0100 (CET)
-From: Andrej Valek <andrej.valek@siemens.com>
+	Tue, 19 Mar 2019 09:44:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.58,497,1544482800"; 
+   d="scan'208";a="6676350"
+Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
+	by mx1-pgp.tq-group.com with ESMTP; 19 Mar 2019 10:35:00 +0100
+Received: from mx1.tq-group.com ([192.168.6.7])
+	by tq-pgp-pr1.tq-net.de (PGP Universal service);
+	Tue, 19 Mar 2019 10:35:00 +0100
+X-PGP-Universal: processed;
+	by tq-pgp-pr1.tq-net.de on Tue, 19 Mar 2019 10:35:00 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+	t=1552988100; x=1584524100;
+	h=from:to:cc:subject:date:message-id;
+	bh=nTGYa4XhXMNmvrv5WVC9ZKuJv8g8iU2Rz0jUIzXl81g=;
+	b=HNCXWoT1rYPkBffkx9/CSKcmJF+xr5QaG7oLhL2Xra9Di3Q+PN/frIkd
+	g8T3mNSf5mT+F8KdSK1NUepNzrILNFltxdQtpuaA/SgNbHvDcm+scn0AH
+	MPakvfeVszDX8cbo9nlKXVHKuTNKXhdR7ilo/WnqNDklPIlJjsTFHWhiy
+	gvm3YY5wLEBElxLipJYJ4Izh4Pc9wGUC+0cCLO9h0w+gPGWAxc3K7RNgL
+	F3ps/oPirRfnlRrheFJVnLdmY2YctELZP8nQDGBg6au1gLHndePSFBX5J
+	Ygv8ucJJMzOaK2RPVBbKHWx1nhN52i8WIgqpuCGquBFXjuGottAS3Mm9I g==;
+X-IronPort-AV: E=Sophos;i="5.58,497,1544482800"; 
+   d="scan'208";a="6676349"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+	by mx1.tq-group.com with ESMTP; 19 Mar 2019 10:35:00 +0100
+Received: from schifferm-ubuntu4.tq-net.de (schifferm-ubuntu4.tq-net.de
+	[10.117.49.26])
+	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id EBB5D280074;
+	Tue, 19 Mar 2019 10:34:59 +0100 (CET)
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Mar 2019 08:05:47 +0100
-Message-Id: <20190319070547.21396-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190318144440.11580-1-andrej.valek@siemens.com>
-References: <20190318144440.11580-1-andrej.valek@siemens.com>
-Cc: vkc@connectedcars.dk
-Subject: [OE-core][PATCH v3] nodejs: fix target ldflags using
+Date: Tue, 19 Mar 2019 10:34:23 +0100
+Message-Id: <20190319093423.10649-1-matthias.schiffer@ew.tq-group.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oliver Friedrich <oliver.friedrich@tq-group.com>
+Subject: [meta-oe][PATCH] nbench-byte: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,62 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 07:05:54 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 09:44:52 -0000
 
- - do not drop target LDFLAGS
-  - even if the target LDFLAGS have been specified, tools like torque was
-    linked with system libraries
+From: Oliver Friedrich <oliver.friedrich@tq-group.com>
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Oliver Friedrich <oliver.friedrich@tq-group.com>
+Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 ---
- .../nodejs/nodejs/0006-Use-target-ldflags.patch    | 24 ++++++++++++++++++++++
- meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb  |  1 +
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
+ meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-new file mode 100644
-index 000000000..f6569cd57
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-@@ -0,0 +1,24 @@
-+The target LDFLAGS have been ignored. Tools like torque
-+have been loaded from system libraries, even if a native
-+one was the target.
-+|$ ldd torque 
-+|    libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
-+|    libcrypto.so.1.1 => /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
-+|    libssl.so.1.1 => /usr/lib/x86_64-linux-gnu/libssl.so.1.1
-+|    libicui18n.so.63 => not found
-+|    libicuuc.so.63 => not found
-+...
-+
-+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-+
-+diff -Naur node-v10.15.1/deps/v8/gypfiles/toolchain.gypi node-v10.15.1/deps/v8/gypfiles/toolchain.gypi
-+--- node-v10.15.1/deps/v8/gypfiles/toolchain.gypi	2019-03-18 15:01:39.000000000 +0100
-++++ node-v10.15.1/deps/v8/gypfiles/toolchain.gypi	2019-03-18 15:04:08.628361308 +0100
-+@@ -1106,6 +1106,7 @@
-+             'cflags': [ '-fno-strict-aliasing' ],
-+           }],
-+         ],  # conditions
-++        'ldflags+': [ '$(LDFLAGS)' ],
-+       }],
-+       ['OS=="solaris"', {
-+         'defines': [ '__C99FEATURES__=1' ],  # isinf() etc.
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-index 17c9bb0c4..672cd8440 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-@@ -17,6 +17,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
-            file://0004-Make-compatibility-with-gcc-4.8.patch \
-            file://0005-Link-atomic-library.patch \
-+           file://0006-Use-target-ldflags.patch \
-            "
- SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
+Upstream moved the file for some reason. Please also backport to all stable
+branches.
+
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+index 22bb0416a..b4d55be1b 100644
+--- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -7,7 +7,7 @@ LICENSE = "nbench-byte"
+ LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
+ SECTION = "console/utils"
+ 
+-SRC_URI = "https://fossies.org/linux/misc/${BP}.tar.gz \
++SRC_URI = "https://fossies.org/linux/misc/old/${BP}.tar.gz \
+            file://nbench_32bits.patch \
+            file://Makefile-add-more-dependencies-to-pointer.h.patch"
+ 
 -- 
-2.11.0
+2.17.1
 
 
