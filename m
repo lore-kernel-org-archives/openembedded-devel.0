@@ -1,52 +1,49 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E93F97CE6B
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BB766B50A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2019 13:07:40 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id f3so20680566wmj.4
+	Wed, 20 Mar 2019 17:49:39 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id v14so98995wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2019 06:07:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=CXzRavQS+KU57nKQRaE79eaNaX/nQu+mwkxb35wDWXk=;
-	b=vNMEZqTKHN/dMpaH7aT7y7pHnX37yBFEcA8adntjpT5xg4i3WYzlYHBOVoQeUuwtgQ
-	+a+M9N0YGWmrB+amqT1ud3ymdnhWwXWsmSBaEqjDDxuBPvO9ydmTV8Aa/dy8YvDQVIil
-	Sya63GaQCMh+5AkJWquRWvKPnQyYltEny2dQ6Jdtk6gL6VWA2LkgHUitzmfzCinpI1uW
-	lJfnsjQh00/EInZVP163qlchxWbkEhbCAgaDsEUAuZWuX79pWWuOUetk2FpU5xjVAl+z
-	tlKsT7X7lwu16ZUAlfeKX7f84nljrrguuVDD2eaEfE0Nm+pUsEUkCeB91aOBw/rBgH2U
-	nLOA==
+	Wed, 20 Mar 2019 10:49:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=uzgXzU7yIgY6yoZ1b/3+Q54TJ1ZcwF679MgDTjP6B+U=;
+	b=brualpjL0LztrKfVUjkd8D60oukt1ImVYqcvSr6sOHmAEycbMFsFFZuzmYRQms9N7X
+	qE/omOO7SdrIzUhbNnUGzoomQZ60WYq7IZq+MYtcyFH6zYx1mkovy/Lvpt4Zd/p2uLmy
+	Q436ieQPFZqWnsxSrmY1V33A6jAeB6Fs4fj+cPu/MP4q2JvfNPa6GBtbLaoFcirkh2P9
+	UtYH8XHoGUuVuZX4642iZ04ar2PjukDOzsr4sRSmxypAcZilfw55ub+OnOtEXNESzWzb
+	O5XJTDkkQHXEGZDCe69jmoSrif7/yewGOf+U6jWi7k7+LY41GtpKUrJB0uzyOAVYqpJt
+	7uZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=CXzRavQS+KU57nKQRaE79eaNaX/nQu+mwkxb35wDWXk=;
-	b=lJ/YXcJyOCIBQH+KbzgKj7P1Y2hZJF8oFD5IdiX7Se1IrUjP3s+wFNIkU3YMZ9BCNN
-	KyI0Bc1uAdhpeNdAGzk9QRvBxJLhuCgUyp2wBJNuLWxmh/icVqC9NoKLxEiEsQg+C2g7
-	dVtFubgtmrWw96jBxtAffxA/B8tFTY1bev/SvOSvkR2bVzZpN7E9USl9LpJP9cuBLN5Z
-	zqjeGOv0FkV6vTTkEwzz6zZ6KSo1YW4FGQoM9+pLnrJySxBSMgQgGPxAkO0GHt3Ln4LU
-	tux38n/ow9mQyYkwWwepKNyC9gjJnfAN7Kff7/WwUzoJiEkYDimztZEZ5+FS+QqRUjh/
-	ax9w==
-X-Gm-Message-State: APjAAAW5Lh1RpM/XhSfmlCaOR15c1rKHY+awO27QbOD/1XdHFBREWigE
-	gpGe2jW9OkFbO+g1lGeUF/N5sBATFio=
-X-Google-Smtp-Source: APXvYqzUxhcpyda0U0L/PDw7YO2UtAAgrtY86RaglewIPqPIwcEoUnU3xIsCMGBp24Vy9kx6jHyCsg==
-X-Received: by 2002:a7b:c111:: with SMTP id w17mr8595650wmi.6.1553087261376;
-	Wed, 20 Mar 2019 06:07:41 -0700 (PDT)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id u12sm2425754wrt.2.2019.03.20.06.07.40
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uzgXzU7yIgY6yoZ1b/3+Q54TJ1ZcwF679MgDTjP6B+U=;
+	b=F4Mkst341d+eBcjHnXOexIxRyTRi9J2ji1pFY9OdzO5xkduFgGYI29w2Ot/pFdCsRn
+	4dAEEPtaGO9bjRJ1We1f5+ta5hE9NIubiJEskAkPQDWrNkkVjcUvCWGAdVcgGYf0nNsf
+	AT4flaiZQ9c20QbKubDV3ha6mhu4SSQP8pa4QC3KkdKFS6V6/4zPYqNhVucIH4sny1rc
+	nr3fNxGV+nOiiqxxwn+Ipm70evQurQLxv3TftzglfYoCbn7ck0uOcxYFFlgfnknAietU
+	y4E/3OJzVAQVwR/xHRQ18cMFMLYQ5NBiI2JGob0dNuIXk12jWFEOm7yEmCxGRMT8s/nh
+	gFpA==
+X-Gm-Message-State: APjAAAVjiaUt7NMC1/gYRqDjllKDvv5z58bcv5HvMJQONj7E4HS89FIJ
+	gKT28vbH2M47X96CefVmWM3EPSZf
+X-Google-Smtp-Source: APXvYqwB/TPnHJCVcMysm5xOp474BLivazydU55WrKMK1lwOEtipYw1hgv4yyqQXM4X9rYZSnf+lkQ==
+X-Received: by 2002:a7b:c111:: with SMTP id w17mr9564908wmi.6.1553104179595;
+	Wed, 20 Mar 2019 10:49:39 -0700 (PDT)
+Received: from localhost.localdomain ([5.171.136.12])
+	by smtp.gmail.com with ESMTPSA id
+	a82sm3799778wmf.11.2019.03.20.10.49.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Mar 2019 06:07:40 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
+	Wed, 20 Mar 2019 10:49:38 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Mar 2019 13:07:35 +0000
-Message-Id: <20190320130735.16859-2-ross.burton@intel.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190320130735.16859-1-ross.burton@intel.com>
-References: <20190320130735.16859-1-ross.burton@intel.com>
-Subject: [meta-python][PATCH 2/2] python3-kconfiglib: add
+Date: Wed, 20 Mar 2019 18:49:33 +0100
+Message-Id: <20190320174933.29364-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] cpprest: update to 2.10.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,39 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2019 13:07:41 -0000
+X-List-Received-Date: Wed, 20 Mar 2019 17:49:39 -0000
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-python/recipes-devtools/python/python-kconfiglib-10.42.0.inc | 8 ++++++++
- meta-python/recipes-devtools/python/python3-kconfiglib_10.42.0.bb | 2 ++
- 2 files changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-kconfiglib-10.42.0.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-kconfiglib_10.42.0.bb
+ .../cpprest/{cpprest_2.10.10.bb => cpprest_2.10.11.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/cpprest/{cpprest_2.10.10.bb => cpprest_2.10.11.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python-kconfiglib-10.42.0.inc b/meta-python/recipes-devtools/python/python-kconfiglib-10.42.0.inc
-new file mode 100644
-index 0000000000..72d6a65922
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-kconfiglib-10.42.0.inc
-@@ -0,0 +1,8 @@
-+DESCRIPTION = "Kconfiglib is a Kconfig implementation in Python"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c"
-+
-+SRC_URI[md5sum] = "2306279a050c6a888f34a5719047f217"
-+SRC_URI[sha256sum] = "0070eb9061f924e1fa7bc2b1f0aeea1d38e1ddf9bbdbd4b5c346bcf1a0848674"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-kconfiglib_10.42.0.bb b/meta-python/recipes-devtools/python/python3-kconfiglib_10.42.0.bb
-new file mode 100644
-index 0000000000..10b039a75d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-kconfiglib_10.42.0.bb
-@@ -0,0 +1,2 @@
-+require python-kconfiglib-${PV}.inc
-+inherit pypi setuptools3
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb
+similarity index 89%
+rename from meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb
+rename to meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb
+index cc9d5e105..8ab72ff5f 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.10.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb
+@@ -10,8 +10,8 @@ EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
+ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
+            "
+ 
+-# tag 2.10.10
+-SRCREV= "91f66c625b6361d2edabf76eae30887b326b2447"
++# tag 2.10.11
++SRCREV= "a325079f7e1976e0485a212d8921ce9b837c1f2f"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.11.0
+2.17.1
 
 
