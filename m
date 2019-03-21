@@ -1,46 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 10CA27CE63
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-it1-f178.google.com (mail-it1-f178.google.com
+	[209.85.166.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B88F7CF62
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2019 12:55:13 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id s1so6387024qte.5
+	Thu, 21 Mar 2019 13:53:43 +0000 (UTC)
+Received: by mail-it1-f178.google.com with SMTP id m18so4163475ita.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2019 05:55:15 -0700 (PDT)
+	Thu, 21 Mar 2019 06:53:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OZ65L6SUPaZZQKOOR5ghLVaM43d3FQTBNdiA2fz0aM4=;
-	b=giOtIS91vV+Oa32ls0OJZmTf78V692AS4JwOBUQQlJ+n0VanajorePh5/U1JfwDA0/
-	xLMhhFbSU/a6nvnLPmxkmJ6qtFdH6WoLMhCYECtkreTuo547BM3IAH2rfhnJU+TDNJB9
-	srUjyAhCV+ikUgPVyneHDe4qsefBOv4YCzGCv45tTiMRTRPHsYwFl97UXzOHyFCsXH3w
-	tp5FoOMWbdOhFXaV7M8HWfgi2Q/hpxCZrKAnbkECqr4WFTrUn0f8BdpfBq2EDzcnHtQA
-	J4IsfOEOTGOARwSkdCny/h9ZHsqw36rALDED6oXDkyhftskVmm2FaDgnZh54ElKk3Sf2
-	Ps5Q==
+	:cc:content-transfer-encoding;
+	bh=bnCjehZyrU22znbfOK9FFYZINTc6nhuaeOxknhQ9tsk=;
+	b=qfmlLXE/DPKZrCbG+dp+RoxtrkAYngw8og+ozp32QwZ390NTSaa/oQyrfY76/r1VI7
+	4dPYOv+CLIRzpbUjlZ9fv+PBIfb1pYr/Pp3JidCDWyZcYZEe0tUwSNySi/gvM1v2G9uE
+	IU6Z/rJVn3Uxju/JVRixJGqnyKdWEMLrQyVeMmpiTC1XMyIqlI+VWU8cP5FLd2ax+naM
+	So6e7tRdYKh7gxJt8OxI8Qx5fTbtUe2TZW9ngY3qfpqJ7bh96sVIM7yWyaJLXQJAw15O
+	QZvlohNkcBiuQWAaxaYVYbQl06HhkLZeSspUB0sYDmTzxYlSum+qG8I9uqalfoDlWayC
+	58IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=OZ65L6SUPaZZQKOOR5ghLVaM43d3FQTBNdiA2fz0aM4=;
-	b=Ug/IG1Ysy4rboVkiuA4poi22/32BjcDxZulvtkwDIG9ESy1uPjwp8HjxLv8e6SWOwV
-	FAKGQq2WGygIJbOilj6Fv6aJRKcmcvEHhirTcfeZ/XF1h1gYAC/AHZdJHGNPK1q0IXhq
-	ZgEe31OeCg5Sw6llTJ+5qEhR5S1Y2DYwfZqc2z5YAh6j2XdbJR/30oJ0DzLZKeBlPKCD
-	CBM3/4/1kJIq+4VdDinzlqYGBEvoahu9Bdcn8XYxnSxnTZ+JGPEL0eM4t0IWqJF8ePJ2
-	rFJ+PKdlKTbViC9j8oLDrSubdFQIEWyd8jrwsdQ3dNVjDFoHRuxhGqcCAPychbRur0Jk
-	/+zA==
-X-Gm-Message-State: APjAAAUAHfCRkPNpw8X7NILH4m6Jbzs26mJjiA3w5G0WwxEzevoGMNRZ
-	hxbSKouFJ1B9pxAs2yxNIAjNd92QYDUYicH1EscGVXZ0
-X-Google-Smtp-Source: APXvYqz9Q6xU+vT5W8eWcde+yJ0KUDSoa/sruietcv+uAlrolevkdiK/2YjTgL+V1lSxmJ0oYZZ+ba/3cy1L7IC8oL0=
-X-Received: by 2002:ac8:2f10:: with SMTP id j16mr2870618qta.29.1553172914649; 
-	Thu, 21 Mar 2019 05:55:14 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=bnCjehZyrU22znbfOK9FFYZINTc6nhuaeOxknhQ9tsk=;
+	b=PYbWKRyb0Fues59pbL7+2QO6ORrLReRRty70crX1Q6LfmT61JzOoVXBilyW01U6kJG
+	aTxAgdGFQ2r7xFXo9X8zO6u9OmUH/ZefQ2EkGfBRAlpQ4AFxl7gaZ0LTSF3Mr49lMN+v
+	5b3/+nKxag6xteKMiZp7E+mM3covFqVzClptVBe+UWrMwzL9XeXrJZRR9RUR4DBz7Xpf
+	zPMQe6fCnxCyyGP2SlcwY3mRM03iLKUUyJXqErRd0753Nygvt4/9HNQrI71+HFyfiy0B
+	BmpLQk47oOfLhIn8vJQunDQupg52MJQF058/dhSxfuYpN9t0d5ClqWraMoOEWWvA4lT2
+	C7hQ==
+X-Gm-Message-State: APjAAAWWuKjDoVDBByEHnX9vxwaUdhy9ubUADtka66YyX3z2Tf1ZmDYf
+	b6ZJfFpr9CmDbfERWpG5/jND1fv6091YOgrVvKg=
+X-Google-Smtp-Source: APXvYqzSK5Pmvb/Xg8cwYI04aFWzuymZR11rigu6DsA78x6GFE+dzW8sW63bnfVrg0cjqJvAgGEeWxfPlr0XSBrIbOU=
+X-Received: by 2002:a24:5c47:: with SMTP id q68mr2778911itb.81.1553176424409; 
+	Thu, 21 Mar 2019 06:53:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190319185054.28570-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190319185054.28570-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 21 Mar 2019 05:54:48 -0700
-Message-ID: <CAMKF1sr1woN-ga0e1pAypc8GdwVNsurJMNNJxK5aecS1HiZRTA@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] blueman: update to 2.0.8
+References: <20190318144440.11580-1-andrej.valek@siemens.com>
+	<20190319070547.21396-1-andrej.valek@siemens.com>
+In-Reply-To: <20190319070547.21396-1-andrej.valek@siemens.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 21 Mar 2019 14:53:32 +0100
+Message-ID: <CALbNGRRHFuHRVmDLGWNjJAFXk3StTVxvWJEzXBbkHGOAKHZ47Q@mail.gmail.com>
+To: Andrej Valek <andrej.valek@siemens.com>
+Cc: vkc@connectedcars.dk,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core][PATCH v3] nodejs: fix target ldflags using
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,115 +56,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 12:55:14 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 13:53:43 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-fails with systemd
-https://errors.yoctoproject.org/Errors/Details/233766/
-
-On Tue, Mar 19, 2019 at 11:51 AM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
+On Tue, Mar 19, 2019 at 8:06 AM Andrej Valek <andrej.valek@siemens.com> wro=
+te:
 >
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+>  - do not drop target LDFLAGS
+>   - even if the target LDFLAGS have been specified, tools like torque was
+>     linked with system libraries
+>
+> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 > ---
->  .../blueman/0001-Fix-building-on-musl.patch   | 56 +++++++++++++++++++
->  .../{blueman_git.bb => blueman_2.0.8.bb}      |  8 +--
->  2 files changed, 60 insertions(+), 4 deletions(-)
->  create mode 100644 meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
->  rename meta-networking/recipes-connectivity/blueman/{blueman_git.bb => blueman_2.0.8.bb} (78%)
+>  .../nodejs/nodejs/0006-Use-target-ldflags.patch    | 24 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb  |  1 +
+>  2 files changed, 25 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-targe=
+t-ldflags.patch
 >
-> diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch b/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldfla=
+gs.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.p=
+atch
 > new file mode 100644
-> index 000000000..beef5d7c5
+> index 000000000..f6569cd57
 > --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/blueman/blueman/0001-Fix-building-on-musl.patch
-> @@ -0,0 +1,56 @@
-> +From ff03542e1ff24646ef16754157a6eb6437172153 Mon Sep 17 00:00:00 2001
-> +From: Kylie McClain <somasis@exherbo.org>
-> +Date: Sun, 13 Dec 2015 21:32:05 -0500
-> +Subject: [PATCH] Fix building on musl libc
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.patc=
+h
+> @@ -0,0 +1,24 @@
+> +The target LDFLAGS have been ignored. Tools like torque
+> +have been loaded from system libraries, even if a native
+> +one was the target.
+> +|$ ldd torque
+> +|    libz.so.1 =3D> /lib/x86_64-linux-gnu/libz.so.1
+> +|    libcrypto.so.1.1 =3D> /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+> +|    libssl.so.1.1 =3D> /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+> +|    libicui18n.so.63 =3D> not found
+> +|    libicuuc.so.63 =3D> not found
+> +...
 > +
-> +The addition of sys/time.h to libblueman.c is needed for `tv`'s usage,
-> +which is defined by musl's time.h.
+> +Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 > +
-> +In addition, XCASE must be defined since it is normally provided by
-> +glibc's termios.h.
-> +---
-> + blueman/main/PPPConnection.py | 2 +-
-> + module/libblueman.c           | 1 +
-> + module/modem-prober.c         | 4 ++++
-> + 3 files changed, 6 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/blueman/main/PPPConnection.py b/blueman/main/PPPConnection.py
-> +index 0aab1d98..1a3a9925 100644
-> +--- a/blueman/main/PPPConnection.py
-> ++++ b/blueman/main/PPPConnection.py
-> +@@ -131,7 +131,7 @@ def Connect(self):
-> +         attrs[0] &= ~(termios.IGNCR | termios.ICRNL | termios.IUCLC | termios.INPCK | termios.IXON | termios.IXANY |
-> +                       termios.IGNPAR)
-> +         attrs[1] &= ~(termios.OPOST | termios.OLCUC | termios.OCRNL | termios.ONLCR | termios.ONLRET)
-> +-        attrs[3] &= ~(termios.ICANON | termios.XCASE | termios.ECHO | termios.ECHOE | termios.ECHONL)
-> ++        attrs[3] &= ~(termios.ICANON | getattr(termios, 'XCASE', 4) | termios.ECHO | termios.ECHOE | termios.ECHONL)
-> +         attrs[3] &= ~(termios.ECHO | termios.ECHOE)
-> +         attrs[6][termios.VMIN] = 1
-> +         attrs[6][termios.VTIME] = 0
-> +diff --git a/module/libblueman.c b/module/libblueman.c
-> +index 7f1626bc..a86fad59 100644
-> +--- a/module/libblueman.c
-> ++++ b/module/libblueman.c
-> +@@ -28,6 +28,7 @@
-> + #include <string.h>
-> + #include <sys/ioctl.h>
-> + #include <sys/socket.h>
-> ++#include <sys/time.h>
-> + #include <unistd.h>
-> + #include <linux/sockios.h>
-> + #include <linux/if.h>
-> +diff --git a/module/modem-prober.c b/module/modem-prober.c
-> +index daffaa4e..972ec146 100644
-> +--- a/module/modem-prober.c
-> ++++ b/module/modem-prober.c
-> +@@ -34,6 +34,10 @@
-> +
-> + #include "modem-prober.h"
-> +
-> ++#ifndef XCASE
-> ++#define XCASE 0000004
-> ++#endif
-> ++
-> + #if PY_MAJOR_VERSION >= 3
-> + #define PyString_FromString PyUnicode_FromString
-> + #endif
-> diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-> similarity index 78%
-> rename from meta-networking/recipes-connectivity/blueman/blueman_git.bb
-> rename to meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-> index 947db7836..459db2a73 100644
-> --- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
-> +++ b/meta-networking/recipes-connectivity/blueman/blueman_2.0.8.bb
-> @@ -7,12 +7,12 @@ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-nat
->  inherit autotools systemd gsettings python3native gtk-icon-cache
->
->  SRC_URI = " \
-> -    git://github.com/blueman-project/blueman.git \
-> +    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
->      file://0001-Search-for-cython3.patch \
-> +    file://0001-Fix-building-on-musl.patch \
->  "
-> -SRCREV = "c4a03417e81e21543d4568e8e7f7de307582eb50"
-> -PV = "2.0.5+git${SRCPV}"
-> -S = "${WORKDIR}/git"
-> +SRC_URI[md5sum] = "51dc07d48125ee9600e7f6168d6e67f6"
-> +SRC_URI[sha256sum] = "04afd07b4c900a401f39e711dedbf8b9cf12000ddeda0d8ef3c3327caf34704e"
->
->  EXTRA_OECONF = " \
->      --disable-runtime-deps-check \
+> +diff -Naur node-v10.15.1/deps/v8/gypfiles/toolchain.gypi node-v10.15.1/d=
+eps/v8/gypfiles/toolchain.gypi
+> +--- node-v10.15.1/deps/v8/gypfiles/toolchain.gypi      2019-03-18 15:01:=
+39.000000000 +0100
+> ++++ node-v10.15.1/deps/v8/gypfiles/toolchain.gypi      2019-03-18 15:04:=
+08.628361308 +0100
+> +@@ -1106,6 +1106,7 @@
+> +             'cflags': [ '-fno-strict-aliasing' ],
+> +           }],
+> +         ],  # conditions
+> ++        'ldflags+': [ '$(LDFLAGS)' ],
+> +       }],
+> +       ['OS=3D=3D"solaris"', {
+> +         'defines': [ '__C99FEATURES__=3D1' ],  # isinf() etc.
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_10.15.1.bb
+> index 17c9bb0c4..672cd8440 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
+> @@ -17,6 +17,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.=
+tar.xz \
+>             file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
+>             file://0004-Make-compatibility-with-gcc-4.8.patch \
+>             file://0005-Link-atomic-library.patch \
+> +           file://0006-Use-target-ldflags.patch \
+>             "
+>  SRC_URI_append_class-target =3D " \
+>             file://0002-Using-native-torque.patch \
 > --
-> 2.17.1
+> 2.11.0
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Fixes native build for me so
+
+Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 
