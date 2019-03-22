@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 34ED67D01D
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+	[209.85.221.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1933C7D01D
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 22 Mar 2019 10:21:51 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id z6so3969240wmi.0
+Received: by mail-wr1-f52.google.com with SMTP id d17so1682608wre.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 03:21:52 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=sAWittRzxlEaXlD/f0mfeLyESh1p7C01BU9oUgzIWNY=;
-	b=RZmO+QKjDkEDrzBvKf4qzylse5ysB9uX0m4B/df51futQznzLbPsDhKyfsINAmoui3
-	KGo8BdDF3UEDh5oi5hjGG8+ajNzk9nLM39DHX/vKd08sxxWnkdv0oIEwVVTUZNNHl93G
-	4N4p78MbOtQiUhvfAHUtURlBLwi8BYEx/lBEVdxHj7U2iulx6pHTQrX+2u7VPGZt4+A7
-	7cpXJf785yw5DmdH2GRShXEiltlhI3VFvFIbE0HE9/HGgPt4cX31GguvCSIvpUA5nd1T
-	X5o0AF9EsHxk455oWU7oGGFHggPIUUQ/8h8rEo7sI5XJQqxhnJclB7XuPbZjT9rE6VRZ
-	Wwpw==
+	bh=mvRPkjqDNt0ZnzJybt6v0OB4/uMxmaprMSHaF+Z7s6I=;
+	b=diS7GX/XbWhhwoJ7hHPVa9Skr4GAOIat++2TrJcbhX8OkDttMCi5ljYBT9JvlDFGo6
+	s5i1LjByfxB8UuAN6NT7Pjm8NCIGOOOwIVypg96HfmuK7LxtsEEoFn+UVvvIo6HdQFPb
+	/CzHNOeyAHHLBBr/hO5gDuGGO0RMUUg8SJloq24reGPtERY+V3jFQSi0KSskFTU5B6Q3
+	q9XKRmbTVSkpcMJt2b/rlllatCvW099fuWJUCbaBDx1eAkCMAgVfjnccIIZ7233zjsEf
+	mPxP3/hHeg7Dwu9HJzD1dNr9xQ38QUuHTlXCpNSvD8lt9/x5WzJWdam/VXnOlZ/xKv7j
+	4TJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sAWittRzxlEaXlD/f0mfeLyESh1p7C01BU9oUgzIWNY=;
-	b=MrVfziCAkARsY4FLWoyHtezllUdCHsT+gWBCy28MYp+ULSMzY+lfGK5OnN9x2dJDho
-	YsLtkRl1B11tREbF6D7G9i+fi3ofnG5eQB3x+Kwocm3PoxUctDXfmIcp2iWVKqeRrNCn
-	OX7V4KGM8OMMCv+p6YsgAXI2wmOpoFD+987JHZr66RDQBx8t9L+RqnjVfaY4Wkv2sLn/
-	jhz7kK1ijvUlMwhP36dXu37KiCO+wkhfbz2E1VxLjRDbMj1kvSZycOtkAq3kbj57mQl9
-	PVlL+LPlgLvHNwLY4mQuJu2udcVbgYx3ekDwUb6t2eZ/MKstL2ld5fSFvNj3mBE7Ndn0
-	gIwg==
-X-Gm-Message-State: APjAAAXtz9x//BZzGqL2nqLfeYAMSF9KmWclphpgwXmGkq/nQTw6jPXQ
-	YazpIDsmT04cT4f9HIIgWbp6H8Dw
-X-Google-Smtp-Source: APXvYqyJjB8aJMKbmfVSOlGZqTnOu3ftdB/yKGM+uRGjHBRZqsH1WNNaP3dSqQzCBNHGmEuLe7vdMA==
-X-Received: by 2002:a7b:c00e:: with SMTP id c14mr2400394wmb.110.1553250111810; 
-	Fri, 22 Mar 2019 03:21:51 -0700 (PDT)
+	bh=mvRPkjqDNt0ZnzJybt6v0OB4/uMxmaprMSHaF+Z7s6I=;
+	b=PNnHW85MmfCq2DKtSzaWg2Mk5k3kBdvzBSP98hErGyF6QZK8GpdScENsEO1NO/V0Gu
+	zy4zVRcMKp0NOMGpUMZACFyqGuYuvedP92UdLBWAG/4rzQyqjtntkS5ZMoII8CuP2wyn
+	k9Jw98LpebgyNBoeGZ6SPLjesBMD9B1d/aBbW5uy5m4SvBVXckKk1Fl+Hf15pgM4hGMt
+	Wdrzz60Hlwixl5jaZK/qKz9ORYh81COIs1tAEJ2EfGnEUjb8qWK6xUrtYNWdJqU83iFy
+	s00DseVixhcns6ts85RakSym2kQcfPcad7bNDnNV/kk7F/2dew7cqrHg43w4bLaH9DsD
+	C5BA==
+X-Gm-Message-State: APjAAAUHAVJL0NKu6sg6g/sENGvG/Beg9Fhz7T4gqpmLvG+DPzZf7l3I
+	R3plvAZqA51xLnhydJIYK0BPmkjg
+X-Google-Smtp-Source: APXvYqzNPykcAWpO/yerjCBlpYDx6qnTGWPbQiPFYd9lit3AeP2iCzlVPUOo+7q/m8zPNasYortg3A==
+X-Received: by 2002:a5d:43c9:: with SMTP id v9mr5756680wrr.269.1553250112732; 
+	Fri, 22 Mar 2019 03:21:52 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	t69sm12255677wmt.16.2019.03.22.03.21.50
+	t69sm12255677wmt.16.2019.03.22.03.21.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Mar 2019 03:21:51 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:52 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Mar 2019 11:21:28 +0100
-Message-Id: <20190322102129.5067-10-schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 11:21:29 +0100
+Message-Id: <20190322102129.5067-11-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190322102129.5067-1-schnitzeltony@gmail.com>
 References: <20190322102129.5067-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/11] network-manager-applet: upgrade 1.8.18 -> 1.8.20
+Subject: [PATCH 11/11] physfs: Fix license checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 10:21:51 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 10:21:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Copyright year was changed
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...ager-applet_1.8.18.bb => network-manager-applet_1.8.20.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.18.bb => network-manager-applet_1.8.20.bb} (90%)
+ meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
-similarity index 90%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
-index 01840009e..7181f5ecf 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.18.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
-@@ -12,8 +12,8 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
+diff --git a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
+index 8dc30bd5f..a0033fab5 100644
+--- a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
++++ b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "PhysicsFS is a library to provide abstract access to various archives"
+ HOMEAPAGE = "http://icculus.org/physfs"
+ LICENSE = "Zlib"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2668e2fb051c3e564198e146a9a2d9f0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=96801882d1120239dcafbf888e821a6e"
+ DEPENDS = "readline zlib"
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "34923579b39360db64649342ee6735d8"
--SRC_URI[archive.sha256sum] = "23dc1404f1e0622b7c4718b6d978b101d5e4d9be0b92133b3863a4dc29786178"
-+SRC_URI[archive.md5sum] = "06aafa851762146034351aa72ebb23d4"
-+SRC_URI[archive.sha256sum] = "050dbb155566c715239dc0378844d8beed10954e64e71014ecef8ca912df34ec"
- 
- PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
- PACKAGECONFIG[mobile-provider-info] = "--enable-mobile-broadband-provider-info,--disable-mobile-broadband-provider-info,mobile-broadband-provider-info,mobile-broadband-provider-info"
+ inherit cmake
 -- 
 2.20.1
 
