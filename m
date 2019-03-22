@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E9BAF6010B
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+	[209.85.128.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 012F57D001
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 10:21:42 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id f3so1580739wmj.4
+	Fri, 22 Mar 2019 10:21:43 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id z6so3969062wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 03:21:44 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=k3GFlTPrnJRTj4kqZoF403BCTa2YqpkK85rTz+p5mXY=;
-	b=Jtch6/FFW/z99h8yJLoKSdRm/TyXD4RCMzJkmXLN276J1d6U4GIkv9zFqA2L/PXKHK
-	Rt0bG1Vdaqevym4xEFgcrEtklfamSxXw24WX/WbvJbzPSD5AJo9S3oSIeSNgWugZOshI
-	funTZS/ZLQcA8np7w3oSVN5L4lKp/UJ7CqXuwp0tQIYItyZaIZNyKt0w82l0RFsULooV
-	bwSm/Zg8XhJj3OvtsIij90yvP7pvAhLSQT63YExfo+hfaFdZDFDukvxYLnM8zms4eaun
-	2VXCEOuyHkvbwCIb9jjyhe0lRdTagp5ZZrayFTcHFUr000X05I/i82J/eUmeYQdDlczJ
-	r/+Q==
+	bh=kSwMdK6cnxfW3BR1qjfBcD0s6a5ba+E71i4LmA61sO0=;
+	b=ggjim4DxsL16+QYkTzaBG1d2qz3iiHO7shx2IVmOQ5NexYFiIVLpdv8hmCmlFAdVBV
+	bBFTKsheUgSJlqNO4+XXKR1HDOm2MCgibH0sG+PD0lZ8kYxlEkpa+5kczKK+S9QaVxgj
+	46EIAfTBEeB+cwhWOYRAhz6HazkY/Axm7PMF5fKCZ0BF3Xme+7JxMZkjp1fsUo/wVLsX
+	FiwTiHKVOMA7elmb+t//pblpvJThTbqtrOTijCWmFVPLkONV7IIHiUNl0ALJMNrUsY8q
+	QMgQqL4MT8RA9tqX9zyRgN87u83FVQrqi7M03u5EC3tLMRJeRtvSAmUYny+anae2YBEy
+	4BPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=k3GFlTPrnJRTj4kqZoF403BCTa2YqpkK85rTz+p5mXY=;
-	b=adnQQ/+j7EnU9YpL7sLhfjkItujETxIAhZvHqULDOXu0xuzvAZVjrxwoSM4A0nfTrv
-	eIg/KE4/2ivM/GNGm0Ynw87gUHhsM1gVA278/0a6vaWWf61uuRYPhh0gT1lNODMHqdIz
-	oGHabgGZGAA0jVs8IWiBOc7ttsiGDmvkOWcrLhE47gnDqFpex/G9PJTH6k2/+6kozgpz
-	O8zzLjmhWDFoz74vQLn5bVeYEfyh9s50cIL13W2aEF8GqnYW9cxaWo5uogWL2n+Fucjc
-	uUj2Npn6U//Aj3kGG/ojEVFrCv2J0aRnvXTErTY0h3nga5NX3MNBSB6XDq0ptxy83HCC
-	3zMg==
-X-Gm-Message-State: APjAAAWo8D29ic/OS6h061NQr2GIbSoRM+HpDncATlkFHDFOZCg+Qd8+
-	iE0xwwBuM5I401lchdbpqCiDg/0K
-X-Google-Smtp-Source: APXvYqzYlEF3HsZ3d0jMinAtcG5EyuNaCqYFKFdW5PvqSu9iMd8eDzoao2tqRU+XY9/Cc0GHR+0hLg==
-X-Received: by 2002:a1c:4641:: with SMTP id t62mr2621718wma.53.1553250103443; 
-	Fri, 22 Mar 2019 03:21:43 -0700 (PDT)
+	bh=kSwMdK6cnxfW3BR1qjfBcD0s6a5ba+E71i4LmA61sO0=;
+	b=pK0xpCigrvMUis5W2XdSrri5AeLFMo0PSEbPaustilgBYjmfg0VAQtmboFa30xMl9E
+	/1C358dUwwI8vIKkWw0ykN+3S8e3wINfRlSQiGSMyr0xm3uTRWSMRRStP1nts+KYCnD9
+	N+F8df9PLl7T1Q4B/O8fQLp7nPeb61g2pNsod0a+dluyvbTRuxlWnN+zlBgCPVk6KrOV
+	rjYvt0HcTYqt99LA2P+MCRnBnvwIgvrEEBTKy2CXZQ97fYGAEKDwiwY8AKGgU99Bqbor
+	VIyXT4S+1bis70wraIiHraNDXC+xrDzuRI/hraTCKAyj0HKjjZJ/9EsqCNwyZniSAa2H
+	3LHg==
+X-Gm-Message-State: APjAAAWMqw5gD183FFnEwluvjgBTPtrkBkswlegzJBD/K3JwnIsqkXdq
+	FxMVdPeLZUcdTAiZnce+93mGcL4A
+X-Google-Smtp-Source: APXvYqzbB9z0M9ruBb09qmoTseFQCPwE2CzePBiruIFTbf5CeGrg9l2EP8s0jUF/rNLuxVpaZpkRvg==
+X-Received: by 2002:a1c:f30d:: with SMTP id q13mr1487670wmq.21.1553250104478; 
+	Fri, 22 Mar 2019 03:21:44 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	t69sm12255677wmt.16.2019.03.22.03.21.42
+	t69sm12255677wmt.16.2019.03.22.03.21.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Mar 2019 03:21:42 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:43 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Mar 2019 11:21:20 +0100
-Message-Id: <20190322102129.5067-2-schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 11:21:21 +0100
+Message-Id: <20190322102129.5067-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190322102129.5067-1-schnitzeltony@gmail.com>
 References: <20190322102129.5067-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 02/11] glibmm: upgrade 2.58.0 -> 2.58.1
+Subject: [PATCH 03/11] gtkmm3: upgrade 3.22.2 -> 3.24.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 10:21:43 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 10:21:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../glib-2.0/{glibmm_2.58.0.bb => glibmm_2.58.1.bb}           | 4 ++--
+ .../recipes-gnome/gtk+/{gtkmm3_3.22.2.bb => gtkmm3_3.24.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-core/glib-2.0/{glibmm_2.58.0.bb => glibmm_2.58.1.bb} (89%)
+ rename meta-oe/recipes-gnome/gtk+/{gtkmm3_3.22.2.bb => gtkmm3_3.24.1.bb} (78%)
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
-similarity index 89%
-rename from meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb
-rename to meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
-index 77774585d..87ab0cbc5 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
-@@ -14,8 +14,8 @@ SRC_URI = " \
-     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
-     file://remove-examples.patch \
- "
--SRC_URI[md5sum] = "4a0402ac65a7c47424b4e21b81b079c0"
--SRC_URI[sha256sum] = "d34189237b99e88228e6f557f7d6e62f767fe356f395a244f5ad0e486254b645"
-+SRC_URI[md5sum] = "77f1016cbb27e15d4e04a2b7bfdb4cae"
-+SRC_URI[sha256sum] = "6e5fe03bdf1e220eeffd543e017fd2fb15bcec9235f0ffd50674aff9362a85f0"
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
+similarity index 78%
+rename from meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
+rename to meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
+index 96b54dd2c..6dd051337 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
+@@ -14,8 +14,8 @@ inherit gnomebase distro_features_check
  
- do_install_append() {
-     install -d ${D}${datadir}/glibmm-2.4
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI[archive.md5sum] = "883e9046768b3a5afc8e365988823e77"
+-SRC_URI[archive.sha256sum] = "91afd98a31519536f5f397c2d79696e3d53143b80b75778521ca7b48cb280090"
++SRC_URI[archive.md5sum] = "9524ed4e5c821d13eeda49ba2a78f024"
++SRC_URI[archive.sha256sum] = "ddfe42ed2458a20a34de252854bcf4b52d3f0c671c045f56b42aa27c7542d2fd"
+ SRC_URI += "file://0001-do-not-build-demos.patch"
+ 
+ EXTRA_OECONF = " --disable-documentation "
 -- 
 2.20.1
 
