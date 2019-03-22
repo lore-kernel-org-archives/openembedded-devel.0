@@ -1,51 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
-	[209.85.221.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F9696010B
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E9BAF6010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 10:21:41 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id g3so1693197wrx.9
+	Fri, 22 Mar 2019 10:21:42 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id f3so1580739wmj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 03:21:43 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=YPS9Zocnbl89vkLs21FhNpXRJU1GDQJl/MlUFIhmp2U=;
-	b=uKICEEVxnyyKXq6KxvzPI5XE6EfLi0sn5gEpa17c+aOcDSxfFPSZltda3Lw/+nBguV
-	xj7uW1O709IZNiZVLam/GVZDmgLM1QKIOSFKycPdoyFN63bLEKp5qVlZF2aeJwlmYNi3
-	aCC5dfbpSuIPJhF6raONiQylgKU27G78umTSZhG+c8iuP5CM3uew5jRT8MRhqZmStM1P
-	xbjuAqawUAY94N7j7kOJeZw6QugIPx3b99to6+Dhzs3RiGmLVS7FK4N2oGpkGMi7sy7g
-	yZGvnbF/gav6JQ8ctVaoEMCQV7NvIgVwQ1W7jQkl9DlOJl5PRAoX7SuM0mNwNlsS8rHQ
-	ef4w==
+	bh=k3GFlTPrnJRTj4kqZoF403BCTa2YqpkK85rTz+p5mXY=;
+	b=Jtch6/FFW/z99h8yJLoKSdRm/TyXD4RCMzJkmXLN276J1d6U4GIkv9zFqA2L/PXKHK
+	Rt0bG1Vdaqevym4xEFgcrEtklfamSxXw24WX/WbvJbzPSD5AJo9S3oSIeSNgWugZOshI
+	funTZS/ZLQcA8np7w3oSVN5L4lKp/UJ7CqXuwp0tQIYItyZaIZNyKt0w82l0RFsULooV
+	bwSm/Zg8XhJj3OvtsIij90yvP7pvAhLSQT63YExfo+hfaFdZDFDukvxYLnM8zms4eaun
+	2VXCEOuyHkvbwCIb9jjyhe0lRdTagp5ZZrayFTcHFUr000X05I/i82J/eUmeYQdDlczJ
+	r/+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YPS9Zocnbl89vkLs21FhNpXRJU1GDQJl/MlUFIhmp2U=;
-	b=rWZ4IKcd59zgu3IfSCm6SLT9H18UUr+wKlKHo+M6bc6OXtpKbnHyUrN2lUQfJnvG6B
-	hs3/d849KhJzT0Cyb/i0TocxvM9d8cpLyG7KSQ/ky7UH8s8SC8X7p6/I60pMem4PzByH
-	3I83jgi92uRHW439ktSn5/XPMGqqKzso4C8AtM9I5tPTjQnKzRN/xKlZ/UQ4T3kzpyFH
-	jjTDzhj/yoJNPL6kWlWR3QkJPQgleoVe/yc74cuhWIBhI6G3nFayGg1m48m4P7wHV2Hz
-	ECWr9Asd9Hi0VeopQSH3rABA7s19/TSsplEmItDHKNRiAYAnyPoh3hqswcYg1okiMc/G
-	rjjg==
-X-Gm-Message-State: APjAAAV0bFpbpKqop5vmjEZ2cD4oa+eSzPyn2M3V3Xq/+79D1uRDUQeh
-	rGouR3HoUSuJp/A8Do6pq/BnHpx/
-X-Google-Smtp-Source: APXvYqymjpISRWEMpG7znHZXnQ86BQYFKb4VTAb+2FYiXXYCcrwsYon4nsE6ZE0BcL3bf/4pycnhEw==
-X-Received: by 2002:adf:9c85:: with SMTP id d5mr5833065wre.68.1553250102356;
-	Fri, 22 Mar 2019 03:21:42 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=k3GFlTPrnJRTj4kqZoF403BCTa2YqpkK85rTz+p5mXY=;
+	b=adnQQ/+j7EnU9YpL7sLhfjkItujETxIAhZvHqULDOXu0xuzvAZVjrxwoSM4A0nfTrv
+	eIg/KE4/2ivM/GNGm0Ynw87gUHhsM1gVA278/0a6vaWWf61uuRYPhh0gT1lNODMHqdIz
+	oGHabgGZGAA0jVs8IWiBOc7ttsiGDmvkOWcrLhE47gnDqFpex/G9PJTH6k2/+6kozgpz
+	O8zzLjmhWDFoz74vQLn5bVeYEfyh9s50cIL13W2aEF8GqnYW9cxaWo5uogWL2n+Fucjc
+	uUj2Npn6U//Aj3kGG/ojEVFrCv2J0aRnvXTErTY0h3nga5NX3MNBSB6XDq0ptxy83HCC
+	3zMg==
+X-Gm-Message-State: APjAAAWo8D29ic/OS6h061NQr2GIbSoRM+HpDncATlkFHDFOZCg+Qd8+
+	iE0xwwBuM5I401lchdbpqCiDg/0K
+X-Google-Smtp-Source: APXvYqzYlEF3HsZ3d0jMinAtcG5EyuNaCqYFKFdW5PvqSu9iMd8eDzoao2tqRU+XY9/Cc0GHR+0hLg==
+X-Received: by 2002:a1c:4641:: with SMTP id t62mr2621718wma.53.1553250103443; 
+	Fri, 22 Mar 2019 03:21:43 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	t69sm12255677wmt.16.2019.03.22.03.21.41
+	t69sm12255677wmt.16.2019.03.22.03.21.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Mar 2019 03:21:41 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:42 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Mar 2019 11:21:19 +0100
-Message-Id: <20190322102129.5067-1-schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 11:21:20 +0100
+Message-Id: <20190322102129.5067-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190322102129.5067-1-schnitzeltony@gmail.com>
+References: <20190322102129.5067-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 01/11] nodejs: upgrade 10.15.1 -> 10.15.3
+Subject: [PATCH 02/11] glibmm: upgrade 2.58.0 -> 2.58.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 10:21:42 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 10:21:43 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* 10.15.2 was a security release for CVE-2019-5737 [1]
-* 10.15.3 was a bugfix release [2]
-
-[1] https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V10.md#10.15.2
-[2] https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V10.md#10.15.3
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../nodejs/{nodejs_10.15.1.bb => nodejs_10.15.3.bb}           | 4 ++--
+ .../glib-2.0/{glibmm_2.58.0.bb => glibmm_2.58.1.bb}           | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_10.15.1.bb => nodejs_10.15.3.bb} (96%)
+ rename meta-oe/recipes-core/glib-2.0/{glibmm_2.58.0.bb => glibmm_2.58.1.bb} (89%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb
-index 672cd8440..d2e77ea0d 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb
-@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
-            "
+diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
+similarity index 89%
+rename from meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb
+rename to meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
+index 77774585d..87ab0cbc5 100644
+--- a/meta-oe/recipes-core/glib-2.0/glibmm_2.58.0.bb
++++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.58.1.bb
+@@ -14,8 +14,8 @@ SRC_URI = " \
+     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
+     file://remove-examples.patch \
+ "
+-SRC_URI[md5sum] = "4a0402ac65a7c47424b4e21b81b079c0"
+-SRC_URI[sha256sum] = "d34189237b99e88228e6f557f7d6e62f767fe356f395a244f5ad0e486254b645"
++SRC_URI[md5sum] = "77f1016cbb27e15d4e04a2b7bfdb4cae"
++SRC_URI[sha256sum] = "6e5fe03bdf1e220eeffd543e017fd2fb15bcec9235f0ffd50674aff9362a85f0"
  
--SRC_URI[md5sum] = "1cad7963255de53509bfa560221bdc88"
--SRC_URI[sha256sum] = "1a55f7b9fb80442182d9e1eba4fca4dac3c781cdcb25d6be37b24d253f61c858"
-+SRC_URI[md5sum] = "d76210a6ae1ea73d10254947684836fb"
-+SRC_URI[sha256sum] = "4e22d926f054150002055474e452ed6cbb85860aa7dc5422213a2002ed9791d5"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+ do_install_append() {
+     install -d ${D}${datadir}/glibmm-2.4
 -- 
 2.20.1
 
