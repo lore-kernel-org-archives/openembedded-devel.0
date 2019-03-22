@@ -1,51 +1,52 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E7836C1BE
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F7827CFF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 15:48:00 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id t5so2875102wri.7
+	Fri, 22 Mar 2019 18:33:10 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id z16so3652752qtn.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 08:48:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	Fri, 22 Mar 2019 11:33:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id:mime-version:organization
 	:content-transfer-encoding;
-	bh=kjX9ECKW+4wH/v0DKYA0zBj88ypEoKZwPGhnmoDWYfs=;
-	b=RDLsjwEO56t79uSk30PBdqJ3pQDTZwVIH9MPLnE9s7nEPRJ2Ey+O2HZBYu3a/Ch3UK
-	f/WyWYl9YBOAet7n2w/qdz15HRpkqJQY2gP8FLNW5OmMMFHRc1fAocde8SrLDqxYrsJc
-	OvpADZEvJ9MhzlWlif4qhecokLNWQTsQZLE2QLOWkCBkbAXILD61CSRvXsyMUA+BgD5j
-	je9/VKFv9Fp0Px9DLwk7pZvaigbzx9k5XDwEyroHm12M7KW687bnjRB+0kdYCZfWNPMF
-	Ph9mAX7HXMXwCkSXK4yhMWq9VKgnEeKriVv4aJTAUHFtkhfSgFmpYRqGcepbhPIa2Gpm
-	d80g==
+	bh=Ay/A6aytBldwVoxfLkv8W5N0aqOKbxfzA+cTkt9uXaw=;
+	b=dDU8kgzetca9jOrQ59EpHYFoa3NUBw14Q4C2MPGCCwW49DWjOebMUBBtN5Qa7Hsamy
+	XIvq3jpzaym1D9UGqAAQ+A4Fr99eovCadPU4s4pYI75S09VozW29dsH6Ags2k0jgoaH7
+	3I/ZqyC9fLfQ5T4v3X5FyiUjcrJJJCvxE27yVWszXWOaiMHuqZedD+ieHWSYIwc7OEk2
+	xNb8ZuBJZm23mNm3ruD3B76Qn4ZbzrVj2PhAMGSsa/obUXtWEFOKwHboMdeOGdEO9kOu
+	cBYudNVdFpUBRYczcHvzD4iMUyyX+rVF31pp4HtjBPEsrEdanhdxeWj/dFia/kOHjd/y
+	9DNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=kjX9ECKW+4wH/v0DKYA0zBj88ypEoKZwPGhnmoDWYfs=;
-	b=Z6dTTBVsjFIhx1TzhqtN53Yi46XRdFu0rJVX9wCz+3dIKXV3uoTPUoMMdF88lqN4z9
-	X/ei08exjqah5WL037Nb7+BFln4/z0C4xat4glNVYfLzprAXaAIEuotNCukrFBbo+6mY
-	WCbJ3eF4lPHtkqbGRdR+AaeZn4Qt0jLVZySLIr6z6wcfTRGet7Oj4Lp0AVJn4xT6C4sO
-	RTgpWFHg3Ut2lzX7oXpaY1xP0yd+vISeMnyrZn708Oi2XrSF5zBvIRhc8Ia0qH1oxBWu
-	GbWM/fUN/8JFRGNfw1wiAVzTYLpSXapu8fMlj0XLBjgtX0nyKt2nKaI1VMGjihizIs7r
-	rQVA==
-X-Gm-Message-State: APjAAAWh/kMMoZCAQa+Xv3nSeZ+HUOGNt2zjiwYbW/TwLTr1t2ZQoDQT
-	g6UwRiuMpGfO+5LeVot6IUzJtdWL
-X-Google-Smtp-Source: APXvYqxQsAfmNTo6Sic/zbpAPfiKPgPtToxuZIINlhAvndrsp5GW3J3zthvN6JsrRDtBoNIVlG8bPQ==
-X-Received: by 2002:a5d:4492:: with SMTP id j18mr2323311wrq.212.1553269681010; 
-	Fri, 22 Mar 2019 08:48:01 -0700 (PDT)
-Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
-	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	z10sm1488234wmi.15.2019.03.22.08.47.59
+	:organization:content-transfer-encoding;
+	bh=Ay/A6aytBldwVoxfLkv8W5N0aqOKbxfzA+cTkt9uXaw=;
+	b=gbjRUtjU5LQCeguzX4rJPXoj7cBa24UYFXYORPSSALk9npbwEgHbDVJuifIG8uosf/
+	U6FR041c4CLup9x2cmWjq6DAm6GLuWMdNgXgnQ7BCVikqsJ8baSVwDMwBwuQ7MGVCPm/
+	IabVK2oXsOsDTZBNs69Yn7Agx636Rb8MVXFeUdcvmswd7BBu/ox1bskRC7sWUtJB5t5V
+	gPyO1Fd/AH3j+Z+dAdOJ/7dEmSf1Xb8xzIBGM/wW/Bhn67O5qEFxoVm1UTHn3YmWNIoW
+	ztajwkddc5Oth4FKiSMRfZH+CvF/jQBTyV5TySYi6HCsK+dvoPGjbk6Se+VzNcOksBXi
+	FzpQ==
+X-Gm-Message-State: APjAAAX2cRLYbNzlDBoGJjVEfxPxqkTW3Z4y9qFRO8B+tFMeS0OLUGtT
+	axsSj8rKzuTRN7vXJXhSWqP38RD47PSHOQ==
+X-Google-Smtp-Source: APXvYqx7e2+DF1i/RC6JnGSCtJAKPqmxEt5r0PTJXMI8Rg43wQdIo14cXvyT4KTJy0MGWXUdFsQdUA==
+X-Received: by 2002:aed:236a:: with SMTP id i39mr9073538qtc.238.1553279591843; 
+	Fri, 22 Mar 2019 11:33:11 -0700 (PDT)
+Received: from pikachu.lab.ossystems ([177.194.204.148])
+	by smtp.gmail.com with ESMTPSA id m4sm3933567qtp.16.2019.03.22.11.33.10
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Mar 2019 08:47:59 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Mar 2019 11:33:10 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Mar 2019 16:47:41 +0100
-Message-Id: <20190322154741.22403-1-schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 15:32:44 -0300
+Message-Id: <20190322183244.2725-1-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH] poppler: install API headers as we used to
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe][PATCH] cpuburn-arm: Add armv7ve as a valid machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,37 +59,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 15:48:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Mar 2019 18:33:11 -0000
 Content-Transfer-Encoding: 8bit
 
-ENABLE_XPDF_HEADERS was renamed to ENABLE_UNSTABLE_API_ABI_HEADERS [1]
-
-[1] https://cgit.freedesktop.org/poppler/poppler/tree/NEWS#n72
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
+ meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-This is a fixup for poppler upgrade just sent. The only excuse I have for being
-late is that the only fallout I saw was good old libreoffice and that takes >10000s
-these days...
-
- meta-oe/recipes-support/poppler/poppler_0.75.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb b/meta-oe/recipes-support/poppler/poppler_0.75.0.bb
-index febdc8eda..0704f1a2a 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.75.0.bb
-@@ -31,7 +31,7 @@ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
+index d60624c88..6189da39f 100644
+--- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
++++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
+@@ -35,3 +35,4 @@ do_install() {
  
- EXTRA_OECMAKE += " \
-     -DENABLE_CMS=lcms2 \
--    -DENABLE_XPDF_HEADERS=ON \
-+    -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
-     -DBUILD_GTK_TESTS=OFF \
-     -DENABLE_ZLIB=ON \
-     -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='${STAGING_INCDIR}' \
+ COMPATIBLE_MACHINE ?= "(^$)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
++COMPATIBLE_MACHINE_armv7ve = "(.*)"
 -- 
 2.20.1
 
