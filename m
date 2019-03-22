@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 012F57D001
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+	[209.85.221.51])
+	by mail.openembedded.org (Postfix) with ESMTP id B4F067D00F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 10:21:43 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id z6so3969062wmi.0
+	Fri, 22 Mar 2019 10:21:44 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id s15so1682750wra.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2019 03:21:45 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=kSwMdK6cnxfW3BR1qjfBcD0s6a5ba+E71i4LmA61sO0=;
-	b=ggjim4DxsL16+QYkTzaBG1d2qz3iiHO7shx2IVmOQ5NexYFiIVLpdv8hmCmlFAdVBV
-	bBFTKsheUgSJlqNO4+XXKR1HDOm2MCgibH0sG+PD0lZ8kYxlEkpa+5kczKK+S9QaVxgj
-	46EIAfTBEeB+cwhWOYRAhz6HazkY/Axm7PMF5fKCZ0BF3Xme+7JxMZkjp1fsUo/wVLsX
-	FiwTiHKVOMA7elmb+t//pblpvJThTbqtrOTijCWmFVPLkONV7IIHiUNl0ALJMNrUsY8q
-	QMgQqL4MT8RA9tqX9zyRgN87u83FVQrqi7M03u5EC3tLMRJeRtvSAmUYny+anae2YBEy
-	4BPA==
+	bh=xs/UAsUNKbVTe0itER/NQbNhjels9SUTxJphL2f2ruA=;
+	b=jsFF34aNl2dGNYlwkbVWNx1c1j+MLhfm1TfrcSZxDfwVs9dtAsz0MCpbZ/40YAFrnb
+	GBurMTjpbmaSfD4OFqPCmDBtiPXNrDyx/3RBj/r8T3SMUn4/pzIpIHk0kuni/5PXpfry
+	WedbXFhN8J0o3mcWLj5OETH/rpHjSoxrxdWq1wIku7xQT9DJiKtQuDsLoSRWQ9hSggT6
+	cAUHnsMUV1VR02SPuXK/KvAnfRRfyz/40u7Mb4VjM1bjyYsTvRuaENWCkOsdeiqMOiZ7
+	n+LbAwjPB+F3vzYYGikijoTzJ+Ew9Y7WBbfBTYFFoQvX4ULgDLBegpyI8Cku8tqIoj35
+	kAAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=kSwMdK6cnxfW3BR1qjfBcD0s6a5ba+E71i4LmA61sO0=;
-	b=pK0xpCigrvMUis5W2XdSrri5AeLFMo0PSEbPaustilgBYjmfg0VAQtmboFa30xMl9E
-	/1C358dUwwI8vIKkWw0ykN+3S8e3wINfRlSQiGSMyr0xm3uTRWSMRRStP1nts+KYCnD9
-	N+F8df9PLl7T1Q4B/O8fQLp7nPeb61g2pNsod0a+dluyvbTRuxlWnN+zlBgCPVk6KrOV
-	rjYvt0HcTYqt99LA2P+MCRnBnvwIgvrEEBTKy2CXZQ97fYGAEKDwiwY8AKGgU99Bqbor
-	VIyXT4S+1bis70wraIiHraNDXC+xrDzuRI/hraTCKAyj0HKjjZJ/9EsqCNwyZniSAa2H
-	3LHg==
-X-Gm-Message-State: APjAAAWMqw5gD183FFnEwluvjgBTPtrkBkswlegzJBD/K3JwnIsqkXdq
-	FxMVdPeLZUcdTAiZnce+93mGcL4A
-X-Google-Smtp-Source: APXvYqzbB9z0M9ruBb09qmoTseFQCPwE2CzePBiruIFTbf5CeGrg9l2EP8s0jUF/rNLuxVpaZpkRvg==
-X-Received: by 2002:a1c:f30d:: with SMTP id q13mr1487670wmq.21.1553250104478; 
-	Fri, 22 Mar 2019 03:21:44 -0700 (PDT)
+	bh=xs/UAsUNKbVTe0itER/NQbNhjels9SUTxJphL2f2ruA=;
+	b=j1HXEkMbRFokq7NfeWkbXqJ03bsBKJSElFrOGxdD7x5vDt+zfw0P+nJGQpPLB4kl6t
+	UDoR0xJkb2f066mq32LSFEmocUOYFQ9VsjOsEwY+cgb++uZHhEPMmQPGAer/aZUphOjt
+	Ymt/BYFOG4JfFEfO3/P7mcmMKmyUNMNYVLxqK0HIQBgawCCym7F41hVMJFGEbNSB6NIV
+	1Btn6DeDSRvWxaZnlW7JFJ8JMi1NEEzEz62wdcIysrfs8nNAlVrns/Ms2mTv+wdfnW1g
+	Mf4A6BfXYzD74OrOvXk+KBlPx1KmO3oQ7tXkW9mCfLCCnSzekkNV+xiYHI69PLftw+yr
+	WDew==
+X-Gm-Message-State: APjAAAWVBrLzXvZ9BWXoqdD66+IFORWY4HUD3JSRWwo4NoUrpzwzEOe+
+	jj93a1zZQHy1SO15hNzOefXwPbjI
+X-Google-Smtp-Source: APXvYqx5KxiMdl0yEmwLZ/UIOJgUZZ+F1xXi4k0fCWGxeMKFeNFCiCV7VPk/sKX/UMSt/umsF5j7TQ==
+X-Received: by 2002:a5d:4801:: with SMTP id l1mr5357010wrq.318.1553250105442; 
+	Fri, 22 Mar 2019 03:21:45 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	t69sm12255677wmt.16.2019.03.22.03.21.43
+	t69sm12255677wmt.16.2019.03.22.03.21.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Mar 2019 03:21:43 -0700 (PDT)
+	Fri, 22 Mar 2019 03:21:44 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Mar 2019 11:21:21 +0100
-Message-Id: <20190322102129.5067-3-schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 11:21:22 +0100
+Message-Id: <20190322102129.5067-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190322102129.5067-1-schnitzeltony@gmail.com>
 References: <20190322102129.5067-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/11] gtkmm3: upgrade 3.22.2 -> 3.24.1
+Subject: [PATCH 04/11] fluidsynth: upgrade 2.0.3 -> 2.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,28 +66,24 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/gtk+/{gtkmm3_3.22.2.bb => gtkmm3_3.24.1.bb} | 4 ++--
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-gnome/gtk+/{gtkmm3_3.22.2.bb => gtkmm3_3.24.1.bb} (78%)
 
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
-similarity index 78%
-rename from meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
-rename to meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
-index 96b54dd2c..6dd051337 100644
---- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
-+++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.1.bb
-@@ -14,8 +14,8 @@ inherit gnomebase distro_features_check
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index df431b62c..810ca997e 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
+-SRCREV = "1bae9b2fe1a958f54f4910c802a79673e0df9850"
++SRCREV = "9671e412feedb90325e038c3aaf5d543eebc20c0"
+ S = "${WORKDIR}/git"
+-PV = "2.0.3"
++PV = "2.0.4"
  
--SRC_URI[archive.md5sum] = "883e9046768b3a5afc8e365988823e77"
--SRC_URI[archive.sha256sum] = "91afd98a31519536f5f397c2d79696e3d53143b80b75778521ca7b48cb280090"
-+SRC_URI[archive.md5sum] = "9524ed4e5c821d13eeda49ba2a78f024"
-+SRC_URI[archive.sha256sum] = "ddfe42ed2458a20a34de252854bcf4b52d3f0c671c045f56b42aa27c7542d2fd"
- SRC_URI += "file://0001-do-not-build-demos.patch"
- 
- EXTRA_OECONF = " --disable-documentation "
+ inherit cmake pkgconfig lib_package
 -- 
 2.20.1
 
