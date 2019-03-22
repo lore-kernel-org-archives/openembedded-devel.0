@@ -1,30 +1,23 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id AFAF46C14C
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C52537CFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2019 23:32:13 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 Mar 2019 16:32:13 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.60,254,1549958400"; d="scan'208";a="309294187"
-Received: from pyeoh1-mobl2.gar.corp.intel.com (HELO localhost.localdomain)
-	([10.255.177.212])
-	by orsmga005.jf.intel.com with ESMTP; 21 Mar 2019 16:32:09 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>, Joshua Watt <jpewhacker@gmail.com>
-Date: Fri, 22 Mar 2019 12:32:06 +1300
-Message-ID: <1698450.TmOFBMJAC0@localhost.localdomain>
-Organization: Intel Corporation
-In-Reply-To: <CAMKF1sprBWXWR2b13ARFOK8LYSjrkbiyx_cWDfKXUktUhZOzdQ@mail.gmail.com>
-References: <cover.1534182463.git.paul.eggleton@linux.intel.com>
-	<6a15a264cf5e3cbe0df1614387cd2eb9fc421ac7.camel@gmail.com>
-	<CAMKF1sprBWXWR2b13ARFOK8LYSjrkbiyx_cWDfKXUktUhZOzdQ@mail.gmail.com>
+	Fri, 22 Mar 2019 01:16:14 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x2M1GFxH021071
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Mar 2019 18:16:15 -0700 (PDT)
+Received: from fidler.wrs.com (172.25.44.10) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 21 Mar 2019 18:16:14 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Mar 2019 21:16:12 -0400
+Message-ID: <20190322011613.32505-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 4/4] faad2: set LICENSE_FLAGS
+Subject: [PATCH 1/2] imagemagick: fix typo in summary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,56 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 23:32:13 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 22 Mar 2019 01:16:14 -0000
+Content-Type: text/plain
 
-On Friday, 22 March 2019 10:29:13 AM NZDT Khem Raj wrote:
-> On Thu, Mar 21, 2019 at 2:09 PM Joshua Watt <jpewhacker@gmail.com> wrote:
-> >
-> > On Mon, 2018-08-13 at 19:50 +0200, Paul Eggleton wrote:
-> > > Commercial usage requires a license according to the homepage, so set
-> > > LICENSE_FLAGS = "commercial" to indicate that.
-> > >
-> > > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> > > ---
-> > >  meta-oe/recipes-multimedia/faad2/faad2_2.7.bb | 2 ++
-> > >  1 file changed, 2 insertions(+)
-> > >
-> > > diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb b/meta-
-> > > oe/recipes-multimedia/faad2/faad2_2.7.bb
-> > > index b777831ad..9e5a3817a 100644
-> > > --- a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
-> > > +++ b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
-> > > @@ -5,6 +5,8 @@ LICENSE = "GPLv2"
-> > >
-> > >  LIC_FILES_CHKSUM =
-> > > "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
-> > >
-> > > +LICENSE_FLAGS = "commercial"
-> > > +
-> >
-> > My understanding was that faad2 was GPLv2, but you could *optionally*
-> > get a commercial license for it if you needed one. Is the LICENSE_FLAG
-> > necessary in that case? It seems like the default license of GPLv2
-> > would apply unless you worked something out with them to get a
-> > commercial license?
-> 
-> Sometimes the use determines the license enforcement. e.g. it might
-> be GPLed for personal use but not for selling products.
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Also, the GPL unfortunately is not the only concern if you read the full 
-upstream README.  I think it's best to err on the side of caution, after all 
-there is the ability for to set LICENSE_FLAGS_WHITELIST signifying "yes I have
-checked and my usage is OK".
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
+index af219abdb..37d5a637a 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "ImageMagick is an image convertion toolkit"
++SUMMARY = "ImageMagick is an image conversion toolkit"
+ SECTION = "console/utils"
+ HOMEPAGE = "https://www.imagemagick.org/"
+ DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+2.17.0
 
 
