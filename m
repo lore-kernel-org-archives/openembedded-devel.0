@@ -1,53 +1,54 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id AE7417CFC8
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id DBC7F7D085
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2019 01:53:04 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id r15so5197962pfn.9
+	Mon, 25 Mar 2019 14:05:29 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id y197so9253029wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Mar 2019 18:53:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	Mon, 25 Mar 2019 07:05:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=nt/xC+dE+wUpmE/u3Ho9jCHRd6qm7u6g3j/6C1hubwg=;
-	b=OupHGMblUPaEpWygBxJjU82ZOuWK/Le1jg728CfB72Xb96geoHrRoHUWIn6i/YtigA
-	aguE414KtdnptNRHuqRgAh+QhW4aF5ELKlJZEW56yjKqU2KMujKaFRFyynp5jEWdCQ7V
-	1sbnkR/0PisGAM3m1WENf2xqZ4N77ZMdg4/Z64GPLSOjWM5a/r6AZfUECQsrAeOucptv
-	ezxh3HXBULB7k6cEcr5lbLwzFMUQrhRXSNR3ZUIj6M6tFDa1GC/bQWAqrOlSDeh5foG+
-	m4HpPVrZafceqT1PKGSgGguDogwKa6hq3hJbqIZLhkTnACVx2WK7YoalvE0Z4zf7+zv8
-	3UaA==
+	bh=6SawKymbInW5dY9225IqZMHZ/ZnCxlBHHzKCoexVBPk=;
+	b=VxgVXBzAIW03ZvCrPSPwQt++yMZ0/hBjWMiD7ozAn3UFWUzD6LHBZouYsAaslqNaxO
+	YCHBSCXqo3TalYlhjC+NipY8xobTMd53joqQepXyibKtagg7CW7HZ58aiJuP5lShnDwT
+	kzM+uv/waY71U+nCKafwCq7iG9JUvBkjGHQcb8zLPE/LuMRoxOTb1LT9qvHeETU0dpxy
+	WpnW7u4ncXmH0wftZSa1qIo4OiPgaykhCLTIa167aOEYuS9fOIX57EQZUnf1xIDu04Eu
+	oIDq8X1jjFy+bIU+j87c1XNNRaYz/dTl7pl/vRMkLorD0KU6o+IixrVpZvP6cfWcTW0O
+	uhDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=nt/xC+dE+wUpmE/u3Ho9jCHRd6qm7u6g3j/6C1hubwg=;
-	b=A4IMNLOC5u5Kf62la9HUYCcBkLk7pL68NJVI+pwka+1baTX5Jt+PsHjvTxIKO4t7YL
-	QIkgVfM31Xz1JXLguhwVrmPsCW5bzvscc942x6/PR3EH2ICBry0x1R4Cr3RVxxnKxres
-	raQbgeUmoYB2HeT7QnzjqDyH3c1BmzRr3ZykQbw4umqvV2a0V8dyBKC6UhnDNDt3lTek
-	Xe6/2jL/VfD3BGR5vCemndjgqvKmzxPv5NarpWLZR3D88zOOHb/l8XJWEwFwphySWa9d
-	LmGRoadvrTnre7KyriiAU5k2nINwngYt4fYv/QcXbtTZQihePmVd+sfC3kk/ROCjyB8m
-	A89w==
-X-Gm-Message-State: APjAAAVatYF8Tk8Sz9YTGWXLmEEDewlriUqc03kXgA7Gd/z8nnTS7KN9
-	Q2NjvjGm2at9G7azlkXFc1sTuZcB
-X-Google-Smtp-Source: APXvYqyOhvfryAJRDw+8h3oObpX+bX863eLkgAn8PJxc8KpXawK4B4Dk/Ic3kzYW2aI3NascO1bmhA==
-X-Received: by 2002:a17:902:b717:: with SMTP id
-	d23mr4414612pls.260.1553478784990; 
-	Sun, 24 Mar 2019 18:53:04 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:c33:7099:fa84:daac:3491])
+	bh=6SawKymbInW5dY9225IqZMHZ/ZnCxlBHHzKCoexVBPk=;
+	b=PlT3sQrwsJRe1f+yE3Xm1gNnyMOtTr6KLUoWTGn2nompugTFx1ruo4R/zPLVt1ne8T
+	pOPeKy3bD8rSA2Fz3C0Hj1+b5UvtYr4eDZ8kOrqz+6J21NhJ8be34xi6GMfGK3efxP1P
+	8a4C+Om4lHpOZgsBIq868+iOZyxQ/rXGVNHKwGtmejuIMLjqwgo++2cLvkM63t3+UEUJ
+	kXIUaVoyjF25Fx551GU5jTa1LA8WGgnUG8WHQAY/1VFkq0Uc9FIVf2OWjNieJtCj9HtV
+	JZaDIlCIZRnZLMS11HJekGAp5Kq/od6yMMZlUWfI8fk1fK1p8ZpSp3WEimp5zGfVR4h/
+	Ddmw==
+X-Gm-Message-State: APjAAAV43Aa0SsAR+ZZcdpei7ufp6ZOUUfqwBwHCSRF7lgJhuswObZfr
+	OmAS5qUvdC0uwO3JEPB8lZsCpA==
+X-Google-Smtp-Source: APXvYqwz820XfUGRUPuawzUrm+u+zKcDFGgFt5RqUfmWJYA1UD4B3AZUPJ6R+HmiuikRGuNaRv5yoQ==
+X-Received: by 2002:a1c:4e0a:: with SMTP id g10mr2896853wmh.147.1553522730561; 
+	Mon, 25 Mar 2019 07:05:30 -0700 (PDT)
+Received: from localhost.localdomain
+	(aputeaux-684-1-20-74.w90-86.abo.wanadoo.fr. [90.86.223.74])
 	by smtp.gmail.com with ESMTPSA id
-	v18sm17364099pfm.165.2019.03.24.18.53.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 24 Mar 2019 18:53:04 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Mar 2019 18:52:54 -0700
-Message-Id: <cover.1553478496.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	p10sm13077424wrs.5.2019.03.25.07.05.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 25 Mar 2019 07:05:29 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Mar 2019 15:05:26 +0100
+Message-Id: <20190325140526.12797-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH 0/6] thud patch review
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: bump version to v1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,46 +61,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2019 01:53:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 25 Mar 2019 14:05:31 -0000
 Content-Transfer-Encoding: 8bit
 
-Please review and provide feedback no later than Tuesday March 26 18:00 pst
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-The following changes since commit 6ef9657068492d4644079c88f2adee9c3cac9543:
+There are several new features in this release. The one that impacts
+the recipe is the option to install the test executable to bindir using
+the new options (--enable-install-tests). This requires separate
+PACKAGECONFIG entries for 0.x and 1.x series.
 
-  vim: improve reproducibility (2019-02-04 22:09:31 -0800)
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb           | 2 ++
+ .../libgpiod/{libgpiod_1.2.1.bb => libgpiod_1.3.bb}          | 5 +++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.2.1.bb => libgpiod_1.3.bb} (67%)
 
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/thud-next
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/thud-next
-
-Adrian Bunk (2):
-  wireless-regdb: update 2018.05.31 -> 2018.10.24
-  Split ntpq into an own package
-
-André Draszik (2):
-  mosquitto: fix build in systemd environments
-  mosquitto: fully switch over to using PACKAGECONFIG_CONFARGS
-
-Khem Raj (1):
-  rtmpdump: Switch to using GNU TLS instead of openssl10
-
-Ovidiu Panait (1):
-  python3-blivetgui: Fix _supported_filesystems crash
-
- .../recipes-multimedia/rtmpdump/rtmpdump_2.4.bb    |  4 +--
- .../mosquitto/mosquitto_1.5.1.bb                   | 13 +++-----
- ..._2018.05.31.bb => wireless-regdb_2018.10.24.bb} |  4 +--
- .../recipes-support/ntp/ntp_4.2.8p12.bb            |  5 ++-
- ...ted_filesystems-in-BlivetGUIAnaconda-init.patch | 39 ++++++++++++++++++++++
- .../python-blivet/python3-blivetgui_2.1.8.bb       |  1 +
- 6 files changed, 53 insertions(+), 13 deletions(-)
- rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2018.05.31.bb => wireless-regdb_2018.10.24.bb} (91%)
- create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Set-_supported_filesystems-in-BlivetGUIAnaconda-init.patch
-
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+index 09fb65a08..96615ebf2 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+@@ -1,4 +1,6 @@
+ require libgpiod.inc
+ 
++PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
++
+ SRC_URI[md5sum] = "2aa1e1a80c3c919ae142ab9a55fb59ca"
+ SRC_URI[sha256sum] = "b773e557af1a497f786825462a776b7bf90168e67ee0a5bc5d2473a5674dc38c"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
+similarity index 67%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.2.1.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
+index d7fd55d79..e513a33bd 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.2.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
+@@ -2,10 +2,11 @@ require libgpiod.inc
+ 
+ DEPENDS += "autoconf-archive-native"
+ 
+-SRC_URI[md5sum] = "e6c222512a0d1994a069ebfd2e0a56fd"
+-SRC_URI[sha256sum] = "736d8b511ad247c2acb01b592f2bbe5e757e14e1d8347b2d80683081ab4b31b8"
++SRC_URI[md5sum] = "9f7530a5d56f070ba0af78d6ba077973"
++SRC_URI[sha256sum] = "6ec837f23e8f2196e5976dec4ac81403170830075e7f33ede1394eaf67f2e962"
+ 
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
++PACKAGECONFIG[tests] = "--enable-tests --enable-install-tests,--disable-tests --disable-install-tests,kmod udev"
+ 
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
 -- 
-2.7.4
+2.20.1
 
 
