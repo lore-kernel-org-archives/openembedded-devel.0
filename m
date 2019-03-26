@@ -1,53 +1,18 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D6F917CFEE
+Return-Path: <bradleyb@fuzziesquirrel.com>
+X-Greylist: delayed 527 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 26 Mar 2019 12:07:01 UTC
+Received: from bajor.fuzziesquirrel.com (mail.fuzziesquirrel.com
+	[173.167.31.197])
+	by mail.openembedded.org (Postfix) with ESMTP id 431927D0FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2019 02:19:35 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id y6so865770pll.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2019 19:19:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=8pXOfoz8/dUZrHK46M3w9S4zpRFT6QQDL2FnfhYQa6k=;
-	b=JK3DUMBRGid3IYlcTVNHpBvk7ob9qzCoKD5QsgQ4mCjlFaWsbpwPBoEIcKCTXAIsMN
-	Q+Mj0xcOIqcYFy0PV1lb/mStUEbh2HDaUKBge3/SAAbYRtUMVyMMJ/QAE8g+O7KfNhkc
-	Vdi52qFVKOPpXfzTlKuH7Nr3LoQbqEqte4p962a+unqa0AU5nHOw2DIUS63bSW6JmaQk
-	SDQCqzKBNP9VMmh5CfRrVB6ooihAz58WF7a5hhA4FopApwszGbMqkVsZRGIEZPbpJqSP
-	FoQn+Cn4BTDEgJWAuoeUyGDq42FqkNGggawOX+sNu7Y4AUXzfoEgR+LyZEEBfTc6dY0e
-	vngw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=8pXOfoz8/dUZrHK46M3w9S4zpRFT6QQDL2FnfhYQa6k=;
-	b=h0/MyFlkW6y2IN5qMupMIysd+qGYChMD/miCEWX4EbRM6vEjw0d8VOPs0N+0HSGcyJ
-	e3tds6LXG9gvoqmG4ndrYGJQzrRVrDSyI9cLjA9OaQe+1Uh8w8AFkhFJwOTgxZ3LjIl8
-	hceuE6kNLVBK3Xyf2W7XxnAJuqNreWpeSF3CrdMvFG2JfgNrGsCYNos1FtZi9D8eS+oU
-	NmmjbxFDIBqe9rnY4ONZSgJmv19UqUbUcyqTPU5fKe3SQlLle+5miaqmv74ngsnp5Utn
-	LXXvnD7pR3Urh1blQfbXGbWWoflsbazrUq2VJScUQW9PFaMUQXFULVDdCtJZsGrz6bkP
-	owmw==
-X-Gm-Message-State: APjAAAWaLd3bxmMjV955Bkoxr3lPN+ANfuakJX1CLKmnrDHPADc8DSzL
-	yJVA5NSam1rP2G/45BzYlTm80eY5
-X-Google-Smtp-Source: APXvYqw6z9TCPIvqhvuJZIVztkMtKbg3FW3Ga6qe3qdm1JednHHWR7zZFMR5DPSaWfUbiy9Eoda+9A==
-X-Received: by 2002:a17:902:1002:: with SMTP id
-	b2mr27738267pla.248.1553566776869; 
-	Mon, 25 Mar 2019 19:19:36 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:3dea:ddac:f0ad:db91])
-	by smtp.gmail.com with ESMTPSA id
-	j4sm25931896pfn.132.2019.03.25.19.19.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Mar 2019 19:19:36 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	Tue, 26 Mar 2019 12:07:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at fuzziesquirrel.com
+From: Brad Bishop <bradleyb@fuzziesquirrel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Mar 2019 19:19:34 -0700
-Message-Id: <1553566774-8056-2-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
-References: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
-Subject: [PATCH 2/2] libforms: has a depends on mesa so add DISTRO_CHECK
+Date: Tue, 26 Mar 2019 07:58:17 -0400
+Message-Id: <20190326115817.23731-1-bradleyb@fuzziesquirrel.com>
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] nodejs: Update GCC 4.8 compat patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,29 +25,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2019 02:19:35 -0000
+X-List-Received-Date: Tue, 26 Mar 2019 12:07:01 -0000
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+GCC 4.8 compatibility was lost moving from 10.15.1 to 10.15.3.  Add
+another wrapper for std::make_unique to restore it.
+
+Signed-off-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
 ---
- meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...0004-Make-compatibility-with-gcc-4.8.patch | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-index 8a214d1..f86d7c1 100644
---- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-+++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-@@ -14,7 +14,9 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
- SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
- SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c2def61"
- 
--inherit autotools
-+inherit autotools distro_features_check
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibili=
+ty-with-gcc-4.8.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-=
+compatibility-with-gcc-4.8.patch
+index cb38362e4f..925c085e9b 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with=
+-gcc-4.8.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0004-Make-compatibility-with=
+-gcc-4.8.patch
+@@ -3,6 +3,7 @@ method to be compatible with gcc < 4.9 .
+ "error::make_unique is not a member of 'std'"
+=20
+ Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
++Signed-off-by: Brad Bishop <bradleyb@fuzziesquirrel.com>
+=20
+ diff -Naur node-v10.15.1/src/cares_wrap.cc node-v10.15.1/src/cares_wrap.=
+cc
+ --- node-v10.15.1/src/cares_wrap.cc	2019-01-29 08:20:50.000000000 +0100
+@@ -44,3 +45,25 @@ diff -Naur node-v10.15.1/src/inspector_agent.cc node-v=
+10.15.1/src/inspector_agen
+  namespace node {
+  namespace inspector {
+  namespace {
 +
-+REQUIRED_DISTRO_FEATURES = "opengl"
- 
- S = "${WORKDIR}/xforms-${PV}"
- 
--- 
-2.7.4
-
++diff --git a/src/inspector/main_thread_interface.cc b/src/inspector/main=
+_thread_interface.cc
++index e374c0fd70..05d7d8c60f 100644
++--- a/src/inspector/main_thread_interface.cc
+++++ b/src/inspector/main_thread_interface.cc
++@@ -6,6 +6,16 @@
++ #include <functional>
++ #include <unicode/unistr.h>
++
+++#ifndef __cpp_lib_make_unique
+++namespace std {
+++  /// make_unique implementation
+++  template<typename T, typename... Args>
+++  std::unique_ptr<T> make_unique(Args&&... args) {
+++    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+++  }
+++}
+++#endif
+++
++ namespace node {
++ namespace inspector {
++ namespace {
+--=20
+2.20.1
 
