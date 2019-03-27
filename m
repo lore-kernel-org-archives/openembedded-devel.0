@@ -1,53 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
-	[209.85.221.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 764DD7D0F2
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id ED15A7D15B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 15:35:35 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id k17so11166913wrx.10
+	Wed, 27 Mar 2019 15:35:36 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id g3so15631266wrx.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 08:35:36 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=n9XPNd8tlWDM5NUxQsqVX6osSdE9uOYyG7HHWvqgcBs=;
-	b=txlLSfSx3UDs78uLussPn5tPaoqLhp2Zq10x5hNTDU/hr2onXo+l5ysjBFM+czFNL8
-	T9yVkXt8M1kqn0YlQBC9VpTCT/yGE3zS0z+pIe1hXQb5XDatgEv91SdpTuWuLwpcGj6H
-	aH45NgsnfdnnM701ljHF6scgwliusNUMNgebQliKJQi9I+XvFiqV9pKoLt5AtGzgc5ci
-	+d5gcsiUqHKuJYlw8y8yd9Z8ExHYadlqRdwrIgK4s42IyawhfvTbY7XCnYtmBTxxzXDV
-	FOoqCxyZqpQ0HFn1pGrDTaGA4ihrHbGPiK7XxxzIns+qroFAgY5sg5oH79dg+YtmS5Pu
-	fTjg==
+	bh=zCW5LotEuK5UM4y8Zr57+CJJDdyRsaao9TKsAptH4MM=;
+	b=C33RmWjnYthlCFG80/8fXy/TGzWDyt2yWZoScnVmBj1+o0A7l/8db+uxIm5uMiK/st
+	neyE7aZNvUKg4Nu3gCD18Tq6zKK8tiYTwl/LeoBQX/oGFeCvcy+A6ZiVLKYdHc5vsu2A
+	+ZPkrXJLOfp+acJDcQgEg1VCiq6hiUoOUvDQi0EQv2C7MNUApTZANedDP7T8cebdz+PQ
+	OoYm/LNK+SZvWpKQ3w3YHwE6FPkNxPu1GM83oOfHfwUhoUCb9kLrcT2EXQaTrbB11FH9
+	koW73u9B9ZdrJeKuUvM42jiE+QrlBR97TX3otnBL4zmFSDvCMlTiB3/2uU4qQJxuSk1q
+	YB7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=n9XPNd8tlWDM5NUxQsqVX6osSdE9uOYyG7HHWvqgcBs=;
-	b=rZENOyHtyesIw2ejlfRZjB3DBg7bD4Yss7VjQ2klyFshdK+vSB3SZeuTHPlXtYeEUS
-	2wW9rph2KuiUgjzhk76ibgMpeBP1RHJbo5FMwlJ0v5iZrRlSiczk3xu8dwIBG30d9Ig2
-	lVaUCUIJgPWIjtXj5FGMHtjJzWBZK2K4/yiVKN4H12mE6tzhqmYQaN9hexvVTIbHvcBN
-	OCRbZ91LXzGo4BmHVzpjQAEDWXBDDSbLrREcg42EeJQJ0SdEh/bwl7TZ3fAz1r5UZwYr
-	QDIeFCg2np0HQzp6U/mxjcelB/R9n8sb04TgtrmdyhsO/s3H1DpO6XjiPZVQRTPgzxD1
-	yWVQ==
-X-Gm-Message-State: APjAAAWdnXcp1G9telSegCakRIHYqBY98R6onz3d1zcR3ByzeDINi5HP
-	Lp8Hw1UM2a5bQDEpKuvUb4jkhFdo
-X-Google-Smtp-Source: APXvYqyQ0ZgvU6nuSqwZZ0pDCtMDCm7+RpOfKTfW+1iFDyB4FbSU9omBRIudk8Bt9ob7fjmstb65wg==
-X-Received: by 2002:a5d:68cd:: with SMTP id p13mr24228933wrw.22.1553700935975; 
-	Wed, 27 Mar 2019 08:35:35 -0700 (PDT)
+	bh=zCW5LotEuK5UM4y8Zr57+CJJDdyRsaao9TKsAptH4MM=;
+	b=RBy7HlCx6R0id25MBrW4N8+fkY0Mn9XCAbJbDVcXNcrLsUtKdPn1ZoO4mpCAmV1B1w
+	ZOm4qnZ6uy7CTP3AIRGXcRVZmEKQWyD0APWBEWE+jefXEYRmkuOEimKCJW77FtYBxMT3
+	Hsbn73CRRLyewKc2/j6Eww5H7bB2oHft37s3WDKXVDXyeIYC0ugmi8YN8goZqvccZ1qy
+	E/3D0J9YohA8h1VWwhuZvxB1dakrJs/1xuQlNhYGWl6ka5yoqNIJxc2IpDHTtvZMRb6R
+	efX8/ROno+tXMMpK8dh/9XvmiiTV3h5p6Rbh2p8OKtAynAlWFdJswIlguwTsBEmtue6v
+	2k7g==
+X-Gm-Message-State: APjAAAUtcz3sV8LqJM7DEsXVN/RQ0k+A6mNg9xY5+U0GkFlnspnvFA7Y
+	vKPdo86Gjnx+kfCv9astneTd0e5g
+X-Google-Smtp-Source: APXvYqwALrH1jPUiGLsXmBK5Z0Cq1UVQebn9O4wFu2pUMQ2ckxTCBB9sdYTG3gMZVMk5VMFFJ5ZbPQ==
+X-Received: by 2002:a05:6000:1209:: with SMTP id
+	e9mr4342146wrx.35.1553700937541; 
+	Wed, 27 Mar 2019 08:35:37 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.34
+	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.36
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 27 Mar 2019 08:35:35 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Mar 2019 16:35:01 +0100
-Message-Id: <20190327153509.23928-7-schnitzeltony@gmail.com>
+Date: Wed, 27 Mar 2019 16:35:02 +0100
+Message-Id: <20190327153509.23928-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190327153509.23928-1-schnitzeltony@gmail.com>
 References: <20190327153509.23928-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/15] gspell: initial add 1.8.1
+Subject: [PATCH 08/15] itstool: initial add 2.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +61,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 15:35:35 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 15:35:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is necessary for latest evince.
+It lived in meta-qt5-extra for a while (don't remember why - it was not used)
+but now we need it for upcoming gnome upgrades.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb
+ .../recipes-support/itstool/itstool_2.0.5.bb  | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-support/itstool/itstool_2.0.5.bb
 
-diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb
+diff --git a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
 new file mode 100644
-index 000000000..9de298c41
+index 000000000..b74d5f607
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "spell adds spell-checking to a GTK+ applications"
-+HOMEPAGE = "https://wiki.gnome.org/Projects/gspell"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8c2e1ec1540fb3e0beb68361344cba7e"
++++ b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "ITS Tool allows you to translate your XML documents with PO files"
++HOMEPAGE = "http://itstool.org/"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59c57b95fd7d0e9e238ebbc7ad47c5a5"
 +
-+DEPENDS = "gtk+3 iso-codes enchant2"
++inherit autotools python3native
 +
-+inherit gnomebase gettext gobject-introspection
++DEPENDS = "python3-native python3-lxml-native"
 +
-+SRC_URI[archive.md5sum] = "8269918ea5ff798e49943e7daf6a32b9"
-+SRC_URI[archive.sha256sum] = "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
++SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
++SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
++SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
++
++do_install_append() {
++    # fix shebang of main script
++    sed -i 's:${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN}:${bindir}/${PYTHON_PN}:g' ${D}${bindir}/itstool
++}
++
++BBCLASSEXTEND = "native"
++
++RDEPENDS_${PN} += "python3 python3-lxml"
++
 -- 
 2.20.1
 
