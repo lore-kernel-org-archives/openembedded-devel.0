@@ -1,46 +1,52 @@
-Return-Path: <38-yaXAMKACQWAKGOOGLE.COM@flex--wak.bounces.google.com>
-Received: from mail-pg1-f202.google.com (mail-pg1-f202.google.com
-	[209.85.215.202])
-	by mail.openembedded.org (Postfix) with ESMTP id 568A77C603
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F0D56C104
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 03:24:34 +0000 (UTC)
-Received: by mail-pg1-f202.google.com with SMTP id m17so13185719pgk.3
+	Wed, 27 Mar 2019 12:24:33 +0000 (UTC)
+Received: by mail-it1-f194.google.com with SMTP id w18so25078053itj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2019 20:24:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=date:message-id:mime-version:subject:from:to:cc;
-	bh=+SCOxbNFKUxQQ5PWK3MbOrv3IeqrvL8/cRJ54IDNmC0=;
-	b=HSyCFwxpkwuisUmzi6pJ7zRIQ4nRk0DWPE9XyNjBsldTfylgICDHj1m0R/Cwg7TG4z
-	eqhjw2+sl4NK/l+aYZwrlWBzEIJ6nVYjVtNq68GNM3YMbdUZ2t+2xet4v/5aYYZ/yR4A
-	Tv6pPEc8po5RXD2O2dNUKdokUZOb3HG20ijUmMxMMtUHJLX0ZIlQiRIPeKYBopK5JCiB
-	t8WSkDBKDC5IpfIwmBbDIPT9nWIA1N/CL2jIfFKcarHRrJu26ZKTb3FuPaYOWAiuArgn
-	jxFQ2pc4Eh52zKHxYmFph0OBiruSlT2aE+SVT3i9zoN17TIBWRaHPPN9MbBWwctrHw0I
-	fjPg==
+	Wed, 27 Mar 2019 05:24:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=1enBI2VpVTqYbinSowfynT1DlD0Mij1r+7EEVXVa4e8=;
+	b=Wykz6OM/8KyzMdnvq5HY+gRkw/gFo+ehgrcIMdoFtzDC5dWsDARnivXDJU7J3xy41z
+	dOmvksrPfGH49GYRWUuCECe+BHsYhAMoN40j7xzSdApxOJ+E9nF60yCJ2KzeCeFeNWVb
+	zEAnPTebyAtIrkMqHrHyxr15ptX8e43CAED5VzZVlnBf7xCEGJmVd+Fq4x8CozPHHGuj
+	OgYfOb8oJ+cfEN7N6SxJkfrElW5kEoyKiOcDkSBjz+kETl+FWu663j3ADVTcr1lM5WQ/
+	tBhByX+3ulBj9oOFLjdi4F0Ypc2jYYlpq9ECt87Yz58NdGo6/VC/FZ8w8erVj96SIb2g
+	1Iaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-	bh=+SCOxbNFKUxQQ5PWK3MbOrv3IeqrvL8/cRJ54IDNmC0=;
-	b=RwZult642/jydFIvM6AUhEGWRsMKRMoTVFUzUSAOjgYuC8ICxXual1r6wxRsUUdxmf
-	ie8On366rL71BdYCu9wPhiGaSH5/82r1qMrJ6/1f5qaFmhfB/ha4pvYuuHmUlg4rFNlN
-	uZcRgyzx0odyW9MVlXzAtSb8mjHvftBeLZ3ZJnGnwVOl/RIlqYzL44seaGYozbV3HjgI
-	pMJZVAONVIJTxOIcY2VlHzxLnP9oRITDXfvVE3sfSt2CeOkvoHeb+Aj1/sbGpqRConNp
-	Z91KELrCOSNRZHkVMhzOmE5kcviqzMuV5aE04YjWqWqPI8ZUpHy8fhGfnCLX2i8MmSYy
-	sHhw==
-X-Gm-Message-State: APjAAAVi3ofLlma5l7cB8pxGA8Fl/9iuP+W3nG7f7m5+uWPWgiwlERtL
-	djN6qEgxlVN42pHrUuP6qkVvKzvBO1gVNm/aEYaMPnSU25ghk/vi0yHBy6pCm29L9NDuXWOYz0I
-	rx/eXsAuHGjd2BuXTBSB/qREbgyYN3NTJ3mpYdv3dBHUMXN9rOjt6GaxVvvuzUOMV3m9wwPXjdH
-	kNg1A=
-X-Google-Smtp-Source: APXvYqwq+H54ySFYYlC63xHhjgeoI1Xgk5Ld8FxtjsMyl5a8IeBry/wAWnA/iJOzrwp4DfVtgzDa8Js=
-X-Received: by 2002:a63:3fc2:: with SMTP id
-	m185mr10571433pga.145.1553657075334; 
-	Tue, 26 Mar 2019 20:24:35 -0700 (PDT)
-Date: Tue, 26 Mar 2019 20:24:30 -0700
-Message-Id: <20190327032430.59511-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.21.0
-From: "William A. Kennington III" <wak@google.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cli11: 1.6.2 -> 1.7.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=1enBI2VpVTqYbinSowfynT1DlD0Mij1r+7EEVXVa4e8=;
+	b=pCpo1PW8mPwgKzhGHEMUYSN9XCW6lQIQM0S+tOj/+gkWNuUvARrdGw1rjadoccJD31
+	SfmT5SVB7RrtKa4wdjHAoJTFqcsyab4L/pawJZdDyYEID9XdIpzCPyproclULmc8B1wa
+	LUswMFi0mtNjDyZ0/ol4Bba+3tyietXZhBsvknOlHMkopGwANtyvKwNDpiHePI2rlZ32
+	5OuRUVeCnnMiaWLkcBovMlyfhgCkkdvodvpHoQIXuAr3so917VQFpEaZ/kd5x+9x1r3G
+	njnWgg3gC0K/fs2TIcBTWr1pSorOjnw3SkIFxhFdkzlP9CtAM09fvvxYTioRUVkkB0Eg
+	C1Ug==
+X-Gm-Message-State: APjAAAXRAkPfvfQ7XMh/mTxtfgWeBOLEEOtc/i1qSTs0Uxj0hY3jLpgz
+	zjaF5o87plhkKvBDg+mZqD/e5zmOhcX7QKM60Us=
+X-Google-Smtp-Source: APXvYqz1hsj5P9kfe1svss4IbI/lRnObZxQCqLH9+OxLW7CBWOpBfvv4BZqGju6tN08rASOVFb87uVs9vhlP1PoFfm8=
+X-Received: by 2002:a02:23c7:: with SMTP id u190mr26805111jau.81.1553689475058;
+	Wed, 27 Mar 2019 05:24:35 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190322102129.5067-1-schnitzeltony@gmail.com>
+	<20190322102129.5067-9-schnitzeltony@gmail.com>
+	<CAMKF1sqtdp5Fqw+wjUfz33VBeaJUwuT430r+AYdQhn0=Cd9FYA@mail.gmail.com>
+	<20190326125724.GA2428@localhost>
+	<CAMKF1srG8EMoUMk0cSFRjyHky-A5pS+GBtNKvqSLQ3_eONpnvw@mail.gmail.com>
+In-Reply-To: <CAMKF1srG8EMoUMk0cSFRjyHky-A5pS+GBtNKvqSLQ3_eONpnvw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 27 Mar 2019 13:24:19 +0100
+Message-ID: <CALbNGRQbK_neQv7n84HQXSB6SjR_CSrJck471eL1Hx_2RRPHig@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [PATCH 09/11] networkmanager: upgrade 1.14.4 -> 1.16.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,37 +59,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 03:24:34 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 12:24:34 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-LICENSE checksum updated to reflect a new copyright date being updated
-there.
+On Tue, Mar 26, 2019 at 5:16 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, Mar 26, 2019 at 5:57 AM Adrian Bunk <bunk@stusta.de> wrote:
+> >
+> > On Sun, Mar 24, 2019 at 09:28:14AM -0700, Khem Raj wrote:
+> > > On Fri, Mar 22, 2019 at 3:23 AM Andreas M=C3=BCller <schnitzeltony@gm=
+ail.com> wrote:
+> > > >
+> > > > * license.html was checked: it is still GPLv2. Could not find what =
+changed the
+> > > >   checksum. Maybe it was generated with a different version of gtk-=
+doc.
+> > > > * Build tested with just gnutls in PACKAGECONFIG to test nss altern=
+ative (and
+> > > >   setting no crypto won't work)
+> > > > * Build tested with all entries except gnutls/qt4-x11-free (yes the=
+y still
+> > > >   support it!) in PACKAGECONFIG
+> > > > * By far the most time was spent on musl patch adjustment. They app=
+ly cleanly
+> > > >   but musl build was not tested due to limited resources.
+> > > > * Fix build for non systemd by making SYSTEMD_SERVICE conditional
+> > >
+> > >
+> > > https://errors.yoctoproject.org/Errors/Details/234221/
+> > >
+> > > ../NetworkManager-1.16.0/shared/systemd/src/basic/util.h:75:18: error=
+:
+> > > unknown type name '__compar_d_fn_t'; did you mean '__compar_fn_t'?
+> > >...
+> >
+> > NM seems to now ship systemd sources for using them as a library.
+> >
+> > OE carries 21 (sic) patches to systemd that are
+> >   Upstream-Status: Inappropriate [musl specific]
+> >
+> > This specific error seems to be fixed by one of them.
+> >
+>
+> Yes, thanks for info,
+>
+Maybe some source of inspiration is found in void-linux [1] - they
+build for musl either.
 
-Signed-off-by: William A. Kennington III <wak@google.com>
----
- .../recipes-support/cli11/{cli11_1.6.2.bb => cli11_1.7.1.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cli11/{cli11_1.6.2.bb => cli11_1.7.1.bb} (79%)
+[1] https://github.com/void-linux/void-packages/tree/master/srcpkgs/Network=
+Manager/patches
 
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb b/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-similarity index 79%
-rename from meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-rename to meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-index e62c1d3d1..1ed97a27e 100644
---- a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-@@ -2,8 +2,8 @@ SUMMARY = "C++11 command line parser"
- DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
- HOMEPAGE = "https://github.com/CLIUtils/CLI11"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c271fee3ae28e11b24b97284d9f82887"
--SRCREV = "bd4dc911847d0cde7a6b41dfa626a85aab213baf"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8489f3831fc7b75264c1d5e346251a74"
-+SRCREV = "49ac989a9527ee9bb496de9ded7b4872c2e0e5ca"
- PV .= "+git${SRCPV}"
- 
- SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
--- 
-2.21.0
-
+Andreas
 
