@@ -1,51 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 557617D141
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F5247D141
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 15:35:28 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id o10so5106570wmc.1
+	Wed, 27 Mar 2019 15:35:29 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id v14so552568wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 08:35:29 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=UIJERsLVDeS/VHTgHZb3wipbDCAy7B4ZfNeETrUX4P8=;
-	b=GcOh6QFRJWre0m6lioWQ5uz3Lzz+yrVH95lSJFT5ar553NfqL0VmAFJcqAxoMB+Mvc
-	5qgbvqvtDXCIeUJywmsuTRfrWA270Bji5/82D3fG0xcfXnI/ecCXrQQj/dDrUmIq0a0N
-	BFj/ibV+3avNuTKiD+UOj4XypCS+safXeIHERHe2rqVWs2X9rQvTIQWSNsotA0yRkCmd
-	Wbf71gHLQBTdzUIgeLdaFSYDQ5eO+TzzkaNO7jNFHJwdVBxWFSTWw6hFPDXj1xlCpCY9
-	kEyHXH4+23W7c6JuQER836YB1nXk/VutNwoytht/+sJ/+69aUg+loMj7jVraUHjZRrJJ
-	gGqA==
+	bh=GjuiWg9drMOZBzQ2Xr2jRHCYtkWsxGQpExIms7WUxiw=;
+	b=fB7aE7piJsIkxGqsfnuRdCtxRDWMz4QZ7QCnqkiJrHMPDMfwOR1LTEhRZe6/lAgu+B
+	qquHLmBFD075ph74UTKw9X1Bcc6MUjWQF6FVXbX6gcQa0ItFabAON/kMz0NrDPWnNCWu
+	y2WLAFOPOYb7Hxh86/q42YVXzUqQqchUHuvv80xwku9sHEdG8qIpxhfXyUR1IUmWlZOl
+	NyJKq9lINpak77hvhQ7B8iMPYADImf5IuHW9HkN8J3U9d+3EHkPh2j7uY0o+6rFWsF5E
+	W2fMfGGkPE0CuMT0fJEJn9Ha/aTzZ9AW43Wx4GOlvG8a5/hKffhi1DfDAqo75XlSGb2L
+	MlUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=UIJERsLVDeS/VHTgHZb3wipbDCAy7B4ZfNeETrUX4P8=;
-	b=BBFmz80hcZpA90+YTq7IjpxyUjMKPRgmbetrBU4SSWgIa56CwqZwVYY2Hwz8tasGhW
-	d3YTkoWfQYqoI8fChMiL8d3M+bb3XtDT4fRIDo43aPxHLp88bIDuuZEWEJRvI20kIwrq
-	sOcQdJ4jWJ0bXtQNq9xGUTRTB6fgpOkD7WB9owyHfz0LyC1985UVOdUBuWq2cWzO1qjq
-	XBk4a4blgy0icz3IWFN4xUDMkQ2Y/oMa6KeCFv5S1zMK7gjjb8MFNLUH8yFrrfJSVXP8
-	E1sNAhNTfYqLjq5EGjOZkSAqoXtNl3yYzbX98O0DoMLMIz4VxWee0myMjIt17iSd5IvL
-	n0xA==
-X-Gm-Message-State: APjAAAVxCwrtX9BNGJtlX6fwOdBxUCMGDeAF3gmH2LWxDDXc4LJi312k
-	le7Oi4dkGUAQkce/Mh4xL0nybgna
-X-Google-Smtp-Source: APXvYqx0uNakw65gyEZJPuTGLiJDYyxKku5P+NC3sgZUEb/k1ZO+7PnHkoybAp0YCgCE973syC/1kQ==
-X-Received: by 2002:a7b:cd9a:: with SMTP id y26mr13551422wmj.31.1553700928574; 
-	Wed, 27 Mar 2019 08:35:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=GjuiWg9drMOZBzQ2Xr2jRHCYtkWsxGQpExIms7WUxiw=;
+	b=P0aeYPDPy1XW1+rewpSNS1l3V5hlwRusDhbF1F1votfMeLpzsyZK2RB+3sBD/aI9rw
+	YrdGMd/YdcgmNJ6CNp4pn1Jqgq4nXxtUkOf97eqcBqc1jLtbpFF/6MNtqkLDduVU/y3G
+	Ab+zoBNFXv6oR7/rtvq0bbvh4AvQ7Wn4r5kbphhkMkXejzOr3d9fcN7Mti1StYzdNv0+
+	2i9zwqYa8YUyfk7HVh7HKOipYRFF4WgpHXUQCITpB4ZpeNVsuREa0gPLsuA4MfZYgz7c
+	4YGAWYV8459FQla1l4vOgTAjlpYMmpqU0FaMh0DaEjIuAAdA9z/3j5FUG88CODsQ4thk
+	0pHg==
+X-Gm-Message-State: APjAAAXvR/hRUdCLriOEAxzFFANu/LcfKAUhmx2UtFdBI6B5/SJxmEYY
+	rhQMGIAJLNsnGDCY882w442FsVoZ
+X-Google-Smtp-Source: APXvYqzBiYs+4dN8U9XUWYH97F4z8RO1kOCLEXMBsIzp2gGbfWWeOg+17PvYIEKqosUa3PQimM7+uw==
+X-Received: by 2002:a1c:2b41:: with SMTP id r62mr18037032wmr.94.1553700929871; 
+	Wed, 27 Mar 2019 08:35:29 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.26
+	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 27 Mar 2019 08:35:26 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:28 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Mar 2019 16:34:55 +0100
-Message-Id: <20190327153509.23928-1-schnitzeltony@gmail.com>
+Date: Wed, 27 Mar 2019 16:34:56 +0100
+Message-Id: <20190327153509.23928-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190327153509.23928-1-schnitzeltony@gmail.com>
+References: <20190327153509.23928-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 01/15] xfce4-weather-plugin: upgrade 0.9.0 -> 0.9.1
+Subject: [PATCH 02/15] gparted: upgrade 0.31.0 -> 0.33.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,45 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 15:35:28 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 15:35:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Most notable changes from announcement [1]:
-
-1. Use https for all connections (bug #13645)
-2. Use the latest sunrise API (2.0) (bug #14972)
-
-Note on 2.: although met.no announced they will stop support for API 1.1 after
-2019-02-15 plugin 0.9.0 still works for me. So in case of trouble on our stable
-branches we should consider upgrading.
-
-[1] https://mail.xfce.org/pipermail/xfce/2019-March/036322.html
-[2] https://api.met.no/weatherapi/sunrise/2.0/documentation#version_2.0_released:_2018-11-19
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-weather-plugin_0.9.0.bb => xfce4-weather-plugin_0.9.1.bb} | 4 ++--
+ .../gparted/{gparted_0.31.0.bb => gparted_0.33.0.bb}          | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.9.0.bb => xfce4-weather-plugin_0.9.1.bb} (72%)
+ rename meta-gnome/recipes-extended/gparted/{gparted_0.31.0.bb => gparted_0.33.0.bb} (90%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.0.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.1.bb
-similarity index 72%
-rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.0.bb
-rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.1.bb
-index 1663bb9af..c53ca13c8 100644
---- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.9.1.bb
-@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
+similarity index 90%
+rename from meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb
+rename to meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
+index 58beaf6c5..a9f6993fb 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
+@@ -12,8 +12,8 @@ SRC_URI = " \
+     file://org.yoctoproject.pkexec.run-gparted.policy \
+     file://gparted_polkit \
+ "
+-SRC_URI[md5sum] = "c554cc5734c50459dd551bd3fa10710e"
+-SRC_URI[sha256sum] = "3b7b49a434d9e4b397bc41a1f5acab8539b9ff402b472dfd83ad77b2decd07ba"
++SRC_URI[md5sum] = "2f481ad34decb7021ca04ca305e79e7d"
++SRC_URI[sha256sum] = "5023b8c983f88a22e65bf6f09a12ea09369defc008981b52ee8b96a3879f81d6"
  
- DEPENDS += "libsoup-2.4 dbus-glib upower"
+ DEPENDS = "glib-2.0 glib-2.0-native gtkmm parted gnome-doc-utils intltool-native"
  
--SRC_URI[md5sum] = "25d3d9fb2e688a619201655f6eea51c2"
--SRC_URI[sha256sum] = "34368cf2332774ad2a05226b2914ecb60e7550e9b2164be53ebe8f370198bb3d"
-+SRC_URI[md5sum] = "e0bde3ba6a7e863022a86a23c7871255"
-+SRC_URI[sha256sum] = "7cdc18b8df759dee4ceaaf6ce303eff7fda48e247dbc26b78142929213506cfd"
- 
- FILES_${PN} += "${datadir}/xfce4/weather"
 -- 
 2.20.1
 
