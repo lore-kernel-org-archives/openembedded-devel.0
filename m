@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D5B07D15B
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+	[209.85.128.50])
+	by mail.openembedded.org (Postfix) with ESMTP id C73D17D157
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 15:35:39 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id o25so457275wmf.5
+	Wed, 27 Mar 2019 15:35:40 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id o10so5107094wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 08:35:41 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=BxVNMqJ9Mm31fasCSxhlUarmmhFTLUkqbmXdOaYrZr0=;
-	b=hqQlpGPNfWPU2Cz6nSpzCkxp3hwjwU00blaRt17J9tBLEhHNmiM0Eh9cFxR1mSutkd
-	Iybj8bGh5YOdjV1G/CO65hN+hSi74vEXCKy2gU2ueJ2WOV9GIMEfCmUIsBDjgAuJfpmF
-	SFYNG1ZaoSvA2eoCWpZLOpWsrHYo3IhXJXvVvv411LHaBjaax2uF87mef/TicKjBAEuN
-	rSaV2nCIfh0Xlkbf+eRtP5Q0ncdJAEWxqX+fuy4XmUZSbYUGUG/ja0wSpBYy1xa/myor
-	2VdtC4Kuzv4FfnonopT/uYeaIMKUe4urRA92MVqCoDXwPBQ0WoVxrYD7LOXXTOU83ij4
-	Gh9A==
+	bh=OQfoacW4EveOUH8gbm+mdd1FlTav2q0Y6dbd6QDJbqg=;
+	b=E6AD7s+GMw1qqMRbY+qfeVhPN8VgWMmP0cNum/5sCYv23r7LB53itXKmKsqequPqOm
+	MPgVgS7J4JrAOkmrBNwCImuqeoyhK5BkBuuaeyMH7s7h4sezz87AvgN0AiXBJkDmzG4c
+	Cle9Ls3F5P6Iwtj5OXSLH/XaUGaQd1KMpBBlKun0IwcV36arccoiYh8o4tRwTczTVmZI
+	XgQXsfos/vXB/+NasHLFgQTLqyPKzMPn0VRmyt7Pim4/LhEwzaGioKZMc2h4YEGBIXpl
+	GRjRZiGXN0+VA21GIJpyE01FRO4Dn5Yx84/cbKnrv87fXnP+tbP4KB7/WQPqR2a3nE61
+	f6mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=BxVNMqJ9Mm31fasCSxhlUarmmhFTLUkqbmXdOaYrZr0=;
-	b=ivCs6YZE86ZI7mlMGBObNV84OshbtV5Yj725Y4y6LDbMhxesBReoJqYCnmv/376D+8
-	5ftmX4UNRN7jUtMS986nZ1op+5HQ3quFu0cDOK8sobst/hgQ+maooaiQFLAhHZbcWkDJ
-	RfxotZ+4TJ9HVG5fjS+9oFu49+ox06ucdp9OPyiAVyuYw9hVXYX3hAwz1MOvdBITKfse
-	+xErerit7VTuj1QNpyWmbiHK6sURq4B8g7ZMCezTOoca69p8u2oR2hlPxjnZ0L5S+xxk
-	SlWl196mgQrU9+zpJ6yGW5aMsY6Bb3GwVVkHuj/LAFtyfEgkekpjRwC6JNWkfXKiHShW
-	asOg==
-X-Gm-Message-State: APjAAAX3TfdyrtxI+8wNI7a6pp4DgvcdiS7fp4e7qV3/CcwdUTDV+B2A
-	i+Gg1R0a2srJYKVwC+muOA3p2iju
-X-Google-Smtp-Source: APXvYqzymUY1h/mEjr7TlA/+t7VZPtnp15dngpmayjUoGCEw8H6Lo655yXLz/35mnoMAmZ3c+B9JGQ==
-X-Received: by 2002:a1c:4187:: with SMTP id o129mr9004151wma.57.1553700940421; 
-	Wed, 27 Mar 2019 08:35:40 -0700 (PDT)
+	bh=OQfoacW4EveOUH8gbm+mdd1FlTav2q0Y6dbd6QDJbqg=;
+	b=YOAzEZDUz0Ha2OIsgtL6ZdhSTP/eUnLV6JDu/S1I9WaipUxI91+HglNvNJYfuJ6W9P
+	Jj46P7Db4wLLiTJI2ttYu5iFrJ2NlTVZOFt6tRAvZmbRDSQgDxL22zM6eTZwEsj45HFK
+	AUt3OyY90LRq56dBfMbGCYdcA9F3+kuSuTCIpyqeCTNdFzGgE9nA7LdNrVqjmpt5BMaU
+	ZIVpzOIDKKkh6hl/FMDQUlcVaNMtcjeBDZvE1rKfcjwfiSbSb5+xNUyyK4alzMxA0tIa
+	MzV1zP/81eVPvdTcx4nmcDZjO+1Kia722mdzR3ivAPx3q20KZuUotxejKK0BXTq45szF
+	Whuw==
+X-Gm-Message-State: APjAAAWqzvejuUQyGzgvbDBaiM2kITEo+Wsij8j5YzYc7tbx0ajoqm9c
+	HjHT9B69AK8zSfAy6JvYLlvMrriH
+X-Google-Smtp-Source: APXvYqxbHLn01J/jioAELeESB0WOtzYd3Jx1V8HnQHdq0qwyN9HJ2F1PYtegBwnxWojg/qj6Q5H3wA==
+X-Received: by 2002:a1c:63c3:: with SMTP id x186mr17902881wmb.47.1553700941433;
+	Wed, 27 Mar 2019 08:35:41 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.39
+	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 27 Mar 2019 08:35:39 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:40 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Mar 2019 16:35:04 +0100
-Message-Id: <20190327153509.23928-10-schnitzeltony@gmail.com>
+Date: Wed, 27 Mar 2019 16:35:05 +0100
+Message-Id: <20190327153509.23928-11-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190327153509.23928-1-schnitzeltony@gmail.com>
 References: <20190327153509.23928-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/15] gtksourceview3: upgrade 3.24.8 -> 3.24.10
+Subject: [PATCH 11/15] libgnomekbd: upgrade 3.26.0 -> 3.26.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 15:35:40 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 15:35:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{gtksourceview3_3.24.8.bb => gtksourceview3_3.24.10.bb}   | 4 ++--
+ .../libgnome/{libgnomekbd_3.26.0.bb => libgnomekbd_3.26.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview3_3.24.8.bb => gtksourceview3_3.24.10.bb} (81%)
+ rename meta-gnome/recipes-gnome/libgnome/{libgnomekbd_3.26.0.bb => libgnomekbd_3.26.1.bb} (71%)
 
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.8.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
-similarity index 81%
-rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.8.bb
-rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
-index 7cb88665a..d91e479d8 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.8.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
-@@ -15,7 +15,7 @@ inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-intr
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+similarity index 71%
+rename from meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.0.bb
+rename to meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+index 456a744fa..3a7379f9e 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.0.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+@@ -12,8 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
- SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/${PNAME}-${PV}.tar.xz"
--SRC_URI[md5sum] = "52f8c83ad21ad75e9ee6cca03ce2e63f"
--SRC_URI[sha256sum] = "1e9bb8ff190db705deb916dd23ff681f0e8803aec407bf0fd64c7e615ac436fe"
-+SRC_URI[md5sum] = "e43337d17c40eae440a76630db76c54e"
-+SRC_URI[sha256sum] = "ab5406cdd0bdcf66afcd52b1e048a2f43c0f3ab391644ee30d9ac419b93cd59b"
+ GNOME_COMPRESS_TYPE = "xz"
  
- FILES_${PN} += " ${datadir}/gtksourceview-3.0"
+-SRC_URI[archive.md5sum] = "8b9d13d46255cde910b3db5a6ebb4727"
+-SRC_URI[archive.sha256sum] = "ea3b418c57c30615f7ee5b6f718def7c9d09ce34637324361150744258968875"
++SRC_URI[archive.md5sum] = "98040022484406e7ebe25f82cef93344"
++SRC_URI[archive.sha256sum] = "f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679"
+ 
+ EXTRA_OECONF_remove = "--disable-schemas-install"
+ 
 -- 
 2.20.1
 
