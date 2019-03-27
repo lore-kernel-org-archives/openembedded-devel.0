@@ -1,50 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id EBD1E7D10B
+Return-Path: <3OOCaXAMKAE8Dr1x55x2v.t53@flex--wak.bounces.google.com>
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com
+	[209.85.210.201])
+	by mail.openembedded.org (Postfix) with ESMTP id 91D2E6BBDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2019 16:16:12 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id s81so7933167qke.13
+	Wed, 27 Mar 2019 02:30:15 +0000 (UTC)
+Received: by mail-pf1-f201.google.com with SMTP id b11so13217833pfo.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2019 09:16:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=s1xyGYkLP3bExKVRHRuPYQqGo1ONb7z5dP1tjOnsrjo=;
-	b=j8RAHM/RcbdBmjTBsZIAA5zZawtlo+kqUppg2kyspuphU2LxnIaKMd3qYxh77fH+q1
-	npIBKGiNe5rHWA8GqdYv9Ot1p7G8ZSOiUt+j0Lhp4RdgU02CDj4un47f+8I9sua88j/w
-	61X8mSesSk35rVAPGaXc9F9fnepjuKqmnMfrEhrZ2tF1La2bN1nh2HUfBq3Lta7btJMo
-	lr+mdXw0RbGSumlNQwnHkUnJasPX2nY95zdqe9os0OncJybiUHS5A3iAxhuYDCF8Qe5k
-	Of8yjUXzNgh6S2VvGbd6UVDD7m5/OMtMjqLjFrUy6xysqxX64CHNINBxaGRol4BxMJab
-	W/BA==
+	Tue, 26 Mar 2019 19:30:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:message-id:mime-version:subject:from:to:cc;
+	bh=iMp/siw/2i++vGiZh07apLqVV7zXjlWuh9xMK6e2CaI=;
+	b=X4rVGYrrcP8haj8q4eUSi+LpcbNg7gN4Q8HhmCx7NnYdNeCe7QFRb8qCHLq8+7mxYw
+	DxRkYAn1x08YDLSWqF2eevwTZ71GLhBbImPIeWt4xzsfEErUMCcpI8fi2xnbD0MLq5zz
+	1ecrRayxi8v9PzhdU66spmKLmWGpbtToYO4ZS6UyUAEAUysYlPm5iNXkDvdscj9NgeQP
+	g295rfz4+8APw+3rEpoyq93kBuECVU0UTy2kP9yXrUgdpDsGWBRXk1XP0MReWC/xIuYn
+	tHWMHkDHdWCCgsm5V3js0YhUcK09E8OF8f7p6j/v4fpRbrq5x2gEdnhkqLZrYY3/UFJh
+	VUMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=s1xyGYkLP3bExKVRHRuPYQqGo1ONb7z5dP1tjOnsrjo=;
-	b=jI5lWgGO7U4hGvRGDxL9/JmeaUcwmbJlZXoWW5nkisiH/aRZHiDJ3MByUAqLAUbsRr
-	WOdi6WeVyuzWYhSln322eZTmsd7F9N3mdPgNvNgRa5d1xyOeLuBHYJeQr0TkB7aTx6Ns
-	Ptei7JMmCXS9ZwMUcLE+aEC3OZQDTvbHfaEfkaTGiURLaaxNDqW9jBC5Bx1qqMnawEDg
-	x+tjHG/RdtyMf+RBEdmNJdM6IaeEimUI3ofxc0UWIuY6vv2vXQ82L0ka9llz/k4GyNuO
-	tIGmx8t5LflJKS4KATQA+n78jNDqDNUDngDjXC7Rf6TNOgmJ/dqHkSV26lRXMtmJ4lSO
-	ZzOw==
-X-Gm-Message-State: APjAAAXGeYslm4yf+7P9INFluPCmSO/rQD/X9oFpwUuX1hJTsS5Gsqfi
-	3ELgOAbdeTr8hDBxZkwykpFAvI90CbD1qSUNSHA=
-X-Google-Smtp-Source: APXvYqz9jf5sK99QiR1bmP7w0jnCmJjeJV6IT1LN2tfKi2kt9oQLmCeZuyJPVteOMQQ/omIr0Zf84YWxKWORg+2YYLM=
-X-Received: by 2002:a37:99c7:: with SMTP id b190mr20977445qke.2.1553616973607; 
-	Tue, 26 Mar 2019 09:16:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190322102129.5067-1-schnitzeltony@gmail.com>
-	<20190322102129.5067-9-schnitzeltony@gmail.com>
-	<CAMKF1sqtdp5Fqw+wjUfz33VBeaJUwuT430r+AYdQhn0=Cd9FYA@mail.gmail.com>
-	<20190326125724.GA2428@localhost>
-In-Reply-To: <20190326125724.GA2428@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Mar 2019 09:15:45 -0700
-Message-ID: <CAMKF1srG8EMoUMk0cSFRjyHky-A5pS+GBtNKvqSLQ3_eONpnvw@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 09/11] networkmanager: upgrade 1.14.4 -> 1.16.0
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=iMp/siw/2i++vGiZh07apLqVV7zXjlWuh9xMK6e2CaI=;
+	b=YhER6rg7db+44XjA5T7bRyoNMqHzs7XxKNq9dqHIadK6dLuQIeKhZ0zZhPIPcuZNhJ
+	ePmdYkyH+Qxn3lfwy77J1yPN7GbYGkePT2RGltOuEWnnOpbO4Ey5OPX5VpZeF+rLeS/0
+	hxqkkZyRJti5n45EsePb7gwhFQK4Uq/01uXHNbDIOyTBOQ9BzqB4ESgMetdobpJ60eXq
+	RmKjexrHAljzgTTI7Qz1w7ssQijEBfpqbsnwMr40xBzwGg9MifdnDh/xDzFmHBtsOzkP
+	WUqB5fZvXMbd2FpEBLJo2rO7zfeYT5aevhBOurrqfYCDCmXR+KM1GMV98GNx6F3EqMS9
+	h5og==
+X-Gm-Message-State: APjAAAXXtCA5GtFUCqo9vag9gMvaB3T3CoJvk0N1MKw4opMmAZKvy3RZ
+	Uu8CQimT/Go8hsY0Tk21KHkrQgPG4LJISTj3goFjSc0KAW+eECmD8uVX+01uzeAihzFzsIltYtp
+	THtqp8V7rvkX+EXNeikz86CXUXETkbuq0KB/s+6QghP5T4A3QlFhsJ7+aNTVE0gEAT92VQxN3Pb
+	0HjXc=
+X-Google-Smtp-Source: APXvYqwiL3vpJPo/xUwbRML/qCHY10MUCkcKleneoqLZA/mBa2HlTMREqFAPaPHJfOXBAjqAGFWMdJ8=
+X-Received: by 2002:a63:28f:: with SMTP id 137mr5494350pgc.377.1553653816378; 
+	Tue, 26 Mar 2019 19:30:16 -0700 (PDT)
+Date: Tue, 26 Mar 2019 19:30:00 -0700
+Message-Id: <20190327023000.105889-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.21.0
+From: "William A. Kennington III" <wak@google.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] function2: Add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,56 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2019 16:16:13 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 02:30:15 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 26, 2019 at 5:57 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Sun, Mar 24, 2019 at 09:28:14AM -0700, Khem Raj wrote:
-> > On Fri, Mar 22, 2019 at 3:23 AM Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com> wrote:
-> > >
-> > > * license.html was checked: it is still GPLv2. Could not find what ch=
-anged the
-> > >   checksum. Maybe it was generated with a different version of gtk-do=
-c.
-> > > * Build tested with just gnutls in PACKAGECONFIG to test nss alternat=
-ive (and
-> > >   setting no crypto won't work)
-> > > * Build tested with all entries except gnutls/qt4-x11-free (yes they =
-still
-> > >   support it!) in PACKAGECONFIG
-> > > * By far the most time was spent on musl patch adjustment. They apply=
- cleanly
-> > >   but musl build was not tested due to limited resources.
-> > > * Fix build for non systemd by making SYSTEMD_SERVICE conditional
-> >
-> >
-> > https://errors.yoctoproject.org/Errors/Details/234221/
-> >
-> > ../NetworkManager-1.16.0/shared/systemd/src/basic/util.h:75:18: error:
-> > unknown type name '__compar_d_fn_t'; did you mean '__compar_fn_t'?
-> >...
->
-> NM seems to now ship systemd sources for using them as a library.
->
-> OE carries 21 (sic) patches to systemd that are
->   Upstream-Status: Inappropriate [musl specific]
->
-> This specific error seems to be fixed by one of them.
->
+function2 is an improved, drop in replacement for std::function.
 
-Yes, thanks for info,
+Signed-off-by: William A. Kennington III <wak@google.com>
+---
+ .../function2/function2_4.0.0.bb              | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/function2/function2_4.0.0.bb
 
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
+diff --git a/meta-oe/recipes-support/function2/function2_4.0.0.bb b/meta-oe/recipes-support/function2/function2_4.0.0.bb
+new file mode 100644
+index 000000000..556a25aa1
+--- /dev/null
++++ b/meta-oe/recipes-support/function2/function2_4.0.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Improved drop-in replacement for std::function"
++DESCRIPTION = "Provides improved implementations of std::function."
++HOMEPAGE = "https://naios.github.io/function2"
++LICENSE = "BSL-1.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
++SRCREV = "d2acdb6c3c7612a6133cd03464ef941161258f4e"
++PV .= "+git${SRCPV}"
++
++SRC_URI += "gitsm://github.com/Naios/function2"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++inherit ptest
++
++# Installs some data to incorrect top-level /usr directory
++do_install_append() {
++	mkdir -p ${D}/${datadir}/function2
++	mv ${D}/${prefix}/Readme.md ${D}/${datadir}/function2/
++	mv ${D}/${prefix}/LICENSE.txt ${D}/${datadir}/function2/
++}
+-- 
+2.21.0
+
 
