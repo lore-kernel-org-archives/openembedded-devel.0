@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
-	[209.85.128.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F5247D141
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C47EF6C104
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 15:35:29 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id v14so552568wmf.2
+	Wed, 27 Mar 2019 15:35:30 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id f3so468275wmj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Mar 2019 08:35:30 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=GjuiWg9drMOZBzQ2Xr2jRHCYtkWsxGQpExIms7WUxiw=;
-	b=fB7aE7piJsIkxGqsfnuRdCtxRDWMz4QZ7QCnqkiJrHMPDMfwOR1LTEhRZe6/lAgu+B
-	qquHLmBFD075ph74UTKw9X1Bcc6MUjWQF6FVXbX6gcQa0ItFabAON/kMz0NrDPWnNCWu
-	y2WLAFOPOYb7Hxh86/q42YVXzUqQqchUHuvv80xwku9sHEdG8qIpxhfXyUR1IUmWlZOl
-	NyJKq9lINpak77hvhQ7B8iMPYADImf5IuHW9HkN8J3U9d+3EHkPh2j7uY0o+6rFWsF5E
-	W2fMfGGkPE0CuMT0fJEJn9Ha/aTzZ9AW43Wx4GOlvG8a5/hKffhi1DfDAqo75XlSGb2L
-	MlUg==
+	bh=eczm9qM2oQDTRFhKaUIl8knfkX9+RecG71eOtRhNkAo=;
+	b=fghioIkMRS2cxbqIDiVasxP7SJBm0QVB/8x/ZAxJjTo7uxZl7+nbtPzifHJ74leUzN
+	TgA51M697J3pNc027XzcWqk7AzRj1xfgFVt5knnRpZEDXbigW2yecu4o50YOAhZ1PMF/
+	RfDt30n4KrxNDh8NpBSvXyOyByBW/hVjaqkcQr72w/2EPgSV7xUrhDaZsR9iFAyQk5gl
+	4Nd79l3AUraMe8bGs7LgtVW+yhYF1UPnZBQfCK9/26GgbnN6P0tYGIk4wetPf3y9yewW
+	1aLl1XMYKaKxakhvPtjF1Yx5vy373VNyiMBR98vwH44YVy0RP8uVW4UJZQwZayxFex1V
+	x7dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=GjuiWg9drMOZBzQ2Xr2jRHCYtkWsxGQpExIms7WUxiw=;
-	b=P0aeYPDPy1XW1+rewpSNS1l3V5hlwRusDhbF1F1votfMeLpzsyZK2RB+3sBD/aI9rw
-	YrdGMd/YdcgmNJ6CNp4pn1Jqgq4nXxtUkOf97eqcBqc1jLtbpFF/6MNtqkLDduVU/y3G
-	Ab+zoBNFXv6oR7/rtvq0bbvh4AvQ7Wn4r5kbphhkMkXejzOr3d9fcN7Mti1StYzdNv0+
-	2i9zwqYa8YUyfk7HVh7HKOipYRFF4WgpHXUQCITpB4ZpeNVsuREa0gPLsuA4MfZYgz7c
-	4YGAWYV8459FQla1l4vOgTAjlpYMmpqU0FaMh0DaEjIuAAdA9z/3j5FUG88CODsQ4thk
-	0pHg==
-X-Gm-Message-State: APjAAAXvR/hRUdCLriOEAxzFFANu/LcfKAUhmx2UtFdBI6B5/SJxmEYY
-	rhQMGIAJLNsnGDCY882w442FsVoZ
-X-Google-Smtp-Source: APXvYqzBiYs+4dN8U9XUWYH97F4z8RO1kOCLEXMBsIzp2gGbfWWeOg+17PvYIEKqosUa3PQimM7+uw==
-X-Received: by 2002:a1c:2b41:: with SMTP id r62mr18037032wmr.94.1553700929871; 
-	Wed, 27 Mar 2019 08:35:29 -0700 (PDT)
+	bh=eczm9qM2oQDTRFhKaUIl8knfkX9+RecG71eOtRhNkAo=;
+	b=Qd3dkbpijf3PJUOhbVSC+DIDPNy0BJrqakmhyqNriHVO56TTA4I4sIbwJ6I/7Qc0Ol
+	jzyPbKC39/Dv2RlQ0jeNY4Vvqq6XmSdFoKDS9o1boWIcDnoWTiXGDyH4cune7hKE0pvS
+	DfP1nG/5/T9whn0IvnQBRekUwfKKfhZ2+Vq5Cw5k0LvoncKVOoxeQ2OARbkADmUhfqLf
+	kij3JR0aWENlBF9bnqrFiEG+zE87Dxc4Mu+josiXmHEDDMIWze5RHCjjUqFk8XwnPG/o
+	8L+SVW3eFUyM4XN/FpbTsj9YTb1uH3ythADY3XRXPszwYIeD8J6kKMp4+4pWmwH7Mn6e
+	+r8Q==
+X-Gm-Message-State: APjAAAWqIFjawNbKWsvAcMvIeXJiucQLEKDDdQghphV45+a28Qif6G4a
+	M2BTwIYfvyhxn26FTsqhaL7r6Ejt
+X-Google-Smtp-Source: APXvYqydlxf70eC526lbm6YvU0N4O3MoWv624Zv1o/EpxcTGXrfqSMMdf3EZvgWDTsvGosc800pOZw==
+X-Received: by 2002:a1c:a70f:: with SMTP id q15mr2252453wme.28.1553700931219; 
+	Wed, 27 Mar 2019 08:35:31 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.28
+	by smtp.gmail.com with ESMTPSA id q4sm7517518wrx.25.2019.03.27.08.35.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 27 Mar 2019 08:35:28 -0700 (PDT)
+	Wed, 27 Mar 2019 08:35:30 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Mar 2019 16:34:56 +0100
-Message-Id: <20190327153509.23928-2-schnitzeltony@gmail.com>
+Date: Wed, 27 Mar 2019 16:34:57 +0100
+Message-Id: <20190327153509.23928-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190327153509.23928-1-schnitzeltony@gmail.com>
 References: <20190327153509.23928-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 02/15] gparted: upgrade 0.31.0 -> 0.33.0
+Subject: [PATCH 03/15] dconf: upgrade 0.30.1 -> 0.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 15:35:29 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 15:35:31 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Instead of patching out docs just tell meson not to build man pages
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gparted/{gparted_0.31.0.bb => gparted_0.33.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-extended/gparted/{gparted_0.31.0.bb => gparted_0.33.0.bb} (90%)
+ ...0001-meson.build-do-not-compile-docs.patch | 27 -------------------
+ .../{dconf_0.30.1.bb => dconf_0.32.0.bb}      |  8 +++---
+ 2 files changed, 4 insertions(+), 31 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/dconf/dconf/0001-meson.build-do-not-compile-docs.patch
+ rename meta-gnome/recipes-gnome/dconf/{dconf_0.30.1.bb => dconf_0.32.0.bb} (53%)
 
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
-similarity index 90%
-rename from meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb
-rename to meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
-index 58beaf6c5..a9f6993fb 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_0.31.0.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb
-@@ -12,8 +12,8 @@ SRC_URI = " \
-     file://org.yoctoproject.pkexec.run-gparted.policy \
-     file://gparted_polkit \
- "
--SRC_URI[md5sum] = "c554cc5734c50459dd551bd3fa10710e"
--SRC_URI[sha256sum] = "3b7b49a434d9e4b397bc41a1f5acab8539b9ff402b472dfd83ad77b2decd07ba"
-+SRC_URI[md5sum] = "2f481ad34decb7021ca04ca305e79e7d"
-+SRC_URI[sha256sum] = "5023b8c983f88a22e65bf6f09a12ea09369defc008981b52ee8b96a3879f81d6"
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf/0001-meson.build-do-not-compile-docs.patch b/meta-gnome/recipes-gnome/dconf/dconf/0001-meson.build-do-not-compile-docs.patch
+deleted file mode 100644
+index 2f4283584..000000000
+--- a/meta-gnome/recipes-gnome/dconf/dconf/0001-meson.build-do-not-compile-docs.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 50a9133e0b13798640da0b7cd11b5a85e35b2038 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Fri, 23 Nov 2018 16:27:32 +0800
+-Subject: [PATCH] meson.build: do not compile docs
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- meson.build | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/meson.build b/meson.build
+-index 04b6d47..46fdbc8 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -81,7 +81,6 @@ subdir('gdbus')
+- subdir('gsettings')
+- subdir('client')
+- subdir('bin')
+--subdir('docs')
+- subdir('tests')
+- 
+- meson.add_install_script('meson_post_install.py', gio_module_dir)
+--- 
+-2.7.4
+-
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+similarity index 53%
+rename from meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb
+rename to meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+index 9f67673b1..8d1bbdfd1 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.30.1.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+@@ -3,8 +3,8 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ SECTION = "x11/gnome"
  
- DEPENDS = "glib-2.0 glib-2.0-native gtkmm parted gnome-doc-utils intltool-native"
+-SRC_URI[archive.md5sum] = "a959eef51c917b3c57cfbef1448a375e"
+-SRC_URI[archive.sha256sum] = "549a3a7cc3881318107dc48a7b02ee8f88c9127acaf2d47f7724f78a8f6d02b7"
++SRC_URI[archive.md5sum] = "e1ac0b6285abefeed69ca9e380e44f5a"
++SRC_URI[archive.sha256sum] = "68bce78b19bc94cb2c3bb8587e37f9e5e338568c3a674f86edde9c9f1624ffab"
  
+ DEPENDS = "dbus glib-2.0 intltool-native"
+ 
+@@ -12,8 +12,8 @@ GNOMEBASEBUILDCLASS = "meson"
+ 
+ inherit gnomebase bash-completion vala
+ 
+-SRC_URI += "file://0001-meson.build-do-not-compile-docs.patch \
+-           "
++# I/O error : Attempt to load network entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
++EXTRA_OEMESON = "-Dman=false"
+ 
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
 -- 
 2.20.1
 
