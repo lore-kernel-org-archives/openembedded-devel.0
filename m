@@ -1,49 +1,56 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
-	[209.85.128.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DEA97D19E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 14:25:18 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id w15so4270638wmc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 07:25:19 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 969797D088;
+	Thu, 28 Mar 2019 14:40:31 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id k11so15820667wro.5;
+	Thu, 28 Mar 2019 07:40:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=uxhlEu3R2UXGZqtQcms9HnE2YD8c/JMtrGMEDrrTF5U=;
-	b=T+vKvU8HfPvqW/DLHpEJL6iIXDmTkbGqsqn/SjLjfnIKD8G8QbSz8i6zFY8YvTH3ZC
-	eJC2qg+Ji9p/pfJTr7o/BbFwYX37I5WG/67IJv5kPalOSgLL271jyCEeKwPVUi4jo/Xr
-	z8bopCG6ajqpNHb9TIYkDQHOTqBWD0nZSHO5c2slmGRcciVk1buOhPGCWAcUor8ztXkc
-	Kd9DZULaoGYH6h3Ef5CgxGkstkcbIQ0IR+FFr9I5Op+oXlvxvNysQKrRs+MChsf7MNKR
-	1ooAxWbRhp+ALpWZFfSoT4jnh8IMq/P8+2zsi6WpGEC8PTHtyNprnxXOwmIcBJYymyny
-	Klhw==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=43FJ++U4EQ1oMy/ZK66TASRIs+qEHOdeQ4/Mz89OyCU=;
+	b=e/M4QdbBp98W8VRk8F0lOBzEZRyxGFkawPzf+ZP/DcQIPXe/p0G93Stf+ASeuo21Ld
+	tUWhCcowT4CKbLteNWlf+ECeRjErmzCteKWieWTa9ZvspcYQ03WBqxG0yO9TcOgEhrpg
+	ZDSVnbKvlhTt7WCYkqShUXj3zW1pvShVaxd432Dj/qhK8ZRA3GdSWKTjXf0c+Yr97WtW
+	SdwTQDFgBHH9oe+vK9UO4n/u9hKYJMZaenNtq/L8k0AbX0n4FX5GAWis92Y8bdgKyLk3
+	wBVg1WbHQ7MgFxyVBqcM91Rl2aQKJ9f1uguVG9q5sQIZOgu5yt6lhsozLpEh2XjytTBX
+	2Yiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=uxhlEu3R2UXGZqtQcms9HnE2YD8c/JMtrGMEDrrTF5U=;
-	b=kRqU6DMYaDUY0IaiAAzcoz9fA9UclfJGzo6EnHZl6Zc5XPeOoHn5VHPrJbt6NEGY9x
-	Kj/KslJ7BWRsYFqmnAqm0mB9lJgpqKKNVwVWnHPY2VF4yuzYsfmzQnXdpPrL+ibvJ3jz
-	Gki73R6jCrFMS8nDV3vDA9IU9nzR0yWFU2SOak1DH0jxXy2mRdG0mP5uX57+gWLza5du
-	wZoswGTNLGP9f1WEhfh7iUo/kdx/KQnKm85kR1t4KFqaBEJvWWViw1EG/2X8ddwmLZkx
-	ofLpB7A8/nYiY9mvW0f8PcdCmbL7qrvDzkX3p3LElirQ+a6+MrxH5ag7fyZHvZQKfG0v
-	xrVw==
-X-Gm-Message-State: APjAAAXwIzviSmVBIy78qVOYSbs+ZXgTJHY1+8Qn9lPMoEKC/HO/CRFs
-	LJVYNDb7F3iRojYk6exFHAYTQGHF
-X-Google-Smtp-Source: APXvYqxFIrc+lG2b+yy85vnL7Xy4f6VCtiWD9MMdoYIDT5UMlmUbDgpCT8Q0CqZuVGHCpVeU7WBqeg==
-X-Received: by 2002:a05:600c:c3:: with SMTP id u3mr185500wmm.45.1553783117264; 
-	Thu, 28 Mar 2019 07:25:17 -0700 (PDT)
-Received: from localhost.localdomain ([2001:b07:5d32:c012:b1e0:8000:6bdd:519])
-	by smtp.gmail.com with ESMTPSA id
-	a10sm34023665wrs.19.2019.03.28.07.25.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 28 Mar 2019 07:25:15 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Mar 2019 15:25:13 +0100
-Message-Id: <20190328142513.31749-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] cpprest: fix build failures on 32bit systems, by reverting two upstream commits
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=43FJ++U4EQ1oMy/ZK66TASRIs+qEHOdeQ4/Mz89OyCU=;
+	b=YbSJh92L1cd+NnoqVVWgduU2KlwVupv2hU2V03oxTEvUdBbTB/jutj0S9mVA6XK/7i
+	/5cgkZVCybPg08aXnvYFUthNtypfGrJjY31AXN3lA3ymnsfipdDwCZU7SSTnye4VvEcT
+	nEynWTSoYRB93qv/KNOfOn5iRBj8ELrukwtcSwz8+DxkYsSF1cGfzdvCl/cGQ9nhqVR8
+	8LRSbLOtPTPpHt9cJT2wv6wUOClV8yi9eq/WV+TeCGsk4wGScwSIUvK7bCET/9uAT42o
+	DF0zeJh9OAGe7SiLlli5v3xMFwAxNAT8qvJID5KjwdxAe4EjvfcBpOMmo7LMzY5aps/9
+	GvLg==
+X-Gm-Message-State: APjAAAU2pQQr5mjeehG4NJL6aCV+PllMFIsXBIyy894dvCP48URnllcD
+	vcu2/cdwSLKwtTXpO1MBeHE=
+X-Google-Smtp-Source: APXvYqyNHwGj787SAfPUZCAGaxSsvryKLYFz+QayyYJGmF3LEcxzF30EoWp7QvRXPuzxu3FPs7yxBA==
+X-Received: by 2002:adf:eb89:: with SMTP id t9mr10859241wrn.109.1553784032181; 
+	Thu, 28 Mar 2019 07:40:32 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id u17sm212113wmj.1.2019.03.28.07.40.30
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 28 Mar 2019 07:40:30 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 28 Mar 2019 15:40:33 +0100
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190328144033.GA1601@jama>
+References: <CAMKF1so7w4i4Kw-ymWayPx1Z_mmetRKcNeyb9pADFZwDY=jqmw@mail.gmail.com>
+	<20190327161754.GD1598@jama> <20190327163507.GE1598@jama>
+	<20190327203907.GF1598@jama> <20190327223257.GG1598@jama>
+	<CAMKF1sqyPnVgbDt6yp8w5fAkjj-5S8WudbarJDwpAFXzdtwAog@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqyPnVgbDt6yp8w5fAkjj-5S8WudbarJDwpAFXzdtwAog@mail.gmail.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: glibc broken when linked with gold Was: State of OE World, 2019-03-16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,1625 +63,268 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2019 14:25:18 -0000
+X-List-Received-Date: Thu, 28 Mar 2019 14:40:32 -0000
+X-Groupsio-MsgNum: 76885
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="envbJBWh7q8WU6mo"
+Content-Disposition: inline
 
----
- ...0e5b33dfdbd501d618cd7e7498148ffbd559.patch |   26 +
- ...9f8e214516d2c19aa6ef831ee874a58c0479.patch | 1557 +++++++++++++++++
- .../cpprest/cpprest_2.10.12.bb                |    2 +
- 3 files changed, 1585 insertions(+)
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest/revert-9b670e5b33dfdbd501d618cd7e7498148ffbd559.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest/revert-f10d9f8e214516d2c19aa6ef831ee874a58c0479.patch
+--envbJBWh7q8WU6mo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/revert-9b670e5b33dfdbd501d618cd7e7498148ffbd559.patch b/meta-oe/recipes-support/cpprest/cpprest/revert-9b670e5b33dfdbd501d618cd7e7498148ffbd559.patch
-new file mode 100644
-index 000000000..9af2cbf36
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest/revert-9b670e5b33dfdbd501d618cd7e7498148ffbd559.patch
-@@ -0,0 +1,26 @@
-+Description: revert upstream bugfix (see:https://github.com/Microsoft/cpprestsdk/issues/1090)
-+Last-Update: 2019-03-28
-+
-+--- cpprest-2.10.12.orig/Release/src/utilities/asyncrt_utils.cpp
-++++ cpprest-2.10.12/Release/src/utilities/asyncrt_utils.cpp
-+@@ -1393,16 +1393,15 @@ utility::seconds __cdecl timespan::xml_d
-+     return utility::seconds(numSecs);
-+ }
-+ 
-+-static const char c_allowed_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-+-static const int chars_count = static_cast<int>(sizeof(c_allowed_chars) - 1);
-++static const utility::char_t c_allowed_chars[] =
-++    _XPLATSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
-+ 
-+ utility::string_t nonce_generator::generate()
-+ {
-+-    std::uniform_int_distribution<> distr(0, chars_count - 1);
-++    std::uniform_int_distribution<> distr(0, static_cast<int>(sizeof(c_allowed_chars) / sizeof(utility::char_t)) - 1);
-+     utility::string_t result;
-+     result.reserve(length());
-+-    std::generate_n(std::back_inserter(result), length(),
-+-		[&] { return static_cast<utility::char_t>(c_allowed_chars[distr(m_random)]); });
-++    std::generate_n(std::back_inserter(result), length(), [&]() { return c_allowed_chars[distr(m_random)]; });
-+     return result;
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest/revert-f10d9f8e214516d2c19aa6ef831ee874a58c0479.patch b/meta-oe/recipes-support/cpprest/cpprest/revert-f10d9f8e214516d2c19aa6ef831ee874a58c0479.patch
-new file mode 100644
-index 000000000..01e463113
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest/revert-f10d9f8e214516d2c19aa6ef831ee874a58c0479.patch
-@@ -0,0 +1,1557 @@
-+Description: revert upstream bugfix (see:https://github.com/Microsoft/cpprestsdk/issues/1090)
-+Last-Update: 2019-03-28
-+
-+--- cpprest-2.10.12.orig/Release/include/cpprest/asyncrt_utils.h
-++++ cpprest-2.10.12/Release/include/cpprest/asyncrt_utils.h
-+@@ -630,6 +630,15 @@ private:
-+     static const interval_type _hourTicks = 60 * 60 * _secondTicks;
-+     static const interval_type _dayTicks = 24 * 60 * 60 * _secondTicks;
-+ 
-++#ifdef _WIN32
-++    // void* to avoid pulling in windows.h
-++    static _ASYNCRTIMP bool __cdecl system_type_to_datetime(/*SYSTEMTIME*/ void* psysTime,
-++                                                            uint64_t seconds,
-++                                                            datetime* pdt);
-++#else
-++    static datetime timeval_to_datetime(const timeval& time);
-++#endif
-++
-+     // Private constructor. Use static methods to create an instance.
-+     datetime(interval_type interval) : m_interval(interval) {}
-+ 
-+@@ -690,6 +699,7 @@ public:
-+     void set_length(int length) { m_length = length; }
-+ 
-+ private:
-++    static const utility::string_t c_allowed_chars;
-+     std::mt19937 m_random;
-+     int m_length;
-+ };
-+--- cpprest-2.10.12.orig/Release/src/pch/stdafx.h
-++++ cpprest-2.10.12/Release/src/pch/stdafx.h
-+@@ -61,6 +61,7 @@
-+ #undef BOOST_NO_CXX11_NULLPTR
-+ #endif
-+ #include "boost/bind/bind.hpp"
-++#include "boost/date_time/posix_time/posix_time_types.hpp"
-+ #include "boost/thread/condition_variable.hpp"
-+ #include "boost/thread/mutex.hpp"
-+ #include <fcntl.h>
-+--- cpprest-2.10.12.orig/Release/src/utilities/asyncrt_utils.cpp
-++++ cpprest-2.10.12/Release/src/utilities/asyncrt_utils.cpp
-+@@ -15,9 +15,20 @@
-+ 
-+ #include <algorithm>
-+ #include <cpprest/asyncrt_utils.h>
-+-#include <stdexcept>
-++#include <sstream>
-+ #include <string>
-+-#include <time.h>
-++
-++#ifndef _WIN32
-++#if defined(__clang__)
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Wunused-local-typedef"
-++#endif
-++#include <boost/date_time/posix_time/posix_time.hpp>
-++#include <boost/date_time/posix_time/posix_time_io.hpp>
-++#if defined(__clang__)
-++#pragma clang diagnostic pop
-++#endif
-++#endif
-+ 
-+ using namespace web;
-+ using namespace utility;
-+@@ -618,7 +629,18 @@ std::string __cdecl conversions::to_utf8
-+ 
-+ utf16string __cdecl conversions::to_utf16string(const std::string& value) { return utf8_to_utf16(value); }
-+ 
-+-static const uint64_t ntToUnixOffsetSeconds = 11644473600U; // diff between windows and unix epochs (seconds)
-++#ifndef WIN32
-++datetime datetime::timeval_to_datetime(const timeval& time)
-++{
-++    const uint64_t epoch_offset = 11644473600LL; // diff between windows and unix epochs (seconds)
-++    uint64_t result = epoch_offset + time.tv_sec;
-++    result *= _secondTicks;      // convert to 10e-7
-++    result += time.tv_usec * 10; // convert and add microseconds, 10e-6 to 10e-7
-++    return datetime(result);
-++}
-++#endif
-++
-++static bool is_digit(utility::char_t c) { return c >= _XPLATSTR('0') && c <= _XPLATSTR('9'); }
-+ 
-+ datetime __cdecl datetime::utc_now()
-+ {
-+@@ -634,649 +656,450 @@ datetime __cdecl datetime::utc_now()
-+ #else // LINUX
-+     struct timeval time;
-+     gettimeofday(&time, nullptr);
-+-    uint64_t result = ntToUnixOffsetSeconds + time.tv_sec;
-+-    result *= _secondTicks;      // convert to 10e-7
-+-    result += time.tv_usec * 10; // convert and add microseconds, 10e-6 to 10e-7
-+-    return datetime(result);
-++    return timeval_to_datetime(time);
-+ #endif
-+ }
-+ 
-+-static const char dayNames[] = "Sun\0Mon\0Tue\0Wed\0Thu\0Fri\0Sat";
-+-static const char monthNames[] = "Jan\0Feb\0Mar\0Apr\0May\0Jun\0Jul\0Aug\0Sep\0Oct\0Nov\0Dec";
-+-
-+ utility::string_t datetime::to_string(date_format format) const
-+ {
-+-    const uint64_t input = m_interval / _secondTicks; // convert to seconds
-+-    const int frac_sec = static_cast<int>(m_interval % _secondTicks);
-+-    const time_t time = static_cast<time_t>(input - ntToUnixOffsetSeconds);
-+-    struct tm t;
-+-#ifdef _MSC_VER
-+-    if (gmtime_s(&t, &time) != 0)
-+-#else  // ^^^ _MSC_VER ^^^ // vvv !_MSC_VER vvv
-+-    if (gmtime_r(&time, &t) == 0)
-+-#endif // _MSC_VER
-+-    {
-+-        throw std::invalid_argument("gmtime_r/s failed on the time supplied");
-+-    }
-+-
-+-    char outBuffer[38]; // Thu, 01 Jan 1970 00:00:00 GMT\0
-+-                        // 1970-01-01T00:00:00.1234567Z\0
-+-    char* outCursor = outBuffer;
-+-    switch (format)
-+-    {
-+-        case RFC_1123:
-+-#ifdef _MSC_VER
-+-            sprintf_s(outCursor,
-+-                      26,
-+-                      "%s, %02d %s %04d %02d:%02d:%02d",
-+-                      dayNames + 4 * t.tm_wday,
-+-                      t.tm_mday,
-+-                      monthNames + 4 * t.tm_mon,
-+-                      t.tm_year + 1900,
-+-                      t.tm_hour,
-+-                      t.tm_min,
-+-                      t.tm_sec);
-+-#else  // ^^^ _MSC_VER // !_MSC_VER vvv
-+-            sprintf(outCursor,
-+-                    "%s, %02d %s %04d %02d:%02d:%02d",
-+-                    dayNames + 4 * t.tm_wday,
-+-                    t.tm_mday,
-+-                    monthNames + 4 * t.tm_mon,
-+-                    t.tm_year + 1900,
-+-                    t.tm_hour,
-+-                    t.tm_min,
-+-                    t.tm_sec);
-+-#endif // _MSC_VER
-+-            outCursor += 25;
-+-            memcpy(outCursor, " GMT", 4);
-+-            outCursor += 4;
-+-            return utility::string_t(outBuffer, outCursor);
-+-        case ISO_8601:
-+-#ifdef _MSC_VER
-+-            sprintf_s(outCursor,
-+-                      20,
-+-                      "%04d-%02d-%02dT%02d:%02d:%02d",
-+-                      t.tm_year + 1900,
-+-                      t.tm_mon + 1,
-+-                      t.tm_mday,
-+-                      t.tm_hour,
-+-                      t.tm_min,
-+-                      t.tm_sec);
-+-#else  // ^^^ _MSC_VER // !_MSC_VER vvv
-+-            sprintf(outCursor,
-+-                    "%04d-%02d-%02dT%02d:%02d:%02d",
-+-                    t.tm_year + 1900,
-+-                    t.tm_mon + 1,
-+-                    t.tm_mday,
-+-                    t.tm_hour,
-+-                    t.tm_min,
-+-                    t.tm_sec);
-+-#endif // _MSC_VER
-+-            outCursor += 19;
-+-            if (frac_sec != 0)
-+-            {
-+-                // Append fractional second, which is a 7-digit value with no trailing zeros
-+-                // This way, '1200' becomes '00012'
-+-#ifdef _MSC_VER
-+-                size_t appended = sprintf_s(outCursor, 9, ".%07d", frac_sec);
-+-#else  // ^^^ _MSC_VER // !_MSC_VER vvv
-+-                size_t appended = sprintf(outCursor, ".%07d", frac_sec);
-+-#endif // _MSC_VER
-+-                while (outCursor[appended - 1] == '0')
-+-                {
-+-                    --appended; // trim trailing zeros
-+-                }
-+-
-+-                outCursor += appended;
-+-            }
-+-
-+-            *outCursor = 'Z';
-+-            ++outCursor;
-+-            return utility::string_t(outBuffer, outCursor);
-+-        default: throw std::invalid_argument("Unrecognized date format.");
-+-    }
-+-}
-+-
-+-template<class CharT>
-+-static bool string_starts_with(const CharT* haystack, const char* needle)
-+-{
-+-    while (*needle)
-+-    {
-+-        if (*haystack != static_cast<CharT>(*needle))
-+-        {
-+-            return false;
-+-        }
-+-
-+-        ++haystack;
-+-        ++needle;
-+-    }
-+-
-+-    return true;
-+-}
-+-
-+-#define ascii_isdigit(c) ((unsigned char)((unsigned char)(c) - '0') <= 9)
-+-#define ascii_isdigit6(c) ((unsigned char)((unsigned char)(c) - '0') <= 6)
-+-#define ascii_isdigit5(c) ((unsigned char)((unsigned char)(c) - '0') <= 5)
-+-#define ascii_isdigit3(c) ((unsigned char)((unsigned char)(c) - '0') <= 3)
-+-#define ascii_isdigit2(c) ((unsigned char)((unsigned char)(c) - '0') <= 2)
-+-#define ascii_isdigit1(c) ((unsigned char)((unsigned char)(c) - '0') <= 1)
-+-
-+-static const unsigned char max_days_in_month[12] = {
-+-    31, // Jan
-+-    00, // Feb, special handling for leap years
-+-    31, // Mar
-+-    30, // Apr
-+-    31, // May
-+-    30, // Jun
-+-    31, // Jul
-+-    31, // Aug
-+-    30, // Sep
-+-    31, // Oct
-+-    30, // Nov
-+-    31  // Dec
-+-};
-+-
-+-static bool validate_day_month(int day, int month, int year)
-+-{
-+-    int maxDaysThisMonth;
-+-    if (month == 1)
-+-    { // Feb needs leap year testing
-+-        maxDaysThisMonth = 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-+-    }
-+-    else
-+-    {
-+-        maxDaysThisMonth = max_days_in_month[month];
-+-    }
-+-
-+-    return day >= 1 && day <= maxDaysThisMonth;
-+-}
-++#ifdef _WIN32
-++    int status;
-+ 
-+-template<class CharT>
-+-static int atoi2(const CharT* str)
-+-{
-+-    return (static_cast<unsigned char>(str[0]) - '0') * 10 + (static_cast<unsigned char>(str[1]) - '0');
-+-}
-++    ULARGE_INTEGER largeInt;
-++    largeInt.QuadPart = m_interval;
-+ 
-+-static const time_t maxTimeT = sizeof(time_t) == 4 ? (time_t)INT_MAX : (time_t)LLONG_MAX;
-++    FILETIME ft;
-++    ft.dwHighDateTime = largeInt.HighPart;
-++    ft.dwLowDateTime = largeInt.LowPart;
-+ 
-+-static time_t timezone_adjust(time_t result, unsigned char chSign, int adjustHours, int adjustMinutes)
-+-{
-+-    if (adjustHours > 23)
-++    SYSTEMTIME systemTime;
-++    if (!FileTimeToSystemTime((const FILETIME*)&ft, &systemTime))
-+     {
-+-        return (time_t)-1;
-++        throw utility::details::create_system_error(GetLastError());
-+     }
-+ 
-+-    // adjustMinutes > 59 is impossible due to digit 5 check
-+-    const int tzAdjust = adjustMinutes * 60 + adjustHours * 60 * 60;
-+-    if (chSign == '-')
-++    std::wstring result;
-++    if (format == RFC_1123)
-+     {
-+-        if (maxTimeT - result < tzAdjust)
-+         {
-+-            return (time_t)-1;
-++            wchar_t dateStr[18] = {0};
-++#if _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            status = GetDateFormatW(
-++                LOCALE_INVARIANT, 0, &systemTime, L"ddd',' dd MMM yyyy", dateStr, sizeof(dateStr) / sizeof(wchar_t));
-++#else
-++            status = GetDateFormatEx(LOCALE_NAME_INVARIANT,
-++                                     0,
-++                                     &systemTime,
-++                                     L"ddd',' dd MMM yyyy",
-++                                     dateStr,
-++                                     sizeof(dateStr) / sizeof(wchar_t),
-++                                     NULL);
-++#endif // _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            if (status == 0)
-++            {
-++                throw utility::details::create_system_error(GetLastError());
-++            }
-++
-++            result += dateStr;
-++            result += L' ';
-+         }
-+ 
-+-        result += tzAdjust;
-+-    }
-+-    else
-+-    {
-+-        if (tzAdjust > result)
-+         {
-+-            return (time_t)-1;
-+-        }
-+-
-+-        result -= tzAdjust;
-+-    }
-+-
-+-    return result;
-+-}
-+-
-+-static time_t make_gm_time(struct tm* t)
-+-{
-+-#ifdef _MSC_VER
-+-    return _mkgmtime(t);
-+-#elif (defined(ANDROID) || defined(__ANDROID__))
-+-    // HACK: The (nonportable?) POSIX function timegm is not available in
-+-    //       bionic. As a workaround[1][2], we set the C library timezone to
-+-    //       UTC, call mktime, then set the timezone back. However, the C
-+-    //       environment is fundamentally a shared global resource and thread-
-+-    //       unsafe. We can protect our usage here, however any other code might
-+-    //       manipulate the environment at the same time.
-+-    //
-+-    // [1] http://linux.die.net/man/3/timegm
-+-    // [2] http://www.gnu.org/software/libc/manual/html_node/Broken_002ddown-Time.html
-+-    time_t time;
-+-    static boost::mutex env_var_lock;
-+-    {
-+-        boost::lock_guard<boost::mutex> lock(env_var_lock);
-+-        std::string prev_env;
-+-        auto prev_env_cstr = getenv("TZ");
-+-        if (prev_env_cstr != nullptr)
-+-        {
-+-            prev_env = prev_env_cstr;
-+-        }
-+-        setenv("TZ", "UTC", 1);
-+-
-+-        time = mktime(t);
-++            wchar_t timeStr[10] = {0};
-++#if _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            status = GetTimeFormatW(LOCALE_INVARIANT,
-++                                    TIME_NOTIMEMARKER | TIME_FORCE24HOURFORMAT,
-++                                    &systemTime,
-++                                    L"HH':'mm':'ss",
-++                                    timeStr,
-++                                    sizeof(timeStr) / sizeof(wchar_t));
-++#else
-++            status = GetTimeFormatEx(LOCALE_NAME_INVARIANT,
-++                                     TIME_NOTIMEMARKER | TIME_FORCE24HOURFORMAT,
-++                                     &systemTime,
-++                                     L"HH':'mm':'ss",
-++                                     timeStr,
-++                                     sizeof(timeStr) / sizeof(wchar_t));
-++#endif // _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            if (status == 0)
-++            {
-++                throw utility::details::create_system_error(GetLastError());
-++            }
-+ 
-+-        if (prev_env_cstr)
-+-        {
-+-            setenv("TZ", prev_env.c_str(), 1);
-+-        }
-+-        else
-+-        {
-+-            unsetenv("TZ");
-++            result += timeStr;
-++            result += L" GMT";
-+         }
-+     }
-+-    return time;
-+-#else  // ^^^ ANDROID // Other POSIX platforms vvv
-+-    return timegm(t);
-+-#endif // _MSC_VER
-+-}
-+-
-+-/*
-+-https://tools.ietf.org/html/rfc822
-+-https://tools.ietf.org/html/rfc1123
-+-
-+-date-time   =  [ day "," ] date time        ; dd mm yy
-+-                                            ;  hh:mm:ss zzz
-+-
-+-day         =  "Mon"  / "Tue" /  "Wed"  / "Thu"
-+-            /  "Fri"  / "Sat" /  "Sun"
-+-
-+-date        =  1*2DIGIT month 2DIGIT        ; day month year
-+-                                            ;  e.g. 20 Jun 82
-+-RFC1123 changes this to:
-+-date        =  1*2DIGIT month 2*4DIGIT        ; day month year
-+-                                              ;  e.g. 20 Jun 1982
-+-This implementation only accepts 4 digit years.
-+-
-+-month       =  "Jan"  /  "Feb" /  "Mar"  /  "Apr"
-+-            /  "May"  /  "Jun" /  "Jul"  /  "Aug"
-+-            /  "Sep"  /  "Oct" /  "Nov"  /  "Dec"
-+-
-+-time        =  hour zone                    ; ANSI and Military
-+-
-+-hour        =  2DIGIT ":" 2DIGIT [":" 2DIGIT]
-+-                                            ; 00:00:00 - 23:59:59
-+-
-+-zone        =  "UT"  / "GMT"                ; Universal Time
-+-                                            ; North American : UT
-+-            /  "EST" / "EDT"                ;  Eastern:  - 5/ - 4
-+-            /  "CST" / "CDT"                ;  Central:  - 6/ - 5
-+-            /  "MST" / "MDT"                ;  Mountain: - 7/ - 6
-+-            /  "PST" / "PDT"                ;  Pacific:  - 8/ - 7
-+-
-+-// military time deleted by RFC 1123
-+-
-+-            / ( ("+" / "-") 4DIGIT )        ; Local differential
-+-                                            ;  hours+min. (HHMM)
-+-*/
-+-
-+-
-+-datetime __cdecl datetime::from_string(const utility::string_t& dateString, date_format format)
-+-{
-+-    datetime result;
-+-    time_t seconds;
-+-    uint64_t frac_sec = 0;
-+-    struct tm t{};
-+-    auto str = dateString.c_str();
-+-    if (format == RFC_1123)
-++    else if (format == ISO_8601)
-+     {
-+-        int parsedWeekday = -1;
-+-        for (int day = 0; day < 7; ++day)
-++        const size_t buffSize = 64;
-+         {
-+-            if (string_starts_with(str, dayNames + day * 4) && str[3] == _XPLATSTR(',') && str[4] == _XPLATSTR(' '))
-++            wchar_t dateStr[buffSize] = {0};
-++#if _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            status = GetDateFormatW(LOCALE_INVARIANT, 0, &systemTime, L"yyyy-MM-dd", dateStr, buffSize);
-++#else
-++            status = GetDateFormatEx(LOCALE_NAME_INVARIANT, 0, &systemTime, L"yyyy-MM-dd", dateStr, buffSize, NULL);
-++#endif // _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            if (status == 0)
-+             {
-+-                parsedWeekday = day;
-+-                str += 5; // parsed day of week
-+-                break;
-++                throw utility::details::create_system_error(GetLastError());
-+             }
-+-        }
-+ 
-+-        if (ascii_isdigit3(str[0]) && ascii_isdigit(str[1]) && str[2] == _XPLATSTR(' '))
-+-        {
-+-            t.tm_mday = atoi2(str); // validity checked later
-+-            str += 3;               // parsed day
-+-        }
-+-        else if (ascii_isdigit(str[0]) && str[1] == _XPLATSTR(' '))
-+-        {
-+-            t.tm_mday = str[0] - _XPLATSTR('0');
-+-            str += 2; // parsed day
-+-        }
-+-        else
-+-        {
-+-            return result;
-++            result += dateStr;
-++            result += L'T';
-+         }
-+ 
-+-        t.tm_mon = -1;
-+-        for (int month = 0; month < 12; ++month)
-+         {
-+-            if (string_starts_with(str, monthNames + month * 4))
-++            wchar_t timeStr[buffSize] = {0};
-++#if _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            status = GetTimeFormatW(LOCALE_INVARIANT,
-++                                    TIME_NOTIMEMARKER | TIME_FORCE24HOURFORMAT,
-++                                    &systemTime,
-++                                    L"HH':'mm':'ss",
-++                                    timeStr,
-++                                    buffSize);
-++#else
-++            status = GetTimeFormatEx(LOCALE_NAME_INVARIANT,
-++                                     TIME_NOTIMEMARKER | TIME_FORCE24HOURFORMAT,
-++                                     &systemTime,
-++                                     L"HH':'mm':'ss",
-++                                     timeStr,
-++                                     buffSize);
-++#endif // _WIN32_WINNT < _WIN32_WINNT_VISTA
-++            if (status == 0)
-+             {
-+-                t.tm_mon = month;
-+-                break;
-++                throw utility::details::create_system_error(GetLastError());
-+             }
-+-        }
-+ 
-+-        if (t.tm_mon == -1 || str[3] != _XPLATSTR(' '))
-+-        {
-+-            return result;
-++            result += timeStr;
-+         }
-+ 
-+-        str += 4; // parsed month
-+-
-+-        if (!ascii_isdigit3(str[0]) || !ascii_isdigit(str[1]) || !ascii_isdigit(str[2]) || !ascii_isdigit(str[3]) ||
-+-            str[4] != ' ')
-++        uint64_t frac_sec = largeInt.QuadPart % _secondTicks;
-++        if (frac_sec > 0)
-+         {
-+-            return result;
-++            // Append fractional second, which is a 7-digit value with no trailing zeros
-++            // This way, '1200' becomes '00012'
-++            wchar_t buf[9] = {0};
-++            size_t appended = swprintf_s(buf, 9, L".%07ld", static_cast<long>(frac_sec));
-++            while (buf[appended - 1] == L'0')
-++                --appended; // trim trailing zeros
-++            result.append(buf, appended);
-+         }
-+ 
-+-        t.tm_year = (str[0] - _XPLATSTR('0')) * 1000 + (str[1] - _XPLATSTR('0')) * 100 +
-+-                    (str[2] - _XPLATSTR('0')) * 10 + (str[3] - _XPLATSTR('0'));
-+-        if (t.tm_year < 1970 || t.tm_year > 3000)
-+-        {
-+-            return result;
-+-        }
-++        result += L'Z';
-++    }
-+ 
-+-        // days in month validity check
-+-        if (!validate_day_month(t.tm_mday, t.tm_mon, t.tm_year))
-+-        {
-+-            return result;
-+-        }
-++    return result;
-++#else // LINUX
-++    uint64_t input = m_interval;
-++    uint64_t frac_sec = input % _secondTicks;
-++    input /= _secondTicks;                               // convert to seconds
-++    time_t time = (time_t)input - (time_t)11644473600LL; // diff between windows and unix epochs (seconds)
-++
-++    struct tm datetime;
-++    gmtime_r(&time, &datetime);
-++
-++    const int max_dt_length = 64;
-++    char output[max_dt_length + 1] = {0};
-++
-++    if (format != RFC_1123 && frac_sec > 0)
-++    {
-++        // Append fractional second, which is a 7-digit value with no trailing zeros
-++        // This way, '1200' becomes '00012'
-++        const int max_frac_length = 8;
-++        char buf[max_frac_length + 1] = {0};
-++        snprintf(buf, sizeof(buf), ".%07ld", (long int)frac_sec);
-++        // trim trailing zeros
-++        for (int i = max_frac_length - 1; buf[i] == '0'; i--)
-++            buf[i] = '\0';
-++        // format the datetime into a separate buffer
-++        char datetime_str[max_dt_length - max_frac_length - 1 + 1] = {0};
-++        strftime(datetime_str, sizeof(datetime_str), "%Y-%m-%dT%H:%M:%S", &datetime);
-++        // now print this buffer into the output buffer
-++        snprintf(output, sizeof(output), "%s%sZ", datetime_str, buf);
-++    }
-++    else
-++    {
-++        strftime(
-++            output, sizeof(output), format == RFC_1123 ? "%a, %d %b %Y %H:%M:%S GMT" : "%Y-%m-%dT%H:%M:%SZ", &datetime);
-++    }
-+ 
-+-        t.tm_year -= 1900;
-+-        str += 5; // parsed year
-++    return std::string(output);
-++#endif
-++}
-+ 
-+-        if (!ascii_isdigit2(str[0]) || !ascii_isdigit(str[1]) || str[2] != _XPLATSTR(':') || !ascii_isdigit5(str[3]) ||
-+-            !ascii_isdigit(str[4]))
-+-        {
-+-            return result;
-+-        }
-++#ifdef _WIN32
-++bool __cdecl datetime::system_type_to_datetime(void* pvsysTime, uint64_t seconds, datetime* pdt)
-++{
-++    SYSTEMTIME* psysTime = (SYSTEMTIME*)pvsysTime;
-++    FILETIME fileTime;
-+ 
-+-        t.tm_hour = atoi2(str);
-+-        if (t.tm_hour > 23)
-+-        {
-+-            return result;
-+-        }
-++    if (SystemTimeToFileTime(psysTime, &fileTime))
-++    {
-++        ULARGE_INTEGER largeInt;
-++        largeInt.LowPart = fileTime.dwLowDateTime;
-++        largeInt.HighPart = fileTime.dwHighDateTime;
-+ 
-+-        str += 3; // parsed hour
-+-        t.tm_min = atoi2(str);
-+-        str += 2; // parsed mins
-++        // Add hundredths of nanoseconds
-++        largeInt.QuadPart += seconds;
-+ 
-+-        if (str[0] == ':')
-+-        {
-+-            if (!ascii_isdigit6(str[1]) || !ascii_isdigit(str[2]) || str[3] != _XPLATSTR(' '))
-+-            {
-+-                return result;
-+-            }
-++        *pdt = datetime(largeInt.QuadPart);
-++        return true;
-++    }
-++    return false;
-++}
-++#endif
-+ 
-+-            t.tm_sec = atoi2(str + 1);
-+-            str += 4; // parsed seconds
-+-        }
-+-        else if (str[0] == _XPLATSTR(' '))
-+-        {
-+-            t.tm_sec = 0;
-+-            str += 1; // parsed seconds
-+-        }
-+-        else
-+-        {
-+-            return result;
-++// Take a string that represents a fractional second and return the number of ticks
-++// This is equivalent to doing atof on the string and multiplying by 10000000,
-++// but does not lose precision
-++template<typename StringIterator>
-++uint64_t timeticks_from_second(StringIterator begin, StringIterator end)
-++{
-++    int size = (int)(end - begin);
-++    _ASSERTE(begin[0] == U('.'));
-++    uint64_t ufrac_second = 0;
-++    for (int i = 1; i <= 7; ++i)
-++    {
-++        ufrac_second *= 10;
-++        int add = i < size ? begin[i] - U('0') : 0;
-++        ufrac_second += add;
-++    }
-++    return ufrac_second;
-++}
-++
-++void extract_fractional_second(const utility::string_t& dateString,
-++                               utility::string_t& resultString,
-++                               uint64_t& ufrac_second)
-++{
-++    resultString = dateString;
-++    // First, the string must be strictly longer than 2 characters, and the trailing character must be 'Z'
-++    if (resultString.size() > 2 && resultString[resultString.size() - 1] == U('Z'))
-++    {
-++        // Second, find the last non-digit by scanning the string backwards
-++        auto last_non_digit = std::find_if_not(resultString.rbegin() + 1, resultString.rend(), is_digit);
-++        if (last_non_digit < resultString.rend() - 1)
-++        {
-++            // Finally, make sure the last non-digit is a dot:
-++            auto last_dot = last_non_digit.base() - 1;
-++            if (*last_dot == U('.'))
-++            {
-++                // Got it! Now extract the fractional second
-++                auto last_before_Z = std::end(resultString) - 1;
-++                ufrac_second = timeticks_from_second(last_dot, last_before_Z);
-++                // And erase it from the string
-++                resultString.erase(last_dot, last_before_Z);
-++            }
-+         }
-++    }
-++}
-+ 
-+-        if (t.tm_sec > 60)
-+-        { // 60 to allow leap seconds
-+-            return result;
-+-        }
-++datetime __cdecl datetime::from_string(const utility::string_t& dateString, date_format format)
-++{
-++    // avoid floating point math to preserve precision
-++    uint64_t ufrac_second = 0;
-+ 
-+-        t.tm_isdst = 0;
-+-        seconds = make_gm_time(&t);
-+-        if (seconds < 0)
-+-        {
-+-            return result;
-+-        }
-++#ifdef _WIN32
-++    datetime result;
-++    if (format == RFC_1123)
-++    {
-++        SYSTEMTIME sysTime = {0};
-+ 
-+-        if (parsedWeekday >= 0 && parsedWeekday != t.tm_wday)
-+-        {
-+-            return result;
-+-        }
-++        std::wstring month(3, L'\0');
-++        std::wstring unused(3, L'\0');
-+ 
-+-        if (!string_starts_with(str, "GMT") && !string_starts_with(str, "UT"))
-+-        {
-+-            // some timezone adjustment necessary
-+-            auto tzCh = _XPLATSTR('-');
-+-            int tzHours;
-+-            int tzMinutes = 0;
-+-            if (string_starts_with(str, "EDT"))
-+-            {
-+-                tzHours = 4;
-+-            }
-+-            else if (string_starts_with(str, "EST") || string_starts_with(str, "CDT"))
-+-            {
-+-                tzHours = 5;
-+-            }
-+-            else if (string_starts_with(str, "CST") || string_starts_with(str, "MDT"))
-+-            {
-+-                tzHours = 6;
-+-            }
-+-            else if (string_starts_with(str, "MST") || string_starts_with(str, "PDT"))
-+-            {
-+-                tzHours = 7;
-+-            }
-+-            else if (string_starts_with(str, "PST"))
-+-            {
-+-                tzHours = 8;
-+-            }
-+-            else if ((tzCh == _XPLATSTR('+') || tzCh == _XPLATSTR('-')) && ascii_isdigit2(str[1]) &&
-+-                     ascii_isdigit(str[2]) && ascii_isdigit5(str[3]) && ascii_isdigit(str[4]))
-+-            {
-+-                tzCh = str[0];
-+-                tzHours = atoi2(str + 1);
-+-                tzMinutes = atoi2(str + 3);
-+-            }
-+-            else
-+-            {
-+-                return result;
-+-            }
-++        const wchar_t* formatString = L"%3c, %2d %3c %4d %2d:%2d:%2d %3c";
-++        auto n = swscanf_s(dateString.c_str(),
-++                           formatString,
-++                           unused.data(),
-++                           unused.size(),
-++                           &sysTime.wDay,
-++                           month.data(),
-++                           month.size(),
-++                           &sysTime.wYear,
-++                           &sysTime.wHour,
-++                           &sysTime.wMinute,
-++                           &sysTime.wSecond,
-++                           unused.data(),
-++                           unused.size());
-++
-++        if (n == 8)
-++        {
-++            std::wstring monthnames[12] = {
-++                L"Jan", L"Feb", L"Mar", L"Apr", L"May", L"Jun", L"Jul", L"Aug", L"Sep", L"Oct", L"Nov", L"Dec"};
-++            auto loc =
-++                std::find_if(monthnames, monthnames + 12, [&month](const std::wstring& m) { return m == month; });
-+ 
-+-            seconds = timezone_adjust(seconds, static_cast<unsigned char>(tzCh), tzHours, tzMinutes);
-+-            if (seconds < 0)
-++            if (loc != monthnames + 12)
-+             {
-+-                return result;
-++                sysTime.wMonth = (short)((loc - monthnames) + 1);
-++                if (system_type_to_datetime(&sysTime, ufrac_second, &result))
-++                {
-++                    return result;
-++                }
-+             }
-+         }
-+     }
-+     else if (format == ISO_8601)
-+     {
-+-        // parse year
-+-        if (!ascii_isdigit3(str[0]) || !ascii_isdigit(str[1]) || !ascii_isdigit(str[2]) || !ascii_isdigit(str[3]))
-+-        {
-+-            return result;
-+-        }
-++        // Unlike FILETIME, SYSTEMTIME does not have enough precision to hold seconds in 100 nanosecond
-++        // increments. Therefore, start with seconds and milliseconds set to 0, then add them separately
-+ 
-+-        t.tm_year = (str[0] - _XPLATSTR('0')) * 1000 + (str[1] - _XPLATSTR('0')) * 100 +
-+-                    (str[2] - _XPLATSTR('0')) * 10 + (str[3] - _XPLATSTR('0'));
-+-        if (t.tm_year < 1970 || t.tm_year > 3000)
-+-        {
-+-            return result;
-+-        }
-++        // Try to extract the fractional second from the timestamp
-++        utility::string_t input;
-++        extract_fractional_second(dateString, input, ufrac_second);
-++        {
-++            SYSTEMTIME sysTime = {0};
-++            const wchar_t* formatString = L"%4d-%2d-%2dT%2d:%2d:%2dZ";
-++            auto n = swscanf_s(input.c_str(),
-++                               formatString,
-++                               &sysTime.wYear,
-++                               &sysTime.wMonth,
-++                               &sysTime.wDay,
-++                               &sysTime.wHour,
-++                               &sysTime.wMinute,
-++                               &sysTime.wSecond);
-+ 
-+-        str += 4;
-+-        if (*str == _XPLATSTR('-'))
-+-        {
-+-            ++str;
-++            if (n == 3 || n == 6)
-++            {
-++                if (system_type_to_datetime(&sysTime, ufrac_second, &result))
-++                {
-++                    return result;
-++                }
-++            }
-+         }
-+-
-+-        // parse month
-+-        if (!ascii_isdigit1(str[0]) || !ascii_isdigit(str[1]))
-+         {
-+-            return result;
-+-        }
-++            SYSTEMTIME sysTime = {0};
-++            DWORD date = 0;
-+ 
-+-        t.tm_mon = atoi2(str);
-+-        if (t.tm_mon < 1 || t.tm_mon > 12)
-+-        {
-+-            return result;
-+-        }
-+-
-+-        t.tm_mon -= 1;
-+-        str += 2;
-++            const wchar_t* formatString = L"%8dT%2d:%2d:%2dZ";
-++            auto n = swscanf_s(input.c_str(), formatString, &date, &sysTime.wHour, &sysTime.wMinute, &sysTime.wSecond);
-+ 
-+-        if (*str == _XPLATSTR('-'))
-+-        {
-+-            ++str;
-+-        }
-++            if (n == 1 || n == 4)
-++            {
-++                sysTime.wDay = date % 100;
-++                date /= 100;
-++                sysTime.wMonth = date % 100;
-++                date /= 100;
-++                sysTime.wYear = (WORD)date;
-+ 
-+-        // parse day
-+-        if (!ascii_isdigit3(str[0]) || !ascii_isdigit(str[1]))
-+-        {
-+-            return result;
-++                if (system_type_to_datetime(&sysTime, ufrac_second, &result))
-++                {
-++                    return result;
-++                }
-++            }
-+         }
-+-
-+-        t.tm_mday = atoi2(str);
-+-        if (!validate_day_month(t.tm_mday, t.tm_mon, t.tm_year))
-+         {
-+-            return result;
-+-        }
-++            SYSTEMTIME sysTime = {0};
-++            GetSystemTime(&sysTime); // Fill date portion with today's information
-++            sysTime.wSecond = 0;
-++            sysTime.wMilliseconds = 0;
-+ 
-+-        t.tm_year -= 1900;
-+-        str += 2;
-++            const wchar_t* formatString = L"%2d:%2d:%2dZ";
-++            auto n = swscanf_s(input.c_str(), formatString, &sysTime.wHour, &sysTime.wMinute, &sysTime.wSecond);
-+ 
-+-        if (str[0] != _XPLATSTR('T') && str[0] != _XPLATSTR('t'))
-+-        {
-+-            // No time
-+-            seconds = make_gm_time(&t);
-+-            if (seconds < 0)
-++            if (n == 3)
-+             {
-+-                return result;
-++                if (system_type_to_datetime(&sysTime, ufrac_second, &result))
-++                {
-++                    return result;
-++                }
-+             }
-+-
-+-            seconds += ntToUnixOffsetSeconds;
-+-            result.m_interval = static_cast<interval_type>(seconds) * _secondTicks;
-+-            return result;
-+         }
-++    }
-+ 
-+-        ++str; // skip 'T'
-++    return datetime();
-++#else
-++    std::string input(dateString);
-+ 
-+-        // parse hour
-+-        if (!ascii_isdigit2(str[0]) || !ascii_isdigit(str[1]))
-+-        {
-+-            return result;
-+-        }
-++    struct tm output = tm();
-+ 
-+-        t.tm_hour = atoi2(str);
-+-        str += 2;
-+-        if (t.tm_hour > 23)
-+-        {
-+-            return result;
-+-        }
-++    if (format == RFC_1123)
-++    {
-++        strptime(input.data(), "%a, %d %b %Y %H:%M:%S GMT", &output);
-++    }
-++    else
-++    {
-++        // Try to extract the fractional second from the timestamp
-++        utility::string_t input;
-++        extract_fractional_second(dateString, input, ufrac_second);
-+ 
-+-        if (*str == _XPLATSTR(':'))
-+-        {
-+-            ++str;
-+-        }
-++        auto result = strptime(input.data(), "%Y-%m-%dT%H:%M:%SZ", &output);
-+ 
-+-        // parse minute
-+-        if (!ascii_isdigit5(str[0]) || !ascii_isdigit(str[1]))
-++        if (result == nullptr)
-+         {
-+-            return result;
-++            result = strptime(input.data(), "%Y%m%dT%H:%M:%SZ", &output);
-+         }
-+-        t.tm_min = atoi2(str);
-+-        // t.tm_min > 59 is impossible because we checked that the first digit is <= 5 in the basic format
-+-        // check above
-+-
-+-        str += 2;
-+-
-+-        if (*str == _XPLATSTR(':'))
-++        if (result == nullptr)
-+         {
-+-            ++str;
-++            // Fill the date portion with the epoch,
-++            // strptime will do the rest
-++            memset(&output, 0, sizeof(struct tm));
-++            output.tm_year = 70;
-++            output.tm_mon = 1;
-++            output.tm_mday = 1;
-++            result = strptime(input.data(), "%H:%M:%SZ", &output);
-+         }
-+-
-+-        // parse seconds
-+-        if (!ascii_isdigit6(str[0]) || !ascii_isdigit(str[1]))
-++        if (result == nullptr)
-+         {
-+-            return result;
-++            result = strptime(input.data(), "%Y-%m-%d", &output);
-+         }
-+-
-+-        t.tm_sec = atoi2(str);
-+-        // We allow 60 to account for leap seconds
-+-        if (t.tm_sec > 60)
-++        if (result == nullptr)
-+         {
-+-            return result;
-++            result = strptime(input.data(), "%Y%m%d", &output);
-+         }
-+-
-+-        str += 2;
-+-        if (str[0] == _XPLATSTR('.') && ascii_isdigit(str[1]))
-++        if (result == nullptr)
-+         {
-+-            ++str;
-+-            int digits = 7;
-+-            for (;;)
-+-            {
-+-                frac_sec *= 10;
-+-                frac_sec += *str - _XPLATSTR('0');
-+-                --digits;
-+-                ++str;
-+-                if (digits == 0)
-+-                {
-+-                    while (ascii_isdigit(*str))
-+-                    {
-+-                        // consume remaining fractional second digits we can't use
-+-                        ++str;
-+-                    }
-+-
-+-                    break;
-+-                }
-+-
-+-                if (!ascii_isdigit(*str))
-+-                {
-+-                    // no more digits in the input, do the remaining multiplies we need
-+-                    for (; digits != 0; --digits)
-+-                    {
-+-                        frac_sec *= 10;
-+-                    }
-+-
-+-                    break;
-+-                }
-+-            }
-++            return datetime();
-+         }
-++    }
-+ 
-+-        seconds = make_gm_time(&t);
-+-        if (seconds < 0)
-+-        {
-+-            return result;
-+-        }
-++#if (defined(ANDROID) || defined(__ANDROID__))
-++    // HACK: The (nonportable?) POSIX function timegm is not available in
-++    //       bionic. As a workaround[1][2], we set the C library timezone to
-++    //       UTC, call mktime, then set the timezone back. However, the C
-++    //       environment is fundamentally a shared global resource and thread-
-++    //       unsafe. We can protect our usage here, however any other code might
-++    //       manipulate the environment at the same time.
-++    //
-++    // [1] http://linux.die.net/man/3/timegm
-++    // [2] http://www.gnu.org/software/libc/manual/html_node/Broken_002ddown-Time.html
-++    time_t time;
-+ 
-+-        if (str[0] == _XPLATSTR('Z') || str[0] == _XPLATSTR('z'))
-++    static boost::mutex env_var_lock;
-++    {
-++        boost::lock_guard<boost::mutex> lock(env_var_lock);
-++        std::string prev_env;
-++        auto prev_env_cstr = getenv("TZ");
-++        if (prev_env_cstr != nullptr)
-+         {
-+-            // no adjustment needed for zulu time
-++            prev_env = prev_env_cstr;
-+         }
-+-        else if (str[0] == _XPLATSTR('+') || str[0] == _XPLATSTR('-'))
-+-        {
-+-            const unsigned char offsetDirection = static_cast<unsigned char>(str[0]);
-+-            if (!ascii_isdigit2(str[1]) || !ascii_isdigit(str[2]) || str[3] != _XPLATSTR(':') ||
-+-                !ascii_isdigit5(str[4]) || !ascii_isdigit(str[5]))
-+-            {
-+-                return result;
-+-            }
-++        setenv("TZ", "UTC", 1);
-+ 
-+-            seconds = timezone_adjust(seconds, offsetDirection, atoi2(str + 1), atoi2(str + 4));
-+-            if (seconds < 0)
-+-            {
-+-                return result;
-+-            }
-++        time = mktime(&output);
-++
-++        if (prev_env_cstr)
-++        {
-++            setenv("TZ", prev_env.c_str(), 1);
-+         }
-+         else
-+         {
-+-            // the timezone is malformed, but cpprestsdk currently accepts this as no timezone
-++            unsetenv("TZ");
-+         }
-+     }
-+-    else
-+-    {
-+-        throw std::invalid_argument("unrecognized date format");
-+-    }
-++#else
-++    time_t time = timegm(&output);
-++#endif
-++
-++    struct timeval tv = timeval();
-++    tv.tv_sec = time;
-++    auto result = timeval_to_datetime(tv);
-+ 
-+-    seconds += ntToUnixOffsetSeconds;
-+-    result.m_interval = static_cast<interval_type>(seconds) * _secondTicks + frac_sec;
-++    // fractional seconds are already in correct format so just add them.
-++    result = result + ufrac_second;
-+     return result;
-++#endif
-+ }
-+ 
-+ /// <summary>
-+@@ -1358,32 +1181,38 @@ utility::seconds __cdecl timespan::xml_d
-+     // The final S could be omitted
-+ 
-+     int64_t numSecs = 0;
-+-    auto cursor = timespanString.c_str();
-+-    auto c = *cursor++; // skip 'P'
-+-    while (c)
-++
-++    utility::istringstream_t is(timespanString);
-++    is.imbue(std::locale::classic());
-++    auto eof = std::char_traits<utility::char_t>::eof();
-++
-++    std::basic_istream<utility::char_t>::int_type c;
-++    c = is.get(); // P
-++
-++    while (c != eof)
-+     {
-+         int val = 0;
-+-        c = *cursor++;
-++        c = is.get();
-+ 
-+-        while (ascii_isdigit(c))
-++        while (is_digit((utility::char_t)c))
-+         {
-+-            val = val * 10 + (c - _XPLATSTR('0'));
-+-            c = *cursor++;
-++            val = val * 10 + (c - L'0');
-++            c = is.get();
-+ 
-+-            if (c == _XPLATSTR('.'))
-++            if (c == '.')
-+             {
-+                 // decimal point is not handled
-+                 do
-+                 {
-+-                    c = *cursor++;
-+-                } while (ascii_isdigit(c));
-++                    c = is.get();
-++                } while (is_digit((utility::char_t)c));
-+             }
-+         }
-+ 
-+-        if (c == _XPLATSTR('D')) numSecs += val * 24 * 3600; // days
-+-        if (c == _XPLATSTR('H')) numSecs += val * 3600;      // Hours
-+-        if (c == _XPLATSTR('M')) numSecs += val * 60;        // Minutes
-+-        if (c == _XPLATSTR('S') || c == _XPLATSTR('\0'))
-++        if (c == L'D') numSecs += val * 24 * 3600; // days
-++        if (c == L'H') numSecs += val * 3600;      // Hours
-++        if (c == L'M') numSecs += val * 60;        // Minutes
-++        if (c == L'S' || c == eof)
-+         {
-+             numSecs += val; // seconds
-+             break;
-+@@ -1393,12 +1222,12 @@ utility::seconds __cdecl timespan::xml_d
-+     return utility::seconds(numSecs);
-+ }
-+ 
-+-static const utility::char_t c_allowed_chars[] =
-+-    _XPLATSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
-++const utility::string_t nonce_generator::c_allowed_chars(
-++    _XPLATSTR("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"));
-+ 
-+ utility::string_t nonce_generator::generate()
-+ {
-+-    std::uniform_int_distribution<> distr(0, static_cast<int>(sizeof(c_allowed_chars) / sizeof(utility::char_t)) - 1);
-++    std::uniform_int_distribution<> distr(0, static_cast<int>(c_allowed_chars.length() - 1));
-+     utility::string_t result;
-+     result.reserve(length());
-+     std::generate_n(std::back_inserter(result), length(), [&]() { return c_allowed_chars[distr(m_random)]; });
-+--- cpprest-2.10.12.orig/Release/tests/functional/utils/datetime.cpp
-++++ cpprest-2.10.12/Release/tests/functional/utils/datetime.cpp
-+@@ -74,6 +74,16 @@ SUITE(datetime)
-+         }
-+     }
-+ 
-++    TEST(parsing_time_extended)
-++    {
-++        // ISO 8601
-++        {
-++            auto dt = utility::datetime::from_string(_XPLATSTR("14:30:01Z"), utility::datetime::ISO_8601);
-++
-++            VERIFY_ARE_NOT_EQUAL(0u, dt.to_interval());
-++        }
-++    }
-++
-+     void TestDateTimeRoundtrip(utility::string_t str, utility::string_t strExpected)
-+     {
-+         auto dt = utility::datetime::from_string(str, utility::datetime::ISO_8601);
-+@@ -91,8 +101,6 @@ SUITE(datetime)
-+ 
-+     TEST(parsing_time_roundtrip_datetime2)
-+     {
-+-        // lose the last '000'
-+-        TestDateTimeRoundtrip(_XPLATSTR("2013-11-19T14:30:59.1234567000Z"), _XPLATSTR("2013-11-19T14:30:59.1234567Z"));
-+         // lose the last '999' without rounding up
-+         TestDateTimeRoundtrip(_XPLATSTR("2013-11-19T14:30:59.1234567999Z"), _XPLATSTR("2013-11-19T14:30:59.1234567Z"));
-+     }
-+@@ -121,260 +129,16 @@ SUITE(datetime)
-+         TestDateTimeRoundtrip(_XPLATSTR("2013-11-19T14:30:59.5Z"));
-+     }
-+ 
-+-    void TestRfc1123IsTimeT(const utility::char_t* str, time_t t)
-+-    {
-+-        datetime dt = datetime::from_string(str, utility::datetime::RFC_1123);
-+-        uint64_t interval = dt.to_interval();
-+-        VERIFY_ARE_EQUAL(0, interval % 10000000);
-+-        interval /= 10000000;
-+-        interval -= 11644473600; // NT epoch adjustment
-+-        VERIFY_ARE_EQUAL(static_cast<uint64_t>(t), interval);
-+-    }
-+-
-+-    TEST(parsing_time_rfc1123_accepts_each_day)
-+-    {
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:00:00 GMT"), (time_t) 0);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Fri, 02 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 1);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Sat, 03 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 2);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Sun, 04 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 3);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Mon, 05 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 4);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Tue, 06 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 5);
-+-        TestRfc1123IsTimeT(_XPLATSTR("Wed, 07 Jan 1970 00:00:00 GMT"), (time_t) 86400 * 6);
-+-    }
-+-
-+-    TEST(parsing_time_rfc1123_boundary_cases)
-+-    {
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:00:00 GMT"), (time_t) 0);
-+-        TestRfc1123IsTimeT(_XPLATSTR("19 Jan 2038 03:14:06 GMT"), (time_t) INT_MAX - 1);
-+-#ifndef _USE_32BIT_TIME_T
-+-        TestRfc1123IsTimeT(_XPLATSTR("19 Jan 2038 03:13:07 -0001"), (time_t) INT_MAX);
-+-        TestRfc1123IsTimeT(_XPLATSTR("19 Jan 2038 03:14:07 -0000"), (time_t) INT_MAX);
-+-#endif // _USE_32BIT_TIME_T
-+-        TestRfc1123IsTimeT(_XPLATSTR("14 Jan 2019 23:16:21 +0000"), (time_t) 1547507781);
-+-        TestRfc1123IsTimeT(_XPLATSTR("14 Jan 2019 23:16:21 -0001"), (time_t) 1547507841);
-+-        TestRfc1123IsTimeT(_XPLATSTR("14 Jan 2019 23:16:21 +0001"), (time_t) 1547507721);
-+-        TestRfc1123IsTimeT(_XPLATSTR("14 Jan 2019 23:16:21 -0100"), (time_t) 1547511381);
-+-        TestRfc1123IsTimeT(_XPLATSTR("14 Jan 2019 23:16:21 +0100"), (time_t) 1547504181);
-+-    }
-+-
-+-    TEST(parsing_time_rfc1123_uses_each_field)
-+-    {
-+-        TestRfc1123IsTimeT(_XPLATSTR("02 Jan 1970 00:00:00 GMT"), (time_t) 86400);
-+-        TestRfc1123IsTimeT(_XPLATSTR("12 Jan 1970 00:00:00 GMT"), (time_t) 950400);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Feb 1970 00:00:00 GMT"), (time_t) 2678400);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 2000 00:00:00 GMT"), (time_t) 946684800);
-+-#ifndef _USE_32BIT_TIME_T
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 2100 00:00:00 GMT"), (time_t) 4102444800);
-+-#endif // _USE_32BIT_TIME_T
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1990 00:00:00 GMT"), (time_t) 631152000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1971 00:00:00 GMT"), (time_t) 31536000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 10:00:00 GMT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 01:00:00 GMT"), (time_t) 3600);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:10:00 GMT"), (time_t) 600);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:01:00 GMT"), (time_t) 60);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:00:10 GMT"), (time_t) 10);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 00:00:01 GMT"), (time_t) 1);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 10:00:00 GMT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 02:00:00 PST"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 03:00:00 PDT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 03:00:00 MST"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 04:00:00 MDT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 04:00:00 CST"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 05:00:00 CDT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 05:00:00 EST"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 06:00:00 EDT"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 06:00:00 -0400"), (time_t) 36000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("01 Jan 1970 05:59:00 -0401"), (time_t) 36000);
-+-    }
-+-
-+-    TEST(parsing_time_rfc1123_max_days)
-+-    {
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Jan 1970 00:00:00 GMT"), (time_t) 2592000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("28 Feb 2019 00:00:00 GMT"), (time_t) 1551312000); // non leap year allows feb 28
-+-        TestRfc1123IsTimeT(_XPLATSTR("29 Feb 2020 00:00:00 GMT"), (time_t) 1582934400); // leap year allows feb 29
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Mar 1970 00:00:00 GMT"), (time_t) 7689600);
-+-        TestRfc1123IsTimeT(_XPLATSTR("30 Apr 1970 00:00:00 GMT"), (time_t) 10281600);
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 May 1970 00:00:00 GMT"), (time_t) 12960000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("30 Jun 1970 00:00:00 GMT"), (time_t) 15552000);
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Jul 1970 00:00:00 GMT"), (time_t) 18230400);
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Aug 1970 00:00:00 GMT"), (time_t) 20908800);
-+-        TestRfc1123IsTimeT(_XPLATSTR("30 Sep 1970 00:00:00 GMT"), (time_t) 23500800);
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Oct 1970 00:00:00 GMT"), (time_t) 26179200);
-+-        TestRfc1123IsTimeT(_XPLATSTR("30 Nov 1970 00:00:00 GMT"), (time_t) 28771200);
-+-        TestRfc1123IsTimeT(_XPLATSTR("31 Dec 1970 00:00:00 GMT"), (time_t) 31449600);
-+-    }
-+-
-+-    TEST(parsing_time_rfc1123_invalid_cases)
-+-    {
-+-        const utility::string_t bad_strings[] = {
-+-            _XPLATSTR("Ahu, 01 Jan 1970 00:00:00 GMT"), // bad letters in each place
-+-            _XPLATSTR("TAu, 01 Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("ThA, 01 Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("ThuA 01 Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu,A01 Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, A1 Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 0A Jan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01AJan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Aan 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 JAn 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 JaA 1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 JanA1970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan A970 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1A70 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 19A0 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 197A 00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970A00:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 A0:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 0A:00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00A00:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:A0:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:0A:00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00A00 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:A0 GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:0A GMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00AGMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 AMT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 GAT"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 GMA"),
-+-            _XPLATSTR(""), // truncation
-+-            _XPLATSTR("T"),
-+-            _XPLATSTR("Th"),
-+-            _XPLATSTR("Thu"),
-+-            _XPLATSTR("Thu,"),
-+-            _XPLATSTR("Thu, "),
-+-            _XPLATSTR("Thu, 0"),
-+-            _XPLATSTR("Thu, 01"),
-+-            _XPLATSTR("Thu, 01 "),
-+-            _XPLATSTR("Thu, 01 J"),
-+-            _XPLATSTR("Thu, 01 Ja"),
-+-            _XPLATSTR("Thu, 01 Jan"),
-+-            _XPLATSTR("Thu, 01 Jan "),
-+-            _XPLATSTR("Thu, 01 Jan 1"),
-+-            _XPLATSTR("Thu, 01 Jan 19"),
-+-            _XPLATSTR("Thu, 01 Jan 197"),
-+-            _XPLATSTR("Thu, 01 Jan 1970"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 "),
-+-            _XPLATSTR("Thu, 01 Jan 1970 0"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:0"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:0"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 "),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 G"),
-+-            _XPLATSTR("Thu, 01 Jan 1970 00:00:00 GM"),
-+-            _XPLATSTR("Fri, 01 Jan 1970 00:00:00 GMT"), // wrong day
-+-            _XPLATSTR("01 Jan 4970 00:00:00 GMT"), // year too big
-+-            _XPLATSTR("01 Jan 3001 00:00:00 GMT"),
-+-            _XPLATSTR("01 Xxx 1971 00:00:00 GMT"), // month bad
-+-            _XPLATSTR("00 Jan 1971 00:00:00 GMT"), // day too small
-+-            _XPLATSTR("32 Jan 1971 00:00:00 GMT"), // day too big
-+-            _XPLATSTR("30 Feb 1971 00:00:00 GMT"), // day too big for feb
-+-            _XPLATSTR("30 Feb 1971 00:00:00 GMT"), // day too big for feb (non-leap year)
-+-            _XPLATSTR("32 Mar 1971 00:00:00 GMT"), // other months
-+-            _XPLATSTR("31 Apr 1971 00:00:00 GMT"),
-+-            _XPLATSTR("32 May 1971 00:00:00 GMT"),
-+-            _XPLATSTR("31 Jun 1971 00:00:00 GMT"),
-+-            _XPLATSTR("32 Jul 1971 00:00:00 GMT"),
-+-            _XPLATSTR("32 Aug 1971 00:00:00 GMT"),
-+-            _XPLATSTR("31 Sep 1971 00:00:00 GMT"),
-+-            _XPLATSTR("32 Oct 1971 00:00:00 GMT"),
-+-            _XPLATSTR("31 Nov 1971 00:00:00 GMT"),
-+-            _XPLATSTR("32 Dec 1971 00:00:00 GMT"),
-+-            _XPLATSTR("01 Jan 1971 70:00:00 GMT"), // hour too big
-+-            _XPLATSTR("01 Jan 1971 24:00:00 GMT"),
-+-            _XPLATSTR("01 Jan 1971 00:60:00 GMT"), // minute too big
-+-            _XPLATSTR("01 Jan 1971 00:00:70 GMT"), // second too big
-+-            _XPLATSTR("01 Jan 1971 00:00:61 GMT"),
-+-            _XPLATSTR("01 Jan 1969 00:00:00 GMT"), // underflow
-+-            _XPLATSTR("01 Jan 1969 00:00:00 CEST"), // bad tz
-+-            _XPLATSTR("01 Jan 1970 00:00:00 +2400"), // bad tzoffsets
-+-            _XPLATSTR("01 Jan 1970 00:00:00 -3000"),
-+-            _XPLATSTR("01 Jan 1970 00:00:00 +2160"),
-+-            _XPLATSTR("01 Jan 1970 00:00:00 -2400"),
-+-            _XPLATSTR("01 Jan 1970 00:00:00 -2160"),
-+-        };
-+-
-+-        for (const auto& str : bad_strings)
-+-        {
-+-            auto dt = utility::datetime::from_string(str, utility::datetime::RFC_1123);
-+-            VERIFY_ARE_EQUAL(0, dt.to_interval());
-+-        }
-+-    }
-+-
-+-    TEST(parsing_time_iso8601_boundary_cases)
-+-    {
-+-        // boundary cases:
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:00:00Z"));                                         // epoch
-+-        TestDateTimeRoundtrip(_XPLATSTR("2038-01-19T03:14:06+00:00"), _XPLATSTR("2038-01-19T03:14:06Z")); // INT_MAX - 1
-+-#ifndef _USE_32BIT_TIME_T
-+-        TestDateTimeRoundtrip(_XPLATSTR("2038-01-19T03:13:07-00:01"),
-+-                              _XPLATSTR("2038-01-19T03:14:07Z")); // INT_MAX after subtacting 1
-+-        TestDateTimeRoundtrip(_XPLATSTR("2038-01-19T03:14:07-00:00"), _XPLATSTR("2038-01-19T03:14:07Z"));
-+-#endif // _USE_32BIT_TIME_T
-+-    }
-+-
-+-    TEST(parsing_time_iso8601_uses_each_timezone_digit)
-+-    {
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-01-14T23:16:21+00:00"), _XPLATSTR("2019-01-14T23:16:21Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-01-14T23:16:21-00:01"), _XPLATSTR("2019-01-14T23:17:21Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-01-14T23:16:21+00:01"), _XPLATSTR("2019-01-14T23:15:21Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-01-14T23:16:21-01:00"), _XPLATSTR("2019-01-15T00:16:21Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-01-14T23:16:21+01:00"), _XPLATSTR("2019-01-14T22:16:21Z"));
-+-    }
-+-
-+-    TEST(parsing_time_iso8601_uses_each_digit)
-+-    {
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:00:01Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:01:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T01:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-02T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-02-01T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1971-01-01T00:00:00Z"));
-+-
-+-        TestDateTimeRoundtrip(_XPLATSTR("1999-01-01T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-12-01T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-09-01T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-30T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-31T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T23:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T19:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:59:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:00:59Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:00:60Z"), _XPLATSTR("1970-01-01T00:01:00Z")); // leap seconds
-+-    }
-+-
-+-    TEST(parsing_time_iso8601_accepts_month_max_days)
-+-    {
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-31T00:00:00Z")); // jan
-+-        TestDateTimeRoundtrip(_XPLATSTR("2019-02-28T00:00:00Z")); // non leap year allows feb 28
-+-        TestDateTimeRoundtrip(_XPLATSTR("2020-02-29T00:00:00Z")); // leap year allows feb 29
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-03-31T00:00:00Z")); // mar
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-04-30T00:00:00Z")); // apr
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-05-31T00:00:00Z")); // may
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-06-30T00:00:00Z")); // jun
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-07-31T00:00:00Z")); // jul
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-08-31T00:00:00Z")); // aug
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-09-30T00:00:00Z")); // sep
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-10-31T00:00:00Z")); // oct
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-11-30T00:00:00Z")); // nov
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-12-31T00:00:00Z")); // dec
-+-    }
-+-
-+-    TEST(parsing_time_iso8601_accepts_lowercase_t_z)
-+-    {
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01t00:00:00Z"), _XPLATSTR("1970-01-01T00:00:00Z"));
-+-        TestDateTimeRoundtrip(_XPLATSTR("1970-01-01T00:00:00z"), _XPLATSTR("1970-01-01T00:00:00Z"));
-+-    }
-+-
-+-    TEST(parsing_time_roundtrip_datetime_accepts_invalid_no_trailing_timezone)
-++    TEST(parsing_time_roundtrip_datetime_invalid1,
-++         "Ignore:Linux",
-++         "Codeplex issue #115",
-++         "Ignore:Apple",
-++         "Codeplex issue #115")
-+     {
-+         // No digits after the dot, or non-digits. This is not a valid input, but we should not choke on it,
-+         // Simply ignore the bad fraction
-+         const utility::string_t bad_strings[] = {_XPLATSTR("2013-11-19T14:30:59.Z"),
-+-                                                 _XPLATSTR("2013-11-19T14:30:59.a12Z")};
-++                                                 _XPLATSTR("2013-11-19T14:30:59.1a2Z")};
-+         utility::string_t str_corrected = _XPLATSTR("2013-11-19T14:30:59Z");
-+ 
-+         for (const auto& str : bad_strings)
-+@@ -387,87 +151,12 @@ SUITE(datetime)
-+ 
-+     TEST(parsing_time_roundtrip_datetime_invalid2)
-+     {
-+-        // Various unsupported cases. In all cases, we have produce an empty date time
-++        // Variouls unsupported cases. In all cases, we have produce an empty date time
-+         const utility::string_t bad_strings[] = {
-+-            _XPLATSTR(""),                     // empty
-+-            _XPLATSTR(".Z"),                   // too short
-+-            _XPLATSTR(".Zx"),                  // no trailing Z
-+-            _XPLATSTR("3.14Z")                 // not a valid date
-+-            _XPLATSTR("a971-01-01T00:00:00Z"), // any non digits or valid separators
-+-            _XPLATSTR("1a71-01-01T00:00:00Z"),
-+-            _XPLATSTR("19a1-01-01T00:00:00Z"),
-+-            _XPLATSTR("197a-01-01T00:00:00Z"),
-+-            _XPLATSTR("1971a01-01T00:00:00Z"),
-+-            _XPLATSTR("1971-a1-01T00:00:00Z"),
-+-            _XPLATSTR("1971-0a-01T00:00:00Z"),
-+-            _XPLATSTR("1971-01a01T00:00:00Z"),
-+-            _XPLATSTR("1971-01-a1T00:00:00Z"),
-+-            _XPLATSTR("1971-01-0aT00:00:00Z"),
-+-            // _XPLATSTR("1971-01-01a00:00:00Z"), parsed as complete date
-+-            _XPLATSTR("1971-01-01Ta0:00:00Z"),
-+-            _XPLATSTR("1971-01-01T0a:00:00Z"),
-+-            _XPLATSTR("1971-01-01T00a00:00Z"),
-+-            _XPLATSTR("1971-01-01T00:a0:00Z"),
-+-            _XPLATSTR("1971-01-01T00:0a:00Z"),
-+-            _XPLATSTR("1971-01-01T00:00a00Z"),
-+-            _XPLATSTR("1971-01-01T00:00:a0Z"),
-+-            _XPLATSTR("1971-01-01T00:00:0aZ"),
-+-            // "1971-01-01T00:00:00a", accepted as per invalid_no_trailing_timezone above
-+-            _XPLATSTR("1"), // truncation
-+-            _XPLATSTR("19"),
-+-            _XPLATSTR("197"),
-+-            _XPLATSTR("1970"),
-+-            _XPLATSTR("1970-"),
-+-            _XPLATSTR("1970-0"),
-+-            _XPLATSTR("1970-01"),
-+-            _XPLATSTR("1970-01-"),
-+-            _XPLATSTR("1970-01-0"),
-+-            // _XPLATSTR("1970-01-01"), complete date
-+-            _XPLATSTR("1970-01-01T"),
-+-            _XPLATSTR("1970-01-01T0"),
-+-            _XPLATSTR("1970-01-01T00"),
-+-            _XPLATSTR("1970-01-01T00:"),
-+-            _XPLATSTR("1970-01-01T00:0"),
-+-            _XPLATSTR("1970-01-01T00:00"),
-+-            _XPLATSTR("1970-01-01T00:00:"),
-+-            _XPLATSTR("1970-01-01T00:00:0"),
-+-            // _XPLATSTR("1970-01-01T00:00:00"), // accepted as invalid timezone above
-+-            _XPLATSTR("4970-01-01T00:00:00Z"), // year too big
-+-            _XPLATSTR("3001-01-01T00:00:00Z"),
-+-            _XPLATSTR("1971-00-01T00:00:00Z"), // month too small
-+-            _XPLATSTR("1971-20-01T00:00:00Z"), // month too big
-+-            _XPLATSTR("1971-13-01T00:00:00Z"),
-+-            _XPLATSTR("1971-01-00T00:00:00Z"), // day too small
-+-            _XPLATSTR("1971-01-32T00:00:00Z"), // day too big
-+-            _XPLATSTR("1971-02-30T00:00:00Z"), // day too big for feb
-+-            _XPLATSTR("1971-02-30T00:00:00Z"), // day too big for feb (non-leap year)
-+-            _XPLATSTR("1971-03-32T00:00:00Z"), // other months
-+-            _XPLATSTR("1971-04-31T00:00:00Z"),
-+-            _XPLATSTR("1971-05-32T00:00:00Z"),
-+-            _XPLATSTR("1971-06-31T00:00:00Z"),
-+-            _XPLATSTR("1971-07-32T00:00:00Z"),
-+-            _XPLATSTR("1971-08-32T00:00:00Z"),
-+-            _XPLATSTR("1971-09-31T00:00:00Z"),
-+-            _XPLATSTR("1971-10-32T00:00:00Z"),
-+-            _XPLATSTR("1971-11-31T00:00:00Z"),
-+-            _XPLATSTR("1971-12-32T00:00:00Z"),
-+-            _XPLATSTR("1971-01-01T70:00:00Z"), // hour too big
-+-            _XPLATSTR("1971-01-01T24:00:00Z"),
-+-            _XPLATSTR("1971-01-01T00:60:00Z"), // minute too big
-+-            _XPLATSTR("1971-01-01T00:00:70Z"), // second too big
-+-            _XPLATSTR("1971-01-01T00:00:61Z"),
-+-            _XPLATSTR("1969-01-01T00:00:00Z"), // underflow
-+-#ifdef _USE_32BIT_TIME_T
-+-            _XPLATSTR("3000-01-01T00:00:01Z"), // overflow
-+-#endif
-+-            _XPLATSTR("3001-01-01T00:00:00Z"),
-+-            _XPLATSTR("1970-01-01T00:00:00+00:01"), // time zone underflow
-+-            // _XPLATSTR("1970-01-01T00:00:00.Z"), // accepted as invalid timezone above
-+-            _XPLATSTR("1970-01-01T00:00:00+24:00"), // bad tzoffsets
-+-            _XPLATSTR("1970-01-01T00:00:00-30:00"),
-+-            _XPLATSTR("1970-01-01T00:00:00+21:60"),
-+-            _XPLATSTR("1970-01-01T00:00:00-24:00"),
-+-            _XPLATSTR("1970-01-01T00:00:00-21:60"),
-++            _XPLATSTR(""),     // empty
-++            _XPLATSTR(".Z"),   // too short
-++            _XPLATSTR(".Zx"),  // no trailing Z
-++            _XPLATSTR("3.14Z") // not a valid date
-+         };
-+ 
-+         for (const auto& str : bad_strings)
-+@@ -477,6 +166,16 @@ SUITE(datetime)
-+         }
-+     }
-+ 
-++    TEST(parsing_time_roundtrip_time)
-++    {
-++        // time only without date
-++        utility::string_t str = _XPLATSTR("14:30:59.1234567Z");
-++        auto dt = utility::datetime::from_string(str, utility::datetime::ISO_8601);
-++        utility::string_t str2 = dt.to_string(utility::datetime::ISO_8601);
-++        // Must look for a substring now, since the date part is filled with today's date
-++        VERIFY_IS_TRUE(str2.find(str) != std::string::npos);
-++    }
-++
-+ } // SUITE(datetime)
-+ 
-+ } // namespace utils_tests
-diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
-index 903d70e2d..92c04535d 100644
---- a/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
-+++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
-@@ -8,6 +8,8 @@ DEPENDS = "openssl websocketpp zlib boost brotli"
- EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
- 
- SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
-+           file://revert-9b670e5b33dfdbd501d618cd7e7498148ffbd559.patch \
-+           file://revert-f10d9f8e214516d2c19aa6ef831ee874a58c0479.patch \
-            "
- 
- # tag 2.10.12
--- 
-2.17.1
+On Wed, Mar 27, 2019 at 10:08:32PM -0700, Khem Raj wrote:
+> On Wed, Mar 27, 2019 at 3:32 PM Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> >
+> > On Wed, Mar 27, 2019 at 09:39:07PM +0100, Martin Jansa wrote:
+> > > On Wed, Mar 27, 2019 at 05:35:07PM +0100, Martin Jansa wrote:
+> > > > On Wed, Mar 27, 2019 at 05:17:54PM +0100, Martin Jansa wrote:
+> > > > > On Sun, Mar 17, 2019 at 08:26:37AM -0700, Khem Raj wrote:
+> > > > > > http://www.openembedded.org/wiki/Bitbake_World_Status
+> > > > > >
+> > > > > > =3D=3D Failed tasks 2019-03-16 =3D=3D
+> > > > > >
+> > > > > > INFO: jenkins-job.sh-1.8.45 Complete log available at
+> > > > > > http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.repo=
+rt.20190317_082308.log
+> > > > > >
+> > > > > >     * sources/openembedded-core/meta/recipes-gnome/gobject-intr=
+ospection/gobject-introspection_1.58.3.bb:do_compile
+> > > > >
+> > > > > I was hit by this one as well on some arm targets.
+> > > > >
+> > > > > http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.=
+qemuarm.20190321_215508.log/bitbake.log
+> > > > >
+> > > > > shows that it's actually from qemu-arm segfault inside g-ir-scann=
+er-qemuwrapper
+> > > > >
+> > > > > | qemu: uncaught target signal 11 (Segmentation fault) - core dum=
+ped
+> > > > > | /home/jenkins/oe/world/yoe/build/tmpfs/work/armv7vet2hf-neon-yo=
+e-linux-gnueabi/gobject-introspection/1.58.3-r0/build/g-ir-scanner-qemuwrap=
+per: line 6:  1959 Segmentation fault      (core dumped) PSEUDO_UNLOAD=3D1 =
+qemu-arm -r 3.2.0 -L /home/jenkins/oe/world/yoe/build/tmpfs/work/armv7vet2h=
+f-neon-yoe-linux-gnueabi/gobject-introspection/1.58.3-r0/recipe-sysroot -E =
+LD_LIBRARY_PATH=3D$GIR_EXTRA_LIBS_PATH:.libs:/home/jenkins/oe/world/yoe/bui=
+ld/tmpfs/work/armv7vet2hf-neon-yoe-linux-gnueabi/gobject-introspection/1.58=
+=2E3-r0/recipe-sysroot//usr/lib:/home/jenkins/oe/world/yoe/build/tmpfs/work=
+/armv7vet2hf-neon-yoe-linux-gnueabi/gobject-introspection/1.58.3-r0/recipe-=
+sysroot//lib "$@"
+> > > > >
+> > > > > The interesting part is that this happens only when glibc is buil=
+t with gold enabled.
+> > > > >
+> > > > > I've put a bit more details in temporary work-around here:
+> > > > > https://github.com/shr-distribution/meta-smartphone/commit/8f06eb=
+355ead85464b1a1bbaa82584504df15743
+> > > > >
+> > > > > I'm comparing qemuarm glibc build with bfd and gold to see if the=
+re is some
+> > > > > significant difference which might cause this and I plan to flash=
+ some small
+> > > > > image on my targets to see if libc is broken in runtime as well o=
+r only when
+> > > > > running inside qemu-arm.
+> > > > >
+> > > > > Is anyone else seeing this as well?
+> > > >
+> > > > Checking older world status on the wiki shows that this issue was
+> > > > introduced somewhere around christmas
+> > > >
+> > > > This is last world build before the issue:
+> > > > http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.2=
+0181219_112425.log
+> > > > ...
+> > > > =3D=3D Tested changes (not included in master yet) - openembedded-c=
+ore =3D=3D
+> > > > latest upstream commit:
+> > > > 14c291e1fb gcc-runtime: Add missing libc dependency
+> > > > not included in master yet:
+> > > > 7e2ab991fa python/python3: use cc_basename to replace CC for checki=
+ng compiler
+> > > > ced915026d python-native: fix one do_populate_sysroot warning
+> > > > aee47f3e82 netbase: add entry to /etc/hosts according to /etc/hostn=
+ame
+> > > > a09e2db43a sstate: add support for caching shared workdir tasks
+> > > > c104a34166 grub2: Fix passing null to printf formats
+> > > > 6f364ff8c4 gnupg: Upgrade to 2.2.12 release
+> > > > 0224fec86b glibc: Upgrade towards 2.29 release
+> > > > 2486349782 gcc-9.0: Add recipes for upcoming gcc 9.0 release in mid=
+-2019
+> > > > b3ab29bdbb gcc-runtime: Drop building libmpx
+> > > >
+> > > > and this is the first which reported qemu-arm segfault:
+> > > > =3D=3D Tested changes (not included in master yet) - openembedded-c=
+ore =3D=3D
+> > > > latest upstream commit:
+> > > > 95659bed3f populate_sdk_ext.bbclass: Include site.conf in parsing f=
+or contents for local.conf
+> > > > not included in master yet:
+> > > > 0c9db0ae7d python/python3: use cc_basename to replace CC for checki=
+ng compiler
+> > > > bb3eb6bc41 python-native: fix one do_populate_sysroot warning
+> > > > 08a205f872 netbase: add entry to /etc/hosts according to /etc/hostn=
+ame
+> > > > b81c8650d0 sstate: add support for caching shared workdir tasks
+> > > > 702be42dc9 glibc: Remove site_config and glibc-initial
+> > > > fc230822d8 gcc: Drop gcc-cross-initial and use gcc-cross instead
+> > > > 8652df3a0d gcc: Drop the -initial versions of the compiler
+> > > > 0c2f6dfa2f recipes: Drop virtual/libc-for-gcc
+> > > > c64531600d newlib: Move away from gcc-initial dependency
+> > > > 0d5fb4428f libssp: Remove dependency on gcc-initial
+> > > > 7dd8829d3e musl: Move away from gcc-initial dependency
+> > > > 9abdb4d6ca tcmode-default: Drop pinnings for gcc-initial based reci=
+pes
+> > > > e02724e8f8 base.bbclass, classextend.py: Drop catering to gcc-initi=
+al
+> > > > 7756cb7d17 oeqa/concurrencytest: fix for locating meta-selftest
+> > > > f4c68c39e7 crosssdk/cross-canadian: Set LIBCOVERRIDE correctly
+> > > > 6fc9bb5698 glibc: Enable --with-default-link
+> > > > d4cb282bc6 gcc-9.0: Add recipes for upcoming gcc 9.0 release in mid=
+-2019
+> > > > 6efe313b46 glibc: Upgrade towards 2.29 release
+> > > > dac5dc5067 grub2: Fix passing null to printf formats
+> > > > bb36d9dc8c gnupg: Upgrade to 2.2.12 release
+> > > > 81059437a5 gnupg: Do not apply -Woverride-init guard for gcc >=3D 9
+> > > > 6fa05e5ace nfs-utils: Disable format-overflow as Werror
+> > > > 8fab7b23ef musl: Update to latest master
+> > > > a5641cac42 libxcrypt: Upgrade to 4.4.2
+> > > > c90ec03d07 gdb: Backport a fix to build with gcc9
+> > > > 1adae92573 valgrind: Fix x86_64 build failure with gcc9
+> > > > 38e9e09104 ffmpeg: Backport patch to fix build with gcc9
+> > > > 4e1fa57743 binutils: Upgrade to latest on 2.31 release branch
+> > > > 5cce276d4a binutils: Upgrade to upcoming 2.32 release
+> > > >
+> > > > and the changes introduced in oe-core between these are:
+> > > > docker-shr @ ~/openembedded-core $ git log --oneline 14c291e1fb..95=
+659bed3f
+> > > > 95659bed3f populate_sdk_ext.bbclass: Include site.conf in parsing f=
+or contents for local.conf
+> > > > 085530e8ff i2c-tools: upgrade 4.0 -> 4.1
+> > > > 673c2dcf10 common-licenses: update Libpng license text
+> > > > 099aecfaa3 libpng: upgrade 1.6.35 -> 1.6.36
+> > > > 6574bb7523 harfbuzz: upgrade 2.1.3 -> 2.2.0
+> > > > 8286e9d79d sqlite3: upgrade 3.25.3 -> 3.26.0
+> > > > a33170ff9a libatomic-ops: upgrade 7.6.6 -> 7.6.8
+> > > > 6a10ff0bcd gsettings-desktop-schemas: upgrade 3.28.0 -> 3.28.1
+> > > > dd2c4d9d85 eudev: upgrade 3.2.5 -> 3.2.7
+> > > > 0860216a81 icecc: patchelf is needed by icecc-create-env
+> > > > d2fcaeb153 icecc: Don't generate recipe-sysroot symlinks at recipe-=
+parsing time
+> > > > 4455c46bf7 icecc: Syntax error meant that we weren't waiting for ta=
+rball generation
+> > > > fa6bae80bc icecc: Trivial simplification
+> > > > 6d6788a3ea icecc: readlink -f on the recipe-sysroot gcc/g++
+> > > > 1ee90ec89a libxcrypt: Fix nativesdk build with gcc9
+> > > > 547174fc83 gcc-runtime: Drop building libmpx
+> > > >
+> > > > It's possible that it's not caused by one of these oe-core changes,=
+ but one of the pending
+> > > > yoe changes (like those 2 binutils upgrades) which were merged to o=
+e-core in some form a bit
+> > > > later.
+> > > >
+> > > > I'll verify if the issue is reproducible with oe-core 95659bed3f an=
+d continue the bisect from there.
+> > >
+> > > git bisect narrowed it down to these oe-core commits:
+> > >
+> > > da527d73f5 oeqa/utils/qemurunner: Print output when failed to login
+> > > 7bbc453ac2 (refs/bisect/bad) glibc: Enable --with-default-link
+> > > 5d0307fbef (HEAD) base.bbclass, classextend.py: Drop catering to gcc-=
+initial
+> > > 5b2fd1c724 tcmode-default: Drop pinnings for gcc-initial based recipes
+> > > fa47e2e654 musl: Move away from gcc-initial dependency
+> > > 9dc6fcd492 libssp: Remove dependency on gcc-initial
+> > > 44539118ce newlib: Move away from gcc-initial dependency
+> > > 122217b421 recipes: Drop virtual/libc-for-gcc
+> > > d84971928b gcc: Drop the -initial versions of the compiler
+> > > 62b7308b8c gcc: Drop gcc-cross-initial and use gcc-cross instead
+> > > c5df105e75 glibc: Remove site_config and glibc-initial
+> > > 94bece16c2 crosssdk/cross-canadian: Set LIBCOVERRIDE correctly
+> > > 56d2493a9a oeqa/concurrencytest: fix for locating meta-selftest
+> > > 95659bed3f (glibc-95659bed3f, refs/bisect/good-95659bed3f6f3216b346f7=
+0cfc9ffae9788c0fc1) populate_sdk_ext.bbclass: Include site.conf in parsing =
+for contents for local.conf
+> > > 085530e8ff i2c-tools: upgrade 4.0 -> 4.1
+> > >
+> > > my guess was the very last commit "glibc: Enable --with-default-link",
+> > > but unfortunately without this fix I cannot build glibc with gold ena=
+bled.
+> > >
+> > > Will compare the glibc build to see is there is something obviously w=
+rong
+> > > in the output.
+> >
+> > I've confirmed that forcing bfd linker in glibc do_compile resolves the
+> > issue with gobject-introspection (image build still running will try to
+> > flash it tomorrow).
+> >
+> > The simples work-around in oe-core:
+> > http://git.openembedded.org/openembedded-core-contrib/commit/?h=3Djansa=
+/master&id=3D054c72716f0648ff2f0770c1010857596442223e
+> > or as bbappend:
+> > https://github.com/webOS-ports/meta-webos-ports/commit/020d31892780b69f=
+a64a3a6a146283e831ccd2e9
 
+If you need to use this, then add "export" as well which is needed
+because of the "unset" in the main recipe (wasn't needed when I had both
+these changes included in the build at first).
+https://github.com/webOS-ports/meta-webos-ports/commit/0e737ad167a14591e73c=
+a3fa47d31108038ec3e2
 
+> > this is what I'm testing with now, notice that setting just LDFLAGS
+> > isn't enough, because LDFLAGS are unset in glibc.do_compile
+> >
+> > I don't know if it's worth spending more time trying to get the glibc
+> > working with gold, it looks like:
+>=20
+> i agree, your change to force bfd linker is acceptable approach
+> please propose it to OE-Core directly.
+
+Send for oe-core:
+https://patchwork.openembedded.org/patch/159874/
+but more information might be needed before it gets applied to oe-core
+as discussed with RP. I'll try to get serial cable working on my Nexus 5
+to test it there in runtime, but maybe someone could beat me to it with
+some more easily hackable 32bit arm board.
+
+>=20
+> > http://git.openembedded.org/openembedded-core/commit/?id=3D7bbc453ac2b8=
+d63680855789948a145fc448017f
+> > resolved the linker script issue (I was seeing the same error with
+> > oe-core 5d0307fbef just this fix) reported here:
+> > https://sourceware.org/bugzilla/show_bug.cgi?id=3D24148
+> >
+> > but there are other bugs like:
+> > https://sourceware.org/bugzilla/show_bug.cgi?id=3D10937
+> > https://sourceware.org/bugzilla/show_bug.cgi?id=3D18103
+> > e.g. gentoo is also explicitly disabling gold for glibc builds:
+> > https://github.com/gentoo/gentoo/blob/16e1c37bdc84b2ac5df10511f63e478d8=
+e49435e/sys-libs/glibc/glibc-2.29-r1.ebuild#L767
+> >
+> > Can someone confirm that glibc built with gold works for him on arm
+> > (I haven't seen this on x86, aarch64)? Or should we just force bfd in
+> > oe-core recipe?
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--envbJBWh7q8WU6mo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXJzc4AAKCRA3VSO3ZXaA
+HHznAKCCSIszhnXP/BZQ/fzYQmR+EPRlXgCgokeCie55UjJmkBsd1RFMKBO7eFU=
+=1oTn
+-----END PGP SIGNATURE-----
+
+--envbJBWh7q8WU6mo--
