@@ -1,52 +1,49 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A160860107
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 6656A7D0D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 10:29:13 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id x7so16760547ioh.4
+	Thu, 28 Mar 2019 10:54:38 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id w1so22318933wrp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 03:29:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=SO1YXW2YBSJ+LnN21fghiBn4LOBI1Ht1f87pu1GMeCw=;
-	b=OXQyJx0Q4Bb2TrkHxyVWb1cSo8uZiTUT3XflE1jH+oiGNHwnGayTQ9+cmtqZjIO3QB
-	Neh143/8AH4OPmTOmj7vUhl0eSrX3LWrJ3PSZSmAD7TeWTQJdgz21PAha34nVRdNRsw1
-	ODZlRRRr3K7TX9cMo3LpHbL4aXtUsAlcfc9xkuIIw/S8CZMjmXEDXSItTI5uM8DvKed7
-	fZXAP3BB7bJpHo0DxHOsS/DRbRYiIYEn26g1B3j3uHecAwYB3Hn1ooXJSoFUphUzOLGQ
-	rdl8Fbzcs1Tl0ofQoYyDt5NdSj62tnPpez3XjeZXCqeHZEADRojz5Db6uKKcUfnEcpkk
-	wFOQ==
+	Thu, 28 Mar 2019 03:54:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=WT8q/w6nWR+faIcVuH+Zp034a6aeHaJ/6E266iC899k=;
+	b=fxkiZ67W4i4x05qMwXO7vPGHxO1KfPvFI2b8szkmG81MzTbK36fgmNHShWas8yKWWZ
+	RWoL3pqD88YSZ/uRaRrZcsQXqU7bU54q5CkTwyzz6N/9B15wbTdSjbNbmJBS+Y68dpmh
+	VvZSCx0xbaoV8JFh/CC46rH2Fm2zrgGOoJrSvU9jW2h9zuTssKcKhd0j4EpOYqSsrbcY
+	QySGZsmRnJ9oSbbeJQuBKcwTSKg5ZF/Ssrxz1cdEpe6RpA4w6DLzSHPmir9w/DFoADCt
+	YousfanHXNEIpcuewMY9rQkQfN8/ZB/fjv9rdq70JhbkbN9MOybJK6E2rMUR9y3XMHth
+	iVCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=SO1YXW2YBSJ+LnN21fghiBn4LOBI1Ht1f87pu1GMeCw=;
-	b=GTjpekLAa97LUu2d6L9Zj0OMaYxoESkVHzgMtgUA+FRahOxtnlGBQzuoc/REp65odJ
-	MuDDo/UL/s2p6LElQInsku4yqjQqPLJFEv1OmqFBdMFUbEPJW+rGV6d2K0vgz8Fxrw9x
-	wSrg271Z8ykbxiqGjOHCLHK5NvyEb9fc4vg1PGOM89FAqdZo9QbOYzToegZhl25gwd8H
-	3Tmm7PEuY6JZQLcRhTmfLOu0GPOOIDbWZ7BTC3YYOfyHOE/+jmAWi8QmQujkqbNaGKhp
-	iaJ+cbwvGWw+6qKUJu+rynr3HwDgBsttRpaJbr/7tjZUDEHaHfjH0+5/UamiyletAxi0
-	0i8Q==
-X-Gm-Message-State: APjAAAWlOJ19m0FqvYLuw5KZ/19epzTOy+RQNlLpuKuOYQhwQOisE+cn
-	RALy/EwZWJJc2DtQDKSq0PXqzoisbdqqP/lDRnAs/Q==
-X-Google-Smtp-Source: APXvYqxLhZHvj+5zd83Fv/v9Q7x6hH/sMRB2KolVuK0Mu0xfuOkp/OHsKzL8LwPHxz5H+ApF5B09uDmUxe2sljbN050=
-X-Received: by 2002:a6b:b515:: with SMTP id e21mr5396672iof.258.1553768954692; 
-	Thu, 28 Mar 2019 03:29:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190325140526.12797-1-brgl@bgdev.pl>
-	<CAMKF1srKu+wFUc+PeAAiZidGBjA_5qR0VUZuK8dW2FXL5xt4PA@mail.gmail.com>
-	<CAMpxmJVeTvhf10yOOL2iVb+Hfv=z+-dU2p7tbAzqqs_QErY5ng@mail.gmail.com>
-	<CAMKF1soqJzfVZP=fJrCyCO90KJCZANmXpEBcLG9=KH_TV5tkGQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soqJzfVZP=fJrCyCO90KJCZANmXpEBcLG9=KH_TV5tkGQ@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Thu, 28 Mar 2019 11:29:03 +0100
-Message-ID: <CAMRc=McYmHhTrGGytkZWe1n86X-vdUe7sK9A=EurWWLG-7Lj4w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libgpiod: bump version to v1.3
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WT8q/w6nWR+faIcVuH+Zp034a6aeHaJ/6E266iC899k=;
+	b=SBr6Y6V1CazOkJ1/vWLFU68VM2wa9dOMKVcpmLPBOigPnPWS3D0cetv9O0mBXZHN3T
+	SDwjXBc9+3PUxp0Ntfw/bdwsxOVswVj6X3NiO4y4ThpkrsPjdjZAOERyDaZTDu3d0ak2
+	QUot+z5r07dj5nDuQDz7PuGMGDKdmcQmAcosi0RwJlqqc20GX/JoR0aBJIbRjsX8vJ84
+	269kpHH/bjcXqJzU6u1plQ1td2WbVVVc0rYexUYsRl2Kj6HxBTxqQA2S5+se4EGtIPrR
+	vmGIFvmue/0Ka1i60gOI0m2yblZEUWOUMTbticjLWEx+8h6P7RFueoLhiKnYAoivzBRm
+	2N5w==
+X-Gm-Message-State: APjAAAV10lPvi6mEbqhOkW1CpRbcI4J1MhHExhRWuoMd7ESFlPfQlwKM
+	uFH4OJ2ek8hYkKxtVaxm0Uk3M3Wu
+X-Google-Smtp-Source: APXvYqyxncKQuPPQYLt0CWoYcODRGTwA77jJo7kJk2ymEBjj0mLJBjdM8g7hx/RLWydhI7XNnnnjZA==
+X-Received: by 2002:a5d:6a0b:: with SMTP id m11mr10955013wru.290.1553770478613;
+	Thu, 28 Mar 2019 03:54:38 -0700 (PDT)
+Received: from Unimatrix05-Bionic.lan (93-34-152-112.ip50.fastwebnet.it.
+	[93.34.152.112])
+	by smtp.gmail.com with ESMTPSA id y9sm3369622wrn.18.2019.03.28.03.54.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 28 Mar 2019 03:54:37 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Mar 2019 11:54:34 +0100
+Message-Id: <20190328105434.32511-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] cpprest: bump version to 2.10.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,44 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2019 10:29:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Mar 2019 10:54:38 -0000
 
-pon., 25 mar 2019 o 18:30 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
->
-> On Mon, Mar 25, 2019 at 7:26 AM Bartosz Golaszewski
-> <bgolaszewski@baylibre.com> wrote:
-> >
-> > pon., 25 mar 2019 o 15:19 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a)=
-:
-> > >
-> > >
-> > >
-> > > On Mon, Mar 25, 2019 at 7:05 AM Bartosz Golaszewski <brgl@bgdev.pl> w=
-rote:
-> > >>
-> > >> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > >>
-> > >> There are several new features in this release. The one that impacts
-> > >> the recipe is the option to install the test executable to bindir us=
-ing
-> > >> the new options (--enable-install-tests). This requires separate
-> > >> PACKAGECONFIG entries for 0.x and 1.x series.
-> > >
-> > >
-> > > Perhaps it will be good to enable this feature automatically when pte=
-st is enabled via distro features
-> > >>
-> >
-> > Sure, how about a separate patch I'll send later this week?
->
-> okay that works too
+---
+ .../cpprest/{cpprest_2.10.11.bb => cpprest_2.10.12.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/cpprest/{cpprest_2.10.11.bb => cpprest_2.10.12.bb} (89%)
 
-A question about that: the testing framework for libgpiod requires a
-specific kernel module to be built (the gpio-mockup testing driver).
-How should I go about depending on it? I couldn't find any example of
-that.
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
+similarity index 89%
+rename from meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb
+rename to meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
+index 8ab72ff5f..903d70e2d 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.11.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
+@@ -10,8 +10,8 @@ EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
+ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
+            "
+ 
+-# tag 2.10.11
+-SRCREV= "a325079f7e1976e0485a212d8921ce9b837c1f2f"
++# tag 2.10.12
++SRCREV= "d4fb1cf7f7d22c12e2e442ba5a5e98d09b0a28ab"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
 
-Bart
 
