@@ -1,47 +1,52 @@
-Return-Path: <wak@google.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 38B067D0F1
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A160860107
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 09:04:43 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id a28so638392lfo.7
+	Thu, 28 Mar 2019 10:29:13 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id x7so16760547ioh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2019 02:04:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	Thu, 28 Mar 2019 03:29:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wEvYsgcMQwS+oRxohSYOp0GXwYYPUoCXtmRVARDtVxw=;
-	b=IcfyB5VQhiX2cwm8rUaf79b1YLOoaSKnlnR8NYOtdpyKPYIu6a5oL3gLPIgVqWbm6e
-	qNw8Gx7Z7lLbWZAxUDmoAykf0xy5yZU3nzQdmus/62EFRG9z43XYF0pAunRyVjwIW+XM
-	g7S0ItIGaD2v2v2naM4agiIqNQwsSsUj5HLmrTd5pBxr5PMvMQBs7S9uvkBOhRMCOGfW
-	3BgUOt8v5XnIDc7k+DidEd/P1GhahwSI3S8TduZyZX+XBDSJAw5lCkVVBlUZrXoMODLk
-	KasPoV6Ad2LQe0xQOVr+1WL93ZTO+sxsiAq28T8vcdtWpohHt4fvx6yQ5PQW/PGQ+XTX
-	4OTA==
+	:cc:content-transfer-encoding;
+	bh=SO1YXW2YBSJ+LnN21fghiBn4LOBI1Ht1f87pu1GMeCw=;
+	b=OXQyJx0Q4Bb2TrkHxyVWb1cSo8uZiTUT3XflE1jH+oiGNHwnGayTQ9+cmtqZjIO3QB
+	Neh143/8AH4OPmTOmj7vUhl0eSrX3LWrJ3PSZSmAD7TeWTQJdgz21PAha34nVRdNRsw1
+	ODZlRRRr3K7TX9cMo3LpHbL4aXtUsAlcfc9xkuIIw/S8CZMjmXEDXSItTI5uM8DvKed7
+	fZXAP3BB7bJpHo0DxHOsS/DRbRYiIYEn26g1B3j3uHecAwYB3Hn1ooXJSoFUphUzOLGQ
+	rdl8Fbzcs1Tl0ofQoYyDt5NdSj62tnPpez3XjeZXCqeHZEADRojz5Db6uKKcUfnEcpkk
+	wFOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wEvYsgcMQwS+oRxohSYOp0GXwYYPUoCXtmRVARDtVxw=;
-	b=Y5zehAtdkUGRAwzlVmR8zNxwcf5W0W3JI8NXGF/TIHzngu4BRlMZ0WnPPkvk+vunS+
-	F+vP/FOYhBvi5t2peM86AWZ8y1TcNxyoLWJTghnH9BVYbSslXI9Z2FkvQNmhTjvBkd8T
-	v3R9JvnBj5ahs4HkaGrgV1RHWtuloI379cLAJspaeY/BvAQ/7TMzJPVktGLwLk5b34qm
-	vlTCl4YFPWWi5HcKoQ3om+kLZhjfYLqI83ksra6SxFEfsysml2+ci6zUMy4PA7FcPP4o
-	fbu765YyW68dYsEJcExakboti86DZLYH1nTdXuUjc2VAU8aHxhhWAOX7FCw39edMrrG0
-	xWTA==
-X-Gm-Message-State: APjAAAUO50/Gl2yPmOWymmffK0DloWVMBkVED/pQApbUbDco479IVwU/
-	3ILfzjlD+y3fMifR6syXM97LlpUKhVBypoNs8xfKBQ==
-X-Google-Smtp-Source: APXvYqwhlw2JBVOb8V626g2KUo3ap9GtB+lqhHT5fk5BkgaAtjiHzjdVLbO9WE8SDICmKZJMz8r2yOGJkN4Z1jaFhto=
-X-Received: by 2002:ac2:44a2:: with SMTP id c2mr20913658lfm.155.1553763883527; 
-	Thu, 28 Mar 2019 02:04:43 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=SO1YXW2YBSJ+LnN21fghiBn4LOBI1Ht1f87pu1GMeCw=;
+	b=GTjpekLAa97LUu2d6L9Zj0OMaYxoESkVHzgMtgUA+FRahOxtnlGBQzuoc/REp65odJ
+	MuDDo/UL/s2p6LElQInsku4yqjQqPLJFEv1OmqFBdMFUbEPJW+rGV6d2K0vgz8Fxrw9x
+	wSrg271Z8ykbxiqGjOHCLHK5NvyEb9fc4vg1PGOM89FAqdZo9QbOYzToegZhl25gwd8H
+	3Tmm7PEuY6JZQLcRhTmfLOu0GPOOIDbWZ7BTC3YYOfyHOE/+jmAWi8QmQujkqbNaGKhp
+	iaJ+cbwvGWw+6qKUJu+rynr3HwDgBsttRpaJbr/7tjZUDEHaHfjH0+5/UamiyletAxi0
+	0i8Q==
+X-Gm-Message-State: APjAAAWlOJ19m0FqvYLuw5KZ/19epzTOy+RQNlLpuKuOYQhwQOisE+cn
+	RALy/EwZWJJc2DtQDKSq0PXqzoisbdqqP/lDRnAs/Q==
+X-Google-Smtp-Source: APXvYqxLhZHvj+5zd83Fv/v9Q7x6hH/sMRB2KolVuK0Mu0xfuOkp/OHsKzL8LwPHxz5H+ApF5B09uDmUxe2sljbN050=
+X-Received: by 2002:a6b:b515:: with SMTP id e21mr5396672iof.258.1553768954692; 
+	Thu, 28 Mar 2019 03:29:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190327032430.59511-1-wak@google.com>
-	<CAMKF1srK4zKuwA0zzo6zNpASu_yYp1W8txE+gzgBiP6vzWuzAA@mail.gmail.com>
-In-Reply-To: <CAMKF1srK4zKuwA0zzo6zNpASu_yYp1W8txE+gzgBiP6vzWuzAA@mail.gmail.com>
-From: William Kennington <wak@google.com>
-Date: Thu, 28 Mar 2019 02:04:32 -0700
-Message-ID: <CAPnigKmZvszOumY-EEbvTGcR2+-8EP3woGEbMyNrts2=s0N8kA@mail.gmail.com>
+References: <20190325140526.12797-1-brgl@bgdev.pl>
+	<CAMKF1srKu+wFUc+PeAAiZidGBjA_5qR0VUZuK8dW2FXL5xt4PA@mail.gmail.com>
+	<CAMpxmJVeTvhf10yOOL2iVb+Hfv=z+-dU2p7tbAzqqs_QErY5ng@mail.gmail.com>
+	<CAMKF1soqJzfVZP=fJrCyCO90KJCZANmXpEBcLG9=KH_TV5tkGQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soqJzfVZP=fJrCyCO90KJCZANmXpEBcLG9=KH_TV5tkGQ@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 28 Mar 2019 11:29:03 +0100
+Message-ID: <CAMRc=McYmHhTrGGytkZWe1n86X-vdUe7sK9A=EurWWLG-7Lj4w@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cli11: 1.6.2 -> 1.7.1
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libgpiod: bump version to v1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2019 09:04:43 -0000
+X-List-Received-Date: Thu, 28 Mar 2019 10:29:13 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yeah, sorry about that. This is a known issue with the gitsm and I
-sent out a patch yesterday
-https://patchwork.openembedded.org/series/16685/#
-this was followed up by a maintainer patch to implement similar update checking
-https://patchwork.openembedded.org/series/16702/#
+pon., 25 mar 2019 o 18:30 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
+>
+> On Mon, Mar 25, 2019 at 7:26 AM Bartosz Golaszewski
+> <bgolaszewski@baylibre.com> wrote:
+> >
+> > pon., 25 mar 2019 o 15:19 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a)=
+:
+> > >
+> > >
+> > >
+> > > On Mon, Mar 25, 2019 at 7:05 AM Bartosz Golaszewski <brgl@bgdev.pl> w=
+rote:
+> > >>
+> > >> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > >>
+> > >> There are several new features in this release. The one that impacts
+> > >> the recipe is the option to install the test executable to bindir us=
+ing
+> > >> the new options (--enable-install-tests). This requires separate
+> > >> PACKAGECONFIG entries for 0.x and 1.x series.
+> > >
+> > >
+> > > Perhaps it will be good to enable this feature automatically when pte=
+st is enabled via distro features
+> > >>
+> >
+> > Sure, how about a separate patch I'll send later this week?
+>
+> okay that works too
 
-I don't think we have consensus yet on a proper fix but hopefully we
-get something soon. This is breaking us in openbmc.
+A question about that: the testing framework for libgpiod requires a
+specific kernel module to be built (the gpio-mockup testing driver).
+How should I go about depending on it? I couldn't find any example of
+that.
 
-On Wed, Mar 27, 2019 at 9:30 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Tue, Mar 26, 2019 at 8:24 PM William A. Kennington III via
-> Openembedded-devel <openembedded-devel@lists.openembedded.org> wrote:
-> >
-> > LICENSE checksum updated to reflect a new copyright date being updated
-> > there.
-> >
-> fails to unpack
->
-> https://errors.yoctoproject.org/Errors/Details/234626/
->
-> > Signed-off-by: William A. Kennington III <wak@google.com>
-> > ---
-> >  .../recipes-support/cli11/{cli11_1.6.2.bb => cli11_1.7.1.bb}  | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-oe/recipes-support/cli11/{cli11_1.6.2.bb => cli11_1.7.1.bb} (79%)
-> >
-> > diff --git a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb b/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-> > similarity index 79%
-> > rename from meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-> > rename to meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-> > index e62c1d3d1..1ed97a27e 100644
-> > --- a/meta-oe/recipes-support/cli11/cli11_1.6.2.bb
-> > +++ b/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-> > @@ -2,8 +2,8 @@ SUMMARY = "C++11 command line parser"
-> >  DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
-> >  HOMEPAGE = "https://github.com/CLIUtils/CLI11"
-> >  LICENSE = "BSD-3-Clause"
-> > -LIC_FILES_CHKSUM = "file://LICENSE;md5=c271fee3ae28e11b24b97284d9f82887"
-> > -SRCREV = "bd4dc911847d0cde7a6b41dfa626a85aab213baf"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=8489f3831fc7b75264c1d5e346251a74"
-> > +SRCREV = "49ac989a9527ee9bb496de9ded7b4872c2e0e5ca"
-> >  PV .= "+git${SRCPV}"
-> >
-> >  SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
-> > --
-> > 2.21.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Bart
 
