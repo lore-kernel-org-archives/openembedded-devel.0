@@ -1,47 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id B8E5C7D1AD
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7469360291
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2019 21:34:17 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id q1so4298361wrp.0
+	Fri, 29 Mar 2019 22:02:31 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x2TM2VR8016057
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2019 14:34:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ELpjibPaA2RCQwoEScxWd8OeyrQB8iu7D0zxsKtfN6g=;
-	b=XE0lbSt6o6HSpc0wJrT3izcwvBMuJYUQiFLUxJgLssKJTID0eKgFmIysUpbSik/uuI
-	26sl8PKpj4uav9WsRyHIHYsyrh7sUMEpZ1KXggOXvUZG3oyQ+3IMgIQQWvtcCP3CKu1G
-	4Q+L0z9oWQXqxMnLRYl5Lza7TZKEN3DRgcnyMt5gmgGk2WLTkGmWm7264PXcqntkf+9Z
-	jlUDWBsR5nkVCDi14AQ1iyctsXl0BxALcNsmLMFTeYTK8K95fNU+UMtG6AJ4R+TEGUcq
-	kAYwDOFPgGcHwBIgxmSfJ466RzNKj6BqHyjDff/xNz+vpVx6UkkIxIdykFPSIsCxUaYF
-	gAAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ELpjibPaA2RCQwoEScxWd8OeyrQB8iu7D0zxsKtfN6g=;
-	b=UTrWlCVfCUOoSMIEfazdD1aCI/BtIFOqd/wFcHDor/Oqmx9T/wuQwmia5IeBxtHRfX
-	xUnSsf/aszCAFdP2igY07CiiPToYUHpAj2yIb0mm+0ApeZO3br8wCjXu5RB+rmyKcsdt
-	IsvKi2yvTEhCuxFIk7lMWKSA9DfyTi2S0ahEtH0eAAcY4918QseD49gk2GVFFY5g0Ps+
-	axlOv9FNI8qHZ19+dpbQ9fFzGHIsLvtXQPbxuoHdGEjOVnp2t3uLdjpn5AxyFtm0/UdP
-	spYbJv+Dw/bbo7zIEHrCftL6wFgmJHULdwg+7HZLwwNtXmuGE/Mp4KCNHF8H3+Ml9RCa
-	Mj3g==
-X-Gm-Message-State: APjAAAWPlVi654SrKMzhD0j7j8K6aRk4nrtCXxNW6FaBga52oLz3hgSM
-	SW01Hcgn9XIUhUiBj3eX7wOwtUhyFdsOEVxUUKY=
-X-Google-Smtp-Source: APXvYqxtguNmGsK7YMIM9F7krJjPS8yqE6GCKXe5Gx22bi7ODK0lsySLQzaYvNeL0FnL1gBHD4bvkV7JGyXEWPiJc2Y=
-X-Received: by 2002:a5d:68c6:: with SMTP id p6mr34368357wrw.321.1553895258315; 
-	Fri, 29 Mar 2019 14:34:18 -0700 (PDT)
+	Fri, 29 Mar 2019 15:02:31 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Fri, 29 Mar 2019 15:02:31 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Mar 2019 15:02:30 -0700
+Message-ID: <20190329220230.101196-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
 MIME-Version: 1.0
-References: <20190329204710.22747-1-Randy.MacLeod@windriver.com>
-In-Reply-To: <20190329204710.22747-1-Randy.MacLeod@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 29 Mar 2019 22:34:06 +0100
-Message-ID: <CA+chaQdaQJOXCjvx8F-5NQa=13eiPzQEGaE5XUF2KhLtP3RYWw@mail.gmail.com>
-To: Randy MacLeod <Randy.MacLeod@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] wolfssl: update to 3.15.8 and use github SRC_URI
+Subject: [meta-oe][PATCH 1/1] libssh2: move to version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,57 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2019 21:34:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 29 Mar 2019 22:02:31 -0000
+Content-Type: text/plain
 
-Don't use github archive which are generated from time to time with
-different checksums. Either use developer uploaded releases (if available)
-or git fetcher.
+Includes fixes for CVE-2019-3858, -3859, -3860, -3861, and -3862.
 
-On Fri, Mar 29, 2019 at 9:47 PM Randy MacLeod <Randy.MacLeod@windriver.com>
-wrote:
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../recipes-support/libssh2/{libssh2_1.8.0.bb => libssh2_1.8.2.bb}   | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libssh2/{libssh2_1.8.0.bb => libssh2_1.8.2.bb} (84%)
 
-> The previous SRC_URI did not work for the new version and
-> when looking at the site, users are required to navigate
-> through a click-through license agreement.
->
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> ---
->  .../wolfssl/{wolfssl_3.15.7.bb => wolfssl_3.15.8.bb}         | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.15.7.bb
-> => wolfssl_3.15.8.bb} (78%)
->
-> diff --git a/meta-networking/recipes-connectivity/wolfssl/
-> wolfssl_3.15.7.bb b/meta-networking/recipes-connectivity/wolfssl/
-> wolfssl_3.15.8.bb
-> similarity index 78%
-> rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
-> rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.8.bb
-> index 0a0a6075d..7690925f8 100644
-> --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
-> +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.8.bb
-> @@ -13,8 +13,9 @@ PROVIDES += "cyassl"
->  RPROVIDES_${PN} = "cyassl"
->
->  SRC_URI = "https://www.wolfssl.com/wolfssl-${PV}.zip"
-> -SRC_URI[md5sum] = "6ec08c09e3f51cccbb1686b4fd45f92f"
-> -SRC_URI[sha256sum] =
-> "4cc318c49580d3b9c361fe258fac6106624aa744f1d34e03977b587766a753ee"
-> +SRC_URI = "https://github.com/wolfSSL/wolfssl/archive/v${PV}.zip"
-> +SRC_URI[md5sum] = "5ba7af2bae27716a3d90e55565a08784"
-> +SRC_URI[sha256sum] =
-> "34605bb540ed091b1e4b2f14a1f6c7e3f26302f7c65f46378a27a6f0aa944881"
->
->  inherit autotools
->
-> --
-> 2.17.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.8.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+similarity index 84%
+rename from meta-oe/recipes-support/libssh2/libssh2_1.8.0.bb
+rename to meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+index 94bfb8f..fe853cd 100644
+--- a/meta-oe/recipes-support/libssh2/libssh2_1.8.0.bb
++++ b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+@@ -8,8 +8,9 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
+ 
+ SRC_URI = "http://www.libssh2.org/download/${BP}.tar.gz"
+-SRC_URI[md5sum] = "3d1147cae66e2959ea5441b183de1b1c"
+-SRC_URI[sha256sum] = "39f34e2f6835f4b992cafe8625073a88e5a28ba78f83e8099610a7b3af4676d4"
++
++SRC_URI[md5sum] = "616efd99af3d9ef731a26bed6cee9593"
++SRC_URI[sha256sum] = "088307d9f6b6c4b8c13f34602e8ff65d21c2dc4d55284dfe15d502c4ee190d67"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+2.7.4
+
 
