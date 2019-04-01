@@ -1,50 +1,48 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C1D76C108
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E0177D003
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Apr 2019 09:39:20 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id w1so11092404wrp.2
+	Mon,  1 Apr 2019 11:04:40 +0000 (UTC)
+Received: by mail-it1-f193.google.com with SMTP id y10so12555215itc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2019 02:39:21 -0700 (PDT)
+	Mon, 01 Apr 2019 04:04:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=OqAf0F7cE0iVtta4VGD+SqvBUNqd8HBDRKC3tzay5no=;
-	b=S3wsNnjj7vFnHedSeyBu1eWcF2tjxJqsEWhsOjy7g5gavmj3d2dcPvhRvjVYN+xAOP
-	9yxgvoT8+ZTIgQJwtkOzSnpocf4XiKR9TUe4HaqTzujZDzXSCOaopf08mwn+LLZQFJJN
-	NmSTQe+6/c8zqOmcA3JoAGdawN3eDcL//EoXZYtMZO2NphHXTOXqM8aAnBM12W9MJXc9
-	mbj08amOGCtrcZ0xAfZlij8FA9M9yIxN8b47tevOJqrzCU8aW+NQlhLTf360NPHo2qiX
-	yHk6FAAzIhlj+Gx9Vxqv8z9/4GA2K16Ym9W+/FcIwc9xYteKk6g5YJ4it8DoDlqNQrON
-	q0eA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=C7Z1S/aZpFYhpLkQjhSg6vV7DpZ4sI1YVgIWpKJ1txA=;
+	b=DyaAg+4Sb7sOidtw2PuKad8im4Juq4gnaGTqTE94s2dIYEUAsCYaLcufC4WKXtZ/rV
+	ZIZegKvreLmSDeZCakgryL6XbWTxafDEISJkSoQ3ubVDsBdtWqcwFmlLKjKwG5VI87rr
+	F5sOIifiOBwZvUNoOb8reYkk4tZ6o0MESjrXS7jaEIvk7moZCFeQiM+T8iQk04IfjpG0
+	3FbNQLg1rkTIvJIbJu4Qpywd411fujSztyl/xGYQodsZe1l3jUgdS6pBnd7wsQHHZW+c
+	px7KFdtgzUgz07o6RIFUv3LzTtzx1KPXPWm5felSFxLIQI4Vrd+FMZQKTS66qmv2IynK
+	SVSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OqAf0F7cE0iVtta4VGD+SqvBUNqd8HBDRKC3tzay5no=;
-	b=KjSj5LbadLJDKWYqlSL9bKwHpo1qhuhtLPqYo+HsEhMY4Zun8aw0xnEeQvrFXkGDcj
-	I8E0acdHgDL5Pd23K4/mV/alYD5dBbT/OI37EFbVLLCNaEjVSzwCe5PEaq8jEHub1uFE
-	0x5zdv1ciIGsjdvGTFSOQng5S9J6LULk6KvakzSBhRswBC3BgeHatlizuwAHywbJ+XLG
-	3QUk8F+QmAm3UnFBUnyX9YxNzs69kvRVSJuamDIc9mj917IA5pcl0NFDdUuXJBn3EEKn
-	g6ydcLyNTbT7e0Ju1GhFIscu6hSjIjGy2pwnx4lSFQi1aHn87zvW/D1avn+LqBWT8Rcg
-	xxtg==
-X-Gm-Message-State: APjAAAV/luekXLXkQnUkNfUAFrm6JjNPhpsUbOwhZiVRXj0Rqt0pT8sx
-	Sz+6qti8FufUjBZ1lnn9hdGOXaMV
-X-Google-Smtp-Source: APXvYqyY72PoBeMFMZmRRE370gFLupKvS+qqwUqH4Q1tj58hR1zlqwDnymMPsC6pxs8vnlRmqDroOg==
-X-Received: by 2002:adf:dc8e:: with SMTP id r14mr41414306wrj.118.1554111560869;
-	Mon, 01 Apr 2019 02:39:20 -0700 (PDT)
-Received: from Unimatrix05-Bionic.lan
-	([2001:b07:5d32:c012:6d2c:49fa:2112:b346])
-	by smtp.gmail.com with ESMTPSA id
-	x5sm15623269wmi.37.2019.04.01.02.39.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 01 Apr 2019 02:39:20 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Apr 2019 11:39:17 +0200
-Message-Id: <20190401093917.28952-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] libmodbus: start to prefer version 3.1.4, now that even Debian updated testing to it. Upstream declares this version as "very stable", so maybe it is really time to switch to it
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=C7Z1S/aZpFYhpLkQjhSg6vV7DpZ4sI1YVgIWpKJ1txA=;
+	b=YxuLtjNFI5fPMIWbuKQKHyVWEDAlok/OGJ7l4kJkYASxPnSzYgsoCrb4X+xs6J1hxG
+	V7rdUV4wLApVqX8xDdQP22CPam6KJzIfQmVDiZn5iyWJ8iJ6l4lCEk1LltqWGgAwyLNK
+	hoBa65cboXqTtxkf8QqswzGAMBa/FceddIIqTJnrG59ZGLb1C2UvgxKIBsGnAyeJrOvq
+	bGxF7kzIQuh3Nmog0eotJIT52DC3f9BQb2oeM4fCffdwVGiu4xfWP5ycKQvHcCn3THTC
+	ESG1/CG4wLjv9BLwivxsh6I8LhC7vKZxWMwODsWY8CqJ8ygtTBM6HOQKxgv8kkq4d3Mf
+	h/wQ==
+X-Gm-Message-State: APjAAAWfczbgnTm8q+svwcHilcxT+Cd4mNouweCO1jXeZsMCn0xEbsOY
+	mnn3z6S/CQgRyVhOBwfj+E/CFQrekiRbUh4H7e0=
+X-Google-Smtp-Source: APXvYqyHxhUuuwfhQdjq4iXOv++Eih7opPmrH1qwFJ/DlXa7nGVuspqQNRygi6GOLisosm3EBmlarBXOvY8/csajOEo=
+X-Received: by 2002:a24:1394:: with SMTP id 142mr16011851itz.54.1554116681685; 
+	Mon, 01 Apr 2019 04:04:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190401093917.28952-1-costamagnagianfranco@yahoo.it>
+In-Reply-To: <20190401093917.28952-1-costamagnagianfranco@yahoo.it>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Mon, 1 Apr 2019 13:04:30 +0200
+Message-ID: <CAB2nKc_+S3dJBMtCtF080vkcms0j=PgOpDJMn3OYV_GDXzCa=g@mail.gmail.com>
+To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libmodbus: start to prefer version 3.1.4, now that even Debian updated testing to it. Upstream declares this version as "very stable", so maybe it is really time to switch to it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,25 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2019 09:39:20 -0000
+X-List-Received-Date: Mon, 01 Apr 2019 11:04:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
----
- meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb | 3 ---
- 1 file changed, 3 deletions(-)
+Hi Gianfranco,
 
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
-index d438a0abc..cc45fa7e2 100644
---- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
-+++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
-@@ -1,7 +1,4 @@
- require libmodbus.inc
- 
--# Use the stable branch by default
--DEFAULT_PREFERENCE = "-1"
--
- SRC_URI[md5sum] = "b1a8fd3a40d2db4de51fb0cbcb201806"
- SRC_URI[sha256sum] = "c8c862b0e9a7ba699a49bc98f62bdffdfafd53a5716c0e162696b4bf108d3637"
--- 
-2.17.1
+This commit subject seems a bit long ?
+Otherwise, I use 3.1.4 for a while now without any problems, so I agree
+with your patch.
 
+Regards,
+Vincent
+
+Le lun. 1 avr. 2019 =C3=A0 11:39, Gianfranco Costamagna <
+costamagna.gianfranco@gmail.com> a =C3=A9crit :
+
+> ---
+>  meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+> b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+> index d438a0abc..cc45fa7e2 100644
+> --- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+> +++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+> @@ -1,7 +1,4 @@
+>  require libmodbus.inc
+>
+> -# Use the stable branch by default
+> -DEFAULT_PREFERENCE =3D "-1"
+> -
+>  SRC_URI[md5sum] =3D "b1a8fd3a40d2db4de51fb0cbcb201806"
+>  SRC_URI[sha256sum] =3D
+> "c8c862b0e9a7ba699a49bc98f62bdffdfafd53a5716c0e162696b4bf108d3637"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
