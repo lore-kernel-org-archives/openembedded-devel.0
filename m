@@ -1,52 +1,26 @@
-Return-Path: <nizovn@gmail.com>
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
-	[209.85.208.180])
-	by mail.openembedded.org (Postfix) with ESMTP id DE6587D013
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B6737CFCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Mar 2019 10:43:53 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id r24so5536707ljg.3
+	Mon,  1 Apr 2019 01:34:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x311YujJ000078
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Mar 2019 03:43:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=GNfDr/oobyah/Zi0lQzHSqsyQ+LBMrQc7J4h2BL+PMQ=;
-	b=UclVykfF4qyOdb7gCeyCgh2W3YeTKhNOvD724H0IDtMtpLIK3CTz+QW/e4dYd4Eq/B
-	Qfv0C4pwvo37nqIasM7tNDPd3v2iXp2Ij7CzU6adi+NmAU14DBwu33c7inxlCiRfYzUj
-	JSUXUZwG5m+c/Jt02LMtwWKqlefkj5b9RjdeoVKhXe+oJ9w4TjR5hCToD4HYPYCUitUu
-	gLzl2lRIG2kGv9aAxdgFvNedwQgAzZV9dc/MLf8j70m1rj7P3IF/x2DGN7QYhCiR9+sd
-	4MltiA+M+gxKT8idMueZAXpLQiu8qYGm6ob1yQefMOHU2fdnoixJQYrjDYrqngbBENQM
-	/WqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=GNfDr/oobyah/Zi0lQzHSqsyQ+LBMrQc7J4h2BL+PMQ=;
-	b=TRgjRs1SY1KYCPEGZjhLotc4ljV9//KtdpUvlcpZKIiH8MpL0nT5IjaxEaYd23tn4d
-	1q2jcGzOBwVxPI2Hx59FCl9kKbXEGG6/WvBt7YqJMHStVPArH0pFRs9hJTHSQ3rk1DWH
-	eG0TzL28ZBBKxKYlRG76E1T8uO3OuhYmC1g9xbbixCyeb6TnVPtSC5zv3DTbG4r7qSM1
-	KVGKw9hdPGv3kxpIy9HBqbSXyQ+nUJktzMau7WoobMd460Nwb33QNIZVZ2sAdcEE3bxb
-	vb6/H0NRz/jOW33ZwsghgwEAdUpba0sbVXHbTZZaAIPC2euQmCA1koWc7P4cNXmjJKgr
-	SZaA==
-X-Gm-Message-State: APjAAAXqaecJnJbSDe1qIQAYlK6I93XpWPgs2loW7TTBBQ627eykWuTc
-	uOYReYN+/26tJuVxd9pPDc1O1lCY
-X-Google-Smtp-Source: APXvYqyi8xFFXA02vRpuXC92lBQZZLck9YL/ldDfmudriahTnilRYGO1ylINMLjfnufdM9WKTsbCdA==
-X-Received: by 2002:a2e:950:: with SMTP id 77mr28788621ljj.113.1554029034333; 
-	Sun, 31 Mar 2019 03:43:54 -0700 (PDT)
-Received: from localhost.localdomain ([93.183.69.182])
-	by smtp.gmail.com with ESMTPSA id u3sm1414010lju.51.2019.03.31.03.43.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 31 Mar 2019 03:43:53 -0700 (PDT)
-From: Nikolay Nizov <nizovn@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 31 Mar 2019 13:43:27 +0300
-Message-Id: <20190331104327.28050-2-nizovn@gmail.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20190331104327.28050-1-nizovn@gmail.com>
-References: <20190331104327.28050-1-nizovn@gmail.com>
+	Sun, 31 Mar 2019 18:34:56 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Sun, 31 Mar 2019 18:34:55 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 1 Apr 2019 09:34:28 +0800
+Message-ID: <1554082469-11465-2-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1554082469-11465-1-git-send-email-yi.zhao@windriver.com>
+References: <1554082469-11465-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
-Cc: Nikolay Nizov <nizovn@gmail.com>
-Subject: [meta-oe][PATCH 2/2] android-tools-conf: Make sure /dev/pts/0 exists
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-python][PATCH 2/3] python-socketio: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,28 +33,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Mar 2019 10:43:54 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 01 Apr 2019 01:34:55 -0000
+Content-Type: text/plain
 
-Signed-off-by: Nikolay Nizov <nizovn@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../android-tools/android-tools-conf/android-gadget-setup      | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-demo/recipes-devtools/python/python-socketio.inc   | 17 +++++++++++++++++
+ .../recipes-devtools/python/python-socketio_4.0.0.bb    |  2 ++
+ .../recipes-devtools/python/python3-socketio_4.0.0.bb   |  2 ++
+ 3 files changed, 21 insertions(+)
+ create mode 100644 meta-demo/recipes-devtools/python/python-socketio.inc
+ create mode 100644 meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb
+ create mode 100644 meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
-index 0e04f7dbe..beca353e6 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
-@@ -1,5 +1,8 @@
- #!/bin/sh
- 
-+[ ! -e /dev/pts ] && mkdir -p /dev/pts
-+[ ! -e /dev/pts/0 ] && mount devpts /dev/pts -t devpts
+diff --git a/meta-demo/recipes-devtools/python/python-socketio.inc b/meta-demo/recipes-devtools/python/python-socketio.inc
+new file mode 100644
+index 0000000..a23e780
+--- /dev/null
++++ b/meta-demo/recipes-devtools/python/python-socketio.inc
+@@ -0,0 +1,17 @@
++SUMMARY = "Socket.IO server"
++HOMEPAGE = "https://github.com/miguelgrinberg/python-socketio/"
++SECTION = "devel/python"
 +
- # TODO enable the lines below once we have support for getprop
- # retrieve the product info from Android
- # manufacturer=$(getprop ro.product.manufacturer Android)
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
++
++inherit pypi
++
++PYPI_PACKAGE = "python-socketio"
++
++SRC_URI[md5sum] = "0b57da61a9464d2e0dc9a8d0164d86d2"
++SRC_URI[sha256sum] = "64feb0817f1bf7e3e7fc05f6f65e28d76146d8061cb7de25b63502717f80e908"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-engineio \
++    "
+diff --git a/meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb b/meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb
+new file mode 100644
+index 0000000..e25a6b3
+--- /dev/null
++++ b/meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-socketio.inc
+diff --git a/meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb b/meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb
+new file mode 100644
+index 0000000..ce83d09
+--- /dev/null
++++ b/meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-socketio.inc
 -- 
-2.19.2
+2.7.4
 
 
