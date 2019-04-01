@@ -1,103 +1,54 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B60187D1AA;
-	Mon,  1 Apr 2019 23:20:41 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id w23so2292804ply.4;
-	Mon, 01 Apr 2019 16:20:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=5+m6EgkvYaAFD8U3fNifKXL9GZ0h5NTRcOIQ7f8iSdw=;
-	b=rw6LirrDMtdgMcesmJxrC5oXXTTmN1ASjZj6dYbw5FKQzNS5eicXkwIfa8wZ/URCeS
-	FTJDvVD2oGMO3njkYAdaSp+nv/S7iwnciQ0AVg/pHdp0YHgSwyLeRDj+Zde5WYepwPd3
-	n3wmvObrHXP3aM03F44L2FZL6wJ3B5W655CCwk/x5uVPmrplpVE0PgZu6I7FBvBcDTiD
-	g03GvwxgpthOZ4CoRWHHveRJJmP3To+6Lde6Pfmo1nUFwd4sjtZmLGqCzQ+sl+MllKyA
-	bxz/hWwnFCNrDM8KGBVoPAzBOvYtIwOoBtetwN7i7BhKo+5qRaAMuRPI6mYjFdAnVoin
-	CZbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language;
-	bh=5+m6EgkvYaAFD8U3fNifKXL9GZ0h5NTRcOIQ7f8iSdw=;
-	b=UhCZi4rHS4gecYOPqX9jVsZF1ph8NT/fMhZ1gl+JkeACzRzE34CKTaR2GvNyWdL2cH
-	mn4lOC2TIsmdFIh5g+kzxP5KcbEXxj5bV64EKmBQeb1bT3ybZ+JUGYMPljNaZ8wBmcUt
-	HxyLo0iEuBAzXNlBTAY7IJaWDdUvbNL0suVrXphF1FvfHV3JpGcz33atibnHXEOY0E4E
-	d8VEL9bggw+Ei3njdbIGAdbgNOmF9PJA3InaIZhsQeEB/hPFC8g1GV7mDEIIlIajqtCe
-	qPX501RfzqV5CFa58NlYD7oHeL2lc1Zjc4+/U2LLmBb5tuFEb7n99WncQEbHWDBHXbY5
-	i4kQ==
-X-Gm-Message-State: APjAAAXUA23Y9nahmKTcxb0xPQlfikZaCNiC4QDtdxaFdlxk/51g8y6c
-	fGgPR7fYiablCRyzwu2itKI=
-X-Google-Smtp-Source: APXvYqzYeIccJ3RXPF5Li3FXWAvUBthoxU8CdJGYBLoUJloWgIpfPCg62c0W6e1GNRwm/epMyGpVTg==
-X-Received: by 2002:a17:902:703:: with SMTP id
-	3mr32826841pli.224.1554160842725; 
-	Mon, 01 Apr 2019 16:20:42 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:4157:7fb6:2684:2e1?
-	([2601:202:4180:c33:4157:7fb6:2684:2e1])
-	by smtp.gmail.com with ESMTPSA id
-	j19sm9820939pfh.41.2019.04.01.16.20.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 01 Apr 2019 16:20:42 -0700 (PDT)
-To: Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 898D77D209;
+	Mon,  1 Apr 2019 23:41:25 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x31NfONA025187
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 1 Apr 2019 16:41:24 -0700 (PDT)
+Received: from soho-mhatle-m.local (172.25.36.230) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Mon, 1 Apr 2019 16:41:23 -0700
+To: akuster808 <akuster808@gmail.com>, Richard Purdie
+	<richard.purdie@linuxfoundation.org>, Patches and discussions about the
+	oe-core layer <openembedded-core@lists.openembedded.org>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
 References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
 	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-From: akuster808 <akuster808@gmail.com>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
 Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
-Date: Mon, 1 Apr 2019 16:20:41 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+Autocrypt: addr=mark.hatle@windriver.com; prefer-encrypt=mutual; keydata=
+	mQENBFYKxFgBCACt/pzutBp6p/xVKTFJjHbM3KpQKCblyot/YP+bpTr51Hrc5xDXBQhoG7TC
+	aIRvRIvbhEevEQK9y04gW3JK/5lobq5ORebolcsHlYBUvpNeIPjupLQwGvz/TPtrLRNGLqDC
+	rvsM6OA2XbQ2bwzxWaSQS3ImE2O2iXOZn9HhThMGeDB4Nff3fgUvXOTDIrgWOn9K2DgLL7Yc
+	zkUIlFdj+Nraksd/7BSk8oH6tjeBVhFqSFvKta9QxWgdr58oPaTYaW/xNqUjlLrbJuMw/MSe
+	xzuYfdfDfm6J8kRjMOnwQ0n8svJElzqAk+d83ow38gpGQ+LkjGgnf8ZFJ4rUJFADroX3ABEB
+	AAG0JU1hcmsgSGF0bGUgPG1hcmsuaGF0bGVAd2luZHJpdmVyLmNvbT6JATcEEwEIACEFAlYK
+	xFgCGwMFCwkIBwIGFQgJCgsCBBYCAwECHgECF4AACgkQfv796/r0vvlvZAf9Gs+eN320yhRW
+	V/fZCsngKhmOK4v3HrTwFrkSmoD9QHQiE/5IPdNacHwIPwZx07tNBohB8xOeNqCPRYRBwGhA
+	AnxKOPyd0nnm6ZhPzbA57v4x3IGRQr4QzvcBTASJq91l3Ew4lpAslyx5w1DPPqRD7G8ycDKg
+	peKyDwmdkvCunVisSAQI3XIMq2y230biTO98tDPEezg+lg+yTsz9ZT33F5KNuWrpf8VL5fG/
+	mt+kAv7wtsx/KTRbqhH3iFXF6eBSwMjAfTXFlkLfbM9riJGXrWEl9n2S2R3cDHNHug0lb8f4
+	whK370KEO4OwRKIYW/VUBmzk5XZUE9DTlDSV8ycsrrkBDQRWCsRYAQgAwK3FuHCE+HW3YWdH
+	PUjeSn5p//xJ57u8g2rng8zm9zNjmYgpPv5UxozaD9i2jf4mlQLHGGOezhHae8K4Nj70oVcv
+	8AmwcrJa9i9WL1oy/9R3fHMWf/Ctt9VXTO0qlCuq6PDzaUfvsXR61aJIjTKNQTOjCLjY1vXm
+	VSewUgARysmA8WrjTfwGBihMBxAX0+kIjx8nOlam0WvekMBXZ0AbS56oTLRxYao6DI3GeB/N
+	oWPy/5DfuTKaSdM0Pf8al20x9RuNN5/HLMlyDH/k8bIa1xd9aAqW+Feiw5gC107V2E6ULyIy
+	q6em2UrsmIRxrvpHqbNgQKqvTehJ+V/i4g/uOwARAQABiQEfBBgBCAAJBQJWCsRYAhsMAAoJ
+	EH7+/ev69L755XAH/3ZcNhooqd9OBhFkvXm1iWZ8EoC7motWqVn2oEyxoonsg8AD9kFXiN+T
+	dYp7dH99EZu9q4ptj56AXm4uHzOgywL/5/V2TY6twCGAjUGzDjAB5gzoi+JLIBlDiyOip0eL
+	QswIhRk473xy3j8DA4oVamnSPWgyNJ+qsdt37YWDzoDFFvtDoRU7Eb+znfIMDKzlny0XU/8L
+	cW1bNHJlpv/78GPdfP4tjysEd8MuA5jf5o5w4XqcwTqalffEJtQ/s3pbkstEi7qm5uPui5Kt
+	gq6YYLSqcSNe0GWAF9/T+qwyo7burSTxUWCWtMmlXdAQLW9SynLhB3Jbch0nFAh0fCKi6yY=
+Organization: Wind River Systems
+Message-ID: <6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
+Date: Mon, 1 Apr 2019 18:41:22 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+	Gecko/20100101 Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
 Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -111,75 +62,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2019 23:20:41 -0000
+X-List-Received-Date: Mon, 01 Apr 2019 23:41:26 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
+On 4/1/19 6:20 PM, akuster808 wrote:
+> 
+> 
+> On 4/1/19 4:02 PM, Richard Purdie wrote:
+>> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
+>>> Hello,
+>>>
+>>> I have noticed a large number of git commits with no header
+>>> information being accepted.
+>> Can you be more specific about what "no header information" means? You
+>> mean a shortlog and no full log message?
+> Commits with just a "subject" and signoff. No additional information
 
+If you can convey the reason for the change in just the subject, that is
+acceptable.. but there is -always- supposed to be a signed-off-by line according
+to our guidelines.
 
-On 4/1/19 4:02 PM, Richard Purdie wrote:
-> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
->> Hello,
+So if you see this, I think we need to step back and figure out where and why
+it's happening and get it resolved in the future.
+
+(Places I've seen in the past were one-off mistakes and clearly that -- so it
+wasn't anything that we needed to work on a correction.)
+
+--Mark
+
+> We tend to reference back to how the kernel does things.
+> 
+> https://www.kernel.org/doc/html/latest/process/submitting-patches.html
+> These two sections in particular.
+> 
+> 
+>     2) Describe your changes
+> 
+> Describe your problem. Whether your patch is a one-line bug fix or 5000 lines of
+> a new feature, there must be an underlying problem that motivated you to do this
+> work. Convince the reviewer that there is a problem worth fixing and that it
+> makes sense for them to read past the first paragraph.
+> 
+> 
+> along with this section.
+> 
+> 
+>     14) The canonical patch format
+> 
+> This section describes how the patch itself should be formatted. Note that, if
+> you have your patches stored in a |git| repository, proper patch formatting can
+> be had with |git format-patch|. The tools cannot create the necessary text,
+> though, so read the instructions below anyway.
+> 
+> The canonical patch subject line is:
+> 
+> Subject: [PATCH 001/123] subsystem: summary phrase
+> 
+> The canonical patch message body contains the following:
+> 
+>       * A |from| line specifying the patch author, followed by an empty line
+>         (only needed if the person sending the patch is not the author).
+>       * The body of the explanation, line wrapped at 75 columns, which will be
+>         copied to the permanent changelog to describe this patch.
+>       * An empty line.
+>       * The |Signed-off-by:| lines, described above, which will also go in the
+>         changelog.
+>       * A marker line containing simply |---|.
+>       * Any additional comments not suitable for the changelog.
+>       * The actual patch (|diff| output).
+> 
+> 
+>     - Armin
+> 
+>> Cheers,
 >>
->> I have noticed a large number of git commits with no header
->> information being accepted.
-> Can you be more specific about what "no header information" means? You
-> mean a shortlog and no full log message?
-Commits with just a "subject" and signoff. No additional information
-
-We tend to reference back to how the kernel does things.
-
-https://www.kernel.org/doc/html/latest/process/submitting-patches.html
-These two sections in particular.
-
-
-    2) Describe your changes
-
-Describe your problem. Whether your patch is a one-line bug fix or 5000
-lines of a new feature, there must be an underlying problem that
-motivated you to do this work. Convince the reviewer that there is a
-problem worth fixing and that it makes sense for them to read past the
-first paragraph.
-
-
-along with this section.
-
-
-    14) The canonical patch format
-
-This section describes how the patch itself should be formatted. Note
-that, if you have your patches stored in a |git| repository, proper
-patch formatting can be had with |git format-patch|. The tools cannot
-create the necessary text, though, so read the instructions below anyway.=
-
-
-The canonical patch subject line is:
-
-Subject: [PATCH 001/123] subsystem: summary phrase
-
-The canonical patch message body contains the following:
-
-      * A |from| line specifying the patch author, followed by an empty
-        line (only needed if the person sending the patch is not the
-        author).
-      * The body of the explanation, line wrapped at 75 columns, which
-        will be copied to the permanent changelog to describe this patch.=
-
-      * An empty line.
-      * The |Signed-off-by:| lines, described above, which will also go
-        in the changelog.
-      * A marker line containing simply |---|.
-      * Any additional comments not suitable for the changelog.
-      * The actual patch (|diff| output).
-
-
-    - Armin
-
->
-> Cheers,
->
-> Richard
->
+>> Richard
+>>
+> 
+> 
 
 
