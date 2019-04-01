@@ -1,46 +1,50 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 094247D007
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C1D76C108
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Apr 2019 07:11:00 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id y7so10407875wrn.11
+	Mon,  1 Apr 2019 09:39:20 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id w1so11092404wrp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2019 00:11:02 -0700 (PDT)
+	Mon, 01 Apr 2019 02:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=Zh9/fmCgluSFIC2sJCPa+DlGBL2IR8UU3s2RJhei0b0=;
-	b=hHsNl8v0vSIoNzjK1vSaD0bGD4jYWtNmgI8NW7ybG6AhXUmwKGMQDNM8IEP0NeV+9a
-	TOanGJdtUQGSf8zlspSLQhRJgIw6t39s6qULfH/S5Ad9n61iK5F+diuv7aPZ8sz6YY5d
-	I0lw5BA9Ctha4dqwrUn60XlsiL6UesQYB6UxvqmB3rMHVqcLDjATVu/tv6Y/qQbCL9Um
-	r8H7TBsmy0APyayx8AgORjGT1SDNu00adf8jFADGLcHORUV2EST+2k+h9ezDQKhRU5zi
-	mm5197I+qvQzTFxHlredNdmV1ucugVWxzh924wqM8M0+uDRwaUWcvom8Bqf8A/Jd+x4F
-	+Bdw==
+	bh=OqAf0F7cE0iVtta4VGD+SqvBUNqd8HBDRKC3tzay5no=;
+	b=S3wsNnjj7vFnHedSeyBu1eWcF2tjxJqsEWhsOjy7g5gavmj3d2dcPvhRvjVYN+xAOP
+	9yxgvoT8+ZTIgQJwtkOzSnpocf4XiKR9TUe4HaqTzujZDzXSCOaopf08mwn+LLZQFJJN
+	NmSTQe+6/c8zqOmcA3JoAGdawN3eDcL//EoXZYtMZO2NphHXTOXqM8aAnBM12W9MJXc9
+	mbj08amOGCtrcZ0xAfZlij8FA9M9yIxN8b47tevOJqrzCU8aW+NQlhLTf360NPHo2qiX
+	yHk6FAAzIhlj+Gx9Vxqv8z9/4GA2K16Ym9W+/FcIwc9xYteKk6g5YJ4it8DoDlqNQrON
+	q0eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Zh9/fmCgluSFIC2sJCPa+DlGBL2IR8UU3s2RJhei0b0=;
-	b=p77+7ogQU3HsbJ3T0GXskFkpgkVskM62DHd1ENEWWm3phblOAldyBMEPApA4HOKlco
-	ZeG4tjNY72M7z+U6JI60ZaZP2RIzEZwuCgqHaP24BgrcUMDWdUtukUhUdJ6BHtEQ4aF3
-	ljB4DhIl6gCZJMNfiHxf8m3rv+L0eizWCWVPnpZN3bOH35Qi51znvZ0QizWOeYxGUAgM
-	cDZLFdeHpZGf1XYoNG67tHdFO3npzLTLQ+C57BWymkjQrKVFDkn0EUk53Ld3QFnGrCg+
-	ibRA5/saaTNjsyB7/dloI60kfq3qxyZU12eoi77ZfUaSBtTVWGDcBjGLxl/nNSUo75RO
-	Ql6w==
-X-Gm-Message-State: APjAAAXg/XKJ+HdPedHhxOSk02uBMdi/WmXhdf8pGYzEbLomkQIb9YGp
-	2WJyDe+CU7tSxfcWI/RCZOCTmZOG
-X-Google-Smtp-Source: APXvYqwhJpDrgnyEjbvWa6ZWXKXcAlO94ulbPKzsrSxjOgwZUB4gqFkJtFrMiI3G31NX5i7FZSOU4Q==
-X-Received: by 2002:adf:cd90:: with SMTP id q16mr38582683wrj.75.1554102661421; 
-	Mon, 01 Apr 2019 00:11:01 -0700 (PDT)
-Received: from VM-VPR.corporate.saft.org ([80.215.128.92])
-	by smtp.gmail.com with ESMTPSA id r9sm8615522wrv.82.2019.04.01.00.11.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 01 Apr 2019 00:11:00 -0700 (PDT)
-From: Vincent Prince <vincent.prince.fr@gmail.com>
+	bh=OqAf0F7cE0iVtta4VGD+SqvBUNqd8HBDRKC3tzay5no=;
+	b=KjSj5LbadLJDKWYqlSL9bKwHpo1qhuhtLPqYo+HsEhMY4Zun8aw0xnEeQvrFXkGDcj
+	I8E0acdHgDL5Pd23K4/mV/alYD5dBbT/OI37EFbVLLCNaEjVSzwCe5PEaq8jEHub1uFE
+	0x5zdv1ciIGsjdvGTFSOQng5S9J6LULk6KvakzSBhRswBC3BgeHatlizuwAHywbJ+XLG
+	3QUk8F+QmAm3UnFBUnyX9YxNzs69kvRVSJuamDIc9mj917IA5pcl0NFDdUuXJBn3EEKn
+	g6ydcLyNTbT7e0Ju1GhFIscu6hSjIjGy2pwnx4lSFQi1aHn87zvW/D1avn+LqBWT8Rcg
+	xxtg==
+X-Gm-Message-State: APjAAAV/luekXLXkQnUkNfUAFrm6JjNPhpsUbOwhZiVRXj0Rqt0pT8sx
+	Sz+6qti8FufUjBZ1lnn9hdGOXaMV
+X-Google-Smtp-Source: APXvYqyY72PoBeMFMZmRRE370gFLupKvS+qqwUqH4Q1tj58hR1zlqwDnymMPsC6pxs8vnlRmqDroOg==
+X-Received: by 2002:adf:dc8e:: with SMTP id r14mr41414306wrj.118.1554111560869;
+	Mon, 01 Apr 2019 02:39:20 -0700 (PDT)
+Received: from Unimatrix05-Bionic.lan
+	([2001:b07:5d32:c012:6d2c:49fa:2112:b346])
+	by smtp.gmail.com with ESMTPSA id
+	x5sm15623269wmi.37.2019.04.01.02.39.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 01 Apr 2019 02:39:20 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Apr 2019 09:10:42 +0200
-Message-Id: <1554102642-12899-1-git-send-email-vincent.prince.fr@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] Rsyslog: Add mmjsonparse to PACKAGECONFIG
+Date: Mon,  1 Apr 2019 11:39:17 +0200
+Message-Id: <20190401093917.28952-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] libmodbus: start to prefer version 3.1.4, now that even Debian updated testing to it. Upstream declares this version as "very stable", so maybe it is really time to switch to it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,37 +57,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2019 07:11:01 -0000
+X-List-Received-Date: Mon, 01 Apr 2019 09:39:20 -0000
 
-Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb
-index e06141e..f1a6e85 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb
-@@ -68,6 +68,7 @@ PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
- PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
- PACKAGECONFIG[imjournal] = "--enable-imjournal,--disable-imjournal,"
-+PACKAGECONFIG[mmjsonparse] = "--enable-mmjsonparse,--disable-mmjsonparse,"
- PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
- PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
- PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
-@@ -136,6 +137,10 @@ do_install_append() {
-         install -d 0755 ${D}${sysconfdir}/rsyslog.d
-         echo '$ModLoad imjournal' >> ${D}${sysconfdir}/rsyslog.d/imjournal.conf
-     fi
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'mmjsonparse', 'true', 'false', d)}; then
-+        install -d 0755 ${D}${sysconfdir}/rsyslog.d
-+        echo '$ModLoad mmjsonparse' >> ${D}${sysconfdir}/rsyslog.d/mmjsonparse.conf
-+    fi
- }
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+index d438a0abc..cc45fa7e2 100644
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+@@ -1,7 +1,4 @@
+ require libmodbus.inc
  
- FILES_${PN} += "${bindir}"
+-# Use the stable branch by default
+-DEFAULT_PREFERENCE = "-1"
+-
+ SRC_URI[md5sum] = "b1a8fd3a40d2db4de51fb0cbcb201806"
+ SRC_URI[sha256sum] = "c8c862b0e9a7ba699a49bc98f62bdffdfafd53a5716c0e162696b4bf108d3637"
 -- 
-2.7.4
+2.17.1
 
 
