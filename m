@@ -1,53 +1,53 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
-	[209.85.166.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 208437CE79
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+	[209.85.128.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BABFB60116
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Apr 2019 04:45:23 +0000 (UTC)
-Received: by mail-it1-f193.google.com with SMTP id y204so2958943itf.3
+	Tue,  2 Apr 2019 06:46:02 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id w15so2166175wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2019 21:45:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=P2t5e91PvXtQ1vk6gpBPehsQ8MAV3ilydskB33y3WMw=;
-	b=JhssEqPPvGY24JU6uh+PqXgLZUPPUHzM+0np+s7CYFZEg/x2ogMZexQP6y9zUgi+bH
-	2FX89YZ0Q8mrWk2T2gJl97XBHepFbnKNs4ihUeN26xnOdVKEiFUIhbOY1kNagQOET4wo
-	PGjz3IrZGaeZA6jb2MlWqq2SG133TJQ8q5890pUw/OpNouiR7hQUOPD8/uNLY91n7XJk
-	W8KJTElFro/gzwcA+aVfpLj+Z3dO/w6TUktZjAfq8EqNNfYLXynAzIXsy2XOx8rxaa8H
-	cmX195cX1+Gy0sff5wpwGPMufnDpUQR1bYAG1pDZsl4a8faoZ9mI5s3QFiwNzdEFDJDk
-	WWzg==
+	Mon, 01 Apr 2019 23:46:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7l+v6nJ+KPwFXiSY0PYa4K9cuq97UVS4bnNIjfmd/FA=;
+	b=kFuD6l8pcqw5R7I1HI6op4xzETXFer9g83yRVpMfv2G7uHg7Lh9inPDJHMkhsrnA8B
+	V25yQpB7djboKWQM8K9LAw4eGUt0zTINAxcO7XSgMLuSVMK6gAo1p5Phz/1hGNGD9K64
+	V7I9HCJCrtUmKnWwmhjCx9gcKIEcEkzf21ImFjGvgaxueSEEcNLLRD+F9p6AXIP80VxK
+	W/BuJxk43JlZHxObir6ZDGL5mwz8jkTsNpVmdgh90D1eCEeOMCWJ+OHDaZ5t08sZbSi4
+	HOVMOZx8bMWZbaqo20AB5rS+jkAjpZ7fLSJq/mZEIJj5Zl/sDoVYcRgo183bMSbdOqkR
+	nH0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=P2t5e91PvXtQ1vk6gpBPehsQ8MAV3ilydskB33y3WMw=;
-	b=HGuaQ0cWxWsjEeuig1VuQs/PaF5DXBp7wC7xqhcYyuEtmmseMGUjHBUwKOTGFP/Ia+
-	OZ6FF/A5ulrC8pStiG4fmbAoqYclgw3TRQ5euxuy2uZ6BzMIZ9Iy7nA45OEyfR9pgMoD
-	RaYp8mDDi2CxkLTYeTbyx0hw2BMarDEfhmm+c/e790udw6KK189H7puo0LH3rLkcsN5g
-	SL9kTB2Qvw9CMkezDGNgTw+Bm8DqunPKykxWVjLjLJk9MMsFhrVi41iFYBtjMmZ4+260
-	oH3ZP0R+2BKgZJqMTEGMzA2gjr1jD7D72L7xetVLWn2ycTaUGrPdrykh+igTARDQMeo6
-	n8/A==
-X-Gm-Message-State: APjAAAUWGJVcg7wV+iijP+S/m3Gz5br2LZUq2LamG2rcWzEC4a+jDiI0
-	dVSz1FI/3LOFp5/qxxdicGxEIVIn+/S3kG023KnT4A==
-X-Google-Smtp-Source: APXvYqwB53u160M+/OAKKEssIgGZTG24h2X6oQRBw/ocLh2wZFIORSQ9Av/q/d5V4nx7K7wky4DjkFAgl36d4UkeW9M=
-X-Received: by 2002:a24:55d8:: with SMTP id e207mr2320877itb.119.1554180324762;
-	Mon, 01 Apr 2019 21:45:24 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7l+v6nJ+KPwFXiSY0PYa4K9cuq97UVS4bnNIjfmd/FA=;
+	b=iX+accyYMBr6tsw2iWPqXU3d/Xf4k9nXugB/wsjfVoGYCZ8IEnG7PSxFm5zMwtnNPI
+	yEiCdgHHxZDPVKyJI5tJxiOuFT9uDOLVVJ4wgi3Aa8/u/WlzjvMFzYJqdq3ApiM1U/rB
+	j/UtgzDEffJPaoS6otWjuB6pKWMqRve06FnJLnpv6Rpm2X1P08FUHJFW6UFJQCgqraC8
+	itZ870b/SDE65BAtzmvtR1RGL8O3Br+6aI/VHmmqAc5J0uMn5Pk1A8Cb2Z5+VjeoYGOC
+	TmULPQq5nHqUQvnLbsE02mOclfLsBZU41KA6M4UYH0pYFVxbL2G/HwijFosozBFAtTBJ
+	hORA==
+X-Gm-Message-State: APjAAAWgl7V8u9KarUuQT4nPWNrJF448FdSQngmO3mviLa62u+RifDW4
+	WyjBKg7MBK/pwP4kpXjsMAuxX/cn
+X-Google-Smtp-Source: APXvYqy5LyT6SIk1nham7E3tdWNakX8qYBycvOYy3BAvHPnV0D4WhYX+7k7PoFogtdkty+jKBj7aKw==
+X-Received: by 2002:a7b:c5d6:: with SMTP id n22mr2250767wmk.112.1554187563274; 
+	Mon, 01 Apr 2019 23:46:03 -0700 (PDT)
+Received: from mueller-a-nb-linux.speedport.ip
+	(p200300F07F2CB720F13E25CAD2D2B3C2.dip0.t-ipconnect.de.
+	[2003:f0:7f2c:b720:f13e:25ca:d2d2:b3c2])
+	by smtp.gmail.com with ESMTPSA id
+	z84sm18540828wmg.24.2019.04.01.23.46.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 01 Apr 2019 23:46:02 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Apr 2019 08:45:54 +0200
+Message-Id: <20190402064554.22908-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
-	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
-	<6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
-In-Reply-To: <6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
-From: Jon Mason <jdmason@kudzu.us>
-Date: Tue, 2 Apr 2019 04:45:16 +0000
-Message-ID: <CAPoiz9yat-4XRgSFikh5PxrsgVpRAWNi2dx1O0+_iHyVR529Ag@mail.gmail.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Git commit process question.
+Subject: [PATCH] gvfs: fix configure options and DDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,102 +60,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2019 04:45:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 02 Apr 2019 06:46:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 2, 2019 at 6:41 AM Mark Hatle <mark.hatle@windriver.com> wrote:
->
-> On 4/1/19 6:20 PM, akuster808 wrote:
-> >
-> >
-> > On 4/1/19 4:02 PM, Richard Purdie wrote:
-> >> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
-> >>> Hello,
-> >>>
-> >>> I have noticed a large number of git commits with no header
-> >>> information being accepted.
-> >> Can you be more specific about what "no header information" means? You
-> >> mean a shortlog and no full log message?
-> > Commits with just a "subject" and signoff. No additional information
->
-> If you can convey the reason for the change in just the subject, that is
-> acceptable.. but there is -always- supposed to be a signed-off-by line according
-> to our guidelines.
->
-> So if you see this, I think we need to step back and figure out where and why
-> it's happening and get it resolved in the future.
->
-> (Places I've seen in the past were one-off mistakes and clearly that -- so it
-> wasn't anything that we needed to work on a correction.)
->
-> --Mark
->
-> > We tend to reference back to how the kernel does things.
-> >
-> > https://www.kernel.org/doc/html/latest/process/submitting-patches.html
-> > These two sections in particular.
-> >
-> >
-> >     2) Describe your changes
-> >
-> > Describe your problem. Whether your patch is a one-line bug fix or 5000 lines of
-> > a new feature, there must be an underlying problem that motivated you to do this
-> > work. Convince the reviewer that there is a problem worth fixing and that it
-> > makes sense for them to read past the first paragraph.
-> >
-> >
-> > along with this section.
-> >
-> >
-> >     14) The canonical patch format
-> >
-> > This section describes how the patch itself should be formatted. Note that, if
-> > you have your patches stored in a |git| repository, proper patch formatting can
-> > be had with |git format-patch|. The tools cannot create the necessary text,
-> > though, so read the instructions below anyway.
-> >
-> > The canonical patch subject line is:
-> >
-> > Subject: [PATCH 001/123] subsystem: summary phrase
-> >
-> > The canonical patch message body contains the following:
-> >
-> >       * A |from| line specifying the patch author, followed by an empty line
-> >         (only needed if the person sending the patch is not the author).
-> >       * The body of the explanation, line wrapped at 75 columns, which will be
-> >         copied to the permanent changelog to describe this patch.
-> >       * An empty line.
-> >       * The |Signed-off-by:| lines, described above, which will also go in the
-> >         changelog.
-> >       * A marker line containing simply |---|.
-> >       * Any additional comments not suitable for the changelog.
-> >       * The actual patch (|diff| output).
-> >
-> >
-> >     - Armin
+* Remove unknown configure options detected by [1]:
+  | ERROR: QA Issue: gvfs: configure was passed unrecognised options: documentation gdu [unknown-configure-option]
+* Remove intltool-native from DEPENDS - gnome uses gettext these days
 
-There are existing git hooks that can be used to detect and fail to
-merge patches like this.  For Linux, I have the following in
-.git/hooks/pre-commit
-#!/bin/sh
-exec git diff --cached | scripts/checkpatch.pl -
+[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-April/280693.html
 
-Perhaps something similar can be added to check for this.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-Thanks,
-Jon
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+index 7f239c413..7b9a16e9e 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
+ GNOMEBASEBUILDCLASS = "meson"
+ inherit gnome bash-completion gettext upstream-version-is-even
+ 
+-DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit shadow-native"
++DEPENDS += "libsecret glib-2.0 gconf libgudev udisks2 polkit shadow-native"
+ 
+ SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+ 
+@@ -15,12 +15,10 @@ SRC_URI[archive.sha256sum] = "3739d64b79c95a9f0f9faf2c5f9e5298b4b2ebdd6431435ce6
+ 
+ EXTRA_OEMESON = " \
+     -Dbluray=false \
+-    -Dgdu=false \
+     -Dgoa=false \
+     -Dgoogle=false \
+     -Dnfs=false \
+     -Dudisks2=true \
+-    -Ddocumentation=false \
+ "
+ 
+ PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
+-- 
+2.20.1
 
-> >
-> >> Cheers,
-> >>
-> >> Richard
-> >>
-> >
-> >
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
