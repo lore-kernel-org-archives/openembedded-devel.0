@@ -1,58 +1,53 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id BE6896D51A
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 0976B7D29F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Apr 2019 19:47:42 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id v21so12767368edq.4
+	Tue,  2 Apr 2019 20:25:43 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id v14so5376267wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Apr 2019 12:47:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=wnMlLiYzhrO/v6s1Kd5DBEd9sOGJdbdpUwwQup8/45c=;
-	b=giL4tD+yM6scRN3upFTOGwxFKju8+L6cc3eBcVJ8Z8MbuO5YuznFECXcaTsWtSgFNr
-	fk9sYrDfu020Ipnc+HZEHodnH/cBMLmX7R1Nq/ysQ1RMUgBJzhih68fKbE7t17Hs4Hms
-	PEq23LCFgViH6LkPvcqsB8W7Wuqgere5vaNvQ=
+	Tue, 02 Apr 2019 13:25:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E0q0gTLeLvXHmdyEHYNqkYeLFOzmxOmiOnt8yD5cbio=;
+	b=VJ71BtRZ6Gc7ZG7WhJrilE0kPE5T0s8m08E2peX6zUWlZkqJVAH02RGychb2ysCzxN
+	/Spj2F60/dRumN6esC9dJVPLu1pKHd/S3YRRvo/CGyeXeWyWE9DSvE4iKMzoqMO+PkJs
+	WKtvU0cVx3EHs791ZPb8IhC1cz+/gtoz+IFEcs+GsVq91X0pfoulbEy6907ilpKFUeiR
+	RaKYRARcFGPZhccn9/bcfV466tpG991KlOdFtWtgS9Jmetix7IDvFOTxaLP/p+wTtCUG
+	OfIyp3JFNyg57fRruVIlRFSUppfuaD/IwQauWlaYpWN4cp8HRopNmTJe/l7zZV9TDasb
+	+rDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=wnMlLiYzhrO/v6s1Kd5DBEd9sOGJdbdpUwwQup8/45c=;
-	b=lER0HKljoxpmciFTsNMRRi8PtzmNhxN20zlttGnEnozBbivvBT6NbI/6vVybtA18Z0
-	cAx/Nl919ERrKUp5CDedy212XJ7+f2zHfnJ92DIfxKcFcMV9NLRdmGCWDJvvghpURBFd
-	uPmmlB6vjlXImVhDiP+f1f2chylLjpGKcUE0xTpT15jogzm04IO3hkluYKMllbBEY+a2
-	wfk91HRkjAwRi+DiYghiyiuynRiB7FbVHhcC9GZYF9ueIrD6ZCbKqNdtWCs9bPHu9d75
-	LFditDws5HJIsCtxxlkOJ5A67BBVqvwSoChcKcEJ1Ux9asgmrTxpBvZ6/N73fSIb3Rz9
-	8/UQ==
-X-Gm-Message-State: APjAAAU0hsy/3ONQ0KWSB4r3q9I1CfMs9+A6rKGbL4PSQGuZ0+AnpumF
-	sBbCg7LnX4zFlc8YA1ALiqqXga4GzmVy1A==
-X-Google-Smtp-Source: APXvYqzQsbDBOdnGYZIsFGfvTqlwupZgV4IxD05aZGG+2t/VqBKzFdqlPd8upmrtHn/9UtqypeP+wg==
-X-Received: by 2002:a17:906:46d1:: with SMTP id
-	k17mr40325140ejs.104.1554234463427; 
-	Tue, 02 Apr 2019 12:47:43 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-134-105.ec.res.rr.com.
-	[65.184.134.105]) by smtp.gmail.com with ESMTPSA id
-	u18sm2635770eja.25.2019.04.02.12.47.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 02 Apr 2019 12:47:42 -0700 (PDT)
-Date: Tue, 2 Apr 2019 15:47:38 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Jon Mason <jdmason@kudzu.us>
-Message-ID: <20190402194738.GZ4664@bill-the-cat>
-References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
-	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
-	<6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
-	<CAPoiz9yat-4XRgSFikh5PxrsgVpRAWNi2dx1O0+_iHyVR529Ag@mail.gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E0q0gTLeLvXHmdyEHYNqkYeLFOzmxOmiOnt8yD5cbio=;
+	b=MTz6NkQvCthYvLtzC5rizrh3eUmyeDrI+r64T6cs1wHCyL+6GOE+Bf48rSzaXr1MKt
+	6WtG+13TfdaYe4K7geuie5PxhptXkC7d4ll/E2e5BYBGtiH4ips3Njhn5WEU/A8GFh3U
+	DAWS4ANuiOKGsP8aszKBoBA26TwbaNb83hxhVDmvcgFjiRCoJyHbp9xHjrTIW4CLNljY
+	WFtGBQL5J9PqUweKWgK8yA0ZjnyRPTgSm8dvn6iVQ8OBvIx4pjeisTuYOGPBHXDaL6De
+	as3jQcPwChykdTw5f4mlnvdHwPll7r2fzCB0x3unRFat+8lwPXA5UTNRRgbFJrwFeeAJ
+	N7xw==
+X-Gm-Message-State: APjAAAVCYfl6c5raT3Fhec//ttHy8rUf83HKdJq303s85eIR8wa9OIpq
+	O/MKOYvQfyLGeS1xHtBD3dI0XJcy
+X-Google-Smtp-Source: APXvYqyL7nTRkqgXu5Ybk3s0iHlBkVj9hfkzhfgwElipqdXU24Ac3EHNm27vGzX678v1BxFRwfyXXg==
+X-Received: by 2002:a7b:cd9a:: with SMTP id y26mr4948581wmj.31.1554236744441; 
+	Tue, 02 Apr 2019 13:25:44 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F2CB720ABAC1D935B83362C.dip0.t-ipconnect.de.
+	[2003:f0:7f2c:b720:abac:1d93:5b83:362c])
+	by smtp.gmail.com with ESMTPSA id
+	c20sm24034911wre.28.2019.04.02.13.25.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 02 Apr 2019 13:25:43 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Apr 2019 22:25:36 +0200
+Message-Id: <20190402202536.8025-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CAPoiz9yat-4XRgSFikh5PxrsgVpRAWNi2dx1O0+_iHyVR529Ag@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Git commit process question.
+Subject: [PATCH] rrdtool: fix build by disabling docs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,136 +60,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2019 19:47:43 -0000
-X-Groupsio-MsgNum: 76951
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Ix2jQZQ3wXOip0b1"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Apr 2019 20:25:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---Ix2jQZQ3wXOip0b1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Have no idea what caused it but on all of my build machines started to fail
+with recently:
 
-On Tue, Apr 02, 2019 at 04:45:16AM +0000, Jon Mason wrote:
-> On Tue, Apr 2, 2019 at 6:41 AM Mark Hatle <mark.hatle@windriver.com> wrot=
-e:
-> >
-> > On 4/1/19 6:20 PM, akuster808 wrote:
-> > >
-> > >
-> > > On 4/1/19 4:02 PM, Richard Purdie wrote:
-> > >> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
-> > >>> Hello,
-> > >>>
-> > >>> I have noticed a large number of git commits with no header
-> > >>> information being accepted.
-> > >> Can you be more specific about what "no header information" means? Y=
-ou
-> > >> mean a shortlog and no full log message?
-> > > Commits with just a "subject" and signoff. No additional information
-> >
-> > If you can convey the reason for the change in just the subject, that is
-> > acceptable.. but there is -always- supposed to be a signed-off-by line =
-according
-> > to our guidelines.
-> >
-> > So if you see this, I think we need to step back and figure out where a=
-nd why
-> > it's happening and get it resolved in the future.
-> >
-> > (Places I've seen in the past were one-off mistakes and clearly that --=
- so it
-> > wasn't anything that we needed to work on a correction.)
-> >
-> > --Mark
-> >
-> > > We tend to reference back to how the kernel does things.
-> > >
-> > > https://www.kernel.org/doc/html/latest/process/submitting-patches.html
-> > > These two sections in particular.
-> > >
-> > >
-> > >     2) Describe your changes
-> > >
-> > > Describe your problem. Whether your patch is a one-line bug fix or 50=
-00 lines of
-> > > a new feature, there must be an underlying problem that motivated you=
- to do this
-> > > work. Convince the reviewer that there is a problem worth fixing and =
-that it
-> > > makes sense for them to read past the first paragraph.
-> > >
-> > >
-> > > along with this section.
-> > >
-> > >
-> > >     14) The canonical patch format
-> > >
-> > > This section describes how the patch itself should be formatted. Note=
- that, if
-> > > you have your patches stored in a |git| repository, proper patch form=
-atting can
-> > > be had with |git format-patch|. The tools cannot create the necessary=
- text,
-> > > though, so read the instructions below anyway.
-> > >
-> > > The canonical patch subject line is:
-> > >
-> > > Subject: [PATCH 001/123] subsystem: summary phrase
-> > >
-> > > The canonical patch message body contains the following:
-> > >
-> > >       * A |from| line specifying the patch author, followed by an emp=
-ty line
-> > >         (only needed if the person sending the patch is not the autho=
-r).
-> > >       * The body of the explanation, line wrapped at 75 columns, whic=
-h will be
-> > >         copied to the permanent changelog to describe this patch.
-> > >       * An empty line.
-> > >       * The |Signed-off-by:| lines, described above, which will also =
-go in the
-> > >         changelog.
-> > >       * A marker line containing simply |---|.
-> > >       * Any additional comments not suitable for the changelog.
-> > >       * The actual patch (|diff| output).
-> > >
-> > >
-> > >     - Armin
->=20
-> There are existing git hooks that can be used to detect and fail to
-> merge patches like this.  For Linux, I have the following in
-> .git/hooks/pre-commit
-> #!/bin/sh
-> exec git diff --cached | scripts/checkpatch.pl -
+| Attempt to reload Encode.pm aborted.
+| Compilation failed in require at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/rrdtool/1.7.0-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.28.1/Pod/Text.pm line 33.
+| BEGIN failed--compilation aborted at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/rrdtool/1.7.0-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.28.1/Pod/Text.pm line 33.
+| Compilation failed in require at (eval 7) line 1.
+| BEGIN failed--compilation aborted at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/rrdtool/1.7.0-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.28.1/Pod/Usage.pm line 30.
+| Compilation failed in require at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/rrdtool/1.7.0-r0/recipe-sysroot-native/usr/bin/pod2man line 19.
+| BEGIN failed--compilation aborted at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/rrdtool/1.7.0-r0/recipe-sysroot-native/usr/bin/pod2man line 19.
+| make[1]: *** [Makefile:692: rrddump.1] Error 255
+| make[1]: *** Waiting for unfinished jobs....
 
-FWIW, over in U-Boot land I do:
-=2E/scripts/checkpatch.pl -q --git origin/master..
-as part of checking things prior to pushing to master.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
---=20
-Tom
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+index ff9957480..4a6c44669 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.0.bb
+@@ -50,6 +50,7 @@ EXTRA_OECONF = " \
+     --disable-tcl \
+     --disable-rpath \
+     --enable-nls=${USE_NLS} \
++    --disable-docs \
+ "
+ 
+ export STAGING_LIBDIR
+-- 
+2.20.1
 
---Ix2jQZQ3wXOip0b1
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJco7xaAAoJEIf59jXTHXZSnlgP/1bjf/CVvYtJxrwbFO39SHFG
-ojcNfiofqDLXn2mc18B/FpII3qoFcy8T3UyNmLnOPW2mo6L9pEs8R7i0Dd+y111x
-oceNiMVQWximgGrVarOKE0hCa0Ub7lNmpNXyKWkvLnC/3MQWZ6JbAzIkIsBZ3+v5
-zJyvuTZh44N5WccsSCLM8GebI5RDN2RlZNgnSNyTTfwdk++dBlTulTdpkbVLwxkU
-U9NOx2d+3sukMAVXPF8s3FdclwdezBhkOMHqmrMpoEdeMGytX2Yu1Y012vQq/kaJ
-MY7a0Zy0CltBe6B67M5CB/kDpRdq1rGmcT79Fj93VsTH/S9ri8oh6Di4NIpH3Hfw
-Ny2l1CoMsapbJNWgNUrU7Z6j+1V4k9GBHowF0B5SrXysJo07Eey8LkFRZCFMD1RZ
-bOOxxFKCYjtaotkQxDhgv1oov0PqGt7lN5QTw7YX9nONfynoc0AvGj4YoFKh2Zeb
-hhoiAkDfXfaUsrEwZmBm9euc540867r7CfjJOS0PLX6pLSO3uSrCVPFUThFtxhmT
-QnRdZPLCFhJ03IAV0VQCi0o6X7q9JxKt0/eAC1/BtEEw9uZ1kn1ufsHnfPYOA/Jr
-mp6rDnIIMou5At7BOLAo1HbuTdRw2YmH8Uz5tTpRhqjOwhk+mWQ/oHFfs1KlvlX9
-PQaV5w9JCJ1sicwIP88I
-=R9vR
------END PGP SIGNATURE-----
-
---Ix2jQZQ3wXOip0b1--
