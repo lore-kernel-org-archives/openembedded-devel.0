@@ -1,53 +1,40 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BABFB60116
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Apr 2019 06:46:02 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id w15so2166175wmc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2019 23:46:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7l+v6nJ+KPwFXiSY0PYa4K9cuq97UVS4bnNIjfmd/FA=;
-	b=kFuD6l8pcqw5R7I1HI6op4xzETXFer9g83yRVpMfv2G7uHg7Lh9inPDJHMkhsrnA8B
-	V25yQpB7djboKWQM8K9LAw4eGUt0zTINAxcO7XSgMLuSVMK6gAo1p5Phz/1hGNGD9K64
-	V7I9HCJCrtUmKnWwmhjCx9gcKIEcEkzf21ImFjGvgaxueSEEcNLLRD+F9p6AXIP80VxK
-	W/BuJxk43JlZHxObir6ZDGL5mwz8jkTsNpVmdgh90D1eCEeOMCWJ+OHDaZ5t08sZbSi4
-	HOVMOZx8bMWZbaqo20AB5rS+jkAjpZ7fLSJq/mZEIJj5Zl/sDoVYcRgo183bMSbdOqkR
-	nH0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7l+v6nJ+KPwFXiSY0PYa4K9cuq97UVS4bnNIjfmd/FA=;
-	b=iX+accyYMBr6tsw2iWPqXU3d/Xf4k9nXugB/wsjfVoGYCZ8IEnG7PSxFm5zMwtnNPI
-	yEiCdgHHxZDPVKyJI5tJxiOuFT9uDOLVVJ4wgi3Aa8/u/WlzjvMFzYJqdq3ApiM1U/rB
-	j/UtgzDEffJPaoS6otWjuB6pKWMqRve06FnJLnpv6Rpm2X1P08FUHJFW6UFJQCgqraC8
-	itZ870b/SDE65BAtzmvtR1RGL8O3Br+6aI/VHmmqAc5J0uMn5Pk1A8Cb2Z5+VjeoYGOC
-	TmULPQq5nHqUQvnLbsE02mOclfLsBZU41KA6M4UYH0pYFVxbL2G/HwijFosozBFAtTBJ
-	hORA==
-X-Gm-Message-State: APjAAAWgl7V8u9KarUuQT4nPWNrJF448FdSQngmO3mviLa62u+RifDW4
-	WyjBKg7MBK/pwP4kpXjsMAuxX/cn
-X-Google-Smtp-Source: APXvYqy5LyT6SIk1nham7E3tdWNakX8qYBycvOYy3BAvHPnV0D4WhYX+7k7PoFogtdkty+jKBj7aKw==
-X-Received: by 2002:a7b:c5d6:: with SMTP id n22mr2250767wmk.112.1554187563274; 
-	Mon, 01 Apr 2019 23:46:03 -0700 (PDT)
-Received: from mueller-a-nb-linux.speedport.ip
-	(p200300F07F2CB720F13E25CAD2D2B3C2.dip0.t-ipconnect.de.
-	[2003:f0:7f2c:b720:f13e:25ca:d2d2:b3c2])
-	by smtp.gmail.com with ESMTPSA id
-	z84sm18540828wmg.24.2019.04.01.23.46.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 01 Apr 2019 23:46:02 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Apr 2019 08:45:54 +0200
-Message-Id: <20190402064554.22908-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id AC44360116;
+	Tue,  2 Apr 2019 06:51:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44YKcX693lz4T;
+	Tue,  2 Apr 2019 08:51:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1554187885;
+	bh=9Vslfiu4ks6EqT0/GeFlpHVLOQ/6yJVWB7nV5XWnhWg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=tvxKPekSrYWAvqtodhShyIYp5YUGQqh4FoQhXOT8qSU1BO+XFHEVhQEKFsIFTZ4r6
+	VLPYxGJQAQMakLDhe7pdupZUY3XbXgMpwT87P/SoNZiKsR+0xZ8Hh1cdT+/k2q8PtV
+	v+UrM0E11f6znWio38wGAp6QImUKWnHRuAq+tIwtNZ/irKVRPIq2yLj8SQrKJVNPtM
+	RIal7JPu39gau5BlSS4V6ql7B1VpSoLXaRE7OLl7AZ1oARB5dJBZtD8O7L+FqNb2lp
+	pHyfJ6O7FdMzDZSeO7as+BVIHK/8tGREUkppIIhLpWp/if4tlKsNx6CMjIU8/ss5k8
+	VcPzMkLI1nuzARt9LoIQ3oEuq6FCckCWhbdWWBYijEVpfYfWmfpUx4Ek5hXuyEsIyY
+	AfOVVGoNDPPWW41uDWHTP/rj6OhcmhjY9dAebt+LZqMy7xrwZWhgMma8rzcGmNCBvD
+	CLanEB18EtMlbxPF3v+6gooK2hUZiouKl7HAtmb8EvjPEzJn/1J4tDldTKYSAGJ8RW
+	cJ540vp74aexICKtsa+bf6U40bB0l2d+v/geMCvkRxSI3ZLAJMRbdKQYoeBNdWcnM+
+	lcTNwYFAZKsizcdz6jfO4KM7syvUBmfG4ChRITKgR5CyTlMIoSCHNkW09cGRrt24rz
+	xXWWYEI7wmcmI0ZD1n2UT3QA=
+Date: Tue, 2 Apr 2019 09:51:21 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20190402065121.GA31468@localhost>
+References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
+	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH] gvfs: fix configure options and DDEPENDS
+In-Reply-To: <a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,48 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2019 06:46:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Apr 2019 06:51:26 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-* Remove unknown configure options detected by [1]:
-  | ERROR: QA Issue: gvfs: configure was passed unrecognised options: documentation gdu [unknown-configure-option]
-* Remove intltool-native from DEPENDS - gnome uses gettext these days
+On Mon, Apr 01, 2019 at 04:20:41PM -0700, akuster808 wrote:
+> 
+> 
+> On 4/1/19 4:02 PM, Richard Purdie wrote:
+> > On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
+> >> Hello,
+> >>
+> >> I have noticed a large number of git commits with no header
+> >> information being accepted.
+> > Can you be more specific about what "no header information" means? You
+> > mean a shortlog and no full log message?
+> Commits with just a "subject" and signoff. No additional information
+> 
+> We tend to reference back to how the kernel does things.
+> 
+> https://www.kernel.org/doc/html/latest/process/submitting-patches.html
+> These two sections in particular.
+> 
+> 
+>     2) Describe your changes
+> 
+> Describe your problem. Whether your patch is a one-line bug fix or 5000
+> lines of a new feature, there must be an underlying problem that
+> motivated you to do this work. Convince the reviewer that there is a
+> problem worth fixing and that it makes sense for them to read past the
+> first paragraph.
+>...
 
-[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-April/280693.html
+The kernel does not have "upgrade foo to the latest upstream version" commits.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+With the Automatic Upgrade Helper this is a semi-automatic task, and 
+most of the time there is no specific motivation other than upgrading
+to the latest upstream version.
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-index 7f239c413..7b9a16e9e 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
- GNOMEBASEBUILDCLASS = "meson"
- inherit gnome bash-completion gettext upstream-version-is-even
- 
--DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit shadow-native"
-+DEPENDS += "libsecret glib-2.0 gconf libgudev udisks2 polkit shadow-native"
- 
- SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
- 
-@@ -15,12 +15,10 @@ SRC_URI[archive.sha256sum] = "3739d64b79c95a9f0f9faf2c5f9e5298b4b2ebdd6431435ce6
- 
- EXTRA_OEMESON = " \
-     -Dbluray=false \
--    -Dgdu=false \
-     -Dgoa=false \
-     -Dgoogle=false \
-     -Dnfs=false \
-     -Dudisks2=true \
--    -Ddocumentation=false \
- "
- 
- PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
