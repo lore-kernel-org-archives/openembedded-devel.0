@@ -1,61 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 752617D2D5
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 188EB7D20A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 12:50:24 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id w1so21211244wrp.2
+	Wed,  3 Apr 2019 13:28:29 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id h4so21335578wre.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 05:50:25 -0700 (PDT)
+	Wed, 03 Apr 2019 06:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=HGER9AIylk5+0jpknsE5TMz0/5SLnak88k0LCb03AS0=;
-	b=VBFk4hyvKD+IyUL5KpcEKw5w9LUn1CeMKejl3XfkL46fznJcQoIJaAhbjVwjwSYiHV
-	/sLahsw/VJqD6UUda42kmOkUMuj/ueWOCLFbEJi4E/+3Agcuzr/xLA3ZEHCZrwPn4AuJ
-	ISj4N4hs7bCbgKq+IqSvCoOXTDx9Yokcq/sS5a9zrYoNySLVqhb9Yai4W38VMTquDJjY
-	NJVrmdj4b8hb8OrrlttWDZ9u2U1F4LHXsvq5OgIJdC1MgxfXnQj94flFwtGt8PD6PcCv
-	kpYHlDFGcDb6jcX9lBosvrsZdC3926zuVR8kCKA4uxzXfFybWcmEXUwkTtMKzUhVmq+/
-	BtdA==
+	h=from:to:cc:subject:date:message-id;
+	bh=tNxR+erOjfSPmRKPOht475s9ajGV6g73mYMIcja9g50=;
+	b=YIdau7/eirUuGXuV8UVq6QCLr5jZXTkPAMTWg4JndhcLKej0T1bUAvhv8caD8oUHxv
+	xwEhJWqvvbY8CmL+5wdf0B2mWQzW+uaGEBF1hEe3C5soDvDgyBGQy/UdQr3i6tOYYrGk
+	j2gEiCJQSc1ze1wt+PCjBPg2G7RabNzRNUzStGgddRYlSt7vARAGfHRfBclxGZISyuvS
+	ahQ46pVzbAiNYlRgKDh2Cl4MhfyIA2luySOXO87fBstzLw9CwSEpqgeka4CFLDkqv12f
+	+fC6B/6T9DvHrwghIEVzfbQRmaFrHYgXZq9y7hTsecqJyIseqT3gZEPMRLLhDnh3ORIj
+	KQBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=HGER9AIylk5+0jpknsE5TMz0/5SLnak88k0LCb03AS0=;
-	b=U0hdnxJm2DQuRqzmZes0nHf+9TU9ulWiw7fxOKIo8LCOGO7cEAVOtMPEYm1o4H2Z/L
-	S7ICTvxLfjDEQvbyYv7N99Xq4OUxqmmUZCC12z4Q6PPmntt8hAeGPeqhMCZ7M7pwppZs
-	YHsxn3/6Uknesr6FmJMn8r3LJ848MWirbkE53DFPxV8rnecMNWd7p1pPc2c9b1LNy6eg
-	uFS6n1ILLcSqGy/hgTORLrGsNb/unOHZ5EI32pfRSi9ga8oxEEcOeJs+czvPb67YxI33
-	5msueTZlgQ+bCrAKEwpv5uqwzkKMaKt96KqgpbA4vOSlaUqvXcb9L6jrp5kjg9mPQ4v/
-	tZhg==
-X-Gm-Message-State: APjAAAVj/t9B8jaj+Zi4qZLqcU9V2nO/KQ6wcCK8wxK4z5AabIx6Nkhv
-	fd/pVuOMPIdqYFhN9Cnf4tlpGwUi
-X-Google-Smtp-Source: APXvYqy5P+rekIuxFuf6Qm2icxK/XE3xiGPmO23Ir8GtQJJIGLK1Ncxr2F78WFyZEJkcIuEdplKzmQ==
-X-Received: by 2002:adf:ed8f:: with SMTP id c15mr50436611wro.144.1554295825198;
-	Wed, 03 Apr 2019 05:50:25 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tNxR+erOjfSPmRKPOht475s9ajGV6g73mYMIcja9g50=;
+	b=R1nuJbsZzrQaZigKaSt4tQH2+OwNGVVlAsXIxAYv3BoHC4rZHR9DFO4T3alb7mvGBg
+	k3ioU0l8j0ZBxdhBtjgIUOEyUcRGGXKk859xwyU1ESy/s4eQ39BuQwfqBCup1Nr1mcPo
+	IsD5SKo0e9U0GlWx0Kfsqp6tw9UEZabOdIaD96buKYtDVjEZzR7g5OXHhTrivKDmta4o
+	ZGa364pHtO9gRQO3bHIWbgexxsicodzwZyiVNKgw325ajzh6okVMEeBla3YcxFEtveMK
+	RwFzR76dwhPKEbmS9P8rctfEZT+5KVEn1L3eRre8gjKbPP8t1TInS7RJQE6m7h5geyM8
+	m8Iw==
+X-Gm-Message-State: APjAAAXKIXBkBOiuweMNpHeslTU4P4bZLSYh0ScXXBlnrXhcLYnG/6LI
+	0cMSVI5817jq5rVqAZUGw4lahwDDWOIypA==
+X-Google-Smtp-Source: APXvYqyRVBZtQFDLvJLQ/4EWMToO7OXV3XGurQszjOBaldAuYT82ZBHX5JGgTiuAeCmXFhJrlWlvvQ==
+X-Received: by 2002:adf:fec3:: with SMTP id q3mr52398088wrs.173.1554298109671; 
+	Wed, 03 Apr 2019 06:28:29 -0700 (PDT)
+Received: from VM-VPR.corporate.saft.org ([80.215.155.216])
 	by smtp.gmail.com with ESMTPSA id
-	84sm28834451wme.43.2019.04.03.05.50.23
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 03 Apr 2019 05:50:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 3 Apr 2019 14:50:25 +0200
-To: Vincent Prince <vincent.prince.fr@gmail.com>
-Message-ID: <20190403125025.GB2025@jama>
-References: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
-	<1554280123-19112-2-git-send-email-vincent.prince.fr@gmail.com>
-	<20190403085651.GA6467@localhost>
-	<CAB2nKc9hnDrOTtKjNfk1cupK0yv8xXksEuvURJtS6ve_baOpJQ@mail.gmail.com>
-	<20190403111514.GA20836@localhost>
-	<CAB2nKc-nz+YhZ9voQOSo=46gLhLoip5_GT2arkmT6jOGiyEo8w@mail.gmail.com>
-	<20190403120314.GA2025@jama>
-	<CAB2nKc9qLz=4hERKOORTSyb74=PsuuEJnA+GezrY0v1u=6Sfhw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAB2nKc9qLz=4hERKOORTSyb74=PsuuEJnA+GezrY0v1u=6Sfhw@mail.gmail.com>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-Cc: openembedded-devel@lists.openembedded.org, Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-oe][PATCH 2/3] cppzmq: bump version 4.2.3 => 4.3.1
+	g13sm13221490wmh.11.2019.04.03.06.28.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 03 Apr 2019 06:28:28 -0700 (PDT)
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+To: openembedded-devel@lists.openembedded.org, bunk@stusta.de,
+	martin.jansa@gmail.com
+Date: Wed,  3 Apr 2019 15:28:12 +0200
+Message-Id: <1554298095-26709-1-git-send-email-vincent.prince.fr@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH v2 0/3] Bump zeromq libraries versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,93 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 12:50:24 -0000
-X-Groupsio-MsgNum: 76983
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6sX45UoQRIJXqkqR"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Apr 2019 13:28:30 -0000
 
---6sX45UoQRIJXqkqR
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+These patches are intended to bump zeromq libraries to latest stable releases including:
+ - libzmq
+ - czmq
+ - cppzmq
 
-On Wed, Apr 03, 2019 at 02:31:13PM +0200, Vincent Prince wrote:
-> Martin,
->=20
-> Thanks for precisions, I will update PV to 4.3.1 in V2
-> By the way, it's first time I submit a patch series, should  changelog be
-> in each patch for should I use --cover option to put them all in 0/3?
+Vincent Prince (3):
+  zeromq: bump version 4.2.5 => 4.3.1
+  cppzmq: bump version 4.2.3 => 4.3.1
+  czmq: bump version 4.1.1 => 4.2.0
 
-If you mean changelog for review changes made to individual commits,
-then it's best to include them in commit message, but bellow --- so that
-it doesn't end in the final commit message once it's applied.
+ meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb  |  6 ++--
+ .../zeromq/{czmq_4.1.1.bb => czmq_4.2.0.bb}        | 18 ++++++------
+ .../0001-Problem-out-of-date-with-zproject.patch   | 31 ---------------------
+ .../recipes-connectivity/zeromq/zeromq_4.2.5.bb    | 32 ----------------------
+ .../recipes-connectivity/zeromq/zeromq_4.3.1.bb    | 26 ++++++++++++++++++
+ 5 files changed, 39 insertions(+), 74 deletions(-)
+ rename meta-oe/recipes-connectivity/zeromq/{czmq_4.1.1.bb => czmq_4.2.0.bb} (56%)
+ delete mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-Problem-out-of-date-with-zproject.patch
+ delete mode 100644 meta-oe/recipes-connectivity/zeromq/zeromq_4.2.5.bb
+ create mode 100644 meta-oe/recipes-connectivity/zeromq/zeromq_4.3.1.bb
 
-Cover letter is useful to describe reasoning behind the whole series,
-but each commit should make sense individually (especially because cover
-letter doesn't end in git history).
+-- 
+2.7.4
 
-Regards,
->=20
-> Best regards
->=20
-> Le mer. 3 avr. 2019 =E0 14:03, Martin Jansa <martin.jansa@gmail.com> a =
-=E9crit :
->=20
-> > On Wed, Apr 03, 2019 at 01:36:24PM +0200, Vincent Prince wrote:
-> > > Adrien,
-> > >
-> > > What I'm not sure to understand is in which case we use "_git.bb"
-> > instead
-> > > of having PV in filename.
-> >
-> > The PV in filename is just another way for setting PV variable (instead
-> > of setting it inside the recipe). This isn't relevant to what Adrian
-> > requested and I would keep the filename as is.
-> >
-> > > If we use a release version, shouldn't we point to
-> > > https://github.com/zeromq/cppzmq/archive/v4.3.0.tar.gz?
-> >
-> > Definitely don't use github archives, they are regenerated from time to
-> > time with different checksums, either you can use developer uploaded
-> > tarballs (some projects on github provides them as well) or use git
-> > fetcher with the SRCREV pointing the the tag.
-> >
-> > > And if we use git version, shouldn't we specify git commit hash to re=
-move
-> > > any ambiguity between PV and SRCREV?
-> >
-> > With git bitbake fetcher (git:// in SRC_URI) you always need to specify
-> > SRCREV, because that's the only thing which defines what "version" of
-> > the source will be fetched.
-> >
-> > PV in this case is only to give this SRCREV some human readable (and
-> > sortable) versioning scheme. And that's what users will see when
-> > installing/upgrading the built packages, so it's important to set it
-> > correctly.
-> >
-> > +git${SRCPV} in PV is usually used to signify that the SRCREV points to
-> > commit a bit newer than the "base version" in this case 4.3.1 and in
-> > this case this +git${SRCPV} is unnecessary if the SRCREV matches exactly
-> > with 4.3.1 tag.
-> >
-> > > Do you know any convention is specified somewhere?
-> >
-> > I don't think it's spelled anywhere in wiki.
-> >
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---6sX45UoQRIJXqkqR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXKSsEAAKCRA3VSO3ZXaA
-HAA6AJ9hxDMi3MZhF+a90tFFTthQs9Kj4wCfa67v477qMgroSTXvmFe4nBeZvIQ=
-=zqgl
------END PGP SIGNATURE-----
-
---6sX45UoQRIJXqkqR--
