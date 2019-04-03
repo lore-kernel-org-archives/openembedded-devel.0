@@ -1,23 +1,57 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 03B447C603
+Return-Path: <jdmason@kudzu.us>
+Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 07BF47D280
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 03:19:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x333JQVl013509
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  3 Apr 2019 03:51:15 +0000 (UTC)
+Received: by mail-it1-f194.google.com with SMTP id u65so9032933itc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Apr 2019 20:19:26 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 2 Apr 2019 20:19:25 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Apr 2019 11:10:21 +0800
-Message-ID: <1554261021-29102-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Tue, 02 Apr 2019 20:51:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=wW/MoSS1flQjW8WCA7tfOy9rLOON5NNHQAszV4SFVh4=;
+	b=vh3LYBm9xqV+/Uq6hslzANV2nirm9RJYB5aL/GH3UqohlDLKsKF4+sUilRikTyXENh
+	+tuaE0B39SGESvQTPZoqo+CzTq+F9EY+J1wpcZJI+U8Gpr18nQkIYNILpk5qS5E4r4rG
+	L9hroW/m8D7F4NNrNTvfbp98OkUvGNJRlEz90OPheinNzPP1lqt2fsDXJfgyvk3gBl7b
+	+YlhvAwF2sh2Alk76+26pr0tFq99YwK66i9Cej+ZGS87xZ/RVxvpWMGy1xqzUE1RzDRu
+	1V96XdRQYt30HJ0dspNsrWv4d7NU1wgtwoMv5yIe4SYOQCYQCwNBrOo+SypIqBOLXzgb
+	n0pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=wW/MoSS1flQjW8WCA7tfOy9rLOON5NNHQAszV4SFVh4=;
+	b=T998+nYHJA9CX1LvXy4aYD6IMbEXFwgA3vvchE68bQa4yTkYlGEihovE9odpfikqvW
+	ttVhyyuDW5Aav9vUYiFrBoodI9a4IsmfdY8wi4L2Dr9vJUXXeUPAoLiE1gTrfjO11ds4
+	KwdsTkzQLWgqDG7GFexKK8x38FQZaLIqzb6uOrst3wYM6ilybX9KYmEdPF5flUNvmILF
+	4B/HoofhBnjVIGWdTPoTXks7epEOLqqRNx+O2tA7Ek8q8EeFcxIesxv1mDksCiUFsjs9
+	WpPYoyhfllWhduEm+Ek7oBGnDdDyxwDHQ3+EPGyJnxXD37BlAd5LgvuEqg+QXFVJJ4oF
+	IAlA==
+X-Gm-Message-State: APjAAAUdlT3WNAf6BSZ5NBKRNm2tGCV/RAhhmb/HtxfSF2I5HJ3AG3hx
+	EhJyce4r1Qa+ft+gGIYT02SjU5kdPQO1ghltscBvCg==
+X-Google-Smtp-Source: APXvYqwo0Lffrb2lFnEi2191xmGykfcdJi50Xv1qepDH7egCMc74NDfzpQ0dHroAPc4XB1AKGc6U0QlNBSpNEzXKaWQ=
+X-Received: by 2002:a24:55d8:: with SMTP id e207mr258269itb.119.1554263476745; 
+	Tue, 02 Apr 2019 20:51:16 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ipsec-tools: add missing CVE tags to patches
+References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
+	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+	<6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
+	<CAPoiz9yat-4XRgSFikh5PxrsgVpRAWNi2dx1O0+_iHyVR529Ag@mail.gmail.com>
+	<20190402194738.GZ4664@bill-the-cat>
+	<56e2b936-177c-7066-99c0-bb46854daa4b@gmail.com>
+	<20190403004550.GB4664@bill-the-cat>
+In-Reply-To: <20190403004550.GB4664@bill-the-cat>
+From: Jon Mason <jdmason@kudzu.us>
+Date: Wed, 3 Apr 2019 03:51:05 +0000
+Message-ID: <CAPoiz9zYfcUJKOdix+1depKWUp5HBnNuSon0DvKKQLA6aKpdTQ@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,41 +64,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 03:19:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 03 Apr 2019 03:51:16 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch     | 2 ++
- .../recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch    | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+On Wed, Apr 3, 2019 at 7:45 AM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Apr 02, 2019 at 02:24:51PM -0700, akuster808 wrote:
+> >
+> >
+> > On 4/2/19 12:47 PM, Tom Rini wrote:
+> > > On Tue, Apr 02, 2019 at 04:45:16AM +0000, Jon Mason wrote:
+> > >> On Tue, Apr 2, 2019 at 6:41 AM Mark Hatle <mark.hatle@windriver.com> wrote:
+> > >>> On 4/1/19 6:20 PM, akuster808 wrote:
+> > >>>>
+> > >>>> On 4/1/19 4:02 PM, Richard Purdie wrote:
+> > >>>>> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
+> > >>>>>> Hello,
+> > >>>>>>
+> > >>>>>> I have noticed a large number of git commits with no header
+> > >>>>>> information being accepted.
+> > >>>>> Can you be more specific about what "no header information" means? You
+> > >>>>> mean a shortlog and no full log message?
+> > >>>> Commits with just a "subject" and signoff. No additional information
+> > >>> If you can convey the reason for the change in just the subject, that is
+> > >>> acceptable.. but there is -always- supposed to be a signed-off-by line according
+> > >>> to our guidelines.
+> > >>>
+> > >>> So if you see this, I think we need to step back and figure out where and why
+> > >>> it's happening and get it resolved in the future.
+> > >>>
+> > >>> (Places I've seen in the past were one-off mistakes and clearly that -- so it
+> > >>> wasn't anything that we needed to work on a correction.)
+> > >>>
+> > >>> --Mark
+> > >>>
+> > >>>> We tend to reference back to how the kernel does things.
+> > >>>>
+> > >>>> https://www.kernel.org/doc/html/latest/process/submitting-patches.html
+> > >>>> These two sections in particular.
+> > >>>>
+> > >>>>
+> > >>>>     2) Describe your changes
+> > >>>>
+> > >>>> Describe your problem. Whether your patch is a one-line bug fix or 5000 lines of
+> > >>>> a new feature, there must be an underlying problem that motivated you to do this
+> > >>>> work. Convince the reviewer that there is a problem worth fixing and that it
+> > >>>> makes sense for them to read past the first paragraph.
+> > >>>>
+> > >>>>
+> > >>>> along with this section.
+> > >>>>
+> > >>>>
+> > >>>>     14) The canonical patch format
+> > >>>>
+> > >>>> This section describes how the patch itself should be formatted. Note that, if
+> > >>>> you have your patches stored in a |git| repository, proper patch formatting can
+> > >>>> be had with |git format-patch|. The tools cannot create the necessary text,
+> > >>>> though, so read the instructions below anyway.
+> > >>>>
+> > >>>> The canonical patch subject line is:
+> > >>>>
+> > >>>> Subject: [PATCH 001/123] subsystem: summary phrase
+> > >>>>
+> > >>>> The canonical patch message body contains the following:
+> > >>>>
+> > >>>>       * A |from| line specifying the patch author, followed by an empty line
+> > >>>>         (only needed if the person sending the patch is not the author).
+> > >>>>       * The body of the explanation, line wrapped at 75 columns, which will be
+> > >>>>         copied to the permanent changelog to describe this patch.
+> > >>>>       * An empty line.
+> > >>>>       * The |Signed-off-by:| lines, described above, which will also go in the
+> > >>>>         changelog.
+> > >>>>       * A marker line containing simply |---|.
+> > >>>>       * Any additional comments not suitable for the changelog.
+> > >>>>       * The actual patch (|diff| output).
+> > >>>>
+> > >>>>
+> > >>>>     - Armin
+> > >> There are existing git hooks that can be used to detect and fail to
+> > >> merge patches like this.  For Linux, I have the following in
+> > >> .git/hooks/pre-commit
+> > >> #!/bin/sh
+> > >> exec git diff --cached | scripts/checkpatch.pl -
+> > > FWIW, over in U-Boot land I do:
+> > > ./scripts/checkpatch.pl -q --git origin/master..
+> > > as part of checking things prior to pushing to master.
+> > Having hooks is fine but after the fact. It puts the burden back on the
+> > Layer maintainer to resolve. If we think more info is better, it needs
+> > to happen at time of change submittal.
+>
+> Note that I'm not talking about a hook, I'm talking about what's part of
+> my CI process.  And when something pops up there is when I grab the
+> patch in question and push back on the submitter.
 
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
-index 5286376..7e033af 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
-@@ -2,6 +2,8 @@
- 
- Upstream-Status: Backport
- 
-+CVE: CVE-2015-4047
-+
- http://www.openwall.com/lists/oss-security/2015/05/20/1
- 
- racoon/gssapi.c in IPsec-Tools 0.8.2 allows remote attackers to cause
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
-index bd07965..19220c4 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
-@@ -1,6 +1,6 @@
- Upstream-Status: Backport [https://anonscm.debian.org/cgit/pkg-ipsec-tools/pkg-ipsec-tools.git/plain/debian/patches/CVE-2016-10396.patch?id=62ac12648a4eb7c5ba5dba0f81998d1acf310d8b]
- 
--Fix CVE-2016-10396.
-+CVE: CVE-2016-10396.
- 
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
--- 
-2.7.4
+Exactly!  I do the same things for the Linux stuff I own.  I'll do a
+git-am, then redir the output and publicly shame them.  Public shaming
+is a vastly underrated method of behavior modification.
 
+Thanks,
+Jon
+
+>
+> --
+> Tom
 
