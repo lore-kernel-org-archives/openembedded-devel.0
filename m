@@ -1,46 +1,47 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com
-	[209.85.167.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B7067C68F
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BB1107D2D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 08:32:12 +0000 (UTC)
-Received: by mail-oi1-f173.google.com with SMTP id a6so9493908oie.5
+	Wed,  3 Apr 2019 08:34:55 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id u12so13338789iop.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 01:32:13 -0700 (PDT)
+	Wed, 03 Apr 2019 01:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hybP2nbYSRnzQ1FBt7nmPX/lGf83bwzim5etOuIiHKM=;
-	b=JuIgtYI1O/jFS8wcHHCBfOjaWxNvNxQH4u39rM+gZPA0uGYapbWuBhUgQMHwI/pbeb
-	D/7zLl6zouzNq9FTdTmUujNZZrgD2RsVpvaKnSnahcWAAYjzyl7rKwLnwgE+w/dQ5ImX
-	IG6EmRxNR385g/ZhNlS1nXt0brW29o7mb4PC9T+gXlHXNBSNhzzzKL4AtdSoEfIllOMP
-	b5NT55ZM1mB04+WgcumnjfXxdtG+rwPZ4B6UoATCN//1ObuDYVVl4uLpboWT37kH3hav
-	f97gn2DfrP8bCuZxyVMgBDKeEH0XD7AI8Rrw0dFsbteszl0p6KTydsLrrDlggi53jhzI
-	J8aA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=D9YUFAYrv6AVYEqh6KovTeX92GkVzlQnlhUbcvt5hu0=;
+	b=SVkfyzeJTY4blUZKnbS7wh9N5Rd2bI1i94ehgt+70nS6aSTaThc78O8c3RvkJ2t7Xq
+	NPvm3HZyeYNL7Psf4L0wenYGuxFwMsKH9WNysUv5VOTCzc8WN7/B3ICEh/0Gcj7IU4QY
+	1e6wwbgG/rYEu/4M0wAU6TCIhy8ByjE8z8pAB9gHjqh8t+KjCms6x3CLAhXW2LEq22JM
+	4CErv9CTg2hHTf2lD1tyAcMl+bmJL28TpqFSgUoC2cj0+/Sysig5rJjO0aqZ/8+qF/yX
+	0JdpzfJWfTIO6ccBxQRlJXKDXAQZZcPJjMwTz38RiMJC42a3uHHLAM199t3oZyCJ8KsF
+	rCxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=hybP2nbYSRnzQ1FBt7nmPX/lGf83bwzim5etOuIiHKM=;
-	b=f2bNFgke2zZNLerJapaVBYRHI23iLDx33/atQ9ZUOco1144oUKVe5bTjbonQqRvrrm
-	wXIdqkkVuZ6s5Wrp/zUoEGAPOZCaMzX1+AXynLnSljafA2o/rPeHET1/WOdiuN96+iay
-	WVr9K+kv+WvigZhAlbHT/D+HfjeoAXAjkSFeCICLWDQhd+R0s3isQx4Z13Dn5H6+nGW/
-	Pwf+sgQ3orTSCZasPI1wgoOS5VA8a1/rFwm0JD4R3cwiWukhdGqXqxjE5Dx1zJ7levj/
-	lqw4xGrYNxTTXgbRl2lQKcccWAmcWakbLdVj4N8FEpeWAVFUooMRoo5DGsP6W3cvT1R1
-	4zlg==
-X-Gm-Message-State: APjAAAXpp7eo8a22HnH1F1rNFe1fApOibCBFvsZRgVNb0kCiVnq54lMa
-	VwMWisCIgjVttAsFe/8NpovVTiNYKMbYYJXcQCU=
-X-Google-Smtp-Source: APXvYqy4GSUj3J01x/nCrAWBT2PTalF1TsRBeq+D2nBCnv/CSAgYR5liwFMKBr+0yg/VQhmf+eqs3u77vqEqxSJcYZM=
-X-Received: by 2002:aca:e689:: with SMTP id d131mr913325oih.132.1554280333150; 
-	Wed, 03 Apr 2019 01:32:13 -0700 (PDT)
+	:message-id:subject:to;
+	bh=D9YUFAYrv6AVYEqh6KovTeX92GkVzlQnlhUbcvt5hu0=;
+	b=U+sn67uB6YzFZO5LI13SmsT+sCRP4oTcQObMkjXOpDQAdH8YHaPQ72OafhWtPhvjWn
+	uPO4Ew+AeSO/OcXD9D0NhNhxJL9o7Z4ocAcBFORBEYjgnRYfMJIjcemUysvDcXn5VgtH
+	4q1eFZqV7192aTI38W9CJhmXhW2wKbgcjjcAuMP6Hich3CgQVsp/GE94u2Qa0lATE6Lj
+	zQ2cG2Pum2HJ75sAYr6Jwb7LXmguuTVM5sRBoV9QevcfQB/akTGQerXps3JNTHdXws7h
+	z4b6yklbtEp2AWRtTOdkawIvh7KbRuD5F2OUkypLnxWRI3kPjy29gRuD8xYf9w3RjMdc
+	xiBw==
+X-Gm-Message-State: APjAAAVPkj+j/vpSvnZcB/Izgc0bIpWyM7RNHvpXrmnMKyc4U0Kw+RKk
+	7Id6Viw4ozdKt4k5SXDE0F6+Fp8bUsqLjCLWOmmXtnJOuJ0=
+X-Google-Smtp-Source: APXvYqzHqY2WyH6j6ptZy6JkHmALih8JkE4Tk6TXmPam+2UAFeMDsjOmvKU4tFj/bZXYjYu1t90ALcO24PgomGBleWI=
+X-Received: by 2002:a6b:c3c3:: with SMTP id t186mr51279227iof.19.1554280496529;
+	Wed, 03 Apr 2019 01:34:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <1554300459-3158-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1554300459-3158-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Wed, 3 Apr 2019 10:32:01 +0200
-Message-ID: <CANNYZj9CtQ9Ucm-rjxNBfH9oTCai+WeKCWNnszVrQoDiLN23rA@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][patch] dnf-plugin-tui: new recipe
+References: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
+	<1554280123-19112-3-git-send-email-vincent.prince.fr@gmail.com>
+In-Reply-To: <1554280123-19112-3-git-send-email-vincent.prince.fr@gmail.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Wed, 3 Apr 2019 10:34:45 +0200
+Message-ID: <CAB2nKc-uJ+M0pHkXo0vwBkUmy6CVhB-TLKNDFZpY3JmH=U0Dtg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 3/3] czmq: bump version 4.1.1 => 4.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,153 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 08:32:12 -0000
+X-List-Received-Date: Wed, 03 Apr 2019 08:34:56 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Apologies, but i have to say no to this patch.
+I forgot to remove 0001-Problem-out-of-date-with-zproject.patch file, it
+will fixed in v2.
 
-1) Most people do not want dnf tooling in their SDKs. Your patches
-include that unconditionally.
-2) bbappends do not belong in meta-oe, as they modify behavior of
-original recipes quietly when you enable that layer. You need to
-modify the original recipes, and send patches for that.
-3) The recipe for the tui plugin should not be nativesdk-specific. If
-someone wants that on target, they should be able to.
-4) You had previously submitted this to oe-core, it was discussed, and
-the outcome was that it's better to add generic tooling support to
-eSDK for the use case (customizing a rootfs). Meta-oe is not the right
-place for a dnf/rpm-specific solution, especially if it's forced on
-everyone.
+Le mer. 3 avr. 2019 =C3=A0 10:29, Vincent Prince <vincent.prince.fr@gmail.c=
+om> a
+=C3=A9crit :
 
-I would suggest that you make your own layer for this (e.g.
-meta-dnf-tui) and publish that in github next to the tui plugin.
-
-Alex
-
-
-
-
-On Wed, 3 Apr 2019 at 07:08, Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com> wrote:
+> Also, add curl and systemd to PACKAGECONFIG
 >
-> A new recipe for dnf-plugin called tui.
-> This plugin can work in nativesdk environment, and provide some additional functions:
->  1. Add new command dnf tui --init to make dnf to work on host
->  2. Text-based user interface for dnf.
->  3. Manage SPDX files
->  4. Manage SRPM files
->  5. Add installation samples for dnf
->
-> More details, please reference to https://github.com/ubinux/dnf-plugin-tui/tree/master.
->
-> In addition, modify some nativesdk recipes to include dnf-plugin-tui in meta-toolchain.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
 > ---
->  .../recipes-core/meta/meta-environment.bbappend    |  3 +++
->  .../nativesdk-packagegroup-sdk-host.bbappend       |  2 ++
->  .../recipes-devtools/dnf-plugin-tui/dnf_%.bbappend | 29 ++++++++++++++++++++++
->  .../dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb     | 29 ++++++++++++++++++++++
->  4 files changed, 63 insertions(+)
->  create mode 100644 meta-oe/recipes-core/meta/meta-environment.bbappend
->  create mode 100644 meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
->  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
->  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
+>  .../zeromq/{czmq_4.1.1.bb =3D> czmq_4.2.0.bb}            | 18
+> +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>  rename meta-oe/recipes-connectivity/zeromq/{czmq_4.1.1.bb =3D>
+> czmq_4.2.0.bb} (56%)
 >
-> diff --git a/meta-oe/recipes-core/meta/meta-environment.bbappend b/meta-oe/recipes-core/meta/meta-environment.bbappend
-> new file mode 100644
-> index 0000000..2ac268f
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/meta/meta-environment.bbappend
-> @@ -0,0 +1,3 @@
-> +create_sdk_files_append() {
-> +    echo 'export MACHINE_ARCH=${MACHINE_ARCH}' >> $script
-> +}
-> diff --git a/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend b/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
-> new file mode 100644
-> index 0000000..9f85825
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
-> @@ -0,0 +1,2 @@
-> +RDEPENDS_${PN}_append = " nativesdk-dnf-plugin-tui \
-> +                          nativesdk-createrepo-c"
-> diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
-> new file mode 100644
-> index 0000000..ce683e4
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
-> @@ -0,0 +1,29 @@
-> +RDEPENDS_${PN}_class-nativesdk += " \
-> +  python3-core \
-> +  python3-codecs \
-> +  python3-netclient \
-> +  python3-email \
-> +  python3-threading \
-> +  python3-distutils \
-> +  python3-logging \
-> +  python3-fcntl \
-> +  librepo \
-> +  python3-shell \
-> +  libcomps \
-> +  libdnf \
-> +  python3-sqlite3 \
-> +  python3-compression \
-> +  python3-rpm \
-> +  python3-iniparse \
-> +  python3-json \
-> +  python3-curses \
-> +  python3-misc \
-> +  python3-gpg \
-> +  libnewt-python \
-> +  "
-> +
-> +do_install_append_class-nativesdk() {
-> +        create_wrapper ${D}/${bindir}/dnf \
-> +                RPM_CONFIGDIR=${SDKPATHNATIVE}${libdir_nativesdk}/rpm \
-> +                RPM_NO_CHROOT_FOR_SCRIPTS=1
-> +}
-> diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
-> new file mode 100644
-> index 0000000..4fbbac8
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
-> @@ -0,0 +1,29 @@
-> +SUMMARY = "A text-based user interface plugin for dnf, used in toolchian environment"
-> +LICENSE = "GPLv2"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
-> +
-> +SRCREV = "a743116fa78a20f9828533c1de79ad8e4ab2d16c"
-> +
-> +inherit nativesdk distutils3-base
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +RDEPENDS_${PN} += " \
-> +  nativesdk-dnf \
-> +  nativesdk-libnewt-python \
-> +  "
-> +
-> +do_install_append() {
-> +        install -d ${D}${datadir}/dnf
-> +        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
-> +        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-> +        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-> +        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
-> +            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
-> +        done
-> +}
-> +
-> +FILES_${PN} += "${datadir}/dnf"
+> diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+> b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
+> similarity index 56%
+> rename from meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+> rename to meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
+> index f2db004..4ec1c04 100644
+> --- a/meta-oe/recipes-connectivity/zeromq/czmq_4.1.1.bb
+> +++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
+> @@ -1,15 +1,13 @@
+> -DESCRIPTION =3D "C bindings for ZeroMQ"
+> -HOMEPAGE =3D "http://www.zeromq.org"
+> +DESCRIPTION =3D "High-level C binding for 0MQ"
+> +HOMEPAGE =3D "http://czmq.zeromq.org/"
+>  LICENSE =3D "MPL-2.0"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D9741c346eef56131163e13b9db124=
+1b3"
+>  DEPENDS =3D "zeromq"
+>
+> -SRC_URI =3D "
+> https://github.com/zeromq/czmq/releases/download/v${PV}/czmq-${PV}.tar.gz
+> \
+> -    file://0001-Problem-out-of-date-with-zproject.patch \
+> -"
+> +SRC_URI =3D "
+> https://github.com/zeromq/czmq/releases/download/v${PV}/czmq-${PV}.tar.gz=
+"
+>
+> -SRC_URI[md5sum] =3D "6d3a6fdd25c2bb29897c53670dce97bf"
+> -SRC_URI[sha256sum] =3D
+> "f00ff419881dc2a05d0686c8467cd89b4882677fc56f31c0e2cc81c134cbb0c0"
+> +SRC_URI[md5sum] =3D "7e09997db6ac3b25e8ed104053040722"
+> +SRC_URI[sha256sum] =3D
+> "cfab29c2b3cc8a845749758a51e1dd5f5160c1ef57e2a41ea96e4c2dcc8feceb"
+>
+>  inherit cmake
+>
+> @@ -17,14 +15,16 @@ PACKAGES =3D "lib${BPN} lib${BPN}-dev
+> lib${BPN}-staticdev ${PN} ${PN}-dbg"
+>
+>  FILES_${PN} =3D "${bindir}/*"
+>  FILES_lib${BPN} =3D "${libdir}/*.so.*"
+> -FILES_lib${BPN}-dev =3D "${libdir}/*.so ${libdir}/pkgconfig ${includedir=
+}"
+> +FILES_lib${BPN}-dev =3D "${libdir}/*.so ${libdir}/pkgconfig ${includedir=
+}
+> ${datadir}/cmake"
+>  FILES_lib${BPN}-staticdev =3D "${libdir}/lib*.a"
+>
+>  RDEPENDS_lib${BPN}-dev =3D "zeromq-dev"
+>
+> -PACKAGECONFIG ??=3D "lz4 uuid"
+> +PACKAGECONFIG ??=3D "lz4 uuid curl ${@bb.utils.filter('DISTRO_FEATURES',
+> 'systemd', d)}"
+>  PACKAGECONFIG[lz4] =3D ",-DCMAKE_DISABLE_FIND_PACKAGE_lz4=3DTRUE,lz4"
+>  PACKAGECONFIG[uuid] =3D ",-DCMAKE_DISABLE_FIND_PACKAGE_uuid=3DTRUE,util-=
+linux"
+> +PACKAGECONFIG[curl] =3D ",-DCMAKE_DISABLE_FIND_PACKAGE_libcurl=3DTRUE,cu=
+rl"
+> +PACKAGECONFIG[systemd] =3D
+> ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=3DTRUE,systemd"
+>
+>  BBCLASSEXTEND =3D "nativesdk"
+>
 > --
 > 2.7.4
 >
 >
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
