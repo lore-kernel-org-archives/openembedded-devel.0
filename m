@@ -1,24 +1,55 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EE17B7D274
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it1-f170.google.com (mail-it1-f170.google.com
+	[209.85.166.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E8F536BA9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 09:38:04 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x339bIew032142
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 3 Apr 2019 02:37:39 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Wed, 3 Apr 2019 02:37:25 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Wed, 3 Apr 2019 17:37:24 +0800
-Message-ID: <1554284244-29098-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Wed,  3 Apr 2019 10:30:49 +0000 (UTC)
+Received: by mail-it1-f170.google.com with SMTP id y10so10409863itc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Apr 2019 03:30:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=benLBz9hW99WBZEeOFcAKwfVLMwfm2Ry36HGmFBMO8o=;
+	b=SQGw6pGWvV2BQfEH99p7lXhGhjcxoLinT1QzUJdM/cQ07HykT5GXxeC6yZD+3i6J+X
+	pYHqo/KFvYz845co3jIpoQlsvIHElrtN0kvQ5aV15PYAXWG5SKIMiZbkM0Bp3pN/XNsT
+	Vx2Z9zfSg9kQLT5ALyhUrwa3tPnsCHiQQQxbpwOchmY5Ajn5Jbilrf9pZqCpJUEFCVFa
+	NXABdf59YdyoygoexNO9IUM901Og5rEZZ8a+Fu2KKVoVI4Stjr30gAxNwJVdpfvp3VLI
+	1UlceUPoOvXBtCcfrFUqoXquAWS69f6EPiBatVcf1nJ5PlNyOZj9QMd7UzqKv94ZVu2b
+	qmEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=benLBz9hW99WBZEeOFcAKwfVLMwfm2Ry36HGmFBMO8o=;
+	b=bQIW6aI4mH3YRIxRDdu88Gykh5c3Xy40ZyMJysYEXN2QPQ7cHjQPigTVC4r3hR1ZMW
+	mny30P5aoAwKgRWygD7bHNkfPbcjkXBW2dnEjSXT+zhNsGNfUbaK0V8BvSXg4dLr/wtj
+	80vxcjHJc0ut7wImLYfQFEtSmso+zcX/M+1bW+pObzgQfVuY4TbyTfWU+Qbai/HwQanv
+	dMNsW5yXTW4FTpdZChuaZ+GvdlkIS4gu/XNTxJNtieTLAoYL/1RpKxcwfiomHCetOpa7
+	QMtgjKU2yGeGJS0pW9k0y/h7aeHDBGVAwB7xfLNV6c1uy67L8eMaZnKhEmeFWmMSoppv
+	tudQ==
+X-Gm-Message-State: APjAAAWVfFd/yt8CSEIRgu3kiPJPXM32VLqSfb/a38lbVbiequDCsrrJ
+	CnX4H+DGPGeXeL8cLM+Fa9DSVUXhnr/IL4mC47A6Ig==
+X-Google-Smtp-Source: APXvYqz9krAoYmJ9iEH/W+3fq3fSBkvPRClYTS/J7SbBKgtMn7jrBaEwTrpgcTIIbVLkW9iqmfnndk6VjuO+p7DetYc=
+X-Received: by 2002:a24:d643:: with SMTP id o64mr1186771itg.148.1554287450951; 
+	Wed, 03 Apr 2019 03:30:50 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-initramfs][PATCH] dracut: fix udevdir not found
+References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
+	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+	<20190402065121.GA31468@localhost>
+	<20190402194614.GY4664@bill-the-cat>
+In-Reply-To: <20190402194614.GY4664@bill-the-cat>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 3 Apr 2019 11:30:39 +0100
+Message-ID: <CAJTo0LZ5qeDA+rQ5Eh3_LCbGtQyo732LrDkiZ=O4sh52cjXU=w@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,83 +62,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 09:38:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 03 Apr 2019 10:30:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-In commit [9d1b81c dracut.sh: improve udevdir and systemdutildir
-fallback logic], it checked a common binary `collect' to localte
-udevdir.
+On Tue, 2 Apr 2019 at 20:46, Tom Rini <trini@konsulko.com> wrote:
+> > The kernel does not have "upgrade foo to the latest upstream version" commits.
+> >
+> > With the Automatic Upgrade Helper this is a semi-automatic task, and
+> > most of the time there is no specific motivation other than upgrading
+> > to the latest upstream version.
+>
+> But since that's just filling in a template the body can also be a
+> template perhaps with useful AUH data (run at ... by ... ?) ?
 
-While upgrading systemd to 241, it dropped binary `collect'.
-[https://github.com/systemd/systemd/commit/a168792c2d95695fd30c0371d4b3890a9df1eafb]
+Apart from making the commit message longer what does this achieve?
+The commit already has a timestamp and author.
 
-So check binary `ata_id' to instead.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../dracut/0001-dracut.sh-improve-udevdir.patch    | 39 ++++++++++++++++++++++
- .../recipes-devtools/dracut/dracut_git.bb          |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
-
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
-new file mode 100644
-index 0000000..06e0a09
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
-@@ -0,0 +1,39 @@
-+From 974f728410052bc8fa18d93dc0c1a991bcdb96e6 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 3 Apr 2019 15:24:47 +0800
-+Subject: [PATCH] dracut.sh: improve udevdir
-+
-+In commit [9d1b81c dracut.sh: improve udevdir and systemdutildir
-+fallback logic], it checked a common binary `collect' to localte
-+udevdir.
-+
-+But upstream systemd drop binary `collect'.
-+[https://github.com/systemd/systemd/commit/a168792c2d95695fd30c0371d4b3890a9df1eafb]
-+
-+So check binary `ata_id' to instead.
-+
-+Upstream-Status: Submitted [https://github.com/dracutdevs/dracut/pull/558]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ dracut.sh | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/dracut.sh b/dracut.sh
-+index 3dc2adc..cc8b01a 100755
-+--- a/dracut.sh
-++++ b/dracut.sh
-+@@ -1311,8 +1311,8 @@ done
-+ [[ -d $udevdir ]] \
-+     || udevdir="$(pkg-config udev --variable=udevdir 2>/dev/null)"
-+ if ! [[ -d "$udevdir" ]]; then
-+-    [[ -e /lib/udev/collect ]] && udevdir=/lib/udev
-+-    [[ -e /usr/lib/udev/collect ]] && udevdir=/usr/lib/udev
-++    [[ -e /lib/udev/ata_id ]] && udevdir=/lib/udev
-++    [[ -e /usr/lib/udev/ata_id ]] && udevdir=/usr/lib/udev
-+ fi
-+ 
-+ [[ -d $systemdutildir ]] \
-+-- 
-+2.7.4
-+
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index dd2e8bb..344dfec 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -12,6 +12,7 @@ PV = "049"
- SRCREV = "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
- SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
-            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
-+           file://0001-dracut.sh-improve-udevdir.patch \
-            "
- 
- DEPENDS += "kmod"
--- 
-2.7.4
-
+Ross
 
