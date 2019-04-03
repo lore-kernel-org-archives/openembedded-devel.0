@@ -1,42 +1,24 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 979C17D2AD;
-	Wed,  3 Apr 2019 09:34:14 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44Z19x5z2Jz4b;
-	Wed,  3 Apr 2019 11:34:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1554284054;
-	bh=IVui8djscj7ciaJ/1vrzh9QB+az2mKJeoguW5l2WLtk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=OXzGaoZKfeS0lobTZRXwrtVokaEvsC8Tlvm4mD+la1NvulziI9+2ax0ckF3cWBSRs
-	nMa7Mz3595E5EwDtGWvZd0CtOvnCE2WWTocq6zLQMAAzjgaardXU+3Fv0zu2LafTyS
-	jyZRItVRP9MVLFNgafKAUFTm0lU3OU7qVpo0LqIf37HccGBK61YuqgKVz3tSzYUqkj
-	UDC7CpYB1n74VY8jXaG0ODbflhIZUrVCQHzpA2jr8LNBcyPTHfyZqPLMgCYga/TisJ
-	8N001Rm5eWyCyq45YmdTczjYxDIW5XMryIhaTgzZFuROjL1B7AZUr+G5njT4NLMSaT
-	JBj7Loz0pO9N4SZWRMKbaTMDmZYyyQUboMPA3wiogkBUq0UymhmTiMh/HliUcnwhh2
-	e2pcZahUJJ/ScAAEFX9WKI2ssmsvHBudooOap0rp/1AZ3oi/Qc1O+oyU3JmwJYSFKr
-	xS1utM4slZijCrCJipsXOfxg9iJiDZ5ejwfRTtq2e7gdPCViyAsXrUHJHoDs6kBUSD
-	bF+zLQ2/3PicJyvd31+b7+wM1OHVqsg2Vqi85Llq26nGt6O7abU8SwZHgh7wuKPhvr
-	A6gKsTJQbpQNvUDzqttJKQdyDkCVM5sb63YUckopRC8mGgfS++qtG1yku/mUCik3ez
-	d56iA30K8ZGnullzXJaAEbVU=
-Date: Wed, 3 Apr 2019 12:34:11 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Tom Rini <trini@konsulko.com>
-Message-ID: <20190403093411.GA8376@localhost>
-References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
-	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
-	<20190402065121.GA31468@localhost>
-	<20190402194614.GY4664@bill-the-cat>
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE17B7D274
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Apr 2019 09:38:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x339bIew032142
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 3 Apr 2019 02:37:39 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Wed, 3 Apr 2019 02:37:25 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Wed, 3 Apr 2019 17:37:24 +0800
+Message-ID: <1554284244-29098-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20190402194614.GY4664@bill-the-cat>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Git commit process question.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-initramfs][PATCH] dracut: fix udevdir not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,64 +31,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 09:34:15 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Apr 2019 09:38:05 -0000
+Content-Type: text/plain
 
-On Tue, Apr 02, 2019 at 03:46:14PM -0400, Tom Rini wrote:
-> On Tue, Apr 02, 2019 at 09:51:21AM +0300, Adrian Bunk wrote:
-> > On Mon, Apr 01, 2019 at 04:20:41PM -0700, akuster808 wrote:
-> > > 
-> > > 
-> > > On 4/1/19 4:02 PM, Richard Purdie wrote:
-> > > > On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
-> > > >> Hello,
-> > > >>
-> > > >> I have noticed a large number of git commits with no header
-> > > >> information being accepted.
-> > > > Can you be more specific about what "no header information" means? You
-> > > > mean a shortlog and no full log message?
-> > > Commits with just a "subject" and signoff. No additional information
-> > > 
-> > > We tend to reference back to how the kernel does things.
-> > > 
-> > > https://www.kernel.org/doc/html/latest/process/submitting-patches.html
-> > > These two sections in particular.
-> > > 
-> > > 
-> > >     2) Describe your changes
-> > > 
-> > > Describe your problem. Whether your patch is a one-line bug fix or 5000
-> > > lines of a new feature, there must be an underlying problem that
-> > > motivated you to do this work. Convince the reviewer that there is a
-> > > problem worth fixing and that it makes sense for them to read past the
-> > > first paragraph.
-> > >...
-> > 
-> > The kernel does not have "upgrade foo to the latest upstream version" commits.
-> > 
-> > With the Automatic Upgrade Helper this is a semi-automatic task, and 
-> > most of the time there is no specific motivation other than upgrading
-> > to the latest upstream version.
-> 
-> But since that's just filling in a template the body can also be a
-> template perhaps with useful AUH data (run at ... by ... ?) ?
+In commit [9d1b81c dracut.sh: improve udevdir and systemdutildir
+fallback logic], it checked a common binary `collect' to localte
+udevdir.
 
-That would be more trivial than useful.
+While upgrading systemd to 241, it dropped binary `collect'.
+[https://github.com/systemd/systemd/commit/a168792c2d95695fd30c0371d4b3890a9df1eafb]
 
-And so far noone has stated any actual problem that would be solved
-by adding such a new requirement.
+So check binary `ata_id' to instead.
 
-> Tom
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../dracut/0001-dracut.sh-improve-udevdir.patch    | 39 ++++++++++++++++++++++
+ .../recipes-devtools/dracut/dracut_git.bb          |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
 
-cu
-Adrian
-
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
+new file mode 100644
+index 0000000..06e0a09
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/dracut/dracut/0001-dracut.sh-improve-udevdir.patch
+@@ -0,0 +1,39 @@
++From 974f728410052bc8fa18d93dc0c1a991bcdb96e6 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Wed, 3 Apr 2019 15:24:47 +0800
++Subject: [PATCH] dracut.sh: improve udevdir
++
++In commit [9d1b81c dracut.sh: improve udevdir and systemdutildir
++fallback logic], it checked a common binary `collect' to localte
++udevdir.
++
++But upstream systemd drop binary `collect'.
++[https://github.com/systemd/systemd/commit/a168792c2d95695fd30c0371d4b3890a9df1eafb]
++
++So check binary `ata_id' to instead.
++
++Upstream-Status: Submitted [https://github.com/dracutdevs/dracut/pull/558]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ dracut.sh | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/dracut.sh b/dracut.sh
++index 3dc2adc..cc8b01a 100755
++--- a/dracut.sh
+++++ b/dracut.sh
++@@ -1311,8 +1311,8 @@ done
++ [[ -d $udevdir ]] \
++     || udevdir="$(pkg-config udev --variable=udevdir 2>/dev/null)"
++ if ! [[ -d "$udevdir" ]]; then
++-    [[ -e /lib/udev/collect ]] && udevdir=/lib/udev
++-    [[ -e /usr/lib/udev/collect ]] && udevdir=/usr/lib/udev
+++    [[ -e /lib/udev/ata_id ]] && udevdir=/lib/udev
+++    [[ -e /usr/lib/udev/ata_id ]] && udevdir=/usr/lib/udev
++ fi
++ 
++ [[ -d $systemdutildir ]] \
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index dd2e8bb..344dfec 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -12,6 +12,7 @@ PV = "049"
+ SRCREV = "225e4b94cbdb702cf512490dcd2ad9ca5f5b22c1"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
+            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
++           file://0001-dracut.sh-improve-udevdir.patch \
+            "
+ 
+ DEPENDS += "kmod"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.7.4
 
 
