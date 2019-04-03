@@ -1,57 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 86CDD7CE5A
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-it1-f193.google.com (mail-it1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 791057D245
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 12:03:13 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id j9so20967805wrn.6
+	Wed,  3 Apr 2019 12:31:24 +0000 (UTC)
+Received: by mail-it1-f193.google.com with SMTP id y204so10729875itf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 05:03:14 -0700 (PDT)
+	Wed, 03 Apr 2019 05:31:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=qb0Yt0mbVBJl24M/AUu43DDhKqHgGKC8aE5V1WJ5Es8=;
-	b=QPmlp/O3KjQKsDAF0r2kSwLCP3UD9m4pgodnKsAgdmH1J1nZW/CXiYqId2WIumXod/
-	5DqP+pThL1obgMYptoJ4vB2yHQyD2/vqIi2p0Dp2zKEsNuCkvL5vZc6geBzjypxveq3t
-	R9l8vRjWWNdBKV4d+kCcHlk/FFeXy6kG6uwEYc8dBbecxGu21aI8CeEsXkcjTwFOdFBf
-	Tu6ek9Gu0KfX1jDBYUKBry0NMT9gwgN6rX3DAS8uC32fPFc7cduAZuvdg145RPuapsFa
-	IPcgU1K6eb+CoVbtOCXRnOSceddgmk6lIkcT/sxWu8vPZiefLFO/+eUrD8S257T7w/FN
-	bMQw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=2Z6WWzX+l33st7dlDm7BHB4x7vqI02ljgYN23/2V1UY=;
+	b=uuqDMbwWoCkoKpFE2fW0I7S/46BxnXuzW9jh3qdw4kdyTNcTcNwfkhBGpd39kCIfSo
+	F4xx7ppUCeC7CI8eLOvdAjiFsGY3X4X2W+7TXoEmIuPa3RDoOHq4CIfP65x6qX2n8vQq
+	dbVUfTth9qBYDeAKXmdDFkjGuSKKZ/2flS+QO/KUIFiFUaJf4BZSwrz4OynqGFq9D0ll
+	qEUhbR7v40A6Ab1um7SEtyCeyxb49hJA7wRsBVypRYuSZS6Llz6WSK5RKmCimFbhwr2z
+	Xei+YCup60aWqtzSTeSToG7Rd4zhmSEgN3t2hdA7Ky23TqGU1PQGWGsiQvmS6xIGpJEW
+	EVSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=qb0Yt0mbVBJl24M/AUu43DDhKqHgGKC8aE5V1WJ5Es8=;
-	b=oC9M0pzxvV0L8ZuPpvRBApuG6qWTW9m0tnX6Vsjbxa3IS9C/0D9k4zfchzEVJH/JkR
-	luRvvkYgeXGpV7CnjHYJNfJoNGPnIzhFIaVZbHsp9C3sTkFIDNPMdsih3dkMzSCpGjCa
-	NdJNX2ApDaJUXzyYo7vvNkyZFX1kiKyETfZ55PIi9nNTHlZJeNIDXLPwlGfKasilpHGd
-	/ZRRIY/6DmuKDsQSIVPlRtY4Ux9kEEnVHQ0AnRjV4PzPXTsVpX0TpyGOMyMZgApqEysV
-	EdEFRefih8BhaVr3N4OY8HSDeoTgNVc8RLBm/lehkYOUFGwh6Yt/kxWjnAdfZiREhdWj
-	4K2Q==
-X-Gm-Message-State: APjAAAWw2KcEqXx3uqYylG4wKNepRby46Qjw9vQeyWRbMpvol88xQoAR
-	UnpbOzwv6ek3nPy2xn+qB2Y=
-X-Google-Smtp-Source: APXvYqwJsCegEC3LDSdiz1HixowWk0yIIFDIbFg/F6QOBWB6vNMOmhnER857fXOdubIYTP+1XZg9mg==
-X-Received: by 2002:a5d:4907:: with SMTP id x7mr4271105wrq.133.1554292994223; 
-	Wed, 03 Apr 2019 05:03:14 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	c20sm27372341wre.28.2019.04.03.05.03.12
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 03 Apr 2019 05:03:12 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 3 Apr 2019 14:03:14 +0200
-To: Vincent Prince <vincent.prince.fr@gmail.com>
-Message-ID: <20190403120314.GA2025@jama>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=2Z6WWzX+l33st7dlDm7BHB4x7vqI02ljgYN23/2V1UY=;
+	b=Yhvco58sPLg7kdVqHbHVfcOrHQRGMVl/1zXpGdOL+wMl52fDISV5dbIqXVf+OQH64C
+	ehE6qlR3wQfSFhcFz4F5I5m/3UKaGKpZrqHXOlHUYOpbcnCAafScHLIC0jlX2TMrDH/N
+	5gJnLNe/6U1kQuOg2jYmkG7pWGZBgh3dcZy0X+UYrgPf8PYmlh2sGHR1sSL3SjQDqRvC
+	9UbkFClJFf5dsN1ZBjO7o/jqyrkd+NI5eyQqoJbbutgBDjI+BSVIRl3nRwvOt8L+0EWk
+	6DebWG9rIMeWf4CazuGoVVkkEsTMtksiBLA7UoNtZiTp2a3PDZxD2wMApjLhBiTSDVAZ
+	R/xA==
+X-Gm-Message-State: APjAAAUZTGyEOCo4MS3Jup3w1sD91mwT7cAcWoSX/smnqlYYiD9o7QLa
+	2kuIuz3vjMp+wXNQRRKztYw/CwXgBCZuSVcOo8I=
+X-Google-Smtp-Source: APXvYqyXn4aYJZrC8MfV9ZHTmU+ETuM2w0EYl914zIHtruhpMmY4hukHc5aZ1Nyox0R68KSQyq+UflQFN18evfjZkG0=
+X-Received: by 2002:a02:3342:: with SMTP id k2mr401740jak.15.1554294685278;
+	Wed, 03 Apr 2019 05:31:25 -0700 (PDT)
+MIME-Version: 1.0
 References: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
 	<1554280123-19112-2-git-send-email-vincent.prince.fr@gmail.com>
 	<20190403085651.GA6467@localhost>
 	<CAB2nKc9hnDrOTtKjNfk1cupK0yv8xXksEuvURJtS6ve_baOpJQ@mail.gmail.com>
 	<20190403111514.GA20836@localhost>
 	<CAB2nKc-nz+YhZ9voQOSo=46gLhLoip5_GT2arkmT6jOGiyEo8w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAB2nKc-nz+YhZ9voQOSo=46gLhLoip5_GT2arkmT6jOGiyEo8w@mail.gmail.com>
-User-Agent: Mutt/1.11.4 (2019-03-13)
+	<20190403120314.GA2025@jama>
+In-Reply-To: <20190403120314.GA2025@jama>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Wed, 3 Apr 2019 14:31:13 +0200
+Message-ID: <CAB2nKc9qLz=4hERKOORTSyb74=PsuuEJnA+GezrY0v1u=6Sfhw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org, Adrian Bunk <bunk@stusta.de>
 Subject: Re: [meta-oe][PATCH 2/3] cppzmq: bump version 4.2.3 => 4.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -66,65 +60,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 12:03:13 -0000
-X-Groupsio-MsgNum: 76981
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lrZ03NoBR/3+SXJZ"
-Content-Disposition: inline
-
---lrZ03NoBR/3+SXJZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Apr 2019 12:31:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 03, 2019 at 01:36:24PM +0200, Vincent Prince wrote:
-> Adrien,
->=20
-> What I'm not sure to understand is in which case we use "_git.bb" instead
-> of having PV in filename.
+Martin,
 
-The PV in filename is just another way for setting PV variable (instead
-of setting it inside the recipe). This isn't relevant to what Adrian
-requested and I would keep the filename as is.
+Thanks for precisions, I will update PV to 4.3.1 in V2
+By the way, it's first time I submit a patch series, should  changelog be
+in each patch for should I use --cover option to put them all in 0/3?
 
-> If we use a release version, shouldn't we point to
-> https://github.com/zeromq/cppzmq/archive/v4.3.0.tar.gz?
+Best regards
 
-Definitely don't use github archives, they are regenerated from time to
-time with different checksums, either you can use developer uploaded
-tarballs (some projects on github provides them as well) or use git
-fetcher with the SRCREV pointing the the tag.
+Le mer. 3 avr. 2019 =C3=A0 14:03, Martin Jansa <martin.jansa@gmail.com> a =
+=C3=A9crit :
 
-> And if we use git version, shouldn't we specify git commit hash to remove
-> any ambiguity between PV and SRCREV?
+> On Wed, Apr 03, 2019 at 01:36:24PM +0200, Vincent Prince wrote:
+> > Adrien,
+> >
+> > What I'm not sure to understand is in which case we use "_git.bb"
+> instead
+> > of having PV in filename.
+>
+> The PV in filename is just another way for setting PV variable (instead
+> of setting it inside the recipe). This isn't relevant to what Adrian
+> requested and I would keep the filename as is.
+>
+> > If we use a release version, shouldn't we point to
+> > https://github.com/zeromq/cppzmq/archive/v4.3.0.tar.gz?
+>
+> Definitely don't use github archives, they are regenerated from time to
+> time with different checksums, either you can use developer uploaded
+> tarballs (some projects on github provides them as well) or use git
+> fetcher with the SRCREV pointing the the tag.
+>
+> > And if we use git version, shouldn't we specify git commit hash to remo=
+ve
+> > any ambiguity between PV and SRCREV?
+>
+> With git bitbake fetcher (git:// in SRC_URI) you always need to specify
+> SRCREV, because that's the only thing which defines what "version" of
+> the source will be fetched.
+>
+> PV in this case is only to give this SRCREV some human readable (and
+> sortable) versioning scheme. And that's what users will see when
+> installing/upgrading the built packages, so it's important to set it
+> correctly.
+>
+> +git${SRCPV} in PV is usually used to signify that the SRCREV points to
+> commit a bit newer than the "base version" in this case 4.3.1 and in
+> this case this +git${SRCPV} is unnecessary if the SRCREV matches exactly
+> with 4.3.1 tag.
+>
+> > Do you know any convention is specified somewhere?
+>
+> I don't think it's spelled anywhere in wiki.
+>
 
-With git bitbake fetcher (git:// in SRC_URI) you always need to specify
-SRCREV, because that's the only thing which defines what "version" of
-the source will be fetched.
-
-PV in this case is only to give this SRCREV some human readable (and
-sortable) versioning scheme. And that's what users will see when
-installing/upgrading the built packages, so it's important to set it
-correctly.
-
-+git${SRCPV} in PV is usually used to signify that the SRCREV points to
-commit a bit newer than the "base version" in this case 4.3.1 and in
-this case this +git${SRCPV} is unnecessary if the SRCREV matches exactly
-with 4.3.1 tag.
-
-> Do you know any convention is specified somewhere?
-
-I don't think it's spelled anywhere in wiki.
-
---lrZ03NoBR/3+SXJZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXKShAQAKCRA3VSO3ZXaA
-HJzIAJ0WFengH9e1AXTdimnE8iks9P7k/gCguQegDM0bQ1BMtgt6wN2zs1k8BVc=
-=HnqZ
------END PGP SIGNATURE-----
-
---lrZ03NoBR/3+SXJZ--
