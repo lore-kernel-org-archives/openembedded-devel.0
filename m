@@ -1,51 +1,54 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
-	[209.85.210.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B12227D2FC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 14:45:09 +0000 (UTC)
-Received: by mail-pf1-f178.google.com with SMTP id b3so8274016pfd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 07:45:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=PsnH3Mkdx1fd3InYYxPwSjEnMK7LdLYP4pRLb5d/OGg=;
-	b=G1hAuBQJRejD5pn2O8zdtU2tOQZXXzOyi2x9vcP3sGxByAJ1Tj7BdMhDq2EskQkh30
-	FiSuvk+4noZ4FsOzcId+o7F7Zs/W4S1MfRRXo0Exlv8Q4dqqwWGVFTOj9rBrtmxXX83f
-	Ne4+pGISS6N6kEmPF3kK8DasYwXfeWqStzDzwpYQ1FkgD4JdwWDZFn9D80hXhjxKRVbF
-	DFbjSF9PdEsm11AK9gtfcG3VKdvT2aEqHUDmWv8lfo4qe8Ay5asv3Qn6YA0PnItyZoUH
-	RaNtkoFJ8UhM6vG2zSbQSPATDyP/9uG9C0Dx1p29Tg/JcanZbwqDL7JgxGExWYVVs7Yk
-	DkTA==
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D14F7D38D;
+	Wed,  3 Apr 2019 16:46:30 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id z17so20082731qts.13;
+	Wed, 03 Apr 2019 09:46:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=yr3ThCJ1sGgMVPNxWLMJQXwq8svlx623UHV/3+7GVRc=;
+	b=CFBA1S2fGcsCIYeVQHTv3bgFee5ppvUCJXecBS0bfbdgpiDduJ87jUBLk+iCOetCkZ
+	uctZ1cmgTPKOJqoJhnF1AtHcRBmpWl43UusUVrszzzfCqxemuNiH6Gsf0SVjdsVF9b6f
+	E+TNeNmQvjmw4T9c3+5OwqsQZzFrVxsKgLBblALkNesQ2ipmCqHYpVNi+wCkrxmGVis4
+	mPdvDtcfJQA9grxRkyJPAYcpYHh6k7uzmnoopzp/FKCWUwV75tbOawlD/TdrdGYnv7Ni
+	ZCZ1tGEfc8ucdH7/PaZ0eXaEz5AqCRiyaL3WdpUDw9kbEFpQcGERcBBW6rma5oBFNzNf
+	PS7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=PsnH3Mkdx1fd3InYYxPwSjEnMK7LdLYP4pRLb5d/OGg=;
-	b=kPHkVhD/K70zR7nOITCIGQL0og1UpGbSjkO8M3AV3Y62wmrxQkAIT69G48gYdHVSiA
-	iFoOem5wqvRLtLOE2EItk+uRIfRDG7pMiUqgibEIhxwVydx8xLOCaqXkq3PIcNF7/LBT
-	jtjSe8whtxoWP88+TglhYt75HcBeDlpzqFTTBkogpwT57PIlE4pAVfesWFeyqBrlJH/Y
-	3xCARBvvCPKBZZ4Uxl1Pc1UyXzg+ON3nIJNe0Qxl/tmElFMXN6bu2tnrB4vTH7rpF0AW
-	j63BABwjTzvoKAKpY5JPh1FuwpJzNNx11c22DxW1RQS5eXb8yCd/Rqkfa39UtSdq8sU4
-	wr1A==
-X-Gm-Message-State: APjAAAXbuaSDnnhnieYLvPcxOa7eqdeKsD6GOPE6cbm8sZ8F6MNLiCqH
-	ILuZDnD8mQDwyvs/oPf0IMAIE2IthkE=
-X-Google-Smtp-Source: APXvYqx2LLNnBpXNVFtqfU0Tji6YaLHdjF1b7jHE1M7fkOWc4y9c9cgnW4ihB5KUw9dEAY71XC5BGg==
-X-Received: by 2002:a63:4819:: with SMTP id v25mr21315pga.412.1554302710288;
-	Wed, 03 Apr 2019 07:45:10 -0700 (PDT)
-Received: from [10.71.8.133] ([147.50.13.10]) by smtp.gmail.com with ESMTPSA id
-	e123sm28064595pgc.14.2019.04.03.07.45.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 03 Apr 2019 07:45:09 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 12.2 \(3445.102.3\))
-From: Paolo Valente <paolo.valente@linaro.org>
-In-Reply-To: <20190328160450.92438-1-paolo.valente@linaro.org>
-Date: Wed, 3 Apr 2019 21:45:06 +0700
-Message-Id: <5940843B-7679-4B79-88E1-9219EC261669@linaro.org>
-References: <20190328160450.92438-1-paolo.valente@linaro.org>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3445.102.3)
-Subject: Re: [meta-oe][PATCH] s-suite: push SRCREV to version 3.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=yr3ThCJ1sGgMVPNxWLMJQXwq8svlx623UHV/3+7GVRc=;
+	b=uWH0XUf8B6YbekwLPnYkPVHjnbGL90G/hxINeQxD021HZxd9y8RZhwOgRMbI8k0Y/q
+	40CJHvVb/XZ2aV1medvNdTJZ8n+aiKXIDX2w/wTU+zkK4GnDZqSJwBdlLmWcEnpONF9e
+	3/qrRcDpfGcIZwtwgpKoYK9Qe28YFpmgDLRyDQzfHbKNkHqwya2u4nvgwCMnNv8dkdve
+	9zpP6FXBOgDfB4U/rCvJS5dVDHdeNijldKkkOPBiWYUlbcvtZkO9JcadzOjBNelw6dOj
+	POg+5Qj/woRxzuRUtz//tTpLhquAN7cFgGdm6IM+sRoQJ6yWy4kIQbaWUPMp8eOwe1FL
+	9unA==
+X-Gm-Message-State: APjAAAUmYpd/jF9BcvsdQKAS4tZAA0aehTuO/dVhJW0VQJV0u0UurPHF
+	sy8x0uET5YPR+YXJwrTj4lgpmfUUFumGNfxpTkM=
+X-Google-Smtp-Source: APXvYqwPfOtiu+AGsQocJ3gcj/E63VAn1LbWh0c5IoqeLKROr2mb4kiXMYy18gLvBZaZK90GDEm3Xlx2ZK5z8ezGzXE=
+X-Received: by 2002:ac8:1846:: with SMTP id n6mr871214qtk.262.1554309991284;
+	Wed, 03 Apr 2019 09:46:31 -0700 (PDT)
+MIME-Version: 1.0
+References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
+	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+	<20190402065121.GA31468@localhost>
+	<20190402194614.GY4664@bill-the-cat>
+	<CAJTo0LZ5qeDA+rQ5Eh3_LCbGtQyo732LrDkiZ=O4sh52cjXU=w@mail.gmail.com>
+	<20190403144110.GG4664@bill-the-cat>
+In-Reply-To: <20190403144110.GG4664@bill-the-cat>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 3 Apr 2019 09:46:04 -0700
+Message-ID: <CAMKF1srb2EgL7tYZDFoq2EqABp-+_eib2u2OZMwT6B3TVgNk=Q@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,44 +61,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 14:45:09 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Apr 2019 16:46:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-have you guys had time to look into this?
+On Wed, Apr 3, 2019 at 7:41 AM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Apr 03, 2019 at 11:30:39AM +0100, Burton, Ross wrote:
+> > On Tue, 2 Apr 2019 at 20:46, Tom Rini <trini@konsulko.com> wrote:
+> > > > The kernel does not have "upgrade foo to the latest upstream version" commits.
+> > > >
+> > > > With the Automatic Upgrade Helper this is a semi-automatic task, and
+> > > > most of the time there is no specific motivation other than upgrading
+> > > > to the latest upstream version.
+> > >
+> > > But since that's just filling in a template the body can also be a
+> > > template perhaps with useful AUH data (run at ... by ... ?) ?
+> >
+> > Apart from making the commit message longer what does this achieve?
+> > The commit already has a timestamp and author.
+>
+> It's an etiquette thing.  Subject+Sign-off+Empty body is bad form.  AUH
+> updates are a form of "trivial update" that every project has.  "Update
+> $X from version $Y to $Z" is what a human would normally put.  It's
+> weird looking at git log of nothing but subject+signed-off-by.  I'm not
+> going to object further on this point, but I don't get it.
 
-Thanks,
-Paolo
-
-> Il giorno 28 mar 2019, alle ore 23:04, Paolo Valente =
-<paolo.valente@linaro.org> ha scritto:
->=20
-> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
-> ---
-> meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb =
-b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> index 8bd0afc49..47d21d36c 100644
-> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-> @@ -2,7 +2,7 @@ SUMMARY =3D "Small collection of benchmarks for =
-storage I/O"
-> LICENSE =3D "GPLv2"
-> LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3Db529aaa6a0c50f15d29f89609b5c22f3"
->=20
-> -SRCREV =3D "e2727f70ed79b5461689c062a4a66a87f1adb4ce"
-> +SRCREV =3D "d05006865f68829fa7603bdb92bd51649f5ba1b6"
-> PV =3D "0.0+git${SRCPV}"
-> SRC_URI =3D =
-"git://github.com/Algodev-github/S.git;protocol=3Dhttps;branch=3Dmaster"
->=20
-> --=20
-> 2.20.1
->=20
-
+if the content of subject is being repeated in body then I would
+prefer an empty body
+redundant information in commits should be avoided since it can create
+impression that body does not have
+useful information and skip reading it. We should strive to make commits
+concise and useful.
 
