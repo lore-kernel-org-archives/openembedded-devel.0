@@ -1,53 +1,84 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id ACCFC7D0F9
+Return-Path: <prvs=989330698=Alistair.Francis@wdc.com>
+X-Greylist: delayed 426 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 03 Apr 2019 23:33:38 UTC
+Received: from esa4.hgst.iphmx.com (esa4.hgst.iphmx.com [216.71.154.42])
+	by mail.openembedded.org (Postfix) with ESMTP id C53B97D41E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 23:15:44 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id o25so691270wmf.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 16:15:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=cH9U8OVbXg6KDrwvjAOqX0FGPdCkY6AAlywr6N3t8qg=;
-	b=am2k5kgVI+XI0+K0zEgzvhv2JAyFbFkyMkU1PeFEKcFDURQ2G1Qftk/IEHcAsclXJV
-	XcxOepWpX98bE8NrMPXJwh8GUVbpxF807raFW8zJSnw6EK6POTI3z/NdHAuQ0TQ7F2L+
-	WTjN59Hsm4SakIf6LtJZpB61x4wYC+vG6M4FJtobrQfCAk5uLqbhAVGazE8fzSOY88tP
-	Em1lbCS2iYok41OyYp1/a4f6MykFaRgCCQLBIT3JPefsSyqexlJOF8to7v9fNoCxR+2J
-	6qyAAI1CgV3DAj+hfX3ggB0GbTNhV6A88mktiLLErgBCnlkb6CDiIudQWj8xXOk1TmFx
-	6t4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=cH9U8OVbXg6KDrwvjAOqX0FGPdCkY6AAlywr6N3t8qg=;
-	b=YuaYj8GBIa0UoUuGsM4A8hvBjilCZyGBo1/AnSRrDBVRR/n+r/XvbUxd+31Ud1Zswm
-	CKPpELMZLXTHFAOj2wEnwfTBaAyuGVBhyKOQp2flkr6hOGbcxxuc+QreTkm8Ldb89Te1
-	yytfnK6qguLaJ5mVTYB4QHMSs1umwgFcjTL4WnJCrgTR8GEEkCmMxxqQzk2SjiW6sVKj
-	/cGsKZEoc6gYobHOG+nIs7bPdAps7gqhDy+wW5lxejxuGbslsFR72iMAbmXAzHuuTiln
-	XerrRueRAp1fC/tATkrwfd7dAsMXBoj7LLyHnpE57o6cHRt0w489sA5Z/PjT/bClSx/N
-	wu/Q==
-X-Gm-Message-State: APjAAAXAjrfxR0rNHYDZSaK7dugGOHOVE0Pirmj/3RHC9n77mooeFpig
-	iYR/6tArO+rdy0wfftWPbKqSulO3
-X-Google-Smtp-Source: APXvYqwvrSsOk1/rhNVTOgrUraobfZCJFF0uSMHC2DorT4Q8dX7dzRlrK7sB81A2sZsYi/Hf2MoaYw==
-X-Received: by 2002:a7b:cb16:: with SMTP id u22mr1643624wmj.60.1554333345233; 
-	Wed, 03 Apr 2019 16:15:45 -0700 (PDT)
-Received: from superandy.speedport.ip (p579734E4.dip0.t-ipconnect.de.
-	[87.151.52.228]) by smtp.gmail.com with ESMTPSA id
-	m6sm25410482wrr.53.2019.04.03.16.15.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 03 Apr 2019 16:15:44 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Apr 2019 01:15:33 +0200
-Message-Id: <20190403231533.24354-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190403231533.24354-1-schnitzeltony@gmail.com>
-References: <20190403231533.24354-1-schnitzeltony@gmail.com>
+	Wed,  3 Apr 2019 23:33:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1554334421; x=1585870421;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=Yn7bnmTL2BgBcUxFAXGl9TjIGj9OFhUbNYX2h/RCLDU=;
+	b=o1ZV/HdFbLh2ah+cVq8ZaNF0pMFK+ATQXECJvMeUOm/j+imXdmgF9ujn
+	51A/47LjlCh0VdcCcdoO92w7+ibY3SLLw3088yHcKP8uFLWyfiWVStHfO
+	oVNHxFfBepvFO88l7P6uDJPOoZk6ldXTjunCkMFZoE6Pk6ps7VfMi2wqr
+	K8MiKuyngLGuwAnmsDZAuF2k/epRULk7kjRJKYecZdntx0G74bDrK/Jgr
+	losq005/AoHMZj1Br/64/SKmxFc+BmUEkOcJFr28xysXgDMwjtxtnM9CL
+	nNrViizNm+X3eOyNFID2t69J6gUdDKtWZYPfmBMuIvKzkCoWHrjDBUA4M g==;
+X-IronPort-AV: E=Sophos;i="5.60,306,1549900800"; d="scan'208";a="104935953"
+Received: from mail-dm3nam03lp2053.outbound.protection.outlook.com (HELO
+	NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.53])
+	by ob1.hgst.iphmx.com with ESMTP; 04 Apr 2019 07:26:34 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=Yn7bnmTL2BgBcUxFAXGl9TjIGj9OFhUbNYX2h/RCLDU=;
+	b=QjLGfwnTfH2kf8u+eUbTg/eZAhOwlw5kG5E5vTb2EtR/Hwgdty0vs+qqqzlsoIIpSgv1EI/d0Fwdmo1c85tM0D8xI4uTvEcSgm3NDAjMde1h+9uYx1sCe5oxNmyHCkex1mPHUX1I99WNygNsv1gWrgUaTV2VRLP3mvPcEi2c5f0=
+Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
+	BYAPR04MB6085.namprd04.prod.outlook.com (20.178.234.31) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1771.13; Wed, 3 Apr 2019 23:26:31 +0000
+Received: from BYAPR04MB4901.namprd04.prod.outlook.com
+	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
+	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1750.014;
+	Wed, 3 Apr 2019 23:26:31 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-python][PATCH 1/6] python3-pyaudio: Initial commit
+Thread-Index: AQHU6nSrod9f2hPqkUq+sAd4Z1Gewg==
+Date: Wed, 3 Apr 2019 23:26:31 +0000
+Message-ID: <20190403232520.27463-1-alistair.francis@wdc.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.21.0
+x-clientproxiedby: BYAPR04CA0009.namprd04.prod.outlook.com
+	(2603:10b6:a03:40::22) To BYAPR04MB4901.namprd04.prod.outlook.com
+	(2603:10b6:a03:4f::14)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.250]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 8f76f1ce-c286-4bd8-d5f1-08d6b88bcde9
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600139)(711020)(4605104)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+	SRVR:BYAPR04MB6085; 
+x-ms-traffictypediagnostic: BYAPR04MB6085:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <BYAPR04MB608543772C293850BFCEEC9890570@BYAPR04MB6085.namprd04.prod.outlook.com>
+x-forefront-prvs: 0996D1900D
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(979002)(346002)(376002)(396003)(136003)(366004)(39860400002)(189003)(199004)(316002)(2616005)(476003)(486006)(54906003)(52116002)(3846002)(186003)(99286004)(386003)(6506007)(6116002)(66066001)(26005)(36756003)(8936002)(4326008)(7736002)(50226002)(25786009)(102836004)(97736004)(81166006)(81156014)(8676002)(305945005)(6916009)(2351001)(2906002)(106356001)(105586002)(6486002)(14454004)(86362001)(5640700003)(53936002)(6512007)(256004)(5660300002)(2501003)(71190400001)(1076003)(44832011)(72206003)(6436002)(71200400001)(478600001)(68736007)(969003)(989001)(999001)(1009001)(1019001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB6085;
+	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: Fk+JTmjCGPBTKBvqMF7zNYf5UfVlt/V8JHRF0Xf17+l1JFzqjOeuCgj6XOSui+yxRyJLG+zisVau2bTm/sI0jm/Y1o7nLHnc4Bazb/jVy7bEM9m76OiQlqNHjyBZC0IBBY/kjh8/u+GKtzt91vIWEg09ujlPYg6LJtHdN4/klDjqok3rQlwac/kJnm0EnZOWcmrEi8Rqn+AQ9gAd7l9Md0J+lzq+GASKvzY973zgOSoVCbvGSDiLtd+NibCu6fj5BiAqTMcO5cf1r02IVBH+3JISvM8xY9OP470y+TXGXaFPC180DQB1i4BHNjTc3gxIUEbEBR1t1GKzQtqzDkm/CWEYUWkTvP6SYoxWzF0laYOn8XuQzpmRLdciAdoedA9OUOGU4pgsNH8IHcWGe0Mbx8L7BVBrJUvHLSgM1/8WirI=
 MIME-Version: 1.0
-Subject: [PATCH 2/2] gvfs: Fix missing executable permission flags for files in libexec
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f76f1ce-c286-4bd8-d5f1-08d6b88bcde9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Apr 2019 23:26:31.6954 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB6085
+Subject: [meta-python][PATCH 1/6] python3-pyaudio: Initial commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,42 +91,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:15:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Apr 2019 23:33:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-At least XFCE sessions turned into unusable state [1]
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2019-April/199010.html
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-index 7b9a16e9e..df9fd50ea 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-@@ -61,8 +61,16 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
- # libcdio-paranoia recipe doesn't exist yet
- PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
- 
--# Fix up permissions on polkit rules.d to work with rpm4 constraints
- do_install_append() {
-+    # Fix up permissions on polkit rules.d to work with rpm4 constraints
- 	chmod 700 ${D}/${datadir}/polkit-1/rules.d
- 	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+
-+    # After rebuilds (not from scracth) it can happen that the executables in
-+    # libexec ar missing executable permission flag. Not sure but it came up
-+    # during transition to meson. Looked into build files and logs but could
-+    # not find suspicious
-+    for exe in `find ${D}/${libexec}`; do
-+       chmod +x $exe
-+    done
- }
--- 
-2.20.1
-
+U2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29t
+Pg0KLS0tDQogLi4uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi1weWF1ZGlvLmluYyAg
+ICAgIHwgMTMgKysrKysrKysrKysrKw0KIC4uLi9weXRob24vcHl0aG9uMy1weWF1ZGlvXzAuMi4x
+MS5iYiAgICAgICAgICAgICAgICB8ICAyICsrDQogMiBmaWxlcyBjaGFuZ2VkLCAxNSBpbnNlcnRp
+b25zKCspDQogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMv
+cHl0aG9uL3B5dGhvbi1weWF1ZGlvLmluYw0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5YXVkaW9fMC4yLjExLmJiDQoNCmRp
+ZmYgLS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHlh
+dWRpby5pbmMgYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHlh
+dWRpby5pbmMNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAwMDAuLjBkM2RkYjFh
+NQ0KLS0tIC9kZXYvbnVsbA0KKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
+b24vcHl0aG9uLXB5YXVkaW8uaW5jDQpAQCAtMCwwICsxLDEzIEBADQorU1VNTUFSWSA9ICJQeUF1
+ZGlvIHByb3ZpZGVzIFB5dGhvbiBiaW5kaW5ncyBmb3IgUG9ydEF1ZGlvLCB0aGUgY3Jvc3MtcGxh
+dGZvcm0gYXVkaW8gSS9PIGxpYnJhcnkiDQorU0VDVElPTiA9ICJkZXZlbC9weXRob24iDQorTElD
+RU5TRSA9ICJNSVQiDQorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vUkVBRE1FO21kNT0yODg3
+OTNjMmI5YjA1YmQ2N2FiYmQyYThmNWQxNDRmNyINCisNCitQWVBJX1BBQ0tBR0UgPSAiUHlBdWRp
+byINCisNCitTUkNfVVJJW21kNXN1bV0gPSAiN2U0Yzg4MTM5Mjg0MDMzZjY3YjQzMzZjNzRlZGEz
+YjgiDQorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjkzYmZkZTMwZTBiNjRlNjNhNDZmMmZkNzdlODVj
+NDFmZDUxMTgyYTRhMzQxM2Q5ZWRmYWY5ZmZhYTI2ZWZiNzQiDQorDQorREVQRU5EUyArPSAicG9y
+dGF1ZGlvLXYxOSINCisNCitSREVQRU5EU18ke1BOfSArPSAicG9ydGF1ZGlvLXYxOSINCmRpZmYg
+LS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5YXVk
+aW9fMC4yLjExLmJiIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My1weWF1ZGlvXzAuMi4xMS5iYg0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAw
+MC4uYWJiMDFiZjY5DQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRl
+dnRvb2xzL3B5dGhvbi9weXRob24zLXB5YXVkaW9fMC4yLjExLmJiDQpAQCAtMCwwICsxLDIgQEAN
+CityZXF1aXJlIHB5dGhvbi1weWF1ZGlvLmluYw0KK2luaGVyaXQgcHlwaSBzZXR1cHRvb2xzMw0K
+LS0gDQoyLjIxLjANCg0K
 
