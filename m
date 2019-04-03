@@ -1,47 +1,50 @@
 Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
-	[209.85.221.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 915E77C68F
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id EDA847D2D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 08:29:55 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id t17so7069351wrw.13
+	Wed,  3 Apr 2019 08:29:57 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id y13so20132483wrd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2019 01:29:56 -0700 (PDT)
+	Wed, 03 Apr 2019 01:29:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=XoQkJbtOrcNMepME5PByCloVCowJNiQULhVufyiqpLA=;
-	b=tamVmAC7l8IgI4B7OO81WxzXAvR0R0XfUVucRrMnzuuWpqRl/0GAGswBfPtVn5pTcJ
-	OrUY0LIE3K7X0Ca/JVex51iebM1qJhzrekWKA7x6zYe+CBDPt5por7dR+SRtnNBpIisD
-	gZEJx05fK7pTl3bzj8BmFOHsWll+lxQDEmpgyNOZN57TGKx54oSuR8sY3aYw0Nv7QDmS
-	ZA0Q6eTBXNZNrSu/cPdguUjPxCgCNxs+Hq0Ps1BuqFNPxawgrwWDr4SWsjoL6rs6n+wC
-	EmvEEOIOu+E80AHB5Jf+IiaEFI37MYbZdU4WdZZ5Y9s6CPBbZ5Hb5CED3PDiny+3UbGh
-	O0jg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=kQK9hVbklzwmJA/MhRCorl5fVkl4y9SneDbmixXhpWI=;
+	b=ZIXgEGXo0z4icayEZowmod8mQheIUlCjUT2h/7vyL7K05hyLvknH1SEFz8nP2/UNiM
+	VAfHkMFlbs9qb4hB+HH4JAFbA4li0xg0janhiMG8DtOwtcAw/Z/PnWBxuEsQDCjgqL7T
+	HOlkwR4uRTJV2ND/j6OLRqNLMwn8fpjrabeaQkTlqMg96ajVxWKHwiVtFyQyYVtQ6N3S
+	ooocSH4U1e8yZPMzfEmrwdXsYBDHp/+uJxGHqfFDIi+U8F88rOgmQDhi5eEqxZ1XRnZ2
+	8EFBlt3f36PCOu67JgPpceh0Mjee11GhTz62g/ZWQEf2rDruvqytnDF9lCot+WKjewGf
+	+MWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XoQkJbtOrcNMepME5PByCloVCowJNiQULhVufyiqpLA=;
-	b=CjMz2jss70PFgtO0pkOdSAqVFiAQVEfOJcj4HkbXV03pxmjRcUyVphNYLg292WhMlI
-	K3g1XQuSooyL27Q1bSfubs4osStTtTDrftugUxieVa/7SLLSZUN7tYPCBAUgXqH9uXlC
-	kyxf2UNmFrCR2cN9cJN8uLTP+zwSt+o1jKbRvpHWMvTEjQ1LHxaIU5BIPf5aRKCjLj66
-	q90iacYJ/t8/pe0JvIkzpZqkxbeOBpC+uF2vAovvH8QRQ5DtzCREW24u4L6DUioD10CU
-	LO2o6mSSX10p41TgX0Tbmkwum2zJx0ojXAhMyHRHhhWwHGhjocxN+8snBqKZBM12pmxB
-	fVXQ==
-X-Gm-Message-State: APjAAAWTahutqxDZlo1894xvk5OYhI9EqT6xi8Fgp+Fyeay8zMS92R/o
-	Pj0frHheH+Ias0v3fT8gu4ck9fViJxo=
-X-Google-Smtp-Source: APXvYqzrvMFBWEhkve2IBrU03HT6bzsqX2kGmaph5vs+duWnZRaab1YN4wud0PQS6NjLHWgRr5M2BQ==
-X-Received: by 2002:a5d:42c5:: with SMTP id t5mr47256840wrr.275.1554280195988; 
-	Wed, 03 Apr 2019 01:29:55 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=kQK9hVbklzwmJA/MhRCorl5fVkl4y9SneDbmixXhpWI=;
+	b=DR4BaWVsXbRTVlWQjXF+ycRLEfKJcPnD0zAMcU6MZRHApeYpT5r/IgoKTOHQtJAvZf
+	3ezBygkyio/GcIeyJJRBL5pBmYH4bCpz96Nr1wETY5hOFO+TRnk93h5HUJbRlFJeNSiV
+	4T4Hjs03WnWajL+gLrul68Q1XzCbS9x+v4v9OGnREkMfyoivQjViibpduOCPlkEZmmwq
+	O8dt0tItgykk6n4L0kNv/hX5/jbqBKqtcNWRyY7PNU62pgd6rGroE1rnqeCFJLIE2bUX
+	4mI36KOi4YcpOQin5TYhUfwsbr338MT8tXZQVTIQ23RZj3dEwwIFw2tnYCZBzdAdob9G
+	zmlA==
+X-Gm-Message-State: APjAAAW9H2sFTJxWQzrvWpGuEIGBDi39hPuSGEjwmymvG2056CGOTeo/
+	NttD53yBCbPnMcYUDEem4GSWy0/17bY=
+X-Google-Smtp-Source: APXvYqwqJ4Wr9r/0Pj6Oxhn+DGEb09dKz5sGHepwjz2UpG282d2HEH4G9gw4UhNP8bsrev3eoTDqRg==
+X-Received: by 2002:adf:cd06:: with SMTP id w6mr50280807wrm.52.1554280198417; 
+	Wed, 03 Apr 2019 01:29:58 -0700 (PDT)
 Received: from VM-VPR.corporate.saft.org
 	([2a04:cec0:1050:ef0b:a7a5:d60d:857c:6708])
-	by smtp.gmail.com with ESMTPSA id l21sm6975587wme.4.2019.04.03.01.29.54
+	by smtp.gmail.com with ESMTPSA id l21sm6975587wme.4.2019.04.03.01.29.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 03 Apr 2019 01:29:55 -0700 (PDT)
+	Wed, 03 Apr 2019 01:29:57 -0700 (PDT)
 From: Vincent Prince <vincent.prince.fr@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Apr 2019 10:28:41 +0200
-Message-Id: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
+Date: Wed,  3 Apr 2019 10:28:42 +0200
+Message-Id: <1554280123-19112-2-git-send-email-vincent.prince.fr@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH 1/3] zeromq: bump version 4.2.5 => 4.3.1
+In-Reply-To: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
+References: <1554280123-19112-1-git-send-email-vincent.prince.fr@gmail.com>
+Subject: [meta-oe][PATCH 2/3] cppzmq: bump version 4.2.3 => 4.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,88 +57,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 08:29:55 -0000
-
-Also, use cmake instead of autotools to build it.
+X-List-Received-Date: Wed, 03 Apr 2019 08:29:58 -0000
 
 Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
 ---
- .../recipes-connectivity/zeromq/zeromq_4.2.5.bb    | 32 ----------------------
- .../recipes-connectivity/zeromq/zeromq_4.3.1.bb    | 26 ++++++++++++++++++
- 2 files changed, 26 insertions(+), 32 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/zeromq/zeromq_4.2.5.bb
- create mode 100644 meta-oe/recipes-connectivity/zeromq/zeromq_4.3.1.bb
+ meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.5.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.5.bb
-deleted file mode 100644
-index 356348b..0000000
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.5.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like a concurrency framework"
--HOMEPAGE = "http://www.zeromq.org"
--LICENSE = "LGPLv3+"
--LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
--
--PACKAGECONFIG ??= "libsodium"
--PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
--
--SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
--    file://run-ptest \
--"
--SRC_URI[md5sum] = "a1c95b34384257e986842f4d006957b8"
--SRC_URI[sha256sum] = "cc9090ba35713d59bb2f7d7965f877036c49c5558ea0c290b0dcc6f2a17e489f"
--
--S = "${WORKDIR}/zeromq-${PV}"
--
--#Uncomment to choose polling system manually. valid values are kqueue, epoll, devpoll, poll or select
--#EXTRA_OECONF += "--with-poller=kqueue"
--#CFLAGS_append = " -O0"
--#CXXFLAGS_append = " -O0"
--
--inherit autotools ptest pkgconfig
--
--do_compile_ptest () {
--    echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${B}/Makefile
--    oe_runmake buildtest-TESTS
--}
--
--do_install_ptest () {
--    install -d ${D}${PTEST_PATH}/tests
--    install -m 0755 ${B}/tests/.libs/test_* ${D}${PTEST_PATH}/tests
--}
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.1.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.1.bb
-new file mode 100644
-index 0000000..6e13376
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.1.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like a concurrency framework"
-+HOMEPAGE = "http://www.zeromq.org"
-+LICENSE = "LGPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
+diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+index 9aff59c..2f99417 100644
+--- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
++++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
+ DEPENDS = "zeromq"
+ 
+-SRCREV = "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
+-PV = "4.2.3+git${SRCPV}"
++SRCREV = "213da0b04ae3b4d846c9abc46bab87f86bfb9cf4"
++PV = "4.3.1+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/zeromq/cppzmq.git"
+ 
+@@ -13,6 +13,8 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
++EXTRA_OECMAKE = "-DCPPZMQ_BUILD_TESTS=OFF"
 +
-+PACKAGECONFIG ??= "libsodium"
-+PACKAGECONFIG[libsodium] = "-DWITH_LIBSODIUM=ON,-DWITH_LIBSODIUM=OFF, libsodium"
-+
-+SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
-+    file://run-ptest \
-+"
-+SRC_URI[md5sum] = "64cbf3577afdbfda30358bc757a6ac83"
-+SRC_URI[sha256sum] = "bcbabe1e2c7d0eec4ed612e10b94b112dd5f06fcefa994a0c79a45d835cd21eb"
-+
-+inherit cmake ptest pkgconfig
-+
-+EXTRA_OECMAKE = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DBUILD_TESTS=ON', '-DBUILD_TESTS=OFF', d)} \
-+                 -DCMAKE_SKIP_RPATH=ON \
-+"
-+
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/tests
-+    install -m 0755 ${B}/bin/test_* ${D}${PTEST_PATH}/tests
-+}
-+
-+FILES_${PN}-doc += "${datadir}/zmq/*.txt"
+ PACKAGES = "${PN}-dev"
+ 
+ RDEPENDS_${PN}-dev = "zeromq-dev"
 -- 
 2.7.4
 
