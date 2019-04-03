@@ -1,36 +1,42 @@
-Return-Path: <prvs=989280226=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BCE77D274
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 09:12:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1554282779; x=1585818779;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=qT9yVKKM/iCDwBDIRjHA+p9Tyb/Wu+yZm221ucpNjUQ=;
-	b=ElsgaxDpajJffDD8N18AkEndrhNr5BZxfyeHQlrcZzIaU4griT+cCIpp
-	EAWOEtKr4kv38oOGfC66rAY2IPcE5cNbulLVukry8Nhn3NhMl+o+W2Plp
-	iHZklpgxyt2gjhNeElcSIKOtIzkwHqIaeSB6p4r0dos854qkaMsqEQKEi
-	YIjsRiVKTfKBAvpP9KG+u64XybEdqmcr/p7Oik6eE6lxpKF0JYfZhIYrF
-	5dT3/2C3Hom0A5njcRjh0f1yreVxNZLwtigqgUTKO2VJhOGZcuK9r3ZvJ
-	RCzFYVM18WrjpyBis/TZdppZr3VGrsYCmrOSVlaKXpLhEBXOy+t0EQiUo w==;
-IronPort-SDR: iRyaDvV5QHd83m+7OZCS3EwsKtLXUTSWSMOZMUbzk1fBnSPCdED8+n7WIKTMNmTn8qKqMlg29m
-	KY9fLaBkljjNsYqSmsB2dAxpHasIO3TwKuXkElJxJUZBpKbreqe+3Shp7vgHQQ/FLm+cmRYMb9
-	MK6uCFh0QYxfOxvvfsjabsJEmW6NCLrTxjkUxbcXYbJYezVv1luJQdSLIFX4HzFKTC6WfAFfWW
-	fU9a6roRsk3ScnKWXnZBPIhYKiMsXFG/C90GDq+RTPc+mQxlpV+4P2GiEoM5CnZo+km4WYr6Eh
-	zkw=
-X-IronPort-AV: E=Sophos;i="5.60,304,1549926000"; d="scan'208";a="16171773"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Apr 2019 11:05:39 +0200
-Message-ID: <20190403090539.24866-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.20.1
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 979C17D2AD;
+	Wed,  3 Apr 2019 09:34:14 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44Z19x5z2Jz4b;
+	Wed,  3 Apr 2019 11:34:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1554284054;
+	bh=IVui8djscj7ciaJ/1vrzh9QB+az2mKJeoguW5l2WLtk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=OXzGaoZKfeS0lobTZRXwrtVokaEvsC8Tlvm4mD+la1NvulziI9+2ax0ckF3cWBSRs
+	nMa7Mz3595E5EwDtGWvZd0CtOvnCE2WWTocq6zLQMAAzjgaardXU+3Fv0zu2LafTyS
+	jyZRItVRP9MVLFNgafKAUFTm0lU3OU7qVpo0LqIf37HccGBK61YuqgKVz3tSzYUqkj
+	UDC7CpYB1n74VY8jXaG0ODbflhIZUrVCQHzpA2jr8LNBcyPTHfyZqPLMgCYga/TisJ
+	8N001Rm5eWyCyq45YmdTczjYxDIW5XMryIhaTgzZFuROjL1B7AZUr+G5njT4NLMSaT
+	JBj7Loz0pO9N4SZWRMKbaTMDmZYyyQUboMPA3wiogkBUq0UymhmTiMh/HliUcnwhh2
+	e2pcZahUJJ/ScAAEFX9WKI2ssmsvHBudooOap0rp/1AZ3oi/Qc1O+oyU3JmwJYSFKr
+	xS1utM4slZijCrCJipsXOfxg9iJiDZ5ejwfRTtq2e7gdPCViyAsXrUHJHoDs6kBUSD
+	bF+zLQ2/3PicJyvd31+b7+wM1OHVqsg2Vqi85Llq26nGt6O7abU8SwZHgh7wuKPhvr
+	A6gKsTJQbpQNvUDzqttJKQdyDkCVM5sb63YUckopRC8mGgfS++qtG1yku/mUCik3ez
+	d56iA30K8ZGnullzXJaAEbVU=
+Date: Wed, 3 Apr 2019 12:34:11 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Tom Rini <trini@konsulko.com>
+Message-ID: <20190403093411.GA8376@localhost>
+References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
+	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
+	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
+	<20190402065121.GA31468@localhost>
+	<20190402194614.GY4664@bill-the-cat>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.22]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH] layer.conf: Add warrior to compatible release series
+In-Reply-To: <20190402194614.GY4664@bill-the-cat>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Git commit process question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +49,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 09:12:58 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 03 Apr 2019 09:34:15 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Apr 02, 2019 at 03:46:14PM -0400, Tom Rini wrote:
+> On Tue, Apr 02, 2019 at 09:51:21AM +0300, Adrian Bunk wrote:
+> > On Mon, Apr 01, 2019 at 04:20:41PM -0700, akuster808 wrote:
+> > > 
+> > > 
+> > > On 4/1/19 4:02 PM, Richard Purdie wrote:
+> > > > On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
+> > > >> Hello,
+> > > >>
+> > > >> I have noticed a large number of git commits with no header
+> > > >> information being accepted.
+> > > > Can you be more specific about what "no header information" means? You
+> > > > mean a shortlog and no full log message?
+> > > Commits with just a "subject" and signoff. No additional information
+> > > 
+> > > We tend to reference back to how the kernel does things.
+> > > 
+> > > https://www.kernel.org/doc/html/latest/process/submitting-patches.html
+> > > These two sections in particular.
+> > > 
+> > > 
+> > >     2) Describe your changes
+> > > 
+> > > Describe your problem. Whether your patch is a one-line bug fix or 5000
+> > > lines of a new feature, there must be an underlying problem that
+> > > motivated you to do this work. Convince the reviewer that there is a
+> > > problem worth fixing and that it makes sense for them to read past the
+> > > first paragraph.
+> > >...
+> > 
+> > The kernel does not have "upgrade foo to the latest upstream version" commits.
+> > 
+> > With the Automatic Upgrade Helper this is a semi-automatic task, and 
+> > most of the time there is no specific motivation other than upgrading
+> > to the latest upstream version.
+> 
+> But since that's just filling in a template the body can also be a
+> template perhaps with useful AUH data (run at ... by ... ?) ?
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index b03a608..90236be 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
- BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
--LAYERSERIES_COMPAT_meta-java = "thud"
-+LAYERSERIES_COMPAT_meta-java = "thud warrior"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
+That would be more trivial than useful.
+
+And so far noone has stated any actual problem that would be solved
+by adding such a new requirement.
+
+> Tom
+
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
