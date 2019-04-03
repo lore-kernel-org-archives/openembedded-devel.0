@@ -1,57 +1,30 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 07BF47D280
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 52C847CFE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2019 03:51:15 +0000 (UTC)
-Received: by mail-it1-f194.google.com with SMTP id u65so9032933itc.2
+	Wed,  3 Apr 2019 05:07:45 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,303,1549900800"; d="scan'208";a="58357990"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 03 Apr 2019 13:07:45 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 298EF4CD7914
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Apr 2019 20:51:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wW/MoSS1flQjW8WCA7tfOy9rLOON5NNHQAszV4SFVh4=;
-	b=vh3LYBm9xqV+/Uq6hslzANV2nirm9RJYB5aL/GH3UqohlDLKsKF4+sUilRikTyXENh
-	+tuaE0B39SGESvQTPZoqo+CzTq+F9EY+J1wpcZJI+U8Gpr18nQkIYNILpk5qS5E4r4rG
-	L9hroW/m8D7F4NNrNTvfbp98OkUvGNJRlEz90OPheinNzPP1lqt2fsDXJfgyvk3gBl7b
-	+YlhvAwF2sh2Alk76+26pr0tFq99YwK66i9Cej+ZGS87xZ/RVxvpWMGy1xqzUE1RzDRu
-	1V96XdRQYt30HJ0dspNsrWv4d7NU1wgtwoMv5yIe4SYOQCYQCwNBrOo+SypIqBOLXzgb
-	n0pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wW/MoSS1flQjW8WCA7tfOy9rLOON5NNHQAszV4SFVh4=;
-	b=T998+nYHJA9CX1LvXy4aYD6IMbEXFwgA3vvchE68bQa4yTkYlGEihovE9odpfikqvW
-	ttVhyyuDW5Aav9vUYiFrBoodI9a4IsmfdY8wi4L2Dr9vJUXXeUPAoLiE1gTrfjO11ds4
-	KwdsTkzQLWgqDG7GFexKK8x38FQZaLIqzb6uOrst3wYM6ilybX9KYmEdPF5flUNvmILF
-	4B/HoofhBnjVIGWdTPoTXks7epEOLqqRNx+O2tA7Ek8q8EeFcxIesxv1mDksCiUFsjs9
-	WpPYoyhfllWhduEm+Ek7oBGnDdDyxwDHQ3+EPGyJnxXD37BlAd5LgvuEqg+QXFVJJ4oF
-	IAlA==
-X-Gm-Message-State: APjAAAUdlT3WNAf6BSZ5NBKRNm2tGCV/RAhhmb/HtxfSF2I5HJ3AG3hx
-	EhJyce4r1Qa+ft+gGIYT02SjU5kdPQO1ghltscBvCg==
-X-Google-Smtp-Source: APXvYqwo0Lffrb2lFnEi2191xmGykfcdJi50Xv1qepDH7egCMc74NDfzpQ0dHroAPc4XB1AKGc6U0QlNBSpNEzXKaWQ=
-X-Received: by 2002:a24:55d8:: with SMTP id e207mr258269itb.119.1554263476745; 
-	Tue, 02 Apr 2019 20:51:16 -0700 (PDT)
+	Wed,  3 Apr 2019 13:07:48 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 3 Apr 2019 13:07:52 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 3 Apr 2019 22:07:39 +0800
+Message-ID: <1554300459-3158-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
-	<b08083fc2f63f6324a652706f8343a0b8defe209.camel@linuxfoundation.org>
-	<a1416fe3-04fb-1d37-eaef-05b9a838254e@gmail.com>
-	<6068e963-94c1-7225-2c60-9ae027c74639@windriver.com>
-	<CAPoiz9yat-4XRgSFikh5PxrsgVpRAWNi2dx1O0+_iHyVR529Ag@mail.gmail.com>
-	<20190402194738.GZ4664@bill-the-cat>
-	<56e2b936-177c-7066-99c0-bb46854daa4b@gmail.com>
-	<20190403004550.GB4664@bill-the-cat>
-In-Reply-To: <20190403004550.GB4664@bill-the-cat>
-From: Jon Mason <jdmason@kudzu.us>
-Date: Wed, 3 Apr 2019 03:51:05 +0000
-Message-ID: <CAPoiz9zYfcUJKOdix+1depKWUp5HBnNuSon0DvKKQLA6aKpdTQ@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Git commit process question.
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: 298EF4CD7914.A7883
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][patch] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,107 +37,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 03:51:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 03 Apr 2019 05:07:46 -0000
+Content-Type: text/plain
 
-On Wed, Apr 3, 2019 at 7:45 AM Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Apr 02, 2019 at 02:24:51PM -0700, akuster808 wrote:
-> >
-> >
-> > On 4/2/19 12:47 PM, Tom Rini wrote:
-> > > On Tue, Apr 02, 2019 at 04:45:16AM +0000, Jon Mason wrote:
-> > >> On Tue, Apr 2, 2019 at 6:41 AM Mark Hatle <mark.hatle@windriver.com> wrote:
-> > >>> On 4/1/19 6:20 PM, akuster808 wrote:
-> > >>>>
-> > >>>> On 4/1/19 4:02 PM, Richard Purdie wrote:
-> > >>>>> On Mon, 2019-04-01 at 15:33 -0700, akuster808 wrote:
-> > >>>>>> Hello,
-> > >>>>>>
-> > >>>>>> I have noticed a large number of git commits with no header
-> > >>>>>> information being accepted.
-> > >>>>> Can you be more specific about what "no header information" means? You
-> > >>>>> mean a shortlog and no full log message?
-> > >>>> Commits with just a "subject" and signoff. No additional information
-> > >>> If you can convey the reason for the change in just the subject, that is
-> > >>> acceptable.. but there is -always- supposed to be a signed-off-by line according
-> > >>> to our guidelines.
-> > >>>
-> > >>> So if you see this, I think we need to step back and figure out where and why
-> > >>> it's happening and get it resolved in the future.
-> > >>>
-> > >>> (Places I've seen in the past were one-off mistakes and clearly that -- so it
-> > >>> wasn't anything that we needed to work on a correction.)
-> > >>>
-> > >>> --Mark
-> > >>>
-> > >>>> We tend to reference back to how the kernel does things.
-> > >>>>
-> > >>>> https://www.kernel.org/doc/html/latest/process/submitting-patches.html
-> > >>>> These two sections in particular.
-> > >>>>
-> > >>>>
-> > >>>>     2) Describe your changes
-> > >>>>
-> > >>>> Describe your problem. Whether your patch is a one-line bug fix or 5000 lines of
-> > >>>> a new feature, there must be an underlying problem that motivated you to do this
-> > >>>> work. Convince the reviewer that there is a problem worth fixing and that it
-> > >>>> makes sense for them to read past the first paragraph.
-> > >>>>
-> > >>>>
-> > >>>> along with this section.
-> > >>>>
-> > >>>>
-> > >>>>     14) The canonical patch format
-> > >>>>
-> > >>>> This section describes how the patch itself should be formatted. Note that, if
-> > >>>> you have your patches stored in a |git| repository, proper patch formatting can
-> > >>>> be had with |git format-patch|. The tools cannot create the necessary text,
-> > >>>> though, so read the instructions below anyway.
-> > >>>>
-> > >>>> The canonical patch subject line is:
-> > >>>>
-> > >>>> Subject: [PATCH 001/123] subsystem: summary phrase
-> > >>>>
-> > >>>> The canonical patch message body contains the following:
-> > >>>>
-> > >>>>       * A |from| line specifying the patch author, followed by an empty line
-> > >>>>         (only needed if the person sending the patch is not the author).
-> > >>>>       * The body of the explanation, line wrapped at 75 columns, which will be
-> > >>>>         copied to the permanent changelog to describe this patch.
-> > >>>>       * An empty line.
-> > >>>>       * The |Signed-off-by:| lines, described above, which will also go in the
-> > >>>>         changelog.
-> > >>>>       * A marker line containing simply |---|.
-> > >>>>       * Any additional comments not suitable for the changelog.
-> > >>>>       * The actual patch (|diff| output).
-> > >>>>
-> > >>>>
-> > >>>>     - Armin
-> > >> There are existing git hooks that can be used to detect and fail to
-> > >> merge patches like this.  For Linux, I have the following in
-> > >> .git/hooks/pre-commit
-> > >> #!/bin/sh
-> > >> exec git diff --cached | scripts/checkpatch.pl -
-> > > FWIW, over in U-Boot land I do:
-> > > ./scripts/checkpatch.pl -q --git origin/master..
-> > > as part of checking things prior to pushing to master.
-> > Having hooks is fine but after the fact. It puts the burden back on the
-> > Layer maintainer to resolve. If we think more info is better, it needs
-> > to happen at time of change submittal.
->
-> Note that I'm not talking about a hook, I'm talking about what's part of
-> my CI process.  And when something pops up there is when I grab the
-> patch in question and push back on the submitter.
+A new recipe for dnf-plugin called tui.
+This plugin can work in nativesdk environment, and provide some additional functions:
+ 1. Add new command dnf tui --init to make dnf to work on host
+ 2. Text-based user interface for dnf.
+ 3. Manage SPDX files
+ 4. Manage SRPM files
+ 5. Add installation samples for dnf
 
-Exactly!  I do the same things for the Linux stuff I own.  I'll do a
-git-am, then redir the output and publicly shame them.  Public shaming
-is a vastly underrated method of behavior modification.
+More details, please reference to https://github.com/ubinux/dnf-plugin-tui/tree/master.
 
-Thanks,
-Jon
+In addition, modify some nativesdk recipes to include dnf-plugin-tui in meta-toolchain.
 
->
-> --
-> Tom
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../recipes-core/meta/meta-environment.bbappend    |  3 +++
+ .../nativesdk-packagegroup-sdk-host.bbappend       |  2 ++
+ .../recipes-devtools/dnf-plugin-tui/dnf_%.bbappend | 29 ++++++++++++++++++++++
+ .../dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb     | 29 ++++++++++++++++++++++
+ 4 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-core/meta/meta-environment.bbappend
+ create mode 100644 meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
+
+diff --git a/meta-oe/recipes-core/meta/meta-environment.bbappend b/meta-oe/recipes-core/meta/meta-environment.bbappend
+new file mode 100644
+index 0000000..2ac268f
+--- /dev/null
++++ b/meta-oe/recipes-core/meta/meta-environment.bbappend
+@@ -0,0 +1,3 @@
++create_sdk_files_append() {
++    echo 'export MACHINE_ARCH=${MACHINE_ARCH}' >> $script
++}
+diff --git a/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend b/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
+new file mode 100644
+index 0000000..9f85825
+--- /dev/null
++++ b/meta-oe/recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bbappend
+@@ -0,0 +1,2 @@
++RDEPENDS_${PN}_append = " nativesdk-dnf-plugin-tui \ 
++                          nativesdk-createrepo-c"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
+new file mode 100644
+index 0000000..ce683e4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf_%.bbappend
+@@ -0,0 +1,29 @@
++RDEPENDS_${PN}_class-nativesdk += " \
++  python3-core \
++  python3-codecs \
++  python3-netclient \
++  python3-email \
++  python3-threading \
++  python3-distutils \
++  python3-logging \
++  python3-fcntl \
++  librepo \
++  python3-shell \
++  libcomps \
++  libdnf \
++  python3-sqlite3 \
++  python3-compression \
++  python3-rpm \
++  python3-iniparse \
++  python3-json \
++  python3-curses \
++  python3-misc \
++  python3-gpg \
++  libnewt-python \
++  "
++
++do_install_append_class-nativesdk() {
++        create_wrapper ${D}/${bindir}/dnf \
++                RPM_CONFIGDIR=${SDKPATHNATIVE}${libdir_nativesdk}/rpm \
++                RPM_NO_CHROOT_FOR_SCRIPTS=1
++}
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
+new file mode 100644
+index 0000000..4fbbac8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/nativesdk-dnf-plugin-tui.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "A text-based user interface plugin for dnf, used in toolchian environment"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
++
++SRCREV = "a743116fa78a20f9828533c1de79ad8e4ab2d16c"
++
++inherit nativesdk distutils3-base
++
++S = "${WORKDIR}/git"
++
++RDEPENDS_${PN} += " \
++  nativesdk-dnf \
++  nativesdk-libnewt-python \
++  "
++
++do_install_append() {
++        install -d ${D}${datadir}/dnf
++        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
++            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
++        done
++}
++
++FILES_${PN} += "${datadir}/dnf"
+-- 
+2.7.4
+
+
+
 
