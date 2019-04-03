@@ -1,32 +1,51 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id B61827D422;
-	Wed,  3 Apr 2019 23:07:09 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	03 Apr 2019 16:07:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.60,306,1549958400"; d="scan'208";a="334775587"
-Received: from mnandy-mobl.gar.corp.intel.com (HELO localhost.localdomain)
-	([10.255.173.211])
-	by fmsmga005.fm.intel.com with ESMTP; 03 Apr 2019 16:07:05 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: yocto@yoctoproject.org,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Date: Thu, 04 Apr 2019 12:07:02 +1300
-Message-ID: <2189093.Hm6Vq2XZhg@localhost.localdomain>
-Organization: Intel Corporation
-In-Reply-To: <CAMKF1srb2EgL7tYZDFoq2EqABp-+_eib2u2OZMwT6B3TVgNk=Q@mail.gmail.com>
-References: <854544cb-aab1-1a9d-9e98-0f39663ca621@gmail.com>
-	<20190403144110.GG4664@bill-the-cat>
-	<CAMKF1srb2EgL7tYZDFoq2EqABp-+_eib2u2OZMwT6B3TVgNk=Q@mail.gmail.com>
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id BB9D67D0F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Apr 2019 23:15:43 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id v14so830182wmf.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Apr 2019 16:15:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pnldcm0djuK9Su2H+N0+XPRLTuRPeAQAq0XN/jXqHBw=;
+	b=GCXMGwrgWRpNaShOQSPEwgdmXrvjnKSF/wwiXaRzYiZ+XMca4bBTgE89057aSyio2q
+	lPtYNQVZBzoB4YE/JjZNGHeYHRfCRNxtaHA8XiYak/z617AEYYb9DlewKTNZ05R2cftA
+	mA5qCns4qEXxeBMNlI+Z/MUKpOutbnsfFMvBo8680NYsBVqHoPwRo7yKTEOrbEwq+Xir
+	jaPUvSlHWDc8sR4NsTVwawNb6L/Et5Z843PiFg0R8y6hpqtAs+QZLin8agyUGtSGNRgg
+	OJbUq8NAtv5SWfUShxcNnPvw7V2ulVQbck4h4f+QIBDgpCpfaUQwqw4JwesKJGx8+fxg
+	WXDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pnldcm0djuK9Su2H+N0+XPRLTuRPeAQAq0XN/jXqHBw=;
+	b=a/YJ39xgEiQhVRgKUBWHeiRMkNQLeCDxIgcRSO3+ZsHUF7q7U40kGNSbJ8DNkc9yxL
+	1H0jH/abx4+2nBuqVre3JXuB/Vg4P5uTT44gWDnl5dWdmsaZo18T4R+qm8KlYxsXGf9n
+	e5TjcsvsHZ3EcGV70VC55ZZv6rUGqUONSYwS/hY5a/qNrj1mGkjLmvRSbk4tvUMpHxDm
+	ARhb6G851mnoeG36y+eqbZ+O2AXVR987MNyXB8qZvBxY1lHg+keEk0XXdS6N5FLSJuVF
+	HAYv/LBRHS6wE2tHf2gJ0AaoMAkhuvUUIr2fmxOZF1AVkV+PZ9hX39DSe74/RbOVqCI5
+	kV2w==
+X-Gm-Message-State: APjAAAUh88k7PB5BpbTrFlct9IGni6p4YLYchhugtWF0TQADiRtrlFg+
+	dJZc4yIE/PeWyLs9p14trGWHnUXw
+X-Google-Smtp-Source: APXvYqxsho/AV94gbuQw+4FZDLPOXt6pkFv3XdcGsO7QZ1Y2nZLF0bSC6zTEPw1n256QlmdVPi76Tw==
+X-Received: by 2002:a1c:f205:: with SMTP id s5mr1699073wmc.124.1554333344241; 
+	Wed, 03 Apr 2019 16:15:44 -0700 (PDT)
+Received: from superandy.speedport.ip (p579734E4.dip0.t-ipconnect.de.
+	[87.151.52.228]) by smtp.gmail.com with ESMTPSA id
+	m6sm25410482wrr.53.2019.04.03.16.15.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 03 Apr 2019 16:15:43 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Apr 2019 01:15:32 +0200
+Message-Id: <20190403231533.24354-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Adrian Bunk <bunk@stusta.de>
-Subject: Re: [yocto] [OE-core] Git commit process question.
+Subject: [PATCH 1/2] libpeas: rework gobject-introspection handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,68 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:07:10 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 03 Apr 2019 23:15:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thursday, 4 April 2019 5:46:04 AM NZDT Khem Raj wrote:
-> On Wed, Apr 3, 2019 at 7:41 AM Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Apr 03, 2019 at 11:30:39AM +0100, Burton, Ross wrote:
-> > > On Tue, 2 Apr 2019 at 20:46, Tom Rini <trini@konsulko.com> wrote:
-> > > > > The kernel does not have "upgrade foo to the latest upstream
-> > > > > version" commits.
-> > > > >
-> > > > > With the Automatic Upgrade Helper this is a semi-automatic task, and
-> > > > > most of the time there is no specific motivation other than
-> > > > > upgrading
-> > > > > to the latest upstream version.
-> > > >
-> > > > But since that's just filling in a template the body can also be a
-> > > > template perhaps with useful AUH data (run at ... by ... ?) ?
-> > >
-> > > Apart from making the commit message longer what does this achieve?
-> > > The commit already has a timestamp and author.
-> >
-> > It's an etiquette thing.  Subject+Sign-off+Empty body is bad form.  AUH
-> > updates are a form of "trivial update" that every project has.  "Update
-> > $X from version $Y to $Z" is what a human would normally put.  It's
-> > weird looking at git log of nothing but subject+signed-off-by.  I'm not
-> > going to object further on this point, but I don't get it.
-> 
-> if the content of subject is being repeated in body then I would
-> prefer an empty body
-> redundant information in commits should be avoided since it can create
-> impression that body does not have
-> useful information and skip reading it. We should strive to make commits
-> concise and useful.
+gobject-introspection is mandatory for libpeas - there is no configure option
+to enable or disable it.
 
-There is often (I won't say always, but often) something useful you can put in 
-the commit message. If it's a recipe upgrade, you could put a pointer to the 
-upstream changelog in it, for example. As the person doing the upgrade if your 
-prior review of that changelog or other upstream release documentation 
-indicated any backwards-compatibility issues or CVEs fixed then those really 
-ought to be mentioned as well; if you're feeling especially generous you might 
-mention highlights of any new functionality. (I have a proposal that might 
-help us automate part of that which I've not yet fully fleshed out, hopefully 
-one day soon I will get around to it.)
+To handle properly, this patch does:
 
-The issue of empty commit messages is something I've complained about in the 
-past, and not just about recipe upgrades. If I - as someone who is relatively 
-familiar with OE - have to actually read beyond the shortlog / commit message 
-to understand the basics of why a change has been made, then it's likely that 
-the commit message wasn't good enough. Unlike other issues, once a commit goes 
-in the message is set in stone within the git history, so if you are working 
-on a change, *please* take a minute or two to document it adequately in the 
-commit message so that others looking back can understand it.
+* Make 'gobject-introspection-data' a required distro feature
+* To avoid trouble once pending patch removing
+  'UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"'
+  are in oe-core [1] - set in recipe to avoid
+  | libpeas-1.22.0-r0 do_configure: QA Issue: libpeas: configure was passed unrecognised options: --enable-introspection [unknown-configure-option]
 
-Thanks,
-Paul
+This does not handle MACHINE_FEATURES / qemu-usermode case but there other
+issues of higher priority.
 
+[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-April/280711.html
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+index c1ead0670..dd1b53e39 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+@@ -5,7 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
+ 
+ DEPENDS = "gnome-common gtk+3 intltool-native"
+ 
+-inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
++inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache distro_features_check
++
++# gobject-introspection is mandatory and cannot be configured
++REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
++UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"
+ 
+ SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
+ SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+2.20.1
 
 
