@@ -1,47 +1,55 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F220A7D644
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DF6C7BD72
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 20:48:45 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id x7so6157165ioh.4
+	Fri,  5 Apr 2019 21:09:22 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id DB5631873B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2019 13:48:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5i3NvkLDSRza75lVLUt+oIiWYv5QKaWz3dFh7Eoun00=;
-	b=Z9GysbPwrfHbLzRNcOOs0Do+/v4SXPeB2LnPYNweBzrAMV9GGHK+dgGuBhKZ8dPD4V
-	FwbieUrnSQMUhHS4fOrP45o9JZCZZAJBM854nZe/t2ooxZLtc4azJXdIXK4ZOxStuvEL
-	sih5ZgowgTxxlkfRg4AR4kke5mnAHRBXeLWI+xn5FaLcIX5+FZYY1f97R+Uxiq5Tx9WM
-	kLgYGO40ae5UC9Iz1J/1o6tHVx+ORprtp++rzEcwMVEtU/yeOqPqFwbj5YXZsn26yqAH
-	MYCR4yEjwL8st84jz5mu4emI/C4YCQmk1utWEHGNAx1G2eHiApd+RLIZPOvqys+Pwyql
-	70jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5i3NvkLDSRza75lVLUt+oIiWYv5QKaWz3dFh7Eoun00=;
-	b=r4cUzTf+bBShSfsLcBfPu3zJAI0ukNIgE1R69ISUrrVn1WJMFcrzHaq1KFclBABecA
-	npRzt8YjDuAMl9bzg5/H5S+EEEGUi5mjNV6pPcxZAMrld65IC04tquDoDRKIQVxywttK
-	dmChCConSrrXNlPASvwjWjbOEFqrPqEcneL1Ni0vvmvvWj0lOG/tGhKKEvMxQ4KNisDu
-	VlPKdydhvWqMx6uBTVVpbC3BqMa78uxtVPBcNWFhAYEScAPm57AuIY/jQ3lN6ujX+EmL
-	sCxwQrjk/T2ielHdtMlRbykD9bm5zBjaVW5TVjDgriihFog0bL3Njftx0dhXCOiZ5jCY
-	YesA==
-X-Gm-Message-State: APjAAAVsGXOX1afAJkypb/yMobSQoakzWmiVlgfGkA+p8rGDAEpueBsk
-	/OmmDqxTerVuVYUKA3KX3TjL9+Cz465Gjiziugg=
-X-Google-Smtp-Source: APXvYqyeCQql5NagGKfAFiUB56swA9MHxfznRg8Z5Ts9ECdh4CgojNk3Qq15kmcCQMMV3hX7OFWNiJbYqVXpC9Q+AAs=
-X-Received: by 2002:a6b:e50d:: with SMTP id y13mr9904188ioc.142.1554497327070; 
-	Fri, 05 Apr 2019 13:48:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190403234608.20046-1-schnitzeltony@gmail.com>
-	<CAMKF1sqZteXU-r2Fm9z=cKBcDg8hreVtHoN_46uRnShEEq2STw@mail.gmail.com>
-In-Reply-To: <CAMKF1sqZteXU-r2Fm9z=cKBcDg8hreVtHoN_46uRnShEEq2STw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 5 Apr 2019 22:48:35 +0200
-Message-ID: <CALbNGRQAne9FYqNN+bYtK4sDMU4Rr=Z-Q8UKsOSrj=c9vBXhXw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] gnome-desktop3: remove gconf from DEPENDS
+	Fri,  5 Apr 2019 23:09:22 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id hn-kJdi7dr8I
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:21 +0200 (CEST)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 182941847C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:21 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id F3F801A075
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E91881A06D
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder02.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by seth.se.axis.com (Postfix) with ESMTP id DD4D0231F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x35L9KEt032737
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 5 Apr 2019 23:09:20 +0200
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x35L9Kjl032733
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 5 Apr 2019 23:09:20 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  5 Apr 2019 23:09:18 +0200
+Message-Id: <20190405210918.32563-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH] doxygen: Make it build with ninja 1.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,21 +62,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 20:48:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 05 Apr 2019 21:09:22 -0000
 
-On Fri, Apr 5, 2019 at 10:39 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Andreas
->
-> I am seeing this
->
-> https://errors.yoctoproject.org/Errors/Details/235565/
->
-> Maybe turning libseccomp into packageconfig and disabling it by
-> default would be right thing here
->
-Thanks - will check
+ninja 1.9.0 turned the previous dupbuild warning into an error, which
+resulted in the following error:
 
-Andreas
+  ninja: error: build.ninja:1948: multiple rules generate
+  generated_src/configvalues.h [-w dupbuild=err]
+
+Turn the error back into a warning until upstream corrects the build
+rules.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
+index 784684620..2435b587d 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
+@@ -4,8 +4,6 @@ HOMEPAGE = "http://www.doxygen.org/"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-inherit cmake python3native
+-
+ DEPENDS = "flex-native bison-native"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+@@ -13,4 +11,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+ SRC_URI[md5sum] = "2c98c73eba392d334f5bbaf15e09bae3"
+ SRC_URI[sha256sum] = "bd9c0ec462b6a9b5b41ede97bede5458e0d7bb40d4cfa27f6f622eb33c59245d"
+ 
++inherit cmake python3native
++
++# Avoid the following error:
++#   ninja: error: build.ninja:1948: multiple rules generate
++#   generated_src/configvalues.h [-w dupbuild=err]
++EXTRA_OECMAKE_BUILD += "-w dupbuild=warn"
++
+ BBCLASSEXTEND = "native"
+-- 
+2.12.0
+
 
