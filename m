@@ -1,47 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D2317D5ED
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B3A37D68F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 22:36:24 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id p20so9248055qtc.9
+	Fri,  5 Apr 2019 23:07:17 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id 188so4057168pfd.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2019 15:36:25 -0700 (PDT)
+	Fri, 05 Apr 2019 16:07:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=zNc+NzyuLMhI/cUr4Udexc5jx57FtEXc4/1l+Y0aeWE=;
-	b=eQs+EVO2E4e1VX6svAJVxiY4zbDTIS46r7YTBvXHxMa712E/a9lRefksJUmufkRuT4
-	lMskLkibdRox0LlizDn5QsIUXMk9+r9bQCUOLiIHYpDlFLzV34s6s0YNERf+h8j41Kcw
-	93Dn1alJjVh0RogBXq5CL1m2FCneipT4lq8BtbxnUD4zRZ42KRJwC5APD1PRjZseXTSS
-	xobEfA537wnikgA+NZZeE9e43F/XvaHclPU4PaB0qs1zFow6Wbokm42muv0WoPsFPrd2
-	M2AlWugo81M1kwVucOxNTk1H5OB9ag+oCOfyjDC+cM8k00bqcVaA25D6fKykZYiO7pNp
-	C3bw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qtYlNWQxANOOBt9XIgWWTUCgGy3L/5nyoiZo5ZkDvkQ=;
+	b=VC+ByS1d5CF3zq3HAtwI+iqmFil8OkQSWMs+0Aqf88OBJc056LCX4osK+/eTJGqq0E
+	sH2DzdBLLMWNX1Suavw0eOY7DvjulWnm2BhuNUInFmAxkrcnUXsVH4nYVp3k/2P8xyAa
+	dH/mMqZMt5vuwAxnh53SziKXpWPgAnrw8GY9s3IoskqUlj7fgAMLsXmezIO4GjHTJMwG
+	2xbgblF+2E6crjaagikK7eV3a+jfTdqKqbNKa/1kCBe70KWWtlr6uF9UmDyPlm+rpWJD
+	V/Ym+W0G+QViJ+QYfyb1Oj915y3UiR79cOKYaZ+h1TTT+i04RFdsudSFLlQAzP8tr549
+	VgZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=zNc+NzyuLMhI/cUr4Udexc5jx57FtEXc4/1l+Y0aeWE=;
-	b=B/uFdcguMgcZ+NTNPNmbuiHdjRwPEU/oUrVRj8M33zsEbxHpjXOsghOzmBluOwr23n
-	/2dz8FXDVbzbRzI9fmBUnUhJXO1fXebm9xR9DX1/GEZg9fnoY9hcp7WYMJl64SaCqF6t
-	EMDi5X9j6H0ggjm+yygf6OkCoBJg3fVz/NYf4J4gCcfvUPAEvd3oRGGOh0QeBGaefvWp
-	5VsOY0zU2YtG1dimbzscNSXPDO5DJi4asKLF/OPRghiCREQlX4U4w/NgVVW6uNSBqS2c
-	WayiLtkr+ccEQCy5xKT+IIfXtIlxVNFd7UF0AO6A8YCThjZJQ3zPHoxLEYCxf+UXgHDY
-	aDgg==
-X-Gm-Message-State: APjAAAU/2880L+NklKoCtefuFudDwZ1mJnVpZfK/s3FzXTSt2a0s8NFk
-	FpcF6bYDac9HvPAVynVZ415pR3hJzidZ5IL/Agc=
-X-Google-Smtp-Source: APXvYqzilO6O3ckpTzh+VYI/P3RkhbesN2htboXnOD322H5bpQ3T+w+JSeStB84KXsuAq9iscVFAVPKibxg20CuhURo=
-X-Received: by 2002:a0c:d0f8:: with SMTP id b53mr12446575qvh.46.1554503784884; 
-	Fri, 05 Apr 2019 15:36:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190405213513.6857-1-joe.slater@windriver.com>
-In-Reply-To: <20190405213513.6857-1-joe.slater@windriver.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qtYlNWQxANOOBt9XIgWWTUCgGy3L/5nyoiZo5ZkDvkQ=;
+	b=k0gd5LezaoBDBqcE9INYIoTAfK1X+4V1tLAOhCPmcTFYZOI5Fn4SXlRVb+bmYwfkI0
+	9vHAwf/g9wHGmMQx7EVPUI4r+qFpEe9wwKWzjfg28MzOaA9v9cuc1KsroEqsXqkn29IV
+	BpHRFDuA3HLqdB6js1780ub8HMDTmikcb84+yG9pMkn3Q1zhxvcNw1VBsFWEEvQamtgI
+	oTduE591hCihq1tRoPp+/kdPEl42mtdHF8zFeCYwSFY0TWpvkQtDjkyCdezh2OxPXubk
+	XgNODIw+HTyPaxbNLzdp7yRa0mLZiRBgKWZJ5HjLNssvNkuE6O1cy5GAEYQ2+5JtBkDd
+	xMag==
+X-Gm-Message-State: APjAAAWZ093LWlNG93HTGfkZCpNt7b8M4W1NfBg77rSkHCub6ZSgOuGk
+	+aBIZPkfPewpXUAp1W0WaHqLFo3IGpc=
+X-Google-Smtp-Source: APXvYqy7MXbyeH4Flzd/wa04qFYcSb206urJFkPLDzxVg+XxSC7CTIQrQQe3GsgXm5BOd+3b64IkQw==
+X-Received: by 2002:a63:e554:: with SMTP id z20mr14582387pgj.234.1554505637757;
+	Fri, 05 Apr 2019 16:07:17 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::8ec8])
+	by smtp.gmail.com with ESMTPSA id
+	143sm44285311pge.50.2019.04.05.16.07.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 05 Apr 2019 16:07:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Apr 2019 15:35:58 -0700
-Message-ID: <CAMKF1sq0fPa1SKtsoKU+08P_dhJKWJVZsfk4FSDyP-5vviYYdA@mail.gmail.com>
-To: Joe Slater <joe.slater@windriver.com>
-Cc: meta-virtualization@yoctoproject.org,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-virt][m-c-s][PATCH 1/1] libibverbs: do not try to build for arm 32 bit or any mips
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  5 Apr 2019 16:07:04 -0700
+Message-Id: <20190405230704.15832-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-multimedia][PATCH] ncmpc: Rename artist_screen to library_screen
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,39 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 22:36:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 05 Apr 2019 23:07:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 5, 2019 at 2:36 PM Joe Slater <joe.slater@windriver.com> wrote:
->
-> arch.h does not contain macros for 32 bit arm or any mips arch.
->
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->  recipes-extended/libibverbs/libibverbs_1.2.1.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/recipes-extended/libibverbs/libibverbs_1.2.1.bb b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
-> index dd74522..2becf35 100644
-> --- a/recipes-extended/libibverbs/libibverbs_1.2.1.bb
-> +++ b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
-> @@ -29,3 +29,7 @@ do_install_append() {
->
->  PROVIDES = "virtual/libibverbs"
->  RPROVIDES_${PN} = "virtual/libibverbs"
-> +
-> +# We can build for arm64
+artist_screen is not a valid meson option
 
-this comment will be confusing. Lets remove it.
+Fixes
+ERROR: ncmpc-0.33-r0 do_configure: QA Issue: ncmpc: configure was passed unrecognised options: artist_screen [unknown-configure-option]
 
-> +COMPATIBLE_HOST_mipsarch = "none"
-> +COMPATIBLE_HOST_arm = "none"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
+index 8468d125df..d4ebe1769a 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
+@@ -11,7 +11,7 @@ DEPENDS += " \
+     libmpdclient \
+ "
+ 
+-PACKAGECONFIG ??= "colors locale mouse nls regex help_screen artist_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
++PACKAGECONFIG ??= "colors locale mouse nls regex help_screen library_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
+ 
+ PACKAGECONFIG[colors] = "-Dcolors=true,-Dcolors=false"
+ PACKAGECONFIG[lirc] = "-Dlirc=enabled,-Dlirc=disabled,lirc"
+@@ -22,7 +22,7 @@ PACKAGECONFIG[nls] = "-Dnls=enabled,-Dnls=disabled,gettext-native"
+ PACKAGECONFIG[regex] = "-Dregex=enabled,-Dregex=disabled,pcre"
+ 
+ PACKAGECONFIG[help_screen] = "-Dhelp_screen=true,-Dhelp_screen=false"
+-PACKAGECONFIG[artist_screen] = "-Dartist_screen=true,-Dartist_screen=false"
++PACKAGECONFIG[library_screen] = "-Dlibrary_screen=true,-Dlibrary_screen=false"
+ PACKAGECONFIG[search_screen] = "-Dsearch_screen=true,-Dsearch_screen=false"
+ PACKAGECONFIG[song_screen] = "-Dsong_screen=true,-Dsong_screen=false"
+ PACKAGECONFIG[key_screen] = "-Dkey_screen=true,-Dkey_screen=false"
+-- 
+2.21.0
+
 
