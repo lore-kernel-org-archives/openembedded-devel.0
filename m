@@ -1,45 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D14D07D689
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by mail.openembedded.org (Postfix) with ESMTP id F220A7D644
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 20:39:53 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id k14so9025834qtb.0
+	Fri,  5 Apr 2019 20:48:45 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id x7so6157165ioh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2019 13:39:55 -0700 (PDT)
+	Fri, 05 Apr 2019 13:48:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zzPt7S3yaAbtgBsXntDOp+lfGi/mZolpvfiJO6GQl4Q=;
-	b=eqSTExopcEkvPuk9CVWzMZxWYcMcrH+l7nrQ2O9kuYVh3CTQp7CYNAEqJZ9el1JEaA
-	UR/qUNzivhstOrsF1OFOQmg26xyfi9nwOmIzrLDd6JvI6hrboq5rWPgh8wLEr162TA59
-	DiESM9vtZb7hTGkzEHLJRddqHkbnczcZzxegdWjtEydEKBHf8j1nP6j75RlGTyujyeEJ
-	vbwvJlWSdjkVzt3Di0nLC9C2qKQHX0CI70RKOV95lMpCLceLx5IH1mEFwgmp5koYozbw
-	YohWEHJxI7PifuUo+GFLHsTXr42ADkIKVmQOKiCgCrf9o8ghDCP5YqgAzwz+NI2ybGqE
-	CE3g==
+	:cc; bh=5i3NvkLDSRza75lVLUt+oIiWYv5QKaWz3dFh7Eoun00=;
+	b=Z9GysbPwrfHbLzRNcOOs0Do+/v4SXPeB2LnPYNweBzrAMV9GGHK+dgGuBhKZ8dPD4V
+	FwbieUrnSQMUhHS4fOrP45o9JZCZZAJBM854nZe/t2ooxZLtc4azJXdIXK4ZOxStuvEL
+	sih5ZgowgTxxlkfRg4AR4kke5mnAHRBXeLWI+xn5FaLcIX5+FZYY1f97R+Uxiq5Tx9WM
+	kLgYGO40ae5UC9Iz1J/1o6tHVx+ORprtp++rzEcwMVEtU/yeOqPqFwbj5YXZsn26yqAH
+	MYCR4yEjwL8st84jz5mu4emI/C4YCQmk1utWEHGNAx1G2eHiApd+RLIZPOvqys+Pwyql
+	70jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zzPt7S3yaAbtgBsXntDOp+lfGi/mZolpvfiJO6GQl4Q=;
-	b=goCI6JMTnQbHHdKlpXSju/MCLuG/OH3pRThzSlguHCDAM0S8HKRyLo/2Ft7Vivoay8
-	/5ldlDHhhIqOYd7+vuaXGF903oYHa/BqnKe0d7RjjsRGrAkEK8k8/Vb/6YOY1+yNahPr
-	13blCH7ap31+oReF5nzYLZMP/8tZu8Q9lzNZP2EJQUQGoip2M1qCy1O8w3USSIib8WXn
-	9rNwaC2oOP+8vzkxK6sOT5/HX0HDutjMWoEmB+6fHez9+WJBxF9mjYXVx0JSc9GGHtsa
-	rGqTukWoMcdGD9D9ilNxf4dqgb1wwETIuBgwYtlCdRZTqrcMi0kZYxjchGw15E5+AKTf
-	5wDw==
-X-Gm-Message-State: APjAAAVJSfdDzbMzqalLyB1qALCXJ32x4mb204eor3eZN0br110P9Vig
-	1wfRHCNMssuJ4tt0k86iGUHQF9O+ZoOBSjARhcY=
-X-Google-Smtp-Source: APXvYqw3rByDJ3XXbYTgRr1rG80ElFwCfR0z1WG2I/afwwap3/9+ii3l+mgGPLMJclGJsYaJS0YfAU9uI4H+CZG1244=
-X-Received: by 2002:a0c:d1a7:: with SMTP id e36mr12341278qvh.127.1554496794567;
-	Fri, 05 Apr 2019 13:39:54 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=5i3NvkLDSRza75lVLUt+oIiWYv5QKaWz3dFh7Eoun00=;
+	b=r4cUzTf+bBShSfsLcBfPu3zJAI0ukNIgE1R69ISUrrVn1WJMFcrzHaq1KFclBABecA
+	npRzt8YjDuAMl9bzg5/H5S+EEEGUi5mjNV6pPcxZAMrld65IC04tquDoDRKIQVxywttK
+	dmChCConSrrXNlPASvwjWjbOEFqrPqEcneL1Ni0vvmvvWj0lOG/tGhKKEvMxQ4KNisDu
+	VlPKdydhvWqMx6uBTVVpbC3BqMa78uxtVPBcNWFhAYEScAPm57AuIY/jQ3lN6ujX+EmL
+	sCxwQrjk/T2ielHdtMlRbykD9bm5zBjaVW5TVjDgriihFog0bL3Njftx0dhXCOiZ5jCY
+	YesA==
+X-Gm-Message-State: APjAAAVsGXOX1afAJkypb/yMobSQoakzWmiVlgfGkA+p8rGDAEpueBsk
+	/OmmDqxTerVuVYUKA3KX3TjL9+Cz465Gjiziugg=
+X-Google-Smtp-Source: APXvYqyeCQql5NagGKfAFiUB56swA9MHxfznRg8Z5Ts9ECdh4CgojNk3Qq15kmcCQMMV3hX7OFWNiJbYqVXpC9Q+AAs=
+X-Received: by 2002:a6b:e50d:: with SMTP id y13mr9904188ioc.142.1554497327070; 
+	Fri, 05 Apr 2019 13:48:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190403234608.20046-1-schnitzeltony@gmail.com>
-In-Reply-To: <20190403234608.20046-1-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Apr 2019 13:39:28 -0700
-Message-ID: <CAMKF1sqZteXU-r2Fm9z=cKBcDg8hreVtHoN_46uRnShEEq2STw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+	<CAMKF1sqZteXU-r2Fm9z=cKBcDg8hreVtHoN_46uRnShEEq2STw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqZteXU-r2Fm9z=cKBcDg8hreVtHoN_46uRnShEEq2STw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 5 Apr 2019 22:48:35 +0200
+Message-ID: <CALbNGRQAne9FYqNN+bYtK4sDMU4Rr=Z-Q8UKsOSrj=c9vBXhXw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/2] gnome-desktop3: remove gconf from DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -54,53 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 20:39:54 -0000
+X-List-Received-Date: Fri, 05 Apr 2019 20:48:46 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+
+On Fri, Apr 5, 2019 at 10:39 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Andreas
+>
+> I am seeing this
+>
+> https://errors.yoctoproject.org/Errors/Details/235565/
+>
+> Maybe turning libseccomp into packageconfig and disabling it by
+> default would be right thing here
+>
+Thanks - will check
 
 Andreas
-
-I am seeing this
-
-https://errors.yoctoproject.org/Errors/Details/235565/
-
-Maybe turning libseccomp into packageconfig and disabling it by
-default would be right thing here
-
-On Wed, Apr 3, 2019 at 4:46 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
-> wrote:
->
-> Modern gnome does not use gconf anymore.
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0=
-.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> index 185a25359..c1a67bda9 100644
-> --- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> @@ -15,7 +15,7 @@ SRC_URI[archive.sha256sum] =3D "a6393dc5fc29fc0652ac84c=
-73b3da205d0b0168128c4cf6d27
->
->  SRC_URI +=3D "file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long=
-.patch"
->
-> -DEPENDS +=3D "itstool-native gsettings-desktop-schemas gconf virtual/lib=
-x11 gtk+3 glib-2.0 startup-notification xkeyboard-config iso-codes udev"
-> +DEPENDS +=3D "itstool-native gsettings-desktop-schemas virtual/libx11 gt=
-k+3 startup-notification xkeyboard-config iso-codes udev"
->
->  inherit distro_features_check gtk-doc
->  REQUIRED_DISTRO_FEATURES =3D "x11"
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
