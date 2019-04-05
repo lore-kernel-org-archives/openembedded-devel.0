@@ -1,55 +1,24 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DF6C7BD72
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 419426C4DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 21:09:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id DB5631873B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:22 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hn-kJdi7dr8I
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:21 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 182941847C
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:21 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id F3F801A075
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E91881A06D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
-Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by seth.se.axis.com (Postfix) with ESMTP id DD4D0231F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:09:20 +0200 (CEST)
-Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x35L9KEt032737
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 5 Apr 2019 23:09:20 +0200
-Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x35L9Kjl032733
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 5 Apr 2019 23:09:20 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Apr 2019 23:09:18 +0200
-Message-Id: <20190405210918.32563-1-pkj@axis.com>
-X-Mailer: git-send-email 2.12.0
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCH] doxygen: Make it build with ninja 1.9.0
+	Fri,  5 Apr 2019 21:35:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x35LZOrP028016
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 5 Apr 2019 14:35:34 -0700
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Fri, 5 Apr 2019 14:35:14 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <meta-virtualization@yoctoproject.org>,
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Apr 2019 14:35:13 -0700
+Message-ID: <20190405213513.6857-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
+MIME-Version: 1.0
+Subject: [meta-virt][m-c-s][PATCH 1/1] libibverbs: do not try to build for arm 32 bit or any mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,48 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 21:09:22 -0000
+X-List-Received-Date: Fri, 05 Apr 2019 21:35:55 -0000
+Content-Type: text/plain
 
-ninja 1.9.0 turned the previous dupbuild warning into an error, which
-resulted in the following error:
+arch.h does not contain macros for 32 bit arm or any mips arch.
 
-  ninja: error: build.ninja:1948: multiple rules generate
-  generated_src/configvalues.h [-w dupbuild=err]
-
-Turn the error back into a warning until upstream corrects the build
-rules.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ recipes-extended/libibverbs/libibverbs_1.2.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
-index 784684620..2435b587d 100644
---- a/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
-+++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb
-@@ -4,8 +4,6 @@ HOMEPAGE = "http://www.doxygen.org/"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/recipes-extended/libibverbs/libibverbs_1.2.1.bb b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
+index dd74522..2becf35 100644
+--- a/recipes-extended/libibverbs/libibverbs_1.2.1.bb
++++ b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
+@@ -29,3 +29,7 @@ do_install_append() {
  
--inherit cmake python3native
--
- DEPENDS = "flex-native bison-native"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
-@@ -13,4 +11,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
- SRC_URI[md5sum] = "2c98c73eba392d334f5bbaf15e09bae3"
- SRC_URI[sha256sum] = "bd9c0ec462b6a9b5b41ede97bede5458e0d7bb40d4cfa27f6f622eb33c59245d"
- 
-+inherit cmake python3native
+ PROVIDES = "virtual/libibverbs"
+ RPROVIDES_${PN} = "virtual/libibverbs"
 +
-+# Avoid the following error:
-+#   ninja: error: build.ninja:1948: multiple rules generate
-+#   generated_src/configvalues.h [-w dupbuild=err]
-+EXTRA_OECMAKE_BUILD += "-w dupbuild=warn"
-+
- BBCLASSEXTEND = "native"
++# We can build for arm64
++COMPATIBLE_HOST_mipsarch = "none"
++COMPATIBLE_HOST_arm = "none"
 -- 
-2.12.0
+2.7.4
 
 
