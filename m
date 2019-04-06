@@ -1,50 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B3A37D68F
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B53BB7D45D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2019 23:07:17 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id 188so4057168pfd.8
+	Sat,  6 Apr 2019 00:48:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x360mTuT026507
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2019 16:07:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qtYlNWQxANOOBt9XIgWWTUCgGy3L/5nyoiZo5ZkDvkQ=;
-	b=VC+ByS1d5CF3zq3HAtwI+iqmFil8OkQSWMs+0Aqf88OBJc056LCX4osK+/eTJGqq0E
-	sH2DzdBLLMWNX1Suavw0eOY7DvjulWnm2BhuNUInFmAxkrcnUXsVH4nYVp3k/2P8xyAa
-	dH/mMqZMt5vuwAxnh53SziKXpWPgAnrw8GY9s3IoskqUlj7fgAMLsXmezIO4GjHTJMwG
-	2xbgblF+2E6crjaagikK7eV3a+jfTdqKqbNKa/1kCBe70KWWtlr6uF9UmDyPlm+rpWJD
-	V/Ym+W0G+QViJ+QYfyb1Oj915y3UiR79cOKYaZ+h1TTT+i04RFdsudSFLlQAzP8tr549
-	VgZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qtYlNWQxANOOBt9XIgWWTUCgGy3L/5nyoiZo5ZkDvkQ=;
-	b=k0gd5LezaoBDBqcE9INYIoTAfK1X+4V1tLAOhCPmcTFYZOI5Fn4SXlRVb+bmYwfkI0
-	9vHAwf/g9wHGmMQx7EVPUI4r+qFpEe9wwKWzjfg28MzOaA9v9cuc1KsroEqsXqkn29IV
-	BpHRFDuA3HLqdB6js1780ub8HMDTmikcb84+yG9pMkn3Q1zhxvcNw1VBsFWEEvQamtgI
-	oTduE591hCihq1tRoPp+/kdPEl42mtdHF8zFeCYwSFY0TWpvkQtDjkyCdezh2OxPXubk
-	XgNODIw+HTyPaxbNLzdp7yRa0mLZiRBgKWZJ5HjLNssvNkuE6O1cy5GAEYQ2+5JtBkDd
-	xMag==
-X-Gm-Message-State: APjAAAWZ093LWlNG93HTGfkZCpNt7b8M4W1NfBg77rSkHCub6ZSgOuGk
-	+aBIZPkfPewpXUAp1W0WaHqLFo3IGpc=
-X-Google-Smtp-Source: APXvYqy7MXbyeH4Flzd/wa04qFYcSb206urJFkPLDzxVg+XxSC7CTIQrQQe3GsgXm5BOd+3b64IkQw==
-X-Received: by 2002:a63:e554:: with SMTP id z20mr14582387pgj.234.1554505637757;
-	Fri, 05 Apr 2019 16:07:17 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::8ec8])
-	by smtp.gmail.com with ESMTPSA id
-	143sm44285311pge.50.2019.04.05.16.07.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 05 Apr 2019 16:07:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Apr 2019 16:07:04 -0700
-Message-Id: <20190405230704.15832-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Fri, 5 Apr 2019 17:48:29 -0700 (PDT)
+Received: from fidler.wrs.com (172.25.44.10) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Fri, 5 Apr 2019 17:48:28 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Apr 2019 20:48:27 -0400
+Message-ID: <20190406004827.14047-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] ncmpc: Rename artist_screen to library_screen
+Subject: [meta-networking][PATCH v3-retransmit] wolfssl: update to 3.15.8 and use github SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,44 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 23:07:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 06 Apr 2019 00:48:28 -0000
+Content-Type: text/plain
 
-artist_screen is not a valid meson option
+The previous SRC_URI did not work for the new version and
+when looking at the site, users are required to navigate
+through a click-through license agreement. Also use git
+repo rather than the .zip archive since the github checksum
+can change from time to time.
 
-Fixes
-ERROR: ncmpc-0.33-r0 do_configure: QA Issue: ncmpc: configure was passed unrecognised options: artist_screen [unknown-configure-option]
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../wolfssl/{wolfssl_3.15.7.bb => wolfssl_3.15.8.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.15.7.bb => wolfssl_3.15.8.bb} (77%)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
-index 8468d125df..d4ebe1769a 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.33.bb
-@@ -11,7 +11,7 @@ DEPENDS += " \
-     libmpdclient \
- "
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.8.bb
+similarity index 77%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.8.bb
+index 0a0a6075d..d4b969104 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.7.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.15.8.bb
+@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ PROVIDES += "cyassl"
+ RPROVIDES_${PN} = "cyassl"
  
--PACKAGECONFIG ??= "colors locale mouse nls regex help_screen artist_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
-+PACKAGECONFIG ??= "colors locale mouse nls regex help_screen library_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
+-SRC_URI = "https://www.wolfssl.com/wolfssl-${PV}.zip"
+-SRC_URI[md5sum] = "6ec08c09e3f51cccbb1686b4fd45f92f"
+-SRC_URI[sha256sum] = "4cc318c49580d3b9c361fe258fac6106624aa744f1d34e03977b587766a753ee"
++SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https"
++SRCREV = "e87433e2b6682aa7162fcb4aafefb08e2fbd932b"
++S = "${WORKDIR}/git"
  
- PACKAGECONFIG[colors] = "-Dcolors=true,-Dcolors=false"
- PACKAGECONFIG[lirc] = "-Dlirc=enabled,-Dlirc=disabled,lirc"
-@@ -22,7 +22,7 @@ PACKAGECONFIG[nls] = "-Dnls=enabled,-Dnls=disabled,gettext-native"
- PACKAGECONFIG[regex] = "-Dregex=enabled,-Dregex=disabled,pcre"
+ inherit autotools
  
- PACKAGECONFIG[help_screen] = "-Dhelp_screen=true,-Dhelp_screen=false"
--PACKAGECONFIG[artist_screen] = "-Dartist_screen=true,-Dartist_screen=false"
-+PACKAGECONFIG[library_screen] = "-Dlibrary_screen=true,-Dlibrary_screen=false"
- PACKAGECONFIG[search_screen] = "-Dsearch_screen=true,-Dsearch_screen=false"
- PACKAGECONFIG[song_screen] = "-Dsong_screen=true,-Dsong_screen=false"
- PACKAGECONFIG[key_screen] = "-Dkey_screen=true,-Dkey_screen=false"
 -- 
-2.21.0
+2.17.0
 
 
