@@ -1,51 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id CD4397D5C0
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
+	[209.85.208.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 22E1F7D5B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Apr 2019 18:42:31 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id b3so4832811plr.7
+	Sat,  6 Apr 2019 18:48:30 +0000 (UTC)
+Received: by mail-lj1-f173.google.com with SMTP id f23so7946809ljc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Apr 2019 11:42:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=vIF77ifR2FVfqMNW1ZAUK0TaD2dEu/G50O2mxzmMEi0=;
-	b=S9q4AzYjkiNEHesXDMeuMYS2jhRgdaR4uKvM1Ec+QSsbHIZDQpsrGsFJgRHVGdr3dL
-	Hpcv++51o4RFrNBv9dXCB3yCSAtQumx/XMA08kpSZS2qOfr7KhWBMs4OWB6yYtKpnV9b
-	cxyMy08nxOcFIubAX9tEEPbjkkseiSp0Gi1YT8KfcYAGaJRfNSJ9WbtFXGlv8nKzmmLn
-	04RZ70UTzSbVhbFHcTucnjaPW1F1ETHCPmYIGqfGkv2AA5KA02q5fnQaNrMjsfJA39YC
-	JYj5Hj6TLyGo21dCBxuaqotkMrs42SGVB2PDys//MaiPfNbj3kp6NZWmzVwS32RhD2R5
-	rE9Q==
+	Sat, 06 Apr 2019 11:48:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=rkLrdkZrfwXvm4mQuu9FhQhIyHHTMTi3zBq8a/hD1tM=;
+	b=YSgR3DQvk7kx39HiNX4jdsh52n3eCVHbYfR06ov3SERKZUld/8rnqy7QmI6Naxsis7
+	F8eDgAH7NTHzxl3pyq5X5frZ7d1BJvyhZemWMTAewxv+PEnBd2n/CR/UnGjdVfOxBWyz
+	lbRxyLhOX1iUoYfkciHh64+rOsr/ic+TOmDC+9ju+tq14S0k19i8IU6Jk3C7ozpAlzEY
+	ts1cDFmqV1gqN4SqbBru3ZBwaKmMaziDR+bSb6vawT2N4IztQ32Uci2JYdfojjqLvgMg
+	8Tg3qM0X+yn9IJf/Tb13roPBFYjWIamWCasA7tQvoEcer43OtWFGxDdwt+7LtwUm18zW
+	YnjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=vIF77ifR2FVfqMNW1ZAUK0TaD2dEu/G50O2mxzmMEi0=;
-	b=P/yFoeTZ2IJmXM3J4C34qjsrkw+uaj9ReBp5OAAAitJb5cqT//H/6xsdA8TBua2Jwr
-	vya4jaLPMXYYcEG13FRzPSHe4uhfpoLU9WfDUqjRW5pBmohznfPFO++Cxd+lbJNn0oBL
-	D9tKthl92qYKgLiesF7nX2Vi5xUsxnQG2xpkGnfZTPVWebezQYq5KUl6cEpvcLt+6x26
-	PQMvKT4ZSzI4uFY/V+GplABeyHu1dZYpByxexYLIB9o973ken54/ySEHomufDh6cbgtx
-	txSdaQYeuVKPJGP57PL7WCsooa598V2hhCfXg1ax57j5NcgIfkFSEd0e2gcDbnTihmKe
-	Ey8A==
-X-Gm-Message-State: APjAAAX+nKy7Kpq8OzhBEZr2lXfaDkHf1lzMgCYsiX79KCRPpDlzl9wu
-	UDsuAvc+JTpSgOhffOSZZiBGb1bqtsc=
-X-Google-Smtp-Source: APXvYqzZ7dA0ILp70dejuPpEh4VoyV66ZOlv4GCKC2VRK2BQK8Sx6tkuzdZgATfdP3xQw8rHj8RQHw==
-X-Received: by 2002:a17:902:6b03:: with SMTP id
-	o3mr20555202plk.226.1554576152031; 
-	Sat, 06 Apr 2019 11:42:32 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::8ec8])
-	by smtp.gmail.com with ESMTPSA id
-	w18sm40572132pfg.75.2019.04.06.11.42.31
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rkLrdkZrfwXvm4mQuu9FhQhIyHHTMTi3zBq8a/hD1tM=;
+	b=O6xEvbNNtypE9Ojv2KNoKa335Q20rqSsOXjApgJmpsTjZJ3gQmCEAKkwGjiseBX83a
+	0kP3oDZfsHhHATuGjmcARygiPS7Y6fqew8eZBl/mCILfqhlnTGZC6vAq72n/sc10vVFM
+	T8BLSeML8iPFlbVvjQbK53TOhMVkrDNEOv4+I14ia4TroNSpZgl78qqdmvs5Ld1WY9Gh
+	nQYNTxdMnZDCL7RKbjaW4sV6zyQDluvHcTtmfIwPfL/Y7JICFxvst9HKw+nfL+5JzJ6H
+	Cwm9YEZVel2CT5SLxp/6/VEz0+URz5IRIg9cvQttVreTqEL+JboWuuZgOYfNLAZ/ZShJ
+	4wMg==
+X-Gm-Message-State: APjAAAUsNRrX9Guc0AhQzbXzKM6XdBdv8IdFqCPeb0XjjmW/pmtOOaPQ
+	ToFCyA5CQvyTguCPWEItQ2yV0/IUoso=
+X-Google-Smtp-Source: APXvYqye32r6LL+CRb/0wdIOQd/hgo4aanayaBXa14tkGJ1splIbNsbNr/AuHzBeESPgZ566ip14cA==
+X-Received: by 2002:a2e:7206:: with SMTP id n6mr10672945ljc.112.1554576511272; 
+	Sat, 06 Apr 2019 11:48:31 -0700 (PDT)
+Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id v4sm3192569ljv.4.2019.04.06.11.48.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 06 Apr 2019 11:42:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 06 Apr 2019 11:48:30 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  6 Apr 2019 11:42:23 -0700
-Message-Id: <20190406184223.28699-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] networkmanager: Fix build with clang
+Date: Sat,  6 Apr 2019 20:48:19 +0200
+Message-Id: <20190406184819.19359-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] fping: update to 4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,116 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Apr 2019 18:42:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 06 Apr 2019 18:48:31 -0000
 
-Detecting libdl for dlopen when failed returns
-"none required", which then gets added to linker commandline
-and inturn fails to link with errors obviously because "-lnone required"
-is no such library.
+md5sum of COPYING was changed since info about project contributors was
+added to the file (see @85abf34b0a38ca6).
 
-This patch is not musl dependent, earlier patches clubbed it into musl
-patch however this is needed with clang too regardless of the C library
-the reason is clang automatically brings in libdl in OE and hence this
-test is failing.
-
-This is noop with gcc since the first check will pass thats why it works
-in first place
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../networkmanager/0003-dlopen-failure.patch  | 34 +++++++++++++++++++
- .../musl/0001-Fix-build-with-musl.patch       | 13 -------
- .../networkmanager/networkmanager_1.16.0.bb   |  1 +
- 3 files changed, 35 insertions(+), 13 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
+ .../recipes-support/fping/{fping_3.5.bb => fping_4.2.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/fping/{fping_3.5.bb => fping_4.2.bb} (80%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
-new file mode 100644
-index 0000000000..e99c22710c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
-@@ -0,0 +1,34 @@
-+From 57239fda56b68a8f3e413f7b6af5290ba0d86636 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Thu, 22 Mar 2018 18:18:06 +0100
-+Subject: [PATCH] musl: dlopen is included so LD_LIBS="" instead of
-+ LD_LIBS="none required"
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Pending
-+
-+Stolen from [1] and prettyfied slightly
-+
-+[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ configure.ac | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 487a266..96ae4f7 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -235,6 +235,7 @@ dnl
-+ dnl Checks for libdl - on certain platforms its part of libc
-+ dnl
-+ AC_SEARCH_LIBS([dlopen], [dl dld], [], [ac_cv_search_dlopen=])
-++AS_IF([test "$ac_cv_search_dlopen" = "none required"],[ac_cv_search_dlopen=""])
-+ AC_SUBST([DL_LIBS], "$ac_cv_search_dlopen")
-+ 
-+ PKG_CHECK_MODULES(GLIB, [gio-unix-2.0 >= 2.37.6 gmodule-2.0],
-+-- 
-+2.14.3
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl.patch
-index 21e9a16d6d..b3f93ff92b 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl.patch
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-Fix-build-with-musl.patch
-@@ -11,7 +11,6 @@ Upstream-Status: Pending
- Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
- ---
-  clients/cli/connections.c                    |  1 -
-- configure.ac                                 |  1 +
-  libnm-core/nm-utils.c                        |  2 +-
-  shared/n-acd/src/n-acd.c                     |  1 -
-  shared/systemd/src/basic/in-addr-util.c      |  1 +
-@@ -43,18 +42,6 @@ index 6db44f8..36e51cc 100644
-  #include <readline/readline.h>
-  #include <readline/history.h>
-  #include <fcntl.h>
--diff --git a/configure.ac b/configure.ac
--index 872c292..b1d7a68 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -241,6 +241,7 @@ dnl
-- dnl Checks for libdl - on certain platforms its part of libc
-- dnl
-- AC_SEARCH_LIBS([dlopen], [dl dld], [], [ac_cv_search_dlopen=])
--+AS_IF([test "$ac_cv_search_dlopen" = "none required"],[ac_cv_search_dlopen=""])
-- AC_SUBST([DL_LIBS], "$ac_cv_search_dlopen")
-- 
-- PKG_CHECK_MODULES(GLIB, [gio-unix-2.0 >= 2.37.6 gmodule-2.0],
- diff --git a/libnm-core/nm-utils.c b/libnm-core/nm-utils.c
- index d276cfe..2aec785 100644
- --- a/libnm-core/nm-utils.c
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
-index 90792ff4ee..9f57908e96 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
-@@ -26,6 +26,7 @@ SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
-     file://0002-Do-not-create-settings-settings-property-documentati.patch \
-+    file://0003-dlopen-failure.patch \
- "
- SRC_URI_append_libc-musl = " file://musl/0001-Fix-build-with-musl.patch"
+diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb b/meta-networking/recipes-support/fping/fping_4.2.bb
+similarity index 80%
+rename from meta-networking/recipes-support/fping/fping_3.5.bb
+rename to meta-networking/recipes-support/fping/fping_4.2.bb
+index 82e3bf073..594f5b9cf 100644
+--- a/meta-networking/recipes-support/fping/fping_3.5.bb
++++ b/meta-networking/recipes-support/fping/fping_4.2.bb
+@@ -9,11 +9,11 @@ in a round-robin fashion."
+ HOMEPAGE = "http://www.fping.org/"
+ SECTION = "net"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=09d77789fe32be35acde9637a5ee39b1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
+ 
+ SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
+-SRC_URI[md5sum] = "2e17cb655aa4eb59b5a4a38a89e746ed"
+-SRC_URI[sha256sum] = "09b8960e235341bae6000085d38106357eae656a79e0119bd27e816c9003656a"
++SRC_URI[md5sum] = "218e71764177a8ce25564a7810f8e729"
++SRC_URI[sha256sum] = "7d339674b6a95aae1d8ad487ff5056fd95b474c3650938268f6a905c3771b64a"
+ 
+ S = "${WORKDIR}/fping-${PV}"
  
 -- 
-2.21.0
+2.17.1
 
 
