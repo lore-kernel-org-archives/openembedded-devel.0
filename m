@@ -1,49 +1,53 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B44CA7D53B
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id AB1356BD1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Apr 2019 15:39:53 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id y6so9014709ljd.12
+	Sun,  7 Apr 2019 20:07:03 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id o25so11911208wmf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Apr 2019 08:39:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=osX/nZTwThnZwLBYlBgWvKhzsaAcRZssuifVfnqtEQY=;
-	b=Lqyqo29N9mNj4V2L5sy8s2fLEm+TvUMBuUTAkQP84Z58rtZHbLUrF4OrAhyWjDH3N1
-	jBtlrM8yHQJ4EMzxOrtlKK651cSTW0SCr6lH88WTr+wB5msx5lAYPOSp2JLcM5jLiGbY
-	Yx5xJ6z6kCtkW4OTxP+YAA9anSeF12LPaehMRPoYvLMDaG4TAocYVgBmOez9Nnz04S/Y
-	/blDwAw8KPgEhilGckQSpExwUE7MocbBIRIJ8nM5sxfh2ZEDM9wOxmqqFegZOkHZxpgN
-	tQAi9Q3HgnGfByRHAHiw1RiUqilU0CBJhf1qijSTscmFDPVu0wmlP1A/duY6tS5MZmDB
-	EbFg==
+	Sun, 07 Apr 2019 13:07:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XdxstouPjlZAenktR1drto4CHPcRO+kCWz2JV/erSXE=;
+	b=EaXNUYqzSsOzY3JHNF6jbF2hJATELsq4fHAi4h6mocatPbqCqOxYANNhMfF7OMHxPU
+	jHerp+JuLW1BDCK0f70kbLN3ZqNtNhtlYixbCj3V2iUMR/kZkdd3t5gXz/LxaKA8ZZNY
+	fn5JzooD2sCI9mx4p/EltK5Fpd8e8+sE+lhYj1MtAP/kg2v8ZvNYJZK78d6ea1P6td0S
+	SN43gKKg9FTHetJnxJ24Zxb9Esak0Tm+c4aHl0RRB6bmZFfaEDRjE3C9p4IolbKzBPTY
+	jyFnvGqncVGlIwMSwcs8jmHhNEItNCNgl5TtD0K9M8QmQl1H9HfNaRL5XIuKG6/XWwqr
+	i+SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=osX/nZTwThnZwLBYlBgWvKhzsaAcRZssuifVfnqtEQY=;
-	b=FJOWCByZGLqEABiK8+3XjtvmmENWNEqdf0ptoMSZtuQO7D7l8i9iSAIcDWjsD2jPqp
-	zp9Dp0Adm45LMIoxYMMONzROjfiS6YsA12BVcQ88P33oeBtCxMPk8vvRsRx6jUDwZ3Wi
-	ozv8qNAmeqReL6yfuIxPiWpH49xFIWcVL8HwVCS5GZVAFOgLNAAoHFeQLqjqRNb6maK7
-	iUt6K8sjwD8YEcN8km/CtxoOc/obKJhHRyo2SBqiXk36nBcXCLfHjokPloOzOMRqoHhf
-	NoGMpXhJFUr7iMno3PmBtSXTithJ4t5MiGhkkVlMCekykCXHV6T8GoVBJH17+Na46FyR
-	0DWg==
-X-Gm-Message-State: APjAAAXpZXWVGVwzBBk0TkGx309DENzhyT8u+nncVQdJ2xG4Yr1BeL2D
-	vW3FMpMdxf98Hho3HAfmz8oUkm5ByCM=
-X-Google-Smtp-Source: APXvYqzhUDxn00yqHgt/jILaz0gc8aaZ2mLM8MC45B5qpbvHTRo2H8z2ek4D7KO2KdYkP//nZa3BPA==
-X-Received: by 2002:a2e:968c:: with SMTP id q12mr12861338lji.36.1554651593992; 
-	Sun, 07 Apr 2019 08:39:53 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	j76sm2360216ljb.78.2019.04.07.08.39.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Apr 2019 08:39:53 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XdxstouPjlZAenktR1drto4CHPcRO+kCWz2JV/erSXE=;
+	b=gpbQmCYyEUL1sWC71LbtpEZ7FBXCa3R6J8Kp2C4cqM0uU5bTC/5msg0G9JrNavBJ1I
+	9aq4WAKSGFmNg3go7iy7EVbHnA6Ges6XE9faaoYaF9b4Fif3PyxDmWACBc01D7Ws5Vwa
+	oSNtyS2PIwgWxNwDSyVgJuPFSJXhmYhk/q0tNn3CED+W2kFRslP8GYdIYAlnmYm5IG+s
+	fySmDG0b3G3ObpqgWp8Imd6RxfjkaudS+ropzsjTmwe00O9rQc/mvGZQ4rNbJ/hEG67/
+	fiLdpeQCve29I6O9qwi/SG+grUKKp5x4Se5edS5U1ujfOazoTlIFCEHot7ZfrLXkxfMR
+	jrgw==
+X-Gm-Message-State: APjAAAUIf4iyGL6EhDeNAPQGtzuO+fcdsM7JDokNrTb+aGYYjtLHD6FA
+	55QlHS7Ttg7PEisS5YhVucLPmJ1D
+X-Google-Smtp-Source: APXvYqwA1nbv4aLtIElFw0XtABZF1imYlglkyJ9SFmSNwC6M6RizH1TzS9I7+SyIrVjvW/0547n2bQ==
+X-Received: by 2002:a1c:c181:: with SMTP id r123mr7552734wmf.13.1554667623959; 
+	Sun, 07 Apr 2019 13:07:03 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F05D997F582C1CABA04AD80.dip0.t-ipconnect.de.
+	[2003:f0:7f05:d997:f582:c1ca:ba04:ad80])
+	by smtp.gmail.com with ESMTPSA id
+	x21sm14007900wrd.45.2019.04.07.13.07.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 07 Apr 2019 13:07:03 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Apr 2019 17:39:51 +0200
-Message-Id: <20190407153951.22589-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] babeld: update to 1.8.4
+Date: Sun,  7 Apr 2019 22:06:55 +0200
+Message-Id: <20190407200655.13442-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [PATCH] gvfs: remove executable permission from systemd user services
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,31 +60,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Apr 2019 15:39:54 -0000
+X-List-Received-Date: Sun, 07 Apr 2019 20:07:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+As written in comment: Looks to me as if meson build is not yet working as
+it should for gvfs. Looked into but did not find suspicious. So just remove
+flags for now.
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../babeld/{babeld_1.8.3.bb => babeld_1.8.4.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-protocols/babeld/{babeld_1.8.3.bb => babeld_1.8.4.bb} (93%)
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb b/meta-networking/recipes-protocols/babeld/babeld_1.8.4.bb
-similarity index 93%
-rename from meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
-rename to meta-networking/recipes-protocols/babeld/babeld_1.8.4.bb
-index 8f028474f..550e126f7 100644
---- a/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
-+++ b/meta-networking/recipes-protocols/babeld/babeld_1.8.4.bb
-@@ -13,7 +13,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
- 
- SRC_URI = "git://github.com/jech/babeld.git;protocol=git"
--SRCREV = "535184173fcde5ddc43020cd197d01d1ea0e9a8b"
-+SRCREV = "8627b6fcd4992f2e7992ecec97a4a4aa2d7ff099"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+index df9fd50ea..8fed9e825 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+@@ -73,4 +73,12 @@ do_install_append() {
+     for exe in `find ${D}/${libexec}`; do
+        chmod +x $exe
+     done
++
++    # Something sets user services executable - looks a bit as if meson
++    # transition has room for enhancements...
++    # Systemd warns with messages as:
++    # Apr 07 01:00:33 raspberrypi3 systemd[348]: Configuration file /usr/lib/systemd/user/gvfs-mtp-volume-monitor.service is marked executable. Please remove executable permissio>
++    for service in `find ${D}/${systemd_user_unitdir}`; do
++       chmod -x $service
++    done
+ }
 -- 
-2.17.1
+2.20.1
 
 
