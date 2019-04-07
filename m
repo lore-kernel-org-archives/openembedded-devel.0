@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
-	[209.85.167.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 754BC7D034
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
+	[209.85.167.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 546607D034
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Apr 2019 13:03:32 +0000 (UTC)
-Received: by mail-lf1-f42.google.com with SMTP id 10so7467875lfr.8
+	Sun,  7 Apr 2019 13:09:38 +0000 (UTC)
+Received: by mail-lf1-f66.google.com with SMTP id o19so7478620lfl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Apr 2019 06:03:33 -0700 (PDT)
+	Sun, 07 Apr 2019 06:09:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=GAFHOTPJuuBbDl2Dtc1mnMor8dMXvbFhxrG7jwlX8e0=;
-	b=yBOL7lzJhoFEULIJeY2kJIuIpiAImMauZwCz3xcTY3FOXAuW043VQXpJ+p/iJHcXAs
-	Snx8QYRxLXy60YsdQndpJty8z4htftSI9GXBpt0PgkBoBAzgUd5hvBSJZFj2N8Gc8o7y
-	PqsF6qhIFPN9RZxCgN1paAk4Mt2B6WIpF8onOoe2izYgH29uRNd882R7jQFdTRMrl0zg
-	v+5Jrjiw8JITIqe4/7obE7FFPtPmk1fDGkaMHKd48VDpF+SjZPI25GjHMkOQ9gJYyz20
-	33fv4ewPMc0wUcDtw5S9pyRwzfL+P+LCCFMShSOUmMzg3qfaUYFV/imafAQ9C145edoT
-	hmNA==
+	bh=msxb78Km3vvFp93HYYfNLHOKlhp9NSt5N0Ukku6ojzg=;
+	b=vVDJf1fRlX6BINQKivyjnVuNOKC5ZmOsxyZDrwYvVVf068rv/7phaP6T2QUiJl4eQI
+	yp4WaaKIxySBCaFOLejlOrMK9GxtYGjKF5MvX8kxMAyd8VVJIcq8IytV1MKYfM5JWjQR
+	d04af6pmLaZyBIe4jpak+ggNwxsdcbejLkfWWSQm6s5yWKAER9dY03pF+dzEaXWClfJg
+	x0kC3N7HTU4h5j0C90pd54Ly9o4sWnU9nl36veKGfnOtN3Xl0ulUZiEa61ndJENkeFVK
+	Qfh0Yc1DclloPr6cwnUykUyRuv5RbDT7MdhLwuJD+OY9/vw51DMMc0hseARtoL1fzM5A
+	mxbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=GAFHOTPJuuBbDl2Dtc1mnMor8dMXvbFhxrG7jwlX8e0=;
-	b=fJfpwFV6YWM2Mp76hjiQzdF4JMyP2d9LAqKO+aM/IbzWW0GD52AuFvzsogs+q316Az
-	60KxNU1y3u8I7db6L6Nt0LduI7+jdVNZPu65oxEUp56PO5xihfcRDlegfhWZvYMwgRPT
-	RAp9GURStMhRsPe8Dt9PaWBR3N1904gf4lHtLA4pbg+esleyb4QMXvzs2UHFZP5YsDfK
-	HQdwxSMTVH4vK6m48XgpIzOIXr2SQA/7Ish9n7dMcsdSmbfjA0VPkKNb9xrvd6AcFirF
-	OhRUznyMDLrkpd72hoyAh+dEPOurUy4+o5bJU8HsTJkoHbEP7ggD58tbGeHq51+HyjJt
-	U9xw==
-X-Gm-Message-State: APjAAAX9tBkfFuetfQQp0H+wkTVJq+MUT/6mOVf1nbL3q7E3anhzitBu
-	gqfLHdhsyK/9b65xnj2PSOliIbBR3Gs=
-X-Google-Smtp-Source: APXvYqy9DgnP/+M3PkTDbozgxqdcgZHe4weAmSbxJfbCEacpOIBWHQQGCYklM6ffp6l50NLRLbOslw==
-X-Received: by 2002:ac2:59db:: with SMTP id x27mr6596615lfn.108.1554642212567; 
-	Sun, 07 Apr 2019 06:03:32 -0700 (PDT)
+	bh=msxb78Km3vvFp93HYYfNLHOKlhp9NSt5N0Ukku6ojzg=;
+	b=EVj8X8jNEdfA82SmqFWLdIVOOFImOzPxq8P3RXQlK7DS16PcWH2yEengCyE5omPT/R
+	e97nchpnWcEouffI4NAPs5bPmaCA4lECV9V1N0a0q4R3yWuzLsJWIqEqRIMe7/RBND/2
+	UGbktANDSqJoPf6GeeohaNxtaGq4kDKfVSVqh70zknE/4voYk9mj2BEXJphvLSOiR2xD
+	h0hoi6WDxovXb5qvRT8aboIag/cF84TjBHjqXRVyRcQuXyBb2fIaxNW8UFy4867x7lYf
+	OkXaCtyDhAbzPlbdrFp3e/3Q6F3WgMARtgfu9Lbu3+41i9pODwuPbF2ZHKvRDCmliqHL
+	34qQ==
+X-Gm-Message-State: APjAAAWNmyPqp0QvZGFGCrTSQP/L82CSpy8BHgaGkdNQjyKgsdRZ3Tal
+	G0742jgbWxENbOQRJQstqxC99uDNDj0=
+X-Google-Smtp-Source: APXvYqw6u1EKm+Pwm5L/XUO4PXD6MLpYH8RBx865PbBX5iev7vpYIzTEnzlErnzf6Rfhpwi0zRtVLA==
+X-Received: by 2002:ac2:54bc:: with SMTP id w28mr12733446lfk.127.1554642578583;
+	Sun, 07 Apr 2019 06:09:38 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	c15sm5574236lfi.14.2019.04.07.06.03.31
+	w19sm5031653lfe.23.2019.04.07.06.09.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Apr 2019 06:03:32 -0700 (PDT)
+	Sun, 07 Apr 2019 06:09:38 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Apr 2019 15:03:29 +0200
-Message-Id: <20190407130329.30732-1-open.source@oleksandr-kravchuk.com>
+Date: Sun,  7 Apr 2019 15:09:35 +0200
+Message-Id: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] phytool: update to v2
+Subject: [PATCH][meta-networking] libowfat: update to 0.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Apr 2019 13:03:32 -0000
+X-List-Received-Date: Sun, 07 Apr 2019 13:09:38 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-networking/recipes-support/phytool/phytool.bb | 4 ++--
+ .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}                | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb} (84%)
 
-diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
-index 4ed3ed1e4..29499d6d7 100644
---- a/meta-networking/recipes-support/phytool/phytool.bb
-+++ b/meta-networking/recipes-support/phytool/phytool.bb
-@@ -2,8 +2,8 @@ SUMMARY = "PHY interface tool for Linux"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
+diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+similarity index 84%
+rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
+rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
+index 4b072f7e7..fba35526d 100644
+--- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
++++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+@@ -7,8 +7,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
  
--PV = "1.0.1+git${SRCPV}"
--SRCREV = "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
-+PV = "2+git${SRCPV}"
-+SRCREV = "8882328c08ba2efb13c049812098f1d0cb8adf0c"
- SRC_URI = "git://github.com/wkz/phytool.git"
+ SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
+-SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
++SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
++SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
  
- S = "${WORKDIR}/git"
+ EXTRA_OEMAKE = "\
+     DIET= \
 -- 
 2.17.1
 
