@@ -1,50 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
-	[209.85.208.53])
-	by mail.openembedded.org (Postfix) with ESMTP id F1E2E7D538
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+	[209.85.167.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E97FF7D53C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Apr 2019 14:49:33 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id q14so9396848edr.5
+	Sun,  7 Apr 2019 14:53:26 +0000 (UTC)
+Received: by mail-lf1-f42.google.com with SMTP id r25so7555703lfn.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Apr 2019 07:49:35 -0700 (PDT)
+	Sun, 07 Apr 2019 07:53:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=ToYffyvU4AAfeJBhrTMcgi6/6vBgvEcrX3TtexAfp6k=;
-	b=CwJq37pRXIqRa42Z9itJz3HndWlyprsnRGyWtN4HylxHTYXo3L+Acd9fqcZt946+UA
-	+HPOo1W/zQxFCf7OFcPGXHppIDCSpCyWZZ7SyXMBSKZwpwFpBv3La69EzP0/KA5CaLMJ
-	mczz3wSqb6JFLS5iCpk+/sLyCf9ErCrkv0W4DPwAxsmVuWtGoFiYvOGI9DSVPvAmpdIb
-	m2ObJXbq4G5WRKBg+R3ZBtPzzPRQvuF0TkVM+QPpL5/xYvA8ui+6HSXyp0Ge081fO/AX
-	yekiwH98qX5jqRTs8ZIJfti9lGugvfHstNp+pq8b1u6OtjGOZBtueOeAsX2Q2h8bJroL
-	dHeA==
+	bh=rmlpQA2y82V5HgSTF6eFUrz+8obadBKkSl6lEhpBIEk=;
+	b=dTy0dc4JVBcmv3F520oiNOGQGGaMUXxdx+1NgH7NTS918UCn3sD5qLEs3ewD41FSE7
+	Om1qhpdaniD0VOkkoWIs91MKVteIfYufN+vx1hm6dLbKQjSnHY1VJLIQeUGHXUBIF/Ey
+	9Xw/r/epPlY8vm9cQO4+PFB2Vsg/4md2+pmLyxLOcYp2nqv2yATVsPD0JHZYXRxZGSm+
+	t/ejJNnMb18mAZ7TyAitKhtFQv0VU4S/19DY96tsYI7mRduUTwisda/UAzdLLGBufAQ5
+	t8oDLQKz+KmmSjzr0ro8LAXumOv/TShVLOnSH2ixpt7EJZJ4oP3RaouHmosay9h2SMsP
+	SkPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ToYffyvU4AAfeJBhrTMcgi6/6vBgvEcrX3TtexAfp6k=;
-	b=cXbYzeo+/BOL8SnVxUXe+jUaLTzjJYFNJOp7eSs4NRtccj1zdXs6UNajLPGN63cUM6
-	48H3P+UaAOPeod3nWIPH8vs0wgtJ8ZknYiYzrPGmtDn/dxxnNSou1bYkDcUbS/d0YoVy
-	LTMzjlrsGAcn7zaEilCGeOngmJwc4wdC0rXHhS8sy+K3WnOpf7+HpzQ2rvdzbdxkhNpK
-	epTx6V8k68kP3L6GSr0GVXw2uVX9s02GD5Y6TNXf+SENiNy/b9/KpEFVyToAf7uUNAMD
-	zMdN+Lsn98nL5XQ/Ai/q0c/SsNvLZOmWmshVAna9kK/8+j2TdtQjxKs5xeX7tTVSS4+U
-	RbVA==
-X-Gm-Message-State: APjAAAX2cHlbJqrMXWXLo2atgVvAovzrTybKf1KF2TAP8vAufcW4Dwpp
-	EytNdFHg0NPRogvhdYJ0jgHjQRoBOyw=
-X-Google-Smtp-Source: APXvYqyU7OLdKdfQLElHWhNP7IY5ABWeC4zFg/YL+mL8GQJKzGS81U9o1buSUcSFT8LyEM2euxlzBA==
-X-Received: by 2002:a17:906:5a95:: with SMTP id
-	l21mr4884887ejq.219.1554648574252; 
-	Sun, 07 Apr 2019 07:49:34 -0700 (PDT)
+	bh=rmlpQA2y82V5HgSTF6eFUrz+8obadBKkSl6lEhpBIEk=;
+	b=iZBROwj5H9ev1lM7ZzI4NfMCqph6eZTnVH3o3i5WV2aUfUKR9WMCUlJtvNmQB/gPwA
+	W9RZuHD3cr32266xcQTkrD0BqtkYmOjBNrd/xcgZEvjHMOiC07QC05WOrQob6R/3K6iy
+	8rKfcSMcZHX7bUAKbr/u46Wo9ctzRGuLRV1m2gd7z8NiMniSq25RsB/fYVK6SxmYUsBC
+	fT9B7YNU+gfFviST92nKywCZ2MqJpQYvpa4rPMdJGI4Hf8MLznudr3mN7+C9Z59Gt73i
+	lm1i/oUp/QPlxR1CCMbByrsRPphrwVyA3mqp1wg1SB06qRxAWtOPmq4+6ceZGYu8IlSb
+	JDwg==
+X-Gm-Message-State: APjAAAX8TtILyhBeQ6yVQyOrlUIp8xEggz2Gt05vIii6uL3VnxT0uZpj
+	iqbtucUEUv4WDJBA0NTj/MYj6D5b3sQ=
+X-Google-Smtp-Source: APXvYqwQofCVC65Un0lLp6flVMlY3WhTu5+gSL508tMxaIRu7EGOGJrTn2inCushR3q6RopuKwdd7w==
+X-Received: by 2002:ac2:5457:: with SMTP id d23mr7593028lfn.11.1554648806837; 
+	Sun, 07 Apr 2019 07:53:26 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id g10sm196439edi.23.2019.04.07.07.49.33
+	by smtp.gmail.com with ESMTPSA id f1sm5722980ljc.73.2019.04.07.07.53.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Apr 2019 07:49:33 -0700 (PDT)
+	Sun, 07 Apr 2019 07:53:26 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Apr 2019 16:49:31 +0200
-Message-Id: <20190407144931.32553-1-open.source@oleksandr-kravchuk.com>
+Date: Sun,  7 Apr 2019 16:53:22 +0200
+Message-Id: <20190407145322.2570-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] open-isns: update to 0.99
+Subject: [PATCH][meta-networking] nanomsg: update to 1.1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,80 +56,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Apr 2019 14:49:34 -0000
-
-Removed patch has been upstreammed.
+X-List-Received-Date: Sun, 07 Apr 2019 14:53:27 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...dian.h-is-available-on-musl-on-linux.patch | 38 -------------------
- .../{open-isns_0.98.bb => open-isns_0.99.bb}  |  6 +--
- 2 files changed, 2 insertions(+), 42 deletions(-)
- delete mode 100644 meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
- rename meta-networking/recipes-support/open-isns/{open-isns_0.98.bb => open-isns_0.99.bb} (86%)
+ .../nanomsg/{nanomsg_1.1.4.bb => nanomsg_1.1.5.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/nanomsg/{nanomsg_1.1.4.bb => nanomsg_1.1.5.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch b/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
-deleted file mode 100644
-index fbdc4e911..000000000
---- a/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From e0d86318227a23f00cf0f6639a6685bb9f5771a1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 12 Dec 2017 09:42:19 -0800
--Subject: [PATCH] util.h: endian.h is available on musl on linux
--
--just checking for glibc alone is not enough since
--it excludes musl, therefore check for platform
--being linux as well
--
--Fixes build issues
--
--include/libisns/util.h:114:12: fatal error: sys/endian.h: No such file or directory
-- #  include <sys/endian.h>
--            ^~~~~~~~~~~~~~
--
--Upstream-Status: Submitted
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- include/libisns/util.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/libisns/util.h b/include/libisns/util.h
--index 9a2bd13..6cc1a1b 100644
----- a/include/libisns/util.h
--+++ b/include/libisns/util.h
--@@ -100,7 +100,7 @@ enum {
--  * There's no htonll yet
--  */
-- #ifndef htonll
---# ifdef __GLIBC__
--+# if defined(__GLIBC__) || defined(__linux__)
-- #  include <endian.h>
-- #  include <byteswap.h>
-- #  if __BYTE_ORDER == __BIG_ENDIAN
---- 
--2.15.1
--
-diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.98.bb b/meta-networking/recipes-support/open-isns/open-isns_0.99.bb
-similarity index 86%
-rename from meta-networking/recipes-support/open-isns/open-isns_0.98.bb
-rename to meta-networking/recipes-support/open-isns/open-isns_0.99.bb
-index 5e64f893e..a03b92f5f 100644
---- a/meta-networking/recipes-support/open-isns/open-isns_0.98.bb
-+++ b/meta-networking/recipes-support/open-isns/open-isns_0.99.bb
-@@ -13,11 +13,9 @@ SECTION = "net"
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.4.bb b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.5.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.4.bb
+rename to meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.5.bb
+index fa6b43ace..8444f0b73 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.4.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.5.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
+ SECTION = "libs/networking"
  
- DEPENDS = "openssl"
- 
--SRC_URI = "git://github.com/open-iscsi/open-isns \
--           file://0001-util.h-endian.h-is-available-on-musl-on-linux.patch \
--           "
-+SRC_URI = "git://github.com/open-iscsi/open-isns"
- 
--SRCREV = "e84374ce7d1f5fc58a4c0fc751e075b2cc752c34"
-+SRCREV = "cfdbcff867ee580a71bc9c18c3a38a6057df0150"
+ SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https"
+-SRCREV = "e7f8a751316b942d8962cd0232c2d606c1d9a9db"
++SRCREV = "1749fd7b039165a91b8d556b4df18e3e632ad830"
  
  S = "${WORKDIR}/git"
  
