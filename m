@@ -1,49 +1,50 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
-	[209.85.167.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2552C7D3D1
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C97C7D3B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Apr 2019 13:50:35 +0000 (UTC)
-Received: by mail-lf1-f45.google.com with SMTP id m13so7522983lfb.6
+	Sun,  7 Apr 2019 14:32:33 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id l20so1877802edv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Apr 2019 06:50:37 -0700 (PDT)
+	Sun, 07 Apr 2019 07:32:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=q+YCM1+C+yoEJb7as1oFN3tmialunGA9//DpHplFEbM=;
-	b=iOSNM77QCEr8700OltTxQIGGIxA1kP26fT+HuWv2Jh/YTRDGYzL8fiC407iLrv2gKs
-	PGjEKaQNfmMATKuWomcNc/6dw6HNu9TErjpLCzqU/n3YT/VM/+hOMGsUW+zn9FYv0Jtw
-	8mH1OFfTQubnOno5NVVrScKrnWy5wLcsQQzAmQQQiVRe1/3ib5J+wcvzFwE13zZqf2F0
-	Bw6HEQVrXWwobqj4k7bPmv8lXWmd4EtBxxbgR2UIKUSEcfI4urqZoQc0e6zyHzh34MR6
-	PbBmkOzhuZrv3G/sbMeZdZft6zAlHfHRCmRHoGp4wgqU3WCCKygZ6Jj7Jq31hkn8eZxN
-	t4JQ==
+	bh=wQ2MIsXcdLM2g1xJxfU+YSfj3wP1IU1ZwP0GsPmGYoU=;
+	b=JqLdivngs8sX1FxKpx49kx1nTpq8u6WlFc7x5X9XflCvifdPJfl1rRd0r3MtFiwv28
+	MClx5lZ6p0dHi15lTiQRz56BBSXajikJyvk922zTBlY0ntJjaKauvnAGnU+XznLi/ML/
+	X8aWVPcK2yxS4Ez3Dh/y9C/5gax+sijpm81HtLh5TI1XVg266ff2mqa9mBqeFqypipwz
+	ZMLDCNkgIl0G+DveLVM8gl5KO0oYXDMNHID1SVkhG7v3GH7BhQNe6dXSC381DcU7G7ix
+	NWiucYUCyq5Q2X+cc2V/YwxoafpfAEJWK9hqnwO51zXAbzvXe9RycLiZAYPgYgehvR0r
+	yiag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=q+YCM1+C+yoEJb7as1oFN3tmialunGA9//DpHplFEbM=;
-	b=NngJlmgoGCSjDt5Zo+xQNUaet4nkGDUC6JQQj1oif9J8evVTfuSYNk4HUAVVOKKR7+
-	v2vQ8mu7pyYFE8RBKr70wUpv4qR3WZVwOoI4Frf2v+g+2f2/CDVZnBs+ESVb6pZ+jeCp
-	BkxzGNwaUWT+U+qZaJeEifhDd3AnInIqA5UB4B5tjmcuur/ZVBh4am1C6XD+Ry+DKQsm
-	Fvi+9fel1PQK7E7912jdQ5Xn0bB9wSITQOzDWdz2u+mfwWtUlkEg3fgDpNkwxuRQCm9X
-	qv7krBhCR9rM/t3TnWYuEWtU1jm5q7zh4sIR9SzBxysXJv0yPcAXwmDiYd3ebILyxVmj
-	pcfQ==
-X-Gm-Message-State: APjAAAUSZPBx48rHuH613MecEb1TvelRtqRH046h45+lKbCskd6gE1dB
-	lLzpRvm/MJM6m3UcT7Tx1ZtIaQU2R3Y=
-X-Google-Smtp-Source: APXvYqyyvEUvukD4dW8BXkoDcGJCdKM/puoBfsDZvXsgbF8AJwYiqlXZDRi8NMdCb/ZiQSOwDjN1Gw==
-X-Received: by 2002:a19:e30a:: with SMTP id a10mr6623991lfh.58.1554645035948; 
-	Sun, 07 Apr 2019 06:50:35 -0700 (PDT)
+	bh=wQ2MIsXcdLM2g1xJxfU+YSfj3wP1IU1ZwP0GsPmGYoU=;
+	b=aL4sPcRTIhY+WS0yxkLb30tg2o7FBz4WgbUEol1dJrKiIpP3HI2AeGi83Fd7glWmfH
+	7Ngyg61e4SEJ8srOv0DNrBjVCx7qGXQ0MOY1VSHy/D1d+FeamRkf/za7DOrfq3uI3oH9
+	x0ysAQwTl1k/fCNYT/PqVwkjj9eFiy2ENG3Yj4N+GG8U2H4GxpA00kdBSPb1tR9nPBxf
+	j0OFeRalwubrOwElR/3f6tTtXCWukVlNFq5bNAoQf99pyoymm+/Jc0ixHzq2IS5Tbiwk
+	vajDps6aUj9rO5BNhuHu3oZSxJABIONgNg5rNmLIzAneaANALYTDVddr2JDEI8FT24Mh
+	qgag==
+X-Gm-Message-State: APjAAAUoal9YoaVCBfJCIoTuTdcf7pS+zJHOwNHnkOIG0HhfvM4EKqcc
+	8SKwcbzQ6FWbgf18BmzFvZDFBUM4LrM=
+X-Google-Smtp-Source: APXvYqyQ7rMieB0sXi5h7jM9V6uGtqAWI3fzhgsEd7/XrX4QEplHlXYOv9dtPYjFNs1mnQdH677ygg==
+X-Received: by 2002:a17:906:1d0f:: with SMTP id
+	n15mr2541233ejh.83.1554647554436; 
+	Sun, 07 Apr 2019 07:32:34 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	t21sm1777966lfb.65.2019.04.07.06.50.34
+	h11sm1971487eds.44.2019.04.07.07.32.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Apr 2019 06:50:35 -0700 (PDT)
+	Sun, 07 Apr 2019 07:32:33 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Apr 2019 15:50:33 +0200
-Message-Id: <20190407135033.27300-1-open.source@oleksandr-kravchuk.com>
+Date: Sun,  7 Apr 2019 16:32:31 +0200
+Message-Id: <20190407143231.27505-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] cifs-utils: update to 6.9
+Subject: [PATCH][meta-networking] keepalived: update to 2.0.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,79 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Apr 2019 13:50:36 -0000
-
-Removed patch has been upstreammed.
+X-List-Received-Date: Sun, 07 Apr 2019 14:32:34 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{cifs-utils_git.bb => cifs-utils_6.9.bb}  |  8 ++---
- ...ount.cifs-Remove-data_blob.h-include.patch | 32 -------------------
- 2 files changed, 3 insertions(+), 37 deletions(-)
- rename meta-networking/recipes-support/cifs/{cifs-utils_git.bb => cifs-utils_6.9.bb} (88%)
- delete mode 100644 meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
+ .../keepalived/{keepalived_1.4.2.bb => keepalived_2.0.15.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/keepalived/{keepalived_1.4.2.bb => keepalived_2.0.15.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
-similarity index 88%
-rename from meta-networking/recipes-support/cifs/cifs-utils_git.bb
-rename to meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
-index 198e3ef98..51dcb23d1 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
-@@ -4,12 +4,10 @@ SECTION = "otherosfs"
- LICENSE = "GPLv3 & LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.0.15.bb
+similarity index 92%
+rename from meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb
+rename to meta-networking/recipes-daemons/keepalived/keepalived_2.0.15.bb
+index 31c50ff6b..9a20e02db 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.0.15.bb
+@@ -11,8 +11,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--PV = "6.7"
-+PV = "6.9"
+ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
+-SRC_URI[md5sum] = "610af6e04071f02d3469191de7499f4e"
+-SRC_URI[sha256sum] = "4e2d7cc01a6ee29a3955f5c622d47704ba7d9dd758189f15e9def016a2d1faa3"
++SRC_URI[md5sum] = "68413d76fc23191ddd66246d498e19b5"
++SRC_URI[sha256sum] = "933ee01bc6346aa573453b998f87510d3cce4aba4537c9642b24e6dbfba5c6f4"
  
--SRCREV = "8101a07871f185c7044fa2ca221b282ab4607c8b"
--SRC_URI = "git://git.samba.org/cifs-utils.git \
--           file://0001-mount.cifs-Remove-data_blob.h-include.patch \
--          "
-+SRCREV = "9a8c21ad9e4510a83a3a41f7a04f763a4fe9ec09"
-+SRC_URI = "git://git.samba.org/cifs-utils.git"
+ DEPENDS = "libnfnetlink openssl"
  
- S = "${WORKDIR}/git"
- DEPENDS += "libtalloc"
-diff --git a/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch b/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
-deleted file mode 100644
-index 07f2a5726..000000000
---- a/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
--
--From 272d523a57a4e8791d625a479128613be5e401f5 Mon Sep 17 00:00:00 2001
--From: Thomas Witt <pyromaniac@exherbo.org>
--Date: Wed, 15 Mar 2017 20:20:44 +0000
--Subject: [PATCH] mount.cifs: Remove data_blob.h include
--
--data_blob.h includes talloc.h from libtalloc, but that is only marked as
--a dependency for cifs.upcall. No symbols from that header are used by
--cifs.mount, so remove it to avoid the libtalloc dependency
--
--Signed-off-by: Thomas Witt <pyromaniac@exherbo.org>
-----
-- mount.cifs.c | 1 -
-- 1 file changed, 1 deletion(-)
--
--diff --git a/mount.cifs.c b/mount.cifs.c
--index 13b71ef..2612feb 100644
----- a/mount.cifs.c
--+++ b/mount.cifs.c
--@@ -61,7 +61,6 @@
-- #include "mount.h"
-- #include "util.h"
-- #include "resolve_host.h"
---#include "data_blob.h"
-- 
-- #ifndef MS_MOVE 
-- #define MS_MOVE 8192 
---- 
--1.9.4
--
 -- 
 2.17.1
 
