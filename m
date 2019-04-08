@@ -1,49 +1,50 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C24757D577
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A773A7D573
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Apr 2019 20:51:45 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id v22so12515982lje.9
+	Mon,  8 Apr 2019 21:09:20 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id u24so3686017lfg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Apr 2019 13:51:47 -0700 (PDT)
+	Mon, 08 Apr 2019 14:09:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=nnfw7XvnbaTfjHOxRRzYiZYFv2hSCL+6qaQmLPzn9M8=;
-	b=fZp7aMo5tFLcik02bxTfu6JDFAqyS9seoS62AQrYQo+1xun8+jRyvlh+/OFKF8qPWD
-	RzEAm3BgQCAL5x8zRL6YJEfwbQFk9lWKWBHvFWwjwotx6DiLE+lK8r3Oope2c9j2WMEx
-	hJ96CPEVZeLuR7MEpI7C40PtbbSlEkIj0H7r0sVIutF0XIHkFjK2gLIieIYtwAoL43Kj
-	u5cMeyylBJ7piYIUKc/39WbCyKGM/9OfMfIKVCmRfukLEoNxK03JlqB0sZCqSebV9HvS
-	Eo76x5COM6tpszTyEd4xDZkXXH0dppv7BVxCJ03agCS+yfwS8jUy9LMBy9R1/qJep4dx
-	MzQA==
+	bh=l4nMkXgW5UBSYtZx+ljqmPFoFCocXzVMdwmkuF4PfVo=;
+	b=F/9EhMkdvK/2EWld5mcQu9MaSiEqtNw+M2d6o8Qzfoi4bpQ6eoLBzDGZWmm/ATZAzV
+	EqbhGKTkckVF9f0/vXe0opXHKOzwmzUTMPBbptKMy5H+f81GRdrgtD5G7iuxLMUFzQvZ
+	AScyugKcQrt1F/cYXWXOLpWgv/zBoo+z/eH2aPRcN/V/4BUk9MTxyKc1WECf51PE0Ao2
+	plTsKa/qlwmQ75xmNNT2brXdBwgFOitCZ9PvXlmPQTWwE0/dHFTafNxi3bi4Ut/FhbCU
+	BOT3VECukrr1fzikHKW9kBzOWbM5SEpW2Gm6RQbxU5SmQgQjPkJj0+NlReuYIY0347w/
+	uchA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nnfw7XvnbaTfjHOxRRzYiZYFv2hSCL+6qaQmLPzn9M8=;
-	b=lt/qeIHjgcnAhtoOxb53bY0/XYxad6SMz/9CJk9YikWiCTNBtetBIZaTlaQYsScUlI
-	ksE2muQ9x5+B6mUvckwm7Aawc4xSj9AN6nAIyrINPX2xYXPZdkzKQsxZhmrS2lXd/VRN
-	yw5sPZRZAKkoz+Tx0hAUaMYPKfQyBYKPggIBi/CXjBirma+gbkfjmm61svYgj2PCuZKx
-	u8Wo7dJnaykre6q3PEZjNbTN/jhv8o6fMivSAnj6CEESaB1baFMlI/0As5ss1IGESDEb
-	dg33sQe4iKK9xPlUYsWgU41FV/Qibn+yiAkulNX0rPmIAb6IlBi5A83nUvsZZyG1iF78
-	GYTA==
-X-Gm-Message-State: APjAAAUfK2LHQUk5vINroU59EKEkvD8Ub86YyG0oVgpZTYkxOcwm+PY4
-	XAgF2jazKgTcK3VsJ9/QxtICBs264nc=
-X-Google-Smtp-Source: APXvYqwdvTpdgI4rhkA8mJB5PFfbI3S4YbyLDotCqNz7abaClr4UuCrt7HEEEvqpFC7ElxHEENvuqg==
-X-Received: by 2002:a2e:894e:: with SMTP id b14mr17634849ljk.158.1554756706194;
-	Mon, 08 Apr 2019 13:51:46 -0700 (PDT)
+	bh=l4nMkXgW5UBSYtZx+ljqmPFoFCocXzVMdwmkuF4PfVo=;
+	b=LGKU8+JUYUVgTWpc7DW86xZUyInv4PzLNLOf+OS9wuzyPUpkSg1j/NSoY1SMw2XgSO
+	WDlhl3+V2u5ONPUpUALpoSmJCU+OLH7QnUeP9JeMPPgIOXU50nJE2hAm09bYvVTDMfds
+	Dnwf4fGIi/k3EOU+6Hy/nsr65xZ7grWnnI7wIslfX3/gCr42AE9jji8Rw2XlXSLF3BBo
+	m+CRXDa9D7gTG1DflgesuAsfQtbxH4Y1vLuX0NLW2abximuTAU+7CCX5psRLrHC43tz3
+	sdN+4jCdke2agsUBfVm0BwU/4FuSNepfdwqLUUfHL7jVZw3SJnOo0awbZKf3UL8kB+0z
+	4z3Q==
+X-Gm-Message-State: APjAAAVOrGvByr2FPu1VORRdVfHvRNWXUP/BUZYwucZNWHqYGNfkg3O4
+	oUzZHHtuRjTxO/mVg94gLvyT4fSToMI=
+X-Google-Smtp-Source: APXvYqxf+QqRHazThB757uHNCL37xt933W6VppqrYvcm0E+ZXnQYdvzzdthgWrhnl1wE+Cy3dqzGtg==
+X-Received: by 2002:a05:6512:c1:: with SMTP id
+	c1mr12467983lfp.132.1554757760708; 
+	Mon, 08 Apr 2019 14:09:20 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	z15sm6406673ljz.55.2019.04.08.13.51.45
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id o3sm6174116lfd.53.2019.04.08.14.09.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 08 Apr 2019 13:51:45 -0700 (PDT)
+	Mon, 08 Apr 2019 14:09:20 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Apr 2019 22:51:38 +0200
-Message-Id: <20190408205138.29472-1-open.source@oleksandr-kravchuk.com>
+Date: Mon,  8 Apr 2019 23:09:12 +0200
+Message-Id: <20190408210912.4527-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] ell: remove recipe
+Subject: [PATCH][meta-oe] analyze-suspend: update to 5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,40 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2019 20:51:46 -0000
-
-This recipe will be moved to poky instead as newer versions of some of
-its components depend on it.
+X-List-Received-Date: Mon, 08 Apr 2019 21:09:20 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-core/ell/ell_0.17.bb | 17 -----------------
- 1 file changed, 17 deletions(-)
- delete mode 100644 meta-oe/recipes-core/ell/ell_0.17.bb
+ .../{analyze-suspend_git.bb => analyze-suspend_5.3.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/analyze-suspend/{analyze-suspend_git.bb => analyze-suspend_5.3.bb} (92%)
 
-diff --git a/meta-oe/recipes-core/ell/ell_0.17.bb b/meta-oe/recipes-core/ell/ell_0.17.bb
-deleted file mode 100644
-index 27f11cfbe..000000000
---- a/meta-oe/recipes-core/ell/ell_0.17.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY  = "Embedded Linux Library"
--DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
--LICENSE  = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
--SECTION = "libs"
--
--inherit autotools pkgconfig
--
--S = "${WORKDIR}/git"
--SRCREV = "ebc021cee3b2d20ca2af5e3ed02495da616b2fd3"
--SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
--
--do_configure_prepend () {
--    mkdir -p ${S}/build-aux
--}
--
--DEPENDS = "dbus"
+diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.3.bb
+similarity index 92%
+rename from meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+rename to meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.3.bb
+index 8888b2267..451671dda 100644
+--- a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
++++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.3.bb
+@@ -16,9 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+ 
+ RDEPENDS_${PN} += "python-core python-datetime python-stringold"
+ 
+-PV = "3.2+gitr${SRCPV}"
+-SRCREV = "c669e002a2e7504f21e277ad248fa81033926391"
+ SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
++SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
++
+ S = "${WORKDIR}/git"
+ 
+ do_install() {
 -- 
 2.17.1
 
