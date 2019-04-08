@@ -1,23 +1,23 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B4BF7D5A1
+Return-Path: <Liwei.Song@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B19DF7D6BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Apr 2019 05:43:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x385hmlo020350
+	Mon,  8 Apr 2019 08:28:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x388SlpH024186
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 7 Apr 2019 22:43:49 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Sun, 7 Apr 2019 22:43:48 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Apr 2019 13:43:46 +0800
-Message-ID: <1554702226-93029-1-git-send-email-changqing.li@windriver.com>
+	Mon, 8 Apr 2019 01:28:47 -0700 (PDT)
+Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Mon, 8 Apr 2019 01:28:41 -0700
+From: Liwei Song <liwei.song@windriver.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Apr 2019 04:26:20 -0400
+Message-ID: <1554711980-84676-1-git-send-email-liwei.song@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gd: fix compile error caused by -Werror=maybe-uninitialized
+Subject: [meta-oe][PATCH] ledmon: control hard disk led for RAID arrays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +30,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2019 05:43:48 -0000
+X-List-Received-Date: Mon, 08 Apr 2019 08:28:46 -0000
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+Enable LED support for Intel Virtual RAID On CPU.
 
-When enable DEBUG_BUILD, gd compile failed with error:
-
-| ../../git/src/gd_tiff.c:961:64: error: 'image_type' may be used uninitialized in this function [-Werror=maybe-uninitialized]
-|           (image_type == GD_PALETTE || image_type == GD_INDEXED || image_type == GD_GRAY)) {
-|           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
-
-actually, this warning is misinformation, we can see the logic from:
-https://github.com/libgd/libgd/blob/master/src/gd_tiff.c
-image_type will be assigned no matter force_rgba is TRUE/FALSE.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Liwei Song <liwei.song@windriver.com>
 ---
- meta-oe/recipes-support/gd/gd_2.2.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-bsp/ledmon/ledmon_git.bb | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon_git.bb
 
-diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
-index 548d2c5..426af25 100644
---- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
-@@ -35,6 +35,8 @@ EXTRA_OECONF += " --disable-rpath \
- 
- EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
- 
-+DEBUG_OPTIMIZATION_append = " -Wno-error=maybe-uninitialized"
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+new file mode 100644
+index 000000000000..14d70e51f5cc
+--- /dev/null
++++ b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Intel(R) Enclosure LED Utilities"
 +
- do_install_append() {
-     # cleanup buildpaths from gdlib.pc
-     sed -i -e 's#${STAGING_DIR_HOST}##g' ${D}${libdir}/pkgconfig/gdlib.pc
++DESCRIPTION = "The utilities are designed primarily to be used on storage servers \
++ utilizing MD devices (aka Linux Software RAID) for RAID arrays.\
++"
++HOMEPAGE = "https://github.com/intel/ledmon"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
++"
++
++DEPENDS = " systemd sg3-utils"
++
++inherit systemd
++
++SYSTEMD_SERVICE_${PN} = "ledmon.service"
++
++SRC_URI = "git://github.com/intel/ledmon;branch=master \
++"
++
++SRCREV = "ad1304ca1363d727425a1f23703c523e21feae4f"
++
++COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
++
++S = "${WORKDIR}/git"
++EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
++
++do_install_append() {
++	install -d ${D}/${systemd_unitdir}/system
++	oe_runmake  DESTDIR=${D}  install
++	oe_runmake  DESTDIR=${D}${systemd_unitdir}/system  install-systemd
++}
 -- 
 2.7.4
 
