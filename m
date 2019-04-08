@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
-	[209.85.222.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FCAF7D4E7
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id AB5257D428
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Apr 2019 17:51:06 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id o129so8515848qke.8
+	Mon,  8 Apr 2019 18:33:59 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id z16so16717871qtn.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Apr 2019 10:51:07 -0700 (PDT)
+	Mon, 08 Apr 2019 11:34:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ETr4kTrqTpyo93dIdIMLrbtj4NHXAqiPVVsi7bh5Nws=;
-	b=Qy13dkCGzRWouvMs1c0eC4aYoqbpXaO35pmI4rth4BewudbjPRJTtBp94+00tLUPpp
-	g8OsGLjgboJQCx74gJ2jY+5ULKj+W4sJdMsWnm8U1/cKbX48lKn/wqUev2lUCaJuraTo
-	7goe0tGCAaZVlhfnggT7EBh2zXKOg5t+oG2xhG856cuJVA+yPWTupG4iagkDXbM+VmdR
-	QTwCcOElFxB7AKQ2V+WLQg+H2FLVi47/NTxTS/vZ4VUxQ1PYyGPRd6k1vwzGsxVvu8IV
-	V5jbf/dd831VU87eaqZYeQdok9issy/WEkJ1lWV+8OPH6Nx+9deMU3F+IrD6ZfkCvrDQ
-	Yc6g==
+	:cc; bh=clxCLxCUoGISLv7FtQDCjvT4TvbI7Exhmtq5lSVzAAg=;
+	b=pfM/Fo0MIjuDIVSOJ25xz51olvidPmOGGUUjey3LOR85FRbfBWUUGwwfgD2rGVCNIn
+	FdMCA0WQFyN+//48uuZ5yP+t/MQz9fqMkurzONqs4L2UAYvxnedbf60+qGZBs4gyoih0
+	JR05+v2QpMQuRabM9JAHYYI2Eu4GbH0jHLrrSr7IKvWBSF1A3ccU71tyXFg8DVDGLBI6
+	rWKHtSHYZWoUvTA94BYCnjJb+3STvjXPjsrLRqN5Xn7SkJFNELUFUcHek8ndaUV6pU1c
+	DLarItH6NlJf+A3JYrw519IQw+IfDfgbybSc8gNg5yyPUNE/szDguGLBdql63wg3bcOX
+	LQKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ETr4kTrqTpyo93dIdIMLrbtj4NHXAqiPVVsi7bh5Nws=;
-	b=NDuhtm5vKiuQZ+6oDBRzTflR1Rpj4SkAdLrYJkW11fvx2akT6dB/zzonk8He6lKUCb
-	/NFTt6DBkCurEQ9OC2rToVGpwyaSxaEMZINnCJRsN5PD4+Gqt3RvDieN8sEOzcDV+W5C
-	7/Cx8uLiHlOWXncoj3iK+bDdzegNEk/MeqygXjK+YEQVU3VVIm+krbH006S02Jtr3vLb
-	geBGxn9F2vszjzok6y8fGFZ/UqKSTMtiCXDUqueuOtNwfSHcwW/K35cJy1NVlYZKMxzB
-	psxToU7aQsS0WgscPANbQasprK1v/xSwbYV/pcR8il5KREcRtXLy3AqixFQSLdGQLOpm
-	mzcA==
-X-Gm-Message-State: APjAAAXnx4KZtD3cblq+JXJe9hGOzfKl6kSxCI1UCI/GNFgc3yEo6p+D
-	7ksXWPoefiBzqHeyW4yAN7L2rlWeGkqdT7Tc/IZvieB4yS8=
-X-Google-Smtp-Source: APXvYqxAmAHYifP97oOL+iQCrgpltN9wiu3Md6MqD1KnSRij6qz6BGqcbYGbaDsINBrUfdOb/8DTguN6T0JIRM2e5DQ=
-X-Received: by 2002:a37:9fc4:: with SMTP id
-	i187mr23166548qke.141.1554745867212; 
-	Mon, 08 Apr 2019 10:51:07 -0700 (PDT)
+	bh=clxCLxCUoGISLv7FtQDCjvT4TvbI7Exhmtq5lSVzAAg=;
+	b=sXRygYQdAaEkaYIDkzsxUVdwJprGobu0N8CVCTYf/p8wQfgb3BsH6yAYIJwm4cTlv0
+	w+MJ84/YGBTDnt4/6b6cHW6nYGubjtVpNjfd5/RxydvsJqfcolf36h29EbIk9i68dMah
+	ykPUIiwXt3Ou3UpQ1wEwotPlwYkKBv8JvL/xhIDs1Y1w/5KJFAeRiD/xQiqz+4aowjV7
+	vhqm0Ait+1DDoFnOgyvCA7OM0Jba4YuJwYUGIjE9yGAGMVvnZ6Nl+2th9ycV/lIOFyPW
+	M21F1Azo+F3VEMtaPamphcqaIeLZs3aDTfFRrzbyLhU2okcjzp8UsFLif7CLr+/Y4iMA
+	coMg==
+X-Gm-Message-State: APjAAAV3d8DLiERtteJ+KcVvlBHMfwi/ddfurGAfBfSmZQBGohfsqgGL
+	du+7I0vhV9oBXr+c21EdXxNAUSRqorZdxQrVtbU=
+X-Google-Smtp-Source: APXvYqzNC6XfMi5AuiHFMl+OjDf9DSVvmwUI4eHseuwlozAgzqyX/xKz6y6vVmNbt8Vm9+xFe+e9ji5dKdctVKU3WMU=
+X-Received: by 2002:a0c:c988:: with SMTP id b8mr25063980qvk.33.1554748440252; 
+	Mon, 08 Apr 2019 11:34:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190406190807.5220-1-open.source@oleksandr-kravchuk.com>
-	<CAMKF1sqwXkVbyAV8Kq+3gT5sqcnToPdPDU8uD8qyxdrqW58FvA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqwXkVbyAV8Kq+3gT5sqcnToPdPDU8uD8qyxdrqW58FvA@mail.gmail.com>
+References: <1554730145-5313-1-git-send-email-cdgarren@indesign-llc.com>
+In-Reply-To: <1554730145-5313-1-git-send-email-cdgarren@indesign-llc.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Apr 2019 10:50:41 -0700
-Message-ID: <CAMKF1spS9PLKgg5Ezo8kU3X1YF8dronMDR1VrYf2HWL6RYM9tA@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Date: Mon, 8 Apr 2019 11:33:34 -0700
+Message-ID: <CAMKF1spGLsV03xo+O-q8mJDWvY=Do_4ynnECVy95Q3K_KUfRkw@mail.gmail.com>
+To: chris.d.garren@gmail.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] macchanger: update to 1.7.0
+Subject: Re: [meta-python][PATCH v2] python-cryptography: Move linker flag to .inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +53,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2019 17:51:06 -0000
+X-List-Received-Date: Mon, 08 Apr 2019 18:33:59 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Apr 8, 2019 at 10:34 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Apr 8, 2019 at 6:29 AM <chris.d.garren@gmail.com> wrote:
 >
-> Fails to build for musl see
-> https://errors.yoctoproject.org/Errors/Build/79499/
+> From: Chris Garren <cdgarren@indesign-llc.com>
 >
+> Move the -pthread linker flag to the .inc file because it is
+> needed for python 2 & 3.
+>
+> Signed-off-by: Chris Garren <cdgarren@indesign-llc.com>
+> ---
+>  meta-python/recipes-devtools/python/python-cryptography.inc       | 2 ++
+>  meta-python/recipes-devtools/python/python3-cryptography_2.4.1.bb | 2 --
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
+> index 2c1ac1c..d7e5ae9 100644
+> --- a/meta-python/recipes-devtools/python/python-cryptography.inc
+> +++ b/meta-python/recipes-devtools/python/python-cryptography.inc
+> @@ -3,6 +3,8 @@ HOMEPAGE = "https://cryptography.io/"
+>  LICENSE = "Apache-2.0 | BSD"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
+>
+> +LDSHARED += "-pthread"
+> +
+>  DEPENDS += " \
+>      ${PYTHON_PN}-cffi \
+>      ${PYTHON_PN}-cffi-native \
+> diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.4.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.4.1.bb
+> index 1959233..f64e51d 100644
+> --- a/meta-python/recipes-devtools/python/python3-cryptography_2.4.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-cryptography_2.4.1.bb
+> @@ -1,8 +1,6 @@
+>  inherit pypi setuptools3
+>  require python-cryptography.inc
+>
+> -LDSHARED += "-pthread"
+> -
+>  SRC_URI += " \
+>      file://run-ptest \
+>  "
 
-particular link
-https://errors.yoctoproject.org/Errors/Details/236092/
-
-> On Sat, Apr 6, 2019 at 12:08 PM Oleksandr Kravchuk
-> <open.source@oleksandr-kravchuk.com> wrote:
-> >
-> > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> > ---
-> >  .../{macchanger_1.5.0.bb => macchanger_1.7.0.bb}    | 13 ++++++-------
-> >  1 file changed, 6 insertions(+), 7 deletions(-)
-> >  rename meta-networking/recipes-support/macchanger/{macchanger_1.5.0.bb => macchanger_1.7.0.bb} (50%)
-> >
-> > diff --git a/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb b/meta-networking/recipes-support/macchanger/macchanger_1.7.0.bb
-> > similarity index 50%
-> > rename from meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
-> > rename to meta-networking/recipes-support/macchanger/macchanger_1.7.0.bb
-> > index a90177f19..0c683ac01 100644
-> > --- a/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
-> > +++ b/meta-networking/recipes-support/macchanger/macchanger_1.7.0.bb
-> > @@ -1,14 +1,13 @@
-> >  SUMMARY = "Tool to view/change network interface MAC addresses"
-> >  DESCRIPTION = "A GNU/Linux utility for viewing/manipulating the MAC address of network interfaces."
-> > -HOMEPAGE = "http://www.alobbs.com/macchanger"
-> > -LICENSE  = "GPLv2"
-> > -LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-> > +HOMEPAGE = "https://github.com/alobbs/macchanger"
-> > +LICENSE  = "GPLv3"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> >  SECTION = "net"
-> >
-> > -SRC_URI  = "${GNU_MIRROR}/macchanger/${BPN}-${PV}.tar.gz"
-> > -
-> > -SRC_URI[md5sum] = "79b7cdaeca3d8ebafa764c4b0dd03ab7"
-> > -SRC_URI[sha256sum] = "d44bfa27cb29c5a718627cb3ef3aa42eb5130426545eb2031120826cd73fa8fe"
-> > +SRC_URI = "https://github.com/alobbs/macchanger/releases/download/${PV}/${BPN}-${PV}.tar.gz"
-> > +SRC_URI[md5sum] = "ca56f16142914337391dac91603eb332"
-> > +SRC_URI[sha256sum] = "dae2717c270fd5f62d790dbf80c19793c651b1b26b62c101b82d5fdf25a845bf"
-> >
-> >  FILES_${PN} = " \
-> >      ${bindir}/${BPN} \
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I had to munge it a bit.
+https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=2be016ee8f5260f67edcfe434ed70569fced56e0
 
