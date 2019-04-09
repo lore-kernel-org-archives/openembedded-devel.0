@@ -1,24 +1,30 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 743DB7D38A
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CE717D277
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Apr 2019 01:00:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3910MQt000231
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  9 Apr 2019 01:56:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,327,1549900800"; d="scan'208";a="58808504"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Apr 2019 09:56:27 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id E2DA54CD8107
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Apr 2019 18:00:23 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Mon, 8 Apr 2019 18:00:22 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Tue,  9 Apr 2019 09:56:29 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 9 Apr 2019 09:56:27 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Apr 2019 09:00:19 +0800
-Message-ID: <1554771619-6761-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Tue, 9 Apr 2019 09:57:07 +0800
+Message-ID: <20190409015707.14043-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-python][PATCH] python-flask-socketio: move to meta-python directory
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: E2DA54CD8107.AAA6D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] xlsatoms: upgrade 1.1.2 -> 1.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,71 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Apr 2019 01:00:22 -0000
+X-List-Received-Date: Tue, 09 Apr 2019 01:56:28 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-The previous commits put the python-engineio, python-socketio and
-python-flask-socketio to a wrong directory. Move them to meta-python.
+-Upgrade from xlsatoms_1.1.2.bb to xlsatoms_1.1.3.bb.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- {meta-demo => meta-python}/recipes-devtools/python/python-engineio.inc    | 0
- .../recipes-devtools/python/python-engineio_3.5.0.bb                      | 0
- .../recipes-devtools/python/python-flask-socketio.inc                     | 0
- .../recipes-devtools/python/python-flask-socketio_3.3.2.bb                | 0
- {meta-demo => meta-python}/recipes-devtools/python/python-socketio.inc    | 0
- .../recipes-devtools/python/python-socketio_4.0.0.bb                      | 0
- .../recipes-devtools/python/python3-engineio_3.5.0.bb                     | 0
- .../recipes-devtools/python/python3-flask-socketio_3.3.2.bb               | 0
- .../recipes-devtools/python/python3-socketio_4.0.0.bb                     | 0
- 9 files changed, 0 insertions(+), 0 deletions(-)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-engineio.inc (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-engineio_3.5.0.bb (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-flask-socketio.inc (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-flask-socketio_3.3.2.bb (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-socketio.inc (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python-socketio_4.0.0.bb (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python3-engineio_3.5.0.bb (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python3-flask-socketio_3.3.2.bb (100%)
- rename {meta-demo => meta-python}/recipes-devtools/python/python3-socketio_4.0.0.bb (100%)
+ .../xorg-app/{xlsatoms_1.1.2.bb => xlsatoms_1.1.3.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xlsatoms_1.1.2.bb => xlsatoms_1.1.3.bb} (73%)
 
-diff --git a/meta-demo/recipes-devtools/python/python-engineio.inc b/meta-python/recipes-devtools/python/python-engineio.inc
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-engineio.inc
-rename to meta-python/recipes-devtools/python/python-engineio.inc
-diff --git a/meta-demo/recipes-devtools/python/python-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-engineio_3.5.0.bb
-rename to meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
-diff --git a/meta-demo/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-flask-socketio.inc
-rename to meta-python/recipes-devtools/python/python-flask-socketio.inc
-diff --git a/meta-demo/recipes-devtools/python/python-flask-socketio_3.3.2.bb b/meta-python/recipes-devtools/python/python-flask-socketio_3.3.2.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-flask-socketio_3.3.2.bb
-rename to meta-python/recipes-devtools/python/python-flask-socketio_3.3.2.bb
-diff --git a/meta-demo/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-socketio.inc
-rename to meta-python/recipes-devtools/python/python-socketio.inc
-diff --git a/meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python-socketio_4.0.0.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb
-rename to meta-python/recipes-devtools/python/python-socketio_4.0.0.bb
-diff --git a/meta-demo/recipes-devtools/python/python3-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python3-engineio_3.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
-diff --git a/meta-demo/recipes-devtools/python/python3-flask-socketio_3.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
-diff --git a/meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb
-similarity index 100%
-rename from meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb
+diff --git a/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.2.bb b/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.3.bb
+similarity index 73%
+rename from meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.2.bb
+rename to meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.3.bb
+index 723d4e211..288bcfc8f 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.2.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xlsatoms_1.1.3.bb
+@@ -10,5 +10,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2b08d9e2e718ac83e6fe2b974d4b5fd8"
+ DEPENDS += "libxmu"
+ BBCLASSEXTEND = "native"
+ 
+-SRC_URI[md5sum] = "5dcb6e6c4b28c8d7aeb45257f5a72a7d"
+-SRC_URI[sha256sum] = "47e5dc7c3dbda6db2cf8c00cedac1722835c1550aa21cfdbc9ba83906694dea4"
++SRC_URI[md5sum] = "61671fee12535347db24ec3a715032a7"
++SRC_URI[sha256sum] = "57868f958c263976727881f3078e55b86b4a109dc578d2b92f5c6d690850a382"
 -- 
-2.7.4
+2.20.1
+
+
 
 
