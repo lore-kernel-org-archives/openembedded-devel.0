@@ -1,49 +1,24 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-it1-f171.google.com (mail-it1-f171.google.com
-	[209.85.166.171])
-	by mail.openembedded.org (Postfix) with ESMTP id D690F6B512
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 743DB7D38A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Apr 2019 23:48:27 +0000 (UTC)
-Received: by mail-it1-f171.google.com with SMTP id 139so2057330ita.4
+	Tue,  9 Apr 2019 01:00:22 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3910MQt000231
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Apr 2019 16:48:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=L/TnXLLq8IdEA/9qHZg8qlPp406WKqEldGEcEPC8lJA=;
-	b=V2Er5MQEyaeXkTZUhTeKYHwKPFT4IoeWFKiCUyg/quyio5K4f79Pr59lbNde+d7HZC
-	P8b3r7wdlTk2s5FkiakM3QhNJ74bHPhO8YBRWQ/xlV7wclikMBB+0Xmj8gxnJKQt08P/
-	Zienl2IFbkkBxc25OeMUwuYN1yqa8Wnhptteobnqsmbp3VC/uK2CN9DretvSQ2TZaHnY
-	niksMAprhbsFOm8ATvNKIo4NnGYz4wB8nwGjX0dcxfzFamIefrKLrb/RoY3s3GPk5Pbk
-	bf8aopMeJWHTRYdoXx/VOfd6MhmWH05nmlADuMwAoaNcGbItAgF28G/FYEUy8DNxlsCm
-	UJFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=L/TnXLLq8IdEA/9qHZg8qlPp406WKqEldGEcEPC8lJA=;
-	b=Kvh1dPvV/xrv09y/eTsnV6dBktk5IoO5dIVDYS74Gh4ZJRF/aJLrZ8Hn7REb9sLqdB
-	ZRt+GyG5qd4IsqQ5F3Z0Z0TSiXTVA8g5PqCH7rz7e8f902WKo4R6lhaxYbGfjAsiVPuq
-	bTTZes9Ujot0Ahhv1M7U0bV5O/p/NQT24gUWF7wymK12yDmv5l2N0GaQD+MSoUfMt6fs
-	lSoV2yGBIjg6Q2u7wKGQoCVpdY6rCtVHPEwiCOOSXR2Wc4LbivSHGKn6yE3JJYj65GSi
-	0GS/zeNj8VwhFXkZT5dyRza+TZl9m3nsWYeFOusYnqoGzCGFggKgm6k/baAtA3QX1Fq6
-	rsXA==
-X-Gm-Message-State: APjAAAV7zihEwrZos0vuPNgk9dJPnd2JAW7BUeTeM6KI567rpc8aqS23
-	pBi6NxVKh6Z+b+0tItAe01EZKcdH1GJyTgQf2IubRg==
-X-Google-Smtp-Source: APXvYqz52xrN1QJrbm6laDMqvcY5hhr6eGlSCbseDxRljey7P0pM7BI5FYpvBpBwkaVNTd8J+PK7rirEu0ygAO+0ssI=
-X-Received: by 2002:a24:43c8:: with SMTP id
-	s191mr19563072itb.109.1554767308790; 
-	Mon, 08 Apr 2019 16:48:28 -0700 (PDT)
+	Mon, 8 Apr 2019 18:00:23 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Mon, 8 Apr 2019 18:00:22 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 9 Apr 2019 09:00:19 +0800
+Message-ID: <1554771619-6761-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20190408224258.1744-1-schnitzeltony@gmail.com>
-	<20190408224258.1744-4-schnitzeltony@gmail.com>
-In-Reply-To: <20190408224258.1744-4-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 9 Apr 2019 01:48:17 +0200
-Message-ID: <CALbNGRR=6wqoLuV49-WZNut5=yLqqSj8HtK+qmTPQiQG2TzUBQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
-Subject: Re: [PATCH 3/5] parole: replace gstreamer1.0-plugins-good by gstreamer1.0-meta-video in RDEPENDS
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-python][PATCH] python-flask-socketio: move to meta-python directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,19 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2019 23:48:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Apr 2019 01:00:22 -0000
+Content-Type: text/plain
 
-On Tue, Apr 9, 2019 at 12:43 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-Please ignore this one
+The previous commits put the python-engineio, python-socketio and
+python-flask-socketio to a wrong directory. Move them to meta-python.
 
-Andreas
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ {meta-demo => meta-python}/recipes-devtools/python/python-engineio.inc    | 0
+ .../recipes-devtools/python/python-engineio_3.5.0.bb                      | 0
+ .../recipes-devtools/python/python-flask-socketio.inc                     | 0
+ .../recipes-devtools/python/python-flask-socketio_3.3.2.bb                | 0
+ {meta-demo => meta-python}/recipes-devtools/python/python-socketio.inc    | 0
+ .../recipes-devtools/python/python-socketio_4.0.0.bb                      | 0
+ .../recipes-devtools/python/python3-engineio_3.5.0.bb                     | 0
+ .../recipes-devtools/python/python3-flask-socketio_3.3.2.bb               | 0
+ .../recipes-devtools/python/python3-socketio_4.0.0.bb                     | 0
+ 9 files changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-engineio.inc (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-engineio_3.5.0.bb (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-flask-socketio.inc (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-flask-socketio_3.3.2.bb (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-socketio.inc (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python-socketio_4.0.0.bb (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python3-engineio_3.5.0.bb (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python3-flask-socketio_3.3.2.bb (100%)
+ rename {meta-demo => meta-python}/recipes-devtools/python/python3-socketio_4.0.0.bb (100%)
+
+diff --git a/meta-demo/recipes-devtools/python/python-engineio.inc b/meta-python/recipes-devtools/python/python-engineio.inc
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-engineio.inc
+rename to meta-python/recipes-devtools/python/python-engineio.inc
+diff --git a/meta-demo/recipes-devtools/python/python-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-engineio_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
+diff --git a/meta-demo/recipes-devtools/python/python-flask-socketio.inc b/meta-python/recipes-devtools/python/python-flask-socketio.inc
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-flask-socketio.inc
+rename to meta-python/recipes-devtools/python/python-flask-socketio.inc
+diff --git a/meta-demo/recipes-devtools/python/python-flask-socketio_3.3.2.bb b/meta-python/recipes-devtools/python/python-flask-socketio_3.3.2.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-flask-socketio_3.3.2.bb
+rename to meta-python/recipes-devtools/python/python-flask-socketio_3.3.2.bb
+diff --git a/meta-demo/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-socketio.inc
+rename to meta-python/recipes-devtools/python/python-socketio.inc
+diff --git a/meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python-socketio_4.0.0.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python-socketio_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python-socketio_4.0.0.bb
+diff --git a/meta-demo/recipes-devtools/python/python3-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python3-engineio_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
+diff --git a/meta-demo/recipes-devtools/python/python3-flask-socketio_3.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-flask-socketio_3.3.2.bb
+diff --git a/meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb
+similarity index 100%
+rename from meta-demo/recipes-devtools/python/python3-socketio_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb
+-- 
+2.7.4
+
 
