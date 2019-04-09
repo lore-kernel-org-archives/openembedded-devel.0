@@ -1,30 +1,49 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D37A27D230
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
+	[209.85.166.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 429E67D27F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Apr 2019 02:32:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,327,1549900800"; d="scan'208";a="58812092"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Apr 2019 10:32:32 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id AA74E4CD8102
+	Tue,  9 Apr 2019 06:43:15 +0000 (UTC)
+Received: by mail-it1-f196.google.com with SMTP id v8so1966170itf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Apr 2019 10:32:32 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 9 Apr 2019 10:32:31 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Apr 2019 10:33:10 +0800
-Message-ID: <20190409023310.27426-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Mon, 08 Apr 2019 23:43:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XrpZDfZW6xbj23No0h3WjcKXZD2arZqoo+6OROM2I/I=;
+	b=IJaVJ6RCyiij8PVQtElI19RVHZCe0YA0/f4KxQVpdqJmEAMvb4zN9M5vd7v9m241vr
+	+F3btaxiO1IkSh8PyeEpCxBkMAKGiqO2GBAP8Y4Cxpzyga0uvswkfy3vBil7pETG96CV
+	Ca37Hz+PHwbe+fP47wlIzKAp6CS2ySpQ6IQx0nC3uZBYSPTieZkbYtQycyn8gz26+Iv8
+	8sKLpUu7/qBFchVJ6ZGZZ5k8xrhXs+U1UMTOWFKeSE+wakn94RzJ81LpHJc4a3C47mp5
+	cEyZakSBwS07d3Hz4C/guwusJUCwgOex2PLygbC6bKjy+WzWCO4tBQxCRpBEOCrEsnog
+	NS5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XrpZDfZW6xbj23No0h3WjcKXZD2arZqoo+6OROM2I/I=;
+	b=WKNtn0Wr5/klptdob5GMcZ4c+7T2HxEM53KASMpATwkR3JJguWNz+dnwvx0Prg3TQJ
+	V9w7Ss0Bg23GFhvLYSVvDUnlsAsBZGr/fxJXmHRYJb0oqO7Ko9hzYT2aC2CviD1VYVwL
+	HITf67qaERLq5k2D5HVRNCpmyWZm3ja6ySp9vRUJEaf9EBCsbaf8gIfAmz48svzmOm3b
+	en1mlwCbgRIVLHrlGgzp1/0db2y64wYKDD0+UTuReAMcMcVfizF4vPCK9qd7Xy6tiMaG
+	4XBFCUw2eUCnYA0Y6gVXtriuPN6ZKSwvlEWcSB+wJu9jgKZkKX4Tin+MmUOcpC+k2Y/g
+	sduw==
+X-Gm-Message-State: APjAAAU51Wq4QN0nw2tCK76E0OuXDOh4SzE3Ir9QHvER8ewiPyIVAxNR
+	U+Qhvrs8CEN+ZR0DfIgTrj/VKZ2Qo0FUb+q8Heo=
+X-Google-Smtp-Source: APXvYqwGUDwxPKE4AXFcKlzislgbYLbf5XOg3GDAHYBb0OfsoHSrfCvNvL3V9wtIftoZMs5DlVSXoKaGufSCm7/VIVY=
+X-Received: by 2002:a24:43c8:: with SMTP id
+	s191mr20400706itb.109.1554792196376; 
+	Mon, 08 Apr 2019 23:43:16 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: AA74E4CD8102.A7A4B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] xbitmaps: upgrade 1.1.1 -> 1.1.2
+References: <20190408224258.1744-1-schnitzeltony@gmail.com>
+	<20190408224258.1744-6-schnitzeltony@gmail.com>
+	<CAMKF1soiU=idpjn_LUf8AEvinZqjDHQX8y8i6z4ALMg12kKZVw@mail.gmail.com>
+In-Reply-To: <CAMKF1soiU=idpjn_LUf8AEvinZqjDHQX8y8i6z4ALMg12kKZVw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 9 Apr 2019 08:43:05 +0200
+Message-ID: <CALbNGRTmCsa-w3744yOwcWXpCRUmJE=owy--JQAVCJndCqEBow@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 5/5] networkmanager: rework musl patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +56,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Apr 2019 02:32:33 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 Apr 2019 06:43:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
--Upgrade from xbitmaps_1.1.1.bb to xbitmaps_1.1.2.bb.
+On Tue, Apr 9, 2019 at 4:23 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >  CFLAGS_libc-musl_append = " \
+>
+> this is wrong,  it should be CFLAGS_append_libc-musl
+> but I see it builds without these but probably wont run. So while here can you
+> address this ?
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../xorg-data/{xbitmaps_1.1.1.bb => xbitmaps_1.1.2.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-data/{xbitmaps_1.1.1.bb => xbitmaps_1.1.2.bb} (58%)
+Let's get it right. Will send a V2 tonight.
 
-diff --git a/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb b/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.2.bb
-similarity index 58%
-rename from meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
-rename to meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.2.bb
-index 8647f038e..4d26db668 100644
---- a/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.2.bb
-@@ -7,5 +7,5 @@ RDEPENDS_${PN}-dev = ""
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=dbd075aaffa4a60a8d00696f2e4b9a8f"
- 
--SRC_URI[md5sum] = "7444bbbd999b53bec6a60608a5301f4c"
--SRC_URI[sha256sum] = "3671b034356bbc4d32d052808cf646c940ec8b2d1913adac51b1453e41aa1e9d"
-+SRC_URI[md5sum] = "cedeef095918aca86da79a2934e03daf"
-+SRC_URI[sha256sum] = "b9f0c71563125937776c8f1f25174ae9685314cbd130fb4c2efce811981e07ee"
--- 
-2.20.1
-
-
-
+Andreas
 
