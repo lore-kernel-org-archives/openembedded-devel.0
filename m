@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 436FE7D5B1
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id A5E187D785
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Apr 2019 18:26:03 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id k2so21057463qtm.1
+	Wed, 10 Apr 2019 00:39:27 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id k2so957578qtm.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Apr 2019 11:26:04 -0700 (PDT)
+	Tue, 09 Apr 2019 17:39:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=B59FNJEXiD2cVicQVR1A5yk8WRlEydFGoF1EYj80eiI=;
-	b=EZQx/yKF6WhMyz/u0b7exq1+HqpR/1E1BYbVWyg/U+pBpVi4ykiTtfet52Fx6Xfiwm
-	1+bZ63wKFSOrsHDVLnIBAXXt82h/BV/+2Ajcoo7rTwMCh4Z7s0lfPxoB+ulyXY9Xgn8d
-	kjmaf6AkGtOViIT48iBDz1dualVLvZldSiy81HUdnCL8bHgeDAvyCi3Rur8QdHJeBe8j
-	6IbsVOnzsZE9vsTv7BXwbYFp1YC5DLxl7RymoiLhVaQOJJZsCOQs2oqKit8dPGnny+1N
-	HqYu70+FUIJSYaE3KzXWC4VygiUHAydujeIwNqb0iBitQ4GsF9NOgCvpP2SQaIY4u6l4
-	xH8g==
+	:cc; bh=CJQIApilXOBPKKKuEkkF02ZqLrgh5eRlGw/7yjJ+uTg=;
+	b=f18LkgfW730JvGEt5U/6YBsZFu/+JhXnl8cao1mIWaTSF0B6nth3HTPf60uBW9YGn/
+	1vJmHDtgBBEhFE7zgjEG7GeHz450CtP42mAhNNNxnBRvqHvDzua4cZ7EKpLwO+uuKRmN
+	iqzfXRL7PLD9tMdDrZ9BKj2kNYPk6O87GAa8ddWi/6qcsc3ZFHAKY9zMDXBi403vJbZq
+	J0yQSieeuPEx0zWlhtpOWHH2Rk3kltx6YQI6Mwrv5VRKcf/1ahjYcJ0fK0JYDM2zqEwg
+	2HG2I6fEVK0DOT0Q1p6w6B/wmC6f6+GR2Eu8UsWKIaVbIVBmUfsnmHxKQ/Xn2HdzefVY
+	mLqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=B59FNJEXiD2cVicQVR1A5yk8WRlEydFGoF1EYj80eiI=;
-	b=fz+CjQCZr8WnpCcX9IvLmiDFGWZHkd138++PLhwZaAq4VQfc5pUSvrHZnRQLjaK/9e
-	Bs0GNjsuY8r89YxywkY2U0azycoDlYMX874RaJJ8OAJexmzjJf0ACUoDtcjbNvY5v2VH
-	2cWa6xsa8OqM35Kw0kDUWaz7o5Bl+hGfxPXeVd9jAV8a+dWBGugQgLzaFIeIZlNo8mbU
-	NPx2XyFAHHooeh3sekfPnXFJzaHU9s9pwiahYn3xHbFEtqCXPTC/LU2kZjg/4FSH/pLC
-	mI8Ms1RqrJbMAVWwfFNFL8UVXozJ9PUD2m/YbzfgNDAIFgj1tK0rAfbywJXy3NJzPB39
-	8MMw==
-X-Gm-Message-State: APjAAAWOVSQq5wXRmJoqvRgld40hzUcU2mSu7UbqEE5N3loevGPEcQsf
-	0ZzBXjMZqMBkHTAF6TZoc7UjmGGylNGol2w4WfM=
-X-Google-Smtp-Source: APXvYqxhzDFyvGOUlZe7BBALj9o+3SpHMu9al+MUhPhUAr61wTmNmIqldl9mLTQsMen7yHR5LK+iJwsOex+pizB4RcU=
-X-Received: by 2002:ac8:1833:: with SMTP id q48mr31567756qtj.133.1554834363766;
-	Tue, 09 Apr 2019 11:26:03 -0700 (PDT)
+	bh=CJQIApilXOBPKKKuEkkF02ZqLrgh5eRlGw/7yjJ+uTg=;
+	b=hmFqhARKhSNk8cQm8l29opi/ZXNfwmRd1rUiSo0LsIu3q/Uitfn4KttMskuNQ6iUnA
+	P2RpH6QU/LbcSURzVR4BOArVuLzolxcTQsUwv2gR1MMjgb8TuT/Chm1kESmSvaxf+XZr
+	NkiTTZeWNxo8mLc+cEvyunA0BTUzAnSmaLtg2mgF321JfcIKWQdoezI5rHc3LdUNzbR1
+	tOkhyWXxgOVzOuGD3afZLpG5ATTNDQB+WUguJjiz8vlpE+c6iie+sb8gaVrLLZ6vOSI2
+	4bzB4aq38BEGzv6qgaEDHQzZQ82gnMw7KTBsWLMcKc1O/J3fM3tpm9zSBcoEIT3AKcwF
+	vOuA==
+X-Gm-Message-State: APjAAAWwsqkdRHr1Th7KfsV2H9Odfoj2IlQ2cYF+zP1NMRTqSN5V7Scd
+	hkGSrxsAvK+0gu26l9mr1DO2ZX4K2Xmhhq1py5mTnINuA+E=
+X-Google-Smtp-Source: APXvYqyDUyVkgW5ACH61pMr5y8v3Y/GHEX36rCU1GKoKxZ3rxylQCUunmH9d4qc6lR8B94JC4IBrXLz66UdBqE/P/Uw=
+X-Received: by 2002:ac8:262c:: with SMTP id u41mr34285081qtu.198.1554856768082;
+	Tue, 09 Apr 2019 17:39:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190408205138.29472-1-open.source@oleksandr-kravchuk.com>
-	<CAMKF1sq3JHuxAH6cjG1AU6fYN7hj6jkiM836b3BGHr5=01UStA@mail.gmail.com>
-	<25f17c05-3d19-5568-7812-33e6f5e1e289@oleksandr-kravchuk.com>
-In-Reply-To: <25f17c05-3d19-5568-7812-33e6f5e1e289@oleksandr-kravchuk.com>
+References: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 Apr 2019 11:25:37 -0700
-Message-ID: <CAMKF1spwa784FC3vGGCP6qtAMp=b=QUQO0qpJtFgNBpAS+=xmw@mail.gmail.com>
+Date: Tue, 9 Apr 2019 17:39:07 -0700
+Message-ID: <CAMKF1spjoZeXitjwgFgr882ab+6WjN+C7-DT7K6Hh9YvtWPUFQ@mail.gmail.com>
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] ell: remove recipe
+Subject: Re: [PATCH][meta-networking] libowfat: update to 0.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,155 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Apr 2019 18:26:03 -0000
+X-List-Received-Date: Wed, 10 Apr 2019 00:39:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Apr 9, 2019 at 11:21 AM Oleksandr Kravchuk
+On Sun, Apr 7, 2019 at 6:09 AM Oleksandr Kravchuk
 <open.source@oleksandr-kravchuk.com> wrote:
 >
-> ell has to be added to poky first.
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}                | 4 ++--
+
+This is causing ncp build failure
+
+| ncp.c:8:10: fatal error: 'dns.h' file not found
+| #include "dns.h"
+|          ^~~~~~~
+| 1 error generated.
+| make: *** [<builtin>: ncp.o] Error 1
+| make: *** Waiting for unfinished jobs....
+
+Can you check why dns.h can't be found ?
+
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb} (84%)
 >
-
-send the meta-oe patch after it has landed in oe-core ( not poky )
-
-> On 09/04/2019 20:17, Khem Raj wrote:
-> > ERROR: Nothing PROVIDES 'ell' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-connectivity/iwd/iwd_0.14.bb
-> > DEPENDS on or otherwise requires it)
-> > ERROR: Nothing RPROVIDES 'ell' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > NOTE: Runtime target 'ell' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-multimedia' is unbuildable,
-> > removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-multimedia', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-dbs' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-dbs', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-devtools' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-devtools', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-bsp' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-bsp', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-extended' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-extended', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-core' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-core', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-security' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-security', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-gnome' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-gnome', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-kernel' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-kernel', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-graphics' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-graphics', 'ell']
-> > NOTE: Runtime target 'packagegroup-meta-oe-benchmarks' is unbuildable,
-> > removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-benchmarks', 'ell']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-crypto' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-crypto'
-> > NOTE: Runtime target 'packagegroup-meta-oe-crypto' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-crypto']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-support' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-support'
-> > NOTE: Runtime target 'packagegroup-meta-oe-support' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-support']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-test' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-test'
-> > NOTE: Runtime target 'packagegroup-meta-oe-test' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-test']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-connectivity' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-connectivity'
-> > NOTE: Runtime target 'packagegroup-meta-oe-connectivity' is
-> > unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-connectivity']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-navigation' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-navigation'
-> > NOTE: Runtime target 'packagegroup-meta-oe-navigation' is unbuildable,
-> > removing...
-> > Missing or unbuildable dependency chain was: ['packagegroup-meta-oe-navigation']
-> > ERROR: Nothing RPROVIDES 'packagegroup-meta-oe-ptest-packages' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'packagegroup-meta-oe-ptest-packages'
-> > NOTE: Runtime target 'packagegroup-meta-oe-ptest-packages' is
-> > unbuildable, removing...
-> > Missing or unbuildable dependency chain was:
-> > ['packagegroup-meta-oe-ptest-packages']
-> > ERROR: Nothing RPROVIDES 'iwd-dev' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-connectivity/iwd/iwd_0.14.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'iwd-dev'
-> > NOTE: Runtime target 'iwd-dev' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['iwd-dev']
-> > ERROR: Nothing RPROVIDES 'iwd' (but
-> > /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-connectivity/iwd/iwd_0.14.bb
-> > RDEPENDS on or otherwise requires it)
-> > No eligible RPROVIDERs exist for 'iwd'
-> > NOTE: Runtime target 'iwd' is unbuildable, removing...
-> > Missing or unbuildable dependency chain was: ['iwd']
-> >
-> > On Mon, Apr 8, 2019 at 1:51 PM Oleksandr Kravchuk
-> > <open.source@oleksandr-kravchuk.com> wrote:
-> >> This recipe will be moved to poky instead as newer versions of some of
-> >> its components depend on it.
-> >>
-> >> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> >> ---
-> >>  meta-oe/recipes-core/ell/ell_0.17.bb | 17 -----------------
-> >>  1 file changed, 17 deletions(-)
-> >>  delete mode 100644 meta-oe/recipes-core/ell/ell_0.17.bb
-> >>
-> >> diff --git a/meta-oe/recipes-core/ell/ell_0.17.bb b/meta-oe/recipes-core/ell/ell_0.17.bb
-> >> deleted file mode 100644
-> >> index 27f11cfbe..000000000
-> >> --- a/meta-oe/recipes-core/ell/ell_0.17.bb
-> >> +++ /dev/null
-> >> @@ -1,17 +0,0 @@
-> >> -SUMMARY  = "Embedded Linux Library"
-> >> -DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
-> >> -LICENSE  = "LGPLv2.1"
-> >> -LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
-> >> -SECTION = "libs"
-> >> -
-> >> -inherit autotools pkgconfig
-> >> -
-> >> -S = "${WORKDIR}/git"
-> >> -SRCREV = "ebc021cee3b2d20ca2af5e3ed02495da616b2fd3"
-> >> -SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
-> >> -
-> >> -do_configure_prepend () {
-> >> -    mkdir -p ${S}/build-aux
-> >> -}
-> >> -
-> >> -DEPENDS = "dbus"
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> similarity index 84%
+> rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> index 4b072f7e7..fba35526d 100644
+> --- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> +++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> @@ -7,8 +7,8 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+>
+>  SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
+> -SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
+> -SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
+> +SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
+> +SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+>
+>  EXTRA_OEMAKE = "\
+>      DIET= \
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
