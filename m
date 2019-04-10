@@ -1,62 +1,45 @@
-Return-Path: <prvs=10032bfe1d=holzmayr@rsi-elektrotechnik.de>
-X-Greylist: delayed 378 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 10 Apr 2019 19:52:40 UTC
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
-	[81.169.146.221])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BB7E7D6B7
+Return-Path: <ram.subramanian@meraki.net>
+Received: from mail-io1-f43.google.com (mail-io1-f43.google.com
+	[209.85.166.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 67AA67D304
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 19:52:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1554925961;
-	s=strato-dkim-0002; d=rsi-elektrotechnik.de;
-	h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:
-	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=Hw8XueYSaYo6wIeqwu1h8alTI4Y84eX3HGrPFPwPI9k=;
-	b=ro4UEUOCZlWW9C/vuG91RAnEwDiPa0Q7A3eWrQbiTmPPDhQA8Xcsal1sPaI9F5FWqj
-	LmgkBAWv9Es72dPtG7nynn/b5h3f1+DkQ3U2D6MPKmjru68emH5zzsphQV6Ehcht03eO
-	hm/pwFN2rukQ43cltIK+DqWPSz8LXOboIWt4KDnJ0WWLRHFByui+8psrmuT08TBanmqp
-	h9dSnzYcK7ArevIpcFc3K6IP3TAAzX08GWFTKJ/FfXX3mehgekUbGl3lrBYLGaSw7QPs
-	a0NPygf7QjyykTvStMgYdu1nV07dDfwOZf35wD2SbMmg3RpJnKTw6DHWefS0bMGfzUOI
-	zEig==
-X-RZG-AUTH: ":fz5RJhWIaexwuXGosGLfiBc0xYyi1Y5bd+wRKqrzPXw4V1/Kpz6b/avroGOv0c9sak1tqOWjLU3UFhR6"
-X-RZG-CLASS-ID: mo00
-Received: from mail.rsi-elektrotechnik.de by smtp.strato.de (RZmta 44.18 AUTH)
-	with ESMTPSA id Q0b788v3AJeJ6p3
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp384r1
-	with 384 ECDH bits, eq. 7680 bits RSA))
-	(Client did not present a certificate);
-	Wed, 10 Apr 2019 21:40:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/relaxed;
-	d=rsi-elektrotechnik.de; s=MDaemon; t=1554925219; x=1555530019;
-	i=holzmayr@rsi-elektrotechnik.de; q=dns/txt; h=Date:From:To:Cc:
-	Subject:Message-ID:References:MIME-Version:Content-Type:
-	Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
-	User-Agent; bh=Hw8XueYSaYo6wIeqwu1h8alTI4Y84eX3HGrPFPwPI9k=; b=I
-	j9VgdRd8I6IpMSBI61gdyVwXF0eg8Oc1R2xgD00+DFQZvLQvHJ34o2Ck3x5k9D/3
-	vKZLxFIoE5EsDVdWYs6ZiGmOk1kCefWPPVx5Q2hSbYhbs3k+mPQM2IdtIIuNTLQW
-	SiCLMWMsv10xNQ4U5i44ZM9PQjtqfbzEbmI0FZPYrc=
-Received: by mail.rsi-elektrotechnik.de (MDaemon PRO v18.5.3) with ESMTPSA id
-	md50000157343.msg; Wed, 10 Apr 2019 21:40:19 +0200
-X-Spam-Processed: mail.rsi-elektrotechnik.de, Wed, 10 Apr 2019 21:40:19 +0200
-	(not processed: message from trusted or authenticated source)
-X-MDRemoteIP: 178.27.67.144
-X-MDHelo: jholzmayr.localdomain
-X-MDArrival-Date: Wed, 10 Apr 2019 21:40:19 +0200
-X-Authenticated-Sender: holzmayr@rsi-elektrotechnik.de
-X-Return-Path: prvs=10032bfe1d=holzmayr@rsi-elektrotechnik.de
-X-Envelope-From: holzmayr@rsi-elektrotechnik.de
-X-CAV-Result: skipped - holzmayr@rsi-elektrotechnik.de is in exclusion list
-Date: Wed, 10 Apr 2019 21:40:07 +0200
-From: Josef Holzmayr <holzmayr@rsi-elektrotechnik.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190410194007.3hs4efbdwg5z3lei@jholzmayr.localdomain>
-References: <d5eb2bd0-173b-79b5-922c-a1f0fa097552@balister.org>
-	<CAMKF1srN+kBat8eKj_tw_7y_pv3zWWjAu92L0abCYQFSnfGXcA@mail.gmail.com>
+	Wed, 10 Apr 2019 20:12:54 +0000 (UTC)
+Received: by mail-io1-f43.google.com with SMTP id v4so3320683ioj.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2019 13:12:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meraki.com; s=google;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=lrTNboSGMQoxSULIb0gjo6JsBSHTqzzsje9KH2oyk5M=;
+	b=VOLR8F933qKDwoTmK85cPX+L0iL/uExTGr+W214sCin3Q9A8RRJfCppYltqqwJb6n6
+	bxhp7FzEu3shM9cMkhtOGLecyoK/9/POPefzE5IVuoirqDtkRH2Q7o9uomrfscLxZUMG
+	rgCk8aM4YrZrUHAr0+ndgYMbCK55P8vkfmX3E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=lrTNboSGMQoxSULIb0gjo6JsBSHTqzzsje9KH2oyk5M=;
+	b=tYvCYq5xRmQOwvxfsyTAfDpLGoVbJwdx7EjM1O9DzKvogTIgHTksMEEVphbSvPRz6v
+	fjKz6st75sZ1kqhJChpPnOBbMqorvazhjvdNl/4PApYUkvJxTqhHvfW7caErnzCXwVbv
+	2gKL0Vn9nAcoXZlkT1XyVTWRhlCxX6OyAEN45shGU559AyoLPJkQoNtuYoMfJ/glbWLQ
+	tYFimers9/pfZ9iL4ibhLru+kuhV4S6h2YVh9aZcohlSBb+W4xfCBI0xPyTj3ChnGI28
+	auFtg0LZvoQKvSNsJgXILKX4ENY6+TWZ/NmsDK2mlN9MoIMZD34KnDL0HMcRGYOGzzhq
+	K1qQ==
+X-Gm-Message-State: APjAAAWUcm9k15Dt8aYnR7WolMIsobZ3sfcuWUJyetlMyT2PoRx4hQdR
+	tVWrXdOgn70vfDgVaHXbgEwKD1C4lIU/W5uXO68PVQ==
+X-Google-Smtp-Source: APXvYqxGl97sn7DKhcFR8P2la3yYbJjaq+ljLXJYoxdPMkoPuCXqEjXgkShH5WqBfNL24Z7zjGoe9D2zL2CRggY9+3Y=
+X-Received: by 2002:a6b:510f:: with SMTP id f15mr28908210iob.59.1554927175260; 
+	Wed, 10 Apr 2019 13:12:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srN+kBat8eKj_tw_7y_pv3zWWjAu92L0abCYQFSnfGXcA@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Scipy, this never ending thread must end
+References: <CAMSkS0hfFUKN4Z3hQvindomzUeTnTJpmQeNVmTMOSG2+jstr8Q@mail.gmail.com>
+	<CAMKF1soBXtA5KpXprtEydJ-qC6tNSymvnNczFDLL1+eRzuDegA@mail.gmail.com>
+In-Reply-To: <CAMKF1soBXtA5KpXprtEydJ-qC6tNSymvnNczFDLL1+eRzuDegA@mail.gmail.com>
+From: Ram Subramanian <ram@meraki.com>
+Date: Wed, 10 Apr 2019 13:12:44 -0700
+Message-ID: <CAMSkS0hUKA+W_9WmtVmVUb48EzoymqrYwcNK76idU2kPOVr5gA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Will a commit currently on master make it to a specific future release branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,64 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 19:52:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 10 Apr 2019 20:12:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Apr 10, 2019 at 09:05:19AM -0700, Khem Raj wrote:
-> On Wed, Apr 10, 2019 at 8:27 AM Philip Balister <philip@balister.org> wrote:
-> >
-> > Over and over people ask about Scipy.
-> >
-> > I've built lapack and created an image I could natively build scipy with
-> > before. Since FORTRAN isn't normally built, adding this recipe to an
-> > existing layer isn't a good idea.
-> >
-> > I'm going to create a layer meta-fortran for this recipe and then start
-> > collecting the wisdom of the community to create a scipy recipe.
-> >
-> > Does anyone have a better approach then this for creating a scipy
-> > recipe? I know people have been really close before.
-> >
-> 
-> I think this is a good idea.
+Khem,
 
-+1
+Thank you for the confirming! I just noticed squid was bumped again to
+version 4.5, but in master-next branch. Will that also make warrior, or
+will it be saved for zeus?
 
-> 
-> > Philip
+Ram
+
+On Wed, Apr 10, 2019 at 8:57 AM Khem Raj <raj.khem@gmail.com> wrote:
+
+> we have not yet branched warrior and it will be in warrior.
+>
+> On Tue, Apr 9, 2019 at 10:29 PM Ram Subramanian <ram@meraki.com> wrote:
+> >
+> > Hi oe-devel,
+> >
+> > I was wondering if the following commit that is currently on the master
+> > branch is slated to be cherry-picked to either the (upcoming) warrior or
+> > zeus branch(es) (or both)? I noticed that new branches aren't always
+> > created at the HEAD of origin/master.
+> >
+> > b42de097d - Pascal Bach - squid: upgrade 3.5.27 -> 3.5.28 (4 weeks ago)
+> >
+> > Currently neither of those branches exist in the upstream repo, and
+> knowing
+> > this information will make it easier to plan for it accordingly;
+> especially
+> > since we're close to the next release going by the yocto releases page.
+> >
+> > Thank you,
+> > Ram
 > > --
 > > _______________________________________________
 > > Openembedded-devel mailing list
 > > Openembedded-devel@lists.openembedded.org
 > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
--- 
-———————————————
-Josef Holzmayr
-Software Developer Embedded Systems
-
-Tel: +49 8444 9204-48
-Fax: +49 8444 9204-50
-
-R-S-I Elektrotechnik GmbH & Co. KG
-Woelkestrasse 11
-D-85301 Schweitenkirchen
-www.rsi-elektrotechnik.de
-———————————————
-Amtsgericht Ingolstadt – GmbH: HRB 191328 – KG: HRA 170393
-Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-Ust-IdNr: DE 128592548 
-
-_____________________________________________________________
-Amtsgericht Ingolstadt - GmbH: HRB 191328 - KG: HRA 170363
-Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-USt-IdNr.: DE 128592548
-
+>
 
