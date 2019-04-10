@@ -1,50 +1,36 @@
-Return-Path: <nathan@nathanrossi.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3540E7D2CA
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F6707D831
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 12:37:53 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id t16so1383650plo.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 05:37:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nathanrossi.com; s=google;
-	h=date:message-id:from:to:cc:subject:content-transfer-encoding
-	:mime-version; bh=8lCQj7SjYDglTSYcdGxG4OBb/IdPNZzgYa2D5if9iY4=;
-	b=Vwi+bpiR/OvREySW8RV1IQSn6HFbtVQDgb/SzH6FIO4LOPeboTV6dI98BFFBHYZ9o2
-	c9nPNBh6J4bjF+QA1RIXjcTRRBlkcsezcS8GJyLKBIlnqWV4V4kE5kXgMQxaRabgDJjq
-	yJs1nTzhpwZDS6eFkkrqCyrxMDlf3W08scdl+6uUX+DSAB1TFiL/N8Jt7Kgnua62Vap1
-	DfEy54c2jlkvmU4XycykB6JRocplCbWTWCotgd3CYXuz1DyoibpH6Aihd8ehixAq+MaW
-	lM0O+8z9DSULq+dO4sFAQUMf5dKd+mI5TjTw74nrG7NxnV4EwIUb79WXAr7hQ0GFQ3MA
-	07Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:message-id:from:to:cc:subject
-	:content-transfer-encoding:mime-version;
-	bh=8lCQj7SjYDglTSYcdGxG4OBb/IdPNZzgYa2D5if9iY4=;
-	b=J54WXEhtCmk+WkoMGzbJipp6nXibrKhdepG06AgAQNn6QxV7IIgoNrolv52Rns3trz
-	nuHcJzrKbqUPAebVs7b05GnJhzuLmobVLI3utmP5ZajO6rp/iRE95pGg978DqNFFzhyC
-	owknNqkbxUl73wPblS/JjxYh7znrfwuID/NmYhxRPl4KSkAQvm5oVf1MgGO/tr/Ewlg2
-	n7rdFS2JEVlSThjCFiHya11RitI6dN7b2veDLU4/w9yjoCY5edQY9hWhC5XITEY5AVxt
-	YT8CN5hzlcpxQSEYUo7eEqku/onZ/8m0rB2/THLPqOGkJC/pGWdA0qaf7kL+Lwjb4pPr
-	uy8w==
-X-Gm-Message-State: APjAAAWkRCaoqNY2GFQiol1MN3yOmiGrsqYT7KJ7ek9lFcbPwYrvgW9J
-	Nl9oS62zOneGC3bIdhQW3z/xqBOwAsY=
-X-Google-Smtp-Source: APXvYqxeqT4Vxnw5N3eVUa6mMAIJtDU0ez+LWBAfk8qruVkbBUqZEmQN0VjaPNa9djhlTDaMMzNOZw==
-X-Received: by 2002:a17:902:9006:: with SMTP id
-	a6mr42376940plp.259.1554899873840; 
-	Wed, 10 Apr 2019 05:37:53 -0700 (PDT)
-Received: from [127.0.1.1] ([101.184.78.119])
-	by smtp.gmail.com with UTF8SMTPSA id
-	r145sm80224171pgr.84.2019.04.10.05.37.51
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 10 Apr 2019 05:37:53 -0700 (PDT)
-Date: Wed, 10 Apr 2019 12:37:43 +0000
-Message-Id: <20190410123743.28863-1-nathan@nathanrossi.com>
-From: Nathan Rossi <nathan@nathanrossi.com>
-To: openembedded-devel@lists.openembedded.org
+	Wed, 10 Apr 2019 13:20:01 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44fPsF1zcNz4b;
+	Wed, 10 Apr 2019 15:20:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1554902401;
+	bh=bBGL87jHO7U2knJXoAykJ0CLon+/bcLQtOMbtWA9nNA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=MOoYydmkaLmNwBOs4o5NjS4PTVhzTc6Q9pYG9v6X7yKJiwalccLkvAAK1OckyA3J7
+	97uZXQqLUFjltdXWEQnxBhaS61hUxgHgnR6OyI28nlqBjuKS8L2IQNVekPsAwAMNwR
+	tkuBh3CWiNanIqlLaCgHwgU0Whf3J9dHAWjtlMrBxbMYXLmXBSHh7S5MLi9j948pQm
+	CMPe8H/wv97qnGR6xLbM6n23YH/mD0+hUeL+R95XWR4bYBOAh4yzeRMNRTqTtLb+ak
+	4kGB9wi09NdMQ229wE7ct5NjuTDYnEo6jL2ZeebHpxfS7wcGeiev7lsVPrruFvVSQO
+	EBGzwlGcswbkPTPueXsg3+Z5UPG/n1p5yC7cGqlM4cwAGa44R/ugUgp7THI8BtvEQc
+	Rh+Suyc5ksDGnPEkbNZW5emksmEpdeEd2CUoHxQBZmr34K3yNoGODSaDJltQbAGw2b
+	9S0H+WofK0UtYfR6ZblScIYjtvwt+oAB2eAOCt2KggIJsmu5m2SURTohIcEGu6ejzv
+	eXk2Z/TABaEQJMjRLWK52reLwTYSNS/Mr9kSogdW3lqaWrqQ9H9xTbWR9K5AcYg25K
+	iNdthK+EcNh/GLS85Cc6tjF0kVb5MBkqMZXu/i2kRuYI8s84KkAY90kDEkfZXg9RrT
+	UXR+J0p4muG9GNdN4W8PF8BM=
+Date: Wed, 10 Apr 2019 16:19:59 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Nathan Rossi <nathan@nathanrossi.com>
+Message-ID: <20190410131959.GA9487@localhost>
+References: <20190410123743.28863-1-nathan@nathanrossi.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH] fatresize_1.0.2.bb: Add recipe for fatresize command line tool
+In-Reply-To: <20190410123743.28863-1-nathan@nathanrossi.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-filesystems][PATCH] fatresize_1.0.2.bb: Add recipe for fatresize command line tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,48 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 12:37:53 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 10 Apr 2019 13:20:01 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-The fatresize command line tool provides command line access to the
-libparted-fs-resize library implementation of the FAT partition
-resizing.
+On Wed, Apr 10, 2019 at 12:37:43PM +0000, Nathan Rossi wrote:
+>...
+> The Debian version of the source is used as the original upstream on
+> SourceForge is no longer actively maintained.
+>...
+> +SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https"
+> +SRCREV = "3f80afc76ad82d4a1b852a6c8dea24cd9f5e7a24"
+> +
+> +PV = "1.0.2-11-git+${SRCPV}"
+>...
 
-This tool is useful for safely resizing FAT partitions which are
-commonly found as the boot partition on a variety of SoC targets (e.g.
-RaspberryPi).
+Please drop the -git+${SRCPV}, this commit is exactly 1.0.2-11
 
-The Debian version of the source is used as the original upstream on
-SourceForge is no longer actively maintained.
+cu
+Adrian
 
-Signed-off-by: Nathan Rossi <nathan@nathanrossi.com>
----
- .../recipes-utils/fatresize/fatresize_1.0.2.bb            | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
+-- 
 
-diff --git a/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb b/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
-new file mode 100644
-index 0000000000..a2f6b6d131
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Resize FAT partitions using libparted"
-+SECTION = "console/tools"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https"
-+SRCREV = "3f80afc76ad82d4a1b852a6c8dea24cd9f5e7a24"
-+
-+PV = "1.0.2-11-git+${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "parted"
-+
-+inherit autotools pkgconfig
----
-2.20.1
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
