@@ -1,42 +1,46 @@
-Return-Path: <ram.subramanian@meraki.net>
-Received: from mail-io1-f43.google.com (mail-io1-f43.google.com
-	[209.85.166.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 67AA67D304
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id AA18A7D4F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 20:12:54 +0000 (UTC)
-Received: by mail-io1-f43.google.com with SMTP id v4so3320683ioj.5
+	Wed, 10 Apr 2019 20:43:09 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id h39so4596972qte.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 13:12:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meraki.com; s=google;
+	Wed, 10 Apr 2019 13:43:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=lrTNboSGMQoxSULIb0gjo6JsBSHTqzzsje9KH2oyk5M=;
-	b=VOLR8F933qKDwoTmK85cPX+L0iL/uExTGr+W214sCin3Q9A8RRJfCppYltqqwJb6n6
-	bxhp7FzEu3shM9cMkhtOGLecyoK/9/POPefzE5IVuoirqDtkRH2Q7o9uomrfscLxZUMG
-	rgCk8aM4YrZrUHAr0+ndgYMbCK55P8vkfmX3E=
+	:cc; bh=MfhnVKHobBNuUa+FfA2nwE5f4LmOFo7ZDm5xYJ1L08U=;
+	b=f6fMn8aDYpPWnYlu56PJoNAwGQOimiOlaEYDLzB0qVq/7w0EcZZ358VO/9B5HvUSKi
+	AC1dMmkKfYi40AisN/NLt00ZKjuGJnEuh4lP7IG672YcmDYTQaX4YEgS2Ar43A0QQ9ZT
+	mH9oYXSDgwWUj0skZY/ZXDeQ3rE1BUvUSte+AG4yH1y7WbShAVndRVLk9OKH9QWHTy0N
+	J770dOJkI+8oYi9nisQHvFFEcGa31G67Up2Z/sWXtc+gIll9pyR/BoNI9rFHh5RILN7Z
+	VavKvERwRV7FuhSP4NGb6vrHZL+TmSu0GslMh7XGXsK5p89mrW+BiA0Y74TaMmdyBHQX
+	TFMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=lrTNboSGMQoxSULIb0gjo6JsBSHTqzzsje9KH2oyk5M=;
-	b=tYvCYq5xRmQOwvxfsyTAfDpLGoVbJwdx7EjM1O9DzKvogTIgHTksMEEVphbSvPRz6v
-	fjKz6st75sZ1kqhJChpPnOBbMqorvazhjvdNl/4PApYUkvJxTqhHvfW7caErnzCXwVbv
-	2gKL0Vn9nAcoXZlkT1XyVTWRhlCxX6OyAEN45shGU559AyoLPJkQoNtuYoMfJ/glbWLQ
-	tYFimers9/pfZ9iL4ibhLru+kuhV4S6h2YVh9aZcohlSBb+W4xfCBI0xPyTj3ChnGI28
-	auFtg0LZvoQKvSNsJgXILKX4ENY6+TWZ/NmsDK2mlN9MoIMZD34KnDL0HMcRGYOGzzhq
-	K1qQ==
-X-Gm-Message-State: APjAAAWUcm9k15Dt8aYnR7WolMIsobZ3sfcuWUJyetlMyT2PoRx4hQdR
-	tVWrXdOgn70vfDgVaHXbgEwKD1C4lIU/W5uXO68PVQ==
-X-Google-Smtp-Source: APXvYqxGl97sn7DKhcFR8P2la3yYbJjaq+ljLXJYoxdPMkoPuCXqEjXgkShH5WqBfNL24Z7zjGoe9D2zL2CRggY9+3Y=
-X-Received: by 2002:a6b:510f:: with SMTP id f15mr28908210iob.59.1554927175260; 
-	Wed, 10 Apr 2019 13:12:55 -0700 (PDT)
+	bh=MfhnVKHobBNuUa+FfA2nwE5f4LmOFo7ZDm5xYJ1L08U=;
+	b=h0QAHsS/Qhu1bLZXv+nNGis/JyI6z3dbrtbPGny3ymn5awivRMSse4vV5eOQkMfN7a
+	/et1KK4jTLmg5Zkfq2T38TWvb0oLWplP5kLjd/VHNHYhun7ZlN/JZcMCCY/dt2L10XmZ
+	/5mWyy7mFKPE5FUtJJUpWK7uQ3c/eKz8ANz9hPl1cEXvwXQisigLKiqItgxPZJID9Mq1
+	qQItAaMb9RwXQVpJzfnltAzdk18Rtg9jkX06m1TJSNpSy2+PzU8jmCVVPKVNkL17MEXF
+	MTo30YoSNXgSDF36VMfI5Rfui78qIohyfd/5mCkw2D06Fz8mhanqQh0EGpA3RTrtdpLd
+	wghg==
+X-Gm-Message-State: APjAAAVCZVXozRU4PkARU+9165nsS9GgUxbHqOcFOOUG+mNkkf96LF5u
+	TM7D3QrQ4fSRBaH0D8XiSQvseTqWq+WR8LWQ3Go=
+X-Google-Smtp-Source: APXvYqzj8cuHRyQEJLY/i2nyebhdQOa+43Nw+o7p0UgqqNLczT9t/hT8sGrLkM5MLlA06Vi+WAC8IUCaXjHfb0Ic3oI=
+X-Received: by 2002:a0c:81a9:: with SMTP id 38mr36269074qvd.208.1554928990330; 
+	Wed, 10 Apr 2019 13:43:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAMSkS0hfFUKN4Z3hQvindomzUeTnTJpmQeNVmTMOSG2+jstr8Q@mail.gmail.com>
 	<CAMKF1soBXtA5KpXprtEydJ-qC6tNSymvnNczFDLL1+eRzuDegA@mail.gmail.com>
-In-Reply-To: <CAMKF1soBXtA5KpXprtEydJ-qC6tNSymvnNczFDLL1+eRzuDegA@mail.gmail.com>
-From: Ram Subramanian <ram@meraki.com>
-Date: Wed, 10 Apr 2019 13:12:44 -0700
-Message-ID: <CAMSkS0hUKA+W_9WmtVmVUb48EzoymqrYwcNK76idU2kPOVr5gA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CAMSkS0hUKA+W_9WmtVmVUb48EzoymqrYwcNK76idU2kPOVr5gA@mail.gmail.com>
+In-Reply-To: <CAMSkS0hUKA+W_9WmtVmVUb48EzoymqrYwcNK76idU2kPOVr5gA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 10 Apr 2019 13:42:59 -0700
+Message-ID: <CAMKF1soHkDpG0uM09QAL1PX=qMr-ZgY4xdkg0WHhuFGJxg7SHQ@mail.gmail.com>
+To: Ram Subramanian <ram@meraki.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: Will a commit currently on master make it to a specific future release branch
@@ -52,44 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 20:12:54 -0000
+X-List-Received-Date: Wed, 10 Apr 2019 20:43:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Khem,
+If no regressions are found current master next will merge before warrior
+is branched out
 
-Thank you for the confirming! I just noticed squid was bumped again to
-version 4.5, but in master-next branch. Will that also make warrior, or
-will it be saved for zeus?
+On Wed, Apr 10, 2019 at 1:12 PM Ram Subramanian <ram@meraki.com> wrote:
 
-Ram
-
-On Wed, Apr 10, 2019 at 8:57 AM Khem Raj <raj.khem@gmail.com> wrote:
-
-> we have not yet branched warrior and it will be in warrior.
+> Khem,
 >
-> On Tue, Apr 9, 2019 at 10:29 PM Ram Subramanian <ram@meraki.com> wrote:
-> >
-> > Hi oe-devel,
-> >
-> > I was wondering if the following commit that is currently on the master
-> > branch is slated to be cherry-picked to either the (upcoming) warrior or
-> > zeus branch(es) (or both)? I noticed that new branches aren't always
-> > created at the HEAD of origin/master.
-> >
-> > b42de097d - Pascal Bach - squid: upgrade 3.5.27 -> 3.5.28 (4 weeks ago)
-> >
-> > Currently neither of those branches exist in the upstream repo, and
-> knowing
-> > this information will make it easier to plan for it accordingly;
-> especially
-> > since we're close to the next release going by the yocto releases page.
-> >
-> > Thank you,
-> > Ram
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Thank you for the confirming! I just noticed squid was bumped again to
+> version 4.5, but in master-next branch. Will that also make warrior, or
+> will it be saved for zeus?
+>
+> Ram
+>
+> On Wed, Apr 10, 2019 at 8:57 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>> we have not yet branched warrior and it will be in warrior.
+>>
+>> On Tue, Apr 9, 2019 at 10:29 PM Ram Subramanian <ram@meraki.com> wrote:
+>> >
+>> > Hi oe-devel,
+>> >
+>> > I was wondering if the following commit that is currently on the master
+>> > branch is slated to be cherry-picked to either the (upcoming) warrior or
+>> > zeus branch(es) (or both)? I noticed that new branches aren't always
+>> > created at the HEAD of origin/master.
+>> >
+>> > b42de097d - Pascal Bach - squid: upgrade 3.5.27 -> 3.5.28 (4 weeks ago)
+>> >
+>> > Currently neither of those branches exist in the upstream repo, and
+>> knowing
+>> > this information will make it easier to plan for it accordingly;
+>> especially
+>> > since we're close to the next release going by the yocto releases page.
+>> >
+>> > Thank you,
+>> > Ram
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
 
