@@ -1,46 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
-	[209.85.222.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 204C57D935
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+	[209.85.222.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A43FB7D412
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 15:57:30 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id k130so1541775qke.3
+	Wed, 10 Apr 2019 16:05:44 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id y5so1533397qkc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 08:57:32 -0700 (PDT)
+	Wed, 10 Apr 2019 09:05:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=t+3BcAf2eubNAnW4r3y4v5XBP+aGKcZjyk4xMw+lPJM=;
-	b=LbgaB7WbMJdnNw/iPEmQgXpLHcqJhGQApgAqfbMU7VkHkFwpW0CHx/zTnSBtnvQ7jz
-	2KKAMljAD/ZyQOQh/wn3CF9ZWipyUWCwHS1YRMx/pQsNDE9y2bwYiqLGhTk42Ek+n6oW
-	To1ypQX+LjooCCstlhd/TKwk0UpHpGMCkgU2SshfPtB+MQWTZVtULG2qJ556q4RkI0YG
-	2Y2EnncNmYoT2rjgu6YtxlCyR1zaLy1EjhTKjAa9S4gFWf/APQVomnmpe2WA3JBKkYXs
-	NROwdNG4x7uHrmBDBk3EpNnc76vo0ksZs85fjeSh7oKt65tYfVqI+tzfO3vl845hHoYb
-	14NA==
+	:cc; bh=ygZlgXZFQWb7/L08krDa5gsw9SFaF+ND/Zfyjxbya3U=;
+	b=oq17keh+KIO6eyMv/XmWMKkGPrayLWw12JrjC1hexQYNWXU7dua1joOmD/0c10kWYX
+	xQUPtRg9NsJLlCUGee+DD9uuRdh0nyrEDhNNI/jb8dVw0TafpgDh82Ut9SvnSRu2blUM
+	M8c4E3lWd8Vnq4ISIugsb/vEjMvMAJFKb/u8HXT8dMagLHNR+GQ7/JC1futGDDeJpWcn
+	ovJE91aTdZikhLPtvvyDbprON0IjlDZVbwheXsXfrbWhp8WJfQLKjg92lOBbYTwvuK6o
+	j24LCY7uUC96ExLDIKwsCVlud+BzE+Xei6yW7mGyRw09i7eZlW4qRnrgfbSnXMjX1s8Q
+	kBcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=t+3BcAf2eubNAnW4r3y4v5XBP+aGKcZjyk4xMw+lPJM=;
-	b=dQ0Yb1erTxI6YjhY7sIKjYjDUopDreUtK7Te6VdQyw3Rx9aC+uUCrTUNiQUmxZSVBd
-	sHwjbc6CeNkefid1zm6H2Mm1oCUSh4qR7vo4ElkJ+5ZkJBMYvNtlalNWjLaq4CcUbAH5
-	yuExHMuQexvwGNrdeydxPZvLjNjJHLbGjnuv5OjXcpWg2KHbSsdIz2eIMuZCKSFxkPCo
-	22tQp7I1Irme+Adx9phvSbXobG33DzSOzjs5qf87/QyKu+ImTR9Cmmo2x5sqOAKgCE7z
-	OwSJi7CeITR8Fb0ZaQITeLZ5ulFe1oTJDOOZnG/8Qe8+s4GkiyeQ0b4dM1aG6MZ0oR0K
-	+IFQ==
-X-Gm-Message-State: APjAAAV9wtYwPGYQd5s2mh7SuMtNKyIT1tkdvtRlwB+YEJN4ojaxY/lB
-	YMOLsK/o5tZsaHSFeLDrQTkH2179jqc4jwXtqGQ=
-X-Google-Smtp-Source: APXvYqzAF3OEkSYfwJeN5U0u8aRH6amLtHoJz1s+vXXF+sWxDMW8hduLgTRTKKsflPSGWsnafQPyarfn11fnHRyzu8A=
-X-Received: by 2002:a37:9d84:: with SMTP id g126mr32449787qke.22.1554911851743;
-	Wed, 10 Apr 2019 08:57:31 -0700 (PDT)
+	bh=ygZlgXZFQWb7/L08krDa5gsw9SFaF+ND/Zfyjxbya3U=;
+	b=UPssHzQh7xZ5nCEt09UNmSSFdqea55jZGPMVoIEWnXKECrbjGG9rc9Pg1N54JWxxQR
+	hC7+x/4ojOUHGjdu+3Sjm8wQ5V4WNeMIZPNBELZBw647OLGsyMZIZoefRhulsXNUuNYK
+	GliKN1yHbZaN+FxVYyjBRDoIVuvk3nXJ3U3Wm49x55/ZUUf2/joxBNKrWUx68/ZEKshk
+	2rGHm1pCB47i439j7FzX1pZA7dhtbrqCOgKHOxQGvx+7N5GeLNwHgkueDpO2Xp7QY5EW
+	jsznWyalX6ZyKvBMs/P7YWgDUDDl2TFdYal0dU5XtmlvjcIpOuMbBYvlhThDP8n3nuel
+	y4mw==
+X-Gm-Message-State: APjAAAVf9IHB+TPBWjnr6xyZ2wAyn+lbvhbo+DiTExZzCxmmJIvcgg9Z
+	vDEMAZKeDrtiG0xFx4vaU/fNQ4oIvzh7eAiq1Xd0MbCE
+X-Google-Smtp-Source: APXvYqyUnk//PKEhs7Ga/6ymObkKcbzD8r/4vBh9JmS8xDBIl+4dhY+sOW/cKYiHxZZIUkbLKfjMC7+MgI+Ro4+kaMo=
+X-Received: by 2002:a37:7b02:: with SMTP id w2mr33299169qkc.225.1554912345359; 
+	Wed, 10 Apr 2019 09:05:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAMSkS0hfFUKN4Z3hQvindomzUeTnTJpmQeNVmTMOSG2+jstr8Q@mail.gmail.com>
-In-Reply-To: <CAMSkS0hfFUKN4Z3hQvindomzUeTnTJpmQeNVmTMOSG2+jstr8Q@mail.gmail.com>
+References: <d5eb2bd0-173b-79b5-922c-a1f0fa097552@balister.org>
+In-Reply-To: <d5eb2bd0-173b-79b5-922c-a1f0fa097552@balister.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 10 Apr 2019 08:57:05 -0700
-Message-ID: <CAMKF1soBXtA5KpXprtEydJ-qC6tNSymvnNczFDLL1+eRzuDegA@mail.gmail.com>
-To: Ram Subramanian <ram@meraki.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Will a commit currently on master make it to a specific future release branch
+Date: Wed, 10 Apr 2019 09:05:19 -0700
+Message-ID: <CAMKF1srN+kBat8eKj_tw_7y_pv3zWWjAu92L0abCYQFSnfGXcA@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Scipy, this never ending thread must end
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 15:57:31 -0000
+X-List-Received-Date: Wed, 10 Apr 2019 16:05:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-we have not yet branched warrior and it will be in warrior.
+On Wed, Apr 10, 2019 at 8:27 AM Philip Balister <philip@balister.org> wrote:
+>
+> Over and over people ask about Scipy.
+>
+> I've built lapack and created an image I could natively build scipy with
+> before. Since FORTRAN isn't normally built, adding this recipe to an
+> existing layer isn't a good idea.
+>
+> I'm going to create a layer meta-fortran for this recipe and then start
+> collecting the wisdom of the community to create a scipy recipe.
+>
+> Does anyone have a better approach then this for creating a scipy
+> recipe? I know people have been really close before.
+>
 
-On Tue, Apr 9, 2019 at 10:29 PM Ram Subramanian <ram@meraki.com> wrote:
->
-> Hi oe-devel,
->
-> I was wondering if the following commit that is currently on the master
-> branch is slated to be cherry-picked to either the (upcoming) warrior or
-> zeus branch(es) (or both)? I noticed that new branches aren't always
-> created at the HEAD of origin/master.
->
-> b42de097d - Pascal Bach - squid: upgrade 3.5.27 -> 3.5.28 (4 weeks ago)
->
-> Currently neither of those branches exist in the upstream repo, and knowing
-> this information will make it easier to plan for it accordingly; especially
-> since we're close to the next release going by the yocto releases page.
->
-> Thank you,
-> Ram
+I think this is a good idea.
+
+> Philip
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
