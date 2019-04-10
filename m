@@ -1,45 +1,50 @@
-Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 309 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 10 Apr 2019 12:29:55 UTC
-Received: from lizzard.sbs.de (lizzard.sbs.de [194.138.37.39])
-	by mail.openembedded.org (Postfix) with ESMTP id 31DE87D80C
+Return-Path: <nathan@nathanrossi.com>
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3540E7D2CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 12:29:55 +0000 (UTC)
-Received: from mail1.sbs.de (mail1.sbs.de [192.129.41.35])
-	by lizzard.sbs.de (8.15.2/8.15.2) with ESMTPS id x3ACOk7r029437
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Wed, 10 Apr 2019 14:24:46 +0200
-Received: from DEFTHW99ERKMSX.ww902.siemens.net
-	(defthw99erkmsx.ww902.siemens.net [139.22.70.147])
-	by mail1.sbs.de (8.15.2/8.15.2) with ESMTPS id x3ACOXag020684
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Wed, 10 Apr 2019 14:24:46 +0200
-Received: from DENBGAT9ER9MSX.ww902.siemens.net (139.22.70.88) by
-	DEFTHW99ERKMSX.ww902.siemens.net (139.22.70.147) with Microsoft SMTP
-	Server (TLS) id 14.3.435.0; Wed, 10 Apr 2019 14:24:42 +0200
-Received: from DENBGAT9EL2MSX.ww902.siemens.net ([169.254.9.89]) by
-	DENBGAT9ER9MSX.ww902.siemens.net ([139.22.70.88]) with mapi id
-	14.03.0435.000; Wed, 10 Apr 2019 14:24:41 +0200
-From: "Bach, Pascal" <pascal.bach@siemens.com>
-To: Adrian Bunk <bunk@stusta.de>, "Valek, Andrej" <andrej.valek@siemens.com>
-Thread-Topic: [oe] [meta-networking][PATCH] squid: upgrade squid 3.5.28 -> 4.6
-Thread-Index: AQHU7rDNNSwALpdjtEqF/TQiTPnmI6YzeH4AgAACuYCAAbBhgIAAJxxQ
-Date: Wed, 10 Apr 2019 12:24:40 +0000
-Message-ID: <355BE46A91031048906B695426A8D8E62EA35B12@DENBGAT9EL2MSX.ww902.siemens.net>
-References: <20190409084621.27294-1-andrej.valek@siemens.com>
-	<20190409100504.GA12869@localhost>
-	<1898c904-c55b-c34c-4162-cdfd0dd2d27a@siemens.com>
-	<20190410120221.GA7028@localhost>
-In-Reply-To: <20190410120221.GA7028@localhost>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-document-confidentiality: NotClassified
-x-originating-ip: [139.22.70.49]
+	Wed, 10 Apr 2019 12:37:53 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id t16so1383650plo.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2019 05:37:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nathanrossi.com; s=google;
+	h=date:message-id:from:to:cc:subject:content-transfer-encoding
+	:mime-version; bh=8lCQj7SjYDglTSYcdGxG4OBb/IdPNZzgYa2D5if9iY4=;
+	b=Vwi+bpiR/OvREySW8RV1IQSn6HFbtVQDgb/SzH6FIO4LOPeboTV6dI98BFFBHYZ9o2
+	c9nPNBh6J4bjF+QA1RIXjcTRRBlkcsezcS8GJyLKBIlnqWV4V4kE5kXgMQxaRabgDJjq
+	yJs1nTzhpwZDS6eFkkrqCyrxMDlf3W08scdl+6uUX+DSAB1TFiL/N8Jt7Kgnua62Vap1
+	DfEy54c2jlkvmU4XycykB6JRocplCbWTWCotgd3CYXuz1DyoibpH6Aihd8ehixAq+MaW
+	lM0O+8z9DSULq+dO4sFAQUMf5dKd+mI5TjTw74nrG7NxnV4EwIUb79WXAr7hQ0GFQ3MA
+	07Qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:message-id:from:to:cc:subject
+	:content-transfer-encoding:mime-version;
+	bh=8lCQj7SjYDglTSYcdGxG4OBb/IdPNZzgYa2D5if9iY4=;
+	b=J54WXEhtCmk+WkoMGzbJipp6nXibrKhdepG06AgAQNn6QxV7IIgoNrolv52Rns3trz
+	nuHcJzrKbqUPAebVs7b05GnJhzuLmobVLI3utmP5ZajO6rp/iRE95pGg978DqNFFzhyC
+	owknNqkbxUl73wPblS/JjxYh7znrfwuID/NmYhxRPl4KSkAQvm5oVf1MgGO/tr/Ewlg2
+	n7rdFS2JEVlSThjCFiHya11RitI6dN7b2veDLU4/w9yjoCY5edQY9hWhC5XITEY5AVxt
+	YT8CN5hzlcpxQSEYUo7eEqku/onZ/8m0rB2/THLPqOGkJC/pGWdA0qaf7kL+Lwjb4pPr
+	uy8w==
+X-Gm-Message-State: APjAAAWkRCaoqNY2GFQiol1MN3yOmiGrsqYT7KJ7ek9lFcbPwYrvgW9J
+	Nl9oS62zOneGC3bIdhQW3z/xqBOwAsY=
+X-Google-Smtp-Source: APXvYqxeqT4Vxnw5N3eVUa6mMAIJtDU0ez+LWBAfk8qruVkbBUqZEmQN0VjaPNa9djhlTDaMMzNOZw==
+X-Received: by 2002:a17:902:9006:: with SMTP id
+	a6mr42376940plp.259.1554899873840; 
+	Wed, 10 Apr 2019 05:37:53 -0700 (PDT)
+Received: from [127.0.1.1] ([101.184.78.119])
+	by smtp.gmail.com with UTF8SMTPSA id
+	r145sm80224171pgr.84.2019.04.10.05.37.51
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 10 Apr 2019 05:37:53 -0700 (PDT)
+Date: Wed, 10 Apr 2019 12:37:43 +0000
+Message-Id: <20190410123743.28863-1-nathan@nathanrossi.com>
+From: Nathan Rossi <nathan@nathanrossi.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] squid: upgrade squid 3.5.28 -> 4.6
+Subject: [meta-filesystems][PATCH] fatresize_1.0.2.bb: Add recipe for fatresize command line tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,48 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 12:29:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Apr 2019 12:37:53 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
+The fatresize command line tool provides command line access to the
+libparted-fs-resize library implementation of the FAT partition
+resizing.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> <openembedded-devel-bounces@lists.openembedded.org> On Behalf Of
-> Adrian Bunk
-> Sent: Mittwoch, 10. April 2019 14:02
-> To: Valek, Andrej (IOT DS EU SK BT1) <andrej.valek@siemens.com>
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH] squid: upgrade squid 3.5.28 ->
-> 4.6
->=20
-> On Tue, Apr 09, 2019 at 12:14:49PM +0200, Andrej Valek wrote:
-> > I think, my changes are backport-compatible.
-> >
-> > The esi feature was not enabled int the previous version. It means,
-> > that libxml2/expat was also not required. In the current version, they
-> > have invert the logic. So it needs to be explicitly disabled.
-> > I have added on option to enable/disable openssl support. Previous
-> > version has openssl disabled.
+This tool is useful for safely resizing FAT partitions which are
+commonly found as the boot partition on a variety of SoC targets (e.g.
+RaspberryPi).
 
-I can confirm that we explicitly had to enable openssl support in squid by =
-adding "--with-openssl".
-You can also see this as the squid 3.5 recipe builds against OE master whic=
-h uses OpenSSL 1.1. But suiqd 3.5 is not compatible with OpenSSL 1.1
-The build only fails when adding "--with-openssl".
+The Debian version of the source is used as the original upstream on
+SourceForge is no longer actively maintained.
 
-> You are saying the unconditional DEPENDS in the current version are usele=
-ss
-> since explicit enabling is required for both options in 3.5.28?
->=20
-> It would be good to mention in the description when such a bug existed.
->=20
-> > Regards,
-> > Andrej
->=20
-> cu
-> Adrian
->=20
-Pascal
+Signed-off-by: Nathan Rossi <nathan@nathanrossi.com>
+---
+ .../recipes-utils/fatresize/fatresize_1.0.2.bb            | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
+
+diff --git a/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb b/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
+new file mode 100644
+index 0000000000..a2f6b6d131
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Resize FAT partitions using libparted"
++SECTION = "console/tools"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https"
++SRCREV = "3f80afc76ad82d4a1b852a6c8dea24cd9f5e7a24"
++
++PV = "1.0.2-11-git+${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "parted"
++
++inherit autotools pkgconfig
+---
+2.20.1
 
