@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B0C667D985
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+	[209.85.222.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 69F357D91B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 17:56:51 +0000 (UTC)
-Received: by mail-qt1-f178.google.com with SMTP id z16so8168634qtn.4
+	Thu, 11 Apr 2019 17:57:40 +0000 (UTC)
+Received: by mail-qk1-f179.google.com with SMTP id c1so4034492qkk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 10:56:53 -0700 (PDT)
+	Thu, 11 Apr 2019 10:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=z0M22+nG/x9b5ZlvFTudvbS8JqNzSPVhIua8mjauYQI=;
-	b=FZT7xZPbGqK11UyrlhYkK8GCmuLfvJ+M13IMrUSgRNOoy2e5Lod2wJg639JSZmOEx2
-	2FBspv6rRmm3LJC1L7rtunY64PMGTp1C6SlK0f/kslBHyTp2Hn+JIVRqIjjsdvCdhnTQ
-	hVFc4X6QBR9aLiRh8q9DtFwYA8ICpsiZRg3t0fjaWBts91uPysKhLSKrqK3YBDDGHzvU
-	mkAD9XKwJcgakw1pSA5/5A8nPrG2efygTdcoXs7k7R9My0aqCpNvAIRY2aqY7CLz35+u
-	sJVPw89oMjRR4QnpGIgU9BfX/8Itpa9axanG9NMitKBi5AS2BAdwMTd7K19DtVq4W8eH
-	85xQ==
+	:cc; bh=eOqhxJYpnYjd+rLaNkpJdl2apavKwiuJekzyLU+bhx4=;
+	b=QLeJpY7lZTQdD3nobIVgztov04qlWZjzsuS32BWGe4IvFZM/eIXI4gYk5fsh0ur8qX
+	tHlMmi589fQ117PopD6lhaLZtotZFFZWCwudKIewe7Y48Pn9MWWaqhMXXaM7JHGfOJ5S
+	Yn72vz+hJ02w9u3P/pyN0HrlEF9Qpk5I6gpLHJI5WDHwGRnhGXAcULR8V+y5H3/wWtoM
+	ZU3BbP/1FP0ipCTY5S+Kl20UfnJlOnLzmmvAXT+YGI83UlNld+EyXIkY0KQaNt32wOaD
+	4IVqABiDQMLv4g/gDUD4/6gOgfoFk6ErgYWDRmUm8G7+JAD9aEOhBFMHrMfTWfBO3wfv
+	aC7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=z0M22+nG/x9b5ZlvFTudvbS8JqNzSPVhIua8mjauYQI=;
-	b=mQIijJfqP0ZRhSIpjTSlDg0bnlEktRK2JiuJqcAIH/e2jyQtne8ZaevDn9JTSTuwSl
-	ZGKoEuiQmOHZ7sLOqLUiQ3nxqAM1K0X21cffJQ147oWZ7ubb+27H5ovj4DByFuapiblq
-	dxRxQOwPVkTk5s9sLN9Ef5e71NXfN40ETekOqPFX9D3jtqAwfQtsUwUfUMs1FCsYdv/Y
-	+TKAt4kJ8Kg+XMexx8vvTT4h9YHZpljWbuqTJVXku6gMcEn4o/pOwmoHkFWFy6G1aIw9
-	ShDPf3RdtwBFtak0Q1/+PTaTC5E4vtyXOReXcDb1lN6udZtNcOSjtP1j2BIqw05UgODl
-	f/FQ==
-X-Gm-Message-State: APjAAAXCzckF2XJKsSHp6FwfUiVG39SXq/zxAqU5ly06opw0z/EmDjuw
-	9b5UzFrbaHYrzrAWV4mV/02wTuEBuOKXDzyMw9k=
-X-Google-Smtp-Source: APXvYqxFAalmxXaolSp6YyL9fzMmamSBTND2iigdYDZwMhI/rOR6dzfL2ZkGGujueq0JYz3/cNKjNz6kaxi8JW1lW20=
-X-Received: by 2002:ac8:f86:: with SMTP id b6mr42716346qtk.330.1555005412494; 
-	Thu, 11 Apr 2019 10:56:52 -0700 (PDT)
+	bh=eOqhxJYpnYjd+rLaNkpJdl2apavKwiuJekzyLU+bhx4=;
+	b=iuJjp3xibYZO4FMb3zsHaAa2xXFhbhb8RuLQGJ1/dljkVeBDGyOQCQtBQdArihbWRt
+	iIsMJwTQpQaBh80DKHJ+D5cWtZerB6g2S1txbMVVf1C8RAJSBUq3T/F8rw5cEip0EJFO
+	IpvdPz5/xQR6Sl9N/Ps4j+y6R8OIkQoQWtySopXLmdRGBSMy3paS/fR16uKm6AaiQO/1
+	n3UaNPUWpI6P1TpSxYljvHPvhee6aetb0kHhGySVBPxcDDtf+zPLUcL6Ib708oA9GDaT
+	LuxZVdzbZMPNvZYzSMt0rool6yGRDDV22pbU3eGiLeqaMsSlYznYDSMvAx+20Uk6Y0sn
+	udKg==
+X-Gm-Message-State: APjAAAUZyk4lkSieNQAGUvQ4Bn5JZ7KF8DfcLTKPX+wQNGyOxXREUb+d
+	7jm1FXoq7nl6o2fM7pigzakxZ3ejGjUXrisAE8Uqel6B0pw=
+X-Google-Smtp-Source: APXvYqxmqTrImtIgakLujY3aksPnAHP2ZB8hEDa2KjuTpqkNjLARLuhpv2GMOurrfZSKxbW5Fjo88zX1tRYS4XbrN4Y=
+X-Received: by 2002:a37:a208:: with SMTP id l8mr40864492qke.210.1555005461059; 
+	Thu, 11 Apr 2019 10:57:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190410082726.30843-1-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <20190410082726.30843-1-zangrc.fnst@cn.fujitsu.com>
+References: <20190410084221.8868-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20190410084221.8868-1-zangrc.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 Apr 2019 10:56:26 -0700
-Message-ID: <CAMKF1spQiTCd8rGkvEGFsnZBe9cgjmXBLUeBKx=tmihwuQPQPA@mail.gmail.com>
+Date: Thu, 11 Apr 2019 10:57:15 -0700
+Message-ID: <CAMKF1so9Z2kf=pmqDQfd2UCmdux-zdaC1uFjw_UmUx30TkHnAQ@mail.gmail.com>
 To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] [PATCH] python-attrs: upgrade 18.1.0 -> 19.1.0
+Subject: Re: [meta-python] [PATCH] python-certifi: upgrade 2018.8.13 -> 2019.3.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,41 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 17:56:51 -0000
+X-List-Received-Date: Thu, 11 Apr 2019 17:57:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Please upgrade python3-attrs at same time
+Upgrade p3 version python3-certifi as well
 
-On Wed, Apr 10, 2019 at 1:27 AM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
+On Wed, Apr 10, 2019 at 1:41 AM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
 >
-> -Upgrade from python-attrs_18.1.0.bb to python-attrs_19.1.0.bb.
+> -Upgrade from python-certifi_2018.8.13.bb to python-certifi_2019.3.9.bb.
 >
 > Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  meta-python/recipes-devtools/python/python-attrs.inc          | 4 ++--
->  .../python/{python-attrs_18.1.0.bb => python-attrs_19.1.0.bb} | 0
+>  meta-python/recipes-devtools/python/python-certifi.inc        | 4 ++--
+>  ...python-certifi_2018.8.13.bb => python-certifi_2019.3.9.bb} | 0
 >  2 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-attrs_18.1.0.bb => python-attrs_19.1.0.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python-certifi_2018.8.13.bb => python-certifi_2019.3.9.bb} (100%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
-> index d0b5697cb..1f767ba19 100644
-> --- a/meta-python/recipes-devtools/python/python-attrs.inc
-> +++ b/meta-python/recipes-devtools/python/python-attrs.inc
-> @@ -3,8 +3,8 @@ HOMEPAGE = "http://www.attrs.org/"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
+> diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+> index c7955c57d..9d99b3475 100644
+> --- a/meta-python/recipes-devtools/python/python-certifi.inc
+> +++ b/meta-python/recipes-devtools/python/python-certifi.inc
+> @@ -7,7 +7,7 @@ HOMEPAGE = " http://certifi.io/"
+>  LICENSE = "ISC"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
 >
-> -SRC_URI[sha256sum] = "e0d0eb91441a3b53dab4d9b743eafc1ac44476296a2053b6ca3af0b139faf87b"
-> -SRC_URI[md5sum] = "3f3f3e0750dab74cfa1dc8b0fd7a5f86"
-> +SRC_URI[sha256sum] = "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"
-> +SRC_URI[md5sum] = "2be7bce157988928f5ff2bb50a0b510d"
+> -SRC_URI[md5sum] = "a84571995a209dcd00a1702a74302b88"
+> -SRC_URI[sha256sum] = "4c1d68a1408dd090d2f3a869aa94c3947cc1d967821d1ed303208c9f41f0f2f4"
+> +SRC_URI[md5sum] = "76381d19d0a1171fecb2d1002b81424e"
+> +SRC_URI[sha256sum] = "b26104d6835d1f5e49452a26eb2ff87fe7090b89dfcaee5ea2212697e1e1d7ae"
 >
->  inherit pypi
->
-> diff --git a/meta-python/recipes-devtools/python/python-attrs_18.1.0.bb b/meta-python/recipes-devtools/python/python-attrs_19.1.0.bb
+>  BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb b/meta-python/recipes-devtools/python/python-certifi_2019.3.9.bb
 > similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-attrs_18.1.0.bb
-> rename to meta-python/recipes-devtools/python/python-attrs_19.1.0.bb
+> rename from meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb
+> rename to meta-python/recipes-devtools/python/python-certifi_2019.3.9.bb
 > --
 > 2.20.1
 >
