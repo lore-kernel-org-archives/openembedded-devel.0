@@ -1,30 +1,23 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D0CF26C3B1
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 806A37D913
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 05:29:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,336,1549900800"; d="scan'208";a="59007519"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Apr 2019 13:29:46 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 63A304CD8127
+	Thu, 11 Apr 2019 06:13:42 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3B6DgZn006776
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 13:29:47 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 11 Apr 2019 13:29:42 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Wed, 10 Apr 2019 23:13:43 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Wed, 10 Apr 2019 23:13:42 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Apr 2019 13:30:24 +0800
-Message-ID: <20190411053024.23351-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Wed, 10 Apr 2019 23:13:42 -0700
+Message-ID: <20190411061342.65548-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: 63A304CD8127.A71FD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-lxml: upgrade 4.3.1 -> 4.3.3
+Subject: [meta-oe][PATCH] lua: upgrade from v5.3.4 to v5.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,41 +30,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 05:29:47 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 11 Apr 2019 06:13:42 -0000
 Content-Type: text/plain
 
--Upgrade from python-lxml_4.3.1.bb to python-lxml_4.3.3.bb.
+The v5.3.5 release covers CVE-2019-6706 which is vulnerable.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-lxml.inc           | 4 ++--
- .../python/{python-lxml_4.3.1.bb => python-lxml_4.3.3.bb}     | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-lxml_4.3.1.bb => python-lxml_4.3.3.bb} (100%)
+ meta-oe/recipes-devtools/lua/lua_5.3.4.bb | 59 -----------------------------
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb | 63 +++++++++++++++++++++++++++++++
+ 2 files changed, 63 insertions(+), 59 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+ create mode 100644 meta-oe/recipes-devtools/lua/lua_5.3.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-index 14897c06e..63532c756 100644
---- a/meta-python/recipes-devtools/python/python-lxml.inc
-+++ b/meta-python/recipes-devtools/python/python-lxml.inc
-@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
- 
- DEPENDS += "libxml2 libxslt"
- 
--SRC_URI[md5sum] = "d2b2eb305bfa9ed15aebe61affb3ffa4"
--SRC_URI[sha256sum] = "da5e7e941d6e71c9c9a717c93725cda0708c2474f532e3680ac5e39ec57d224d"
-+SRC_URI[md5sum] = "d35e90d9de17e1370fbb7e6059bd95ed"
-+SRC_URI[sha256sum] = "4a03dd682f8e35a10234904e0b9508d705ff98cf962c5851ed052e9340df3d90"
- 
- DISTUTILS_BUILD_ARGS += " \
-                      --with-xslt-config='pkg-config libxslt' \
-diff --git a/meta-python/recipes-devtools/python/python-lxml_4.3.1.bb b/meta-python/recipes-devtools/python/python-lxml_4.3.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-lxml_4.3.1.bb
-rename to meta-python/recipes-devtools/python/python-lxml_4.3.3.bb
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+deleted file mode 100644
+index 8f4e8fe..0000000
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
++++ /dev/null
+@@ -1,59 +0,0 @@
+-DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+-for extending applications."
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
+-HOMEPAGE = "http://www.lua.org/"
+-
+-DEPENDS = "readline"
+-SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+-           file://lua.pc.in \
+-           "
+-SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+-           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
+-            file://run-ptest \
+-           ', '', d)}"
+-
+-SRC_URI[tarballsrc.md5sum] = "53a9c68bcc0eda58bdc2095ad5cdfc63"
+-SRC_URI[tarballsrc.sha256sum] = "f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c"
+-SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
+-SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
+-
+-inherit pkgconfig binconfig ptest
+-
+-UCLIBC_PATCHES += "file://uclibc-pthread.patch"
+-SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
+-
+-TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
+-EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
+-
+-do_configure_prepend() {
+-    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
+-}
+-
+-do_compile () {
+-    oe_runmake linux
+-}
+-
+-do_install () {
+-    oe_runmake \
+-        'INSTALL_TOP=${D}${prefix}' \
+-        'INSTALL_BIN=${D}${bindir}' \
+-        'INSTALL_INC=${D}${includedir}/' \
+-        'INSTALL_MAN=${D}${mandir}/man1' \
+-        'INSTALL_SHARE=${D}${datadir}/lua' \
+-        'INSTALL_LIB=${D}${libdir}' \
+-        'INSTALL_CMOD=${D}${libdir}/lua/5.3' \
+-        install
+-    install -d ${D}${libdir}/pkgconfig
+-
+-    sed -e s/@VERSION@/${PV}/ ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
+-    install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
+-    rmdir ${D}${datadir}/lua/5.3
+-    rmdir ${D}${datadir}/lua
+-}
+-
+-do_install_ptest () {
+-        cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
+-}
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+new file mode 100644
+index 0000000..265e251
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -0,0 +1,63 @@
++DESCRIPTION = "Lua is a powerful light-weight programming language designed \
++for extending applications."
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
++HOMEPAGE = "http://www.lua.org/"
++
++DEPENDS = "readline"
++SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
++           file://lua.pc.in \
++           "
++
++# if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
++PV_testsuites = "5.3.4"
++
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
++           'http://www.lua.org/tests/lua-${PV_testsuites}-tests.tar.gz;name=tarballtest \
++            file://run-ptest \
++           ', '', d)}"
++
++SRC_URI[tarballsrc.md5sum] = "4f4b4f323fd3514a68e0ab3da8ce3455"
++SRC_URI[tarballsrc.sha256sum] = "0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac"
++SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
++SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
++
++inherit pkgconfig binconfig ptest
++
++UCLIBC_PATCHES += "file://uclibc-pthread.patch"
++SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
++
++TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
++EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
++
++do_configure_prepend() {
++    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
++}
++
++do_compile () {
++    oe_runmake linux
++}
++
++do_install () {
++    oe_runmake \
++        'INSTALL_TOP=${D}${prefix}' \
++        'INSTALL_BIN=${D}${bindir}' \
++        'INSTALL_INC=${D}${includedir}/' \
++        'INSTALL_MAN=${D}${mandir}/man1' \
++        'INSTALL_SHARE=${D}${datadir}/lua' \
++        'INSTALL_LIB=${D}${libdir}' \
++        'INSTALL_CMOD=${D}${libdir}/lua/5.3' \
++        install
++    install -d ${D}${libdir}/pkgconfig
++
++    sed -e s/@VERSION@/${PV}/ ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
++    install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
++    rmdir ${D}${datadir}/lua/5.3
++    rmdir ${D}${datadir}/lua
++}
++
++do_install_ptest () {
++        cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV_testsuites}-tests ${D}${PTEST_PATH}/test
++}
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.20.1
-
-
+2.8.1
 
 
