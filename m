@@ -1,23 +1,46 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2754B7D577
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B2717D91B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 08:03:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3B83ZZh028524
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 11 Apr 2019 17:56:24 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id w5so8098460qtb.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 01:03:35 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Thu, 11 Apr 2019 01:03:35 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Apr 2019 15:53:55 +0800
-Message-ID: <1554969235-16868-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 11 Apr 2019 10:56:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=SKwlzYrAVDrdQXV24JkbK7vK8Y+FdP7TZXwklm3zkKg=;
+	b=hH6TynfAXOPxwI0CLllx2SjOTfC3/Q1ujLCkPMcsxlyQLo6qeQfvSVk+ZV5rNnGqvp
+	iPk4hY4lzjtFa++D++5yH057wWHdQJynTrAVDI0+pRWSL1G/uMneebLeGnpsNsIb5RSx
+	EqS8QC3SXxdPh8pYZCTrQ1ANMQI/gsgPs5zfJf0sVU23u9kdoU17+3waa6CYnA+sPUt8
+	xYj0/4gK9YLlhDGGYVcRKQTRZZIaP2WU2K1Oi1eNqzdxyyjMxWKQpqJQcHY9i0P2LAn2
+	tXrG3TPlTR6aDrry7aSNlrLwTJowkgT7aCXPAt/YP/LoWvzcu6pMGJcBjAAKM8n8Sa8I
+	lzkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=SKwlzYrAVDrdQXV24JkbK7vK8Y+FdP7TZXwklm3zkKg=;
+	b=rPI/3jTvJ+cCtdF4BtwEHJbQTXtLHaEgT0unFGvZL6nxbRMJtDNQ/7+Xu4JFWiEUob
+	dvB9YuLQJqLgJW/VFIgD6w/qqc6IgT4bHbmI+1gKeN0NVr8elW3b5IYL9i8jXHnTdoWK
+	hHAN4Gi2fkI6nDCcagRpos7SnFH9WDIhmo5s6Z1H95QcDiAVfOr9Vcswyg1wRVf+FgGs
+	seNNW9mKKStyzBmwbsGDJsvQ3Pph11xztqqnexi1r/XMkKzT8Wr6L0KcKR/CIrEOMHl8
+	9LeAEHMy6wfMwDgShvLVXnswyqg47UFcsqm3EhNFi3d0oS/+VVcZVXR9y3OEf3irzP5I
+	ADIQ==
+X-Gm-Message-State: APjAAAUqj+sD7uasDZ7qf5gIkSjN7VYjD7ivrRvEQPF0gFTBkhhLpazb
+	Krc5g9LFzkQXMERmv8mfGDA35qyT+8/TLBVUsQdaFThQ4PI=
+X-Google-Smtp-Source: APXvYqxZ+XA9osdUGqSLp9xeiQbdFiV3yJRUB9v2G+DZGmwpB3q5QzKhaR44rXsKfwuG7+QBHOid3FVupeyyT5oCGDU=
+X-Received: by 2002:a0c:b0ef:: with SMTP id p44mr28950462qvc.127.1555005384828;
+	Thu, 11 Apr 2019 10:56:24 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] multipath-tools: fix up patch to avoid segfault
+References: <20190410085815.8916-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20190410085815.8916-1-zangrc.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 Apr 2019 10:55:58 -0700
+Message-ID: <CAMKF1spAA5evfdzxcOpaXr0dRztPvwMZnvXa6E=wQct-_iLipA@mail.gmail.com>
+To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python] [PATCH] python-cffi: upgrade 1.11.5 -> 1.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,101 +53,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 08:03:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Apr 2019 17:56:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-When upgrading multipath, the following patch was accidently
-wrongly rebased, leaving set_value not declared in parser.h
-and resulting in segfault when running 'multipath' and 'multipathd'.
+Please upgrade python3-cffi as the same time as well
 
-  0027-RH-warn-on-invalid-regex-instead-of-failing.patch
-
-So fix things up and add the declaration back.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- ...-warn-on-invalid-regex-instead-of-failing.patch | 25 ++++++++++------------
- 1 file changed, 11 insertions(+), 14 deletions(-)
-
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
-index 57d04d0..95624ad 100644
---- a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
-+++ b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
-@@ -1,4 +1,4 @@
--From d16de70b76919269561b4e404825f78286ea9a40 Mon Sep 17 00:00:00 2001
-+From 56d65ecb1c6d814929f6ff3159ade09dc203cc83 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Mon, 26 Nov 2018 10:31:30 +0800
- Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
-@@ -18,14 +18,15 @@ Upstream-Status: Pending
- update this patch to new version
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
- ---
-  libmultipath/dict.c   | 29 ++++++++++++++++++++++-------
-  libmultipath/parser.c | 13 +++++++++++++
-- libmultipath/parser.h |  2 +-
-- 3 files changed, 36 insertions(+), 8 deletions(-)
-+ libmultipath/parser.h |  1 +
-+ 3 files changed, 36 insertions(+), 7 deletions(-)
- 
- diff --git a/libmultipath/dict.c b/libmultipath/dict.c
--index a81c051..0689763 100644
-+index eaad4f1..fb30577 100644
- --- a/libmultipath/dict.c
- +++ b/libmultipath/dict.c
- @@ -59,6 +59,21 @@ set_str(vector strvec, void *ptr)
-@@ -50,7 +51,7 @@ index a81c051..0689763 100644
-  set_yes_no(vector strvec, void *ptr)
-  {
-  	char * buff;
--@@ -1346,8 +1361,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec)		\
-+@@ -1373,8 +1388,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec)		\
-  									\
-  	if (!conf->option)						\
-  		return 1;						\
-@@ -61,7 +62,7 @@ index a81c051..0689763 100644
-  	if (!buff)							\
-  		return 1;						\
-  									\
--@@ -1363,7 +1378,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec) \
-+@@ -1390,7 +1405,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec) \
-  	if (!conf->option)						\
-  		return 1;						\
-  									\
-@@ -70,7 +71,7 @@ index a81c051..0689763 100644
-  	if (!buff)							\
-  		return 1;						\
-  									\
--@@ -1466,16 +1481,16 @@ device_handler(struct config *conf, vector strvec)
-+@@ -1493,16 +1508,16 @@ device_handler(struct config *conf, vector strvec)
-  	return 0;
-  }
-  
-@@ -116,18 +117,14 @@ index 92ef7cf..0e2cf49 100644
-  static int kw_level = 0;
-  
- diff --git a/libmultipath/parser.h b/libmultipath/parser.h
--index 62906e9..b6899fc 100644
-+index 62906e9..b791705 100644
- --- a/libmultipath/parser.h
- +++ b/libmultipath/parser.h
--@@ -76,7 +76,7 @@ extern int _install_keyword(vector keywords, char *string,
-- extern void dump_keywords(vector keydump, int level);
-+@@ -77,6 +77,7 @@ extern void dump_keywords(vector keydump, int level);
-  extern void free_keywords(vector keywords);
-  extern vector alloc_strvec(char *string);
---extern void *set_value(vector strvec);
-+ extern void *set_value(vector strvec);
- +extern void *set_regex_value(vector strvec);
-  extern int process_file(struct config *conf, char *conf_file);
-  extern struct keyword * find_keyword(vector keywords, vector v, char * name);
-  int snprint_keyword(char *buff, int len, char *fmt, struct keyword *kw,
---- 
--2.7.4
--
--- 
-2.7.4
-
+On Wed, Apr 10, 2019 at 1:57 AM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
+>
+> -Upgrade from python-cffi_1.11.5.bb to python-cffi_1.12.2.bb.
+>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> ---
+>  meta-python/recipes-devtools/python/python-cffi.inc           | 4 ++--
+>  .../python/{python-cffi_1.11.5.bb => python-cffi_1.12.2.bb}   | 0
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-cffi_1.11.5.bb => python-cffi_1.12.2.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+> index e6071eeca..069aba008 100644
+> --- a/meta-python/recipes-devtools/python/python-cffi.inc
+> +++ b/meta-python/recipes-devtools/python/python-cffi.inc
+> @@ -4,8 +4,8 @@ LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+>  DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+>
+> -SRC_URI[md5sum] = "ac8492f4ad952360737413e82d661908"
+> -SRC_URI[sha256sum] = "e90f17980e6ab0f3c2f3730e56d1fe9bcba1891eeea58966e89d352492cc74f4"
+> +SRC_URI[md5sum] = "4d7dcb6c7c738c15d2ece9bd4c5f86da"
+> +SRC_URI[sha256sum] = "e113878a446c6228669144ae8a56e268c91b7f1fafae927adc4879d9849e0ea7"
+>
+>  RDEPENDS_${PN}_class-target = " \
+>      ${PYTHON_PN}-ctypes \
+> diff --git a/meta-python/recipes-devtools/python/python-cffi_1.11.5.bb b/meta-python/recipes-devtools/python/python-cffi_1.12.2.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-cffi_1.11.5.bb
+> rename to meta-python/recipes-devtools/python/python-cffi_1.12.2.bb
+> --
+> 2.20.1
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
