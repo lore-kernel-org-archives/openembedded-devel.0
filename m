@@ -1,23 +1,23 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 806A37D913
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2754B7D577
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 06:13:42 +0000 (UTC)
+	Thu, 11 Apr 2019 08:03:34 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3B6DgZn006776
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3B83ZZh028524
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 23:13:43 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 10 Apr 2019 23:13:42 -0700
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+	Thu, 11 Apr 2019 01:03:35 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Thu, 11 Apr 2019 01:03:35 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Apr 2019 23:13:42 -0700
-Message-ID: <20190411061342.65548-1-hongzhi.song@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Date: Thu, 11 Apr 2019 15:53:55 +0800
+Message-ID: <1554969235-16868-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] lua: upgrade from v5.3.4 to v5.3.5
+Subject: [meta-oe][PATCH] multipath-tools: fix up patch to avoid segfault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,154 +30,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 06:13:42 -0000
+X-List-Received-Date: Thu, 11 Apr 2019 08:03:35 -0000
 Content-Type: text/plain
 
-The v5.3.5 release covers CVE-2019-6706 which is vulnerable.
+When upgrading multipath, the following patch was accidently
+wrongly rebased, leaving set_value not declared in parser.h
+and resulting in segfault when running 'multipath' and 'multipathd'.
 
-Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+  0027-RH-warn-on-invalid-regex-instead-of-failing.patch
+
+So fix things up and add the declaration back.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-devtools/lua/lua_5.3.4.bb | 59 -----------------------------
- meta-oe/recipes-devtools/lua/lua_5.3.5.bb | 63 +++++++++++++++++++++++++++++++
- 2 files changed, 63 insertions(+), 59 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/lua/lua_5.3.4.bb
- create mode 100644 meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+ ...-warn-on-invalid-regex-instead-of-failing.patch | 25 ++++++++++------------
+ 1 file changed, 11 insertions(+), 14 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-deleted file mode 100644
-index 8f4e8fe..0000000
---- a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-+++ /dev/null
-@@ -1,59 +0,0 @@
--DESCRIPTION = "Lua is a powerful light-weight programming language designed \
--for extending applications."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
--HOMEPAGE = "http://www.lua.org/"
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
+index 57d04d0..95624ad 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
+@@ -1,4 +1,4 @@
+-From d16de70b76919269561b4e404825f78286ea9a40 Mon Sep 17 00:00:00 2001
++From 56d65ecb1c6d814929f6ff3159ade09dc203cc83 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 26 Nov 2018 10:31:30 +0800
+ Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
+@@ -18,14 +18,15 @@ Upstream-Status: Pending
+ update this patch to new version
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
+ ---
+  libmultipath/dict.c   | 29 ++++++++++++++++++++++-------
+  libmultipath/parser.c | 13 +++++++++++++
+- libmultipath/parser.h |  2 +-
+- 3 files changed, 36 insertions(+), 8 deletions(-)
++ libmultipath/parser.h |  1 +
++ 3 files changed, 36 insertions(+), 7 deletions(-)
+ 
+ diff --git a/libmultipath/dict.c b/libmultipath/dict.c
+-index a81c051..0689763 100644
++index eaad4f1..fb30577 100644
+ --- a/libmultipath/dict.c
+ +++ b/libmultipath/dict.c
+ @@ -59,6 +59,21 @@ set_str(vector strvec, void *ptr)
+@@ -50,7 +51,7 @@ index a81c051..0689763 100644
+  set_yes_no(vector strvec, void *ptr)
+  {
+  	char * buff;
+-@@ -1346,8 +1361,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec)		\
++@@ -1373,8 +1388,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec)		\
+  									\
+  	if (!conf->option)						\
+  		return 1;						\
+@@ -61,7 +62,7 @@ index a81c051..0689763 100644
+  	if (!buff)							\
+  		return 1;						\
+  									\
+-@@ -1363,7 +1378,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec) \
++@@ -1390,7 +1405,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec) \
+  	if (!conf->option)						\
+  		return 1;						\
+  									\
+@@ -70,7 +71,7 @@ index a81c051..0689763 100644
+  	if (!buff)							\
+  		return 1;						\
+  									\
+-@@ -1466,16 +1481,16 @@ device_handler(struct config *conf, vector strvec)
++@@ -1493,16 +1508,16 @@ device_handler(struct config *conf, vector strvec)
+  	return 0;
+  }
+  
+@@ -116,18 +117,14 @@ index 92ef7cf..0e2cf49 100644
+  static int kw_level = 0;
+  
+ diff --git a/libmultipath/parser.h b/libmultipath/parser.h
+-index 62906e9..b6899fc 100644
++index 62906e9..b791705 100644
+ --- a/libmultipath/parser.h
+ +++ b/libmultipath/parser.h
+-@@ -76,7 +76,7 @@ extern int _install_keyword(vector keywords, char *string,
+- extern void dump_keywords(vector keydump, int level);
++@@ -77,6 +77,7 @@ extern void dump_keywords(vector keydump, int level);
+  extern void free_keywords(vector keywords);
+  extern vector alloc_strvec(char *string);
+--extern void *set_value(vector strvec);
++ extern void *set_value(vector strvec);
+ +extern void *set_regex_value(vector strvec);
+  extern int process_file(struct config *conf, char *conf_file);
+  extern struct keyword * find_keyword(vector keywords, vector v, char * name);
+  int snprint_keyword(char *buff, int len, char *fmt, struct keyword *kw,
+--- 
+-2.7.4
 -
--DEPENDS = "readline"
--SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
--           file://lua.pc.in \
--           "
--SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
--           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
--            file://run-ptest \
--           ', '', d)}"
--
--SRC_URI[tarballsrc.md5sum] = "53a9c68bcc0eda58bdc2095ad5cdfc63"
--SRC_URI[tarballsrc.sha256sum] = "f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c"
--SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
--SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
--
--inherit pkgconfig binconfig ptest
--
--UCLIBC_PATCHES += "file://uclibc-pthread.patch"
--SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
--
--TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
--EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
--
--do_configure_prepend() {
--    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
--}
--
--do_compile () {
--    oe_runmake linux
--}
--
--do_install () {
--    oe_runmake \
--        'INSTALL_TOP=${D}${prefix}' \
--        'INSTALL_BIN=${D}${bindir}' \
--        'INSTALL_INC=${D}${includedir}/' \
--        'INSTALL_MAN=${D}${mandir}/man1' \
--        'INSTALL_SHARE=${D}${datadir}/lua' \
--        'INSTALL_LIB=${D}${libdir}' \
--        'INSTALL_CMOD=${D}${libdir}/lua/5.3' \
--        install
--    install -d ${D}${libdir}/pkgconfig
--
--    sed -e s/@VERSION@/${PV}/ ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
--    install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
--    rmdir ${D}${datadir}/lua/5.3
--    rmdir ${D}${datadir}/lua
--}
--
--do_install_ptest () {
--        cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
--}
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-new file mode 100644
-index 0000000..265e251
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
-@@ -0,0 +1,63 @@
-+DESCRIPTION = "Lua is a powerful light-weight programming language designed \
-+for extending applications."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
-+HOMEPAGE = "http://www.lua.org/"
-+
-+DEPENDS = "readline"
-+SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-+           file://lua.pc.in \
-+           "
-+
-+# if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
-+PV_testsuites = "5.3.4"
-+
-+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-+           'http://www.lua.org/tests/lua-${PV_testsuites}-tests.tar.gz;name=tarballtest \
-+            file://run-ptest \
-+           ', '', d)}"
-+
-+SRC_URI[tarballsrc.md5sum] = "4f4b4f323fd3514a68e0ab3da8ce3455"
-+SRC_URI[tarballsrc.sha256sum] = "0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac"
-+SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
-+SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
-+
-+inherit pkgconfig binconfig ptest
-+
-+UCLIBC_PATCHES += "file://uclibc-pthread.patch"
-+SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
-+
-+TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
-+EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
-+
-+do_configure_prepend() {
-+    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
-+}
-+
-+do_compile () {
-+    oe_runmake linux
-+}
-+
-+do_install () {
-+    oe_runmake \
-+        'INSTALL_TOP=${D}${prefix}' \
-+        'INSTALL_BIN=${D}${bindir}' \
-+        'INSTALL_INC=${D}${includedir}/' \
-+        'INSTALL_MAN=${D}${mandir}/man1' \
-+        'INSTALL_SHARE=${D}${datadir}/lua' \
-+        'INSTALL_LIB=${D}${libdir}' \
-+        'INSTALL_CMOD=${D}${libdir}/lua/5.3' \
-+        install
-+    install -d ${D}${libdir}/pkgconfig
-+
-+    sed -e s/@VERSION@/${PV}/ ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
-+    install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
-+    rmdir ${D}${datadir}/lua/5.3
-+    rmdir ${D}${datadir}/lua
-+}
-+
-+do_install_ptest () {
-+        cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV_testsuites}-tests ${D}${PTEST_PATH}/test
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
-2.8.1
+2.7.4
 
 
