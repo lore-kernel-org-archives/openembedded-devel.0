@@ -1,50 +1,30 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-vs1-f53.google.com (mail-vs1-f53.google.com
-	[209.85.217.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 61B1A7D8F1
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E9D17D8D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2019 01:03:30 +0000 (UTC)
-Received: by mail-vs1-f53.google.com with SMTP id n4so2514566vsm.3
+	Thu, 11 Apr 2019 03:05:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,335,1549900800"; d="scan'208";a="58996070"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Apr 2019 11:05:23 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 305DF4CD8448
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2019 18:03:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=kQE0pb3g2AQ02ravq5I1L10DdyWzKyPUZXpErwowbYk=;
-	b=EGSsF5nN+FnsauhgfbAv++It+m2LA4bTiFIY3j3YRNZkTyJExPhby+8RDOOCkFCnq9
-	F9/XA6rKVCgC3a6r/d7Z5SVd4OEHzy6d+QmDcPZuLnVu01Jr9ecRtwmVnrwyYXgkwYz1
-	qRI3baCOiSrJkODgHN1bf4fmH1a14dSQJprw4DD/Xv5sXgtPW80Aqts6b8QjKdKQaP0m
-	FQQj7W2HsS8gmjAe2MYRxadc9AZHl6a/dw4kk7uUugduU+nvvRY3Rni5yT7p6Zf7hkCr
-	tYJpr2MmkdX/Bm4VhS5z6Aplwo7HO7EDceytxrjAlAbu+JOALcW+6kAr5mHZVCF6dJBw
-	byoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=kQE0pb3g2AQ02ravq5I1L10DdyWzKyPUZXpErwowbYk=;
-	b=oZtQoa1OrUIEJikqnc9U1JL8V6Y8LF2zAQ/OkMOxbb/aK43rffdY238ECdHFRum4bp
-	RxytMgEodQy9Iyt5MuqjOnmCO1FWpT0KB+A38Cl1TJrXLLLhEh52VHLfbOsAHAMAFL5j
-	SQF+fBdU8AyOzw0KhDt3ngi0Y4eSW59x3IhZ4sG8jbvwtXyNFgLqcI8LUIyL6IBIfx8b
-	ZkLe6EKpGkdmL+C49ZMn72sRq8s5/vZnqHffmGCOuMrBecd7ID2mn5tR1H7376UCbksm
-	aLeppPudY1HCfNwGSa4SVN3Rg9oj1/iuh9EyV0a6aOfjWQIRs7+V3Der7qbzEdv/tWoZ
-	drjw==
-X-Gm-Message-State: APjAAAWswtDmTmg7LxoOUQoEM2Cc5Iy1Pk11QhnZ2XVN3KviD7mOYSTg
-	BRhcJtPLzjODbUiO2jue/1pxdvhtddxUYTPJ9YQ=
-X-Google-Smtp-Source: APXvYqyfNcLNedLbm+EYyb4xbWzJnsTs5DqtMA+W/LtV0ZQCgW+YAa7oGABxO2UuNti+rNvbejJMzZ0+zlHXXeak4ho=
-X-Received: by 2002:a67:8e0a:: with SMTP id q10mr27347809vsd.56.1554944611065; 
-	Wed, 10 Apr 2019 18:03:31 -0700 (PDT)
+	Thu, 11 Apr 2019 11:05:26 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 11 Apr 2019 11:05:35 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 11 Apr 2019 11:06:03 +0800
+Message-ID: <20190411030603.3907-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <d5eb2bd0-173b-79b5-922c-a1f0fa097552@balister.org>
-	<CAMKF1srN+kBat8eKj_tw_7y_pv3zWWjAu92L0abCYQFSnfGXcA@mail.gmail.com>
-	<20190410194007.3hs4efbdwg5z3lei@jholzmayr.localdomain>
-In-Reply-To: <20190410194007.3hs4efbdwg5z3lei@jholzmayr.localdomain>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 10 Apr 2019 18:03:20 -0700
-Message-ID: <CANx9H-ATiUjhZ9dmMbk=hJEfAPDQDjTCO46AOGqVrA=ouavYWA@mail.gmail.com>
-To: Josef Holzmayr <holzmayr@rsi-elektrotechnik.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Scipy, this never ending thread must end
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: 305DF4CD8448.A8CAC
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-cython: upgrade 0.28.5 -> 0.29.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,83 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 01:03:30 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Apr 2019 03:05:23 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, Apr 10, 2019 at 12:53 PM Josef Holzmayr <
-holzmayr@rsi-elektrotechnik.de> wrote:
+-Upgrade from python-cython_0.28.5.bb to python-cython_0.29.6.bb.
 
-> On Wed, Apr 10, 2019 at 09:05:19AM -0700, Khem Raj wrote:
-> > On Wed, Apr 10, 2019 at 8:27 AM Philip Balister <philip@balister.org>
-> wrote:
-> > >
-> > > Over and over people ask about Scipy.
-> > >
-> > > I've built lapack and created an image I could natively build scipy
-> with
-> > > before. Since FORTRAN isn't normally built, adding this recipe to an
-> > > existing layer isn't a good idea.
-> > >
-> > > I'm going to create a layer meta-fortran for this recipe and then sta=
-rt
-> > > collecting the wisdom of the community to create a scipy recipe.
-> > >
-> > > Does anyone have a better approach then this for creating a scipy
-> > > recipe? I know people have been really close before.
-> > >
-> >
-> > I think this is a good idea.
->
-> +1
->
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-cython.inc         | 4 ++--
+ .../{python-cython_0.28.5.bb => python-cython_0.29.6.bb}      | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cython_0.28.5.bb => python-cython_0.29.6.bb} (100%)
 
-+1
-That would also possibly enable R language.
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index 0939cad26..afdf974a4 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-SRC_URI[md5sum] = "0cb620e1259818e4ecc1a056e8c3a8be"
+-SRC_URI[sha256sum] = "b64575241f64f6ec005a4d4137339fb0ba5e156e826db2fdb5f458060d9979e0"
++SRC_URI[md5sum] = "8a9441e85ac8085e3d947082db4e7993"
++SRC_URI[sha256sum] = "6c5d33f1b5c864382fbce810a8fd9e015447869ae42e98e6301e977b8165e7ae"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.5.bb b/meta-python/recipes-devtools/python/python-cython_0.29.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cython_0.28.5.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.29.6.bb
+-- 
+2.20.1
 
->
-> >
-> > > Philip
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
-> Josef Holzmayr
-> Software Developer Embedded Systems
->
-> Tel: +49 8444 9204-48
-> Fax: +49 8444 9204-50
->
-> R-S-I Elektrotechnik GmbH & Co. KG
-> Woelkestrasse 11
-> D-85301 Schweitenkirchen
-> www.rsi-elektrotechnik.de
-> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
-> Amtsgericht Ingolstadt =E2=80=93 GmbH: HRB 191328 =E2=80=93 KG: HRA 17039=
-3
-> Gesch=C3=A4ftsf=C3=BChrer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-> Ust-IdNr: DE 128592548
->
-> _____________________________________________________________
-> Amtsgericht Ingolstadt - GmbH: HRB 191328 - KG: HRA 170363
-> Gesch=C3=A4ftsf=C3=BChrer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-> USt-IdNr.: DE 128592548
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+
 
