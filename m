@@ -1,30 +1,30 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D7F17D848
+	by mail.openembedded.org (Postfix) with ESMTP id 7BC127DBD1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 03:34:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,339,1549900800"; d="scan'208";a="59092613"
+	Fri, 12 Apr 2019 09:17:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,340,1549900800"; d="scan'208";a="59120024"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 11:34:05 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id B5CC24CD8183
+	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 17:17:32 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6DEE54CD8454
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 11:34:05 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 11:34:03 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Fri, 12 Apr 2019 17:17:36 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 17:17:32 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Apr 2019 11:34:50 +0800
-Message-ID: <20190412033450.12482-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Sat, 13 Apr 2019 02:16:41 +0800
+Message-ID: <1555093001-41848-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: B5CC24CD8183.A880E
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: 6DEE54CD8454.A9F8D
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCHv2] python-dateutil: upgrade 2.7.3 -> 2.8.0
+Subject: [meta-oe][patch v2] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,48 +37,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 03:34:06 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 12 Apr 2019 09:17:33 -0000
 Content-Type: text/plain
 
--Upgrade from python-dateutil_2.7.3.bb to python-dateutil_2.8.0.bb.
+This dnf plugin aims to supply a tui interface for user to manage
+packages. It has features as following:
+  1. Add new command dnf tui --init to make dnf to work on host.
+  2. Text-based user interface for dnf.
+  3. Manage SPDX files.
+  4. Manage SRPM files.
+  5. Add installation samples for dnf.
 
--Upgrade from python3-dateutil_2.7.3.bb to python3-dateutil_2.8.0.bb.
+More details please refer to https://github.com/ubinux/dnf-plugin-tui.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-dateutil.inc       | 4 ++--
- .../{python-dateutil_2.7.3.bb => python-dateutil_2.8.0.bb}    | 0
- .../{python3-dateutil_2.7.3.bb => python3-dateutil_2.8.0.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-dateutil_2.7.3.bb => python-dateutil_2.8.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-dateutil_2.7.3.bb => python3-dateutil_2.8.0.bb} (100%)
+ .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++++++++++
+ .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
 
-diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
-index 9c5a89dd3..e230f15dd 100644
---- a/meta-python/recipes-devtools/python/python-dateutil.inc
-+++ b/meta-python/recipes-devtools/python/python-dateutil.inc
-@@ -4,8 +4,8 @@ HOMEPAGE = "https://dateutil.readthedocs.org"
- LICENSE = "BSD-3-Clause & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e3155c7bdc71f66e02678411d2abf996"
- 
--SRC_URI[md5sum] = "175b7c1a3cc0cb01151eced07c61c0b8"
--SRC_URI[sha256sum] = "e27001de32f627c22380a688bcc43ce83504a7bc5da472209b4c70f02829f0b8"
-+SRC_URI[md5sum] = "354db28843d949f1bc3e49e8458e22df"
-+SRC_URI[sha256sum] = "c89805f6f4d64db21ed966fda138f8a5ed7a4fdbc1a8ee329ce1b74e3c74da9e"
- 
- PYPI_PACKAGE = "python-dateutil"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-dateutil_2.7.3.bb b/meta-python/recipes-devtools/python/python-dateutil_2.8.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-dateutil_2.7.3.bb
-rename to meta-python/recipes-devtools/python/python-dateutil_2.8.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-dateutil_2.7.3.bb b/meta-python/recipes-devtools/python/python3-dateutil_2.8.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-dateutil_2.7.3.bb
-rename to meta-python/recipes-devtools/python/python3-dateutil_2.8.0.bb
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+new file mode 100644
+index 0000000..e891868
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
++SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
++PV = "1.0"
++
++SRC_URI_append_class-target = "file://oe-remote.repo.sample"
++
++inherit distutils3-base
++
++S = "${WORKDIR}/git"
++
++do_install_append() {
++        install -d ${D}${datadir}/dnf
++        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
++            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
++        done
++}
++
++do_install_append_class-target() {
++        install -d ${D}${sysconfdir}/yum.repos.d
++        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
++}
++
++FILES_${PN} += "${datadir}/dnf"
++
++RDEPENDS_${PN} += " \
++  dnf \
++  libnewt-python \
++  "
++
++BBCLASSEXTEND = "nativesdk"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+new file mode 100644
+index 0000000..6c4502e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+@@ -0,0 +1,5 @@
++[base]
++name=myrepo
++baseurl=http://127.0.0.1/oe_repo/
++enabled=1
++gpgcheck=0
 -- 
-2.20.1
+1.8.3.1
 
 
 
