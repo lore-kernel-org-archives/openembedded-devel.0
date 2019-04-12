@@ -1,48 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A1DC7D589
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BEA77DBDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 11:20:47 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id t17so11397436wrw.13
+	Fri, 12 Apr 2019 11:20:49 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id k11so11458402wro.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 04:20:48 -0700 (PDT)
+	Fri, 12 Apr 2019 04:20:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=HOd/r28x4ogvc1ymfj2w3R5ZdrXMSeY4HR7IxkfuZiY=;
-	b=CBZKbG2NyhKLhTtiHRQ5B+7iro+2qlEf1Gkk4Tt/SjV2d64nZ2dsOts/32fXoV1euL
-	myRuTiBaC3fgeBgTV+0Tlb1v//22nin69A0iBbjm9UpKuzm3l2wumhQLXsRwTwouNORD
-	TlFHMK8NHN20jQa7+8C97CQRWlEns7xURii1qkKdJK/Iow1U4KZxCZSd+HguJZjH1jTa
-	9eUgrhJ1tsjv/TZoqI4StomlHpxZmIOvVywg3BswsTSiclcOKf6uD/i2U/q3QDJBf+Jb
-	coyD4YNTSLlx7S8Ok/HVbYakC8eTnpmM+9EOX0eVeXs9KpjvWSVVE4Z5zLnywJ6HIzQJ
-	Fh1Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=dbE3kSuQ48ngLDmSwK7+wQZwCInPHst9B8vcW7JViok=;
+	b=RwJpxrs4BTcmtoRoNAu45Hdp0ctlQtnXUNuwpGhNpG+/Rja6xuHEWVu1115mxrl60C
+	bZmUp1jEjqqZZXzDDlsz57kTXtiyJumnHM4L4fRsMkOekxxMGopXQMQnWRyEzsAi+AWg
+	MJ6EOmUYLK/i6bRyVM5ruZ001M+cYqRCMdc80TH6LY0Z1J99mJ9CirBypQUNLORhskXr
+	oJaOX4RuuDZ9T+/ogW1IdEg/Ho7Lr7crqbhtb4HsmVxrpe4iGbN3PvB1/s+sTmuNhH8S
+	AfdVN9v3ca+EERL3ob1fK8MZkbaB1TJeNCNyR5EuDqw+Qv7OgbuImFmYHSmA9Ga+1fem
+	1yXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=HOd/r28x4ogvc1ymfj2w3R5ZdrXMSeY4HR7IxkfuZiY=;
-	b=h4bUI2WnBbuHbBRM6rh+y2TEzXUpgBzzwzXyGSzqMpjq2D84Y4Tv9YJ2kItqb60HgT
-	9yoP8KYq4I28v1Lzv3+iEOY2zL+O4hjpskR/Z7YxL+J7HkcjSnaGGHS1947XRjRVf+hp
-	StT4aiVrvBTr7/hRO2xP99/17osZH0a6CgstH68FzLZ7GnOZft5lLKs714kAkynkVR2W
-	/bLaIfVeTVx+xDqTTRlMH9XR63ITDS/BC2lXuetY2TR6PEK3lcpg3EUjfAWFZ1gyk2rr
-	7W+PTsgvLVVmkoZbA7Svn5of6jVaL1qdtkJ+gBIQQMu3Sew7guIycFe9AHHYn36Rv0qH
-	iAcQ==
-X-Gm-Message-State: APjAAAWTx3q5b7RNvxp433pBnCvJCARMklj8tW1UHwWRr005wssBRyG5
-	AyqbiOo2emK//DSnPE08UvcuI5Bq
-X-Google-Smtp-Source: APXvYqyxmSW0K+lPEKhzMvZiSQn+EJAh0yiidq/UMgipvUL8OXFVLGZdcbmsLh+4vqOxDbG+j6McEA==
-X-Received: by 2002:adf:ef91:: with SMTP id d17mr34319383wro.78.1555068047806; 
-	Fri, 12 Apr 2019 04:20:47 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=dbE3kSuQ48ngLDmSwK7+wQZwCInPHst9B8vcW7JViok=;
+	b=jLsOpZDDlusKtb/z9rfJhAEPmHUCsJcLwPFX9oXUYjIYDhoGiOH1x6aJZ6JOG5eL9T
+	VIekC0Y2fBR9orEESf+rpJsVhkdpEVTNitUabBpdv2uCZ9QJphHS3cAwB2tPUQCqymCY
+	9CGXLwvEsLdbiFcnhNQx3o4CTDTeA7c6hUL7SULloHTL94OrTeGl5Vs5FGPqtLSZnBSX
+	DH3JUJfHFQ+x5Am/m68dgLYPiRisjchyk3ZWHUnQmPCTG1A8F6j9/5mqGmeyZRCwgxrA
+	a6ukM8Fd/1idY+haboCLgpBPDwxlTkQOvVTstRZ4YYVIZ2QaFe8xsfXlPySUn9djX7ue
+	2fTg==
+X-Gm-Message-State: APjAAAUlYmU75yLJyaT+ZIibufGRlJ9kd44RzfbOBpzEEYqucG4mstwW
+	eaUUS0smFa50JbUhS23nOHQxDcGG
+X-Google-Smtp-Source: APXvYqz+QwtMrlO3MTuR2Bho/Pf70+TMVMhmC6rZrTvnj1uZ5wiJRIpyP/fRNUwAd++l6fxk8oRTWg==
+X-Received: by 2002:a5d:4a4f:: with SMTP id v15mr25216981wrs.5.1555068050015; 
+	Fri, 12 Apr 2019 04:20:50 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	v1sm55866052wrd.47.2019.04.12.04.20.47
+	13sm10347864wmf.23.2019.04.12.04.20.49
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 12 Apr 2019 04:20:47 -0700 (PDT)
+	Fri, 12 Apr 2019 04:20:49 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Apr 2019 11:20:50 +0000
-Message-Id: <20190412112051.138-1-Martin.Jansa@gmail.com>
+Date: Fri, 12 Apr 2019 11:20:51 +0000
+Message-Id: <20190412112051.138-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/2] ftgl: add x11 to required DISTRO_FEATURES like freeglut
+In-Reply-To: <20190412112051.138-1-Martin.Jansa@gmail.com>
+References: <20190412112051.138-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] libforms: add x11 to required DISTRO_FEATURES because of libx11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,30 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 11:20:47 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 11:20:49 -0000
 
-freeglut was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+libx11 was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
 ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'ftgl', 'freeglut']
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'libforms', 'libx11']
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb | 2 +-
+ meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-index c5eaf425ce..343c983c3d 100644
---- a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-+++ b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=527a83e92c7bf363025380eec05df6e4"
+diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+index f86d7c16bf..5d33185900 100644
+--- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
++++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c
  
- inherit autotools pkgconfig distro_features_check
+ inherit autotools distro_features_check
  
 -REQUIRED_DISTRO_FEATURES = "opengl"
 +REQUIRED_DISTRO_FEATURES = "opengl x11"
  
- DEPENDS += " \
-     freetype \
+ S = "${WORKDIR}/xforms-${PV}"
+ 
 -- 
 2.17.1
 
