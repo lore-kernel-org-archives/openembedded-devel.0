@@ -1,51 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BEA77DBDF
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 701A87D6B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 11:20:49 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id k11so11458402wro.5
+	Fri, 12 Apr 2019 14:52:28 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id v13so9146574ljk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 04:20:50 -0700 (PDT)
+	Fri, 12 Apr 2019 07:52:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dbE3kSuQ48ngLDmSwK7+wQZwCInPHst9B8vcW7JViok=;
-	b=RwJpxrs4BTcmtoRoNAu45Hdp0ctlQtnXUNuwpGhNpG+/Rja6xuHEWVu1115mxrl60C
-	bZmUp1jEjqqZZXzDDlsz57kTXtiyJumnHM4L4fRsMkOekxxMGopXQMQnWRyEzsAi+AWg
-	MJ6EOmUYLK/i6bRyVM5ruZ001M+cYqRCMdc80TH6LY0Z1J99mJ9CirBypQUNLORhskXr
-	oJaOX4RuuDZ9T+/ogW1IdEg/Ho7Lr7crqbhtb4HsmVxrpe4iGbN3PvB1/s+sTmuNhH8S
-	AfdVN9v3ca+EERL3ob1fK8MZkbaB1TJeNCNyR5EuDqw+Qv7OgbuImFmYHSmA9Ga+1fem
-	1yXg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=73SmAeng89GxXFNzti3fnkaTHTpvuOzDzW2/g7OyBBI=;
+	b=f5z+ClAAzFLRQZAUtqVGls/6cBbcJmxiuz0+pjikQwmDqGQ+nQa4ewqSjTFY6H8UhD
+	3tpkUgniUuuIUn/S03VcXTyma8U9GVuPKQ51pynyfukZ2BaMjg0RcVWhsaZohEiJ9XSV
+	6e3dBmeU8umH2Ss4PbfhDSOtbZuC6+6YM5MDWmEva7b/W4OyZt3Gtn1uqPDXozI5EgJq
+	RplD0HXYoVVKWsoQ6ATIlIU1Jq7mq9dl7vh0RY1FRC0sthFqF9y8+Tn3wnM2wDMUrnR7
+	E3IjNSs4s778CzF0v5Tmj8Yruwz4mEN59iqQubAM38aqkDTAR0UgAwVZE/Ag0EkCdq5w
+	vXRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=dbE3kSuQ48ngLDmSwK7+wQZwCInPHst9B8vcW7JViok=;
-	b=jLsOpZDDlusKtb/z9rfJhAEPmHUCsJcLwPFX9oXUYjIYDhoGiOH1x6aJZ6JOG5eL9T
-	VIekC0Y2fBR9orEESf+rpJsVhkdpEVTNitUabBpdv2uCZ9QJphHS3cAwB2tPUQCqymCY
-	9CGXLwvEsLdbiFcnhNQx3o4CTDTeA7c6hUL7SULloHTL94OrTeGl5Vs5FGPqtLSZnBSX
-	DH3JUJfHFQ+x5Am/m68dgLYPiRisjchyk3ZWHUnQmPCTG1A8F6j9/5mqGmeyZRCwgxrA
-	a6ukM8Fd/1idY+haboCLgpBPDwxlTkQOvVTstRZ4YYVIZ2QaFe8xsfXlPySUn9djX7ue
-	2fTg==
-X-Gm-Message-State: APjAAAUlYmU75yLJyaT+ZIibufGRlJ9kd44RzfbOBpzEEYqucG4mstwW
-	eaUUS0smFa50JbUhS23nOHQxDcGG
-X-Google-Smtp-Source: APXvYqz+QwtMrlO3MTuR2Bho/Pf70+TMVMhmC6rZrTvnj1uZ5wiJRIpyP/fRNUwAd++l6fxk8oRTWg==
-X-Received: by 2002:a5d:4a4f:: with SMTP id v15mr25216981wrs.5.1555068050015; 
-	Fri, 12 Apr 2019 04:20:50 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	13sm10347864wmf.23.2019.04.12.04.20.49
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 12 Apr 2019 04:20:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Apr 2019 11:20:51 +0000
-Message-Id: <20190412112051.138-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190412112051.138-1-Martin.Jansa@gmail.com>
-References: <20190412112051.138-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libforms: add x11 to required DISTRO_FEATURES because of libx11
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=73SmAeng89GxXFNzti3fnkaTHTpvuOzDzW2/g7OyBBI=;
+	b=Iiz6CH6aqCoUjdlsjdmHetbeKcIGc6mflpwDTt/M3gQaD7m5QiccFuuKbnSSv9BEnI
+	1fMO4kAIbl8UmSvfBFSgsJyr9iOXgj+FdQtmqDzJ7eHhrx9zB0xp0pzwX7v9i5K/Mxe7
+	L9Bn7LJTQpZUzcWx00eQcPz4VLo/ByedJPA4oMOenkO8riTB8XhfhDkTK+1rBUa09SY0
+	wBXERsPEDQiann5cie7G1appR/1ZC/6EGmBIlanS88NxvLTDJDKAWoFs8agl1s5smdW2
+	jeBxidrfUI7iE9ofkVSSGottAZPjcst2ue2OxyvTdgVe/w8exUONwFvmoUIczGiF/66+
+	qrtA==
+X-Gm-Message-State: APjAAAXo53A51mW3uPF3fFfhg4UziMUI93Vd5AO5/wJaS75gfSJigFqF
+	sI3mX3IL1P+j6yYBVZ7Mzfo8SS/HPI+bkDhlgQw=
+X-Google-Smtp-Source: APXvYqyC796yzm/7Qou7sqIjh/XWWMQUU8KjRsWYdqxbjH+twNVKv1GYG/VvxJK5tAf4k0RrcopfhWWuitKTXOho//Y=
+X-Received: by 2002:a2e:1311:: with SMTP id 17mr19508020ljt.75.1555080748859; 
+	Fri, 12 Apr 2019 07:52:28 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190408212312.86791-1-joe.slater@windriver.com>
+In-Reply-To: <20190408212312.86791-1-joe.slater@windriver.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Fri, 12 Apr 2019 10:52:17 -0400
+Message-ID: <CADkTA4Mdw2ii0mMm1fJnTSwXT8pHN0e7wCv4W_XeicofxegiWg@mail.gmail.com>
+To: Joe Slater <joe.slater@windriver.com>
+Cc: meta-virtualization@yoctoproject.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-virtualization] [meta-virt][m-c-s][v2][PATCH 1/1] libibverbs: do not try to build for arm 32 bit or any mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 11:20:49 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 14:52:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-libx11 was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'libforms', 'libx11']
+Thanks Joe.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2 is now merged.
 
-diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-index f86d7c16bf..5d33185900 100644
---- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-+++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c
- 
- inherit autotools distro_features_check
- 
--REQUIRED_DISTRO_FEATURES = "opengl"
-+REQUIRED_DISTRO_FEATURES = "opengl x11"
- 
- S = "${WORKDIR}/xforms-${PV}"
- 
+Bruce
+
+On Mon, Apr 8, 2019 at 5:23 PM Joe Slater <joe.slater@windriver.com> wrote:
+>
+> arch.h does not contain macros for 32 bit arm or any mips arch.
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  recipes-extended/libibverbs/libibverbs_1.2.1.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/recipes-extended/libibverbs/libibverbs_1.2.1.bb b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
+> index dd74522..fa7eee6 100644
+> --- a/recipes-extended/libibverbs/libibverbs_1.2.1.bb
+> +++ b/recipes-extended/libibverbs/libibverbs_1.2.1.bb
+> @@ -29,3 +29,6 @@ do_install_append() {
+>
+>  PROVIDES = "virtual/libibverbs"
+>  RPROVIDES_${PN} = "virtual/libibverbs"
+> +
+> +COMPATIBLE_HOST_mipsarch = "none"
+> +COMPATIBLE_HOST_arm = "none"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> meta-virtualization mailing list
+> meta-virtualization@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-virtualization
+
+
+
 -- 
-2.17.1
-
+- Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end
+- "Use the force Harry" - Gandalf, Star Trek II
 
