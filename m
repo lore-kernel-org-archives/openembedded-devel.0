@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B6517D9FA
+	by mail.openembedded.org (Postfix) with ESMTP id 554347DB4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 03:07:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,339,1549900800"; d="scan'208";a="59090391"
+	Fri, 12 Apr 2019 03:21:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,339,1549900800"; d="scan'208";a="59091586"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 11:07:07 +0800
+	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 11:21:50 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 440F94CD8183
+	by cn.fujitsu.com (Postfix) with ESMTP id C75504CD819D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 11:07:07 +0800 (CST)
+	Fri, 12 Apr 2019 11:21:54 +0800 (CST)
 Received: from localhost.local (10.167.225.84) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 11:07:05 +0800
+	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 11:21:52 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Apr 2019 11:07:51 +0800
-Message-ID: <20190412030751.28438-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 12 Apr 2019 11:22:39 +0800
+Message-ID: <20190412032239.8659-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: 440F94CD8183.A78FC
+X-yoursite-MailScanner-ID: C75504CD819D.A7AFA
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCHv2] python-certifi: upgrade 2018.8.13 -> 2019.3.9
+Subject: [meta-python] [PATCHv2] python-beabutifulsoup4: upgrade 4.6.0 -> 4.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 03:07:07 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 03:21:51 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-certifi_2018.8.13.bb to python-certifi_2019.3.9.bb.
+-Upgrade from python-beautifulsoup4_4.6.0.bb to python-beautifulsoup4_4.7.1.bb.
 
--Upgrade from python3-certifi_2018.8.13.bb to python3-certifi_2019.3.9.bb.
+-Upgrade from python3-beautifulsoup4_4.6.0.bb to python3-beautifulsoup4_4.7.1.bb.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-certifi.inc        | 4 ++--
- ...python-certifi_2018.8.13.bb => python-certifi_2019.3.9.bb} | 0
- ...thon3-certifi_2018.8.13.bb => python3-certifi_2019.3.9.bb} | 0
+ meta-python/recipes-devtools/python/python-beautifulsoup4.inc | 4 ++--
+ ...beautifulsoup4_4.6.0.bb => python-beautifulsoup4_4.7.1.bb} | 0
+ ...eautifulsoup4_4.6.0.bb => python3-beautifulsoup4_4.7.1.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-certifi_2018.8.13.bb => python-certifi_2019.3.9.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-certifi_2018.8.13.bb => python3-certifi_2019.3.9.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-beautifulsoup4_4.6.0.bb => python-beautifulsoup4_4.7.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.6.0.bb => python3-beautifulsoup4_4.7.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
-index c7955c57d..9d99b3475 100644
---- a/meta-python/recipes-devtools/python/python-certifi.inc
-+++ b/meta-python/recipes-devtools/python/python-certifi.inc
-@@ -7,7 +7,7 @@ HOMEPAGE = " http://certifi.io/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+index d60d987ca..a33d8f4be 100644
+--- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
  
--SRC_URI[md5sum] = "a84571995a209dcd00a1702a74302b88"
--SRC_URI[sha256sum] = "4c1d68a1408dd090d2f3a869aa94c3947cc1d967821d1ed303208c9f41f0f2f4"
-+SRC_URI[md5sum] = "76381d19d0a1171fecb2d1002b81424e"
-+SRC_URI[sha256sum] = "b26104d6835d1f5e49452a26eb2ff87fe7090b89dfcaee5ea2212697e1e1d7ae"
+-SRC_URI[md5sum] = "c17714d0f91a23b708a592cb3c697728"
+-SRC_URI[sha256sum] = "808b6ac932dccb0a4126558f7dfdcf41710dd44a4ef497a0bb59a77f9f078e89"
++SRC_URI[md5sum] = "c71f53fcb2580c376ab7b010a9178983"
++SRC_URI[sha256sum] = "945065979fb8529dd2f37dbb58f00b661bdbcbebf954f93b32fdf5263ef35348"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb b/meta-python/recipes-devtools/python/python-certifi_2019.3.9.bb
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.7.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb
-rename to meta-python/recipes-devtools/python/python-certifi_2019.3.9.bb
-diff --git a/meta-python/recipes-devtools/python/python3-certifi_2018.8.13.bb b/meta-python/recipes-devtools/python/python3-certifi_2019.3.9.bb
+rename from meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb
+rename to meta-python/recipes-devtools/python/python-beautifulsoup4_4.7.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.7.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-certifi_2018.8.13.bb
-rename to meta-python/recipes-devtools/python/python3-certifi_2019.3.9.bb
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.7.1.bb
 -- 
 2.20.1
 
