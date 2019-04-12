@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C528E7DAF9
+	by mail.openembedded.org (Postfix) with ESMTP id D945B7DB36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 02:47:48 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,339,1549900800"; d="scan'208";a="59088673"
+	Fri, 12 Apr 2019 02:56:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,339,1549900800"; d="scan'208";a="59089394"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 10:47:48 +0800
+	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 10:56:58 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E679A4CD7BAF
+	by cn.fujitsu.com (Postfix) with ESMTP id E49C64CD8448
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 10:47:46 +0800 (CST)
+	Fri, 12 Apr 2019 10:57:01 +0800 (CST)
 Received: from localhost.local (10.167.225.84) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 10:47:44 +0800
+	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 10:57:00 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Apr 2019 10:48:31 +0800
-Message-ID: <20190412024831.23191-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 12 Apr 2019 10:57:46 +0800
+Message-ID: <20190412025746.26023-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: E679A4CD7BAF.ABB59
+X-yoursite-MailScanner-ID: E49C64CD8448.A8C75
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCHv2] python-cffi: upgrade 1.11.5 -> 1.12.2
+Subject: [meta-python] [PATCHv2] python-attrs: upgrade 18.1.0 -> 19.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 02:47:49 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 02:56:58 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-cffi_1.11.5.bb to python-cffi_1.12.2.bb.
+-Upgrade from python-attrs_18.1.0.bb to python-attrs_19.1.0.bb.
 
--Upgrade from python3-cffi_1.11.5.bb to python3-cffi_1.12.2.bb.
+-Upgrade from python3-attrs_18.1.0.bb to python3-attrs_19.1.0.bb.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-cffi.inc           | 4 ++--
- .../python/{python-cffi_1.11.5.bb => python-cffi_1.12.2.bb}   | 0
- .../python/{python3-cffi_1.11.5.bb => python3-cffi_1.12.2.bb} | 0
+ meta-python/recipes-devtools/python/python-attrs.inc          | 4 ++--
+ .../python/{python-attrs_18.1.0.bb => python-attrs_19.1.0.bb} | 0
+ .../{python3-attrs_18.1.0.bb => python3-attrs_19.1.0.bb}      | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_1.11.5.bb => python-cffi_1.12.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cffi_1.11.5.bb => python3-cffi_1.12.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-attrs_18.1.0.bb => python-attrs_19.1.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-attrs_18.1.0.bb => python3-attrs_19.1.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-index e6071eeca..069aba008 100644
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ b/meta-python/recipes-devtools/python/python-cffi.inc
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
+index d0b5697cb..1f767ba19 100644
+--- a/meta-python/recipes-devtools/python/python-attrs.inc
++++ b/meta-python/recipes-devtools/python/python-attrs.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.attrs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
  
--SRC_URI[md5sum] = "ac8492f4ad952360737413e82d661908"
--SRC_URI[sha256sum] = "e90f17980e6ab0f3c2f3730e56d1fe9bcba1891eeea58966e89d352492cc74f4"
-+SRC_URI[md5sum] = "4d7dcb6c7c738c15d2ece9bd4c5f86da"
-+SRC_URI[sha256sum] = "e113878a446c6228669144ae8a56e268c91b7f1fafae927adc4879d9849e0ea7"
+-SRC_URI[sha256sum] = "e0d0eb91441a3b53dab4d9b743eafc1ac44476296a2053b6ca3af0b139faf87b"
+-SRC_URI[md5sum] = "3f3f3e0750dab74cfa1dc8b0fd7a5f86"
++SRC_URI[sha256sum] = "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"
++SRC_URI[md5sum] = "2be7bce157988928f5ff2bb50a0b510d"
  
- RDEPENDS_${PN}_class-target = " \
-     ${PYTHON_PN}-ctypes \
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.11.5.bb b/meta-python/recipes-devtools/python/python-cffi_1.12.2.bb
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-attrs_18.1.0.bb b/meta-python/recipes-devtools/python/python-attrs_19.1.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cffi_1.11.5.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.12.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.11.5.bb b/meta-python/recipes-devtools/python/python3-cffi_1.12.2.bb
+rename from meta-python/recipes-devtools/python/python-attrs_18.1.0.bb
+rename to meta-python/recipes-devtools/python/python-attrs_19.1.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-attrs_18.1.0.bb b/meta-python/recipes-devtools/python/python3-attrs_19.1.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cffi_1.11.5.bb
-rename to meta-python/recipes-devtools/python/python3-cffi_1.12.2.bb
+rename from meta-python/recipes-devtools/python/python3-attrs_18.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-attrs_19.1.0.bb
 -- 
 2.20.1
 
