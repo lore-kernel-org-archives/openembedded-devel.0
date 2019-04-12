@@ -1,47 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 387267DBC8
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+	[209.85.128.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E0437DBD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 11:17:15 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id z24so10601539wmi.5
+	Fri, 12 Apr 2019 11:17:55 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id w15so10526901wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 04:17:16 -0700 (PDT)
+	Fri, 12 Apr 2019 04:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=JsFKvuPi3TDAZNk1ggdmTDk2vCOyXflSgayxbL6Egvw=;
-	b=veFC47VekrnohzqommBEjfuYBNEOwt06iQcj+XCVHoI0vBYq4eZIaKbNxmWcykwqAU
-	/X3/Voa23A8XIf+S0hV3FGjOv91U6XFcj2ZPmRhAFlZM97O26zcqomvG+K1giHy5R6mR
-	Wp7Mh1Kv8M8ozjOQA217yskhAhlZMB+ZRq3TooJ06n7dxk1Rc4KdMJlW+ssoLcrm5d54
-	cZZzcsOhv9LOaxzDuKmcCfR6WkUC/HDqHH7mZSBcILM1p1SsT8ykWsa45W9jjwqMOaJ8
-	OlQg6no1OP1nJrbeS+R5X+lYcOAVmGhxLaA/uW0ivWUIWq5KuxdYmKnVQfSMV1eVJADs
-	F0Fw==
+	:cc; bh=uW8eKDsjnjv3rSfdqBLYnWeIINGGu/DO4NLjiSEPFZ8=;
+	b=adZF0c0L5KyInplsIrhc/4ME/kC1K5FpDQH+nJY8lfBodZyy3IFUkv2JWvYEV/CpAw
+	M1B4gkYhoHwgHUH7eA7BdUXk8MrKeoGf1trM8BR6oc5mDR9J42HFdhwElq4FBp5rkoz8
+	blFmwmVv66q5bEOKyFUhPm5hidlL4RhBDbxkD/t3uXPEti+2kt2lUlI067NnL4Tos3RU
+	UVPaKz1DxR4fQ9IjUB9PogIgRag/RHk4bFeMhTTqYlz5eXoHqnvi5rBlbLSb0If4/8iB
+	qTCS/pJn6rvQ5Kwr8VD5muOS/82d0aPjvdtPZcashukN/nPD6EjTws7zPA1Qu9J7Tke6
+	OUKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=JsFKvuPi3TDAZNk1ggdmTDk2vCOyXflSgayxbL6Egvw=;
-	b=AY60KTVZTLH1+jchWm4jW2JBpkPdZfxxm3B/1CuCke4NNJmO3hLqlDphULClvpObOp
-	x7YNwWosmTDaheeCETIE1+6K0HYaSRrtaZbQ9TcfxRA4c7Hat2BKyxS5FiV7MI6SjS+U
-	RSaiWNrF9cPXj0Bn98sEzYnTO+5qQDmCf9sNcWvJiLvQq+ba1KARieoxkJgrAi+k/x+R
-	QQpEHGN/tmgo6oMIykMYtk6uFYPNTRtYsZmYeU0EvH4QWizmM29d9But+lWdJdNB4sUU
-	hmsEswFpUEUJEIP+gi9flPST2vnRxiTqkGxspPXdnn8eYoq0d3uCNBHKvC4Jvq16rWsP
-	Up1Q==
-X-Gm-Message-State: APjAAAXhzds2GK7zDgMlNIFT7wkGgmBQYDiVbTJrLkQAdvStW3jzcSW5
-	faL9kZl08h6QRbvze9JcFPOo2HKLmJHPQ0FF7p4=
-X-Google-Smtp-Source: APXvYqz6LuqUz/KYoNnvSphaOputZRQ4cUfD3IgHJS0/G4OsYDVfQSA2S2fcILos1gCg1qJ/eW/titQVonwE5+Wk1NQ=
-X-Received: by 2002:a1c:2d0e:: with SMTP id t14mr10025556wmt.33.1555067835920; 
-	Fri, 12 Apr 2019 04:17:15 -0700 (PDT)
+	bh=uW8eKDsjnjv3rSfdqBLYnWeIINGGu/DO4NLjiSEPFZ8=;
+	b=AbPVy4d5rGWwdNJFX8fQ3tvzqf6bwg8ZlfKfACVIwUe2PqW37ePf1w9CazA0Pm/5cZ
+	CLOah/OEVWoDqqLJlQFzqRKOs35ZLMXJ7N122QDE8y8fdxJc/Z1aZE9/5H8DBKE31874
+	a2yf+zC/gKs4xwo9AOqm45D+170qUjjLynjBMZiORn+Tpv0Y3dQzKPlGLFLVXahZuJZX
+	EitbyPfEqflNglECkMTiNfBNasV+aAOc+Cjzc3i2J/80u5mrI4o2rxfPBA1o9XmE+S6Z
+	h41RGX4hchV3p+HVVLwo+nBPcCw7hFjrQqi+43Yo8GzGFuoSoosxGFfWK1mX3fPqOzFU
+	3+1Q==
+X-Gm-Message-State: APjAAAX/dCjsGHXWDAnn7LAP4tjgpAeb6TPIiTuuMJmNeWYcRg3bvIaf
+	hj6cmw6HgKGbs1g1NVYlslF1cZcNzlqelEj28BX9Ig==
+X-Google-Smtp-Source: APXvYqzNPNLu6wynwaloJpUH9qdjUejH0UKyC4sKSrv4kMs+H+NCHHSRYrPh0qglG38CER2NbEm5Av5wHr9tfcwU7xU=
+X-Received: by 2002:a1c:c504:: with SMTP id v4mr11040688wmf.45.1555067876301; 
+	Fri, 12 Apr 2019 04:17:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
+References: <1551014332-1608-1-git-send-email-tuanha@viosoft.com>
+In-Reply-To: <1551014332-1608-1-git-send-email-tuanha@viosoft.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 12 Apr 2019 13:17:11 +0200
-Message-ID: <CA+chaQe1b7cvszjtJpwBFn9a3-GZS_i8M+wSk9s25KXVxhLTUA@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
+Date: Fri, 12 Apr 2019 13:17:51 +0200
+Message-ID: <CA+chaQdZd37tn4NHCKrjm0YtpB_YDQtjoPNBSMLw=51HicS15Q@mail.gmail.com>
+To: Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] ftgl: package requires openql add DISTRO_CHECK
+Subject: Re: [meta-oe][PATCH] libforms: add version 1.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +54,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 11:17:15 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 11:17:56 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Shouldn't this be opengl _and_ x11 like freeglut?
+It depends on libx11, so it should have x11 in REQUIRED_DISTRO_FEATURES,
+will send a fix shortly.
 
-freeglut was skipped: missing required distro feature 'x11' (not in
-DISTRO_FEATURES)
-ERROR: Required build target 'meta-world-pkgdata' has no buildable
-providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'ftgl',
-'freeglut']
+On Sun, Feb 24, 2019 at 2:19 PM Hoang Anh Tuan <tuanhoanganh.dev@gmail.com>
+wrote:
 
-On Tue, Mar 26, 2019 at 3:19 AM Armin Kuster <akuster808@gmail.com> wrote:
-
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> Signed-off-by: Hoang Anh Tuan <tuanha@viosoft.com>
 > ---
->  meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  .../files/add-absolute-path-for-include-dir.patch  | 12 +++++++++++
+>  .../libforms/files/fix-link-to-xforms-man.patch    | 12 +++++++++++
+>  .../libforms/files/fix-path-fdesign_LDADD.patch    | 12 +++++++++++
+>  .../recipes-graphics/libforms/libforms_1.2.3.bb    | 24
+> ++++++++++++++++++++++
+>  4 files changed, 60 insertions(+)
+>  create mode 100644
+> meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
+>  create mode 100644
+> meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
+>  create mode 100644
+> meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
+>  create mode 100644 meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
 >
-> diff --git a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-> b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-> index b291159..c5eaf42 100644
-> --- a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-> +++ b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-> @@ -3,7 +3,9 @@ HOMEPAGE = "https://sourceforge.net/projects/ftgl/"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=527a83e92c7bf363025380eec05df6e4"
->
-> -inherit autotools pkgconfig
-> +inherit autotools pkgconfig distro_features_check
+> diff --git
+> a/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
+> b/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
+> new file mode 100644
+> index 0000000..db400f7
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-graphics/libforms/files/add-absolute-path-for-include-dir.patch
+> @@ -0,0 +1,12 @@
+> +diff -Naur xforms-1.2.3.orig/fdesign/Makefile.am
+> xforms-1.2.3/fdesign/Makefile.am
+> +--- xforms-1.2.3.orig/fdesign/Makefile.am      2019-02-24
+> 12:58:51.968645873 +0000
+> ++++ xforms-1.2.3/fdesign/Makefile.am   2019-02-24 13:00:48.500635163 +0000
+> +@@ -11,7 +11,7 @@
+> + fdesign.1:
+> +       cp -p $(srcdir)/fdesign.man fdesign.1
 > +
-> +REQUIRED_DISTRO_FEATURES = "opengl"
->
->  DEPENDS += " \
->      freetype \
+> +-INCLUDES = -I./xpm $(X_CFLAGS)
+> ++INCLUDES = -I./xpm -I$(srcdir)/xpm $(X_CFLAGS)
+> +
+> + bin_PROGRAMS = fdesign
+> +
+> diff --git
+> a/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
+> b/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
+> new file mode 100644
+> index 0000000..c95bd18
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libforms/files/fix-link-to-xforms-man.patch
+> @@ -0,0 +1,12 @@
+> +diff -Naur xforms-1.2.3.orig/lib/Makefile.am xforms-1.2.3/lib/Makefile.am
+> +--- xforms-1.2.3.orig/lib/Makefile.am  2019-02-24 12:53:58.340678373 +0000
+> ++++ xforms-1.2.3/lib/Makefile.am       2019-02-24 12:54:33.096674102 +0000
+> +@@ -25,7 +25,7 @@
+> + man_MANS = xforms.5
+> +
+> + xforms.5:
+> +-      cp -p ./xforms.man xforms.5
+> ++      cp -p $(srcdir)/xforms.man xforms.5
+> +
+> + libforms_la_SOURCES = \
+> +       align.c \
+> diff --git
+> a/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
+> b/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
+> new file mode 100644
+> index 0000000..73956de
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libforms/files/fix-path-fdesign_LDADD.patch
+> @@ -0,0 +1,12 @@
+> +diff -Naur xforms-1.2.3.orig/fdesign/Makefile.am
+> xforms-1.2.3/fdesign/Makefile.am
+> +--- xforms-1.2.3.orig/fdesign/Makefile.am      2019-02-24
+> 13:08:48.412603250 +0000
+> ++++ xforms-1.2.3/fdesign/Makefile.am   2019-02-24 13:09:18.412601874 +0000
+> +@@ -15,7 +15,7 @@
+> +
+> + bin_PROGRAMS = fdesign
+> +
+> +-fdesign_LDADD = $(top_srcdir)/lib/libforms.la $(X_LIBS) $(X_PRE_LIBS)
+> $(XPM_LIB) -lX11 $(LIBS) $(X_EXTRA_LIBS)
+> ++fdesign_LDADD = $(top_builddir)/lib/libforms.la $(X_LIBS) $(X_PRE_LIBS)
+> $(XPM_LIB) -lX11 $(LIBS) $(X_EXTRA_LIBS)
+> +
+> + fdesign_SOURCES = \
+> +       fd_attribs.c \
+> diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+> b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+> new file mode 100644
+> index 0000000..8a214d1
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+> @@ -0,0 +1,24 @@
+> +DESCRIPTION = "The XForms graphical interface widget library   "
+> +HOMEPAGE = "http://savannah.nongnu.org/projects/xforms/"
+> +PR = "r0"
+> +
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM =
+> "file://COPYING.LIB;md5=ade9a053df81f5b9408d2f4f5546df86"
+> +
+> +SRC_URI = "
+> http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.gz \
+> +           file://fix-link-to-xforms-man.patch \
+> +           file://add-absolute-path-for-include-dir.patch \
+> +           file://fix-path-fdesign_LDADD.patch \
+> +          "
+> +
+> +SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
+> +SRC_URI[sha256sum] =
+> "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c2def61"
+> +
+> +inherit autotools
+> +
+> +S = "${WORKDIR}/xforms-${PV}"
+> +
+> +DEPENDS = "libxpm jpeg libx11 mesa"
+> +RDEPENDS_${PN} = "bash"
+> +
+> +EXTRA_OECONF = "--with-extra-inc=${S}/lib"
 > --
 > 2.7.4
 >
