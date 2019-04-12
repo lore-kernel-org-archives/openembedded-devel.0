@@ -1,30 +1,47 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BC127DBD1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 387267DBC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 09:17:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,340,1549900800"; d="scan'208";a="59120024"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2019 17:17:32 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6DEE54CD8454
+	Fri, 12 Apr 2019 11:17:15 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id z24so10601539wmi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2019 17:17:36 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 12 Apr 2019 17:17:32 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 13 Apr 2019 02:16:41 +0800
-Message-ID: <1555093001-41848-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Fri, 12 Apr 2019 04:17:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=JsFKvuPi3TDAZNk1ggdmTDk2vCOyXflSgayxbL6Egvw=;
+	b=veFC47VekrnohzqommBEjfuYBNEOwt06iQcj+XCVHoI0vBYq4eZIaKbNxmWcykwqAU
+	/X3/Voa23A8XIf+S0hV3FGjOv91U6XFcj2ZPmRhAFlZM97O26zcqomvG+K1giHy5R6mR
+	Wp7Mh1Kv8M8ozjOQA217yskhAhlZMB+ZRq3TooJ06n7dxk1Rc4KdMJlW+ssoLcrm5d54
+	cZZzcsOhv9LOaxzDuKmcCfR6WkUC/HDqHH7mZSBcILM1p1SsT8ykWsa45W9jjwqMOaJ8
+	OlQg6no1OP1nJrbeS+R5X+lYcOAVmGhxLaA/uW0ivWUIWq5KuxdYmKnVQfSMV1eVJADs
+	F0Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=JsFKvuPi3TDAZNk1ggdmTDk2vCOyXflSgayxbL6Egvw=;
+	b=AY60KTVZTLH1+jchWm4jW2JBpkPdZfxxm3B/1CuCke4NNJmO3hLqlDphULClvpObOp
+	x7YNwWosmTDaheeCETIE1+6K0HYaSRrtaZbQ9TcfxRA4c7Hat2BKyxS5FiV7MI6SjS+U
+	RSaiWNrF9cPXj0Bn98sEzYnTO+5qQDmCf9sNcWvJiLvQq+ba1KARieoxkJgrAi+k/x+R
+	QQpEHGN/tmgo6oMIykMYtk6uFYPNTRtYsZmYeU0EvH4QWizmM29d9But+lWdJdNB4sUU
+	hmsEswFpUEUJEIP+gi9flPST2vnRxiTqkGxspPXdnn8eYoq0d3uCNBHKvC4Jvq16rWsP
+	Up1Q==
+X-Gm-Message-State: APjAAAXhzds2GK7zDgMlNIFT7wkGgmBQYDiVbTJrLkQAdvStW3jzcSW5
+	faL9kZl08h6QRbvze9JcFPOo2HKLmJHPQ0FF7p4=
+X-Google-Smtp-Source: APXvYqz6LuqUz/KYoNnvSphaOputZRQ4cUfD3IgHJS0/G4OsYDVfQSA2S2fcILos1gCg1qJ/eW/titQVonwE5+Wk1NQ=
+X-Received: by 2002:a1c:2d0e:: with SMTP id t14mr10025556wmt.33.1555067835920; 
+	Fri, 12 Apr 2019 04:17:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: 6DEE54CD8454.A9F8D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][patch v2] dnf-plugin-tui: new recipe
+References: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
+In-Reply-To: <1553566774-8056-1-git-send-email-akuster808@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 12 Apr 2019 13:17:11 +0200
+Message-ID: <CA+chaQe1b7cvszjtJpwBFn9a3-GZS_i8M+wSk9s25KXVxhLTUA@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/2] ftgl: package requires openql add DISTRO_CHECK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,85 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 09:17:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Apr 2019 11:17:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This dnf plugin aims to supply a tui interface for user to manage
-packages. It has features as following:
-  1. Add new command dnf tui --init to make dnf to work on host.
-  2. Text-based user interface for dnf.
-  3. Manage SPDX files.
-  4. Manage SRPM files.
-  5. Add installation samples for dnf.
+Shouldn't this be opengl _and_ x11 like freeglut?
 
-More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+freeglut was skipped: missing required distro feature 'x11' (not in
+DISTRO_FEATURES)
+ERROR: Required build target 'meta-world-pkgdata' has no buildable
+providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'ftgl',
+'freeglut']
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++++++++++
- .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
- create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+On Tue, Mar 26, 2019 at 3:19 AM Armin Kuster <akuster808@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-new file mode 100644
-index 0000000..e891868
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
-+SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
-+PV = "1.0"
-+
-+SRC_URI_append_class-target = "file://oe-remote.repo.sample"
-+
-+inherit distutils3-base
-+
-+S = "${WORKDIR}/git"
-+
-+do_install_append() {
-+        install -d ${D}${datadir}/dnf
-+        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
-+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-+        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-+        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
-+            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
-+        done
-+}
-+
-+do_install_append_class-target() {
-+        install -d ${D}${sysconfdir}/yum.repos.d
-+        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
-+}
-+
-+FILES_${PN} += "${datadir}/dnf"
-+
-+RDEPENDS_${PN} += " \
-+  dnf \
-+  libnewt-python \
-+  "
-+
-+BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
-new file mode 100644
-index 0000000..6c4502e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
-@@ -0,0 +1,5 @@
-+[base]
-+name=myrepo
-+baseurl=http://127.0.0.1/oe_repo/
-+enabled=1
-+gpgcheck=0
--- 
-1.8.3.1
-
-
-
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
+> b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
+> index b291159..c5eaf42 100644
+> --- a/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
+> +++ b/meta-oe/recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
+> @@ -3,7 +3,9 @@ HOMEPAGE = "https://sourceforge.net/projects/ftgl/"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=527a83e92c7bf363025380eec05df6e4"
+>
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig distro_features_check
+> +
+> +REQUIRED_DISTRO_FEATURES = "opengl"
+>
+>  DEPENDS += " \
+>      freetype \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
