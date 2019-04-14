@@ -1,27 +1,28 @@
 Return-Path: <robert.joslyn@redrectangle.org>
-Received: from mslow2.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 038577DA6B
+X-Greylist: delayed 26246 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 14 Apr 2019 23:35:07 UTC
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
+	[217.70.183.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C4ABC7D913
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2019 18:16:30 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (unknown [217.70.183.200])
-	by mslow2.mail.gandi.net (Postfix) with ESMTP id 557713A5023
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2019 16:17:48 +0000 (UTC)
-X-Originating-IP: 50.37.87.235
-Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
-	[50.37.87.235])
+	Sun, 14 Apr 2019 23:35:07 +0000 (UTC)
+X-Originating-IP: 64.126.170.184
+Received: from [192.168.1.114] (w170184.wireless.fsr.net [64.126.170.184])
 	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay7-d.mail.gandi.net (Postfix) with ESMTPSA id 6599420004;
-	Sun, 14 Apr 2019 16:17:46 +0000 (UTC)
+	by relay2-d.mail.gandi.net (Postfix) with ESMTPSA id F1D0D40006;
+	Sun, 14 Apr 2019 23:35:06 +0000 (UTC)
+Message-ID: <09fe191bae6b2634f6cf4137ea4326b011e78900.camel@redrectangle.org>
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Apr 2019 09:17:23 -0700
-Message-Id: <20190414161725.21617-3-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190414161725.21617-1-robert.joslyn@redrectangle.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 14 Apr 2019 16:35:02 -0700
+In-Reply-To: <CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
 References: <20190414161725.21617-1-robert.joslyn@redrectangle.org>
+	<20190414161725.21617-4-robert.joslyn@redrectangle.org>
+	<CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
+User-Agent: Evolution 3.30.5 
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/5] gpm: Generate documentation
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 4/5] gpm: Remove duplicate definition of _GNU_SOURCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,56 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2019 18:16:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 14 Apr 2019 23:35:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Remove patch disabling documentation, since it builds and is packaged
-properly.
+On Sun, 2019-04-14 at 11:15 -0700, Khem Raj wrote:
+> 
+> 
+> On Sun, Apr 14, 2019 at 11:09 AM Robert Joslyn <
+> robert.joslyn@redrectangle.org> wrote:
+> > The Makefile already sets -D_GNU_SOURCE in CPPFLAGS, no need to
+> > patch it
+> > in again.
+> 
+> Have you build tested it with musl ?
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
----
- meta-oe/recipes-support/gpm/gpm/no-docs.patch | 18 ------------------
- meta-oe/recipes-support/gpm/gpm_git.bb        |  1 -
- 2 files changed, 19 deletions(-)
- delete mode 100644 meta-oe/recipes-support/gpm/gpm/no-docs.patch
+Yes, this builds with musl, but I have not run tested. I can throw a
+musl build on a board tomorrow to make sure it runs on hardware.
 
-diff --git a/meta-oe/recipes-support/gpm/gpm/no-docs.patch b/meta-oe/recipes-support/gpm/gpm/no-docs.patch
-deleted file mode 100644
-index 3faef84ee..000000000
---- a/meta-oe/recipes-support/gpm/gpm/no-docs.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--
--#
--# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
--#
--
--Index: gpm-1.99.7/Makefile.in
--===================================================================
----- gpm-1.99.7.orig/Makefile.in	2008-07-24 03:36:35.000000000 -0700
--+++ gpm-1.99.7/Makefile.in	2010-06-22 18:28:45.269507001 -0700
--@@ -19,7 +19,7 @@
-- # user-overridable flags, but it's also all the implicit rule looks at.
-- # missing ?
-- 
---SUBDIRS = src doc contrib
--+SUBDIRS = src
-- 
-- 
-- ### simple, but effective rules
-diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
-index fa0307038..012dceb23 100644
---- a/meta-oe/recipes-support/gpm/gpm_git.bb
-+++ b/meta-oe/recipes-support/gpm/gpm_git.bb
-@@ -13,7 +13,6 @@ DEPENDS = "ncurses bison-native"
- 
- SRC_URI = "git://github.com/telmich/gpm;protocol=git \
-            file://init \
--           file://no-docs.patch \
-            file://processcreds.patch \
-            file://gpm.service.in \
-            file://0001-Use-sigemptyset-API-instead-of-__sigemptyset.patch \
--- 
-2.21.0
+Thanks,
+Robert
 
 
