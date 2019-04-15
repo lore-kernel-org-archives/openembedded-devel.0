@@ -1,28 +1,23 @@
-Return-Path: <robert.joslyn@redrectangle.org>
-X-Greylist: delayed 26246 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 14 Apr 2019 23:35:07 UTC
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
-	[217.70.183.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C4ABC7D913
+Return-Path: <aaron.chun.yew.chan@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id A91AE7D89E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2019 23:35:07 +0000 (UTC)
-X-Originating-IP: 64.126.170.184
-Received: from [192.168.1.114] (w170184.wireless.fsr.net [64.126.170.184])
-	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay2-d.mail.gandi.net (Postfix) with ESMTPSA id F1D0D40006;
-	Sun, 14 Apr 2019 23:35:06 +0000 (UTC)
-Message-ID: <09fe191bae6b2634f6cf4137ea4326b011e78900.camel@redrectangle.org>
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 14 Apr 2019 16:35:02 -0700
-In-Reply-To: <CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
-References: <20190414161725.21617-1-robert.joslyn@redrectangle.org>
-	<20190414161725.21617-4-robert.joslyn@redrectangle.org>
-	<CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
-User-Agent: Evolution 3.30.5 
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/5] gpm: Remove duplicate definition of _GNU_SOURCE
+	Mon, 15 Apr 2019 01:37:12 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	14 Apr 2019 18:37:13 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.60,351,1549958400"; d="scan'208";a="150847408"
+Received: from centaurus01.png.intel.com ([10.221.183.13])
+	by orsmga002.jf.intel.com with ESMTP; 14 Apr 2019 18:37:12 -0700
+From: aaron.chun.yew.chan@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Apr 2019 09:37:50 +0800
+Message-Id: <20190415013750.59316-1-aaron.chun.yew.chan@intel.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] php: Fix libzip extension
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,25 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2019 23:35:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Apr 2019 01:37:12 -0000
 
-On Sun, 2019-04-14 at 11:15 -0700, Khem Raj wrote:
-> 
-> 
-> On Sun, Apr 14, 2019 at 11:09 AM Robert Joslyn <
-> robert.joslyn@redrectangle.org> wrote:
-> > The Makefile already sets -D_GNU_SOURCE in CPPFLAGS, no need to
-> > patch it
-> > in again.
-> 
-> Have you build tested it with musl ?
+From: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
 
-Yes, this builds with musl, but I have not run tested. I can throw a
-musl build on a board tomorrow to make sure it runs on hardware.
+Phoronix Test Suite 8.x requires zlib and zip extension in PHP 7.x
 
-Thanks,
-Robert
+Signed-off-by: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
+---
+ meta-oe/recipes-devtools/php/php.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 6f893ad85..d2cd05f8e 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -47,7 +47,6 @@ EXTRA_OECONF = "--enable-mbstring \
+                 --enable-fpm \
+                 --with-libdir=${baselib} \
+                 --with-gettext=${STAGING_LIBDIR}/.. \
+-                --with-libzip=${STAGING_LIBDIR}/.. \
+                 --with-iconv=${STAGING_LIBDIR}/.. \
+                 --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
+                 --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
+@@ -64,7 +63,7 @@ EXTRA_OECONF_class-native = " \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ 
+-PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
++PACKAGECONFIG ??= "zip mysql sqlite3 imap opcache openssl \
+                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+ "
+ PACKAGECONFIG_class-native = ""
+@@ -90,6 +89,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
+ PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
++PACKAGECONFIG[zip] = "--enable-zip --with-libzip=${STAGING_LIBDIR}/..,--disable-zip, libzip"
+ 
+ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+-- 
+2.17.1
 
 
