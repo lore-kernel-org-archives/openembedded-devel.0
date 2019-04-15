@@ -1,25 +1,46 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E36027D8EF
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 333DD7D7A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 06:59:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x3F6wlVY031580
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 15 Apr 2019 10:39:14 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id u12so14090634iop.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2019 23:58:57 -0700
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Sun, 14 Apr 2019 23:58:36 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Apr 2019 14:58:34 +0800
-Message-ID: <1555311514-12809-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 15 Apr 2019 03:39:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=m9EgUBRecBztUDoKzSN3j2ZL/Of0Ly2IxyOmnI9TAQo=;
+	b=V1Q0QjyeKGAeVW0GfMZPLsFmoX912x/Pnh95zcZpCXai017B8gED20h7n3gMnuLonM
+	WOlKJ3eVVab8qbXXTNCJ19+E9zKHN61upriYo/yqJ42jml4s8CJuGUi1VN84kDu+/WNZ
+	hCf0T8qLQ++AlLowPOqUnNSgRcJQUSOZnVb4ODaxJdC3HIqqqaubu+xq9czpCACHXF+9
+	LJ4OO3FSNZJHTw/nahQmyqKwuu8zJjGGA6pnVYWbd33VmxDme2oxzFvR9p/pWJI5QgEJ
+	w4lRQMZHDr4C9akujhs2Ogb2xRUAGvLeVyHF4eA0SyhwsdxHD5LyDz7w5+CG234GBq6N
+	9ALg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=m9EgUBRecBztUDoKzSN3j2ZL/Of0Ly2IxyOmnI9TAQo=;
+	b=o7nkcDvisT9MvDQAdBB19GSeZt/KTO2mW+hhofF7NAP2sLRszaFr9fGW1QvjpNSYuy
+	LHoplfQE0njefi6DOehTdvEUWxGUZA53cJHhBNs6R18wsKRdSRDAGzT0wsZgywV4WcDI
+	auSWkx9AOmywhhGij3GMk524f7cIvBaxQxDwyoNRvUYyTVl3izwiMSwzKwG5CbeAsZD+
+	2LvY1C5vRXuHnLkGcVtxw5uki/MVvsn0Za2tAajptXIjkE7HApWuKRGMbuRMBh1TNWwQ
+	tTumidB92XlW9Ax1IA0nCHuRQFEhe5o83M2P+8KDpe0Cf29oUiliIA6zpSAdXPxPecAG
+	zz0g==
+X-Gm-Message-State: APjAAAWdOPpIXEGrU4ppxvpVB1EgG0Sx7NXBu1J7jdU3ljI3pGdAcXHQ
+	zEoWMMvThmlTSbuRm5s+2auVZEQrAuuAYuNMqN8=
+X-Google-Smtp-Source: APXvYqw6KOiJRRzDmXU4PhzSEoykKTgggEvtAT2qf2EXRYlfP7M4/otxfN0pBWVr7g7fF1G91sQnCVmFeAnrqAMc2ck=
+X-Received: by 2002:a6b:e50d:: with SMTP id y13mr6332538ioc.142.1555324755138; 
+	Mon, 15 Apr 2019 03:39:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH] netkit-rsh: security fixes
+References: <20190415063233.119684-1-kai.kang@windriver.com>
+In-Reply-To: <20190415063233.119684-1-kai.kang@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 15 Apr 2019 12:39:03 +0200
+Message-ID: <CALbNGRQTJQcCkmOLcvxFryEbEZ+eGhOEubgDcQmFC8ZeFghA9g@mail.gmail.com>
+To: Kang Kai <kai.kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] gvfs: fix typo libexec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,77 +53,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 06:59:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Apr 2019 10:39:14 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fix CVE-2019-7282, CVE-2019-7283
+On Mon, Apr 15, 2019 at 8:32 AM <kai.kang@windriver.com> wrote:
+>
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> I believe ${libexec} is a typo here which should be ${libexecdir}.
+> Otherwise, the execute bit of ${datadir}/polkit-1/rules.d will be set
+> and previous workaround which chmod ${datadir}/polkit-1/rules.d does not
+> work.
+>
+Thanks - for fixing and I think it explains the other issue: Systemd
+service adjustment can go now - it was caused by the typo either
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2019-7282
-https://nvd.nist.gov/vuln/detail/CVE-2019-7283
-
-Patch from:
-https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../CVE-2019-7282-and-CVE-2019-7283.patch          | 33 ++++++++++++++++++++++
- .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-new file mode 100644
-index 0000000..4381f5b
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-@@ -0,0 +1,33 @@
-+From a7831a16c3e0e1463d5eb08a58af152cb75ca976 Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Mon, 15 Apr 2019 06:05:58 +0000
-+Subject: [PATCH] Fix CVE-2019-7282 and CVE-2019-7283
-+
-+Description: Fix CVE-2018-20685 and CVE-2019-6111
-+Bug-Debian: https://bugs.debian.org/920486
-+Origin: https://github.com/openssh/openssh-portable/commit/6010c0303a422a9c5fa8860c061bf7105eb7f8b2#diff-9f340c228413d5a9a9206ea2ed2bc624R1114
-+
-+Upstream-Status: Backport [Debian]
-+[https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ rcp/rcp.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/rcp/rcp.c b/rcp/rcp.c
-+index ca61c18..77d8ff8 100644
-+--- a/rcp/rcp.c
-++++ b/rcp/rcp.c
-+@@ -740,6 +740,11 @@ sink(int argc, char *argv[])
-+ 			size = size * 10 + (*cp++ - '0');
-+ 		if (*cp++ != ' ')
-+ 			SCREWUP("size not delimited");
-++		if (*cp == '\0' || strchr(cp, '/') != NULL ||
-++		    strcmp(cp, ".") == 0 || strcmp(cp, "..") == 0) {
-++			error("error: unexpected filename: %s", cp);
-++			exit(1);
-++		}
-+ 		if (targisdir) {
-+ 			static char *namebuf;
-+ 			static int cursize;
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-index d034cd8..6f203c5 100644
---- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-@@ -16,6 +16,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=
-             file://netkit-rsh-0.17-rexec-ipv6.patch \
-             file://fix-host-variable.patch \
-             file://fixup_wait3_api_change.patch \
-+            file://CVE-2019-7282-and-CVE-2019-7283.patch \
- "
- 
- SRC_URI[archive.md5sum] = "65f5f28e2fe22d9ad8b17bb9a10df096"
--- 
-2.7.4
-
+Andreas
 
