@@ -1,26 +1,25 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 374B77D8DD
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A5DE7D8DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 03:40:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3F3eAqX028613
+	Mon, 15 Apr 2019 03:40:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x3F3dqJZ026993
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2019 20:40:10 -0700 (PDT)
+	Sun, 14 Apr 2019 20:40:03 -0700
 Received: from localhost (128.224.163.192) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Sun, 14 Apr 2019 20:40:09 -0700
+	Sun, 14 Apr 2019 20:39:42 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Apr 2019 11:39:39 +0800
-Message-ID: <1555299579-31574-3-git-send-email-yi.zhao@windriver.com>
+Date: Mon, 15 Apr 2019 11:39:37 +0800
+Message-ID: <1555299579-31574-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1555299579-31574-1-git-send-email-yi.zhao@windriver.com>
-References: <1555299579-31574-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.192]
-Subject: [meta-webserver][PATCH 2/2] apache-websocket: upgrade to latest git rev
+Subject: [meta-webserver][PATCH 0/2] apache2 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,49 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 03:40:09 -0000
+X-List-Received-Date: Mon, 15 Apr 2019 03:40:12 -0000
 Content-Type: text/plain
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../recipes-httpd/apache-mod/apache-websocket_git.bb           | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+V2 Changes: Fix apache-websocket build failure
 
-diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
-index 0beb3ed..c44efb6 100644
---- a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
-+++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Websocket module for Apache web server"
- DESCRIPTION = "Process requests using the WebSocket protocol (RFC 6455)"
--HOMEPAGE = "https://github.com/jchampio/${PN}/"
-+HOMEPAGE = "https://github.com/jchampio/apache-websocket/"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
-@@ -13,9 +13,9 @@ RDEPENDS_${PN} += "apache2"
- # fork contains patches from the modules ML and fixes CVE compliance issues
- SRC_URI = "git://github.com/jchampio/apache-websocket.git"
- 
--SRCREV = "f5230d8c520dccf8631da94bf90c23f3c1100dcc"
-+SRCREV = "6968083264b90b89b1b9597a4ca03ba29e7ea2e1"
- 
--PV = "0.1.1"
-+PV = "0.1.1+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
-@@ -25,8 +25,8 @@ EXTRA_OECONF = "APACHECTL=${STAGING_DIR_TARGET}${sbindir}/apachectl \
-                 LIBTOOL=${STAGING_DIR_TARGET}${bindir_crossscripts}/${HOST_SYS}-libtool"
- 
- do_install() {
--    install -d ${D}${libdir}/apache2/modules/
--    install ${B}/.libs/mod_websocket.so ${D}${libdir}/apache2/modules/
-+    install -d ${D}${libdir}/apache2/modules
-+    install -m 755 ${B}/.libs/mod_websocket.so ${D}${libdir}/apache2/modules
- }
- 
- FILES_${PN} += " ${libdir}/apache2/modules/* "
+
+Yi Zhao (2):
+  apache2: upgrade 2.4.34 -> 2.4.39
+  apache-websocket: upgrade to latest git rev
+
+ .../apache-mod/apache-websocket_git.bb             |  10 +-
+ .../recipes-httpd/apache2/apache2-native_2.4.34.bb |  46 --
+ ...nfigure-use-pkg-config-for-PCRE-detection.patch |   8 +-
+ ...-up-the-core-size-limit-if-CoreDumpDirec.patch} |  12 +-
+ ...ot-export-apr-apr-util-symbols-when-usin.patch} |  10 +-
+ ...ache2-log-the-SELinux-context-at-startup.patch} |  23 +-
+ ...replace-lynx-to-curl-in-apachectl-script.patch} |   6 +-
+ ...-the-race-issue-of-parallel-installation.patch} |   6 +-
+ ...apache2-allow-to-disable-selinux-support.patch} |   8 +-
+ ...-not-use-relative-path-for-gen_test_char.patch} |   8 +-
+ .../apache2/apache2/CVE-2018-11763.patch           | 512 ---------------------
+ .../apache2/apache2/apache-configure_perlbin.patch |  27 --
+ .../{apache2_2.4.34.bb => apache2_2.4.39.bb}       | 204 ++++----
+ meta-webserver/recipes-httpd/apache2/files/init    |   0
+ 14 files changed, 162 insertions(+), 718 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
+ rename meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-corelimit.patch => 0002-apache2-bump-up-the-core-size-limit-if-CoreDumpDirec.patch} (83%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.4-export.patch => 0003-apache2-do-not-export-apr-apr-util-symbols-when-usin.patch} (80%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-selinux.patch => 0004-apache2-log-the-SELinux-context-at-startup.patch} (85%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{replace-lynx-to-curl-in-apachectl-script.patch => 0005-replace-lynx-to-curl-in-apachectl-script.patch} (95%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.3-fix-race-issue-of-dir-install.patch => 0006-apache2-fix-the-race-issue-of-parallel-installation.patch} (94%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{configure-allow-to-disable-selinux-support.patch => 0007-apache2-allow-to-disable-selinux-support.patch} (91%)
+ rename meta-webserver/recipes-httpd/apache2/apache2/{server-makefile.patch => 0008-apache2-do-not-use-relative-path-for-gen_test_char.patch} (76%)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.34.bb => apache2_2.4.39.bb} (61%)
+ mode change 100755 => 100644 meta-webserver/recipes-httpd/apache2/files/init
+
 -- 
 2.7.4
 
