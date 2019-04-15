@@ -1,46 +1,36 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 333DD7D7A4
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id EC9127D96D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 10:39:14 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id u12so14090634iop.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 03:39:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=m9EgUBRecBztUDoKzSN3j2ZL/Of0Ly2IxyOmnI9TAQo=;
-	b=V1Q0QjyeKGAeVW0GfMZPLsFmoX912x/Pnh95zcZpCXai017B8gED20h7n3gMnuLonM
-	WOlKJ3eVVab8qbXXTNCJ19+E9zKHN61upriYo/yqJ42jml4s8CJuGUi1VN84kDu+/WNZ
-	hCf0T8qLQ++AlLowPOqUnNSgRcJQUSOZnVb4ODaxJdC3HIqqqaubu+xq9czpCACHXF+9
-	LJ4OO3FSNZJHTw/nahQmyqKwuu8zJjGGA6pnVYWbd33VmxDme2oxzFvR9p/pWJI5QgEJ
-	w4lRQMZHDr4C9akujhs2Ogb2xRUAGvLeVyHF4eA0SyhwsdxHD5LyDz7w5+CG234GBq6N
-	9ALg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=m9EgUBRecBztUDoKzSN3j2ZL/Of0Ly2IxyOmnI9TAQo=;
-	b=o7nkcDvisT9MvDQAdBB19GSeZt/KTO2mW+hhofF7NAP2sLRszaFr9fGW1QvjpNSYuy
-	LHoplfQE0njefi6DOehTdvEUWxGUZA53cJHhBNs6R18wsKRdSRDAGzT0wsZgywV4WcDI
-	auSWkx9AOmywhhGij3GMk524f7cIvBaxQxDwyoNRvUYyTVl3izwiMSwzKwG5CbeAsZD+
-	2LvY1C5vRXuHnLkGcVtxw5uki/MVvsn0Za2tAajptXIjkE7HApWuKRGMbuRMBh1TNWwQ
-	tTumidB92XlW9Ax1IA0nCHuRQFEhe5o83M2P+8KDpe0Cf29oUiliIA6zpSAdXPxPecAG
-	zz0g==
-X-Gm-Message-State: APjAAAWdOPpIXEGrU4ppxvpVB1EgG0Sx7NXBu1J7jdU3ljI3pGdAcXHQ
-	zEoWMMvThmlTSbuRm5s+2auVZEQrAuuAYuNMqN8=
-X-Google-Smtp-Source: APXvYqw6KOiJRRzDmXU4PhzSEoykKTgggEvtAT2qf2EXRYlfP7M4/otxfN0pBWVr7g7fF1G91sQnCVmFeAnrqAMc2ck=
-X-Received: by 2002:a6b:e50d:: with SMTP id y13mr6332538ioc.142.1555324755138; 
-	Mon, 15 Apr 2019 03:39:15 -0700 (PDT)
+	Mon, 15 Apr 2019 11:44:13 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44jRVN6VsHzFl;
+	Mon, 15 Apr 2019 13:44:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1555328653;
+	bh=MUbJ6OwywvXDsszO/d3q3VRF8JXnXxLgklVwf4vgty4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=sCbfQYQQVPBzC75g988iENUP20wU8XvLGxjnYSFUS+WfSJnERBci1+j47qT+ldbQ4
+	x1cMt+xQEq9nOcg6G/kcrC5oWo5F2qQcnwSJBq7kcHvPRKfi5J/oSAUntNvXgupp/N
+	fD2ZRDTf/zb25bSM0VCpy3UunTnmiRdQw9Wg9oM/RsfZHIVPPzxt1wknRLSqaaon7L
+	AcfDGLmrgQ7blP79KViVyed+ek6o7aq9vdOzS+w8tQRJOPVn7N3AvdQ/HXrrV1LZyg
+	trtc8dadyf72yaRcHF6qdMb0UTCwZNIWVJxwuzO4AefEe8R9gXgzMFfchNRP632Azv
+	3akCPi4gdYc40hoMTy+RmGiQOS6hChXGRaw40QklhIrB/uRzy58T/2LYlns74VYWu0
+	G8XBykelRvNwrPlickz/po7aTzgmHu986VDBGJhZ78ogEg/7upIrknCfvBiYStj7nI
+	BmxOmxLx3hbKUPvG48NHkOzR1g8pQEFviwjNpO0QCD80DmIUOU9tF3ndKG5TiMhnKk
+	gvjhX0B6JhXRIeSxNvKPK7QkhHAUvkkkFpWmFDh65FKs4JJ39qtLL8UzLs+1/JbNlP
+	BqDgu1nPztOIlopjYeNzmbatXHcVvw08QZdXegL+A7aPucdTBcWgmi0yM5Q7X/HQLm
+	5KdPeosHJz/oYv0TVx0hmaQ8=
+Date: Mon, 15 Apr 2019 14:44:10 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190415114410.GA9707@localhost>
+References: <20190410043244.12131-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20190415063233.119684-1-kai.kang@windriver.com>
-In-Reply-To: <20190415063233.119684-1-kai.kang@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 15 Apr 2019 12:39:03 +0200
-Message-ID: <CALbNGRQTJQcCkmOLcvxFryEbEZ+eGhOEubgDcQmFC8ZeFghA9g@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] gvfs: fix typo libexec
+In-Reply-To: <20190410043244.12131-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH V2] ledmon: control hard disk led for RAID arrays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,20 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 10:39:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 15 Apr 2019 11:44:14 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Mon, Apr 15, 2019 at 8:32 AM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> I believe ${libexec} is a typo here which should be ${libexecdir}.
-> Otherwise, the execute bit of ${datadir}/polkit-1/rules.d will be set
-> and previous workaround which chmod ${datadir}/polkit-1/rules.d does not
-> work.
->
-Thanks - for fixing and I think it explains the other issue: Systemd
-service adjustment can go now - it was caused by the typo either
+On Tue, Apr 09, 2019 at 09:32:44PM -0700, Khem Raj wrote:
+>...
+> +musl does not support on_exit which is used in clean up.
+> +Instead use atexit with is supported by musl and glibc.
 
-Andreas
+The functions have different signatures, and this patch introduces bugs 
+for cases that use the parameters of on_exit.
+
+int on_exit(void (*function)(int , void *), void *arg);
+int atexit(void (*function)(void));
+
+Example:
+
+>...
+> +-	if (on_exit(_ledmon_status, &terminate))
+> ++	if (atexit(_ledmon_status))
+>...
+
+static void _ledmon_status(int status, void *ignore)
+{
+        if (*((int *)ignore) != 0)
+                log_info("exit status is %s.", strstatus(status));
+        else if (status != STATUS_SUCCESS)
+                log_error("parent exit status is %s.", strstatus(status));
+}
+
+With the bogus atexit change no parameters are passed to _ledmon_status,
+and the function uses (and dereferenes) whatever garbage is currently
+in the stack/registers where function parameters are expected.
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
