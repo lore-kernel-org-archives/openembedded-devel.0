@@ -1,48 +1,48 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E18F7D72B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B1BE57D68D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 12:50:55 +0000 (UTC)
-Received: by mail-it1-f195.google.com with SMTP id s3so11994063itk.1
+	Mon, 15 Apr 2019 14:29:22 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id t28so19312195qte.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 05:50:56 -0700 (PDT)
+	Mon, 15 Apr 2019 07:29:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=tRrcCeuD6J9sunkEqq9fcj3BLFeCFfQQufqXrpVBJm0=;
-	b=C4keetpetpEN8bSPMDLFyLIc2TJxdSlf/4a8pjc7lqwJ6wL7C6RT86GI8vL6oTuN8K
-	2qkndm1j5/cJDcDH5PbOR7S2fQWNuYt9GbXFGnwV6LLwaf/+CvEf223pJB4yx0Dy9F3m
-	H1jRU+hYGho5hpwdEpOpSDEDP54sGlKol1uG5ijggXYCZYmvuZKIksVCHxlh02knnYgs
-	6Kob7r5lgvfvK0EvOYvySaRBkI1vEzP1FILiz5cErXgIN5k+9L+AA7zazreOEP/C8Rdj
-	kuFr5kO0S6JxAytvlbAx9vhGXkLmTFcEQLrFhX8KVuR+bl2yW+aLCGz7f2CqYu5gqfnw
-	yo8w==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qopPyfeZ+jU4AuaSnXZO1E3EbEJLu2doXKmWfwcPuQE=;
+	b=CgVVzEXh9p8c7WRwijawfaUBOtaVw594AWRkcGS31qeDykJQITDiLAK+hIX/CyeKc7
+	RJWWni46xJLw+13rmds2bIZULfRNDC2l4zUvdwfFie2zP0eLhoarVDG+sDW/+me7LbtP
+	42QVSzeDavUb1PVPV1jVvwrOtnFBUK+PsNpw/P4DU+dEsK1XIRkyubBihuZwDTdH4za0
+	b215aVmucKEwz4FzzFWZNDfmI0qlMD6pry7NtXoTsHcxnBvyWsx3V/mhb6lsLidtOlku
+	UQLIoozYtYqNQ/ZdHXAy3cn+daLdGBwkRIgGNe60MBoJHEhL9xO0J/f1bAL2X5lxmjRj
+	/xnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=tRrcCeuD6J9sunkEqq9fcj3BLFeCFfQQufqXrpVBJm0=;
-	b=rLCsBeDcTPRwmeNPyTrJoEkNr24or2JerniNVvVMKSM32d3s39V3RzBzNnxYF8SJmD
-	ioxrwBAbmlkzWLc1ooxH3sp/x5OZzEM74Xn8Ea2YR3nuiHS0gA8aeGiVmB8I/TuKUGJP
-	RXnvPXkWrO8XRYjPNxl/bMzYd7Bsla74yQUGZZnMCrtkW99y9WbT3irLqrHc0y/k0UbW
-	5vtuYQjKCV5/TgUikboPdZxGJ7X8T/MXpisuF7UOsAAB92jBqdxdvP8cw4FMyv9D7UUh
-	dYgCp3kImsxku0B6I9v4yPP2tEJ0jQDOTud49/gomUb0QNZISrGYoWgCi41qYFqqZtRA
-	Uk5Q==
-X-Gm-Message-State: APjAAAVA1xAtR8kQxw30c8IGicOfC0czxuqTsIDO7TAJjsGrunzdCXOA
-	DQBbQV8Za/BFHo6GK9s5AwpTzGcP8UI2V682VxunTw==
-X-Google-Smtp-Source: APXvYqzKq11IqlTLcH2gH7svtaLpS0Rp+yG4gkf5v2DREi7BnRB9ktlm/YeIXW9NjfAy2Y30VuE1at/lzej3adM/yFQ=
-X-Received: by 2002:a24:46cc:: with SMTP id
-	j195mr23746950itb.161.1555332656215; 
-	Mon, 15 Apr 2019 05:50:56 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=qopPyfeZ+jU4AuaSnXZO1E3EbEJLu2doXKmWfwcPuQE=;
+	b=AqxExzdVEh66LY7gty0+6gOnSYfgB9/beBbTgk4sUnkI3PADEs+Ljs3p+uEbgNlpKG
+	T2y8epblfpV/f1niGhApuPlEaiVWpaHbmL57uq/FOcmwte6sfWI3Com9c+bVcJZE+Son
+	nwqqFAxQRezE0AguehBYQZBg13DjUNdDFVQ1FN1AyTt8nIN5iMZlf0MzBiZ6mHaR9PJR
+	xCIB5AmS6draaFv5RGy4UzFHkAc3RTqDnRIyrs/fTsRRd2ZW4qCcYmT/kwYsFKOFSvXF
+	SML9UXtY6ML8UctZ0JJVgf8acxcEyTGxFtUxSKCkza5eCgKbRkXDSuq8b+Fd9G0SM8NC
+	44uQ==
+X-Gm-Message-State: APjAAAW83BWrl2ORSpS58+FZRG81yDcO/IBt3yq/LOX6wB03zwQp+wIN
+	h21LBopAJJa/oZZxqPm+S3ykghDV2Xzv90Hz+QJvTA==
+X-Google-Smtp-Source: APXvYqyYVyRxNsbCc1xu/k0jLQ/AgW8u6UGtOtjcTY7cqf4WPfucRG9Xx3s8sLYcUihkbwEiBwp4ZKXx9nzwTE2eMC4=
+X-Received: by 2002:a0c:81a9:: with SMTP id 38mr59346464qvd.208.1555338563549; 
+	Mon, 15 Apr 2019 07:29:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <1555330647-27749-1-git-send-email-vincent.prince.fr@gmail.com>
-In-Reply-To: <1555330647-27749-1-git-send-email-vincent.prince.fr@gmail.com>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Mon, 15 Apr 2019 14:50:44 +0200
-Message-ID: <CAB2nKc_Pj=uiO3n7Nj0i49y0i6a+LOMifsTwRpz1A=+mehxPFA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Alistair.Francis@wdc.com, richard.leitner@skidata.com
+References: <20190410043244.12131-1-raj.khem@gmail.com>
+	<20190415114410.GA9707@localhost>
+In-Reply-To: <20190415114410.GA9707@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Apr 2019 07:29:12 -0700
+Message-ID: <CAMKF1sozBega6PU4PfMLohbtpEXRt_Z4r=KRCXqAjoPHXWdwDw@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][PATCH] layer.conf: Add warrior to compatible release series
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH V2] ledmon: control hard disk led for RAID arrays
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,42 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 12:50:55 -0000
+X-List-Received-Date: Mon, 15 Apr 2019 14:29:23 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Sorry
+On Mon, Apr 15, 2019 at 4:44 AM Adrian Bunk <bunk@stusta.de> wrote:
 
-I didn't see that patch already sent 2 times before.
-
-Regards,
-Vincent
-
-Le lun. 15 avr. 2019 =C3=A0 14:17, Vincent Prince <vincent.prince.fr@gmail.=
-com>
-a =C3=A9crit :
-
-> Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
-> ---
->  conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> On Tue, Apr 09, 2019 at 09:32:44PM -0700, Khem Raj wrote:
+> >...
+> > +musl does not support on_exit which is used in clean up.
+> > +Instead use atexit with is supported by musl and glibc.
 >
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index b03a608..90236be 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
-> ${LAYERDIR}/recipes*/*/*.bbappend"
->  BBFILE_COLLECTIONS +=3D "meta-java"
->  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-java =3D "10"
-> -LAYERSERIES_COMPAT_meta-java =3D "thud"
-> +LAYERSERIES_COMPAT_meta-java =3D "thud warrior"
+> The functions have different signatures, and this patch introduces bugs
+> for cases that use the parameters of on_exit.
 >
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> int on_exit(void (*function)(int , void *), void *arg);
+> int atexit(void (*function)(void));
+>
+> Example:
+>
+> >...
+> > +-    if (on_exit(_ledmon_status, &terminate))
+> > ++    if (atexit(_ledmon_status))
+> >...
+>
+> static void _ledmon_status(int status, void *ignore)
+> {
+>         if (*((int *)ignore) != 0)
+>                 log_info("exit status is %s.", strstatus(status));
+>         else if (status != STATUS_SUCCESS)
+>                 log_error("parent exit status is %s.", strstatus(status));
+> }
+>
+> With the bogus atexit change no parameters are passed to _ledmon_status,
+> and the function uses (and dereferenes) whatever garbage is currently
+> in the stack/registers where function parameters are expected.
+
+
+Thanks for looking into it and This is correct somehow I overlooked it i
+will send a follow up to not rely on arguments for on_exit
+
+>
+>
+> cu
+> Adrian
 >
 > --
-> 2.7.4
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
 >
 >
 
