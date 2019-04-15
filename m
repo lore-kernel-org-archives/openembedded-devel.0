@@ -1,48 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B1BE57D68D
+Return-Path: <paolo.valente@linaro.org>
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+	[209.85.128.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1603D7D43C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 14:29:22 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id t28so19312195qte.6
+	Mon, 15 Apr 2019 16:15:31 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id v14so21224097wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 07:29:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=qopPyfeZ+jU4AuaSnXZO1E3EbEJLu2doXKmWfwcPuQE=;
-	b=CgVVzEXh9p8c7WRwijawfaUBOtaVw594AWRkcGS31qeDykJQITDiLAK+hIX/CyeKc7
-	RJWWni46xJLw+13rmds2bIZULfRNDC2l4zUvdwfFie2zP0eLhoarVDG+sDW/+me7LbtP
-	42QVSzeDavUb1PVPV1jVvwrOtnFBUK+PsNpw/P4DU+dEsK1XIRkyubBihuZwDTdH4za0
-	b215aVmucKEwz4FzzFWZNDfmI0qlMD6pry7NtXoTsHcxnBvyWsx3V/mhb6lsLidtOlku
-	UQLIoozYtYqNQ/ZdHXAy3cn+daLdGBwkRIgGNe60MBoJHEhL9xO0J/f1bAL2X5lxmjRj
-	/xnQ==
+	Mon, 15 Apr 2019 09:15:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S9zua6ErlzDPYlx+3tP6zkPmmxDvkgDWrh1SB1e943U=;
+	b=San61k3aAF6ARasD6q3qStVyXmBC3AvBK5vSNUIvCfejkQ4W5INPi8S1fyF3KeAkXa
+	bjyYKaDmnT6+1jCvwT4PBZGnU3NsROHpKLflnV3SMDyobzOwN5uZHFb/t4oQBKHNq/VP
+	ryQhfEQRPKA8+stLR//ubX3JYa+fwN+6GVntkK700/s6obuuG5nBlJWgjMOm7CyZ4rFM
+	1iYw0pRI7XPQpWI0l22CcpC3T3/e3ZArGYmyVLadxweWpVat6ulv5KBM3PhpVPGQ+Pc9
+	v/140MNkXR0iNvkD6jbSn66DRMHS/bhvv56WkutJHw0yC6mc1TcsucPbC2gHBnMRh+L1
+	ddVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=qopPyfeZ+jU4AuaSnXZO1E3EbEJLu2doXKmWfwcPuQE=;
-	b=AqxExzdVEh66LY7gty0+6gOnSYfgB9/beBbTgk4sUnkI3PADEs+Ljs3p+uEbgNlpKG
-	T2y8epblfpV/f1niGhApuPlEaiVWpaHbmL57uq/FOcmwte6sfWI3Com9c+bVcJZE+Son
-	nwqqFAxQRezE0AguehBYQZBg13DjUNdDFVQ1FN1AyTt8nIN5iMZlf0MzBiZ6mHaR9PJR
-	xCIB5AmS6draaFv5RGy4UzFHkAc3RTqDnRIyrs/fTsRRd2ZW4qCcYmT/kwYsFKOFSvXF
-	SML9UXtY6ML8UctZ0JJVgf8acxcEyTGxFtUxSKCkza5eCgKbRkXDSuq8b+Fd9G0SM8NC
-	44uQ==
-X-Gm-Message-State: APjAAAW83BWrl2ORSpS58+FZRG81yDcO/IBt3yq/LOX6wB03zwQp+wIN
-	h21LBopAJJa/oZZxqPm+S3ykghDV2Xzv90Hz+QJvTA==
-X-Google-Smtp-Source: APXvYqyYVyRxNsbCc1xu/k0jLQ/AgW8u6UGtOtjcTY7cqf4WPfucRG9Xx3s8sLYcUihkbwEiBwp4ZKXx9nzwTE2eMC4=
-X-Received: by 2002:a0c:81a9:: with SMTP id 38mr59346464qvd.208.1555338563549; 
-	Mon, 15 Apr 2019 07:29:23 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S9zua6ErlzDPYlx+3tP6zkPmmxDvkgDWrh1SB1e943U=;
+	b=GNiz8eEmFlWGXg+48MLfmGsmYz4bUPH69W4IT0tExj7nzi2ceve0Do+Rq9RTEdi+AV
+	2Ed4sscOWUXe8zRihGOV2mI4aIZpqDY6fIX87KJtqGG/ppOsrRFg8mHWQ3+ES8sqNXKT
+	DwYjWc95cvYJ5nBnY9oFgbOr8CFMdjrjlOGeMIpC9HjqIVjid723TuYl4xnZ3Nkv1IFy
+	Sr3OF//JKvddsnOjd4YAc30MzmxtCO8B1156XAdbTZ1KD09p1D6GRZXuL/h3cvImgw4P
+	bX3FUXWyoYHm4mKbLYEpNfUYfH/A69/uKErgrMm+9QtFFtIvO9hDpjLKC2unLBjoM4ft
+	C8cQ==
+X-Gm-Message-State: APjAAAXUTK9xTFcSfe2xdJ1OkBPHsd0pfnLj9Cwdkci7Py5uKFvyi2ev
+	yp/4Rbvra0C7voYHN1qhiTp/Bi8qL2Y=
+X-Google-Smtp-Source: APXvYqwFTl7wfA1kO1WCSLaOut+0dqRePUu9P9Et8WAGh6tzJATz+wVyiQWMwYgThqNB1DE79OsXCA==
+X-Received: by 2002:a1c:1a53:: with SMTP id a80mr22902420wma.15.1555344932499; 
+	Mon, 15 Apr 2019 09:15:32 -0700 (PDT)
+Received: from localhost.localdomain ([37.160.110.140])
+	by smtp.gmail.com with ESMTPSA id
+	o20sm17167862wmh.21.2019.04.15.09.15.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Apr 2019 09:15:31 -0700 (PDT)
+From: Paolo Valente <paolo.valente@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Apr 2019 18:13:26 +0200
+Message-Id: <20190415161326.5464-1-paolo.valente@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190410043244.12131-1-raj.khem@gmail.com>
-	<20190415114410.GA9707@localhost>
-In-Reply-To: <20190415114410.GA9707@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Apr 2019 07:29:12 -0700
-Message-ID: <CAMKF1sozBega6PU4PfMLohbtpEXRt_Z4r=KRCXqAjoPHXWdwDw@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2] ledmon: control hard disk led for RAID arrays
+Subject: [meta-oe][PATCH] s-suite: push SRCREV to version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,56 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 14:29:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 15 Apr 2019 16:15:32 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Apr 15, 2019 at 4:44 AM Adrian Bunk <bunk@stusta.de> wrote:
+Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+---
+ meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Tue, Apr 09, 2019 at 09:32:44PM -0700, Khem Raj wrote:
-> >...
-> > +musl does not support on_exit which is used in clean up.
-> > +Instead use atexit with is supported by musl and glibc.
->
-> The functions have different signatures, and this patch introduces bugs
-> for cases that use the parameters of on_exit.
->
-> int on_exit(void (*function)(int , void *), void *arg);
-> int atexit(void (*function)(void));
->
-> Example:
->
-> >...
-> > +-    if (on_exit(_ledmon_status, &terminate))
-> > ++    if (atexit(_ledmon_status))
-> >...
->
-> static void _ledmon_status(int status, void *ignore)
-> {
->         if (*((int *)ignore) != 0)
->                 log_info("exit status is %s.", strstatus(status));
->         else if (status != STATUS_SUCCESS)
->                 log_error("parent exit status is %s.", strstatus(status));
-> }
->
-> With the bogus atexit change no parameters are passed to _ledmon_status,
-> and the function uses (and dereferenes) whatever garbage is currently
-> in the stack/registers where function parameters are expected.
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 47d21d36c..78d299e3b 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
+ 
+-SRCREV = "d05006865f68829fa7603bdb92bd51649f5ba1b6"
++SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
+ PV = "0.0+git${SRCPV}"
+ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+ 
+-- 
+2.20.1
 
-
-Thanks for looking into it and This is correct somehow I overlooked it i
-will send a follow up to not rely on arguments for on_exit
-
->
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
->
 
