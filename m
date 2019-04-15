@@ -1,22 +1,25 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0687A7D7A0
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E36027D8EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 06:32:38 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3F6WcB7029929
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 14 Apr 2019 23:32:38 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Sun, 14 Apr 2019 23:32:38 -0700
-From: <kai.kang@windriver.com>
+	Mon, 15 Apr 2019 06:59:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x3F6wlVY031580
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Apr 2019 23:58:57 -0700
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Sun, 14 Apr 2019 23:58:36 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Apr 2019 02:32:33 -0400
-Message-ID: <20190415063233.119684-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+Date: Mon, 15 Apr 2019 14:58:34 +0800
+Message-ID: <1555311514-12809-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH] gvfs: fix typo libexec
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-networking][PATCH] netkit-rsh: security fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,47 +32,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 06:32:39 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 Apr 2019 06:59:07 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+Fix CVE-2019-7282, CVE-2019-7283
 
-I believe ${libexec} is a typo here which should be ${libexecdir}.
-Otherwise, the execute bit of ${datadir}/polkit-1/rules.d will be set
-and previous workaround which chmod ${datadir}/polkit-1/rules.d does not
-work.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2019-7282
+https://nvd.nist.gov/vuln/detail/CVE-2019-7283
 
-Replace tab with spaces at same time.
+Patch from:
+https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../CVE-2019-7282-and-CVE-2019-7283.patch          | 33 ++++++++++++++++++++++
+ .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-index 8fed9e825..35367ae11 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-@@ -63,14 +63,14 @@ PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+new file mode 100644
+index 0000000..4381f5b
+--- /dev/null
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+@@ -0,0 +1,33 @@
++From a7831a16c3e0e1463d5eb08a58af152cb75ca976 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Mon, 15 Apr 2019 06:05:58 +0000
++Subject: [PATCH] Fix CVE-2019-7282 and CVE-2019-7283
++
++Description: Fix CVE-2018-20685 and CVE-2019-6111
++Bug-Debian: https://bugs.debian.org/920486
++Origin: https://github.com/openssh/openssh-portable/commit/6010c0303a422a9c5fa8860c061bf7105eb7f8b2#diff-9f340c228413d5a9a9206ea2ed2bc624R1114
++
++Upstream-Status: Backport [Debian]
++[https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ rcp/rcp.c | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/rcp/rcp.c b/rcp/rcp.c
++index ca61c18..77d8ff8 100644
++--- a/rcp/rcp.c
+++++ b/rcp/rcp.c
++@@ -740,6 +740,11 @@ sink(int argc, char *argv[])
++ 			size = size * 10 + (*cp++ - '0');
++ 		if (*cp++ != ' ')
++ 			SCREWUP("size not delimited");
+++		if (*cp == '\0' || strchr(cp, '/') != NULL ||
+++		    strcmp(cp, ".") == 0 || strcmp(cp, "..") == 0) {
+++			error("error: unexpected filename: %s", cp);
+++			exit(1);
+++		}
++ 		if (targisdir) {
++ 			static char *namebuf;
++ 			static int cursize;
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+index d034cd8..6f203c5 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=
+             file://netkit-rsh-0.17-rexec-ipv6.patch \
+             file://fix-host-variable.patch \
+             file://fixup_wait3_api_change.patch \
++            file://CVE-2019-7282-and-CVE-2019-7283.patch \
+ "
  
- do_install_append() {
-     # Fix up permissions on polkit rules.d to work with rpm4 constraints
--	chmod 700 ${D}/${datadir}/polkit-1/rules.d
--	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+    chmod 700 ${D}/${datadir}/polkit-1/rules.d
-+    chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
- 
-     # After rebuilds (not from scracth) it can happen that the executables in
-     # libexec ar missing executable permission flag. Not sure but it came up
-     # during transition to meson. Looked into build files and logs but could
-     # not find suspicious
--    for exe in `find ${D}/${libexec}`; do
-+    for exe in `find ${D}/${libexecdir}`; do
-        chmod +x $exe
-     done
- 
+ SRC_URI[archive.md5sum] = "65f5f28e2fe22d9ad8b17bb9a10df096"
 -- 
-2.20.0
+2.7.4
 
 
