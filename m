@@ -1,48 +1,48 @@
 Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FEFC7D9E7
+Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E18F7D72B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 12:17:35 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id s15so21619852wra.12
+	Mon, 15 Apr 2019 12:50:55 +0000 (UTC)
+Received: by mail-it1-f195.google.com with SMTP id s3so11994063itk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 05:17:36 -0700 (PDT)
+	Mon, 15 Apr 2019 05:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=y4g9giDK6I5hrHpRsa6z7IfljwBp2pLtJQnVGBehxV4=;
-	b=ficYkkLwFtN1DysjK/8EvGIqM+Ryk55z+CVcWlltIoXQI+ZxRN2PknFPopP5QvERru
-	fMXSac/dR8KCMvYSNvq3MpCkWexSPoh1nY1KEM+7SbePEhogjAs9gfIgFizBOzwxq5ic
-	bxZsX5LYWgfxKP3Tg4QJHF/eqJGJmt3n6vKUHuK9P8wj2LifzA5eXXHYydDxmjUbK/Ao
-	8n3J6peo+Re3aJ5RuFEdI9wH7mrSvvx73uemQnwCgRkAtMYybnF+qaVddh93+vymp0IW
-	tYQuOiY7IPUlj1SrZbb9zXZhja3GlkI80y1b9DyiIDae6arU586fnOliv9KyOjKCeIte
-	SJ9A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=tRrcCeuD6J9sunkEqq9fcj3BLFeCFfQQufqXrpVBJm0=;
+	b=C4keetpetpEN8bSPMDLFyLIc2TJxdSlf/4a8pjc7lqwJ6wL7C6RT86GI8vL6oTuN8K
+	2qkndm1j5/cJDcDH5PbOR7S2fQWNuYt9GbXFGnwV6LLwaf/+CvEf223pJB4yx0Dy9F3m
+	H1jRU+hYGho5hpwdEpOpSDEDP54sGlKol1uG5ijggXYCZYmvuZKIksVCHxlh02knnYgs
+	6Kob7r5lgvfvK0EvOYvySaRBkI1vEzP1FILiz5cErXgIN5k+9L+AA7zazreOEP/C8Rdj
+	kuFr5kO0S6JxAytvlbAx9vhGXkLmTFcEQLrFhX8KVuR+bl2yW+aLCGz7f2CqYu5gqfnw
+	yo8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=y4g9giDK6I5hrHpRsa6z7IfljwBp2pLtJQnVGBehxV4=;
-	b=uMbeq9HPCz3f7Z6kgfOemUUiq8ekYYXS3dRPDGb7shnXO/rn+Da2ALLi2+b+x+iV2k
-	ukPQPp+Uj5kUYm5bxyxrbtrhYJXS+4uGmg0x8mzEac9o0HhGxX5qrxooCLXU1Z6Eyz1S
-	lIclcOuI5peQvTQNHtwgrB+omZ6W4bdfPZqA/Fm7VSI7vKPwg6Ph/EGa/ch1Vf7/cbVI
-	1PdfniaUM3hwdHwQFIrztjeq5TELbp5cB/l1nrJFb8V4nhQPztsYBKaMyZtaqWPwYcsS
-	ksaw/xJda1lxI/Uch936szTbZ7L4EPcs97pQraFDkfMO9afufi64zQYvqJJdUzLawbOJ
-	cEYA==
-X-Gm-Message-State: APjAAAU0XEdC/ypXq6n2LvMK/4RbNDycO6nkt+oIbfrv7vtB+/5HfpDm
-	68ZYwBmiaWJtV5LnRxziRwA9jiti
-X-Google-Smtp-Source: APXvYqy8R67CaCdcW3Y9tF8Yq1LIZY5meSJC9pg8zLI3RwiR/DFcASS5Qs73+V3Rr5tvWOT+s3ee+Q==
-X-Received: by 2002:adf:b60a:: with SMTP id f10mr16179399wre.116.1555330655558;
-	Mon, 15 Apr 2019 05:17:35 -0700 (PDT)
-Received: from VM-VPR.corporate.saft.org
-	([2a04:cec0:1008:9a6c:819a:ad4:9abe:4b09])
-	by smtp.gmail.com with ESMTPSA id
-	t17sm43453311wrr.26.2019.04.15.05.17.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Apr 2019 05:17:34 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=tRrcCeuD6J9sunkEqq9fcj3BLFeCFfQQufqXrpVBJm0=;
+	b=rLCsBeDcTPRwmeNPyTrJoEkNr24or2JerniNVvVMKSM32d3s39V3RzBzNnxYF8SJmD
+	ioxrwBAbmlkzWLc1ooxH3sp/x5OZzEM74Xn8Ea2YR3nuiHS0gA8aeGiVmB8I/TuKUGJP
+	RXnvPXkWrO8XRYjPNxl/bMzYd7Bsla74yQUGZZnMCrtkW99y9WbT3irLqrHc0y/k0UbW
+	5vtuYQjKCV5/TgUikboPdZxGJ7X8T/MXpisuF7UOsAAB92jBqdxdvP8cw4FMyv9D7UUh
+	dYgCp3kImsxku0B6I9v4yPP2tEJ0jQDOTud49/gomUb0QNZISrGYoWgCi41qYFqqZtRA
+	Uk5Q==
+X-Gm-Message-State: APjAAAVA1xAtR8kQxw30c8IGicOfC0czxuqTsIDO7TAJjsGrunzdCXOA
+	DQBbQV8Za/BFHo6GK9s5AwpTzGcP8UI2V682VxunTw==
+X-Google-Smtp-Source: APXvYqzKq11IqlTLcH2gH7svtaLpS0Rp+yG4gkf5v2DREi7BnRB9ktlm/YeIXW9NjfAy2Y30VuE1at/lzej3adM/yFQ=
+X-Received: by 2002:a24:46cc:: with SMTP id
+	j195mr23746950itb.161.1555332656215; 
+	Mon, 15 Apr 2019 05:50:56 -0700 (PDT)
+MIME-Version: 1.0
+References: <1555330647-27749-1-git-send-email-vincent.prince.fr@gmail.com>
+In-Reply-To: <1555330647-27749-1-git-send-email-vincent.prince.fr@gmail.com>
 From: Vincent Prince <vincent.prince.fr@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Apr 2019 14:17:27 +0200
-Message-Id: <1555330647-27749-1-git-send-email-vincent.prince.fr@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-java][PATCH] layer.conf: Add warrior to compatible release series
+Date: Mon, 15 Apr 2019 14:50:44 +0200
+Message-ID: <CAB2nKc_Pj=uiO3n7Nj0i49y0i6a+LOMifsTwRpz1A=+mehxPFA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Alistair.Francis@wdc.com, richard.leitner@skidata.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java][PATCH] layer.conf: Add warrior to compatible release series
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +55,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 12:17:35 -0000
+X-List-Received-Date: Mon, 15 Apr 2019 12:50:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
----
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Sorry
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index b03a608..90236be 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
- BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
--LAYERSERIES_COMPAT_meta-java = "thud"
-+LAYERSERIES_COMPAT_meta-java = "thud warrior"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
--- 
-2.7.4
+I didn't see that patch already sent 2 times before.
 
+Regards,
+Vincent
+
+Le lun. 15 avr. 2019 =C3=A0 14:17, Vincent Prince <vincent.prince.fr@gmail.=
+com>
+a =C3=A9crit :
+
+> Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index b03a608..90236be 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
+> ${LAYERDIR}/recipes*/*/*.bbappend"
+>  BBFILE_COLLECTIONS +=3D "meta-java"
+>  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java =3D "10"
+> -LAYERSERIES_COMPAT_meta-java =3D "thud"
+> +LAYERSERIES_COMPAT_meta-java =3D "thud warrior"
+>
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+>
+> --
+> 2.7.4
+>
+>
 
