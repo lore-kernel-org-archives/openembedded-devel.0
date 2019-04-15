@@ -1,53 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
-	[209.85.221.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E9BDD7D71C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+	[209.85.222.180])
+	by mail.openembedded.org (Postfix) with ESMTP id BC0377CD90
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 19:31:05 +0000 (UTC)
-Received: by mail-wr1-f52.google.com with SMTP id y7so23413435wrn.11
+	Mon, 15 Apr 2019 20:00:07 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id o129so10664835qke.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 12:31:07 -0700 (PDT)
+	Mon, 15 Apr 2019 13:00:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=hj2pzuT0dMB5Gi4e6z/NNLvxRt7bZllk/lK9rXUbp1c=;
-	b=k0SnTd+DXPRGKpFue4yQx4vJvKajajNa2dyFVL2TtoQSKspr/Z/Si22Nf7NxgauCNv
-	CcJ5V3VVikRq58LEnHvb4/VMv3GDzOaG65CEX6nlBMoQJ3vFuYsWqE706rNdyVCPmtSy
-	vgqQ5DCrC9fq/BWlF8ie+prs28RRXbx0H3Bv9VQuJdhwSfJxlzyncYAcjhFSxPTVWHFj
-	NU0XR1ao5ti6pa3jilPGzfVLYahK0g/oWyhiKdP1i9zrdzmdU/iH1wBqYlh1l8BPrLTA
-	lrMwnlnG2gMQkKAFmSJenEwD2j1tNNQXA5dxOfAup+swe4M/kR18oU3g6j8xXb3xwjLa
-	noyQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=tjLDyAOhlcVtg0obfzCneSi0xsy9F2GobMPQ3siW2WM=;
+	b=GXooYcNFVtCjs8fIMpqbYsMeCSb5SeS4cHDezix39DKQG3gkdLnFae7oVCWJzP4Lap
+	Bl/s9LqEjgQIfJoJ6SB8PBeDcoPtfC6mb5g+ws3k/uPphQlZoek/XXkXQjfVVemKX1eq
+	HHtthn4N7a6sNAQ6yslVKaj5SAG330fWYJCq1oSiOYQQqxbtSQpujfYa5xXMsSdPcwdw
+	wBxeZXxRCM9KIVxpQDy+QwkOqrD04/sdFyXFsU/Bd3ULXATqWCQGZFOW4u34tPOHAwtu
+	It9kUw7K+bQOnalgJGOqCnd/aFYxiSNOa9p3xpBzfQz2/D0jZerbThv8A6cxzwG9rLQZ
+	W27Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=hj2pzuT0dMB5Gi4e6z/NNLvxRt7bZllk/lK9rXUbp1c=;
-	b=JbalKMMFZn2c0chdbn/4dFOhU4izuEpLD1gU57u+VVDQGgaZRwNf+4ETmKmbn7aLpg
-	TqIsUuOWPR642rGGcoc3qlchBt/Bnfmc2RkMujSxwlTteCLQPtzT/25yHXK5aeP6R6SI
-	NCe6hn40t341j1ANOlaUXsawabobO3mk8EhHbp5TWM1Ck8NCYbOIDppSOVYEmoe6vxiM
-	wqTt2Was/mAm0r6HdxtgQ9Im9nDTeoPr5f3UabaFEDNhcHl6jpy+bBKLCQ56xvVaJP4g
-	42MM6F1e0A5oFuRRQdWwZNiqBUEDMMLXNeCJB+lzq9e3SwIrBQqs7vcPHLqAeew7n28+
-	ayEw==
-X-Gm-Message-State: APjAAAUNQhqbPeKhaTQlby6BIPZ61fUrFqe/29h2T1pC/9xyYpKyEZP+
-	98EJBkn/RiHpFVF+Wk1RlmQA4w0O
-X-Google-Smtp-Source: APXvYqwSWDgG29iPfGeghuT/GZ8bY0uWIXFNOU0Y6Jb+NaerMjs735xGeG6Xc5f+TjE51K532kVe6g==
-X-Received: by 2002:adf:f80c:: with SMTP id s12mr41155539wrp.72.1555356666323; 
-	Mon, 15 Apr 2019 12:31:06 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F3387417A2C29093A387C31.dip0.t-ipconnect.de.
-	[2003:f0:7f33:8741:7a2c:2909:3a38:7c31])
-	by smtp.gmail.com with ESMTPSA id
-	d3sm39125720wmf.46.2019.04.15.12.31.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Apr 2019 12:31:05 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Apr 2019 21:30:57 +0200
-Message-Id: <20190415193057.12546-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=tjLDyAOhlcVtg0obfzCneSi0xsy9F2GobMPQ3siW2WM=;
+	b=GcdS69olMDl6oPjOwP5tp0UaocvZpOuZcD6qaZdJuhqUlhbl8yV3cYsUwz5+RxoXrN
+	byqF0n9wX2iYO6s6wlr7+AudqvVaZVZxnBTDoffwHpc6m/avO7FULMewG2vsLIkpOW3z
+	9OkSa+hu6WdgS9lsFTYUk+6mqnEeoBsHogoKqs90vwlpDSgd6vWCixOOx8S7z6hkTbpD
+	09xKgpZV1xiQgPsA1ydKdfco2uXB6pYIWbm47d58JDzdZbgX+PLS/g66ZiZJ9moARQri
+	fZX8f+MAEyWmfXkFKFsWbtEARIJyGBVnRbKBgGlNIP5Rid31jBiA+SUnU6jPhjHPXOpb
+	ETOg==
+X-Gm-Message-State: APjAAAUr49paoTbVR8jYlTGmzwCQ1srqHIpyN53sp5I4CyO5/rV3D9LL
+	FgDcJagZaJKLa1hb+xV8YI/5w/aNAmnPZ8USLS8=
+X-Google-Smtp-Source: APXvYqxA1bZOX6VF4tv9n+bFCFLaveYkcrr9FY1TCLGTp8hneDmTprZHD5GIY1E5qkCfb4wtX+2SfKWKgAdF1lCK9aQ=
+X-Received: by 2002:a37:7b02:: with SMTP id w2mr57349754qkc.225.1555358408449; 
+	Mon, 15 Apr 2019 13:00:08 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] gvfs: remove systemd user unit executable permission adjustment
+References: <20190415185146.14189-1-alistair.francis@wdc.com>
+In-Reply-To: <20190415185146.14189-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Apr 2019 12:59:56 -0700
+Message-ID: <CAMKF1sqhZc8Y9KMPpadR0EgzGkh4bYreo2KOsnFB_ObBkYeNuA@mail.gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH 1/2] mycroft: Update the systemd service to ensure we are ready to start
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,36 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 19:31:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 Apr 2019 20:00:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Executable permissions were set accidently by a typo in recipe and has nothing
-to do with meson build. Typo in recipe was fixed so adjustment can go.
+On Mon, Apr 15, 2019 at 11:53 AM Alistair Francis <Alistair.Francis@wdc.com>
+wrote:
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 8 --------
- 1 file changed, 8 deletions(-)
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  .../recipes-multimedia/mycroft/files/mycroft.service         | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git
+> a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
+> b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
+> index 04cf43620..28729f6b1 100644
+> --- a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
+> +++ b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
+> @@ -1,10 +1,11 @@
+>  [Unit]
+>  Description=Mycroft
+> -DefaultDependencies=no
+> -After=mycroft-setup
+> +RequiresMountsFor=/var
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-index 35367ae11..7caee2771 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-@@ -73,12 +73,4 @@ do_install_append() {
-     for exe in `find ${D}/${libexecdir}`; do
-        chmod +x $exe
-     done
--
--    # Something sets user services executable - looks a bit as if meson
--    # transition has room for enhancements...
--    # Systemd warns with messages as:
--    # Apr 07 01:00:33 raspberrypi3 systemd[348]: Configuration file /usr/lib/systemd/user/gvfs-mtp-volume-monitor.service is marked executable. Please remove executable permissio>
--    for service in `find ${D}/${systemd_user_unitdir}`; do
--       chmod -x $service
--    done
- }
--- 
-2.20.1
 
+Does this mean it should be a separate mount point
+
+>
+> +After=mycroft-setup.service
+>
+>  [Service]
+>  Type=forking
+> +WorkingDirectory=@LIBDIR@/mycroft
+>  ExecStartPre=mkdir -p /var/log/mycroft
+>  ExecStart=@LIBDIR@/mycroft/start-mycroft.sh all
+>  ExecStop=@LIBDIR@/mycroft/stop-mycroft.sh all
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
