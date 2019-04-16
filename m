@@ -1,51 +1,63 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
-	[209.85.222.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BCD307CF88
+Return-Path: <alistair@alistair23.me>
+X-Greylist: delayed 100095 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 16 Apr 2019 04:11:37 UTC
+Received: from APC01-PU1-obe.outbound.protection.outlook.com
+	(mail-oln040092254022.outbound.protection.outlook.com [40.92.254.22])
+	by mail.openembedded.org (Postfix) with ESMTP id B24B17C349
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 03:47:44 +0000 (UTC)
-Received: by mail-qk1-f175.google.com with SMTP id a71so11315835qkg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 20:47:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hhIYGcJgHUby+uMPzCMijiuRKyKd7R96NfeFQOxBZkg=;
-	b=sbaANWz78Xbu+g6SJsWrP0hHTN/wLHBR9+dUl73WV1wa+4gilk5kRxeWBNuY9iiK4h
-	5Se2e21iWUXI9JgOuuK/TtesjNjWhxBHT5JCZ5SqUKt7XzUcvRbQYsPUKD2z/lG9tpuF
-	mi0eRmECY+H5fAQ1ksN3YVzP56TC4LKCjbHCSjeAGp/CXYCc/k4Yo4PxHEwOCXIEP/8i
-	Zw1QE5rM8fcTB0AV7Z5IOz8jXn1kuKK+h+WloofttJfm/mFzmV1u/tB0aRM4ENBktu0A
-	FFf7VztxXHtNPSC2iA2dXXA9kQxHtbBwjQ4FLTJWasAe53024HQu4r371sjcaE4D5iON
-	ec7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=hhIYGcJgHUby+uMPzCMijiuRKyKd7R96NfeFQOxBZkg=;
-	b=o7zlclL70ZXYY/B5JepVVfZBNflAHqEFC3jKhRD/Ro2S1CkrPq/EdOtXjJlvkSFcLH
-	C/dDkwNgwzVwo1CsTGhM95wLEG7uPNfAxwiVX9RMRk/FJ6ISbmXGxMwfr37GAihlFW9c
-	mjm/NpCCUuekuJc1NxaqRRytDbHoRQqJP1Gxn4a5Up8heyyeCLttMpF2XMzFing4WGdu
-	n6vYWxWv8FXqxl53uxHETmX0LycSMlWBILm6zZsM6Md3IhR5v5ecUWk0Il8BLUxfedUi
-	jo2qc+emFToV1QJs+sPCaNxw1wRJbZt221+e9/DYk1HPHHXdGOXAnZ0MlStNQfAD6S9R
-	T0Yw==
-X-Gm-Message-State: APjAAAXXZrmKnyszPldzytzsnoCKyZCoRfuXzRkZUM1NdkgSVoHHFzv/
-	pJ3pM9AHW9YHxdRgMMP3fiqo6JSxuQ8UcOgQWyES4Cjb
-X-Google-Smtp-Source: APXvYqz9Nlvn0LKJQy4wAf85adS49C6yEMx26a92mJc4gbdZTmSsvqZOP5Xy8IydbB29/QL6Hi2p5FOVBXdd/CVxYRs=
-X-Received: by 2002:a37:b587:: with SMTP id
-	e129mr60920268qkf.145.1555386465251; 
-	Mon, 15 Apr 2019 20:47:45 -0700 (PDT)
+	Tue, 16 Apr 2019 04:11:37 +0000 (UTC)
+Received: from PU1APC01FT020.eop-APC01.prod.protection.outlook.com
+	(10.152.252.59) by PU1APC01HT024.eop-APC01.prod.protection.outlook.com
+	(10.152.253.46) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1771.16;
+	Tue, 16 Apr 2019 03:57:14 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.252.58) by
+	PU1APC01FT020.mail.protection.outlook.com (10.152.252.217) with
+	Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+	15.20.1771.16 via Frontend Transport; Tue, 16 Apr 2019 03:57:14 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::a9fb:86c9:a1ef:59ec]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::a9fb:86c9:a1ef:59ec%5]) with mapi id 15.20.1792.020;
+	Tue, 16 Apr 2019 03:57:14 +0000
+From: Alistair Francis <alistair@alistair23.me>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] python-obd: Add missing RDEPENDS
+Thread-Index: AQHU9Ah5fGp/gjn9iUKl6DVEEs4ieA==
+Date: Tue, 16 Apr 2019 03:57:14 +0000
+Message-ID: <PSXP216MB0277F214F3614FFD52F0C113DD240@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
+Accept-Language: en-AU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BYAPR06CA0051.namprd06.prod.outlook.com
+	(2603:10b6:a03:14b::28) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	(2603:1096:300:a::18)
+x-incomingtopheadermarker: OriginalChecksum:8860F5A99B50241E2A349917BE46FF280871863BA9DC33B12E14D2672A3C8462;
+	UpperCasedChecksum:F125C925ED704ED7286FAA3761235D8F27EE093F621245E3C48F035872BA51F8;
+	SizeAsReceived:7437; Count:48
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.20.1
+x-tmn: [Gy0+8R+87ruRyvTMlruhyHeZy+Ykh+HFlIslHypnWXwcLEbqukK9pyDps9vkZDj0]
+x-microsoft-original-message-id: <20190416035700.17102-1-alistair@alistair23.me>
+x-ms-publictraffictype: Email
+x-incomingheadercount: 48
+x-eopattributedmessage: 0
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031323274)(2017031324274)(2017031322404)(1601125500)(1603101475)(1701031045);
+	SRVR:PU1APC01HT024; 
+x-ms-traffictypediagnostic: PU1APC01HT024:
+x-microsoft-antispam-message-info: n1XdG4Tu2b6Eddnj3erIGQz2ncTJ7GTlkK6UhDSayOszmV7WM19DlvyAs8SyMn8AZymc3qT7rRbfpiq7MwPHYcSVzDlLH2eaZ3JJGyNET8BlfJfdFJIN+RgSnzcQPxfzxuoS1IYAaFHv+/CTIB9pqa0t+86icjbZde0oSko8131/QxjGm4PNr6L5laLeqqhX
 MIME-Version: 1.0
-References: <20190414161725.21617-1-robert.joslyn@redrectangle.org>
-	<20190414161725.21617-4-robert.joslyn@redrectangle.org>
-	<CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
-	<5c1d0aa631564af5cde6565a70fd54a58a46c97b.camel@redrectangle.org>
-In-Reply-To: <5c1d0aa631564af5cde6565a70fd54a58a46c97b.camel@redrectangle.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Apr 2019 20:47:34 -0700
-Message-ID: <CAMKF1spnJxe1axA=zZnTrGsErt3oA2DUThtE9gh6+_YmfBMYvw@mail.gmail.com>
-To: Robert Joslyn <robert.joslyn@redrectangle.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/5] gpm: Remove duplicate definition of _GNU_SOURCE
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76d33e85-1965-47d2-2946-08d6c21f9c00
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Apr 2019 03:57:14.3340 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PU1APC01HT024
+Subject: [PATCH] python-obd: Add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +70,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2019 03:47:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 16 Apr 2019 04:11:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 15, 2019 at 8:37 PM Robert Joslyn <
-robert.joslyn@redrectangle.org> wrote:
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
+---
+ meta-python/recipes-devtools/python/python-obd.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> On Sun, 2019-04-14 at 11:15 -0700, Khem Raj wrote:
-> >
-> >
-> > On Sun, Apr 14, 2019 at 11:09 AM Robert Joslyn <
-> > robert.joslyn@redrectangle.org> wrote:
-> > > The Makefile already sets -D_GNU_SOURCE in CPPFLAGS, no need to
-> > > patch it
-> > > in again.
-> >
-> > Have you build tested it with musl ?
->
-> Was able to do a musl build and confirmed it builds and runs on my x86
-> boards.
->
+diff --git a/meta-python/recipes-devtools/python/python-obd.inc b/meta-pyth=
+on/recipes-devtools/python/python-obd.inc
+index f2caf6491..5621dba94 100644
+--- a/meta-python/recipes-devtools/python/python-obd.inc
++++ b/meta-python/recipes-devtools/python/python-obd.inc
+@@ -7,3 +7,5 @@ SRC_URI[md5sum] =3D "93e04f825e13b7ebc97d06b6a6407807"
+ SRC_URI[sha256sum] =3D "4b1bac95df2faac571ebf444778e4d736d050d8ed7049023c0=
+fc929a520eba6d"
+=20
+ inherit pypi
++
++RDEPENDS_${PN} =3D "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint"
+--=20
+2.20.1
 
-Thanks
-
-
-> Thanks,
-> Robert
->
->
 
