@@ -1,33 +1,50 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CCDF96B50B
+Return-Path: <paolo.valente@linaro.org>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E7C8B7D6C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 07:49:19 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44jyDv6KKjz44
+	Tue, 16 Apr 2019 08:43:15 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id k11so25813937wro.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 09:49:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1555400960;
-	bh=LIWCLu0xc4cqPQm66FAeFVwylS6PbXaDQ7oeI3LZElg=;
-	h=From:To:Subject:Date:From;
-	b=FaxBLeJA+egaQ2+Ylyatj2tcx0f5jQIyUh70ZhkhBN8qNWVwslye9jCdnvqVS/kI1
-	6WSOW9+PkMOHhP965KKxveKjLKXo+iwghJ06Mga8LSsNPXl70KIRFiS05xSvoRl52c
-	ArLhF/+f0gQInvlase4oJLMA/7irVdLsVMY6isJWY74oACsMqp+hKUKiSHFu12Spwu
-	BxuhXN5OfrHirh/CfO+HWPoYlmiQqU0P8ExLofqAYRzGS0/cwBF5/Upq6IJgqkAAgS
-	CZDy07ieu5z53AmWaDwmqotA3JnC6HT1a5y4bBEUEwqk3rb66Tj+a5d536uduCQIZq
-	YKcIzf1Yb0xwhXuJe/6ovzcpX8bekNBh3XIp/KQ+Id5PIlC38eyq/WUU8bTNWIQXye
-	klOJcpZxqK5XmTTiQlcJy8euvyO7fWflBCouIhPs0VH3o8CGd3o3Pfi7YcM2GjIQiW
-	zRpx6fV5RoX3eEvJl5z1p3+ND0Uc3IDvE3kpldlmmc+L/6xcghqXRRP0R2cgXF4g6p
-	1mwGltPhZKEYiv+Ui6LsFiWZg2lDWdPdYlTF9Gwo927LQDMgYoqifTNS2iMaG8DCHU
-	89ToSbOyKAUX67U9o2+yseKHZp12jj9Hz+wuoOH1/+GiqUBvJPmsDbwVpdOuucqmz3
-	4sBCZBN2gpcGGejICimcUHVo=
-From: Adrian Bunk <bunk@stusta.de>
+	Tue, 16 Apr 2019 01:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=PInmZZGNzRiQrqEW8LFcJGDz/Kwq91jCV5jebGMvQJU=;
+	b=Yc3MG0jNab+qqK46MUI9udtcfkSfIANKZW6Axe6b/zu6ZNj7jw5ABF+osrhxvlNzWd
+	mM9QDYtzzXR5rTtM4FZ6hTfpX2Ndxv8+djD7EAFpRnfzU3Obn35B6+Z0Zlu4wUYV0wN0
+	0ADw9KZh7jw0hq6rfvgGZhiFZwCUB+ohC6HJEp5M0+ugl8RPYm45t+5w9bkUC07VP8Ad
+	xvbyeQhzz/0l4t+FLL8xGywLOTAQKiQdJ7eRECeviZN0fafN7jC1EjWoac1Vh4wZVsOI
+	q7+UhfBp/WCk5LbgWK4PRbjGV1kqqBZbmsh44e+1ZZap+IWWbBfgGNvunSVHbEYkujdt
+	l20g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=PInmZZGNzRiQrqEW8LFcJGDz/Kwq91jCV5jebGMvQJU=;
+	b=qV48Iuy1dYy9T87cd2jDK7UiMFJAu5Iee4az14CSOlVBrsEpNojwlJejQ4wflCnh22
+	QweLVm9Osm/lChxGdofn1CpsFufG5sebEod+AXxpKMnA6RteMIZZQJeE/3U095hVaX0D
+	z920r2N2yPIYhx8yCElUdUSxSLfL8rNVd+Mf3re/axzbB1vTNVpGzl8uQ75uM0mL7I9W
+	KtpiDgfBUFuh4M9ax1mfuU7tfX+IBI1y8LLpn3NRz2bKWR4uLot9yHQX5Migal3yxVm2
+	y8VKp6q2Xv1MLlkXwE6plQfFJC56dtoMpFAy1I53Q+p6I662jEBk03bGItmAbWpcVCQ5
+	iEWw==
+X-Gm-Message-State: APjAAAUGQJqHMQ+WDgripNSlkhbL1lWCr27Fx/EF4lc3kCvntpMXf6IJ
+	opigUGdSbn6trUy2zDFUsMGDXlkDWEcT3A==
+X-Google-Smtp-Source: APXvYqx2XIGE1Wx3+aEzP6nnVoN0jFELPfkwO/zo0jQgbOCqTzdSx8jHUvkepidSFnwAj56PqnVTMw==
+X-Received: by 2002:a5d:5401:: with SMTP id g1mr49491567wrv.70.1555404196236; 
+	Tue, 16 Apr 2019 01:43:16 -0700 (PDT)
+Received: from localhost.localdomain (146-241-108-11.dyn.eolo.it.
+	[146.241.108.11]) by smtp.gmail.com with ESMTPSA id
+	r9sm17240638wmh.38.2019.04.16.01.43.15
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 16 Apr 2019 01:43:15 -0700 (PDT)
+From: Paolo Valente <paolo.valente@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Apr 2019 10:49:18 +0300
-Message-Id: <20190416074918.28537-2-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] linux-atm: Replace bogus on_exit removal with musl-specific hack
+Date: Tue, 16 Apr 2019 10:43:02 +0200
+Message-Id: <20190416084302.6825-1-paolo.valente@linaro.org>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V2] s-suite: push SRCREV to version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,121 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2019 07:49:20 -0000
+X-List-Received-Date: Tue, 16 Apr 2019 08:43:16 -0000
+Content-Transfer-Encoding: 8bit
 
-Functions registered by atexit and on_exit have different signatures,
-if registered with atexit no parameters are passed.
-
-The function only prints a trace on nonzero exit(),
-so can safely be disabled in musl builds.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
 ---
- ...sigd-Replace-on_exit-API-with-atexit.patch | 30 ---------------
- .../linux-atm/linux-atm/musl-no-on_exit.patch | 37 +++++++++++++++++++
- .../linux-atm/linux-atm_2.5.2.bb              |  3 +-
- 3 files changed, 39 insertions(+), 31 deletions(-)
- delete mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/musl-no-on_exit.patch
+ meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
-deleted file mode 100644
-index ce061231c..000000000
---- a/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 27fa80dc8045e71c30dd2abea835206d5c8f6c71 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 17 Jun 2017 16:18:56 -0700
--Subject: [PATCH 2/3] sigd: Replace on_exit() API with atexit()
--
--on_exit is not universally available
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/sigd/atmsigd.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/sigd/atmsigd.c b/src/sigd/atmsigd.c
--index 52e41c7..b766606 100644
----- a/src/sigd/atmsigd.c
--+++ b/src/sigd/atmsigd.c
--@@ -517,7 +517,7 @@ int main(int argc,char **argv)
-- 	    exit(0);
-- 	}
--     }
---    (void) on_exit(trace_on_exit,NULL);
--+    atexit(trace_on_exit);
--     poll_loop();
--     close_all();
--     for (sig = entities; sig; sig = sig->next) stop_saal(&sig->saal);
---- 
--2.13.1
--
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/musl-no-on_exit.patch b/meta-networking/recipes-support/linux-atm/linux-atm/musl-no-on_exit.patch
-new file mode 100644
-index 000000000..25211d7c1
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/musl-no-on_exit.patch
-@@ -0,0 +1,37 @@
-+Description: musl lacks on_exit
-+Author: Adrian Bunk <bunk@stusta.de>
-+
-+Only prints a trace on nonzero exit(),
-+so can safely be disabled in musl builds.
-+
-+Signed-off-by: Adrian Bunk <bunk@stusta.de>
-+Upstream-Status: Inappropriate [musl specific]
-+
-+--- linux-atm-2.5.1.orig/src/sigd/atmsigd.c
-++++ linux-atm-2.5.1/src/sigd/atmsigd.c
-+@@ -283,6 +283,7 @@ static void setup_signals(void)
-+ /* ------------------------------- main ...  ------------------------------- */
-+ 
-+ 
-++#if 0
-+ static void trace_on_exit(int status,void *dummy)
-+ {
-+     char path[PATH_MAX+1];
-+@@ -300,6 +301,7 @@ static void trace_on_exit(int status,voi
-+     dump_trace(file,"Message trace (after error exit)");
-+     if (file != stderr) (void) fclose(file);
-+ }
-++#endif
-+ 
-+ 
-+ static void manual_override(void)
-+@@ -517,7 +519,9 @@ int main(int argc,char **argv)
-+ 	    exit(0);
-+ 	}
-+     }
-++#if 0
-+     (void) on_exit(trace_on_exit,NULL);
-++#endif
-+     poll_loop();
-+     close_all();
-+     for (sig = entities; sig; sig = sig->next) stop_saal(&sig->saal);
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index d34dc842f..9ed7ca613 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -10,11 +10,12 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
-            file://install-from-buildir.patch \
-            file://0001-fix-compile-error-with-linux-kernel-v4.8.patch \
-            file://0001-ttcp-Add-printf-format-string.patch \
--           file://0002-sigd-Replace-on_exit-API-with-atexit.patch \
-            file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
-            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
- "
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 47d21d36c..706a55e11 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
  
-+SRC_URI_append_libc-musl = " file://musl-no-on_exit.patch"
-+
- SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
- SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
+-SRCREV = "d05006865f68829fa7603bdb92bd51649f5ba1b6"
+-PV = "0.0+git${SRCPV}"
++SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
++PV = "3.2+git${SRCPV}"
+ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
  
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.20.1
 
 
