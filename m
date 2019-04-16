@@ -1,50 +1,63 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E7C8B7D6C5
+Return-Path: <alistair@alistair23.me>
+X-Greylist: delayed 17939 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 16 Apr 2019 10:30:47 UTC
+Received: from APC01-PU1-obe.outbound.protection.outlook.com
+	(mail-oln040092254020.outbound.protection.outlook.com [40.92.254.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 980457D8CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 08:43:15 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id k11so25813937wro.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 01:43:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PInmZZGNzRiQrqEW8LFcJGDz/Kwq91jCV5jebGMvQJU=;
-	b=Yc3MG0jNab+qqK46MUI9udtcfkSfIANKZW6Axe6b/zu6ZNj7jw5ABF+osrhxvlNzWd
-	mM9QDYtzzXR5rTtM4FZ6hTfpX2Ndxv8+djD7EAFpRnfzU3Obn35B6+Z0Zlu4wUYV0wN0
-	0ADw9KZh7jw0hq6rfvgGZhiFZwCUB+ohC6HJEp5M0+ugl8RPYm45t+5w9bkUC07VP8Ad
-	xvbyeQhzz/0l4t+FLL8xGywLOTAQKiQdJ7eRECeviZN0fafN7jC1EjWoac1Vh4wZVsOI
-	q7+UhfBp/WCk5LbgWK4PRbjGV1kqqBZbmsh44e+1ZZap+IWWbBfgGNvunSVHbEYkujdt
-	l20g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=PInmZZGNzRiQrqEW8LFcJGDz/Kwq91jCV5jebGMvQJU=;
-	b=qV48Iuy1dYy9T87cd2jDK7UiMFJAu5Iee4az14CSOlVBrsEpNojwlJejQ4wflCnh22
-	QweLVm9Osm/lChxGdofn1CpsFufG5sebEod+AXxpKMnA6RteMIZZQJeE/3U095hVaX0D
-	z920r2N2yPIYhx8yCElUdUSxSLfL8rNVd+Mf3re/axzbB1vTNVpGzl8uQ75uM0mL7I9W
-	KtpiDgfBUFuh4M9ax1mfuU7tfX+IBI1y8LLpn3NRz2bKWR4uLot9yHQX5Migal3yxVm2
-	y8VKp6q2Xv1MLlkXwE6plQfFJC56dtoMpFAy1I53Q+p6I662jEBk03bGItmAbWpcVCQ5
-	iEWw==
-X-Gm-Message-State: APjAAAUGQJqHMQ+WDgripNSlkhbL1lWCr27Fx/EF4lc3kCvntpMXf6IJ
-	opigUGdSbn6trUy2zDFUsMGDXlkDWEcT3A==
-X-Google-Smtp-Source: APXvYqx2XIGE1Wx3+aEzP6nnVoN0jFELPfkwO/zo0jQgbOCqTzdSx8jHUvkepidSFnwAj56PqnVTMw==
-X-Received: by 2002:a5d:5401:: with SMTP id g1mr49491567wrv.70.1555404196236; 
-	Tue, 16 Apr 2019 01:43:16 -0700 (PDT)
-Received: from localhost.localdomain (146-241-108-11.dyn.eolo.it.
-	[146.241.108.11]) by smtp.gmail.com with ESMTPSA id
-	r9sm17240638wmh.38.2019.04.16.01.43.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Apr 2019 01:43:15 -0700 (PDT)
-From: Paolo Valente <paolo.valente@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Apr 2019 10:43:02 +0200
-Message-Id: <20190416084302.6825-1-paolo.valente@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	Tue, 16 Apr 2019 10:30:47 +0000 (UTC)
+Received: from PU1APC01FT020.eop-APC01.prod.protection.outlook.com
+	(10.152.252.55) by PU1APC01HT126.eop-APC01.prod.protection.outlook.com
+	(10.152.253.76) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1771.16;
+	Tue, 16 Apr 2019 04:00:49 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.252.58) by
+	PU1APC01FT020.mail.protection.outlook.com (10.152.252.217) with
+	Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+	15.20.1771.16 via Frontend Transport; Tue, 16 Apr 2019 04:00:49 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::a9fb:86c9:a1ef:59ec]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::a9fb:86c9:a1ef:59ec%5]) with mapi id 15.20.1792.020;
+	Tue, 16 Apr 2019 04:00:49 +0000
+From: Alistair Francis <alistair@alistair23.me>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] u-boot: Fix missing Python.h build failure
+Thread-Index: AQHU9Aj6u5WUPnoorUyOYJY0EozqlA==
+Date: Tue, 16 Apr 2019 04:00:49 +0000
+Message-ID: <PSXP216MB02777C55F909552A664FC2D6DD240@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
+Accept-Language: en-AU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BYAPR02CA0037.namprd02.prod.outlook.com
+	(2603:10b6:a03:54::14) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	(2603:1096:300:a::18)
+x-incomingtopheadermarker: OriginalChecksum:494216C83E68D07B956F29028080F14DDA911B406A1C089AD3C42591D8637A91;
+	UpperCasedChecksum:408F76611B525E3955A5C10255FF7EC9E5973402477DF75F648A698A2CD1A296;
+	SizeAsReceived:7451; Count:48
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.20.1
+x-tmn: [cTSC/QaB+Jnp60IidBZ1bhRa4WLjEJwApzjL0K9pj8uL398/eC0ruJSl2ce9n25u]
+x-microsoft-original-message-id: <20190416040035.17741-1-alistair@alistair23.me>
+x-ms-publictraffictype: Email
+x-incomingheadercount: 48
+x-eopattributedmessage: 0
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031323274)(2017031324274)(2017031322404)(1601125500)(1603101475)(1701031045);
+	SRVR:PU1APC01HT126; 
+x-ms-traffictypediagnostic: PU1APC01HT126:
+x-microsoft-antispam-message-info: ql3HNPEbyFJcUnM74Jx0jgQaR7e9tmJKMd/FymOn8MhWMoYC5bz6Z25Nwgga9GvoP+uuPV2E6S6coi3fFvWXdHFHhN3JnkrmJkL2owFlyU+OJhDMwDnyWf1Eyxek1bFbGJQGDFw5p3XpXVoUeTszC4NKvMWeX4jf89E0d0/lnk8PG5RmwEnU0MzlPPzt3eSP
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] s-suite: push SRCREV to version 3.2
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 01368085-5aa3-4fcf-04f8-08d6c2201c59
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Apr 2019 04:00:49.4305 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PU1APC01HT126
+Subject: [PATCH] u-boot: Fix missing Python.h build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +70,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2019 08:43:16 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 16 Apr 2019 10:30:48 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
 ---
- meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...rt-pylibfdt-Use-Python-2-in-Makefile.patch | 37 +++++++++++++++++++
+ meta/recipes-bsp/u-boot/u-boot-common.inc     |  4 +-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-=
+Python-2-in-Makefile.patch
 
-diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-index 47d21d36c..706a55e11 100644
---- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-+++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
- 
--SRCREV = "d05006865f68829fa7603bdb92bd51649f5ba1b6"
--PV = "0.0+git${SRCPV}"
-+SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
-+PV = "3.2+git${SRCPV}"
- SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
- 
- S = "${WORKDIR}/git"
--- 
+diff --git a/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-=
+2-in-Makefile.patch b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Us=
+e-Python-2-in-Makefile.patch
+new file mode 100644
+index 0000000000..a7c934d49e
+--- /dev/null
++++ b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Ma=
+kefile.patch
+@@ -0,0 +1,37 @@
++From 30f41eae3d7a3d07e1d62b98d11430d5b2d24513 Mon Sep 17 00:00:00 2001
++From: Alistair Francis <alistair@alistair23.me>
++Date: Sat, 13 Apr 2019 13:41:58 -0700
++Subject: [PATCH] Revert "pylibfdt: Use Python 2 in Makefile"
++
++This reverts commit 03e6151d5bb42fd055e9c1e571440359bd5b5282.
++
++Revert the patch to avoid:
++| scripts/dtc/pylibfdt/libfdt_wrap.c:149:11: fatal error: Python.h: No suc=
+h file or directory
++|  # include <Python.h>
++|            ^~~~~~~~~~
++| compilation terminated.
++
++errors when buildling u-boot in OE.
++
++Signed-off-by: Alistair Francis <alistair@alistair23.me>
++Upstream-Status: Inappropriate [configuration]
++---
++ scripts/dtc/pylibfdt/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/scripts/dtc/pylibfdt/Makefile b/scripts/dtc/pylibfdt/Makefile
++index 15e66ad44d..c769d7db06 100644
++--- a/scripts/dtc/pylibfdt/Makefile
+++++ b/scripts/dtc/pylibfdt/Makefile
++@@ -21,7 +21,7 @@ quiet_cmd_pymod =3D PYMOD   $@
++ 		CPPFLAGS=3D"$(HOSTCFLAGS) -I$(LIBFDT_srcdir)" OBJDIR=3D$(obj) \
++ 		SOURCES=3D"$(PYLIBFDT_srcs)" \
++ 		SWIG_OPTS=3D"-I$(LIBFDT_srcdir) -I$(LIBFDT_srcdir)/.." \
++-		$(PYTHON2) $< --quiet build_ext --inplace
+++		$(PYTHON) $< --quiet build_ext --inplace
++=20
++ $(obj)/_libfdt.so: $(src)/setup.py $(PYLIBFDT_srcs) FORCE
++ 	$(call if_changed,pymod)
++--=20
++2.20.1
++
+diff --git a/meta/recipes-bsp/u-boot/u-boot-common.inc b/meta/recipes-bsp/u=
+-boot/u-boot-common.inc
+index a0212e1b6b..5e81cabdbd 100644
+--- a/meta/recipes-bsp/u-boot/u-boot-common.inc
++++ b/meta/recipes-bsp/u-boot/u-boot-common.inc
+@@ -10,6 +10,8 @@ PE =3D "1"
+ # repo during parse
+ SRCREV =3D "3c99166441bf3ea325af2da83cfe65430b49c066"
+=20
+-SRC_URI =3D "git://git.denx.de/u-boot.git"
++SRC_URI =3D "git://git.denx.de/u-boot.git \
++           file://0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch \
++          "
+=20
+ S =3D "${WORKDIR}/git"
+--=20
 2.20.1
 
 
