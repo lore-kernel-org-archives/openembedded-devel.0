@@ -1,49 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 104127D736
+Return-Path: <robert.joslyn@redrectangle.org>
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+	[217.70.183.200])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FC5D79CCB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 20:58:51 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id z16so20908061qtn.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2019 13:58:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4ZBF3KMrXI2tOxHAYXNhMfUWfxipF5LZYHHs9feAZMk=;
-	b=KSjWiBe88P1vNivJPjWi46iwt59C/+f9lMFMZ2EjxkK4pivb8oROwohGmfnEfmzUC4
-	nOH7BsESB4pX31Mj0Prd7c6SbVYDQ4aHDFdgChqVmHzQJDF3Xcah3njDERTlG8Vk3p+i
-	JFKbBtv+s4EpxFWy0d7M73juQ3zEcaABB5hi3LFE5bFcN/MDPl6YZRWu5dZ9aDbf4vSf
-	ONvsJyr13I1lvTPUyLswVbjAoB+r2pUQTYAdceY1KJIHKRUs08e8nVfC16rrDlxmGQbW
-	toO9zXl2h6jQsdTWosatyLo0XUhdJ3Fhtt7Nq5O/hHPa5iS2yJNNSv72S1dijlk3mpNW
-	UGsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4ZBF3KMrXI2tOxHAYXNhMfUWfxipF5LZYHHs9feAZMk=;
-	b=Kl1nxEj2tGsi3WH9Ggo5yjqPUdaZx6nnpiWd7RuMpSzA5KbtWzzZNUDhRXFKmXPCA/
-	kglo+VndYr8/pY3sbvKikiQ1ETxCpBvIbi7KTaSJSyFxa3UyKkaaEqiIjADTkK2TicPN
-	2eY6dskZhCrpLCbLPHZi/1B/6c1rH9+rSm88zVB7/fk+bi4kgpcF8B4WUGoSlIaII8TD
-	Rt/wy346mxkVMKcsSz3KzRnXIXEFXLttT2BksEjY8wbINUu69OXFIpO2DpSw8sO8CBKT
-	vZmfF7SBP9PsnjyuFeCvBDoRFR0u9Llguytl6Q5g9X2RHUtoGif5iW/UR5pndD8cCyr0
-	yQxQ==
-X-Gm-Message-State: APjAAAUQXCZAL+dfiFnPx1N7eSyzKknx28LjfI8nd4kRfUeYpyx0ze2U
-	S5HaYb+D/jVY0KntB8MV+u4F4amdN4GM6s9MCIU=
-X-Google-Smtp-Source: APXvYqx9OWSLUKejup07njuGg45vzfqDXeRAobALwgqCeVmmJK7sqI+uo0wXpH5gEZ79n8hA5QPeMB7JQlEuQhDVKbo=
-X-Received: by 2002:ac8:1833:: with SMTP id q48mr62200769qtj.133.1555361932692;
-	Mon, 15 Apr 2019 13:58:52 -0700 (PDT)
+	Tue, 16 Apr 2019 03:37:42 +0000 (UTC)
+X-Originating-IP: 50.37.87.235
+Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
+	[50.37.87.235])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay7-d.mail.gandi.net (Postfix) with ESMTPSA id 7E79420007;
+	Tue, 16 Apr 2019 03:37:42 +0000 (UTC)
+Message-ID: <5c1d0aa631564af5cde6565a70fd54a58a46c97b.camel@redrectangle.org>
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Apr 2019 20:37:38 -0700
+In-Reply-To: <CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
+References: <20190414161725.21617-1-robert.joslyn@redrectangle.org>
+	<20190414161725.21617-4-robert.joslyn@redrectangle.org>
+	<CAMKF1sp2+DGg32W415-om0Y10zwJQEL54YARNBkWBskckYaRnw@mail.gmail.com>
+User-Agent: Evolution 3.30.5 
 MIME-Version: 1.0
-References: <20190415185146.14189-1-alistair.francis@wdc.com>
-	<CAMKF1sqhZc8Y9KMPpadR0EgzGkh4bYreo2KOsnFB_ObBkYeNuA@mail.gmail.com>
-	<CAKmqyKOB8OES414EocPqiDJe-TrJ2naiVC7zg2F++Yxp4majqg@mail.gmail.com>
-In-Reply-To: <CAKmqyKOB8OES414EocPqiDJe-TrJ2naiVC7zg2F++Yxp4majqg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Apr 2019 13:58:26 -0700
-Message-ID: <CAMKF1spRnYjN5grriwuWB0oxZQ87j3uS+6AA9WipSQDjRe=m2g@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH 1/2] mycroft: Update the systemd service to ensure we are ready to start
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 4/5] gpm: Remove duplicate definition of _GNU_SOURCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,70 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 20:58:52 -0000
+X-List-Received-Date: Tue, 16 Apr 2019 03:37:43 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 15, 2019 at 1:24 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Mon, Apr 15, 2019 at 1:00 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Mon, Apr 15, 2019 at 11:53 AM Alistair Francis <Alistair.Francis@wdc.com>
-> > wrote:
-> >
-> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  .../recipes-multimedia/mycroft/files/mycroft.service         | 5 +++--
-> > >  1 file changed, 3 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git
-> > > a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-> > > b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-> > > index 04cf43620..28729f6b1 100644
-> > > --- a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-> > > +++ b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-> > > @@ -1,10 +1,11 @@
-> > >  [Unit]
-> > >  Description=Mycroft
-> > > -DefaultDependencies=no
-> > > -After=mycroft-setup
-> > > +RequiresMountsFor=/var
-> >
-> >
-> > Does this mean it should be a separate mount point
->
-> I'm not sure what you mean. We just need to ensure that /var is
-> accessible before starting.
->
+On Sun, 2019-04-14 at 11:15 -0700, Khem Raj wrote:
+> 
+> 
+> On Sun, Apr 14, 2019 at 11:09 AM Robert Joslyn <
+> robert.joslyn@redrectangle.org> wrote:
+> > The Makefile already sets -D_GNU_SOURCE in CPPFLAGS, no need to
+> > patch it
+> > in again.
+> 
+> Have you build tested it with musl ?
 
-I guess, I found it for myself that all mount units required to access
-the specified path will be added to After= and Requires=
-field. So this would work in cases where /var is a separate mount or
-simply a directory under / so this seems to be fine.
+Was able to do a musl build and confirmed it builds and runs on my x86
+boards.
 
-> Alistair
->
-> >
-> > >
-> > > +After=mycroft-setup.service
-> > >
-> > >  [Service]
-> > >  Type=forking
-> > > +WorkingDirectory=@LIBDIR@/mycroft
-> > >  ExecStartPre=mkdir -p /var/log/mycroft
-> > >  ExecStart=@LIBDIR@/mycroft/start-mycroft.sh all
-> > >  ExecStop=@LIBDIR@/mycroft/stop-mycroft.sh all
-> > > --
-> > > 2.21.0
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Thanks,
+Robert
+
 
