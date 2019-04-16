@@ -1,63 +1,51 @@
-Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 17939 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 16 Apr 2019 10:30:47 UTC
-Received: from APC01-PU1-obe.outbound.protection.outlook.com
-	(mail-oln040092254020.outbound.protection.outlook.com [40.92.254.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 980457D8CE
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C52E9601F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 10:30:47 +0000 (UTC)
-Received: from PU1APC01FT020.eop-APC01.prod.protection.outlook.com
-	(10.152.252.55) by PU1APC01HT126.eop-APC01.prod.protection.outlook.com
-	(10.152.253.76) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.1771.16;
-	Tue, 16 Apr 2019 04:00:49 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.252.58) by
-	PU1APC01FT020.mail.protection.outlook.com (10.152.252.217) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
-	15.20.1771.16 via Frontend Transport; Tue, 16 Apr 2019 04:00:49 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::a9fb:86c9:a1ef:59ec]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::a9fb:86c9:a1ef:59ec%5]) with mapi id 15.20.1792.020;
-	Tue, 16 Apr 2019 04:00:49 +0000
-From: Alistair Francis <alistair@alistair23.me>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [PATCH] u-boot: Fix missing Python.h build failure
-Thread-Index: AQHU9Aj6u5WUPnoorUyOYJY0EozqlA==
-Date: Tue, 16 Apr 2019 04:00:49 +0000
-Message-ID: <PSXP216MB02777C55F909552A664FC2D6DD240@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
-Accept-Language: en-AU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BYAPR02CA0037.namprd02.prod.outlook.com
-	(2603:10b6:a03:54::14) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	(2603:1096:300:a::18)
-x-incomingtopheadermarker: OriginalChecksum:494216C83E68D07B956F29028080F14DDA911B406A1C089AD3C42591D8637A91;
-	UpperCasedChecksum:408F76611B525E3955A5C10255FF7EC9E5973402477DF75F648A698A2CD1A296;
-	SizeAsReceived:7451; Count:48
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.20.1
-x-tmn: [cTSC/QaB+Jnp60IidBZ1bhRa4WLjEJwApzjL0K9pj8uL398/eC0ruJSl2ce9n25u]
-x-microsoft-original-message-id: <20190416040035.17741-1-alistair@alistair23.me>
-x-ms-publictraffictype: Email
-x-incomingheadercount: 48
-x-eopattributedmessage: 0
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031323274)(2017031324274)(2017031322404)(1601125500)(1603101475)(1701031045);
-	SRVR:PU1APC01HT126; 
-x-ms-traffictypediagnostic: PU1APC01HT126:
-x-microsoft-antispam-message-info: ql3HNPEbyFJcUnM74Jx0jgQaR7e9tmJKMd/FymOn8MhWMoYC5bz6Z25Nwgga9GvoP+uuPV2E6S6coi3fFvWXdHFHhN3JnkrmJkL2owFlyU+OJhDMwDnyWf1Eyxek1bFbGJQGDFw5p3XpXVoUeTszC4NKvMWeX4jf89E0d0/lnk8PG5RmwEnU0MzlPPzt3eSP
-MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01368085-5aa3-4fcf-04f8-08d6c2201c59
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Apr 2019 04:00:49.4305 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PU1APC01HT126
-Subject: [PATCH] u-boot: Fix missing Python.h build failure
+	Tue, 16 Apr 2019 15:29:31 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id t28so23766446qte.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Apr 2019 08:29:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=9rX4HX5VD3usY3dDgXHtOdH3KFU4jmHSDRuX0DE4Gu0=;
+	b=YgA9r/vS4AhT1/pKk6A4ro7K3bWac8OyhmJL4fpJ+CeaRWk1EJNwLYlhsxSJnsGTp3
+	RhzDr5ed182Lxn++XFixWKGMcjiTPX1PC3cr6wpEhzZCfkcHMxUSuzdVV/eLE2JgWgRG
+	xxZaY6f8Wh3dgR8IDxxxk3/J4v8PuBUHqTs2TU6B0LZKgkJrx/w5BmnfiBmGrcs6OAWF
+	vSXi4LfyPzg1WGiOk12J1fSHNUCZx6EG56hSMD9J4V/jbF/nNdIctajGH3ep1W3a7/nu
+	LOXnMRrDPdzPavoweiqIwAjc1yKvtP2OVCQncTfLgGwbJJO3BfJ2tL+BounUl/9pl9ZZ
+	bsgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=9rX4HX5VD3usY3dDgXHtOdH3KFU4jmHSDRuX0DE4Gu0=;
+	b=GIZ15NSyrO7CwMPRF9c96eJAtriS3Zeksw7s6Xu/q53kS7c0hIhUyBKuuWEC0dZLh/
+	KDekAC+s0TH1ReBYbOXRb4gTSzH5rs0Ij3GAgf3BwigVj0RDXA6Xrv1afs/jPsw1qUSz
+	Z3/2OTL99MthtLV5yKdkKBopSZyqKj/iScm/tD4zpoOFr8dKdtCxTV5x4hxRNXFV+YrD
+	kUwzeSZBWcF6YczvGpbZTWWRIDxoA3saFxPxD2SPSJlxHzgQuXiS2wDkaHRg9ScFOQ9p
+	HQ72wJTWyNB/u3+wE4qHah8n8aDOmRsb7LqGX2Jxj2Pwel2pKU+gTHPbvkNDEec36xNZ
+	lioQ==
+X-Gm-Message-State: APjAAAXFOEAp3KxaOOnk4aANYmIdPIecf7bkKSzA/xefANICDj5Xjb49
+	HgP5YemizlXS8I5SZW5Paf3t16a+Wa0=
+X-Google-Smtp-Source: APXvYqyu8Gx/kOFa2x9xGT6c/x+gEMrL6Mld/XCTl//Fcv+g1mePWgmoQanfL+UnmIXjtmX3ty9MTA==
+X-Received: by 2002:a0c:87b3:: with SMTP id 48mr65749644qvj.199.1555428571999; 
+	Tue, 16 Apr 2019 08:29:31 -0700 (PDT)
+Received: from prague.hsd1.va.comcast.net
+	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
+	by smtp.gmail.com with ESMTPSA id
+	n41sm38067914qtf.63.2019.04.16.08.29.30
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 16 Apr 2019 08:29:31 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+X-Google-Original-From: Philip Balister <philip@opensdr.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Apr 2019 11:29:27 -0400
+Message-Id: <20190416152927.20043-1-philip@opensdr.com>
+X-Mailer: git-send-email 2.13.6
+Cc: Philip Balister <philip@opensdr.com>
+Subject: [meta-oe][PATCH] sip: Update to 4.19.16.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,82 +58,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2019 10:30:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 16 Apr 2019 15:29:33 -0000
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
+ * Note SRC_URI changed from SourceForge to Riverbank
+
+Signed-off-by: Philip Balister <philip@opensdr.com>
 ---
- ...rt-pylibfdt-Use-Python-2-in-Makefile.patch | 37 +++++++++++++++++++
- meta/recipes-bsp/u-boot/u-boot-common.inc     |  4 +-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-=
-Python-2-in-Makefile.patch
+ meta-oe/recipes-devtools/sip/sip.inc                       | 14 +++++++-------
+ meta-oe/recipes-devtools/sip/sip3_4.19.13.bb               | 11 -----------
+ meta-oe/recipes-devtools/sip/sip3_4.19.16.bb               | 11 +++++++++++
+ .../sip/{sip_4.19.13.bb => sip_4.19.16.bb}                 |  0
+ 4 files changed, 18 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
+ create mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
+ rename meta-oe/recipes-devtools/sip/{sip_4.19.13.bb => sip_4.19.16.bb} (100%)
 
-diff --git a/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-=
-2-in-Makefile.patch b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Us=
-e-Python-2-in-Makefile.patch
+diff --git a/meta-oe/recipes-devtools/sip/sip.inc b/meta-oe/recipes-devtools/sip/sip.inc
+index d0795454e..092531b32 100644
+--- a/meta-oe/recipes-devtools/sip/sip.inc
++++ b/meta-oe/recipes-devtools/sip/sip.inc
+@@ -4,10 +4,10 @@ SECTION = "devel"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
++SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
+           "
+-SRC_URI[md5sum] = "9124cb8978742685747a5415179a9890"                           
+-SRC_URI[sha256sum] = "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
++SRC_URI[md5sum] = "7e854b0da395ddc8fb5da82d0321994d"                           
++SRC_URI[sha256sum] = "184c790d58e9527fc6bdac2bbf8638f3d1b41dea922cad8eb83172b4ba70c620"
+ 
+ S = "${WORKDIR}/sip-${PV}"
+ 
+@@ -15,19 +15,19 @@ BBCLASSEXTEND = "native"
+ 
+ do_configure_prepend_class-target() {
+     echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = %(sysroot)/${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
++    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
+     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
++    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+     ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+ }
+ do_configure_prepend_class-native() {
+     echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = ${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
++    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
+     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
++    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+     ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
+ }
+diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
+deleted file mode 100644
+index dc15bc2e2..000000000
+--- a/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require sip.inc
+-
+-DEPENDS = "python3"
+-
+-inherit python3-dir python3native
+-
+-PACKAGES += "python3-sip3"
+-
+-FILES_python3-sip3 = "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/"
+-FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/.debug"
+-
+diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
 new file mode 100644
-index 0000000000..a7c934d49e
+index 000000000..010fa30fe
 --- /dev/null
-+++ b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Ma=
-kefile.patch
-@@ -0,0 +1,37 @@
-+From 30f41eae3d7a3d07e1d62b98d11430d5b2d24513 Mon Sep 17 00:00:00 2001
-+From: Alistair Francis <alistair@alistair23.me>
-+Date: Sat, 13 Apr 2019 13:41:58 -0700
-+Subject: [PATCH] Revert "pylibfdt: Use Python 2 in Makefile"
++++ b/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
+@@ -0,0 +1,11 @@
++require sip.inc
 +
-+This reverts commit 03e6151d5bb42fd055e9c1e571440359bd5b5282.
++DEPENDS = "python3"
 +
-+Revert the patch to avoid:
-+| scripts/dtc/pylibfdt/libfdt_wrap.c:149:11: fatal error: Python.h: No suc=
-h file or directory
-+|  # include <Python.h>
-+|            ^~~~~~~~~~
-+| compilation terminated.
++inherit python3-dir python3native
 +
-+errors when buildling u-boot in OE.
++PACKAGES += "python3-sip3"
 +
-+Signed-off-by: Alistair Francis <alistair@alistair23.me>
-+Upstream-Status: Inappropriate [configuration]
-+---
-+ scripts/dtc/pylibfdt/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++FILES_python3-sip3 = "${libdir}/${PYTHON_DIR}/site-packages/"
++FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
 +
-+diff --git a/scripts/dtc/pylibfdt/Makefile b/scripts/dtc/pylibfdt/Makefile
-+index 15e66ad44d..c769d7db06 100644
-+--- a/scripts/dtc/pylibfdt/Makefile
-++++ b/scripts/dtc/pylibfdt/Makefile
-+@@ -21,7 +21,7 @@ quiet_cmd_pymod =3D PYMOD   $@
-+ 		CPPFLAGS=3D"$(HOSTCFLAGS) -I$(LIBFDT_srcdir)" OBJDIR=3D$(obj) \
-+ 		SOURCES=3D"$(PYLIBFDT_srcs)" \
-+ 		SWIG_OPTS=3D"-I$(LIBFDT_srcdir) -I$(LIBFDT_srcdir)/.." \
-+-		$(PYTHON2) $< --quiet build_ext --inplace
-++		$(PYTHON) $< --quiet build_ext --inplace
-+=20
-+ $(obj)/_libfdt.so: $(src)/setup.py $(PYLIBFDT_srcs) FORCE
-+ 	$(call if_changed,pymod)
-+--=20
-+2.20.1
-+
-diff --git a/meta/recipes-bsp/u-boot/u-boot-common.inc b/meta/recipes-bsp/u=
--boot/u-boot-common.inc
-index a0212e1b6b..5e81cabdbd 100644
---- a/meta/recipes-bsp/u-boot/u-boot-common.inc
-+++ b/meta/recipes-bsp/u-boot/u-boot-common.inc
-@@ -10,6 +10,8 @@ PE =3D "1"
- # repo during parse
- SRCREV =3D "3c99166441bf3ea325af2da83cfe65430b49c066"
-=20
--SRC_URI =3D "git://git.denx.de/u-boot.git"
-+SRC_URI =3D "git://git.denx.de/u-boot.git \
-+           file://0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch \
-+          "
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.20.1
+diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip_4.19.16.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/sip/sip_4.19.13.bb
+rename to meta-oe/recipes-devtools/sip/sip_4.19.16.bb
+-- 
+2.13.6
 
 
