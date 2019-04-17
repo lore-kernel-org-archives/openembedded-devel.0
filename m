@@ -1,30 +1,25 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F7AC7D277
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D74B97D39A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2019 06:12:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,360,1549900800"; d="scan'208";a="59506688"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Apr 2019 14:12:33 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id DAC934CD80D0
+	Wed, 17 Apr 2019 06:13:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3H6DdA3023099
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2019 14:12:31 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 17 Apr 2019 14:12:31 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Tue, 16 Apr 2019 23:13:39 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 16 Apr 2019 23:13:39 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Apr 2019 14:13:22 +0800
-Message-ID: <20190417061322.19414-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Wed, 17 Apr 2019 02:13:12 -0400
+Message-ID: <20190417061312.120376-2-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20190417061312.120376-1-kai.kang@windriver.com>
+References: <20190417061312.120376-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: DAC934CD80D0.AA881
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-py: upgrade 1.6.0 -> 1.8.0
+Subject: [meta-networking][PATCH 2/2] drbd-utils: fix file conflict with base-files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2019 06:12:33 -0000
+X-List-Received-Date: Wed, 17 Apr 2019 06:13:39 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-py_1.6.0.bb to python-py_1.8.0.bb.
+From: Kai Kang <kai.kang@windriver.com>
 
--Upgrade from python3-py_1.6.0.bb to python3-py_1.8.0.bb.
+drbd-utils installs directory /var/run but is a link file installed by
+package base-files. Remove /var/run to fix the file conflict issue.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-py.inc             | 4 ++--
- .../python/{python-py_1.6.0.bb => python-py_1.8.0.bb}         | 0
- .../python/{python3-py_1.6.0.bb => python3-py_1.8.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-py_1.6.0.bb => python-py_1.8.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-py_1.6.0.bb => python3-py_1.8.0.bb} (100%)
+ meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-py.inc b/meta-python/recipes-devtools/python/python-py.inc
-index 8144523c2..b6e0409bd 100644
---- a/meta-python/recipes-devtools/python/python-py.inc
-+++ b/meta-python/recipes-devtools/python/python-py.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://py.readthedocs.io/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb
+index a781e2791..70e04b943 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb
+@@ -47,8 +47,9 @@ do_configure_prepend() {
  
--SRC_URI[md5sum] = "5ccd0cd5373c55171cf9fd61b9f19a1b"
--SRC_URI[sha256sum] = "06a30435d058473046be836d3fc4f27167fd84c45b99704f2fb5509ef61f9af1"
-+SRC_URI[md5sum] = "d9e30436ce7e79f30847f9b30b62e149"
-+SRC_URI[sha256sum] = "dc639b046a6e2cff5bbe40194ad65936d6ba360b52b3c3fe1d08a82dd50b5e53"
+ }
+ do_install_append() {
+-    # don't install empty /var/lock to avoid conflict with base-files
++    # don't install empty /var/lock and /var/run to avoid conflict with base-files
+     rm -rf ${D}${localstatedir}/lock
++    rm -rf ${D}${localstatedir}/run
+ }
  
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-py_1.6.0.bb b/meta-python/recipes-devtools/python/python-py_1.8.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-py_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python-py_1.8.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-py_1.6.0.bb b/meta-python/recipes-devtools/python/python3-py_1.8.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-py_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-py_1.8.0.bb
+ RDEPENDS_${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
 -- 
-2.20.1
-
-
+2.20.0
 
 
