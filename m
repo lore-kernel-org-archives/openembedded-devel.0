@@ -1,51 +1,46 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id C52E9601F2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+	[209.85.160.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E1017D34A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 15:29:31 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id t28so23766446qte.6
+	Wed, 17 Apr 2019 04:07:02 +0000 (UTC)
+Received: by mail-qt1-f182.google.com with SMTP id w5so25855649qtb.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 08:29:33 -0700 (PDT)
+	Tue, 16 Apr 2019 21:07:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=9rX4HX5VD3usY3dDgXHtOdH3KFU4jmHSDRuX0DE4Gu0=;
-	b=YgA9r/vS4AhT1/pKk6A4ro7K3bWac8OyhmJL4fpJ+CeaRWk1EJNwLYlhsxSJnsGTp3
-	RhzDr5ed182Lxn++XFixWKGMcjiTPX1PC3cr6wpEhzZCfkcHMxUSuzdVV/eLE2JgWgRG
-	xxZaY6f8Wh3dgR8IDxxxk3/J4v8PuBUHqTs2TU6B0LZKgkJrx/w5BmnfiBmGrcs6OAWF
-	vSXi4LfyPzg1WGiOk12J1fSHNUCZx6EG56hSMD9J4V/jbF/nNdIctajGH3ep1W3a7/nu
-	LOXnMRrDPdzPavoweiqIwAjc1yKvtP2OVCQncTfLgGwbJJO3BfJ2tL+BounUl/9pl9ZZ
-	bsgw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Y0pVl2XIfVw0nfhMGUGARE6Dvc2iwuqu+N+7zpb7/j8=;
+	b=Bfs376Nyo3/l+lJUXD9Rph7d9CIi+ubFvhfihSG2ZI2CI2LtN0DCUUp6O4SixQ+RKk
+	57Prnh+unn54ta+gAkVCwHvjjXA+onjC4FNbXOOoFWFR0p1HBlR3obo3Q0XvTVmNJjMp
+	19t3OLaZR8A93zUGyLALX0JZtAoA/k6sDP98/PN6MAwt1wa62zGg6yoYWXd08c3bOdSk
+	dtJTYZ/Uu0noZ1jO44upGJce9ifoQSubbeOUzbkGh0HaJaJAYohHG9vqXh8hu8cnFTes
+	b+bS3QTc88tXA79RsEVj+rPra7hstHibjiK+z7V3C1f+oWX8U0qIB0ymCATEq0cdvHYG
+	XGjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=9rX4HX5VD3usY3dDgXHtOdH3KFU4jmHSDRuX0DE4Gu0=;
-	b=GIZ15NSyrO7CwMPRF9c96eJAtriS3Zeksw7s6Xu/q53kS7c0hIhUyBKuuWEC0dZLh/
-	KDekAC+s0TH1ReBYbOXRb4gTSzH5rs0Ij3GAgf3BwigVj0RDXA6Xrv1afs/jPsw1qUSz
-	Z3/2OTL99MthtLV5yKdkKBopSZyqKj/iScm/tD4zpoOFr8dKdtCxTV5x4hxRNXFV+YrD
-	kUwzeSZBWcF6YczvGpbZTWWRIDxoA3saFxPxD2SPSJlxHzgQuXiS2wDkaHRg9ScFOQ9p
-	HQ72wJTWyNB/u3+wE4qHah8n8aDOmRsb7LqGX2Jxj2Pwel2pKU+gTHPbvkNDEec36xNZ
-	lioQ==
-X-Gm-Message-State: APjAAAXFOEAp3KxaOOnk4aANYmIdPIecf7bkKSzA/xefANICDj5Xjb49
-	HgP5YemizlXS8I5SZW5Paf3t16a+Wa0=
-X-Google-Smtp-Source: APXvYqyu8Gx/kOFa2x9xGT6c/x+gEMrL6Mld/XCTl//Fcv+g1mePWgmoQanfL+UnmIXjtmX3ty9MTA==
-X-Received: by 2002:a0c:87b3:: with SMTP id 48mr65749644qvj.199.1555428571999; 
-	Tue, 16 Apr 2019 08:29:31 -0700 (PDT)
-Received: from prague.hsd1.va.comcast.net
-	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
-	by smtp.gmail.com with ESMTPSA id
-	n41sm38067914qtf.63.2019.04.16.08.29.30
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 16 Apr 2019 08:29:31 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-X-Google-Original-From: Philip Balister <philip@opensdr.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Apr 2019 11:29:27 -0400
-Message-Id: <20190416152927.20043-1-philip@opensdr.com>
-X-Mailer: git-send-email 2.13.6
-Cc: Philip Balister <philip@opensdr.com>
-Subject: [meta-oe][PATCH] sip: Update to 4.19.16.
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Y0pVl2XIfVw0nfhMGUGARE6Dvc2iwuqu+N+7zpb7/j8=;
+	b=UXlvRKESWSXIMdN+oeGwPY02fSL/SKnI+F8hlvrfOoLTyUW9HkFn8XNB0HwRICf+m1
+	752mZhOltLjU3IDqQMiLC023qe1apxzc1HN4ZgDfXxUsjSUcIYvFQJdW/aXLu5O3S8Ki
+	0BV5URw+an1u9Uo+ncczXPGoD1JWqzkCVGhFSVgfK71lShxiJaFe9MV5cpgPQQUdW0Nv
+	RMT4ZnDnK8fwgCw7iGzjT2hFZaNNUkrg/A2uumRcwkpmDdEZgQa2Hz0uk4jEiJZJ97ws
+	1lTWc4JdSJYoBJ1CtxPuASlAVhYJwTqnhPSsaLk1nvmFgejtpXfKunVA9jYWB9dI5oqg
+	P+AQ==
+X-Gm-Message-State: APjAAAVydFWZgzluTkKVeOzJlPEubTSmnuBL9y9s+5GgJ69/4fmkEOsT
+	sGzzA9AOBPviccSt8EG5IkNYH0i0yklhNDYf8c8=
+X-Google-Smtp-Source: APXvYqwzx2ryvn0UxTe8RuWr9qz4t2igiLwAF3fFirxxPfcHNe8P8ovhn23qoeIIo9JZ5S8DxcBwMQhko8C93Gjy2Ks=
+X-Received: by 2002:ac8:2aa4:: with SMTP id b33mr68700804qta.127.1555474023297;
+	Tue, 16 Apr 2019 21:07:03 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190415013750.59316-1-aaron.chun.yew.chan@intel.com>
+In-Reply-To: <20190415013750.59316-1-aaron.chun.yew.chan@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 Apr 2019 21:06:37 -0700
+Message-ID: <CAMKF1spKdKKjOsyuS0KMSDpQbW1Y7B1Krto3+=poQqtLLSL4aA@mail.gmail.com>
+To: "Chan, Aaron Chun Yew" <aaron.chun.yew.chan@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] php: Fix libzip extension
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,102 +53,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2019 15:29:33 -0000
+X-List-Received-Date: Wed, 17 Apr 2019 04:07:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 
- * Note SRC_URI changed from SourceForge to Riverbank
+I think this breaks php itself
 
-Signed-off-by: Philip Balister <philip@opensdr.com>
----
- meta-oe/recipes-devtools/sip/sip.inc                       | 14 +++++++-------
- meta-oe/recipes-devtools/sip/sip3_4.19.13.bb               | 11 -----------
- meta-oe/recipes-devtools/sip/sip3_4.19.16.bb               | 11 +++++++++++
- .../sip/{sip_4.19.13.bb => sip_4.19.16.bb}                 |  0
- 4 files changed, 18 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
- create mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
- rename meta-oe/recipes-devtools/sip/{sip_4.19.13.bb => sip_4.19.16.bb} (100%)
+https://errors.yoctoproject.org/Errors/Details/237658/
 
-diff --git a/meta-oe/recipes-devtools/sip/sip.inc b/meta-oe/recipes-devtools/sip/sip.inc
-index d0795454e..092531b32 100644
---- a/meta-oe/recipes-devtools/sip/sip.inc
-+++ b/meta-oe/recipes-devtools/sip/sip.inc
-@@ -4,10 +4,10 @@ SECTION = "devel"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
-+SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
-           "
--SRC_URI[md5sum] = "9124cb8978742685747a5415179a9890"                           
--SRC_URI[sha256sum] = "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
-+SRC_URI[md5sum] = "7e854b0da395ddc8fb5da82d0321994d"                           
-+SRC_URI[sha256sum] = "184c790d58e9527fc6bdac2bbf8638f3d1b41dea922cad8eb83172b4ba70c620"
- 
- S = "${WORKDIR}/sip-${PV}"
- 
-@@ -15,19 +15,19 @@ BBCLASSEXTEND = "native"
- 
- do_configure_prepend_class-target() {
-     echo "py_platform = linux" > sip.cfg
--    echo "py_inc_dir = %(sysroot)/${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
-+    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
-     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
--    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
-+    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-     ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
- }
- do_configure_prepend_class-native() {
-     echo "py_platform = linux" > sip.cfg
--    echo "py_inc_dir = ${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
-+    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
-     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
--    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
-+    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-     ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
- }
-diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
-deleted file mode 100644
-index dc15bc2e2..000000000
---- a/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require sip.inc
--
--DEPENDS = "python3"
--
--inherit python3-dir python3native
--
--PACKAGES += "python3-sip3"
--
--FILES_python3-sip3 = "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/"
--FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/.debug"
--
-diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
-new file mode 100644
-index 000000000..010fa30fe
---- /dev/null
-+++ b/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
-@@ -0,0 +1,11 @@
-+require sip.inc
-+
-+DEPENDS = "python3"
-+
-+inherit python3-dir python3native
-+
-+PACKAGES += "python3-sip3"
-+
-+FILES_python3-sip3 = "${libdir}/${PYTHON_DIR}/site-packages/"
-+FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
-+
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip_4.19.16.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/sip/sip_4.19.13.bb
-rename to meta-oe/recipes-devtools/sip/sip_4.19.16.bb
--- 
-2.13.6
-
+On Sun, Apr 14, 2019 at 6:38 PM <aaron.chun.yew.chan@intel.com> wrote:
+>
+> From: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
+>
+> Phoronix Test Suite 8.x requires zlib and zip extension in PHP 7.x
+>
+> Signed-off-by: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index 6f893ad85..d2cd05f8e 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -47,7 +47,6 @@ EXTRA_OECONF = "--enable-mbstring \
+>                  --enable-fpm \
+>                  --with-libdir=${baselib} \
+>                  --with-gettext=${STAGING_LIBDIR}/.. \
+> -                --with-libzip=${STAGING_LIBDIR}/.. \
+>                  --with-iconv=${STAGING_LIBDIR}/.. \
+>                  --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
+>                  --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
+> @@ -64,7 +63,7 @@ EXTRA_OECONF_class-native = " \
+>                  ${COMMON_EXTRA_OECONF} \
+>  "
+>
+> -PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
+> +PACKAGECONFIG ??= "zip mysql sqlite3 imap opcache openssl \
+>                     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+>  "
+>  PACKAGECONFIG_class-native = ""
+> @@ -90,6 +89,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+>  PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+>  PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
+>  PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
+> +PACKAGECONFIG[zip] = "--enable-zip --with-libzip=${STAGING_LIBDIR}/..,--disable-zip, libzip"
+>
+>  export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+>  export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
