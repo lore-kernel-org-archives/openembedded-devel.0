@@ -1,46 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
-	[209.85.160.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E1017D34A
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 036A17D350
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2019 04:07:02 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id w5so25855649qtb.11
+	Wed, 17 Apr 2019 04:09:04 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id d13so25922583qth.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2019 21:07:03 -0700 (PDT)
+	Tue, 16 Apr 2019 21:09:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Y0pVl2XIfVw0nfhMGUGARE6Dvc2iwuqu+N+7zpb7/j8=;
-	b=Bfs376Nyo3/l+lJUXD9Rph7d9CIi+ubFvhfihSG2ZI2CI2LtN0DCUUp6O4SixQ+RKk
-	57Prnh+unn54ta+gAkVCwHvjjXA+onjC4FNbXOOoFWFR0p1HBlR3obo3Q0XvTVmNJjMp
-	19t3OLaZR8A93zUGyLALX0JZtAoA/k6sDP98/PN6MAwt1wa62zGg6yoYWXd08c3bOdSk
-	dtJTYZ/Uu0noZ1jO44upGJce9ifoQSubbeOUzbkGh0HaJaJAYohHG9vqXh8hu8cnFTes
-	b+bS3QTc88tXA79RsEVj+rPra7hstHibjiK+z7V3C1f+oWX8U0qIB0ymCATEq0cdvHYG
-	XGjA==
+	:cc; bh=2s60qRVAgwudipWXNkN6LYXTpm93SGZ9ov3LMyULG5Q=;
+	b=C5rBU7/ij25PYmlmv/ikz8G8aLQ3ACobAyyKvhCZpkZgmNn3gQw/SHf8ZH4NGDsZ0Z
+	3VHumIWSjqerBwFkRQ9YPFahB6HrD6YGn9zYpjLmmrB5Y4Xk28hXFc2f2K9iVL4H+L5F
+	ELGfi7Tn/RXf5n/RfpGp281sQfWlpCD1UvFckYqdbGlZSQAdl3hAJcSQhA5HhX4B1o0b
+	sDptQNJ22dgUDp9YTbPsPxP79hmNPISb9P8xQTLOpvrRbotbVHHGt5iqrYS1GulvUfvt
+	L5/RBV0YIq3EWlm7LjJkTJcV/2R8koPN0dJcqfBhvQk7NxCkfFEZzsjga8HvNUTwCT2S
+	FuhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Y0pVl2XIfVw0nfhMGUGARE6Dvc2iwuqu+N+7zpb7/j8=;
-	b=UXlvRKESWSXIMdN+oeGwPY02fSL/SKnI+F8hlvrfOoLTyUW9HkFn8XNB0HwRICf+m1
-	752mZhOltLjU3IDqQMiLC023qe1apxzc1HN4ZgDfXxUsjSUcIYvFQJdW/aXLu5O3S8Ki
-	0BV5URw+an1u9Uo+ncczXPGoD1JWqzkCVGhFSVgfK71lShxiJaFe9MV5cpgPQQUdW0Nv
-	RMT4ZnDnK8fwgCw7iGzjT2hFZaNNUkrg/A2uumRcwkpmDdEZgQa2Hz0uk4jEiJZJ97ws
-	1lTWc4JdSJYoBJ1CtxPuASlAVhYJwTqnhPSsaLk1nvmFgejtpXfKunVA9jYWB9dI5oqg
-	P+AQ==
-X-Gm-Message-State: APjAAAVydFWZgzluTkKVeOzJlPEubTSmnuBL9y9s+5GgJ69/4fmkEOsT
-	sGzzA9AOBPviccSt8EG5IkNYH0i0yklhNDYf8c8=
-X-Google-Smtp-Source: APXvYqwzx2ryvn0UxTe8RuWr9qz4t2igiLwAF3fFirxxPfcHNe8P8ovhn23qoeIIo9JZ5S8DxcBwMQhko8C93Gjy2Ks=
-X-Received: by 2002:ac8:2aa4:: with SMTP id b33mr68700804qta.127.1555474023297;
-	Tue, 16 Apr 2019 21:07:03 -0700 (PDT)
+	bh=2s60qRVAgwudipWXNkN6LYXTpm93SGZ9ov3LMyULG5Q=;
+	b=HgeR7dlmUOkv7AdMA9zjAZ/KfzjfuCSXulOfJVDEbBlB4wox5RKBHij/R0aiOXfYsa
+	XzG8ebdliysif3tj5rkeLE8D/Q/o6cv5w28mM4Y7dUHwy/hLx7Vt6t/Uzwu3MEUZmUL8
+	ECVacUpYFynyajK7Ik6NJun4aV0HeC7cDZdF2UXFNOcNlR8sEsSX/Iiqvt3y4zYVWFGr
+	Uw6doZY84T2p7J3YDT9nNpAFihoIbz47Bo2syIpZ0BnQgeiy38YrgUZtkcKJgny8khxW
+	K39K1VT/tv0XGCDEbLDs++vXeM/lL8RWUzanJgTCSSu44OxNKj0oys3lkqSA73j4lNEg
+	6myA==
+X-Gm-Message-State: APjAAAVOSBuvvOpdSXR/eNHTAbuavOTTbrboK76BuTk6JmZYH4WW/Y5H
+	oR+82W/I3xtlLHFmntyFJpcgAN+Vdr9toRvmyYEzcDNC
+X-Google-Smtp-Source: APXvYqwfHRkQjNAH3GnEnXsa3bpoXVjSHQZU6Yk0ctcr54nNQS0Z2QVJVkwCEceF8ToVCp4MbvbqWAelxSdGn9YdNu8=
+X-Received: by 2002:ac8:f86:: with SMTP id b6mr68748929qtk.330.1555474145767; 
+	Tue, 16 Apr 2019 21:09:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190415013750.59316-1-aaron.chun.yew.chan@intel.com>
-In-Reply-To: <20190415013750.59316-1-aaron.chun.yew.chan@intel.com>
+References: <PSXP216MB02777C55F909552A664FC2D6DD240@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
+In-Reply-To: <PSXP216MB02777C55F909552A664FC2D6DD240@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Apr 2019 21:06:37 -0700
-Message-ID: <CAMKF1spKdKKjOsyuS0KMSDpQbW1Y7B1Krto3+=poQqtLLSL4aA@mail.gmail.com>
-To: "Chan, Aaron Chun Yew" <aaron.chun.yew.chan@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] php: Fix libzip extension
+Date: Tue, 16 Apr 2019 21:08:39 -0700
+Message-ID: <CAMKF1sr4PahrHE+799vZxDsVHCQocxxj5dmPPN7b9PoEZaxp5A@mail.gmail.com>
+To: Alistair Francis <alistair@alistair23.me>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] u-boot: Fix missing Python.h build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,55 +54,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2019 04:07:02 -0000
+X-List-Received-Date: Wed, 17 Apr 2019 04:09:05 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-I think this breaks php itself
+wrong ml I guess.
 
-https://errors.yoctoproject.org/Errors/Details/237658/
-
-On Sun, Apr 14, 2019 at 6:38 PM <aaron.chun.yew.chan@intel.com> wrote:
+On Tue, Apr 16, 2019 at 3:31 AM Alistair Francis <alistair@alistair23.me> wrote:
 >
-> From: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
->
-> Phoronix Test Suite 8.x requires zlib and zip extension in PHP 7.x
->
-> Signed-off-by: Aaron Chun Yew Chan <aaron.chun.yew.chan@intel.com>
+> Signed-off-by: Alistair Francis <alistair@alistair23.me>
 > ---
->  meta-oe/recipes-devtools/php/php.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  ...rt-pylibfdt-Use-Python-2-in-Makefile.patch | 37 +++++++++++++++++++
+>  meta/recipes-bsp/u-boot/u-boot-common.inc     |  4 +-
+>  2 files changed, 40 insertions(+), 1 deletion(-)
+>  create mode 100644 meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch
 >
-> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-> index 6f893ad85..d2cd05f8e 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -47,7 +47,6 @@ EXTRA_OECONF = "--enable-mbstring \
->                  --enable-fpm \
->                  --with-libdir=${baselib} \
->                  --with-gettext=${STAGING_LIBDIR}/.. \
-> -                --with-libzip=${STAGING_LIBDIR}/.. \
->                  --with-iconv=${STAGING_LIBDIR}/.. \
->                  --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
->                  --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
-> @@ -64,7 +63,7 @@ EXTRA_OECONF_class-native = " \
->                  ${COMMON_EXTRA_OECONF} \
->  "
+> diff --git a/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch
+> new file mode 100644
+> index 0000000000..a7c934d49e
+> --- /dev/null
+> +++ b/meta/recipes-bsp/u-boot/files/0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch
+> @@ -0,0 +1,37 @@
+> +From 30f41eae3d7a3d07e1d62b98d11430d5b2d24513 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair@alistair23.me>
+> +Date: Sat, 13 Apr 2019 13:41:58 -0700
+> +Subject: [PATCH] Revert "pylibfdt: Use Python 2 in Makefile"
+> +
+> +This reverts commit 03e6151d5bb42fd055e9c1e571440359bd5b5282.
+> +
+> +Revert the patch to avoid:
+> +| scripts/dtc/pylibfdt/libfdt_wrap.c:149:11: fatal error: Python.h: No such file or directory
+> +|  # include <Python.h>
+> +|            ^~~~~~~~~~
+> +| compilation terminated.
+> +
+> +errors when buildling u-boot in OE.
+> +
+> +Signed-off-by: Alistair Francis <alistair@alistair23.me>
+> +Upstream-Status: Inappropriate [configuration]
+> +---
+> + scripts/dtc/pylibfdt/Makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/scripts/dtc/pylibfdt/Makefile b/scripts/dtc/pylibfdt/Makefile
+> +index 15e66ad44d..c769d7db06 100644
+> +--- a/scripts/dtc/pylibfdt/Makefile
+> ++++ b/scripts/dtc/pylibfdt/Makefile
+> +@@ -21,7 +21,7 @@ quiet_cmd_pymod = PYMOD   $@
+> +               CPPFLAGS="$(HOSTCFLAGS) -I$(LIBFDT_srcdir)" OBJDIR=$(obj) \
+> +               SOURCES="$(PYLIBFDT_srcs)" \
+> +               SWIG_OPTS="-I$(LIBFDT_srcdir) -I$(LIBFDT_srcdir)/.." \
+> +-              $(PYTHON2) $< --quiet build_ext --inplace
+> ++              $(PYTHON) $< --quiet build_ext --inplace
+> +
+> + $(obj)/_libfdt.so: $(src)/setup.py $(PYLIBFDT_srcs) FORCE
+> +       $(call if_changed,pymod)
+> +--
+> +2.20.1
+> +
+> diff --git a/meta/recipes-bsp/u-boot/u-boot-common.inc b/meta/recipes-bsp/u-boot/u-boot-common.inc
+> index a0212e1b6b..5e81cabdbd 100644
+> --- a/meta/recipes-bsp/u-boot/u-boot-common.inc
+> +++ b/meta/recipes-bsp/u-boot/u-boot-common.inc
+> @@ -10,6 +10,8 @@ PE = "1"
+>  # repo during parse
+>  SRCREV = "3c99166441bf3ea325af2da83cfe65430b49c066"
 >
-> -PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
-> +PACKAGECONFIG ??= "zip mysql sqlite3 imap opcache openssl \
->                     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
->  "
->  PACKAGECONFIG_class-native = ""
-> @@ -90,6 +89,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
->  PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
->  PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
->  PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
-> +PACKAGECONFIG[zip] = "--enable-zip --with-libzip=${STAGING_LIBDIR}/..,--disable-zip, libzip"
+> -SRC_URI = "git://git.denx.de/u-boot.git"
+> +SRC_URI = "git://git.denx.de/u-boot.git \
+> +           file://0001-Revert-pylibfdt-Use-Python-2-in-Makefile.patch \
+> +          "
 >
->  export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
->  export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+>  S = "${WORKDIR}/git"
 > --
-> 2.17.1
+> 2.20.1
 >
 > --
 > _______________________________________________
