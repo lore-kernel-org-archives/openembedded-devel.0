@@ -1,25 +1,30 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 62D237D22D
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F7D37C749
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2019 01:36:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x3I1ZgWn004579
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 18 Apr 2019 02:04:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,364,1549900800"; d="scan'208";a="59578063"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Apr 2019 10:04:37 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7B1ED4CD8478
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2019 18:35:52 -0700
-Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Wed, 17 Apr 2019 18:35:32 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Thu, 18 Apr 2019 10:04:37 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 18 Apr 2019 10:04:39 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Apr 2019 09:35:29 +0800
-Message-ID: <1555551329-3477-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Thu, 18 Apr 2019 10:05:27 +0800
+Message-ID: <20190418020527.12700-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [meta-networking][PATCH] openhpi: fix failure of ptest case ohpi_035
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: 7B1ED4CD8478.A97E2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pyopenssl: upgrade 18.0.0 -> 19.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,55 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2019 01:36:02 -0000
+X-List-Received-Date: Thu, 18 Apr 2019 02:04:38 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Install missing openhpi.conf to ptest directory to fix failure of ptest
-case ohpi_035:
+-Upgrade from python-pyopenssl_18.0.0.bb to python-pyopenssl_19.0.0.bb.
 
-(process:3559): openhpid-CRITICAL **: 08:41:04.036:
-../../openhpi-3.8.0/openhpid/conf.c:623: Configuration file
-'../../../../openhpi-3.8.0/openhpid/t/ohpi/openhpi.conf' could not be
-opened.
-FAIL: ohpi_035
+-Upgrade from python3-pyopenssl_18.0.0.bb to python3-pyopenssl_19.0.0.bb.
 
-Also chage the configure files mode from 755 to 644.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ meta-python/recipes-devtools/python/python-pyopenssl.inc      | 4 ++--
+ ...{python-pyopenssl_18.0.0.bb => python-pyopenssl_19.0.0.bb} | 0
+ ...ython3-pyopenssl_18.0.0.bb => python3-pyopenssl_19.0.0.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyopenssl_18.0.0.bb => python-pyopenssl_19.0.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyopenssl_18.0.0.bb => python3-pyopenssl_19.0.0.bb} (100%)
 
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-index ca9130d..14cc3d8 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-@@ -70,10 +70,10 @@ export DISTRO
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl.inc b/meta-python/recipes-devtools/python/python-pyopenssl.inc
+index 516e7958a..00c103fcf 100644
+--- a/meta-python/recipes-devtools/python/python-pyopenssl.inc
++++ b/meta-python/recipes-devtools/python/python-pyopenssl.inc
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- do_install_append () {
-     install -m 0755 -d ${D}${sysconfdir}/${BPN}
--    install -m 0755 ${S}/openhpiclient.conf.example ${D}${sysconfdir}/${BPN}/openhpiclient.conf
--    install -m 0700 ${S}/openhpi.conf.example ${D}${sysconfdir}/${BPN}/openhpi.conf
--    install -m 0755 ${S}/simulation.data.example ${D}${sysconfdir}/${BPN}/simulation.data
--    install -m 0755 ${S}/test_agent.data.example ${D}${sysconfdir}/${BPN}/test_agent.data
-+    install -m 0644 ${S}/openhpiclient.conf.example ${D}${sysconfdir}/${BPN}/openhpiclient.conf
-+    install -m 0600 ${S}/openhpi.conf.example ${D}${sysconfdir}/${BPN}/openhpi.conf
-+    install -m 0644 ${S}/simulation.data.example ${D}${sysconfdir}/${BPN}/simulation.data
-+    install -m 0644 ${S}/test_agent.data.example ${D}${sysconfdir}/${BPN}/test_agent.data
-     install -m 0755 ${WORKDIR}/openhpi.init ${D}${sysconfdir}/init.d/openhpid
+ DEPENDS += "openssl ${PYTHON_PN}-cryptography"
  
-     install -d ${D}${systemd_unitdir}/system
-@@ -105,6 +105,9 @@ do_install_ptest () {
-         sed -i "s/^Makefile:/MM:/g" ${x};
-     done;
+-SRC_URI[md5sum] = "c92e9c85b520b7e153fef0f7f3c5dda7"
+-SRC_URI[sha256sum] = "6488f1423b00f73b7ad5167885312bb0ce410d3312eb212393795b53c8caa580"
++SRC_URI[md5sum] = "b9876625dc1d5a5a662d748689191537"
++SRC_URI[sha256sum] = "aeca66338f6de19d1aa46ed634c3b9ae519a64b458f8468aec688e7e3c20f200"
  
-+    install -m 644 ${S}/openhpid/t/ohpi/openhpi.conf ${D}${PTEST_PATH}/openhpid/t/ohpi/
-+    sed -i "s:OPENHPI_CONF=[^ ]*:OPENHPI_CONF=./openhpi.conf:g" ${D}${PTEST_PATH}/openhpid/t/ohpi/Makefile
-+
-     mkdir -p ${D}${PTEST_PATH}/plugins/watchdog/
-     cp -L ${D}/${libdir}/${BPN}/libwatchdog.so ${D}${PTEST_PATH}/plugins/watchdog/
-     cp -L ${D}/${libdir}/${BPN}/libsimulator.so ${D}${PTEST_PATH}/plugins/watchdog/
+ PYPI_PACKAGE = "pyOpenSSL"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_18.0.0.bb b/meta-python/recipes-devtools/python/python-pyopenssl_19.0.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyopenssl_18.0.0.bb
+rename to meta-python/recipes-devtools/python/python-pyopenssl_19.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyopenssl_18.0.0.bb b/meta-python/recipes-devtools/python/python3-pyopenssl_19.0.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyopenssl_18.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyopenssl_19.0.0.bb
 -- 
-2.7.4
+2.20.1
+
+
 
 
