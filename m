@@ -1,44 +1,46 @@
-Return-Path: <leon.anavi@konsulko.com>
-X-Greylist: delayed 2729 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 19 Apr 2019 11:12:19 UTC
-Received: from anavi.org (anavi.technology [91.215.217.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F6EA6025F
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 07F896B07F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Apr 2019 11:12:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org; 
-	s=default;
-	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version
-	:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=QS2fmeTm0PDVb7+VgyVMS3I7IyePM9rUAjhiqPM7xWY=;
-	b=TN8w88Lf200S/KQm9dP0bTExMr
-	aBXXYczGLzkyWyE5ZCfpNop8I7hiWQxfrYX3u7qyc9WhchTl4Ef2Eu80NvFuG3qT2ys+e6stieo7Z
-	2l76sGz0TKeVpW+8batZDgK32I3dTJKvEq4fYSJxdiK/QyXWDASPcpX9b7BJ1+u8gBaY=; 
-Received: from [78.130.245.106] (port=45572 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.91)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1hHQjG-00083l-HQ; Fri, 19 Apr 2019 13:26:50 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
+	Fri, 19 Apr 2019 23:56:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id BF890186E1;
+	Sat, 20 Apr 2019 01:56:13 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id aX5z6zhbI2TD; Sat, 20 Apr 2019 01:56:11 +0200 (CEST)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id AD7DD186C0;
+	Sat, 20 Apr 2019 01:56:10 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9822A1A05E;
+	Sat, 20 Apr 2019 01:56:10 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8C42F1A05C;
+	Sat, 20 Apr 2019 01:56:10 +0200 (CEST)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Sat, 20 Apr 2019 01:56:10 +0200 (CEST)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by seth.se.axis.com (Postfix) with ESMTP id 7F0171A75;
+	Sat, 20 Apr 2019 01:56:10 +0200 (CEST)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x3JNuAvi003601;
+	Sat, 20 Apr 2019 01:56:11 +0200
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x3JNuAV9003598;
+	Sat, 20 Apr 2019 01:56:10 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Apr 2019 13:26:33 +0300
-Message-Id: <1555669593-12468-1-git-send-email-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: [meta-oe][PATCH] openbox: Add python-shell as a runtime dependency
+Date: Sat, 20 Apr 2019 01:56:01 +0200
+Message-Id: <20190419235602.3553-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [meta-webserver][PATCH 1/2] apache2: Correct appending to SYSROOT_PREPROCESS_FUNCS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,29 +53,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2019 11:12:20 -0000
+X-List-Received-Date: Fri, 19 Apr 2019 23:56:14 -0000
 
-/usr/libexec/openbox-xdg-autostart imports Python module glob
-for Unix style pathname pattern expansion. File glob.py is
-provided by python-shell therefore it has been added to the
-RDEPENDS of openbox.
+A missing space lead to problems if something else was already added to
+SYSROOT_PREPROCESS_FUNCS.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb | 2 +-
+
+We have a bbappend which amongst others inherits useradd, which also
+appends to SYSROOT_PREPROCESS_FUNCS. What really confuses me though,
+is that there was no error due to not being able to find the non-
+existent useradd_sysroot_sstateapache_sysroot_preprocess function...
+Only reason I noticed that there was a problem was because other
+packages failed to build because apxs had not been installed in the
+sysroot as expected.
+
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-index f4d21b8..9af3798 100644
---- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-+++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-@@ -54,4 +54,4 @@ FILES_${PN}-gnome += " \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
+index d58ccb8f2..c6961ef9b 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
+@@ -147,7 +147,7 @@ do_install_append_class-native() {
+     install -m 755 server/gen_test_char ${D}${bindir}
+ }
  
- FILES_${PN}-config += "${sysconfdir}"
+-SYSROOT_PREPROCESS_FUNCS_append_class-target = "apache_sysroot_preprocess"
++SYSROOT_PREPROCESS_FUNCS_append_class-target = " apache_sysroot_preprocess"
  
--RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python pyxdg"
-+RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python python-shell pyxdg"
+ apache_sysroot_preprocess() {
+     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
 -- 
-2.7.4
+2.12.0
 
 
