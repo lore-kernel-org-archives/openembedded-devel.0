@@ -1,53 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 073267D274
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 88F6E60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2019 15:54:22 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id y13so3587984wrd.3
+	Fri, 19 Apr 2019 01:48:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,368,1549900800"; d="scan'208";a="59707368"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Apr 2019 09:48:39 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 441814C8B03D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2019 08:54:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=yei249p63Nqsiprv4ysm9O+r2lRJv1VLiGki/8tdKNc=;
-	b=elDUdUUWXpiaIrM3v30nXdqRq228uzushb9segI4dLdQ1Rna9I88MAMPSH3N4SJais
-	fOL/FZ7euG1Vc/iF1ivYOle4EIZy3eE2otJ/OFDX6jPfcYuff5JqcNQx15y84OpOL0Qk
-	lEJ5vgHf5kg3Us4QXMJNb6srbBjotYz7+JRD1u/YdwThPp2daTuC8+21GUUgsBQjbdEq
-	1NVeGVaWy7SZk9Le5BqyuBo/kiYLuBGwfyVxZoRIAs0PIo5WwKXw5++3TZRlMUvoJg+f
-	xRLmSU1+g4WQQxxp+2S71xnbQLPpskRSIb0kqvk5bKkQPWf4nrgMKvT4Kjr5Omm4n5dD
-	Du7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=yei249p63Nqsiprv4ysm9O+r2lRJv1VLiGki/8tdKNc=;
-	b=ogXikj7CQycUsQ3pL2DbftE4P08QtQNpbARG83TNL2bzbG+en5FyxFAaF3fW5xcSK3
-	6KMuXEgKQ8NlNdVN0DKYxy5UBKW1U91HN7mdPxRe+8ugLbbWDFg+7W0NDOCrlVbtOmwD
-	eT2x/hLjWXliNbQlFn77IM5bTDR8sHSUv3CYVSERBjhxmoQ8eZJr+unzTZzcdnIuJPck
-	dyfnUQlCrWDVV6akcPitp0KWd490UyVZkrsReqwYm6reEd4oO57vvBdJQzqEqQb+rBPZ
-	kqWuxjRuIwGkxoLmSrEseoQeQiMLt4ch0EQ9ZP/cunKcvFJukwMfeqG86MfeFTCN0IPv
-	4YDw==
-X-Gm-Message-State: APjAAAUexbJLsHL4zVKHi3UDpD/iu5BN/cIdQNhhAE1b/Je1op73C+/b
-	fKOM+GvWtCoMu+0K7dmH9EyqhFik
-X-Google-Smtp-Source: APXvYqy3vH2VSxKO2GJD8uWJWs0RXOMeZmc3/5Z43VeLk0YaFPMRt9QoWblLtGTPYFRgGrSUkrX2ZQ==
-X-Received: by 2002:adf:c788:: with SMTP id l8mr2809066wrg.143.1555602863516; 
-	Thu, 18 Apr 2019 08:54:23 -0700 (PDT)
-Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
-	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id o5sm2075962wmc.16.2019.04.18.08.54.22
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 18 Apr 2019 08:54:22 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Apr 2019 17:54:08 +0200
-Message-Id: <20190418155408.10418-3-schnitzeltony@gmail.com>
+	Fri, 19 Apr 2019 09:48:35 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 19 Apr 2019 09:48:36 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Apr 2019 09:49:24 +0800
+Message-ID: <20190419014924.31855-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190418155408.10418-1-schnitzeltony@gmail.com>
-References: <20190418155408.10418-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/3] samba: rework localstatedir package split
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: 441814C8B03D.A7198
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCHv2] python-cython: upgrade 0.28.5 -> 0.29.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,60 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2019 15:54:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 19 Apr 2019 01:48:40 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Now that we can install smbclient without samba package e.g for gvfs there are
-complains:
+-Upgrade from python-cython_0.28.5.bb to python-cython_0.29.6.bb.
 
-| gvsd: mkdir failed on directory /var/lib/samba: Permission denied
+-Upgrade from python3-cython_0.28.5.bb to python3-cython_0.29.6.bb.
 
-and browsing Windows network does not work anymore
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.8.4.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-python/recipes-devtools/python/python-cython.inc         | 4 ++--
+ .../{python-cython_0.28.5.bb => python-cython_0.29.6.bb}      | 0
+ .../{python3-cython_0.28.5.bb => python3-cython_0.29.6.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cython_0.28.5.bb => python-cython_0.29.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.28.5.bb => python3-cython_0.29.6.bb} (100%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-index aa8087131..2a785bd89 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-@@ -230,16 +230,13 @@ RDEPENDS_${PN}-python += "pytalloc python-tdb"
- FILES_${PN}-base = "${sbindir}/nmbd \
-                     ${sbindir}/smbd \
-                     ${sysconfdir}/init.d \
--                    ${localstatedir}/lib/samba \
--                    ${localstatedir}/nmbd \
--                    ${localstatedir}/spool/samba \
-                     ${systemd_system_unitdir}/nmb.service \
-                     ${systemd_system_unitdir}/smb.service"
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index 0939cad26..afdf974a4 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native nativesdk"
  
- FILES_${PN}-ad-dc = "${sbindir}/samba \
-                      ${systemd_system_unitdir}/samba.service \
-                      ${libdir}/krb5/plugins/kdb/samba.so \
--                    "
-+"
- RDEPENDS_${PN}-ad-dc = "krb5-kdc"
+-SRC_URI[md5sum] = "0cb620e1259818e4ecc1a056e8c3a8be"
+-SRC_URI[sha256sum] = "b64575241f64f6ec005a4d4137339fb0ba5e156e826db2fdb5f458060d9979e0"
++SRC_URI[md5sum] = "8a9441e85ac8085e3d947082db4e7993"
++SRC_URI[sha256sum] = "6c5d33f1b5c864382fbce810a8fd9e015447869ae42e98e6301e977b8165e7ae"
  
- FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
-@@ -247,11 +244,14 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
-                           ${sysconfdir}/ctdb/nodes \
-                           ${datadir}/ctdb-tests \
-                           ${datadir}/ctdb/tests \
-+                          ${localstatedir}/lib/ctdb \
-                          "
+ inherit pypi
  
- FILES_${BPN}-common = "${sysconfdir}/default \
-                        ${sysconfdir}/samba \
-                        ${sysconfdir}/tmpfiles.d \
-+                       ${localstatedir}/lib/samba \
-+                       ${localstatedir}/spool/samba \
- "
- 
- FILES_${PN} += "${libdir}/vfs/*.so \
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.5.bb b/meta-python/recipes-devtools/python/python-cython_0.29.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cython_0.28.5.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.29.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.5.bb b/meta-python/recipes-devtools/python/python3-cython_0.29.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cython_0.28.5.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.29.6.bb
 -- 
 2.20.1
+
+
 
 
