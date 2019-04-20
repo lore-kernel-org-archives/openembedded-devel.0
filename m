@@ -1,48 +1,49 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 08ECC7CB25
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id BC66379CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Apr 2019 23:56:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 56A26186E6;
-	Sat, 20 Apr 2019 01:56:13 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 1fSPZvaMACV0; Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id BE61B186E1;
-	Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id A9F6D1A05E;
-	Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9E7C01A05C;
-	Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by seth.se.axis.com (Postfix) with ESMTP id 92BF41A75;
-	Sat, 20 Apr 2019 01:56:12 +0200 (CEST)
-Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id x3JNuDkd003606;
-	Sat, 20 Apr 2019 01:56:13 +0200
-Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id x3JNuDmk003605;
-	Sat, 20 Apr 2019 01:56:13 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+	Sat, 20 Apr 2019 22:00:37 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id y67so6951827ede.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Apr 2019 15:00:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=cde6vpKd2tvyUMzbhobcjsKJBwW+e2ok5MtY984UErM=;
+	b=tU8JKpTys2eKB4BQzzX3ZTIpwqvPWxsnHVWTPf1ga4Qdypc6MuxtxYCGCNhdOPfFpb
+	riaQbMqCcSw1UmLkQA1tQCghRSQ7lHu8FAPYPq26e+uWNjlia9robizlR4oVuF/56Oat
+	9MGCwJ0eKTbrouH58qVLTBxzGJ05Z0MpSeD2hVSxCq5iS+nqPH/MsZeL0JnzAwIs+yZL
+	D/eZLT4gi0Afe4i+e9LTIvNRqfuXIbSO1yHUbLXMMcFvny5J7YUtLRmX9n9iyPXISZf4
+	Hpa7ouJNEVcBFwhxYzx+fYectCwsaDy3Xpq9VOy0XeAcZqzn9khGxQcfcpDeUHj/GzSs
+	I/gQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=cde6vpKd2tvyUMzbhobcjsKJBwW+e2ok5MtY984UErM=;
+	b=gbwzsBDXYvRQimiWegI12VF0oWTEvdE9W2udwK2BAzI3js/Fg8iayKiKdoSnENlsTu
+	j2PlZbin0uxnbYZAB8uWcTVLhZC7utp7mfnO+TVLiPGQDGlDCPjb+MmC7X4VOtWj6kLH
+	BmtVEsI0uC/X9/7Fj7F9BIqoShW5q2CUMiio8rDgYUz2HMGDPzHFQSUPS9b/Kzbsl936
+	xjyaIrSJ8f2Cxg4GxjT3U/PFaHfVXG+Cv2cZH+FEPgMdZhq9t25hu3o9B0K2Y0ODC0Ha
+	MA4mVJgULixTLAsO7sII35VG1T0CZC560P1atuNTANm7bKoLshw2lY1LUW3DuZVczhUT
+	Rm2A==
+X-Gm-Message-State: APjAAAVEUbWJTVXHfyJ1T2PZTLRi1GXt0nnCJpYL0f99NrLoD+JECeOQ
+	9mavtAR6RkY55ztXL4T0vnuaTeWO7qc=
+X-Google-Smtp-Source: APXvYqwJPbwA6Kwbly+TZW4rsbZpj0EviCz5Hh9xdN0bjianyDnih3L1BZZg48Iq/sH5oFs8TLUYaA==
+X-Received: by 2002:aa7:c715:: with SMTP id i21mr7012163edq.66.1555797637977; 
+	Sat, 20 Apr 2019 15:00:37 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id 30sm2483037edr.2.2019.04.20.15.00.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 20 Apr 2019 15:00:37 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Apr 2019 01:56:02 +0200
-Message-Id: <20190419235602.3553-2-pkj@axis.com>
-X-Mailer: git-send-email 2.12.0
-In-Reply-To: <20190419235602.3553-1-pkj@axis.com>
-References: <20190419235602.3553-1-pkj@axis.com>
-X-TM-AS-GCONF: 00
-Subject: [meta-webserver][PATCH 2/2] apache2: Correct packaging of build and doc related files
+Date: Sun, 21 Apr 2019 00:00:21 +0200
+Message-Id: <20190420220021.20694-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] nghttp2: update to 1.38
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2019 23:56:14 -0000
+X-List-Received-Date: Sat, 20 Apr 2019 22:00:38 -0000
 
-The build related files (${datadir}/${BPN}/build and ${bindir}/apxs)
-belong in the -dev package, and the manual belong in the -doc package.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
+ .../nghttp2/{nghttp2_1.37.0.bb => nghttp2_1.38.0.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/nghttp2/{nghttp2_1.37.0.bb => nghttp2_1.38.0.bb} (72%)
 
-No idea why these files were moved to the main package in the 2.4.39
-update, but it makes no sense. The build files and apxs are only needed
-if you build on target, and that's what -dev is for, and the manual
-obviously belongs in the -doc package.
-
- meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-index c6961ef9b..2bd21f7d1 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-@@ -184,12 +184,17 @@ CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
+diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
+similarity index 72%
+rename from meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
+index 50196d669..42b437933 100644
+--- a/meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb
++++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
+@@ -5,8 +5,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
  
- # We override here rather than append so that .so links are
- # included in the runtime package rather than here (-dev)
--# and to get icons, error into the -dev package
--FILES_${PN}-dev = "${datadir}/${BPN}/icons \
-+# and to get build, icons, error into the -dev package
-+FILES_${PN}-dev = "${datadir}/${BPN}/build \
-+                   ${datadir}/${BPN}/icons \
-                    ${datadir}/${BPN}/error \
-                    ${includedir}/${BPN} \
-+                   ${bindir}/apxs \
-                   "
+ SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
+-SRC_URI[md5sum] = "dc7536d02aa7d4883c20eaf637747381"
+-SRC_URI[sha256sum] = "aa090b164b17f4b91fe32310a1c0edf3e97e02cd9d1524eef42d60dd1e8d47b7"
++SRC_URI[md5sum] = "45b47086ee6da8171e11887c1665f275"
++SRC_URI[sha256sum] = "ef75c761858241c6b4372fa6397aa0481a984b84b7b07c4ec7dc2d7b9eee87f8"
  
-+# Add the manual to -doc
-+FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
-+
- FILES_${PN}-scripts += "${bindir}/dbmmanage"
+ DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
  
- # Override this too - here is the default, less datadir
 -- 
-2.12.0
+2.17.1
 
 
