@@ -1,53 +1,49 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 769776D73C
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
+	[209.85.208.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 602CF6079F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Apr 2019 12:58:56 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id t17so12701816wrw.13
+	Sun, 21 Apr 2019 19:37:23 +0000 (UTC)
+Received: by mail-lj1-f175.google.com with SMTP id t4so8668749ljc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Apr 2019 05:58:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=k73TniQPsh6UD2nt7lIsKvPEKCR121w+YAf501jLV8E=;
-	b=OUREoUmv6kBKmVujxGCqyj7NC6/SVRRqNHYDL7gYWh5EWXcpGYZy7bUyg+K5xFFtYL
-	JSM3PCzfgsq46JGdVF8F5lRrIoyIQ0/ZsGzI7+o0VBEuMZiawLbkwFZqoTyQyMdnsHtM
-	I4aBEvVjghaiPA6ED8Qf7vLqoG9zpnuxN28rwMi7Hk+AOIww5Ov3O/kOUL76jU4uv0cQ
-	tISB8raNDN+fK3/TQdxsCG52tUI1MctUuWjh5WO6tk0AZxoQP8C0V+FEwRFNaVFVLChV
-	A9MtyArE4A40ebqJqWv+H15n/vpjOHdb4azRQm1PlUruVQvhhh9CuJe5qbsV2+gOFfDg
-	XwQQ==
+	Sun, 21 Apr 2019 12:37:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=dO+qr4SGuM/wgjkmKiUs1FwpByAm6kDM8NKm3Pp1u+M=;
+	b=gtjUYCe7MajJO4md8d5aX18RgsiZK5gki2p5pc5gpZCSPSKgrRy46EThYYiylMQlKX
+	DA61u32LF7KlX2ublHcUJu1/Q+swxdplyTC6MWbJ+z7Kj+nEoJnDlvgKIxnBe7uQNVGN
+	L2x3J90CrsO6DHkzk4oFhyNIgzrV08Aog+MClwe18Hi+RvHdZym7tBLa0rcKtyEO2Fpa
+	dSX6Q4dDOATr52RDCx23YS4vJFoWP8ctwrS6eceNj3YAFdDrFQ2aKoFUXHE6ohAw/1//
+	3Gj2VlKzoYd/uGW0XJmvAEKuyrt12eCSsvzvC29H+4juUrYoE0OAXXqJ9I2v3Wa4iYjX
+	4ocA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=k73TniQPsh6UD2nt7lIsKvPEKCR121w+YAf501jLV8E=;
-	b=EkczHuQY3dmZVi8HRWYY3ncSTySsBVAQ5Tm2rNUttspJU/iVI/Aopt4Wwm99DgjjzZ
-	A6Mj6SzUppG2reiNLCttC8qZXHPu0RKrdP0wSoV9H4X+gOyhvq6C+Ehn+4woPHy8nf9c
-	ZmUol1SjEb4kDJFTxcOEtKFjNj5Z8oNyICenXtUcF8l/RZWI1kAVulukZRP46ZK3/m6o
-	6WTbC5O6Zf3fLmZgs+ADh5W+jRdy8ix4OeK9ZW/bd5xnyVde1uZk90KbgYaZN3kK9d5X
-	gOJ5drAvLOZLKt2h4zNVSkp2+4GD6EFJZ6O7Bbo9b8kyE6LsYBi5e5k4RF5IMhnfTmzQ
-	pwSw==
-X-Gm-Message-State: APjAAAUtCxN8EW2tP/H8E/tm/zgFYZe93mlevFqlqwxZyCeBP0PYFGKG
-	Rjs15Plt09B7hLZB6W/10MFz0cVA
-X-Google-Smtp-Source: APXvYqwLdjGrjhKpeDquUYyw0Dd6RR2ptb/cTs5u9h43Z80Nv6QjZ3mtF+UbzSH1mlYhjtScYrmBmg==
-X-Received: by 2002:adf:ff88:: with SMTP id j8mr10335404wrr.1.1555851536919;
-	Sun, 21 Apr 2019 05:58:56 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F0F10871B60A041D40E8A5E.dip0.t-ipconnect.de.
-	[2003:f0:7f0f:1087:1b60:a041:d40e:8a5e])
-	by smtp.gmail.com with ESMTPSA id
-	f10sm10717679wrs.17.2019.04.21.05.58.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 21 Apr 2019 05:58:55 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dO+qr4SGuM/wgjkmKiUs1FwpByAm6kDM8NKm3Pp1u+M=;
+	b=CElPoZZyktZ/1/k4jJxZHw/88DHuKigjUMDTNGtO77cxAK2oOAzl+JRyljQ4Ilb7Gf
+	9kTj7ObXqRNE4YmaSy8KO87YKONgMJBDSs1lU0xrpBsEfzPD8XRINn4Xr+38cnILUlUx
+	uvjeUARuTA3Tv9eACRaAlsvCaJYZUqluiAJ9dhwouLitybwE9XCC8eIcy6r6YRPZqJdy
+	/qx/SbURxbZ2t9JlPi4wHI9RYTqLc0/6+duHhjdbK9Na2NBVlFbAwcDZWJExV0sI+CcK
+	0LtF4Bn23qg8DOIRROI4FwMxOMtpyEVgKb7J9EmNuiXk+mt/2DyLOMIRGlN88Knb7T20
+	5G8w==
+X-Gm-Message-State: APjAAAVaAAUHPlDT7uRqd+S+CQvMr4TVNCZts22w8uODCqdy/80mR2Uk
+	Uf+bfRiT0nGFXDQ9b4KSLmj1afFLm1o=
+X-Google-Smtp-Source: APXvYqwDHVX/UM/oBpbtI/FsyrwGtY34SPutN2eA1HYVHl3VzwEjY40UJ07iE0hXcVCTyk0gPxaQXw==
+X-Received: by 2002:a2e:884a:: with SMTP id z10mr8550125ljj.21.1555875443435; 
+	Sun, 21 Apr 2019 12:37:23 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id d3sm2350899ljc.15.2019.04.21.12.37.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 21 Apr 2019 12:37:22 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Apr 2019 14:58:48 +0200
-Message-Id: <20190421125848.2390-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [PATCH] fluidsynth: upgrade 2.0.4 -> 2.0.5
+Date: Sun, 21 Apr 2019 21:37:13 +0200
+Message-Id: <20190421193713.4794-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] xl2tpd: update to 1.3.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +56,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Apr 2019 12:58:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 21 Apr 2019 19:37:23 -0000
 
-Release notes are found at [1] - upgrade can be considered as bugfix release
+License checksum changed due to formatting change (see @1611d6f028fe3).
 
-[1] https://github.com/FluidSynth/fluidsynth/releases/tag/v2.0.5
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc       | 2 +-
+ .../xl2tpd/{xl2tpd_1.3.6.bb => xl2tpd_1.3.14.bb}          | 0
+ meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb    | 8 --------
+ 3 files changed, 1 insertion(+), 9 deletions(-)
+ rename meta-networking/recipes-protocols/xl2tpd/{xl2tpd_1.3.6.bb => xl2tpd_1.3.14.bb} (100%)
+ delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-index 810ca997e..234be02ca 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+index d037c7cfc..b3d466c3b 100644
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+@@ -6,7 +6,7 @@ DEPENDS = "ppp virtual/kernel"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
--SRCREV = "9671e412feedb90325e038c3aaf5d543eebc20c0"
-+SRCREV = "7f11a9bf5c7304e04309a6ec9fc515ee815524bf"
- S = "${WORKDIR}/git"
--PV = "2.0.4"
-+PV = "2.0.5"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- inherit cmake pkgconfig lib_package
+ SRC_URI = "git://github.com/xelerance/xl2tpd.git \
+ "
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
+similarity index 100%
+rename from meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
+rename to meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+deleted file mode 100644
+index 88ae5d6f8..000000000
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require xl2tpd.inc
+-
+-# This is v1.3.6 plus some commits.  There is no tag for this commit.
+-#
+-PV = "1.3.9+git${SRCPV}"
+-
+-SRCREV = "f114c10ac532051badeca0132b144a2f1596f047"
+-
 -- 
-2.20.1
+2.17.1
 
 
