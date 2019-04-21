@@ -1,49 +1,53 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by mail.openembedded.org (Postfix) with ESMTP id BC66379CB3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 769776D73C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Apr 2019 22:00:37 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id y67so6951827ede.2
+	Sun, 21 Apr 2019 12:58:56 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id t17so12701816wrw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Apr 2019 15:00:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=cde6vpKd2tvyUMzbhobcjsKJBwW+e2ok5MtY984UErM=;
-	b=tU8JKpTys2eKB4BQzzX3ZTIpwqvPWxsnHVWTPf1ga4Qdypc6MuxtxYCGCNhdOPfFpb
-	riaQbMqCcSw1UmLkQA1tQCghRSQ7lHu8FAPYPq26e+uWNjlia9robizlR4oVuF/56Oat
-	9MGCwJ0eKTbrouH58qVLTBxzGJ05Z0MpSeD2hVSxCq5iS+nqPH/MsZeL0JnzAwIs+yZL
-	D/eZLT4gi0Afe4i+e9LTIvNRqfuXIbSO1yHUbLXMMcFvny5J7YUtLRmX9n9iyPXISZf4
-	Hpa7ouJNEVcBFwhxYzx+fYectCwsaDy3Xpq9VOy0XeAcZqzn9khGxQcfcpDeUHj/GzSs
-	I/gQ==
+	Sun, 21 Apr 2019 05:58:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=k73TniQPsh6UD2nt7lIsKvPEKCR121w+YAf501jLV8E=;
+	b=OUREoUmv6kBKmVujxGCqyj7NC6/SVRRqNHYDL7gYWh5EWXcpGYZy7bUyg+K5xFFtYL
+	JSM3PCzfgsq46JGdVF8F5lRrIoyIQ0/ZsGzI7+o0VBEuMZiawLbkwFZqoTyQyMdnsHtM
+	I4aBEvVjghaiPA6ED8Qf7vLqoG9zpnuxN28rwMi7Hk+AOIww5Ov3O/kOUL76jU4uv0cQ
+	tISB8raNDN+fK3/TQdxsCG52tUI1MctUuWjh5WO6tk0AZxoQP8C0V+FEwRFNaVFVLChV
+	A9MtyArE4A40ebqJqWv+H15n/vpjOHdb4azRQm1PlUruVQvhhh9CuJe5qbsV2+gOFfDg
+	XwQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=cde6vpKd2tvyUMzbhobcjsKJBwW+e2ok5MtY984UErM=;
-	b=gbwzsBDXYvRQimiWegI12VF0oWTEvdE9W2udwK2BAzI3js/Fg8iayKiKdoSnENlsTu
-	j2PlZbin0uxnbYZAB8uWcTVLhZC7utp7mfnO+TVLiPGQDGlDCPjb+MmC7X4VOtWj6kLH
-	BmtVEsI0uC/X9/7Fj7F9BIqoShW5q2CUMiio8rDgYUz2HMGDPzHFQSUPS9b/Kzbsl936
-	xjyaIrSJ8f2Cxg4GxjT3U/PFaHfVXG+Cv2cZH+FEPgMdZhq9t25hu3o9B0K2Y0ODC0Ha
-	MA4mVJgULixTLAsO7sII35VG1T0CZC560P1atuNTANm7bKoLshw2lY1LUW3DuZVczhUT
-	Rm2A==
-X-Gm-Message-State: APjAAAVEUbWJTVXHfyJ1T2PZTLRi1GXt0nnCJpYL0f99NrLoD+JECeOQ
-	9mavtAR6RkY55ztXL4T0vnuaTeWO7qc=
-X-Google-Smtp-Source: APXvYqwJPbwA6Kwbly+TZW4rsbZpj0EviCz5Hh9xdN0bjianyDnih3L1BZZg48Iq/sH5oFs8TLUYaA==
-X-Received: by 2002:aa7:c715:: with SMTP id i21mr7012163edq.66.1555797637977; 
-	Sat, 20 Apr 2019 15:00:37 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id 30sm2483037edr.2.2019.04.20.15.00.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 20 Apr 2019 15:00:37 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=k73TniQPsh6UD2nt7lIsKvPEKCR121w+YAf501jLV8E=;
+	b=EkczHuQY3dmZVi8HRWYY3ncSTySsBVAQ5Tm2rNUttspJU/iVI/Aopt4Wwm99DgjjzZ
+	A6Mj6SzUppG2reiNLCttC8qZXHPu0RKrdP0wSoV9H4X+gOyhvq6C+Ehn+4woPHy8nf9c
+	ZmUol1SjEb4kDJFTxcOEtKFjNj5Z8oNyICenXtUcF8l/RZWI1kAVulukZRP46ZK3/m6o
+	6WTbC5O6Zf3fLmZgs+ADh5W+jRdy8ix4OeK9ZW/bd5xnyVde1uZk90KbgYaZN3kK9d5X
+	gOJ5drAvLOZLKt2h4zNVSkp2+4GD6EFJZ6O7Bbo9b8kyE6LsYBi5e5k4RF5IMhnfTmzQ
+	pwSw==
+X-Gm-Message-State: APjAAAUtCxN8EW2tP/H8E/tm/zgFYZe93mlevFqlqwxZyCeBP0PYFGKG
+	Rjs15Plt09B7hLZB6W/10MFz0cVA
+X-Google-Smtp-Source: APXvYqwLdjGrjhKpeDquUYyw0Dd6RR2ptb/cTs5u9h43Z80Nv6QjZ3mtF+UbzSH1mlYhjtScYrmBmg==
+X-Received: by 2002:adf:ff88:: with SMTP id j8mr10335404wrr.1.1555851536919;
+	Sun, 21 Apr 2019 05:58:56 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F0F10871B60A041D40E8A5E.dip0.t-ipconnect.de.
+	[2003:f0:7f0f:1087:1b60:a041:d40e:8a5e])
+	by smtp.gmail.com with ESMTPSA id
+	f10sm10717679wrs.17.2019.04.21.05.58.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 21 Apr 2019 05:58:55 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Apr 2019 00:00:21 +0200
-Message-Id: <20190420220021.20694-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nghttp2: update to 1.38
+Date: Sun, 21 Apr 2019 14:58:48 +0200
+Message-Id: <20190421125848.2390-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [PATCH] fluidsynth: upgrade 2.0.4 -> 2.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +60,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Apr 2019 22:00:38 -0000
+X-List-Received-Date: Sun, 21 Apr 2019 12:58:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Release notes are found at [1] - upgrade can be considered as bugfix release
+
+[1] https://github.com/FluidSynth/fluidsynth/releases/tag/v2.0.5
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../nghttp2/{nghttp2_1.37.0.bb => nghttp2_1.38.0.bb}          | 4 ++--
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/nghttp2/{nghttp2_1.37.0.bb => nghttp2_1.38.0.bb} (72%)
 
-diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
-similarity index 72%
-rename from meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb
-rename to meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
-index 50196d669..42b437933 100644
---- a/meta-networking/recipes-support/nghttp2/nghttp2_1.37.0.bb
-+++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
-@@ -5,8 +5,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index 810ca997e..234be02ca 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
  
- SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
--SRC_URI[md5sum] = "dc7536d02aa7d4883c20eaf637747381"
--SRC_URI[sha256sum] = "aa090b164b17f4b91fe32310a1c0edf3e97e02cd9d1524eef42d60dd1e8d47b7"
-+SRC_URI[md5sum] = "45b47086ee6da8171e11887c1665f275"
-+SRC_URI[sha256sum] = "ef75c761858241c6b4372fa6397aa0481a984b84b7b07c4ec7dc2d7b9eee87f8"
+ SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
+-SRCREV = "9671e412feedb90325e038c3aaf5d543eebc20c0"
++SRCREV = "7f11a9bf5c7304e04309a6ec9fc515ee815524bf"
+ S = "${WORKDIR}/git"
+-PV = "2.0.4"
++PV = "2.0.5"
  
- DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
- 
+ inherit cmake pkgconfig lib_package
 -- 
-2.17.1
+2.20.1
 
 
