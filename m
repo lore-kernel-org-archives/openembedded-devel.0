@@ -1,33 +1,50 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 470 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 22 Apr 2019 20:47:47 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E4166D147
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+	[209.85.167.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5309260017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2019 20:47:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0183640BD1;
-	Mon, 22 Apr 2019 20:39:58 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 1aeRUioNRr60; Mon, 22 Apr 2019 20:39:57 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D65A640BC1;
-	Mon, 22 Apr 2019 20:39:56 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 970BB16E4FF; Mon, 22 Apr 2019 16:39:56 -0400 (EDT)
-Date: Mon, 22 Apr 2019 16:39:56 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20190422203956.GY2112@denix.org>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: [meta-qt5] Re: qtwayland: improve manual header installation
+	Mon, 22 Apr 2019 21:22:32 +0000 (UTC)
+Received: by mail-lf1-f46.google.com with SMTP id j20so10020338lfh.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Apr 2019 14:22:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Z4M5aiQp9BYnFgexVnP+OIGv6X2loYFamHAblec7O2I=;
+	b=E1kyJ+4RxKBmbByYp/rmf0qapbm+NWd31kNfR35tdt+wJNDo13pSPIfqq437gJxp2D
+	yNo6pqRsID99703hcIxkHQeIcY+Zd+zYSAwSHpFQR3KfcxotU5nN6911eEwpJ+QMJMlO
+	Pg9Q8O6qfduDV5jHYfC2AkAqb6XG+IQQxS2IRqkN+rtR8lYgVeNk/3n+BQebwQdtsO9l
+	AYXiDeHNOljHXT88OA5WlovB4Jp5SFM0mK26IXg2l+9KVFlZgP98Bz9yLcS2O9ig7AzW
+	Q0uhvrfY1SLPzIPszDc6JVZhTC1my2rhvUku93Cb5DZWklGG9kgjnZuEoNMwSXHWBy2J
+	+cpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Z4M5aiQp9BYnFgexVnP+OIGv6X2loYFamHAblec7O2I=;
+	b=sok7Agrun4dOj8T6b4CxEYta1TxQt0FrnVgpCc75IdHqYYt/krKymehLcmkJ7DyFpd
+	iALVvna1g8sZV7FFubwDpIy/ZRu1T7WXZtACULKv4Hwh+NaFs/r+aLuzPX+AqN/4uPpW
+	cGAn4GHy/Fj0Vgvx4saktCWa/9J7T1Qs5VYm5uHiRGWYsCx9sihmg4JuQu7/a5CFXw8a
+	wSAJ2eGC7aMHnMKC3/oBUcApSCS1xq16PaQLOXqMggfrVoZ3McLAwxLbCiBwV+1AJ6zp
+	4nPsuH2CQAnZVsg1/glg2SR/Pw8aIg69jEdoofeBeQxg2AaWB6QbwyggvRxXkohKwffF
+	nJYw==
+X-Gm-Message-State: APjAAAVupq2xf2t7wBiDGhj07kcFLdcSf8unftOW1315cDEPeF8G0j73
+	CohVP76DI44dU2AoYAt1qEO7PSOTsXE=
+X-Google-Smtp-Source: APXvYqxjAxzUXt4UwMyk7MOWjo5FesjpJ9Ka2weGP7jha2KnziVn/wPrFvcoctNW2WI6DrpKThmc7Q==
+X-Received: by 2002:a19:48c9:: with SMTP id
+	v192mr11350355lfa.136.1555968152552; 
+	Mon, 22 Apr 2019 14:22:32 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id h6sm3154015lfp.1.2019.04.22.14.22.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 22 Apr 2019 14:22:31 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Apr 2019 23:22:29 +0200
+Message-Id: <20190422212229.8610-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-support] nano: update to 4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,43 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2019 20:47:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Apr 2019 21:22:32 -0000
 
-Updated meta-qt5 in Thud with this new commit:
-https://github.com/meta-qt5/meta-qt5/commit/600fefbde15eea52fbc438bbe5e9757f5e735baa
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ meta-oe/recipes-support/nano/{nano_4.0.bb => nano_4.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/nano/{nano_4.0.bb => nano_4.1.bb} (79%)
 
-Distro features are -x11 +wayland +opengl
-
-Got the following breakage:
-
-| Manual install: qwayland-wayland.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-wayland.h
-| Manual install: wayland-qtkey-extension-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-qtkey-extension-client-protocol.h
-| Manual install: wayland-hardware-integration-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-hardware-integration-client-protocol.h
-| Manual install: qwayland-touch-extension.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-touch-extension.h
-| Manual install: qwayland-text-input-unstable-v2.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-text-input-unstable-v2.h
-| Manual install: qwayland-qt-windowmanager.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-qt-windowmanager.h
-| Manual install: qwayland-xdg-shell-unstable-v6.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-xdg-shell-unstable-v6.h
-| Manual install: wayland-server-buffer-extension-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-server-buffer-extension-client-protocol.h
-| Manual install: wayland-xdg-shell-unstable-v6-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-xdg-shell-unstable-v6-client-protocol.h
-| Manual install: qwayland-xdg-shell.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-xdg-shell.h
-| Manual install: qwayland-qtkey-extension.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-qtkey-extension.h
-| Manual install: wayland-xdg-shell-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-xdg-shell-client-protocol.h
-| Manual install: wayland-surface-extension-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-surface-extension-client-protocol.h
-| Manual install: qwayland-surface-extension.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-surface-extension.h
-| Manual install: wayland-touch-extension-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-touch-extension-client-protocol.h
-| Manual install: wayland-qt-windowmanager-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-qt-windowmanager-client-protocol.h
-| Manual install: wayland-text-input-unstable-v2-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-text-input-unstable-v2-client-protocol.h
-| Manual install: qwayland-server-buffer-extension.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-server-buffer-extension.h
-| Manual install: wayland-wayland-client-protocol.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/wayland-wayland-client-protocol.h
-| Manual install: qwayland-hardware-integration.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtWaylandClient/5.11.3/QtWaylandClient/private/qwayland-hardware-integration.h
-| Manual install: qwayland-server-server-buffer-extension.h to .../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtCompositor/5.11.3/QtCompositor/private/qwayland-server-server-buffer-extension.h
-| install: cannot create regular file '.../work/armv7at2hf-neon-linux-gnueabi/qtwayland/5.11.3+gitAUTOINC+9ce3088d22-r0/image/usr/include/QtCompositor/5.11.3/QtCompositor/private/qwayland-server-server-buffer-extension.h': No such file or directory
-
-Looks like ${D}${includedir}/QtCompositor/${SHRT_VER}/QtCompositor/private/ 
-doesn't exist before trying to install files there.
-
+diff --git a/meta-oe/recipes-support/nano/nano_4.0.bb b/meta-oe/recipes-support/nano/nano_4.1.bb
+similarity index 79%
+rename from meta-oe/recipes-support/nano/nano_4.0.bb
+rename to meta-oe/recipes-support/nano/nano_4.1.bb
+index 3d7921a37..1fe36cdb0 100644
+--- a/meta-oe/recipes-support/nano/nano_4.0.bb
++++ b/meta-oe/recipes-support/nano/nano_4.1.bb
+@@ -12,8 +12,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+ 
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[md5sum] = "2de3e8a60ecf09649e316e89be2aac65"
+-SRC_URI[sha256sum] = "1e2fcfea35784624a7d86785768b772d58bb3995d1aec9176a27a113b1e9bac3"
++SRC_URI[md5sum] = "235eaf7d27db3c3679b2054361ff6181"
++SRC_URI[sha256sum] = "86bde596a038d6fde619b49d785c0ebf0b3eaa7001a39dbe9316bd5392d221d0"
+ 
+ inherit autotools gettext pkgconfig
+ 
 -- 
-Denys
+2.17.1
+
 
