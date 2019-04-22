@@ -1,24 +1,51 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C9816D5B1
+Return-Path: <daniel.diaz@linaro.org>
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
+	[209.85.167.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 87A1E6B96C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2019 09:06:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3M96Z3l027701
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 22 Apr 2019 02:06:35 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 22 Apr 2019 02:06:34 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Mon, 22 Apr 2019 02:06:34 -0700
-Message-ID: <20190422090634.24343-1-mingli.yu@windriver.com>
+	Mon, 22 Apr 2019 20:08:51 +0000 (UTC)
+Received: by mail-oi1-f196.google.com with SMTP id y84so9403220oia.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Apr 2019 13:08:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EIvDU9ioo2ihpWS6pR5m/hYibZaxJqOyEfeTdyp6qkQ=;
+	b=lFvCq7B1yyZbOO/4yg0ZTCxmj+oyhUT0yq+RS+XyJ2XOpsMCWAB8uWVob+BJTBRNqD
+	nvRpXvaJzIfnq4s0K5wUNTctkgRV3QMQq2j76BNRsn+sLJEyOe6aQUlR8vh1bqlUg4Q0
+	010GKWodhmZx29iWd32qqRol2QACz4VxIN7qmEK0IykflpsBlAl2ArfeJNBJg4AOe2oK
+	kJ2cxdEsbSaWGxY+WT1cWL767vepbRHm6AMNf1jLDTuiNRontZVr5sjptmqcnjVLjaKZ
+	gO1k6OoaWBIpiPfwUm6KUfqRej0hrWcI6igF/F5038T2LVBxV4E5w6QIwBRDKpK2hKBm
+	RN3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EIvDU9ioo2ihpWS6pR5m/hYibZaxJqOyEfeTdyp6qkQ=;
+	b=oVdRxEcS5A/nwgOuLqOpWImnRj8TSq6DT5OGascqOlw1Ns5gQ1nZzr++ZEPqoa8eTQ
+	0WQDrgniFxaC4ob87Two832RgQt2JDIq9q3mJkasZJQPusYfjE4I0199wBNOl+SDZvGf
+	Vk18brhzBqEZiYy0Lx9TNyy4x9sk+M4V22Racl4Kt0Q4OB8AbN3gqEFhXoV9TwlABSzt
+	qZxxOC7PWOzBMSOdBK5vVkD2a6h8gU0aS7s13uipdoj2XLd/oSAuIIMlH0+QRE3d+GBK
+	aP+nBoAZVzqrUcpPiqGqZd8T9GCkv1oWbxzpRSp3/LAqkU/yjArWIsxo3x6Uywo9bRZn
+	Ijig==
+X-Gm-Message-State: APjAAAVNRTAfCQQnkNCyNaDzEycfLQgRA1pg0vhLHXHh/YhFhVlPLeCn
+	cTssrlg1aY3C15DCCTQQiWEGBHAQLqQ=
+X-Google-Smtp-Source: APXvYqy/WsnqDFqJt0jO0GAkfp3YLoWv89zwv5nLKYTiICERGDIbwenqpwXjGQCL9YV76Qut9SlBmA==
+X-Received: by 2002:aca:4c48:: with SMTP id z69mr11259712oia.147.1555963731930;
+	Mon, 22 Apr 2019 13:08:51 -0700 (PDT)
+Received: from alago.cortijodelrio.net
+	(CableLink-189-218-30-19.Hosts.InterCable.net. [189.218.30.19])
+	by smtp.googlemail.com with ESMTPSA id
+	k65sm6189560oia.16.2019.04.22.13.08.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 22 Apr 2019 13:08:51 -0700 (PDT)
+From: =?UTF-8?q?Daniel=20D=C3=ADaz?= <daniel.diaz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Apr 2019 15:08:45 -0500
+Message-Id: <20190422200845.14343-1-daniel.diaz@linaro.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <CAMKF1sqfUttvk00sNMQS6JGXvB=gBOm=_9zLaiWQ-zBAchs8tg@mail.gmail.com>
-References: <CAMKF1sqfUttvk00sNMQS6JGXvB=gBOm=_9zLaiWQ-zBAchs8tg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] indent: Upgrade to 2.2.12
+Subject: [meta-oe][PATCH] cpupower: update license file checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,181 +58,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2019 09:06:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 22 Apr 2019 20:08:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
+The Linux kernel is GPLv2, at least as far cpupower is
+concerned. Because this recipe reuses the kernel code, and
+said source code can (does) vary across different releases,
+it's best to refer to license by its name.
 
-Add two patches to fix the build error.
+Use GPL-2.0 from OE common license dir.
 
-Add -Wno-error=unused-value for native build
-to silence below error:
-| In file included from ../../indent-2.2.12/src/indent.h:60:0,
-                 from ../../indent-2.2.12/src/indent.c:77:
-| ../../indent-2.2.12/src/indent.c: In function 'main':
-| ../../indent-2.2.12/src/libgettext.h:88:5: error: statement with no effect [-Werror=unused-value]
-     ((void) (Domainname), (const char *) (Dirname))
-     ^
-| ../../indent-2.2.12/src/indent.c:1064:5: note: in expansion of macro 'bindtextdomain'
-     bindtextdomain(PACKAGE, LOCALEDIR);
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Daniel Díaz <daniel.diaz@linaro.org>
 ---
- ...01-Makefile.am-remove-regression-dir.patch | 67 +++++++++++++++++++
- ...ent.c-correct-the-check-for-locale.h.patch | 40 +++++++++++
- .../{indent_2.2.10.bb => indent_2.2.12.bb}    | 11 ++-
- 3 files changed, 115 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
- create mode 100644 meta-oe/recipes-extended/indent/indent/0001-src-indent.c-correct-the-check-for-locale.h.patch
- rename meta-oe/recipes-extended/indent/{indent_2.2.10.bb => indent_2.2.12.bb} (65%)
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch b/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
-new file mode 100644
-index 000000000..357d77d83
---- /dev/null
-+++ b/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
-@@ -0,0 +1,67 @@
-+From 27bda5ee884e79d6d0e76955124d2b0c5798d6cf Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Mon, 25 Feb 2019 00:34:17 -0800
-+Subject: [PATCH] Makefile.am: remove regression dir
-+
-+Remove regression dir to fix below do_compile
-+error:
-+| Making all in regression
-+| /bin/sh: line 20: cd: regression: No such file or directory
-+| Makefile:451: recipe for target 'all-recursive' failed
-+
-+BTW, it should be safe not to cover regression dir
-+as there is no Makefile.in under ${S}/regression
-+and the content of ${S}/regression/Makefile as below.
-+-------------------------------------
-+all:
-+
-+install:
-+
-+check:
-+        ./TEST
-+
-+distclean: clean
-+
-+maintainer-clean: clean
-+
-+distdir:
-+
-+clean:
-+        @rm -rf output
-+
-+.PHONY: all install
-+-------------------------------------
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ Makefile.am | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index ba37a42..548fea7 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1,7 +1,7 @@
-+ ## Process this file with automake to produce Makefile.in
-+ AUTOMAKE_OPTIONS = no-texinfo.tex
-+ 
-+-SUBDIRS = intl src doc po man regression
-++SUBDIRS = intl src doc po man
-+ 
-+ BUILT_SOURCES = 
-+ 
-+@@ -13,8 +13,7 @@ EXTRA_DIST = 	README.md \
-+ 		aclocal/UTIMBUF.m4 \
-+ 		miscel/Makefile.mingw32 \
-+ 		miscel/README.vc++ \
-+-		bootstrap \
-+-		regression
-++		bootstrap
-+ 
-+ DISTCLEANFILES=config/config.cache config/config.log config.h
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-src-indent.c-correct-the-check-for-locale.h.patch b/meta-oe/recipes-extended/indent/indent/0001-src-indent.c-correct-the-check-for-locale.h.patch
-new file mode 100644
-index 000000000..7df7ecb38
---- /dev/null
-+++ b/meta-oe/recipes-extended/indent/indent/0001-src-indent.c-correct-the-check-for-locale.h.patch
-@@ -0,0 +1,40 @@
-+From 75369ce004ec0f5e46a432fa1dac8cfc7ae1ef8d Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Sun, 24 Feb 2019 22:35:08 -0800
-+Subject: [PATCH] src/indent.c: correct the check for locale.h
-+
-+Adjust to check HAVE_LC_MESSAGES or HAVE_LOCALE_H
-+to determine whether include locale.h or not to
-+fix below issue:
-+
-+| ../../indent-2.2.12/src/indent.c: In function 'main':
-+| ../../indent-2.2.12/src/indent.c:1062:5: error: implicit declaration of function 'setlocale'; did you mean 'setstate'? [-Werror=implicit-function-declaration]
-+|      setlocale(LC_ALL, "");
-+|      ^~~~~~~~~
-+|      setstate
-+| ../../indent-2.2.12/src/indent.c:1062:5: error: nested extern declaration of 'setlocale' [-Werror=nested-externs]
-+| ../../indent-2.2.12/src/indent.c:1062:15: error: 'LC_ALL' undeclared (first use in this function)
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ src/indent.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/indent.c b/src/indent.c
-+index 4d666e2..0c2780b 100644
-+--- a/src/indent.c
-++++ b/src/indent.c
-+@@ -71,7 +71,7 @@
-+ #include <string.h>
-+ #include <ctype.h>
-+ #include <stdlib.h>
-+-#ifdef HAVE_LOCALE_H
-++#if defined(HAVE_LC_MESSAGES) || defined(HAVE_LOCALE_H)
-+ #include <locale.h>
-+ #endif
-+ #include "indent.h"
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/indent/indent_2.2.10.bb b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-similarity index 65%
-rename from meta-oe/recipes-extended/indent/indent_2.2.10.bb
-rename to meta-oe/recipes-extended/indent/indent_2.2.12.bb
-index d25e8e317..f2891df50 100644
---- a/meta-oe/recipes-extended/indent/indent_2.2.10.bb
-+++ b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-@@ -11,12 +11,17 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- DEPENDS = "virtual/gettext"
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index 928973871..c7ea087a5 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Shows and sets processor power related values"
+ DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
+ saving related features of your processor."
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+ DEPENDS = "pciutils gettext-native"
+ PROVIDES = "virtual/cpupower"
  
--SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
--SRC_URI[md5sum] = "be35ea62705733859fbf8caf816d8959"
--SRC_URI[sha256sum] = "8a9b41be5bfcab5d8c1be74204b10ae78789fc3deabea0775fdced8677292639"
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-+           file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
-+           file://0001-Makefile.am-remove-regression-dir.patch \
-+"
-+SRC_URI[md5sum] = "4764b6ac98f6654a35da117b8e5e8e14"
-+SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
- 
- inherit autotools gettext
- 
-+CFLAGS_class-native += " -Wno-error=unused-value"
-+
- FILES_${PN}-doc += "/usr/doc/indent/indent.html"
- 
- BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
