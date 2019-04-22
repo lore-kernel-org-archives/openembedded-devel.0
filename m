@@ -1,54 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 00EF16C4DA
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 31F2C6C4CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2019 23:40:20 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id s15so17600679wra.12
+	Mon, 22 Apr 2019 23:46:25 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id t17so17614778wrw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2019 16:40:22 -0700 (PDT)
+	Mon, 22 Apr 2019 16:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=oCOAGDz1fyJl7KUx3JYYt1f1dLNgbz3B0YVpJ6KRrG0=;
-	b=gGKDoykrI1ylTnBd7No9op8MCTXbTYsQVge/ObCBurgeP6MXHzqA9mft0ks7l1RhSF
-	sXBkMwoD8CFi+lIhmMjkEmTKVeQWu/DCaKKxLcBbC1680i80E0gCBXode7zjZs7JPx2H
-	rBzwZJswOOntUURA5InmfabYboihDLOyPfjH87Kp3MPSCv25iN24AtJEb7fHH4S8/3l6
-	PrvPJ7ZcwxiI4XBQYQ4FkjLIV00qsV3+xG5JxgoBEZgQQmq1KqGL+w+F5aY2nlhDWi5t
-	LYlfZfS3Cnqy1a1Q5+HFl5BusM+D1nkF+xPEVQrAHm6j4qWezsnQtUD8C/2f1fRSba1B
-	jO5g==
+	bh=7a/05uxulSKonUNOh7AAbWI9l/LRVIEVZmD45QuAPTw=;
+	b=kxD4EZlBbbFxM2faiIYLM1bCamsawBDd9pjYaQmUwbzmr318Lg1d390dWNeZYQn3lN
+	QUtnqe+fRTOJVN5LrxdptOg7QuMer3DSCJVVpGPwXSfk22OpByw+icOCQmkAdEvPAWk9
+	RYgnLf88cAris9OGH8vzpM2MsyD3Bxz8xjqRTbjGzguA464aTgTen/X8se0QZF+u8m/H
+	7WBIDf/RFAN08O5fBiLIFoNzkmDPMLnKJPQE90QyNN3aY1bMBMF5ERXBzeqrqKUcReLp
+	KAXRM/Umy3yGk6tLo2YFsXvFGo0raEucivcwaMVwwfq5H4Fe6mMNzghIF+/HYIaTUIyL
+	etWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=oCOAGDz1fyJl7KUx3JYYt1f1dLNgbz3B0YVpJ6KRrG0=;
-	b=aNgpv+iVpCZb8R0h/IZAAigIF6hnpg6qgKKuZWWUPf2bYRM6vl/Rx8o+48lyUkGi9j
-	1kIYF0lR2dmUV2oIuea6sZOBumqtxM+O1+govsT7uShHqYoO3g3O+dYoIOZOkIky1nqT
-	vq72C76xTV4ZoysKfCswcppH7Z6SugX0DZ+Bno/Ifhjq28q1GWCuEve+Zt0q175yiIXb
-	0hd8JAqGYTr9oq0fKbjOlMWn97eF42JXo4j1ocxH39YmS1VAfgtf/lLv4rn2fqRCDoLM
-	BaaLSfHvi9BCudUuuuapdOGqmLfAuplYHgjxIMVHATXdY3WTPajv44Cme3rHH6dYF/3K
-	wzoA==
-X-Gm-Message-State: APjAAAXzmJvcHC/jo44ZgxwYXzTmJpkepEuaMYRnXrkVXWzVeSPe8Bza
-	T+cm/Wn8XoRp7IOcZr5S/eKtjVcf
-X-Google-Smtp-Source: APXvYqyb7oj3H1rMNLoxzeGWmIoyHHqKAGaNO49P/g/9XJmiKPI46eA8snHfASRMXegoAdIHE6VE5w==
-X-Received: by 2002:a05:6000:1291:: with SMTP id
-	f17mr14435536wrx.201.1555976421361; 
-	Mon, 22 Apr 2019 16:40:21 -0700 (PDT)
+	bh=7a/05uxulSKonUNOh7AAbWI9l/LRVIEVZmD45QuAPTw=;
+	b=bpTiOvdTZ5BJiZWrfJRAkC8fMl1h9QeA1EfyvsEfdYqjRfn42a81rJoJCjGAZJ8zHd
+	brds8tPU7vL+sC0SbXZa5BwyUPbBPPof9GLYOtwJhzKiZVJ9lUmH0Q0AnBV+/FC1Iw3H
+	ZBf2/mZedCkIOlsvn54mcJpJqPFOHx2lAxESC/hJ2COT2XTV03WSdjt3fxdf2gpgUcz8
+	94lDsEkmHiRH+Uw3AlAcf/GCxCDcf/+FgS5iZYsX9az1nI+EytHZmMijjFbWugfU7688
+	vMWsCnnf5BGyzlxSBrwKbQ0QyL6KCNUTtfeI2MAxuwuiQymm781ugeXIFzDRbqzxkhAL
+	sg8A==
+X-Gm-Message-State: APjAAAW/aBDiOWQASZ1MmLn58WekMiWp4MDRxfMfXLXL0/8XDTdYGoc1
+	h4YufgwMYiywvGtOY6jXZFl/wbk9
+X-Google-Smtp-Source: APXvYqzt2xzX+nrrmN1cG14ub5W3pfgZRIJ4+GlqVQnDNOtix73Pcr6Q+rwTOpxTqJMvXsVUP6JhQg==
+X-Received: by 2002:adf:e68d:: with SMTP id r13mr239920wrm.84.1555976785595;
+	Mon, 22 Apr 2019 16:46:25 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F06D035817AE370820A503A.dip0.t-ipconnect.de.
 	[2003:f0:7f06:d035:817a:e370:820a:503a])
 	by smtp.gmail.com with ESMTPSA id
-	m14sm5242773wru.51.2019.04.22.16.40.20
+	m13sm14419076wmg.42.2019.04.22.16.46.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 22 Apr 2019 16:40:20 -0700 (PDT)
+	Mon, 22 Apr 2019 16:46:24 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Apr 2019 01:40:01 +0200
-Message-Id: <20190422234001.5250-1-schnitzeltony@gmail.com>
+Date: Tue, 23 Apr 2019 01:46:17 +0200
+Message-Id: <20190422234617.5419-1-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH] vlc: revork qt PACKAGECONFIG
+Subject: [PATCH] vlc: rework qt PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2019 23:40:21 -0000
+X-List-Received-Date: Mon, 22 Apr 2019 23:46:25 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -72,6 +71,7 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
+V1 -> V2: Aargh again typo in commit messeage...
  .../recipes-multimedia/vlc/vlc.inc            | 25 ++++++++++++-------
  1 file changed, 16 insertions(+), 9 deletions(-)
 
