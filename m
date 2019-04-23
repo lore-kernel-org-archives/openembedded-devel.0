@@ -1,38 +1,36 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 161146C154
+	by mail.openembedded.org (Postfix) with ESMTP id 010146D73C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Apr 2019 06:08:08 +0000 (UTC)
+	Tue, 23 Apr 2019 06:11:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44pCfv57SSz4V;
-	Tue, 23 Apr 2019 08:08:07 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44pCkx2m72z4V;
+	Tue, 23 Apr 2019 08:11:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1555999688;
-	bh=uZn7NcSapKeyl/cUAq9iAi9Q4/17J1ObNLuof8eYHIk=;
+	s=default; t=1555999897;
+	bh=S50/OAjxX//cC7kzzTu2JMf8/eVJokb+zV5RBJtJNU4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=VlLdKaaOkKOHwgmUceNCa0D86UaV4yOp/Mb+AcSzIyahiD4RXQNDXyMts1BzlZiV4
-	UvwZTMDbe0KvHDPrR69xrDM8DHVbSn6WrbM176ntlbJ5nRdAPae3UnxHLrp5zf7GTa
-	IWHSgs+PuL+ZKTAV+86ONyqzdlt72Md1hqxLmPUfNJSulMsteOC3GZf8OhjN5WFvhl
-	iQprnbCJS4JBZVibKfj0xwZ5uFMx74YEAM1vD6A6uvKefU6sEtE2LMEpG1ha8CXqbl
-	LfYZ3dHBr0cwUQ0py64sLkrCnWqKwDPBpORIutQYS2jxFppKKYzBLVGVGeBLUORUkd
-	XwXvxqwgd2yMq8O+z6bRBXzMcND3AnEvgpn8mBH/s69MuWJKcU1a8adnjZrMN40p9f
-	9JhBXlUjSljqTVTsi8xIe3G7LPoqoJFrYlF0djq2g0PyDhrjHilNRM/9eoZMnYcETM
-	TXMrR23nSz1V+yY19L9/oSVRSY2zNC3yoBcpNcwKrAX4s/cCPPOoPm0kMGEWp6AQaC
-	M5hd0NcKJ2OX7Uj/UcEkyGEJrAakk9Fu0qG2JoBmb5mqTcCr5gxCMiTliLcloxstk4
-	8QQfIk4XLSdLHoSmpFNjtWd0oH2ZvrwqrsvggQ1Ngvl2Zm6r6u28DCa407aDNR2GU5
-	18VjfRGDuNYrDYJA573Ae9wE=
-Date: Tue, 23 Apr 2019 09:08:05 +0300
+	b=a1IZyVkF8faL4CaA6gdOYA/D9R6ILcg9GrcoG/8cFv8hCxymd2f6U5fXK82A5wZ78
+	Hp56A7yWUjn4K/iMYoUuupmEon2sEZqaPYl86VhxpbShadeKSetLcJHbpoecrfo2vW
+	Ov7FuJ2HNT0ipx05YaRT4Titfyr6Pgc2Fpq5MiblvtG1+DL9cPmFB9nXOGebQMOKYW
+	Wrq6WB66fXr2WtGU+ERcHzgCKvBMJm6bO2mvgYVTd9yB0IU/WQAmYbYcdBILE+wTb/
+	30B0mRpBlUC4cqqzSSeO89JgLN0p2Jmz2Medwr5af8ftkz7FOifIIDTpNVCcgwJVcY
+	N/YZNQ0W24H2NcFG02u17rMhD5wn6PoVIy7QPEgJW6RvIMrDSkD4xQ++YkSOzZL3b/
+	i5q9fz9tPQWLTeDkhxSJaPGn02rXAPgBOO70FJaXxTm+5ETac2l3koaWIl7tW5JPeZ
+	hdiUc7wySEytMPJlEmvmNoU8SohmUh37tPwTRE23lyxTVX2csUEglEksWjjQMY9+3w
+	MS0VhK1/OpGrxhNRBKr6wBAVC9j7e2AXE/3vZ2YX+sDh0kDgH0RdEzZGnQPvCxJVzZ
+	vNk9WrX23xhwOPmmMjqJaCCZn3MNvS51hbnwI/z4GVjwatptCF7BI2WgyL9uBBNMMs
+	qtOSTte+EhosQM9CgcjH5aCc=
+Date: Tue, 23 Apr 2019 09:11:34 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>
-Message-ID: <20190423060805.GD18826@localhost>
-References: <20190422234617.5419-1-schnitzeltony@gmail.com>
-	<e9587755-4b63-90cf-1738-930b808da883@betafive.co.uk>
-	<CALbNGRQdfS-xNdheKuj=AA1zaChsA_g1gb6kMkiU8jGXngfw0g@mail.gmail.com>
+To: mingli.yu@windriver.com
+Message-ID: <20190423061134.GE18826@localhost>
+References: <20190422072218.94167-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQdfS-xNdheKuj=AA1zaChsA_g1gb6kMkiU8jGXngfw0g@mail.gmail.com>
+In-Reply-To: <20190422072218.94167-1-mingli.yu@windriver.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] vlc: rework qt PACKAGECONFIG
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] hwdata: Upgrade to 0.322
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2019 06:08:09 -0000
+X-List-Received-Date: Tue, 23 Apr 2019 06:11:37 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 23, 2019 at 02:07:02AM +0200, Andreas Müller wrote:
-> On Tue, Apr 23, 2019 at 1:55 AM Paul Barker <paul@betafive.co.uk> wrote:
-> > On 23/04/2019 00:46, Andreas Müller wrote:
+On Mon, Apr 22, 2019 at 12:22:18AM -0700, mingli.yu@windriver.com wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
+> 
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+> index 8e8dbf5c8..f04e5c8d4 100644
+> --- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
+> +++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+> @@ -5,8 +5,8 @@ SECTION = "System/Base"
+>  LICENSE = "GPL-2.0+"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+>  
+> -PV = "0.316+git${SRCPV}"
+> -SRCREV = "803819aef862ded2ce0737cd3cf642c633b68c35"
+> +PV = "0.322+git${SRCPV}"
+> +SRCREV = "a65d28807d8f2446faa4734c758d1607f0a56ded"
+>  SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
 >...
-> > > -PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-> > > +PACKAGECONFIG ?= " \
-> > > +    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
-> > > +    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-> > > +    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)} \
-> >
-> > I don't like this change based on BBFILE_COLLECTIONS, it's just a
-> > different way of having things change when you add an extra layer. We
-> > wouldn't want an unconditional bbappend in meta-qt5 to set this and so
-> > we don't want to set it here when that layer is added.
-> >
-> > Perhaps we should have qt5 as a distro feature instead?
-> Isn't that a different naming for the same thing not working properly
-> if you don't have meta-qt5 in layers?
 
-Isn't this a reason for moving vlc out of meta-openembedded?
-Or alternatively moving qt5 to meta-openembedded.
-
-> Andreas
+PV shouldn't contain +git when SRCREV is exactly the release.
+That's already present in the old version, but should be fixed.
 
 cu
 Adrian
