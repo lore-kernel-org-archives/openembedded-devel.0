@@ -1,46 +1,63 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
-	[209.85.166.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 52C1E71E5A
+Return-Path: <paul@betafive.co.uk>
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+	[66.111.4.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EC9060043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Apr 2019 00:07:13 +0000 (UTC)
-Received: by mail-io1-f45.google.com with SMTP id i21so10481064iol.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2019 17:07:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=IO3DfdAV4FWEN9Dd3AuCbkn4w27npOiMmBBFKxYzVb8=;
-	b=HXgsP/c8rseHf8bSUMmKuk9R8QhWUlNla9vQXROO5rwY0rRsOjZ28z/a3RvPsIaVcq
-	CBMlEJumjeQx09OVpyEZQhaVBtnteD2tfLNUJczaoijwn+iBxVrsbU3BEKjaUm2QrTX8
-	WiEe4rckjCEvlZzjkwT2Ff0NHg8C8Py1SyRl+4WHIUWApw/W2Buepkyy5R3I5G8O2PwC
-	myOPsDv0onfLQ5tqyV3S02Ih4UlAas7docq4wl0lRB4IUiHJCAkOyC8gAU0ry2JOWndP
-	oII7JELOD/yea+B6NCihJcCwZ59XPix7Seo7VXRA+79lMTZXij76sbM26VE48quhKHdk
-	ln/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=IO3DfdAV4FWEN9Dd3AuCbkn4w27npOiMmBBFKxYzVb8=;
-	b=Kmg7vIQQNFjv5ykvhoRd0rN0x07vgX5OkEPHJnzWA484hki+UdzQ3K6RqK30p1A0AN
-	aRvqq8HBCzoEr6QT9dYaQt6nBOEKZe3qr68wE/NhcTH196fB54Khv3IR7e/zxvc2O7QC
-	U3CgXuRVEagegGCChSdVMnP9XBxESEmsw+V2ywnl+W+mKqQwHr9fy8+WihgzTheGz6LZ
-	q3YCyRHHgxyIJNPdxYqB5tgSNf88Ksu5408BNPKNWSGW5HX4/iQMRYvxGozmIDrCgsBr
-	SC98PXmtQx36oL1Vy1FeLRblx6zCJFjylx7+1pzBIx4PM4XHGeosQAixHcn0oZFaF2ga
-	AOtQ==
-X-Gm-Message-State: APjAAAWyEV3vvfzJlhNo8YO3dav6ddxecHnkD7Dv62k8zeYUAx696nJC
-	Xtn1L2sOeluono/XQXF0O1YDa4keANuM+4JXtyonJw==
-X-Google-Smtp-Source: APXvYqxz86JEVXt9KAUomCwku0JuSgrAU6wu9WXF5uRxTbvA3ZrVMKF/iDviUp9e7mwRWyaqHBXHHM34m19wbwxiUk8=
-X-Received: by 2002:a5d:8441:: with SMTP id w1mr2203043ior.99.1555978034320;
-	Mon, 22 Apr 2019 17:07:14 -0700 (PDT)
-MIME-Version: 1.0
+	Tue, 23 Apr 2019 00:41:27 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.nyi.internal (Postfix) with ESMTP id 1726821111;
+	Mon, 22 Apr 2019 20:41:29 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+	by compute1.internal (MEProxy); Mon, 22 Apr 2019 20:41:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
+	h=subject:to:cc:references:from:message-id:date:mime-version
+	:in-reply-to:content-type:content-transfer-encoding; s=fm1; bh=e
+	QuGf9XCh7W6QUZFvNPPG4AqTTDsQ3PMw7hGI2Zf99g=; b=jzfkx56M2FE4btHdj
+	Ocg37NoHlrRPsg6swvUyyBPLFYEE+H1Kq9c2TTm7GOoDrKrzqWlLPuS6DIv/w/VS
+	tcVE8NNkYxJkvWOoMwsyH8Hwu96zTJKKiuu1z4hWpA2hrFkYMqgaRXN2evpp1wzC
+	QDI/ANvFt/ZVD37znxswGat+SMp0SJ0bruWwRURxRqoiEmNCmA9XHgUkJomD94Xm
+	kEv2Q6wcdH1ZIWjUomtESkhorGp6PmwNpBri3fGEe3yaRlEbJEmEckbHJOVcuJx4
+	poqmuTLq+5H3R5FJTqc9LWR+8EcLHcgHt5YmvoYkZ9w5wkm6RqicKtdnGsELf3bX
+	p0/Mw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:content-type
+	:date:from:in-reply-to:message-id:mime-version:references
+	:subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; bh=eQuGf9XCh7W6QUZFvNPPG4AqTTDsQ3PMw7hGI2Zf9
+	9g=; b=atiknZOTBgpd3IMMgRlg0XK/5DMvhjmGlzcO7u00sTJgVF+WoBLGQ2y7w
+	HDc0/YBJYtPqao/EAEkVfMcGvwZXn9lL/DRamLecYsOz1hNH/tIbAyHgAulqzfQ4
+	dRg1OebwUw4w8tEH8nFXT3pWo0TFj6TSelkV2wiQqf3ZCb70gC9wSK7kAUVKpciJ
+	heT40gdAr/oaUkdZC5Kj2zwCyWtbW96BSpPPna5Z8BnJlMWlV6ftCbydqaCeEuMO
+	uMRZ+1oIVPXRWJihv+u4EQytRlVFEE/dItfpgfUHPS2jEu5yfX6ofG7Own5T411i
+	8QBdiPRLb50N6dQKX2+Zm5Ouwv/og==
+X-ME-Sender: <xms:OF--XK-749STalfWixI8-ldvSXgW7cAET-uhCpqaLS7ngmv_5Rnk_g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduuddrgeejgddvkecutefuodetggdotefrodftvf
+	curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+	uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+	fjughrpefuvfhfhfhokffffgggjggtgfesthekredttdefjeenucfhrhhomheprfgruhhl
+	uceurghrkhgvrhcuoehprghulhessggvthgrfhhivhgvrdgtohdruhhkqeenucffohhmrg
+	hinhephihotghtohhprhhojhgvtghtrdhorhhgnecukfhppeekuddrudekjedrfedvrddu
+	feeknecurfgrrhgrmhepmhgrihhlfhhrohhmpehprghulhessggvthgrfhhivhgvrdgtoh
+	druhhknecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:OF--XCkulSHHIMyPIMogqXzFTgp9EBecp1dvneeX7a5ioK6Tm6vI9A>
+	<xmx:OF--XPbcfCNqBxUAUIaWw31TcFnqkCAU5iwUPzdMEyTXWKsxVgb6wQ>
+	<xmx:OF--XKOgyGUqjcu6VxWlNwK0d52imCFBssGQiGqYcRef2Q5iMSQ9ng>
+	<xmx:OV--XJkv-KKPi-heDaDu7RQu_O4JemS2jrIxv_MwB-SY4Du5-SOn2Q>
+Received: from [192.168.2.138] (138.32.187.81.in-addr.arpa [81.187.32.138])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 2402BE415C;
+	Mon, 22 Apr 2019 20:41:28 -0400 (EDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
 References: <20190422234617.5419-1-schnitzeltony@gmail.com>
 	<e9587755-4b63-90cf-1738-930b808da883@betafive.co.uk>
-In-Reply-To: <e9587755-4b63-90cf-1738-930b808da883@betafive.co.uk>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 23 Apr 2019 02:07:02 +0200
-Message-ID: <CALbNGRQdfS-xNdheKuj=AA1zaChsA_g1gb6kMkiU8jGXngfw0g@mail.gmail.com>
-To: Paul Barker <paul@betafive.co.uk>
+	<CALbNGRQdfS-xNdheKuj=AA1zaChsA_g1gb6kMkiU8jGXngfw0g@mail.gmail.com>
+From: Paul Barker <paul@betafive.co.uk>
+Organization: Beta Five Ltd
+Message-ID: <16abe617-eaaf-afe4-6190-f51315494712@betafive.co.uk>
+Date: Tue, 23 Apr 2019 01:41:26 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.0
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQdfS-xNdheKuj=AA1zaChsA_g1gb6kMkiU8jGXngfw0g@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] vlc: rework qt PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,59 +72,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2019 00:07:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Apr 2019 00:41:28 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 23, 2019 at 1:55 AM Paul Barker <paul@betafive.co.uk> wrote:
->
-> On 23/04/2019 00:46, Andreas M=C3=BCller wrote:
-> > * qt4 support is gone -> move to qt5
-> > * enable qt5 gui in case meta-qt5 is in layers (it is more or less usel=
-ess
-> >    without gui)
-> > * while at it remove noop libtool copy
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > ---
-> > V1 -> V2: Aargh again typo in commit messeage...
-> >   .../recipes-multimedia/vlc/vlc.inc            | 25 ++++++++++++------=
--
-> >   1 file changed, 16 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-mult=
-imedia/recipes-multimedia/vlc/vlc.inc
-> > index 19ac8206c..6ba1444b5 100644
-> > --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> > +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> > @@ -36,12 +36,18 @@ EXTRA_OECONF =3D "\
-> >       --enable-realrtsp \
-> >       --disable-libtar \
-> >       --enable-avcodec \
-> > -    ac_cv_path_MOC=3D${STAGING_BINDIR_NATIVE}/moc4 \
-> > -    ac_cv_path_RCC=3D${STAGING_BINDIR_NATIVE}/rcc4 \
-> > -    ac_cv_path_UIC=3D${STAGING_BINDIR_NATIVE}/uic4 \
-> > +    ac_cv_path_MOC=3D${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/moc \
-> > +    ac_cv_path_RCC=3D${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/rcc \
-> > +    ac_cv_path_UIC=3D${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/uic \
-> >   "
-> >
-> > -PACKAGECONFIG ?=3D " live555 dc1394 dv1394 notify fontconfig freetype =
-dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-> > +PACKAGECONFIG ?=3D " \
-> > +    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
-> > +    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-> > +    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '',=
- d)} \
->
-> I don't like this change based on BBFILE_COLLECTIONS, it's just a
-> different way of having things change when you add an extra layer. We
-> wouldn't want an unconditional bbappend in meta-qt5 to set this and so
-> we don't want to set it here when that layer is added.
->
-> Perhaps we should have qt5 as a distro feature instead?
-Isn't that a different naming for the same thing not working properly
-if you don't have meta-qt5 in layers?
+On 23/04/2019 01:07, Andreas Müller wrote:
+> On Tue, Apr 23, 2019 at 1:55 AM Paul Barker <paul@betafive.co.uk> wrote:
+>>
+>> On 23/04/2019 00:46, Andreas Müller wrote:
+>>> * qt4 support is gone -> move to qt5
+>>> * enable qt5 gui in case meta-qt5 is in layers (it is more or less useless
+>>>     without gui)
+>>> * while at it remove noop libtool copy
+>>>
+>>> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>>> ---
+>>> V1 -> V2: Aargh again typo in commit messeage...
+>>>    .../recipes-multimedia/vlc/vlc.inc            | 25 ++++++++++++-------
+>>>    1 file changed, 16 insertions(+), 9 deletions(-)
+>>>
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> index 19ac8206c..6ba1444b5 100644
+>>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> @@ -36,12 +36,18 @@ EXTRA_OECONF = "\
+>>>        --enable-realrtsp \
+>>>        --disable-libtar \
+>>>        --enable-avcodec \
+>>> -    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
+>>> -    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
+>>> -    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
+>>> +    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/moc \
+>>> +    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/rcc \
+>>> +    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/uic \
+>>>    "
+>>>
+>>> -PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+>>> +PACKAGECONFIG ?= " \
+>>> +    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
+>>> +    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+>>> +    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)} \
+>>
+>> I don't like this change based on BBFILE_COLLECTIONS, it's just a
+>> different way of having things change when you add an extra layer. We
+>> wouldn't want an unconditional bbappend in meta-qt5 to set this and so
+>> we don't want to set it here when that layer is added.
+>>
+>> Perhaps we should have qt5 as a distro feature instead?
+> Isn't that a different naming for the same thing not working properly
+> if you don't have meta-qt5 in layers?
+> 
 
-Andreas
+Agreed, we shouldn't give people more opportunities to shoot themselves 
+in the foot!
+
+For my builds I have all layers added all the time and just 
+enable/disable features as needed. So just because meta-qt5 is included 
+as a layer doesn't mean I'm even building an x11 or weston 
+configuration, it could be command line only in which case I wouldn't 
+want this extra PACKAGECONFIG creeping in.
+
+meta-virtualization handles this by gating overrides on a 
+'virtualization' distro feature and adding a sanity check that you 
+enabled that distro feature when adding the layer 
+(http://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/tree/classes/sanity-meta-virt.bbclass). 
+The sanity check can be disabled by setting SKIP_META_VIRT_SANITY_CHECK. 
+I find it a bit messy but it does work.
+
+What would work for this case is a bbappend in meta-qt5 which checks for 
+the 'qt5' distro feature. The benefit of using a distro feature is that 
+we can gate changes to other recipes on the same configuration setting 
+so that we don't need to set lots of PACKAGECONFIG values explicitly in 
+a distro or local.conf.
+
+Forgive my 01:40 AM brain if any of that doesn't make sense.
+
+> Andreas
+> 
+
+-- 
+Paul Barker
+Managing Director & Principal Engineer
+Beta Five Ltd
 
