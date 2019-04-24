@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 87B356C0F4
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 091827CF1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 22:08:51 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id w23so15890789lfc.9
+	Wed, 24 Apr 2019 22:45:53 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id h126so5315741lfh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 15:08:52 -0700 (PDT)
+	Wed, 24 Apr 2019 15:45:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=gRLszKk431BhCCNBnaHruMjmIAHNBL/lYouxleRWXUA=;
-	b=g0++wtNPt/Kp7nnEVwKkmsjsG0JuSELpM4wA4dvLfS0Bb9i6DmhUr56e1/siN0aPKG
-	9yewtxea/47mEfzRDlqaw3qrz/cW/F+8CLHuYetCh9U+cKItsKlHLMww6FVMoB+l8aXZ
-	6K4+CYlqKeymZIw3VkkJUULPIVfoYWE2JeG98LzCUgsZvmctaB7qcPF4Ad7JbrU6vnbt
-	h02bfHx8Jd6S/2mYQgRqPUnXr0RNRB21+ZDrFOo35IF6iBkGj/l8xzvbM6aceBw11HNA
-	Z0Clb5tRQCCoZc1B1pAfMS8lMTxSCzK/OJY5oPY6dEjLq23QBWOSIM/G0hozVGoV3yLG
-	nvbw==
+	bh=tgxcNGCQtBEIRV1U4BeroZRCPPq6oypFdkcq335ddXw=;
+	b=PtC2EMlT/2cJ60XdT97uyJacSpP+Dd+zO0XLKdx+dZj8ZxCx/dDpzBTVhjd/jGcyXa
+	YfJIt5583OjWaJVtyBvIITWUgdbfPOpYj7J6R23Nv+tLmo7nZdI9ijVyMzJIJPeC7QoS
+	H20U82ktXlh7+GSJl2aW1p609NfBn6WsCTtPFV6jnbxxGZME5F6T9qbm4E4FG06SQT32
+	uDLLjpkWSGq1K8x21NHzCTliZLWPuGqiRT/9hrKsNCpXp8hn1ybPfjKFpOghYXD65mOr
+	TdJvIqYXmmBh/FJVjHkxwLnu2XGJvDk8qF5BnMw3G4CXS8+TLmKtwCxY6QWW6d6VwebA
+	luag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gRLszKk431BhCCNBnaHruMjmIAHNBL/lYouxleRWXUA=;
-	b=C/uLxAZtK3BkeHthxc3xNbWH4WDmpqbeKgqqjBXAwbPOIn22kRFJIjRevUuaqq2DAr
-	zw5iylnz0hm5x1sbkGIbTGo0xjLc9MgXEfiEQYzi35C1Kuab/NGtFfyVDzCdzZi9caHM
-	TIvNDWeDU9vcBeWCXAMqR+W2rDTbwDZBFB4ifvpwuFcB69x7c+4HUXpx01zRKfzh15vq
-	GqH4mDaES98OUy5xaF3rMWfcZFXRt2jfvWE1RWnyq4zX02P31LUge89fLa0j6UXactaJ
-	e7VYiX2PTkefvRdBVGYD1d+QA3j7W9tOtlMm7MpDq4Z5GK6GaXcp1ItdQyhsD8hqfitM
-	91XA==
-X-Gm-Message-State: APjAAAWdOJKepZiRH9bxoOrzmSWm7GzaQrtPDDPZD7m/jU/wPatzFWeM
-	x9p0WvgeHf9UluYvkbCfdJ/5EicPBs8=
-X-Google-Smtp-Source: APXvYqxm6bNhTFkh8hIhuAAGw2Cd90SivPRSqC468UkojBeCeJpMpdWmjeZLOn82RLmmbH3+yyluRA==
-X-Received: by 2002:a19:7402:: with SMTP id v2mr3851270lfe.53.1556143731946;
-	Wed, 24 Apr 2019 15:08:51 -0700 (PDT)
+	bh=tgxcNGCQtBEIRV1U4BeroZRCPPq6oypFdkcq335ddXw=;
+	b=BSe212U/cZ7XNm+Vw3bv+g1MqcXedolVkSDxpqZ3DaV2MfQIc/HApGITP5LmgTBUw5
+	frnF5Qo6zIm6ffjcKrDjDv2BGZkIXCDvl49BmU4I6JiJ3onrDuq3kVncG+59TR5zkw49
+	Be2k7zmRgT8+Pl6/jS56hSjCfrXv+x8laDuLD0ITHeNYhWyTZ3AG08b+UvDPExt9nO5U
+	1xvcgDBAZ1XnO99w2zgqeje6gw/252CWrz+5fAYylDTtv5Aai0W/3m4kmKpYbxbVTfih
+	2aJCk2hlbzgrFUa+QvOaqoDbDdeNDocSoeATytrwuXfQLcp8epJ/zqe6rZ5Nsdu54SZ0
+	0DeQ==
+X-Gm-Message-State: APjAAAXvPmy0NGbvHX6LVbNpY+pfL0681dyDB+OxZ0tZTEFZ5kl7Fw2f
+	iDcvmFTvUPQce1S5q+gS1qDFcdCeep0=
+X-Google-Smtp-Source: APXvYqyM6Um3/980R6wSAN4oYyTvWjbknVRHF91QTisixYEkSb5D3JuGU2AbGzInwUuGYICpuoP1Rw==
+X-Received: by 2002:a19:751a:: with SMTP id y26mr5694462lfe.47.1556145953986; 
+	Wed, 24 Apr 2019 15:45:53 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	m28sm4595843lfc.71.2019.04.24.15.08.51
+	a28sm5745941lfk.54.2019.04.24.15.45.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Apr 2019 15:08:51 -0700 (PDT)
+	Wed, 24 Apr 2019 15:45:53 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Apr 2019 00:08:49 +0200
-Message-Id: <20190424220849.17374-1-open.source@oleksandr-kravchuk.com>
+Date: Thu, 25 Apr 2019 00:45:50 +0200
+Message-Id: <20190424224550.22731-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nopoll: add UPSTREAM_CHECK_URI
+Subject: [PATCH][meta-networking] libnetfilter-queue: update to 1.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 22:08:51 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 22:45:54 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-protocols/nopoll/nopoll_0.4.6.b400.bb           | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../{libnetfilter-queue_1.0.2.bb => libnetfilter-queue_1.0.3.bb}  | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-queue_1.0.2.bb => libnetfilter-queue_1.0.3.bb} (100%)
 
-diff --git a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
-index 8c57d2949..84bd65618 100644
---- a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
-+++ b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
-@@ -11,8 +11,10 @@ LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f0504124678c1b3158146e0630229298 \
-                    "
- DEPENDS = "openssl"
--SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \
--          "
-+
-+UPSTREAM_CHECK_URI = "http://www.aspl.es/nopoll/downloads/"
-+
-+SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \          "
- SRC_URI[md5sum] = "8d333f158b5d5a8975a6149e6ef8db63"
- SRC_URI[sha256sum] = "7f1b20f1d0525f30cdd2a4fc386d328b4cf98c6d11cef51fe62cd9491ba19ad9"
- 
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.3.bb
+similarity index 100%
+rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb
+rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.3.bb
 -- 
 2.17.1
 
