@@ -1,26 +1,48 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 72BDC7D48D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id B49056D61B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 10:40:14 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x3OAeFku017762
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Wed, 24 Apr 2019 14:51:36 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id q16so4998394wmj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 12:40:15 +0200
-Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
-	[163.242.44.88])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x3OAeEuM025564;
-	Wed, 24 Apr 2019 12:40:14 +0200
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 52D0723B85;
-	Wed, 24 Apr 2019 12:40:14 +0200 (CEST)
-From: Andrej Valek <andrej.valek@siemens.com>
+	Wed, 24 Apr 2019 07:51:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=5vFzQJ3gznAEjfIjMULZ/sKtPKlUrU5uRQk8VkA2WVg=;
+	b=G5e7cfdIVOrpyPVXQ4RN0Xu25otCsfy3dR1SlQpprNUTbgpTAbPt0+nNBvzazTZ54P
+	uOxtBp/tuoVoHNfB5xXIRCScXlidK2Q4BvR/V4iUhyV39hL1TMz5BhyWXp2pbRhREW5l
+	h2KpPuj1eAZqosMLC845DKw8Lp8uWpWfSJ/VKpzK114026A1g3p8/aGYQwfj6cTkOHgM
+	rQqVhCd7nCq4VN9lrINr98kayyfQ7vjd1ImgScU5U+nw9lZ3U48C5K0JXm7afaxwBr2Z
+	c5DLlXX5P2iM1TUELbPQ+ZwnbHbCvvZq4B4YNT3EDJlRMmNkLC1o54TQZDEY/KQmeCMk
+	/i2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5vFzQJ3gznAEjfIjMULZ/sKtPKlUrU5uRQk8VkA2WVg=;
+	b=LKmS2fLpQ8691PVu+O+PmNs8WNHUygjiSXzR/Jxm3fj3d/UMo4JVKex+lThNdw5gwD
+	KD3KCSTUGc0/r1jK8XjTDjNikFNaEUMScvecKi9CQ5VyP2a/4jhyL+zuCEPsy2mn8nrr
+	4+IWzchl37cGaEAYWGlSRKnPdGWbwWD5r82cNyNGrz5L2n0HijbNDJzQC+DcUdSHWSPq
+	hO27md1ibxXhijzfdLSx6Du7NyY8eWk6VexTXfZHRj3IGRa9HcQQadqLLhPofZwMMguj
+	ftrG5L59pMcpTUZYN+GEyN4MEkOqVFq5k7F1Aqf9KfO/wi+kt7nCR/LRdmUo+lZJTrDk
+	jUlA==
+X-Gm-Message-State: APjAAAXoSL/IY3TUi8s5p92c/KzMgggvtXTfhL5DPJiEAxFvBYrgUTbA
+	TPxjJ3rWhQ1zCgV445U0bsVHQUY1
+X-Google-Smtp-Source: APXvYqzU07Xiy3wdiv1xReB71BjN17fUVYqb12wQsauQDIC54A5dSte+iB5L29D0rA+FbCoz5YqIXQ==
+X-Received: by 2002:a1c:e0c6:: with SMTP id x189mr6624245wmg.4.1556117497031; 
+	Wed, 24 Apr 2019 07:51:37 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	t76sm26998970wmt.8.2019.04.24.07.51.35
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 24 Apr 2019 07:51:35 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Apr 2019 12:40:00 +0200
-Message-Id: <20190424104000.23269-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][PATCH] ntp: upgrade 4.2.8p12 -> 4.2.8p13
+Date: Wed, 24 Apr 2019 14:51:35 +0000
+Message-Id: <20190424145135.767-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] Revert "ell: remove recipe"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,44 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 10:40:15 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 14:51:37 -0000
 
-License has been changed due to reformatting, no new stuff added.
+This reverts commit f4a59c5dd69a6d24cd500a6eba0b72e0d8b4f58c.
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+It was merged too early, ell wasn't merged to oe-core yet.
+
+meta-oe/recipes-connectivity/iwd/iwd_0.14.bb depends on it and now there
+is no provider in meta-oe nor oe-core.
+
+Should be merged again after meta-oe warrior is branched and
+ell in oe-core for the next release.
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb} (96%)
+ meta-oe/recipes-core/ell/ell_0.17.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-core/ell/ell_0.17.bb
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-similarity index 96%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-index 289d2645b..dc18a602a 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-@@ -6,7 +6,7 @@ or satellite receiver or modem."
- HOMEPAGE = "http://support.ntp.org"
- SECTION = "net"
- LICENSE = "NTP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=e877a1d567a6a58996d2b66e3e387003"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4cee33257467509e498f4cd9a6a4bd53"
- 
- DEPENDS = "libevent"
- 
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "1522d66574bae14abb2622746dad2bdc"
--SRC_URI[sha256sum] = "709b222b5013d77d26bfff532b5ea470a8039497ef29d09363931c036cb30454"
-+SRC_URI[md5sum] = "ea040ab9b4ca656b5229b89d6b822f13"
-+SRC_URI[sha256sum] = "288772cecfcd9a53694ffab108d1825a31ba77f3a8466b0401baeca3bc232a38"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
+diff --git a/meta-oe/recipes-core/ell/ell_0.17.bb b/meta-oe/recipes-core/ell/ell_0.17.bb
+new file mode 100644
+index 0000000000..27f11cfbe2
+--- /dev/null
++++ b/meta-oe/recipes-core/ell/ell_0.17.bb
+@@ -0,0 +1,17 @@
++SUMMARY  = "Embedded Linux Library"
++DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
++LICENSE  = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
++SECTION = "libs"
++
++inherit autotools pkgconfig
++
++S = "${WORKDIR}/git"
++SRCREV = "ebc021cee3b2d20ca2af5e3ed02495da616b2fd3"
++SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
++
++do_configure_prepend () {
++    mkdir -p ${S}/build-aux
++}
++
++DEPENDS = "dbus"
 -- 
-2.11.0
+2.17.1
 
 
