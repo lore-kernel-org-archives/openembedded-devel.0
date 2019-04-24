@@ -1,26 +1,30 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CFB9D7D574
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9138E7D557
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 07:11:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x3O7BBBU028663
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 24 Apr 2019 07:43:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,388,1549900800"; d="scan'208";a="60368316"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Apr 2019 15:43:58 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id D856C4CDABF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 00:11:22 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 24 Apr 2019 00:11:01 -0700
-From: <mingli.yu@windriver.com>
+	Wed, 24 Apr 2019 15:43:55 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 24 Apr 2019 15:43:57 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Apr 2019 00:11:00 -0700
-Message-ID: <20190424071100.23092-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190424071100.23092-1-mingli.yu@windriver.com>
-References: <20190424071100.23092-1-mingli.yu@windriver.com>
+Date: Wed, 24 Apr 2019 15:44:45 +0800
+Message-ID: <20190424074445.7104-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] libdbd-mysql-perl: Upgrade to 4.050
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: D856C4CDABF5.AAEA6
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-alembic: upgrade 1.0.0 -> 1.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,122 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 07:11:31 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 07:43:59 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+-Upgrade from python-alembic_1.0.0.bb to python-alembic_1.0.9.bb.
 
-Update homepage and make SRC_URI to fetch
-from git.
+-Upgrade from python3-alembic_1.0.0.bb to python3-alembic_1.0.9.bb.
 
-Remove one backported patch.
+-License-Update: Copyright year updated to 2019.
 
-Add libdev-checklib-perl-native to DEPENDS as
-the new libdbd-mysql-perl depends on another module
-(Devel::CheckLib) at configure time.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../0001-Use-API-function-for-reconnect.patch | 53 -------------------
- ...rl_4.043.bb => libdbd-mysql-perl_4.050.bb} | 14 ++---
- 2 files changed, 5 insertions(+), 62 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
- rename meta-oe/recipes-devtools/perl/{libdbd-mysql-perl_4.043.bb => libdbd-mysql-perl_4.050.bb} (57%)
+ meta-python/recipes-devtools/python/python-alembic.inc      | 6 +++---
+ .../{python-alembic_1.0.0.bb => python-alembic_1.0.9.bb}    | 0
+ .../{python3-alembic_1.0.0.bb => python3-alembic_1.0.9.bb}  | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-alembic_1.0.0.bb => python-alembic_1.0.9.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.0.0.bb => python3-alembic_1.0.9.bb} (100%)
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
-deleted file mode 100644
-index 60d88c3d1..000000000
---- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From edb6b202b7e233864aa5dd84532646c50097b0b8 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Mon, 4 Mar 2019 00:49:17 -0800
--Subject: [PATCH] Use API function for reconnect
--
--For configuring reconnect functionality use standard API function
--MYSQL_OPT_RECONNECT instead of direct modification of internal structures
--which does not work for MariaDB. Fixes compilation with MariaDB 10.2.6+.
--
--Upstream-Status: Backport [https://github.com/perl5-dbi/DBD-mysql/commit/0b1884f4153d3de0a91bae4d3b3cc1771ffdf4f3]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- dbdimp.c | 16 ++++++++++------
-- 1 file changed, 10 insertions(+), 6 deletions(-)
--
--diff --git a/dbdimp.c b/dbdimp.c
--index 9b8b313..3bed213 100644
----- a/dbdimp.c
--+++ b/dbdimp.c
--@@ -1979,6 +1979,16 @@ MYSQL *mysql_dr_connect(
-- 
--     if (result)
--     {
--+      /*
--+        we turn off Mysql's auto reconnect and handle re-connecting ourselves
--+        so that we can keep track of when this happens.
--+      */
--+#if MYSQL_VERSION_ID >= 50013
--+      my_bool reconnect = FALSE;
--+      mysql_options(result, MYSQL_OPT_RECONNECT, &reconnect);
--+#else
--+      result->reconnect = 0;
--+#endif
-- #if MYSQL_VERSION_ID >=SERVER_PREPARE_VERSION
--       /* connection succeeded. */
--       /* imp_dbh == NULL when mysql_dr_connect() is called from mysql.xs
--@@ -1992,12 +2002,6 @@ MYSQL *mysql_dr_connect(
--           imp_dbh->async_query_in_flight = NULL;
--       }
-- #endif
---
---      /*
---        we turn off Mysql's auto reconnect and handle re-connecting ourselves
---        so that we can keep track of when this happens.
---      */
---      result->reconnect=0;
--     }
--     else {
--       /* 
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
-similarity index 57%
-rename from meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb
-rename to meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
-index e185f48f7..049dc665d 100644
---- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
-@@ -6,21 +6,17 @@ with the MySQL relational database management system. Most functions \
- provided by this programming API are supported. Some rarely used \
- functions are missing, mainly because no-one ever requested them. \
- "
--HOMEPAGE = "http://search.cpan.org/~michielb/DBD-mysql-4.036/lib/DBD/mysql.pm"
-+HOMEPAGE = "https://github.com/perl5-dbi/DBD-mysql"
+diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
+index 477e89c5a..a7701a3bc 100644
+--- a/meta-python/recipes-devtools/python/python-alembic.inc
++++ b/meta-python/recipes-devtools/python/python-alembic.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "A database migration tool for SQLAlchemy"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a5befaf254582f10aadd62d83cd20322"
  
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
--DEPENDS += "libdbi-perl-native libmysqlclient"
-+DEPENDS += "libdev-checklib-perl-native libdbi-perl-native libmysqlclient"
+-SRC_URI[md5sum] = "762ab9ba56d1c0b1bfbc7c9f7f849c92"
+-SRC_URI[sha256sum] = "52d73b1d750f1414fa90c25a08da47b87de1e4ad883935718a8f36396e19e78e"
++SRC_URI[md5sum] = "d1ebe49c7f71dfbd0daa8905df95668b"
++SRC_URI[sha256sum] = "40b9a619aa5f25ea1e1508adcda88b33704ef28e02c9cfa6471e5c772ecf0829"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
+ PYPI_PACKAGE = "alembic"
  
--SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MICHIELB/DBD-mysql-${PV}.tar.gz \
--           file://0001-Use-API-function-for-reconnect.patch \
--"
--
--SRC_URI[md5sum] = "4a00dd7f1c057931147c65dfc4901c36"
--SRC_URI[sha256sum] = "629f865e8317f52602b2f2efd2b688002903d2e4bbcba5427cb6188b043d6f99"
-+SRCREV = "9b5b70ea372f49fe9bc9e592dae3870596d1e3d6"
-+SRC_URI = "git://github.com/perl5-dbi/DBD-mysql.git;protocol=https"
- 
--S = "${WORKDIR}/DBD-mysql-${PV}"
-+S = "${WORKDIR}/git"
- 
- inherit cpan
+diff --git a/meta-python/recipes-devtools/python/python-alembic_1.0.0.bb b/meta-python/recipes-devtools/python/python-alembic_1.0.9.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-alembic_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python-alembic_1.0.9.bb
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.0.9.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.0.9.bb
 -- 
-2.17.1
+2.20.1
+
+
 
 
