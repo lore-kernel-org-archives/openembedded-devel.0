@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 09A607D686
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BF457D589
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 19:34:23 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id w23so15584595lfc.9
+	Wed, 24 Apr 2019 19:36:40 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id k18so15576975lfj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 12:34:25 -0700 (PDT)
+	Wed, 24 Apr 2019 12:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=pz5Vu4AAeHLtWqxORbnVIyXouIcXsNgZ/qzG19uQ6Mo=;
-	b=Tnyr+q+JMeucCOb3SAr4EMR1uNjvVmecF0pye2N4dn639Ri+/yPJaMFHnVklV4xJyd
-	2gdHxKo6IZtVjuMJxxfn+Pe0a0UdE6i4McRJFHs0IsTNnEVu/krtfowiiWhV0J7oqVQ+
-	J/Xtx9+WRSMLLR/dUwqM2ly9nmG/w2WzpsWSknMnt1UiFFBE32Y0IXOm92Y17hoaVtjP
-	VCndbjiw4h7v7iyk4vfRmnUfbaCiMwyosO8YGQoDplYjTDTcBYYcbSjs7uuzoFZH/Pzg
-	Baa1y8yiyDUcAY3jMn3JPnG0+RiH71O5j1FzbN4/Tm5tsLiMkJ2zsW2NMUtEQSN7Lgyv
-	4OGw==
+	bh=Tdr7ZJNlcI+7pSgNmzLFhxR1y6kUwb/GlYDA3S3b+h8=;
+	b=dh6cq4Do63wn98gbHIh/XvbVBulIsXAQNiV7+VKSPWow0JVmH006p1ZIR8/P19MERl
+	ErG/xRNcOqkpB2tl+lSE/9DUhQhzEN80KiiVRVVxOVzdkZUHE6DPgeYHF6OFy5hmzMY7
+	FXdy3rSc90x4yZL0yULsdd1BunH2s+t5CCHJ62NbcbESQ+aUNflvU+bBFtmywy0bmofU
+	I/SxByRvrV8ska9tZ2LK/Q4XGPsgcj6Df86cXYg/lM0GFcseetVBihHHDhDjRTE1DaEw
+	QAZULNZvmvdNxhRa1zXMPFmbXbjoixNAlEpoKf0JYvL4E3qeqycfqtdhS94FXngXfges
+	CgOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pz5Vu4AAeHLtWqxORbnVIyXouIcXsNgZ/qzG19uQ6Mo=;
-	b=dkGtcmh4Py/tzIgEPOybfwXjR9IpZUVg9zjhEGCfQ5KE7J4HTFkhw+apBWPzmfi5mr
-	DEimQewYDL0BVivl5ELXtyexC4z2ImdHnmec0o0xsEfJzqvHIKeAnmeyxdmg3koF92bt
-	UCQ1bSzzTnKgzfa/kWKhaweHW18xhbd4oyVlwivxtFiHo2BUspQoIsSqE2bxYm4Yq+oz
-	u2SY2nJIr98IC6FJKg/eyrAXPx1o4hAgThcgkANK28v92C9j5JrcmxvdnG7AhXINn/Xe
-	mjWojMgOP7dS0uh2l+2aMcCtZlod45WD+BpVfI87MfkI12w2/kK+08h6uYtEH1+Xdypb
-	Te9Q==
-X-Gm-Message-State: APjAAAVv8gYVmmaUwa/fhD1NK1rltWdO5Piex6wwVfOYB59OSm7+nV4p
-	pZY2mT+5qM6/nUi1XmC6ya8m7zwpves=
-X-Google-Smtp-Source: APXvYqwjujmfQ2hD+q7JK4mCkLSfT2Mmk1vfP+rgFcKygpT+k7ZG41qFWEsJUZfkK9z+vcj31JDuag==
-X-Received: by 2002:a19:1dc7:: with SMTP id d190mr18523461lfd.48.1556134464270;
-	Wed, 24 Apr 2019 12:34:24 -0700 (PDT)
+	bh=Tdr7ZJNlcI+7pSgNmzLFhxR1y6kUwb/GlYDA3S3b+h8=;
+	b=obOPWMaSQRmi9IckrixW4mW/nqewlOB3ImWiQ66VWYnu/jPOS0xGGsR6iqRvrswH+f
+	6EOgjmJ+fkMn9H52KF/3drNIkUJ9Fe1S+xToMolZ7W5TRRGuWmHZ70QCDeFGWZFU0+fN
+	OSGooWTvd8Cim10+WDcseqhAXuXpASm9xvjQuZ8vLtSXv5KXbUZ6rRjK0q9ijsKd+Jhj
+	KYgK02ZEt5ZIkaGMixSGPXdpucufW8xT4qC6asZkorxYc6lStRPpiVQi7v0S0sL0e3HA
+	bcc4IXxKU0A4DkaqQSlX0GVv6Erx3wgHZori+8cFBn/CpJXD4uRKBzPuuhR77J5N3hBZ
+	okSg==
+X-Gm-Message-State: APjAAAWXvbwYxlhGldIaleoar5snK+/894z+HhTnl38XgZgGYVwdiuFW
+	jFogN4XNxI/vc0rE286+eTjPjTvI7K4=
+X-Google-Smtp-Source: APXvYqwD6ICQD+/BHOY7Kd8g6DO5ljS82R9WJKDMme9/DAdg9GShVATNGIVTWLQFBSC8yrM+WZ9wBQ==
+X-Received: by 2002:ac2:52a8:: with SMTP id r8mr18470189lfm.160.1556134600530; 
+	Wed, 24 Apr 2019 12:36:40 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id z16sm5413513lfi.9.2019.04.24.12.34.23
+	by smtp.gmail.com with ESMTPSA id q29sm4129572ljc.8.2019.04.24.12.36.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Apr 2019 12:34:23 -0700 (PDT)
+	Wed, 24 Apr 2019 12:36:40 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Apr 2019 21:34:21 +0200
-Message-Id: <20190424193421.31946-1-open.source@oleksandr-kravchuk.com>
+Date: Wed, 24 Apr 2019 21:36:37 +0200
+Message-Id: <20190424193637.32506-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] vblade: add UPSTREAM_CHECK_URI
+Subject: [PATCH][meta-networking] traceroute: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,26 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 19:34:24 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 19:36:40 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-networking/recipes-daemons/vblade/vblade_22.bb | 2 ++
+ meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/vblade/vblade_22.bb b/meta-networking/recipes-daemons/vblade/vblade_22.bb
-index a51a8c31c..a52a1e92b 100644
---- a/meta-networking/recipes-daemons/vblade/vblade_22.bb
-+++ b/meta-networking/recipes-daemons/vblade/vblade_22.bb
-@@ -4,6 +4,8 @@ SECTION = "admin"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+index 8f17d3fdb..19bbf03f1 100644
+--- a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
++++ b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+@@ -13,6 +13,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
-+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
+ inherit update-alternatives
+ 
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/traceroute/files/traceroute/"
 +
- SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
-            file://cross.patch \
-            file://makefile-add-ldflags.patch \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/${BP}/${BP}.tar.gz \
+            file://filter-out-the-patches-from-subdirs.patch \
+ "
 -- 
 2.17.1
 
