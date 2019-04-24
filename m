@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C08C879B57
+	by mail.openembedded.org (Postfix) with ESMTP id DD35D7C68C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 08:06:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,389,1549900800"; d="scan'208";a="60370999"
+	Wed, 24 Apr 2019 08:34:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,389,1549900800"; d="scan'208";a="60374143"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Apr 2019 16:06:31 +0800
+	by heian.cn.fujitsu.com with ESMTP; 24 Apr 2019 16:34:38 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 89CD34CDAACD
+	by cn.fujitsu.com (Postfix) with ESMTP id 665304CDAAAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 16:06:33 +0800 (CST)
+	Wed, 24 Apr 2019 16:34:39 +0800 (CST)
 Received: from localhost.local (10.167.225.84) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 24 Apr 2019 16:06:32 +0800
+	Server (TLS) id 14.3.439.0; Wed, 24 Apr 2019 16:34:39 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Apr 2019 16:07:21 +0800
-Message-ID: <20190424080721.17624-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 24 Apr 2019 16:35:28 +0800
+Message-ID: <20190424083528.27283-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: 89CD34CDAACD.AC6DC
+X-yoursite-MailScanner-ID: 665304CDAAAA.AA6EF
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-hyperlink: upgrade 18.0.0 -> 19.0.0
+Subject: [meta-python] [PATCH] python-twisted: upgrade 18.4.0 -> 19.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 08:06:32 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 08:34:39 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-hyperlink_18.0.0.bb to python-hyperlink_19.0.0.bb.
+-Upgrade from python-twisted_18.4.0.bb to python-twisted_19.2.0.bb.
 
--Upgrade from python3-hyperlink_18.0.0.bb to python3-hyperlink_19.0.0.bb.
+-Upgrade from python3-twisted_18.4.0.bb to python3-twisted_19.2.0.bb.
+
+-License-Update: Copyright year updated to 2019.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-hyperlink.inc      | 4 ++--
- ...{python-hyperlink_18.0.0.bb => python-hyperlink_19.0.0.bb} | 0
- ...ython3-hyperlink_18.0.0.bb => python3-hyperlink_19.0.0.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-hyperlink_18.0.0.bb => python-hyperlink_19.0.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-hyperlink_18.0.0.bb => python3-hyperlink_19.0.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-twisted.inc      | 6 +++---
+ .../{python-twisted_18.4.0.bb => python-twisted_19.2.0.bb}  | 0
+ ...{python3-twisted_18.4.0.bb => python3-twisted_19.2.0.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-twisted_18.4.0.bb => python-twisted_19.2.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-twisted_18.4.0.bb => python3-twisted_19.2.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-hyperlink.inc b/meta-python/recipes-devtools/python/python-hyperlink.inc
-index 78e3ee830..25398541c 100644
---- a/meta-python/recipes-devtools/python/python-hyperlink.inc
-+++ b/meta-python/recipes-devtools/python/python-hyperlink.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/python-hyper/hyperlink"
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index 456adf4c3..ddef414a1 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -5,10 +5,10 @@ HOMEPAGE = "http://www.twistedmatrix.com"
+ 
+ #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3893d4ed05dcc823f8ed685a9ea19bcb"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=04e7730aecedc79d805625a91bc06145"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d136e8cf7b52f2e64079186ae2060d8a"
  
--SRC_URI[sha256sum] = "f01b4ff744f14bc5d0a22a6b9f1525ab7d6312cb0ff967f59414bbac52f0a306"
--SRC_URI[md5sum] = "f41a96779b324d824864696a94b24823"
-+SRC_URI[sha256sum] = "4288e34705da077fada1111a24a0aa08bb1e76699c9ce49876af722441845654"
-+SRC_URI[md5sum] = "4772fb4d87c26a1ab22a6161424e3cba"
+-SRC_URI[sha256sum] = "a4cc164a781859c74de47f17f0e85f4bce8a3321a9d0892c015c8f80c4158ad9"
+-SRC_URI[md5sum] = "da8142ad4e9971a75fe751ac96a33b95"
++SRC_URI[sha256sum] = "1708e1928ae84ec9d3ebab0d427e20e1e38ff721b15bbced476d047d4a43abbe"
++SRC_URI[md5sum] = "473e12f4226e0fecc0ca5698e418e3f6"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-hyperlink_18.0.0.bb b/meta-python/recipes-devtools/python/python-hyperlink_19.0.0.bb
+ PYPI_PACKAGE = "Twisted"
+ PYPI_PACKAGE_EXT = "tar.bz2"
+diff --git a/meta-python/recipes-devtools/python/python-twisted_18.4.0.bb b/meta-python/recipes-devtools/python/python-twisted_19.2.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-hyperlink_18.0.0.bb
-rename to meta-python/recipes-devtools/python/python-hyperlink_19.0.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-hyperlink_18.0.0.bb b/meta-python/recipes-devtools/python/python3-hyperlink_19.0.0.bb
+rename from meta-python/recipes-devtools/python/python-twisted_18.4.0.bb
+rename to meta-python/recipes-devtools/python/python-twisted_19.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_18.4.0.bb b/meta-python/recipes-devtools/python/python3-twisted_19.2.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-hyperlink_18.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-hyperlink_19.0.0.bb
+rename from meta-python/recipes-devtools/python/python3-twisted_18.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_19.2.0.bb
 -- 
 2.20.1
 
