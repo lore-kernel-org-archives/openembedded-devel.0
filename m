@@ -1,30 +1,26 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 436EB7D577
+Return-Path: <andrej.valek@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 72BDC7D48D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 08:53:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,389,1549900800"; d="scan'208";a="60376232"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Apr 2019 16:53:56 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5F9154CDAADA
+	Wed, 24 Apr 2019 10:40:14 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x3OAeFku017762
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 16:53:58 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 24 Apr 2019 16:53:59 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Apr 2019 16:54:48 +0800
-Message-ID: <20190424085448.2615-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: 5F9154CDAADA.AA93C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-decorator: upgrade 4.3.0 -> 4.4.0
+	Wed, 24 Apr 2019 12:40:15 +0200
+Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
+	[163.242.44.88])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x3OAeEuM025564;
+	Wed, 24 Apr 2019 12:40:14 +0200
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 52D0723B85;
+	Wed, 24 Apr 2019 12:40:14 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Apr 2019 12:40:00 +0200
+Message-Id: <20190424104000.23269-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-networking][PATCH] ntp: upgrade 4.2.8p12 -> 4.2.8p13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 08:53:57 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Apr 2019 10:40:15 -0000
 
--Upgrade from python-decorator_4.3.0.bb to python-decorator_4.4.0.bb.
+License has been changed due to reformatting, no new stuff added.
 
--Upgrade from python3-decorator_4.3.0.bb to python3-decorator_4.4.0.bb.
-
--License-Update: Copyright year updated to 2018.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- meta-python/recipes-devtools/python/python-decorator.inc    | 6 +++---
- ...{python-decorator_4.3.0.bb => python-decorator_4.4.0.bb} | 0
- ...ython3-decorator_4.3.0.bb => python3-decorator_4.4.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-decorator_4.3.0.bb => python-decorator_4.4.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-decorator_4.3.0.bb => python3-decorator_4.4.0.bb} (100%)
+ .../recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python-decorator.inc b/meta-python/recipes-devtools/python/python-decorator.inc
-index 44edb8ad7..96cf8b475 100644
---- a/meta-python/recipes-devtools/python/python-decorator.inc
-+++ b/meta-python/recipes-devtools/python/python-decorator.inc
-@@ -7,10 +7,10 @@ can be abused and you should not try to solve every problem with a \
- decorator, just because you can."
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
+similarity index 96%
+rename from meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
+rename to meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
+index 289d2645b..dc18a602a 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
+@@ -6,7 +6,7 @@ or satellite receiver or modem."
+ HOMEPAGE = "http://support.ntp.org"
+ SECTION = "net"
+ LICENSE = "NTP"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=e877a1d567a6a58996d2b66e3e387003"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4cee33257467509e498f4cd9a6a4bd53"
  
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=893f896413826096ce5270c700a498fd"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
+ DEPENDS = "libevent"
  
--SRC_URI[md5sum] = "249e7299b9b4bced0c382343f84eb1c0"
--SRC_URI[sha256sum] = "c39efa13fbdeb4506c476c9b3babf6a718da943dab7811c206005a4a956c080c"
-+SRC_URI[md5sum] = "a565a98581c0d110bc247323e89df9b1"
-+SRC_URI[sha256sum] = "86156361c50488b84a3f148056ea716ca587df2f0de1d34750d35c21312725de"
+@@ -25,8 +25,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.list \
+ "
  
- inherit pypi
+-SRC_URI[md5sum] = "1522d66574bae14abb2622746dad2bdc"
+-SRC_URI[sha256sum] = "709b222b5013d77d26bfff532b5ea470a8039497ef29d09363931c036cb30454"
++SRC_URI[md5sum] = "ea040ab9b4ca656b5229b89d6b822f13"
++SRC_URI[sha256sum] = "288772cecfcd9a53694ffab108d1825a31ba77f3a8466b0401baeca3bc232a38"
  
-diff --git a/meta-python/recipes-devtools/python/python-decorator_4.3.0.bb b/meta-python/recipes-devtools/python/python-decorator_4.4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-decorator_4.3.0.bb
-rename to meta-python/recipes-devtools/python/python-decorator_4.4.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-decorator_4.3.0.bb b/meta-python/recipes-devtools/python/python3-decorator_4.4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-decorator_4.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-decorator_4.4.0.bb
+ inherit autotools update-rc.d useradd systemd pkgconfig
+ 
 -- 
-2.20.1
-
-
+2.11.0
 
 
