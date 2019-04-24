@@ -1,33 +1,48 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CCCB67D656
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 94DBF7D67C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 18:04:49 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44q7WP1FJ9z4R
+	Wed, 24 Apr 2019 19:01:27 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id z6so109087wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 20:04:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1556129089;
-	bh=PsSjWIf+eNdrxiXs5LuBrA9wsu3NZMsNDsY+Bat1PdI=;
-	h=From:To:Subject:Date:From;
-	b=BAkB8gkTcgSY+Rp/aYQtCt5/a5cMu+3wQh0GEZ49fHQ6diQ3qfaoA6enuZomK61Bj
-	EBOwQYRFMWYWEKl/rjyUYMSkcbKMZXSHnAiNUWr5MrqfUZp4eZCCfYzcxEo6XxiFJR
-	f78Nfs9rQdW3ShE6BPm7FIFUVf3An0TGc9938d/xmB1mXYigpmMNm8uCOkDIAW9dTB
-	KQNy7HhS/8HwJHAfZyIzvcpfIg9IMwsqtD3JTIhy+dtqv2/pYJjRPouR7PPnotNQTs
-	/fwbkVUJzF6hg+QtaCvUHnPrrXaqpNrXg5mluQKzcOsRUsM3icViV6kLWJfuuGOB9q
-	9N3CcbYpImiEWO9QsJVLIAvPwDJEbMpvGZrg/2h4mjAnpQHgIYEJccwZ50vOtW+Zl8
-	hobqU1ygao7GRD4XfmvjMKnfiJ4g5K2pK6ouT3gmfoM6UoqEeQsVijEOaDh7Tgd/ea
-	BD9ac9UtdcXPviVetG2VcC+hrVBNZ5XdUW9lJbzt35XNbygHN5AdJop08Uwv1ra9w3
-	oCkBYgp8FSl0ZDP3Zoq5/S/E/M8Z4qpvNnDbPpKc8Poh2u0qc8O/bCenQraiqeuPE3
-	HlqziI0I2fqnezul2nl8sdM1MM6IC6vv5xjmefezuyn4c9RiZO6gsNEEqNme55h8bo
-	4dhLR2o90UMTGS2nr5WY/1aY=
-From: Adrian Bunk <bunk@stusta.de>
+	Wed, 24 Apr 2019 12:01:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=exaq402l63SqXPJjqtxXzJ4Cc2Rs+ndBVlUpgmeY55Q=;
+	b=cg8wG0uHCwPkdl+1jVtQL9tg/Y5qWbjPxJzH7JWEyaytIRNSszM0oB3iZgyahnpuLn
+	l7/UEiRmnKOMvou9jOxgKgFkepwen/zQz6xsq9R64USlU0mH6gYHAdrvnPp3DXHMIAW4
+	yeFS0Re4Q/2qqdF5pd9iRnNK+VYD3UJbYrrbvvLMKIjhKoNMY7AxsZmrkmwE72q+sJQm
+	9NI0hF5K3cnBGmHKco8hOGkBfn6SV9s6hQCBxvskdLdIrntvAr4wE1dpEJPwTlJxFuyD
+	4PlFpfhyNlh/rWDYyBmGQaJ/39B99RIi0Vmwa2riIqZj4WsuvJ51o/oUZUgeZSYS6iGl
+	lKFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=exaq402l63SqXPJjqtxXzJ4Cc2Rs+ndBVlUpgmeY55Q=;
+	b=Ncnq0svfoJZb2xcOM/0GtbYGwRHKrCzboRo47bR4rW6H/L0TlCvhBGkQQ1bSZ/T6Rn
+	2H3xcFHlOi31eNpKbgFC/uwx9yKLkexzWVR4RQyiJ+haQk0S9fDWWIjEqsz0B5X6T2wo
+	N1GoDxyfUWEQUA5R5x9/fuJtBm5LrRxRJzu9XgQA5mIMxjHF7BTYUo1YjFkObrxasP25
+	a6QpwOhCWwqApwUFLDmmzJIzqyErgzwgCjlVdh0a2t3hv12HblQ6PVCg9QHmmHSMlxVa
+	wHFoCOPaeDERPb1WeTWhTahkqt+vixM84qZPDBSY0ldVHXE0Rag1OfREWTGxTeODO8ds
+	NcRw==
+X-Gm-Message-State: APjAAAV71/x4bHwkiEiG1pQxFcdHTRZpZ95rb8BFndCgcUc/WBQKe7Lu
+	7vHTksGnnDFhU29D3yhUkKu6oOxf
+X-Google-Smtp-Source: APXvYqw6z65qI38koYQPUpoARSxIqzTNhkPkUmn+h3XPYPg5/1pmlhgzHze9swteg2Q8sE4kI9i7yA==
+X-Received: by 2002:a1c:a7c5:: with SMTP id q188mr424173wme.126.1556132487828; 
+	Wed, 24 Apr 2019 12:01:27 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	v190sm20405918wme.18.2019.04.24.12.01.26
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 24 Apr 2019 12:01:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Apr 2019 21:04:48 +0300
-Message-Id: <20190424180448.19524-1-bunk@stusta.de>
+Date: Wed, 24 Apr 2019 19:00:38 +0000
+Message-Id: <20190424190038.19593-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] ledmon: Mark as incompatible on musl instead of adding bogus patch
+Subject: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,97 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 18:04:50 -0000
+X-List-Received-Date: Wed, 24 Apr 2019 19:01:27 -0000
 
-atexit is not a drop-in replacement for on_exit,
-mark as incompatible with musl instead of adding
-a broken patch.
+* set COMPATIBLE_MACHINE to (^$) to prevent building it for any other
+  architectures than armv7a and aarch64
+* with new arm tune files it's easy to have armv7a in OVERRIDES even
+  when there isn't armv7a in TUNE_FEATURES:
+  meta/conf/machine/include/tune-cortexa9.inc:7
+     "${@bb.utils.contains('TUNE_FEATURES', 'cortexa9', 'armv7a:', '',d)}"
+  in cases like this COMPATIBLE_MACHINE was satisfied thanks to the
+  armv7a OVERRIDE, but then the anonymous python was failing with:
+  ne10 was skipped: Incompatible with archs other than armv7 and aarch64
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...ad-of-on_exit-for-musl-compatibility.patch | 53 -------------------
- meta-oe/recipes-bsp/ledmon/ledmon_git.bb      |  2 +-
- 2 files changed, 1 insertion(+), 54 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-use-atexit-insead-of-on_exit-for-musl-compatibility.patch
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-use-atexit-insead-of-on_exit-for-musl-compatibility.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-use-atexit-insead-of-on_exit-for-musl-compatibility.patch
-deleted file mode 100644
-index de5ce9fc8..000000000
---- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-use-atexit-insead-of-on_exit-for-musl-compatibility.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From 8aba09b743b4e89ef581a679943ce39a5c7fd4a5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 9 Apr 2019 21:25:21 -0700
--Subject: [PATCH 1/2] use atexit insead of on_exit for musl compatibility
--
--musl does not support on_exit which is used in clean up.
--Instead use atexit with is supported by musl and glibc.
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/ledctl.c | 2 +-
-- src/ledmon.c | 4 ++--
-- 2 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/ledctl.c b/src/ledctl.c
--index 2aa1abc..2c97dcf 100644
----- a/src/ledctl.c
--+++ b/src/ledctl.c
--@@ -689,7 +689,7 @@ int main(int argc, char *argv[])
-- 	status = _init_ledctl_conf();
-- 	if (status != STATUS_SUCCESS)
-- 		return status;
---	if (on_exit(_ledctl_fini, progname))
--+	if (atexit(_ledctl_fini))
-- 		exit(STATUS_ONEXIT_ERROR);
-- 	if (_cmdline_parse(argc, argv))
-- 		exit(STATUS_CMDLINE_ERROR);
--diff --git a/src/ledmon.c b/src/ledmon.c
--index 0ea2583..2333c7c 100644
----- a/src/ledmon.c
--+++ b/src/ledmon.c
--@@ -860,7 +860,7 @@ int main(int argc, char *argv[])
-- 	set_invocation_name(argv[0]);
-- 	openlog(progname, LOG_PID | LOG_PERROR, LOG_DAEMON);
-- 
---	if (on_exit(_ledmon_status, &terminate))
--+	if (atexit(_ledmon_status))
-- 		return STATUS_ONEXIT_ERROR;
-- 
-- 	if (_cmdline_parse_non_daemonise(argc, argv) != STATUS_SUCCESS)
--@@ -930,7 +930,7 @@ int main(int argc, char *argv[])
-- 	}
-- 	_ledmon_setup_signals();
-- 
---	if (on_exit(_ledmon_fini, progname))
--+	if (atexit(_ledmon_fini))
-- 		exit(STATUS_ONEXIT_ERROR);
-- 	list_init(&ledmon_block_list, (item_free_t)block_device_fini);
-- 	sysfs_init();
---- 
--2.21.0
--
-diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-index 4376ad394..74ae56c67 100644
---- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-+++ b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-@@ -16,13 +16,13 @@ inherit systemd
- SYSTEMD_SERVICE_${PN} = "ledmon.service"
+diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+index 3afdff7786..4e8986de18 100644
+--- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
++++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+@@ -15,22 +15,15 @@ PV .= "gitr+${SRCPV}"
  
- SRC_URI = "git://github.com/intel/ledmon;branch=master \
--           file://0001-use-atexit-insead-of-on_exit-for-musl-compatibility.patch \
-            file://0002-include-sys-select.h-and-sys-types.h.patch \
-           "
+ inherit cmake
  
- SRCREV = "ad1304ca1363d727425a1f23703c523e21feae4f"
+-NE10_TARGET_ARCH = ""
+-EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
+-
++# Incompatible with archs other than armv7 and aarch64
++COMPATIBLE_MACHINE = "(^$)"
+ COMPATIBLE_MACHINE_aarch64 = "(.*)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
++NE10_TARGET_ARCH = ""
++NE10_TARGET_ARCH_aarch64 = "aarch64"
++NE10_TARGET_ARCH_armv7a = "armv7"
  
- COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
-+COMPATIBLE_HOST_libc-musl = "null"
+-python () {
+-    if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES').split()):
+-        d.setVar('NE10_TARGET_ARCH', 'armv7')
+-        bb.debug(2, 'Building Ne10 for armv7')
+-    elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES').split()):
+-        d.setVar('NE10_TARGET_ARCH', 'aarch64')
+-        bb.debug(2, 'Building Ne10 for aarch64')
+-    else:
+-        raise bb.parse.SkipRecipe("Incompatible with archs other than armv7 and aarch64")
+-}
++EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
  
- S = "${WORKDIR}/git"
- EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
+ do_install() {
+     install -d ${D}${libdir}
 -- 
 2.17.1
 
