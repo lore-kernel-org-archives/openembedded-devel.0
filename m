@@ -1,49 +1,23 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
-	[209.85.167.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 091827CF1B
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DC66D6B50B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 22:45:53 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id h126so5315741lfh.4
+	Thu, 25 Apr 2019 07:15:30 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3P7FV1V010102
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2019 15:45:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=tgxcNGCQtBEIRV1U4BeroZRCPPq6oypFdkcq335ddXw=;
-	b=PtC2EMlT/2cJ60XdT97uyJacSpP+Dd+zO0XLKdx+dZj8ZxCx/dDpzBTVhjd/jGcyXa
-	YfJIt5583OjWaJVtyBvIITWUgdbfPOpYj7J6R23Nv+tLmo7nZdI9ijVyMzJIJPeC7QoS
-	H20U82ktXlh7+GSJl2aW1p609NfBn6WsCTtPFV6jnbxxGZME5F6T9qbm4E4FG06SQT32
-	uDLLjpkWSGq1K8x21NHzCTliZLWPuGqiRT/9hrKsNCpXp8hn1ybPfjKFpOghYXD65mOr
-	TdJvIqYXmmBh/FJVjHkxwLnu2XGJvDk8qF5BnMw3G4CXS8+TLmKtwCxY6QWW6d6VwebA
-	luag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tgxcNGCQtBEIRV1U4BeroZRCPPq6oypFdkcq335ddXw=;
-	b=BSe212U/cZ7XNm+Vw3bv+g1MqcXedolVkSDxpqZ3DaV2MfQIc/HApGITP5LmgTBUw5
-	frnF5Qo6zIm6ffjcKrDjDv2BGZkIXCDvl49BmU4I6JiJ3onrDuq3kVncG+59TR5zkw49
-	Be2k7zmRgT8+Pl6/jS56hSjCfrXv+x8laDuLD0ITHeNYhWyTZ3AG08b+UvDPExt9nO5U
-	1xvcgDBAZ1XnO99w2zgqeje6gw/252CWrz+5fAYylDTtv5Aai0W/3m4kmKpYbxbVTfih
-	2aJCk2hlbzgrFUa+QvOaqoDbDdeNDocSoeATytrwuXfQLcp8epJ/zqe6rZ5Nsdu54SZ0
-	0DeQ==
-X-Gm-Message-State: APjAAAXvPmy0NGbvHX6LVbNpY+pfL0681dyDB+OxZ0tZTEFZ5kl7Fw2f
-	iDcvmFTvUPQce1S5q+gS1qDFcdCeep0=
-X-Google-Smtp-Source: APXvYqyM6Um3/980R6wSAN4oYyTvWjbknVRHF91QTisixYEkSb5D3JuGU2AbGzInwUuGYICpuoP1Rw==
-X-Received: by 2002:a19:751a:: with SMTP id y26mr5694462lfe.47.1556145953986; 
-	Wed, 24 Apr 2019 15:45:53 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	a28sm5745941lfk.54.2019.04.24.15.45.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Apr 2019 15:45:53 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Apr 2019 00:45:50 +0200
-Message-Id: <20190424224550.22731-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] libnetfilter-queue: update to 1.0.3
+	Thu, 25 Apr 2019 00:15:31 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Thu, 25 Apr 2019 00:15:30 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Apr 2019 15:15:28 +0800
+Message-ID: <1556176528-151935-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [meta-webserver][PATCH] apache2: add back patch for set perlbin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,19 +30,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2019 22:45:54 -0000
+X-List-Received-Date: Thu, 25 Apr 2019 07:15:32 -0000
+Content-Type: text/plain
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+From: Changqing Li <changqing.li@windriver.com>
+
+Add back this patch. Without this patch, apxs's shebang will use
+perl under hosttools, which can be too long for shebang, and cause
+error:
+bad interpreter: No such file or directory
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../{libnetfilter-queue_1.0.2.bb => libnetfilter-queue_1.0.3.bb}  | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-queue_1.0.2.bb => libnetfilter-queue_1.0.3.bb} (100%)
+ .../apache2/apache2/apache-configure_perlbin.patch | 34 ++++++++++++++++++++++
+ .../recipes-httpd/apache2/apache2_2.4.39.bb        |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.3.bb
-similarity index 100%
-rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb
-rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.3.bb
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+new file mode 100644
+index 0000000..61669e3
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+@@ -0,0 +1,34 @@
++From 5412077c398dec74321388fe6e593a44c4c80de6 Mon Sep 17 00:00:00 2001
++From: echo <fei.geng@windriver.com>
++Date: Tue, 28 Apr 2009 03:11:06 +0000
++Subject: [PATCH] Fix perl install directory to /usr/bin
++
++Upstream-Status: Inappropriate [configuration]
++
++Add back this patch. Without this patch, apxs's shebang will use
++perl under hosttools, which can be too long for shebang, and cause
++error:
++bad interpreter: No such file or directory
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++---
++ configure.in | 5 +----
++ 1 file changed, 1 insertion(+), 4 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index d828512..be7bd25 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -855,10 +855,7 @@ AC_DEFINE_UNQUOTED(SERVER_CONFIG_FILE, "${rel_sysconfdir}/${progname}.conf",
++ AC_DEFINE_UNQUOTED(AP_TYPES_CONFIG_FILE, "${rel_sysconfdir}/mime.types",
++ 	[Location of the MIME types config file, relative to the Apache root directory])
++ 
++-perlbin=`$ac_aux_dir/PrintPath perl`
++-if test "x$perlbin" = "x"; then
++-    perlbin="/replace/with/path/to/perl/interpreter"
++-fi
+++perlbin='/usr/bin/perl'
++ AC_SUBST(perlbin)
++ 
++ dnl If we are running on BSD/OS, we need to use the BSD .include syntax.
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
+index 2bd21f7..4cdf36c 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
+@@ -13,6 +13,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+            file://0005-replace-lynx-to-curl-in-apachectl-script.patch \
+            file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
+            file://0007-apache2-allow-to-disable-selinux-support.patch \
++           file://apache-configure_perlbin.patch \
+           "
+ 
+ SRC_URI_append_class-target = " \
 -- 
-2.17.1
+2.7.4
 
 
