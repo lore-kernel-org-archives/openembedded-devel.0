@@ -1,23 +1,47 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DC66D6B50B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by mail.openembedded.org (Postfix) with ESMTP id EF77F60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Apr 2019 07:15:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3P7FV1V010102
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 25 Apr 2019 09:13:37 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id s15so29190316wra.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Apr 2019 00:15:31 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Thu, 25 Apr 2019 00:15:30 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Apr 2019 15:15:28 +0800
-Message-ID: <1556176528-151935-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-webserver][PATCH] apache2: add back patch for set perlbin
+	Thu, 25 Apr 2019 02:13:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=FCAZVkIuBo0JKD250SOSb50U7rHrYh38Ci43KElusmA=;
+	b=Fsv920Upr8ljS0rIbrc66VmKz7B1qobMw6V6KqoUkaeVVdDZo2cXYyyc9iJVG+F3HL
+	gpKUNCN4/nc2obSBoW1B6mAVR9NthfJQmAncCCV/B05CRiBPwjzAI1fTJPPlBHDb6Dsi
+	bZSiveseZMp70GmRydKkNNG/dzgSCldz/QfUTHH2hwek/YCgTndrgzhUMwvoLMl24IIY
+	+YS/r17aYub9dPHG6rgXdreZjE5qNQak+9/4Ze4BeSkXeY4MjX1WJqT3PrJL4yidAmIb
+	rQNDO8nMUPgDLJK4qmPp9fz2EgQ+MGtxvrXSf2xvuram3NAo8/dfcRtve96cM1ktoU9W
+	U6DQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=FCAZVkIuBo0JKD250SOSb50U7rHrYh38Ci43KElusmA=;
+	b=J1q9/GsFDW+B+swQLQT5HWIO37d2nIApzB3pQu7nVnAsKMgYHBK9UKYb1IwJoHf9jH
+	QGeRvKJq/GJfqRGr8lWzLFUl35G4g0Kjt2XLg6iqWo3wD60qI9eZkRgZgikeHcbw9kcd
+	wLgPs3xwm/Jluuyp6qWu5EkJpGIzCTClUR7wt/s8PjdfAC/hipMie1kwT7sT3dxjH3qR
+	kPqGfeuPLgg2qQcfdJ3b4l6fmWQcIvEpV3lypiCqjfN99btBTu+zxoVHja25f230LfJ2
+	0GPyfBjq/mHBArw+bzasvAy806IFQCwrbXcL7B/Rv+NQl+520Mp3cfMdC4OcA3vX1ngg
+	ujoQ==
+X-Gm-Message-State: APjAAAUnCAG3Tk22kPz7GU08uPhmaBvs47nhNpJm5SACabu3YhCikzor
+	r2lcj/AlxE/qI+mxBSSi3Nx6TSdx
+X-Google-Smtp-Source: APXvYqwcEXs6879sKDSNjYFU4GjwafXLUXF3GuIdk8sHrheGgiii4/lNELOaNgzLqMqxdLyUHR2Yaw==
+X-Received: by 2002:a5d:6b04:: with SMTP id v4mr23277138wrw.69.1556183618427; 
+	Thu, 25 Apr 2019 02:13:38 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id q7sm7175695wmc.11.2019.04.25.02.13.37
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 25 Apr 2019 02:13:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Apr 2019 09:13:41 +0000
+Message-Id: <20190425091341.3190-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] libopus: use armv7a, aarch64 overrides when adding ne10 dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,76 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Apr 2019 07:15:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Apr 2019 09:13:38 -0000
 
-From: Changqing Li <changqing.li@windriver.com>
+* to match what ne10 recipe does now
+* fixes:
+  ERROR: Nothing PROVIDES 'ne10' (but meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb DEPENDS on or otherwise requires it)
+  ne10 was skipped: incompatible with machine qemuarm (not in COMPATIBLE_MACHINE)
+  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'libopus', 'ne10']
 
-Add back this patch. Without this patch, apxs's shebang will use
-perl under hosttools, which can be too long for shebang, and cause
-error:
-bad interpreter: No such file or directory
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../apache2/apache2/apache-configure_perlbin.patch | 34 ++++++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.39.bb        |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+ meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
-new file mode 100644
-index 0000000..61669e3
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
-@@ -0,0 +1,34 @@
-+From 5412077c398dec74321388fe6e593a44c4c80de6 Mon Sep 17 00:00:00 2001
-+From: echo <fei.geng@windriver.com>
-+Date: Tue, 28 Apr 2009 03:11:06 +0000
-+Subject: [PATCH] Fix perl install directory to /usr/bin
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Add back this patch. Without this patch, apxs's shebang will use
-+perl under hosttools, which can be too long for shebang, and cause
-+error:
-+bad interpreter: No such file or directory
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
-+---
-+ configure.in | 5 +----
-+ 1 file changed, 1 insertion(+), 4 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index d828512..be7bd25 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -855,10 +855,7 @@ AC_DEFINE_UNQUOTED(SERVER_CONFIG_FILE, "${rel_sysconfdir}/${progname}.conf",
-+ AC_DEFINE_UNQUOTED(AP_TYPES_CONFIG_FILE, "${rel_sysconfdir}/mime.types",
-+ 	[Location of the MIME types config file, relative to the Apache root directory])
-+ 
-+-perlbin=`$ac_aux_dir/PrintPath perl`
-+-if test "x$perlbin" = "x"; then
-+-    perlbin="/replace/with/path/to/perl/interpreter"
-+-fi
-++perlbin='/usr/bin/perl'
-+ AC_SUBST(perlbin)
-+ 
-+ dnl If we are running on BSD/OS, we need to use the BSD .include syntax.
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-index 2bd21f7..4cdf36c 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-@@ -13,6 +13,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0005-replace-lynx-to-curl-in-apachectl-script.patch \
-            file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
-            file://0007-apache2-allow-to-disable-selinux-support.patch \
-+           file://apache-configure_perlbin.patch \
-           "
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+index dd6789dc01..50d49370ba 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+@@ -28,13 +28,13 @@ EXTRA_OECONF = " \
+     --enable-custom-modes \
+ "
  
- SRC_URI_append_class-target = " \
++# ne10 is available only for armv7a and aarch64
++DEPENDS_append_aarch64 = " ne10"
++DEPENDS_append_armv7a = " ne10"
++
+ python () {
+     if d.getVar('TARGET_FPU') in [ 'soft' ]:
+         d.appendVar('PACKAGECONFIG', ' fixed-point')
+-
+-    # Ne10 is only available for armv7 and aarch64
+-    if any((t.startswith('armv7') or t.startswith('aarch64')) for t in d.getVar('TUNE_FEATURES').split()):
+-        d.appendVar('DEPENDS', ' ne10')
+ }
+ 
+ # Fails to build with thumb-1 (qemuarm)
 -- 
-2.7.4
+2.17.1
 
 
