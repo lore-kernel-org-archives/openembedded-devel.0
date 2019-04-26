@@ -1,52 +1,47 @@
-Return-Path: <sander.visser.2@consultant.volvo.com>
-Received: from mail-gw3.it.volvo.com (mail-gw3.it.volvo.com [192.138.110.232])
-	by mail.openembedded.org (Postfix) with ESMTP id 77F187DAC4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 721557DC6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 13:26:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,397,1549926000"; d="scan'208";a="1035391643"
-From: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Python3 in sumo+thud does not package sha1 support in crypt
-Thread-Index: AdT7YpXlzjKvlA/qT9aMXSkfHSkIwgABtVaAADJtHSA=
-Date: Fri, 26 Apr 2019 13:26:21 +0000
-Message-ID: <HE1PR05MB46355B6713A3451E9021BA7EC53E0@HE1PR05MB4635.eurprd05.prod.outlook.com>
-References: <HE1PR05MB46350C84FDF6E1F7F6C448D8C53D0@HE1PR05MB4635.eurprd05.prod.outlook.com>
-	<9c2be11a-2877-5059-35c3-58abc0d34f7b@gmail.com>
-In-Reply-To: <9c2be11a-2877-5059-35c3-58abc0d34f7b@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=sander.visser.2@consultant.volvo.com; 
-x-originating-ip: [199.247.36.90]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2869d847-cef2-44c0-d6cd-08d6ca4ac62a
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(5600141)(711020)(4605104)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
-	SRVR:HE1PR05MB4523; 
-x-ms-traffictypediagnostic: HE1PR05MB4523:
-x-microsoft-antispam-prvs: <HE1PR05MB45234EA8E05CEC7F479105BEC53E0@HE1PR05MB4523.eurprd05.prod.outlook.com>
-x-forefront-prvs: 001968DD50
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(346002)(366004)(376002)(39860400002)(396003)(13464003)(199004)(189003)(8676002)(26005)(52536014)(71200400001)(68736007)(6246003)(33656002)(2906002)(9686003)(6436002)(55016002)(74316002)(7696005)(476003)(486006)(25786009)(229853002)(2501003)(5660300002)(81166006)(81156014)(7736002)(305945005)(8936002)(446003)(11346002)(53546011)(478600001)(6116002)(3846002)(97736004)(102836004)(86362001)(14454004)(66946007)(73956011)(316002)(64756008)(66556008)(66476007)(66446008)(5024004)(14444005)(71190400001)(186003)(76176011)(76116006)(66066001)(110136005)(256004)(53936002)(99286004)(6506007);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR05MB4523;
-	H:HE1PR05MB4635.eurprd05.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:0; MX:1; 
-received-spf: None (protection.outlook.com: consultant.volvo.com does not
-	designate permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: uW3bnCkmi834goxe6s14sgoHgbQw68uFVR4YGsk/NhHRIN8HN+qpZZcr2euU8vbrI1wWXxh8W+wGr6H1dLppztfGhKRjkBGyid/53X3vXYXadGKVm1EWtkn87omaxj3stYmDQ4iINYefnLn6fHXWTGZ2IImBzFE6I1YhRvGDhy5qNOWuF2F+EcWFBpjUNsu3ngNrJ23nASiOLwV4NJeWNQ1s1bqa7yQJSZfuF6J2TSBF+YO6NbKLwV1sGRyDDNxDpizIv9FU7Rnva22Y2Qhm3pWlHWZsPNPus5Qi1kn8vginm39HJrzhlyQG10Rn7aPI6V18f6WJT+Uif+0YA5DvrsxemAcHxRI+wnkQ0es8MR5kl5x1iSPjUgKFNmU180XF/bvYzC6Bb4EYv1qruakio3TALsEwIT4cIMtSWJh3e6U=
+	Fri, 26 Apr 2019 17:35:43 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id n68so2382335qka.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Apr 2019 10:35:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=a13sJSVfh+gTOtUEHWmC84/tpVwwhKkxj0OKd3Rdxug=;
+	b=aPkCRyqJzA9uD74kjdbmh1SUuPK3gNS7K5mOsLsM3BesQfjAPnKy7jJmVMQq/BGDm1
+	NPQmbimBJW6GN8El+drgqsIwGteBbhXHSI0fnmyzj3ymMpsCaCizixWEDMVDPkkTMVH3
+	eCTZyv4lh5E7YpnZsrTN6FPVPRr5Jk3bTPoUvdMDfYSCp2HQgFMHz8JVHDSRpo631GlN
+	Mcel5MhBPtPGvPT2//QsM3NazU/F0NZcrP4d7Xy/klS7Hw2gd0APp2VHcChe4m+VGNBW
+	xnssQ52zo/TIXtjTK7mUDgMrPLoXjAy5k1mQiLUtdIqfYDXG9V9TU97oD7yyypFV5+at
+	Nq/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=a13sJSVfh+gTOtUEHWmC84/tpVwwhKkxj0OKd3Rdxug=;
+	b=sHBQkLT/KV0kuFPyb+7vR926XPmkPPb8oib2jGQlB5piI8LXuG4uRhohKgyT5aHaQ2
+	4Wt8FJEg1cDFocAdpfBUWkJPTTPEnA+ba0EBqVE6q4H9sTj5Gu82/sENYlwQBqpVibyQ
+	KFRKoAAUGtWFK5jtXMNHgkznxVpL+3KzQYEbOaGuJtcngPD26fl8+M+rDS6qWOHftWi3
+	ZX4lpu/sfYp8B4M5jweKVktmnufb1Yl94Bu7rFUcn7fnniQu5sBnc5thCIr6xfY1jZJA
+	SONlLhAXBVkTFY96nx8sHKQR4QeMeMkLMz4mUel8AUMpokaKa78V1QC9cvQIBFaIySXv
+	McWA==
+X-Gm-Message-State: APjAAAWzaEriQ4qwj0skZc8At5UBGFzYPcUMtp+NV4eqK6EmfUB6URFM
+	KRDzPf8rd8iamWXZiDgDgbXd8PoH0np3tHioewc=
+X-Google-Smtp-Source: APXvYqzZIRmP0VRR7CWhtDTp5Z1rRflOopPUundGl9waMdKE5UAQs3+VUjhPGT37CNLvDetO5UVl4jKZkKtvM48XfL8=
+X-Received: by 2002:a37:a849:: with SMTP id r70mr27646751qke.315.1556300144173;
+	Fri, 26 Apr 2019 10:35:44 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2869d847-cef2-44c0-d6cd-08d6ca4ac62a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Apr 2019 13:26:21.8619 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f25493ae-1c98-41d7-8a33-0be75f5fe603
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR05MB4523
-X-OriginatorOrg: consultant.volvo.com
-Subject: Re: Python3 in sumo+thud does not package sha1 support in crypt
+References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
+	<20190426052056.GB26023@localhost>
+In-Reply-To: <20190426052056.GB26023@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 26 Apr 2019 10:35:18 -0700
+Message-ID: <CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,37 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 13:26:24 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 26 Apr 2019 17:35:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-UGF0Y2ggc3VibWl0dGVkLiBUZXN0ZWQgZm9yIHN1bW8gdG8gcmVtb3ZlIGNyeXB0IHJlbGF0ZWQg
-LnNvIGZyb20gcHl0aG9uMy1taXNjDQoNCkJUVy4gSWYgSSB3YW50IHRvIG92ZXJyaWRlIHRoZSBw
-eXRob24zLW1hbmlmZXN0Lmpzb24gcGFydCBvZiB0aGUgcHl0aG9uMyByZWNpcGU7IGhvdyBjYW4g
-SSBkbyB0aGF0Pw0KDQpJIGF0dGVtcHRlZCB0byBhZGQgYSBjdXN0b20gcHl0aG9uMy1tYW5pZmVz
-dC5qc29uIGluIG15IGN1c3RvbSBsYXllciB0aGF0IGhhcyBoaWdoZXIgcHJvcCB0aGFuIHBva3ku
-IEkgb2JzZXJ2ZSB0aGF0IG15IGpzb24gaXMgaW5zdGFsbGVkIHRvIHRoZSAkV09SS1NQQUNFLCBi
-dXQgcGFja2FnZSBzcGxpdHRpbmcgaXMgc3RpbGwgZG9uZSB1c2luZyB0aGUgLmpzb24gZnJvbSBw
-b2t5IG1ldGEgbGF5ZXIuLi4NCg0KL1JlZ2FyZHMgU2FuZGVyDQoNCi0tLS0tT3JpZ2luYWwgTWVz
-c2FnZS0tLS0tDQpGcm9tOiBha3VzdGVyODA4IFttYWlsdG86YWt1c3RlcjgwOEBnbWFpbC5jb21d
-IA0KU2VudDogZGVuIDI1IGFwcmlsIDIwMTkgMzoxOQ0KVG86IFZpc3NlciBTYW5kZXIgKDIpIChD
-b25zdWx0YW50KTsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNClN1
-YmplY3Q6IFJlOiBbb2VdIFB5dGhvbjMgaW4gc3Vtbyt0aHVkIGRvZXMgbm90IHBhY2thZ2Ugc2hh
-MSBzdXBwb3J0IGluIGNyeXB0DQoNCg0KDQpPbiA0LzI1LzE5IDU6MzEgQU0sIFZpc3NlciBTYW5k
-ZXIgKDIpIChDb25zdWx0YW50KSB3cm90ZToNCj4gSGkNCj4NCj4gSXQgc2VlbXMgIiR7bGliZGly
-fS9weXRob24ke1BZVEhPTl9NQUpNSU59L2xpYi1keW5sb2FkL19zaGExLiouc28iIGlzIG1pc3Np
-bmcgaW4gc3VtbyBhbmQgdGh1ZC4gSXQgaXMgbGlzdGVkIGluIHJvY2tvICh2aWEgc2hhKikgYW5k
-IGluIHdhcnJpb3IgdmlhIF9zaGExLiouc28NCj4NCj4gV291bGQgYSBwYXRjaCB0b3dhcmRzIHRo
-dWQvc3VtbyBiZSBhY2NlcHRlZCB3aGVyZSBfc2hhMS4qLnNvIGlzIGFkZGVkIHRvIHRoZSBjcnlw
-dCBmaWxlcz8NClllcw0KDQotIEFybWluDQo+DQo+IC9SZWdhcmRzIFNhbmRlcg0KPg0KPiBUaGlz
-IGVtYWlsIG1lc3NhZ2UgYW5kIGFueSBhdHRhY2htZW50cyBtYXkgY29udGFpbiBjb25maWRlbnRp
-YWwgaW5mb3JtYXRpb24gYW5kIG1heSBiZSBwcml2aWxlZ2VkLiBJZiB5b3UgYXJlIG5vdCB0aGUg
-aW50ZW5kZWQgcmVjaXBpZW50IG9yIG90aGVyd2lzZSBub3QgYXV0aG9yaXplZCB0byByZWNlaXZl
-IHRoaXMgbWVzc2FnZSwgeW91IGFyZSBwcm9oaWJpdGVkIHRvIHVzZSwgY29weSwgZGlzY2xvc2Ug
-b3IgdGFrZSBhbnkgYWN0aW9uIGJhc2VkIG9uIHRoaXMgZW1haWwgb3IgYW55IGluZm9ybWF0aW9u
-IGNvbnRhaW5lZCBoZXJlaW4uIElmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZCByZWNpcGllbnQs
-IHBsZWFzZSBhZHZpc2UgdGhlIHNlbmRlciBpbW1lZGlhdGVseSBieSByZXBseWluZyB0byB0aGlz
-IGVtYWlsIGFuZCBwZXJtYW5lbnRseSBkZWxldGUgdGhpcyBtZXNzYWdlIGFuZCBhbnkgYXR0YWNo
-bWVudHMgZnJvbSB5b3VyIHN5c3RlbS4NCg0K
+On Thu, Apr 25, 2019 at 10:21 PM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Wed, Apr 24, 2019 at 07:00:38PM +0000, Martin Jansa wrote:
+> > * set COMPATIBLE_MACHINE to (^$) to prevent building it for any other
+> >   architectures than armv7a and aarch64
+> > * with new arm tune files it's easy to have armv7a in OVERRIDES even
+> >   when there isn't armv7a in TUNE_FEATURES:
+> >   meta/conf/machine/include/tune-cortexa9.inc:7
+> >      "${@bb.utils.contains('TUNE_FEATURES', 'cortexa9', 'armv7a:', '',d)}"
+> >   in cases like this COMPATIBLE_MACHINE was satisfied thanks to the
+> >   armv7a OVERRIDE, but then the anonymous python was failing with:
+> >   ne10 was skipped: Incompatible with archs other than armv7 and aarch64
+> >...
+>
+> How does this handle Cortex A9 SoCs without NEON support?
+
+this is a valid concern although rare but this combination is out
+there ( tegra2 )
+and ne10 needs neon, so probably its better to check for neon in tune features
+ than anything else first.
 
