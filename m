@@ -1,24 +1,25 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BA7A7DA7C
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C70D7DA7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 02:10:31 +0000 (UTC)
+	Fri, 26 Apr 2019 02:10:32 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3Q2AVwh013487
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3Q2AW2l024261
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 25 Apr 2019 19:10:31 -0700 (PDT)
+	Thu, 25 Apr 2019 19:10:32 -0700 (PDT)
 Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 25 Apr 2019 19:10:31 -0700
+	Thu, 25 Apr 2019 19:10:32 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Thu, 25 Apr 2019 19:10:30 -0700
-Message-ID: <20190426021031.20962-1-mingli.yu@windriver.com>
+Date: Thu, 25 Apr 2019 19:10:31 -0700
+Message-ID: <20190426021031.20962-2-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190424071100.23092-1-mingli.yu@windriver.com>
+In-Reply-To: <20190426021031.20962-1-mingli.yu@windriver.com>
 References: <20190424071100.23092-1-mingli.yu@windriver.com>
+	<20190426021031.20962-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 1/2] libdev-checklib-perl: add new recipe
+Subject: [PATCH v2 2/2] libdbd-mysql-perl: Upgrade to 4.050
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,102 +32,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 02:10:32 -0000
+X-List-Received-Date: Fri, 26 Apr 2019 02:10:33 -0000
 Content-Type: text/plain
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
-It provides the perl module (Devel::CheckLib) which
-may needed by other package which uses it to
-check libs.
+Update homepage and make SRC_URI to fetch
+from git.
+
+Remove one backported patch.
+
+Add libdev-checklib-perl-native to DEPENDS as
+the new libdbd-mysql-perl depends on another module
+(Devel::CheckLib) at configure time.
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...CheckLib.pm-don-t-execute-the-binary.patch | 46 +++++++++++++++++++
- .../perl/libdev-checklib-perl_1.13.bb         | 21 +++++++++
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
- create mode 100644 meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
+ .../0001-Use-API-function-for-reconnect.patch | 53 -------------------
+ ...rl_4.043.bb => libdbd-mysql-perl_4.050.bb} | 14 ++---
+ 2 files changed, 5 insertions(+), 62 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
+ rename meta-oe/recipes-devtools/perl/{libdbd-mysql-perl_4.043.bb => libdbd-mysql-perl_4.050.bb} (57%)
 
-diff --git a/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch b/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
-new file mode 100644
-index 000000000..78a7e63b9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
-@@ -0,0 +1,46 @@
-+From d111fd85b25466f7829ccee34493aa0e3b551308 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Tue, 23 Apr 2019 19:13:19 -0700
-+Subject: [PATCH] CheckLib.pm: don't execute the binary
-+
-+Don't execute the binary in build env as the
-+binary which is generated in cross compile env
-+may fail when executed in build env.
-+
-+And it's enough to verify the libs via successully
-+generate the binary which links the libs as below.
-+  $ /yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/x86_64-poky-linux-gcc \
-+  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security \
-+  -Werror=format-security --sysroot=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot \
-+  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/perl/5.28.1-r1=/usr/src/debug/perl/5.28.1-r1 \
-+  -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/perl/5.28.1-r1=/usr/src/debug/perl/5.28.1-r1 \
-+  -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot= -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot-native= -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 assertlibEhx19yuY.c -L/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot/usr/lib -lcrypto -fstack-protector-strong -o assertlibCOw_eujb
-+
-+Execute the binary in cross compile env as below
-+and use the return status to determine the lib's
-+checking status is not appropriate in cross compile env.
-+ $ /yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/git/assertlibCOw_eujb
-+
-+Upstream-Status: Inappropriate[oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ lib/Devel/CheckLib.pm | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/Devel/CheckLib.pm b/lib/Devel/CheckLib.pm
-+index e45cfb4..d228bb5 100644
-+--- a/lib/Devel/CheckLib.pm
-++++ b/lib/Devel/CheckLib.pm
-+@@ -424,7 +424,7 @@ sub assert_lib {
-+             my $absexefile = File::Spec->rel2abs($exefile);
-+             $absexefile = '"'.$absexefile.'"' if $absexefile =~ m/\s/;
-+             if (!$not_execute && system($absexefile) != 0) {
-+-                push @wrongresult, $lib;
-++                print "Checking the lib $lib\n";
-+             }
-+             else {
-+                 if ($analyze_binary) {
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
-new file mode 100644
-index 000000000..f5bdb2087
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "A Perl module that checks whether a particular C library and its headers are available"
-+DESCRIPTION = "This module provides a way of checking whether a particular library \
-+and its headers are available, by attempting to compile a simple program and \
-+link against it."
-+HOMEPAGE = "https://metacpan.org/pod/Devel::CheckLib"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+
-+LIC_FILES_CHKSUM = "file://README;md5=7911cdbb572d25c5f2e2ea17f669efc2"
-+
-+SRC_URI = "https://cpan.metacpan.org/modules/by-module/Devel/Devel-CheckLib-${PV}.tar.gz \
-+           file://0001-CheckLib.pm-don-t-execute-the-binary.patch \
-+"
-+SRC_URI[md5sum] = "930216c5abc0f016df8a7539d48c891a"
-+SRC_URI[sha256sum] = "24adfd908705dfac4bb320711763f37126b75cf54b3566c2c27c7cdef9c429a8"
-+
-+S = "${WORKDIR}/Devel-CheckLib-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND="native"
+diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
+deleted file mode 100644
+index 60d88c3d1..000000000
+--- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Use-API-function-for-reconnect.patch
++++ /dev/null
+@@ -1,53 +0,0 @@
+-From edb6b202b7e233864aa5dd84532646c50097b0b8 Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Mon, 4 Mar 2019 00:49:17 -0800
+-Subject: [PATCH] Use API function for reconnect
+-
+-For configuring reconnect functionality use standard API function
+-MYSQL_OPT_RECONNECT instead of direct modification of internal structures
+-which does not work for MariaDB. Fixes compilation with MariaDB 10.2.6+.
+-
+-Upstream-Status: Backport [https://github.com/perl5-dbi/DBD-mysql/commit/0b1884f4153d3de0a91bae4d3b3cc1771ffdf4f3]
+-
+-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+----
+- dbdimp.c | 16 ++++++++++------
+- 1 file changed, 10 insertions(+), 6 deletions(-)
+-
+-diff --git a/dbdimp.c b/dbdimp.c
+-index 9b8b313..3bed213 100644
+---- a/dbdimp.c
+-+++ b/dbdimp.c
+-@@ -1979,6 +1979,16 @@ MYSQL *mysql_dr_connect(
+- 
+-     if (result)
+-     {
+-+      /*
+-+        we turn off Mysql's auto reconnect and handle re-connecting ourselves
+-+        so that we can keep track of when this happens.
+-+      */
+-+#if MYSQL_VERSION_ID >= 50013
+-+      my_bool reconnect = FALSE;
+-+      mysql_options(result, MYSQL_OPT_RECONNECT, &reconnect);
+-+#else
+-+      result->reconnect = 0;
+-+#endif
+- #if MYSQL_VERSION_ID >=SERVER_PREPARE_VERSION
+-       /* connection succeeded. */
+-       /* imp_dbh == NULL when mysql_dr_connect() is called from mysql.xs
+-@@ -1992,12 +2002,6 @@ MYSQL *mysql_dr_connect(
+-           imp_dbh->async_query_in_flight = NULL;
+-       }
+- #endif
+--
+--      /*
+--        we turn off Mysql's auto reconnect and handle re-connecting ourselves
+--        so that we can keep track of when this happens.
+--      */
+--      result->reconnect=0;
+-     }
+-     else {
+-       /* 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
+similarity index 57%
+rename from meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb
+rename to meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
+index e185f48f7..049dc665d 100644
+--- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.043.bb
++++ b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
+@@ -6,21 +6,17 @@ with the MySQL relational database management system. Most functions \
+ provided by this programming API are supported. Some rarely used \
+ functions are missing, mainly because no-one ever requested them. \
+ "
+-HOMEPAGE = "http://search.cpan.org/~michielb/DBD-mysql-4.036/lib/DBD/mysql.pm"
++HOMEPAGE = "https://github.com/perl5-dbi/DBD-mysql"
+ 
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+-DEPENDS += "libdbi-perl-native libmysqlclient"
++DEPENDS += "libdev-checklib-perl-native libdbi-perl-native libmysqlclient"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
+ 
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MICHIELB/DBD-mysql-${PV}.tar.gz \
+-           file://0001-Use-API-function-for-reconnect.patch \
+-"
+-
+-SRC_URI[md5sum] = "4a00dd7f1c057931147c65dfc4901c36"
+-SRC_URI[sha256sum] = "629f865e8317f52602b2f2efd2b688002903d2e4bbcba5427cb6188b043d6f99"
++SRCREV = "9b5b70ea372f49fe9bc9e592dae3870596d1e3d6"
++SRC_URI = "git://github.com/perl5-dbi/DBD-mysql.git;protocol=https"
+ 
+-S = "${WORKDIR}/DBD-mysql-${PV}"
++S = "${WORKDIR}/git"
+ 
+ inherit cpan
 -- 
 2.17.1
 
