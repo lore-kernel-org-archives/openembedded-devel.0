@@ -1,52 +1,50 @@
-Return-Path: <vincent.prince.fr@gmail.com>
+Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
 	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 463637DCDE
+	by mail.openembedded.org (Postfix) with ESMTP id BEB787DA7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 19:29:17 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id c3so3863588iok.6
+	Fri, 26 Apr 2019 20:34:11 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id r18so4029551ioh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 12:29:18 -0700 (PDT)
+	Fri, 26 Apr 2019 13:34:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=cgre5kfBGZoD9e8iWMoqvfavdspKtzQB+qo5oJJFJ4w=;
-	b=YqtDX3ULQVc8Hh/1o/YNQ859/zqmky66et2mx5hlTQk8kQjK30E/LVEFL0gpyaOqZ+
-	6Npj9/qpHxJUnfZ4DUyXgIRjV9vPZHZZcMTtQRoZqFnwyhDTbHje84Kgwdi3Gxt6wSzz
-	haFrV8scc7j52YZjx5re3RhvnVHIFETVQ2+8OmQ85vx7SS7yuyvhPJ8CaKUd90qPNlyx
-	vw9P/PXJvr0rOaa4Bscw6L+YhlEFs9Y4BwfYMN93n3yZ9HVAK9t8OnObDfqu7GYFmwTs
-	uRUK8B1UbJ1giE/y4jSMEieH1xe3CntKXWvwuX5SsQ/G8LZG4FSJ5YiPxm1O738tl1cc
-	z77Q==
+	:cc; bh=4sIP+JKvnbcDpt7Fii1i1rbBGVn2gxxHgQh6SG4igC0=;
+	b=CMgfP/DVL7qJIWkB5uDC0IkbTrAmhbx0l9i42p3moPB60TwwxY8gkKB8vPxlk5hcLo
+	QLkUXSp8eXKtJTNe2jYxXMGtyn8JtJ97cjzhIm+SuHMXqTDUk4W2ngnJxzAtSHlLXeH9
+	+2Ymno6C4yTggH53rxSMAWHt+kSx5soHEtuXiSqQGCYcsqtWcRPwaqn/qv3FNi9uzhOJ
+	z20HzopbEGECc3Yd5dnZMrvxMczJqWTcU2g+ydNDI+mJFBYGtFUtUZz5djg1yHQa0cGw
+	vcPMJMCWlZ4RWhz8iKM6DFCk3waxgSoz7H5JH8n96AP9SG+nPaAGWaPfF9LOwzP3lZN4
+	VlwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=cgre5kfBGZoD9e8iWMoqvfavdspKtzQB+qo5oJJFJ4w=;
-	b=oixxqqkGKV6e39KVywtY3iVjIZ1bEbKtftrYueYRosHGevuik5Sp8nUjlVe4KgIZcd
-	vBOSKFf9I6Y9i8L9HA6TAHyfCCZ1sSm+xzcD0JxX3FAcns3IYr1MGIjeLsqjjTpUkUg9
-	wM/dSOGTl5NMJQVcazYkEvuN+Er7L8Eg1pb73rlYjuBJ14d/VCVd3HtRUd78gjImB3ev
-	HywZ7j1LlfklQP1gmU7C8oai/z37FkOZ+ob6Qgv/Yek/PuEUoNn2SH3bFPrma5GxIoqB
-	gj2iDYWqLIjShcs/YMcY5R4O1Pf0YW38LoSF88sMD455cE3kg+3yhuUQoYloSZhHfcmc
-	3P3w==
-X-Gm-Message-State: APjAAAVWl9E2aRFn0RR8aWqB+MqK4fpqrXYYPTDVbCAmoqfsaj+Mkjqw
-	j5d7x7MGjAqHkN6DbC7ZJT9ZhHabwQnHDOmZfM0=
-X-Google-Smtp-Source: APXvYqz1DEOROoUB96+fLTi/9Z714428vIUSH4mylXwdyke7nQy3GFe9jYQ1p5X4u6cKUd/nxveDTKgCE9HBHK93Ui0=
-X-Received: by 2002:a6b:b745:: with SMTP id h66mr1252628iof.107.1556306958223; 
-	Fri, 26 Apr 2019 12:29:18 -0700 (PDT)
+	bh=4sIP+JKvnbcDpt7Fii1i1rbBGVn2gxxHgQh6SG4igC0=;
+	b=gp6u9HSxcFe1GObvUu7OeVJFcJU7zqjPGMJfCaRD1srQTbXOCtDeNTYrQGX0ipNQxH
+	2Iuby0L+VEJLjlDCT0akWb0abQ4h/nqEfwRnKuwZWkLapcUsf19zy6L5t6A18TvwCDFq
+	IiP0BNxoL7y43xi/UfUJ5tcS1xtTEub1plpfmvVZaj6DrDpsvpXyNsg30Xff51DSNaXQ
+	y90IKSP+PRqwNzx54GfPGM8eb9bcMmXkyItq3l2UtH5yzQUuq348VxwRnSVGB3OH3qAf
+	hhf6zAiy1dgZq+kTCgY799kg+6FWITl7uUWK7L0VnLbQ8G7Tv4JxyXA3IMxdXftWQs4d
+	49Zw==
+X-Gm-Message-State: APjAAAUSSEEurtUU2PUvxOIhcPECTX/YdWVlZUIDHDOnHlttMrZ60V28
+	WSFjemK7Bq7vlEqgWYz1uG2muySoObbmzj8w0E8=
+X-Google-Smtp-Source: APXvYqxOE95sZm2ewm7hcdMBbN0qV+9jEx0aL9n5wahlI75NthizvD8Nb67iuE+OTAKGxdJXkON7vDY2LKb5K1JRSqE=
+X-Received: by 2002:a5d:9a84:: with SMTP id c4mr9986827iom.284.1556310852705; 
+	Fri, 26 Apr 2019 13:34:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190411213317.20935-1-alistair.francis@wdc.com>
-	<CAKmqyKPqaiZprZwD6nPxpuUEMm6jh4UgJfyPLh+-Fxcu7ZXOtg@mail.gmail.com>
-In-Reply-To: <CAKmqyKPqaiZprZwD6nPxpuUEMm6jh4UgJfyPLh+-Fxcu7ZXOtg@mail.gmail.com>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Fri, 26 Apr 2019 21:29:08 +0200
-Message-ID: <CAB2nKc-oX=ATOgmDTswmsdEWaD3yxy-XBoT3-CTLsor4w1pQdQ@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>,
-	Otavio Salvador <otavio.salvador@gmail.com>, 
-	richard.leitner@skidata.com, henning@itconsulting-heinold.de, 
-	"Maxin B. John" <maxin.john@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] layer.conf: Mark warrior as supported
+References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
+	<20190426052056.GB26023@localhost>
+	<CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
+	<CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
+In-Reply-To: <CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 26 Apr 2019 22:34:00 +0200
+Message-ID: <CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Adrian Bunk <bunk@stusta.de>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,54 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 19:29:17 -0000
+X-List-Received-Date: Fri, 26 Apr 2019 20:34:11 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Francis,
-
-it's not that urgent Warrior is not released yet but just in case, I added
-meta-java maintainers to current thread, If anyone can merge this patch ;)
-
-Best regards,
-Vincent
-
-Le jeu. 25 avr. 2019 =C3=A0 20:27, Alistair Francis <alistair23@gmail.com> =
-a
-=C3=A9crit :
-
-> On Thu, Apr 11, 2019 at 2:34 PM Alistair Francis
-> <Alistair.Francis@wdc.com> wrote:
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+On Fri, Apr 26, 2019 at 9:27 PM Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> Ping!
+> I'm not using ne10 or libopus anywhere, it was just breaking
+> sstate-diff-machines.sh script by adding that unjustifiable dependency
+> based on TUNE_FEATURES.
 >
-> > ---
-> >  conf/layer.conf | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/conf/layer.conf b/conf/layer.conf
-> > index b03a608..90236be 100644
-> > --- a/conf/layer.conf
-> > +++ b/conf/layer.conf
-> > @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
-> ${LAYERDIR}/recipes*/*/*.bbappend"
-> >  BBFILE_COLLECTIONS +=3D "meta-java"
-> >  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
-> >  BBFILE_PRIORITY_meta-java =3D "10"
-> > -LAYERSERIES_COMPAT_meta-java =3D "thud"
-> > +LAYERSERIES_COMPAT_meta-java =3D "thud warrior"
-> >
-> >  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> >
-> > --
-> > 2.21.0
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> I was going to send v2 with the armv7ve entries as requested by Andreas (I
+> forgot that armv7ve tunes no longer include armv7a in overrides), but if
+> someone wants to rework it to test for neon in TUNE_FEATURES feel free to
+> do so.
 >
+> It didn't check for neon before, so at least this change didn't make it
+> worse.
+Yeah - you fix something you are not interested in and people (either
+not using it) open up wishlists..
+
+Thanks (and sorry :)
+
+Andreas
 
