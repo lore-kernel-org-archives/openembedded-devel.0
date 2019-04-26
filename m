@@ -1,50 +1,31 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BEB787DA7C
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.openembedded.org (Postfix) with ESMTP id C211E7DCD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 20:34:11 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id r18so4029551ioh.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 13:34:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4sIP+JKvnbcDpt7Fii1i1rbBGVn2gxxHgQh6SG4igC0=;
-	b=CMgfP/DVL7qJIWkB5uDC0IkbTrAmhbx0l9i42p3moPB60TwwxY8gkKB8vPxlk5hcLo
-	QLkUXSp8eXKtJTNe2jYxXMGtyn8JtJ97cjzhIm+SuHMXqTDUk4W2ngnJxzAtSHlLXeH9
-	+2Ymno6C4yTggH53rxSMAWHt+kSx5soHEtuXiSqQGCYcsqtWcRPwaqn/qv3FNi9uzhOJ
-	z20HzopbEGECc3Yd5dnZMrvxMczJqWTcU2g+ydNDI+mJFBYGtFUtUZz5djg1yHQa0cGw
-	vcPMJMCWlZ4RWhz8iKM6DFCk3waxgSoz7H5JH8n96AP9SG+nPaAGWaPfF9LOwzP3lZN4
-	VlwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4sIP+JKvnbcDpt7Fii1i1rbBGVn2gxxHgQh6SG4igC0=;
-	b=gp6u9HSxcFe1GObvUu7OeVJFcJU7zqjPGMJfCaRD1srQTbXOCtDeNTYrQGX0ipNQxH
-	2Iuby0L+VEJLjlDCT0akWb0abQ4h/nqEfwRnKuwZWkLapcUsf19zy6L5t6A18TvwCDFq
-	IiP0BNxoL7y43xi/UfUJ5tcS1xtTEub1plpfmvVZaj6DrDpsvpXyNsg30Xff51DSNaXQ
-	y90IKSP+PRqwNzx54GfPGM8eb9bcMmXkyItq3l2UtH5yzQUuq348VxwRnSVGB3OH3qAf
-	hhf6zAiy1dgZq+kTCgY799kg+6FWITl7uUWK7L0VnLbQ8G7Tv4JxyXA3IMxdXftWQs4d
-	49Zw==
-X-Gm-Message-State: APjAAAUSSEEurtUU2PUvxOIhcPECTX/YdWVlZUIDHDOnHlttMrZ60V28
-	WSFjemK7Bq7vlEqgWYz1uG2muySoObbmzj8w0E8=
-X-Google-Smtp-Source: APXvYqxOE95sZm2ewm7hcdMBbN0qV+9jEx0aL9n5wahlI75NthizvD8Nb67iuE+OTAKGxdJXkON7vDY2LKb5K1JRSqE=
-X-Received: by 2002:a5d:9a84:: with SMTP id c4mr9986827iom.284.1556310852705; 
-	Fri, 26 Apr 2019 13:34:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
-	<20190426052056.GB26023@localhost>
-	<CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
-	<CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
-In-Reply-To: <CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 26 Apr 2019 22:34:00 +0200
-Message-ID: <CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Adrian Bunk <bunk@stusta.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
+	Fri, 26 Apr 2019 20:58:33 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E0431407DA;
+	Fri, 26 Apr 2019 20:58:34 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 152iSgtV9m5a; Fri, 26 Apr 2019 20:58:34 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C6FB340024;
+	Fri, 26 Apr 2019 20:58:33 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 104F016E5E7;
+	Fri, 26 Apr 2019 16:58:33 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 26 Apr 2019 16:58:31 -0400
+Message-Id: <1556312311-9218-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] v4l-utils: upgrade 1.16.0 -> 1.16.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 20:34:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 26 Apr 2019 20:58:35 -0000
 
-On Fri, Apr 26, 2019 at 9:27 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> I'm not using ne10 or libopus anywhere, it was just breaking
-> sstate-diff-machines.sh script by adding that unjustifiable dependency
-> based on TUNE_FEATURES.
->
-> I was going to send v2 with the armv7ve entries as requested by Andreas (I
-> forgot that armv7ve tunes no longer include armv7a in overrides), but if
-> someone wants to rework it to test for neon in TUNE_FEATURES feel free to
-> do so.
->
-> It didn't check for neon before, so at least this change didn't make it
-> worse.
-Yeah - you fix something you are not interested in and people (either
-not using it) open up wishlists..
+From: Denys Dmytriyenko <denys@ti.com>
 
-Thanks (and sorry :)
+Includes about 6 months of bug fixes.
 
-Andreas
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../v4l2apps/{v4l-utils_1.16.0.bb => v4l-utils_1.16.5.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.16.0.bb => v4l-utils_1.16.5.bb} (93%)
+
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.0.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.5.bb
+similarity index 93%
+rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.0.bb
+rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.5.bb
+index bcead00..4154468 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.0.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.16.5.bb
+@@ -22,8 +22,8 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
+            file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
+            file://0003-v4l2-ctl-Do-not-use-getsubopt.patch \
+            "
+-SRC_URI[md5sum] = "21a6ec3605a1c3114c8ccb70a963c871"
+-SRC_URI[sha256sum] = "f1b425584284bac378b76331c0671dc890bd7af49c03e8a6cc0c70e57eea0bad"
++SRC_URI[md5sum] = "de272817133c0dca000a78a5c8c8ec8b"
++SRC_URI[sha256sum] = "ed80242510385017a1dc566e17a285a77222bb301f5bc19386badfcc2c19df1b"
+ 
+ EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
+ 
+-- 
+2.7.4
+
 
