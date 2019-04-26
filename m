@@ -1,50 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AB6187D80C
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 463637DCDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 19:27:36 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id r6so5893876wrm.4
+	Fri, 26 Apr 2019 19:29:17 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id c3so3863588iok.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 12:27:37 -0700 (PDT)
+	Fri, 26 Apr 2019 12:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ouMFKeAbHGYsX7GtG48nMqOnmOCIXLSAWzS1ecW8Ag8=;
-	b=j8rrz4xPs/n/KRickoBxjXtGFe2pOsL8yFwCFB/+dwfOP8Jy4N38QMC60SaAmZoxsD
-	yiey7uFcq5zoWNY2u3hp79wxlSNih2piWr9DDtTS5W0/t082Vue9+UW9COmDV8+cWlGf
-	GPQuuBOAUmucOtyhxebDj2o4tPa7MBTwUxoqiaEPsnC2ia7yv8a+Sb1RCwvKsWC3cFPj
-	fW08/p5CgKdk41U1ICtBtC4usRPb1knunHSvkxHGyN/qXpAZ+MOCNskNQTo4Ljkm1xZS
-	tFUj0K+8VAze8261tP4r5VLuWQFFuqK2nocoU/IE2MYqQB/Wo5G037z5pN5BW2YB4ClD
-	3UUw==
+	:cc; bh=cgre5kfBGZoD9e8iWMoqvfavdspKtzQB+qo5oJJFJ4w=;
+	b=YqtDX3ULQVc8Hh/1o/YNQ859/zqmky66et2mx5hlTQk8kQjK30E/LVEFL0gpyaOqZ+
+	6Npj9/qpHxJUnfZ4DUyXgIRjV9vPZHZZcMTtQRoZqFnwyhDTbHje84Kgwdi3Gxt6wSzz
+	haFrV8scc7j52YZjx5re3RhvnVHIFETVQ2+8OmQ85vx7SS7yuyvhPJ8CaKUd90qPNlyx
+	vw9P/PXJvr0rOaa4Bscw6L+YhlEFs9Y4BwfYMN93n3yZ9HVAK9t8OnObDfqu7GYFmwTs
+	uRUK8B1UbJ1giE/y4jSMEieH1xe3CntKXWvwuX5SsQ/G8LZG4FSJ5YiPxm1O738tl1cc
+	z77Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ouMFKeAbHGYsX7GtG48nMqOnmOCIXLSAWzS1ecW8Ag8=;
-	b=m7EB15ljrFKw0l9WRvkZY+kmHKi7Sfli6i01gjeuYy2be8kWfrlItl4iUWSravNxk8
-	jHSBNXewKM8MgFeNgdRVXg72uSPqrqZUkBjz++cEi08cdvHfKjxpUlCdwhBPwDNC9KCX
-	ncigWJGyBDR9hxAPLAFVG0P+P8zdC6qmw9aZLgjGgIoaGU7iQiOy1FiES0RaiCwqNPU8
-	A9lH+VOSBzODETL4JxB4klFi3vAyklzbIKk3RUpF5nQUeK2eQCHCZMpBcpSgNZxVn9Ux
-	sCXi5JkfPlk7hI5hDxvepcVWaEC4sqX621Yh3Po1/3Sf5kxZ2Zihow+kUqetGU3i92wt
-	czEQ==
-X-Gm-Message-State: APjAAAX3SJ2vuQfvmSX2J0LmQUErjWBw+pjhUr/jMwZ0r4+gY0siqhc8
-	U9UVQtPUx/MkYuRX4ZelCzg3A7Q+MMhTCd1dEGM=
-X-Google-Smtp-Source: APXvYqwrV9oOClr8SfM5jDgpuBPj9dx1bLzvb0iu06hyMFK6EwfJO0vTgNhmlGpHxxPK2XEjr33J1Q8fUg3MLNvpegw=
-X-Received: by 2002:a5d:4348:: with SMTP id u8mr6702205wrr.129.1556306857188; 
-	Fri, 26 Apr 2019 12:27:37 -0700 (PDT)
+	bh=cgre5kfBGZoD9e8iWMoqvfavdspKtzQB+qo5oJJFJ4w=;
+	b=oixxqqkGKV6e39KVywtY3iVjIZ1bEbKtftrYueYRosHGevuik5Sp8nUjlVe4KgIZcd
+	vBOSKFf9I6Y9i8L9HA6TAHyfCCZ1sSm+xzcD0JxX3FAcns3IYr1MGIjeLsqjjTpUkUg9
+	wM/dSOGTl5NMJQVcazYkEvuN+Er7L8Eg1pb73rlYjuBJ14d/VCVd3HtRUd78gjImB3ev
+	HywZ7j1LlfklQP1gmU7C8oai/z37FkOZ+ob6Qgv/Yek/PuEUoNn2SH3bFPrma5GxIoqB
+	gj2iDYWqLIjShcs/YMcY5R4O1Pf0YW38LoSF88sMD455cE3kg+3yhuUQoYloSZhHfcmc
+	3P3w==
+X-Gm-Message-State: APjAAAVWl9E2aRFn0RR8aWqB+MqK4fpqrXYYPTDVbCAmoqfsaj+Mkjqw
+	j5d7x7MGjAqHkN6DbC7ZJT9ZhHabwQnHDOmZfM0=
+X-Google-Smtp-Source: APXvYqz1DEOROoUB96+fLTi/9Z714428vIUSH4mylXwdyke7nQy3GFe9jYQ1p5X4u6cKUd/nxveDTKgCE9HBHK93Ui0=
+X-Received: by 2002:a6b:b745:: with SMTP id h66mr1252628iof.107.1556306958223; 
+	Fri, 26 Apr 2019 12:29:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
-	<20190426052056.GB26023@localhost>
-	<CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
-In-Reply-To: <CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 26 Apr 2019 21:27:25 +0200
-Message-ID: <CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+References: <20190411213317.20935-1-alistair.francis@wdc.com>
+	<CAKmqyKPqaiZprZwD6nPxpuUEMm6jh4UgJfyPLh+-Fxcu7ZXOtg@mail.gmail.com>
+In-Reply-To: <CAKmqyKPqaiZprZwD6nPxpuUEMm6jh4UgJfyPLh+-Fxcu7ZXOtg@mail.gmail.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Fri, 26 Apr 2019 21:29:08 +0200
+Message-ID: <CAB2nKc-oX=ATOgmDTswmsdEWaD3yxy-XBoT3-CTLsor4w1pQdQ@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>,
+	Otavio Salvador <otavio.salvador@gmail.com>, 
+	richard.leitner@skidata.com, henning@itconsulting-heinold.de, 
+	"Maxin B. John" <maxin.john@intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] layer.conf: Mark warrior as supported
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,45 +59,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 19:27:36 -0000
+X-List-Received-Date: Fri, 26 Apr 2019 19:29:17 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm not using ne10 or libopus anywhere, it was just breaking
-sstate-diff-machines.sh script by adding that unjustifiable dependency
-based on TUNE_FEATURES.
+Hi Francis,
 
-I was going to send v2 with the armv7ve entries as requested by Andreas (I
-forgot that armv7ve tunes no longer include armv7a in overrides), but if
-someone wants to rework it to test for neon in TUNE_FEATURES feel free to
-do so.
+it's not that urgent Warrior is not released yet but just in case, I added
+meta-java maintainers to current thread, If anyone can merge this patch ;)
 
-It didn't check for neon before, so at least this change didn't make it
-worse.
+Best regards,
+Vincent
 
-On Fri, Apr 26, 2019 at 7:35 PM Khem Raj <raj.khem@gmail.com> wrote:
+Le jeu. 25 avr. 2019 =C3=A0 20:27, Alistair Francis <alistair23@gmail.com> =
+a
+=C3=A9crit :
 
-> On Thu, Apr 25, 2019 at 10:21 PM Adrian Bunk <bunk@stusta.de> wrote:
+> On Thu, Apr 11, 2019 at 2:34 PM Alistair Francis
+> <Alistair.Francis@wdc.com> wrote:
 > >
-> > On Wed, Apr 24, 2019 at 07:00:38PM +0000, Martin Jansa wrote:
-> > > * set COMPATIBLE_MACHINE to (^$) to prevent building it for any other
-> > >   architectures than armv7a and aarch64
-> > > * with new arm tune files it's easy to have armv7a in OVERRIDES even
-> > >   when there isn't armv7a in TUNE_FEATURES:
-> > >   meta/conf/machine/include/tune-cortexa9.inc:7
-> > >      "${@bb.utils.contains('TUNE_FEATURES', 'cortexa9', 'armv7a:',
-> '',d)}"
-> > >   in cases like this COMPATIBLE_MACHINE was satisfied thanks to the
-> > >   armv7a OVERRIDE, but then the anonymous python was failing with:
-> > >   ne10 was skipped: Incompatible with archs other than armv7 and
-> aarch64
-> > >...
-> >
-> > How does this handle Cortex A9 SoCs without NEON support?
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> this is a valid concern although rare but this combination is out
-> there ( tegra2 )
-> and ne10 needs neon, so probably its better to check for neon in tune
-> features
->  than anything else first.
+> Ping!
+>
+> > ---
+> >  conf/layer.conf | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/conf/layer.conf b/conf/layer.conf
+> > index b03a608..90236be 100644
+> > --- a/conf/layer.conf
+> > +++ b/conf/layer.conf
+> > @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
+> ${LAYERDIR}/recipes*/*/*.bbappend"
+> >  BBFILE_COLLECTIONS +=3D "meta-java"
+> >  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+> >  BBFILE_PRIORITY_meta-java =3D "10"
+> > -LAYERSERIES_COMPAT_meta-java =3D "thud"
+> > +LAYERSERIES_COMPAT_meta-java =3D "thud warrior"
+> >
+> >  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> >
+> > --
+> > 2.21.0
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
