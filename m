@@ -1,53 +1,52 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id C04A97D9EA
+Return-Path: <sander.visser.2@consultant.volvo.com>
+Received: from mail-gw3.it.volvo.com (mail-gw3.it.volvo.com [192.138.110.232])
+	by mail.openembedded.org (Postfix) with ESMTP id 77F187DAC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2019 08:52:23 +0000 (UTC)
-Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x3Q8qNQU005304
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Fri, 26 Apr 2019 10:52:23 +0200
-Received: from [192.168.20.128] (md1wg6qc.ad001.siemens.net [163.242.44.88])
-	by mail2.sbs.de (8.15.2/8.15.2) with ESMTP id x3Q8qM64018598;
-	Fri, 26 Apr 2019 10:52:23 +0200
-To: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>,
+	Fri, 26 Apr 2019 13:26:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,397,1549926000"; d="scan'208";a="1035391643"
+From: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>
+To: akuster808 <akuster808@gmail.com>,
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-References: <DB6PR05MB46319F9DA03A6DE85BBAB2A9C53E0@DB6PR05MB4631.eurprd05.prod.outlook.com>
-From: Andrej Valek <andrej.valek@siemens.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=andrej.valek@siemens.com; prefer-encrypt=mutual; keydata=
-	mQENBFkSzTcBCADSJTRk7YudjxZ/ma2IXPV4Y5gkACJKDOYAZcRqNjDbIFUmc7ck3KeuUGKy
-	ifrpWD6/7YPXbixv4sAlFly6sNL31agVHLO4BCCE77DaZ2smiN0JaLYzmMdr0BPLMsL96nBO
-	UDo8o2a1NwU+GpD8a0/vcovro+NgLvfk9xP4rYAve09VYvF4DbQNW9Y+8reqWFnBI8EN5Fps
-	vPCUr/TSuxk3VpU//8QtP7WqyRA31qiWFDxE2dqSnrpUBojxQMY94tDP7kjQtzD2ZpaDt1oL
-	PDE/n6qtYG792JVvNjuo1QpfPo8a8I4HvMmbh/Orv0fniauB229OaWNPp27ln55xG8FvABEB
-	AAG0J0FuZHJlaiBWYWxlayA8YW5kcmVqLnZhbGVrQHNpZW1lbnMuY29tPokBPgQTAQIAKAUC
-	WRLNNwIbAwUJA8JnAAYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQ3npj5PmioO8DZQgA
-	ibpOwfxDw3qlSEHDE395Tf+bEAYWjjNz9OQB4nnhq1Ql9jbUhfQQk/equaxoIfNHyLNDbeUU
-	8ULLXJS+nDRi13yf2w/9L386fd5V63cdP6no2dpnEhwOKV1miiUtvcjDCe3bjm7WHVfg9OsF
-	4AWox+/GR6sGJHRestHeXIJthmru8dB57oKy2fPgPpY1Ld1Wwb4okZgIi+1sKx19fk2xX9lc
-	KpdvCXx+6FB3a9+sJTmb12meeGtKWC7BeElM2sG5NK7yx9zFNqSRebilwNankSE0QzWwmu4M
-	bW6OTuxv/3qeHIvFH3EhrEmnd68Zm4+/jx2ZN5Ax23ZaGD8pabuO57kBDQRZEs03AQgA0oCu
-	faa9qlV0iYK+XlLcW6u55/o5psqtwoUCo8u18v8j4qB80r9latFKsO/SOjhVOYgIuzTTftQs
-	Di71i9GJwK8Kk2FMo0YuJ9J9xdcvmjUI2vNUbOcaz2V0tRC9P/P5UaIltQAMVxbFHDwj17UA
-	7YpEUL3ixxMs/usIKKGA+jIvsBdcn1WFji/NXLffwQ+zrAoT3q8EuGn4jSdROND16e9ynKgk
-	D5D+EoA5RoFi8y3tRHJsi/dNlaUISsQOux/MgXsk1UU2lkmq7uxddRw8xwzG5dhx79sQp4Dt
-	YpSfZBylD3DnCTg3ajdWCHGVyBdMLVncfj8sPDsVkCozTaSqFwARAQABiQElBBgBAgAPBQJZ
-	Es03AhsMBQkDwmcAAAoJEN56Y+T5oqDv8EEH/0qUECI1OpJS5R9Di9yc6YOfyNdCFHJ5rnUx
-	dTr5+U3z30HBpzv1yPtO0fRQPulFRp2T81nhzT07B6Jce/pPUPE4QUVuwkM80KUbveJSNVHH
-	Vp+9MGHEmpSevVHGKwzr+/7n5KJd5+SX3Y0mFxbu7GUZTMvM9Ra/p7lu0DsAH1CgEzKf3KTx
-	FrUN9oSYETbN3l6+pxO3RYAxtCVRMCOCJ7skHkfPH0ADxsbecaKo2CHqcDJigqZBKxjnWYsm
-	0+8mRhIQs3JuF0z7hKJGRacdGvKdQbCo0swLT9NVWU0IcUc/gwsCzQu/0Iml1x6MbgameiX4
-	emYHzsJ3+vLapH+kAEI=
-Message-ID: <e1b22453-bc39-5692-811d-79a517d91acb@siemens.com>
-Date: Fri, 26 Apr 2019 10:52:22 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+Thread-Topic: [oe] Python3 in sumo+thud does not package sha1 support in crypt
+Thread-Index: AdT7YpXlzjKvlA/qT9aMXSkfHSkIwgABtVaAADJtHSA=
+Date: Fri, 26 Apr 2019 13:26:21 +0000
+Message-ID: <HE1PR05MB46355B6713A3451E9021BA7EC53E0@HE1PR05MB4635.eurprd05.prod.outlook.com>
+References: <HE1PR05MB46350C84FDF6E1F7F6C448D8C53D0@HE1PR05MB4635.eurprd05.prod.outlook.com>
+	<9c2be11a-2877-5059-35c3-58abc0d34f7b@gmail.com>
+In-Reply-To: <9c2be11a-2877-5059-35c3-58abc0d34f7b@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=sander.visser.2@consultant.volvo.com; 
+x-originating-ip: [199.247.36.90]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 2869d847-cef2-44c0-d6cd-08d6ca4ac62a
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600141)(711020)(4605104)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+	SRVR:HE1PR05MB4523; 
+x-ms-traffictypediagnostic: HE1PR05MB4523:
+x-microsoft-antispam-prvs: <HE1PR05MB45234EA8E05CEC7F479105BEC53E0@HE1PR05MB4523.eurprd05.prod.outlook.com>
+x-forefront-prvs: 001968DD50
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(136003)(346002)(366004)(376002)(39860400002)(396003)(13464003)(199004)(189003)(8676002)(26005)(52536014)(71200400001)(68736007)(6246003)(33656002)(2906002)(9686003)(6436002)(55016002)(74316002)(7696005)(476003)(486006)(25786009)(229853002)(2501003)(5660300002)(81166006)(81156014)(7736002)(305945005)(8936002)(446003)(11346002)(53546011)(478600001)(6116002)(3846002)(97736004)(102836004)(86362001)(14454004)(66946007)(73956011)(316002)(64756008)(66556008)(66476007)(66446008)(5024004)(14444005)(71190400001)(186003)(76176011)(76116006)(66066001)(110136005)(256004)(53936002)(99286004)(6506007);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR05MB4523;
+	H:HE1PR05MB4635.eurprd05.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:0; MX:1; 
+received-spf: None (protection.outlook.com: consultant.volvo.com does not
+	designate permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: uW3bnCkmi834goxe6s14sgoHgbQw68uFVR4YGsk/NhHRIN8HN+qpZZcr2euU8vbrI1wWXxh8W+wGr6H1dLppztfGhKRjkBGyid/53X3vXYXadGKVm1EWtkn87omaxj3stYmDQ4iINYefnLn6fHXWTGZ2IImBzFE6I1YhRvGDhy5qNOWuF2F+EcWFBpjUNsu3ngNrJ23nASiOLwV4NJeWNQ1s1bqa7yQJSZfuF6J2TSBF+YO6NbKLwV1sGRyDDNxDpizIv9FU7Rnva22Y2Qhm3pWlHWZsPNPus5Qi1kn8vginm39HJrzhlyQG10Rn7aPI6V18f6WJT+Uif+0YA5DvrsxemAcHxRI+wnkQ0es8MR5kl5x1iSPjUgKFNmU180XF/bvYzC6Bb4EYv1qruakio3TALsEwIT4cIMtSWJh3e6U=
 MIME-Version: 1.0
-In-Reply-To: <DB6PR05MB46319F9DA03A6DE85BBAB2A9C53E0@DB6PR05MB4631.eurprd05.prod.outlook.com>
-Cc: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: Re: busybox: udhcpd: fix not dying on SIGTERM -sumo 2.5.3 rebased
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2869d847-cef2-44c0-d6cd-08d6ca4ac62a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Apr 2019 13:26:21.8619 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f25493ae-1c98-41d7-8a33-0be75f5fe603
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR05MB4523
+X-OriginatorOrg: consultant.volvo.com
+Subject: Re: Python3 in sumo+thud does not package sha1 support in crypt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,47 +59,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2019 08:52:24 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 26 Apr 2019 13:26:24 -0000
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Sander,
-
-You have posted the patch with a wrongly way.
-
-I have re-submitted your patch with a correct way
-http://lists.openembedded.org/pipermail/openembedded-core/2019-April/281613.html
-.
-
-Please use this
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded#Sending_patches
-for future patches.
-
-Regards,
-Andrej
-
-On 4/26/19 10:38 AM, Visser Sander (2) (Consultant) wrote:
-> Hi
-> 
-> I rebased https://patchwork.openembedded.org/patch/152701/ sent by *Rasmus 
-> Villemoes rv@rasmusvillemoes.dk <mailto:rv@rasmusvillemoes.dk> *so that it can 
-> be applied on Sumo 2.5.3
-> 
-> The patch solves issue with busybox 1.27.2 udhcpd not dying when system sedns 
-> SIGTERM to it.
-> 
-> Tested ok on target.
-> 
-> /Regards Sander
-> 
-> 
-> This email message and any attachments may contain confidential information and 
-> may be privileged. If you are not the intended recipient or otherwise not 
-> authorized to receive this message, you are prohibited to use, copy, disclose or 
-> take any action based on this email or any information contained herein. If you 
-> are not the intended recipient, please advise the sender immediately by replying 
-> to this email and permanently delete this message and any attachments from your 
-> system.
-> 
+UGF0Y2ggc3VibWl0dGVkLiBUZXN0ZWQgZm9yIHN1bW8gdG8gcmVtb3ZlIGNyeXB0IHJlbGF0ZWQg
+LnNvIGZyb20gcHl0aG9uMy1taXNjDQoNCkJUVy4gSWYgSSB3YW50IHRvIG92ZXJyaWRlIHRoZSBw
+eXRob24zLW1hbmlmZXN0Lmpzb24gcGFydCBvZiB0aGUgcHl0aG9uMyByZWNpcGU7IGhvdyBjYW4g
+SSBkbyB0aGF0Pw0KDQpJIGF0dGVtcHRlZCB0byBhZGQgYSBjdXN0b20gcHl0aG9uMy1tYW5pZmVz
+dC5qc29uIGluIG15IGN1c3RvbSBsYXllciB0aGF0IGhhcyBoaWdoZXIgcHJvcCB0aGFuIHBva3ku
+IEkgb2JzZXJ2ZSB0aGF0IG15IGpzb24gaXMgaW5zdGFsbGVkIHRvIHRoZSAkV09SS1NQQUNFLCBi
+dXQgcGFja2FnZSBzcGxpdHRpbmcgaXMgc3RpbGwgZG9uZSB1c2luZyB0aGUgLmpzb24gZnJvbSBw
+b2t5IG1ldGEgbGF5ZXIuLi4NCg0KL1JlZ2FyZHMgU2FuZGVyDQoNCi0tLS0tT3JpZ2luYWwgTWVz
+c2FnZS0tLS0tDQpGcm9tOiBha3VzdGVyODA4IFttYWlsdG86YWt1c3RlcjgwOEBnbWFpbC5jb21d
+IA0KU2VudDogZGVuIDI1IGFwcmlsIDIwMTkgMzoxOQ0KVG86IFZpc3NlciBTYW5kZXIgKDIpIChD
+b25zdWx0YW50KTsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNClN1
+YmplY3Q6IFJlOiBbb2VdIFB5dGhvbjMgaW4gc3Vtbyt0aHVkIGRvZXMgbm90IHBhY2thZ2Ugc2hh
+MSBzdXBwb3J0IGluIGNyeXB0DQoNCg0KDQpPbiA0LzI1LzE5IDU6MzEgQU0sIFZpc3NlciBTYW5k
+ZXIgKDIpIChDb25zdWx0YW50KSB3cm90ZToNCj4gSGkNCj4NCj4gSXQgc2VlbXMgIiR7bGliZGly
+fS9weXRob24ke1BZVEhPTl9NQUpNSU59L2xpYi1keW5sb2FkL19zaGExLiouc28iIGlzIG1pc3Np
+bmcgaW4gc3VtbyBhbmQgdGh1ZC4gSXQgaXMgbGlzdGVkIGluIHJvY2tvICh2aWEgc2hhKikgYW5k
+IGluIHdhcnJpb3IgdmlhIF9zaGExLiouc28NCj4NCj4gV291bGQgYSBwYXRjaCB0b3dhcmRzIHRo
+dWQvc3VtbyBiZSBhY2NlcHRlZCB3aGVyZSBfc2hhMS4qLnNvIGlzIGFkZGVkIHRvIHRoZSBjcnlw
+dCBmaWxlcz8NClllcw0KDQotIEFybWluDQo+DQo+IC9SZWdhcmRzIFNhbmRlcg0KPg0KPiBUaGlz
+IGVtYWlsIG1lc3NhZ2UgYW5kIGFueSBhdHRhY2htZW50cyBtYXkgY29udGFpbiBjb25maWRlbnRp
+YWwgaW5mb3JtYXRpb24gYW5kIG1heSBiZSBwcml2aWxlZ2VkLiBJZiB5b3UgYXJlIG5vdCB0aGUg
+aW50ZW5kZWQgcmVjaXBpZW50IG9yIG90aGVyd2lzZSBub3QgYXV0aG9yaXplZCB0byByZWNlaXZl
+IHRoaXMgbWVzc2FnZSwgeW91IGFyZSBwcm9oaWJpdGVkIHRvIHVzZSwgY29weSwgZGlzY2xvc2Ug
+b3IgdGFrZSBhbnkgYWN0aW9uIGJhc2VkIG9uIHRoaXMgZW1haWwgb3IgYW55IGluZm9ybWF0aW9u
+IGNvbnRhaW5lZCBoZXJlaW4uIElmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZCByZWNpcGllbnQs
+IHBsZWFzZSBhZHZpc2UgdGhlIHNlbmRlciBpbW1lZGlhdGVseSBieSByZXBseWluZyB0byB0aGlz
+IGVtYWlsIGFuZCBwZXJtYW5lbnRseSBkZWxldGUgdGhpcyBtZXNzYWdlIGFuZCBhbnkgYXR0YWNo
+bWVudHMgZnJvbSB5b3VyIHN5c3RlbS4NCg0K
 
