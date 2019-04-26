@@ -1,46 +1,24 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7328171BB9
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BA7A7DA7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Apr 2019 21:14:14 +0000 (UTC)
-Received: by mail-it1-f194.google.com with SMTP id q19so2501506itk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Apr 2019 14:14:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eXW+pQqTd3q3BFZxC6+6nsKUG2baJZKMrVTVzT4pZC4=;
-	b=WN4P2WBkEYIdS2+BR1cNs9lqzEN6mnd3Xrl7BZdbwRe+ZPL2wU4+XmzI+UVQR4TlZI
-	M6tzRdvTAY+1nYLkkCywASBL6tmQ2x4j1vmIGvNilfCRxJk5Ac5MFAXMv3QqXpTtN03C
-	ezLqvkZWb6klDiGfuwKtJEHjakzkbtJ7nBdLCwkgi1kEr15J7IK1pFjzbAVCn7PMy9qf
-	22uDe5oaFAtdrQcmLwt2uae9sYe7948+LTJFpZlP6FLcUynn7VokmfWQLXCLGA0xP/tT
-	rEuTSWVZkhYuiJB2ig5Yicez9pPLxOJJGM7KdEKVNU5VJmazY+dqbSG+J4Q2aHphuGqm
-	Jg1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eXW+pQqTd3q3BFZxC6+6nsKUG2baJZKMrVTVzT4pZC4=;
-	b=Bq07z4PPI/258KTFkWXAE+j5kRShzt1DpUg86xgonwJCTqcmvlwFGERqAet2yCkXmx
-	0jfOg/EPna0KVP5jknu1KvrJmu1I0zIQ1mxLjVvLs6NeMdRFAj1fzDlvEnSBXMPVR8IT
-	XZfnJZ/at5L/Dp23x3EIDpEke5TcIlahP/HIrTyPYvn/65r0Ef4Ztv51391yvb76UDc8
-	ELEJ8onvaWcws6UbZ+M3pjDIRGZWiu4CnIeVt26R7hHWVSCU7AYuS+JKTlrVdfVhGIlm
-	ZMLvhFl39hvdK6gPrC6B9VhNDCZljaZB+cVbN7csaBxU+rbQ+htFMuEU881EhXLmVNSn
-	vSkw==
-X-Gm-Message-State: APjAAAWzqPS7xKFLs/s6vzznRdobfd4QMNpNgcPafHIOXk9IdCbigSmJ
-	Dar7gQcCGvwi5tyd0a02OfFcBEPnxLi/jMyOYcU=
-X-Google-Smtp-Source: APXvYqwhJaMZRjfeYtYYx06487VgxG/eiEjafdcCYSfxLyGC9LuK+yKQesJVVILWEKdMSyrC2W40v/0vC0gnYTu9rX4=
-X-Received: by 2002:a24:5c10:: with SMTP id q16mr5756326itb.81.1556226854701; 
-	Thu, 25 Apr 2019 14:14:14 -0700 (PDT)
+	Fri, 26 Apr 2019 02:10:31 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3Q2AVwh013487
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 25 Apr 2019 19:10:31 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 25 Apr 2019 19:10:31 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Thu, 25 Apr 2019 19:10:30 -0700
+Message-ID: <20190426021031.20962-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190424071100.23092-1-mingli.yu@windriver.com>
+References: <20190424071100.23092-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20190424190038.19593-1-Martin.Jansa@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 25 Apr 2019 23:14:02 +0200
-Message-ID: <CALbNGRQaA1=z05+uR2aMxF3WgFKs5PiZWCBuAOd5ovf8TiaVow@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
+Subject: [PATCH v2 1/2] libdev-checklib-perl: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,66 +31,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Apr 2019 21:14:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 26 Apr 2019 02:10:32 -0000
+Content-Type: text/plain
 
-On Wed, Apr 24, 2019 at 9:01 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> * set COMPATIBLE_MACHINE to (^$) to prevent building it for any other
->   architectures than armv7a and aarch64
-> * with new arm tune files it's easy to have armv7a in OVERRIDES even
->   when there isn't armv7a in TUNE_FEATURES:
->   meta/conf/machine/include/tune-cortexa9.inc:7
->      "${@bb.utils.contains('TUNE_FEATURES', 'cortexa9', 'armv7a:', '',d)}"
->   in cases like this COMPATIBLE_MACHINE was satisfied thanks to the
->   armv7a OVERRIDE, but then the anonymous python was failing with:
->   ne10 was skipped: Incompatible with archs other than armv7 and aarch64
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 19 ++++++-------------
->  1 file changed, 6 insertions(+), 13 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> index 3afdff7786..4e8986de18 100644
-> --- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> +++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-> @@ -15,22 +15,15 @@ PV .= "gitr+${SRCPV}"
->
->  inherit cmake
->
-> -NE10_TARGET_ARCH = ""
-> -EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
-> -
-> +# Incompatible with archs other than armv7 and aarch64
-> +COMPATIBLE_MACHINE = "(^$)"
->  COMPATIBLE_MACHINE_aarch64 = "(.*)"
->  COMPATIBLE_MACHINE_armv7a = "(.*)"
-> +NE10_TARGET_ARCH = ""
-> +NE10_TARGET_ARCH_aarch64 = "aarch64"
-> +NE10_TARGET_ARCH_armv7a = "armv7"
->
-> -python () {
-> -    if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES').split()):
-> -        d.setVar('NE10_TARGET_ARCH', 'armv7')
-> -        bb.debug(2, 'Building Ne10 for armv7')
-> -    elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES').split()):
-> -        d.setVar('NE10_TARGET_ARCH', 'aarch64')
-> -        bb.debug(2, 'Building Ne10 for aarch64')
-> -    else:
-> -        raise bb.parse.SkipRecipe("Incompatible with archs other than armv7 and aarch64")
-> -}
-> +EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
->
->  do_install() {
->      install -d ${D}${libdir}
-> --
-> 2.17.1
->
-Have stolen the idea of this patch for another recipe. I think
-cortexa7 (raspi) needs COMPATIBLE_MACHINE_armv7ve and
-NE10_TARGET_ARCH_armv7ve entries. I know they were not handled before
-but...  - or do I miss something
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Andreas
+It provides the perl module (Devel::CheckLib) which
+may needed by other package which uses it to
+check libs.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ ...CheckLib.pm-don-t-execute-the-binary.patch | 46 +++++++++++++++++++
+ .../perl/libdev-checklib-perl_1.13.bb         | 21 +++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
+ create mode 100644 meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
+
+diff --git a/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch b/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
+new file mode 100644
+index 000000000..78a7e63b9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libdev-checklib-perl/0001-CheckLib.pm-don-t-execute-the-binary.patch
+@@ -0,0 +1,46 @@
++From d111fd85b25466f7829ccee34493aa0e3b551308 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Tue, 23 Apr 2019 19:13:19 -0700
++Subject: [PATCH] CheckLib.pm: don't execute the binary
++
++Don't execute the binary in build env as the
++binary which is generated in cross compile env
++may fail when executed in build env.
++
++And it's enough to verify the libs via successully
++generate the binary which links the libs as below.
++  $ /yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/x86_64-poky-linux-gcc \
++  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security \
++  -Werror=format-security --sysroot=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot \
++  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/perl/5.28.1-r1=/usr/src/debug/perl/5.28.1-r1 \
++  -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/perl/5.28.1-r1=/usr/src/debug/perl/5.28.1-r1 \
++  -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot= -fdebug-prefix-map=/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot-native= -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 assertlibEhx19yuY.c -L/yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/recipe-sysroot/usr/lib -lcrypto -fstack-protector-strong -o assertlibCOw_eujb
++
++Execute the binary in cross compile env as below
++and use the return status to determine the lib's
++checking status is not appropriate in cross compile env.
++ $ /yocto/builds/upgrade1/tmp/work/core2-64-poky-linux/libdbd-mysql-perl/4.050-r0/git/assertlibCOw_eujb
++
++Upstream-Status: Inappropriate[oe specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ lib/Devel/CheckLib.pm | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/lib/Devel/CheckLib.pm b/lib/Devel/CheckLib.pm
++index e45cfb4..d228bb5 100644
++--- a/lib/Devel/CheckLib.pm
+++++ b/lib/Devel/CheckLib.pm
++@@ -424,7 +424,7 @@ sub assert_lib {
++             my $absexefile = File::Spec->rel2abs($exefile);
++             $absexefile = '"'.$absexefile.'"' if $absexefile =~ m/\s/;
++             if (!$not_execute && system($absexefile) != 0) {
++-                push @wrongresult, $lib;
+++                print "Checking the lib $lib\n";
++             }
++             else {
++                 if ($analyze_binary) {
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
+new file mode 100644
+index 000000000..f5bdb2087
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.13.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "A Perl module that checks whether a particular C library and its headers are available"
++DESCRIPTION = "This module provides a way of checking whether a particular library \
++and its headers are available, by attempting to compile a simple program and \
++link against it."
++HOMEPAGE = "https://metacpan.org/pod/Devel::CheckLib"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++
++LIC_FILES_CHKSUM = "file://README;md5=7911cdbb572d25c5f2e2ea17f669efc2"
++
++SRC_URI = "https://cpan.metacpan.org/modules/by-module/Devel/Devel-CheckLib-${PV}.tar.gz \
++           file://0001-CheckLib.pm-don-t-execute-the-binary.patch \
++"
++SRC_URI[md5sum] = "930216c5abc0f016df8a7539d48c891a"
++SRC_URI[sha256sum] = "24adfd908705dfac4bb320711763f37126b75cf54b3566c2c27c7cdef9c429a8"
++
++S = "${WORKDIR}/Devel-CheckLib-${PV}"
++
++inherit cpan
++
++BBCLASSEXTEND="native"
+-- 
+2.17.1
+
 
