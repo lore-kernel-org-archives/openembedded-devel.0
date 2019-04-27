@@ -1,57 +1,50 @@
 Return-Path: <beniaminsandu@gmail.com>
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
-	[209.85.167.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 960B27D8F3
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 358977DC48
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 18:32:26 +0000 (UTC)
-Received: by mail-lf1-f66.google.com with SMTP id i68so4753868lfi.10
+	Sat, 27 Apr 2019 21:36:05 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id b1so9655501wru.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 11:32:28 -0700 (PDT)
+	Sat, 27 Apr 2019 14:36:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=cF/B3cSHw+78+eIqRdkAQi08PgKIZX7UfDGEBVKlzYo=;
-	b=ACeDc5ezPJJR4YiOtGM31NxWsq9aQy8IC6gW+Go1DF9vxBvzCByI+lDQSIVzY8jN7k
-	MI/e176tJ064gayVO6V2AMUTiMraBUD7uxbxKWq2J5LTpmaQvPKZmLvuW20t2od8D9yA
-	N76Vcq0pdmAUc1Rz2XssbPPgDBHa37I1eZWkxZIgD0uKRbYPvcrGGZgl6BDsTJUTNJbK
-	2kFlr1IPX4rdTDxZwcihFuq8b/jZRNiU7pYMG+H+c8iVytdlLE8jrNQvu/L0IPIPa/ZZ
-	SruzF6QyocSegGdYMKIh33p2hKka5cusHrSBFfop3zT0DOa846a3xfV/TOW01hPS/dD/
-	UosA==
+	h=from:to:cc:subject:date:message-id;
+	bh=xurmwT24gUi1YRNcm0Px/VS/RwZ+82ZAt3vsvtJcfNE=;
+	b=Lkqj7smUSeX6vSy+GJ6C7lQNMRIfez1y1LCDhaGINrxUcpDM/GALwmmfrtvx2T7lLD
+	EulPAvgRBHQtPS7ZTv8aIL4AaT2uA3+Qh+Ub5HWWEpzLudN9X744JbDLOmFt3QXXKUrD
+	lM/9rkiWrY/FDaB5cM4oPFKx9MANxFylzjmfKkDpbkD9Au/WNkq89nsbte+NjxXd/Qyn
+	IOK0mhBumKlL0EI3GaOI3hz6mk4AniuDaVov6OG8X9Zove+uZQfjTLljzDCPeRJ+lodw
+	BE4iEFQQi+WXCrUs/PFCz8osD3CkoA7rCSdXHtxTwFXay0AG0QACNUns5GIIbOXJKl1U
+	gslA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=cF/B3cSHw+78+eIqRdkAQi08PgKIZX7UfDGEBVKlzYo=;
-	b=I5YoSbZydwIGzMQIeI/Y/kbImtXUV6n9yZK/RY60zA5RSxmRWBht1svR2m9/Pp8vfM
-	lEAmBpjYcmkGWYOvH+eH0JUUM1kke0RIxNv02WQGsRRhp9pq7MifPcRrPoewx74zro9/
-	DLoOx6nu5akGAjNboInP44C/5OiEBUFXib+tmt461rhhFm4Dt9Fg1uX0rBIql1LWdhtu
-	iv8uFMqfgQtyNNt5dfG9koIBjOhueaLMCkIEDKYS3jfrFDzOOmKmGpRI/ehds1xQTHL7
-	SEDO5XOHLryYuwTeAphkDIpFddGUnxB3UIycQW1luOrtcrW92t5OfkjizAj+nts8NDoo
-	BQVw==
-X-Gm-Message-State: APjAAAVwdX1WtogQfhZ7gVr1IL9DOgAnHPV3EnEz5meB/+Ww5gF+jQDA
-	GQrd0VM4PQpE0qKI7rDiDQc=
-X-Google-Smtp-Source: APXvYqx0qo0AXLKD4ynX9t6k7mSjDSx1qtxlbjqLJmuRtWwVAj0q8hMvX/hhu+8X5nGS+2LzM4Pblw==
-X-Received: by 2002:ac2:4a89:: with SMTP id l9mr730618lfp.60.1556389947194;
-	Sat, 27 Apr 2019 11:32:27 -0700 (PDT)
-Received: from [192.168.2.101] (5-13-153-104.residential.rdsnet.ro.
-	[5.13.153.104]) by smtp.googlemail.com with ESMTPSA id
-	x2sm1188202ljx.13.2019.04.27.11.32.25
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xurmwT24gUi1YRNcm0Px/VS/RwZ+82ZAt3vsvtJcfNE=;
+	b=h28MKRTyA0dY/rveCdK2zPSseDEZvnElYYwS51dU83pn/OLvZ1+TSpy0BsS3utLKnb
+	05+OV4w2+/vnLPKV8CCC5YM0SjXY83NgttPTUlY/n0Rr24bmqhvoGGXzXGa3ZEayRQen
+	gGBHcC7gMulgAqu1ka5szLL/9l3IU7WOl4SuUBK9tZ/wOkQwQP5y7mtsElja17the07K
+	eeAUVjCzX0JcQg8RIwebaUXr3TvPmdi49Jo/ZLJfTWcfPyaz8eWTRDk6QxsODp0lmS3r
+	tXREe8QxMVyJRccM6z3hxdNauV/BOUZ9OQqBDYvwDFYWWpIoUv3/44RuTrn+jAhhYgoz
+	TaLg==
+X-Gm-Message-State: APjAAAXmr0VoCJGBVbR6F+sDn1xVcJDVlD8L7hQ7RfRzO8/lb+LCQDgA
+	rnud8I1Fnmk+lh6Ms0xqcTWFpXqxvgE=
+X-Google-Smtp-Source: APXvYqxxfRGX75qelxJStC7OaodHGvFEPYcW9RNPa8cNIe92ZMEMa1K6HkkV/sofJ2kIeMI2OtM1SA==
+X-Received: by 2002:a05:6000:10cc:: with SMTP id
+	b12mr10637034wrx.182.1556400965492; 
+	Sat, 27 Apr 2019 14:36:05 -0700 (PDT)
+Received: from localhost.localdomain (5-13-153-104.residential.rdsnet.ro.
+	[5.13.153.104])
+	by smtp.gmail.com with ESMTPSA id x20sm954257wrg.29.2019.04.27.14.36.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 27 Apr 2019 11:32:26 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>
-References: <20190418153432.16745-1-beniamin.sandu@gmail.com>
-	<20190427182651.GD10144@localhost>
-From: Ben <beniaminsandu@gmail.com>
-Message-ID: <53236768-b7ab-0400-1b6b-1b7996a98552@gmail.com>
-Date: Sat, 27 Apr 2019 21:32:25 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <20190427182651.GD10144@localhost>
-Cc: openembedded-devel@lists.openembedded.org,
-	Beniamin Sandu <beniamin.sandu@gmail.com>
-Subject: Re: [meta-networking][PATCH] unbound: create recipe for version 1.9.2
+	Sat, 27 Apr 2019 14:36:04 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+X-Google-Original-From: Beniamin Sandu <beniamin.sandu@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 28 Apr 2019 00:35:51 +0300
+Message-Id: <20190427213551.14485-1-beniamin.sandu@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Beniamin Sandu <beniamin.sandu@gmail.com>
+Subject: [meta-networking][PATCH] unbound: create recipe for version 1.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,28 +57,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2019 18:32:27 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Sat, 27 Apr 2019 21:36:05 -0000
 
+Signed-off-by: Beniamin Sandu <beniamin.sandu@gmail.com>
+---
+ .../recipes-support/unbound/unbound_1.9.1.bb  | 36 +++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound_1.9.1.bb
 
-On 27.04.2019 21:26, Adrian Bunk wrote:
-> On Thu, Apr 18, 2019 at 06:34:32PM +0300, Beniamin Sandu wrote:
->> ...
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/unbound/unbound_1.9.2.bb
->> ...
->> +SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master"
->> +SRCREV="61a28c2ee5e60132f26725583b66c1cf8214bb78"
->> ...
-> Has 1.9.2 even been released?
->
-> This looks like a random git commit some time after 1.9.1 to me.
-You're right, I will create a new one based on the latest released tag, 
-which 1.9.1.
->
-> cu
-> Adrian
->
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.1.bb b/meta-networking/recipes-support/unbound/unbound_1.9.1.bb
+new file mode 100644
+index 000000000..84bbe6581
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound_1.9.1.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Unbound is a validating, recursive, and caching DNS resolver"
++DESCRIPTION = "Unbound's design is a set of modular components which incorporate \
++	features including enhanced security (DNSSEC) validation, Internet Protocol \
++	Version 6 (IPv6), and a client resolver library API as an integral part of the \
++	architecture"
++
++HOMEPAGE = "https://www.unbound.net/"
++SECTION = "net"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
++
++SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master"
++SRCREV="16cc196bf28aec604ed2dae2b5af2ed82c8a58d6"
++
++inherit autotools pkgconfig systemd
++
++DEPENDS = "openssl libevent libtool-native bison-native expat"
++RDEPENDS_${PN} = "bash openssl-bin"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECONF = "libtool=${TARGET_PREFIX}libtool \
++		--with-ssl=${STAGING_EXECPREFIXDIR}"
++
++PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
++
++do_install_append() {
++	# systemd support
++	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++		install -d ${D}${systemd_unitdir}/system/
++		install -m 0644 ${B}/contrib/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
++	fi
++}
++
++SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+-- 
+2.17.1
+
 
