@@ -1,43 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CC577D598
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D6307DC8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 17:02:49 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id w20so3734774qka.7
+	Sat, 27 Apr 2019 17:13:00 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id k189so3776497qkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 10:02:50 -0700 (PDT)
+	Sat, 27 Apr 2019 10:13:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=zYxgFMGUXMfNkqQvSdtMH2ipgacgoX8jjh9Ff3zLKww=;
-	b=s1sFfcyVhGQgLuztTUyXV6J5kdTtD3cgZezOScm7aSOLYyCypiK6knxAf+EZHMavvQ
-	NjHCGiJc5SQFbaUl4idoRZelNReQ3BTh3Y7k8jv57QHAbGUJgSmE7a5bhSymgV+h3Z+d
-	IRB9cDmbjkGUvm51M2f+yoQ+x9vPBSTEULKNUQBd+ExXDSt3mfrWQpvONIkvdmKfqCcB
-	fPnXOV/bhAW/5pMG+zL32V7Vr2rlVepNCIqcbJ4Et1FJn21jIO7hqHsgwel78ph5ZAPf
-	9RKKhoTrKpLLXnl56NU06BuOKd1ALDDWPAZ+Qvf7VKokhyZJDZlR1g+C7PegLMfTWxnK
-	+tSg==
+	:cc; bh=ekMmRPJ7sINfnSSkP89i/F33azZN2XozviWp5pPEa6w=;
+	b=jptvNW2iUuiVrfJTDrYCxuHdZIXk7tybUxGs1gSStmSALuhZsMd2mgn7VlYUl/xZHo
+	SfnEl7VTVWwBDsZDSas641clyTTVbqLQe7dPDpnWovOYgcjS4c7HZ5YY/S4V9+P7QcQI
+	qUQbaT03FPcWftQXrqC6dfasKSYsIls7YJxIctMgUmChnCdl+1Fel9CiYk113yLBos6t
+	1fAS5YV4u+Tj6Ur8xlDszg8dAwqRdb15rmsAt9plAJfoWYpActAPKPWjVhIESEuGTI4R
+	I23kQHCktDaL4KmNiaC7LwiLY74Gq4ugq8xW8wh4Ts8nfD72fS/a1/rabSjOoAXlw7Uu
+	oHow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=zYxgFMGUXMfNkqQvSdtMH2ipgacgoX8jjh9Ff3zLKww=;
-	b=Z35L1a6muaSmwaVyJwc+W6C9hYEbfz0kB6CvTajgd7Au5m7kfk+FR36D0U2wgm+X8m
-	hh39ffSThXs8u4tkgIi9QGvmxbkw9GDEVFmenNUaACXtn0oslBVcfi/3ScaBdK+o0r1u
-	mxCAspV7LXXim1UWzftanwC/iyzCqw1D9uLob1uWnZkXuCb7vjLJhcC9g4XgwtQ7NqkF
-	RuRKmOMBxrT2+Gm9UDBTf5+WIjhE5QDVKf4XszZ92GPyxvY2JBlzPpnawlTmqYL9t83V
-	dydHMGziN50MFEdn9i37lcJFmlfdylWyrKX92HDZtCNTz9/1wMXVh/41eUFR/m3zOH1X
-	wiSA==
-X-Gm-Message-State: APjAAAVNcvmELKQbD5GwFMjOVdc9mg3YHs5kva59TscKoAk7LFLWHcTV
-	ZrK12Nbp5qo0Bv4vNoD0viGKeAHVdd7bVvzYFIw=
-X-Google-Smtp-Source: APXvYqz/20ySiMjT8VEg0SuSuqSgj//iq7IzEsxbNAqjVuocYfmITLrJ4grLgP0wqREWbK1krHbRkvwYQmZGS63dujI=
-X-Received: by 2002:a37:5009:: with SMTP id e9mr420143qkb.206.1556384570001;
-	Sat, 27 Apr 2019 10:02:50 -0700 (PDT)
+	bh=ekMmRPJ7sINfnSSkP89i/F33azZN2XozviWp5pPEa6w=;
+	b=fmmGiI1QC7Z7Bi00C0L3qRcEJ1j61155Ggt3Dc/ox35KF9X+kiny31nBINTS4mH6Si
+	zu1uBL2zVVmPiczHFNsWXQZLm1GTBeQBlW+4iLs9RMs/UeFpRujkqq8mA3Oi1uCDnhWh
+	9iG8bLKrgkTcCulXZSzTZpGoLzAnNBPGd1dZjMsSHW9EmdIjgME5PiZcDPh89/lmlsm5
+	zK+7zffF5T8/iJyK8/OiFey+SI7h54O2r/8JqYRnSG4Z5txj6yTTX37W8dxYeNmOsKYb
+	eC9rCPeOgLBFC5MyslQF3VWvc4lNMJxg2pXYkZrn2c9m+ByFj5w4Tp+4W6qtAdwPDX3e
+	fGSA==
+X-Gm-Message-State: APjAAAXx2hSM3yBGXE+CNYpN8QRTlTBogNqlCgraBe8x3LtoSDLAfdgo
+	Z1RwCif63dtzv27UxuY7/I8wFFOZy3KVZM0Z2CeDkUVO9ic=
+X-Google-Smtp-Source: APXvYqyw8jXYojWfQtWoY7jgChYmFTKbDwJ6fRiHulITySnEqYUvCbyKMcTd27MxsTjudh8z8o7xcHv48KAHb/jxQ+Q=
+X-Received: by 2002:a37:a849:: with SMTP id r70mr31825002qke.315.1556385180845;
+	Sat, 27 Apr 2019 10:13:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190418153432.16745-1-beniamin.sandu@gmail.com>
-In-Reply-To: <20190418153432.16745-1-beniamin.sandu@gmail.com>
+	<CAMKF1sozPTkxYHg67tNEok5SDgQ35EEu=WkLmaTro4CvZea_AA@mail.gmail.com>
+In-Reply-To: <CAMKF1sozPTkxYHg67tNEok5SDgQ35EEu=WkLmaTro4CvZea_AA@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 27 Apr 2019 10:02:24 -0700
-Message-ID: <CAMKF1sozPTkxYHg67tNEok5SDgQ35EEu=WkLmaTro4CvZea_AA@mail.gmail.com>
+Date: Sat, 27 Apr 2019 10:12:35 -0700
+Message-ID: <CAMKF1sr6Rn+epNv93hcamsoL0DSK7VWcZzYqmx0dEXZo6KJaKw@mail.gmail.com>
 To: Beniamin Sandu <beniaminsandu@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Beniamin Sandu <beniamin.sandu@gmail.com>
@@ -54,56 +55,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2019 17:02:50 -0000
+X-List-Received-Date: Sat, 27 Apr 2019 17:13:00 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-it fails to package the systemd files so please build with systemd in
-DISTRO_FEATURES
+On Sat, Apr 27, 2019 at 10:02 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> it fails to package the systemd files so please build with systemd in
+> DISTRO_FEATURES
+>
+> see https://errors.yoctoproject.org/Errors/Details/238577/
+>
 
-see https://errors.yoctoproject.org/Errors/Details/238577/
+right link to error is
 
-On Thu, Apr 18, 2019 at 8:35 AM Beniamin Sandu <beniaminsandu@gmail.com> wrote:
->
-> Signed-off-by: Beniamin Sandu <beniamin.sandu@gmail.com>
-> ---
->  .../recipes-support/unbound/unbound_1.9.2.bb  | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-networking/recipes-support/unbound/unbound_1.9.2.bb
->
-> diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.2.bb b/meta-networking/recipes-support/unbound/unbound_1.9.2.bb
-> new file mode 100644
-> index 000000000..9e0a24187
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/unbound/unbound_1.9.2.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "Unbound is a validating, recursive, and caching DNS resolver"
-> +DESCRIPTION = "Unbound's design is a set of modular components which incorporate \
-> +       features including enhanced security (DNSSEC) validation, Internet Protocol \
-> +       Version 6 (IPv6), and a client resolver library API as an integral part of the \
-> +       architecture"
-> +
-> +HOMEPAGE = "https://www.unbound.net/"
-> +SECTION = "net"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
-> +
-> +SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master"
-> +SRCREV="61a28c2ee5e60132f26725583b66c1cf8214bb78"
-> +
-> +inherit autotools pkgconfig
-> +
-> +DEPENDS = "openssl libevent libtool-native bison-native expat"
-> +RDEPENDS_${PN} = "bash openssl-bin"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +EXTRA_OECONF = "libtool=${TARGET_PREFIX}libtool"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+https://errors.yoctoproject.org/Errors/Details/238573/
+
+> On Thu, Apr 18, 2019 at 8:35 AM Beniamin Sandu <beniaminsandu@gmail.com> wrote:
+> >
+> > Signed-off-by: Beniamin Sandu <beniamin.sandu@gmail.com>
+> > ---
+> >  .../recipes-support/unbound/unbound_1.9.2.bb  | 22 +++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
+> >  create mode 100644 meta-networking/recipes-support/unbound/unbound_1.9.2.bb
+> >
+> > diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.2.bb b/meta-networking/recipes-support/unbound/unbound_1.9.2.bb
+> > new file mode 100644
+> > index 000000000..9e0a24187
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/unbound/unbound_1.9.2.bb
+> > @@ -0,0 +1,22 @@
+> > +SUMMARY = "Unbound is a validating, recursive, and caching DNS resolver"
+> > +DESCRIPTION = "Unbound's design is a set of modular components which incorporate \
+> > +       features including enhanced security (DNSSEC) validation, Internet Protocol \
+> > +       Version 6 (IPv6), and a client resolver library API as an integral part of the \
+> > +       architecture"
+> > +
+> > +HOMEPAGE = "https://www.unbound.net/"
+> > +SECTION = "net"
+> > +LICENSE = "BSD-3-Clause"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+> > +
+> > +SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master"
+> > +SRCREV="61a28c2ee5e60132f26725583b66c1cf8214bb78"
+> > +
+> > +inherit autotools pkgconfig
+> > +
+> > +DEPENDS = "openssl libevent libtool-native bison-native expat"
+> > +RDEPENDS_${PN} = "bash openssl-bin"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +EXTRA_OECONF = "libtool=${TARGET_PREFIX}libtool"
+> > --
+> > 2.17.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
