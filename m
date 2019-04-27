@@ -1,47 +1,46 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 651647DCCF
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E21727DB04
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 07:39:35 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id s15so7564980wra.12
+	Sat, 27 Apr 2019 08:11:55 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id 26so6754098wmj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 00:39:36 -0700 (PDT)
+	Sat, 27 Apr 2019 01:11:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=Yi4xiOV9d9iZzzCPOWt2YYwmIIfEvcXqjo/moOdZA7c=;
-	b=eYtA7QjuLumfzOJ1ugu4BDaWUCsWFSYmK40zlasFr586lJxn5IcbZB5JY726QH+x/r
-	nowyiEC+L+0X/9s05SdHMFutx2yuaK7+NrKqXMgzUgn4k/FKmDK/12nh+Y1sc8EwCydE
-	C/DBxRQMLAFpmi69fyodGyR0zLVjsPKgVcg+KeVjHIludtFSYZ7qjHMKvXKix2fxx/hp
-	GW5s1JZynlaVdqAqx6PqmnBKzso/bNS8agFlMRcPAslK8mLyPVB+gIcwY51lhTEch45C
-	mcHjLqHEkSvcW+ZBxx8ZmHMj4H/X7Dza2dxtH54QpAXa6/g6H2fDIa2n8Bh974zUfDDs
-	Zu/g==
+	bh=04i9czZmQmF52rJNrxhRlTjarGcV+Ahu+y9RbRZCnHM=;
+	b=DHXoGv36bneYvjTTsiNRrejcwiF0uY+YIuDDQRVkpE7oqLAQC4eoyjohZejcuakNDf
+	Ez5uD7xtmfPil0AyanI3T4+Aw+MaUNeQIFy2clTRKhch7q+D1XqfZGZH3tlUObpeVeG4
+	qVIEEz6x/UFahgoCK3wMeEt6Kb5+WHV59bbOgSFwGwNRApjCkLDoagOQ5g37mVOcH1Y3
+	MTxEswQtxBVoR03V9Wg36T3GrX2Z19j9ATyq2fsRo1XwQYHHpDlS7KbMtd3WVpG2gPx2
+	Tj1SbJgY0/hFYzmAPQLF9M1by+Ga+UXzFHOoZ+E67WieKdNvQz5ow3BuNSkH1YKE6hzv
+	Ydkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Yi4xiOV9d9iZzzCPOWt2YYwmIIfEvcXqjo/moOdZA7c=;
-	b=et4CiP0JP7HHTmQOmPrrK73zxD422NGzEY6pHp/5SfPEZvxfMvLMktWFSl3hDymh58
-	c4oCqLSkvzU9MVIVdJiCjAn6fxkiYpbsglWkusK1Ic3FeLtFxIYKof0TUtEKJTs0mKW5
-	38WUMDkf5HyeibWblk4xvoCBynHxPV+rE6cVNJPyfwgXPcKGNMRdJCUqB+TGSZXbMnYC
-	nLTO6uJ7D2+Ubq/tBNAgisvzhbl/C1JolHSxu2+t21kvLUT75+tSbE5wzHUr6TvM4vi5
-	CDI2+5euCuid4SCfSL+LuejDaYZgORa+DUSnpwDhktMig0OTm4EXi0o/dLfDiXZp9Wve
-	NN3g==
-X-Gm-Message-State: APjAAAWCNhhfCwqYCvKlia6WpViTRylWI0LeEbEmlm+adKo6YSRhh8Zo
-	ofue+OgIGDXeGCkHPD/NhNlFiG0F
-X-Google-Smtp-Source: APXvYqzKu/wzYjt9ah/pHg4yZHv+Vyt/2Tkd5F/176Sg3pa/rN0CaQ4AEJehVetGv7525NzrWbhgoA==
-X-Received: by 2002:a05:6000:1206:: with SMTP id
-	e6mr3523262wrx.221.1556350775316; 
-	Sat, 27 Apr 2019 00:39:35 -0700 (PDT)
+	bh=04i9czZmQmF52rJNrxhRlTjarGcV+Ahu+y9RbRZCnHM=;
+	b=YKxxtLbHjbEVSwdq9iJD5XCLQaDgoGfS35n6mgpolpEQBfG6TJkB1wXMqLFlqwefur
+	7QugoSZqQPBMUCX/vJ/jLOWrykkR2v/wSAWCXz0iJviRSoAP294/hmwg4htxlYP52Sax
+	gZsxz5h/HaAYfd/gEhwHP3XsdNlgv+ZqnyIJaLLbm4REoRfOuYr6QIoOSif1QINo1VQ6
+	bBsCuXzF2rBmfgINP2A2tP/RtEIcdG8hkMhOJGDCHRU9MO7Awj0KdBvWElYZQkilo+Vu
+	6P9j7+T0zfpzXJ4hFGxpu+XD4/saasZ7IMzLQvyt62tcllKJOpDIMbWYl5xpTkOFfXEk
+	k7Hw==
+X-Gm-Message-State: APjAAAW/9gOQbtkMYGhp8nW6iIKaTP4J2mO+8YFWmTDpvUx/Rp01fvzd
+	lBC1hrB2kmi5EksTYbL5+7BdqEDG
+X-Google-Smtp-Source: APXvYqz4DYjkyvD2vZIE9dYPHH6j1yLDJF87LE4lQAeF+qR3lJFQhCMXJonbuQzXmyxXUTar82/BbQ==
+X-Received: by 2002:a1c:730c:: with SMTP id d12mr10968011wmb.10.1556352715725; 
+	Sat, 27 Apr 2019 01:11:55 -0700 (PDT)
 Received: from localhost.localdomain ([31.157.66.55])
 	by smtp.gmail.com with ESMTPSA id
-	q24sm23778100wmj.26.2019.04.27.00.39.34
+	f10sm26987510wrs.17.2019.04.27.01.11.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 27 Apr 2019 00:39:34 -0700 (PDT)
+	Sat, 27 Apr 2019 01:11:55 -0700 (PDT)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Apr 2019 09:39:26 +0200
-Message-Id: <20190427073926.27941-1-costamagnagianfranco@yahoo.it>
+Date: Sat, 27 Apr 2019 09:42:24 +0200
+Message-Id: <20190427074224.28516-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.17.1
 Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
 	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
@@ -58,7 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2019 07:39:35 -0000
+X-List-Received-Date: Sat, 27 Apr 2019 08:11:56 -0000
 
 Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
@@ -564,7 +563,7 @@ diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb b/meta-oe/recipe
 similarity index 78%
 rename from meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
 rename to meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb
-index 67edf5691..56b4f3acd 100644
+index 67edf5691..1b1265fe3 100644
 --- a/meta-oe/recipes-support/cpprest/cpprest_2.10.12.bb
 +++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb
 @@ -8,10 +8,11 @@ DEPENDS = "openssl websocketpp zlib boost brotli"
@@ -578,7 +577,7 @@ index 67edf5691..56b4f3acd 100644
 -# tag 2.10.12
 -SRCREV= "d4fb1cf7f7d22c12e2e442ba5a5e98d09b0a28ab"
 +# tag 2.10.13
-+SRCREV= ""9d8f544001cb74544de6dc8c565592f7e2626d6e
++SRCREV= "9d8f544001cb74544de6dc8c565592f7e2626d6e"
  
  S = "${WORKDIR}/git"
  
