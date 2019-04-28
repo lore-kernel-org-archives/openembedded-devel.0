@@ -1,30 +1,23 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 196AA7CB4F
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 13C7F7D7AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Apr 2019 02:57:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,403,1549900800"; d="scan'208";a="60878228"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2019 10:57:56 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9AAEA4CDBF74
+	Sun, 28 Apr 2019 05:55:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3S5tafX021897
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Apr 2019 10:57:58 +0800 (CST)
-Received: from localhost.local (10.167.225.84) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Sun, 28 Apr 2019 10:58:03 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Sat, 27 Apr 2019 22:55:36 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Sat, 27 Apr 2019 22:55:36 -0700
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 28 Apr 2019 10:58:50 +0800
-Message-ID: <20190428025850.12049-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Sun, 28 Apr 2019 13:55:34 +0800
+Message-ID: <1556430934-190585-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.84]
-X-yoursite-MailScanner-ID: 9AAEA4CDBF74.AA1A5
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pyasn1: upgrade 0.4.4 -> 0.4.5
+Subject: [meta-oe][PATCH] postgresql: fix compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +30,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Apr 2019 02:57:57 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 28 Apr 2019 05:55:36 -0000
 Content-Type: text/plain
 
--Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
+From: Changqing Li <changqing.li@windriver.com>
 
--Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
+configuration:
+MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+MULTILIBS ?= "multilib:lib32 multilib:libn32"
+DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+require conf/multilib.conf
 
--License-Update: Copyright year updated to 2019.
+SELECTED_OPTIMIZATION = "${DEBUG_OPTIMIZATION}"
+DEBUG_BUILD = "1"
+EXTRA_IMAGE_FEATURES += "dbg-pkgs"
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+with above configuration and option -Og, postgresql compile failed with:
+| make[4]: Nothing to be done for 'all'.
+| make[4]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/fe_utils'
+| {standard input}: Assembler messages:
+| {standard input}:58887: Error: branch out of range
+| <builtin>: recipe for target 'tab-complete.o' failed
+| make[3]: *** [tab-complete.o] Error 1
+| make[3]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/bin/psql'
+| Makefile:41: recipe for target 'all-psql-recurse' failed
+| make[2]: *** [all-psql-recurse] Error 2
+
+replace -Og with -O to fix this error
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-pyasn1.inc       | 6 +++---
- .../{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb}      | 0
- .../{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb}    | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb} (100%)
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
-index ab34d2508..3827feaba 100644
---- a/meta-python/recipes-devtools/python/python-pyasn1.inc
-+++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "Python library implementing ASN.1 types."
- HOMEPAGE = "http://pyasn1.sourceforge.net/"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=815ac3f9ca693006349094b358ab3155"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a14482d15c2249de3b6f0e8a47e021fd"
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 85f1917..1d985a4 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -72,6 +72,11 @@ EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
+ EXTRA_OECONF_sh4 += "--disable-spinlocks"
+ EXTRA_OECONF_aarch64 += "--disable-spinlocks"
  
--SRC_URI[md5sum] = "0d182b71e1f72fe147d7957bc90be7f2"
--SRC_URI[sha256sum] = "f58f2a3d12fd754aa123e9fa74fb7345333000a035f3921dbdaa08597aa53137"
-+SRC_URI[md5sum] = "f3c0cfbf882a20811be5ad5a41f74b82"
-+SRC_URI[sha256sum] = "da2420fe13a9452d8ae97a0e478adde1dee153b11ba832a95b223a2ba01c10f7"
- 
- RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-codecs \
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
++DEBUG_OPTIMIZATION_remove_mips = " -Og"
++BUILD_OPTIMIZATION_remove_mips = " -Og"
++DEBUG_OPTIMIZATION_append_mips = " -O"
++BUILD_OPTIMIZATION_append_mips = " -O"
++
+ PACKAGES_DYNAMIC += "^${PN}-plperl \
+     ^${PN}-pltcl \
+     ^${PN}-plpython \
 -- 
-2.20.1
-
-
+2.7.4
 
 
