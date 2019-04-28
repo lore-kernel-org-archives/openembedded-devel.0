@@ -1,50 +1,30 @@
-Return-Path: <beniaminsandu@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 358977DC48
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 146377D922
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 21:36:05 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id b1so9655501wru.3
+	Sun, 28 Apr 2019 02:25:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,403,1549900800"; d="scan'208";a="60875410"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2019 10:25:10 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 621FA4CDAACA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2019 14:36:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=xurmwT24gUi1YRNcm0Px/VS/RwZ+82ZAt3vsvtJcfNE=;
-	b=Lkqj7smUSeX6vSy+GJ6C7lQNMRIfez1y1LCDhaGINrxUcpDM/GALwmmfrtvx2T7lLD
-	EulPAvgRBHQtPS7ZTv8aIL4AaT2uA3+Qh+Ub5HWWEpzLudN9X744JbDLOmFt3QXXKUrD
-	lM/9rkiWrY/FDaB5cM4oPFKx9MANxFylzjmfKkDpbkD9Au/WNkq89nsbte+NjxXd/Qyn
-	IOK0mhBumKlL0EI3GaOI3hz6mk4AniuDaVov6OG8X9Zove+uZQfjTLljzDCPeRJ+lodw
-	BE4iEFQQi+WXCrUs/PFCz8osD3CkoA7rCSdXHtxTwFXay0AG0QACNUns5GIIbOXJKl1U
-	gslA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xurmwT24gUi1YRNcm0Px/VS/RwZ+82ZAt3vsvtJcfNE=;
-	b=h28MKRTyA0dY/rveCdK2zPSseDEZvnElYYwS51dU83pn/OLvZ1+TSpy0BsS3utLKnb
-	05+OV4w2+/vnLPKV8CCC5YM0SjXY83NgttPTUlY/n0Rr24bmqhvoGGXzXGa3ZEayRQen
-	gGBHcC7gMulgAqu1ka5szLL/9l3IU7WOl4SuUBK9tZ/wOkQwQP5y7mtsElja17the07K
-	eeAUVjCzX0JcQg8RIwebaUXr3TvPmdi49Jo/ZLJfTWcfPyaz8eWTRDk6QxsODp0lmS3r
-	tXREe8QxMVyJRccM6z3hxdNauV/BOUZ9OQqBDYvwDFYWWpIoUv3/44RuTrn+jAhhYgoz
-	TaLg==
-X-Gm-Message-State: APjAAAXmr0VoCJGBVbR6F+sDn1xVcJDVlD8L7hQ7RfRzO8/lb+LCQDgA
-	rnud8I1Fnmk+lh6Ms0xqcTWFpXqxvgE=
-X-Google-Smtp-Source: APXvYqxxfRGX75qelxJStC7OaodHGvFEPYcW9RNPa8cNIe92ZMEMa1K6HkkV/sofJ2kIeMI2OtM1SA==
-X-Received: by 2002:a05:6000:10cc:: with SMTP id
-	b12mr10637034wrx.182.1556400965492; 
-	Sat, 27 Apr 2019 14:36:05 -0700 (PDT)
-Received: from localhost.localdomain (5-13-153-104.residential.rdsnet.ro.
-	[5.13.153.104])
-	by smtp.gmail.com with ESMTPSA id x20sm954257wrg.29.2019.04.27.14.36.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 27 Apr 2019 14:36:04 -0700 (PDT)
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-X-Google-Original-From: Beniamin Sandu <beniamin.sandu@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Apr 2019 00:35:51 +0300
-Message-Id: <20190427213551.14485-1-beniamin.sandu@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Beniamin Sandu <beniamin.sandu@gmail.com>
-Subject: [meta-networking][PATCH] unbound: create recipe for version 1.9.1
+	Sun, 28 Apr 2019 10:25:11 +0800 (CST)
+Received: from localhost.local (10.167.225.84) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Sun, 28 Apr 2019 10:25:15 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 28 Apr 2019 10:26:02 +0800
+Message-ID: <20190428022602.7377-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.84]
+X-yoursite-MailScanner-ID: 621FA4CDAACA.A8AAF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pip: upgrade 18.0 -> 19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,57 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2019 21:36:05 -0000
+X-List-Received-Date: Sun, 28 Apr 2019 02:25:11 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Beniamin Sandu <beniamin.sandu@gmail.com>
+-Upgrade from python-pip_18.0.bb to python-pip_19.1.bb.
+
+-License-Update: Copyright year updated to 2019.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../recipes-support/unbound/unbound_1.9.1.bb  | 36 +++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-networking/recipes-support/unbound/unbound_1.9.1.bb
+ .../python/{python-pip_18.0.bb => python-pip_19.1.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pip_18.0.bb => python-pip_19.1.bb} (62%)
 
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.1.bb b/meta-networking/recipes-support/unbound/unbound_1.9.1.bb
-new file mode 100644
-index 000000000..84bbe6581
---- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound_1.9.1.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Unbound is a validating, recursive, and caching DNS resolver"
-+DESCRIPTION = "Unbound's design is a set of modular components which incorporate \
-+	features including enhanced security (DNSSEC) validation, Internet Protocol \
-+	Version 6 (IPv6), and a client resolver library API as an integral part of the \
-+	architecture"
-+
-+HOMEPAGE = "https://www.unbound.net/"
-+SECTION = "net"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
-+
-+SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master"
-+SRCREV="16cc196bf28aec604ed2dae2b5af2ed82c8a58d6"
-+
-+inherit autotools pkgconfig systemd
-+
-+DEPENDS = "openssl libevent libtool-native bison-native expat"
-+RDEPENDS_${PN} = "bash openssl-bin"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECONF = "libtool=${TARGET_PREFIX}libtool \
-+		--with-ssl=${STAGING_EXECPREFIXDIR}"
-+
-+PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
-+PACKAGECONFIG[systemd] = "--enable-systemd,,systemd"
-+
-+do_install_append() {
-+	# systemd support
-+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+		install -d ${D}${systemd_unitdir}/system/
-+		install -m 0644 ${B}/contrib/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
-+	fi
-+}
-+
-+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+diff --git a/meta-python/recipes-devtools/python/python-pip_18.0.bb b/meta-python/recipes-devtools/python/python-pip_19.1.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python-pip_18.0.bb
+rename to meta-python/recipes-devtools/python/python-pip_19.1.bb
+index 6b943b008..f451a8729 100644
+--- a/meta-python/recipes-devtools/python/python-pip_18.0.bb
++++ b/meta-python/recipes-devtools/python/python-pip_19.1.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "PIP is a tool for installing and managing Python packages"
+ HOMEPAGE = "https://pip.pypa.io/"
+ LICENSE = "MIT & LGPL-2.1"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=593c6cd9d639307226978cbcae61ad4b"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8ba06d529c955048e5ddd7c45459eb2e"
+ 
+-SRC_URI[md5sum] = "52f75ceb21e96c258f289859a2996b60"
+-SRC_URI[sha256sum] = "a0e11645ee37c90b40c46d607070c4fd583e2cd46231b1c06e389c5e814eed76"
++SRC_URI[md5sum] = "22e3726252b492ce24312c2b43d0127f"
++SRC_URI[sha256sum] = "d9137cb543d8a4d73140a3282f6d777b2e786bb6abb8add3ac5b6539c82cd624"
+ 
+ inherit pypi setuptools
+ 
 -- 
-2.17.1
+2.20.1
+
+
 
 
