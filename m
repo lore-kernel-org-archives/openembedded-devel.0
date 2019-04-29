@@ -1,50 +1,46 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it1-f169.google.com (mail-it1-f169.google.com
-	[209.85.166.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 548087DC12
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C33C7DC69
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 15:54:27 +0000 (UTC)
-Received: by mail-it1-f169.google.com with SMTP id r85so8396609itc.2
+	Mon, 29 Apr 2019 17:11:22 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id y49so7098191qta.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 08:54:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	Mon, 29 Apr 2019 10:11:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dqT6Svari9eR7GsSNlRTdVBPBup5DiqgO9hw9niG+/U=;
-	b=DXHGqyTy0NGm5LhlRJBqLFrb/3KeIxqNIeojtRy8YhnZqIa+0ejmttc9vFO3qGZAK9
-	5dT1DJMsABw0GAXGyYLnqalXZL+scYYU/Grf2sNK3c3drG423Qh/6A6wvf5r+ay/xQDK
-	q0l4Mr4r99XB4ub9SfCr3Y9VCo9SDPgcTxjw4gL27upbZwnVBWnySAnGHMOmw6YwTalM
-	13GK0VNdzhyJo1hpKe7u2GpYYMws9LBZXsbgmYnAY/781gdvc8CUc6Ok8BrlMLfXI+OB
-	8XvQKuEtKH0Db+tczMDvCnO9icP6K+vYWLxZIy89gIvx0Yevgl582/PYyinfGmAAJj8N
-	Oq4w==
+	:cc; bh=IM3zH3NU5De6UxCeKe9P6r+xcq92c7+EDZ7SzvCuU8E=;
+	b=ammxtSToxcI9cGxoT4Ma2B5lAmJgdzBGM+2LLRXeUyCUMxPJEvFPfZcMbbe3xH8T1Q
+	hOUEEpKk5ueUOdcWbMEXOBPLGAPuCOUuy7Dl9869s3u0RRUtLV8xArLcHPdabfWoKgwm
+	9C7/7Kl1sxj4yHxQUjW0QNhqZY9U1HkXO8axGUwqABgpRusJw99zqhiWQAPxyuWMkDsB
+	buFcCkb3vIIpFyfXYOgFFrCiVMLiVb+CpVw8r034dYluJ+7xWMpnDkV98lsMym8GgC2w
+	Hg9hqyBw+rSTIdVus10ro+qTC4njqUSadTp/SYgauUaAEqqLy71zeeXZ2hFL51g4V5yZ
+	qrdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=dqT6Svari9eR7GsSNlRTdVBPBup5DiqgO9hw9niG+/U=;
-	b=azFzm5hHy0ImgnURIxxwg17SmIMfnmjnR36TSmUtW0wdrc4y3Br5aBbGK2mMWOaKG1
-	Jo4m9QIT0oBLBlzr9TUfbkC1Kumuumtr/1HTV79xPsm1vSAq++6quUwtSJ1x/Re1Q0E+
-	XYCL/E9ylwjKMvV2AJKz0YOnJKfb4D0cacpFKL0Q7ARhnIuFeG777waKtsQFTzpkEPYx
-	v2FszutA0tu6aF2LatgPm6UG+k2d7CIKze2YeHG4RnJItt2uA9zf3RHZfXlB+Dfw+RFU
-	B2VJ6U0qEc/3bLJ6SSgsnDJdY1Kgjs026gFRkIJf3ruSyDo8KN1qsUYFREiOoHdtN6fR
-	8pFQ==
-X-Gm-Message-State: APjAAAVyJkN2le3zEh9svleVyuYPliByhjb0mf1gli/YkpjWmmYs1g2t
-	z/kV0aqvFrbMuxo/8K3NfVz1I7ER25Eh9SbVjogrbA==
-X-Google-Smtp-Source: APXvYqyHEu2qWQ2yRAcIkaVy2HGlVJDRizXa+ODBoFNnXTYEKWzkx0bmrOGtQSuoOdoWBaSAjKn39e1ReYh2O19j+QQ=
-X-Received: by 2002:a24:5ccf:: with SMTP id
-	q198mr20439137itb.130.1556553268469; 
-	Mon, 29 Apr 2019 08:54:28 -0700 (PDT)
+	bh=IM3zH3NU5De6UxCeKe9P6r+xcq92c7+EDZ7SzvCuU8E=;
+	b=liJdUkGhsPBqXs/9h4jLMqhoZ3B/bK2mOFpMolQ9Aio4S/9L4H3p6f8X/miNMmQAMO
+	Hyj3kdHE6oVlBoPkDW1KZ2LchkXlCxCpH5o7W96V6/NL0U6rdL5EIBCszfUNJAGMRaN8
+	Ak4OrnDbD81t2DXiNUNVHvw01Oh2TT96NQsQDDbm0Yy4Z2OCmVlF9KORiy/WXteScjoi
+	dcr0lHxlmDNsn/4pFGloJCA9VHdZSpq4SaoDlJAtynNJcIxqAw2j3c8me8YOX2/iOo8O
+	/mEaP30Z4OKz+90TJItgGy7SHWDoRNkUgAP49kufV4mN9fciV1GeBdL8zq6HKbibl5Ro
+	rUzA==
+X-Gm-Message-State: APjAAAUEVoCkD6jfHwuronZq6mux5UhNMQZAma3dzSpQfEpN5UMEP3Yu
+	7hulkUOMJ6KNra95Xhfm9cs6M5tU8VIvrzSRVWs=
+X-Google-Smtp-Source: APXvYqwsVuz6q27+V+ZE9UpKGRM0Mglwx5YHWtI3QTY233gFHNZ9fzgGcB+kLge8+4GVZsLzH2cGeanYLXzR4rlhRe0=
+X-Received: by 2002:a0c:92f9:: with SMTP id c54mr19095211qvc.194.1556557883394;
+	Mon, 29 Apr 2019 10:11:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190429131914.123617-1-sean@geanix.com>
-	<32ba7bfc-2556-0707-fd27-51d44338aa52@gmail.com>
-	<a10c0685-3602-efd2-fbec-4de81e5980ee@geanix.com>
-In-Reply-To: <a10c0685-3602-efd2-fbec-4de81e5980ee@geanix.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 29 Apr 2019 16:54:17 +0100
-Message-ID: <CAJTo0LaPvenK8_QYicbihHT68gFg+2HbF-410MsXpe37Hepf5Q@mail.gmail.com>
-To: Sean Nyekjaer <sean@geanix.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] cannelloni: new package, CAN to ethernet proxy
+References: <1556430934-190585-1-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1556430934-190585-1-git-send-email-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 29 Apr 2019 10:10:57 -0700
+Message-ID: <CAMKF1sqOhmF0_ifkFvLBH2SGEtudLRvCMg0fDwG2S8u0RtmQ6Q@mail.gmail.com>
+To: Changqing Li <changqing.li@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] postgresql: fix compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,22 +53,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2019 15:54:27 -0000
+X-List-Received-Date: Mon, 29 Apr 2019 17:11:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 29 Apr 2019 at 16:04, Sean Nyekjaer via Openembedded-devel
-<openembedded-devel@lists.openembedded.org> wrote:
-> > Version by hash is not optimal. Can you add PV or change the recipe name
-> > to include the version?
-> >
-> > - armin
-> Hi Armin
+On Sat, Apr 27, 2019 at 10:56 PM <changqing.li@windriver.com> wrote:
 >
-> Upstream have not released in 3 years. But new commits are quite useful...
-> So do you have an idea to what I can add as a PV?
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> configuration:
+> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+> MULTILIBS ?= "multilib:lib32 multilib:libn32"
+> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+> require conf/multilib.conf
+>
+> SELECTED_OPTIMIZATION = "${DEBUG_OPTIMIZATION}"
+> DEBUG_BUILD = "1"
+> EXTRA_IMAGE_FEATURES += "dbg-pkgs"
+>
+> with above configuration and option -Og, postgresql compile failed with:
+> | make[4]: Nothing to be done for 'all'.
+> | make[4]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/fe_utils'
+> | {standard input}: Assembler messages:
+> | {standard input}:58887: Error: branch out of range
+> | <builtin>: recipe for target 'tab-complete.o' failed
+> | make[3]: *** [tab-complete.o] Error 1
+> | make[3]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/bin/psql'
+> | Makefile:41: recipe for target 'all-psql-recurse' failed
+> | make[2]: *** [all-psql-recurse] Error 2
+>
+> replace -Og with -O to fix this error
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  meta-oe/recipes-dbs/postgresql/postgresql.inc | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> index 85f1917..1d985a4 100644
+> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> @@ -72,6 +72,11 @@ EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
+>  EXTRA_OECONF_sh4 += "--disable-spinlocks"
+>  EXTRA_OECONF_aarch64 += "--disable-spinlocks"
+>
+> +DEBUG_OPTIMIZATION_remove_mips = " -Og"
+> +BUILD_OPTIMIZATION_remove_mips = " -Og"
+> +DEBUG_OPTIMIZATION_append_mips = " -O"
+> +BUILD_OPTIMIZATION_append_mips = " -O"
+> +
 
-https://github.com/mguentner/cannelloni/releases says the last release
-was either 20160414 or 0.5.  The idiom is "<last release>+git<sha>.
+perhaps its better to include mipsel as well while here.
 
-Ross
+>  PACKAGES_DYNAMIC += "^${PN}-plperl \
+>      ^${PN}-pltcl \
+>      ^${PN}-plpython \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
