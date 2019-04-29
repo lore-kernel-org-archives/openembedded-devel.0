@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C33C7DC69
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+	[209.85.160.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 55A717DC48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 17:11:22 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id y49so7098191qta.7
+	Mon, 29 Apr 2019 17:14:03 +0000 (UTC)
+Received: by mail-qt1-f170.google.com with SMTP id h16so7137203qtk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 10:11:24 -0700 (PDT)
+	Mon, 29 Apr 2019 10:14:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=IM3zH3NU5De6UxCeKe9P6r+xcq92c7+EDZ7SzvCuU8E=;
-	b=ammxtSToxcI9cGxoT4Ma2B5lAmJgdzBGM+2LLRXeUyCUMxPJEvFPfZcMbbe3xH8T1Q
-	hOUEEpKk5ueUOdcWbMEXOBPLGAPuCOUuy7Dl9869s3u0RRUtLV8xArLcHPdabfWoKgwm
-	9C7/7Kl1sxj4yHxQUjW0QNhqZY9U1HkXO8axGUwqABgpRusJw99zqhiWQAPxyuWMkDsB
-	buFcCkb3vIIpFyfXYOgFFrCiVMLiVb+CpVw8r034dYluJ+7xWMpnDkV98lsMym8GgC2w
-	Hg9hqyBw+rSTIdVus10ro+qTC4njqUSadTp/SYgauUaAEqqLy71zeeXZ2hFL51g4V5yZ
-	qrdQ==
+	:cc; bh=5HU+RsTO1saJm+X1QUJAMN1Z6aEWkfZOOaHIVVeQzd0=;
+	b=S8h/WxUlbwxcBFbCfGMOigLzSxipNypKAKsKBAk2JO7O6n4e1kWnKKHI+43NHjqouB
+	/Zl+AW7mNKV/6XTxv1a1m2K0XS8IVTAf8T+WsYA5o1CW3cHnjPEJZpQjnTOVaawOKBuL
+	skpwQI3Jx/QJ5K37Gf8jiK+ULw2mqGqmmrd60wuOZD8ToPoZaJvD4eVbdr2DBDLGramW
+	4t5iNPDuG774syCxwEzJys9QSeb5Rc+OMU9JCI92+oagic0ZZlhjS6fkXnEd29mcW1xJ
+	9TXk6M/yAZIOnmlFwPExVoQbnqWRc1Kme9dRwkBgeVJdX9UQd4K3WrghXaRDO1SrDWoe
+	HhmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=IM3zH3NU5De6UxCeKe9P6r+xcq92c7+EDZ7SzvCuU8E=;
-	b=liJdUkGhsPBqXs/9h4jLMqhoZ3B/bK2mOFpMolQ9Aio4S/9L4H3p6f8X/miNMmQAMO
-	Hyj3kdHE6oVlBoPkDW1KZ2LchkXlCxCpH5o7W96V6/NL0U6rdL5EIBCszfUNJAGMRaN8
-	Ak4OrnDbD81t2DXiNUNVHvw01Oh2TT96NQsQDDbm0Yy4Z2OCmVlF9KORiy/WXteScjoi
-	dcr0lHxlmDNsn/4pFGloJCA9VHdZSpq4SaoDlJAtynNJcIxqAw2j3c8me8YOX2/iOo8O
-	/mEaP30Z4OKz+90TJItgGy7SHWDoRNkUgAP49kufV4mN9fciV1GeBdL8zq6HKbibl5Ro
-	rUzA==
-X-Gm-Message-State: APjAAAUEVoCkD6jfHwuronZq6mux5UhNMQZAma3dzSpQfEpN5UMEP3Yu
-	7hulkUOMJ6KNra95Xhfm9cs6M5tU8VIvrzSRVWs=
-X-Google-Smtp-Source: APXvYqwsVuz6q27+V+ZE9UpKGRM0Mglwx5YHWtI3QTY233gFHNZ9fzgGcB+kLge8+4GVZsLzH2cGeanYLXzR4rlhRe0=
-X-Received: by 2002:a0c:92f9:: with SMTP id c54mr19095211qvc.194.1556557883394;
-	Mon, 29 Apr 2019 10:11:23 -0700 (PDT)
+	bh=5HU+RsTO1saJm+X1QUJAMN1Z6aEWkfZOOaHIVVeQzd0=;
+	b=Dpdp/2mSWlB30lG51k/gaYsWTaJ34pGdigqteJmSR/Dh9XBjD6kzs1rEixMcHEN/mL
+	uXav0TOd+BT1XdQ+wQFApKFT2TXqxZuvkssN6vFLaELBSu/kmXtGH+rV3xVFNbiNAJdJ
+	ChbmxM0+1fStHatXrJYB5fhUTFgpnrSZp8tm2hq6Lr4WU+et0j9VR/Lii2qhdNOqp9ha
+	5nlOy6cv3P08sukuoG5nS0J/p8Cx0ZgnsMEZ/6ZeZc6m/c1mc295IvfpM6nmUYSNaRjN
+	o207E1455tHQ7c9YSW4Ki9tsBniFXKTb4SNsGPjtvFYdtUNYjJjbF7ycHEcDgFzN4Zt6
+	s1EA==
+X-Gm-Message-State: APjAAAX3nXk9r+qiGH2jdVxiyigqU+3qGx8kVMChbneQDvbm1dtwLZpl
+	gxm+0i8st/naVyN+V5ql1mAczWzDYzIxcTBA6SCgxTQC6vM=
+X-Google-Smtp-Source: APXvYqyxqXajeYUTMOUEDsABVdCCYD7Bfy+3k1mOj6s4Cd/IL+CbIAX4qjv7FF2IlP9VokASgIlCvuPuIe+5vDteDGQ=
+X-Received: by 2002:a0c:92f9:: with SMTP id c54mr19106970qvc.194.1556558044079;
+	Mon, 29 Apr 2019 10:14:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <1556430934-190585-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1556430934-190585-1-git-send-email-changqing.li@windriver.com>
+References: <20190421193713.4794-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190421193713.4794-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Apr 2019 10:10:57 -0700
-Message-ID: <CAMKF1sqOhmF0_ifkFvLBH2SGEtudLRvCMg0fDwG2S8u0RtmQ6Q@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
+Date: Mon, 29 Apr 2019 10:13:38 -0700
+Message-ID: <CAMKF1spAU4_2bYaizv_McRWV_SvgKH8-aiNS3jmC7X+47QKh7w@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] postgresql: fix compile error
+Subject: Re: [PATCH][meta-networking] xl2tpd: update to 1.3.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,63 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2019 17:11:23 -0000
+X-List-Received-Date: Mon, 29 Apr 2019 17:14:03 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Apr 27, 2019 at 10:56 PM <changqing.li@windriver.com> wrote:
+Fails on rpi3
+
+https://errors.yoctoproject.org/Errors/Details/238633/
+
+
+On Sun, Apr 21, 2019 at 12:37 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
 >
-> From: Changqing Li <changqing.li@windriver.com>
+> License checksum changed due to formatting change (see @1611d6f028fe3).
 >
-> configuration:
-> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
-> MULTILIBS ?= "multilib:lib32 multilib:libn32"
-> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
-> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
-> require conf/multilib.conf
->
-> SELECTED_OPTIMIZATION = "${DEBUG_OPTIMIZATION}"
-> DEBUG_BUILD = "1"
-> EXTRA_IMAGE_FEATURES += "dbg-pkgs"
->
-> with above configuration and option -Og, postgresql compile failed with:
-> | make[4]: Nothing to be done for 'all'.
-> | make[4]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/fe_utils'
-> | {standard input}: Assembler messages:
-> | {standard input}:58887: Error: branch out of range
-> | <builtin>: recipe for target 'tab-complete.o' failed
-> | make[3]: *** [tab-complete.o] Error 1
-> | make[3]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/bin/psql'
-> | Makefile:41: recipe for target 'all-psql-recurse' failed
-> | make[2]: *** [all-psql-recurse] Error 2
->
-> replace -Og with -O to fix this error
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  meta-oe/recipes-dbs/postgresql/postgresql.inc | 5 +++++
->  1 file changed, 5 insertions(+)
+>  meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc       | 2 +-
+>  .../xl2tpd/{xl2tpd_1.3.6.bb => xl2tpd_1.3.14.bb}          | 0
+>  meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb    | 8 --------
+>  3 files changed, 1 insertion(+), 9 deletions(-)
+>  rename meta-networking/recipes-protocols/xl2tpd/{xl2tpd_1.3.6.bb => xl2tpd_1.3.14.bb} (100%)
+>  delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
 >
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> index 85f1917..1d985a4 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> @@ -72,6 +72,11 @@ EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
->  EXTRA_OECONF_sh4 += "--disable-spinlocks"
->  EXTRA_OECONF_aarch64 += "--disable-spinlocks"
+> diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+> index d037c7cfc..b3d466c3b 100644
+> --- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+> +++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+> @@ -6,7 +6,7 @@ DEPENDS = "ppp virtual/kernel"
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
 >
-> +DEBUG_OPTIMIZATION_remove_mips = " -Og"
-> +BUILD_OPTIMIZATION_remove_mips = " -Og"
-> +DEBUG_OPTIMIZATION_append_mips = " -O"
-> +BUILD_OPTIMIZATION_append_mips = " -O"
-> +
-
-perhaps its better to include mipsel as well while here.
-
->  PACKAGES_DYNAMIC += "^${PN}-plperl \
->      ^${PN}-pltcl \
->      ^${PN}-plpython \
+>  LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
+>
+>  SRC_URI = "git://github.com/xelerance/xl2tpd.git \
+>  "
+> diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
+> similarity index 100%
+> rename from meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.6.bb
+> rename to meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
+> diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+> deleted file mode 100644
+> index 88ae5d6f8..000000000
+> --- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -require xl2tpd.inc
+> -
+> -# This is v1.3.6 plus some commits.  There is no tag for this commit.
+> -#
+> -PV = "1.3.9+git${SRCPV}"
+> -
+> -SRCREV = "f114c10ac532051badeca0132b144a2f1596f047"
+> -
 > --
-> 2.7.4
+> 2.17.1
 >
 > --
 > _______________________________________________
