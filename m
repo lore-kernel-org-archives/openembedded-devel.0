@@ -1,48 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id B5E327DADE
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-it1-f176.google.com (mail-it1-f176.google.com
+	[209.85.166.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 692BE7DC62
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 19:09:17 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id f25so13263906qtc.8
+	Mon, 29 Apr 2019 19:50:23 +0000 (UTC)
+Received: by mail-it1-f176.google.com with SMTP id z4so971600itc.3
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 12:09:19 -0700 (PDT)
+	Mon, 29 Apr 2019 12:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=BFcLokznfTbeS+5FjGUZf2rUoVPbo+ysi68lPZ1F/a4=;
-	b=Ut+Fa2rrzONXh3TPKivnbv/xcB7VXDWtuszgGgd/FNdfINqtRehlT37Z02geCXHSDb
-	iHT2Oztk0aakHF5/17ZAC6CGDqK/ch2WbsOh9m1xs2HJ4shvy5SXTkzYfPB+yDY6L1Tt
-	AlemR5a8JA6vVW3MlmCDUjAm0WV7yzWUZaPeaEHPMkd0Sbez4Q1ltfg6NCN/jmURQ/W6
-	ck4UDkAU2V0pnZIzotK0AS8BSN7OubPGZ7kqyfcMekSJM2/1BDksHISHAGEa3/KaC/lk
-	p+D9Yxf4BGRV04FhGIetF80j2QwO0N/K1tT1TKKreWwfWmZUy1RZSQ8dg64yvgKJD5JW
-	Kiyg==
+	:cc; bh=OPTqFTDevI5nvxb90SpHRMJ/ZHH3ziim0ffwPR8eXMI=;
+	b=YFojm6Q0kJAm2LtqpAjU/4qCxL80zR3o7iMbeCTJI90cNlEO8Zfh+EAL2pAjeafaA5
+	UfExG/IawaMVZ4vo3cgc51VYnod+sqYtOmYnU08ygCB5dpopVCZnX9MgjMqlaQJqgG71
+	4rn6wCNhZBiFIacKZevIyvM0spaCduzXBOjpJBMe6cJFmXjAw3TmwENeF8WF1YP2+H4C
+	leV2pVQ+SdrUP6ovUYj72/ZYEWCxjm3EzlKJQJJYreeoYSO2r7xzxR/71V/h/wI+kitV
+	QGatHZmMPmnicTS49EuvCH3X5T4OGgI/0BS2CIBoZSY9rf+IcxgP3OHEbG6eT9Uu4Dl9
+	XaXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=BFcLokznfTbeS+5FjGUZf2rUoVPbo+ysi68lPZ1F/a4=;
-	b=YFtsB8E8NG/kwshqaAYHRzzgDVFZX49jcPRuEwafneGUVXs+jw5KT4qpxr4usxB97q
-	MQsKReVQhdJAMop9odROYYZlay4lT7iNL/lRdpKEHPUnYR4czzsfe32bioerbhwoj3Eg
-	joX+59IUm7y34mlsG+rltT+OxUUrrZngxlTQhkidp87AOKu9Gt5+gfqt2mgw2P2XGFXK
-	gOfIPX1VedrWu4iqqsI0LEEiyQcZFFrL1qqtoNmb+ClW9SZeAijZeReQmJC4eW3BphSD
-	D3nJ0EMNsKeh0sNpMHr8SjZOw3QkrSVDvnCZu9NxFi2BP0o+oDJOSrTVajddcUQImHgH
-	nrHQ==
-X-Gm-Message-State: APjAAAV8avJHNu5AhQv5vsGAsOHt7c9vmPo5rMitaa+IhEn199lQUkcR
-	+79j8vEhqxK2VQplwyLvHrKOl8LFFj3YUZTqeO4=
-X-Google-Smtp-Source: APXvYqz8g4wUF/0yZaEN+yN/GI+BLkeCRp/6AeeXig6XhKH7xOnswWbKa4A2WAX8U4RbcMWQ3XIwcdvJLrFNhpZxdbU=
-X-Received: by 2002:a0c:b620:: with SMTP id f32mr43840681qve.228.1556564958445;
-	Mon, 29 Apr 2019 12:09:18 -0700 (PDT)
+	bh=OPTqFTDevI5nvxb90SpHRMJ/ZHH3ziim0ffwPR8eXMI=;
+	b=OdbFYlzstSDnP2ADn9mgujKZBfhckaqRQb7H/0bifOFZGo+XEh4+xC/YIsODl6Z8id
+	4HxbIaYgIXXaydbvqogw+SOxd9RebkAxSvGjj3BZ6qyGQIEHp5KRLBvvq9xbYjYZcQcp
+	Pi3N8GCkEgQVEXn9phHih1/k0Z1jlZ7w+bVMA1py9m56Oolq+KTATPNt0sK36YXaSd4B
+	wJzTZWeh49UXKuNlaabhJM2++oOjdg+YsMRxmhePvXZij98nIHgJRuBK5cUhaBtWJpPZ
+	J11VIa+PV3K/S8f1q47k6San+RNFqlOHF5mYLJMq4A4iWsY689zJnYF1sZtJrsYnZp/W
+	+Mug==
+X-Gm-Message-State: APjAAAV/nRHZqpPMU/S8+EELOHUoZl4ryl22t5Whwdcf6voWSNLdrFWt
+	c6EtZFic7fgN/CRP2zguahfpHPbWl11zkwR+vcc=
+X-Google-Smtp-Source: APXvYqxnrRHQktGtvttK72hJOmQdaK2DB/D+9huSYxnq8pblPVTCtaQ1UA5oTiglFeEUC3TabCrbRR/ZIo19L98h1y4=
+X-Received: by 2002:a24:78c8:: with SMTP id p191mr677897itc.58.1556567424471; 
+	Mon, 29 Apr 2019 12:50:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAMKF1srkU7OPqv7YRyGkrDHbmMMYR02hPpW_88cB_7=nYbrnZg@mail.gmail.com>
-	<2707a439-ae13-bcbe-adc8-7816ebacbf38@gmail.com>
-In-Reply-To: <2707a439-ae13-bcbe-adc8-7816ebacbf38@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Apr 2019 12:09:07 -0700
-Message-ID: <CAMKF1soWN4RwSjK3--tbyMvGvh=+5km8a4a_=_CfwLA38PWYYA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+References: <CAMKF1spVRws2HV7W9w-mvMPwEVYaTqAdt=OGv_DnuLYiMRiBoQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spVRws2HV7W9w-mvMPwEVYaTqAdt=OGv_DnuLYiMRiBoQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 29 Apr 2019 21:50:12 +0200
+Message-ID: <CALbNGRTPZYHSKGsYa4ft87pXjfQHqqy-0vCfifwPH=eVOtSpAg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-openembedded 2.7 (warrior) release maintainer
+Subject: Re: State of OE World, 2019-04-28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2019 19:09:17 -0000
+X-List-Received-Date: Mon, 29 Apr 2019 19:50:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Yes please, thanks!
+On Mon, Apr 29, 2019 at 7:27 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> == Failed tasks 2019-04-28 ==
+>
+> INFO: jenkins-job.sh-1.8.45 Complete log available at
+> http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190429_101843.log
+>
+> === common (1) ===
+>     * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
+>
+> === common-x86 (1) ===
+>     * sources/meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb:do_compile
+>
+> === qemuarm (10) ===
+>     * sources/meta-browser/recipes-browser/chromium/chromium-ozone-wayland_73.0.3683.103.bb:do_compile
+>     * sources/meta-openembedded/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb:do_configure
+>     * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
+>     * sources/meta-openembedded/meta-oe/recipes-kernel/cpupower/cpupower.bb:do_package
+>     * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_install
+>     * sources/meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb:do_configure
+>     * sources/meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+>     * sources/meta-rust/recipes-devtools/rust/rust_1.33.0.bb:do_compile
+>     * sources/openembedded-core/meta/recipes-multimedia/mpeg2dec/mpeg2dec_0.5.1.bb:do_package_qa
+>     * sources/openembedded-core/meta/recipes-sato/webkit/webkitgtk_2.24.0.bb:do_compile
+^ Looked into: I can take care for xfce4-vala & gnome-desktop3 (should
+be trivial :)
 
-On Mon, Apr 29, 2019 at 12:06 PM akuster808 <akuster808@gmail.com> wrote:
-
->
->
-> On 4/29/19 11:07 AM, Khem Raj wrote:
-> > Hi
-> >
-> > I have branched out warrior today and seeking a maintainer for warrior
-> > release for all layers under meta-openembedded repository. If you have
-> > time and interest please sign up to help out, much appreciated.
-> Signed up? you want patch to update README's instead?
->
-> - armin
-> >
-> > Thank you
-> > -Khem
->
->
+Andreas
 
