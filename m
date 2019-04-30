@@ -1,51 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C97706C0EA
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+	[209.85.167.48])
+	by mail.openembedded.org (Postfix) with ESMTP id AC4A57DAD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 19:19:07 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id n8so7171743plp.10
+	Tue, 30 Apr 2019 19:36:29 +0000 (UTC)
+Received: by mail-lf1-f48.google.com with SMTP id i68so11607588lfi.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 12:19:08 -0700 (PDT)
+	Tue, 30 Apr 2019 12:36:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=s5Hkj2dT3YX8kpsrVuidpqq4S6GWf1PDIN0Y5W8TBjU=;
-	b=IBBfflHeXVWVyn+BGD2UAN311M5l0Lc+g4AzdxKzt+majywgig/vo/Ui7u7D9/+Ayl
-	Kbmm74FYCoXtzo5/8aeLap3VlNqFKW4U9Zjm2eEiidW+syXyDYws8CIEV/jmExrVPOKJ
-	IUL5bHPMFJyG2v3RVg1dGqCxKk/wSId3cxMGThu93IBXPCyZ4hdogFUabewssYSeSht0
-	RB6csS2Uhwxswrs3GjYNqB91k9caX3YdV2a7u+TsNiTTUTaLnoItvIE8Di2nAkdedi0Q
-	hWIHthukXJ6fWdqqLs5VSJaZByxzftgJnUibMw2tx/VlPfBrY5TwAwbHnvBWAzDd0kbT
-	U//A==
+	h=from:to:cc:subject:date:message-id;
+	bh=xR6YY0Kt63SFrXcpOQMP2XFho7JnysYHs06CrqtEjC4=;
+	b=LcI4bjynIEzw+5bRey2ZSfowM0TA7qB7rerIBFUZpPc0sLnD65ksJJ9uDw5G5VZu/9
+	BZCexhP6wMe7947xnZWTE24tQp1OaGqZttAgIAewyEO6bH8/BA/btFNYxH2ohxbJ9uox
+	VNF/dvc18C2o5qtdS1HpkUWlTwNp4s/syGvkYj2Gc53/UdSbclsqUxYrKRTXtQMmFR51
+	inu353LGsgxh9o3sazQxfZHANEPqzHosO2eKtWfVhbLs2MgNV8cWx2Pmpq9Ad9eC5CQ3
+	eYToGe7FM0SIUeArgr79uDWXgH1yDwzdea5P17cXoRcvxW0ZtBupQKPlPFPthQ6k0SWB
+	zeuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=s5Hkj2dT3YX8kpsrVuidpqq4S6GWf1PDIN0Y5W8TBjU=;
-	b=T2FEJOVANggN9OE+VN2/CxoIfuAeTKaFJCOb3OJ/76gKlJbPq78h9shm75Di/Od8yc
-	+jScvvu24BO2gg6d67AMxK5IJRmfIjBs1DsOHRpaEF+PYyDljGQc9RChrRAoRYtFvRg8
-	J9OoB8HFMFtGo2HeJZEdU/9G10eSIvlOPjO4ek74/l7Ox0oIrNV0JqZ3cFuNuxhOrm2J
-	qW6NO3jjxOo7VMAdbT8/6MN/C0lnBsH+I8mgo5sOaZNmQUZnSIwSAl6r2HqRFfYjp6vB
-	iQtfkhSFyR1MlpbCZn00W9pVCkrchb08+joLCOcIrPToF0Ll868eoGQOcmntKSmBm6IO
-	CKuA==
-X-Gm-Message-State: APjAAAX6FLyPHOsCUTem8sEix3/aoIqbozuHXAnZbaQLgv1z23OPa43v
-	g6DZ/XmgGUnpTNZsgUaNE1rbrUCblN8=
-X-Google-Smtp-Source: APXvYqzZAGtglvRnMTC01/bSZ2+0SkaZHtdk+nbKVLWiuV9mCZnfzPhhPX9pDsSmXeKALipfr5pBNA==
-X-Received: by 2002:a17:902:2808:: with SMTP id
-	e8mr352913plb.317.1556651947862; 
-	Tue, 30 Apr 2019 12:19:07 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::5848])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xR6YY0Kt63SFrXcpOQMP2XFho7JnysYHs06CrqtEjC4=;
+	b=oi+5Gxq7EyPszjXqgJ9Q/Nku2elmdXmMCp25tV0D9+03fgoF/inawMYbojw3OuI+c9
+	z6AcoB2JOPo2aIf+PFtqlYsbrm7kn6l89XL6ORWNyY+38Ww8xSZ+5faX/h6a7Er+vzAJ
+	1OUjA8/CwcW0PKT/JfDN5jSKKmfMRaWe57EPLPMgwwSpcUXkcMWW/NIXumGQchPaININ
+	mCs9CfBgtoDOt9hIux+VPKmc7SfbfWPnvOcjjwWxiMqHzS0WFZtyoXhNHKim3OSr7gKu
+	w8UnnUDmzh5bTd3ZbmQciGRRlLuKph3M9yHDFPHDgbTBwpmYlDVbmlWzYZHUcD/qjc1m
+	SUqA==
+X-Gm-Message-State: APjAAAW5jtCE6IopvzpnYtIh1/1jBRNUVgDXjnWY5phvL2+jitd6keYR
+	2QoO1f1orN+W+DVnCcEYZZbE8iDvgyWX1Q==
+X-Google-Smtp-Source: APXvYqygno6yz50cKQw6PNG+S79HdbJGb2PWeWsbkuGMeE/PoEnKo1mPeMpe2rMotbMzxJYS6g5PFA==
+X-Received: by 2002:a19:ee17:: with SMTP id g23mr37652302lfb.43.1556652989476; 
+	Tue, 30 Apr 2019 12:36:29 -0700 (PDT)
+Received: from peterliu-Precision-M4800.lan
+	(c-b09ee253.022-417-73746f13.bbcust.telenor.se. [83.226.158.176])
 	by smtp.gmail.com with ESMTPSA id
-	e1sm47631543pfn.187.2019.04.30.12.19.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Apr 2019 12:19:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	y19sm8167798lfb.24.2019.04.30.12.36.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 30 Apr 2019 12:36:28 -0700 (PDT)
+From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2019 12:19:00 -0700
-Message-Id: <20190430191900.15061-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] cpupower: Inherit bash completion class
+Date: Tue, 30 Apr 2019 21:36:26 +0200
+Message-Id: <1556652986-22022-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH] libmodbus: add documentation PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 19:19:08 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 30 Apr 2019 19:36:30 -0000
 
-Fixes
-ERROR: QA Issue: cpupower: Files/directories were installed but not shipped in any package:
-  /usr/share/bash-completion
-  /usr/share/bash-completion/completions
-  /usr/share/bash-completion/completions/cpupower
+From: Ming Liu <liu.ming50@gmail.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+asciidoc, xmlto programs are being checked to decide if documentation
+should be generated or not depending on if they are present, this will
+definitely lead to a non-deterministic build.
+
+Fix it by adding documentation to PACKAGECONFIG.
+
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/libmodbus/libmodbus.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-index 9289738716..5798440e93 100644
---- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
-+++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
- DEPENDS = "pciutils gettext-native"
- PROVIDES = "virtual/cpupower"
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus.inc b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+index a01659a..b502177 100644
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus.inc
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
+@@ -10,4 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
  
--inherit kernelsrc kernel-arch
-+inherit kernelsrc kernel-arch bash-completion
+ SRC_URI = "http://libmodbus.org/releases/${BP}.tar.gz"
  
- do_populate_lic[depends] += "virtual/kernel:do_patch"
- 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[documentation] = "--with-documentation,--without-documentation,asciidoc-native xmlto-native"
++
+ inherit autotools pkgconfig
 -- 
-2.21.0
+2.7.4
 
 
