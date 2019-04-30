@@ -1,49 +1,36 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
-	[209.85.167.48])
-	by mail.openembedded.org (Postfix) with ESMTP id AC4A57DAD3
+Return-Path: <pn@denx.de>
+X-Greylist: delayed 487 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 30 Apr 2019 22:53:11 UTC
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BF087D5B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 19:36:29 +0000 (UTC)
-Received: by mail-lf1-f48.google.com with SMTP id i68so11607588lfi.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 12:36:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=xR6YY0Kt63SFrXcpOQMP2XFho7JnysYHs06CrqtEjC4=;
-	b=LcI4bjynIEzw+5bRey2ZSfowM0TA7qB7rerIBFUZpPc0sLnD65ksJJ9uDw5G5VZu/9
-	BZCexhP6wMe7947xnZWTE24tQp1OaGqZttAgIAewyEO6bH8/BA/btFNYxH2ohxbJ9uox
-	VNF/dvc18C2o5qtdS1HpkUWlTwNp4s/syGvkYj2Gc53/UdSbclsqUxYrKRTXtQMmFR51
-	inu353LGsgxh9o3sazQxfZHANEPqzHosO2eKtWfVhbLs2MgNV8cWx2Pmpq9Ad9eC5CQ3
-	eYToGe7FM0SIUeArgr79uDWXgH1yDwzdea5P17cXoRcvxW0ZtBupQKPlPFPthQ6k0SWB
-	zeuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xR6YY0Kt63SFrXcpOQMP2XFho7JnysYHs06CrqtEjC4=;
-	b=oi+5Gxq7EyPszjXqgJ9Q/Nku2elmdXmMCp25tV0D9+03fgoF/inawMYbojw3OuI+c9
-	z6AcoB2JOPo2aIf+PFtqlYsbrm7kn6l89XL6ORWNyY+38Ww8xSZ+5faX/h6a7Er+vzAJ
-	1OUjA8/CwcW0PKT/JfDN5jSKKmfMRaWe57EPLPMgwwSpcUXkcMWW/NIXumGQchPaININ
-	mCs9CfBgtoDOt9hIux+VPKmc7SfbfWPnvOcjjwWxiMqHzS0WFZtyoXhNHKim3OSr7gKu
-	w8UnnUDmzh5bTd3ZbmQciGRRlLuKph3M9yHDFPHDgbTBwpmYlDVbmlWzYZHUcD/qjc1m
-	SUqA==
-X-Gm-Message-State: APjAAAW5jtCE6IopvzpnYtIh1/1jBRNUVgDXjnWY5phvL2+jitd6keYR
-	2QoO1f1orN+W+DVnCcEYZZbE8iDvgyWX1Q==
-X-Google-Smtp-Source: APXvYqygno6yz50cKQw6PNG+S79HdbJGb2PWeWsbkuGMeE/PoEnKo1mPeMpe2rMotbMzxJYS6g5PFA==
-X-Received: by 2002:a19:ee17:: with SMTP id g23mr37652302lfb.43.1556652989476; 
-	Tue, 30 Apr 2019 12:36:29 -0700 (PDT)
-Received: from peterliu-Precision-M4800.lan
-	(c-b09ee253.022-417-73746f13.bbcust.telenor.se. [83.226.158.176])
-	by smtp.gmail.com with ESMTPSA id
-	y19sm8167798lfb.24.2019.04.30.12.36.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Apr 2019 12:36:28 -0700 (PDT)
-From: liu.ming50@gmail.com
+	Tue, 30 Apr 2019 22:53:11 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 44txS11f5mz1rbMl;
+	Wed,  1 May 2019 00:45:05 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 44txS11Rt5z1qtm4;
+	Wed,  1 May 2019 00:45:05 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+	port 10024)
+	with ESMTP id KdQxtCnZGht2; Wed,  1 May 2019 00:45:04 +0200 (CEST)
+X-Auth-Info: jw3jfDkcptDeWMH0F7tvVwGo/qEIo5yYRjk6KLrp2a8=
+Received: from [192.168.178.26] (unknown [62.91.105.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPSA;
+	Wed,  1 May 2019 00:45:04 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2019 21:36:26 +0200
-Message-Id: <1556652986-22022-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] libmodbus: add documentation PACKAGECONFIG
+From: Parthiban Nallathambi <pn@denx.de>
+Organization: DENX Software Engineering GmbH
+Message-ID: <a5e8ae61-d876-90a7-56c2-b6ccd90c9b69@denx.de>
+Date: Wed, 1 May 2019 00:45:03 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
+MIME-Version: 1.0
+Subject: Steps for adding new python module to meta-python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 19:36:30 -0000
+X-List-Received-Date: Tue, 30 Apr 2019 22:53:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Ming Liu <liu.ming50@gmail.com>
+Hello All,
 
-asciidoc, xmlto programs are being checked to decide if documentation
-should be generated or not depending on if they are present, this will
-definitely lead to a non-deterministic build.
+I am currently trying to add a python module for aiohttp into meta-python.
+But this recipes are not detected during bitbake.
 
-Fix it by adding documentation to PACKAGECONFIG.
+Do we have any specific ways to add it or mention about the addition for
+it to compile?
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- meta-oe/recipes-extended/libmodbus/libmodbus.inc | 3 +++
- 1 file changed, 3 insertions(+)
+Also I would like to know how the package is referenced and cheksums are
+calculated.
 
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus.inc b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
-index a01659a..b502177 100644
---- a/meta-oe/recipes-extended/libmodbus/libmodbus.inc
-+++ b/meta-oe/recipes-extended/libmodbus/libmodbus.inc
-@@ -10,4 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI = "http://libmodbus.org/releases/${BP}.tar.gz"
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[documentation] = "--with-documentation,--without-documentation,asciidoc-native xmlto-native"
-+
- inherit autotools pkgconfig
+Thanks in advance for the feedback.
+
+python-aiohttp.inc:
+SUMMARY = "Asynchronous HTTP client/server framework for asyncio and Python"
+DESCRIPTION = "Asynchronous HTTP client/server framework for asyncio and Python"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cf056e8e7a0a5477451af18b7b5aa98c"
+
+SRC_URI[md5sum] = "7a152f5236ee3b3ef97b6f1965a7c62c"
+SRC_URI[sha256sum] = "9385ff2ea20249be9119236b3367356465cb92dc55b463d12239c7cf36024bba"
+
+PYPI_PACKAGE = "aiohttp"
+inherit pypi
+RDEPENDS_${PN} = "\
+    ${PYTHON_PN}-chardet \
+    ${PYTHON_PN}-idna-ssl \
+    ${PYTHON_PN}-multidict \
+"
+
+python3-aiohttp_3.5.4:
+inherit setuptools3
+require python-aiohttp.inc
+
+
+Error:
+bitbake python3-aiohttp
+Loading cache: 100% |##################################################################################################| Time: 0:00:00
+Loaded 3034 entries from dependency cache.
+ERROR: Nothing PROVIDES 'python3-aiohttp'. Close matches:
+  python3-attr
+  python3-isort
+  python3-attrs
+
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
 -- 
-2.7.4
+Thanks,
+Parthiban N
 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-22 Fax: (+49)-8142-66989-80 Email: pn@denx.de
 
