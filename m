@@ -1,52 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D1F27D52B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 981CA6007A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 11:27:49 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id r7so850255wrr.13
+	Tue, 30 Apr 2019 12:38:09 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id z6so2274127wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 04:27:50 -0700 (PDT)
+	Tue, 30 Apr 2019 05:38:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=3qzXNjuQgcFBx/7IFc7O/1+P4GU/ZyTLX8wlJwDP3ac=;
-	b=YUjMyTnjr/DFblZYkd26J+rGQxosgVnwjFWFiCQsIIp4rM1YS2QK2YxQPhMMktaVSa
-	uADe3OvAZd9UgD7XvSc8E9BvoFbaqPEIorVDp9JoQIbMfQf2SWbUmVZgdJY3PGnvmVeX
-	mJaCN7Cq8yd25F1RbiuWcnlQYV6OcOa9mLiBFDHAYu2JhslIthiicIFgUVFpD2hNOYXB
-	587maMRhOdvwWNoICwMm24I/mDqAQT+bfF049lHfrSrd9e7+/Z6XoPuY0anjchaKgKzv
-	uc+UaNMoa3mo+DPEPbMz4aS6FsFfMMwHPd49ohkihfRczTGtMysnjp+gOjEfdmeFRb0N
-	XAzw==
+	h=from:to:cc:subject:date:message-id;
+	bh=oc326dottQ9KY8iKDjyntPV0L6OAw9p/hAozk06gkHg=;
+	b=YYuKHmL9BHbGH/eHp3wIKtnGEM0bxdUCh3T/awDezIK+DbDQ/lYhQFIni0CQ7XtIJ5
+	WYyz/Vj+fZ+9vN+G2Vufis45DGaBoVMa6VGCpBCVrQCImF8EQC+22Xq1EtVO6kF2uC++
+	EDh4++2HNx4KQX6pwjTGZ8S9TzEyUngOC0GVkmqjpn+0fQ8SCMUb+R7NFEpvMp2bv7pz
+	QIT7E7OKnjrDK94lMB+5b6Kre9OU7HwxRNmnYnNlrfyiJ79y8z5hxks3/PjLuDBjMe3B
+	0EQY5BZBzIqqtUEtLUQBlwX5+o3kgDJesOP9lQYKCVgZ3T3tg93hIk80R26QH3jjv3Tc
+	Jiag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=3qzXNjuQgcFBx/7IFc7O/1+P4GU/ZyTLX8wlJwDP3ac=;
-	b=lP+mwlP7+J1ZOTVE4XPu4EU76vFnMXjRroZKAb63GJ6gZrhLSRxLccaXDIcYyjQgZg
-	lrum8LAB/OrnYThLyJKKIDlbc03CpyCNZqXrBhqDmYaucagq5IlSP0hILSEdorkdalzx
-	8JXP1fTy/II89/XXY55OHIOkUang1fs5OijtxkST2Xzh25DI9mhgTYQMY5sRcNo12mB2
-	cGFDkhpGAXcn8HEXN0tbJ4WJZ4lWTT+AIgKAurVBBRcIwM4CWqSVgzM52tD1nu3qKu3I
-	LHwLrzd04GcNVGYlU/oafYtEytz2SnPRyrZstYvUQJqjlNU4zaPH0+gQ4ahTdWHKxSYa
-	+mfg==
-X-Gm-Message-State: APjAAAVSN42G6bXjjudp+IpfLJAqM3HN0hcxJ8+jJOrxRowOgEKtkBsF
-	6sKcr3aSmOAw+F/RltjZxztpEkKn
-X-Google-Smtp-Source: APXvYqwctEjA1RtLe2IX6kBwi2vCtwsNQui/EiCDivQ5YMBuD1DIDoWEzewdFu9EenfbT1OiBOIDqg==
-X-Received: by 2002:a05:6000:10cc:: with SMTP id
-	b12mr20096240wrx.182.1556623669788; 
-	Tue, 30 Apr 2019 04:27:49 -0700 (PDT)
-Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
-	[80.151.55.163])
-	by smtp.gmail.com with ESMTPSA id x14sm1835132wmj.3.2019.04.30.04.27.48
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=oc326dottQ9KY8iKDjyntPV0L6OAw9p/hAozk06gkHg=;
+	b=h1nShqug0xehnh6iX6Ii2oeKY+q6tKjZjhKMPkAX0TLx+EA8PZlaWOc+ITD0gT61ld
+	bfJgk5TZoDU/MFZAj9BUfuc8IASyhkiak9bzF8Jw5fonyIjOzUv9IRN0QfE1/dYSwlcf
+	wp/3KD0nGJOh3REjABTxMDnDjG2Z3jcbe+giqljgHcWVcs/6Bfr/5lbjg2/jmUfVfKt5
+	kVldck+ygM0EUtBkGX6aP2AxQOVQcj/vZSKcVCAL5p31t4qEbWMAhCAx17+fl//BW8pO
+	2srhUj1PGTiPdq5b2+NTd9iyxBCN7STQ2lRhKxh3QQly6wsubGncoUMliIAXXhNNnp+r
+	fBNg==
+X-Gm-Message-State: APjAAAVRZQWVpmurQZ+XsW5nQ83fHL56ckT7s5LIAkKx+7MUFkT/Gxbn
+	iU8pUGHmDALfEC9BseiqQpY+K2k1
+X-Google-Smtp-Source: APXvYqzzeENVQgOqLhhVTdE0hXV8bsOnGA74gAGdwds/uTZV63O8ek+2fP5v1QqWqi4ov/cT5CFs6w==
+X-Received: by 2002:a7b:cf2b:: with SMTP id m11mr2923489wmg.56.1556627889932; 
+	Tue, 30 Apr 2019 05:38:09 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	z140sm4503752wmc.27.2019.04.30.05.38.09
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 30 Apr 2019 04:27:48 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	Tue, 30 Apr 2019 05:38:09 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2019 13:27:36 +0200
-Message-Id: <20190430112736.1418-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [PATCH] gnome-desktop3: set correct meson gtk doc option
+Date: Tue, 30 Apr 2019 12:38:15 +0000
+Message-Id: <20190430123815.1475-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] esound: fix SRC_URI for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 11:27:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 30 Apr 2019 12:38:10 -0000
 
-Fixes:
-| ERROR: gnome-desktop3-3.32.0-r0 do_configure: QA Issue: gnome-desktop3: configure was passed unrecognised options: docs [unknown-configure-option]
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-multimedia/esound/esound_0.2.41.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-index ffd7dcea4..0acbb2117 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-@@ -27,6 +27,7 @@ DEPENDS += "itstool-native gsettings-desktop-schemas virtual/libx11 gtk+3 startu
- inherit distro_features_check gtk-doc
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb b/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
+index 0ddf94f2da..d703f23d91 100644
+--- a/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
++++ b/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
+@@ -6,7 +6,7 @@ DEPENDS = "audiofile"
  
-+GTKDOC_MESON_OPTION = "gtk_doc"
- EXTRA_OEMESON = "-Ddesktop_docs=false"
+ inherit gnome
  
- PACKAGES =+ "libgnome-desktop3"
+-SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/${P}.tar.bz2;name=archive \
++SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/${BP}.tar.bz2;name=archive \
+            file://no-docs.patch \
+            file://0001-audio_alsa09.c-alsa-drain-fix.patch \
+            file://0002-Undefine-open64-and-fopen64.patch \
 -- 
-2.20.1
+2.17.1
 
 
