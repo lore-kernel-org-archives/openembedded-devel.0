@@ -1,24 +1,39 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4021E7DA6F
+Return-Path: <prvs=0162804a6=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 96C307DC69
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 06:56:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x3U6uTeg025929
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2019 23:56:30 -0700 (PDT)
-Received: from localhost (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Mon, 29 Apr 2019 23:56:29 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Tue, 30 Apr 2019 07:34:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1556609661; x=1588145661;
+	h=subject:to:references:from:message-id:date:mime-version:
+	in-reply-to:content-transfer-encoding;
+	bh=ypM9I1kC89fAI2fP1U2IZvoZ3pHYIYFQHSmEGixbA8g=;
+	b=Ji++Z2mqgxG3358j26Njcae6F+nXqtoYB6Ll8Teup9NfbBxjHdnsCI4+
+	UMpADAvYOunL2Qu7ogZeBEPiWb/WWC45NkFyWpiZ0HaB8f3/cKbwJZ/k3
+	HFSP8T6k+3jZKLNZt7vYb6ytsyqL1fM2+PpRQ4jt/AudkPig6MltG9+hG
+	8c3tmWM0sUGaEUxLMG0MDUEbm2wJ3C9Ia3SQSo0KcKjvogyl1xV9IeWRH
+	GFM0bNRT6atR2rfhe94HrBI84hZTdGgwn3oCSsEViINrTJ/7al94qCKo1
+	WsPdydclxlVzSIjkHP3zgsNkPso+QXEEppnEuanfu4Ds9kx9ffFdp30rL Q==;
+IronPort-SDR: JzlwckpdutQNnbMOiF8sm45QX72VTwsbRENdwhOVMa8NM1/oLu4eosha0xCTRLyVOPZud4yfQv
+	1c+/sO3p/N70dTStykOoRN9iOs/DB2DFS+szP0N+6GzsIR1/qOexgtKFZ/uOms2dxAGL0QcIcZ
+	aQGLBURpy6PtcrFgoeabErGkPDJECW5AGaEGQyR3rg2h82JZ3iIxBwXH+0T9j+LEU6WfF4venS
+	OntrqVcmPKl15aAT60jvq3nHq895/P2+dVQ74UxwKGEbV3tJadLyuqGFPyqdNv4hX8HxdX0R+B
+	Z8c=
+X-IronPort-AV: E=Sophos;i="5.60,412,1549926000"; d="scan'208";a="16742718"
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Apr 2019 14:56:27 +0800
-Message-ID: <1556607387-26849-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+References: <20190411213317.20935-1-alistair.francis@wdc.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <51a3fd9f-e23d-4eb7-99fe-63fbb48b6499@skidata.com>
+Date: Tue, 30 Apr 2019 09:34:19 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.136]
-Subject: [meta-networking][PATCH] openhpi: update openhpi-fix-testfail-errors.patch
+In-Reply-To: <20190411213317.20935-1-alistair.francis@wdc.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH] layer.conf: Mark warrior as supported
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,120 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 06:56:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 30 Apr 2019 07:34:20 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-The openhpi-fix-testfail-errors.patch tries to fix 2 saftest failures.
-But the second fix is not correct. It should not return false when there
-is no surrogate pairs since for the code points in UTF-16 Basic
-Multilingual Plane (BMP), there is no need surrogate pairs. We should
-update saftest case to fix this failure.
+Hi,
+sorry for the late reply. I had this patch already in my local 
+master-next for weeks but forgot to push.
 
-Also add more description for the first fix.
+Just did it now. Sorry again for the delay.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- ...penhpi-fix-function-saHpiSensorThresholds.patch | 35 ++++++++++++++++++++++
- .../files/openhpi-fix-testfail-errors.patch        | 33 --------------------
- .../recipes-daemons/openhpi/openhpi_3.8.0.bb       |  2 +-
- 3 files changed, 36 insertions(+), 34 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
+regards;Richard.L
 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
-new file mode 100644
-index 0000000..b2771c0
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
-@@ -0,0 +1,35 @@
-+From e0b2be7a1fce0fed63bac8c350b711b69edfe30e Mon Sep 17 00:00:00 2001
-+From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-+Date: Tue, 30 Apr 2019 10:04:58 +0800
-+Subject: [PATCH] openhpid/safhpi.c: fix function saHpiSensorThresholdsSet
-+
-+In COPY_TH the SensorThresholds->TH will be copied to tmp.TH only if
-+TH.IsSupported == SAHPI_TRUE. So we should pass &tmp but not
-+SensorThresholds as the argument to OH_CALL_ABI. Otherwise the TH will
-+be set even if TH.IsSupported == SAHPI_FALSE.
-+
-+Upstream-Status: Submitted
-+[https://github.com/open-hpi/openhpi/pull/2744/commits/77a78bb1ada56e55c5ba6d7a5987c214705bf035]
-+
-+Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ openhpid/safhpi.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/openhpid/safhpi.c b/openhpid/safhpi.c
-+index 28a2632..61b7f03 100644
-+--- a/openhpid/safhpi.c
-++++ b/openhpid/safhpi.c
-+@@ -1933,7 +1933,7 @@ SaErrorT SAHPI_API saHpiSensorThresholdsSet (
-+         oh_release_domain(d); /* Unlock domain */
-+ 
-+         OH_CALL_ABI(h, set_sensor_thresholds, SA_ERR_HPI_INVALID_CMD, rv,
-+-                    ResourceId, SensorNum, SensorThresholds);
-++                    ResourceId, SensorNum, &tmp);
-+         oh_release_handler(h);
-+ 
-+         return rv;
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
-deleted file mode 100644
-index 60e2e79..0000000
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--Fix for saftest failures.
--
--Upstream-Status: Pending
--
--Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
--
--Index: openhpi-3.6.1/openhpid/safhpi.c
--===================================================================
----- openhpi-3.6.1.orig/openhpid/safhpi.c
--+++ openhpi-3.6.1/openhpid/safhpi.c
--@@ -1933,7 +1933,7 @@ SaErrorT SAHPI_API saHpiSensorThresholds
--         oh_release_domain(d); /* Unlock domain */
-- 
--         OH_CALL_ABI(h, set_sensor_thresholds, SA_ERR_HPI_INVALID_CMD, rv,
---                    ResourceId, SensorNum, SensorThresholds);
--+                    ResourceId, SensorNum, &tmp);
--         oh_release_handler(h);
-- 
--         return rv;
--Index: openhpi-3.6.1/utils/sahpi_struct_utils.c
--===================================================================
----- openhpi-3.6.1.orig/utils/sahpi_struct_utils.c
--+++ openhpi-3.6.1/utils/sahpi_struct_utils.c
--@@ -3861,6 +3861,9 @@ SaHpiBoolT oh_valid_textbuffer(SaHpiText
--                                         /* found a unpaired surrogate */
--                                         return SAHPI_FALSE;
--                                 }
--+                        } else {
--+                            /*the first 2 bytes wrong*/
--+                            return SAHPI_FALSE;
--                         }
--                 }
--                 break;
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-index 14cc3d8..e3a0c2e 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-@@ -33,7 +33,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://openhpi-glib-cross-compile.patch \
-            file://openhpi-linkfix.patch \
-            file://openhpi-fix-host-gcc.patch \
--           file://openhpi-fix-testfail-errors.patch \
-+           file://openhpi-fix-function-saHpiSensorThresholds.patch \
-            file://openhpi-add-libnetsnmp-when-link.patch \
-            file://openhpi-invalide-session.patch \
-            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
--- 
-2.7.4
-
+On 11/04/2019 23:34, Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   conf/layer.conf | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index b03a608..90236be 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+>   BBFILE_COLLECTIONS += "meta-java"
+>   BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+>   BBFILE_PRIORITY_meta-java = "10"
+> -LAYERSERIES_COMPAT_meta-java = "thud"
+> +LAYERSERIES_COMPAT_meta-java = "thud warrior"
+>   
+>   LICENSE_PATH += "${LAYERDIR}/licenses"
+>   
+> 
 
