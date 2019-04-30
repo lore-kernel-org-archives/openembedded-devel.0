@@ -1,48 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 981CA6007A
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D8B37DD20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 12:38:09 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id z6so2274127wmi.0
+	Tue, 30 Apr 2019 12:38:33 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id j13so3660923wmh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 05:38:10 -0700 (PDT)
+	Tue, 30 Apr 2019 05:38:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=oc326dottQ9KY8iKDjyntPV0L6OAw9p/hAozk06gkHg=;
-	b=YYuKHmL9BHbGH/eHp3wIKtnGEM0bxdUCh3T/awDezIK+DbDQ/lYhQFIni0CQ7XtIJ5
-	WYyz/Vj+fZ+9vN+G2Vufis45DGaBoVMa6VGCpBCVrQCImF8EQC+22Xq1EtVO6kF2uC++
-	EDh4++2HNx4KQX6pwjTGZ8S9TzEyUngOC0GVkmqjpn+0fQ8SCMUb+R7NFEpvMp2bv7pz
-	QIT7E7OKnjrDK94lMB+5b6Kre9OU7HwxRNmnYnNlrfyiJ79y8z5hxks3/PjLuDBjMe3B
-	0EQY5BZBzIqqtUEtLUQBlwX5+o3kgDJesOP9lQYKCVgZ3T3tg93hIk80R26QH3jjv3Tc
-	Jiag==
+	bh=IqqayjIbV2U33hD4RO++nWF7LWJMjHRzcuClhuo2rf8=;
+	b=EenDCToUmHIssgsEWORCa/eRo4eLp/y2uzd3v2jI04So0sqYJH7MdTyk+F4djFWDpk
+	RIFDj0tkQ9BpYICmKdpAAX9rZQSx+XE+M/OhaF9MhjzspTvyghxCYMsBt7ermf9X89ax
+	iHS7KxHrAwKFNuC49F26CoXC/NECUIBz7GXVuhgW8JRh56Fi+jwUnzrf3ZoSrf3lkRdQ
+	jeUOzrZYAsmdg1jFNePytrEhg19CdHqnWJ1lTUn3Kak2q1zpotMLArcr6tFNVhedjfBH
+	CUZHcnzG/ZL04t7LKF20VE8eT0zs+EL9dTHrZKs7Qscw6xukfPMg0lSQsEoDiH3wWA30
+	BAhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=oc326dottQ9KY8iKDjyntPV0L6OAw9p/hAozk06gkHg=;
-	b=h1nShqug0xehnh6iX6Ii2oeKY+q6tKjZjhKMPkAX0TLx+EA8PZlaWOc+ITD0gT61ld
-	bfJgk5TZoDU/MFZAj9BUfuc8IASyhkiak9bzF8Jw5fonyIjOzUv9IRN0QfE1/dYSwlcf
-	wp/3KD0nGJOh3REjABTxMDnDjG2Z3jcbe+giqljgHcWVcs/6Bfr/5lbjg2/jmUfVfKt5
-	kVldck+ygM0EUtBkGX6aP2AxQOVQcj/vZSKcVCAL5p31t4qEbWMAhCAx17+fl//BW8pO
-	2srhUj1PGTiPdq5b2+NTd9iyxBCN7STQ2lRhKxh3QQly6wsubGncoUMliIAXXhNNnp+r
-	fBNg==
-X-Gm-Message-State: APjAAAVRZQWVpmurQZ+XsW5nQ83fHL56ckT7s5LIAkKx+7MUFkT/Gxbn
-	iU8pUGHmDALfEC9BseiqQpY+K2k1
-X-Google-Smtp-Source: APXvYqzzeENVQgOqLhhVTdE0hXV8bsOnGA74gAGdwds/uTZV63O8ek+2fP5v1QqWqi4ov/cT5CFs6w==
-X-Received: by 2002:a7b:cf2b:: with SMTP id m11mr2923489wmg.56.1556627889932; 
-	Tue, 30 Apr 2019 05:38:09 -0700 (PDT)
+	bh=IqqayjIbV2U33hD4RO++nWF7LWJMjHRzcuClhuo2rf8=;
+	b=BlM4+l5v04RyCfbpsmiTHKoQC8S8aKdkuTjIY1kIIiT/pX/IGadLMm6o7j82sssGRX
+	IxyFKh5gjWIHx6oeFhzyZiZUEEejHpWa3QyyaC5RHf3kMdhixIti9nhQIVKJ5yjcplM4
+	c552NQ7fU5A9dA6nmNHv3XFFv3ZWa87KOEdrKS2zt9Ch6LZo3blSc93iOMzXiJpHdREk
+	ZsbldnmcuqHKJOB7ThDLnWzRad/v3Txz5vzha90BaBnMYXpbdcZto2pGDQNj6st/dkl3
+	Jp7KNSDRzaW/NMROq4sJyslyVNDls1MIwyqQlG57OW5JYwiQ/x/7IlxlTUe4uI1mQrfL
+	UqCA==
+X-Gm-Message-State: APjAAAXWkAFsBwWuL68g9hbObGCSISZm8dVYF6oTo1uem2dX4ayJ0m8O
+	Z4G3p0rpdDKJsDLvLgDA5XGNqvf2
+X-Google-Smtp-Source: APXvYqwjmL1dghSA7a8iC7d5WnSSj/bMW98tPyQnJlwuLj9ugZkmzgALVep7B6aTEy/VIxRQasBPLw==
+X-Received: by 2002:a1c:4d04:: with SMTP id o4mr3058792wmh.126.1556627913871; 
+	Tue, 30 Apr 2019 05:38:33 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	z140sm4503752wmc.27.2019.04.30.05.38.09
+	by smtp.gmail.com with ESMTPSA id n4sm2112019wmk.24.2019.04.30.05.38.33
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 30 Apr 2019 05:38:09 -0700 (PDT)
+	Tue, 30 Apr 2019 05:38:33 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2019 12:38:15 +0000
-Message-Id: <20190430123815.1475-1-Martin.Jansa@gmail.com>
+Date: Tue, 30 Apr 2019 12:38:40 +0000
+Message-Id: <20190430123840.1545-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] esound: fix SRC_URI for multilib
+Subject: [meta-multimedia][PATCH] opusfile: fix SRC_URI for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,25 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 12:38:10 -0000
+X-List-Received-Date: Tue, 30 Apr 2019 12:38:33 -0000
 
 ---
- meta-oe/recipes-multimedia/esound/esound_0.2.41.bb | 2 +-
+ meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb b/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
-index 0ddf94f2da..d703f23d91 100644
---- a/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
-+++ b/meta-oe/recipes-multimedia/esound/esound_0.2.41.bb
-@@ -6,7 +6,7 @@ DEPENDS = "audiofile"
+diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
+index 189dc87c49..3f6dbb8e92 100644
+--- a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
++++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
+@@ -7,7 +7,7 @@ DEPENDS = "libogg openssl libopus"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ac22b992dde6a891f8949c3e2da8576"
  
- inherit gnome
+-SRC_URI = "https://downloads.xiph.org/releases/opus/${PN}-${PV}.tar.gz"
++SRC_URI = "https://downloads.xiph.org/releases/opus/${BP}.tar.gz"
+ SRC_URI[md5sum] = "ab3f7d15d766f5b36b0951ee435f9ebf"
+ SRC_URI[sha256sum] = "48e03526ba87ef9cf5f1c47b5ebe3aa195bd89b912a57060c36184a6cd19412f"
  
--SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/${P}.tar.bz2;name=archive \
-+SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/${BP}.tar.bz2;name=archive \
-            file://no-docs.patch \
-            file://0001-audio_alsa09.c-alsa-drain-fix.patch \
-            file://0002-Undefine-open64-and-fopen64.patch \
 -- 
 2.17.1
 
