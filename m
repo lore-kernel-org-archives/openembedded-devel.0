@@ -1,31 +1,25 @@
-Return-Path: <sean@geanix.com>
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A28E60116
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 304287DAEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 06:09:07 +0000 (UTC)
-Received: from zen.localdomain (unknown [85.184.147.232])
-	by first.geanix.com (Postfix) with ESMTPSA id 8F811308E7E;
-	Tue, 30 Apr 2019 06:09:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1556604541; bh=dmCqmw4Oi/9UYxURBIEZ2rgEGgeMhngRqyStAgcZOIU=;
-	h=From:To:Cc:Subject:Date;
-	b=N0FTKeUquH82e4Y6rSTq1W2ybV7gnHiF8OJtEzuyPRxI5Iuett5TBZfk1PgbCX1A8
-	qJdp8OaQNvh7ky07PubaSnAQWydZfioYc6IXAYKVyogSb4rIxmIT8Lsm5WlS3Sz876
-	yFGbtOnLxhBhg/0fcYaIdQyugEROTb5MSt+T+T20F/afBt0UyE60jnXGejmf5gLQsx
-	RhmaMSM2P+L4S8lJzK3X63F+DVQsRc2REAb5Tcak4vfCa/WItEF55a6W6JV6J2y8uO
-	uS6c7KbP8wfGiB89cwW4al3EGQT1IkA4xayHgYoV50UTPT7Z2zI/9FKPXB3wIJeJ0U
-	8c/O1DGSrudNw==
-From: Sean Nyekjaer <sean@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2019 08:08:55 +0200
-Message-Id: <20190430060855.60494-1-sean@geanix.com>
-X-Mailer: git-send-email 2.21.0
+	Tue, 30 Apr 2019 06:33:14 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x3U6XBxZ017937
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Apr 2019 23:33:11 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Mon, 29 Apr 2019 23:33:10 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 30 Apr 2019 14:33:09 +0800
+Message-ID: <1556605989-137699-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <CAMKF1sqOhmF0_ifkFvLBH2SGEtudLRvCMg0fDwG2S8u0RtmQ6Q@mail.gmail.com>
+References: <CAMKF1sqOhmF0_ifkFvLBH2SGEtudLRvCMg0fDwG2S8u0RtmQ6Q@mail.gmail.com>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, DKIM_VALID_EF, UNPARSEABLE_RELAY,
-	URIBL_BLOCKED autolearn=disabled version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on b7bf6291adac
-Subject: [PATCH v2] cannelloni: new package, CAN to ethernet proxy
+Subject: [PATCH V2] postgresql: fix compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,45 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 06:09:07 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 30 Apr 2019 06:33:15 -0000
+Content-Type: text/plain
 
-Tool for sending SocketCAN messages
-over Ethernet tunnel.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Sean Nyekjaer <sean@geanix.com>
+configuration:
+MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+MULTILIBS ?= "multilib:lib32 multilib:libn32"
+DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+require conf/multilib.conf
+
+SELECTED_OPTIMIZATION = "${DEBUG_OPTIMIZATION}"
+DEBUG_BUILD = "1"
+EXTRA_IMAGE_FEATURES += "dbg-pkgs"
+
+with above configuration and option -Og, postgresql compile failed with:
+| make[4]: Nothing to be done for 'all'.
+| make[4]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/fe_utils'
+| {standard input}: Assembler messages:
+| {standard input}:58887: Error: branch out of range
+| <builtin>: recipe for target 'tab-complete.o' failed
+| make[3]: *** [tab-complete.o] Error 1
+| make[3]: Leaving directory '/tmp/work/mips-pokymllib32-linux/lib32-postgresql/11.2-r0/build/src/bin/psql'
+| Makefile:41: recipe for target 'all-psql-recurse' failed
+| make[2]: *** [all-psql-recurse] Error 2
+
+replace -Og with -O to fix this error
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
-Changes in v2:
-- Added PV
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
- .../cannelloni/cannelloni_git.bb                | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
-
-diff --git a/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
-new file mode 100644
-index 000000000..df75e6342
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "a SocketCAN over Ethernet tunnel"
-+HOMEPAGE = "https://github.com/mguentner/cannelloni"
-+LICENSE = "GPLv2"
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 85f1917..6e20231 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -72,6 +72,16 @@ EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
+ EXTRA_OECONF_sh4 += "--disable-spinlocks"
+ EXTRA_OECONF_aarch64 += "--disable-spinlocks"
+ 
++DEBUG_OPTIMIZATION_remove_mips = " -Og"
++DEBUG_OPTIMIZATION_append_mips = " -O"
++BUILD_OPTIMIZATION_remove_mips = " -Og"
++BUILD_OPTIMIZATION_append_mips = " -O"
 +
-+SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https"
-+SRCREV = "44080bb021d1a143e6906f2ec4610513c4e1cece"
++DEBUG_OPTIMIZATION_remove_mipsel = " -Og"
++DEBUG_OPTIMIZATION_append_mipsel = " -O"
++BUILD_OPTIMIZATION_remove_mipsel = " -Og"
++BUILD_OPTIMIZATION_append_mipsel = " -O"
 +
-+PV = "20160414+${SRCPV}"
-+
-+LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG ??= "lksctp-tools"
-+PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+ PACKAGES_DYNAMIC += "^${PN}-plperl \
+     ^${PN}-pltcl \
+     ^${PN}-plpython \
 -- 
-2.21.0
+2.7.4
 
 
