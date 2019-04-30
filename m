@@ -1,47 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 75B427D8E4
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C97706C0EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 18:15:37 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id c35so17364141qtk.3
+	Tue, 30 Apr 2019 19:19:07 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id n8so7171743plp.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2019 11:15:38 -0700 (PDT)
+	Tue, 30 Apr 2019 12:19:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=GLPwEteJ72nxi8nUtJnp84PMUPeqP94n/WhRd4bUsAg=;
-	b=NBhaPZYviX+Y1va25H5nr354SH2Ew4oWgviSLHxkoJZUsRmqxutTumziznwDxfsz8f
-	RPlzSRiXdDVteJXAI2LUklC+Gw9zjZ4Z5sOJjSm0Y/PKvDhBfbzcdUf15lHOjyL8eopV
-	YdZP8IbjO3jcPe7jmE53PnWUzNlOAt8gCpaTRLlTvngpoTQmXQnPQ6G16QhQz7IyO9Fb
-	GJCn6O8/4VCrCpNh/YAQ+of+vDAH9gSWBWb+OZ3he+fUJiVn4fD+mJOd7gH6B+z+Vbk3
-	wKNeChmT6ADOABobQigXUA9F9SCmdGdjaVDzUFu7MyNPiNcWq1k4nqx/mKel6725sBNR
-	vmSw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=s5Hkj2dT3YX8kpsrVuidpqq4S6GWf1PDIN0Y5W8TBjU=;
+	b=IBBfflHeXVWVyn+BGD2UAN311M5l0Lc+g4AzdxKzt+majywgig/vo/Ui7u7D9/+Ayl
+	Kbmm74FYCoXtzo5/8aeLap3VlNqFKW4U9Zjm2eEiidW+syXyDYws8CIEV/jmExrVPOKJ
+	IUL5bHPMFJyG2v3RVg1dGqCxKk/wSId3cxMGThu93IBXPCyZ4hdogFUabewssYSeSht0
+	RB6csS2Uhwxswrs3GjYNqB91k9caX3YdV2a7u+TsNiTTUTaLnoItvIE8Di2nAkdedi0Q
+	hWIHthukXJ6fWdqqLs5VSJaZByxzftgJnUibMw2tx/VlPfBrY5TwAwbHnvBWAzDd0kbT
+	U//A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=GLPwEteJ72nxi8nUtJnp84PMUPeqP94n/WhRd4bUsAg=;
-	b=jysTiMv6KxDaRyPjGlDRfeifutf0PVU4TnnC8wTIQjo8YwJ5SMK7YsLVHArom+GK6b
-	hXOxeCUOVg+6UvtK+GLKFoRTHhsJs/TZPKC9zLPDEQAMlkinQWr0jsTMtY4Fg5HM845c
-	a3AZxHKL4e37Ai5BUvRqPJwxEOvxDsB/Na6wvDN3YcXkj/RMVkV8PKVajHTq8sgMeu5t
-	X3TXXy2r8Dk8KRVJ/YjgIu6h7ezMj3fLC9v8X1CcTc4cjhlqp7xIu8RnNCgbXiq1IRx/
-	gB1Fg43YcFxt/Ug9bz6WipfT4vs0otYubG8v9ZsimwMecy3213EX4D/z7kFi/Md5JPFy
-	lvjg==
-X-Gm-Message-State: APjAAAUHeqFaP2Tdabp4mDXMnn72rXC1c+U2U3R8sgAopLjnTYgKr8Gu
-	lV07su7d1uS4SWFRFgupo1egZWscU8Ne4cPYS8E=
-X-Google-Smtp-Source: APXvYqzuUFDQSfr/AgFOSrcB1usKzoO3MILy7Uzzm4p0c+fRwL+vqmgrw/JDtAma2fQcx6ZGxHV675utPmuNINic/Ug=
-X-Received: by 2002:a0c:b64c:: with SMTP id q12mr55385762qvf.50.1556648137985; 
-	Tue, 30 Apr 2019 11:15:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190430084400.4135-1-schnitzeltony@gmail.com>
-In-Reply-To: <20190430084400.4135-1-schnitzeltony@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=s5Hkj2dT3YX8kpsrVuidpqq4S6GWf1PDIN0Y5W8TBjU=;
+	b=T2FEJOVANggN9OE+VN2/CxoIfuAeTKaFJCOb3OJ/76gKlJbPq78h9shm75Di/Od8yc
+	+jScvvu24BO2gg6d67AMxK5IJRmfIjBs1DsOHRpaEF+PYyDljGQc9RChrRAoRYtFvRg8
+	J9OoB8HFMFtGo2HeJZEdU/9G10eSIvlOPjO4ek74/l7Ox0oIrNV0JqZ3cFuNuxhOrm2J
+	qW6NO3jjxOo7VMAdbT8/6MN/C0lnBsH+I8mgo5sOaZNmQUZnSIwSAl6r2HqRFfYjp6vB
+	iQtfkhSFyR1MlpbCZn00W9pVCkrchb08+joLCOcIrPToF0Ll868eoGQOcmntKSmBm6IO
+	CKuA==
+X-Gm-Message-State: APjAAAX6FLyPHOsCUTem8sEix3/aoIqbozuHXAnZbaQLgv1z23OPa43v
+	g6DZ/XmgGUnpTNZsgUaNE1rbrUCblN8=
+X-Google-Smtp-Source: APXvYqzZAGtglvRnMTC01/bSZ2+0SkaZHtdk+nbKVLWiuV9mCZnfzPhhPX9pDsSmXeKALipfr5pBNA==
+X-Received: by 2002:a17:902:2808:: with SMTP id
+	e8mr352913plb.317.1556651947862; 
+	Tue, 30 Apr 2019 12:19:07 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::5848])
+	by smtp.gmail.com with ESMTPSA id
+	e1sm47631543pfn.187.2019.04.30.12.19.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Apr 2019 12:19:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Apr 2019 11:15:11 -0700
-Message-ID: <CAMKF1soQsW9bdL=yESKpd_fBJ6qjXXEp=3MAAB6SJg_G-OT16w@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] xfce4-vala: auto-detect vala api version
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 30 Apr 2019 12:19:00 -0700
+Message-Id: <20190430191900.15061-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] cpupower: Inherit bash completion class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,101 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2019 18:15:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Apr 2019 19:19:08 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 30, 2019 at 1:44 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> Get rid of tedious maintenance burden
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  ...Detect-vapidir-if-not-set-explicitly.patch | 31 +++++++++++++++++++
->  .../vala/xfce4-vala_4.10.3.bb                 |  7 +++--
->  2 files changed, 35 insertions(+), 3 deletions(-)
->  create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala/0001-confi=
-gure.ac-Detect-vapidir-if-not-set-explicitly.patch
->
-> diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac=
--Detect-vapidir-if-not-set-explicitly.patch b/meta-xfce/recipes-bindings/va=
-la/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch
-> new file mode 100644
-> index 000000000..a3a9330ef
-> --- /dev/null
-> +++ b/meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect=
--vapidir-if-not-set-explicitly.patch
-> @@ -0,0 +1,31 @@
-> +From 35267d995a81263b98f0ad56399ac3e30f9cf152 Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
-> +Date: Tue, 30 Apr 2019 09:48:08 +0200
-> +Subject: [PATCH] configure.ac: Detect vala-api version if not set explic=
-itly
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +---
-> + configure.ac | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 9bf4230..c489385 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -38,7 +38,7 @@ AC_ARG_WITH([vala-api],
-> +               AC_HELP_STRING([--with-vala-api=3DVERSION],
-> +                               [Use Vala API version VERSION]),
-> +               [vala_api=3D$withval],
-> +-              [vala_api=3D'0.16'])
-> ++              [vala_api=3D`$PKG_CONFIG --variable=3Dvapidir_versioned v=
-apigen | sed -e 's:.*vala-::' -e s:/vapi::`])
+Fixes
+ERROR: QA Issue: cpupower: Files/directories were installed but not shipped in any package:
+  /usr/share/bash-completion
+  /usr/share/bash-completion/completions
+  /usr/share/bash-completion/completions/cpupower
 
-thanks for fixing it once for all
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> + M8T_CHECK_VALA([$vala_api])
-> + AC_ARG_WITH([default-vapidir],
-> +               AC_HELP_STRING([--with-default-vapidir],
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-=
-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> index 97007bec4..68dbc69af 100644
-> --- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> +++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> @@ -7,12 +7,13 @@ inherit xfce pkgconfig distro_features_check
->
->  REQUIRED_DISTRO_FEATURES =3D "x11"
->
-> -SRC_URI =3D "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir(=
-"${PV}")}/${BPN}-${PV}.tar.bz2"
-> +SRC_URI =3D " \
-> +    http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}=
-/${BPN}-${PV}.tar.bz2 \
-> +    file://0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch =
-\
-> +"
->  SRC_URI[md5sum] =3D "0bbb1d6e473e0fe9b335b7b1b49d8a71"
->  SRC_URI[sha256sum] =3D "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997=
-a01b4af77260ae7b"
->
-> -EXTRA_OECONF =3D "-with-vala-api=3D0.42"
-> -
->  FILES_${PN} +=3D "${datadir}/vala-*/vapi"
->
->  RDEPENDS_${PN} =3D "vala"
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index 9289738716..5798440e93 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+ DEPENDS = "pciutils gettext-native"
+ PROVIDES = "virtual/cpupower"
+ 
+-inherit kernelsrc kernel-arch
++inherit kernelsrc kernel-arch bash-completion
+ 
+ do_populate_lic[depends] += "virtual/kernel:do_patch"
+ 
+-- 
+2.21.0
+
 
