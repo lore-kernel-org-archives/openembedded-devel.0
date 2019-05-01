@@ -1,47 +1,30 @@
-Return-Path: <parthitce@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 547607D458
+Return-Path: <mac@mcrowe.com>
+X-Greylist: delayed 451 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 01 May 2019 13:26:41 UTC
+Received: from avasout02.plus.net (avasout02.plus.net [212.159.14.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B6027D3AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 12:52:59 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id t76so3186424wmt.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 05:53:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=2wK0PewNULU2hAZMoVhBMxeSDLPNbOV4bLP7G4cgrkE=;
-	b=ORCzLL2/KSRuMz4DhI2KyywTB1z0heTPZA3DExPLH8aFy/vwC4J/PQgM5M0j9d5W0c
-	kSzXiMJDb7/iJmk+ZRW2HDpLYtb43EuTWlztKzcdsg0cEAalh9BIQQS9iDQ5QFgVR6zT
-	WaqsFmsqnPT9SYuTdB1Qd42oZMZGmLtWhqenspqK5+J4wa4TpGUSBZNk0bkmG9yF4ZUz
-	3MvdJ4YtZlQTpkGx8IeeTQ8as51fPsDY4fHpbuC9/YrHR+lX36hIrbRAAt4KGA95xDaA
-	xPDQa7jeP+LXbva8sV5tijyCOuunUXebSgbA6n+SNTNsgX9tFbMPz7C9RXlh7V1v9kz5
-	zJLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2wK0PewNULU2hAZMoVhBMxeSDLPNbOV4bLP7G4cgrkE=;
-	b=TDGFXnj4Ylpj4avMR1FuC0Q6tI/LMCWrXss2E2qXotk+qOG25CnnrAno3G2YMuTejl
-	w7dOP2WUz7RL7wyuIcByRH4CDkNx5I3EwpAbI9r9MSXxWElnHPpqqtLKJuTK1JUIWrlk
-	/edSRuY5y6GJmA5JByE1RkMRRRcyXrIphE81WkeqpHclPbBy9Df+SFljSL8gmQXkBx/z
-	GKyAu4xr3hwWXztjhkJMy1kK0czzihEBrPMLk53XeF+uIOV5qgrXRAeiV2g0wA4NOdfi
-	O20UrAZI7PhOixaDuUcdwJWkJZ8bhSKUyWnnX/sUK/njjIS06vH5Q9Wsddr6qHl8sorP
-	6UfQ==
-X-Gm-Message-State: APjAAAXW6QaxW0DmOPx88KI0XmoBpQf7I0ZV94cx/HlUchC7dAuIdPG7
-	/63XBLgJV0TFfk0o3FEEEFjuMcBWNA==
-X-Google-Smtp-Source: APXvYqxdIsEitSAlODvnviePyxbQ6hi0TbkPMV58/627IUGkRFDQcwf5syatfDZM6SQS9jwH9mJtZw==
-X-Received: by 2002:a7b:cb4e:: with SMTP id v14mr6351768wmj.52.1556715179794; 
-	Wed, 01 May 2019 05:52:59 -0700 (PDT)
-Received: from xpert.denx.de ([62.91.23.180]) by smtp.gmail.com with ESMTPSA id
-	v20sm1047674wmj.10.2019.05.01.05.52.58
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 01 May 2019 05:52:58 -0700 (PDT)
-From: Parthiban Nallathambi <parthitce@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 May 2019 14:52:50 +0200
-Message-Id: <20190501125250.2990445-1-parthitce@gmail.com>
-X-Mailer: git-send-email 2.17.2
-Cc: Parthiban Nallathambi <parthitce@gmail.com>
-Subject: [PATCH] python3-websocket-client: add version 0.56.0
+	Wed,  1 May 2019 13:26:40 +0000 (UTC)
+Received: from deneb ([80.229.24.9]) by smtp with ESMTP
+	id Lp8fh5ZNvpYZWLp8ghZzrn; Wed, 01 May 2019 14:19:10 +0100
+X-CM-Score: 0.00
+X-CNFS-Analysis: v=2.3 cv=cd2sUULM c=1 sm=1 tr=0
+	a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
+	a=kj9zAlcOel0A:10 a=E5NmQfObTbMA:10 a=BlMeI24vB3fBGh1XEIwA:9
+	a=CjuIK1q_8ugA:10
+Received: from mac by deneb with local (Exim 4.89)
+	(envelope-from <mac@mcrowe.com>) id 1hLp8f-0002CV-G0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 May 2019 14:19:09 +0100
+Date: Wed, 1 May 2019 14:19:09 +0100
+From: Mike Crowe <mac@mcrowe.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20190501131909.uhobxiuxv57o3q4t@mcrowe.com>
+MIME-Version: 1.0
+User-Agent: NeoMutt/20170113 (1.7.2)
+X-CMAE-Envelope: MS4wfBjjFJadkvTByqcy5wMQr5OalM6t+FPZo20P/67Lf/YtlqzQ4I4c35MY7H6F8DfTGA1qJPbddpe/S2dYv5wo28svUpzB3Tr2unABgnYxQR/34QTmPsWm
+	OMFDYcu3jCTK/uowCzXkF0E0TqvzdF/AMiHS8442J5lyfvIfIBEXlWKuePfN46yi7U8SxAgN0j6lCw==
+Subject: [meta-java] openjdk "IndexError: string index out of range" with ccache
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,51 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 12:52:59 -0000
+X-List-Received-Date: Wed, 01 May 2019 13:26:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-DEPENS on python-six
+For a long time, we've been seeing errors when building openjdk-8:
 
-Signed-off-by: Parthiban Nallathambi <parthitce@gmail.com>
----
- .../python/python-websocket-client.inc         | 18 ++++++++++++++++++
- .../python/python3-websocket-client_0.56.0.bb  |  2 ++
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-websocket-client.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
+WARNING: .../meta-java/recipes-core/openjdk/openjdk-8_172b11.bb: Unable to export ${CXXFLAGS_FOR_BUILD}: Failure expanding variableBUILD_CFLAGS, expression was -isystem/.../openjdk-8/172b11-r0/recipe-sysroot-native/usr/include -O2 -pipe -Wno-error=deprecated-declarations ${@openjdk_build_helper_get_build_cflags(d)} which triggered exception IndexError: string index out of range
 
-diff --git a/meta-python/recipes-devtools/python/python-websocket-client.inc b/meta-python/recipes-devtools/python/python-websocket-client.inc
-new file mode 100644
-index 000000000..c4214b2fd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-websocket-client.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "websocket client for python"
-+DESCRIPTION = "\
-+websocket-client module is WebSocket client for python. \
-+This provide the low level APIs for WebSocket. All APIs \
-+are the synchronous functions."
-+HOMEPAGE = "https://github.com/websocket-client/websocket-client"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1"
-+
-+SRC_URI[md5sum] = "89484bd5dac71123ae6a09b2f90fe62c"
-+SRC_URI[sha256sum] = "1fd5520878b68b84b5748bb30e592b10d0a91529d5383f74f4964e72b297fd3a"
-+
-+PYPI_PACKAGE = "websocket_client"
-+inherit pypi
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-six \
-+"
-diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb b/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
-new file mode 100644
-index 000000000..9b6696ead
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-websocket-client_0.56.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-websocket-client.inc
--- 
-2.17.2
+I finally managed to work out what was causing them. When using ccache
+(built as ccache-native during the build), BUILD_CC contains "ccache gcc".
+Unfortunately, with recipe-specific sysroots ccache is not always available
+in the PATH for every task (in particular, for do_prepare_sysroot of
+course, but there are plenty of others.) Yet, because CXXFLAGS_FOR_BUILD is
+exported it must be expanded for every task.
 
+The confusing error message is because
+openjdk-build-helper.bbclass:openjdk_build_helper_get_build_cflags does
+cc.communicate()[0].decode('utf-8')[0] on the empty string it received on
+from stdout when ccache cannot be executed.
+
+(I also notice that this will break with GCC 10, which is currently in
+development.)
+
+I've worked around the problem with the horrendous:
+
+    if build_cc.startswith("ccache "):
+            build_cc = build_cc[7:]
+
+What would be a better solution to this problem? The only one I could come
+up with is only export CXXFLAGS_FOR_BUILD in a prepend for do_configure and
+do_compile.
+
+Thanks.
+
+Mike.
 
