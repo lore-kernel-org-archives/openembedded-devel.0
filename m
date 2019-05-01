@@ -1,49 +1,50 @@
 Return-Path: <akshay.bhat@timesys.com>
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id BEE8F7D589
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+	[209.85.222.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 377547D598
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 19:41:41 +0000 (UTC)
-Received: by mail-qt1-f180.google.com with SMTP id g4so21118896qtq.10
+	Wed,  1 May 2019 20:32:47 +0000 (UTC)
+Received: by mail-qk1-f170.google.com with SMTP id x19so181305qki.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 12:41:43 -0700 (PDT)
+	Wed, 01 May 2019 13:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=timesys-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=w5D2JDCNhPqn3Q2MB+Jal7HLGtvTGD/NufNjXWixUfI=;
-	b=c+TCg5lDvkOLrHqecDpdHRoP8EI0KaMgpTIeykGzB20sJgleucH9IqctVouaqNhlcG
-	40TE71B0ql4Y8PTcXtRyHrMbRM7HjhPUqpi4CCWFgxKnxSqY65A/5TF9L3viw6/TeFpg
-	hLrFFzeHDCiQ6ZJldpcdAhC8CVRsYR7+6D/f8eQvmPbHN5aZD2JuuN/MoPywbd6Tu/DN
-	UXkLcYFRoO92AISc6hxZgD8/4o6CDELktziOSkQk8BsG2/eqdWqxtjtpc+LOozX+TCTA
-	ETONLT/yQqWoEHKqWqfFP+72jirKxFDc41EU5FdIGcXXw3i4JIZ/9NzVtCqkr5az+yth
-	C30g==
+	bh=4xwgvxt9Rk4Ufug9mCd/J6A/GrpM4hG+ELjkWQl71GI=;
+	b=WW903WeKH66GcE20iF4EB7PGkt3SGuncxET55fDqG1geB/yWFjDtA6+FsEEmj87jCK
+	kJS/NSP4IhDOEcCn0by3dUefm6/++mOffkYsw4/8HjbnWvGaAsQSXDfDLzjmUXtXxVeN
+	7MWhAY27ML2af51mJauDfEMOipOfVHjFm9vTQlSJ+dq+abVcOUwKgLD5OfzfQ03itrBW
+	pLI9FYLQs0ClZ5Ei0x9AuBRgTFim6DeEkbSTNbqHBLDpwz3cpp1opPUUAXCWzCQ8z3Si
+	jUwZs4A4J4brk5zkmPS+w1FeEFH2xbacAT334E+9rnylKAEAYY6n4NynYFGHN9HYowsu
+	khDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=w5D2JDCNhPqn3Q2MB+Jal7HLGtvTGD/NufNjXWixUfI=;
-	b=SBu7GYIC2keGlmchzFZagYewLlmzfh6dz2r8WbOM3m23rnt8fdQg4h/h6RoatLx53G
-	8riInG0G4qS0HvptCVVddVmCRI0rphYvDNmE1lEOPvercD9MSK9WjkGKt6ddvDs0IreT
-	bheWJYfP9hbWhlYhTea4enXJ581pu8B3qV2Mpklpd7TTa+GLPMRlArg1RUHQ7gvYgE0u
-	f53ZnJnocEiuYT7Pv9ALbPfkw9UNKGiSwuR8UNdHcNobV4iVXCRJsqwpggH2vYwEoKP7
-	GAxkVl91/Ak0FiZ96meCnQlMCBkwWs2NkVJZ8bNAs169pfYE1eZSzMB1Hxq2kV9MSRjG
-	27pA==
-X-Gm-Message-State: APjAAAXyOBFbWT3YE5jMyDA93o544Rm3Fh/pfX70y40jY5+fJJMcGT+l
-	X3BJRIhid/CHQGKSmjoVlqz+8S68o1D4sA==
-X-Google-Smtp-Source: APXvYqyLivfhYZQ1NaW+sV6CvY0YPbblEy0WIik3Q6jwKXvRwCvFpg/9qBGl2gQHvLwZFqHppga9Bg==
-X-Received: by 2002:a0c:b99c:: with SMTP id v28mr20248qvf.10.1556739702479;
-	Wed, 01 May 2019 12:41:42 -0700 (PDT)
+	bh=4xwgvxt9Rk4Ufug9mCd/J6A/GrpM4hG+ELjkWQl71GI=;
+	b=E3ypHZSV8cb3IR8yliBf0cpURQOFoHPErubtPGLIHj2SIT8Q2iglXa3bUWTJT9cEAO
+	kAlbx+GxJ2GDHHaQkZyFyRt2NPl3xQ/LnUcu0FcOPlKamZNDrCx+0JYmhxPhUguUm9qs
+	q9cRTF8qd6w2H6ej8/Pp626WdvMcGJj2/QT435MnOxQs6jmKXea6vOAIOLl90zvc5Nqn
+	uAQ0zpJ4Gql2MGgk2Cl94lUN1U1c8EKkGqBpFRGACGIXAwqflSTeMbl74C0ogcfOWrPK
+	/zadBWr9a79tnbF4U/m3sAx9mUOW3Y7folXU0CuqPGP3OKeuxrycTk3L8Y2D2M2/r8jB
+	ITQA==
+X-Gm-Message-State: APjAAAVNyRMa2oqJEeQ52oHb8WnNpPBDLBHEonK/50zsZ4tlHxW/UADR
+	ZbXbWGXk3yKMAtSDCCUQStjYvzGYjP7Pmw==
+X-Google-Smtp-Source: APXvYqzc5SLLinjzd2GCvHUf0BXKjkxlPUsWBqBXQfiMx6BujDsP6Wvx0746JWY13EtD5t6DVRVqeg==
+X-Received: by 2002:a05:620a:1134:: with SMTP id
+	p20mr127763qkk.20.1556742767785; 
+	Wed, 01 May 2019 13:32:47 -0700 (PDT)
 Received: from timesysax.timesys.com
 	(96-94-100-129-static.hfc.comcastbusiness.net. [96.94.100.129])
 	by smtp.gmail.com with ESMTPSA id
-	m17sm4747946qkk.44.2019.05.01.12.41.41
+	k45sm1162691qtf.65.2019.05.01.13.32.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 May 2019 12:41:41 -0700 (PDT)
+	Wed, 01 May 2019 13:32:47 -0700 (PDT)
 From: Akshay Bhat <akshay.bhat@timesys.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 May 2019 15:37:02 -0400
-Message-Id: <1556739422-5480-1-git-send-email-akshay.bhat@timesys.com>
+Date: Wed,  1 May 2019 16:32:18 -0400
+Message-Id: <1556742738-28112-1-git-send-email-akshay.bhat@timesys.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-pillow: Set CVE_PRODUCT
+Subject: [meta-python][PATCH] python-requests: Set CVE_PRODUCT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 19:41:42 -0000
+X-List-Received-Date: Wed, 01 May 2019 20:32:48 -0000
 
-pillow is used in NVD for CVE's like:
-https://nvd.nist.gov/vuln/detail/CVE-2016-3076
+requests is used in NVD for CVE's like:
+https://nvd.nist.gov/vuln/detail/CVE-2018-18074
 
 Signed-off-by: Akshay Bhat <akshay.bhat@timesys.com>
 ---
- meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb | 2 ++
+ meta-python/recipes-devtools/python/python-requests.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb b/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
-index 746c184..6fce162 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
-@@ -23,6 +23,8 @@ DEPENDS += " \
-     openjpeg \
+diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
+index e6337cb..53504d0 100644
+--- a/meta-python/recipes-devtools/python/python-requests.inc
++++ b/meta-python/recipes-devtools/python/python-requests.inc
+@@ -23,4 +23,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-idna \
  "
  
-+CVE_PRODUCT = "pillow"
++CVE_PRODUCT = "requests"
 +
- S = "${WORKDIR}/git"
- 
- BBCLASSEXTEND = "native"
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.7.4
 
