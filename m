@@ -1,50 +1,48 @@
-Return-Path: <parthitce@gmail.com>
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
-	[209.85.221.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AB687D9ED
+Return-Path: <hainsvdbosch@ziggo.nl>
+X-Greylist: delayed 1017 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 01 May 2019 17:20:28 UTC
+Received: from smtpq4.mnd.mail.iss.as9143.net (smtpq4.mnd.mail.iss.as9143.net
+	[212.54.34.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 49E737DACC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 17:19:52 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id o4so13374733wra.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 10:19:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ivUEK1PFI6Zk2mDVt3Wnx4h45gU6e3k8U90zS2doMOk=;
-	b=fYRcGfwRESoTcCLZ5+iJQUAgtsPnViE4IiTzLJvvhByOW/69PLAzr0oGdiRcAtBfV0
-	o1xXbI8yfZfLk+xhJyRvlqqH8Av0Rnack4HJNsH3eGuECO0RgTiIIlVQGl8cYm8x6JaL
-	gTieLSarF1hEkMZ2yMuCycdiPGzKqrdr4E6khQ4Sk3ru9tDlgK81mGcKhtZiS1Az7yNF
-	vJO9283rNf0zB8vcZGF943D7CEUOxmZo0RKobySrnr04wgeGWuV9yggr1f/q3LvIoE+W
-	yCr7xvbOcZHHaxvfSolTPoUMmCwu1xnvNQgJqZAbI5dwVFZuGlnDViay9ZlUwsRzPB0G
-	0LBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ivUEK1PFI6Zk2mDVt3Wnx4h45gU6e3k8U90zS2doMOk=;
-	b=KAbukxKRGJEd1rtQq8WDNKBzudCwUcTqr0S/sb6o/zsOhzaA4T68nvmcqhsSUZOR4K
-	2uNUuvCklsQKbUptN2P9CmlNOK5JxAxmRa+1rq3ScQ0V4eflu2CElwq8VTiZ0TBfbr2K
-	Ph6AsnI66MJYgLHYUEKwStl50qFO5fJ2wiiUEweH2J/bagYbVMt9kLCmx4exHN54IFxE
-	DkPS+QmV5GtACLhotLHdSIYbq7JWgNjBmi36aNoAkS1Wv6x6OQgP8i6RNIXzwdZGEL0b
-	59Tvxu8g7lfnvBZZA+encPS4GbyWifIntEkBkt+LcC7TOLuPH42xnaSDXysiwWQ3OM7i
-	fu+Q==
-X-Gm-Message-State: APjAAAVMvYEtp+eRbOCse6XTgLFXsqswgmIcnP0efVqQZ1lWuqqszdUi
-	lPkB7jPnX2rwsNPv8Hiudhcnj0PuPg==
-X-Google-Smtp-Source: APXvYqzWNR9EolRwjkpxMzFlsfhH1rhfQabi51RIgnA+enATKtdrM3paBFX76a5AzPjBffHCh97ohg==
-X-Received: by 2002:a5d:5092:: with SMTP id a18mr7690799wrt.112.1556731192761; 
-	Wed, 01 May 2019 10:19:52 -0700 (PDT)
-Received: from xpert.denx.de ([62.91.23.180]) by smtp.gmail.com with ESMTPSA id
-	c63sm8503083wma.29.2019.05.01.10.19.51
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 01 May 2019 10:19:52 -0700 (PDT)
-From: Parthiban Nallathambi <parthitce@gmail.com>
+	Wed,  1 May 2019 17:20:28 +0000 (UTC)
+Received: from [212.54.34.115] (helo=smtp7.mnd.mail.iss.as9143.net)
+	by smtpq4.mnd.mail.iss.as9143.net with esmtps
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.90_1)
+	(envelope-from <hainsvdbosch@ziggo.nl>)
+	id 1hLsdo-0000jp-Br; Wed, 01 May 2019 19:03:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/simple; d=ziggo.nl;
+	s=201809corplgsmtpnl; h=MIME-Version:Message-Id:Date:Subject:To:From;
+	bh=LsBcvk34LbLN34gCU7DShh8OoRV60m+SB6iys6kSXro=;
+	b=iLF2dJ3Rfr1v7XtkoBlSaBlQkU
+	tLEYg8qZYGhnC6TKxj7flb+uSk0V5SOd/7FedxnwaBVhvqHq2hRvhUnHIxOHMc+eHBhzfrQaff7L5
+	TdSZMjpATXj7uIrXcQ/jXKq/nxxrjaqjGkQTFDPUjVqgUhHmyR9+AM0M9sz65qx222WmzuAol/7X4
+	CSICE/sIjtXKjMu1n5Y11L44ZIYsQ8nDelst97BvRt0ESgJ3EHNQGimt8OPF8685a7RuC5u6610nR
+	gibNLtZ0XNQf6ykehTCt0xvepX1aWhIM9fyjSeeMutQo55tE8cJO8Q7JeZoMIMaAvP1GqiCD3gJza
+	AezdpYtQ==;
+Received: from 82-73-120-193.cable.dynamic.v4.ziggo.nl ([82.73.120.193]
+	helo=localhost.localdomain)
+	by smtp7.mnd.mail.iss.as9143.net with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>)
+	id 1hLsdo-0003pq-6x; Wed, 01 May 2019 19:03:32 +0200
+From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 May 2019 19:19:45 +0200
-Message-Id: <20190501171945.2999954-1-parthitce@gmail.com>
-X-Mailer: git-send-email 2.17.2
+Date: Wed,  1 May 2019 19:03:15 +0200
+Message-Id: <20190501170315.3656-1-hainsvdbosch@ziggo.nl>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: Parthiban Nallathambi <parthitce@gmail.com>
-Subject: [PATCH] python3-raven: add version 6.10.0
+X-SourceIP: 82.73.120.193
+X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
+X-Ziggo-spambar: /
+X-Ziggo-spamscore: 0.0
+X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=caasUULM c=1 sm=1 tr=0
+	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
+	a=E5NmQfObTbMA:10 a=KA9O7LQ_giGCryJPBK0A:9
+X-Ziggo-Spam-Status: No
+X-Spam-Status: No
+X-Spam-Flag: No
+Subject: [meta-oe][PATCH] libcdio: update to version 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,46 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 17:19:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 May 2019 17:20:28 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Parthiban Nallathambi <parthitce@gmail.com>
----
- .../recipes-devtools/python/python-raven.inc        | 13 +++++++++++++
- .../recipes-devtools/python/python3-raven_6.10.0.bb |  2 ++
- 2 files changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-raven.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
+Use tar.bz2 instead of tar.gz since tar.gz doesn't exist for 2.1.0.
 
-diff --git a/meta-python/recipes-devtools/python/python-raven.inc b/meta-python/recipes-devtools/python/python-raven.inc
-new file mode 100644
-index 000000000..1c65e1176
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-raven.inc
-@@ -0,0 +1,13 @@
-+SUMMARY = "Raven is the legacy Python client for Sentry (getsentry.com)"
-+DESCRIPTION = "\
-+Raven is the official legacy Python client for Sentry, officially \
-+supports Python 2.6–2.7 & 3.3–3.7, and runs on PyPy and Google App Engine."
-+HOMEPAGE = "https://github.com/getsentry/raven-python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b9a4414e08f0571d55184531cefc131b"
-+
-+SRC_URI[md5sum] = "3676f31dadfa61526444dd0245c78a38"
-+SRC_URI[sha256sum] = "3fa6de6efa2493a7c827472e984ce9b020797d0da16f1db67197bcc23c8fae54"
-+
-+PYPI_PACKAGE = "raven"
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb b/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
-new file mode 100644
-index 000000000..0f346e45e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-raven.inc
+Signed-off-by: Hains van den Bosch <hainsvdbosch@ziggo.nl>
+---
+ .../libcdio/{libcdio_2.0.0.bb => libcdio_2.1.0.bb}          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-multimedia/libcdio/{libcdio_2.0.0.bb => libcdio_2.1.0.bb} (82%)
+
+diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb b/meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb
+similarity index 82%
+rename from meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb
+rename to meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb
+index 6bf64d663..e282e89b7 100644
+--- a/meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb
++++ b/meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb
+@@ -4,10 +4,10 @@ SECTION = "libs"
+ LICENSE = "GPLv3+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "0cb25905113b930e4539d2f4eb6574b0"
+-SRC_URI[sha256sum] = "1b481b5da009bea31db875805665974e2fc568e2b2afa516f4036733657cf958"
++SRC_URI[md5sum] = "aa7629e8f73662a762f64c444b901055"
++SRC_URI[sha256sum] = "8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
-2.17.2
+2.20.1
 
 
