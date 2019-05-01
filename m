@@ -1,52 +1,54 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8622F7D723
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 15:41:04 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id u17so4802496pfn.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 08:41:05 -0700 (PDT)
+Return-Path: <jpewhacker@gmail.com>
+Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 225977D9B4;
+	Wed,  1 May 2019 15:45:05 +0000 (UTC)
+Received: by mail-it1-f194.google.com with SMTP id t200so10385514itf.4;
+	Wed, 01 May 2019 08:45:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7+slljOSuYBH4R3GYPjgySe1qdozViR7KIUzZSYcoGU=;
-	b=DUXm7xb7BIx4eWdg7E7pIecr86GcyVleI284w17xg5F5ySKKBvzFy6BR5Tte/zOsbv
-	GFLLNYvBMMdtLgHX1YpCujzHXTjJmjlJI3ubVrobSOq7k1TeXWb+xllC+V8XNLbSvS8W
-	BcEzWQbOdbTdzTBixRLErP6tVG+ivIGNeARajCFm5PhJZ+xezdrK+TGtg60z/ULpEt1f
-	GG51IxZkVVO1zh46PBJdE/v5yWod7I2PNXfQp8q84zRCD9LHWy5//q+oYxSAQTBVhqOK
-	GMBeYmFpSVyKHn7bMLYJo/9YOFsCUSJqQ5XNKxmXNdIZrrStUruZojulQu4b7/kl6gJz
-	QsFg==
+	h=from:message-id:subject:to:cc:date:in-reply-to:references
+	:user-agent:mime-version:content-transfer-encoding;
+	bh=aY6dFWpV7+tYH50HOgxeqDj9cCZmbI2WR6V7SXLX5J0=;
+	b=C1AHlAABe+BMb6ME/jykioP2OUfnPdtAWiJXCBFhXQlyTsBWw7/9cSpOvpfhv/VAZX
+	/Y3VQbx+kfjDiZhN1Xvx1URiMZk5UsGRw8UfzpDq/fOJqH8IQmEZX4BXykFXssU8Zj6X
+	annO0U9HaSdCmSPTW5kUYP7cKA/LdPF6vyaoN1hUuRlt323nyw/8R05ivMxos1eMf7Bq
+	eItX+hiEfE5ay66oLHZoLMk+Wg3blCnU6cyJ2Pjh+kIksVE+Hrv5VlGKNDr+M07qI6Vf
+	f3v/g8/juo3888pwlUm2MPGXgQfGO0Az8Ot19u7RC5tXqNY6MLoK274pAnJkLiF75vGA
+	TxRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7+slljOSuYBH4R3GYPjgySe1qdozViR7KIUzZSYcoGU=;
-	b=BHbJ7VSEY7TQbJyENQHtOXRYgqOp9f6x54UeBAlDCOKdLofbla3g8TmJdmoQzm3FQG
-	AjheQQveDbKdxV+LHWxO1gtPSrszfXFoYG/gySA+h7UNm5b+6X9ENDWyJipCpDygO9B0
-	0UNaGutLXta2w2m4EnsGXI5NBou14QtfDVSUvhIr/vVxI6W3qpwb3VZtWDy74ZU+JpSR
-	vVEHhw7zRguNirVbA63E6zy+XBT+x3m/BtynSU1tvLWBIyKkdgAY/D/G7XhdoTwmD/FZ
-	PZqdj7YNsuW4xYvY2Bswo9Bp7TPf4GNOLcwi1u1As+E585772T+Abi9JOvdv9FJ9D/+A
-	D2FQ==
-X-Gm-Message-State: APjAAAVNsmBGsbfO5LhbXvMm9rFPG020AeSei4sW//OOkQT9TEQoZ4MH
-	9cyIjdTB5kX+6ekApA8kRFuX8eJq
-X-Google-Smtp-Source: APXvYqwPoVdMCY+V1Z6gWeepu2f1BpoK4njT6FMlB2Sc26aQ7FH3U/0rAh0mZgpGAGNI7h0zAGlL1w==
-X-Received: by 2002:a65:5c82:: with SMTP id a2mr24315267pgt.378.1556725265174; 
-	Wed, 01 May 2019 08:41:05 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:8977:bf2:211e:20be])
-	by smtp.gmail.com with ESMTPSA id
-	k7sm14760079pfk.93.2019.05.01.08.41.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 May 2019 08:41:04 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 May 2019 08:41:03 -0700
-Message-Id: <1556725263-19751-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:from:message-id:subject:to:cc:date:in-reply-to
+	:references:user-agent:mime-version:content-transfer-encoding;
+	bh=aY6dFWpV7+tYH50HOgxeqDj9cCZmbI2WR6V7SXLX5J0=;
+	b=swQfi+1CvZ5Iqlcu+1jPvyK2uiPVM9DNg13FADfEFTNbF7FTtPRXvJi89D1diUJW9O
+	whrRHN73OGCDJIrddRlIAceCQpOXv2UzFciUWbBrzIUFYIm4AB4OU4+EZGd7551XFpcw
+	PT7PrnTKQl2U2J0mjJUyopKDL++DcUPuYPttBkwcYvr1TdIBIZV1mPPYmeMHm2zf6GmX
+	nM9pjwJCisoXomaFMM7j2ofIAq93+yH73dYv3zxH0IyFiMU6/c5sWvlJqo3r66v1HKRl
+	DBDSlZKcNO0VzSLT1KFSAkysuNSZF5jBI3Kff10Xttt4vqg4hFqtGnmdKIIvaPC1GbYC
+	d87A==
+X-Gm-Message-State: APjAAAXujUfMrY4922jyNU2GROuP41C8kfi9ONzYxFRsXdm68W4w+jm4
+	VBebwE95ohRzrnvQ3jBIiVM=
+X-Google-Smtp-Source: APXvYqyPM/+Lkym6wjZbZgZkx5ON+Di6DSTirzdewzK8T53FpfLnW/iGXCQXOfUPCzS1w9GsVJxGJQ==
+X-Received: by 2002:a24:694b:: with SMTP id e72mr8484227itc.48.1556725505655; 
+	Wed, 01 May 2019 08:45:05 -0700 (PDT)
+Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
+	by smtp.googlemail.com with ESMTPSA id
+	m3sm1888442ion.69.2019.05.01.08.45.04
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 01 May 2019 08:45:05 -0700 (PDT)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+Message-ID: <f3d54ab2a6c9fd0f452483c86b4a1f84d31a8420.camel@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Armin Kuster <akuster808@gmail.com>
+Date: Wed, 01 May 2019 10:45:03 -0500
+In-Reply-To: <20190501152748.GY31207@bill-the-cat>
+References: <1556722320-17827-1-git-send-email-akuster808@gmail.com>
+	<20190501152748.GY31207@bill-the-cat>
+User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
 MIME-Version: 1.0
-Subject: [warrior][v2][PATCH] README: updated Maintainers list for Warrior
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [warrior][PATCH] README: updated Maintainers list for Warrior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,400 +61,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 15:41:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 01 May 2019 15:45:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+On Wed, 2019-05-01 at 11:27 -0400, Tom Rini wrote:
+> On Wed, May 01, 2019 at 07:52:00AM -0700, Armin Kuster wrote:
+> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> > ---
+> >  README                      |  2 +-
+> >  meta-filesystems/README     | 12 ++++++------
+> >  meta-gnome/README           | 10 +++++-----
+> >  meta-initramfs/README       |  8 ++++----
+> >  meta-multimedia/README      | 10 +++++-----
+> >  meta-networking/MAINTAINERS | 32 +++-----------------------------
+> >  meta-networking/README      |  6 +++---
+> >  meta-oe/README              |  8 ++++----
+> >  meta-perl/README            | 10 ++++------
+> >  meta-python/README          | 12 +++++-------
+> >  meta-webserver/README       |  8 ++++----
+> >  meta-xfce/README            | 10 +++++-----
+> >  12 files changed, 49 insertions(+), 79 deletions(-)
+> > 
+> > diff --git a/README b/README
+> > index 7318f09..881115e 100644
+> > --- a/README
+> > +++ b/README
+> > @@ -1,6 +1,6 @@
+> >  Collection of layers for the OE-core universe
+> >  
+> > -Main layer maintainer: Khem Raj <raj.khem@gmail.com>
+> > +Warrior maintainer: Armin Kuster  <akuster808@gmail.com>
+> >  
+> >  This repository is a collection of layers to suppliment OE-Core
+> >  with additional packages, Each layer have designated maintainer
+> > diff --git a/meta-filesystems/README b/meta-filesystems/README
+> > index 87cb685..d9f07df 100644
+> > --- a/meta-filesystems/README
+> > +++ b/meta-filesystems/README
+> > @@ -10,30 +10,30 @@ Dependencies
+> >  This layer depends on:
+> >  
+> >    URI: git://git.openembedded.org/bitbake
+> > -  branch: master
+> > +  branch: 1.40
+> 
+> I may be starting off on the wrong patch here, but, did 1.40 or
+> bitbake.conf ever get patched up such that rm_work doesn't cause
+> world-rebuilds every time?  I recall when digging into this before
+> there
+> was a "maybe if we tweak $something it'll be happy again with this
+> older
+> bitbake".  Thanks!
 
-[v2]
-bump bitbake to warrior version
----
- README                      |  2 +-
- meta-filesystems/README     | 12 ++++++------
- meta-gnome/README           | 10 +++++-----
- meta-initramfs/README       |  8 ++++----
- meta-multimedia/README      | 10 +++++-----
- meta-networking/MAINTAINERS | 32 +++-----------------------------
- meta-networking/README      |  6 +++---
- meta-oe/README              |  8 ++++----
- meta-perl/README            | 10 ++++------
- meta-python/README          | 12 +++++-------
- meta-webserver/README       |  8 ++++----
- meta-xfce/README            | 10 +++++-----
- 12 files changed, 49 insertions(+), 79 deletions(-)
+No it didn't... I seem to recall looking at it and it wasn't quite as
+trivial as I had assumed but got distracted; sorry about that. If we
+are still wanting to make oe-core backward compatible with older
+bitbake I can open a bugzilla. 
 
-diff --git a/README b/README
-index 7318f09..881115e 100644
---- a/README
-+++ b/README
-@@ -1,6 +1,6 @@
- Collection of layers for the OE-core universe
- 
--Main layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Warrior maintainer: Armin Kuster  <akuster808@gmail.com>
- 
- This repository is a collection of layers to suppliment OE-Core
- with additional packages, Each layer have designated maintainer
-diff --git a/meta-filesystems/README b/meta-filesystems/README
-index 87cb685..842da13 100644
---- a/meta-filesystems/README
-+++ b/meta-filesystems/README
-@@ -10,30 +10,30 @@ Dependencies
- This layer depends on:
- 
-   URI: git://git.openembedded.org/bitbake
--  branch: master
-+  branch: 1.42
- 
-   URI: git://git.openembedded.org/openembedded-core
-   layers: meta
--  branch: master
-+  branch: warrior
- 
-   URI: git://git.openembedded.org/meta-openembedded
-   layers: meta-oe
--  branch: master
-+  branch: warrior
- 
- Patches
- =======
- 
- Please submit any patches against the filesystems layer to the
- OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
--with '[meta-filesystems]' in the subject.
-+with '[meta-filesystems][warrior]' in the subject.
- 
--Layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Warrior maintainer: Armin Kuster <akuster808@gmail.com>
- 
- When sending single patches, please use something like:
- 
-    git send-email -1 -M \
-         --to openembedded-devel@lists.openembedded.org \
--        --subject-prefix=meta-filesystems][PATCH
-+        --subject-prefix=meta-filesystems][warrior][PATCH
- 
- 
- Table of Contents
-diff --git a/meta-gnome/README b/meta-gnome/README
-index 2a682e7..2e9e6bb 100644
---- a/meta-gnome/README
-+++ b/meta-gnome/README
-@@ -23,16 +23,16 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][warrior]' in the subject'
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][warrior][PATCH'
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Warrior maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-initramfs/README b/meta-initramfs/README
-index 79244d4..b56224e 100644
---- a/meta-initramfs/README
-+++ b/meta-initramfs/README
-@@ -12,7 +12,7 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
- 
-@@ -20,12 +20,12 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
--with '[meta-initramfs]' in the subject.
-+with '[meta-initramfs][warrior]' in the subject.
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][warrior][PATCH'
- 
--Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Warrior maintainer: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-multimedia/README b/meta-multimedia/README
-index 20f4fb8..7229948 100644
---- a/meta-multimedia/README
-+++ b/meta-multimedia/README
-@@ -1,19 +1,19 @@
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
- layers: meta-oe
--branch: master
-+branch: warrior
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia][warrior]' in the subject'
- 
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][warrior][PATCH
- 
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Warrior maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
-index 5c4c4ce..c029935 100644
---- a/meta-networking/MAINTAINERS
-+++ b/meta-networking/MAINTAINERS
-@@ -2,38 +2,12 @@ This file contains a list of maintainers for the meta-networking layer.
- 
- Please submit any patches against meta-networking to the OpenEmbedded
- development mailing list (openembedded-devel@lists.openembedded.org) with
--'[meta-networking]' in the subject.
-+'[meta-networking][warrior]' in the subject.
- 
- When sending single patches, please use something like:
- 
-    git send-email -1 -M \
-         --to openembedded-devel@lists.openembedded.org \
--        --subject-prefix=meta-networking][PATCH
-+        --subject-prefix=meta-networking][warrior][PATCH
- 
--You may also contact the maintainers directly.
--
--Descriptions of section entries:
--
--        M: Mail patches to: FullName <address@domain>
--        F: Files and directories with wildcard patterns.
--           A trailing slash includes all files and subdirectory files.
--           F: recipes-devtools/    all files in and below recipes-devtools
--           F: recipes-selinux/*    all files in recipes-selinux, but not below
--           One pattern per line.  Multiple F: lines acceptable.
--
--Please keep this list in alphabetical order.
--
--Maintainers List (try to look for most precise areas first)
--
--COMMON
--M:      Khem Raj <raj.khem@gmail.com>
--M:      "Joe MacDonald (backup)" <joe@deserted.net>
--L:      openembedded-devel@lists.openembedded.org
--Q:      https://patchwork.openembedded.org/project/oe/
--S:      Maintained
--F:      conf
--F:      recipes-*
--
--NETKIT
--M:      Armin Kuster <akuster808@gmail.com>
--F:      recipes-netkit
-+Warrior Maintainer:      Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-networking/README b/meta-networking/README
-index e1ba27d..71b48dd 100644
---- a/meta-networking/README
-+++ b/meta-networking/README
-@@ -18,19 +18,19 @@ Dependencies
- This layer depends on:
- 
- URI: git://github.com/openembedded/openembedded-core.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
- For some recipes, the meta-oe layer is required:
- 
- URI: git://github.com/openembedded/meta-openembedded.git
- subdirectory: meta-oe
--branch: master
-+branch: warrior
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-openembedded.git
- subdirectory: meta-python
--branch: master
-+branch: warrior
- revision: HEAD
- 
- Maintenance
-diff --git a/meta-oe/README b/meta-oe/README
-index 0e9f842..1ce0915 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -4,13 +4,13 @@ meta-oe
- This layer depends on:
- 
- URI: git://github.com/openembedded/openembedded-core.git
--branch: master
-+branch: warrior 
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][warrior]' in the subject'
- 
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe[warrior][PATCH'
- 
- You are encouraged to fork the mirror on GitHub https://github.com/openembedded/openembedded-core
- to share your patches, this is preferred for patch sets consisting of more than one patch.
-@@ -19,4 +19,4 @@ Other services like gitorious, repo.or.cz or self-hosted setups are of course ac
- 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
- to use, has been proven to be reliable and has a really good web GUI.
- 
--layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Warrior maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-perl/README b/meta-perl/README
-index 67f2910..543e889 100644
---- a/meta-perl/README
-+++ b/meta-perl/README
-@@ -52,7 +52,7 @@ Dependencies
- This layer depends on:
- 
-   URI: git://git.openembedded.org/openembedded-core
--  branch: master
-+  branch: warrior
-   revision: HEAD
-   prio: default
- 
-@@ -75,14 +75,12 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org with
--'[meta-perl]' in the subject.
-+'[meta-perl][warrior]' in the subject.
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][warrior][PATCH'
- 
--Layer maintainers:
--    Hongxu Jia <hongxu.jia@windriver.com>
--    Tim "moto-timo" Orling <ticotimo@gmail.com>
-+Warrior maintainers: Armin kuster <akuster808@gmail.com>
- 
- License
- -------
-diff --git a/meta-python/README b/meta-python/README
-index 705b035..961efc2 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -13,12 +13,12 @@ The meta-python layer depends on:
- 
- 	URI: git://git.openembedded.org/openembedded-core
- 	layers: meta
--	branch: master
-+	branch: warrior
- 	revision: HEAD
- 
- 	URI: git://git.openembedded.org/meta-openembedded
- 	layers: meta-oe
--	branch: master
-+	branch: warrior
- 	revision: HEAD
- 
- Please follow the recommended setup procedures of your OE distribution.
-@@ -35,15 +35,13 @@ comments and patch review. It is subscriber only, so please register
- before posting.
- 
- Send pull requests to openembedded-devel@lists.openembedded.org with
--'[meta-python]' in the subject.
-+'[meta-python][warrior]' in the subject.
- 
- When sending single patches, please use something like: 
--'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
-+'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][warrior][PATCH'
- 
- Maintenance
- -------------------------
- 
--Layer Maintainers:
--        Tim "moto-timo" Orling <TicoTimo@gmail.com>
--        Derek Straka <derek@asterius.io>
-+Warrior Maintainers: Armin Kuster <akuster808@gmail.com>
- 
-diff --git a/meta-webserver/README b/meta-webserver/README
-index 7b60630..58b6310 100644
---- a/meta-webserver/README
-+++ b/meta-webserver/README
-@@ -13,14 +13,14 @@ This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
- subdirectory: meta
--branch: master
-+branch: warrior
- revision: HEAD
- 
- For some recipes, the meta-oe layer is required:
- 
- URI: git://github.com/openembedded/meta-oe.git
- subdirectory: meta-oe
--branch: master
-+branch: warrior
- revision: HEAD
- 
- 
-@@ -52,9 +52,9 @@ Maintenance
- -----------
- 
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
--with '[meta-webserver]' in the subject.
-+with '[meta-webserver][warrior]' in the subject.
- 
--Layer maintainer: Derek Straka <derek@asterius.io>
-+Warrior Maintainer: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-xfce/README b/meta-xfce/README
-index 7431e8b..2362ecb 100644
---- a/meta-xfce/README
-+++ b/meta-xfce/README
-@@ -1,11 +1,11 @@
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
--branch: master
-+branch: warrior
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
--branch: master
-+branch: warrior
- revision: HEAD
- meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
- 
-@@ -14,9 +14,9 @@ this to local.conf:
- 
- BBMASK = "meta-xfce/recipes-multimedia"
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce][warrior]' in the subject'
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][warrior][PATCH'
- 
--Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Warrior Maintainer: Armin Kuster <akuster808@gmail.com>
+For reference, here is the discussion: 
+http://lists.openembedded.org/pipermail/openembedded-core/2019-March/279724.html
+
+> 
 -- 
-2.7.4
+Joshua Watt <JPEWhacker@gmail.com>
 
 
