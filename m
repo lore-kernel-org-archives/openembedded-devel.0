@@ -1,47 +1,31 @@
-Return-Path: <parthitce@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ECDD7D35F
+Return-Path: <sean@geanix.com>
+Received: from first.geanix.com (first.geanix.com [116.203.34.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 822566BA93
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 12:21:03 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id b10so6992615wmj.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 05:21:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=6SJ/dM/bYZaZgpx0KOcJl/OlcfvCZ88GjGXiizLlIUc=;
-	b=HiJwKcc/PAMf66acjEcCNAxA4j0Lc7qH2c5dtuurvk8B/S42rbGjjiaY7Jv+64ZFAj
-	V99N4v4IcA8y+OZj96zZu3ddRhiE9GMAFexY7uA65qbmzlSOKtUAYO4iKXz0YvD4fGht
-	v4AoZuZA939NvAI95P6R4YGv/CIFtpqjEO0Wn9DMqt34PSdzwyds7mpfYUNoWn/MCIqC
-	vBByETHKJfwjbJvvhUQs0eN7pi6btLwjd2e4b131VSjYXUMbAp/bAyOHIldNZXm6rJ1V
-	ui9pW4Oyp1nQ+TNt2raInk9aHG//QFvfiopY3Chze8MPsQP+MIMye/4E/ttLUHwZ6eBG
-	FFTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6SJ/dM/bYZaZgpx0KOcJl/OlcfvCZ88GjGXiizLlIUc=;
-	b=n+TF0GSxy2cYnwKZy4ZJ4yG0U06wsp3tCFPGiEfva3+3dxal9OnjA3CPw4RFrbAJvk
-	mEb94wy6djr4cp2V2xLBnKAcc2Mx165MwDJx1HgeFqX/sMQx47W2uFWLCjJDzhAupeQn
-	hWLfp/LHOvu1anfpIreJTfmUX5/yWCdSKNUqjd6MBc91/o9Sd0DrQx3Pj6gJqj/oX7EO
-	9fpdR1fD2sWQa+Hx3fhn80VF6JER+gMDjtWOjBFPRRpGB7unvZ6ZZXwKpqBITgnJyQUW
-	jqnTVokiqwkZtF5xkUN05ixqDHrpfLUROYebf8wa6lMmpqSrlOQtlrr3NLFKPhC4uGYt
-	ARwA==
-X-Gm-Message-State: APjAAAU1/wR9RsDIf+IDnUmRczEdCyS9TJdsfU8UqMXoAac3UCnFhcKg
-	O/QAhRNOERixChQRCex4k9m8gc6MEQ==
-X-Google-Smtp-Source: APXvYqzWmoKykhnZHnuDCRbtEaI/Yn+STweGmNYQ8tpVrcJKHGsWqU4jBwSSdOzLNWcoWRSClBbh+Q==
-X-Received: by 2002:a1c:ef08:: with SMTP id n8mr6758859wmh.85.1556713263598;
-	Wed, 01 May 2019 05:21:03 -0700 (PDT)
-Received: from xpert.denx.de ([62.91.23.180])
-	by smtp.gmail.com with ESMTPSA id s6sm4899619wmh.22.2019.05.01.05.21.02
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 01 May 2019 05:21:03 -0700 (PDT)
-From: Parthiban Nallathambi <parthitce@gmail.com>
+	Wed,  1 May 2019 12:37:57 +0000 (UTC)
+Received: from zen.localdomain (unknown [85.184.147.232])
+	by first.geanix.com (Postfix) with ESMTPSA id 0AEE0308E4F;
+	Wed,  1 May 2019 12:37:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
+	t=1556714265; bh=SFaU247uv+nfKFEo0N+VAMvX+07cHGE0IfZn60USibY=;
+	h=From:To:Cc:Subject:Date;
+	b=IjElUhCKBGcjtPj3IJ4swuB+bi7Zgvmj7omqyxr4unbJTTAR+ejWkYI0l45Qbhsmm
+	1tM6WbDl6reAyJt3vhBO2AZfDKWNs1nHw/hJ+NvVo+G5ES+rGp3Re7pGAim++q0qpL
+	0fC0v06t1wBM1ruSh26sCKGAxX2F21QwY6X+U7sy1jx/rxDW/3m4+tPr8boj6Siv3p
+	ZBfSeWho95EMEt05fQR+fGMzNIiRJicpsH7RbEck+RKT4pYDOiq1106kJlZTriNLBJ
+	HSBjbt1p/f33xpDtQ0Rcy+LxpOTYqscw5Qx4bakP/Qwt5iMYwN35jyU958xD/4L+bp
+	+Rx3TVwdmk6Ng==
+From: Sean Nyekjaer <sean@geanix.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 May 2019 14:20:40 +0200
-Message-Id: <20190501122040.2987717-1-parthitce@gmail.com>
-X-Mailer: git-send-email 2.17.2
-Cc: Parthiban Nallathambi <parthitce@gmail.com>
-Subject: [PATCH] python3-supervisor: add version 4.0.2
+Date: Wed,  1 May 2019 14:37:48 +0200
+Message-Id: <20190501123748.77214-1-sean@geanix.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, DKIM_VALID_EF, UNPARSEABLE_RELAY,
+	URIBL_BLOCKED autolearn=disabled version=3.4.2
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on b7bf6291adac
+Subject: [PATCH] ser2net: upgrade to version 3.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,159 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 12:21:03 -0000
+X-List-Received-Date: Wed, 01 May 2019 12:37:57 -0000
+Content-Transfer-Encoding: 8bit
 
-Added python3-supervisor with following missing DEPENDS
-- python3-meld3 version 1.0.2
-
-Signed-off-by: Parthiban Nallathambi <parthitce@gmail.com>
+Signed-off-by: Sean Nyekjaer <sean@geanix.com>
 ---
- .../recipes-devtools/python/python-meld3.inc  | 15 +++++++++
- .../python/python-supervisor.inc              | 30 ++++++++++++++++++
- .../python/python3-meld3_1.0.2.bb             |  2 ++
- .../python3-supervisor/supervisor.service     | 15 +++++++++
- .../python3-supervisor/supervisord.conf       | 31 +++++++++++++++++++
- .../python/python3-supervisor_4.0.2.bb        |  2 ++
- 6 files changed, 95 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-meld3.inc
- create mode 100644 meta-python/recipes-devtools/python/python-supervisor.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-supervisor/supervisor.service
- create mode 100644 meta-python/recipes-devtools/python/python3-supervisor/supervisord.conf
- create mode 100644 meta-python/recipes-devtools/python/python3-supervisor_4.0.2.bb
+ .../ser2net/{ser2net_3.5.bb => ser2net_3.5.1.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/ser2net/{ser2net_3.5.bb => ser2net_3.5.1.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python-meld3.inc b/meta-python/recipes-devtools/python/python-meld3.inc
-new file mode 100644
-index 000000000..d4e274e60
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-meld3.inc
-@@ -0,0 +1,15 @@
-+SUMMARY = "meld3 templating system used by Supervisor"
-+DESCRIPTION = "\
-+meld3 is an HTML/XML templating system for Python which keeps \
-+template markup and dynamic rendering logic separate from one \
-+another.  See http://www.entrian.com/PyMeld for a treatise on the \
-+benefits of this pattern."
-+HOMEPAGE = "https://github.com/supervisor/meld3"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9e7581cef5645475fcefebdc15ed7abf"
-+
-+SRC_URI[md5sum] = "3ccc78cd79cffd63a751ad7684c02c91"
-+SRC_URI[sha256sum] = "f7b754a0fde7a4429b2ebe49409db240b5699385a572501bb0d5627d299f9558"
-+
-+PYPI_PACKAGE = "meld3"
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-supervisor.inc b/meta-python/recipes-devtools/python/python-supervisor.inc
-new file mode 100644
-index 000000000..beab49739
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-supervisor.inc
-@@ -0,0 +1,30 @@
-+SUMMARY = "Supervisor: A Process Control System"
-+DESCRIPTION = "\
-+Supervisor is a client/server system that allows its users \
-+to monitorand control a number of processes on UNIX-like \
-+operating systems."
-+HOMEPAGE = "https://github.com/Supervisor/supervisor"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=5b4e3a2172bba4c47cded5885e7e507e"
-+
-+SRC_URI[md5sum] = "ac70dadd051dcaf1d03c467d51a3aac1"
-+SRC_URI[sha256sum] = "5604457da4fb89d850e78c128205fe4938c9277f87301885b33c94c60361e575"
-+
-+PYPI_PACKAGE = "supervisor"
-+inherit pypi systemd
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-meld3 \
-+"
-+
-+SRC_URI += "file://supervisord.conf \
-+	    file://supervisor.service \
-+	"
-+SYSTEMD_SERVICE_${PN} = "supervisor.service"
-+
-+do_install_append() {
-+	install -d ${D}${sysconfdir}/supervisor
-+	install -d ${D}${systemd_system_unitdir}
-+
-+	install -m 0644 ${WORKDIR}/supervisord.conf ${D}${sysconfdir}/supervisor
-+	install -m 0644 ${WORKDIR}/supervisor.service ${D}${systemd_system_unitdir}
-+}
-diff --git a/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb b/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
-new file mode 100644
-index 000000000..f69591629
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-meld3_1.0.2.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-meld3.inc
-diff --git a/meta-python/recipes-devtools/python/python3-supervisor/supervisor.service b/meta-python/recipes-devtools/python/python3-supervisor/supervisor.service
-new file mode 100644
-index 000000000..e9d3f706b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-supervisor/supervisor.service
-@@ -0,0 +1,15 @@
-+[Unit]
-+Description=Supervisor process control system for UNIX
-+Documentation=http://supervisord.org
-+After=network.target
-+
-+[Service]
-+ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-+ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-+ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
-+KillMode=process
-+Restart=on-failure
-+RestartSec=50s
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-python/recipes-devtools/python/python3-supervisor/supervisord.conf b/meta-python/recipes-devtools/python/python3-supervisor/supervisord.conf
-new file mode 100644
-index 000000000..3fb9b492d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-supervisor/supervisord.conf
-@@ -0,0 +1,31 @@
-+; supervisor config file
-+
-+[unix_http_server]
-+file=/var/run/supervisor.sock   ; (the path to the socket file)
-+chmod=0700                       ; sockef file mode (default 0700)
-+
-+[supervisord]
-+logfile=/var/log/supervisord.log ; (main log file;default $CWD/supervisord.log)
-+pidfile=/var/run/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
-+childlogdir=/var/log/            ; ('AUTO' child log dir, default $TEMP)
-+
-+; the below section must remain in the config file for RPC
-+; (supervisorctl/web interface) to work, additional interfaces may be
-+; added by defining them in separate rpcinterface: sections
-+[rpcinterface:supervisor]
-+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
-+
-+[supervisorctl]
-+serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
-+
-+; The [include] section can just contain the "files" setting.  This
-+; setting can list multiple files (separated by whitespace or
-+; newlines).  It can also contain wildcards.  The filenames are
-+; interpreted as relative to this file.  Included files *cannot*
-+; include files themselves.
-+
-+[include]
-+files = /etc/supervisor/conf.d/*.conf
-+
-+;[inet_http_server]
-+;port=127.0.0.1:9001
-diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.0.2.bb b/meta-python/recipes-devtools/python/python3-supervisor_4.0.2.bb
-new file mode 100644
-index 000000000..d29e1d6b6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-supervisor_4.0.2.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-supervisor.inc
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_3.5.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_3.5.1.bb
+similarity index 71%
+rename from meta-oe/recipes-connectivity/ser2net/ser2net_3.5.bb
+rename to meta-oe/recipes-connectivity/ser2net/ser2net_3.5.1.bb
+index f64776c56..ed8aab016 100644
+--- a/meta-oe/recipes-connectivity/ser2net/ser2net_3.5.bb
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_3.5.1.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "e10e7c8c97e5bade5e85ce6e89bdf1f4"
+-SRC_URI[sha256sum] = "ba9e1d60a89fd7ed075553b4a2074352902203f7fbd9b65b15048c05f0e3f3be"
++SRC_URI[md5sum] = "569267b37b8f507d8874f28f5334b5d2"
++SRC_URI[sha256sum] = "02f5dd0abbef5a17b80836b0de1ef0588e257106fb5e269b86822bfd001dc862"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
-2.17.2
+2.21.0
 
 
