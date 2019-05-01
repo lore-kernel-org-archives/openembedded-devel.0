@@ -1,51 +1,51 @@
-Return-Path: <parthitce@gmail.com>
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
-	[209.85.221.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 981897D901
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F82E7D8D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 May 2019 17:36:37 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id h4so25369002wre.7
+	Wed,  1 May 2019 17:56:43 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id k19so8616774pgh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2019 10:36:38 -0700 (PDT)
+	Wed, 01 May 2019 10:56:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:cc:from:subject:message-id:date:user-agent:mime-version
-	:content-language:content-transfer-encoding;
-	bh=wm/kmZFjS+RKa7JCuwITXr/7uwJehJQnwbXLD6711o0=;
-	b=LLBQh7Ko3nSfwI4ViBKkFEFujQvEw7Q+C2UuE/cbFggfy8m7MwEo2Dghgbna/Lgrbv
-	CK389wV/j8g2sKHbl64BinzftFUgUDAJjuCHDD87gM7b99/u29C453lZ3ZdNKkJBItRo
-	tSaDFIWoTXjqsckVXQfUhuO6r/KLcas4y6cEZNRhJsEbjGfe/wppstHPAt8Lp6eFoNxU
-	qTKg/ic/Hc7Rj04j/nHXGPjQHSErlSksvMrovF8nRbnVkxLGRll4FXfGLMXrv/9i44zg
-	ywOStOAL5CcOyU9t4k9OHbCtIC0QlrMV0bGZY/vXqGfYpDkYmtNnMnjqAndZkHCNbwOZ
-	Rx8Q==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bTc2eDFaWaLQ28W8wybw9ByvGcT3fFuipb/dnI5mdXA=;
+	b=tB4z2jYzDx/m7bXj9L9BniKQa7YwYKPvjqTBJ4NEehBJw/wr+AvSs1/eH/Sjvopdfh
+	nfRLAT5EdHOWsuwBfsxn5azEyaMV5j2xJhNH0SvdOmv/bCHOvtqJQCsBU9u4eEmtGpKQ
+	oGyuz5+czKt8bqy70OSzLaIvCFRfNV3V2Tp+J5Av6tfy7i/XlqlITr7VlI6rGdFjacmF
+	0MPW7ko5v2vqDgyFYpoKVrgsjXyNGCLpbtvGXFnqHdC7IxPNtnCI6n9VkcOMLdDM8qXd
+	KNbVtCWxDPqQw+1iwSDCfEQ4gcVeAHuq1Thr5bMTHHrBOwZWti4SjkU1sC5+3cEttPNv
+	PDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:cc:from:subject:message-id:date:user-agent
-	:mime-version:content-language:content-transfer-encoding;
-	bh=wm/kmZFjS+RKa7JCuwITXr/7uwJehJQnwbXLD6711o0=;
-	b=VbZtOnGAGG/5p05XIycAtcvrxr33WNqhLQbip9JsmaSzmkVlSJkogQK7sDyrGESLXN
-	jUReP1ORB0GOWZA7n5tgmYksyZ4HTJLFzZrUDbKBV9dmc1LpmkTa///yW7F6pYJTSSHq
-	e0FQLJElORC8oE5iklvbvPAebJd2U8dE4xDIHl5NWaCpchlGjAft7zuicx6LS/AvP5v1
-	5kDXfyFZNOZWJXWCks+xkrDsSB2gG4X94Pofyt9FFyg8TdI7su+N1zyQlXk9fex0l2e5
-	M2Q7bYaEqE163oHGI5AMbY68wLmAChQBQSVZX8THKKw4s+BjGU9JFyA/7YxoMWhfRX63
-	xLYA==
-X-Gm-Message-State: APjAAAUg1NNpsSQgAeS0t9Q1xXBP4BuqrkJq0AqKvOqdYb5V3u/xfuuN
-	junhBw/2A57+8vetmEUm6A==
-X-Google-Smtp-Source: APXvYqzL8UcNCdt2Ip2K2etsZDUod9Tx0BfT9HLKUx6fWJGqeehGi/CL3mGgaijiBdBhDaDTKCGz8Q==
-X-Received: by 2002:a5d:5108:: with SMTP id s8mr44682523wrt.99.1556732198112; 
-	Wed, 01 May 2019 10:36:38 -0700 (PDT)
-Received: from [192.168.178.26] ([62.91.105.64])
-	by smtp.gmail.com with ESMTPSA id u9sm1883234wmd.14.2019.05.01.10.36.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 May 2019 10:36:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bTc2eDFaWaLQ28W8wybw9ByvGcT3fFuipb/dnI5mdXA=;
+	b=H34kVQrycQHAra+G9SOvtVnNVivYcjE42kuFLU8B/of2L++fU4rdEa49Zr/FJAKpnH
+	aFXVuph7yQVw15IpKGwp3o8dcRc6b2+orQZtqxBW1a0Qmg7X2Sl6q0gIc+CxaWEfEEXO
+	A6KsauDEKEWM07RaL8ArGqQn2GWz1m0WGcf95UIlfdsacfRm5WRTe/a60wZuAtFlXCGS
+	rSxbY29YJrwVLVEe+oZFX6N8ar7arsTE60sjett8Dv5VEbYH4U56PiKmotEp0Cb3Lh2u
+	fYmQ14X/h6Xfc64A+NrLi0s6jsCUQUN7DCY+fRHfihnSewvk1B4kbarVyuxG3CsIsMAb
+	/6Wg==
+X-Gm-Message-State: APjAAAXLalpymopD+usDb6MWacIp/M4cW6bx/OB6g1sEFLo8Q3bRNIGk
+	47u+s22Xardtms2bcC4RyUBeHVVt
+X-Google-Smtp-Source: APXvYqxACFUT234B1UURivRSrcoAbJP4xaSdhSa8AlpsLpRteWNPtujj/hFagbsrWr5Km4T6NFJsyg==
+X-Received: by 2002:a65:62d2:: with SMTP id m18mr23878457pgv.122.1556733404556;
+	Wed, 01 May 2019 10:56:44 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:c33:8977:bf2:211e:20be])
+	by smtp.gmail.com with ESMTPSA id j10sm509985pgc.14.2019.05.01.10.56.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 01 May 2019 10:56:43 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Parthiban <parthitce@gmail.com>
-Message-ID: <9ede5b50-8c4f-eaaf-8d8b-74d688ef5a4f@gmail.com>
-Date: Wed, 1 May 2019 19:36:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+Date: Wed,  1 May 2019 10:56:42 -0700
+Message-Id: <1556733402-22322-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Cc: Parthiban <parthitce@gmail.com>
-Subject: python3-tinydb: Install failure
+Subject: [warrior][v3][PATCH] README: updated Maintainers list for Warrior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,69 +58,403 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 May 2019 17:36:37 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 May 2019 17:56:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello All,
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 
-I am trying to compile the python3-tinydb and the compilation is successful, but install
-fails with below error,
+[v2]
+bump bitbake to warrior version
 
-*| ModuleNotFoundError: No module named '_sysconfigdata'*
+[v3]
+remove bitbake ref from meta-filesystems
+---
+ README                      |  2 +-
+ meta-filesystems/README     | 13 +++++--------
+ meta-gnome/README           | 10 +++++-----
+ meta-initramfs/README       |  8 ++++----
+ meta-multimedia/README      | 10 +++++-----
+ meta-networking/MAINTAINERS | 32 +++-----------------------------
+ meta-networking/README      |  6 +++---
+ meta-oe/README              |  8 ++++----
+ meta-perl/README            | 10 ++++------
+ meta-python/README          | 12 +++++-------
+ meta-webserver/README       |  8 ++++----
+ meta-xfce/README            | 10 +++++-----
+ 12 files changed, 48 insertions(+), 81 deletions(-)
 
-I could fix this error by copying,
+diff --git a/README b/README
+index 7318f09..881115e 100644
+--- a/README
++++ b/README
+@@ -1,6 +1,6 @@
+ Collection of layers for the OE-core universe
+ 
+-Main layer maintainer: Khem Raj <raj.khem@gmail.com>
++Warrior maintainer: Armin Kuster  <akuster808@gmail.com>
+ 
+ This repository is a collection of layers to suppliment OE-Core
+ with additional packages, Each layer have designated maintainer
+diff --git a/meta-filesystems/README b/meta-filesystems/README
+index 87cb685..8723a0a 100644
+--- a/meta-filesystems/README
++++ b/meta-filesystems/README
+@@ -9,31 +9,28 @@ Dependencies
+ 
+ This layer depends on:
+ 
+-  URI: git://git.openembedded.org/bitbake
+-  branch: master
+-
+   URI: git://git.openembedded.org/openembedded-core
+   layers: meta
+-  branch: master
++  branch: warrior
+ 
+   URI: git://git.openembedded.org/meta-openembedded
+   layers: meta-oe
+-  branch: master
++  branch: warrior
+ 
+ Patches
+ =======
+ 
+ Please submit any patches against the filesystems layer to the
+ OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
+-with '[meta-filesystems]' in the subject.
++with '[meta-filesystems][warrior]' in the subject.
+ 
+-Layer maintainer: Khem Raj <raj.khem@gmail.com>
++Warrior maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-filesystems][PATCH
++        --subject-prefix=meta-filesystems][warrior][PATCH
+ 
+ 
+ Table of Contents
+diff --git a/meta-gnome/README b/meta-gnome/README
+index 2a682e7..2e9e6bb 100644
+--- a/meta-gnome/README
++++ b/meta-gnome/README
+@@ -23,16 +23,16 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][warrior]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][warrior][PATCH'
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
++Warrior maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-initramfs/README b/meta-initramfs/README
+index 79244d4..b56224e 100644
+--- a/meta-initramfs/README
++++ b/meta-initramfs/README
+@@ -12,7 +12,7 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ 
+@@ -20,12 +20,12 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+-with '[meta-initramfs]' in the subject.
++with '[meta-initramfs][warrior]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][warrior][PATCH'
+ 
+-Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
++Warrior maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ 
+ License
+diff --git a/meta-multimedia/README b/meta-multimedia/README
+index 20f4fb8..7229948 100644
+--- a/meta-multimedia/README
++++ b/meta-multimedia/README
+@@ -1,19 +1,19 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+ layers: meta-oe
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia][warrior]' in the subject'
+ 
+ When sending single patches, please use something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][warrior][PATCH
+ 
+ You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
++Warrior maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+index 5c4c4ce..c029935 100644
+--- a/meta-networking/MAINTAINERS
++++ b/meta-networking/MAINTAINERS
+@@ -2,38 +2,12 @@ This file contains a list of maintainers for the meta-networking layer.
+ 
+ Please submit any patches against meta-networking to the OpenEmbedded
+ development mailing list (openembedded-devel@lists.openembedded.org) with
+-'[meta-networking]' in the subject.
++'[meta-networking][warrior]' in the subject.
+ 
+ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-networking][PATCH
++        --subject-prefix=meta-networking][warrior][PATCH
+ 
+-You may also contact the maintainers directly.
+-
+-Descriptions of section entries:
+-
+-        M: Mail patches to: FullName <address@domain>
+-        F: Files and directories with wildcard patterns.
+-           A trailing slash includes all files and subdirectory files.
+-           F: recipes-devtools/    all files in and below recipes-devtools
+-           F: recipes-selinux/*    all files in recipes-selinux, but not below
+-           One pattern per line.  Multiple F: lines acceptable.
+-
+-Please keep this list in alphabetical order.
+-
+-Maintainers List (try to look for most precise areas first)
+-
+-COMMON
+-M:      Khem Raj <raj.khem@gmail.com>
+-M:      "Joe MacDonald (backup)" <joe@deserted.net>
+-L:      openembedded-devel@lists.openembedded.org
+-Q:      https://patchwork.openembedded.org/project/oe/
+-S:      Maintained
+-F:      conf
+-F:      recipes-*
+-
+-NETKIT
+-M:      Armin Kuster <akuster808@gmail.com>
+-F:      recipes-netkit
++Warrior Maintainer:      Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-networking/README b/meta-networking/README
+index e1ba27d..71b48dd 100644
+--- a/meta-networking/README
++++ b/meta-networking/README
+@@ -18,19 +18,19 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/openembedded-core.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ For some recipes, the meta-oe layer is required:
+ 
+ URI: git://github.com/openembedded/meta-openembedded.git
+ subdirectory: meta-oe
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-openembedded.git
+ subdirectory: meta-python
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ Maintenance
+diff --git a/meta-oe/README b/meta-oe/README
+index 0e9f842..1ce0915 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -4,13 +4,13 @@ meta-oe
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/openembedded-core.git
+-branch: master
++branch: warrior 
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][warrior]' in the subject'
+ 
+ When sending single patches, please use something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe[warrior][PATCH'
+ 
+ You are encouraged to fork the mirror on GitHub https://github.com/openembedded/openembedded-core
+ to share your patches, this is preferred for patch sets consisting of more than one patch.
+@@ -19,4 +19,4 @@ Other services like gitorious, repo.or.cz or self-hosted setups are of course ac
+ 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
+ to use, has been proven to be reliable and has a really good web GUI.
+ 
+-layer maintainer: Khem Raj <raj.khem@gmail.com>
++Warrior maintainer: Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-perl/README b/meta-perl/README
+index 67f2910..543e889 100644
+--- a/meta-perl/README
++++ b/meta-perl/README
+@@ -52,7 +52,7 @@ Dependencies
+ This layer depends on:
+ 
+   URI: git://git.openembedded.org/openembedded-core
+-  branch: master
++  branch: warrior
+   revision: HEAD
+   prio: default
+ 
+@@ -75,14 +75,12 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
+-'[meta-perl]' in the subject.
++'[meta-perl][warrior]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][warrior][PATCH'
+ 
+-Layer maintainers:
+-    Hongxu Jia <hongxu.jia@windriver.com>
+-    Tim "moto-timo" Orling <ticotimo@gmail.com>
++Warrior maintainers: Armin kuster <akuster808@gmail.com>
+ 
+ License
+ -------
+diff --git a/meta-python/README b/meta-python/README
+index 705b035..961efc2 100644
+--- a/meta-python/README
++++ b/meta-python/README
+@@ -13,12 +13,12 @@ The meta-python layer depends on:
+ 
+ 	URI: git://git.openembedded.org/openembedded-core
+ 	layers: meta
+-	branch: master
++	branch: warrior
+ 	revision: HEAD
+ 
+ 	URI: git://git.openembedded.org/meta-openembedded
+ 	layers: meta-oe
+-	branch: master
++	branch: warrior
+ 	revision: HEAD
+ 
+ Please follow the recommended setup procedures of your OE distribution.
+@@ -35,15 +35,13 @@ comments and patch review. It is subscriber only, so please register
+ before posting.
+ 
+ Send pull requests to openembedded-devel@lists.openembedded.org with
+-'[meta-python]' in the subject.
++'[meta-python][warrior]' in the subject.
+ 
+ When sending single patches, please use something like: 
+-'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
++'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][warrior][PATCH'
+ 
+ Maintenance
+ -------------------------
+ 
+-Layer Maintainers:
+-        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+-        Derek Straka <derek@asterius.io>
++Warrior Maintainers: Armin Kuster <akuster808@gmail.com>
+ 
+diff --git a/meta-webserver/README b/meta-webserver/README
+index 7b60630..58b6310 100644
+--- a/meta-webserver/README
++++ b/meta-webserver/README
+@@ -13,14 +13,14 @@ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+ subdirectory: meta
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ For some recipes, the meta-oe layer is required:
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+ subdirectory: meta-oe
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ 
+@@ -52,9 +52,9 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+-with '[meta-webserver]' in the subject.
++with '[meta-webserver][warrior]' in the subject.
+ 
+-Layer maintainer: Derek Straka <derek@asterius.io>
++Warrior Maintainer: Armin Kuster <akuster808@gmail.com>
+ 
+ 
+ License
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 7431e8b..2362ecb 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -1,11 +1,11 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: warrior
+ revision: HEAD
+ meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
+ 
+@@ -14,9 +14,9 @@ this to local.conf:
+ 
+ BBMASK = "meta-xfce/recipes-multimedia"
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce][warrior]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][warrior][PATCH'
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
++Warrior Maintainer: Armin Kuster <akuster808@gmail.com>
+-- 
+2.7.4
 
-cp ./recipe-sysroot-native/usr/lib/python-sysconfigdata/_sysconfigdata.py recipe-sysroot-native/usr/lib/python3.7/
-
-But not sure the way to fix it in build environment and not sure about the proper
-way to make this module visible during build.
-
-Thanks,
-Parthiban N
-
-*Full error log:*
-ERROR: python3-tinydb-3.13.0-r0 do_install: 'python3 setup.py install --root=/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/image     --prefix=/usr     --install-lib=/usr/lib/python3.7/site-packages     --install-data=/usr/share' execution failed.
-ERROR: python3-tinydb-3.13.0-r0 do_install: Function failed: do_install (log file is located at /work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/temp/log.do_install.3000311)
-ERROR: Logfile of failure stored in: /work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/temp/log.do_install.3000311
-Log data follows:
-| DEBUG: Executing python function extend_recipe_sysroot
-| NOTE: Direct dependencies are ['virtual:native:/work/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot', '/work/meta/recipes-core/glibc/glibc_2.29.bb:do_populate_sysroot', 'virtual:native:/work/meta/recipes-devtools/python/python3_3.7.2.bb:do_populate_sysroot', 'virtual:native:/work/meta-openembedded/meta-python/recipes-devtools/python/python3-pytest-runner_4.2.bb:do_populate_sysroot', '/work/meta/recipes-devtools/gcc/gcc-runtime_8.3.bb:do_populate_sysroot', '/work/meta/recipes-devtools/gcc/gcc-cross_8.3.bb:do_populate_sysroot', '/work/meta/recipes-devtools/quilt/quilt-native_0.65.bb:do_populate_sysroot']
-| NOTE: Installed into sysroot: []
-| NOTE: Skipping as already exists in sysroot: ['pseudo-native', 'glibc', 'python3-native', 'python3-pytest-runner-native', 'gcc-runtime', 'gcc-cross-arm', 'quilt-native', 'python3-setuptools-native', 'python3-py-native', 'python3-setuptools-scm-native', 'linux-libc-headers', 'gdbm-native', 'xz-native', 'sqlite3-native', 'util-linux-native', 'automake-native', 'autoconf-native', 'pkgconfig-native', 'libffi-native', 'libtirpc-native', 'readline-native', 'gnu-config-native', 'openssl-native', 'libtool-native', 'libnsl2-native', 'zlib-native', 'bzip2-native', 'libgcc', 'binutils-cross-arm', 'texinfo-dummy-native', 'libmpc-native', 'mpfr-native', 'flex-native', 'gmp-native', 'unzip-native', 'gettext-minimal-native', 'ncurses-native', 'm4-native']
-| DEBUG: Python function extend_recipe_sysroot finished
-| DEBUG: Executing shell function do_install
-| running install
-| Traceback (most recent call last):
-|   File "setup.py", line 59, in <module>
-|     long_description=read('README.rst'),
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/site-packages/setuptools/__init__.py", line 145, in setup
-|     return distutils.core.setup(**attrs)
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/core.py", line 148, in setup
-|     dist.run_commands()
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/dist.py", line 966, in run_commands
-|     self.run_command(cmd)
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/dist.py", line 984, in run_command
-|     cmd_obj.ensure_finalized()
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/cmd.py", line 107, in ensure_finalized
-|     self.finalize_options()
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/site-packages/setuptools/command/install.py", line 38, in finalize_options
-|     orig.install.finalize_options(self)
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/command/install.py", line 284, in finalize_options
-|     (prefix, exec_prefix) = get_config_vars('prefix', 'exec_prefix')
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/sysconfig.py", line 472, in get_config_vars
-|     func()
-|   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/sysconfig.py", line 432, in _init_posix
-|     _temp = __import__(name, globals(), locals(), ['build_time_vars'], 0)
-| ModuleNotFoundError: No module named '_sysconfigdata'
-| ERROR: 'python3 setup.py install --root=/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/image     --prefix=/usr     --install-lib=/usr/lib/python3.7/site-packages     --install-data=/usr/share' execution failed.
-| WARNING: /work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/temp/run.do_install.3000311:1 exit 1 from 'exit 1'
-| ERROR: Function failed: do_install (log file is located at /work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/temp/log.do_install.3000311)
-ERROR: Task (/work/meta-openembedded/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb:do_install) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 920 tasks of which 919 didn't need to be rerun and 1 failed.
-
-Summary: 1 task failed:
-  /work/meta-openembedded/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb:do_install
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
 
