@@ -1,48 +1,98 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com
-	[209.85.167.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E6CA560069
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 May 2019 14:21:39 +0000 (UTC)
-Received: by mail-oi1-f177.google.com with SMTP id j9so3781827oie.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 May 2019 07:21:41 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+	[209.85.210.181])
+	by mail.openembedded.org (Postfix) with ESMTP id C2CA77D714;
+	Fri,  3 May 2019 17:18:45 +0000 (UTC)
+Received: by mail-pf1-f181.google.com with SMTP id j11so3174073pff.13;
+	Fri, 03 May 2019 10:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Bq3h3rrlnntgk7flOV0JqJVxLj3NGO+/6h9F4/uyGQE=;
-	b=uV76wxulcKGwDQTW5ztBTb5w385Bo2GTTMpjInWrUw3fQ7lP/yCn6LrjSz+ikqLcdW
-	MGcELKofHfeQeXqwMzwllO2+gDQ4Rqxb/8wGk9uaQvL4jGxig3M1SZx7MjdzBSJ3BPtg
-	S17/F5Um4yOPCtdN9z1Pgcpfu+ZH0PrJCGUISXfmF84we3XHS80BASV4DYDF/kTtgs8O
-	Rt82F7uZMvJKfVbPVmjrFumXt666TWk1na0Nj2AMOwYDsNTLEk5GNY3dqUMXkfbDSyvu
-	gZ7gmZMO/ipcvOf8Gkib257Qdi92yOxz2UsQgM657dKJZLdnYhiZ5rNeEQvp8Mz2+gOS
-	fjLA==
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=/zkBMMt5Gt9B4PEqjDvYLNG0yGxNhbokci4Hvv6JL1s=;
+	b=Qakopx7ZZ5arZGsXophhSCnfpJxDQZIAv8JNTKGhoKy1HYzHlF03EyXXtkjdofd9AI
+	L5/4BOFCuurATdRnGEiak8fa2nrc9UsbotSDtM0imP0Ehra73k+jh0Zgh8079u5gwPhS
+	Dd8pYkgmFlV6CZQxicSXASGajbjqsD1WKGwOo4cGMUoZQLJU8FBWzvNuR69CT7JJ3WGt
+	7u+17o0qshH3AQ1SgKAjgZRDnmeH44owdyscyem8E6XkN9MDlwf1r2qiehb3wci5MXD1
+	ZO8CyW1gJ9wFCnwj9uaBv/41Qor5bE6KQIyvHX9JZIf6CeujwTgeZ7hJAGrWrfU+Rw8+
+	KPfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Bq3h3rrlnntgk7flOV0JqJVxLj3NGO+/6h9F4/uyGQE=;
-	b=GATsEih6DRid1nrZd/HKDfru1OpGfrqQtY+gcvpk5PjgTrgzC4VuuX03/vSn9tTfHt
-	JmszZkaiHUNIOIFXIiMkgs4GLu6B+/rL2kzih+CSw8Z00ggxh+sOmN5j3WpyiaKKkPHS
-	g0QJppAyxw/gsbrkGYT2gNKw6o74AhVH0pztFFXphRc2ZHiO0gTKzq2tW6lZgHV43h7Z
-	zFLXb75xDoJwmVmud8b9Flk8tBiMXJqM1rp04YwyEehlMHh/mvMRpsQ9z3cSMgBtG8xS
-	p066Bv2xslQkcOzs54CbvD5d8a2Eomw/trQU2h+Ec+rMxExfxhcg7Iv+RM9Bx+ZE8Gdn
-	wdJw==
-X-Gm-Message-State: APjAAAWtAK0XYJOqM0f21Mz5ArH6wetVrOtrqTK//fRyQeHx1RhqAvGO
-	Os4rERLBCCnlV9IbrLco93M9o1LPJtLB7v8WCsc=
-X-Google-Smtp-Source: APXvYqy/nue+O2FpXHa2zgyhenmsotDgB+OuuEV21rc1un4DiVaau88zCO4wRKYXwBOYwxGTf+GNfUZz3Sokul5IbGY=
-X-Received: by 2002:aca:3189:: with SMTP id x131mr776740oix.88.1556893300768; 
-	Fri, 03 May 2019 07:21:40 -0700 (PDT)
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=/zkBMMt5Gt9B4PEqjDvYLNG0yGxNhbokci4Hvv6JL1s=;
+	b=XZRLthJ9+NjClIOIAz81S3d74CeMrTbXWjnbluh4PwsP7NBOKTMxgRBWFvgn1xQgOi
+	xJ24UQjh8fztYzUtpQdnQiJ2328rz+1RjETRpv0VfhcpW2BTMQ8Q8D3ncLSyaV7HsTP9
+	BMiqPYlgEEFtF2eZn9Ue+vSkoOc4LlP542DCnre3eFL3BYXmiriirHXLDjHm9o0sPoh4
+	utYP+Rqj6IbyydvlvsCuUkek1PoI8BxpOIXU2KlKE5AYjaF6xZXb76jUnQQNkjmWVO5E
+	p4zA+E5nSl+8PoebaxodzLRqXzBoeTah/JiDBSY28sCxYx08IAV7w5lNaBWcPY/fu7+Y
+	7JKg==
+X-Gm-Message-State: APjAAAWfMtUBw/PxItISl4dCYTLP3qVSd9sQymV1SgZTZw+TRGw/agDm
+	YDN9mDW14qTt+X1ELStN/9b8T6qp
+X-Google-Smtp-Source: APXvYqweX5HVusbdlLBFCpolNPcaGxkTx3nm70CwcvbYfR2MGRSr+yYOTnba1nbpvaAha5cGvQKPsQ==
+X-Received: by 2002:a63:3d4c:: with SMTP id k73mr11842770pga.154.1556903926805;
+	Fri, 03 May 2019 10:18:46 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:b9b3:5f13:7709:822d?
+	([2601:202:4180:c33:b9b3:5f13:7709:822d])
+	by smtp.gmail.com with ESMTPSA id
+	q144sm3188358pgq.76.2019.05.03.10.18.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 03 May 2019 10:18:46 -0700 (PDT)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <e86cf937-5734-fc36-cd94-fad9b0155059@gmail.com>
+Date: Fri, 3 May 2019 10:18:44 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-References: <HE1PR05MB4635B39CEC6B61094BD46679C5350@HE1PR05MB4635.eurprd05.prod.outlook.com>
-In-Reply-To: <HE1PR05MB4635B39CEC6B61094BD46679C5350@HE1PR05MB4635.eurprd05.prod.outlook.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Fri, 3 May 2019 16:21:29 +0200
-Message-ID: <CANNYZj8dCJguNCSu5m13-=mRiz_O_GNQp7vv5gL-J2AkY=1GPA@mail.gmail.com>
-To: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Unable to customize python packaging in a clean way
+Subject: patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,96 +105,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2019 14:21:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 03 May 2019 17:18:46 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-I guess to address the underlying issue, you could modify the python3
-recipe to take the manifest file name from a variable. Patches welcome
-:)
+Hello OE folk,
 
-Alex
+My apologies for cross posting.
 
-On Fri, 3 May 2019 at 16:13, Visser Sander (2) (Consultant)
-<sander.visser.2@consultant.volvo.com> wrote:
->
-> If I want to override the python3-manifest.json part of the python3 recip=
-e; how should I do that from a layer of my own?
->
->
->
-> I first attempted to add a custom python3-manifest.json in my custom laye=
-r that has higher BBFILE_PRIORITY than poky. I observe that my json is inst=
-alled to the $WORKSPACE, but package splitting is still done using the .jso=
-n from poky meta layer...
->
->
->
-> The way that the manifest is included from python3.bb (rocko-warrior) see=
-ms to not allow custom manifest?
->
-> filename =3D os.path.join(d.getVar('THISDIR'), 'python3', 'python3-manife=
-st.json')
->
->
->
-> I could not find any documentation on how customization is supposed to wo=
-rk after the introduction of the JSON manifest.
->
->
->
-> I want to be able to remove rdepends on python3-email when installing pyt=
-hon3-netclient (in sumo), as my use of netclient actually does not use emai=
-l (and email has many dependancies that make including it add a large footp=
-rint to my image).
->
->
->
-> I did find a hack to be able to do what I want, but it is not very clean.=
- Is there a cleaner solution?
->
->
->
-> Hack:
->
-> In my custom layer create a modified copy of the JSON manifest in
->
-> recipes-devtools/python/python3/python3-manifest.json
->
-> For sumo in my custom layer with higher prio than poky create a recipes-d=
-evtools/python/python3_3.5.5.bb file with the following content:
->
->
->
-> require ../../../../poky/meta/recipes-devtools/python/python3_3.5.5.bb
->
->
->
-> #  Adapted JSON manifest is found from THISDIR, so no need to add custom =
-${THISDIR}/python3 to FILESEXTRAPATHS
->
-> FILESEXTRAPATHS_prepend :=3D "${THISDIR}/../../../../poky/meta/recipes-de=
-vtools/python/python3:"
->
->
->
->
->
->
->
-> /Regards Sander
->
->
-> This email message and any attachments may contain confidential informati=
-on and may be privileged. If you are not the intended recipient or otherwis=
-e not authorized to receive this message, you are prohibited to use, copy, =
-disclose or take any action based on this email or any information containe=
-d herein. If you are not the intended recipient, please advise the sender i=
-mmediately by replying to this email and permanently delete this message an=
-d any attachments from your system.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Who is the Admin for Patchwork?
+
+I would like additional privileges to manage the "Yocto Project Layers"
+queue.
+
+Also, I would like additional=C2=A0 privileges to add new branches for an=
+y
+oe, meta-oe queues & yp layers.
+
+kind regards,
+Armin
+
 
