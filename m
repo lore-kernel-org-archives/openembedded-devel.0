@@ -1,98 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id C2CA77D714;
-	Fri,  3 May 2019 17:18:45 +0000 (UTC)
-Received: by mail-pf1-f181.google.com with SMTP id j11so3174073pff.13;
-	Fri, 03 May 2019 10:18:47 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E4B1E7DE21
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  3 May 2019 18:34:53 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id g4so7819815qtq.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 May 2019 11:34:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
-	:mime-version:content-transfer-encoding:content-language;
-	bh=/zkBMMt5Gt9B4PEqjDvYLNG0yGxNhbokci4Hvv6JL1s=;
-	b=Qakopx7ZZ5arZGsXophhSCnfpJxDQZIAv8JNTKGhoKy1HYzHlF03EyXXtkjdofd9AI
-	L5/4BOFCuurATdRnGEiak8fa2nrc9UsbotSDtM0imP0Ehra73k+jh0Zgh8079u5gwPhS
-	Dd8pYkgmFlV6CZQxicSXASGajbjqsD1WKGwOo4cGMUoZQLJU8FBWzvNuR69CT7JJ3WGt
-	7u+17o0qshH3AQ1SgKAjgZRDnmeH44owdyscyem8E6XkN9MDlwf1r2qiehb3wci5MXD1
-	ZO8CyW1gJ9wFCnwj9uaBv/41Qor5bE6KQIyvHX9JZIf6CeujwTgeZ7hJAGrWrfU+Rw8+
-	KPfQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=yeWgS3Js7jHihcIjSBzLDlX0ixdBLB92pqqm1cQ/JpE=;
+	b=qdHAtRBeFd22GKlh5V8750LsoVVmFOic4BCShhx+Q66tKz7/gQZw5SK3dzXSKELK1a
+	4cE2qpysNc2d07fIhiC8qr0R3NMLh/u5jzqHSzCO3nqjyqcC5TVvzr1HrKjHi/EzvTmQ
+	CDZ89aTrmBFNDzWDR0dHWUflbo7sCr/ZBznYOOhY9K0IGJ7lr/SH4dR6GHlE3ZxMRPDd
+	P2qKVLUJlzvRiO+HsQ2XBFRW9+J0h7L+3Z8U3lDXj1WqgQhE7frSlViDjU3c/hCwdrd8
+	JsRZMS+e+Q/SJiAZ9B1cGdSgtPtGO7zabtiHQhgt4U3tyke30o3PsFLVvEKLvSW50D5O
+	gPLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
-	:date:user-agent:mime-version:content-transfer-encoding
-	:content-language;
-	bh=/zkBMMt5Gt9B4PEqjDvYLNG0yGxNhbokci4Hvv6JL1s=;
-	b=XZRLthJ9+NjClIOIAz81S3d74CeMrTbXWjnbluh4PwsP7NBOKTMxgRBWFvgn1xQgOi
-	xJ24UQjh8fztYzUtpQdnQiJ2328rz+1RjETRpv0VfhcpW2BTMQ8Q8D3ncLSyaV7HsTP9
-	BMiqPYlgEEFtF2eZn9Ue+vSkoOc4LlP542DCnre3eFL3BYXmiriirHXLDjHm9o0sPoh4
-	utYP+Rqj6IbyydvlvsCuUkek1PoI8BxpOIXU2KlKE5AYjaF6xZXb76jUnQQNkjmWVO5E
-	p4zA+E5nSl+8PoebaxodzLRqXzBoeTah/JiDBSY28sCxYx08IAV7w5lNaBWcPY/fu7+Y
-	7JKg==
-X-Gm-Message-State: APjAAAWfMtUBw/PxItISl4dCYTLP3qVSd9sQymV1SgZTZw+TRGw/agDm
-	YDN9mDW14qTt+X1ELStN/9b8T6qp
-X-Google-Smtp-Source: APXvYqweX5HVusbdlLBFCpolNPcaGxkTx3nm70CwcvbYfR2MGRSr+yYOTnba1nbpvaAha5cGvQKPsQ==
-X-Received: by 2002:a63:3d4c:: with SMTP id k73mr11842770pga.154.1556903926805;
-	Fri, 03 May 2019 10:18:46 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:b9b3:5f13:7709:822d?
-	([2601:202:4180:c33:b9b3:5f13:7709:822d])
-	by smtp.gmail.com with ESMTPSA id
-	q144sm3188358pgq.76.2019.05.03.10.18.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 03 May 2019 10:18:46 -0700 (PDT)
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <e86cf937-5734-fc36-cd94-fad9b0155059@gmail.com>
-Date: Fri, 3 May 2019 10:18:44 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=yeWgS3Js7jHihcIjSBzLDlX0ixdBLB92pqqm1cQ/JpE=;
+	b=d1pxN0qUDBzaVHPKDrbovVuulbPoTLtGV93lY5DiYYu1S8s/IsHy1Rb8J/vC/edde4
+	Tr7Ih6qxlAiHGUn73ZAsr+BuqInq4N99z1HJ8U/l2qH/+FP3HxouWihc9UHZx0SpSLak
+	ydfZYGVr9yQqMSPPrS6Qu/kLbGtXw3cgsmMuem2Uf5HPAuaMU0RMAq998aFxL7Cio8Y8
+	QjRpkmRIz94Mspyag5Ds0Bz/Jtx9pN38FmjLmMvyqUnytzK++FSjAjimBKGWU4KF74Q1
+	vbyC9sGl4Wu8P5BMJqRvNwYRGqNUReifQYlB5x8Q/sjII0MFs32J4XeF/2PzRZ1P+bvS
+	48QA==
+X-Gm-Message-State: APjAAAXBHqHenQZcPQkK2IFbUSCDjnm3WNk3floZaU1GuHTZBGy3wkn9
+	GXLwphOI+B3slmRWmTD+a5nlvifilZTflqoyRXA=
+X-Google-Smtp-Source: APXvYqyDapRGjMUeGTMRTPW4B5UEv7PcWBtiHoigivCrtRQfgWQeZozlSc8hvYNgyqCmTcYsYuRHg2F6mPvu2gYnRyM=
+X-Received: by 2002:a0c:b64c:: with SMTP id q12mr9724347qvf.50.1556908494735; 
+	Fri, 03 May 2019 11:34:54 -0700 (PDT)
 MIME-Version: 1.0
-Subject: patchwork
+References: <9ede5b50-8c4f-eaaf-8d8b-74d688ef5a4f@gmail.com>
+	<CAMKF1sq4HaU8hELGqPPLgw+dBrv_J3RfCkaW5nRx76UWoGH_uQ@mail.gmail.com>
+	<1eb730dd-b240-5d41-e8c1-492dff13fec1@gmail.com>
+In-Reply-To: <1eb730dd-b240-5d41-e8c1-492dff13fec1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 3 May 2019 11:34:28 -0700
+Message-ID: <CAMKF1srGZMg4e99hTD=DDRbfSRMAAf79rh4G-YUo4aBm=kwfoQ@mail.gmail.com>
+To: Parthiban Nallathambi <parthitce@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: python3-tinydb: Install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -105,25 +56,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2019 17:18:46 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Fri, 03 May 2019 18:34:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
 
-Hello OE folk,
+On Fri, May 3, 2019 at 1:32 AM Parthiban Nallathambi
+<parthitce@gmail.com> wrote:
+>
+> Hello Khem,
+>
+> On 5/2/19 11:07 PM, Khem Raj wrote:
+> > On Wed, May 1, 2019 at 10:36 AM Parthiban <parthitce@gmail.com> wrote:
+> >>
+> >> Hello All,
+> >>
+> >> I am trying to compile the python3-tinydb and the compilation is succe=
+ssful, but install
+> >> fails with below error,
+> >>
+> >> *| ModuleNotFoundError: No module named '_sysconfigdata'*
+> >>
+> >> I could fix this error by copying,
+> >>
+> >> cp ./recipe-sysroot-native/usr/lib/python-sysconfigdata/_sysconfigdata=
+.py recipe-sysroot-native/usr/lib/python3.7/
+> >>
+> >
+> > this should be done via do_install to move this file into
+> > ${D}${libdir}/${PYTHON_DIR}
+>
+> Do you meant to fix this in python3_3.7.2.bb by copying it?
+>
 
-My apologies for cross posting.
+yes
 
-Who is the Admin for Patchwork?
-
-I would like additional privileges to manage the "Yocto Project Layers"
-queue.
-
-Also, I would like additional=C2=A0 privileges to add new branches for an=
-y
-oe, meta-oe queues & yp layers.
-
-kind regards,
-Armin
-
+> Thanks,
+> Parthiban N
+> >
+> >> But not sure the way to fix it in build environment and not sure about=
+ the proper
+> >> way to make this module visible during build.
+> >>
+> >> Thanks,
+> >> Parthiban N
+> >>
+> >> *Full error log:*
+> >> ERROR: python3-tinydb-3.13.0-r0 do_install: 'python3 setup.py install =
+--root=3D/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-ti=
+nydb/3.13.0-r0/image     --prefix=3D/usr     --install-lib=3D/usr/lib/pytho=
+n3.7/site-packages     --install-data=3D/usr/share' execution failed.
+> >> ERROR: python3-tinydb-3.13.0-r0 do_install: Function failed: do_instal=
+l (log file is located at /work/build/tmp/work/armv7at2hf-neon-metr-linux-g=
+nueabi/python3-tinydb/3.13.0-r0/temp/log.do_install.3000311)
+> >> ERROR: Logfile of failure stored in: /work/build/tmp/work/armv7at2hf-n=
+eon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/temp/log.do_install.3000311
+> >> Log data follows:
+> >> | DEBUG: Executing python function extend_recipe_sysroot
+> >> | NOTE: Direct dependencies are ['virtual:native:/work/meta/recipes-de=
+vtools/pseudo/pseudo_git.bb:do_populate_sysroot', '/work/meta/recipes-core/=
+glibc/glibc_2.29.bb:do_populate_sysroot', 'virtual:native:/work/meta/recipe=
+s-devtools/python/python3_3.7.2.bb:do_populate_sysroot', 'virtual:native:/w=
+ork/meta-openembedded/meta-python/recipes-devtools/python/python3-pytest-ru=
+nner_4.2.bb:do_populate_sysroot', '/work/meta/recipes-devtools/gcc/gcc-runt=
+ime_8.3.bb:do_populate_sysroot', '/work/meta/recipes-devtools/gcc/gcc-cross=
+_8.3.bb:do_populate_sysroot', '/work/meta/recipes-devtools/quilt/quilt-nati=
+ve_0.65.bb:do_populate_sysroot']
+> >> | NOTE: Installed into sysroot: []
+> >> | NOTE: Skipping as already exists in sysroot: ['pseudo-native', 'glib=
+c', 'python3-native', 'python3-pytest-runner-native', 'gcc-runtime', 'gcc-c=
+ross-arm', 'quilt-native', 'python3-setuptools-native', 'python3-py-native'=
+, 'python3-setuptools-scm-native', 'linux-libc-headers', 'gdbm-native', 'xz=
+-native', 'sqlite3-native', 'util-linux-native', 'automake-native', 'autoco=
+nf-native', 'pkgconfig-native', 'libffi-native', 'libtirpc-native', 'readli=
+ne-native', 'gnu-config-native', 'openssl-native', 'libtool-native', 'libns=
+l2-native', 'zlib-native', 'bzip2-native', 'libgcc', 'binutils-cross-arm', =
+'texinfo-dummy-native', 'libmpc-native', 'mpfr-native', 'flex-native', 'gmp=
+-native', 'unzip-native', 'gettext-minimal-native', 'ncurses-native', 'm4-n=
+ative']
+> >> | DEBUG: Python function extend_recipe_sysroot finished
+> >> | DEBUG: Executing shell function do_install
+> >> | running install
+> >> | Traceback (most recent call last):
+> >> |   File "setup.py", line 59, in <module>
+> >> |     long_description=3Dread('README.rst'),
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/site-packages/=
+setuptools/__init__.py", line 145, in setup
+> >> |     return distutils.core.setup(**attrs)
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/core=
+.py", line 148, in setup
+> >> |     dist.run_commands()
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/dist=
+.py", line 966, in run_commands
+> >> |     self.run_command(cmd)
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/dist=
+.py", line 984, in run_command
+> >> |     cmd_obj.ensure_finalized()
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/cmd.=
+py", line 107, in ensure_finalized
+> >> |     self.finalize_options()
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/site-packages/=
+setuptools/command/install.py", line 38, in finalize_options
+> >> |     orig.install.finalize_options(self)
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/comm=
+and/install.py", line 284, in finalize_options
+> >> |     (prefix, exec_prefix) =3D get_config_vars('prefix', 'exec_prefix=
+')
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/sysc=
+onfig.py", line 472, in get_config_vars
+> >> |     func()
+> >> |   File "/work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyth=
+on3-tinydb/3.13.0-r0/recipe-sysroot-native/usr/lib/python3.7/distutils/sysc=
+onfig.py", line 432, in _init_posix
+> >> |     _temp =3D __import__(name, globals(), locals(), ['build_time_var=
+s'], 0)
+> >> | ModuleNotFoundError: No module named '_sysconfigdata'
+> >> | ERROR: 'python3 setup.py install --root=3D/work/build/tmp/work/armv7=
+at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/image     --prefix=
+=3D/usr     --install-lib=3D/usr/lib/python3.7/site-packages     --install-=
+data=3D/usr/share' execution failed.
+> >> | WARNING: /work/build/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/pyt=
+hon3-tinydb/3.13.0-r0/temp/run.do_install.3000311:1 exit 1 from 'exit 1'
+> >> | ERROR: Function failed: do_install (log file is located at /work/bui=
+ld/tmp/work/armv7at2hf-neon-metr-linux-gnueabi/python3-tinydb/3.13.0-r0/tem=
+p/log.do_install.3000311)
+> >> ERROR: Task (/work/meta-openembedded/meta-python/recipes-devtools/pyth=
+on/python3-tinydb_3.13.0.bb:do_install) failed with exit code '1'
+> >> NOTE: Tasks Summary: Attempted 920 tasks of which 919 didn't need to b=
+e rerun and 1 failed.
+> >>
+> >> Summary: 1 task failed:
+> >>    /work/meta-openembedded/meta-python/recipes-devtools/python/python3=
+-tinydb_3.13.0.bb:do_install
+> >> Summary: There were 2 ERROR messages shown, returning a non-zero exit =
+code.
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
