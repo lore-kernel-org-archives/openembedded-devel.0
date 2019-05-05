@@ -1,33 +1,53 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id ADE496BA93
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+	[209.85.128.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BA15B6D494
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 May 2019 20:27:07 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44xy8X0FNPz4x
+	Sun,  5 May 2019 23:28:37 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id n25so745609wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 May 2019 22:27:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557088028;
-	bh=ZuOuifBFK7EuSQcRBgLN8hNL+hhax6lyx786cxZgULE=;
-	h=From:To:Subject:Date:From;
-	b=sXIF6xgvDBHCz8PI8bh9Xplh8JVN12WqKUyOUW8yrDGRx4RkoI31DjhJY31up6sMA
-	v01Bpfl3Hq+KBVUYWQupFH8yVX2kTi9Q6MW7/AaR6QwJkj8MvRR3BrtVCEsDw8LmRA
-	/RbO4J3bVUCOVCjUBniYCpaak106wmBrFMof9o73WODFU/dnaWtmtHy1N8WlV+9YjM
-	PX3PEqCIvqACWeY9iLwXTuezUFqpO6xrdcP3yjEskZ6JWzq47IK5Zm2mbbd1xHLYbI
-	HaY1D6aV/x2pFmAoQ9I8qy3AUSB6Ve7ZPrHe9J+xs/C+M13qDUZXXOM8nkG9jzJkuK
-	xEUl9r4Qb1jS1hv8chI1vUxyGsauSW1eW/Ws6yqBY1vAg6ZyU7kyPCnbGsqiZfTXJd
-	GPJ9Ny2DVdGWAFBf2jqmpwgDBjSubA+soXn4Ky0vbnDI8Oh22t+txthM9RpWelwraM
-	dUx10zs5Jx0V0eIv3xL8o1rreleCtVA/CT7TFAJH94/VT+pJ6i9sEW4gb6JmEXRs3m
-	wGADCb+7K91UZLSpKBgW1UAZtjhMwbyeTGe9sfkPpM0OfMaZQqwQbVg3dyU7fIalB5
-	FJ4xkXsx7GNVkX4WTlJHqW1HZWOp6FrcJc9/zf7Jx5UYrWuC3EVRk+xlVbbCeNtflQ
-	aOL3hfVUcIC36G3BPzsrpwWI=
-From: Adrian Bunk <bunk@stusta.de>
+	Sun, 05 May 2019 16:28:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Omo6xILk6bMu4XHowBgxtt+LFEj50229dhnx4WaVfPc=;
+	b=B7LFYV/RIOUR24/6nnv61KVSPB6SUx9OZecndrWWflOxA5LJNtu+WRQJB5rB0yimL7
+	8MnuD5HtsJmesoZbADyjkTOx2F8cH6jQbdHc3808JRUSpqjj/3rkYjYdQ8leB9yfUq/d
+	IgWPSWc231touiCl2WpbsY7ND0gDq+FcqPqDMnajHKRflm5YMKT/qa8nd/FbJnOvV7nU
+	qqh2nltoijBCkina+OSOez+LwX+oAy2xRhBl6zWlKi+2PcBGG7LILU0sbsGAtVWirF6V
+	zw8FDX6TySFzjIPLA8LeKII1qBJob1U9wezVYOpTBKzbrUVuq/wkNpqYPxXwWMNWrSW5
+	kAaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Omo6xILk6bMu4XHowBgxtt+LFEj50229dhnx4WaVfPc=;
+	b=kImx+kSvqgJ8NbwmK3PTISoWIzu1yA48jtr1brPbqprD/hqdTNOlxbaTy0nrWCOJJK
+	zp6uxHgFJvenUYKddWCUaTwdCFGAyEoOCP7uIEm3pCDRIf9I3w/xsYXxqGPeJ9fkApg0
+	Jd1xO80ggfHSLkv78ZjTYh9QQ/AA0iM/KgjRxiaZU/PUrY5mC6xw0SZF3eOL18AJQihs
+	p6c+Ua2e+yJga80e8oagaxbBfxBEBdD6/1jK3oNmottCAS7IUgWKEig11PezjOCcEXZR
+	LDv5ahfvDs8hQ1ZwjRnrE9rE2qic5XLkuqYm2hty1wKilWih9CfCVg/KhT+5ZuBxc99x
+	O0QA==
+X-Gm-Message-State: APjAAAUXmVkP1CZH927bf1bMVJqfJM0JwxJSGdUuj19H/R/OuIB4TAzx
+	KzH/q/ebJgDuI+zwQowl35jQoz1CYwE=
+X-Google-Smtp-Source: APXvYqzNXIH25pJ3+HPlNEqUkNj9WQfO2cSrkYMKHJkE7J2Zyl9BbsCC8vWDq4YPa5MVqKla4c1O7A==
+X-Received: by 2002:a1c:f702:: with SMTP id v2mr14926010wmh.0.1557098917979;
+	Sun, 05 May 2019 16:28:37 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F04849985EFC643178755BA.dip0.t-ipconnect.de.
+	[2003:f0:7f04:8499:85ef:c643:1787:55ba])
+	by smtp.gmail.com with ESMTPSA id
+	l5sm16311473wrb.51.2019.05.05.16.28.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 05 May 2019 16:28:37 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 May 2019 23:27:07 +0300
-Message-Id: <20190505202707.25756-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] efivars: Drop workaround patch for host gcc < 4.7
+Date: Mon,  6 May 2019 01:28:26 +0200
+Message-Id: <20190505232826.25538-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [PATCH] evince: add patch to fix build with recent gobject-introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,83 +60,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 May 2019 20:27:08 -0000
+X-List-Received-Date: Sun, 05 May 2019 23:28:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The -flto change already disappeared in an earlier update.
+gobject-introspection torned some warnings to errors. That caused:
 
--std=gnu11 and -Wmaybe-uninitialized are supported by gcc >= 4.7,
-which covers all host distributions that are still supported.
+| ../../evince-3.28.2/libview/ev-document-model.h:57: Fatal: EvinceView: Namespace conflict for 'document_model_get_type'
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Have tried to fix evince by update to 3.28.5 and 3.32.0 but that causes nasty
+gettext errors which I was not able to fix yet.
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...ix-compile-failure-with-host-gcc-4.6.patch | 43 -------------------
- meta-oe/recipes-bsp/efivar/efivar_37.bb       |  2 -
- 2 files changed, 45 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
+ ...vDocumentModel-get-type-function-dec.patch | 33 +++++++++++++++++++
+ .../recipes-gnome/evince/evince_3.28.2.bb     | 12 ++++---
+ 2 files changed, 40 insertions(+), 5 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
 
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch b/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-deleted file mode 100644
-index dbc9a5755..000000000
---- a/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 3edce6a0019bcb90febc1f654b5b2e2bad5c59bd Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Thu, 26 May 2016 21:50:01 -0400
--Subject: [PATCH] fix compile failure with older host gcc (<=4.6)
--
--While host gcc version is 4.6.3 in ubuntu 1204, it
--did not recognize -std=gnu11 and -Wmaybe-uninitialized.
--
--While host gcc version is 4.4.7 in centos6, it
--did not recognize -std=gnu11, -Wmaybe-uninitialized,
--and -flto.
--
--For native build, use -std=gnu99 to replace -std=gnu11,
--and directly remove -Wmaybe-uninitialized and -flto.
--
--Upstream-Status: Pending
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
--
-----
-- gcc.specs | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/gcc.specs b/gcc.specs
--index 45d43d1..f1c6944 100644
----- a/gcc.specs
--+++ b/gcc.specs
--@@ -2,13 +2,13 @@
-- + -D_GNU_SOURCE
-- 
-- *efivar_cpp_options:
--- -Werror -Wall -std=gnu11 -Wextra
--+ -Werror -Wall -std=gnu99 -Wextra
-- 
-- *cpp_options:
-- + %(efivar_cpp_options)
-- 
-- *cc1_options:
---+ %(efivar_cpp_options) -Wmaybe-uninitialized -fno-merge-constants -fvisibility=hidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%{!fPIC:%{!fno-pic:-fPIE}}}}}}
--++ %(efivar_cpp_options) -fno-merge-constants -fvisibility=hidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%{!fPIC:%{!fno-pic:-fPIE}}}}}}
-- 
-- *self_spec:
-- + %{!shared:%{!static:%{!r:-pie}}} %{static:-Wl,-no-fatal-warnings -Wl,-static -static -Wl,-z,relro,-z,now}
-diff --git a/meta-oe/recipes-bsp/efivar/efivar_37.bb b/meta-oe/recipes-bsp/efivar/efivar_37.bb
-index 8a56e7adc..87f5df423 100644
---- a/meta-oe/recipes-bsp/efivar/efivar_37.bb
-+++ b/meta-oe/recipes-bsp/efivar/efivar_37.bb
-@@ -19,8 +19,6 @@ SRC_URI = "git://github.com/rhinstaller/efivar.git \
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
-                               "
--SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
--                              "
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+new file mode 100644
+index 000000000..dcc4a4e9c
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+@@ -0,0 +1,33 @@
++From 0cdce687d3edfa5ac0fd19539ba1815d039026d5 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?I=C3=B1igo=20Mart=C3=ADnez?= <inigomartinez@gmail.com>
++Date: Fri, 7 Sep 2018 22:34:29 +0200
++Subject: [PATCH] libview: Remove EvDocumentModel get type function declaration
++
++The EvDocumentModel class declares the `ev_document_model_get_type`
++function as part of the `GObject` boilerplate code.
++
++However, this declaration is not necessary and also causes a warning
++when introspection data file, `EvinceView-3.0.gir`, is generated.
++
++Upstream-Status: Applied [1]
++
++
++---
++ libview/ev-document-model.h | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/libview/ev-document-model.h b/libview/ev-document-model.h
++index 784e27d6..6a99e43a 100644
++--- a/libview/ev-document-model.h
+++++ b/libview/ev-document-model.h
++@@ -54,7 +54,6 @@ typedef enum {
++ 	EV_PAGE_LAYOUT_AUTOMATIC
++ } EvPageLayout;
++ 
++-GType            ev_document_model_get_type          (void) G_GNUC_CONST;
++ EvDocumentModel *ev_document_model_new               (void);
++ EvDocumentModel *ev_document_model_new_with_document (EvDocument      *document);
++ 
++-- 
++2.20.1
++
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+index 01f581a35..d2885906f 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+@@ -6,11 +6,13 @@ DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-d
  
- S = "${WORKDIR}/git"
+ inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+ 
+-SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+-           file://0001-help-remove-YELP-macro.patch \
+-           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
+-           file://0001-add-a-formatting-attribute-check.patch \
+-           "
++SRC_URI = " \
++    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
++    file://0001-help-remove-YELP-macro.patch \
++    file://0001-Add-format-attribute-to-_synctex_malloc.patch \
++    file://0001-add-a-formatting-attribute-check.patch \
++    file://0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch \
++"
+ SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
+ SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
  
 -- 
-2.17.1
+2.20.1
 
 
