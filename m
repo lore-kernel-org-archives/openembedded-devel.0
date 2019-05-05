@@ -1,51 +1,49 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id A7F607DDD5
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 909B27CBE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 May 2019 21:47:08 +0000 (UTC)
-Received: (qmail 10227 invoked by uid 1003); 3 May 2019 21:47:14 -0000
-Received: from unknown (HELO ?192.168.11.100?)
-	(philip@opensdr.com@73.152.143.112)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
-	3 May 2019 21:47:14 -0000
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <2f5e2cdf-cd6c-8e59-5442-37c62ac9dbf0@balister.org>
-Date: Fri, 3 May 2019 17:47:06 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-Subject: Plans for ELC and ELCE
+	Sun,  5 May 2019 09:17:49 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id h21so8564749ljk.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 May 2019 02:17:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=O/f1FmF9Ctj0zoDHKAKHU6qn8cpfwcRFLkFO5mfYy4s=;
+	b=b6uRGjaRN1WV4ILxCRwYgKQwQWuQbkWRF3Fs59hBpY3jkMdAHsAGQmLtdupieLzX1i
+	vvDESYbI0Y2Z9S2i5Cvqf8GGfe47WuSVsHJ1boYV3jXC2Cc40AW2GmN3FF8OS545THGW
+	KfAu1hNYmAk9PRH5ImXjjBSn3nHokO7CxfqUKJBXCqC95WBy6TLEO/VEWI1P5+IGUDLd
+	xJH/paVQohQRWWgzZWSo7NnxawX+1eQ+VLRjJieVH14F0KyFLsZZkHJTPWfSfTpmdWSO
+	6rutMsdqwcdJyJ4uA1Je/qcXiWVw6/z3DRLl/glCFMTbXJ1ALM18f8nx6uVtFMPGJwOx
+	8fdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O/f1FmF9Ctj0zoDHKAKHU6qn8cpfwcRFLkFO5mfYy4s=;
+	b=q00cF0y8X0srETFhFM0af4Any7rg/CkPLxZZPrJz4HaL3IW71iAeJEVtI/eLnFwtZS
+	3hcPZnZ9CtAU6rDcLIyqLJ1tHNYRgV3DgDJq6hN9aGwmJ98X0e6QjuY8xeU3IFOy3FFu
+	DKfbYMf+Yf7L3I8akM1JTDMMT/Irqp0TPD5XYPSTYr4ldCpaWYaCwKoim6OTcy4Vy3Di
+	sMhelSXfBFpj41Ga6M8aDTgDLJ2t3ymPNiF/9T5FY2xryMpKke/t70bkueR2Nu1eDZPs
+	G4LIipJgOuha9x5DZlM41oiDwGalCa935RwH6PvJf/74l3asYgbni/hIp4ifXwjQ8zHs
+	C++g==
+X-Gm-Message-State: APjAAAUpLGJwkpa0QKdFNiWA9OkN2jD6WNYikRxzYeycNknHT0KchU49
+	x3eS0Ee+2qGy4I/rMqxn1SPs9SF6C2U=
+X-Google-Smtp-Source: APXvYqzu8ZqnJzEz49lzWHzLXdK61PiK6HzfsKp2LY6NurC9N+g2IZYVT9CrD+KmzQHi6Ada7Z7g9A==
+X-Received: by 2002:a2e:d1a:: with SMTP id 26mr10349391ljn.147.1557047869843; 
+	Sun, 05 May 2019 02:17:49 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	g20sm1023589lja.67.2019.05.05.02.17.48
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 05 May 2019 02:17:49 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 May 2019 11:15:21 +0200
+Message-Id: <20190505091521.6598-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] arno-iptables-firewall: update to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2019 21:47:09 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 05 May 2019 09:17:49 -0000
 
-For the past few years, OpenEmbedded has held developer meetings at the
-LF Embedded conferences in the US and Europe. This year, since ELC is in
-late August, we will skip the developer meeting at ELC. There will be a
-Yocto Project day on Aug 20 before ELC.For ELCE, we are going to work
-with the Yocto project on a 2 day event after ELCE (Oct 31- Nov 1).
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ ...irewall_2.0.1g.bb => arno-iptables-firewall_2.0.3.bb} | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-filter/arno-iptables-firewall/{arno-iptables-firewall_2.0.1g.bb => arno-iptables-firewall_2.0.3.bb} (86%)
 
-The format of the ELC event will be more like the advanced track in
-prior years, which means we will need people to speak about their
-OpenEmbedded and Yocto Project work. Details later.
+diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.1g.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.3.bb
+similarity index 86%
+rename from meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.1g.bb
+rename to meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.3.bb
+index 6fd0affdf..040c53f5c 100644
+--- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.1g.bb
++++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.0.3.bb
+@@ -4,12 +4,11 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
+ 
+-SRC_URI = "http://rocky.eld.leidenuniv.nl/arno-iptables-firewall/${BPN}_${PV}.tar.gz \
+-          "
+-SRC_URI[md5sum] = "77eba7f148bf2840a3e35a6f50c9c353"
+-SRC_URI[sha256sum] = "0bafd85ddc235752250eaec0c7fdb21e530912483f6807a97f86158ed2d301f7"
++SRC_URI = "https://github.com/arno-iptables-firewall/aif/archive/${PV}.tar.gz"
++SRC_URI[md5sum] = "71271c08299aacd45ceb9c9400082d03"
++SRC_URI[sha256sum] = "e2c4fb88a25f0cae8308a3b2bb922b5e2f52f24d8309b24e15a527a6b326e703"
+ 
+-S = "${WORKDIR}/${BPN}_${PV}"
++S = "${WORKDIR}/aif-${PV}"
+ 
+ inherit systemd
+ 
+-- 
+2.17.1
 
-For ELCE there will be two days, the first day is an auditorium, and the
-second day two smaller rooms. Day 1 is for talks, on Day2 we really need
-some ideas of events we can have to help get developers , maintainers
-and users working together. So if you have ideas, let me know and I can
-feed them to people planning the event.
-
-Hopefully these formats start to address some of the themes coming from
-the last couple developer meetings and give us a chance to get more
-information to the larger community.
-
-Philip
 
