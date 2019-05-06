@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 306927D543
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AAB279CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 May 2019 11:27:20 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id y8so10505586ljd.3
+	Mon,  6 May 2019 15:09:07 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id k8so11386321lja.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 May 2019 04:27:22 -0700 (PDT)
+	Mon, 06 May 2019 08:09:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=Cwm86sfr8FMKw9eST+7TPX5i8X5mDYf22wBjOF9NXH4=;
-	b=iu71ZvNJ6w0tyL84fBFHoPoW2OvpsYCI2uyejHupjSWSHx88SErdjGPBActoJnkH7m
-	nblxMrApCvLaYtbVh5zL3M3d1Tvp0MPnfUSEuMYuPkSi8zHoT3G7yH612WTeIb5xk551
-	Sz7tuVziPeL+3CpjK3Yl2riYOzhMztozNjFGXQVlU+rwwkkBdW9I9HMEjCezD2XMRI3e
-	HENMLlJGGaX7SIyJlFhWZT2CzWfiXW5L28GKVv0gz8MEmeh9uiTV58rD4TXDeXqRxeZA
-	2ZVGiDGOcSiIQdA6QewT5frFiyN8iUu69CZXtn8AdJxQjWmdskFyL37tdVhLEnnK57hu
-	pu7w==
+	bh=o87ZwjpkROwR245MET+ye5xIaQcPmut/nix4GutX+zc=;
+	b=kOWJ5cB+qXFctrnrXDQ5AEz8ADrxtMqf0JpZQivfM/Z5muANYQxZC7LpSR4k3szuI3
+	JSymRBLTjKOJII4P9EK78j3V42hCFhkDreYstPojWh1VYMyFfAm3uiN2NeU+lFP8hW0Z
+	9v2NWUph+efFcEVRaJxLZ/m0xq+vmegjIej8m/KhvN/1WN9IL+gNgMZbeqfO/Td5Pl2K
+	FovRcc2vLZ9Yrwhz0M/CFNyNonqfVP2iF726HemTZdVs9M/IdP2m5+mVbzqi95+l2KYS
+	937//+xcWmoPidYQ9LhP6PhZl/OQW2aIEMDC14fUVjkD6FihWN9zW5Sx3wx/TbgdTFsL
+	In2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Cwm86sfr8FMKw9eST+7TPX5i8X5mDYf22wBjOF9NXH4=;
-	b=ViSVZxlvXmBbqXXkrzBm+rbL4spBk2R6RqXOwgZBY58kA+TJfNP/nPGQ/w+XMR3hlY
-	7Dy5iqb0uuztfKcmT4TKThMYva1UaJ2+cf/hfT9ARMV6u5/GDUeJ2VnWis2E/z2j/vsp
-	IUf9AYHvLB2tDtCYPrt9HNePtwIo99H7P7lZg71A4/SQlRwmKlZ4F4xXFpkliQdQoMfs
-	FRFxNN0uFOEew/TSW4VsxTfwwNEumjPA2tqW1nRqO7Pz103pgreOB7gnJk+Ygvo2NnFq
-	gpTKarBisghAOm1HESIgNb4PL86eVEmkPjJQQzeyrCiYXxo5AnWRMskXCzFBGIW/E2vB
-	FkPw==
-X-Gm-Message-State: APjAAAV4PzqgLDPQQ6md18eGoFvFaGAsq3WEEwB9Z9hlc5dtEZjgzVf1
-	+bK3Jf07+zKUXRyzVh3V/k06xpsKWOY=
-X-Google-Smtp-Source: APXvYqyULTPGSZ6kExlGmNUwIFPZrkNT3usobl8MRaaXMlyMcugq7bhW8K5Sksb5ReYMDdFVtqZwPA==
-X-Received: by 2002:a2e:9a8f:: with SMTP id p15mr13283404lji.191.1557142041508;
-	Mon, 06 May 2019 04:27:21 -0700 (PDT)
+	bh=o87ZwjpkROwR245MET+ye5xIaQcPmut/nix4GutX+zc=;
+	b=BkSUQlqn1Gtt7ToVQg4c5k7aYy1YUoSeWi1xxZWY1qvx9NIjTifg47GMIorHpDKqRZ
+	jRrqsI8NpNsxdk6kWHmFmvlT6Civ/76J+ZD6pC60oXw1QyKSMUE6tPcHmRkK020A5biR
+	5ZrvKocBT2/gq+I+Fe1X3YCT+vxR/t4DIQ0gddBZse5CtMSMxiu6TazSMAai4NJxo9yZ
+	5RYMFjYH4CRJALyWWWdhOm567NtRPUC30Y/fOU27ji0cpHv7P4qgerzwS/11Dbils/UN
+	RsEyiIb86o72fO2chMCVVx2pQXUYxOWvgLuqM7qZZ0vAOiSeDXUepVwSKlDxQsYb9vza
+	gRlw==
+X-Gm-Message-State: APjAAAVOg6R6Lsuw4qi0DYLsb05oMPGi5JpFo62AYeYF52Xe0f41zBaX
+	pIZdkDvGdW9aiao9zBtSlINHE4fdTao=
+X-Google-Smtp-Source: APXvYqzjJ2ql09V+3QqaKcdRCIQfY9Ecwc5k/sbBPjoGm87yvCLQtNbczSwHGcTs2B7apczlkex1zg==
+X-Received: by 2002:a2e:9898:: with SMTP id b24mr8023396ljj.70.1557155347492; 
+	Mon, 06 May 2019 08:09:07 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id i73sm493127lfe.22.2019.05.06.04.27.20
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	y131sm787166lfc.76.2019.05.06.08.09.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 May 2019 04:27:20 -0700 (PDT)
+	Mon, 06 May 2019 08:09:06 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 May 2019 13:27:18 +0200
-Message-Id: <20190506112718.24206-1-open.source@oleksandr-kravchuk.com>
+Date: Mon,  6 May 2019 17:09:03 +0200
+Message-Id: <20190506150903.3875-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] ypbind-mt: update to 2.6
+Subject: [PATCH][meta-networking] ebtables: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,47 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2019 11:27:21 -0000
+X-List-Received-Date: Mon, 06 May 2019 15:09:07 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../nis/{ypbind-mt_2.4.bb => ypbind-mt_2.6.bb}            | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-support/nis/{ypbind-mt_2.4.bb => ypbind-mt_2.6.bb} (85%)
+ meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.4.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
-similarity index 85%
-rename from meta-networking/recipes-support/nis/ypbind-mt_2.4.bb
-rename to meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
-index 9822f455e..1a64e6c2e 100644
---- a/meta-networking/recipes-support/nis/ypbind-mt_2.4.bb
-+++ b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
-@@ -16,7 +16,7 @@ the server which answered as first. \
- \
- This is the final IPv4-only version of ypbind-mt. \
- "
--HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-+HOMEPAGE = "https://github.com/thkukuk/ypbind-mt/"
- DEPENDS = " \
-            yp-tools \
-            ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-@@ -28,13 +28,13 @@ RDEPENDS_${PN} += "yp-tools"
- # and is used in place of it.
- PROVIDES += "ypbind"
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index f05bd615d..276784009 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -12,6 +12,8 @@ RDEPENDS_${PN} += "bash"
+ RRECOMMENDS_${PN} += "kernel-module-ebtables \
+     "
  
--SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
-+SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
-            file://ypbind.init \
-            file://ypbind.service \
-            file://0001-dns_hosts-Fix-build-with-musl.patch \
-            "
--SRC_URI[md5sum] = "1aeccd0d11c064d5d59c56941bca682b"
--SRC_URI[sha256sum] = "a2e1fa8fc992a12b289c229e00e38c20d59070c3bcf08babf40c692515c340e0"
-+SRC_URI[md5sum] = "7cf89641fdc128d0919207e4b7caaf1d"
-+SRC_URI[sha256sum] = "0696c0263c4fd48a4ff2ce6c109f05f37aab0f71646d81cb22c7c28591bf80eb"
- 
- inherit systemd update-rc.d
- 
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/ebtables/files/ebtables/"
++
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://ebtables-save \
+            file://installnonroot.patch \
 -- 
 2.17.1
 
