@@ -1,53 +1,23 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id BA15B6D494
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9651E6D9B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 May 2019 23:28:37 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id n25so745609wmi.1
+	Mon,  6 May 2019 02:14:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x462EHPt007205
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 May 2019 16:28:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Omo6xILk6bMu4XHowBgxtt+LFEj50229dhnx4WaVfPc=;
-	b=B7LFYV/RIOUR24/6nnv61KVSPB6SUx9OZecndrWWflOxA5LJNtu+WRQJB5rB0yimL7
-	8MnuD5HtsJmesoZbADyjkTOx2F8cH6jQbdHc3808JRUSpqjj/3rkYjYdQ8leB9yfUq/d
-	IgWPSWc231touiCl2WpbsY7ND0gDq+FcqPqDMnajHKRflm5YMKT/qa8nd/FbJnOvV7nU
-	qqh2nltoijBCkina+OSOez+LwX+oAy2xRhBl6zWlKi+2PcBGG7LILU0sbsGAtVWirF6V
-	zw8FDX6TySFzjIPLA8LeKII1qBJob1U9wezVYOpTBKzbrUVuq/wkNpqYPxXwWMNWrSW5
-	kAaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Omo6xILk6bMu4XHowBgxtt+LFEj50229dhnx4WaVfPc=;
-	b=kImx+kSvqgJ8NbwmK3PTISoWIzu1yA48jtr1brPbqprD/hqdTNOlxbaTy0nrWCOJJK
-	zp6uxHgFJvenUYKddWCUaTwdCFGAyEoOCP7uIEm3pCDRIf9I3w/xsYXxqGPeJ9fkApg0
-	Jd1xO80ggfHSLkv78ZjTYh9QQ/AA0iM/KgjRxiaZU/PUrY5mC6xw0SZF3eOL18AJQihs
-	p6c+Ua2e+yJga80e8oagaxbBfxBEBdD6/1jK3oNmottCAS7IUgWKEig11PezjOCcEXZR
-	LDv5ahfvDs8hQ1ZwjRnrE9rE2qic5XLkuqYm2hty1wKilWih9CfCVg/KhT+5ZuBxc99x
-	O0QA==
-X-Gm-Message-State: APjAAAUXmVkP1CZH927bf1bMVJqfJM0JwxJSGdUuj19H/R/OuIB4TAzx
-	KzH/q/ebJgDuI+zwQowl35jQoz1CYwE=
-X-Google-Smtp-Source: APXvYqzNXIH25pJ3+HPlNEqUkNj9WQfO2cSrkYMKHJkE7J2Zyl9BbsCC8vWDq4YPa5MVqKla4c1O7A==
-X-Received: by 2002:a1c:f702:: with SMTP id v2mr14926010wmh.0.1557098917979;
-	Sun, 05 May 2019 16:28:37 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F04849985EFC643178755BA.dip0.t-ipconnect.de.
-	[2003:f0:7f04:8499:85ef:c643:1787:55ba])
-	by smtp.gmail.com with ESMTPSA id
-	l5sm16311473wrb.51.2019.05.05.16.28.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 05 May 2019 16:28:37 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 May 2019 01:28:26 +0200
-Message-Id: <20190505232826.25538-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	Sun, 5 May 2019 19:14:17 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Sun, 5 May 2019 19:14:17 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 6 May 2019 10:14:15 +0800
+Message-ID: <1557108855-391721-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH] evince: add patch to fix build with recent gobject-introspection
+Subject: [meta-oe][PATCH] php: correct httpd path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,87 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 May 2019 23:28:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 May 2019 02:14:16 -0000
+Content-Type: text/plain
 
-gobject-introspection torned some warnings to errors. That caused:
+From: Changqing Li <changqing.li@windriver.com>
 
-| ../../evince-3.28.2/libview/ev-document-model.h:57: Fatal: EvinceView: Namespace conflict for 'document_model_get_type'
+Configuration:
+IMAGE_INSTALL_append = " modphp apache2 phpmyadmin xdebug"
+PACKAGECONFIG_append_pn-php = " apache2"
 
-Have tried to fix evince by update to 3.28.5 and 3.32.0 but that causes nasty
-gettext errors which I was not able to fix yet.
+Apache2 service start up with error:
+[php7:crit] [pid 3943:tid 140477147074880] Apache is running a threaded MPM,
+but your PHP Module is not compiled to be threadsafe.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Fix:
+after apache2 is upgraded from 2.4.34 to 2.4.39, apache2-native
+installs httpd into STAGING_SBINDIR_NATIVE, correct it so that
+ZTS feature is open, and php is compiled to be threadsafe.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...vDocumentModel-get-type-function-dec.patch | 33 +++++++++++++++++++
- .../recipes-gnome/evince/evince_3.28.2.bb     | 12 ++++---
- 2 files changed, 40 insertions(+), 5 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+ meta-oe/recipes-devtools/php/php.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
-new file mode 100644
-index 000000000..dcc4a4e9c
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
-@@ -0,0 +1,33 @@
-+From 0cdce687d3edfa5ac0fd19539ba1815d039026d5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?I=C3=B1igo=20Mart=C3=ADnez?= <inigomartinez@gmail.com>
-+Date: Fri, 7 Sep 2018 22:34:29 +0200
-+Subject: [PATCH] libview: Remove EvDocumentModel get type function declaration
-+
-+The EvDocumentModel class declares the `ev_document_model_get_type`
-+function as part of the `GObject` boilerplate code.
-+
-+However, this declaration is not necessary and also causes a warning
-+when introspection data file, `EvinceView-3.0.gir`, is generated.
-+
-+Upstream-Status: Applied [1]
-+
-+
-+---
-+ libview/ev-document-model.h | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/libview/ev-document-model.h b/libview/ev-document-model.h
-+index 784e27d6..6a99e43a 100644
-+--- a/libview/ev-document-model.h
-++++ b/libview/ev-document-model.h
-+@@ -54,7 +54,6 @@ typedef enum {
-+ 	EV_PAGE_LAYOUT_AUTOMATIC
-+ } EvPageLayout;
-+ 
-+-GType            ev_document_model_get_type          (void) G_GNUC_CONST;
-+ EvDocumentModel *ev_document_model_new               (void);
-+ EvDocumentModel *ev_document_model_new_with_document (EvDocument      *document);
-+ 
-+-- 
-+2.20.1
-+
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-index 01f581a35..d2885906f 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-@@ -6,11 +6,13 @@ DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-d
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 6f893ad..785c2f5 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -102,7 +102,7 @@ acpaths = ""
  
- inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+ do_configure_prepend () {
+     rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
+-    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
++    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
+ }
  
--SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
--           file://0001-help-remove-YELP-macro.patch \
--           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
--           file://0001-add-a-formatting-attribute-check.patch \
--           "
-+SRC_URI = " \
-+    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-+    file://0001-help-remove-YELP-macro.patch \
-+    file://0001-Add-format-attribute-to-_synctex_malloc.patch \
-+    file://0001-add-a-formatting-attribute-check.patch \
-+    file://0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch \
-+"
- SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
- SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
- 
+ do_configure_append() {
 -- 
-2.20.1
+2.7.4
 
 
