@@ -1,52 +1,49 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B31A77D533
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 306927D543
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 May 2019 11:14:16 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id h11so14631672wmb.5
+	Mon,  6 May 2019 11:27:20 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id y8so10505586ljd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 May 2019 04:14:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=XaonEX+ALaUtgHUpuUJd8FEUKytQDwNIscU77CeN6Ck=;
-	b=cG8z6HXeh8bh8xbhtcce6hWhMcptgQrj+iDFTMMouA7EhmHa5MFhzLzRgfvwYOtaFg
-	9LUh+b813lJcgxfG+IdmPtjL5oONpfd8ufP165dy2/AI1FQtSTw1oMAGK5mdFq0b4d19
-	Wv9+vr+oSMuND+jlKZXMf1j5IM4DQ0BVzCS4AA2sbXCPxM4TRHytKDmuIoUFOWMJ9ARR
-	EpDOc1mFCizpCn8+9ld8Lo/a9rI3jBSPOdcVGBQgGssoZuN1NaKYL9tJGgVU9LRHUYVD
-	2mg9uuBFmarGpHC8kKH0zC4+hhBmUOXIZ+aQi/yMcLkzKz/I5KXqTx8jBFRp87x2n978
-	UAgw==
+	Mon, 06 May 2019 04:27:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Cwm86sfr8FMKw9eST+7TPX5i8X5mDYf22wBjOF9NXH4=;
+	b=iu71ZvNJ6w0tyL84fBFHoPoW2OvpsYCI2uyejHupjSWSHx88SErdjGPBActoJnkH7m
+	nblxMrApCvLaYtbVh5zL3M3d1Tvp0MPnfUSEuMYuPkSi8zHoT3G7yH612WTeIb5xk551
+	Sz7tuVziPeL+3CpjK3Yl2riYOzhMztozNjFGXQVlU+rwwkkBdW9I9HMEjCezD2XMRI3e
+	HENMLlJGGaX7SIyJlFhWZT2CzWfiXW5L28GKVv0gz8MEmeh9uiTV58rD4TXDeXqRxeZA
+	2ZVGiDGOcSiIQdA6QewT5frFiyN8iUu69CZXtn8AdJxQjWmdskFyL37tdVhLEnnK57hu
+	pu7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=XaonEX+ALaUtgHUpuUJd8FEUKytQDwNIscU77CeN6Ck=;
-	b=EiFKeQYt2+7/SBrrr27PEnHX2FW9Y9sqeq5yg3SyJlgvwrYxca7FLMSrt4KQ4RmduB
-	YGlAfrCzqoOB66o2EbcV1kvqohWOvCiyRvxVIzDq1SpnOUJaS21x7qZdLk/NNIXGzplK
-	Rca0JGpISJd4NJUltlETfkm99/4YDHMTPBCYZ864+jSXLLW242QMZbklOx9LmikacDYe
-	3EPS12NIdfbpWd0SsrPwusOa8dBeONGBSasOc9Bjs01lFk7g9iTWoEGXF82HHsFAc6gL
-	+RFSM+AY17QPLjaEWxtNotHxMG5hkOKy1w8GUcF1wblndNEcKZXmJlvlpvwmSRdaC4um
-	V5bg==
-X-Gm-Message-State: APjAAAXZ+PQihAvguK4ebaKPuHf+COSBaqCyE1ykgabIgITCVN13gqNP
-	n4JCkcj9LbwXb9R0dq6kp/ahzBH6HsA=
-X-Google-Smtp-Source: APXvYqyUd3IPkpFuZ5spMed5mjwCJVdYfNjkn0wXRAuAqiWyhfNvadHZNn+ZYy4vsnCZhRkaATHPzA==
-X-Received: by 2002:a05:600c:2051:: with SMTP id
-	p17mr5174448wmg.125.1557141257016; 
-	Mon, 06 May 2019 04:14:17 -0700 (PDT)
-Received: from VM-VPR.corporate.saft.org ([80.215.75.114])
-	by smtp.gmail.com with ESMTPSA id
-	b10sm15910181wrh.59.2019.05.06.04.14.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 06 May 2019 04:14:16 -0700 (PDT)
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Date: Mon,  6 May 2019 13:14:06 +0200
-Message-Id: <1557141246-4799-1-git-send-email-vincent.prince.fr@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <20190206004547.32351-5-raj.khem@gmail.com>
-References: <20190206004547.32351-5-raj.khem@gmail.com>
-Subject: [meta-oe] [PATCH] mongodb: Fix build with gcc
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Cwm86sfr8FMKw9eST+7TPX5i8X5mDYf22wBjOF9NXH4=;
+	b=ViSVZxlvXmBbqXXkrzBm+rbL4spBk2R6RqXOwgZBY58kA+TJfNP/nPGQ/w+XMR3hlY
+	7Dy5iqb0uuztfKcmT4TKThMYva1UaJ2+cf/hfT9ARMV6u5/GDUeJ2VnWis2E/z2j/vsp
+	IUf9AYHvLB2tDtCYPrt9HNePtwIo99H7P7lZg71A4/SQlRwmKlZ4F4xXFpkliQdQoMfs
+	FRFxNN0uFOEew/TSW4VsxTfwwNEumjPA2tqW1nRqO7Pz103pgreOB7gnJk+Ygvo2NnFq
+	gpTKarBisghAOm1HESIgNb4PL86eVEmkPjJQQzeyrCiYXxo5AnWRMskXCzFBGIW/E2vB
+	FkPw==
+X-Gm-Message-State: APjAAAV4PzqgLDPQQ6md18eGoFvFaGAsq3WEEwB9Z9hlc5dtEZjgzVf1
+	+bK3Jf07+zKUXRyzVh3V/k06xpsKWOY=
+X-Google-Smtp-Source: APXvYqyULTPGSZ6kExlGmNUwIFPZrkNT3usobl8MRaaXMlyMcugq7bhW8K5Sksb5ReYMDdFVtqZwPA==
+X-Received: by 2002:a2e:9a8f:: with SMTP id p15mr13283404lji.191.1557142041508;
+	Mon, 06 May 2019 04:27:21 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id i73sm493127lfe.22.2019.05.06.04.27.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 May 2019 04:27:20 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  6 May 2019 13:27:18 +0200
+Message-Id: <20190506112718.24206-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] ypbind-mt: update to 2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,36 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2019 11:14:16 -0000
+X-List-Received-Date: Mon, 06 May 2019 11:27:21 -0000
 
-Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-dbs/mongodb/mongodb_git.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../nis/{ypbind-mt_2.4.bb => ypbind-mt_2.6.bb}            | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-support/nis/{ypbind-mt_2.4.bb => ypbind-mt_2.6.bb} (85%)
 
-diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-index 53a9f66..0f90003 100644
---- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
-@@ -21,12 +21,16 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.0 \
-            file://arm64-support.patch \
-            file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
-            file://0001-Support-deprecated-resolver-functions.patch \
--           file://0001-asio-Dont-use-experimental-with-clang.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0002-Fix-default-stack-size-to-256K.patch \
-            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
-            "
-+
-+SRC_URI_append_toolchain-clang = "\
-+           file://0001-asio-Dont-use-experimental-with-clang.patch \
-+           "
-+
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.4.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
+similarity index 85%
+rename from meta-networking/recipes-support/nis/ypbind-mt_2.4.bb
+rename to meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
+index 9822f455e..1a64e6c2e 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_2.4.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
+@@ -16,7 +16,7 @@ the server which answered as first. \
+ \
+ This is the final IPv4-only version of ypbind-mt. \
+ "
+-HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
++HOMEPAGE = "https://github.com/thkukuk/ypbind-mt/"
+ DEPENDS = " \
+            yp-tools \
+            ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+@@ -28,13 +28,13 @@ RDEPENDS_${PN} += "yp-tools"
+ # and is used in place of it.
+ PROVIDES += "ypbind"
  
- COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
+-SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
++SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
+            file://ypbind.init \
+            file://ypbind.service \
+            file://0001-dns_hosts-Fix-build-with-musl.patch \
+            "
+-SRC_URI[md5sum] = "1aeccd0d11c064d5d59c56941bca682b"
+-SRC_URI[sha256sum] = "a2e1fa8fc992a12b289c229e00e38c20d59070c3bcf08babf40c692515c340e0"
++SRC_URI[md5sum] = "7cf89641fdc128d0919207e4b7caaf1d"
++SRC_URI[sha256sum] = "0696c0263c4fd48a4ff2ce6c109f05f37aab0f71646d81cb22c7c28591bf80eb"
+ 
+ inherit systemd update-rc.d
+ 
 -- 
-2.7.4
+2.17.1
 
 
