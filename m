@@ -1,23 +1,23 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9651E6D9B6
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 66DC46BCDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 May 2019 02:14:16 +0000 (UTC)
+	Mon,  6 May 2019 03:18:50 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x462EHPt007205
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 5 May 2019 19:14:17 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Sun, 5 May 2019 19:14:17 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 May 2019 10:14:15 +0800
-Message-ID: <1557108855-391721-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x463IoNY002450
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 5 May 2019 20:18:50 -0700 (PDT)
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Sun, 5 May 2019 20:18:49 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Sun, 5 May 2019 20:18:49 -0700
+Message-ID: <20190506031849.37334-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] php: correct httpd path
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] pmtools: use update-alternatives for acpidump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,43 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2019 02:14:16 -0000
+X-List-Received-Date: Mon, 06 May 2019 03:18:50 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+acpidump is both provided by acpica and pmtools, so use
+update-alternatives to fix conflicts:
+...
+|Error: Transaction check error:
+|  file /usr/bin/acpidump conflicts between attempted installs of
+pmtools-20130209+git0+3ebe0e54c5-r0.i586 and acpica-20190405-r0.i586
+...
 
-Configuration:
-IMAGE_INSTALL_append = " modphp apache2 phpmyadmin xdebug"
-PACKAGECONFIG_append_pn-php = " apache2"
-
-Apache2 service start up with error:
-[php7:crit] [pid 3943:tid 140477147074880] Apache is running a threaded MPM,
-but your PHP Module is not compiled to be threadsafe.
-
-Fix:
-after apache2 is upgraded from 2.4.34 to 2.4.39, apache2-native
-installs httpd into STAGING_SBINDIR_NATIVE, correct it so that
-ZTS feature is open, and php is compiled to be threadsafe.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-devtools/php/php.inc | 2 +-
+ meta-oe/recipes-devtools/pmtools/pmtools_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 6f893ad..785c2f5 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -102,7 +102,7 @@ acpaths = ""
+diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
+index 8491fc904..9afcbbb7f 100644
+--- a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
++++ b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
+@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
+ inherit update-alternatives
  
- do_configure_prepend () {
-     rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
--    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
-+    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
- }
+ ALTERNATIVE_PRIORITY = "90"
+-ALTERNATIVE_${PN} = "acpixtract"
++ALTERNATIVE_${PN} = "acpixtract acpidump"
  
- do_configure_append() {
+ do_configure[noexec] = "1"
+ do_compile() {
 -- 
-2.7.4
+2.21.0
 
 
