@@ -1,54 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
-	[209.85.221.48])
-	by mail.openembedded.org (Postfix) with ESMTP id BEA7A7D593
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 969FE7D656
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 May 2019 08:30:07 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id h4so16096734wre.7
+	Mon,  6 May 2019 08:30:08 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id f7so5771054wrq.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 May 2019 01:30:09 -0700 (PDT)
+	Mon, 06 May 2019 01:30:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=b2d9OEHLpNAdI1Zh1nU+hck2pDScf3bYgkZa58/Kk9E=;
-	b=Seijcj8yUsn9KK0lbJABX4gS/cM9XQLSSWCX60YhEVWp9uY/ZLNHAFavlzUpj7Gc4J
-	zJe6maFAro6QXFN/FK4r5s5MrDDFCLJSyvOmoNH0qhaY21fwWBpfepM+EFwc2oiDq2ky
-	k35SyL0EbeE5ejO4ZFE3ha1584JPZLyiOapcoZcAdzYGZIxl9bZEpJNY+FuOnOwx+leJ
-	z4pYF1g2LzpA4DceXAZ4azKW1hOoJK9SCW/DBRAtaRggj0dtLjZX2oD4FgU1c79y53Ey
-	iAchSCMIeKhp6P/YGmYIhXJaVlKvkf1Km+kD6lAP4rO1NtcLSL61WMfFBQNtwG8BlFpD
-	1nHQ==
+	bh=d0vElPMByCza/M3EbzzYTzlovV5vd10Uy9f0+QwCTWA=;
+	b=RK9k52xQ/oYdCXkYutdsQuy2v1NdsLM/Nh1bPrvVZOGtOWwhh2rrXzrCKleGXATkQA
+	1NNxhcYHOPlrBFcO+X4kc9Kc5M/Yg4IySSLZDVCHZbhMRbo6UA9vrIUNhHePDbUyvTUF
+	5Sm9GGRPqg1d8k7oY3is/dpRqurjSy5HzYX44NUgFoSOU8RkMWSHDYm1Gv8H9sIWLaAJ
+	BSEy4CTBhwrAKqDM4esEZpjP5Ea+CbLjsMNYgx4O5YkynYTLnxS2IVa62B9t7d54Z33R
+	68UrJdBR8TlhYJEpqpUic1QFKWGmCSxDR8oEJgUlx56hwZe4K+O9BZl/w/nfDsxgYanD
+	itFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=b2d9OEHLpNAdI1Zh1nU+hck2pDScf3bYgkZa58/Kk9E=;
-	b=QcCQyo5iMFYan07LLOugaBBlG8pqYxfPOeFiOQxqt4DKlHBwta37oS2ZIM7DPVrv3C
-	Z6gU5lOBo1I/cD4ZgP9CGET7sfR3yGKVJtdVo7cXnLWiTZejRMZF0IuJxGTwC0AlpLnu
-	Wke6Sd6E2n2ZG8EKdLqn3UJK5nZYgIf4f7Ibdln2SuAh6u2jKwkN0J65LWVraOzsd4Pt
-	fT+v+assHOKMwJITfcb7CFrYitIsIX8KX8wWuse6oyYDVBSlZJDwm911/UgnZEPXGnte
-	RbdH8/TfE2oBK1p9v7zYad/Og7kChdEvqBCvTQcNdVvJ39tCSgrhXtqrfVJ6IEZ/w2eu
-	yv0Q==
-X-Gm-Message-State: APjAAAXsYB4T0WUtyfye0vEoeqBdL1VtXVq7WBGm21rYjOxl4w4QRnFW
-	jySU9kptmMxEqTXDfbBbnE+nXwFq
-X-Google-Smtp-Source: APXvYqyhJVgg0H5HGqYBKzLG0Gte8fsxKc9fr3viLtxVPXxZkFuKVHnhFtWy4HQpDTh/4VMByssvRg==
-X-Received: by 2002:a05:6000:12cf:: with SMTP id
-	l15mr14775127wrx.323.1557131408132; 
-	Mon, 06 May 2019 01:30:08 -0700 (PDT)
+	bh=d0vElPMByCza/M3EbzzYTzlovV5vd10Uy9f0+QwCTWA=;
+	b=BRRfbSDtE///XJ3HVgJ8CyaZdzIrsoWvJbgKTKjJFjl4lWihYioKus3Nq7Wi9QSApK
+	EqTjKmiRH1R7NrmsVHxj+47SVX3ceiTIypsqBT7B/M4vVw5xUysbnYFQkS+4Sy7GN2BR
+	18C8cTflOMfwCQdTV5PN8yN6Xryi/t4vNUozJu2jA/5QQ4galMuErk1vRe3GhVeYLC//
+	2o2CaDdk9sxke60Aosm6frbmNpqnmPnWDqdlP59JXb+eZXS82SZt4ie40qBEfRv+vOaR
+	rE0TniGaP9H6/vMJ2szvVRvQeNLhtyr8zxSecet/txyLos+6bDVD7KoUmsbvevUYTXYO
+	LD5A==
+X-Gm-Message-State: APjAAAVAe34Tl6jikkhqGso8iIKX4fE52Zlk68ACw3WfPQnNYVn73Fkn
+	92jIYVaj0WOwb7mrknwooIti8Mnr
+X-Google-Smtp-Source: APXvYqyDc58AJpSHCU3p3pdCQ/Zqhc/19Kw5p1U7OuBO8y840bvhYhgypo7bNGNeyilHVd1TBn0MYg==
+X-Received: by 2002:adf:e5cb:: with SMTP id a11mr4913389wrn.128.1557131409210; 
+	Mon, 06 May 2019 01:30:09 -0700 (PDT)
 Received: from localhost.localdomain (p509737a3.dip0.t-ipconnect.de.
 	[80.151.55.163]) by smtp.gmail.com with ESMTPSA id
-	a22sm7526235wmb.47.2019.05.06.01.30.07
+	a22sm7526235wmb.47.2019.05.06.01.30.08
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 06 May 2019 01:30:07 -0700 (PDT)
+	Mon, 06 May 2019 01:30:08 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 May 2019 10:29:46 +0200
-Message-Id: <20190506082948.22276-6-schnitzeltony@gmail.com>
+Date: Mon,  6 May 2019 10:29:47 +0200
+Message-Id: <20190506082948.22276-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190506082948.22276-1-schnitzeltony@gmail.com>
 References: <20190506082948.22276-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/8] xfce4-places-plugin: upgrade 1.7.0 -> 1.8.0
+Subject: [PATCH 7/8] xfce4-datetime-plugin: upgrade 0.7.0 -> 0.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,45 +60,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2019 08:30:08 -0000
+X-List-Received-Date: Mon, 06 May 2019 08:30:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Most notable change is port to GTK3. Futher info at [1]
-* Added SUMMARY and reworked DESCRIPTION slightly
+Prettyficatons, translations and minor bugfixes [1]
 
-[1] https://mail.xfce.org/pipermail/xfce/2019-May/036394.html
+[1] https://mail.xfce.org/pipermail/xfce/2019-April/036390.html
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...places-plugin_1.7.0.bb => xfce4-places-plugin_1.8.0.bb} | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.7.0.bb => xfce4-places-plugin_1.8.0.bb} (58%)
+ ...atetime-plugin_0.7.0.bb => xfce4-datetime-plugin_0.7.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/datetime/{xfce4-datetime-plugin_0.7.0.bb => xfce4-datetime-plugin_0.7.1.bb} (66%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.0.bb
-similarity index 58%
-rename from meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb
-rename to meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.0.bb
-index 16be09dca..698152bae 100644
---- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.0.bb
-@@ -1,12 +1,13 @@
--DESCRIPTION = "Panel plugin displaying menu with quick access to folders, documents, and removable media"
-+SUMMARY = "Menu for quick access to folders, documents and removable media"
-+DESCRIPTION = "Panel plugin displaying menu with quick access to folders, documents and removable media"
- HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-places-plugin"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
+diff --git a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.0.bb b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.1.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.0.bb
+rename to meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.1.bb
+index af38ba543..97aa184b0 100644
+--- a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.0.bb
++++ b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.7.1.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "fcae9b38a8affcd82699a94991bba29b"
--SRC_URI[sha256sum] = "4175c614749abbb5bcf6f49c88125fb0dd36db69f4c374df23563907b16e2c3f"
-+SRC_URI[md5sum] = "e3a306d927befb8afcb5212f8ab0b8c9"
-+SRC_URI[sha256sum] = "7ba3f46f88c2845cbf413efeefaed29157f8b98571856c6e2bf35e4de5d8ecce"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+-SRC_URI[md5sum] = "30caaa94c6c267827a31ad69fa472e51"
+-SRC_URI[sha256sum] = "297f3077f7aee52a237449fbd8595e232267bc600b5b9e7ddc5baab306ed67b9"
++SRC_URI[md5sum] = "c42149ec71836fe83085511429e638dc"
++SRC_URI[sha256sum] = "e0c7321346ded2539c4688c593f650696ed0ddca0a5f9d4e404d0e7fc42ae256"
 -- 
 2.20.1
 
