@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 73B2E7D795
+	by mail.openembedded.org (Postfix) with ESMTP id D277B7D735
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue,  7 May 2019 11:56:33 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44yykV4011z6Y
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44yykV6Y7lz7K
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue,  7 May 2019 13:56:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557230194;
-	bh=PQMKFH4Iq2PQVKQfkjE6iaGHItp9O8iLARqQ2i/jrEA=;
+	s=default; t=1557230195;
+	bh=aoTJKk4SWweBnGCvQ1fhirWi6GtLurR5wvxqmJ4MR8I=;
 	h=From:To:Subject:Date:From;
-	b=uKeto3zUQHuGBUAtSo5q2l0B1vO5DwcynZ8s3i7o1gB84mib6I45rj3c2M1TWTc/v
-	UVW4g9hnG++3dDSrdtoWc5dSl4eCN9SQ+O05YFkTEOeva7iqb1CvqNL0vnGK1HXfOd
-	4hGVF3OM+YnRTpkO456z6LEeO1VGeo7S2aTr+hUtgm+Gyg834DjV2nqzuotDXPL3Yr
-	e7EftLgisVFx6tisTxf7nRF0ImH/Z2jkza+mUxeTlTx7STHqdR2Bj14msWmvqyFaId
-	xrfxjGilapPQXoH+ECAKlMRgmeEddQtj2UIsS+tCopp6M+Uw4WqCIt4fEwpsSHxyXN
-	My9vATW9NI0MqO1qTfbsAObCI0Ijmj16MDANOaGajZ2D/ukJ2fXv5tlCuufmxaXR9E
-	jZHr4VVTKCMlkhAsFa1O54CNiJMJF4aPD9tBLwabDVmau7rCxoTVPXpV/KRWORH2k3
-	kdU+5KbbAE8HqXMyXJV3OBN9wzbIkb1vvQpQJp8/ryHRocU/nDDvaCaoKf5idb51m5
-	9CV0vPRHxA5SNGgNBsRQBWX6iw211Tq3d/eX0kAVXAHGnNnNma9xsn1lpkUiOsZ9e1
-	rtZp8I03spR5EtdPWQiv2wLtjvYjozkobc75yaVVg7JcIFOVyDpG85NikPKxIizJzd
-	qOVqkiSps0+22atn/8NWCjIU=
+	b=OX3BomJem0DvFDypOP7hqfR7B7G1d0dsvsXtD7zX/AQZLWMzYb21xm5ZdrGP424ng
+	NbMOqRff7YoR8znQw/PXR1jGCFgElouIJN2d9vi4HuMOUuaB+HaUkhMGiVonIYKvPE
+	XsCEHtYdUIq3Js31+uveFax72huNTdvjv8Psa3S0VwhtuLHcSzaBiE2LQthfy16kuS
+	gIyLpwVnux5xEKYHA9d+OoDfefZf7EdKpvte7hpjlIL58Tjk6Mbc3akcyy71t54B1A
+	uK1iI/tAHU5oTPQRX/lum8tk/MH7K/u1mTXe3MXlQSBgBerHBqRSOPDDyYbgTJZ5GO
+	JvCFIk3d3fPv0YZFpdxO9pqJOV4JKcDuFLajCNvpqFb4Qtdm2bHBWjKNxZAvYKPBRE
+	j25lLiMVaLEVFq8QzSWteIsjoaVUGhtOcEdp4k3D3SO0SWzcP7y+Efh/yOwx4Dp6Me
+	jFvIKRCQsqNgUdowGMraQHTWbUSn6gid70ST1GbMLMr+atMImhW3EX+m6fnmG8/dcR
+	LJnRAKi7j7DFrOlS24Z0yW/UxJhxZLUfvl/3G4eu3yuCA2vxltG+15cpFM6mSXgRjj
+	ywhRpL2vK6g+0of7Qi0V5Hn2KXPe4lFTbKSWdR9Qhgseao7GHTIMwKASUVEaPsqK4t
+	HKY4/BT/OYGczs2dDO6wAGKA=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 May 2019 14:56:27 +0300
-Message-Id: <20190507115630.30368-9-bunk@stusta.de>
+Date: Tue,  7 May 2019 14:56:28 +0300
+Message-Id: <20190507115630.30368-10-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] cogl: upgrade 1.22.2 -> 1.22.4
+Subject: [meta-oe][PATCH] cogl: remove -Werror=maybe-uninitialized workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,86 +40,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2019 11:56:33 -0000
+X-List-Received-Date: Tue, 07 May 2019 11:56:34 -0000
 
-Remove backported patch.
+This should now also be covered by the
+   DEBUG_OPTIMIZATION_append = " -Wno-error=maybe-uninitialized"
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...n-incorrect-preprocessor-conditional.patch | 32 -------------------
- meta/recipes-graphics/cogl/cogl-1.0_1.22.2.bb |  8 -----
- meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb |  8 +++++
- 3 files changed, 8 insertions(+), 40 deletions(-)
- delete mode 100644 meta/recipes-graphics/cogl/cogl-1.0/0001-Fix-an-incorrect-preprocessor-conditional.patch
- delete mode 100644 meta/recipes-graphics/cogl/cogl-1.0_1.22.2.bb
- create mode 100644 meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
+ ...lling.c-fix-may-be-used-uninitialize.patch | 35 -------------------
+ meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb |  2 --
+ 2 files changed, 37 deletions(-)
+ delete mode 100644 meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
 
-diff --git a/meta/recipes-graphics/cogl/cogl-1.0/0001-Fix-an-incorrect-preprocessor-conditional.patch b/meta/recipes-graphics/cogl/cogl-1.0/0001-Fix-an-incorrect-preprocessor-conditional.patch
+diff --git a/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch b/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
 deleted file mode 100644
-index 2a9d8f829b..0000000000
---- a/meta/recipes-graphics/cogl/cogl-1.0/0001-Fix-an-incorrect-preprocessor-conditional.patch
+index 479a0ff4b5..0000000000
+--- a/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
 +++ /dev/null
-@@ -1,32 +0,0 @@
--Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
--Upstream-Status: Backport
+@@ -1,35 +0,0 @@
+-From a51f61d675a0e7d6649182c6a1325ceab8342df2 Mon Sep 17 00:00:00 2001
+-From: Robert Yang <liezhi.yang@windriver.com>
+-Date: Mon, 4 Jan 2016 22:47:29 -0800
+-Subject: [PATCH] test-backface-culling.c: fix may be used uninitialized error
 -
+-Fixed when gcc -O:
+-test-backface-culling.c:206:7: error: 'cull_front' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+-|        validate_part (framebuffer,
+-|        ^
+-| cc1: some warnings being treated as errors
 -
--Original upstream commit follows:
+-Upstream-Status: Pending
 -
--From b583e21d8698dbd58013320cfb47739102efdea7 Mon Sep 17 00:00:00 2001
--From: Kalev Lember <klember@redhat.com>
--Date: Wed, 19 Oct 2016 23:38:28 +0200
--Subject: [PATCH] Fix an incorrect preprocessor conditional
--
--This fixes the build with wayland wayland egl server support disabled.
+-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ----
-- cogl/winsys/cogl-winsys-egl.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- tests/conform/test-backface-culling.c |    3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
 -
--diff --git a/cogl/winsys/cogl-winsys-egl.c b/cogl/winsys/cogl-winsys-egl.c
--index 39bfd884..4a9f3aa6 100644
----- a/cogl/winsys/cogl-winsys-egl.c
--+++ b/cogl/winsys/cogl-winsys-egl.c
--@@ -1029,7 +1029,7 @@ _cogl_egl_create_image (CoglContext *ctx,
--     egl_ctx = EGL_NO_CONTEXT;
--   else
-- #endif
---#if COGL_HAS_WAYLAND_EGL_SERVER_SUPPORT
--+#ifdef COGL_HAS_WAYLAND_EGL_SERVER_SUPPORT
--   /* The WL_bind_wayland_display spec states that EGL_NO_CONTEXT is to be used
--    * in conjunction with the EGL_WAYLAND_BUFFER_WL target */
--   if (target == EGL_WAYLAND_BUFFER_WL)
+-diff --git a/tests/conform/test-backface-culling.c b/tests/conform/test-backface-culling.c
+-index e90c2f5..7c45592 100644
+---- a/tests/conform/test-backface-culling.c
+-+++ b/tests/conform/test-backface-culling.c
+-@@ -164,7 +164,8 @@ validate_result (CoglFramebuffer *framebuffer, int y_offset)
+- 
+-   for (draw_num = 0; draw_num < 16; draw_num++)
+-     {
+--      CoglBool cull_front, cull_back;
+-+      CoglBool cull_front = FALSE;
+-+      CoglBool cull_back = FALSE;
+-       CoglPipelineCullFaceMode cull_mode;
+- 
+-       if (USE_LEGACY_STATE (draw_num))
 --- 
--2.11.0
+-1.7.9.5
 -
-diff --git a/meta/recipes-graphics/cogl/cogl-1.0_1.22.2.bb b/meta/recipes-graphics/cogl/cogl-1.0_1.22.2.bb
-deleted file mode 100644
-index 5901062a4c..0000000000
---- a/meta/recipes-graphics/cogl/cogl-1.0_1.22.2.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require cogl-1.0.inc
--
--SRC_URI += "file://test-backface-culling.c-fix-may-be-used-uninitialize.patch \
--            file://0001-Fix-an-incorrect-preprocessor-conditional.patch"
--SRC_URI[archive.md5sum] = "d53b708ca7c4af03d7254e46945d6b33"
--SRC_URI[archive.sha256sum] = "39a718cdb64ea45225a7e94f88dddec1869ab37a21b339ad058a9d898782c00d"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=1b1a508d91d25ca607c83f92f3e31c84"
 diff --git a/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb b/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
-new file mode 100644
-index 0000000000..432025233b
---- /dev/null
+index 432025233b..8e61c19f5d 100644
+--- a/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
 +++ b/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
-@@ -0,0 +1,8 @@
-+require cogl-1.0.inc
-+
-+SRC_URI += "file://test-backface-culling.c-fix-may-be-used-uninitialize.patch \
-+"
-+SRC_URI[archive.md5sum] = "31755015a865c4af51ac84f6e53af8ab"
-+SRC_URI[archive.sha256sum] = "5217bf94cbca3df63268a3b79d017725382b9e592b891d1e7dc6212590ce0de0"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1b1a508d91d25ca607c83f92f3e31c84"
+@@ -1,7 +1,5 @@
+ require cogl-1.0.inc
+ 
+-SRC_URI += "file://test-backface-culling.c-fix-may-be-used-uninitialize.patch \
+-"
+ SRC_URI[archive.md5sum] = "31755015a865c4af51ac84f6e53af8ab"
+ SRC_URI[archive.sha256sum] = "5217bf94cbca3df63268a3b79d017725382b9e592b891d1e7dc6212590ce0de0"
+ 
 -- 
 2.17.1
 
