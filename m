@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id D277B7D735
+	by mail.openembedded.org (Postfix) with ESMTP id 408807D735
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 May 2019 11:56:33 +0000 (UTC)
+	Tue,  7 May 2019 11:56:34 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44yykV6Y7lz7K
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44yykW2Rbkz60
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 May 2019 13:56:34 +0200 (CEST)
+	Tue,  7 May 2019 13:56:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557230195;
-	bh=aoTJKk4SWweBnGCvQ1fhirWi6GtLurR5wvxqmJ4MR8I=;
+	bh=V6aTdaB2KW3ucxJnC7y58CtXcrmtPS3v1h5ZZ9F49lY=;
 	h=From:To:Subject:Date:From;
-	b=OX3BomJem0DvFDypOP7hqfR7B7G1d0dsvsXtD7zX/AQZLWMzYb21xm5ZdrGP424ng
-	NbMOqRff7YoR8znQw/PXR1jGCFgElouIJN2d9vi4HuMOUuaB+HaUkhMGiVonIYKvPE
-	XsCEHtYdUIq3Js31+uveFax72huNTdvjv8Psa3S0VwhtuLHcSzaBiE2LQthfy16kuS
-	gIyLpwVnux5xEKYHA9d+OoDfefZf7EdKpvte7hpjlIL58Tjk6Mbc3akcyy71t54B1A
-	uK1iI/tAHU5oTPQRX/lum8tk/MH7K/u1mTXe3MXlQSBgBerHBqRSOPDDyYbgTJZ5GO
-	JvCFIk3d3fPv0YZFpdxO9pqJOV4JKcDuFLajCNvpqFb4Qtdm2bHBWjKNxZAvYKPBRE
-	j25lLiMVaLEVFq8QzSWteIsjoaVUGhtOcEdp4k3D3SO0SWzcP7y+Efh/yOwx4Dp6Me
-	jFvIKRCQsqNgUdowGMraQHTWbUSn6gid70ST1GbMLMr+atMImhW3EX+m6fnmG8/dcR
-	LJnRAKi7j7DFrOlS24Z0yW/UxJhxZLUfvl/3G4eu3yuCA2vxltG+15cpFM6mSXgRjj
-	ywhRpL2vK6g+0of7Qi0V5Hn2KXPe4lFTbKSWdR9Qhgseao7GHTIMwKASUVEaPsqK4t
-	HKY4/BT/OYGczs2dDO6wAGKA=
+	b=jam36GPs/Dn0SX7Srpwg/ZRZFwujYz0VmUWd7knDLOInRkAKMpljJEljiIDCwASBA
+	fZSmujAtvsY3XDe1vfhgRq48ir6cUHrGktYmjncVItuUPpBAn4HMbBUnLOmm7Ua4aS
+	R3smC6pTDOLyF1C5LQHLMA2BjVcRztQeY6RUpS5AjiNN8K1PuxMx5n2A9GwsVvho/y
+	gfgOurre9DFILnFKWeKLj2qkn7Pr74SjOkkr2UHnSJ8HjomnGyQUiakxvZEz566eCV
+	SnxVq7SwbDaXh7HPISC2nEL0ZDrEkOTxc0XGr6gELFBZVObjIu39rhlUfjUigXPJWU
+	k4Pv93P3mssqwgwAyNY9R/ohHz15EY7uRQiI57fd/H5UaIJRgutzCJAS4OfL8Yqpm+
+	saRrMtFZez82kVM1vOklvoHZK0zlCH/KfdWaOebeM+OLp02UtixXauRJBMFUzzLK0h
+	AjSz5v0Lztvccs7VwYHSMuwxXVi5p3xF7ninPPoTsml8hUTKLHcbTWGVaN+6uQ2pRa
+	861qSzTKP6S8NfSyAUrJli3ZeEzB/7SN0l1tle9gu56LiyB9bvECWH7JIig8z+h0A7
+	bvBWa+vwjHjNnaCzsP/cnQAT6EVGyG6pKpeqvqY7STZNy3aU1plXsI65MpjCIP4Ehg
+	xhjJlitrkUB8enWSKqKtOWBI=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 May 2019 14:56:28 +0300
-Message-Id: <20190507115630.30368-10-bunk@stusta.de>
+Date: Tue,  7 May 2019 14:56:29 +0300
+Message-Id: <20190507115630.30368-11-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] cogl: remove -Werror=maybe-uninitialized workaround
+Subject: [meta-oe][PATCH] libxcb: remove workaround patch for a bug that was fixed in gcc 5 in 2015
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,69 +42,53 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 07 May 2019 11:56:34 -0000
 
-This should now also be covered by the
-   DEBUG_OPTIMIZATION_append = " -Wno-error=maybe-uninitialized"
-
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...lling.c-fix-may-be-used-uninitialize.patch | 35 -------------------
- meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb |  2 --
- 2 files changed, 37 deletions(-)
- delete mode 100644 meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
+ .../gcc-mips-pr68302-mips-workaround.patch    | 22 -------------------
+ .../xorg-lib/libxcb_1.13.1.bb                 |  1 -
+ 2 files changed, 23 deletions(-)
+ delete mode 100644 meta/recipes-graphics/xorg-lib/libxcb/gcc-mips-pr68302-mips-workaround.patch
 
-diff --git a/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch b/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
+diff --git a/meta/recipes-graphics/xorg-lib/libxcb/gcc-mips-pr68302-mips-workaround.patch b/meta/recipes-graphics/xorg-lib/libxcb/gcc-mips-pr68302-mips-workaround.patch
 deleted file mode 100644
-index 479a0ff4b5..0000000000
---- a/meta/recipes-graphics/cogl/cogl-1.0/test-backface-culling.c-fix-may-be-used-uninitialize.patch
+index 698d038f90..0000000000
+--- a/meta/recipes-graphics/xorg-lib/libxcb/gcc-mips-pr68302-mips-workaround.patch
 +++ /dev/null
-@@ -1,35 +0,0 @@
--From a51f61d675a0e7d6649182c6a1325ceab8342df2 Mon Sep 17 00:00:00 2001
--From: Robert Yang <liezhi.yang@windriver.com>
--Date: Mon, 4 Jan 2016 22:47:29 -0800
--Subject: [PATCH] test-backface-culling.c: fix may be used uninitialized error
+@@ -1,22 +0,0 @@
+-Reduce debug info for xcb.c since on mips we run into a gcc5 bug
 -
--Fixed when gcc -O:
--test-backface-culling.c:206:7: error: 'cull_front' may be used uninitialized in this function [-Werror=maybe-uninitialized]
--|        validate_part (framebuffer,
--|        ^
--| cc1: some warnings being treated as errors
+-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68302
 -
--Upstream-Status: Pending
+-This patch is a workaround to get past the gcc bug until its resolved.
+-it should have minimal impact on libxcb while make it work.
 -
--Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-----
-- tests/conform/test-backface-culling.c |    3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
+-Upstream-Status: Inappropriate [OE-Specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 -
--diff --git a/tests/conform/test-backface-culling.c b/tests/conform/test-backface-culling.c
--index e90c2f5..7c45592 100644
----- a/tests/conform/test-backface-culling.c
--+++ b/tests/conform/test-backface-culling.c
--@@ -164,7 +164,8 @@ validate_result (CoglFramebuffer *framebuffer, int y_offset)
-- 
--   for (draw_num = 0; draw_num < 16; draw_num++)
--     {
---      CoglBool cull_front, cull_back;
--+      CoglBool cull_front = FALSE;
--+      CoglBool cull_back = FALSE;
--       CoglPipelineCullFaceMode cull_mode;
-- 
--       if (USE_LEGACY_STATE (draw_num))
---- 
--1.7.9.5
--
-diff --git a/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb b/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
-index 432025233b..8e61c19f5d 100644
---- a/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
-+++ b/meta/recipes-graphics/cogl/cogl-1.0_1.22.4.bb
-@@ -1,7 +1,5 @@
- require cogl-1.0.inc
+-Index: libxcb-1.11.1/src/Makefile.am
+-===================================================================
+---- libxcb-1.11.1.orig/src/Makefile.am
+-+++ libxcb-1.11.1/src/Makefile.am
+-@@ -188,6 +188,7 @@ EXTSOURCES += xkb.c
+- if BUILD_XKB
+- lib_LTLIBRARIES += libxcb-xkb.la
+- libxcb_xkb_la_LDFLAGS = -version-info 1:0:0 -no-undefined
+-+CFLAGS += -g1
+- libxcb_xkb_la_LIBADD = $(XCB_LIBS)
+- nodist_libxcb_xkb_la_SOURCES = xkb.c xkb.h
+- endif
+diff --git a/meta/recipes-graphics/xorg-lib/libxcb_1.13.1.bb b/meta/recipes-graphics/xorg-lib/libxcb_1.13.1.bb
+index 84303e6246..42b0951479 100644
+--- a/meta/recipes-graphics/xorg-lib/libxcb_1.13.1.bb
++++ b/meta/recipes-graphics/xorg-lib/libxcb_1.13.1.bb
+@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d763b081cb10c223435b01e00dc0aba7"
+ SRC_URI = "http://xcb.freedesktop.org/dist/libxcb-${PV}.tar.bz2 \
+            file://xcbincludedir.patch \
+            file://disable-check.patch \
+-           file://gcc-mips-pr68302-mips-workaround.patch \
+           "
  
--SRC_URI += "file://test-backface-culling.c-fix-may-be-used-uninitialize.patch \
--"
- SRC_URI[archive.md5sum] = "31755015a865c4af51ac84f6e53af8ab"
- SRC_URI[archive.sha256sum] = "5217bf94cbca3df63268a3b79d017725382b9e592b891d1e7dc6212590ce0de0"
- 
+ SRC_URI[md5sum] = "f33cdfc67346f7217a9326c0d8679975"
 -- 
 2.17.1
 
