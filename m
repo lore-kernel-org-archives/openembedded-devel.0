@@ -1,24 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 67F8760107
+	by mail.openembedded.org (Postfix) with ESMTP id 148377C427
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 May 2019 03:06:36 +0000 (UTC)
+	Tue,  7 May 2019 06:44:49 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4736HA5021524
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x476iF7Q026389
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 May 2019 20:06:27 -0700
+	Mon, 6 May 2019 23:44:41 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Mon, 6 May 2019 20:06:00 -0700
+	14.3.439.0; Mon, 6 May 2019 23:44:33 -0700
 From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 May 2019 10:54:35 +0800
-Message-ID: <1557197676-4300-1-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 7 May 2019 14:33:07 +0800
+Message-ID: <1557210787-16262-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH V2 1/2] netkit-rsh: add tag to CVE patch
+Subject: [meta-oe][PATCH] gd: set CVE_PRODUCT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,27 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2019 03:06:36 -0000
+X-List-Received-Date: Tue, 07 May 2019 06:44:50 -0000
 Content-Type: text/plain
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch         | 2 ++
+ meta-oe/recipes-support/gd/gd_2.2.5.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-index 4381f5b..285667b 100644
---- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-@@ -10,6 +10,8 @@ Origin: https://github.com/openssh/openssh-portable/commit/6010c0303a422a9c5fa88
- Upstream-Status: Backport [Debian]
- [https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch]
- 
-+CVE: CVE-2019-7282 CVE-2019-7283
+diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+index 426af25..c846bda 100644
+--- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
++++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+@@ -50,3 +50,5 @@ FILES_${PN}-tools = "${bindir}/*"
+ PROVIDES += "${PN}-tools"
+ RPROVIDES_${PN}-tools = "${PN}-tools"
+ RDEPENDS_${PN}-tools = "perl perl-module-strict"
 +
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- ---
-  rcp/rcp.c | 5 +++++
++CVE_PRODUCT = "libgd"
 -- 
 2.7.4
 
