@@ -1,49 +1,46 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
-	[209.85.167.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BEFC67D68C
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-it1-f172.google.com (mail-it1-f172.google.com
+	[209.85.166.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B2A07D2E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 May 2019 22:22:21 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id h126so1854517lfh.4
+	Tue,  7 May 2019 23:06:36 +0000 (UTC)
+Received: by mail-it1-f172.google.com with SMTP id l10so969506iti.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 May 2019 15:22:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=JdqJYfni07Tju8GpDwa3EBcjrALgrqREan3uYTh7o1k=;
-	b=OVfUfTuKouE4KMp0W3DTpGFj5iNb0C5VTAd4NJA7R8+Mn3R29rS6HcxXqF4UkQLpJt
-	SS6mOUw55/o1Mol0WCPC3WaDHjcAU3CzQedFDxcSuNzBxOFRYuNqoiOBg6cXmffWB9+r
-	6ptHIAM8K6R3437NrfaHxOvyhsjPUusrNnm+X5AbIYqJ+WGAjcuUuUyGckR8EXtQOa0e
-	YBRWLduoxielX3k0rhuC2pUquTR67gLHJtVxv5gtvmaaQr0AsOynuf6umrI5U1PlZqM7
-	uQ6TT7qhZvye/IHDmqTZd6BG3tEJhbe1r9idNTOUZjK28BIcpMNYLqJQWZikqNSh+5eB
-	jN8A==
+	Tue, 07 May 2019 16:06:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=MLJ4uQL94pzqBrBYMBNB4bUrxocI3c2Dl2I5gPTKV4Q=;
+	b=C0Iihob/k+cmv+P/dJoDm88JlcekIJyI0nfQwwMrPwxU7P7CDXhUacnQsYjw7DmWUL
+	HyIIPxmxOVYSnk3im5ZHpGdikGkLNyEkWs3Yj8Bwks/k97bbxRFkbPeC/inr3ZbAW0o5
+	77uVNvzW4WlJ6puzTEDhjQe6wHzeI+4H0mQf4JOIdXVAenpfGD7wWbcwcSEjPmTX1eZa
+	FjHBXNiKmynvd3vTG2W6RbEMhl2MAfU9kwb+861wJvj3AJHFCURYA+ekI6/2vTquJdVm
+	U+cQ0KF+WaPO7XKe7AES9qx52Ca7aWBMaRuuqLATGZV61/Ld8lFGSNIDQULMwYtp1tyn
+	ePlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=JdqJYfni07Tju8GpDwa3EBcjrALgrqREan3uYTh7o1k=;
-	b=MSymRJJQBYh73Xq8sT7B/hCJ1gM3c3HoNlzx2P7AVLWHOendPuzQS6pbrer75vh3Hy
-	y1zs2+4gDSzJStldPvSAHpaIjbrfoGie/ByOdRgXyjH0KaalEOFDK6rmq3s5w+ZGOqGI
-	GMgVe+MQlQfNhvoDj4p8C7zQj/l+aEHRveN36UONE6U9A207Kfpmkb5U/iaQ5Q/MDmow
-	3JDdb0CBG6nB/LAvGKcGea1eV0fmj7tVysgtgSL+u/RC0OixLfKCdxUI7LnZdeyjnCz1
-	byFvqWHdG7BWiDCx7pe8eilngxnOZjA89yQMplokbgr7XwRKDI0kWq+Q0MhH3jK3Glfp
-	N+RA==
-X-Gm-Message-State: APjAAAVpimRHOtYVFEp0C4IlX8QFVuKw9XFy304c10xcy+wJl2VReRm7
-	GPiJzaDlVAM0V3X+hCY5ZqFVnulx/N4=
-X-Google-Smtp-Source: APXvYqzqHcIGlcUclW2b+TGqJEjkmkwbiuHtPuG8mKaKR7sbtiMfymJe/X7Rn2fOdf1hjgtN100peQ==
-X-Received: by 2002:ac2:51d9:: with SMTP id u25mr16325122lfm.91.1557267741886; 
-	Tue, 07 May 2019 15:22:21 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id r5sm3746525ljh.27.2019.05.07.15.22.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 May 2019 15:22:21 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 May 2019 00:22:12 +0200
-Message-Id: <20190507222212.1808-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] libnetfilter-conntrack: update to 1.0.7
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=MLJ4uQL94pzqBrBYMBNB4bUrxocI3c2Dl2I5gPTKV4Q=;
+	b=U3HdgGr1vw9XQWhGceiiEniffSMtuzWeWjcUnusTxmYj488r9D78tY4Ul2/GW+ZrbP
+	m/tUdcPFFjfADNhATrrR71H+qsVG2UIeI1q7wnnjeJU2u4ugCEEvQVtRVbID7I1GYlPe
+	LxzH18vwSBUNX/CbiboZZedxUBFtnjHT9+4Ip7Loe6vt9QLPu6j91lFoldxupZCd4knt
+	BbqE4q37IFWIvtfdUvirjIh5vH9M1R7xO+H8PAoUBtYnmtDECNmrviFw3yvwoL9yp1Fk
+	PTY00g3y5omCpraFVvYgZL+RktZWN0eqkDibqFStoj9xmF+I3a0+CLuDW29fWDVrynVu
+	0vxA==
+X-Gm-Message-State: APjAAAUUl0xTWOoTQzgndo6HCRclmIa89nI6Q+J1rDRVBBmivvsVLFcP
+	Tycfo1NnW09KqYnPrtmFXhg0WvSx3dlut01HkuwLQzWeHr0=
+X-Google-Smtp-Source: APXvYqyz899auzm6ThBc6c1pu0NKiXiWul5af1WcunkqykclOmzVEdz5s4UsnvHVuGKjEDcJUDC8Z1q2XXzFmiWKfHk=
+X-Received: by 2002:a02:3846:: with SMTP id v6mr25412887jae.81.1557270397611; 
+	Tue, 07 May 2019 16:06:37 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190507214414.19696-1-bunk@stusta.de>
+In-Reply-To: <20190507214414.19696-1-bunk@stusta.de>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 8 May 2019 01:06:26 +0200
+Message-ID: <CALbNGRTQDPSZTk0z46fh7gEpLeP-pp3SqJsHBCaX_o1g=sxGaQ@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-gnome][PATCH] Remove the obsolete glade3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2019 22:22:22 -0000
+X-List-Received-Date: Tue, 07 May 2019 23:06:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- ...-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} (63%)
+Hi Adrian
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-similarity index 63%
-rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-index e4e186bdb..5c8150156 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-@@ -6,10 +6,9 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- DEPENDS = "libnfnetlink libmnl"
- 
--SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
--"
--SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
--SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
-+SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "013d182c2df716fcb5eb2a1fb7febd1f"
-+SRC_URI[sha256sum] = "33685351e29dff93cc21f5344b6e628e41e32b9f9e567f4bec0478eb41f989b6"
- 
- S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
- 
--- 
-2.17.1
+On Tue, May 7, 2019 at 11:44 PM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> After the libbonoboui removal there shouldn't be any reason
+> left for this ancient version instead of the glade recipe
+> in meta-oe that currently builds version 3.22.1.
+NAK - libxfce4ui PACKAGECONFIG gladeui builds components necessary to
+open glade files shipped by GTK2 xfce4-panel-plugins. I need that at
+least until I have ported xfce4-closebutton to GTK3.
 
+So there are use cases.
+
+Cheers
+
+
+Andreas
 
