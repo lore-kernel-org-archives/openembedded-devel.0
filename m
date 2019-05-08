@@ -1,47 +1,33 @@
-Return-Path: <troth@openavr.org>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id ED5DA7DE56
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 105AA7DE92
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 May 2019 15:15:22 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id o4so27728016wra.3
+	Wed,  8 May 2019 19:58:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 44znNY5565z4q
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 May 2019 08:15:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=openavr-org.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=iDFYgmG/aFAgAntAyXXzTIADAOf5d4d9185YeMy5/oY=;
-	b=XA3vmAMvWSMhi20r7RWxs18XVppFkloRoTmEQtfNqcTbZvS7w40aq//JKNJ09KRnxG
-	ksJpVN+GN9cgoP6CEwbJPLPnPJOBtBFmRiPjtSsI6i/ttrV05n4boj7ebjOU672PseZN
-	7fMR23ky+eSYhV9is8BTif5ed9KyiDAg3nfHsGOM4v/hr+Im6Nt9WgWdnDEDiAbZbdhW
-	P7dKGXPJxi/22Bd6hnT3X+Nk7b86o5c/dChJYmgo9HjRsifq6puIDBSE78DkuBqnIrTH
-	ndpaWnpEiBnLNjwIKPi/EgZjiKBn8lLOfggA1ZMDSbxZ9a7EzIwgnnXH79bSvjBluR6O
-	3Eig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=iDFYgmG/aFAgAntAyXXzTIADAOf5d4d9185YeMy5/oY=;
-	b=GED449bG/nc2iJOd6nWHNoFaQT/CzrOw3cgITGWS5bfTXc3T3Y6Ga6K94hazeScUt7
-	EaenOHz0z/gkhookxxclJy6YpxslZj+HOwpojfdNZp9w9yXX4EJx0idxmpalXC3RI39Y
-	LJor8Qh/3lXDgXGPwlPSeiKprc00NpGntflK6kwYpIpIDgVyYutXeCAQA+DiYFcQvle+
-	Z8RbB00cs2hxHdU6T6YYU7FRNUrD4WU/TE8SahiGMTzHHLl5pC59LrL+AbmpX7qklnBV
-	qynFBHJeIYak1bYilHup4RLGA0O4VlrZ1Ozk2wKC3Jg1nyU2D3s/pkq8wiRLZVXuz82J
-	ECQQ==
-X-Gm-Message-State: APjAAAV8ijxRz+nsO356JcOytx4bH/SyZD/So39khcbtLec7km4BdUYB
-	2eaGzcJ9KMOSdJPN9sbHQvfLSrcUyWMOnQz8WkJyhg==
-X-Google-Smtp-Source: APXvYqyfhb+7q5qsF0CTZ9YqQg3IJz9aWNssPBjDz+dEK6udJvyLlQmhAZzWIziiXf6LajjEtJ31+ScunTTuR5bBHvw=
-X-Received: by 2002:adf:d081:: with SMTP id y1mr21906929wrh.283.1557328523540; 
-	Wed, 08 May 2019 08:15:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <CANr77M3b823R3tNGvTHvqU-F6TfFxbioiHzM_cBhx+XjbJ02Vg@mail.gmail.com>
-In-Reply-To: <CANr77M3b823R3tNGvTHvqU-F6TfFxbioiHzM_cBhx+XjbJ02Vg@mail.gmail.com>
-From: "Theodore A. Roth" <troth@openavr.org>
-Date: Wed, 8 May 2019 09:15:11 -0600
-Message-ID: <CAFMvBt191mfPoLK6bGi5MO6h9tCqUqpYYZMtLuFE3vGK-50QCg@mail.gmail.com>
-To: Matthew Stanger <matthew_stanger@trimble.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Google protobuf-native doesn't install support .proto's in native
+	Wed,  8 May 2019 21:58:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1557345534;
+	bh=G4X7cEqjyOc5CgKe5z4pgDeTFQZ5EtD7RHQlvG+cTTE=;
+	h=From:To:Subject:Date:From;
+	b=kE/BYYPXlGdyShVNzzf3Uu5mctP16Y4ShkLRNGR3PA0ppqwdEix+ZTDFvgtK2yn7T
+	rDrq53g++eQl2I1wrG8a4C3HduWaBD/tqkVU/aPBMvsgKRMgsbNXwdlAfgF4Guvy6e
+	mEq/FDuS92Nm89PaK7lxUp93nNtq4kegDFylAe3hCQoGwKbnMf5ILRFHMnrD9tAJIv
+	mp9sDRJf1xnnhxmT7Tt2cFayUYooF8gskobQ/zbCF2WocVm1jTTywtizG/ttn9B+oU
+	NjjYPodJmYkZJEAlTz5yClIedVt74aDTomNnkwdqipyQRU+j8NME/miHWlJ4xNqBXu
+	6CB20ujXxRBtQ3F5KnBfG+eEYGDcrhRYny9iym90fFOTB8wnK18PXPSLOaQRzWV+6Q
+	6SmwnakkIHotP9UU61Tp6CXq3znMSPCFekbzK4+9kSNfCb4blK6LrdLI1TzC99s+rt
+	FEsEGPR2e7fLW5tKW+Fr4t1Q5z+sAEiDY29HuotzXYZm1wkZbwr9h8s/TVAK8g6Ynz
+	qAzd+PZKlqmnPJXSEyJAurqG87l5yEduf5Zz4rYF0jMrKFliiQVcD+C19GqkiptAkx
+	EIMsJDLHIMs8wxAzZVg5xBcyciFQy2Ei2n3PPF1sYDze56zSO04v2H+85XZn68VrgQ
+	RUIusIdigJC3MuruTY/aUKaE=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 May 2019 22:58:46 +0300
+Message-Id: <20190508195852.28803-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-multimedia][PATCH] caps: Upgrade 0.9.24 -> 0.9.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +40,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2019 15:15:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 08 May 2019 19:58:54 -0000
 
-On Wed, May 1, 2019 at 9:04 AM Matthew Stanger
-<matthew_stanger@trimble.com> wrote:
->
-> `protoc` sourced by the standard Yocto SDK will fail to import "well
-> known"  supporting protobufs.
->
-> Steps to reproduce:
->
->    1. Generated SDK with `protoc` via `DEPENDS = "protobuf-native"`
->    2. Source SDK & run `protoc *.proto --cpp_out=.`
+Remove patches applied upstream.
 
-This is not a problem with the protobuf recipe, but in how the SDK was
-configured.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...-Do-not-use-obsolete-pow10f-function.patch | 50 -------------------
+ .../Avoid-ambiguity-in-div-invocation.patch   | 32 ------------
+ .../caps/{caps_0.9.24.bb => caps_0.9.26.bb}   |  6 +--
+ 3 files changed, 2 insertions(+), 86 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/caps/caps/0001-Do-not-use-obsolete-pow10f-function.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/caps/caps/Avoid-ambiguity-in-div-invocation.patch
+ rename meta-multimedia/recipes-multimedia/caps/{caps_0.9.24.bb => caps_0.9.26.bb} (70%)
 
-I just need to make the following changes to our image's bbappend file
-and all of the
-protobuf headers were properly added to the SDK we are generating
+diff --git a/meta-multimedia/recipes-multimedia/caps/caps/0001-Do-not-use-obsolete-pow10f-function.patch b/meta-multimedia/recipes-multimedia/caps/caps/0001-Do-not-use-obsolete-pow10f-function.patch
+deleted file mode 100644
+index bd5e1b603..000000000
+--- a/meta-multimedia/recipes-multimedia/caps/caps/0001-Do-not-use-obsolete-pow10f-function.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From 0cc7362e171616dcfeb93c6e1576362761bf14e5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 31 Jan 2018 18:37:16 -0800
+-Subject: [PATCH] Do not use obsolete pow10f() function
+-
+-exp10 name is standardized in TS 18661-4 and its
+-available in glibc since version 2.1
+-it has been now removed from glibc 2.27+
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- dsp/v4f_IIR2.h | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/dsp/v4f_IIR2.h b/dsp/v4f_IIR2.h
+-index a68ecf5..ebd1234 100644
+---- a/dsp/v4f_IIR2.h
+-+++ b/dsp/v4f_IIR2.h
+-@@ -33,7 +33,7 @@
+- namespace DSP {
+- 
+- #ifdef __APPLE__
+--inline float pow10f(float f) {return pow(10,f);}
+-+inline float exp10f(float f) {return __exp10f(f);}
+- #endif
+- 
+- class RBJv4
+-@@ -142,7 +142,7 @@ class IIR2v4
+- 				/* A = pow (10, gain / 40) */
+- 				v4f_t A = (v4f_t) {.025,.025,.025,.025};
+- 				A *= gain;
+--				A = v4f_map<pow10f> (A);
+-+				A = v4f_map<exp10f> (A);
+- 
+- 				RBJv4 p (f, Q);
+- 
+-@@ -429,7 +429,7 @@ class IIR2v4Bank
+- 					/* A = pow (10, gain / 40) */
+- 					v4f_t A = (v4f_t) {.025,.025,.025,.025};
+- 					A *= gain[i];
+--					A = v4f_map<pow10f> (A);
+-+					A = v4f_map<exp10f> (A);
+- 
+- 					RBJv4 p (f[i], Q[i]);
+- 
+--- 
+-2.16.1
+-
+diff --git a/meta-multimedia/recipes-multimedia/caps/caps/Avoid-ambiguity-in-div-invocation.patch b/meta-multimedia/recipes-multimedia/caps/caps/Avoid-ambiguity-in-div-invocation.patch
+deleted file mode 100644
+index 1a050af91..000000000
+--- a/meta-multimedia/recipes-multimedia/caps/caps/Avoid-ambiguity-in-div-invocation.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 1ea09653692efdd6443fb6770e8523bf6c9e49b9 Mon Sep 17 00:00:00 2001
+-From: Fabio Berton <fabio.berton@ossystems.com.br>
+-Date: Thu, 6 Oct 2016 11:54:07 -0300
+-Subject: Avoid ambiguity in div invocation
+-Organization: O.S. Systems Software LTDA.
+-
+-Patch from:
+-https://anonscm.debian.org/cgit/pkg-multimedia/caps.git/commit/?id=9a99c225fb813ae69f146e3d90f7b47bdbd97708
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+----
+- AutoFilter.cc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/AutoFilter.cc b/AutoFilter.cc
+-index fc087d0..bd6b12f 100644
+---- a/AutoFilter.cc
+-+++ b/AutoFilter.cc
+-@@ -69,7 +69,7 @@ AutoFilter::activate()
+- void
+- AutoFilter::cycle (uint frames)
+- {
+--	div_t qr = div (frames, blocksize);
+-+	div_t qr = div ((int)frames, (int)blocksize);
+- 	int blocks = qr.quot;
+- 	if (qr.rem) ++blocks;
+- 	double over_blocks = 1./blocks;
+--- 
+-2.1.4
+-
+diff --git a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb b/meta-multimedia/recipes-multimedia/caps/caps_0.9.26.bb
+similarity index 70%
+rename from meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
+rename to meta-multimedia/recipes-multimedia/caps/caps_0.9.26.bb
+index 0404bd515..46bcf6c6a 100644
+--- a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
++++ b/meta-multimedia/recipes-multimedia/caps/caps_0.9.26.bb
+@@ -4,14 +4,12 @@ LICENSE = "GPL-3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = "http://quitte.de/dsp/${BPN}_${PV}.tar.bz2 \
+-           file://Avoid-ambiguity-in-div-invocation.patch \
+            file://0001-basic.h-Use-c99-supported-stdint-types.patch \
+            file://append_ldflags.patch \
+-           file://0001-Do-not-use-obsolete-pow10f-function.patch \
+            "
+ 
+-SRC_URI[md5sum] = "c1d634038dcb54702306c0e30cb1c626"
+-SRC_URI[sha256sum] = "f746feba57af316b159f0169de5d78b4fd1064c2c0c8017cb5856b2f22e83f20"
++SRC_URI[md5sum] = "36b30c7c7db2d2bc5f4f54077e97b5ee"
++SRC_URI[sha256sum] = "e7496c5bce05abebe3dcb635926153bbb58a9337a6e423f048d3b61d8a4f98c9"
+ 
+ EXTRA_OEMAKE = " \
+     CC='${CXX}' \
+-- 
+2.17.1
 
-$ git diff
-diff --git a/recipes-core/images/core-image-renew.bbappend
-b/recipes-core/images/core-image-renew.bbappend
-index 5d75531..198526f 100644
---- a/recipes-core/images/core-image-renew.bbappend
-+++ b/recipes-core/images/core-image-renew.bbappend
-@@ -1 +1,2 @@
--TOOLCHAIN_HOST_TASK += "nativesdk-protobuf-compiler"
-+TOOLCHAIN_HOST_TASK += "nativesdk-protobuf-dev"
-+TOOLCHAIN_TARGET_TASK += "protobuf-dev"
-
-Once I built the SDK with that change in place, the project using
-protobuf during build
-had no problem building using the SDK.
-
-Ted Roth
 
