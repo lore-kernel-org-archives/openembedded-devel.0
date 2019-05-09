@@ -1,54 +1,51 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
-	[209.85.221.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 765817DF7E
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E1DC87DF7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 16:07:17 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id w12so3863141wrp.2
+	Thu,  9 May 2019 16:16:26 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id r4so3842672wro.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 May 2019 09:07:18 -0700 (PDT)
+	Thu, 09 May 2019 09:16:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=9gnMtA1qKngW6OZDzD5L4UBbLby1LnlIdcDrx9dILSA=;
-	b=c0Z7hcnqYjRXxFOEfQDDdKvecbBxntn57D7qBwwFZ0X8QixycrXN+pFHwLGi8fn+vf
-	vYBFc3QEVTJZe4aoD0ajkEocoMcQJtt2E3ycF+TKovlQ0BKcML3ap3tuEDwqd2eJy4gE
-	pjfqy3ua8JX1Lue/AJKdeQD2txOT14PMxI1vPV1gdukx0TPBSXp+6DtaqakdMnUIVlta
-	T8b3fkGuDIhPPe1+dBlsXRITICedloj/ppF5TSEsMRah0SmyPupqIMkuLHbJ4+g2dxyp
-	qmVGyIJdYoMzdgiE6cGaoBSHL3apSqlqOuN7hRAzKN058Iap0r3UJf1NoN4bmuZMdJuj
-	hYzw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pK2A2UJiMnEutJdWhjpiW1WffK3gpJeuInNWwouNIRk=;
+	b=iaCSSpyHHC+/wtMEPIil4xU1try75w7s2tsZYJpgnAu3ogG0JQe8SS0tH6KoTaTNFh
+	vPvysUZDHh9lWm/3BCjcRUFOGlW1YK7P66XCsEdxjfAzZ5jQBkXuf3EcDCPE4eSnaJGN
+	BDBaDI+pCJg7sF7kwJmBqpC/jvUKzoZcsewm2hy5DhB2z7p+k1iXed+EqanR/IIEW94/
+	kEfghxZn8xLwvmShcOQWL31mPYXywWQ6XEtnLK6/+bpS3CLksX1cMH4qZGE7Uv6F5utY
+	iy8z4ixeSGYjwCxcLgAjBSa1Ary+pKHvULVdg2aoFWtMy8SA0bhPw0VVQSDsgJpe0lxJ
+	1VwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=9gnMtA1qKngW6OZDzD5L4UBbLby1LnlIdcDrx9dILSA=;
-	b=je7I/0593eE5X0kv/gL0X49HKM/B/xJpoHwW5pE8Pidl/C3mc48gZoCJtXHqTOY5aQ
-	zfnRAQtW09ddJ9iKE10rHHr7I+YDkdk2aYhce2ZuTtiB8O2gmi1uuahOarpYmDsfIRM7
-	AjvV24tUMf2LG8kiX92aPeAfocKDWtFpHxseWKPKOuwVa5Ok2ITXdQNaAlprG2d77fYd
-	ffMiUe+oYI+7NMwssew4lKSM3KbD4WoMIPtQgUThWOpyCTpTVCAeCp91oXUmaH3g3Jrv
-	k5xYvpU0hiuYNyKy14CgtPs30+uXZ8Mzd3lQDU2nulciiocCsbte9w8JNsP55tNhVE18
-	MVnQ==
-X-Gm-Message-State: APjAAAVZT5HJJc3GL+89xRGaAjeJzVsFewmrG/4Hdb8GlI3HgMfXlRpC
-	oqckcBpuPNfD1rcKjZ9BwZ2HqVLI
-X-Google-Smtp-Source: APXvYqyyy6A8PdfEJojcaodDF+hdhdLJzB+wOi3FLS87neenjUPkKEwmKleuDGfaFawbGJay9eceVQ==
-X-Received: by 2002:adf:dbce:: with SMTP id e14mr3782536wrj.249.1557418037771; 
-	Thu, 09 May 2019 09:07:17 -0700 (PDT)
-Received: from ?IPv6:2a01:598:b10b:f504:e5e0:c0c4:8f44:31cc?
-	([2a01:598:b10b:f504:e5e0:c0c4:8f44:31cc])
-	by smtp.gmail.com with ESMTPSA id
-	c130sm4244871wmf.47.2019.05.09.09.07.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 May 2019 09:07:16 -0700 (PDT)
-Mime-Version: 1.0 (1.0)
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-X-Mailer: iPhone Mail (16E227)
-In-Reply-To: <20190509081557.383974-1-parthitce@gmail.com>
-Date: Thu, 9 May 2019 18:07:15 +0200
-Message-Id: <845976C0-9771-46A4-927C-429CE67147BB@gmail.com>
-References: <20190509081557.383974-1-parthitce@gmail.com>
-To: Parthiban Nallathambi <parthitce@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] python3-tinydb: add version 3.13.0
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pK2A2UJiMnEutJdWhjpiW1WffK3gpJeuInNWwouNIRk=;
+	b=CifuHrnminYoO/zqy16PKFswnDFRXy+t1R7VchXwUGSn0Yd4xaWSgOqTmnKuz4/Xq4
+	a7/gYZ/iuBQWeZ5BrC6n8w2H68+Stg7gj7kK0hOJ25EEssBPIbaQ5ojvlozAbNEo3iFc
+	DQO/n2xpKR5fh0LWcRgww+tjA1cntYChkvslNHZTF1SoK76ax5fXxnJxxRF6jYaulhgM
+	fwqBC1G/H6Bk/4MqJhUaYvV7vfsQSZURf9gQa2t8/tmtA422H3nPrltilfj8lGoFMKgP
+	l3G/4SHnDjhuKnYE14iCieHCfkO+u8etIfEmI8qZsAyFpvef7nU40yEM2RcE0ObrZG5J
+	9dXw==
+X-Gm-Message-State: APjAAAVx0OMpS0OhRe3JkiV0ZlJKcNo+Z1l2EKKdUj9UmNbC9ViUlU5c
+	bQBiyLuauoxlRxLeu2vLuSldbTTJUGM=
+X-Google-Smtp-Source: APXvYqwtYxvP9bBwChO+7T8UpNvpvAmewK0HnyaK0k2uOueSzUjdD7fA1kyn8hgJ8PW4wzSBS6668w==
+X-Received: by 2002:adf:df92:: with SMTP id z18mr3831167wrl.213.1557418587601; 
+	Thu, 09 May 2019 09:16:27 -0700 (PDT)
+Received: from superandy.speedport.ip (p5DE68511.dip0.t-ipconnect.de.
+	[93.230.133.17]) by smtp.gmail.com with ESMTPSA id
+	a15sm3682744wru.88.2019.05.09.09.16.26
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 09 May 2019 09:16:26 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 May 2019 18:16:20 +0200
+Message-Id: <20190509161620.10742-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [PATCH] Remove me as maintainer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,82 +58,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 16:07:17 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 May 2019 16:16:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Sorru but no. You should not copy native-specific configuration into target d=
-irectories. The correct way is to depend on target python3, and fix resultin=
-g failures.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-xfce/README | 1 -
+ 1 file changed, 1 deletion(-)
 
-Alex
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 7431e8b7c..84b019896 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -19,4 +19,3 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
+ When sending single patches, please using something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
+ 
+-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+-- 
+2.20.1
 
-> On 9 May 2019, at 10.15, Parthiban Nallathambi <parthitce@gmail.com> wrote=
-:
->=20
-> Note:
-> Installation expects _sysconfigdata.py in native python DIR,
-> but python3 doesn't have copy for it. Adding the copy in python3
-> recipe breaks other python packages.
->=20
-> Patched locally in _prepend specific to tinydb
->=20
-> Signed-off-by: Parthiban Nallathambi <parthitce@gmail.com>
-> ---
-> .../recipes-devtools/python/python-tinydb.inc | 20 +++++++++++++++++++
-> .../python/python3-tinydb_3.13.0.bb           |  2 ++
-> 2 files changed, 22 insertions(+)
-> create mode 100644 meta-python/recipes-devtools/python/python-tinydb.inc
-> create mode 100644 meta-python/recipes-devtools/python/python3-tinydb_3.13=
-.0.bb
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-tinydb.inc b/meta-=
-python/recipes-devtools/python/python-tinydb.inc
-> new file mode 100644
-> index 000000000..f79daa0f2
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-tinydb.inc
-> @@ -0,0 +1,20 @@
-> +SUMMARY =3D "TinyDB is a lightweight document oriented database"
-> +DESCRIPTION =3D "\
-> +TinyDB is a lightweight document oriented database optimized for \
-> +your happiness. It's written in pure Python and has no external \
-> +dependencies. The target are small apps that would be blown away \
-> +by a SQL-DB or an external database server."
-> +HOMEPAGE =3D "https://github.com/msiemens/tinydb"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc03ea0a450e50a3a05d5a746504cb2=
-eb"
-> +
-> +SRC_URI[md5sum] =3D "2824877e9ecfd9db5b64fdf079819358"
-> +SRC_URI[sha256sum] =3D "a05c4c81e6e867c4f8a2e51c5236d0d897019aa5e9296f594=
-7455b0bdd3c519d"
-> +
-> +PYPI_PACKAGE =3D "tinydb"
-> +inherit pypi python3-dir
-> +DEPENDS =3D "${PYTHON_PN}-pytest-runner-native"
-> +
-> +do_install_prepend() {
-> +    install -m 0644 ${WORKDIR}/recipe-sysroot-native/usr/lib/python-sysco=
-nfigdata/_sysconfigdata.py ${WORKDIR}/recipe-sysroot-native/usr/lib/${PYTHON=
-_DIR}
-> +}
-> diff --git a/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb b=
-/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb
-> new file mode 100644
-> index 000000000..8996b2d44
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools3
-> +require python-tinydb.inc
-> --=20
-> 2.21.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
