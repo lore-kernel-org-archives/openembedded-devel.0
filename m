@@ -1,49 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
-	[209.85.222.178])
-	by mail.openembedded.org (Postfix) with ESMTP id BDA2B7D6A2
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
+	[209.85.210.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F84E7D6A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 17:18:24 +0000 (UTC)
-Received: by mail-qk1-f178.google.com with SMTP id g190so1924879qkf.8
+	Thu,  9 May 2019 17:19:42 +0000 (UTC)
+Received: by mail-ot1-f51.google.com with SMTP id s19so3015038otq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 May 2019 10:18:26 -0700 (PDT)
+	Thu, 09 May 2019 10:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=hqMDsNh4O60/pxD0O0gUhU3P77lvJGj/BEHXGihtORU=;
-	b=BO5ZYHuMAXUfvJUm6pchFoj2gHzuIU6nOaXtC8tdGUiPgLeHli8dWCbaZ49AtS7PyT
-	OlxB0zkT7G4j7ADiTg0BbJbVdvALNIg446+FRbhfHXrYoRY3D48RqgDMKUUAs7GpNYjG
-	38wBHI3+v6Ip0Dj58fsfJA8FkJ71WIZPteVyN/aRlKUrufhc0PvR+6xxXTyJpwL1pSAm
-	dXB0fDWPbyQuWg0SyFUI+QUx5phNUb/0TV6G7aXj5mBrh+fgcuHFQfm3w7HiVRCbcFjS
-	KV/OevFN5bWvEHWj8PYWhiAIv/VF3jXtdIQpAUEMvTbuLGEtXF1QosQVCqn6yX/AM4+3
-	rbhg==
+	:cc; bh=7CqxpW32Lrdg+rYshnYlE/sP415jLck8WwcIfkJL2Cs=;
+	b=snLEK8CjMfoP18CC3NdEYN/k2dIoA7ojmsTfhi4B4wMZ03K6v6kylABNUx6zeHdF9p
+	FY826ybATLI9/JLpTKUk0GUySfUUu1u2VTmRpDL+GUSDhkFcBc/A/Q7BeStNXXI50/gL
+	vrZfheq+gexQYu12TB8ygfpdi/ori5uBK7nVuYMWTLxgZ9fmlcYFwVFeYStgGptdlaPG
+	SZSQjJRb+FuvIXidcYyY0mTbbfFTnig27XiEB2iLm1Kp0pv+kinMghvxT7bMjACWm/MA
+	/wFAeGsqKqH7dgq8LStTaNelOAjMcf1A8UoogXGWL233wIIdlWbpz1/dxUdLKUcidTVG
+	kmyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=hqMDsNh4O60/pxD0O0gUhU3P77lvJGj/BEHXGihtORU=;
-	b=dXUib2lmv61CrvOhM9THA3sPflKcTcYGm88DVpB8hQPxJhMgcG39I54dzMDN0zXIIK
-	f+/zMN9/J4OvZ66y+N3G/W8O3qKea6UUqDmhyyTnaJ7WH8tnBCzPnD9+KTeefdgNhaFL
-	VjBAFP5OyEm2/epvdAyrQNPa/DJ9uTJidIfKbTn8uh3eWXdkyk5EEBBqM7YRV0AJ3kMt
-	rGwmOBT0lpz4iruNNK2uV32H4eU11N8SfmDC30VvOP2FDNUTjzYaAbzBYXf9nZioGXvz
-	JMF+XLsbn2kk4DYiH26drILATcTOGcKlTwtZi08ljmuY0PrKShJ+gAJREB1D1JTbZ0Wd
-	e76g==
-X-Gm-Message-State: APjAAAUIJgJCTMMPDqzHJUDZzqLt1Z8CLNTYgdckmso/quQobLzsC62B
-	emZbFus6Nr9eC/4xYDF23bto/M7GyTjVbv8Lh1owiXK3
-X-Google-Smtp-Source: APXvYqwv4lxBSuCjjW/5q82UiMLGinCpPxDZ0a2RXLRxBojfY8VA6HmVPcpeKc1bl1/MHMJx/q/Nhn1G+XHw8ZmkTKk=
-X-Received: by 2002:a37:5009:: with SMTP id e9mr4364248qkb.206.1557422305230; 
-	Thu, 09 May 2019 10:18:25 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=7CqxpW32Lrdg+rYshnYlE/sP415jLck8WwcIfkJL2Cs=;
+	b=VfAHb1475U9AsVgK/7kjGeiULjax9qQFFKpYTfQ2plQOdAW0r1k14/wuJxw5X2wSuo
+	AJtjX3z1UgRQhoqN0uuWVciXWzLEdEwsKHryZWz6yx5qYQ70VfWXRnn43KI8KmZcVLcj
+	SuHukzmgZcj2L2RXeRm6hwJcD0/QxkGIyGmkfOKXGZxNzXoHstmsnvOHuI/OOn0uu/dJ
+	PVF7A4noANKMpYiaE7NSBudZz/AitvhR9qUrnrPp1k3xnFqDkd5Do0CRwky1raJtBYqF
+	LP8ihspUPy8H9gKROl3EELXQimHLHyi7ZYiKJlJtm78/VRNAv0y3NSotcM0pDCMLLXTw
+	xNfA==
+X-Gm-Message-State: APjAAAXv0UhcPs5ColXmJF9gf1yN4bZd9+mAFz01Iwrk5WKV1Efmx0q8
+	ep5H2qcQA0SK0yN2RilRDhKYccCJzbochMw35gE=
+X-Google-Smtp-Source: APXvYqwY9FSwA8UpB0tSVWQpOx7udfxgMzgxMHZcyWxufMeILeT55E8gaRy15tzXYynTs5AphtqAJgIFjngl2AsHqcI=
+X-Received: by 2002:a9d:4a9c:: with SMTP id i28mr3630459otf.326.1557422383214; 
+	Thu, 09 May 2019 10:19:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <1555093001-41848-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C1693E@G08CNEXMBPEKD01.g08.fujitsu.local>
-In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C1693E@G08CNEXMBPEKD01.g08.fujitsu.local>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 May 2019 10:17:59 -0700
-Message-ID: <CAMKF1spFHciZqujO0nxqNsDvYdPHrgk0pyWkpQi2a9jDr_7O+g@mail.gmail.com>
-To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][patch v2] dnf-plugin-tui: new recipe
+References: <20190509081557.383974-1-parthitce@gmail.com>
+	<845976C0-9771-46A4-927C-429CE67147BB@gmail.com>
+	<18bd4168-41a5-f857-4d23-1f0e7d213aa7@gmail.com>
+In-Reply-To: <18bd4168-41a5-f857-4d23-1f0e7d213aa7@gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Thu, 9 May 2019 19:19:31 +0200
+Message-ID: <CANNYZj9mKeFguQW0DYAw65-A1EF22_kwUU0DcxkZKGbw5HhtPg@mail.gmail.com>
+To: Parthiban Nallathambi <parthitce@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] python3-tinydb: add version 3.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,131 +55,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 17:18:25 -0000
+X-List-Received-Date: Thu, 09 May 2019 17:19:42 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Somehow this patch is not captured by patchwork, can you resend it so
-we can get it on patchwork ?
+On Thu, 9 May 2019 at 18:24, Parthiban Nallathambi <parthitce@gmail.com> wrote:
+> It's not copying the file into recipes-sysroot, but into native just for
+> the installation purpose.
 
-On Thu, May 9, 2019 at 5:14 AM Zheng, Ruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
->
-> Ping
->
-> --------------------------------------------------
-> Zheng Ruoqin
-> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
-> ADDR.: No.6 Wenzhu Road, Software Avenue,
->        Nanjing, 210012, China
-> MAIL : zhengrq.fnst@cn.fujistu.com
->
->
-> > -----Original Message-----
-> > From: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6
-> > Sent: Saturday, April 13, 2019 2:17 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 <zhengrq.fnst@cn.fujitsu=
-.com>
-> > Subject: [oe][meta-oe][patch v2] dnf-plugin-tui: new recipe
-> >
-> > This dnf plugin aims to supply a tui interface for user to manage packa=
-ges. It has
-> > features as following:
-> >   1. Add new command dnf tui --init to make dnf to work on host.
-> >   2. Text-based user interface for dnf.
-> >   3. Manage SPDX files.
-> >   4. Manage SRPM files.
-> >   5. Add installation samples for dnf.
-> >
-> > More details please refer to https://github.com/ubinux/dnf-plugin-tui.
-> >
-> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> > ---
-> >  .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++=
-++++++++
-> >  .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
-> >  2 files changed, 43 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-
-> > tui_git.bb
-> >  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
-> > remote.repo.sample
-> >
-> > diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git=
-.bb
-> > b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-> > new file mode 100644
-> > index 0000000..e891868
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-> > @@ -0,0 +1,38 @@
-> > +SUMMARY =3D "A text-based user interface plugin of dnf for user to man=
-age
-> > packages. "
-> > +LICENSE =3D "GPLv2"
-> > +
-> > +LIC_FILES_CHKSUM =3D
-> > "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
-> > +
-> > +SRC_URI =3D "git://github.com/ubinux/dnf-plugin-tui.git;branch=3Dmaste=
-r "
-> > +SRCREV =3D "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
-> > +PV =3D "1.0"
-> > +
-> > +SRC_URI_append_class-target =3D "file://oe-remote.repo.sample"
-> > +
-> > +inherit distutils3-base
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +do_install_append() {
-> > +        install -d ${D}${datadir}/dnf
-> > +        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
-> > +        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-> > +        install -m 0755 ${S}/dnf-plugins/mkimg/*
-> > ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-> > +        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
-> > +            install -m 0755 ${S}/dnf-plugins/$file
-> > ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
-> > +        done
-> > +}
-> > +
-> > +do_install_append_class-target() {
-> > +        install -d ${D}${sysconfdir}/yum.repos.d
-> > +        install -m 0644 ${WORKDIR}/oe-remote.repo.sample
-> > +${D}${sysconfdir}/yum.repos.d }
-> > +
-> > +FILES_${PN} +=3D "${datadir}/dnf"
-> > +
-> > +RDEPENDS_${PN} +=3D " \
-> > +  dnf \
-> > +  libnewt-python \
-> > +  "
-> > +
-> > +BBCLASSEXTEND =3D "nativesdk"
-> > diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
-> > remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
-> > remote.repo.sample
-> > new file mode 100644
-> > index 0000000..6c4502e
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.samp=
-l
-> > +++ e
-> > @@ -0,0 +1,5 @@
-> > +[base]
-> > +name=3Dmyrepo
-> > +baseurl=3Dhttp://127.0.0.1/oe_repo/
-> > +enabled=3D1
-> > +gpgcheck=3D0
-> > --
-> > 1.8.3.1
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+That was a bit hasty reply, yes.
+
+Still, as we are installing a target package, we need the target
+sysconfigdata, not the native one. We specifically patch native python
+to pick it up:
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-devtools/python/python3/0001-distutils-sysconfig-append-STAGING_LIBDIR-python-sys.patch
+
+Alex
 
