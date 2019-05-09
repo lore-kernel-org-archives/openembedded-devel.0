@@ -1,33 +1,54 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 17F917DFBA
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 765817DF7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 16:03:08 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J645Xymz7P
+	Thu,  9 May 2019 16:07:17 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id w12so3863141wrp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 18:03:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557417788;
-	bh=aefxP8LNyn00zCKu+SoQHDI5tUgfjw+l7/motGA9ZMM=;
-	h=From:To:Subject:Date:From;
-	b=ByRggHsvJThTWSA3i/jOJejSqJ38fxfuK7uLc2IXkQx60sK0cRAkidQj4lPmT+hRk
-	5UFr5MYq+aC2ObY/aaLYCv11iRoBS+KV/VAfo27ASyB9iaL9CEOT51J11alqNTXnjc
-	Ph0X9EL4wnikWrMK+jvlagm9D5Sg7X5lqZHf5gPKqVyWhwsqBB0+BGMIxBXUGS/qWS
-	MpiBWXWndVtS5OqC8/8ZVgLMwwgWa5Xle79Hg8DVj0csCGnXfkIN/mdyKRVKdtoFiv
-	uPw/lDjbi7EhQc6pAkeKQslcf98HXu9e6td/faWIwJJH/pz0RY/FzqX4azWk1EAsTs
-	Ufs5tHltXbkuy4s9jsporLhxayi1XGtmDI9sHXsus33Wn8FEWHZvjOPlny6RQl07ze
-	17D/MUvz4orhNd5sYbBh/AhUrn1HVJ2GGFv7DOVryQzsW/QBzloLAlS7vOpgWmPb/4
-	jZ2d/XVBZG3THaDcO3wrv7GhbN/8fMM7A24hjpm3+bX+yGUnh4j6cYAsHOQ93Gcjau
-	8IQO1KUux17RhWfDU80Oln3soh8JinH/StOsZ00cBu7iOd+SxA3Y0XjLY89SHq1vZA
-	uZjomSU80D6zxl6BoTkojDIHgUKnGR7x3zdmoSyRsh2CiMDPelN9tjGqm0K9v4OV0D
-	imGv9gJyil+/vei7V+a/yZkI=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 May 2019 19:03:06 +0300
-Message-Id: <20190509160306.857-4-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] dovecot: Upgrade 2.2.36 -> 2.2.36.3
+	Thu, 09 May 2019 09:07:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=9gnMtA1qKngW6OZDzD5L4UBbLby1LnlIdcDrx9dILSA=;
+	b=c0Z7hcnqYjRXxFOEfQDDdKvecbBxntn57D7qBwwFZ0X8QixycrXN+pFHwLGi8fn+vf
+	vYBFc3QEVTJZe4aoD0ajkEocoMcQJtt2E3ycF+TKovlQ0BKcML3ap3tuEDwqd2eJy4gE
+	pjfqy3ua8JX1Lue/AJKdeQD2txOT14PMxI1vPV1gdukx0TPBSXp+6DtaqakdMnUIVlta
+	T8b3fkGuDIhPPe1+dBlsXRITICedloj/ppF5TSEsMRah0SmyPupqIMkuLHbJ4+g2dxyp
+	qmVGyIJdYoMzdgiE6cGaoBSHL3apSqlqOuN7hRAzKN058Iap0r3UJf1NoN4bmuZMdJuj
+	hYzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=9gnMtA1qKngW6OZDzD5L4UBbLby1LnlIdcDrx9dILSA=;
+	b=je7I/0593eE5X0kv/gL0X49HKM/B/xJpoHwW5pE8Pidl/C3mc48gZoCJtXHqTOY5aQ
+	zfnRAQtW09ddJ9iKE10rHHr7I+YDkdk2aYhce2ZuTtiB8O2gmi1uuahOarpYmDsfIRM7
+	AjvV24tUMf2LG8kiX92aPeAfocKDWtFpHxseWKPKOuwVa5Ok2ITXdQNaAlprG2d77fYd
+	ffMiUe+oYI+7NMwssew4lKSM3KbD4WoMIPtQgUThWOpyCTpTVCAeCp91oXUmaH3g3Jrv
+	k5xYvpU0hiuYNyKy14CgtPs30+uXZ8Mzd3lQDU2nulciiocCsbte9w8JNsP55tNhVE18
+	MVnQ==
+X-Gm-Message-State: APjAAAVZT5HJJc3GL+89xRGaAjeJzVsFewmrG/4Hdb8GlI3HgMfXlRpC
+	oqckcBpuPNfD1rcKjZ9BwZ2HqVLI
+X-Google-Smtp-Source: APXvYqyyy6A8PdfEJojcaodDF+hdhdLJzB+wOi3FLS87neenjUPkKEwmKleuDGfaFawbGJay9eceVQ==
+X-Received: by 2002:adf:dbce:: with SMTP id e14mr3782536wrj.249.1557418037771; 
+	Thu, 09 May 2019 09:07:17 -0700 (PDT)
+Received: from ?IPv6:2a01:598:b10b:f504:e5e0:c0c4:8f44:31cc?
+	([2a01:598:b10b:f504:e5e0:c0c4:8f44:31cc])
+	by smtp.gmail.com with ESMTPSA id
+	c130sm4244871wmf.47.2019.05.09.09.07.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 May 2019 09:07:16 -0700 (PDT)
+Mime-Version: 1.0 (1.0)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+X-Mailer: iPhone Mail (16E227)
+In-Reply-To: <20190509081557.383974-1-parthitce@gmail.com>
+Date: Thu, 9 May 2019 18:07:15 +0200
+Message-Id: <845976C0-9771-46A4-927C-429CE67147BB@gmail.com>
+References: <20190509081557.383974-1-parthitce@gmail.com>
+To: Parthiban Nallathambi <parthitce@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] python3-tinydb: add version 3.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,33 +61,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 16:03:08 -0000
+X-List-Received-Date: Thu, 09 May 2019 16:07:17 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../dovecot/{dovecot_2.2.36.bb => dovecot_2.2.36.3.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/dovecot/{dovecot_2.2.36.bb => dovecot_2.2.36.3.bb} (95%)
+Sorru but no. You should not copy native-specific configuration into target d=
+irectories. The correct way is to depend on target python3, and fix resultin=
+g failures.
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
-similarity index 95%
-rename from meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
-rename to meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
-index 39bfb912e..be633e03b 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
-            file://0001-doveadm-Fix-parallel-build.patch \
-            "
- 
--SRC_URI[md5sum] = "a8d6492584025b2413e82ea48de3cd5f"
--SRC_URI[sha256sum] = "e9aba89bb1ac1e9581b84e4a7a50f53142539614eaf7cc4c80007ebea4988be5"
-+SRC_URI[md5sum] = "80c1c271b1c4cbe26a793f4e3b09eb8e"
-+SRC_URI[sha256sum] = "992521305fa1d61f4726aac2619ccc65094a3cc2e5c80644455199764305863e"
- 
- DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
- CFLAGS += "-I${STAGING_INCDIR}/tirpc"
--- 
-2.17.1
+Alex
 
+> On 9 May 2019, at 10.15, Parthiban Nallathambi <parthitce@gmail.com> wrote=
+:
+>=20
+> Note:
+> Installation expects _sysconfigdata.py in native python DIR,
+> but python3 doesn't have copy for it. Adding the copy in python3
+> recipe breaks other python packages.
+>=20
+> Patched locally in _prepend specific to tinydb
+>=20
+> Signed-off-by: Parthiban Nallathambi <parthitce@gmail.com>
+> ---
+> .../recipes-devtools/python/python-tinydb.inc | 20 +++++++++++++++++++
+> .../python/python3-tinydb_3.13.0.bb           |  2 ++
+> 2 files changed, 22 insertions(+)
+> create mode 100644 meta-python/recipes-devtools/python/python-tinydb.inc
+> create mode 100644 meta-python/recipes-devtools/python/python3-tinydb_3.13=
+.0.bb
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python-tinydb.inc b/meta-=
+python/recipes-devtools/python/python-tinydb.inc
+> new file mode 100644
+> index 000000000..f79daa0f2
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-tinydb.inc
+> @@ -0,0 +1,20 @@
+> +SUMMARY =3D "TinyDB is a lightweight document oriented database"
+> +DESCRIPTION =3D "\
+> +TinyDB is a lightweight document oriented database optimized for \
+> +your happiness. It's written in pure Python and has no external \
+> +dependencies. The target are small apps that would be blown away \
+> +by a SQL-DB or an external database server."
+> +HOMEPAGE =3D "https://github.com/msiemens/tinydb"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc03ea0a450e50a3a05d5a746504cb2=
+eb"
+> +
+> +SRC_URI[md5sum] =3D "2824877e9ecfd9db5b64fdf079819358"
+> +SRC_URI[sha256sum] =3D "a05c4c81e6e867c4f8a2e51c5236d0d897019aa5e9296f594=
+7455b0bdd3c519d"
+> +
+> +PYPI_PACKAGE =3D "tinydb"
+> +inherit pypi python3-dir
+> +DEPENDS =3D "${PYTHON_PN}-pytest-runner-native"
+> +
+> +do_install_prepend() {
+> +    install -m 0644 ${WORKDIR}/recipe-sysroot-native/usr/lib/python-sysco=
+nfigdata/_sysconfigdata.py ${WORKDIR}/recipe-sysroot-native/usr/lib/${PYTHON=
+_DIR}
+> +}
+> diff --git a/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb b=
+/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb
+> new file mode 100644
+> index 000000000..8996b2d44
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-tinydb_3.13.0.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools3
+> +require python-tinydb.inc
+> --=20
+> 2.21.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
