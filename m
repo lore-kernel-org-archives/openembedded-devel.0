@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CFC827DFD7
+	by mail.openembedded.org (Postfix) with ESMTP id 17F917DFBA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 16:03:07 +0000 (UTC)
+	Thu,  9 May 2019 16:03:08 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J642yDZz79
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J645Xymz7P
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 18:03:07 +0200 (CEST)
+	Thu,  9 May 2019 18:03:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557417788;
-	bh=TrT8/NwBcl1ly4u1c9V7FZ+96gXK3nPkEWJxTBJr1xc=;
+	bh=aefxP8LNyn00zCKu+SoQHDI5tUgfjw+l7/motGA9ZMM=;
 	h=From:To:Subject:Date:From;
-	b=Q4dgnOxOE/lIBpisqDyREbIT7hEZPjrTMBPRvIYKuSpHZjMdbZBglm4ptB5+BKOVd
-	IetvAvOSP9VNKeA7URAbRoUGpLBgxFbA/TaT1SzivvQikg2JFBolCnxiS4nG8/wdc4
-	qosD5l47z68OH5knlNi1bFPH4OBv3aEaR0HQ9H39UBU6/ZcrtVfLoYFbevZUg6vrFI
-	pmgf3x5PkWmtqV2dnRAMlcnkjPvZGKrVkZctJ6Klre1++4n2jwe0edaoGrtYhfwhpy
-	f2fgHAB44+TTBEXCfxtBbaRQwx3aPYhwhGvqWOJdLihcyeXOVI4NrMRaGPPoZtnw8R
-	RRgIe4VVhQiZWQ9FoOGXnIilRlT+F49Hp+EWjLh5Tr9qTJ3UcBQ/uC5HkXzJV44AV3
-	pK0dpGPtes4kmigmlpSrJDNCIN6ORrGuE1uVrHqwzNYlzV6pabvL3Hguj7lff1pNhM
-	ayItnnjxBifQsVM4+Rqf1X+1ZbUEnSjH7vRsGUaKY+j9g9qT69tRZ3a8zhYjghhBM4
-	tfJhViRvXPKUX6Ae1bAQybIGwJ5fE7C1oHhazPJz9T/wDL6mRMOiBTJK5whRzj49nZ
-	C9sZBjnxEW5mV/AvKNo6IsYQOw/TWSrvY6K5DwF28xD9MP3Rj8lSeajmHpy4HwnaZe
-	Zxfk3zNjf7LUghkXyVvDMXYE=
+	b=ByRggHsvJThTWSA3i/jOJejSqJ38fxfuK7uLc2IXkQx60sK0cRAkidQj4lPmT+hRk
+	5UFr5MYq+aC2ObY/aaLYCv11iRoBS+KV/VAfo27ASyB9iaL9CEOT51J11alqNTXnjc
+	Ph0X9EL4wnikWrMK+jvlagm9D5Sg7X5lqZHf5gPKqVyWhwsqBB0+BGMIxBXUGS/qWS
+	MpiBWXWndVtS5OqC8/8ZVgLMwwgWa5Xle79Hg8DVj0csCGnXfkIN/mdyKRVKdtoFiv
+	uPw/lDjbi7EhQc6pAkeKQslcf98HXu9e6td/faWIwJJH/pz0RY/FzqX4azWk1EAsTs
+	Ufs5tHltXbkuy4s9jsporLhxayi1XGtmDI9sHXsus33Wn8FEWHZvjOPlny6RQl07ze
+	17D/MUvz4orhNd5sYbBh/AhUrn1HVJ2GGFv7DOVryQzsW/QBzloLAlS7vOpgWmPb/4
+	jZ2d/XVBZG3THaDcO3wrv7GhbN/8fMM7A24hjpm3+bX+yGUnh4j6cYAsHOQ93Gcjau
+	8IQO1KUux17RhWfDU80Oln3soh8JinH/StOsZ00cBu7iOd+SxA3Y0XjLY89SHq1vZA
+	uZjomSU80D6zxl6BoTkojDIHgUKnGR7x3zdmoSyRsh2CiMDPelN9tjGqm0K9v4OV0D
+	imGv9gJyil+/vei7V+a/yZkI=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 May 2019 19:03:05 +0300
-Message-Id: <20190509160306.857-3-bunk@stusta.de>
+Date: Thu,  9 May 2019 19:03:06 +0300
+Message-Id: <20190509160306.857-4-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] pptp-linux: Upgrade 1.9.0 -> 1.10.0
+Subject: [meta-networking][PATCH] dovecot: Upgrade 2.2.36 -> 2.2.36.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,71 +42,30 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 09 May 2019 16:03:08 -0000
 
-Remove patch for issue fixed upstream.
-
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../0001-include-missing-sys-types.h.patch    | 28 -------------------
- ...tp-linux_1.9.0.bb => pptp-linux_1.10.0.bb} |  5 ++--
- 2 files changed, 2 insertions(+), 31 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-linux/0001-include-missing-sys-types.h.patch
- rename meta-networking/recipes-protocols/pptp-linux/{pptp-linux_1.9.0.bb => pptp-linux_1.10.0.bb} (82%)
+ .../dovecot/{dovecot_2.2.36.bb => dovecot_2.2.36.3.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/dovecot/{dovecot_2.2.36.bb => dovecot_2.2.36.3.bb} (95%)
 
-diff --git a/meta-networking/recipes-protocols/pptp-linux/pptp-linux/0001-include-missing-sys-types.h.patch b/meta-networking/recipes-protocols/pptp-linux/pptp-linux/0001-include-missing-sys-types.h.patch
-deleted file mode 100644
-index 804bf1234..000000000
---- a/meta-networking/recipes-protocols/pptp-linux/pptp-linux/0001-include-missing-sys-types.h.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From f6c4d2468ae0dadd2f35680d61b98b2a59077328 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 7 Jul 2017 10:31:03 -0700
--Subject: [PATCH] include missing sys/types.h
--
--Fixes errors seen on musl
--pqueue.h:21:3: error: unknown type name 'u_int32_t'
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- pqueue.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/pqueue.h b/pqueue.h
--index c37ba7b..ae4cc6a 100644
----- a/pqueue.h
--+++ b/pqueue.h
--@@ -3,6 +3,7 @@
-- 
-- #include <time.h>
-- #include <sys/time.h>
--+#include <sys/types.h>
-- 
-- /* wait this many seconds for missing packets before forgetting about them */
-- #define DEFAULT_PACKET_TIMEOUT 0.3
---- 
--2.13.2
--
-diff --git a/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.9.0.bb b/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
-similarity index 82%
-rename from meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.9.0.bb
-rename to meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
-index 10c9170fb..322158146 100644
---- a/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.9.0.bb
-+++ b/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
-@@ -11,11 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
-            file://options.pptp \
--           file://0001-include-missing-sys-types.h.patch \
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
+similarity index 95%
+rename from meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
+rename to meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
+index 39bfb912e..be633e03b 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
+            file://0001-doveadm-Fix-parallel-build.patch \
             "
  
--SRC_URI[md5sum] = "b2117b377f65294a9786f80f0235d308"
--SRC_URI[sha256sum] = "0b1e8cbfc578d3f5ab12ee87c5c2c60419abfe9cc445690a8a19c320b11c9201"
-+SRC_URI[md5sum] = "8d25341352fdae5ad5b36b9f18254908"
-+SRC_URI[sha256sum] = "82492db8e487ce73b182ee7f444251d20c44f5c26d6e96c553ec7093aefb5af4"
+-SRC_URI[md5sum] = "a8d6492584025b2413e82ea48de3cd5f"
+-SRC_URI[sha256sum] = "e9aba89bb1ac1e9581b84e4a7a50f53142539614eaf7cc4c80007ebea4988be5"
++SRC_URI[md5sum] = "80c1c271b1c4cbe26a793f4e3b09eb8e"
++SRC_URI[sha256sum] = "992521305fa1d61f4726aac2619ccc65094a3cc2e5c80644455199764305863e"
  
- S = "${WORKDIR}/pptp-${PV}"
- 
+ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 -- 
 2.17.1
 
