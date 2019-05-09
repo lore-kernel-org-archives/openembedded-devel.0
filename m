@@ -1,37 +1,33 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EAF857DE69
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 67DDA7DFCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 12:13:43 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,449,1549900800"; d="scan'208";a="62257512"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 May 2019 20:13:43 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id B4D114CDB2EF
+	Thu,  9 May 2019 16:03:07 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J631c3hz5c
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 May 2019 20:13:43 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0439.000; Thu, 9 May 2019 20:13:44 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][patch v2] dnf-plugin-tui: new recipe
-Thread-Index: AQHU8RCP+c8K4RGxSUO64L/tyEyNgKZi3wDA
-Date: Thu, 9 May 2019 12:13:52 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C1693E@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1555093001-41848-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1555093001-41848-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
-MIME-Version: 1.0
-X-yoursite-MailScanner-ID: B4D114CDB2EF.AB035
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][patch v2] dnf-plugin-tui: new recipe
+	Thu,  9 May 2019 18:03:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1557417787;
+	bh=ITJS+N8FT+FCzyyjvVpdgNfuM4xyqGIwgcUba4szrYw=;
+	h=From:To:Subject:Date:From;
+	b=FaWyTUtV2vOiNP6S72dzrYG83Qr4iaNIkf0x/kGUJIaqN6FeIU8/h7odkix27gSgP
+	Pd/t5gz1z+W6rxOHRcX8ZUOyfZMJIf8Jk0FKMYl5B+eZpQi27jjd2ECElBbOajt1wA
+	KlVdOVWjzxcWG+HH6TO5ozuXycPv/o7n624FP4ntYieR+6rpzdb6lwW4h4vodPjdtm
+	pN/vlSoGWi755WgpNBZZcU6kjjDdMPSO8+Kl+E5Ux75sp6cVW4aK5T7wVCOfy83XTf
+	on8AREHm1+aVEJmw8Iz3dCIFJX8axsqmL6mp5huUG4bCKH7qg6HF8K6Me+BJ7ev3xH
+	0e7BUebsMFRPu6T4ITe17s9W9eHgRUgjhtIY+keyFsyu4cSpe4DlxeRBa+B8OshsKr
+	hfgdpu9WE8ObeuvMs9q5bgIBZN1Y3hVLBvdhP9DUhAAmD6PV/3iUBZ5b5P4qxHQBEe
+	MtncbiK9Gcm5l4xNPWmJ5oOlZkvy+xnVeopibQSn27WcFerA+7OC1MxwFmtsqyzDZp
+	ca3w0M8l7kDmAmTJ9+oCrAcSD1svfC9zd4NE/+yVhoFOiko4NrZCpoeJ5AyT005ON2
+	wBzx6haikzJ098nETCsdGrypFjnJ2dhIsKF2zSNW5x2puIbUxNrSV2fcIvkwgf4e27
+	dW+iLmk4wK6BQgqLfglejhtk=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 May 2019 19:03:03 +0300
+Message-Id: <20190509160306.857-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] dnrd: Remove stale files of recipe removed 2 years ago
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,86 +40,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 12:13:44 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 09 May 2019 16:03:07 -0000
 
-UGluZw0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5nIEZ1aml0c3Ug
-TmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpDQpBRERSLjog
-Tm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZlbnVlLA0KICAgICAgIE5h
-bmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3JxLmZuc3RAY24u
-ZnVqaXN0dS5jb20NCg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0t
-DQo+IEZyb206IFpoZW5nLCBSdW9xaW4v1qMgyPTH1Q0KPiBTZW50OiBTYXR1
-cmRheSwgQXByaWwgMTMsIDIwMTkgMjoxNyBBTQ0KPiBUbzogb3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gQ2M6IFpoZW5n
-LCBSdW9xaW4v1qMgyPTH1SA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29t
-Pg0KPiBTdWJqZWN0OiBbb2VdW21ldGEtb2VdW3BhdGNoIHYyXSBkbmYtcGx1
-Z2luLXR1aTogbmV3IHJlY2lwZQ0KPiANCj4gVGhpcyBkbmYgcGx1Z2luIGFp
-bXMgdG8gc3VwcGx5IGEgdHVpIGludGVyZmFjZSBmb3IgdXNlciB0byBtYW5h
-Z2UgcGFja2FnZXMuIEl0IGhhcw0KPiBmZWF0dXJlcyBhcyBmb2xsb3dpbmc6
-DQo+ICAgMS4gQWRkIG5ldyBjb21tYW5kIGRuZiB0dWkgLS1pbml0IHRvIG1h
-a2UgZG5mIHRvIHdvcmsgb24gaG9zdC4NCj4gICAyLiBUZXh0LWJhc2VkIHVz
-ZXIgaW50ZXJmYWNlIGZvciBkbmYuDQo+ICAgMy4gTWFuYWdlIFNQRFggZmls
-ZXMuDQo+ICAgNC4gTWFuYWdlIFNSUE0gZmlsZXMuDQo+ICAgNS4gQWRkIGlu
-c3RhbGxhdGlvbiBzYW1wbGVzIGZvciBkbmYuDQo+IA0KPiBNb3JlIGRldGFp
-bHMgcGxlYXNlIHJlZmVyIHRvIGh0dHBzOi8vZ2l0aHViLmNvbS91YmludXgv
-ZG5mLXBsdWdpbi10dWkuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBaaGVuZyBS
-dW9xaW4gPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+
-ICAuLi4vZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi10dWlfZ2l0LmJiICAg
-ICAgICAgICB8IDM4ICsrKysrKysrKysrKysrKysrKysrKysNCj4gIC4uLi9k
-bmYtcGx1Z2luLXR1aS9maWxlcy9vZS1yZW1vdGUucmVwby5zYW1wbGUgICAg
-IHwgIDUgKysrDQo+ICAyIGZpbGVzIGNoYW5nZWQsIDQzIGluc2VydGlvbnMo
-KykNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZGV2
-dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi0NCj4gdHVpX2dpdC5i
-Yg0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1kZXZ0
-b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3RlLnJlcG8u
-c2FtcGxlDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRl
-dnRvb2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0K
-PiBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9k
-bmYtcGx1Z2luLXR1aV9naXQuYmINCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQN
-Cj4gaW5kZXggMDAwMDAwMC4uZTg5MTg2OA0KPiAtLS0gL2Rldi9udWxsDQo+
-ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1
-aS9kbmYtcGx1Z2luLXR1aV9naXQuYmINCj4gQEAgLTAsMCArMSwzOCBAQA0K
-PiArU1VNTUFSWSA9ICJBIHRleHQtYmFzZWQgdXNlciBpbnRlcmZhY2UgcGx1
-Z2luIG9mIGRuZiBmb3IgdXNlciB0byBtYW5hZ2UNCj4gcGFja2FnZXMuICIN
-Cj4gK0xJQ0VOU0UgPSAiR1BMdjIiDQo+ICsNCj4gK0xJQ19GSUxFU19DSEtT
-VU0gPQ0KPiAiZmlsZTovL0NPUFlJTkc7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0
-ODZhODBmZGFmNGE0MjYzIg0KPiArDQo+ICtTUkNfVVJJID0gImdpdDovL2dp
-dGh1Yi5jb20vdWJpbnV4L2RuZi1wbHVnaW4tdHVpLmdpdDticmFuY2g9bWFz
-dGVyICINCj4gK1NSQ1JFViA9ICIzMWQ2ODY2ZDVlZGEwMmJlOWE2YmZiMWZj
-YTllOTA5NWIxMmVlY2QxIg0KPiArUFYgPSAiMS4wIg0KPiArDQo+ICtTUkNf
-VVJJX2FwcGVuZF9jbGFzcy10YXJnZXQgPSAiZmlsZTovL29lLXJlbW90ZS5y
-ZXBvLnNhbXBsZSINCj4gKw0KPiAraW5oZXJpdCBkaXN0dXRpbHMzLWJhc2UN
-Cj4gKw0KPiArUyA9ICIke1dPUktESVJ9L2dpdCINCj4gKw0KPiArZG9faW5z
-dGFsbF9hcHBlbmQoKSB7DQo+ICsgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7
-ZGF0YWRpcn0vZG5mDQo+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke1N9
-L3NhbXBsZXMvKiAke0R9JHtkYXRhZGlyfS9kbmYNCj4gKyAgICAgICAgaW5z
-dGFsbCAtZCAke0R9JHtQWVRIT05fU0lURVBBQ0tBR0VTX0RJUn0vZG5mLXBs
-dWdpbnMvbWtpbWcNCj4gKyAgICAgICAgaW5zdGFsbCAtbSAwNzU1ICR7U30v
-ZG5mLXBsdWdpbnMvbWtpbWcvKg0KPiAke0R9JHtQWVRIT05fU0lURVBBQ0tB
-R0VTX0RJUn0vZG5mLXBsdWdpbnMvbWtpbWcNCj4gKyAgICAgICAgZm9yIGZp
-bGUgaW4gJChscyAke1N9L2RuZi1wbHVnaW5zLyB8IGdyZXAgLXYgbWtpbWcp
-OyBkbw0KPiArICAgICAgICAgICAgaW5zdGFsbCAtbSAwNzU1ICR7U30vZG5m
-LXBsdWdpbnMvJGZpbGUNCj4gJHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19E
-SVJ9L2RuZi1wbHVnaW5zDQo+ICsgICAgICAgIGRvbmUNCj4gK30NCj4gKw0K
-PiArZG9faW5zdGFsbF9hcHBlbmRfY2xhc3MtdGFyZ2V0KCkgew0KPiArICAg
-ICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L3l1bS5yZXBvcy5k
-DQo+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L29lLXJl
-bW90ZS5yZXBvLnNhbXBsZQ0KPiArJHtEfSR7c3lzY29uZmRpcn0veXVtLnJl
-cG9zLmQgfQ0KPiArDQo+ICtGSUxFU18ke1BOfSArPSAiJHtkYXRhZGlyfS9k
-bmYiDQo+ICsNCj4gK1JERVBFTkRTXyR7UE59ICs9ICIgXA0KPiArICBkbmYg
-XA0KPiArICBsaWJuZXd0LXB5dGhvbiBcDQo+ICsgICINCj4gKw0KPiArQkJD
-TEFTU0VYVEVORCA9ICJuYXRpdmVzZGsiDQo+IGRpZmYgLS1naXQgYS9tZXRh
-LW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2Ut
-DQo+IHJlbW90ZS5yZXBvLnNhbXBsZSBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0
-b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3RlLnJlcG8u
-c2FtcGxlDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAw
-MDAuLjZjNDUwMmUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9l
-L3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2UtcmVt
-b3RlLnJlcG8uc2FtcGwNCj4gKysrIGUNCj4gQEAgLTAsMCArMSw1IEBADQo+
-ICtbYmFzZV0NCj4gK25hbWU9bXlyZXBvDQo+ICtiYXNldXJsPWh0dHA6Ly8x
-MjcuMC4wLjEvb2VfcmVwby8NCj4gK2VuYWJsZWQ9MQ0KPiArZ3BnY2hlY2s9
-MA0KPiAtLQ0KPiAxLjguMy4xDQoNCgoK
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ .../dnrd/dnrd/dnrd.conf.sample                | 21 -----
+ .../recipes-daemons/dnrd/dnrd/dnrd.init       | 94 -------------------
+ .../recipes-daemons/dnrd/dnrd/dnrd.service    | 12 ---
+ 3 files changed, 127 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
+ delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
+ delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
+
+diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
+deleted file mode 100644
+index ec0584193..000000000
+--- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
++++ /dev/null
+@@ -1,21 +0,0 @@
+-# options to dnrd
+-
+-# example: two default dns servers and dns servers for exampledomain.com. The
+-# latter are load balanced (-b)
+-#
+-#
+-
+-# DNRD_OPTS="
+-# -s XXX.XXX.XX.XXX
+-# -s XXX.XXX.XX.XXX
+-# -b
+-# -s XXX.XXX.XX.XXX:exampledomain.com
+-# -s XXX.XXX.XX.XXX:exampledomain.com"
+-
+-# example: dnrd user
+-#
+-
+-# DNRD_USER="user"
+-#
+-
+-
+diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
+deleted file mode 100644
+index 2fe583fcf..000000000
+--- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
++++ /dev/null
+@@ -1,94 +0,0 @@
+-#!/bin/sh
+-#
+-# Startup script for dnrd
+-#
+-#       Copyright 2008, Rakesh Pandit <rakesh.pandit@gmail.com>
+-#
+-#       This source is free software; you can redistribute it and/or modify
+-#       it under the terms of the GNU General Public License as published by
+-#       the Free Software Foundation; either version 2, or (at your option)
+-#       any later version.
+-
+-#       This source is distributed in the hope that it will be useful,
+-#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-#       GNU General Public License for more details.
+-
+-#       You should have received a copy of the GNU General Public License
+-#       along with this program; if not, write to the Free Software
+-#       Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+-#
+-# chkconfig: - 85 15
+-# description: dnrd is a proxying nameserver. It forwards DNS queries to the
+-# appropriate nameserver, but can also act as the primary nameserver for
+-# a subnet behind a firewall. It also has features such as caching DNS
+-# requests, support for DNS servers, cache poisoning prevention, TCP
+-# support, etc..
+-
+-# processname: dnrd
+-# pidfile: /var/run/dnrd.pid
+-# config: /etc/dnrd/dnrd.conf
+-
+-# Provides:          dnrd
+-# Required-Start:
+-# Should-Start:
+-# Required-Stop:
+-# Default-Stop:      0 1 2 6
+-# Short-Description: Start dnrd daemon
+-# Description:       Domain Name Relay Daemon
+-# END INIT INFO
+-
+-exe=/usr/sbin/dnrd
+-pfile=/etc/passwd
+-
+-# Source function library.
+-. /etc/init.d/functions
+-
+-# Source conf file
+-. /etc/dnrd/dnrd.conf
+-
+-[ -x $exe ] || exit 1
+-[ -r "/etc/dnrd/dnrd.conf" ] || exit 1
+-if [ $DNRD_USER ]
+-then
+-         grep "^${LOGIN}:" $pfile >/dev/null 2>&1
+-         if [ $? -eq 0 ];then
+-                 echo "$DNRD_USER specified in /etc/dnrd/dnrd.conf does not exist!"
+-         fi
+-else
+-        echo "DNRD_USER not set at /etc/dnrd/dnrd.conf!"
+-        exit 1
+-fi
+-
+-case "$1" in
+-  start)
+-        echo -n "Starting  dnrd: "
+-        daemon  dnrd $DNRD_OPTS -u $DNRD_USER
+-        echo
+-        touch /var/lock/subsys/dnrd
+-        ;;
+-  stop)
+-        echo -n "Shutting down dnrd: "
+-        killproc dnrd
+-        echo
+-        rm -f /var/lock/subsys/dnrd
+-        rm -f /var/run/dnrd.pid
+-        ;;
+-  status)
+-        status dnrd
+-        ;;
+-  restart)
+-        $0 stop
+-        $0 start
+-        ;;
+-  reload)
+-        echo -n "Reloading dnrd: "
+-        killproc dnrd -HUP
+-        echo
+-        ;;
+-  *)
+-        echo "Usage: $0 {start|stop|restart|reload|status}"
+-        exit 1
+-esac
+-
+-exit 0
+diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
+deleted file mode 100644
+index 9c9fa6639..000000000
+--- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
++++ /dev/null
+@@ -1,12 +0,0 @@
+-[Unit]
+-Description=Domain Name Relay Daemon
+-After=network.target
+-
+-[Service]
+-Type=forking
+-PIDFile=/var/run/dnrd.pid
+-EnvironmentFile=/etc/dnrd/dnrd.conf
+-ExecStart=/usr/sbin/dnrd $DNRD_OPTS -u $DNRD_USER
+-
+-[Install]
+-WantedBy=multi-user.target
+-- 
+2.17.1
+
 
