@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 67DDA7DFCC
+	by mail.openembedded.org (Postfix) with ESMTP id 66E0C7DFBA
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  9 May 2019 16:03:07 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J631c3hz5c
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450J634H2nz6Y
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  9 May 2019 18:03:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557417787;
-	bh=ITJS+N8FT+FCzyyjvVpdgNfuM4xyqGIwgcUba4szrYw=;
+	bh=h9gQXhCEC+kG2snlNWGaEULuL/YqnlEETBpfxcRCf+M=;
 	h=From:To:Subject:Date:From;
-	b=FaWyTUtV2vOiNP6S72dzrYG83Qr4iaNIkf0x/kGUJIaqN6FeIU8/h7odkix27gSgP
-	Pd/t5gz1z+W6rxOHRcX8ZUOyfZMJIf8Jk0FKMYl5B+eZpQi27jjd2ECElBbOajt1wA
-	KlVdOVWjzxcWG+HH6TO5ozuXycPv/o7n624FP4ntYieR+6rpzdb6lwW4h4vodPjdtm
-	pN/vlSoGWi755WgpNBZZcU6kjjDdMPSO8+Kl+E5Ux75sp6cVW4aK5T7wVCOfy83XTf
-	on8AREHm1+aVEJmw8Iz3dCIFJX8axsqmL6mp5huUG4bCKH7qg6HF8K6Me+BJ7ev3xH
-	0e7BUebsMFRPu6T4ITe17s9W9eHgRUgjhtIY+keyFsyu4cSpe4DlxeRBa+B8OshsKr
-	hfgdpu9WE8ObeuvMs9q5bgIBZN1Y3hVLBvdhP9DUhAAmD6PV/3iUBZ5b5P4qxHQBEe
-	MtncbiK9Gcm5l4xNPWmJ5oOlZkvy+xnVeopibQSn27WcFerA+7OC1MxwFmtsqyzDZp
-	ca3w0M8l7kDmAmTJ9+oCrAcSD1svfC9zd4NE/+yVhoFOiko4NrZCpoeJ5AyT005ON2
-	wBzx6haikzJ098nETCsdGrypFjnJ2dhIsKF2zSNW5x2puIbUxNrSV2fcIvkwgf4e27
-	dW+iLmk4wK6BQgqLfglejhtk=
+	b=YJZVH94EUBhaXTzYyhpBBZ/W4S4xtZ5LVh93bshvPxmIlVRsFj2o8WvTvyuemYAEE
+	jxeZxSShYRsf4z52iTzTZfX1FlARzRBEUzsLxa7ck1EyFVZFNzoBooDnUW6fmvn2aq
+	U5vYJoTVHqnpnOjEstEOOfOCMMelxaukS6hbbV3AoXr6aVbQ7SmByWGFYQg7asFAmY
+	AebGB04UB1qc/FiX6yscw9MCPwwIQVBYiIKTFZsZKLusRZiEmUZ6az60zpakG96jsf
+	9d2/dGY499xPynA7SgcrfXg3VBsJ2oPrD/ANLLhpOnAtxgw3kivdLF/N4ynx3ha4Qm
+	jva0UdBS70KUfgG+yJYJSEfoHgWjiDT+Qw9SCcElsrdJdMO6j+GZEMqCaPO2Z4mC85
+	i17MsdzBCkCQKqJQbZ/BpcfI5B0AomIw2eY0totLHvUtcg4I4F4kf1/xl03AnGOjBe
+	79vZYieffYGK+dItnZj5OoX9m2AGZyTzKSKRVx3fXkVktUY/YyC9gQcoSWY14X08ii
+	/xnZSpH1H4ZLJ5wsJOM+PxSswGdXYrZGrOkFjjiysVbv2Ut8YDG1gz460Aa94c9vdj
+	X1Sx+cn+Jz8SUzc0+CLOhGgXj1nA9tLpvqUvzWwZyoizIm639n9jVH02Sk7IEoVJYj
+	pEj/u7e2zICb7djJ9rf+pN3I=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 May 2019 19:03:03 +0300
-Message-Id: <20190509160306.857-1-bunk@stusta.de>
+Date: Thu,  9 May 2019 19:03:04 +0300
+Message-Id: <20190509160306.857-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] dnrd: Remove stale files of recipe removed 2 years ago
+Subject: [meta-networking][PATCH] postfix: Upgrade 3.4.1 -> 3.4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,161 +42,68 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 09 May 2019 16:03:07 -0000
 
+Remove patch for issue fixed upstream.
+
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../dnrd/dnrd/dnrd.conf.sample                | 21 -----
- .../recipes-daemons/dnrd/dnrd/dnrd.init       | 94 -------------------
- .../recipes-daemons/dnrd/dnrd/dnrd.service    | 12 ---
- 3 files changed, 127 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
- delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
- delete mode 100644 meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
+ .../postfix/files/linux_5.x.patch             | 27 -------------------
+ .../{postfix_3.4.1.bb => postfix_3.4.5.bb}    |  5 ++--
+ 2 files changed, 2 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.4.1.bb => postfix_3.4.5.bb} (66%)
 
-diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
+diff --git a/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch b/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
 deleted file mode 100644
-index ec0584193..000000000
---- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.conf.sample
+index fbb811c06..000000000
+--- a/meta-networking/recipes-daemons/postfix/files/linux_5.x.patch
 +++ /dev/null
-@@ -1,21 +0,0 @@
--# options to dnrd
+@@ -1,27 +0,0 @@
+-Recognise kernel 5.x versioning scheme
 -
--# example: two default dns servers and dns servers for exampledomain.com. The
--# latter are load balanced (-b)
--#
--#
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 -
--# DNRD_OPTS="
--# -s XXX.XXX.XX.XXX
--# -s XXX.XXX.XX.XXX
--# -b
--# -s XXX.XXX.XX.XXX:exampledomain.com
--# -s XXX.XXX.XX.XXX:exampledomain.com"
--
--# example: dnrd user
--#
--
--# DNRD_USER="user"
--#
--
--
-diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
-deleted file mode 100644
-index 2fe583fcf..000000000
---- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.init
-+++ /dev/null
-@@ -1,94 +0,0 @@
--#!/bin/sh
--#
--# Startup script for dnrd
--#
--#       Copyright 2008, Rakesh Pandit <rakesh.pandit@gmail.com>
--#
--#       This source is free software; you can redistribute it and/or modify
--#       it under the terms of the GNU General Public License as published by
--#       the Free Software Foundation; either version 2, or (at your option)
--#       any later version.
--
--#       This source is distributed in the hope that it will be useful,
--#       but WITHOUT ANY WARRANTY; without even the implied warranty of
--#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--#       GNU General Public License for more details.
--
--#       You should have received a copy of the GNU General Public License
--#       along with this program; if not, write to the Free Software
--#       Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--#
--# chkconfig: - 85 15
--# description: dnrd is a proxying nameserver. It forwards DNS queries to the
--# appropriate nameserver, but can also act as the primary nameserver for
--# a subnet behind a firewall. It also has features such as caching DNS
--# requests, support for DNS servers, cache poisoning prevention, TCP
--# support, etc..
--
--# processname: dnrd
--# pidfile: /var/run/dnrd.pid
--# config: /etc/dnrd/dnrd.conf
--
--# Provides:          dnrd
--# Required-Start:
--# Should-Start:
--# Required-Stop:
--# Default-Stop:      0 1 2 6
--# Short-Description: Start dnrd daemon
--# Description:       Domain Name Relay Daemon
--# END INIT INFO
--
--exe=/usr/sbin/dnrd
--pfile=/etc/passwd
--
--# Source function library.
--. /etc/init.d/functions
--
--# Source conf file
--. /etc/dnrd/dnrd.conf
--
--[ -x $exe ] || exit 1
--[ -r "/etc/dnrd/dnrd.conf" ] || exit 1
--if [ $DNRD_USER ]
--then
--         grep "^${LOGIN}:" $pfile >/dev/null 2>&1
--         if [ $? -eq 0 ];then
--                 echo "$DNRD_USER specified in /etc/dnrd/dnrd.conf does not exist!"
--         fi
--else
--        echo "DNRD_USER not set at /etc/dnrd/dnrd.conf!"
--        exit 1
--fi
--
--case "$1" in
--  start)
--        echo -n "Starting  dnrd: "
--        daemon  dnrd $DNRD_OPTS -u $DNRD_USER
--        echo
--        touch /var/lock/subsys/dnrd
--        ;;
--  stop)
--        echo -n "Shutting down dnrd: "
--        killproc dnrd
--        echo
--        rm -f /var/lock/subsys/dnrd
--        rm -f /var/run/dnrd.pid
--        ;;
--  status)
--        status dnrd
--        ;;
--  restart)
--        $0 stop
--        $0 start
--        ;;
--  reload)
--        echo -n "Reloading dnrd: "
--        killproc dnrd -HUP
--        echo
--        ;;
--  *)
--        echo "Usage: $0 {start|stop|restart|reload|status}"
--        exit 1
--esac
--
--exit 0
-diff --git a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service b/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
-deleted file mode 100644
-index 9c9fa6639..000000000
---- a/meta-networking/recipes-daemons/dnrd/dnrd/dnrd.service
-+++ /dev/null
-@@ -1,12 +0,0 @@
--[Unit]
--Description=Domain Name Relay Daemon
--After=network.target
--
--[Service]
--Type=forking
--PIDFile=/var/run/dnrd.pid
--EnvironmentFile=/etc/dnrd/dnrd.conf
--ExecStart=/usr/sbin/dnrd $DNRD_OPTS -u $DNRD_USER
--
--[Install]
--WantedBy=multi-user.target
+---- a/makedefs
+-+++ b/makedefs
+-@@ -543,7 +543,7 @@ EOF
+- 		: ${SHLIB_ENV="LD_LIBRARY_PATH=`pwd`/lib"}
+- 		: ${PLUGIN_LD="${CC-gcc} -shared"}
+- 		;;
+--  Linux.[34].*)	SYSTYPE=LINUX$RELEASE_MAJOR
+-+  Linux.[345].*)	SYSTYPE=LINUX$RELEASE_MAJOR
+- 		case "$CCARGS" in
+- 		 *-DNO_DB*) ;;
+- 		 *-DHAS_DB*) ;;
+---- a/src/util/sys_defs.h
+-+++ b/src/util/sys_defs.h
+-@@ -749,7 +749,7 @@ extern int initgroups(const char *, int)
+-  /*
+-   * LINUX.
+-   */
+--#if defined(LINUX2) || defined(LINUX3) || defined(LINUX4)
+-+#if defined(LINUX2) || defined(LINUX3) || defined(LINUX4) || defined(LINUX5)
+- #define SUPPORTED
+- #define UINT32_TYPE	unsigned int
+- #define UINT16_TYPE	unsigned short
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
+similarity index 66%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
+index 73380d8c6..3ce805553 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.4.1.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
+@@ -4,9 +4,8 @@ SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patc
+             file://postfix-install.patch \
+             file://icu-config.patch \
+             file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+-            file://linux_5.x.patch \
+            "
+-SRC_URI[md5sum] = "d292bb49a1c79ff6d2eb9c5e88c51425"
+-SRC_URI[sha256sum] = "8c9763f7a8ec70d499257b7f25bb50e1f3da8a4c43e59826ba8a26c4a778d0ce"
++SRC_URI[md5sum] = "093109941095390562166de766d4720d"
++SRC_URI[sha256sum] = "8b2ba54f9d2a049582a0ed3ee2dbe96ba57e278feea9cb4f80e1a61844e6319f"
+ 
+ UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.3(\.\d+)+).tar.gz"
 -- 
 2.17.1
 
