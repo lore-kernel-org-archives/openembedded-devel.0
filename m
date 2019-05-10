@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 5046A6C1D5
+	by mail.openembedded.org (Postfix) with ESMTP id 5B0617E09C
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 10 May 2019 11:55:18 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYg3DY4zFr
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYg14m7z7k
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 10 May 2019 13:55:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557489319;
-	bh=9ly843VowJp/9aObViU/5Xs4Kr9z4xxJR7dXjhgaLIc=;
+	bh=joomT3xwVUOkL6brbD0XWWE3eEDl+/txLsJvjt61kvg=;
 	h=From:To:Subject:Date:From;
-	b=fk8BwJFHnzHW2hbFUFyb4jFS4oU7ngztCPRBIymJRrKkeYW5udCFqbmbSlmB8niM8
-	WOcFpo/bJNk7kqBxZQ2prM4O2dDfpJCkRN4J7b4B56Gv4prMYA8cV16ve2CWJem4Yc
-	ymOU7uG7bOTMdDHNIIGoOJlsS/zNrRRGzXS5WeP98sVQ0YACFVwyPfZC4uFCIfrG8m
-	JMQtOw2UFLxYVxzUAzsiQQVvbtq2pCN2jEeTcihRot/lPd55aTIMuuFcNczXAxTpiv
-	wO2Zu19WCd4mx+Ag+jqGTL57QVUzOVsmQaouGEGCuQ4HAu4HNIaUytJ50y/gKzn/sA
-	0FhzoKdcDl7reBUixxXDDyRqs3VSoFZov+ps9u+4fYlThJDTe2lFh+mbaN+fc+evrU
-	w3XcZMoFCF6EzUjLdS1majya0l7O3McWVspR0KO+T5uIcJUbXkpeILI9TWoEaEcSBp
-	E0qk3RR6hmZL7m/nj3jEPTm3MzQucHhvg06awYEHmTkhxshd/I7nU6Xqc14vFF63KQ
-	z0xAsrvZ+wOYn/qD1MtdO556XhAKFhSdYkxBjm8ttCdyiB9hmV263hHHfvjyCxUvnp
-	726eTxwfOnPfywUw2VMHeHT7T1XBrswSXQFkpOwEKLKh9CJeH1o26zPP8cNYxQVzLs
-	SXKXr/uXTH6lrUV+nA+m9nR4=
+	b=PBsuol6mEqXV40er++wJElBVMp5rxr3jHpjsHqmxon5toea6mN/nm1MqcBkJNOrzh
+	iB+P6vKkuzn5zkEcLvh+gCTsLM+cuj2D5YFtEEdcit3s7oX7gjM6u3cRHXD0cbbEg1
+	Eybv4s4Jnm5PXyYPGcSUre9Za5n0MPqH12emHouo7HT5xCGC87Qkzc9cC9CCZOfk3Y
+	rVz6l11TIi9BEu92HZY2pUDojL4eqpA37RlP5I4pGOcjmY+MpiHd7khMOCz0u4x/vN
+	UATuu4/1ZGM1bG42W2ZuC9f/ycAXfNRyB5IJWC81Q6hh8l+C7WJD33Xs50TbBDjunA
+	O3TP/Op5cw3bXlhQL86AYogVmEN+Hqgz8jBUQmdJA5g+eVNuX0cGbeerULUE4Vstbf
+	gfvjxkX4pF5/ooIpxfj+AIFkegGranZF4Fw7cKChG9ZTPDdqjDubt8cW1FyLZkI6VU
+	uapBmreAj9lbKIIDmUFABHJ72K5nieu/hlsUewAOOoh/GR7qehRF1tMWmBaZ2QOQXP
+	n6EExZlkIOje4R8d5hd+27EZZ6f1Sumx/ZF9eW6F58fTgJdkAwveBm26KRqUYq2/co
+	8DjuObmjZG+tNtiYE3Bzrn2RMSAWU+LWHJL2fzHTYr2Y0dDWjIfX5wTZbw52YPEyQw
+	Y7p3kSTe/Kq06sZ3v9ncl6/M=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 May 2019 14:55:06 +0300
-Message-Id: <20190510115515.19491-10-bunk@stusta.de>
+Date: Fri, 10 May 2019 14:55:05 +0300
+Message-Id: <20190510115515.19491-9-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] geos: Upgrade 3.4.2 -> 3.4.3
+Subject: [meta-oe][PATCH] fvwm: Upgrade 2.6.7 -> 2.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,72 +42,122 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 10 May 2019 11:55:18 -0000
 
-Remove patch applied upstream.
+Remove patches applied upstream.
+pkg-config is now used when checking for freetype.
+The licence did not change by the changes to COPYING.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../geos/files/fix-gcc6-isnan.patch           | 22 -------------------
- meta-oe/recipes-navigation/geos/geos_3.4.2.bb |  7 ------
- meta-oe/recipes-navigation/geos/geos_3.4.3.bb |  7 ++++++
- 3 files changed, 7 insertions(+), 29 deletions(-)
- delete mode 100644 meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
- delete mode 100644 meta-oe/recipes-navigation/geos/geos_3.4.2.bb
- create mode 100644 meta-oe/recipes-navigation/geos/geos_3.4.3.bb
+ ...1-Fix-compilation-for-disabled-gnome.patch | 17 +-----------
+ .../fvwm/0002-Avoid-absolute-symlinks.patch   | 27 -------------------
+ .../fvwm/{fvwm_2.6.7.bb => fvwm_2.6.8.bb}     |  8 +++---
+ 3 files changed, 4 insertions(+), 48 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
+ rename meta-oe/recipes-graphics/fvwm/{fvwm_2.6.7.bb => fvwm_2.6.8.bb} (91%)
 
-diff --git a/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch b/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
-deleted file mode 100644
-index 5c5fbd1d9..000000000
---- a/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
----- geos-3.4.2/configure.in.orig	2016-06-08 17:46:43.002250304 +0000
--+++ geos-3.4.2/configure.in	2016-06-08 17:57:36.342241606 +0000
--@@ -197,7 +197,7 @@
-- AC_LANG_PUSH([C++])
-- AC_CACHE_CHECK([for isnan], ac_cv_isnan,
--  [AC_TRY_LINK([#include <cmath>],
--- [double x; int y; y = isnan(x);],
--+ [double x; int y; y = std::isnan(x);],
--  ac_cv_isnan=yes,
--  ac_cv_isnan=no
-- )])
----- geos-3.4.2/include/geos/platform.h.in.orig	2016-06-08 14:06:53.910234182 -0400
--+++ geos-3.4.2/include/geos/platform.h.in	2016-06-08 14:07:19.298233844 -0400
--@@ -84,7 +84,7 @@
-- #endif
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
+index 5a7647455..e81d395b9 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
++++ b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
+@@ -27,22 +27,7 @@ diff --git a/configure.ac b/configure.ac
+ index 48ce264..fab7b44 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1413,23 +1413,7 @@ else
+-   problem_gdkimlib=": Failed on gdk-imlib, see config.log"
+- fi
 - 
-- #if defined(HAVE_ISNAN)
---# define ISNAN(x) (isnan(x))
--+# define ISNAN(x) (std::isnan(x))
-- #else
-- # if defined(_MSC_VER)
-- #  define ISNAN(x) _isnan(x)
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+--GNOME_INIT_HOOK
+--
+--# Unfortunately we have 2 gnome supports: WM hints and gnome libs.
+--# The $with_gnomehints below refers to the first, not GNOME_INIT_HOOK.
+--if test ! x"$enable_gnome_hints" = xno; then
+--  with_gnomehints=yes
+--  problem_gnomehints=""
+--else
+--  with_gnomehints=no
+--  problem_gnomehints=": Explicitly disabled"
+--fi
+--
++@@ -1413,8 +1413,4 @@ else
+  # Define some compatibility macros needed for config.h.
+ -mg_DEFINE_IF_NOT([#include <X11/keysym.h>],
+ -  [defined XK_Page_Up && defined XK_Page_Down],
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
 deleted file mode 100644
-index 7193f8fb5..000000000
---- a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+index 756cc86e8..000000000
+--- a/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
 +++ /dev/null
-@@ -1,7 +0,0 @@
--require geos.inc
+@@ -1,27 +0,0 @@
+-From: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
+-Date: Tue, 29 Auf 2017 16:08:42 +0200
+-Subject: [PATCH] Avoid absolute symlinks
 -
--SRC_URI += "file://geos-config-Add-includedir-variable.patch \
--            file://fix-gcc6-isnan.patch"
+-Avoid usage of absolute symlinks, which breaks yocto builds
+-since pyro.
 -
--SRC_URI[md5sum] = "fc5df2d926eb7e67f988a43a92683bae"
--SRC_URI[sha256sum] = "15e8bfdf7e29087a957b56ac543ea9a80321481cef4d4f63a7b268953ad26c53"
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.4.3.bb b/meta-oe/recipes-navigation/geos/geos_3.4.3.bb
-new file mode 100644
-index 000000000..538456cc2
---- /dev/null
-+++ b/meta-oe/recipes-navigation/geos/geos_3.4.3.bb
-@@ -0,0 +1,7 @@
-+require geos.inc
-+
-+SRC_URI += "file://geos-config-Add-includedir-variable.patch \
-+"
-+
-+SRC_URI[md5sum] = "77f2c2cca1e9f49bc1bece9037ac7a7a"
-+SRC_URI[sha256sum] = "cfbf68079117c1c2b76411636444ff41d73c31093c4cab9dcc9a8c1bbe7e3897"
+-Upstream-Status: Pending
+-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
+-
+-diff --git a/default-config/Makefile.am b/default-config/Makefile.am
+-index 5e16d095a137..5404145a742c 100644
+---- a/default-config/Makefile.am
+-+++ b/default-config/Makefile.am
+-@@ -17,9 +17,9 @@ EXTRA_DIST  = images \
+- 
+- install-data-hook:
+- 	cp -r $(srcdir)/images $(inst_location)
+--	ln -sf $(inst_location)/FvwmScript-DateTime $(inst_location)/..
+--	ln -sf $(inst_location)/FvwmScript-ConfirmQuit $(inst_location)/..
+--	ln -sf $(inst_location)/FvwmScript-ConfirmCopyConfig $(inst_location)/..
+-+	ln -sf default-config/FvwmScript-DateTime $(inst_location)/..
+-+	ln -sf default-config/FvwmScript-ConfirmQuit $(inst_location)/..
+-+	ln -sf default-config/FvwmScript-ConfirmCopyConfig $(inst_location)/..
+- 
+- uninstall-hook:
+- 	rm -fr $(DESTDIR)/$(configdir)
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.8.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
+rename to meta-oe/recipes-graphics/fvwm/fvwm_2.6.8.bb
+index cb851bfd9..e1c3158bb 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.8.bb
+@@ -2,7 +2,7 @@ SUMMARY = "F Virtual Window Manager "
+ HOMEPAGE = "http://www.fvwm.org/"
+ SECTION = "x11/wm"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=363fbcfb59124689af72c914560eaf6e"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f8204787357db6ea518dcc9b6cf08388"
+ 
+ DEPENDS = " \
+     bison-native \
+@@ -31,15 +31,14 @@ DEPENDS = " \
+     zlib \
+ "
+ 
+-PV = "2.6.7+git${SRCPV}"
++PV = "2.6.8"
+ 
+ SRC_URI = " \
+     git://github.com/fvwmorg/fvwm.git;protocol=https \
+     file://0001-Fix-compilation-for-disabled-gnome.patch \
+-    file://0002-Avoid-absolute-symlinks.patch \
+ "
+ 
+-SRCREV = "597a4e296da4f21e71a17facab297e016a3a80a8"
++SRCREV = "dc6a396bfe5cd6c53eb1df103c3af505d0899f90"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -54,7 +53,6 @@ ALTERNATIVE_PRIORITY[x-window-manager] = "20"
+ EXTRA_OECONF = " \
+     --disable-bidi \
+     --disable-fontconfigtest \
+-    --disable-freetypetest \
+     --disable-htmldoc \
+     --disable-imlibtest \
+     --disable-mandoc \
 -- 
 2.17.1
 
