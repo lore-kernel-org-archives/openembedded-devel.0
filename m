@@ -1,57 +1,56 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B7B1A7E09C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8887C7D537
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 14:09:37 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id w1so2661076ljw.0
+	Fri, 10 May 2019 16:12:10 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id t187so3226505pgb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 07:09:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=zazYlntY3DdjUOqrdNWdIKk5wqTFWR86TjJFYxy1O/A=;
-	b=TwSPy6MmN1NTd9+aJMmXMLB7wgIrEBs0SYa6ZbFZJXvy3iz4+KD/571t58UkXfjBvf
-	m7S15bGldPkNIHE8zvcF1j4M0sAo8zrbgGbg+oG3Vpp+Psh5DlMp72hW2bLqIWfbjWOL
-	YxyuFvoH7tSWlJQNM4Dc03diSVThvqrlib258yE4/nJwYVDtYg0d2WndVJyF4S/lV4vW
-	6IZpuNQYYG38sIY6+4FfF/IvDacd1u0Z4hxFIpf5VbcHG2hAbTSRLl034Yb6nBZR3zBe
-	6RDkFFMApykzJa/TX+Of8XRWKMb8Bz/ZDUS9eFYTY2WCqF7d6MUmLeNnD1W+BfP83i7Z
-	1Fmw==
+	Fri, 10 May 2019 09:12:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=804bzw26MuOI2zawJ9Og1sXy46fZ61SmgGu1DXXjw/s=;
+	b=DVBqWeSpeZ1UMzY/644YAo15pmMcXIvHLw8k7tXM95VlQujcjaNh69h9XGhuZh0kDm
+	fX7w9KBwDhow4GV+g62diQaqBi4/FG3HzK0s/twkMPoPFuJaHquLKBe7MN9Rt6q/tqfT
+	WOnnJe/o65jELZ5EofPC7ALAZzIpqP1ySCRb9YBnLXO2Cawn9DwVAJQWLnRK9uf0MT//
+	d7pKVDqPLNtypv+EOB76NKD6buseITLJ4zB++W9OtNrclYGuBhfyMZesRgy5r0BC8F6p
+	hSTmuX7s1eC1IJ2yfu1ODDbbyFczKUgQEMJWTRRVA6bq4yTNeNlE3aexYMkam/ertP8Y
+	D2Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=zazYlntY3DdjUOqrdNWdIKk5wqTFWR86TjJFYxy1O/A=;
-	b=Go9+67fLfFd5FrGxJl+5KT+RriSSEk6PHZ+dwkPOhxn7xtIairgEtIwGI0v+GgaJDx
-	pQccu7NDwSN07YfHSb/PKLpdapmwvR1pg/Xkr1TcM3Sq0A/Yu2hGapSvq3fSy1Xnqkw9
-	Zg8U/E18LI5X2NZ6skqPaXaHpCE/AqRE0lwVYvIhOc+r6GvirPZStWTV/bmfbztxRLV5
-	0geDIWdmAslZCcTKMzlnEiB/jfj4b/EpCja6pYkNR6fyeZDC2V5ZUBdtrzTJCN8ozww8
-	2wLBZrjwNH1uHJRKALpil28IPFBmp+oqVUTN0vqXcl9ms7JaEqtrosCuzDqTF0AtrFeY
-	2fPg==
-X-Gm-Message-State: APjAAAXgWo+LmRy0Q4d5aZrr0GNMBqrf7wL2zek/l3Y0mPzX9suWk5fZ
-	hos4497Dh0Ah3Uq2Bykv6HfKI+icfeY=
-X-Google-Smtp-Source: APXvYqwSD1NSKvO6wrecLzmwa+39QX3sORXx5XYQiEkla6qWAbolhYsj2dyVE3KGCnomu5GZGA74KQ==
-X-Received: by 2002:a2e:85d2:: with SMTP id h18mr6027350ljj.128.1557497378021; 
-	Fri, 10 May 2019 07:09:38 -0700 (PDT)
-Received: from [192.168.0.8] (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id x6sm1721613ljd.63.2019.05.10.07.09.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 May 2019 07:09:37 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190507222212.1808-1-open.source@oleksandr-kravchuk.com>
-	<CAMKF1so9YYSGVFzLD-9tt-UmRi-x6n3HtK3XiVXo0gQKe0FOXA@mail.gmail.com>
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Message-ID: <d2ad54bc-5333-e1dd-410c-86b6215e3683@oleksandr-kravchuk.com>
-Date: Fri, 10 May 2019 16:09:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=804bzw26MuOI2zawJ9Og1sXy46fZ61SmgGu1DXXjw/s=;
+	b=HySDKb5Rm2GX7tMdSLk3mxdO8OsiMJUqFQrdopGvMdv0FQObeEUKdYdtiV3YBf69Pn
+	MeXM47kKeQyuzVyxtzg0dDIs8620oCRe1yLolGArf7tIR8zB6k8HF5ZQkDLE5z9RVJMm
+	+cYBO5JchQohkcx9Hcqs1U81tEF/8Tgw6gxdUCiYh37Ys2adbTxnVAzjoDOYsbQ6RKuA
+	ikvnq7ptVPiOI7Jzu2epcD6qUWhxGJGyJgSEAUGCAsJb5NBLa5ZOyexyez4Riz+xlFp7
+	OuIU8QbZjQdUUakGZjSiT/sHkrMT/hWX8yvHNLFgFCct4XJ/4SVegI9VNyLmTJc0aAZq
+	eaTA==
+X-Gm-Message-State: APjAAAVPyfs+O8mRF2pDa+EjHkj83+URUzezJANSor5jmXvhNzlFxFup
+	OYHAdNERhFIt4pJkE5gw8p6oZef5eGo=
+X-Google-Smtp-Source: APXvYqyJveEGFX1m5l8qkCyCjX+nO2UXis5eILHMrohnv33AQQFGVHXiU3SQ6xVD2fKduJTAu02Lzw==
+X-Received: by 2002:a62:2703:: with SMTP id n3mr15374087pfn.199.1557504730931; 
+	Fri, 10 May 2019 09:12:10 -0700 (PDT)
+Received: from hermes.local ([2601:646:8500:6bc6:6095:8839:3497:2f69])
+	by smtp.gmail.com with ESMTPSA id f6sm5730389pgq.11.2019.05.10.09.12.10
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 May 2019 09:12:10 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <20190430060855.60494-1-sean@geanix.com>
+	<CAP71WjyBr94m0gH4MBG7CEpQcS01UP9ia1Ay9S6zueJdeT-Jcg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <a7026c4e-89a2-211d-e054-d42114680934@gmail.com>
+Date: Fri, 10 May 2019 09:12:07 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0)
+	Gecko/20100101 Thunderbird/67.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1so9YYSGVFzLD-9tt-UmRi-x6n3HtK3XiVXo0gQKe0FOXA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] libnetfilter-conntrack: update to 1.0.7
+In-Reply-To: <CAP71WjyBr94m0gH4MBG7CEpQcS01UP9ia1Ay9S6zueJdeT-Jcg@mail.gmail.com>
+Subject: Re: [PATCH v2] cannelloni: new package, CAN to ethernet proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,52 +63,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 14:09:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 May 2019 16:12:10 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Resent together with conntrack-tools update which is compatible with
-this version.
 
-On 10/05/2019 05:29, Khem Raj wrote:
-> Hi Oleksandr
->
-> this is breaking conntrack-tools I believe see
->
-> https://errors.yoctoproject.org/Errors/Details/239969/
->
-> On Tue, May 7, 2019 at 3:22 PM Oleksandr Kravchuk
-> <open.source@oleksandr-kravchuk.com> wrote:
->> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+
+On 5/10/19 6:08 AM, Nicolas Dechesne wrote:
+> On Tue, Apr 30, 2019 at 8:09 AM Sean Nyekjaer via Openembedded-devel
+> <openembedded-devel@lists.openembedded.org> wrote:
+>>
+>> Tool for sending SocketCAN messages
+>> over Ethernet tunnel.
+>>
+>> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
 >> ---
->>  ...-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} | 7 +++----
->>  1 file changed, 3 insertions(+), 4 deletions(-)
->>  rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} (63%)
+>> Changes in v2:
+>> - Added PV
 >>
->> diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
->> similarity index 63%
->> rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
->> rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
->> index e4e186bdb..5c8150156 100644
->> --- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
->> +++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
->> @@ -6,10 +6,9 @@ LICENSE = "GPLv2+"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->>  DEPENDS = "libnfnetlink libmnl"
+>>   .../cannelloni/cannelloni_git.bb                | 17 +++++++++++++++++
+>>   1 file changed, 17 insertions(+)
+>>   create mode 100644 meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
 >>
->> -SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
->> -"
->> -SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
->> -SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
->> +SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2"
->> +SRC_URI[md5sum] = "013d182c2df716fcb5eb2a1fb7febd1f"
->> +SRC_URI[sha256sum] = "33685351e29dff93cc21f5344b6e628e41e32b9f9e567f4bec0478eb41f989b6"
->>
->>  S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
->>
+>> diff --git a/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
+>> new file mode 100644
+>> index 000000000..df75e6342
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
+>> @@ -0,0 +1,17 @@
+>> +SUMMARY = "a SocketCAN over Ethernet tunnel"
+>> +HOMEPAGE = "https://github.com/mguentner/cannelloni"
+>> +LICENSE = "GPLv2"
+>> +
+>> +SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https"
+>> +SRCREV = "44080bb021d1a143e6906f2ec4610513c4e1cece"
+>> +
+>> +PV = "20160414+${SRCPV}"
+>> +
+>> +LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +inherit cmake
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +PACKAGECONFIG ??= "lksctp-tools"
+>> +PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+> 
+> lksctp-tools recipe is in meta-networking, so we've added an implicit
+> dependency on meta-networking by taking this patch. should we disable
+> lksctp-tools support by default?
+
+Yes it should be disabled by default. But looking again at it, I think 
+this recipe is more appropriate for meta-networking to reside in. So
+probably just moving the recipe to meta-networking is another solution.
+
+> 
 >> --
->> 2.17.1
+>> 2.21.0
 >>
 >> --
 >> _______________________________________________
