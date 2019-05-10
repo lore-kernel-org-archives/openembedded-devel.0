@@ -1,56 +1,52 @@
-Return-Path: <uvv.mail@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 559F37E07D
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A569C7E068
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 13:37:02 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id v7so4494621iob.10
+	Fri, 10 May 2019 14:08:50 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id m20so5228846lji.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 06:37:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=qBGLEXD3gNQufCd5URBk6uJQI0HKrSQVDBZbOM2TI9o=;
-	b=kKSyvzSiYVFg/D5B6REcsXBsphV/1EBFREYoD5umO1ys9PdNnDPtpTsXhenEceS1X8
-	0UyJ8jwZGjN/HmtQmohAUYbdrSSVapHO6KSZDRkNxfT+NltzsvYCPyDUVYtN0TI6fOW1
-	k3LDoflnSoa7soSo414Z9obRd06ceOf5DZ7C4yas3tmgf0FI6nuMZRzvkhxL+rBf5hKB
-	CWN8hfq9Xcv1SDKkJh+paUz1CXM7rwQ80S7+jqPiU4lggTreIOcP5qkNSv8hzf0S5JTY
-	8niSjw3Ns1+8Zhi7OcpweGYZqfLdBlwi8w3GUOalW5heDQ3Hjd24zCRsQW7HkcTdGf9Y
-	RTGw==
+	Fri, 10 May 2019 07:08:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=A/WZePOYa4Gjty1Uy2sJx152PzuzOcyXdQK6ypVquu0=;
+	b=2RyaNGFSsLVHRmMarXCkWfLv+RPso/qofO2htbLbfV49DV0qBjaS2ubGov2WaUUi32
+	rozaRCtbwmOm01KvGWZ8CDp8nlwRyXWiY422fg60JC0Wb/ZIG+noerAjfRZ3UqkFJxLQ
+	4jpMuBNMq5iBT+EcuiSIfJqvbf0rlLC1rvEK+YVZ6A69gzFOCaZx/gsYsrADhe85AlrH
+	iiNT+UehkXWzrT14b3TBulkii9lUf7mxc52JhHLGn0Lq4O4XTv0cDk0c+QBfPJU9cUCe
+	6s2K06UmzH5UJ9HViCRDlp6MBlZrfN3V2b67ATzIRyE/EI7FpzpxKnU45RDj1CWAqk0q
+	v7lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=qBGLEXD3gNQufCd5URBk6uJQI0HKrSQVDBZbOM2TI9o=;
-	b=Y22k92DjLKbK/1igOqP1H8SljmiGQD8mRRVB8GbQUYUrWuWPbannEgYx8HISAnwwE5
-	L7bJtdKQt9q3H+kxKP3jwyxjct8tIz4N2lieBMe1/UCxvc+tC3KlVTxDKZYn0logsPq8
-	bOFE42zmWN4p0BdYdtFi/WXVvKY0zpT6sV3Kg8saUxtuHV2WhDPp0nfswaCgMUqBzGWK
-	oKB8CMyIIrylIE6y7XfdR2tRzashGc5Up4jmLqZKtU7xV2ectzljvQ9CBUM2hkBeYRgH
-	dYPmHvjqCeLBnG8YqwbXBnPszTR+kfvxEypEhgCCguqKWfeaUZak0xLiWEAtcys6n2t8
-	aa/Q==
-X-Gm-Message-State: APjAAAVPsEzLra1mspQDcAtq1RdrB5fD36QlX232EtiXp0tJjI+0z1Kc
-	h4B1MtcP+P00StzGMrXnf/Q5N9FiDl404w==
-X-Google-Smtp-Source: APXvYqwCBEnSTbsdXx8tLrT3Ex0zwP3ugpK7WmRb9Jy7c8sctcnCBqK6Ze/vXKPWp2R7ccq6GkVyvQ==
-X-Received: by 2002:a5d:8712:: with SMTP id u18mr6567000iom.18.1557495423024; 
-	Fri, 10 May 2019 06:37:03 -0700 (PDT)
-Received: from Vyacheslavs-MacBook-Pro.local ([67.215.13.230])
-	by smtp.gmail.com with ESMTPSA id i8sm1808720ioj.26.2019.05.10.06.37.01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=A/WZePOYa4Gjty1Uy2sJx152PzuzOcyXdQK6ypVquu0=;
+	b=avo1Xqj4cqYm2StD8NlhqhbuCA6GKdd79m6GJ5mweF4WQUx1dGCrJDUl8tg26wTLUe
+	ArW3bTwe7KRnFKFckZtucbNMLtVaWdFolMN+HaU3iUEWv1N59exhknr77iS50Ltv015D
+	Y1YrmJF1bg7MNAn/3eXtWM11BKqUfdltswU/w3fJrqe6QciTDweE6l/kVM4TSHtkWG0n
+	2hdT6kUmHU+yc2inLVF6VknrNuRkrXhJBWpoNFcZzc4QtUdgfiwQiF+cZRT2lCn/AcVF
+	f5WXqce8YF4l7CAqu5US5kMY1BbQcIj+NjHJl/avf421jJiBweg8UGTrGhGL+mgU2x5d
+	0hUA==
+X-Gm-Message-State: APjAAAVsM8cvhYOP41t8OCouCcra0yvh+OFxQIdk177migznU8t4DhBb
+	RMBdxzgAOAOAuuIfIqodxHuBwrCJa3s=
+X-Google-Smtp-Source: APXvYqyVl4q4dM4ulm1b/LvKdsPBku5nI8inL+iAX2isrx1Sok3o5Lo3RrjQ2YoWTUsl15bncTIjMA==
+X-Received: by 2002:a2e:92ce:: with SMTP id k14mr6064920ljh.83.1557497330704; 
+	Fri, 10 May 2019 07:08:50 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id n1sm1383640ljg.84.2019.05.10.07.08.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 May 2019 06:37:02 -0700 (PDT)
-To: Belisko Marek <marek.belisko@gmail.com>,
-	OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-References: <1551959871-9647-1-git-send-email-marek.belisko@open-nandra.com>
-	<CAAfyv36SJe1D=qQA_jDdRBbv_VAJEUBvimSxc8vhVNRoZ4C=DA@mail.gmail.com>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Message-ID: <2ce57835-2253-0579-c54b-bd9adde559ea@gmail.com>
-Date: Fri, 10 May 2019 15:36:59 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
-	Gecko/20100101 Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <CAAfyv36SJe1D=qQA_jDdRBbv_VAJEUBvimSxc8vhVNRoZ4C=DA@mail.gmail.com>
-Subject: Re: [meta-java][PATCH] jamvm: Disable inlining
+	Fri, 10 May 2019 07:08:50 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 May 2019 16:08:42 +0200
+Message-Id: <20190510140842.17978-2-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190510140842.17978-1-open.source@oleksandr-kravchuk.com>
+References: <20190510140842.17978-1-open.source@oleksandr-kravchuk.com>
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking 2/2] conntrack-tools: update to 1.4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,67 +59,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 13:37:02 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 10 May 2019 14:08:50 -0000
 
-Hi Marek,
-Thanks for your patch. I can confirm that this resolves the Illegal 
-instruction issue for me on gcc-7.4 and Morty branch. I don't think 
-there should be any difference for master branch regarding this fix, in 
-other words it must be applicable to master too.
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../{conntrack-tools_1.4.4.bb => conntrack-tools_1.4.5.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-filter/conntrack-tools/{conntrack-tools_1.4.4.bb => conntrack-tools_1.4.5.bb} (91%)
 
-Thanks,
-Vyacheslav
+diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
+similarity index 91%
+rename from meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
+rename to meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
+index 46168b0ba..51e0ec1a6 100644
+--- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
++++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-too
+     file://conntrack-failover \
+     file://init \
+ "
+-SRC_URI[tar.md5sum] = "acd9e0b27cf16ae3092ba900e4d7560e"
+-SRC_URI[tar.sha256sum] = "b7caf4fcc4c03575df57d25e5216584d597fd916c891f191dac616ce68bdba6c"
++SRC_URI[tar.md5sum] = "9356a0cd4df81a597ac26d87ccfebac4"
++SRC_URI[tar.sha256sum] = "36c6d99c7684851d4d72e75bd07ff3f0ff1baaf4b6f069eb7244990cd1a9a462"
+ 
+ inherit autotools update-rc.d pkgconfig
+ 
+-- 
+2.17.1
 
-On 30/04/2019 09:48, Belisko Marek wrote:
-> Ping. any comments on this?
->
-> On Thu, Mar 7, 2019 at 12:57 PM Marek Belisko <marek.belisko@open-nandra.com>
-> wrote:
->
->> This will fix crashes seen when build openjdk-8:
->>
->> ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile
->> (log file is located at
->> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
->> ERROR: Logfile of failure stored in:
->> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894
->> Log data follows:
->> | DEBUG: Executing shell function do_compile
->> | Illegal instruction (core dumped)
->> | WARNING: exit code 132 from a shell command.
->> | ERROR: Function failed: do_compile (log file is located at
->> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
->> ERROR: Task
->> (virtual:native:/home/jenkins/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile)
->> failed with exit code '1'
->>
->>
->> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
->> ---
->>   recipes-core/jamvm/jamvm.inc | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
->> index fc21380..8a1ed63 100644
->> --- a/recipes-core/jamvm/jamvm.inc
->> +++ b/recipes-core/jamvm/jamvm.inc
->> @@ -29,7 +29,7 @@ do_configure_append_class-native() {
->>   }
->>
->>
->> -EXTRA_OECONF = "--with-classpath-install-dir=${prefix}
->> --libdir=${libdir}/jamvm --enable-ffi"
->> +EXTRA_OECONF = "--with-classpath-install-dir=${prefix}
->> --libdir=${libdir}/jamvm --enable-ffi --disable-int-inlining"
->>
->>   # Needed for big compilation targets like OpenJDK
->>   CFLAGS_append_class-native = " -DDEFAULT_MAX_HEAP=1024*MB"
->> --
->> 2.7.4
->>
->>
-> marek
 
