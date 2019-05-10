@@ -1,37 +1,52 @@
-Return-Path: <sean@geanix.com>
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F99F7E0D9
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A2677E0D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 16:59:51 +0000 (UTC)
-Received: from [192.168.100.12] (unknown [95.138.208.137])
-	by first.geanix.com (Postfix) with ESMTPSA id 62277AD5;
-	Fri, 10 May 2019 16:58:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1557507537; bh=B5IHpvObhu1827EtmP6vg595uw+oQBA9hfwmSST1ERg=;
-	h=Subject:From:In-Reply-To:Date:Cc:References:To;
-	b=amJUO44VEb3qp1N297j0UcMqsky+CHct9SjbBVpfO+4DyCUoY3vxVesKGkVjyZuFE
-	e9YyrAWpLjXkvEnjK8fgjqsQ2OAuCE4nt9018SoPsYwnFqSiZ/dWq4BrcWh+KApzB+
-	4WQ9HbxIOlio5qV0Jx6UuFJVglzKP7rTgYLEhTse1WJcHpHoLeAO7ng9AD2PyCuCwQ
-	GTswzzm/wBpk6gLwDdm+wb/1MXOdr5IA5AgmdOXfGrPYsYBRBQi7ukYYxgQTciY2Bg
-	fu98pJa0QoqIx5SqRXRtNSop3YVmD5jSYewcCKorFgZN4KV3ylgO+wcP5SUJyvxbox
-	BWObo7S3CWvbQ==
-Mime-Version: 1.0 (1.0)
-From: =?utf-8?Q?Sean_Nyekj=C3=A6r?= <sean@geanix.com>
-X-Mailer: iPhone Mail (16E227)
-In-Reply-To: <CAP71Wjyy03gd62DqgZqod_sncQgBH2FPO1CfViJcQBXCNQhOKg@mail.gmail.com>
-Date: Fri, 10 May 2019 18:59:51 +0200
-Message-Id: <78B996AD-9A54-4B9D-A573-4BBD54B9C636@geanix.com>
-References: <20190430060855.60494-1-sean@geanix.com>
-	<CAP71WjyBr94m0gH4MBG7CEpQcS01UP9ia1Ay9S6zueJdeT-Jcg@mail.gmail.com>
-	<8EC4636E-7D85-4364-8864-23BF2DC610DB@geanix.com>
-	<CAP71Wjyy03gd62DqgZqod_sncQgBH2FPO1CfViJcQBXCNQhOKg@mail.gmail.com>
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,URIBL_BLOCKED
-	autolearn=disabled version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on 9cf0eadf640b
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] cannelloni: new package, CAN to ethernet proxy
+	Fri, 10 May 2019 17:41:13 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id f204so2921372wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 May 2019 10:41:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9krp869zgdlXB7Ga4WMROvwyZQO5Q/AcM8UqOZ5LS9s=;
+	b=MYhdteruAxKxJ9OtzmoCQeWFGnECQKMToVEJFQXZtRYD+uqs9Q4cAlSc1KSElt6ViQ
+	sv/OizlIOxh24Ep+dJAqVIL1qlN07zLqN6sgaTpYHwE0k4518diJc74/8PIogFo4hnOr
+	r9Nj/CyeX321hn9ib0liWHVHefrF6jLPcojpBewq7K6RvMP+3JcV5ashukn8ePbpccNi
+	jGYRYACWf0FLv260TPbbmErJ8uph4TurqMrR/OJdUebuqhu5opmNs13PCa99vv/Xy62V
+	5s9nkkLwdYNiGgotMl9oC9fAcMguxpGINQbUnOxYNj7xj9GrQdq6GKdC3IM3+F/tSvxb
+	XOkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9krp869zgdlXB7Ga4WMROvwyZQO5Q/AcM8UqOZ5LS9s=;
+	b=UkXkGK5HKzd1vGABdyTWUCLm8JzKNYgc7VNM6XhnP17O+WjyH19XXyrp2BclkNUUNq
+	A0tBWlDmN7Ib8VEUe5Dt1hnCRtLZTR7XW1CIXIMrnKyoqNL5ObPL4mgk+JZu9LqeIJbv
+	hXboD1BeXoY8+X5VAVvJkqETKht5MoGomj3kjQMKKpvv8dgVj+VsOiBJAbIP2DOsyoub
+	uVU4aa7zBIv4Iwj4sURiSFCv0qsmitkg41xgPpqNEwpiOubpleQIkUc0UTjR79BwkO0Z
+	BhDJni3QhcTs293im9+AIH8l9WSbi+uZqvz79KOFiF6PzY8jfPJ7bgp4khtFx620Wi6i
+	6vyw==
+X-Gm-Message-State: APjAAAXtATqoYs6P7Q545rgeDAx++1XnxXnVFw5x5Dnr1JVDwrrKV/w7
+	ba4PmV+17iARg54oAwX2DY5qbQ==
+X-Google-Smtp-Source: APXvYqzK3LYFRYI9PsWAlPx8QPpMOlD1EPs76AowO+CFIw0VL9vPmZJ/gAmMMsfVAG+s0I/QtrGecA==
+X-Received: by 2002:a1c:dcc2:: with SMTP id t185mr8446803wmg.143.1557510074071;
+	Fri, 10 May 2019 10:41:14 -0700 (PDT)
+Received: from localhost.localdomain (static.8.26.4.46.clients.your-server.de.
+	[46.4.26.8]) by smtp.gmail.com with ESMTPSA id
+	r64sm14238887wmr.0.2019.05.10.10.41.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 May 2019 10:41:13 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 10 May 2019 19:41:02 +0200
+Message-Id: <20190510174102.19015-1-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-oe][warrior][thud][PATCH] cpupower: remove LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,92 +59,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 16:59:52 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 10 May 2019 17:41:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+cpupower is a 'special' recipe since it does "inherit kernelsrc" ,
+which essentially means that it doesn't have its own sources, but
+reuse the kernel source tree, from virtual/kernel recipe. As such,
+checking the license file in cpupower recipe does not seem relevant,
+since it does not fetch anything (kernelsrc has "deltask do_fetch")
+and the fetching is deferred to the virtual/kernel recipe.
 
+so we are basically checking the COPYING file twice. If there was any
+license issue, it would have been caught by virtual/kernel recipe
+already.
 
-> On 10 May 2019, at 18.54, Nicolas Dechesne <nicolas.dechesne@linaro.org> w=
-rote:
->=20
->> On Fri, May 10, 2019 at 6:49 PM Sean Nyekj=C3=A6r <sean@geanix.com> wrote=
-:
->>=20
->>=20
->>=20
->>> On 10 May 2019, at 15.08, Nicolas Dechesne <nicolas.dechesne@linaro.org>=
- wrote:
->>>=20
->>> On Tue, Apr 30, 2019 at 8:09 AM Sean Nyekjaer via Openembedded-devel
->>> <openembedded-devel@lists.openembedded.org> wrote:
->>>>=20
->>>> Tool for sending SocketCAN messages
->>>> over Ethernet tunnel.
->>>>=20
->>>> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
->>>> ---
->>>> Changes in v2:
->>>> - Added PV
->>>>=20
->>>> .../cannelloni/cannelloni_git.bb                | 17 +++++++++++++++++
->>>> 1 file changed, 17 insertions(+)
->>>> create mode 100644 meta-oe/recipes-connectivity/cannelloni/cannelloni_g=
-it.bb
->>>>=20
->>>> diff --git a/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb b=
-/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
->>>> new file mode 100644
->>>> index 000000000..df75e6342
->>>> --- /dev/null
->>>> +++ b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
->>>> @@ -0,0 +1,17 @@
->>>> +SUMMARY =3D "a SocketCAN over Ethernet tunnel"
->>>> +HOMEPAGE =3D "https://github.com/mguentner/cannelloni"
->>>> +LICENSE =3D "GPLv2"
->>>> +
->>>> +SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttp=
-s"
->>>> +SRCREV =3D "44080bb021d1a143e6906f2ec4610513c4e1cece"
->>>> +
->>>> +PV =3D "20160414+${SRCPV}"
->>>> +
->>>> +LIC_FILES_CHKSUM =3D "file://gpl-2.0.txt;md5=3Db234ee4d69f5fce4486a80f=
-daf4a4263"
->>>> +
->>>> +inherit cmake
->>>> +
->>>> +S =3D "${WORKDIR}/git"
->>>> +
->>>> +PACKAGECONFIG ??=3D "lksctp-tools"
->>>> +PACKAGECONFIG[lksctp-tools] =3D "-DSCTP_SUPPORT=3Dtrue, -DSCTP_SUPPORT=
-=3Dfalse, lksctp-tools"
->>>=20
->>> lksctp-tools recipe is in meta-networking, so we've added an implicit
->>> dependency on meta-networking by taking this patch. should we disable
->>> lksctp-tools support by default?
->> I completely missed that. :-D
->> It seems to be the correct solution, to disable it by default...
->> Will you send a patch?
->=20
-> I would prefer the other solution Khem proposed, and move it to
-> meta-networking.. what do you think?
-Both disabled and moved, I agree with Khem.
-I just put it here next to ser2net, but I get the point :-)
-In my setup it=E2=80=99s disabled anyway.
+Hence we remove LIC_FILES_CHKSUM like it is done for perf recipe in
+OE-core in meta/recipes-kernel/perf/perf.bb.
 
-/Sean
->=20
->>=20
->> /Sean
->>>=20
->>>> --
->>>> 2.21.0
->>>>=20
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+It has the nice side effect that BSP layers can use different kernel
+versions without worrying about any LICENSE checksum changes in
+between kernel versions.
+
+Reported-by: Daniel Díaz <daniel.diaz@linaro.org>
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 7142f09407b81c2221bbf1c5078641ab4bc63ee9)
+---
+Armin, for our use cases (at least) this is a bug fix, since we use
+different kernel versions in our BSP layers.. I am hoping you will
+agree to merge it is -stable branches. If you can apply to warrior and thud
+where it applies cleanly that would be really nice. It won't apply on sumo, 
+i can send another patch later for sumo.
+---
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index 928973871..abf1585de 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -2,7 +2,6 @@ SUMMARY = "Shows and sets processor power related values"
+ DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
+ saving related features of your processor."
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+ DEPENDS = "pciutils gettext-native"
+ PROVIDES = "virtual/cpupower"
+ 
+-- 
+2.20.1
+
 
