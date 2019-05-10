@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id B62346C1D5
+	by mail.openembedded.org (Postfix) with ESMTP id 1196F7E096
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 11:55:17 +0000 (UTC)
+	Fri, 10 May 2019 11:55:18 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYf38lDzKM
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYf601Pz7P
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 10 May 2019 13:55:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557489318;
-	bh=poYX0BWJUow/eg9tYj+c/5MY3ztj8/0kykgHUpMqBW8=;
+	bh=hf+i4+RzsfayasK07nI36jJfENo/RaTDYbuRxpJ4GNs=;
 	h=From:To:Subject:Date:From;
-	b=LHsyL22GPp/PmOzdVUXx6aHr6lAreyByuBFBv8t8pDjso/EMDr1NbxsN99Jk+Z8FI
-	Mz5nIXM7SORm+OH9rleYcdxSB4Rphzo/lLS/OKXf8ntF0o9ciF+2ApkMrZXfUjoht/
-	X/+uyH+IsOWn2gU2lNxv2S+RgqXAOceSjFlxE3ji6kqkys0nZLT2a7pOoYeSNeOpY6
-	5WV9EfYBMxX/O9JQYzMMnkppQJCJPPokwnMnx0IoVlTgxO8xNfooEq6fQCWVje7eCh
-	dBkF2t38brbheS0GUXIBGhbKAkxs8l1xPkaphjVWCszDqe5yRlj86lXrPSOa/oF/5k
-	svEj1K5QZno0TxgXjk7DZWWuwX6imQ1JmI8fu/zPN0EUyqy/e1C8BgtL7aa09u489l
-	EW2Pr9qn/fL2gvBmpb4zP7Lg0RqXjAKhPdirypLzgilE6o49y5DtFS37+v132f6AMN
-	ZHtjYlabr5lButuKvkz1lD1qBuokwSQw0phjRkazSnfN6MDH/J1TrRyJL3Fogq3YEg
-	26P0Susgjumqd/m61l6ZZczPYihfSzgWudy/O26q1kx1+f1+WmMWoBRlQdSH2JiREa
-	QqobfbEmTXR8A130czvYiEtO4E5qI266IAOJRq9JzJ7xUEIkangbImcDSJtQJ/bPZQ
-	MK7Fhj2MByCdLzF0LEOGqkqs=
+	b=jdfl4VsFnpuZ99L5bgQQo6/ek+b5FK3frxT3u4KjrJ+FxUkFkiUXLLfc0zxIXUkkf
+	PknD5DE1je2I7S7hTWlTdTlpAmLHnUJy5bYcicvrnzvujdeXz4QIrSIi8+uuSzikPC
+	sD6IyUHyNJkAtc/FwhFkHE2nxIzDAcxl9SmTJOTT5lNQ3VPOY10ufXAGJf774mfUDM
+	KxcIudPAsjl/Df70ONFI4fGoGLaSomfanyyU96Zulv7O+AQJrO9toQ8p5XWk7XKXbE
+	7YIk+dLJx24PktmgKQdt6IgtlFExLrJkhyrr970T49UrMuQrxYhr51ugnIWfJmi2Eu
+	G8WSvJymOLW71vak9lhjzLUccHQnD+nAbZp4NuRZy4a3Js04yWlCljcFJktZVYz4Cd
+	D4f8Syxtezz+X8LgYXMgH7RJ97X26sp/dsX3KpbNKHy5FcQVPy6ghYcLF0bPBQ9GxS
+	kQ39D+Fqc1Dd0loZMHa4YnU2UofhEqlemSS693ts/WECklqa3nQZfc+VJgCc8B6mEV
+	oQQx3EqsjR9m1Z2rSrFUnf46tnplyCFfONTz33/fY+AyKKFHX5TB94BGifYoqvICV6
+	WWm62hVPm0ME6bSZowF6dn8LetyRvwZNZ+Nyfn/b1OM/cB+jjdvkRwI5v0EWP4udhj
+	pQR2JH2yv4iX5HnOlya4MhGk=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 May 2019 14:55:03 +0300
-Message-Id: <20190510115515.19491-7-bunk@stusta.de>
+Date: Fri, 10 May 2019 14:55:04 +0300
+Message-Id: <20190510115515.19491-8-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] openwsman: Upgrade 2.6.8 -> 2.6.9
+Subject: [meta-oe][PATCH] glm: Upgrade 0.9.9.3 -> 0.9.9.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,174 +42,162 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 10 May 2019 11:55:18 -0000
 
-Remove patches applied upstream.
+Remove patch applied upstream.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ..._SSL_CACERT-deprecation-in-curl-7.62.patch | 42 ----------
- .../0001-openSSL-1.1.0-API-fixes.patch        | 77 -------------------
- ...{openwsman_2.6.8.bb => openwsman_2.6.9.bb} |  6 +-
- 3 files changed, 2 insertions(+), 123 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/openwsman/openwsman/0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch
- delete mode 100644 meta-oe/recipes-extended/openwsman/openwsman/0001-openSSL-1.1.0-API-fixes.patch
- rename meta-oe/recipes-extended/openwsman/{openwsman_2.6.8.bb => openwsman_2.6.9.bb} (93%)
+ ...-Remove-redundant-double-semi-colons.patch | 120 ------------------
+ .../glm/{glm_0.9.9.3.bb => glm_0.9.9.5.bb}    |   5 +-
+ 2 files changed, 2 insertions(+), 123 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/glm/glm/0001-glm-Remove-redundant-double-semi-colons.patch
+ rename meta-oe/recipes-graphics/glm/{glm_0.9.9.3.bb => glm_0.9.9.5.bb} (82%)
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch b/meta-oe/recipes-extended/openwsman/openwsman/0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch
+diff --git a/meta-oe/recipes-graphics/glm/glm/0001-glm-Remove-redundant-double-semi-colons.patch b/meta-oe/recipes-graphics/glm/glm/0001-glm-Remove-redundant-double-semi-colons.patch
 deleted file mode 100644
-index 4dcd10800..000000000
---- a/meta-oe/recipes-extended/openwsman/openwsman/0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch
+index 6e50f2cf2..000000000
+--- a/meta-oe/recipes-graphics/glm/glm/0001-glm-Remove-redundant-double-semi-colons.patch
 +++ /dev/null
-@@ -1,42 +0,0 @@
--From f2c37fab5dbaffa06c1268ee1309596306c9a4df Mon Sep 17 00:00:00 2001
+@@ -1,120 +0,0 @@
+-From 3f6869e392b061f2932f3df155b6cc37e3e7d342 Mon Sep 17 00:00:00 2001
 -From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 20 Nov 2018 12:23:47 -0800
--Subject: [PATCH] Adjust for CURLE_SSL_CACERT deprecation in curl >= 7.62
+-Date: Fri, 1 Mar 2019 10:56:05 -0800
+-Subject: [PATCH] glm: Remove redundant double semi-colons
 -
--Use CURLE_PEER_FAILED_VERIFICATION instead
+-Make clang happy
+-/glm/gtc/../ext/../detail/../simd/common.h:106:45: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+-|         glm_vec4 const or0 = _mm_or_ps(and0, and1);;
+-|                                                    ^
+-| 1 error generated.
 -
--Upstream-Status: Pending
+-Upstream-Status: Submitted [https://github.com/g-truc/glm/pull/874]
 -
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- src/lib/wsman-curl-client-transport.c | 7 +++++++
-- 1 file changed, 7 insertions(+)
+- glm/gtx/associated_min_max.inl      | 8 ++++----
+- glm/simd/common.h                   | 2 +-
+- test/core/core_func_exponential.cpp | 6 +++---
+- test/gtx/gtx_easing.cpp             | 4 ++--
+- 4 files changed, 10 insertions(+), 10 deletions(-)
 -
--diff --git a/src/lib/wsman-curl-client-transport.c b/src/lib/wsman-curl-client-transport.c
--index d0a3829b..92727f4f 100644
----- a/src/lib/wsman-curl-client-transport.c
--+++ b/src/lib/wsman-curl-client-transport.c
--@@ -186,16 +186,23 @@ convert_to_last_error(CURLcode r)
-- 		return WS_LASTERR_SSL_CONNECT_ERROR;
--         case CURLE_BAD_FUNCTION_ARGUMENT:
--                 return WS_LASTERR_CURL_BAD_FUNCTION_ARG;
--+#if LIBCURL_VERSION_NUM < 0x073E00
-- 	case CURLE_SSL_PEER_CERTIFICATE:
-- 		return WS_LASTERR_SSL_PEER_CERTIFICATE;
--+#endif
-- 	case CURLE_SSL_ENGINE_NOTFOUND:
-- 		return WS_LASTERR_SSL_ENGINE_NOTFOUND;
-- 	case CURLE_SSL_ENGINE_SETFAILED:
-- 		return WS_LASTERR_SSL_ENGINE_SETFAILED;
-- 	case CURLE_SSL_CERTPROBLEM:
-- 		return WS_LASTERR_SSL_CERTPROBLEM;
--+#if LIBCURL_VERSION_NUM < 0x073E00
-- 	case CURLE_SSL_CACERT:
-- 		return WS_LASTERR_SSL_CACERT;
--+#else
--+	case CURLE_PEER_FAILED_VERIFICATION:
--+		return WS_LASTERR_SSL_PEER_CERTIFICATE;
--+#endif
-- #if LIBCURL_VERSION_NUM > 0x70C01
-- 	case CURLE_SSL_ENGINE_INITFAILED:
-- 		return WS_LASTERR_SSL_ENGINE_INITFAILED;
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/0001-openSSL-1.1.0-API-fixes.patch b/meta-oe/recipes-extended/openwsman/openwsman/0001-openSSL-1.1.0-API-fixes.patch
-deleted file mode 100644
-index 8d230ba6d..000000000
---- a/meta-oe/recipes-extended/openwsman/openwsman/0001-openSSL-1.1.0-API-fixes.patch
-+++ /dev/null
-@@ -1,77 +0,0 @@
--From 634b95157e1823672a2c95fac0cecf079b5967e7 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Klaus=20K=C3=A4mpf?= <kkaempf@suse.de>
--Date: Mon, 19 Nov 2018 15:31:27 +0100
--Subject: [PATCH] openSSL 1.1.0 API fixes
--
-----
-- src/server/shttpd/io_ssl.c |  5 +++++
-- src/server/shttpd/shttpd.c | 11 ++++++++++-
-- src/server/shttpd/ssl.h    |  3 +++
-- 3 files changed, 18 insertions(+), 1 deletion(-)
--
--diff --git a/src/server/shttpd/io_ssl.c b/src/server/shttpd/io_ssl.c
--index 6de0db2a..ece610ef 100644
----- a/src/server/shttpd/io_ssl.c
--+++ b/src/server/shttpd/io_ssl.c
--@@ -21,8 +21,13 @@ struct ssl_func	ssl_sw[] = {
-- 	{"SSL_set_fd",			{0}},
-- 	{"SSL_new",			{0}},
-- 	{"SSL_CTX_new",			{0}},
--+#if OPENSSL_VERSION_NUMBER < 0x10100000L
-- 	{"SSLv23_server_method",	{0}},
-- 	{"SSL_library_init",		{0}},
--+#else
--+	{"TLS_server_method",	{0}},
--+	{"OPENSSL_init_ssl",		{0}},
--+#endif
-- 	{"SSL_CTX_use_PrivateKey_file",	{0}},
-- 	{"SSL_CTX_use_certificate_file",{0}},
-- 	{NULL,				{0}}
--diff --git a/src/server/shttpd/shttpd.c b/src/server/shttpd/shttpd.c
--index f0f3fbd8..652aea17 100644
----- a/src/server/shttpd/shttpd.c
--+++ b/src/server/shttpd/shttpd.c
--@@ -1489,9 +1489,14 @@ set_ssl(struct shttpd_ctx *ctx, const char *pem)
-- 		}
+-diff --git a/glm/gtx/associated_min_max.inl b/glm/gtx/associated_min_max.inl
+-index 1a459add..5186c471 100644
+---- a/glm/gtx/associated_min_max.inl
+-+++ b/glm/gtx/associated_min_max.inl
+-@@ -86,7 +86,7 @@ GLM_FUNC_QUALIFIER U associatedMin
+- )
+- {
+- 	T Test1 = min(x, y);
+--	T Test2 = min(z, w);;
+-+	T Test2 = min(z, w);
+- 	U Result1 = x < y ? a : b;
+- 	U Result2 = z < w ? c : d;
+- 	U Result = Test1 < Test2 ? Result1 : Result2;
+-@@ -152,7 +152,7 @@ GLM_FUNC_QUALIFIER vec<L, U, Q> associatedMin
+- 	for(length_t i = 0, n = Result.length(); i < n; ++i)
+- 	{
+- 		T Test1 = min(x[i], y[i]);
+--		T Test2 = min(z[i], w[i]);;
+-+		T Test2 = min(z[i], w[i]);
+- 		U Result1 = x[i] < y[i] ? a : b;
+- 		U Result2 = z[i] < w[i] ? c : d;
+- 		Result[i] = Test1 < Test2 ? Result1 : Result2;
+-@@ -278,7 +278,7 @@ GLM_FUNC_QUALIFIER U associatedMax
+- )
+- {
+- 	T Test1 = max(x, y);
+--	T Test2 = max(z, w);;
+-+	T Test2 = max(z, w);
+- 	U Result1 = x > y ? a : b;
+- 	U Result2 = z > w ? c : d;
+- 	U Result = Test1 > Test2 ? Result1 : Result2;
+-@@ -344,7 +344,7 @@ GLM_FUNC_QUALIFIER vec<L, U, Q> associatedMax
+- 	for(length_t i = 0, n = Result.length(); i < n; ++i)
+- 	{
+- 		T Test1 = max(x[i], y[i]);
+--		T Test2 = max(z[i], w[i]);;
+-+		T Test2 = max(z[i], w[i]);
+- 		U Result1 = x[i] > y[i] ? a : b;
+- 		U Result2 = z[i] > w[i] ? c : d;
+- 		Result[i] = Test1 > Test2 ? Result1 : Result2;
+-diff --git a/glm/simd/common.h b/glm/simd/common.h
+-index d07920a3..9b017cb4 100644
+---- a/glm/simd/common.h
+-+++ b/glm/simd/common.h
+-@@ -103,7 +103,7 @@ GLM_FUNC_QUALIFIER glm_vec4 glm_vec4_sign(glm_vec4 x)
+- 	glm_vec4 const cmp1 = _mm_cmpgt_ps(x, zro0);
+- 	glm_vec4 const and0 = _mm_and_ps(cmp0, _mm_set1_ps(-1.0f));
+- 	glm_vec4 const and1 = _mm_and_ps(cmp1, _mm_set1_ps(1.0f));
+--	glm_vec4 const or0 = _mm_or_ps(and0, and1);;
+-+	glm_vec4 const or0 = _mm_or_ps(and0, and1);
+- 	return or0;
+- }
 - 
-- 	/* Initialize SSL crap */
---	SSL_library_init();
+-diff --git a/test/core/core_func_exponential.cpp b/test/core/core_func_exponential.cpp
+-index a414a4e9..380cdfb1 100644
+---- a/test/core/core_func_exponential.cpp
+-+++ b/test/core/core_func_exponential.cpp
+-@@ -153,13 +153,13 @@ static int test_inversesqrt()
+- 	float A = glm::inversesqrt(16.f) * glm::sqrt(16.f);
+- 	Error += glm::equal(A, 1.f, 0.01f) ? 0 : 1;
 - 
--+#if OPENSSL_VERSION_NUMBER < 0x10100000L
--+	SSL_library_init();
-- 	if ((CTX = SSL_CTX_new(SSLv23_server_method())) == NULL)
--+#else
--+        OPENSSL_init_ssl();
--+	if ((CTX = SSL_CTX_new(TLS_server_method())) == NULL)
--+#endif
-- 		_shttpd_elog(E_LOG, NULL, "SSL_CTX_new error");
-- 	else if (SSL_CTX_use_certificate_file(CTX, wsmand_options_get_ssl_cert_file(), SSL_FILETYPE_PEM) != 1)
-- 		_shttpd_elog(E_LOG, NULL, "cannot open certificate file %s", pem);
--@@ -1552,6 +1557,10 @@ set_ssl(struct shttpd_ctx *ctx, const char *pem)
--           if (rc != 1) {
--             _shttpd_elog(E_LOG, NULL, "Failed to set SSL cipher list \"%s\"", ssl_cipher_list);
--           }
--+          else if ((*ssl_cipher_list == 0) || (*ssl_cipher_list == ' ')) {
--+            _shttpd_elog(E_LOG, NULL, "Empty 'ssl_cipher_list' defaults to 'TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256'.");
--+            _shttpd_elog(E_LOG, NULL, "Check openSSL documentation.");
--+          }
--         }
-- 	ctx->ssl_ctx = CTX;
+--	glm::vec1 B = glm::inversesqrt(glm::vec1(16.f)) * glm::sqrt(16.f);;
+-+	glm::vec1 B = glm::inversesqrt(glm::vec1(16.f)) * glm::sqrt(16.f);
+- 	Error += glm::all(glm::equal(B, glm::vec1(1.f), 0.01f)) ? 0 : 1;
 - 
--diff --git a/src/server/shttpd/ssl.h b/src/server/shttpd/ssl.h
--index 2304b70a..89a73c49 100644
----- a/src/server/shttpd/ssl.h
--+++ b/src/server/shttpd/ssl.h
--@@ -56,6 +56,9 @@ extern struct ssl_func	ssl_sw[];
-- #if OPENSSL_VERSION_NUMBER < 0x10100000L
-- #define	SSLv23_server_method()	(* (SSL_METHOD * (*)(void)) FUNC(9))()
-- #define	SSL_library_init() (* (int (*)(void)) FUNC(10))()
--+#else
--+#define	TLS_server_method()	(* (SSL_METHOD * (*)(void)) FUNC(9))()
--+#define	OPENSSL_init_ssl() (* (int (*)(void)) FUNC(10))()
-- #endif
-- #define	SSL_CTX_use_PrivateKey_file(x,y,z)	(* (int (*)(SSL_CTX *, \
-- 		const char *, int)) FUNC(11))((x), (y), (z))
+--	glm::vec2 C = glm::inversesqrt(glm::vec2(16.f)) * glm::sqrt(16.f);;
+-+	glm::vec2 C = glm::inversesqrt(glm::vec2(16.f)) * glm::sqrt(16.f);
+- 	Error += glm::all(glm::equal(C, glm::vec2(1.f), 0.01f)) ? 0 : 1;
+- 
+--	glm::vec3 D = glm::inversesqrt(glm::vec3(16.f)) * glm::sqrt(16.f);;
+-+	glm::vec3 D = glm::inversesqrt(glm::vec3(16.f)) * glm::sqrt(16.f);
+- 	Error += glm::all(glm::equal(D, glm::vec3(1.f), 0.01f)) ? 0 : 1;
+- 
+- 	glm::vec4 E = glm::inversesqrt(glm::vec4(16.f)) * glm::sqrt(16.f);
+-diff --git a/test/gtx/gtx_easing.cpp b/test/gtx/gtx_easing.cpp
+-index b3e13997..0e98cd53 100644
+---- a/test/gtx/gtx_easing.cpp
+-+++ b/test/gtx/gtx_easing.cpp
+-@@ -34,7 +34,7 @@ namespace
+- 		r = glm::circularEaseOut(a);
+- 		r = glm::circularEaseInOut(a);
+- 
+--		r = glm::exponentialEaseIn(a);;
+-+		r = glm::exponentialEaseIn(a);
+- 		r = glm::exponentialEaseOut(a);
+- 		r = glm::exponentialEaseInOut(a);
+- 
+-@@ -46,7 +46,7 @@ namespace
+- 		r = glm::backEaseOut(a);
+- 		r = glm::backEaseInOut(a);
+- 
+--		r = glm::bounceEaseIn(a);;
+-+		r = glm::bounceEaseIn(a);
+- 		r = glm::bounceEaseOut(a);
+- 		r = glm::bounceEaseInOut(a);
+- 	}
 --- 
--2.19.1
+-2.21.0
 -
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.8.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.9.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/openwsman/openwsman_2.6.8.bb
-rename to meta-oe/recipes-extended/openwsman/openwsman_2.6.9.bb
-index f04ff01d9..e5bb0765f 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.8.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.9.bb
-@@ -15,15 +15,13 @@ DEPENDS = "curl libxml2 openssl libpam"
- inherit distro_features_check
- REQUIRED_DISTRO_FEATURES = "pam"
+diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9.3.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
+similarity index 82%
+rename from meta-oe/recipes-graphics/glm/glm_0.9.9.3.bb
+rename to meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
+index 2a26a5bc7..f367e4eae 100644
+--- a/meta-oe/recipes-graphics/glm/glm_0.9.9.3.bb
++++ b/meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
+@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "file://readme.md;beginline=21;endline=22;md5=3075b5727d36f29
  
--# v2.6.8
--SRCREV = "b9cd0b72534854abb6dd834c8c11e02111b4c8d7"
-+# v2.6.9
-+SRCREV = "5efb1545dbac7e6d1e0a992f3e84ca12cea1c18e"
- 
- SRC_URI = "git://github.com/Openwsman/openwsman.git \
-            file://libssl-is-required-if-eventint-supported.patch \
-            file://openwsmand.service \
-            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
--           file://0001-openSSL-1.1.0-API-fixes.patch \
--           file://0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch \
-            "
+ SRC_URI = " \
+     git://github.com/g-truc/glm;branch=master \
+-    file://0001-glm-Remove-redundant-double-semi-colons.patch \
+ "
+-# v0.9.9.3
+-SRCREV = "9749727c2db4742369219e1d452f43e918734b4e"
++# v0.9.9.5
++SRCREV = "d162eee1e6f7c317a09229fe6ceab8ec6ab9a4b4"
  
  S = "${WORKDIR}/git"
+ 
 -- 
 2.17.1
 
