@@ -1,52 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
 Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
 	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A569C7E068
+	by mail.openembedded.org (Postfix) with ESMTP id A65417E09C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 14:08:50 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id m20so5228846lji.2
+	Fri, 10 May 2019 14:08:48 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id r76so5194562lja.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 07:08:51 -0700 (PDT)
+	Fri, 10 May 2019 07:08:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=A/WZePOYa4Gjty1Uy2sJx152PzuzOcyXdQK6ypVquu0=;
-	b=2RyaNGFSsLVHRmMarXCkWfLv+RPso/qofO2htbLbfV49DV0qBjaS2ubGov2WaUUi32
-	rozaRCtbwmOm01KvGWZ8CDp8nlwRyXWiY422fg60JC0Wb/ZIG+noerAjfRZ3UqkFJxLQ
-	4jpMuBNMq5iBT+EcuiSIfJqvbf0rlLC1rvEK+YVZ6A69gzFOCaZx/gsYsrADhe85AlrH
-	iiNT+UehkXWzrT14b3TBulkii9lUf7mxc52JhHLGn0Lq4O4XTv0cDk0c+QBfPJU9cUCe
-	6s2K06UmzH5UJ9HViCRDlp6MBlZrfN3V2b67ATzIRyE/EI7FpzpxKnU45RDj1CWAqk0q
-	v7lQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=JdqJYfni07Tju8GpDwa3EBcjrALgrqREan3uYTh7o1k=;
+	b=WAYSveby6fZnMva8LckI4X9AFcLDWmPa6GdLiPJvhZbLH4pxTwQ8lmmaKG6YxIsQmC
+	j1DC5Z8E0qhXvlxBPQ6pFh5pZECUtXScsgii9YrMq95n7nL2Q24T4eGbE+v/vRRwITgG
+	Vu6cUXkuQCHVz6Y0TBHQpgDvrRwGlJMKyFgXJzlyNeaMhpmrOaZONHFK9NEbjITO+xkh
+	/FkPMK9cLdT9w2SGerRCXMMg4SL2OGGldiNfn8I/zHWOQ7eFcEgLUmxhBtW6TVEUPNF2
+	gqlqmMNFVJOcZykheZ6sw9PY7KXXk2qhhL9bs+jodHLiTKCODnIcS5hz4MQT5AWYTH98
+	Dj5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=A/WZePOYa4Gjty1Uy2sJx152PzuzOcyXdQK6ypVquu0=;
-	b=avo1Xqj4cqYm2StD8NlhqhbuCA6GKdd79m6GJ5mweF4WQUx1dGCrJDUl8tg26wTLUe
-	ArW3bTwe7KRnFKFckZtucbNMLtVaWdFolMN+HaU3iUEWv1N59exhknr77iS50Ltv015D
-	Y1YrmJF1bg7MNAn/3eXtWM11BKqUfdltswU/w3fJrqe6QciTDweE6l/kVM4TSHtkWG0n
-	2hdT6kUmHU+yc2inLVF6VknrNuRkrXhJBWpoNFcZzc4QtUdgfiwQiF+cZRT2lCn/AcVF
-	f5WXqce8YF4l7CAqu5US5kMY1BbQcIj+NjHJl/avf421jJiBweg8UGTrGhGL+mgU2x5d
-	0hUA==
-X-Gm-Message-State: APjAAAVsM8cvhYOP41t8OCouCcra0yvh+OFxQIdk177migznU8t4DhBb
-	RMBdxzgAOAOAuuIfIqodxHuBwrCJa3s=
-X-Google-Smtp-Source: APXvYqyVl4q4dM4ulm1b/LvKdsPBku5nI8inL+iAX2isrx1Sok3o5Lo3RrjQ2YoWTUsl15bncTIjMA==
-X-Received: by 2002:a2e:92ce:: with SMTP id k14mr6064920ljh.83.1557497330704; 
-	Fri, 10 May 2019 07:08:50 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=JdqJYfni07Tju8GpDwa3EBcjrALgrqREan3uYTh7o1k=;
+	b=Lb2Q1OoPnslueV/XM6OkPP1oHf4BGglMYq9Qja8B2lS4JHAFy/TePCbo2EQNikE4zc
+	jqo/O6Hda92wkzt+xZHSlAAL+CXfCwx40uOZb+v0W6XY2e4aAflBPhk1X/ds/NT1BDCG
+	v0MgWVsvAETxhDY3IG+TgvDC/TUr3K9OfcM+8GNCSvSaFP/7YYgNr5KMrPJbSQcgf/6G
+	3ZufDVr2dlqDT7buqSWvgvPiK34bhdwXW4io9brcgj78I/CaZU9mx66Dy7IIxluYv6Dq
+	Ix4uvEn41r+np5AqfvXmZ2Td1Ss9pPawOcyMdZ4kMsTslsiGOolIsJdbUb+VR69TZq7o
+	KLYA==
+X-Gm-Message-State: APjAAAU9yeWag93TSHGe3WjZEanpfkwtV4aYCuQiKk8wqVrQqEjPOV6N
+	DpcW1S4ezpn4w5mijnhLd4gY+AazZNY=
+X-Google-Smtp-Source: APXvYqyGn9EM9hVf2O9qwCuUVAZ2KtH14dPuBKdUgZBA2NaPj8MHQFpLgGmP5WIPt+Ws/x1YoNAJKg==
+X-Received: by 2002:a2e:8696:: with SMTP id l22mr6518168lji.43.1557497328720; 
+	Fri, 10 May 2019 07:08:48 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id n1sm1383640ljg.84.2019.05.10.07.08.49
+	by smtp.gmail.com with ESMTPSA id n1sm1383640ljg.84.2019.05.10.07.08.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 May 2019 07:08:50 -0700 (PDT)
+	Fri, 10 May 2019 07:08:47 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 May 2019 16:08:42 +0200
-Message-Id: <20190510140842.17978-2-open.source@oleksandr-kravchuk.com>
+Date: Fri, 10 May 2019 16:08:41 +0200
+Message-Id: <20190510140842.17978-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190510140842.17978-1-open.source@oleksandr-kravchuk.com>
-References: <20190510140842.17978-1-open.source@oleksandr-kravchuk.com>
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking 2/2] conntrack-tools: update to 1.4.5
+Subject: [PATCH][meta-networking 1/2] libnetfilter-conntrack: update to 1.0.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 14:08:50 -0000
+X-List-Received-Date: Fri, 10 May 2019 14:08:51 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{conntrack-tools_1.4.4.bb => conntrack-tools_1.4.5.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-filter/conntrack-tools/{conntrack-tools_1.4.4.bb => conntrack-tools_1.4.5.bb} (91%)
+ ...-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} (63%)
 
-diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
-similarity index 91%
-rename from meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-rename to meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
-index 46168b0ba..51e0ec1a6 100644
---- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-+++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.5.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-too
-     file://conntrack-failover \
-     file://init \
- "
--SRC_URI[tar.md5sum] = "acd9e0b27cf16ae3092ba900e4d7560e"
--SRC_URI[tar.sha256sum] = "b7caf4fcc4c03575df57d25e5216584d597fd916c891f191dac616ce68bdba6c"
-+SRC_URI[tar.md5sum] = "9356a0cd4df81a597ac26d87ccfebac4"
-+SRC_URI[tar.sha256sum] = "36c6d99c7684851d4d72e75bd07ff3f0ff1baaf4b6f069eb7244990cd1a9a462"
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
+similarity index 63%
+rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
+rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
+index e4e186bdb..5c8150156 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
+@@ -6,10 +6,9 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "libnfnetlink libmnl"
  
- inherit autotools update-rc.d pkgconfig
+-SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
+-"
+-SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
+-SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
++SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2"
++SRC_URI[md5sum] = "013d182c2df716fcb5eb2a1fb7febd1f"
++SRC_URI[sha256sum] = "33685351e29dff93cc21f5344b6e628e41e32b9f9e567f4bec0478eb41f989b6"
+ 
+ S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
  
 -- 
 2.17.1
