@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C58ED7E085
+	by mail.openembedded.org (Postfix) with ESMTP id C49917E07A
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 10 May 2019 11:55:16 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYc41lwz7P
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYd1ZTDzFr
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 13:55:15 +0200 (CEST)
+	Fri, 10 May 2019 13:55:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557489316;
-	bh=GgBKHxkGSUgF8l7W4CQGnc659yA9NNYIG3BySVRb/hg=;
+	s=default; t=1557489317;
+	bh=NAyyiWMVz6CO6ocWm8px3XG73bxQyRg4fczWPwqsME8=;
 	h=From:To:Subject:Date:From;
-	b=AcNzd2+Xg1tfr1qGHQvWyfLMUFx9yKP2rLoAm0NzjD0pZKtO+HbgrPPNH5OJSmYD6
-	AX4Z1v7ATyrOldP+yHWTLxI+FvdcevOLCkTfl4Cgpo25vPlNNiFRuVRMzE5L7wiqtU
-	VfpXDdR2uBUso/UqmtnocHRZ7Uh26aKBVcfDyHX1yTSKIdOX8BDNlgV/+IaGOeCm+d
-	s6krY1bSL11qwO7e1gTZ9teA4ezwe5wVjJ5MdhbEQh1zJwZ1ezDxYDT2CxhdmlGbgT
-	uymTbCEhuA+DHmdZpnnbwg1e5nAr5cQ7u1Bnsr+YjN9dsliCEMRNLXjdMs2iWw9z9g
-	dNXBlOuV3/S6mPN6IEIHndXpWKZ0QniGs5DfEkNkc9y0mRMkc5OFBAZijsn3nDgY4L
-	i6wpnioYSXpOQVMzuPKdS2zRl7kX4RPFh638V3bkBBaWkIMkdVWjV3gncuYYvIADlB
-	GqXdEjC0fp1wv04/D420Vdhs7JQCBEYkzG5JB/nVqiuZvIqwdw1/PL43ybvvcHhyi2
-	tdfa4Ru8RaAgqrlqeWfTwjgtdPvthER5eTA5hMN7XMnahUkrohDIPQPUDF414/nk3/
-	NB8LZlpfniWGT1LwSuDfBXtQIF503lCFbQ9gVaORTKgwxg0SgOqtKUtjgiXudiONdi
-	SgCUKypP6HpWlUS1Eza4bjKk=
+	b=i0UYR16Z77MdeJ8x1ISu2u/rRgKRif77Zd9Q0vJNruT3nck093LzBkLrvdIkxyc3t
+	QAWI6r1wscVCQvoOU8YimZiFV3oaby15N2tMAIYimLrE9PvFxKTYLxMtm/2/I5Jw6l
+	NV6EBq3jqqpGcOJND5GZ/EdXEXvKsyVlGc/Hk5RD/nmyEhEvYZNhuuSaU2oFatTn0o
+	giD56y4RVNPGZZsaN1GdWsqqfA2nDCNtcBV+JaM5WocQ4E5yyifsbofxD/rzXLyATi
+	DQarJX9Yp02aoPhuo8F5LohMcWAMcnf/zRhrnszu9XTvMYjhm/5zdtQcmX9T5fx2ye
+	SO8uzjuc4EwHaoHHs1NgOYQf/ZMI9NQ6b2xFR/MBSv9EEOxIUW/41qMyNVaDObDbhs
+	8c5V9aWoiHuXzKamAypli8qRvF5RBYoZu3RefkdQAUPWFzFQkZtBSMrlDR4MXF/TCW
+	ZL2d8TyVEZdqlwru/FNki8absQw6NSorUgnzU0hbGeDeYMIfCrDKut0lzHlqP37/xk
+	YWJBXmDUYF65/c2rxS2Ymwh1Hpw1SsNhGzHVKT+wC+FiIJ3l9Jp8tJ9uuqdRzCBfHw
+	GnNgMoruw5sGCzSxPw04+SFHLpLQBJ2pghDRO3aeeDAth6lHnNIWzMaBzBrXoQf8Rs
+	VjmHDObFjJY7r24gn8uLqhAE=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 May 2019 14:54:57 +0300
-Message-Id: <20190510115515.19491-1-bunk@stusta.de>
+Date: Fri, 10 May 2019 14:54:59 +0300
+Message-Id: <20190510115515.19491-3-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] postgresql: Upgrade 11.2 -> 11.3
+Subject: [meta-oe][PATCH] cloud9: Remove stale files of recipe removed 2 years ago
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,25 +44,55 @@ X-List-Received-Date: Fri, 10 May 2019 11:55:17 -0000
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../postgresql/{postgresql_11.2.bb => postgresql_11.3.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_11.2.bb => postgresql_11.3.bb} (58%)
+ .../cloud9/cloud9/cloud9-avahi.service                | 10 ----------
+ meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service | 11 -----------
+ meta-oe/recipes-devtools/cloud9/cloud9/index.js       |  2 --
+ 3 files changed, 23 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/cloud9/cloud9/cloud9-avahi.service
+ delete mode 100644 meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+ delete mode 100644 meta-oe/recipes-devtools/cloud9/cloud9/index.js
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_11.2.bb b/meta-oe/recipes-dbs/postgresql/postgresql_11.3.bb
-similarity index 58%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_11.2.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_11.3.bb
-index 0f59c8dd1..ff9306c1a 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_11.2.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_11.3.bb
-@@ -7,5 +7,5 @@ SRC_URI += "\
-    file://0001-Add-support-for-RISC-V.patch \
- "
- 
--SRC_URI[md5sum] = "19d43be679cb0d55363feb8926af3a0f"
--SRC_URI[sha256sum] = "2676b9ce09c21978032070b6794696e0aa5a476e3d21d60afc036dc0a9c09405"
-+SRC_URI[md5sum] = "c2a729b754b8de86a969c86ec25db076"
-+SRC_URI[sha256sum] = "2a85e082fc225944821dfd23990e32dfcd2284c19060864b0ad4ca537d30522d"
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9/cloud9-avahi.service b/meta-oe/recipes-devtools/cloud9/cloud9/cloud9-avahi.service
+deleted file mode 100644
+index cb9b6e2db..000000000
+--- a/meta-oe/recipes-devtools/cloud9/cloud9/cloud9-avahi.service
++++ /dev/null
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+-<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+-
+-<service-group>
+-  <name replace-wildcards="yes">Cloud9 IDE on %h</name>
+-  <service>
+-    <type>_http._tcp</type>
+-    <port>3000</port>
+-  </service>
+-</service-group>
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+deleted file mode 100644
+index 495b131ff..000000000
+--- a/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
++++ /dev/null
+@@ -1,11 +0,0 @@
+-[Unit]
+-Description=Cloud9 IDE
+-ConditionPathExists=|/var/lib/cloud9
+-
+-[Service]
+-Restart=always
+-EnvironmentFile=-/etc/default/node
+-ExecStart=/usr/bin/node4 /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9/index.js b/meta-oe/recipes-devtools/cloud9/cloud9/index.js
+deleted file mode 100644
+index 88c9a19f0..000000000
+--- a/meta-oe/recipes-devtools/cloud9/cloud9/index.js
++++ /dev/null
+@@ -1,2 +0,0 @@
+-var o3 = require('./o3.js')
+-module.exports = o3.xml;
 -- 
 2.17.1
 
