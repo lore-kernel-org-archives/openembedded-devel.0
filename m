@@ -1,46 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id A145A7D697
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C6807DF3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 03:30:09 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id f24so644197qtk.11
+	Fri, 10 May 2019 07:24:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,452,1549900800"; d="scan'208";a="62366142"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 May 2019 15:24:10 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 112DE4CDB74D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 May 2019 20:30:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5ESgiVkKwKR+Ar6JggUoQKOLZRNtrux2rcUcy5w0kZA=;
-	b=MsoNmgfPqB1mKq/Zv+5z2nZo94awgbtDG3LdMutHop4sGbsMRFlKXrHgljnpP7NhjR
-	ltLZIoQ+6Yi9ovAyZkFLHdWZ38T6KAjnVfXpZdNOj14zGNCHBcej9ZSL857MGPRqsjaD
-	7czNjkuvTPx7d2ZU69NscX2O1uuhOjq7QXjHAg0Rfb44C6pOFIU38QYtzUum58sUqDuH
-	IORSMgIiqq2qBitmU8uURD8euAtUfgF/UNeHlddhzVPxdNym5zN3uQ0dNLsxVYCE2Soh
-	wMAoE8dT5PQkw594LcbIutbBwlTYHxDr4YCAnwc0S6XNClqM/SNAqoONA9zY0ji+WtMS
-	PI1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5ESgiVkKwKR+Ar6JggUoQKOLZRNtrux2rcUcy5w0kZA=;
-	b=D1EV9W+oIdsCbdSVm1bITiwHvGdjI09qcw/ANY9EZLhk3oSy3/GmOFjfcCFlludS4N
-	nn3GjJZpiEY0NTzgbj8V6qeQgOzxb3MbfoL5O+aTLnDw55ZontUKa42eMkRkReuu9/E/
-	Cd4arq2WpTrkqgtQwx4N3du5kOi+RimeU5AxoGBznkRerTw7v9YQ2udUdEPsj9VmiWRr
-	TcreFIKBGrV9pIMT7bmZcDMo7qIbt4kX73y3bY7gkL7MTDzcLmFZ/w2+YcyUvsXdscYT
-	R1xWtCJzzLoKAWPjiqPBIP2F7bmuNCGujFkofHfFgDCuPRyw4bXIY+vXCUdattRrSF5y
-	o8+Q==
-X-Gm-Message-State: APjAAAXedNDXqBJh6WpAP5r6rtkGD7Z+OhErI7wYNNHsKBx7CdMarYaS
-	WzIO4sUw1su+ZeS68axlNYu1S7vUN5fqFKYdl05q0xJB6s4=
-X-Google-Smtp-Source: APXvYqyjCabFVOs1Dywr8kB/l1ONatpgUlc0buLIR4MJJCj1i9hsG9noLfzVUAs28B50mKJl5k0kJLuz39SbO8ssIWE=
-X-Received: by 2002:ac8:2a0b:: with SMTP id k11mr7479186qtk.29.1557459010233; 
-	Thu, 09 May 2019 20:30:10 -0700 (PDT)
+	Fri, 10 May 2019 15:24:06 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 10 May 2019 15:24:10 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <1555736021-11973-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-References: <20190507222212.1808-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190507222212.1808-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 May 2019 20:29:44 -0700
-Message-ID: <CAMKF1so9YYSGVFzLD-9tt-UmRi-x6n3HtK3XiVXo0gQKe0FOXA@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] libnetfilter-conntrack: update to 1.0.7
+X-Originating-IP: [10.167.225.227]
+X-yoursite-MailScanner-ID: 112DE4CDB74D.AFCCC
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] mozjs: Make mozjs support arm32BE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +36,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 03:30:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 10 May 2019 07:24:11 -0000
+X-Original-Date: Sat, 20 Apr 2019 12:53:41 +0800
+X-List-Received-Date: Fri, 10 May 2019 07:24:11 -0000
+Content-Type: text/plain
 
-Hi Oleksandr
+Fixed a build error on arm32BE.
 
-this is breaking conntrack-tools I believe see
+Upstream-Status: Pending
 
-https://errors.yoctoproject.org/Errors/Details/239969/
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../mozjs/0001-To-fix-build-error-on-arm32BE.patch | 28 ++++++++++++++++++++++
+ meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb     |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-error-on-arm32BE.patch
 
-On Tue, May 7, 2019 at 3:22 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  ...-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->  rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.6.bb => libnetfilter-conntrack_1.0.7.bb} (63%)
->
-> diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-> similarity index 63%
-> rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-> rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-> index e4e186bdb..5c8150156 100644
-> --- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-> +++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.7.bb
-> @@ -6,10 +6,9 @@ LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->  DEPENDS = "libnfnetlink libmnl"
->
-> -SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
-> -"
-> -SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
-> -SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
-> +SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2"
-> +SRC_URI[md5sum] = "013d182c2df716fcb5eb2a1fb7febd1f"
-> +SRC_URI[sha256sum] = "33685351e29dff93cc21f5344b6e628e41e32b9f9e567f4bec0478eb41f989b6"
->
->  S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-error-on-arm32BE.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-error-on-arm32BE.patch
+new file mode 100644
+index 0000000..3bbd10a
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-error-on-arm32BE.patch
+@@ -0,0 +1,28 @@
++From 9afb0e4d3b9209ea198052cea0401bef7ee25ad8 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Thu, 9 May 2019 12:23:40 +0900
++Subject: [PATCH] To fix build error on arm32BE.
++
++error: #error Target architecture was not detected as supported by Double-Conversion.
++
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ mfbt/double-conversion/utils.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/mfbt/double-conversion/utils.h b/mfbt/double-conversion/utils.h
++index 4f37218..93575cb 100644
++--- a/mfbt/double-conversion/utils.h
+++++ b/mfbt/double-conversion/utils.h
++@@ -53,7 +53,7 @@
++ // disabled.)
++ // On Linux,x86 89255e-22 != Div_double(89255.0/1e22)
++ #if defined(_M_X64) || defined(__x86_64__) || \
++-    defined(__ARMEL__) || defined(__avr32__) || \
+++    defined(__arm__) || defined(__avr32__) || \
++     defined(__hppa__) || defined(__ia64__) || \
++     defined(__mips__) || \
++     defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || \
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
+index 92d1572..5e67eee 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.o
+            file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
+            file://format-overflow.patch \
+            file://JS_PUBLIC_API.patch \
++           file://0001-To-fix-build-error-on-arm32BE.patch \
+            "
+ SRC_URI_append_libc-musl = " \
+            file://0006-support-musl.patch \
+-- 
+2.7.4
+
+
+
 
