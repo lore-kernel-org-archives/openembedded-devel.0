@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C0DC47E085
+	by mail.openembedded.org (Postfix) with ESMTP id 140BD7E07C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 11:55:20 +0000 (UTC)
+	Fri, 10 May 2019 11:55:21 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYj6QFMzFr
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 450pYk1S9Rz7P
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 13:55:21 +0200 (CEST)
+	Fri, 10 May 2019 13:55:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1557489322;
-	bh=/icBGNLFfgCZ2dwA0Zqhtd+Vg19GcTeZKNBHF1TUbC0=;
+	bh=PCtNeuhH0AJ+mOYaswQFGgiiSSa6JFjncvviNdZXwf0=;
 	h=From:To:Subject:Date:From;
-	b=tTld5d1rcKt3i9Q2UFJnLJbn16EhiEvu6HAIevP79dZhKzimaXdc0/NItnQJn4OTH
-	DhEUIAPPCkuof942BKccXYLVVhbxXNGJZMuPXZPaVhAgxUVKOR1pDuPXKS7Yrg5Qgf
-	W8CSul1kqRIpiQQ0hVUu7hz2YMINg2dETNsNU6cVpnauWokExEk9ZM6nY6szPvkbRq
-	BRV2twjinYtyhvxDmQPvNe8cRBW0DTUZ6/cqXUpnkjVJwUCM6qz42xOAy8sB5JiI2B
-	stQpFesdcH8LUKbNWrepD8qc01AI/k+IZQ7hg+Xo3YWzS/saa0BdzR8XlhkU1mqtAO
-	1qMsfOsSWE5M/Uf8HO35vTGqt/EonAm1+qt5N3yaOKeIWjwww4/+BW6g6N8YLnrgak
-	X2pw3KA0S7pWuDFjDBs7N73tJt/H2yscFQA1LMcFzYlZCpLDfCGOMnOfuQgtDK5tM0
-	Tp3D8loK7QBHqW3BzpkGVRMbyan65r6JIRma8Ucwo4cU14pyswqweWByUVJ1vgNFkA
-	pYzli+eOLhqI6GD2iD1yXxl9VW/fT97LsQxXwToph7bEhF5UmOqakGoo/gbh3B7xGD
-	cTO7xq2ZrXz2dryx8tKU1affBFvbD6Gmynyww+/kjd3JKeCpSekIaQOaXXQqCWxVKj
-	IfsLphvgqCIHsAsVxCvfanGI=
+	b=Cz+3TOozU2ViWIVF1HJg8kD/7NIkrOu5PeHigIudRxF/7RByBg/ntXPdMjw+s339Q
+	EXmQZbY412vWRYzfL+KtG3A0j+wQAxUs3LO+JewGBMpW8gEjzfUmt5IDaKvTT12UoN
+	SdKviVsm4QI3X2XtfZppRhBYJKdPm3le4oQY3kMmKrwQY/KJPpLzTuIBkENZ3jYTxh
+	T2GYGeB50T9Z9kcsOhpkxYgpIrKUMR+AKBplY0rdCetf/i5gG+PEImRMJ5FtdlrGVk
+	HUAupnjmtr9LG2eZgLaMJkduDeD8wrw9+9MAY6tqEutHMO4z+un6/eYIBXhUlpihWm
+	icvidOJuZeIqN7BIQAPRVPx4ZR8yITjyBUgmI3P+hALYR83pa+3AUswfXsOE1CRAHQ
+	DEmKxpErGzoie/Mmxgfl19Xf+zHRz6Sf6JRRDhuHykU+3uFS8s9Q8du/E1xj1rvHuD
+	KtC9g6U3nzmL9LWsQhj7RhZRrhByLBT7AfwWGj0sxAm48tPgrpv4cQX7uYo7rHKZGH
+	hvlrYTkflbdWB2ACEbAS1NWQxLA8p98kIJN4Do+TW4xFOYAFtyaq/ctENUoIwxvFQb
+	qnQRMbexgEVT64Ku+S0GNuNBG72DxqdeRqCXguacAchbXE8y6ziq6vohich2HS9NPc
+	7/KwujFBRhMTcxnBd5LMMjWc=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 May 2019 14:55:14 +0300
-Message-Id: <20190510115515.19491-18-bunk@stusta.de>
+Date: Fri, 10 May 2019 14:55:15 +0300
+Message-Id: <20190510115515.19491-19-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] rdfind: Upgrade 1.3.4 -> 1.4.1
+Subject: [meta-oe][PATCH] catch2: Upgrade 2.6.1 -> 2.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,89 +42,77 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 10 May 2019 11:55:21 -0000
 
-Remove patch for issue fixed upstream.
+Remove patch applied upstream.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../rdfind/files/reproducible_build.patch     | 46 -------------------
- .../{rdfind_1.3.4.bb => rdfind_1.4.1.bb}      |  5 +-
- 2 files changed, 2 insertions(+), 49 deletions(-)
- delete mode 100644 meta-oe/recipes-support/rdfind/files/reproducible_build.patch
- rename meta-oe/recipes-support/rdfind/{rdfind_1.3.4.bb => rdfind_1.4.1.bb} (62%)
+ .../{catch2_2.6.1.bb => catch2_2.7.2.bb}      |  5 ++-
+ ...-Wdefaulted-function-deleted-warning.patch | 35 -------------------
+ 2 files changed, 2 insertions(+), 38 deletions(-)
+ rename meta-oe/recipes-test/catch2/{catch2_2.6.1.bb => catch2_2.7.2.bb} (83%)
+ delete mode 100644 meta-oe/recipes-test/catch2/files/0001-Fix-Wdefaulted-function-deleted-warning.patch
 
-diff --git a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch b/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+diff --git a/meta-oe/recipes-test/catch2/catch2_2.6.1.bb b/meta-oe/recipes-test/catch2/catch2_2.7.2.bb
+similarity index 83%
+rename from meta-oe/recipes-test/catch2/catch2_2.6.1.bb
+rename to meta-oe/recipes-test/catch2/catch2_2.7.2.bb
+index 08d661640..b5c857329 100644
+--- a/meta-oe/recipes-test/catch2/catch2_2.6.1.bb
++++ b/meta-oe/recipes-test/catch2/catch2_2.7.2.bb
+@@ -6,10 +6,9 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+ 
+ SRC_URI = "git://github.com/catchorg/Catch2.git \
+-           file://0001-Fix-Wdefaulted-function-deleted-warning.patch \
+           "
+-# v2.6.1
+-SRCREV = "dbbab8727c342733f75045483048cdcb52421e32"
++# v2.7.2
++SRCREV = "7c37501b070c0e9ea9cdedbeac2059f0a6b0a8ab"
+ 
+ S = "${WORKDIR}/git"
+ 
+diff --git a/meta-oe/recipes-test/catch2/files/0001-Fix-Wdefaulted-function-deleted-warning.patch b/meta-oe/recipes-test/catch2/files/0001-Fix-Wdefaulted-function-deleted-warning.patch
 deleted file mode 100644
-index 36728a788..000000000
---- a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+index 555c71ad2..000000000
+--- a/meta-oe/recipes-test/catch2/files/0001-Fix-Wdefaulted-function-deleted-warning.patch
 +++ /dev/null
-@@ -1,46 +0,0 @@
--Description: sort the filelist when it is complete to get reproducible behaviour
--Author: Reiner Herrmann <reiner@reiner-h.de>
--Bug-Debian: https://bugs.debian.org/795790
+@@ -1,35 +0,0 @@
+-From a39e0eaa8318335260967ffd1d16388eb5a1d6d8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 12 Feb 2019 12:57:00 -0800
+-Subject: [PATCH] Fix -Wdefaulted-function-deleted warning
 -
--Upstream-Status: Pending
+-Clang8 warns
 -
--Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+-catch_interfaces_reporter.h:84:25: error: explicitly defaulted move assignment operator is implicitly deleted [-Werror,-Wdefaulted-function-deleted]
+-|         AssertionStats& operator = ( AssertionStats && )     = default;
+-|                         ^
 -
--Index: rdfind-1.3.4/Fileinfo.hh
--===================================================================
----- rdfind-1.3.4.orig/Fileinfo.hh
--+++ rdfind-1.3.4/Fileinfo.hh
--@@ -189,6 +189,10 @@ public:
--   static bool compareondepth(const Fileinfo &a, const Fileinfo &b)
--   {return (a.depth() < b.depth());}
+-Upstream-Status: Submitted [https://github.com/catchorg/Catch2/pull/1537]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/internal/catch_interfaces_reporter.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/internal/catch_interfaces_reporter.h b/include/internal/catch_interfaces_reporter.h
+-index 9d99c981..e5fbf8bb 100644
+---- a/include/internal/catch_interfaces_reporter.h
+-+++ b/include/internal/catch_interfaces_reporter.h
+-@@ -80,8 +80,8 @@ namespace Catch {
 - 
--+  //returns true if a has lower filename than b)
--+  static bool compareonfilename(const Fileinfo &a, const Fileinfo &b)
--+  {return (a.name().compare(b.name()) < 0);}
--+
--   //fills with bytes from the file. if lasttype is supplied,
--   //it is used to see if the file needs to be read again - useful if
--   //file is shorter than the length of the bytes field.
--@@ -235,6 +239,10 @@ public:
--   static bool equaldepth(const Fileinfo &a, const Fileinfo &b)
--   {return (a.depth()==b.depth());}
+-         AssertionStats( AssertionStats const& )              = default;
+-         AssertionStats( AssertionStats && )                  = default;
+--        AssertionStats& operator = ( AssertionStats const& ) = default;
+--        AssertionStats& operator = ( AssertionStats && )     = default;
+-+        AssertionStats& operator = ( AssertionStats const& ) = delete;
+-+        AssertionStats& operator = ( AssertionStats && )     = delete;
+-         virtual ~AssertionStats();
 - 
--+  //returns true if filenames are equal
--+  static bool equalfilename(const Fileinfo &a, const Fileinfo &b)
--+  {return (a.name()==b.name());}
--+
--   //returns true if file is a regular file. call readfileinfo first!
--   bool isRegularFile() {return m_info.is_file;}
-- 
--Index: rdfind-1.3.4/rdfind.cc
--===================================================================
----- rdfind-1.3.4.orig/rdfind.cc
--+++ rdfind-1.3.4/rdfind.cc
--@@ -349,6 +349,7 @@ int main(int narg, char *argv[])
--   cout<<dryruntext<<"Now have "<<filelist1.size()<<" files in total."<<endl;
--   
--   
--+  gswd.sortlist(&Fileinfo::compareonfilename,&Fileinfo::equalfilename);
-- 
--   //mark files with a unique number
--   gswd.markitems();
-diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
-similarity index 62%
-rename from meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
-rename to meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
-index 4d984ee05..6eab78630 100644
---- a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
-+++ b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
-@@ -6,11 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
- DEPENDS = "nettle"
- 
- SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
--           file://reproducible_build.patch \
- "
- 
--SRC_URI[md5sum] = "97c0cb35933588413583c61d3b5f9adf"
--SRC_URI[sha256sum] = "a5f0b3f72093d927b93898c993479b35682cccb47f7393fb72bd4803212fcc7d"
-+SRC_URI[md5sum] = "180418c863b861d1df221bc486a07ce7"
-+SRC_URI[sha256sum] = "30c613ec26eba48b188d2520cfbe64244f3b1a541e60909ce9ed2efb381f5e8c"
- 
- inherit autotools
- 
+-         AssertionResult assertionResult;
+--- 
+-2.20.1
+-
 -- 
 2.17.1
 
