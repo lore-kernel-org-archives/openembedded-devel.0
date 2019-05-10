@@ -1,46 +1,56 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
-	[209.85.167.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A9E77E090
+Return-Path: <uvv.mail@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 559F37E07D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 13:08:13 +0000 (UTC)
-Received: by mail-lf1-f42.google.com with SMTP id f1so4104065lfl.6
+	Fri, 10 May 2019 13:37:02 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id v7so4494621iob.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 May 2019 06:08:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=uSko99xPvmIT4ANNs/KYYepG5FvFCUQECJsmaTNEkqQ=;
-	b=kNbNXInAsYFzu4A1nJIW1XOTivA6lguc/fax4e2KwyiSNwd0310bEx5/tpTRAUGzcg
-	FgAOQifOIUhxHvIhhLAlXTVQy47Hy7K/NoXEBJimW/kSI3dxSLnR6CM6uIAtQZk8iDDz
-	kHDNmakIXlFmyJ3MMJ4/TqtxhbnHJ/4+7sY4s3puiul+qQLVF8JtL1+wc++ZffkbfSvo
-	Ng5ak8Na4ehJTkyjpZ31il/Lyh2FD+MvKP3VJBuxPKmmTqbZjsuI/g0GcauXX4pt3JzR
-	XiYnlOhFeE+sNHC6D5Hvf2fmExDs2aQOO9bAvUEf3Ggs3WJCCT3Xo/Tgo7+wG58QWwr9
-	Tv1Q==
+	Fri, 10 May 2019 06:37:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=qBGLEXD3gNQufCd5URBk6uJQI0HKrSQVDBZbOM2TI9o=;
+	b=kKSyvzSiYVFg/D5B6REcsXBsphV/1EBFREYoD5umO1ys9PdNnDPtpTsXhenEceS1X8
+	0UyJ8jwZGjN/HmtQmohAUYbdrSSVapHO6KSZDRkNxfT+NltzsvYCPyDUVYtN0TI6fOW1
+	k3LDoflnSoa7soSo414Z9obRd06ceOf5DZ7C4yas3tmgf0FI6nuMZRzvkhxL+rBf5hKB
+	CWN8hfq9Xcv1SDKkJh+paUz1CXM7rwQ80S7+jqPiU4lggTreIOcP5qkNSv8hzf0S5JTY
+	8niSjw3Ns1+8Zhi7OcpweGYZqfLdBlwi8w3GUOalW5heDQ3Hjd24zCRsQW7HkcTdGf9Y
+	RTGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=uSko99xPvmIT4ANNs/KYYepG5FvFCUQECJsmaTNEkqQ=;
-	b=GrilWAUkmP9+L5Mj1ijY0E/rF2jJNCTePpGHW0kBEl+3gJk9/+0m07NBp2mLfKgSZg
-	rtkU5fyyA4h1/d9YXDpXW0FxLQ5493cy2kMnN4VT/GKQi8pk8gaLVZyNZSzephhVRsHL
-	h6aH3NZmuOEaIz2dLR6tClwR6O9wAKkGqOA7uW240Ii3Qn1/HqPdMNF5Yqgpryj5UVcn
-	b8+qy3+lpZfwBfyoxGibJwhEVSlj209n5QIxrz4UA5EU6z6343XfBq5SeaIz13XVIu1y
-	zqypKd+tcFY8amsNrsQAISpd7lg9hQXJHfQf7mKJBXR7oiN/Wz4H0i5dD0cIH0R96Pqs
-	ZNDg==
-X-Gm-Message-State: APjAAAWqeeu0huKcbZk/EPv5+kwp/gVRQYw1WKrw6s0JAEmc/fJAgtTW
-	rknaQJB3cto/esKuxPWIhCUBeRvWZB4BIqZOMROSGgxohLc=
-X-Google-Smtp-Source: APXvYqyUceRTO5a/GIBDgR4Jh3wIWx4x9yot+ocPWIvtLhLxp0gZIIBosrRicsHv3BDvc31OZ5BWOgjS8z61wjKj+E4=
-X-Received: by 2002:a19:1987:: with SMTP id 129mr6352037lfz.80.1557493693953; 
-	Fri, 10 May 2019 06:08:13 -0700 (PDT)
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=qBGLEXD3gNQufCd5URBk6uJQI0HKrSQVDBZbOM2TI9o=;
+	b=Y22k92DjLKbK/1igOqP1H8SljmiGQD8mRRVB8GbQUYUrWuWPbannEgYx8HISAnwwE5
+	L7bJtdKQt9q3H+kxKP3jwyxjct8tIz4N2lieBMe1/UCxvc+tC3KlVTxDKZYn0logsPq8
+	bOFE42zmWN4p0BdYdtFi/WXVvKY0zpT6sV3Kg8saUxtuHV2WhDPp0nfswaCgMUqBzGWK
+	oKB8CMyIIrylIE6y7XfdR2tRzashGc5Up4jmLqZKtU7xV2ectzljvQ9CBUM2hkBeYRgH
+	dYPmHvjqCeLBnG8YqwbXBnPszTR+kfvxEypEhgCCguqKWfeaUZak0xLiWEAtcys6n2t8
+	aa/Q==
+X-Gm-Message-State: APjAAAVPsEzLra1mspQDcAtq1RdrB5fD36QlX232EtiXp0tJjI+0z1Kc
+	h4B1MtcP+P00StzGMrXnf/Q5N9FiDl404w==
+X-Google-Smtp-Source: APXvYqwCBEnSTbsdXx8tLrT3Ex0zwP3ugpK7WmRb9Jy7c8sctcnCBqK6Ze/vXKPWp2R7ccq6GkVyvQ==
+X-Received: by 2002:a5d:8712:: with SMTP id u18mr6567000iom.18.1557495423024; 
+	Fri, 10 May 2019 06:37:03 -0700 (PDT)
+Received: from Vyacheslavs-MacBook-Pro.local ([67.215.13.230])
+	by smtp.gmail.com with ESMTPSA id i8sm1808720ioj.26.2019.05.10.06.37.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 May 2019 06:37:02 -0700 (PDT)
+To: Belisko Marek <marek.belisko@gmail.com>,
+	OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+References: <1551959871-9647-1-git-send-email-marek.belisko@open-nandra.com>
+	<CAAfyv36SJe1D=qQA_jDdRBbv_VAJEUBvimSxc8vhVNRoZ4C=DA@mail.gmail.com>
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Message-ID: <2ce57835-2253-0579-c54b-bd9adde559ea@gmail.com>
+Date: Fri, 10 May 2019 15:36:59 +0200
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+	Gecko/20100101 Thunderbird/60.6.1
 MIME-Version: 1.0
-References: <20190430060855.60494-1-sean@geanix.com>
-In-Reply-To: <20190430060855.60494-1-sean@geanix.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 10 May 2019 15:08:02 +0200
-Message-ID: <CAP71WjyBr94m0gH4MBG7CEpQcS01UP9ia1Ay9S6zueJdeT-Jcg@mail.gmail.com>
-To: Sean Nyekjaer <sean@geanix.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] cannelloni: new package, CAN to ethernet proxy
+In-Reply-To: <CAAfyv36SJe1D=qQA_jDdRBbv_VAJEUBvimSxc8vhVNRoZ4C=DA@mail.gmail.com>
+Subject: Re: [meta-java][PATCH] jamvm: Disable inlining
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,58 +63,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 13:08:13 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 10 May 2019 13:37:02 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Tue, Apr 30, 2019 at 8:09 AM Sean Nyekjaer via Openembedded-devel
-<openembedded-devel@lists.openembedded.org> wrote:
->
-> Tool for sending SocketCAN messages
-> over Ethernet tunnel.
->
-> Signed-off-by: Sean Nyekjaer <sean@geanix.com>
-> ---
-> Changes in v2:
-> - Added PV
->
->  .../cannelloni/cannelloni_git.bb                | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
->
-> diff --git a/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
-> new file mode 100644
-> index 000000000..df75e6342
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY = "a SocketCAN over Ethernet tunnel"
-> +HOMEPAGE = "https://github.com/mguentner/cannelloni"
-> +LICENSE = "GPLv2"
-> +
-> +SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https"
-> +SRCREV = "44080bb021d1a143e6906f2ec4610513c4e1cece"
-> +
-> +PV = "20160414+${SRCPV}"
-> +
-> +LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +inherit cmake
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +PACKAGECONFIG ??= "lksctp-tools"
-> +PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+Hi Marek,
+Thanks for your patch. I can confirm that this resolves the Illegal 
+instruction issue for me on gcc-7.4 and Morty branch. I don't think 
+there should be any difference for master branch regarding this fix, in 
+other words it must be applicable to master too.
 
-lksctp-tools recipe is in meta-networking, so we've added an implicit
-dependency on meta-networking by taking this patch. should we disable
-lksctp-tools support by default?
+Thanks,
+Vyacheslav
 
-> --
-> 2.21.0
+On 30/04/2019 09:48, Belisko Marek wrote:
+> Ping. any comments on this?
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> On Thu, Mar 7, 2019 at 12:57 PM Marek Belisko <marek.belisko@open-nandra.com>
+> wrote:
+>
+>> This will fix crashes seen when build openjdk-8:
+>>
+>> ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile
+>> (log file is located at
+>> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
+>> ERROR: Logfile of failure stored in:
+>> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894
+>> Log data follows:
+>> | DEBUG: Executing shell function do_compile
+>> | Illegal instruction (core dumped)
+>> | WARNING: exit code 132 from a shell command.
+>> | ERROR: Function failed: do_compile (log file is located at
+>> /home/jenkins/my_build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.28894)
+>> ERROR: Task
+>> (virtual:native:/home/jenkins/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile)
+>> failed with exit code '1'
+>>
+>>
+>> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+>> ---
+>>   recipes-core/jamvm/jamvm.inc | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+>> index fc21380..8a1ed63 100644
+>> --- a/recipes-core/jamvm/jamvm.inc
+>> +++ b/recipes-core/jamvm/jamvm.inc
+>> @@ -29,7 +29,7 @@ do_configure_append_class-native() {
+>>   }
+>>
+>>
+>> -EXTRA_OECONF = "--with-classpath-install-dir=${prefix}
+>> --libdir=${libdir}/jamvm --enable-ffi"
+>> +EXTRA_OECONF = "--with-classpath-install-dir=${prefix}
+>> --libdir=${libdir}/jamvm --enable-ffi --disable-int-inlining"
+>>
+>>   # Needed for big compilation targets like OpenJDK
+>>   CFLAGS_append_class-native = " -DDEFAULT_MAX_HEAP=1024*MB"
+>> --
+>> 2.7.4
+>>
+>>
+> marek
 
