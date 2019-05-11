@@ -1,30 +1,37 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 48C107DE74
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 39D057C68D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 May 2019 12:28:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,456,1549900800"; d="scan'208";a="62508960"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 May 2019 20:28:45 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id E91544CD80EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 May 2019 20:28:43 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Sat, 11 May 2019 20:28:47 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 12 May 2019 05:28:54 +0800
-Message-ID: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Sat, 11 May 2019 21:09:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 451fpR1W54z4D;
+	Sat, 11 May 2019 23:09:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1557608959;
+	bh=8q7zAKGcPAaAdLMzHchqPR4AyUBYLvfPxiwvBuM7Rls=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=VMaVSa187Kt6mtDVYPf5VCxL1a3r7wbSy+HS+UAlwZ9jBZf+eQD/X01dEFbh077Ma
+	mw6Hb37FObZqhugN9z6jL0VBlf2dLCYybmfijp/S4VrYJANJwN7v9SS5BWXCn+p74R
+	AZJeUPv++6hVrvX4NXcNIAiOYigBGAYOSdE3P1wdv1/qiYei6Ojve9kq9sNcUjMGOB
+	oJO/zUppxIqTl42t/wpIA7MQCjmPBCiMJ7a8JQJrpg+/vou9TyJEuSMuwY/AS4YdF/
+	jTfyCcvwCQc+neefDcm7k7si/Faa6QRyWFiIItgo8123QhMcPF0LFPW9HBCJMtIjv/
+	lsbTE70Cey/D2MXmx3kAaft7hlUaORZdKgksxH8TJjdWabiFRCsR8JRJ7xCzURCZ09
+	XsjNf6q4NxGnId3LamVVcittoDKafkf5wb5Q7XkieQ8UAtyY1VsxvDVHUsZgLoV7ep
+	Uk1HBt8A/Un3rK9ppmAbg1VrHeNFaGnbIQIstTqEvcg2At2HgMMl0eeucu+OzJLh4V
+	TM/E5kX31ig+sKdDOuzshh/O/gdjgvCXBS4mweNT35Nk9f8ZGqwbdWg1Sw05Mc08h6
+	cRiweRyBmPxjHFNTOfQ4KVCBTl/chXb5zL6itHOck+9c6QpqW/QXsroCXyIBxdf3dI
+	dWB1NuPKdpEz61iqy4SPZCH4=
+Date: Sun, 12 May 2019 00:09:17 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190511210917.GA25833@localhost>
+References: <20190510115515.19491-10-bunk@stusta.de>
+	<dd9ec01e-c6c6-532f-96da-f39d6eb82ffe@gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: E91544CD80EB.A9794
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][patch v3] dnf-plugin-tui: new recipe
+In-Reply-To: <dd9ec01e-c6c6-532f-96da-f39d6eb82ffe@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] geos: Upgrade 3.4.2 -> 3.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,85 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 May 2019 12:28:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 11 May 2019 21:09:19 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-This dnf plugin aims to supply a tui interface for user to manage
-packages. It has features as following:
-  1. Add new command dnf tui --init to make dnf to work on host.
-  2. Text-based user interface for dnf.
-  3. Manage SPDX files.
-  4. Manage SRPM files.
-  5. Add installation samples for dnf.
+On Fri, May 10, 2019 at 02:06:54PM -0700, Khem Raj wrote:
+> 
+> 
+> On 5/10/19 4:55 AM, Adrian Bunk wrote:
+> > Remove patch applied upstream.
+> > 
+> 
+> I am also seeing license checksum mismatches
+>...
 
-More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+Sorry for that (and I am still puzzled what went I botched so that
+I didn't notice).
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++++++++++
- .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
- create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+v2 sent for both.
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-new file mode 100644
-index 0000000..e891868
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
-+SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
-+PV = "1.0"
-+
-+SRC_URI_append_class-target = "file://oe-remote.repo.sample"
-+
-+inherit distutils3-base
-+
-+S = "${WORKDIR}/git"
-+
-+do_install_append() {
-+        install -d ${D}${datadir}/dnf
-+        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
-+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-+        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
-+        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
-+            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
-+        done
-+}
-+
-+do_install_append_class-target() {
-+        install -d ${D}${sysconfdir}/yum.repos.d
-+        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
-+}
-+
-+FILES_${PN} += "${datadir}/dnf"
-+
-+RDEPENDS_${PN} += " \
-+  dnf \
-+  libnewt-python \
-+  "
-+
-+BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
-new file mode 100644
-index 0000000..6c4502e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
-@@ -0,0 +1,5 @@
-+[base]
-+name=myrepo
-+baseurl=http://127.0.0.1/oe_repo/
-+enabled=1
-+gpgcheck=0
+cu
+Adrian
+
 -- 
-2.7.4
 
-
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
