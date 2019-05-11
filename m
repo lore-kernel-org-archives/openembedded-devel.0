@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 379117DDC2
+	by mail.openembedded.org (Postfix) with ESMTP id 7672F7E09C
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 11 May 2019 21:09:27 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 451fpb5PsDz4D
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 451fpc0tjvz5l
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 May 2019 23:09:27 +0200 (CEST)
+	Sat, 11 May 2019 23:09:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557608967;
-	bh=RC9di2KA806b+sxI42+/VU7fYcekq/of5FEauOizeps=;
+	s=default; t=1557608968;
+	bh=cDRb48LyvZfN8TAVN5D1To3VVqLZVyoLaTMww4FyFxQ=;
 	h=From:To:Subject:Date:From;
-	b=FlfuU3apd9bzj3ERE6UdKTdcrKR/G6pIkxLhBYzgN1J7IXmrNYdfwU3IL2jl5Sa4Z
-	QucV60ZT4hF1kQ5zkML9riMLdX6fBiRDPdc4HyhpjwlrT0l/SxkhdMpa8JKUnSsYw9
-	v2lX9Z3IO8PPC9PHVx2WsnGiqcRHoKi7m2L+ijVzaPNFPs5QdlB7hBAJpOT9uSigfX
-	zzPverHvmWDarVwsfea4/yggVAj8qVQipTiafTd2656g7tGuWd40CUdxej9VBjX5az
-	nNjDPFes/ia5zEUnRsaeHr2XQ/7n8afOCR54GX+w8i+578RrLSiRjTyPKZyyRBdSci
-	b6JYOIqINpXliPsL8BLQ+hVU6GUyulOJaUU7apRFRvf/o2JAU7O+Imyb4RBx0cYSlE
-	vveyG/wp1JxIG5HBs0k7IncZR9BPRIzdDbO9YB+GNZHQDmpy5KF1U69csfqSz8705P
-	XTvu60K7ln1N7h7Hn2irv8gw6PmOUuR6Eux0eBDgrkzeOruWPs/0rbQ2sz97gmLm24
-	fTNhxD8gqc0scXMCXyi52jhIU+9KyUFxp06TT+8N09GIRdlzCDb2ZetJBnQUF9U79N
-	i+J49FJiFgHLE28hcPf/TUPetBBfPPDRrQZomcUltRIANSVSRvs93pQzgZvL9mEf8z
-	i4+dLZ1NBqfjEv4sD0uNLkFE=
+	b=OpPSC9fayoYxK/Bb4uWnxCMxOzAmc6sJZ0Bp/BXwWRMyeC6spSkBySfKlhXpLOpWz
+	gFdEfp6ddwSrwIDLLlx7juDgzoUwyWypdjx6ETldMSgPkk4OfLQIDDTeabOzgyLcYP
+	S3/usx1huKYyxjpOL2HN2aOjjykq7/z6IIQlVxmiVwXcPEY69RJ07kpEPgyH+VzunC
+	91O87j2PPsw5kIuYvStVfjcudpmlesdl7+HdG4C1lbJvLqORN31Kw+IUweiQ7XGmr3
+	s++p0SCR5PLoEoMqTvfyjCXe/r5fg596ShfUdC2M5LwJQyFXa9roi+aZ/0iJcqQb48
+	MhhKlw6iJcEKZ0WSn20hMOJUvomqX6FT/Jvlpdi1cSfh8tgHJQgd58EhcMwXTelWIH
+	Py+mv8E2B+OoPgcGy3c/50oRxUTtK4mSKTGU1bypJ2FYKPVCr5KvFWr5AXJUh69+qd
+	Lohd9miQCGhPo0UqKWS2HfYgPInDUK0sIhoc/gQujOg4fKYE/j7x54NjU0ViwoycEi
+	qQAyHNVr2sy7gHmp3InI7SnWd95l+ZguwWR/XJHjWGpFEO3We3K2eFlhOg5B2uPGfF
+	mnmgWJziBf1Busw/VRLt3/vYAS1hxG29mFzqwoVYerbrZRhgfPaCZ8ZLjsX2XhxLdj
+	sWWzqB2HEjcEsqux42AcmCxs=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 May 2019 00:09:26 +0300
-Message-Id: <20190511210927.16928-1-bunk@stusta.de>
+Date: Sun, 12 May 2019 00:09:27 +0300
+Message-Id: <20190511210927.16928-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] geos: Upgrade 3.4.2 -> 3.4.3
+Subject: [meta-oe][PATCH v2] rdfind: Upgrade 1.3.4 -> 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,87 +42,116 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 11 May 2019 21:09:27 -0000
 
-Remove patch applied upstream.
+Remove patch for issue fixed upstream.
 The change in COPYING is due to updated FSF postal address.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../geos/files/fix-gcc6-isnan.patch           | 22 -------------------
- meta-oe/recipes-navigation/geos/geos.inc      |  2 +-
- meta-oe/recipes-navigation/geos/geos_3.4.2.bb |  7 ------
- meta-oe/recipes-navigation/geos/geos_3.4.3.bb |  7 ++++++
- 4 files changed, 8 insertions(+), 30 deletions(-)
- delete mode 100644 meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
- delete mode 100644 meta-oe/recipes-navigation/geos/geos_3.4.2.bb
- create mode 100644 meta-oe/recipes-navigation/geos/geos_3.4.3.bb
+ .../rdfind/files/reproducible_build.patch     | 46 -------------------
+ .../recipes-support/rdfind/rdfind_1.3.4.bb    | 17 -------
+ .../recipes-support/rdfind/rdfind_1.4.1.bb    | 16 +++++++
+ 3 files changed, 16 insertions(+), 63 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+ delete mode 100644 meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
+ create mode 100644 meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
 
-diff --git a/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch b/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
+diff --git a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch b/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
 deleted file mode 100644
-index 5c5fbd1d9..000000000
---- a/meta-oe/recipes-navigation/geos/files/fix-gcc6-isnan.patch
+index 36728a788..000000000
+--- a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
 +++ /dev/null
-@@ -1,22 +0,0 @@
----- geos-3.4.2/configure.in.orig	2016-06-08 17:46:43.002250304 +0000
--+++ geos-3.4.2/configure.in	2016-06-08 17:57:36.342241606 +0000
--@@ -197,7 +197,7 @@
-- AC_LANG_PUSH([C++])
-- AC_CACHE_CHECK([for isnan], ac_cv_isnan,
--  [AC_TRY_LINK([#include <cmath>],
--- [double x; int y; y = isnan(x);],
--+ [double x; int y; y = std::isnan(x);],
--  ac_cv_isnan=yes,
--  ac_cv_isnan=no
-- )])
----- geos-3.4.2/include/geos/platform.h.in.orig	2016-06-08 14:06:53.910234182 -0400
--+++ geos-3.4.2/include/geos/platform.h.in	2016-06-08 14:07:19.298233844 -0400
--@@ -84,7 +84,7 @@
-- #endif
+@@ -1,46 +0,0 @@
+-Description: sort the filelist when it is complete to get reproducible behaviour
+-Author: Reiner Herrmann <reiner@reiner-h.de>
+-Bug-Debian: https://bugs.debian.org/795790
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+-
+-Index: rdfind-1.3.4/Fileinfo.hh
+-===================================================================
+---- rdfind-1.3.4.orig/Fileinfo.hh
+-+++ rdfind-1.3.4/Fileinfo.hh
+-@@ -189,6 +189,10 @@ public:
+-   static bool compareondepth(const Fileinfo &a, const Fileinfo &b)
+-   {return (a.depth() < b.depth());}
 - 
-- #if defined(HAVE_ISNAN)
---# define ISNAN(x) (isnan(x))
--+# define ISNAN(x) (std::isnan(x))
-- #else
-- # if defined(_MSC_VER)
-- #  define ISNAN(x) _isnan(x)
-diff --git a/meta-oe/recipes-navigation/geos/geos.inc b/meta-oe/recipes-navigation/geos/geos.inc
-index 2e308b488..48721058d 100644
---- a/meta-oe/recipes-navigation/geos/geos.inc
-+++ b/meta-oe/recipes-navigation/geos/geos.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://trac.osgeo.org/geos/"
- SECTION = "libs"
- 
- LICENSE = "LGPLv2.1+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI = "http://download.osgeo.org/geos/geos-${PV}.tar.bz2"
- 
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+-+  //returns true if a has lower filename than b)
+-+  static bool compareonfilename(const Fileinfo &a, const Fileinfo &b)
+-+  {return (a.name().compare(b.name()) < 0);}
+-+
+-   //fills with bytes from the file. if lasttype is supplied,
+-   //it is used to see if the file needs to be read again - useful if
+-   //file is shorter than the length of the bytes field.
+-@@ -235,6 +239,10 @@ public:
+-   static bool equaldepth(const Fileinfo &a, const Fileinfo &b)
+-   {return (a.depth()==b.depth());}
+- 
+-+  //returns true if filenames are equal
+-+  static bool equalfilename(const Fileinfo &a, const Fileinfo &b)
+-+  {return (a.name()==b.name());}
+-+
+-   //returns true if file is a regular file. call readfileinfo first!
+-   bool isRegularFile() {return m_info.is_file;}
+- 
+-Index: rdfind-1.3.4/rdfind.cc
+-===================================================================
+---- rdfind-1.3.4.orig/rdfind.cc
+-+++ rdfind-1.3.4/rdfind.cc
+-@@ -349,6 +349,7 @@ int main(int narg, char *argv[])
+-   cout<<dryruntext<<"Now have "<<filelist1.size()<<" files in total."<<endl;
+-   
+-   
+-+  gswd.sortlist(&Fileinfo::compareonfilename,&Fileinfo::equalfilename);
+- 
+-   //mark files with a unique number
+-   gswd.markitems();
+diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb b/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
 deleted file mode 100644
-index 7193f8fb5..000000000
---- a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+index 4d984ee05..000000000
+--- a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
 +++ /dev/null
-@@ -1,7 +0,0 @@
--require geos.inc
+@@ -1,17 +0,0 @@
+-SUMMARY = "Rdfind is a program that finds duplicate files"
+-HOMEPAGE = "https://rdfind.pauldreik.se/"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 -
--SRC_URI += "file://geos-config-Add-includedir-variable.patch \
--            file://fix-gcc6-isnan.patch"
+-DEPENDS = "nettle"
 -
--SRC_URI[md5sum] = "fc5df2d926eb7e67f988a43a92683bae"
--SRC_URI[sha256sum] = "15e8bfdf7e29087a957b56ac543ea9a80321481cef4d4f63a7b268953ad26c53"
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.4.3.bb b/meta-oe/recipes-navigation/geos/geos_3.4.3.bb
+-SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
+-           file://reproducible_build.patch \
+-"
+-
+-SRC_URI[md5sum] = "97c0cb35933588413583c61d3b5f9adf"
+-SRC_URI[sha256sum] = "a5f0b3f72093d927b93898c993479b35682cccb47f7393fb72bd4803212fcc7d"
+-
+-inherit autotools
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
 new file mode 100644
-index 000000000..538456cc2
+index 000000000..42f2064fd
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/geos/geos_3.4.3.bb
-@@ -0,0 +1,7 @@
-+require geos.inc
++++ b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Rdfind is a program that finds duplicate files"
++HOMEPAGE = "https://rdfind.pauldreik.se/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fa22e16ebbe6638b2bd253338fbded9f"
 +
-+SRC_URI += "file://geos-config-Add-includedir-variable.patch \
++DEPENDS = "nettle autoconf-archive"
++
++SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
 +"
 +
-+SRC_URI[md5sum] = "77f2c2cca1e9f49bc1bece9037ac7a7a"
-+SRC_URI[sha256sum] = "cfbf68079117c1c2b76411636444ff41d73c31093c4cab9dcc9a8c1bbe7e3897"
++SRC_URI[md5sum] = "180418c863b861d1df221bc486a07ce7"
++SRC_URI[sha256sum] = "30c613ec26eba48b188d2520cfbe64244f3b1a541e60909ce9ed2efb381f5e8c"
++
++inherit autotools
++
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
