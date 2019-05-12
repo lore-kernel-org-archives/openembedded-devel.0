@@ -1,50 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A07237D38A
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B6607D38A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 May 2019 09:40:39 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id j187so10998267wmj.1
+	Sun, 12 May 2019 09:40:54 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id c5so11972899wrs.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 May 2019 02:40:40 -0700 (PDT)
+	Sun, 12 May 2019 02:40:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8zfv1zFFLGXzxjVBclxVPjyc8jGfPoSWYDkmqqoXWx8=;
-	b=du/+mHiPLiVncgHYEeGWug/GLXHIgL6TzJhE7efOsoJkjrY3lpomcqdxn61Lu5/xcS
-	HtfL1FJgoL+91KqaH/8oMxXvAmZEuAnm+jkrVg1p+NRsc9ooZ2xzGM2Pc6FO+RfmZRnz
-	z48+guTWEVYO0cr/wmW/VKfsWtVinBF7uT8qTz4fnqzcIbawKAzxxDJxF/vIIbish+Id
-	1ZDSnIKS0MQzcWaZcy6H9ZmfhbmkXjz5l0IbVYf/NRx23HNUpQufiDPwP6yR10HXaxe0
-	HRCN25A1xTtTXpMLLKJfahacW4YUxI8qq9AjYe4X+ux46hv0aMPFUjBFFRYM+d3Wyvpo
-	ck2Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=976lx2z5Ezuiy8bv81O7TlVF1QUTY6aTMcgjVjnWibI=;
+	b=QsMadVocCUqWNPsRzcfxzJeo2SzFAryAmWeohuA0ChkJIGwm+060Pr7UGpeXFM/3Qq
+	rVgUa4Y/bT+4/rBkVcuLOvaHsvU3ix0ortpr6nmIIZbZltq3zJWxHGCte1oQZaRcvQdB
+	bSfWTvtDEx6GFDVe7tMJbbFHshjWyqDQPmVd6BmCD/TJFCwt72cMW16IzOY+HtwVQkCp
+	qZGuxZRQsEqWb+PTwckPDKJSF6LFCdzUpHoANCuD1qe+TrxRSm/8a+xrsFD8OuiH9GgH
+	gOKSBZVIF7urrHT3+tdP5bWWHaT4mQeP2weVnBCxsuj4Qvvo8N4ENN+YmmaCS58Cvlxq
+	g2vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=8zfv1zFFLGXzxjVBclxVPjyc8jGfPoSWYDkmqqoXWx8=;
-	b=e2dNL5HnsfNgfpAHj5VeuTP3cF0lu2d2txyfHodb8OVMxU/uYzaAFGWMYYNJE+t6ca
-	L7nyQUMQWQxUqTnlgtg93Qd7QkVSlk0olrEEoPjBiQNQ1WCs/5MnUVxF8Kp2ZhOrCbTR
-	5+UWDkwPnwxw59ujzXfSs3DC3V6UdE7mZj9R10CWCYfYEUCENh0sb9XIg4ZTR2uC2MFv
-	S66fSvVi6egzecHHBClCFZ/4ydQhRvENR4abb4XSR0Sae4fRDeoYy+7kxwzm57qj+Dk/
-	YLQOfwolqt9yPPXhiTuG7TiL5rSVqVn3s+qhb8gln7U8ZWwpvDBWJhp41tC5oVthZbuS
-	I6KA==
-X-Gm-Message-State: APjAAAVASXq+8JI4RfPg9d3UTwWMAHcMoom8KX59iD/gJojt9Z7nuqfU
-	cSDfGdnYbqR49O6LwpHE2JMoxExk
-X-Google-Smtp-Source: APXvYqyLBkx+IjHEKe23vBiqFGnb0s4TJjuPJZTSNNBFHv+iucAEd0xqk4YpXKOtDu8472qrEgBx9w==
-X-Received: by 2002:a1c:7f8e:: with SMTP id a136mr11905057wmd.36.1557654040027;
-	Sun, 12 May 2019 02:40:40 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=976lx2z5Ezuiy8bv81O7TlVF1QUTY6aTMcgjVjnWibI=;
+	b=aAamEWI8VpU2XAsa2sZjUz6aKwLjq2CYpuECSrLj3J56IlN8Z04JDi9l9DBLWLiWjw
+	S3AcPiG4PKWg5+KykXT/Fpv2SxTqYRLOD/mWq1VKQZxk9DnaVmCul02cfU81Dzwbgc/A
+	/ggvrSrmFaalo/ck23G4RrboLfe6Cf8D+mdFX0/YFDZViL8GE/fWG9A8kBbR2n/mY7rP
+	ChKB+1OZQDk5vEZJmI/Xf9K07CNRZaS3Xih9wV/io7RsHj7ZJQnpGAmb7zjOyv/egSEm
+	cCiiKoRpRIrroE6OkKIZCvGm4q55x3CEPdvMbQbMktL8V9ZxrAKC3gRlclxhwxT+gsK/
+	+iew==
+X-Gm-Message-State: APjAAAW5myRLAQBgIZeIX1QbpkaarTMC2VbgnWU74uO5earT8DTik+4M
+	6RBXrWaagtB+ed5us/zR6XB7kk8s
+X-Google-Smtp-Source: APXvYqxONEUTKZ5uHFYSlye6dGHD4NAk8uLLkVRCZH5UrMDM9eG9MrgjyQB63zfmEC/jnRVBZnd7Mg==
+X-Received: by 2002:a5d:53c8:: with SMTP id a8mr14074833wrw.152.1557654054884; 
+	Sun, 12 May 2019 02:40:54 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id x9sm8700224wmf.27.2019.05.12.02.40.39
+	by smtp.gmail.com with ESMTPSA id f6sm7269277wmh.13.2019.05.12.02.40.54
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 12 May 2019 02:40:39 -0700 (PDT)
+	Sun, 12 May 2019 02:40:54 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 May 2019 09:40:35 +0000
-Message-Id: <20190512094035.13949-2-Martin.Jansa@gmail.com>
+Date: Sun, 12 May 2019 09:40:51 +0000
+Message-Id: <20190512094051.14264-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190512094035.13949-1-Martin.Jansa@gmail.com>
-References: <20190512094035.13949-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libdbi-perl: prevent native libdbi-perl depending on target perl
+Subject: [meta-filesystems][PATCH] aufs-util: prevent native aufs-util depending on target kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +54,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 May 2019 09:40:39 -0000
+X-List-Received-Date: Sun, 12 May 2019 09:40:54 -0000
 
-* detected with:
-  openembedded-core/scripts/sstate-diff-machines.sh --tmpdir=tmp-glibc --machines="qemux86 qemux86copy qemuarm" --targets="libdbi-perl-native" --analyze
-  ...
-  ERROR: libdbi-perl-native different signature for task do_populate_sysroot.sigdata between qemux86 and qemuarm
-  Hash for dependent task perl-sanity/perl_5.28.2.bb.do_populate_sysroot changed from 00c0f30e40a144255fc3054e9a71ce73170a89832318774bd2a8fc5e8dcd20ad to e22ff8375c4ee6bda646dae8a1d6b1ddeb6d373678fc036fdc406e91a026b497
+* fixes:
+  ERROR: aufs-util-native different signature for task do_populate_sysroot.sigdata between qemux86 and qemux86copy
+  Hash for dependent task linux/linux-yocto_5.0.bb.do_populate_sysroot changed from de9e49b4f66adddf9a0943db020b4eb677404e0b6ddac60073184a3855d406cb to a912d6ea21336c85c8d8a5e9db4800fccb95197744465b641eda60339bee8901
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-index 3c031646b6..ff4a9d0610 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-@@ -7,10 +7,11 @@ database interface independent of the actual database being used. \
- HOMEPAGE = "http://search.cpan.org/dist/DBI/"
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
--RDEPENDS_${PN} = " perl-module-carp \
--                   perl-module-exporter \
--                   perl-module-exporter-heavy \
--                   perl-module-dynaloader \
-+RDEPENDS_${PN}_class-target = " \
-+    perl-module-carp \
-+    perl-module-exporter \
-+    perl-module-exporter-heavy \
-+    perl-module-dynaloader \
- "
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+index 6d71fc0941..b4819d8fbf 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+@@ -61,6 +61,6 @@ do_install_class-native () {
+     done
+ }
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
+-RRECOMMENDS_${PN} += "kernel-module-aufs"
++RRECOMMENDS_${PN}_class-target += "kernel-module-aufs"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
