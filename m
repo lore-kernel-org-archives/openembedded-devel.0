@@ -1,33 +1,47 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7672F7E09C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D8C3E7D38A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 May 2019 21:09:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 451fpc0tjvz5l
+	Sun, 12 May 2019 09:40:38 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id n25so10922709wmk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 May 2019 23:09:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1557608968;
-	bh=cDRb48LyvZfN8TAVN5D1To3VVqLZVyoLaTMww4FyFxQ=;
-	h=From:To:Subject:Date:From;
-	b=OpPSC9fayoYxK/Bb4uWnxCMxOzAmc6sJZ0Bp/BXwWRMyeC6spSkBySfKlhXpLOpWz
-	gFdEfp6ddwSrwIDLLlx7juDgzoUwyWypdjx6ETldMSgPkk4OfLQIDDTeabOzgyLcYP
-	S3/usx1huKYyxjpOL2HN2aOjjykq7/z6IIQlVxmiVwXcPEY69RJ07kpEPgyH+VzunC
-	91O87j2PPsw5kIuYvStVfjcudpmlesdl7+HdG4C1lbJvLqORN31Kw+IUweiQ7XGmr3
-	s++p0SCR5PLoEoMqTvfyjCXe/r5fg596ShfUdC2M5LwJQyFXa9roi+aZ/0iJcqQb48
-	MhhKlw6iJcEKZ0WSn20hMOJUvomqX6FT/Jvlpdi1cSfh8tgHJQgd58EhcMwXTelWIH
-	Py+mv8E2B+OoPgcGy3c/50oRxUTtK4mSKTGU1bypJ2FYKPVCr5KvFWr5AXJUh69+qd
-	Lohd9miQCGhPo0UqKWS2HfYgPInDUK0sIhoc/gQujOg4fKYE/j7x54NjU0ViwoycEi
-	qQAyHNVr2sy7gHmp3InI7SnWd95l+ZguwWR/XJHjWGpFEO3We3K2eFlhOg5B2uPGfF
-	mnmgWJziBf1Busw/VRLt3/vYAS1hxG29mFzqwoVYerbrZRhgfPaCZ8ZLjsX2XhxLdj
-	sWWzqB2HEjcEsqux42AcmCxs=
-From: Adrian Bunk <bunk@stusta.de>
+	Sun, 12 May 2019 02:40:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=xCE+wZzv+dFrODKbadPpKOCfNAUKWvCOKUSyA2A1pc8=;
+	b=FTHZt9vEPqIHseMNeBUKr+bRbXv5X0/0nJfm8Lsue5p/Z3Vgj19GKUVcqB2mHSORku
+	4qBRRpDaPs2E61GDLzxQaQzLGDnkUXOernJtHTnPPlDv4FJIDeEK1LeCHCWR4Ry3wCNL
+	ViE5b/V681zjYcE2DQ1xCN+k/zfS6bYYo2FSsei5IA3pe4ISlVDCjDAhLt05KI32wK6r
+	5/gUukHUWm4txUBa88AWamgrgK/iD6D/D29fO4cHDp5ZkX/cv2iQdkdcv9ouJU2wYCqg
+	plFIm231wINc8JeKbX/L1xgbSLMifQlix8raLgJiiXQ+zccK/1AIdXky3v0KDgy73sb5
+	Ql+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xCE+wZzv+dFrODKbadPpKOCfNAUKWvCOKUSyA2A1pc8=;
+	b=bzt0OgT4jvUr+daeHEN1LOdz5ZcbG7XsPoB/1H31ZEyksk2drGEjCx2xHUoFEQ12ip
+	/C0SsbVkW4P80JFWCnyRUKYBHT72cSRuDoGY+vQaDJr0ztv2seUVTMmb8biZC6ekY2kf
+	B8GnSX/8Exhh69E8vwCECEeeN6+QnmBfhZAn0cuYKTAUMqsVmfvHW3fP7OUq/fp4VRIx
+	rZB+hRcGnKes2REMf7mktuHmWzVb+12fQpEPEttKVpk8E7ZaBzGRF4tFnkePHxkkXuSj
+	ODhBEv1SuGmpuHlAMxARRp1lmFzXA66t81RbhUDVy5LLRVSqxyMOg/7IX+zeIjeqZ+y8
+	vEUQ==
+X-Gm-Message-State: APjAAAXhrTmFY8Mp74KWefFppA8rKQW6iRqTGdfbeEpBof5IDBW+wh5z
+	QY91xLjAUWYhjC06kUbkQgTE4ZHT
+X-Google-Smtp-Source: APXvYqzIYBADjG6z9kz36F3UNBsnu/ZZ/UwivDOS23xJwHpLkR4+X4tWTxP9WCJGdPnRyQareOY3NA==
+X-Received: by 2002:a7b:cd0e:: with SMTP id f14mr1372384wmj.127.1557654038874; 
+	Sun, 12 May 2019 02:40:38 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id e12sm414593wrs.8.2019.05.12.02.40.37
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 12 May 2019 02:40:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 May 2019 00:09:27 +0300
-Message-Id: <20190511210927.16928-2-bunk@stusta.de>
+Date: Sun, 12 May 2019 09:40:34 +0000
+Message-Id: <20190512094035.13949-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] rdfind: Upgrade 1.3.4 -> 1.4.1
+Subject: [meta-oe][PATCH 1/2] efivar: prevent native efivar depending on target kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,118 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 May 2019 21:09:27 -0000
+X-List-Received-Date: Sun, 12 May 2019 09:40:39 -0000
 
-Remove patch for issue fixed upstream.
-The change in COPYING is due to updated FSF postal address.
+* fixes:
+  ERROR: efivar-native different signature for task do_populate_sysroot.sigdata between qemux86 and qemux86copy
+  Hash for dependent task linux/linux-yocto_5.0.bb.do_populate_sysroot changed from de9e49b4f66adddf9a0943db020b4eb677404e0b6ddac60073184a3855d406cb to a912d6ea21336c85c8d8a5e9db4800fccb95197744465b641eda60339bee8901
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../rdfind/files/reproducible_build.patch     | 46 -------------------
- .../recipes-support/rdfind/rdfind_1.3.4.bb    | 17 -------
- .../recipes-support/rdfind/rdfind_1.4.1.bb    | 16 +++++++
- 3 files changed, 16 insertions(+), 63 deletions(-)
- delete mode 100644 meta-oe/recipes-support/rdfind/files/reproducible_build.patch
- delete mode 100644 meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
- create mode 100644 meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
+ meta-oe/recipes-bsp/efivar/efivar_37.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch b/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
-deleted file mode 100644
-index 36728a788..000000000
---- a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--Description: sort the filelist when it is complete to get reproducible behaviour
--Author: Reiner Herrmann <reiner@reiner-h.de>
--Bug-Debian: https://bugs.debian.org/795790
--
--Upstream-Status: Pending
--
--Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
--
--Index: rdfind-1.3.4/Fileinfo.hh
--===================================================================
----- rdfind-1.3.4.orig/Fileinfo.hh
--+++ rdfind-1.3.4/Fileinfo.hh
--@@ -189,6 +189,10 @@ public:
--   static bool compareondepth(const Fileinfo &a, const Fileinfo &b)
--   {return (a.depth() < b.depth());}
-- 
--+  //returns true if a has lower filename than b)
--+  static bool compareonfilename(const Fileinfo &a, const Fileinfo &b)
--+  {return (a.name().compare(b.name()) < 0);}
--+
--   //fills with bytes from the file. if lasttype is supplied,
--   //it is used to see if the file needs to be read again - useful if
--   //file is shorter than the length of the bytes field.
--@@ -235,6 +239,10 @@ public:
--   static bool equaldepth(const Fileinfo &a, const Fileinfo &b)
--   {return (a.depth()==b.depth());}
-- 
--+  //returns true if filenames are equal
--+  static bool equalfilename(const Fileinfo &a, const Fileinfo &b)
--+  {return (a.name()==b.name());}
--+
--   //returns true if file is a regular file. call readfileinfo first!
--   bool isRegularFile() {return m_info.is_file;}
-- 
--Index: rdfind-1.3.4/rdfind.cc
--===================================================================
----- rdfind-1.3.4.orig/rdfind.cc
--+++ rdfind-1.3.4/rdfind.cc
--@@ -349,6 +349,7 @@ int main(int narg, char *argv[])
--   cout<<dryruntext<<"Now have "<<filelist1.size()<<" files in total."<<endl;
--   
--   
--+  gswd.sortlist(&Fileinfo::compareonfilename,&Fileinfo::equalfilename);
-- 
--   //mark files with a unique number
--   gswd.markitems();
-diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb b/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
-deleted file mode 100644
-index 4d984ee05..000000000
---- a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "Rdfind is a program that finds duplicate files"
--HOMEPAGE = "https://rdfind.pauldreik.se/"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--
--DEPENDS = "nettle"
--
--SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
--           file://reproducible_build.patch \
--"
--
--SRC_URI[md5sum] = "97c0cb35933588413583c61d3b5f9adf"
--SRC_URI[sha256sum] = "a5f0b3f72093d927b93898c993479b35682cccb47f7393fb72bd4803212fcc7d"
--
--inherit autotools
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
-new file mode 100644
-index 000000000..42f2064fd
---- /dev/null
-+++ b/meta-oe/recipes-support/rdfind/rdfind_1.4.1.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Rdfind is a program that finds duplicate files"
-+HOMEPAGE = "https://rdfind.pauldreik.se/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fa22e16ebbe6638b2bd253338fbded9f"
-+
-+DEPENDS = "nettle autoconf-archive"
-+
-+SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "180418c863b861d1df221bc486a07ce7"
-+SRC_URI[sha256sum] = "30c613ec26eba48b188d2520cfbe64244f3b1a541e60909ce9ed2efb381f5e8c"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-bsp/efivar/efivar_37.bb b/meta-oe/recipes-bsp/efivar/efivar_37.bb
+index 87f5df423b..4b458dedd5 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar_37.bb
++++ b/meta-oe/recipes-bsp/efivar/efivar_37.bb
+@@ -40,4 +40,4 @@ do_install_class-native() {
+ 
+ BBCLASSEXTEND = "native"
+ 
+-RRECOMMENDS_${PN} = "kernel-module-efivarfs"
++RRECOMMENDS_${PN}_class-target = "kernel-module-efivarfs"
 -- 
 2.17.1
 
