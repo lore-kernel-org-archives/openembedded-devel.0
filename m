@@ -1,56 +1,51 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F7FC6B073;
-	Mon, 13 May 2019 08:59:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x4D8xHHk002655
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 May 2019 01:59:17 -0700 (PDT)
-Received: from soho-mhatle-m.local (147.11.117.151) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 13 May 2019 01:59:16 -0700
-To: Adrian Bunk <bunk@stusta.de>
-References: <e86cf937-5734-fc36-cd94-fad9b0155059@gmail.com>
-	<65432636-c595-ed39-28f3-efb7a0d565da@gmail.com>
-	<bf12fd00-e786-25dc-4b10-056ce5adffb4@windriver.com>
-	<20190513074620.GA14282@localhost>
-From: Mark Hatle <mark.hatle@windriver.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=mark.hatle@windriver.com; prefer-encrypt=mutual; keydata=
-	mQENBFYKxFgBCACt/pzutBp6p/xVKTFJjHbM3KpQKCblyot/YP+bpTr51Hrc5xDXBQhoG7TC
-	aIRvRIvbhEevEQK9y04gW3JK/5lobq5ORebolcsHlYBUvpNeIPjupLQwGvz/TPtrLRNGLqDC
-	rvsM6OA2XbQ2bwzxWaSQS3ImE2O2iXOZn9HhThMGeDB4Nff3fgUvXOTDIrgWOn9K2DgLL7Yc
-	zkUIlFdj+Nraksd/7BSk8oH6tjeBVhFqSFvKta9QxWgdr58oPaTYaW/xNqUjlLrbJuMw/MSe
-	xzuYfdfDfm6J8kRjMOnwQ0n8svJElzqAk+d83ow38gpGQ+LkjGgnf8ZFJ4rUJFADroX3ABEB
-	AAG0JU1hcmsgSGF0bGUgPG1hcmsuaGF0bGVAd2luZHJpdmVyLmNvbT6JATcEEwEIACEFAlYK
-	xFgCGwMFCwkIBwIGFQgJCgsCBBYCAwECHgECF4AACgkQfv796/r0vvlvZAf9Gs+eN320yhRW
-	V/fZCsngKhmOK4v3HrTwFrkSmoD9QHQiE/5IPdNacHwIPwZx07tNBohB8xOeNqCPRYRBwGhA
-	AnxKOPyd0nnm6ZhPzbA57v4x3IGRQr4QzvcBTASJq91l3Ew4lpAslyx5w1DPPqRD7G8ycDKg
-	peKyDwmdkvCunVisSAQI3XIMq2y230biTO98tDPEezg+lg+yTsz9ZT33F5KNuWrpf8VL5fG/
-	mt+kAv7wtsx/KTRbqhH3iFXF6eBSwMjAfTXFlkLfbM9riJGXrWEl9n2S2R3cDHNHug0lb8f4
-	whK370KEO4OwRKIYW/VUBmzk5XZUE9DTlDSV8ycsrrkBDQRWCsRYAQgAwK3FuHCE+HW3YWdH
-	PUjeSn5p//xJ57u8g2rng8zm9zNjmYgpPv5UxozaD9i2jf4mlQLHGGOezhHae8K4Nj70oVcv
-	8AmwcrJa9i9WL1oy/9R3fHMWf/Ctt9VXTO0qlCuq6PDzaUfvsXR61aJIjTKNQTOjCLjY1vXm
-	VSewUgARysmA8WrjTfwGBihMBxAX0+kIjx8nOlam0WvekMBXZ0AbS56oTLRxYao6DI3GeB/N
-	oWPy/5DfuTKaSdM0Pf8al20x9RuNN5/HLMlyDH/k8bIa1xd9aAqW+Feiw5gC107V2E6ULyIy
-	q6em2UrsmIRxrvpHqbNgQKqvTehJ+V/i4g/uOwARAQABiQEfBBgBCAAJBQJWCsRYAhsMAAoJ
-	EH7+/ev69L755XAH/3ZcNhooqd9OBhFkvXm1iWZ8EoC7motWqVn2oEyxoonsg8AD9kFXiN+T
-	dYp7dH99EZu9q4ptj56AXm4uHzOgywL/5/V2TY6twCGAjUGzDjAB5gzoi+JLIBlDiyOip0eL
-	QswIhRk473xy3j8DA4oVamnSPWgyNJ+qsdt37YWDzoDFFvtDoRU7Eb+znfIMDKzlny0XU/8L
-	cW1bNHJlpv/78GPdfP4tjysEd8MuA5jf5o5w4XqcwTqalffEJtQ/s3pbkstEi7qm5uPui5Kt
-	gq6YYLSqcSNe0GWAF9/T+qwyo7burSTxUWCWtMmlXdAQLW9SynLhB3Jbch0nFAh0fCKi6yY=
-Organization: Wind River Systems
-Message-ID: <24c5b8fb-38eb-acb0-3e2a-97e63df0e8d9@windriver.com>
-Date: Mon, 13 May 2019 11:59:14 +0300
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
-	Gecko/20100101 Thunderbird/60.6.1
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EDE66B073
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 May 2019 09:18:17 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id v11so14359897wru.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 May 2019 02:18:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7D0tmwU2hihV3KnnKfoJiVuOLn2ketbVNzXcZbAhOlE=;
+	b=ZMGHsEId0QmfbUWJUcaWlCBhzSG/t90zRxiAz76vKZSXN5Q+HvE7Qg2ETGmXyeWpOO
+	CL+AwYJVraaZBNVtePf/iRICYbgQtw2eUyBjbEbPwkds3sudMPiVXabG5wNzJ7icr9gz
+	1puVjTjNyuYBjYizfUawSN4CPcij4xv4/uHJYklkO+OAGd0qYjCWbO9ueEcc/vXDPTKP
+	uMCHaafouqh8XCzNXwjLl4IWg0a2vANjany0Z0fAnuuehmneMk11lxrEcNjwZJ4hXX9b
+	EdIA3n1kc6GromfVaFHxzmq+UnUHVfkOQUJdT2pC8tLW27Qoo51lNHzPSXykgbxLlPyv
+	NYVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7D0tmwU2hihV3KnnKfoJiVuOLn2ketbVNzXcZbAhOlE=;
+	b=Kc99GLk4a5ERx7f6u1WliutqUD8zgNwX4FtKQ4zTnPULfVtdRQx0JTk1iPyxqe/Crm
+	hvPK4AlluSNG5UHHLYRQHZSEA5l02JFlWQEHlcJF2RcF52ocvB+JFrEbQzA1sekpktty
+	Cek3QiqFG2Ionb8APIdVmGHSCqvDpj9Dt+5YQLI6geKXtZC5lTEc9h8b3FIm/N90aM0E
+	5mBx+Q2JWHuaL4v7d5jyuAOvFPp/U5CYzCRtWAwrPx+YIjQ1xIMCcNFmzI3aW+fDwb87
+	X21A6CnJ/Mlu/cAQOWqr035tLkF4Cj8zyU6zVtcX/8QVX8eSlbV6Ipcbu1YqeawrDGgU
+	r1Kg==
+X-Gm-Message-State: APjAAAWPJnXamaVqD1V77+Shyb1aWvHr6fVh9NiCTF+/FQpsSD8qLsGz
+	usKbjx8Cukcvw0laPCD1NZl/0b4Ef4c=
+X-Google-Smtp-Source: APXvYqy4pKtxZnm4H3c/OcBdW+LhHAic6cOOjwRh5luNt1CYjot0QRIIDrZdTAdDXmaz/mXzccJWTg==
+X-Received: by 2002:a5d:67cb:: with SMTP id n11mr16613180wrw.3.1557739097711; 
+	Mon, 13 May 2019 02:18:17 -0700 (PDT)
+Received: from localhost.localdomain (91-167-84-221.subs.proxad.net.
+	[91.167.84.221])
+	by smtp.gmail.com with ESMTPSA id l8sm2900177wrw.56.2019.05.13.02.18.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 May 2019 02:18:16 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 May 2019 11:17:53 +0200
+Message-Id: <20190513091753.24046-1-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20190513074620.GA14282@localhost>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] patchwork
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-oe][PATCH] cannelloni: move from meta-oe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,34 +58,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 May 2019 08:59:18 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 May 2019 09:18:17 -0000
+Content-Transfer-Encoding: 8bit
 
-On 5/13/19 10:46 AM, Adrian Bunk wrote:
-> On Mon, May 13, 2019 at 10:32:48AM +0300, Mark Hatle wrote:
->> On 5/12/19 9:04 PM, akuster808 wrote:
->>> ok, so no Admins. This is unexceptionable.
->>>
->>> OE TSC and Board, I believe its your time to get involved.
->>
->> I've not used patchwork before, do you know who originally configured it?  Was
->> it Paul Eggleton, or Richard, or?  If I have an idea who was originally
->> responsible, I'm pretty sure we can figure out a handoff plan to someone else.
-> 
-> http://git.yoctoproject.org/cgit/cgit.cgi/patchwork/
+It has a dependency on lksctp-tools which is available in
+meta-networking. Move the recipe to avoid dependency from meta-oe onto
+meta-networking.
 
-No I mean who set it up for OE (or the YP) to use.  I don't even know at this
-point whose infrastructure the component runs on.  If I had that I'd know to
-start with either Tom or Michael.
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ .../recipes-connectivity/cannelloni/cannelloni_git.bb             | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-connectivity/cannelloni/cannelloni_git.bb (100%)
 
---Mark
-
->> --Mark
-> 
-> cu
-> Adrian
-> 
+diff --git a/meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb
+similarity index 100%
+rename from meta-oe/recipes-connectivity/cannelloni/cannelloni_git.bb
+rename to meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb
+-- 
+2.20.1
 
 
