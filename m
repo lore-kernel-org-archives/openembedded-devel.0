@@ -1,32 +1,36 @@
-Return-Path: <scott@jumpnowtek.com>
-X-Greylist: delayed 308 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 May 2019 09:31:44 UTC
-Received: from smtp89.iad3b.emailsrvr.com (smtp89.iad3b.emailsrvr.com
-	[146.20.161.89])
-	by mail.openembedded.org (Postfix) with ESMTP id E3D107D3AC
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A0007D735
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 09:31:44 +0000 (UTC)
-Received: from smtp20.relay.iad3b.emailsrvr.com (localhost [127.0.0.1])
-	by smtp20.relay.iad3b.emailsrvr.com (SMTP Server) with ESMTP id
-	4E2E5A01D9 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 05:26:37 -0400 (EDT)
-X-Auth-ID: scott@jumpnowtek.com
-Received: by smtp20.relay.iad3b.emailsrvr.com (Authenticated sender:
-	scott-AT-jumpnowtek.com) with ESMTPSA id 2F511A01CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 05:26:37 -0400 (EDT)
-X-Sender-Id: scott@jumpnowtek.com
-Received: from [192.168.10.4] (c-73-234-253-132.hsd1.me.comcast.net
-	[73.234.253.132]) (using TLSv1.2 with cipher AES128-SHA)
-	by 0.0.0.0:465 (trex/5.7.12); Tue, 14 May 2019 05:26:37 -0400
-To: openembedded-devel@lists.openembedded.org
-From: Scott Ellis <scott@jumpnowtek.com>
-Message-ID: <41c04e88-4b89-6f1a-57a1-78bcbfcb562b@jumpnowtek.com>
-Date: Tue, 14 May 2019 05:26:34 -0400
-User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Tue, 14 May 2019 11:18:32 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 453FYN4W2xz60;
+	Tue, 14 May 2019 13:18:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1557832712;
+	bh=eOmeAPwULduKYsLG/JjsI64XGs5/ZnvWJvYkpMbPxek=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=XQskPH7hWU4Dg9VvVyXuJZIdshYqeadzOG8sDsteNwqcAN7h0Oz1g95xjp172wzP5
+	0MP99Oo+WvKz0txfZNrVGJSxlNMqhqSDUPnAb+byAH6+/yPiSNbW3ICTuGCevpUd60
+	sbdZdaKtEbS+sycQCctGlH80a8LyzZ6A1zmNgZ49TySVF2QNohxeIk6bduHML90/pl
+	JK1fhbFMs3ZhF1e7b8uuzZ65cUR6xiTInwfWjAXPMIp1XE14PX28X5uSthIpDnUG2D
+	uNPBe4wEmogeSAkY7UQaDFwQMNaZhcvy2sg0d48jl15KsaQBtwuDtEwKBfk72edCVb
+	o03f8zQO9obtiY8lqJh+ks9pFhsrz+LS+tQsSR8UPWZZXQx5jeruYLyK8ZEjk7fY2p
+	1jGt4gOD8Tng/rKIISjBVDkD8hOeVAnQfc5jCuwWZueZ4Gwju0XDW39MQ85wNbtyW0
+	RfXcvjlY+NsUKcIrCUFbrsg3Dp1YxXlOpA7D0E6d6YbMG0OiAZswJ47CoZgQjUT/CI
+	ZC2ne3NlZJpfhYD/JjMZGMpRSWsq8rVs9CTY7XsSvDWNoCIRBSDbo9eGk7+WNzM9ce
+	Q0hX80rkKoDUE6dkgGP46+uA4yLA9LNqnOzD5aM3jpR6+ozkjj+N/R5fdjSQ5gZG2Q
+	o8lqWcBZcWhzLTXR6IHnZ6ag=
+Date: Tue, 14 May 2019 14:18:30 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Scott Ellis <scott@jumpnowtek.com>
+Message-ID: <20190514111830.GC18877@localhost>
+References: <41c04e88-4b89-6f1a-57a1-78bcbfcb562b@jumpnowtek.com>
 MIME-Version: 1.0
-Subject: [meta-openembedded] Wireguard broken with 5.1+ kernels
+In-Reply-To: <41c04e88-4b89-6f1a-57a1-78bcbfcb562b@jumpnowtek.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-openembedded] Wireguard broken with 5.1+ kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,22 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2019 09:31:45 -0000
+X-List-Received-Date: Tue, 14 May 2019 11:18:33 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-This kernel commit removes nf_nat_core.h which breaks wireguard 20190123.
+On Tue, May 14, 2019 at 05:26:34AM -0400, Scott Ellis wrote:
+> This kernel commit removes nf_nat_core.h which breaks wireguard 20190123.
+> 
+>     commit d2c5c103b1337f590b7edf1509a6e294bdf22402
+>     Author: Florian Westphal <fw@strlen.de>
+>     Date:   Tue Feb 19 17:38:27 2019 +0100
+> 
+>         netfilter: nat: remove nf_nat_l3proto.h and nf_nat_core.h
+> 
+> 
+> Version 20190406 of wireguard fixes this.
+> 
+> Will a patch to upgrade the wireguard version on the warrior branch be
+> accepted?
 
-    commit d2c5c103b1337f590b7edf1509a6e294bdf22402
-    Author: Florian Westphal <fw@strlen.de>
-    Date:   Tue Feb 19 17:38:27 2019 +0100
+IMHO backporting the fix would be more appropriate for warrior.
 
-        netfilter: nat: remove nf_nat_l3proto.h and nf_nat_core.h
+And wireguard should be fixed or upgraded on master before this gets 
+fixed in warrior.
 
+cu
+Adrian
 
-Version 20190406 of wireguard fixes this.
+-- 
 
-Will a patch to upgrade the wireguard version on the warrior branch be
-accepted?
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
