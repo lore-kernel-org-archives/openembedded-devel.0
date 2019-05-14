@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
-	[209.85.167.66])
-	by mail.openembedded.org (Postfix) with ESMTP id F3CA96D666
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CFC360102
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 18:08:00 +0000 (UTC)
-Received: by mail-lf1-f66.google.com with SMTP id c17so5285903lfi.2
+	Tue, 14 May 2019 18:26:35 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id f1so12656294lfl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 11:08:02 -0700 (PDT)
+	Tue, 14 May 2019 11:26:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=rVV+HW7w+QGc9EWjzvZ6lronh4BcdjWXi9ibCqfxuJY=;
-	b=2En4sM0occCdjToBPzRLuZCfhodKERrTb4PLa6C8iw+D8LwNJ4KqARodoS1eXCqsVC
-	FAn6WJj7EGXIwZD43q+Co89J/lD/1uGJKF9MDxHyKQQw5ei6l61Wa778a1Ss550D+4e5
-	OSPiE/7R0nMi98w1LDsVL7Kj/KTIRKZCNwboPg9VD6jdbqwIS92wjmXZ0j0nfQHWwRnP
-	13MwSak7zNXr3PxyzPUr7Uz/bE2Vx/0yMNP15LFbhSRB3XtziGzpDx7Pva3V115Alwpc
-	26YjptRSj/s8BdnVb9lZt6I5063Ox3ulLgltqt10IP4vBsQm7Jg2VKfV8yLo75sM5P+o
-	D18Q==
+	bh=R3VuDz6028D41tWPZfiRmikKpputrsxXQRLFwgoUBLw=;
+	b=B/nBQeSBSAQiSADv4lU6VnO3QF4tYvXNezQMnR4qr6PYKlAbZsvzUOrIzeTMKz5Sl9
+	Z4ly/CxralUXHQqUbNEIAEg3wwKidpuyGg7SnLr9h7fAIopP6Fgy1/7cWb8OCP24ehUw
+	aErWHi+EUp3UuJFHBUMu8vq8V1qDBnTPbPK5e2xhBNEcfPyA6n8F096NIWw2SwLp8HLQ
+	GAuuFuJQ/RjtA3NWgOaiWib7f5I/3K5PNjg2QjvlSvvujzhxdZVhsJMK79lXxcdvfcBe
+	sNWKjQT5jq0pcpHdoeeBLXLXgfhlWi4mNevTcd0EV/KBmu4wwlVOy6y3srDGu6NgPngk
+	wzvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rVV+HW7w+QGc9EWjzvZ6lronh4BcdjWXi9ibCqfxuJY=;
-	b=KWMAyD14OsxlICG0h3URz3+yDJFWR5TZkc4HxZCoiRMXaqfH8tVCo9MsfEHyDoz/3h
-	wtMFjqKgnUySnroShQqTJuUPer4O3gJn8DBjNbuPt1UNwK2S67g64luVIsUGh7L331cZ
-	BIT5lwXeFeKDufty5cUBnyugf+HDJllsH0j9Fpd9TzC0H3YxQYagrnA+I16bUI4/J9zl
-	8xyqNRT4U3yJ4W2r6MQx0omDPLyke0SemLGcPnspkB3HVyHqveN0OXYB6fMS7zp0Azqj
-	/GjLNyagb+PItArV65ewEkIU28Mnei5mvz1BBwGxYcuSO7P18nkNllmfdsJ3BZ1wyqc9
-	Xufg==
-X-Gm-Message-State: APjAAAX8NdYV2NxXweUC78+uThkV6TFzcMl8C+XR/LKmzWOCu/Gaw0ip
-	6QfuFuGkQxVCG+i6pHxLXKvI2t/Mo7Q=
-X-Google-Smtp-Source: APXvYqzMB4kFto0t0fLXimEwvtTFct0VcLOEO8nHcABLH39qDU6BaWJF0ckqqqpkwQa2yRj64H7Bpw==
-X-Received: by 2002:a19:4acf:: with SMTP id x198mr17447232lfa.7.1557857280958; 
-	Tue, 14 May 2019 11:08:00 -0700 (PDT)
+	bh=R3VuDz6028D41tWPZfiRmikKpputrsxXQRLFwgoUBLw=;
+	b=iqHJnQlRNS0wHXd1EKTJdsaaOPA1Ycghs7r2JY+52XXhgUipV4LLB3rH1O9cA5Dpl/
+	9x0fA8M3GE8qT811aErdZGf379hAiyaVRn3VIdZkV7alzdXTtclpwiRh4Iqs+1eedjaN
+	54Woojdq5xLRHCSLIOXci1uApWgXfK0+ErRxlZUDjWr8ReN9ySkF4vvYAaoeeUJAf4+y
+	FzKMNNneDsIUAPdSKlNXZaDYbrT+hU1FrDDG3fUEPghjieh75u+kgMPjEe1SSmvwBYSO
+	TuuzIth24eVxz8hjtUgxvqQwZIm12O0d6ak+DI209hKJif+zDKCfT6bsPQ1okvbZtU0D
+	Y4Fg==
+X-Gm-Message-State: APjAAAWi3/S0IL0gf1l09YyAtghqVIjL32NB6lW4/meZnEbf90kQu8KJ
+	thvz10UUy02dTOyXZygMVoFZ6L7/K6E=
+X-Google-Smtp-Source: APXvYqyJhOvFZikXN2h9IxohTbeGUO33zzKWAAJQdxvDxwiribp0ytKgJ40gWSWGh/LlwDf2LJuseg==
+X-Received: by 2002:a19:5507:: with SMTP id n7mr18664649lfe.140.1557858395612; 
+	Tue, 14 May 2019 11:26:35 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	123sm4575418lfb.81.2019.05.14.11.07.59
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id q9sm3948373lfn.88.2019.05.14.11.26.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 May 2019 11:08:00 -0700 (PDT)
+	Tue, 14 May 2019 11:26:35 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 May 2019 20:07:58 +0200
-Message-Id: <20190514180758.21446-1-open.source@oleksandr-kravchuk.com>
+Date: Tue, 14 May 2019 20:26:32 +0200
+Message-Id: <20190514182632.18358-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] znc: update to 1.7.3
+Subject: [PATCH][meta-networking] pure-ftpd: update to 1.0.47
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,35 +56,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2019 18:08:03 -0000
+X-List-Received-Date: Tue, 14 May 2019 18:26:35 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-networking/recipes-irc/znc/{znc_git.bb => znc_1.7.3.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-networking/recipes-irc/znc/{znc_git.bb => znc_1.7.3.bb} (93%)
+ ...coded-usr-local-includes-from-configure.a.patch | 14 ++++++--------
+ .../pure-ftpd/pure-ftpd/nostrip.patch              | 13 ++++++-------
+ .../{pure-ftpd_1.0.42.bb => pure-ftpd_1.0.47.bb}   |  9 ++++-----
+ 3 files changed, 16 insertions(+), 20 deletions(-)
+ rename meta-networking/recipes-daemons/pure-ftpd/{pure-ftpd_1.0.42.bb => pure-ftpd_1.0.47.bb} (67%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_1.7.3.bb
-similarity index 93%
-rename from meta-networking/recipes-irc/znc/znc_git.bb
-rename to meta-networking/recipes-irc/znc/znc_1.7.3.bb
-index 728ef8746..b7d46af6f 100644
---- a/meta-networking/recipes-irc/znc/znc_git.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.7.3.bb
-@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+index 76523fb99..16a611e3c 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+@@ -1,4 +1,4 @@
+-From 1bafadf2502334a3e972ff667061469316d0d2ca Mon Sep 17 00:00:00 2001
++From a45e086661a3eed29193546c525998d7525ef6d9 Mon Sep 17 00:00:00 2001
+ From: Tudor Florea <tudor.florea@enea.com>
+ Date: Tue, 4 Aug 2015 02:46:39 +0200
+ Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
+@@ -7,17 +7,18 @@ Upstream-Status: Inappropriate [config]
  
- DEPENDS = "openssl zlib icu"
+ Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+ Signed-off-by: Tudor Florea <tudor.florea@enea.com>
++
+ ---
+  configure.ac | 12 ------------
+  1 file changed, 12 deletions(-)
  
--PV = "1.7.1"
+ diff --git a/configure.ac b/configure.ac
+-index 6c78e8c..851d45d 100644
++index 3a4209b..695ce68 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -100,18 +100,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
+- python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
+- AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
++@@ -91,18 +91,6 @@ AX_CHECK_LINK_FLAG([-Wl,-z,relro], [LDFLAGS="$LDFLAGS -Wl,-z,relro"])
++ AX_CHECK_LINK_FLAG([-Wl,-z,now], [LDFLAGS="$LDFLAGS -Wl,-z,now"])
++ AX_CHECK_LINK_FLAG([-Wl,-z,noexecstack], [LDFLAGS="$LDFLAGS -Wl,-z,noexecstack"])
+  
+ -if test -d /usr/local/include; then
+ -  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+@@ -34,6 +35,3 @@ index 6c78e8c..851d45d 100644
+  CPPFLAGS="$CPPFLAGS -D_FORTIFY_SOURCE=2"
+  
+  dnl Checks for header files
+--- 
+-1.9.1
 -
- SRC_URI = "git://github.com/znc/znc.git;name=znc \
-            git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
-           "
--SRCREV_znc = "c426898b3a1b899dfe8a8b2a3eeb4b18d8be1bf2"
-+SRCREV_znc = "be1b6bcd4cafbc57ebc298d89a5402ae7df55a8a"
- SRCREV_Csocket = "e8d9e0bb248c521c2c7fa01e1c6a116d929c41b4"
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+index 4cb33bc5c..32d714f6f 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+@@ -1,7 +1,8 @@
+-From 0290bd6f4ceddff2c52dff833c9d31d24de7d0e1 Mon Sep 17 00:00:00 2001
++From 79fd22c0def26eba130db98e312bb00fec32ac0a Mon Sep 17 00:00:00 2001
+ From: Tudor Florea <tudor.florea@enea.com>
+ Date: Tue, 4 Aug 2015 03:07:01 +0200
+-Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is specified
++Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is
++ specified
  
- # This constructs a composite revision based on multiple SRCREV's.
+ We especially don't want stripping enabled.
+ 
+@@ -9,15 +10,16 @@ Upstream-Status: Inappropriate [config]
+ 
+ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Signed-off-by: Tudor Florea <tudor.florea@enea.com>
++
+ ---
+  configure.ac | 2 --
+  1 file changed, 2 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 851d45d..dc410a1 100644
++index 695ce68..0f28b55 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -423,8 +423,6 @@ AC_ARG_WITH(minimal,
++@@ -414,8 +414,6 @@ AC_ARG_WITH(minimal,
+      AC_DEFINE(NO_FTP_USERS)
+      AC_DEFINE(WITHOUT_ASCII)    
+      AC_DEFINE(BORING_MODE)
+@@ -26,6 +28,3 @@ index 851d45d..dc410a1 100644
+    fi ])
+  
+  AC_ARG_WITH(paranoidmsg,
+--- 
+-1.9.1
+-
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.47.bb
+similarity index 67%
+rename from meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
+rename to meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.47.bb
+index e5c561646..43be44ea3 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.42.bb
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.47.bb
+@@ -3,20 +3,19 @@ DESCRIPTION = "Pure-FTPd is a free (BSD license), secure, production-quality and
+ HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
+ SECTION = "net"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=90352fb2bfe17f4261687a0d6e09f489"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0595b4261a04bc2d27f30b9c90796c1f"
+ 
+ DEPENDS = "libcap virtual/crypt"
+ 
+-
+ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
+            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
+            file://nostrip.patch \
+ "
+-SRC_URI[md5sum] = "4195af8f0e5ee2a798b1014071dae3a3"
+-SRC_URI[sha256sum] = "7be73a8e58b190a7054d2ae00c5e650cb9e091980420082d02ec3c3b68d8e7f9"
++SRC_URI[md5sum] = "f000e519918682ee6b65090352177d4a"
++SRC_URI[sha256sum] = "4740c316f5df879a2d68464489fb9b8b90113fe7dce58e2cdd2054a4768f27ad"
+ 
+ inherit autotools
+ 
+ EXTRA_OECONF = "--with-minimal"
+ PACKAGECONFIG[libsodium] ="ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
+-                       ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
++                           ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
 -- 
 2.17.1
 
