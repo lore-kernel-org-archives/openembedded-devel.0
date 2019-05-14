@@ -1,34 +1,50 @@
-Return-Path: <ml@calgera.com>
-X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 May 2019 14:11:59 UTC
-Received: from t4v1.calgera.eu (t4v1.calgera.eu [80.208.226.141])
-	by mail.openembedded.org (Postfix) with ESMTP id F0C667DED6
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 76DD67DF23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 14:11:59 +0000 (UTC)
-Received: from [10.227.138.157] (unknown [193.136.33.117])
-	by t4v1.calgera.eu (Postfix) with ESMTPSA id 7FB12CB4FDF6
+	Tue, 14 May 2019 14:49:47 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id w33so23264359edb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2019 15:06:51 +0100 (WEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=calgera.com; s=mail;
-	t=1557842814; bh=ylSRUPBpbj6t4lTdUOwLtFkmIWMvQxvwI6NywLKFWwU=;
-	h=To:From:Subject:Date:From;
-	b=JDIMqAz8tkypmHQCy+5Gc437MtmBj5srgGHyE9UemJGI+htFijPC+1FK7/gESN54V
-	RR5NomK80sQqAeVIgQhbbBMtiZdHvZI7bw/GdRpmHQZ0z7s1ypbnII0q+GCl4D8CV7
-	ZNUl3soLiwrmb+rte/0RducT0zgdHeseEyOwGabxJsEeLEW+P+cmNkqnZnbetE0knd
-	Uqh7Tm8R1TCAnKpQZqC1MHCGalwVcHfSbKDNhkr0A2U16pdBJRFQ+ClAmTGrNOPPCP
-	VGYjqU2eYUrxv61YwZQU0MgLwxMlxUixr8f1U0CVGgjLxB90/dlDJ2mp3szNF6RzYx
-	J2lDft6Ff7Zig==
+	Tue, 14 May 2019 07:49:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=eIZ2svRhpSuUxLs8waZPmOQm9du9V9VzGx18PLVVzpI=;
+	b=vpB0suA0Z59r6b1+efThvIKSqhmTslMqEGRCmiH1C4RnpAQszpolprG79inK5Peuai
+	eNkVIdyKEIk+K/gdOUPpzrXMWljiOsqy3SRM/uLCtv2+LjWZS5kZ565ZkBs6DagPnrcX
+	EH8SZhOA/EsWelHEi7bv97iTM3dOq2sSkbZqRIhdonYSA/aGEuZN+h1HS4+1FKIkOU31
+	jrJKvec0yqY0VgUxNGqZtvuQXohY1gicUE0HwVqaDdiQEJDrD4M95ro9iCbqx6MTVECC
+	XDu1Euf0XMWRd264XQQWUYDh4L9UCe7OxZo0dU5lEhJcje1jkKxqrR9LA8EN4YM8KYog
+	5D6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eIZ2svRhpSuUxLs8waZPmOQm9du9V9VzGx18PLVVzpI=;
+	b=ijmLXgA5z5qQQeQSP8l5dnm8SMBoknSFSTVJF46QFa0sz52Z1Fs5GlwQZsPEsgEeXO
+	XvUFm2vmdV03gNf8IFuf7/TnRGGKLyPVBt6WOF7wxkFEaE4m/Pc4ZSWKlAhB/VPzt4Xp
+	ispFTHzQv2G3GwZNZmtb/bgOTjQYAm+d6/tdPf0JU9ypnS6nu+Gw6/FAo/5Dg0jLGaA2
+	KXghqRXvSuHxWLCgnAYNRTWWvH2Y5tfJjseHQaXUHG6i1JQAzKLWwzJBlgykCyqqdJiu
+	D0qRC6i0HKhSDjpSYn797WpGpy+i/xxqV/NXesfzB9/bHjZiULUYR+NNR7Oy8M7H21Fb
+	DERA==
+X-Gm-Message-State: APjAAAUIdCtnYO826lW2eECQCa+oioGvgFdK3EvaawaYzH8bFM/IbcjZ
+	9Nl2NdiYq25s+laCAXWW+LJhfMWeGz8=
+X-Google-Smtp-Source: APXvYqwO98jf2/8WWNaiTNTGdKCMeC3iLFKf1eQRgp9FyslwIPbvngnumkHu+HnfX/j9zKxmhBUieg==
+X-Received: by 2002:a17:906:1f51:: with SMTP id
+	d17mr27906890ejk.290.1557845387712; 
+	Tue, 14 May 2019 07:49:47 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id m16sm771828ejj.57.2019.05.14.07.49.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 May 2019 07:49:46 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-From: Renato Caldas <ml@calgera.com>
-Message-ID: <ba83285c-2a1f-b8be-dcb0-b9a3e3574dca@calgera.com>
-Date: Tue, 14 May 2019 15:06:49 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-MIME-Version: 1.0
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.1
-X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on t4v1.calgera.eu
-Subject: icedtea-7-native stringop-overflow error
+Date: Tue, 14 May 2019 16:49:43 +0200
+Message-Id: <20190514144943.23731-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] ell: remove recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,40 +57,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2019 14:12:00 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 May 2019 14:49:48 -0000
 
-Hi,
+ELL is now part of openembedded-core.
 
-I'm having trouble building icedtea-7-native on warrior, here's the 
-relevant error:
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ meta-oe/recipes-core/ell/ell_0.17.bb | 17 -----------------
+ 1 file changed, 17 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/ell/ell_0.17.bb
 
-| 
-/(...)/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/hotspot/src/share/vm/adlc/dfa.cpp:546:16: 
-error: ‘char* strncpy(char*, const char*, size_t)’ specified bound 
-depends on the length of the source argument [-Werror=stringop-overflow=]
-|          strncpy(shared_pred_loc, shared_pred_var, 
-strlen(shared_pred_var));
-| ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-There was a previous attempt at silencing a similar warning in commit 
-f83992acbe737a1d8cc87e73c8983b7fa2f64a1b of meta-java, except for the 
-format-overflow warning.
-
-I'm not sure how to approach this, whether to just silence the warning 
-or try to fix it somehow. Any help would really be appreciated!
-
-
-BTW I just posted this question at the yocto mailing list, but have 
-since realized it was probably the wrong list. Sorry for the repost.
-
-
-Cheers,
+diff --git a/meta-oe/recipes-core/ell/ell_0.17.bb b/meta-oe/recipes-core/ell/ell_0.17.bb
+deleted file mode 100644
+index 27f11cfbe..000000000
+--- a/meta-oe/recipes-core/ell/ell_0.17.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-SUMMARY  = "Embedded Linux Library"
+-DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
+-LICENSE  = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+-SECTION = "libs"
+-
+-inherit autotools pkgconfig
+-
+-S = "${WORKDIR}/git"
+-SRCREV = "ebc021cee3b2d20ca2af5e3ed02495da616b2fd3"
+-SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
+-
+-do_configure_prepend () {
+-    mkdir -p ${S}/build-aux
+-}
+-
+-DEPENDS = "dbus"
 -- 
-Renato Caldas
-Calgera, Unipessoal Lda.
-Email: renato@calgera.com
-Tel: +351 967 709 735
+2.17.1
+
 
