@@ -1,54 +1,55 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 47F966025F
+Return-Path: <oobitots@cisco.com>
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+	by mail.openembedded.org (Postfix) with ESMTP id A509C7DF22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 11:29:19 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id r7so2922701wrr.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 04:29:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=9sN8xz4tlvNoqkElH6tv6cEeHfCX4H6SjSp6G2isNKo=;
-	b=LRnSb58WY1vLb//e65QTAOyEHoiojAFht7wUPtRBIEF6tl2Fca8ozEqpnyKcZmIEgu
-	d5r2JrfxpyNVUy+/hgxiTc0rMZok1zRaE+XOyzQGQfDZ4aKK0FTDLiwAIsK1A+UnZoFc
-	p1ms9vdnt+91hg0AbzdrcfyXJjJ68DNpJ+wl+9KVGFaQ5p9OoqX4F3SfwNkXK3ajrZP2
-	BxxdUeZ25bDvqaFcsEgdJPLLXk5DuNj12mAjlcfckqrbUIZ5sqlfmX7MmMMPWGIgQ7Uv
-	aM1x4XwHN2E5L4gvlx8nuotVEyzm8IoGk4BX+kK50at7rJayoHaTVMk2Z6eDyhrI3Gu0
-	I0wQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=9sN8xz4tlvNoqkElH6tv6cEeHfCX4H6SjSp6G2isNKo=;
-	b=lGzlP2jsR6m36ehYKOJmEgLJco82nH6QRXQ0C3DG93IyX2Co332Yrxz416OgvZmLK1
-	WDr3TAf8e3wkvHCvTa/LTjhDOqMpt4w7lxhNoG6BtRTzK3HF7o0PLkP1nj7RIkJpIMjQ
-	cjsHx7OnD+PvPEAsUIIQJczYd+s+mtt06JUAoYMj1qz9K9Ph+3u3KSY9CxjoBNJpohg/
-	V5C5NgINkZCUGsFNCdYSGve0lM2ZYmwMwIKgNLOl8POy3VKbKQNvkWmkm2fb0lYZJb1T
-	QZrEkWEPW1zzG6WjdZXzTGifvSjjAXBsC5hRTe2tgisz4CYCAkEHvPWuNt6tkk01el6P
-	kluQ==
-X-Gm-Message-State: APjAAAV4zKVhrheVoMPPYMT+u3sNSBcnxBgIBM9E0O4fdqw8kgT2SGir
-	2roTOGGD4P0StvzZwFP9NA3Nb8W1
-X-Google-Smtp-Source: APXvYqwmNCzIloACLSY6vle5Ll5Hq/c8ot/7TVLWcaHkUCKhej2dGph/SdlNXqenBv9aClpUJbnsRQ==
-X-Received: by 2002:a5d:6a81:: with SMTP id s1mr30088263wru.85.1558006159926; 
-	Thu, 16 May 2019 04:29:19 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id x5sm5641285wrt.72.2019.05.16.04.29.18
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 May 2019 04:29:18 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 16 May 2019 13:29:20 +0200
+	Thu, 16 May 2019 11:43:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=515; q=dns/txt; s=iport;
+	t=1558007002; x=1559216602;
+	h=from:to:cc:subject:date:message-id:references:
+	content-transfer-encoding:mime-version;
+	bh=kcuniKvg6rZ+dreIl0YkRBgi0etyOuXErKqs65MhWMo=;
+	b=X9PIuFcOZhLC6QWeXLt8AlcxkvGDgqpi/qxYnjm/+ZdTGJm6e+oTCc1t
+	L0opbswUrboKEuxkuJXUZAz6021dEE0OSOXN1bMhU6UgGt6sdNpcRwHw/
+	hEdqyy7fkPp3Sc2ri0elUwU7d6Gx+Vdmgt4c+9UWpYkFEL6k5G01IX7XT w=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0D0AgBzTN1c/5BdJa1kHAEBAQQBAQc?=
+	=?us-ascii?q?EAQGBZYIRgT0wMpkcmk4JAQEBDAEBLwEBhECCMCM4EwEDAQEEAQECAQRtKIV?=
+	=?us-ascii?q?LAQU6PxACAQgYHhAyJQIEDg2FJa0TijOBM4tPF4F/g241PoREhWIEp1kJAh2?=
+	=?us-ascii?q?BbJJWI4IEAZNpoT4CERWBMDYhgVdwFYMokFBBj3+BIQEB?=
+X-IronPort-AV: E=Sophos;i="5.60,476,1549929600"; d="scan'208";a="273573876"
+Received: from rcdn-core-8.cisco.com ([173.37.93.144])
+	by alln-iport-5.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA;
+	16 May 2019 11:43:21 +0000
+Received: from XCH-ALN-008.cisco.com (xch-aln-008.cisco.com [173.36.7.18])
+	by rcdn-core-8.cisco.com (8.15.2/8.15.2) with ESMTPS id x4GBhLSM013644
+	(version=TLSv1.2 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 16 May 2019 11:43:21 GMT
+Received: from xch-rcd-007.cisco.com (173.37.102.17) by XCH-ALN-008.cisco.com
+	(173.36.7.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+	Thu, 16 May 2019 06:43:20 -0500
+Received: from xch-rcd-007.cisco.com ([173.37.102.17]) by
+	XCH-RCD-007.cisco.com ([173.37.102.17]) with mapi id 15.00.1473.003;
+	Thu, 16 May 2019 06:43:20 -0500
+From: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
 To: Adrian Bunk <bunk@stusta.de>
-Message-ID: <20190516112920.GA1400@jama>
-References: <20190516070624.27975-1-Martin.Jansa@gmail.com>
-	<20190516072441.GA7938@localhost>
+Thread-Topic: [oe] [meta-oe][PATCH] protobuf: Fix ptest compilation
+Thread-Index: AQHVC8VVzXsD9DBvQEuUegAB/ZO3HQ==
+Date: Thu, 16 May 2019 11:43:20 +0000
+Message-ID: <c01e469bd1394e4eba8cbab4c651902c@XCH-RCD-007.cisco.com>
+References: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
+	<20190516112315.GA17876@localhost>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.63.15.143]
 MIME-Version: 1.0
-In-Reply-To: <20190516072441.GA7938@localhost>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/3] gtkwave: add distro_features_check
+X-Outbound-SMTP-Client: 173.36.7.18, xch-aln-008.cisco.com
+X-Outbound-Node: rcdn-core-8.cisco.com
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf: Fix ptest compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,78 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 11:29:19 -0000
-X-Groupsio-MsgNum: 77575
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EeQfGwPcQSOJBaQU"
-Content-Disposition: inline
-
---EeQfGwPcQSOJBaQU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 May 2019 11:43:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 16, 2019 at 10:24:41AM +0300, Adrian Bunk wrote:
-> On Thu, May 16, 2019 at 07:06:22AM +0000, Martin Jansa wrote:
-> > * fixes:
-> > ERROR: Nothing PROVIDES 'gtk+' (but /OE/build/luneos-warrior/webos-port=
-s/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPE=
-NDS on or otherwise requires it)
-> > gtk+ was skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES
-> > ERROR: Required build target 'meta-world-pkgdata' has no buildable prov=
-iders.
-> > Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gt=
-kwave', 'gtk+']
-> >=20
-> > and
-> >=20
-> > ERROR: Nothing PROVIDES 'tk' (but /OE/build/luneos-warrior/webos-ports/=
-meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPEND=
-S on or otherwise requires it)
-> > tk was skipped: missing required distro feature 'x11' (not in DISTRO_FE=
-ATURES)
-> > ERROR: Required build target 'meta-world-pkgdata' has no buildable prov=
-iders.
-> > Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gt=
-kwave', 'tk']
-> >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >=20
-> > diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-=
-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> > index 60df6f773b..b9aae0f6c8 100644
-> > --- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> > +++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-> > @@ -14,6 +14,10 @@ inherit pkgconfig autotools gettext texinfo
-> >  DEPENDS =3D "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf g=
-lib-2.0"
-> >  RDEPENDS_${PN} =3D "tk-lib"
-> > =20
-> > +# depends on gtk+ which has this restriction
-> > +inherit distro_features_check
-> > +ANY_OF_DISTRO_FEATURES =3D "${GTK2DISTROFEATURES}"
-> >...
->=20
-> Shouldn't this be x11 (without the directfb alternative)
-> due to tk?
+It was clang 4.0.0=0A=
+=0A=
+Regards,=0A=
+Oleksiy=0A=
+=0A=
+On 16.05.19 14:27, Adrian Bunk wrote:=0A=
+> On Thu, May 16, 2019 at 08:57:04AM +0000, Oleksiy Obitotskyi -X (oobitots=
+ - GLOBALLOGIC INC at Cisco) via Openembedded-devel wrote:=0A=
+>> Tests require c++11 support, so add -std=3Dc++11=0A=
+>> to compiler flags.=0A=
+>> ...=0A=
+> What compiler are you using to compile for your target?=0A=
+>=0A=
+> The description sounds as if it would be gcc < 6.=0A=
+>=0A=
+> cu=0A=
+> Adrian=0A=
+>=0A=
+=0A=
 
-Makes sense, will send v2, thanks.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---EeQfGwPcQSOJBaQU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXN1JjwAKCRA3VSO3ZXaA
-HDmZAJ9QHB19EgQYi5H3jHHkYQ4fflp3zACgjVdrIeurPsFiSezsRh7Pl3xKH/I=
-=FsjW
------END PGP SIGNATURE-----
-
---EeQfGwPcQSOJBaQU--
