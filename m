@@ -1,47 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A6CA7D86E
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C0627D86E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 07:06:27 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id 7so2251029wmo.2
+	Thu, 16 May 2019 07:06:28 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id 7so2251079wmo.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 00:06:28 -0700 (PDT)
+	Thu, 16 May 2019 00:06:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=+bNkW4ypkV0AFYJH1IR54qAorWg6XXxE6y/M292P4nA=;
-	b=Dh127LliPJwhu5lik+Nr7QfItCvJzrGVM/53Sur4XxJ46Qdm7Pc6VVDNjZLDf5aZYM
-	ACLt8bSV8ytChos22xXKHRJgbNTDuV6108432tFakJpCYjCi80nPpYmdAI4c7Zusls7W
-	Fs3UD7qOzVJOFYfVP7kDBvo/YafkA8ASUDO7jIttQ/TxM7kpwtBxKyE/g+nPa1gYwX4I
-	P5KJhtKfbC/gsERYYvAS2jJjJOJP7PhrqD9Ku/61LxeU2K49d1aGyeB5IjvLiSLmXBen
-	9Xn985klrUdYoXaqCDc7hlTm5vYDgSix+VEd4B9ZTbvhXQDGk3xooPFcqgvF7SSb7f5y
-	09+Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=r26rA52NKkfvQAu/ADyXd8dMVO/E6J/BcF9tW8mbs3M=;
+	b=bbiaFHoJTqtgFe0qw/QbQsy88I4vRkSBPQFEXJtf7NSwv0vPkYHdcyNYZ1+Z/amiMv
+	EcSDUdZZp+0fBZca0tRYbqRWcBC7zvSp0SwZlYNVMS1GN56x2WxhgdtyObv+m1xcxkdb
+	NXzZ6Sn041YJqmN4Lvbysxq4wR4lkJmbeDDa5u0iJRFPB2Cd32jjiEhtnjyNUH2K2Yl7
+	F2LN/L/QvSs0Xcbf8zDgCl4ZKJ0mrxAWyhqB2k6c0SkpruKm0O9h8+mczawCh48wWAsL
+	k0BBM3L+s562kfjuuftn0nLaRolKEcRLxXDiXgsRPyoerR9cDOthAgw2P1tmuz6WsoJC
+	C2WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+bNkW4ypkV0AFYJH1IR54qAorWg6XXxE6y/M292P4nA=;
-	b=jUG0ASQe6NM1I2y6wOwkzCZnz9Q6v18/i1dxzbUdpsUKAmNd5lX4If5P8oWkV5190t
-	GlgLsOlrBqoLI3tvPb6vupdaFXymWYHg+/8X0TBERhR63IHLv8drnT/o8mjvq4PlmrLW
-	EGkea07Qrso+vyNVIMiIJ08cvTPtjTWAPI7HdIStIb5dWMCKB0LR/qq+zVWITPGi/gRF
-	qD+PUY2um2tYoOkZRGDp5YlR9MPjsMrydYPqOBx9VUUO4kVbCQsYAGw8DeIsyg37qi+1
-	W2/5USSW0p7W3D49OBPKvAAlXGbexb96DxjB7DePxP7TeZG1Ttw9J2cwDLVQE2zAXVab
-	Qd+w==
-X-Gm-Message-State: APjAAAUt93XaH5VU8jC1fNOSqsqVjJD2E4mNAQL7gXBqV6ZP6BxiCGkc
-	9u7ZelSIwX+vayvPU9hlBopxWxUr
-X-Google-Smtp-Source: APXvYqwYn12erV0aDrsV7G1ihKsmvy6lQR7EG+DAlPbqyxEeFIWK144dXF+w7Ue/nu1BRKv4Lry2Ww==
-X-Received: by 2002:a1c:3cc2:: with SMTP id j185mr26569939wma.26.1557990387896;
-	Thu, 16 May 2019 00:06:27 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=r26rA52NKkfvQAu/ADyXd8dMVO/E6J/BcF9tW8mbs3M=;
+	b=Wc+uLsLWDHT6APZnfDnk0a/WvKovHW6bgFCtqo51i0B6Nu6z7IGQFMsxD6Ha9Z9lx3
+	1rO4AFShXw9Kr4wGiGAwnLmsG3shHiIgy0GxSl7exf12SF9a2OgYrYdGsTmIrT+a1pyD
+	19hs8w0/zSb1PtT5z5q5a508tP8TJrDHu4cXuH46nIDYSGlHUJWhlnEhJzkgApQIRXBq
+	CekodTjOJ2aRGk/sxCI9m2qebL0NgC54AMa2HryyjKIfy6QpDPdiLB+xobbAbSWF8pEV
+	fgR656HLoHDdB+JYT4M1mNkuzsHjdBgXPU0Q6NN3t/fGUb16OqYsD1hHhsDnstikotql
+	fLgg==
+X-Gm-Message-State: APjAAAUiSCr6UqZ0PA9WnOgRtSfXFHxOtEbrzIzGguBUJR5EJnkUGtj2
+	UPn9Fa0Ey4mg/XiYDjVWsPIReYGH
+X-Google-Smtp-Source: APXvYqyEwTgEzDl72wZT+cOVeNpfcW/WgheufbSq0juoDP5KaVP7VwJqpWIpbAwjXAB3Qr0ls3dMQg==
+X-Received: by 2002:a1c:414:: with SMTP id 20mr24977006wme.84.1557990388974;
+	Thu, 16 May 2019 00:06:28 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id o6sm7307070wrh.55.2019.05.16.00.06.26
+	by smtp.gmail.com with ESMTPSA id 7sm5187185wro.85.2019.05.16.00.06.28
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 May 2019 00:06:27 -0700 (PDT)
+	Thu, 16 May 2019 00:06:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 May 2019 07:06:22 +0000
-Message-Id: <20190516070624.27975-1-Martin.Jansa@gmail.com>
+Date: Thu, 16 May 2019 07:06:23 +0000
+Message-Id: <20190516070624.27975-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/3] gtkwave: add distro_features_check
+In-Reply-To: <20190516070624.27975-1-Martin.Jansa@gmail.com>
+References: <20190516070624.27975-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/3] ndctl: make MACHINE_ARCH and ignore from libblockdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +57,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 07:06:27 -0000
+X-List-Received-Date: Thu, 16 May 2019 07:06:28 -0000
 
 * fixes:
-ERROR: Nothing PROVIDES 'gtk+' (but /OE/build/luneos-warrior/webos-ports/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPENDS on or otherwise requires it)
-gtk+ was skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gtkwave', 'gtk+']
+ERROR: libblockdev different signature for task do_configure.sigdata between hammerhead and mako
+Hash for dependent task libblockdev/libblockdev_2.20.bb.do_prepare_recipe_sysroot changed from bee357e6fd2c8479c9dbf9ccef6f30c416df1eb608b53a775383069a4215286b to 23a2ff7864fbd6d38b77918829651cff8d009702894ee670fab145c520d05be8
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-extended/libblockdev/libblockdev_2.20.bb.do_prepare_recipe_sysroot with hashes bee357e6fd2c8479c9dbf9ccef6f30c416df1eb608b53a775383069a4215286b or 23a2ff7864fbd6d38b77918829651cff8d009702894ee670fab145c520d05be8
 
-and
+ERROR: ndctl different signature for task do_configure.sigdata between hammerhead and mako
+Hash for dependent task ndctl/ndctl_v63.bb.do_prepare_recipe_sysroot changed from ea34e9d64a9f30c3ed898bd3850e43e95297dacc560732e1d6bdfa961a6b357b to f886d72844b05c99cd241b8402d760d2c02e0264bfc66503d1e8742815463b3c
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-core/ndctl/ndctl_v63.bb.do_prepare_recipe_sysroot with hashes ea34e9d64a9f30c3ed898bd3850e43e95297dacc560732e1d6bdfa961a6b357b or f886d72844b05c99cd241b8402d760d2c02e0264bfc66503d1e8742815463b3c
 
-ERROR: Nothing PROVIDES 'tk' (but /OE/build/luneos-warrior/webos-ports/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPENDS on or otherwise requires it)
-tk was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gtkwave', 'tk']
+$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/ndctl/*do_prepare*.sigdata*
+runtaskdeps changed:
+['autoconf/autoconf_2.69.bb.do_populate_sysroot:virtual:native automake/automake_1.16.1.bb.do_populate_sysroot:virtual:native bash-completion/bash-completion_2.8.bb.do_populate_sysroot gcc/gcc-cross_7.3.bb.do_populate_sysroot gcc/gcc-runtime_7.3.bb.do_populate_sysroot glibc/glibc_2.29.bb.do_populate_sysroot gnu-config/gnu-config_git.bb.do_populate_sysroot:virtual:native json-c/json-c_0.13.1.bb.do_populate_sysroot kmod/kmod_git.bb.do_populate_sysroot libtool/libtool-cross_2.4.6.bb.do_populate_sysroot libtool/libtool-native_2.4.6.bb.do_populate_sysroot', -linux/linux-lg-hammerhead_git.bb.do_populate_sysroot, +linux/linux-lg-mako_git.bb.do_populate_sysroot, 'ndctl/ndctl_v63.bb.do_fetch pkgconfig/pkgconfig_git.bb.do_populate_sysroot:virtual:native systemd/systemd-systemctl-native.bb.do_populate_sysroot systemd/systemd_242.bb.do_populate_sysroot']
+linux/linux-lg-hammerhead_git.bb.do_populate_sysroot with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
+ changed to
+linux/linux-lg-mako_git.bb.do_populate_sysroot with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
+Dependency on task linux/linux-lg-mako_git.bb.do_populate_sysroot was added with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
+Dependency on task linux/linux-lg-hammerhead_git.bb.do_populate_sysroot was removed with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
+
+$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/libblockdev/*do_prepare*.sigdata*
+Hash for dependent task ndctl/ndctl_v63.bb.do_populate_sysroot changed from 0d123eb0e330a9e34d199eb012da9ae2eb614063f9412725ef39a06b152341f1 to 40077996bc35ac047210928559ad692f4eb20e37b07ef675bf49c9c39c46fe1e
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-core/ndctl/ndctl_v63.bb.do_populate_sysroot with hashes 0d123eb0e330a9e34d199eb012da9ae2eb614063f9412725ef39a06b152341f1 or 40077996bc35ac047210928559ad692f4eb20e37b07ef675bf49c9c39c46fe1e
+
+as detected with:
+openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/conf/layer.conf                 | 6 ++++++
+ meta-oe/recipes-core/ndctl/ndctl_v63.bb | 3 +++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-index 60df6f773b..b9aae0f6c8 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-@@ -14,6 +14,10 @@ inherit pkgconfig autotools gettext texinfo
- DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
- RDEPENDS_${PN} = "tk-lib"
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 31f2f17fc8..507ac50eca 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -51,6 +51,12 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   phoronix-test-suite->php \
+ "
  
-+# depends on gtk+ which has this restriction
-+inherit distro_features_check
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
++# Depends on ndctl (through nvdimm PACKAGECONFIG) which depends on MACHINE_ARCH kernel
++# and making libblockdev MACHINE_ARCH is not an option as python3-blivet, udisks2, gvfs
++# would be MACHINE_ARCH as well
++SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
++  libblockdev->ndctl \
++"
+ # ttf.inc inherits fontcache which adds fontconfig-utils to RDEPENDS
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   terminus-font->fontconfig \
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_v63.bb b/meta-oe/recipes-core/ndctl/ndctl_v63.bb
+index 1f3abf5143..61e53029b3 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_v63.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_v63.bb
+@@ -19,6 +19,9 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+ 
++# Depends on MACHINE_ARCH kernel
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
- EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS}"
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+ PACKAGECONFIG[systemd] = "--with-systemd, --without-systemd, systemd"
  
- FILES_${PN} = "${bindir} ${datadir}"
 -- 
 2.17.1
 
