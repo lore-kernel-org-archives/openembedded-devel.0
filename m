@@ -1,56 +1,37 @@
-Return-Path: <oobitots@cisco.com>
-X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 16 May 2019 09:04:11 UTC
-Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
-	by mail.openembedded.org (Postfix) with ESMTP id 419456025F
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id DD0BA7D6B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 09:04:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1401; q=dns/txt; s=iport;
-	t=1557997452; x=1559207052;
-	h=from:to:cc:subject:date:message-id:
-	content-transfer-encoding:mime-version;
-	bh=p7+3SFqHhcrPFyctiAoP0r1f49+eMNWFnyhf1Bt3FzQ=;
-	b=XtvPiHvX8qQ/E65MuGWosNmpP6G/nqjJx29upnSTi6road4HQA7sZ0jY
-	asebwCboSF7Xh4VDU1Cj2ZTv+CHjtJwJrjulbF8ysrF2gnZwYuDjwzFrJ
-	d46BNOs5uh59qYCBO6hZTgGqr2oO5xZ0mYXoE6Pw8UMGoC1mxtPO6X26z k=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0BbAACDJN1c/4oNJK1kHAEBAQQBAQc?=
-	=?us-ascii?q?EAQGBUwUBAQsBghBpVDAoCrFugXsJAQEBDAEBHxABAYRAgi0jNgcOAQMBAQQ?=
-	=?us-ascii?q?BAQIBBG0dC4YLEQEtEgE+QicEDgUIgxuCCqxTg38BhjWBMwGLTheBf4RhiiY?=
-	=?us-ascii?q?Ep1kJAh2BbIYhjDUjghSTWow0gSKTaAIRFYEwJgkogVdwFYMnCZBIQTEBj02?=
-	=?us-ascii?q?BIQEB?=
-X-IronPort-AV: E=Sophos;i="5.60,476,1549929600"; d="scan'208";a="273479277"
-Received: from alln-core-5.cisco.com ([173.36.13.138])
-	by alln-iport-5.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA;
-	16 May 2019 08:57:05 +0000
-Received: from XCH-RCD-007.cisco.com (xch-rcd-007.cisco.com [173.37.102.17])
-	by alln-core-5.cisco.com (8.15.2/8.15.2) with ESMTPS id x4G8v59R025959
-	(version=TLSv1.2 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 08:57:05 GMT
-Received: from xch-rcd-007.cisco.com (173.37.102.17) by XCH-RCD-007.cisco.com
-	(173.37.102.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Thu, 16 May 2019 03:57:04 -0500
-Received: from xch-rcd-007.cisco.com ([173.37.102.17]) by
-	XCH-RCD-007.cisco.com ([173.37.102.17]) with mapi id 15.00.1473.003;
-	Thu, 16 May 2019 03:57:04 -0500
-From: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] protobuf: Fix ptest compilation
-Thread-Index: AQHVC8VVzXsD9DBvQEuUegAB/ZO3HQ==
-Date: Thu, 16 May 2019 08:57:04 +0000
-Message-ID: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.63.15.143]
+	Thu, 16 May 2019 11:23:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 454TYx5qbtz9m;
+	Thu, 16 May 2019 13:23:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558005798;
+	bh=pixpMtHiaQupz8yWQuPdXND8PyiDTQ9XKpMDSu2cuwk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=EmFyBFYJPRuqsAj3eZsKscAZdTW+RldosgF3jnD7M82uGU3oM83TfbN5KVOONQyRz
+	wT+Hot83LAl4shXLHorabOueOjeza+v3gx5K4RRnAaF/zSF7hRuQfiXz9UBhPqURpu
+	2/1jg93o8NoI4UcolXrn7L/q8ewQ41PPwAcrcLegsNrJtPc0XkOjOQX9H/RHlUcs96
+	kSzbTK/4XJlhKTwIxLSER9PV0pQaUbTbiZc3Gv1ymPvQBXz/1BaoMAVk289gTcG0/B
+	yA7ABchkTn0t+PsZ86SRlScOueHzuM4/OyjHaRtjXirund8fsSoogRE2DgGgGyPQrQ
+	4KZizobIbBh4CKmdVn8WIM8AMotS9pHzpREFZbpe1G6GwH9EKfpSn+WiGd5X6eXhTb
+	WZXiImB8NPravnu/baSQ/EftflrBVnr1WPV3aVU7K35nXcuz415DLrXGZ7ubtMVIX9
+	81XdlvUvn9fZf5nQ2atXKs/kmopHTUGuBVGdeNpwjuRTwO83ktgIZNSZGUh4yFq0Jb
+	qQTJQNJwHRHh8GqdyCJChRiyIODh5ZIb5EU6WgQHd43KJuyX2P/kuFB3ohLUMfvIzs
+	HjcwF4u8XJpIc5xzBvQEIJGt6p+i/rBl8E0+9pThGLIoVdEp5zZws1TyB/TacOyO44
+	VvftrUBbYdIvOR7cJDP0Ahug=
+Date: Thu, 16 May 2019 14:23:15 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
+Message-ID: <20190516112315.GA17876@localhost>
+References: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 173.37.102.17, xch-rcd-007.cisco.com
-X-Outbound-Node: alln-core-5.cisco.com
-Subject: [meta-oe][PATCH] protobuf: Fix ptest compilation
+In-Reply-To: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf: Fix ptest compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,43 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 09:04:11 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 May 2019 11:23:18 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Tests require c++11 support, so add -std=3Dc++11=0A=
-to compiler flags.=0A=
-=0A=
-Upstream-Status: Pending=0A=
-Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>=0A=
----=0A=
-meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb | 4 ++--=0A=
-1 file changed, 2 insertions(+), 2 deletions(-)=0A=
-=0A=
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb=0A=
-b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb=0A=
-index cf72d9ca7..4791e13ca 100644=0A=
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb=0A=
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb=0A=
-@@ -40,8 +40,8 @@ do_compile_ptest() {=0A=
-# which haven't been installed yet.=0A=
-cp "${B}/protobuf.pc" "${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-sed -e 's|libdir=3D|libdir=3D${PKG_CONFIG_SYSROOT_DIR}|' -i=0A=
-"${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-- sed -e 's|Cflags:|Cflags: -I${S}/src|' -i=0A=
-"${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-- sed -e 's|Libs:|Libs: -L${B}/src/.libs|' -i=0A=
-"${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-+ sed -e 's|Cflags:|Cflags: -std=3Dc++11 -I${S}/src|' -i=0A=
-"${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-+ sed -e 's|Libs:|Libs: -std=3Dc++11 -L${B}/src/.libs|' -i=0A=
-"${B}/${TEST_SRC_DIR}/protobuf.pc"=0A=
-export PKG_CONFIG_PATH=3D"${B}/${TEST_SRC_DIR}"=0A=
-# Save the pkgcfg sysroot variable, and update it to nothing so=0A=
-=0A=
--- =0A=
-2.19.1=0A=
-=0A=
-=0A=
+On Thu, May 16, 2019 at 08:57:04AM +0000, Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC at Cisco) via Openembedded-devel wrote:
+> Tests require c++11 support, so add -std=c++11
+> to compiler flags.
+>...
+
+What compiler are you using to compile for your target?
+
+The description sounds as if it would be gcc < 6.
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
