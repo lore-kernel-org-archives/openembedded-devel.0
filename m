@@ -1,55 +1,56 @@
-Return-Path: <oobitots@cisco.com>
-Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
-	by mail.openembedded.org (Postfix) with ESMTP id A509C7DF22
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F2737997D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 11:43:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=515; q=dns/txt; s=iport;
-	t=1558007002; x=1559216602;
-	h=from:to:cc:subject:date:message-id:references:
-	content-transfer-encoding:mime-version;
-	bh=kcuniKvg6rZ+dreIl0YkRBgi0etyOuXErKqs65MhWMo=;
-	b=X9PIuFcOZhLC6QWeXLt8AlcxkvGDgqpi/qxYnjm/+ZdTGJm6e+oTCc1t
-	L0opbswUrboKEuxkuJXUZAz6021dEE0OSOXN1bMhU6UgGt6sdNpcRwHw/
-	hEdqyy7fkPp3Sc2ri0elUwU7d6Gx+Vdmgt4c+9UWpYkFEL6k5G01IX7XT w=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0D0AgBzTN1c/5BdJa1kHAEBAQQBAQc?=
-	=?us-ascii?q?EAQGBZYIRgT0wMpkcmk4JAQEBDAEBLwEBhECCMCM4EwEDAQEEAQECAQRtKIV?=
-	=?us-ascii?q?LAQU6PxACAQgYHhAyJQIEDg2FJa0TijOBM4tPF4F/g241PoREhWIEp1kJAh2?=
-	=?us-ascii?q?BbJJWI4IEAZNpoT4CERWBMDYhgVdwFYMokFBBj3+BIQEB?=
-X-IronPort-AV: E=Sophos;i="5.60,476,1549929600"; d="scan'208";a="273573876"
-Received: from rcdn-core-8.cisco.com ([173.37.93.144])
-	by alln-iport-5.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA;
-	16 May 2019 11:43:21 +0000
-Received: from XCH-ALN-008.cisco.com (xch-aln-008.cisco.com [173.36.7.18])
-	by rcdn-core-8.cisco.com (8.15.2/8.15.2) with ESMTPS id x4GBhLSM013644
-	(version=TLSv1.2 cipher=AES256-SHA bits=256 verify=FAIL);
-	Thu, 16 May 2019 11:43:21 GMT
-Received: from xch-rcd-007.cisco.com (173.37.102.17) by XCH-ALN-008.cisco.com
-	(173.36.7.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Thu, 16 May 2019 06:43:20 -0500
-Received: from xch-rcd-007.cisco.com ([173.37.102.17]) by
-	XCH-RCD-007.cisco.com ([173.37.102.17]) with mapi id 15.00.1473.003;
-	Thu, 16 May 2019 06:43:20 -0500
-From: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
-To: Adrian Bunk <bunk@stusta.de>
-Thread-Topic: [oe] [meta-oe][PATCH] protobuf: Fix ptest compilation
-Thread-Index: AQHVC8VVzXsD9DBvQEuUegAB/ZO3HQ==
-Date: Thu, 16 May 2019 11:43:20 +0000
-Message-ID: <c01e469bd1394e4eba8cbab4c651902c@XCH-RCD-007.cisco.com>
-References: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
-	<20190516112315.GA17876@localhost>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.63.15.143]
+	Thu, 16 May 2019 11:45:59 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id l2so3016612wrb.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 May 2019 04:46:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=OF9lB9R0IiYEES4Q3zaOC1Wogy7Z5/lavsYFzfmfO94=;
+	b=nN2hkvay2WEP6IFLIOgYo36cfBGSdwODg/7u9WrKLwaThwWBj4dUco+IDCgJ8twLsp
+	gAlE7QWQ+K3onj1M270DUllA9wb6wHd/6Px4Zgb1/cXVihzX5vAle14riiN7CE00HJoY
+	8FpmcfdWZKy6j704SQPC3dm9YhCj4rdGPqwr7Ncn4pBuB53nAHN/LX0VgKl2dfR2wQDS
+	FF68lZSmDH0ZU/8OglRgf95JqrdHyUS8nKB6rtNudyeYlZRRqN58+bbrKug1kEh1l7K0
+	CHBAPzUFJaKn753FXz/jqWUp9SgHXgxbNY60zE9uKb8hXe8/5ECcTb4N9B83wrXYDy/l
+	UYVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=OF9lB9R0IiYEES4Q3zaOC1Wogy7Z5/lavsYFzfmfO94=;
+	b=em0ISi5mBNUDrPTotHX2ijh3gNblph8AHiu6OTuxXfoQpnhQb0sEgHrDiz55gmKMCT
+	OMR0/V0S98o8u5bYcQdUg10K9Yut/XLtcskgr4rf5VK3DcuGqFiwvvb7wgZR0B25KSjS
+	Kwu0QWT37WUQf9q2+qf4MEwQSzTyQe7dmp99Bgyi1gMGlKCtbC1aeVg88AeXQgj0WBZl
+	dcEW6zyg2scsLQVjSOLhI/YxlaZolUEA3nvK7+Ggvhgaz0j+ch2b8SdqWJPuSuYZytFv
+	dmdXuuN1BcEgicuMdkKFSAEZrjeK+3f8rrdEG2M4we8ja3Z51OEwljHBGiSPvpa8Po0k
+	NIlA==
+X-Gm-Message-State: APjAAAVxpI+k7lIDNFRU5vMEK/ws6VbFsWln3PgoyIs8smbjJmfpmnm1
+	Zo+5P1Hl3EsHeyUBpIVei34=
+X-Google-Smtp-Source: APXvYqwEj4j8ja7SVuHnG7frU/t3OcMgmT53ZeG4d1ZHzagO5WzxqRk/pohUgB9SxJu8gcgur0Yo4w==
+X-Received: by 2002:adf:b645:: with SMTP id i5mr30844824wre.272.1558007159876; 
+	Thu, 16 May 2019 04:45:59 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id b8sm4511011wrr.64.2019.05.16.04.45.58
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 16 May 2019 04:45:59 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 16 May 2019 13:46:00 +0200
+To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>
+Message-ID: <20190516114600.GB1400@jama>
+References: <20190516070624.27975-1-Martin.Jansa@gmail.com>
+	<20190516072441.GA7938@localhost>
+	<CALbNGRTv-YB-Gx4sLpF7+8g0B9U63qm=mpm4a43KZmnzsq+9wQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 173.36.7.18, xch-aln-008.cisco.com
-X-Outbound-Node: rcdn-core-8.cisco.com
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] protobuf: Fix ptest compilation
+In-Reply-To: <CALbNGRTv-YB-Gx4sLpF7+8g0B9U63qm=mpm4a43KZmnzsq+9wQ@mail.gmail.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe][PATCH 1/3] gtkwave: add distro_features_check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,28 +63,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 11:43:20 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 16 May 2019 11:45:59 -0000
+X-Groupsio-MsgNum: 77577
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ZfOjI3PrQbgiZnxM"
+Content-Disposition: inline
+
+--ZfOjI3PrQbgiZnxM
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-It was clang 4.0.0=0A=
-=0A=
-Regards,=0A=
-Oleksiy=0A=
-=0A=
-On 16.05.19 14:27, Adrian Bunk wrote:=0A=
-> On Thu, May 16, 2019 at 08:57:04AM +0000, Oleksiy Obitotskyi -X (oobitots=
- - GLOBALLOGIC INC at Cisco) via Openembedded-devel wrote:=0A=
->> Tests require c++11 support, so add -std=3Dc++11=0A=
->> to compiler flags.=0A=
->> ...=0A=
-> What compiler are you using to compile for your target?=0A=
->=0A=
-> The description sounds as if it would be gcc < 6.=0A=
->=0A=
-> cu=0A=
-> Adrian=0A=
->=0A=
-=0A=
+On Thu, May 16, 2019 at 10:21:14AM +0200, Andreas M=FCller wrote:
+> On Thu, May 16, 2019 at 9:25 AM Adrian Bunk <bunk@stusta.de> wrote:
+> >
+> > On Thu, May 16, 2019 at 07:06:22AM +0000, Martin Jansa wrote:
+> > > * fixes:
+> > > ERROR: Nothing PROVIDES 'gtk+' (but /OE/build/luneos-warrior/webos-po=
+rts/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DE=
+PENDS on or otherwise requires it)
+> > > gtk+ was skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES
+> > > ERROR: Required build target 'meta-world-pkgdata' has no buildable pr=
+oviders.
+> > > Missing or unbuildable dependency chain was: ['meta-world-pkgdata', '=
+gtkwave', 'gtk+']
+> > >
+> > > and
+> > >
+> > > ERROR: Nothing PROVIDES 'tk' (but /OE/build/luneos-warrior/webos-port=
+s/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPE=
+NDS on or otherwise requires it)
+> > > tk was skipped: missing required distro feature 'x11' (not in DISTRO_=
+FEATURES)
+> > > ERROR: Required build target 'meta-world-pkgdata' has no buildable pr=
+oviders.
+> > > Missing or unbuildable dependency chain was: ['meta-world-pkgdata', '=
+gtkwave', 'tk']
+> > >
+> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > ---
+> > >  meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 4 ++++
+> > >  1 file changed, 4 insertions(+)
+> > >
+> > > diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/met=
+a-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+> > > index 60df6f773b..b9aae0f6c8 100644
+> > > --- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+> > > +++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+> > > @@ -14,6 +14,10 @@ inherit pkgconfig autotools gettext texinfo
+> > >  DEPENDS =3D "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf=
+ glib-2.0"
+> > >  RDEPENDS_${PN} =3D "tk-lib"
+> > >
+> > > +# depends on gtk+ which has this restriction
+> > > +inherit distro_features_check
+> > > +ANY_OF_DISTRO_FEATURES =3D "${GTK2DISTROFEATURES}"
+> > >...
+> >
+> > Shouldn't this be x11 (without the directfb alternative)
+> > due to tk?
+> >
+> It is slightly off-top and maybe I missed something but from my
+> opinion these type of patches are wrong - and we have many of them.
+> The origin of the issue is gtk+ not gtkwave.
 
+I think this was discussed (long time ago) when adding x11 to required
+distro features to all recipes depending on libx11, but I haven't found
+that thread with quick search.
+
+You're right that the gtk+ restriction is the root cause of this, but
+gtk+ already has the restriction correct defined (hence the "gtk+ was
+skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES" error
+message when parsing gtkwave).
+
+The automatic propagation of such restriction to recipes which depend on
+it sounds good, but it also makes sense to explicitly acknowledge that
+there is such restriction caused by some dependency in the recipe.
+That's why I'm at least putting a comment above REQUIRED_DISTRO_FEATURES
+saying why I've added it in first place.
+
+In most cases I just want to be able to do:
+bitbake world without any errors shown for MACHINEs which I care about
+or something like:
+openembedded-core/scripts/sstate-diff-machines.sh --targets=3Dworld --tmpdi=
+r=3Dtmp-glibc/ --analyze --machines=3D"hammerhead mako qemux86"
+which works correctly only if it can parse the dependency tree of whole
+world.
+
+> Would it be a big issue if recipes inherit distro-feature-check
+> settings from the recipes they depend on?
+>=20
+> I ask this because this is definitely a maintenance burden and such a
+> mechanism would make life much easier.
+
+Agreed, especially in cases where the problematic dependency is also
+optional and the required distro features should be set with respect to
+e.g. PACKAGECONFIG as well.
+
+But me being used to a lot of burden I don't see this type of
+patches to be so big deal.
+
+Just compare:
+https://github.com/openwebos/meta-webos/blob/master/conf/distro/include/web=
+os-recipe-blacklist-world.inc
+https://github.com/webosose/meta-webosose/blob/master/meta-webos/conf/distr=
+o/include/webos-recipe-blacklist-world.inc
+https://github.com/webOS-ports/meta-webos-ports/blob/master/meta-luneos/con=
+f/distro/include/luneos-recipe-blacklist-world.inc
+
+just having the distro-feature-check bbclass and the restriction in the
+recipes (instead of PNBLACKLIST for all recipes incompatible with the
+DISTRO_FEATURES we have) made my life so much easier (that I never got
+around to cleanup some of these 6+ old entries which were already
+resolved elsewhere since then).
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--ZfOjI3PrQbgiZnxM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXN1NdwAKCRA3VSO3ZXaA
+HMf+AKCze90qTE85MPHO4WFJNIhLJP7vuACeItk3j8x714aRoKOlc4/32FpQmPM=
+=KwRH
+-----END PGP SIGNATURE-----
+
+--ZfOjI3PrQbgiZnxM--
