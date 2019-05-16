@@ -1,50 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D3587D86E
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D026D7DF1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 07:06:29 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id g12so1751961wro.8
+	Thu, 16 May 2019 07:06:44 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id d18so2044485wrs.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2019 00:06:31 -0700 (PDT)
+	Thu, 16 May 2019 00:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mARFYRW2JjZF6hXzArQf2S3Oll/WhL4hnM/Fhn4b+80=;
-	b=BSZ1Di1Iw+EuH9ZSyDG84cFsnrxYPyKgvQuJQ9f0lj5xyz6E2O2kriX973AYGiqsDr
-	Yl95//syygpf/d3wGS2rAJxr1i0afnrtuJA4gyMf0LzXegy5Uj42zgMf8fj5ghN5SHiI
-	ifyjFNPrT876rlbnbL8TWqOehgpJAX/7lJqZBzlvSwLg+zuqY/aIS5j9JdfeptxIBzgL
-	4AMDP/sBSJo7qgqdqyje5ufFrOgFvUvAauuZ/MENjqrvT8xvZEXkUVrbOKaE2lZVj3vV
-	4/spNsyYcOG1Upf6Po1wwMvoswAx8ov3maNZK+c2Iimkx/eFOrgs2nNpKe8SWIwdxf3c
-	sY5g==
+	h=from:to:cc:subject:date:message-id;
+	bh=3SFZZ/gspQFUvJhJUFkE8MeAKr/n57wxdD4PEK6/Z8Y=;
+	b=W2LnpEHgQIOQurVhptYBHBZaFW1667W2UyXLvArq38jXPZvPko+7bvnkliVB6Kn5ks
+	mJCbKdsWf4bybH55PowPT19OZXVoW7jIr9DgJDwmrvQ84Iinfl1n5rHrOB6J/pkeYWu7
+	eU9N5zM41JYg0u/m0o7P/JFS32Yjld+HIPNzLGkiaIeaf6WuSNQHhCuAykT2/fI0a8Ww
+	F9koeNq1W2OKBaNcQuQ1adHdZq9NaihNVeYa4hS4SykwYmqkZPYcaxE+GNQA+su6jN02
+	88V6XPby1nFB6flt0luHMTPRZAB2EtNPx+nAg3DFmUDwezah7PiIa7PambkSsLvB+ljy
+	f5Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=mARFYRW2JjZF6hXzArQf2S3Oll/WhL4hnM/Fhn4b+80=;
-	b=jXUQ73RsrTOpcVIzBYeNkW3pt6mVXxyWl3TuUyeFDp5VsjmhgPv9IgnaDMoAaMs0ZX
-	uLCVt3HvaCW+KyONbKlqb0rUtnJQ+soPPub4cuE5zSHe7d2z0uPn5v4caISpimH/wbSN
-	Q2DMULKqFSvRSKcZeFvEYNiFmoiw9fFnI6LcyUjAqFVpK1SD8HG+hmMsI8je4a/hwa85
-	eb3RqlbTYmGJEX5Buid+iW5nUW3ODM+7uG7Tu8d/0IXnvdKi+eGpO1r9bSiaJZr3LXnx
-	gSUsHYk0HIom5Nj9Cb768Z818Q/NUJ8LkUBp9MpsiSlxTPU3jQyzfz67R49koKi9M2/5
-	cALQ==
-X-Gm-Message-State: APjAAAVQg3hOSjylfEFwS3NVksG4t9S1Aw/veGpnrVFgIDlZ2DLsVN8J
-	doBWzQ53J/rQc+7NbsO7j6+9y6Ee
-X-Google-Smtp-Source: APXvYqzXVxuQmu7gYOKPzHpWBRzQwyiKe/69P3PzEKGXh/IDXpCCl1Lz0cfP9+mwfxec/i3R++G54A==
-X-Received: by 2002:adf:f208:: with SMTP id p8mr9802450wro.160.1557990390137; 
-	Thu, 16 May 2019 00:06:30 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3SFZZ/gspQFUvJhJUFkE8MeAKr/n57wxdD4PEK6/Z8Y=;
+	b=LKpMCcIx1ZWc+Tj0uSD5I+qyWZ7ldM3zvbgvCJyOITZy2pVsoR3dRpEWW88EbUocAu
+	RWp+FMtpaN3Pex7L78QdH/99p8y8ditTu+NIKuR4gBY3xta72B1oxRX/qLL8vzSZ30FS
+	kk+3JJ8zQr39ODBXDfPk9XTXjF+Q36zOdH7f7KyzPNmj1j4Zuwoz/x3NQA36gsH2lUYq
+	cqNgh/kclM9OAsUmuHfH3sId0nhSQdiXorj4IDoJ+ZGRZ8Bljx0anZJINKUTWbONdEXk
+	M7TaN4jDBz9ZQzhGkehRKT/yroNiROiRdeODxmn+Gyt594k91Y77WwtMJeRsUD0Ex/H2
+	oZjg==
+X-Gm-Message-State: APjAAAVuxSdb3ubIjY+JnQamGjouLhpIxjGeLs9nn93lRfMEncojKbpo
+	hrNo/IW0q02JyuciL/hHhah7Tq3h
+X-Google-Smtp-Source: APXvYqzmMgqkYtC+80cf/ele5fieQVSJrThRQHFpzA+7J/tvt3wJ/IjaQoUjqNK8vot4PXHz56+ydg==
+X-Received: by 2002:a5d:54d2:: with SMTP id x18mr29927781wrv.186.1557990405234;
+	Thu, 16 May 2019 00:06:45 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id e8sm9671564wrc.34.2019.05.16.00.06.29
+	by smtp.gmail.com with ESMTPSA id
+	l127sm5668242wml.40.2019.05.16.00.06.44
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 May 2019 00:06:29 -0700 (PDT)
+	Thu, 16 May 2019 00:06:44 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 May 2019 07:06:24 +0000
-Message-Id: <20190516070624.27975-3-Martin.Jansa@gmail.com>
+Date: Thu, 16 May 2019 07:06:44 +0000
+Message-Id: <20190516070644.28384-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190516070624.27975-1-Martin.Jansa@gmail.com>
-References: <20190516070624.27975-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] oprofile: make MACHINE_ARCH
+Subject: [meta-networking][PATCH] umip: make MACHINE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,44 +55,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 07:06:30 -0000
+X-List-Received-Date: Thu, 16 May 2019 07:06:45 -0000
 
-* fixes:
-ERROR: oprofile different signature for task do_configure.sigdata between hammerhead and mako
-Hash for dependent task oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot changed from deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb to d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
-Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot with hashes deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb or d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
+* Depends on ipsec-tools which is already MACHINE_ARCH (and also RRECOMMENDS kernel modules)
+* Fixes:
+  ERROR: umip different signature for task do_configure.sigdata between hammerhead and mako
+  Hash for dependent task umip/umip_1.0.bb.do_prepare_recipe_sysroot changed from 7c74a208880f6c8a5aa46b1c8577e39b6b71429d9a379ea75f17a155ca270035 to 87c6cd438dd9645c98530e3ac1094005bace785bfd89bfe4073bc8815926abba
+  Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-networking/recipes-connectivity/umip/umip_1.0.bb.do_prepare_recipe_sysroot with hashes 7c74a208880f6c8a5aa46b1c8577e39b6b71429d9a379ea75f17a155ca270035 or 87c6cd438dd9645c98530e3ac1094005bace785bfd89bfe4073bc8815926abba
 
-$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/oprofile/*do_prepare*.sigdata*
-runtaskdeps changed:
-['autoconf/autoconf_2.69.bb.do_populate_sysroot:virtual:native automake/automake_1.16.1.bb.do_populate_sysroot:virtual:native binutils/binutils_2.32.bb.do_populate_sysroot gcc/gcc-cross_7.3.bb.do_populate_sysroot gcc/gcc-runtime_7.3.bb.do_populate_sysroot glibc/glibc_2.29.bb.do_populate_sysroot gnu-config/gnu-config_git.bb.do_populate_sysroot:virtual:native libtool/libtool-cross_2.4.6.bb.do_populate_sysroot libtool/libtool-native_2.4.6.bb.do_populate_sysroot', -linux/linux-lg-hammerhead_git.bb.do_populate_sysroot, +linux/linux-lg-mako_git.bb.do_populate_sysroot, 'oprofile/oprofile_1.3.0.bb.do_fetch pkgconfig/pkgconfig_git.bb.do_populate_sysroot:virtual:native popt/popt_1.16.bb.do_populate_sysroot']
-linux/linux-lg-hammerhead_git.bb.do_populate_sysroot with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
- changed to
-linux/linux-lg-mako_git.bb.do_populate_sysroot with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-Dependency on task linux/linux-lg-mako_git.bb.do_populate_sysroot was added with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-Dependency on task linux/linux-lg-hammerhead_git.bb.do_populate_sysroot was removed with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
+  bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/umip/*do_prepare*.sigdata*
+  Hash for dependent task ipsec-tools/ipsec-tools_0.8.2.bb.do_populate_sysroot changed from 1100c4984d88050bb7ca154445205bac3c3ab80c3ff0aa7c9124825c9d4f6e14 to feeddbd35a8106b264c98076e21d0b3cb227ab1d209e150926112b2906273ef4
+  Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb.do_populate_sysroot with hashes 1100c4984d88050bb7ca154445205bac3c3ab80c3ff0aa7c9124825c9d4f6e14 or feeddbd35a8106b264c98076e21d0b3cb227ab1d209e150926112b2906273ef4
 
-* as detected with:
-openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
+  as detected with:
+  openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb | 3 +++
+ meta-networking/recipes-connectivity/umip/umip_1.0.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-index 1dc535ed8d..8d706e4a50 100644
---- a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-@@ -3,6 +3,9 @@ require oprofile.inc
- DEPENDS += "virtual/kernel"
- DEPENDS_append_powerpc64 = " libpfm4"
+diff --git a/meta-networking/recipes-connectivity/umip/umip_1.0.bb b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
+index e2abc02ce7..43367b5503 100644
+--- a/meta-networking/recipes-connectivity/umip/umip_1.0.bb
++++ b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
+@@ -20,6 +20,9 @@ SRC_URI = "git://git.umip.org/umip/umip.git \
+            "
+ SRCREV = "cbd441c5db719db554ff2b4fcb02fef88ae2f791"
  
-+# Depends on MACHINE_ARCH kernel
++# Depends on ipsec-tools which is already MACHINE_ARCH (and also RRECOMMENDS kernel modules)
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
- SRC_URI[md5sum] = "bd998df5521ebedae31e71cd3fb6200b"
- SRC_URI[sha256sum] = "95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6"
+ S = "${WORKDIR}/git"
  
+ EXTRA_OECONF = "--enable-vt"
 -- 
 2.17.1
 
