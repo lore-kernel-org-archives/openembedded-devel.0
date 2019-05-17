@@ -1,48 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
-	[209.85.128.45])
-	by mail.openembedded.org (Postfix) with ESMTP id F36237DF2E
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B61717DD9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 11:32:25 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id x64so6599189wmb.5
+	Fri, 17 May 2019 13:24:14 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id p27so10637573eda.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 04:32:27 -0700 (PDT)
+	Fri, 17 May 2019 06:24:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=H/ud1R6zjbgmdtGEtXTuQLDT9XMI8qA44t30GuCVdPc=;
-	b=OTYJ9u+AWE/tNSmEhlUpjNDG6012wcrXw6HDa7gQQaR9yqHpMqcuh7B0n1ZTrIeJeh
-	kIk5qE81GxD/WSQktYORC3kb2+7sQPIetggfLLYBiBZJDCU9U/CsQUzdBA45hWKCxLAk
-	YltJHcT7jBwMIMQaA5ONxmvUpZEdVc5VVtomKPyL/VYX9GwyK7UvF41829rDKcNvxgUA
-	yMXCGpy6ScTeTTKN3QY2CHTzsEKjaXLDE7tP/XxHhZLvPTGhXsVLV1vvsagrrM/L07aj
-	PZd7EfAiTkBhT0GRSRzSvoilhTTkRrGbnPLbKL8IJIUJVqEkik1sOx96aWF7/j3NDHch
-	72tw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=j4+OZt2aUQSvsXmdK7aeI3c22xeVeFd2gPWTgaRhDA4=;
+	b=YPakEjYVUU1hqMdqgf4ySKyaOTQO/3kES+tuhlyj+IDu3SCeSnzANocvZlRngOp4Jk
+	1iXaMfT+s8RV93d4qum9yr80V+39qxuNc7+DXwpIPwq9qga5bzJfHGIs+OJLajbBAESv
+	QqVagMrPWCAE0AJGuOTJXV9hmbPGQIPs/+upK418EJhaDz6CAW46FbKF5TT2VgnKWcwT
+	7f+ziAU5yTtNI3twFrNnQWR7vS6/goE7w4lsSMsEKmiytwTuum9WlXYVqMl9fe111pcy
+	f0nKQfeCfjzzW/elarbJ1KCp6TnYhQXrgDM1rJTCV7hPch2bD6m2sSXVinlkTdjmVIZO
+	3rjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=H/ud1R6zjbgmdtGEtXTuQLDT9XMI8qA44t30GuCVdPc=;
-	b=CYmXblzlYVf93nrLsMZepxpA/9F1kPjd6MpJyKN4s1iBri/X6ZfP1jJsFRzp0LRnMP
-	+kFZY7OVAH6P+qEsaivquZt3puXDW0WlCYWsmqmOd5uLQv2zSdg8tcsy/tUqFAfzPg3w
-	Is7sb56CXA1oAdfhC+jEt8NUCDWG+j4ziaEiYemqiE3ycGaJwaWGNgzYZYoiAb1g4quf
-	nh9mSMcImissJ6C6vf4cVUPSaBCvcybbtxe7EPo34ogk5lJhqd1RPoY7H0/5+g69Wl8l
-	z949CWtU21G9EsLg5Zgs7nJzOJlgJ/TGltU3SCDJp+rPfJxP2YISgojDAQzwnSVpO5rB
-	DfpQ==
-X-Gm-Message-State: APjAAAX2LdmoUS7uUy8tz6DWMxvOw9p6gYSobWvuA05UNOCnLF5bn9mO
-	4B/vI3htLCaGAPdbK/CtVEqa8tBZ
-X-Google-Smtp-Source: APXvYqwm3D/wrQPfL28D4glEwUV9jj+rvUt8P+ovYMEMs7Id5vvRw/VZlxd18fMjZPXa06B02ZJdsQ==
-X-Received: by 2002:a1c:a9d4:: with SMTP id s203mr30711640wme.27.1558092746238;
-	Fri, 17 May 2019 04:32:26 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	x6sm11534249wru.36.2019.05.17.04.32.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 17 May 2019 04:32:25 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=j4+OZt2aUQSvsXmdK7aeI3c22xeVeFd2gPWTgaRhDA4=;
+	b=fUCjDOUn7FHymIb9DyuhQqpJ0Jl9/E7zCfOK/4Y0JY6raknMBEQBxgZGbl0v9pQL55
+	sRxdMZOEqw9XgCp+5PCqhN8SOw2HRat0SP9dERhV7zQQGr8fxorLiJjeZfEUSMF7R9ke
+	zDQTmMgJHwInMdm04T1X2p8x3QTJToFkErSSHTwlafe/aKM7DzuRleq4cNtDDVlF3iyu
+	qzrelBbGke3NZeHTO40+3OK+BcP8ujYmFH96dJ4BbEjA12NNYiW+XZP7tBmBqhZjmkBH
+	8DxpUp9N/VeN/uzM7jr6FZpwCwXuJ1DivT0qHcK/veYTxkDlYKKA0blNgM2L2NC7ZJ1X
+	6Bsg==
+X-Gm-Message-State: APjAAAX5UZAuHsygxUQWRsf2WAudMPUY+gG8gTQ2/KfqmhuNF78Eu3Ah
+	06c3qv0B08urVE2yrN9SwZJ78SCSknOfYlIFISHqNQl/
+X-Google-Smtp-Source: APXvYqzIBqfgZxZowkNYrofuywHQmnUJURtdArx4NSbRvYKpeqY9aagEC3oi60tr/VWof5q+uPfVt2JuszTkfQEuN8o=
+X-Received: by 2002:a17:906:41c8:: with SMTP id
+	g8mr29824494ejl.131.1558099455004; 
+	Fri, 17 May 2019 06:24:15 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190517113223.1072-1-Martin.Jansa@gmail.com>
+In-Reply-To: <20190517113223.1072-1-Martin.Jansa@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 May 2019 11:32:23 +0000
-Message-Id: <20190517113223.1072-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python-cassandra-driver.inc: fix DEPENDS
+Date: Fri, 17 May 2019 15:24:04 +0200
+Message-ID: <CA+chaQf4341yaUYC+t37ZtXt7KbcH1ZDjmatd2AYYeaTw_YPqw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH] python-cassandra-driver.inc: fix DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,28 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2019 11:32:26 -0000
+X-List-Received-Date: Fri, 17 May 2019 13:24:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* there is no such thing as DEPENDS_${PN}
+It should also be ${PYTHON_PN}-cython-native if it really needs cython, but
+somehow it built without that until now (as DEPENDS_${PN} doesn't do
+anything useful).
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-python/recipes-devtools/python/python-cassandra-driver.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, May 17, 2019 at 1:32 PM Martin Jansa <martin.jansa@gmail.com> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-index 1cc1f4c494..53ebfec337 100644
---- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-+++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-@@ -28,6 +28,6 @@ RDEPENDS_${PN} += "\
-     libevent \
- "
- 
--DEPENDS_${PN} += "\
-+DEPENDS += "\
-     ${PYTHON_PN}-cython \
- "
--- 
-2.17.1
-
+> * there is no such thing as DEPENDS_${PN}
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-python/recipes-devtools/python/python-cassandra-driver.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git
+> a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+> b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+> index 1cc1f4c494..53ebfec337 100644
+> --- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+> +++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+> @@ -28,6 +28,6 @@ RDEPENDS_${PN} += "\
+>      libevent \
+>  "
+>
+> -DEPENDS_${PN} += "\
+> +DEPENDS += "\
+>      ${PYTHON_PN}-cython \
+>  "
+> --
+> 2.17.1
+>
+>
 
