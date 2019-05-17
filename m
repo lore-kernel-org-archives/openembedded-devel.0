@@ -1,50 +1,52 @@
 Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 32EBE7DF7B
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id CB1477DF85
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 09:44:31 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id 13so3422051pfw.9
+	Fri, 17 May 2019 09:44:39 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id t22so3046693pgi.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 02:44:32 -0700 (PDT)
+	Fri, 17 May 2019 02:44:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=AHQBSoH0zAQj1M+2xgCIvOdFm9RoT6sAN2UhhkmpvqE=;
-	b=thwHhCVe8VxAje4Hnpn4a5op7yrR+BJ0DMyvAWUGAEYFlfpFc0zRrfI+bw0T8mkgxj
-	6MaMUjQwgLeXaNM5TrXNKEzRgQK0r0ZwMH3E1bxJG15Cv00vW3SkM5vkfIlaj1haYKac
-	yoGuXazf59gbJZkxoYcQ6uXvWRcWCRrlrnXwEyR6SPCV70IsP3w+uk7s+zQiVQ2AvVDJ
-	F1pUFD/3IUksOfEJo1F8wgTNzuO5WQUX5juE8w/gkUPnK1tLTKKDGjzCG9ahxKUitV5a
-	6GMr7a5ovyjd8b4TvdehJ9coM0V3PLSPTWaSrO7jEiT2l16uRXpbnH5GdPRvlVq8Frxj
-	u/kg==
+	bh=ca9dSkp5nfyVOdVlf55LYURuzLNzwDJT6/TmugOhKN4=;
+	b=N3SpLT5fpP7xv/xVGAamwprfovWQMBv1JdYxXr30Br/gE6jh7wzlw698gJ5sLDRjoy
+	NiekayQcrd2Dg8bkbegDsE2GMdo+V7DCn8dQO8y0Qmm65Cpv/c9qX/BP6yJSrAyCDY0s
+	YDTHVq0GDsmyVIsNd1cteqJHA8l7ZjR8BY6XU9+W50AMEKrZkqW4fEoqbAp/OrCnILNV
+	d+mnY0zqFsjESstST/IyTKPmz4S9kvXcuPWKfMh0PZxgbz6qnyzzeW0wa2mfiweJp708
+	8EKlLNsMCmY0/NM0KNdNf/7rYreaZNmw0cQ4EKKfq0e5Tbex/B+yh3Klsxzp2zfWqcOC
+	fb6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=AHQBSoH0zAQj1M+2xgCIvOdFm9RoT6sAN2UhhkmpvqE=;
-	b=mcGzGkJ9RouvfsKde7ubUDdVXE9IF/Ec40ux57Kobooz5wimH7YGxY/UXyIM/st86M
-	eKU8eLA13nPka88TVX5YpH3fJuNuxPu9mMeg6BqPDypXWTk5futnxlnFcGJ5XlpT9noX
-	ORTx0h6r/E+f0f72dxQszZsu1AF5yejCxUgueT+3bsvT8Gf7ugbCTbCXo1pRLjTrf9cL
-	NgXLv3uyJ8gHoDhq1422igVd44BgkUA/o06+9Bwki1c/bAHMQ3JCkjKRP4mxkRUCM3+r
-	Bt3N0bheueTafrXIGoPR/qMLyoJfUVmKUDxHNQI/umsyry4cnI2l/T1PvNVo1Wrn7I82
-	m0KQ==
-X-Gm-Message-State: APjAAAWnBRBGxnerStLnh+zDDeab8TB4y7FQN4ia3R80qm3bgOPSsW9c
-	KRZy3Pd4ioMGvlE2w0vqk9qDT4UOG/4=
-X-Google-Smtp-Source: APXvYqztMsdMZ9TILDHqTNQJF8g6X2PzoCorLGHoYBFVzLOLdEplBGgab9wCaxkNp3yRA72FBeEdNw==
-X-Received: by 2002:a63:4952:: with SMTP id y18mr12625044pgk.144.1558086272021;
-	Fri, 17 May 2019 02:44:32 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=ca9dSkp5nfyVOdVlf55LYURuzLNzwDJT6/TmugOhKN4=;
+	b=TA46CWL49DDqAVdQhTpPn5s/gy7Upzpf4J5Jllp8aQ9GJ3ckTaItQoPVd5jTieohy9
+	OSzr6WiC0fU2FYlcoJJI87FvqB270XX3i4aeEq7peFmP+VyU2txSWveKTpFQ4xDUPRKP
+	3i1G3RsEwY5Y2pUGWWXh25QdxN4qT3EGjQEy8eL7r1BffYvUr41MLCoNdX7L3Hpj6FDJ
+	22OJYCxGueCBSWigla0zLbvivRtdLtr3fwM1jCx4Ng3IlKWUB0g8uf84bP6zErg/g0lR
+	BbNY3ShF8bT3XaV3aj9J6KtF5hUmPCD+szfKAnKThHPqnLi7cOQtPSD80MBeWq3/62p5
+	7HXw==
+X-Gm-Message-State: APjAAAVMRDPKOBOPR76LL4W6lTArsGluBK8BxSSv4Vb6emkDPw3nHt8T
+	opr9r2yJPnP0kYRS2NOgpgS6r/kb1DY=
+X-Google-Smtp-Source: APXvYqxIiyb00AEVXW/wJsVB4AShz06tZUzKjIjPaqVHvgp2dJmfnaRFiJoE4np+TVm452EiB27+Hw==
+X-Received: by 2002:a62:6842:: with SMTP id d63mr61212682pfc.9.1558086280842; 
+	Fri, 17 May 2019 02:44:40 -0700 (PDT)
 Received: from navik-desk.iind.intel.com ([192.55.54.43])
-	by smtp.gmail.com with ESMTPSA id n1sm7697511pgv.15.2019.05.17.02.44.30
+	by smtp.gmail.com with ESMTPSA id n1sm7697511pgv.15.2019.05.17.02.44.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 17 May 2019 02:44:31 -0700 (PDT)
+	Fri, 17 May 2019 02:44:40 -0700 (PDT)
 From: Ankit Navik <ankit.tarot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 May 2019 15:13:35 +0530
-Message-Id: <20190517094336.26232-1-ankit.tarot@gmail.com>
+Date: Fri, 17 May 2019 15:13:36 +0530
+Message-Id: <20190517094336.26232-2-ankit.tarot@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190517094336.26232-1-ankit.tarot@gmail.com>
+References: <20190517094336.26232-1-ankit.tarot@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] safec: Add Safe C license
+Subject: [meta-oe][PATCH 2/2] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,47 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2019 09:44:31 -0000
+X-List-Received-Date: Fri, 17 May 2019 09:44:39 -0000
 Content-Transfer-Encoding: 8bit
+
+Add generic recipe for safe C library.
+This library implements the secure C11 Annex K functions on top of most libc
+implementations, which are missing from them.
 
 Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 ---
- meta-oe/licenses/safec | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/licenses/safec
+ meta-oe/recipes-core/safec/safec_3.4.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
 
-diff --git a/meta-oe/licenses/safec b/meta-oe/licenses/safec
+diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
 new file mode 100644
-index 000000000..2bf1e6374
+index 000000000..2048fd418
 --- /dev/null
-+++ b/meta-oe/licenses/safec
-@@ -0,0 +1,26 @@
-+Safe C Library
++++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+@@ -0,0 +1,13 @@
++SUMMARY  = "Safe C Library"
 +
-+Copyright (C) 2012, 2013 Cisco Systems
-+Copyright (C) 2017 Reini Urban
-+All rights reserved.
++LICENSE  = "safec"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
++SECTION = "lib"
 +
-+Permission is hereby granted, free of charge, to any person
-+obtaining a copy of this software and associated documentation
-+files (the "Software"), to deal in the Software without
-+restriction, including without limitation the rights to use,
-+copy, modify, merge, publish, distribute, sublicense, and/or
-+sell copies of the Software, and to permit persons to whom the
-+Software is furnished to do so, subject to the following
-+conditions:
++inherit autotools pkgconfig
 +
-+The above copyright notice and this permission notice shall be
-+included in all copies or substantial portions of the Software.
++S = "${WORKDIR}/git"
++SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
++SRC_URI = "git://github.com/rurban/safeclib.git"
 +
-+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-+NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-+OTHER DEALINGS IN THE SOFTWARE.
++RDEPENDS_${PN} = "perl"
 -- 
 2.20.1
 
