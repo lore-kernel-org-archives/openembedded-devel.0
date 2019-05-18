@@ -1,47 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F98079980
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-yw1-f53.google.com (mail-yw1-f53.google.com
+	[209.85.161.53])
+	by mail.openembedded.org (Postfix) with ESMTP id D0BE86D50C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 May 2019 19:42:18 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id z19so11836724qtz.13
+	Sat, 18 May 2019 23:57:50 +0000 (UTC)
+Received: by mail-yw1-f53.google.com with SMTP id a130so4271481ywe.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 May 2019 12:42:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0Y9XrbYoSn6JfQBwkqy4OoVFh8KKZel6snEzGXVPuww=;
-	b=PYre4RyBAERt57IPy7EhsgjxvVrfDqrtOyLxkcxo6ocoXcakpilbIkU4VdJog06+a0
-	MReVnXq69kSGGcLmdfDdQAVtTxpEh9IEH5zs72gH0EaLEiRlaHZ2HD7cuzRmxmeZ5YYd
-	f3TSOtS42kYWqa9MUXdYpgxNlAa31fYAs5akMtjsmlgsE9Qabf67inF0ZWKBa9kqJ9FN
-	JNoAS/CXBgG+GzwOHFYhTCnicSuPCxkSXr98Iqkq+cGKbqT1GiUKOAU4ETtqv3BMzQz8
-	RgrWAg4aXmylweEr5cjsNZH12BTmD/SUVy0NHJEtx/FoHh0eiJoWSSVPPEAXjqWJgJrS
-	4oIQ==
+	Sat, 18 May 2019 16:57:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0Y9XrbYoSn6JfQBwkqy4OoVFh8KKZel6snEzGXVPuww=;
-	b=JPWAuwarUjS3TYAQI3cysK2OMNcyQGhCZRhp6ixDGeYwRHoOzlOCO1bZBBd6QUUF67
-	mdptf/i1UK2azczxALBvX0fhut8hkCU13l1eBmnkfnYCZPis+pFtq0z3UGYY8tWE3oud
-	3QW3FbOIlEnbUxrB5HXlqKdSV2kxjAd7zIxjb4oWirMjDXh03PwrLUzlHr4KHzrtByQ7
-	bdituQppYfLFG4eCBWBlKfpcwej2GupcppudhyzfOoML4LhHSTRa6aoHxD8ZPVqF3lqt
-	2b3BdtZNjy17OQyAIOsQxLR5BmR85VO74uBIEV/Nj2GpDM4RMDTNw+YRZGD3xm/X54JO
-	t/SQ==
-X-Gm-Message-State: APjAAAVbcOPOT4jwB833v1fZuDyFUhXLkeskwSp6O7JfrCtKg6GXoZez
-	0HeCpRXl/CNEqRBNAaQEHa21pireMjBUho3HHqM=
-X-Google-Smtp-Source: APXvYqzpsVcSRCtSlOzelzJrw6J8pW5WtWKdZgwwGlNF0H/E8vmi02IUCPwPScXKzuHmEexnJQHFot/w2JO5nke6EOc=
-X-Received: by 2002:a0c:96e7:: with SMTP id b36mr19542450qvd.51.1558208538826; 
-	Sat, 18 May 2019 12:42:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
-In-Reply-To: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 18 May 2019 12:41:53 -0700
-Message-ID: <CAMKF1sp6hLt5sqWqu_Nqb2wFJVmaP-sNbRVFSpvQVojtfr5TnA@mail.gmail.com>
-To: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] protobuf: Fix ptest compilation
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=AfFFAfzF4qIRspD7p0pF45Ph5QxTTdXD1De0UKOzwfI=;
+	b=emdIaOeh5AjBuhIEmOHWaaQSufAGF4EqdN6B+39DCJ9UxFhhZrYhIYF0tr/dHfXePi
+	OvhBLfixwSF6UJxc2qd96GD1cSajPlmXLfAhO6spsEyZiYVzeIhZchkijndwsCabOL9a
+	znsvDMevY6wTOytSkfpMHWVYYTI8OFHAsiuCf3FRneZn7ul4rXeaL6RjxN9DGNr/SDYu
+	0Z4NDPftYBlMcnHuTqGnhVFvvuJIFhMXoLqfk/wksHMDxvzxqtgprXXiWzCFi1S3bgYP
+	Yqx7/R2Bj6+6pxQNAZfLLfgqNAoSpyU35nA60F0jlL815AXq+T8I8fCrA9FiFSzxRIJC
+	+nEQ==
+X-Gm-Message-State: APjAAAVKaJ/BV0Kt9g6xAbSquMo5ceCDRr4uhH8vEF43zZtMCTNztKmt
+	F9SkR7zmwjD/ZmY+Pdo+Zswqwwk=
+X-Google-Smtp-Source: APXvYqwSgpwn6mJT64hs9lH+L/iCyja7SxTEk5kAPb36gU9ipcG95c8b+e8qxa5e+GpR01ybbo5Eng==
+X-Received: by 2002:a81:4c05:: with SMTP id z5mr30668534ywa.413.1558223871479; 
+	Sat, 18 May 2019 16:57:51 -0700 (PDT)
+Received: from bill-the-cat.local (cpe-65-184-141-147.ec.res.rr.com.
+	[65.184.141.147]) by smtp.gmail.com with ESMTPSA id
+	y196sm3724036ywg.40.2019.05.18.16.57.49
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 18 May 2019 16:57:50 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 May 2019 19:57:46 -0400
+Message-Id: <1558223866-20797-1-git-send-email-trini@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] toybox: Re-order inherit location so we can override do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 May 2019 19:42:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 18 May 2019 23:57:51 -0000
 
-On Thu, May 16, 2019 at 2:04 AM Oleksiy Obitotskyi -X (oobitots -
-GLOBALLOGIC INC at Cisco) via Openembedded-devel
-<openembedded-devel@lists.openembedded.org> wrote:
->
-> Tests require c++11 support, so add -std=c++11
-> to compiler flags.
->
-This does not apply cleanly on top of master, can you rebase and send again ?
+We need to override the do_configure function to disable some applets.
+Move our inherit line to where they should be, stylistically, so that
+our function overrides the one from cml1.bbclass
 
-> Upstream-Status: Pending
-> Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
-> ---
-> meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> index cf72d9ca7..4791e13ca 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> @@ -40,8 +40,8 @@ do_compile_ptest() {
-> # which haven't been installed yet.
-> cp "${B}/protobuf.pc" "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> sed -e 's|libdir=|libdir=${PKG_CONFIG_SYSROOT_DIR}|' -i
-> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> - sed -e 's|Cflags:|Cflags: -I${S}/src|' -i
-> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> - sed -e 's|Libs:|Libs: -L${B}/src/.libs|' -i
-> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> + sed -e 's|Cflags:|Cflags: -std=c++11 -I${S}/src|' -i
-> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> + sed -e 's|Libs:|Libs: -std=c++11 -L${B}/src/.libs|' -i
-> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> export PKG_CONFIG_PATH="${B}/${TEST_SRC_DIR}"
-> # Save the pkgcfg sysroot variable, and update it to nothing so
->
-> --
-> 2.19.1
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ meta-oe/recipes-core/toybox/toybox_0.7.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
+index 614136e27f50..069f0471c088 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
++++ b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
+@@ -5,6 +5,8 @@ DEPENDS = "attr virtual/crypt"
+ LICENSE = "BSD-0-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+ 
++inherit cml1 update-alternatives
++
+ SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+            file://OE-path-changes.patch \
+            "
+@@ -48,8 +50,6 @@ do_install() {
+     install -m 0644 ${B}/toybox.links ${D}${sysconfdir}
+ }
+ 
+-inherit cml1 update-alternatives
+-
+ # If you've chosen to install toybox you probably want it to take precedence
+ # over busybox where possible but not over other packages
+ ALTERNATIVE_PRIORITY = "60"
+-- 
+2.7.4
+
 
