@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C941D7DFC2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F98079980
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 21:49:19 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id y3so8196222wmm.2
+	Sat, 18 May 2019 19:42:18 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id z19so11836724qtz.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2019 14:49:21 -0700 (PDT)
+	Sat, 18 May 2019 12:42:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=JGBRJuxiJQXKWvV1ZBnSQJuv5dxLPV9p+MGDXhNMwwM=;
-	b=fPm5W0kLjt08sxtFnS6SOy+yvHqVLp5GLC55qJRR2Lsq2EGIPgTNB5cDYScesddWK+
-	mzE24L1jYhdd4b/TMZEtQFDTMPv+dJIbFsa/A+EbfMWp3n8+WqVWeL3uqUrkuxZGq9Uk
-	CO2uj89VRyoWSSw6MspIFNe3jcy/qlyxwgOswa8ENSJoOh1mRLU2hO9+jGDhPrPFMXVV
-	s+Zbo6sBSYZ4syL98St5BhZ6ORQgPDHnVhLxNBMuUg0NhgMm5Y/keAy+pbOgpxlFjkX+
-	Utjlsyqk7eA/RY0L/23rUoa4EIVx7GxUYt6xmV/CmBjVtMhwUCaJIylD10tO1Lj3qD8f
-	Q/mQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=0Y9XrbYoSn6JfQBwkqy4OoVFh8KKZel6snEzGXVPuww=;
+	b=PYre4RyBAERt57IPy7EhsgjxvVrfDqrtOyLxkcxo6ocoXcakpilbIkU4VdJog06+a0
+	MReVnXq69kSGGcLmdfDdQAVtTxpEh9IEH5zs72gH0EaLEiRlaHZ2HD7cuzRmxmeZ5YYd
+	f3TSOtS42kYWqa9MUXdYpgxNlAa31fYAs5akMtjsmlgsE9Qabf67inF0ZWKBa9kqJ9FN
+	JNoAS/CXBgG+GzwOHFYhTCnicSuPCxkSXr98Iqkq+cGKbqT1GiUKOAU4ETtqv3BMzQz8
+	RgrWAg4aXmylweEr5cjsNZH12BTmD/SUVy0NHJEtx/FoHh0eiJoWSSVPPEAXjqWJgJrS
+	4oIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=JGBRJuxiJQXKWvV1ZBnSQJuv5dxLPV9p+MGDXhNMwwM=;
-	b=DQJZ7UNpOKlTvGY9SxIhLVW22BYEDiWFQO7eheJV1gHv/nyzL04CqiYyO4DdH6s+2g
-	BZ78R5U3S6s8AaqPLXPEuA9Vubh/1dnnLCYB7kClkDPes470n+2Kla+7Sdqb4fMNVHWN
-	9vFyUNAcJ2y3z7hbOUl8aDFfmfEMB3132nBW3gnkS/Lto9Au4edeptf2nPPeqKIZSokZ
-	GOaPFlfxOh9bKEmsTsDscmmQehqwaHYPQczTTIXpL3uw5y30tZ3bFvcEg4c2jHHl/3mU
-	Sdo+MTXZrM6fzBE2+n5y1gDpbgSAINKJIkFEKwvCvlMTijkcY7OawMCsVpbiNUnDd+Tp
-	537w==
-X-Gm-Message-State: APjAAAUx5jXr00ZzSCnqD2G9IgeVoOnRcPD1p9i2qAoyDu0yj2MeGG2s
-	mhx9aAX61dYZAnH3u5tl0RG7PKny
-X-Google-Smtp-Source: APXvYqzqi7BKcd7CAxZ9g4C03Zg1Mv5L0XSYoo+fIdE8R7QfQ/lXqTOfatp8+ichIqyDYT5hHzp6lQ==
-X-Received: by 2002:a1c:a695:: with SMTP id p143mr3826940wme.128.1558129760378;
-	Fri, 17 May 2019 14:49:20 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	j28sm1534084wrd.64.2019.05.17.14.49.19
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 17 May 2019 14:49:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 May 2019 21:49:19 +0000
-Message-Id: <20190517214919.32222-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] triggerhappy: fix issues
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=0Y9XrbYoSn6JfQBwkqy4OoVFh8KKZel6snEzGXVPuww=;
+	b=JPWAuwarUjS3TYAQI3cysK2OMNcyQGhCZRhp6ixDGeYwRHoOzlOCO1bZBBd6QUUF67
+	mdptf/i1UK2azczxALBvX0fhut8hkCU13l1eBmnkfnYCZPis+pFtq0z3UGYY8tWE3oud
+	3QW3FbOIlEnbUxrB5HXlqKdSV2kxjAd7zIxjb4oWirMjDXh03PwrLUzlHr4KHzrtByQ7
+	bdituQppYfLFG4eCBWBlKfpcwej2GupcppudhyzfOoML4LhHSTRa6aoHxD8ZPVqF3lqt
+	2b3BdtZNjy17OQyAIOsQxLR5BmR85VO74uBIEV/Nj2GpDM4RMDTNw+YRZGD3xm/X54JO
+	t/SQ==
+X-Gm-Message-State: APjAAAVbcOPOT4jwB833v1fZuDyFUhXLkeskwSp6O7JfrCtKg6GXoZez
+	0HeCpRXl/CNEqRBNAaQEHa21pireMjBUho3HHqM=
+X-Google-Smtp-Source: APXvYqzpsVcSRCtSlOzelzJrw6J8pW5WtWKdZgwwGlNF0H/E8vmi02IUCPwPScXKzuHmEexnJQHFot/w2JO5nke6EOc=
+X-Received: by 2002:a0c:96e7:: with SMTP id b36mr19542450qvd.51.1558208538826; 
+	Sat, 18 May 2019 12:42:18 -0700 (PDT)
+MIME-Version: 1.0
+References: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
+In-Reply-To: <036838bbf1cb46dc9c9e3b16bd8027a0@XCH-RCD-007.cisco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 18 May 2019 12:41:53 -0700
+Message-ID: <CAMKF1sp6hLt5sqWqu_Nqb2wFJVmaP-sNbRVFSpvQVojtfr5TnA@mail.gmail.com>
+To: "Oleksiy Obitotskyi -X (oobitots - GLOBALLOGIC INC@Cisco)" <oobitots@cisco.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf: Fix ptest compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,67 +54,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2019 21:49:21 -0000
+X-List-Received-Date: Sat, 18 May 2019 19:42:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* using PN instead of BPN in S causes all tasks to fail:
-  make: *** No targets specified and no makefile found.  Stop.
-* using github archives is bad, because they are regenerated from time to time
-  with different checksums
-* set PV, because this isn't exactly 0.5.0, because of the debian changes
-  mostly the systemd support
-* fix indentation
+On Thu, May 16, 2019 at 2:04 AM Oleksiy Obitotskyi -X (oobitots -
+GLOBALLOGIC INC at Cisco) via Openembedded-devel
+<openembedded-devel@lists.openembedded.org> wrote:
+>
+> Tests require c++11 support, so add -std=c++11
+> to compiler flags.
+>
+This does not apply cleanly on top of master, can you rebase and send again ?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...ggerhappy_0.5.0.bb => triggerhappy_git.bb} | 22 +++++++++----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
- rename meta-oe/recipes-extended/triggerhappy/{triggerhappy_0.5.0.bb => triggerhappy_git.bb} (73%)
-
-diff --git a/meta-oe/recipes-extended/triggerhappy/triggerhappy_0.5.0.bb b/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
-similarity index 73%
-rename from meta-oe/recipes-extended/triggerhappy/triggerhappy_0.5.0.bb
-rename to meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
-index 037ce063e1..24df750e01 100644
---- a/meta-oe/recipes-extended/triggerhappy/triggerhappy_0.5.0.bb
-+++ b/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
-@@ -4,12 +4,12 @@ HOMEPAGE = "https://github.com/wertarbyte/triggerhappy"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--SRC_URI = "https://github.com/wertarbyte/triggerhappy/archive/debian/0.5.0-1.tar.gz"
-+# matches debian/0.5.0-1 tag
-+SRCREV = "44a173195986d0d853316cb02a58785ded66c12b"
-+PV = "0.5.0+git${SRCPV}"
-+SRC_URI = "git://github.com/wertarbyte/${BPN}.git;branch=debian"
- 
--SRC_URI[md5sum] = "77f90a18c775e47c4c5e9e08987ca32f"
--SRC_URI[sha256sum] = "9150bafbf7f2de7d57e6cc154676c33da98dc11ac6442e1ca57e5dce82bd4292"
--
--S = "${WORKDIR}/${PN}-debian-${PV}-1"
-+S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig update-rc.d systemd
- 
-@@ -21,12 +21,12 @@ INITSCRIPT_PARAMS = "defaults"
- SYSTEMD_SERVICE_${PN} = "triggerhappy.service triggerhappy.socket"
- 
- FILES_${PN} = "\
--${sbindir}/thd \
--${sbindir}/th-cmd \
--${sysconfdir}/triggerhappy/triggers.d \
--${nonarch_base_libdir}/udev/rules.d/80-triggerhappy.rules \
--${sysconfdir}/init.d/triggerhappy \
--${systemd_unitdir}/system \
-+    ${sbindir}/thd \
-+    ${sbindir}/th-cmd \
-+    ${sysconfdir}/triggerhappy/triggers.d \
-+    ${nonarch_base_libdir}/udev/rules.d/80-triggerhappy.rules \
-+    ${sysconfdir}/init.d/triggerhappy \
-+    ${systemd_unitdir}/system \
- "
- CONFFILES_${PN} = "${sysconfdir}/udev/rules.d/80-triggerhappy.rules"
- 
--- 
-2.17.1
-
+> Upstream-Status: Pending
+> Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
+> ---
+> meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> index cf72d9ca7..4791e13ca 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> @@ -40,8 +40,8 @@ do_compile_ptest() {
+> # which haven't been installed yet.
+> cp "${B}/protobuf.pc" "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> sed -e 's|libdir=|libdir=${PKG_CONFIG_SYSROOT_DIR}|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> - sed -e 's|Cflags:|Cflags: -I${S}/src|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> - sed -e 's|Libs:|Libs: -L${B}/src/.libs|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> + sed -e 's|Cflags:|Cflags: -std=c++11 -I${S}/src|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> + sed -e 's|Libs:|Libs: -std=c++11 -L${B}/src/.libs|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> export PKG_CONFIG_PATH="${B}/${TEST_SRC_DIR}"
+> # Save the pkgcfg sysroot variable, and update it to nothing so
+>
+> --
+> 2.19.1
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
