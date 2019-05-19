@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 226FC7C132
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+	[209.85.167.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 88E426C3AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2019 20:27:57 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id m15so1252274ljg.13
+	Sun, 19 May 2019 20:40:20 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id h13so8777304lfc.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2019 13:27:59 -0700 (PDT)
+	Sun, 19 May 2019 13:40:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=doTD2Qr940fEasibZ29BO6JAkriSJVglYgwpqibF8+I=;
-	b=KI/PhRDJytgE8XmM+IpZKjlJQ8/1Sb+v2GwmfT/6nGwkfvw+92SNgHyPc0K+yBWdnI
-	qoFtkax1wYV2DRySjsNIYd9iIk9fiaRnK8qsVOhu1KHi/4ddCGHHzzK+p5OgT/KnEM5L
-	WL+t/AKPND9qbFRK6oFKEGX9dCjuMD/Cd5R/nqNGTqhDYzHxOfDSHoGjSAmUFt0Ivt2C
-	MuGjZPISgFjB9RCHiOg0ncaHSGse2FmUYWh3gjz4TCMf6jHc3zrEyM/0PwJQw5Za4dh1
-	uNRPCwMwNHF7/FkdI4/8Ukdf+66tMKz8DqoM0zbXemXE5eUqOywQ73LTUBA1LPict8If
-	l7Bw==
+	bh=xY55+eqEk/RpmxTNYsEu8RGXe62OdCPB6McNNxR1M2A=;
+	b=i1qLku+bjfRR09LKxTLAcW8MZ6BYA/H1KhnXBJ+F067cNirg4cpu6kRPUj3oqcMKDy
+	9dzxoKM3vipwMSAPw6EeQg8CfqhkltxNUwfEn0mzQf8WkfVPOV81zB3Qk+/RYd4nTcS4
+	AdOWmKaz0CPFesKkeEqZy8ZJHo1VPbheoEkugEP+ktfSExvefMdzhrwOMlbgQEF+dbAU
+	Xbdt5XcSb+fD8msEe1mkq6X1QdGU2lyNhHkVeCaCJw4r+T9Q7PwATcN+aRRijfbPxNUm
+	g0wnDFmyXj/cL5HVJBvumByVkupcAjyvuvfS6DbKVCSUBLgX6h8QR6ZQYvr0Wmt4aa7m
+	jZig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=doTD2Qr940fEasibZ29BO6JAkriSJVglYgwpqibF8+I=;
-	b=JoFa2gF7rBxK+eT4vnBQFgbpjUHkf3eXPPqjsuQZNwpGj6peGWzQCSKHWK4+yN5Iwv
-	JWnV2TmnXYLPHhzuva4k2Fqb3Q8zpabcAsB15/u/5gu0Rt1Yqe1SlBOu4rk0YfsyPTwH
-	CxsRa3pTbifCEhKdAfXOYfpaVoLatOY5QrhqiASW4Nf5rmp7y51nHy2uAphGVSzSf4LB
-	8mHvRGWSKZybFsD3d8DnazQUQ3IMcCJ6nQ32MJyfuq/QXD3QEVHVhKAa29WliJzMJ6ox
-	v10oVHKYHpcpxgg7+VDq3WiOvPNPyylr6oInVsoxwSwEuxLbRVRF2JSdkQ38WLKvvCzz
-	svhw==
-X-Gm-Message-State: APjAAAUnuWyFEj1/Ijia/5hfJqIPsbA0+OrWLvdUyLWo0YBPtxRAsjJo
-	oHpEKp0K6C2Cc4NGo98ZLAXvoMekpa4=
-X-Google-Smtp-Source: APXvYqyZ9Ag3IPS4XFh8bLDcsEY41EUxS9WSkHyF62w4VEkGvXvOz1whYXJeRgjBUNlwCP6bXUEmkg==
-X-Received: by 2002:a2e:2b58:: with SMTP id q85mr35434688lje.179.1558297678309;
-	Sun, 19 May 2019 13:27:58 -0700 (PDT)
+	bh=xY55+eqEk/RpmxTNYsEu8RGXe62OdCPB6McNNxR1M2A=;
+	b=YwrBKpFRECJdWrjDrP3XC7wt4buCbkA7wITbQUDRvx+mAXfgZ4+Ra48s433xBlGM2D
+	BUSI9VOaTz0Qc+gRkhWNLglJKTtzy129Ix9oKCkp7L5o1mt+KrZzpIUb4Si/ggNeIcmR
+	NMPyBYY2ZLn3vEGlxBkU4esqRw4qvzu0NscSGM9XXzbtt9pSeN81oEnOX3LMz/1fA9Hu
+	OdB9h9nwyKHNW30q81r6VjfYtMcX0pdDFy4R8FyP+Ix/vta42XsJcE6mjRVOwiPJ6ScD
+	XCTaI1p0JERXeAAMtrI9Em30Z9vUR60ORP4G7tTKz+GYSsaMk8ib2ykcyMl+/dzCzrkB
+	zBuA==
+X-Gm-Message-State: APjAAAW6a5uZyyxrByJwd2onH0w8RhF/xNxcXxlnHhReFLSRjMuOEPKQ
+	/MBw16t2E93OqQDFeP5nZIV9O4e/DkQ=
+X-Google-Smtp-Source: APXvYqz9KMS7jalLYQixiFDgRd56u8nWDTW5N/WvvId0yY9/yxWCXPWhQ0JuMd2u2Up3ykKLJNl2dA==
+X-Received: by 2002:a19:196:: with SMTP id 144mr35249125lfb.35.1558298420629; 
+	Sun, 19 May 2019 13:40:20 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
 	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	x29sm3473904lfg.58.2019.05.19.13.27.57
+	y25sm3481276lfy.59.2019.05.19.13.40.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 19 May 2019 13:27:57 -0700 (PDT)
+	Sun, 19 May 2019 13:40:20 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 May 2019 22:27:53 +0200
-Message-Id: <20190519202753.2575-1-open.source@oleksandr-kravchuk.com>
+Date: Sun, 19 May 2019 22:40:18 +0200
+Message-Id: <20190519204018.14033-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] rp-pppoe: update to 3.13
+Subject: [PATCH][meta-networking] python-ldap: update to 3.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,124 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2019 20:27:58 -0000
-
-Removed patch was upstreamed.
+X-List-Received-Date: Sun, 19 May 2019 20:40:20 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../0001-ppoe-Dont-include-linux-if_ether.h.patch          | 0
- .../0002-Enable-support-for-the-kernel-module.patch        | 0
- .../configure.in-Error-fix.patch                           | 0
- .../rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.patch   | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/configure_in_cross.patch   | 0
- .../discard-use-of-dnl-in-Makefile.am.patch                | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/dont-swallow-errors.patch  | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.default       | 0
- .../rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.init | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.service       | 0
- .../pppoe-src-restrictions.patch                           | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/top-autoconf.patch         | 0
- .../{rp-pppoe-3.12 => rp-pppoe}/update-config.patch        | 0
- .../rp-pppoe/{rp-pppoe_3.12.bb => rp-pppoe_3.13.bb}        | 7 +++----
- 14 files changed, 3 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/0001-ppoe-Dont-include-linux-if_ether.h.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/0002-Enable-support-for-the-kernel-module.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.in-Error-fix.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure_in_cross.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/discard-use-of-dnl-in-Makefile.am.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/dont-swallow-errors.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.default (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.init (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.service (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-src-restrictions.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/top-autoconf.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/update-config.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe_3.12.bb => rp-pppoe_3.13.bb} (91%)
+ .../python/{python-ldap_2.4.45.bb => python-ldap_3.2.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-devtools/python/{python-ldap_2.4.45.bb => python-ldap_3.2.0.bb} (85%)
 
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0001-ppoe-Dont-include-linux-if_ether.h.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0001-ppoe-Dont-include-linux-if_ether.h.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0002-Enable-support-for-the-kernel-module.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0002-Enable-support-for-the-kernel-module.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/discard-use-of-dnl-in-Makefile.am.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/discard-use-of-dnl-in-Makefile.am.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.default
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.default
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.init
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.init
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.service
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.service
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-src-restrictions.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-src-restrictions.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/top-autoconf.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/top-autoconf.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/update-config.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/update-config.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-similarity index 91%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-index fbe015f5e..492ade5ae 100644
---- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-+++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
+diff --git a/meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb b/meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
+similarity index 85%
+rename from meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb
+rename to meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
+index dde8a52dc..d10f11bbc 100644
+--- a/meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb
++++ b/meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
+@@ -15,8 +15,8 @@ PYPI_PACKAGE = "python-ldap"
+ inherit pypi setuptools
  
- PR = "r10"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
+-SRC_URI[md5sum] = "6108e189a44eea8bc7d1cc281c222978"
+-SRC_URI[sha256sum] = "824fde180a53772e23edc031c4dd64ac1af4a3eade78f00d9d510937d562f64e"
++SRC_URI[md5sum] = "fe22522208dc9b06d16eb70f8553eaab"
++SRC_URI[sha256sum] = "7d1c4b15375a533564aad3d3deade789221e450052b21ebb9720fb822eccdb8e"
  
--SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
-+SRC_URI = "https://dianne.skoll.ca/projects/rp-pppoe/download/rp-pppoe-${PV}.tar.gz \
-            file://top-autoconf.patch \
-            file://configure_in_cross.patch \
--           file://pppoe-src-restrictions.patch \
-            file://update-config.patch \
-            file://dont-swallow-errors.patch \
-            file://discard-use-of-dnl-in-Makefile.am.patch \
-@@ -22,8 +21,8 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
-            file://0002-Enable-support-for-the-kernel-module.patch \
-            "
- 
--SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
--SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
-+SRC_URI[md5sum] = "ec9dccd9a367a1f71f2dc81069796dd8"
-+SRC_URI[sha256sum] = "8cd6bc71ba46bd5f6eb4daf60220ccdcd991a8525111dee466501b1b9717e676"
- 
- inherit autotools-brokensep update-rc.d systemd
- 
+ do_configure_prepend() {
+     sed -i -e 's:^library_dirs =.*::' setup.cfg
 -- 
 2.17.1
 
