@@ -1,39 +1,48 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-yw1-f53.google.com (mail-yw1-f53.google.com
-	[209.85.161.53])
-	by mail.openembedded.org (Postfix) with ESMTP id D0BE86D50C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 668AA6D666
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 May 2019 23:57:50 +0000 (UTC)
-Received: by mail-yw1-f53.google.com with SMTP id a130so4271481ywe.13
+	Sun, 19 May 2019 07:38:36 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id t5so8730651wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 May 2019 16:57:52 -0700 (PDT)
+	Sun, 19 May 2019 00:38:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Iodg+L/eHzQE54nXcQKUpzxNp+vRVEnUwPBrAz5cIoc=;
+	b=YeG61hHAFChfkki1qesvOiyDJhFSsoaMvPNERz0PHkPs55CEEmwvFz4+D0FyLkwewR
+	iujhY4Wp7Ac4XpHCS1aZ4NyO2ET4BCDRjzfV3rRSQtSj2Aw/NmA+BxsymO0hgn2CoC5s
+	IyyL8VIp+B0z73U5gRSTfe9AfdrG2Hsj08XqvJxwhez/Z6+IS+OAHmlHLwhKvEemm9Cp
+	PSc15l9Rg+rKN9mXUcRkd7AAOuamo3Lmt+Uv0UUa5YRe6HNVWE9U66YgqKI2GRpHduL3
+	SJv5u3otzzgbQSEUKXkorQhpo5gmrehLFq+zKmudVpVEb3lL/RlLIqAuqaxQuE+5X2/C
+	K9kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=AfFFAfzF4qIRspD7p0pF45Ph5QxTTdXD1De0UKOzwfI=;
-	b=emdIaOeh5AjBuhIEmOHWaaQSufAGF4EqdN6B+39DCJ9UxFhhZrYhIYF0tr/dHfXePi
-	OvhBLfixwSF6UJxc2qd96GD1cSajPlmXLfAhO6spsEyZiYVzeIhZchkijndwsCabOL9a
-	znsvDMevY6wTOytSkfpMHWVYYTI8OFHAsiuCf3FRneZn7ul4rXeaL6RjxN9DGNr/SDYu
-	0Z4NDPftYBlMcnHuTqGnhVFvvuJIFhMXoLqfk/wksHMDxvzxqtgprXXiWzCFi1S3bgYP
-	Yqx7/R2Bj6+6pxQNAZfLLfgqNAoSpyU35nA60F0jlL815AXq+T8I8fCrA9FiFSzxRIJC
-	+nEQ==
-X-Gm-Message-State: APjAAAVKaJ/BV0Kt9g6xAbSquMo5ceCDRr4uhH8vEF43zZtMCTNztKmt
-	F9SkR7zmwjD/ZmY+Pdo+Zswqwwk=
-X-Google-Smtp-Source: APXvYqwSgpwn6mJT64hs9lH+L/iCyja7SxTEk5kAPb36gU9ipcG95c8b+e8qxa5e+GpR01ybbo5Eng==
-X-Received: by 2002:a81:4c05:: with SMTP id z5mr30668534ywa.413.1558223871479; 
-	Sat, 18 May 2019 16:57:51 -0700 (PDT)
-Received: from bill-the-cat.local (cpe-65-184-141-147.ec.res.rr.com.
-	[65.184.141.147]) by smtp.gmail.com with ESMTPSA id
-	y196sm3724036ywg.40.2019.05.18.16.57.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 18 May 2019 16:57:50 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Iodg+L/eHzQE54nXcQKUpzxNp+vRVEnUwPBrAz5cIoc=;
+	b=W4UH4EpDKcn/qfBplaUovbm5wRvu9Ya2Jkss+tAmk4NFjGdcNFKwgVSxyadd1v8WVW
+	oPcKyiKq44fk2ylqv3pM8ca6S2HG7eulacfEzy4GCfAH8pHaWY6MYGutuFKTRc9yAVfr
+	VBuStH7M+c8xoE7pXDcdOl0qWgdo/V3YY2NfcFbSlNmUSRuD1X9TOiJ30zqrkk7f31oa
+	bAIjGNfgX1TY3G9MMPubfyADxCdkhLxMc08J+nDQReYoZnaQwov8mejCzJ2fahgNYbLn
+	VKKoJ9MF3Gq4nIeAihUIbdW5hDuKx6hH2uG3ii97gEBzbnVAgijV5QJFtip910sdgQIN
+	w4nQ==
+X-Gm-Message-State: APjAAAWAsDUvVLwL1pQQj26fXeFBcqcd0l1Ztc1Heuj1X+f/PIWS3XAx
+	djf1NEVv6cFU4MciaFxOKGkRfMg2
+X-Google-Smtp-Source: APXvYqxMkRwO6IS7j19NC4/P68aZ0yN5ApmVSr72j+OI9HDn6cMdcyMBg5micZ0ig8e19eoI1O2XRg==
+X-Received: by 2002:a1c:3:: with SMTP id 3mr29245871wma.44.1558251516819;
+	Sun, 19 May 2019 00:38:36 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	i17sm13949616wrr.46.2019.05.19.00.38.35
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 19 May 2019 00:38:35 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 May 2019 19:57:46 -0400
-Message-Id: <1558223866-20797-1-git-send-email-trini@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] toybox: Re-order inherit location so we can override do_configure
+Date: Sun, 19 May 2019 07:38:38 +0000
+Message-Id: <20190519073838.147-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] opencv: use the same package name in PACKAGES and RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 May 2019 23:57:51 -0000
+X-List-Received-Date: Sun, 19 May 2019 07:38:36 -0000
 
-We need to override the do_configure function to disable some applets.
-Move our inherit line to where they should be, stylistically, so that
-our function overrides the one from cml1.bbclass
-
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/toybox/toybox_0.7.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_3.4.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-index 614136e27f50..069f0471c088 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.7.5.bb
-@@ -5,6 +5,8 @@ DEPENDS = "attr virtual/crypt"
- LICENSE = "BSD-0-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.4.5.bb b/meta-oe/recipes-support/opencv/opencv_3.4.5.bb
+index fa6e06a255..ce60698b2b 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.4.5.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.4.5.bb
+@@ -176,7 +176,7 @@ SUMMARY_python3-opencv = "Python bindings to opencv"
+ FILES_python3-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
+ RDEPENDS_python3-opencv = "python3-core python3-numpy"
  
-+inherit cml1 update-alternatives
-+
- SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-            file://OE-path-changes.patch \
-            "
-@@ -48,8 +50,6 @@ do_install() {
-     install -m 0644 ${B}/toybox.links ${D}${sysconfdir}
- }
+-RDEPENDS_opencv-apps  = "bash"
++RDEPENDS_${PN}-apps  = "bash"
  
--inherit cml1 update-alternatives
--
- # If you've chosen to install toybox you probably want it to take precedence
- # over busybox where possible but not over other packages
- ALTERNATIVE_PRIORITY = "60"
+ do_install_append() {
+     cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
 -- 
-2.7.4
+2.17.1
 
 
