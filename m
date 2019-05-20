@@ -1,49 +1,36 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
-	[209.85.167.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 88E426C3AA
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id D3C9A6D6C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2019 20:40:20 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id h13so8777304lfc.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2019 13:40:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=xY55+eqEk/RpmxTNYsEu8RGXe62OdCPB6McNNxR1M2A=;
-	b=i1qLku+bjfRR09LKxTLAcW8MZ6BYA/H1KhnXBJ+F067cNirg4cpu6kRPUj3oqcMKDy
-	9dzxoKM3vipwMSAPw6EeQg8CfqhkltxNUwfEn0mzQf8WkfVPOV81zB3Qk+/RYd4nTcS4
-	AdOWmKaz0CPFesKkeEqZy8ZJHo1VPbheoEkugEP+ktfSExvefMdzhrwOMlbgQEF+dbAU
-	Xbdt5XcSb+fD8msEe1mkq6X1QdGU2lyNhHkVeCaCJw4r+T9Q7PwATcN+aRRijfbPxNUm
-	g0wnDFmyXj/cL5HVJBvumByVkupcAjyvuvfS6DbKVCSUBLgX6h8QR6ZQYvr0Wmt4aa7m
-	jZig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xY55+eqEk/RpmxTNYsEu8RGXe62OdCPB6McNNxR1M2A=;
-	b=YwrBKpFRECJdWrjDrP3XC7wt4buCbkA7wITbQUDRvx+mAXfgZ4+Ra48s433xBlGM2D
-	BUSI9VOaTz0Qc+gRkhWNLglJKTtzy129Ix9oKCkp7L5o1mt+KrZzpIUb4Si/ggNeIcmR
-	NMPyBYY2ZLn3vEGlxBkU4esqRw4qvzu0NscSGM9XXzbtt9pSeN81oEnOX3LMz/1fA9Hu
-	OdB9h9nwyKHNW30q81r6VjfYtMcX0pdDFy4R8FyP+Ix/vta42XsJcE6mjRVOwiPJ6ScD
-	XCTaI1p0JERXeAAMtrI9Em30Z9vUR60ORP4G7tTKz+GYSsaMk8ib2ykcyMl+/dzCzrkB
-	zBuA==
-X-Gm-Message-State: APjAAAW6a5uZyyxrByJwd2onH0w8RhF/xNxcXxlnHhReFLSRjMuOEPKQ
-	/MBw16t2E93OqQDFeP5nZIV9O4e/DkQ=
-X-Google-Smtp-Source: APXvYqz9KMS7jalLYQixiFDgRd56u8nWDTW5N/WvvId0yY9/yxWCXPWhQ0JuMd2u2Up3ykKLJNl2dA==
-X-Received: by 2002:a19:196:: with SMTP id 144mr35249125lfb.35.1558298420629; 
-	Sun, 19 May 2019 13:40:20 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	y25sm3481276lfy.59.2019.05.19.13.40.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 19 May 2019 13:40:20 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 May 2019 22:40:18 +0200
-Message-Id: <20190519204018.14033-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] python-ldap: update to 3.2.0
+	Mon, 20 May 2019 06:07:58 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 456pNG4220z2s;
+	Mon, 20 May 2019 08:07:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558332478;
+	bh=YeugTowJoZ36KnQPrXUGWvYhFly13HZZiIl7icazYY4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=adxzAUeb6rbvH3hUmeE/P5dXSZTsMYZJn3Pv3AAvJD2npC9Jc09+7k8TI8grSbT2t
+	ec6fYBqq6XUE+sJS6iLijse1lHWJTVylPNcTuaM9c3vzRXURrlivGawwEr77lUN2cv
+	CObqED4605xdccKB/lsP4aVelaD2U4PHOeSSaUdfCEsff+vS6lYyc5/cg6TXtY+xDz
+	AtoAguX/uSjiwHsu7zL7JA2PafOYR2NDzPKtsAxEymewMPiZDhgSROvUfAX82RE5l7
+	Fx5rl+TU/TS+OGorBo/XVUDVKD7Y8x/MWokg6JXkqcUZRJaLTqVs5q4ZPagO00Eio5
+	dV4q3YNn6JZ9CHWNAlGjPaHijDWuhl3BARNGV17cy5uqzOJCUz0c5+JUfGwPZVdY0z
+	lS+/z0/bTmT+dJ04gIX+wTZe1BdXb9GNRsr0mU3oatNrStexmsHDgDMN9Y7w0sAPXy
+	Y6cVELajnK1y5ldePWfJAx9C6lbZVufI6Q5LxADrjVWUisR/RKPTOfLKo8kLkvAKhp
+	1djnCRMtU25tEl+b7j8wc/WU9ZZ4PTYbPXlWXsu0YlSv1zq00o/TgzHdkSwISdBkjm
+	2heHh1TxjwpSbGP8T2KSg2St0TOUKJS32L/+NSjgLptvGMKePk269fzwi0zSK/H/6O
+	UkEg6MMw5DyajZu3LX7sDBLk=
+Date: Mon, 20 May 2019 09:07:56 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Message-ID: <20190520054114.GA3848@localhost>
+References: <20190519202753.2575-1-open.source@oleksandr-kravchuk.com>
+MIME-Version: 1.0
+In-Reply-To: <20190519202753.2575-1-open.source@oleksandr-kravchuk.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking] rp-pppoe: update to 3.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2019 20:40:20 -0000
+X-List-Received-Date: Mon, 20 May 2019 06:07:59 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../python/{python-ldap_2.4.45.bb => python-ldap_3.2.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-devtools/python/{python-ldap_2.4.45.bb => python-ldap_3.2.0.bb} (85%)
+On Sun, May 19, 2019 at 10:27:53PM +0200, Oleksandr Kravchuk wrote:
+> Removed patch was upstreamed.
+>...
 
-diff --git a/meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb b/meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
-similarity index 85%
-rename from meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb
-rename to meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
-index dde8a52dc..d10f11bbc 100644
---- a/meta-networking/recipes-devtools/python/python-ldap_2.4.45.bb
-+++ b/meta-networking/recipes-devtools/python/python-ldap_3.2.0.bb
-@@ -15,8 +15,8 @@ PYPI_PACKAGE = "python-ldap"
- inherit pypi setuptools
- 
- LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
--SRC_URI[md5sum] = "6108e189a44eea8bc7d1cc281c222978"
--SRC_URI[sha256sum] = "824fde180a53772e23edc031c4dd64ac1af4a3eade78f00d9d510937d562f64e"
-+SRC_URI[md5sum] = "fe22522208dc9b06d16eb70f8553eaab"
-+SRC_URI[sha256sum] = "7d1c4b15375a533564aad3d3deade789221e450052b21ebb9720fb822eccdb8e"
- 
- do_configure_prepend() {
-     sed -i -e 's:^library_dirs =.*::' setup.cfg
+The patch file is not removed:
+
+>  .../0001-ppoe-Dont-include-linux-if_ether.h.patch          | 0
+>  .../0002-Enable-support-for-the-kernel-module.patch        | 0
+>  .../configure.in-Error-fix.patch                           | 0
+>  .../rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.patch   | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/configure_in_cross.patch   | 0
+>  .../discard-use-of-dnl-in-Makefile.am.patch                | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/dont-swallow-errors.patch  | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.default       | 0
+>  .../rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.init | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.service       | 0
+>  .../pppoe-src-restrictions.patch                           | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/top-autoconf.patch         | 0
+>  .../{rp-pppoe-3.12 => rp-pppoe}/update-config.patch        | 0
+>  .../rp-pppoe/{rp-pppoe_3.12.bb => rp-pppoe_3.13.bb}        | 7 +++----
+>  14 files changed, 3 insertions(+), 4 deletions(-)
+>...
+
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
