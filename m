@@ -1,51 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 225C07E269
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 075297E23E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 14:52:49 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id f12so8563975plt.8
+	Tue, 21 May 2019 16:37:59 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id n2so2174123pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 07:52:51 -0700 (PDT)
+	Tue, 21 May 2019 09:38:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=x+YOc/qcG3YPF1Fv6OAg0Yx+hDJ2DVaNhIAliZikDC8=;
-	b=JEI9DseTYKiCzJ8cf64L6VSOKIA4W1NgJb/ZAZM7hCmfyf3ZCwwmhfDreIaA28J19u
-	vFlWj+hHy7gyyWHsUfTDiydZP90C2OKZ0K2PB8tQoSThcixf25kiCnfhYxAATW//hIp4
-	mZEfx78F0BSuIq7oFWn35xnnNNVd8FKbehyncVx5AB8K56doncnv/5tj4m3yFDWp5D/7
-	ytcRBnMPQQ1ao4b/04qv8woU/LfCKvQkkq/3JAsl/FCwGPaBx2HGvJu9pwb1+s/r3XpW
-	go/M1wCh42CVmLMThjYEIrJ2lXcTrjO3C2yhaqfc4NPfidSa/bez7GsmO3+j6uM21Nv0
-	b5kA==
+	bh=GamNMynw56pKFlpNsOkDXUbljmh2hSw1vDfBZvL38VI=;
+	b=nZPhghhcWi3BCRa+PO+UyWspNdYlWCMGtXj0ye3r1YYRt6ERIkxXZjvr4CKq6doUmp
+	3raYeZYg5kdTXdHlNzteCBwjFYazYwy4TbEGQpg68IlHdgmEA3kt/7NgZZYkP/gvzFPO
+	vm7XBJj/3x9c60M2NN5pS/cB0S+tTz8Bhk6m6Po7Gm3WC2Reu4CptwHNImunsAw/s1IT
+	LXUI4i9G9mTmJ1J423c2wp9qpip1Nh9fTer8XWHClYaqGQ0f4CiA1fGJwVOElTEnsIen
+	9bGXaQuh5tI1tWDsN4JCSfFb502dUmggQIon+axKeLvWKkWPC0N2Hai7LTbkb/RPfgLx
+	rYxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=x+YOc/qcG3YPF1Fv6OAg0Yx+hDJ2DVaNhIAliZikDC8=;
-	b=SYTv7PS9hCKzi/ggDoXmnbOrmzAQNBStJvjJrB2Fg3IpChJn9rHv+q5wKzS3rpsk/E
-	QlcZoAM9Mf237NB0+oXIGIIPNIuLbJz5hFx/h0TgA4miN3ehZ3aZynwVo+DHMEeyLPuQ
-	zoR53oXdiDhTqHJr5UwNzhaV4x70LWD0Gz9pfMHJLUHJ58Vr8m7QhpytlMFV60PVsHHK
-	jUNdizo0Q8HQ0IzAVmh0LmObb8LdHUVqfrTWhFArwb9zsLyo0S+vcF6FjFCc33KGVxKB
-	jZQwG9lxlo1L/OXSFQAbSAo2F2IHgGPWm/RBMuWZqWvnXUpfZPUsMN4sS6BQZ643fgru
-	4thA==
-X-Gm-Message-State: APjAAAW6rGR38pMJ8q+VlKMIga2oWXAjWfLMHF9T6d0YujiSyMgVFFP6
-	FczZ2y+33rfv0juKLxX5jDZvscUE
-X-Google-Smtp-Source: APXvYqz35MCF47PMKqeWszW0+AKcMbh3XCbC0A9Ko2FRmmnxOMwlRyIY2G9WG8ypKYNlbN8GS76Ojw==
-X-Received: by 2002:a17:902:7d8a:: with SMTP id
-	a10mr62820882plm.63.1558450370862; 
-	Tue, 21 May 2019 07:52:50 -0700 (PDT)
+	bh=GamNMynw56pKFlpNsOkDXUbljmh2hSw1vDfBZvL38VI=;
+	b=VxIPkkf99EM0IIv3+nL58j3JJSYBodTsdBvQXjux0ZluJ8wON2p0BOcPQ19BVppeS4
+	uM2sAPO+/I9EincU14QLgj5ud+Z2UhbN8TJUEZ2YkObZgccSFhTrHQND4/O2gRvSwgGc
+	KD1I4hxnb3/OftKo8qzAaqATz8NxAttkZDgIO4hWBYlEcChOlgrNnCE0z0zA23ukkxGy
+	KxWMTAkk1arL67S0488U5tRbC+bSy0PIFfPwE7xEdZCFHr6LxMkSOiqxzBCfM07h24PY
+	80mXdvTQrhvO1Tg+NE/gkWoSeh3VuyfFVgKKVMYf6ePicCrzjrjsr6vjoZox3/63SFdI
+	BCHA==
+X-Gm-Message-State: APjAAAW8X5pdrTMNKWD36KNyp2caZwmHeNYaF+OoBdOkgl7MmJGdU9YS
+	xnn2I12WsEP01pKd2xj+m1QPonll
+X-Google-Smtp-Source: APXvYqwz3if7QafJBk5CFkiiQjpVhMI52tHsqjrBwpFeCsAVbpMUH+aKrej30EUcV8WriQmnrru8iQ==
+X-Received: by 2002:aa7:864e:: with SMTP id a14mr78081187pfo.132.1558456680600;
+	Tue, 21 May 2019 09:38:00 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:199d:e2fe:5a4f:97f4?
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	c5sm23506332pgh.86.2019.05.21.07.52.50
+	g17sm38473854pfk.55.2019.05.21.09.37.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 May 2019 07:52:50 -0700 (PDT)
+	Tue, 21 May 2019 09:37:59 -0700 (PDT)
 To: Adrian Bunk <bunk@stusta.de>
 References: <cover.1558410874.git.akuster808@gmail.com>
-	<fd48edcd7415f4a1ca043e256585f2705b66545f.1558410874.git.akuster808@gmail.com>
-	<20190521064032.GD9971@localhost>
+	<3265bb67550f49b0dd4a4ec9ad98af56c14cbb5d.1558410874.git.akuster808@gmail.com>
+	<20190521080814.GB15108@localhost>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -91,14 +90,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <13e0f089-cd2e-9084-279e-1a048911e543@gmail.com>
-Date: Tue, 21 May 2019 07:52:49 -0700
+Message-ID: <e00150ba-4790-3405-5b36-c7062188cc8c@gmail.com>
+Date: Tue, 21 May 2019 09:37:58 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190521064032.GD9971@localhost>
+In-Reply-To: <20190521080814.GB15108@localhost>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior][patch 02/34] python-pyasn1: upgrade 0.4.4 -> 0.4.5
+Subject: Re: [warrior][patch 08/34] gnome-desktop3: set correct meson gtk doc option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,46 +110,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 14:52:50 -0000
+X-List-Received-Date: Tue, 21 May 2019 16:38:00 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
 
 
-On 5/20/19 11:40 PM, Adrian Bunk wrote:
-> On Mon, May 20, 2019 at 08:56:02PM -0700, Armin Kuster wrote:
->> From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+On 5/21/19 1:08 AM, Adrian Bunk wrote:
+> On Mon, May 20, 2019 at 08:56:08PM -0700, Armin Kuster wrote:
+>> From: Andreas Müller <schnitzeltony@gmail.com>
 >>
->> -Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
->>
->> -Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
->>
->> -License-Update: Copyright year updated to 2019.
->>
->> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ..
-> No reason is provided why this should be upgraded in a stable branch.
+>> Fixes:
+>> | ERROR: gnome-desktop3-3.32.0-r0 do_configure: QA Issue: gnome-desktop3: configure was passed unrecognised options: docs [unknown-configure-option]
+>> ...
+> This was a post-warrior breakage.
+AH, so it is. Will drop.
 
-There is no meta-openembedded process or requirements for stable
-branches=C2=A0 to provide reasons in commit messages.
-
-The precedent in the community is to provide minimal or no comments in a
-commit message. So the burned is placed on the Stable branch maintainer
-to do the leg work the community as whole should have done.
-
-I looked this up before backporting and I was satisfied with the
-information I found and felt no compelling reason to explain why I
-choose this for backporting.
-
-- armin
-
+thanks,
+Armin
 >
 > cu
 > Adrian
 >
-
 
 
