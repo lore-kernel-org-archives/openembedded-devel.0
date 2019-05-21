@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
-	[209.85.214.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C3817E144
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+	[209.85.214.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 17C847E140
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:48 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id f97so7724100plb.5
+	Tue, 21 May 2019 03:56:49 +0000 (UTC)
+Received: by mail-pl1-f177.google.com with SMTP id r18so7714627pls.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:49 -0700 (PDT)
+	Mon, 20 May 2019 20:56:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=xl9Tl6/sXJGl8ds3axnzxmTqTmtrJ5H2dbk7nSBQGxQ=;
-	b=P9mSQMS1s7dE0DGtQvzELn07Olvf7aFQh7vb5Rg57vz4o9JCaRYF42Lv6K0DqDBBnF
-	gOZB2tp+tSJCNKS8jm2iBX2aX0xreHa/IB6RHdmbQeBEx0kgq1cL/oMCkGQHx0mAwsMB
-	+E9F1NMXXvURkjnwl6FvWcBXg1pvlvQSHaMAUMWHIfMyA+KIXFTJrxi5dF+MOHATU2hz
-	3uQ246StEu2/hvNvHe4M748LGEJqEiRCTHmf0NwcE1O2iv4TN7bxwDbbaEZnozkpQF8F
-	QhGnm/dBB3q3K/qMnhJfyfice/StEgrCQGM9jFLDL+yiE/B5GhgQbSS5UOsCGODJ+sCG
-	606A==
+	bh=YFqwYla75uQPesGG/TcPCAt8z3rl9wt/FdHpcZeAPzE=;
+	b=QOFIJU+EiWdcIUlMqXc/vTGfukNBhL2uznpGNnWvCO4MbYZZhSfmhqrUJfFOMPH6W/
+	bEJmGZ+vayPCo5TxkITjmZhm9foa29Lyv4JDbIsbDEGO26S4ers65ZOQdlu+BGc3eUvF
+	Y35ta4AeXRQmS4jrgFmo8NFWEkLtZIcilE7JXBtfMq8T9/t7fTjpTavz2j3fGIG+UGIA
+	1jNU3mr0S0JcCTFMNkKH5lVfaJHvE0qTElwAr9ypKt++lSGK6RDtfoWCMNvEL2YuVSzs
+	aB7GwXJUZzzlgSuEDpSTecMRhvPllXQ085LLfIOiOtq7CuaUE3s08U9nUpqb3hTgafwb
+	uR7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=xl9Tl6/sXJGl8ds3axnzxmTqTmtrJ5H2dbk7nSBQGxQ=;
-	b=Lc99T1rC+HCpLU+WdiUjxOCjP6QzEx32l1+9wuPoG7qiwhvB9JIvO+/eZhdX6Qzhpo
-	KfrFWS5W994yrq7VUv2CJUHQu023pzUq76iE0L73YzDcgcmbPH90Wr28QPM3nKqyVL3s
-	LaLYG3IRT8AtpsxOjdAWfuvmqNeBgitnBPITUoZJ0w/LMBYynNwrBoj+DT3PHSaBm+sF
-	llcAnmATM5SSQRuv66qPZvgBTaGJtQHDnDh19NO764YmIR1NyXPvRlfKHyry1jwp0d8D
-	yRwCtMPAZC9kfxiPLjBLdK2Jc5w9EFCk2DFTH3lTtMXhQIdz6z9FBhVbFcZhwKP8ShKY
-	yd8w==
-X-Gm-Message-State: APjAAAX/gSllUWh0QwaLc5ycPUtcDoL5W10OtfFL/eutdI7R9CsR0l6o
-	za//LgZgfkbKKev7iUSqDCWTSbo0
-X-Google-Smtp-Source: APXvYqw2u4stvZEO/fx0xkPG1jj6cdGqb0adzYKHsAiwoGWd5uqlX0FAHP9lmHBuQLyVmo3xxLfhPA==
-X-Received: by 2002:a17:902:ac98:: with SMTP id
-	h24mr23784440plr.265.1558411009422; 
-	Mon, 20 May 2019 20:56:49 -0700 (PDT)
+	bh=YFqwYla75uQPesGG/TcPCAt8z3rl9wt/FdHpcZeAPzE=;
+	b=RQt9jLA6B1Dps0BDoeVGywnBkyx1QLBArEuMEf4wthHvTLVMgVeteNeg8tgiulTC9s
+	VV59VDFMMWOcAUlnARh2b7P4OC4fZ581aALubIdNaFtktxiCb+1PhL6lf83dQI/uG96v
+	RMnTPG1ct8cQ6qZvecHODo4v6xLlXFTeFkASXeAUaR0+In+ZhBav6rTuAxVVw0Xs3CSz
+	V0G+4OJlxfrfjJNaSLovOgZkCo+45ASa3PyP3TewuPg/pqoIDhfpNvLghTRBfsN1EJb0
+	R42wgatfAMyrsFw4InKan/YatiB00iDDS1NZGH06MOtqtLA+XUYJuiL8KuPPCAhqTYA0
+	r0DQ==
+X-Gm-Message-State: APjAAAVSbgpETRGv5MR8c+N0o3HXySVBSvFD5d9mjmrunEB7Rl+dzUwU
+	KYtWp6ZC3qU5Ju0boeTzHFw8ZcjW
+X-Google-Smtp-Source: APXvYqxEqCa0QV6FRPW2XaWh9cxxV8UB6XKpKwtStxrqJa9el85i3b/PxWRQ/7Ct3Rw1HEgr4wnNsA==
+X-Received: by 2002:a17:902:3103:: with SMTP id
+	w3mr4896224plb.329.1558411010195; 
+	Mon, 20 May 2019 20:56:50 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.48
+	h13sm23045273pfo.98.2019.05.20.20.56.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Mon, 20 May 2019 20:56:49 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:13 -0700
-Message-Id: <078349138c98bccf7740fa54dae2056ba2c2cad5.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:14 -0700
+Message-Id: <86d4b455a3989ec0b22717e4ca696c849d5fbdc8.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 13/34] cpupower: Inherit bash completion class
+Subject: [warrior][patch 14/34] python-urllib3: Set CVE_PRODUCT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +60,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:48 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:49 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Akshay Bhat <akshay.bhat@timesys.com>
 
-Fixes
-ERROR: QA Issue: cpupower: Files/directories were installed but not shipped in any package:
-  /usr/share/bash-completion
-  /usr/share/bash-completion/completions
-  /usr/share/bash-completion/completions/cpupower
+urllib3 is used in NVD for CVE's like:
 
+https://nvd.nist.gov/vuln/detail/CVE-2016-9015
+
+Signed-off-by: Akshay Bhat <akshay.bhat@timesys.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-urllib3.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-index abf1585..cf70eb2 100644
---- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
-+++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- DEPENDS = "pciutils gettext-native"
- PROVIDES = "virtual/cpupower"
+diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
+index 288ed8b..34f1478 100644
+--- a/meta-python/recipes-devtools/python/python-urllib3.inc
++++ b/meta-python/recipes-devtools/python/python-urllib3.inc
+@@ -16,4 +16,6 @@ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-threading \
+ "
  
--inherit kernelsrc kernel-arch
-+inherit kernelsrc kernel-arch bash-completion
- 
- do_populate_lic[depends] += "virtual/kernel:do_patch"
- 
++CVE_PRODUCT = "urllib3"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.7.4
 
