@@ -1,54 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EB127E101
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id A84607E12E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:37 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id b76so8313077pfb.5
+	Tue, 21 May 2019 03:56:38 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id z28so8335485pfk.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:39 -0700 (PDT)
+	Mon, 20 May 2019 20:56:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=22vJ03wj6sBDyrE1BnaGjfUaMHKmLSnWbdTm350Bl6o=;
-	b=KNHpIblxh9LSZN3Bme1Rm6WWRvOd7UnV0piwscC21lvlg3AKwY/lWJXmhlnG0bXySY
-	KUTqA0WtGCse3Zjp4IIIAwHhDV1gdMiPWoGqR00klUGXvAu/VzikNMuEDzlsZZ2WkVbm
-	TW5iJJo2yoslaBTsFUXftf210tGUzRSdLrS3VhBM9J+7A7+MhyEiq2JIh30pliNAKOTt
-	pImorz5K8lW+goJoPU1XNf8pG75jN0jNPNm5movQnvhX91azr7ILukDkpC0Q0CVDOu7a
-	BdNoFCNm9NnWhm1j/nuRm2CLCUJo8x3m0uukf8sfSe4Qaf9otVummS9bk3Du3ibnjEZg
-	Nnmw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=/Pv7E31gbcEO5j9odxgnjHayanxf+SmJQbMRTEyd0do=;
+	b=CcPOuxZ2egMHqOP1xAiBG2E+DzCRjgsdN0+qAZgMO/wm9n9yt9P6ZbEY6ERnvdgcpn
+	IU/WG/atcCArZKE7eIKwCE9T/JE32albNH2yBzVUJ1v0vfqQtHKvCFjlJP40KFSD8TLk
+	W0N5koQUGAzyteLBxOkdXsXwYh9ffK56hr/k80jWq5AQy6RlL95n3aCqJFDYH6uhaevP
+	PiwfHHwhaRiS57Yy+yNU6K2vey9ca85UVgf22iVF0+GZByoZdWQPVcPL/1PIh0E7h77u
+	CZD1qUNs+N0F1X9Y2v2xej8xlup14p5bg61IWUwiY+w8xYKE8HjVEoizAL7EBlXE6BMp
+	nGVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=22vJ03wj6sBDyrE1BnaGjfUaMHKmLSnWbdTm350Bl6o=;
-	b=ta2zVQx1pZpsIIvY6LW6ZbNcCE0XjEJGba586YVE0PV33CwauGSU7ihGqJvPIX6/Nz
-	6hpyv8B30wDgF5PT84LIcG58MoLCUlHqHD5I2UNThmU4PdUzjfVhwoG8AsJj+6CgBz2Y
-	uWYVJ7xO1BeMfOlB1ZZ1Pz2LfctFQTeubKAoO59uXFHs8UNAenScdojzJGlDN2tBrTE7
-	EUSJNzbejfrsKbHEZ6pKMjLCczXTYV+y71O9Jdo+5kfHR269Q6yU3uXhc9H1CQ31+5fl
-	f6pGwvpN2mgMAMRZBhyC3MkO1ySVAtxMYIkuSu2hoDMZdPhAvOyENU9TXASRyXZ52XF5
-	fttw==
-X-Gm-Message-State: APjAAAWe+QqRr4sGgeZ3EiGtd6JSuKkqwLShSK2h6cQAJaJDwUvQpBU/
-	W9Z3jnOxXZLVM5vJ+PBi1PQFe8dI
-X-Google-Smtp-Source: APXvYqylcdW2WrflWPYOjm+iIxXgsGm3g1QyKwf8U/H4thJ9OJOJz9SxKFgqHKGGOHkVT0rIBba2Xw==
-X-Received: by 2002:a63:a08:: with SMTP id 8mr79014227pgk.46.1558410998634;
-	Mon, 20 May 2019 20:56:38 -0700 (PDT)
+	:references;
+	bh=/Pv7E31gbcEO5j9odxgnjHayanxf+SmJQbMRTEyd0do=;
+	b=pvZxHVIbFfZ2hAMrx/Ti7ohJ40O/2zKhlOsfbuzImgGFl2c2H+tg9XUYkzqFHSqnQo
+	9bYtAj1SmaH9Q6Yf+suJSBHD6NCYlv08QZ3gbx8sOowK2M8kihSQII/kQdAcdr6f5H/m
+	Ernb1dK1YAxUae3hFX5USC1nI5KBNc3kmHmiDjGosXAUeSYAwid72XTVWfswaMtCC+Lp
+	sbnUOP7zHB9RONlEqP9RNexShPTq15QMli0Gc213JpI5XvwQASH2Riot7yDgEgcm/jj5
+	wIk9483Lz6B2X72hcIbO5T8LdR/ZiII12Sd9voW6d4ae4B4Q9zZphxgfAgk1kKBr/+uA
+	qpkg==
+X-Gm-Message-State: APjAAAXssL0TfohzF7KJxo0hUVfqBfy2RcaPi1sjwcs8dHSQUv/vTQJn
+	sOmJCuMT1uU8cgWkYMzgb8uUOnFz
+X-Google-Smtp-Source: APXvYqyxhdakxgKtIRvCyynt1xNaM3oMAvMItUq1Vh/CvLnqfBKcJBmF9hn97ZnYP1K1LyXagvCACA==
+X-Received: by 2002:a63:8342:: with SMTP id h63mr81009242pge.251.1558410999648;
+	Mon, 20 May 2019 20:56:39 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.37
+	h13sm23045273pfo.98.2019.05.20.20.56.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:38 -0700 (PDT)
+	Mon, 20 May 2019 20:56:39 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:01 -0700
-Message-Id: <ddf9156c384735afecddebbf4534ec5422a53db8.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:02 -0700
+Message-Id: <fd48edcd7415f4a1ca043e256585f2705b66545f.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [warrior][patch 01/34] cpupower: remove LIC_FILES_CHKSUM
+Subject: [warrior][patch 02/34] python-pyasn1: upgrade 0.4.4 -> 0.4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,51 +59,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 May 2019 03:56:38 -0000
 
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 
-cpupower is a 'special' recipe since it does "inherit kernelsrc" ,
-which essentially means that it doesn't have its own sources, but
-reuse the kernel source tree, from virtual/kernel recipe. As such,
-checking the license file in cpupower recipe does not seem relevant,
-since it does not fetch anything (kernelsrc has "deltask do_fetch")
-and the fetching is deferred to the virtual/kernel recipe.
+-Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
 
-so we are basically checking the COPYING file twice. If there was any
-license issue, it would have been caught by virtual/kernel recipe
-already.
+-Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
 
-Hence we remove LIC_FILES_CHKSUM like it is done for perf recipe in
-OE-core in meta/recipes-kernel/perf/perf.bb.
+-License-Update: Copyright year updated to 2019.
 
-It has the nice side effect that BSP layers can use different kernel
-versions without worrying about any LICENSE checksum changes in
-between kernel versions.
-
-Reported-by: Daniel Díaz <daniel.diaz@linaro.org>
-Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7142f09407b81c2221bbf1c5078641ab4bc63ee9)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/cpupower/cpupower.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-python/recipes-devtools/python/python-pyasn1.inc               | 6 +++---
+ .../python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb}       | 0
+ .../python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb}     | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb} (100%)
 
-diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-index 9289738..abf1585 100644
---- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
-+++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Shows and sets processor power related values"
- DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
- saving related features of your processor."
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
- DEPENDS = "pciutils gettext-native"
- PROVIDES = "virtual/cpupower"
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index ab34d25..3827fea 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -1,10 +1,10 @@
+ SUMMARY = "Python library implementing ASN.1 types."
+ HOMEPAGE = "http://pyasn1.sourceforge.net/"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=815ac3f9ca693006349094b358ab3155"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a14482d15c2249de3b6f0e8a47e021fd"
  
+-SRC_URI[md5sum] = "0d182b71e1f72fe147d7957bc90be7f2"
+-SRC_URI[sha256sum] = "f58f2a3d12fd754aa123e9fa74fb7345333000a035f3921dbdaa08597aa53137"
++SRC_URI[md5sum] = "f3c0cfbf882a20811be5ad5a41f74b82"
++SRC_URI[sha256sum] = "da2420fe13a9452d8ae97a0e478adde1dee153b11ba832a95b223a2ba01c10f7"
+ 
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb
+rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb
+rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
 -- 
 2.7.4
 
