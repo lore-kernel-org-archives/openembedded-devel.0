@@ -1,103 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id DB5FB7E263
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B1C807E26A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 16:38:18 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id f97so8683314plb.5
+	Tue, 21 May 2019 17:43:21 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id h1so21556015qtp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 09:38:20 -0700 (PDT)
+	Tue, 21 May 2019 10:43:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=CcixcNMc0lnHjMvEhPBb/QjwKbuP3jYckKcZUxE3qTk=;
-	b=Awe/PulpB5WwQKBqPT0dKpauwZWkSdEPybkyD8dgW1Hy3zI6EY+yPYCRLLcvmQULfz
-	SJA/R774pWBap/4b7WIp7BEo6+bbWzFCVH1ubY3kkDVRR+V9fP8cD965/iEok8v8JDNG
-	KD1ozPh0YmQ0urkY44i/0mdT6zmYsffcs0A13YgvhihZf6wWt7yK2oPexweAtsAG239q
-	Jg/wiyT1olzDL5G3LP4gIwKQDIKO+NzGp8nkwwYOvYlwEcBSDqDH4AfC/q3sW1HopTbz
-	FZMU9kjfxak3FsmjguWycGEFkokygPQN87RfuiWW6jVti3h5mr+3YiTrhJwyt2tfSeNK
-	tS5Q==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=2Kg81xtp088USB+xQUhJmp+Hcz13jHwZH61xjGZihVc=;
+	b=K81m5AMRV0U/tfTUVu03jB8OI0MxgDTo85T32Mu2zEuk8ma48UxlV0rwlsBQCbzu0I
+	ZKxQq40rpPuGa2c2hjePCGsqfQ8Y5FhphkYwwR9GJB4adMt9m20ANy2za0BYiL1H6umk
+	gihvTLeY+81bv58o0wK5hboTc4ej2QDsZonweH+Xa/9kLh0FflpSCn3WDBhnVH7YOjzp
+	aSQlGogSuH64IhFzmE2QweK78rhLGUi8MsQNuA5DmOFqsLChH0PqAFEBipC2fdUUsTcg
+	AsxO+zRrrehmD11zrjss1ay9sMRuycbOPQ329ga6NHwoLDiaiKbVuh9dkzNAThuVt/05
+	5B/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=CcixcNMc0lnHjMvEhPBb/QjwKbuP3jYckKcZUxE3qTk=;
-	b=GxhTwfShBFNfqbsRaCEaKoRrP1U7a+grhKfwuR7TmkFc2eIFe56mYkAyDiVcPJ9py3
-	E3eiChXzV3Bi+xuRGVzgKHZau4kbc9wtK05+f3KwlwBRjlIw19bm2NZBovzxiRZXhZsN
-	2gZNgcLE6+V8ald3bxFEuZmQt7zDRCIc/Hmk5CeeO08Ku2tOL8f28TAtAub/fsfiRh2p
-	gWvK6aAxNkHD/7Xai0B95LDObJbJsLCwa2deMTOMNlRcxkw8orhkhKRtIdP5+vjOOW07
-	uSJSENhVq1GpbWNDInxPID+ExKbpUmyNJWJlJiFKfbpdHa8q6J16Egu32/KmsQJhNHuK
-	JrVg==
-X-Gm-Message-State: APjAAAWz9ODLVCcCLd8xKyXfOQrSGcZ0I0sdEHipgw0issRndu5dsLcZ
-	Dt8qf4uhF5OwpzV3/q9HeojlGdGX
-X-Google-Smtp-Source: APXvYqzmiShPQ6Apx2UB7D2e77620KcqxGZIA1pYQ44H7MN7O/dw626GN4k2iI96MjavwqTgfUCy4w==
-X-Received: by 2002:a17:902:7202:: with SMTP id
-	ba2mr29956838plb.177.1558456700111; 
-	Tue, 21 May 2019 09:38:20 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:199d:e2fe:5a4f:97f4?
-	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
-	by smtp.gmail.com with ESMTPSA id o1sm8547386pfa.66.2019.05.21.09.38.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 May 2019 09:38:19 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>
-References: <cover.1558410874.git.akuster808@gmail.com>
-	<8af1b3526defb5b604a7edb096d594e81cd2a72a.1558410874.git.akuster808@gmail.com>
-	<20190521093308.GE15108@localhost>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <b07bcdee-c558-5480-1997-cdca56673719@gmail.com>
-Date: Tue, 21 May 2019 09:38:18 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=2Kg81xtp088USB+xQUhJmp+Hcz13jHwZH61xjGZihVc=;
+	b=dizVheOJhpMjOYjxVCbMmS9QlY6qHq2fjC4a82FLHtiXEGP6fWCaZ2KxdUm/G9aW3v
+	90PhyfQJDHG10JIOi/kfg9aMkrGexdvD7GzvvDSzoiA0MlisUkmk16f4BcbD6cDJX7XY
+	2i4tGJGNpbyiXmkN6H2qbAzd/uI3lnUQu8NyZXDstzKIVaNMLFuyOHIBVqs7Ybn8vgF9
+	FApv2lItKbQUcGHMufO+KngyloY9V19il2zRtNnWeohxhQVyPdJMYN944eBsEs2MdHqw
+	Cvf4tKwPMjTxrReeT5DeQ2Or7wtvKLoQa75goN5ZsTlb5Gq5XPPDSO0xFqCPLRkZvw0E
+	mdPA==
+X-Gm-Message-State: APjAAAWpL4yeVzaBVxxg2OQeXtDTvhI8JWU/hVuhChWCdy9i6Kc9DDSs
+	6FNGmnwMWvP5PNBtSN+ublbaEYjK/veL4jWUR65DkG/3
+X-Google-Smtp-Source: APXvYqyY9xs+Dim/Y70f/RDSe3EPbolzvbEE6GUtbH5gfemMdORaM6sp3F1DhvyaDNoxU9ocrPmAHrMwiYjJX4o1SzA=
+X-Received: by 2002:aed:3b0a:: with SMTP id p10mr47643063qte.194.1558460602260;
+	Tue, 21 May 2019 10:43:22 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190521093308.GE15108@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior][patch 17/34] evince: add patch to fix build with recent gobject-introspection
+References: <20190521065529.41647-1-raj.khem@gmail.com>
+	<20190521065529.41647-2-raj.khem@gmail.com>
+	<20190521071928.GA15108@localhost>
+In-Reply-To: <20190521071928.GA15108@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 May 2019 10:42:56 -0700
+Message-ID: <CAMKF1sp8bpg_kYq=fTASAYy9isUGAUuF0A9FXdQ3pEJJ=w-m0w@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] openocd: Fix build on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,20 +55,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 16:38:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 21 May 2019 17:43:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-
-
-On 5/21/19 2:33 AM, Adrian Bunk wrote:
-> "recent" is post-warrior in this case.
-Good catch. thanks
-Armin
+On Tue, May 21, 2019 at 12:19 AM Adrian Bunk <bunk@stusta.de> wrote:
 >
+> On Mon, May 20, 2019 at 11:55:29PM -0700, Khem Raj wrote:
+> >...
+> > +Fixes
+> > +| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
+> > +| #define PAGE_SIZE                       4096
+> > +|         ^
+> > +| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
+> > +de/limits.h:89:9: note: previous definition is here
+> > +| #define PAGE_SIZE PAGESIZE
+> >...
+> > +--- a/src/flash/nor/esirisc_flash.c
+> > ++++ b/src/flash/nor/esirisc_flash.c
+> > +@@ -92,7 +92,9 @@
+> > + #endif
+> > +
+> > + #define CONTROL_TIMEOUT             5000            /* 5s    */
+> > ++#ifndef PAGE_SIZE
+> > + #define PAGE_SIZE                   4096
+> > ++#endif
+> > + #define PB_MAX                              32
+> >...
+>
+> Are you sure this is correct?
+> This looks like two completely unrelated defines that just happen to
+> have the same name.
+> And it worked by chance since they have the same value on x86_64.
+>
+> Renaming to something like ESIRISC_PAGE_SIZE would be a proper fix.
+>
+
+yes, upstream clarified that too. v2 is on cards.
+
 > cu
 > Adrian
 >
-
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
 
