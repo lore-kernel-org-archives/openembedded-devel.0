@@ -1,52 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BDC37E069
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
+	[209.85.214.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C3817E144
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:47 +0000 (UTC)
-Received: by mail-pg1-f180.google.com with SMTP id t1so6418376pgc.2
+	Tue, 21 May 2019 03:56:48 +0000 (UTC)
+Received: by mail-pl1-f182.google.com with SMTP id f97so7724100plb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:48 -0700 (PDT)
+	Mon, 20 May 2019 20:56:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=b2Z9V9Nhpp2vCHVxMAHX6ogS464JLEkFPO0nJjCC7TY=;
-	b=qQxuoQsEYPsPBOiY3aj9AtTc8Cj0Khbau+WtaaHC7yroNTrZpM61EdRDOoBPNA01DX
-	X9n5mjNXl0GC/l10OXu8vdmnzH9jS8pDpCiv3UN4Lx0CPRlFeuwl29hjweGaUIu5IxxI
-	0xqLeYb8Hcs1rOzFHPfMZxJeeA3YLeWNA5YOItdmtyLlxCsc8OZ36sMxA/7xCOfgIcI9
-	VlUUmYYf3rZ+u9vYeE80R3CHuq9psOluQbpLuBlq2NQLtWDDzAw4ma/zFg/hNOHJ3vhv
-	QWJ9jgoSQTcScPwoGg/knQ3zbdxahYZ2JqRzTthOi2s90ZWvlom8Zu0VE5gaAD4Sl/Sm
-	D7FQ==
+	bh=xl9Tl6/sXJGl8ds3axnzxmTqTmtrJ5H2dbk7nSBQGxQ=;
+	b=P9mSQMS1s7dE0DGtQvzELn07Olvf7aFQh7vb5Rg57vz4o9JCaRYF42Lv6K0DqDBBnF
+	gOZB2tp+tSJCNKS8jm2iBX2aX0xreHa/IB6RHdmbQeBEx0kgq1cL/oMCkGQHx0mAwsMB
+	+E9F1NMXXvURkjnwl6FvWcBXg1pvlvQSHaMAUMWHIfMyA+KIXFTJrxi5dF+MOHATU2hz
+	3uQ246StEu2/hvNvHe4M748LGEJqEiRCTHmf0NwcE1O2iv4TN7bxwDbbaEZnozkpQF8F
+	QhGnm/dBB3q3K/qMnhJfyfice/StEgrCQGM9jFLDL+yiE/B5GhgQbSS5UOsCGODJ+sCG
+	606A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=b2Z9V9Nhpp2vCHVxMAHX6ogS464JLEkFPO0nJjCC7TY=;
-	b=YCptz3UEGofXOhCcU7EmpFunxJrlB9CIiYsOTVAOtYr2747ES3ZusbWCnd9w7wXsLL
-	qGOFQgmxEBJLRZZtrNTJBgEK4frLv8NMYW5GRAnRcT75qp5d2SlVyFETebaX3WPwZbVE
-	x5xg8r+TWEsCD/r7znUsZ8TjTF69XNdwSIfff0pmP+dLJVIlSk+gdqPmyGwy1trCXlKC
-	MDpScQLnIhhNyIND9YC4QnQQcKRFvXLw0PzeGqSMoE4AFLq+jvLaNCPZb0m1kfJQZL5l
-	zrVaGkDmjdr8CLo4Dpqfwsq82LPlqgceo2cccXZk0pZQhqShOvJNEQ6BSxuJINlw1veU
-	AFog==
-X-Gm-Message-State: APjAAAXbbT++U3wjWpmN8vpZ1IJHMvQVAKeoDbHzRBVsIGVhRFrZ5qMZ
-	P2bVaRblGUDimqexb8Qbjrcw+bd9
-X-Google-Smtp-Source: APXvYqzNLOyUoppl+rdhk9X0z+eINlg57Pe3EZsEvUfBubA6+nK0nLLK3i8CnLT03H5OcHj+xzy72Q==
-X-Received: by 2002:a63:4c54:: with SMTP id m20mr79928851pgl.316.1558411008511;
-	Mon, 20 May 2019 20:56:48 -0700 (PDT)
+	bh=xl9Tl6/sXJGl8ds3axnzxmTqTmtrJ5H2dbk7nSBQGxQ=;
+	b=Lc99T1rC+HCpLU+WdiUjxOCjP6QzEx32l1+9wuPoG7qiwhvB9JIvO+/eZhdX6Qzhpo
+	KfrFWS5W994yrq7VUv2CJUHQu023pzUq76iE0L73YzDcgcmbPH90Wr28QPM3nKqyVL3s
+	LaLYG3IRT8AtpsxOjdAWfuvmqNeBgitnBPITUoZJ0w/LMBYynNwrBoj+DT3PHSaBm+sF
+	llcAnmATM5SSQRuv66qPZvgBTaGJtQHDnDh19NO764YmIR1NyXPvRlfKHyry1jwp0d8D
+	yRwCtMPAZC9kfxiPLjBLdK2Jc5w9EFCk2DFTH3lTtMXhQIdz6z9FBhVbFcZhwKP8ShKY
+	yd8w==
+X-Gm-Message-State: APjAAAX/gSllUWh0QwaLc5ycPUtcDoL5W10OtfFL/eutdI7R9CsR0l6o
+	za//LgZgfkbKKev7iUSqDCWTSbo0
+X-Google-Smtp-Source: APXvYqw2u4stvZEO/fx0xkPG1jj6cdGqb0adzYKHsAiwoGWd5uqlX0FAHP9lmHBuQLyVmo3xxLfhPA==
+X-Received: by 2002:a17:902:ac98:: with SMTP id
+	h24mr23784440plr.265.1558411009422; 
+	Mon, 20 May 2019 20:56:49 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.47
+	h13sm23045273pfo.98.2019.05.20.20.56.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:48 -0700 (PDT)
+	Mon, 20 May 2019 20:56:49 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:12 -0700
-Message-Id: <2a534f23d63b8d9b9bbbc124fffef6ed7fbc7af2.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:13 -0700
+Message-Id: <078349138c98bccf7740fa54dae2056ba2c2cad5.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 12/34] zbar: fix SRC_URI for multilib
+Subject: [warrior][patch 13/34] cpupower: Inherit bash completion class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,29 +60,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:47 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:48 -0000
 
-From: Martin Jansa <martin.jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+
+Fixes
+ERROR: QA Issue: cpupower: Files/directories were installed but not shipped in any package:
+  /usr/share/bash-completion
+  /usr/share/bash-completion/completions
+  /usr/share/bash-completion/completions/cpupower
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/zbar/zbar_0.10.bb | 2 +-
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/zbar/zbar_0.10.bb b/meta-oe/recipes-support/zbar/zbar_0.10.bb
-index 6b6e501..ebd1f7a 100644
---- a/meta-oe/recipes-support/zbar/zbar_0.10.bb
-+++ b/meta-oe/recipes-support/zbar/zbar_0.10.bb
-@@ -6,7 +6,7 @@ DEPENDS = "pkgconfig intltool-native libpng jpeg"
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+index abf1585..cf70eb2 100644
+--- a/meta-oe/recipes-kernel/cpupower/cpupower.bb
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+ DEPENDS = "pciutils gettext-native"
+ PROVIDES = "virtual/cpupower"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=42bafded1b380c6fefbeb6c5cd5448d9"
+-inherit kernelsrc kernel-arch
++inherit kernelsrc kernel-arch bash-completion
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2 \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.bz2 \
-            file://0001-undefine-__va_arg_pack.patch \
-            file://0001-make-relies-GNU-extentions.patch \
- "
+ do_populate_lic[depends] += "virtual/kernel:do_patch"
+ 
 -- 
 2.7.4
 
