@@ -1,46 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id AD4E57E133
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A4BA7E16B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 05:23:10 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id k24so19087555qtq.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 22:23:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3xO4lBYydySoM61zsneYEbw6zJHZHyO+NLeOgLdtQZU=;
-	b=qXhN3qtMUnz6+oqUJ1xnZWDerUpYZwgFKAsGxZnRtBXhyZhnK6CbBwSQ+LyQMySMDJ
-	sJtmjS32Qa5AFIaGr+OXagClzae4pZ9gKaVeX3AcCQt/kD7pnF3D79ZKdVKUasP8c3Wk
-	cFe9CAM8q1dgBE2q0ctgzHEecYHzx/dlXh4OYYIu8K4sALO50oxGf7BZKHsMtqfOD0Zj
-	fwggVPnbL0heL+tm3ovil8ag86uasWy31HSe2/atg0m2nZCkka+oeQ0M9YwPvMb6JrQ3
-	m3dXtl6fDdVoX+4m+e/MovAvWqM+QE16Q3uI+4TmZxQaWR3iOwU69wJ+/Yu4lKkw3Qdk
-	tYoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=3xO4lBYydySoM61zsneYEbw6zJHZHyO+NLeOgLdtQZU=;
-	b=ikJBJa+h9/sq/gyuzQVsD8PjQTTtaWiXlg9xnsQyXH9q7M6xU2BsyLJUMsUKszPQQA
-	845cN8Soct2rU5bA3ZJeiXZlQlNLSBSiGUQCOzDIF2KUIqfyN4Af7QloXCGGgu8aSKuC
-	M8bqN+hRMUxR+oF/ECF4R3jE2kOQVTkaSyRaYvGzZ6zWSzfV26611TbPCdk9uxvqy0w+
-	EMWgrfZ1a430iL+E1gBaw+NyWQX7yO6MoDYr8+eYsV4OHzNW/nDVHSlutWI1z+RKb10G
-	H8AB9LRzCkpItfvlVuwo8cey6T7e3RjRnQhv4MZhc+PS7HUGkjSyLq7YmAlkix5wa3zB
-	yy0w==
-X-Gm-Message-State: APjAAAUnd+4RN0CPaRTbeQSoHoE+spi4MT7w40ySositwx7dtcBqbSmQ
-	0lwyE8yZim2ycmVfG5Z0UV1SFDI6KKYH6jchRS4=
-X-Google-Smtp-Source: APXvYqxyCj6+V2k7M8KxkArUJn/ebmXwsldJFq3fJEQivp8oEISyJgVQAFhwK4Px2X4+JLWDUG7I0mUE1ecZcPUUkvA=
-X-Received: by 2002:aed:23a8:: with SMTP id j37mr27951542qtc.53.1558416191437; 
-	Mon, 20 May 2019 22:23:11 -0700 (PDT)
+	Tue, 21 May 2019 06:02:33 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 457QCY3mWHz3k;
+	Tue, 21 May 2019 08:02:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558418553;
+	bh=yCPd+Z/p4Izav+IWHV6AlYJRCVu1LhkPWUrSRTPQILg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Lcnu7uPUMWDJNNugBdrK4tqbVga7oWErl+AyuZLYwT2YS3ud86v5oJ8vlsth3UeZa
+	IfSqcZS6JDRtyx+6kVfE2SAM7wQhAPwnrvAKgimFLhRDm5ATZ4ZH7EUScsGtX7RD+V
+	VRs/CLuH8Juu6WhJc0CwV+GFXyh+bPexM4eh2my9aTJ9AgyVvawdgISlDyJDwN1RlY
+	zcTp4YvxVVK6iPXbRagEajX8CrlOi9Y6qfQ+Xayq73q84OWpTeP6gusKD06Qk33sQF
+	GVcPDdDkvbRwKnz2X9wWVlYARzcPWhosBK2aziX1UlovNJNmxaoONq6MxKcdMAYA68
+	Buvxx6MLJNHHkS/yElezIiqFk/y7ADJ/stkCh7imBxf1zDBlp88h0hPKLJ33/ckeQ1
+	P98R1hbpfAyzMc3AXw0RfW5enUwCI62V5k5wPG97Xg6aLOZgRSDj0vP3W3ppLOCyFL
+	BCza6d7J6IonOZRho1oupUzAoDZjJODwbCzELa7upfFvBnV9djC/fUE6AnV+mrLTU9
+	SW/buam/JrVbJqMimjOxJvHcuKiarpSt89IN/1R1+v3LglY94rD50DNzTTsRsbZfuh
+	TLm+7UkvuVcheqyEBIzVXsJnD3elWlVvF+We3Gted9Rsh/SVUtUfeCw8UsUBEbAdrc
+	kKVRsDrgT+pSIDblZLkXJv7k=
+Date: Tue, 21 May 2019 09:02:31 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190521060231.GC9971@localhost>
+References: <20190521052103.2096-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20190519153935.15357-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190519153935.15357-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 May 2019 22:22:45 -0700
-Message-ID: <CAMKF1spg0FiC+wNY2QCxqvEau5pjPyA3YaSNN3pBuYR2tifDFg@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2][meta-networking] libowfat: update to 0.32
+In-Reply-To: <20190521052103.2096-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libnfc: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,55 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 05:23:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 21 May 2019 06:02:33 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Fails on musl
+On Mon, May 20, 2019 at 10:21:03PM -0700, Khem Raj wrote:
+>...
+> +--- a/libnfc/buses/usbbus.h
+> ++++ b/libnfc/buses/usbbus.h
+> +@@ -35,6 +35,8 @@
+> + 
+> + #ifndef _WIN32
+> + // Under POSIX system, we use libusb (>= 0.1.12)
+> ++#define _GNU_SOURCE
+> ++#include <stdint.h>
+>...
 
-https://errors.yoctoproject.org/Errors/Details/241414/
+Defining feature test macros after headers have already been included is 
+documented to be wrong, and can lead to nasty runtime breakages.
 
-On Sun, May 19, 2019 at 8:40 AM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}              | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb} (80%)
->
-> diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> similarity index 80%
-> rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
-> rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> index 4b072f7e7..a5e2c21cf 100644
-> --- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
-> +++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> @@ -7,8 +7,8 @@ LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->
->  SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
-> -SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
-> -SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
-> +SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
-> +SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
->
->  EXTRA_OEMAKE = "\
->      DIET= \
-> @@ -19,7 +19,7 @@ EXTRA_OEMAKE = "\
->  do_install() {
->      make install \
->          DESTDIR=${D} \
-> -        INCLUDEDIR=${includedir}/${BPN} \
-> +        INCLUDEDIR=${includedir} \
->          LIBDIR=${libdir} \
->          MAN3DIR=${mandir}/man3
->  }
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
