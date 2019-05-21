@@ -1,53 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 96A1B7E182
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BFCFE7E182
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 21 May 2019 06:55:36 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id a5so7927427pls.12
+Received: by mail-pf1-f195.google.com with SMTP id t87so8556817pfa.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 20 May 2019 23:55:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=hwOxC25EsZgo6nW9+xLtFdFxgrzukAzedtbHXFHyj+A=;
-	b=cyF5BGcwXBwNB+hkz977OXZGvV2J60+7SZAk3ycw4hJ039wLtpY4+old9Of7Uv8MSD
-	pdB72qftb5Mscikx27PDQqbM0EMr+Rt3b/duunD3HpDm7a7Zj1O0Sii4bJ7ks/Arfl2i
-	o5nBZGTJICR86xCpZQt/o75rqlnADnb1hYqfuMQh0ZtLEWXOZy+a1jFlhf+wmkyH+3I2
-	J1cxhm0pKp454utT8womg17B/TrXzZUInwywMayC2Hloo/Ewif/BAizdQaqKzx0agLqi
-	xVxbqReeNBJHLe/B0sGc+97hH2nLHwDjYssLYn4egGPx2uDltWcfvxiDXPbpNjFnu1FC
-	fZxA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=lSdVYJZYvqci+5AhkFLGk+IhIL2bbOBNtBHh+IJXa1Y=;
+	b=bwaRY1txDRcc0e9DKDuaLfHu6fFAMxMpeGzLjKLQv+4S8lUnaoS+kcBBSGkuXTmL7+
+	JrSwbfZNzUAqdZwDUetK6zIhYkzDBUY3dYB68u5kgDGaBdkzZZJPO4bq9rqoK/68X9AG
+	4YuPHKN10ExXqrATJtFMlpYZUWgzgeqp/TFYvwKS/4gTCsmMVBdYC6EDzgCcX30twuos
+	SKeI1lpRKUJ+6Qat5aDIbmyP1N8//lUtY8XSmDOH3rJUdGgRD1zW1jxLM7ieER/csxTZ
+	Ohj6Y1/iJvtbInpoflJTK+xHbgxCKIVK6vBlGz7/58aPQYXmpl7q8eCuF132QITNd7X4
+	BHQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=hwOxC25EsZgo6nW9+xLtFdFxgrzukAzedtbHXFHyj+A=;
-	b=D8wsAQmOawZ9uCBAQSMNU9Fn5EkH4LHbw31SEFuCJvUVXqg7idagKXXTZ3iVLczjwK
-	wbPjHDvigcYN3UfcV3xPDbbEjGyC4e9u3mRrqL9vrTJxvXlD9ezk6ACWd9Sf5LIPYmCW
-	n01VF99liAZJUH0x6GPYvbsCbKNQYclf8l9/v+Jb07KrTXGqXvuxSOwKmwMBA9lLxi4x
-	hh91wbJRTAmvOFXWFtQ/LNu6oOK7pSVm9gj41KATm1jw7JBr69IkNFzn9R1BDdOadnlR
-	/vvAprOl4w+ead393EHBigzmwkA+3ozmL4Fmq+MaQK0+qcfaHAWctzG7orqGijZfcVho
-	KNlg==
-X-Gm-Message-State: APjAAAU74CZfk2U4tmiivsag8O40z77xVlfnwBalj0gjZXFxmgSmhyRo
-	bsf+pdQYKtRfs3pwhrDUBBJwGM4ptpA=
-X-Google-Smtp-Source: APXvYqw7cYN4l366KYphJrAAtF5zwn0Q9AVEdagEdRfWUJBbbkoYeJQDBmQ9wRWmYxnGaupUmQbd8w==
-X-Received: by 2002:a17:902:442:: with SMTP id
-	60mr42399378ple.325.1558421737603; 
-	Mon, 20 May 2019 23:55:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=lSdVYJZYvqci+5AhkFLGk+IhIL2bbOBNtBHh+IJXa1Y=;
+	b=av5qspdT0rXUfJipkzgiA/CQRnvmiL2x/unUSyOspAuCZ0KaXr+uaC7IAO9aON4a2+
+	ugVjKCKb6CY1JtdA4hBfd4HZ0fHPGBNRAMLJI5nr97GZfBmSpVRUViX+unoDA278fcNQ
+	1RhKeBvHb417Y/AwIIDHuBmOzTrNm67yyUQ8CZGWA9mtaFv1OkNr+g+a9POXmisKi3mY
+	7rd2ddV1U/zEKcB2yPpDijYCpEvhI4NfntOQUSmMHoHhsFDeVlmj0EjH4iRDYa1yHgb8
+	LXIJ4Jz8k3oB0jUhypGz+UVlzpayOOCkPD7+TF0tC+I3WyIx3w2Tc2fs9oEvEewChsMC
+	fXjQ==
+X-Gm-Message-State: APjAAAXwOOzKtJ6jndZCozRzq5oVSTUq4WbJ41pdFZ5ldXul/cI1lzvj
+	Y2Y7UpYjlZewZHMUzhcNiw4gSfUK+rg=
+X-Google-Smtp-Source: APXvYqzoEFO14sU/j3ayTw287U03Iu/cElJ5lFcmD5IAmqa3hubzvN/FKXDmhyd9P7ivz5uE4ps5OQ==
+X-Received: by 2002:a63:2745:: with SMTP id n66mr79430793pgn.208.1558421736920;
+	Mon, 20 May 2019 23:55:36 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
 	by smtp.gmail.com with ESMTPSA id
 	l21sm28100673pff.40.2019.05.20.23.55.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 May 2019 23:55:37 -0700 (PDT)
+	Mon, 20 May 2019 23:55:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 23:55:29 -0700
-Message-Id: <20190521065529.41647-2-raj.khem@gmail.com>
+Date: Mon, 20 May 2019 23:55:28 -0700
+Message-Id: <20190521065529.41647-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190521065529.41647-1-raj.khem@gmail.com>
-References: <20190521065529.41647-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] openocd: Fix build on x86_64
+Subject: [meta-oe][PATCH V2 1/2] libnfc: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,66 +62,58 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...fine-PAGE_SIZE-if-its-not-already-de.patch | 37 +++++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Define-PAGE_SIZE-if-its-not-already-de.patch
+v2: Pass _GNU_SOURCE on cmdline
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Define-PAGE_SIZE-if-its-not-already-de.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Define-PAGE_SIZE-if-its-not-already-de.patch
+ ...-usbbus-Include-stdint.h-for-uintX_t.patch | 24 +++++++++++++++++++
+ meta-oe/recipes-core/libnfc/libnfc_git.bb     |  5 +++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+
+diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
 new file mode 100644
-index 0000000000..6fe5b27891
+index 0000000000..b8ed87aa0f
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Define-PAGE_SIZE-if-its-not-already-de.patch
-@@ -0,0 +1,37 @@
-+From 531c96b4fd99ea046750591af36c5b3f92479fa6 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+@@ -0,0 +1,24 @@
++From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 May 2019 23:24:26 -0700
-+Subject: [PATCH] esirisc_flash: Define PAGE_SIZE if its not already defined
++Date: Mon, 20 May 2019 22:10:05 -0700
++Subject: [PATCH] usbbus: Include stdint.h for uintX_t
 +
-+Fixes
-+| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
-+| #define PAGE_SIZE                       4096
-+|         ^
-+| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
-+de/limits.h:89:9: note: previous definition is here
-+| #define PAGE_SIZE PAGESIZE
++stdint.h is needed for uintX_t typedefs which are
++used to replace u_intX_t in libusb API headers in the cmake files
 +
-+Change-Id: I195b303fc88a7c848ca4e55fd6ba893796df55cc
++Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/5180/]
 +---
-+ src/flash/nor/esirisc_flash.c | 2 ++
++ libnfc/buses/usbbus.h | 2 ++
 + 1 file changed, 2 insertions(+)
 +
-+diff --git a/src/flash/nor/esirisc_flash.c b/src/flash/nor/esirisc_flash.c
-+index 4e33b9429..90661b77b 100644
-+--- a/src/flash/nor/esirisc_flash.c
-++++ b/src/flash/nor/esirisc_flash.c
-+@@ -92,7 +92,9 @@
-+ #endif
++--- a/libnfc/buses/usbbus.h
+++++ b/libnfc/buses/usbbus.h
++@@ -35,6 +35,7 @@
 + 
-+ #define CONTROL_TIMEOUT		5000		/* 5s    */
-++#ifndef PAGE_SIZE
-+ #define PAGE_SIZE			4096
-++#endif
-+ #define PB_MAX				32
-+ 
-+ #define NUM_NS_PER_S		1000000000ULL
-+-- 
-+2.21.0
-+
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index 9a8a09a913..9054e69b6c 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -9,6 +9,7 @@ SRC_URI = " \
-     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
-     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
-     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
-+    file://0001-esirisc_flash-Define-PAGE_SIZE-if-its-not-already-de.patch \
- "
++ #ifndef _WIN32
++ // Under POSIX system, we use libusb (>= 0.1.12)
+++#include <stdint.h>
++ #include <usb.h>
++ #define USB_TIMEDOUT ETIMEDOUT
++ #define _usb_strerror( X ) strerror(-X)
+diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+index d00733bf58..7efd3443dd 100644
+--- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
++++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+@@ -9,6 +9,9 @@ inherit autotools pkgconfig
  
- SRCREV_FORMAT = "openocd"
+ S = "${WORKDIR}/git"
+ SRCREV = "c42e2502d4627d3ea62f83c32677b100bb3cebdc"
+-SRC_URI = "git://github.com/nfc-tools/libnfc.git"
++SRC_URI = "git://github.com/nfc-tools/libnfc.git \
++           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
++          "
+ 
++CFLAGS_append_libc-musl = " -D_GNU_SOURCE"
+ DEPENDS = "libusb"
 -- 
 2.21.0
 
