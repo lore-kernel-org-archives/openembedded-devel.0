@@ -1,53 +1,50 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 7033E7E14E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 22F7F7E15F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:57:04 +0000 (UTC)
-Received: by mail-pl1-f170.google.com with SMTP id f12so7726800plt.8
+	Tue, 21 May 2019 05:21:11 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id f25so1398014pgv.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:57:06 -0700 (PDT)
+	Mon, 20 May 2019 22:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=4U06S7dAebfwcKJf70sh/jP5C6fgiglr4Qxv/nDVQlU=;
-	b=hCs38q3Y/tMvQOoNJxFBvsBqgzOnLjxdkxEgOxnkMBNxaSGTsLwKeEPISIAoUi/SL/
-	k016ugLUnm/L1LlCTSnltLFwVPt4v5K4hc+LTZ8sR8JSEWwFDy178LAfaWXSJ0pyHw/D
-	q1EltyDQ7Gw0fqmB8gx2Du6hkj2+IGcNFXkfzdKAvegZUVhxGJ4JpJElvi1YYEnaI1zH
-	q3WoWPH+lOn0dujueY790Tz6GElbaFWgvxDsmTZvOBLbhG4Lm66B6dKUd/tKv3hzr2dO
-	+BYyjxe2GEKBfiLOyFYysMKyPieisJKpGwqpwiIzGhc0JI4DJINbUNk/N4Q/AN7r9pwm
-	SfAQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LgSKN9Ib0niMUsJmnT3Qakw5Kb5CosqX3T/cwUlUQsI=;
+	b=DJqFLFqkDu2v9mKc37M/PEZidUAFTBqkE+qf4NqEXySVUW700fPtSLB7nokDjD2uAI
+	aONHe3kVLTW0LWdtS1geRl7Cng/m/c7/6mZKU0ziuYeWFsIHtDNji3eyAZ5Ahk3O/2VV
+	ao6ZZcGzko1q3G9WQEzXXkarzU7AJE6TAe7XxA7AuVEMGlV/6P5v/8p5Wo6yHkJEFUog
+	K/xME2EqsvRvQ5aM9WKG2jAornp6KkcMToHRmu6OApwR8jQcAJt25nxomGNvMWCprasI
+	+bIufY5v3bKkw6smQikk50lE5OVXzqIPTnctczS1K7faeOhl6ed6NHSc5JhYRJXg0Yp7
+	1vXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=4U06S7dAebfwcKJf70sh/jP5C6fgiglr4Qxv/nDVQlU=;
-	b=o/UQDG6v8vlq5uk9YhRIAArw4OVavgFfzIzWlaLCbMHhu7spOKLU7VIQoVrD4YHPJN
-	Q2t8Xlt9dxIVwSnHCOVPRyc9wBRe4wNMrlPYhFzPAE0lYUuzz020CYEOY8hKkYPTDiDk
-	ZdKEIuqVwdrRjcFYsLM/ad9MJovz09X3EJIwznhNPXu0RCZtpVz/1EsUylhzUI6IwNY1
-	04Q0zsVc6/PCpMAL08MyGmn97ZykKANUnEGuF4XjF3e1qTokKd2T9QT2n9XKzhd6tEd1
-	Mg0uocwbhwBp/RXTCTppBbLjFO1FpVyOGWRyuIX7Ou6beB0pDd4ISbi7labTjeYw5wPJ
-	6Vdw==
-X-Gm-Message-State: APjAAAUFRLO/9DKFr8GZgzVmNhKbtq8XRvE2J3wjUD0dDBNNy86aeT7L
-	EP9SBZzY2khzMauNqPPRse2DIweR
-X-Google-Smtp-Source: APXvYqznxTw5STFFceRg9YKiJ9pMt20Ssf7ARYaxfRoBrIYGvRywp1MEPSEHNIheCAQa2PkPRe54YA==
-X-Received: by 2002:a17:902:8d96:: with SMTP id
-	v22mr4461342plo.282.1558411025669; 
-	Mon, 20 May 2019 20:57:05 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LgSKN9Ib0niMUsJmnT3Qakw5Kb5CosqX3T/cwUlUQsI=;
+	b=Do9ZyToPD9agATVAyuRqM2YtCCxCqpUMdCB721EopTCOfUAJyH34tbH9UxBC8CcPw/
+	/aJzAThdWO24TY3Ni7XzYlhYUxPdCYJYCLhxZBqIdFA0o3svRVy10ZSfGXefyGKfKCeB
+	arSiNRVbe8ek1ruy6UhIAT//k42CgIgoxQ+dU50ficwVGxMlK/u65X6qz0/gRtnPZDZv
+	xSQHvZjSFumkIvqiEutSknPlvrDY49SzqVgCs7o0Df4HKI4VdhOrVdz7Mk0j3fHaCief
+	w9hJCZ8fVMgiJZPHTFmtm9X1YnGHbqRgGJn8B7KpyBDW1IiuOXIYByC6Ej1xCkWvKzeC
+	+uzA==
+X-Gm-Message-State: APjAAAVL1KfmxWa+vQ+fL/8iKx131LsWnjEM/gzNanBQAfSo4g6NgCfE
+	wL6XtEebrCgKksNyMIzANb9oSg2UzQA=
+X-Google-Smtp-Source: APXvYqzvMsoEPNXFaoEvb38FhHT6TcR+hFWT1rFE1xcOL5I+hGNyPdG3XGbW00HOZPCg+mrjCsBMNg==
+X-Received: by 2002:a63:1650:: with SMTP id 16mr80584927pgw.164.1558416072530; 
+	Mon, 20 May 2019 22:21:12 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.57.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:57:05 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	s28sm30056075pgl.88.2019.05.20.22.21.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 20 May 2019 22:21:11 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:34 -0700
-Message-Id: <21cbe3ec166696b4d67d2ef5486a394d14d29269.1558410874.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
-References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 34/34] aufs-util: prevent native aufs-util depending on target kernel
+Date: Mon, 20 May 2019 22:21:03 -0700
+Message-Id: <20190521052103.2096-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libnfc: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +57,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:57:04 -0000
+X-List-Received-Date: Tue, 21 May 2019 05:21:12 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Martin Jansa <martin.jansa@gmail.com>
-
-* fixes:
-  ERROR: aufs-util-native different signature for task do_populate_sysroot.sigdata between qemux86 and qemux86copy
-  Hash for dependent task linux/linux-yocto_5.0.bb.do_populate_sysroot changed from de9e49b4f66adddf9a0943db020b4eb677404e0b6ddac60073184a3855d406cb to a912d6ea21336c85c8d8a5e9db4800fccb95197744465b641eda60339bee8901
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...-usbbus-Include-stdint.h-for-uintX_t.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-core/libnfc/libnfc_git.bb     |  4 ++-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
 
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index 6d71fc0..b4819d8 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -61,6 +61,6 @@ do_install_class-native () {
-     done
- }
+diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+new file mode 100644
+index 0000000000..b1e9be7c35
+--- /dev/null
++++ b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+@@ -0,0 +1,33 @@
++From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 20 May 2019 22:10:05 -0700
++Subject: [PATCH] usbbus: Include stdint.h for uintX_t
++
++stdint.h is needed for uintX_t typedefs which are
++used to replace u_intX_t in libusb API headers in the cmake files
++
++Define _GNU_SOURCE since thats not defined by default for musl
++C library on linux
++
++Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libnfc/buses/usbbus.h | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/libnfc/buses/usbbus.h b/libnfc/buses/usbbus.h
++index 87f6a85..d18bf8b 100644
++--- a/libnfc/buses/usbbus.h
+++++ b/libnfc/buses/usbbus.h
++@@ -35,6 +35,8 @@
++ 
++ #ifndef _WIN32
++ // Under POSIX system, we use libusb (>= 0.1.12)
+++#define _GNU_SOURCE
+++#include <stdint.h>
++ #include <usb.h>
++ #define USB_TIMEDOUT ETIMEDOUT
++ #define _usb_strerror( X ) strerror(-X)
++-- 
++2.21.0
++
+diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+index d00733bf58..040ac2145c 100644
+--- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
++++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+@@ -9,6 +9,8 @@ inherit autotools pkgconfig
  
--RRECOMMENDS_${PN} += "kernel-module-aufs"
-+RRECOMMENDS_${PN}_class-target += "kernel-module-aufs"
+ S = "${WORKDIR}/git"
+ SRCREV = "c42e2502d4627d3ea62f83c32677b100bb3cebdc"
+-SRC_URI = "git://github.com/nfc-tools/libnfc.git"
++SRC_URI = "git://github.com/nfc-tools/libnfc.git \
++           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
++          "
  
- BBCLASSEXTEND = "native"
+ DEPENDS = "libusb"
 -- 
-2.7.4
+2.21.0
 
 
