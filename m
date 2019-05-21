@@ -1,48 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B1C807E26A
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B6DBF7E26A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 17:43:21 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id h1so21556015qtp.1
+	Tue, 21 May 2019 17:46:58 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id h17so8959374pgv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 10:43:22 -0700 (PDT)
+	Tue, 21 May 2019 10:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=2Kg81xtp088USB+xQUhJmp+Hcz13jHwZH61xjGZihVc=;
-	b=K81m5AMRV0U/tfTUVu03jB8OI0MxgDTo85T32Mu2zEuk8ma48UxlV0rwlsBQCbzu0I
-	ZKxQq40rpPuGa2c2hjePCGsqfQ8Y5FhphkYwwR9GJB4adMt9m20ANy2za0BYiL1H6umk
-	gihvTLeY+81bv58o0wK5hboTc4ej2QDsZonweH+Xa/9kLh0FflpSCn3WDBhnVH7YOjzp
-	aSQlGogSuH64IhFzmE2QweK78rhLGUi8MsQNuA5DmOFqsLChH0PqAFEBipC2fdUUsTcg
-	AsxO+zRrrehmD11zrjss1ay9sMRuycbOPQ329ga6NHwoLDiaiKbVuh9dkzNAThuVt/05
-	5B/g==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=b4kIzErRQ/5ht8X+Vor7hP9M+nMRQpG6lXL5HYMoIEg=;
+	b=ICUXnbKcTvbMUjFzFbeV7RAYzN8aY35eAlQ4By/N36kQn6L2JcEGYTR8f2kfx/YPkw
+	AHmZ/NIokrBsc7p5X4jPScbUkLaXaj/qAMfGiZQhaDzJAMbFkLdpnTmKrureD8GwOEyI
+	ewm2S7PRXQXbCiAxBznWyBDK56uYEvtBT19NbiK0e+EvAjnSv+9nq39yxN/Q21UDUcQh
+	aRCnAHwAf3V/zABG8Wnqo5STECzJwqHxsaTstFEEeoufljHZUsjzS94eekcmhYJnaUYh
+	iqbsE+AdKjRX4UqMKvm1TU1yHVlKri8F4OJRjInBu0eKtKwbvx1j5+deeFywLgfEjmR6
+	6J8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=2Kg81xtp088USB+xQUhJmp+Hcz13jHwZH61xjGZihVc=;
-	b=dizVheOJhpMjOYjxVCbMmS9QlY6qHq2fjC4a82FLHtiXEGP6fWCaZ2KxdUm/G9aW3v
-	90PhyfQJDHG10JIOi/kfg9aMkrGexdvD7GzvvDSzoiA0MlisUkmk16f4BcbD6cDJX7XY
-	2i4tGJGNpbyiXmkN6H2qbAzd/uI3lnUQu8NyZXDstzKIVaNMLFuyOHIBVqs7Ybn8vgF9
-	FApv2lItKbQUcGHMufO+KngyloY9V19il2zRtNnWeohxhQVyPdJMYN944eBsEs2MdHqw
-	Cvf4tKwPMjTxrReeT5DeQ2Or7wtvKLoQa75goN5ZsTlb5Gq5XPPDSO0xFqCPLRkZvw0E
-	mdPA==
-X-Gm-Message-State: APjAAAWpL4yeVzaBVxxg2OQeXtDTvhI8JWU/hVuhChWCdy9i6Kc9DDSs
-	6FNGmnwMWvP5PNBtSN+ublbaEYjK/veL4jWUR65DkG/3
-X-Google-Smtp-Source: APXvYqyY9xs+Dim/Y70f/RDSe3EPbolzvbEE6GUtbH5gfemMdORaM6sp3F1DhvyaDNoxU9ocrPmAHrMwiYjJX4o1SzA=
-X-Received: by 2002:aed:3b0a:: with SMTP id p10mr47643063qte.194.1558460602260;
-	Tue, 21 May 2019 10:43:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190521065529.41647-1-raj.khem@gmail.com>
-	<20190521065529.41647-2-raj.khem@gmail.com>
-	<20190521071928.GA15108@localhost>
-In-Reply-To: <20190521071928.GA15108@localhost>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=b4kIzErRQ/5ht8X+Vor7hP9M+nMRQpG6lXL5HYMoIEg=;
+	b=LHYEIAm+sUv63ri4x/brTSdiC8LoBEWrajKokRsQ/LuaQ6gDtFUS+m9X8tRJz1lTKJ
+	UqGUdWLKmo8upBO+ETUlnWSKqYfREHt+IfHjBkIyDFp1VGXGrd30omfA9MrYeigQBKq5
+	XNTFNSFOFaA11GM1x1iuUJL1MMiZsoF7Ki//+LOrnptIeeimfZ4JNWKDZveNvS5Df+VZ
+	dWBDeBY6t9MTGvPMMs1ibpRq3rA2QtxSY3vIerszk/56/UB+sPDvYkwnrMAClcPlwmaK
+	cAYXLf629iLjamxHENM6KUGeRbPLdFSUemdOzQlnzXektSzBA/E8MrvqTqnfmAVoWjGU
+	T0Lw==
+X-Gm-Message-State: APjAAAX3rcvaMvNdilvgbgKdrpArr7G8EVwLCCNs6rUf9FpD39g6Pnx/
+	H8vuMfYUmN9mgb4WFS4qfGy5fDKowqw=
+X-Google-Smtp-Source: APXvYqxxYUC3JJZ5Am54RkvgcGbW7fecDAQr1J+i2bLWX5fhS53n+Y0KiVqbsG1gbmgZw2NNjJSx7w==
+X-Received: by 2002:a63:fa16:: with SMTP id y22mr44353755pgh.15.1558460819123; 
+	Tue, 21 May 2019 10:46:59 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
+	by smtp.gmail.com with ESMTPSA id
+	p14sm29175324pfa.112.2019.05.21.10.46.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 21 May 2019 10:46:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 May 2019 10:42:56 -0700
-Message-ID: <CAMKF1sp8bpg_kYq=fTASAYy9isUGAUuF0A9FXdQ3pEJJ=w-m0w@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] openocd: Fix build on x86_64
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 May 2019 10:46:52 -0700
+Message-Id: <20190521174652.9572-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V2] openocd: Fix build on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,51 +57,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 17:43:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 21 May 2019 17:46:58 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, May 21, 2019 at 12:19 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Mon, May 20, 2019 at 11:55:29PM -0700, Khem Raj wrote:
-> >...
-> > +Fixes
-> > +| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
-> > +| #define PAGE_SIZE                       4096
-> > +|         ^
-> > +| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
-> > +de/limits.h:89:9: note: previous definition is here
-> > +| #define PAGE_SIZE PAGESIZE
-> >...
-> > +--- a/src/flash/nor/esirisc_flash.c
-> > ++++ b/src/flash/nor/esirisc_flash.c
-> > +@@ -92,7 +92,9 @@
-> > + #endif
-> > +
-> > + #define CONTROL_TIMEOUT             5000            /* 5s    */
-> > ++#ifndef PAGE_SIZE
-> > + #define PAGE_SIZE                   4096
-> > ++#endif
-> > + #define PB_MAX                              32
-> >...
->
-> Are you sure this is correct?
-> This looks like two completely unrelated defines that just happen to
-> have the same name.
-> And it worked by chance since they have the same value on x86_64.
->
-> Renaming to something like ESIRISC_PAGE_SIZE would be a proper fix.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Avoid conflict by renaming
 
-yes, upstream clarified that too. v2 is on cards.
+ ...-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch | 59 +++++++++++++++++++
+ .../recipes-devtools/openocd/openocd_git.bb   |  1 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
 
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
+new file mode 100644
+index 0000000000..c80d9f19f8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
+@@ -0,0 +1,59 @@
++From bee22f143ffa0457aefcf31053f76416e6d242e5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 20 May 2019 23:24:26 -0700
++Subject: [PATCH] esirisc_flash: Rename PAGE_SIZE to FLASH_PAGE_SIZE
++
++PAGE_SIZE is defined in system includes on some systems, this would
++avoid the unintended conflict
++
++Fixes
++| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
++| #define PAGE_SIZE                       4096
++|         ^
++| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
++de/limits.h:89:9: note: previous definition is here
++| #define PAGE_SIZE PAGESIZE
++
++Upstream-Status: Submitted [http://openocd.zylin.com/#/c/5180/2]
++Change-Id: I195b303fc88a7c848ca4e55fd6ba893796df55cc
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/flash/nor/esirisc_flash.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/src/flash/nor/esirisc_flash.c b/src/flash/nor/esirisc_flash.c
++index 4e33b942..3bed0658 100644
++--- a/src/flash/nor/esirisc_flash.c
+++++ b/src/flash/nor/esirisc_flash.c
++@@ -92,7 +92,7 @@
++ #endif
++ 
++ #define CONTROL_TIMEOUT		5000		/* 5s    */
++-#define PAGE_SIZE			4096
+++#define FLASH_PAGE_SIZE		4096
++ #define PB_MAX				32
++ 
++ #define NUM_NS_PER_S		1000000000ULL
++@@ -264,7 +264,7 @@ static int esirisc_flash_erase(struct flash_bank *bank, int first, int last)
++ 	(void)esirisc_flash_disable_protect(bank);
++ 
++ 	for (int page = first; page < last; ++page) {
++-		uint32_t address = page * PAGE_SIZE;
+++		uint32_t address = page * FLASH_PAGE_SIZE;
++ 
++ 		target_write_u32(target, esirisc_info->cfg + ADDRESS, address);
++ 
++@@ -464,8 +464,8 @@ static int esirisc_flash_probe(struct flash_bank *bank)
++ 	if (target->state != TARGET_HALTED)
++ 		return ERROR_TARGET_NOT_HALTED;
++ 
++-	bank->num_sectors = bank->size / PAGE_SIZE;
++-	bank->sectors = alloc_block_array(0, PAGE_SIZE, bank->num_sectors);
+++	bank->num_sectors = bank->size / FLASH_PAGE_SIZE;
+++	bank->sectors = alloc_block_array(0, FLASH_PAGE_SIZE, bank->num_sectors);
++ 
++ 	retval = esirisc_flash_init(bank);
++ 	if (retval != ERROR_OK) {
++-- 
++2.21.0
++
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 9a8a09a913..b50c3acf4c 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -9,6 +9,7 @@ SRC_URI = " \
+     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
+     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
+     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
++    file://0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch \
+ "
+ 
+ SRCREV_FORMAT = "openocd"
+-- 
+2.21.0
+
 
