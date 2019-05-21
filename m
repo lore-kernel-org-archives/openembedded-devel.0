@@ -1,23 +1,53 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AD39F7E092
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CCB977E069
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 02:14:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4L2EkMS024999
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 21 May 2019 03:56:36 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id p15so7735616pll.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 19:14:46 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Mon, 20 May 2019 19:14:45 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 May 2019 10:02:22 +0800
-Message-ID: <1558404142-29622-1-git-send-email-Qi.Chen@windriver.com>
+	Mon, 20 May 2019 20:56:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=eOABLvNfuFk4epJlHaVr3EuA54MAMwQsbShHeKqgaqw=;
+	b=P0+wH8jtA2cINotPdPcTGQOP+dtR660sVfKI/+TgA+IN97VknAaY+Hfm41QnmV97uS
+	wWXyDII/JsZPm7FoEcRVGrz7S3/q/tmDvx9Kvuv8ygV9Slg93jHtZYu4HZ7b9ovBUQFo
+	psg0QRjpNmZZ3FPFoUA4O+MGQHVG1F+nzEi8pnElHr83G90nwEKD4l0vW/QpyNUPf+5/
+	jqtiIcd4N5xpPywuw6eoSEPVNxp0vYJWJmQGPBH2db+3hMfk+WdsdwjqrrkTEvRAHFkV
+	t1go7dNBaWz1Y1vzfr9AXlkIs0wKrcIwqmSabXdZ8SBF2y3nGZlh5sc/wjRCH0Rcf2hc
+	jOGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=eOABLvNfuFk4epJlHaVr3EuA54MAMwQsbShHeKqgaqw=;
+	b=o+ZU/it3NN3hAb2TAYZthoAr1Riq7rfRZ0dlIs9ynptd8aVFOeavU/LTXSZp8C/7Ur
+	wpEFX7RjX8qIYBw1Dq3w/ngX+w9RpBuDB3m2ZYRh38gzCBo8u+ruEVuUbIVH75i82f/f
+	f2M7FBClvW3ZQ5qq3bV0k+HEsSkJWADaKSIUcEzGNYvhUYfaMqjHKayET+bYKcQkoLWU
+	f6V4ylzMN5f4L1abpafKTIDrspPweE02U/uAp4K4lnPre5StCoSYFvSNMId8Ru52fz4o
+	6/1ug+bLPls02aSAgtcsE3137wsHyoME9w2CmYPfnsV71yXRHhrVNjmkSqZOjuNUM/Wr
+	EQrQ==
+X-Gm-Message-State: APjAAAWWjkaEip41botQl+a566Yim2otalx4ro4nK4uV5H9eFdGE1gYA
+	s3n+a7qZLfWjm4VXvM0ICoTMYyYB
+X-Google-Smtp-Source: APXvYqyYnme6Pmz/YGEwH6/vu90KdBEGKvoZTbh+Jvvd4E91pIAOixiOGI7VSZVAQHpSMxyfFgq4rw==
+X-Received: by 2002:a17:902:8d96:: with SMTP id
+	v22mr4459713plo.282.1558410997722; 
+	Mon, 20 May 2019 20:56:37 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
+	by smtp.gmail.com with ESMTPSA id
+	h13sm23045273pfo.98.2019.05.20.20.56.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 20 May 2019 20:56:37 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 May 2019 20:56:00 -0700
+Message-Id: <cover.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] polkit: fix CVE-2019-6133
+Subject: [warrior][patch 00/34] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,226 +60,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 02:14:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 May 2019 03:56:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- ...pare-PolkitUnixProcess-uids-for-temporary.patch | 186 +++++++++++++++++++++
- meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   7 +-
- 2 files changed, 190 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch
+Patch review for meta-openembedded next warrior.
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch b/meta-oe/recipes-extended/polkit/polkit/0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch
-new file mode 100644
-index 0000000..ae314e3
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/polkit/0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch
-@@ -0,0 +1,186 @@
-+From eb1f1336e8e49b4db6243b543e0a71f7c0c9b5b1 Mon Sep 17 00:00:00 2001
-+From: Colin Walters <walters@verbum.org>
-+Date: Fri, 4 Jan 2019 14:24:48 -0500
-+Subject: [PATCH] backend: Compare PolkitUnixProcess uids for temporary
-+ authorizations
-+
-+It turns out that the combination of `(pid, start time)` is not
-+enough to be unique.  For temporary authorizations, we can avoid
-+separate users racing on pid reuse by simply comparing the uid.
-+
-+https://bugs.chromium.org/p/project-zero/issues/detail?id=1692
-+
-+And the above original email report is included in full in a new comment.
-+
-+Reported-by: Jann Horn <jannh@google.com>
-+
-+Closes: https://gitlab.freedesktop.org/polkit/polkit/issues/75
-+
-+Upstream-Status: Backport
-+CVE: CVE-2019-6133
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ src/polkit/polkitsubject.c                         |  2 +
-+ src/polkit/polkitunixprocess.c                     | 71 +++++++++++++++++++++-
-+ .../polkitbackendinteractiveauthority.c            | 39 +++++++++++-
-+ 3 files changed, 110 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/polkit/polkitsubject.c b/src/polkit/polkitsubject.c
-+index d4c1182..ccabd0a 100644
-+--- a/src/polkit/polkitsubject.c
-++++ b/src/polkit/polkitsubject.c
-+@@ -99,6 +99,8 @@ polkit_subject_hash (PolkitSubject *subject)
-+  * @b: A #PolkitSubject.
-+  *
-+  * Checks if @a and @b are equal, ie. represent the same subject.
-++ * However, avoid calling polkit_subject_equal() to compare two processes;
-++ * for more information see the `PolkitUnixProcess` documentation.
-+  *
-+  * This function can be used in e.g. g_hash_table_new().
-+  *
-+diff --git a/src/polkit/polkitunixprocess.c b/src/polkit/polkitunixprocess.c
-+index 972b777..7a6d48b 100644
-+--- a/src/polkit/polkitunixprocess.c
-++++ b/src/polkit/polkitunixprocess.c
-+@@ -51,7 +51,10 @@
-+  * @title: PolkitUnixProcess
-+  * @short_description: Unix processs
-+  *
-+- * An object for representing a UNIX process.
-++ * An object for representing a UNIX process.  NOTE: This object as
-++ * designed is now known broken; a mechanism to exploit a delay in
-++ * start time in the Linux kernel was identified.  Avoid
-++ * calling polkit_subject_equal() to compare two processes.
-+  *
-+  * To uniquely identify processes, both the process id and the start
-+  * time of the process (a monotonic increasing value representing the
-+@@ -66,6 +69,72 @@
-+  * polkit_unix_process_new_for_owner() with trusted data.
-+  */
-+ 
-++/* See https://gitlab.freedesktop.org/polkit/polkit/issues/75
-++
-++  But quoting the original email in full here to ensure it's preserved:
-++
-++  From: Jann Horn <jannh@google.com>
-++  Subject: [SECURITY] polkit: temporary auth hijacking via PID reuse and non-atomic fork
-++  Date: Wednesday, October 10, 2018 5:34 PM
-++
-++When a (non-root) user attempts to e.g. control systemd units in the system
-++instance from an active session over DBus, the access is gated by a polkit
-++policy that requires "auth_admin_keep" auth. This results in an auth prompt
-++being shown to the user, asking the user to confirm the action by entering the
-++password of an administrator account.
-++
-++After the action has been confirmed, the auth decision for "auth_admin_keep" is
-++cached for up to five minutes. Subject to some restrictions, similar actions can
-++then be performed in this timespan without requiring re-auth:
-++
-++ - The PID of the DBus client requesting the new action must match the PID of
-++   the DBus client requesting the old action (based on SO_PEERCRED information
-++   forwarded by the DBus daemon).
-++ - The "start time" of the client's PID (as seen in /proc/$pid/stat, field 22)
-++   must not have changed. The granularity of this timestamp is in the
-++   millisecond range.
-++ - polkit polls every two seconds whether a process with the expected start time
-++   still exists. If not, the temporary auth entry is purged.
-++
-++Without the start time check, this would obviously be buggy because an attacker
-++could simply wait for the legitimate client to disappear, then create a new
-++client with the same PID.
-++
-++Unfortunately, the start time check is bypassable because fork() is not atomic.
-++Looking at the source code of copy_process() in the kernel:
-++
-++        p->start_time = ktime_get_ns();
-++        p->real_start_time = ktime_get_boot_ns();
-++        [...]
-++        retval = copy_thread_tls(clone_flags, stack_start, stack_size, p, tls);
-++        if (retval)
-++                goto bad_fork_cleanup_io;
-++
-++        if (pid != &init_struct_pid) {
-++                pid = alloc_pid(p->nsproxy->pid_ns_for_children);
-++                if (IS_ERR(pid)) {
-++                        retval = PTR_ERR(pid);
-++                        goto bad_fork_cleanup_thread;
-++                }
-++        }
-++
-++The ktime_get_boot_ns() call is where the "start time" of the process is
-++recorded. The alloc_pid() call is where a free PID is allocated. In between
-++these, some time passes; and because the copy_thread_tls() call between them can
-++access userspace memory when sys_clone() is invoked through the 32-bit syscall
-++entry point, an attacker can even stall the kernel arbitrarily long at this
-++point (by supplying a pointer into userspace memory that is associated with a
-++userfaultfd or is backed by a custom FUSE filesystem).
-++
-++This means that an attacker can immediately call sys_clone() when the victim
-++process is created, often resulting in a process that has the exact same start
-++time reported in procfs; and then the attacker can delay the alloc_pid() call
-++until after the victim process has died and the PID assignment has cycled
-++around. This results in an attacker process that polkit can't distinguish from
-++the victim process.
-++*/
-++
-++
-+ /**
-+  * PolkitUnixProcess:
-+  *
-+diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
-+index de3f752..098d343 100644
-+--- a/src/polkitbackend/polkitbackendinteractiveauthority.c
-++++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
-+@@ -3035,6 +3035,43 @@ temporary_authorization_store_free (TemporaryAuthorizationStore *store)
-+   g_free (store);
-+ }
-+ 
-++/* See the comment at the top of polkitunixprocess.c */
-++static gboolean
-++subject_equal_for_authz (PolkitSubject *a,
-++                         PolkitSubject *b)
-++{
-++  if (!polkit_subject_equal (a, b))
-++    return FALSE;
-++
-++  /* Now special case unix processes, as we want to protect against
-++   * pid reuse by including the UID.
-++   */
-++  if (POLKIT_IS_UNIX_PROCESS (a) && POLKIT_IS_UNIX_PROCESS (b)) {
-++    PolkitUnixProcess *ap = (PolkitUnixProcess*)a;
-++    int uid_a = polkit_unix_process_get_uid ((PolkitUnixProcess*)a);
-++    PolkitUnixProcess *bp = (PolkitUnixProcess*)b;
-++    int uid_b = polkit_unix_process_get_uid ((PolkitUnixProcess*)b);
-++
-++    if (uid_a != -1 && uid_b != -1)
-++      {
-++        if (uid_a == uid_b)
-++          {
-++            return TRUE;
-++          }
-++        else
-++          {
-++            g_printerr ("denying slowfork; pid %d uid %d != %d!\n",
-++                        polkit_unix_process_get_pid (ap),
-++                        uid_a, uid_b);
-++            return FALSE;
-++          }
-++      }
-++    /* Fall through; one of the uids is unset so we can't reliably compare */
-++  }
-++
-++  return TRUE;
-++}
-++
-+ static gboolean
-+ temporary_authorization_store_has_authorization (TemporaryAuthorizationStore *store,
-+                                                  PolkitSubject               *subject,
-+@@ -3077,7 +3114,7 @@ temporary_authorization_store_has_authorization (TemporaryAuthorizationStore *st
-+     TemporaryAuthorization *authorization = l->data;
-+ 
-+     if (strcmp (action_id, authorization->action_id) == 0 &&
-+-        polkit_subject_equal (subject_to_use, authorization->subject))
-++        subject_equal_for_authz (subject_to_use, authorization->subject))
-+       {
-+         ret = TRUE;
-+         if (out_tmp_authz_id != NULL)
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.115.bb b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-index 13c4b02..562a754 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-@@ -23,9 +23,10 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
- 
- PAM_SRC_URI = "file://polkit-1_pam.patch"
- SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
--    file://0001-make-netgroup-support-configurable.patch \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
--"
-+           file://0001-make-netgroup-support-configurable.patch \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-+           file://0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch \
-+           "
- SRC_URI[md5sum] = "f03b055d6ae5fc8eac76838c7d83d082"
- SRC_URI[sha256sum] = "2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131"
- 
+Merge request will happen Wed.
+
+The following changes since commit d7338c2b3a96ef7d8bf9df59dcde11f8c131f9c0:
+
+  README: updated Maintainers list for Warrior (2019-05-07 09:34:43 -0700)
+
+are available in the git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib stable/warrior-nmut
+  http://cgit.openembedded.org//log/?h=stable/warrior-nmut
+
+Akshay Bhat (3):
+  python-urllib3: Set CVE_PRODUCT
+  python3-pillow: Set CVE_PRODUCT
+  python-requests: Set CVE_PRODUCT
+
+Andreas Müller (7):
+  xfce4-vala: auto-detect vala api version
+  gnome-desktop3: set correct meson gtk doc option
+  evince: add patch to fix build with recent gobject-introspection
+  xfce4-cpufreq-plugin: Fix memory leak and reduce CPU load
+  packagegroup-meta-networking: replace DISTRO_FEATURE by
+    DISTRO_FEATURES
+  meta-xfce: add meta-networking to layer depends
+  itstool: rework - it went out too early
+
+Changqing Li (3):
+  php: upgrade 7.3.2 -> 7.3.4
+  postgresql: fix compile error
+  php: correct httpd path
+
+Hongxu Jia (1):
+  pmtools: use update-alternatives for acpidump
+
+Johannes Pointner (1):
+  samba: update to 4.8.11
+
+Khem Raj (1):
+  cpupower: Inherit bash completion class
+
+Martin Jansa (7):
+  esound: fix SRC_URI for multilib
+  opusfile: fix SRC_URI for multilib
+  miniupnpd: fix SRC_URI for multilib
+  zbar: fix SRC_URI for multilib
+  efivar: prevent native efivar depending on target kernel
+  libdbi-perl: prevent native libdbi-perl depending on target perl
+  aufs-util: prevent native aufs-util depending on target kernel
+
+Nicolas Dechesne (1):
+  cpupower: remove LIC_FILES_CHKSUM
+
+Oleksandr Kravchuk (3):
+  ebtables: add UPSTREAM_CHECK_URI
+  doxygen: replace ninja 1.9.0 fix with official one
+  openvpn: update to 2.4.7
+
+Qi.Chen@windriver.com (3):
+  netkit-rsh: add tag to CVE patch
+  ipsec-tools: fix CVE tag in patch
+  gd: set CVE_PRODUCT
+
+Vincent Prince (1):
+  mongodb: Fix build with gcc
+
+Yi Zhao (2):
+  openhpi: update openhpi-fix-testfail-errors.patch
+  phpmyadmin: upgrade 4.8.3 -> 4.8.5
+
+Zang Ruochen (1):
+  python-pyasn1: upgrade 0.4.4 -> 0.4.5
+
+ .../recipes-utils/aufs-util/aufs-util_git.bb       |   2 +-
+ ...ove-EvDocumentModel-get-type-function-dec.patch |  33 +++++
+ meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   |  12 +-
+ .../gnome-desktop/gnome-desktop3_3.32.0.bb         |   1 +
+ .../recipes-multimedia/opusfile/opusfile_0.10.bb   |   2 +-
+ .../miniupnpd/miniupnpd_2.1.20190210.bb            |   2 +-
+ ...to-build-Samba-against-a-newer-minor-vers.patch |  86 ------------
+ .../samba/{samba_4.8.4.bb => samba_4.8.11.bb}      |   7 +-
+ .../packagegroups/packagegroup-meta-networking.bb  |  13 +-
+ ...penhpi-fix-function-saHpiSensorThresholds.patch |  35 +++++
+ .../files/openhpi-fix-testfail-errors.patch        |  33 -----
+ .../recipes-daemons/openhpi/openhpi_3.8.0.bb       |   2 +-
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   2 +
+ .../CVE-2019-7282-and-CVE-2019-7283.patch          |   2 +
+ .../ipsec-tools/fix-CVE-2016-10396.patch           |   2 +-
+ .../openvpn/{openvpn_2.4.6.bb => openvpn_2.4.7.bb} |   6 +-
+ meta-oe/recipes-bsp/efivar/efivar_37.bb            |   2 +-
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb         |   6 +-
+ meta-oe/recipes-dbs/postgresql/postgresql.inc      |  10 ++
+ .../doxygen/doxygen/0001-Fix-6906.patch            |  94 +++++++++++++
+ meta-oe/recipes-devtools/doxygen/doxygen_1.8.15.bb |   8 +-
+ meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb |   9 +-
+ meta-oe/recipes-devtools/php/php.inc               |   2 +-
+ .../0001-opcache-config.m4-enable-opcache.patch    |  81 ++---------
+ ...049-ext-intl-Use-pkg-config-to-detect-icu.patch | 154 ++++++++++++++-------
+ .../php/{php_7.3.2.bb => php_7.3.4.bb}             |   4 +-
+ meta-oe/recipes-devtools/pmtools/pmtools_git.bb    |   2 +-
+ meta-oe/recipes-kernel/cpupower/cpupower.bb        |   3 +-
+ meta-oe/recipes-multimedia/esound/esound_0.2.41.bb |   2 +-
+ meta-oe/recipes-support/gd/gd_2.2.5.bb             |   2 +
+ meta-oe/recipes-support/itstool/itstool_2.0.5.bb   |   6 +-
+ meta-oe/recipes-support/zbar/zbar_0.10.bb          |   2 +-
+ .../recipes-devtools/python/python-pyasn1.inc      |   6 +-
+ ...thon-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb} |   0
+ .../recipes-devtools/python/python-requests.inc    |   2 +
+ .../recipes-devtools/python/python-urllib3.inc     |   2 +
+ .../python/python3-pillow_5.4.1.bb                 |   2 +
+ ...on3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb} |   0
+ .../{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb}   |   4 +-
+ meta-xfce/conf/layer.conf                          |   1 +
+ ...e.ac-Detect-vapidir-if-not-set-explicitly.patch |  31 +++++
+ .../recipes-bindings/vala/xfce4-vala_4.10.3.bb     |   7 +-
+ ...-memory-leak-and-reduce-cpu-load-slightly.patch | 121 ++++++++++++++++
+ .../cpufreq/xfce4-cpufreq-plugin_1.2.1.bb          |   1 +
+ 44 files changed, 512 insertions(+), 292 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+ delete mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch
+ rename meta-networking/recipes-connectivity/samba/{samba_4.8.4.bb => samba_4.8.11.bb} (98%)
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
+ delete mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.4.6.bb => openvpn_2.4.7.bb} (94%)
+ create mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/0001-Fix-6906.patch
+ rename meta-oe/recipes-devtools/php/{php_7.3.2.bb => php_7.3.4.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb} (100%)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb} (91%)
+ create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin/0001-Fix-memory-leak-and-reduce-cpu-load-slightly.patch
+
 -- 
 2.7.4
 
