@@ -1,37 +1,37 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 265777E181
+	by mail.openembedded.org (Postfix) with ESMTP id 6D9757D2BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 07:19:30 +0000 (UTC)
+	Tue, 21 May 2019 08:08:19 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 457RwM0RGfz63;
-	Tue, 21 May 2019 09:19:30 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 457T0f5BYqz24;
+	Tue, 21 May 2019 10:08:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1558423171;
-	bh=XhmqIEu64vybKrfHxMVANkRaWeR60WUf0Ht3OspLMbY=;
+	s=default; t=1558426099;
+	bh=zHOSVLw9ZZgiQgPsF/ijSRm3FasA2zznlwMxXkrpmF4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=NoKcoRumEL1OAjByX3rsbQ0FP87PlOkS8K7fIx2swrwzJZFXisEaMwKHExDzhnoHY
-	agkcb5HD+zAr6VIjr5dpDplpW1YGIsa6ZaY7m+rsI7ASyoeRv5cTPRCGuotiVFw1b7
-	EBDwZR1/3krdcLJ7yUcWe8nrGleDPZv69NKcETZKYpnvXoiGq2lDMjLk4RqUlWZXV8
-	2ld1b0julTrDbuze+QQdd8BU7Q154lUAdBt9u+w3C22ScqZrpql798M3+i+gZwlvHN
-	wdrMgOzP9kDCdEV102678sufalKrjvnc8t5jnlay8DfFFehmxpy82vVZfEjo6PHgNU
-	yPruMa0nKgCcdvbMg0d5MVilhHPs/ooOy96MWCKcHR5+N5aa1E1RKIMmWlAe158aAC
-	546S2zbEQ3gC0oI/wQiS8PPoOg83RQ+rqqFWz+yED85F7YVh2iYJZwrCoEHxBzVTHi
-	2VMITjNdnsIZaX4+hpIYivVMVxLmXaY9+U4VjQ2OZf1+1oxPfa16D6GoGVlXG16+Ew
-	GYP4GyKKJDwkg44nxVaH+ShzIaKbNziWc8sm4VBPKZ+sgOyoabVqaW25qwketvGwxW
-	POtCZvQqpMxyLy13B8sBDHdfXzh7UuXT9/GGaPXKbLmlnmYfyg6lnksM/Od0Oe1c47
-	SPFso+05j4X19j3xj7BOKwg4=
-Date: Tue, 21 May 2019 10:19:28 +0300
+	b=J0/IvIXfweJOW9MupQd2eflYo+RwetySykbJ7jZ1HckL7dq/Uq+oCVwGGtpOmrKXU
+	HEFhnedWUlTAb7JTGS3kvGauFoNDxQNlSOoKPw0UVBq/1hj/vT2XxlqU1lnpfTZObY
+	RjPZjJaBEayJd8sKb3aDNbmGF/9Dugm+mq/bDY/Afl69XzclbUs0t9iUzNeooJkAZJ
+	xp9WDBqmcewlqqArV+17HCGahZi/OGJR/0yipvRSBZlaW0SU6CMTBG6HV7Xh8f+qfd
+	NxxK8T9YCeIB37VdLmWWreqshl0MkfR84F6zdhSLzu2bA/CEEbSO1gMQNMO0H3j4/I
+	Nr3EABOVQubNaP+TbqGnzj1fxV8SMLwSwGQhRN9atL6XDOMdUSduvXU5pHIx9zcEXi
+	FhQHPXwMBGzSQt2vv3a56oiy0ybl8H5Q7Iv2rlmX6kFI7Hb200nNyL+sgO0l35Vv4J
+	mK1NOOpsbnPLkA0zB3zvTJS7RjA+WXQaOpyJiND1E51+8m12yF3NaZONimCFfTGJ+V
+	sWezglDgJ9cQGfWkakLX046ph9VBnyNij9b1PeMdxZtaRxvIIOwHk2io96G9sJDrip
+	UkyNVV/DP7fUMhRsh9Wn+Q6W0bD1hc2Evmx6hTAb0TKnlglbq0pmKojhtTmTbBw/fO
+	k3BYZbXWFV4dQb76dH4MBv9I=
+Date: Tue, 21 May 2019 11:08:14 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190521071928.GA15108@localhost>
-References: <20190521065529.41647-1-raj.khem@gmail.com>
-	<20190521065529.41647-2-raj.khem@gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20190521080814.GB15108@localhost>
+References: <cover.1558410874.git.akuster808@gmail.com>
+	<3265bb67550f49b0dd4a4ec9ad98af56c14cbb5d.1558410874.git.akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20190521065529.41647-2-raj.khem@gmail.com>
+In-Reply-To: <3265bb67550f49b0dd4a4ec9ad98af56c14cbb5d.1558410874.git.akuster808@gmail.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 2/2] openocd: Fix build on x86_64
+Subject: Re: [warrior][patch 08/34] gnome-desktop3: set correct meson gtk doc option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 07:19:31 -0000
+X-List-Received-Date: Tue, 21 May 2019 08:08:19 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Mon, May 20, 2019 at 11:55:29PM -0700, Khem Raj wrote:
->...
-> +Fixes
-> +| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
-> +| #define PAGE_SIZE                       4096
-> +|         ^
-> +| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
-> +de/limits.h:89:9: note: previous definition is here
-> +| #define PAGE_SIZE PAGESIZE
->...
-> +--- a/src/flash/nor/esirisc_flash.c
-> ++++ b/src/flash/nor/esirisc_flash.c
-> +@@ -92,7 +92,9 @@
-> + #endif
-> + 
-> + #define CONTROL_TIMEOUT		5000		/* 5s    */
-> ++#ifndef PAGE_SIZE
-> + #define PAGE_SIZE			4096
-> ++#endif
-> + #define PB_MAX				32
+On Mon, May 20, 2019 at 08:56:08PM -0700, Armin Kuster wrote:
+> From: Andreas Müller <schnitzeltony@gmail.com>
+> 
+> Fixes:
+> | ERROR: gnome-desktop3-3.32.0-r0 do_configure: QA Issue: gnome-desktop3: configure was passed unrecognised options: docs [unknown-configure-option]
 >...
 
-Are you sure this is correct?
-This looks like two completely unrelated defines that just happen to 
-have the same name.
-And it worked by chance since they have the same value on x86_64.
-
-Renaming to something like ESIRISC_PAGE_SIZE would be a proper fix.
+This was a post-warrior breakage.
 
 cu
 Adrian
