@@ -1,52 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 927277E14E
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+	[209.85.214.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 576887E069
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:57 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id t1so6418571pgc.2
+	Tue, 21 May 2019 03:56:58 +0000 (UTC)
+Received: by mail-pl1-f180.google.com with SMTP id f97so7724269plb.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 20 May 2019 20:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=m7T52ksdFczSwFRipJ4NO2UyqjvhnJeTTAfFYY9gTW8=;
-	b=VW79ABjpmgKCWBUMwAVZBgweTOOfiGleS5F+DFHqCEqLX21wJY4jPN/FRiXgL+TGCv
-	UGMnwMEL+wE3bNiLQv58ip811Y1uphqpUV0m0oaIoXZAl6A54/oHdFdQGDPeU4EEaOkl
-	9ZFZv899fYK09m06FCYpo6J5wo7BbpnL5UepwEM3ua0pwfAFOQvoHvuWSA9yOA12AdHL
-	QuknwxeD8naxt/cw5reQaH4RouZ/Ax5ZPnp+BBQ9xgLoo/8JHy14thRu7TvS0dOp93VR
-	WrN6J0D8BUpLdapamGG/Du57Tb9Et5VSPgwbc6UPy9vqtvZ0RQQwNYqKC/Fzjpb3t/5c
-	SlnQ==
+	bh=wuHykQuzBP7aQ03bAZLrhus5Y0d/hclhDU6OmSfkbI4=;
+	b=mER7VChU54UCwYtkEcSFS6IxCH8hBVOMXffg5tkpxd/Ch4hAdDnF2EccJhId4lcyIb
+	qqB59KNYfVXyYDu3PZAX8aPCeU/x8tSLoiUG9ccc0pHxGgKRanMcD/Aeiv9wFiNTqI0c
+	UWHBdiYOWxtvHgv6sVceZPrcmf+4ODWZu7XxYdjy+sNsspO93C7tWRR6cbGhirKjVcSd
+	vUWPMUajAxf+D0qX/7b9SV+ZxstfHSMs24D0dv93t1Ah4vaK+CwvpzEgrkmjYHykcFB3
+	ezdnUw2VygQDmKc7ZQhnkByi+8fUP9xkjckCM/DnCcY+JILc8mZr+6Fb8cFxlI3WUdJC
+	5L3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=m7T52ksdFczSwFRipJ4NO2UyqjvhnJeTTAfFYY9gTW8=;
-	b=QnthPpLfiAL/jRlDcwxY6bQPI9pphlg2GNUBJ1CtXl5lQaC+yiS3hmGNKD3/qrorwW
-	KIqCw49Sui9DSUQDGDIqDPDwkHYTlXD2fHiSfVENa4CDJCbCNUK0WNR/uI8mPb6AsU2G
-	ubh9/EL8yw6gs5RqbftGaqBOeifCnCogzX9TFLzkx1FRTkqXY3fir2HlMinRJ1ax260A
-	HAy6c75uiBIn/K3G1pBa+l8LnXdVWUqpF9aLAhuGXZd5WdZfMMGW88k+5zaH1EAC3XHI
-	TmNmLUS8AC9SMjbnEaNdN0RS+LjqMNARh4i6l4G8u9//LAuCqKpyP3YGkOgwPbq7vaC5
-	Ffjw==
-X-Gm-Message-State: APjAAAWmv5qkMRR1J61Atz2XxbyYv/NmC3fZ/27oMfMSH8wT5FkdWgbY
-	Xs1cy3uzOi9wyn3T/JJuiiUjfi8d
-X-Google-Smtp-Source: APXvYqx6As86huKinHEFjAJ6rKL+Wk+zg4zni98ikglT1E3XVz0HuyDwbJZ2Sx53965ieh/7uuXKiQ==
-X-Received: by 2002:a63:d343:: with SMTP id u3mr79316474pgi.285.1558411018645; 
-	Mon, 20 May 2019 20:56:58 -0700 (PDT)
+	bh=wuHykQuzBP7aQ03bAZLrhus5Y0d/hclhDU6OmSfkbI4=;
+	b=Kal+fF4WG+WzBXITXVIoAzbFBKlPHrfAYjzWkl8yRgGUn9ca3WLDgzBYuxL4Eq6P9E
+	0LFs9szxtBmYYdRJGkDXqyjXVHAUNPP0tRIDUlm8ca7l0mfPpTKGuf9elelUzQ65xLvI
+	WWfS2hvTjfkv0l3tDa+6kWqEMCyHPCQNd/eZmSQ8TRGQMnDzCmxLetCuaoqsu+9JeQZr
+	0ZWxnut5gvdNHo/KyRw0M9DPDgNiQoIPQJpkm1OZXtkoCUuWNDcjOh4dDgWP/xkgIj7O
+	U0KTwHlQRXsQwa79pDgKYUB1n5aSFP6uwOXUJx93QHRpo83AABRuyhXhp1v3TL6xT4AZ
+	XgnA==
+X-Gm-Message-State: APjAAAVL/1U6QCO+8V6jy4bqFf6qKAUv0IbOtnBtISgIFugS75dtEyr5
+	CBPhJoRXcnYH9qOSkMjuF2MzIAZT
+X-Google-Smtp-Source: APXvYqwb+rYmCtJ8xtSCrDYsgnN04BdUnGqytDAZiUtzLM7DGX9rhTzR2x4Se/6xbbacqufkIKK2Kw==
+X-Received: by 2002:a17:902:2d03:: with SMTP id
+	o3mr44457310plb.309.1558411019399; 
+	Mon, 20 May 2019 20:56:59 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.57
+	h13sm23045273pfo.98.2019.05.20.20.56.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:58 -0700 (PDT)
+	Mon, 20 May 2019 20:56:59 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:25 -0700
-Message-Id: <0b8aa0188fbc0886b5211bbfca897b8894b5fe15.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:26 -0700
+Message-Id: <38cbad0c522029d08226f645e977a5652376547c.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 25/34] ebtables: add UPSTREAM_CHECK_URI
+Subject: [warrior][patch 26/34] netkit-rsh: add tag to CVE patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,30 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:57 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:58 -0000
 
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb | 2 ++
+ .../netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch         | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-index f05bd61..2767840 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-@@ -12,6 +12,8 @@ RDEPENDS_${PN} += "bash"
- RRECOMMENDS_${PN} += "kernel-module-ebtables \
-     "
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+index 4381f5b..285667b 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+@@ -10,6 +10,8 @@ Origin: https://github.com/openssh/openssh-portable/commit/6010c0303a422a9c5fa88
+ Upstream-Status: Backport [Debian]
+ [https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch]
  
-+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/ebtables/files/ebtables/"
++CVE: CVE-2019-7282 CVE-2019-7283
 +
- SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
-            file://ebtables-save \
-            file://installnonroot.patch \
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+ ---
+  rcp/rcp.c | 5 +++++
 -- 
 2.7.4
 
