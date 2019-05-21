@@ -1,50 +1,104 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A1227E25A
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 225C07E269
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 14:39:40 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id j24so16138151ljg.1
+	Tue, 21 May 2019 14:52:49 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id f12so8563975plt.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 07:39:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=GsJ6fzChEjG/vCydqCjbhDgfQu6KZEHxZtquLo5Imo0=;
-	b=AG0uCz/n5vX7NCd/vwy24mqKqX/m/2ZYzP98hG74KifQCESXjUKr5B5lLUimEKoAPp
-	ersrtmbGq2jTZl4PPVzBcTBBAUoBGCZJRrTIMS4X5PymR0BuAMY7UIWnf6Imp1NgncIQ
-	NtCfTfUHIQlZbPuZ5XyysBgFn38jfFEV8FW/0E2m6LfZOWEZdJ8137GmQuK05s333nEN
-	e1TWWrX+mEIR7kxvC2DyxRas8BO8AzSpmkLP4CW26VwdQkq3jW3SgXjISQ6feN30wCDO
-	EE/tPg0svN1x5fgL7XVheafRv+dd2dT9AmVIjrRhPhiTep/gge69OWccRPwVupkr5WoS
-	TxmQ==
+	Tue, 21 May 2019 07:52:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=x+YOc/qcG3YPF1Fv6OAg0Yx+hDJ2DVaNhIAliZikDC8=;
+	b=JEI9DseTYKiCzJ8cf64L6VSOKIA4W1NgJb/ZAZM7hCmfyf3ZCwwmhfDreIaA28J19u
+	vFlWj+hHy7gyyWHsUfTDiydZP90C2OKZ0K2PB8tQoSThcixf25kiCnfhYxAATW//hIp4
+	mZEfx78F0BSuIq7oFWn35xnnNNVd8FKbehyncVx5AB8K56doncnv/5tj4m3yFDWp5D/7
+	ytcRBnMPQQ1ao4b/04qv8woU/LfCKvQkkq/3JAsl/FCwGPaBx2HGvJu9pwb1+s/r3XpW
+	go/M1wCh42CVmLMThjYEIrJ2lXcTrjO3C2yhaqfc4NPfidSa/bez7GsmO3+j6uM21Nv0
+	b5kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=GsJ6fzChEjG/vCydqCjbhDgfQu6KZEHxZtquLo5Imo0=;
-	b=lsQsgmWOwC16Zs+Wxs1ue8gsaQhZYH91tLYOLF6dx6/Mr5PuKh7PPs1ftebTLanU6M
-	O2Fbzvtj2+357DvypVAqp/wopoRmpx0lJy5dP285XgwuqyPPP1aD+anXCPV3GNaCGwYD
-	h0nwcasGkkvGxjMMEVt4bEAGowrFKBmKFgAZLPeRJ9NGRw08Cgki0JyNYrEyG6QZsx8p
-	aL4U9pfBF0Qc6OK9Ywobh+D6qqzAd3RzKu0/qWRpdm/PJ392yq4Yls/yuWmPwYAxbUkk
-	1A2aGCywaTQsrg6wjMEhyQZHiJgo95JW9cBag/Ynbj94IAJHjU6Q07Mrru+ZmtPwNBlZ
-	waQg==
-X-Gm-Message-State: APjAAAXw/539KPLjovURd/l5ziXmuOiSvSzVy29Kx8Xzfda6ZLcvVfSS
-	wP1nZDILe11BOWARanXTUVI6RVgGCXw=
-X-Google-Smtp-Source: APXvYqyqaPP5IYljg7R+Nya12V3+yOD2dDRRN9ijh/SZoZvvqk75mmmWToTBneYZs3Yz6BC/2/CFpw==
-X-Received: by 2002:a2e:89cc:: with SMTP id c12mr35414585ljk.90.1558449580321; 
-	Tue, 21 May 2019 07:39:40 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	r69sm4707502ljb.16.2019.05.21.07.39.39
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=x+YOc/qcG3YPF1Fv6OAg0Yx+hDJ2DVaNhIAliZikDC8=;
+	b=SYTv7PS9hCKzi/ggDoXmnbOrmzAQNBStJvjJrB2Fg3IpChJn9rHv+q5wKzS3rpsk/E
+	QlcZoAM9Mf237NB0+oXIGIIPNIuLbJz5hFx/h0TgA4miN3ehZ3aZynwVo+DHMEeyLPuQ
+	zoR53oXdiDhTqHJr5UwNzhaV4x70LWD0Gz9pfMHJLUHJ58Vr8m7QhpytlMFV60PVsHHK
+	jUNdizo0Q8HQ0IzAVmh0LmObb8LdHUVqfrTWhFArwb9zsLyo0S+vcF6FjFCc33KGVxKB
+	jZQwG9lxlo1L/OXSFQAbSAo2F2IHgGPWm/RBMuWZqWvnXUpfZPUsMN4sS6BQZ643fgru
+	4thA==
+X-Gm-Message-State: APjAAAW6rGR38pMJ8q+VlKMIga2oWXAjWfLMHF9T6d0YujiSyMgVFFP6
+	FczZ2y+33rfv0juKLxX5jDZvscUE
+X-Google-Smtp-Source: APXvYqz35MCF47PMKqeWszW0+AKcMbh3XCbC0A9Ko2FRmmnxOMwlRyIY2G9WG8ypKYNlbN8GS76Ojw==
+X-Received: by 2002:a17:902:7d8a:: with SMTP id
+	a10mr62820882plm.63.1558450370862; 
+	Tue, 21 May 2019 07:52:50 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:199d:e2fe:5a4f:97f4?
+	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
+	by smtp.gmail.com with ESMTPSA id
+	c5sm23506332pgh.86.2019.05.21.07.52.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 May 2019 07:39:39 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 May 2019 16:39:37 +0200
-Message-Id: <20190521143937.18457-1-dev@sashko.rv.ua>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-networking] rp-pppoe: update to 3.13
+	Tue, 21 May 2019 07:52:50 -0700 (PDT)
+To: Adrian Bunk <bunk@stusta.de>
+References: <cover.1558410874.git.akuster808@gmail.com>
+	<fd48edcd7415f4a1ca043e256585f2705b66545f.1558410874.git.akuster808@gmail.com>
+	<20190521064032.GD9971@localhost>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <13e0f089-cd2e-9084-279e-1a048911e543@gmail.com>
+Date: Tue, 21 May 2019 07:52:49 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <20190521064032.GD9971@localhost>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior][patch 02/34] python-pyasn1: upgrade 0.4.4 -> 0.4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,160 +111,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 14:39:40 -0000
+X-List-Received-Date: Tue, 21 May 2019 14:52:50 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
-Removed patch was upstreamed.
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../pppoe-src-restrictions.patch              | 31 -------------------
- ...1-ppoe-Dont-include-linux-if_ether.h.patch |  0
- ...Enable-support-for-the-kernel-module.patch |  0
- .../configure.in-Error-fix.patch              |  0
- .../configure.patch                           |  0
- .../configure_in_cross.patch                  |  0
- .../discard-use-of-dnl-in-Makefile.am.patch   |  0
- .../dont-swallow-errors.patch                 |  0
- .../pppoe-server.default                      |  0
- .../pppoe-server.init                         |  0
- .../pppoe-server.service                      |  0
- .../top-autoconf.patch                        |  0
- .../update-config.patch                       |  0
- .../{rp-pppoe_3.12.bb => rp-pppoe_3.13.bb}    |  7 ++---
- 14 files changed, 3 insertions(+), 35 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/0001-ppoe-Dont-include-linux-if_ether.h.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/0002-Enable-support-for-the-kernel-module.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.in-Error-fix.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/configure_in_cross.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/discard-use-of-dnl-in-Makefile.am.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/dont-swallow-errors.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.default (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.init (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/pppoe-server.service (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/top-autoconf.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe-3.12 => rp-pppoe}/update-config.patch (100%)
- rename meta-networking/recipes-protocols/rp-pppoe/{rp-pppoe_3.12.bb => rp-pppoe_3.13.bb} (91%)
+On 5/20/19 11:40 PM, Adrian Bunk wrote:
+> On Mon, May 20, 2019 at 08:56:02PM -0700, Armin Kuster wrote:
+>> From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+>>
+>> -Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
+>>
+>> -Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
+>>
+>> -License-Update: Copyright year updated to 2019.
+>>
+>> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ..
+> No reason is provided why this should be upgraded in a stable branch.
 
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
-deleted file mode 100644
-index 03697ff1f..000000000
---- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-src-restrictions.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From a6a85ec5c85cbd3c86743b6e2fa391198869bff8 Mon Sep 17 00:00:00 2001
--From: Tom Rini <tom_rini@mentor.com>
--Date: Wed, 27 Jul 2011 03:46:52 +0000
--Subject: [PATCH] rp-pppoe: Port from oe.dev
--
--Relax restrictions on the PPPoE src address, as per debian bug
--293811:
--
--  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=293811
--
--Upstream-Status: Inappropriate [Backport from Debian]
--
-----
-- src/discovery.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/discovery.c b/src/discovery.c
--index 7ee259d..5213a37 100644
----- a/src/discovery.c
--+++ b/src/discovery.c
--@@ -472,8 +472,8 @@ waitForPADO(PPPoEConnection *conn, int timeout)
-- 	if (!packetIsForMe(conn, &packet)) continue;
-- 
-- 	if (packet.code == CODE_PADO) {
---	    if (NOT_UNICAST(packet.ethHdr.h_source)) {
---		printErr("Ignoring PADO packet from non-unicast MAC address");
--+	    if (BROADCAST(packet.ethHdr.h_source)) {
--+		printErr("Ignoring broadcast PADO packet");
-- 		continue;
-- 	    }
-- #ifdef PLUGIN
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0001-ppoe-Dont-include-linux-if_ether.h.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0001-ppoe-Dont-include-linux-if_ether.h.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0002-Enable-support-for-the-kernel-module.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/0002-Enable-support-for-the-kernel-module.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.in-Error-fix.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.in-Error-fix.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/configure_in_cross.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/configure_in_cross.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/discard-use-of-dnl-in-Makefile.am.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/discard-use-of-dnl-in-Makefile.am.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/discard-use-of-dnl-in-Makefile.am.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/dont-swallow-errors.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/dont-swallow-errors.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.default
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.default
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.default
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.init
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.init
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.init
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.service
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/pppoe-server.service
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/pppoe-server.service
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/top-autoconf.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/top-autoconf.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/top-autoconf.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/update-config.patch
-similarity index 100%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/update-config.patch
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe/update-config.patch
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-similarity index 91%
-rename from meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-rename to meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-index fbe015f5e..492ade5ae 100644
---- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-+++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.13.bb
-@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
- 
- PR = "r10"
- 
--SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
-+SRC_URI = "https://dianne.skoll.ca/projects/rp-pppoe/download/rp-pppoe-${PV}.tar.gz \
-            file://top-autoconf.patch \
-            file://configure_in_cross.patch \
--           file://pppoe-src-restrictions.patch \
-            file://update-config.patch \
-            file://dont-swallow-errors.patch \
-            file://discard-use-of-dnl-in-Makefile.am.patch \
-@@ -22,8 +21,8 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
-            file://0002-Enable-support-for-the-kernel-module.patch \
-            "
- 
--SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
--SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
-+SRC_URI[md5sum] = "ec9dccd9a367a1f71f2dc81069796dd8"
-+SRC_URI[sha256sum] = "8cd6bc71ba46bd5f6eb4daf60220ccdcd991a8525111dee466501b1b9717e676"
- 
- inherit autotools-brokensep update-rc.d systemd
- 
--- 
-2.17.1
+There is no meta-openembedded process or requirements for stable
+branches=C2=A0 to provide reasons in commit messages.
+
+The precedent in the community is to provide minimal or no comments in a
+commit message. So the burned is placed on the Stable branch maintainer
+to do the leg work the community as whole should have done.
+
+I looked this up before backporting and I was satisfied with the
+information I found and felt no compelling reason to explain why I
+choose this for backporting.
+
+- armin
+
+>
+> cu
+> Adrian
+>
+
 
 
