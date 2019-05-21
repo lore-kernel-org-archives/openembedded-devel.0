@@ -1,52 +1,54 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
-	[209.85.210.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D0BC7E12E
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 05A1F7E101
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 21 May 2019 03:56:42 +0000 (UTC)
-Received: by mail-pf1-f171.google.com with SMTP id z28so8335560pfk.0
+Received: by mail-pf1-f195.google.com with SMTP id s11so8294454pfm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:43 -0700 (PDT)
+	Mon, 20 May 2019 20:56:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=g7+nnl4NtjNXTrD2PZDWW6iRQg1pXDgIacDT1r6LTSs=;
-	b=TgxP1zDzfmqbpQzzCkjKCnXD38/tGq8q38AUx3tPUwOyyJGI0qjN0Vatf4rQYKrPoU
-	DjTL+Xfv+1QFAw2fIlzP0vR6tohEs8k5msdORQ8M/YoJTQUkuiF7LeAuI8Ynnpc371CI
-	29e8xdR8QjVpuQYT3PzfxJDITFOPq5rKIS5+18R4Ul7sLDGv0AUdMLeLpV2NAfj3Tvoo
-	083nMLUeCgdT1nMPHWeVf5DCG3B9zRaSPFMwQHu8iZEwsEJx8dC+t8lpd2sozJBmmXTN
-	bS8aG2jUukZqqSoc3Vd+ZLo9tNaT/qgJyOiBbvTH0pPb0xa2OyGamWRXkl/U9pwx3lud
-	RFlg==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=vvEDXjFpsH7hF0YtmKyinUaBLDKjgRWB0+PgeSlk/ro=;
+	b=WWZaDE1r+r8EF6BXmx15s1yazVps1Vhezv/jc8ao1biGMQxeuqwIqtJTdG7IsVA/mO
+	nTFkWW1KmFNZk2yWHTTCp2lktAc9RH9jGWExEsX2cJxacnaI4YZ3oaE+/NSsNx1IQ/wM
+	J7nLm0Xv4WHL+hKyqvQvr2jtmVk6ZU7TSCc8DFCqfWUOdegIW960CdD4j+vMFWGxpfsR
+	td15TqVHwfv0LU0YYu6CINDrtE+zED0jTklPE+FWsChGlOq6DUOaMKglbZE4DonaLqru
+	+P/rAyeri2NHnzNHHRAjG5gssReNUsMaUMCnGsGKlNJmMb40cJXbMkBArX4/EdbZDeZX
+	Z5Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=g7+nnl4NtjNXTrD2PZDWW6iRQg1pXDgIacDT1r6LTSs=;
-	b=e/4Rt7ssjXt0nLcaYEoF1CbVuIjQAZ8rxufr20JjIEVKmA8H/8alg3eHTFMxFs3S4B
-	/yxwiSiFq5FRu7qht+H+OjExQLiQZEAi6daQxxUx/Ejzc1AULApIzt4RedsVWbjtA08a
-	LQ9FaHEcEcgHYSMjFU0pgQ2TUE9dxbhuYkN1yAtw5zir59rRfRxwre4tmw6acL+8n0p6
-	dRD/Mu+Gyv0i+e2WajsTEtM+c/a+vVPT62rl2gF02T9mx8zafwMhmQjPqU1pEvi59iQ4
-	6WKdSeCTGws6TVDLcQKFT8js7TdLhr3Gil7dJmTROcoawkDp0A/L5kQPoKFS3wnCMG52
-	EUTg==
-X-Gm-Message-State: APjAAAVi3YGyQINy+SCUcNUa3rS76LrnA8NEsOdSBI4rkYpG/kiU5pWa
-	z7AUi514tO497YHZB23sJxSm5kM8
-X-Google-Smtp-Source: APXvYqyczQIFrp+1f6FcLqdyg4iBYKg7JBiizs3RLbBCoUz4s9UMNxgD+jsGu0oJI2zO6amspbzexA==
-X-Received: by 2002:a63:950d:: with SMTP id p13mr79947534pgd.269.1558411003339;
-	Mon, 20 May 2019 20:56:43 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=vvEDXjFpsH7hF0YtmKyinUaBLDKjgRWB0+PgeSlk/ro=;
+	b=L8eyu66Qy9YnGTbbZ1MJrDYc5TVfiPBrvM4Khm1j2TGSuxoDcsQds0+4fLC0AlEH8G
+	9S9BQXKo+omDYx8ggUjAyw6yIPxWfz2K7UJB2KAg4VJM/R7AQxdD9BdFhPtX54+H6x6o
+	ASdsC8ktSpH4Yo0WB+TbuN+3hnPsRgFU0KpIlw9ocfSXeyOooLnTGwfLY5DYuZbfIVE4
+	qSN+2Pfr2ZJAAHH2MFiKH12ixrrc0nMsYuiwyVSDlA0yCzeCUk9/EXi8AqgWS4U7F2kI
+	GK7jcfBYCSnBdGjMgF8AN154yROeMD+v6oahUN9EyLWH2MBTQ5bNH0TmQgo9qS4vmiVJ
+	esAg==
+X-Gm-Message-State: APjAAAV6i3aA3Jqdbsg6IIYjVMXlK509+oqiF/MA/tB0yzznpV56PGxN
+	cKfrw4oZF/jm1U+fOac6nGzdE8FH
+X-Google-Smtp-Source: APXvYqwG9ZmB/q1YaoAWLGC+4JgO5s+Jv1bfZxmD/N/fz76doW4P4jc+MxpIFlcgaPtsnKroGpByEg==
+X-Received: by 2002:a63:c106:: with SMTP id w6mr76091572pgf.422.1558411004092; 
+	Mon, 20 May 2019 20:56:44 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.42
+	h13sm23045273pfo.98.2019.05.20.20.56.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Mon, 20 May 2019 20:56:43 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:06 -0700
-Message-Id: <7207a2559f5239b62792bb06638941c67ef2c13a.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:07 -0700
+Message-Id: <03d3e3877a6eed51661d000d2d312e17a5d7ebfe.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 06/34] phpmyadmin: upgrade 4.8.3 -> 4.8.5
+MIME-Version: 1.0
+Subject: [warrior][patch 07/34] xfce4-vala: auto-detect vala api version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,36 +61,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:42 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Get rid of tedious maintenance burden
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../phpmyadmin/{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb} (91%)
+ ...e.ac-Detect-vapidir-if-not-set-explicitly.patch | 31 ++++++++++++++++++++++
+ .../recipes-bindings/vala/xfce4-vala_4.10.3.bb     |  7 ++---
+ 2 files changed, 35 insertions(+), 3 deletions(-)
+ create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
-index 975f631..99678e6 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
-@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
-            file://apache.conf \
- "
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch b/meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch
+new file mode 100644
+index 0000000..a3a9330
+--- /dev/null
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala/0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch
+@@ -0,0 +1,31 @@
++From 35267d995a81263b98f0ad56399ac3e30f9cf152 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Tue, 30 Apr 2019 09:48:08 +0200
++Subject: [PATCH] configure.ac: Detect vala-api version if not set explicitly
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 9bf4230..c489385 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -38,7 +38,7 @@ AC_ARG_WITH([vala-api],
++ 		AC_HELP_STRING([--with-vala-api=VERSION],
++ 				[Use Vala API version VERSION]),
++ 		[vala_api=$withval],
++-		[vala_api='0.16'])
+++		[vala_api=`$PKG_CONFIG --variable=vapidir_versioned vapigen | sed -e 's:.*vala-::' -e s:/vapi::`])
++ M8T_CHECK_VALA([$vala_api])
++ AC_ARG_WITH([default-vapidir],
++ 		AC_HELP_STRING([--with-default-vapidir],
++-- 
++2.20.1
++
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+index 97007be..68dbc69 100644
+--- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+@@ -7,12 +7,13 @@ inherit xfce pkgconfig distro_features_check
  
--SRC_URI[md5sum] = "c8a603f4b78d1dbcefc191b8ae598c79"
--SRC_URI[sha256sum] = "95f2692094d31c2c323d4767023583ab112ad54fff9e3af372710fcb676151af"
-+SRC_URI[md5sum] = "e3737a28fff076003e56a83fe1920d04"
-+SRC_URI[sha256sum] = "d7ab5df4e464d7ba17bf2a42da7d7f26dad45c34bf321ac8ae7d2ed748413913"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
- UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
+-SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
++SRC_URI = " \
++    http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
++    file://0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch \
++"
+ SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
+ SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
+ 
+-EXTRA_OECONF = "-with-vala-api=0.42"
+-
+ FILES_${PN} += "${datadir}/vala-*/vapi"
+ 
+ RDEPENDS_${PN} = "vala"
 -- 
 2.7.4
 
