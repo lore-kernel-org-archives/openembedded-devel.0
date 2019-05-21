@@ -1,54 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 194267E16D
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id BA21E7E14E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:55 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id i21so7819362pgi.12
+	Tue, 21 May 2019 03:56:56 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id 13so8302823pfw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:57 -0700 (PDT)
+	Mon, 20 May 2019 20:56:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=auWIfJfADhIItNHCRzJdEZ4AHIu+/zM93dIG8UBplQc=;
-	b=ogDe0pk6xf7ntd/dNwFOlJxJwhvEBGqlonyfia9My3dKJaIbZSj2wLjkt8bH+2Q81d
-	TSd5frJKVQJy3ifn4hjVU+s0eU6BFceXa9onL1XyWPRAvKJU+Uo0mCL+PDclx/IpwLJK
-	ghTCSCSlSO3IxP8W/OFz0/2jsLe7DiM7dF/fPk5fvlVWz++2kh+V0cZN7PVZLWpFtRvx
-	ILi1a/grsDp/Wt5GDOgRHGg9RO3YXIvrww3MpmUZjdBAFP1EBttiPjVAFBNYHOFIbxZi
-	3u3G7gY0XERUrJWpzebKz536xeay830ud8tjxzmixTg2nGbMWW09zUd9h9UmgE2rBypq
-	NuDA==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=XKdHuM6ZM+z7oVnLCAPnbF5m5oESBQd/PIFbYQgZNbg=;
+	b=nOVZkD3zAhUSuA0472XXdM+mE//2TJahrET4URy6XlG1rN9HVezhYi9W1QfnnPpyfE
+	hUm9jtE4oXuSDOS4rlNVyJgtkBX7aY0krGWgz1eFgXN6emNRP8LR6VEj85vBy43CYXS4
+	ya4XP4DQAF8zmPdXzcOSd3qJ23ti6LIeXi75YZAq0+FRk8+5jZP5DjoR2OGVnkVcpRqf
+	ZvFyP/LP7xFp4krBDsQ3r8z5F8Cq2k8KqR6QJzO+U29qXLwE59ob1kbDlir2g4tEZCye
+	WIQy9kz4RTfod12TXw7v/A/eYySEn3IekEE7m0N2Qb+/dqKohTZjljEP/Zj3XLYM49EB
+	HH3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=auWIfJfADhIItNHCRzJdEZ4AHIu+/zM93dIG8UBplQc=;
-	b=JT/VgXGkDo4gAHdhTvc8SXTeLVQiwlHWxguNmIhrHICrFJEJ0dbrgGHcr6v+BdYqIs
-	ypQPzIFBZlK1+wSzuB5PzS/2jmEwcLPYwxRjH8Y4KOK291iQgowHK7Itezc2Qie2NbCx
-	zouAp4QAl8jJ5xpygxNyUcdfdh/LcglQm/n0oAGbRPjjcg3pwC6QDSUneeXaBGm5SDKS
-	jtDriXsjuOZDnq6HTROFo2erTjNa56dnd6cVv8n1l+NUIGQd8ijXa2m0Spw4K04hxFLb
-	nkwYOin9ofViMD5umYY/S9o+iHkS8Jn3/Ywa/hUvphQ7V4weLFfqQ99Z8dLo/SkRQjnf
-	vHsA==
-X-Gm-Message-State: APjAAAWIGe0HcAmIIfS3wEXHncXtzdJjzneFZgzqf9scDIl2Hm/+SH91
-	SQ3R3eBW7UUpJ+xDTtko+k8VfAXt
-X-Google-Smtp-Source: APXvYqzY8P3GWsRECVvt1la/H8apwYKHVP4OhsISrv2axg/dXouV0IyUZXLQ2ztLEe6p36OUYhEV+Q==
-X-Received: by 2002:aa7:8b12:: with SMTP id f18mr20368469pfd.178.1558411016964;
-	Mon, 20 May 2019 20:56:56 -0700 (PDT)
+	:references;
+	bh=XKdHuM6ZM+z7oVnLCAPnbF5m5oESBQd/PIFbYQgZNbg=;
+	b=Jt5F+6ETV+FYFBJmpRYSCMA2a5BAcgCLAp1WHBKCHXQiisG3Ebn+NXY/jyuoArE1vR
+	jPNeSXwVzxB89l/X+LZH1Ai5QOH81hkN+90HzPvr+s7/TzJsvfPrzQ2s3iFlcng4xX3M
+	7QH+GLjyJW/tEH8QURPu+HxSXlg1eA/5OKvmYr9/6PCLHrbA2fkbf4oA8xZD16o75C6A
+	FSpCMdGNJJUtg9/AZ1aWcy4JX3PJXpWEGrJ0x4BGvV2VskCuDXh4CNngMNr6kBzAKZvE
+	G7eY2YOrlKyocnQLHzxbMdZkg0gCtfX76NYpx1rCboJnbPZNRZlt6K1pG1YSAGJ9movo
+	MDXA==
+X-Gm-Message-State: APjAAAXxb431pgHD6Eikgh+jbVJ3aKnRZIYlenXMSjK0KMtMUOWMenmI
+	UwO6PXKFnhEp4KgaUvun2kD3nNhB
+X-Google-Smtp-Source: APXvYqz7RutshOFPb1xEp3ZNbxA4tZZ63ZtFvh+7VhuA0Fj6QMyyMb4LBMfNymJvM3iQXr6ucDM/5Q==
+X-Received: by 2002:a63:a08:: with SMTP id 8mr79015393pgk.46.1558411017808;
+	Mon, 20 May 2019 20:56:57 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.56
+	h13sm23045273pfo.98.2019.05.20.20.56.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:56 -0700 (PDT)
+	Mon, 20 May 2019 20:56:57 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:23 -0700
-Message-Id: <9923b210b46f167f57c563491ef2527fe2a61bd4.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:24 -0700
+Message-Id: <c16c6de66118d324376f9528294766436f7946c5.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [warrior][patch 23/34] itstool: rework - it went out too early
+Subject: [warrior][patch 24/34] mongodb: Fix build with gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,48 +60,38 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 21 May 2019 03:56:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
 
-* adjust dependencies
-* adjust shebang correctly - caused errors not easy to debug in dependent
-  packages
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/itstool/itstool_2.0.5.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
-index b74d5f6..166e95b 100644
---- a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
-+++ b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59c57b95fd7d0e9e238ebbc7ad47c5a5"
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+index 53a9f66..0f90003 100644
+--- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+@@ -21,12 +21,16 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.0 \
+            file://arm64-support.patch \
+            file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
+            file://0001-Support-deprecated-resolver-functions.patch \
+-           file://0001-asio-Dont-use-experimental-with-clang.patch \
+            "
+ SRC_URI_append_libc-musl ="\
+            file://0002-Fix-default-stack-size-to-256K.patch \
+            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
+            "
++
++SRC_URI_append_toolchain-clang = "\
++           file://0001-asio-Dont-use-experimental-with-clang.patch \
++           "
++
+ S = "${WORKDIR}/git"
  
- inherit autotools python3native
- 
--DEPENDS = "python3-native python3-lxml-native"
-+DEPENDS = "python3-lxml-native"
- 
- SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
-@@ -13,10 +13,10 @@ SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100
- 
- do_install_append() {
-     # fix shebang of main script
--    sed -i 's:${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN}:${bindir}/${PYTHON_PN}:g' ${D}${bindir}/itstool
-+    sed -i 's:^#!${WORKDIR}.*${PYTHON_PN} -s:#!${bindir_native}/${PYTHON_PN} -s:' ${D}${bindir}/itstool
- }
- 
- BBCLASSEXTEND = "native"
- 
--RDEPENDS_${PN} += "python3 python3-lxml"
-+RDEPENDS_${PN} += "python3-lxml"
- 
+ COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
 -- 
 2.7.4
 
