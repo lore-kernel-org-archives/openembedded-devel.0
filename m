@@ -1,50 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BFCFE7E182
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 265777E181
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 06:55:36 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id t87so8556817pfa.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 23:55:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lSdVYJZYvqci+5AhkFLGk+IhIL2bbOBNtBHh+IJXa1Y=;
-	b=bwaRY1txDRcc0e9DKDuaLfHu6fFAMxMpeGzLjKLQv+4S8lUnaoS+kcBBSGkuXTmL7+
-	JrSwbfZNzUAqdZwDUetK6zIhYkzDBUY3dYB68u5kgDGaBdkzZZJPO4bq9rqoK/68X9AG
-	4YuPHKN10ExXqrATJtFMlpYZUWgzgeqp/TFYvwKS/4gTCsmMVBdYC6EDzgCcX30twuos
-	SKeI1lpRKUJ+6Qat5aDIbmyP1N8//lUtY8XSmDOH3rJUdGgRD1zW1jxLM7ieER/csxTZ
-	Ohj6Y1/iJvtbInpoflJTK+xHbgxCKIVK6vBlGz7/58aPQYXmpl7q8eCuF132QITNd7X4
-	BHQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lSdVYJZYvqci+5AhkFLGk+IhIL2bbOBNtBHh+IJXa1Y=;
-	b=av5qspdT0rXUfJipkzgiA/CQRnvmiL2x/unUSyOspAuCZ0KaXr+uaC7IAO9aON4a2+
-	ugVjKCKb6CY1JtdA4hBfd4HZ0fHPGBNRAMLJI5nr97GZfBmSpVRUViX+unoDA278fcNQ
-	1RhKeBvHb417Y/AwIIDHuBmOzTrNm67yyUQ8CZGWA9mtaFv1OkNr+g+a9POXmisKi3mY
-	7rd2ddV1U/zEKcB2yPpDijYCpEvhI4NfntOQUSmMHoHhsFDeVlmj0EjH4iRDYa1yHgb8
-	LXIJ4Jz8k3oB0jUhypGz+UVlzpayOOCkPD7+TF0tC+I3WyIx3w2Tc2fs9oEvEewChsMC
-	fXjQ==
-X-Gm-Message-State: APjAAAXwOOzKtJ6jndZCozRzq5oVSTUq4WbJ41pdFZ5ldXul/cI1lzvj
-	Y2Y7UpYjlZewZHMUzhcNiw4gSfUK+rg=
-X-Google-Smtp-Source: APXvYqzoEFO14sU/j3ayTw287U03Iu/cElJ5lFcmD5IAmqa3hubzvN/FKXDmhyd9P7ivz5uE4ps5OQ==
-X-Received: by 2002:a63:2745:: with SMTP id n66mr79430793pgn.208.1558421736920;
-	Mon, 20 May 2019 23:55:36 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
-	by smtp.gmail.com with ESMTPSA id
-	l21sm28100673pff.40.2019.05.20.23.55.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 May 2019 23:55:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 23:55:28 -0700
-Message-Id: <20190521065529.41647-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Tue, 21 May 2019 07:19:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 457RwM0RGfz63;
+	Tue, 21 May 2019 09:19:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558423171;
+	bh=XhmqIEu64vybKrfHxMVANkRaWeR60WUf0Ht3OspLMbY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=NoKcoRumEL1OAjByX3rsbQ0FP87PlOkS8K7fIx2swrwzJZFXisEaMwKHExDzhnoHY
+	agkcb5HD+zAr6VIjr5dpDplpW1YGIsa6ZaY7m+rsI7ASyoeRv5cTPRCGuotiVFw1b7
+	EBDwZR1/3krdcLJ7yUcWe8nrGleDPZv69NKcETZKYpnvXoiGq2lDMjLk4RqUlWZXV8
+	2ld1b0julTrDbuze+QQdd8BU7Q154lUAdBt9u+w3C22ScqZrpql798M3+i+gZwlvHN
+	wdrMgOzP9kDCdEV102678sufalKrjvnc8t5jnlay8DfFFehmxpy82vVZfEjo6PHgNU
+	yPruMa0nKgCcdvbMg0d5MVilhHPs/ooOy96MWCKcHR5+N5aa1E1RKIMmWlAe158aAC
+	546S2zbEQ3gC0oI/wQiS8PPoOg83RQ+rqqFWz+yED85F7YVh2iYJZwrCoEHxBzVTHi
+	2VMITjNdnsIZaX4+hpIYivVMVxLmXaY9+U4VjQ2OZf1+1oxPfa16D6GoGVlXG16+Ew
+	GYP4GyKKJDwkg44nxVaH+ShzIaKbNziWc8sm4VBPKZ+sgOyoabVqaW25qwketvGwxW
+	POtCZvQqpMxyLy13B8sBDHdfXzh7UuXT9/GGaPXKbLmlnmYfyg6lnksM/Od0Oe1c47
+	SPFso+05j4X19j3xj7BOKwg4=
+Date: Tue, 21 May 2019 10:19:28 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190521071928.GA15108@localhost>
+References: <20190521065529.41647-1-raj.khem@gmail.com>
+	<20190521065529.41647-2-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2 1/2] libnfc: Fix build with musl
+In-Reply-To: <20190521065529.41647-2-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 2/2] openocd: Fix build on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,64 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 06:55:37 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 May 2019 07:19:31 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Pass _GNU_SOURCE on cmdline
+On Mon, May 20, 2019 at 11:55:29PM -0700, Khem Raj wrote:
+>...
+> +Fixes
+> +| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
+> +| #define PAGE_SIZE                       4096
+> +|         ^
+> +| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
+> +de/limits.h:89:9: note: previous definition is here
+> +| #define PAGE_SIZE PAGESIZE
+>...
+> +--- a/src/flash/nor/esirisc_flash.c
+> ++++ b/src/flash/nor/esirisc_flash.c
+> +@@ -92,7 +92,9 @@
+> + #endif
+> + 
+> + #define CONTROL_TIMEOUT		5000		/* 5s    */
+> ++#ifndef PAGE_SIZE
+> + #define PAGE_SIZE			4096
+> ++#endif
+> + #define PB_MAX				32
+>...
 
- ...-usbbus-Include-stdint.h-for-uintX_t.patch | 24 +++++++++++++++++++
- meta-oe/recipes-core/libnfc/libnfc_git.bb     |  5 +++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+Are you sure this is correct?
+This looks like two completely unrelated defines that just happen to 
+have the same name.
+And it worked by chance since they have the same value on x86_64.
 
-diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-new file mode 100644
-index 0000000000..b8ed87aa0f
---- /dev/null
-+++ b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-@@ -0,0 +1,24 @@
-+From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 May 2019 22:10:05 -0700
-+Subject: [PATCH] usbbus: Include stdint.h for uintX_t
-+
-+stdint.h is needed for uintX_t typedefs which are
-+used to replace u_intX_t in libusb API headers in the cmake files
-+
-+Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libnfc/buses/usbbus.h | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+--- a/libnfc/buses/usbbus.h
-++++ b/libnfc/buses/usbbus.h
-+@@ -35,6 +35,7 @@
-+ 
-+ #ifndef _WIN32
-+ // Under POSIX system, we use libusb (>= 0.1.12)
-++#include <stdint.h>
-+ #include <usb.h>
-+ #define USB_TIMEDOUT ETIMEDOUT
-+ #define _usb_strerror( X ) strerror(-X)
-diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-index d00733bf58..7efd3443dd 100644
---- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
-+++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-@@ -9,6 +9,9 @@ inherit autotools pkgconfig
- 
- S = "${WORKDIR}/git"
- SRCREV = "c42e2502d4627d3ea62f83c32677b100bb3cebdc"
--SRC_URI = "git://github.com/nfc-tools/libnfc.git"
-+SRC_URI = "git://github.com/nfc-tools/libnfc.git \
-+           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
-+          "
- 
-+CFLAGS_append_libc-musl = " -D_GNU_SOURCE"
- DEPENDS = "libusb"
+Renaming to something like ESIRISC_PAGE_SIZE would be a proper fix.
+
+cu
+Adrian
+
 -- 
-2.21.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
