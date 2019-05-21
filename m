@@ -1,52 +1,54 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
-	[209.85.210.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C83B7E140
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id A37E17E069
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:50 +0000 (UTC)
-Received: by mail-pf1-f178.google.com with SMTP id u17so8310859pfn.7
+	Tue, 21 May 2019 03:56:51 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id g9so8292450pfo.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:52 -0700 (PDT)
+	Mon, 20 May 2019 20:56:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=dLD3r3CB5NaP+5L9DfmG/8tPO5/Kdctswm4iu8GvwEA=;
-	b=pSXro4NbHGkgEqpjxJ77h334OtdkeLCl0j4TVRegaIgTXvW8G7AzGUXcAJOtwfDpS2
-	QoxrMA9XZoneCyAaxztHovrqIWCM5WLqt2xH6nlNmWVvrwF0JdH/c9+ClVmYKGrHB5xS
-	/6cZldhAGI1nFemlz2zDo5NBfpSzREOn7JiqMvmq3MCDR7PgUbMSXe0R6/ZLTPtAfDKX
-	Pqh6uvXKK8O8sPlN0RMNoFFt0y3DJPL/P/IqdfMoCffL3CK6kJnd2Xa3heIPKJHBHz0i
-	d161K4NdXPDZ4A7sdFpnAzdGkaha+HrlT8+7T9Fa7K0S8iuc2UqKv1hq9ddEyLGdPJhB
-	yH5Q==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=ydU6bUXp0vN1WxXJ8vqC4YaqaL3euJIh56R+eqhuuUA=;
+	b=HsqjQpV1V8a1Gdw9Jxb4lS0JXvI1BrTTtXP7zmVyeNXfDCJgNo3Ljv8p0CzTVtqLLx
+	VtxE3M2rkifNSkWJlA8/UnMys4jIqalcpRm7wmmWBjI6cGApq++B0LBh/Tiyi6jBhhjI
+	ps+6utUO9PSEJFoQ5q4UxGgELiTKdmMAkV+/tEGheTImSm5He4TgAUPpCXuUzkDOYMMg
+	1f+/gibo+99f6X4gbOHjJwWLPARrQlaMi0mQv3xGmTC9BS10oI1rjvoPSVjqUygetOOX
+	QIHm1qfE31oFJpe0TG1ZVTwo2ZgYP7gSFfPjiNigXkq0AvMho/wvsb3jaCJTR9hcmrB3
+	aUTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=dLD3r3CB5NaP+5L9DfmG/8tPO5/Kdctswm4iu8GvwEA=;
-	b=Xsu4GdAFNJdEzkENFdqE76JzH/UT0x94SU5k5Sj/f2Mr/QvAZpZ4y2ubpITAhNbQjj
-	8uL/vG9VVKZIgGMuSXW212r2NYsRDuum3/OX1ZaONSaWOeSmhgLq1DPS+i5WCZ1kJdi2
-	k7mRftmGc3ch6IMdMw8xjcgZ6Ewqha8oJbp6hNHCi4Y+dhUTkHUj23zZBzIGrvv9/R8w
-	cphqQ26miAU1CY6PKqzxa4W54GU+t6eqcUWia5ZdUm2tEQN1yHZAYw2jiQn3sRbxpk83
-	9p1ojVtLCjXG/TIgNOuajhS9OSzmAoxCDICD2QDItmPDrQZ0q9Y4tguVavSAYSCL54C7
-	m7sA==
-X-Gm-Message-State: APjAAAXTteFJy7lIPYXQ1vNbyR3S4ygqCqmGB9devZUcT6WfTXYqtZXn
-	dV5sSJ2T4i9ln6Y20kZNzjhWxWHF
-X-Google-Smtp-Source: APXvYqy0vVAbEnG2cn5u0BZtWeK8sXuT//J4tspcvdZW8MOkQ3/41aaagce1FJpw8KVfJV4Pf2AQ2w==
-X-Received: by 2002:a63:950d:: with SMTP id p13mr79948036pgd.269.1558411011705;
-	Mon, 20 May 2019 20:56:51 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=ydU6bUXp0vN1WxXJ8vqC4YaqaL3euJIh56R+eqhuuUA=;
+	b=D4SP1FWqtO4RtnA9hWSpIab+zWh2Q5dS2aAEMzoVNs35VyclJGbnAfyv9ak0c5C7jR
+	XZsMjJlKaB8gd2YWc3NJ3Wopj0XsgthjEmWesx8ytU8pf5uoW2GN8fJZ45jVZ2z8HPXH
+	m9zNaG4VSDOPzhEVYxF6Sa5+iVOpRh8BtDpPibICAAMEQmHlpVIahbeFqkPbeps7UTuu
+	z7A0i4bqg1DijY/aarVERrRova5f+8XHitsBu5R3NTkK5ZyhRlBNpphb6Rc3N7KAU003
+	gFFNGVNzwr9k5eEQlHqDGJGFMoFRNHyMZjVrQnbKW7232A7F8BHqyVeWnsaM1r8XHJsO
+	Z77Q==
+X-Gm-Message-State: APjAAAXw/MkObnQ2rm3uOVrSHh5ZYAaTphPEs+e2H1QKjofhhMv7mSSa
+	aj61o41cbCZxdHBlETMcj4eaUcv8
+X-Google-Smtp-Source: APXvYqzlp8ik2SRdxg3xEsGB+VepXSgNos7s8lCWMk31AMQxk8qdWotD6/u8Y/tCWt+oKS6lT7HHQg==
+X-Received: by 2002:a62:f247:: with SMTP id y7mr83564629pfl.18.1558411012551; 
+	Mon, 20 May 2019 20:56:52 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
 	h13sm23045273pfo.98.2019.05.20.20.56.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:51 -0700 (PDT)
+	Mon, 20 May 2019 20:56:52 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:16 -0700
-Message-Id: <d0ff0867436a8180ec069c5c6bcb4e9902513126.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:17 -0700
+Message-Id: <8af1b3526defb5b604a7edb096d594e81cd2a72a.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 16/34] python-requests: Set CVE_PRODUCT
+MIME-Version: 1.0
+Subject: [warrior][patch 17/34] evince: add patch to fix build with recent gobject-introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +61,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:50 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Akshay Bhat <akshay.bhat@timesys.com>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-requests is used in NVD for CVE's like:
-https://nvd.nist.gov/vuln/detail/CVE-2018-18074
+gobject-introspection torned some warnings to errors. That caused:
 
-Signed-off-by: Akshay Bhat <akshay.bhat@timesys.com>
+| ../../evince-3.28.2/libview/ev-document-model.h:57: Fatal: EvinceView: Namespace conflict for 'document_model_get_type'
+
+Have tried to fix evince by update to 3.28.5 and 3.32.0 but that causes nasty
+gettext errors which I was not able to fix yet.
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-requests.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ ...ove-EvDocumentModel-get-type-function-dec.patch | 33 ++++++++++++++++++++++
+ meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
+ 2 files changed, 40 insertions(+), 5 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
-index e6337cb..53504d0 100644
---- a/meta-python/recipes-devtools/python/python-requests.inc
-+++ b/meta-python/recipes-devtools/python/python-requests.inc
-@@ -23,4 +23,6 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-idna \
- "
- 
-+CVE_PRODUCT = "requests"
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+new file mode 100644
+index 0000000..dcc4a4e
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+@@ -0,0 +1,33 @@
++From 0cdce687d3edfa5ac0fd19539ba1815d039026d5 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?I=C3=B1igo=20Mart=C3=ADnez?= <inigomartinez@gmail.com>
++Date: Fri, 7 Sep 2018 22:34:29 +0200
++Subject: [PATCH] libview: Remove EvDocumentModel get type function declaration
 +
- BBCLASSEXTEND = "native nativesdk"
++The EvDocumentModel class declares the `ev_document_model_get_type`
++function as part of the `GObject` boilerplate code.
++
++However, this declaration is not necessary and also causes a warning
++when introspection data file, `EvinceView-3.0.gir`, is generated.
++
++Upstream-Status: Applied [1]
++
++
++---
++ libview/ev-document-model.h | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/libview/ev-document-model.h b/libview/ev-document-model.h
++index 784e27d6..6a99e43a 100644
++--- a/libview/ev-document-model.h
+++++ b/libview/ev-document-model.h
++@@ -54,7 +54,6 @@ typedef enum {
++ 	EV_PAGE_LAYOUT_AUTOMATIC
++ } EvPageLayout;
++ 
++-GType            ev_document_model_get_type          (void) G_GNUC_CONST;
++ EvDocumentModel *ev_document_model_new               (void);
++ EvDocumentModel *ev_document_model_new_with_document (EvDocument      *document);
++ 
++-- 
++2.20.1
++
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+index 01f581a..d288590 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+@@ -6,11 +6,13 @@ DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-d
+ 
+ inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+ 
+-SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+-           file://0001-help-remove-YELP-macro.patch \
+-           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
+-           file://0001-add-a-formatting-attribute-check.patch \
+-           "
++SRC_URI = " \
++    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
++    file://0001-help-remove-YELP-macro.patch \
++    file://0001-Add-format-attribute-to-_synctex_malloc.patch \
++    file://0001-add-a-formatting-attribute-check.patch \
++    file://0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch \
++"
+ SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
+ SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
+ 
 -- 
 2.7.4
 
