@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id A84607E12E
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AEC557E101
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:38 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id z28so8335485pfk.0
+	Tue, 21 May 2019 03:56:39 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id w22so7834403pgi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:40 -0700 (PDT)
+	Mon, 20 May 2019 20:56:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=/Pv7E31gbcEO5j9odxgnjHayanxf+SmJQbMRTEyd0do=;
-	b=CcPOuxZ2egMHqOP1xAiBG2E+DzCRjgsdN0+qAZgMO/wm9n9yt9P6ZbEY6ERnvdgcpn
-	IU/WG/atcCArZKE7eIKwCE9T/JE32albNH2yBzVUJ1v0vfqQtHKvCFjlJP40KFSD8TLk
-	W0N5koQUGAzyteLBxOkdXsXwYh9ffK56hr/k80jWq5AQy6RlL95n3aCqJFDYH6uhaevP
-	PiwfHHwhaRiS57Yy+yNU6K2vey9ca85UVgf22iVF0+GZByoZdWQPVcPL/1PIh0E7h77u
-	CZD1qUNs+N0F1X9Y2v2xej8xlup14p5bg61IWUwiY+w8xYKE8HjVEoizAL7EBlXE6BMp
-	nGVA==
+	bh=uttCeYRe/S1/zRqw4HO7wS4SWi2kcmzSfss5gN4eC54=;
+	b=kqSWKGe30iXK8BHzx7wIf4b0ANYbsdq7UQIqGgfcJKnqCGt/LTX1+3aSY7/UiKxasx
+	KIKkoebynoe3aMPZJV59q4a1Hjj8WA3zBZvfTq33aOh/0rMnl8ab74MdtcfBsKt1uf9A
+	7QRqsUgMaixJkUrx43wslLHJJoaFcNfjgbWGaM7zrzCJQORLm2iDlifoiOf6CNKUK1Vb
+	u8Ab1Fuggosog7h/KmuJ8TQMiWQ6W80edXPC/lItom7bZ7Bt1lcv2uchvhqNzUY5FeQu
+	9MlLXYCTxEXDn/dLDHpCEf9TJYmjE7ehJUg/LtnA+qdaTdyxpTH6O1MRB7BPOY+hea5n
+	mOXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=/Pv7E31gbcEO5j9odxgnjHayanxf+SmJQbMRTEyd0do=;
-	b=pvZxHVIbFfZ2hAMrx/Ti7ohJ40O/2zKhlOsfbuzImgGFl2c2H+tg9XUYkzqFHSqnQo
-	9bYtAj1SmaH9Q6Yf+suJSBHD6NCYlv08QZ3gbx8sOowK2M8kihSQII/kQdAcdr6f5H/m
-	Ernb1dK1YAxUae3hFX5USC1nI5KBNc3kmHmiDjGosXAUeSYAwid72XTVWfswaMtCC+Lp
-	sbnUOP7zHB9RONlEqP9RNexShPTq15QMli0Gc213JpI5XvwQASH2Riot7yDgEgcm/jj5
-	wIk9483Lz6B2X72hcIbO5T8LdR/ZiII12Sd9voW6d4ae4B4Q9zZphxgfAgk1kKBr/+uA
-	qpkg==
-X-Gm-Message-State: APjAAAXssL0TfohzF7KJxo0hUVfqBfy2RcaPi1sjwcs8dHSQUv/vTQJn
-	sOmJCuMT1uU8cgWkYMzgb8uUOnFz
-X-Google-Smtp-Source: APXvYqyxhdakxgKtIRvCyynt1xNaM3oMAvMItUq1Vh/CvLnqfBKcJBmF9hn97ZnYP1K1LyXagvCACA==
-X-Received: by 2002:a63:8342:: with SMTP id h63mr81009242pge.251.1558410999648;
-	Mon, 20 May 2019 20:56:39 -0700 (PDT)
+	bh=uttCeYRe/S1/zRqw4HO7wS4SWi2kcmzSfss5gN4eC54=;
+	b=iV7KcWHjsYsQPemHCu0sHfm5nFq63wwvlLK08EonksXsaSQbryFLzOb/WJob4PilUP
+	jnrti8jQKzM8Kyrb9ybFQa6sFsaFghuP9VUv2VTiQ5sTGU9VQHHqdDcMve5EDHsjD8WD
+	BRk/oeY20GP6eNVeAYEe2rfiHxq78kYABQdvhA1UbAygI9gZdxVArlu/qaPTGZG3o7Jz
+	qyuReSPRUZuGhJVqNCeCeH082rvYsPCQzA/AtQk9l0yTKktxRTTRz4N4aMn4Dly9fdlv
+	2MZurESjImHVuM8qV6lG/ufM+1ZUi0PeAlbY3pF/aUa4isJzW96wAX5lWDQeTjvMhvKU
+	j8fA==
+X-Gm-Message-State: APjAAAU5NMiFZlt/jgg6W71Ol1dnB3ko3VnWhbNu694pl4CTDjpOTpOg
+	KCSprAsFeD+y2qmE4Ih0OXj5vyTk
+X-Google-Smtp-Source: APXvYqy2E5Bn2zXzvbVhL+tVlLPstz063bNH2y9Wy6+KMgR0Th3gHxYV7AGsEQCHDFaaszFIr7snyQ==
+X-Received: by 2002:a63:d150:: with SMTP id c16mr79214070pgj.439.1558411000408;
+	Mon, 20 May 2019 20:56:40 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.38
+	h13sm23045273pfo.98.2019.05.20.20.56.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:39 -0700 (PDT)
+	Mon, 20 May 2019 20:56:40 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:02 -0700
-Message-Id: <fd48edcd7415f4a1ca043e256585f2705b66545f.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:03 -0700
+Message-Id: <07bd2623722cf6743bc112eebbe02a6125823c99.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 02/34] python-pyasn1: upgrade 0.4.4 -> 0.4.5
+Subject: [warrior][patch 03/34] php: upgrade 7.3.2 -> 7.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,53 +59,351 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:38 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:39 -0000
 
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Changqing Li <changqing.li@windriver.com>
 
--Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
-
--Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
-
--License-Update: Copyright year updated to 2019.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pyasn1.inc               | 6 +++---
- .../python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb}       | 0
- .../python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb}     | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.4.bb => python-pyasn1_0.4.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.4.bb => python3-pyasn1_0.4.5.bb} (100%)
+ .../0001-opcache-config.m4-enable-opcache.patch    |  81 ++---------
+ ...049-ext-intl-Use-pkg-config-to-detect-icu.patch | 154 ++++++++++++++-------
+ .../php/{php_7.3.2.bb => php_7.3.4.bb}             |   4 +-
+ 3 files changed, 118 insertions(+), 121 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_7.3.2.bb => php_7.3.4.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
-index ab34d25..3827fea 100644
---- a/meta-python/recipes-devtools/python/python-pyasn1.inc
-+++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "Python library implementing ASN.1 types."
- HOMEPAGE = "http://pyasn1.sourceforge.net/"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=815ac3f9ca693006349094b358ab3155"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a14482d15c2249de3b6f0e8a47e021fd"
+diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+index 9ffd0e4..34f433f 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+@@ -1,7 +1,9 @@
+-From fb139d9707dabe1684b472a08a6eb5761ede4a3a Mon Sep 17 00:00:00 2001
++From 8de5ba69d20d049b8ca983a9470c7303142ec0b3 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+-Date: Tue, 12 Feb 2019 14:56:16 +0800
+-Subject: [PATCH] opcache/config.m4: enable opcache
++Date: Sun, 28 Apr 2019 16:55:13 +0800
++Subject: [PATCH] From fb139d9707dabe1684b472a08a6eb5761ede4a3a Mon Sep 17
++ 00:00:00 2001 From: Changqing Li <changqing.li@windriver.com> Date: Tue, 12
++ Feb 2019 14:56:16 +0800 Subject: [PATCH] opcache/config.m4: enable opcache
  
--SRC_URI[md5sum] = "0d182b71e1f72fe147d7957bc90be7f2"
--SRC_URI[sha256sum] = "f58f2a3d12fd754aa123e9fa74fb7345333000a035f3921dbdaa08597aa53137"
-+SRC_URI[md5sum] = "f3c0cfbf882a20811be5ad5a41f74b82"
-+SRC_URI[sha256sum] = "da2420fe13a9452d8ae97a0e478adde1dee153b11ba832a95b223a2ba01c10f7"
+ We can't use AC_TRY_RUN to run programs in a cross compile environment. Set
+ the variables directly instead since we know that we'd be running on latest
+@@ -11,17 +13,17 @@ Upstream-Status: Inappropriate [Configuration]
  
- RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-codecs \
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+ 
+-update patch to version 7.3.2
++update patch to version 7.3.4
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- ext/opcache/config.m4 | 357 +-------------------------------------------------
+- 1 file changed, 6 insertions(+), 351 deletions(-)
++ ext/opcache/config.m4 | 312 +-------------------------------------------------
++ 1 file changed, 6 insertions(+), 306 deletions(-)
+ 
+ diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+-index 392f4c6..6617693 100644
++index 4810217..22c3d61 100644
+ --- a/ext/opcache/config.m4
+ +++ b/ext/opcache/config.m4
+-@@ -27,374 +27,29 @@ if test "$PHP_OPCACHE" != "no"; then
++@@ -27,319 +27,19 @@ if test "$PHP_OPCACHE" != "no"; then
+    AC_CHECK_HEADERS([unistd.h sys/uio.h])
+  
+    AC_MSG_CHECKING(for sysvipc shared memory support)
+@@ -93,8 +95,9 @@ index 392f4c6..6617693 100644
+ -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+ -    msg=yes],[msg=no],[msg=no])
+ -  AC_MSG_RESULT([$msg])
++-
+ +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+- 
+++  
+    AC_MSG_CHECKING(for mmap() using MAP_ANON shared memory support)
+ -  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+ -#include <sys/types.h>
+@@ -344,64 +347,8 @@ index 392f4c6..6617693 100644
+ -  AC_MSG_RESULT([$msg])
+ +  AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM support])
+  
+- flock_type=unknown
+- AC_MSG_CHECKING(for struct flock layout)
+- 
+- if test "$flock_type" = "unknown"; then
+--AC_RUN_IFELSE([AC_LANG_SOURCE([[
+--  #include <fcntl.h>
+--  struct flock lock = { 1, 2, 3, 4, 5, 6, 7 };
+--  int main() {
+--    if(lock.l_type == 1 && lock.l_whence == 2 && lock.l_start == 6 && lock.l_len== 7) {
+--		return 0;
+--    }
+--    return 1;
+--  }
+--]])], [
+--    flock_type=aix64
+--    AC_DEFINE([HAVE_FLOCK_AIX64], [], [Struct flock is 64-bit AIX-type])
+--], [])
+--fi
+--
+--if test "$flock_type" = "unknown"; then
+--AC_RUN_IFELSE([AC_LANG_SOURCE([[
+--  #include <fcntl.h>
+--  struct flock lock = { 1, 2, 3, 4, 5 };
+--  int main() {
+--    if(lock.l_type == 1 && lock.l_whence == 2 && lock.l_start == 3 && lock.l_len == 4) {
+--		return 0;
+--    }
+--    return 1;
+--  }
+--]])], [
+--	flock_type=linux
+-+    flock_type=linux
+-     AC_DEFINE([HAVE_FLOCK_LINUX], [], [Struct flock is Linux-type])
+--], [])
+- fi
+- 
+- if test "$flock_type" = "unknown"; then
+--AC_RUN_IFELSE([AC_LANG_SOURCE([[
+--  #include <fcntl.h>
+--  struct flock lock = { 1, 2, 3, 4, 5 };
+--  int main() {
+--    if(lock.l_start == 1 && lock.l_len == 2 && lock.l_type == 4 && lock.l_whence == 5) {
+--		return 0;
+--    }
+--    return 1;
+--  }
+--]])], [
+--	flock_type=bsd
+--    AC_DEFINE([HAVE_FLOCK_BSD], [], [Struct flock is BSD-type])
+--], [])
+--fi
+--
+--AC_MSG_RESULT([$flock_type])
+--
+--if test "$flock_type" = "unknown"; then
+- 	AC_MSG_ERROR([Don't know how to define struct flock on this system[,] set --enable-opcache=no])
+- fi
+- 
++   PHP_NEW_EXTENSION(opcache,
++ 	ZendAccelerator.c \
+ -- 
+ 2.7.4
+ 
+diff --git a/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch b/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
+index deada1f..2258c4c 100644
+--- a/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
++++ b/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
+@@ -1,84 +1,131 @@
+-From: Hugh McMaster <hugh.mcmaster@outlook.com>
+-Date: Wed, 5 Dec 2018 23:27:30 +1100
+-Subject: ext/intl: Use pkg-config to detect icu
++From 03fecab78f9fa747ad8ab3484e7ca00c0148321d Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Sun, 28 Apr 2019 16:45:02 +0800
++Subject: [PATCH] From: Hugh McMaster <hugh.mcmaster@outlook.com> Date: Wed, 5
++ Dec 2018 23:27:30 +1100 Subject: ext/intl: Use pkg-config to detect icu
+ 
+ The developers of icu recommend using pkg-config to detect icu,
+ because icu-config is deprecated.
++
++Upstream-Status: Pending
++
++update to version 7.3.4
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- acinclude.m4       | 56 +++++++-----------------------------------------------
+- ext/intl/config.m4 | 16 ++++++----------
+- 2 files changed, 13 insertions(+), 59 deletions(-)
++ acinclude.m4       | 95 ++++++------------------------------------------------
++ ext/intl/config.m4 | 16 ++++-----
++ 2 files changed, 15 insertions(+), 96 deletions(-)
+ 
+---- php7.3.orig/acinclude.m4
+-+++ php7.3/acinclude.m4
+-@@ -2168,58 +2168,16 @@ dnl
++diff --git a/acinclude.m4 b/acinclude.m4
++index 7d77c33..86b0ecc 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2158,92 +2158,15 @@ dnl
+  dnl Common setup macro for ICU
+  dnl
+  AC_DEFUN([PHP_SETUP_ICU],[
+ -  PHP_ARG_WITH(icu-dir,,
+ -  [  --with-icu-dir=DIR      Specify where ICU libraries and headers can be found], DEFAULT, no)
+-+  PKG_CHECK_MODULES([ICU], [icu-io >= 50.1])
+- 
++-
+ -  if test "$PHP_ICU_DIR" = "no"; then
+ -    PHP_ICU_DIR=DEFAULT
+ -  fi
+ -
+--  if test "$PHP_ICU_DIR" = "DEFAULT"; then
+--    dnl Try to find icu-config
+--    AC_PATH_PROG(ICU_CONFIG, icu-config, no, [$PATH:/usr/local/bin])
+--  else
+--    ICU_CONFIG="$PHP_ICU_DIR/bin/icu-config"
++-  AC_MSG_CHECKING([for location of ICU headers and libraries])
++-  found_icu=no
++-
++-  dnl First try to find pkg-config
++-  if test -z "$PKG_CONFIG"; then
++-    AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+ -  fi
+ -
+--  AC_MSG_CHECKING([for location of ICU headers and libraries])
++-  dnl If pkg-config is found try using it
++-  if test "$PHP_ICU_DIR" = "DEFAULT" && test -x "$PKG_CONFIG" && $PKG_CONFIG --exists icu-uc icu-io icu-i18n; then
++-    if $PKG_CONFIG --atleast-version=40 icu-uc; then
++-      found_icu=yes
++-      icu_version_full=`$PKG_CONFIG --modversion icu-uc`
++-      ac_IFS=$IFS
++-      IFS="."
++-      set $icu_version_full
++-      IFS=$ac_IFS
++-      icu_version=`expr [$]1 \* 1000 + [$]2`
++-      AC_MSG_RESULT([found $icu_version_full])
+ -
+--  dnl Trust icu-config to know better what the install prefix is..
+--  icu_install_prefix=`$ICU_CONFIG --prefix 2> /dev/null`
+--  if test "$?" != "0" || test -z "$icu_install_prefix"; then
+--    AC_MSG_RESULT([not found])
+--    AC_MSG_ERROR([Unable to detect ICU prefix or $ICU_CONFIG failed. Please verify ICU install prefix and make sure icu-config works.])
+--  else
+--    AC_MSG_RESULT([$icu_install_prefix])
++-      ICU_LIBS=`$PKG_CONFIG --libs icu-uc icu-io icu-i18n`
++-      ICU_INCS=`$PKG_CONFIG --cflags-only-I icu-uc icu-io icu-i18n`
++-      ICU_CXXFLAGS="-DU_USING_ICU_NAMESPACE=1"
+ -
+--    dnl Check ICU version
+--    AC_MSG_CHECKING([for ICU 4.0 or greater])
+--    icu_version_full=`$ICU_CONFIG --version`
+--    ac_IFS=$IFS
+--    IFS="."
+--    set $icu_version_full
+--    IFS=$ac_IFS
+--    icu_version=`expr [$]1 \* 1000 + [$]2`
+--    AC_MSG_RESULT([found $icu_version_full])
++-      AC_MSG_RESULT([found $ICU_VERSION])
++-
++-      PHP_EVAL_LIBLINE($ICU_LIBS, $1)
++-      PHP_EVAL_INCLINE($ICU_INCS)
++-    else
++-      AC_MSG_ERROR([ICU version 4.0 or later required.])
++-    fi
++-  fi
+ -
+--    if test "$icu_version" -lt "4000"; then
+--      AC_MSG_ERROR([ICU version 4.0 or later is required])
++-  dnl If pkg-config fails for some reason, revert to the old method
++-  if test "$found_icu" = "no"; then
++-    if test "$PHP_ICU_DIR" = "DEFAULT"; then
++-      dnl Try to find icu-config
++-      AC_PATH_PROG(ICU_CONFIG, icu-config, no, [$PATH:/usr/local/bin])
++-    else
++-      ICU_CONFIG="$PHP_ICU_DIR/bin/icu-config"
+ -    fi
++-
++-    dnl Trust icu-config to know better what the install prefix is..
++-    icu_install_prefix=`$ICU_CONFIG --prefix 2> /dev/null`
++-    if test "$?" != "0" || test -z "$icu_install_prefix"; then
++-      AC_MSG_RESULT([not found])
++-      AC_MSG_ERROR([Unable to detect ICU prefix or $ICU_CONFIG failed. Please verify ICU install prefix and make sure icu-config works.])
++-    else
++-      AC_MSG_RESULT([$icu_install_prefix])
++-
++-      dnl Check ICU version
++-      AC_MSG_CHECKING([for ICU 4.0 or greater])
++-      icu_version_full=`$ICU_CONFIG --version`
++-      ac_IFS=$IFS
++-      IFS="."
++-      set $icu_version_full
++-      IFS=$ac_IFS
++-      icu_version=`expr [$]1 \* 1000 + [$]2`
++-      AC_MSG_RESULT([found $icu_version_full])
++-
++-      if test "$icu_version" -lt "4000"; then
++-        AC_MSG_ERROR([ICU version 4.0 or later is required])
++-      fi
++-
++-      ICU_VERSION=$icu_version
++-      ICU_INCS=`$ICU_CONFIG --cppflags-searchpath`
++-      ICU_LIBS=`$ICU_CONFIG --ldflags --ldflags-icuio`
++-      PHP_EVAL_INCLINE($ICU_INCS)
++-      PHP_EVAL_LIBLINE($ICU_LIBS, $1)
++-
++-      ICU_CXXFLAGS=`$ICU_CONFIG --cxxflags`
++-      if test "$icu_version" -ge "49000"; then
++-        ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
++-        ICU_CFLAGS="-DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
++-      fi
++-      if test "$icu_version" -ge "60000"; then
++-        ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
++-      fi
++-    fi
+++  PKG_CHECK_MODULES([ICU], [icu-io >= 50.1])
+ +  PHP_EVAL_INCLINE($ICU_CFLAGS)
+ +  PHP_EVAL_LIBLINE($ICU_LIBS, $1)
+- 
+--    ICU_VERSION=$icu_version
+--    ICU_INCS=`$ICU_CONFIG --cppflags-searchpath`
+--    ICU_LIBS=`$ICU_CONFIG --ldflags --ldflags-icuio`
+--    PHP_EVAL_INCLINE($ICU_INCS)
+--    PHP_EVAL_LIBLINE($ICU_LIBS, $1)
+++  
+ +  ICU_CFLAGS="$ICU_CFLAGS -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
+ +  ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
+- 
+--    ICU_CXXFLAGS=`$ICU_CONFIG --cxxflags`
+--    if test "$icu_version" -ge "49000"; then
+--      ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
+--      ICU_CFLAGS="-DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
+--    fi
+--    if test "$icu_version" -ge "60000"; then
+--      ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
+--    fi
+++  
+ +  if $PKG_CONFIG icu-io --atleast-version=60; then
+ +    ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
+    fi
+  ])
+  
+---- php7.3.orig/ext/intl/config.m4
+-+++ php7.3/ext/intl/config.m4
++diff --git a/ext/intl/config.m4 b/ext/intl/config.m4
++index 4b9f469..fdae88a 100644
++--- a/ext/intl/config.m4
+++++ b/ext/intl/config.m4
+ @@ -9,15 +9,7 @@ if test "$PHP_INTL" != "no"; then
+    PHP_SETUP_ICU(INTL_SHARED_LIBADD)
+    PHP_SUBST(INTL_SHARED_LIBADD)
+@@ -109,3 +156,6 @@ because icu-config is deprecated.
+  
+    PHP_INTL_CXX_SOURCES="intl_convertcpp.cpp \
+      common/common_enum.cpp \
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.2.bb b/meta-oe/recipes-devtools/php/php_7.3.4.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/php/php_7.3.2.bb
+rename to meta-oe/recipes-devtools/php/php_7.3.4.bb
+index 634facd..1a5c976 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.2.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.4.bb
+@@ -13,8 +13,8 @@ SRC_URI_append_class-target = " \
+                                 file://0001-opcache-config.m4-enable-opcache.patch \
+                                 "
+ 
+-SRC_URI[md5sum] = "c893ff828945c274d90e026528142439"
+-SRC_URI[sha256sum] = "946f50dacbd2f61e643bb737021cbe8b1816e780ee7ad3e0cd999a1892ab0add"
++SRC_URI[md5sum] = "efb58aea95a66738d871f83ec55fec6f"
++SRC_URI[sha256sum] = "2e2c3d8212c83649e443b61efffbd03df4b9edd0f9c7a679081fe4cb2da12b78"
+ 
+ PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
+                         --with-pdo-mysql=mysqlnd \
 -- 
 2.7.4
 
