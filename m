@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 822EE7E101
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+	[209.85.210.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D0BC7E12E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 03:56:41 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id j26so7843010pgl.5
+	Tue, 21 May 2019 03:56:42 +0000 (UTC)
+Received: by mail-pf1-f171.google.com with SMTP id z28so8335560pfk.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 20:56:42 -0700 (PDT)
+	Mon, 20 May 2019 20:56:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=TDxckeIsOoYFejgkVb4oFyz3unwidy9PKvThCqUQFbU=;
-	b=fBdsijtizaEYPvCcyZNjb37oTgwBZE1iJ2hKlif/X/mfvmgAUVr8XhxADWnRQJHZOl
-	zr5eMuaq3kXxFr6rZ0ONMncmazU7cR+4x9z4iSGJTDKusEVxb1ULep8l6MoJX6x7mpfa
-	HjNWBIW3MhIaDzAtzHB168y0U9PFbejaXYOzD5nuYBcCfyOzyuBblRGfsFQ6BwDC9fUm
-	xh6JRK16WdHWO/YU3sGH2V8sRIIUSNRp7sgI9PUi/kO6LmJcnao7TZZhk/wiHs6vaVtF
-	kKqgdwTMPRFWbDFvm41DUMmFnWJQDThRLysZFo78lTNf/fBOS9jW/DzjzX4CjEi+GCkw
-	TH5g==
+	bh=g7+nnl4NtjNXTrD2PZDWW6iRQg1pXDgIacDT1r6LTSs=;
+	b=TgxP1zDzfmqbpQzzCkjKCnXD38/tGq8q38AUx3tPUwOyyJGI0qjN0Vatf4rQYKrPoU
+	DjTL+Xfv+1QFAw2fIlzP0vR6tohEs8k5msdORQ8M/YoJTQUkuiF7LeAuI8Ynnpc371CI
+	29e8xdR8QjVpuQYT3PzfxJDITFOPq5rKIS5+18R4Ul7sLDGv0AUdMLeLpV2NAfj3Tvoo
+	083nMLUeCgdT1nMPHWeVf5DCG3B9zRaSPFMwQHu8iZEwsEJx8dC+t8lpd2sozJBmmXTN
+	bS8aG2jUukZqqSoc3Vd+ZLo9tNaT/qgJyOiBbvTH0pPb0xa2OyGamWRXkl/U9pwx3lud
+	RFlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=TDxckeIsOoYFejgkVb4oFyz3unwidy9PKvThCqUQFbU=;
-	b=eFboD6BD6B3X2y6aufNEbvG5wVYPnyEufJ/wvhWiCdO5GYofBn2m+CYHK3eSPl5GoZ
-	hOxXjQlHHmAFXbZeP3cjxhwQXAfowWMkMugnY/V1YFlGPr9Zf2h55KKHaN9m8IPs2xqQ
-	Lwp0CPsHb1SJxm/FijpA/MStYpS5/wLhFkAiNqN7pZ8ZCwo9xKgdVm6ZNBpWYIFbGdRC
-	MXOzEc7RepzLGgw1g6EDFXwzfOnwrQxokAs5mC4S+tsgueBnr7iiERB5b9D9ay5arIV3
-	beGUwq8e0YGyUkDjg16z/E6lhaBQdf3ZFlCa5cvtYQOzvhy2H7loQwlGMO5EkMJL3t5H
-	jfeA==
-X-Gm-Message-State: APjAAAUz1FG3VOw6qJtXLF4vyGGTWS+J7zsjqyItsHLCDKPLxhwwmppE
-	gVYsog7sdtbS2fpgi6566864yTn6
-X-Google-Smtp-Source: APXvYqy8rgZ37jgYux2Yno+j/Q8mfiYY+wA/l4nMVek3lIGlZu0SVj483Yq500t4BqsV8OGRkq+Wag==
-X-Received: by 2002:a63:d4c:: with SMTP id 12mr66484432pgn.30.1558411002526;
-	Mon, 20 May 2019 20:56:42 -0700 (PDT)
+	bh=g7+nnl4NtjNXTrD2PZDWW6iRQg1pXDgIacDT1r6LTSs=;
+	b=e/4Rt7ssjXt0nLcaYEoF1CbVuIjQAZ8rxufr20JjIEVKmA8H/8alg3eHTFMxFs3S4B
+	/yxwiSiFq5FRu7qht+H+OjExQLiQZEAi6daQxxUx/Ejzc1AULApIzt4RedsVWbjtA08a
+	LQ9FaHEcEcgHYSMjFU0pgQ2TUE9dxbhuYkN1yAtw5zir59rRfRxwre4tmw6acL+8n0p6
+	dRD/Mu+Gyv0i+e2WajsTEtM+c/a+vVPT62rl2gF02T9mx8zafwMhmQjPqU1pEvi59iQ4
+	6WKdSeCTGws6TVDLcQKFT8js7TdLhr3Gil7dJmTROcoawkDp0A/L5kQPoKFS3wnCMG52
+	EUTg==
+X-Gm-Message-State: APjAAAVi3YGyQINy+SCUcNUa3rS76LrnA8NEsOdSBI4rkYpG/kiU5pWa
+	z7AUi514tO497YHZB23sJxSm5kM8
+X-Google-Smtp-Source: APXvYqyczQIFrp+1f6FcLqdyg4iBYKg7JBiizs3RLbBCoUz4s9UMNxgD+jsGu0oJI2zO6amspbzexA==
+X-Received: by 2002:a63:950d:: with SMTP id p13mr79947534pgd.269.1558411003339;
+	Mon, 20 May 2019 20:56:43 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:199d:e2fe:5a4f:97f4])
 	by smtp.gmail.com with ESMTPSA id
-	h13sm23045273pfo.98.2019.05.20.20.56.41
+	h13sm23045273pfo.98.2019.05.20.20.56.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 May 2019 20:56:41 -0700 (PDT)
+	Mon, 20 May 2019 20:56:43 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 20:56:05 -0700
-Message-Id: <3ee48cdd625a0b632511106272374fabff63e0fa.1558410874.git.akuster808@gmail.com>
+Date: Mon, 20 May 2019 20:56:06 -0700
+Message-Id: <7207a2559f5239b62792bb06638941c67ef2c13a.1558410874.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558410874.git.akuster808@gmail.com>
 References: <cover.1558410874.git.akuster808@gmail.com>
-Subject: [warrior][patch 05/34] openhpi: update openhpi-fix-testfail-errors.patch
+Subject: [warrior][patch 06/34] phpmyadmin: upgrade 4.8.3 -> 4.8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,122 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 03:56:41 -0000
+X-List-Received-Date: Tue, 21 May 2019 03:56:42 -0000
 
 From: Yi Zhao <yi.zhao@windriver.com>
-
-The openhpi-fix-testfail-errors.patch tries to fix 2 saftest failures.
-But the second fix is not correct. It should not return false when there
-is no surrogate pairs since for the code points in UTF-16 Basic
-Multilingual Plane (BMP), there is no need surrogate pairs. We should
-update saftest case to fix this failure.
-
-Also add more description for the first fix.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...penhpi-fix-function-saHpiSensorThresholds.patch | 35 ++++++++++++++++++++++
- .../files/openhpi-fix-testfail-errors.patch        | 33 --------------------
- .../recipes-daemons/openhpi/openhpi_3.8.0.bb       |  2 +-
- 3 files changed, 36 insertions(+), 34 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
+ .../phpmyadmin/{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.8.3.bb => phpmyadmin_4.8.5.bb} (91%)
 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
-new file mode 100644
-index 0000000..b2771c0
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-function-saHpiSensorThresholds.patch
-@@ -0,0 +1,35 @@
-+From e0b2be7a1fce0fed63bac8c350b711b69edfe30e Mon Sep 17 00:00:00 2001
-+From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-+Date: Tue, 30 Apr 2019 10:04:58 +0800
-+Subject: [PATCH] openhpid/safhpi.c: fix function saHpiSensorThresholdsSet
-+
-+In COPY_TH the SensorThresholds->TH will be copied to tmp.TH only if
-+TH.IsSupported == SAHPI_TRUE. So we should pass &tmp but not
-+SensorThresholds as the argument to OH_CALL_ABI. Otherwise the TH will
-+be set even if TH.IsSupported == SAHPI_FALSE.
-+
-+Upstream-Status: Submitted
-+[https://github.com/open-hpi/openhpi/pull/2744/commits/77a78bb1ada56e55c5ba6d7a5987c214705bf035]
-+
-+Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ openhpid/safhpi.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/openhpid/safhpi.c b/openhpid/safhpi.c
-+index 28a2632..61b7f03 100644
-+--- a/openhpid/safhpi.c
-++++ b/openhpid/safhpi.c
-+@@ -1933,7 +1933,7 @@ SaErrorT SAHPI_API saHpiSensorThresholdsSet (
-+         oh_release_domain(d); /* Unlock domain */
-+ 
-+         OH_CALL_ABI(h, set_sensor_thresholds, SA_ERR_HPI_INVALID_CMD, rv,
-+-                    ResourceId, SensorNum, SensorThresholds);
-++                    ResourceId, SensorNum, &tmp);
-+         oh_release_handler(h);
-+ 
-+         return rv;
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
-deleted file mode 100644
-index 60e2e79..0000000
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--Fix for saftest failures.
--
--Upstream-Status: Pending
--
--Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
--
--Index: openhpi-3.6.1/openhpid/safhpi.c
--===================================================================
----- openhpi-3.6.1.orig/openhpid/safhpi.c
--+++ openhpi-3.6.1/openhpid/safhpi.c
--@@ -1933,7 +1933,7 @@ SaErrorT SAHPI_API saHpiSensorThresholds
--         oh_release_domain(d); /* Unlock domain */
-- 
--         OH_CALL_ABI(h, set_sensor_thresholds, SA_ERR_HPI_INVALID_CMD, rv,
---                    ResourceId, SensorNum, SensorThresholds);
--+                    ResourceId, SensorNum, &tmp);
--         oh_release_handler(h);
-- 
--         return rv;
--Index: openhpi-3.6.1/utils/sahpi_struct_utils.c
--===================================================================
----- openhpi-3.6.1.orig/utils/sahpi_struct_utils.c
--+++ openhpi-3.6.1/utils/sahpi_struct_utils.c
--@@ -3861,6 +3861,9 @@ SaHpiBoolT oh_valid_textbuffer(SaHpiText
--                                         /* found a unpaired surrogate */
--                                         return SAHPI_FALSE;
--                                 }
--+                        } else {
--+                            /*the first 2 bytes wrong*/
--+                            return SAHPI_FALSE;
--                         }
--                 }
--                 break;
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-index 14cc3d8..e3a0c2e 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-@@ -33,7 +33,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://openhpi-glib-cross-compile.patch \
-            file://openhpi-linkfix.patch \
-            file://openhpi-fix-host-gcc.patch \
--           file://openhpi-fix-testfail-errors.patch \
-+           file://openhpi-fix-function-saHpiSensorThresholds.patch \
-            file://openhpi-add-libnetsnmp-when-link.patch \
-            file://openhpi-invalide-session.patch \
-            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
+similarity index 91%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
+index 975f631..99678e6 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.5.bb
+@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://apache.conf \
+ "
+ 
+-SRC_URI[md5sum] = "c8a603f4b78d1dbcefc191b8ae598c79"
+-SRC_URI[sha256sum] = "95f2692094d31c2c323d4767023583ab112ad54fff9e3af372710fcb676151af"
++SRC_URI[md5sum] = "e3737a28fff076003e56a83fe1920d04"
++SRC_URI[sha256sum] = "d7ab5df4e464d7ba17bf2a42da7d7f26dad45c34bf321ac8ae7d2ed748413913"
+ 
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
 -- 
 2.7.4
 
