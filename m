@@ -1,50 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 22F7F7E15F
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id AD4E57E133
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 05:21:11 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id f25so1398014pgv.10
+	Tue, 21 May 2019 05:23:10 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id k24so19087555qtq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2019 22:21:13 -0700 (PDT)
+	Mon, 20 May 2019 22:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=LgSKN9Ib0niMUsJmnT3Qakw5Kb5CosqX3T/cwUlUQsI=;
-	b=DJqFLFqkDu2v9mKc37M/PEZidUAFTBqkE+qf4NqEXySVUW700fPtSLB7nokDjD2uAI
-	aONHe3kVLTW0LWdtS1geRl7Cng/m/c7/6mZKU0ziuYeWFsIHtDNji3eyAZ5Ahk3O/2VV
-	ao6ZZcGzko1q3G9WQEzXXkarzU7AJE6TAe7XxA7AuVEMGlV/6P5v/8p5Wo6yHkJEFUog
-	K/xME2EqsvRvQ5aM9WKG2jAornp6KkcMToHRmu6OApwR8jQcAJt25nxomGNvMWCprasI
-	+bIufY5v3bKkw6smQikk50lE5OVXzqIPTnctczS1K7faeOhl6ed6NHSc5JhYRJXg0Yp7
-	1vXw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3xO4lBYydySoM61zsneYEbw6zJHZHyO+NLeOgLdtQZU=;
+	b=qXhN3qtMUnz6+oqUJ1xnZWDerUpYZwgFKAsGxZnRtBXhyZhnK6CbBwSQ+LyQMySMDJ
+	sJtmjS32Qa5AFIaGr+OXagClzae4pZ9gKaVeX3AcCQt/kD7pnF3D79ZKdVKUasP8c3Wk
+	cFe9CAM8q1dgBE2q0ctgzHEecYHzx/dlXh4OYYIu8K4sALO50oxGf7BZKHsMtqfOD0Zj
+	fwggVPnbL0heL+tm3ovil8ag86uasWy31HSe2/atg0m2nZCkka+oeQ0M9YwPvMb6JrQ3
+	m3dXtl6fDdVoX+4m+e/MovAvWqM+QE16Q3uI+4TmZxQaWR3iOwU69wJ+/Yu4lKkw3Qdk
+	tYoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=LgSKN9Ib0niMUsJmnT3Qakw5Kb5CosqX3T/cwUlUQsI=;
-	b=Do9ZyToPD9agATVAyuRqM2YtCCxCqpUMdCB721EopTCOfUAJyH34tbH9UxBC8CcPw/
-	/aJzAThdWO24TY3Ni7XzYlhYUxPdCYJYCLhxZBqIdFA0o3svRVy10ZSfGXefyGKfKCeB
-	arSiNRVbe8ek1ruy6UhIAT//k42CgIgoxQ+dU50ficwVGxMlK/u65X6qz0/gRtnPZDZv
-	xSQHvZjSFumkIvqiEutSknPlvrDY49SzqVgCs7o0Df4HKI4VdhOrVdz7Mk0j3fHaCief
-	w9hJCZ8fVMgiJZPHTFmtm9X1YnGHbqRgGJn8B7KpyBDW1IiuOXIYByC6Ej1xCkWvKzeC
-	+uzA==
-X-Gm-Message-State: APjAAAVL1KfmxWa+vQ+fL/8iKx131LsWnjEM/gzNanBQAfSo4g6NgCfE
-	wL6XtEebrCgKksNyMIzANb9oSg2UzQA=
-X-Google-Smtp-Source: APXvYqzvMsoEPNXFaoEvb38FhHT6TcR+hFWT1rFE1xcOL5I+hGNyPdG3XGbW00HOZPCg+mrjCsBMNg==
-X-Received: by 2002:a63:1650:: with SMTP id 16mr80584927pgw.164.1558416072530; 
-	Mon, 20 May 2019 22:21:12 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
-	by smtp.gmail.com with ESMTPSA id
-	s28sm30056075pgl.88.2019.05.20.22.21.11
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 May 2019 22:21:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 May 2019 22:21:03 -0700
-Message-Id: <20190521052103.2096-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=3xO4lBYydySoM61zsneYEbw6zJHZHyO+NLeOgLdtQZU=;
+	b=ikJBJa+h9/sq/gyuzQVsD8PjQTTtaWiXlg9xnsQyXH9q7M6xU2BsyLJUMsUKszPQQA
+	845cN8Soct2rU5bA3ZJeiXZlQlNLSBSiGUQCOzDIF2KUIqfyN4Af7QloXCGGgu8aSKuC
+	M8bqN+hRMUxR+oF/ECF4R3jE2kOQVTkaSyRaYvGzZ6zWSzfV26611TbPCdk9uxvqy0w+
+	EMWgrfZ1a430iL+E1gBaw+NyWQX7yO6MoDYr8+eYsV4OHzNW/nDVHSlutWI1z+RKb10G
+	H8AB9LRzCkpItfvlVuwo8cey6T7e3RjRnQhv4MZhc+PS7HUGkjSyLq7YmAlkix5wa3zB
+	yy0w==
+X-Gm-Message-State: APjAAAUnd+4RN0CPaRTbeQSoHoE+spi4MT7w40ySositwx7dtcBqbSmQ
+	0lwyE8yZim2ycmVfG5Z0UV1SFDI6KKYH6jchRS4=
+X-Google-Smtp-Source: APXvYqxyCj6+V2k7M8KxkArUJn/ebmXwsldJFq3fJEQivp8oEISyJgVQAFhwK4Px2X4+JLWDUG7I0mUE1ecZcPUUkvA=
+X-Received: by 2002:aed:23a8:: with SMTP id j37mr27951542qtc.53.1558416191437; 
+	Mon, 20 May 2019 22:23:11 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libnfc: Fix build with musl
+References: <20190519153935.15357-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190519153935.15357-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 May 2019 22:22:45 -0700
+Message-ID: <CAMKF1spg0FiC+wNY2QCxqvEau5pjPyA3YaSNN3pBuYR2tifDFg@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2][meta-networking] libowfat: update to 0.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,70 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 05:21:12 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 May 2019 05:23:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-usbbus-Include-stdint.h-for-uintX_t.patch | 33 +++++++++++++++++++
- meta-oe/recipes-core/libnfc/libnfc_git.bb     |  4 ++-
- 2 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
+Fails on musl
 
-diff --git a/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-new file mode 100644
-index 0000000000..b1e9be7c35
---- /dev/null
-+++ b/meta-oe/recipes-core/libnfc/libnfc/0001-usbbus-Include-stdint.h-for-uintX_t.patch
-@@ -0,0 +1,33 @@
-+From cb2a3991545ba9e885704226ed3e831bd5e4cb27 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 May 2019 22:10:05 -0700
-+Subject: [PATCH] usbbus: Include stdint.h for uintX_t
-+
-+stdint.h is needed for uintX_t typedefs which are
-+used to replace u_intX_t in libusb API headers in the cmake files
-+
-+Define _GNU_SOURCE since thats not defined by default for musl
-+C library on linux
-+
-+Upstream-Status: Submitted [https://github.com/nfc-tools/libnfc/pull/544]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libnfc/buses/usbbus.h | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/libnfc/buses/usbbus.h b/libnfc/buses/usbbus.h
-+index 87f6a85..d18bf8b 100644
-+--- a/libnfc/buses/usbbus.h
-++++ b/libnfc/buses/usbbus.h
-+@@ -35,6 +35,8 @@
-+ 
-+ #ifndef _WIN32
-+ // Under POSIX system, we use libusb (>= 0.1.12)
-++#define _GNU_SOURCE
-++#include <stdint.h>
-+ #include <usb.h>
-+ #define USB_TIMEDOUT ETIMEDOUT
-+ #define _usb_strerror( X ) strerror(-X)
-+-- 
-+2.21.0
-+
-diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-index d00733bf58..040ac2145c 100644
---- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
-+++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
-@@ -9,6 +9,8 @@ inherit autotools pkgconfig
- 
- S = "${WORKDIR}/git"
- SRCREV = "c42e2502d4627d3ea62f83c32677b100bb3cebdc"
--SRC_URI = "git://github.com/nfc-tools/libnfc.git"
-+SRC_URI = "git://github.com/nfc-tools/libnfc.git \
-+           file://0001-usbbus-Include-stdint.h-for-uintX_t.patch \
-+          "
- 
- DEPENDS = "libusb"
--- 
-2.21.0
+https://errors.yoctoproject.org/Errors/Details/241414/
 
+On Sun, May 19, 2019 at 8:40 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}              | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb} (80%)
+>
+> diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> similarity index 80%
+> rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> index 4b072f7e7..a5e2c21cf 100644
+> --- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> +++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> @@ -7,8 +7,8 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+>
+>  SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
+> -SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
+> -SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
+> +SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
+> +SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+>
+>  EXTRA_OEMAKE = "\
+>      DIET= \
+> @@ -19,7 +19,7 @@ EXTRA_OEMAKE = "\
+>  do_install() {
+>      make install \
+>          DESTDIR=${D} \
+> -        INCLUDEDIR=${includedir}/${BPN} \
+> +        INCLUDEDIR=${includedir} \
+>          LIBDIR=${libdir} \
+>          MAN3DIR=${mandir}/man3
+>  }
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
