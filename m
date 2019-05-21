@@ -1,47 +1,26 @@
-Return-Path: <prvs=60446d21bb=alejandro.delcastillo@ni.com>
-X-Greylist: delayed 10071 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 21 May 2019 19:01:40 UTC
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 78FA07E284
+Return-Path: <thstead@steadtechnology.co.uk>
+Received: from bradley.thecyberweb.co.uk (bradley.thecyberweb.co.uk
+	[35.176.52.35])
+	by mail.openembedded.org (Postfix) with ESMTP id E2EC97D3A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 19:01:40 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
-	x4LG1OX1009853 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 11:13:50 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2sky4f3pay-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 11:13:50 -0500
-Received: from us-aus-exch2.ni.corp.natinst.com
-	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
-	by us-aus-skprod2.natinst.com (8.16.0.27/8.16.0.27) with ESMTPS id
-	x4LGDnii020948
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 11:13:49 -0500
-Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
-	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 21 May 2019 11:13:49 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 21 May 2019 11:13:49 -0500
-Received: from delcastillo3.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1395.4 via Frontend Transport; Tue, 21 May 2019 11:13:49 -0500
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 May 2019 11:13:48 -0500
-Message-ID: <20190521161348.20347-1-alejandro.delcastillo@ni.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2019-05-21_03:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-webserver][PATCH] apache2: add all extra/*.conf to conffiles
+	Tue, 21 May 2019 19:21:23 +0000 (UTC)
+Received: by bradley.thecyberweb.co.uk (Postfix, from userid 2223)
+	id 9695560F78; Tue, 21 May 2019 20:21:34 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	bradley.thecyberweb.co.uk
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from quietthinker.steadtechnology
+	(baculaserver.steadtechnology.co.uk [90.254.76.244])
+	by bradley.thecyberweb.co.uk (Postfix) with ESMTPA id 1391C60F75;
+	Tue, 21 May 2019 20:21:34 +0100 (BST)
+From: thstead <thstead@steadtechnology.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 May 2019 20:20:25 +0100
+Message-Id: <20190521192025.13929-1-thstead@steadtechnology.co.uk>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-python][PATCH] Upgraded python-pysnmp from version 4.3.5. to 4.4.9.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 19:01:40 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 May 2019 19:21:24 -0000
 
-Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+This upgrade corrects a parameter issue on the Integer32.clone method within __SNMP-FRAMEWORK-MIB.py
+LICENSE checksum has also been updated to reflect the change of filename from LICENSE.txt to LICENSE.rst
+
+Signed-off-by: thstead <thstead@steadtechnology.co.uk>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../python/{python-pysnmp_4.3.5.bb => python-pysnmp_4.4.9.bb}      | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pysnmp_4.3.5.bb => python-pysnmp_4.4.9.bb} (74%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-index 6642f2bda..87e41c20e 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-@@ -152,7 +152,8 @@ PACKAGES = "${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
- CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
-                    ${sysconfdir}/${BPN}/magic \
-                    ${sysconfdir}/${BPN}/mime.types \
--                   ${sysconfdir}/init.d/${BPN} "
-+                   ${sysconfdir}/${BPN}/extra/* \
-+                   ${sysconfdir}/init.d/${BPN}"
+diff --git a/meta-python/recipes-devtools/python/python-pysnmp_4.3.5.bb b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python-pysnmp_4.3.5.bb
+rename to meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
+index 0b38d58e4..9ff4df2c9 100644
+--- a/meta-python/recipes-devtools/python/python-pysnmp_4.3.5.bb
++++ b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
+@@ -6,14 +6,15 @@ DESCRIPTION = "SNMP v1/v2c/v3 engine and apps written in pure-Python. \
+ HOMEPAGE = "https://pypi.python.org/pypi/pysnmp"
+ SECTION = "devel/python"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=280606d9c18f200e03e0c247ac61475a"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b15d29f500f748d1c2a15709769090a8"
  
- # we override here rather than append so that .so links are
- # included in the runtime package rather than here (-dev)
+ SRCNAME = "pysnmp"
+ 
+ SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "387aaa23c168ccc0b59775cfdf519fc0"
+-SRC_URI[sha256sum] = "38253fe95cea33f352fb36e85f3c2874043401724300c4888df74835161169d2"
++SRC_URI[md5sum] = "6d1b514997326bed18f1ae1510f6b1c9"
++SRC_URI[sha256sum] = "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
++
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
 -- 
-2.21.0
+2.11.0
 
 
