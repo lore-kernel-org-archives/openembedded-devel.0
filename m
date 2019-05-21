@@ -1,50 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B6DBF7E26A
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E5BF27E27B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 17:46:58 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id h17so8959374pgv.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2019 10:47:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=b4kIzErRQ/5ht8X+Vor7hP9M+nMRQpG6lXL5HYMoIEg=;
-	b=ICUXnbKcTvbMUjFzFbeV7RAYzN8aY35eAlQ4By/N36kQn6L2JcEGYTR8f2kfx/YPkw
-	AHmZ/NIokrBsc7p5X4jPScbUkLaXaj/qAMfGiZQhaDzJAMbFkLdpnTmKrureD8GwOEyI
-	ewm2S7PRXQXbCiAxBznWyBDK56uYEvtBT19NbiK0e+EvAjnSv+9nq39yxN/Q21UDUcQh
-	aRCnAHwAf3V/zABG8Wnqo5STECzJwqHxsaTstFEEeoufljHZUsjzS94eekcmhYJnaUYh
-	iqbsE+AdKjRX4UqMKvm1TU1yHVlKri8F4OJRjInBu0eKtKwbvx1j5+deeFywLgfEjmR6
-	6J8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=b4kIzErRQ/5ht8X+Vor7hP9M+nMRQpG6lXL5HYMoIEg=;
-	b=LHYEIAm+sUv63ri4x/brTSdiC8LoBEWrajKokRsQ/LuaQ6gDtFUS+m9X8tRJz1lTKJ
-	UqGUdWLKmo8upBO+ETUlnWSKqYfREHt+IfHjBkIyDFp1VGXGrd30omfA9MrYeigQBKq5
-	XNTFNSFOFaA11GM1x1iuUJL1MMiZsoF7Ki//+LOrnptIeeimfZ4JNWKDZveNvS5Df+VZ
-	dWBDeBY6t9MTGvPMMs1ibpRq3rA2QtxSY3vIerszk/56/UB+sPDvYkwnrMAClcPlwmaK
-	cAYXLf629iLjamxHENM6KUGeRbPLdFSUemdOzQlnzXektSzBA/E8MrvqTqnfmAVoWjGU
-	T0Lw==
-X-Gm-Message-State: APjAAAX3rcvaMvNdilvgbgKdrpArr7G8EVwLCCNs6rUf9FpD39g6Pnx/
-	H8vuMfYUmN9mgb4WFS4qfGy5fDKowqw=
-X-Google-Smtp-Source: APXvYqxxYUC3JJZ5Am54RkvgcGbW7fecDAQr1J+i2bLWX5fhS53n+Y0KiVqbsG1gbmgZw2NNjJSx7w==
-X-Received: by 2002:a63:fa16:: with SMTP id y22mr44353755pgh.15.1558460819123; 
-	Tue, 21 May 2019 10:46:59 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3506])
-	by smtp.gmail.com with ESMTPSA id
-	p14sm29175324pfa.112.2019.05.21.10.46.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 May 2019 10:46:58 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 May 2019 10:46:52 -0700
-Message-Id: <20190521174652.9572-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Tue, 21 May 2019 18:05:46 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 457kG30gbMz7k;
+	Tue, 21 May 2019 20:05:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558461947;
+	bh=eiYx+FKYPI/wElZ7ieAN9zvzhhxRImCfUqQcGHLogJ0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=UdqCimSjx2hNKGt/Sz5GdWbkbfhGudSSR21vlOQgAy6Xg4Pk3WBQc7cFZhJCK1ZVi
+	4KFpigCNERZenLX/oxqlUMC9i2tZy7KY7/2s6C4y8D1QkjAVXoJpCaq70Pgl0HHQAr
+	mbevbfJIrl7LCBVpEl3yv2iwwpw7pg1BzBbAu/32A0erLLC+eIKfdNLDwSBeVJ53Zp
+	zScN6LOqNgANRG6ZcDRtF10dq86rRX1Ht8yDEvqtisMrLxudeSq+822Q1ZHEjBFKob
+	50TvSma55g1fqSXE7Cup6UJRT67STvlOto+1hL0euTZhKZRc8+5SEuhXmyLo+z3OpX
+	R+lbKB2OPrSdTo0Opa2deFSS5mn9051SjOhkPPy2fgIJ3zDJEEEOWn1x3OKvvQJyNQ
+	b3QJRKl5whRvLdwUxwP51wmbyuj2yZ2G/uM8aXPyClKjegKGAzgnqRWrABVVirtlCL
+	t2J10Mb7dFK/PiiromPQ79Mz7/Hr1VO5GaHehoagG0stXFpEQxf1zGvVxkSBF+wAjZ
+	unaFj6uK8KxyFo5t+8ep5BOpcOvAKPVISWyxLEHfm7LgV9HAwvVHlXM3184/51Y7Tk
+	Qf06UzzMcb2CvGopwPW4MYv9n+g6F8IFIvofcxpevm9Qi6m2+3R1DUcEIilO8ACKpO
+	Y7oT4LpVE+dlFMB9UguGSzrc=
+Date: Tue, 21 May 2019 21:05:44 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20190521180544.GA9045@localhost>
+References: <cover.1558410874.git.akuster808@gmail.com>
+	<fd48edcd7415f4a1ca043e256585f2705b66545f.1558410874.git.akuster808@gmail.com>
+	<20190521064032.GD9971@localhost>
+	<13e0f089-cd2e-9084-279e-1a048911e543@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] openocd: Fix build on x86_64
+In-Reply-To: <13e0f089-cd2e-9084-279e-1a048911e543@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior][patch 02/34] python-pyasn1: upgrade 0.4.4 -> 0.4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,96 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 17:46:58 -0000
+X-List-Received-Date: Tue, 21 May 2019 18:05:47 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Avoid conflict by renaming
+On Tue, May 21, 2019 at 07:52:49AM -0700, akuster808 wrote:
+> 
+> 
+> On 5/20/19 11:40 PM, Adrian Bunk wrote:
+> > On Mon, May 20, 2019 at 08:56:02PM -0700, Armin Kuster wrote:
+> >> From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> >>
+> >> -Upgrade from python-pyasn1_0.4.4.bb to python-pyasn1_0.4.5.bb.
+> >>
+> >> -Upgrade from python3-pyasn1_0.4.4.bb to python3-pyasn1_0.4.5.bb
+> >>
+> >> -License-Update: Copyright year updated to 2019.
+> >>
+> >> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> >> ..
+> > No reason is provided why this should be upgraded in a stable branch.
+> 
+> There is no meta-openembedded process or requirements for stable
+> branches  to provide reasons in commit messages.
+> 
+> The precedent in the community is to provide minimal or no comments in a
+> commit message. So the burned is placed on the Stable branch maintainer
+> to do the leg work the community as whole should have done.
+>...
 
- ...-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch | 59 +++++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
+For master the default action should be to upgrade to the latest
+version, and no further rationale is required for this.
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
-new file mode 100644
-index 0000000000..c80d9f19f8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch
-@@ -0,0 +1,59 @@
-+From bee22f143ffa0457aefcf31053f76416e6d242e5 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 May 2019 23:24:26 -0700
-+Subject: [PATCH] esirisc_flash: Rename PAGE_SIZE to FLASH_PAGE_SIZE
-+
-+PAGE_SIZE is defined in system includes on some systems, this would
-+avoid the unintended conflict
-+
-+Fixes
-+| src/flash/nor/esirisc_flash.c:95:9: error: 'PAGE_SIZE' macro redefined [-Werror,-Wmacro-redefined]
-+| #define PAGE_SIZE                       4096
-+|         ^
-+| /mnt/a/yoe/build/tmp/work/core2-64-yoe-linux-musl/openocd/0.10+gitrAUTOINC+7ee618692f-r0/recipe-sysroot/usr/inclu
-+de/limits.h:89:9: note: previous definition is here
-+| #define PAGE_SIZE PAGESIZE
-+
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/5180/2]
-+Change-Id: I195b303fc88a7c848ca4e55fd6ba893796df55cc
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/flash/nor/esirisc_flash.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/flash/nor/esirisc_flash.c b/src/flash/nor/esirisc_flash.c
-+index 4e33b942..3bed0658 100644
-+--- a/src/flash/nor/esirisc_flash.c
-++++ b/src/flash/nor/esirisc_flash.c
-+@@ -92,7 +92,7 @@
-+ #endif
-+ 
-+ #define CONTROL_TIMEOUT		5000		/* 5s    */
-+-#define PAGE_SIZE			4096
-++#define FLASH_PAGE_SIZE		4096
-+ #define PB_MAX				32
-+ 
-+ #define NUM_NS_PER_S		1000000000ULL
-+@@ -264,7 +264,7 @@ static int esirisc_flash_erase(struct flash_bank *bank, int first, int last)
-+ 	(void)esirisc_flash_disable_protect(bank);
-+ 
-+ 	for (int page = first; page < last; ++page) {
-+-		uint32_t address = page * PAGE_SIZE;
-++		uint32_t address = page * FLASH_PAGE_SIZE;
-+ 
-+ 		target_write_u32(target, esirisc_info->cfg + ADDRESS, address);
-+ 
-+@@ -464,8 +464,8 @@ static int esirisc_flash_probe(struct flash_bank *bank)
-+ 	if (target->state != TARGET_HALTED)
-+ 		return ERROR_TARGET_NOT_HALTED;
-+ 
-+-	bank->num_sectors = bank->size / PAGE_SIZE;
-+-	bank->sectors = alloc_block_array(0, PAGE_SIZE, bank->num_sectors);
-++	bank->num_sectors = bank->size / FLASH_PAGE_SIZE;
-++	bank->sectors = alloc_block_array(0, FLASH_PAGE_SIZE, bank->num_sectors);
-+ 
-+ 	retval = esirisc_flash_init(bank);
-+ 	if (retval != ERROR_OK) {
-+-- 
-+2.21.0
-+
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index 9a8a09a913..b50c3acf4c 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -9,6 +9,7 @@ SRC_URI = " \
-     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl \
-     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl \
-     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink \
-+    file://0001-esirisc_flash-Rename-PAGE_SIZE-to-FLASH_PAGE_SIZE.patch \
- "
- 
- SRCREV_FORMAT = "openocd"
+For stable branches the default action should be to do nothing, unless
+there is a reason why something needs backporting or fixing in stable.
+
+Stable branch maintainance can anyways not be based on just 
+cherry-picking commits from master. Many important fixes, especially 
+many CVE fixes, will need a different fix in a stable branch than in 
+master.
+
+> - armin
+
+cu
+Adrian
+
 -- 
-2.21.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
