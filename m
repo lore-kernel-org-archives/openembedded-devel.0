@@ -1,51 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 90FC87E3BF
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
+	[209.85.166.47])
+	by mail.openembedded.org (Postfix) with ESMTP id AF9067E3C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:28:26 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id 7so3874402wmo.2
+	Wed, 22 May 2019 23:44:27 +0000 (UTC)
+Received: by mail-io1-f47.google.com with SMTP id f22so3318905iol.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 16:28:28 -0700 (PDT)
+	Wed, 22 May 2019 16:44:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OdQ+kJMqJGvpwDhc7RSRo7e/7BCGI1kUHytuV5YkTIU=;
-	b=LY5y23c3UfXS2s8gNZ/yvA6hmV9Ut+0nnhkAbRvz6cMvOWKydgW7W5oETGzs1GiQ0U
-	2JOoC9cA1toACIorlVXkitzpmDqoezLhMSwQmlV5tW5QZzz8VSyA/9KuRZuE5dq8o/R6
-	b/ghJkSAqk73zwozXlwwFM6fyIf7d6wEQNBYVkouGKGKgvCbwcIkjiRqeOqiwmGnHoAZ
-	nXa0KcYpwnNrgEteDWpyU/opYSpbDBXIAFgicIXn0ouRNR6cYAvqi5o/FvCvyibz8C0r
-	ovtH49QxnecWtD3t+UecTt80m5PXl6U2xZHmXokE9xd/dNkNQtK/nVnLEBtNgwCYb5LN
-	5cgg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=t01f8pDpIjVUDFjqE8Fq2Y1HEw3hCwz6pja5a1xeqF0=;
+	b=j2e3os6iq9e1S5kLp76FzizVGJ7YfTdaacSQyfkiy1ygLiNMOxmFDHwq5oAWELE4+7
+	FpDE+2Q2bsEEJ6GNlh1nETOGdyCsFb9j2mv+Yh0Fyep5QmutvBBm4HupeDSjQ40kYIZg
+	1ZaZcNZJ7oNnz2h1ve0zR/ZRrF2bHbImMk2IK6fN7QRxrA8Ur8oQ6YQ9hNHdpPIlnvE5
+	Sr7o3tdpuDOquQFe2///Sq6e9ugncVJV/93EeEYqUQIqZbmT3sbTBGO4I20HP7VUQEt8
+	6K4GoP7ziE+rXsEo0FjhA1BawtstQMTn/m+xB5w3OBBz3fZ+mGr+9EFCICnPmpidDQZZ
+	hyPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=OdQ+kJMqJGvpwDhc7RSRo7e/7BCGI1kUHytuV5YkTIU=;
-	b=VBE4o6NiXrDoStVWay0SGPbEq/4/56cGekaG911cZUlhVpmfqpmzyDSclgYLx1vsWj
-	AvFVjPcmA8uBw5tG1f38hPFnctnZRtS7IymalqnS47elPp5sSTQNVH8qoYE7PD06wdEf
-	S+XsGKTjvvZJvvFI/2IWa+Zp9EoJGamO4KwjVJBHu7BiU2oEkORVA3GUA9OB25KZV408
-	mV5cqkNK+psSn5c9jhaZhxWWIE1mAxbJkHkwSi/mM6y0aR7ubarHDZH+CNYcdi2m6yOW
-	x+ywaUDwbmmkdvtdYnVepI3aHQC6gFQzD5wDHfZ6y1FpNrFFL68Xy45I29SKqpP0ZxGk
-	tFCw==
-X-Gm-Message-State: APjAAAUimJmFBaCzAFtXR/qCyDfn1ZDToO8P4kH+eOir0s/R1ZWvNuIL
-	vH5Az9tACuaMCCVMH4fQTTQXYE23
-X-Google-Smtp-Source: APXvYqzLV1B78wVbDXD1CY/rjcfRdnENXv8VJLdgOVJvqXgUllKK7X1CFBQemT1+nlyt4ugaIyE2HA==
-X-Received: by 2002:a1c:9eca:: with SMTP id h193mr9071670wme.125.1558567707103;
-	Wed, 22 May 2019 16:28:27 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	i185sm14232193wmg.32.2019.05.22.16.28.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 16:28:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 May 2019 23:28:35 +0000
-Message-Id: <20190522232835.17963-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
-References: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
-Subject: [meta-oe][PATCH] ne10, libopus: add armv7ve override as well
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=t01f8pDpIjVUDFjqE8Fq2Y1HEw3hCwz6pja5a1xeqF0=;
+	b=YZWXctGengxSGok8S2HbmPOt0FGCJ34UFfRzRnLpe0byAT01Qp2NlOr1mewtlaf54c
+	ZZg1q+CN+KCUOxvVGgAo5bdTALzMV56nK1eh6H7TiIyfEL1P6g/Gj3/hydUVA8PPyfa/
+	bljH3GAQemj4Kif6Reu7QGvK3SjsxQleLoUOyu02m4wvK/XfldbFCjG7zfFLXSTOyI1c
+	T9ZgOfLJ8FQiMqea+H/xWPUn9OTnCPMFVR83Tv0JoPS/JAkj9XBKj365ylST5MKgYco9
+	o0uab2M0CowNIng112EKuhzFwcDusod4cVFTSsEovjZNg0xhYKM1Oja68pRh2V7QLYd7
+	9CtQ==
+X-Gm-Message-State: APjAAAWKArvBGfAhTCl2MDx9addlDI28EuTxMgnNOiVobf6I/+uYLP5H
+	SDa+9c55LAVEPpT6jSIP7opH0SmUNn4b3QuKnWE=
+X-Google-Smtp-Source: APXvYqyuP8tP5/Hplgb2Xcr3ap/FmpHYQIMxk+twjYBFAfjTaByxvmV+QJYJDHX8isL03MVL/TPaLXwrg0DzB2xgNQk=
+X-Received: by 2002:a5d:9a11:: with SMTP id s17mr26823100iol.267.1558568668703;
+	Wed, 22 May 2019 16:44:28 -0700 (PDT)
+MIME-Version: 1.0
+References: <155854019588.26288.10003174813774515795@git.openembedded.org>
+	<20190522154956.6750B23534D@git.openembedded.org>
+	<CALbNGRS52_LUD8pDuE-cXt5PK8Pqf-TZbFyQdcgGxQanZNx3vg@mail.gmail.com>
+	<CAMKF1sqMxN5ic=X8n5yVPct_8DmUCPDCoKxmy9kMVbvYdBQWGg@mail.gmail.com>
+	<CALbNGRR97eVuCgmrn06eSB6BM3tGHhaNDzMnTtbLAGd+HQMdtQ@mail.gmail.com>
+	<CAMKF1sq_N0buByYD9N3Xx4kox99yLmMdJX8N=8iLAM8TSbTS0Q@mail.gmail.com>
+In-Reply-To: <CAMKF1sq_N0buByYD9N3Xx4kox99yLmMdJX8N=8iLAM8TSbTS0Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 01:44:16 +0200
+Message-ID: <CALbNGRRzQHZhFJc=HAORCoVx7KaioZbkh+Tc-eBJK5-1sgriNA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe-commits] [meta-openembedded] 02/09: mozjs: Upgrade to version 60.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,70 +59,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 23:28:26 -0000
+X-List-Received-Date: Wed, 22 May 2019 23:44:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* fix the override in packagegroup-meta-oe.bb
-* alllow building ne10 for armv7ve (e.g. Cortex-A15)
+On Wed, May 22, 2019 at 11:34 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Wed, May 22, 2019 at 2:29 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > On Wed, May 22, 2019 at 10:14 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > On Wed, May 22, 2019 at 12:06 PM Andreas M=C3=BCller <schnitzeltony@g=
+mail.com> wrote:
+> > > >
+> > > > On Wed, May 22, 2019 at 5:50 PM <git@git.openembedded.org> wrote:
+> > > > >
+> > > > > This is an automated email from the git hooks/post-receive script=
+.
+> > > > >
+> > > > > khem pushed a commit to branch master-next
+> > > > > in repository meta-openembedded.
+> > > > >
+> > > > > commit 8587370567e7f2f398ae1efa77989b1110d15a77
+> > > > > Author: Khem Raj <raj.khem@gmail.com>
+> > > > > AuthorDate: Tue May 21 23:27:16 2019 -0700
+> > > > >
+> > > > >     mozjs: Upgrade to version 60.x
+> > > > >
+> > > > Haven't found this on mailing list so:
+> > > >
+> > > > I ve done similar here and I saw that
+> > > >
+> > > > * musl patch can go (tested)
+> > > > * polkit needs update - current version requires mozjs 52.x (shall =
+I
+> > > > send the patch I have already?)
+> > > >
+> > >
+> > > Please do. I am currently trying to upgrade polkit to 0.116 which
+> > > should work with
+> > > spidermonkey 60.x so if you have patches please send, I would be happ=
+y
+> > > to give them a shot.
+> > >
+> > That might take till weekend: am sitting on 60+ patches not quite
+> > ready for the wild. So I have to rebase (and test).
+> >
+> > Ahh  - and after staring python2 crusade accidentally: If you give me
+> > a bit more time I would create a patch to move mozjs build to python3.
+> > Found a patch which is a good base to steel from.
+> >
+>
+> OK. I have it compiling and working on rpi3 and qemux86-64
+> see top 4 patches
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dyoe/mut
+>
+> Let me know what you think
+>
+Seems you chose same way as I did: add necessary python dependencies.
+Now after recent discussion about python2 I don't like this way. E.g
+python-which has seen last release in 2010 [1] and does not build for
+python3.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
- meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb        | 3 ++-
- meta-oe/recipes-support/ne10/ne10_1.2.1.bb                 | 4 +++-
- 3 files changed, 7 insertions(+), 3 deletions(-)
+By looking into the python3 patch for mozjs [2] I found that mozjs
+ships the python scripts required (and I think much more). Seems we do
+not set it up properly so that it cannot find them.
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 5fcf9899b6..af3e848124 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -220,7 +220,8 @@ RDEPENDS_packagegroup-meta-oe-shells ="\
- 
- NE10 = ""
- NE10_aarch64 = "ne10"
--NE10_arm7 = "ne10"
-+NE10_armv7a = "ne10"
-+NE10_armv7ve = "ne10"
- 
- RDEPENDS_packagegroup-meta-oe-support ="\
-     anthy asio atop augeas avro-c bdwgc frame grail \
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-index 50d49370ba..fb9bdc70fa 100644
---- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-@@ -28,9 +28,10 @@ EXTRA_OECONF = " \
-     --enable-custom-modes \
- "
- 
--# ne10 is available only for armv7a and aarch64
-+# ne10 is available only for armv7a, armv7ve and aarch64
- DEPENDS_append_aarch64 = " ne10"
- DEPENDS_append_armv7a = " ne10"
-+DEPENDS_append_armv7ve = " ne10"
- 
- python () {
-     if d.getVar('TARGET_FPU') in [ 'soft' ]:
-diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-index 4e8986de18..f37ccde1cb 100644
---- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-+++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-@@ -15,13 +15,15 @@ PV .= "gitr+${SRCPV}"
- 
- inherit cmake
- 
--# Incompatible with archs other than armv7 and aarch64
-+# Incompatible with archs other than armv7, armv7ve and aarch64
- COMPATIBLE_MACHINE = "(^$)"
- COMPATIBLE_MACHINE_aarch64 = "(.*)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
-+COMPATIBLE_MACHINE_armv7ve = "(.*)"
- NE10_TARGET_ARCH = ""
- NE10_TARGET_ARCH_aarch64 = "aarch64"
- NE10_TARGET_ARCH_armv7a = "armv7"
-+NE10_TARGET_ARCH_armv7ve = "armv7"
- 
- EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
- 
--- 
-2.17.1
+My target for mozjs is:
+Use the python-scripts found in mozjs 'third_party' folder, patch them
+for python3 and don't add python-native recipes.
 
+Suggestion:
+* If you are under pressure for this issue for other recipes: Take
+your patches - I can make those modifications on top later.
+* If there is no pressure just give me a bit of time
+
+And finally: Maybe we do same in parallel. To avoid double efforts: My
+WIP is at [3] As said it is not ready to send: Have not seen
+gnome-desktop yet and would like to add =C5=9Bome more as gdm / eog...
+
+Time for zzz
+
+Andreas
+
+[1] https://pypi.org/project/which/
+[2] https://code.foxkit.us/adelie/packages/blob/f2b5773da19ab397fbe64fd32da=
+cc383cfe4cd77/user/mozjs/python3.patch
+[3] https://github.com/schnitzeltony/meta-openembedded/tree/work-2019-05
 
