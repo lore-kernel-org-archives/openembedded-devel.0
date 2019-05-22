@@ -1,52 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
-	[209.85.166.47])
-	by mail.openembedded.org (Postfix) with ESMTP id AF9067E3C2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id CC02E7E3D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:44:27 +0000 (UTC)
-Received: by mail-io1-f47.google.com with SMTP id f22so3318905iol.11
+	Wed, 22 May 2019 23:45:01 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id n2so2080922pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 16:44:29 -0700 (PDT)
+	Wed, 22 May 2019 16:45:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=t01f8pDpIjVUDFjqE8Fq2Y1HEw3hCwz6pja5a1xeqF0=;
-	b=j2e3os6iq9e1S5kLp76FzizVGJ7YfTdaacSQyfkiy1ygLiNMOxmFDHwq5oAWELE4+7
-	FpDE+2Q2bsEEJ6GNlh1nETOGdyCsFb9j2mv+Yh0Fyep5QmutvBBm4HupeDSjQ40kYIZg
-	1ZaZcNZJ7oNnz2h1ve0zR/ZRrF2bHbImMk2IK6fN7QRxrA8Ur8oQ6YQ9hNHdpPIlnvE5
-	Sr7o3tdpuDOquQFe2///Sq6e9ugncVJV/93EeEYqUQIqZbmT3sbTBGO4I20HP7VUQEt8
-	6K4GoP7ziE+rXsEo0FjhA1BawtstQMTn/m+xB5w3OBBz3fZ+mGr+9EFCICnPmpidDQZZ
-	hyPA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=chxUvBjV+HRoW98DLswgVMqLhrU4GAYhQNq31PR0Ekc=;
+	b=VCAnTSvzqYQ7YjTW1WPnUrAKojV0qMjW0uAE+oETG3W0gWveU5sj0jOTataNhZAUB2
+	9xiSlYK+eplqZ9OQbmOvNGbbhlwGKKTyMf/0mCF0qVXt/xWSINrRZF4L9ivub0JWcsgN
+	DyTSR8EcbZuphT28NzEn4uwnvQ1CARVWb3NR8MxAoxRET+MyDj8F/rqHpiX/h/d+Uz3l
+	+mOXras+WjAPCOC2hqQubLwTsv06wqc//pDqx4jAgR8SvHOpuXin3tBfCCeZDkMD1+wZ
+	j6tdLptj8qEVADXB5XotokPMCKrdENiey7V+udLG5IZI/FQ7Yq9RSEgaIIt1bG7KenCL
+	DGcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=t01f8pDpIjVUDFjqE8Fq2Y1HEw3hCwz6pja5a1xeqF0=;
-	b=YZWXctGengxSGok8S2HbmPOt0FGCJ34UFfRzRnLpe0byAT01Qp2NlOr1mewtlaf54c
-	ZZg1q+CN+KCUOxvVGgAo5bdTALzMV56nK1eh6H7TiIyfEL1P6g/Gj3/hydUVA8PPyfa/
-	bljH3GAQemj4Kif6Reu7QGvK3SjsxQleLoUOyu02m4wvK/XfldbFCjG7zfFLXSTOyI1c
-	T9ZgOfLJ8FQiMqea+H/xWPUn9OTnCPMFVR83Tv0JoPS/JAkj9XBKj365ylST5MKgYco9
-	o0uab2M0CowNIng112EKuhzFwcDusod4cVFTSsEovjZNg0xhYKM1Oja68pRh2V7QLYd7
-	9CtQ==
-X-Gm-Message-State: APjAAAWKArvBGfAhTCl2MDx9addlDI28EuTxMgnNOiVobf6I/+uYLP5H
-	SDa+9c55LAVEPpT6jSIP7opH0SmUNn4b3QuKnWE=
-X-Google-Smtp-Source: APXvYqyuP8tP5/Hplgb2Xcr3ap/FmpHYQIMxk+twjYBFAfjTaByxvmV+QJYJDHX8isL03MVL/TPaLXwrg0DzB2xgNQk=
-X-Received: by 2002:a5d:9a11:: with SMTP id s17mr26823100iol.267.1558568668703;
-	Wed, 22 May 2019 16:44:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=chxUvBjV+HRoW98DLswgVMqLhrU4GAYhQNq31PR0Ekc=;
+	b=q8l4SdGNzFZYTr98b7562TnT4xCMcCzNzaTrcpEjoT2kL/TOxBzO0MUtAH++DPkO/h
+	OGsEv1O0MZ1hQYHDHKoQGIZTwJREtP6Rgmsu7IN77l2sqJ5QHat1JWZDZX/ssadtzP2f
+	KJnEjrMAdKLnFODauYvRIw6q1sMT0Mnx+dutSfDOT57hScjcNlIwBX1tp3hTvkkw3uIQ
+	JbaosaSPAHEqiTPgwsz4dWlb04N3AXevHaxKDlB4t1fhyA/aJ1SWyMWSavLuCC55K38V
+	gzOqrkzq+RM4cYsyYRbW1dTVvQNKQppw4q/YUyZM+2VkfvjnsyGjlMDXJysvd3tpYDBI
+	FOOA==
+X-Gm-Message-State: APjAAAUqaF2LdvPl0W6RXWXrztImp7TDge7icCxN8NnNekVO4oafS8u0
+	5jHfP/nXfzla9UAK0ErCKSLCr+n41eo=
+X-Google-Smtp-Source: APXvYqyCo8gEeTCik0PZW1vHhOGUoRtTEQSRsVZhzVa6eTfSSuMkOuXPwpAnozoMejbDVcRx0kg/6g==
+X-Received: by 2002:a63:18e:: with SMTP id 136mr63954731pgb.277.1558568702471; 
+	Wed, 22 May 2019 16:45:02 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::e252])
+	by smtp.gmail.com with ESMTPSA id
+	k27sm18567808pfh.147.2019.05.22.16.45.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 May 2019 16:45:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 May 2019 16:44:52 -0700
+Message-Id: <20190522234455.13121-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <155854019588.26288.10003174813774515795@git.openembedded.org>
-	<20190522154956.6750B23534D@git.openembedded.org>
-	<CALbNGRS52_LUD8pDuE-cXt5PK8Pqf-TZbFyQdcgGxQanZNx3vg@mail.gmail.com>
-	<CAMKF1sqMxN5ic=X8n5yVPct_8DmUCPDCoKxmy9kMVbvYdBQWGg@mail.gmail.com>
-	<CALbNGRR97eVuCgmrn06eSB6BM3tGHhaNDzMnTtbLAGd+HQMdtQ@mail.gmail.com>
-	<CAMKF1sq_N0buByYD9N3Xx4kox99yLmMdJX8N=8iLAM8TSbTS0Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sq_N0buByYD9N3Xx4kox99yLmMdJX8N=8iLAM8TSbTS0Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 23 May 2019 01:44:16 +0200
-Message-ID: <CALbNGRRzQHZhFJc=HAORCoVx7KaioZbkh+Tc-eBJK5-1sgriNA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] [meta-openembedded] 02/09: mozjs: Upgrade to version 60.x
+Subject: [meta-oe][PATCH 1/4] python-six: put python2/3 variant together
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,92 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 23:44:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 May 2019 23:45:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, May 22, 2019 at 11:34 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Wed, May 22, 2019 at 2:29 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
-> >
-> > On Wed, May 22, 2019 at 10:14 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > On Wed, May 22, 2019 at 12:06 PM Andreas M=C3=BCller <schnitzeltony@g=
-mail.com> wrote:
-> > > >
-> > > > On Wed, May 22, 2019 at 5:50 PM <git@git.openembedded.org> wrote:
-> > > > >
-> > > > > This is an automated email from the git hooks/post-receive script=
-.
-> > > > >
-> > > > > khem pushed a commit to branch master-next
-> > > > > in repository meta-openembedded.
-> > > > >
-> > > > > commit 8587370567e7f2f398ae1efa77989b1110d15a77
-> > > > > Author: Khem Raj <raj.khem@gmail.com>
-> > > > > AuthorDate: Tue May 21 23:27:16 2019 -0700
-> > > > >
-> > > > >     mozjs: Upgrade to version 60.x
-> > > > >
-> > > > Haven't found this on mailing list so:
-> > > >
-> > > > I ve done similar here and I saw that
-> > > >
-> > > > * musl patch can go (tested)
-> > > > * polkit needs update - current version requires mozjs 52.x (shall =
-I
-> > > > send the patch I have already?)
-> > > >
-> > >
-> > > Please do. I am currently trying to upgrade polkit to 0.116 which
-> > > should work with
-> > > spidermonkey 60.x so if you have patches please send, I would be happ=
-y
-> > > to give them a shot.
-> > >
-> > That might take till weekend: am sitting on 60+ patches not quite
-> > ready for the wild. So I have to rebase (and test).
-> >
-> > Ahh  - and after staring python2 crusade accidentally: If you give me
-> > a bit more time I would create a patch to move mozjs build to python3.
-> > Found a patch which is a good base to steel from.
-> >
->
-> OK. I have it compiling and working on rpi3 and qemux86-64
-> see top 4 patches
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dyoe/mut
->
-> Let me know what you think
->
-Seems you chose same way as I did: add necessary python dependencies.
-Now after recent discussion about python2 I don't like this way. E.g
-python-which has seen last release in 2010 [1] and does not build for
-python3.
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-By looking into the python3 patch for mozjs [2] I found that mozjs
-ships the python scripts required (and I think much more). Seems we do
-not set it up properly so that it cannot find them.
+Upcoming 60.2.3 mozjs (meta-oe) requires python(2)-six-native for its
+configuration. Currently python(2)-six lives in meta-python and it could be
+moved to mozjs's home meta-oe but that would be just further clutter.
 
-My target for mozjs is:
-Use the python-scripts found in mozjs 'third_party' folder, patch them
-for python3 and don't add python-native recipes.
+Once applied here patch to meta-python will be send.
 
-Suggestion:
-* If you are under pressure for this issue for other recipes: Take
-your patches - I can make those modifications on top later.
-* If there is no pressure just give me a bit of time
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-devtools/python/python-six_1.12.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-six_1.12.0.bb
 
-And finally: Maybe we do same in parallel. To avoid double efforts: My
-WIP is at [3] As said it is not ready to send: Have not seen
-gnome-desktop yet and would like to add =C5=9Bome more as gdm / eog...
+diff --git a/meta-oe/recipes-devtools/python/python-six_1.12.0.bb b/meta-oe/recipes-devtools/python/python-six_1.12.0.bb
+new file mode 100644
+index 0000000000..af26e83d60
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-six_1.12.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require recipes-devtools/python/python-six.inc
+-- 
+2.21.0
 
-Time for zzz
-
-Andreas
-
-[1] https://pypi.org/project/which/
-[2] https://code.foxkit.us/adelie/packages/blob/f2b5773da19ab397fbe64fd32da=
-cc383cfe4cd77/user/mozjs/python3.patch
-[3] https://github.com/schnitzeltony/meta-openembedded/tree/work-2019-05
 
