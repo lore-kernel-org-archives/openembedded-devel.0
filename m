@@ -1,48 +1,90 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 510F16BA10
+Return-Path: <prvs=604521429f=alejandro.delcastillo@ni.com>
+X-Greylist: delayed 1851 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 22 May 2019 16:10:57 UTC
+Received: from mx0b-00010702.pphosted.com (mx0b-00010702.pphosted.com
+	[148.163.158.57])
+	by mail.openembedded.org (Postfix) with ESMTP id AD3357E3D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 14:16:56 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id j187so4837552wma.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 07:16:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.ro; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=CtRbsdj7tijH3pSklJERgvdObrcX6t9/1YJgI/qVNBA=;
-	b=lMluJROEm8C2P0MfiylUs8Zwc7REYl9LZuiiFjR4BdruPhp2edv+7uZ5OsyMrZgSwE
-	kH7rY08jlcqBbvA3tziUhQaxYDb+pHffy8poyYX+j1HTlzhDBu4Rlzy7OwzEwXmhlE7d
-	1NYWHbQcRCDG5jbwbGaU/33l6ArZYxcUtxLFTXke3W/2AmkHIfPX/ZphLWbVtQlRQ/6F
-	yYhNTSQJRmCj0fi4kykCAxWJ0+BR+igsnazIPvy5qXbd01ZFqk/Lf4AlBwN53JD5MpdQ
-	nDJ/EI3j6CwGHVY92ECXInlUmqOl9fEJIe2TlQ27ZBIzsVhecdKT/CLBEmkGvwVrjaOt
-	cp/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CtRbsdj7tijH3pSklJERgvdObrcX6t9/1YJgI/qVNBA=;
-	b=TbK5jDzYmcaE3LZd/e9uIATcR26woxmBNTr81rTod8+PSIB55rsSVTFy6Ya70zMwLN
-	U0thdYr9wSxfk4RQjYnw0Iklp1FaUebw5RYXCcOI1vH6hPJpJM6XftpmMwEGPWLo9Qz2
-	Knxl+cmv1hewF7CObHoUxCz/6f8EYOqyiZEHRoCic0eba+ft8iFHJakACM+Hs1SaxkZW
-	8S7FBgPnkysHLTwhoyB/CZyjqnObL8GUHOjCZOxx6u0Q1IFASmJp2zh87HHIeSY/Tjnl
-	qipEPXujBQLAk+mp6ybb+4Hwd8CCuAbdV+ZU82VAdZ8aRcCuaGjDaC2fvYe6qO9VZBu4
-	OEwA==
-X-Gm-Message-State: APjAAAV9a/YnZeHaSSPpTyvHZI7xyxYVc/nRBv9MTU7gEjlkSMidGaKI
-	I5MSDnBBTorzEJlQPLyciebVIxbOtGk=
-X-Google-Smtp-Source: APXvYqw1Lw37zDbClZTLI5OGQNWQi0gixstHOq/9UnbNZBZKOU8kia5cjvrOdTZu5ORtde52GZq2YA==
-X-Received: by 2002:a1c:c015:: with SMTP id q21mr2687515wmf.75.1558534616527; 
-	Wed, 22 May 2019 07:16:56 -0700 (PDT)
-Received: from localhost.localdomain (host90-152-4-101.ipv4.regusnet.com.
-	[90.152.4.101])
-	by smtp.gmail.com with ESMTPSA id h8sm12094038wmf.5.2019.05.22.07.16.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 May 2019 07:16:55 -0700 (PDT)
-From: Andrei Gherzan <andrei@gherzan.ro>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 May 2019 15:16:42 +0100
-Message-Id: <20190522141642.9173-1-andrei@gherzan.ro>
-X-Mailer: git-send-email 2.17.1
-Cc: Andrei Gherzan <andrei@gherzan.ro>
-Subject: [meta-networking][PATCH] modemmanager: Update to 1.10.0
+	Wed, 22 May 2019 16:10:57 +0000 (UTC)
+Received: from pps.filterd (m0098779.ppops.net [127.0.0.1])
+	by mx0b-00010702.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+	x4MFaQZa023994; Wed, 22 May 2019 10:40:07 -0500
+Received: from nam04-co1-obe.outbound.protection.outlook.com
+	(mail-co1nam04lp2058.outbound.protection.outlook.com [104.47.45.58])
+	by mx0b-00010702.pphosted.com with ESMTP id 2sn4e98rsj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Wed, 22 May 2019 10:40:06 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nio365.onmicrosoft.com; s=selector1-nio365-onmicrosoft-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=2Ej4X1kd/yjfGwjeHTyogQg8PaOdyDvKQ/nbIFu1KcU=;
+	b=K9X660ks3eNIsfbhP35prcKPP4Hvd82m6YOd/NLUE0mpsJW1RpuYApM3A82eD7uzeHItrgGlk+poNMqVHBv0RZHn4CYmPQq6Kj8RfQOVolNe+O//QoQe/HERyr7yfdXlOFcRC6gx43ubyRRH2ritaHLXsJQTpE+gb+OKKk3co+g=
+Received: from SN6PR04MB4221.namprd04.prod.outlook.com (52.135.71.147) by
+	SN6PR04MB5327.namprd04.prod.outlook.com (20.177.255.81) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1922.15; Wed, 22 May 2019 15:40:04 +0000
+Received: from SN6PR04MB4221.namprd04.prod.outlook.com
+	([fe80::70d5:e6a1:16e0:110a]) by
+	SN6PR04MB4221.namprd04.prod.outlook.com
+	([fe80::70d5:e6a1:16e0:110a%5]) with mapi id 15.20.1900.024;
+	Wed, 22 May 2019 15:40:04 +0000
+From: Alejandro Del Castillo <alejandro.delcastillo@ni.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [EXTERNAL] Re: [oe] [meta-webserver][PATCH] apache2: add all
+	extra/*.conf to conffiles
+Thread-Index: AQHVD/At4swbn9wQi0W+d+V3qWJ0yaZ2UT8AgAD4GwA=
+Date: Wed, 22 May 2019 15:40:03 +0000
+Message-ID: <71129f81-1a95-f695-924f-4137477560bf@ni.com>
+References: <20190521161348.20347-1-alejandro.delcastillo@ni.com>
+	<CAMKF1spQMMOoKqt0zD1MwBnX3D8MF4PPjO=1eBe_y5RKGdWZTQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spQMMOoKqt0zD1MwBnX3D8MF4PPjO=1eBe_y5RKGdWZTQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: SN4PR0701CA0014.namprd07.prod.outlook.com
+	(2603:10b6:803:28::24) To SN6PR04MB4221.namprd04.prod.outlook.com
+	(2603:10b6:805:30::19)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [130.164.62.198]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: f19cf3af-bcee-4a9d-0772-08d6decbc22f
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(2017052603328)(7193020);
+	SRVR:SN6PR04MB5327; 
+x-ms-traffictypediagnostic: SN6PR04MB5327:
+x-ms-exchange-purlcount: 1
+x-microsoft-antispam-prvs: <SN6PR04MB53271887BE10B201AEBCB22886000@SN6PR04MB5327.namprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2803;
+x-forefront-prvs: 0045236D47
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(396003)(39860400002)(346002)(376002)(136003)(366004)(199004)(189003)(71200400001)(25786009)(71190400001)(11346002)(31696002)(36756003)(6436002)(31686004)(76176011)(99286004)(186003)(86362001)(476003)(2616005)(102836004)(52116002)(446003)(6486002)(478600001)(68736007)(6512007)(486006)(256004)(14444005)(6306002)(66066001)(229853002)(14454004)(316002)(6916009)(53936002)(966005)(66446008)(2906002)(8936002)(305945005)(73956011)(66946007)(66476007)(66556008)(6116002)(3846002)(4326008)(7736002)(64756008)(26005)(8676002)(81166006)(5660300002)(81156014)(386003)(6506007)(6246003)(53546011);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:SN6PR04MB5327;
+	H:SN6PR04MB4221.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: ni.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: 2CLZqaCZ4gVqjziII0vdG8uDMEMGj4FUVYNDv/ApHIfmYjFseiO4SF1DcH+X/diogQ4qCbSL/6DsKXsg1L5QuY4h1uOho4fzNb/jh8XsGfV6w7g4+UR2D0foTEDHB4HunkS2tFFk7KVllMDgQ6yxwFcXHqG47ElYrLcLOEeizq591rDDBn7teiiEHqWZv/dKM//+kaE19YHZ4cJC6lAbWeRn5CQ6btxrFyehOJ1D+mMOHUq1t4fLPc3mfBxUpyxTy1ixt7LSW/uuN+Fcq7htqVXreI2ZlEQHpxzTzgcjNuPdeR6wrhyGMU5cMjV49UolbpilBjF0s/H2TzPalZAH+9/ApgIq4IRlJ2X4f8KPykEoWROMFIWxaxAENqK9AUXpYtD8ZJAkepK0IP6AMM4gLjsMNsuVkfVjbIdCjMarkJg=
+MIME-Version: 1.0
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f19cf3af-bcee-4a9d-0772-08d6decbc22f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 May 2019 15:40:03.9601 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB5327
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2019-05-22_08:, , signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=30 reason=mlx
+	scancount=1 engine=8.0.1-1810050000 definitions=main-1905220110
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver][PATCH] apache2: add all extra/*.conf to conffiles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,77 +97,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 14:16:56 -0000
+X-List-Received-Date: Wed, 22 May 2019 16:10:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <3087737B10C14343BB346A4D702A346E@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-Commit includes removal of upstream merged patch.
-
-Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
----
- ...-string-to-s-printf-formatted-string.patch | 31 -------------------
- ...anager_1.8.2.bb => modemmanager_1.10.0.bb} |  6 ++--
- 2 files changed, 2 insertions(+), 35 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.8.2.bb => modemmanager_1.10.0.bb} (89%)
-
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch
-deleted file mode 100644
-index 5fbafbb5d..000000000
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From b8862e6af1c6d022b8c182098e7deddb874ece19 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 18 Dec 2018 23:10:44 -0800
--Subject: [PATCH] Do not pass null string to %s printf formatted string
--
--Here the string is already decided to be NULL and passing
--a null pointer to %s will not work
--
--Fixes
--error: '%s' directive argument is null
--
--Upstream-Status: Submitted [https://gitlab.freedesktop.org/mobile-broadband/ModemManager/merge_requests/67]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- plugins/mtk/mm-broadband-modem-mtk.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/plugins/mtk/mm-broadband-modem-mtk.c b/plugins/mtk/mm-broadband-modem-mtk.c
--index 475a63ac..541de4a5 100644
----- a/plugins/mtk/mm-broadband-modem-mtk.c
--+++ b/plugins/mtk/mm-broadband-modem-mtk.c
--@@ -191,7 +191,7 @@ get_supported_modes_ready (MMBaseModem *self,
-- 
--     response = mm_base_modem_at_command_finish (MM_BASE_MODEM (self), res, &error);
--     if (!response) {
---        mm_dbg ("Fail to get response %s", response);
--+        mm_dbg ("Fail to get response");
--         g_task_return_error (task, error);
--         g_object_unref (task);
--         return;
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-similarity index 89%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-index f9b302a3d..8254a85fc 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-@@ -13,11 +13,9 @@ DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native libxslt-native"
- 
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
-            file://0001-Do-not-set-Wno-unused-but-set-variable.patch \
--           file://0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch \
-            "
--
--SRC_URI[md5sum] = "a49c9f73e46c7b89e5efedda250d22c0"
--SRC_URI[sha256sum] = "96f2a5f0ed15532b4c4c185b756fdc0326e7c2027cea26a1264f91e098260f80"
-+SRC_URI[md5sum] = "92d25176d0cc9d588ca29700b33c7d98"
-+SRC_URI[sha256sum] = "fd0f39996025dac96995daea8a58ec7dd571582f7563a8ae0d5f65b571b76ee2"
- 
- S = "${WORKDIR}/ModemManager-${PV}"
- 
--- 
-2.17.1
-
+YWgsIGJhZCBjb25maWd1cmF0aW9uIG9uIG15IG1hY2hpbmUsIHdpbGwgc2VuZCBjb3JyZWN0IHYy
+IHNob3J0bHkNCg0KT24gNS8yMS8xOSA3OjUyIFBNLCBLaGVtIFJhaiB3cm90ZToNCj4gSGkgQWxl
+amFuZHJvDQo+IFBsZWFzZSByZWJhc2UvdGVzdCBpdCBvbiBtYXN0ZXIgaWYgeW91IGFyZSBwcm9w
+b3NpbmcgaXQgZm9yIG1hc3Rlci4NCj4gDQo+IE9uIFR1ZSwgTWF5IDIxLCAyMDE5IGF0IDEyOjAx
+IFBNIEFsZWphbmRybyBkZWwgQ2FzdGlsbG8NCj4gPGFsZWphbmRyby5kZWxjYXN0aWxsb0BuaS5j
+b20+IHdyb3RlOg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IEFsZWphbmRybyBkZWwgQ2FzdGlsbG8g
+PGFsZWphbmRyby5kZWxjYXN0aWxsb0BuaS5jb20+DQo+PiAtLS0NCj4+ICAgbWV0YS13ZWJzZXJ2
+ZXIvcmVjaXBlcy1odHRwZC9hcGFjaGUyL2FwYWNoZTJfMi40LjM0LmJiIHwgMyArKy0NCj4+ICAg
+MSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPj4NCj4+IGRp
+ZmYgLS1naXQgYS9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2FwYWNoZTIvYXBhY2hlMl8y
+LjQuMzQuYmIgYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2FwYWNoZTIvYXBhY2hlMl8y
+LjQuMzQuYmINCj4+IGluZGV4IDY2NDJmMmJkYS4uODdlNDFjMjBlIDEwMDY0NA0KPj4gLS0tIGEv
+bWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9hcGFjaGUyL2FwYWNoZTJfMi40LjM0LmJiDQo+
+PiArKysgYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL2FwYWNoZTIvYXBhY2hlMl8yLjQu
+MzQuYmINCj4+IEBAIC0xNTIsNyArMTUyLDggQEAgUEFDS0FHRVMgPSAiJHtQTn0tc2NyaXB0cyAk
+e1BOfS1kb2MgJHtQTn0tZGV2ICR7UE59LWRiZyAke1BOfSINCj4+ICAgQ09ORkZJTEVTXyR7UE59
+ID0gIiR7c3lzY29uZmRpcn0vJHtCUE59L2h0dHBkLmNvbmYgXA0KPj4gICAgICAgICAgICAgICAg
+ICAgICAgJHtzeXNjb25mZGlyfS8ke0JQTn0vbWFnaWMgXA0KPj4gICAgICAgICAgICAgICAgICAg
+ICAgJHtzeXNjb25mZGlyfS8ke0JQTn0vbWltZS50eXBlcyBcDQo+PiAtICAgICAgICAgICAgICAg
+ICAgICR7c3lzY29uZmRpcn0vaW5pdC5kLyR7QlBOfSAiDQo+PiArICAgICAgICAgICAgICAgICAg
+ICR7c3lzY29uZmRpcn0vJHtCUE59L2V4dHJhLyogXA0KPj4gKyAgICAgICAgICAgICAgICAgICAk
+e3N5c2NvbmZkaXJ9L2luaXQuZC8ke0JQTn0iDQo+Pg0KPj4gICAjIHdlIG92ZXJyaWRlIGhlcmUg
+cmF0aGVyIHRoYW4gYXBwZW5kIHNvIHRoYXQgLnNvIGxpbmtzIGFyZQ0KPj4gICAjIGluY2x1ZGVk
+IGluIHRoZSBydW50aW1lIHBhY2thZ2UgcmF0aGVyIHRoYW4gaGVyZSAoLWRldikNCj4+IC0tDQo+
+PiAyLjIxLjANCj4+DQo+PiAtLQ0KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18NCj4+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4+IE9w
+ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+PiBodHRwczovL3VybGRl
+ZmVuc2UucHJvb2Zwb2ludC5jb20vdjIvdXJsP3U9aHR0cC0zQV9fbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZ19tYWlsbWFuX2xpc3RpbmZvX29wZW5lbWJlZGRlZC0yRGRldmVsJmQ9RHdJQmFRJmM9SV8w
+WXdvS3k3ejVMTVRWZHlPNllDaUUydXpJMWpqWlp1SVBlbGNTaml4QSZyPXdOY3JMMmFrUm42amZ4
+aEhhS2F2VXJKQl9DOUpBTVh0eW5qTGQ4WnpnWFEmbT1qSnpJdWw3U1lHSVpld0VlZ01MZTBZNV80
+dE81UVJVMVNxbVZkRnc4bUt3JnM9SFZXSFl4dGltcEFYTTFFcDRuTmprZG9QWkFhTDUzSnlnd2o4
+Vk9ybG9hUSZlPQ0KDQotLSANCkNoZWVycywNCg0KQWxlamFuZHJvDQo=
 
