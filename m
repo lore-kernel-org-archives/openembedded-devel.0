@@ -1,39 +1,52 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CDE0C7E3B2
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
+	[209.85.222.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D20737E3B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 21:43:56 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 458R3H6pzHz9W;
-	Wed, 22 May 2019 23:43:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1558561436;
-	bh=n97F2YUBmgm/u0lCvJY+phB2szAHT6551L3ge17kM28=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=oXEWqSxEAr0fhpjglCShPZpPzw6zvRLELnb7kc+DpB6eldIxdm/7T9vsShQk2mthy
-	R8NIsAgZRytqRDQfz/Hizb9QUqB/L7uRDUp1JhgD8wqq8P1PZGPH/sl+YV6rhEj+zU
-	4RU/y16vIFV3w5Bp7L3G/rreR0fx4IoLjHdhwz4IQlpxJVqWfmgsv0izsvPv0GtLMa
-	yQ5Km8HeU1IMWQINrzdha8ze8V0zGiY1dVQeDAvS5eJp4Jrt+2kDV9bSJZ5CIu8v7a
-	kVj+b/ljxhdmwvpFXdruz42YiGQzCI6qB48Zjd3WP6W0hb1a+V3qh9X2UGR+cxd0gq
-	X1SYC8PO22byYe/UNmWVqgzB+Whgxya1DiN4X2mHflklwewDd888TdMZD56sfGladc
-	/f1sfVT+7uO60++b3k71+GG7wo/3yZN/rIv8o2yfZ040a1LqQuf0Xt0kHTa2ZVI/hn
-	bQ49KMrBSIhwytES9vY3S+JZVWSS8L5M3DwAjFuKbAbLGbNxLl+0bl5bBG0b3mAxlP
-	aBhn1XP2CxnNlnDgXfsYrYATLn4+utR6CeQVua5kfFJDyaDpIynnvCIl4b4AC2rt0u
-	FO041Jcr4icAIX2IMIKQAnZA3f/hnKoZiHF98+Vdc/4RsYiNBUGsittOGjQqnVfkY5
-	R/wd89OBgPlRH49e0/zF62MI=
-Date: Thu, 23 May 2019 00:43:53 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>
-Message-ID: <20190522214353.GA3164@localhost>
-References: <155854019588.26288.10003174813774515795@git.openembedded.org>
-	<20190522154956.B6296235353@git.openembedded.org>
-	<CALbNGRQ7VT88mxPhnW44pEOHRhGQ_QUg4WORMCyH17Q6KfE8wg@mail.gmail.com>
+	Wed, 22 May 2019 22:17:07 +0000 (UTC)
+Received: by mail-ua1-f65.google.com with SMTP id n7so1458719uap.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2019 15:17:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=yz44u4GjL2RYFmCCSCvnLrosWEkc2Dz627sM9pUhMf4=;
+	b=h75peHj/gPUF9pEppvBRKski1iHWxQmMhSKfj884rK+GW24f2PanrQXiES/hBNnJ+5
+	TK2rZ6I/UhlDgWwYhReDYPEb295qrS7D25nVdKA8pLhGKWrPn41mNWvOjVZS3BcZXZqC
+	oYUiSjBjccNJZK3v4xBZE+ivnx3vIwADEDaZMYsv8xGFNlPyCTJz2VLFnxoBx2V9h2O3
+	Mp+S+jlnTy/mr+qr18D5W5PG03p9ixjrNPinyffMEiKvKQyZlXmjuAiEp4psMpPw+Kkz
+	mc/yCKV9isGMIMmfr5/dwYcdwpgaA+VmFMHLTW2b22bbEnnfVvqP1fNAQHJGKCKUyC4D
+	IAGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=yz44u4GjL2RYFmCCSCvnLrosWEkc2Dz627sM9pUhMf4=;
+	b=tFQdtUpPYwdSC+RFMlDk9C3cPNFehJCAqUpODoYlXxo/wmbvP8H7NVSw8wKiodhYfW
+	RC63epafYYwECo0uez3+ucKuoyzd5oXMnpmP7IGMuvvxiil4E5J1w+djCp7PLc3LkvO3
+	6rnvt0MG3B/8ISAxvyFk/7u+kBoTC11oXhx+fut4bHXATbb3eLD5Do2A7Ds8qgcXmaxX
+	y1kF8KOaFWURJyg67hQPFQpqZX5uBMeLW3WycUavwBTGqv1I6vfKFlR0H4UbOlXVyvar
+	U1vahJs7BtAGIF7ff47s9uIa4HH3gwzcAuFZkKj25W6WK3GKO0xBo833AtsDOW/dpBE5
+	AgZw==
+X-Gm-Message-State: APjAAAVmf1Cdh1xzyT/APOhNy1naXKc/Ef3c0J4DlA3ChGmsmOZtIn0P
+	StLcgQ7Gnset/0rOYgKy+sJh0VCpIn1FH82DyBE=
+X-Google-Smtp-Source: APXvYqyYHYM3yPkRt6H0+DoLZa7WSHvOD5zMbhkaIAZaS6vZgiM4KoMYeHLk+oLUpHUjzp1hwHUWTvsNGmof9hsjBns=
+X-Received: by 2002:ab0:670c:: with SMTP id q12mr22510115uam.106.1558563428604;
+	Wed, 22 May 2019 15:17:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQ7VT88mxPhnW44pEOHRhGQ_QUg4WORMCyH17Q6KfE8wg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Andrei Gherzan <andrei@gherzan.ro>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] [meta-openembedded] 08/09: networkmanager: Update to 1.18.0
+References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
+	<20190426052056.GB26023@localhost>
+	<CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
+	<CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
+	<CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
+In-Reply-To: <CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Wed, 22 May 2019 15:16:57 -0700
+Message-ID: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,62 +59,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 21:43:57 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 May 2019 22:17:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 22, 2019 at 10:45:14PM +0200, Andreas Müller wrote:
-> On Wed, May 22, 2019 at 5:50 PM <git@git.openembedded.org> wrote:
+On Fri, Apr 26, 2019 at 1:34 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> On Fri, Apr 26, 2019 at 9:27 PM Martin Jansa <martin.jansa@gmail.com> wro=
+te:
 > >
-> > This is an automated email from the git hooks/post-receive script.
+> > I'm not using ne10 or libopus anywhere, it was just breaking
+> > sstate-diff-machines.sh script by adding that unjustifiable dependency
+> > based on TUNE_FEATURES.
 > >
-> > khem pushed a commit to branch master-next
-> > in repository meta-openembedded.
+> > I was going to send v2 with the armv7ve entries as requested by Andreas=
+ (I
+> > forgot that armv7ve tunes no longer include armv7a in overrides), but i=
+f
+> > someone wants to rework it to test for neon in TUNE_FEATURES feel free =
+to
+> > do so.
 > >
-> > commit 8ac5fe0ca3d32e2cf6be7555c1f84dba9106f96c
-> > Author: Andrei Gherzan <andrei@gherzan.ro>
-> > AuthorDate: Wed May 22 14:13:45 2019 +0100
-> >
-> >     networkmanager: Update to 1.18.0
-> >
-> >     One patch was dropped (0003-dlopen-failure.patch) as a similar one was
-> >     merged upstream. See:
-> >     https://github.com/NetworkManager/NetworkManager/commit/bd4957fcd78a0e64d26459e94ab3b84c91cd6f5f
-> >
-> >     Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
-> >     Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Wanted to do same but did not yet because of [1]: --with-libnm-glib
-> was removed. That means
-> 
-> * PACKAGECONFIG[glib] has to go
-> * bbappend in meta-oe has to go
-> * maybe glib-2.0 must be an unconditional dependency
+> > It didn't check for neon before, so at least this change didn't make it
+> > worse.
+> Yeah - you fix something you are not interested in and people (either
+> not using it) open up wishlists..
 
-glib-2.0 has always been an unconditional runtime as well as an
-indirect build dependency.
-
-PACKAGECONFIG[glib] was building the libnm-glib library that had been 
-deprecated since NetworkManager 1.0.
-
-> * please check if network-manager-applet builds (that required PACKAGECONFIG[glib]) set in the past
->...
-
-network-manager-applet needs it only for building the libnm-gtk library,
-which meta-gnome stopped building 2 months ago.
-
-> Cheers
-> 
-> Andreas
-
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+This got merged and backported to warrior without the _armv7ve
+over-ride, so Cortex-A15 etc targets are going to see some regression.
 
