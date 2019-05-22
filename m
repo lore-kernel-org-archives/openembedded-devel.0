@@ -1,52 +1,51 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
-	[209.85.222.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D20737E3B8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 90FC87E3BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 22:17:07 +0000 (UTC)
-Received: by mail-ua1-f65.google.com with SMTP id n7so1458719uap.12
+	Wed, 22 May 2019 23:28:26 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id 7so3874402wmo.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 15:17:09 -0700 (PDT)
+	Wed, 22 May 2019 16:28:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=yz44u4GjL2RYFmCCSCvnLrosWEkc2Dz627sM9pUhMf4=;
-	b=h75peHj/gPUF9pEppvBRKski1iHWxQmMhSKfj884rK+GW24f2PanrQXiES/hBNnJ+5
-	TK2rZ6I/UhlDgWwYhReDYPEb295qrS7D25nVdKA8pLhGKWrPn41mNWvOjVZS3BcZXZqC
-	oYUiSjBjccNJZK3v4xBZE+ivnx3vIwADEDaZMYsv8xGFNlPyCTJz2VLFnxoBx2V9h2O3
-	Mp+S+jlnTy/mr+qr18D5W5PG03p9ixjrNPinyffMEiKvKQyZlXmjuAiEp4psMpPw+Kkz
-	mc/yCKV9isGMIMmfr5/dwYcdwpgaA+VmFMHLTW2b22bbEnnfVvqP1fNAQHJGKCKUyC4D
-	IAGA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=OdQ+kJMqJGvpwDhc7RSRo7e/7BCGI1kUHytuV5YkTIU=;
+	b=LY5y23c3UfXS2s8gNZ/yvA6hmV9Ut+0nnhkAbRvz6cMvOWKydgW7W5oETGzs1GiQ0U
+	2JOoC9cA1toACIorlVXkitzpmDqoezLhMSwQmlV5tW5QZzz8VSyA/9KuRZuE5dq8o/R6
+	b/ghJkSAqk73zwozXlwwFM6fyIf7d6wEQNBYVkouGKGKgvCbwcIkjiRqeOqiwmGnHoAZ
+	nXa0KcYpwnNrgEteDWpyU/opYSpbDBXIAFgicIXn0ouRNR6cYAvqi5o/FvCvyibz8C0r
+	ovtH49QxnecWtD3t+UecTt80m5PXl6U2xZHmXokE9xd/dNkNQtK/nVnLEBtNgwCYb5LN
+	5cgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=yz44u4GjL2RYFmCCSCvnLrosWEkc2Dz627sM9pUhMf4=;
-	b=tFQdtUpPYwdSC+RFMlDk9C3cPNFehJCAqUpODoYlXxo/wmbvP8H7NVSw8wKiodhYfW
-	RC63epafYYwECo0uez3+ucKuoyzd5oXMnpmP7IGMuvvxiil4E5J1w+djCp7PLc3LkvO3
-	6rnvt0MG3B/8ISAxvyFk/7u+kBoTC11oXhx+fut4bHXATbb3eLD5Do2A7Ds8qgcXmaxX
-	y1kF8KOaFWURJyg67hQPFQpqZX5uBMeLW3WycUavwBTGqv1I6vfKFlR0H4UbOlXVyvar
-	U1vahJs7BtAGIF7ff47s9uIa4HH3gwzcAuFZkKj25W6WK3GKO0xBo833AtsDOW/dpBE5
-	AgZw==
-X-Gm-Message-State: APjAAAVmf1Cdh1xzyT/APOhNy1naXKc/Ef3c0J4DlA3ChGmsmOZtIn0P
-	StLcgQ7Gnset/0rOYgKy+sJh0VCpIn1FH82DyBE=
-X-Google-Smtp-Source: APXvYqyYHYM3yPkRt6H0+DoLZa7WSHvOD5zMbhkaIAZaS6vZgiM4KoMYeHLk+oLUpHUjzp1hwHUWTvsNGmof9hsjBns=
-X-Received: by 2002:ab0:670c:: with SMTP id q12mr22510115uam.106.1558563428604;
-	Wed, 22 May 2019 15:17:08 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190424190038.19593-1-Martin.Jansa@gmail.com>
-	<20190426052056.GB26023@localhost>
-	<CAMKF1sq3J1pjWp-sBijwi4VzGVAZWQCk8uznx0VbtODixTFY4A@mail.gmail.com>
-	<CA+chaQfZE7kZHown5xfxZQf+yQoB_iqtuH=LFKJhhoqJ7tVF0w@mail.gmail.com>
-	<CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
-In-Reply-To: <CALbNGRS7ceuKHHZL-EZ6VcprbpXUFS8k7coeVL9RKQMT2G_7hw@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Wed, 22 May 2019 15:16:57 -0700
-Message-ID: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-oe][PATCH] ne10: set NE10_TARGET_ARCH with an override instead of anonymous python
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=OdQ+kJMqJGvpwDhc7RSRo7e/7BCGI1kUHytuV5YkTIU=;
+	b=VBE4o6NiXrDoStVWay0SGPbEq/4/56cGekaG911cZUlhVpmfqpmzyDSclgYLx1vsWj
+	AvFVjPcmA8uBw5tG1f38hPFnctnZRtS7IymalqnS47elPp5sSTQNVH8qoYE7PD06wdEf
+	S+XsGKTjvvZJvvFI/2IWa+Zp9EoJGamO4KwjVJBHu7BiU2oEkORVA3GUA9OB25KZV408
+	mV5cqkNK+psSn5c9jhaZhxWWIE1mAxbJkHkwSi/mM6y0aR7ubarHDZH+CNYcdi2m6yOW
+	x+ywaUDwbmmkdvtdYnVepI3aHQC6gFQzD5wDHfZ6y1FpNrFFL68Xy45I29SKqpP0ZxGk
+	tFCw==
+X-Gm-Message-State: APjAAAUimJmFBaCzAFtXR/qCyDfn1ZDToO8P4kH+eOir0s/R1ZWvNuIL
+	vH5Az9tACuaMCCVMH4fQTTQXYE23
+X-Google-Smtp-Source: APXvYqzLV1B78wVbDXD1CY/rjcfRdnENXv8VJLdgOVJvqXgUllKK7X1CFBQemT1+nlyt4ugaIyE2HA==
+X-Received: by 2002:a1c:9eca:: with SMTP id h193mr9071670wme.125.1558567707103;
+	Wed, 22 May 2019 16:28:27 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	i185sm14232193wmg.32.2019.05.22.16.28.25
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 22 May 2019 16:28:25 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 May 2019 23:28:35 +0000
+Message-Id: <20190522232835.17963-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
+References: <CAJ86T=V8DsNKUgyBrhuwa_w4bgbqpnRK3jX5HGtX+vGUtJL_YA@mail.gmail.com>
+Subject: [meta-oe][PATCH] ne10, libopus: add armv7ve override as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,33 +58,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 22:17:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 May 2019 23:28:26 -0000
 
-On Fri, Apr 26, 2019 at 1:34 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Fri, Apr 26, 2019 at 9:27 PM Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> >
-> > I'm not using ne10 or libopus anywhere, it was just breaking
-> > sstate-diff-machines.sh script by adding that unjustifiable dependency
-> > based on TUNE_FEATURES.
-> >
-> > I was going to send v2 with the armv7ve entries as requested by Andreas=
- (I
-> > forgot that armv7ve tunes no longer include armv7a in overrides), but i=
-f
-> > someone wants to rework it to test for neon in TUNE_FEATURES feel free =
-to
-> > do so.
-> >
-> > It didn't check for neon before, so at least this change didn't make it
-> > worse.
-> Yeah - you fix something you are not interested in and people (either
-> not using it) open up wishlists..
+* fix the override in packagegroup-meta-oe.bb
+* alllow building ne10 for armv7ve (e.g. Cortex-A15)
 
-This got merged and backported to warrior without the _armv7ve
-over-ride, so Cortex-A15 etc targets are going to see some regression.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
+ meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb        | 3 ++-
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb                 | 4 +++-
+ 3 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 5fcf9899b6..af3e848124 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -220,7 +220,8 @@ RDEPENDS_packagegroup-meta-oe-shells ="\
+ 
+ NE10 = ""
+ NE10_aarch64 = "ne10"
+-NE10_arm7 = "ne10"
++NE10_armv7a = "ne10"
++NE10_armv7ve = "ne10"
+ 
+ RDEPENDS_packagegroup-meta-oe-support ="\
+     anthy asio atop augeas avro-c bdwgc frame grail \
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+index 50d49370ba..fb9bdc70fa 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+@@ -28,9 +28,10 @@ EXTRA_OECONF = " \
+     --enable-custom-modes \
+ "
+ 
+-# ne10 is available only for armv7a and aarch64
++# ne10 is available only for armv7a, armv7ve and aarch64
+ DEPENDS_append_aarch64 = " ne10"
+ DEPENDS_append_armv7a = " ne10"
++DEPENDS_append_armv7ve = " ne10"
+ 
+ python () {
+     if d.getVar('TARGET_FPU') in [ 'soft' ]:
+diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+index 4e8986de18..f37ccde1cb 100644
+--- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
++++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+@@ -15,13 +15,15 @@ PV .= "gitr+${SRCPV}"
+ 
+ inherit cmake
+ 
+-# Incompatible with archs other than armv7 and aarch64
++# Incompatible with archs other than armv7, armv7ve and aarch64
+ COMPATIBLE_MACHINE = "(^$)"
+ COMPATIBLE_MACHINE_aarch64 = "(.*)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
++COMPATIBLE_MACHINE_armv7ve = "(.*)"
+ NE10_TARGET_ARCH = ""
+ NE10_TARGET_ARCH_aarch64 = "aarch64"
+ NE10_TARGET_ARCH_armv7a = "armv7"
++NE10_TARGET_ARCH_armv7ve = "armv7"
+ 
+ EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
+ 
+-- 
+2.17.1
+
 
