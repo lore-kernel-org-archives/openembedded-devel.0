@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id F27357D691
+	by mail.openembedded.org (Postfix) with ESMTP id 036B37D691
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 12:11:00 +0000 (UTC)
+	Wed, 22 May 2019 12:15:45 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 458BLF3l7xz60
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 458BRj5Gqsz60
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 14:11:01 +0200 (CEST)
+	Wed, 22 May 2019 14:15:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1558527061;
-	bh=c54gKwUNj28KB/Uz9mvY+gDfjQG4QeSIUErmWKKmsaM=;
+	s=default; t=1558527346;
+	bh=tvAvqV/tsghJefKYSwGZm8+F1sBxx0jztmwqsgftOCc=;
 	h=From:To:Subject:Date:From;
-	b=UhSpSnxSCLxC7fjUEkFOYdM11XUtZPO4v3LyIIlSnks2TJdswoh1h45FUj5nq8+ax
-	m4LceDcaKuRgfQvaZipygALukIysCGXAKdWTHRLkKpzzeWgmT6d3j6xgZiyAmpK2dU
-	TfDu91CLPeA21Qw4uz/Q+eZ4Fb6JnqdNkqZu/oA+MXWSNfVeJMswHqvUGzRd1/adZV
-	sjYyr8+mz4AV2wi8XzgSmxYYeT4ARidsUg6aIPupDOA/dp9bu10J3yQCEcRUgRTa0P
-	T51au3/uCFMwN0WIOEabo0JmdH2dlYkK5HuFSz9yN5FTQUazxWALzqqWRzyMYg+ZVJ
-	fP5l6qMV9fAvOIPdG6w9FjoPGumpzK5R4nFIP26XHU8MIuclrr84LPsO9XMsccXqe3
-	E16/woFEYrAL4exWo9gU9QVlOfjdcSXfA0a1O5G8BmqSXtASDMV4RNEgHgoiPehVNe
-	5z6NMsnNTpbJwH55RHJ6NxmJr8S7VUsytJbTpDc3lEJQJyR+RUXzxtg2qwPSPKBV/K
-	7wNk0ezwB4Gi9i1NrxTFWI8ZFB/lKi/53VtJXpK9amADZh6AsRlBSdwkTx9wMKPLRr
-	og7xqnIB6qrthP0cjEp7AribAnR4nF/w57XES6JLReSXjk3FleiRMtpFDUFzqrrB4M
-	mBTEx9A7ghRWaUKKJ+06ZQEQ=
+	b=iWZNdi5FaQ0qmszeN8AsvsfIb/x1qj5rOCyW2od/ioPNRBWTC0Xxmmlp55veJI4uQ
+	bF0mWX+z0FEbh0/faJgR1RtmdkXeCCAYb558QfLvCnsfG+MHs+ckDIwppqd7D/AMsB
+	JuKldTKaCCYCFDFQTUe3BTuBleLiC48zcHRLkX/N6Wx+yJKvYDA40KjKgbCHvMrUoG
+	aj1ZxbEOHvtryBCXfHb60KCAcoeR8wRVaaGnVVelGdiK2MK+KS7oyjdIVfoytxQK3H
+	HJ6NIkmLNJ3uPTKYEd8qhpVNOMbYj4lhI041NI+nByf5J9rgv1GkYuA1kR5/Hz1Aqn
+	HNHutvv6lEdYKd5fSKJWu9MzINwZuToPaIG1IBnAI0dFe04/5aJW+RgotAWnmouN6K
+	7AQxdjcpASfUtd/vpdh9/DHfjI4r9FbB+XTbUM0B9Csi1k023w1swKlWbaYRrE36U7
+	vnqUP9iaxjqMUlvAulfAeRkkCLh95FTTLw4r0Q7E/ADaGWyFKE9Z3GWVPKfdiMb4PC
+	4MTmMedZsHsRMb+TfryksCfMHXkDmCIVYcJ4kd7n/iGJLZYk+ilVkefKojv4NMNszC
+	kCkgppPhLbcsyuhEN4C+xclvfVUCRFkx9iIryA19j+bNrw35TxhqxxQlFRkr2PPszl
+	j0/wr52sh5lNVXe7oj6pY4DU=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 May 2019 15:11:00 +0300
-Message-Id: <20190522121100.8858-1-bunk@stusta.de>
+Date: Wed, 22 May 2019 15:15:45 +0300
+Message-Id: <20190522121545.9136-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] dvb-apps: Remove workaround patch for ancient target compilers
+Subject: [meta-networking][PATCH] Remove ipsec-tools and umip
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,77 +40,3170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 12:11:01 -0000
+X-List-Received-Date: Wed, 22 May 2019 12:15:46 -0000
+
+ipsec-tools is dead upstream and upstream recommends
+against using it:
+http://ipsec-tools.sourceforge.net/
+
+More detailed explanation from the Debian maintainer:
+https://bugs.debian.org/917847
+
+umip was the only package depending on ipsec-tools.
+umip is dormant upstream since 2013.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../dvb-apps/dvb-apps_1.1.1.bb                |  1 -
- .../0002-Fix-compiler-warning-flags.patch     | 44 -------------------
- 2 files changed, 45 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/dvb-apps/files/0002-Fix-compiler-warning-flags.patch
+ ...01-Add-format-string-to-fprintf-call.patch |   26 -
+ ...with-SIGCHLD-and-include-sys-types.h.patch |   38 -
+ .../umip/0001-support-openssl-1.1.x.patch     |   88 --
+ ...MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch |  143 ---
+ ...ency-to-support-parallel-compilation.patch |   23 -
+ .../recipes-connectivity/umip/umip/mip6d      |  112 --
+ .../umip/umip/mip6d.service                   |   10 -
+ .../recipes-connectivity/umip/umip_1.0.bb     |   46 -
+ .../packagegroup-meta-networking.bb           |    4 +-
+ .../0001-Disable-gcc8-specific-warnings.patch |   86 --
+ .../0001-Fix-build-with-clang.patch           |  115 --
+ ...x-header-issues-found-with-musl-libc.patch |  249 ----
+ ...-ipsec-tools-add-openssl-1.1-support.patch | 1086 -----------------
+ ...id-potential-null-pointer-dereferenc.patch |   33 -
+ .../0002-Don-t-link-against-libfl.patch       |   87 --
+ ...-clear-memory-equal-to-size-of-array.patch |   30 -
+ .../ipsec-tools/ipsec-tools/configure.patch   |   13 -
+ .../ipsec-tools/fix-CVE-2015-4047.patch       |   38 -
+ .../ipsec-tools/fix-CVE-2016-10396.patch      |  207 ----
+ .../ipsec-tools/ipsec-tools/glibc-2.20.patch  |   23 -
+ ...-message-when-received-EINTR-message.patch |  220 ----
+ .../racoon-check-invalid-ivm.patch            |   26 -
+ .../racoon-check-invalid-pointers.patch       |   61 -
+ .../ipsec-tools/ipsec-tools/racoon.conf       |    8 -
+ .../ipsec-tools/racoon.conf.sample            |   40 -
+ .../ipsec-tools/ipsec-tools/racoon.service    |   11 -
+ .../ipsec-tools/ipsec-tools_0.8.2.bb          |   98 --
+ 27 files changed, 2 insertions(+), 2919 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch
+ delete mode 100755 meta-networking/recipes-connectivity/umip/umip/mip6d
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip/mip6d.service
+ delete mode 100644 meta-networking/recipes-connectivity/umip/umip_1.0.bb
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Disable-gcc8-specific-warnings.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-build-with-clang.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-header-issues-found-with-musl-libc.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-ipsec-tools-add-openssl-1.1-support.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-cfparse-clear-memory-equal-to-size-of-array.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/configure.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf.sample
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.service
+ delete mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.bb b/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.bb
-index 2aa7ccebf..3f491181d 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.bb
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.bb
-@@ -7,7 +7,6 @@ SRCREV = "3d43b280298c39a67d1d889e01e173f52c12da35"
- SRC_URI = "hg://linuxtv.org/hg;module=dvb-apps;protocol=http \
-           file://dvb-scan-table \
-           file://0001-Fix-generate-keynames.patch \
--          file://0002-Fix-compiler-warning-flags.patch \
-           file://0003-handle-static-shared-only-build.patch \
-           file://0004-Makefile-remove-test.patch \
-           file://0005-libucsi-optimization-removal.patch \
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0002-Fix-compiler-warning-flags.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0002-Fix-compiler-warning-flags.patch
+diff --git a/meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch b/meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch
 deleted file mode 100644
-index 9c6276beb..000000000
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0002-Fix-compiler-warning-flags.patch
+index 8e5f4da36..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch
 +++ /dev/null
-@@ -1,44 +0,0 @@
--From 9b8f1df41f7579da63c27763ff184d351e4c7fef Mon Sep 17 00:00:00 2001
--From: Simon Dawson <spdawson@gmail.com>
--Date: Sun, 4 Jan 2015 12:06:18 +0100
--Subject: [PATCH] Fix compiler warning flags
+@@ -1,26 +0,0 @@
+-From a0ad5128d14b022239445e251cf4a9826e86aa96 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 27 Jun 2017 07:48:31 -0700
+-Subject: [PATCH] Add format string to fprintf() call
 -
--  When building for bfin, the build fails as follows.
--
--  cc1: error: unrecognized command line option "-Wno-packed-bitfield-compat"
--
--An example of an autobuild failure arising from this is the following.
--
--  http://autobuild.buildroot.net/results/92e/92e472004812a3616f62d766a9ea07a997a66e89/
--  http://autobuild.buildroot.net/results/6e7/6e7b48ad9768349d983985c3067c4267cde80541/
--
--Clearly, not all toolchains provide a gcc that understands
--the -Wno-packed-bitfield-compat flag; remove usage of this flag.
--
--Wno-packed-bitfield-compat option was added in gcc 4.4.
--
--[Romain:
--  - This patch is also needed for bfin toolchains which use gcc 4.3.5
--  - Add a link to bfin build failure]
--Signed-off-by: Simon Dawson <spdawson@gmail.com>
--Signed-off-by: Romain Naour <romain.naour@openwide.fr>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- util/scan/Makefile | 2 +-
+- src/vt.c | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/util/scan/Makefile b/util/scan/Makefile
--index d48c478..88667c5 100644
----- a/util/scan/Makefile
--+++ b/util/scan/Makefile
--@@ -14,7 +14,7 @@ inst_bin = $(binaries)
+-diff --git a/src/vt.c b/src/vt.c
+-index 795d393..a533d3d 100644
+---- a/src/vt.c
+-+++ b/src/vt.c
+-@@ -499,7 +499,7 @@ static int vt_cmd_dump_candidates(const struct vt_handle *vh,
+- 		}
+- 		llen += cmdlen;
 - 
-- removing = atsc_psip_section.c atsc_psip_section.h
-- 
---CPPFLAGS += -Wno-packed-bitfield-compat -D__KERNEL_STRICT_NAMES
--+CPPFLAGS += -D__KERNEL_STRICT_NAMES
-- 
-- .PHONY: all
+--		ret = fprintf(vh->vh_stream, e->cmd);
+-+		ret = fprintf(vh->vh_stream, "%s", e->cmd);
+- 		if (ret < 0)
+- 			return ret;
 - 
 --- 
--1.9.3
+-2.13.2
 -
+diff --git a/meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch b/meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
+deleted file mode 100644
+index 153bced39..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From f567740cf64978ac9db014c786b6d0267b244f33 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 4 Mar 2018 22:30:30 -0800
+-Subject: [PATCH 1/2] replace SIGCLD with SIGCHLD and include sys/types.h
+-
+-Fixes
+-main.c:129:10: error: 'SIGCLD' undeclared (first use in this function); did you mean 'SIGCHLD'?
+-   signal(SIGCLD, sig_child);
+-          ^~~~~~
+-          SIGCHLD
+-
+-main.c:125:2: warning: implicit declaration of function 'umask' [-Wimplicit-function-declaration]
+-  umask(0);
+-  ^~~~~
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- src/main.c | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
+-
+-Index: git/src/main.c
+-===================================================================
+---- git.orig/src/main.c
+-+++ git/src/main.c
+-@@ -133,9 +133,9 @@ static void daemon_start(int ignsigcld)
+- 
+- 	if (ignsigcld) {
+- #ifdef SIGTSTP
+--		signal(SIGCLD, sig_child);
+-+		signal(SIGCHLD, sig_child);
+- #else
+--		signal(SIGCLD, SIG_IGN);
+-+		signal(SIGCHLD, SIG_IGN);
+- #endif
+- 	}
+- }
+diff --git a/meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch b/meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch
+deleted file mode 100644
+index d8355e25f..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch
++++ /dev/null
+@@ -1,88 +0,0 @@
+-From 62784e8b6df8ff3a907c1f816154808bea9d7064 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Tue, 25 Sep 2018 14:38:14 +0800
+-Subject: [PATCH] support openssl 1.1.x
+-
+-Long time no maintain from upstream since 2013
+-(git://git.umip.org/umip/umip.git), backport a
+-fix from openSUSE
+-
+-Upstream-Status: Backport [openSUSE]
+-http://ftp.gwdg.de/pub/opensuse/source/distribution/leap/15.0/repo/oss/src/mipv6d-2.0.2.umip.0.4-lp150.1.2.src.rpm
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/keygen.c | 12 ++++++++++++
+- src/mh.c     | 17 ++++++++++++++++-
+- 2 files changed, 28 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/keygen.c b/src/keygen.c
+-index e434a38..b902644 100644
+---- a/src/keygen.c
+-+++ b/src/keygen.c
+-@@ -172,6 +172,7 @@ static void build_kgen_token(struct in6_addr *addr, uint8_t *nonce,
+- 	uint8_t tmp[20];
+- #ifdef HAVE_LIBCRYPTO
+- 	unsigned int len = 20;
+-+#if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER < 0x1010006fL
+- 	HMAC_CTX ctx;
+- 
+- 	HMAC_CTX_init(&ctx);
+-@@ -182,6 +183,17 @@ static void build_kgen_token(struct in6_addr *addr, uint8_t *nonce,
+- 	HMAC_Final(&ctx, tmp, &len);
+- 	HMAC_CTX_cleanup(&ctx);
+- #else
+-+	HMAC_CTX *ctx;
+-+	ctx = HMAC_CTX_new();
+-+	HMAC_Init_ex(ctx, key_cn, sizeof(key_cn), EVP_sha1(), NULL);
+-+	HMAC_Update(ctx, (unsigned char *)addr, sizeof(*addr));
+-+	HMAC_Update(ctx, nonce, NONCE_LENGTH);
+-+	HMAC_Update(ctx, &id, sizeof(id));
+-+	HMAC_Final(ctx, tmp, &len);
+-+	HMAC_CTX_free(ctx);
+-+#endif // End of defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER < 0x1010006fL
+-+
+-+#else
+- 	HMAC_SHA1_CTX ctx;
+- 
+- 	HMAC_SHA1_init(&ctx, key_cn, sizeof(key_cn));
+-diff --git a/src/mh.c b/src/mh.c
+-index cba9a33..212eb5a 100644
+---- a/src/mh.c
+-+++ b/src/mh.c
+-@@ -518,9 +518,10 @@ static int calculate_auth_data(const struct iovec *iov, int iovlen,
+- 
+- #ifdef HAVE_LIBCRYPTO
+- 	unsigned int len = HMAC_SHA1_HASH_LEN;
+--	HMAC_CTX ctx;
+- 	const EVP_MD *evp_md = EVP_sha1();
+- 
+-+#if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER < 0x1010006fL
+-+	HMAC_CTX ctx;
+- 	HMAC_CTX_init(&ctx);
+- 	HMAC_Init_ex(&ctx, key, HMAC_SHA1_KEY_SIZE, evp_md, NULL);
+- 
+-@@ -532,6 +533,20 @@ static int calculate_auth_data(const struct iovec *iov, int iovlen,
+- 	HMAC_Final(&ctx, buf, &len);
+- 	HMAC_CTX_cleanup(&ctx);
+- #else
+-+	HMAC_CTX *ctx;
+-+	ctx = HMAC_CTX_new();
+-+	HMAC_Init_ex(ctx, key, HMAC_SHA1_KEY_SIZE, evp_md, NULL);
+-+
+-+	HMAC_Update(ctx, (uint8_t *)coa, sizeof(*coa));
+-+	HMAC_Update(ctx, (uint8_t *)cn, sizeof(*coa));
+-+	for (i = 0; i < iovlen; i++) {
+-+		HMAC_Update(ctx, (uint8_t *)iov[i].iov_base, iov[i].iov_len);
+-+	}
+-+	HMAC_Final(ctx, buf, &len);
+-+	HMAC_CTX_free(ctx);
+-+#endif
+-+
+-+#else
+- 	HMAC_SHA1_CTX ctx;
+- 
+- 	HMAC_SHA1_init(&ctx, key, HMAC_SHA1_KEY_SIZE);
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch b/meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
+deleted file mode 100644
+index 90d12da14..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
++++ /dev/null
+@@ -1,143 +0,0 @@
+-From 19b6cf8099e1974b5fc39086fc54103b0cbc2658 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 4 Mar 2018 23:01:25 -0800
+-Subject: [PATCH 2/2] replace PTHREAD_MUTEX_FAST_NP with PTHREAD_MUTEX_NORMAL
+-
+-PTHREAD_MUTEX_FAST_NP is not available on non-posix systems
+-e.g. musl
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- src/ha.c        | 2 +-
+- src/icmp6.c     | 2 +-
+- src/mh.c        | 2 +-
+- src/mn.c        | 2 +-
+- src/movement.c  | 2 +-
+- src/mpdisc_ha.c | 2 +-
+- src/mpdisc_mn.c | 2 +-
+- src/tqueue.c    | 2 +-
+- src/tunnelctl.c | 2 +-
+- 9 files changed, 9 insertions(+), 9 deletions(-)
+-
+-diff --git a/src/ha.c b/src/ha.c
+-index fbdcff0..b2f811e 100644
+---- a/src/ha.c
+-+++ b/src/ha.c
+-@@ -1246,7 +1246,7 @@ int ha_init(void)
+- {
+- 	pthread_mutexattr_t mattrs;
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&bu_worker_mutex, &mattrs) ||
+- 	    pthread_cond_init(&cond, NULL))
+- 		return -1;
+-diff --git a/src/icmp6.c b/src/icmp6.c
+-index 3695135..6460634 100644
+---- a/src/icmp6.c
+-+++ b/src/icmp6.c
+-@@ -243,7 +243,7 @@ int icmp6_init(void)
+- 		return -1;
+- 	/* create ICMP listener thread */
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&icmp6_sock.send_mutex, &mattrs) ||
+- 	    pthread_rwlock_init(&handler_lock, NULL) ||
+- 	    pthread_create(&icmp6_listener, NULL, icmp6_listen, NULL))
+-diff --git a/src/mh.c b/src/mh.c
+-index 60e345e..7928f4c 100644
+---- a/src/mh.c
+-+++ b/src/mh.c
+-@@ -204,7 +204,7 @@ int mh_init(void)
+- 		return -1;
+- 
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&mh_sock.send_mutex, &mattrs) ||
+- 	    pthread_rwlock_init(&handler_lock, NULL) ||
+- 	    pthread_create(&mh_listener, NULL, mh_listen, NULL))
+-diff --git a/src/mn.c b/src/mn.c
+-index 092cfcb..8f7f448 100644
+---- a/src/mn.c
+-+++ b/src/mn.c
+-@@ -1478,7 +1478,7 @@ static struct home_addr_info *hai_copy(struct home_addr_info *conf_hai)
+- 	if (hai != NULL) {
+- 		pthread_mutexattr_t mattrs;
+- 		pthread_mutexattr_init(&mattrs);
+--		pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+		pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 
+- 		memcpy(hai, conf_hai, sizeof(struct home_addr_info));
+- 
+-diff --git a/src/movement.c b/src/movement.c
+-index d985937..6400448 100644
+---- a/src/movement.c
+-+++ b/src/movement.c
+-@@ -2013,7 +2013,7 @@ int md_init(void)
+- 	int val;
+- 
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&iface_lock, &mattrs))
+- 		return -1;
+- 
+-diff --git a/src/mpdisc_ha.c b/src/mpdisc_ha.c
+-index 40ba05f..fd7a90d 100644
+---- a/src/mpdisc_ha.c
+-+++ b/src/mpdisc_ha.c
+-@@ -559,7 +559,7 @@ int mpd_ha_init(void)
+- {
+- 	pthread_mutexattr_t mattrs;
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&mpa_lock, &mattrs) ||
+- 	    pthread_rwlock_init(&prefix_lock, NULL) ||
+- 	    hash_init(&mpa_hash, DOUBLE_ADDR, MPA_BUCKETS) < 0)
+-diff --git a/src/mpdisc_mn.c b/src/mpdisc_mn.c
+-index 4873bd6..ada02bd 100644
+---- a/src/mpdisc_mn.c
+-+++ b/src/mpdisc_mn.c
+-@@ -267,7 +267,7 @@ int mpd_mn_init(void)
+- {
+- 	pthread_mutexattr_t mattrs;
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&mps_lock, &mattrs))
+- 		return -1;
+- 	if (hash_init(&mps_hash, DOUBLE_ADDR, MPS_BUCKETS) < 0)
+-diff --git a/src/tqueue.c b/src/tqueue.c
+-index 2f7aa0b..9c185b8 100644
+---- a/src/tqueue.c
+-+++ b/src/tqueue.c
+-@@ -65,7 +65,7 @@ int taskqueue_init(void)
+- {
+- 	pthread_mutexattr_t mattrs;
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&mutex, &mattrs) ||
+- 	    pthread_cond_init(&cond, NULL) ||
+- 	    pthread_create(&tq_runner, NULL, runner, NULL))
+-diff --git a/src/tunnelctl.c b/src/tunnelctl.c
+-index 23fc20b..813b8ec 100644
+---- a/src/tunnelctl.c
+-+++ b/src/tunnelctl.c
+-@@ -433,7 +433,7 @@ int tunnelctl_init(void)
+- 		return -1;
+- 
+- 	pthread_mutexattr_init(&mattrs);
+--	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_FAST_NP);
+-+	pthread_mutexattr_settype(&mattrs, PTHREAD_MUTEX_NORMAL);
+- 	if (pthread_mutex_init(&tnl_lock, &mattrs))
+- 		return -1;
+- 
+--- 
+-2.16.2
+-
+diff --git a/meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch b/meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch
+deleted file mode 100644
+index dbf008264..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-When "make -j10", the compilation will fail,
+-because scan.c has included gram.h, but gram.h was produced
+-after scan.c was compiled
+-
+-So add this dependency to ensure that gram.h is produced
+-before scan.c is produced.
+-
+-Upstream-Status: Inappropriate [upstream is not active]
+-
+-Signed-off-by: Roy.Li <RongQing.Li@windriver.com>
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+----
+- src/Makefile.am |    2 ++
+- 1 file changed, 2 insertions(+)
+-
+---- a/src/Makefile.am
+-+++ b/src/Makefile.am
+-@@ -81,3 +81,5 @@ CLEANFILES = gram.c gram.h \
+- 
+- DISTCLEANFILES = $(BUILT_SOURCES)
+- MAINTAINERCLEANFILES = Makefile.in
+-+
+-+scan.c: gram.h
+diff --git a/meta-networking/recipes-connectivity/umip/umip/mip6d b/meta-networking/recipes-connectivity/umip/umip/mip6d
+deleted file mode 100755
+index ebd70a6cc..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/mip6d
++++ /dev/null
+@@ -1,112 +0,0 @@
+-#!/bin/sh
+-#
+-# mip6d		Start script for the Mobile IPv6 daemon
+-#
+-# chkconfig:	- 55 25
+-# description:	The mobile IPv6 daemon allows nodes to remain \
+-#		reachable while moving around in the IPv6 Internet.
+-# processname:	mip6d
+-# config:	/etc/mip6d.conf
+-# config:	/etc/sysconfig/mip6d
+-#
+-### BEGIN INIT INFO
+-# Provides: mipv6-daemon
+-# Required-Start: $local_fs $remote_fs $network $named
+-# Required-Stop: $local_fs $remote_fs $network
+-# Should-Start: $syslog
+-# Should-Stop: $network $syslog
+-# Default-Start:
+-# Default-Stop: 0 1 6
+-# Short-Description: Start and stop Mobile IPV6 daemon
+-# Description:	The mobile IPv6 daemon allows nodes to remain
+-#		reachable while moving around in the IPv6 Internet.
+-### END INIT INFO
+-
+-# Source function library.
+-. /etc/init.d/functions
+-
+-if [ -f /etc/sysconfig/mip6d ]; then
+-	. /etc/sysconfig/mip6d
+-fi
+-
+-mip6d=/usr/sbin/mip6d
+-prog="mip6d"
+-lockfile=/var/lock/subsys/$prog
+-
+-start() {
+-	[ -x $mip6d ] || exit 5
+-	echo -n $"Starting $prog: "
+-	start-stop-daemon -S -x ${mip6d} && success || failure
+-	retval=$?
+-	echo
+-	[ $retval -eq 0 ] && touch ${lockfile}
+-	return $retval
+-}
+-
+-stop() {
+-	echo -n $"Stopping $prog: "
+-	start-stop-daemon -K -x $mip6d
+-	retval=$?
+-	echo
+-	[ $retval -eq 0 ] && rm -f ${lockfile}
+-	return $retval
+-}
+-
+-restart() {
+-	stop
+-	start
+-}
+-
+-reload()
+-{
+-	echo -n $"Reloading $prog configuration: "
+-	killproc $mip6d -HUP
+-	retval=$?
+-	echo
+-	return $retval
+-}
+-
+-force_reload() {
+-	restart
+-}
+-
+-rh_status() {
+-	status $prog
+-}
+-
+-rh_status_q() {
+-	rh_status > /dev/null 2>&1
+-}
+-
+-case "$1" in
+-  start)
+-	rh_status_q && exit 0
+-	$1
+-	;;
+-  stop)
+-	rh_status_q || exit 0
+-	$1
+-	;;
+-  restart)
+-	$1
+-	;;
+-  reload)
+-	rh_status_q || exit 7
+-	$1
+-	;;
+-  force-reload)
+-	force_reload
+-	;;
+-  status)
+-	rh_status
+-	;;
+-  condrestart|try-restart)
+-	rh_status_q || exit 0
+-	restart
+-	;;
+-  *)
+-	echo $"Usage: $prog {start|stop|status|restart|condrestart|try-restart|reload|force-reload}"
+-	exit 2
+-esac
+-
+-exit $?
+diff --git a/meta-networking/recipes-connectivity/umip/umip/mip6d.service b/meta-networking/recipes-connectivity/umip/umip/mip6d.service
+deleted file mode 100644
+index 2b5a5b9f1..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip/mip6d.service
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Unit]
+-Description=MIPL Mobile IPv6
+-After=network.target
+-
+-[Service]
+-EnvironmentFile=-@SYSCONFDIR@/sysconfig/mip6d
+-ExecStart=@SBINDIR@/mip6d $ARGS
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-connectivity/umip/umip_1.0.bb b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
+deleted file mode 100644
+index 43367b550..000000000
+--- a/meta-networking/recipes-connectivity/umip/umip_1.0.bb
++++ /dev/null
+@@ -1,46 +0,0 @@
+-SUMMARY = "Mobile IPv6 and NEMO for Linux"
+-DESCRIPTION = "UMIP is an open source implementation of Mobile IPv6 and NEMO \
+-Basic Support for Linux. It is released under the GPLv2 license. It supports \
+-the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 and \
+-RFC4877 (IPsec and IKEv2)."
+-HOMEPAGE = "http://umip.org/"
+-SECTION = "System Environment/Base"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
+-DEPENDS = "openssl ipsec-tools radvd indent-native bison-native"
+-
+-SRC_URI = "git://git.umip.org/umip/umip.git \
+-           file://add-dependency-to-support-parallel-compilation.patch \
+-           file://mip6d \
+-           file://mip6d.service \
+-           file://0001-Add-format-string-to-fprintf-call.patch \
+-           file://0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch \
+-           file://0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch \
+-           file://0001-support-openssl-1.1.x.patch \
+-           "
+-SRCREV = "cbd441c5db719db554ff2b4fcb02fef88ae2f791"
+-
+-# Depends on ipsec-tools which is already MACHINE_ARCH (and also RRECOMMENDS kernel modules)
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-EXTRA_OECONF = "--enable-vt"
+-
+-inherit autotools-brokensep systemd update-rc.d
+-
+-INITSCRIPT_NAME = "mip6d"
+-INITSCRIPT_PARAMS = "start 64 . stop 36 0 1 2 3 4 5 6 ."
+-
+-SYSTEMD_SERVICE_${PN} = "mip6d.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+-
+-do_install_append() {
+-	install -D -m 0755 ${WORKDIR}/mip6d ${D}${sysconfdir}/init.d/mip6d
+-	install -D -m 0644 ${WORKDIR}/mip6d.service ${D}${systemd_system_unitdir}/mip6d.service
+-	sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+-	    -e 's,@SBINDIR@,${sbindir},g' \
+-	    ${D}${systemd_system_unitdir}/mip6d.service
+-}
+-
+-RRECOMMENDS_${PN} = "kernel-module-mip6 kernel-module-ipv6"
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index 64eabe462..3770601a4 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -34,7 +34,7 @@ RDEPENDS_packagegroup-meta-networking-connectivity = "\
+     openconnect ez-ipupdate mosquitto sethdlc crda \
+     dibbler-server dibbler-client dibbler-requestor dibbler-relay \
+     libdnet ufw civetweb freeradius kea daq \
+-    mbedtls relayd snort dhcpcd rdate vlan umip vpnc \
++    mbedtls relayd snort dhcpcd rdate vlan vpnc \
+     inetutils wolfssl lftp miniupnpd networkmanager \
+     networkmanager-openvpn rdist nanomsg python-networkmanager \
+     wireless-regdb \
+@@ -93,7 +93,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
+     ncp ndisc6 mtr tinyproxy ssmping ntp \
+     wpan-tools bridge-utils ifenslave celt051 pimd \
+     nbd-client nbd-server nbd-trdump \
+-    phytool fwknop htpdate tcpreplay ipsec-tools \
++    phytool fwknop htpdate tcpreplay \
+     traceroute geoip-perl geoip geoipupdate esmtp \
+     libtdb netcf dnsmasq curlpp openipmi drbd-utils \
+     drbd tunctl dovecot ipvsadm stunnel chrony spice-protocol \
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Disable-gcc8-specific-warnings.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Disable-gcc8-specific-warnings.patch
+deleted file mode 100644
+index 11a910393..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Disable-gcc8-specific-warnings.patch
++++ /dev/null
+@@ -1,86 +0,0 @@
+-From 282d492e4cab7b4d9c7321f4c0c55b615948e280 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 11 May 2018 14:09:17 -0700
+-Subject: [PATCH] Disable gcc8 specific warnings
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/libipsec/ipsec_dump_policy.c |  5 +++++
+- src/libipsec/pfkey_dump.c        |  5 +++++
+- src/racoon/isakmp.c              | 11 ++++++++++-
+- 3 files changed, 20 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/libipsec/ipsec_dump_policy.c b/src/libipsec/ipsec_dump_policy.c
+-index 4d0eb77..c3fc842 100644
+---- a/src/libipsec/ipsec_dump_policy.c
+-+++ b/src/libipsec/ipsec_dump_policy.c
+-@@ -275,6 +275,10 @@ ipsec_dump_policy1(policy, delimiter, withports)
+- 	return buf;
+- }
+- 
+-+#pragma GCC diagnostic push
+-+#if defined(__GNUC__) && (__GNUC__ >= 8)
+-+#pragma GCC diagnostic ignored "-Wformat-truncation"
+-+#endif
+- static char *
+- ipsec_dump_ipsecrequest(buf, len, xisr, bound, withports)
+- 	char *buf;
+-@@ -419,3 +423,4 @@ set_address(buf, len, sa, withports)
+- 
+- 	return buf;
+- }
+-+#pragma GCC diagnostic pop
+-diff --git a/src/libipsec/pfkey_dump.c b/src/libipsec/pfkey_dump.c
+-index 4627ebc..451e535 100644
+---- a/src/libipsec/pfkey_dump.c
+-+++ b/src/libipsec/pfkey_dump.c
+-@@ -691,6 +691,10 @@ str_ipport(sa)
+- /*
+-  * set "/prefix[port number]" to buffer.
+-  */
+-+#pragma GCC diagnostic push
+-+#if defined(__GNUC__) && (__GNUC__ >= 8)
+-+#pragma GCC diagnostic ignored "-Wformat-truncation"
+-+#endif
+- static char *
+- str_prefport(family, pref, port, ulp)
+- 	u_int family, pref, port, ulp;
+-@@ -735,6 +739,7 @@ str_prefport(family, pref, port, ulp)
+- 
+- 	return buf;
+- }
+-+#pragma GCC diagnostic pop
+- 
+- static void
+- str_upperspec(ulp, p1, p2)
+-diff --git a/src/racoon/isakmp.c b/src/racoon/isakmp.c
+-index 7ff53a3..4addf24 100644
+---- a/src/racoon/isakmp.c
+-+++ b/src/racoon/isakmp.c
+-@@ -3124,7 +3124,12 @@ script_hook(iph1, script)
+- #endif
+- 
+- 	/* local address */
+-+#pragma GCC diagnostic push
+-+#if defined(__GNUC__) && (__GNUC__ >= 8)
+-+#pragma GCC diagnostic ignored "-Wstringop-truncation"
+-+#endif
+- 	GETNAMEINFO(iph1->local, addrstr, portstr);
+-+#pragma GCC diagnostic pop
+- 
+- 	if (script_env_append(&envp, &envc, "LOCAL_ADDR", addrstr) != 0) {
+- 		plog(LLV_ERROR, LOCATION, NULL, "Cannot set LOCAL_ADDR\n");
+-@@ -3138,8 +3143,12 @@ script_hook(iph1, script)
+- 
+- 	/* Peer address */
+- 	if (iph1->remote != NULL) {
+-+#pragma GCC diagnostic push
+-+#if defined(__GNUC__) && (__GNUC__ >= 8)
+-+#pragma GCC diagnostic ignored "-Wstringop-truncation"
+-+#endif
+- 		GETNAMEINFO(iph1->remote, addrstr, portstr);
+--
+-+#pragma GCC diagnostic pop
+- 		if (script_env_append(&envp, &envc, 
+- 		    "REMOTE_ADDR", addrstr) != 0) {
+- 			plog(LLV_ERROR, LOCATION, NULL, 
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-build-with-clang.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-build-with-clang.patch
+deleted file mode 100644
+index 5c0914745..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-build-with-clang.patch
++++ /dev/null
+@@ -1,115 +0,0 @@
+-From 9135ca401186fb14e5e5110bbb04d1ccc480360a Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 15 Nov 2016 04:15:44 +0000
+-Subject: [PATCH] Fix build with clang
+-
+-Fixes for following errors found by clang
+-
+-src/racoon/eaytest.c:316:6: error: comparison of array 'dnstr_w1' not equal to a null pointer is always true
+-      [-Werror,-Wtautological-pointer-compare]
+-        if (dnstr_w1 != NULL) {
+-            ^~~~~~~~    ~~~~
+-src/racoon/eaytest.c:326:6: error: comparison of array 'dnstr_w1' not equal to a null pointer is always true
+-      [-Werror,-Wtautological-pointer-compare]
+-        if (dnstr_w1 != NULL) {
+-            ^~~~~~~~    ~~~~
+-
+-src/racoon/isakmp.c:1134:11: error: promoted type 'int' of K&R function parameter is not compatible with the
+-                  parameter type 'u_int8_t' (aka 'unsigned char') declared in a previous prototype [-Werror,-Wknr-promoted-parameter]
+-                    u_int8_t etype;
+-                             ^
+-src/racoon/isakmp.c:184:48: note: previous declaration is here
+-        struct sockaddr *, struct sockaddr *, u_int8_t));
+-                                                     ^
+-            1 error generated.
+-
+-src/racoon/racoonctl.c:1457:15: error: incompatible pointer types passing 'struct evt_async *' to parameter of type
+-        'caddr_t' (aka 'char *') [-Werror,-Wincompatible-pointer-types]
+-                            print_cfg(ec, len);
+-                                      ^~
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/racoon/eaytest.c   |  4 ++--
+- src/racoon/isakmp.c    | 10 +++++-----
+- src/racoon/racoonctl.c |  7 +++----
+- 3 files changed, 10 insertions(+), 11 deletions(-)
+-
+-diff --git a/src/racoon/eaytest.c b/src/racoon/eaytest.c
+-index 1474bdc..d609e4f 100644
+---- a/src/racoon/eaytest.c
+-+++ b/src/racoon/eaytest.c
+-@@ -313,7 +313,7 @@ certtest(ac, av)
+- 
+- 	printf("exact match: succeed.\n");
+- 
+--	if (dnstr_w1 != NULL) {
+-+	if (dnstr_w1[0] != '\0') {
+- 		asn1dn = eay_str2asn1dn(dnstr_w1, strlen(dnstr_w1));
+- 		if (asn1dn == NULL || asn1dn->l == asn1dn0.l)
+- 			errx(1, "asn1dn length wrong for wildcard 1\n");
+-@@ -323,7 +323,7 @@ certtest(ac, av)
+- 		printf("wildcard 1 match: succeed.\n");
+- 	}
+- 
+--	if (dnstr_w1 != NULL) {
+-+	if (dnstr_w1[0] != '\0') {
+- 		asn1dn = eay_str2asn1dn(dnstr_w2, strlen(dnstr_w2));
+- 		if (asn1dn == NULL || asn1dn->l == asn1dn0.l)
+- 			errx(1, "asn1dn length wrong for wildcard 2\n");
+-diff --git a/src/racoon/isakmp.c b/src/racoon/isakmp.c
+-index 2672f7a..da7ebe8 100644
+---- a/src/racoon/isakmp.c
+-+++ b/src/racoon/isakmp.c
+-@@ -567,7 +567,7 @@ isakmp_main(msg, remote, local)
+- 
+- 				/* it must be responder's 1st exchange. */
+- 				if (isakmp_ph1begin_r(msg, remote, local,
+--					isakmp->etype) < 0)
+-+					(u_int8_t)isakmp->etype) < 0)
+- 					return -1;
+- 				break;
+- 
+-@@ -1128,10 +1128,10 @@ isakmp_ph1begin_i(rmconf, remote, local)
+- 
+- /* new negotiation of phase 1 for responder */
+- static int
+--isakmp_ph1begin_r(msg, remote, local, etype)
+--	vchar_t *msg;
+--	struct sockaddr *remote, *local;
+--	u_int8_t etype;
+-+isakmp_ph1begin_r(vchar_t *msg,
+-+	struct sockaddr *remote,
+-+	struct sockaddr *local,
+-+	u_int8_t etype)
+- {
+- 	struct isakmp *isakmp = (struct isakmp *)msg->v;
+- 	struct ph1handle *iph1;
+-diff --git a/src/racoon/racoonctl.c b/src/racoon/racoonctl.c
+-index da28ecd..bbf068e 100644
+---- a/src/racoon/racoonctl.c
+-+++ b/src/racoon/racoonctl.c
+-@@ -1299,9 +1299,8 @@ print_evt(evtdump)
+-  * Print ISAKMP mode config info (IP and banner)
+-  */
+- void
+--print_cfg(buf, len)
+--	caddr_t buf;
+--	int len;
+-+print_cfg(caddr_t buf,
+-+	int len)
+- {
+- 	struct evt_async *evtdump = (struct evt_async *)buf;
+- 	struct isakmp_data *attr;
+-@@ -1454,7 +1453,7 @@ handle_recv(combuf)
+- 		else if (evt_quit_event == ec->ec_type) {
+- 			switch (ec->ec_type) {
+- 			case EVT_PHASE1_MODE_CFG:
+--				print_cfg(ec, len);
+-+				print_cfg((caddr_t)ec, len);
+- 				break;
+- 			default:
+- 				print_evt(ec);
+--- 
+-1.9.1
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-header-issues-found-with-musl-libc.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-header-issues-found-with-musl-libc.patch
+deleted file mode 100644
+index 630ecdb5f..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-Fix-header-issues-found-with-musl-libc.patch
++++ /dev/null
+@@ -1,249 +0,0 @@
+-From 7d9585be093c9cb2428b373c0b0088bb778942d0 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 20 Mar 2017 21:37:47 -0700
+-Subject: [PATCH] Fix header issues found with musl libc
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/libipsec/ipsec_strerror.h         | 3 +++
+- src/libipsec/libpfkey.h               | 4 +++-
+- src/racoon/admin.c                    | 2 +-
+- src/racoon/backupsa.c                 | 6 +++---
+- src/racoon/cftoken.l                  | 4 ++++
+- src/racoon/logger.h                   | 3 +++
+- src/racoon/misc.h                     | 3 +++
+- src/racoon/missing/crypto/sha2/sha2.h | 3 +++
+- src/racoon/netdb_dnssec.h             | 3 +++
+- src/racoon/pfkey.c                    | 1 -
+- src/racoon/plog.h                     | 2 ++
+- src/racoon/str2val.h                  | 3 +++
+- src/racoon/vmbuf.h                    | 3 +++
+- src/setkey/extern.h                   | 3 ++-
+- src/setkey/setkey.c                   | 1 -
+- 15 files changed, 36 insertions(+), 8 deletions(-)
+-
+-diff --git a/src/libipsec/ipsec_strerror.h b/src/libipsec/ipsec_strerror.h
+-index 2b4264f..dac66a1 100644
+---- a/src/libipsec/ipsec_strerror.h
+-+++ b/src/libipsec/ipsec_strerror.h
+-@@ -34,6 +34,9 @@
+- #ifndef _IPSEC_STRERROR_H
+- #define _IPSEC_STRERROR_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- extern int __ipsec_errcode;
+- extern void __ipsec_set_strerror __P((const char *));
+- 
+-diff --git a/src/libipsec/libpfkey.h b/src/libipsec/libpfkey.h
+-index 61d2f2a..f7991b7 100644
+---- a/src/libipsec/libpfkey.h
+-+++ b/src/libipsec/libpfkey.h
+-@@ -34,6 +34,9 @@
+- #ifndef _LIBPFKEY_H
+- #define _LIBPFKEY_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- #ifndef KAME_LIBPFKEY_H
+- #define KAME_LIBPFKEY_H
+- 
+-@@ -43,7 +46,6 @@
+- 
+- #define PRIORITY_OFFSET_POSITIVE_MAX	0x3fffffff
+- #define PRIORITY_OFFSET_NEGATIVE_MAX	0x40000000
+--
+- struct sadb_msg;
+- extern void pfkey_sadump __P((struct sadb_msg *));
+- extern void pfkey_sadump_withports __P((struct sadb_msg *));
+-diff --git a/src/racoon/admin.c b/src/racoon/admin.c
+-index 4b1875b..03ea3f8 100644
+---- a/src/racoon/admin.c
+-+++ b/src/racoon/admin.c
+-@@ -36,7 +36,6 @@
+- #include <sys/types.h>
+- #include <sys/param.h>
+- #include <sys/socket.h>
+--#include <sys/signal.h>
+- #include <sys/stat.h>
+- #include <sys/un.h>
+- 
+-@@ -46,6 +45,7 @@
+- #include PATH_IPSEC_H
+- 
+- 
+-+#include <signal.h>
+- #include <stdlib.h>
+- #include <stdio.h>
+- #include <string.h>
+-diff --git a/src/racoon/backupsa.c b/src/racoon/backupsa.c
+-index 82d74ca..95307ca 100644
+---- a/src/racoon/backupsa.c
+-+++ b/src/racoon/backupsa.c
+-@@ -276,9 +276,9 @@ do { 								\
+- 		GETNEXTNUM(sa_args.a_keylen, strtoul);
+- 		GETNEXTNUM(sa_args.flags, strtoul);
+- 		GETNEXTNUM(sa_args.l_alloc, strtoul);
+--		GETNEXTNUM(sa_args.l_bytes, strtouq);
+--		GETNEXTNUM(sa_args.l_addtime, strtouq);
+--		GETNEXTNUM(sa_args.l_usetime, strtouq);
+-+		GETNEXTNUM(sa_args.l_bytes, strtoull);
+-+		GETNEXTNUM(sa_args.l_addtime, strtoull);
+-+		GETNEXTNUM(sa_args.l_usetime, strtoull);
+- 		GETNEXTNUM(sa_args.seq, strtoul);
+- 
+- #undef GETNEXTNUM
+-diff --git a/src/racoon/cftoken.l b/src/racoon/cftoken.l
+-index 1701922..787f4a9 100644
+---- a/src/racoon/cftoken.l
+-+++ b/src/racoon/cftoken.l
+-@@ -77,6 +77,10 @@
+- 
+- #include "cfparse.h"
+- 
+-+#ifndef GLOB_TILDE
+-+#define GLOB_TILDE 0
+-+#endif
+-+
+- int yyerrorcount = 0;
+- 
+- #if defined(YIPS_DEBUG)
+-diff --git a/src/racoon/logger.h b/src/racoon/logger.h
+-index 3fd3e94..67af5f0 100644
+---- a/src/racoon/logger.h
+-+++ b/src/racoon/logger.h
+-@@ -34,6 +34,9 @@
+- #ifndef _LOGGER_H
+- #define _LOGGER_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- struct log {
+- 	int head;
+- 	int siz;
+-diff --git a/src/racoon/misc.h b/src/racoon/misc.h
+-index 3e758d9..30d9825 100644
+---- a/src/racoon/misc.h
+-+++ b/src/racoon/misc.h
+-@@ -34,6 +34,9 @@
+- #ifndef _MISC_H
+- #define _MISC_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- #define BIT2STR(b) bit2str(b, sizeof(b)<<3)
+- 
+- #ifdef HAVE_FUNC_MACRO
+-diff --git a/src/racoon/missing/crypto/sha2/sha2.h b/src/racoon/missing/crypto/sha2/sha2.h
+-index 42bcc2a..c043dfe 100644
+---- a/src/racoon/missing/crypto/sha2/sha2.h
+-+++ b/src/racoon/missing/crypto/sha2/sha2.h
+-@@ -40,6 +40,9 @@
+- #ifndef __SHA2_H__
+- #define __SHA2_H__
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- #ifdef __cplusplus
+- extern "C" {
+- #endif
+-diff --git a/src/racoon/netdb_dnssec.h b/src/racoon/netdb_dnssec.h
+-index a11209d..98fd813 100644
+---- a/src/racoon/netdb_dnssec.h
+-+++ b/src/racoon/netdb_dnssec.h
+-@@ -34,6 +34,9 @@
+- #ifndef _NETDB_DNSSEC_H
+- #define _NETDB_DNSSEC_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- #ifndef T_CERT
+- #define T_CERT	37		/* defined by RFC2538 section 2 */
+- #endif
+-diff --git a/src/racoon/pfkey.c b/src/racoon/pfkey.c
+-index 8f26c19..a06c30e 100644
+---- a/src/racoon/pfkey.c
+-+++ b/src/racoon/pfkey.c
+-@@ -59,7 +59,6 @@
+- #include <sys/param.h>
+- #include <sys/socket.h>
+- #include <sys/queue.h>
+--#include <sys/sysctl.h>
+- 
+- #include <net/route.h>
+- #include <net/pfkeyv2.h>
+-diff --git a/src/racoon/plog.h b/src/racoon/plog.h
+-index ed43c8b..920c850 100644
+---- a/src/racoon/plog.h
+-+++ b/src/racoon/plog.h
+-@@ -34,6 +34,8 @@
+- #ifndef _PLOG_H
+- #define _PLOG_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+- #ifdef HAVE_STDARG_H
+- #include <stdarg.h>
+- #else
+-diff --git a/src/racoon/str2val.h b/src/racoon/str2val.h
+-index 4a7cec1..d3d698e 100644
+---- a/src/racoon/str2val.h
+-+++ b/src/racoon/str2val.h
+-@@ -34,6 +34,9 @@
+- #ifndef _STR2VAL_H
+- #define _STR2VAL_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- extern caddr_t val2str __P((const char *, size_t));
+- extern char *str2val __P((const char *, int, size_t *));
+- 
+-diff --git a/src/racoon/vmbuf.h b/src/racoon/vmbuf.h
+-index 3f2f4ea..8287a00 100644
+---- a/src/racoon/vmbuf.h
+-+++ b/src/racoon/vmbuf.h
+-@@ -34,6 +34,9 @@
+- #ifndef _VMBUF_H
+- #define _VMBUF_H
+- 
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+-+
+- /*
+-  *	bp      v
+-  *	v       v
+-diff --git a/src/setkey/extern.h b/src/setkey/extern.h
+-index 6f439fa..a1d9d14 100644
+---- a/src/setkey/extern.h
+-+++ b/src/setkey/extern.h
+-@@ -1,6 +1,7 @@
+- /*	$NetBSD: extern.h,v 1.5 2009/03/06 11:45:03 tteras Exp $	*/
+- 
+--
+-+#undef __P
+-+#define __P(protos)     protos          /* ANSI C prototypes */
+- 
+- void parse_init __P((void));
+- int parse __P((FILE **));
+-diff --git a/src/setkey/setkey.c b/src/setkey/setkey.c
+-index c400faa..51f8b75 100644
+---- a/src/setkey/setkey.c
+-+++ b/src/setkey/setkey.c
+-@@ -40,7 +40,6 @@
+- #include <sys/socket.h>
+- #include <sys/time.h>
+- #include <sys/stat.h>
+--#include <sys/sysctl.h>
+- #include <err.h>
+- #include <netinet/in.h>
+- #include <net/pfkeyv2.h>
+--- 
+-2.12.0
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-ipsec-tools-add-openssl-1.1-support.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-ipsec-tools-add-openssl-1.1-support.patch
+deleted file mode 100644
+index 228274436..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-ipsec-tools-add-openssl-1.1-support.patch
++++ /dev/null
+@@ -1,1086 +0,0 @@
+-From b572350a922187d43dd4629c3b43e19979fae3ef Mon Sep 17 00:00:00 2001
+-From: Eneas U de Queiroz <cote2004-github@yahoo.com>
+-Date: Tue, 25 Sep 2018 15:30:04 +0800
+-Subject: [PATCH] ipsec-tools: add openssl 1.1 support
+-
+-To: equeiroz@troianet.com.br
+-
+-This patch updates the calls to openssl 1.1 API, and adds a
+-compatibility layer so it compiles with (at least) openssl 1.0.2, I
+-haven't tested it with lower versions, but all that's needed is to edit
+-the openssl_compat.* files and add the missing functions there--they're
+-usually trivial.
+-
+-Signed-off-by: Eneas U de Queiroz <cote2004-github@yahoo.com>
+-
+-Upstream-Status: Submitted [https://sourceforge.net/p/ipsec-tools/mailman/message/36327963/]
+-https://github.com/openwrt/packages/blob/master/net/ipsec-tools/patches/015-openssl-1.1.patch
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/racoon/Makefile.am      |  10 +--
+- src/racoon/algorithm.c      |   6 +-
+- src/racoon/crypto_openssl.c | 197 +++++++++++++++++++++-------------------
+- src/racoon/crypto_openssl.h |   2 +-
+- src/racoon/eaytest.c        |   7 +-
+- src/racoon/ipsec_doi.c      |   2 +-
+- src/racoon/openssl_compat.c | 213 ++++++++++++++++++++++++++++++++++++++++++++
+- src/racoon/openssl_compat.h |  45 ++++++++++
+- src/racoon/plainrsa-gen.c   |  41 +++++----
+- src/racoon/prsa_par.y       |  28 ++++--
+- src/racoon/rsalist.c        |   5 +-
+- 11 files changed, 430 insertions(+), 126 deletions(-)
+- create mode 100644 src/racoon/openssl_compat.c
+- create mode 100644 src/racoon/openssl_compat.h
+-
+-diff --git a/src/racoon/Makefile.am b/src/racoon/Makefile.am
+-index 0662957..272b009 100644
+---- a/src/racoon/Makefile.am
+-+++ b/src/racoon/Makefile.am
+-@@ -4,7 +4,7 @@ sbin_PROGRAMS = racoon racoonctl plainrsa-gen
+- noinst_PROGRAMS = eaytest
+- include_racoon_HEADERS = racoonctl.h var.h vmbuf.h misc.h gcmalloc.h admin.h \
+- 	schedule.h sockmisc.h isakmp_var.h isakmp.h isakmp_xauth.h \
+--	isakmp_cfg.h isakmp_unity.h ipsec_doi.h evt.h
+-+	isakmp_cfg.h isakmp_unity.h ipsec_doi.h evt.h openssl_compat.h
+- lib_LTLIBRARIES = libracoon.la
+- 
+- adminsockdir=${localstatedir}/racoon
+-@@ -32,7 +32,7 @@ racoon_SOURCES = \
+- 	gssapi.c dnssec.c getcertsbyname.c privsep.c \
+- 	pfkey.c admin.c evt.c ipsec_doi.c oakley.c grabmyaddr.c vendorid.c \
+- 	policy.c localconf.c remoteconf.c crypto_openssl.c algorithm.c \
+--	proposal.c sainfo.c strnames.c \
+-+	openssl_compat.c proposal.c sainfo.c strnames.c \
+- 	plog.c logger.c schedule.c str2val.c \
+- 	safefile.c backupsa.c genlist.c rsalist.c \
+- 	cftoken.l cfparse.y prsa_tok.l prsa_par.y 
+-@@ -51,12 +51,12 @@ libracoon_la_SOURCES = kmpstat.c vmbuf.c sockmisc.c misc.c
+- libracoon_la_CFLAGS = -DNOUSE_PRIVSEP $(AM_CFLAGS)
+- 
+- plainrsa_gen_SOURCES = plainrsa-gen.c plog.c \
+--	crypto_openssl.c logger.c 
+-+	crypto_openssl.c logger.c openssl_compat.c
+- EXTRA_plainrsa_gen_SOURCES = $(MISSING_ALGOS)
+- plainrsa_gen_LDADD = $(CRYPTOBJS) vmbuf.o misc.o
+- plainrsa_gen_DEPENDENCIES = $(CRYPTOBJS) vmbuf.o misc.o
+- 
+--eaytest_SOURCES = eaytest.c plog.c logger.c
+-+eaytest_SOURCES = eaytest.c plog.c logger.c openssl_compat.c
+- EXTRA_eaytest_SOURCES = missing/crypto/sha2/sha2.c
+- eaytest_LDADD =	crypto_openssl_test.o vmbuf.o str2val.o misc_noplog.o \
+- 	$(CRYPTOBJS)
+-@@ -75,7 +75,7 @@ noinst_HEADERS = \
+- 	debugrm.h         isakmp.h      misc.h          sainfo.h \
+- 	dhgroup.h         isakmp_agg.h  netdb_dnssec.h  schedule.h \
+- 	isakmp_cfg.h      isakmp_xauth.h isakmp_unity.h isakmp_frag.h \
+--	throttle.h	  privsep.h \
+-+	throttle.h	  privsep.h     openssl_compat.h \
+- 	cfparse_proto.h	  cftoken_proto.h genlist.h     rsalist.h \
+- 	missing/crypto/sha2/sha2.h missing/crypto/rijndael/rijndael_local.h \
+- 	missing/crypto/rijndael/rijndael-api-fst.h \
+-diff --git a/src/racoon/algorithm.c b/src/racoon/algorithm.c
+-index 3fd50f6..66c874b 100644
+---- a/src/racoon/algorithm.c
+-+++ b/src/racoon/algorithm.c
+-@@ -128,7 +128,7 @@ static struct enc_algorithm oakley_encdef[] = {
+- { "aes",	algtype_aes,	OAKLEY_ATTR_ENC_ALG_AES,	16,
+- 		eay_aes_encrypt,	eay_aes_decrypt,
+- 		eay_aes_weakkey,	eay_aes_keylen, },
+--#ifdef HAVE_OPENSSL_CAMELLIA_H
+-+#if defined(HAVE_OPENSSL_CAMELLIA_H) && ! defined(OPENSSL_NO_CAMELLIA)
+- { "camellia",	algtype_camellia,	OAKLEY_ATTR_ENC_ALG_CAMELLIA,	16,
+- 		eay_camellia_encrypt,	eay_camellia_decrypt,
+- 		eay_camellia_weakkey,	eay_camellia_keylen, },
+-@@ -168,7 +168,7 @@ static struct enc_algorithm ipsec_encdef[] = {
+- { "twofish",	algtype_twofish,	IPSECDOI_ESP_TWOFISH,		16,
+- 		NULL,			NULL,
+- 		NULL,			eay_twofish_keylen, },
+--#ifdef HAVE_OPENSSL_IDEA_H
+-+#if defined(HAVE_OPENSSL_IDEA_H) && ! defined(OPENSSL_NO_IDEA)
+- { "3idea",	algtype_3idea,		IPSECDOI_ESP_3IDEA,		8,
+- 		NULL,			NULL,
+- 		NULL,			NULL, },
+-@@ -179,7 +179,7 @@ static struct enc_algorithm ipsec_encdef[] = {
+- { "rc4",	algtype_rc4,		IPSECDOI_ESP_RC4,		8,
+- 		NULL,			NULL,
+- 		NULL,			NULL, },
+--#ifdef HAVE_OPENSSL_CAMELLIA_H
+-+#if defined(HAVE_OPENSSL_CAMELLIA_H) && ! defined(OPENSSL_NO_CAMELLIA)
+- { "camellia",	algtype_camellia,	IPSECDOI_ESP_CAMELLIA,		16,
+- 		NULL,			NULL,
+- 		NULL,			eay_camellia_keylen, },
+-diff --git a/src/racoon/crypto_openssl.c b/src/racoon/crypto_openssl.c
+-index 55b076a..8fb358f 100644
+---- a/src/racoon/crypto_openssl.c
+-+++ b/src/racoon/crypto_openssl.c
+-@@ -90,6 +90,7 @@
+- #endif
+- #endif
+- #include "plog.h"
+-+#include "openssl_compat.h"
+- 
+- #define USE_NEW_DES_API
+- 
+-@@ -316,9 +317,12 @@ eay_cmp_asn1dn(n1, n2)
+- 			i = idx+1;
+- 			goto end;
+- 		}
+--		if ((ea->value->length == 1 && ea->value->data[0] == '*') ||
+--		    (eb->value->length == 1 && eb->value->data[0] == '*')) {
+--	    		if (OBJ_cmp(ea->object,eb->object)) {
+-+		ASN1_STRING *sa = X509_NAME_ENTRY_get_data(ea);
+-+		ASN1_STRING *sb = X509_NAME_ENTRY_get_data(eb);
+-+		if ((ASN1_STRING_length(sa) == 1 && ASN1_STRING_get0_data(sa)[0] == '*') ||
+-+		    (ASN1_STRING_length(sb) == 1 && ASN1_STRING_get0_data(sb)[0] == '*')) {
+-+	    		if (OBJ_cmp(X509_NAME_ENTRY_get_object(ea),
+-+				    X509_NAME_ENTRY_get_object(eb))) {
+- 				i = idx+1;
+- 				goto end;
+- 	    		}
+-@@ -430,7 +434,7 @@ cb_check_cert_local(ok, ctx)
+- 
+- 	if (!ok) {
+- 		X509_NAME_oneline(
+--				X509_get_subject_name(ctx->current_cert),
+-+				X509_get_subject_name(X509_STORE_CTX_get_current_cert(ctx)),
+- 				buf,
+- 				256);
+- 		/*
+-@@ -438,7 +442,8 @@ cb_check_cert_local(ok, ctx)
+- 		 * ok if they are self signed. But we should still warn
+- 		 * the user.
+-  		 */
+--		switch (ctx->error) {
+-+		int ctx_error = X509_STORE_CTX_get_error(ctx);
+-+		switch (ctx_error) {
+- 		case X509_V_ERR_CERT_HAS_EXPIRED:
+- 		case X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT:
+- 		case X509_V_ERR_INVALID_CA:
+-@@ -453,9 +458,9 @@ cb_check_cert_local(ok, ctx)
+- 		}
+- 		plog(log_tag, LOCATION, NULL,
+- 			"%s(%d) at depth:%d SubjectName:%s\n",
+--			X509_verify_cert_error_string(ctx->error),
+--			ctx->error,
+--			ctx->error_depth,
+-+			X509_verify_cert_error_string(ctx_error),
+-+			ctx_error,
+-+			X509_STORE_CTX_get_error_depth(ctx),
+- 			buf);
+- 	}
+- 	ERR_clear_error();
+-@@ -477,10 +482,11 @@ cb_check_cert_remote(ok, ctx)
+- 
+- 	if (!ok) {
+- 		X509_NAME_oneline(
+--				X509_get_subject_name(ctx->current_cert),
+-+				X509_get_subject_name(X509_STORE_CTX_get_current_cert(ctx)),
+- 				buf,
+- 				256);
+--		switch (ctx->error) {
+-+		int ctx_error=X509_STORE_CTX_get_error(ctx);
+-+		switch (ctx_error) {
+- 		case X509_V_ERR_UNABLE_TO_GET_CRL:
+- 			ok = 1;
+- 			log_tag = LLV_WARNING;
+-@@ -490,9 +496,9 @@ cb_check_cert_remote(ok, ctx)
+- 		}
+- 		plog(log_tag, LOCATION, NULL,
+- 			"%s(%d) at depth:%d SubjectName:%s\n",
+--			X509_verify_cert_error_string(ctx->error),
+--			ctx->error,
+--			ctx->error_depth,
+-+			X509_verify_cert_error_string(ctx_error),
+-+			ctx_error,
+-+			X509_STORE_CTX_get_error_depth(ctx),
+- 			buf);
+- 	}
+- 	ERR_clear_error();
+-@@ -516,14 +522,15 @@ eay_get_x509asn1subjectname(cert)
+- 	if (x509 == NULL)
+- 		goto error;
+- 
+-+	X509_NAME *subject_name = X509_get_subject_name(x509);
+- 	/* get the length of the name */
+--	len = i2d_X509_NAME(x509->cert_info->subject, NULL);
+-+	len = i2d_X509_NAME(subject_name, NULL);
+- 	name = vmalloc(len);
+- 	if (!name)
+- 		goto error;
+- 	/* get the name */
+- 	bp = (unsigned char *) name->v;
+--	len = i2d_X509_NAME(x509->cert_info->subject, &bp);
+-+	len = i2d_X509_NAME(subject_name, &bp);
+- 
+- 	X509_free(x509);
+- 
+-@@ -661,15 +668,16 @@ eay_get_x509asn1issuername(cert)
+- 	if (x509 == NULL)
+- 		goto error;
+- 
+-+	X509_NAME *issuer_name = X509_get_issuer_name(x509);
+- 	/* get the length of the name */
+--	len = i2d_X509_NAME(x509->cert_info->issuer, NULL);
+-+	len = i2d_X509_NAME(issuer_name, NULL);
+- 	name = vmalloc(len);
+- 	if (name == NULL)
+- 		goto error;
+- 
+- 	/* get the name */
+- 	bp = (unsigned char *) name->v;
+--	len = i2d_X509_NAME(x509->cert_info->issuer, &bp);
+-+	len = i2d_X509_NAME(issuer_name, &bp);
+- 
+- 	X509_free(x509);
+- 
+-@@ -850,7 +858,7 @@ eay_check_x509sign(source, sig, cert)
+- 		return -1;
+- 	}
+- 
+--	res = eay_rsa_verify(source, sig, evp->pkey.rsa);
+-+	res = eay_rsa_verify(source, sig, EVP_PKEY_get0_RSA(evp));
+- 
+- 	EVP_PKEY_free(evp);
+- 	X509_free(x509);
+-@@ -992,7 +1000,7 @@ eay_get_x509sign(src, privkey)
+- 	if (evp == NULL)
+- 		return NULL;
+- 
+--	sig = eay_rsa_sign(src, evp->pkey.rsa);
+-+	sig = eay_rsa_sign(src, EVP_PKEY_get0_RSA(evp));
+- 
+- 	EVP_PKEY_free(evp);
+- 
+-@@ -1079,7 +1087,11 @@ eay_strerror()
+- 	int line, flags;
+- 	unsigned long es;
+- 
+-+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+-+	es = 0; /* even when allowed by OPENSSL_API_COMPAT, it is defined as 0 */
+-+#else
+- 	es = CRYPTO_thread_id();
+-+#endif
+- 
+- 	while ((l = ERR_get_error_line_data(&file, &line, &data, &flags)) != 0){
+- 		n = snprintf(ebuf + len, sizeof(ebuf) - len,
+-@@ -1100,7 +1112,7 @@ vchar_t *
+- evp_crypt(vchar_t *data, vchar_t *key, vchar_t *iv, const EVP_CIPHER *e, int enc)
+- {
+- 	vchar_t *res;
+--	EVP_CIPHER_CTX ctx;
+-+	EVP_CIPHER_CTX *ctx;
+- 
+- 	if (!e)
+- 		return NULL;
+-@@ -1111,7 +1123,7 @@ evp_crypt(vchar_t *data, vchar_t *key, vchar_t *iv, const EVP_CIPHER *e, int enc
+- 	if ((res = vmalloc(data->l)) == NULL)
+- 		return NULL;
+- 
+--	EVP_CIPHER_CTX_init(&ctx);
+-+	ctx = EVP_CIPHER_CTX_new();
+- 
+- 	switch(EVP_CIPHER_nid(e)){
+- 	case NID_bf_cbc:
+-@@ -1125,54 +1137,41 @@ evp_crypt(vchar_t *data, vchar_t *key, vchar_t *iv, const EVP_CIPHER *e, int enc
+- 		/* XXX: can we do that also for algos with a fixed key size ?
+- 		 */
+- 		/* init context without key/iv
+--         */
+--        if (!EVP_CipherInit(&ctx, e, NULL, NULL, enc))
+--        {
+--            OpenSSL_BUG();
+--            vfree(res);
+--            return NULL;
+--        }
+-+                 */
+-+		if (!EVP_CipherInit(ctx, e, NULL, NULL, enc))
+-+			goto out;
+- 		
+--        /* update key size
+--         */
+--        if (!EVP_CIPHER_CTX_set_key_length(&ctx, key->l))
+--        {
+--            OpenSSL_BUG();
+--            vfree(res);
+--            return NULL;
+--        }
+--
+--        /* finalize context init with desired key size
+--         */
+--        if (!EVP_CipherInit(&ctx, NULL, (u_char *) key->v,
+-+		/* update key size
+-+		 */
+-+		if (!EVP_CIPHER_CTX_set_key_length(ctx, key->l))
+-+			goto out;
+-+
+-+		/* finalize context init with desired key size
+-+		 */
+-+		if (!EVP_CipherInit(ctx, NULL, (u_char *) key->v,
+- 							(u_char *) iv->v, enc))
+--        {
+--            OpenSSL_BUG();
+--            vfree(res);
+--            return NULL;
+--		}
+-+			goto out;
+- 		break;
+- 	default:
+--		if (!EVP_CipherInit(&ctx, e, (u_char *) key->v, 
+--							(u_char *) iv->v, enc)) {
+--			OpenSSL_BUG();
+--			vfree(res);
+--			return NULL;
+--		}
+-+		if (!EVP_CipherInit(ctx, e, (u_char *) key->v,
+-+							(u_char *) iv->v, enc))
+-+            		goto out;
+- 	}
+- 
+- 	/* disable openssl padding */
+--	EVP_CIPHER_CTX_set_padding(&ctx, 0); 
+-+	EVP_CIPHER_CTX_set_padding(ctx, 0);
+- 	
+--	if (!EVP_Cipher(&ctx, (u_char *) res->v, (u_char *) data->v, data->l)) {
+--		OpenSSL_BUG();
+--		vfree(res);
+--		return NULL;
+--	}
+-+	if (!EVP_Cipher(ctx, (u_char *) res->v, (u_char *) data->v, data->l))
+-+		goto out;
+- 
+--	EVP_CIPHER_CTX_cleanup(&ctx);
+-+	EVP_CIPHER_CTX_free(ctx);
+- 
+- 	return res;
+-+out:
+-+	EVP_CIPHER_CTX_free(ctx);
+-+	OpenSSL_BUG();
+-+	vfree(res);
+-+	return NULL;
+- }
+- 
+- int
+-@@ -1230,7 +1229,7 @@ eay_des_keylen(len)
+- 	return evp_keylen(len, EVP_des_cbc());
+- }
+- 
+--#ifdef HAVE_OPENSSL_IDEA_H
+-+#if defined(HAVE_OPENSSL_IDEA_H) && ! defined(OPENSSL_NO_IDEA)
+- /*
+-  * IDEA-CBC
+-  */
+-@@ -1587,7 +1586,7 @@ eay_aes_keylen(len)
+- 	return len;
+- }
+- 
+--#if defined(HAVE_OPENSSL_CAMELLIA_H)
+-+#if defined(HAVE_OPENSSL_CAMELLIA_H) && ! defined(OPENSSL_NO_CAMELLIA)
+- /*
+-  * CAMELLIA-CBC
+-  */
+-@@ -1680,9 +1679,9 @@ eay_hmac_init(key, md)
+- 	vchar_t *key;
+- 	const EVP_MD *md;
+- {
+--	HMAC_CTX *c = racoon_malloc(sizeof(*c));
+-+	HMAC_CTX *c = HMAC_CTX_new();
+- 
+--	HMAC_Init(c, key->v, key->l, md);
+-+	HMAC_Init_ex(c, key->v, key->l, md, NULL);
+- 
+- 	return (caddr_t)c;
+- }
+-@@ -1761,8 +1760,7 @@ eay_hmacsha2_512_final(c)
+- 
+- 	HMAC_Final((HMAC_CTX *)c, (unsigned char *) res->v, &l);
+- 	res->l = l;
+--	HMAC_cleanup((HMAC_CTX *)c);
+--	(void)racoon_free(c);
+-+	HMAC_CTX_free((HMAC_CTX *)c);
+- 
+- 	if (SHA512_DIGEST_LENGTH != res->l) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+-@@ -1811,8 +1809,7 @@ eay_hmacsha2_384_final(c)
+- 
+- 	HMAC_Final((HMAC_CTX *)c, (unsigned char *) res->v, &l);
+- 	res->l = l;
+--	HMAC_cleanup((HMAC_CTX *)c);
+--	(void)racoon_free(c);
+-+	HMAC_CTX_free((HMAC_CTX *)c);
+- 
+- 	if (SHA384_DIGEST_LENGTH != res->l) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+-@@ -1861,8 +1858,7 @@ eay_hmacsha2_256_final(c)
+- 
+- 	HMAC_Final((HMAC_CTX *)c, (unsigned char *) res->v, &l);
+- 	res->l = l;
+--	HMAC_cleanup((HMAC_CTX *)c);
+--	(void)racoon_free(c);
+-+	HMAC_CTX_free((HMAC_CTX *)c);
+- 
+- 	if (SHA256_DIGEST_LENGTH != res->l) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+-@@ -1912,8 +1908,7 @@ eay_hmacsha1_final(c)
+- 
+- 	HMAC_Final((HMAC_CTX *)c, (unsigned char *) res->v, &l);
+- 	res->l = l;
+--	HMAC_cleanup((HMAC_CTX *)c);
+--	(void)racoon_free(c);
+-+	HMAC_CTX_free((HMAC_CTX *)c);
+- 
+- 	if (SHA_DIGEST_LENGTH != res->l) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+-@@ -1962,8 +1957,7 @@ eay_hmacmd5_final(c)
+- 
+- 	HMAC_Final((HMAC_CTX *)c, (unsigned char *) res->v, &l);
+- 	res->l = l;
+--	HMAC_cleanup((HMAC_CTX *)c);
+--	(void)racoon_free(c);
+-+	HMAC_CTX_free((HMAC_CTX *)c);
+- 
+- 	if (MD5_DIGEST_LENGTH != res->l) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+-@@ -2266,6 +2260,7 @@ eay_dh_generate(prime, g, publen, pub, priv)
+- 	u_int32_t g;
+- {
+- 	BIGNUM *p = NULL;
+-+	BIGNUM *BNg = NULL;
+- 	DH *dh = NULL;
+- 	int error = -1;
+- 
+-@@ -2276,25 +2271,28 @@ eay_dh_generate(prime, g, publen, pub, priv)
+- 
+- 	if ((dh = DH_new()) == NULL)
+- 		goto end;
+--	dh->p = p;
+--	p = NULL;	/* p is now part of dh structure */
+--	dh->g = NULL;
+--	if ((dh->g = BN_new()) == NULL)
+-+	if ((BNg = BN_new()) == NULL)
+- 		goto end;
+--	if (!BN_set_word(dh->g, g))
+-+	if (!BN_set_word(BNg, g))
+- 		goto end;
+-+	if (! DH_set0_pqg(dh, p, NULL, BNg))
+-+		goto end;
+-+	BNg = NULL;
+-+	p = NULL;	/* p is now part of dh structure */
+- 
+- 	if (publen != 0)
+--		dh->length = publen;
+-+		DH_set_length(dh, publen);
+- 
+- 	/* generate public and private number */
+- 	if (!DH_generate_key(dh))
+- 		goto end;
+- 
+- 	/* copy results to buffers */
+--	if (eay_bn2v(pub, dh->pub_key) < 0)
+-+	BIGNUM *pub_key, *priv_key;
+-+	DH_get0_key(dh, (const BIGNUM**) &pub_key, (const BIGNUM**) &priv_key);
+-+	if (eay_bn2v(pub, pub_key) < 0)
+- 		goto end;
+--	if (eay_bn2v(priv, dh->priv_key) < 0) {
+-+	if (eay_bn2v(priv, priv_key) < 0) {
+- 		vfree(*pub);
+- 		goto end;
+- 	}
+-@@ -2306,6 +2304,8 @@ end:
+- 		DH_free(dh);
+- 	if (p != 0)
+- 		BN_free(p);
+-+	if (BNg != 0)
+-+		BN_free(BNg);
+- 	return(error);
+- }
+- 
+-@@ -2319,6 +2319,10 @@ eay_dh_compute(prime, g, pub, priv, pub2, key)
+- 	int l;
+- 	unsigned char *v = NULL;
+- 	int error = -1;
+-+	BIGNUM *p = BN_new();
+-+	BIGNUM *BNg = BN_new();
+-+	BIGNUM *pub_key = BN_new();
+-+	BIGNUM *priv_key = BN_new();
+- 
+- 	/* make public number to compute */
+- 	if (eay_v2bn(&dh_pub, pub2) < 0)
+-@@ -2327,19 +2331,21 @@ eay_dh_compute(prime, g, pub, priv, pub2, key)
+- 	/* make DH structure */
+- 	if ((dh = DH_new()) == NULL)
+- 		goto end;
+--	if (eay_v2bn(&dh->p, prime) < 0)
+-+	if (p == NULL || BNg == NULL || pub_key == NULL || priv_key == NULL)
+- 		goto end;
+--	if (eay_v2bn(&dh->pub_key, pub) < 0)
+-+
+-+	if (eay_v2bn(&p, prime) < 0)
+- 		goto end;
+--	if (eay_v2bn(&dh->priv_key, priv) < 0)
+-+	if (eay_v2bn(&pub_key, pub) < 0)
+- 		goto end;
+--	dh->length = pub2->l * 8;
+--
+--	dh->g = NULL;
+--	if ((dh->g = BN_new()) == NULL)
+-+	if (eay_v2bn(&priv_key, priv) < 0)
+- 		goto end;
+--	if (!BN_set_word(dh->g, g))
+-+	if (!BN_set_word(BNg, g))
+- 		goto end;
+-+	DH_set0_key(dh, pub_key, priv_key);
+-+	DH_set_length(dh, pub2->l * 8);
+-+	DH_set0_pqg(dh, p, NULL, BNg);
+-+	pub_key = priv_key = p = BNg = NULL;
+- 
+- 	if ((v = racoon_calloc(prime->l, sizeof(u_char))) == NULL)
+- 		goto end;
+-@@ -2350,6 +2356,14 @@ eay_dh_compute(prime, g, pub, priv, pub2, key)
+- 	error = 0;
+- 
+- end:
+-+	if (p != NULL)
+-+		BN_free(p);
+-+	if (BNg != NULL)
+-+		BN_free(BNg);
+-+	if (pub_key != NULL)
+-+		BN_free(pub_key);
+-+	if (priv_key != NULL)
+-+		BN_free(priv_key);
+- 	if (dh_pub != NULL)
+- 		BN_free(dh_pub);
+- 	if (dh != NULL)
+-@@ -2400,12 +2414,14 @@ eay_bn2v(var, bn)
+- void
+- eay_init()
+- {
+-+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+- 	OpenSSL_add_all_algorithms();
+- 	ERR_load_crypto_strings();
+- #ifdef HAVE_OPENSSL_ENGINE_H
+- 	ENGINE_load_builtin_engines();
+- 	ENGINE_register_all_complete();
+- #endif
+-+#endif
+- }
+- 
+- vchar_t *
+-@@ -2504,8 +2520,7 @@ binbuf_pubkey2rsa(vchar_t *binbuf)
+- 		goto out;
+- 	}
+- 	
+--	rsa_pub->n = mod;
+--	rsa_pub->e = exp;
+-+	RSA_set0_key(rsa_pub, mod, exp, NULL);
+- 
+- out:
+- 	return rsa_pub;
+-@@ -2582,5 +2597,5 @@ eay_random()
+- const char *
+- eay_version()
+- {
+--	return SSLeay_version(SSLEAY_VERSION);
+-+	return OpenSSL_version(OPENSSL_VERSION);
+- }
+-diff --git a/src/racoon/crypto_openssl.h b/src/racoon/crypto_openssl.h
+-index 66fac73..ee5b765 100644
+---- a/src/racoon/crypto_openssl.h
+-+++ b/src/racoon/crypto_openssl.h
+-@@ -124,7 +124,7 @@ extern vchar_t *eay_aes_decrypt __P((vchar_t *, vchar_t *, vchar_t *));
+- extern int eay_aes_weakkey __P((vchar_t *));
+- extern int eay_aes_keylen __P((int));
+- 
+--#if defined(HAVE_OPENSSL_CAMELLIA_H)
+-+#if defined(HAVE_OPENSSL_CAMELLIA_H) && ! defined(OPENSSL_NO_CAMELLIA)
+- /* Camellia */
+- extern vchar_t *eay_camellia_encrypt __P((vchar_t *, vchar_t *, vchar_t *));
+- extern vchar_t *eay_camellia_decrypt __P((vchar_t *, vchar_t *, vchar_t *));
+-diff --git a/src/racoon/eaytest.c b/src/racoon/eaytest.c
+-index d609e4f..d2d20da 100644
+---- a/src/racoon/eaytest.c
+-+++ b/src/racoon/eaytest.c
+-@@ -62,6 +62,7 @@
+- #include "dhgroup.h"
+- #include "crypto_openssl.h"
+- #include "gnuc.h"
+-+#include "openssl_compat.h"
+- 
+- #include "package_version.h"
+- 
+-@@ -103,7 +104,7 @@ rsa_verify_with_pubkey(src, sig, pubkey_txt)
+- 		printf ("PEM_read_PUBKEY(): %s\n", eay_strerror());
+- 		return -1;
+- 	}
+--	error = eay_check_rsasign(src, sig, evp->pkey.rsa);
+-+	error = eay_check_rsasign(src, sig, EVP_PKEY_get0_RSA(evp));
+- 
+- 	return error;
+- }
+-@@ -698,7 +699,7 @@ ciphertest(ac, av)
+- 			  eay_cast_encrypt, eay_cast_decrypt) < 0)
+- 	  return -1;
+- 	
+--#ifdef HAVE_OPENSSL_IDEA_H
+-+#if defined(HAVE_OPENSSL_IDEA_H) && ! defined(OPENSSL_NO_IDEA)
+- 	if (ciphertest_1 ("IDEA",
+- 			  &data, 8,
+- 			  &key, key.l,
+-@@ -715,7 +716,7 @@ ciphertest(ac, av)
+- 			  eay_rc5_encrypt, eay_rc5_decrypt) < 0)
+- 	  return -1;
+- #endif
+--#if defined(HAVE_OPENSSL_CAMELLIA_H)
+-+#if defined(HAVE_OPENSSL_CAMELLIA_H) && ! defined(OPENSSL_NO_CAMELLIA)
+- 	if (ciphertest_1 ("CAMELLIA",
+- 			  &data, 16,
+- 			  &key, key.l,
+-diff --git a/src/racoon/ipsec_doi.c b/src/racoon/ipsec_doi.c
+-index 08e4325..7b1604d 100644
+---- a/src/racoon/ipsec_doi.c
+-+++ b/src/racoon/ipsec_doi.c
+-@@ -715,7 +715,7 @@ out:
+- 	/* key length must not be specified on some algorithms */
+- 	if (keylen) {
+- 		if (sa->enctype == OAKLEY_ATTR_ENC_ALG_DES
+--#ifdef HAVE_OPENSSL_IDEA_H
+-+#if defined(HAVE_OPENSSL_IDEA_H) && ! defined(OPENSSL_NO_IDEA)
+- 		 || sa->enctype == OAKLEY_ATTR_ENC_ALG_IDEA
+- #endif
+- 		 || sa->enctype == OAKLEY_ATTR_ENC_ALG_3DES) {
+-diff --git a/src/racoon/openssl_compat.c b/src/racoon/openssl_compat.c
+-new file mode 100644
+-index 0000000..864b5fb
+---- /dev/null
+-+++ b/src/racoon/openssl_compat.c
+-@@ -0,0 +1,213 @@
+-+/*
+-+ * Copyright 2016 The OpenSSL Project Authors. All Rights Reserved.
+-+ *
+-+ * Licensed under the OpenSSL license (the "License").  You may not use
+-+ * this file except in compliance with the License.  You can obtain a copy
+-+ * in the file LICENSE in the source distribution or at
+-+ * https://www.openssl.org/source/license.html
+-+ */
+-+
+-+#include "openssl_compat.h"
+-+
+-+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+-+
+-+#include <string.h>
+-+
+-+static void *OPENSSL_zalloc(size_t num)
+-+{
+-+    void *ret = OPENSSL_malloc(num);
+-+
+-+    if (ret != NULL)
+-+        memset(ret, 0, num);
+-+    return ret;
+-+}
+-+
+-+int RSA_set0_key(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d)
+-+{
+-+    /* If the fields n and e in r are NULL, the corresponding input
+-+     * parameters MUST be non-NULL for n and e.  d may be
+-+     * left NULL (in case only the public key is used).
+-+     */
+-+    if ((r->n == NULL && n == NULL)
+-+        || (r->e == NULL && e == NULL))
+-+        return 0;
+-+
+-+    if (n != NULL) {
+-+        BN_free(r->n);
+-+        r->n = n;
+-+    }
+-+    if (e != NULL) {
+-+        BN_free(r->e);
+-+        r->e = e;
+-+    }
+-+    if (d != NULL) {
+-+        BN_free(r->d);
+-+        r->d = d;
+-+    }
+-+
+-+    return 1;
+-+}
+-+
+-+int RSA_set0_factors(RSA *r, BIGNUM *p, BIGNUM *q)
+-+{
+-+    /* If the fields p and q in r are NULL, the corresponding input
+-+     * parameters MUST be non-NULL.
+-+     */
+-+    if ((r->p == NULL && p == NULL)
+-+        || (r->q == NULL && q == NULL))
+-+        return 0;
+-+
+-+    if (p != NULL) {
+-+        BN_free(r->p);
+-+        r->p = p;
+-+    }
+-+    if (q != NULL) {
+-+        BN_free(r->q);
+-+        r->q = q;
+-+    }
+-+
+-+    return 1;
+-+}
+-+
+-+int RSA_set0_crt_params(RSA *r, BIGNUM *dmp1, BIGNUM *dmq1, BIGNUM *iqmp)
+-+{
+-+    /* If the fields dmp1, dmq1 and iqmp in r are NULL, the corresponding input
+-+     * parameters MUST be non-NULL.
+-+     */
+-+    if ((r->dmp1 == NULL && dmp1 == NULL)
+-+        || (r->dmq1 == NULL && dmq1 == NULL)
+-+        || (r->iqmp == NULL && iqmp == NULL))
+-+        return 0;
+-+
+-+    if (dmp1 != NULL) {
+-+        BN_free(r->dmp1);
+-+        r->dmp1 = dmp1;
+-+    }
+-+    if (dmq1 != NULL) {
+-+        BN_free(r->dmq1);
+-+        r->dmq1 = dmq1;
+-+    }
+-+    if (iqmp != NULL) {
+-+        BN_free(r->iqmp);
+-+        r->iqmp = iqmp;
+-+    }
+-+
+-+    return 1;
+-+}
+-+
+-+void RSA_get0_key(const RSA *r,
+-+                  const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)
+-+{
+-+    if (n != NULL)
+-+        *n = r->n;
+-+    if (e != NULL)
+-+        *e = r->e;
+-+    if (d != NULL)
+-+        *d = r->d;
+-+}
+-+
+-+void RSA_get0_factors(const RSA *r, const BIGNUM **p, const BIGNUM **q)
+-+{
+-+    if (p != NULL)
+-+        *p = r->p;
+-+    if (q != NULL)
+-+        *q = r->q;
+-+}
+-+
+-+void RSA_get0_crt_params(const RSA *r,
+-+                         const BIGNUM **dmp1, const BIGNUM **dmq1,
+-+                         const BIGNUM **iqmp)
+-+{
+-+    if (dmp1 != NULL)
+-+        *dmp1 = r->dmp1;
+-+    if (dmq1 != NULL)
+-+        *dmq1 = r->dmq1;
+-+    if (iqmp != NULL)
+-+        *iqmp = r->iqmp;
+-+}
+-+
+-+int DH_set0_pqg(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g)
+-+{
+-+    /* If the fields p and g in d are NULL, the corresponding input
+-+     * parameters MUST be non-NULL.  q may remain NULL.
+-+     */
+-+    if ((dh->p == NULL && p == NULL)
+-+        || (dh->g == NULL && g == NULL))
+-+        return 0;
+-+
+-+    if (p != NULL) {
+-+        BN_free(dh->p);
+-+        dh->p = p;
+-+    }
+-+    if (q != NULL) {
+-+        BN_free(dh->q);
+-+        dh->q = q;
+-+    }
+-+    if (g != NULL) {
+-+        BN_free(dh->g);
+-+        dh->g = g;
+-+    }
+-+
+-+    if (q != NULL) {
+-+        dh->length = BN_num_bits(q);
+-+    }
+-+
+-+    return 1;
+-+}
+-+
+-+void DH_get0_key(const DH *dh, const BIGNUM **pub_key, const BIGNUM **priv_key)
+-+{
+-+    if (pub_key != NULL)
+-+        *pub_key = dh->pub_key;
+-+    if (priv_key != NULL)
+-+        *priv_key = dh->priv_key;
+-+}
+-+
+-+int DH_set0_key(DH *dh, BIGNUM *pub_key, BIGNUM *priv_key)
+-+{
+-+    /* If the field pub_key in dh is NULL, the corresponding input
+-+     * parameters MUST be non-NULL.  The priv_key field may
+-+     * be left NULL.
+-+     */
+-+    if (dh->pub_key == NULL && pub_key == NULL)
+-+        return 0;
+-+
+-+    if (pub_key != NULL) {
+-+        BN_free(dh->pub_key);
+-+        dh->pub_key = pub_key;
+-+    }
+-+    if (priv_key != NULL) {
+-+        BN_free(dh->priv_key);
+-+        dh->priv_key = priv_key;
+-+    }
+-+
+-+    return 1;
+-+}
+-+
+-+int DH_set_length(DH *dh, long length)
+-+{
+-+    dh->length = length;
+-+    return 1;
+-+}
+-+
+-+HMAC_CTX *HMAC_CTX_new(void)
+-+{
+-+    return OPENSSL_zalloc(sizeof(HMAC_CTX));
+-+}
+-+
+-+void HMAC_CTX_free(HMAC_CTX *ctx)
+-+{
+-+    HMAC_CTX_cleanup(ctx);
+-+    OPENSSL_free(ctx);
+-+}
+-+
+-+RSA *EVP_PKEY_get0_RSA(EVP_PKEY *pkey)
+-+{
+-+    if (pkey->type != EVP_PKEY_RSA) {
+-+        return NULL;
+-+    }
+-+    return pkey->pkey.rsa;
+-+}
+-+
+-+
+-+#endif /* OPENSSL_VERSION_NUMBER */
+-diff --git a/src/racoon/openssl_compat.h b/src/racoon/openssl_compat.h
+-new file mode 100644
+-index 0000000..9e152c2
+---- /dev/null
+-+++ b/src/racoon/openssl_compat.h
+-@@ -0,0 +1,45 @@
+-+#ifndef OPENSSL_COMPAT_H
+-+#define OPENSSL_COMPAT_H
+-+
+-+#include <openssl/opensslv.h>
+-+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+-+
+-+#include <openssl/rsa.h>
+-+#include <openssl/dh.h>
+-+#include <openssl/evp.h>
+-+#include <openssl/hmac.h>
+-+
+-+int RSA_set0_key(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d);
+-+int RSA_set0_factors(RSA *r, BIGNUM *p, BIGNUM *q);
+-+int RSA_set0_crt_params(RSA *r, BIGNUM *dmp1, BIGNUM *dmq1, BIGNUM *iqmp);
+-+void RSA_get0_key(const RSA *r, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d);
+-+void RSA_get0_factors(const RSA *r, const BIGNUM **p, const BIGNUM **q);
+-+void RSA_get0_crt_params(const RSA *r, const BIGNUM **dmp1, const BIGNUM **dmq1, const BIGNUM **iqmp);
+-+
+-+int DH_set0_pqg(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g);
+-+void DH_get0_key(const DH *dh, const BIGNUM **pub_key, const BIGNUM **priv_key);
+-+int DH_set0_key(DH *dh, BIGNUM *pub_key, BIGNUM *priv_key);
+-+int DH_set_length(DH *dh, long length);
+-+
+-+HMAC_CTX *HMAC_CTX_new(void);
+-+void HMAC_CTX_free(HMAC_CTX* ctx);
+-+
+-+RSA *EVP_PKEY_get0_RSA(EVP_PKEY *pkey);
+-+
+-+#define ASN1_STRING_length(s) s->length
+-+#define ASN1_STRING_get0_data(s) s->data
+-+
+-+#define X509_get_subject_name(x) x->cert_info->subject
+-+#define X509_get_issuer_name(x) x->cert_info->issuer
+-+#define X509_NAME_ENTRY_get_data(n) n->value
+-+#define X509_NAME_ENTRY_get_object(n) n->object
+-+#define X509_STORE_CTX_get_current_cert(ctx) ctx->current_cert
+-+#define X509_STORE_CTX_get_error(ctx) ctx->error
+-+#define X509_STORE_CTX_get_error_depth(ctx) ctx->error_depth
+-+
+-+#define OPENSSL_VERSION SSLEAY_VERSION
+-+#define OpenSSL_version SSLeay_version
+-+
+-+#endif /* OPENSSL_VERSION_NUMBER */
+-+
+-+#endif /* OPENSSL_COMPAT_H */
+-diff --git a/src/racoon/plainrsa-gen.c b/src/racoon/plainrsa-gen.c
+-index cad1861..b949b08 100644
+---- a/src/racoon/plainrsa-gen.c
+-+++ b/src/racoon/plainrsa-gen.c
+-@@ -60,6 +60,7 @@
+- #include "vmbuf.h"
+- #include "plog.h"
+- #include "crypto_openssl.h"
+-+#include "openssl_compat.h"
+- 
+- #include "package_version.h"
+- 
+-@@ -90,12 +91,14 @@ mix_b64_pubkey(const RSA *key)
+- 	char *binbuf;
+- 	long binlen, ret;
+- 	vchar_t *res;
+--	
+--	binlen = 1 + BN_num_bytes(key->e) + BN_num_bytes(key->n);
+-+	const BIGNUM *e, *n;
+-+
+-+	RSA_get0_key(key, &n, &e, NULL);
+-+	binlen = 1 + BN_num_bytes(e) + BN_num_bytes(n);
+- 	binbuf = malloc(binlen);
+- 	memset(binbuf, 0, binlen);
+--	binbuf[0] = BN_bn2bin(key->e, (unsigned char *) &binbuf[1]);
+--	ret = BN_bn2bin(key->n, (unsigned char *) (&binbuf[binbuf[0] + 1]));
+-+	binbuf[0] = BN_bn2bin(e, (unsigned char *) &binbuf[1]);
+-+	ret = BN_bn2bin(n, (unsigned char *) (&binbuf[binbuf[0] + 1]));
+- 	if (1 + binbuf[0] + ret != binlen) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+- 		     "Pubkey generation failed. This is really strange...\n");
+-@@ -131,16 +134,20 @@ print_rsa_key(FILE *fp, const RSA *key)
+- 	
+- 	fprintf(fp, "# : PUB 0s%s\n", pubkey64->v);
+- 	fprintf(fp, ": RSA\t{\n");
+--	fprintf(fp, "\t# RSA %d bits\n", BN_num_bits(key->n));
+-+	const BIGNUM *n, *e, *d, *p, *q, *dmp1, *dmq1, *iqmp;
+-+	RSA_get0_key(key, &n, &e, &d);
+-+	RSA_get0_factors(key, &p, &q);
+-+	RSA_get0_crt_params(key, &dmp1, &dmq1, &iqmp);
+-+	fprintf(fp, "\t# RSA %d bits\n", BN_num_bits(n));
+- 	fprintf(fp, "\t# pubkey=0s%s\n", pubkey64->v);
+--	fprintf(fp, "\tModulus: 0x%s\n", lowercase(BN_bn2hex(key->n)));
+--	fprintf(fp, "\tPublicExponent: 0x%s\n", lowercase(BN_bn2hex(key->e)));
+--	fprintf(fp, "\tPrivateExponent: 0x%s\n", lowercase(BN_bn2hex(key->d)));
+--	fprintf(fp, "\tPrime1: 0x%s\n", lowercase(BN_bn2hex(key->p)));
+--	fprintf(fp, "\tPrime2: 0x%s\n", lowercase(BN_bn2hex(key->q)));
+--	fprintf(fp, "\tExponent1: 0x%s\n", lowercase(BN_bn2hex(key->dmp1)));
+--	fprintf(fp, "\tExponent2: 0x%s\n", lowercase(BN_bn2hex(key->dmq1)));
+--	fprintf(fp, "\tCoefficient: 0x%s\n", lowercase(BN_bn2hex(key->iqmp)));
+-+	fprintf(fp, "\tModulus: 0x%s\n", lowercase(BN_bn2hex(n)));
+-+	fprintf(fp, "\tPublicExponent: 0x%s\n", lowercase(BN_bn2hex(e)));
+-+	fprintf(fp, "\tPrivateExponent: 0x%s\n", lowercase(BN_bn2hex(d)));
+-+	fprintf(fp, "\tPrime1: 0x%s\n", lowercase(BN_bn2hex(p)));
+-+	fprintf(fp, "\tPrime2: 0x%s\n", lowercase(BN_bn2hex(q)));
+-+	fprintf(fp, "\tExponent1: 0x%s\n", lowercase(BN_bn2hex(dmp1)));
+-+	fprintf(fp, "\tExponent2: 0x%s\n", lowercase(BN_bn2hex(dmq1)));
+-+	fprintf(fp, "\tCoefficient: 0x%s\n", lowercase(BN_bn2hex(iqmp)));
+- 	fprintf(fp, "  }\n");
+- 
+- 	vfree(pubkey64);
+-@@ -203,11 +210,13 @@ int
+- gen_rsa_key(FILE *fp, size_t bits, unsigned long exp)
+- {
+- 	int ret;
+--	RSA *key;
+-+	RSA *key = RSA_new();
+-+	BIGNUM *e = BN_new();
+- 
+--	key = RSA_generate_key(bits, exp, NULL, NULL);
+--	if (!key) {
+-+	BN_set_word(e, exp);
+-+	if (! RSA_generate_key_ex(key, bits, e, NULL)) {
+- 		fprintf(stderr, "RSA_generate_key(): %s\n", eay_strerror());
+-+		RSA_free(key);
+- 		return -1;
+- 	}
+- 	
+-diff --git a/src/racoon/prsa_par.y b/src/racoon/prsa_par.y
+-index 1987e4d..27ce4c6 100644
+---- a/src/racoon/prsa_par.y
+-+++ b/src/racoon/prsa_par.y
+-@@ -68,6 +68,7 @@
+- #include "isakmp_var.h"
+- #include "handler.h"
+- #include "crypto_openssl.h"
+-+#include "openssl_compat.h"
+- #include "sockmisc.h"
+- #include "rsalist.h"
+- 
+-@@ -85,7 +86,18 @@ char *prsa_cur_fname = NULL;
+- struct genlist *prsa_cur_list = NULL;
+- enum rsa_key_type prsa_cur_type = RSA_TYPE_ANY;
+- 
+--static RSA *rsa_cur;
+-+struct my_rsa_st {
+-+	BIGNUM *n;
+-+	BIGNUM *e;
+-+	BIGNUM *d;
+-+	BIGNUM *p;
+-+	BIGNUM *q;
+-+	BIGNUM *dmp1;
+-+	BIGNUM *dmq1;
+-+	BIGNUM *iqmp;
+-+};
+-+
+-+static struct my_rsa_st *rsa_cur;
+- 
+- void
+- prsaerror(const char *s, ...)
+-@@ -201,8 +213,12 @@ rsa_statement:
+- 				rsa_cur->iqmp = NULL;
+- 			}
+- 		}
+--		$$ = rsa_cur;
+--		rsa_cur = RSA_new();
+-+		RSA * rsa_tmp = RSA_new();
+-+		RSA_set0_key(rsa_tmp, rsa_cur->n, rsa_cur->e, rsa_cur->d);
+-+		RSA_set0_factors(rsa_tmp, rsa_cur->p, rsa_cur->q);
+-+		RSA_set0_crt_params(rsa_tmp, rsa_cur->dmp1, rsa_cur->dmq1, rsa_cur->iqmp);
+-+		$$ = rsa_tmp;
+-+		memset(rsa_cur, 0, sizeof(struct my_rsa_st));
+- 	}
+- 	| TAG_PUB BASE64
+- 	{
+-@@ -351,10 +367,12 @@ prsa_parse_file(struct genlist *list, char *fname, enum rsa_key_type type)
+- 	prsa_cur_fname = fname;
+- 	prsa_cur_list = list;
+- 	prsa_cur_type = type;
+--	rsa_cur = RSA_new();
+-+	rsa_cur = malloc(sizeof(struct my_rsa_st));
+-+	memset(rsa_cur, 0, sizeof(struct my_rsa_st));
+- 	ret = prsaparse();
+- 	if (rsa_cur) {
+--		RSA_free(rsa_cur);
+-+		memset(rsa_cur, 0, sizeof(struct my_rsa_st));
+-+		free(rsa_cur);
+- 		rsa_cur = NULL;
+- 	}
+- 	fclose (fp);
+-diff --git a/src/racoon/rsalist.c b/src/racoon/rsalist.c
+-index f152c82..96e8363 100644
+---- a/src/racoon/rsalist.c
+-+++ b/src/racoon/rsalist.c
+-@@ -52,6 +52,7 @@
+- #include "genlist.h"
+- #include "remoteconf.h"
+- #include "crypto_openssl.h"
+-+#include "openssl_compat.h"
+- 
+- #ifndef LIST_FIRST
+- #define LIST_FIRST(head)        ((head)->lh_first)
+-@@ -98,7 +99,9 @@ rsa_key_dup(struct rsa_key *key)
+- 		return NULL;
+- 
+- 	if (key->rsa) {
+--		new->rsa = key->rsa->d != NULL ? RSAPrivateKey_dup(key->rsa) : RSAPublicKey_dup(key->rsa);
+-+		const BIGNUM *d;
+-+		RSA_get0_key(key->rsa, NULL, NULL, &d);
+-+		new->rsa = (d != NULL ? RSAPrivateKey_dup(key->rsa) : RSAPublicKey_dup(key->rsa));
+- 		if (new->rsa == NULL)
+- 			goto dup_error;
+- 	}
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
+deleted file mode 100644
+index d5602c03d..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 738a9857be9c92ad2f70be88ccee238e3154a936 Mon Sep 17 00:00:00 2001
+-From: Joe MacDonald <joe.macdonald@windriver.com>
+-Date: Wed, 2 Oct 2013 14:20:37 -0400
+-Subject: [PATCH] racoon/pfkey: avoid potential null-pointer dereference
+-
+-Building with -Werror=maybe-uninitialized revealed that 'remote' from
+-pk_recvmigrate() could be used with uninitialized data in
+-migrate_sp_ike_addresses().  Ensure it is always at a minimum assigned
+-NULL.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
+----
+- src/racoon/pfkey.c |    2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/racoon/pfkey.c b/src/racoon/pfkey.c
+-index d00b166..e0dc1db 100644
+---- a/src/racoon/pfkey.c
+-+++ b/src/racoon/pfkey.c
+-@@ -3352,7 +3352,7 @@ pk_recvmigrate(mhp)
+- 	struct sockaddr *old_saddr, *new_saddr;
+- 	struct sockaddr *old_daddr, *new_daddr;
+- 	struct sockaddr *old_local, *old_remote;
+--	struct sockaddr *local, *remote;
+-+	struct sockaddr *local, *remote = NULL;
+- 	struct sadb_x_kmaddress *kmaddr;
+- 	struct sadb_x_policy *xpl;
+- 	struct sadb_x_ipsecrequest *xisr_list;
+--- 
+-1.7.9.5
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
+deleted file mode 100644
+index 13e9d73fc..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
++++ /dev/null
+@@ -1,87 +0,0 @@
+-From e48b9097dce7bc2bfbb9e9c542124d3b5cebab39 Mon Sep 17 00:00:00 2001
+-From: Paul Barker <paul@paulbarker.me.uk>
+-Date: Wed, 5 Mar 2014 13:39:14 +0000
+-Subject: [PATCH] Don't link against libfl
+-
+-We can remove all references to yywrap by adding "%option noyywrap" statements
+-to each flex source file that doesn't override yywrap. After this, we no longer
+-need to link against libfl and so no longer get errors about undefined
+-references to yylex.
+-
+-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+-Upstream-status: Submitted 2014-03-11
+-    see http://sourceforge.net/p/ipsec-tools/mailman/ipsec-tools-devel/thread/CANyK_8ewmxGA3vBVJW6s1APXPmxPR%2BDFWZ61EL8pCt288aKQ6w%40mail.gmail.com/#msg32088797
+----
+- src/libipsec/Makefile.am | 1 -
+- src/racoon/Makefile.am   | 2 +-
+- src/racoon/cftoken.l     | 2 ++
+- src/setkey/Makefile.am   | 1 -
+- src/setkey/token.l       | 2 ++
+- 5 files changed, 5 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/libipsec/Makefile.am b/src/libipsec/Makefile.am
+-index 6a4e3b3..df1e106 100644
+---- a/src/libipsec/Makefile.am
+-+++ b/src/libipsec/Makefile.am
+-@@ -26,7 +26,6 @@ libipsec_la_SOURCES = \
+- # version is current:revision:age.
+- # See: http://www.gnu.org/manual/libtool-1.4.2/html_chapter/libtool_6.html#SEC32
+- libipsec_la_LDFLAGS = -version-info 0:1:0
+--libipsec_la_LIBADD = $(LEXLIB)
+- 
+- noinst_HEADERS = ipsec_strerror.h
+- 
+-diff --git a/src/racoon/Makefile.am b/src/racoon/Makefile.am
+-index dbaded9..0662957 100644
+---- a/src/racoon/Makefile.am
+-+++ b/src/racoon/Makefile.am
+-@@ -38,7 +38,7 @@ racoon_SOURCES = \
+- 	cftoken.l cfparse.y prsa_tok.l prsa_par.y 
+- EXTRA_racoon_SOURCES = isakmp_xauth.c isakmp_cfg.c isakmp_unity.c throttle.c \
+- 	isakmp_frag.c nattraversal.c security.c $(MISSING_ALGOS)
+--racoon_LDADD = $(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(LEXLIB) \
+-+racoon_LDADD = $(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) \
+- 	 $(SECCTX_OBJS) vmbuf.o sockmisc.o misc.o ../libipsec/libipsec.la
+- racoon_DEPENDENCIES = \
+- 	$(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(SECCTX_OBJS) \
+-diff --git a/src/racoon/cftoken.l b/src/racoon/cftoken.l
+-index 490242c..1701922 100644
+---- a/src/racoon/cftoken.l
+-+++ b/src/racoon/cftoken.l
+-@@ -106,6 +106,8 @@ static int incstackp = 0;
+- static int yy_first_time = 1;
+- %}
+- 
+-+%option noyywrap
+-+
+- /* common seciton */
+- nl		\n
+- ws		[ \t]+
+-diff --git a/src/setkey/Makefile.am b/src/setkey/Makefile.am
+-index 746c1f1..389e6cf 100644
+---- a/src/setkey/Makefile.am
+-+++ b/src/setkey/Makefile.am
+-@@ -13,7 +13,6 @@ setkey_SOURCES = \
+- 
+- setkey_LDFLAGS = ../libipsec/libipsec.la
+- setkey_DEPENDENCIES = ../libipsec/libipsec.la
+--setkey_LDADD = $(LEXLIB)
+- 
+- noinst_HEADERS = vchar.h extern.h
+- man8_MANS = setkey.8
+-diff --git a/src/setkey/token.l b/src/setkey/token.l
+-index ad3d843..eb23b76 100644
+---- a/src/setkey/token.l
+-+++ b/src/setkey/token.l
+-@@ -88,6 +88,8 @@
+- #endif
+- %}
+- 
+-+%option noyywrap
+-+
+- /* common section */
+- nl		\n
+- ws		[ \t]+
+--- 
+-1.9.0
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-cfparse-clear-memory-equal-to-size-of-array.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-cfparse-clear-memory-equal-to-size-of-array.patch
+deleted file mode 100644
+index e9dd84aaa..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-cfparse-clear-memory-equal-to-size-of-array.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From a5c59f6a1479947d33dba5191724cc5fc88a614b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 22 Apr 2017 10:39:57 -0700
+-Subject: [PATCH 2/2] cfparse: clear memory equal to size of array
+-
+-Fixes compiler error
+-cfparse.y: In function 'set_isakmp_proposal':
+-cfparse.y:2567:3: error: 'memset' used with length equal to number of elements without multiplication by element size [-Werror=memset-elt-size]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/racoon/cfparse.y | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/racoon/cfparse.y b/src/racoon/cfparse.y
+-index 0d9bd67..5d9c67b 100644
+---- a/src/racoon/cfparse.y
+-+++ b/src/racoon/cfparse.y
+-@@ -2564,7 +2564,7 @@ set_isakmp_proposal(rmconf)
+- 		plog(LLV_DEBUG2, LOCATION, NULL,
+- 			"encklen=%d\n", s->encklen);
+- 
+--		memset(types, 0, ARRAYLEN(types));
+-+		memset(types, 0, sizeof(types));
+- 		types[algclass_isakmp_enc] = s->algclass[algclass_isakmp_enc];
+- 		types[algclass_isakmp_hash] = s->algclass[algclass_isakmp_hash];
+- 		types[algclass_isakmp_dh] = s->algclass[algclass_isakmp_dh];
+--- 
+-2.12.2
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/configure.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/configure.patch
+deleted file mode 100644
+index 8d270a62b..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/configure.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: ipsec-tools-0.8.1/configure.ac
+-===================================================================
+---- ipsec-tools-0.8.1.orig/configure.ac	2013-01-08 12:43:29.000000000 +0000
+-+++ ipsec-tools-0.8.1/configure.ac	2014-07-18 07:51:30.045555880 +0000
+-@@ -6,7 +6,7 @@
+- AC_CONFIG_SRCDIR([configure.ac])
+- AC_CONFIG_HEADERS(config.h)
+- 
+--AM_INIT_AUTOMAKE(dist-bzip2)
+-+AM_INIT_AUTOMAKE([foreign dist-bzip2])
+- 
+- AC_ENABLE_SHARED(no)
+- 
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
+deleted file mode 100644
+index 7e033af5e..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-[PATCH] fix CVE-2015-4047
+-
+-Upstream-Status: Backport
+-
+-CVE: CVE-2015-4047
+-
+-http://www.openwall.com/lists/oss-security/2015/05/20/1
+-
+-racoon/gssapi.c in IPsec-Tools 0.8.2 allows remote attackers to cause
+-a denial of service (NULL pointer dereference and IKE daemon crash) via
+-a series of crafted UDP requests.
+-
+-https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4047
+-
+-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+----
+- src/racoon/gssapi.c | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/src/racoon/gssapi.c b/src/racoon/gssapi.c
+-index e64b201..1ad3b42 100644
+---- a/src/racoon/gssapi.c
+-+++ b/src/racoon/gssapi.c
+-@@ -192,6 +192,11 @@ gssapi_init(struct ph1handle *iph1)
+- 	gss_name_t princ, canon_princ;
+- 	OM_uint32 maj_stat, min_stat;
+- 
+-+	if (iph1->rmconf == NULL) {
+-+	        plog(LLV_ERROR, LOCATION, NULL, "no remote config\n");
+-+	        return -1;
+-+	}
+-+
+- 	gps = racoon_calloc(1, sizeof (struct gssapi_ph1_state));
+- 	if (gps == NULL) {
+- 		plog(LLV_ERROR, LOCATION, NULL, "racoon_calloc failed\n");
+--- 
+-1.9.1
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
+deleted file mode 100644
+index fec4804c0..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2016-10396.patch
++++ /dev/null
+@@ -1,207 +0,0 @@
+-Upstream-Status: Backport [https://anonscm.debian.org/cgit/pkg-ipsec-tools/pkg-ipsec-tools.git/plain/debian/patches/CVE-2016-10396.patch?id=62ac12648a4eb7c5ba5dba0f81998d1acf310d8b]
+-
+-CVE: CVE-2016-10396
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-Description: Fix remotely exploitable DoS. http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10396
+-Source: vendor; https://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=51682
+-Bug-debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=867986
+-
+-Index: pkg-ipsec-tools/src/racoon/isakmp_frag.c
+-===================================================================
+---- pkg-ipsec-tools.orig/src/racoon/isakmp_frag.c
+-+++ pkg-ipsec-tools/src/racoon/isakmp_frag.c
+-@@ -1,4 +1,4 @@
+--/*	$NetBSD: isakmp_frag.c,v 1.5 2009/04/22 11:24:20 tteras Exp $	*/
+-+/*	$NetBSD: isakmp_frag.c,v 1.5.36.1 2017/04/21 16:50:42 bouyer Exp $	*/
+- 
+- /* Id: isakmp_frag.c,v 1.4 2004/11/13 17:31:36 manubsd Exp */
+- 
+-@@ -173,6 +173,43 @@ vendorid_frag_cap(gen)
+- 	return ntohl(hp[MD5_DIGEST_LENGTH / sizeof(*hp)]);
+- }
+- 
+-+static int 
+-+isakmp_frag_insert(struct ph1handle *iph1, struct isakmp_frag_item *item)
+-+{
+-+	struct isakmp_frag_item *pitem = NULL;
+-+	struct isakmp_frag_item *citem = iph1->frag_chain;
+-+
+-+	/* no frag yet, just insert at beginning of list */
+-+	if (iph1->frag_chain == NULL) {
+-+		iph1->frag_chain = item;
+-+		return 0;
+-+	}
+-+
+-+	do {
+-+		/* duplicate fragment number, abort (CVE-2016-10396) */
+-+		if (citem->frag_num == item->frag_num)
+-+			return -1;
+-+
+-+		/* need to insert before current item */
+-+		if (citem->frag_num > item->frag_num) {
+-+			if (pitem != NULL)
+-+				pitem->frag_next = item;
+-+			else
+-+				/* insert at the beginning of the list  */
+-+				iph1->frag_chain = item;
+-+			item->frag_next = citem;
+-+			return 0;
+-+		}
+-+
+-+		pitem = citem;
+-+		citem = citem->frag_next;
+-+	} while (citem != NULL);
+-+
+-+	/* we reached the end of the list, insert */
+-+	pitem->frag_next = item;
+-+	return 0;
+-+}
+-+
+- int 
+- isakmp_frag_extract(iph1, msg)
+- 	struct ph1handle *iph1;
+-@@ -224,39 +261,43 @@ isakmp_frag_extract(iph1, msg)
+- 	item->frag_next = NULL;
+- 	item->frag_packet = buf;
+- 
+--	/* Look for the last frag while inserting the new item in the chain */
+--	if (item->frag_last)
+--		last_frag = item->frag_num;
+-+	/* Check for the last frag before inserting the new item in the chain */
+-+	if (item->frag_last) {
+-+		/* if we have the last fragment, indices must match */
+-+		if (iph1->frag_last_index != 0 &&
+-+		    item->frag_last != iph1->frag_last_index) {
+-+			plog(LLV_ERROR, LOCATION, NULL,
+-+			     "Repeated last fragment index mismatch\n");
+-+			racoon_free(item);
+-+			vfree(buf);
+-+			return -1;
+-+		}
+- 
+--	if (iph1->frag_chain == NULL) {
+--		iph1->frag_chain = item;
+--	} else {
+--		struct isakmp_frag_item *current;
+-+		last_frag = iph1->frag_last_index = item->frag_num;
+-+	}
+- 
+--		current = iph1->frag_chain;
+--		while (current->frag_next) {
+--			if (current->frag_last)
+--				last_frag = item->frag_num;
+--			current = current->frag_next;
+--		}
+--		current->frag_next = item;
+-+	/* insert fragment into chain */
+-+	if (isakmp_frag_insert(iph1, item) == -1) {
+-+		plog(LLV_ERROR, LOCATION, NULL,
+-+		    "Repeated fragment index mismatch\n");
+-+		racoon_free(item);
+-+		vfree(buf);
+-+		return -1;
+- 	}
+- 
+--	/* If we saw the last frag, check if the chain is complete */
+-+	/* If we saw the last frag, check if the chain is complete
+-+	 * we have a sorted list now, so just walk through */
+- 	if (last_frag != 0) {
+-+		item = iph1->frag_chain;
+- 		for (i = 1; i <= last_frag; i++) {
+--			item = iph1->frag_chain;
+--			do {
+--				if (item->frag_num == i)
+--					break;
+--				item = item->frag_next;
+--			} while (item != NULL);
+--
+-+			if (item->frag_num != i)
+-+				break;
+-+			item = item->frag_next;
+- 			if (item == NULL) /* Not found */
+- 				break;
+- 		}
+- 
+--		if (item != NULL) /* It is complete */
+-+		if (i > last_frag) /* It is complete */
+- 			return 1;
+- 	}
+- 		
+-@@ -291,15 +332,9 @@ isakmp_frag_reassembly(iph1)
+- 	}
+- 	data = buf->v;
+- 
+-+	item = iph1->frag_chain;
+- 	for (i = 1; i <= frag_count; i++) {
+--		item = iph1->frag_chain;
+--		do {
+--			if (item->frag_num == i)
+--				break;
+--			item = item->frag_next;
+--		} while (item != NULL);
+--
+--		if (item == NULL) {
+-+		if (item->frag_num != i) {
+- 			plog(LLV_ERROR, LOCATION, NULL, 
+- 			    "Missing fragment #%d\n", i);
+- 			vfree(buf);
+-@@ -308,6 +343,7 @@ isakmp_frag_reassembly(iph1)
+- 		}
+- 		memcpy(data, item->frag_packet->v, item->frag_packet->l);
+- 		data += item->frag_packet->l;
+-+		item = item->frag_next;
+- 	}
+- 
+- out:
+-Index: pkg-ipsec-tools/src/racoon/isakmp_inf.c
+-===================================================================
+---- pkg-ipsec-tools.orig/src/racoon/isakmp_inf.c
+-+++ pkg-ipsec-tools/src/racoon/isakmp_inf.c
+-@@ -720,6 +720,7 @@ isakmp_info_send_nx(isakmp, remote, loca
+- #endif
+- #ifdef ENABLE_FRAG
+- 	iph1->frag = 0;
+-+	iph1->frag_last_index = 0;
+- 	iph1->frag_chain = NULL;
+- #endif
+- 
+-Index: pkg-ipsec-tools/src/racoon/isakmp.c
+-===================================================================
+---- pkg-ipsec-tools.orig/src/racoon/isakmp.c
+-+++ pkg-ipsec-tools/src/racoon/isakmp.c
+-@@ -1072,6 +1072,7 @@ isakmp_ph1begin_i(rmconf, remote, local)
+- 		iph1->frag = 1;
+- 	else
+- 		iph1->frag = 0;
+-+	iph1->frag_last_index = 0;
+- 	iph1->frag_chain = NULL;
+- #endif
+- 	iph1->approval = NULL;
+-@@ -1176,6 +1177,7 @@ isakmp_ph1begin_r(msg, remote, local, et
+- #endif
+- #ifdef ENABLE_FRAG
+- 	iph1->frag = 0;
+-+	iph1->frag_last_index = 0;
+- 	iph1->frag_chain = NULL;
+- #endif
+- 	iph1->approval = NULL;
+-Index: pkg-ipsec-tools/src/racoon/handler.h
+-===================================================================
+---- pkg-ipsec-tools.orig/src/racoon/handler.h
+-+++ pkg-ipsec-tools/src/racoon/handler.h
+-@@ -1,4 +1,4 @@
+--/*	$NetBSD: handler.h,v 1.25 2010/11/17 10:40:41 tteras Exp $	*/
+-+/*	$NetBSD: handler.h,v 1.26 2017/01/24 19:23:56 christos Exp $	*/
+- 
+- /* Id: handler.h,v 1.19 2006/02/25 08:25:12 manubsd Exp */
+- 
+-@@ -141,6 +141,7 @@ struct ph1handle {
+- #endif
+- #ifdef ENABLE_FRAG
+- 	int frag;			/* IKE phase 1 fragmentation */
+-+	int frag_last_index;
+- 	struct isakmp_frag_item *frag_chain;	/* Received fragments */
+- #endif
+- 
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
+deleted file mode 100644
+index 36efc4917..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-squahes below warning
+-  warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+-
+-Seen with glibc 2.20
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Pending
+-Index: ipsec-tools-0.8.2/src/include-glibc/glibc-bugs.h
+-===================================================================
+---- ipsec-tools-0.8.2.orig/src/include-glibc/glibc-bugs.h	2006-09-09 09:22:08.000000000 -0700
+-+++ ipsec-tools-0.8.2/src/include-glibc/glibc-bugs.h	2014-09-03 22:27:22.551563888 -0700
+-@@ -4,7 +4,11 @@
+- #define __GLIBC_BUGS_H__ 1
+- 
+- #define _XOPEN_SOURCE 500
+-+/* Legacy feature macro.*/
+- #define _BSD_SOURCE
+-+/* New feature macro that provides everything _BSD_SOURCE and
+-+ * _SVID_SOURCE provided and possibly more.  */
+-+#define _DEFAULT_SOURCE
+- 
+- #include <features.h>
+- #include <sys/types.h>
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+deleted file mode 100644
+index e82db087c..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
++++ /dev/null
+@@ -1,220 +0,0 @@
+-racoon: Resend UPDATE message when received EINTR message
+-
+-Upstream-Status: Pending
+-
+-While kernel is processing the UPDATE message which is sent from racoon,
+-it maybe interrupted by system signal and if this case happens,
+-kernel responds with an EINTR message to racoon and kernel fails to
+-establish the corresponding SA.
+-Fix this problem by resend the UPDATE message when EINTR(Interrupted
+-system call) error happens.
+-
+-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+----
+---- a/src/libipsec/libpfkey.h
+-+++ b/src/libipsec/libpfkey.h
+-@@ -92,6 +92,12 @@
+- 	u_int16_t ctxstrlen;		/* length of security context string */
+- };
+- 
+-+struct update_msg_info {
+-+        struct sadb_msg *update_msg;
+-+        int so;
+-+        int len;
+-+};
+-+
+- /* The options built into libipsec */
+- extern int libipsec_opt;
+- #define LIBIPSEC_OPT_NATT		0x01
+---- a/src/libipsec/pfkey.c
+-+++ b/src/libipsec/pfkey.c
+-@@ -1219,7 +1219,8 @@
+- }
+- #endif
+- 
+--
+-+struct update_msg_info update_msg_send = {NULL, 0, 0};
+-+
+- /* sending SADB_ADD or SADB_UPDATE message to the kernel */
+- static int
+- pfkey_send_x1(struct pfkey_send_sa_args *sa_parms)
+-@@ -1483,10 +1484,24 @@
+- 
+- 	/* send message */
+- 	len = pfkey_send(sa_parms->so, newmsg, len);
+--	free(newmsg);
+- 
+--	if (len < 0)
+--		return -1;
+-+	if (newmsg->sadb_msg_type == SADB_UPDATE) {
+-+		if (update_msg_send.update_msg)
+-+			free(update_msg_send.update_msg);
+-+		update_msg_send.update_msg = newmsg;
+-+		update_msg_send.so = sa_parms->so;
+-+		update_msg_send.len = len;
+-+
+-+		if (len < 0) {
+-+			free(update_msg_send.update_msg);
+-+			update_msg_send.update_msg = NULL;
+-+			return -1;
+-+		}
+-+	} else {
+-+		free(newmsg);
+-+		if (len < 0)
+-+			return -1;
+-+	}
+- 
+- 	__ipsec_errcode = EIPSEC_NO_ERROR;
+- 	return len;
+---- a/src/racoon/session.c
+-+++ b/src/racoon/session.c
+-@@ -100,6 +100,8 @@
+- 
+- #include "sainfo.h"
+- 
+-+extern struct update_msg_info update_msg_send;
+-+
+- struct fd_monitor {
+- 	int (*callback)(void *ctx, int fd);
+- 	void *ctx;
+-@@ -348,6 +350,11 @@
+- 	close_sockets();
+- 	backupsa_clean();
+- 
+-+	if (update_msg_send.update_msg) {
+-+		free(update_msg_send.update_msg);
+-+		update_msg_send.update_msg = NULL;
+-+	}
+-+
+- 	plog(LLV_INFO, LOCATION, NULL, "racoon process %d shutdown\n", getpid());
+- 
+- 	exit(0);
+---- a/src/racoon/pfkey.c
+-+++ b/src/racoon/pfkey.c
+-@@ -103,10 +103,12 @@
+- #include "crypto_openssl.h"
+- #include "grabmyaddr.h"
+-+#include "../libipsec/libpfkey.h"
+- 
+- #if defined(SADB_X_EALG_RIJNDAELCBC) && !defined(SADB_X_EALG_AESCBC)
+- #define SADB_X_EALG_AESCBC  SADB_X_EALG_RIJNDAELCBC
+- #endif
+- 
+-+extern struct update_msg_info update_msg_send;
+- /* prototype */
+- static u_int ipsecdoi2pfkey_aalg __P((u_int));
+- static u_int ipsecdoi2pfkey_ealg __P((u_int));
+-@@ -253,6 +255,13 @@
+- 			s_pfkey_type(msg->sadb_msg_type),
+- 			strerror(msg->sadb_msg_errno));
+- 
+-+		if (msg->sadb_msg_errno == EINTR &&
+-+			update_msg_send.update_msg) {
+-+			plog(LLV_DEBUG, LOCATION, NULL,
+-+			"pfkey update resend\n");
+-+			send(update_msg_send.so, (void *)update_msg_send.update_msg, (socklen_t)update_msg_send.len, 0);
+-+		}
+-+
+- 		goto end;
+- 	}
+- 
+-@@ -498,6 +507,11 @@
+- {
+- 	flushsp();
+- 
+-+	if (update_msg_send.update_msg) {
+-+		free(update_msg_send.update_msg);
+-+		update_msg_send.update_msg = NULL;
+-+	}
+-+
+- 	if (pfkey_send_spddump(lcconf->sock_pfkey) < 0) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+- 			"libipsec sending spddump failed: %s\n",
+-@@ -1295,6 +1309,8 @@
+- 	return 0;
+- }
+- 
+-+int update_received = 0;
+-+
+- static int
+- pk_recvupdate(mhp)
+- 	caddr_t *mhp;
+-@@ -1307,6 +1323,13 @@
+- 	int incomplete = 0;
+- 	struct saproto *pr;
+- 
+-+	update_received = 1;
+-+
+-+	if (update_msg_send.update_msg) {
+-+                free(update_msg_send.update_msg);
+-+                update_msg_send.update_msg = NULL;
+-+        }
+-+
+- 	/* ignore this message because of local test mode. */
+- 	if (f_local)
+- 		return 0;
+-@@ -4163,3 +4186,8 @@
+- 
+- 	return buf;
+- }
+-+
+-+int receive_from_isakmp()
+-+{
+-+	return pfkey_handler(NULL, lcconf->sock_pfkey);
+-+}
+---- a/src/racoon/pfkey.h
+-+++ b/src/racoon/pfkey.h
+-@@ -71,5 +71,6 @@
+- extern u_int32_t pk_getseq __P((void));
+- extern const char *sadbsecas2str
+- 	__P((struct sockaddr *, struct sockaddr *, int, u_int32_t, int));
+-+extern int receive_from_isakmp __P((void));
+- 
+- #endif /* _PFKEY_H */
+---- a/src/racoon/isakmp_quick.c
+-+++ b/src/racoon/isakmp_quick.c
+-@@ -774,6 +774,8 @@
+- 	return error;
+- }
+- 
+-+extern int update_received;
+-+
+- /*
+-  * send to responder
+-  * 	HDR*, HASH(3)
+-@@ -892,6 +894,11 @@
+- 	}
+- 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+- 
+-+	while (!update_received)
+-+		receive_from_isakmp();
+-+
+-+	update_received = 0;
+-+
+- 	/* Do ADD for responder */
+- 	if (pk_sendadd(iph2) < 0) {
+- 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+-@@ -1035,6 +1042,11 @@
+- 	}
+- 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+- 
+-+	while (!update_received)
+-+		receive_from_isakmp();
+-+
+-+	update_received = 0;
+-+
+- 	/* Do ADD for responder */
+- 	if (pk_sendadd(iph2) < 0) {
+- 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+-@@ -1989,6 +2001,11 @@
+- 	}
+- 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+- 
+-+	while (!update_received)
+-+		receive_from_isakmp();
+-+
+-+	update_received = 0;
+-+
+- 	/* Do ADD for responder */
+- 	if (pk_sendadd(iph2) < 0) {
+- 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
+deleted file mode 100644
+index e272bc20f..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-Subject: [PATCH] ipsec-tools: racoon: check several invalid ivm
+-
+-Upstream-Status: Pending
+-
+-Add checking for invalid ivm, or it will crash racoon.
+-
+-Signed-off-by: Ming Liu <ming.liu@windriver.com>
+----
+- isakmp_cfg.c |    5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff -urpN a/src/racoon/isakmp_cfg.c b/src/racoon/isakmp_cfg.c
+---- a/src/racoon/isakmp_cfg.c
+-+++ b/src/racoon/isakmp_cfg.c
+-@@ -171,6 +171,11 @@ isakmp_cfg_r(iph1, msg)
+- 	    iph1->mode_cfg->last_msgid != packet->msgid )
+- 		iph1->mode_cfg->ivm = 
+- 		    isakmp_cfg_newiv(iph1, packet->msgid);
+-+	if(iph1->mode_cfg->ivm == NULL) {
+-+		plog(LLV_ERROR, LOCATION, NULL, 
+-+		    "failed to create new IV\n");
+-+		return;
+-+	}
+- 	ivm = iph1->mode_cfg->ivm;
+- 
+- 	dmsg = oakley_do_decrypt(iph1, msg, ivm->iv, ivm->ive);
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
+deleted file mode 100644
+index de1bdb407..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-Subject: [PATCH] ipsec-tools: racoon: check several invalid pointers
+-
+-Upstream-Status: Pending
+-
+-Add checking for invalid pointers, or it will crash racoon.
+-
+-Signed-off-by: Ming Liu <ming.liu@windriver.com>
+----
+- ipsec_doi.c    |    5 +++--
+- isakmp_cfg.c   |    7 +++++++
+- isakmp_quick.c |    6 ++++--
+- 3 files changed, 14 insertions(+), 4 deletions(-)
+-
+-diff -urpN a/src/racoon/ipsec_doi.c b/src/racoon/ipsec_doi.c
+---- a/src/racoon/ipsec_doi.c
+-+++ b/src/racoon/ipsec_doi.c
+-@@ -3374,8 +3374,9 @@ ipsecdoi_chkcmpids( idt, ids, exact )
+- 
+- 	/* handle wildcard IDs */
+- 
+--	if (idt == NULL || ids == NULL)
+--	{
+-+	if (idt == NULL || ids == NULL ||
+-+	    idt->v == NULL || idt->l == 0 ||
+-+	    ids->v == NULL || ids->l == 0) {
+- 		if( !exact )
+- 		{
+- 			plog(LLV_DEBUG, LOCATION, NULL,
+-diff -urpN a/src/racoon/isakmp_cfg.c b/src/racoon/isakmp_cfg.c
+---- a/src/racoon/isakmp_cfg.c
+-+++ b/src/racoon/isakmp_cfg.c
+-@@ -1138,6 +1138,13 @@ isakmp_cfg_newiv(iph1, msgid)
+- 		return NULL;
+- 	}
+- 
+-+	if (iph1->ivm == NULL || iph1->ivm->iv == NULL ||
+-+	    iph1->ivm->iv->v == NULL || iph1->ivm->iv->l == 0) {
+-+		plog(LLV_ERROR, LOCATION, NULL,
+-+		    "isakmp_cfg_newiv called with invalid IV management\n");
+-+		return NULL;
+-+	}
+-+
+- 	if (ics->ivm != NULL)
+- 		oakley_delivm(ics->ivm);
+- 
+-diff -urpN a/src/racoon/isakmp_quick.c b/src/racoon/isakmp_quick.c
+---- a/src/racoon/isakmp_quick.c
+-+++ b/src/racoon/isakmp_quick.c
+-@@ -2243,8 +2243,10 @@ get_proposal_r(iph2)
+- 	int error = ISAKMP_INTERNAL_ERROR;
+- 
+- 	/* check the existence of ID payload */
+--	if ((iph2->id_p != NULL && iph2->id == NULL)
+--	 || (iph2->id_p == NULL && iph2->id != NULL)) {
+-+	if ((iph2->id_p != NULL &&
+-+	    (iph2->id == NULL || iph2->id->v == NULL || iph2->id->l == 0)) ||
+-+	    (iph2->id != NULL &&
+-+	    (iph2->id_p == NULL || iph2->id_p->v == NULL || iph2->id_p->l == 0))) {
+- 		plog(LLV_ERROR, LOCATION, NULL,
+- 			"Both IDs wasn't found in payload.\n");
+- 		return ISAKMP_NTYPE_INVALID_ID_INFORMATION;
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf
+deleted file mode 100644
+index 6b507508b..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf
++++ /dev/null
+@@ -1,8 +0,0 @@
+-# Defaults for racoon service
+-# sourced by racoon.service
+-# installed at /etc/default/racoon by the maintainer scripts
+-#
+-# This is a POSIX shell fragment
+-#
+-# Arguments to pass to racoon
+-RACOON_ARGS=""
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf.sample b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf.sample
+deleted file mode 100644
+index 2948a4a35..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf.sample
++++ /dev/null
+@@ -1,40 +0,0 @@
+-#
+-# NOTE: This file will not be used if you use racoon-tool(8) to manage your
+-# IPsec connections. racoon-tool will process racoon-tool.conf(5) and
+-# generate a configuration (/var/lib/racoon/racoon.conf) and use it, instead
+-# of this file.
+-#
+-# Simple racoon.conf
+-# 
+-#
+-# Please look in /usr/share/doc/racoon/examples for
+-# examples that come with the source.
+-#
+-# Please read racoon.conf(5) for details, and alsoread setkey(8).
+-#
+-#
+-# Also read the Linux IPSEC Howto up at 
+-# http://www.ipsec-howto.org/t1.html 
+-#
+-log notify;
+-path pre_shared_key "/etc/racoon/psk.txt";
+-path certificate "/etc/racoon/certs";
+-
+-#remote 172.31.1.1 {
+-#        exchange_mode main,aggressive;
+-#        proposal {
+-#                encryption_algorithm 3des;
+-#                hash_algorithm sha1;
+-#                authentication_method pre_shared_key;
+-#                dh_group modp1024;
+-#        }
+-#        generate_policy off;
+-#}
+-# 
+-#sainfo address 192.168.203.10[any] any address 192.168.22.0/24[any] any {
+-#        pfs_group modp768;
+-#        encryption_algorithm 3des;
+-#        authentication_algorithm hmac_md5;
+-#        compression_algorithm deflate;
+-#}
+-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.service b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.service
+deleted file mode 100644
+index a10e77027..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.service
++++ /dev/null
+@@ -1,11 +0,0 @@
+-[Unit]
+-Description=Racoon IKEv1 key management daemon for IPSEC
+-After=syslog.target network.target
+-
+-[Service]
+-Type=forking
+-EnvironmentFile=-@SYSCONFDIR@/default/racoon
+-ExecStart=@SBINDIR@/racoon $RACOON_ARGS
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+deleted file mode 100644
+index a6d473b59..000000000
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
++++ /dev/null
+@@ -1,98 +0,0 @@
+-DESCRIPTION = "IPsec-Tools is a port of KAME's IPsec utilities to the \
+-Linux-2.6 IPsec implementation."
+-HOMEPAGE = "http://ipsec-tools.sourceforge.net/"
+-SECTION = "net"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
+-
+-DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-SRC_URI = "http://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
+-           file://0002-Don-t-link-against-libfl.patch \
+-           file://configure.patch \
+-           file://0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch \
+-           file://racoon-check-invalid-pointers.patch \
+-           file://racoon-check-invalid-ivm.patch \
+-           file://glibc-2.20.patch \
+-           file://racoon-Resend-UPDATE-message-when-received-EINTR-message.patch \
+-           file://racoon.conf.sample \
+-           file://racoon.conf \
+-           file://racoon.service \
+-           file://fix-CVE-2015-4047.patch \
+-           file://0001-Fix-build-with-clang.patch \
+-           file://0001-Fix-header-issues-found-with-musl-libc.patch \
+-           file://0002-cfparse-clear-memory-equal-to-size-of-array.patch \
+-           file://fix-CVE-2016-10396.patch \
+-           file://0001-Disable-gcc8-specific-warnings.patch \
+-           file://0001-ipsec-tools-add-openssl-1.1-support.patch \
+-           "
+-SRC_URI[md5sum] = "d53ec14a0a3ece64e09e5e34b3350b41"
+-SRC_URI[sha256sum] = "8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c9536792690564c74fe722f2d"
+-
+-inherit autotools systemd
+-
+-# Options:
+-#  --enable-adminport      enable admin port
+-#  --enable-rc5            enable RC5 encryption (patented)
+-#  --enable-idea enable IDEA encryption (patented)
+-#  --enable-gssapi         enable GSS-API authentication
+-#  --enable-hybrid         enable hybrid, both mode-cfg and xauth support
+-#  --enable-frag           enable IKE fragmentation payload support
+-#  --enable-stats          enable statistics logging function
+-#  --enable-dpd            enable dead peer detection
+-#  --enable-samode-unspec  enable to use unspecified a mode of SA
+-#  --disable-ipv6          disable ipv6 support
+-#  --enable-natt           enable NAT-Traversal (yes/no/kernel)
+-#  --enable-natt-versions=list    list of supported NAT-T versions delimited by coma.
+-#  --with-kernel-headers=/lib/modules/<uname>/build/include
+-#                          where your Linux Kernel headers are installed
+-#  --with-readline         support readline input (yes by default)
+-#  --with-flex             use directiory (default: no)
+-#  --with-flexlib=<LIB>    specify flex library.
+-#  --with-openssl=DIR      specify OpenSSL directory
+-#  --with-libradius=DIR    specify libradius path (like/usr/pkg)
+-#  --with-libpam=DIR       specify libpam path (like/usr/pkg)
+-#
+-# Note: if you give it the actual kernel headers it won't build, it actually
+-# needs to point at the linux-libc-headers version of the kernel headers.
+-#
+-EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
+-                --with-readline \
+-                --with-openssl=${STAGING_LIBDIR}/.. \
+-                --without-libradius \
+-                --disable-security-context \
+-                --enable-shared \
+-                --enable-dpd \
+-                --enable-natt=yes \
+-                --sysconfdir=${sysconfdir}/racoon \
+-                ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
+-
+-# See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
+-CFLAGS += "-fno-strict-aliasing"
+-
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam,"
+-PACKAGECONFIG[selinux] = "--enable-security-context,--disable-security-context,libselinux,"
+-
+-SYSTEMD_SERVICE_${PN} = "racoon.service"
+-
+-do_install_append() {
+-    install -d ${D}${sysconfdir}/racoon
+-    install -m 0644 ${WORKDIR}/racoon.conf.sample ${D}${sysconfdir}/racoon/racoon.conf
+-
+-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-        install -d ${D}${systemd_unitdir}/system
+-        install -m 0644 ${WORKDIR}/racoon.service ${D}${systemd_unitdir}/system
+-
+-        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/racoon.service
+-        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/racoon.service
+-
+-        install -d ${D}${sysconfdir}/default/
+-        install -m 0644 ${WORKDIR}/racoon.conf ${D}${sysconfdir}/default/racoon
+-    fi
+-}
+-
+-FILES_${PN} += "${sysconfdir}/racoon/racoon.conf \
+-                ${sysconfdir}/default/racoon"
 -- 
 2.17.1
 
