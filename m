@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C9B3B7E3F3
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 533977E413
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:14 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id t5so4512614wmh.3
+	Thu, 23 May 2019 06:49:15 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id u16so994786wrn.8
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 May 2019 23:49:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=4rHqDq5CJEHTxNZ+TasfqgYL7cQ3aY9FjvywEywi5YQ=;
-	b=fQSZq9rOnv07r6fcqbOz4NhmaHqxVtRW7Nk2v+mb9nX1XAx3n+qLY2jFDPhS83rOCY
-	wEF3Z6tJXlWAuKG6fY+p85jIe0dMjF5/10LPXhLGl1Q0leeivwox0mGLQ2eUoCN8rcOv
-	m1mC59hCbxhsubOpm9rdgOVcdfSNesEUsrccDkkxJ5M5ZixUxKSC0t/2YbaXh4ZTl6Vl
-	71ZUuYJu93m1CwU3SQyuWkejqwku+grtpGDzrfBpk9ABlbdz/usqnbRPpAvg5PUT/Po4
-	t9nsncBpvx9ujiFv1A5jrm03z2oi/DZoE6Uj9OhnRUUF/6STqkk9x/7IB7waxDwjTGlz
-	3L7Q==
+	bh=PZTN/LpPeu0ckVJ5XlfM1m40Ha7W5294ZIIjQvDZWU0=;
+	b=rhyVhyN8APW1+ecmHpVUgTmFKRRkeU9fNP97V9MJGUUcOtLx351dj848FsduLZNBnB
+	Mdv/LLh/fPpeiZ3BJvuHvwHQNwDeEWTifUsC5Zx6cJYwynXRP/QAHsQCe2NlrNuHUmcz
+	BbkHuJa6/9B3IEtqHabvH4XUZRdWz87s/r1YbzofMnJI8JvTVhy5jKmUuiuGfowroOmC
+	DSq/RaRThJH/ltt7mSSThSbRq1gpSh23MwucMw19R5BeEqSW/13UenKmONm0YUeWczSm
+	5RpfXeKRlnH2b1ojvf8XyPEfygtEtjhUnmP9on+LPxzU20/F3iVCYpsyCzJ+SpKixl/q
+	Rzow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=4rHqDq5CJEHTxNZ+TasfqgYL7cQ3aY9FjvywEywi5YQ=;
-	b=Ki8YkvrAY8aDs3de1lDy0baw7IBNSqTb+ahrHMWvz/ow4bIC782MrPXG3HeuVoivdm
-	cjYdBXn77Qy9BOofeppcoHAmrYO4VveofZbzufuELgLPORg2VCS6uAwjhIO//KKVgPES
-	Bquew7sVX3kREt/Ok1C6I1z3y7m79QlX+HqW0g6G3PXjN5ZYqt8QRxtvGw1HsCkY2zTg
-	HVotbb8prfgRSVIvNyKNR1tQM5do6EI9tB7wgBUvnKKefho4h/rrUSd8pjrS2P4nZokU
-	3PJlRL/w61HOgmNiGcWGel76A0h9Q1lwXBEmIv5Px59i3333/BLxY/YkkLDRHgXSYmrr
-	YgQw==
-X-Gm-Message-State: APjAAAUpwiADD6T0cYVTIJ69NwUCGEnpnBCunGg3Hc2/SfYw5oe1fs8k
-	97sCmfY7r+Jtr7RSbrP/P49+kLW+TQY=
-X-Google-Smtp-Source: APXvYqwCI2ztybdJtLL5NAGM+jtrzUQeoGfvsxSIQZjvOh5/DB0MVpkev8uNodd6fWUlJEfnJ/QVEA==
-X-Received: by 2002:a1c:a711:: with SMTP id q17mr9910646wme.146.1558594154998; 
-	Wed, 22 May 2019 23:49:14 -0700 (PDT)
+	bh=PZTN/LpPeu0ckVJ5XlfM1m40Ha7W5294ZIIjQvDZWU0=;
+	b=qW2IXvvTTeRf67Z4Q8WCzWC9uUxremNuXJjEzwm2FLbTjAA/KpEaOj4hysm4jxv/1D
+	pWjXHSs73lUKhstqknE7PfaJwORq1yTI4r1vog98ZmDjQmQYhMdtS0oWtUZHkTH8+yO0
+	j1tZs8XX9tAiMrixx/YFEFP74mPRTk/kH9gMXcecgyhjOWyYa2e1AEcm+BhD9FMh6T6J
+	tLq+Z49EUhr+FS++1IVQfeUzqH4sn2SyqyT19VpYS4DXvN/hdm3pN/KCAfHCDAn8rsef
+	hQRW4b3dF5SpFugE+VmCIDDUwI8nfPbzpyvTK8yzObk+wCeq36egt6AfYinsz+Hd2neZ
+	SOPw==
+X-Gm-Message-State: APjAAAVt86Pgjxwdz64HH2t3dSymDP1TJM2sVI3RZooKEjpKtL3HI4CR
+	KAV9rj8h4MJEcED2+GCFNcD/rlVYIMY=
+X-Google-Smtp-Source: APXvYqye+1tOCmqCvG9nZqIYWeVT2Vhxld/9a2eGILoH0QNPg745UveLNq7UcKDllNrv+5/VFDTE9Q==
+X-Received: by 2002:a5d:61c4:: with SMTP id q4mr46195304wrv.295.1558594155838; 
+	Wed, 22 May 2019 23:49:15 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.14
+	d9sm33827524wro.26.2019.05.22.23.49.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:14 -0700 (PDT)
+	Wed, 22 May 2019 23:49:15 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:26 +0200
-Message-Id: <20190523064859.24336-9-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:27 +0200
+Message-Id: <20190523064859.24336-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 08/41] evolution-data-server: uprade 3.26.6 -> 3.32.2 and rework
+Subject: [PATCH 09/41] gnome-menus3: upgrade 3.10.1 -> 3.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,468 +66,47 @@ X-List-Received-Date: Thu, 23 May 2019 06:49:15 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Unfortuantely they stopped maintaing Changelog and suggest to clone the repo.
-* a native variant had to be introduced for code-generator tools
-* gobject-introspection builds theoretically :) Unfortunataelly qemu runs
-  with 100% CPU load and never returns -> disable introspection for now
-* add PACKAGECONFIGs for new dependencies - disabled by default
-* give up fine grained packaging: It was broken over the years completely
-  and nobody seemed to take care.
-* ICU-patch does not apply anymore and it seems upstream has fixed issues
-  with ICU
+* No Changelog avalailable - they suggest to clone the repo :(
+* they use gettext instead of intltool
+* gconf is not required in DEPENDS - modern gnome does not use gconf anymore
 * add upstream-version-is-even to inherit
-* rename folder containing recipe
-* get rid of gconf dependency
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...nded-way-to-handle-the-icu-namespace.patch |  46 -------
- .../evolution-data-server-native.bb           |  23 ++++
- .../evolution-data-server.bb}                 | 123 +++++-------------
- .../evolution-data-server.inc                 |  16 +++
- ...keLists.txt-Remove-TRY_RUN-for-iconv.patch |  24 ++--
- ...txt-remove-CHECK_C_SOURCE_RUNS-check.patch |   0
- ...the-Novell-sample-contact-with-somet.patch |   0
- ...abi-from-the-default-C-warning-flags.patch |  29 +++++
- .../0005-call-native-helpers.patch            |  45 +++++++
- .../evolution-data-server/iconv-detect.h      |   0
- 10 files changed, 158 insertions(+), 148 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
- rename meta-gnome/recipes-gnome/{eds/evolution-data-server_3.26.6.bb => evolution-data-server/evolution-data-server.bb} (15%)
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
- rename meta-gnome/recipes-gnome/{eds => evolution-data-server}/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch (59%)
- rename meta-gnome/recipes-gnome/{eds => evolution-data-server}/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch (100%)
- rename meta-gnome/recipes-gnome/{eds => evolution-data-server}/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch (100%)
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
- rename meta-gnome/recipes-gnome/{eds => evolution-data-server}/evolution-data-server/iconv-detect.h (100%)
+ ...{gnome-menus3_3.10.1.bb => gnome-menus3_3.32.0.bb} | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-menus/{gnome-menus3_3.10.1.bb => gnome-menus3_3.32.0.bb} (41%)
 
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-deleted file mode 100644
-index d3b0ac673..000000000
---- a/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 698a0e104dcbe4b630df848fd4af7c59f76cdc37 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 5 May 2018 17:46:52 -0700
--Subject: [PATCH] Use recommended way to handle the icu namespace
--
--Fixes build with icu >= 61
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libedataserver/e-alphabet-index-private.cpp | 2 ++
-- src/libedataserver/e-transliterator-private.cpp | 2 ++
-- 2 files changed, 4 insertions(+)
--
--diff --git a/src/libedataserver/e-alphabet-index-private.cpp b/src/libedataserver/e-alphabet-index-private.cpp
--index d3e44f4..ddffd99 100644
----- a/src/libedataserver/e-alphabet-index-private.cpp
--+++ b/src/libedataserver/e-alphabet-index-private.cpp
--@@ -33,9 +33,11 @@
-- 
-- /* ICU headers */
-- #include <unicode/alphaindex.h>
--+#include <unicode/ustring.h>
-- 
-- using icu::AlphabeticIndex;
-- using icu::Locale;
--+using U_ICU_NAMESPACE::UnicodeString;
-- 
-- struct _EAlphabetIndex {
-- 	AlphabeticIndex *priv;
--diff --git a/src/libedataserver/e-transliterator-private.cpp b/src/libedataserver/e-transliterator-private.cpp
--index bb15593..573446f 100644
----- a/src/libedataserver/e-transliterator-private.cpp
--+++ b/src/libedataserver/e-transliterator-private.cpp
--@@ -33,8 +33,10 @@
-- 
-- /* ICU headers */
-- #include <unicode/translit.h>
--+#include <unicode/ustring.h>
-- 
-- using icu::Transliterator;
--+using U_ICU_NAMESPACE::UnicodeString;
-- 
-- struct _ETransliterator {
-- 	Transliterator *priv;
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
-new file mode 100644
-index 000000000..681a61c33
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
-@@ -0,0 +1,23 @@
-+require ${BPN}.inc
-+
-+inherit native
-+
-+DEPENDS = "glib-2.0-native"
-+
-+# build native helpers
-+do_compile() {
-+    cd ${S}/src/camel
-+    sed -i 's:#include "evolution-data-server-config.h"::g' camel-gen-tables.c
-+    ${CC} -o ${B}/camel-gen-tables camel-gen-tables.c ${CFLAGS} ${LDFLAGS}
-+
-+    LDFLAGS_glib=`pkg-config glib-2.0 --libs`
-+    CFLAGS_glib=`pkg-config glib-2.0 --cflags`
-+    cd ${S}/src/addressbook/libebook-contacts
-+    sed -i 's:#include "evolution-data-server-config.h"::g' gen-western-table.c
-+    ${CC} -o ${B}/gen-western-table gen-western-table.c ${CFLAGS} ${CFLAGS_glib} ${LDFLAGS} ${LDFLAGS_glib}
-+}
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 755 ${B}/* ${D}${bindir}
-+}
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-similarity index 15%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-index 1949fc7fd..5f535c1b5 100644
---- a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-@@ -1,51 +1,48 @@
--SUMMARY = "Evolution database backend server"
--HOMEPAGE = "http://www.gnome.org/projects/evolution/"
--BUGTRACKER = "https://bugzilla.gnome.org/"
--
--LICENSE = "LGPLv2 & LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
--                    file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
--                    file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543 \
--                    file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
-+require ${BPN}.inc
+diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
+similarity index 41%
+rename from meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb
+rename to meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
+index 647ae914f..b6d212a27 100644
+--- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
+@@ -4,18 +4,15 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
  
- DEPENDS = " \
--    intltool-native gperf-native \
--    glib-2.0 gtk+3 gconf libgnome-keyring libgdata \
-+    ${BPN}-native intltool-native gperf-native \
-+    glib-2.0 gtk+3 libgdata \
-     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
- "
+-DEPENDS = "python libxml2 gconf popt gtk+3 intltool-native gnome-common-native"
++DEPENDS = "python libxml2 popt gtk+3 gnome-common-native"
  
--inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
-+inherit distro_features_check cmake gtk-doc gettext gobject-introspection perlnative pythonnative
+-inherit distro_features_check gnomebase pkgconfig python-dir pythonnative gobject-introspection
++inherit distro_features_check gnomebase gettext pkgconfig gobject-introspection upstream-version-is-even
  
  REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
--           file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
--           file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
--           file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
--           file://iconv-detect.h \
--           file://0004-Use-recommended-way-to-handle-the-icu-namespace.patch \
--           "
--SRC_URI[archive.md5sum] = "ae7bbf543b2c3ff79af27e0edea5d472"
--SRC_URI[archive.sha256sum] = "e43aa1847ddc02965f560261ef88d18fb8704eddaa55555bf96b884a33e510ec"
-+SRC_URI += " \
-+    file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-+    file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-+    file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-+    file://0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch \
-+    file://0005-call-native-helpers.patch \
-+    file://iconv-detect.h \
-+"
+ BPN = "gnome-menus"
  
- LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
- LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
- 
-+# For arm qemu-arm runs at 100% CPU load and never returns - so disable introspection for now
-+GI_DATA_ENABLED="False"
-+
- EXTRA_OECMAKE = " \
-+    -DSYSCONF_INSTALL_DIR=${sysconfdir} \
-     -DWITH_KRB5=OFF \
-     -DENABLE_GOA=OFF \
-     -DENABLE_UOA=OFF \
-     -DENABLE_GOOGLE_AUTH=OFF \
-     -DENABLE_WEATHER=OFF \
-+    -DENABLE_INTROSPECTION=${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'ON', 'OFF', d)} \
-     -D${LKSTRFTIME} \
-     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
- "
- 
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
-+PACKAGECONFIG[canberra] = "-DENABLE_CANBERRA=ON,-DENABLE_CANBERRA=OFF,libcanberra"
-+PACKAGECONFIG[oauth]    = "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,webkitgtk json-glib"
- 
--EXTRA_OECONF = "--with-libdb=${STAGING_DIR_HOST}${prefix} \
--                --disable-nntp --disable-gtk-doc"
-+# BROKEN: due missing pkg-config in openldap eds' cmake finds host-libs when
-+# searching for openldap-libs
-+PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
- 
- # -ldb needs this on some platforms
- LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
-@@ -55,78 +52,20 @@ do_configure_append () {
- 
-     # fix native perl shebang
-     sed -i 's:${STAGING_BINDIR_NATIVE}/perl-native:${bindir}:' ${B}/src/tools/addressbook-export/csv2vcard
-+
-+    # fix abs path for g-ir-scanner-wrapper
-+    sed  -i ${B}/build.ninja \
-+        -e 's: ${bindir}/g-ir-scanner-wrapper: ${STAGING_BINDIR}/g-ir-scanner-wrapper:g'
- }
- 
- do_compile_prepend() {
-     export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
- }
- 
-+FILES_${PN} =+ " \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/evolution-data-server-*/ui/ \
-+    ${systemd_user_unitdir} \
-+"
- 
--PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
--             libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
--             libedataserver libedataserver-dev \
--             libedataserverui libedataserverui-dev"
+-SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+-SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BPN}-${PV}.tar.xz"
 -
--FILES_${PN} =+ "${systemd_user_unitdir} \
--                ${datadir}/dbus-1 \
--                ${datadir}/evolution-data-server-*/ui/"
- RDEPENDS_${PN} += "perl"
--
--FILES_${PN}-dev =+ "${libdir}/pkgconfig/evolution-data-server-*.pc"
--FILES_${PN}-dbg =+ "${libdir}/evolution-data-server*/camel-providers/.debug \
--                    ${libdir}/evolution-data-server*/calendar-backends/.debug \
--                    ${libdir}/evolution-data-server*/addressbook-backends/.debug \
--                    ${libdir}/evolution-data-server*/extensions/.debug/"
--
--RRECOMMENDS_${PN}-dev += "libecal-dev libebook-dev"
--
--FILES_libcamel = "${libdir}/libcamel-*.so.* \
--                  ${libdir}/libcamel-provider-*.so.* \
--                  ${libdir}/evolution-data-server*/camel-providers/*.so \
--                  ${libdir}/evolution-data-server*/camel-providers/*.urls"
--FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
--                      ${libdir}/pkgconfig/camel*pc \
--                      ${libdir}/evolution-data-server*/camel-providers/*.la \
--                      ${includedir}/evolution-data-server*/camel"
--
--FILES_libebook = "${libdir}/libebook-*.so.*"
--FILES_libebook-dev = "${libdir}/libebook-1.2.so \
--                      ${libdir}/pkgconfig/libebook-*.pc \
--                      ${includedir}/evolution-data-server*/libebook/*.h"
--RRECOMMENDS_libebook = "libedata-book"
--
--FILES_libecal = "${libdir}/libecal-*.so.* \
--                 ${datadir}/evolution-data-server-1.4/zoneinfo"
--FILES_libecal-dev = "${libdir}/libecal-*.so ${libdir}/pkgconfig/libecal-*.pc \
--                     ${includedir}/evolution-data-server*/libecal/*.h \
--                     ${includedir}/evolution-data-server*/libical/*.h"
--RRECOMMENDS_libecal = "libedata-cal tzdata"
--
--FILES_libedata-book = "${libexecdir}/e-addressbook-factory \
--                       ${datadir}/dbus-1/services/*.AddressBook.service \
--                       ${libdir}/libedata-book-*.so.* \
--                       ${libdir}/evolution-data-server-*/extensions/libebook*.so \
--                       ${datadir}/evolution-data-server-1.4/weather/Locations.xml"
--FILES_libedata-book-dev = "${libdir}/libedata-book-*.so \
--                           ${libdir}/pkgconfig/libedata-book-*.pc \
--                           ${libdir}/evolution-data-server-*/extensions/libebook*.la \
--                           ${includedir}/evolution-data-server-*/libedata-book"
--
--FILES_libedata-cal = "${libexecdir}/e-calendar-factory \
--                      ${datadir}/dbus-1/services/*.Calendar.service \
--                      ${libdir}/libedata-cal-*.so.* \
--                      ${libdir}/evolution-data-server-*/extensions/libecal*.so"
--FILES_libedata-cal-dev = "${libdir}/libedata-cal-*.so \
--                          ${libdir}/pkgconfig/libedata-cal-*.pc \
--                          ${includedir}/evolution-data-server-*/libedata-cal \
--                          ${libdir}/evolution-data-server-*/extensions/libecal*.la"
--
--FILES_libedataserver = "${libdir}/libedataserver-*.so.*"
--FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
--                            ${libdir}/pkgconfig/libedataserver-*.pc \
--                            ${includedir}/evolution-data-server-*/libedataserver/*.h"
--
--FILES_libedataserverui = "${libdir}/libedataserverui-*.so.* ${datadir}/evolution-data-server-1.4/glade/*.glade"
--FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
--                              ${libdir}/pkgconfig/libedataserverui-*.pc \
--                              ${includedir}/evolution-data-server-*/libedataserverui/*.h"
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-new file mode 100644
-index 000000000..2ea94920b
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -0,0 +1,16 @@
-+SUMMARY = "Evolution database backend server"
-+HOMEPAGE = "http://www.gnome.org/projects/evolution/"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
-+
-+LICENSE = "LGPLv2 & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
-+                    file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
-+                    file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543 \
-+                    file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
-+
-+inherit gnomebase
-+
-+SRC_URI[archive.md5sum] = "965648316c7cee06f49878eceed5da01"
-+SRC_URI[archive.sha256sum] = "7ea7491065fd0382f2268cf6bf95331a75dfda587d5940deb47f9e74be1ab3c9"
-+PV = "3.32.2"
-+
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-similarity index 59%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-index a821a14ab..e8c6d6a76 100644
---- a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-@@ -1,6 +1,6 @@
- From 131b88a81aba3d72d566bc8a9d968941a98e0007 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
--Date: Tue, 19 Dec 2017 16:37:20 +0100
-+Date: Sun, 31 Mar 2019 18:11:55 +0200
- Subject: [PATCH] CMakeLists.txt: Remove TRY_RUN for iconv
- MIME-Version: 1.0
- Content-Type: text/plain; charset=UTF-8
-@@ -13,20 +13,24 @@ Upstream-Status: Inappropriate [OE specific]
+-SRC_URI[md5sum] = "6db025e79e2b69f39fc7aa0753f43081"
+-SRC_URI[sha256sum] = "46950aba274c1ad58234374fa9b235258650737307f3bc396af48eb983668a71"
++SRC_URI[archive.md5sum] = "4262208c13f266d9ada7d356aada9e1b"
++SRC_URI[archive.sha256sum] = "c850c64b2074265fe59e099a340b8689cf3dd4658dc9feddd2ab5e95f1a74b74"
  
- Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
- ---
-- CMakeLists.txt | 5 -----
-- 1 file changed, 5 deletions(-)
-+ CMakeLists.txt | 11 -----------
-+ 1 file changed, 11 deletions(-)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 8d07772..a2396f2 100644
-+index 1672daf..0b3e4e0 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -521,13 +521,8 @@ if(NOT HAVE_ICONV)
-+@@ -524,17 +524,6 @@ if(NOT HAVE_ICONV)
-+ 	message(FATAL_ERROR "You need to install a working iconv implementation, such as ftp://ftp.gnu.org/pub/gnu/libiconv")
-  endif(NOT HAVE_ICONV)
-  
-- set(CMAKE_REQUIRED_LIBRARIES ${ICONV_LIBS})
---CHECK_C_SOURCE_RUNS("#include \"${CMAKE_SOURCE_DIR}/iconv-detect.c\"" _correct_iconv)
-- unset(CMAKE_REQUIRED_LIBRARIES)
-- 
-+-set(CMAKE_REQUIRED_LIBRARIES ${ICONV_LIBS})
-+-file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/" _binary_dir_with_separator)
-+-CHECK_C_SOURCE_RUNS("#define ICONV_DETECT_BUILD_DIR \"${_binary_dir_with_separator}\"
-+-		     #include \"${CMAKE_SOURCE_DIR}/iconv-detect.c\"" _correct_iconv)
-+-unset(_binary_dir_with_separator)
-+-unset(CMAKE_REQUIRED_LIBRARIES)
-+-
- -if(NOT _correct_iconv)
- -	message(FATAL_ERROR "You need to install a working iconv implementation, such as ftp://ftp.gnu.org/pub/gnu/libiconv")
- -endif(NOT _correct_iconv)
-@@ -35,5 +39,5 @@ index 8d07772..a2396f2 100644
-  # Backtraces for debugging
-  # ******************************
- -- 
--2.14.3
-+2.20.1
- 
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-similarity index 100%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-similarity index 100%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
-new file mode 100644
-index 000000000..8cfc1f8d6
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
-@@ -0,0 +1,29 @@
-+From 3cfeb3c7f458c6fe40c67cea43987b45cf6cbeaf Mon Sep 17 00:00:00 2001
-+From: Milan Crha <mcrha@redhat.com>
-+Date: Thu, 14 Mar 2019 14:16:56 +0100
-+Subject: [PATCH] I#94 - Remove -Wabi from the default C++ warning flags
-+
-+Closes https://gitlab.gnome.org/GNOME/evolution-data-server/issues/94
-+
-+Upstream-Status: Applied [1]
-+
-+[1] https://gitlab.gnome.org/GNOME/evolution-data-server/commit/3cfeb3c7f458c6fe40c67cea43987b45cf6cbeaf
-+---
-+ cmake/modules/SetupBuildFlags.cmake | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/cmake/modules/SetupBuildFlags.cmake b/cmake/modules/SetupBuildFlags.cmake
-+index 4c6154129..284445455 100644
-+--- a/cmake/modules/SetupBuildFlags.cmake
-++++ b/cmake/modules/SetupBuildFlags.cmake
-+@@ -56,7 +56,6 @@ macro(setup_build_flags _maintainer_mode)
-+ 
-+ 	list(APPEND proposed_cxx_flags
-+ 		${proposed_flags}
-+-		-Wabi
-+ 		-Wnoexcept
-+ 	)
-+ 
-+-- 
-+2.20.1
-+
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
-new file mode 100644
-index 000000000..e320f6342
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
-@@ -0,0 +1,45 @@
-+From 9c375e3fcf8ff778a5010a07a7da4b6a58adec7c Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Sun, 31 Mar 2019 19:11:31 +0200
-+Subject: [PATCH] call native helpers
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate[oe-specific]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ src/addressbook/libebook-contacts/CMakeLists.txt | 2 +-
-+ src/camel/CMakeLists.txt                         | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/addressbook/libebook-contacts/CMakeLists.txt b/src/addressbook/libebook-contacts/CMakeLists.txt
-+index e9e3259..e749d1b 100644
-+--- a/src/addressbook/libebook-contacts/CMakeLists.txt
-++++ b/src/addressbook/libebook-contacts/CMakeLists.txt
-+@@ -25,7 +25,7 @@ target_link_libraries(gen-western-table
-+ 
-+ add_custom_command(
-+ 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-+-	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-++	COMMAND gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-+ 	DEPENDS gen-western-table e-name-western-tables.h.in
-+ )
-+ 
-+diff --git a/src/camel/CMakeLists.txt b/src/camel/CMakeLists.txt
-+index be626a8..14ac8b8 100644
-+--- a/src/camel/CMakeLists.txt
-++++ b/src/camel/CMakeLists.txt
-+@@ -10,7 +10,7 @@ target_include_directories(camel-gen-tables PUBLIC
-+ 
-+ add_custom_command(
-+ 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-+-	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-++	COMMAND camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-+ 	DEPENDS camel-gen-tables
-+ )
-+ 
-+-- 
-+2.20.1
-+
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/iconv-detect.h b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/iconv-detect.h
-similarity index 100%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server/iconv-detect.h
-rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/iconv-detect.h
+ FILES_${PN} += "${datadir}/desktop-directories/"
 -- 
 2.20.1
 
