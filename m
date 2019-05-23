@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B58C27E407
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 98EC37E40D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:10 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id j187so4506989wmj.1
+	Thu, 23 May 2019 06:49:11 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id l2so4870626wrb.9
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 May 2019 23:49:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=YtdIaC5ayUdxPNND4oCdXTfuXoMF4likPFnWNG3OHiI=;
-	b=sDZd5MS0OoS9M32S9iz/DT5ByFRGfEwk7kioOMna3sa/Ayj1qeu24Fw+ccJPkZoSuG
-	pjgJCp3LIpjymLrQQn2zZk+hiEgmKToymcRQnHjQPJELCKGQD277VQrhuwokbgWQ+iw/
-	mGl9BpR2phhF0hvnN3m6XuSAuWpwKV6qmJozWXEFC6FcgtNYmrsTfB6p/y2NrRkRmBfF
-	kEfJJxCopu9rDSkJkHGhFmLzSmCqVpdcvg9mKhNShrcq1IMOEa/f3+ONv9RPnMkgJwXz
-	LTr6LNph1dcMKUPGr2AGelRhP9GUF4Xl6OnS2zA95KTuWD0hf9ere+iym6/tUSgX4nfa
-	eBEg==
+	bh=Wo4xjvuZy6Umg6cVIxS2qBm/ZX1SKviUVH/NhlKcHX4=;
+	b=pezSZvnEsCEbCTc/ykqzKg7xaQP9YWaoD/WGMUutckW/UIMj5nwUD6/Mt8N5YnBMS4
+	iC6PlTFfp3I24ovsbvYO50KkZiEuS6+CoOjbp13Rf6kdhRJsBVrgxv/8+KKMvZJZzkpt
+	jjKSBT6skWl6RwjfIUMYP605mC4zt86K4botCmgJ4p7CTUOuALndxlvL/LMkXFGikmB0
+	jBXtI1Izv6seT086F+NVF+1Kqhxvk9uPKfjqQbbccet70yY2KGajtK0/Ce4jzH12F0rq
+	IW9Rl7YMKUbgixMHn6No8AwMjw7adP2OBHUNszbwcZNsXFAg88RXt1g38BbwKfqNHg9Q
+	UhpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=YtdIaC5ayUdxPNND4oCdXTfuXoMF4likPFnWNG3OHiI=;
-	b=eFcpc3pFo3ngFOefXhgLa/upV8Fo5sDCSNPknfgO1MwLVrHxJ0wkreDvW+TqfWNvzv
-	m8BUtCqZlNbbCaeDccQRiV81jB51mjobtt9bLp0/rOuvynBAxA3A9sWNudfl0Dl0zqd3
-	J8JyBU8a6qiqSvtNoXDTagi6LkmzRNdjRpjPhLM9OiaD1mUGB6C5I4XENucqmr2PyjgA
-	DteVyZmwcx26anNJaYWxh6TgULwM/W9cBY8zRCsT7ImTbyTuKyF1sbvlC0uMQCLulVAp
-	/6TcV9M8eVRCnaFKOvmis3yduBThmWlzm5lmJ0jc8R1hrWH2igIaguPOmGzkp8oy0fPs
-	NC2A==
-X-Gm-Message-State: APjAAAX5HK+jXVyZ03BYPt7AABuxHjoplkhXXW4uKlT+eH2bCPxvNayJ
-	zHgLz+qfv2nJodW0Sb0YKYAtC4+cyI0=
-X-Google-Smtp-Source: APXvYqx6Ay7FYscoWeKlWdBRsHHsOm8l2py4rEtF2iEA/zEGWEmfZZSxurS7JagQiE5ldt68/jndkA==
-X-Received: by 2002:a1c:cb82:: with SMTP id
-	b124mr10599656wmg.107.1558594151152; 
-	Wed, 22 May 2019 23:49:11 -0700 (PDT)
+	bh=Wo4xjvuZy6Umg6cVIxS2qBm/ZX1SKviUVH/NhlKcHX4=;
+	b=rLbjH3v/+JTNUWeAKZy17+lUy+Wmqs7LZy+bVC/TcTY3ZNdeCr55quHMtDm5i8j6Eb
+	yVLceA3PHypPwOxhnzgbvkIHdfRrQKpMa3VCykGMJ3zHhAy79PAFyq49CfHU+ds4Oi86
+	IilKc4DK1BxxXYQVUpTgy4SjIgmy0oFu8dr+BJFMHZqwU3lsYmVTj79CeqImsSMcqwgr
+	9WQKjz7QjuBGI2vrpP6/OCjfTyv3Fa2MqZ1qYOCuvjrwaYh7eII/dz1418sk4BEWa3cL
+	8cLYjWg0YnvB07ytIvY2gV70VNntGxx9B6VEz5xQxCzV3UCaFqCc0jM/DT20MyPERNWn
+	5i7Q==
+X-Gm-Message-State: APjAAAWoqj+qon9kM3o5T9NuCPMRjBBhzZaUSGWniJMQEhAm5t7bjYgW
+	SZHxSuSkW0ujqcIhAgVTefs8WrXKPBI=
+X-Google-Smtp-Source: APXvYqyVUwPN91rAFQgu1AmwkYpbvcJB/cBIJQP+ogxSU/HF2P78d72YEO0AURWxADtGRtT0BJNagQ==
+X-Received: by 2002:adf:ef83:: with SMTP id d3mr47135626wro.253.1558594152107; 
+	Wed, 22 May 2019 23:49:12 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.10
+	d9sm33827524wro.26.2019.05.22.23.49.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:10 -0700 (PDT)
+	Wed, 22 May 2019 23:49:11 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:22 +0200
-Message-Id: <20190523064859.24336-5-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:23 +0200
+Message-Id: <20190523064859.24336-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 04/41] yelp-xsl: initial add 3.32.1
+Subject: [PATCH 05/41] yelp-tools: initial add 3.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,40 +62,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:11 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:12 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is a dependecy for upcoming yelp-tools.
+It is not yet used by any recipe but will be used for help file generation
+on recipes for actual gnome.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/yelp/yelp-xsl_3.32.1.bb      | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/yelp/yelp-xsl_3.32.1.bb
+ .../recipes-gnome/yelp/yelp-tools_3.32.0.bb   | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/yelp/yelp-tools_3.32.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp-xsl_3.32.1.bb b/meta-gnome/recipes-gnome/yelp/yelp-xsl_3.32.1.bb
+diff --git a/meta-gnome/recipes-gnome/yelp/yelp-tools_3.32.0.bb b/meta-gnome/recipes-gnome/yelp/yelp-tools_3.32.0.bb
 new file mode 100644
-index 000000000..8c60d6168
+index 000000000..8ddc00393
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/yelp/yelp-xsl_3.32.1.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "XSL stylesheets for the yelp help browser"
-+LICENSE = "LGPLv2.1 & GPLv2"
++++ b/meta-gnome/recipes-gnome/yelp/yelp-tools_3.32.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Collection of scripts and build utilities for documentation"
++LICENSE = "GPLv2+"
 +LIC_FILES_CHKSUM = " \
-+    file://COPYING;md5=3e2bad3c5e3990988f9fa1bc5785b147 \
++    file://COPYING;md5=d67c6f9f1515506abfea4f0d920c0774 \
 +    file://COPYING.GPL;md5=eb723b61539feef013de476e68b5c50a \
-+    file://COPYING.LGPL;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 +"
 +
 +inherit gnomebase
 +
-+DEPENDS += "libxml2 itstool-native intltool-native"
++DEPENDS += " \
++    libxml2-native \
++    itstool-native \
++    yelp-xsl \
++"
 +
-+SRC_URI[archive.md5sum] = "e5b800a872b50243570552402b56f0d6"
-+SRC_URI[archive.sha256sum] = "cac31bc150545d6aa0de15dce04560cbf591008d17a783a1d1d9cdd47b147f04"
++SRC_URI[archive.md5sum] = "f65cb652553600faa8d8bddf1b0221da"
++SRC_URI[archive.sha256sum] = "bfdd40d10d837d1a170c7fe70b3436d30e6698db809d5be459ea0f7fbb69ee0c"
 +
-+RDEPENDS_${PN} += "libxml2 itstool intltool"
++RDEPENDS_${PN} += "yelp-xsl"
 +
 +BBCLASSEXTEND = "native"
 -- 
