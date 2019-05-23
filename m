@@ -1,59 +1,50 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E5AAF7E423
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DCD077E421
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 08:55:12 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 4948218549;
-	Thu, 23 May 2019 10:55:13 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id xx6Q8YDDEmpU; Thu, 23 May 2019 10:55:11 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 246CE18351;
-	Thu, 23 May 2019 10:55:11 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 011461A075;
-	Thu, 23 May 2019 10:55:11 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E97E31A067;
-	Thu, 23 May 2019 10:55:10 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Thu, 23 May 2019 10:55:10 +0200 (CEST)
-Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
-	by seth.se.axis.com (Postfix) with ESMTP id DDB711669;
-	Thu, 23 May 2019 10:55:10 +0200 (CEST)
-Received: from XBOX04.axis.com (10.0.5.18) by XBOX03.axis.com (10.0.5.17) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Thu, 23 May 2019 10:55:10 +0200
-Received: from XBOX04.axis.com ([fe80::210a:724b:68cb:a917]) by
-	XBOX04.axis.com ([fe80::210a:724b:68cb:a917%22]) with mapi id
-	15.00.1365.000; Thu, 23 May 2019 10:55:10 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files
-	with	new distro feature 'helpfiles'
-Thread-Index: AQHVETPPULShpE8asEye99k+/dvgGKZ4Z8sw
-Date: Thu, 23 May 2019 08:55:10 +0000
-Message-ID: <191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
+	Thu, 23 May 2019 09:44:04 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id s20so4314083ioj.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 May 2019 02:44:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=cfn1XzGquCI2IBNs0P8P6jH+uCX8rBGaY97GxyYJWBk=;
+	b=BktKG5ffMY8ojRfjeKuctjHjz98mg/hEwHKgM3fvhGsl4FhQTgup/BwWIYr26CGoRm
+	JeMy6j2HDw6mAGGZv+5FjqVfDS1Z/o3SH2Hzw3Ri4DMn2meUabBQsHUm0onoKeiGKK7S
+	Nb7SOAJbK3rTTr90+gdunAUq/ZEEjxgB5mDfuN9zJRjsLVBk9nm1XaNEnh7AnOlN8iJf
+	insZrLvUEt69uQ6t0v1jVXrLCPpMZhoLgpdW+nv/ANU6s9XybRhQcXGsuoE8R5sAULtT
+	81Tq/4Y8espC9x+e+nYs6/KuOsOKYR8NRgLQ2TvG4zTrkV811mCgVj3Mhm0rb2v8msWJ
+	ELpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=cfn1XzGquCI2IBNs0P8P6jH+uCX8rBGaY97GxyYJWBk=;
+	b=nxsz2+hbmq2r26igw87J4xlQOQvQpyPUvZJ5j9G8higSFfTiDSodbzCGyCTEeRVdO9
+	BOaWhrueWcwRYD95SbQeRoloUbvxn78T8ff8TBAWY1rL8qOV4x91L0rCb+B+3RTLtD0f
+	cRzlU0bQZoX+B17zhbZ+/81xm7MBgA3BtqFL9Ia6rwNuQz+8AZlLBKF2DQTT3/co5H0R
+	xzTDF2LEVF6NaWY+oMIfl09GiE7k83UqIuoQ5xHoPo5/PHz0+br5jF8v7zpIyrykpkyP
+	Lh1Ps67PLxCbM5ZJw1cx2VZfimkArqf27Q1F3loiayiluwPXXsKpoTJ6LAKRaIPTYGP5
+	lmGA==
+X-Gm-Message-State: APjAAAXLnU/7wi7bap7TVHUeI5y5hAPmHckEAd+nvlJk8sKI8lTLdyuR
+	vaET38KBWHB0Lr4+0LfnDQOyZQm6yh49reHYqOY=
+X-Google-Smtp-Source: APXvYqzM1JDQHv6NTXRCzUNBiI1yvi5TK2qeYFussdNuQXHqMyVZo2cxaTApLkxGEk+jH5Nn/53yHNR+XIxtlmH4Mdw=
+X-Received: by 2002:a5d:9a11:: with SMTP id s17mr28475263iol.267.1558604645943;
+	Thu, 23 May 2019 02:44:05 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 	<20190523064859.24336-8-schnitzeltony@gmail.com>
-In-Reply-To: <20190523064859.24336-8-schnitzeltony@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Subject: Re: [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files with	new distro feature 'helpfiles'
+	<191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
+In-Reply-To: <191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 11:43:54 +0200
+Message-ID: <CALbNGRSfLNCph672ddFLXEYKVzC+t+UzjmYt9FD240qy=YUG0A@mail.gmail.com>
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files with new distro feature 'helpfiles'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,25 +57,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 08:55:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 23 May 2019 09:44:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtDQo+IGRldmVsLWJv
-dW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIEFuZHJlYXMgTcO8bGxl
-cg0KPiBTZW50OiBkZW4gMjMgbWFqIDIwMTkgMDg6NDgNCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFtvZV0gW1BBVENIIDA3LzQxXSBn
-bm9tZS1oZWxwLmJiY2xhc3M6IEhhbmRsZSBnbm9tZS1oZWxwIGZpbGVzDQo+IHdpdGggbmV3IGRp
-c3RybyBmZWF0dXJlICdoZWxwZmlsZXMnDQo+IA0KPiBHbm9tZSBoZWxwIGZpbGUgZ2VuZXJhdGlv
-biBjYW5ub3QgYmUgY29uZmlndXJlZCBzbyBoYW5kbGUgZmlsZXMNCj4gcHJvcGVybHkNCj4gDQo+
-ICogQWRkIGEgbmV3IGRpc3RybyBmZWF0dXJlICdoZWxwZmlsZXMnOg0KPiAgICBJZiBzZXQ6IHNw
-bGl0IGhlbHAgZmlsZSBpbnRvICR7UE59LWhlbHAtKg0KPiAgICBJZiBub3Qgc2V0OiBkZWxldGUg
-aGVscCBmaWxlcyBvbiBpbnN0YWxsYXRpb24NCj4gKiBBcHBlbmQgJHtQTn0taGVscC0uKiB0byBQ
-QUNLQUdFU19EWU5BTUlDDQo+IA0KPiBPbmNlIGFjY2VwdGVkIC8gYXBwbGllZCBpdCB0YWtlcyBh
-IG9uLWxpbmUgcGF0Y2ggdG8gYWRkIGhlbHAgZmlsZXMgYmFzZWQgb24NCg0KSSBhc3N1bWUgeW91
-IG1lYW4gIm9uZS1saW5lIj8NCg0KPiBJTUFHRV9MSU5HVUFTLg0KPiANCj4gU2lnbmVkLW9mZi1i
-eTogQW5kcmVhcyBNw7xsbGVyIDxzY2huaXR6ZWx0b255QGdtYWlsLmNvbT4NCg0KLy9QZXRlcg0K
-DQo=
+On Thu, May 23, 2019 at 10:55 AM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
+> > devel-bounces@lists.openembedded.org> On Behalf Of Andreas M=C3=BCller
+> > Sent: den 23 maj 2019 08:48
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files
+> > with new distro feature 'helpfiles'
+> >
+> > Gnome help file generation cannot be configured so handle files
+> > properly
+> >
+> > * Add a new distro feature 'helpfiles':
+> >    If set: split help file into ${PN}-help-*
+> >    If not set: delete help files on installation
+> > * Append ${PN}-help-.* to PACKAGES_DYNAMIC
+> >
+> > Once accepted / applied it takes a on-line patch to add help files base=
+d on
+>
+> I assume you mean "one-line"?
+Your assumption is correct :)
+>
+> > IMAGE_LINGUAS.
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>
+> //Peter
+>
+Andreas
 
