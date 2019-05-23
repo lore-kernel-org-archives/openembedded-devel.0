@@ -1,38 +1,38 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
 	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 533977E413
+	by mail.openembedded.org (Postfix) with ESMTP id 6FBEA7E407
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:15 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id u16so994786wrn.8
+	Thu, 23 May 2019 06:49:16 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id f10so4888175wre.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:16 -0700 (PDT)
+	Wed, 22 May 2019 23:49:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=PZTN/LpPeu0ckVJ5XlfM1m40Ha7W5294ZIIjQvDZWU0=;
-	b=rhyVhyN8APW1+ecmHpVUgTmFKRRkeU9fNP97V9MJGUUcOtLx351dj848FsduLZNBnB
-	Mdv/LLh/fPpeiZ3BJvuHvwHQNwDeEWTifUsC5Zx6cJYwynXRP/QAHsQCe2NlrNuHUmcz
-	BbkHuJa6/9B3IEtqHabvH4XUZRdWz87s/r1YbzofMnJI8JvTVhy5jKmUuiuGfowroOmC
-	DSq/RaRThJH/ltt7mSSThSbRq1gpSh23MwucMw19R5BeEqSW/13UenKmONm0YUeWczSm
-	5RpfXeKRlnH2b1ojvf8XyPEfygtEtjhUnmP9on+LPxzU20/F3iVCYpsyCzJ+SpKixl/q
-	Rzow==
+	bh=jepvPYCvSPq8zjTFryxOCm/yznQUU+SPzcPwkloE+h4=;
+	b=qMg2PsCuZToDOyS0xask9KnKKd+ylxGGxm3fmCb4kaKdz+4iQwRjvIPgMPeW1/JP4/
+	wEnOSB7rJb9Cyk8OaX87Un3t31eNCTNKUJBbslRtqNnMqiwxBEAJ63e3QDhNs+svrdur
+	hxJvaEWEZ2pOyX78iLk6z5YW+ucIRihEQV/MFgw0yRfhswLFHxHoP6LUY//ZTqq9w2ou
+	WbNGDfVrgDaMCNAszJz75XWjFSZs47p1RmEaBeFXs8KJTclKA8iBrXC08DJ7YqeE8azr
+	fpwJjlITPsKofND2F2PafotKST6ksmEVbouiHwTzdgX5mA0Oy+yWfajyR+50vEXsx3xZ
+	1LxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=PZTN/LpPeu0ckVJ5XlfM1m40Ha7W5294ZIIjQvDZWU0=;
-	b=qW2IXvvTTeRf67Z4Q8WCzWC9uUxremNuXJjEzwm2FLbTjAA/KpEaOj4hysm4jxv/1D
-	pWjXHSs73lUKhstqknE7PfaJwORq1yTI4r1vog98ZmDjQmQYhMdtS0oWtUZHkTH8+yO0
-	j1tZs8XX9tAiMrixx/YFEFP74mPRTk/kH9gMXcecgyhjOWyYa2e1AEcm+BhD9FMh6T6J
-	tLq+Z49EUhr+FS++1IVQfeUzqH4sn2SyqyT19VpYS4DXvN/hdm3pN/KCAfHCDAn8rsef
-	hQRW4b3dF5SpFugE+VmCIDDUwI8nfPbzpyvTK8yzObk+wCeq36egt6AfYinsz+Hd2neZ
-	SOPw==
-X-Gm-Message-State: APjAAAVt86Pgjxwdz64HH2t3dSymDP1TJM2sVI3RZooKEjpKtL3HI4CR
-	KAV9rj8h4MJEcED2+GCFNcD/rlVYIMY=
-X-Google-Smtp-Source: APXvYqye+1tOCmqCvG9nZqIYWeVT2Vhxld/9a2eGILoH0QNPg745UveLNq7UcKDllNrv+5/VFDTE9Q==
-X-Received: by 2002:a5d:61c4:: with SMTP id q4mr46195304wrv.295.1558594155838; 
-	Wed, 22 May 2019 23:49:15 -0700 (PDT)
+	bh=jepvPYCvSPq8zjTFryxOCm/yznQUU+SPzcPwkloE+h4=;
+	b=fTYhPGsHBGisvEDrru6VE5sWu4cRYEtBmBFZ90mlrjlGdUmUQgzwK/UuIOIFef8HYZ
+	fVgHFu88jKpS5RkojU6TXnm4BcOazcD1bhpMJWjS9eNHuAgLmEREAQMuKwxqF2WPdncb
+	UYiQqqSTqLQGe1TcySQlLFA0xNBaxz0lKW+w68tVGpxXBcK1JpaAcC7xvXGEiPDKq+cf
+	KsP8QO/0VA2gHf1uEsAVr9Uyj3bX32qWcYLsAujj8JJFqiO5dh1oZ7vzzU++SCD34lVq
+	kDO4Rf/2IutdcUoIFcYssQrI5pTO56dzJZ6QQiIhvbv2xq9r1vztO0GQA64EjSb5hOe6
+	JIvg==
+X-Gm-Message-State: APjAAAXPTX9oxyWZCkOPguq4EVcOnQf2UZaxLWScCOWzxRFBUKMckVS3
+	F4rgrtzJ1lyzu8UpfqLQw/OEeU2LYcU=
+X-Google-Smtp-Source: APXvYqxi7GI6IROj/rdWbZB6AlBvbC9X/7eFh6MLxgtwuVtzgukkJid1K6lu1kqkE6hlSQvxrMtzZQ==
+X-Received: by 2002:adf:f6ce:: with SMTP id y14mr2183823wrp.113.1558594156785; 
+	Wed, 22 May 2019 23:49:16 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
@@ -40,16 +40,16 @@ Received: from mueller-a-nb-linux.speedport.ip
 	d9sm33827524wro.26.2019.05.22.23.49.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:15 -0700 (PDT)
+	Wed, 22 May 2019 23:49:16 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:27 +0200
-Message-Id: <20190523064859.24336-10-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:28 +0200
+Message-Id: <20190523064859.24336-11-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 09/41] gnome-menus3: upgrade 3.10.1 -> 3.32.0
+Subject: [PATCH 10/41] gnome-bluetooth: upgrade 3.18.2 -> 3.32.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,51 +62,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:15 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* No Changelog avalailable - they suggest to clone the repo :(
-* they use gettext instead of intltool
-* gconf is not required in DEPENDS - modern gnome does not use gconf anymore
-* add upstream-version-is-even to inherit
+* move to meson-build
+* they do not maintain a changelog but suggest to clone the repo
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...{gnome-menus3_3.10.1.bb => gnome-menus3_3.32.0.bb} | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-menus/{gnome-menus3_3.10.1.bb => gnome-menus3_3.32.0.bb} (41%)
+ ...uetooth_3.18.2.bb => gnome-bluetooth_3.32.1.bb} | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_3.18.2.bb => gnome-bluetooth_3.32.1.bb} (48%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
-similarity index 41%
-rename from meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb
-rename to meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
-index 647ae914f..b6d212a27 100644
---- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.32.0.bb
-@@ -4,18 +4,15 @@ LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
+similarity index 48%
+rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
+index 8cfd65af3..181cb1f68 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
+@@ -6,14 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
  
--DEPENDS = "python libxml2 gconf popt gtk+3 intltool-native gnome-common-native"
-+DEPENDS = "python libxml2 popt gtk+3 gnome-common-native"
+ SECTION = "x11/gnome"
  
--inherit distro_features_check gnomebase pkgconfig python-dir pythonnative gobject-introspection
-+inherit distro_features_check gnomebase gettext pkgconfig gobject-introspection upstream-version-is-even
+-DEPENDS = "udev gtk+3 libnotify libcanberra intltool-native gnome-common-native \
++DEPENDS = " \
++    udev gtk+3 libnotify libcanberra \
+     ${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)} \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11"
+-inherit gnomebase gtk-icon-cache gobject-introspection distro_features_check
+-REQUIRED_DISTRO_FEATURES = "x11"
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit gnomebase gtk-icon-cache gobject-introspection gettext distro_features_check
  
- BPN = "gnome-menus"
+-SRC_URI[archive.md5sum] = "75d09c924468ec0c687f9ab3acf7f113"
+-SRC_URI[archive.sha256sum] = "d8df073c331df0f97261869fb77ffcdbf4e3e4eaf460d3c3ed2b16e03d9c5398"
++REQUIRED_DISTRO_FEATURES = "x11"
  
--SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
--SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BPN}-${PV}.tar.xz"
--
--SRC_URI[md5sum] = "6db025e79e2b69f39fc7aa0753f43081"
--SRC_URI[sha256sum] = "46950aba274c1ad58234374fa9b235258650737307f3bc396af48eb983668a71"
-+SRC_URI[archive.md5sum] = "4262208c13f266d9ada7d356aada9e1b"
-+SRC_URI[archive.sha256sum] = "c850c64b2074265fe59e099a340b8689cf3dd4658dc9feddd2ab5e95f1a74b74"
- 
- FILES_${PN} += "${datadir}/desktop-directories/"
+-FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
++SRC_URI[archive.md5sum] = "5b3d66f564a5067ea154750cdb6d850d"
++SRC_URI[archive.sha256sum] = "6441cafd313af94fba28b701698074f97d693b9023788a74e8e6f16f817ba1aa"
 -- 
 2.20.1
 
