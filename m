@@ -1,46 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E25CB7E3B2
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 4ADBC7E33D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 15:21:47 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id j53so7157306qta.9
+	Thu, 23 May 2019 17:47:43 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id gn7so3028983plb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 08:21:49 -0700 (PDT)
+	Thu, 23 May 2019 10:47:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hKPPLKpXnW/4eSxuE9b//fTv83Dig2xPd5REM6/h+mk=;
-	b=XJd5CzvBhicE1d0bpY4JAIrCAo0cQknawihCTGXmQsW8vyRG69ukFc9eA/c/43YNgv
-	3vbdbk7LeJRvD7AiwHL8wmtaujCLN/Vmb0WbNIIV8xE4+q2PU26lduVdLclFs6EHhsQI
-	tpbdjxrJjOrBOhX95Y+d3JoOy4bGnNWzf8EMtSfv/fUT2FJpC/dZ9utM8H8YGlcF4VWn
-	Iht+WHzm6xM5AGDK+MvtjM688xBWOHjWZhczdRcYcJAM/cCZSPUJaDc3+efB7hQMAJ28
-	W+AzqtjMy78+Tnr12ifkpqdu+PzaNPTUmxxt7JIlfjfm5H1Qr4kwIH+iJPfitcwd08kk
-	8x7g==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Qlft00vW7RvRSorB0gew4TvwaLs7F0YIvzdIboffWv8=;
+	b=c8jY21dJb2OcxEjZ0PV/HjCgr+lYY8g/pYnOY62UwhR7UauEkYGO/Rd1CvY3fCFyJF
+	x4GNR3xr+Vckx/4vdU2NH9+GK852ic40vMYzGwZrHD6WoCJn0VWJ+c7XoEW7iIq9NmRf
+	IvYyCjCyp9oEHd/MFIWIpnsE5yQV58bgVb9YtCTmrDJ6f+lefTAD4Fsf5Ufg85O6udyD
+	cH1lQkVF7l20xbbYpR2j4RjCcoOFTLZoBT4P3FRPTS3Au4MjwvTl+dvQ9rCMf55vFwI6
+	jxqQSxNy1zhSWm7wXSvAGY1gy2YvALUV9ho9+a9ppTokJueyPqS5kRDOGq1/LIfaPdqm
+	stSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=hKPPLKpXnW/4eSxuE9b//fTv83Dig2xPd5REM6/h+mk=;
-	b=ATpoE6o7FwMiTOvgSCJQc+h+b08/Ah6CuWLPPokgrAzwP6mJWRyGXqkM1L6HBguAdP
-	GElxAXFqZtQk2mnxSlgox6kmNhfvWqlSA35HlW80oroOODen0v7h+tK+cbEVtFwurS0T
-	UUjS+2JmteVQ2amSdwAIuFBOZWf61z9KvRaskYysznrLjwPqBwNWLlldcB0JrOMdXtdS
-	tIojjl/3f3W42rcYIOIwMRB4MZ/RWze++MvSG0D7/B0qox4b3zwlXyAmV0YipPE4iyoh
-	vAwYqJctNqUpVQKyYccZNJ44PoON8d6u7tMbUhapx5gHEZISmg+j7pNCN+KXXWP87VxB
-	5+8Q==
-X-Gm-Message-State: APjAAAXIkIYTMKYKa8rBHARU/K6NIP/mdSgX3YzMkTD2HQXFR+z9wslA
-	n0x4sbBGCi+KgjKFoGPlQkmNcZbKhAuig7Da66E=
-X-Google-Smtp-Source: APXvYqxwlNxm27V7b2CLT8IJZ7kLNtKRjB9wZ1K5WiD5Oeev9FzPRbrrZ6ch0NCVWj2/5fFVSOrYZug0zCWiKkfucQc=
-X-Received: by 2002:aed:23a8:: with SMTP id j37mr42898152qtc.53.1558624908508; 
-	Thu, 23 May 2019 08:21:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190521210926.5236-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190521210926.5236-1-open.source@oleksandr-kravchuk.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Qlft00vW7RvRSorB0gew4TvwaLs7F0YIvzdIboffWv8=;
+	b=EymWX6KFzI0M1bkAOrRkq/t3goFpBUUIglX5B3khdBkOO/Os2UOJDJBfSgnCc0uL6M
+	LAPenhIFeXtU/F0ut5Ew6XrwmSKv5/Yj1GdwjJn8DNfbG3+mm1j6oWOoI8q66ClltEqG
+	+Wt1b3+BCVwRgBIsCJU4NeNg/nyV6yRG/o3kO8aLGeldiGqu81PuF+cbYrsREpzvsjYY
+	7+Ed2JTkJmDsdVP/4uWHGKoGhxdSF9FVVAc84X+ARwFhY6oXrl2mF/wBrY2MUUFUqZ5R
+	hNOycEFwVGI59ISS/JkRFQfLNBm0hIsF6qNNvRT75Zuj+aSwoFcB2GjNVFObW6X49aEc
+	HRnQ==
+X-Gm-Message-State: APjAAAXat8AIWEu+s2OyABWlhUZLNeca3RfQj4c/JPtk8H8eRfwsfUlP
+	wYCl5zRmFg+/4btJOlj+DVgri2gnQYM=
+X-Google-Smtp-Source: APXvYqyV/8LnpqS2Wet6xMyBNMS7zwPY5LRYLBCUK7nNh7os2FwnJzjVod+2wjbP6ibtQ9cAWq6qGg==
+X-Received: by 2002:a17:902:868c:: with SMTP id
+	g12mr83582022plo.323.1558633663408; 
+	Thu, 23 May 2019 10:47:43 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::e252])
+	by smtp.gmail.com with ESMTPSA id y7sm1569217pja.26.2019.05.23.10.47.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 23 May 2019 10:47:42 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 23 May 2019 08:21:22 -0700
-Message-ID: <CAMKF1spwUr0cbT1Zf+tYhBUh5j8zcR8-_SPZJHCWyEODZ-7Jgw@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] lldpd: update to 1.0.3
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 May 2019 10:47:35 -0700
+Message-Id: <20190523174735.42541-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] spice, spice-protocol: Uprev to 0.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,93 +57,191 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 15:21:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 23 May 2019 17:47:43 -0000
+Content-Transfer-Encoding: 8bit
 
-This fails on musl
+Drop the patch for fixing printf formatting, its fixed differently
+upstream
 
-https://errors.yoctoproject.org/Errors/Details/241886/
+Forward port pthread_t printf patch
 
-I think limits.h needs to be included for missing PATH_MAX
+Add -Wno-address-of-packed-member needed with gcc9
 
-On Tue, May 21, 2019 at 2:09 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Removed patch is not appropriate anymore.
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  ....service.in-Use-fixed-path-for-mkdir.patch | 32 -------------------
->  .../lldpd/{lldpd_0.9.8.bb => lldpd_1.0.3.bb}  |  5 ++-
->  2 files changed, 2 insertions(+), 35 deletions(-)
->  delete mode 100644 meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
->  rename meta-networking/recipes-daemons/lldpd/{lldpd_0.9.8.bb => lldpd_1.0.3.bb} (91%)
->
-> diff --git a/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch b/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
-> deleted file mode 100644
-> index 4876e1794..000000000
-> --- a/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
-> +++ /dev/null
-> @@ -1,32 +0,0 @@
-> -From f9f3e4dd31588cce5f655730da7b5c3f56a9bdc1 Mon Sep 17 00:00:00 2001
-> -From: Fabio Berton <fabio.berton@ossystems.com.br>
-> -Date: Tue, 26 Sep 2017 09:19:51 -0300
-> -Subject: [PATCH] src/daemon/lldpd.service.in: Use fixed path for mkdir command
-> -Organization: O.S. Systems Software LTDA.
-> -
-> -@mkdir_p@ is expanded to host tools path ../build/tmp/hosttools/mkdir that
-> -doesn't exist on target. Remove @mkdir_p@ and use /bin/mkdir -p to
-> -create /var/run/lldpd directory.
-> -
-> -Upstream-Status: Inappropriate [configuration]
-> -
-> -Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-> ----
-> - src/daemon/lldpd.service.in | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/daemon/lldpd.service.in b/src/daemon/lldpd.service.in
-> -index fdb7338..4291830 100644
-> ---- a/src/daemon/lldpd.service.in
-> -+++ b/src/daemon/lldpd.service.in
-> -@@ -9,7 +9,7 @@ Type=notify
-> - NotifyAccess=main
-> - EnvironmentFile=-/etc/default/lldpd
-> - EnvironmentFile=-/etc/sysconfig/lldpd
-> --ExecStartPre=@mkdir_p@ @PRIVSEP_CHROOT@
-> -+ExecStartPre=/bin/mkdir -p @PRIVSEP_CHROOT@
-> - ExecStart=@sbindir@/lldpd $DAEMON_ARGS $LLDPD_OPTIONS
-> - Restart=on-failure
-> - PrivateTmp=yes
-> ---
-> -2.14.2
-> diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb
-> similarity index 91%
-> rename from meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb
-> rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb
-> index dbd84cf67..9a912a2fe 100644
-> --- a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb
-> +++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb
-> @@ -9,11 +9,10 @@ SRC_URI = "\
->      http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
->      file://lldpd.init.d \
->      file://lldpd.default \
-> -    file://src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch \
->      "
->
-> -SRC_URI[md5sum] = "8809600492f6b73149eb19158e819c1f"
-> -SRC_URI[sha256sum] = "9ee494e91bc33938575b2c09b26188c486ef8eac6e2155d250c189cc4e988c4f"
-> +SRC_URI[md5sum] = "04844328f053ee343344d892efb8a00c"
-> +SRC_URI[sha256sum] = "39fced395168015416bfe78b95414facf066f841f349024433aa20ab54e4c360"
->
->  inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+replace _append += with just _append syntax
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../spice/spice-protocol_git.bb               |  4 +--
+ ...0001-Convert-pthread_t-to-be-numeric.patch | 25 +++++--------
+ .../0001-spice-fix-compile-fail-problem.patch | 36 -------------------
+ .../recipes-support/spice/spice_git.bb        | 11 +++---
+ 4 files changed, 17 insertions(+), 59 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/spice/spice/0001-spice-fix-compile-fail-problem.patch
+
+diff --git a/meta-networking/recipes-support/spice/spice-protocol_git.bb b/meta-networking/recipes-support/spice/spice-protocol_git.bb
+index 30d0a76752..be9dba32f1 100644
+--- a/meta-networking/recipes-support/spice/spice-protocol_git.bb
++++ b/meta-networking/recipes-support/spice/spice-protocol_git.bb
+@@ -13,9 +13,9 @@ architectures."
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b37311cb5604f3e5cc2fb0fd23527e95"
+ 
+-PV = "0.12.13+git${SRCPV}"
++PV = "0.14.0+git${SRCPV}"
+ 
+-SRCREV = "87441524f4e7b79658e42bd8f1f6c3e3c8649aa5"
++SRCREV = "f72ece993aeaf23f77e2845562b20e5563e52ba0"
+ 
+ SRC_URI = " \
+     git://anongit.freedesktop.org/spice/spice-protocol \
+diff --git a/meta-networking/recipes-support/spice/spice/0001-Convert-pthread_t-to-be-numeric.patch b/meta-networking/recipes-support/spice/spice/0001-Convert-pthread_t-to-be-numeric.patch
+index 505b7c890b..e63cbe3b72 100644
+--- a/meta-networking/recipes-support/spice/spice/0001-Convert-pthread_t-to-be-numeric.patch
++++ b/meta-networking/recipes-support/spice/spice/0001-Convert-pthread_t-to-be-numeric.patch
+@@ -14,21 +14,19 @@ Upstream-Status: Pending
+  server/red-client.c  | 6 +++---
+  2 files changed, 6 insertions(+), 5 deletions(-)
+ 
+-diff --git a/server/red-channel.c b/server/red-channel.c
+-index 1b38f04d..11dc667b 100644
+ --- a/server/red-channel.c
+ +++ b/server/red-channel.c
+-@@ -192,7 +192,7 @@ red_channel_constructed(GObject *object)
++@@ -204,7 +204,7 @@ red_channel_constructed(GObject *object)
+  {
+      RedChannel *self = RED_CHANNEL(object);
+  
+--    red_channel_debug(self, "thread_id 0x%lx", self->priv->thread_id);
+-+    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
++-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", self->priv->thread_id);
+++    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
+  
+      RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
+  
+-@@ -475,7 +475,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
+-         red_channel_warning(channel, "channel->thread_id (0x%lx) != pthread_self (0x%lx)."
++@@ -479,7 +479,8 @@ void red_channel_remove_client(RedChanne
++                             "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+                              "If one of the threads is != io-thread && != vcpu-thread, "
+                              "this might be a BUG",
+ -                            channel->priv->thread_id, pthread_self());
+@@ -37,12 +35,10 @@ index 1b38f04d..11dc667b 100644
+      }
+      spice_return_if_fail(channel);
+      link = g_list_find(channel->priv->clients, rcc);
+-diff --git a/server/red-client.c b/server/red-client.c
+-index ddfc5400..76986640 100644
+ --- a/server/red-client.c
+ +++ b/server/red-client.c
+-@@ -180,7 +180,7 @@ void red_client_migrate(RedClient *client)
+-         spice_warning("client->thread_id (0x%lx) != pthread_self (0x%lx)."
++@@ -180,7 +180,7 @@ void red_client_migrate(RedClient *clien
++                       "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+                        "If one of the threads is != io-thread && != vcpu-thread,"
+                        " this might be a BUG",
+ -                      client->thread_id, pthread_self());
+@@ -50,8 +46,8 @@ index ddfc5400..76986640 100644
+      }
+      FOREACH_CHANNEL_CLIENT(client, rcc) {
+          if (red_channel_client_is_connected(rcc)) {
+-@@ -199,8 +199,8 @@ void red_client_destroy(RedClient *client)
+-         spice_warning("client->thread_id (0x%lx) != pthread_self (0x%lx)."
++@@ -199,8 +199,8 @@ void red_client_destroy(RedClient *clien
++                       "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+                        "If one of the threads is != io-thread && != vcpu-thread,"
+                        " this might be a BUG",
+ -                      client->thread_id,
+@@ -61,6 +57,3 @@ index ddfc5400..76986640 100644
+      }
+      red_client_set_disconnecting(client);
+      FOREACH_CHANNEL_CLIENT(client, rcc) {
+--- 
+-2.17.1
+-
+diff --git a/meta-networking/recipes-support/spice/spice/0001-spice-fix-compile-fail-problem.patch b/meta-networking/recipes-support/spice/spice/0001-spice-fix-compile-fail-problem.patch
+deleted file mode 100644
+index 1f9d5fdd7b..0000000000
+--- a/meta-networking/recipes-support/spice/spice/0001-spice-fix-compile-fail-problem.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 7023732c65b4dc509c46a54fb7715da275b5597f Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Thu, 13 Sep 2018 12:39:44 +0800
+-Subject: [PATCH] spice: fix compile fail problem
+-
+-compile error:
+-format '%d' expects argument of type 'int', but argument 6 has 
+-type 'long unsigned int' [-Werror=format=]
+-
+-spice compile failed on 32bit system, since upstream commit
+-9541cd2fe(in V0.14.1) change %ld to %PRIdPTR, %PRIdPTR is %d, but argument
+-strm.total_out is uLong.
+-
+-Upstream-Status: Submitted[https://github.com/freedesktop/spice/pull/1]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- server/red-replay-qxl.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
+-index 1fce76c..bd33b58 100644
+---- a/server/red-replay-qxl.c
+-+++ b/server/red-replay-qxl.c
+-@@ -266,7 +266,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
+-             exit(1);
+-         }
+-         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
+--            spice_error("inflate error %d (disc: %" PRIdPTR ")", ret, *size - strm.total_out);
+-+            spice_error("inflate error %d (disc: %ld)", ret, *size - strm.total_out);
+-             if (ret == Z_DATA_ERROR) {
+-                 /* last operation may be wrong. since we do the recording
+-                  * in red_worker, when there is a shutdown from the vcpu/io thread
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 1ad46c2c31..6249b0422b 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -13,10 +13,10 @@ architectures."
+ LICENSE = "BSD & LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+-PV = "0.14.1+git${SRCPV}"
++PV = "0.14.2+git${SRCPV}"
+ 
+-SRCREV_spice = "eaa07ef15cfc3bf57a69da2576af66f028787774"
+-SRCREV_spice-common = "6b93b3fce8909b836ef1d1434d191900d8aa00be"
++SRCREV_spice = "7cbd70b931db76c69c89c2d9d5d704f67381a81b"
++SRCREV_spice-common = "4fc4c2db36c7f07b906e9a326a9d3dc0ae6a2671"
+ 
+ SRCREV_FORMAT = "spice_spice-common"
+ 
+@@ -24,7 +24,6 @@ SRC_URI = " \
+     git://anongit.freedesktop.org/spice/spice;name=spice \
+     git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
+     file://0001-Convert-pthread_t-to-be-numeric.patch \
+-    file://0001-spice-fix-compile-fail-problem.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+@@ -37,6 +36,8 @@ DEPENDS_append_class-nativesdk = "nativesdk-openssl"
+ export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
+ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
+ 
++CFLAGS += "-Wno-address-of-packed-member"
++
+ PACKAGECONFIG_class-native = ""
+ PACKAGECONFIG_class-nativesdk = ""
+ PACKAGECONFIG ?= "sasl"
+@@ -54,4 +55,4 @@ COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-EXTRA_OECONF_toolchain-clang += "--disable-werror"
++EXTRA_OECONF_append_toolchain-clang = " --disable-werror"
+-- 
+2.21.0
+
 
