@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9042E7E41F
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+	[209.85.221.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B7DF7E424
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:20 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id d18so4884943wrs.5
+	Thu, 23 May 2019 06:49:21 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id d18so4884981wrs.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:21 -0700 (PDT)
+	Wed, 22 May 2019 23:49:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=WP+SUvCO3g4Pvoj6fCI+IZKcGzZrxUNMoGjptfDMgxI=;
-	b=CzLRYnJbxFNHlHldfFOPvtK6afVfl8O3+/UcnVvfcEPK0yFTzHito0U8deqJMtCbg9
-	x2TrljC0YMdo12jvIhOqYV+7UNwRg+xqvwreoAs1Ekz3gefwDrxqDi2s1R0WlEzENi+b
-	0MRBNK7SCZwiReCzvg8oMRc7tI8nmXyOBAuuI32Y4pJgPlB3uX2wj/gDmhHsuTQtXpzG
-	SrT9t8UXLVLZAtGlmv+NpgId9OjPJClcdUz8Zh/P1T6b3C8LT4Y9xmWPb0vIrA5TpFMu
-	P9bzfXABi/UFibWOrdFDmOrRfzAbwftFC7ppfvK2pKYLSFH/urfPrUyP4eQssVBYqbdi
-	3BXA==
+	bh=BKKz//XRKH0MeNaWWyGO/9S+mZfkVM+0N3e66EreJnw=;
+	b=eh+gSc2oxf0Ae7eoxcTKQGBSXUUbr2exUBlO02QjYjsEaHq08DwuFAoUwA2pfA+72F
+	eDeFbHDbWI3cBzNRkdM3Q9ysFEmAUROofKrdeXvvHO56bZ82xMSwvCMgPBREwtzS7Q+I
+	aUJ9RKDEgsNmjdEm8RNCRhifPi1+wBauXYMnMBWCUPcG5BcCZtdP4y9TnEVAQunOAb/9
+	IeF324KbGRyr8ub+8ik6NZL6dLpUtWQXJGsUZoVrPdy48PTiev2QKjdui198xIzKMtOA
+	7Uj7jHnuQgY1CB1M2hJ3ooWdbxCcj450YGY/MpP1Myoo2hrI01fT9DXXv+5+du1ak4Yq
+	K7CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=WP+SUvCO3g4Pvoj6fCI+IZKcGzZrxUNMoGjptfDMgxI=;
-	b=SrA1+J6zWprtgv34fCvTKasHC6Hv2TSDZMhBnuGKIGXUxMML432e4/D5lb7ajCJbLq
-	7BNgn4nwOatxmRsu4Zgo3TCwU56Id0WZpq/NDW2Fyz/y+3wU+RKHMX4dr3nGtZcZ2xVE
-	3VB68L36Psi4BCuOhiCsMVZ2sW+Jzh4wd9I0qLRy2TT90Arc+lZq5IEY2OHGKZc6Hfr7
-	NQW6Kt7Ku6DuYhpazXT8DibZiNPsPvuG37W3NsBj+7p4xZsaY6ZHD9LppuCdaUhO2QMN
-	4IBnP+CZthGcfYpKM9R+xOOPUTuxnbpIvqB22r4PBspXRTb0f3Ei5+KqHZZyKiiV32JQ
-	19Vg==
-X-Gm-Message-State: APjAAAUBJ7TCNDhhpSU5am/LpeaurbLh5VJSBwYpEYuvcsBhkRgME8zz
-	QYbwSTim/xMYz/G44r3VpRhcdHbJH3c=
-X-Google-Smtp-Source: APXvYqzF/d7qOPc1Sqe5pAW1X51gwuiCyVfSFDpIe5WE4Vxa1InmUDJWPzCi4TbxW7j/KO5S9HI4Bg==
-X-Received: by 2002:adf:fdc1:: with SMTP id i1mr30280709wrs.103.1558594161221; 
-	Wed, 22 May 2019 23:49:21 -0700 (PDT)
+	bh=BKKz//XRKH0MeNaWWyGO/9S+mZfkVM+0N3e66EreJnw=;
+	b=qNGHQk+jtcVQtG1hV7ll9CKDbIysSg3cyqJ6jOVp8hScCo/BLwsDGC95wqFLWxpK7H
+	ktdGSG8FQzaR18CmMRkO3oPSucbyrG/8lmHUWCqn8ewe+2c6GJ+xK7TwET4GclkWuTCz
+	oReeTuBrIanA1mx+mWyh4fCkpJ+1DaU9LO8RFkAxSVecr5EW8qySQvtGkhl23LrrIR5l
+	fkqAJYowc8+d8fp+PCtca3j3rn9eBMDlTTSe/wUY88FKl+byRwTMu7ReYCwWP81Pc+tx
+	QTcsr6tC/BaOYxK/zrUwAGvaPobGEXT0SGxyVh4mpLCZk5vawdJpJW+Mzb+we5pWoI3d
+	Y8+A==
+X-Gm-Message-State: APjAAAXNuQfpCjWQmMsLIGkQM38nCcIS+FPWaaufP1NnKT3vrCN8Y7Hm
+	Ej0Dqmc610qYAUmhRTAT+2JFaqcHkP8=
+X-Google-Smtp-Source: APXvYqztQUzLKUxtgMWQIvTa+7+XacgixwfOMzp+f7sbypwv1xXpkgYU4PZUbbUeRjS6hpTKJJrwNA==
+X-Received: by 2002:adf:de82:: with SMTP id w2mr6536695wrl.53.1558594162053;
+	Wed, 22 May 2019 23:49:22 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.20
+	d9sm33827524wro.26.2019.05.22.23.49.21
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:20 -0700 (PDT)
+	Wed, 22 May 2019 23:49:21 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:33 +0200
-Message-Id: <20190523064859.24336-16-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:34 +0200
+Message-Id: <20190523064859.24336-17-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 15/41] mousepad: move to gtk3
+Subject: [PATCH 16/41] network-manager-applet: port to meson build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,38 +62,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:20 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-At the time of creation there was no gtksourceview3. That was a blocker
-to use gtk3. gtksourceview3 was added long ago.
+Thanks to meson being more precise / better readable we can get rid of old crap
+e.g useless dependency on libgnome-keyring.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ .../network-manager-applet_1.8.20.bb          | 23 +++++++------------
+ 1 file changed, 8 insertions(+), 15 deletions(-)
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
-index d122bfe37..67c49930b 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
-@@ -6,14 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- # intltool to provide intltool.m4 with AC_PROG_INTLTOOL
- # xfce4-dev-tools-native for XDT_I18N macro and more importantly XDT_CHECK_OPTIONAL_PACKAGE
- # which fixes mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
--DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-native"
-+DEPENDS = "gtk+3 dbus dbus-glib gtksourceview3 intltool-native xfce4-dev-tools-native"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
+index 7181f5ecf..45f552a88 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
+@@ -3,32 +3,25 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- inherit xfce-app gsettings
+ DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
+-           gconf libgnome-keyring iso-codes nss \
++           gconf iso-codes nss \
+            intltool-native \
+ "
  
- SRC_URI[md5sum] = "fb85c23bcb096a46aee9ec22b4e4fdf5"
- SRC_URI[sha256sum] = "39a7379b929d964665299c385b2cf705e32e8760698ccc34f91c990bb733518b"
+-GNOMEBASEBUILDCLASS = "autotools-brokensep"
+-inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introspection
++GNOMEBASEBUILDCLASS = "meson"
++inherit distro_features_check gnomebase gsettings gtk-doc gtk-icon-cache gobject-introspection
  
--# we have no gtksourceview 3.x around
--EXTRA_OECONF = "--disable-gtk3"
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI[archive.md5sum] = "06aafa851762146034351aa72ebb23d4"
+ SRC_URI[archive.sha256sum] = "050dbb155566c715239dc0378844d8beed10954e64e71014ecef8ca912df34ec"
+ 
+-PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
+-PACKAGECONFIG[mobile-provider-info] = "--enable-mobile-broadband-provider-info,--disable-mobile-broadband-provider-info,mobile-broadband-provider-info,mobile-broadband-provider-info"
+ PACKAGECONFIG ??= ""
++PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr"
++PACKAGECONFIG[modemmanager] = "-Dwwan=true, -Dwwan=false, modemmanager"
++PACKAGECONFIG[mobile-provider-info] = "-Dmobile_broadband_provider_info=true, -Dmobile_broadband_provider_info=false, mobile-broadband-provider-info,mobile-broadband-provider-info"
++PACKAGECONFIG[selinux] = "-Dselinux=true, -Dselinux=false, libselinux"
+ 
+-EXTRA_OECONF = " \
+-    --without-selinux \
+-"
 -
- FILES_${PN} += "${datadir}/glib-2.0/schemas"
+-do_configure_append() {
+-    # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
+-    for i in $(find ${B} -name "Makefile") ; do
+-        sed -i -e s%-Werror[^[:space:]]*%%g $i
+-    done
+-}
++GTKDOC_MESON_OPTION = "gtk_doc"
+ 
+ # gobject-introspection related
+ GI_DATA_ENABLED_libc-musl = "False"
 -- 
 2.20.1
 
