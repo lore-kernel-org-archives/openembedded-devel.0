@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id CADA37E457
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 80C6B7E457
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:37 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id j187so4508031wmj.1
+	Thu, 23 May 2019 06:49:38 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id m3so4884770wrv.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 May 2019 23:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=htQt3hqiEexvAI2RWplHEKewRglQ2Wq+tR2Lr1qTlYY=;
-	b=UW/5IdyNe3I4xMSsvPQ7Al4Qsx1Fym2Vp5GWuv0plUB7QPbz1W9QJ0ntanXXf8t/gJ
-	SJhOOTqWZEkONumjql2DU2eUlHjnmnTvieXnVLzpl7U7MqzozMb6nslYYf+frPBwpUdp
-	q8EsxEToTwpl+jcS2ldt3mWb0vCVNdGdeldnhPNgg1vPYkQ3g9yhib4//wvU6J7hL3DR
-	QBqWIFZE56iOkbvJ/GDZNBTD6Zvx1IqdnHb4vGhBazZZrsWtAQHmVIYdGa6ZYTuCP462
-	uhplehRAp64UH+N/GGkZ+wNZxvkeC59b4MWBvBrS2xThg+a47tiCD/eZLqS6S+bnA9iS
-	G8xA==
+	bh=T05j4G4KgpmMlSQDx3/1Y5QY4r8upULw6DDXgiafI6E=;
+	b=JrgWaNK3ofEqB7HXRC3m8bnEkWWbMoA2huUnqGqShd1D9BGB0wkIAXQG3jTTYIposZ
+	/3gO6UOjHZ6FzXkb1BbKnnABDJZg4JSoB3O4cPDLepCYO881L7iAPAg1uFFv/fkKIjve
+	DB4XTO4+gvAPZTDUggRrNVNBvDzQpoLYTDpnS89YNgY3qmrEz9ebxmcRuWGd9jC7jann
+	JLDNxQlfoWwRJIg6amA0BvXbbF08eKW4Q+9KMOuuHZ/bzdCYLl7vMrl+zfX+XZt+Ixgq
+	LTEUiYeZvwcgF4/oFOUpf0ePr5BFheHZR7wX0JbI7Cs1Irfg7OCmEZCyWlzdoMH805Ux
+	Y0VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=htQt3hqiEexvAI2RWplHEKewRglQ2Wq+tR2Lr1qTlYY=;
-	b=rwGUwG0I1AC6rlZNWAIPGV2XMXNolz5TeBkzL2X/t1T4mAU2UWzXf2rgv7iJNVeISX
-	bc1dQyc4nmxTKjO+qOr1DE2l2ZN8c+Kuq6h6Bfdmg2/KpyGWPcHFlqjSm5v4A9v7lr8r
-	6edlxx8wiAkLhVDUBd/s2K6jSFFuL/Rvrv0RSC4uuQTU77+JNABXu95XrF9gxJnGdyny
-	LaK69bv9B0CxGhBjhuIqyjOqPuyMc2YPIkLjAa8e6L1FZqXFqNwM3KY+Txy2y0L4pOF2
-	n9R2ZEtssEngLkJnlP9whcFmUGNW08+uGCoFPA8XMPRIVaJCmVEF1xUopEFYAvwVFjNe
-	0h7w==
-X-Gm-Message-State: APjAAAX1/gQn6FnLqj6hS9NSGduYlFj7/w4dbdHuiectaNj6r6gfmkSV
-	qDjBLMUronvkw3KPssB8hPWBM1GsJ4w=
-X-Google-Smtp-Source: APXvYqyjdU59g997N1AhDPabPmmv8VHJB2oKpEOhf4jXeoaSl1zNi3/NbOFQPXz0sR5p7J7U2D5++g==
-X-Received: by 2002:a7b:ca47:: with SMTP id m7mr10813587wml.77.1558594178429; 
-	Wed, 22 May 2019 23:49:38 -0700 (PDT)
+	bh=T05j4G4KgpmMlSQDx3/1Y5QY4r8upULw6DDXgiafI6E=;
+	b=IjAHr97agNQDFoUD1Zfqu3LsN+8d2pwKL9wTMNp5aLOMwkCRrG1nUyuVSiA8bAoGxb
+	oWpRvooJaP2MWHpYBITksNY1TgpvDVKmd9QjdDhnB5znr9wTaiyvRg5/N/RLOdUpg4x/
+	BDUZeeYYwnBKHoKrYUdAykUCD45dV7knS8ynf1TW5YXCgyolaOLkjvDmQEV/Sqwo0ztL
+	UtoXk3m4S/x68jmUaZzmsX2nERBOusKnYJJKp92qTOI3A2sieqBOpjCUpKHGS8fWGXlN
+	Qs4gH76yaYF/EndetFBkwpeRJ/7Ok/NUIIr2B+QmgDZlErAtmEKnZ1YU+CdeuPQ6tgli
+	1mXA==
+X-Gm-Message-State: APjAAAXlVfrhu6sl855WsC3Pc+2T0M3RCeG/uieKyIQFkhHgbr0vQaHw
+	DefodwJdi6r/ozgeU+Ia2oqS5DDywWY=
+X-Google-Smtp-Source: APXvYqwrANHcPgAWIjk5bh7PXBOQczoE/CK8aNRjUrCvA33tdmdddtUsI4i//xfl2Ggz+OOZM3UFnw==
+X-Received: by 2002:adf:de82:: with SMTP id w2mr6537522wrl.53.1558594179208;
+	Wed, 22 May 2019 23:49:39 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.37
+	d9sm33827524wro.26.2019.05.22.23.49.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:37 -0700 (PDT)
+	Wed, 22 May 2019 23:49:38 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:53 +0200
-Message-Id: <20190523064859.24336-36-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:54 +0200
+Message-Id: <20190523064859.24336-37-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 35/41] libgnomekbd: cleanup
+Subject: [PATCH 36/41] libwnck: GNOME_COMPRESS_TYPE = "xz"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,47 +62,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:38 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:39 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* cleanup inherit -> EXTRA_OECONF_remove can go
-* remove unnecessary DEPENDS
-* remove GNOME_COMPRESS_TYPE = "xz"
-* rename folder libgnome -> libgnomekbd
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{libgnome => libgnomekbd}/libgnomekbd_3.26.1.bb      | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
- rename meta-gnome/recipes-gnome/{libgnome => libgnomekbd}/libgnomekbd_3.26.1.bb (63%)
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
-similarity index 63%
-rename from meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-rename to meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
-index 3a7379f9e..8d84b79cc 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-+++ b/meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
-@@ -4,16 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
- 
- SECTION = "x11/gnome/libs"
- 
--DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
-+DEPENDS = "gtk+3 libxklavier"
- 
--inherit distro_features_check gnome gobject-introspection gettext
-+inherit gnomebase gobject-introspection gettext distro_features_check
- 
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+index ea4c8df53..f50b9ceb9 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+@@ -11,7 +11,6 @@ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-s
+ inherit gnomebase gobject-introspection distro_features_check
  REQUIRED_DISTRO_FEATURES = "x11"
  
 -GNOME_COMPRESS_TYPE = "xz"
--
- SRC_URI[archive.md5sum] = "98040022484406e7ebe25f82cef93344"
- SRC_URI[archive.sha256sum] = "f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679"
--
--EXTRA_OECONF_remove = "--disable-schemas-install"
--
+ SRC_URI[archive.md5sum] = "f03e1139296e2a3a92e3b65a3080cd32"
+ SRC_URI[archive.sha256sum] = "83f732d20781fc88b22cdc6aaf2d4f388db6d3d4ff28d1a8fd45be9fb7743a9e"
+ 
 -- 
 2.20.1
 
