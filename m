@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E9A897E446
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id CADA37E457
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:36 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id y3so4527622wmm.2
+	Thu, 23 May 2019 06:49:37 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id j187so4508031wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:38 -0700 (PDT)
+	Wed, 22 May 2019 23:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=bWZC5StyW2WcBFCgrQvO11EEn86VxR+vSBj9g6Msrgc=;
-	b=ZbazRsahWEcIprHV8lqKSiceOTvpF57xyIosR3hR8wxzYybc6zfhQEJsaDKhJASi3Z
-	CAuooi8BRlma8dd0D+TV9ZT9pTYq2P/D3RxLLtroBby+9RPzcQ5L921kmZDhk1aJlN9q
-	F5mGGNZq+kAuNCc0AY2/DLXfnrIptESu2hNX4+S5uIdPaXxNbhwmFbsJnfQPHa0SRAe0
-	PXXd98bBcafhqGwGxeqKkIpp0D8r0FGj1682CkXU7nJ3l9N7kiaMfwRPoBMjKYZs3lUc
-	ynx2T+rN1D5imi7K/ID9i5SQLGQrFEEkEDBNgnFVF6/J/zVWjeOiaHPwgam6TaYXwfk4
-	slug==
+	bh=htQt3hqiEexvAI2RWplHEKewRglQ2Wq+tR2Lr1qTlYY=;
+	b=UW/5IdyNe3I4xMSsvPQ7Al4Qsx1Fym2Vp5GWuv0plUB7QPbz1W9QJ0ntanXXf8t/gJ
+	SJhOOTqWZEkONumjql2DU2eUlHjnmnTvieXnVLzpl7U7MqzozMb6nslYYf+frPBwpUdp
+	q8EsxEToTwpl+jcS2ldt3mWb0vCVNdGdeldnhPNgg1vPYkQ3g9yhib4//wvU6J7hL3DR
+	QBqWIFZE56iOkbvJ/GDZNBTD6Zvx1IqdnHb4vGhBazZZrsWtAQHmVIYdGa6ZYTuCP462
+	uhplehRAp64UH+N/GGkZ+wNZxvkeC59b4MWBvBrS2xThg+a47tiCD/eZLqS6S+bnA9iS
+	G8xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=bWZC5StyW2WcBFCgrQvO11EEn86VxR+vSBj9g6Msrgc=;
-	b=QJUGKLMm/oVg9n68xeSrsWPsy0TJSxkws7Nn1QV8Uy6GWwhZRRBC7f82uCiPJpNfu3
-	TMy0hG8napJHOIrGM2ENGCdpeLjP7iIjQPCazwgYfGTUZTkC4E6kdeWgM3ZdAJJTZbVK
-	W3zG8cQrknIoJqZNaR3D1mqC/NEPkfqjMz1RU26Urz86qdoY7PQ1fZCH0szJlo5a4v/Q
-	g4XkU8gl45KT3YdquaNVO81lg2DGDuc54PhyfWM3PMSnorR8DekFwXDBFXAYh0fZmkVJ
-	9JwAhbEpiP/BWBYQtrROfKqUFNDt1AVzDkyyGdayl3ddjHwlPOWnMbc2lWHgKSaaQpTq
-	fWFg==
-X-Gm-Message-State: APjAAAXru30/E9C0qzBv2NhWtGpAZkZ4H9xGOUoBKZ2R5hEsDoaUYisc
-	EHu+win2SFbIdH2zhobppt27w5VHiXY=
-X-Google-Smtp-Source: APXvYqxlvb2xrn/EZc7OCmu8y9KLtyVlJSvd5/nr1PLBbcyYv3jx3FRUW2FEF6LeiOmLhk1ujBuu6w==
-X-Received: by 2002:a7b:ca4c:: with SMTP id m12mr10164518wml.31.1558594177553; 
-	Wed, 22 May 2019 23:49:37 -0700 (PDT)
+	bh=htQt3hqiEexvAI2RWplHEKewRglQ2Wq+tR2Lr1qTlYY=;
+	b=rwGUwG0I1AC6rlZNWAIPGV2XMXNolz5TeBkzL2X/t1T4mAU2UWzXf2rgv7iJNVeISX
+	bc1dQyc4nmxTKjO+qOr1DE2l2ZN8c+Kuq6h6Bfdmg2/KpyGWPcHFlqjSm5v4A9v7lr8r
+	6edlxx8wiAkLhVDUBd/s2K6jSFFuL/Rvrv0RSC4uuQTU77+JNABXu95XrF9gxJnGdyny
+	LaK69bv9B0CxGhBjhuIqyjOqPuyMc2YPIkLjAa8e6L1FZqXFqNwM3KY+Txy2y0L4pOF2
+	n9R2ZEtssEngLkJnlP9whcFmUGNW08+uGCoFPA8XMPRIVaJCmVEF1xUopEFYAvwVFjNe
+	0h7w==
+X-Gm-Message-State: APjAAAX1/gQn6FnLqj6hS9NSGduYlFj7/w4dbdHuiectaNj6r6gfmkSV
+	qDjBLMUronvkw3KPssB8hPWBM1GsJ4w=
+X-Google-Smtp-Source: APXvYqyjdU59g997N1AhDPabPmmv8VHJB2oKpEOhf4jXeoaSl1zNi3/NbOFQPXz0sR5p7J7U2D5++g==
+X-Received: by 2002:a7b:ca47:: with SMTP id m7mr10813587wml.77.1558594178429; 
+	Wed, 22 May 2019 23:49:38 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.36
+	d9sm33827524wro.26.2019.05.22.23.49.37
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
 	Wed, 22 May 2019 23:49:37 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:52 +0200
-Message-Id: <20190523064859.24336-35-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:53 +0200
+Message-Id: <20190523064859.24336-36-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 34/41] pinpoint: remove dead project
+Subject: [PATCH 35/41] libgnomekbd: cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,50 +62,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:37 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:38 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* it is an app so nothing depends on it
-* last commit was 2016
-* last release was 2015
+* cleanup inherit -> EXTRA_OECONF_remove can go
+* remove unnecessary DEPENDS
+* remove GNOME_COMPRESS_TYPE = "xz"
+* rename folder libgnome -> libgnomekbd
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-apps/pinpoint/pinpoint_git.bb     | 24 -------------------
- 1 file changed, 24 deletions(-)
- delete mode 100644 meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
+ .../{libgnome => libgnomekbd}/libgnomekbd_3.26.1.bb      | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+ rename meta-gnome/recipes-gnome/{libgnome => libgnomekbd}/libgnomekbd_3.26.1.bb (63%)
 
-diff --git a/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb b/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
-deleted file mode 100644
-index bf5178cf8..000000000
---- a/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--SUMMARY = "A simple presentation tool for hackers"
--DESCRIPTION = "Pinpoint is a simple presentation tool that hopes to avoid audience death \
--               by bullet point and instead encourage presentations containing beautiful \
--               images and small amounts of concise text in slides."
--SECTION = "x11/multimedia"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
--                    file://pinpoint.c;beginline=6;endline=17;md5=201d438283607da393fae6aca085454c"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
+similarity index 63%
+rename from meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+rename to meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
+index 3a7379f9e..8d84b79cc 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
++++ b/meta-gnome/recipes-gnome/libgnomekbd/libgnomekbd_3.26.1.bb
+@@ -4,16 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+ 
+ SECTION = "x11/gnome/libs"
+ 
+-DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
++DEPENDS = "gtk+3 libxklavier"
+ 
+-inherit distro_features_check gnome gobject-introspection gettext
++inherit gnomebase gobject-introspection gettext distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-GNOME_COMPRESS_TYPE = "xz"
 -
--DEPENDS = "glib-2.0 gdk-pixbuf cogl-1.0 clutter-1.0 clutter-gst-3.0 librsvg"
+ SRC_URI[archive.md5sum] = "98040022484406e7ebe25f82cef93344"
+ SRC_URI[archive.sha256sum] = "f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679"
 -
--inherit autotools gettext pkgconfig distro_features_check
+-EXTRA_OECONF_remove = "--disable-schemas-install"
 -
--# cogl requires opengl
--REQUIRED_DISTRO_FEATURES = "opengl"
--
--SRC_URI = "git://git.gnome.org/pinpoint"
--
--SRCREV = "80a056c57e819d0b75035424638813b0670830e1"
--PV = "0.1.4+gitr${SRCPV}"
--
--S = "${WORKDIR}/git"
--
--RRECOMMENDS_${PN} = "gdk-pixbuf-loader-jpeg gdk-pixbuf-loader-png"
 -- 
 2.20.1
 
