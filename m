@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B6957E43C
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A1F057E442
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 11:55:00 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id m3so5952026wrv.2
+	Thu, 23 May 2019 11:55:01 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id s17so5972269wru.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 04:55:01 -0700 (PDT)
+	Thu, 23 May 2019 04:55:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YBKr5D2UUzkoSnm9cso5lWGxqyeJh65anz613J5bvlc=;
-	b=gVdTRfRayfEiV9uw9mneW73IydVeqmRla8HFNyKhNwKOzkG5bgPZv674HEdNbqfVGH
-	5ISd8Tiatz4/CH9A+z7Ymzs9jUO52IdsVzmFR8zV7OKZ7XzxLDzT0oOC/AhtFkt5OAtv
-	8BLbc5Rg2C6mPbz2p27acHl+/T1hZ1sijhXKSkP1RVXpRbBp6cegig93tMArC1VoXxk7
-	78yE5PkBGIjKNjkq+EpE1NdwCZevMEoVqmFWMa/g3xmo/nKkv225S0EVJ+WHTSWkWCOX
-	enmPcBr/bVqIaYzgUDECzEngETvn7kZ6U7VBGdKTbtNvG7QgkxkejmtEOouXdImpCBOw
-	ljjA==
+	bh=NPE9ukl8vgmxbP0mCcrrXpAVufInoZT8qsw/FEs2hFs=;
+	b=gJNLIRdP1HuNrddLjDmvqiMYz7QgcBWY356Ia5DQHRQmhz7Wv6WH4MY/Sw17aCyfvM
+	J5tJumC01z6W5WKKa2ymJJ1EW5nzgQSpEKQKXbDAaELSPIjRtg2SFOw5NAbr9U88fzMX
+	9h8WLm4AyKjdZAEtJ+zEAnTJlzyyXK77Ur1tyA3A23Njn0PsLwhekT7akat5bMeH221t
+	Rm77iyyvRQrJybRjF8zaQZ7ZEJKnFR3B3Kb9gTo3w0ZQJjx5Zg8syTAZm16FVgqLx3sN
+	b+wLO+DnSTmxJEDaFInbgRRua4fMWWwZcet0fdZdFqm/3/XDnM/4zVrITrkqry18o9pH
+	SAOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=YBKr5D2UUzkoSnm9cso5lWGxqyeJh65anz613J5bvlc=;
-	b=k54tHgZMPsG7+rqn+iN+5o/nbWJf11g4XN3t7FF9AwTmLSRmcPZ/8nK+fKcoRdlkzh
-	blzpvtBOvQIT6NbaAgSvRpOk4BWc12PqKgaUL8zVwvGEKwJ1UYeZtAUe8niYASJU2uks
-	JfLqFe6+W8hf950yAiwLOguX/FNuSzEfEZk2jZ2T/YiBvRB+AiY5EtC60lw0Xo5x5eXz
-	frv5LgvMmz5XC8UzSvNYhC0NUl0UxM2OClrLr7xVjCca9Y/xmOcxulbELCXdfvST1b/C
-	+/EPJOC6uyWFph3pym4Cxr7VbcV8HO3jKLVqMRLYioGQITXlWiqOSCXHBNJiFjNp2X9C
-	fz/w==
-X-Gm-Message-State: APjAAAUxeKX3nRWAKnlRfs3Z6E2Q4uze4cDfew5AvuBV2d8iCnMXCG9A
-	ZGsiV0+LpAHAquozwbADq96+e/YK
-X-Google-Smtp-Source: APXvYqxqJQBMgsTtDArq1/xnv9kSXapaNGbo1FL/aUoo8XvuTqvUAWsKRPAsQJnt6Z/OF0P7J9GD5Q==
-X-Received: by 2002:a5d:6b49:: with SMTP id x9mr3644927wrw.170.1558612501015; 
-	Thu, 23 May 2019 04:55:01 -0700 (PDT)
+	bh=NPE9ukl8vgmxbP0mCcrrXpAVufInoZT8qsw/FEs2hFs=;
+	b=G+makBwupDbY5KB0vb/i31Ak2nMBGz5ZicwzryyF0Ezn1pm28rOVXyL2VW7/OJ4Bgd
+	v7H5AZ50TFHA7pnx6XUq9aEiKY7f85F0Ta+YfzO/nxSjZVDTRDSX2jNW1dCWPML5Oy4t
+	UZjqtB6nDck6Q0meZbmk7eJHaDZeK9g9Pbnq+eCpp5waHmkOnPrmooUa48e7G2W1PNjN
+	dLNBfSqvYJdaj2kR5ZfWRNqNoH0z9kRTEW5WU3H5vTNp45LW0+gBAuKrmnkU322EvzYl
+	PhTmG35JF4TWFu6S7KeV0H2mr2BnwHKEa9jGo6SpT2OQRF/aioNuc5aBJ/XaB88/7s0Q
+	ewmQ==
+X-Gm-Message-State: APjAAAVQbUrwPr5Vbbrfs2ixv8h9QdlfoDCa4ensKclf3kOiBbqdpT5k
+	Zte8Ql49cMz8DCNNTv9ohfhkKeqv
+X-Google-Smtp-Source: APXvYqwSigQ8795ELlSP05DxaCLbFnqbDky6Um8TDQ8p0lOKwjgf4MLHI4XW4N4sEWPNghcHuwehaA==
+X-Received: by 2002:a5d:4b52:: with SMTP id w18mr354894wrs.262.1558612502119; 
+	Thu, 23 May 2019 04:55:02 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	z193sm2727231wmc.20.2019.05.23.04.55.00
+	d9sm34807328wro.26.2019.05.23.04.55.01
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 23 May 2019 04:55:00 -0700 (PDT)
+	Thu, 23 May 2019 04:55:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 11:55:01 +0000
-Message-Id: <20190523115505.18245-4-Martin.Jansa@gmail.com>
+Date: Thu, 23 May 2019 11:55:02 +0000
+Message-Id: <20190523115505.18245-5-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190523115505.18245-1-Martin.Jansa@gmail.com>
 References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/8] hunspell: use git fetcher instead of github archive
+Subject: [meta-oe][PATCH 5/8] hunspell-dictionaries: import from meta-luneos to make hunspell in meta-oe a bit more useful
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,108 +58,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 11:55:00 -0000
-
-* fixes:
-  ERROR: QA Issue: https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz: SRC_URI uses unstable GitHub archives [src-uri-bad]
-* there is developer uploaded tarball in:
-  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
-  but it's already reconfigured which we don't need, so I've used git fetcher
-  to stay closer to what we already use.
-* the diff between:
-  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
-  and
-  https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz
-
-docker-shr @ ~/hunspell $ diff -rq hunspell-1.7.0*/
-Only in hunspell-1.7.0-archive/: .gitignore
-Only in hunspell-1.7.0-archive/: .travis.yml
-Only in hunspell-1.7.0-archive/: COPYING.MPL
-Only in hunspell-1.7.0/: INSTALL
-Only in hunspell-1.7.0/: Makefile.in
-Only in hunspell-1.7.0-archive/: README.md
-Only in hunspell-1.7.0/: aclocal.m4
-Only in hunspell-1.7.0-archive/: appveyor.yml
-Only in hunspell-1.7.0/: compile
-Only in hunspell-1.7.0/: config.guess
-Only in hunspell-1.7.0/: config.h.in
-Only in hunspell-1.7.0/: config.sub
-Only in hunspell-1.7.0/: configure
-Only in hunspell-1.7.0/: depcomp
-Only in hunspell-1.7.0/: install-sh
-Only in hunspell-1.7.0/: ltmain.sh
-Only in hunspell-1.7.0-archive/m4: ChangeLog
-Only in hunspell-1.7.0-archive/m4: README
-Only in hunspell-1.7.0/m4: libtool.m4
-Only in hunspell-1.7.0/m4: ltoptions.m4
-Only in hunspell-1.7.0/m4: ltsugar.m4
-Only in hunspell-1.7.0/m4: ltversion.m4
-Only in hunspell-1.7.0/m4: lt~obsolete.m4
-Only in hunspell-1.7.0/man: Makefile.in
-Only in hunspell-1.7.0/man/hu: Makefile.in
-Only in hunspell-1.7.0/: missing
-Only in hunspell-1.7.0-archive/: msvc
-Only in hunspell-1.7.0-archive/po: .gitignore
-Only in hunspell-1.7.0/po: ca.gmo
-Files hunspell-1.7.0-archive/po/ca.po and hunspell-1.7.0/po/ca.po differ
-Only in hunspell-1.7.0/po: de.gmo
-Files hunspell-1.7.0-archive/po/de.po and hunspell-1.7.0/po/de.po differ
-Only in hunspell-1.7.0/po: es.gmo
-Files hunspell-1.7.0-archive/po/es.po and hunspell-1.7.0/po/es.po differ
-Only in hunspell-1.7.0/po: hu.gmo
-Files hunspell-1.7.0-archive/po/hu.po and hunspell-1.7.0/po/hu.po differ
-Files hunspell-1.7.0-archive/po/hunspell.pot and hunspell-1.7.0/po/hunspell.pot differ
-Only in hunspell-1.7.0/po: it.gmo
-Files hunspell-1.7.0-archive/po/it.po and hunspell-1.7.0/po/it.po differ
-Only in hunspell-1.7.0/po: pl.gmo
-Files hunspell-1.7.0-archive/po/pl.po and hunspell-1.7.0/po/pl.po differ
-Only in hunspell-1.7.0/po: pt_BR.gmo
-Files hunspell-1.7.0-archive/po/pt_BR.po and hunspell-1.7.0/po/pt_BR.po differ
-Only in hunspell-1.7.0/po: tg.gmo
-Files hunspell-1.7.0-archive/po/tg.po and hunspell-1.7.0/po/tg.po differ
-Only in hunspell-1.7.0/src: Makefile.in
-Only in hunspell-1.7.0/src/hunspell: Makefile.in
-Only in hunspell-1.7.0-archive/src/parsers: .gitignore
-Only in hunspell-1.7.0/src/parsers: Makefile.in
-Only in hunspell-1.7.0-archive/src/tools: .gitignore
-Only in hunspell-1.7.0/src/tools: Makefile.in
-Only in hunspell-1.7.0-archive/src/tools: fuzzer.cxx
-Only in hunspell-1.7.0/: tap-driver.sh
-Only in hunspell-1.7.0/: test-driver
-Only in hunspell-1.7.0-archive/tests: .gitattributes
-Only in hunspell-1.7.0-archive/tests: .gitignore
-Only in hunspell-1.7.0/tests: Makefile.in
-Only in hunspell-1.7.0-archive/tests: hu.wrong
-Only in hunspell-1.7.0-archive/tests: nepali.wrong
-Only in hunspell-1.7.0-archive/tests: ph2.good
-Only in hunspell-1.7.0-archive/tests/suggestiontest: .gitignore
-Only in hunspell-1.7.0/tests/suggestiontest: Makefile.in
-Only in hunspell-1.7.0-archive/tests/suggestiontest: prepare2
-Only in hunspell-1.7.0-archive/tests: wordpair.good
+X-List-Received-Date: Thu, 23 May 2019 11:55:01 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ .../hunspell/hunspell-dictionaries.bb         | 151 ++++++++++++++++++
+ 1 file changed, 151 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-index 40da3b4965..c2fb4fa05b 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
- "
- 
--SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
--SRC_URI[md5sum] = "b2399a4aa927e8b3e171d9ea6737cc02"
--SRC_URI[sha256sum] = "bb27b86eb910a8285407cf3ca33b62643a02798cf2eef468c0a74f6c3ee6bc8a"
-+SRCREV = "4ddd8ed5ca6484b930b111aec50c2750a6119a0f"
-+SRC_URI = "git://github.com/${BPN}/${BPN}.git"
+diff --git a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+new file mode 100644
+index 0000000000..3da67d1e3a
+--- /dev/null
++++ b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+@@ -0,0 +1,151 @@
++SUMMARY = "Hunspell dictionaries used by Maliit"
++
++#Provided by Titus Wormer (wooorm) https://github.com/wooorm/dictionaries
++
++LICENSE = "MIT"
++LICENSE_dictionaries/bg = "LGPL 2.1"
++LICENSE_dictionaries/br = "GPL 3.0"
++LICENSE_dictionaries/ca-valencia = "GPL 2.0 & LGPL-2.1"
++LICENSE_dictionaries/ca = "GPL 2.0 & LGPL-2.1"
++LICENSE_dictionaries/cs = "GPL-2.0"
++LICENSE_dictionaries/da = "GPL-2.0"
++LICENSE_dictionaries/de-AT = "GPL-3.0"
++LICENSE_dictionaries/de-CH = "GPL-3.0"
++LICENSE_dictionaries/de = "GPL-3.0"
++LICENSE_dictionaries/el-polyton = "GPL-2.0"
++LICENSE_dictionaries/el = "GPL-2.0"
++LICENSE_dictionaries/en-AU = "LGPL-2.0"
++LICENSE_dictionaries/en-CA = "MIT & BSD"
++LICENSE_dictionaries/en-GB = "LGPL-2.0"
++LICENSE_dictionaries/en-US = "MIT & BSD"
++LICENSE_dictionaries/en-ZA = "LGPL 2.1"
++LICENSE_dictionaries/eo = "GPL-2.0"
++LICENSE_dictionaries/es = "GPL-3.0"
++LICENSE_dictionaries/et = "LGPL-2.1"
++LICENSE_dictionaries/eu = "GPL-2.0"
++LICENSE_dictionaries/fo = "GPL-2.0"
++LICENSE_dictionaries/fr = "MPL-2.0"
++LICENSE_dictionaries/fur = "GPL-2.0"
++LICENSE_dictionaries/fy = "GPL-3.0"
++LICENSE_dictionaries/ga = "GPL-2.0"
++LICENSE_dictionaries/gd = "GPL-3.0"
++LICENSE_dictionaries/gl = "GPL-3.0"
++LICENSE_dictionaries/he = "AGPL-3.0"
++LICENSE_dictionaries/hr = "GPL-3.0"
++LICENSE_dictionaries/hu = "GPL-2.0"
++LICENSE_dictionaries/hy-arevela = "GPL-2.0"
++LICENSE_dictionaries/hy-arevmda = "GPL-2.0"
++LICENSE_dictionaries/ia = "GPL-3.0"
++LICENSE_dictionaries/ie = "Apache-2.0"
++LICENSE_dictionaries/is = "CC BY-SA 3.0 & CC BY 4.0"
++LICENSE_dictionaries/it = "GPL-3.0"
++LICENSE_dictionaries/ko = "MPL-1.1 & GPL-2.0 & LGPL-2.1"
++LICENSE_dictionaries/la = "GPL-3.0"
++LICENSE_dictionaries/lb = "EUPL-1.1"
++LICENSE_dictionaries/lt = "Other"
++LICENSE_dictionaries/ltg = "LGPL-2.1"
++LICENSE_dictionaries/lv = "LGPL-2.1"
++LICENSE_dictionaries/mk = "GPL-3.0"
++LICENSE_dictionaries/mn = "GPL-2.0"
++LICENSE_dictionaries/nb = "GPL-2.0"
++LICENSE_dictionaries/nds = "GPL-2.0"
++LICENSE_dictionaries/ne = "LGPL-2.1"
++LICENSE_dictionaries/nl = "BSD"
++LICENSE_dictionaries/nn = "GPL-2.0"
++LICENSE_dictionaries/pl = "GPL-3.0"
++LICENSE_dictionaries/pt-BR = "LGPL 2.1"
++LICENSE_dictionaries/pt = "GPL-2.0"
++LICENSE_dictionaries/ro = "GPL-2.0"
++LICENSE_dictionaries/ru = "BSD"
++LICENSE_dictionaries/rw = "GPL-3.0"
++LICENSE_dictionaries/sk = "GPL-2.0"
++LICENSE_dictionaries/sl = "GPL-2.0"
++LICENSE_dictionaries/sr-Latn = "LGPL 3.0"
++LICENSE_dictionaries/sr = "LGPL 3.0"
++LICENSE_dictionaries/sv = "LGPL 3.0"
++LICENSE_dictionaries/tr = "MIT"
++LICENSE_dictionaries/uk = "GPL 2.0"
++LICENSE_dictionaries/vi = "GPL 3.0"
++LIC_FILES_CHKSUM = " \
++    file://dictionaries/bg/license;md5=ab14e2ded1a43b84be9aba2be64b9814 \
++    file://dictionaries/br/license;md5=2e046c64edc0a4e47fb3ea614e6c82c4 \
++    file://dictionaries/ca-valencia/license;md5=da087cefab7bc3b7687203198a0042ec \
++    file://dictionaries/ca/license;md5=da087cefab7bc3b7687203198a0042ec \
++    file://dictionaries/cs/license;md5=e0496d626a53ad31addea1869c1bed53 \
++    file://dictionaries/da/license;md5=b7678b3e997999043be3503dc717d96d \
++    file://dictionaries/de-AT/license;md5=a03d823e8cd00fd71c9ba18b8ec4ccf1 \
++    file://dictionaries/de-CH/license;md5=a03d823e8cd00fd71c9ba18b8ec4ccf1 \
++    file://dictionaries/de/license;md5=a03d823e8cd00fd71c9ba18b8ec4ccf1 \
++    file://dictionaries/el-polyton/license;md5=d952bcbf1c67129920f03536197c7281 \
++    file://dictionaries/el/license;md5=90b757dd77b1ebbf473eef31037a59e8 \
++    file://dictionaries/en-AU/license;md5=dae002c846eab5e1132ba2e00692dc68 \
++    file://dictionaries/en-CA/license;md5=6c205de0cbcae4b42cf992bb355a5346 \
++    file://dictionaries/en-GB/license;md5=dd6d2bbd7b7f4519448f2b995fd99cd4 \
++    file://dictionaries/en-US/license;md5=244a909f295640bfafeb8d9e522d454b \
++    file://dictionaries/en-ZA/license;md5=56e4b4ca965de3bba6db42494cc34576 \
++    file://dictionaries/eo/license;md5=eb723b61539feef013de476e68b5c50a \
++    file://dictionaries/es/license;md5=b41cabf4e6f2a7d951684246518bea4f \
++    file://dictionaries/et/readme.md;md5=59d851f12cc280f893b245938abc1905 \
++    file://dictionaries/fo/license;md5=fa9ce505d07423c9f8e6c1073f4806c2 \
++    file://dictionaries/fr/license;md5=2346c7bffe6ab4d51730ab3116817c72 \
++    file://dictionaries/fur/license;md5=28ac8c6e75d6c44b60016a8c850036e3 \
++    file://dictionaries/fy/license;md5=c05115c38ca2a4aa95cb9c9b00ed78df \
++    file://dictionaries/ga/license;md5=ee7d601b5d3be3856a169afa71eb3376 \
++    file://dictionaries/gd/license;md5=b5f39c26d691733095323a59d0f02216 \
++    file://dictionaries/gl/license;md5=d32239bcb673463ab874e80d47fae504 \
++    file://dictionaries/he/license;md5=e627dcdf6878e7eca4454e39d1489271 \
++    file://dictionaries/hr/license;md5=4b03c9b6e41a6ef12b4e31d2fb224d46 \
++    file://dictionaries/hu/license;md5=c9755266de74fdbe69636bdb3076b603 \
++    file://dictionaries/hy-arevela/license;md5=c690b6bc807de0a6dcd62db030843ee4 \
++    file://dictionaries/hy-arevmda/license;md5=c690b6bc807de0a6dcd62db030843ee4 \
++    file://dictionaries/ia/license;md5=25c37bbb54f9ab5da9b4bcdda2e2f68e \
++    file://dictionaries/ie/license;md5=fa818a259cbed7ce8bc2a22d35a464fc \
++    file://dictionaries/is/license;md5=db5e38a312b91d717561514767c95999 \
++    file://dictionaries/it/license;md5=31d06285633a89f4d0267895ef8b7107 \
++    file://dictionaries/ko/license;md5=5ff35d5b0523cccb3049edff77c73a10 \
++    file://dictionaries/la/license;md5=9bc08ae2930eb806cee44bbae905b7ba \
++    file://dictionaries/lb/license;md5=5d6417331778645577c40c3329a3d559 \
++    file://dictionaries/lt/license;md5=3d1264d7017271c6731fefaba912a15f \
++    file://dictionaries/ltg/license;md5=72c786f9d43bb07c101766457fcf6435 \
++    file://dictionaries/lv/license;md5=957d42bd58feff079daa6ede1d215585 \
++    file://dictionaries/mk/license;md5=c05a3747d4c871f3c6378909668ec72d \
++    file://dictionaries/mn/license;md5=93a1be573a1bd039cb4e17c21ed800a7 \
++    file://dictionaries/nb/license;md5=6b50c67a5ee9ba5af1b4ab6c009b66f2 \
++    file://dictionaries/nds/license;md5=08c69ee106e67a1085d45dc723ae5396 \
++    file://dictionaries/ne/license;md5=620e39f1aec72b0bdbc922128dd08267 \
++    file://dictionaries/nl/license;md5=f9181fe437dd701ce6ae690f6e09b119 \
++    file://dictionaries/nn/license;md5=9d372c99817cb42bdd1f6c0acb7f4d11 \
++    file://dictionaries/pl/license;md5=5d0961c4eee8448d5f3738b1ff04ebe8 \
++    file://dictionaries/pt-BR/license;md5=08a7e74543d3e612e7613f2959bedab0 \
++    file://dictionaries/pt/license;md5=53d8ed71b4053ef0ccfcf6b3f89880a8 \
++    file://dictionaries/ro/license;md5=db18b1d6cfc0d4ca32371cb76900de2c \
++    file://dictionaries/ru/license;md5=a3d4108679bd3b76ec1a86520b5362cf \
++    file://dictionaries/rw/license;md5=784d7dc7357bd924e8d5642892bf1b6b \
++    file://dictionaries/sk/license;md5=7fb3956bf960db433deedec7746d33c5 \
++    file://dictionaries/sl/license;md5=4965d53062ea2045837facf483475ac7 \
++    file://dictionaries/sr-Latn/license;md5=0139a4b8ce316882cceae8924030950d \
++    file://dictionaries/sr/license;md5=0139a4b8ce316882cceae8924030950d \
++    file://dictionaries/sv/license;md5=fe5c586fe56d04fbdc44df187129ac29 \
++    file://dictionaries/tr/readme.md;md5=27c07bbfa543cfdd163f2dad491703bd \
++    file://dictionaries/uk/license;md5=7702f203b58979ebbc31bfaeb44f219c \
++    file://dictionaries/vi/license;md5=8d9ecb4e7577ce760029786aba7ecec5 \
++"
++
++RDEPENDS_${PN} = "hunspell"
++
++PV = "0.0.0+git${SRCPV}"
++SRCREV = "820a65e539e34a3a8c2a855d2450b84745c624ee"
++SRC_URI = "git://github.com/wooorm/dictionaries.git"
 +
 +S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig gettext
- 
++
++do_install() {
++    for LANGUAGE in `ls -d1 ${S}/dictionaries/*` ; do
++        LANGUAGE_DIR=`basename $LANGUAGE`
++        install -D -m0644 $LANGUAGE/index.dic ${D}${datadir}/hunspell/$LANGUAGE_DIR.dic
++        install -D -m0644 $LANGUAGE/index.aff ${D}${datadir}/hunspell/$LANGUAGE_DIR.aff
++        install -D -m0644 $LANGUAGE/LICENSE   ${D}${datadir}/hunspell/LICENSE-$LANGUAGE_DIR 2>/dev/null || echo "No LICENSE for language $LANGUAGE"
++    done
++}
++
++FILES_${PN} = "${datadir}/hunspell"
 -- 
 2.17.1
 
