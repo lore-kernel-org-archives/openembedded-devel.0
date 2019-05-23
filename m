@@ -1,38 +1,38 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 313F47E42D
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 13DF27E42D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:34 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id x64so4503585wmb.5
+	Thu, 23 May 2019 06:49:35 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id b18so4849613wrq.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:35 -0700 (PDT)
+	Wed, 22 May 2019 23:49:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=LUw21gaRauBzQZr1wsH1TUa71AYwfV7wcu6Bb5BSDWA=;
-	b=CwroIhTMjyyPgx6xpbiPDEiKgNRXEO9OMfE2jBYLU0F2Dbxof5LsEs8lasQpERGCQZ
-	46vEr6207AmU1SYDiBC92GEVN/ciU0ig5+s7+dmXoCbwTTGPXOqp9qLw7sJV6GTyenA7
-	QbRx5HkFVc8UrrXfNpgY8JRUsF5LeH6gscNTS/QTDQ1VwmYljV9lcqBDZhfG7OcrVoiJ
-	B2nJuq5VVgXVYACuPU3/NHBFB722HQCEHRtzFGPjPBpkw0nQM4RpOvcSNEQ26jmKT13A
-	MUZO8t0HdAEtrn6NwbxlSo4Si/GPxbMqEmPTa+1cLcM1WlDcvjdWeTZ5khVancWqg10H
-	owVg==
+	bh=y9qNgQECbn4UG5z0TIocwM4cKQ3uvvJPXeLbgWWjUEQ=;
+	b=R6IElaT7bGOJk6E6vwa0Hp7qtra7fRpEZHfgSeS1JxQjAXcERrDi8JsF62sYrLuriR
+	ddz7JUSpWeCewUiUMFJfVfLdEgg2kdtk9UesuGmbZsQB3FRjN+hIBPWr3hWNMb8q1zNC
+	PP64xfuhAidmuBOLeJe68uCZMAExhamuLWCPlQWeAu1DvUss1Tid/dBhFh3eh0KzUMp1
+	8yrmndrAN/9HKsi/CSu1lEWQvAguqxfQBX4EXdvGmXEbhE8YlpAiZ9plb/Jt8vPuKOiv
+	iQYUBkhtZl4oMj7r3zWfBEHgHLY14S/bm2WxD8YKmGiTUVVeJEmDzjFlTage9x+q6mN/
+	sWnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=LUw21gaRauBzQZr1wsH1TUa71AYwfV7wcu6Bb5BSDWA=;
-	b=WGys8EXolqVLZrRAVl9H04KWfZsKTeg0zN6V4GsWnRi8N4f+FTNzjrcLWNFvQ5qMfc
-	7yWImPjwQnSf4HKGpRHLblwdQ9C57MOSuEm6OVtx2yGvXyXSCJqoEW1UMnKBzF/SlECN
-	u01gsb/SSUJWP2QUcGlJFEuUInSpju2ubBPNclFK95ZD2kQDheA+4d2RFsrXrkJDoWsB
-	ZqvpxFWKmIj/JQykDwIj7OCb6A29WZ0Dcp9ukN/BrFGA7Zrl7ht0LqooJFIdVaCiXUqo
-	8RBmhwFJOVjdl8R9A7R/QjkcKLDnw/7WGMg14UE3Pfv7Qn1QdM/t7v6AePaUNHdmtpD8
-	yMkQ==
-X-Gm-Message-State: APjAAAXyvTppF6cJ8ZwXJDNtwJDUNZY8pzrlbCqFS/zViSaRcuDOjy8y
-	ajriWnanvM7j8LIKo4M8hnqVOHrD4ss=
-X-Google-Smtp-Source: APXvYqzC1tR6iynoXE5fi2CpbV1Equg6wocihsXgPamAqk8jbyDhje3U4KNUY4puO3AqJ1MFwTtbuA==
-X-Received: by 2002:a7b:c397:: with SMTP id s23mr10547533wmj.85.1558594174929; 
-	Wed, 22 May 2019 23:49:34 -0700 (PDT)
+	bh=y9qNgQECbn4UG5z0TIocwM4cKQ3uvvJPXeLbgWWjUEQ=;
+	b=edaOD3XP2A7Ba52Im2Y8d813z9JcmOWe9XpIOY7M8yJXK6V3XcyvBgmA0BEfEhosnN
+	QauerIUuTw6c0hGK9/aCOwrRHZTJmmWPSqWY3ZifT3UzFbKhSEWxnUDAiB8M8E3eH4mH
+	RZ5rhLmWCHSFbIvnoum8OeUxSATJsFEWFPofqShxTVWh+YbMzkfAU1qee4pvfIB5AbNG
+	V+g40ljiec8/nawB3toy2bxugET9Pw1w8NRwqTSg+XTMxdM4tx5uH8JVn1F3l5reaASp
+	MtwvZzH8lcNAmz3ugZ1ty53fD8CE0JgH7D2AonjYcdiY/3h7vrM7/hgIhyfeQXPZrxQo
+	ch1g==
+X-Gm-Message-State: APjAAAVDtkid5fRr8O5raROpn/rZAUxk/3eMF7bialpRzhVBHwdPfMz5
+	OA5xGT4N6GPrZJQbP9UvqXlIRi1etx0=
+X-Google-Smtp-Source: APXvYqyyWN2hM/2da+IGe+yMAgfyKtlQ2CDcz7OZzWjS5exM6buWjxTCwAqNvDC1dIr0Jt+s88m1kg==
+X-Received: by 2002:a5d:4e50:: with SMTP id r16mr19783295wrt.197.1558594175727;
+	Wed, 22 May 2019 23:49:35 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
@@ -40,16 +40,16 @@ Received: from mueller-a-nb-linux.speedport.ip
 	d9sm33827524wro.26.2019.05.22.23.49.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:34 -0700 (PDT)
+	Wed, 22 May 2019 23:49:35 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:49 +0200
-Message-Id: <20190523064859.24336-32-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:50 +0200
+Message-Id: <20190523064859.24336-33-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 31/41] libwacom: initial add 0.33
+Subject: [PATCH 32/41] geocode-glib: initial add 3.26.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,30 +70,36 @@ It is a dependency for upcoming gnome-settings-daemon
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-support/libwacom/libwacom_0.33.bb      | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
+ .../geocode-glib/geocode-glib_3.26.1.bb       | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
 
-diff --git a/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb b/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
+diff --git a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
 new file mode 100644
-index 000000000..6fb3b82ef
+index 000000000..dc218f3a3
 --- /dev/null
-+++ b/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "A tablet description library"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
++++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A convenience library for the geocoding"
++
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
++
++GNOMEBASEBUILDCLASS = "meson"
++GIR_MESON_OPTION = "enable-introspection"
++GTKDOC_MESON_OPTION = "enable-gtk-doc"
++
++inherit gnomebase gobject-introspection gettext gtk-doc upstream-version-is-even
 +
 +DEPENDS = " \
-+    libxml2-native \
-+    libgudev \
++    json-glib \
++    libsoup-2.4 \
 +"
 +
-+inherit autotools pkgconfig
++SRC_URI[archive.md5sum] = "21094494e66c86368add6a55bf480049"
++SRC_URI[archive.sha256sum] = "5baa6ab76a76c9fc567e4c32c3af2cd1d1784934c255bc5a62c512e6af6bde1c"
 +
-+SRC_URI = "git://github.com/linuxwacom/libwacom.git"
-+SRCREV = "87cc710e21a6220e267dd08936bbec2932aa3658"
-+S = "${WORKDIR}/git"
++EXTRA_OEMESON = "-Denable-installed-tests=false"
 -- 
 2.20.1
 
