@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E7E07E3FD
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 051837E3FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:23 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 198so4508641wme.3
+	Thu, 23 May 2019 06:49:24 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id m3so4884111wrv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:24 -0700 (PDT)
+	Wed, 22 May 2019 23:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Vw7Buz9YOINTGmMTUYmZUTu5BGkW7n0H37z/RtpppQ0=;
-	b=Cxcz5GtHUUv/FW9hEcZi9V+3CrRhjYpnSjp0d6/3H0YOkUhxc4wGjZTSh11Zmju6d1
-	nNs7uxLdEg2MFkujaKFRX7pJeh6FC9FgvV85r5E61lMYpXpYjf6mctk4jJoG8rCubrxd
-	4qRot2+AoEPBJfGfSitS/wwtz82Lj3SPOAOb9mksfB0Gi9OrKbJNoxvkFFiMMch9b9vJ
-	l6iybBBZshU7ueH3hgRm7mEGXSL92KPeD1t/HhtII5LVHbMlZUpuT9naGLyJyzqUc71u
-	idKHr78QgVfRS5d3rNxSxOz6PPPdu0wF1q6YFX/gjwfRbUcJbDiE1Heox8FF+6U3icCu
-	4f7g==
+	bh=Dcsu34FVWn79B/OOJTdyhpDoO+H8amcruKD7u9lYZjA=;
+	b=fvnfdO5FHDZ8kWk6pYmFdGcVV9CcypfOvQfwfWY5N6dO7vdu97jO2AHpiwgMGMBujy
+	FpPCfg2zzEvvyDhQ5vBOzUywf5LWkozqtkRq1C19AXPoiky4DnjRdw4U6f3fJBB4/NDu
+	2HwfVp0F1R//ViATaeRqOEgOuEMixKtV49OkazjYVuWwFTPYircnowoQJIhSXlHUuiCK
+	oxWrgu6mCDIKKLwBCobHoGZrkn4mrSvs1wtMTrpDCETYyNq0IxHpd0zQYenqypQjFCn0
+	+fr7mQlKJOeZ5EUt8V7i9GD6yioc5n3BWy3wGYz0AN0jrt+DxUWypeQTl+ERvl+Mli9E
+	33gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Vw7Buz9YOINTGmMTUYmZUTu5BGkW7n0H37z/RtpppQ0=;
-	b=TGLcs757P26PrgSdRpa/RaINN0VluyKZt7zWUxx2/aPZu2FysOZcscx3SqS2o+vNW4
-	t5b54I4dSqTMWNsNeVvP8EkvTTWF4FPOTtJGinzwIGvBHf9Jzyt1F71EgyT0IV5qpXgB
-	/BV9Nos60fIPC95lV2oRChAmAbxC3Fr9IifGjVskEsOWrvmr8lthY9tvKTL1HojWA2mj
-	TOYmBR/AFZ5Lhljn1eEr4SIAWKcG2kgNweKZx7FHvFaY1Tbfd7oQaYE9ZNyGjzAcxzxZ
-	FLm/NSqOOMoa71P/BU8YaIbby/z77CeuYEOypKy57DnJoQXb/iy5+AzRLw1UQWkX2uUL
-	VziQ==
-X-Gm-Message-State: APjAAAXeqn80l8GStBCIl4Ii+7fvfq3EBHTMqyfjjkP4f95bMF9tWwDq
-	uBIvklN/XkzsULc3uKbkRak0awp0KsY=
-X-Google-Smtp-Source: APXvYqy+VksA8jTQXnKzyz6AzZ60Ix+iJ8tPgt2kA2nH67DP9nrJQ4aNoKd1pG3syIKgxsl0YOx/KQ==
-X-Received: by 2002:a7b:c549:: with SMTP id j9mr10109608wmk.114.1558594163732; 
-	Wed, 22 May 2019 23:49:23 -0700 (PDT)
+	bh=Dcsu34FVWn79B/OOJTdyhpDoO+H8amcruKD7u9lYZjA=;
+	b=X93e8a5c9D1kQgMJzHRoZVseZiX7etEjPuzfSOBUZgkWL4/+38AGBEVAXHaWkNotWq
+	86ASF7DayokTBlQdUxvhTu29LkDXyN5C2ghE3iSaNkCl2RNvodAdxLxckVI1hnghqkIp
+	EjQfv1bJZSzPAxs7pLCHZ/aEJLj3yAY8CeOCyt+37DECFsmDQyANo0igU71rKVWWeTSt
+	+TaERv8BMww5NrH/HTiHNat73DxpXu5c75pmcLNZ4UpMBDxHihxH6oJAvd2QIrihL1+R
+	ME1EA96eoO1C8HUmnS8tq9J4o78uxK5I+QncIdZ2cdNUJ/v9IyITzr0LTcrThLXUc28X
+	AHDg==
+X-Gm-Message-State: APjAAAWPI1lhf8mw4bJk2sssNlzp/ZQliDFCeOepMAnO/ShJzs11Og3q
+	qmdeuOV4o7J9AAK5Wyn2D42WCRdubuI=
+X-Google-Smtp-Source: APXvYqwOu1qc3aUmD520Id2Oe4DhFkcqbshfpABKBY/ELVcG5J9d/cIxT4NwwePjWbCOwLHc9j07eQ==
+X-Received: by 2002:adf:df87:: with SMTP id z7mr31691962wrl.8.1558594164584;
+	Wed, 22 May 2019 23:49:24 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.22
+	d9sm33827524wro.26.2019.05.22.23.49.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:23 -0700 (PDT)
+	Wed, 22 May 2019 23:49:24 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:36 +0200
-Message-Id: <20190523064859.24336-19-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:37 +0200
+Message-Id: <20190523064859.24336-20-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 18/41] abiword: remove
+Subject: [PATCH 19/41] evince: upgrade 3.28.2 -> 3.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,402 +62,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 06:49:23 -0000
+X-List-Received-Date: Thu, 23 May 2019 06:49:24 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-seems develompment has stopped - last release was 2016. I had good times
-with it so I added it to meta office.
+Add upstream-version-is-even to inherit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...1-Bug-13770-Require-C-11-from-now-on.patch | 180 ------------------
- ...s-Makefile.am-remove-uncomplete-opti.patch |  39 ----
- .../recipes-gnome/abiword/abiword_3.0.2.bb    | 142 --------------
- 3 files changed, 361 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
+ ...-format-attribute-to-_synctex_malloc.patch | 12 ++--
+ .../evince/0001-help-remove-YELP-macro.patch  | 24 --------
+ ...vDocumentModel-get-type-function-dec.patch | 33 ----------
+ ...02-add-a-formatting-attribute-check.patch} |  0
+ .../{evince_3.28.2.bb => evince_3.32.0.bb}    | 60 ++++++++-----------
+ 5 files changed, 30 insertions(+), 99 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
+ delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+ rename meta-gnome/recipes-gnome/evince/evince/{0001-add-a-formatting-attribute-check.patch => 0002-add-a-formatting-attribute-check.patch} (100%)
+ rename meta-gnome/recipes-gnome/evince/{evince_3.28.2.bb => evince_3.32.0.bb} (32%)
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch b/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
+index de739c5b3..32ca073f9 100644
+--- a/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
++++ b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
+@@ -11,17 +11,17 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+)
+ 
+ diff --git a/cut-n-paste/synctex/synctex_parser_utils.c b/cut-n-paste/synctex/synctex_parser_utils.c
+-index f8a9f6f..9459b2d 100644
++index 08053f0..0519b38 100644
+ --- a/cut-n-paste/synctex/synctex_parser_utils.c
+ +++ b/cut-n-paste/synctex/synctex_parser_utils.c
+-@@ -78,6 +78,7 @@ void *_synctex_malloc(size_t size) {
+- 	return (void *)ptr;
++@@ -136,6 +136,7 @@ int _synctex_log(int level, const char * prompt, const char * reason,va_list arg
++ 	return result;
+  }
+  
+ +__attribute__((__format__ (__printf__, 1, 0)))
+  int _synctex_error(const char * reason,...) {
+- 	va_list arg;
+- 	int result;
++     va_list arg;
++     int result;
+ -- 
+-2.12.2
++2.20.1
+ 
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch b/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
 deleted file mode 100644
-index 3731a23f1..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
+index 592f46606..000000000
+--- a/meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
 +++ /dev/null
-@@ -1,180 +0,0 @@
--From f6d0dc338fe867c1b064682ae7f15bffe019b306 Mon Sep 17 00:00:00 2001
--From: Hubert Figuiere <hub@figuiere.net>
--Date: Tue, 12 Apr 2016 02:55:47 +0000
--Subject: [PATCH] Bug 13770 - Require C++11 from now on.
+@@ -1,24 +0,0 @@
+-From 40921037d8e7205a3889d529fb4e06f79e1e88b0 Mon Sep 17 00:00:00 2001
+-From: Alexander Kanavin <alex.kanavin@gmail.com>
+-Date: Fri, 19 Feb 2016 16:52:18 +0200
+-Subject: [PATCH] help: remove YELP macro
 -
--git-svn-id: svn+ssh://svn.abisource.com/svnroot/abiword/trunk@35197 bcba8976-2d24-0410-9c9c-aab3bd5fdfd6
--
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Inappropriate [embedded-specific]
+-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
 ----
-- ax_cxx_compile_stdcxx_11.m4  | 133 +++++++++++++++++++++++++++++++++++
-- configure.ac                 |   1 +
-- src/wp/ap/gtk/ap_UnixApp.cpp |   2 +-
-- 3 files changed, 135 insertions(+), 1 deletion(-)
-- create mode 100644 ax_cxx_compile_stdcxx_11.m4
+- help/Makefile.am | 2 --
+- 1 file changed, 2 deletions(-)
 -
--diff --git a/ax_cxx_compile_stdcxx_11.m4 b/ax_cxx_compile_stdcxx_11.m4
--new file mode 100644
--index 0000000..af37acd
----- /dev/null
--+++ b/ax_cxx_compile_stdcxx_11.m4
--@@ -0,0 +1,133 @@
--+# ============================================================================
--+#  http://www.gnu.org/software/autoconf-archive/ax_cxx_compile_stdcxx_11.html
--+# ============================================================================
--+#
--+# SYNOPSIS
--+#
--+#   AX_CXX_COMPILE_STDCXX_11([ext|noext],[mandatory|optional])
--+#
--+# DESCRIPTION
--+#
--+#   Check for baseline language coverage in the compiler for the C++11
--+#   standard; if necessary, add switches to CXXFLAGS to enable support.
--+#
--+#   The first argument, if specified, indicates whether you insist on an
--+#   extended mode (e.g. -std=gnu++11) or a strict conformance mode (e.g.
--+#   -std=c++11).  If neither is specified, you get whatever works, with
--+#   preference for an extended mode.
--+#
--+#   The second argument, if specified 'mandatory' or if left unspecified,
--+#   indicates that baseline C++11 support is required and that the macro
--+#   should error out if no mode with that support is found.  If specified
--+#   'optional', then configuration proceeds regardless, after defining
--+#   HAVE_CXX11 if and only if a supporting mode is found.
--+#
--+# LICENSE
--+#
--+#   Copyright (c) 2008 Benjamin Kosnik <bkoz@redhat.com>
--+#   Copyright (c) 2012 Zack Weinberg <zackw@panix.com>
--+#   Copyright (c) 2013 Roy Stogner <roystgnr@ices.utexas.edu>
--+#
--+#   Copying and distribution of this file, with or without modification, are
--+#   permitted in any medium without royalty provided the copyright notice
--+#   and this notice are preserved. This file is offered as-is, without any
--+#   warranty.
--+
--+#serial 3
--+
--+m4_define([_AX_CXX_COMPILE_STDCXX_11_testbody], [
--+  template <typename T>
--+    struct check
--+    {
--+      static_assert(sizeof(int) <= sizeof(T), "not big enough");
--+    };
--+
--+    typedef check<check<bool>> right_angle_brackets;
--+
--+    int a;
--+    decltype(a) b;
--+
--+    typedef check<int> check_type;
--+    check_type c;
--+    check_type&& cr = static_cast<check_type&&>(c);
--+
--+    auto d = a;
--+])
--+
--+AC_DEFUN([AX_CXX_COMPILE_STDCXX_11], [dnl
--+  m4_if([$1], [], [],
--+        [$1], [ext], [],
--+        [$1], [noext], [],
--+        [m4_fatal([invalid argument `$1' to AX_CXX_COMPILE_STDCXX_11])])dnl
--+  m4_if([$2], [], [ax_cxx_compile_cxx11_required=true],
--+        [$2], [mandatory], [ax_cxx_compile_cxx11_required=true],
--+        [$2], [optional], [ax_cxx_compile_cxx11_required=false],
--+        [m4_fatal([invalid second argument `$2' to AX_CXX_COMPILE_STDCXX_11])])dnl
--+  AC_LANG_PUSH([C++])dnl
--+  ac_success=no
--+  AC_CACHE_CHECK(whether $CXX supports C++11 features by default,
--+  ax_cv_cxx_compile_cxx11,
--+  [AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+    [ax_cv_cxx_compile_cxx11=yes],
--+    [ax_cv_cxx_compile_cxx11=no])])
--+  if test x$ax_cv_cxx_compile_cxx11 = xyes; then
--+    ac_success=yes
--+  fi
--+
--+  m4_if([$1], [noext], [], [dnl
--+  if test x$ac_success = xno; then
--+    for switch in -std=gnu++11 -std=gnu++0x; do
--+      cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx11_$switch])
--+      AC_CACHE_CHECK(whether $CXX supports C++11 features with $switch,
--+                     $cachevar,
--+        [ac_save_CXXFLAGS="$CXXFLAGS"
--+         CXXFLAGS="$CXXFLAGS $switch"
--+         AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+          [eval $cachevar=yes],
--+          [eval $cachevar=no])
--+         CXXFLAGS="$ac_save_CXXFLAGS"])
--+      if eval test x\$$cachevar = xyes; then
--+        CXXFLAGS="$CXXFLAGS $switch"
--+        ac_success=yes
--+        break
--+      fi
--+    done
--+  fi])
--+
--+  m4_if([$1], [ext], [], [dnl
--+  if test x$ac_success = xno; then
--+    for switch in -std=c++11 -std=c++0x; do
--+      cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx11_$switch])
--+      AC_CACHE_CHECK(whether $CXX supports C++11 features with $switch,
--+                     $cachevar,
--+        [ac_save_CXXFLAGS="$CXXFLAGS"
--+         CXXFLAGS="$CXXFLAGS $switch"
--+         AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+          [eval $cachevar=yes],
--+          [eval $cachevar=no])
--+         CXXFLAGS="$ac_save_CXXFLAGS"])
--+      if eval test x\$$cachevar = xyes; then
--+        CXXFLAGS="$CXXFLAGS $switch"
--+        ac_success=yes
--+        break
--+      fi
--+    done
--+  fi])
--+  AC_LANG_POP([C++])
--+  if test x$ax_cxx_compile_cxx11_required = xtrue; then
--+    if test x$ac_success = xno; then
--+      AC_MSG_ERROR([*** A compiler with support for C++11 language features is required.])
--+    fi
--+  else
--+    if test x$ac_success = xno; then
--+      HAVE_CXX11=0
--+      AC_MSG_NOTICE([No compiler with C++11 support was found])
--+    else
--+      HAVE_CXX11=1
--+      AC_DEFINE(HAVE_CXX11,1,
--+                [define if the compiler supports basic C++11 syntax])
--+    fi
--+
--+    AC_SUBST(HAVE_CXX11)
--+  fi
--+])
--diff --git a/configure.ac b/configure.ac
--index 48228be..f7be7de 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -131,6 +131,7 @@ win_pkgs="$enchant_req"
+-diff --git a/help/Makefile.am b/help/Makefile.am
+-index 7835810..37c88ce 100644
+---- a/help/Makefile.am
+-+++ b/help/Makefile.am
+-@@ -1,5 +1,3 @@
+--@YELP_HELP_RULES@
+--
+- SUBDIRS = reference
 - 
-- AC_PROG_CC
-- AC_PROG_CXX
--+AX_CXX_COMPILE_STDCXX_11(noext,mandatory)
-- #AC_PROG_OBJC
-- AC_PROG_INSTALL
-- # For libtool 1.5.x compatability (AC_PROG_LIBTOOL is deprecated version of LT_INIT)
--diff --git a/src/wp/ap/gtk/ap_UnixApp.cpp b/src/wp/ap/gtk/ap_UnixApp.cpp
--index 061a304..260f8e5 100644
----- a/src/wp/ap/gtk/ap_UnixApp.cpp
--+++ b/src/wp/ap/gtk/ap_UnixApp.cpp
--@@ -863,7 +863,7 @@ static bool is_so (const char *file) {
-- 	if (len < (strlen(G_MODULE_SUFFIX) + 2)) // this is ".so" and at least one char for the filename
-- 		return false;
-- 	const char *suffix = file+(len-3);
---	if(0 == strcmp (suffix, "."G_MODULE_SUFFIX))
--+	if(0 == strcmp (suffix, "." G_MODULE_SUFFIX))
-- 		return true;
-- 	return false;
-- }
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch b/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
+- HELP_ID = evince
+--- 
+-2.7.0
+-
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
 deleted file mode 100644
-index 0dff1411d..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
+index dcc4a4e9c..000000000
+--- a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
 +++ /dev/null
-@@ -1,39 +0,0 @@
--From c646159ce817506131b58fdab1cdc1cd6364df7a Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Sun, 7 Feb 2016 21:45:20 +0100
--Subject: [PATCH] plugins/aiksaurus/Makefile.am: remove uncomplete options
-- WITH_BUILTIN_AIKSAURUS_GTK
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,33 +0,0 @@
+-From 0cdce687d3edfa5ac0fd19539ba1815d039026d5 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?I=C3=B1igo=20Mart=C3=ADnez?= <inigomartinez@gmail.com>
+-Date: Fri, 7 Sep 2018 22:34:29 +0200
+-Subject: [PATCH] libview: Remove EvDocumentModel get type function declaration
 -
--* with gtk2 we won't use it
--* it is missing in configure.ac causing
+-The EvDocumentModel class declares the `ev_document_model_get_type`
+-function as part of the `GObject` boilerplate code.
 -
--| plugins/aiksaurus/Makefile.am:5: error: WITH_BUILTIN_AIKSAURUS_GTK does not appear in AM_CONDITIONAL
+-However, this declaration is not necessary and also causes a warning
+-when introspection data file, `EvinceView-3.0.gir`, is generated.
 -
--Upstream-Status: Pending
+-Upstream-Status: Applied [1]
 -
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+-
 ----
-- plugins/aiksaurus/Makefile.am | 4 ----
-- 1 file changed, 4 deletions(-)
+- libview/ev-document-model.h | 1 -
+- 1 file changed, 1 deletion(-)
 -
--diff --git a/plugins/aiksaurus/Makefile.am b/plugins/aiksaurus/Makefile.am
--index d402c58..1034e2a 100644
----- a/plugins/aiksaurus/Makefile.am
--+++ b/plugins/aiksaurus/Makefile.am
--@@ -2,10 +2,6 @@ SUBDIRS =
+-diff --git a/libview/ev-document-model.h b/libview/ev-document-model.h
+-index 784e27d6..6a99e43a 100644
+---- a/libview/ev-document-model.h
+-+++ b/libview/ev-document-model.h
+-@@ -54,7 +54,6 @@ typedef enum {
+- 	EV_PAGE_LAYOUT_AUTOMATIC
+- } EvPageLayout;
 - 
-- if TOOLKIT_GTK
-- 
---if WITH_BUILTIN_AIKSAURUS_GTK
---SUBDIRS += aiksaurusgtk3
---platform_lib = aiksaurusgtk3/libAiksaurusGtk3.la
---endif
-- 
-- endif
+--GType            ev_document_model_get_type          (void) G_GNUC_CONST;
+- EvDocumentModel *ev_document_model_new               (void);
+- EvDocumentModel *ev_document_model_new_with_document (EvDocument      *document);
 - 
 --- 
--2.5.0
+-2.20.1
 -
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-deleted file mode 100644
-index 36b056fdd..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-+++ /dev/null
-@@ -1,142 +0,0 @@
--SUMMARY = "AbiWord is free word processing program similar to Microsoft(r) Word"
--HOMEPAGE = "http://www.abiword.org"
--SECTION = "x11/office"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
--DEPENDS  = " \
--    perl-native \
--    gtk+ \
--    gtkmathview \
--    wv \
--    fribidi \
--    jpeg \
--    libpng \
--    librsvg \
--    libwmf-native \
--    asio \
--    evolution-data-server \
--    libxslt \
--    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
--"
--RDEPENDS_${PN}_append_libc-glibc = " \
--    glibc-gconv-ibm850 glibc-gconv-cp1252 \
--    glibc-gconv-iso8859-15 glibc-gconv-iso8859-1 \
--"
--RCONFLICTS_${PN} = "${PN}-embedded"
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-add-a-formatting-attribute-check.patch b/meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch
+similarity index 100%
+rename from meta-gnome/recipes-gnome/evince/evince/0001-add-a-formatting-attribute-check.patch
+rename to meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.32.0.bb
+similarity index 32%
+rename from meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+rename to meta-gnome/recipes-gnome/evince/evince_3.32.0.bb
+index d2885906f..e4d0d69be 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.32.0.bb
+@@ -2,48 +2,43 @@ SUMMARY = "Evince is a document viewer for document formats like pdf, ps, djvu"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
+ SECTION = "x11/office"
+-DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
++DEPENDS = " \
++    gnome-common-native \
++    itstool-native \
++    yelp-tools-native \
++    appstream-glib \
++    gtk+3 \
++    gspell \
++    libsecret \
++    poppler \
++    gstreamer1.0-plugins-base \
++    orc \
++    adwaita-icon-theme \
++    ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} \
++"
+ 
+-inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
++inherit gnomebase gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext distro_features_check
+ 
+-SRC_URI = " \
+-    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+-    file://0001-help-remove-YELP-macro.patch \
++SRC_URI[archive.md5sum] = "b7402d14e12ea09da1490f2e624eb6de"
++SRC_URI[archive.sha256sum] = "f0d977216466ed2f5a6de64476ef7113dc7c7c9832336f1ff07f3c03c5324c40"
++SRC_URI += " \
+     file://0001-Add-format-attribute-to-_synctex_malloc.patch \
+-    file://0001-add-a-formatting-attribute-check.patch \
+-    file://0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch \
++    file://0002-add-a-formatting-attribute-check.patch \
+ "
+-SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
+-SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
+ 
+-EXTRA_OECONF = "--enable-thumbnailer"
++EXTRA_OECONF = " \
++    --enable-thumbnailer \
++    --without-systemduserunitdir \
++"
+ 
+ do_compile_prepend() {
+     export GIR_EXTRA_LIBS_PATH="${B}/libdocument/.libs"
+ }
+ 
 -
--SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
--           file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
--           file://0001-Bug-13770-Require-C-11-from-now-on.patch \
--           "
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
--
--SRC_URI[md5sum] = "cda6dd58c747c133b421cc7eb18f5796"
--SRC_URI[sha256sum] = "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
--
--#want 3.x from 3.x.y for the installation directory
--SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
--
--inherit distro_features_check autotools-brokensep pkgconfig
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--PACKAGECONFIG ??= " \
--    collab-backend-xmpp collab-backend-tcp \
--    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
--"
--PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
--PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
--PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
--PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
--PACKAGECONFIG[collab-backend-service] = "--enable-collab-backend-service,--disable-collab-backend-service,libgsf libxml2 libsoup-2.4 gnutls"
--PACKAGECONFIG[collab-backend-telepathy] = "--enable-collab-backend-telepathy,--disable-collab-backend-telepathy,libgsf libxml2 telepathy-glib telepathy-mission-control"
--PACKAGECONFIG[collab-backend-sugar] = "--enable-collab-backend-sugar,--disable-collab-backend-sugar,libgsf libxml2 dbus-glib"
--
--EXTRA_OECONF = " --disable-static  \
--                 --enable-plugins \
--                 --enable-clipart \
--                 --enable-templates \
--                 --without-gnomevfs \
--                 --with-gtk2 \
--                 --with-libwmf-config=${STAGING_DIR} \
--"
--
--LDFLAGS += "-lgmodule-2.0"
--
--do_compile() {
--    cd goffice-bits2
--    make goffice-paths.h
--    make libgoffice.la
--    cd ${B}
--    oe_runmake
+-do_install_append() {
+-    install -d ${D}${datadir}/pixmaps
+-    install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}
+-    then
+-        install -d ${D}${systemd_unitdir}/system
+-        mv ${D}${systemd_user_unitdir}/evince.service ${D}${systemd_system_unitdir}/evince.service
+-    else
+-        rm -rf ${D}${libdir}/systemd/user/evince.service
+-    fi
+-    rmdir --ignore-fail-on-non-empty ${D}${systemd_user_unitdir}
+-    rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd
+-    rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}
 -}
 -
--PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
+ PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
+ 
+-SYSTEMD_SERVICE_${PN} = "evince.service"
 -
--FILES_${PN} += " \
--                ${libdir}/lib${PN}-*.so \
--                ${datadir}/mime-info \
--                ${datadir}/icons/* \
--                ${datadir}/${PN}-${SHRT_VER}/glade \
--                ${datadir}/${PN}-${SHRT_VER}/scripts \
--                ${datadir}/${PN}-${SHRT_VER}/system.profile-en \
--                ${datadir}/${PN}-${SHRT_VER}/system.profile-en_GB \
--                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt-en_GB \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Employee-Directory.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Business-Report.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Fax-Coversheet.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Resume.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Two-Columns.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Memo.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Press-Release.awt \
--                ${datadir}/${PN}-${SHRT_VER}/certs \
--                ${datadir}/${PN}-${SHRT_VER}/ui \
--                ${datadir}/${PN}-${SHRT_VER}/xsl* \
--                ${datadir}/${PN}-${SHRT_VER}/mime-info \
--                ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
--"
--
--# don't steal /usr/lib/libabiword-3.0.so from ${PN}
--# in this case it's needed in ${PN}
--FILES_${PN}-dev = " \
--                  ${includedir} \
--                  ${libdir}/pkgconfig \
--                  ${libdir}/${PN}*.la \
--                  ${libdir}/lib${PN}*.la \
--                  ${libdir}/${PN}-${SHRT_VER}/plugins/*.la \
--"
--FILES_${PN}-dbg += "${libdir}/${PN}-${SHRT_VER}/plugins/.debug"
--FILES_${PN}-doc += "${datadir}/${PN}-*/readme*"
--
--FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"
--FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/system.profile*"
--FILES_${PN}-clipart        += "${datadir}/${PN}-${SHRT_VER}/clipart"
--FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
--FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
--FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
--
--PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
--
--python populate_packages_prepend () {
--    abiword_libdir    = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
--    do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
--
--    metapkg = "abiword-meta"
--    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
--    d.setVar('FILES_' + metapkg, "")
--    blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
--    metapkg_rdepends = []
--    packages = d.getVar('PACKAGES').split()
--    for pkg in packages[1:]:
--        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
--            print("Modifying %s" % pkg)
--            metapkg_rdepends.append(pkg)
--    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
--    d.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package')
--    packages.append(metapkg)
--    d.setVar('PACKAGES', ' '.join(packages))
--}
--
--FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
+ RDEPENDS_${PN} += "glib-2.0-utils"
+ RRECOMMMENDS_${PN} = "adwaita-icon-theme"
+ 
+@@ -53,13 +48,6 @@ PACKAGES =+ "${PN}-browser-plugin"
+ FILES_${PN} += "${datadir}/dbus-1 \
+                 ${datadir}/metainfo \
+                 ${datadir}/thumbnailers \
+-                ${systemd_unitdir}/systemd/user/evince.service \
+-               "
+-FILES_${PN}-dbg += "${libdir}/*/*/.debug \
+-                    ${libdir}/*/*/*/.debug"
+-FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
+-                    ${libdir}/evince/*/backends/*.la"
+-FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
+-                          ${libdir}/evince/*/backends/*.a"
++"
+ FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+ FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
 -- 
 2.20.1
 
