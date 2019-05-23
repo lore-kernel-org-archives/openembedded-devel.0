@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id BC3C97E40C
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9042E7E41F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:19 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id y3so4526860wmm.2
+	Thu, 23 May 2019 06:49:20 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id d18so4884943wrs.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 May 2019 23:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=PZDmn1MlwqpRWa8x5w2F/gabonaRSScw1mwbVbsTljg=;
-	b=K8j87ORROE5SJKcYufeTXG2C5jawEHF1/iLA5RXLWQTMfiqHLTYJXYT4vU5xGBKoUp
-	Cmac++RbEB2k5ngGuqioE4Uan4SvwepHuzSWE5K1UGuIawUdbAYKm1r1S6aeiZPcw9lJ
-	emF8AFhqiONai8y4Zc24nV5c5SFgviSgOEPyn4DAk3lTYOikV4ieCGsQ2aj+TitgflwQ
-	qCH8CHd1AAsQ/eEmtsciUDFRZeQ84/iEUO+Fc3P8n8xeVpnLwda/mXGSFtGksFABQba3
-	rVLHoew1arAtNyNBiDfPgWWcYL8UVIFgdEw/qV5AOtCW86LTRsek9r1XdusvgaQ/Ccpd
-	IaZw==
+	bh=WP+SUvCO3g4Pvoj6fCI+IZKcGzZrxUNMoGjptfDMgxI=;
+	b=CzLRYnJbxFNHlHldfFOPvtK6afVfl8O3+/UcnVvfcEPK0yFTzHito0U8deqJMtCbg9
+	x2TrljC0YMdo12jvIhOqYV+7UNwRg+xqvwreoAs1Ekz3gefwDrxqDi2s1R0WlEzENi+b
+	0MRBNK7SCZwiReCzvg8oMRc7tI8nmXyOBAuuI32Y4pJgPlB3uX2wj/gDmhHsuTQtXpzG
+	SrT9t8UXLVLZAtGlmv+NpgId9OjPJClcdUz8Zh/P1T6b3C8LT4Y9xmWPb0vIrA5TpFMu
+	P9bzfXABi/UFibWOrdFDmOrRfzAbwftFC7ppfvK2pKYLSFH/urfPrUyP4eQssVBYqbdi
+	3BXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=PZDmn1MlwqpRWa8x5w2F/gabonaRSScw1mwbVbsTljg=;
-	b=hm4noyB9ARsHDhuz2ncJXs/ytYwY8io/ovLpM2hSYokIXzkTwUWKXV0YHyxdtT2Dsz
-	/3/Xd9LLcD1eVRLLk2HeZYyqv0jWK/xFu+ElkZbAoznzqE714TgPxml5p0Kjj8UhZkDi
-	ayUI8hJhdebHsHwN+qAIXGU6OSbV1wr9uElRfBdyOr9Cl/looI2mV1EW4E9fbx0sAZ8O
-	Z0biKZLq/Snfc/LDu0B5Nq8IV9crmp9WGpixtHnwAk8zs3tqAGD75766EYjKvlWmK/Ih
-	GG3ZMpd8mOBCPbfxPik1tbxG/uIFRazUXGSLeduL7GPuQXQLHi6wu0dJPbAlj99t36W3
-	yiZQ==
-X-Gm-Message-State: APjAAAU4vYPUIK43vif4UYhkjzgQQc2aTyWaPderd5uRoFFKmjuiF43l
-	MgezeRFvDxvduUSqD+QwsdRo4J7V3gU=
-X-Google-Smtp-Source: APXvYqznahuvVETd8faDZD1EjNQwIDXZUb6aNMQQ2gjGa9Kxtuljs1ofUbhRuC4IH2L8UrUhQ9OTgg==
-X-Received: by 2002:a1c:20d2:: with SMTP id
-	g201mr10461167wmg.148.1558594160443; 
-	Wed, 22 May 2019 23:49:20 -0700 (PDT)
+	bh=WP+SUvCO3g4Pvoj6fCI+IZKcGzZrxUNMoGjptfDMgxI=;
+	b=SrA1+J6zWprtgv34fCvTKasHC6Hv2TSDZMhBnuGKIGXUxMML432e4/D5lb7ajCJbLq
+	7BNgn4nwOatxmRsu4Zgo3TCwU56Id0WZpq/NDW2Fyz/y+3wU+RKHMX4dr3nGtZcZ2xVE
+	3VB68L36Psi4BCuOhiCsMVZ2sW+Jzh4wd9I0qLRy2TT90Arc+lZq5IEY2OHGKZc6Hfr7
+	NQW6Kt7Ku6DuYhpazXT8DibZiNPsPvuG37W3NsBj+7p4xZsaY6ZHD9LppuCdaUhO2QMN
+	4IBnP+CZthGcfYpKM9R+xOOPUTuxnbpIvqB22r4PBspXRTb0f3Ei5+KqHZZyKiiV32JQ
+	19Vg==
+X-Gm-Message-State: APjAAAUBJ7TCNDhhpSU5am/LpeaurbLh5VJSBwYpEYuvcsBhkRgME8zz
+	QYbwSTim/xMYz/G44r3VpRhcdHbJH3c=
+X-Google-Smtp-Source: APXvYqzF/d7qOPc1Sqe5pAW1X51gwuiCyVfSFDpIe5WE4Vxa1InmUDJWPzCi4TbxW7j/KO5S9HI4Bg==
+X-Received: by 2002:adf:fdc1:: with SMTP id i1mr30280709wrs.103.1558594161221; 
+	Wed, 22 May 2019 23:49:21 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.19
+	d9sm33827524wro.26.2019.05.22.23.49.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:19 -0700 (PDT)
+	Wed, 22 May 2019 23:49:20 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:32 +0200
-Message-Id: <20190523064859.24336-15-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:33 +0200
+Message-Id: <20190523064859.24336-16-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 14/41] gtksourceview3: upgrade 3.24.10 -> 3.24.11
+Subject: [PATCH 15/41] mousepad: move to gtk3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,40 +66,34 @@ X-List-Received-Date: Thu, 23 May 2019 06:49:20 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* this an improvement and bugfix release [1]
-* add upstream-version-is-even
-
-[1] http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-3.24.11.news
+At the time of creation there was no gtksourceview3. That was a blocker
+to use gtk3. gtksourceview3 was added long ago.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...{gtksourceview3_3.24.10.bb => gtksourceview3_3.24.11.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview3_3.24.10.bb => gtksourceview3_3.24.11.bb} (75%)
+ meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-similarity index 75%
-rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
-rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-index d91e479d8..f7884930c 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-@@ -10,12 +10,12 @@ PNAME = "gtksourceview"
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
+index d122bfe37..67c49930b 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
+@@ -6,14 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ # intltool to provide intltool.m4 with AC_PROG_INTLTOOL
+ # xfce4-dev-tools-native for XDT_I18N macro and more importantly XDT_CHECK_OPTIONAL_PACKAGE
+ # which fixes mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
+-DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-native"
++DEPENDS = "gtk+3 dbus dbus-glib gtksourceview3 intltool-native xfce4-dev-tools-native"
  
- S = "${WORKDIR}/${PNAME}-${PV}"
+ inherit xfce-app gsettings
  
--inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-introspection
-+inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-introspection upstream-version-is-even
+ SRC_URI[md5sum] = "fb85c23bcb096a46aee9ec22b4e4fdf5"
+ SRC_URI[sha256sum] = "39a7379b929d964665299c385b2cf705e32e8760698ccc34f91c990bb733518b"
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/${PNAME}-${PV}.tar.xz"
--SRC_URI[md5sum] = "e43337d17c40eae440a76630db76c54e"
--SRC_URI[sha256sum] = "ab5406cdd0bdcf66afcd52b1e048a2f43c0f3ab391644ee30d9ac419b93cd59b"
-+SRC_URI[md5sum] = "b748da426a7d64e1304f0c532b0f2a67"
-+SRC_URI[sha256sum] = "691b074a37b2a307f7f48edc5b8c7afa7301709be56378ccf9cc9735909077fd"
- 
- FILES_${PN} += " ${datadir}/gtksourceview-3.0"
+-# we have no gtksourceview 3.x around
+-EXTRA_OECONF = "--disable-gtk3"
+-
+ FILES_${PN} += "${datadir}/glib-2.0/schemas"
 -- 
 2.20.1
 
