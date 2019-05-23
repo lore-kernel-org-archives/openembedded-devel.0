@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CA0A67E43F
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C7EDA7E44C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 11:55:03 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id 198so5515882wme.3
+	Thu, 23 May 2019 11:55:04 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id f204so5527534wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 04:55:05 -0700 (PDT)
+	Thu, 23 May 2019 04:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8FUnIjZGl+JMvwU4g+uR/kO33ab5nmtD3/VqEQuIutI=;
-	b=I9Ope3HeCYfGWZRbSZMtuu1QI30OoPuPrknPdKCqqQBseDcgSG+Z48WRAhLLP72H3e
-	QAlA4UbqSpgrdI94uUZonwu07d/MP9aW67x0IgeMXtVQ3tJyWSaYxyE2mTVtTdCitPDD
-	HDiekVsQfOwz+pZawQwbhRmFkY5spRMNxt1LFAQfno+Mnxa6C0490vXD1dbdrxmYgFKq
-	LRTmhqLXHZwWeYNNuZ059TGk8VVtJiLLCw3kCWhDlghr2wn0czgtkDFIUD4kI2Fn7Akf
-	3HAdebpEpR52BWkwj6i8UcMGr8Kdv/BeEzeeLjdZ+8qpu9PuyKXjlMeIotwGoTplSJOx
-	tUNg==
+	bh=fjNp+8wm3fgUTq/p2tjOMcezXtTac28IlUDA7iarH2M=;
+	b=PiMN1mn3fPBJGHRAmxiEN2iyjtT7yjTPN1pJsCTOOpBBuol3j5BS5MmcwpsGBnuggu
+	G54Kbs5YCv7d/N+YjpnpygpQqshyLSWOdhUS27JKkDz2xztIiz4JAKu5GdFHKX2KAK41
+	v4i9EzM25rfi8jfcfupJlPiZXv+2I2GJ9sjGpIUPF1QXITevYrTUpfEaZJ7b9s1UXMmi
+	Iwc+tTea73ucyCGyfePZ2peNC3sKcJRQ9CfFV9nNcd2pyR/tpnTvp/covheXjtTBaUzz
+	Nc2HJA5hHr2nl3I5A/xRQ7eBBgm97dnX512vPPCeYbPmMpVwY+Q4exJUOQSSFWEQWY7E
+	QM8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=8FUnIjZGl+JMvwU4g+uR/kO33ab5nmtD3/VqEQuIutI=;
-	b=RFMAeiGi37F/i5lCdB75A5AddjnMaoNGULaj3vSxT6ztyQCBsZ4mI2eWcDxMg5ro2t
-	WUMHyv4LEJLPkHgEtyilLXiBBZ7CJxiNv6igME27klJrhalc18qiuux6QMbITupzytAN
-	gczJoLCDI8/3h9mLzojhIduQ1OJIGNux1eceEycLzerjPJtaEk8qwihkuS/LuR3Ekal9
-	fOJHHl3/xwXy1dhkVdHt7EqguoEveUgbqWoSqkGzs0gDDXM9YaG5t8SXoIVI5qvQak4t
-	1XqMDbYv7UolNGRALGEbbXCizSrN5M/7JFp4YsGVRzxPJhCUO1PUySkNnqTxlxzqU20P
-	EQ2w==
-X-Gm-Message-State: APjAAAWJJZRthiwqcvQZneFin+Kyo341aay6sqRZAqzEbO3316kddf4n
-	DKiI5dmWCl7oCkxXOvC5N+TIw7eI
-X-Google-Smtp-Source: APXvYqywamQj3wnkZOEeaPtdWI92WPaiGjLLOFbzoRdcTuqqQi0pyNUdOADrWmsjR7okpVd+/m26iQ==
-X-Received: by 2002:a1c:be0b:: with SMTP id o11mr11882286wmf.63.1558612504283; 
-	Thu, 23 May 2019 04:55:04 -0700 (PDT)
+	bh=fjNp+8wm3fgUTq/p2tjOMcezXtTac28IlUDA7iarH2M=;
+	b=ECoKznnhIu2uLSUZquIYPiy4JpGAFrvKPijkiuzlifDaHpOWy5bMOooeLQ0TSJZiWO
+	EZ5BXbybxdSp9wPDlcI2XzCuSnpeuN5GgL7gMrnBEOTKmXH1o1FITDP07cctmiUpd18/
+	kBAqwxDkJL0Mk8y/D0Rj5K1txjmk1cR8NBnUTVbnG+3jjC4fuYIbgvY2HBhe3yOsUgkc
+	LutUdvgUS+Et7eb0vt9CYQvq4fEaFxiuezR1aagJtOkp1OPpKi+mFy3Ty+sicPZZABrn
+	2X70W5EY2XHLWYKyvvHhw8bsB/nC7foktKwvxCAY9tJit7NEVAoIrrDpUKH+EoyN9lWc
+	WiCg==
+X-Gm-Message-State: APjAAAUSJq+jXNXdkAiC2PpCdlDtDinl32ZZrb0A0gEHL+H8uxIHpT8p
+	jgWdNnTFiPTHSDwCtbnwubZg32RT
+X-Google-Smtp-Source: APXvYqxu4edk6YqwM+PWTJwPayrS9Kd3uwQoQpxxN2T9bCym0gLr+ONzEhLLnc9ovafq4LIggaU3+Q==
+X-Received: by 2002:a1c:6a0e:: with SMTP id f14mr11836866wmc.28.1558612505393; 
+	Thu, 23 May 2019 04:55:05 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	u15sm52980374wru.16.2019.05.23.04.55.03
+	a128sm10510599wmc.13.2019.05.23.04.55.04
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 23 May 2019 04:55:03 -0700 (PDT)
+	Thu, 23 May 2019 04:55:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 11:55:04 +0000
-Message-Id: <20190523115505.18245-7-Martin.Jansa@gmail.com>
+Date: Thu, 23 May 2019 11:55:05 +0000
+Message-Id: <20190523115505.18245-8-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190523115505.18245-1-Martin.Jansa@gmail.com>
 References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 7/8] ttf-mplus, ttf-vlgothic: add ttf-mplus license
+Subject: [meta-oe][PATCH 8/8] android-tools-conf: import one more improvement for android-gadget-setup from meta-luneos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,71 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 11:55:04 -0000
-
-* add meta-oe/licenses/ttf-mplus from ttf-mplus/027-r4/mplus-TESTFLIGHT-027/LICENSE_E
-* use BPN to use the same LICENSE even with multilib
-* use the same license name from ttf-vlgothic
-* fixes following warnings:
-  WARNING: ttf-mplus-027-r4 do_populate_lic: ttf-mplus: No generic license file exists for: ttf-mplus in any provider
-  WARNING: ttf-vlgothic-20141206-r0 do_populate_lic: ttf-vlgothic: No generic license file exists for: mplus in any provider
+X-List-Received-Date: Thu, 23 May 2019 11:55:05 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/licenses/ttf-mplus                       | 16 ++++++++++++++++
- .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb  |  2 +-
- .../ttf-fonts/ttf-vlgothic_20141206.bb           |  2 +-
- 3 files changed, 18 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/licenses/ttf-mplus
+ .../android-tools-conf/android-gadget-setup              | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-oe/licenses/ttf-mplus b/meta-oe/licenses/ttf-mplus
-new file mode 100644
-index 0000000000..c9cdca3fe6
---- /dev/null
-+++ b/meta-oe/licenses/ttf-mplus
-@@ -0,0 +1,16 @@
-+M+ FONTS                                Copyright (C) 2002-2009 M+ FONTS PROJECT
-+
-+-
-+
-+LICENSE_E
-+
-+
-+
-+
-+These fonts are free softwares.
-+Unlimited permission is granted to use, copy, and distribute it, with
-+or without modification, either commercially and noncommercially.
-+THESE FONTS ARE PROVIDED "AS IS" WITHOUT WARRANTY.
-+
-+
-+http://mplus-fonts.sourceforge.jp/mplus-outline-fonts/
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-index 9ad348d9fa..efcf1b6165 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-@@ -2,7 +2,7 @@ require ttf.inc
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
+index beca353e67..26cf30eddd 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
+@@ -9,6 +9,15 @@
+ # model=$(getprop ro.product.model Android)
+ # serial=$(getprop ro.serialno 0123456789ABCDEF)
  
- SUMMARY = "MPlus font - TTF Edition"
- HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
--LICENSE = "${PN}"
-+LICENSE = "${BPN}"
- LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \
-                     file://LICENSE_J;md5=a120ca8d7c8e4a475d5277c9aeb95221 \
- "
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-index 62f2bb2805..e522810a24 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-@@ -4,7 +4,7 @@ SUMMARY = "Japanese TrueType fonts from Vine Linux"
- AUTHOR = "Contributor: noonov <noonov@gmail.com>"
- HOMEPAGE = "http://vlgothic.dicey.org/"
- 
--LICENSE = "mplus & BSD"
-+LICENSE = "ttf-mplus & BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.en;md5=66ecd0fd7e4da6246fa30317c7b66755 \
-                     file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
- "
++#below are now needed in order to use FunctionFS for ADB, tested to work with 3.4+ kernels
++if grep -q functionfs /proc/filesystems; then
++    mkdir -p /dev/usb-ffs/adb
++    mount -t functionfs adb /dev/usb-ffs/adb
++    #android-gadget-setup doesn't provide below 2 and without them it won't work, so we provide them here.
++    echo adb > /sys/class/android_usb/android0/f_ffs/aliases
++    echo ffs > /sys/class/android_usb/android0/functions
++fi
++
+ manufacturer="$(cat /system/build.prop | grep -o 'ro.product.manufacturer=.*' | cut -d'=' -f 2)"
+ model="$(cat /system/build.prop | grep -o 'ro.product.model=.*' | cut -d'=' -f 2)"
+ # get the device serial number from /proc/cmdline directly(since we have no getprop on
 -- 
 2.17.1
 
