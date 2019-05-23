@@ -1,50 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DCD077E421
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BDEF7E2AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 09:44:04 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id s20so4314083ioj.7
+	Thu, 23 May 2019 11:54:57 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id t7so5639786wrr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 02:44:06 -0700 (PDT)
+	Thu, 23 May 2019 04:54:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=cfn1XzGquCI2IBNs0P8P6jH+uCX8rBGaY97GxyYJWBk=;
-	b=BktKG5ffMY8ojRfjeKuctjHjz98mg/hEwHKgM3fvhGsl4FhQTgup/BwWIYr26CGoRm
-	JeMy6j2HDw6mAGGZv+5FjqVfDS1Z/o3SH2Hzw3Ri4DMn2meUabBQsHUm0onoKeiGKK7S
-	Nb7SOAJbK3rTTr90+gdunAUq/ZEEjxgB5mDfuN9zJRjsLVBk9nm1XaNEnh7AnOlN8iJf
-	insZrLvUEt69uQ6t0v1jVXrLCPpMZhoLgpdW+nv/ANU6s9XybRhQcXGsuoE8R5sAULtT
-	81Tq/4Y8espC9x+e+nYs6/KuOsOKYR8NRgLQ2TvG4zTrkV811mCgVj3Mhm0rb2v8msWJ
-	ELpg==
+	h=from:to:cc:subject:date:message-id;
+	bh=4yq5DKlRSrOrq9i5d4AVs3HSB1WLirnQ1jNBpnWJ+dU=;
+	b=pmQ6TDpmZrC0QIQX61+KjFhzUI/R8m1hud/UQ+yBBgA4vag5jWZMUAewc68zJ+AVac
+	5De5MWRV8hQ+iVLVS6qO5zzN2Bk2mZkJuefDnYHd6fC+Gl04f4a1vgfR4VQDBSygIQzS
+	zssXJCZ5nnnYKqHbuGi+xaTtubvBJ8qDLJDmE1QBRCbidOhvJMqGrHRkuzMSjgBDJ5YP
+	62x2oHmhUAJvXkzR0qnRhC4HLFZsHhxbv22h1YuizO5Tjob54lAwJemTclRZ5KkpiJGg
+	ISvDBYLNctHseu18pi2NbZZlDh1ahNv6X3+XDM+s3DVgS710rHchjVBDZ6LslNjvWZLz
+	DZcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=cfn1XzGquCI2IBNs0P8P6jH+uCX8rBGaY97GxyYJWBk=;
-	b=nxsz2+hbmq2r26igw87J4xlQOQvQpyPUvZJ5j9G8higSFfTiDSodbzCGyCTEeRVdO9
-	BOaWhrueWcwRYD95SbQeRoloUbvxn78T8ff8TBAWY1rL8qOV4x91L0rCb+B+3RTLtD0f
-	cRzlU0bQZoX+B17zhbZ+/81xm7MBgA3BtqFL9Ia6rwNuQz+8AZlLBKF2DQTT3/co5H0R
-	xzTDF2LEVF6NaWY+oMIfl09GiE7k83UqIuoQ5xHoPo5/PHz0+br5jF8v7zpIyrykpkyP
-	Lh1Ps67PLxCbM5ZJw1cx2VZfimkArqf27Q1F3loiayiluwPXXsKpoTJ6LAKRaIPTYGP5
-	lmGA==
-X-Gm-Message-State: APjAAAXLnU/7wi7bap7TVHUeI5y5hAPmHckEAd+nvlJk8sKI8lTLdyuR
-	vaET38KBWHB0Lr4+0LfnDQOyZQm6yh49reHYqOY=
-X-Google-Smtp-Source: APXvYqzM1JDQHv6NTXRCzUNBiI1yvi5TK2qeYFussdNuQXHqMyVZo2cxaTApLkxGEk+jH5Nn/53yHNR+XIxtlmH4Mdw=
-X-Received: by 2002:a5d:9a11:: with SMTP id s17mr28475263iol.267.1558604645943;
-	Thu, 23 May 2019 02:44:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190523064859.24336-1-schnitzeltony@gmail.com>
-	<20190523064859.24336-8-schnitzeltony@gmail.com>
-	<191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
-In-Reply-To: <191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 23 May 2019 11:43:54 +0200
-Message-ID: <CALbNGRSfLNCph672ddFLXEYKVzC+t+UzjmYt9FD240qy=YUG0A@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files with new distro feature 'helpfiles'
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=4yq5DKlRSrOrq9i5d4AVs3HSB1WLirnQ1jNBpnWJ+dU=;
+	b=r0/rs+bQifrNC5OTwrvbC5EdD+RbkEAH99b8lKRzuf9hgBRE5lR9DAYXnhuNir52A/
+	lr93x2hewB78T0lgz+6xeIithRiSUsVZYT1OiR0sWnTXCNNTvT9GKujfKb6oZLSZlqdL
+	tLpwDcDTD2LAV2Hx45HZUfzIcqXngQZp7DDtr84KDTBXJy89UTzLxq2ZbIi94yTjLY+V
+	ZPbL90Tzqjr36pXxCUlp4OY6YAgvk13OlF8sFila/vrbQ0EodXQjTJf64LWA9Bh1j1wi
+	gP1RaawX/9DGTuMCd95ttdOpwEpj+4OgYTs5PjFNxTOECjfuTj4jl2RH0mT+mwCUc4pN
+	FR5w==
+X-Gm-Message-State: APjAAAUKBbuAS0sKb+5CFhp8QN71N+BkVDVs2hBYaaJ+gwpyEt4FCrki
+	OJ1ryNfjAaKWYtfpT+I9NoLMGUJL
+X-Google-Smtp-Source: APXvYqylStk0EpSrjhi+RwD+DV3c52+v0B5F8IkdQBJbAHtMuAQ/9YJ30aOWNqNoW5yF41a44EhBUQ==
+X-Received: by 2002:adf:ff88:: with SMTP id j8mr640848wrr.99.1558612497692;
+	Thu, 23 May 2019 04:54:57 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	v5sm57273164wra.83.2019.05.23.04.54.56
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 23 May 2019 04:54:57 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 May 2019 11:54:58 +0000
+Message-Id: <20190523115505.18245-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH 1/8] uriparser: upgrade to 0.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +55,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2019 09:44:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 May 2019 11:54:57 -0000
 
-On Thu, May 23, 2019 at 10:55 AM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> > devel-bounces@lists.openembedded.org> On Behalf Of Andreas M=C3=BCller
-> > Sent: den 23 maj 2019 08:48
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files
-> > with new distro feature 'helpfiles'
-> >
-> > Gnome help file generation cannot be configured so handle files
-> > properly
-> >
-> > * Add a new distro feature 'helpfiles':
-> >    If set: split help file into ${PN}-help-*
-> >    If not set: delete help files on installation
-> > * Append ${PN}-help-.* to PACKAGES_DYNAMIC
-> >
-> > Once accepted / applied it takes a on-line patch to add help files base=
-d on
->
-> I assume you mean "one-line"?
-Your assumption is correct :)
->
-> > IMAGE_LINGUAS.
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->
-> //Peter
->
-Andreas
+* LIC_FILES_CHKSUM changed only with formal changes:
+  commit 093f10a3539b02a38efa835022ef08e52e71ea52
+  Author: Sebastian Pipping <sebastian@pipping.org>
+  Date:   Wed Nov 4 22:33:13 2015 +0100
+
+    dos2unix COPYING
+
+  commit 62a6150417636afe3c6956c030a3e4b1b1c1fe57
+  Author: Sebastian Pipping <sebastian@pipping.org>
+  Date:   Wed Nov 4 22:30:29 2015 +0100
+
+    Update e-mail address
+
+* use CMake instead of autotools
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../uriparser/uriparser_0.8.4.bb               | 16 ----------------
+ .../recipes-support/uriparser/uriparser_git.bb | 18 ++++++++++++++++++
+ 2 files changed, 18 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+ create mode 100644 meta-oe/recipes-support/uriparser/uriparser_git.bb
+
+diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+deleted file mode 100644
+index bfcdf83737..0000000000
+--- a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "RFC 3986 compliant URI parsing library"
+-HOMEPAGE = "https://uriparser.github.io"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=72b0f9c74ae96eeab8cf1bf3efe08da2"
+-
+-SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "--disable-test --disable-doc"
+-
+-SRC_URI[md5sum] = "9aabdc3611546f553f4af372167de6d6"
+-SRC_URI[sha256sum] = "ce7ccda4136974889231e8426a785e7578e66a6283009cfd13f1b24a5e657b23"
+-
+-BBCLASSEXTEND += "native"
+diff --git a/meta-oe/recipes-support/uriparser/uriparser_git.bb b/meta-oe/recipes-support/uriparser/uriparser_git.bb
+new file mode 100644
+index 0000000000..09e8befcf8
+--- /dev/null
++++ b/meta-oe/recipes-support/uriparser/uriparser_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "RFC 3986 compliant URI parsing library"
++HOMEPAGE = "https://uriparser.github.io"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fc3bbde670fc6e95392a0e23bf57bda0"
++
++PV = "0.9.3+git${SRCPV}"
++
++SRCREV = "737e95f67bc2e5d8b90a1392797b353b52e5124a"
++SRC_URI = "git://github.com/uriparser/${BPN}.git"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DURIPARSER_BUILD_DOCS:BOOL=OFF -DURIPARSER_BUILD_TESTS:BOOL=OFF"
++
++BBCLASSEXTEND += "native"
+-- 
+2.17.1
+
 
