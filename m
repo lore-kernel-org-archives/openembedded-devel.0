@@ -1,55 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 80C6B7E457
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 6777C7E403
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 06:49:38 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id m3so4884770wrv.2
+	Thu, 23 May 2019 06:49:39 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id 198so4509352wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2019 23:49:39 -0700 (PDT)
+	Wed, 22 May 2019 23:49:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=T05j4G4KgpmMlSQDx3/1Y5QY4r8upULw6DDXgiafI6E=;
-	b=JrgWaNK3ofEqB7HXRC3m8bnEkWWbMoA2huUnqGqShd1D9BGB0wkIAXQG3jTTYIposZ
-	/3gO6UOjHZ6FzXkb1BbKnnABDJZg4JSoB3O4cPDLepCYO881L7iAPAg1uFFv/fkKIjve
-	DB4XTO4+gvAPZTDUggRrNVNBvDzQpoLYTDpnS89YNgY3qmrEz9ebxmcRuWGd9jC7jann
-	JLDNxQlfoWwRJIg6amA0BvXbbF08eKW4Q+9KMOuuHZ/bzdCYLl7vMrl+zfX+XZt+Ixgq
-	LTEUiYeZvwcgF4/oFOUpf0ePr5BFheHZR7wX0JbI7Cs1Irfg7OCmEZCyWlzdoMH805Ux
-	Y0VA==
+	bh=Q70kIfDKdfVFmix03TcAoq6Vv9KTDSNAPqJqM2AsJb0=;
+	b=BAF5Ii3DGNBNUspRhMzTHh4KkkAkezJLkmNH90uXb9gJQspTemnYgBEO5fYrhhezdb
+	ZeOxpixBt6XStSq1QI/QHo3m76TU+gxd1qs6LmwixJvcEgZOJfkODcMGBdr8ykvJub7L
+	gEG/o3zy6XdFM2ussFwUGwhFvG3DE2J8+Os6Z8z3/aLGe7euqbFbob0kDprJ0mf/6bv4
+	wENce84F7EB9IiH3UdekgqHh7LF1CezlUBL9ojzCnbyIsB5SrBRIxGjLM97GPRFFkPh8
+	6v5djaIlvVLWM+n0wGoYKILaGxrARZTDkpNJBWA9C9PchVG1iLp9oNUjJShUZowAu7nz
+	dVrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=T05j4G4KgpmMlSQDx3/1Y5QY4r8upULw6DDXgiafI6E=;
-	b=IjAHr97agNQDFoUD1Zfqu3LsN+8d2pwKL9wTMNp5aLOMwkCRrG1nUyuVSiA8bAoGxb
-	oWpRvooJaP2MWHpYBITksNY1TgpvDVKmd9QjdDhnB5znr9wTaiyvRg5/N/RLOdUpg4x/
-	BDUZeeYYwnBKHoKrYUdAykUCD45dV7knS8ynf1TW5YXCgyolaOLkjvDmQEV/Sqwo0ztL
-	UtoXk3m4S/x68jmUaZzmsX2nERBOusKnYJJKp92qTOI3A2sieqBOpjCUpKHGS8fWGXlN
-	Qs4gH76yaYF/EndetFBkwpeRJ/7Ok/NUIIr2B+QmgDZlErAtmEKnZ1YU+CdeuPQ6tgli
-	1mXA==
-X-Gm-Message-State: APjAAAXlVfrhu6sl855WsC3Pc+2T0M3RCeG/uieKyIQFkhHgbr0vQaHw
-	DefodwJdi6r/ozgeU+Ia2oqS5DDywWY=
-X-Google-Smtp-Source: APXvYqwrANHcPgAWIjk5bh7PXBOQczoE/CK8aNRjUrCvA33tdmdddtUsI4i//xfl2Ggz+OOZM3UFnw==
-X-Received: by 2002:adf:de82:: with SMTP id w2mr6537522wrl.53.1558594179208;
-	Wed, 22 May 2019 23:49:39 -0700 (PDT)
+	bh=Q70kIfDKdfVFmix03TcAoq6Vv9KTDSNAPqJqM2AsJb0=;
+	b=X+BFIL5ROYzO3IClY/qKADB64o9kHWSfbTfAEMdIjjrVp8NDWUDaOEd2W2LM3jTXnR
+	CZ1Sr1IXCdUmriZXRmxBw5sXq5/CM7NP6N+SQHXg9ZY+BuuSvn07N2ZUYf57gaCZcg3d
+	Kbh9mHs7h5Zi2DlfMVOLNQNEPl/c19ZFI4uWfwKlobjcBdcnpbNz1QDPMmR4djyF38zy
+	ens2ktnP2dloYSxCspc9hEZEmmK1e0dbaKX+d4t7NpcYWDRoOHVx0tu77Yme2Hc+JZgn
+	uFByWiQNbCtE6mWND5kZ3tdB7HwGfiUvLDWGU7MKecyaTLMZsjLdz/mu2DgZPBrPHPdc
+	Mj/w==
+X-Gm-Message-State: APjAAAURESw8J3/YrjZjcCEeIeaShwf2kbvM24Nq7WxuXkGNVYj1Z/uC
+	+cqC4NAK+6KZxEN0ud51goyVBHgPEs8=
+X-Google-Smtp-Source: APXvYqwJbEizafGgFYHrbqL3ynyrxw4e2PGAarxpshAgSIskUc09Di+pXyN7IuoWSzP/sqFab0228w==
+X-Received: by 2002:a1c:2c89:: with SMTP id
+	s131mr10023044wms.142.1558594180055; 
+	Wed, 22 May 2019 23:49:40 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F04E634002574DE25662558.dip0.t-ipconnect.de.
 	[2003:f0:7f04:e634:25:74de:2566:2558])
 	by smtp.gmail.com with ESMTPSA id
-	d9sm33827524wro.26.2019.05.22.23.49.38
+	d9sm33827524wro.26.2019.05.22.23.49.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 May 2019 23:49:38 -0700 (PDT)
+	Wed, 22 May 2019 23:49:39 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 08:48:54 +0200
-Message-Id: <20190523064859.24336-37-schnitzeltony@gmail.com>
+Date: Thu, 23 May 2019 08:48:55 +0200
+Message-Id: <20190523064859.24336-38-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 36/41] libwnck: GNOME_COMPRESS_TYPE = "xz"
+Subject: [PATCH 37/41] rygel: remove GNOME_COMPRESS_TYPE = "xz"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,20 +69,20 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb | 1 -
+ meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-index ea4c8df53..f50b9ceb9 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-@@ -11,7 +11,6 @@ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-s
- inherit gnomebase gobject-introspection distro_features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
+index 4869d866f..0adc721d8 100644
+--- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
++++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
+@@ -12,7 +12,6 @@ DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstream
+ RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+ RRECOMMENDS_${PN} = "rygel-plugin-media-export"
  
 -GNOME_COMPRESS_TYPE = "xz"
- SRC_URI[archive.md5sum] = "f03e1139296e2a3a92e3b65a3080cd32"
- SRC_URI[archive.sha256sum] = "83f732d20781fc88b22cdc6aaf2d4f388db6d3d4ff28d1a8fd45be9fb7743a9e"
+ SRC_URI[archive.md5sum] = "f897167ad82e2e741582f2c393a76843"
+ SRC_URI[archive.sha256sum] = "dfd3d885da3ac383ba0cfbf119995f4a0c2bca2cc8f8cfcd3df10cfec8f35cd7"
  
 -- 
 2.20.1
