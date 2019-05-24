@@ -1,47 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
-	[209.85.221.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C1F86C3B2
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+	[209.85.128.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 633E67E259
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 16:40:27 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id m3so10673983wrv.2
+	Fri, 24 May 2019 23:39:49 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id 15so10646229wmg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 09:40:28 -0700 (PDT)
+	Fri, 24 May 2019 16:39:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=7btbqjWfrY+D6O8ICmylW9Jt5xgfaAxU2D1s50Jh194=;
-	b=NHGU9gAalyJDLKUL9yKb6oL5OayI2WbxyFEouRa9M2AJjd6+R9tw2WoCwF2OdSKrRW
-	Kcvq6o0I4P/v5bpYGditQAyJ9ZT9TM8T5dpqYEQMVOFyG2USxWnYEGx6k9GHgy5QUOjL
-	afr7AKS0P6H+NOdFLW+QHvUxsWvYi8ScVru9uJnhtGGeDDGEgKF6WtHfWnlFVkKH2ILW
-	IcDcgJrY+FfBQmy2OT9CmzsG3gcs15e2ceZN2K32+CGw34g2P373kzl8ZBJx2YisCdKk
-	Qjzoox7d5yjFfeJOls76bPNvDOIgie3kjy0l9i6MuGJcP07/4B0frzDCEdp3VCQDJwkb
-	fjpQ==
+	bh=gguUkQGWzDLqvjFGjQQxYC4XP2lylk3S6QhCfg4Dafo=;
+	b=K7gckogFbM8et2ByRRzmCZ9FlsK2fLle3gwn51zoXV7XcdR+LGMdZXLCfT9VP5JOrR
+	H2WHdEMA1VDr0QRVJegtAur3n1vB50zvzq7/eKa7JtgRoszYvLnreglDMcIDFOpyt0KM
+	FVhRVKdCz1w1gu/uazNQmbHdjok8A3289DH8eY/BHy2lEHoauYoILqAPRLQdTREfwCWH
+	93LDeQft8LWhgZdJeBJKv/NWdYbulmHzDp13sZ8vWJbve0q60DXwZ0mjyuZ6iwRGHc+Q
+	5tNLwk/mVlWiW9ycmApJd2rrEJVqjuGH5x4C+LMa0GvHMggolblGW9xM0pQ+3xpHQbX5
+	lilw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7btbqjWfrY+D6O8ICmylW9Jt5xgfaAxU2D1s50Jh194=;
-	b=hwE18CQ3LawEf999sM1gM+o34iDqYSgSAoLVXzuyATlIL2/JI/vvq27QJQShB7+kfl
-	AcidmXFHVgXcBCc403m2RMS43d1LTAUJxCiDPgwLqfkmXUeRzv6j/PilOyvfdVstJ9j3
-	dRObq/0V5UallRfDFDSw3Ju6toPpOj6dc1P9c548+I+f4eXdkfZB218HDgU4ggY4kPJ1
-	2PVeTXkhFwmARIVJHKDaHPW01tRPrdYENxwt2T/EfkOipJbs1huVP1PHxyCAui5hePLv
-	XjUNI0hkmcNYPKFmZVC+npD2YDzIZOYROptUsLb9LVHtVyQynKHzPzy6uz3J1B/Yqcjq
-	ARTQ==
-X-Gm-Message-State: APjAAAUe+KZ4eyzdnh8bxoYTJjvEiH5gHG4e8jeSk9XSvRgeCryeFAFn
-	S/MQ0eBh6OGbL2vopQZx9HdGUlJe
-X-Google-Smtp-Source: APXvYqzPnT0kxHt2xM+QidUa5k3U3DcBJ+AGFpqyEhQnPpvRqxuCuExGcMB21e3mexwIoAe9C4YMBQ==
-X-Received: by 2002:adf:e711:: with SMTP id c17mr26537925wrm.227.1558716027827;
-	Fri, 24 May 2019 09:40:27 -0700 (PDT)
+	bh=gguUkQGWzDLqvjFGjQQxYC4XP2lylk3S6QhCfg4Dafo=;
+	b=YcKy18zBsk7QG0iUzTQWdF13O76/VkflAf1D6RtXgmx23KlsNROD08C5LiFOdypKWp
+	rVSxGbJqtxlrkfYmfep9xNCi/QPK1qfzxNqzDBGMYPqhc1tj/IukmUPQWZpgtE70cLt+
+	CtoJO1weCRsPdl2BqpnvUtW3GksneioLOy4ptCO6Cje2wWWVFyqCBtL9dXodVHHiwDfj
+	0D8ciKfttZIikxdapMHPJEARjS6ZpTCQS4qo8pIJ11vf5o5q17zHOL+29YajTkRG0Zpn
+	EgkSOzMaafKeubcMvvpYLYAji/1R0k9gLIOqcK6YFP4jlvCwJO5qvyoy1CW2ybQTWKTS
+	YP/Q==
+X-Gm-Message-State: APjAAAV9eAYgtjfIOW2I2DNQHLo87OLi0P15dFfp+MHFm+K2bzJOk06N
+	xUNKtk/JBSSrPjGrtwyvrnXdhfHf
+X-Google-Smtp-Source: APXvYqySdcQ0W3+HxNZok9fiaT3ZNywvRYSnhgdQiw88VNImfL4d0+x1Xrgzsmu5Hc209clKof1qgg==
+X-Received: by 2002:a05:600c:2289:: with SMTP id
+	9mr18914684wmf.106.1558741189810; 
+	Fri, 24 May 2019 16:39:49 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 91sm3508364wrs.43.2019.05.24.09.40.26
+	by smtp.gmail.com with ESMTPSA id
+	v137sm3862514wmf.28.2019.05.24.16.39.48
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 24 May 2019 09:40:26 -0700 (PDT)
+	Fri, 24 May 2019 16:39:48 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 May 2019 16:40:21 +0000
-Message-Id: <20190524164021.18767-1-Martin.Jansa@gmail.com>
+Date: Fri, 24 May 2019 23:39:48 +0000
+Message-Id: <20190524233948.20049-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCHv2] uriparser: upgrade to 0.9.3
+Subject: [meta-oe][PATCH] libmikmod: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,61 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 16:40:27 -0000
+X-List-Received-Date: Fri, 24 May 2019 23:39:49 -0000
 
-* LIC_FILES_CHKSUM changed only with formal changes:
-  commit 093f10a3539b02a38efa835022ef08e52e71ea52
-  Author: Sebastian Pipping <sebastian@pipping.org>
-  Date:   Wed Nov 4 22:33:13 2015 +0100
-
-    dos2unix COPYING
-
-  commit 62a6150417636afe3c6956c030a3e4b1b1c1fe57
-  Author: Sebastian Pipping <sebastian@pipping.org>
-  Date:   Wed Nov 4 22:30:29 2015 +0100
-
-    Update e-mail address
-
-* use CMake instead of autotools
+* it was moved to outdated_versions directory
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
+ meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-v2: switched from git fetcher to release tarbal
-
- .../{uriparser_0.8.4.bb => uriparser_0.9.3.bb}      | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-support/uriparser/{uriparser_0.8.4.bb => uriparser_0.9.3.bb} (27%)
-
-diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb b/meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb
-similarity index 27%
-rename from meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
-rename to meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb
-index bfcdf83737..8c28c9d93a 100644
---- a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
-+++ b/meta-oe/recipes-support/uriparser/uriparser_0.9.3.bb
-@@ -2,15 +2,14 @@ SUMMARY = "RFC 3986 compliant URI parsing library"
- HOMEPAGE = "https://uriparser.github.io"
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
+index d53dff6a07..bbf58f9540 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
+ DEPENDS = "alsa-lib texinfo"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=72b0f9c74ae96eeab8cf1bf3efe08da2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fc3bbde670fc6e95392a0e23bf57bda0"
- 
--SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${BP}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "9874b64f6f4ff656f3f69598e38f12b7"
-+SRC_URI[sha256sum] = "6cef39d6eaf1a48504ee0264ce85f078758057dafb1edd0a898183b55ff76014"
- 
--inherit autotools
-+inherit cmake
- 
--EXTRA_OECONF = "--disable-test --disable-doc"
--
--SRC_URI[md5sum] = "9aabdc3611546f553f4af372167de6d6"
--SRC_URI[sha256sum] = "ce7ccda4136974889231e8426a785e7578e66a6283009cfd13f1b24a5e657b23"
-+EXTRA_OECMAKE += "-DURIPARSER_BUILD_DOCS:BOOL=OFF -DURIPARSER_BUILD_TESTS:BOOL=OFF"
- 
- BBCLASSEXTEND += "native"
+ SRC_URI = "\
+-    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
++    ${SOURCEFORGE_MIRROR}/project/mikmod/outdated_versions/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+ "
+ SRC_URI[md5sum] = "9dd9bed30c6f7607a55480234606071b"
+ SRC_URI[sha256sum] = "3f363e03f7b1db75b9b6602841bbd440ed275a548e53545f980df8155de4d330"
 -- 
 2.17.1
 
