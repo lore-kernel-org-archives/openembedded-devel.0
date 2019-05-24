@@ -1,22 +1,62 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F11E27E45D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C92F7D264
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 01:41:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4O1fJVN024362
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 23 May 2019 18:41:20 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 23 May 2019 18:41:19 -0700
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Thu, 23 May 2019 18:41:19 -0700
-Message-ID: <20190524014119.123821-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Fri, 24 May 2019 04:05:22 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id y11so4454524pfm.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 May 2019 21:05:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=kPx4IYH4u9VOisfjXqom3aUgiOVDLJAgjUsoRAMJ1is=;
+	b=djU/pIWlUuXB2dIZh92HuDXJi5nG4MTq9Wsrs43tBWl/mR5dp50frbFSq7Wq8qjN/J
+	PkRs6+C/6ks7cTY8wP2IW9aW5baqmgYBqYp7GQh1Fh4ossEfDKMYxgAHWef2wpKX6nHm
+	BoOT44WrQ9B2B2w3X7zUUUdtbXxBwzpQJqhc8CXur3cBUi3ACnHoE1QGpPBwP2Bn6kvh
+	doYjuHjJY4Y5jiU2luIUEW/KpoIS3ozTpJz62srqUq3IfpxcCjM+ldu8AQlnzNnnLBWc
+	LnNEQM0SxAS37n+EWd4rn9leSH/BzbIY4EOAjg6z3RywmC+Z2tXkGV6f0GmaJHNzhc4B
+	Wn6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=kPx4IYH4u9VOisfjXqom3aUgiOVDLJAgjUsoRAMJ1is=;
+	b=EHJ76S9Cu9uLwPAjUz21CaCiks11ZU3128Cvz1oFpXBCRS+HXzbeD4v5zwnbbBGMLn
+	yG/lFu6kjk3lXbo+JfRm9ZXNZpK+h1iCNPdnCQ/YSQpVQKP0pi5QlQ4unenUu50lpO+f
+	TK7o7z0wkiDi4kEGCqeLyI0zZ7AJ23jUGVvkRexM307UoE2eZhV0T/MYF38PpwdCXlhl
+	pe7E3ZICYQWoSzyr+QjRPU8BoibB4JIx4Z9jDlFRu9mPlTNkROjGV5qCWQxwA6I1lQ4x
+	diiDzDO5uebvZXOUCcwAKqCeJfA9ISW/CkPZrwjtmKKBRBABMtzFiq2tsKPRTJFV7Sz+
+	oVzw==
+X-Gm-Message-State: APjAAAWYUEGlKx2XS4tQh5Zd/aqJ+SxM3ALf0VqRtBoKwMJNu8m5ms2Q
+	sHWCFgmvyvdl9USndh8Au9aZil1IhZI=
+X-Google-Smtp-Source: APXvYqxyQDqNlipkB254v428V7FymVzFFf4/fWg9MZchA7oOEIB5fni+NlG0Dn4Kzxc/NRy2EF/sAQ==
+X-Received: by 2002:aa7:942f:: with SMTP id y15mr50978656pfo.121.1558670722995;
+	Thu, 23 May 2019 21:05:22 -0700 (PDT)
+Received: from hermes.local ([2601:646:8500:6bc6:313d:8ef2:9687:9b74])
+	by smtp.gmail.com with ESMTPSA id
+	t78sm1098379pfa.154.2019.05.23.21.05.21
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Thu, 23 May 2019 21:05:22 -0700 (PDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+References: <20190523064859.24336-1-schnitzeltony@gmail.com>
+	<20190523064859.24336-8-schnitzeltony@gmail.com>
+	<191e6e9a53294aae82f66761b91f6382@XBOX04.axis.com>
+	<CALbNGRSfLNCph672ddFLXEYKVzC+t+UzjmYt9FD240qy=YUG0A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <ec1bf46e-c82f-fac8-8032-4747a4c29e97@gmail.com>
+Date: Thu, 23 May 2019 21:05:21 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0)
+	Gecko/20100101 Thunderbird/67.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.3.15
+In-Reply-To: <CALbNGRSfLNCph672ddFLXEYKVzC+t+UzjmYt9FD240qy=YUG0A@mail.gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files with new distro feature 'helpfiles'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,50 +69,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 01:41:20 -0000
+X-List-Received-Date: Fri, 24 May 2019 04:05:22 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
 
-Fixes for the following security vulnerabilities:
- CVE-2019-2614
- CVE-2019-2627
- CVE-2019-2628
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../{mariadb-native_10.3.13.bb => mariadb-native_10.3.15.bb}  | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                         | 4 ++--
- .../mysql/{mariadb_10.3.13.bb => mariadb_10.3.15.bb}          | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.13.bb => mariadb-native_10.3.15.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.13.bb => mariadb_10.3.15.bb} (100%)
+On 5/23/19 2:43 AM, Andreas Müller wrote:
+> On Thu, May 23, 2019 at 10:55 AM Peter Kjellerstedt
+> <peter.kjellerstedt@axis.com> wrote:
+>>
+>>> -----Original Message-----
+>>> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
+>>> devel-bounces@lists.openembedded.org> On Behalf Of Andreas Müller
+>>> Sent: den 23 maj 2019 08:48
+>>> To: openembedded-devel@lists.openembedded.org
+>>> Subject: [oe] [PATCH 07/41] gnome-help.bbclass: Handle gnome-help files
+>>> with new distro feature 'helpfiles'
+>>>
+>>> Gnome help file generation cannot be configured so handle files
+>>> properly
+>>>
+>>> * Add a new distro feature 'helpfiles':
+>>>     If set: split help file into ${PN}-help-*
+>>>     If not set: delete help files on installation
+>>> * Append ${PN}-help-.* to PACKAGES_DYNAMIC
+>>>
+>>> Once accepted / applied it takes a on-line patch to add help files based on
+>>
+>> I assume you mean "one-line"?
+> Your assumption is correct :)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.13.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.13.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index fca74d448..eed23d28a 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -19,8 +19,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
-            file://clang_version_header_conflict.patch \
-            file://fix-arm-atomic.patch \
-           "
--SRC_URI[md5sum] = "603ce42e35b9a688f2cca05275acb5cb"
--SRC_URI[sha256sum] = "b2aa857ef5b84f85a7ea60a1eac7b34c0ca5151c71a0d44ce2d7fb028d71459a"
-+SRC_URI[md5sum] = "08edd8b5060a181e6dd3c6aac23218cd"
-+SRC_URI[sha256sum] = "27f391a54d544f93850d4edfb3ef1b4cf24f8e27e61e51727b0e7d31bb4d6968"
- 
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.13.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.13.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
--- 
-2.21.0
+I cant apply this patch when taken from patchwork.
 
+>>
+>>> IMAGE_LINGUAS.
+>>>
+>>> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>>
+>> //Peter
+>>
+> Andreas
+> 
 
