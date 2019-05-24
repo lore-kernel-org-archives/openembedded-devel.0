@@ -1,23 +1,24 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 542267D1F9
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 350C07D28D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 09:19:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4O9Imv0010809
+	Fri, 24 May 2019 09:25:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x4O9PEZa013036
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 24 May 2019 02:18:58 -0700
+	Fri, 24 May 2019 02:25:14 -0700 (PDT)
 Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 24 May 2019 02:18:37 -0700
+	Fri, 24 May 2019 02:25:14 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Fri, 24 May 2019 02:18:37 -0700
-Message-ID: <20190524091837.94146-1-mingli.yu@windriver.com>
+Date: Fri, 24 May 2019 02:25:14 -0700
+Message-ID: <20190524092514.94462-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190524091837.94146-1-mingli.yu@windriver.com>
+References: <20190524091837.94146-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] kea: Upgrade to 1.5.0
+Subject: [meta-networking][PATCH v2] kea: Upgrade to 1.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,9 +31,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 09:19:24 -0000
+X-List-Received-Date: Fri, 24 May 2019 09:25:15 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
@@ -50,14 +51,114 @@ From: Mingli Yu <mingli.yu@windriver.com>
   | checking for usuable C++11 regex... configure: error: in '/builddir/upgrade1/tmp/work/core2-64-poky-linux/kea/1.5.0-r0/build':
   | configure: error: cannot run test program while cross compiling
 
+* Remove 0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch
+  as the logic is already included in 1.5.0.
+
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../kea/files/0001-remove-AC_TRY_RUN.patch    | 34 +++++++++++++++++++
- .../kea/{kea_1.4.0.bb => kea_1.5.0.bb}        |  8 ++---
- 2 files changed, 38 insertions(+), 4 deletions(-)
+ ...-of-overloaded-distance-is-ambiguous.patch | 89 -------------------
+ .../kea/files/0001-remove-AC_TRY_RUN.patch    | 34 +++++++
+ .../kea/{kea_1.4.0.bb => kea_1.5.0.bb}        |  8 +-
+ 3 files changed, 38 insertions(+), 93 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/kea/files/0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch
  create mode 100644 meta-networking/recipes-connectivity/kea/files/0001-remove-AC_TRY_RUN.patch
  rename meta-networking/recipes-connectivity/kea/{kea_1.4.0.bb => kea_1.5.0.bb} (86%)
 
+diff --git a/meta-networking/recipes-connectivity/kea/files/0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch b/meta-networking/recipes-connectivity/kea/files/0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch
+deleted file mode 100644
+index fb16ecbf9..000000000
+--- a/meta-networking/recipes-connectivity/kea/files/0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch
++++ /dev/null
+@@ -1,89 +0,0 @@
+-From 8ea2ee451a1af7c5b5c8f4b36c1f77d44442064d Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 7 Sep 2018 13:02:35 -0700
+-Subject: [PATCH] Fix error: call of overloaded distance is ambiguous
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-The boost::iterators::distance function template is an adapted version
+-of std::distance for the Boost iterator traversal in 2.68 it has started
+-to fail with argument dependent lookup and compiler is erroring out
+-
+-with
+-
+-error: call of overloaded ‘distance'
+-
+-boost implementation of distance is protected against being found by ADL
+-
+-The way function is called in libdhcp means it will be found via ADL and
+-all namespaces will be considered which is providing problematic since
+-its getting it from both std:: and boost:: namespaces
+-
+-so let it not rely on ADL by qualifying then calls with std:: namespace
+-
+-Upstream-Status: Submitted [https://github.com/isc-projects/kea/pull/103]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/lib/dhcp/libdhcp++.cc | 12 ++++++------
+- 1 file changed, 6 insertions(+), 6 deletions(-)
+-
+-diff --git a/src/lib/dhcp/libdhcp++.cc b/src/lib/dhcp/libdhcp++.cc
+-index 330c02b..ced705d 100644
+---- a/src/lib/dhcp/libdhcp++.cc
+-+++ b/src/lib/dhcp/libdhcp++.cc
+-@@ -419,14 +419,14 @@ size_t LibDHCP::unpackOptions6(const OptionBuffer& buf,
+-         // We previously did the lookup only for dhcp6 option space, but with the
+-         // addition of S46 options, we now do it for every space.
+-         range = idx.equal_range(opt_type);
+--        num_defs = distance(range.first, range.second);
+-+        num_defs = std::distance(range.first, range.second);
+- 
+-         // Standard option definitions do not include the definition for
+-         // our option or we're searching for non-standard option. Try to
+-         // find the definition among runtime option definitions.
+-         if (num_defs == 0) {
+-             range = runtime_idx.equal_range(opt_type);
+--            num_defs = distance(range.first, range.second);
+-+            num_defs = std::distance(range.first, range.second);
+-         }
+- 
+-         OptionPtr opt;
+-@@ -538,14 +538,14 @@ size_t LibDHCP::unpackOptions4(const OptionBuffer& buf,
+-         // may be standard options in other spaces (e.g. radius). So we now do
+-         // the lookup for every space.
+-         range = idx.equal_range(opt_type);
+--        num_defs = distance(range.first, range.second);
+-+        num_defs = std::distance(range.first, range.second);
+- 
+-         // Standard option definitions do not include the definition for
+-         // our option or we're searching for non-standard option. Try to
+-         // find the definition among runtime option definitions.
+-         if (num_defs == 0) {
+-             range = runtime_idx.equal_range(opt_type);
+--            num_defs = distance(range.first, range.second);
+-+            num_defs = std::distance(range.first, range.second);
+-         }
+- 
+-         // Check if option unpacking must be deferred
+-@@ -638,7 +638,7 @@ size_t LibDHCP::unpackVendorOptions6(const uint32_t vendor_id,
+-                 idx->equal_range(opt_type);
+-             // Get the number of returned option definitions for the
+-             // option code.
+--            size_t num_defs = distance(range.first, range.second);
+-+            size_t num_defs = std::distance(range.first, range.second);
+- 
+-             if (num_defs > 1) {
+-                 // Multiple options of the same code are not supported
+-@@ -746,7 +746,7 @@ size_t LibDHCP::unpackVendorOptions4(const uint32_t vendor_id, const OptionBuffe
+-                     idx->equal_range(opt_type);
+-                 // Get the number of returned option definitions for
+-                 // the option code.
+--                size_t num_defs = distance(range.first, range.second);
+-+                size_t num_defs = std::distance(range.first, range.second);
+- 
+-                 if (num_defs > 1) {
+-                     // Multiple options of the same code are not
+--- 
+-2.18.0
+-
 diff --git a/meta-networking/recipes-connectivity/kea/files/0001-remove-AC_TRY_RUN.patch b/meta-networking/recipes-connectivity/kea/files/0001-remove-AC_TRY_RUN.patch
 new file mode 100644
 index 000000000..d7ca9ff8f
