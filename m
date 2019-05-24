@@ -1,49 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 590867E1F9
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E92B7E1F9
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 24 May 2019 05:10:00 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id n2so4342304pgp.11
+Received: by mail-pl1-f196.google.com with SMTP id p15so3671283pll.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 22:10:01 -0700 (PDT)
+	Thu, 23 May 2019 22:10:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y5Ipgg4/rc3e8yQ1DxbqMxDqe0QR5meE3O/+dKWLFwc=;
-	b=PsO4kDMQVQqt6omkPABjYst46s4twZ17IBA6q9115/yQPQCze83qdN8W+eO0Oowz6t
-	4N4IwRmkxCwJNKHQq4pUWtBR1ePxV2IgP5yv4SP81kPKmUJ6hXuFtLija+2PGYkGJRmT
-	iwRiBRA6QbQ/rMVzI0ARcyMedfEvciU85l3UHV51wqE4pFdCS5zkLn50bozfUy9iOmv2
-	Dv5Q0FlGtruNFvFblFo6/2FrxpKTLC+U8BOHNTRQQnq+cQPZ1oFM7s9Y/aYap1Dv6+Bh
-	C2+gNg24vVQh3+d8anujaSdm7d9Ce2dIr/7CIitYL5RiajnFFcqXqSgPb1TqQLefHtTY
-	I3MQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=WuhWrt9LwRO77Abw51pgSthvw8NW6bep+TDnTX2G7MM=;
+	b=nCtAcSCAp5ousXU1CUgWbCyBp3A7rWIy4kmE2mu27f9+n7Nm6IJi+k854xXK6QX8KB
+	UBle4plv9j4e6hq1FtnKaVyrm0ptXscJh6xWWDtcWbfYGCeCFh3ou5rXpankqrMxrQGR
+	0AHexkw8DN8OcGyhxgP8hFFTYzIQE0+QosZYihXJCFJsrq3GjlU1ktmBw1tjjY7RYkUS
+	KKcV45638Te9oKO0EYjCeVIBA7PlNmnTy12YIthlL04Vp5zGj4BvjpUq5XxVUZNTWIPm
+	H+rO5iINQvAVY8qcFtkrdoKzZ54iMIi6vvR5o5djP+AcBV/Fq7iOo8d+kMdvbz9IGrWA
+	ZWFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y5Ipgg4/rc3e8yQ1DxbqMxDqe0QR5meE3O/+dKWLFwc=;
-	b=Q7uhiYI8WkZjh+pEr1LbYRsm0o08mFE50+NTgDuuKniGD5c/C6qTyfRGvC/5Cdr++d
-	JF1ckgn24E/rn+dyb9LYlLmn0Nnzq1yBaT/C3zyxlTufXsc/mvVBGfRTLQrSpdf5MNGZ
-	Qd6ZeBUzmmRyBQq7Ye0ZKL7DZS1qnK5FPvpFHcZsTq9g5lRgxM6MZRie7Hz5OlKr52UI
-	fu5VDma/1e+CNuexjNEfB6qUDH0/3XioNIua8ngd9Qad1vnI7Ed4u051LhAhIMjyHPY6
-	b0N13rIZew9wxhi1jO0M7ER7r0VdMC0iijFc0EFZPre+NGiDPtM/jfdi68Of8lx+JLzt
-	EN/g==
-X-Gm-Message-State: APjAAAUWz+DG0mMWWF/8BJCxyhMMEmuuuS9MN3TFynuUtAadps1lAG8v
-	5o2hgE+QzAg56Tg+TdqBX6hZDScoY9c=
-X-Google-Smtp-Source: APXvYqzNGr2aVc3g2Njwg9UNNsEqhxsZkzpbPcZS+NajPiUmSSEZk6DOnOLEGQucUp82zXWlS/BJhQ==
-X-Received: by 2002:a63:246:: with SMTP id 67mr104219249pgc.145.1558674600956; 
-	Thu, 23 May 2019 22:10:00 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=WuhWrt9LwRO77Abw51pgSthvw8NW6bep+TDnTX2G7MM=;
+	b=IZi8tAnChfUvnZ3aXTlt4587nVa3O2dQTWW11cD+7KQLMbIfZ1kq8/B9G8C7Ony8zW
+	keCyt2h0pLb948RMrO/ScJJI9e290gED2+tAX5vrakv0QbRHluI5+VLScboKadp2k3fm
+	7F26df9FJOjG/JXT1qv2dW9RBtwkr8uFXS87miu8ZEV/04oAh9sI3b/O9uH4G7A+PXPG
+	aIWmrqQhur+ysKvr+HbM/PvIifo2zb6yw08S5mpydjFW5CvXii1TrwTh4lKkEkzCKCQp
+	e+nrl8FiQw1dg6txDMV+K2rHwYCqwkkOZg9Dq1q7QnognHZrC8P/OurJz1JuL4nhD+mj
+	ngWg==
+X-Gm-Message-State: APjAAAU2Bui71lzzl8Fe1Vx3Lyfx9A+7a1iOVjOA9gCgi3QYDTK2ST0Y
+	oXcSz1NgNZEhBUMO9Z/nc5wdqxPpDOs=
+X-Google-Smtp-Source: APXvYqxxVQZYwoHamDFCc/C4jDLDDrU7tGwJU8fSH1rSFYWrcvJIFmbzfc4DVcoFHfAQg1VdT4ah/g==
+X-Received: by 2002:a17:902:b195:: with SMTP id
+	s21mr1232098plr.16.1558674601637; 
+	Thu, 23 May 2019 22:10:01 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::e252])
 	by smtp.gmail.com with ESMTPSA id 4sm1212803pfj.111.2019.05.23.22.10.00
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 May 2019 22:10:00 -0700 (PDT)
+	Thu, 23 May 2019 22:10:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 May 2019 22:09:52 -0700
-Message-Id: <20190524050953.9647-1-raj.khem@gmail.com>
+Date: Thu, 23 May 2019 22:09:53 -0700
+Message-Id: <20190524050953.9647-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190524050953.9647-1-raj.khem@gmail.com>
+References: <20190524050953.9647-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] udisks: Install bash_completion script in OE familiar dir
+Subject: [meta-oe][PATCH 2/2] udisks: Remove bash dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,79 +59,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 05:10:00 -0000
+X-List-Received-Date: Fri, 24 May 2019 05:10:01 -0000
 Content-Transfer-Encoding: 8bit
 
-bash-completion packages up /etc/bash_completion.d automatically
-so install the bash completion script in the above said dir
+There are couple of scripts which explicitly calls out for bash
+interpreter but there is nothing bash specific about them, so let
+it use sh interpreter.
 
-inherit bash-completion to do the needed for bash-completion package
+Fixes
+ERROR: QA Issue: /usr/libexec/udisks-helper-mdadm-expand contained in package udisks requires /bin/bash, but no providers found in RDEPENDS_udisks? [file-rdeps]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...sh_completion-script-in-etc-bash_com.patch | 33 +++++++++++++++++++
- .../recipes-support/udisks/udisks_1.0.5.bb    |  3 +-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-tools-Install-bash_completion-script-in-etc-bash_com.patch
+ ...r-Use-sh-interpreter-instead-of-bash.patch | 38 +++++++++++++++++++
+ .../recipes-support/udisks/udisks_1.0.5.bb    |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch
 
-diff --git a/meta-oe/recipes-support/udisks/udisks/0001-tools-Install-bash_completion-script-in-etc-bash_com.patch b/meta-oe/recipes-support/udisks/udisks/0001-tools-Install-bash_completion-script-in-etc-bash_com.patch
+diff --git a/meta-oe/recipes-support/udisks/udisks/0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch b/meta-oe/recipes-support/udisks/udisks/0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch
 new file mode 100644
-index 0000000000..16dc440674
+index 0000000000..ef7f6f9c32
 --- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks/0001-tools-Install-bash_completion-script-in-etc-bash_com.patch
-@@ -0,0 +1,33 @@
-+From 7863a72c723035529d6fd8d626d7fbf9a765f162 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/udisks/udisks/0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch
+@@ -0,0 +1,38 @@
++From 44953e5501e92c87611be45221338004e8032a74 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 23 May 2019 21:49:57 -0700
-+Subject: [PATCH] tools: Install bash_completion script in
-+ /etc/bash_completion.d
++Date: Thu, 23 May 2019 22:00:14 -0700
++Subject: [PATCH] udisks-helper: Use sh interpreter instead of bash
 +
-+In OE this is one of common locations to install bash_completion files
-+and its covered for packaging automatically when bash_completion class
-+is inherited
++These scripts do not require bash, since they do not use any bash
++specific extentions
 +
-+Upstream-Status: Inappropriate [OE-Specific]
-+
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tools/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/helpers/udisks-helper-change-luks-password | 2 +-
++ src/helpers/udisks-helper-mdadm-expand         | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/tools/Makefile.am b/tools/Makefile.am
-+index 0aaec11..839c961 100644
-+--- a/tools/Makefile.am
-++++ b/tools/Makefile.am
-+@@ -72,7 +72,7 @@ udisks_tcp_bridge_LDADD = $(DBUS_GLIB_LIBS)
++diff --git a/src/helpers/udisks-helper-change-luks-password b/src/helpers/udisks-helper-change-luks-password
++index edcf6c9..c71fc72 100755
++--- a/src/helpers/udisks-helper-change-luks-password
+++++ b/src/helpers/udisks-helper-change-luks-password
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/usr/bin/env sh
++ set -e
 + 
-+ CLEANFILES = $(BUILT_SOURCES)
++ DEVICE=$1
++diff --git a/src/helpers/udisks-helper-mdadm-expand b/src/helpers/udisks-helper-mdadm-expand
++index 8b4e23d..921f96a 100755
++--- a/src/helpers/udisks-helper-mdadm-expand
+++++ b/src/helpers/udisks-helper-mdadm-expand
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/usr/bin/env sh
 + 
-+-profiledir = $(sysconfdir)/profile.d
-++profiledir = $(sysconfdir)/bash_completion.d
-+ profile_SCRIPTS = udisks-bash-completion.sh
++ set -e
 + 
-+ EXTRA_DIST = $(profile_SCRIPTS)
 +-- 
 +2.21.0
 +
 diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index 3ae8ecc15c..0373749f0f 100644
+index 0373749f0f..0918fedda5 100644
 --- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
 +++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -17,12 +17,13 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-            file://udisks-1.0.5-fix-service-file.patch \
+@@ -18,6 +18,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
             file://0001-Make-udev-rules-directory-configurable.patch \
             file://0001-include-sys-sysmacros.h.patch \
-+           file://0001-tools-Install-bash_completion-script-in-etc-bash_com.patch \
+            file://0001-tools-Install-bash_completion-script-in-etc-bash_com.patch \
++           file://0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch \
             "
  
  SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
- SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
- 
--inherit autotools-brokensep systemd gtk-doc distro_features_check
-+inherit autotools-brokensep systemd gtk-doc distro_features_check bash-completion
- 
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
 -- 
 2.21.0
 
