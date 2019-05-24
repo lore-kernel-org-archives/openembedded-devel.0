@@ -1,58 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E5C317E45D
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id F11E27E45D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 00:37:25 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id p15so3418900pll.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 17:37:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=+JynWQ4/VbFFfUfVFjy8HFGN04J6e6mUKXeTuRghjiM=;
-	b=MaMUatGfUXtJYrcm7kI1DCmn9p9enWfjpzMUFfGRkan5Rgb0wUcuwR/IPLUbmv9u6U
-	U4A36TqVHTgJzVDjlTjjOWic5pWcs7XNg4x3B9tuyoZSf9vaumwLZjWN5Y6TY8uU8pE5
-	16+qhhWE3pBBAEpcPMp0sO9b1wPDk4NXuBruI3oeLpAO5DMFhvFmzJHNoobAPt8LJNRJ
-	SJlSgBqrQT2TBJ+l6kloyPJ8HM3nC+dLRGks2cV6kSc71u8j8A0RJf7xorrEfiAYBIIE
-	ylkcVOD2j10OBtfMUKuWlK/NUL41asJD0uu03ARs3tkS3IaAzQsH5gSaxDTUQ/kvzIhu
-	s5Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=+JynWQ4/VbFFfUfVFjy8HFGN04J6e6mUKXeTuRghjiM=;
-	b=oFrkE+nJ9A/s1dhcxBd3WAd5hEN9BBFGT0nZe51rlPfDfLQ9wY3fzIPGsGiw7ksZzN
-	Aujp1iPDp5NkID1VdTyrD8QYuPpVh+eghi3rt0AaySUkAjo8PngThTmpCUewTjWsZPo/
-	wSSKFAcCRc6vv3DVIPxRRlAHq6VgphMK6nAljOlvDAdWbJH42Id0msMwdwWoBQ8lVY0z
-	ID6Jpc/9tBsK22gFS8S109kAST8w6ZgKdHAQE6fmScEmQWjkQVflOerymPOvNW5FGpYv
-	eL7dlE/4MvrwEBfpSd383MEui2+958NxmwNCz+gXa6pn7WaLdFEj/QWQxrXw4rn5vfT4
-	Sizg==
-X-Gm-Message-State: APjAAAX7fHuYvqaJORqP+Sww5AvfD7VbYR9p88r4qwu9MOMKJzB9wWVB
-	7SoQ68pHoP+HvNqxWSo8DYpP0vo8i0A=
-X-Google-Smtp-Source: APXvYqwwDM7JkT/QJVuRW6Jveyol8P8+Jj/FDHwAkZOjpnSuiaYPcswzHFV58FYzsH9TYbiOuNUEdg==
-X-Received: by 2002:a17:902:bd94:: with SMTP id
-	q20mr80164653pls.146.1558658246201; 
-	Thu, 23 May 2019 17:37:26 -0700 (PDT)
-Received: from hermes.local ([2601:646:8500:6bc6:7892:9931:70c0:491e])
-	by smtp.gmail.com with ESMTPSA id o2sm488913pgq.50.2019.05.23.17.37.25
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 May 2019 17:37:25 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>, Martin Jansa <martin.jansa@gmail.com>
-References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-	<20190523120233.GB25084@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <60975770-3d7b-b488-e2e5-874f79637710@gmail.com>
-Date: Thu, 23 May 2019 17:37:24 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0)
-	Gecko/20100101 Thunderbird/67.0
+	Fri, 24 May 2019 01:41:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4O1fJVN024362
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 23 May 2019 18:41:20 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 23 May 2019 18:41:19 -0700
+From: <mingli.yu@windriver.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Thu, 23 May 2019 18:41:19 -0700
+Message-ID: <20190524014119.123821-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190523120233.GB25084@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/8] uriparser: upgrade to 0.9.3
+Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.3.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,38 +29,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 00:37:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 May 2019 01:41:20 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
+From: Mingli Yu <mingli.yu@windriver.com>
 
+Fixes for the following security vulnerabilities:
+ CVE-2019-2614
+ CVE-2019-2627
+ CVE-2019-2628
 
-On 5/23/19 5:02 AM, Adrian Bunk wrote:
-> On Thu, May 23, 2019 at 11:54:58AM +0000, Martin Jansa wrote:
->> ...
->> -SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
->> ...
->> +SRC_URI = "git://github.com/uriparser/${BPN}.git"
->> ...
-> 
-> Why move from tarball to git?
-> 
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ .../{mariadb-native_10.3.13.bb => mariadb-native_10.3.15.bb}  | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                         | 4 ++--
+ .../mysql/{mariadb_10.3.13.bb => mariadb_10.3.15.bb}          | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.13.bb => mariadb-native_10.3.15.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.13.bb => mariadb_10.3.15.bb} (100%)
 
-yeah may be
-https://github.com/uriparser/uriparser/releases/download/uriparser-0.9.3/uriparser-0.9.3.tar.xz
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.13.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.13.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index fca74d448..eed23d28a 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -19,8 +19,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+           "
+-SRC_URI[md5sum] = "603ce42e35b9a688f2cca05275acb5cb"
+-SRC_URI[sha256sum] = "b2aa857ef5b84f85a7ea60a1eac7b34c0ca5151c71a0d44ce2d7fb028d71459a"
++SRC_URI[md5sum] = "08edd8b5060a181e6dd3c6aac23218cd"
++SRC_URI[sha256sum] = "27f391a54d544f93850d4edfb3ef1b4cf24f8e27e61e51727b0e7d31bb4d6968"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.13.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.13.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
+-- 
+2.21.0
 
-is better here
-
->> ...
->> +PV = "0.9.3+git${SRCPV}"
->> +
->> +SRCREV = "737e95f67bc2e5d8b90a1392797b353b52e5124a"
->> ...
-> 
-> This is the release, so shouldn't have +git in PV.
-> 
-> cu
-> Adrian
-> 
 
