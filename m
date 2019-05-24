@@ -1,57 +1,56 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 495DD7E472
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 45AA67E464
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2019 04:05:54 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id g69so3604727plb.7
+	Fri, 24 May 2019 04:07:53 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id g9so4467272pfo.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2019 21:05:55 -0700 (PDT)
+	Thu, 23 May 2019 21:07:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:organization:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=gUnCwojxW64s4AKmwKDaZY+hWC/1LuByqwe7zy0qhPo=;
-	b=SLWRaJwE84ADUKqPP2OcKIdI8Dz9bCLeA+eaSGZQ1jTjytD4Rw1XDMfS7WIJNIsWD+
-	NfW4hvJ9NhAyribpV+Z4UkZ46gGmGd5uqFTmJth6aQ3syRTt29MXKr4ybKTymUdJnlI9
-	/w+aQReVmSoKcCZpkEC1Z5DUlSsv+hdsOdV2Rgzj3JigIWPJf7JMyQ48f3i95++1U4PW
-	RfZhoZNZy4cl0bHBzmYWVIYPSYlTeiM1Um+TfdMxrkXKKvLRglC78xaTCLqDZGK5p+ut
-	M6qeDZFQudwTk+AdSTzg/wzJNtBRooZ8o1lL8JUtao8EgARimZ4D2dB4PWQfhpN8lGXP
-	Wuvg==
+	bh=XY/jk5jNPOH2Qf9wE4OrDtgIbd/9snICK1o4DZSu43s=;
+	b=hRqx3vOzL2x9vgd3TVsCysjlJc//5Zopdej/qgGMUr8BAHd4iWJg4lZHurtBg/X6KP
+	AizqiFp16BL8+OKbeE4npuKBXxUk/gkMFLPOYNMFii3HbHvE3CqCMM45PqfNRq0MMsPe
+	bPeURZQsUs7agNIRwWAX9tAOXWL3Sijt+nz6ENZE27tyRkOo6Wb/ly2Rbx1fgemkdP6o
+	zJDZ/iDa2d8b6o72+7qfyTXLU+7KaH2Cdn+5xQ6nhTy0wT4AZzo8W4dxCKZUYlVGb5U6
+	U88x9n3OmN4z6qILQVUW6YrKkFs1mGv/sksuzyqpHgZBAsdf6OSmF9VgyNRLRZr/tNFS
+	TalQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language:content-transfer-encoding;
-	bh=gUnCwojxW64s4AKmwKDaZY+hWC/1LuByqwe7zy0qhPo=;
-	b=FwvvREuk0QAnn8Vpc2CI8fj44JuxaRFxIj67XTSjrEcmu7MuTZNj2/GkyrquBuDVBL
-	z7emc5khpU//BfFX4nik7YJctShuII9GGbU+L/DthiAhDy2SXBjWy/hvXaFoDN5zPeNG
-	5wDtRsuJ9+1CNntJRAPhX/Z5v1yGLMSDcnYGs0fuQdPu6+gkKZpG2RKeMHC/RVwRzH9U
-	9ZSIOS0KbnTrVPBWz08TG65vo/MDL3gTq3ahHD1wCgdP18+3Do4ZEu1v//Sze3KGYL4w
-	/Iop6Pvg0hMk2e9o9aJNtIWNcy3j5Wi4PYgnwxQuizpAEi6QUoBiUpJ0x98WT5lEvl4C
-	hOuA==
-X-Gm-Message-State: APjAAAWsbTfQhPmDLBuxvZ9D1pCgPTSKgj5tEZIGqZ1r0ypj0tdRukFA
-	583wid2Tvk0ad98bktFfYVrd8KYhSgI=
-X-Google-Smtp-Source: APXvYqyHtD0xSMUstL0p68nQPna702zZW/EWRSVadnKmdiLGnonb+/o6FqC33xpcwt5lxUpJu0uSTA==
-X-Received: by 2002:a17:902:3103:: with SMTP id
-	w3mr27809578plb.187.1558670754684; 
-	Thu, 23 May 2019 21:05:54 -0700 (PDT)
+	bh=XY/jk5jNPOH2Qf9wE4OrDtgIbd/9snICK1o4DZSu43s=;
+	b=B9PRk/hJAev5f9Nt5QprBwoC6U2Ashxx57dR+vKiSlOws4ySjGQupfouy7zA0bFAbp
+	JFgys9jvRvf1PIWf1NVIZ1xamDgAuL9VMhKStiX3r+kH+My/Lf06FsBlWSdSXr9H/sXI
+	fxNTQB/MLxl7tN8DPZVlOuxwvF4m4QEHExpxQvz6OW9jStrJDlA0oylwKtVjz3aC0Iyb
+	D2xUmkqqnQr77qVFECW15c6YG+IlNk5eF7ahly7TXWEKxd1EW0qwALrd5I2f3/06KYwc
+	UyghHSldiWPJ7X+hD7So/zzg/LyfasSoZHzeqP8pqUbEDUAK+ZP1Hq6CD6zfx+sY1ksI
+	pTBw==
+X-Gm-Message-State: APjAAAUjZXrwosE6gppqC8tCcM/Z9oangjCMxt09Hn0cL+Yp6WO2TiEa
+	2vRR2HADK56I6qW0Tijqv5pCmBddfNM=
+X-Google-Smtp-Source: APXvYqziUjHe1dS4mueXm0/G27Fq7NVuLZHz5aQCuM0D/8RC0U0+jHM7jznnRcXRZBnUpaO2GH0oPw==
+X-Received: by 2002:a63:1c4:: with SMTP id 187mr75726302pgb.317.1558670873557; 
+	Thu, 23 May 2019 21:07:53 -0700 (PDT)
 Received: from hermes.local ([2601:646:8500:6bc6:313d:8ef2:9687:9b74])
-	by smtp.gmail.com with ESMTPSA id r1sm995104pfg.65.2019.05.23.21.05.53
+	by smtp.gmail.com with ESMTPSA id
+	o66sm946470pfb.184.2019.05.23.21.07.52
 	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 May 2019 21:05:54 -0700 (PDT)
+	Thu, 23 May 2019 21:07:53 -0700 (PDT)
 To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 References: <20190523064859.24336-1-schnitzeltony@gmail.com>
-	<20190523064859.24336-9-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <8d92d992-cc69-506d-b285-619af7ea266f@gmail.com>
-Date: Thu, 23 May 2019 21:05:53 -0700
+Message-ID: <8008aa3c-b117-c46c-aa1c-618a8c1a504d@gmail.com>
+Date: Thu, 23 May 2019 21:07:52 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0)
 	Gecko/20100101 Thunderbird/67.0
 MIME-Version: 1.0
-In-Reply-To: <20190523064859.24336-9-schnitzeltony@gmail.com>
-Subject: Re: [PATCH 08/41] evolution-data-server: uprade 3.26.6 -> 3.32.2 and rework
+In-Reply-To: <20190523064859.24336-1-schnitzeltony@gmail.com>
+Subject: Re: [PATCH 00/41] More GNOME & cleanups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,41 +63,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 04:05:54 -0000
+X-List-Received-Date: Fri, 24 May 2019 04:07:53 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-small nit, typo in subject
+Hi Andreas
+
+This is good stuff, I wanted to stage it for some CI but the series
+does not apply cleanly over master-next. If you can send a v2 of whole 
+series rebased on master-next that will be super cool
+
+Thanks
+-Khem
 
 On 5/22/19 11:48 PM, Andreas Müller wrote:
-> * Unfortuantely they stopped maintaing Changelog and suggest to clone the repo.
-> * a native variant had to be introduced for code-generator tools
-> * gobject-introspection builds theoretically :) Unfortunataelly qemu runs
->    with 100% CPU load and never returns -> disable introspection for now
-> * add PACKAGECONFIGs for new dependencies - disabled by default
-> * give up fine grained packaging: It was broken over the years completely
->    and nobody seemed to take care.
-> * ICU-patch does not apply anymore and it seems upstream has fixed issues
->    with ICU
-> * add upstream-version-is-even to inherit
-> * rename folder containing recipe
-> * get rid of gconf dependency
+> Have more patches for GNOM in my WIP but remaining patches need more love.
+> To avoid nasty rebasing I have cherry-picked this series - hope I did not
+> overlook some missing dependency or...
 > 
-> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> ---
->   ...nded-way-to-handle-the-icu-namespace.patch |  46 -------
->   .../evolution-data-server-native.bb           |  23 ++++
->   .../evolution-data-server.bb}                 | 123 +++++-------------
->   .../evolution-data-server.inc                 |  16 +++
->   ...keLists.txt-Remove-TRY_RUN-for-iconv.patch |  24 ++--
+> Andreas Müller (41):
+>    libstemmer: initial add
+>    appstream: initial add 0.12.6
+>    appstream-glib: initial add 0.7.15
+>    yelp-xsl: initial add 3.32.1
+>    yelp-tools: initial add 3.32.0
+>    yelp: initial add 3.32.1
+>    gnome-help.bbclass: Handle gnome-help files with new distro feature
+>      'helpfiles'
+>    evolution-data-server: uprade 3.26.6 -> 3.32.2 and rework
+>    gnome-menus3: upgrade 3.10.1 -> 3.32.0
+>    gnome-bluetooth: upgrade 3.18.2 -> 3.32.1
+>    glade3: upgrade 3.8.5 -> 3.8.6
+>    gnome-bluetooth: add upstream-version-is-even to inherit
+>    gtksourceview4: upgrade 4.2.0 -> 4.3.1
+>    gtksourceview3: upgrade 3.24.10 -> 3.24.11
+>    mousepad: move to gtk3
+>    network-manager-applet: port to meson build
+>    network-manager-applet: cleanup
+>    abiword: remove
+>    evince: upgrade 3.28.2 -> 3.32.0
+>    exiv2: initial add 0.27.0
+>    gexiv2: initial add 0.12.0
+>    gnome-autoar: inital add 0.2.3
+>    tracker: initial add 2.2.2
+>    nautilus: upgrade 3.18.5 -> 3.32.1
+>    ibus: initial add 1.5.20
+>    gnome-desktop3: upgrade 3.32.0 -> 3.32.2
+>    libgusb: initial add 0.3.0+
+>    colord: initial add 1.4.4
+>    colord-gtk: initial add 0.1.26
+>    itstool: upgrade 2.0.5 -> 2.0.6
+>    libwacom: initial add 0.33
+>    geocode-glib: initial add 3.26.1
+>    libgweather: initial add 3.32.1
+>    pinpoint: remove dead project
+>    libgnomekbd: cleanup
+>    libwnck: GNOME_COMPRESS_TYPE = "xz"
+>    rygel: remove GNOME_COMPRESS_TYPE = "xz"
+>    libmediaart(-2.0): remove GNOME_COMPRESS_TYPE = "xz"
+>    gvfs: upgrade 1.40.0 -> 1.40.1
+>    upower: upgrade 0.99.7 -> 0.99.10
+>    xserver-xorg-cvt-native: initial add 1.20.4
+> 
+>   meta-gnome/classes/gnome-help.bbclass         |  71 +++++++
+>   meta-gnome/conf/layer.conf                    |   3 +
+>   .../recipes-apps/pinpoint/pinpoint_git.bb     |  24 ---
+>   .../network-manager-applet_1.8.20.bb          |  34 +---
+>   ...1-Bug-13770-Require-C-11-from-now-on.patch | 180 ------------------
+>   .../recipes-gnome/abiword/abiword_3.0.2.bb    | 142 --------------
+>   ...nded-way-to-handle-the-icu-namespace.patch |  46 -----
+>   ...-format-attribute-to-_synctex_malloc.patch |  12 +-
+>   .../evince/0001-help-remove-YELP-macro.patch  |  24 ---
+>   ...vDocumentModel-get-type-function-dec.patch |  33 ----
+>   ...02-add-a-formatting-attribute-check.patch} |   0
+>   .../{evince_3.28.2.bb => evince_3.32.0.bb}    |  60 +++---
+>   .../evolution-data-server-native.bb           |  23 +++
+>   .../evolution-data-server.bb}                 | 123 +++---------
+>   .../evolution-data-server.inc                 |  16 ++
+>   ...keLists.txt-Remove-TRY_RUN-for-iconv.patch |  24 ++-
 >   ...txt-remove-CHECK_C_SOURCE_RUNS-check.patch |   0
 >   ...the-Novell-sample-contact-with-somet.patch |   0
->   ...abi-from-the-default-C-warning-flags.patch |  29 +++++
->   .../0005-call-native-helpers.patch            |  45 +++++++
+>   ...abi-from-the-default-C-warning-flags.patch |  29 +++
+>   .../0005-call-native-helpers.patch            |  45 +++++
 >   .../evolution-data-server/iconv-detect.h      |   0
->   10 files changed, 158 insertions(+), 148 deletions(-)
+>   .../geocode-glib/geocode-glib_3.26.1.bb       |  20 ++
+>   .../recipes-gnome/gexiv2/gexiv2_0.12.0.bb     |  21 ++
+>   .../gnome-autoar/gnome-autoar_0.2.3.bb        |  18 ++
+>   ...th_3.18.2.bb => gnome-bluetooth_3.32.1.bb} |  14 +-
+>   ...op3_3.32.0.bb => gnome-desktop3_3.32.2.bb} |  10 +-
+>   ...enus3_3.10.1.bb => gnome-menus3_3.32.0.bb} |  11 +-
+>   ...3_3.24.10.bb => gtksourceview3_3.24.11.bb} |   6 +-
+>   ...view4_4.2.0.bb => gtksourceview4_4.3.1.bb} |  13 +-
+>   .../gvfs/{gvfs_1.40.0.bb => gvfs_1.40.1.bb}   |  12 +-
+>   .../libgnomekbd_3.26.1.bb                     |   9 +-
+>   .../libgweather/libgweather_3.32.1.bb         |  24 +++
+>   .../recipes-gnome/libwnck/libwnck_2.31.0.bb   |   1 -
+>   ...ome-desktop-thumbnail-API-with-new-g.patch |  40 ----
+>   .../recipes-gnome/nautilus/nautilus_3.18.5.bb |  33 ----
+>   .../recipes-gnome/nautilus/nautilus_3.32.1.bb |  32 ++++
+>   .../recipes-gnome/tracker/tracker_2.2.2.bb    |  51 +++++
+>   .../recipes-gnome/yelp/yelp-tools_3.32.0.bb   |  21 ++
+>   .../recipes-gnome/yelp/yelp-xsl_3.32.1.bb     |  18 ++
+>   meta-gnome/recipes-gnome/yelp/yelp_3.32.1.bb  |  37 ++++
+>   .../appstream-glib/appstream-glib_0.7.15.bb   |  37 ++++
+>   .../colord-gtk/colord-gtk_0.1.26.bb           |  19 ++
+>   .../recipes-support/ibus/ibus-native.bb       |  28 +++
+>   meta-gnome/recipes-support/ibus/ibus.bb       |  28 +++
+>   meta-gnome/recipes-support/ibus/ibus.inc      |  33 ++++
+>   ...start-dbus-we-do-not-have-dbus-lauch.patch |  39 ++++
+>   .../libstemmer/0001-Build-so-lib.patch        |  63 ++++++
+>   .../libstemmer/libstemmer_0.0.0.bb            |  46 +++++
+>   .../recipes-support/libwacom/libwacom_0.33.bb |  14 ++
+>   .../rygel/rygel_0.37.0.bb                     |   1 -
+>   .../libmediaart/libmediaart.inc               |   2 -
+>   .../0001-Do-not-use-host-include-path.patch   |  51 +++--
+>   .../appstream/appstream_0.12.6.bb             |  41 ++++
+>   .../recipes-support/colord/colord-native.bb   |  64 +++++++
+>   ...n-cd_icc_create_from_edid-to-avoid-u.patch | 166 ++++++++++++++++
+>   .../colord/colord-native/Makefile             |  48 +++++
+>   meta-oe/recipes-support/colord/colord.bb      |  42 ++++
+>   meta-oe/recipes-support/colord/colord.inc     |  13 ++
+>   ...Run-native-cd_idt8-cd_create_profile.patch |  59 ++++++
+>   meta-oe/recipes-support/exiv2/exiv2.bb        |  26 +++
+>   ...es-only-installed-with-the-exiv2-app.patch |  41 ++++
+>   ...nings-about-missing-PDB-files-in-3rd.patch |  64 +++++++
+>   ...-to-exiv2-xmp-to-avoid-name-conflict.patch |  82 ++++++++
+>   ...nstall-header-files-without-globbing.patch | 111 +++++++++++
+>   ...t-installation-dir-for-generated-doc.patch |  28 +++
+>   ...t-installation-dir-for-cmake-config-.patch | 124 ++++++++++++
+>   ...psdk-Build-with-DBanAllEntityUsage-1.patch |  34 ++++
+>   ...compile-warnings-in-ExpatAdapter.cpp.patch |  31 +++
+>   ...e-for-being-compatible-with-more-dis.patch |  27 +++
+>   ...ate-install-exiv2ConfigVersion.cmake.patch |  50 +++++
+>   ...on-fault-bug-introduced-with-version.patch |  33 ++++
+>   .../{itstool_2.0.5.bb => itstool_2.0.6.bb}    |   9 +-
+>   .../recipes-support/libgusb/libgusb_git.bb    |  12 ++
+>   ...everity-of-unhandled-action-messages.patch |  31 ---
+>   .../{upower_0.99.7.bb => upower_0.99.10.bb}   |  16 +-
+>   .../xserver-xorg-cvt-native_1.20.4.bb         |  43 +++++
+>   .../recipes-apps/mousepad/mousepad_0.4.1.bb   |   5 +-
+>   .../{glade3_3.8.5.bb => glade3_3.8.6.bb}      |  21 +-
+>   78 files changed, 2038 insertions(+), 824 deletions(-)
+>   create mode 100644 meta-gnome/classes/gnome-help.bbclass
+>   delete mode 100644 meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
+>   delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
+>   delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
 >   delete mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
+>   delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-help-remove-YELP-macro.patch
+>   delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+>   rename meta-gnome/recipes-gnome/evince/evince/{0001-add-a-formatting-attribute-check.patch => 0002-add-a-formatting-attribute-check.patch} (100%)
+>   rename meta-gnome/recipes-gnome/evince/{evince_3.28.2.bb => evince_3.32.0.bb} (32%)
 >   create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
 >   rename meta-gnome/recipes-gnome/{eds/evolution-data-server_3.26.6.bb => evolution-data-server/evolution-data-server.bb} (15%)
 >   create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
@@ -108,431 +223,58 @@ On 5/22/19 11:48 PM, Andreas Müller wrote:
 >   create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
 >   create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
 >   rename meta-gnome/recipes-gnome/{eds => evolution-data-server}/evolution-data-server/iconv-detect.h (100%)
-> 
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-> deleted file mode 100644
-> index d3b0ac673..000000000
-> --- a/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-> +++ /dev/null
-> @@ -1,46 +0,0 @@
-> -From 698a0e104dcbe4b630df848fd4af7c59f76cdc37 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sat, 5 May 2018 17:46:52 -0700
-> -Subject: [PATCH] Use recommended way to handle the icu namespace
-> -
-> -Fixes build with icu >= 61
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - src/libedataserver/e-alphabet-index-private.cpp | 2 ++
-> - src/libedataserver/e-transliterator-private.cpp | 2 ++
-> - 2 files changed, 4 insertions(+)
-> -
-> -diff --git a/src/libedataserver/e-alphabet-index-private.cpp b/src/libedataserver/e-alphabet-index-private.cpp
-> -index d3e44f4..ddffd99 100644
-> ---- a/src/libedataserver/e-alphabet-index-private.cpp
-> -+++ b/src/libedataserver/e-alphabet-index-private.cpp
-> -@@ -33,9 +33,11 @@
-> -
-> - /* ICU headers */
-> - #include <unicode/alphaindex.h>
-> -+#include <unicode/ustring.h>
-> -
-> - using icu::AlphabeticIndex;
-> - using icu::Locale;
-> -+using U_ICU_NAMESPACE::UnicodeString;
-> -
-> - struct _EAlphabetIndex {
-> - 	AlphabeticIndex *priv;
-> -diff --git a/src/libedataserver/e-transliterator-private.cpp b/src/libedataserver/e-transliterator-private.cpp
-> -index bb15593..573446f 100644
-> ---- a/src/libedataserver/e-transliterator-private.cpp
-> -+++ b/src/libedataserver/e-transliterator-private.cpp
-> -@@ -33,8 +33,10 @@
-> -
-> - /* ICU headers */
-> - #include <unicode/translit.h>
-> -+#include <unicode/ustring.h>
-> -
-> - using icu::Transliterator;
-> -+using U_ICU_NAMESPACE::UnicodeString;
-> -
-> - struct _ETransliterator {
-> - 	Transliterator *priv;
-> diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
-> new file mode 100644
-> index 000000000..681a61c33
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server-native.bb
-> @@ -0,0 +1,23 @@
-> +require ${BPN}.inc
-> +
-> +inherit native
-> +
-> +DEPENDS = "glib-2.0-native"
-> +
-> +# build native helpers
-> +do_compile() {
-> +    cd ${S}/src/camel
-> +    sed -i 's:#include "evolution-data-server-config.h"::g' camel-gen-tables.c
-> +    ${CC} -o ${B}/camel-gen-tables camel-gen-tables.c ${CFLAGS} ${LDFLAGS}
-> +
-> +    LDFLAGS_glib=`pkg-config glib-2.0 --libs`
-> +    CFLAGS_glib=`pkg-config glib-2.0 --cflags`
-> +    cd ${S}/src/addressbook/libebook-contacts
-> +    sed -i 's:#include "evolution-data-server-config.h"::g' gen-western-table.c
-> +    ${CC} -o ${B}/gen-western-table gen-western-table.c ${CFLAGS} ${CFLAGS_glib} ${LDFLAGS} ${LDFLAGS_glib}
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +    install -m 755 ${B}/* ${D}${bindir}
-> +}
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> similarity index 15%
-> rename from meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-> rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> index 1949fc7fd..5f535c1b5 100644
-> --- a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> @@ -1,51 +1,48 @@
-> -SUMMARY = "Evolution database backend server"
-> -HOMEPAGE = "http://www.gnome.org/projects/evolution/"
-> -BUGTRACKER = "https://bugzilla.gnome.org/"
-> -
-> -LICENSE = "LGPLv2 & LGPLv2+"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
-> -                    file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
-> -                    file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543 \
-> -                    file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
-> +require ${BPN}.inc
->   
->   DEPENDS = " \
-> -    intltool-native gperf-native \
-> -    glib-2.0 gtk+3 gconf libgnome-keyring libgdata \
-> +    ${BPN}-native intltool-native gperf-native \
-> +    glib-2.0 gtk+3 libgdata \
->       dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
->   "
->   
-> -inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
-> +inherit distro_features_check cmake gtk-doc gettext gobject-introspection perlnative pythonnative
->   
->   REQUIRED_DISTRO_FEATURES = "x11"
->   
-> -SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-> -           file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-> -           file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-> -           file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-> -           file://iconv-detect.h \
-> -           file://0004-Use-recommended-way-to-handle-the-icu-namespace.patch \
-> -           "
-> -SRC_URI[archive.md5sum] = "ae7bbf543b2c3ff79af27e0edea5d472"
-> -SRC_URI[archive.sha256sum] = "e43aa1847ddc02965f560261ef88d18fb8704eddaa55555bf96b884a33e510ec"
-> +SRC_URI += " \
-> +    file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-> +    file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-> +    file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-> +    file://0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch \
-> +    file://0005-call-native-helpers.patch \
-> +    file://iconv-detect.h \
-> +"
->   
->   LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
->   LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
->   
-> +# For arm qemu-arm runs at 100% CPU load and never returns - so disable introspection for now
-> +GI_DATA_ENABLED="False"
-> +
->   EXTRA_OECMAKE = " \
-> +    -DSYSCONF_INSTALL_DIR=${sysconfdir} \
->       -DWITH_KRB5=OFF \
->       -DENABLE_GOA=OFF \
->       -DENABLE_UOA=OFF \
->       -DENABLE_GOOGLE_AUTH=OFF \
->       -DENABLE_WEATHER=OFF \
-> +    -DENABLE_INTROSPECTION=${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'ON', 'OFF', d)} \
->       -D${LKSTRFTIME} \
->       -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
->   "
->   
-> -PACKAGECONFIG ??= ""
-> -PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
-> +PACKAGECONFIG[canberra] = "-DENABLE_CANBERRA=ON,-DENABLE_CANBERRA=OFF,libcanberra"
-> +PACKAGECONFIG[oauth]    = "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,webkitgtk json-glib"
->   
-> -EXTRA_OECONF = "--with-libdb=${STAGING_DIR_HOST}${prefix} \
-> -                --disable-nntp --disable-gtk-doc"
-> +# BROKEN: due missing pkg-config in openldap eds' cmake finds host-libs when
-> +# searching for openldap-libs
-> +PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
->   
->   # -ldb needs this on some platforms
->   LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
-> @@ -55,78 +52,20 @@ do_configure_append () {
->   
->       # fix native perl shebang
->       sed -i 's:${STAGING_BINDIR_NATIVE}/perl-native:${bindir}:' ${B}/src/tools/addressbook-export/csv2vcard
-> +
-> +    # fix abs path for g-ir-scanner-wrapper
-> +    sed  -i ${B}/build.ninja \
-> +        -e 's: ${bindir}/g-ir-scanner-wrapper: ${STAGING_BINDIR}/g-ir-scanner-wrapper:g'
->   }
->   
->   do_compile_prepend() {
->       export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
->   }
->   
-> +FILES_${PN} =+ " \
-> +    ${datadir}/dbus-1 \
-> +    ${datadir}/evolution-data-server-*/ui/ \
-> +    ${systemd_user_unitdir} \
-> +"
->   
-> -PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
-> -             libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
-> -             libedataserver libedataserver-dev \
-> -             libedataserverui libedataserverui-dev"
-> -
-> -FILES_${PN} =+ "${systemd_user_unitdir} \
-> -                ${datadir}/dbus-1 \
-> -                ${datadir}/evolution-data-server-*/ui/"
->   RDEPENDS_${PN} += "perl"
-> -
-> -FILES_${PN}-dev =+ "${libdir}/pkgconfig/evolution-data-server-*.pc"
-> -FILES_${PN}-dbg =+ "${libdir}/evolution-data-server*/camel-providers/.debug \
-> -                    ${libdir}/evolution-data-server*/calendar-backends/.debug \
-> -                    ${libdir}/evolution-data-server*/addressbook-backends/.debug \
-> -                    ${libdir}/evolution-data-server*/extensions/.debug/"
-> -
-> -RRECOMMENDS_${PN}-dev += "libecal-dev libebook-dev"
-> -
-> -FILES_libcamel = "${libdir}/libcamel-*.so.* \
-> -                  ${libdir}/libcamel-provider-*.so.* \
-> -                  ${libdir}/evolution-data-server*/camel-providers/*.so \
-> -                  ${libdir}/evolution-data-server*/camel-providers/*.urls"
-> -FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
-> -                      ${libdir}/pkgconfig/camel*pc \
-> -                      ${libdir}/evolution-data-server*/camel-providers/*.la \
-> -                      ${includedir}/evolution-data-server*/camel"
-> -
-> -FILES_libebook = "${libdir}/libebook-*.so.*"
-> -FILES_libebook-dev = "${libdir}/libebook-1.2.so \
-> -                      ${libdir}/pkgconfig/libebook-*.pc \
-> -                      ${includedir}/evolution-data-server*/libebook/*.h"
-> -RRECOMMENDS_libebook = "libedata-book"
-> -
-> -FILES_libecal = "${libdir}/libecal-*.so.* \
-> -                 ${datadir}/evolution-data-server-1.4/zoneinfo"
-> -FILES_libecal-dev = "${libdir}/libecal-*.so ${libdir}/pkgconfig/libecal-*.pc \
-> -                     ${includedir}/evolution-data-server*/libecal/*.h \
-> -                     ${includedir}/evolution-data-server*/libical/*.h"
-> -RRECOMMENDS_libecal = "libedata-cal tzdata"
-> -
-> -FILES_libedata-book = "${libexecdir}/e-addressbook-factory \
-> -                       ${datadir}/dbus-1/services/*.AddressBook.service \
-> -                       ${libdir}/libedata-book-*.so.* \
-> -                       ${libdir}/evolution-data-server-*/extensions/libebook*.so \
-> -                       ${datadir}/evolution-data-server-1.4/weather/Locations.xml"
-> -FILES_libedata-book-dev = "${libdir}/libedata-book-*.so \
-> -                           ${libdir}/pkgconfig/libedata-book-*.pc \
-> -                           ${libdir}/evolution-data-server-*/extensions/libebook*.la \
-> -                           ${includedir}/evolution-data-server-*/libedata-book"
-> -
-> -FILES_libedata-cal = "${libexecdir}/e-calendar-factory \
-> -                      ${datadir}/dbus-1/services/*.Calendar.service \
-> -                      ${libdir}/libedata-cal-*.so.* \
-> -                      ${libdir}/evolution-data-server-*/extensions/libecal*.so"
-> -FILES_libedata-cal-dev = "${libdir}/libedata-cal-*.so \
-> -                          ${libdir}/pkgconfig/libedata-cal-*.pc \
-> -                          ${includedir}/evolution-data-server-*/libedata-cal \
-> -                          ${libdir}/evolution-data-server-*/extensions/libecal*.la"
-> -
-> -FILES_libedataserver = "${libdir}/libedataserver-*.so.*"
-> -FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
-> -                            ${libdir}/pkgconfig/libedataserver-*.pc \
-> -                            ${includedir}/evolution-data-server-*/libedataserver/*.h"
-> -
-> -FILES_libedataserverui = "${libdir}/libedataserverui-*.so.* ${datadir}/evolution-data-server-1.4/glade/*.glade"
-> -FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
-> -                              ${libdir}/pkgconfig/libedataserverui-*.pc \
-> -                              ${includedir}/evolution-data-server-*/libedataserverui/*.h"
-> diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-> new file mode 100644
-> index 000000000..2ea94920b
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "Evolution database backend server"
-> +HOMEPAGE = "http://www.gnome.org/projects/evolution/"
-> +BUGTRACKER = "https://bugzilla.gnome.org/"
-> +
-> +LICENSE = "LGPLv2 & LGPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
-> +                    file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
-> +                    file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543 \
-> +                    file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
-> +
-> +inherit gnomebase
-> +
-> +SRC_URI[archive.md5sum] = "965648316c7cee06f49878eceed5da01"
-> +SRC_URI[archive.sha256sum] = "7ea7491065fd0382f2268cf6bf95331a75dfda587d5940deb47f9e74be1ab3c9"
-> +PV = "3.32.2"
-> +
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-> similarity index 59%
-> rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-> rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-> index a821a14ab..e8c6d6a76 100644
-> --- a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch
-> @@ -1,6 +1,6 @@
->   From 131b88a81aba3d72d566bc8a9d968941a98e0007 Mon Sep 17 00:00:00 2001
->   From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -Date: Tue, 19 Dec 2017 16:37:20 +0100
-> +Date: Sun, 31 Mar 2019 18:11:55 +0200
->   Subject: [PATCH] CMakeLists.txt: Remove TRY_RUN for iconv
->   MIME-Version: 1.0
->   Content-Type: text/plain; charset=UTF-8
-> @@ -13,20 +13,24 @@ Upstream-Status: Inappropriate [OE specific]
->   
->   Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
->   ---
-> - CMakeLists.txt | 5 -----
-> - 1 file changed, 5 deletions(-)
-> + CMakeLists.txt | 11 -----------
-> + 1 file changed, 11 deletions(-)
->   
->   diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index 8d07772..a2396f2 100644
-> +index 1672daf..0b3e4e0 100644
->   --- a/CMakeLists.txt
->   +++ b/CMakeLists.txt
-> -@@ -521,13 +521,8 @@ if(NOT HAVE_ICONV)
-> +@@ -524,17 +524,6 @@ if(NOT HAVE_ICONV)
-> + 	message(FATAL_ERROR "You need to install a working iconv implementation, such as ftp://ftp.gnu.org/pub/gnu/libiconv")
->    endif(NOT HAVE_ICONV)
->    
-> - set(CMAKE_REQUIRED_LIBRARIES ${ICONV_LIBS})
-> --CHECK_C_SOURCE_RUNS("#include \"${CMAKE_SOURCE_DIR}/iconv-detect.c\"" _correct_iconv)
-> - unset(CMAKE_REQUIRED_LIBRARIES)
-> -
-> +-set(CMAKE_REQUIRED_LIBRARIES ${ICONV_LIBS})
-> +-file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/" _binary_dir_with_separator)
-> +-CHECK_C_SOURCE_RUNS("#define ICONV_DETECT_BUILD_DIR \"${_binary_dir_with_separator}\"
-> +-		     #include \"${CMAKE_SOURCE_DIR}/iconv-detect.c\"" _correct_iconv)
-> +-unset(_binary_dir_with_separator)
-> +-unset(CMAKE_REQUIRED_LIBRARIES)
-> +-
->   -if(NOT _correct_iconv)
->   -	message(FATAL_ERROR "You need to install a working iconv implementation, such as ftp://ftp.gnu.org/pub/gnu/libiconv")
->   -endif(NOT _correct_iconv)
-> @@ -35,5 +39,5 @@ index 8d07772..a2396f2 100644
->    # Backtraces for debugging
->    # ******************************
->   --
-> -2.14.3
-> +2.20.1
->   
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-> similarity index 100%
-> rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-> rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-> similarity index 100%
-> rename from meta-gnome/recipes-gnome/eds/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-> rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0003-contact-Replace-the-Novell-sample-contact-with-somet.patch
-> diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
-> new file mode 100644
-> index 000000000..8cfc1f8d6
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0004-I-94-Remove-Wabi-from-the-default-C-warning-flags.patch
-> @@ -0,0 +1,29 @@
-> +From 3cfeb3c7f458c6fe40c67cea43987b45cf6cbeaf Mon Sep 17 00:00:00 2001
-> +From: Milan Crha <mcrha@redhat.com>
-> +Date: Thu, 14 Mar 2019 14:16:56 +0100
-> +Subject: [PATCH] I#94 - Remove -Wabi from the default C++ warning flags
-> +
-> +Closes https://gitlab.gnome.org/GNOME/evolution-data-server/issues/94
-> +
-> +Upstream-Status: Applied [1]
-> +
-> +[1] https://gitlab.gnome.org/GNOME/evolution-data-server/commit/3cfeb3c7f458c6fe40c67cea43987b45cf6cbeaf
-> +---
-> + cmake/modules/SetupBuildFlags.cmake | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/cmake/modules/SetupBuildFlags.cmake b/cmake/modules/SetupBuildFlags.cmake
-> +index 4c6154129..284445455 100644
-> +--- a/cmake/modules/SetupBuildFlags.cmake
-> ++++ b/cmake/modules/SetupBuildFlags.cmake
-> +@@ -56,7 +56,6 @@ macro(setup_build_flags _maintainer_mode)
-> +
-> + 	list(APPEND proposed_cxx_flags
-> + 		${proposed_flags}
-> +-		-Wabi
-> + 		-Wnoexcept
-> + 	)
-> +
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
-> new file mode 100644
-> index 000000000..e320f6342
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0005-call-native-helpers.patch
-> @@ -0,0 +1,45 @@
-> +From 9c375e3fcf8ff778a5010a07a7da4b6a58adec7c Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> +Date: Sun, 31 Mar 2019 19:11:31 +0200
-> +Subject: [PATCH] call native helpers
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=UTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +Upstream-Status: Inappropriate[oe-specific]
-> +
-> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> +---
-> + src/addressbook/libebook-contacts/CMakeLists.txt | 2 +-
-> + src/camel/CMakeLists.txt                         | 2 +-
-> + 2 files changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/addressbook/libebook-contacts/CMakeLists.txt b/src/addressbook/libebook-contacts/CMakeLists.txt
-> +index e9e3259..e749d1b 100644
-> +--- a/src/addressbook/libebook-contacts/CMakeLists.txt
-> ++++ b/src/addressbook/libebook-contacts/CMakeLists.txt
-> +@@ -25,7 +25,7 @@ target_link_libraries(gen-western-table
-> +
-> + add_custom_command(
-> + 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-> +-	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-> ++	COMMAND gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-> + 	DEPENDS gen-western-table e-name-western-tables.h.in
-> + )
-> +
-> +diff --git a/src/camel/CMakeLists.txt b/src/camel/CMakeLists.txt
-> +index be626a8..14ac8b8 100644
-> +--- a/src/camel/CMakeLists.txt
-> ++++ b/src/camel/CMakeLists.txt
-> +@@ -10,7 +10,7 @@ target_include_directories(camel-gen-tables PUBLIC
-> +
-> + add_custom_command(
-> + 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-> +-	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-> ++	COMMAND camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-> + 	DEPENDS camel-gen-tables
-> + )
-> +
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/iconv-detect.h b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/iconv-detect.h
-> similarity index 100%
-> rename from meta-gnome/recipes-gnome/eds/evolution-data-server/iconv-detect.h
-> rename to meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/iconv-detect.h
+>   create mode 100644 meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
+>   create mode 100644 meta-gnome/recipes-gnome/gexiv2/gexiv2_0.12.0.bb
+>   create mode 100644 meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.2.3.bb
+>   rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_3.18.2.bb => gnome-bluetooth_3.32.1.bb} (48%)
+>   rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.32.0.bb => gnome-desktop3_3.32.2.bb} (69%)
+>   rename meta-gnome/recipes-gnome/gnome-menus/{gnome-menus3_3.10.1.bb => gnome-menus3_3.32.0.bb} (41%)
+>   rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview3_3.24.10.bb => gtksourceview3_3.24.11.bb} (75%)
+>   rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview4_4.2.0.bb => gtksourceview4_4.3.1.bb} (65%)
+>   rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.40.0.bb => gvfs_1.40.1.bb} (87%)
+>   rename meta-gnome/recipes-gnome/{libgnome => libgnomekbd}/libgnomekbd_3.26.1.bb (63%)
+>   create mode 100644 meta-gnome/recipes-gnome/libgweather/libgweather_3.32.1.bb
+>   delete mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch
+>   delete mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+>   create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.32.1.bb
+>   create mode 100644 meta-gnome/recipes-gnome/tracker/tracker_2.2.2.bb
+>   create mode 100644 meta-gnome/recipes-gnome/yelp/yelp-tools_3.32.0.bb
+>   create mode 100644 meta-gnome/recipes-gnome/yelp/yelp-xsl_3.32.1.bb
+>   create mode 100644 meta-gnome/recipes-gnome/yelp/yelp_3.32.1.bb
+>   create mode 100644 meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.15.bb
+>   create mode 100644 meta-gnome/recipes-support/colord-gtk/colord-gtk_0.1.26.bb
+>   create mode 100644 meta-gnome/recipes-support/ibus/ibus-native.bb
+>   create mode 100644 meta-gnome/recipes-support/ibus/ibus.bb
+>   create mode 100644 meta-gnome/recipes-support/ibus/ibus.inc
+>   create mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+>   create mode 100644 meta-gnome/recipes-support/libstemmer/libstemmer/0001-Build-so-lib.patch
+>   create mode 100644 meta-gnome/recipes-support/libstemmer/libstemmer_0.0.0.bb
+>   create mode 100644 meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
+>   rename meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch => meta-oe/recipes-support/appstream/appstream/0001-Do-not-use-host-include-path.patch (10%)
+>   create mode 100644 meta-oe/recipes-support/appstream/appstream_0.12.6.bb
+>   create mode 100644 meta-oe/recipes-support/colord/colord-native.bb
+>   create mode 100644 meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
+>   create mode 100644 meta-oe/recipes-support/colord/colord-native/Makefile
+>   create mode 100644 meta-oe/recipes-support/colord/colord.bb
+>   create mode 100644 meta-oe/recipes-support/colord/colord.inc
+>   create mode 100644 meta-oe/recipes-support/colord/colord/0001-Run-native-cd_idt8-cd_create_profile.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2.bb
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-cmake-man-pages-only-installed-with-the-exiv2-app.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0002-cmake-ignore-warnings-about-missing-PDB-files-in-3rd.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0003-cmake-Rename-xmp-to-exiv2-xmp-to-avoid-name-conflict.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0004-cmake-Install-header-files-without-globbing.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0005-cmake-Use-correct-installation-dir-for-generated-doc.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0006-cmake-Use-correct-installation-dir-for-cmake-config-.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0007-xmpsdk-Build-with-DBanAllEntityUsage-1.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0008-xmpsdk-Fix-compile-warnings-in-ExpatAdapter.cpp.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0009-Fixes-in-.pc-file-for-being-compatible-with-more-dis.patch
+>   create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0010-create-install-exiv2ConfigVersion.cmake.patch
+>   create mode 100644 meta-oe/recipes-support/itstool/itstool/0001-Fix-a-segmentation-fault-bug-introduced-with-version.patch
+>   rename meta-oe/recipes-support/itstool/{itstool_2.0.5.bb => itstool_2.0.6.bb} (70%)
+>   create mode 100644 meta-oe/recipes-support/libgusb/libgusb_git.bb
+>   delete mode 100644 meta-oe/recipes-support/upower/upower/0001-linux-lower-severity-of-unhandled-action-messages.patch
+>   rename meta-oe/recipes-support/upower/{upower_0.99.7.bb => upower_0.99.10.bb} (73%)
+>   create mode 100644 meta-oe/recipes-support/xserver-xorg-cvt/xserver-xorg-cvt-native_1.20.4.bb
+>   rename meta-xfce/recipes-devtools/glade/{glade3_3.8.5.bb => glade3_3.8.6.bb} (42%)
 > 
 
