@@ -1,49 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
-	[209.85.210.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 27EC17E447
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
+	[209.85.214.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 029617E4F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 20:17:20 +0000 (UTC)
-Received: by mail-pf1-f172.google.com with SMTP id s11so7291441pfm.12
+	Sat, 25 May 2019 20:17:21 +0000 (UTC)
+Received: by mail-pl1-f182.google.com with SMTP id g69so5509143plb.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 13:17:22 -0700 (PDT)
+	Sat, 25 May 2019 13:17:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=DlFIrOuwDH7I5D7BHCWcDMTLdmQF97NLYdZb/lu4iPg=;
-	b=VvIQU6FmGHg2ibR3NaREYSoSXzTFtxvPzyd2qYWoMM6CvmTkUHiD9fi+ryhM04JnTN
-	W/fHn20iouFUgoXB5BJbXd11DKl9IbDxKNX+Jn5Nl7iApbSl0h5YRRjCiO/B0m4XC4rf
-	z4CPwqsFNhuklia9wkrmoJmfE4BBR16x1f4e0R72Xk1UjwRkQo/guAYfltYXQpeLMt0G
-	bh04MntkJOejbFOa9sgjD5hc0/ySF/Vd5w6aTrBIFuaWqBuSFy+JQ0aVDFIv1KdcPUdf
-	8aGCPvD1jmfCWnFB5bO+WwnapTXNbxuPXWEF5oVtAzSP5fnI3fqbam9ARP6nLTgu3Fq3
-	Wggg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=AaUfWImFuGxVWVy3zpTkL65wS3tp6E0ibFLyGwXEteE=;
+	b=OXBvXLja+GPilVIKoyPsSvQuHtc+pCCciPZvckxC7K3Ho08tigaGwiiH+mWFTwJf7y
+	2gDfQbgbOd9L2mC7/3jUZwX31c4+KL4uXfZXu12ANsOXno+Rpb2do6gldQluJUT7xTxD
+	tWM3PYrR5ac0QQcEKK0DAzP9ubEE0pxh/LNOBntorIXX63qIvaS+RbiuTyGaAB2/iZvu
+	cfUZzhKfFqbFleHXe1atMi+cxT/lz28LZB5hfti9H0AFFhkoEFLEEDCvZKxGxtZvBeZl
+	9YtQMU/4RcbUFV/VAQMzdH/+nvyRRze+4oEP0qWoWVKEi5etoZeITwmq2O3xr5/UU66o
+	Rjjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=DlFIrOuwDH7I5D7BHCWcDMTLdmQF97NLYdZb/lu4iPg=;
-	b=Boqr+J9l0PH0Xo6zco8eK5nLpKYaZWbpS/9qzVtbfRnBsD5C+Ndlgd94M33T85dp7T
-	SHUyPfxqesaNr+q8ROAH8GXSmKVs/lggwAUD0wJ1rXTSHg0riUAXSvsU37YwnNYCDe3X
-	AMA/ugXf2vK/WCu7npXG83wMHqHgivfJTM4V5sv2Bo6UkgVGIZfwS/sQmFVdLHpSnxAH
-	PMX1qVU9063PFcR97Su0ecpfRwippU0bh2Lq2Qr4AXECKFvSkxPxdzKGJSKNgeFJpGwb
-	QzbUCDFysPG39gyahGXSv1W/R6j56JG/YaV/206NbHN9294Ot8Uclz/j0Afrfrq9EZGZ
-	iBuQ==
-X-Gm-Message-State: APjAAAXiAKSXAikj267etR7Nz8/6UeOy9Dz6FaBNcryyG0YFndw0aU/r
-	VINJU52VH9RUB1zjfpLenQY3TQQP
-X-Google-Smtp-Source: APXvYqzde1NXbxCAnKf4wdld2/RhFbpX7fVttRWym/yvs2xqjhndUA+Cm1ygsM2sS3A+adW9FCm2dQ==
-X-Received: by 2002:aa7:90ce:: with SMTP id k14mr40222356pfk.239.1558815442116;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=AaUfWImFuGxVWVy3zpTkL65wS3tp6E0ibFLyGwXEteE=;
+	b=SEv0P6UYRgXE21xaQN1BS9uPfy6Wk5IOa6tEvjlqy/w+nqpb7GingFoM06ILgXnGxU
+	R+ftfZbfuz4fyWBYPenzieYfiYwlC7X++vfCpR1rn8efk2g19A9oAG5G//BTAF26JTHm
+	0Y7Jw9uML0KX/mL/4RrcRIgMB/QTWeTahdIVsgcjyQse4DOSZMVIRRMl5jvHtyRUOLJx
+	9Z48q0Ifjck++3gnuqGTtvAEdtWR2H0TjoVQ6Pkp4v/9LTAa2RDJ+YvMrJEwJ1zsiWXw
+	hpA7N+QtMZrS8MCgd6jSdUv+3CUY87M1W0tgcY5nNLr/DBdnHP6ztqBdKY4bE4y5KNfP
+	pWNg==
+X-Gm-Message-State: APjAAAUajqBNXGi2/bIFmD+ZMOKvR825uM+mPRjHhugGIWNRj/vUuaCg
+	KoOCaOf+hyCAZmQgp9fjh7DyGzCA
+X-Google-Smtp-Source: APXvYqxK6BohXZ5DQeR/ZBZfrDtvyYy4xPA1By2qrqraqbB/q86zo+OsvmufqnqTWvBvDhFYdjKyZw==
+X-Received: by 2002:a17:902:3343:: with SMTP id
+	a61mr12561712plc.274.1558815442893; 
 	Sat, 25 May 2019 13:17:22 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:8c20:a770:5243:e558])
 	by smtp.gmail.com with ESMTPSA id
-	i27sm10832553pfk.162.2019.05.25.13.17.21
+	i27sm10832553pfk.162.2019.05.25.13.17.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 25 May 2019 13:17:21 -0700 (PDT)
+	Sat, 25 May 2019 13:17:22 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 May 2019 13:17:19 -0700
-Message-Id: <1558815440-18048-1-git-send-email-akuster808@gmail.com>
+Date: Sat, 25 May 2019 13:17:20 -0700
+Message-Id: <1558815440-18048-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1558815440-18048-1-git-send-email-akuster808@gmail.com>
+References: <1558815440-18048-1-git-send-email-akuster808@gmail.com>
 Cc: Armin Kuster <akuster@mvista.com>
-Subject: [thud][PATCH 1/2] ntp: upgrade 4.2.8p12 -> 4.2.8p13
+Subject: [thud][PATCH 2/2] mariadb: update to 5.5.64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +60,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 May 2019 20:17:21 -0000
+X-List-Received-Date: Sat, 25 May 2019 20:17:22 -0000
 
-From: Andrej Valek <andrej.valek@siemens.com>
+From: Armin Kuster <akuster@mvista.com>
 
-License has been changed due to reformatting, no new stuff added.
+Bug fix only updates:
+https://mariadb.com/kb/en/library/mariadb-5564-release-notes/
 
-Bug fix only update include security fixes:
-CVE-2019-8936
+5.5.64;
+CVE-2019-2614
+CVE-2019-2627
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+5.5.63;
+CVE-2019-2529
+
 Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb} (96%)
+ .../mysql/{mariadb-native_5.5.62.bb => mariadb-native_5.5.64.bb}      | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                                 | 4 ++--
+ meta-oe/recipes-dbs/mysql/{mariadb_5.5.62.bb => mariadb_5.5.64.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.62.bb => mariadb-native_5.5.64.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.62.bb => mariadb_5.5.64.bb} (100%)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-similarity index 96%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-index 289d264..dc18a60 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p13.bb
-@@ -6,7 +6,7 @@ or satellite receiver or modem."
- HOMEPAGE = "http://support.ntp.org"
- SECTION = "net"
- LICENSE = "NTP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=e877a1d567a6a58996d2b66e3e387003"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4cee33257467509e498f4cd9a6a4bd53"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.64.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.62.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.64.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 8ca5b2b..4f7784b 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -18,8 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+            file://change-cc-to-cc-version.patch \
+            file://0001-disable-ucontext-on-musl.patch \
+           "
+-SRC_URI[md5sum] = "6375d577e9539b839f44d857e70f82b9"
+-SRC_URI[sha256sum] = "56a365af71b8a9ec8bfee0801e2dec95011da8ee7507986ca329be11296411db"
++SRC_URI[md5sum] = "03968ae08cff3038e2420921ef257550"
++SRC_URI[sha256sum] = "c103f3c54741b296980d6be48b221340eebaa97c6bd95a02fd8d530a5df5c343"
  
- DEPENDS = "libevent"
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
  
-@@ -25,8 +25,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "1522d66574bae14abb2622746dad2bdc"
--SRC_URI[sha256sum] = "709b222b5013d77d26bfff532b5ea470a8039497ef29d09363931c036cb30454"
-+SRC_URI[md5sum] = "ea040ab9b4ca656b5229b89d6b822f13"
-+SRC_URI[sha256sum] = "288772cecfcd9a53694ffab108d1825a31ba77f3a8466b0401baeca3bc232a38"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.64.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.62.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.64.bb
 -- 
 2.7.4
 
