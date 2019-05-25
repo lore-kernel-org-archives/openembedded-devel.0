@@ -1,26 +1,48 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 11F677E4F2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CE467D743
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 12:42:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4PCgCaM022457
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sat, 25 May 2019 19:56:13 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id x64so12434815wmb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 05:42:22 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Sat, 25 May 2019 05:42:01 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 25 May 2019 08:41:57 -0400
-Message-ID: <20190525124158.184776-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190525124158.184776-1-kai.kang@windriver.com>
-References: <20190525124158.184776-1-kai.kang@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 2/3] xfce4-screensaver: add recipe
+	Sat, 25 May 2019 12:56:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Vm4Y7dNlBw8beACHvm4pCXCsFRbBc2jS5folTYg4PdM=;
+	b=dfyI+Tna10NheqhgY/WF/pZvVZbkmwEnrhHZ0BkKw86Bh6NTicl3+owzX6cbmA4+px
+	uQN3ETDz7YAM1iduHI1coBdd+yi+9IY6Dod6i6atTMCJVmjTvfjd4bilW9ddHm4cOy5d
+	hW2TWaKcECnn/8OQBch37g5AUXyUmwwn0lR2mAzRRbifogHZaFBOPFVYhHE4MkfIphoR
+	R8qEr3SuB9OvsWANhWhBZx2Mgx+bBgbRMlGNvFmT+wScxYoy9jotCo1NirX6Je+k+2og
+	DLGVBZePB+xo0M7Klu3+n61Wa/VvJJmT9TqHJj49kaKhDUgUxzmmJRpBD8OXIWkFVxB7
+	javQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Vm4Y7dNlBw8beACHvm4pCXCsFRbBc2jS5folTYg4PdM=;
+	b=RB/0FI9us1rTJzRRaNTEbES9JXkZcTj62SUZXSARAzjbjOBPLn9dSMnXfgHwl4DEvV
+	mkZWh4tzh46LDsBah1Hiz5e6rBgvWvAIOWphsij6eWsaQUx6WMsKRjBNgf1WvVJB15TL
+	2UuT+tGlZj0X881BC9ZFCh53GQZfN42+fJ64/Ao4p9lUcFovZqPkspsJTHBvzj6pXUm8
+	88CnvxlqH5Len8hD344oQlX+i8C5uCOjTilUCXAW5vwocA8FEpgGVqBR53AmX6TLQh5O
+	F4nFndle7kSztkf1aVqWGHVEAX6N2c4YKiBUuwZflMJ0259hKLHBw5fgS24ho8f84bDh
+	oHoA==
+X-Gm-Message-State: APjAAAWmmxDSP1TZfW1uNRqEmvlMrVDcJSF5VLcvVW5pJbFgEpWYyo1B
+	lhfyrfHs/YAsx7KamcsdnFQgOjsD
+X-Google-Smtp-Source: APXvYqwspy2piIFKEqserZ32KZNup478UMnZFLW9g3GWksIEwFxDiDY02MiEHYlgbdbyHtopS3RXWA==
+X-Received: by 2002:a1c:ef0c:: with SMTP id n12mr20727894wmh.3.1558814173993; 
+	Sat, 25 May 2019 12:56:13 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	34sm14538681wre.32.2019.05.25.12.56.12
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 25 May 2019 12:56:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 25 May 2019 19:55:33 +0000
+Message-Id: <20190525195533.26321-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] leptonica: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,117 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 May 2019 12:42:32 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Sat, 25 May 2019 19:56:13 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+* leptonica.com now only redirects to www.leptonica.org, so it only downloads
+  the HTML home page instead of the source tarball
 
-xfce4-screensaver is a screen saver and locker which used by Xfce module
-'actions' when click 'Lock Screen'.
-
-* add a patch to fix configure QA issue for cross compile
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../xfce4-screensaver/fix-cross-compile.patch | 60 +++++++++++++++++++
- .../xfce4-screensaver_0.1.4.bb                | 19 ++++++
- 2 files changed, 79 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cross-compile.patch
- create mode 100644 meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
+ meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cross-compile.patch b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cross-compile.patch
-new file mode 100644
-index 000000000..f726064e2
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cross-compile.patch
-@@ -0,0 +1,60 @@
-+It adds '-I$includedir' to CPPFLAGS and adds '-L$libdir' to LDFLAGS in
-+configure.ac which causes 'configure-unsafe' QA error. Don't add them for cross
-+compile to avoid the QA issues.
-+
-+Upstream-Status: Inappropriate [cross compile specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+diff --git a/configure.ac b/configure.ac
-+index f0ec537..05c393d 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -230,9 +230,9 @@ dnl ---------------------------------------------------------------------------
-+ #
-+ AC_DEFUN([AC_CHECK_X_HEADER], [
-+   ac_save_CPPFLAGS="$CPPFLAGS"
-+-  if test \! -z "$includedir" ; then
-+-    CPPFLAGS="$CPPFLAGS -I$includedir"
-+-  fi
-++#  if test \! -z "$includedir" ; then
-++#    CPPFLAGS="$CPPFLAGS -I$includedir"
-++#  fi
-+   CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-+   AC_CHECK_HEADER([$1],[$2],[$3],[$4])
-+   CPPFLAGS="$ac_save_CPPFLAGS"])
-+@@ -241,9 +241,9 @@ AC_DEFUN([AC_CHECK_X_HEADER], [
-+ #
-+ AC_DEFUN([AC_TRY_X_COMPILE], [
-+   ac_save_CPPFLAGS="$CPPFLAGS"
-+-  if test \! -z "$includedir" ; then
-+-    CPPFLAGS="$CPPFLAGS -I$includedir"
-+-  fi
-++#  if test \! -z "$includedir" ; then
-++#    CPPFLAGS="$CPPFLAGS -I$includedir"
-++#  fi
-+   CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-+   AC_TRY_COMPILE([$1], [$2], [$3], [$4])
-+   CPPFLAGS="$ac_save_CPPFLAGS"])
-+@@ -257,15 +257,15 @@ AC_DEFUN([AC_CHECK_X_LIB], [
-+   ac_save_LDFLAGS="$LDFLAGS"
-+ #  ac_save_LIBS="$LIBS"
-+ 
-+-  if test \! -z "$includedir" ; then
-+-    CPPFLAGS="$CPPFLAGS -I$includedir"
-+-  fi
-++#  if test \! -z "$includedir" ; then
-++#    CPPFLAGS="$CPPFLAGS -I$includedir"
-++#  fi
-+   # note: $X_CFLAGS includes $x_includes
-+   CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-+ 
-+-  if test \! -z "$libdir" ; then
-+-    LDFLAGS="$LDFLAGS -L$libdir"
-+-  fi
-++#  if test \! -z "$libdir" ; then
-++#    LDFLAGS="$LDFLAGS -L$libdir"
-++#  fi
-+   # note: $X_LIBS includes $x_libraries
-+   LDFLAGS="$LDFLAGS $ALL_X_LIBS"
-+ 
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
-new file mode 100644
-index 000000000..fb2be6609
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Xfce screensaver Application"
-+DESCRIPTION = "Xfce screensaver is a screen saver and locker that aims to have simple, sane, secure defaults and be well integrated with the desktop."
-+HOMEPAGE = "https://git.xfce.org/apps/xfce4-screensaver/about/"
-+SECTION = "x11/application"
-+
-+LICENSE = "GPLv2+ & LGPLv2+ "
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
-+                    "
-+
-+DEPENDS = "dbus-glib garcon gtk+3 libxklavier libxscrnsaver virtual/libx11 xfconf"
-+
-+inherit xfce-app
-+
-+SRC_URI_append = " file://fix-cross-compile.patch"
-+SRC_URI[md5sum] = "18a619849f85c24d784c7fa27279ca4b"
-+SRC_URI[sha256sum] = "ed04ae32034b8e13a78495ca2bd7789a20ec7f67891ab9e92826a944371eabef"
-+
-+FILES_${PN} += "${datadir}/dbus-1 ${datadir}/desktop-directories"
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
+index 91fa00cc96..249e96f168 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.74.4.bb
+@@ -3,7 +3,7 @@ DEPENDS = "jpeg tiff libpng zlib"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=34aa579294e8284b7b848c8d5d361e8f"
+ 
+-SRC_URI = "http://leptonica.com/source/leptonica-${PV}.tar.gz"
++SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
+ SRC_URI[md5sum] = "4f32be9bd2e2c142ba018037ab5d746f"
+ SRC_URI[sha256sum] = "29c35426a416bf454413c6fec24c24a0b633e26144a17e98351b6dffaa4a833b"
+ 
 -- 
-2.20.0
+2.17.1
 
 
