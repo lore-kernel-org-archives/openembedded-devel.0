@@ -1,50 +1,36 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D1E67E1D7
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E00307C68D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 17:33:09 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id f10so202576wmb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 10:33:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=UL3Nl1WLOO2def5/JVfIgNjhVx29/tOG0nEBOP5PNs8=;
-	b=UJKrS7IoYX4pK0+4q50o+LpMJf+x5NQvl0IyJQyOSQuQUsGRUb5pjwVx/NEwYvgLw9
-	78o35LTb720HNj8Hzj9WS7Qq5IPKmOERUJqovPbUz1HNSMSklpBJOz+r7dPznPP0k9eJ
-	QiYKbL4aTlt9m7yM4SixDznVYD/KdhUtfqXTCmDW7kgfeteLA1a/N5lKeB7I6xyhSovk
-	ExbowCvOTUrNVEP/+VwOUG0RQyZJnDZvJbRGoOtVhj3Umw0/2CuKc9GdGhjEZS4NZdOJ
-	pvn1guTyHxxIhckRiw5LXOtxWFUYJCR/b5w2RvlUauma4Hys9h1ISbiHvggJlhepHK0L
-	v15A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=UL3Nl1WLOO2def5/JVfIgNjhVx29/tOG0nEBOP5PNs8=;
-	b=QjWzd1rRtE+H09CW2RE56R6Rs4XDBxf3ZPuS3F3djy9ioNe+mYk2rnN/ZkqtcX3mxR
-	sbalvQIlbTrh5UiJyauscMCmD5FtxRGhvbkPftHD3HCvamkQj83bZzB2w5B+kkSdeMBg
-	YiQQJzlMZwP/9W7AOEFRI7+U5tKcnJWttT60V94aGnbmfAxXFBeXAkIYkyuuiosqDig6
-	k/kHJpA3mdGK3nySiDhjvim2cMqoWdMQIunn4PAVeQv+aZoa6ac+9hRXILzw7/1q/sGP
-	rfr17RLixRWt30xKWcJu3C++rtU2Pfwqc4+hEVH0d2uwMBvV4nhs979uJ2CMBv+TraQx
-	zw/A==
-X-Gm-Message-State: APjAAAWcFi3G8/oMWc6r/1+5E3oh4S8sSB7t5gqjNP5CtPrhnIy3/THM
-	4OLc38cHkJ3OTW8qS4Em0o+1w4QLQUTAgKnfXkE=
-X-Google-Smtp-Source: APXvYqwwos/OpRkpcEL6y3QxgSOWFK7zE5m3rp0ExC0n8yw/20aG7xIeqprkCAN3qJCiwoKoaWd8uDnIkth9tHi4svg=
-X-Received: by 2002:a1c:be12:: with SMTP id o18mr133923wmf.124.1558978389845; 
-	Mon, 27 May 2019 10:33:09 -0700 (PDT)
+	Mon, 27 May 2019 17:37:11 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45CPLJ3dNGz4H;
+	Mon, 27 May 2019 19:37:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1558978632;
+	bh=AUclpu9NNfudcJ8vWPMSYcDDzJ40goNzaTtM67B1p+8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=lro7gHcah8rVgolvKFP6PGe/q2Gu1oSvWMU3aGkAaaVTUhXX1A3BfZjEnP37vI5CX
+	/IJhqBF8TmP98LX4EqoZb5eSQlrRIXFXm3w/E/UnLVNSHmHNR+Ep6fmDyhi1eqgZiP
+	gr7cHaPoB1UyBZMFvGWG6AkpoyqGlhVz6Twsmtxi0v4VnaMR6smNKzLTGM1Kv+Qnj4
+	kzxmxLUz/0vOZRX8Yu03k90/y8Knr7IpJ7/6nPhiamxD97TO7OQnJSj8Hq3iXav4Ne
+	GyjCJWs9IZwIgnz8CYWd2CnDvyeNIYBP+MLR/QLJR0EqLqVj5WeF2YWjZmq4rPwoBo
+	e0Yp27A5gDpFixzVg0nLwO5EfWeDBfmbfYiaPCGvm5EZkympIgRiyLWaZDN/nGokQk
+	eNl/T12zh4g4ZzvoUdVYCDTrPwQtSdL+IzDwz08QlhwqgoKLW4ePWeWW8smtk2cjaL
+	+6qcKfdmZmahoje+eCL56n+sQXGzDvYf1OoWZ6OmEqmcTAYtFy5gGWE5p8x8PItglU
+	oxh5nMMy7DWuUwsH4l5NXAi0SBEWl4Z7QYe4IFE16eB5n5zT4JofoP8Z9UBTdKZFGA
+	Br89UFvYSRwhkK7wGWJHbx7rn748Wp16bzVNZR4em737+pVyfmuoWmNNtuAwpYPCmu
+	7qvnEYopIC980YMq/sKauROY=
+Date: Mon, 27 May 2019 20:37:04 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20190527173704.GB27759@localhost>
+References: <cover.1558966078.git.akuster808@gmail.com>
 MIME-Version: 1.0
-References: <CAAfyv34HAOaAaO1cyiQbR8P6mQPp8p3gCT2jM=UyQDGfvV-fYw@mail.gmail.com>
-	<CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
-In-Reply-To: <CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Mon, 27 May 2019 19:32:57 +0200
-Message-ID: <CAAfyv34jJ362tu3x_8J1+FuV3zFpchkB8Ft9w-WERrxCNPxbvg@mail.gmail.com>
-To: Enrico <ebutera@users.sourceforge.net>
-Cc: yocto <yocto@yoctoproject.org>, Sergey Lapin <slapin@ossfans.org>,
-	Nicolas Aguirre <aguirre.nicolas@gmail.com>,
-	OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-sunxi maintained?
+In-Reply-To: <cover.1558966078.git.akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 00/34] Warrior pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,54 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 17:33:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 27 May 2019 17:37:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Hi Enrico,
+On Mon, May 27, 2019 at 07:09:06AM -0700, Armin Kuster wrote:
+>...
+> Andreas Müller (7):
+>...
+>   gnome-desktop3: set correct meson gtk doc option
+>   evince: add patch to fix build with recent gobject-introspection
+>...
 
-On Mon, May 27, 2019 at 5:44 PM Enrico <ebutera@users.sourceforge.net> wrote:
->
-> Hi,
->
-> i try to keep it maintained, but now i just have a lime2 for testing
-> on real hardware, and i don't have the resources to do test builds for
-> all the supported boards.
-> Your help would be welcome, i can't check right now if i have the
-> rights to add you as co-maintainer, anyway i will add you.
-Thanks I have few sunxi based boards so can do tests also on my setup.
-Pls ping me when you will add me. Thanks.
->
-> Thanks for the help!
->
-> Enrico
+You wanted to drop these.
 
-Marek
->
-> On Mon, May 27, 2019 at 4:50 PM Belisko Marek <marek.belisko@gmail.com> wrote:
-> >
-> > Hello,
-> >
-> > I'm just curious if meta-sunxi is still maintained? I was contributed
-> > to layer back while and when look now thud branch is un-compilable
-> > (dri2proto not replaced) and warrior branch not created yet. There is
-> > 14 issues + 6 pending pull requests. Added maintainers also in CC. I
-> > think it would be good to have sunxi properly maintained as boards
-> > with sunxi processors are popular. I can give a hand as co-maintainer
-> > if necessary. Thanks a lot.
-> >
-> > BR,
-> >
-> > marek
-> >
-> > --
-> > as simple and primitive as possible
-> > -------------------------------------------------
-> > Marek Belisko - OPEN-NANDRA
-> > Freelance Developer
-> >
-> > Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-> > Tel: +421 915 052 184
-> > skype: marekwhite
-> > twitter: #opennandra
-> > web: http://open-nandra.com
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
