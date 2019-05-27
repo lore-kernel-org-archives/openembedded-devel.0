@@ -1,52 +1,50 @@
 Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 55C3B7E01C
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F5997E01C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 10:06:20 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id 33so5886127pgv.9
+	Mon, 27 May 2019 10:08:28 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id v9so2455159pgr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 03:06:22 -0700 (PDT)
+	Mon, 27 May 2019 03:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0Ps574peU43tNAR17Bb0BK6/VFL1d8q6zmQ1FSpzzDM=;
-	b=QOmWp14M8lmb9BHfCuiQ4/9DRdKtrxdOGPBQQSuArK1O/OvZAxpki6rNzR4R0hzzyw
-	yODSkSWjMPvcR9J90TECGmqZMZn/XPfuIWDisy5IUP3gPWYtE4FOV2OveRiPryOwXOkO
-	vBH3jqrImy0llECT1tfUSSesZb6W0uL3cb6kWO5Ed2hSKrmiG2mzuVO+gKmv50SHtyyw
-	icA2RnLE1zmPpYjrVgAzDhFr7//VwiQG3WSF2yNvnwKb9ggI6y/3FIuY10F7CpUpRmVi
-	BWtdV6gj+NMGgxJXvrwOvz2e+0p2Mw+ydOMz+OiZLdPdxc+C1hAyzidkYTkDEyAW4c+h
-	h0oQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=w/2+pPyJ/OcIB1VksxUQHVT0VIoITjtpsglmfvvnABU=;
+	b=mESmorOCfM74wuZd7rkMCFw6nMWwpn3m3YL1DsG9Yk9x3cTqlG5StpQUF5JyDKbwZ2
+	yJyj8FY+wQI+MwmB88lXjKU1dI3UZTGjODvwRlhuskp54Lo1TZ/f2tFn6v06hSt/99aL
+	cNIBuCIzsKU3QoWHe1f22OXsy3Xf6y/RR5g52gZx/LmWLB4GcHMPvyjTIFDPx14s8hqH
+	keEoGcte1IpVu3kYBoqd5aQ4HvcI6wllFDbJYBEQvlEnOcPIfZrEeiWe2TFERNTtWk1Z
+	CHBkbWhYmnENBhS8541EPbXjxYkKueM0mYwn7/lmqg42ExG6AVVTSVy5/xyXB8lteh7p
+	BwhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0Ps574peU43tNAR17Bb0BK6/VFL1d8q6zmQ1FSpzzDM=;
-	b=gQvoAfG45LxWIoC2hRig1WMtSIa9d0Q7V+83wtJi20Xz1jwTz4wZIef0IhQOdAzsGP
-	gaD8D+x3IHgH1txDqW8lxMss7UY6TIQOjwX7oXHi8E7AAmZSAFjKE+pXUGcLrXSRnRch
-	Q1ExseaI/Pxd/7OptOZv+ZVAc/kliQ4Ka3oIhRx4dHzsfZTYOIhKoLpauxSQ5C6u0XUa
-	+MLc0DyrAp//q9BYtOwYBxqdjhEXpfetUcSqd/b9LqlbPxjwN7KNSRG1SYqYBbu7qRG7
-	DDDZOhHZchKekPVgvczawaUlGaWY0Bg0MAmHYKnJtqmL9Kcs5PDBOKti8pGymFwuSXsh
-	f/Zg==
-X-Gm-Message-State: APjAAAXVqON7zjrJbefAbjwjx6HtDRrKOsnwJu0r7i5sVKFD2oFoikB9
-	gXt/c+TkY9sDS79qpJrucWu8+3kLsxM=
-X-Google-Smtp-Source: APXvYqyGrpufAw+jemWu8zuyRXGDuOBMrROAegh5C4d/3hCoAsh95/aCk37WOAPnwW95JufBmxBjRg==
-X-Received: by 2002:a63:27c7:: with SMTP id
-	n190mr65207912pgn.250.1558951581391; 
-	Mon, 27 May 2019 03:06:21 -0700 (PDT)
-Received: from navik-desk.iind.intel.com ([134.134.139.82])
-	by smtp.gmail.com with ESMTPSA id
-	n9sm10921833pfq.53.2019.05.27.03.06.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 May 2019 03:06:20 -0700 (PDT)
-From: Ankit Navik <ankit.tarot@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 May 2019 15:36:10 +0530
-Message-Id: <20190527100610.8944-1-ankit.tarot@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=w/2+pPyJ/OcIB1VksxUQHVT0VIoITjtpsglmfvvnABU=;
+	b=OVwvi3B3oPAxMFGPDJQz0Ou/Uug1MTqnwBLRNnMQU5dRUJaysC17cBRAbKzqeKozNQ
+	isg4Cyz7K/YSBd2HhRzk8Fq1+19jmIKgaCdVYF0tyT+IcaPtaIeXnaW377CnHxvzIF1R
+	2UvsIsDHXJHOPsTAIVJiyxzxD6SOeTTpAeJlz1bVhjP4PetXmyiNyfY8UCiHYDwZ5hQb
+	xWZmGi9Yo2GkoOoeNDvSYRL+PgCHo4ZL/UebI5thKhITy8OHdj+5mtrM/PXurWqHNi+i
+	W7ce5me5VVO/V6QimGXA/8Cv/hMea/jCY3tsJvFNnLHPOwlrJcYX4LsJuF5qKe3grqVz
+	FgpA==
+X-Gm-Message-State: APjAAAXUhEZefFuVJSbyH+foL9flCPGTpqVmQuwTRKlSiJ5Tp0NN/SS0
+	JH4a1N6Ti8cLrFsOGLTxo+NQlPuKsv/LXJDvrMlwqOFL
+X-Google-Smtp-Source: APXvYqyq0dKfgC2vezARdLTzMVjMSXNAR8LS4y8V+im0nceuYi60bAiNSItq66m4WfbMLH3rj5GhME8PNXXdke6N8dA=
+X-Received: by 2002:a62:4ece:: with SMTP id
+	c197mr134360165pfb.139.1558951710154; 
+	Mon, 27 May 2019 03:08:30 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] safec: Initial recipe for safe C library
+References: <20190517094336.26232-1-ankit.tarot@gmail.com>
+	<20190517094336.26232-2-ankit.tarot@gmail.com>
+	<CAMKF1sq-X3q0XW4ki+mfUfAR+zVFBJ9WeEdSF2M1pD4JyguWCg@mail.gmail.com>
+In-Reply-To: <CAMKF1sq-X3q0XW4ki+mfUfAR+zVFBJ9WeEdSF2M1pD4JyguWCg@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Mon, 27 May 2019 15:38:18 +0530
+Message-ID: <CAM_RqkOnRpH9f_x67wi2ywFebxyg7VJR0H4-wSWR_p55N+Jv5Q@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,41 +57,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 10:06:21 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 27 May 2019 10:08:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add generic recipe for safe C library.
-This library implements the secure C11 Annex K functions on top of most libc
-implementations, which are missing from them.
+Hi Raj,
 
-Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
----
- meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+On Mon, May 20, 2019 at 10:18 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
-new file mode 100644
-index 000000000..ad3c4ba74
---- /dev/null
-+++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-@@ -0,0 +1,15 @@
-+SUMMARY  = "Safe C Library"
-+
-+LICENSE  = "safec"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
-+SECTION = "lib"
-+
-+inherit autotools pkgconfig
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
-+SRC_URI = "git://github.com/rurban/safeclib.git"
-+
-+COMPATIBLE_HOST = '(x86_64|i.86|arm|aarch64).*-linux'
-+
-+RDEPENDS_${PN} = "perl"
--- 
-2.20.1
+> This fails to build for mips target see
+>
+> https://errors.yoctoproject.org/Errors/Details/241270/
 
+
+v2 patch is submitted for compatible target.
+Regards,
+Ankit
+
+>
+>
+> On Fri, May 17, 2019 at 2:44 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
+> >
+> > Add generic recipe for safe C library.
+> > This library implements the secure C11 Annex K functions on top of most
+> libc
+> > implementations, which are missing from them.
+> >
+> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > ---
+> >  meta-oe/recipes-core/safec/safec_3.4.bb | 13 +++++++++++++
+> >  1 file changed, 13 insertions(+)
+> >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+> >
+> > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
+> b/meta-oe/recipes-core/safec/safec_3.4.bb
+> > new file mode 100644
+> > index 000000000..2048fd418
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+> > @@ -0,0 +1,13 @@
+> > +SUMMARY  = "Safe C Library"
+> > +
+> > +LICENSE  = "safec"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
+> > +SECTION = "lib"
+> > +
+> > +inherit autotools pkgconfig
+> > +
+> > +S = "${WORKDIR}/git"
+> > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
+> > +SRC_URI = "git://github.com/rurban/safeclib.git"
+> > +
+> > +RDEPENDS_${PN} = "perl"
+> > --
+> > 2.20.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
