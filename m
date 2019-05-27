@@ -1,48 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 56B0C7CFF8
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B71977DD44
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 21:58:55 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id f10so5149804wmb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 May 2019 14:58:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Cvu5RqtAQPrh8zCM++7j9R6rI9LOaUgD4LZcFDGxynM=;
-	b=R3bOpuXZPrIKwN0dGvomFakqPAUpVl20JgULFLM8gkpglUl1XNyhGw0tFXJCy0e8zX
-	ttnlmZr2VmFydHrBjDlyOlp6whCkheMUojCgP/KHetDw+lNR3lpzQIHXvfsKKzOA64hZ
-	7oQOonJ00kKy4YuUbzv5rL3lU97CWElJ3ByvmQpw4TTj9vf+tfFzI3Z1Q9pot5mdjIOm
-	MGJa/Zu2VA8t3vs+lyuRoMedYlQtWvlZ3Po9z+8rhY/z09va3d9bu9eVVGWOhZC9u0OU
-	C9yzHiyBBSpWuT09IykSMOoym8g21DJLaoMCX1JPbwUJ25LwQLcSqNAyAMuj/OPUSyEN
-	/c9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Cvu5RqtAQPrh8zCM++7j9R6rI9LOaUgD4LZcFDGxynM=;
-	b=OxXd/jhTlToj4WyjPAjqbr6fCDKLCpSh8RP9eNcKITbQRmYMjhvmDYmdYuM8OeYQmK
-	f+SPlJ4LBwhPmijzRM3oicPPay6vsXD4Vp2HHLwtg/i3TQQZPteos0v/nbcOOv4XC8gB
-	33xW8Oax8vcuR9LWTgfSxnqYNgA86EkxAt7Z6EKlJ1FBcO2jKMIWVh/lEF9+FJbcbEDu
-	QVd2bEdDlBtHj/s0SUgMoHGbbu+E9T/tK7eFTvYLFbuYSzcHBFg3m/T1dmJVs81GfT+U
-	T5LYPJgkB/pldm6HndrGl9NeS4hIOxZCPHlV8ByqIq6F9tCklOPFEpl8/4Kr8GjPXZCt
-	6j4A==
-X-Gm-Message-State: APjAAAXnz083y4VDf5nc3B6Fl7tYyDOtDq92V7CJgHPwjjCdA7wzL4qy
-	lYPcsiOzKbsYTStvc3WSPPVJPaug
-X-Google-Smtp-Source: APXvYqxbMAWfhinO+Uzk46tqlhzkPzKI8OOYKf4ZN9lwVaNato1sQPVd5GdNMNrbL23QCGb9JeQiMQ==
-X-Received: by 2002:a1c:9c8c:: with SMTP id f134mr4664854wme.95.1558821535718; 
-	Sat, 25 May 2019 14:58:55 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	z20sm10692224wmf.14.2019.05.25.14.58.54
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 25 May 2019 14:58:54 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 May 2019 21:58:54 +0000
-Message-Id: <20190525215854.5336-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][warrior][PATCH] ccid: fix SRC_URI
+	Mon, 27 May 2019 06:54:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4R6sBcA022592
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 26 May 2019 23:54:21 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Sun, 26 May 2019 23:54:00 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Mon, 27 May 2019 14:53:58 +0800
+Message-ID: <1558940038-23204-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] crash: do not use unstable github archive tarballs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,36 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 May 2019 21:58:55 -0000
+X-List-Received-Date: Mon, 27 May 2019 06:54:46 -0000
+Content-Type: text/plain
 
-* alioth.debian.org isn't available anymore
-* master already has this (was part of the upgrade to newer version)
+Since commit [21f84fc insane: add sanity checks to SRC_URI] applied
+in oe-core, do not use unstable github archive tarballs
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-support/ccid/ccid_1.4.24.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-kernel/crash/crash_7.2.5.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/ccid/ccid_1.4.24.bb b/meta-oe/recipes-support/ccid/ccid_1.4.24.bb
-index 31145d0efd..92f43d86a4 100644
---- a/meta-oe/recipes-support/ccid/ccid_1.4.24.bb
-+++ b/meta-oe/recipes-support/ccid/ccid_1.4.24.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "Generic USB CCID smart card reader driver"
--HOMEPAGE = "http://pcsclite.alioth.debian.org/ccid.html"
-+HOMEPAGE = "https://ccid.apdu.fr/"
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.5.bb b/meta-oe/recipes-kernel/crash/crash_7.2.5.bb
+index 0b23356..e124db1 100644
+--- a/meta-oe/recipes-kernel/crash/crash_7.2.5.bb
++++ b/meta-oe/recipes-kernel/crash/crash_7.2.5.bb
+@@ -12,8 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
  
- DEPENDS = "virtual/libusb0 pcsc-lite"
- RDEPENDS_${PN} = "pcsc-lite"
+ DEPENDS = "zlib readline coreutils-native"
  
--SRC_URI = "https://alioth.debian.org/frs/download.php/file/4171/ccid-${PV}.tar.bz2 \
-+SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
-     file://no-dep-on-libfl.patch \
- "
+-SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
+-           http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=${BP} \
++S = "${WORKDIR}/git"
++SRC_URI = "git://github.com/crash-utility/${BPN}.git \
++           http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=git \
+            file://7001force_define_architecture.patch \
+            file://7003cross_ranlib.patch \
+            file://0001-cross_add_configure_option.patch \
+@@ -25,8 +26,7 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
+            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
+            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
+            "
+-SRC_URI[md5sum] = "3f6e18d38821bb326700f1d6d43bcaec"
+-SRC_URI[sha256sum] = "114a83ca27c91e4321f6399d637a9d2270f72b9327e56d687c5fb139e903069b"
++SRCREV = "c0a2fc9d322cf0c5f569ce54e9201d2f586edb0c"
  
+ SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
+ SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
 -- 
-2.17.1
+2.7.4
 
 
