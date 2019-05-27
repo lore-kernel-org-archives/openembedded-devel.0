@@ -1,42 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
-	[209.85.222.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 901267E150
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 16:51:49 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id c70so4582076qkg.7
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 09:51:50 -0700 (PDT)
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D1E67E1D7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 May 2019 17:33:09 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id f10so202576wmb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 May 2019 10:33:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=sEK3Kc2fLZxyUf1Q4x548z4+4XZlwp3uZfdq2oNBW+Q=;
-	b=MY+7xJEW6brgsz9D9GG4g9G8fM+3AWgxjAPtZrlJu4ty1scGj5qmApB8hbhf3LPP6/
-	5Ows2MvwFDxKhIK3OAmoyF2W0vBak1EHUpTf3JKxy4VpbKXVebQ8+FwLn2qPtWOOWSuw
-	hb+1KP1tOmkRZM3Y+pbIErykS9nsO4lNYVOuJLkyYxkWA/bZ5tQQn1qMhF3aZdtywVxt
-	rErhRUL4VnMZa1HPEGNZQ4zfSvnshmQPe7j8Wm1rgQDtFfs67fjwORyxEEx7KduglaCG
-	dDWWhuLiCnEVpWt+fZBdXwXJHWy+NHAxTst6wqSFTXzrLwHeRiTEesmhukR0dg3I7lhi
-	UVQg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=UL3Nl1WLOO2def5/JVfIgNjhVx29/tOG0nEBOP5PNs8=;
+	b=UJKrS7IoYX4pK0+4q50o+LpMJf+x5NQvl0IyJQyOSQuQUsGRUb5pjwVx/NEwYvgLw9
+	78o35LTb720HNj8Hzj9WS7Qq5IPKmOERUJqovPbUz1HNSMSklpBJOz+r7dPznPP0k9eJ
+	QiYKbL4aTlt9m7yM4SixDznVYD/KdhUtfqXTCmDW7kgfeteLA1a/N5lKeB7I6xyhSovk
+	ExbowCvOTUrNVEP/+VwOUG0RQyZJnDZvJbRGoOtVhj3Umw0/2CuKc9GdGhjEZS4NZdOJ
+	pvn1guTyHxxIhckRiw5LXOtxWFUYJCR/b5w2RvlUauma4Hys9h1ISbiHvggJlhepHK0L
+	v15A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=sEK3Kc2fLZxyUf1Q4x548z4+4XZlwp3uZfdq2oNBW+Q=;
-	b=T4pz5AlhXQPS79hSYkIJ5NAsoHRaRVJ3+d3rCx8/Qw9Se26ldNqOSnd+kRK873VoZV
-	83+ak2LJul5HAaa4PF27eqA7wFPBTD3IGsBmOv6hYn4QuV77wjs2W1SVQLDMfXNqwTHj
-	+IwxPKwE5hLW7ExYdCZEBCZ/MHzg7yaGm46ZBUuBdoBmLuOJIjB2jAWU/uJQYN5WUfyE
-	rCj/5cA1qILCY48Nbs9Vr/7Vwl1WqgTncNcpKAtsaxOfuNfJUba4gpJEEoLVq0SDB3nW
-	6zI/Ne9eO4DOq4fXtPeo3/Eb9EDf2zYSBZPIcHiCUizkGtsqMO3sKGOk13szn0jMG/4F
-	/e9g==
-X-Gm-Message-State: APjAAAUmKRJL+OuQXvwuMIS9l2s/zwXngnW1gRPK0J5go9omNZIQu6+c
-	5XfWg78CJBjZOHDLFLorsMneQaJnNx5eC3QUFN9fEOT6
-X-Google-Smtp-Source: APXvYqwDJKKhDUE9kQcv3wXRvGgw53kf+F2XjTs/T3CGTMzw77vOsuLkRs5jc5eBnwAIhA+tY0d0v+cfMNGikdyQAnQ=
-X-Received: by 2002:ac8:26dc:: with SMTP id 28mr12152059qtp.88.1558975909987; 
-	Mon, 27 May 2019 09:51:49 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=UL3Nl1WLOO2def5/JVfIgNjhVx29/tOG0nEBOP5PNs8=;
+	b=QjWzd1rRtE+H09CW2RE56R6Rs4XDBxf3ZPuS3F3djy9ioNe+mYk2rnN/ZkqtcX3mxR
+	sbalvQIlbTrh5UiJyauscMCmD5FtxRGhvbkPftHD3HCvamkQj83bZzB2w5B+kkSdeMBg
+	YiQQJzlMZwP/9W7AOEFRI7+U5tKcnJWttT60V94aGnbmfAxXFBeXAkIYkyuuiosqDig6
+	k/kHJpA3mdGK3nySiDhjvim2cMqoWdMQIunn4PAVeQv+aZoa6ac+9hRXILzw7/1q/sGP
+	rfr17RLixRWt30xKWcJu3C++rtU2Pfwqc4+hEVH0d2uwMBvV4nhs979uJ2CMBv+TraQx
+	zw/A==
+X-Gm-Message-State: APjAAAWcFi3G8/oMWc6r/1+5E3oh4S8sSB7t5gqjNP5CtPrhnIy3/THM
+	4OLc38cHkJ3OTW8qS4Em0o+1w4QLQUTAgKnfXkE=
+X-Google-Smtp-Source: APXvYqwwos/OpRkpcEL6y3QxgSOWFK7zE5m3rp0ExC0n8yw/20aG7xIeqprkCAN3qJCiwoKoaWd8uDnIkth9tHi4svg=
+X-Received: by 2002:a1c:be12:: with SMTP id o18mr133923wmf.124.1558978389845; 
+	Mon, 27 May 2019 10:33:09 -0700 (PDT)
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 May 2019 09:51:24 -0700
-Message-ID: <CAMKF1sr9T0K71M5K4Qh+K-PrFv1dn5L0aNpn2hkN4usLY5hDpg@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Delays in patch merges
+References: <CAAfyv34HAOaAaO1cyiQbR8P6mQPp8p3gCT2jM=UyQDGfvV-fYw@mail.gmail.com>
+	<CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
+In-Reply-To: <CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Mon, 27 May 2019 19:32:57 +0200
+Message-ID: <CAAfyv34jJ362tu3x_8J1+FuV3zFpchkB8Ft9w-WERrxCNPxbvg@mail.gmail.com>
+To: Enrico <ebutera@users.sourceforge.net>
+Cc: yocto <yocto@yoctoproject.org>, Sergey Lapin <slapin@ossfans.org>,
+	Nicolas Aguirre <aguirre.nicolas@gmail.com>,
+	OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-sunxi maintained?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,15 +57,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 16:51:49 -0000
+X-List-Received-Date: Mon, 27 May 2019 17:33:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi All
+Hi Enrico,
 
-I will be on vacation and traveling for next two weeks in places where
-I might not have internet, therefore upstream patch integration for
-meta-openembedded layers upstream will be a bit slow.
+On Mon, May 27, 2019 at 5:44 PM Enrico <ebutera@users.sourceforge.net> wrote:
+>
+> Hi,
+>
+> i try to keep it maintained, but now i just have a lime2 for testing
+> on real hardware, and i don't have the resources to do test builds for
+> all the supported boards.
+> Your help would be welcome, i can't check right now if i have the
+> rights to add you as co-maintainer, anyway i will add you.
+Thanks I have few sunxi based boards so can do tests also on my setup.
+Pls ping me when you will add me. Thanks.
+>
+> Thanks for the help!
+>
+> Enrico
 
-Thanks
--Khem
+Marek
+>
+> On Mon, May 27, 2019 at 4:50 PM Belisko Marek <marek.belisko@gmail.com> wrote:
+> >
+> > Hello,
+> >
+> > I'm just curious if meta-sunxi is still maintained? I was contributed
+> > to layer back while and when look now thud branch is un-compilable
+> > (dri2proto not replaced) and warrior branch not created yet. There is
+> > 14 issues + 6 pending pull requests. Added maintainers also in CC. I
+> > think it would be good to have sunxi properly maintained as boards
+> > with sunxi processors are popular. I can give a hand as co-maintainer
+> > if necessary. Thanks a lot.
+> >
+> > BR,
+> >
+> > marek
+> >
+> > --
+> > as simple and primitive as possible
+> > -------------------------------------------------
+> > Marek Belisko - OPEN-NANDRA
+> > Freelance Developer
+> >
+> > Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+> > Tel: +421 915 052 184
+> > skype: marekwhite
+> > twitter: #opennandra
+> > web: http://open-nandra.com
 
