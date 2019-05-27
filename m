@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D15D7D69E
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DF907D69E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 14:22:02 +0000 (UTC)
-Received: by mail-pg1-f179.google.com with SMTP id w22so9199109pgi.6
+	Mon, 27 May 2019 14:22:03 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id t1so9206347pgc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 07:22:03 -0700 (PDT)
+	Mon, 27 May 2019 07:22:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=x4cGVK/WtK0oVUnw5KYUiG1nUmUThrYrh5OTDctW1Zk=;
-	b=mYnlf1mZbHF0JZ92Oy0Sgz95oP6RuDhrMioiCDotFGS43UCG7JzhyewJyJh0rGQXhm
-	M4PMFWhMWNghzkaYXKmhvZB68Ahfh6tmXGKkXADWCzYNJw7F6EEe5DYoS3RCrf5NKQrt
-	ZQKNBFgSacVOWE5KEw5XZP2tRY/BKiotFyi6ngl0akV9/+iDQZ4jKDoSQUoITTCpuAxH
-	rZro4/b8l0gAlB9S3R5XKwxbxunZkhoPrjD94Jx/2nJnm4Vhc1dRhaH6Kqyz/yU0g7Ko
-	hcHoBKN1PBcsRWwZh30W6aBEaM/RHniIZQJiW21T+Wvb1g4wwfPR8cavP9NiLB+ZLPDS
-	FkNg==
+	bh=G+3cw8oGdbSJ1CU/J0PBbfexYeT0JJSxSNRkCYxt9M4=;
+	b=gUvIIaEtSJTzUJj2UXaoo8CyNMdlmqvmvH/ihtXroOurSsACN0mzZ8ixBG+V9o3YgO
+	jXncCbLTZ6B2G3WYrEpig53nxX6rG+aK61YNsQnL8vRFd29kRUvsxN6cs4Uz9U9hWsxn
+	erYlXgskioByohLjQmodL9+bWkbSmYWbxU3ujB97eUIgHKBi1aqHMeSQvC2kSmWHqkXT
+	ijuqaELSQN03ZbEaQhXlgQR30XipJSWS+NwIjMTE6zUoQ2miNzhL4MYbvFfNUoxWOTVm
+	uS92cCPGx67GHHHAVmt/BpEm25St/oFeT4SCgbKqXHXgIMHXo7Akb9UlNzysGh8Pinmv
+	g+7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=x4cGVK/WtK0oVUnw5KYUiG1nUmUThrYrh5OTDctW1Zk=;
-	b=WNszCY0lIzLWDuQoOgSrQDQekLYoRgyz95IEWR2hjj475P0WHOZetmxQFJL6m+0rgE
-	sNWrzOlmscjk5Xf28fD95H8kMWpobQzIsG2Ev6g2XVXZVqpW4AV0rbRPyMv9jClYygNa
-	JlT+E3h3oIuEmKVO0yV9Ie4Mfcwxiyao50vdbmpu+59l0RuuY4ykx2gkLU4gC2qCzk4l
-	L0JCBbq9UWjsBPAAZLiL1fYXMN4BlPtafbtbIPVxSm3auC2Zg9wbkajQRBXP7APV9Xkj
-	FyPn6iW+qBLBRY5KFx3e5ONsswFcjofpiXSxo7IjSbiTjI3Ahq+4US7ZnobJxjitwIR6
-	HufQ==
-X-Gm-Message-State: APjAAAV4sXdh+O4/PmDNgDLNCuocYuc1QI32xexIrmzSujmz379vT0G1
-	U66SLGQ4G/1uFIMj5nQ/fD/rSNWo
-X-Google-Smtp-Source: APXvYqwHTC5dnpEMmE/AgNZlUrM6q7jveL+R3WCk9nYKFO5eJ+O6QVJ+Mivmwdd6UaeFo2PYHDPSMA==
-X-Received: by 2002:a63:1919:: with SMTP id z25mr1727121pgl.440.1558966923472; 
-	Mon, 27 May 2019 07:22:03 -0700 (PDT)
+	bh=G+3cw8oGdbSJ1CU/J0PBbfexYeT0JJSxSNRkCYxt9M4=;
+	b=rRpk7e65/b8oDsnfRBY+NRTqpscSgMhU9zRfpOOCZcc3lO46gd9nrKZE6xSiHbdraB
+	+4D0cDOlB10LxEdaL3zf3YroM4oYDHKOcsXVsIQDCb8RKBGrpAK8hEph8RZ7mwtPyf+I
+	RWXU98cZgbYH78e4YDvxmymatoFvHNcOOybmQYVzWfvowoqSMHX2VdAq1LCS2b0IEZnH
+	mmYxvluOOGwQaWSQiGAjz3E6rk0dp1QfM3ajAWSBF4YLQC1eFyhrjZuLPfaAqbiFGl+Z
+	qQbCctR20Z7hcrA71aAUAJqF0MRau7ysMDoEPJr2ECi4cqBJ0ja/hTko9koRUh+z5Hjt
+	Lx+Q==
+X-Gm-Message-State: APjAAAXwJEyTZlUGDPPPciMcaUcm7qNQ6PmTfXpwXfHgmH/K9NQDMYRI
+	qYG3HFPg22rulrnQlGecnYd+Q0qj
+X-Google-Smtp-Source: APXvYqyPdJQebfyRrBrbdX48fm/a+bx7GoTELyl5RODb4cWCsfpUze15OkPr9M+4oUgOx696rUPIyg==
+X-Received: by 2002:a62:d244:: with SMTP id c65mr99476118pfg.173.1558966924476;
+	Mon, 27 May 2019 07:22:04 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:6833:552f:fefb:d39])
 	by smtp.gmail.com with ESMTPSA id
-	11sm16902190pfu.155.2019.05.27.07.22.02
+	11sm16902190pfu.155.2019.05.27.07.22.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 May 2019 07:22:02 -0700 (PDT)
+	Mon, 27 May 2019 07:22:04 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 May 2019 07:21:57 -0700
-Message-Id: <d86834a5a12b6856694181afaca0dd8572ac39ae.1558966857.git.akuster808@gmail.com>
+Date: Mon, 27 May 2019 07:21:58 -0700
+Message-Id: <eb7e2899a1dfbb3c6863816f57025cc57c28219f.1558966857.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1558966857.git.akuster808@gmail.com>
 References: <cover.1558966857.git.akuster808@gmail.com>
-Subject: [thud 1/3] netkit-rsh: don't build under musl
+Subject: [thud 2/3] netkit-rsh: security fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,34 +59,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 14:22:02 -0000
+X-List-Received-Date: Mon, 27 May 2019 14:22:03 -0000
 
-From: Tom Rini <trini@konsulko.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Uses iruserok and ruserok which are GNU extensions available in glibc
-but not in musl
+Fix CVE-2019-7282, CVE-2019-7283
 
-Cc: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Tom Rini <trini@konsulko.com>
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2019-7282
+https://nvd.nist.gov/vuln/detail/CVE-2019-7283
+
+Patch from:
+https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../CVE-2019-7282-and-CVE-2019-7283.patch          | 33 ++++++++++++++++++++++
+ .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
 
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+new file mode 100644
+index 0000000..4381f5b
+--- /dev/null
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
+@@ -0,0 +1,33 @@
++From a7831a16c3e0e1463d5eb08a58af152cb75ca976 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Mon, 15 Apr 2019 06:05:58 +0000
++Subject: [PATCH] Fix CVE-2019-7282 and CVE-2019-7283
++
++Description: Fix CVE-2018-20685 and CVE-2019-6111
++Bug-Debian: https://bugs.debian.org/920486
++Origin: https://github.com/openssh/openssh-portable/commit/6010c0303a422a9c5fa8860c061bf7105eb7f8b2#diff-9f340c228413d5a9a9206ea2ed2bc624R1114
++
++Upstream-Status: Backport [Debian]
++[https://sources.debian.org/src/netkit-rsh/0.17-20/debian/patches/fix-CVE-2018-20685-and-CVE-2019-6111.patch]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ rcp/rcp.c | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/rcp/rcp.c b/rcp/rcp.c
++index ca61c18..77d8ff8 100644
++--- a/rcp/rcp.c
+++++ b/rcp/rcp.c
++@@ -740,6 +740,11 @@ sink(int argc, char *argv[])
++ 			size = size * 10 + (*cp++ - '0');
++ 		if (*cp++ != ' ')
++ 			SCREWUP("size not delimited");
+++		if (*cp == '\0' || strchr(cp, '/') != NULL ||
+++		    strcmp(cp, ".") == 0 || strcmp(cp, "..") == 0) {
+++			error("error: unexpected filename: %s", cp);
+++			exit(1);
+++		}
++ 		if (targisdir) {
++ 			static char *namebuf;
++ 			static int cursize;
 diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-index 03dd963..d034cd8 100644
+index d034cd8..6f203c5 100644
 --- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
 +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-@@ -39,6 +39,8 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
- PACKAGECONFIG[pam] = " , --without-pam, libpam, libpam"
+@@ -16,6 +16,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=
+             file://netkit-rsh-0.17-rexec-ipv6.patch \
+             file://fix-host-variable.patch \
+             file://fixup_wait3_api_change.patch \
++            file://CVE-2019-7282-and-CVE-2019-7283.patch \
+ "
  
-+COMPATIBLE_HOST_libc-musl = 'null'
-+
- do_configure () {
-     ./configure --prefix=${prefix} --exec-prefix=${exec_prefix}
-     echo "INSTALLROOT=${D}" > MCONFIG
+ SRC_URI[archive.md5sum] = "65f5f28e2fe22d9ad8b17bb9a10df096"
 -- 
 2.7.4
 
