@@ -1,49 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 98F317E15F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 17:49:03 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id y11so5068588pfm.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 10:49:05 -0700 (PDT)
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E8A17E1FC
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 27 May 2019 17:49:46 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id v9so3044359pgr.13
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 27 May 2019 10:49:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=9NpKF8Eq5Aui0PODLKBBBNtL7J/n/3hqx5FcDU5qmm4=;
-	b=F0vikh41DSIGqtMirUd0jHSRYVBmPi2sLEIIcVgAJ3a6oDr9Gui2Tb3CJcfllPqSFs
-	woUKI4WlR/dTeJqqgQc8/HT3HDOiZAHPnjLjcZyE+NO/IHD6kuVrwSfkXlLhG8WsVWWI
-	altoI0SG84AWI7IgLwebjOe3CkjrFLthlQWuYnjPHuuxvllERBMog5tmzz5+fNWaEjId
-	FkLPM36I2nl37XxKsYK3mc2t/0lXE9OQ79qWtjeJFRh+BXMdiYEWKOwTen3ZftqPK/xu
-	l80zt5/o720UhupaJqMjOJPjht1L7Z+/Gj9cs8K1CEdpYeIEdSicxTkeMstB9+lx6+tk
-	KKjw==
+	bh=S4sTtoQqEFEUxYhwDNrziyqgJ7/EUMBDkq0OaeIPeW4=;
+	b=Vfj9gsWrmoBDWhKI+m6UDyrHNRgqqiUajYzXDeB2EV994VWSGJOiIihZ1CS60Ffpi7
+	3awW290ncAHeWPpL9Mn67B2ANW7qTTL/0jKaI2v80Kykj9OMnWB139d3WzD0zPYLsx/6
+	mlE0c/9dvjPDlB2RVkVaoiWt35OtT/AjOPWUe4kqP5qaFiISmDsEPtGKpuUXzzPR0KuX
+	doRzSeU4FAC5QNdShR45l8TMrLhX+XO7REsXgblL3Lrp297yu0J2ePoZTz+exUOwOl0N
+	VgZeiIJU6vwLYnuDZ249TTYQGdBiUE0UST+w60hDXHAlYsAo+u25XzRNe9/zV4VLKJmN
+	hLWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=9NpKF8Eq5Aui0PODLKBBBNtL7J/n/3hqx5FcDU5qmm4=;
-	b=jYrekYuWEXFoOntX5bwkWAlUtwdxH7vJbt7tjY5eyTkHSEuZN/Yk7AEtZgFtmLZZqK
-	ahUQObw0fgz6EXhmBWOw/OFTLJOzRsOVn38chdCCWucQojNlVHyalIXaWHHRC1uLl0X9
-	F3dttiXegvmJHERQt4rJO2m26ttGy0SnR1T/cm6XbB96IQlEKjxXuIRr4Du+5Ltb2jPK
-	Y9jHErVuwTtBH6tE9tou7MavemkTGQD9yNtSjmN1NJmY+dgRtiRp3IvvkxpPbBPjVRfe
-	3FUtVHu16qodHF4Opw+CfGHWt1UwzzEeOnaympTBiFmbY2E/aH+d7Ae+h6FLnoacpnKG
-	bHCg==
-X-Gm-Message-State: APjAAAUOaujjslb4qEVaEqsDhjLbuhrrQ3DBHUOTARpgqmpPYkYF8kQ3
-	IuD6CF81ecrlBzA1wxSrD62Z/wUJ
-X-Google-Smtp-Source: APXvYqzFcY2GIBB8AP7pDUURKIc4SwU69xnJIWyq1bWgk0aH12V2LEKC7Vtlts++DqQcG4JbqIOOrQ==
-X-Received: by 2002:a65:56cc:: with SMTP id w12mr27449551pgs.415.1558979344444;
-	Mon, 27 May 2019 10:49:04 -0700 (PDT)
+	bh=S4sTtoQqEFEUxYhwDNrziyqgJ7/EUMBDkq0OaeIPeW4=;
+	b=ZDu/5gC/f6qnEwkfgKWKFnQQ5GVL9LOCydy9upzORHCrxWW2LEbQBji7Jki+dzabZ7
+	ZQJ+56QwwLhDhY2ZaiNF6pLnh2LBAdRpFoxJoyjbLNClc6NpoYeOYyzzWIUH69fD2aRR
+	Zak9L+RGVXV84dqML0AhyfDSg3uchmPT2NGETjEmf5CWxicJH6kM1HoO1ShycjuJnS96
+	kbTGlQZQ2/+mb1PwrUv1oe41BEPsn4eotme2xavGKSaai8nlQ7YkS6jH7s8uYTOhGcVg
+	vu8zQddvLgEqYf8A3Aa3uJAUXcYmArosQfJqpDVsKsh3J9jPDkT+EhVA+4eRPNVbKIcV
+	GNFg==
+X-Gm-Message-State: APjAAAW0DgH0H3dY8I5OvltR5dNUuG4sGi1mDmjEdxD/HfWWorMkECj9
+	l+ahVEgdG5bQLx4/YaxKZQDiN9qL
+X-Google-Smtp-Source: APXvYqxtpQp4BXw8WvZCwLaXsVhIu3sld7gpn6riYtzXPF9VdqroJqR2i0udK+vlVGlW1PnxSGAM3w==
+X-Received: by 2002:a65:64c9:: with SMTP id t9mr20139176pgv.221.1558979387575; 
+	Mon, 27 May 2019 10:49:47 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:6833:552f:fefb:d39?
 	([2601:202:4180:c33:6833:552f:fefb:d39])
 	by smtp.gmail.com with ESMTPSA id
-	k22sm11610291pfk.54.2019.05.27.10.49.03
+	i12sm12284295pfd.33.2019.05.27.10.49.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 May 2019 10:49:03 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>
-References: <cover.1558966078.git.akuster808@gmail.com>
-	<20190527173704.GB27759@localhost>
+	Mon, 27 May 2019 10:49:47 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+References: <CAMKF1sr9T0K71M5K4Qh+K-PrFv1dn5L0aNpn2hkN4usLY5hDpg@mail.gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,14 +89,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <b73d860b-7c42-2e69-a07f-594cb43ca158@gmail.com>
-Date: Mon, 27 May 2019 10:49:02 -0700
+Message-ID: <f69d8e4b-1603-e599-a56e-2b65a0eeb27e@gmail.com>
+Date: Mon, 27 May 2019 10:49:46 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190527173704.GB27759@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 00/34] Warrior pull request
+In-Reply-To: <CAMKF1sr9T0K71M5K4Qh+K-PrFv1dn5L0aNpn2hkN4usLY5hDpg@mail.gmail.com>
+Subject: Re: Delays in patch merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,28 +108,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 17:49:03 -0000
+X-List-Received-Date: Mon, 27 May 2019 17:49:46 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 5/27/19 10:37 AM, Adrian Bunk wrote:
-> On Mon, May 27, 2019 at 07:09:06AM -0700, Armin Kuster wrote:
->> ...
->> Andreas Müller (7):
->> ...
->>   gnome-desktop3: set correct meson gtk doc option
->>   evince: add patch to fix build with recent gobject-introspection
->> ...
-> You wanted to drop these.
-correct.  gone now.
+On 5/27/19 9:51 AM, Khem Raj wrote:
+> Hi All
+>
+> I will be on vacation and traveling for next two weeks in places where
+> I might not have internet, therefore upstream patch integration for
+> meta-openembedded layers upstream will be a bit slow.
+
+including stable?
 
 - armin
 >
-> cu
-> Adrian
->
+> Thanks
+> -Khem
 
 
