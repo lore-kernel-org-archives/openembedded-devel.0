@@ -1,49 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A4337D1F9
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D15D7D69E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 14:22:01 +0000 (UTC)
-Received: by mail-pf1-f182.google.com with SMTP id s11so9659440pfm.12
+	Mon, 27 May 2019 14:22:02 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id w22so9199109pgi.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 27 May 2019 07:22:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=c7yh3Kv2dvv3xisPAqKLGmNTZbI8QK4Jq0C/fsHYd9U=;
-	b=I8QmoWi7fmHFSHVq6Gf3lmViuT7iF+jtJ0ZVaDkNOXqRFmw2YbrBKIwlGEPuRkV48T
-	GCWuFL5mzOQqvsrJ/bz9lM1gwsdSDS96YN77p3UAVqQr7WeM/5SVRdP5ilCHF6E7cWTv
-	ENd5Gl1PS7u0ZocmEmegoW/YZ8hnX2xL7O87r12+hFC8oo/VwgrVdVN2j+Nj200Z5ixj
-	ehz9DG/hF1h0quQT0mHhGuCpIbolKFuoiDrDpDSfaSV2ybQgClapc3ViBX9Ud5Sok+Vl
-	NMncPwCJCchIiRgcXytIth5OoMrxMBtJou/qelVG1F+xWrVe7mrT9RFAh36OX5+h9+XJ
-	VbVg==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=x4cGVK/WtK0oVUnw5KYUiG1nUmUThrYrh5OTDctW1Zk=;
+	b=mYnlf1mZbHF0JZ92Oy0Sgz95oP6RuDhrMioiCDotFGS43UCG7JzhyewJyJh0rGQXhm
+	M4PMFWhMWNghzkaYXKmhvZB68Ahfh6tmXGKkXADWCzYNJw7F6EEe5DYoS3RCrf5NKQrt
+	ZQKNBFgSacVOWE5KEw5XZP2tRY/BKiotFyi6ngl0akV9/+iDQZ4jKDoSQUoITTCpuAxH
+	rZro4/b8l0gAlB9S3R5XKwxbxunZkhoPrjD94Jx/2nJnm4Vhc1dRhaH6Kqyz/yU0g7Ko
+	hcHoBKN1PBcsRWwZh30W6aBEaM/RHniIZQJiW21T+Wvb1g4wwfPR8cavP9NiLB+ZLPDS
+	FkNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=c7yh3Kv2dvv3xisPAqKLGmNTZbI8QK4Jq0C/fsHYd9U=;
-	b=dplndy8MlYNvlcdmX30bLR58y+Tr7Yxa+Y1v6UK+OfmsYaNC81gjsHP13TKKZXxcME
-	GgDZOGYLFL6KXUD91Ro0BAvxk1V1GNEgfNF+fNI8mbA63nab3W1YS28nPDisrvtL0HhW
-	AYOzKnxLFk7GWAC/Wq5JL4eDfDf+cjgEQ/OqyG/xJ5RyItZobM9M0uAfdIzTX1nPKOSd
-	Fx2ri3ekr26umxPUAJ/NHPgkZfbHJk2tbzB+SbFp12CAW8GgS/gtcgYBabQCoDnLbKHz
-	0WwoG3BSgcSikOu0Cm6yZ7XBOCbz7waSo11XTJ90CWkav0R7VxOZNSUpBviX9nRihwlj
-	koTQ==
-X-Gm-Message-State: APjAAAUd+UIkMW9ieq6gNbO2EgPadDaHC/EDPnzZ47T3OLLAL90CcQvQ
-	2BLaDcDnrUtJRX3H5PYVrHuVKf1a
-X-Google-Smtp-Source: APXvYqypa38FEDeF35Q0dOHjhRFpI/rpfIWp/WiTirhHTPTGzvkZGKv4calZynG5IbM8ZkvzRcgriA==
-X-Received: by 2002:a63:224a:: with SMTP id t10mr13256657pgm.27.1558966922526; 
-	Mon, 27 May 2019 07:22:02 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=x4cGVK/WtK0oVUnw5KYUiG1nUmUThrYrh5OTDctW1Zk=;
+	b=WNszCY0lIzLWDuQoOgSrQDQekLYoRgyz95IEWR2hjj475P0WHOZetmxQFJL6m+0rgE
+	sNWrzOlmscjk5Xf28fD95H8kMWpobQzIsG2Ev6g2XVXZVqpW4AV0rbRPyMv9jClYygNa
+	JlT+E3h3oIuEmKVO0yV9Ie4Mfcwxiyao50vdbmpu+59l0RuuY4ykx2gkLU4gC2qCzk4l
+	L0JCBbq9UWjsBPAAZLiL1fYXMN4BlPtafbtbIPVxSm3auC2Zg9wbkajQRBXP7APV9Xkj
+	FyPn6iW+qBLBRY5KFx3e5ONsswFcjofpiXSxo7IjSbiTjI3Ahq+4US7ZnobJxjitwIR6
+	HufQ==
+X-Gm-Message-State: APjAAAV4sXdh+O4/PmDNgDLNCuocYuc1QI32xexIrmzSujmz379vT0G1
+	U66SLGQ4G/1uFIMj5nQ/fD/rSNWo
+X-Google-Smtp-Source: APXvYqwHTC5dnpEMmE/AgNZlUrM6q7jveL+R3WCk9nYKFO5eJ+O6QVJ+Mivmwdd6UaeFo2PYHDPSMA==
+X-Received: by 2002:a63:1919:: with SMTP id z25mr1727121pgl.440.1558966923472; 
+	Mon, 27 May 2019 07:22:03 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:6833:552f:fefb:d39])
 	by smtp.gmail.com with ESMTPSA id
-	11sm16902190pfu.155.2019.05.27.07.22.01
+	11sm16902190pfu.155.2019.05.27.07.22.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 May 2019 07:22:01 -0700 (PDT)
+	Mon, 27 May 2019 07:22:02 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 May 2019 07:21:56 -0700
-Message-Id: <cover.1558966857.git.akuster808@gmail.com>
+Date: Mon, 27 May 2019 07:21:57 -0700
+Message-Id: <d86834a5a12b6856694181afaca0dd8572ac39ae.1558966857.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [thud 0/3] Patch review for thud
+In-Reply-To: <cover.1558966857.git.akuster808@gmail.com>
+References: <cover.1558966857.git.akuster808@gmail.com>
+Subject: [thud 1/3] netkit-rsh: don't build under musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2019 14:22:01 -0000
+X-List-Received-Date: Mon, 27 May 2019 14:22:02 -0000
 
-These are being backported from Warrior-next
+From: Tom Rini <trini@konsulko.com>
 
-The following changes since commit f6b21313abee0fc53b77a7e977f3fa54a8428118:
+Uses iruserok and ruserok which are GNU extensions available in glibc
+but not in musl
 
-  ccid: fix SRC_URI (2019-05-26 09:09:32 -0700)
+Cc: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-are available in the git repository at:
-
-  https://git.openembedded.org/meta-openembedded-contrib stable/thud-nmut
-  http://cgit.openembedded.org//log/?h=stable/thud-nmut
-
-Qi.Chen@windriver.com (1):
-  netkit-rsh: add tag to CVE patch
-
-Tom Rini (1):
-  netkit-rsh: don't build under musl
-
-Yi Zhao (1):
-  netkit-rsh: security fixes
-
- .../CVE-2019-7282-and-CVE-2019-7283.patch          | 35 ++++++++++++++++++++++
- .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  3 ++
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
-
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+index 03dd963..d034cd8 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+@@ -39,6 +39,8 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG[pam] = " , --without-pam, libpam, libpam"
+ 
++COMPATIBLE_HOST_libc-musl = 'null'
++
+ do_configure () {
+     ./configure --prefix=${prefix} --exec-prefix=${exec_prefix}
+     echo "INSTALLROOT=${D}" > MCONFIG
 -- 
 2.7.4
 
