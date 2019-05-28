@@ -1,48 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 16CFF7E19B
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-it1-f178.google.com (mail-it1-f178.google.com
+	[209.85.166.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FF547D6A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 03:33:58 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id m18so20394531qki.8
+	Tue, 28 May 2019 06:19:47 +0000 (UTC)
+Received: by mail-it1-f178.google.com with SMTP id m140so2195718itg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 20:34:00 -0700 (PDT)
+	Mon, 27 May 2019 23:19:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8YDEmSOY1oYzs6gtFvWa0niNl1x0p6GSUiEPWaiCqyA=;
-	b=Z5tVDOmf9Giv6pLbFbyvlwcLB/mr5smbYBvd6njhNVsE2k909BaVU+Hx53IRwVtZnG
-	Ekiprcm6KIrUeI5/47Nx7FW4CHyOd5tF+s8TCgv3cWJxt8ta54beMXRd/mbhhLjvAZqg
-	9SCM+O52Vf6XsPfoo2TLrf4FRz7USi1DcLNLbAqk5yUVddpaL/cRl/ahXJrNBbZpp/iV
-	FeEAAr2KNAbHECu+pG0Hz0Dn5/q5gNPXbuf0rBuhJdt/4dyWJ2Lfzpl0IRb6yGbSy71f
-	0Yk+6Mys2YVbh3Vhp1EqAZpxT0tXrzCTud4ioxdCdN1jr3mIKKg5CB/DbceCQ+K958EO
-	PTMw==
+	:cc; bh=nhC2m6vSgxrXIZVdFlRqr7PNBNbJYXGuVRp+s3MyjgI=;
+	b=Z1SxfCFbL1Ggn9euKcGDHmc5Tn9ccKt7QN5RkMK8/URo0fY4/LjMDi6lznWH+kRKXe
+	VMJxDR0PsUTEPo3UF/CfD4K83XjrI0hD2CISRGwbxUhwlyxw08W10e7AI2xnPPOMtKWX
+	K25x15usTDUCpjQiT2tCxp7X79mPnSYwuKn5mcWB96I29HKF7p/dg6p2spO5y8J6HLTD
+	sEzb/T651/7ZotZBwFtbftnP/IuwyG340wZOPk76Uoya7DI/k/mHALh+BEgTN6DY6KEA
+	FnlFXNMNHd3qmeDjqdEfR6xpn6TpQoTsf/wBIH5V2hyKt8iOSkdYSZqv1hqkEIk23N6X
+	3rkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=8YDEmSOY1oYzs6gtFvWa0niNl1x0p6GSUiEPWaiCqyA=;
-	b=tIpSQmx3FPMTi111Ert4e2ZMAS+1Nrcopmz8x6x3aAZsoznbVE8iumXBhrkkJG3Ic4
-	vxye2JIUNtpZKdLB/qQybNUoJuKQbOKcI3X577nkLad7G2mUb4AUf4/sfniAh9GKkZwy
-	lkkzZQB7XlftXdy8/LiQ+VYMh8IV7oHyBWbbHfzEeNejCcDOI0WVVLrPerO0v2ia72kv
-	9B9jqhCS9lOUO+Ll+kDi/zJl3lI9yQnhx6TyPo8wHSgYLHGuPZny9+cOjkyQJjOzkHYc
-	cY220sJ9MveCR7p23NIEZQVR+qvKkWFuFXei9EW8YSYbvpyD2zhpZT5TOsytq43edF89
-	ZqQA==
-X-Gm-Message-State: APjAAAUV+FI1PXvaMNn4MH7TeXbUiO8aiPtGA3e4WcC8fiNEdOQRHy9N
-	wv1MEmf67ADeaqvx+aV3Bf9uPfhwAUnWilDeOSE=
-X-Google-Smtp-Source: APXvYqzI71tbZ4pANLfVfbB28ZXA+l2Aq1iv3Q1BYphPTr00cjBGu7g5UM08xhlqsLiiNloezWHIN9jxq/vjHJNEfAs=
-X-Received: by 2002:a0c:876c:: with SMTP id 41mr78051479qvi.175.1559014439685; 
-	Mon, 27 May 2019 20:33:59 -0700 (PDT)
+	bh=nhC2m6vSgxrXIZVdFlRqr7PNBNbJYXGuVRp+s3MyjgI=;
+	b=dmo6M97Disru2bPwn/6xJ095nouGHrzgxAcqVwfNwDDxqjyLOlalmfObSozjlF8yiA
+	CWSY7i1ESHB4lXNU5rLWSy9CEyvipu6njhyL1itYxFYjRlD2171X8E2G0IGGWM1+huUF
+	hcGov/vymVwe7VhkgNTxpc0INlp9etletXVi6xGk1eRWHWAbZejA0HcblVRPgDSf2IMM
+	dWUG/3b1aj7Z8loDw5DFnvvTc3NxTWn4B4OmL53OLfgskOhIAQckXs4CuMFpjX2JHwmJ
+	sQ2iTg/R5D6BbTw8I69yq9S5H5qydRbTIDeLUykw85IuhRLdX3W9n0PdFCFw/I3Fvikq
+	DQ/Q==
+X-Gm-Message-State: APjAAAVdH6o/6Wyift4paZbCGY3XoNwLT9Cl//VZNHf41AZ3MS/sq8RC
+	+Xq+1OpkJvRJDT70naY+xxd0V4ytsQb6qZ6zheQ=
+X-Google-Smtp-Source: APXvYqy05XCRnYkJKlnjEZz2xde0sQA4TJ4b0WwHmqsnMD5zbbFm2X5Mbhwh43XRVz9Q0Yfl6GEMmq/ilXKv2lVwgeg=
+X-Received: by 2002:a02:a806:: with SMTP id f6mr5591416jaj.74.1559024388320;
+	Mon, 27 May 2019 23:19:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190527100610.8944-1-ankit.tarot@gmail.com>
-	<CAMKF1srM7s8F-i+R+pqOwiizg7kUce8seP66vvwrvC_av0p-Kw@mail.gmail.com>
-	<CAM_RqkPkOp87iszm7Vf5Cv6Ap2-usP9QJGD_1xHzukG2m3qUyQ@mail.gmail.com>
-In-Reply-To: <CAM_RqkPkOp87iszm7Vf5Cv6Ap2-usP9QJGD_1xHzukG2m3qUyQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 May 2019 20:33:33 -0700
-Message-ID: <CAMKF1sqN-XUboz7y+ObSaJJYfEM1qicS4FZBKyO2D2yyt6NNmw@mail.gmail.com>
-To: Ankit Navik <ankit.tarot@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] safec: Initial recipe for safe C library
+References: <1554298095-26709-3-git-send-email-vincent.prince.fr@gmail.com>
+	<20190528032730.lzggdqsjix56r6fo@apollo>
+In-Reply-To: <20190528032730.lzggdqsjix56r6fo@apollo>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Tue, 28 May 2019 08:19:36 +0200
+Message-ID: <CAB2nKc8S-2WawRE+TqgnAqJESJv_UXci7WmrNA10rVMhhMt3cw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe,v2,2/3] cppzmq: bump version 4.2.3 => 4.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,69 +56,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 03:33:59 -0000
+X-List-Received-Date: Tue, 28 May 2019 06:19:47 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 27, 2019 at 7:40 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
->
-> Hi Raj,
->
-> On Mon 27 May, 2019, 21:10 Khem Raj, <raj.khem@gmail.com> wrote:
->>
->> On Mon, May 27, 2019 at 3:06 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
->> >
->> > Add generic recipe for safe C library.
->> > This library implements the secure C11 Annex K functions on top of most libc
->> > implementations, which are missing from them.
->> >
->> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
->> > ---
->> >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
->> >  1 file changed, 15 insertions(+)
->> >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
->> >
->> > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
->> > new file mode 100644
->> > index 000000000..ad3c4ba74
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
->> > @@ -0,0 +1,15 @@
->> > +SUMMARY  = "Safe C Library"
->> > +
->> > +LICENSE  = "safec"
->> > +LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
->> > +SECTION = "lib"
->> > +
->> > +inherit autotools pkgconfig
->> > +
->> > +S = "${WORKDIR}/git"
->> > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
->> > +SRC_URI = "git://github.com/rurban/safeclib.git"
->> > +
->> > +COMPATIBLE_HOST = '(x86_64|i.86|arm|aarch64).*-linux'
->>
->> is it limited to these architectures ?
->
->
-> I have not verified for mips. Since I didn't have target to verify.
-> But let me check, whether it is feasible for mips or not.
+Hi,
 
-Sure, qemumips would be a good target.
+It was a mistake in v1 and v2, latest release is 4.3.0 which was corrected
+in v3.
+Is it ok for you?
 
+Rergards,
+Vincent
+
+
+Le mar. 28 mai 2019 =C3=A0 05:27, Khem Raj <raj.khem@gmail.com> a =C3=A9cri=
+t :
+
+> On Wed, Apr 03, 2019 at 03:28:14PM +0200, Vincent Prince wrote:
+> > Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> > ---
+> > Changes in v2:
+> >  - Remove git SRCPV from PV
+> >
+> >  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> > index 9aff59c..95b5215 100644
+> > --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> > +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> > @@ -4,8 +4,8 @@ LICENSE =3D "MIT"
+> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddb174eaf7b55a34a7c89551197f=
+66e94"
+> >  DEPENDS =3D "zeromq"
+> >
+> > -SRCREV =3D "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
+> > -PV =3D "4.2.3+git${SRCPV}"
+> > +SRCREV =3D "213da0b04ae3b4d846c9abc46bab87f86bfb9cf4"
+> > +PV =3D "4.3.1"
 >
-> I'll keep you posted
+> Can you rebase this on top of latest master and resend, I merged an
+> older patch which bumped it to 4.3.0
 >
-> Regards, Ankit
->>
->>
->> > +
->> > +RDEPENDS_${PN} = "perl"
->> > --
->> > 2.20.1
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >  SRC_URI =3D "git://github.com/zeromq/cppzmq.git"
+> >
+> > @@ -13,6 +13,8 @@ S =3D "${WORKDIR}/git"
+> >
+> >  inherit cmake
+> >
+> > +EXTRA_OECMAKE =3D "-DCPPZMQ_BUILD_TESTS=3DOFF"
+> > +
+> >  PACKAGES =3D "${PN}-dev"
+> >
+> >  RDEPENDS_${PN}-dev =3D "zeromq-dev"
+>
 
