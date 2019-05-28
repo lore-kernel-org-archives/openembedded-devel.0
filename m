@@ -1,53 +1,56 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id EED866D6F5
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id EF1267E01C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 15:25:30 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id c5so8482904pll.11
+	Tue, 28 May 2019 15:37:51 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id w13so12387308wru.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 08:25:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=EjlPGq4lEZkhpwQwnO9vMD9IgISpfSg3bplyJR2u+SM=;
-	b=UWjw1BEm/b/O/KPBwf1cNluacA/bZHqpnNhlrd60PYcz+9ZbanOcNi0WdyO0NG4gu1
-	JHdQcagKHOm+g6lzhMyCUjaqpNP7XFbPOcyNqzzK7lrctyAST/VupD2mA047ZLIVXgW1
-	ZxBz2LI5LQqFJyyzgoX1AgzchvW16G3GLuyoVHArgqHcCU06DoHH40jt1h2isLeo1/F2
-	wNvfstBuK3vJRRBfggQmsG9J4kYjk4kSwm0W4AWQZhI4IJwkc/ARLZbc/5MgprHcPLtV
-	0/JmYDRAMHjIZ82iW5BQzjPNfW8XngI36nyHRbuObxHJhKLpmG4HwopJcmhbdlQNZceQ
-	iRxw==
+	Tue, 28 May 2019 08:37:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.ro; s=google;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=cSAVmGt5pHb2HkGfMlF2MSkv5n7EltTfPSxVQrOUF4M=;
+	b=D5w8kV8XuFwdDU2G79ESOtiD7aW/v7l3J607vTKdsBwZRX3d9lcHzEJfE2Z6N2V78P
+	+JsUZfZewn84bX++smxLCwbgAYmcYUCoDOLuz9LM31CE+imlYHmixGwApoRR/aunh4eG
+	QeQe/4qDrPfXaz/G3iBpDDCdl4wzyrZ20CTw3xQbLvDvxt6DDSXKMZaFtTmzR6Fyvp+8
+	4kFpkGtXwFKzZ9vxofZR+4NzVwu2MG7rZEeJ+44Kz+dPTI7nRXL1HKIWlW66RRbz7IMC
+	i4isrSw/6QKc5VGcIsICpTikWn6HyMPb1Z5fX4qeUO3Fe9d5fxe34mR0X3i13RHF/6Sz
+	dnuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=EjlPGq4lEZkhpwQwnO9vMD9IgISpfSg3bplyJR2u+SM=;
-	b=DDaCA3n6FHx54/8LvxLr0lgrtSCkHsh5dZjInMP6Ca6X+HThVNJNjhCfzwBqUNRfGv
-	WV647clX+o10z+73lE6Y0UXKlKHZUAtoxXb23WqW+UXeaIrnZxd7ZNq67PrZqrINrD+Q
-	cmOhm3lSxahIeXcxHd6v3ckNJdMqNKxN20obaPeizbvegHpbtZjaF59lkutWc+bsnvUh
-	N7Mmuu5LkjuGZECJksCAIhjcuCtBXLaDLRv0mfgvnb6wvPlSZo1QXDob0ijnGnauad5M
-	0XwELIX+ia8ZJPwQ8gq4hnLqXUI4lTfKHCGBM+NJ9vYwJ0E2d68egecs3Y0bwTNl/ZYu
-	/EJg==
-X-Gm-Message-State: APjAAAVtXQ2GKXX6Jt4N4EuApzRMzkoNmSFyw70qoSMA1u/3IV4G7RtU
-	9bE8JM4Id3hkhwAJwgtefub+YUrd
-X-Google-Smtp-Source: APXvYqyteJ+WTq1veFX0YIPaZcNkJJz0bcF7oY9qwnW5SM4D9RjCWwIoawy2n1wIw4pE0Xn5W5bhaQ==
-X-Received: by 2002:a17:902:ba8c:: with SMTP id
-	k12mr34664576pls.229.1559057131717; 
-	Tue, 28 May 2019 08:25:31 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:c33:88b0:7832:d929:cf73])
-	by smtp.gmail.com with ESMTPSA id
-	124sm15927295pfe.124.2019.05.28.08.25.31
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 28 May 2019 08:25:31 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 May 2019 08:25:21 -0700
-Message-Id: <cover.1559056652.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=cSAVmGt5pHb2HkGfMlF2MSkv5n7EltTfPSxVQrOUF4M=;
+	b=RLxImkB6Z11qS+82n26AjLZScckBIqrxyoCFOhWbIvCOdX9rCNu2dsRShu7zRbKn4q
+	6NSBMUg99WDApcsE42eFeaL1BsgKXlXLSD1D096eTlOgIgf+WlWHz7Yas9lfod6e9+70
+	cap48UK8XG6OfnsWGpwYJB0W0SzUiGc5q8MQ32qigI7p8a6fVWlPR1zq5whr88iQNwak
+	9eXVFIS84caVLau1iBFu8bHT60n36vimqJOLRllAqruuySEahYcPrNMC2g7EfuxelCjx
+	zI9xMiPJXk8WRMJzUCDCZOV2fEAeqk0fv5b7TCeUTjpsEN25d140Au1UbvhImsmvyg4/
+	BWCw==
+X-Gm-Message-State: APjAAAUibze/YICivoFm38zhAbG9QANQHWFwvA+/xmo/bm9cU0pqe0lz
+	9RDaFip0AGQ6BEuwVeGHRM0VJDPAACU=
+X-Google-Smtp-Source: APXvYqwwpl7Z6iuAgRRqbrIrEkfmlT0pNB28xjoN+yponScLYpj1yhQDLRGQwukVnpYqAak6o4aR6Q==
+X-Received: by 2002:a5d:440d:: with SMTP id z13mr17027484wrq.263.1559057872261;
+	Tue, 28 May 2019 08:37:52 -0700 (PDT)
+Received: from [10.100.100.101] (host90-152-4-101.ipv4.regusnet.com.
+	[90.152.4.101]) by smtp.gmail.com with ESMTPSA id
+	g11sm11559962wrq.89.2019.05.28.08.37.50
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 May 2019 08:37:51 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190522131345.10392-1-andrei@gherzan.ro>
+	<CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Message-ID: <119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
+Date: Tue, 28 May 2019 16:37:49 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
 MIME-Version: 1.0
-Subject: [PATCH 0/7] Thud pull request
+In-Reply-To: <CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] networkmanager: Update to 1.18.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,57 +63,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 15:25:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 May 2019 15:37:52 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-These are good to go for thud.
+On 28/05/2019 16.13, Khem Raj wrote:
+> Hi Andrei
+>
+> The musl patches need to be forward ported as well. They dont apply
+> cleanly anymore on top of this update.
 
-The following changes since commit 4cd3a39f22a2712bfa8fc657d09fe2c7765a4005:
-
-  rtmpdump: Switch to using GNU TLS instead of openssl10 (2019-03-24 18:44:58 -0700)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded thud-next
-  http://cgit.openembedded.org/meta-openembedded/log/?h=thud-next
-
-Andrej Valek (1):
-  ntp: upgrade 4.2.8p12 -> 4.2.8p13
-
-Armin Kuster (1):
-  mariadb: update to 5.5.64
-
-Martin Jansa (1):
-  ccid: fix SRC_URI
-
-Nicolas Dechesne (1):
-  cpupower: remove LIC_FILES_CHKSUM
-
-Qi.Chen@windriver.com (1):
-  netkit-rsh: add tag to CVE patch
-
-Tom Rini (1):
-  netkit-rsh: don't build under musl
-
-Yi Zhao (1):
-  netkit-rsh: security fixes
-
- .../CVE-2019-7282-and-CVE-2019-7283.patch          | 35 ++++++++++++++++++++++
- .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   |  3 ++
- .../ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb}       |  6 ++--
- ...b-native_5.5.62.bb => mariadb-native_5.5.64.bb} |  0
- meta-oe/recipes-dbs/mysql/mariadb.inc              |  4 +--
- .../mysql/{mariadb_5.5.62.bb => mariadb_5.5.64.bb} |  0
- meta-oe/recipes-kernel/cpupower/cpupower.bb        |  1 -
- meta-oe/recipes-support/ccid/ccid_1.4.24.bb        |  4 +--
- 8 files changed, 45 insertions(+), 8 deletions(-)
- create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/CVE-2019-7282-and-CVE-2019-7283.patch
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p12.bb => ntp_4.2.8p13.bb} (96%)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.62.bb => mariadb-native_5.5.64.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.62.bb => mariadb_5.5.64.bb} (100%)
+Seems like. So all the contributions now need to go through local musl
+and glibc testing? This sounds a little bit of an overhead and might
+discourage people in contributing because usually everyone is working on
+one libc variant. Just raising it as a concern. As per this specific
+case, I'm going to fix it and push a V2.
 
 -- 
-2.7.4
+Andrei Gherzan
+gpg: rsa4096/D4D94F67AD0E9640 | t: @agherzan
 
 
