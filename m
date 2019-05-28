@@ -1,49 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A3B0D7DF2B
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id CEEB87C5FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 17:42:02 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id d17so3906266wmb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 10:42:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=iGBHr9TRbXJsyn1C/xsUCVvbdMN/IF0Eof64b3kCZ4g=;
-	b=a8ABTJtBQ9UMVL6GzZYxFbaB4ZFnWU1C1rXAXoQFsSmKP1QHBp10CdZ+37q31Qnzut
-	SboZh1Mm+2h1XObaIYfTof/qHN+iSgdlg1fCUdeOGzdz1mmJ/bEwAJen73waSGtALM5U
-	cR7Ilc4UQXQwHbH0JmSQ2Z+/Yb4NGW9MoMg3WbgL+jYIGWLUD2xn1FZ+mJfKw4Nl1jEO
-	Gr4xfkT3gZdLe2e/egtM4Ta8EhgTH0ftjHmB2u/x3bw7Uf3Bv5CPI0NKCIGC0izgqDbX
-	urQelP/wv8K89ZuHAbHwwtqOfL/zh3Hf7uCE9qnSTN7EaWAO0QTIsxUHw6Nc4tTpZXT+
-	VG1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iGBHr9TRbXJsyn1C/xsUCVvbdMN/IF0Eof64b3kCZ4g=;
-	b=e3ZU74oHJWsN7Jj8eNy5cJff7frI/bOsYKMKDK51LrBg/Tm2dCeMfxMhh5Dq89dGQa
-	Vv89ldq6O062cYEHDCKmjXlrkOb4OoIc0hCaIKVXs1gF3qWR8JA487sIGX1vE/pfMNo9
-	1PMNLyXSo+nDG5M0Ulx1lWcAHlyf89Ga0tGJfiIQPHZRmhIrq1VL76DfzcNVk9ar82sS
-	Nr/ezhtcH14CMY80UbOXmdWDDMZpyPNvpPazTSpi2cqyrhfYkDTsHCioZb6ZTXb73hl7
-	/5H6LUYd0kL/rvZeA0Bpq3ZMCNFv5/LMXjDrqf03QU4J70QG34qwbVRWAZi6s9Ts4z1C
-	01sg==
-X-Gm-Message-State: APjAAAXMwHTXjqE7Wf0K1g1FXNcmD1xdvTjfsMgyEOm8jYFRi+M89I9k
-	fxIp2UsXPEHVO1Bem/Ln9qM3exM1
-X-Google-Smtp-Source: APXvYqxBbjS/WWbuotfVWNiJfXD/M2/Yi7Gw734pDt7rS/wytIZfOj/Hx2ziDurcvGt4MhBC2Bzo+A==
-X-Received: by 2002:a05:600c:114f:: with SMTP id
-	z15mr4243299wmz.104.1559065322926; 
-	Tue, 28 May 2019 10:42:02 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	j7sm12278857wrt.31.2019.05.28.10.42.01
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 28 May 2019 10:42:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 May 2019 17:42:03 +0000
-Message-Id: <20190528174203.726-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] libmikmod: upgrade to 3.3.11.1
+	Tue, 28 May 2019 18:06:57 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45D1y91g6vz3L;
+	Tue, 28 May 2019 20:06:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1559066817;
+	bh=AS3jMrS3RKMvntJZ1lDsBF2Oai/CuiZp7rhUiKB/2LY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bo5JinY8Z4LLCp0ZLBOGszqLnxV1aH4GbOqUAQh0f+kzuF109PhgZwTLRTvISgvtf
+	39fHuPMB91/xM/Pg/a2v+e3KjzHpF4HCjEpXWaCHSj6gKSytzhkpqdbk5qyArCHyq4
+	GT/4vT12/tGpEhovSX9ySh9hw3XHXi83/WW/O3iJkVt5LkBkRepgKCeFf66Fu1y2FX
+	fRVFwXk2GV2o2UdT8gwaqEs/CY835XzM5I0uY5+68RErDH36q8+g31YexMFLCkywqt
+	2wBL037t8tJgSHWKXrBDX7Q5pCT8GWrQLztgNHY4de7NmNEAvSKiXEfQxx9TBhWHwf
+	dMhL9UDqDNomMd8hhBghrKnt8JRHwdvpJM5FiFhmgnMG1Hsnh2fJI9lJ2BmPwiTOuX
+	tmHD/XGs7lHxZV/aDodutbUzo7pU2M6tr1zeqfDGgWUw3QMZCC0SHSO+CrWTKdWsOd
+	TL09Vxm86/gzZE52Ub6MpVTpBT51sA0nkiNgfgZaB4SmHY98/iT1UikyagrsbGtroU
+	k0CjWvoYItS5DANFD7K/5IX1PyTz+DCtctmsWI1BgFOUMqF23WyxPssmPiUv6N0hts
+	Rd6eIt8GlKdxOL46bVMrNfQT6wK3XmU6l1F/N3mo/9j9ZFcmoAjxuqM87zRiCquR4l
+	dR7A9rdMwx/iRow+G+ZelnI8=
+Date: Tue, 28 May 2019 21:06:55 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190528180655.GA14708@localhost>
+References: <20190522131345.10392-1-andrei@gherzan.ro>
+	<CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
+	<119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
+	<CAMKF1srx8acL-pQu6HWt3KutcvTNu=X-Fweos2XZ6vO-mLyK7Q@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1srx8acL-pQu6HWt3KutcvTNu=X-Fweos2XZ6vO-mLyK7Q@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Andrei Gherzan <andrei@gherzan.ro>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] networkmanager: Update to 1.18.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 17:42:03 -0000
+X-List-Received-Date: Tue, 28 May 2019 18:06:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../mikmod/{libmikmod_3.3.6.bb => libmikmod_3.3.11.1.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.6.bb => libmikmod_3.3.11.1.bb} (73%)
+On Tue, May 28, 2019 at 09:14:17AM -0700, Khem Raj wrote:
+> On Tue, May 28, 2019 at 8:37 AM Andrei Gherzan <andrei@gherzan.ro> wrote:
+> 
+> > On 28/05/2019 16.13, Khem Raj wrote:
+> > > Hi Andrei
+> > >
+> > > The musl patches need to be forward ported as well. They dont apply
+> > > cleanly anymore on top of this update.
+> >
+> > Seems like. So all the contributions now need to go through local musl
+> > and glibc testing? This sounds a little bit of an overhead and might
+> > discourage people in contributing because usually everyone is working on
+> > one libc variant. Just raising it as a concern. As per this specific
+> > case, I'm going to fix it and push a V2.
+> 
+> 
+> I understand that and in some cases it’s even narrower where one might just
+> be working on one distribution alone for single architecture for that case
+> failure on architectures they don’t care is
+> also a nuisance
+> 
+> It’s wide and far testing we can achieve is good for end user same goes for
+> multiple architectures if someone tests a given architecture and reports
+> build  failures then it’s good to acknowledge that imo
+> 
+> It’s not a blocker I expect someone interested in a given regression of
+> this kind to chime and help if possible so don’t see it as an impediment
 
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.11.1.bb
-similarity index 73%
-rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.11.1.bb
-index bbf58f9540..76e10f86a3 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.11.1.bb
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
- DEPENDS = "alsa-lib texinfo"
- 
- SRC_URI = "\
--    ${SOURCEFORGE_MIRROR}/project/mikmod/outdated_versions/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-+    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "9dd9bed30c6f7607a55480234606071b"
--SRC_URI[sha256sum] = "3f363e03f7b1db75b9b6602841bbd440ed275a548e53545f980df8155de4d330"
-+SRC_URI[md5sum] = "f69d7dd06d307e888f466fc27f4f680b"
-+SRC_URI[sha256sum] = "ad9d64dfc8f83684876419ea7cd4ff4a41d8bcd8c23ef37ecb3a200a16b46d19"
- 
- inherit autotools binconfig lib_package
- 
+Is anyone actually using networkmanager with musl?
+
+There are no obvious usecases where it makes sense, and OE seems to be
+adding security vulnerabilities in the musl build that are not in the 
+glibc build (e.g. -Dsecure_getenv=getenv) so users should better not
+use it in any case.
+
+> If we remain cognizant of the fact that upstream might have wider usecases
+> we will generally be better off cumulatively
+
+Upstream ships a copy of systemd code for use as library.
+
+This already implies that trying to support it for musl will be a 
+long-term pain of not upstreamable patches for OE contributors.
+
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
