@@ -1,49 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 579457D3AC
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D6D77D3AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 16:14:28 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id b18so17523853qkc.9
+	Tue, 28 May 2019 16:23:02 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id v19so2699338wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 09:14:29 -0700 (PDT)
+	Tue, 28 May 2019 09:23:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dr0+ujOL4DBCVgjiBOdWXfmovqFs261SH67N4Nb1OLA=;
-	b=IyTKSwMq/8INDqNzqSUIm94GrbFp9zagTBAM1dJRofXCsblezpRf/PXoVt9doYcdUh
-	4NvFvBx9tcqkSFQKIwFEaNBSXOMbwYAJLVABL6T6X31kmtCOGBjeqjgSFQGzw9+wHzw0
-	+xT8Wv7IRwGwcsGSmMvbWj4LHb/KPyQDvOufrHEk+LL34fMiyyNegjNq6zVeQe2/DC8o
-	DmrY4Tbxxugf/n+MmYR3p6M2PDM0UdnVgwaS9FfK8qLRVnznB5tplx3OmcwWwGzbjjOm
-	ThRu5fbduE64Rcd/7gP0aogF5TOMEi/xSGmNqk3+uVRru/pGrg6vid94LS8jlvL0oIDe
-	CsDg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=5UEM2qtTEcMvz0TPb8O0kmMSO2uya0hZtkGSjO7JKx4=;
+	b=YGyR1EhlPK1+3dTXBkoorNZmKrqAs8WRm/MGVU+CNx82ZkyLoKviKDowRdlJNl6l+Y
+	Um+CwQ3xdG1YvRSPPK1FS0/SejKZBlLAEfoKkoZGaB6V+kqKD+csaSxfYpCVPblSfJ8r
+	VoOf9O6vW6tosrAYlXO2ApX1BGbPRWAcLQvfUDtsjb6gWTs0pKM0EC9whdZChdiyVcMt
+	rbDZpWAr03q847FsLLjKYQ1EoFCLCy/MAO+xrzZ3ibm8vYsSE+c+4pkE867Ixh8Rh0T0
+	gdRXh7Pd4g6PmOY7/SObRweSlHY6zncqk9rHrOB0AUx4vV1W+Po7Er45gC8Y22zIM7Ad
+	gjww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=dr0+ujOL4DBCVgjiBOdWXfmovqFs261SH67N4Nb1OLA=;
-	b=aVZjIErxse9Ja8A8Fth0SQxSVazPFvI+YYCsOj7gwYe0OIwamvnXYXV74RM5LhBXGT
-	50LrLGGVuwPORUK0dZdRY6jfD4VnoYCYmINadppMCgfS54mQyfsV3nn4DDYL2Ow0VkFG
-	xeSb3w+xB8o2/of9/rPSLMOhUQvAR4W+szPzeWvW0XYpBa/bYJCbjHHEB4rsqgmKaWRx
-	HAqc+SsEIe5EeFex1fupiKHgDO+fT9Cj3HzUneSi0ZJOYf6SMk8hTUL8U8zf6tNDs5iJ
-	Qmi6591MdQKb4+tY4vhbS+1HFqkMUfKFYBVfISd5CRzLDPI4STGnb2pZrhllTm911UDo
-	iqVQ==
-X-Gm-Message-State: APjAAAUvs/oD+1Ufv70Sf6Hxs1g5LiEn37K3r/uJuKPHFk+owDfXlOkP
-	OWJIyEVSHixZtOyCxuxqPt4THA5w3YF6QqWmkt346GWm
-X-Google-Smtp-Source: APXvYqyayJdS+f9ldyxIkRuPNJRPhJduoyugrmixVrLXBkSQg+HDuIciDkU0JjJV/TVJT1tgepCgypWp2qwaMnEKfwM=
-X-Received: by 2002:ac8:26dc:: with SMTP id 28mr15099098qtp.88.1559060068950; 
-	Tue, 28 May 2019 09:14:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=5UEM2qtTEcMvz0TPb8O0kmMSO2uya0hZtkGSjO7JKx4=;
+	b=pHDb2Xay631z+A9VL7G74d5es0iQmSqGV0IDMvQ0livGbGPbh6Dv3OoS3FlIXY8tIS
+	5cBgRgJWjGOWhj6HuYSts2p6EX+fb25UjGtugZjryKBobTXt0DGuFtfiZ/viwZRYT6Db
+	Rozfb2D+gY39BFBKGPtKdQUHgnV9qN/FQbtQM7zKTe+FxGlha40SscX9TI1OIXgFR6FN
+	bkZWmRbNqoeVzZD/IN9s1/fiRBC0QPQqj2D2b2MiZ4YmN0Avs7KG9+tT5C1CtmgzWnZX
+	/PEn99aB1rdjHpiIo0ZURHVxqlbDUx5NdoETNg042/rkDpBuxJulCduLg4EV6QNamDVq
+	G2Sg==
+X-Gm-Message-State: APjAAAUmmsfWZA081JDXB4ohnw4zP096GId91RQYJm09fCDCAj50lQwy
+	utKK8Xy0zBrmIHF/2BWpVQA618SM
+X-Google-Smtp-Source: APXvYqzLJSIubkaeqkQnN7zfDe5YL1JYzgClljFwt2Te/cdJqqsU6qxT7YWBpwyRE6Z1eGryhHFw8g==
+X-Received: by 2002:a1c:67c2:: with SMTP id b185mr3643503wmc.98.1559060582664; 
+	Tue, 28 May 2019 09:23:02 -0700 (PDT)
+Received: from nick-beastie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	d11sm14081860wrv.72.2019.05.28.09.23.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 May 2019 09:23:01 -0700 (PDT)
+From: Nicola Lunghi <nick83ola@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 May 2019 17:18:57 +0100
+Message-Id: <20190528161856.14582-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190522131345.10392-1-andrei@gherzan.ro>
-	<CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
-	<119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
-In-Reply-To: <119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 May 2019 09:14:17 -0700
-Message-ID: <CAMKF1srx8acL-pQu6HWt3KutcvTNu=X-Fweos2XZ6vO-mLyK7Q@mail.gmail.com>
-To: Andrei Gherzan <andrei@gherzan.ro>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] networkmanager: Update to 1.18.0
+Subject: [meta-oe][PATCH] uthash: do not use unstable github archive tarballs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,49 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 16:14:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 May 2019 16:23:02 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, May 28, 2019 at 8:37 AM Andrei Gherzan <andrei@gherzan.ro> wrote:
+Since commit [21f84fc insane: add sanity checks to SRC_URI] applied
+in oe-core, do not use unstable github archive tarballs.
 
-> On 28/05/2019 16.13, Khem Raj wrote:
-> > Hi Andrei
-> >
-> > The musl patches need to be forward ported as well. They dont apply
-> > cleanly anymore on top of this update.
->
-> Seems like. So all the contributions now need to go through local musl
-> and glibc testing? This sounds a little bit of an overhead and might
-> discourage people in contributing because usually everyone is working on
-> one libc variant. Just raising it as a concern. As per this specific
-> case, I'm going to fix it and push a V2.
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+---
+ meta-oe/recipes-support/uthash/uthash_2.1.0.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
+index 7eb1383053..d01a06cae0 100644
+--- a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
++++ b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
+@@ -9,15 +9,14 @@ HOMEPAGE = "https://troydhanson.github.io/uthash/"
+ SECTION = "base"
+ LICENSE = "BSD-1-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a2513f7d2291df840527b76b2a8f9718"
++SRCREV = "8b214aefcb81df86a7e5e0d4fa20e59a6c18bc02"
+ 
+ SRC_URI = "\
+-    https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
++    git://github.com/troydhanson/${BPN}.git \
+     file://run-ptest \
+ "
+-UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
+ 
+-SRC_URI[md5sum] = "4d0a33f6393260926032f1fad4bad39a"
+-SRC_URI[sha256sum] = "152ccd8e64d0f495377232e3964d06c7ec8bb8c3fbd3217f8a5702614f9a669e"
++S = "${WORKDIR}/git"
+ 
+ inherit ptest
+ 
+-- 
+2.20.1
 
-I understand that and in some cases it=E2=80=99s even narrower where one mi=
-ght just
-be working on one distribution alone for single architecture for that case
-failure on architectures they don=E2=80=99t care is
-also a nuisance
-
-It=E2=80=99s wide and far testing we can achieve is good for end user same =
-goes for
-multiple architectures if someone tests a given architecture and reports
-build  failures then it=E2=80=99s good to acknowledge that imo
-
-It=E2=80=99s not a blocker I expect someone interested in a given regressio=
-n of
-this kind to chime and help if possible so don=E2=80=99t see it as an imped=
-iment
-
-If we remain cognizant of the fact that upstream might have wider usecases
-we will generally be better off cumulatively
-
-
->
-> --
-> Andrei Gherzan
-> gpg: rsa4096/D4D94F67AD0E9640 | t: @agherzan
->
->
 
