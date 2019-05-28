@@ -1,50 +1,49 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D6D77D3AC
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
+	[209.85.167.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 313217D593
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 16:23:02 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id v19so2699338wmh.0
+	Tue, 28 May 2019 16:52:14 +0000 (UTC)
+Received: by mail-lf1-f68.google.com with SMTP id f1so15136076lfl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 09:23:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5UEM2qtTEcMvz0TPb8O0kmMSO2uya0hZtkGSjO7JKx4=;
-	b=YGyR1EhlPK1+3dTXBkoorNZmKrqAs8WRm/MGVU+CNx82ZkyLoKviKDowRdlJNl6l+Y
-	Um+CwQ3xdG1YvRSPPK1FS0/SejKZBlLAEfoKkoZGaB6V+kqKD+csaSxfYpCVPblSfJ8r
-	VoOf9O6vW6tosrAYlXO2ApX1BGbPRWAcLQvfUDtsjb6gWTs0pKM0EC9whdZChdiyVcMt
-	rbDZpWAr03q847FsLLjKYQ1EoFCLCy/MAO+xrzZ3ibm8vYsSE+c+4pkE867Ixh8Rh0T0
-	gdRXh7Pd4g6PmOY7/SObRweSlHY6zncqk9rHrOB0AUx4vV1W+Po7Er45gC8Y22zIM7Ad
-	gjww==
+	Tue, 28 May 2019 09:52:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=SSZuXR22mSimOm+ZxKZIejLEhFg8y9yvww5tnm5PjJI=;
+	b=1Lb1dsDDG4CKTZct6i9wca0OZPLnWDXHrG7e9kZLLScDICftwXfV3kBdtsvMvJFK2w
+	S4/MCJDzdqjYk5JyUxw1J792e2kTDZ16dowMV4soGtyRFDX+DH22vl3jMJXiVCn2OIUb
+	89iuzvHGE/fGLDGztRr8oWHBjULiQO26fb87yR6TxkjQWQGVT70ABT0SSULyaLHdKFf1
+	pNgYGcado5Qa55VwZEF47xPF/V//WHTBGwc5Fdmz+TrTXj3LgOLgeXvTF6vmSUquo+cz
+	fuJhkkwvdxVvUOwWUsCts61XsU8G/olyjLdZ1d5yBOvDJEi2GLnKIjn94KAWpEoPHNH9
+	yvSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5UEM2qtTEcMvz0TPb8O0kmMSO2uya0hZtkGSjO7JKx4=;
-	b=pHDb2Xay631z+A9VL7G74d5es0iQmSqGV0IDMvQ0livGbGPbh6Dv3OoS3FlIXY8tIS
-	5cBgRgJWjGOWhj6HuYSts2p6EX+fb25UjGtugZjryKBobTXt0DGuFtfiZ/viwZRYT6Db
-	Rozfb2D+gY39BFBKGPtKdQUHgnV9qN/FQbtQM7zKTe+FxGlha40SscX9TI1OIXgFR6FN
-	bkZWmRbNqoeVzZD/IN9s1/fiRBC0QPQqj2D2b2MiZ4YmN0Avs7KG9+tT5C1CtmgzWnZX
-	/PEn99aB1rdjHpiIo0ZURHVxqlbDUx5NdoETNg042/rkDpBuxJulCduLg4EV6QNamDVq
-	G2Sg==
-X-Gm-Message-State: APjAAAUmmsfWZA081JDXB4ohnw4zP096GId91RQYJm09fCDCAj50lQwy
-	utKK8Xy0zBrmIHF/2BWpVQA618SM
-X-Google-Smtp-Source: APXvYqzLJSIubkaeqkQnN7zfDe5YL1JYzgClljFwt2Te/cdJqqsU6qxT7YWBpwyRE6Z1eGryhHFw8g==
-X-Received: by 2002:a1c:67c2:: with SMTP id b185mr3643503wmc.98.1559060582664; 
-	Tue, 28 May 2019 09:23:02 -0700 (PDT)
-Received: from nick-beastie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	d11sm14081860wrv.72.2019.05.28.09.23.01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SSZuXR22mSimOm+ZxKZIejLEhFg8y9yvww5tnm5PjJI=;
+	b=nBW/oC3+zjwHQxlvY7NOKCdNxzN7o//1I58DncadAxu8NzZzkOfOc1qRbWficwFNnb
+	VZkv4O2RcfEwmt1lJbDm4zXyckDIMI5jUsbx96L95M9d9bpPwsxNTunu+t8g/QPzjOcI
+	pU5+Au7Xm7I4w/m74G1vl5M3gDmeFaaduhR6dLbZIeFWkcUAc63h024IKhWdUcU0+NsE
+	mQ4jWVMoswXHiLT+kYjjjo4/YYQYoWgAP0DTQoEbibkT8zc5MhyHKQNm8aHxD2N8GbMH
+	OyNacRgToY/hDlER6qG0PaD1K7kNjf/zfzU7iqyXzWPca5+tOD5JY81g1DsMX/mhZf7v
+	gBGQ==
+X-Gm-Message-State: APjAAAUEjT2Wq6uB2K500VEjRnTI3CeshQCrJ3Jb0C432mUpetMmowsF
+	TCzM9AHzEKqEkAheBn7+XvAmSNQ4fbQ=
+X-Google-Smtp-Source: APXvYqxJj71/dboGixdLxZ4764h6TMQZHHYVCKO6gqDkE66evZ4ceWlTv/TY4x77UjucreVtzyJ1fA==
+X-Received: by 2002:ac2:510b:: with SMTP id q11mr4323109lfb.11.1559062335374; 
+	Tue, 28 May 2019 09:52:15 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	v20sm2988488lfe.11.2019.05.28.09.52.14
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 28 May 2019 09:23:01 -0700 (PDT)
-From: Nicola Lunghi <nick83ola@gmail.com>
+	Tue, 28 May 2019 09:52:14 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 May 2019 17:18:57 +0100
-Message-Id: <20190528161856.14582-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] uthash: do not use unstable github archive tarballs
+Date: Tue, 28 May 2019 18:52:00 +0200
+Message-Id: <20190528165200.10764-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] libp11: update to 0.4.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +56,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 16:23:02 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 May 2019 16:52:15 -0000
 
-Since commit [21f84fc insane: add sanity checks to SRC_URI] applied
-in oe-core, do not use unstable github archive tarballs.
-
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/uthash/uthash_2.1.0.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ .../libp11/{libp11_0.4.7.bb => libp11_0.4.10.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libp11/{libp11_0.4.7.bb => libp11_0.4.10.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-index 7eb1383053..d01a06cae0 100644
---- a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-+++ b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-@@ -9,15 +9,14 @@ HOMEPAGE = "https://troydhanson.github.io/uthash/"
- SECTION = "base"
- LICENSE = "BSD-1-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a2513f7d2291df840527b76b2a8f9718"
-+SRCREV = "8b214aefcb81df86a7e5e0d4fa20e59a6c18bc02"
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.7.bb b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+similarity index 92%
+rename from meta-oe/recipes-support/libp11/libp11_0.4.7.bb
+rename to meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+index 87d99c1a6..2911e37c7 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.4.7.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
+ DEPENDS = "libtool openssl"
  
- SRC_URI = "\
--    https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-+    git://github.com/troydhanson/${BPN}.git \
-     file://run-ptest \
- "
--UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
+ SRC_URI = "git://github.com/OpenSC/libp11.git"
+-SRCREV = "64569a391897bd29c5060b19fa4613e619e59277"
++SRCREV = "libp11-0.4.10"
  
--SRC_URI[md5sum] = "4d0a33f6393260926032f1fad4bad39a"
--SRC_URI[sha256sum] = "152ccd8e64d0f495377232e3964d06c7ec8bb8c3fbd3217f8a5702614f9a669e"
-+S = "${WORKDIR}/git"
- 
- inherit ptest
+ S = "${WORKDIR}/git"
  
 -- 
-2.20.1
+2.17.1
 
 
