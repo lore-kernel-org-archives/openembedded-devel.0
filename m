@@ -1,49 +1,53 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-it1-f178.google.com (mail-it1-f178.google.com
-	[209.85.166.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FF547D6A2
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+	[209.85.128.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F0676B07E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 06:19:47 +0000 (UTC)
-Received: by mail-it1-f178.google.com with SMTP id m140so2195718itg.2
+	Tue, 28 May 2019 09:49:38 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id v19so1863459wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 23:19:48 -0700 (PDT)
+	Tue, 28 May 2019 02:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=nhC2m6vSgxrXIZVdFlRqr7PNBNbJYXGuVRp+s3MyjgI=;
-	b=Z1SxfCFbL1Ggn9euKcGDHmc5Tn9ccKt7QN5RkMK8/URo0fY4/LjMDi6lznWH+kRKXe
-	VMJxDR0PsUTEPo3UF/CfD4K83XjrI0hD2CISRGwbxUhwlyxw08W10e7AI2xnPPOMtKWX
-	K25x15usTDUCpjQiT2tCxp7X79mPnSYwuKn5mcWB96I29HKF7p/dg6p2spO5y8J6HLTD
-	sEzb/T651/7ZotZBwFtbftnP/IuwyG340wZOPk76Uoya7DI/k/mHALh+BEgTN6DY6KEA
-	FnlFXNMNHd3qmeDjqdEfR6xpn6TpQoTsf/wBIH5V2hyKt8iOSkdYSZqv1hqkEIk23N6X
-	3rkA==
+	:cc; bh=2zxtNB80kgUrU91FAd1tplDcRw/XzOaItKp6o0n5aQY=;
+	b=aILmDTFdqWl9PNTCZjOidKQirWBHs/MbZgQ2y17fipGte48Nqs2F87u5LelNKAbX4/
+	HTpffdGW/IbK+rjskoYLcwSolA24E2wgx7AnulXKyAOQ29vuc2KLBMT7ryiQXu/Qo3x4
+	MUNrGrtvnVm2PKuu3ZMTVsZmeBQkITc2WkkmaPMjQBRLYjSbJLczaBytF9cX3xEQNPyn
+	lD9rKymqPpjFKwU+A4D3tsuPxcAicBvDjt08ateSkILHO0Xeie8cadhLOjwwAi81EV6Q
+	GBXp3A3EzBzTvNtwCU9AlU6l8t7qFF/734NYu4t6Fzb9CQUZQ+yunDN7htKjXY3zOpGs
+	pWvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=nhC2m6vSgxrXIZVdFlRqr7PNBNbJYXGuVRp+s3MyjgI=;
-	b=dmo6M97Disru2bPwn/6xJ095nouGHrzgxAcqVwfNwDDxqjyLOlalmfObSozjlF8yiA
-	CWSY7i1ESHB4lXNU5rLWSy9CEyvipu6njhyL1itYxFYjRlD2171X8E2G0IGGWM1+huUF
-	hcGov/vymVwe7VhkgNTxpc0INlp9etletXVi6xGk1eRWHWAbZejA0HcblVRPgDSf2IMM
-	dWUG/3b1aj7Z8loDw5DFnvvTc3NxTWn4B4OmL53OLfgskOhIAQckXs4CuMFpjX2JHwmJ
-	sQ2iTg/R5D6BbTw8I69yq9S5H5qydRbTIDeLUykw85IuhRLdX3W9n0PdFCFw/I3Fvikq
-	DQ/Q==
-X-Gm-Message-State: APjAAAVdH6o/6Wyift4paZbCGY3XoNwLT9Cl//VZNHf41AZ3MS/sq8RC
-	+Xq+1OpkJvRJDT70naY+xxd0V4ytsQb6qZ6zheQ=
-X-Google-Smtp-Source: APXvYqy05XCRnYkJKlnjEZz2xde0sQA4TJ4b0WwHmqsnMD5zbbFm2X5Mbhwh43XRVz9Q0Yfl6GEMmq/ilXKv2lVwgeg=
-X-Received: by 2002:a02:a806:: with SMTP id f6mr5591416jaj.74.1559024388320;
-	Mon, 27 May 2019 23:19:48 -0700 (PDT)
+	bh=2zxtNB80kgUrU91FAd1tplDcRw/XzOaItKp6o0n5aQY=;
+	b=BdvQ0s9mEaYe86GUrEjm1hYq178aeiWhOib+7TKMopfHzl3HqY4UlLHg58IScth9mv
+	sMuBHM5wgu/9fg+yAsRdauILc3iz2h/iX05zcwgzMSSL7APgrkL3dFlt7QXhpv6XYbwn
+	PCyrJKG1WwIKfrrKhTFbNpD1v34neZkLWq++odX4XjBNV8t9YUpixWHQ6UfH/5g4qCbd
+	iX6lCCmvzHyh72t2WEsTjpRmF0XHm1g+OvPm8sktxsTTnGvvtzt74vL+eR7Qsn5IVcpN
+	T2auqS8gm9y0BNzSL5eAQGC1N0b0UDKDNgWs6S7uDoz5cWnrVhePwZ8I0G0LuKOOoXvh
+	C9vg==
+X-Gm-Message-State: APjAAAW5+l7GyXLNdXjT4kPkvwwsS4+HRFmEi8WhV/6i9+HpzXlIjcC2
+	1r07nHklFO0hPeyyYw18/+H7GOJuLqGt3j9BVOk=
+X-Google-Smtp-Source: APXvYqwMbByBXUMnrNi/Yn1ulxQcpbRhNCT5coiUTnkCGpCYczF66QTPzFeIvgaT9jaWO1cNHuh/7BzM0hmR+iYTeus=
+X-Received: by 2002:a1c:2082:: with SMTP id g124mr2397969wmg.71.1559036978771; 
+	Tue, 28 May 2019 02:49:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <1554298095-26709-3-git-send-email-vincent.prince.fr@gmail.com>
-	<20190528032730.lzggdqsjix56r6fo@apollo>
-In-Reply-To: <20190528032730.lzggdqsjix56r6fo@apollo>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Tue, 28 May 2019 08:19:36 +0200
-Message-ID: <CAB2nKc8S-2WawRE+TqgnAqJESJv_UXci7WmrNA10rVMhhMt3cw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-oe,v2,2/3] cppzmq: bump version 4.2.3 => 4.3.1
+References: <CAAfyv34HAOaAaO1cyiQbR8P6mQPp8p3gCT2jM=UyQDGfvV-fYw@mail.gmail.com>
+	<CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
+	<CAAfyv34jJ362tu3x_8J1+FuV3zFpchkB8Ft9w-WERrxCNPxbvg@mail.gmail.com>
+	<CACKFPN1bgM_DPDRRDxkjekqZ9gQwV9S+1MkHF42z6MvczD81Jg@mail.gmail.com>
+In-Reply-To: <CACKFPN1bgM_DPDRRDxkjekqZ9gQwV9S+1MkHF42z6MvczD81Jg@mail.gmail.com>
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Tue, 28 May 2019 11:49:26 +0200
+Message-ID: <CAAfyv36-ykHu2Gfet1CeuR8tjNgernF4m01AjnQaOzcFb-BZaw@mail.gmail.com>
+To: Dimitris Tassopoulos <dimtass@gmail.com>
+Cc: yocto <yocto@yoctoproject.org>, Sergey Lapin <slapin@ossfans.org>,
+	Enrico <ebutera@users.sourceforge.net>,
+	Nicolas Aguirre <aguirre.nicolas@gmail.com>,
+	OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [yocto] meta-sunxi maintained?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,61 +60,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 06:19:47 -0000
+X-List-Received-Date: Tue, 28 May 2019 09:49:38 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Dimitris,
 
-It was a mistake in v1 and v2, latest release is 4.3.0 which was corrected
-in v3.
-Is it ok for you?
-
-Rergards,
-Vincent
-
-
-Le mar. 28 mai 2019 =C3=A0 05:27, Khem Raj <raj.khem@gmail.com> a =C3=A9cri=
-t :
-
-> On Wed, Apr 03, 2019 at 03:28:14PM +0200, Vincent Prince wrote:
-> > Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
-> > ---
-> > Changes in v2:
-> >  - Remove git SRCPV from PV
-> >
-> >  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > index 9aff59c..95b5215 100644
-> > --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > @@ -4,8 +4,8 @@ LICENSE =3D "MIT"
-> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddb174eaf7b55a34a7c89551197f=
-66e94"
-> >  DEPENDS =3D "zeromq"
-> >
-> > -SRCREV =3D "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
-> > -PV =3D "4.2.3+git${SRCPV}"
-> > +SRCREV =3D "213da0b04ae3b4d846c9abc46bab87f86bfb9cf4"
-> > +PV =3D "4.3.1"
+On Tue, May 28, 2019 at 11:01 AM Dimitris Tassopoulos <dimtass@gmail.com> wrote:
 >
-> Can you rebase this on top of latest master and resend, I merged an
-> older patch which bumped it to 4.3.0
+> Hi Belisko,
 >
-> >
-> >  SRC_URI =3D "git://github.com/zeromq/cppzmq.git"
-> >
-> > @@ -13,6 +13,8 @@ S =3D "${WORKDIR}/git"
-> >
-> >  inherit cmake
-> >
-> > +EXTRA_OECMAKE =3D "-DCPPZMQ_BUILD_TESTS=3DOFF"
-> > +
-> >  PACKAGES =3D "${PN}-dev"
-> >
-> >  RDEPENDS_${PN}-dev =3D "zeromq-dev"
+> you can also have a look in to this layer: http://layers.openembedded.org/layerindex/branch/master/layer/meta-allwinner-hx/
+> It's for allwinner H2,H3 and H5 boards that already have support on Armbian.
+> Pretty much is just a Yocto layer with all the patches and BSP support from Armbian.
+> It supports 4.14 and 4.19 mainline kernels only and also the PREEMPT-RT patches.
+> Warrior support was added recently, too.
+OK thanks. I think I'll stick with meta-sunxi ;). What about join
+forces and maintains one layer properly instead having it separated?
 >
+> A similar one is also this: http://layers.openembedded.org/layerindex/branch/master/layer/meta-nanopi-neo4/
+>
+> Dimitris
+>
+> On Mon, May 27, 2019 at 7:33 PM Belisko Marek <marek.belisko@gmail.com> wrote:
+>>
+>> Hi Enrico,
+>>
+>> On Mon, May 27, 2019 at 5:44 PM Enrico <ebutera@users.sourceforge.net> wrote:
+>> >
+>> > Hi,
+>> >
+>> > i try to keep it maintained, but now i just have a lime2 for testing
+>> > on real hardware, and i don't have the resources to do test builds for
+>> > all the supported boards.
+>> > Your help would be welcome, i can't check right now if i have the
+>> > rights to add you as co-maintainer, anyway i will add you.
+>> Thanks I have few sunxi based boards so can do tests also on my setup.
+>> Pls ping me when you will add me. Thanks.
+>> >
+>> > Thanks for the help!
+>> >
+>> > Enrico
+>>
+>> Marek
+>> >
+>> > On Mon, May 27, 2019 at 4:50 PM Belisko Marek <marek.belisko@gmail.com> wrote:
+>> > >
+>> > > Hello,
+>> > >
+>> > > I'm just curious if meta-sunxi is still maintained? I was contributed
+>> > > to layer back while and when look now thud branch is un-compilable
+>> > > (dri2proto not replaced) and warrior branch not created yet. There is
+>> > > 14 issues + 6 pending pull requests. Added maintainers also in CC. I
+>> > > think it would be good to have sunxi properly maintained as boards
+>> > > with sunxi processors are popular. I can give a hand as co-maintainer
+>> > > if necessary. Thanks a lot.
+>> > >
+>> > > BR,
+>> > >
+>> > > marek
+>> > >
+>> > > --
+>> > > as simple and primitive as possible
+>> > > -------------------------------------------------
+>> > > Marek Belisko - OPEN-NANDRA
+>> > > Freelance Developer
+>> > >
+>> > > Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+>> > > Tel: +421 915 052 184
+>> > > skype: marekwhite
+>> > > twitter: #opennandra
+>> > > web: http://open-nandra.com
+>> --
+>> _______________________________________________
+>> yocto mailing list
+>> yocto@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/yocto
+
+
+
+marek
 
