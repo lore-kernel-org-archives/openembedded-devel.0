@@ -1,25 +1,24 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 32FC77E1A2
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D5CE07E1E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 02:52:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x4S2qMpC001380
+	Tue, 28 May 2019 02:52:30 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4S2qBOT022709
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2019 19:52:22 -0700 (PDT)
+	Mon, 27 May 2019 19:52:21 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Mon, 27 May 2019 19:52:22 -0700
+	14.3.439.0; Mon, 27 May 2019 19:52:00 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 May 2019 10:51:59 +0800
-Message-ID: <1559011919-113581-2-git-send-email-changqing.li@windriver.com>
+Date: Tue, 28 May 2019 10:51:58 +0800
+Message-ID: <1559011919-113581-1-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1559011919-113581-1-git-send-email-changqing.li@windriver.com>
-References: <1559011919-113581-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] syslog-ng: add rconflict for package syslog-ng-libs
+Subject: [PATCH 1/2] phoronix-test-suite: add rconflict
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,30 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 02:52:22 -0000
+X-List-Received-Date: Tue, 28 May 2019 02:52:31 -0000
 Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
-syslog-ng-libs also have conflicts
+phoronix-test-suite rdepend on lsb, lsb rdepend on lsbinitscripts,
+lsbinitscripts rconflict with initscripts-functions. so also add
+rconflict for this one.
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 +
+ .../recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.6.0.bb   | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index b52deff..c183f05 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -127,6 +127,7 @@ CONFFILES_${PN} = "${sysconfdir}/${BPN}.conf ${sysconfdir}/scl.conf"
- RDEPENDS_${PN} += " ${@oe.utils.conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.6.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.6.0.bb
+index 4c7b057..bdd6855 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.6.0.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.6.0.bb
+@@ -30,6 +30,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
  
- RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
-+RCONFLICTS_${PN}-libs = "busybox-syslog sysklogd rsyslog"
+ RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release lsb"
++RCONFLICTS_${PN} = "initscripts-functions"
  
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
+ FILES_${PN} += " \
+     ${datadir}/phoronix-test-suite \
 -- 
 2.7.4
 
