@@ -1,63 +1,51 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
-	[209.85.128.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E1D137E145
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 79FA07D302
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 08:17:54 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id z23so884957wma.4
+	Wed, 29 May 2019 08:48:10 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id 196so194021pgc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 01:17:56 -0700 (PDT)
+	Wed, 29 May 2019 01:48:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=fbWddBhDppr2QkeDXLDRHFbOtGMFk0PtOeKnuMkV5b0=;
-	b=cTEL3W9FUKWA0WvpJPvix5m04RewMIkHEkRdqCuTjjwmqZu9mWqq3bqn20ohvvJgxb
-	YSSjRfn4UipxF88ks8TdH2MMgFxV9eHg5RiREQ0ljcuE4RkYXrkNmvDTqhN9SEG5tibu
-	kuJJ0zCNZhDQOoG1wZGNgQgKe7awP98KFzwSwifaXl6oIdUhPndjLdGEuhUOv5gLDebA
-	I3J6bT3PTwx9u52Wovxlrku5TF5vuZvbmlx0LlS3NYzSY333wmQkvQuY7ORlO+Z7B11F
-	zPuae+S5j4RWv8BbxtZVWQe7XYHB2j9RzSF9YdbfsLT1N+yG5e4x8t3sdO5FQZD8muM+
-	AjaA==
+	:cc; bh=iG+YzVbk9SlkC6XsiZGgWXhZoRSG/fNspsnjwZnVtxU=;
+	b=N4sH9Q9Lyt1uA/UxuDxipammKTz098FtgGS+5c/hdHnPQP01DtqgMYkEZEyiIqWkOQ
+	+b01/7bkYVws790kz4g1Kbtdkxjt98LY1WdQjOi9v7Rd5ZNNMoJ0JUP+E2DxtEtYG/jq
+	iMBjl9UiymZCvm6Kb4g8Mp4BfhuCIsekjmbzsbNM34RMLfPysrTIdD99iNTqNz2A51lB
+	u7LvQeMpxrfFe0UnEUqd+jjzHSy0mNmaNnEGbI3kSr76p+u9ET2kC71ahT4Pi2qa+cPL
+	ihohrZj2CCPuXDSa/YDO/kVEapP7jHmRDox1ju8U9N0tLa8WxBYy0/OXPBu2F///s8E3
+	bSlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=fbWddBhDppr2QkeDXLDRHFbOtGMFk0PtOeKnuMkV5b0=;
-	b=bFJAkjDs87NagBOqVnMfXHdp8S5q9yI6V0cxSmYrxTC9WOHzJCrMtdX1IL+Gc05Tr/
-	1c8TTVm+RLIka9M7Peluq2bw9Ke0Nzz2S7fgH5Rrq4x4YTZDfui69wuUQ+BrtAruK7B9
-	R5cgoUKaUO/vm8eu7/qzO5tPFROpIg0S6xnXaTgU7k1o9GCiJe7pF2ZtQHx5rTtrjDds
-	+m/d/AAMjLiTjbz5d3hA19lvdFgq/a5LeUvM2bcvFALYo69J6S255nUWF/LZdFvKFbe4
-	pMyKp36iPFTbKhTQJt08LvQjPysHDs6Zs27irUaLYs+FjC2lr4uH00fJQaunBeTZ1Ryz
-	J0Cw==
-X-Gm-Message-State: APjAAAWaYZ4rRI9ABQ0ITkYGro4YsR6Z/z9bPL8G5lYzkacN5JTraQY7
-	ZVQ/T3im8A2r0DhrqQkbwpPlBYPMLXgx2qVIKjQ=
-X-Google-Smtp-Source: APXvYqzpDVujbcst6czy1dQnsOBx0KyePjWeE0mY3qZRl5VDXNVq72vfIbzV92NHnPYHMYgC0j+ReoRsNgZLA80Cg4s=
-X-Received: by 2002:a1c:2c89:: with SMTP id s131mr6301835wms.142.1559117875444;
-	Wed, 29 May 2019 01:17:55 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=iG+YzVbk9SlkC6XsiZGgWXhZoRSG/fNspsnjwZnVtxU=;
+	b=f8Feu16ocFq78aoU3QDupsbKN2YO93SgUJZvwaX7FEfBeWaoiOb37uJ4w1M8FMKOy8
+	WE8ukTqTSoLq3qjnEGoxQEH3pf7ic3crBiQdUTSByJLhBpePXVE7OQ6NRJ8uwiJeWa8M
+	YanG+nYARMvABSjAed/izzK+aGwkyshEl4CrGMygX5VbtEoohdrQ8Cnz5engzzuStE01
+	KneKKHlNca51/Xw+8bqWMa0wjtRDRulvA4lj+vURPCo7B4Pigw2haLtMDVZvrgY50uCG
+	LU+trWvcU1nXN8OmaFkAagnfnCroipubRR9A1cA39m7JEvbK5Q07ZvXxaUHgs4AB5Fsn
+	DVhA==
+X-Gm-Message-State: APjAAAWKz+pKvKF59E1AGUlkQ0rwQnumIeJw6OLhmUM7eFQMXEKaTDy0
+	qUXRP32lGYDmcBTyxofvdoeiGcUecVZy/KZzRQw=
+X-Google-Smtp-Source: APXvYqx3ymGzB7W4ugfsTpRHVKbWfWb4edJsPgmrKRHfpRRtjpu93jG8cdKDSfvVwCn+fCVthyV+acpOW7mjHPjxRGg=
+X-Received: by 2002:a17:90a:8e86:: with SMTP id
+	f6mr10489097pjo.66.1559119691382; 
+	Wed, 29 May 2019 01:48:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAAfyv34HAOaAaO1cyiQbR8P6mQPp8p3gCT2jM=UyQDGfvV-fYw@mail.gmail.com>
-	<CA+2YH7ud9TX=ohQSk8XY=GzpewzFsXo6Z2eBJ=bXacyAsojV9A@mail.gmail.com>
-	<CAAfyv34jJ362tu3x_8J1+FuV3zFpchkB8Ft9w-WERrxCNPxbvg@mail.gmail.com>
-	<CACKFPN1bgM_DPDRRDxkjekqZ9gQwV9S+1MkHF42z6MvczD81Jg@mail.gmail.com>
-	<CAAfyv36-ykHu2Gfet1CeuR8tjNgernF4m01AjnQaOzcFb-BZaw@mail.gmail.com>
-	<CACKFPN1q13OJfCcRCP6aLxGOC+cM+2zjwoTLNbkAn5dAS+J_DA@mail.gmail.com>
-	<CAAfyv36hNk8CXYEfYASZJ-tOPEUwZ23i1zyDdLbVWk6r9ONkDA@mail.gmail.com>
-	<CA+2YH7vhko+jG6UTKHJrXGnv7AsCJP=GT4=trUUgkQ8cNQ5-0Q@mail.gmail.com>
-	<CACKFPN3XaUoY532vj1oxTd2Nd3QNsT1Lx6TVQTQEWY2ELXNRRw@mail.gmail.com>
-	<CAAfyv35FO2+wBpWTB2muyXGUBG3pgCvcVXon1d0BNuzJ7g9uKA@mail.gmail.com>
-	<CACKFPN2Zh9K4fymx+a-Ougw-H=CHKw=KxgimBpe40nOAgCESZg@mail.gmail.com>
-	<CAAfyv35B773mjZtK4E7jDCLHrjkRW-JdhEqTPM1pUGbfNz7PcA@mail.gmail.com>
-	<CACKFPN3dx0NMRrS35eYhDKqd7e7yMWDAOKKu_Ei9LJ3euqiVFQ@mail.gmail.com>
-In-Reply-To: <CACKFPN3dx0NMRrS35eYhDKqd7e7yMWDAOKKu_Ei9LJ3euqiVFQ@mail.gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Wed, 29 May 2019 10:17:43 +0200
-Message-ID: <CAAfyv37y8_ZDyocx46ZPvVEK_tTmHoAFDYcrwdA3bL-FW5X_3Q@mail.gmail.com>
-To: Dimitris Tassopoulos <dimtass@gmail.com>
-Cc: Yocto discussion list <yocto@yoctoproject.org>,
-	Sergey Lapin <slapin@ossfans.org>, Enrico <ebutera@users.sourceforge.net>,
-	Nicolas Aguirre <aguirre.nicolas@gmail.com>,
-	OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [yocto] meta-sunxi maintained?
+References: <20190527100610.8944-1-ankit.tarot@gmail.com>
+	<CAMKF1srM7s8F-i+R+pqOwiizg7kUce8seP66vvwrvC_av0p-Kw@mail.gmail.com>
+	<CAM_RqkPkOp87iszm7Vf5Cv6Ap2-usP9QJGD_1xHzukG2m3qUyQ@mail.gmail.com>
+	<CAMKF1sqN-XUboz7y+ObSaJJYfEM1qicS4FZBKyO2D2yyt6NNmw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqN-XUboz7y+ObSaJJYfEM1qicS4FZBKyO2D2yyt6NNmw@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Wed, 29 May 2019 14:18:00 +0530
+Message-ID: <CAM_RqkMygPx-C-CMEyG5dcLRHUqwyzC2EiQ-1y2ceCn5aHZMkg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,185 +58,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 08:17:55 -0000
+X-List-Received-Date: Wed, 29 May 2019 08:48:10 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Dimitris,
+Hi Raj,
 
-On Wed, May 29, 2019 at 10:03 AM Dimitris Tassopoulos <dimtass@gmail.com> w=
-rote:
->
-> Hi Marek,
->
-> I see (and now remember) that there is a recipe for libgles for Mali400 a=
-nd A10/20.
-> Are you interested for this architecture or newer (like H2, H3, H5) ?
->
-> I can only make a wild guess that maybe because the driver is a bit old, =
-then if you
-> try to build new recipes then there might be some issues.
->
-> This also is the difference between the layers that I've mentioned before=
-. The meta-sunxi
-> is clean and raw layer. Meaning that you get more flexibility to add/remo=
-ve things and
-> also have a more generic layer. On the other hand, the other layer is not=
- really configurable
-> and flexible in the same depth but it takes the full armbian distro and w=
-raps it. So, if the
-> distro works, then the layer should work only with those components (of c=
-ourse you can
-> do modifications). That's the difference in the approach I meant in the p=
-revious mail.
->
-> I don't have any A10/20 hardware to test, but I could spin a build and lo=
-ok at the errors you get.
-> If you send my your local conf file and your environment setup and build =
-command I ca
-> trigger a build and see if there's anything I can help with.
-Thanks it will be really helpful. Basically I'm doing same as
-described here:
-https://github.com/linux-sunxi/meta-sunxi/issues/240#issuecomment-496410993
-Looking at sunxi-mali more devices should be supported:
-COMPATIBLE_MACHINE =3D "(sun4i|sun5i|sun7i|sun8i)"
->
-> Regards,
-> Dimitris
+On Tue, May 28, 2019 at 9:04 AM Khem Raj <raj.khem@gmail.com> wrote:
 
-BR,
-
-marek
+> On Mon, May 27, 2019 at 7:40 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
+> >
+> > Hi Raj,
+> >
+> > On Mon 27 May, 2019, 21:10 Khem Raj, <raj.khem@gmail.com> wrote:
+> >>
+> >> On Mon, May 27, 2019 at 3:06 AM Ankit Navik <ankit.tarot@gmail.com>
+> wrote:
+> >> >
+> >> > Add generic recipe for safe C library.
+> >> > This library implements the secure C11 Annex K functions on top of
+> most libc
+> >> > implementations, which are missing from them.
+> >> >
+> >> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> >> > ---
+> >> >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
+> >> >  1 file changed, 15 insertions(+)
+> >> >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+> >> >
+> >> > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
+> b/meta-oe/recipes-core/safec/safec_3.4.bb
+> >> > new file mode 100644
+> >> > index 000000000..ad3c4ba74
+> >> > --- /dev/null
+> >> > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+> >> > @@ -0,0 +1,15 @@
+> >> > +SUMMARY  = "Safe C Library"
+> >> > +
+> >> > +LICENSE  = "safec"
+> >> > +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
+> >> > +SECTION = "lib"
+> >> > +
+> >> > +inherit autotools pkgconfig
+> >> > +
+> >> > +S = "${WORKDIR}/git"
+> >> > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
+> >> > +SRC_URI = "git://github.com/rurban/safeclib.git"
+> >> > +
+> >> > +COMPATIBLE_HOST = '(x86_64|i.86|arm|aarch64).*-linux'
+> >>
+> >> is it limited to these architectures ?
+> >
+> >
+> > I have not verified for mips. Since I didn't have target to verify.
+> > But let me check, whether it is feasible for mips or not.
 >
-> On Wed, May 29, 2019 at 9:39 AM Belisko Marek <marek.belisko@gmail.com> w=
-rote:
->>
->> Hi Dimitris,
->>
->> On Wed, May 29, 2019 at 9:03 AM Dimitris Tassopoulos <dimtass@gmail.com>=
- wrote:
->> >
->> > Hi Marek,
->> >
->> > that's correct. I have a branch though which I've started to experimen=
-t and add support for Mali. I didn't finished because I've tried to do this=
- by myself from the scratch and soon I've hit a wall. Nevertheless, I've do=
-ne the same for the rk3399 for nanopi-neo4 and during this process I've lea=
-rned a lot on how to do it with some help from other people from the open s=
-ource scene. The graphics stack was too complicated for me in the beginning=
-.
->> You can maybe look to meta-sunxi there is sunxi-mali driver +
->> libraries which will add support for that. When I've set that package
->> to PREFERRED_PROVIDER_virtual/gles2 I get issues with compilation
->> gtk3+ and others. I've spend 2 hours looking and trying yesterday but
->> without any success. Also pls look at this communication:
->> https://github.com/linux-sunxi/meta-sunxi/issues/144 (looks like we
->> can use opensource drivers + libs later). Thanks.
->> >
->> > Therefore now that I feel much more confident with it I'm going to re-=
-try and finish with my branch. Armbian does have support, so I'll try to st=
-ick to the Armbian backend for maintenance reasons.
->> >
->> > I hope that this will be rather easy, because the dri driver should al=
-ready be there, so the only thing I believe is needed is the blobs and to c=
-reate symlinks for the various so libs to that blob.
->> >
->> > Anyway, I'll try to do that also. In the meantime I will also wait a b=
-it to see if that merge between those two layers is possible and doable, wh=
-ich will help to short the time and effort to do that.
->> >
->> > Regards,
->> > Dimitris
->>
->> BR,
->>
->> marek
->> >
->> > Belisko Marek <marek.belisko@gmail.com> schrieb am Mi., 29. Mai 2019, =
-08:37:
->> >>
->> >> Hi Dimitris,
->> >>
->> >> On Tue, May 28, 2019 at 1:07 PM Dimitris Tassopoulos <dimtass@gmail.c=
-om> wrote:
->> >> >
->> >> > Hi Enrico,
->> >> >
->> >> > I'm totally positive to any possibility for such integration. Perso=
-nally, that was the first thing I've tried to do before I start this layer,=
- but I've failed as it got really complex and the overhead was too much aft=
-er some point (at least for me). If you have look it's actually a mix of me=
-ta-sunxi and armbian, but I had to remove or change many stuff to fit the a=
-rmbian in the layer.
->> >> >
->> >> > If you have time to have a look to my layer and you think that such=
- kind of integration is possible and can be done in a more easy way, then f=
-rom my side I'm all in.
->> >> > I believe that re-using the armbian patches is easier as it makes m=
-aintenance much easier, there are more supported SBCs and also there is muc=
-h more testing involved in armbian and frequent updates fix those bugs.
->> >> I did check your layer and it seems that you're not using sunxi-mali
->> >> for opengl HW acceleration only mesa so SW rendering? Thanks.
->> >> >
->> >> > Please consider it and I can help as much as I can and my time allo=
-ws for that integration.
->> >> >
->> >> > Regards,
->> >> > Dimitris
->> >> >
->> >> >
->> >> Marek
->> >> >
->> >> > On Tue, May 28, 2019 at 12:56 PM Enrico <ebutera@users.sourceforge.=
-net> wrote:
->> >> >>
->> >> >> On Tue, May 28, 2019 at 12:06 PM Dimitris Tassopoulos <dimtass@gma=
-il.com> wrote:
->> >> >> >
->> >> >> > >
->> >> >> > > I was thinking about this also, too. The only reason is that i=
-n meta-sunxi they do a great job and they keep their layer clean, which is =
-great I think. The other layers are just based on the armbian distro, which=
- is a lot different, but for me it was much easier to integrate their patch=
-es, patching scripts and bootloader scripts to a Yocto layer. That way the =
-only thing I do is that from time to time I just integrate their new patche=
-s and that's it. There's no development in the layer is just re-use of the =
-armbian work and a wrapper around it. Therefore, it's hard, even no doable =
-to put those different architectures together. But definitely that decision=
- also bothered me a lot before I create the layer and I also don't like tim=
-e to be spend on the same thing from different people. Nevertheless, from m=
-y point of view I couldn't find a way to put those things together. I've tr=
-ied but I couldn't do it.
->> >> >> > >
->> >> >> > > Therefore, it was easier for me to do it the way I've done it.=
- And after all, although it doesn't seem right, at the same time this is th=
-e beauty of the open source. I think the layers are just incompatible in th=
-e way that they are do things. Also it's not bad to have alternatives.
->> >> >> > >
->> >> >> > > Sunxi is a great community and I believe many of the armbian p=
-atches are coming from there. Others not. Of course, having them all togeth=
-er would be nice. But I don't think that it's possible because of the diffe=
-rent approach.
->> >> >>
->> >> >> It would be great to integrate all those different layers in
->> >> >> meta-sunxi,the main problem is that usually they come with their o=
-wn
->> >> >> bootloader/kernel/etc.... so you have to *maintain* all these
->> >> >> different configurations.
->> >> >> Infact in the past i refused to do such things because i didn't ha=
-ve
->> >> >> the time to maintain all those different versions, it was just eas=
-ier
->> >> >> to support what was already in mainline uboot/kernel.
->> >> >>
->> >> >> But of course if someone wants to do it then it's welcome, the wor=
-st
->> >> >> thing that can happen is that once an arch gets unmaintained it wi=
-ll
->> >> >> be removed.
->> >> >>
->> >> >> One thing that can be done anyway is to have those external layers
->> >> >> linked in the readme, so at least people will know they exist.
->> >> >>
->> >> >> Enrico
+> Sure, qemumips would be a good target.
+>
+Looks like, It is not able to recognize opcode for mips target.
+Other target works fine including powerpc. I will submit v3 including
+powerpc in COMPATIBLE_HOST.
+
+Regards,
+Ankit
+
+>
+> >
+> > I'll keep you posted
+> >
+> > Regards, Ankit
+> >>
+> >>
+> >> > +
+> >> > +RDEPENDS_${PN} = "perl"
+> >> > --
+> >> > 2.20.1
+> >> >
+> >> > --
+> >> > _______________________________________________
+> >> > Openembedded-devel mailing list
+> >> > Openembedded-devel@lists.openembedded.org
+> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
