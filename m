@@ -1,41 +1,23 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CFD346C4F2
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BB93B6C1BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 21:20:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45D6Fp1Rlcz54;
-	Tue, 28 May 2019 23:20:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1559078446;
-	bh=UEzfqtiIHBfCaAXvVDEcTIclO9pg5kH5QWbPgYchRGM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=fbxsDUbDO/s7lGtGr+IJ5ZiWoklM8NL9Q/2EkS6W/Gxy8Nw8CjBc26FneDit1oWDm
-	ll5I8s5AGal0HMSOKFUU+r1a3dkL6JLoJtly2+sPjo0Ye4fQdPb2JuMgoxpB0OlZRZ
-	2OAjE2ZmuHu6TGlGC0j2n70YU6h7NT9h7mGFip0LxLfihhcYU4DJm/iNwdB0rLn63F
-	qsQgzdjiyI6MUiDwLer/QBVk6uxw0Bp+A1lwi8QHSrrC+V8OReUDXnty9IrF/g7JOS
-	hv+JzG2D+ftbhGula8V96yHSII2yq15VVBSApOW9x+0D0y998UpjgaNN381qfq8kDp
-	CZ7bBpGTnrAyGp5i9K+w+/caGLk4OrYHZRIylYYiAMIuUK92bGaw0eGScbXmRye0TT
-	URt6M6ieeJYwe1PWCAidgFMbwjORi5b8TcwAxFun3JvDildlJcImeCoIPK0gp0cG+0
-	NhG/N0Z9sRjjGwrvB+2HvRPV94JMnOmOUzzwq2X/FVbo2XzgtVc5JGfLJ2PrIf5L1G
-	LJKiP91xHQOWZNY+oijGpLIYkLO7mR2y/dD6+w1qhbtBTu4h58PMrUPiJLutHlpkbM
-	0mhCgOu4o9cyw9Y9l7aUE1dF4bCNBU944I6XQVyuWIp8Xo9cGhk9vWtp2lLs2R8vg9
-	AqJvn2mWiiFmj90m44O7LAso=
-Date: Wed, 29 May 2019 00:20:43 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190528212043.GA23804@localhost>
-References: <20190522131345.10392-1-andrei@gherzan.ro>
-	<CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
-	<119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
-	<CAMKF1srx8acL-pQu6HWt3KutcvTNu=X-Fweos2XZ6vO-mLyK7Q@mail.gmail.com>
-	<20190528180655.GA14708@localhost>
-	<CAMKF1sqAzXc+iMFqqWU_-p_3e5aifuQtZWMPwxcBghwrPm9vmA@mail.gmail.com>
+	Wed, 29 May 2019 02:41:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4T2fUOd022483
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 May 2019 19:41:31 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 28 May 2019 19:41:17 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 May 2019 22:40:39 -0400
+Message-ID: <20190529024039.45241-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqAzXc+iMFqqWU_-p_3e5aifuQtZWMPwxcBghwrPm9vmA@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] networkmanager: Update to 1.18.0
+Subject: [meta-xfce][PATCH] lxdm: provides fake gdmflexiserver for xfce desktop environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2019 21:20:47 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 May 2019 02:41:33 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, May 28, 2019 at 01:37:21PM -0700, Khem Raj wrote:
->...
-> That could be improved. Probably adding this function to musl is not a bad idea
-> 
-> something like
-> 
-> char *secure_getenv(const char *name)
-> {
->  return issetugid() ? NULL : getenv(name);
->...
+From: Kai Kang <kai.kang@windriver.com>
 
-I didn't know that musl adds non-standard functions like issetugid()
-that are not in glibc.
+Xfce4 plugin 'actions' which stays in tray area provides a menu 'Switch
+User' but the menu grayed out. It calls whether 'dm-tool' from lightdm
+or 'gdmflexiserver' from gdm to support switch users.
 
-cu
-Adrian
+Since recipe gdm has been removed from meta-gnome, create a fake
+'gdmflexiserver' which calls lxdm to make menu 'Switch User' work
+according to:
 
+https://wiki.archlinux.org/index.php/Xfce#User_switching_action_button_is_greyed_out
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver | 3 +++
+ meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend     | 7 +++++++
+ 2 files changed, 10 insertions(+)
+ create mode 100644 meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
+ create mode 100644 meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
+
+diff --git a/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver b/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
+new file mode 100644
+index 000000000..4ef8baf29
+--- /dev/null
++++ b/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++lxdm -c USER_SWITCH
+diff --git a/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend b/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
+new file mode 100644
+index 000000000..4a799a98a
+--- /dev/null
++++ b/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
+@@ -0,0 +1,7 @@
++FILESEXTRAPATHS_append := "${THISDIR}/${BPN}:"
++
++SRC_URI += "file://gdmflexiserver"
++
++do_install_append () {
++    install -D -m 0755 ${WORKDIR}/gdmflexiserver ${D}${bindir}/gdmflexiserver
++}
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.20.0
 
 
