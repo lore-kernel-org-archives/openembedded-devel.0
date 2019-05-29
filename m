@@ -1,48 +1,33 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5399B7D302
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id DF5007E33C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 10:31:09 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id r22so1339620pfh.9
+	Wed, 29 May 2019 12:38:07 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45DVcJ3763z5l
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 03:31:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=F2K8a+hGsmmkRQN/Xf2B7LhPd2sJ4lffemyu7lZzuAQ=;
-	b=NxSmBM+gbqfBbIT7auYmdHhwr+bWXeiWn3oZQi0Iko1+6BSsknuOI6jdDahsVT3kSS
-	aA9LzUgv1TLaYMxabS1EvhAc9wRNBAXMsn0RxYZbOWmi/4yvyRzqxw6m8ZGi+utBKde6
-	CmaaRa4t9t95jvBmzCSYBoZBEORRT/Y5ZkPRqFV1c1g4uhHskUsKCJA2tC0BYKLYhm5v
-	6NHJdQFzoSETexi06Kp5VirTXDmHVg/0KY2vy5fy8/2tuxFuNzi7Uv6Rk0Mk65NN8R/M
-	3AjAM6NeJtsCCUgG4DObuDnj+Y2qbFTSEKlSq036O1A1TTGVg8ibC8NC75y8nVCXEI6a
-	oAlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=F2K8a+hGsmmkRQN/Xf2B7LhPd2sJ4lffemyu7lZzuAQ=;
-	b=ki1eHN8252NbGAILoZP//PKN7S5PrmBan0fNSQOyPRzCT40jyDl+qR8/Jy4KA1M/xW
-	gCbMiRreUMZdUnXW/jqpZ+qsheMPBqjBB5XSEhAAH2cUGBlZZfW/QQkPC05UpIOFNwYC
-	HkEn+8KH97Sjs05lHdQFhx2WFN8G92pSEHrvjOhg7UiiVdfGHyfxeB7Gf2rWOmIqo87I
-	7HH/L7xfYRkCWd+JBNklbC60OTTipFbhO8K16txqaYnwdUreQixxMALxxLzRrcaMJntx
-	fONcFYPiUl/8U7p9wqvaGdolwOVtxUIIXzP7XTs2TLba7ZRX5KzvITRmmwGNm6MtEwkq
-	E8LQ==
-X-Gm-Message-State: APjAAAVjTOadbVkGOPqgCmKbThjZuHbpZ9veAJuavbPkQguSVR2R4/u1
-	f/VTjsNamRmAEsS3LC+1D1VoS/9IP4KLFDgTD5s=
-X-Google-Smtp-Source: APXvYqxMW2t5YLFZfyc2D8LPk8YMRQYe4Jys91f8ec7U5z9mCYnCWG1CIkBSasO+RutrVEvYgtY/WYmEpLA3lEoFQx8=
-X-Received: by 2002:a63:cd4c:: with SMTP id a12mr8056498pgj.362.1559125870316; 
-	Wed, 29 May 2019 03:31:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190529084806.13342-1-ankit.tarot@gmail.com>
-	<CAMKF1soiTZwgAQM3-RD6PttxUJw88rLqpvomL-0j9X1sCJn9qQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soiTZwgAQM3-RD6PttxUJw88rLqpvomL-0j9X1sCJn9qQ@mail.gmail.com>
-From: Ankit Navik <ankit.tarot@gmail.com>
-Date: Wed, 29 May 2019 16:00:58 +0530
-Message-ID: <CAM_RqkNM+uqH4HsM6Y=cdWpPSJLyDoXUaf5_rY++fYwXy42W5A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
+	Wed, 29 May 2019 14:38:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1559133488;
+	bh=ObE0T96T4olXJkq8rcsr/c9ZGHKNmRtwqohy0757Mww=;
+	h=From:To:Subject:Date:From;
+	b=C15qS9SQ0GAZHSHF/d2bk7InDlVKZA9JJCGWd6bSeqRIrBRb76FLzJSv5+osJJvMy
+	Mt5uAIPV6UlB4r6M1pRAcsoF2ijVWyB6mcrZOuILYPSnCM8P5Ff3PW0oLaBdMcZ5Ia
+	5Bm7zpfstAriKfNtKgO6+xk5TWVxLjpH262JLBpOh7Lj/Vv9khBuED106zUtkrEZuW
+	hOcMBt50tML1eWJQZmn95W6jpUOnkpA1V9o69Wy0OH1ZxGZkood+DmOLadN6Njb44z
+	ckJ1XUs9UOEEt0QcBs+wEkwl86l5jsPWkpOAKJEM+nlRcg/4kW7ExKEttMIJ1F1leP
+	vI/CN3BZH3YDj+77agyIUfxt0yQ81gdKXpoQb0Oj9L14ppkhletBoffGZ+KitrX5bl
+	RQqMXBEGm3CDZvNddRtB1Y2nvNoMPmC7+b9gYqaJEiIfFBnyH4qtj96G92glPBVR2/
+	sN9LcwcGkh45xDaZi0FKEjTMAZNRhfy7CRiOdySPROGlr2oN+LqyHUq3ylduQ404TC
+	1Lv3LN4OxyIMvdTH1OM+dZi3ksTZ4kAST3nLomZDNIrb13rgkS9ntkyDatfysJFbkn
+	zuU7Q54zYt+jqhGU/Uv8WYAv4OIwpZGNy1K1J9KqqaIfO/TB4vghINqGDBNXo/BBy3
+	sRzKfjhgWZUrHnfW69NlguDs=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 May 2019 15:38:07 +0300
+Message-Id: <20190529123807.23246-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] samba: Upgrade 4.8.11 -> 4.8.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,67 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 10:31:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 29 May 2019 12:38:08 -0000
 
-Hi Raj,
+The only change is the fix for CVE-2018-16860.
 
-On Wed, May 29, 2019 at 2:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ .../samba/{samba_4.8.11.bb => samba_4.8.12.bb}                | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.8.11.bb => samba_4.8.12.bb} (98%)
 
-> On Wed, May 29, 2019 at 10:48 AM Ankit Navik <ankit.tarot@gmail.com>
-> wrote:
-> >
-> > Add generic recipe for safe C library.
-> > This library implements the secure C11 Annex K functions on top of most
-> libc
-> > implementations, which are missing from them.
-> >
-> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-> > ---
-> >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
-> >  1 file changed, 15 insertions(+)
-> >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
-> >
-> > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
-> b/meta-oe/recipes-core/safec/safec_3.4.bb
-> > new file mode 100644
-> > index 000000000..d55d081f3
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-> > @@ -0,0 +1,15 @@
-> > +SUMMARY  = "Safe C Library"
-> > +
-> > +LICENSE  = "safec"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
-> > +SECTION = "lib"
-> > +
-> > +inherit autotools pkgconfig
-> > +
-> > +S = "${WORKDIR}/git"
-> > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
-> > +SRC_URI = "git://github.com/rurban/safeclib.git"
-> > +
-> > +COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
-> > +
->
-> I see its excluding mips/mips64 from core supported architectures, is
-> that intentional ?
->
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.11.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/samba/samba_4.8.11.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
+index 8c08d1ed3..a6d3d0a2e 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.8.11.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
+@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
+            file://cmocka-uintptr_t.patch \
+           "
+ 
+-SRC_URI[md5sum] = "de61611075e97ea98140a42d9189d9a5"
+-SRC_URI[sha256sum] = "d294a8d7455d7d252d7bafc9c474855ea6e0ebe559c3babcd303a5c24e58710a"
++SRC_URI[md5sum] = "25de700c8f1148fd13973a49a51c059e"
++SRC_URI[sha256sum] = "c162d519101e15d1a1d76df063bfefe8d1656f57fb74e1ef19fe05d341a65d8f"
+ 
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
+ 
+-- 
+2.17.1
 
-I'm not sure. This library is required for another component i.e. ipmctl.
-
-Regards,
-Ankit
-
->
-> > +RDEPENDS_${PN} = "perl"
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
