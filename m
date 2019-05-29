@@ -1,51 +1,52 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D8C7F7E225
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CC417E043
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 08:48:12 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id a3so965119pgb.3
+	Wed, 29 May 2019 09:04:39 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id b18so919948qkc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 01:48:14 -0700 (PDT)
+	Wed, 29 May 2019 02:04:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=e4S+BcoE/KvAKIeSG3XOJ8fBnXK1EtLokscGBfrx31s=;
-	b=MgqiY6DMPkgs42GmqVT+h9qCl9rgzWqJSFzUtd0LiNxHHHE9PLAkkV3vFJLjx9+RNf
-	+tNXyBN5Z3MOT7jaaARmoI5sQpK/yru/PAkXxC6Aqhb1D9CVXc21QiJbZOss+OFjSUJZ
-	/GSXf7I0F0zjxVM9wGldZJmPYk4ZmWC00PkqsdAnoVOHUOcsPv32W8/WDQqY2NCeIOvr
-	6YzcQv+kD7qJa1vrXtQYi/mJP0xaJnmEAc5Bz29INKfq+SvmpfNaBkkxWqCvWrBiEhry
-	yYvBiaMhfcFUbnjxFueI1vEEwjOPak5iSyeuayl90hb2g+JT5aS1F4T7NSG57H9T3MLo
-	qduw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Z0rH3TUSGlHeoQgt+xfh7SSk8IzogVHPEjXA2my6PV4=;
+	b=i6bysl2uTgCbYnACIb8I6d1Kc4/BD2Z04JTY3khksTmIffyVxOAWZD4WQpL650o8/7
+	JuZWPQ4ewA4q3SRsXpCUc6CzTRPl7Cj8cScwf8RysXOG+PWGs7TM2IjflJ/uTjPHcUfC
+	YxdQqoBb6DypFWqCgxAxy6JXyP4u8Q+36ccWVIjjgOKjGSThuCwjngKfHnE0/us7bbsZ
+	L8CiczzNWxU8QcaCqsSaNrbDeI/J4JQzdq3s22+hTWHFVBmptz5wlw04kTXses9tkMHQ
+	hotmSXlCaK+HmcGEUz5nzbEjKZP/Ec//5XJOQNo9hbyZvGLV7H/8/LuewGGsjyZouzJ/
+	JU4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=e4S+BcoE/KvAKIeSG3XOJ8fBnXK1EtLokscGBfrx31s=;
-	b=JOPsjiYzdVD45pWQe6JmSQ/tBbeLKE6VNEFcfpZbqxsru2yFg0h0Vn3kDNANF3xhSw
-	+X/myJ3CX1sECgW3whDLHVxvUhkuSmbvi3XqrYe/XlC4A4Yl7ssAbcrjY4W3HT1MZrRV
-	WNiY6vlzNQzH7yZxFphv11nyQ86s6sy+xI1BeSRgsjO7ato08U3N9PE0/UvI/X9PHVTV
-	azz+4Ymm/DJV/lqFqlntpGjcsU52XF8qhY1d5voiMQGrkVnXsRMhp/CUNmmaqiYyFXEy
-	w63DfgbsGjjDjpqIR2F0plC0GZaglBk8dRO0tCrQq4dS9sZbnaZNuvDor7wSargtmAWw
-	qutQ==
-X-Gm-Message-State: APjAAAX18TiF4QnA1kPBDbTOXpLrqTZBh89ztMfQMYQIGAK6Bl/zef7f
-	pZ/LPSf4ruF8lFpmfERzjx+TXV0x+8Y=
-X-Google-Smtp-Source: APXvYqxHM3HJozjlvSxNFX4wu4Jq0ZPabJGxAh2tb1Q4zyLtc79SW7PFbUyP/svygMCzWJQIApl2bQ==
-X-Received: by 2002:a17:90a:658b:: with SMTP id
-	k11mr10790097pjj.44.1559119693729; 
-	Wed, 29 May 2019 01:48:13 -0700 (PDT)
-Received: from navik-desk.iind.intel.com ([134.134.139.82])
-	by smtp.gmail.com with ESMTPSA id r4sm4921046pjd.28.2019.05.29.01.48.11
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 May 2019 01:48:13 -0700 (PDT)
-From: Ankit Navik <ankit.tarot@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 May 2019 14:18:06 +0530
-Message-Id: <20190529084806.13342-1-ankit.tarot@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Z0rH3TUSGlHeoQgt+xfh7SSk8IzogVHPEjXA2my6PV4=;
+	b=KjfITGNRQrWo7xMqtJJaA28UPBmJlzUFb4LreY1wuYbmWgHg335OlEb90hfmfMAY5B
+	Aaj3iweJA7oRT985UG2K2fglYOhCK29q3FOrfLUdsI64Bl+t4AC9uYBXe4Wc5Is7BAc2
+	qotizq83DCQ4hIDVFJsj+4xrUZN1LjQ910vYTso/f8nzgqlszFxxtcvJmMCjmXLT9S4a
+	FdLFUBk5NojWDenhDrduZ6MawUJqG5/GwfsA1aW59EzFifdQGixUSpSFXEj63Q2aPeUl
+	ZVhQpOmr5D1xFgh/gIWIveq/eTdcn2jkd8ffkdheMbHbgyqcFgJsvyXqDuHLfJ8z87Rk
+	UQ3g==
+X-Gm-Message-State: APjAAAWc7TXB+oeHOu87IvfjJSk4copsjQg9TSAii2KmHLh752Nd8dpO
+	uKIhvqys3nzR1ADZCGRXcwSawDaDQAxgot1NpQ74vpT9us0=
+X-Google-Smtp-Source: APXvYqx1SQG5UvUfs39y8MljoxIGqMskLdrbB4kz5dNjkq5w5HnCQkkcADSfKcne4qEOiusk/tJS4eaXmiYgTTMhJEY=
+X-Received: by 2002:a37:a017:: with SMTP id j23mr14073689qke.258.1559120680150;
+	Wed, 29 May 2019 02:04:40 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
+References: <20190522131345.10392-1-andrei@gherzan.ro>
+	<CAMKF1srfV74+4jODJtnOtgKwSBtBgznGENOZFOvkp+vZ7BdAoQ@mail.gmail.com>
+	<119819b9-eee8-442e-f4bd-b4005b0a1a6d@gherzan.ro>
+	<CAMKF1srx8acL-pQu6HWt3KutcvTNu=X-Fweos2XZ6vO-mLyK7Q@mail.gmail.com>
+	<20190528180655.GA14708@localhost>
+	<CAMKF1sqAzXc+iMFqqWU_-p_3e5aifuQtZWMPwxcBghwrPm9vmA@mail.gmail.com>
+	<20190528212043.GA23804@localhost>
+In-Reply-To: <20190528212043.GA23804@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 May 2019 11:04:14 +0200
+Message-ID: <CAMKF1spQymu=5un3uRgO7Wp-OUEZV0bRHDC2ME5Liu4ZZ1QewQ@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] networkmanager: Update to 1.18.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,41 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 08:48:12 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 29 May 2019 09:04:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add generic recipe for safe C library.
-This library implements the secure C11 Annex K functions on top of most libc
-implementations, which are missing from them.
+On Tue, May 28, 2019 at 11:20 PM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Tue, May 28, 2019 at 01:37:21PM -0700, Khem Raj wrote:
+> >...
+> > That could be improved. Probably adding this function to musl is not a bad idea
+> >
+> > something like
+> >
+> > char *secure_getenv(const char *name)
+> > {
+> >  return issetugid() ? NULL : getenv(name);
+> >...
+>
+> I didn't know that musl adds non-standard functions like issetugid()
+> that are not in glibc.
 
-Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
----
- meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+I don't think its stated as such anywhere in musl design guidelines,
+however they do
+try to implement defined behavior for POSIX functions which is a good thing.
 
-diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
-new file mode 100644
-index 000000000..d55d081f3
---- /dev/null
-+++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-@@ -0,0 +1,15 @@
-+SUMMARY  = "Safe C Library"
-+
-+LICENSE  = "safec"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
-+SECTION = "lib"
-+
-+inherit autotools pkgconfig
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
-+SRC_URI = "git://github.com/rurban/safeclib.git"
-+
-+COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
-+
-+RDEPENDS_${PN} = "perl"
--- 
-2.20.1
-
+>
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
 
