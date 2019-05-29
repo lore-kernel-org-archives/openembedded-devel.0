@@ -1,51 +1,51 @@
 Return-Path: <ankit.tarot@gmail.com>
 Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
 	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 79FA07D302
+	by mail.openembedded.org (Postfix) with ESMTP id D8C7F7E225
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 08:48:10 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id 196so194021pgc.6
+	Wed, 29 May 2019 08:48:12 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id a3so965119pgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 01:48:11 -0700 (PDT)
+	Wed, 29 May 2019 01:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=iG+YzVbk9SlkC6XsiZGgWXhZoRSG/fNspsnjwZnVtxU=;
-	b=N4sH9Q9Lyt1uA/UxuDxipammKTz098FtgGS+5c/hdHnPQP01DtqgMYkEZEyiIqWkOQ
-	+b01/7bkYVws790kz4g1Kbtdkxjt98LY1WdQjOi9v7Rd5ZNNMoJ0JUP+E2DxtEtYG/jq
-	iMBjl9UiymZCvm6Kb4g8Mp4BfhuCIsekjmbzsbNM34RMLfPysrTIdD99iNTqNz2A51lB
-	u7LvQeMpxrfFe0UnEUqd+jjzHSy0mNmaNnEGbI3kSr76p+u9ET2kC71ahT4Pi2qa+cPL
-	ihohrZj2CCPuXDSa/YDO/kVEapP7jHmRDox1ju8U9N0tLa8WxBYy0/OXPBu2F///s8E3
-	bSlA==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=e4S+BcoE/KvAKIeSG3XOJ8fBnXK1EtLokscGBfrx31s=;
+	b=MgqiY6DMPkgs42GmqVT+h9qCl9rgzWqJSFzUtd0LiNxHHHE9PLAkkV3vFJLjx9+RNf
+	+tNXyBN5Z3MOT7jaaARmoI5sQpK/yru/PAkXxC6Aqhb1D9CVXc21QiJbZOss+OFjSUJZ
+	/GSXf7I0F0zjxVM9wGldZJmPYk4ZmWC00PkqsdAnoVOHUOcsPv32W8/WDQqY2NCeIOvr
+	6YzcQv+kD7qJa1vrXtQYi/mJP0xaJnmEAc5Bz29INKfq+SvmpfNaBkkxWqCvWrBiEhry
+	yYvBiaMhfcFUbnjxFueI1vEEwjOPak5iSyeuayl90hb2g+JT5aS1F4T7NSG57H9T3MLo
+	qduw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=iG+YzVbk9SlkC6XsiZGgWXhZoRSG/fNspsnjwZnVtxU=;
-	b=f8Feu16ocFq78aoU3QDupsbKN2YO93SgUJZvwaX7FEfBeWaoiOb37uJ4w1M8FMKOy8
-	WE8ukTqTSoLq3qjnEGoxQEH3pf7ic3crBiQdUTSByJLhBpePXVE7OQ6NRJ8uwiJeWa8M
-	YanG+nYARMvABSjAed/izzK+aGwkyshEl4CrGMygX5VbtEoohdrQ8Cnz5engzzuStE01
-	KneKKHlNca51/Xw+8bqWMa0wjtRDRulvA4lj+vURPCo7B4Pigw2haLtMDVZvrgY50uCG
-	LU+trWvcU1nXN8OmaFkAagnfnCroipubRR9A1cA39m7JEvbK5Q07ZvXxaUHgs4AB5Fsn
-	DVhA==
-X-Gm-Message-State: APjAAAWKz+pKvKF59E1AGUlkQ0rwQnumIeJw6OLhmUM7eFQMXEKaTDy0
-	qUXRP32lGYDmcBTyxofvdoeiGcUecVZy/KZzRQw=
-X-Google-Smtp-Source: APXvYqx3ymGzB7W4ugfsTpRHVKbWfWb4edJsPgmrKRHfpRRtjpu93jG8cdKDSfvVwCn+fCVthyV+acpOW7mjHPjxRGg=
-X-Received: by 2002:a17:90a:8e86:: with SMTP id
-	f6mr10489097pjo.66.1559119691382; 
-	Wed, 29 May 2019 01:48:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190527100610.8944-1-ankit.tarot@gmail.com>
-	<CAMKF1srM7s8F-i+R+pqOwiizg7kUce8seP66vvwrvC_av0p-Kw@mail.gmail.com>
-	<CAM_RqkPkOp87iszm7Vf5Cv6Ap2-usP9QJGD_1xHzukG2m3qUyQ@mail.gmail.com>
-	<CAMKF1sqN-XUboz7y+ObSaJJYfEM1qicS4FZBKyO2D2yyt6NNmw@mail.gmail.com>
-In-Reply-To: <CAMKF1sqN-XUboz7y+ObSaJJYfEM1qicS4FZBKyO2D2yyt6NNmw@mail.gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=e4S+BcoE/KvAKIeSG3XOJ8fBnXK1EtLokscGBfrx31s=;
+	b=JOPsjiYzdVD45pWQe6JmSQ/tBbeLKE6VNEFcfpZbqxsru2yFg0h0Vn3kDNANF3xhSw
+	+X/myJ3CX1sECgW3whDLHVxvUhkuSmbvi3XqrYe/XlC4A4Yl7ssAbcrjY4W3HT1MZrRV
+	WNiY6vlzNQzH7yZxFphv11nyQ86s6sy+xI1BeSRgsjO7ato08U3N9PE0/UvI/X9PHVTV
+	azz+4Ymm/DJV/lqFqlntpGjcsU52XF8qhY1d5voiMQGrkVnXsRMhp/CUNmmaqiYyFXEy
+	w63DfgbsGjjDjpqIR2F0plC0GZaglBk8dRO0tCrQq4dS9sZbnaZNuvDor7wSargtmAWw
+	qutQ==
+X-Gm-Message-State: APjAAAX18TiF4QnA1kPBDbTOXpLrqTZBh89ztMfQMYQIGAK6Bl/zef7f
+	pZ/LPSf4ruF8lFpmfERzjx+TXV0x+8Y=
+X-Google-Smtp-Source: APXvYqxHM3HJozjlvSxNFX4wu4Jq0ZPabJGxAh2tb1Q4zyLtc79SW7PFbUyP/svygMCzWJQIApl2bQ==
+X-Received: by 2002:a17:90a:658b:: with SMTP id
+	k11mr10790097pjj.44.1559119693729; 
+	Wed, 29 May 2019 01:48:13 -0700 (PDT)
+Received: from navik-desk.iind.intel.com ([134.134.139.82])
+	by smtp.gmail.com with ESMTPSA id r4sm4921046pjd.28.2019.05.29.01.48.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 29 May 2019 01:48:13 -0700 (PDT)
 From: Ankit Navik <ankit.tarot@gmail.com>
-Date: Wed, 29 May 2019 14:18:00 +0530
-Message-ID: <CAM_RqkMygPx-C-CMEyG5dcLRHUqwyzC2EiQ-1y2ceCn5aHZMkg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] safec: Initial recipe for safe C library
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 May 2019 14:18:06 +0530
+Message-Id: <20190529084806.13342-1-ankit.tarot@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,86 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 08:48:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 29 May 2019 08:48:12 -0000
+Content-Transfer-Encoding: 8bit
 
-Hi Raj,
+Add generic recipe for safe C library.
+This library implements the secure C11 Annex K functions on top of most libc
+implementations, which are missing from them.
 
-On Tue, May 28, 2019 at 9:04 AM Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+---
+ meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
 
-> On Mon, May 27, 2019 at 7:40 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
-> >
-> > Hi Raj,
-> >
-> > On Mon 27 May, 2019, 21:10 Khem Raj, <raj.khem@gmail.com> wrote:
-> >>
-> >> On Mon, May 27, 2019 at 3:06 AM Ankit Navik <ankit.tarot@gmail.com>
-> wrote:
-> >> >
-> >> > Add generic recipe for safe C library.
-> >> > This library implements the secure C11 Annex K functions on top of
-> most libc
-> >> > implementations, which are missing from them.
-> >> >
-> >> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-> >> > ---
-> >> >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
-> >> >  1 file changed, 15 insertions(+)
-> >> >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
-> >> >
-> >> > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
-> b/meta-oe/recipes-core/safec/safec_3.4.bb
-> >> > new file mode 100644
-> >> > index 000000000..ad3c4ba74
-> >> > --- /dev/null
-> >> > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-> >> > @@ -0,0 +1,15 @@
-> >> > +SUMMARY  = "Safe C Library"
-> >> > +
-> >> > +LICENSE  = "safec"
-> >> > +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
-> >> > +SECTION = "lib"
-> >> > +
-> >> > +inherit autotools pkgconfig
-> >> > +
-> >> > +S = "${WORKDIR}/git"
-> >> > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
-> >> > +SRC_URI = "git://github.com/rurban/safeclib.git"
-> >> > +
-> >> > +COMPATIBLE_HOST = '(x86_64|i.86|arm|aarch64).*-linux'
-> >>
-> >> is it limited to these architectures ?
-> >
-> >
-> > I have not verified for mips. Since I didn't have target to verify.
-> > But let me check, whether it is feasible for mips or not.
->
-> Sure, qemumips would be a good target.
->
-Looks like, It is not able to recognize opcode for mips target.
-Other target works fine including powerpc. I will submit v3 including
-powerpc in COMPATIBLE_HOST.
+diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
+new file mode 100644
+index 000000000..d55d081f3
+--- /dev/null
++++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+@@ -0,0 +1,15 @@
++SUMMARY  = "Safe C Library"
++
++LICENSE  = "safec"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
++SECTION = "lib"
++
++inherit autotools pkgconfig
++
++S = "${WORKDIR}/git"
++SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
++SRC_URI = "git://github.com/rurban/safeclib.git"
++
++COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
++
++RDEPENDS_${PN} = "perl"
+-- 
+2.20.1
 
-Regards,
-Ankit
-
->
-> >
-> > I'll keep you posted
-> >
-> > Regards, Ankit
-> >>
-> >>
-> >> > +
-> >> > +RDEPENDS_${PN} = "perl"
-> >> > --
-> >> > 2.20.1
-> >> >
-> >> > --
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
