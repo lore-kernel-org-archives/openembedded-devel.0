@@ -1,23 +1,28 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BB93B6C1BE
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C5BD77CBE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 02:41:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4T2fUOd022483
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2019 19:41:31 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 28 May 2019 19:41:17 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 May 2019 22:40:39 -0400
-Message-ID: <20190529024039.45241-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Wed, 29 May 2019 02:51:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x4T2pr4s005078
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 28 May 2019 19:51:54 -0700 (PDT)
+Received: from [128.224.162.186] (128.224.162.186) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Tue, 28 May 2019 19:51:53 -0700
+To: Adrian Bunk <bunk@stusta.de>
+References: <1559011919-113581-1-git-send-email-changqing.li@windriver.com>
+	<20190528193734.GA18778@localhost>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <30bbbc31-4f2d-771c-bb83-a09407a13489@windriver.com>
+Date: Wed, 29 May 2019 10:51:50 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] lxdm: provides fake gdmflexiserver for xfce desktop environment
+In-Reply-To: <20190528193734.GA18778@localhost>
+X-Originating-IP: [128.224.162.186]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] phoronix-test-suite: add rconflict
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,53 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 02:41:33 -0000
+X-List-Received-Date: Wed, 29 May 2019 02:51:54 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Language: en-US
 
-From: Kai Kang <kai.kang@windriver.com>
+On 5/29/19 3:37 AM, Adrian Bunk wrote:
+> On Tue, May 28, 2019 at 10:51:58AM +0800, changqing.li@windriver.com wrote:
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> phoronix-test-suite rdepend on lsb, lsb rdepend on lsbinitscripts,
+>> lsbinitscripts rconflict with initscripts-functions. so also add
+>> rconflict for this one.
+>> ...
+> In what situation is this needed?
+>
+> It sounds wrong if rconflict from lower-level packages have to be
+> replicated in higher-level packages, and is likely to break in the
+> future.
+>
+> cu
+> Adrian
 
-Xfce4 plugin 'actions' which stays in tray area provides a menu 'Switch
-User' but the menu grayed out. It calls whether 'dm-tool' from lightdm
-or 'gdmflexiserver' from gdm to support switch users.
+My original idea is that,  by add this info,  we can get the rconflict  
+info when parse recipe.
 
-Since recipe gdm has been removed from meta-gnome, create a fake
-'gdmflexiserver' which calls lxdm to make menu 'Switch User' work
-according to:
+But, you are right,  this  is not good for an indirect rconflicts.
 
-https://wiki.archlinux.org/index.php/Xfce#User_switching_action_button_is_greyed_out
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver | 3 +++
- meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend     | 7 +++++++
- 2 files changed, 10 insertions(+)
- create mode 100644 meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
- create mode 100644 meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
+@Khem,  I noticed this is on master-next,  so maybe this patch 1/2 
+needed to be reverted.  Sorry for the inconvenience.
 
-diff --git a/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver b/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
-new file mode 100644
-index 000000000..4ef8baf29
---- /dev/null
-+++ b/meta-xfce/recipes-graphics/lxdm/lxdm/gdmflexiserver
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+lxdm -c USER_SWITCH
-diff --git a/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend b/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
-new file mode 100644
-index 000000000..4a799a98a
---- /dev/null
-+++ b/meta-xfce/recipes-graphics/lxdm/lxdm_%.bbappend
-@@ -0,0 +1,7 @@
-+FILESEXTRAPATHS_append := "${THISDIR}/${BPN}:"
-+
-+SRC_URI += "file://gdmflexiserver"
-+
-+do_install_append () {
-+    install -D -m 0755 ${WORKDIR}/gdmflexiserver ${D}${bindir}/gdmflexiserver
-+}
 -- 
-2.20.0
+BRs
+
+Sandy(Li Changqing)
 
 
