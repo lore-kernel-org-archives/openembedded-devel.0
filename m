@@ -1,33 +1,23 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id DF5007E33C
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 535E77E3A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 12:38:07 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45DVcJ3763z5l
+	Wed, 29 May 2019 14:29:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4TETUZA000997
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 14:38:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1559133488;
-	bh=ObE0T96T4olXJkq8rcsr/c9ZGHKNmRtwqohy0757Mww=;
-	h=From:To:Subject:Date:From;
-	b=C15qS9SQ0GAZHSHF/d2bk7InDlVKZA9JJCGWd6bSeqRIrBRb76FLzJSv5+osJJvMy
-	Mt5uAIPV6UlB4r6M1pRAcsoF2ijVWyB6mcrZOuILYPSnCM8P5Ff3PW0oLaBdMcZ5Ia
-	5Bm7zpfstAriKfNtKgO6+xk5TWVxLjpH262JLBpOh7Lj/Vv9khBuED106zUtkrEZuW
-	hOcMBt50tML1eWJQZmn95W6jpUOnkpA1V9o69Wy0OH1ZxGZkood+DmOLadN6Njb44z
-	ckJ1XUs9UOEEt0QcBs+wEkwl86l5jsPWkpOAKJEM+nlRcg/4kW7ExKEttMIJ1F1leP
-	vI/CN3BZH3YDj+77agyIUfxt0yQ81gdKXpoQb0Oj9L14ppkhletBoffGZ+KitrX5bl
-	RQqMXBEGm3CDZvNddRtB1Y2nvNoMPmC7+b9gYqaJEiIfFBnyH4qtj96G92glPBVR2/
-	sN9LcwcGkh45xDaZi0FKEjTMAZNRhfy7CRiOdySPROGlr2oN+LqyHUq3ylduQ404TC
-	1Lv3LN4OxyIMvdTH1OM+dZi3ksTZ4kAST3nLomZDNIrb13rgkS9ntkyDatfysJFbkn
-	zuU7Q54zYt+jqhGU/Uv8WYAv4OIwpZGNy1K1J9KqqaIfO/TB4vghINqGDBNXo/BBy3
-	sRzKfjhgWZUrHnfW69NlguDs=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 May 2019 15:38:07 +0300
-Message-Id: <20190529123807.23246-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] samba: Upgrade 4.8.11 -> 4.8.12
+	Wed, 29 May 2019 07:29:30 -0700 (PDT)
+Received: from fidler.wrs.com (128.224.56.208) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Wed, 29 May 2019 07:29:30 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 29 May 2019 10:29:29 -0400
+Message-ID: <20190529142929.26419-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
+MIME-Version: 1.0
+Subject: [PATCH] imagemagick: update from 7.0.8-43 to 7.0.8-47
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 12:38:08 -0000
+X-List-Received-Date: Wed, 29 May 2019 14:29:33 -0000
+Content-Type: text/plain
 
-The only change is the fix for CVE-2018-16860.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../samba/{samba_4.8.11.bb => samba_4.8.12.bb}                | 4 ++--
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.8.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.8.11.bb => samba_4.8.12.bb} (98%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.11.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.8.11.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
-index 8c08d1ed3..a6d3d0a2e 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.8.11.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.8.12.bb
-@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
-            file://cmocka-uintptr_t.patch \
-           "
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.8.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.8.bb
+index f235db094..4ee06d77f 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.8.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.8.bb
+@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=05ff94b3ff59fe6fa7489fa26e3d9142"
+ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
  
--SRC_URI[md5sum] = "de61611075e97ea98140a42d9189d9a5"
--SRC_URI[sha256sum] = "d294a8d7455d7d252d7bafc9c474855ea6e0ebe559c3babcd303a5c24e58710a"
-+SRC_URI[md5sum] = "25de700c8f1148fd13973a49a51c059e"
-+SRC_URI[sha256sum] = "c162d519101e15d1a1d76df063bfefe8d1656f57fb74e1ef19fe05d341a65d8f"
+ BASE_PV := "${PV}"
+-PV .= "_43"
++PV .= "_47"
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git "
+-SRCREV = "723c2bd9cc716a9267a8afe08354d67bb60dabd5"
++SRCREV = "b672df7a44b0ab0219b1fa78b3673c2810ddd374"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
+ S = "${WORKDIR}/git"
  
 -- 
-2.17.1
+2.17.0
 
 
