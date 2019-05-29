@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E3C447DED3
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 63AA97DED3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 09:07:12 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id 14so1668555qtf.0
+	Wed, 29 May 2019 09:11:48 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id m18so941322qki.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2019 02:07:14 -0700 (PDT)
+	Wed, 29 May 2019 02:11:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=rTHfdbaGpLkbMsMzkFbQjB4PlxC7oTpccS383zwRr10=;
-	b=uT51VlEcfGeoswFklovpbWMx5uAuKtoy3pdyX3bfWpHcyuEP6DkRqKFY8yg2KRwgCb
-	8R/t1ojoiPFHy7RYB6+2U3ec75pZzb6yTqP76Z/mfNu92lIcxubbA9wTrNmuqAbUn2tg
-	i8uZZ/cU2Gbsm33qprzBGuVcPZcDZOcrH7XxPmizMIXlm8oNP+m8OxaJALy/skYbDUhJ
-	n0GY0LnrstItIgcxS1wn2/12cySQzsnWoFh9cW4jeYMwzO7VrnOb6akh+YbGA3N55H2i
-	ACwRBPlQkLThzKmuyXcBboPHLjH+Bo+oupqZ1fmFrEDQ1UkIzkOe4CKahTLeIuFJ/Q9Q
-	Z1cw==
+	:cc; bh=0xZ8tRL0pkkNdRMNAZc+15Q3g2dIpDhL1SDXk8d7Bys=;
+	b=ouCg3AOfwQ6N5eqwgYQvTdnla65sr4tj84vz7x8XB1Dao4qtmCwu2eho1oUptc5BA7
+	ydAVtXyplBHqdZgI5mkQT/nARjx8W/imyP8rwpqxJXWkMkiDGPlk+3yF76uOspbwUmMw
+	LOQYdx3FWsO77l8zNRj8phRvf2A3atbBcoC3h6VJY9UVdBsONka4DR3wDmtRRNd3ejf4
+	gpwXgvYzAo+mlAoyOltz/SAUCmeLlDqFQnPvJeRJxVCoZnS0j8z+JK4JR7QihpyWofq7
+	PJkMXBEQZs7rBY0clU6AYnEHvzOAZfZEnSNUQGmBwnVfeDc8VVKRKLgCcMmXh0Z04KpA
+	Wxyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=rTHfdbaGpLkbMsMzkFbQjB4PlxC7oTpccS383zwRr10=;
-	b=fVLfnUrltKQENb7oQ6bOv77TAz4k2LQg5rAAatJua4/HybBi+hjIdV6d06832PixTo
-	BekNpzuTJYquXniTTwYjJ8P4phSGjAp4Usds8ckghmuqInn7GGUrBSJsztEYmpjdXDwN
-	dkFdFhqzHlRj0KZm164SpD8gYVEYOf8vhjDqzHphr6jv6yaynQJIBRbKUqu3MgaEO0yR
-	RgnmfROsZaZ95Vsqee7g8iQkNbLlGQ4Rda1cPept6ZGb1RxKUqqpmabIl9yUlYH4UhBh
-	VQcSslWVEh7wf4CwDaMxpMpNpZ5NoMK+sGwjpBp6qPi4JVSU4EXqjpNjkYBukDeX/vKD
-	zTxQ==
-X-Gm-Message-State: APjAAAUIX592GBrNg4tSPnCmquXIBAJWLVxsIq3raPSWangjqSWN/1to
-	u4C8Tt+Uk+8m83ePpuW3L2aBSHxPuzSls4b8IKITKKhEuJs=
-X-Google-Smtp-Source: APXvYqw25Le3lF2KFLgUyl6suZgB0VJTme78qEvFAalwteXz7SfM4z4H03yftahU2pssM1Auu5m8olhdqKqljxsvBQw=
-X-Received: by 2002:aed:23a8:: with SMTP id j37mr64608309qtc.53.1559120833542; 
-	Wed, 29 May 2019 02:07:13 -0700 (PDT)
+	bh=0xZ8tRL0pkkNdRMNAZc+15Q3g2dIpDhL1SDXk8d7Bys=;
+	b=oYcxQUhEV5p1E4oBiX/6Y1G22iiPqEp5riTtrb6sMqk5/nPk6OS9neCv9GUNj8MIhx
+	IliEBZ2LH6IErtw7JLcOk49RBn0q8yPh8PaRjJW3xURbvDDtl4wBep8L53B87lKT++qW
+	sbYV2QwvtXXngjtXVbbPhijbOHQRwHMF/HWNH+TLfqo8B3uIFv63WvnfzbBMRaEiIFJ0
+	zqOLr2cA4XDxu0sXe/mGdH0eZLyuo/VvQ60TiCb3+J/MMCHjuz8WoQ2VN2xBHQbUTUWH
+	3gol6bi6IKCsPVbFvLkPKbHsy1jiozkiFW0iz3hDeq4hLmidIeLfehoZ3V4DLcrDGANt
+	e0aA==
+X-Gm-Message-State: APjAAAVsvFqDIxe8ikKYrS3gAatxz/g+8B6n0oMzuWnnactptWKpzNcb
+	YJ6MszfwTbLlP7k/8+0SoLPcvAdQb6pJ3ERP67YbWI9Id2k=
+X-Google-Smtp-Source: APXvYqySVLj1qgkjZzIkzKQFcp4Szq2UV3YohHz1FVD0MwQYb9PKLI4EB8PEaEuesaJNaOlHUpmjNFLSVnKL671dYRU=
+X-Received: by 2002:a37:66cb:: with SMTP id a194mr7590629qkc.312.1559121109152;
+	Wed, 29 May 2019 02:11:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <1559011919-113581-1-git-send-email-changqing.li@windriver.com>
-	<20190528193734.GA18778@localhost>
-	<30bbbc31-4f2d-771c-bb83-a09407a13489@windriver.com>
-In-Reply-To: <30bbbc31-4f2d-771c-bb83-a09407a13489@windriver.com>
+References: <20190528192804.15712-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190528192804.15712-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 May 2019 11:06:47 +0200
-Message-ID: <CAMKF1squ-XhkRTG9PEOuPQBX-dnPu6riWst8+i4gYWkLLEEE4Q@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [PATCH 1/2] phoronix-test-suite: add rconflict
+Date: Wed, 29 May 2019 11:11:23 +0200
+Message-ID: <CAMKF1sopyc2vK7D+-tJROnKzAc0AKyGwqDCZsQPtKNPQy3mPqg@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] libghttpd: update to 1.4.54
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2019 09:07:13 -0000
+X-List-Received-Date: Wed, 29 May 2019 09:11:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, May 29, 2019 at 4:51 AM Changqing Li <changqing.li@windriver.com> wrote:
->
-> On 5/29/19 3:37 AM, Adrian Bunk wrote:
-> > On Tue, May 28, 2019 at 10:51:58AM +0800, changqing.li@windriver.com wrote:
-> >> From: Changqing Li <changqing.li@windriver.com>
-> >>
-> >> phoronix-test-suite rdepend on lsb, lsb rdepend on lsbinitscripts,
-> >> lsbinitscripts rconflict with initscripts-functions. so also add
-> >> rconflict for this one.
-> >> ...
-> > In what situation is this needed?
-> >
-> > It sounds wrong if rconflict from lower-level packages have to be
-> > replicated in higher-level packages, and is likely to break in the
-> > future.
-> >
-> > cu
-> > Adrian
->
-> My original idea is that,  by add this info,  we can get the rconflict
-> info when parse recipe.
->
-> But, you are right,  this  is not good for an indirect rconflicts.
->
->
-> @Khem,  I noticed this is on master-next,  so maybe this patch 1/2
-> needed to be reverted.  Sorry for the inconvenience.
->
+should go to oe-core ml
 
-thanks for letting me know, I have dropped it.
+On Tue, May 28, 2019 at 9:28 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../lighttpd/{lighttpd_1.4.53.bb => lighttpd_1.4.54.bb}       | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta/recipes-extended/lighttpd/{lighttpd_1.4.53.bb => lighttpd_1.4.54.bb} (96%)
+>
+> diff --git a/meta/recipes-extended/lighttpd/lighttpd_1.4.53.bb b/meta/recipes-extended/lighttpd/lighttpd_1.4.54.bb
+> similarity index 96%
+> rename from meta/recipes-extended/lighttpd/lighttpd_1.4.53.bb
+> rename to meta/recipes-extended/lighttpd/lighttpd_1.4.54.bb
+> index a0b350f358..ba1a2c54bf 100644
+> --- a/meta/recipes-extended/lighttpd/lighttpd_1.4.53.bb
+> +++ b/meta/recipes-extended/lighttpd/lighttpd_1.4.54.bb
+> @@ -19,8 +19,8 @@ SRC_URI = "http://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-${PV}.t
+>          file://0001-Use-pkg-config-for-pcre-dependency-instead-of-config.patch \
+>          "
+>
+> -SRC_URI[md5sum] = "f93436d8d400b2b0e26ee4bcc60b9ac7"
+> -SRC_URI[sha256sum] = "3bdfce1cf3e9650a556a8c26fb15342c5717c63f530c54693db632b0371dcb78"
+> +SRC_URI[md5sum] = "7abc776243c811e9872f73ab38b7f8b5"
+> +SRC_URI[sha256sum] = "cf14cce2254a96d8fcb6d3181e1a3c29a8f832531c3e86ff6f2524ecda9a8721"
+>
+>  PACKAGECONFIG ??= "openssl pcre zlib \
+>      ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
 > --
-> BRs
+> 2.17.1
 >
-> Sandy(Li Changqing)
->
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
