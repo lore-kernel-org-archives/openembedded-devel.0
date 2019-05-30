@@ -1,51 +1,36 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 213577E217
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 136136D545
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 10:25:54 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c2so3828949wrm.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 03:25:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tGT6Fbij0Cv8SPhPoYc5fSXSeYsruVPUc5ToioyUiCo=;
-	b=O1cZsS6gHczAbpDCtRvbXkKmv2oOJsZ7/ORn4B55oc7GZis/M96M5pyYnrz9CFMM15
-	mHhnFf9pRXT5P/FiYQVOYh5bnWWGT24P4g1lD1nRhaLh4SThqZdQhH/+LlK4hE28Y6NZ
-	8M9NbsiCLmAHQqZictTeCp6PfLIb58jsorT7zD7BuMiqyuRupgmaA9eP3ZOKZKDhOPxI
-	FhVZ4VTJ73D9I1hC2GjXYd/6gnU2fv5EistxtNBRWB2lk9dXoYZH9NdZhCbxMz9Sv1at
-	iua5sZPBM9iFpEIf+PHficdePZj0rTeeHt/AiJZ/SacEzYGGekp9ET/FeZQFI94SFJfy
-	pPXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tGT6Fbij0Cv8SPhPoYc5fSXSeYsruVPUc5ToioyUiCo=;
-	b=PX9wiWYgwLAAHnhsyTE9djTuwThrQNY1BXCZa9ITFxJv8x04WfZQZW/bwDQS8k8zVE
-	MClPwyhE7OfHAVgQWOG6gZO3c8hh/XiT/yTgjsDItD87s+Up/bkmK1DBIoMXDPzXn/9d
-	dTeRqNPaxVolOwiUDJ5et/AO5X7Rf53Gx278BW5N9Ml9KVlsoqvbNIOxk8y45tcXGXZS
-	EASwbttV/K9gWQ+99ssFk9QXUB0qHYBQwELeIAS04nj8OQcKNrDjMIKH1rS9T4PUJebq
-	BSTmkv20gP0CXMGvw9ATUxWj0Ixn1ItNPZkAQQtFq9z3NVFFPJ1G0UtSBTGuKiOaud+Q
-	CVNg==
-X-Gm-Message-State: APjAAAXNXmuq+ASOotiGjjLI47t13j5M/dSaYKY2bWNVtI0gOJin7BdJ
-	w8FheVEQ+0lAyCUkMAIbeg8MsA==
-X-Google-Smtp-Source: APXvYqzOJ74x6RFhf0UcnxhmThWvyChrFNUetWVgh2tPEZCHwvNWkJneSviFvKV3xtKEEpfJhu0j3A==
-X-Received: by 2002:adf:ef83:: with SMTP id d3mr2083894wro.253.1559211955621; 
-	Thu, 30 May 2019 03:25:55 -0700 (PDT)
-Received: from localhost.localdomain (84-33-71-35.dyn.eolo.it. [84.33.71.35])
-	by smtp.gmail.com with ESMTPSA id
-	r8sm1689520wrt.92.2019.05.30.03.25.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 May 2019 03:25:55 -0700 (PDT)
-From: Paolo Valente <paolo.valente@linaro.org>
-To: raj.khem@gmail.com
-Date: Thu, 30 May 2019 12:25:39 +0200
-Message-Id: <20190530102539.65935-1-paolo.valente@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	Thu, 30 May 2019 11:15:07 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45F4k26xZFz43;
+	Thu, 30 May 2019 13:15:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1559214907;
+	bh=nHDgz53L/gM43ZBvfnoRm7IVklAVteRrCOfHIYqfEmY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=XuNJlQTlulRrJEldJ6bnuhlVkP7Ucverq2QUDyTrJaK9tW+kGBSiny3kHi8lz+es7
+	fmERQxiY/CmuNdO6QOi+6QW7RTLilYEIu8BjV2pNmLhjNzjtrOdPF+YvT/UiZTvAZv
+	iinGWYEU6+ybWFlFdvX3EFmpsyjKeU7wPoDUCfQwV+yAGRfiRMboV45XoetHWh7BV8
+	/GAd9meQkjlnKfXiKqarE2/WtO6omO/T3YO8aeP9oyS44E5mVOsd+wFG7g6+qGiXOt
+	14s6hEjNTV/ML/nxFlYy3ETDGPiRgE2nqwsNyo85LIUZTL5m7FxLVVdT4WOOsbFpGS
+	EwJ8DD+zDkY7eJJnWHb/31Gvcf+4rs94FGrVcjuUH3cADg+0HlDXfvtpkhmw9Bbctc
+	v7mkyZTrDzGIl4jHBjGi8uXLjOnLNVTyJ0vMNx+A1iQu12Db2r/jjem7Q1ekambCuR
+	8uvlM3Y2SOQNS5gqDrkdGLqOI26EDIERspQ1lYAI8u+BkYIfyf2+R3/J6OrzDZRSAs
+	7arm5SBTA/IhnvDs9cMKQGkseRsYn9k5fu+nou50yqhyG0esMqi6ftE4mfZuWdr2c1
+	1sxDxlCeEIo7f5cIPCiZJQ0NcCPDCiomhzvxoCkLpiLuwNRnhGSfXvSg2SxhHMa86y
+	X/JwOFSpXKVXgMNv7tArxLfw=
+Date: Thu, 30 May 2019 14:14:57 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Paolo Valente <paolo.valente@linaro.org>
+Message-ID: <20190530111457.GA20599@localhost>
+References: <20190530102539.65935-1-paolo.valente@linaro.org>
 MIME-Version: 1.0
+In-Reply-To: <20190530102539.65935-1-paolo.valente@linaro.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: ulf.hansson@linaro.org, openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] s-suite: push SRCREV to version 3.4
+Subject: Re: [meta-oe][PATCH] s-suite: push SRCREV to version 3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 10:25:55 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 May 2019 11:15:08 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
----
- meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Thu, May 30, 2019 at 12:25:39PM +0200, Paolo Valente wrote:
+> Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+> ---
+>  meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> index 706a55e11..db1945dd0 100644
+> --- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> +++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+> @@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
+>  
+> -SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
+> -PV = "3.2+git${SRCPV}"
+> +SRCREV = "8d22ab8a4cc1484622c47ac9c5944fb9a61a5c0f"
+> +PV = "3.4+git${SRCPV}"
+>  SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+>...
 
-diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-index 706a55e11..db1945dd0 100644
---- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-+++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
- 
--SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
--PV = "3.2+git${SRCPV}"
-+SRCREV = "8d22ab8a4cc1484622c47ac9c5944fb9a61a5c0f"
-+PV = "3.4+git${SRCPV}"
- SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
- 
- S = "${WORKDIR}/git"
+The problem was already there before, but the upgrade gives the 
+opportunity to get rid of the +git${SRCPV}, which is incorrect
+when exactly the release is packaged.
+
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
