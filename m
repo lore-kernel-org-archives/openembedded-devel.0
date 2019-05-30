@@ -1,47 +1,31 @@
-Return-Path: <geoffhp@gmail.com>
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
-	[209.85.167.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C98A37E403
+Return-Path: <scott@jumpnowtek.com>
+X-Greylist: delayed 399 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 30 May 2019 21:06:32 UTC
+Received: from smtp97.ord1c.emailsrvr.com (smtp97.ord1c.emailsrvr.com
+	[108.166.43.97])
+	by mail.openembedded.org (Postfix) with ESMTP id B51687CA4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 16:34:02 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id y17so5549733lfe.0
+	Thu, 30 May 2019 21:06:32 +0000 (UTC)
+X-Auth-ID: scott@jumpnowtek.com
+Received: by smtp13.relay.ord1c.emailsrvr.com (Authenticated sender:
+	scott-AT-jumpnowtek.com) with ESMTPSA id 0836AA027D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 09:34:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=GiYMu+4Y44kIUEWb40UKaydXLH7pMqLWRdl4t4IbokU=;
-	b=Xj8PVBz/btatB74KAHU0lOWnTv1oVQ0G7UtBzGDyCAMz+6tBV3pYpRhTAp9sdZrhr2
-	W9ebnZ4CYmjhVqL/Rq5782B4pvfli3wWbG8pu90M/0eMzF85BErGk6K1LAI5Fby+vGxJ
-	7fpnh9fB3gwiQDwujOk4rFFt7D664CWCfcOGgJzkYeYQPg9BCKOzh78bAV64LwdbUiG3
-	Io7HOEnUy7X6BTkoOUyAAcoK364Ksgb/b+oXChi2wyXnR6zwRvILIw+94Ka8BVvpM6mO
-	8V4i2QBRjh0FUvNwBY9y2H7snXO+VtV6ZOW9Sgf5vEYjXp6MouTIPSJfgfzG4+deaLf2
-	CGTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=GiYMu+4Y44kIUEWb40UKaydXLH7pMqLWRdl4t4IbokU=;
-	b=EagcjOm+G2C2wVNU8mT5OWhOksWYCPbhT1lvtypjj3QPpG16zz0MOjE81b0NCPDqd9
-	HtYIJA1HdtpE2AR1WQr2vYQH6Odft2i0gsIiLgaMCGZkmsVQ/w3JgeM2UifZKwBSWRO0
-	ULDXjbZrt/FPil/19fgv2KZd53iVqqdCFlaVhk3Ltp51MNTbXFPy+7ipXxmc7gGIbDKb
-	YuC8pHS9vMBf9RBZv3s90K0Q35dLAntvOipQKWJITfZI+v4M9qmfBTB0F9MlgwHaOANQ
-	pRnz+28jUv45t44MBpasYCsl7fK4cIsd6LQH2dgPoXwZ9zmawbOYBgY6CrURi166VmWY
-	3b6w==
-X-Gm-Message-State: APjAAAXxQGX7PxB1ZjQ9eE7pQw8RdGaVssBKTUx8GSAESTf4K5JyLbNu
-	foYDZ8PSUjOUh9amXWI1AKi5fMMbtuCLnF1K8Iw=
-X-Google-Smtp-Source: APXvYqw5ElU3kXI1B6RDuXUK21gvGeS7d2p/HVULN02lHNQ8UBPJPxCyiZ1cOLw/XQJNRnGGJSVJkQTUKcAf8tvHP18=
-X-Received: by 2002:ac2:5383:: with SMTP id g3mr2674241lfh.107.1559234043009; 
-	Thu, 30 May 2019 09:34:03 -0700 (PDT)
+	Thu, 30 May 2019 16:59:53 -0400 (EDT)
+X-Sender-Id: scott@jumpnowtek.com
+Received: from [192.168.10.4] (c-73-234-253-132.hsd1.me.comcast.net
+	[73.234.253.132]) (using TLSv1.2 with cipher AES128-SHA)
+	by 0.0.0.0:465 (trex/5.7.12); Thu, 30 May 2019 16:59:54 -0400
+To: openembedded-devel@lists.openembedded.org
+References: <1559207054-32056-1-git-send-email-scott@jumpnowtek.com>
+	<d9e8c97c-892a-473b-c48d-eccffce6f071@gmail.com>
+From: Scott Ellis <scott@jumpnowtek.com>
+Message-ID: <e5067fbe-0d2d-b2c3-8bb4-29024740cf65@jumpnowtek.com>
+Date: Thu, 30 May 2019 16:59:56 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-References: <CAHNuFGLy41mmeMnR2iRbJWYQSU9egnv9bNuF_hUoBhpUH7p+tQ@mail.gmail.com>
-	<d8c5976a-9691-290d-fdec-4a8eedd90fb4@gmail.com>
-In-Reply-To: <d8c5976a-9691-290d-fdec-4a8eedd90fb4@gmail.com>
-From: Geoff Parker <geoffhp@gmail.com>
-Date: Thu, 30 May 2019 09:33:51 -0700
-Message-ID: <CAHNuFGKC2hd_14_s9J-JhPCX0__yYJAdD4bQrkdJwjHJAEa8EA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][warrior] update python3-websockets from v4.0.1 to 5.0.1
+In-Reply-To: <d9e8c97c-892a-473b-c48d-eccffce6f071@gmail.com>
+Subject: Re: [meta-networking][warrior][PATCH] wireguard: Upgrade 20190123 -> 20190406
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,64 +38,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 16:34:03 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 May 2019 21:06:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Thanks, I'm new to the patch process.  Do I just resubmit the same
-patch, changing the e-mail subject header line from [warrior] to
-[master] ?
+http://lists.openembedded.org/pipermail/openembedded-devel/2019-May/199619.html
 
-On Thu, May 30, 2019 at 6:19 AM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 5/29/19 11:13 AM, Geoff Parker wrote:
-> > python3-websockets version 4.01 will throw this error
-> > when used with Python 3.7.
-> >
-> >  File "/usr/lib/python3.7/site-packages/websockets/compatibility.py", line 15
-> >    asyncio_ensure_future = asyncio.async           # Python < 3.5
-> >                                        ^
-> >    SyntaxError: invalid syntax
-> >
-> > This was fixed upstream in a commit applied 3 commits since the 4.0.1 tag.
->
-> Fix needs to be in master first before any consideration for backport.
->
+On 5/30/2019 9:16 AM, akuster808 wrote:
+> 
+> 
+> On 5/30/19 2:04 AM, Scott Ellis wrote:
+>> Fixes issues with kernels 5.1 and greater.
+>>
+>> Backport from master fc1b5310b28f70900a8a432048e08ee06ae309d7
+> 
+> What is in this update?
+> 
 > - armin
-> >
-> >  https://github.com/aaugustin/websockets/commit/9f566c5d12eae1258aa6f1991fe8cf0a7d390f97
-> >
-> > Signed-off-by: Geoff Parker <geoffhp@gmail.com>
-> > ---
-> > ...ython3-websockets_4.0.1.bb => python3-websockets_5.0.1.bb} | 4 ++--
-> > 1 file changed, 2 insertions(+), 2 deletions(-)
-> > rename meta-python/recipes-devtools/python/{python3-websockets_4.0.1.bb
-> > => python3-websockets_5.0.1.bb} (70%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
-> > b/meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
-> > similarity index 70%
-> > rename from meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
-> > rename to meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
-> > index 414129c59..151dee2d5 100644
-> > --- a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
-> > @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =
-> > "file://LICENSE;md5=5070256738c06d2e59adbec1f4057dac"
-> >
-> > inherit pypi setuptools3
-> >
-> > -SRC_URI[md5sum] = "9e8c6b3c70def4146d75fbb0f52bdfc7"
-> > -SRC_URI[sha256sum] =
-> > "da4d4fbe059b0453e726d6d993760065d69b823a27efc3040402a6fcfe6a1ed9"
-> > +SRC_URI[md5sum] = "cd2f92f07bca588acd9238b18f6cfbcf"
-> > +SRC_URI[sha256sum] =
-> > "a49d315db5a7a19d55422e1678e8a1c3b9661d7296bef3179fa620cf80b12674"
-> >
-> > BBCLASSEXTEND = "native nativesdk"
-> >
-> > --
-> > 2.20.1
->
+>>
+>> Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
+>> ---
+>>  ...eguard-module_0.0.20190123.bb => wireguard-module_0.0.20190406.bb} | 0
+>>  ...ireguard-tools_0.0.20190123.bb => wireguard-tools_0.0.20190406.bb} | 0
+>>  meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
+>>  3 files changed, 2 insertions(+), 2 deletions(-)
+>>  rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190123.bb => wireguard-module_0.0.20190406.bb} (100%)
+>>  rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190123.bb => wireguard-tools_0.0.20190406.bb} (100%)
+>>
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190123.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb
+>> similarity index 100%
+>> rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190123.bb
+>> rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190123.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb
+>> similarity index 100%
+>> rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190123.bb
+>> rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> index 8314e79..5cf745e 100644
+>> --- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> @@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+>>  LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>>  
+>>  SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+>> -SRC_URI[md5sum] = "8a0a232f65d5d86dd408efd9ac30bcf9"
+>> -SRC_URI[sha256sum] = "edd13c7631af169e3838621b1a1bff3ef73cf7bc778eec2bd55f7c1089ffdf9b"
+>> +SRC_URI[md5sum] = "c11254fe48695e61c145a7e82756ecba"
+>> +SRC_URI[sha256sum] = "2f06f3adf70b95e74a7736a22dcf6e9ef623b311a15b7d55b5474e57c3d0415b"
+>>  
+>>  S = "${WORKDIR}/WireGuard-${PV}/src/"
+> 
 
