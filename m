@@ -1,28 +1,48 @@
-Return-Path: <Fang.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7490D605B3
+Return-Path: <scottellis.developer@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D1C427D41E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 08:25:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4U8Or6l016839
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 30 May 2019 01:25:04 -0700
-Received: from [0.0.0.0] (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 30 May 2019 01:24:42 -0700
-To: Richard Leitner <richard.leitner@skidata.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
-	<cee583cc-c120-8198-8322-d917f6ae1266@skidata.com>
-From: "Jia, Fang" <fang.jia@windriver.com>
-Message-ID: <c7f24c27-2a09-5f80-86b6-40cf6cfb3423@windriver.com>
-Date: Thu, 30 May 2019 16:33:13 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <cee583cc-c120-8198-8322-d917f6ae1266@skidata.com>
-Subject: Re: [PATCH 1/2] Revert "base-files: Define JAVA_HOME by default"
+	Thu, 30 May 2019 09:04:49 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id t1so5999395qtc.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 May 2019 02:04:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=78eJMesgAIPqq6iG+16fV18sGQZPs+JxEaLduget7Vo=;
+	b=eTYJsaH1CoddVsk8p5+O1lzJYt5FPKVwwq0m6NQou2F+J0gD5I6jwxoRodNg79mRTv
+	1rjOGYqQ+bI+KrO4U5diXih/+Q0rlHFVz3yh0D/VUvU7WQQcO8HTHrs1FESElnN5wkTu
+	9XkS8aC9bo7r66dJiL/dPBWe2Vegu+X2K7KfcdIwP5Eo7bu6QtToLFZgG6NRov6F+CJy
+	eAAMEKPQiQXZZRAR5Y38zL8HsISm0fXyyR6PB87yJy3g8OU5DVhY6pL/2+vbA6EyNftN
+	JIOoa4eF077VWWgWmofrrFJ+UenhGjpObVYimVcKe47f6kYV5ZUc+Q4V5rL42nvrVBzm
+	XVtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=78eJMesgAIPqq6iG+16fV18sGQZPs+JxEaLduget7Vo=;
+	b=a9PR6ugIdgy8HKg/HGAYlHdWSu58jFFZSOLdTQ+1yAq+nEZRl/jW3rRdeUcCmbaGHR
+	ORwytVk85E4G85KQYpyxxnZWOj2SthShO/6UqcU9YHb+xLNIj9Ci7y4cgb9D9cV747So
+	Phq65a8poUGeKDYO93v3u6b2JOpSTvOD3hahWyOe0AuSOKe62ExH+dSoDUn2uyXiTJvb
+	wMot/Lcdn4wp277DAHjUPt9NYD6pUh2cbDPk5ReiX2dJukgZO0iTIl7TumIj6RWyW8GT
+	wk9CtvFgibcM06BFZRsNTvHgRajl3YZge0VQ5A0vkMueyt9p1jYnBZUiFhBqUKGb2Hp4
+	rqwg==
+X-Gm-Message-State: APjAAAV9GEFjZr6Bf/vXtYgHslq82aBTOuGL5hZr2o0jdm8OdB2DVUyX
+	uYnl7YQpKpr9UnTtGTdXrIXpap8x
+X-Google-Smtp-Source: APXvYqyqLf8rzXU3776PMDsXM+cmiEUM52l2CMJ7iGyhgn+Ljq4mNdP7WETJGnHWhFBLB+OX74koeg==
+X-Received: by 2002:aed:378a:: with SMTP id j10mr2461451qtb.6.1559207090807;
+	Thu, 30 May 2019 02:04:50 -0700 (PDT)
+Received: from fractal.jumpnow (c-73-234-253-132.hsd1.me.comcast.net.
+	[73.234.253.132]) by smtp.gmail.com with ESMTPSA id
+	e66sm1241083qtb.55.2019.05.30.02.04.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 30 May 2019 02:04:50 -0700 (PDT)
+From: Scott Ellis <scottellis.developer@gmail.com>
+X-Google-Original-From: Scott Ellis <scott@jumpnowtek.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 30 May 2019 05:04:14 -0400
+Message-Id: <1559207054-32056-1-git-send-email-scott@jumpnowtek.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][warrior][PATCH] wireguard: Upgrade 20190123 -> 20190406
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,78 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 08:25:24 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 May 2019 09:04:50 -0000
 
-Hi Richard
+Fixes issues with kernels 5.1 and greater.
 
-How about the test for the two patches ? Is it fine to push to master branch ?
+Backport from master fc1b5310b28f70900a8a432048e08ee06ae309d7
 
-Thanks,
-Fang
+Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
+---
+ ...eguard-module_0.0.20190123.bb => wireguard-module_0.0.20190406.bb} | 0
+ ...ireguard-tools_0.0.20190123.bb => wireguard-tools_0.0.20190406.bb} | 0
+ meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190123.bb => wireguard-module_0.0.20190406.bb} (100%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190123.bb => wireguard-tools_0.0.20190406.bb} (100%)
 
-On 22/02/2019 16:52, Richard Leitner wrote:
-> Hi,
-> thanks for the patch. Looks good to me now.
-> I'll add it to my tests and will give feedback.
-> 
-> Nonetheless things to improve for your next contribution:
->  a) Please add [meta-java] to the subject
->  b) Please version the patchset when it updates an existing one
->     on the mailinglist
-> 
-> Therefore the correct subject prefix for this patchset would have been:
->  [oe][meta-java][PATCH V2 1/2]
-> 
-> No problem for this one as I found it, but please keep an eye on that for the
-> next time. Thanks.
-> 
-> regards;Richard.L
-> 
-> On 21/02/2019 04:23, Fang Jia wrote:
->> This reverts commit ada652564f09756a81f54495cbc2091125239625.
->>
->> When enable multilib on a 64-bit system, probably both base-file and
->> lib32-base-files are installed.
->> Then both packages want to modify the file "profile", there will be
->> an error like:
->> "
->> Error: Transaction check error:
->> file /etc/profile conflicts between attempted installs of
->> lib32-base-files-3.0.14-r148.gpb_virt and
->> base-files-3.0.14-r148.gpb_virt
->> "
->>
->> The task can be added by adding a file to ${sysconfdir}/profile.d/.
->>
->> Signed-off-by: Fang Jia <fang.jia@windriver.com>
->> ---
->>   recipes-core/base-files/base-files_3.0.14.bbappend | 13 -------------
->>   1 file changed, 13 deletions(-)
->>   delete mode 100644 recipes-core/base-files/base-files_3.0.14.bbappend
->>
->> diff --git a/recipes-core/base-files/base-files_3.0.14.bbappend
->> b/recipes-core/base-files/base-files_3.0.14.bbappend
->> deleted file mode 100644
->> index 4651185..0000000
->> --- a/recipes-core/base-files/base-files_3.0.14.bbappend
->> +++ /dev/null
->> @@ -1,13 +0,0 @@
->> -do_install_append() {
->> -    cat >> ${D}${sysconfdir}/profile << EOT
->> -JAVA_HOME=""
->> -for dir in ${libdir}/jvm/*; do
->> -    if [ -x "\${dir}/bin/java" ]; then
->> -        [ -z "\${JAVA_HOME}" ] && JAVA_HOME="\${dir}"
->> -    fi
->> -done
->> -if [ -n "\${JAVA_HOME}" ]; then
->> -    export JAVA_HOME=\${JAVA_HOME}
->> -fi
->> -EOT
->> -}
->>
-> 
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190123.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190123.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190123.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190123.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 8314e79..5cf745e 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+-SRC_URI[md5sum] = "8a0a232f65d5d86dd408efd9ac30bcf9"
+-SRC_URI[sha256sum] = "edd13c7631af169e3838621b1a1bff3ef73cf7bc778eec2bd55f7c1089ffdf9b"
++SRC_URI[md5sum] = "c11254fe48695e61c145a7e82756ecba"
++SRC_URI[sha256sum] = "2f06f3adf70b95e74a7736a22dcf6e9ef623b311a15b7d55b5474e57c3d0415b"
+ 
+ S = "${WORKDIR}/WireGuard-${PV}/src/"
+-- 
+2.7.4
+
 
