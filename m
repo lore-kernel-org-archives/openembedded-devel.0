@@ -1,52 +1,47 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 60CCD7E258
+Return-Path: <geoffhp@gmail.com>
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C98A37E403
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 13:21:59 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id d18so4213969wrs.5
+	Thu, 30 May 2019 16:34:02 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id y17so5549733lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 06:22:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QO714HbqEh+sV7XfkKQpZuDizk5nPJTsfOE/NRtA99g=;
-	b=ViZkKV/UuHk+aqmOvB+xpE6C6NfqrViUlEW0xph2BDlCNmoWsveEfIk2YCf9YSkNT2
-	G+2rThRCMG+9xrkNJly7FvbVoRuFrdMlHsQDa+nosfOnGtQZdzowOoS3GDrktIR/DZHe
-	9xfcuD64V8y/38WjrvO2WkLCzPT1vflEk9jMIl65kTnamzXso2cDt/nq5VNQ4F5XeLa4
-	/a/VeFNXq6WMQSJnMddrIeiRu4VbG4iO3SCQgoloQbGMCLMKj863sHMkmyVDoxTXf6tM
-	NM556lpK7gaZvdrMNN5rFI8BNUNPJkerTnO06V9TrkwuaUwQuUDCJxlLoW2r8eccy3GP
-	pC6A==
+	Thu, 30 May 2019 09:34:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=GiYMu+4Y44kIUEWb40UKaydXLH7pMqLWRdl4t4IbokU=;
+	b=Xj8PVBz/btatB74KAHU0lOWnTv1oVQ0G7UtBzGDyCAMz+6tBV3pYpRhTAp9sdZrhr2
+	W9ebnZ4CYmjhVqL/Rq5782B4pvfli3wWbG8pu90M/0eMzF85BErGk6K1LAI5Fby+vGxJ
+	7fpnh9fB3gwiQDwujOk4rFFt7D664CWCfcOGgJzkYeYQPg9BCKOzh78bAV64LwdbUiG3
+	Io7HOEnUy7X6BTkoOUyAAcoK364Ksgb/b+oXChi2wyXnR6zwRvILIw+94Ka8BVvpM6mO
+	8V4i2QBRjh0FUvNwBY9y2H7snXO+VtV6ZOW9Sgf5vEYjXp6MouTIPSJfgfzG4+deaLf2
+	CGTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QO714HbqEh+sV7XfkKQpZuDizk5nPJTsfOE/NRtA99g=;
-	b=i4diXDSB8wNh2hjqEl8nr+ZXgSea8qYFylRrr9F1pCcTi+2RJXmQAAseHLlzwHmR5v
-	UpQIV+rBkiHOH+Ad9uFb/wEi/CZa1Ukx7o1YX6JUTO4V6v/1/TVjkp750y2kljPG9pJZ
-	xQNcVdc5kMuT8PVvqIhglc1bGIabQsycOsuyV9FYuu0/HkROiGyKXF5526leKvqUIXvm
-	Z8dOggGyb+J0UG2Jh54Z+d5xOSuvRkhmUpamINU4qTyZ50qqIeKQzIMubKUF+iKVCKvO
-	t3EkK+XazRZ5j7yj0/yBdBKkdL59qApensVVn9mFIMN7aJdw+anB+ZqtLLw6n9zbP1Pz
-	j+1g==
-X-Gm-Message-State: APjAAAWepcYTisjRcyG5Qqa7hra05c6iALq8pSHMFHnkvROZhgOma9jz
-	q9sqS3LiJb5PlcYk0lotfNeY5A==
-X-Google-Smtp-Source: APXvYqxJLtSUc3GVwxu116QSli35dpIGkA+ELgtKbqZDnCTK1i4QxNc8KUwiZVe1Dr5SVLBc6h7Vvg==
-X-Received: by 2002:adf:ba47:: with SMTP id t7mr2545990wrg.175.1559222520151; 
-	Thu, 30 May 2019 06:22:00 -0700 (PDT)
-Received: from localhost.localdomain (84-33-71-35.dyn.eolo.it. [84.33.71.35])
-	by smtp.gmail.com with ESMTPSA id
-	f197sm2760319wme.39.2019.05.30.06.21.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 May 2019 06:21:59 -0700 (PDT)
-From: Paolo Valente <paolo.valente@linaro.org>
-To: raj.khem@gmail.com
-Date: Thu, 30 May 2019 15:21:48 +0200
-Message-Id: <20190530132148.66500-1-paolo.valente@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=GiYMu+4Y44kIUEWb40UKaydXLH7pMqLWRdl4t4IbokU=;
+	b=EagcjOm+G2C2wVNU8mT5OWhOksWYCPbhT1lvtypjj3QPpG16zz0MOjE81b0NCPDqd9
+	HtYIJA1HdtpE2AR1WQr2vYQH6Odft2i0gsIiLgaMCGZkmsVQ/w3JgeM2UifZKwBSWRO0
+	ULDXjbZrt/FPil/19fgv2KZd53iVqqdCFlaVhk3Ltp51MNTbXFPy+7ipXxmc7gGIbDKb
+	YuC8pHS9vMBf9RBZv3s90K0Q35dLAntvOipQKWJITfZI+v4M9qmfBTB0F9MlgwHaOANQ
+	pRnz+28jUv45t44MBpasYCsl7fK4cIsd6LQH2dgPoXwZ9zmawbOYBgY6CrURi166VmWY
+	3b6w==
+X-Gm-Message-State: APjAAAXxQGX7PxB1ZjQ9eE7pQw8RdGaVssBKTUx8GSAESTf4K5JyLbNu
+	foYDZ8PSUjOUh9amXWI1AKi5fMMbtuCLnF1K8Iw=
+X-Google-Smtp-Source: APXvYqw5ElU3kXI1B6RDuXUK21gvGeS7d2p/HVULN02lHNQ8UBPJPxCyiZ1cOLw/XQJNRnGGJSVJkQTUKcAf8tvHP18=
+X-Received: by 2002:ac2:5383:: with SMTP id g3mr2674241lfh.107.1559234043009; 
+	Thu, 30 May 2019 09:34:03 -0700 (PDT)
 MIME-Version: 1.0
-Cc: ulf.hansson@linaro.org, bunk@stusta.de,
-	openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH V2] s-suite: push SRCREV to version 3.4
+References: <CAHNuFGLy41mmeMnR2iRbJWYQSU9egnv9bNuF_hUoBhpUH7p+tQ@mail.gmail.com>
+	<d8c5976a-9691-290d-fdec-4a8eedd90fb4@gmail.com>
+In-Reply-To: <d8c5976a-9691-290d-fdec-4a8eedd90fb4@gmail.com>
+From: Geoff Parker <geoffhp@gmail.com>
+Date: Thu, 30 May 2019 09:33:51 -0700
+Message-ID: <CAHNuFGKC2hd_14_s9J-JhPCX0__yYJAdD4bQrkdJwjHJAEa8EA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][warrior] update python3-websockets from v4.0.1 to 5.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,30 +54,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 13:21:59 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 May 2019 16:34:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
----
- meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks, I'm new to the patch process.  Do I just resubmit the same
+patch, changing the e-mail subject header line from [warrior] to
+[master] ?
 
-diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-index 706a55e11..741142c50 100644
---- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-+++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
- 
--SRCREV = "262227ec9de4be1ab41d9918d32ceb773089f1dd"
--PV = "3.2+git${SRCPV}"
-+SRCREV = "8d22ab8a4cc1484622c47ac9c5944fb9a61a5c0f"
-+PV = "3.4"
- SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
- 
- S = "${WORKDIR}/git"
--- 
-2.20.1
-
+On Thu, May 30, 2019 at 6:19 AM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 5/29/19 11:13 AM, Geoff Parker wrote:
+> > python3-websockets version 4.01 will throw this error
+> > when used with Python 3.7.
+> >
+> >  File "/usr/lib/python3.7/site-packages/websockets/compatibility.py", line 15
+> >    asyncio_ensure_future = asyncio.async           # Python < 3.5
+> >                                        ^
+> >    SyntaxError: invalid syntax
+> >
+> > This was fixed upstream in a commit applied 3 commits since the 4.0.1 tag.
+>
+> Fix needs to be in master first before any consideration for backport.
+>
+> - armin
+> >
+> >  https://github.com/aaugustin/websockets/commit/9f566c5d12eae1258aa6f1991fe8cf0a7d390f97
+> >
+> > Signed-off-by: Geoff Parker <geoffhp@gmail.com>
+> > ---
+> > ...ython3-websockets_4.0.1.bb => python3-websockets_5.0.1.bb} | 4 ++--
+> > 1 file changed, 2 insertions(+), 2 deletions(-)
+> > rename meta-python/recipes-devtools/python/{python3-websockets_4.0.1.bb
+> > => python3-websockets_5.0.1.bb} (70%)
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+> > b/meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
+> > similarity index 70%
+> > rename from meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+> > rename to meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
+> > index 414129c59..151dee2d5 100644
+> > --- a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-websockets_5.0.1.bb
+> > @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =
+> > "file://LICENSE;md5=5070256738c06d2e59adbec1f4057dac"
+> >
+> > inherit pypi setuptools3
+> >
+> > -SRC_URI[md5sum] = "9e8c6b3c70def4146d75fbb0f52bdfc7"
+> > -SRC_URI[sha256sum] =
+> > "da4d4fbe059b0453e726d6d993760065d69b823a27efc3040402a6fcfe6a1ed9"
+> > +SRC_URI[md5sum] = "cd2f92f07bca588acd9238b18f6cfbcf"
+> > +SRC_URI[sha256sum] =
+> > "a49d315db5a7a19d55422e1678e8a1c3b9661d7296bef3179fa620cf80b12674"
+> >
+> > BBCLASSEXTEND = "native nativesdk"
+> >
+> > --
+> > 2.20.1
+>
 
