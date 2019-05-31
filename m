@@ -1,25 +1,24 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E170B7D2B2
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4828C7E572
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 08:45:01 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4V8j15B025936
+	Fri, 31 May 2019 08:45:14 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4V8idXv026424
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 31 May 2019 01:45:02 -0700 (PDT)
+	Fri, 31 May 2019 01:44:49 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 31 May 2019 01:44:56 -0700
+	Fri, 31 May 2019 01:44:28 -0700
 From: <kai.kang@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Fri, 31 May 2019 04:44:15 -0400
-Message-ID: <20190531084423.172617-3-kai.kang@windriver.com>
+Date: Fri, 31 May 2019 04:44:13 -0400
+Message-ID: <20190531084423.172617-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190531084423.172617-1-kai.kang@windriver.com>
-References: <20190531084423.172617-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 02/10] xfdesktop: 4.13.3 -> 4.13.4
+Subject: [meta-xfce][PATCH 00/10] Update recipes in meta-xfce
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 08:45:02 -0000
+X-List-Received-Date: Fri, 31 May 2019 08:45:14 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb} (76%)
 
-diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.3.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.4.bb
-similarity index 76%
-rename from meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.3.bb
-rename to meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.4.bb
-index 2c70a9c31..f02a6bffe 100644
---- a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.3.bb
-+++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.13.4.bb
-@@ -8,8 +8,8 @@ inherit xfce distro_features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[md5sum] = "f08944f1b69ce1c6e1fbb9d7f4cb1da7"
--SRC_URI[sha256sum] = "80f7f28ef17638fe1cf4481db694731c208785a56b6c840005202f9c2db238f5"
-+SRC_URI[md5sum] = "d1174af12148141a07b62cc051c43c84"
-+SRC_URI[sha256sum] = "f4f7fa5162512971c25066eb04ef78f0d075656da79b6f7425ffb619a5119ca0"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+Kai Kang (10):
+  thunar: 1.8.4 -> 1.8.6
+  xfdesktop: 4.13.3 -> 4.13.4
+  xfce4-panel: 4.13.4 -> 4.13.5
+  thunar-volman: 0.9.1 -> 0.9.2
+  xfce4-appfinder: 4.13.2 -> 4.13.3
+  libxfce4util: 4.13.2 -> 4.13.3
+  xfwm4: 4.13.1 -> 4.13.2
+  xfconf: 4.13.6 -> 4.13.7
+  libxfce4ui: 4.13.4 -> 4.13.5
+  xfce4-power-manager: 1.6.1 -> 1.6.2
+
+ .../{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb}          | 4 ++--
+ .../{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb}      | 4 ++--
+ .../{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb}      | 4 ++--
+ .../thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb}             | 4 ++--
+ ...{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} | 4 ++--
+ .../{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb}        | 4 ++--
+ ...-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} | 6 +++---
+ .../xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb}           | 4 ++--
+ .../xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb}  | 4 ++--
+ .../recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} | 4 ++--
+ 10 files changed, 21 insertions(+), 21 deletions(-)
+ rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb} (89%)
+ rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb} (64%)
+ rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb} (76%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb} (86%)
+ rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} (69%)
+ rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb} (90%)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} (88%)
+ rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb} (82%)
+ rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb} (76%)
+ rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} (89%)
+
 -- 
 2.20.0
 
