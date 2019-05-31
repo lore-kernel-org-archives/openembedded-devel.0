@@ -1,24 +1,36 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FA2F7E54A
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id D2A3F7D2B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 08:23:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4V8MxG8025962
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 01:23:16 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Fri, 31 May 2019 01:22:59 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 May 2019 16:22:58 +0800
-Message-ID: <1559290978-297054-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 31 May 2019 08:44:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45FdLB3CjWz1n;
+	Fri, 31 May 2019 10:44:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1559292290;
+	bh=Mw3RqNIYXlpkWTRLNOLg3a3MVGkTFVaX2A+TEkTlBvA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=L8jkAxLay0HUTRgVSEnBRobOlc9ZQgN6PasVb+OuwyybvOTtRHWKIXgvEU0VhUBrq
+	kFzWJzt8gkW6VTnJfDXIAyK2o9+qmxQ4cc3vqsv76vDNIj+cEah2kmd9pSOwCeqfJ/
+	l72W8EfcUilq+Kv7A+DG7qczkeZU5FPkEf/81Rf8OEHZ+4F1vRkIA5kQ20KwCggQtE
+	iW9lb0ZkfbofUnosRzFKFVXwBDQ49Mf01ZTgdjbap9CNfRoVcYAjYHQoK/Cep/nluC
+	5u6xuLsEylX1zU3yM1yg+WYPTA43HDp/iojO+ViqpRBFeNvNbVGDkq6uUdxMwV1Dja
+	qbJHbIa/vBpKLXV2RXvebhTyzlqgAerP3LwR1nPPuT6YulODGMEv2tm2Go/NyZ8IwR
+	uSGAYvGpXNGB3lY1c5sJlQYgwHZzih+1aJXMKzkRGSd9Sw6DYEmas3a5z8e6FQkyof
+	S1XBZHCBeb+hLWLPD/MQrjnqV8vs8ED2WrLSWaH3PaTY3WtLpQcBocwQM/XbAkBcRs
+	gNnTTb5wE5/JOXSxBqZ4+o/OhCFVTBndFzMpuIlapbOxxgONlAE6AtoTpj/cr/nDO0
+	RI5nQ9Y//Qlue5nyU2sOa6gmjjJU15Sgv7CI2d/EFazCaO/EeTdb5oqiJuZZ4Jn2Cl
+	ESVgUUsnXrWvMOt8vaxNZ/o4=
+Date: Fri, 31 May 2019 11:44:47 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: zhe.he@windriver.com
+Message-ID: <20190531084447.GA18583@localhost>
+References: <1559271137-240663-1-git-send-email-zhe.he@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] php-fpm-apache: fix module path
+In-Reply-To: <1559271137-240663-1-git-send-email-zhe.he@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] rocksdb: Fix build failure due to GCC9 deprecated-copy pessimizing-move
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 08:23:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 31 May 2019 08:44:51 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Changqing Li <changqing.li@windriver.com>
+On Fri, May 31, 2019 at 10:52:17AM +0800, zhe.he@windriver.com wrote:
+> From: He Zhe <zhe.he@windriver.com>
+> 
+> GCC9 introduce more stricter checks deprecated-copy and pessimizing-move, while
+> rocksdb uses -Werror and causes the following build error.
+> 
+> db/version_edit.h:178:33: error: implicitly-declared 'constexpr rocksdb::FileDescriptor::FileDescriptor(const rocksdb::FileDescriptor&)' is deprecated [-Werror=deprecated-copy]
+> 
+> utilities/persistent_cache/persistent_cache_util.h:51:23: error: moving a local object in a return statement prevents copy elision [-Werror=pessimizing-move]
+> 
+> Signed-off-by: He Zhe <zhe.he@windriver.com>
+> ---
+>  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> index 8d84619..bbd8e4f 100644
+> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> @@ -31,6 +31,9 @@ EXTRA_OECMAKE = "\
+>      -DWITH_TESTS=OFF \
+>      -DWITH_TOOLS=OFF \
+>  "
+> +do_compile_prepend() {
+> +    sed -i 's/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow -Wno-error=deprecated-copy -Wno-error=pessimizing-move")/' ${S}/CMakeLists.txt
+> +}
+>...
 
-with configuration:
-IMAGE_INSTALL_append = " apache2 php-fpm-apache2"
+It would be more elegant to add -DFAIL_ON_WARNINGS=OFF to EXTRA_OECMAKE 
+instead.
 
-systemctl status apache2.service report error:
-httpd: Syntax error on line 509 of /etc/apache2/httpd.conf: Syntax error on line 3 of /etc/apache2/conf.d/php-fpm.conf: Cannot load lib/apache
+This is also correct in general, since the few packages using -Werror 
+are frequently causing this kind of problem for distributions.
 
-fix by correct the module path
+cu
+Adrian
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-devtools/php/php/php-fpm-apache.conf | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-index 77cdd82..ef79a0c 100644
---- a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-@@ -1,6 +1,6 @@
- # Taken from http://wiki.apache.org/httpd/PHP-FPM
- 
--LoadModule proxy_module      lib/apache2/modules/mod_proxy.so
--LoadModule proxy_fcgi_module lib/apache2/modules/mod_proxy_fcgi.so
-+LoadModule proxy_module      /usr/lib/apache2/modules/mod_proxy.so
-+LoadModule proxy_fcgi_module /usr/lib/apache2/modules/mod_proxy_fcgi.so
- 
- ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/share/apache2/htdocs/
 -- 
-2.7.4
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
