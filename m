@@ -1,24 +1,24 @@
-Return-Path: <Zhe.He@windriver.com>
+Return-Path: <Changqing.Li@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AD857E40A
+	by mail.openembedded.org (Postfix) with ESMTP id 5FA2F7E54A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 02:53:01 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4V2qf5P016738
+	Fri, 31 May 2019 08:23:25 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4V8MxG8025962
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2019 19:52:52 -0700
+	Fri, 31 May 2019 01:23:16 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Thu, 30 May 2019 19:52:18 -0700
-From: <zhe.he@windriver.com>
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Fri, 31 May 2019 01:22:59 -0700
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 May 2019 10:52:17 +0800
-Message-ID: <1559271137-240663-1-git-send-email-zhe.he@windriver.com>
+Date: Fri, 31 May 2019 16:22:58 +0800
+Message-ID: <1559290978-297054-1-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rocksdb: Fix build failure due to GCC9 deprecated-copy pessimizing-move
+Subject: [meta-oe][PATCH] php-fpm-apache: fix module path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 02:53:01 -0000
+X-List-Received-Date: Fri, 31 May 2019 08:23:25 -0000
 Content-Type: text/plain
 
-From: He Zhe <zhe.he@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-GCC9 introduce more stricter checks deprecated-copy and pessimizing-move, while
-rocksdb uses -Werror and causes the following build error.
+with configuration:
+IMAGE_INSTALL_append = " apache2 php-fpm-apache2"
 
-db/version_edit.h:178:33: error: implicitly-declared 'constexpr rocksdb::FileDescriptor::FileDescriptor(const rocksdb::FileDescriptor&)' is deprecated [-Werror=deprecated-copy]
+systemctl status apache2.service report error:
+httpd: Syntax error on line 509 of /etc/apache2/httpd.conf: Syntax error on line 3 of /etc/apache2/conf.d/php-fpm.conf: Cannot load lib/apache
 
-utilities/persistent_cache/persistent_cache_util.h:51:23: error: moving a local object in a return statement prevents copy elision [-Werror=pessimizing-move]
+fix by correct the module path
 
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-devtools/php/php/php-fpm-apache.conf | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 8d84619..bbd8e4f 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -31,6 +31,9 @@ EXTRA_OECMAKE = "\
-     -DWITH_TESTS=OFF \
-     -DWITH_TOOLS=OFF \
- "
-+do_compile_prepend() {
-+    sed -i 's/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow -Wno-error=deprecated-copy -Wno-error=pessimizing-move")/' ${S}/CMakeLists.txt
-+}
+diff --git a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
+index 77cdd82..ef79a0c 100644
+--- a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
++++ b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
+@@ -1,6 +1,6 @@
+ # Taken from http://wiki.apache.org/httpd/PHP-FPM
  
- do_install_append() {
-     # fix for qa check buildpaths
+-LoadModule proxy_module      lib/apache2/modules/mod_proxy.so
+-LoadModule proxy_fcgi_module lib/apache2/modules/mod_proxy_fcgi.so
++LoadModule proxy_module      /usr/lib/apache2/modules/mod_proxy.so
++LoadModule proxy_fcgi_module /usr/lib/apache2/modules/mod_proxy_fcgi.so
+ 
+ ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/share/apache2/htdocs/
 -- 
 2.7.4
 
