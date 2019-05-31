@@ -1,44 +1,30 @@
-Return-Path: <sbabic@denx.de>
-X-Greylist: delayed 534 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 31 May 2019 09:03:56 UTC
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 132187E575
+Return-Path: <maciej.pijanowski@3mdeb.com>
+X-Greylist: delayed 2400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 31 May 2019 13:42:27 UTC
+Received: from 10.mo3.mail-out.ovh.net (10.mo3.mail-out.ovh.net
+	[87.98.165.232])
+	by mail.openembedded.org (Postfix) with ESMTP id E7FBC7E33A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 09:03:56 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 45FdYy55htz1rKJr;
-	Fri, 31 May 2019 10:55:02 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 45FdYy4w9bz1qrGN;
-	Fri, 31 May 2019 10:55:02 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id ruilVpqNbLgD; Fri, 31 May 2019 10:55:00 +0200 (CEST)
-Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net
-	[88.217.136.221])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPS;
-	Fri, 31 May 2019 10:55:00 +0200 (CEST)
-Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
-	by babic.homelinux.org (Postfix) with ESMTP id A78874540343;
-	Fri, 31 May 2019 10:54:59 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
-Received: from babic.homelinux.org ([IPv6:::1])
-	by localhost (mail.babic.homelinux.org [IPv6:::1]) (amavisd-new,
-	port 10024)
-	with ESMTP id CpzBvvX-tL2b; Fri, 31 May 2019 10:54:57 +0200 (CEST)
-Received: from papero.fritz.box (papero.fritz.box [192.168.178.132])
-	by babic.homelinux.org (Postfix) with ESMTP id D4CC645401EE;
-	Fri, 31 May 2019 10:54:56 +0200 (CEST)
-From: Stefano Babic <sbabic@denx.de>
+	Fri, 31 May 2019 13:42:27 +0000 (UTC)
+Received: from player746.ha.ovh.net (unknown [10.108.42.168])
+	by mo3.mail-out.ovh.net (Postfix) with ESMTP id CFCCE217383
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 May 2019 14:25:03 +0200 (CEST)
+Received: from 3mdeb.com (85-222-117-222.dynamic.chello.pl [85.222.117.222])
+	(Authenticated sender: maciej.pijanowski@3mdeb.com)
+	by player746.ha.ovh.net (Postfix) with ESMTPSA id 538E1673DAFB;
+	Fri, 31 May 2019 12:25:02 +0000 (UTC)
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 May 2019 10:54:47 +0200
-Message-Id: <20190531085447.827-1-sbabic@denx.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [PATCH] systat: systemd never enables the service
+Date: Fri, 31 May 2019 14:24:48 +0200
+Message-Id: <1559305488-7112-1-git-send-email-maciej.pijanowski@3mdeb.com>
+X-Mailer: git-send-email 2.7.4
+X-Ovh-Tracer-Id: 2098395954910867016
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduuddrudefuddghedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenuc
+Cc: piotr.krol@3mdeb.com
+Subject: [meta-oe][PATCH] recipes-benchmark/stressapptest_1.0.9.bb: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,79 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 09:03:57 -0000
+X-List-Received-Date: Fri, 31 May 2019 13:42:29 -0000
 
-Even if SYSTEMD_AUTO_ENABLE is set to "enable", the service is never
-activated by systemd. The cause is the postinst function in the recipe:
+This patch introduces recipe for the stressapptest utility.
+The recipe builds without errors and warnings (tested on thud).
+It basically uses autootools to buildm so should build just fine
+on the other releases as well.
+Basic commands from the project's README were tested on a few
+armv7 / armv8 platforms.
 
- pkg_postinst_${PN} () {
-         if [ -n "$D" ]; then
-                 exit 0
-         fi
-         if [ -e /etc/init.d/populate-volatile.sh ]; then
-                 /etc/init.d/populate-volatile.sh update
-         fi
- }
-
-This generates with activated systemd the following postinst script:
-
-	set -e
-	        if [ -n "$D" ]; then
-	                exit 0
-	        fi
-	        if [ -e /etc/init.d/populate-volatile.sh ]; then
-	                /etc/init.d/populate-volatile.sh update
-	        fi
-	OPTS=""
-
-	if [ -n "$D" ]; then
-	    OPTS="--root=$D"
-	fi
-
-	if type systemctl >/dev/null 2>/dev/null; then
-		if [ -z "$D" ]; then
-			systemctl daemon-reload
-		fi
-
-		systemctl $OPTS enable sysstat.service
-
-		if [ -z "$D" -a "enable" = "enable" ]; then
-			systemctl --no-block restart sysstat.service
-		fi
-	fi
-
-Due to the exit statement, systemctl is never called and the service is
-never enabled in rootfs.
-Invert the logic for the check to let run the rest of postinst script.
-
-Signed-off-by: Stefano Babic <sbabic@denx.de>
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 ---
- meta/recipes-extended/sysstat/sysstat.inc | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ .../stressapptest/stressapptest_1.0.9.bb              | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
 
-diff --git a/meta/recipes-extended/sysstat/sysstat.inc b/meta/recipes-extended/sysstat/sysstat.inc
-index 0bc7e14d36..850a6d1465 100644
---- a/meta/recipes-extended/sysstat/sysstat.inc
-+++ b/meta/recipes-extended/sysstat/sysstat.inc
-@@ -51,12 +51,11 @@ do_install() {
- }
- 
- pkg_postinst_${PN} () {
--        if [ -n "$D" ]; then
--                exit 0
--        fi
--        if [ -e /etc/init.d/populate-volatile.sh ]; then
--                /etc/init.d/populate-volatile.sh update
--        fi
-+	if [  ! -n "$D" ]; then
-+		if [ -e /etc/init.d/populate-volatile.sh ]; then
-+			/etc/init.d/populate-volatile.sh update
-+		fi
-+	fi
- }
- 
- 
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+new file mode 100644
+index 000000000000..3e5748a3a12c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Stressful Application Test"
++DESCRIPTION = "Stressful Application Test (or stressapptest, its unix name) \
++ is a memory interface test. It tries to maximize randomized traffic to memory \
++ from processor and I/O, with the intent of creating a realistic high load \
++ situation in order to test the existing hardware devices in a computer. \
++"
++HOMEPAGE = "https://github.com/stressapptest/stressapptest"
++SECTION = "benchmark"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
++
++SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
++
++SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
++SRC_URI[sha256sum] = "2ba470587ad4f6ae92057d427c3a2a2756e5f10bd25cd91e62eaef55a40b30a1"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++inherit autotools
 -- 
-2.17.1
+2.7.4
 
 
