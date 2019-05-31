@@ -1,25 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 801687E576
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CBF487E552
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 08:45:29 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x4V8jUhP025939
+	Fri, 31 May 2019 08:45:47 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x4V8jDVj026454
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 31 May 2019 01:45:30 -0700 (PDT)
+	Fri, 31 May 2019 01:45:23 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 31 May 2019 01:45:29 -0700
+	Fri, 31 May 2019 01:45:02 -0700
 From: <kai.kang@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Fri, 31 May 2019 04:44:18 -0400
-Message-ID: <20190531084423.172617-6-kai.kang@windriver.com>
+Date: Fri, 31 May 2019 04:44:16 -0400
+Message-ID: <20190531084423.172617-4-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.20.0
 In-Reply-To: <20190531084423.172617-1-kai.kang@windriver.com>
 References: <20190531084423.172617-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 05/10] xfce4-appfinder: 4.13.2 -> 4.13.3
+Subject: [meta-xfce][PATCH 03/10] xfce4-panel: 4.13.4 -> 4.13.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 08:45:29 -0000
+X-List-Received-Date: Fri, 31 May 2019 08:45:47 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -40,27 +41,28 @@ From: Kai Kang <kai.kang@windriver.com>
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb}  | 4 ++--
+ .../{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb}          | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} (69%)
+ rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb} (90%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.2.bb b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.3.bb
-similarity index 69%
-rename from meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.2.bb
-rename to meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.3.bb
-index e9f6e28b4..309559646 100644
---- a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.2.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.3.bb
-@@ -8,7 +8,7 @@ inherit xfce distro_features_check
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.5.bb
+similarity index 90%
+rename from meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
+rename to meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.5.bb
+index 18e054c9d..a4b200a7e 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.5.bb
+@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection distro_features_check gtk-icon-cache
  
  REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "8b4c2ab413748fcd0cc51444418d5af3"
--SRC_URI[sha256sum] = "fd774acbcab08dbb88bcbf28eecf73ec9f55b13e1f2058021b63f703c4989d97"
-+SRC_URI[md5sum] = "c2069a14c85c8a3e537b2d4c552d36d2"
-+SRC_URI[sha256sum] = "d738082a5fb01e42ea6333803012fd80258061f444afbbbd7b05a0f620a32ba6"
- 
- FILES_${PN} += "${datadir}/metainfo"
+-SRC_URI[md5sum] = "c0f132fed2110d37f351aadc9e80a034"
+-SRC_URI[sha256sum] = "36ffd26ef7f5867c01ba310475b4358ff0e588cfd5599a266f0037a6c20052a1"
++SRC_URI[md5sum] = "376e360fb87095edaea7df8ca34fe6a7"
++SRC_URI[sha256sum] = "0d05b6dd8c91c154a364a3e31583c5f423c33e26d44d43cc409165f7d578ca15"
+ SRC_URI += " \
+     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+ "
 -- 
 2.20.0
 
