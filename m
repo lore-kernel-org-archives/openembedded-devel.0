@@ -1,30 +1,49 @@
-Return-Path: <maciej.pijanowski@3mdeb.com>
-X-Greylist: delayed 2400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 31 May 2019 13:42:27 UTC
-Received: from 10.mo3.mail-out.ovh.net (10.mo3.mail-out.ovh.net
-	[87.98.165.232])
-	by mail.openembedded.org (Postfix) with ESMTP id E7FBC7E33A
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D9ED57E5F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 13:42:27 +0000 (UTC)
-Received: from player746.ha.ovh.net (unknown [10.108.42.168])
-	by mo3.mail-out.ovh.net (Postfix) with ESMTP id CFCCE217383
+	Sat,  1 Jun 2019 03:16:55 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id u22so7315139pfm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 14:25:03 +0200 (CEST)
-Received: from 3mdeb.com (85-222-117-222.dynamic.chello.pl [85.222.117.222])
-	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player746.ha.ovh.net (Postfix) with ESMTPSA id 538E1673DAFB;
-	Fri, 31 May 2019 12:25:02 +0000 (UTC)
-From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+	Fri, 31 May 2019 20:16:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=ltahs203Xm7uFW7ltAxMspIs1Egg993EiGIxi7yQypM=;
+	b=f2oTl9K3zz5z+5XVBoYtHNZ6INfB8cj+ruu0o4cS+kYKz0LbAInGkOYj4kAy3hwn0T
+	LR/t03yxQFN5+tL9NO6Eh3uVXBFccKyaDW6pnxooCcneBJ6VExKXr4bQGUTLeg1Vqu1y
+	6+3CkCr7syQE67MCjBB/IhUsdIwJKanKfMKnfZGTF5W5LXspR9wk8TdU+qpXYZ/MhmhQ
+	+AOLhgjSkPLNtM2wlJlLq2RRwt7tYMVhtgI7TVI683QBbWBnnP9mISvYZhduDz67TfCv
+	Qy/VUWO2dnOPZH0ebNJUVGMx5MHdl81TL5JK52pt3S6XFlpaCP9+FusnOR/36zxmFewA
+	G6mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=ltahs203Xm7uFW7ltAxMspIs1Egg993EiGIxi7yQypM=;
+	b=HCXesihQAZhgMlguelRogIXBKD9L59+PqUfgqXNtv2SFCHDr4RsYOWEoXuSXzUP//c
+	W8cB8IFkemPQNDzG3efz9o2FsaAxvY6o58lnRHyi7TliDGCuTpxWIRJqKFoy8hsKBrtC
+	CWeKJ33qNvig/W5U+Z2+AWzPyFRgEyoQ9xha0vkA4ErdMkXkl96oxNhoxzP3qKjYngqt
+	/BvQmA5wKaPq4MDNwzkwzpiGBGLmyIeei3zD9XYzLkfk3PVGhhla6mt93RWn7Cx4UZN+
+	ydJijeM174Dg1+mgV3c3zeOtu/5L34rVjve1LyrO/huDsio/ClQfbqdG1kdpgyTJdWvH
+	n85w==
+X-Gm-Message-State: APjAAAVE1B/mrMdxxpDi4lcIa+bm0+qN6c3mFqYBq5C8QjD+ge050K07
+	HqLj4yETZEqzegW3frroCSHev0iP
+X-Google-Smtp-Source: APXvYqxDFoL/3ozxNOgl7AdHuDkdmGZUrPata9OY11c/VuAyPPxkjFGy3wfxmVQbeauqLeQF2POlZA==
+X-Received: by 2002:a65:62cc:: with SMTP id m12mr12936479pgv.237.1559359016591;
+	Fri, 31 May 2019 20:16:56 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:c33:d8eb:da43:9914:3fc9])
+	by smtp.gmail.com with ESMTPSA id
+	f10sm12609244pgo.14.2019.05.31.20.16.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 31 May 2019 20:16:55 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 May 2019 14:24:48 +0200
-Message-Id: <1559305488-7112-1-git-send-email-maciej.pijanowski@3mdeb.com>
+Date: Fri, 31 May 2019 20:16:54 -0700
+Message-Id: <1559359014-14129-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-X-Ovh-Tracer-Id: 2098395954910867016
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduuddrudefuddghedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenuc
-Cc: piotr.krol@3mdeb.com
-Subject: [meta-oe][PATCH] recipes-benchmark/stressapptest_1.0.9.bb: add recipe
+Subject: [meta-oe[thud][PATCH] lua: Security fix for CVE-2019-6706
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +56,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2019 13:42:29 -0000
+X-List-Received-Date: Sat, 01 Jun 2019 03:16:56 -0000
 
-This patch introduces recipe for the stressapptest utility.
-The recipe builds without errors and warnings (tested on thud).
-It basically uses autootools to buildm so should build just fine
-on the other releases as well.
-Basic commands from the project's README were tested on a few
-armv7 / armv8 platforms.
+Source: lua.org
+MR: 97553
+Type: Security Fix
+Disposition: Backport from http://lua.2524044.n2.nabble.com/CVE-2019-6706-use-after-free-in-lua-upvaluejoin-function-tc7685575.html
+ChangeID: c939b7edcb54274ab0aeebcb7e3dc9f17cc09c2d
+Description:
 
-Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Affects < 5.3.5
+Fixes:
+CVE-2019-6706
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../stressapptest/stressapptest_1.0.9.bb              | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+ .../recipes-devtools/lua/lua/CVE-2019-6706.patch   | 32 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.4.bb          |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
 
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
 new file mode 100644
-index 000000000000..3e5748a3a12c
+index 0000000..cfe48af
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Stressful Application Test"
-+DESCRIPTION = "Stressful Application Test (or stressapptest, its unix name) \
-+ is a memory interface test. It tries to maximize randomized traffic to memory \
-+ from processor and I/O, with the intent of creating a realistic high load \
-+ situation in order to test the existing hardware devices in a computer. \
-+"
-+HOMEPAGE = "https://github.com/stressapptest/stressapptest"
-+SECTION = "benchmark"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
++++ b/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
+@@ -0,0 +1,32 @@
++CVE-2019-6706: use-after-free in lua_upvaluejoin function 
 +
-+SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
++Upstream-Status: Backport
++http://lua.2524044.n2.nabble.com/CVE-2019-6706-use-after-free-in-lua-upvaluejoin-function-tc7685575.html
++CVE: CVE-2019-6706
++Affects < 5.3.5
++Signed-off-by: Armin Kuster <akuster@mvista.com>
 +
-+SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
-+SRC_URI[sha256sum] = "2ba470587ad4f6ae92057d427c3a2a2756e5f10bd25cd91e62eaef55a40b30a1"
-+
-+S = "${WORKDIR}/${PN}-${PV}"
-+
-+inherit autotools
++Index: lua-5.3.4/src/lapi.c
++===================================================================
++--- lua-5.3.4.orig/src/lapi.c
+++++ lua-5.3.4/src/lapi.c
++@@ -1285,14 +1285,14 @@ LUA_API void *lua_upvalueid (lua_State *
++ 
++ LUA_API void lua_upvaluejoin (lua_State *L, int fidx1, int n1,
++                                             int fidx2, int n2) {
++-  LClosure *f1;
++-  UpVal **up1 = getupvalref(L, fidx1, n1, &f1);
+++  UpVal **up1 = getupvalref(L, fidx1, n1, NULL); /* the last parameter not needed */
++   UpVal **up2 = getupvalref(L, fidx2, n2, NULL);
+++  if (*up1 == *up2) return; /* Already joined */
+++  (*up2)->refcount++;
+++  if (upisopen(*up2)) (*up2)->u.open.touched = 1;
+++  luaC_upvalbarrier(L, *up2);
++   luaC_upvdeccount(L, *up1);
++   *up1 = *up2;
++-  (*up1)->refcount++;
++-  if (upisopen(*up1)) (*up1)->u.open.touched = 1;
++-  luaC_upvalbarrier(L, *up1);
++ }
++ 
++ 
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+index 8f4e8fe..978c203 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
+ DEPENDS = "readline"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc.in \
++           file://CVE-2019-6706.patch \
+            "
+ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+            'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
 -- 
 2.7.4
 
