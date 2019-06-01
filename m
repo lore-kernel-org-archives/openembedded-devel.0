@@ -1,49 +1,26 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D9ED57E5F9
+Return-Path: <thstead@steadtechnology.co.uk>
+Received: from bradley.thecyberweb.co.uk (bradley.thecyberweb.co.uk
+	[35.176.52.35])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DC4A7E516
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jun 2019 03:16:55 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id u22so7315139pfm.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2019 20:16:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=ltahs203Xm7uFW7ltAxMspIs1Egg993EiGIxi7yQypM=;
-	b=f2oTl9K3zz5z+5XVBoYtHNZ6INfB8cj+ruu0o4cS+kYKz0LbAInGkOYj4kAy3hwn0T
-	LR/t03yxQFN5+tL9NO6Eh3uVXBFccKyaDW6pnxooCcneBJ6VExKXr4bQGUTLeg1Vqu1y
-	6+3CkCr7syQE67MCjBB/IhUsdIwJKanKfMKnfZGTF5W5LXspR9wk8TdU+qpXYZ/MhmhQ
-	+AOLhgjSkPLNtM2wlJlLq2RRwt7tYMVhtgI7TVI683QBbWBnnP9mISvYZhduDz67TfCv
-	Qy/VUWO2dnOPZH0ebNJUVGMx5MHdl81TL5JK52pt3S6XFlpaCP9+FusnOR/36zxmFewA
-	G6mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=ltahs203Xm7uFW7ltAxMspIs1Egg993EiGIxi7yQypM=;
-	b=HCXesihQAZhgMlguelRogIXBKD9L59+PqUfgqXNtv2SFCHDr4RsYOWEoXuSXzUP//c
-	W8cB8IFkemPQNDzG3efz9o2FsaAxvY6o58lnRHyi7TliDGCuTpxWIRJqKFoy8hsKBrtC
-	CWeKJ33qNvig/W5U+Z2+AWzPyFRgEyoQ9xha0vkA4ErdMkXkl96oxNhoxzP3qKjYngqt
-	/BvQmA5wKaPq4MDNwzkwzpiGBGLmyIeei3zD9XYzLkfk3PVGhhla6mt93RWn7Cx4UZN+
-	ydJijeM174Dg1+mgV3c3zeOtu/5L34rVjve1LyrO/huDsio/ClQfbqdG1kdpgyTJdWvH
-	n85w==
-X-Gm-Message-State: APjAAAVE1B/mrMdxxpDi4lcIa+bm0+qN6c3mFqYBq5C8QjD+ge050K07
-	HqLj4yETZEqzegW3frroCSHev0iP
-X-Google-Smtp-Source: APXvYqxDFoL/3ozxNOgl7AdHuDkdmGZUrPata9OY11c/VuAyPPxkjFGy3wfxmVQbeauqLeQF2POlZA==
-X-Received: by 2002:a65:62cc:: with SMTP id m12mr12936479pgv.237.1559359016591;
-	Fri, 31 May 2019 20:16:56 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:d8eb:da43:9914:3fc9])
-	by smtp.gmail.com with ESMTPSA id
-	f10sm12609244pgo.14.2019.05.31.20.16.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 31 May 2019 20:16:55 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	Sat,  1 Jun 2019 04:58:25 +0000 (UTC)
+Received: by bradley.thecyberweb.co.uk (Postfix, from userid 2223)
+	id D3197641E0; Sat,  1 Jun 2019 05:58:42 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	bradley.thecyberweb.co.uk
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.1
+Received: from quietthinker.steadtechnology
+	(baculaserver.steadtechnology.co.uk [90.254.83.67])
+	by bradley.thecyberweb.co.uk (Postfix) with ESMTPA id 007ED641DE;
+	Sat,  1 Jun 2019 05:58:41 +0100 (BST)
+From: thstead <thstead@steadtechnology.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 May 2019 20:16:54 -0700
-Message-Id: <1559359014-14129-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe[thud][PATCH] lua: Security fix for CVE-2019-6706
+Date: Sat,  1 Jun 2019 05:58:15 +0100
+Message-Id: <20190601045815.30790-1-thstead@steadtechnology.co.uk>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] Created recipes for python2 and python3 packages for pysnmp and its dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,77 +33,224 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jun 2019 03:16:56 -0000
+X-List-Received-Date: Sat, 01 Jun 2019 04:58:25 -0000
 
-Source: lua.org
-MR: 97553
-Type: Security Fix
-Disposition: Backport from http://lua.2524044.n2.nabble.com/CVE-2019-6706-use-after-free-in-lua-upvaluejoin-function-tc7685575.html
-ChangeID: c939b7edcb54274ab0aeebcb7e3dc9f17cc09c2d
-Description:
+Created Python2 and Python 3 packages for:
+- pysnmp
+- ply
+- pysmi
 
-Affects < 5.3.5
-Fixes:
-CVE-2019-6706
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: thstead <thstead@steadtechnology.co.uk>
 ---
- .../recipes-devtools/lua/lua/CVE-2019-6706.patch   | 32 ++++++++++++++++++++++
- meta-oe/recipes-devtools/lua/lua_5.3.4.bb          |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
+ meta-python/recipes-devtools/python/python-ply.inc | 17 ++++++++++++++
+ .../recipes-devtools/python/python-ply_3.10.bb     | 18 ++-------------
+ .../recipes-devtools/python/python-pysmi.inc       | 19 +++++++++++++++
+ .../recipes-devtools/python/python-pysmi_0.1.2.bb  | 21 ++---------------
+ .../recipes-devtools/python/python-pysnmp.inc      | 21 +++++++++++++++++
+ .../recipes-devtools/python/python-pysnmp_4.4.9.bb | 27 +++-------------------
+ .../recipes-devtools/python/python3-ply_3.10.bb    |  3 +++
+ .../recipes-devtools/python/python3-pysmi_0.1.2.bb |  3 +++
+ .../python/python3-pysnmp_4.4.9.bb                 |  5 ++++
+ 9 files changed, 75 insertions(+), 59 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-ply.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pysmi.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pysnmp.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-ply_3.10.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
 
-diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
+diff --git a/meta-python/recipes-devtools/python/python-ply.inc b/meta-python/recipes-devtools/python/python-ply.inc
 new file mode 100644
-index 0000000..cfe48af
+index 000000000..8e61efa79
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
-@@ -0,0 +1,32 @@
-+CVE-2019-6706: use-after-free in lua_upvaluejoin function 
++++ b/meta-python/recipes-devtools/python/python-ply.inc
+@@ -0,0 +1,17 @@
++SUMMARY = "Python Lex and Yacc"
++DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
++HOMEPAGE = "https://pypi.python.org/pypi/ply"
++SECTION = "devel/python"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
 +
-+Upstream-Status: Backport
-+http://lua.2524044.n2.nabble.com/CVE-2019-6706-use-after-free-in-lua-upvaluejoin-function-tc7685575.html
-+CVE: CVE-2019-6706
-+Affects < 5.3.5
-+Signed-off-by: Armin Kuster <akuster@mvista.com>
++SRCNAME = "ply"
 +
-+Index: lua-5.3.4/src/lapi.c
-+===================================================================
-+--- lua-5.3.4.orig/src/lapi.c
-++++ lua-5.3.4/src/lapi.c
-+@@ -1285,14 +1285,14 @@ LUA_API void *lua_upvalueid (lua_State *
-+ 
-+ LUA_API void lua_upvaluejoin (lua_State *L, int fidx1, int n1,
-+                                             int fidx2, int n2) {
-+-  LClosure *f1;
-+-  UpVal **up1 = getupvalref(L, fidx1, n1, &f1);
-++  UpVal **up1 = getupvalref(L, fidx1, n1, NULL); /* the last parameter not needed */
-+   UpVal **up2 = getupvalref(L, fidx2, n2, NULL);
-++  if (*up1 == *up2) return; /* Already joined */
-++  (*up2)->refcount++;
-++  if (upisopen(*up2)) (*up2)->u.open.touched = 1;
-++  luaC_upvalbarrier(L, *up2);
-+   luaC_upvdeccount(L, *up1);
-+   *up1 = *up2;
-+-  (*up1)->refcount++;
-+-  if (upisopen(*up1)) (*up1)->u.open.touched = 1;
-+-  luaC_upvalbarrier(L, *up1);
-+ }
-+ 
-+ 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-index 8f4e8fe..978c203 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-@@ -7,6 +7,7 @@ HOMEPAGE = "http://www.lua.org/"
- DEPENDS = "readline"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-            file://lua.pc.in \
-+           file://CVE-2019-6706.patch \
-            "
- SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-            'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
++SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
++SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+index 8e61efa79..6f5c4e6c8 100644
+--- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
++++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+@@ -1,17 +1,3 @@
+-SUMMARY = "Python Lex and Yacc"
+-DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
+-HOMEPAGE = "https://pypi.python.org/pypi/ply"
+-SECTION = "devel/python"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
+-
+-SRCNAME = "ply"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
+-SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+ inherit setuptools
++require python-ply.inc
++
+diff --git a/meta-python/recipes-devtools/python/python-pysmi.inc b/meta-python/recipes-devtools/python/python-pysmi.inc
+new file mode 100644
+index 000000000..12ba0c68a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pysmi.inc
+@@ -0,0 +1,19 @@
++SUMMARY = "SNMP SMI/MIB Parser"
++DESCRIPTION = "A pure-Python implementation of SNMP/SMI MIB \
++  parsing and conversion library. Can produce PySNMP MIB modules. \
++"
++HOMEPAGE = "https://pypi.python.org/pypi/pysmi"
++SECTION = "devel/python"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d8b1bbadd635f187dee74d999a8c67b8"
++
++SRCNAME = "pysmi"
++
++SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "f8754e9ed75698cc16b40f125df85b12"
++SRC_URI[sha256sum] = "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
+diff --git a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
+index aa234dd70..2fe56ca04 100644
+--- a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
++++ b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
+@@ -1,22 +1,5 @@
+-SUMMARY = "SNMP SMI/MIB Parser"
+-DESCRIPTION = "A pure-Python implementation of SNMP/SMI MIB \
+-  parsing and conversion library. Can produce PySNMP MIB modules. \
+-"
+-HOMEPAGE = "https://pypi.python.org/pypi/pysmi"
+-SECTION = "devel/python"
+-
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d8b1bbadd635f187dee74d999a8c67b8"
+-
+-SRCNAME = "pysmi"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "f8754e9ed75698cc16b40f125df85b12"
+-SRC_URI[sha256sum] = "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+ inherit setuptools
++require python-pysmi.inc
+ 
+ RDEPENDS_${PN} = "python-ply"
++
+diff --git a/meta-python/recipes-devtools/python/python-pysnmp.inc b/meta-python/recipes-devtools/python/python-pysnmp.inc
+new file mode 100644
+index 000000000..9b67f6bc7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pysnmp.inc
+@@ -0,0 +1,21 @@
++SUMMARY = "A pure-Python SNMPv1/v2c/v3 library"
++DESCRIPTION = "SNMP v1/v2c/v3 engine and apps written in pure-Python. \
++  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
++  operation (asyncio, twisted, asyncore) and multiple transports.\
++"
++HOMEPAGE = "https://pypi.python.org/pypi/pysnmp"
++SECTION = "devel/python"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b15d29f500f748d1c2a15709769090a8"
++
++SRCNAME = "pysnmp"
++
++SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "6d1b514997326bed18f1ae1510f6b1c9"
++SRC_URI[sha256sum] = "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
++
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++RDEPENDS_${PN} += "python-pycrypto"
+diff --git a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
+index 9ff4df2c9..c36d69b6a 100644
+--- a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
++++ b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
+@@ -1,26 +1,5 @@
+-SUMMARY = "A pure-Python SNMPv1/v2c/v3 library"
+-DESCRIPTION = "SNMP v1/v2c/v3 engine and apps written in pure-Python. \
+-  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
+-  operation (asyncio, twisted, asyncore) and multiple transports.\
+-"
+-HOMEPAGE = "https://pypi.python.org/pypi/pysnmp"
+-SECTION = "devel/python"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b15d29f500f748d1c2a15709769090a8"
+-
+-SRCNAME = "pysnmp"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "6d1b514997326bed18f1ae1510f6b1c9"
+-SRC_URI[sha256sum] = "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
+-
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+ inherit setuptools
++require python-pysnmp.inc
++
++RDEPENDS_${PN} += "python-pyasn1 python-pysmi"
+ 
+-RDEPENDS_${PN} += "python-pycrypto \
+-                   python-pyasn1 \
+-                   python-pysmi \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-ply_3.10.bb b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
+new file mode 100644
+index 000000000..401dd0df5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
+@@ -0,0 +1,3 @@
++inherit setuptools3
++require python-ply.inc
++
+diff --git a/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
+new file mode 100644
+index 000000000..829f16682
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
+@@ -0,0 +1,3 @@
++inherit setuptools3
++require python-pysmi.inc
++RDEPENDS_${PN} = "python3-ply"
+diff --git a/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
+new file mode 100644
+index 000000000..046d3e5d0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
+@@ -0,0 +1,5 @@
++inherit setuptools3
++require python-pysnmp.inc
++
++RDEPENDS_${PN} += "python3-pyasn1 python3-pysmi"
++
 -- 
-2.7.4
+2.11.0
 
 
