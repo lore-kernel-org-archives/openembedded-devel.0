@@ -1,26 +1,99 @@
-Return-Path: <thstead@steadtechnology.co.uk>
-Received: from bradley.thecyberweb.co.uk (bradley.thecyberweb.co.uk
-	[35.176.52.35])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DC4A7E516
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id E27C27E5F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jun 2019 04:58:25 +0000 (UTC)
-Received: by bradley.thecyberweb.co.uk (Postfix, from userid 2223)
-	id D3197641E0; Sat,  1 Jun 2019 05:58:42 +0100 (BST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	bradley.thecyberweb.co.uk
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.1
-Received: from quietthinker.steadtechnology
-	(baculaserver.steadtechnology.co.uk [90.254.83.67])
-	by bradley.thecyberweb.co.uk (Postfix) with ESMTPA id 007ED641DE;
-	Sat,  1 Jun 2019 05:58:41 +0100 (BST)
-From: thstead <thstead@steadtechnology.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jun 2019 05:58:15 +0100
-Message-Id: <20190601045815.30790-1-thstead@steadtechnology.co.uk>
-X-Mailer: git-send-email 2.11.0
-Subject: [PATCH] Created recipes for python2 and python3 packages for pysnmp and its dependencies.
+	Sat,  1 Jun 2019 17:20:17 +0000 (UTC)
+Received: by mail-pg1-f180.google.com with SMTP id s27so215155pgl.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Jun 2019 10:20:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=kkaAnIV/wjbjSQ9BmBtiz25WvIn1FuQ+kSy04ZcUTMQ=;
+	b=NJnNy1ZjH+sMVX48/kgVMmy3QbS9YZcKnKp4lJjho+QKrYQgv5u2PBMz9NON+CBBeg
+	O4CM+q3o+kshnKGTfnL1pqSdKj97jML8ERJrALmjydwDZweDGt59px3a1k/qCZIy+7Yb
+	FpO2oEGTqFhUCZDsbW7quPq4IAp+I+odOLc2JC3ksDkbbrkYYNu+UlwhUAmrqdzA3hhP
+	G8cCL6nsi2lutTcXR6Oenr3ZppdGHyPGzsIi0IzxyDb3F6IqIglR9dooxLJF4IzpQnyp
+	kMxB6pt8N3bas7BM2Fwn6axd3N9gsoVqZ6uKw4PkFsJVRPwsdXUPlJ52YNro60dnyh1Y
+	ufnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=kkaAnIV/wjbjSQ9BmBtiz25WvIn1FuQ+kSy04ZcUTMQ=;
+	b=kF6pTU1HZQE3FpCZnRnduXds5IuviMMbZCsYV0qWG0odRuSDTiyGLKJ92a9EfV9g3P
+	5PIPH3FLAXGYNpFCNEDYx8lKiT4jBepCgeWMikGnFwP+9TOB3IP5KLCOuzf6j33i5KoF
+	f/iuQd2YbM3JP+nnEwQkZNsMuHc9txiwOtwwNXZzDm0w5eTNuc29kJF+6v9tIEG1MAFO
+	Z6L2xAfmgqnFgzjNE1EYpMCMVpxG7MhADnDL65jgWxWeckzzx7RNgyYfepAnVP2OHZKh
+	dvYUIbCpJX3OSnUm6INp45qLu00LxVyw6Rv0sxSi2ayB4w9RUmbBwG/uEEcRHBs5PbIY
+	W8lQ==
+X-Gm-Message-State: APjAAAXVzIR2kmdBQGHBjJwWjlrAndf9+ob0p2KVbyQC3onHSb7bVWIt
+	qAfeqoirDPmcRGr1Jor6gDvMJ46X
+X-Google-Smtp-Source: APXvYqwMZD8yHNIf7sSB+/dTWk3Fs7f1fockOwzESJmseaDebiKnqD2jUCThR2en2s/LpXnw85JrPA==
+X-Received: by 2002:a63:2a89:: with SMTP id
+	q131mr17063846pgq.359.1559409618706; 
+	Sat, 01 Jun 2019 10:20:18 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:d8eb:da43:9914:3fc9?
+	([2601:202:4180:c33:d8eb:da43:9914:3fc9])
+	by smtp.gmail.com with ESMTPSA id
+	m6sm15900011pjl.18.2019.06.01.10.20.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 01 Jun 2019 10:20:17 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <5492cc4e-4318-d6d8-3b84-86fb94fd8a74@gmail.com>
+Date: Sat, 1 Jun 2019 10:20:16 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.6.1
+MIME-Version: 1.0
+Subject: meta-python py2 plans
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,224 +106,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jun 2019 04:58:25 -0000
+X-List-Received-Date: Sat, 01 Jun 2019 17:20:19 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Created Python2 and Python 3 packages for:
-- pysnmp
-- ply
-- pysmi
+Hello,
 
-Signed-off-by: thstead <thstead@steadtechnology.co.uk>
----
- meta-python/recipes-devtools/python/python-ply.inc | 17 ++++++++++++++
- .../recipes-devtools/python/python-ply_3.10.bb     | 18 ++-------------
- .../recipes-devtools/python/python-pysmi.inc       | 19 +++++++++++++++
- .../recipes-devtools/python/python-pysmi_0.1.2.bb  | 21 ++---------------
- .../recipes-devtools/python/python-pysnmp.inc      | 21 +++++++++++++++++
- .../recipes-devtools/python/python-pysnmp_4.4.9.bb | 27 +++-------------------
- .../recipes-devtools/python/python3-ply_3.10.bb    |  3 +++
- .../recipes-devtools/python/python3-pysmi_0.1.2.bb |  3 +++
- .../python/python3-pysnmp_4.4.9.bb                 |  5 ++++
- 9 files changed, 75 insertions(+), 59 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-ply.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pysmi.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pysnmp.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-ply_3.10.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
+With python2 being EOL this year. Is there a plan for meta-python to
+deal with this?
 
-diff --git a/meta-python/recipes-devtools/python/python-ply.inc b/meta-python/recipes-devtools/python/python-ply.inc
-new file mode 100644
-index 000000000..8e61efa79
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-ply.inc
-@@ -0,0 +1,17 @@
-+SUMMARY = "Python Lex and Yacc"
-+DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
-+HOMEPAGE = "https://pypi.python.org/pypi/ply"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
-+
-+SRCNAME = "ply"
-+
-+SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
-+SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-index 8e61efa79..6f5c4e6c8 100644
---- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
-+++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-@@ -1,17 +1,3 @@
--SUMMARY = "Python Lex and Yacc"
--DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
--HOMEPAGE = "https://pypi.python.org/pypi/ply"
--SECTION = "devel/python"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
--
--SRCNAME = "ply"
--
--SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
--SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- inherit setuptools
-+require python-ply.inc
-+
-diff --git a/meta-python/recipes-devtools/python/python-pysmi.inc b/meta-python/recipes-devtools/python/python-pysmi.inc
-new file mode 100644
-index 000000000..12ba0c68a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pysmi.inc
-@@ -0,0 +1,19 @@
-+SUMMARY = "SNMP SMI/MIB Parser"
-+DESCRIPTION = "A pure-Python implementation of SNMP/SMI MIB \
-+  parsing and conversion library. Can produce PySNMP MIB modules. \
-+"
-+HOMEPAGE = "https://pypi.python.org/pypi/pysmi"
-+SECTION = "devel/python"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d8b1bbadd635f187dee74d999a8c67b8"
-+
-+SRCNAME = "pysmi"
-+
-+SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "f8754e9ed75698cc16b40f125df85b12"
-+SRC_URI[sha256sum] = "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-diff --git a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-index aa234dd70..2fe56ca04 100644
---- a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-@@ -1,22 +1,5 @@
--SUMMARY = "SNMP SMI/MIB Parser"
--DESCRIPTION = "A pure-Python implementation of SNMP/SMI MIB \
--  parsing and conversion library. Can produce PySNMP MIB modules. \
--"
--HOMEPAGE = "https://pypi.python.org/pypi/pysmi"
--SECTION = "devel/python"
--
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d8b1bbadd635f187dee74d999a8c67b8"
--
--SRCNAME = "pysmi"
--
--SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "f8754e9ed75698cc16b40f125df85b12"
--SRC_URI[sha256sum] = "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- inherit setuptools
-+require python-pysmi.inc
- 
- RDEPENDS_${PN} = "python-ply"
-+
-diff --git a/meta-python/recipes-devtools/python/python-pysnmp.inc b/meta-python/recipes-devtools/python/python-pysnmp.inc
-new file mode 100644
-index 000000000..9b67f6bc7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pysnmp.inc
-@@ -0,0 +1,21 @@
-+SUMMARY = "A pure-Python SNMPv1/v2c/v3 library"
-+DESCRIPTION = "SNMP v1/v2c/v3 engine and apps written in pure-Python. \
-+  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
-+  operation (asyncio, twisted, asyncore) and multiple transports.\
-+"
-+HOMEPAGE = "https://pypi.python.org/pypi/pysnmp"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b15d29f500f748d1c2a15709769090a8"
-+
-+SRCNAME = "pysnmp"
-+
-+SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "6d1b514997326bed18f1ae1510f6b1c9"
-+SRC_URI[sha256sum] = "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
-+
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+RDEPENDS_${PN} += "python-pycrypto"
-diff --git a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-index 9ff4df2c9..c36d69b6a 100644
---- a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-+++ b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-@@ -1,26 +1,5 @@
--SUMMARY = "A pure-Python SNMPv1/v2c/v3 library"
--DESCRIPTION = "SNMP v1/v2c/v3 engine and apps written in pure-Python. \
--  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
--  operation (asyncio, twisted, asyncore) and multiple transports.\
--"
--HOMEPAGE = "https://pypi.python.org/pypi/pysnmp"
--SECTION = "devel/python"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b15d29f500f748d1c2a15709769090a8"
--
--SRCNAME = "pysnmp"
--
--SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "6d1b514997326bed18f1ae1510f6b1c9"
--SRC_URI[sha256sum] = "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
--
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- inherit setuptools
-+require python-pysnmp.inc
-+
-+RDEPENDS_${PN} += "python-pyasn1 python-pysmi"
- 
--RDEPENDS_${PN} += "python-pycrypto \
--                   python-pyasn1 \
--                   python-pysmi \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-ply_3.10.bb b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-new file mode 100644
-index 000000000..401dd0df5
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-@@ -0,0 +1,3 @@
-+inherit setuptools3
-+require python-ply.inc
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
-new file mode 100644
-index 000000000..829f16682
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
-@@ -0,0 +1,3 @@
-+inherit setuptools3
-+require python-pysmi.inc
-+RDEPENDS_${PN} = "python3-ply"
-diff --git a/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
-new file mode 100644
-index 000000000..046d3e5d0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
-@@ -0,0 +1,5 @@
-+inherit setuptools3
-+require python-pysnmp.inc
-+
-+RDEPENDS_${PN} += "python3-pyasn1 python3-pysmi"
-+
--- 
-2.11.0
-
+- Armin
 
