@@ -1,49 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 71C8B7E39F
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A4347E49C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Jun 2019 20:23:43 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id f97so6121274plb.5
+	Sun,  2 Jun 2019 20:23:53 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id cl9so1006129plb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Jun 2019 13:23:44 -0700 (PDT)
+	Sun, 02 Jun 2019 13:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=lbTO8dSiGxM44ovcOMdrT/2DTNbuWVf7aGx8dZoHsVw=;
-	b=CBinbZnh5scaBC5UB4h6UpXXdD2qVfqYVk3l3w+g5oMyeFK2LnT+QIMI7W/TIYFQ+6
-	KUlKJEad0tokYd3UiCg5jsHb9JLN2J8cRogG+XMijxywZ74Hc40dR/IHqRrzhMKHjYaA
-	zZYnME3709/jrDwi3AYyQsh4BSiUQB0JJVoteVWaWQPvYYBpc+K7M+gkqBEJbbepVqGF
-	6hTLOv9mD2yijTksEbpI8mPaUDOgU6qGptaXd7+gG4cpnNJY+bx71zExwPpkZFBltRH+
-	7HggVOvELV0EZm8T0PjZRWFQS0gOBItkuC80zbA19KmP/JLCWBCnjnPRbwyz7XiXe90N
-	qdwA==
+	bh=Zxbt4Coe054CsyZjEaWU95JAuIfCh+KaxG5vq7UgADU=;
+	b=lwY/uk4IQmE5N8lCuzSYfa+fXysm8523yeSignbRsj96EW1WPBxa6fqfsUN20y82nu
+	7BXrthaEvv/P6ucvNM/idR9q82c+1gd2uwYDPSUNd0nGoiaeXq7dLeerUi68FaGO/pIV
+	bpxy5a4KFLFLpazTSi/EJO3vDaiM3Q+5IJrnDYSvY3BmPYooYb99sl8KOQEzDCvSxqkT
+	OLm37tdQLpuxRJTj10xNURmHQ71lUn4KY8YOHbpD7zACRPVU1GqAxzBtryPmbQw8CJ/5
+	XMArNYJnPIlMZslYUpxGiivIWvtSpQOzvJ2h0gYVgstdz1PZHT8BLIU0ryK7YWwYtwty
+	JpHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=lbTO8dSiGxM44ovcOMdrT/2DTNbuWVf7aGx8dZoHsVw=;
-	b=JC1USgvkaGfekAJ2D9NCOhYA8sM9ZaJN+yMpvISSJUsCv2nc6mK8JTDF9uec4YCoz/
-	UXTmbPpul6ioBdCPSUaPciWrg0eue9bB/OzHWts/NsEAYxbHLVrB30mO6Xsh5FbI4tML
-	21CqywgaAzWISWN6Rv4sGSnQwk27hi6xwA/y788Bn4xkuTnqIHchtRIU3sxjjwIRJpg1
-	oxOHdq/bdiSa54mfc1z+5Q9sF4E3pgXhmC9XZGJI07hGvskfQpamrKIN/D36/W/Yw/As
-	JHRYT1W4UEn2n/i+qYaagMCRipfpQFQ8AunYvZxovK6hRhhTor7e2mYVW0r2I6ddUfuK
-	IgiA==
-X-Gm-Message-State: APjAAAUA401pfwKaOoalDWytPJVXnJ6+oZRPHwf+a30UgA9ogcNekVgY
-	MqccW2Aze8k8wHbOE4TaFgGw9T5g
-X-Google-Smtp-Source: APXvYqxvVmuztKmGsUHNdQECbIkrsNpybExSUEYU0qxZQFjMZGmSJWoBMIaoqUA18Jc2839rjWEuTg==
-X-Received: by 2002:a17:902:b089:: with SMTP id
-	p9mr25832526plr.38.1559507019215; 
-	Sun, 02 Jun 2019 13:23:39 -0700 (PDT)
+	bh=Zxbt4Coe054CsyZjEaWU95JAuIfCh+KaxG5vq7UgADU=;
+	b=JpsfZpASprwR83f9e6YFn/XsaYkARS+O2sTi0BQwcYgoHMHasYVR6E3oiR2DHM6ASr
+	8bAoOZVJVefH9Yj+zeZ1TdvSqaKz2fONKWzCrlXIpT0A7D1Dw/njHdxrDJTc++1dzR5x
+	29KhpRjpeykwGss17hEgnQeuqoR/5KR5vv6ewkrJcszv+Rd1q61pk/ddsnZq6+WkGZOB
+	ac1Jh8hwgnxzXjSdDxuTGB8v8DFvgx57zfYxXGntfFs/KjjNDj1yLxGDpTTRottDSbV9
+	CsDz+8fF3gK9n5uc72diX8GPUJd+LVRo5wfjXjs2gK3j7WfBayu2XGJnT0Zzl7C8GidH
+	/bHA==
+X-Gm-Message-State: APjAAAXSsUbQqbULiCCvJD7EEQR+pGZsVJtZ0JSOtBJEcQT3HrVbp8N4
+	0QPNqfPSn4CbnBec+g5fVvgq9GLS
+X-Google-Smtp-Source: APXvYqyYyQb4lsCq2M3iBns1A1YoLicyvAJHQyIdlT3aS9wkBm6nqdeiXArZP3BPZbgilLNESN8a+g==
+X-Received: by 2002:a17:902:1003:: with SMTP id
+	b3mr25834643pla.172.1559507029766; 
+	Sun, 02 Jun 2019 13:23:49 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:1148:3840:7bb3:6bde?
 	([2601:202:4180:c33:1148:3840:7bb3:6bde])
-	by smtp.gmail.com with ESMTPSA id e6sm7797394pfi.42.2019.06.02.13.22.30
+	by smtp.gmail.com with ESMTPSA id
+	k2sm11817246pjl.23.2019.06.02.13.23.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 02 Jun 2019 13:23:19 -0700 (PDT)
-To: Tim Orling <timothy.t.orling@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
+	Sun, 02 Jun 2019 13:23:11 -0700 (PDT)
+To: kai.kang@windriver.com, raj.khem@gmail.com
+References: <20190531084423.172617-1-kai.kang@windriver.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +89,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <f9d57034-a434-b696-5428-c549992ef0e7@gmail.com>
-Date: Sun, 2 Jun 2019 13:22:29 -0700
+Message-ID: <974dea6a-ad6c-3c82-5fa7-b36f1368d3f7@gmail.com>
+Date: Sun, 2 Jun 2019 13:23:10 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
-Subject: Re: [meta-perl][PATCH 01/13] libterm-readkey-perl: upgrade 2.37 -> 2.38; fix upstream check; enable ptest
+In-Reply-To: <20190531084423.172617-1-kai.kang@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][PATCH 00/10] Update recipes in meta-xfce
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,82 +109,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jun 2019 20:23:43 -0000
+X-List-Received-Date: Sun, 02 Jun 2019 20:23:53 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 6/2/19 11:43 AM, Tim Orling wrote:
-> Upstream release notes:
-> """
-> 2.38     - 2019-01-05
->         * Bundle up various changes including:
->                 * Indexing improvements
->                 * Makefile improvements for some make utils
->                 * Various code cleanups and modernizations
+On 5/31/19 1:44 AM, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>
+>
+> Kai Kang (10):
+>   thunar: 1.8.4 -> 1.8.6
+>   xfdesktop: 4.13.3 -> 4.13.4
+>   xfce4-panel: 4.13.4 -> 4.13.5
+>   thunar-volman: 0.9.1 -> 0.9.2
+>   xfce4-appfinder: 4.13.2 -> 4.13.3
+>   libxfce4util: 4.13.2 -> 4.13.3
+>   xfwm4: 4.13.1 -> 4.13.2
+>   xfconf: 4.13.6 -> 4.13.7
+>   libxfce4ui: 4.13.4 -> 4.13.5
+>   xfce4-power-manager: 1.6.1 -> 1.6.2
 
-bug fix only? ie appropriate possible backport to warrior?
+Are these bug fix only updates for possible Warrior backport?
 
 - armin
-> """
 >
-> * Add UPSTREAM_CHECK_REGEX
-> * Add UPSTREAM_CHECK_URI
-> * inherit ptest-perl; all tests pass
-> * ptest RDEPENDS on perl-module-test-more
+>  .../{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb}          | 4 ++--
+>  .../{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb}      | 4 ++--
+>  .../{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb}      | 4 ++--
+>  .../thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb}             | 4 ++--
+>  ...{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} | 4 ++--
+>  .../{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb}        | 4 ++--
+>  ...-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} | 6 +++---
+>  .../xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb}           | 4 ++--
+>  .../xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb}  | 4 ++--
+>  .../recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} | 4 ++--
+>  10 files changed, 21 insertions(+), 21 deletions(-)
+>  rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb} (89%)
+>  rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb} (64%)
+>  rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb} (76%)
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb} (86%)
+>  rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} (69%)
+>  rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb} (90%)
+>  rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} (88%)
+>  rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb} (82%)
+>  rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb} (76%)
+>  rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} (89%)
 >
-> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
-> ---
->  ...erl_2.37.bb => libterm-readkey-perl_2.38.bb} | 17 ++++++++++++-----
->  1 file changed, 12 insertions(+), 5 deletions(-)
->  rename meta-perl/recipes-perl/libterm/{libterm-readkey-perl_2.37.bb => libterm-readkey-perl_2.38.bb} (74%)
->
-> diff --git a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-> similarity index 74%
-> rename from meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb
-> rename to meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-> index 6b76682c68..cc1ac6ed56 100644
-> --- a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb
-> +++ b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-> @@ -3,8 +3,8 @@ DESCRIPTION = "Term::ReadKey is a compiled perl module dedicated to providing si
->  control over terminal driver modes (cbreak, raw, cooked, etc.,) support \
->  for non-blocking reads, if the architecture allows, and some generalized \
->  handy functions for working with terminals. One of the main goals is to \
-> -have the functions as portable as possible, so you can just plug in "use \
-> -Term::ReadKey" on any architecture and have a good likelihood of it \
-> +have the functions as portable as possible, so you can just plug in 'use \
-> +Term::ReadKey' on any architecture and have a good likelihood of it \
->  working."
->  HOMEPAGE = "http://search.cpan.org/~jstowe/TermReadKey-${PV}"
->  SECTION = "libraries"
-> @@ -14,16 +14,23 @@ LIC_FILES_CHKSUM = "file://README;md5=c275db663c8489a5709ebb22b185add5"
->  
->  SRC_URI = "${CPAN_MIRROR}/authors/id/J/JS/JSTOWE/TermReadKey-${PV}.tar.gz"
->  
-> -SRC_URI[md5sum] = "e8ea15c16333ac4f8d146d702e83cc0c"
-> -SRC_URI[sha256sum] = "4a9383cf2e0e0194668fe2bd546e894ffad41d556b41d2f2f577c8db682db241"
-> +SRC_URI[md5sum] = "b2b4aab7a0e6bddb7ac3b21ba637482c"
-> +SRC_URI[sha256sum] = "5a645878dc570ac33661581fbb090ff24ebce17d43ea53fd22e105a856a47290"
->  
->  S = "${WORKDIR}/TermReadKey-${PV}"
->  
-> +UPSTREAM_CHECK_URI = "https://metacpan.org/release/TermReadKey"
-> +UPSTREAM_CHECK_REGEX = "TermReadKey\-(?P<pver>(\d+\.\d+))(?!_\d+)\.tar.gz"
-> +
->  # It needs depend on native to let dynamic loader use native modules
->  # rather than target ones.
->  DEPENDS = "libterm-readkey-perl-native"
->  
-> -inherit cpan
-> +inherit cpan ptest-perl
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +    perl-module-test-more \
-> +"
->  
->  do_configure_append () {
->      # Hack the dynamic module loader so that it use native modules since it can't load
 
 
