@@ -1,25 +1,25 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 5530F7E33A
+	by mail.openembedded.org (Postfix) with ESMTP id D89BB7E33A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Jun 2019 18:43:43 +0000 (UTC)
+	Sun,  2 Jun 2019 18:43:45 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga007.jf.intel.com ([10.7.209.58])
 	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	02 Jun 2019 11:43:44 -0700
+	02 Jun 2019 11:43:47 -0700
 X-ExtLoop1: 1
 Received: from chiron.jf.intel.com ([10.54.74.38])
-	by orsmga007.jf.intel.com with ESMTP; 02 Jun 2019 11:43:44 -0700
+	by orsmga007.jf.intel.com with ESMTP; 02 Jun 2019 11:43:47 -0700
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  2 Jun 2019 11:43:07 -0700
-Message-Id: <20190602184318.71277-2-timothy.t.orling@linux.intel.com>
+Date: Sun,  2 Jun 2019 11:43:08 -0700
+Message-Id: <20190602184318.71277-3-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
 References: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH 02/13] libtest-deep-perl: add recipe for v1.128
+Subject: [meta-perl][PATCH 03/13] libcgi-perl: upgrade 4.38 -> 4.43; enable ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,82 +32,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jun 2019 18:43:43 -0000
+X-List-Received-Date: Sun, 02 Jun 2019 18:43:46 -0000
 Content-Transfer-Encoding: 8bit
 
-Test::Deep gives you very flexible ways to check that the result you got is
-the result you were expecting. At its simplest it compares two structures
-by going through each level, ensuring that the values match, that arrays and
-hashes have the same elements and that references are blessed into the
-correct class. It also handles circular data structures without getting
-caught in an infinite loop.
+* Add libhtml-parser-perl to RDEPENDS for HTML::Entities dependency
+
+Upstream release notes:
+
+4.43 2019-05-01
+
+    [ FIX / TESTING ]
+    - support unquoted multipart/form-data name values (GH #234)
+
+4.42 2019-03-26
+
+    [ DOCUMENTATION ]
+    - clarify licence also in Makefile.PL (GH #232)
+
+4.41 2019-03-26
+
+    [ DOCUMENTATION ]
+    - clarify licence (GH #232)
+
+4.40 2018-08-15
+
+    [ FIX / TESTING ]
+    - support perls < 5.10.1 in Makefile.PL by being more dynamic
+      (GH #229, GH #230, thanks to Aristotle)
+
+4.39 2018-08-13
+
+    [ FIX / TESTING ]
+    - specify CONFIGURE_REQUIRES in Makefile.PL so can use TEST_REQUIRES
+      to build with older perls (GH #228)
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- .../libtest/libtest-deep-perl_1.128.bb        | 56 +++++++++++++++++++
- 1 file changed, 56 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libtest/libtest-deep-perl_1.128.bb
+ .../recipes-perl/libcgi/libcgi-perl_4.38.bb   | 25 ----------
+ .../recipes-perl/libcgi/libcgi-perl_4.43.bb   | 50 +++++++++++++++++++
+ 2 files changed, 50 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-perl/recipes-perl/libcgi/libcgi-perl_4.38.bb
+ create mode 100644 meta-perl/recipes-perl/libcgi/libcgi-perl_4.43.bb
 
-diff --git a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.128.bb b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.128.bb
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.38.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.38.bb
+deleted file mode 100644
+index db16d8307d..0000000000
+--- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.38.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "CGI.pm is a stable, complete and mature solution for processing and preparing \
+-HTTP requests and responses. Major features including processing form \
+-submissions, file uploads, reading and writing cookies, query string generation \
+-and manipulation, and processing and preparing HTTP headers."
+-HOMEPAGE = "http://search.cpan.org/~leejo/CGI-4.28/lib/CGI.pod"
+-SECTION = "libs"
+-LICENSE = "Artistic-2.0 | GPL-2.0"
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2e9769f0a2613a98bc7fce15dee0c533"
+-
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "0aeb8563d533e7f83724ed068b5bfc37"
+-SRC_URI[sha256sum] = "8c58f4a529bb92a914b22b7e64c5e31185c9854a4070a6dfad44fe5cc248e7d4"
+-
+-S = "${WORKDIR}/CGI-${PV}"
+-
+-inherit cpan
+-
+-RDEPENDS_${PN} += "\
+-    perl-module-deprecate \
+-    perl-module-if \
+-"
+-
+-RPROVIDES_${PN} += "perl-module-cgi"
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.43.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.43.bb
 new file mode 100644
-index 0000000000..44a915c5b7
+index 0000000000..b4571b27e6
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.128.bb
-@@ -0,0 +1,56 @@
-+SUMMARY = "Test::Deep - Extremely flexible deep comparison"
-+DESCRIPTION = "If you don't know anything about automated testing in Perl \
-+then you should probably read about Test::Simple and Test::More before \
-+preceding. Test::Deep uses the Test::Builder framework. \
-+\ 
-+Test::Deep gives you very flexible ways to check that the result you got is \
-+the result you were expecting. At its simplest it compares two structures \
-+by going through each level, ensuring that the values match, that arrays and \
-+hashes have the same elements and that references are blessed into the \
-+correct class. It also handles circular data structures without getting \
-+caught in an infinite loop. \
-+\
-+Where it becomes more interesting is in allowing you to do something besides \
-+simple exact comparisons. With strings, the \'eq\' operator checks that 2 \
-+strings are exactly equal but sometimes that's not what you want. When you \
-+don't know exactly what the string should be but you do know some things \
-+about how it should look, \'eq\' is no good and you must use pattern matching \
-+instead. Test::Deep provides pattern matching for complex data structures \
-+distribution."
-+
++++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.43.bb
+@@ -0,0 +1,50 @@
++DESCRIPTION = "CGI.pm is a stable, complete and mature solution for processing and preparing \
++HTTP requests and responses. Major features including processing form \
++submissions, file uploads, reading and writing cookies, query string generation \
++and manipulation, and processing and preparing HTTP headers."
++HOMEPAGE = "http://search.cpan.org/~leejo/CGI-4.28/lib/CGI.pod"
 +SECTION = "libs"
++LICENSE = "Artistic-2.0 | GPL-2.0"
 +
-+HOMEPAGE = "http://github.com/rjbs/Test-Deep/"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
 +
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://lib/Test/Deep.pm;beginline=1817;endline=1826;md5=aebc793c87a3d8771fe98d5d369898e7"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
 +
-+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RJ/RJBS/Test-Deep-${PV}.tar.gz"
-+SRC_URI[md5sum] = "9bc47147ea720fc01bc6b214afb884ff"
-+SRC_URI[sha256sum] = "852d7e836fba8269b0b755082051a24a1a309d015a8b76838790af9e3760092f"
++SRC_URI[md5sum] = "8c1f2cf11e4410911827ea48d58aaecc"
++SRC_URI[sha256sum] = "14b94f9df6e48fc26ebc4fa1e01a7b534cbc1611028a49028f9ac9d8ca27b734"
 +
-+UPSTREAM_CHECK_REGEX = "Test\-Deep\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
-+
-+S = "${WORKDIR}/Test-Deep-${PV}"
++S = "${WORKDIR}/CGI-${PV}"
 +
 +inherit cpan ptest-perl
 +
-+RDEPENDS_${PN} += " \
-+    perl-module-dynaloader \
-+    perl-module-exporter \
-+    perl-module-fcntl \
-+    perl-module-list-util \
-+    perl-module-scalar-util \
-+    perl-module-strict \
-+    perl-module-vars \
-+    perl-module-warnings \
++RDEPENDS_${PN} += "\
++    libhtml-parser-perl \
++    perl-module-base \
++    perl-module-deprecate \
++    perl-module-if \
 +"
 +
++do_install_prepend() {
++    # requires "-T" (taint) command line option
++    rm -rf ${B}/t/push.t
++    rm -rf ${B}/t/utf8.t
++    # tests building of docs
++    rm -rf ${B}/t/compiles_pod.t
++}
++
 +RDEPENDS_${PN}-ptest += " \
-+    perl-module-if \
++    libtest-deep-perl \
++    perl-module-bytes \
++    perl-module-file-find \
++    perl-module-filehandle \
++    perl-module-findbin \
 +    perl-module-lib \
++    perl-module-perlio \
++    perl-module-perlio-scalar \
 +    perl-module-test-more \
-+    perl-module-test-tester \
++    perl-module-utf8 \
 +"
++
++RPROVIDES_${PN} += "perl-module-cgi"
 +
 +BBCLASSEXTEND = "native"
 -- 
