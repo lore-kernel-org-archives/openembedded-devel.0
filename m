@@ -1,25 +1,48 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FA6D7E41B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-it1-f174.google.com (mail-it1-f174.google.com
+	[209.85.166.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CAFB7E41B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Jun 2019 18:44:20 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	02 Jun 2019 11:44:22 -0700
-X-ExtLoop1: 1
-Received: from chiron.jf.intel.com ([10.54.74.38])
-	by orsmga007.jf.intel.com with ESMTP; 02 Jun 2019 11:44:21 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  2 Jun 2019 11:43:18 -0700
-Message-Id: <20190602184318.71277-13-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
-References: <20190602184318.71277-1-timothy.t.orling@linux.intel.com>
+	Sun,  2 Jun 2019 19:25:41 +0000 (UTC)
+Received: by mail-it1-f174.google.com with SMTP id m141so24041772ita.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Jun 2019 12:25:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=YD6UuSy1rUS8ZR2lQT4y6BU0c8PIz4mUfRxaQ0R+Xa8=;
+	b=EtwENyJsrupQoL4A3FK/PY/Iizoljbm4Qxx7MtRwj+IOlCOwTVMKJkz+96bjTS1QxZ
+	clMbEg+gzq+vuDR9yzBAYkKhX8H/2UYOXmetz+pPhpCcZkMYFB8dwQ66YDr4Lr8jgnvp
+	tlpGoqjY9VER0nlS6NGJwkfa/lTPv065rTwHsnKdDiPKBrgkivDi1O+8aJCLcjnmnNrQ
+	9d4oy5mNF/dbBl9phzG551gHcJHkF1iKzPjRPx4HBtSrF/1Zm3S77JdWgqWuUMdP90KW
+	7w/a+Nh6ny3DcSIkAPYbClp0M7o1gP4Okm0rTm63UBVIQa+En3cnlMhXB1UlUBf/eGnM
+	DHHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=YD6UuSy1rUS8ZR2lQT4y6BU0c8PIz4mUfRxaQ0R+Xa8=;
+	b=aUAR5z7qHe5nLNwrEiBOLTkijXwMrIsrtZK2fvBhs+LiLrbOxdv/j7ylfK7HyrP8q/
+	X6exFyOhE53Ck2h1JizdqUX1ykCNn7A42aZ+FLEN4WxHZf0wJ206Q3u9FLNQ4xLH9AkJ
+	dQpSDiD8xqHmsnJCyYIzm8aa9lPhsyWa+yzWob7ubiov8WwCu1v1KLYd9sq6hhS5JTka
+	aHD7arXrfdX6KDhF5ilmLt8eLNlVMw0ZtHz9HDQ0KRZQjrHiQJXgNwfo1lxvBhXkcN5G
+	ZAa3avfmU8bpVceB54FQnX1gziHiMxTQtR9poLctNoDJuSwlZ4Ts8v7ELEB48KIfkNmi
+	Pl9A==
+X-Gm-Message-State: APjAAAWf6q/lgEJzzRhH/LYecwPvcvecywVMVQ11C6ZI0LdX51Vc+K3n
+	UnbSTXG9+jNxLUcyjpkiaFQv826UrJjF11zaNQI=
+X-Google-Smtp-Source: APXvYqz9X0LqjQfcmHOvvEGTilk/IHw1aQwF7FyFtaYwfNq50YyOjt+c1PV2iX2Bvq91pYHEQbL4+QlQ3jC+S+4cQms=
+X-Received: by 2002:a24:9ac7:: with SMTP id
+	l190mr14034247ite.100.1559503537411; 
+	Sun, 02 Jun 2019 12:25:37 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH 13/13] libcapture-tiny-perl: upgrade 0.46 -> 0.48; enable ptest
+References: <5492cc4e-4318-d6d8-3b84-86fb94fd8a74@gmail.com>
+In-Reply-To: <5492cc4e-4318-d6d8-3b84-86fb94fd8a74@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Sun, 2 Jun 2019 12:25:26 -0700
+Message-ID: <CANx9H-A8hDNPoJRKVNtZEWATqvWOwu-Ak1DxvXZBirmqBts7Lw@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-python py2 plans
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,79 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jun 2019 18:44:20 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 02 Jun 2019 19:25:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* sort RDEPENDS in alpha order
-* add missing dependencies (since perl-sanity change)
+What Ross, Paul and I are proposing (we have discussed in YPTM/Engineering
+Sync,Bug Triage meetings and in person):
 
-Upstream release notes:
+1. Move existing (deprecated) meta-python to a new layer
+(meta-python-classic? ;) ). I will be seeking someone else to pick up the
+mantel of maintenance, as I have no intent to spend time on python2.
+2. Make meta-python python3 only. This gives us a chance to merge the
+python3-* and python-*.inc files, for simpler maintenance.
+3. Refactor recipetool/devtool to support python3 (only).
+4. Investigate using distutils "test" functionality for low-hanging fruit
+ptests for python3 modules (something like the ptest-perl.bbclass). We
+really need ptests.
 
-[Fixed]
+This is also an opportunity to move meta-python into it's own repository
+(not under the meta-openembedded umbrella). I have no strong opinion on
+this, but it has been under discussion for a couple of years now. Without
+patchtest and ptests for python recipes, maintenance is challenging (not
+that this is impacted by where the layer lives). I run a Jenkins job weekly
+to run AUH on "all" python recipes, not that I have had a lot of time to go
+the last mile to get the patches to the mailing list (there is always hand
+tweaking and manual testing which is time consuming). This task would be
+simpler in a separate repository, with cleaner git log. Patchtest and
+patchwork would be simpler with a dedicated mailing list. The main cons to
+a new repo are that (1) other layers (e.g. meta-networking) depend on
+meta-python and meta-python depends on meta-oe and (2) without improved
+tools maintenance, a new repo doesn't really change anything. There has
+also been discussion of functional layers, rather than a "language" layer.
+Meta-python has become a bit of a mini-meta-oe in that it has recieved a
+lot of drive-by contributions and is a bit of everything plus the kitchen
+sink.
 
-- Appends PID to random file names for tee signalling to avoid
-  random name collision when used in multiple forked children.
+Ultimately, I think the TSC(s) may need to make a call on moving the repo.
+A clear consensus has not been achieved to date (in a series of OEDAM/OEDEM
+meetings) and so we have continued with status quo.
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- ...l_0.46.bb => libcapture-tiny-perl_0.48.bb} | 36 +++++++++++--------
- 1 file changed, 22 insertions(+), 14 deletions(-)
- rename meta-perl/recipes-perl/libcapture/{libcapture-tiny-perl_0.46.bb => libcapture-tiny-perl_0.48.bb} (58%)
+I would like to see all of this accomplished by the 2.9 release. Anyone
+interested in helping, especially with #1, #3 and #4, please speak up.
 
-diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.46.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-similarity index 58%
-rename from meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.46.bb
-rename to meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-index 2719811ce4..3b3e31dd97 100644
---- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.46.bb
-+++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-@@ -15,23 +15,31 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
- 
- SRCNAME = "Capture-Tiny"
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
--SRC_URI[md5sum] = "d718af07729d26a793949ca6ba2580a7"
--SRC_URI[sha256sum] = "5d7a6a830cf7f2b2960bf8b8afaac16a537ede64f3023827acea5bd24ca77015"
-+SRC_URI[md5sum] = "f5d24083ad270f8326dd659dd83eeb54"
-+SRC_URI[sha256sum] = "6c23113e87bad393308c90a207013e505f659274736638d8c79bac9c67cc3e19"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
--inherit cpan
--
--RDEPENDS_${PN} = " perl-module-scalar-util \
--                   perl-module-io-file \
--                   perl-module-extutils-makemaker \
--                   perl-module-file-spec \
--                   perl-module-exporter \
--                   perl-module-carp \
--                   perl-module-test-more \
--                   perl-module-file-temp \
--                   perl-module-lib \
--                   perl-module-overloading \
-+inherit cpan ptest-perl
-+
-+RDEPENDS_${PN} = " \
-+    perl-module-carp \
-+    perl-module-exporter \
-+    perl-module-extutils-makemaker \
-+    perl-module-extutils-mm-unix \
-+    perl-module-file-spec \
-+    perl-module-file-temp \
-+    perl-module-io-handle \
-+    perl-module-lib \
-+    perl-module-overloading \
-+    perl-module-perlio \
-+    perl-module-perlio-scalar \
-+    perl-module-scalar-util \
-+    perl-module-strict \
-+    perl-module-test-more \
-+    perl-module-warnings \
- "
- 
-+RDEPENDS_${PN}-ptest += "perl-module-perlio"
-+
- BBCLASSEXTEND = "native"
--- 
-2.20.1
+--Tim
 
+On Sat, Jun 1, 2019 at 10:20 AM akuster808 <akuster808@gmail.com> wrote:
+
+> Hello,
+>
+> With python2 being EOL this year. Is there a plan for meta-python to
+> deal with this?
+>
+> - Armin
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
