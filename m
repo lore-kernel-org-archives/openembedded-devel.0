@@ -1,26 +1,24 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Hongzhi.Song@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E562C7DE75
+	by mail.openembedded.org (Postfix) with ESMTP id AF8E579D54
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 03:05:22 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x55353L8011405
+	Wed,  5 Jun 2019 04:50:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x554nhYg014031
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Jun 2019 20:05:14 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 4 Jun 2019 20:04:53 -0700
-From: <changqing.li@windriver.com>
+	Tue, 4 Jun 2019 21:49:54 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 4 Jun 2019 21:49:32 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Jun 2019 11:04:01 +0800
-Message-ID: <1559703841-263740-8-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1559703841-263740-1-git-send-email-changqing.li@windriver.com>
-References: <1559703841-263740-1-git-send-email-changqing.li@windriver.com>
+Date: Tue, 4 Jun 2019 21:49:32 -0700
+Message-ID: <20190605044932.62524-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [PATCH 7/7] multipath-tools: upgrade 0.8.0 -> 0.8.1
+Subject: [PATCH] spice: fix compile errors on 32bit system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,89 +31,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 03:05:23 -0000
+X-List-Received-Date: Wed, 05 Jun 2019 04:50:03 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+There are folowing compile errors on Linux 32bit system:
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+red-channel.c:207:73: error: format '%x' expects argument of type
+'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
+|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
+                                ~~~~~~~~~~~~~~~~~~~~~^
+                        self->priv->thread_id);
+                ~~~~~~~~~~~~~~~~~~~~~^
+
+On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
+'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
+not '%x'.
+
+So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
+And others files modification are similar to G_GSIZE_MODIFIER.
+
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- ...ools-modify-Makefile.inc-for-cross-compil.patch | 28 ++++++++++++----------
- ...ath-tools_0.8.0.bb => multipath-tools_0.8.1.bb} |  2 +-
- 2 files changed, 16 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-support/multipath-tools/{multipath-tools_0.8.0.bb => multipath-tools_0.8.1.bb} (98%)
+ ...compile-errors-on-Linux-32bit-system.patch | 96 +++++++++++++++++++
+ .../recipes-support/spice/spice_git.bb        |  1 +
+ 2 files changed, 97 insertions(+)
+ create mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
 
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch b/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
-index 4fa7960..3919f99 100644
---- a/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
-+++ b/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
-@@ -1,10 +1,7 @@
--From a805b601fcf4bb9e269566a8d25e48d9e60915c0 Mon Sep 17 00:00:00 2001
-+From c3436ec8a502a40579abf62be0a479fa9d7888ad Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
--Date: Mon, 26 Nov 2018 11:14:24 +0800
--Subject: [PATCH] From 8bdd4481d822b6625d8bf719431ca74ed1b5e021 Mon Sep 17
-- 00:00:00 2001 From: Changqing Li <changqing.li@windriver.com> Date: Mon, 16
-- Jul 2018 15:56:37 +0800 Subject: [PATCH] multipath-tools: modify Makefile.inc
-- for cross-compilation
-+Date: Tue, 4 Jun 2019 11:39:39 +0800
-+Subject: [PATCH] multipath-tools: modify Makefile.inc for cross-compilation
- 
- Do not look for systemd info on the host, and allow us to pass in CFLAGS
- using the OPTFLAGS variable.
-@@ -27,23 +24,28 @@ remove change about CFLAGS part, since patch 0024 already have similar function.
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- 
--update for version 0.7.9
-+update for version 0.8.1
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-- Makefile.inc | 6 ------
-- 1 file changed, 6 deletions(-)
-+ Makefile.inc | 11 -----------
-+ 1 file changed, 11 deletions(-)
- 
- diff --git a/Makefile.inc b/Makefile.inc
--index 295afb9..7136db3 100644
-+index 661f141..3f9fd28 100644
- --- a/Makefile.inc
- +++ b/Makefile.inc
--@@ -38,12 +38,6 @@ ifndef RUN
-+@@ -35,17 +35,6 @@ ifndef RUN
-  	endif
-  endif
-  
- -ifndef SYSTEMD
---	ifeq ($(shell systemctl --version > /dev/null 2>&1 && echo 1), 1)
---		SYSTEMD = $(shell systemctl --version 2> /dev/null |  sed -n 's/systemd \([0-9]*\)/\1/p')
-+-	ifeq ($(shell pkg-config --modversion libsystemd >/dev/null 2>&1 && echo 1), 1)
-+-		SYSTEMD = $(shell pkg-config --modversion libsystemd)
-+-	else
-+-		ifeq ($(shell systemctl --version >/dev/null 2>&1 && echo 1), 1)
-+-			SYSTEMD = $(shell systemctl --version 2> /dev/null | \
-+-				sed -n 's/systemd \([0-9]*\).*/\1/p')
-+-		endif
- -	endif
- -endif
- -
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.0.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
-similarity index 98%
-rename from meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.0.bb
-rename to meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
-index 0cff48d..55866e9 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.0.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
-@@ -46,7 +46,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
--SRCREV = "eb688e1833e9533bfd9496ddc37eecc93590defa"
-+SRCREV = "e23b5d7cf67a9c543e118f2f6b902594a02a804a"
+diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+new file mode 100644
+index 000000000..749a8fd16
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+@@ -0,0 +1,96 @@
++From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
++From: "Hongzhi.Song" <hongzhi.song@windriver.com>
++Date: Tue, 4 Jun 2019 03:58:17 -0400
++Subject: [PATCH] Fix compile errors on Linux 32bit system
++
++There are folowing compile errors on Linux 32bit system:
++
++red-channel.c:207:73: error: format '%x' expects argument of type
++'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
++|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
++                                ~~~~~~~~~~~~~~~~~~~~~^
++                        self->priv->thread_id);
++                ~~~~~~~~~~~~~~~~~~~~~^
++
++On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
++'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
++not '%x'.
++
++So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
++And others files modification are similar to G_GSIZE_MODIFIER.
++
++Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
++---
++Upstream-Status: sent to upstream
++
++ server/red-channel.c    | 6 +++---
++ server/red-client.c     | 8 ++++----
++ server/red-replay-qxl.c | 2 +-
++ 3 files changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/server/red-channel.c b/server/red-channel.c
++index f81142d..6a03ec2 100644
++--- a/server/red-channel.c
+++++ b/server/red-channel.c
++@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
++ {
++     RedChannel *self = RED_CHANNEL(object);
++ 
++-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
+++    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
++ 
++     RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
++ 
++@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
++ 
++     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
++         red_channel_warning(channel,
++-                            "channel->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++                            "channel->thread_id (0x%lx) != "
+++                            "pthread_self (0x%lx)."
++                             "If one of the threads is != io-thread && != vcpu-thread, "
++                             "this might be a BUG",
++                             (unsigned long)channel->priv->thread_id,
++diff --git a/server/red-client.c b/server/red-client.c
++index 2b859cb..ff4da2a 100644
++--- a/server/red-client.c
+++++ b/server/red-client.c
++@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
++     RedChannel *channel;
++ 
++     if (!pthread_equal(pthread_self(), client->thread_id)) {
++-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++        spice_warning("client->thread_id (0x%lx) != "
+++                      "pthread_self (0x%lx)."
++                       "If one of the threads is != io-thread && != vcpu-thread,"
++                       " this might be a BUG",
++                       (unsigned long)client->thread_id, (unsigned long)pthread_self());
++@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
++     RedChannelClient *rcc;
++ 
++     if (!pthread_equal(pthread_self(), client->thread_id)) {
++-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++        spice_warning("client->thread_id (0x%lx) != "
+++                      "pthread_self (0x%lx)."
++                       "If one of the threads is != io-thread && != vcpu-thread,"
++                       " this might be a BUG",
++                       (unsigned long)client->thread_id,
++diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
++index 6d34818..0deb406 100644
++--- a/server/red-replay-qxl.c
+++++ b/server/red-replay-qxl.c
++@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
++             exit(1);
++         }
++         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
++-            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")",
+++            spice_error("inflate error %d (disc: %li)",
++                         ret, *size - strm.total_out);
++             if (ret == Z_DATA_ERROR) {
++                 /* last operation may be wrong. since we do the recording
++-- 
++2.8.1
++
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 6249b0422..3c45d1f5e 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -24,6 +24,7 @@ SRC_URI = " \
+     git://anongit.freedesktop.org/spice/spice;name=spice \
+     git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
+     file://0001-Convert-pthread_t-to-be-numeric.patch \
++    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
+ "
  
  S = "${WORKDIR}/git"
- 
 -- 
-2.7.4
+2.21.0
 
 
