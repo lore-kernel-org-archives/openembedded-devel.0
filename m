@@ -1,49 +1,36 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E1707D251
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 322F17D6A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 17:14:26 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id x17so2229871wrl.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jun 2019 10:14:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=SshZERwgzhtHPmvEzSI0bNfO+4tJogZrVzHHCeDIazM=;
-	b=ZqNdigxk+hfYhSy7iaW1hKZz7VcTYmVEQLue3HrPX7vfQc5ytOgZpWI8PnGdY24jtB
-	9QAPIJ9ttkLQ3Jd3hTN2PCYRJck+dfdm2yO4707WnWI5TvLbTK9avHNZg6H/iaGnllMV
-	xdjZ/TrLxGfZVXQSeAMZXB7+0WmyJl7K3IS1nmEP+dSThDfSReb3QaqEgtII3Hc4XMz9
-	zRgVmFj5kg0ukSoAJ9P1i5mEX+OBz6XHeAGXPHYqVDqQBKhXjJGmalKantbABMG28CUj
-	KsZiA2b0P9k9zMNEAQg5GyReXSDbPSu7D7jtqeext47Br1M1O44A6f49prRrtd+y80G3
-	ApIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=SshZERwgzhtHPmvEzSI0bNfO+4tJogZrVzHHCeDIazM=;
-	b=DSTqHpOrkcJG9f3SXW6gFd6Mc9o0lkG0dblu+fiU3Rbzh7RuwsQ+vxZzDuZK0WDcqY
-	dyIJFpJYpKn4aZVpPSRHFaKrwuNGRdH+ojs5m1p61/AvfWdVhKIhcEc0N2ct/k5kFQt0
-	0uiyGsVDTaMWHDm6IvmVID1YkmNzlBULw+XtnRCkUs/n2XWp/qZFPNgqc0IGFArLKBiX
-	D9wM0kE58voihxoxC5v+KQraZoIAV/doyjHWuCROUzzoK397RWN+8+61+Wmjac9cBrNC
-	iHUPJrpYk22nLlO0tfEHtR+4bdPkoW/ibeM6TOmxfR94yRXdKFWdymj+jH/1tpZ8vneS
-	l2DQ==
-X-Gm-Message-State: APjAAAUGTFuhvLwuSI7d9+MwdOzBUMS02kvLepbQLaIAhlPqS8HEenG5
-	RqRINvDRo5NeamzdtVIIrTSXW9J1
-X-Google-Smtp-Source: APXvYqwuG1M85MT0q/vz9aovtknLRNuq5NvRHJyR0dqaC3qIUX/BVOPkKf9nhOrkRV6hbZj/HiiWCw==
-X-Received: by 2002:adf:ea44:: with SMTP id j4mr11368218wrn.123.1559754866366; 
-	Wed, 05 Jun 2019 10:14:26 -0700 (PDT)
-Received: from nick-beastie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id z5sm8443341wmf.48.2019.06.05.10.14.24
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 05 Jun 2019 10:14:24 -0700 (PDT)
-From: Nicola Lunghi <nick83ola@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jun 2019 18:12:34 +0100
-Message-Id: <20190605171233.15670-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	Wed,  5 Jun 2019 17:27:38 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45Jwj7041Yz3L;
+	Wed,  5 Jun 2019 19:27:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1559755659;
+	bh=0PPtrE2cwYJigXWBGpVCMBIN6injD9EKFwR1ZFE5xh4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=G0gSnk1ctDUkJZeHBN/ShJ5dRQw9qtaH+nfL21H2wHcAj/bzoIe1ujIsB9gwaZk6q
+	mZoy4eqbsTwhunee5SbIOXLYQVlA+cJWKGZbC0TnoxuK1KzwiZugJ3o8CgmLQdaj8D
+	92gw6TEuFxc4RqrU238qbpJ+ZQ8nep346NZDHU2YoShIzK6vSYPyyQDXQBa0VtK3vv
+	8aoK8fvrPmj9LITb5h62dKPE1mPYAM3WIr/sWELIYNbDC446b+8T/KpBzGfrlg/1uC
+	ECnGRzRFoiFoit+OFgivgYxPnXhQS2oOqAi2Qo1r9cjrL2Ja6xMa9fiL+fsjVAu4Lt
+	SFcbyjOEy+OqT8nY6izUu23VgSgCQmUrCRMS+gMWkbBWg0rxB71HjPe2TfLBkoc5AB
+	fnSQiwFWUHFDGH08/gqCH+e80bYts1XlLIintxwwKkSpk0NJqA8Rl72s93AHOWwrkd
+	OtbfTCnU8Y1eDG3i7hiF112tJbP501X1zzukSjschf0qvYk1fSq1GHQW7f6bpL/aVn
+	tlMSUwjtSVYDS82S1MBFzwQ1mE6xpvcqOPK9URw7pNKmeMxpmryXdQ6z19n06R6VRy
+	kYgo8nUjzfSaCPHLckFHB9++UT8nZqzaduYsNVwNVWdfImduEspW4pbjxu/vyEQwXy
+	+diU5tt32hYTf1Xo/sQ2LWdI=
+Date: Wed, 5 Jun 2019 20:27:31 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <20190605172731.GA7942@localhost>
+References: <20190605141114.5576-1-pascal.bach@siemens.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libp11: 0.4.7 -> 0.4.10
+In-Reply-To: <20190605141114.5576-1-pascal.bach@siemens.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] protobuf: 3.6.1 -> 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 17:14:26 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 05 Jun 2019 17:27:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Upgrade libp11 from 0.4.7 to 0.4.10.
+On Wed, Jun 05, 2019 at 04:11:14PM +0200, Pascal Bach wrote:
+> Simple update to latest release
+> 
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+> ---
+>  .../protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb}                 | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-devtools/protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb} (96%)
+> 
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> similarity index 96%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> index cf72d9ca7..7148954ce 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> @@ -12,9 +12,9 @@ DEPENDS_append_class-target = " protobuf-native"
+>  
+>  PV .= "+git${SRCPV}"
 
-also remove the following line (not needed anymore):
+This is (and was previously) exactly the release,
+so upgrading gives the opportunity to remove this
+misleading +git addition.
 
-  rm -rf ${D}${libdir}/*.la
+> -SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+> +SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
+>  
+> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
+> +SRC_URI = "git://github.com/google/protobuf.git;branch=master \
+>...
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
----
- .../libp11/{libp11_0.4.7.bb => libp11_0.4.10.bb}               | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/libp11/{libp11_0.4.7.bb => libp11_0.4.10.bb} (88%)
+branch=3.8.x would look more logical to me here.
 
-diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.7.bb b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-similarity index 88%
-rename from meta-oe/recipes-support/libp11/libp11_0.4.7.bb
-rename to meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-index 87d99c1a68..2db3310ce9 100644
---- a/meta-oe/recipes-support/libp11/libp11_0.4.7.bb
-+++ b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
- DEPENDS = "libtool openssl"
- 
- SRC_URI = "git://github.com/OpenSC/libp11.git"
--SRCREV = "64569a391897bd29c5060b19fa4613e619e59277"
-+SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
- 
- S = "${WORKDIR}/git"
- 
-@@ -18,7 +18,6 @@ inherit autotools pkgconfig
- EXTRA_OECONF = "--disable-static"
- 
- do_install_append () {
--    rm -rf ${D}${libdir}/*.la
-     rm -rf ${D}${docdir}/${BPN}
- }
- 
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
