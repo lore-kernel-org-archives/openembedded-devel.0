@@ -1,27 +1,47 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C742B79D54
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DCB2D7CE21
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 04:54:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x554s2ho006635
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  5 Jun 2019 07:52:28 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id c6so1215371wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Jun 2019 21:54:02 -0700 (PDT)
-Received: from [128.224.162.188] (128.224.162.188) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Tue, 4 Jun 2019 21:54:01 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <20190605044932.62524-1-hongzhi.song@windriver.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <810bd251-4eac-1259-dfb9-a7cc22024a9b@windriver.com>
-Date: Wed, 5 Jun 2019 12:53:59 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <20190605044932.62524-1-hongzhi.song@windriver.com>
-X-Originating-IP: [128.224.162.188]
-Subject: Re: [PATCH] spice: fix compile errors on 32bit system
+	Wed, 05 Jun 2019 00:52:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Dw7Tn+wVaItH+BWn26yRkCpdvlf5mb3Bil/QLf+TJ9g=;
+	b=JVQE7iAy0/SxNNhQtOSCk9ClXomjqWyf8fx6etaaBipZowBvaWixZvxYUNHfhuRdpt
+	EiLhD6n2qUs13SCpJjoBg4+8RitukThbZWVW3AnvdOZA2xqBUCInFz7NgcYF93HEwKT0
+	OlXc1UMdgy7NonGMuEISYp+MtE7HQ44IMfMn/isv8hIqyOYxloaloui1ZccQTqj9+x+O
+	ALkRACTbmzafvh/ryHrgcxtlDHVjblJeQ2m4naxl6mL65XNd5DJ14RUqjRo5Qisa9O5P
+	AFEZ0wCT9/fNekZDTmJ1PrAIiN7SxPTsumILHD8ThIExCieCu+ThYfRf2JAcOiWGw0r8
+	WeTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Dw7Tn+wVaItH+BWn26yRkCpdvlf5mb3Bil/QLf+TJ9g=;
+	b=Y6uqkm1zh20YqLEXlBHeRVYjgLZpyJB8Tq6oLa+PwNUoex/IH0EN8bUrioBNSJqMcm
+	GXGKtKVGwgDYPv06rggWpS0vCU1+PBJVNQH7k1W50BgLFx8Vk5cygHZ6OJdOLAIWHsdP
+	WjG0npoOWWW5CR+HwVG0GuP69vUmb03PX8juxNXG4TFHvMjO26CZR66STsqMPV5sH0GJ
+	cx0Z+ngyzHexEX5FAcV3dKMQgYhraSrlIlXtXKmPJ2OeG6YVi62FJsFDemShggp0sc8i
+	dceJ6xE/OrZ1IsWCSsVCeXDeoVL2kZZPsSGNta4goRin8jCOtOndjhpZ4QJTg7dPWNfd
+	Qt3w==
+X-Gm-Message-State: APjAAAVI72OdyONy7mDNmeh0CpzshOYxP+vVVW5tbrmtp4XxX0GdKeg3
+	sjGjxHT04B8BdXRzHwmrN7KKY4tZ
+X-Google-Smtp-Source: APXvYqwTer6kHLuZoDCRDZmXCnSXqFObtYuXavW7eFDc8jqFBL6Qms5BBy9z+LY7bEiNgYMFX7E35A==
+X-Received: by 2002:a1c:eb16:: with SMTP id j22mr8671160wmh.56.1559721149212; 
+	Wed, 05 Jun 2019 00:52:29 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id v63sm966121wmb.30.2019.06.05.00.52.28
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 05 Jun 2019 00:52:28 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Jun 2019 07:52:41 +0000
+Message-Id: <20190605075241.422-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] spice: append to CFLAGS instead of +=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,152 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 04:54:02 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 05 Jun 2019 07:52:29 -0000
 
-For meta-networking
+* so that -Wno-address-of-packed-member is used for all the builds not
+  only for target builds
+* with native it was overwritten with BUILD_CFLAGS and for nativesdk with
+  BUILDSDK_CFLAGS
+* this issue isn't specific for gcc-9 as the original commit said, I see
+  nativesdk-spice failing on older hosts with gcc-7 with the same issue
+* also use -Wno-error=address-of-packed-member instead of
+  -Wno-address-of-packed-member so that there is still a warning, just
+  not fatal for the build in combination with -Werror.
 
---Hongzhi
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-networking/recipes-support/spice/spice_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 6249b0422b..b0fab0d65f 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -36,7 +36,7 @@ DEPENDS_append_class-nativesdk = "nativesdk-openssl"
+ export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
+ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
+ 
+-CFLAGS += "-Wno-address-of-packed-member"
++CFLAGS_append = " -Wno-error=address-of-packed-member"
+ 
+ PACKAGECONFIG_class-native = ""
+ PACKAGECONFIG_class-nativesdk = ""
+-- 
+2.17.1
 
-On 6/5/19 12:49 PM, Hongzhi.Song wrote:
-> There are folowing compile errors on Linux 32bit system:
->
-> red-channel.c:207:73: error: format '%x' expects argument of type
-> 'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
-> |207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
->                                  ~~~~~~~~~~~~~~~~~~~~~^
->                          self->priv->thread_id);
->                  ~~~~~~~~~~~~~~~~~~~~~^
->
-> On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
-> 'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
-> not '%x'.
->
-> So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
-> And others files modification are similar to G_GSIZE_MODIFIER.
->
-> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> ---
->   ...compile-errors-on-Linux-32bit-system.patch | 96 +++++++++++++++++++
->   .../recipes-support/spice/spice_git.bb        |  1 +
->   2 files changed, 97 insertions(+)
->   create mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
->
-> diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
-> new file mode 100644
-> index 000000000..749a8fd16
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
-> @@ -0,0 +1,96 @@
-> +From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
-> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-> +Date: Tue, 4 Jun 2019 03:58:17 -0400
-> +Subject: [PATCH] Fix compile errors on Linux 32bit system
-> +
-> +There are folowing compile errors on Linux 32bit system:
-> +
-> +red-channel.c:207:73: error: format '%x' expects argument of type
-> +'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
-> +|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
-> +                                ~~~~~~~~~~~~~~~~~~~~~^
-> +                        self->priv->thread_id);
-> +                ~~~~~~~~~~~~~~~~~~~~~^
-> +
-> +On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
-> +'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
-> +not '%x'.
-> +
-> +So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
-> +And others files modification are similar to G_GSIZE_MODIFIER.
-> +
-> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> +---
-> +Upstream-Status: sent to upstream
-> +
-> + server/red-channel.c    | 6 +++---
-> + server/red-client.c     | 8 ++++----
-> + server/red-replay-qxl.c | 2 +-
-> + 3 files changed, 8 insertions(+), 8 deletions(-)
-> +
-> +diff --git a/server/red-channel.c b/server/red-channel.c
-> +index f81142d..6a03ec2 100644
-> +--- a/server/red-channel.c
-> ++++ b/server/red-channel.c
-> +@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
-> + {
-> +     RedChannel *self = RED_CHANNEL(object);
-> +
-> +-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
-> ++    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
-> +
-> +     RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
-> +
-> +@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
-> +
-> +     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
-> +         red_channel_warning(channel,
-> +-                            "channel->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
-> +-                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
-> ++                            "channel->thread_id (0x%lx) != "
-> ++                            "pthread_self (0x%lx)."
-> +                             "If one of the threads is != io-thread && != vcpu-thread, "
-> +                             "this might be a BUG",
-> +                             (unsigned long)channel->priv->thread_id,
-> +diff --git a/server/red-client.c b/server/red-client.c
-> +index 2b859cb..ff4da2a 100644
-> +--- a/server/red-client.c
-> ++++ b/server/red-client.c
-> +@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
-> +     RedChannel *channel;
-> +
-> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
-> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
-> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
-> ++        spice_warning("client->thread_id (0x%lx) != "
-> ++                      "pthread_self (0x%lx)."
-> +                       "If one of the threads is != io-thread && != vcpu-thread,"
-> +                       " this might be a BUG",
-> +                       (unsigned long)client->thread_id, (unsigned long)pthread_self());
-> +@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
-> +     RedChannelClient *rcc;
-> +
-> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
-> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
-> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
-> ++        spice_warning("client->thread_id (0x%lx) != "
-> ++                      "pthread_self (0x%lx)."
-> +                       "If one of the threads is != io-thread && != vcpu-thread,"
-> +                       " this might be a BUG",
-> +                       (unsigned long)client->thread_id,
-> +diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
-> +index 6d34818..0deb406 100644
-> +--- a/server/red-replay-qxl.c
-> ++++ b/server/red-replay-qxl.c
-> +@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
-> +             exit(1);
-> +         }
-> +         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
-> +-            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")",
-> ++            spice_error("inflate error %d (disc: %li)",
-> +                         ret, *size - strm.total_out);
-> +             if (ret == Z_DATA_ERROR) {
-> +                 /* last operation may be wrong. since we do the recording
-> +--
-> +2.8.1
-> +
-> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-> index 6249b0422..3c45d1f5e 100644
-> --- a/meta-networking/recipes-support/spice/spice_git.bb
-> +++ b/meta-networking/recipes-support/spice/spice_git.bb
-> @@ -24,6 +24,7 @@ SRC_URI = " \
->       git://anongit.freedesktop.org/spice/spice;name=spice \
->       git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
->       file://0001-Convert-pthread_t-to-be-numeric.patch \
-> +    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
->   "
->   
->   S = "${WORKDIR}/git"
 
