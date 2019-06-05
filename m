@@ -1,38 +1,22 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 63A5C7D533
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 240967D32D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Jun 2019 08:37:58 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45J50Q0xSpz3L;
-	Tue,  4 Jun 2019 10:37:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1559637478;
-	bh=0g0FQ+d/A8FDhqKmAxcNLHyPWm4mMKAAq1L2qNQFoRM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=qt+HAsrm4OQGIRCofDydIltfWkXZFhWZxsXuYCj/NMtkT1bBYHe9TPtq+wFt/28g0
-	rgQOQVGvVdzOP8QQZQwPxv9YgAnQy/Zgb71Pm+X9oy2v78306JMyPMo0Qe1hGxs1kh
-	qxmx+2hu2IJbgoePvSN3TMsUCtwAG/HY9OpPfsu3dKQdq1IcTPBU47kaUf5PQQS/bo
-	hdvN01IVldmeOFGzJ5zL1Y7PgSKB8MqUnmF55TyslvLAmv7I9jG3YPKl6qfp3VgpKS
-	TfBLaQ1OPYu5xIPibq/TltM5ePFgjeJh83piqQo4Tqo6kNK8DMAPBeStHdTsq/bgMX
-	kagAJ4xoMzJkGVWdaW3h6bhIJFnbs41VV6Kv2Me6EzReEhB+9GI8VNNyt9k28LmOap
-	qtQsQbavHmzKePKVhXAscSXuZkDAjnRWNJUeBTonY1quaRiZY+K3DKHY/js9oEx3BB
-	XrFWnvJymc4SGUwLljuZXKEUkHBpuWIy3nXWh0st+jQ7Fcb2KU1sSE6PBMdJjESgjY
-	11lvfDvqjE5FfGSEwPaHRDYmzIcttgPMNvu/gp5tXpNM99vkP5FmAZjDK0LUVuqnZ4
-	CBYpCJwFcx7pMfJ9tF0lRTkFM9/yyAtJ0TnsrrYl9YQ+8YGeODp0H4iVOzFsadjssc
-	Sbv88W+/SgTrMIpL5wAwGpCM=
-Date: Tue, 4 Jun 2019 11:37:55 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Paolo Valente <paolo.valente@linaro.org>
-Message-ID: <20190604083755.GA2249@localhost>
-References: <20190530132148.66500-1-paolo.valente@linaro.org>
-	<83FEA552-5A4B-4A54-BBF9-2D88B4B6B11F@linaro.org>
+	Wed,  5 Jun 2019 02:22:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x552MBVr005279
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 4 Jun 2019 19:22:12 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 4 Jun 2019 19:22:11 -0700
+From: <mingli.yu@windriver.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Jun 2019 19:22:11 -0700
+Message-ID: <20190605022211.41350-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <83FEA552-5A4B-4A54-BBF9-2D88B4B6B11F@linaro.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Ulf Hansson <ulf.hansson@linaro.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2] s-suite: push SRCREV to version 3.4
+Subject: [meta-oe][PATCH] hwloc: Upgrade to 1.11.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,35 +29,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jun 2019 08:37:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 05 Jun 2019 02:22:12 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Tue, Jun 04, 2019 at 09:38:48AM +0200, Paolo Valente wrote:
-> Hi,
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Hi Paolo,
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ .../hwloc/{hwloc_1.11.10.bb => hwloc_1.11.12.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/hwloc/{hwloc_1.11.10.bb => hwloc_1.11.12.bb} (89%)
 
-> anyone had time to look into this? Is the patch ok now?
-
-it looks OK to me.
-
-The delay is caused by [1], so don't worry if it takes until next week 
-for a merge or reply from Khem.
-
-> Thanks,
-> Paolo
-
-cu
-Adrian
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2019-May/199871.html
-
+diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb
+similarity index 89%
+rename from meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb
+rename to meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb
+index 5f4155ea5..4f5b248c4 100644
+--- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.10.bb
++++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb
+@@ -8,8 +8,8 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
+ 
+ SRC_URI = "https://www.open-mpi.org/software/${BPN}/v1.11/downloads/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "0981a01935982aa7e850a96e0c3057b0"
+-SRC_URI[sha256sum] = "2be808383d8337846fe77ce49c7ad3336fb6857505494d85c0ac03f22c5bd1e7"
++SRC_URI[md5sum] = "c2a2e4e23eeb719ed31a755684697cf9"
++SRC_URI[sha256sum] = "ddfb7b9b4571551165b0fd824a340e58814c8c2b4af64c818579d4bc695a417d"
+ 
+ UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v1.11/"
+ 
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.21.0
 
 
