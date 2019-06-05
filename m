@@ -1,22 +1,24 @@
-Return-Path: <james.feist@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 131956BCE7
+Return-Path: <vernon.mauery@linux.intel.com>
+X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 05 Jun 2019 18:42:46 UTC
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FF097D68F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 18:04:36 +0000 (UTC)
+	Wed,  5 Jun 2019 18:42:46 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Jun 2019 11:04:37 -0700
-X-ExtLoop1: 1
-Received: from skyhawk.jf.intel.com ([10.54.51.81])
-	by orsmga008.jf.intel.com with ESMTP; 05 Jun 2019 11:04:37 -0700
-From: James Feist <james.feist@linux.intel.com>
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	05 Jun 2019 11:35:40 -0700
+Received: from vmauery-desk.jf.intel.com ([10.7.150.62])
+	by orsmga005-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
+	05 Jun 2019 11:35:40 -0700
+From: Vernon Mauery <vernon.mauery@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jun 2019 11:04:30 -0700
-Message-Id: <20190605180430.5382-1-james.feist@linux.intel.com>
+Date: Wed,  5 Jun 2019 11:35:23 -0700
+Message-Id: <20190605183523.32391-1-vernon.mauery@linux.intel.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] libgpiod: Enable cxx bindings by default
+Subject: [meta-oe][PATCH] Update ipmitool to use new active source
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,60 +31,216 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 18:04:37 -0000
+X-List-Received-Date: Wed, 05 Jun 2019 18:42:46 -0000
 
-If we move the packageconfig settings from the shared
-inc file into the individual version recipes, we can
-enable the cxx bindings by default for the newer version
-of libgpiod.
+The ipmitool project has moved from sourceforge to github and is under
+new management. This updates the source so that it pulls directly from
+git rather than a tarball. Eventually, once the next release is tagged,
+the new SRCREV can be updated to that. But for now, the project is under
+active development and could probably benefit from periodic updates
+anyway.
 
-Signed-off-by: James Feist <james.feist@linux.intel.com>
+The SRCREV and SRC_URI links point to code that already has been patched
+to work with the new openssl 1.1 APIs, so the patch is no longer needed.
+
+Signed-off-by: Vernon Mauery <vernon.mauery@linux.intel.com>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod.inc      | 3 ---
- meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb | 3 +++
- meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb   | 3 +++
- 3 files changed, 6 insertions(+), 3 deletions(-)
+ .../0001-Migrate-to-openssl-1.1.patch         | 152 ------------------
+ .../{ipmitool_1.8.18.bb => ipmitool_git.bb}   |  12 +-
+ 2 files changed, 6 insertions(+), 158 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
+ rename meta-oe/recipes-kernel/ipmitool/{ipmitool_1.8.18.bb => ipmitool_git.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/recipes-support/libgpiod/libgpiod.inc
-index cd7750623..89679cb91 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
-@@ -7,9 +7,6 @@ SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
- 
- inherit autotools pkgconfig
- 
--# enable tools
--PACKAGECONFIG ?= "tools"
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
+deleted file mode 100644
+index 394aa16ad..000000000
+--- a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
++++ /dev/null
+@@ -1,152 +0,0 @@
+-From c9dcb6afef9c343d070aaff208d11a997a45a105 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 5 Sep 2018 22:19:38 -0700
+-Subject: [PATCH] Migrate to openssl 1.1
 -
- PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
- PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
+-Upstream-Status: Backport [https://sourceforge.net/p/ipmitool/source/ci/1664902525a1c3771b4d8b3ccab7ea1ba6b2bdd1/]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/plugins/lanplus/lanplus_crypt_impl.c | 50 ++++++++++++++----------
+- 1 file changed, 29 insertions(+), 21 deletions(-)
+-
+-diff --git a/src/plugins/lanplus/lanplus_crypt_impl.c b/src/plugins/lanplus/lanplus_crypt_impl.c
+-index d5fac37..9652a5e 100644
+---- a/src/plugins/lanplus/lanplus_crypt_impl.c
+-+++ b/src/plugins/lanplus/lanplus_crypt_impl.c
+-@@ -164,11 +164,7 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
+- 							uint8_t       * output,
+- 							uint32_t        * bytes_written)
+- {
+--	EVP_CIPHER_CTX ctx;
+--	EVP_CIPHER_CTX_init(&ctx);
+--	EVP_EncryptInit_ex(&ctx, EVP_aes_128_cbc(), NULL, key, iv);
+--	EVP_CIPHER_CTX_set_padding(&ctx, 0);
+--	
+-+	EVP_CIPHER_CTX *ctx = NULL;
+- 
+- 	*bytes_written = 0;
+- 
+-@@ -182,6 +178,14 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
+- 		printbuf(input, input_length, "encrypting this data");
+- 	}
+- 
+-+	ctx = EVP_CIPHER_CTX_new();
+-+	if (ctx == NULL) {
+-+		lprintf(LOG_DEBUG, "ERROR: EVP_CIPHER_CTX_new() failed");
+-+		return;
+-+	}
+-+	EVP_CIPHER_CTX_init(ctx);
+-+	EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv);
+-+	EVP_CIPHER_CTX_set_padding(ctx, 0);
+- 
+- 	/*
+- 	 * The default implementation adds a whole block of padding if the input
+-@@ -191,28 +195,28 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
+- 	assert((input_length % IPMI_CRYPT_AES_CBC_128_BLOCK_SIZE) == 0);
+- 
+- 
+--	if(!EVP_EncryptUpdate(&ctx, output, (int *)bytes_written, input, input_length))
+-+	if(!EVP_EncryptUpdate(ctx, output, (int *)bytes_written, input, input_length))
+- 	{
+- 		/* Error */
+- 		*bytes_written = 0;
+--		return;
+- 	}
+- 	else
+- 	{
+- 		uint32_t tmplen;
+- 
+--		if(!EVP_EncryptFinal_ex(&ctx, output + *bytes_written, (int *)&tmplen))
+-+		if(!EVP_EncryptFinal_ex(ctx, output + *bytes_written, (int *)&tmplen))
+- 		{
+-+			/* Error */
+- 			*bytes_written = 0;
+--			return; /* Error */
+- 		}
+- 		else
+- 		{
+- 			/* Success */
+- 			*bytes_written += tmplen;
+--			EVP_CIPHER_CTX_cleanup(&ctx);
+- 		}
+- 	}
+-+	/* performs cleanup and free */
+-+	EVP_CIPHER_CTX_free(ctx);
+- }
+- 
+- 
+-@@ -239,11 +243,7 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
+- 							uint8_t       * output,
+- 							uint32_t        * bytes_written)
+- {
+--	EVP_CIPHER_CTX ctx;
+--	EVP_CIPHER_CTX_init(&ctx);
+--	EVP_DecryptInit_ex(&ctx, EVP_aes_128_cbc(), NULL, key, iv);
+--	EVP_CIPHER_CTX_set_padding(&ctx, 0);
+--
+-+	EVP_CIPHER_CTX *ctx = NULL;
+- 
+- 	if (verbose >= 5)
+- 	{
+-@@ -252,12 +252,20 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
+- 		printbuf(input, input_length, "decrypting this data");
+- 	}
+- 
+--
+- 	*bytes_written = 0;
+- 
+- 	if (input_length == 0)
+- 		return;
+- 
+-+	ctx = EVP_CIPHER_CTX_new();
+-+	if (ctx == NULL) {
+-+		lprintf(LOG_DEBUG, "ERROR: EVP_CIPHER_CTX_new() failed");
+-+		return;
+-+	}
+-+	EVP_CIPHER_CTX_init(ctx);
+-+	EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv);
+-+	EVP_CIPHER_CTX_set_padding(ctx, 0);
+-+
+- 	/*
+- 	 * The default implementation adds a whole block of padding if the input
+- 	 * data is perfectly aligned.  We would like to keep that from happening.
+-@@ -266,33 +274,33 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
+- 	assert((input_length % IPMI_CRYPT_AES_CBC_128_BLOCK_SIZE) == 0);
+- 
+- 
+--	if (!EVP_DecryptUpdate(&ctx, output, (int *)bytes_written, input, input_length))
+-+	if (!EVP_DecryptUpdate(ctx, output, (int *)bytes_written, input, input_length))
+- 	{
+- 		/* Error */
+- 		lprintf(LOG_DEBUG, "ERROR: decrypt update failed");
+- 		*bytes_written = 0;
+--		return;
+- 	}
+- 	else
+- 	{
+- 		uint32_t tmplen;
+- 
+--		if (!EVP_DecryptFinal_ex(&ctx, output + *bytes_written, (int *)&tmplen))
+-+		if (!EVP_DecryptFinal_ex(ctx, output + *bytes_written, (int *)&tmplen))
+- 		{
+-+			/* Error */
+- 			char buffer[1000];
+- 			ERR_error_string(ERR_get_error(), buffer);
+- 			lprintf(LOG_DEBUG, "the ERR error %s", buffer);
+- 			lprintf(LOG_DEBUG, "ERROR: decrypt final failed");
+- 			*bytes_written = 0;
+--			return; /* Error */
+- 		}
+- 		else
+- 		{
+- 			/* Success */
+- 			*bytes_written += tmplen;
+--			EVP_CIPHER_CTX_cleanup(&ctx);
+- 		}
+- 	}
+-+	/* performs cleanup and free */
+-+	EVP_CIPHER_CTX_free(ctx);
+- 
+- 	if (verbose >= 5)
+- 	{
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
+similarity index 80%
+rename from meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
+rename to meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
+index b7f1aa914..6d3ead14f 100644
+--- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
+@@ -14,7 +14,7 @@ Log (SEL), printing Field Replaceable Unit (FRU) information, reading and \
+ setting LAN configuration, and chassis power control. \
+ "
  
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
-index 96615ebf2..3ecfffdd6 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
-@@ -1,5 +1,8 @@
- require libgpiod.inc
+-HOMEPAGE = "http://ipmitool.sourceforge.net/"
++HOMEPAGE = "https://github.com/ipmitool/ipmitool"
+ SECTION = "kernel/userland"
  
-+# enable tools
-+PACKAGECONFIG ?= "tools"
+ LICENSE = "BSD-3-Clause"
+@@ -22,11 +22,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9aa91e13d644326bf281924212862184"
+ 
+ DEPENDS = "openssl readline ncurses"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
+-           file://0001-Migrate-to-openssl-1.1.patch \
+-           "
+-SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
+-SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
++SRC_URI = "git://github.com/ipmitool/ipmitool.git;protocol=https"
++SRCREV = "619a02cf5dc5b85a62730d82277fa8e78be396f5"
 +
- PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
++# latest current tag from the project
++PV = "1.8.18+git${SRCPV}"
  
- SRC_URI[md5sum] = "2aa1e1a80c3c919ae142ab9a55fb59ca"
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
-index e513a33bd..ffa2b9f12 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
-@@ -5,6 +5,9 @@ DEPENDS += "autoconf-archive-native"
- SRC_URI[md5sum] = "9f7530a5d56f070ba0af78d6ba077973"
- SRC_URI[sha256sum] = "6ec837f23e8f2196e5976dec4ac81403170830075e7f33ede1394eaf67f2e962"
- 
-+# enable tools and cxx bindings
-+PACKAGECONFIG ?= "cxx tools"
-+
- PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
- PACKAGECONFIG[tests] = "--enable-tests --enable-install-tests,--disable-tests --disable-install-tests,kmod udev"
+ inherit autotools
  
 -- 
 2.17.1
