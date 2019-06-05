@@ -1,25 +1,26 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 46CBF7E079
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A8ED37E261
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 03:04:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x5534qT6005567
+	Wed,  5 Jun 2019 03:04:58 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5534d4w011401
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Jun 2019 20:04:52 -0700 (PDT)
+	Tue, 4 Jun 2019 20:04:49 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 4 Jun 2019 20:04:52 -0700
+	14.3.439.0; Tue, 4 Jun 2019 20:04:28 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Jun 2019 11:04:00 +0800
-Message-ID: <1559703841-263740-7-git-send-email-changqing.li@windriver.com>
+Date: Wed, 5 Jun 2019 11:03:58 +0800
+Message-ID: <1559703841-263740-5-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1559703841-263740-1-git-send-email-changqing.li@windriver.com>
 References: <1559703841-263740-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/7] pavucontrol: upgrade 3.0 -> 4.0
+Subject: [PATCH 4/7] php: upgrade 7.3.4 -> 7.3.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,85 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 03:04:51 -0000
+X-List-Received-Date: Wed, 05 Jun 2019 03:04:58 -0000
 Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
-drop support of gtk2
-
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../0001-build-sys-Use-C-11-for-building.patch     | 27 ----------------------
- .../{pavucontrol_3.0.bb => pavucontrol_4.0.bb}     | 10 ++++----
- 2 files changed, 4 insertions(+), 33 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-build-sys-Use-C-11-for-building.patch
- rename meta-oe/recipes-multimedia/pulseaudio/{pavucontrol_3.0.bb => pavucontrol_4.0.bb} (52%)
+ meta-oe/recipes-devtools/php/{php_7.3.4.bb => php_7.3.6.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_7.3.4.bb => php_7.3.6.bb} (88%)
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-build-sys-Use-C-11-for-building.patch b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-build-sys-Use-C-11-for-building.patch
-deleted file mode 100644
-index b59569f..0000000
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-build-sys-Use-C-11-for-building.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From 1f92aa5c8d910519e3a74b2e3a9199aa9026a16c Mon Sep 17 00:00:00 2001
--From: Arun Raghavan <git@arunraghavan.net>
--Date: Mon, 25 Jan 2016 08:41:42 +0530
--Subject: [PATCH 1/2] build-sys: Use C++11 for building
--
--This requirement was added by gtkmm at some point:
--
--http://www.murrayc.com/permalink/2015/07/31/gtkmm-now-uses-c11/
-----
-- configure.ac | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/configure.ac b/configure.ac
--index 5b50e2d..8f28782 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -39,6 +39,7 @@ AC_PROG_CC
-- AC_PROG_LN_S
-- AC_TYPE_SIGNAL
-- AC_HEADER_STDC
--+AX_CXX_COMPILE_STDCXX_11
-- 
-- AC_ARG_ENABLE(gtk3,
--    [AS_HELP_STRING([--disable-gtk3],
---- 
--2.12.1
--
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-similarity index 52%
-rename from meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb
-rename to meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-index 959068d..6a82744 100644
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-@@ -2,19 +2,17 @@ DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based vol
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.4.bb b/meta-oe/recipes-devtools/php/php_7.3.6.bb
+similarity index 88%
+rename from meta-oe/recipes-devtools/php/php_7.3.4.bb
+rename to meta-oe/recipes-devtools/php/php_7.3.6.bb
+index 4e577df..b1cac1c 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.6.bb
+@@ -14,8 +14,8 @@ SRC_URI_append_class-target = " \
+                                 file://xfail_two_bug_tests.patch \
+                                 "
  
--DEPENDS = "intltool-native gtkmm libcanberra pulseaudio"
-+DEPENDS = "intltool-native gtkmm3 libcanberra pulseaudio"
+-SRC_URI[md5sum] = "efb58aea95a66738d871f83ec55fec6f"
+-SRC_URI[sha256sum] = "2e2c3d8212c83649e443b61efffbd03df4b9edd0f9c7a679081fe4cb2da12b78"
++SRC_URI[md5sum] = "bde9a912fb311182cd460dad1abbc247"
++SRC_URI[sha256sum] = "1e5ac8700154835c0910e3a814517da9b87bb4a82cc7011fea1a82096b6f6f77"
  
- inherit gnome distro_features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz \
--           file://0001-build-sys-Use-C-11-for-building.patch \
--           file://0002-build-sys-Add-m4-file-for-AX_CXX_COMPILE_STDCXX_11.patch \
-           "
--SRC_URI[md5sum] = "176308d2c03f8f3a7b2bd4f4d284fe71"
--SRC_URI[sha256sum] = "b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890"
-+SRC_URI[md5sum] = "9dcc2c76292e7e5e075d51b8dcb20202"
-+SRC_URI[sha256sum] = "8fc45bac9722aefa6f022999cbb76242d143c31b314e2dbb38f034f4069d14e2"
- 
--EXTRA_OECONF = " --disable-gtk3 --disable-lynx "
-+EXTRA_OECONF = "--disable-lynx "
- 
- RDEPENDS_${PN} += "pulseaudio-server"
+ PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
+                         --with-pdo-mysql=mysqlnd \
 -- 
 2.7.4
 
