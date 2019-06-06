@@ -1,36 +1,54 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C3A287CF1B
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DB52C7C87F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jun 2019 12:55:08 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45KQcD2Khpz3L;
-	Thu,  6 Jun 2019 14:55:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1559825708;
-	bh=yOsOlCXLvp0R8yYkaWf+95F1zV5+SV7cBz7+bhJNOv8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Z2u0fudY7aY7UQsbvOVl/OQ2pYNByMSmONSOZ6DFkpm1PAZ//tbMiUpwkSnG7Vccw
-	9cVtaaewD//NLPUFTQKf+tI3GT4vT1HmV3/WfpzBUEXO5Svt4bp40VOBVc6xXmBHfE
-	ElkJh6x/D/x9Oosf5ewBg8OzezLSjbV1zhxtwkf5vhK4udQhvP3uac4cbx2IHvfV20
-	D5ltoc7my/rXQ0F85gUL1S9rG2T3VPtye4X9WAu6eYYT8llR059kNdOYtbGtEvYC6U
-	uFQDE26msmYyTARTN1x6ChNFFPgL9GiKMGu1RLaPFTIMANGu7VOnNfyFIeYblACr9L
-	MaoUJsNdYySqlEcoEoVhfUbvamVjUZuFgHhOaSgwywYjmboX56GyyLVOOPCqdanSiX
-	Ar9DCdNpWQZEVxYV4MrsdzAQwbegmsSSb5n9GY6BkAJjx6fUc+RdHGW6X3PuwQHImn
-	Qb1tXNsK+morZgCWOQ+MpIYxG537xqjqT4Jnq9LOOHlgbS4FEqRnst58SMiuZ5G0qd
-	JwRGB0qmkOvmkL+VU6ixOsTWmplVE7F+s8U8hCiZUCyhlkS+esNeVH6NMh3Krgv0Yw
-	J78ETYrX+bMSzXtPmSKu2krBfiyEysNlZXK0Fh4vL+tQO1l/Hj7uY8F8ffqc1YGPta
-	YL+Pdeqxl7JFV8gb7fAuuxaM=
-Date: Thu, 6 Jun 2019 15:55:01 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Vernon Mauery <vernon.mauery@linux.intel.com>
-Message-ID: <20190606125501.GA12025@localhost>
-References: <20190605183523.32391-1-vernon.mauery@linux.intel.com>
+	Thu,  6 Jun 2019 14:01:30 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id d18so2563406wrs.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Jun 2019 07:01:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7x/V4W6Z0gVYkHnRIOjGqWj4/yE8hN33jifloEG4LN8=;
+	b=PSTP7V3Tgt0QchKaIqSU4Bo4bxDId/v9XU64YRBlw0CD+mxlxkC2xysInWReo/t3Cc
+	UvXcKNB3M/h5Hxo8O+OURW1ekZOq9cioJ5XA0KcmBrUcnDiSMvqFqp+rK+QuIg7zsM3J
+	fklztTqH4uB0KN3sQxbtchD+sBDSDdRh3/p9D7HYOy6aJj9Z2DH4NSrU2a8WPNTXjMii
+	p3sGaHzm7onoPF392OlPh6i/uZYVZYTRLDJL4Czv3p+nIGwvLa94NS87r4BaC6NRMI4W
+	RWvzbTL8F4mgjWEuqHTTB7b38lOzCiPSSljsEqklfxA3EirxxR/xlfGMLS7F4y7WWWFT
+	v0kA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7x/V4W6Z0gVYkHnRIOjGqWj4/yE8hN33jifloEG4LN8=;
+	b=NLhmqgkt+J5VH6Lqx/YbjLCSFgsjUQmHDuGFheCwx9Tg1onFpk+dLgxMTrAgyOh9mq
+	5t7C11FcKUzvZNp4QTNouZ8/o5m6SFyq6LhCUwLwRS5GcHoSmvtH4C+qsbdMkQgTYF9Z
+	WlvNLBz6tFiClsOwXOsgXaa86qVPvzCfFMyWlWHl8nctbrG+v8pLcIMzi4ck71K+n+QE
+	wdrVGXN3YyLw0jn5JX6w0IOtYdxZpK59cy4TKB9/GLrNnVKt5R4o6krHElTF3mft0Ypm
+	ZqD2wXqOJe3r1fhLXRfj2WC5Y4B0H8J32Ju7XIleOeyWMDs7yH/PfmMRXAq8dMEZH+2h
+	a/9w==
+X-Gm-Message-State: APjAAAVPZnOfOFu/DFOztDckzgO2FUv7FJoFh+QIH2OOcX8ZuzjAb38d
+	DhmsQaD8waR6UBr5Uip4RwaZ0g==
+X-Google-Smtp-Source: APXvYqwdqZlv4mqASARqKPiqtbrqfDyz5x0/+7+fkO2SYqmE2DEksZVm8Rw/YGLpMmtMhx4AVg3iOA==
+X-Received: by 2002:a05:6000:104e:: with SMTP id
+	c14mr18985468wrx.71.1559829691368; 
+	Thu, 06 Jun 2019 07:01:31 -0700 (PDT)
+Received: from localhost.localdomain
+	(amontpellier-652-1-281-69.w109-210.abo.wanadoo.fr. [109.210.96.69])
+	by smtp.gmail.com with ESMTPSA id j7sm2421091wru.54.2019.06.06.07.01.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Jun 2019 07:01:30 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Jun 2019 16:01:27 +0200
+Message-Id: <20190606140127.1194-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190605183523.32391-1-vernon.mauery@linux.intel.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] Update ipmitool to use new active source
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libgpiod: upgrade to v1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +61,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jun 2019 12:55:09 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 Jun 2019 14:01:31 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jun 05, 2019 at 11:35:23AM -0700, Vernon Mauery wrote:
-> The ipmitool project has moved from sourceforge to github and is under
-> new management. This updates the source so that it pulls directly from
-> git rather than a tarball. Eventually, once the next release is tagged,
-> the new SRCREV can be updated to that. But for now, the project is under
-> active development and could probably benefit from periodic updates
-> anyway.
->...
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-This does not sound as if upgrading ipmitool right now would be a good 
-idea - if you do not feel confident to make a release, then downstream
-distributions should better not use unstable "active development" code.
+This release contains a couple fixes for C++ bindings and testing framework
+refactoring. The --enable-install-tests option has been removed as it was
+redundant. More info in NEWS.
 
-cu
-Adrian
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ .../libgpiod/{libgpiod_1.3.bb => libgpiod_1.4.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.3.bb => libgpiod_1.4.bb} (67%)
 
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb
+similarity index 67%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb
+index e513a33bd..22650d7b5 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb
+@@ -2,11 +2,11 @@ require libgpiod.inc
+ 
+ DEPENDS += "autoconf-archive-native"
+ 
+-SRC_URI[md5sum] = "9f7530a5d56f070ba0af78d6ba077973"
+-SRC_URI[sha256sum] = "6ec837f23e8f2196e5976dec4ac81403170830075e7f33ede1394eaf67f2e962"
++SRC_URI[md5sum] = "bd52d764017215a30e2f014d2081dc3e"
++SRC_URI[sha256sum] = "ebde83aaf14be3abd33e7a90faa487a2ee231e242897afe7fdefb765386b3c8b"
+ 
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+-PACKAGECONFIG[tests] = "--enable-tests --enable-install-tests,--disable-tests --disable-install-tests,kmod udev"
++PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+ 
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.21.0
 
 
