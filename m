@@ -1,22 +1,26 @@
-Return-Path: <robert.joslyn@redrectangle.org>
-Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FA327BFB3
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F2C5605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jun 2019 05:41:08 +0000 (UTC)
-Received: from xps13.localdomain (50-37-95-192.mscw.id.frontiernet.net
-	[50.37.95.192])
-	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay10.mail.gandi.net (Postfix) with ESMTPSA id 3D12D240003;
-	Thu,  6 Jun 2019 05:41:07 +0000 (UTC)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
+	Thu,  6 Jun 2019 06:53:18 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x566rJfY027812
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 Jun 2019 08:53:19 +0200
+Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
+	[139.16.125.99])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x566rJNp013364;
+	Thu, 6 Jun 2019 08:53:19 +0200
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id CBCEA10D1262;
+	Thu,  6 Jun 2019 08:53:18 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jun 2019 22:39:29 -0700
-Message-Id: <20190606053929.10625-2-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190606053929.10625-1-robert.joslyn@redrectangle.org>
-References: <20190606053929.10625-1-robert.joslyn@redrectangle.org>
-MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 2/2] xfce4-session: Reformat DEPENDS and RDEPENDS
+Date: Thu,  6 Jun 2019 08:53:08 +0200
+Message-Id: <20190606065308.23766-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCHv2] protobuf: 3.6.1 -> 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,56 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jun 2019 05:41:08 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 06 Jun 2019 06:53:19 -0000
 
-Break them over multiple lines to make updates easier.
+Simple update to latest release
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- .../xfce4-session/xfce4-session_4.13.2.bb     | 24 +++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
+ .../protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb}               | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb} (95%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-index d6e391430..dc44c4b0b 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-@@ -2,8 +2,19 @@ SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck3 dbus dbus-glib xfconf polkit"
--RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower xrdb"
-+
-+DEPENDS = " \
-+    dbus \
-+    dbus-glib \
-+    gtk+ \
-+    libwnck3 \
-+    libsm \
-+    libxfce4ui \
-+    libxfce4util \
-+    polkit \
-+    virtual/libx11 \
-+    xfconf \
-+"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+index cf72d9ca7..0892178c0 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+@@ -10,11 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib"
+ DEPENDS_append_class-target = " protobuf-native"
  
- inherit xfce update-alternatives distro_features_check
+-PV .= "+git${SRCPV}"
++SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
  
-@@ -26,3 +37,12 @@ FILES_${PN} += " \
-     ${datadir}/themes/Default/balou/* \
-     ${datadir}/polkit-1 \
+-SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+-
+-SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
++SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
+            file://run-ptest \
+            file://0001-protobuf-fix-configure-error.patch \
  "
-+
-+RDEPENDS_${PN} = " \
-+    dbus-x11 \
-+    iceauth \
-+    netbase \
-+    upower \
-+    xinit \
-+    xrdb \
-+"
 -- 
-2.21.0
+2.11.0
 
 
