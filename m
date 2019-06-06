@@ -1,24 +1,30 @@
-Return-Path: <vernon.mauery@linux.intel.com>
-X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 05 Jun 2019 18:42:46 UTC
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FF097D68F
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F29A6079F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jun 2019 18:42:46 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Jun 2019 11:35:40 -0700
-Received: from vmauery-desk.jf.intel.com ([10.7.150.62])
-	by orsmga005-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
-	05 Jun 2019 11:35:40 -0700
-From: Vernon Mauery <vernon.mauery@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Jun 2019 11:35:23 -0700
-Message-Id: <20190605183523.32391-1-vernon.mauery@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] Update ipmitool to use new active source
+	Thu,  6 Jun 2019 03:23:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,557,1549900800"; d="scan'208";a="66168337"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Jun 2019 11:23:04 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 0633B4CDCD42
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 Jun 2019 11:23:00 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.46) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 6 Jun 2019 11:23:05 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 6 Jun 2019 11:24:13 +0800
+Message-ID: <20190606032413.7746-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.46]
+X-yoursite-MailScanner-ID: 0633B4CDCD42.AC201
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-babel: upgrade 2.6.0 -> 2.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,218 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 18:42:46 -0000
+X-List-Received-Date: Thu, 06 Jun 2019 03:23:08 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-The ipmitool project has moved from sourceforge to github and is under
-new management. This updates the source so that it pulls directly from
-git rather than a tarball. Eventually, once the next release is tagged,
-the new SRCREV can be updated to that. But for now, the project is under
-active development and could probably benefit from periodic updates
-anyway.
+-Upgrade from python-babel_2.6.0.bb to python-babel_2.7.0.bb.
 
-The SRCREV and SRC_URI links point to code that already has been patched
-to work with the new openssl 1.1 APIs, so the patch is no longer needed.
+-Upgrade from python3-babel_2.6.0.bb to python3-babel_2.7.0.bb.
 
-Signed-off-by: Vernon Mauery <vernon.mauery@linux.intel.com>
+-License-Update: Copyright year updated to 2019.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../0001-Migrate-to-openssl-1.1.patch         | 152 ------------------
- .../{ipmitool_1.8.18.bb => ipmitool_git.bb}   |  12 +-
- 2 files changed, 6 insertions(+), 158 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
- rename meta-oe/recipes-kernel/ipmitool/{ipmitool_1.8.18.bb => ipmitool_git.bb} (80%)
+ meta-python/recipes-devtools/python/python-babel.inc        | 6 +++---
+ .../python/{python-babel_2.6.0.bb => python-babel_2.7.0.bb} | 0
+ .../{python3-babel_2.6.0.bb => python3-babel_2.7.0.bb}      | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-babel_2.6.0.bb => python-babel_2.7.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-babel_2.6.0.bb => python3-babel_2.7.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
-deleted file mode 100644
-index 394aa16ad..000000000
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-Migrate-to-openssl-1.1.patch
-+++ /dev/null
-@@ -1,152 +0,0 @@
--From c9dcb6afef9c343d070aaff208d11a997a45a105 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 5 Sep 2018 22:19:38 -0700
--Subject: [PATCH] Migrate to openssl 1.1
--
--Upstream-Status: Backport [https://sourceforge.net/p/ipmitool/source/ci/1664902525a1c3771b4d8b3ccab7ea1ba6b2bdd1/]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/plugins/lanplus/lanplus_crypt_impl.c | 50 ++++++++++++++----------
-- 1 file changed, 29 insertions(+), 21 deletions(-)
--
--diff --git a/src/plugins/lanplus/lanplus_crypt_impl.c b/src/plugins/lanplus/lanplus_crypt_impl.c
--index d5fac37..9652a5e 100644
----- a/src/plugins/lanplus/lanplus_crypt_impl.c
--+++ b/src/plugins/lanplus/lanplus_crypt_impl.c
--@@ -164,11 +164,7 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
-- 							uint8_t       * output,
-- 							uint32_t        * bytes_written)
-- {
---	EVP_CIPHER_CTX ctx;
---	EVP_CIPHER_CTX_init(&ctx);
---	EVP_EncryptInit_ex(&ctx, EVP_aes_128_cbc(), NULL, key, iv);
---	EVP_CIPHER_CTX_set_padding(&ctx, 0);
---	
--+	EVP_CIPHER_CTX *ctx = NULL;
-- 
-- 	*bytes_written = 0;
-- 
--@@ -182,6 +178,14 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
-- 		printbuf(input, input_length, "encrypting this data");
-- 	}
-- 
--+	ctx = EVP_CIPHER_CTX_new();
--+	if (ctx == NULL) {
--+		lprintf(LOG_DEBUG, "ERROR: EVP_CIPHER_CTX_new() failed");
--+		return;
--+	}
--+	EVP_CIPHER_CTX_init(ctx);
--+	EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv);
--+	EVP_CIPHER_CTX_set_padding(ctx, 0);
-- 
-- 	/*
-- 	 * The default implementation adds a whole block of padding if the input
--@@ -191,28 +195,28 @@ lanplus_encrypt_aes_cbc_128(const uint8_t * iv,
-- 	assert((input_length % IPMI_CRYPT_AES_CBC_128_BLOCK_SIZE) == 0);
-- 
-- 
---	if(!EVP_EncryptUpdate(&ctx, output, (int *)bytes_written, input, input_length))
--+	if(!EVP_EncryptUpdate(ctx, output, (int *)bytes_written, input, input_length))
-- 	{
-- 		/* Error */
-- 		*bytes_written = 0;
---		return;
-- 	}
-- 	else
-- 	{
-- 		uint32_t tmplen;
-- 
---		if(!EVP_EncryptFinal_ex(&ctx, output + *bytes_written, (int *)&tmplen))
--+		if(!EVP_EncryptFinal_ex(ctx, output + *bytes_written, (int *)&tmplen))
-- 		{
--+			/* Error */
-- 			*bytes_written = 0;
---			return; /* Error */
-- 		}
-- 		else
-- 		{
-- 			/* Success */
-- 			*bytes_written += tmplen;
---			EVP_CIPHER_CTX_cleanup(&ctx);
-- 		}
-- 	}
--+	/* performs cleanup and free */
--+	EVP_CIPHER_CTX_free(ctx);
-- }
-- 
-- 
--@@ -239,11 +243,7 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
-- 							uint8_t       * output,
-- 							uint32_t        * bytes_written)
-- {
---	EVP_CIPHER_CTX ctx;
---	EVP_CIPHER_CTX_init(&ctx);
---	EVP_DecryptInit_ex(&ctx, EVP_aes_128_cbc(), NULL, key, iv);
---	EVP_CIPHER_CTX_set_padding(&ctx, 0);
---
--+	EVP_CIPHER_CTX *ctx = NULL;
-- 
-- 	if (verbose >= 5)
-- 	{
--@@ -252,12 +252,20 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
-- 		printbuf(input, input_length, "decrypting this data");
-- 	}
-- 
---
-- 	*bytes_written = 0;
-- 
-- 	if (input_length == 0)
-- 		return;
-- 
--+	ctx = EVP_CIPHER_CTX_new();
--+	if (ctx == NULL) {
--+		lprintf(LOG_DEBUG, "ERROR: EVP_CIPHER_CTX_new() failed");
--+		return;
--+	}
--+	EVP_CIPHER_CTX_init(ctx);
--+	EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv);
--+	EVP_CIPHER_CTX_set_padding(ctx, 0);
--+
-- 	/*
-- 	 * The default implementation adds a whole block of padding if the input
-- 	 * data is perfectly aligned.  We would like to keep that from happening.
--@@ -266,33 +274,33 @@ lanplus_decrypt_aes_cbc_128(const uint8_t * iv,
-- 	assert((input_length % IPMI_CRYPT_AES_CBC_128_BLOCK_SIZE) == 0);
-- 
-- 
---	if (!EVP_DecryptUpdate(&ctx, output, (int *)bytes_written, input, input_length))
--+	if (!EVP_DecryptUpdate(ctx, output, (int *)bytes_written, input, input_length))
-- 	{
-- 		/* Error */
-- 		lprintf(LOG_DEBUG, "ERROR: decrypt update failed");
-- 		*bytes_written = 0;
---		return;
-- 	}
-- 	else
-- 	{
-- 		uint32_t tmplen;
-- 
---		if (!EVP_DecryptFinal_ex(&ctx, output + *bytes_written, (int *)&tmplen))
--+		if (!EVP_DecryptFinal_ex(ctx, output + *bytes_written, (int *)&tmplen))
-- 		{
--+			/* Error */
-- 			char buffer[1000];
-- 			ERR_error_string(ERR_get_error(), buffer);
-- 			lprintf(LOG_DEBUG, "the ERR error %s", buffer);
-- 			lprintf(LOG_DEBUG, "ERROR: decrypt final failed");
-- 			*bytes_written = 0;
---			return; /* Error */
-- 		}
-- 		else
-- 		{
-- 			/* Success */
-- 			*bytes_written += tmplen;
---			EVP_CIPHER_CTX_cleanup(&ctx);
-- 		}
-- 	}
--+	/* performs cleanup and free */
--+	EVP_CIPHER_CTX_free(ctx);
-- 
-- 	if (verbose >= 5)
-- 	{
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
-similarity index 80%
-rename from meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-rename to meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
-index b7f1aa914..6d3ead14f 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_git.bb
-@@ -14,7 +14,7 @@ Log (SEL), printing Field Replaceable Unit (FRU) information, reading and \
- setting LAN configuration, and chassis power control. \
- "
+diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
+index 14b5a9f57..427467294 100644
+--- a/meta-python/recipes-devtools/python/python-babel.inc
++++ b/meta-python/recipes-devtools/python/python-babel.inc
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "A collection of tools for internationalizing Python applications"
+ HOMEPAGE = "http://babel.edgewall.org/"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=eebdc057dc12abcc2d6c4453628bfcd4"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=942469df9305abb1c59e95f778310384"
  
--HOMEPAGE = "http://ipmitool.sourceforge.net/"
-+HOMEPAGE = "https://github.com/ipmitool/ipmitool"
- SECTION = "kernel/userland"
+-SRC_URI[md5sum] = "c384ac03026e8fe6f9b90f55201f1bff"
+-SRC_URI[sha256sum] = "8cba50f48c529ca3fa18cf81fa9403be176d374ac4d60738b839122dfaaa3d23"
++SRC_URI[md5sum] = "83c158b7dae9135750a7cf204e6e2eea"
++SRC_URI[sha256sum] = "e86135ae101e31e2c8ec20a4e0c5220f4eed12487d5cf3f78be7e98d3a57fc28"
  
- LICENSE = "BSD-3-Clause"
-@@ -22,11 +22,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9aa91e13d644326bf281924212862184"
+ PYPI_PACKAGE = "Babel"
  
- DEPENDS = "openssl readline ncurses"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
--           file://0001-Migrate-to-openssl-1.1.patch \
--           "
--SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
--SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
-+SRC_URI = "git://github.com/ipmitool/ipmitool.git;protocol=https"
-+SRCREV = "619a02cf5dc5b85a62730d82277fa8e78be396f5"
-+
-+# latest current tag from the project
-+PV = "1.8.18+git${SRCPV}"
- 
- inherit autotools
- 
+diff --git a/meta-python/recipes-devtools/python/python-babel_2.6.0.bb b/meta-python/recipes-devtools/python/python-babel_2.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-babel_2.6.0.bb
+rename to meta-python/recipes-devtools/python/python-babel_2.7.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-babel_2.6.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-babel_2.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
 -- 
-2.17.1
+2.20.1
+
+
 
 
