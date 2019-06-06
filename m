@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 281376079F
+	by mail.openembedded.org (Postfix) with ESMTP id 81A267D6A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jun 2019 03:35:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,557,1549900800"; d="scan'208";a="66169753"
+	Thu,  6 Jun 2019 03:46:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,557,1549900800"; d="scan'208";a="66171029"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jun 2019 11:35:04 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Jun 2019 11:46:24 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 61F164CDCEA5
+	by cn.fujitsu.com (Postfix) with ESMTP id 9B58E4CDCEBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jun 2019 11:35:02 +0800 (CST)
+	Thu,  6 Jun 2019 11:46:23 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.46) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 6 Jun 2019 11:35:08 +0800
+	Server (TLS) id 14.3.439.0; Thu, 6 Jun 2019 11:46:29 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 6 Jun 2019 11:36:11 +0800
-Message-ID: <20190606033611.11531-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 6 Jun 2019 11:47:37 +0800
+Message-ID: <20190606034737.12893-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.46]
-X-yoursite-MailScanner-ID: 61F164CDCEA5.A8D93
+X-yoursite-MailScanner-ID: 9B58E4CDCEBE.AE10F
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pbr: upgrade 5.2.0 -> 5.2.1
+Subject: [meta-python] [PATCH] python-mako: upgrade 1.0.10 -> 1.0.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jun 2019 03:35:06 -0000
+X-List-Received-Date: Thu, 06 Jun 2019 03:46:30 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-pbr_5.2.0.bb to python-pbr_5.2.1.bb.
+-Upgrade from python-mako_1.0.10.bb to python-mako_1.0.12.bb.
+
+-License-Update: Copyright year updated to 2019.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../python/{python-pbr_5.2.0.bb => python-pbr_5.2.1.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pbr_5.2.0.bb => python-pbr_5.2.1.bb} (62%)
+ meta-python/recipes-devtools/python/python-mako.inc         | 6 +++---
+ .../python/{python-mako_1.0.10.bb => python-mako_1.0.12.bb} | 0
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-mako_1.0.10.bb => python-mako_1.0.12.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr_5.2.0.bb b/meta-python/recipes-devtools/python/python-pbr_5.2.1.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python-pbr_5.2.0.bb
-rename to meta-python/recipes-devtools/python/python-pbr_5.2.1.bb
-index a42388797..ccc75de8d 100644
---- a/meta-python/recipes-devtools/python/python-pbr_5.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_5.2.1.bb
-@@ -2,8 +2,8 @@ inherit setuptools
- # The inc file is in oe-core
- require recipes-devtools/python/python-pbr.inc
+diff --git a/meta-python/recipes-devtools/python/python-mako.inc b/meta-python/recipes-devtools/python/python-mako.inc
+index d86ad33cd..dc27ada74 100644
+--- a/meta-python/recipes-devtools/python/python-mako.inc
++++ b/meta-python/recipes-devtools/python/python-mako.inc
+@@ -2,14 +2,14 @@ SUMMARY = "A super-fast templating language that borrows the best ideas from the
+ HOMEPAGE = "http://www.makotemplates.org/"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1bb21fa2d2f7a534c884b990430a6863"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=df7e6c7c82990acf0228a55e00d29bc9"
  
--SRC_URI[md5sum] = "2bca008fd08d035a2f78c606d876a6db"
--SRC_URI[sha256sum] = "d950c64aeea5456bbd147468382a5bb77fe692c13c9f00f0219814ce5b642755"
-+SRC_URI[md5sum] = "f72c2dd10602abad3695097d634e94bb"
-+SRC_URI[sha256sum] = "93d2dc6ee0c9af4dbc70bc1251d0e545a9910ca8863774761f92716dece400b6"
+ PYPI_PACKAGE = "Mako"
  
- do_install_append() {
-         if [ -f ${D}${bindir}/pbr ]; then
+ inherit pypi
+ 
+-SRC_URI[md5sum] = "a94d376078dda65f834ea5049a81ebb5"
+-SRC_URI[sha256sum] = "7165919e78e1feb68b4dbe829871ea9941398178fa58e6beedb9ba14acf63965"
++SRC_URI[md5sum] = "4a7aef27217a8e6c1a29447c9b1b00ab"
++SRC_URI[sha256sum] = "0cfa65de3a835e87eeca6ac856b3013aade55f49e32515f65d999f91a2324162"
+ 
+ RDEPENDS_${PN} = " \
+     ${PYTHON_PN}-html \
+diff --git a/meta-python/recipes-devtools/python/python-mako_1.0.10.bb b/meta-python/recipes-devtools/python/python-mako_1.0.12.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-mako_1.0.10.bb
+rename to meta-python/recipes-devtools/python/python-mako_1.0.12.bb
 -- 
 2.20.1
 
