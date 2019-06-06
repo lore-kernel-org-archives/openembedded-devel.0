@@ -1,49 +1,48 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
 	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 83E686BCE7
+	by mail.openembedded.org (Postfix) with ESMTP id 4C6E46BCE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jun 2019 14:24:13 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id 81so358189pfy.13
+	Thu,  6 Jun 2019 14:29:00 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id s11so1597493pfm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jun 2019 07:24:14 -0700 (PDT)
+	Thu, 06 Jun 2019 07:29:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=0O52T2yarSS9e2IXWxeXd0LQarHj3MzGdde2ASiWGhY=;
-	b=fKtFSMCJ/fQG1Ey7u6xkQohqezaCJt8zzhGRjoNTWjfIZwOctmoTDMg2G0QFB1VP1k
-	ZVUSTmBshtXDwaxLp04wWYOoSWHNIbd62i5XSuJ4HXS2QYjGHpuzbFEe62KYpa/9mtOn
-	oSD9hf/2TiNGbLEfZCU3ixDbW+w5QqGmQcqW4Ck8g5Zt9JXzl1dvfF5EqHibuDdxAmS+
-	GtpQyrzrx7NkpuMXwLO0/mR+a2O1u9ouvEg0jLQHAKZxVLSKE0D7FqzRw9yEg02EJ57e
-	7tDogw0yUQ1k56R0L9WhoalHaDHnKXYN8QXsNPKN/zKWlI9gjcSZzKJHEFdQHZesAkZn
-	orNw==
+	bh=6bm5Q3j5bFcUhIUrUwFLfttyPbah6cQY5B24/jRcIiM=;
+	b=hEJmYe947taGrx1x/vrjSMdUX9fWimEULUkfHhv4JGtu004B74ii0ERyE0WuqysJAw
+	Q2JHJpUP5ZHDwuyeaPDu6QNoXasfWLA7EHsWn4F/hlfneGoUxjbBGeOtoBhnBKPKE+mE
+	BAMDfettq8yL5fg54VIWWneP0a83cCfVG4gXoQpsl0G9uLN2fMWyOyLyKNiSOdy8oy0G
+	QYuBICK6rsf7i+falkGta3hdU7lXCVitNx9OAlGpvjCk5kjVmfnr0qgbAOITeGLF5UeW
+	3I2AYgdVD7xyMhYlX7tXeOCzIwqe6O2ah1Gvwbhj7fK/q6UHGzahUo0IdMknbhuR1dEC
+	DmNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=0O52T2yarSS9e2IXWxeXd0LQarHj3MzGdde2ASiWGhY=;
-	b=T8tcAvObxGl5gFJ/1ZEhrmfmpK9RXFrpHlZ/qRWcW7oicUl9l3oBp9iNzd5lNMt6NR
-	algRTQfKq5eTqcJ1eZD2N+JkOaxh0T96qL69Cu7oSzhh08rpOin08tfBCMdFtNEa/wlp
-	8R1IGttadsGbzNjDM7rr+/QDmUACHuVUVpJ2gTXchANBS5AQWAUvFN/MDi+6ZhJKqPkL
-	l9Fj5o1O0K9qRl766HMc8j+9XcWoliJHVJj2k2py1CrnEDQXIK/OOw0lu7TtTWBotESv
-	PbNNlJB75RdHjcxBLOI8wC7CwUo/oxYgliHSMUHcXCjI9lbwEGIvORmOluBdgsGirI/Y
-	GcmQ==
-X-Gm-Message-State: APjAAAVoxtoREwRYkGEpix5In2ec/wQoFy6yak2ENxACUo0zidgmbzSy
-	TxSCiwfPvJvqUHA06spW/HLLuPEy
-X-Google-Smtp-Source: APXvYqxHbb95+lDq01cMm+KK7a/O2293wj52ZHMXJsFbZjcELKQ40Q/bQqytY4gaOfrxAaxgSsupPQ==
-X-Received: by 2002:aa7:956d:: with SMTP id x13mr13943136pfq.132.1559831053654;
-	Thu, 06 Jun 2019 07:24:13 -0700 (PDT)
+	bh=6bm5Q3j5bFcUhIUrUwFLfttyPbah6cQY5B24/jRcIiM=;
+	b=rEHmDNGJ6X+YW8Xb6crE6tHxwO2eEqeN6z6fXU0FIAX3wRk1SmAP+LJqc6CDEeBLMJ
+	ztQqhAi4kiwTWE2NoLrAym7rnyuzfAkE4lwgESfdgEC8GmbOHC+LFtgMUm41Wv5bMH3u
+	W/UXTnCD/I2GjXk/x+onzP4LTUD/kQCF3byXf7hzBE3GmiaaDqgPBoL4lyxTbwOtu30A
+	GO7/iDhx2p/pP8ow3Qqs6twYvp+bKRyO90hPkQMmTjNQDQQgQH4DE1APsvRlSujykulE
+	C2rxamRnjAwGYrDtPpDN6UfTMhG0U26ILW/lxFMZgfnE7+xYBB//Dl5/1ViM+xuXsefp
+	gJtw==
+X-Gm-Message-State: APjAAAUqbVcdOeHshc51G/aPJj2P+M00qfdmSX/EDEK4HHtBodPuD3eg
+	T+5Jux78qIbKBJsMoKrd3awtS6G+
+X-Google-Smtp-Source: APXvYqyw3bv/ktDw3ZAKzhOHICq9cFCNBohaei/v9XFG8De6Ce9yfVzf2FJa9tciEtdXvgOrR6OipA==
+X-Received: by 2002:a63:d949:: with SMTP id e9mr3585295pgj.437.1559831341035; 
+	Thu, 06 Jun 2019 07:29:01 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:649f:275:809c:24d6?
 	([2601:202:4180:c33:649f:275:809c:24d6])
-	by smtp.gmail.com with ESMTPSA id
-	k8sm3170201pfk.177.2019.06.06.07.24.12
+	by smtp.gmail.com with ESMTPSA id f21sm2036795pjq.2.2019.06.06.07.29.00
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Jun 2019 07:24:12 -0700 (PDT)
-To: Robert Joslyn <robert.joslyn@redrectangle.org>,
+	Thu, 06 Jun 2019 07:29:00 -0700 (PDT)
+To: "Hongzhi.Song" <hongzhi.song@windriver.com>,
 	openembedded-devel@lists.openembedded.org
-References: <20190602231221.24148-1-robert.joslyn@redrectangle.org>
+References: <20190605044932.62524-1-hongzhi.song@windriver.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +88,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <ed9e6fc4-d91c-7457-34d7-491c153215cb@gmail.com>
-Date: Thu, 6 Jun 2019 07:24:11 -0700
+Message-ID: <95302c7f-f036-623b-603e-b3a8ece56596@gmail.com>
+Date: Thu, 6 Jun 2019 07:28:59 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <20190602231221.24148-1-robert.joslyn@redrectangle.org>
-Subject: Re: [meta-oe][PATCH] cryptsetup: Add PACKAGECONFIG options
+In-Reply-To: <20190605044932.62524-1-hongzhi.song@windriver.com>
+Subject: Re: [PATCH] spice: fix compile errors on 32bit system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,98 +107,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jun 2019 14:24:13 -0000
+X-List-Received-Date: Thu, 06 Jun 2019 14:29:00 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 6/2/19 4:12 PM, Robert Joslyn wrote:
-> Add various PACKAGECONFIG options, keeping the default options enabled.
-the PACKCONFIG went from openssl to a lot more, how is that keeping the
-defaults?
-> ---
->  .../cryptsetup/cryptsetup_2.1.0.bb            | 51 ++++++++++++++++++-
->  1 file changed, 49 insertions(+), 2 deletions(-)
+On 6/4/19 9:49 PM, Hongzhi.Song wrote:
+> There are folowing compile errors on Linux 32bit system:
 >
-> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
-> index cf1d22242..51cecf5d2 100644
-> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
-> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
-> @@ -9,7 +9,12 @@ SECTION = "console"
->  LICENSE = "GPL-2.0-with-OpenSSL-exception"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
->  
-> -DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
-> +DEPENDS = " \
-> +    json-c \
-> +    libdevmapper \
-> +    popt \
-> +    util-linux \
-> +"
->  
->  SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
->  SRC_URI[md5sum] = "41d8b985ef69242852b93e95d53e8e28"
-> @@ -19,9 +24,45 @@ inherit autotools gettext pkgconfig
->  
->  # Use openssl because libgcrypt drops root privileges
->  # if libgcrypt is linked with libcap support
-> -PACKAGECONFIG ??= "openssl"
-> +PACKAGECONFIG ??= " \
-> +    keyring \
-> +    cryptsetup \
-> +    veritysetup \
-> +    cryptsetup-reencrypt \
-> +    integritysetup \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
-> +    udev \
-> +    kernel_crypto \
-> +    internal-argon2 \
-> +    blkid \
-> +    luks-adjust-xts-keysize \
-> +    openssl \
-> +"
+> red-channel.c:207:73: error: format '%x' expects argument of type
+> 'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
+> |207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
+>                                 ~~~~~~~~~~~~~~~~~~~~~^
+>                         self->priv->thread_id);
+>                 ~~~~~~~~~~~~~~~~~~~~~^
+>
+> On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
+> 'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
+> not '%x'.
+>
+> So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
+> And others files modification are similar to G_GSIZE_MODIFIER.
+>
+> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+> ---
+>  ...compile-errors-on-Linux-32bit-system.patch | 96 +++++++++++++++++++
+>  .../recipes-support/spice/spice_git.bb        |  1 +
+>  2 files changed, 97 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+>
+> diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+> new file mode 100644
+> index 000000000..749a8fd16
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+> @@ -0,0 +1,96 @@
+> +From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
+> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+> +Date: Tue, 4 Jun 2019 03:58:17 -0400
+> +Subject: [PATCH] Fix compile errors on Linux 32bit system
 > +
-> +PACKAGECONFIG[keyring] = "--enable-keyring,--disable-keyring"
-> +PACKAGECONFIG[fips] = "--enable-fips,--disable-fips"
-> +PACKAGECONFIG[pwquality] = "--enable-pwquality,--disable-pwquality,libpwquality"
-> +PACKAGECONFIG[passwdqc] = "--enable-passwdqc,--disable-passwdqc,passwdqc"
-> +PACKAGECONFIG[cryptsetup] = "--enable-cryptsetup,--disable-cryptsetup"
-> +PACKAGECONFIG[veritysetup] = "--enable-veritysetup,--disable-veritysetup"
-> +PACKAGECONFIG[cryptsetup-reencrypt] = "--enable-cryptsetup-reencrypt,--disable-cryptsetup-reencrypt"
-> +PACKAGECONFIG[integritysetup] = "--enable-integritysetup,--disable-integritysetup"
-> +PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux"
-> +PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,udev"
-> +PACKAGECONFIG[kernel_crypto] = "--enable-kernel_crypto,--disable-kernel_crypto"
-> +# gcrypt-pkbdf2 requries --with-crypto_backend=gcrypt or the flag isn't
-> +# recognized.
-> +PACKAGECONFIG[gcrypt-pbkdf2] = "--enable-gcrypt-pbkdf2"
-> +PACKAGECONFIG[internal-argon2] = "--enable-internal-argon2,--disable-internal-argon2"
-> +PACKAGECONFIG[internal-sse-argon2] = "--enable-internal-sse-argon2,--disable-internal-sse-argon2"
-> +PACKAGECONFIG[blkid] = "--enable-blkid,--disable-blkid,util-linux"
-> +PACKAGECONFIG[dev-random] = "--enable-dev-random,--disable-dev-random"
-> +PACKAGECONFIG[luks-adjust-xts-keysize] = "--enable-luks-adjust-xts-keysize,--disable-luks-adjust-xts-keysize"
->  PACKAGECONFIG[openssl] = "--with-crypto_backend=openssl,,openssl"
->  PACKAGECONFIG[gcrypt] = "--with-crypto_backend=gcrypt,,libgcrypt"
-> +PACKAGECONFIG[nss] = "--with-crypto_backend=nss,,nss"
-> +PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
-> +PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
->  
->  RRECOMMENDS_${PN} = "kernel-module-aes-generic \
->                       kernel-module-dm-crypt \
-> @@ -32,6 +73,12 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
+> +There are folowing compile errors on Linux 32bit system:
+> +
+> +red-channel.c:207:73: error: format '%x' expects argument of type
+> +'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
+> +|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
+> +                                ~~~~~~~~~~~~~~~~~~~~~^
+> +                        self->priv->thread_id);
+> +                ~~~~~~~~~~~~~~~~~~~~~^
+> +
+> +On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
+> +'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
+> +not '%x'.
+> +
+> +So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
+> +And others files modification are similar to G_GSIZE_MODIFIER.
+> +
+> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+> +---
+> +Upstream-Status: sent to upstream
+
+Is there a link we can follow for the change upstream?
+
+> +
+> + server/red-channel.c    | 6 +++---
+> + server/red-client.c     | 8 ++++----
+> + server/red-replay-qxl.c | 2 +-
+> + 3 files changed, 8 insertions(+), 8 deletions(-)
+> +
+> +diff --git a/server/red-channel.c b/server/red-channel.c
+> +index f81142d..6a03ec2 100644
+> +--- a/server/red-channel.c
+> ++++ b/server/red-channel.c
+> +@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
+> + {
+> +     RedChannel *self = RED_CHANNEL(object);
+> + 
+> +-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
+> ++    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
+> + 
+> +     RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
+> + 
+> +@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
+> + 
+> +     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
+> +         red_channel_warning(channel,
+> +-                            "channel->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
+> +-                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+> ++                            "channel->thread_id (0x%lx) != "
+> ++                            "pthread_self (0x%lx)."
+> +                             "If one of the threads is != io-thread && != vcpu-thread, "
+> +                             "this might be a BUG",
+> +                             (unsigned long)channel->priv->thread_id,
+> +diff --git a/server/red-client.c b/server/red-client.c
+> +index 2b859cb..ff4da2a 100644
+> +--- a/server/red-client.c
+> ++++ b/server/red-client.c
+> +@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
+> +     RedChannel *channel;
+> + 
+> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
+> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
+> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+> ++        spice_warning("client->thread_id (0x%lx) != "
+> ++                      "pthread_self (0x%lx)."
+> +                       "If one of the threads is != io-thread && != vcpu-thread,"
+> +                       " this might be a BUG",
+> +                       (unsigned long)client->thread_id, (unsigned long)pthread_self());
+> +@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
+> +     RedChannelClient *rcc;
+> + 
+> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
+> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
+> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+> ++        spice_warning("client->thread_id (0x%lx) != "
+> ++                      "pthread_self (0x%lx)."
+> +                       "If one of the threads is != io-thread && != vcpu-thread,"
+> +                       " this might be a BUG",
+> +                       (unsigned long)client->thread_id,
+> +diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
+> +index 6d34818..0deb406 100644
+> +--- a/server/red-replay-qxl.c
+> ++++ b/server/red-replay-qxl.c
+> +@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
+> +             exit(1);
+> +         }
+> +         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
+> +-            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")",
+> ++            spice_error("inflate error %d (disc: %li)",
+> +                         ret, *size - strm.total_out);
+> +             if (ret == Z_DATA_ERROR) {
+> +                 /* last operation may be wrong. since we do the recording
+> +-- 
+> +2.8.1
+> +
+> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+> index 6249b0422..3c45d1f5e 100644
+> --- a/meta-networking/recipes-support/spice/spice_git.bb
+> +++ b/meta-networking/recipes-support/spice/spice_git.bb
+> @@ -24,6 +24,7 @@ SRC_URI = " \
+>      git://anongit.freedesktop.org/spice/spice;name=spice \
+>      git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
+>      file://0001-Convert-pthread_t-to-be-numeric.patch \
+> +    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
 >  "
 >  
->  EXTRA_OECONF = "--enable-static"
-> +# Building without largefile is not supported by upstream
-> +EXTRA_OECONF += "--enable-largefile"
-> +# Requires a static popt library
-> +EXTRA_OECONF += "--disable-static-cryptsetup"
-> +# There's no recipe for libargon2 yet
-> +EXTRA_OECONF += "--disable-libargon2"
->  
->  FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
->  
+>  S = "${WORKDIR}/git"
 
 
