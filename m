@@ -1,49 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DE1CD7E4EB
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 78DF67E517
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Jun 2019 21:51:06 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id s27so1827649pgl.2
+	Fri,  7 Jun 2019 21:52:09 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id w34so1804473pga.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jun 2019 14:51:08 -0700 (PDT)
+	Fri, 07 Jun 2019 14:52:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=WplVVgncJP1uOqh2TnVIxeqgpRva8+wxB0DwhRLMdzM=;
-	b=hGLDMI5VroV7OURbjX2PLFNJRkh/F8zUyHO1HY1OkFSPuKmBRrv3ZWGjRQZDjcJYsk
-	6PmRbagvClX+Gay/4yBo4tpZOk0R9AMA0+8097dbzRbfwi7U1hCCC7HoIsWiPit/O6vx
-	/Xg6hCKvQ7+f+hpigPXU+POdGtI92VEsUGF9wbfEnMAswkGFabFnqp83VOJK/dfwpkHz
-	Gx+XaMtq52SjLKVjcQn93QO6yLsdc0Hgr1P2sp3+KkpmMRXs4AJjSbpDg8GcFUzAz35Y
-	hd4X5zM1e3r8Gmut4Mt42mPOaqkoWGKSTwvQuoLzA20mULAIvwzh5Y0omkjdzoqcUKDf
-	kuCQ==
+	bh=dUpjTzxl9dngZ5omMpQd5ZoqHyG0R+bC7Cxe0HcoT1s=;
+	b=dE2DVpWPH7LwdvFJ7BouHCQuh7qXIRJ2bQy/IlvsSwj4L6WngdeNGya55pgN54aaXg
+	HyoH3sL0oirBQDJ9dUEqnHN9T2WSKoU+XiGLuYZ+HHS2xpDJYHrFSXhwEhx06sY8pBL+
+	EEmJw0JqsxooS846eUSgOUJs+GXUJIOE/gJZEl5vyTOLx5eDFp8TA3jBK+bI4GriIjsb
+	jZmcFXAW7ZEwVtAP1IPE1bg867wTuRo5TJuthQDRlk81rNniC553Ug0AcMC2fMtu8AUz
+	BNwJ41ptGaqSiWgjmDw8AbLENpm6noACEqUznh+rUKIMji5TqvxLykO9eLOXo62qOaMb
+	pkzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=WplVVgncJP1uOqh2TnVIxeqgpRva8+wxB0DwhRLMdzM=;
-	b=lvy+kHECnG1/DcpfiiqseC4aqIs2cPwfJAsVsPhalz91tB5TcUY6Ly/6V6q4ydGueK
-	/vF9ZjTzc7eRlLhGP70/kFARhL2t4nznXvecGn7JxApkYrPNqZ+mL6XAsdUJ8WOu5h8d
-	DxuYRpjMKEDGdBYYlmPueVwZURhW/LTeywHsUfZYR8ghdtNC/kslArnQQ5n01f/KI61V
-	+CNZQjsXoefMUtkUaeOFUorf+//n2L1+oORkn4UCbHPL3HyfIYfsP4aNMWT5DsKVW37A
-	fQwUaglFbsUDAvk68ELt97EzFyvsIZl9rLO1BQM/bS7q3K23SjtpM2o78mdwIpxcJ03d
-	9YAg==
-X-Gm-Message-State: APjAAAUZzBKV/id21uZKkzDjh/hAXXikroIdES26/MSPRFwrjzBfHssx
-	QYuIQvwupPgCna1lJGM1sdAhxTPb
-X-Google-Smtp-Source: APXvYqxfpo0hYvJ/eAfU0WaAeuOReFcGrqMtncoCHWp5dc8L0oHw1mC1B81NZEiJu3sKLmxIoDScEw==
-X-Received: by 2002:a17:90a:37e9:: with SMTP id
-	v96mr7939320pjb.10.1559944267698; 
-	Fri, 07 Jun 2019 14:51:07 -0700 (PDT)
+	bh=dUpjTzxl9dngZ5omMpQd5ZoqHyG0R+bC7Cxe0HcoT1s=;
+	b=sPMsj2YHF+eR3TmplYGy+Nth62d9AD3hIcn02dHJ7cNuZpoMMA6G8YxlUPZVjstSad
+	aVvM+DMGyVwzP45HiY1gzbEsu2WLOTx5A+y0G8DcQsd3FasUo10BaT7zdCO/zZCGRjZD
+	+K2n3zIXDmNyF/8sKQX9G5N7FRg7rJ84MDtD/JBk3Bv5284XQM50Nf8if4PwFxoRlP3w
+	MiS7CGtvNa7bcy7Ep0/VfizU+6HvJZwmDyn7RD5G8gMG8mqjpMptLASzyRzj6pBBzx0G
+	6OxeUi4pvodXHP1p9McYq5JW2lO6ADloRntGAKcujI0S+sOPRrL08/+Y+RNe3n87qOX+
+	FaTQ==
+X-Gm-Message-State: APjAAAVhZsyNjRqHISaBvorwnmvis+nCGYFhvIS4ZmTF5L/3x9LWVO1e
+	jOUf16aoRm913u3uuaZqOsk=
+X-Google-Smtp-Source: APXvYqxkyvyegn89PIm2JOTrspMF2OcZMfRmyQIYxoVWsickLphu+a3r9pJJxiMgONIqKbWZeiUhEA==
+X-Received: by 2002:a63:7508:: with SMTP id q8mr4755617pgc.296.1559944330583; 
+	Fri, 07 Jun 2019 14:52:10 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:9501:8703:ab4:a59e?
 	([2601:202:4180:c33:9501:8703:ab4:a59e])
 	by smtp.gmail.com with ESMTPSA id
-	o13sm1948867pgr.86.2019.06.07.14.51.06
+	d24sm2832701pjv.24.2019.06.07.14.52.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Jun 2019 14:51:07 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>, openembedded-devel@lists.openembedded.org
-References: <20190607201822.28898-1-bunk@stusta.de>
+	Fri, 07 Jun 2019 14:52:10 -0700 (PDT)
+To: Stefan Agner <stefan@agner.ch>, raj.khem@gmail.com,
+	openembedded-devel@lists.openembedded.org
+References: <20190606140914.28713-1-stefan@agner.ch>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +89,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <02e81d03-9a69-1650-1847-8a40983c595f@gmail.com>
-Date: Fri, 7 Jun 2019 14:51:05 -0700
+Message-ID: <9a56f901-cc72-3c23-7f39-a73b24ddfd35@gmail.com>
+Date: Fri, 7 Jun 2019 14:52:08 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <20190607201822.28898-1-bunk@stusta.de>
-Subject: Re: [meta-perl][PATCH] recipes-devtools: Move back from meta-networking to meta-perl
+In-Reply-To: <20190606140914.28713-1-stefan@agner.ch>
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: Re: [meta-oe][PATCH] haveged: fix CPU cache size detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,47 +109,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jun 2019 21:51:07 -0000
+X-List-Received-Date: Fri, 07 Jun 2019 21:52:09 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 6/7/19 1:18 PM, Adrian Bunk wrote:
-> It needs both freeradius and perl-module-data-dumper,
-> so neither place would fulfill all dependencies.
+On 6/6/19 7:09 AM, Stefan Agner wrote:
+> From: Stefan Agner <stefan.agner@toradex.com>
 >
-> In general meta-perl looks like the more appropriate place.
+> Fix ENOMEM error in case the kernel reports cache size of -1. This
+> lead to the following error when starting haveged:
+>   haveged starting up
+>   haveged: Couldn't initialize HAVEGE rng 5
 >
-> The location in meta-networking also had the problem that
-> it was one directory too deep and therefore not included
-> in BBFILES.
-can this be run w/o meta-networking?
-
-- armin
->
-> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 > ---
->  .../recipes-perl}/libauthen/libauthen-radius-perl/run-ptest       | 0
->  .../libauthen-radius-perl/test.pl-adjust-for-ptest.patch          | 0
->  .../recipes-perl}/libauthen/libauthen-radius-perl_0.22.bb         | 0
->  3 files changed, 0 insertions(+), 0 deletions(-)
->  rename {meta-networking/recipes-devtools/perl => meta-perl/recipes-perl}/libauthen/libauthen-radius-perl/run-ptest (100%)
->  rename {meta-networking/recipes-devtools/perl => meta-perl/recipes-perl}/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch (100%)
->  rename {meta-networking/recipes-devtools/perl => meta-perl/recipes-perl}/libauthen/libauthen-radius-perl_0.22.bb (100%)
+>  .../haveged/fix-cpu-cache-size-detection.patch       | 20 ++++++++++++++++++++
+>  meta-oe/recipes-extended/haveged/haveged_1.9.4.bb    |  1 +
+>  2 files changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
 >
-> diff --git a/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/run-ptest b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl/run-ptest
-> similarity index 100%
-> rename from meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/run-ptest
-> rename to meta-perl/recipes-perl/libauthen/libauthen-radius-perl/run-ptest
-> diff --git a/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
-> similarity index 100%
-> rename from meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
-> rename to meta-perl/recipes-perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
-> diff --git a/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl_0.22.bb b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
-> similarity index 100%
-> rename from meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl_0.22.bb
-> rename to meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+> diff --git a/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch b/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
+> new file mode 100644
+> index 000000000..5b68f1966
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
+> @@ -0,0 +1,20 @@
+> +Some ARM cpus does not report the cache size or say it is -1
+> +
+> +https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=866306
+> +
+> +Upstream-status: Pending
+
+missing "Singed-off-by" per patch process
+> +
+> +Index: haveged-1.9.2/src/havegetune.c
+> +===================================================================
+> +--- haveged-1.9.2.orig/src/havegetune.c
+> ++++ haveged-1.9.2/src/havegetune.c
+> +@@ -795,6 +795,9 @@ static int vfs_configInfoCache(
+> +          ctype = vfs_configFile(pAnchor, path, vfs_configType);
+> +          strcpy(path+plen, "size");
+> +          size  = vfs_configFile(pAnchor, path, vfs_configInt);
+> ++         if (size == -1) {
+> ++             size = ctype == 'I' ? GENERIC_ICACHE : GENERIC_DCACHE;
+> ++         }
+> +          cfg_cacheAdd(pAnchor, SRC_VFS_INDEX,  pArgs[1], level, ctype, size);
+> +          }
+> +      }
+> diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb
+> index 32aab59f1..d0e1a29dd 100644
+> --- a/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb
+> +++ b/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb
+> @@ -9,6 +9,7 @@ LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+>  SRCREV = "faa40ff345af194d3253f5fb030403e3c9831c36"
+>  SRC_URI = "git://github.com/jirka-h/haveged.git \
+>             file://haveged-init.d-Makefile.am-add-missing-dependency.patch \
+> +           file://fix-cpu-cache-size-detection.patch \
+>  "
+>  S = "${WORKDIR}/git"
+>  
 
 
