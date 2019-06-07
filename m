@@ -1,33 +1,30 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DA5D7E794
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 95C3B7E558
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 21:22:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45TdFf1s3kz2M
+	Thu, 20 Jun 2019 02:31:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,394,1557158400"; d="scan'208";a="68121271"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Jun 2019 10:31:29 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 65D884CDDB0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 23:22:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1560979350;
-	bh=xOor1og7R0SD3Xw7b2zz7GBPsPNGeoiR3BmBve9p+/Q=;
-	h=From:To:Subject:Date:From;
-	b=XBpBmsEGAA0bYiKoi7paTnLRuLP/4bDOCm3tf9O8YJshOScPOEJlFUVLZCZo+HU1f
-	H612ugPUklAvs5sS1WrrgZNJHWmsIQPByg7HSKtZMBAiF9KjHsC/LmF/a1r7gb/fEK
-	4hBdngs4aQJJagrBxE5ffvT8ZFw+m8ejFB7QyjIu13xLeBRxkXVLDA3itTDlGfV8AC
-	bMyc6o4AJ34xwqQKv8FY9vDx1IV71sx63MQkJByNIQ/sxCD/vgfdqpN7ZPdFHm3hVA
-	GyIw8fAo0VfsvZJEh+DEWLhoHU1o6PkjOZhmghykR9IlYyKrWKfe//JGg/Vo3XX52m
-	bDFqa83b4TioAwDpFlCZ1ccaMhuQWfnIqxXb+zrN5fcSFuzNilYp4O90jIaaI5IOLi
-	uFwMg8LF3CsFou/KzV1dZDMCzTq4bl33qTSw26HeJI70BAj5cxB0sWEFtK4/yq8hhr
-	j4fntkmaCU71hDLDbYAzsH1yl7xfB0a39BZ3jJuTo/YOBeUWSO8ozdYj8lrUjFOa7Y
-	OkaXmEjEfdbl5IL8kJ21vkUNYuDGpovVFqQ+ihJaOvx0ymb4Gv7xCe+YPYjBIrjyGj
-	fsqMYVf4IJkmAVbxM0gNkHSfFoWU/DkEciricJQbUGARWS4k85KmGsA7thdJumKaYJ
-	rFjpQ38o0XZGYGl1Fy1fifOY=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jun 2019 00:22:29 +0300
-Message-Id: <20190619212229.31177-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] wireless-regdb: Remove, was moved to oe-core
+	Thu, 20 Jun 2019 10:31:26 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 20 Jun 2019 10:31:37 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 7 Jun 2019 08:42:24 +0800
+Message-ID: <1559868144-38423-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.227]
+X-yoursite-MailScanner-ID: 65D884CDDB0E.AC186
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][patch v4] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,79 +37,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 21:22:30 -0000
+X-List-Received-Date: Thu, 20 Jun 2019 02:31:30 -0000
+Content-Type: text/plain
 
-kernel_wireless_regdb.bbclass stays here since it is only
-required for kernels <= 4.14.
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+This dnf plugin aim to supply a tui interface for user to manage
+packages. It has features as following:
+  1. Add new command dnf tui --init to make dnf to work on host.
+  2. Text-based user interface for dnf.
+  3. Manage SPDX files.
+  4. Manage SRPM files.
+  5. Add installation samples for dnf.
+
+More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../wireless-regdb_2019.06.03.bb              | 42 -------------------
- .../packagegroup-meta-networking.bb           |  1 -
- 2 files changed, 43 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
+ .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++++++++++
+ .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
 
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-deleted file mode 100644
-index ded44b3d4..000000000
---- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-+++ /dev/null
-@@ -1,42 +0,0 @@
--SUMMARY = "Wireless Central Regulatory Domain Database"
--HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
--SECTION = "net"
--LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
--
--SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
--SRC_URI[md5sum] = "4b5ba3f089db7fdb7b9daae6a7c1f2cb"
--SRC_URI[sha256sum] = "cd917ed86b63ce8d93947979f1f18948f03a4ac0ad89ec25227b36ac00dc54bf"
--
--inherit bin_package allarch
--
--do_install() {
--    install -d -m0755 ${D}${nonarch_libdir}/crda
--    install -d -m0755 ${D}${sysconfdir}/wireless-regdb/pubkeys
--    install -m 0644 regulatory.bin ${D}${nonarch_libdir}/crda/regulatory.bin
--    install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
--
--    install -m 0644 -D regulatory.db ${D}${nonarch_base_libdir}/firmware/regulatory.db
--    install -m 0644 regulatory.db.p7s ${D}${nonarch_base_libdir}/firmware/regulatory.db.p7s
--}
--
--# Install static regulatory DB in /lib/firmware for kernel to load.
--# This requires Linux kernel >= v4.15.
--# For kernel <= v4.14, inherit the kernel_wireless_regdb.bbclass in kernel's recipe.
--PACKAGES =+ "${PN}-static"
--RCONFLICTS_${PN} = "${PN}-static"
--
--FILES_${PN}-static = " \
--    ${nonarch_base_libdir}/firmware/regulatory.db \
--    ${nonarch_base_libdir}/firmware/regulatory.db.p7s \
--"
--
--# Native users might want to use the source of regulatory DB.
--# This is for example used by Linux kernel <= v4.14 and kernel_wireless_regdb.bbclass.
--do_install_append_class-native() {
--    install -m 0644 -D db.txt ${D}${libdir}/crda/db.txt
--}
--
--RSUGGESTS_${PN} = "crda"
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-index 3770601a4..bbc5e1299 100644
---- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-+++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-@@ -37,7 +37,6 @@ RDEPENDS_packagegroup-meta-networking-connectivity = "\
-     mbedtls relayd snort dhcpcd rdate vlan vpnc \
-     inetutils wolfssl lftp miniupnpd networkmanager \
-     networkmanager-openvpn rdist nanomsg python-networkmanager \
--    wireless-regdb \
-     ${@bb.utils.contains("DISTRO_FEATURES", "bluez5 x11", "blueman", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+new file mode 100644
+index 0000000..e891868
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
++SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
++PV = "1.0"
++
++SRC_URI_append_class-target = "file://oe-remote.repo.sample"
++
++inherit distutils3-base
++
++S = "${WORKDIR}/git"
++
++do_install_append() {
++        install -d ${D}${datadir}/dnf
++        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
++            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
++        done
++}
++
++do_install_append_class-target() {
++        install -d ${D}${sysconfdir}/yum.repos.d
++        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
++}
++
++FILES_${PN} += "${datadir}/dnf"
++
++RDEPENDS_${PN} += " \
++  dnf \
++  libnewt-python \
++  "
++
++BBCLASSEXTEND = "nativesdk"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+new file mode 100644
+index 0000000..6c4502e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+@@ -0,0 +1,5 @@
++[base]
++name=myrepo
++baseurl=http://127.0.0.1/oe_repo/
++enabled=1
++gpgcheck=0
 -- 
-2.17.1
+2.7.4
+
+
 
 
