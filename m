@@ -1,36 +1,35 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 218287E511
+	by mail.openembedded.org (Postfix) with ESMTP id E96FD7E2BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Jun 2019 06:28:35 +0000 (UTC)
+	Sun,  9 Jun 2019 10:00:44 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45LTxH5MXDz2C;
-	Sat,  8 Jun 2019 08:28:35 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45MBbZ4p26z2C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Jun 2019 12:00:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1559975316;
-	bh=vRnxUDzzDGpHcFaz0ViE9b0H4nn60yMjiERPuG6qL8Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=A8jz9nJ9FSzNvxE6gb0yPFRkZvcaW3leYQ2HFF9/DLswag6As7BXVnNXoe2kwLNKj
-	GNacIS2sgSlsaKgfKiVX9WviuwuySr6spzUdOEyR32f/6uwyRQYCon+ig3+pXmTkS2
-	IQ7kNOZxLo3E9BUGJtilhcXhAFEoqMeLCtqEdlocVHtC6zqxyeAzirqsWSlFl1crbj
-	iaa3XD8K9mYy2rM+GmkdQqawc73OOedHBJPDSOgjOYZRf+1AHbagXStbyvh/ajlJND
-	hVkd+8I5Jd97bN+uvQhlFYx+pfJa4SjfhNN5/+c8NUIgws/xCNs5nGT5jkkQ26iaSK
-	UzzC7tvZFea9adEOCtJjRlYcBtZy5qYveSYgyMRON0j7V/76gY9Nn3BzAqMKHu1hJQ
-	aP3BtYM3GGB2guWM3JVARC18WamwpfsyB0vxcZwdlryRnC+0QDpKqNn9xWzl6Bxd81
-	vzAkfR3h5rq/7Q5yNmefRY9/060mRzBZ9bKlwwodInarYRl+939s7j2UDTX2ugkztL
-	d3wCiUx+72SlRSku8uTvZDUeI9TMArlf0/XZ6LqWZO0yqvw2evo7Eqhav86efMDQmr
-	sSK7jo/8iU1r1RSN4crfXngK+KPhg4ED1baoS8i9dfzm36y4iazOvm0m+RnO8U53FM
-	DnLjVwPEGnyEHUgonGBpYSQQ=
-Date: Sat, 8 Jun 2019 09:28:33 +0300
+	s=default; t=1560074442;
+	bh=Gd5StS6CUyEozTNtJ5MQidwfo20gJfvFEBAgx4cPGyU=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=hHSyHsDuEidGmTY7GjBGg+fHjLutyR2UggBFA31G/sMq6BWT57e0RvQ/g8JRy87Rv
+	ltGK/ll8dmbe04zaMfMe1FZUUhL/AFj0iI+J/mtzAQ5LnyY8UFT+a+SNwsDwyKcC1O
+	SE1+U0vU/5uJNh80atDBlWLVQFpXCju0YpZQdwtfj33u0EZs9ScQyCvdMFpG0wXAqt
+	1VB9tDs9psd8xMFbGPjkSJUX7S5piTxQ5hfwlEJlkRWCw7GQAra3Zcvh69Ctj7a1/H
+	07pjO/vqsYz5XAkWPpSL6RMdYihA6joR4zv1ifzTDid1EoxUMHNWF+tUq9GtudJ2I0
+	dJFuIRO7HoCBbqcDdBe0Hwr4cBY2SadleDMWCCliIDd7kKe200+oZIm0CUoSHLlyKJ
+	4KCYcFZ0tYO5smdtSg7W0b/mxGUY+zfRpo2d3cmsSPnVrzifI8EdWUQOioaqJ5mBfe
+	FVCWiJsQuShhvJPdsFzNDEbiXPlN0MMVsOEqwNBY7q693offB0oOOAVPFylJUS9Vl+
+	AccXuXavSjYEkN3vRDyog2ylbYU84HjXULFRsFzEo+mfS/5BGcT13Cw+T6mDgmHLkf
+	f/0rYeIPpyd3rc8zd1YZ5L5NjlfSAIHiyi3f48+To/Xq/7yK6hugOURF6NCyELp3C/
+	y+vgzf6LpF/+/2lHH/LBVbXI=
+Date: Sun, 9 Jun 2019 13:00:39 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20190608062833.GA3645@localhost>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20190609100039.GA21600@localhost>
 References: <20190607201822.28898-1-bunk@stusta.de>
-	<02e81d03-9a69-1650-1847-8a40983c595f@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <02e81d03-9a69-1650-1847-8a40983c595f@gmail.com>
+In-Reply-To: <20190607201822.28898-1-bunk@stusta.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-perl][PATCH] recipes-devtools: Move back from meta-networking to meta-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,20 +43,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Jun 2019 06:28:36 -0000
+X-List-Received-Date: Sun, 09 Jun 2019 10:00:45 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 
-On Fri, Jun 07, 2019 at 02:51:05PM -0700, akuster808 wrote:
-> On 6/7/19 1:18 PM, Adrian Bunk wrote:
-> > It needs both freeradius and perl-module-data-dumper,
-> > so neither place would fulfill all dependencies.
->...
-> can this be run w/o meta-networking?
-
-No, as I wrote.
-
-> - armin
+Seems I botched the title, resending with this corrected.
 
 cu
 Adrian
