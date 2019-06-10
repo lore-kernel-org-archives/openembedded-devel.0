@@ -1,22 +1,52 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EFC117E198
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 10 Jun 2019 12:28:20 UTC
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 6193F6D409
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2019 07:13:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5A7DBF9019735
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 10 Jun 2019 00:13:11 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 10 Jun 2019 00:13:10 -0700
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 10 Jun 2019 00:13:10 -0700
-Message-ID: <20190610071310.15157-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Mon, 10 Jun 2019 12:28:20 +0000 (UTC)
+Received: (qmail 890 invoked by uid 1003); 10 Jun 2019 12:21:40 -0000
+Received: from unknown (HELO ?172.20.2.92?) (philip@opensdr.com@38.90.133.135)
+	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted)
+	SMTP; 10 Jun 2019 12:21:40 -0000
+References: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
+To: openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+X-Forwarded-Message-Id: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
+Message-ID: <9d4f1478-434d-1671-7039-417f1d624ac0@balister.org>
+Date: Mon, 10 Jun 2019 08:21:35 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] kea: replace -Og with -O
+In-Reply-To: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
+Subject: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded Linux Conference Experience
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,61 +59,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2019 07:13:12 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Jun 2019 12:28:20 -0000
+X-Groupsio-MsgNum: 77974
+Content-Type: multipart/mixed; boundary="------------3FD629A5F084066EC4A3EFA9"
+Content-Language: en-MW
 
-From: Mingli Yu <mingli.yu@windriver.com>
+--------------3FD629A5F084066EC4A3EFA9
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-With below logic in local.conf:
-MACHINE ??= "qemumips64"
-MULTILIB_GLOBAL_VARIANTS_append = " libn32"
-MULTILIBS ?= "multilib:lib32 multilib:libn32"
-DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
-DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
-require conf/multilib.conf
-DEBUG_BUILD = "1"
- $ bitbake lib32-kea
-[snip]
-{standard input}: Assembler messages:
-{standard input}:305030: Error: branch out of range
-{standard input}:305041: Error: branch out of range
-{standard input}:305432: Error: branch out of range
-{standard input}:305443: Error: branch out of range
-Makefile:707: recipe for target 'dhcp4_parser.lo' failed
-make[6]: *** [dhcp4_parser.lo] Error 1
-[snip]
+FYI
 
-When DEBUG_BUILD enabled, -Og pass to compiler,
-replace -Og with -O to fix the above compile error.
+-------- Forwarded Message --------
+Subject: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded
+Linux Conference Experience
+Date: Tue, 4 Jun 2019 19:39:08 +0000
+From: Volosincu, Andreea S <andreea.volosincu@windriver.com>
+To: Yocto list discussion <yocto@yoctoproject.org>
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-networking/recipes-connectivity/kea/kea_1.5.0.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Hello Everybody,
 
-diff --git a/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb b/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb
-index 9210ac1bc..fb166df60 100644
---- a/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb
-+++ b/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb
-@@ -23,6 +23,16 @@ inherit autotools systemd
- SYSTEMD_SERVICE_${PN} = "kea-dhcp4.service kea-dhcp6.service kea-dhcp-ddns.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
-+DEBUG_OPTIMIZATION_remove_mips = " -Og"
-+DEBUG_OPTIMIZATION_append_mips = " -O"
-+BUILD_OPTIMIZATION_remove_mips = " -Og"
-+BUILD_OPTIMIZATION_append_mips = " -O"
-+
-+DEBUG_OPTIMIZATION_remove_mipsel = " -Og"
-+DEBUG_OPTIMIZATION_append_mipsel = " -O"
-+BUILD_OPTIMIZATION_remove_mipsel = " -Og"
-+BUILD_OPTIMIZATION_append_mipsel = " -O"
-+
- do_configure_prepend_class-target() {
-     mkdir -p ${B}/src/lib/log/compiler/
-     ln -sf ${STAGING_BINDIR_NATIVE}/kea-msg-compiler ${B}/src/lib/log/compiler/kea-msg-compiler
+The registration for the Yocto Project DevDay NA 2019 is now open. Join
+our knowledgeable and engaging instructors to learn about creating
+custom-build Linux distributions using the Yocto Project infrastructure
+and tools, across multiple architectures.
+
+Date: Tuesday, August 20, 2019
+Time: 9:00 am - 5:00 pm
+Location: Hilton San Diego Bayfront
+
+There are two ways to register - by adding it your ELC registration or
+on the separate registration page.
+
+Register now.
+<https://www.yoctoproject.org/yocto-project-dev-day-north-america-2019/>
+
+Best regards,
+Yocto Project Advocacy Team
+
+
+
+--------------3FD629A5F084066EC4A3EFA9
+Content-Type: text/plain; charset=UTF-8;
+ name="Attached Message Part"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="Attached Message Part"
+
 -- 
-2.21.0
+_______________________________________________
+yocto mailing list
+yocto@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/yocto
 
 
+--------------3FD629A5F084066EC4A3EFA9--
