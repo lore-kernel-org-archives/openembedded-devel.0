@@ -1,52 +1,36 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 10 Jun 2019 12:28:20 UTC
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 6193F6D409
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 08D2B7E4FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2019 12:28:20 +0000 (UTC)
-Received: (qmail 890 invoked by uid 1003); 10 Jun 2019 12:21:40 -0000
-Received: from unknown (HELO ?172.20.2.92?) (philip@opensdr.com@38.90.133.135)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted)
-	SMTP; 10 Jun 2019 12:21:40 -0000
-References: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
-To: openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-X-Forwarded-Message-Id: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
-Message-ID: <9d4f1478-434d-1671-7039-417f1d624ac0@balister.org>
-Date: Mon, 10 Jun 2019 08:21:35 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+	Mon, 10 Jun 2019 13:35:32 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45MvK02nLjz2C;
+	Mon, 10 Jun 2019 15:35:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1560173732;
+	bh=KGijMKu4SBB8doSm0iVQq+YtjVDgKVLdIM04xlsg2Go=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=sJaBaAQQXcBaP//lY+rM9rEUiS7zQAPcuKj4v2PoknI3KHgi8QNX4BKG80LQ2voYr
+	iu+ATcSfN065Zrbgh9PkDBt8iSPxgNZ629S01mQyfTxIwBw8wrs1Zx70j1HCPQA2CH
+	XJSyQ8pwQnc2y7dgI9Erz0ffsl368iWd2lp/c10rQFIOt3LOf0vFOa1LgKWKK54Lov
+	dbcjtG72avrzT4DMvjGuzt8U+WXb5TGbmQB6zJrpedhQRHlZcKM53hDqCjTMhNxOL7
+	dJQqBeUM5zQHZtS4rWmTKpOmyB5oRN5L6abLHUFhH29Ixxo4Uj7ceID4zfSH/lwe7z
+	WeysghavPc8E8+595vHW+7omyojyIuiILQjCZdK0CTiQuW/dDoq1PqmDGa7bZK2Iuw
+	SymPSmJlqv65/h5mFG7gTMWgJ1Um9evqrk/kVA7mLVJ1VR2Xq6hZjDBmtWVlo19cnC
+	VJhZikacY2JLghEel9tyWF8jq63oE2TLKnDPOO1jE/KnYIw94oeB+qjaLD4udpwxWW
+	INcvjFfMjYlK/Nz/gBJq5lR3+yDX8VXKOzlEbelcWo3olVTIbD6WUVjax5WMNPR9ty
+	D7zoTKmffhpsx/x31DkOGYZiuVr4GZVSmS+8QOrU/nQ7P4XJ2GHQ3qtyJGcwGHPAmC
+	37NYL1tudsy3j5NkPYVDx6h8=
+Date: Mon, 10 Jun 2019 16:35:29 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: mingli.yu@windriver.com
+Message-ID: <20190610133529.GA18219@localhost>
+References: <20190610071310.15157-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
-Subject: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded Linux Conference Experience
+In-Reply-To: <20190610071310.15157-1-mingli.yu@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] kea: replace -Og with -O
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,58 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2019 12:28:20 -0000
-X-Groupsio-MsgNum: 77974
-Content-Type: multipart/mixed; boundary="------------3FD629A5F084066EC4A3EFA9"
-Content-Language: en-MW
+X-List-Received-Date: Mon, 10 Jun 2019 13:35:33 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
---------------3FD629A5F084066EC4A3EFA9
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+On Mon, Jun 10, 2019 at 12:13:10AM -0700, mingli.yu@windriver.com wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
+> 
+> With below logic in local.conf:
+> MACHINE ??= "qemumips64"
+> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+> MULTILIBS ?= "multilib:lib32 multilib:libn32"
+> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+> require conf/multilib.conf
+> DEBUG_BUILD = "1"
+>  $ bitbake lib32-kea
+> [snip]
+> {standard input}: Assembler messages:
+> {standard input}:305030: Error: branch out of range
+> {standard input}:305041: Error: branch out of range
+> {standard input}:305432: Error: branch out of range
+> {standard input}:305443: Error: branch out of range
+> Makefile:707: recipe for target 'dhcp4_parser.lo' failed
+> make[6]: *** [dhcp4_parser.lo] Error 1
+> [snip]
+> 
+> When DEBUG_BUILD enabled, -Og pass to compiler,
+> replace -Og with -O to fix the above compile error.
+>...
 
-FYI
+This sounds like a toolchain bug in gcc or binutils that should
+be fixed there.
 
--------- Forwarded Message --------
-Subject: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded
-Linux Conference Experience
-Date: Tue, 4 Jun 2019 19:39:08 +0000
-From: Volosincu, Andreea S <andreea.volosincu@windriver.com>
-To: Yocto list discussion <yocto@yoctoproject.org>
+I've opened #13387 in bugzilla so that this doesn't get lost.
 
-Hello Everybody,
-
-The registration for the Yocto Project DevDay NA 2019 is now open. Join
-our knowledgeable and engaging instructors to learn about creating
-custom-build Linux distributions using the Yocto Project infrastructure
-and tools, across multiple architectures.
-
-Date: Tuesday, August 20, 2019
-Time: 9:00 am - 5:00 pm
-Location: Hilton San Diego Bayfront
-
-There are two ways to register - by adding it your ELC registration or
-on the separate registration page.
-
-Register now.
-<https://www.yoctoproject.org/yocto-project-dev-day-north-america-2019/>
-
-Best regards,
-Yocto Project Advocacy Team
-
-
-
---------------3FD629A5F084066EC4A3EFA9
-Content-Type: text/plain; charset=UTF-8;
- name="Attached Message Part"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="Attached Message Part"
+cu
+Adrian
 
 -- 
-_______________________________________________
-yocto mailing list
-yocto@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/yocto
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
---------------3FD629A5F084066EC4A3EFA9--
