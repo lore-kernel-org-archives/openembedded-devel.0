@@ -1,36 +1,47 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 08D2B7E4FE
+Return-Path: <crg7475@mailbox.org>
+X-Greylist: delayed 538 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 10 Jun 2019 20:15:56 UTC
+Received: from mx2.mailbox.org (mx2.mailbox.org [80.241.60.215])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B92A7D71A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2019 13:35:32 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45MvK02nLjz2C;
-	Mon, 10 Jun 2019 15:35:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1560173732;
-	bh=KGijMKu4SBB8doSm0iVQq+YtjVDgKVLdIM04xlsg2Go=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=sJaBaAQQXcBaP//lY+rM9rEUiS7zQAPcuKj4v2PoknI3KHgi8QNX4BKG80LQ2voYr
-	iu+ATcSfN065Zrbgh9PkDBt8iSPxgNZ629S01mQyfTxIwBw8wrs1Zx70j1HCPQA2CH
-	XJSyQ8pwQnc2y7dgI9Erz0ffsl368iWd2lp/c10rQFIOt3LOf0vFOa1LgKWKK54Lov
-	dbcjtG72avrzT4DMvjGuzt8U+WXb5TGbmQB6zJrpedhQRHlZcKM53hDqCjTMhNxOL7
-	dJQqBeUM5zQHZtS4rWmTKpOmyB5oRN5L6abLHUFhH29Ixxo4Uj7ceID4zfSH/lwe7z
-	WeysghavPc8E8+595vHW+7omyojyIuiILQjCZdK0CTiQuW/dDoq1PqmDGa7bZK2Iuw
-	SymPSmJlqv65/h5mFG7gTMWgJ1Um9evqrk/kVA7mLVJ1VR2Xq6hZjDBmtWVlo19cnC
-	VJhZikacY2JLghEel9tyWF8jq63oE2TLKnDPOO1jE/KnYIw94oeB+qjaLD4udpwxWW
-	INcvjFfMjYlK/Nz/gBJq5lR3+yDX8VXKOzlEbelcWo3olVTIbD6WUVjax5WMNPR9ty
-	D7zoTKmffhpsx/x31DkOGYZiuVr4GZVSmS+8QOrU/nQ7P4XJ2GHQ3qtyJGcwGHPAmC
-	37NYL1tudsy3j5NkPYVDx6h8=
-Date: Mon, 10 Jun 2019 16:35:29 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: mingli.yu@windriver.com
-Message-ID: <20190610133529.GA18219@localhost>
-References: <20190610071310.15157-1-mingli.yu@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <20190610071310.15157-1-mingli.yu@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] kea: replace -Og with -O
+	Mon, 10 Jun 2019 20:15:56 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [80.241.60.240])
+	(using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
+	(No client certificate requested)
+	by mx2.mailbox.org (Postfix) with ESMTPS id B3306A1776
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jun 2019 22:06:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
+	message-id:date:date:subject:subject:from:from:received; s=
+	mail20150812; t=1560197214; bh=mV3bpq/8nP/3JNkW+AUYocJcjMHUa3LtQ
+	QHTuRerbBU=; b=tbXifV862W/dUsWoffwSJZWtEZuxngLef0kNzmYhvfp/3Euth
+	ddR1DNQ8BoEOlwXdpaQkCQs8D1Z8ECg45SCsykcewXpc8dn+oXWEopL3hKtf8sxp
+	JnTWeusraDbxBfEd7GtgNHxDhFAj0DKbRQ83UeCnjzn0Je/DM+cPUDbvy0i9xy/j
+	z6rrAnnA91UwiUYS7C6LQrveZzWDQAMrFcA3n+xNpsjrfgubAbL3n2A4gH0O91Go
+	nMwfNViDwCaySN8V6Gh3dwwAdtE0uMI0gbi5Iw+1KCJoHyf1TmEzKAG4jUms6E/I
+	PwwZwRtS/jPqkq0dkYrUsW8BBd72VMHEU+xqQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+	s=mail20150812; 
+	t=1560197218; h=from:from:sender:reply-to:subject:subject:date:date:
+	message-id:message-id:to:to:cc:mime-version:content-type:
+	content-transfer-encoding:in-reply-to:references;
+	bh=8whQgiurBIlfqHWF4b6QBRPi8BuQC45Ity33HwVikYI=;
+	b=LtkJUXhx2Kcxn8M/q/Ftmi4UV4Tsb0LNSYQVyWp7gUJfxxFffUaqitJeFn5yHF5iAXi3/T
+	pCknAYvHCu0L5GP9NJ5tRWwhotS/4NN0LuPJ37YDkQeuuENdohwbwOd+2s7VtReICEyFph
+	4bzL9S3y+dnNylP09XOuXJ1xMUldXWYCep3/iGl6Fs6ZozFL5yfKz7WRspmqV2Vjpy7M9b
+	1KakIV4C4ka6MyDE2/0yU/YT59lESJ4YHRvvTHaFfnjuazQp4jrK/Ro5tIBXJQN/lnqwuS
+	TuQqn0JRTHyS4OFakMXffqVZNncmZFIZhH/4vSeiIvshXSFAw589PV+czUa3ZA==
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from smtp1.mailbox.org ([80.241.60.240])
+	by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+	[80.241.56.116]) (amavisd-new, port 10030) with ESMTP id 9zkpK9r2SgOD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jun 2019 22:06:54 +0200 (CEST)
+From: Carlos Rafael Giani <crg7475@mailbox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Jun 2019 22:06:45 +0200
+Message-Id: <20190610200645.22179-1-crg7475@mailbox.org>
+Subject: [meta-multimedia][PATCH] openh264: Fix armv7ve build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,49 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2019 13:35:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 Jun 2019 20:15:56 -0000
 
-On Mon, Jun 10, 2019 at 12:13:10AM -0700, mingli.yu@windriver.com wrote:
-> From: Mingli Yu <mingli.yu@windriver.com>
-> 
-> With below logic in local.conf:
-> MACHINE ??= "qemumips64"
-> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
-> MULTILIBS ?= "multilib:lib32 multilib:libn32"
-> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
-> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
-> require conf/multilib.conf
-> DEBUG_BUILD = "1"
->  $ bitbake lib32-kea
-> [snip]
-> {standard input}: Assembler messages:
-> {standard input}:305030: Error: branch out of range
-> {standard input}:305041: Error: branch out of range
-> {standard input}:305432: Error: branch out of range
-> {standard input}:305443: Error: branch out of range
-> Makefile:707: recipe for target 'dhcp4_parser.lo' failed
-> make[6]: *** [dhcp4_parser.lo] Error 1
-> [snip]
-> 
-> When DEBUG_BUILD enabled, -Og pass to compiler,
-> replace -Og with -O to fix the above compile error.
->...
+Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+---
+ meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-This sounds like a toolchain bug in gcc or binutils that should
-be fixed there.
-
-I've opened #13387 in bugzilla so that this doesn't get lost.
-
-cu
-Adrian
-
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+index 44c46f81e..e2f028ac5 100644
+--- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+@@ -23,6 +23,7 @@ COMPATIBLE_MACHINE_mips = "(.*)"
+ COMPATIBLE_MACHINE_mips64 = "(.*)"
+ 
+ EXTRA_OEMAKE_armv7a = "ARCH=arm"
++EXTRA_OEMAKE_armv7ve = "ARCH=arm"
+ EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
+ EXTRA_OEMAKE_x86 = "ARCH=i386"
+ EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.17.1
 
 
