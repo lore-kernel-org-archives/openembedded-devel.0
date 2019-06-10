@@ -1,30 +1,27 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BDB037E3AF
+	by mail.openembedded.org (Postfix) with ESMTP id 853987E393
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2019 01:34:54 +0000 (UTC)
+	Mon, 10 Jun 2019 02:12:45 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x5A1YsjT028516
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x5A2Cj97028664
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 9 Jun 2019 18:34:54 -0700 (PDT)
-Received: from [128.224.162.186] (128.224.162.186) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Sun, 9 Jun 2019 18:34:53 -0700
-To: Tim Orling <ticotimo@gmail.com>
-References: <1559703841-263740-1-git-send-email-changqing.li@windriver.com>
-	<1559703841-263740-3-git-send-email-changqing.li@windriver.com>
-	<CANx9H-AQ46hCN=CzMQuGOWxjHeyEJz7ZyxW=HzXtJpxCAg2ZSA@mail.gmail.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <1876ebf3-47eb-2fdc-d149-2f760470c6ce@windriver.com>
-Date: Mon, 10 Jun 2019 09:34:50 +0800
+	Sun, 9 Jun 2019 19:12:45 -0700 (PDT)
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Sun, 9 Jun 2019 19:12:44 -0700
+To: akuster808 <akuster808@gmail.com>, <raj.khem@gmail.com>
+References: <20190531084423.172617-1-kai.kang@windriver.com>
+	<974dea6a-ad6c-3c82-5fa7-b36f1368d3f7@gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <e3918833-0400-e0ab-148a-fb7214e8b94d@windriver.com>
+Date: Mon, 10 Jun 2019 10:10:49 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-AQ46hCN=CzMQuGOWxjHeyEJz7ZyxW=HzXtJpxCAg2ZSA@mail.gmail.com>
-X-Originating-IP: [128.224.162.186]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <974dea6a-ad6c-3c82-5fa7-b36f1368d3f7@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/7] python-pygobject: upgrade 3.28.3 -> 3.32.1
+Subject: Re: [meta-xfce][PATCH 00/10] Update recipes in meta-xfce
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,106 +34,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2019 01:34:54 -0000
-Content-Language: en-US
+X-List-Received-Date: Mon, 10 Jun 2019 02:12:45 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On 6/7/19 3:12 PM, Tim Orling wrote:
-> Please consider providing a python3 version as well. Python2 will be 
-> EOL soon.
-Already have one under oe-core layer
+On 2019/6/3 上午4:23, akuster808 wrote:
 >
-> On Tue, Jun 4, 2019 at 8:04 PM <changqing.li@windriver.com 
-> <mailto:changqing.li@windriver.com>> wrote:
+> On 5/31/19 1:44 AM, kai.kang@windriver.com wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>>
+>> Kai Kang (10):
+>>    thunar: 1.8.4 -> 1.8.6
+>>    xfdesktop: 4.13.3 -> 4.13.4
+>>    xfce4-panel: 4.13.4 -> 4.13.5
+>>    thunar-volman: 0.9.1 -> 0.9.2
+>>    xfce4-appfinder: 4.13.2 -> 4.13.3
+>>    libxfce4util: 4.13.2 -> 4.13.3
+>>    xfwm4: 4.13.1 -> 4.13.2
+>>    xfconf: 4.13.6 -> 4.13.7
+>>    libxfce4ui: 4.13.4 -> 4.13.5
+>>    xfce4-power-manager: 1.6.1 -> 1.6.2
+> Are these bug fix only updates for possible Warrior backport?
+
+Most of they are not only bug fix updates, but also updates for next 
+xfce release 4.14 except:
+
+1. thunar-volman: only i18n updates
+2. libxfce4util: bug fix and i18n updates
+
+Regards,
+Kai
+
+
 >
->     From: Changqing Li <changqing.li@windriver.com
->     <mailto:changqing.li@windriver.com>>
+> - armin
+>>   .../{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb}          | 4 ++--
+>>   .../{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb}      | 4 ++--
+>>   .../{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb}      | 4 ++--
+>>   .../thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb}             | 4 ++--
+>>   ...{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} | 4 ++--
+>>   .../{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb}        | 4 ++--
+>>   ...-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} | 6 +++---
+>>   .../xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb}           | 4 ++--
+>>   .../xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb}  | 4 ++--
+>>   .../recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} | 4 ++--
+>>   10 files changed, 21 insertions(+), 21 deletions(-)
+>>   rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.13.4.bb => libxfce4ui_4.13.5.bb} (89%)
+>>   rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.13.2.bb => libxfce4util_4.13.3.bb} (64%)
+>>   rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.9.1.bb => thunar-volman_0.9.2.bb} (76%)
+>>   rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.4.bb => thunar_1.8.6.bb} (86%)
+>>   rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.13.2.bb => xfce4-appfinder_4.13.3.bb} (69%)
+>>   rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.13.4.bb => xfce4-panel_4.13.5.bb} (90%)
+>>   rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.1.bb => xfce4-power-manager_1.6.2.bb} (88%)
+>>   rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.6.bb => xfconf_4.13.7.bb} (82%)
+>>   rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.13.3.bb => xfdesktop_4.13.4.bb} (76%)
+>>   rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.13.1.bb => xfwm4_4.13.2.bb} (89%)
+>>
 >
->     switch to meson build
->
->     Signed-off-by: Changqing Li <changqing.li@windriver.com
->     <mailto:changqing.li@windriver.com>>
->     ---
->      ...thon-pygobject_3.28.3.bb <http://thon-pygobject_3.28.3.bb> =>
->     python-pygobject_3.32.1.bb <http://python-pygobject_3.32.1.bb>} |
->     14 +++++++++-----
->      1 file changed, 9 insertions(+), 5 deletions(-)
->      rename
->     meta-oe/recipes-devtools/python/{python-pygobject_3.28.3.bb
->     <http://python-pygobject_3.28.3.bb> => python-pygobject_3.32.1.bb
->     <http://python-pygobject_3.32.1.bb>} (64%)
->
->     diff --git
->     a/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
->     <http://python-pygobject_3.28.3.bb>
->     b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
->     <http://python-pygobject_3.32.1.bb>
->     similarity index 64%
->     rename from
->     meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
->     <http://python-pygobject_3.28.3.bb>
->     rename to
->     meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
->     <http://python-pygobject_3.32.1.bb>
->     index 348a039..c26b383 100644
->     --- a/meta-oe/recipes-devtools/python/python-pygobject_3.28.3.bb
->     <http://python-pygobject_3.28.3.bb>
->     +++ b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
->     <http://python-pygobject_3.32.1.bb>
->     @@ -4,6 +4,7 @@ SECTION = "devel/python"
->      LICENSE = "LGPLv2.1"
->      LIC_FILES_CHKSUM =
->     "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
->
->     +GNOMEBASEBUILDCLASS = "meson"
->      inherit gnomebase gobject-introspection distutils-base
->     upstream-version-is-even
->
->      DEPENDS += "python glib-2.0"
->     @@ -13,16 +14,19 @@ SRC_URI = " \
->     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir(
->     <http://ftp.gnome.org/pub/GNOME/sources/$%7BSRCNAME%7D/$%7B@gnome_verdir(>"${PV}")}/${SRCNAME}-${PV}.tar.xz
->     \
->      "
->
->     -SRC_URI[md5sum] = "3bac63c86bb963aa401f97859464aa90"
->     -SRC_URI[sha256sum] =
->     "3dd3e21015d06e00482ea665fc1733b77e754a6ab656a5db5d7f7bfaf31ad0b0"
->     +SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
->     +SRC_URI[sha256sum] =
->     "32c99def94b8dea5ce9e4bc99576ef87591ea779b4db77cfdca7af81b76d04d8"
->
->      S = "${WORKDIR}/${SRCNAME}-${PV}"
->
->     -BBCLASSEXTEND = "native"
->     +UNKNOWN_CONFIGURE_WHITELIST = "introspection"
->     +
->     +PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo
->     python-pycairo, python-pycairo"
->     +PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
->
->     -EXTRA_OECONF = "--disable-cairo"
->
->     -RDEPENDS_${PN} += "python-setuptools"
->     +BBCLASSEXTEND = "native"
->     +RDEPENDS_${PN} = "python-setuptools"
->      RDEPENDS_${PN}_class-native = ""
->
->      do_install_append() {
->     -- 
->     2.7.4
->
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 -- 
-BRs
-
-Sandy(Li Changqing)
+Kai Kang
 
 
