@@ -1,29 +1,28 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B2447D416
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D1747D00E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 01:28:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5B1RqTM018134
+	Tue, 11 Jun 2019 02:45:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5B2jGIa007011
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 10 Jun 2019 18:28:07 -0700
-Received: from [128.224.162.188] (128.224.162.188) by ALA-HCA.corp.ad.wrs.com
+	Mon, 10 Jun 2019 19:45:18 -0700 (PDT)
+Received: from [128.224.162.170] (128.224.162.170) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Mon, 10 Jun 2019 18:27:48 -0700
-To: akuster808 <akuster808@gmail.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20190605044932.62524-1-hongzhi.song@windriver.com>
-	<95302c7f-f036-623b-603e-b3a8ece56596@gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <d053ceef-cf1b-01da-5805-e02d5effecc1@windriver.com>
-Date: Tue, 11 Jun 2019 09:27:46 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	Mon, 10 Jun 2019 19:45:15 -0700
+To: Adrian Bunk <bunk@stusta.de>
+References: <20190610071310.15157-1-mingli.yu@windriver.com>
+	<20190610133529.GA18219@localhost>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5CFF16F7.90003@windriver.com>
+Date: Tue, 11 Jun 2019 10:50:31 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-In-Reply-To: <95302c7f-f036-623b-603e-b3a8ece56596@gmail.com>
-X-Originating-IP: [128.224.162.188]
-Subject: Re: [PATCH] spice: fix compile errors on 32bit system
+In-Reply-To: <20190610133529.GA18219@localhost>
+X-Originating-IP: [128.224.162.170]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] kea: replace -Og with -O
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,166 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 01:28:32 -0000
+X-List-Received-Date: Tue, 11 Jun 2019 02:45:18 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
 
-On 6/6/19 10:28 PM, akuster808 wrote:
+
+On 2019年06月10日 21:35, Adrian Bunk wrote:
+> On Mon, Jun 10, 2019 at 12:13:10AM -0700, mingli.yu@windriver.com wrote:
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>
+>> With below logic in local.conf:
+>> MACHINE ??= "qemumips64"
+>> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+>> MULTILIBS ?= "multilib:lib32 multilib:libn32"
+>> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+>> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+>> require conf/multilib.conf
+>> DEBUG_BUILD = "1"
+>>   $ bitbake lib32-kea
+>> [snip]
+>> {standard input}: Assembler messages:
+>> {standard input}:305030: Error: branch out of range
+>> {standard input}:305041: Error: branch out of range
+>> {standard input}:305432: Error: branch out of range
+>> {standard input}:305443: Error: branch out of range
+>> Makefile:707: recipe for target 'dhcp4_parser.lo' failed
+>> make[6]: *** [dhcp4_parser.lo] Error 1
+>> [snip]
+>>
+>> When DEBUG_BUILD enabled, -Og pass to compiler,
+>> replace -Og with -O to fix the above compile error.
+>> ...
 >
-> On 6/4/19 9:49 PM, Hongzhi.Song wrote:
->> There are folowing compile errors on Linux 32bit system:
->>
->> red-channel.c:207:73: error: format '%x' expects argument of type
->> 'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
->> |207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
->>                                  ~~~~~~~~~~~~~~~~~~~~~^
->>                          self->priv->thread_id);
->>                  ~~~~~~~~~~~~~~~~~~~~~^
->>
->> On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
->> 'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
->> not '%x'.
->>
->> So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
->> And others files modification are similar to G_GSIZE_MODIFIER.
->>
->> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->> ---
->>   ...compile-errors-on-Linux-32bit-system.patch | 96 +++++++++++++++++++
->>   .../recipes-support/spice/spice_git.bb        |  1 +
->>   2 files changed, 97 insertions(+)
->>   create mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
->>
->> diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
->> new file mode 100644
->> index 000000000..749a8fd16
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
->> @@ -0,0 +1,96 @@
->> +From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
->> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
->> +Date: Tue, 4 Jun 2019 03:58:17 -0400
->> +Subject: [PATCH] Fix compile errors on Linux 32bit system
->> +
->> +There are folowing compile errors on Linux 32bit system:
->> +
->> +red-channel.c:207:73: error: format '%x' expects argument of type
->> +'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
->> +|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
->> +                                ~~~~~~~~~~~~~~~~~~~~~^
->> +                        self->priv->thread_id);
->> +                ~~~~~~~~~~~~~~~~~~~~~^
->> +
->> +On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
->> +'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
->> +not '%x'.
->> +
->> +So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
->> +And others files modification are similar to G_GSIZE_MODIFIER.
->> +
->> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->> +---
->> +Upstream-Status: sent to upstream
-> Is there a link we can follow for the change upstream?
+> This sounds like a toolchain bug in gcc or binutils that should
+> be fixed there.
+>
+> I've opened #13387 in bugzilla so that this doesn't get lost.
 
-Sorry, spice upstream has 2 days delay to show email.
+Could you help to post the link here about the issue you opened?
 
-So I can't append link in time.
-
-This is mail list of spice:
-
-https://lists.freedesktop.org/archives/spice-devel/2019-June/049285.html
-
-
---Hongzhi
-
+Thanks,
 
 >
->> +
->> + server/red-channel.c    | 6 +++---
->> + server/red-client.c     | 8 ++++----
->> + server/red-replay-qxl.c | 2 +-
->> + 3 files changed, 8 insertions(+), 8 deletions(-)
->> +
->> +diff --git a/server/red-channel.c b/server/red-channel.c
->> +index f81142d..6a03ec2 100644
->> +--- a/server/red-channel.c
->> ++++ b/server/red-channel.c
->> +@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
->> + {
->> +     RedChannel *self = RED_CHANNEL(object);
->> +
->> +-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
->> ++    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
->> +
->> +     RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
->> +
->> +@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
->> +
->> +     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
->> +         red_channel_warning(channel,
->> +-                            "channel->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
->> +-                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
->> ++                            "channel->thread_id (0x%lx) != "
->> ++                            "pthread_self (0x%lx)."
->> +                             "If one of the threads is != io-thread && != vcpu-thread, "
->> +                             "this might be a BUG",
->> +                             (unsigned long)channel->priv->thread_id,
->> +diff --git a/server/red-client.c b/server/red-client.c
->> +index 2b859cb..ff4da2a 100644
->> +--- a/server/red-client.c
->> ++++ b/server/red-client.c
->> +@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
->> +     RedChannel *channel;
->> +
->> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
->> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
->> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
->> ++        spice_warning("client->thread_id (0x%lx) != "
->> ++                      "pthread_self (0x%lx)."
->> +                       "If one of the threads is != io-thread && != vcpu-thread,"
->> +                       " this might be a BUG",
->> +                       (unsigned long)client->thread_id, (unsigned long)pthread_self());
->> +@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
->> +     RedChannelClient *rcc;
->> +
->> +     if (!pthread_equal(pthread_self(), client->thread_id)) {
->> +-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
->> +-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
->> ++        spice_warning("client->thread_id (0x%lx) != "
->> ++                      "pthread_self (0x%lx)."
->> +                       "If one of the threads is != io-thread && != vcpu-thread,"
->> +                       " this might be a BUG",
->> +                       (unsigned long)client->thread_id,
->> +diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
->> +index 6d34818..0deb406 100644
->> +--- a/server/red-replay-qxl.c
->> ++++ b/server/red-replay-qxl.c
->> +@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
->> +             exit(1);
->> +         }
->> +         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
->> +-            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")",
->> ++            spice_error("inflate error %d (disc: %li)",
->> +                         ret, *size - strm.total_out);
->> +             if (ret == Z_DATA_ERROR) {
->> +                 /* last operation may be wrong. since we do the recording
->> +--
->> +2.8.1
->> +
->> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
->> index 6249b0422..3c45d1f5e 100644
->> --- a/meta-networking/recipes-support/spice/spice_git.bb
->> +++ b/meta-networking/recipes-support/spice/spice_git.bb
->> @@ -24,6 +24,7 @@ SRC_URI = " \
->>       git://anongit.freedesktop.org/spice/spice;name=spice \
->>       git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
->>       file://0001-Convert-pthread_t-to-be-numeric.patch \
->> +    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
->>   "
->>   
->>   S = "${WORKDIR}/git"
+> cu
+> Adrian
 >
 
