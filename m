@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 8618D7E66A
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C93CF7E5B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 16:55:10 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id n4so13801049wrw.13
+	Tue, 11 Jun 2019 16:55:11 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id c6so3720185wml.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 09:55:11 -0700 (PDT)
+	Tue, 11 Jun 2019 09:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=3SFZZ/gspQFUvJhJUFkE8MeAKr/n57wxdD4PEK6/Z8Y=;
-	b=vXqS7k7RDZP2XVJmf4e4bEHg4kr18bC8tdO7Y8qotlVAAZnL7c4wmg4S/rOrCtHEP6
-	2tpQHdbRXQM25Ldou7IVxDOCT0s6RVR9iGDVqmB6GWD4VHbr8WiAURqGTkjFSMZUkgaE
-	h0VzQH5kxwUUaD1VkIRsH/c34ROHrl+dKS5rhqVN+Zm+yfWu3y/8LDud757eN1S7ci/4
-	URrZllPtknl20phxAJtblrQFGL0GredE5Hn06qjTHDB0pK5g3pRFJTrNbXP7nPayVXU8
-	6N2CuRaTgIk6gUg64j36k3YH6Jgkn72g5mHAdhgwttZVdT7p9nt6I+S2HGSAzuFKN8q6
-	XOKQ==
+	bh=u3SEAqFMIwAZaPuajhI8XTlmOQxvWkcmpVh9BbYsRYQ=;
+	b=A3qLOmhawBTAMOuzEt1OiGUCXgSXpEh8CgC6bykzIeIbUSnomLCJx38FxSgd/yCbp0
+	3Ve1HLkRNMTrPMm8EajBXLdIvsJODAs81Ae+mXeT5AXY4n7Mz+UV0tQoHlnkjdWgkIou
+	E8uk/dCvkBB7R/qiiajcPo44fjIUVOpdIG0mVAxdvAsRlSRkDaCA9hLgTD1H1JL0KUSM
+	swzevMIkF3MIbdk1ldQfoB/n6Sq9na+gC+647IW1SF4syIUmK2n7knzSO7+cg9T8xiE6
+	mKH2Wo9g2IRgixaE24f+0C/PHNHDXtkPNhLGiNmVL625x/8Qsqa4c0EeEWMCYCzjSri2
+	h4Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=3SFZZ/gspQFUvJhJUFkE8MeAKr/n57wxdD4PEK6/Z8Y=;
-	b=EXZdFPp1UkbSSi6STm0NZjLN0EIb5OkIipYg4y97wHCTcmy0CXVQ4Yf16y1FIRWfH6
-	IcynP61rQ4Sc+n5G8REO1gyuE7Mgb+L1IUC00S8c0cxmNr1DmnjQzxvH95r60KVu3Ijg
-	Mk/ub09UGL1Ul19EpM4xBJsuh+tjajaGx8mVdXQANDmlQQiFGPzg50RcPl8eDcuBE7rL
-	gOFhIGLPweyjDArtm7s6Ux7i4p2e39UODM4jjcsqjwFfkW+Ja3uf20EkhyL7f5Nk1bQ7
-	Mjwm1REaHtiXv4xMptcEyfR9xYcWE8ByQm1D9DZiuCJwRwaIO99eMRnJyLTVN+Z7uBOE
-	Erwg==
-X-Gm-Message-State: APjAAAU4SEPxBKurpyOdHkJHjWc7EENIGaUgNFytagDf1vajSP1gWRT/
-	Xg6nyPxasqPHE2JTCqs0acnL311p
-X-Google-Smtp-Source: APXvYqxIf/ZGHFFlmlvNL7mug+pIbi5dvEe095oFq7Q7nWHUcz1ZJ/SBf3vVsPOC3vAp67ixJ5Z4DA==
-X-Received: by 2002:a5d:6212:: with SMTP id y18mr2456655wru.178.1560272111069; 
-	Tue, 11 Jun 2019 09:55:11 -0700 (PDT)
+	bh=u3SEAqFMIwAZaPuajhI8XTlmOQxvWkcmpVh9BbYsRYQ=;
+	b=q8hAueS9H5lK996PiH9nDYPva6mpRjfQjjgnwIapRwbvAb5kW51mhhAQPtlo4yscAB
+	/xd3vs0iqTGRboGxqkS8CV1B5fAW2XB23aD9f+20RwR/Sys/8veGyp0COtI197PpoD/t
+	T12gtmamzINFfByStbq/pJymUfLL69zTLoLN4CSXjbA3UvwR4wPcgye/dkbB2/UT2tMy
+	t0Qj9cwsKIm9a7dChDSDgpCu+PrI3jLAoyecHayg1JdwszwF75ta7giFAl0Ixpha0dZZ
+	rtJm8d6jOg7AbX4+XQ9FNZD9Zsmy6vedKUVfdHZgPiXZ7PAEad11NX8hF5k+mqqmuwad
+	105g==
+X-Gm-Message-State: APjAAAW70MTTxxmWqjUDN7V7VzcmS8svbtKFKQFotRBjRfjYTrT1Xv5G
+	RS0NBYClx9WmaXR7RLLwqPw+jpum
+X-Google-Smtp-Source: APXvYqwk55x5IdS/rq8oTVNOO3PnZ0iXC7NUYzQFHBZGF28Zs0LNyuOwzJH9ZO6QtTa4uw0WKjMtMA==
+X-Received: by 2002:a1c:ab42:: with SMTP id u63mr18975925wme.130.1560272112149;
+	Tue, 11 Jun 2019 09:55:12 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id r6sm8334156wrp.85.2019.06.11.09.55.10
+	by smtp.gmail.com with ESMTPSA id x16sm3658854wmj.4.2019.06.11.09.55.11
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 11 Jun 2019 09:55:10 -0700 (PDT)
+	Tue, 11 Jun 2019 09:55:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2019 16:54:57 +0000
-Message-Id: <20190611165504.23049-4-Martin.Jansa@gmail.com>
+Date: Tue, 11 Jun 2019 16:54:58 +0000
+Message-Id: <20190611165504.23049-5-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190611165504.23049-1-Martin.Jansa@gmail.com>
 References: <20190611165504.23049-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][warrior][PATCH 04/11] umip: make MACHINE_ARCH
+Subject: [meta-oe][warrior][PATCH 05/11] mscgen: fix SRC_URI for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 16:55:10 -0000
-
-* Depends on ipsec-tools which is already MACHINE_ARCH (and also RRECOMMENDS kernel modules)
-* Fixes:
-  ERROR: umip different signature for task do_configure.sigdata between hammerhead and mako
-  Hash for dependent task umip/umip_1.0.bb.do_prepare_recipe_sysroot changed from 7c74a208880f6c8a5aa46b1c8577e39b6b71429d9a379ea75f17a155ca270035 to 87c6cd438dd9645c98530e3ac1094005bace785bfd89bfe4073bc8815926abba
-  Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-networking/recipes-connectivity/umip/umip_1.0.bb.do_prepare_recipe_sysroot with hashes 7c74a208880f6c8a5aa46b1c8577e39b6b71429d9a379ea75f17a155ca270035 or 87c6cd438dd9645c98530e3ac1094005bace785bfd89bfe4073bc8815926abba
-
-  bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/umip/*do_prepare*.sigdata*
-  Hash for dependent task ipsec-tools/ipsec-tools_0.8.2.bb.do_populate_sysroot changed from 1100c4984d88050bb7ca154445205bac3c3ab80c3ff0aa7c9124825c9d4f6e14 to feeddbd35a8106b264c98076e21d0b3cb227ab1d209e150926112b2906273ef4
-  Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb.do_populate_sysroot with hashes 1100c4984d88050bb7ca154445205bac3c3ab80c3ff0aa7c9124825c9d4f6e14 or feeddbd35a8106b264c98076e21d0b3cb227ab1d209e150926112b2906273ef4
-
-  as detected with:
-  openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
+X-List-Received-Date: Tue, 11 Jun 2019 16:55:12 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/umip/umip_1.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/mscgen/mscgen_0.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/umip/umip_1.0.bb b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
-index e2abc02ce7..43367b5503 100644
---- a/meta-networking/recipes-connectivity/umip/umip_1.0.bb
-+++ b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
-@@ -20,6 +20,9 @@ SRC_URI = "git://git.umip.org/umip/umip.git \
-            "
- SRCREV = "cbd441c5db719db554ff2b4fcb02fef88ae2f791"
+diff --git a/meta-oe/recipes-support/mscgen/mscgen_0.20.bb b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
+index 6ead015f85..276ad201fd 100644
+--- a/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
++++ b/meta-oe/recipes-support/mscgen/mscgen_0.20.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.mcternan.me.uk/mscgen/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b1e6a340187c1cf716513439d07c1d79"
  
-+# Depends on ipsec-tools which is already MACHINE_ARCH (and also RRECOMMENDS kernel modules)
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
- S = "${WORKDIR}/git"
+-SRC_URI = "http://www.mcternan.me.uk/mscgen/software/${PN}-src-${PV}.tar.gz"
++SRC_URI = "http://www.mcternan.me.uk/mscgen/software/${BPN}-src-${PV}.tar.gz"
  
- EXTRA_OECONF = "--enable-vt"
+ SRC_URI[md5sum] = "65c90fb5150d7176b65b793f0faa7377"
+ SRC_URI[sha256sum] = "3c3481ae0599e1c2d30b7ed54ab45249127533ab2f20e768a0ae58d8551ddc23"
 -- 
 2.17.1
 
