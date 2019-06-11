@@ -1,39 +1,58 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EF837E637
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 20:31:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45NhVV2qn2z4x;
-	Tue, 11 Jun 2019 22:31:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1560285090;
-	bh=AcHhg/oL2th+sp7/bgJDnirUkE+OttvWPBO2XATLI6g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=EMkXRvAktovLUJKEDFHlsikSpk48irWtWsnmIlKh1mq7aBaSJKYC8L0YMX9Dd55Mb
-	/luE70dTDZlHxy35BcQCGFXOljsPMdCbISVQll+7ERqHSCDz8aMEACNFmedrMRB+Z3
-	n+QDRSRC3FN379Pq0QMLQhcR2ETyG5Z171CPvBlTcZmy7TkKnwsrs/20nJ/pOsuvV0
-	Wofs7N61QAFMUnHkjhd/Fx+L7/uesrRw7/NDiIJwiogm/ixZnqwpUldylmn03FGMtf
-	b4j8yXsuNrPnGjo0DZkIU8vdd9VSvKYbMCE83rVgEA5bUNeLov8B9jHFcvdnU7ooOh
-	IHH6tGGVwMLwrC/Wf8qP8J3/1pKlK3vvkqTQwr5szMlPDiggGmKVBdOrqqJ9WW00Sq
-	8Tzk1qOe6gA+uiPVsFnTYAT3sNFiw2PEERoofjIYfg1Q08nNMWcwfmWldNv3BPiMix
-	gG2+ACrHBPuk8uWfZUUcqYvVzQUxtVi8lZu74Si64/eGLwWamJaqlXSngnUGn/56Qo
-	ImgAprSgcFjDBO5hy0y+DwjlfKNGyDbrlhvV57kSNndQREHPNDMxEsAtdxwt+GlUm4
-	ndY8UcB38ffXQerlXIGINwtC2cmaWpLWXjm8Vd8aXYAorPhPLLAep5UKnhphUbtj3b
-	gYVhT6AuWzQHvavcBQGz+tU4=
-Date: Tue, 11 Jun 2019 23:31:28 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20190611203128.GA32661@localhost>
-References: <20190611165504.23049-1-Martin.Jansa@gmail.com>
-	<20190611165504.23049-3-Martin.Jansa@gmail.com>
-	<20190611193339.GA18027@localhost>
-	<CA+chaQe8r6WkwAmMTXk6bd9SPGxymV_AhUOzMvNFai37FYiDQQ@mail.gmail.com>
+Return-Path: <jpewhacker@gmail.com>
+Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
+	[209.85.166.47])
+	by mail.openembedded.org (Postfix) with ESMTP id E6BE17E6CD;
+	Tue, 11 Jun 2019 20:57:18 +0000 (UTC)
+Received: by mail-io1-f47.google.com with SMTP id u19so11100023ior.9;
+	Tue, 11 Jun 2019 13:57:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:subject:to:references:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=XWjASOP9p5voiaJepeaFW0w2VvMOG/CrZJJlxBwzZYg=;
+	b=j3R8U5l7Luu3AYBtuwJXXU4yqDB+Qz3E/QVQLhU4kOWnUrjo8ANmFqMT6WYVk+p9p2
+	9uU6S/V+NUMb2mzDD0xSIfMr7lWoHYKL2k4JHUXYG8VXWzfCDJeqAHOyyhecFLmzLt0y
+	zNRusF9FCGlatRK2zdGXl2dwzvC23QdOIwp3HdphN2SY1m/zbl4FDHut6v3Ap9pRlInl
+	K7IDNh/NVC0gqkOreMu/EkFdWEmxe8wWDBJLXSCU0C5NXtU7R15VUMnPvTfFbcj9SaeE
+	GPMPZQA8Na0x0Ln3hk8Iwbjb32MNE37XYUTydTRLKTWg2c3k14jTidRxOhtyDjqYfk3w
+	olSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:subject:to:references:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=XWjASOP9p5voiaJepeaFW0w2VvMOG/CrZJJlxBwzZYg=;
+	b=SHgvmaQ0KoEdACM55SlaLYrE2aD9hYv/IjBkZ7QSCXMTbvH0bfybljfx/foxqRDOXR
+	wyD52VwysH6PZY7ptadc4BPsOoH1p5f5sG6kNos8G9E27HFUABOyXrMWoKhB74MZUrk7
+	4639Tefolmr/ugPnv4D4nKn0EYTatEL6xryyad/7mwqwPiTiVledGd7CD9tWzOJMIUp3
+	N3zgRGpObPOlPYI0FeXg4b0HU7zKTpP3xTVzA/4OzLjfZkVLttzFyDJxLbI6QGnjI+dx
+	NSIF8CuFLIReCexm7I+xgw4pPdrLcziwP2B+5xtiSBr9YklbfvXlbnqASxGvdISpgkEh
+	eQpA==
+X-Gm-Message-State: APjAAAUI8wXOW5wp3eJWD1VjaXS+roe7o6bSVudwWqhdrVKZ33brMriQ
+	sp6Ng/deqwjvSolMYnU58XzKAhi2
+X-Google-Smtp-Source: APXvYqxNelEUcy+1mZ0+GSdrDsZ8jfnUzxQkTa6loqRW3BLzDGDRrRhpe33dbzQsMdNdKhwAXlf/1w==
+X-Received: by 2002:a05:6602:96:: with SMTP id
+	h22mr124719iob.149.1560286639508; 
+	Tue, 11 Jun 2019 13:57:19 -0700 (PDT)
+Received: from [10.30.197.57] ([204.77.163.55])
+	by smtp.gmail.com with ESMTPSA id
+	n21sm4926284ioh.30.2019.06.11.13.57.18
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Jun 2019 13:57:18 -0700 (PDT)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: Philip Balister <philip@balister.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <A084970538D2234B96D99D06FA9D974FC37CEE23@ALA-MBD.corp.ad.wrs.com>
+	<9d4f1478-434d-1671-7039-417f1d624ac0@balister.org>
+Message-ID: <3e53b535-a287-df96-3399-593c32ac3e26@gmail.com>
+Date: Tue, 11 Jun 2019 15:57:17 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQe8r6WkwAmMTXk6bd9SPGxymV_AhUOzMvNFai37FYiDQQ@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][warrior][PATCH 03/11] oprofile: make MACHINE_ARCH
+In-Reply-To: <9d4f1478-434d-1671-7039-417f1d624ac0@balister.org>
+Subject: Re: [OE-core] Fwd: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded Linux Conference Experience
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +65,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 20:31:30 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 11 Jun 2019 20:57:19 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Tue, Jun 11, 2019 at 10:04:03PM +0200, Martin Jansa wrote:
-> fair point, I'll try to remove the dependency and see what breaks, it was
-> added couple years ago in:
-> https://git.openembedded.org/openembedded-core/commit/?id=16bc366877a2e02d96adb91b90e30710777e6f09
-> are you sure that the explanation from back then is no longer valid?
->...
+Both of the registration links take me to the ELC registration page.... 
+is there a way to register outside of the ELC registration? We lost our 
+confirmation numbers due to a mix up in the ordering process and can't 
+change our registration anymore :(
 
-As far as I am aware this is the /usr/include/linux/perf_event.h
-userspace kernel header.
-
-Loking at configure.ac it seems more likely that any problems would come 
-from there than a fundamental dependency on a specific kernel.
-
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+On 6/10/19 7:21 AM, Philip Balister wrote:
+> FYI
+>
+> -------- Forwarded Message --------
+> Subject: [yocto] Yocto Project DevDay NA 2019 - Extend your Embedded
+> Linux Conference Experience
+> Date: Tue, 4 Jun 2019 19:39:08 +0000
+> From: Volosincu, Andreea S <andreea.volosincu@windriver.com>
+> To: Yocto list discussion <yocto@yoctoproject.org>
+>
+> Hello Everybody,
+>
+> The registration for the Yocto Project DevDay NA 2019 is now open. Join
+> our knowledgeable and engaging instructors to learn about creating
+> custom-build Linux distributions using the Yocto Project infrastructure
+> and tools, across multiple architectures.
+>
+> Date: Tuesday, August 20, 2019
+> Time: 9:00 am - 5:00 pm
+> Location: Hilton San Diego Bayfront
+>
+> There are two ways to register - by adding it your ELC registration or
+> on the separate registration page.
+>
+> Register now.
+> <https://www.yoctoproject.org/yocto-project-dev-day-north-america-2019/>
+>
+> Best regards,
+> Yocto Project Advocacy Team
+>
+>
+>
 
