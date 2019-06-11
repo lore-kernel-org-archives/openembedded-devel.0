@@ -1,29 +1,48 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id BAFDB6BDD2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+	[209.85.221.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 85D567E651
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 15:38:59 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x5BFcx14021451
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Tue, 11 Jun 2019 16:55:07 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id f9so13819960wre.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 17:38:59 +0200
-Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
-	[139.16.78.240])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id x5BFcv0P022026;
-	Tue, 11 Jun 2019 17:38:57 +0200
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 702DD10D1262;
-	Tue, 11 Jun 2019 17:38:57 +0200 (CEST)
-From: Pascal Bach <pascal.bach@siemens.com>
+	Tue, 11 Jun 2019 09:55:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=+bNkW4ypkV0AFYJH1IR54qAorWg6XXxE6y/M292P4nA=;
+	b=nerO9egO+2HU+NBVDQi5yzEIlwmvGinHiyeVIfB4QKL27xM4M6X2fhJ+WxvNYwPKFg
+	hMDlalJDdn9oH0jMlsOjojA8qGTvLyYxOLpBQi9k4gq9XUQ8TTh0RfYfv729XKT0jsJX
+	YrOEaTbPTzJyiEJdTm+lvhKijn7i0W+6mbtd288C5ampH/HAi2dkQt4cvKqFV+eUOe79
+	cExCdTm+Vm5YKF/ydSV0Lpvp3Dg0iRwD5n/+UnfaNZcVA1f6jJCU7KkHSHwFy8WdS0fZ
+	AWEWrGOJexkpBrcNfqgPOuYvQCtcJ/RJgcJTjm9boovgs5HgCmD33UDx7j+f1SNK9EWf
+	pK/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+bNkW4ypkV0AFYJH1IR54qAorWg6XXxE6y/M292P4nA=;
+	b=S0W8i1f73PsMmSI/QL1HyvAhO87+OM8rNgmBXiujcIBGerdOuBnuO+PGHphvr+A4nq
+	2zPSE6t9Zp7BHZT/qqmy6Glw7Hff1R2yO39rJV7YnqWkcgmdkjDumSdOA2UW/yb6cnUP
+	0B9fT/tqw649WAu1VdUYJFLr7UyolRz+82PhKBRGbNGgSGHuoiEuvp9lxnl78yMoKK9p
+	gmZccue6pyOhZntjdCsuMm/+nEXFcyzRMLqu2nvmwDo/oDwttMjYg1CiM6weMLQvLqKf
+	0vhcLuxqXEi0KpJgBWbkSq588Hb7y3umAiX9iQk8PadKoaelxohke0lVI6bhZtOPx9YP
+	Nhsg==
+X-Gm-Message-State: APjAAAXDng4E2+o4nqv9p1hCebcEkyrplFeelY/EEtf3HHM72Q+ONkur
+	0OQgvnXK0igwJaNX9DdrxLUZGM84
+X-Google-Smtp-Source: APXvYqydZ34oAx/TxSVnaf7M5t/mnOk19HYUzsslMzyz/EJbl3SGSg6uo60UFTWlEtVNrUn5fUHuZg==
+X-Received: by 2002:a5d:52cc:: with SMTP id r12mr11522512wrv.132.1560272107922;
+	Tue, 11 Jun 2019 09:55:07 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	f10sm23635911wrg.24.2019.06.11.09.55.06
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 11 Jun 2019 09:55:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2019 17:38:48 +0200
-Message-Id: <20190611153848.30239-3-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190611153848.30239-1-pascal.bach@siemens.com>
-References: <20190606065308.23766-1-pascal.bach@siemens.com>
-	<20190611153848.30239-1-pascal.bach@siemens.com>
-Subject: [meta-oe][PATCHv3 2/2] protobuf-c: add patch for protobuf 3 compatibility
+Date: Tue, 11 Jun 2019 16:54:54 +0000
+Message-Id: <20190611165504.23049-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][warrior][PATCH 01/11] gtkwave: add distro_features_check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,95 +55,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 15:39:00 -0000
+X-List-Received-Date: Tue, 11 Jun 2019 16:55:08 -0000
 
-There is no release yet of protobuf-c that is compatible with protobuf 3.
-Master is already patched so this is just a straight backport of this patch.
+* fixes:
+ERROR: Nothing PROVIDES 'gtk+' (but /OE/build/luneos-warrior/webos-ports/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPENDS on or otherwise requires it)
+gtk+ was skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES
+ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gtkwave', 'gtk+']
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+and
+
+ERROR: Nothing PROVIDES 'tk' (but /OE/build/luneos-warrior/webos-ports/meta-openembedded/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb DEPENDS on or otherwise requires it)
+tk was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gtkwave', 'tk']
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../protobuf-c/protobuf3-compatibility.patch       | 55 ++++++++++++++++++++++
- .../recipes-devtools/protobuf/protobuf-c_1.3.1.bb  |  4 +-
- 2 files changed, 58 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
+ meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
-new file mode 100644
-index 000000000..35914952d
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
-@@ -0,0 +1,55 @@
-+From 7456d1621223d425b8a3fd74e435a79c046169fb Mon Sep 17 00:00:00 2001
-+From: Robert Edmonds <edmonds@users.noreply.github.com>
-+Date: Wed, 10 Apr 2019 20:47:48 -0400
-+Subject: [PATCH] t/generated-code2/cxx-generate-packed-data.cc: Fix build
-+ failure on newer protobuf
-+
-+ Upstream-Status: Backport [https://github.com/protobuf-c/protobuf-c/pull/369]
-+
-+google::protobuf::Message::Reflection has been removed in newer versions
-+of protobuf. The replacement is google::protobuf::Reflection.
-+
-+protobuf in commit 779f61c6a3ce02a119e28e802f229e61b69b9046 ("Integrate
-+recent changes from google3.", from August 2008) changed the following
-+in message.h:
-+
-+    @@ -336,7 +337,8 @@ class LIBPROTOBUF_EXPORT Message {
-+
-+       // Introspection ---------------------------------------------------
-+
-+    -  class Reflection;  // Defined below.
-+    +  // Typedef for backwards-compatibility.
-+    +  typedef google::protobuf::Reflection Reflection;
-+
-+The "typedef for backwards-compatibility" apparently lasted ten years
-+until protobuf commit 6bbe197e9c1b6fc38cbdc45e3bf83fa7ced792a3
-+("Down-integrate from google3.", from August 2018) which finally removed
-+the typedef:
-+
-+    @@ -327,8 +344,6 @@ class LIBPROTOBUF_EXPORT Message : public MessageLite {
-+
-+       // Introspection ---------------------------------------------------
-+
-+    -  // Typedef for backwards-compatibility.
-+    -  typedef google::protobuf::Reflection Reflection;
-+
-+This commit updates the only use of this typedef (in the test suite) to
-+directly refer to the replacement, google::protobuf::Reflection. This
-+fixes the build failure in the test suite.
-+---
-+ t/generated-code2/cxx-generate-packed-data.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/t/generated-code2/cxx-generate-packed-data.cc b/t/generated-code2/cxx-generate-packed-data.cc
-+index 4fd3e25..0865d2e 100644
-+--- a/t/generated-code2/cxx-generate-packed-data.cc
-++++ b/t/generated-code2/cxx-generate-packed-data.cc
-+@@ -998,7 +998,7 @@ static void dump_test_packed_repeated_enum (void)
-+ static void dump_test_unknown_fields (void)
-+ {
-+   EmptyMess mess;
-+-  const google::protobuf::Message::Reflection *reflection = mess.GetReflection();
-++  const google::protobuf::Reflection *reflection = mess.GetReflection();
-+   google::protobuf::UnknownFieldSet *fs = reflection->MutableUnknownFields(&mess);
-+
-+ #if GOOGLE_PROTOBUF_VERSION >= 2001000
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-index 7ef030092..1d1782306 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-@@ -15,7 +15,9 @@ DEPENDS = "protobuf-native protobuf"
- PV .= "+git${SRCPV}"
- SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+index 60df6f773b..b9aae0f6c8 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+@@ -14,6 +14,10 @@ inherit pkgconfig autotools gettext texinfo
+ DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
+ RDEPENDS_${PN} = "tk-lib"
  
--SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
-+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-+           file://protobuf3-compatibility.patch \
-+          "
++# depends on gtk+ which has this restriction
++inherit distro_features_check
++ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
++
+ EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS}"
  
- S = "${WORKDIR}/git"
- 
+ FILES_${PN} = "${bindir} ${datadir}"
 -- 
-2.11.0
+2.17.1
 
 
