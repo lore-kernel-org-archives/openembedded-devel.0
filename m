@@ -1,48 +1,52 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-it1-f194.google.com (mail-it1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DE8EF7D6A2
+Return-Path: <yann.dirson@blade-group.com>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E06C77D24A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 09:14:24 +0000 (UTC)
-Received: by mail-it1-f194.google.com with SMTP id m187so3666098ite.3
+	Tue, 11 Jun 2019 15:32:18 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id u8so3426718wmm.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 02:14:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=bghbKh9OkGse6jTsGsS3lY1yApMADIap48X2dVMHXOI=;
-	b=m+Gbx8LtEdA5+fVkQYDI4VpRSs9+PTVODNQGrgzeJhceLH3nvC7bYCaPRXIyamnJ9J
-	KTdOR0DOhBc+y7RLoL4Ix5+s4G94snZREDVKJ+xus5ysDCvA+Cj9IC9s8/yzCbHUQ4si
-	3AnDn5S49Z5gZ5qFFwHKTtQHXWDlXCM1ijWRuxRWq8IxjSNCToSy+ma/z/MeYmGzdjmK
-	AH2XttGNrLIi0eeLVzuFx9PRx62UO0VH38wKDjwSss1YI40KtLLGxHiSVUu0+lG3rjLu
-	KlV5w48cKFCheu5dsB3zp3oNLDZvn+T5G08sfa+/F/q2bit8bJcq62ZI6irZMaNLz+Ao
-	onFA==
+	Tue, 11 Jun 2019 08:32:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=blade-group.com; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ed0k8o6UMCoAuXfWBtKKdU2k3uQAukIoKkGrv7TTV8A=;
+	b=pxi0yzQo4u6oaUPBZhynodksT6UZiWzsw4X1Y6+S8DxAIoT2AR6xrWR9xTYHyf+yLa
+	ztubrgLpsgUVxgn+7NjbIO04FT0le7qNK4wVUIg4hmZ9rjI5zBmrTEUPIRJq4wgt3QZd
+	dMNWiFk+pA89TP3QK8+dogSgrxa3JNIlmRgCgkiJKmEKhWUyJ8Uxg1c9J9wbV96WIRr/
+	jtxoJhnxFvhHCTEjCWiadu1K9uhfbttPLZBJ4l5CfyUJa49BCrkUY7K6tRimGQwatWbO
+	fVcEd2Bay/t6Pt7YJ8B3gI50E03NFksr2jQ+86K+jJKKE2q8E+frQd5HOYBKc+qDlvyc
+	6C5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=bghbKh9OkGse6jTsGsS3lY1yApMADIap48X2dVMHXOI=;
-	b=Kso+3pcPeSlw4FRSKj/z5qXgxxk9+MsNpGaS9E7+gfOCZQ1eMyyfNKRiFK4auEMDdY
-	EW8RyjORcfq9o2X8Kq0KFCr/G+emkVR0xreQMZfhC3zcH9GavDijWMojYIHNf1IdjVXT
-	CP43ayHOJ1ubnX5uDwnoXaS1Mteihyou93m7zx/GXO4bPt3qp3XhIO+SHbcUYW3aZZ9O
-	cIdvB5xz3yeEMHCoG3+gAJ4seZTS4I3Dt2Vr1iFdIjQwW27surXsAWj5cq7Qupdvmi0Y
-	1egx++XO0BsCCr5y+6EbHge1OFyC6PdVaDEFgCKSt+W/PTipBRh5lj3au+euCFoRD509
-	dcKw==
-X-Gm-Message-State: APjAAAVAyrbNXJHVOW6RPS0tpvddZIPKJsNv4KuN0GJkczB0bAW4/RnW
-	pAamuQlVkHr/gjagz57jXsi8QbJ1j9LD2uik+df+njhb
-X-Google-Smtp-Source: APXvYqyxpstUfz0ifFfthI06LyTQS3Dpljsk0Uacq9A1gz0vF2xnaoplUgrKQc27w1xFjyBVnujxbSs0aLdH0VS7V4I=
-X-Received: by 2002:a05:660c:a4d:: with SMTP id
-	j13mr18666373itl.116.1560244465767; 
-	Tue, 11 Jun 2019 02:14:25 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ed0k8o6UMCoAuXfWBtKKdU2k3uQAukIoKkGrv7TTV8A=;
+	b=NRa/waroC5w7tH01T7D7AdYKHK8MwgYWVe0kCHZZh/2LrOgw6RnD467ZqX0ZTzp/Mh
+	Pp16j43+50ZyjSGy89pFY35+PRc9LEOEqcBWUN/QkTpqAI58stJa4lx0vvgnIjmcZUVG
+	4uk08vJBNYSZ0sqlTHDLnTHekUYiSioNXnZMfS7pKv4DSObGO0UOnvJQZHDPk4TTQ5+j
+	QjNu9oDlWGtJVQbSnEZy93GDtWDGGPV1rlHV8XTzLQssw8QjvIIxp+fvf2thW8Px2H+F
+	D16jQvDvt4f186v1/iWodCE7NvRFPOvHPpiBA4OwHGLWwYuQ1OBxoevFxRyAxHXA/3PF
+	NNoQ==
+X-Gm-Message-State: APjAAAWuIVUwBjopZ+cBBNoxFflMxv63ha9x14E1eXIuRARlTgqceqcD
+	XvfnexVLaWlapwN387eOYE0HFyPi4bGTHw==
+X-Google-Smtp-Source: APXvYqwHUY15GMSoOEA+HO5P7WDuvm88SpHusqsSDUuXf0EbLVsXZr74nInBiGikztY4HWQ1BT4rHQ==
+X-Received: by 2002:a1c:a00f:: with SMTP id j15mr19513330wme.167.1560267139445;
+	Tue, 11 Jun 2019 08:32:19 -0700 (PDT)
+Received: from yantop.local ([85.118.38.73])
+	by smtp.gmail.com with ESMTPSA id s7sm10745146wmc.2.2019.06.11.08.32.18
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Tue, 11 Jun 2019 08:32:18 -0700 (PDT)
+From: yann.dirson@blade-group.com
+X-Google-Original-From: yann@blade-group.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Jun 2019 17:32:10 +0200
+Message-Id: <20190611153210.20013-1-yann@blade-group.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190611081516.169741-1-kai.kang@windriver.com>
-In-Reply-To: <20190611081516.169741-1-kai.kang@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 11 Jun 2019 11:14:14 +0200
-Message-ID: <CALbNGRT2+nH9of=cw0LyZE9nszeQie-LDiCfa1H2h=2HbRjqMQ@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-settings: set default theme Adwaita
+Cc: Yann Dirson <yann@blade-group.com>
+Subject: [yocto-docs][PATCH] doc: discourage users from looking in directly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,71 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 09:14:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Jun 2019 15:32:19 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jun 11, 2019 at 10:15 AM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> The pre-configured default theme Xfce doesn't work as expected. For
-> example, no layout in start menu and applications' menu bar. And
-> GtkColorButton is blank in config tab page from xfce4-terminal -> Edit
-> -> Preference -> Colors.
->
-> So set Adwaita as default theme instead.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Had other issues and worked around by shipping a default
-configuration. Had forgotten the patch added in 2012.
+From: Yann Dirson <yann@blade-group.com>
 
-Thanks
+Signed-off-by: Yann Dirson <yann@blade-group.com>
+---
+ documentation/ref-manual/ref-classes.xml | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../files/0001-xsettings.xml-Set-default-themes.patch  | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.x=
-ml-Set-default-themes.patch b/meta-xfce/recipes-xfce/xfce4-settings/files/0=
-001-xsettings.xml-Set-default-themes.patch
-> index 67df05a79..0463d2ebd 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-=
-default-themes.patch
-> +++ b/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-=
-default-themes.patch
-> @@ -9,6 +9,14 @@ Content-Transfer-Encoding: 8bit
->  Upstram status:  Inappropriate [configuration]
->
->  Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> +
-> +Theme Xfce doesn't work as expected. For example, no layout in start
-> +menu and applications' menu bar. And GtkColorButton is blank in config
-> +tab page from xfce4-terminal -> Edit -> Preference -> Colors.
-> +
-> +So use Adwaita as default theme instead.
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
->  ---
->   xfsettingsd/xsettings.xml | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> @@ -23,7 +31,7 @@ index 65ba1ee..9efb3cd 100644
->     <property name=3D"Net" type=3D"empty">
->  -    <property name=3D"ThemeName" type=3D"empty"/>
->  -    <property name=3D"IconThemeName" type=3D"empty"/>
-> -+    <property name=3D"ThemeName" type=3D"string" value=3D"Xfce"/>
-> ++    <property name=3D"ThemeName" type=3D"string" value=3D"Adwaita"/>
->  +    <property name=3D"IconThemeName" type=3D"string" value=3D"Adwaita"/=
->
->       <property name=3D"DoubleClickTime" type=3D"int" value=3D"400"/>
->       <property name=3D"DoubleClickDistance" type=3D"int" value=3D"5"/>
-> --
-> 2.20.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/documentation/ref-manual/ref-classes.xml b/documentation/ref-manual/ref-classes.xml
+index 5cd25e8c29..0f8c89703b 100644
+--- a/documentation/ref-manual/ref-classes.xml
++++ b/documentation/ref-manual/ref-classes.xml
+@@ -3236,6 +3236,14 @@ This check was removed for YP 2.3 release
+                     <link linkend='var-SYSROOT_PREPROCESS_FUNCS'><filename>SYSROOT_PREPROCESS_FUNCS</filename></link>
+                     variable.
+                 </note>
++                <note>
++                    The paths under
++                    <filename>${SYSROOT_DESTDIR}</filename> have (for
++                    historical reasons) a complicated structure, you
++                    should instead look in <link
++                    linkend='structure-build-tmp-sysroots-components'><filename>tmp/sysroots-components/</filename>
++                    when debugging a recipe.</link>
++                </note>
+                 </para>
+ 
+                 <para>
+-- 
+2.20.1
+
 
