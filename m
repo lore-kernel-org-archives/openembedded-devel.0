@@ -1,52 +1,26 @@
-Return-Path: <yann.dirson@blade-group.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E06C77D24A
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 456A27E64D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 15:32:18 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id u8so3426718wmm.1
+	Tue, 11 Jun 2019 15:32:45 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x5BFWkqx021378
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 08:32:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=blade-group.com; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ed0k8o6UMCoAuXfWBtKKdU2k3uQAukIoKkGrv7TTV8A=;
-	b=pxi0yzQo4u6oaUPBZhynodksT6UZiWzsw4X1Y6+S8DxAIoT2AR6xrWR9xTYHyf+yLa
-	ztubrgLpsgUVxgn+7NjbIO04FT0le7qNK4wVUIg4hmZ9rjI5zBmrTEUPIRJq4wgt3QZd
-	dMNWiFk+pA89TP3QK8+dogSgrxa3JNIlmRgCgkiJKmEKhWUyJ8Uxg1c9J9wbV96WIRr/
-	jtxoJhnxFvhHCTEjCWiadu1K9uhfbttPLZBJ4l5CfyUJa49BCrkUY7K6tRimGQwatWbO
-	fVcEd2Bay/t6Pt7YJ8B3gI50E03NFksr2jQ+86K+jJKKE2q8E+frQd5HOYBKc+qDlvyc
-	6C5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ed0k8o6UMCoAuXfWBtKKdU2k3uQAukIoKkGrv7TTV8A=;
-	b=NRa/waroC5w7tH01T7D7AdYKHK8MwgYWVe0kCHZZh/2LrOgw6RnD467ZqX0ZTzp/Mh
-	Pp16j43+50ZyjSGy89pFY35+PRc9LEOEqcBWUN/QkTpqAI58stJa4lx0vvgnIjmcZUVG
-	4uk08vJBNYSZ0sqlTHDLnTHekUYiSioNXnZMfS7pKv4DSObGO0UOnvJQZHDPk4TTQ5+j
-	QjNu9oDlWGtJVQbSnEZy93GDtWDGGPV1rlHV8XTzLQssw8QjvIIxp+fvf2thW8Px2H+F
-	D16jQvDvt4f186v1/iWodCE7NvRFPOvHPpiBA4OwHGLWwYuQ1OBxoevFxRyAxHXA/3PF
-	NNoQ==
-X-Gm-Message-State: APjAAAWuIVUwBjopZ+cBBNoxFflMxv63ha9x14E1eXIuRARlTgqceqcD
-	XvfnexVLaWlapwN387eOYE0HFyPi4bGTHw==
-X-Google-Smtp-Source: APXvYqwHUY15GMSoOEA+HO5P7WDuvm88SpHusqsSDUuXf0EbLVsXZr74nInBiGikztY4HWQ1BT4rHQ==
-X-Received: by 2002:a1c:a00f:: with SMTP id j15mr19513330wme.167.1560267139445;
-	Tue, 11 Jun 2019 08:32:19 -0700 (PDT)
-Received: from yantop.local ([85.118.38.73])
-	by smtp.gmail.com with ESMTPSA id s7sm10745146wmc.2.2019.06.11.08.32.18
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 11 Jun 2019 08:32:18 -0700 (PDT)
-From: yann.dirson@blade-group.com
-X-Google-Original-From: yann@blade-group.com
+	Tue, 11 Jun 2019 17:32:46 +0200
+Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
+	[139.16.78.240])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id x5BFWi8P021380;
+	Tue, 11 Jun 2019 17:32:44 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id F2C3510D1262;
+	Tue, 11 Jun 2019 17:32:43 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2019 17:32:10 +0200
-Message-Id: <20190611153210.20013-1-yann@blade-group.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Cc: Yann Dirson <yann@blade-group.com>
-Subject: [yocto-docs][PATCH] doc: discourage users from looking in directly
+Date: Tue, 11 Jun 2019 17:32:39 +0200
+Message-Id: <20190611153239.29835-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] rocksdb: 5.18.3 -> 6.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,36 +33,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 15:32:19 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 11 Jun 2019 15:32:46 -0000
 
-From: Yann Dirson <yann@blade-group.com>
+Also add support for snappy and gflags as these are enabled by default
+and recipes are available in meta-oe. They can still be disabled via
+PACKAGECONFIG.
 
-Signed-off-by: Yann Dirson <yann@blade-group.com>
+zstd is also added as an PACKAGECONFIG but currently the zstd recipe is not in
+meta-oe so it stays disabled for the moment.
+
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- documentation/ref-manual/ref-classes.xml | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ ...01-CMake-has-stock-FindZLIB-in-upper-case.patch | 29 ++++++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb         | 11 +++++---
+ 2 files changed, 36 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
 
-diff --git a/documentation/ref-manual/ref-classes.xml b/documentation/ref-manual/ref-classes.xml
-index 5cd25e8c29..0f8c89703b 100644
---- a/documentation/ref-manual/ref-classes.xml
-+++ b/documentation/ref-manual/ref-classes.xml
-@@ -3236,6 +3236,14 @@ This check was removed for YP 2.3 release
-                     <link linkend='var-SYSROOT_PREPROCESS_FUNCS'><filename>SYSROOT_PREPROCESS_FUNCS</filename></link>
-                     variable.
-                 </note>
-+                <note>
-+                    The paths under
-+                    <filename>${SYSROOT_DESTDIR}</filename> have (for
-+                    historical reasons) a complicated structure, you
-+                    should instead look in <link
-+                    linkend='structure-build-tmp-sysroots-components'><filename>tmp/sysroots-components/</filename>
-+                    when debugging a recipe.</link>
-+                </note>
-                 </para>
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+new file mode 100644
+index 000000000..9682f8ad4
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+@@ -0,0 +1,29 @@
++From 38146a5d803a1fb9b10f011aa857872b6f20cd02 Mon Sep 17 00:00:00 2001
++From: Tongliang Liao <xkszltl@gmail.com>
++Date: Mon, 29 Apr 2019 03:51:51 -0700
++Subject: [PATCH] CMake has stock FindZLIB in upper case. More details in
++ https://cmake.org/cmake/help/v3.14/module/FindZLIB.html
++
++
++Upstream-Status: Backport https://github.com/facebook/rocksdb/pull/5261
++
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 40cdd26bb..355686566 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -92,7 +92,7 @@ else()
++   endif()
++
++   if(WITH_ZLIB)
++-    find_package(zlib REQUIRED)
+++    find_package(ZLIB REQUIRED)
++     add_definitions(-DZLIB)
++     if(ZLIB_INCLUDE_DIRS)
++       # CMake 3
++--
++2.11.0
++
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 8d846197a..6320c10fa 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -6,11 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
  
-                 <para>
+-SRCREV = "641fae60f63619ed5d0c9d9e4c4ea5a0ffa3e253"
+-SRCBRANCH = "5.18.fb"
+-PV = "5.18.3"
++SRCREV = "628a7fd74b5611657106c57f724f1682b114684c"
++SRCBRANCH = "6.0.fb"
++PV = "6.0.2"
+ 
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
++           file://0001-CMake-has-stock-FindZLIB-in-upper-case.patch \
+            file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
+            file://0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch \
+           "
+@@ -19,11 +20,13 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+-PACKAGECONFIG ??= "bzip2 zlib lz4"
++PACKAGECONFIG ??= "bzip2 zlib lz4 snappy gflags"
+ PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON -DBZIP2_LIBRARIES:STRING=bz2,-DWITH_BZ2=OFF,bzip2"
+ PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON -DLZ4_LIBRARIES:STRING=lz4,-DWITH_LZ4=OFF,lz4"
+ PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON -DZLIB_LIBRARIES:STRING=z,-DWITH_ZLIB=OFF,zlib"
++PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
+ PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
++PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
+ 
+ # Tools and tests currently don't compile on armv5 so we disable them
+ EXTRA_OECMAKE = "\
 -- 
-2.20.1
+2.11.0
 
 
