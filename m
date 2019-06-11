@@ -1,37 +1,38 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 55E867E67D
+Return-Path: <asselsm@gmail.com>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D3ED7E6A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2019 19:33:44 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45NgCr3d4Gz4v;
-	Tue, 11 Jun 2019 21:33:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1560281624;
-	bh=3NUMTpm5jZvznQXN71t0FWqx1XRqVI+5SinxpAtKfIU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cs+iQz9QsFxJ4SqVF38Lev2VagBP9ACfJL/8sQTFtbUI0djwRugzRJSExUszMBzKJ
-	+T17x8UZwqyZ141XDP77bXkPMQczND042wAKJfCAQfptr3iRjzULM193UAEVQsZXNC
-	RGIAgc9CUTuZRw3PoZ6Ik9qHCZdXgPsjF8B9kW+PrB5WHALERY6e+57vOqMiLKIxvb
-	l9RqeFesgtjLyJoLNXAK8hc/ucU/dzYA6+rAOsABdjcscOjwEWjlI5mDyWD45HvQ8R
-	ccHoOxPaTsg2QYJhTxX3AMKekeEodPMSQHO+ETF9zrrnJky9yFx/MmGaesLQogPCGW
-	DKrJUrjM1aCMDdiWwm+e1k/yFm4Bt5UKIiBRuPeDdlBm38IizhOcIEvgOx/Evh9xrX
-	aQrmtm/5lt95ic6s44QN1ayI1n2fEmDGz6kfSX8DaoyBs3Bc2G5Ielx1dkQlYwjlkd
-	wh4gBJ03ziZmPB3YPPJ5nj0prT6I5glI8tmNx5acURQAhHCHHntwqeaSlqPSD2Ad84
-	Tf3/0+WzwCQkvokE2lpYOgqRqY+cN7dWi9M94Rlo2AUxCbEfpqTMazA6mJ5LkUiumP
-	ayr4JQ/yZNStf5cpmQircIrKuSeNFc2dEIvO4CMY98ROiO6CvZUWqqfvx1Yp/T++0M
-	YZopLbVWJtss/AJ59wytickg=
-Date: Tue, 11 Jun 2019 22:33:39 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20190611193339.GA18027@localhost>
-References: <20190611165504.23049-1-Martin.Jansa@gmail.com>
-	<20190611165504.23049-3-Martin.Jansa@gmail.com>
+	Tue, 11 Jun 2019 19:48:46 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id r10so13114727otd.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jun 2019 12:48:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
+	:from:date:message-id:subject:to:cc;
+	bh=3ZsajDi0TNWsAgSC/kqTA3KHG7j0KW45UmDmvnNneE4=;
+	b=KI7+phrcoL2tLyvHYHrzQbzNMTPHGahqJCbgCSPZGsAd5tsqrnQ1ib+seltOzPbanx
+	+ln7bek/IWf+23b7ku5a1+kFv+9h4WPXk5I7+Ro2gTNNHBjfm2O41R299ynBjztzDtA+
+	RzkqLS1CdjM/7VjO1chlUtXrIKny7KMu0ebMHAyLiEmrUHyEW9tfNEluafRhEEKf2hD0
+	kjSCqxt5c3KLJeoaAyGDS9TexkRdbZOVc8k+e0lInFObl8x9z0QjTH5qXlSn0Tlejdde
+	76L+Mx4JlzwjaOibTEjOr3Xn5kuwyVVRqnYFCtAtI3UubBghZIZNa8Uwx85I+jnJNGmG
+	Q/cw==
+X-Gm-Message-State: APjAAAXglnGJKYmw4XLBWNufg29IAnp0dR2A5YPCqokieoPm81PKUBzU
+	NwiXgY4ZQIdj7/eawgA4W6qFcxTZEFQoUtSzMxY=
+X-Google-Smtp-Source: APXvYqzilK94+71F7rs+uqAANgZUTE27k5Ldx3BhZ52XfzYx27cQjIFaTaAP6lj41fav1PxV7pGePPFgZ3b7qJRzjl0=
+X-Received: by 2002:a9d:3f62:: with SMTP id m89mr37124700otc.128.1560282526421;
+	Tue, 11 Jun 2019 12:48:46 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190611165504.23049-3-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][warrior][PATCH 03/11] oprofile: make MACHINE_ARCH
+References: <20190611153239.29835-1-pascal.bach@siemens.com>
+In-Reply-To: <20190611153239.29835-1-pascal.bach@siemens.com>
+Reply-To: mark.asselstine@windriver.com
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Tue, 11 Jun 2019 15:48:35 -0400
+Message-ID: <CAPuovEKTDjuoCj4e1-XQuK4XQTcQwNTmJPBy29PApdse9yBdOw@mail.gmail.com>
+To: Pascal Bach <pascal.bach@siemens.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] rocksdb: 5.18.3 -> 6.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,59 +45,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2019 19:33:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 11 Jun 2019 19:48:46 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jun 11, 2019 at 04:54:56PM +0000, Martin Jansa wrote:
-> * fixes:
-> ERROR: oprofile different signature for task do_configure.sigdata between hammerhead and mako
-> Hash for dependent task oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot changed from deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb to d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
-> Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot with hashes deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb or d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
-> 
-> $ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/oprofile/*do_prepare*.sigdata*
-> runtaskdeps changed:
-> ['autoconf/autoconf_2.69.bb.do_populate_sysroot:virtual:native automake/automake_1.16.1.bb.do_populate_sysroot:virtual:native binutils/binutils_2.32.bb.do_populate_sysroot gcc/gcc-cross_7.3.bb.do_populate_sysroot gcc/gcc-runtime_7.3.bb.do_populate_sysroot glibc/glibc_2.29.bb.do_populate_sysroot gnu-config/gnu-config_git.bb.do_populate_sysroot:virtual:native libtool/libtool-cross_2.4.6.bb.do_populate_sysroot libtool/libtool-native_2.4.6.bb.do_populate_sysroot', -linux/linux-lg-hammerhead_git.bb.do_populate_sysroot, +linux/linux-lg-mako_git.bb.do_populate_sysroot, 'oprofile/oprofile_1.3.0.bb.do_fetch pkgconfig/pkgconfig_git.bb.do_populate_sysroot:virtual:native popt/popt_1.16.bb.do_populate_sysroot']
-> linux/linux-lg-hammerhead_git.bb.do_populate_sysroot with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
->  changed to
-> linux/linux-lg-mako_git.bb.do_populate_sysroot with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-> Dependency on task linux/linux-lg-mako_git.bb.do_populate_sysroot was added with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-> Dependency on task linux/linux-lg-hammerhead_git.bb.do_populate_sysroot was removed with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
-> 
-> * as detected with:
-> openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On Tue, Jun 11, 2019 at 11:32 AM Pascal Bach <pascal.bach@siemens.com> wrote:
+>
+> Also add support for snappy and gflags as these are enabled by default
+> and recipes are available in meta-oe. They can still be disabled via
+> PACKAGECONFIG.
+>
+> zstd is also added as an PACKAGECONFIG but currently the zstd recipe is not in
+> meta-oe so it stays disabled for the moment.
+>
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 > ---
->  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-> index 1dc535ed8d..8d706e4a50 100644
-> --- a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-> +++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-> @@ -3,6 +3,9 @@ require oprofile.inc
->  DEPENDS += "virtual/kernel"
->  DEPENDS_append_powerpc64 = " libpfm4"
->  
-> +# Depends on MACHINE_ARCH kernel
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->...
 
-Sorry that I missed this when it went into master,
-but this looks bogus to me:
+Please consider adding the fix for gcc9 along with this
+https://github.com/facebook/rocksdb/pull/5426/commits/e03a10b0c5ba55b081f49e607c49480d799b5b37
+(there is a space-tab issue in the change but otherwise it merges
+cleanly to your uprev.)
 
-oprofile only needs the userspace kernel headers and shouldn't depend 
-on virtual/kernel.
+The gcc9 issue exists in 5.18.3 and 6.0.2 but since you are in here we
+might as well ensure that builds of master are working.
 
-cu
-Adrian
+Regards,
+Mark Asselstine
 
--- 
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
 
+>  ...01-CMake-has-stock-FindZLIB-in-upper-case.patch | 29 ++++++++++++++++++++++
+>  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb         | 11 +++++---
+>  2 files changed, 36 insertions(+), 4 deletions(-)
+>  create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+>
+> diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+> new file mode 100644
+> index 000000000..9682f8ad4
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+> @@ -0,0 +1,29 @@
+> +From 38146a5d803a1fb9b10f011aa857872b6f20cd02 Mon Sep 17 00:00:00 2001
+> +From: Tongliang Liao <xkszltl@gmail.com>
+> +Date: Mon, 29 Apr 2019 03:51:51 -0700
+> +Subject: [PATCH] CMake has stock FindZLIB in upper case. More details in
+> + https://cmake.org/cmake/help/v3.14/module/FindZLIB.html
+> +
+> +
+> +Upstream-Status: Backport https://github.com/facebook/rocksdb/pull/5261
+> +
+> +---
+> + CMakeLists.txt | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 40cdd26bb..355686566 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -92,7 +92,7 @@ else()
+> +   endif()
+> +
+> +   if(WITH_ZLIB)
+> +-    find_package(zlib REQUIRED)
+> ++    find_package(ZLIB REQUIRED)
+> +     add_definitions(-DZLIB)
+> +     if(ZLIB_INCLUDE_DIRS)
+> +       # CMake 3
+> +--
+> +2.11.0
+> +
+> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> index 8d846197a..6320c10fa 100644
+> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> @@ -6,11 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+>                      file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>                      file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+>
+> -SRCREV = "641fae60f63619ed5d0c9d9e4c4ea5a0ffa3e253"
+> -SRCBRANCH = "5.18.fb"
+> -PV = "5.18.3"
+> +SRCREV = "628a7fd74b5611657106c57f724f1682b114684c"
+> +SRCBRANCH = "6.0.fb"
+> +PV = "6.0.2"
+>
+>  SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+> +           file://0001-CMake-has-stock-FindZLIB-in-upper-case.patch \
+>             file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
+>             file://0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch \
+>            "
+> @@ -19,11 +20,13 @@ S = "${WORKDIR}/git"
+>
+>  inherit cmake
+>
+> -PACKAGECONFIG ??= "bzip2 zlib lz4"
+> +PACKAGECONFIG ??= "bzip2 zlib lz4 snappy gflags"
+>  PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON -DBZIP2_LIBRARIES:STRING=bz2,-DWITH_BZ2=OFF,bzip2"
+>  PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON -DLZ4_LIBRARIES:STRING=lz4,-DWITH_LZ4=OFF,lz4"
+>  PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON -DZLIB_LIBRARIES:STRING=z,-DWITH_ZLIB=OFF,zlib"
+> +PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
+>  PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
+> +PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
+>
+>  # Tools and tests currently don't compile on armv5 so we disable them
+>  EXTRA_OECMAKE = "\
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
