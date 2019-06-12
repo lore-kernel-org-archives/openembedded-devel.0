@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 086BD7E6DA
+	by mail.openembedded.org (Postfix) with ESMTP id 5225E60116
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 02:43:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,363,1557158400"; d="scan'208";a="67012994"
+	Wed, 12 Jun 2019 02:52:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,363,1557158400"; d="scan'208";a="67014272"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Jun 2019 10:43:37 +0800
+	by heian.cn.fujitsu.com with ESMTP; 12 Jun 2019 10:52:57 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7E6DA4CDD988
+	by cn.fujitsu.com (Postfix) with ESMTP id 464F24CDD460
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 10:43:36 +0800 (CST)
+	Wed, 12 Jun 2019 10:52:57 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.46) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 12 Jun 2019 10:43:33 +0800
+	Server (TLS) id 14.3.439.0; Wed, 12 Jun 2019 10:52:54 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Jun 2019 10:44:50 +0800
-Message-ID: <20190612024450.7549-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 12 Jun 2019 10:54:11 +0800
+Message-ID: <20190612025411.9494-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.46]
-X-yoursite-MailScanner-ID: 7E6DA4CDD988.AA539
+X-yoursite-MailScanner-ID: 464F24CDD460.A85DC
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-babel: upgrade 2.6.0 -> 2.7.0
+Subject: [meta-python] [PATCH] python-cachetools: upgrade 3.1.0 -> 3.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,51 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2019 02:43:38 -0000
+X-List-Received-Date: Wed, 12 Jun 2019 02:52:58 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-babel_2.6.0.bb to python-babel_2.7.0.bb.
+-Upgrade from python-cachetools_3.1.0.bb to python-cachetools_3.1.1.bb.
 
--Upgrade from python3-babel_2.6.0.bb to python3-babel_2.7.0.bb
-
--License-Update: Copyright year updated to 2019.
+-Upgrade from python3-cachetools_3.1.0.bb to python3-cachetools_3.1.1.bb
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-babel.inc        | 6 +++---
- .../python/{python-babel_2.6.0.bb => python-babel_2.7.0.bb} | 0
- .../{python3-babel_2.6.0.bb => python3-babel_2.7.0.bb}      | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-babel_2.6.0.bb => python-babel_2.7.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-babel_2.6.0.bb => python3-babel_2.7.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-cachetools.inc     | 4 ++--
+ ...{python-cachetools_3.1.0.bb => python-cachetools_3.1.1.bb} | 0
+ ...ython3-cachetools_3.1.0.bb => python3-cachetools_3.1.1.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cachetools_3.1.0.bb => python-cachetools_3.1.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_3.1.0.bb => python3-cachetools_3.1.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
-index 14b5a9f57..427467294 100644
---- a/meta-python/recipes-devtools/python/python-babel.inc
-+++ b/meta-python/recipes-devtools/python/python-babel.inc
-@@ -1,10 +1,10 @@
- DESCRIPTION = "A collection of tools for internationalizing Python applications"
- HOMEPAGE = "http://babel.edgewall.org/"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=eebdc057dc12abcc2d6c4453628bfcd4"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=942469df9305abb1c59e95f778310384"
+diff --git a/meta-python/recipes-devtools/python/python-cachetools.inc b/meta-python/recipes-devtools/python/python-cachetools.inc
+index 52ae3186d..9c793808f 100644
+--- a/meta-python/recipes-devtools/python/python-cachetools.inc
++++ b/meta-python/recipes-devtools/python/python-cachetools.inc
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=27f7518eb6f7dc686d0f953b2f28dae5"
  
--SRC_URI[md5sum] = "c384ac03026e8fe6f9b90f55201f1bff"
--SRC_URI[sha256sum] = "8cba50f48c529ca3fa18cf81fa9403be176d374ac4d60738b839122dfaaa3d23"
-+SRC_URI[md5sum] = "83c158b7dae9135750a7cf204e6e2eea"
-+SRC_URI[sha256sum] = "e86135ae101e31e2c8ec20a4e0c5220f4eed12487d5cf3f78be7e98d3a57fc28"
+ inherit pypi
  
- PYPI_PACKAGE = "Babel"
+-SRC_URI[md5sum] = "a7b1c5eb5390d50067c62d7bcb4e875c"
+-SRC_URI[sha256sum] = "9efcc9fab3b49ab833475702b55edd5ae07af1af7a4c627678980b45e459c460"
++SRC_URI[md5sum] = "91aa9b611b6345154df84e8e37746f41"
++SRC_URI[sha256sum] = "8ea2d3ce97850f31e4a08b0e2b5e6c34997d7216a9d2c98e0f3978630d4da69a"
  
-diff --git a/meta-python/recipes-devtools/python/python-babel_2.6.0.bb b/meta-python/recipes-devtools/python/python-babel_2.7.0.bb
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-cachetools_3.1.0.bb b/meta-python/recipes-devtools/python/python-cachetools_3.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-babel_2.6.0.bb
-rename to meta-python/recipes-devtools/python/python-babel_2.7.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.6.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
+rename from meta-python/recipes-devtools/python/python-cachetools_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python-cachetools_3.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_3.1.0.bb b/meta-python/recipes-devtools/python/python3-cachetools_3.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-babel_2.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
+rename from meta-python/recipes-devtools/python/python3-cachetools_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_3.1.1.bb
 -- 
 2.20.1
 
