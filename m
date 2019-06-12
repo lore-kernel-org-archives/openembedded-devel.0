@@ -1,43 +1,49 @@
-Return-Path: <angelovic.s@gmail.com>
-Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com
-	[209.85.217.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FB7C7E774
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+	[209.85.167.47])
+	by mail.openembedded.org (Postfix) with ESMTP id BC7427E6EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 12:18:53 +0000 (UTC)
-Received: by mail-vs1-f48.google.com with SMTP id v129so10053211vsb.11
+	Wed, 12 Jun 2019 17:31:49 +0000 (UTC)
+Received: by mail-lf1-f47.google.com with SMTP id j29so12806712lfk.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 05:18:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=4STFpqkSzL9JANpbHKce72T/ty4sbPEH/iJwSKm5vuY=;
-	b=FVazBuCdTTl5O/AddmvM/wibtCC9M37wWW74wy49yFpqZVn8N4zK/ptl5WyEq2sOoQ
-	TZNwndYw1TmqT5qzI6fFfq0t64GzHj4zF9RG4KC0f8QimKD3R1MRLYWRF40YXFtrkuXA
-	BBL2zvW+FhOFqC+GmSqm6va1Vr6ouxuZVneVvGorhhIaN7URDD3HSOww9Jy+UmCVRUTE
-	IwQS2/QJhqYeFrIzy57q+HXalrw96ETom9Uc3rXnZEqwMzwNo3rMnVfMi3EEiy5dHy0V
-	Gcq8Mg1hFddArFLKlkKCDzr0lnT+nJ01LkodHooES3avg0J0FgAz8FwCuDs7MCJIHfGL
-	fIXQ==
+	Wed, 12 Jun 2019 10:31:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=lHoJfl62NR3g6/L7uNs08wN+amufIK1AcglRx5MHu2k=;
+	b=f6wz7KLddRXnUH24E4nSfjwNxweigPn8dYxhOWMFIFRkkLZ7gSeMuaGs7jYBHxh6yG
+	q6OJ3Ge5WkYwmNnehwvYkZO5jgqHT7z4R/8AJXOPWItbrHx+H2avKZbSiuEImFjWVsAF
+	DuS4stU9tU48fXOnQXp5mkaHnfd4yWxzBA+qzcT1nG1OJnOaahmoNAXOs4+SKFJYM7Yu
+	qRg3pM6Mmpl8XXy7VpB32ZD5CNi1oQ9UU8qldzPhyWv8tC247YZvdiTAZY7md6YuDwNN
+	mR+HC1T7NIe/03XEKse2k2fr6Me/WgLDVFFVEARu9DpvPjWRfldZDc3JeZfqqove55Bv
+	Gd8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=4STFpqkSzL9JANpbHKce72T/ty4sbPEH/iJwSKm5vuY=;
-	b=E+Ey908a8/XXS7q5oX4fGfc1YEhpPUwNuX8Qf6ge/Z8OQa7twv6t9m5WCo9hKmNhZ/
-	h377gsbJFgfl5jc7aBXfUSb9SbGx48ru/c19FuY6RJxLZ7iRDygZJM8C1OcsaGzZdxPR
-	hB6kdeWP67ylNkgSZMhbc+O9k961jv9wUDWBUxRvA5+sAcDXHNFUh9+rxsiRDCJ8/t4c
-	SZU5tFhcoMXvBjljCa81ymlJUD21DHs4cHD1rHTaaME0u3SvNGnlrW76rc4avbdy+KWO
-	W5ZtT71c90mD358YpFKnJ2h+UlF8m/BY60NBMGYqEnBAg/12E0VZT68pbMDTuCgeT4e0
-	f3ew==
-X-Gm-Message-State: APjAAAXiyB9nFwkUYBlETAL/gF2L07I0em0JY3AXad4hLvXWhm932Kd4
-	tgbp6Pf/YyyQySDcOcmkboXaLt61YEvtkjhoVjcMzdPtv0I=
-X-Google-Smtp-Source: APXvYqxU8M8Fj/kDUQ+RuvYladVup9JsxkmQrv/49Oix9+vCOP2W0NSjgdzP+oBmrfTRygrSIXJaQ8+46NFiK6sM0uU=
-X-Received: by 2002:a67:de99:: with SMTP id r25mr43906114vsk.215.1560341934559;
-	Wed, 12 Jun 2019 05:18:54 -0700 (PDT)
-MIME-Version: 1.0
-From: =?UTF-8?Q?Stanislav_Angelovi=C4=8D?= <angelovic.s@gmail.com>
-Date: Wed, 12 Jun 2019 14:18:43 +0200
-Message-ID: <CAA9bybPbYubZDBnACQAa+44K4Jkza9Eb9wpgAo_r0WB7e6MjaA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=lHoJfl62NR3g6/L7uNs08wN+amufIK1AcglRx5MHu2k=;
+	b=j6J2VN66y77HrfzvWRouLab9INa7xTMP04rvoORTeqSYKc+NMU51s7lLPu31i0cgK5
+	PdLBfnz8LdLWzBSPDh6WtZ+1VbPo2gfZtbcqa0/SR6LaL6T5/791b9/tPrUe0ap/Vm6G
+	RA4QAfS6uLzB/bv4QeGdUfqNnpbAK2ydyy/wQKvfp3RBF0ruiSFwlpwP2T1lJ33nOCD1
+	2I6roM49f0HvlWyZAbtfz/mXbgv5niUYQzwTlp375H/M5HhZE/zPqwPSxP+IcO3ACzMZ
+	f+LmOwptXFNA6gCOx74kob1iXNc/0UNWkKhtdOg+XkJGw8eZ4kJOzC72q69tJlPUtSvB
+	N4NQ==
+X-Gm-Message-State: APjAAAWEFAspKvgPthneN0buwRxGM/9b0lExSg7BIz76R4yaUSqWHTpO
+	iyskxXsVTl3VTFuxTAqFL6ovGbDOQaE=
+X-Google-Smtp-Source: APXvYqybgUbdWviX5UBXgSY7iUJpltoJTi4I56Nr5hd+7GveaQ05owkkVVHp+RagVreyHzrsFE0eIw==
+X-Received: by 2002:ac2:5601:: with SMTP id v1mr28228075lfd.106.1560360710017; 
+	Wed, 12 Jun 2019 10:31:50 -0700 (PDT)
+Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id u18sm79091ljj.32.2019.06.12.10.31.48
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 12 Jun 2019 10:31:49 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe] Introduce recipe for sdbus-c++ library
+Date: Wed, 12 Jun 2019 19:31:28 +0200
+Message-Id: <20190612173128.9582-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] nano: update to 4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,129 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2019 12:18:54 -0000
-X-Groupsio-MsgNum: 78022
-Content-Type: multipart/mixed; boundary="000000000000bd2a54058b1f6a83"
+X-List-Received-Date: Wed, 12 Jun 2019 17:31:51 -0000
 
---000000000000bd2a54058b1f6a83
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ meta-oe/recipes-support/nano/{nano_4.1.bb => nano_4.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/nano/{nano_4.1.bb => nano_4.2.bb} (79%)
 
-Hi,
+diff --git a/meta-oe/recipes-support/nano/nano_4.1.bb b/meta-oe/recipes-support/nano/nano_4.2.bb
+similarity index 79%
+rename from meta-oe/recipes-support/nano/nano_4.1.bb
+rename to meta-oe/recipes-support/nano/nano_4.2.bb
+index 1fe36cdb0..19a8b4782 100644
+--- a/meta-oe/recipes-support/nano/nano_4.1.bb
++++ b/meta-oe/recipes-support/nano/nano_4.2.bb
+@@ -12,8 +12,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+ 
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[md5sum] = "235eaf7d27db3c3679b2054361ff6181"
+-SRC_URI[sha256sum] = "86bde596a038d6fde619b49d785c0ebf0b3eaa7001a39dbe9316bd5392d221d0"
++SRC_URI[md5sum] = "9ef42650960fa71671dc5318841a27a9"
++SRC_URI[sha256sum] = "1143defce62e391b241252ffdb6e5c1ded56cfe26d46ee81b796abe0ccc45df9"
+ 
+ inherit autotools gettext pkgconfig
+ 
+-- 
+2.17.1
 
-I've just sent a new PR to meta-openembedded at GitHub (
-https://github.com/openembedded/meta-openembedded/pull/).
 
-sdbus-c++ is a high-level C++ D-Bus library written on top of systemd D-Bus
-implementation originally as a modern, robust replacement for dbus-c++.
-
-There are two recipes:
-* One for sdbus-c++ itself. It detects whether systemd feature is turned
-on. If so, it depends on systemd and links against libsystemd. Otherwise it
-builds libsystemd as part of building sdbus-c++. The recipe also supports
-ptest.
-* One for sdbus-c++ native tools, namely sdbus-c++ code generator to
-generate C++ adaptor and proxy binding classes.
-
-The recipes have been tested on yocto master.
-
-Per meta-oe README, one is also asked to send an e-mail, so here I am (I
-hope I'm doing this correctly). Attached please find the patch file.
-
-Looking forward to your feedback.
-
-Kind regards,
-Stanislav.
-
---000000000000bd2a54058b1f6a83
-Content-Type: application/octet-stream; name="sdbus-c++.patch"
-Content-Disposition: attachment; filename="sdbus-c++.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jwt77phm0>
-X-Attachment-Id: f_jwt77phm0
-
-RnJvbSAzYWQ5YjIxOGJjYWRiNWY0NGUzNzRiYjVkYTYyOTA0ZTFkMDQ0MmQ5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBzYW5nZWxvdmljIDxhbmdlbG92aWMuc0BnbWFpbC5jb20+CkRh
-dGU6IFdlZCwgMTIgSnVuIDIwMTkgMTE6NTA6MDcgKzAyMDAKU3ViamVjdDogW1BBVENIXSBJbnRy
-b2R1Y2UgcmVjaXBlIGZvciBzZGJ1cy1jKysgbGlicmFyeSBhbmQgaXRzIHRvb2xzCgotLS0KIC4u
-Li9zZGJ1cy1jKysvc2RidXMtYysrLTAuNy4xL3J1bi1wdGVzdCAgICAgICB8IDE1ICsrKysrKysK
-IC4uLi9zZGJ1cy1jKysvc2RidXMtYysrLXRvb2xzLW5hdGl2ZV8wLjcuMS5iYiB8IDE3ICsrKysr
-KysKIC4uLi9yZWNpcGVzLWNvcmUvc2RidXMtYysrL3NkYnVzLWMrK18wLjcuMS5iYiB8IDQ1ICsr
-KysrKysrKysrKysrKysrKysKIDMgZmlsZXMgY2hhbmdlZCwgNzcgaW5zZXJ0aW9ucygrKQogY3Jl
-YXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1jb3JlL3NkYnVzLWMrKy9zZGJ1cy1jKyst
-MC43LjEvcnVuLXB0ZXN0CiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWNvcmUv
-c2RidXMtYysrL3NkYnVzLWMrKy10b29scy1uYXRpdmVfMC43LjEuYmIKIGNyZWF0ZSBtb2RlIDEw
-MDY0NCBtZXRhLW9lL3JlY2lwZXMtY29yZS9zZGJ1cy1jKysvc2RidXMtYysrXzAuNy4xLmJiCgpk
-aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvc2RidXMtYysrL3NkYnVzLWMrKy0wLjcu
-MS9ydW4tcHRlc3QgYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9zZGJ1cy1jKysvc2RidXMtYysrLTAu
-Ny4xL3J1bi1wdGVzdApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwMDAwLi44ZmE5
-NDUzZTM5Ci0tLSAvZGV2L251bGwKKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvc2RidXMtYysr
-L3NkYnVzLWMrKy0wLjcuMS9ydW4tcHRlc3QKQEAgLTAsMCArMSwxNSBAQAorIyEvYmluL3NoCitz
-ZXQgLWUKK3NldCAtbyBwaXBlZmFpbAorCitsb2dnZXIgIioqIFN0YXJ0aW5nIHNkYnVzLWMrKy11
-bml0LXRlc3RzIgorL29wdC90ZXN0L2Jpbi9zZGJ1cy1jKystdW5pdC10ZXN0cyAtLWd0ZXN0X291
-dHB1dD14bWw6L2RhdGEvcHRlc3Qvc2RidXMtYysrL3NkYnVzLWMrKy11bml0LXRlc3RzLnhtbCB8
-JiBcCitzZWQgLXIgJ3MvXlxbXHMrT0tccytcXSAoLiopIFwoWzAtOV0rXHNtc1wpJC9PSzogXDEg
-LycgfCBcCitzZWQgLXIgJ3MvXlxbXHMrRkFJTEVEXHMrXF0gKC4qKSBcKFswLTldK1xzbXNcKSQv
-RkFJTEVEOiBcMSAvJyB8IFwKK2F3ayAne2lmICgkMSA9PSAiT0s6IiB8fCAkMSA9PSAiRkFJTEVE
-OiIpIHtwcmludCAkMH19JworCitsb2dnZXIgIioqIFN0YXJ0aW5nIHNkYnVzLWMrKy1pbnRlZ3Jh
-dGlvbi10ZXN0cyIKKy9vcHQvdGVzdC9iaW4vc2RidXMtYysrLWludGVncmF0aW9uLXRlc3RzIC0t
-Z3Rlc3Rfb3V0cHV0PXhtbDovZGF0YS9wdGVzdC9zZGJ1cy1jKysvc2RidXMtYysrLWludGVncmF0
-aW9uLXRlc3RzLnhtbCB8JiBcCitzZWQgLXIgJ3MvXlxbXHMrT0tccytcXSAoLiopIFwoWzAtOV0r
-XHNtc1wpJC9PSzogXDEgLycgfCBcCitzZWQgLXIgJ3MvXlxbXHMrRkFJTEVEXHMrXF0gKC4qKSBc
-KFswLTldK1xzbXNcKSQvRkFJTEVEOiBcMSAvJyB8IFwKK2F3ayAne2lmICgkMSA9PSAiT0s6IiB8
-fCAkMSA9PSAiRkFJTEVEOiIpIHtwcmludCAkMH19JyAKZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1jb3JlL3NkYnVzLWMrKy9zZGJ1cy1jKystdG9vbHMtbmF0aXZlXzAuNy4xLmJiIGIvbWV0
-YS1vZS9yZWNpcGVzLWNvcmUvc2RidXMtYysrL3NkYnVzLWMrKy10b29scy1uYXRpdmVfMC43LjEu
-YmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMDAwMC4uMTBiZGQwYTJlYQotLS0g
-L2Rldi9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL3NkYnVzLWMrKy9zZGJ1cy1jKyst
-dG9vbHMtbmF0aXZlXzAuNy4xLmJiCkBAIC0wLDAgKzEsMTcgQEAKK1NVTU1BUlkgPSAic2RidXMt
-YysrIG5hdGl2ZSB0b29scyIKK0RFU0NSSVBUSU9OID0gIk5hdGl2ZSBpbnRlcmZhY2UgY29kZSBn
-ZW5lcmF0b3IgZm9yIGRldmVsb3BtZW50IHdpdGggc2RidXMtYysrIgorCitMSUNFTlNFID0gIkxH
-UEx2Mi4xIgorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vJHtXT1JLRElSfS9naXQtdG9vbHMv
-Q09QWUlORzttZDU9MTgwM2ZhOWMyYzNjZThjYjA2YjQ4NjFkNzUzMTA3NDIiCisKK2luaGVyaXQg
-Y21ha2UgbmF0aXZlCisKK0RFUEVORFNfJHtQTn0gPSAiZXhwYXQiCitSREVQRU5EU18ke1BOfSA9
-ICJleHBhdCIKKworQlJBTkNIID0gIm1hc3RlciIKK1RBRyA9ICJ2JHtQVn0iCisKK1NSQ19VUkkg
-PSAiZ2l0Oi8vZ2l0aHViLmNvbS9LaXN0bGVyLUdyb3VwL3NkYnVzLWNwcC5naXQ7cHJvdG9jb2w9
-aHR0cHM7ZGVzdHN1ZmZpeD1naXQtdG9vbHM7YnJhbmNoPSR7QlJBTkNIfTt0YWc9JHtUQUd9O3N1
-YnBhdGg9dG9vbHMiCisKK1MgPSAiJHtXT1JLRElSfS9naXQtdG9vbHMiCmRpZmYgLS1naXQgYS9t
-ZXRhLW9lL3JlY2lwZXMtY29yZS9zZGJ1cy1jKysvc2RidXMtYysrXzAuNy4xLmJiIGIvbWV0YS1v
-ZS9yZWNpcGVzLWNvcmUvc2RidXMtYysrL3NkYnVzLWMrK18wLjcuMS5iYgpuZXcgZmlsZSBtb2Rl
-IDEwMDY0NAppbmRleCAwMDAwMDAwMDAwLi4zMWFlMzhjNzU5Ci0tLSAvZGV2L251bGwKKysrIGIv
-bWV0YS1vZS9yZWNpcGVzLWNvcmUvc2RidXMtYysrL3NkYnVzLWMrK18wLjcuMS5iYgpAQCAtMCww
-ICsxLDQ1IEBACitTVU1NQVJZID0gInNkYnVzLWMrKyIKK0RFU0NSSVBUSU9OID0gIkhpZ2gtbGV2
-ZWwgQysrIEQtQnVzIGxpYnJhcnkgZGVzaWduZWQgdG8gcHJvdmlkZSBlYXN5LXRvLXVzZSB5ZXQg
-cG93ZXJmdWwgQVBJIGluIG1vZGVybiBDKysiCisKK1NFQ1RJT04gPSAibGlicyIKKworTElDRU5T
-RSA9ICJMR1BMdjIuMSIKK0xJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovLyR7V09SS0RJUn0vc2Ri
-dXMtY3BwLSR7UFZ9L0NPUFlJTkc7bWQ1PTE4MDNmYTljMmMzY2U4Y2IwNmI0ODYxZDc1MzEwNzQy
-IgorCitpbmhlcml0IGNtYWtlIHBrZ2NvbmZpZyBzeXN0ZW1kIHB0ZXN0IHB5dGhvbjNuYXRpdmUK
-KworREVQRU5EUyA9ICJleHBhdCAke0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVT
-JywgJ3N5c3RlbWQnLCAnc3lzdGVtZCcsICdtZXNvbi1uYXRpdmUgbmluamEtbmF0aXZlIGdpdC1u
-YXRpdmUgZ3BlcmYtbmF0aXZlIGdldHRleHQtbmF0aXZlIHV0aWwtbGludXggZ2xpYmMgbGliY2Fw
-JywgZCl9IgorUkRFUEVORFNfJHtQTn0gPSAiJHtAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RST19G
-RUFUVVJFUycsICdzeXN0ZW1kJywgJ2xpYnN5c3RlbWQnLCAnZ2xpYmMgbGliY2FwJywgZCl9Igor
-CitTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vS2lzdGxlci1Hcm91cC9zZGJ1cy1jcHAuZ2l0
-O3Byb3RvY29sPWh0dHBzO2Rlc3RzdWZmaXg9c2RidXMtY3BwLSR7UFZ9O2JyYW5jaD1tYXN0ZXI7
-dGFnPXYke1BWfSIKK1NSQ19VUkkgKz0gImZpbGU6Ly9ydW4tcHRlc3QiCisKK1RFU1RfQklOX0RJ
-UiA9ICIvb3B0L3Rlc3QvYmluIgorCisjIEFsbG93IENNYWtlIHRvIHVzZSBnaXQgb24gdGhlIGhv
-c3QgbWFjaGluZQorT0VDTUFLRV9GSU5EX1JPT1RfUEFUSF9NT0RFX1BST0dSQU0gPSAiQk9USCIK
-KyMgTmluamEgaXMgdGhlIGRlZmF1bHQgQ01ha2UgZ2VuZXJhdG9yIGluIFlvY3RvIG5vdywgc28g
-bGV0J3Mgc2V0IFVuaXggTWFrZWZpbGVzIGV4cGxpY2l0bHkKK09FQ01BS0VfR0VORVJBVE9SID0g
-IlVuaXggTWFrZWZpbGVzIgorCitFWFRSQV9PRUNNQUtFID0gIi1EQlVJTERfQ09ERV9HRU49T04g
-XAorICAgICAgICAgICAgICAgICAtREJVSUxEX0RPQz1PTiBcCisgICAgICAgICAgICAgICAgIC1E
-QlVJTERfRE9YWUdFTl9ET0M9T0ZGIFwKKyAgICAgICAgICAgICAgICAgJHtAYmIudXRpbHMuY29u
-dGFpbnMoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgJy1EQlVJTERfTElCU1lTVEVNRD1P
-RkYnLCAnLURCVUlMRF9MSUJTWVNURU1EPU9OIC1ETElCU1lTVEVNRF9WRVJTSU9OPTI0MicsIGQp
-fSBcCisgICAgICAgICAgICAgICAgICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQVEVTVF9FTkFCTEVE
-JywgJzEnLCAnLURCVUlMRF9URVNUUz1PTiAtRFRFU1RTX0lOU1RBTExfUEFUSD0ke1RFU1RfQklO
-X0RJUn0nLCAnLURCVUlMRF9URVNUUz1PRkYnLCBkKX0iCisKK1MgPSAiJHtXT1JLRElSfS9zZGJ1
-cy1jcHAtJHtQVn0iCisKK1BBQ0tBR0VTICs9ICIke1BOfS10ZXN0IgorQUxMT1dfRU1QVFlfJHtQ
-Tn0tdGVzdCA9ICIxIgorUkRFUEVORFNfJHtQTn0tdGVzdCA9ICIke1BOfSIKK1JERVBFTkRTXyR7
-UE59LXB0ZXN0ID0gIiR7UE59LXRlc3QiCisKKyMgRG9uJ3QgdGFrZSBvcmcuc2RidXNjcHAuaW50
-ZWdyYXRpb250ZXN0cy5jb25mIGZpbGUgaW50byB0aGUgYmFzZSBwYWNrYWdlCitGSUxFU18ke1BO
-fSA9ICIke2xpYmRpcn0vIgorCitGSUxFU18ke1BOfS10ZXN0ICs9ICIke3N5c2NvbmZkaXJ9L2Ri
-dXMtMS9zeXN0ZW0uZC8iCitGSUxFU18ke1BOfS10ZXN0ICs9ICIke1RFU1RfQklOX0RJUn0vIgor
-CitGSUxFU18ke1BOfS1kZXYgKz0gIiR7YmluZGlyfS9zZGJ1cy1jKysteG1sMmNwcCIKK0ZJTEVT
-XyR7UE59LWRldiArPSAiJHtsaWJkaXJ9L2NtYWtlL3NkYnVzLWMrKy9zZGJ1cy1jKystY29uZmln
-LmNtYWtlIgorRklMRVNfJHtQTn0tZGV2ICs9ICIke2xpYmRpcn0vY21ha2Uvc2RidXMtYysrL3Nk
-YnVzLWMrKy1jb25maWctdmVyc2lvbi5jbWFrZSIK
-
---000000000000bd2a54058b1f6a83--
