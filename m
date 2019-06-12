@@ -1,49 +1,50 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
-	[209.85.167.47])
-	by mail.openembedded.org (Postfix) with ESMTP id BC7427E6EB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 27C6D7D251
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 17:31:49 +0000 (UTC)
-Received: by mail-lf1-f47.google.com with SMTP id j29so12806712lfk.10
+	Wed, 12 Jun 2019 18:23:31 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id c26so27154079edt.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2019 10:31:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=lHoJfl62NR3g6/L7uNs08wN+amufIK1AcglRx5MHu2k=;
-	b=f6wz7KLddRXnUH24E4nSfjwNxweigPn8dYxhOWMFIFRkkLZ7gSeMuaGs7jYBHxh6yG
-	q6OJ3Ge5WkYwmNnehwvYkZO5jgqHT7z4R/8AJXOPWItbrHx+H2avKZbSiuEImFjWVsAF
-	DuS4stU9tU48fXOnQXp5mkaHnfd4yWxzBA+qzcT1nG1OJnOaahmoNAXOs4+SKFJYM7Yu
-	qRg3pM6Mmpl8XXy7VpB32ZD5CNi1oQ9UU8qldzPhyWv8tC247YZvdiTAZY7md6YuDwNN
-	mR+HC1T7NIe/03XEKse2k2fr6Me/WgLDVFFVEARu9DpvPjWRfldZDc3JeZfqqove55Bv
-	Gd8w==
+	Wed, 12 Jun 2019 11:23:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=45yTzxKVsJSrNQ9Ee+YZ4bF3Cofb4C1owIgFrRwYfO8=;
+	b=J3eXnj45SaDfJrSwG/Pi3AZNfabS6gNnxRr+DxvfHHA2jjgwWzTXZ+pFrtA/A+JTTR
+	RY2+f5XKBdLmcs/30eTJNUihaavDsILeqn+7m6UR9bsn4+aV1dL4L2p/NwPZNumaBmiD
+	lUSyyQ8xMhARRDTsQWPUh4ABpP4vI/I97Riy1fvoVZ0szDzBtB7olYeOtxyzPG2xurXt
+	8QZr8SP6RO6LPbk7Z69/xi+Y/53/qzEBtXxvzCOzZkqf68giviR9Zq1z5BNP89yGr1R6
+	3TJNA8XYvTo41FvKLS1byzlap6/F5ZR6C3H6I1OYX4elRb6Ec8WyCpsaTkc43eeOeXll
+	NPww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lHoJfl62NR3g6/L7uNs08wN+amufIK1AcglRx5MHu2k=;
-	b=j6J2VN66y77HrfzvWRouLab9INa7xTMP04rvoORTeqSYKc+NMU51s7lLPu31i0cgK5
-	PdLBfnz8LdLWzBSPDh6WtZ+1VbPo2gfZtbcqa0/SR6LaL6T5/791b9/tPrUe0ap/Vm6G
-	RA4QAfS6uLzB/bv4QeGdUfqNnpbAK2ydyy/wQKvfp3RBF0ruiSFwlpwP2T1lJ33nOCD1
-	2I6roM49f0HvlWyZAbtfz/mXbgv5niUYQzwTlp375H/M5HhZE/zPqwPSxP+IcO3ACzMZ
-	f+LmOwptXFNA6gCOx74kob1iXNc/0UNWkKhtdOg+XkJGw8eZ4kJOzC72q69tJlPUtSvB
-	N4NQ==
-X-Gm-Message-State: APjAAAWEFAspKvgPthneN0buwRxGM/9b0lExSg7BIz76R4yaUSqWHTpO
-	iyskxXsVTl3VTFuxTAqFL6ovGbDOQaE=
-X-Google-Smtp-Source: APXvYqybgUbdWviX5UBXgSY7iUJpltoJTi4I56Nr5hd+7GveaQ05owkkVVHp+RagVreyHzrsFE0eIw==
-X-Received: by 2002:ac2:5601:: with SMTP id v1mr28228075lfd.106.1560360710017; 
-	Wed, 12 Jun 2019 10:31:50 -0700 (PDT)
-Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id u18sm79091ljj.32.2019.06.12.10.31.48
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 12 Jun 2019 10:31:49 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Jun 2019 19:31:28 +0200
-Message-Id: <20190612173128.9582-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] nano: update to 4.2
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=45yTzxKVsJSrNQ9Ee+YZ4bF3Cofb4C1owIgFrRwYfO8=;
+	b=lEI5CBPiBZ9dSIIVVCArr2FGCdAOTREaBYi2yvWRU76DgSVgyDobXZ7U0J9PFSwl9x
+	uQIl2o4ZAAuU/2bpGYHsndZ2wS/XDyJ6Zez2BcUzD4VkZmURyN56YTJCPjclzs70PtNo
+	7C+nZdqNlKSDU09odN1jX9MublZ7XQtXO87dZumGUt+eI1SjBScNOXo4R4lE3+AEzDXs
+	bPlBhw24Viqe1DmqGY8O8jKQO0nwA3jHAF9PFG3dFv2T9wkecE3MX5ppsNpA8YnoI7Ca
+	vQYGMzOplVSmFiqoSKwnYUwDrUsnMC/VlBAoVh9Jr9gOTcfpaAeOoeJ4u52T3lJlPGYa
+	1psQ==
+X-Gm-Message-State: APjAAAXzePrH4fOn73TGOLY0o1cguQsWes2mOmuLBjCvU3VFuYOAlES5
+	JYRfiZHG+ueReGy9Fvgpq1Ja44+H11PswJtbq1A=
+X-Google-Smtp-Source: APXvYqweFDAieWOoZofkKhXxrCsh6QlyTfVQemoGpHc+XguhSmFZ/DjQyfd4LcCJXdSuKJw8anq00idodrzHk/xYJss=
+X-Received: by 2002:a17:906:a59:: with SMTP id
+	x25mr28386726ejf.293.1560363811712; 
+	Wed, 12 Jun 2019 11:23:31 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190606065308.23766-1-pascal.bach@siemens.com>
+	<20190611153848.30239-1-pascal.bach@siemens.com>
+	<20190611153848.30239-3-pascal.bach@siemens.com>
+In-Reply-To: <20190611153848.30239-3-pascal.bach@siemens.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 12 Jun 2019 20:23:23 +0200
+Message-ID: <CA+chaQeChtWCd3nnzMxy9OO0xbiwaPyM7kG=nf2JnnbcNeY3TQ@mail.gmail.com>
+To: Pascal Bach <pascal.bach@siemens.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCHv3 2/2] protobuf-c: add patch for protobuf 3 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +57,193 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2019 17:31:51 -0000
+X-List-Received-Date: Wed, 12 Jun 2019 18:23:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- meta-oe/recipes-support/nano/{nano_4.1.bb => nano_4.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/nano/{nano_4.1.bb => nano_4.2.bb} (79%)
+It's not caused by this change, but if you're using protobuf-c aren't you
+seeing random build failures due to race-condition between generated
+test-full.pb.h and cxx-generate-packed-data.cc ?
 
-diff --git a/meta-oe/recipes-support/nano/nano_4.1.bb b/meta-oe/recipes-support/nano/nano_4.2.bb
-similarity index 79%
-rename from meta-oe/recipes-support/nano/nano_4.1.bb
-rename to meta-oe/recipes-support/nano/nano_4.2.bb
-index 1fe36cdb0..19a8b4782 100644
---- a/meta-oe/recipes-support/nano/nano_4.1.bb
-+++ b/meta-oe/recipes-support/nano/nano_4.2.bb
-@@ -12,8 +12,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
- PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
- 
- SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
--SRC_URI[md5sum] = "235eaf7d27db3c3679b2054361ff6181"
--SRC_URI[sha256sum] = "86bde596a038d6fde619b49d785c0ebf0b3eaa7001a39dbe9316bd5392d221d0"
-+SRC_URI[md5sum] = "9ef42650960fa71671dc5318841a27a9"
-+SRC_URI[sha256sum] = "1143defce62e391b241252ffdb6e5c1ded56cfe26d46ee81b796abe0ccc45df9"
- 
- inherit autotools gettext pkgconfig
- 
--- 
-2.17.1
+I've rebuilt protobuf-c-native 100 times in 32 core system and got 4 failed
+builds, each with slightly different errors (only first 5 shown for each):
 
+BUILD-40/work/x86_64-linux/protobuf-c-native/1.3.1+gitAUTOINC+269771b4b4-r0=
+/temp/log.do_compile
+../git/t/generated-code2/cxx-generate-packed-data.cc:28:17: error: =E2=80=
+=98foo=E2=80=99 is
+not a namespace-name
+../git/t/generated-code2/cxx-generate-packed-data.cc:28:20: error: expected
+namespace-name before =E2=80=98;=E2=80=99 token
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+
+BUILD-76/work/x86_64-linux/protobuf-c-native/1.3.1+gitAUTOINC+269771b4b4-r0=
+/temp/log.do_compile
+./t/test-full.pb.h:4:0: error: unterminated #ifndef
+/usr/include/inttypes.h:266:1: error: expected initializer before =E2=80=98=
+extern=E2=80=99
+../git/t/generated-code2/cxx-generate-packed-data.cc:1169:1: error:
+expected =E2=80=98}=E2=80=99 at end of input
+
+BUILD-85/work/x86_64-linux/protobuf-c-native/1.3.1+gitAUTOINC+269771b4b4-r0=
+/temp/log.do_compile
+./t/test-full.pb.h:4:0: error: unterminated #ifndef
+/usr/include/inttypes.h:266:1: error: expected =E2=80=98)=E2=80=99 before =
+=E2=80=98extern=E2=80=99
+../git/t/generated-code2/cxx-generate-packed-data.cc:42:1: error: a
+function-definition is not allowed here before =E2=80=98{=E2=80=99 token
+../git/t/generated-code2/cxx-generate-packed-data.cc:64:1: error: a
+function-definition is not allowed here before =E2=80=98{=E2=80=99 token
+../git/t/generated-code2/cxx-generate-packed-data.cc:70:1: error: a
+function-definition is not allowed here before =E2=80=98{=E2=80=99 token
+
+BUILD-86/work/x86_64-linux/protobuf-c-native/1.3.1+gitAUTOINC+269771b4b4-r0=
+/temp/log.do_compile
+./t/test-full.pb.h:4:0: error: unterminated #ifndef
+./t/test-full.pb.h:21888:15: error: =E2=80=98s=E2=80=99 in namespace =E2=80=
+=98std=E2=80=99 does not name a
+type
+../git/t/generated-code2/cxx-generate-packed-data.cc:1169:1: error:
+expected =E2=80=98}=E2=80=99 at end of input
+
+It was supposed to be fixed with;
+https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee38eb5f1=
+f11251b07239c
+but the fix either doesn't work at all or is actually causing this (I
+haven't seen these failures with older protobuf-c-native).
+
+Maybe we should switch from autotools to CMake when building protobuf-c.
+
+There is also PR with meson support:
+https://github.com/protobuf-c/protobuf-c/pull/340
+
+If you're not really interested in protobuf-c-native then you can ignore
+this, it's not caused by your change - I wasn't trying to hijack this
+thread and block your change.
+
+Cheers,
+
+On Tue, Jun 11, 2019 at 5:39 PM Pascal Bach <pascal.bach@siemens.com> wrote=
+:
+
+> There is no release yet of protobuf-c that is compatible with protobuf 3.
+> Master is already patched so this is just a straight backport of this
+> patch.
+>
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+> ---
+>  .../protobuf-c/protobuf3-compatibility.patch       | 55
+> ++++++++++++++++++++++
+>  .../recipes-devtools/protobuf/protobuf-c_1.3.1.bb  |  4 +-
+>  2 files changed, 58 insertions(+), 1 deletion(-)
+>  create mode 100644
+> meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patc=
+h
+>
+> diff --git
+> a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.pa=
+tch
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.pa=
+tch
+> new file mode 100644
+> index 000000000..35914952d
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.pa=
+tch
+> @@ -0,0 +1,55 @@
+> +From 7456d1621223d425b8a3fd74e435a79c046169fb Mon Sep 17 00:00:00 2001
+> +From: Robert Edmonds <edmonds@users.noreply.github.com>
+> +Date: Wed, 10 Apr 2019 20:47:48 -0400
+> +Subject: [PATCH] t/generated-code2/cxx-generate-packed-data.cc: Fix buil=
+d
+> + failure on newer protobuf
+> +
+> + Upstream-Status: Backport [
+> https://github.com/protobuf-c/protobuf-c/pull/369]
+> +
+> +google::protobuf::Message::Reflection has been removed in newer versions
+> +of protobuf. The replacement is google::protobuf::Reflection.
+> +
+> +protobuf in commit 779f61c6a3ce02a119e28e802f229e61b69b9046 ("Integrate
+> +recent changes from google3.", from August 2008) changed the following
+> +in message.h:
+> +
+> +    @@ -336,7 +337,8 @@ class LIBPROTOBUF_EXPORT Message {
+> +
+> +       // Introspection
+> ---------------------------------------------------
+> +
+> +    -  class Reflection;  // Defined below.
+> +    +  // Typedef for backwards-compatibility.
+> +    +  typedef google::protobuf::Reflection Reflection;
+> +
+> +The "typedef for backwards-compatibility" apparently lasted ten years
+> +until protobuf commit 6bbe197e9c1b6fc38cbdc45e3bf83fa7ced792a3
+> +("Down-integrate from google3.", from August 2018) which finally removed
+> +the typedef:
+> +
+> +    @@ -327,8 +344,6 @@ class LIBPROTOBUF_EXPORT Message : public
+> MessageLite {
+> +
+> +       // Introspection
+> ---------------------------------------------------
+> +
+> +    -  // Typedef for backwards-compatibility.
+> +    -  typedef google::protobuf::Reflection Reflection;
+> +
+> +This commit updates the only use of this typedef (in the test suite) to
+> +directly refer to the replacement, google::protobuf::Reflection. This
+> +fixes the build failure in the test suite.
+> +---
+> + t/generated-code2/cxx-generate-packed-data.cc | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/t/generated-code2/cxx-generate-packed-data.cc
+> b/t/generated-code2/cxx-generate-packed-data.cc
+> +index 4fd3e25..0865d2e 100644
+> +--- a/t/generated-code2/cxx-generate-packed-data.cc
+> ++++ b/t/generated-code2/cxx-generate-packed-data.cc
+> +@@ -998,7 +998,7 @@ static void dump_test_packed_repeated_enum (void)
+> + static void dump_test_unknown_fields (void)
+> + {
+> +   EmptyMess mess;
+> +-  const google::protobuf::Message::Reflection *reflection =3D
+> mess.GetReflection();
+> ++  const google::protobuf::Reflection *reflection =3D mess.GetReflection=
+();
+> +   google::protobuf::UnknownFieldSet *fs =3D
+> reflection->MutableUnknownFields(&mess);
+> +
+> + #if GOOGLE_PROTOBUF_VERSION >=3D 2001000
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> index 7ef030092..1d1782306 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> @@ -15,7 +15,9 @@ DEPENDS =3D "protobuf-native protobuf"
+>  PV .=3D "+git${SRCPV}"
+>  SRCREV =3D "269771b4b45d3aba04e59569f53600003db8d9ff"
+>
+> -SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git"
+> +SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
+> +           file://protobuf3-compatibility.patch \
+> +          "
+>
+>  S =3D "${WORKDIR}/git"
+>
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
