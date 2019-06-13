@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A644A7E6E8
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 6087E7E6E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jun 2019 16:26:44 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id n4so21418847wrw.13
+	Thu, 13 Jun 2019 16:29:31 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id x4so18817606wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jun 2019 09:26:46 -0700 (PDT)
+	Thu, 13 Jun 2019 09:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6zYS3FE+I10bAONUpGA5Y/kItwB2RQkA6rX1kLh2RNk=;
-	b=Av7/8jJyNgWgxwGKdkSWKOLAsZfpaeuexQyavW06q3h9RTh+wkcbD5YJyyJUOgQyau
-	vE5OHGGhnpu9bj7QW8hWWAjpDZwbE84oTQ/XdtT4G0bTdcjdryOsDnEauVS9X0k3pEBN
-	Pffm5VB6pX3CCy5I9tSHhGd+YlCoirU5FeZc1wP+RAPSwNcQKVjjAjIwmvh7/n27AsRF
-	w+rIB2+HH7qWVilxPQNZ/GMnHZ1jDP6qw6dBKoUiJkLwiuD0IC8tohn3pFPNcCMmgr1I
-	WZciO9RzfPDdEGORsrk2ytlWFvlNrLxaXJXuuZsSZ3uuv4/Wyg6Pr7L+3Ret7E/km94g
-	Txzw==
+	bh=ryQ+53ahS/zq8G3FUQ/DitDG0OcbabBmxKdiB79xECE=;
+	b=huEG21nP51AgxkOwWpB49yVj/+lvG/ThQTXTv8Mif7p1hi619pYN2HcnJ2qMXsIepS
+	bCJLWZvsCqNtTj1gKY/M3lKl94NgdEwCYCeMUHvpXaTmO0phrTzpvAShwpmnFqznhQvH
+	qTJ+tIJoW5hX0kcYQEsl5oydoweuTBSof1Gj5GZJqLSMKnMZkpVBrH/vWuF4wOAQHSzL
+	jxUYQImrJtYxxQrjPnb0Th4NetH0n/5O29tjU/Ithdh1CaU/6oiogKUcdSIZKoZAM8tP
+	zohPY8v0mb0dF6OYdFLIBle8zbD2swmLxqV3yIHYqSwdH04QI51P3Kez/03RS+G2I1qV
+	SPUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=6zYS3FE+I10bAONUpGA5Y/kItwB2RQkA6rX1kLh2RNk=;
-	b=Jy7EPEbGW3eB6cD0EovvLApUmTKmKsFT05VjpJBW8yB3GFuo0TATHEI4NmwhrCTvwO
-	T/zBDhVqrv/pwSVXQDdBMSWrZB6JJL/m1zxY4CPKpjVnPzWHgZO1h3uOD1Lu0YNyQJ1N
-	icCIo3LflM6j8FbEImYZdv4eUqch+pmz9PfV/cr69cdQSfCaSmAhIcTvvhOvi3X4GPFJ
-	8yoC2y5KuAgVzBOWQFwo2vix7S8FoAxDBaB+gI0vXa5YY8AN4KieZNroybpz0Mr+Buc5
-	FhOGj0e9QOsbbZMweEzuxgvhVjtAjNkOquFPzQ0inylxNo6sjRQhDGhhX3cdqjK755/k
-	JuKg==
-X-Gm-Message-State: APjAAAWAUCtYUDPpHEaSRepl1LSvbTEbZNaJhKZunrp/rskknCooUjuK
-	e+ka/hdU1j0WjAlRee4eg2ZA8vTX
-X-Google-Smtp-Source: APXvYqy0psaraiiev9RHgkx5JFgU1sJQ2j7rOGbH8Qs3XLbYOSvdWimLiTAVVTgIHUj0f81NpglZoQ==
-X-Received: by 2002:adf:db02:: with SMTP id s2mr24463310wri.326.1560443204485; 
-	Thu, 13 Jun 2019 09:26:44 -0700 (PDT)
+	bh=ryQ+53ahS/zq8G3FUQ/DitDG0OcbabBmxKdiB79xECE=;
+	b=CxUO9gYG4ErKte2SdXlLcpwrC1nIG4vc11h2Ad8+D33947HD9hYSv0Hyx+NydzO3pO
+	Rh9EN7zSX95DTApEq0/j4kpoYqlBDfH6c8wQsAWJs1kW8bn1jkYzBt30C2mLxzikiiNz
+	xzeQiFs3HmMJ+VDoOskaHTd4AtC/8mgi2CAEDDJkaq+CIJSjZ58TlgkR+n1UX6XSTip2
+	klTfEALqzSIExPMO//yG7WxJmIem5TSzYaVfgJl/MH3sQzY1maaxKyLOe886vDFdtI+q
+	c7EVzMngsKTaBUvnx2Z68feDO8YGC+4HIsKdQrgArxXfpLRmhxnIBdhUbTcpQq7czNAj
+	CJNA==
+X-Gm-Message-State: APjAAAW09piDKnOx7PJI67kRegvg4La4fhplh/WRQCRwrdHiMakycmnE
+	/CBd7f+Ys5kw2Xss9PTaCQ2px2xU
+X-Google-Smtp-Source: APXvYqynxSpzgXXUwuVnAbXTiYMvdgWBLOFxSTppblINnaqvBbUsVrZuPFktOGn1x7Ntza11bNpWHA==
+X-Received: by 2002:adf:a18a:: with SMTP id u10mr38076661wru.351.1560443371783;
+	Thu, 13 Jun 2019 09:29:31 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id z5sm181912wrv.60.2019.06.13.09.26.43
+	by smtp.gmail.com with ESMTPSA id t63sm493363wmt.6.2019.06.13.09.29.31
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 13 Jun 2019 09:26:43 -0700 (PDT)
+	Thu, 13 Jun 2019 09:29:31 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jun 2019 16:26:44 +0000
-Message-Id: <20190613162644.877-2-Martin.Jansa@gmail.com>
+Date: Thu, 13 Jun 2019 16:29:34 +0000
+Message-Id: <20190613162934.1394-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190613162644.877-1-Martin.Jansa@gmail.com>
-References: <20190613162644.877-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] open-vm-tools: import gcc9 fixes from fedora
+In-Reply-To: <d053ceef-cf1b-01da-5805-e02d5effecc1@windriver.com>
+References: <d053ceef-cf1b-01da-5805-e02d5effecc1@windriver.com>
+Subject: [meta-networking][PATCHv2] spice: fix compile errors on 32bit system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,1324 +57,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jun 2019 16:26:45 -0000
+X-List-Received-Date: Thu, 13 Jun 2019 16:29:31 -0000
 
-* fixes:
-  ../../../git/open-vm-tools/lib/hgfsServer/hgfsServer.c: In function 'HgfsServerRead':
-  ../../../git/open-vm-tools/lib/hgfsServer/hgfsServer.c:6541:43: error: taking address of packed member of 'struct HgfsReplyReadV3' may result in an unaligned pointer value [-Werror=address-of-packed-member]
-   6541 |                                           &reply->actualSize);
-        |                                           ^~~~~~~~~~~~~~~~~~
-  ../../../git/open-vm-tools/lib/hgfsServer/hgfsServer.c:6562:56: error: taking address of packed member of 'struct HgfsReplyRead' may result in an unaligned pointer value [-Werror=address-of-packed-member]
-   6562 |                                        reply->payload, &reply->actualSize);
-        |                                                        ^~~~~~~~~~~~~~~~~~
-  cc1: all warnings being treated as errors
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
 
+There are folowing compile errors on Linux 32bit system:
+
+red-channel.c:207:73: error: format '%x' expects argument of type
+'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
+|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
+                                ~~~~~~~~~~~~~~~~~~~~~^
+                        self->priv->thread_id);
+                ~~~~~~~~~~~~~~~~~~~~~^
+
+On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
+'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
+not '%x'.
+
+So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
+And others files modification are similar to G_GSIZE_MODIFIER.
+
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../0014-Fix-new-warnings-from-gcc9.patch     | 1281 +++++++++++++++++
- .../open-vm-tools/open-vm-tools_10.3.5.bb     |    1 +
- 2 files changed, 1282 insertions(+)
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0014-Fix-new-warnings-from-gcc9.patch
 
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0014-Fix-new-warnings-from-gcc9.patch b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0014-Fix-new-warnings-from-gcc9.patch
+v2: fixed Upstream-Status
+
+---
+ ...compile-errors-on-Linux-32bit-system.patch | 96 +++++++++++++++++++
+ .../recipes-support/spice/spice_git.bb        |  1 +
+ 2 files changed, 97 insertions(+)
+ create mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+
+diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
 new file mode 100644
-index 0000000000..b5ccffd141
+index 0000000000..d04bee95fa
 --- /dev/null
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0014-Fix-new-warnings-from-gcc9.patch
-@@ -0,0 +1,1281 @@
-+From af9eca8689c97ea8e792902b458a31608286655e Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@lge.com>
-+Date: Thu, 13 Jun 2019 16:01:03 +0000
-+Subject: [PATCH] Fix new warnings from gcc9
++++ b/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+@@ -0,0 +1,96 @@
++From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
++From: "Hongzhi.Song" <hongzhi.song@windriver.com>
++Date: Tue, 4 Jun 2019 03:58:17 -0400
++Subject: [PATCH] Fix compile errors on Linux 32bit system
 +
-+Imported from Fedora:
-+https://src.fedoraproject.org/rpms/open-vm-tools/raw/master/f/gcc9-warnings.patch
++There are folowing compile errors on Linux 32bit system:
 +
-+Upstream bug:
-+https://github.com/vmware/open-vm-tools/issues/330
++red-channel.c:207:73: error: format '%x' expects argument of type
++'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=format=]
++|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
++                                ~~~~~~~~~~~~~~~~~~~~~^
++                        self->priv->thread_id);
++                ~~~~~~~~~~~~~~~~~~~~~^
 +
-+Upstream-Status: Pending
++On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
++'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
++not '%x'.
++
++So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
++And others files modification are similar to G_GSIZE_MODIFIER.
++
++Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 +---
-+ open-vm-tools/hgfsmounter/hgfsmounter.c   |  14 +-
-+ open-vm-tools/lib/hgfsServer/hgfsServer.c |  24 ++-
-+ open-vm-tools/vmhgfs-fuse/dir.c           | 175 ++++++++---------
-+ open-vm-tools/vmhgfs-fuse/file.c          | 217 +++++++++++++---------
-+ open-vm-tools/vmhgfs-fuse/filesystem.c    |  46 ++---
-+ open-vm-tools/vmhgfs-fuse/fsutil.c        |  63 ++++---
-+ open-vm-tools/vmhgfs-fuse/link.c          | 125 +++++++------
-+ 7 files changed, 367 insertions(+), 297 deletions(-)
++Upstream-Status: Submitted [https://lists.freedesktop.org/archives/spice-devel/2019-June/049285.html]
 +
-+diff --git a/open-vm-tools/hgfsmounter/hgfsmounter.c b/open-vm-tools/hgfsmounter/hgfsmounter.c
-+index 0921b700..3f6798dc 100644
-+--- a/open-vm-tools/hgfsmounter/hgfsmounter.c
-++++ b/open-vm-tools/hgfsmounter/hgfsmounter.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2006-2017 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2006-2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -514,11 +514,13 @@ ParseFmask(const char *option,         // IN:  option string along with value
-+            HgfsMountInfo *mountInfo,   // OUT: mount data
-+            int *flags)                 // OUT: mount flags
++ server/red-channel.c    | 6 +++---
++ server/red-client.c     | 8 ++++----
++ server/red-replay-qxl.c | 2 +-
++ 3 files changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/server/red-channel.c b/server/red-channel.c
++index f81142d..6a03ec2 100644
++--- a/server/red-channel.c
+++++ b/server/red-channel.c
++@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
 + {
-++   unsigned short fmask = 0;
-+    ASSERT(option);
-+    ASSERT(mountInfo);
-+ 
-+-   if (ParseMask(option, &mountInfo->fmask)) {
-+-      LOG("Setting mount fmask to %o\n", mountInfo->fmask);
-++   if (ParseMask(option, &fmask)) {
-++      LOG("Setting mount fmask to %o\n", fmask);
-++      mountInfo->fmask = fmask;
-+       return TRUE;
-+    }
-+ 
-+@@ -548,11 +550,13 @@ ParseDmask(const char *option,         // IN:  option string along with value
-+            HgfsMountInfo *mountInfo,   // OUT: mount data
-+            int *flags)                 // OUT: mount flags
-+ {
-++   unsigned short dmask = 0;
-+    ASSERT(option);
-+    ASSERT(mountInfo);
-+ 
-+-   if (ParseMask(option, &mountInfo->dmask)) {
-+-      LOG("Setting mount dmask to %o\n", mountInfo->dmask);
-++   if (ParseMask(option, &dmask)) {
-++      LOG("Setting mount dmask to %o\n", dmask);
-++      mountInfo->dmask = dmask;
-+       return TRUE;
-+    }
-+ 
-+diff --git a/open-vm-tools/lib/hgfsServer/hgfsServer.c b/open-vm-tools/lib/hgfsServer/hgfsServer.c
-+index 740c4fed..422383cd 100644
-+--- a/open-vm-tools/lib/hgfsServer/hgfsServer.c
-++++ b/open-vm-tools/lib/hgfsServer/hgfsServer.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 1998-2018 VMware, Inc. All rights reserved.
-++ * Copyright (C) 1998-2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -159,7 +159,7 @@ struct HgfsTransportSessionInfo {
-+    HgfsServerChannelData channelCapabilities;
-+ };
-+ 
-+-/* The input request paramaters object. */
-++/* The input request parameters object. */
-+ typedef struct HgfsInputParam {
-+    const void *request;          /* Hgfs header followed by operation request */
-+    size_t requestSize;           /* Size of Hgfs header and operation request */
-+@@ -2682,8 +2682,8 @@ HgfsSearchHandle2Search(HgfsHandle handle,         // IN: handle
-+  *    None
-+  *
-+  * Side effects:
-+- *    If there isnt enough memory to accomodate the new names, those file nodes
-+- *    that couldnt be updated are deleted.
-++ *    If there isn't enough memory to accommodate the new names, those file nodes
-++ *    that couldn't be updated are deleted.
-+  *
-+  *-----------------------------------------------------------------------------
-+  */
-+@@ -3399,7 +3399,7 @@ HgfsServerSessionReceive(HgfsPacket *packet,      // IN: Hgfs Packet
-+ 
-+    /* Send error if we fail to process the op. */
-+    if (HGFS_ERROR_SUCCESS != status) {
-+-      LOG(4, ("Error %d occured parsing the packet\n", (uint32)status));
-++      LOG(4, ("Error %d occurred parsing the packet\n", (uint32)status));
-+       HgfsServerCompleteRequest(status, 0, input);
-+    }
-+ }
-+@@ -4131,7 +4131,7 @@ HgfsServerSetSessionCapability(HgfsOp op,                  // IN: operation code
-+          result = TRUE;
-+       }
-+    }
-+-   LOG(4, ("%s: Setting capabilitiy flags %x for op code %d %s\n",
-++   LOG(4, ("%s: Setting capability flags %x for op code %d %s\n",
-+            __FUNCTION__, flags, op, result ? "succeeded" : "failed"));
-+ 
-+    return result;
-+@@ -4143,7 +4143,7 @@ HgfsServerSetSessionCapability(HgfsOp op,                  // IN: operation code
-+  *
-+  * HgfsServerResEnumInit --
-+  *
-+- *    Initialize an enumeration of all exisitng resources.
-++ *    Initialize an enumeration of all existing resources.
-+  *
-+  * Results:
-+  *    The enumeration state object.
-+@@ -4239,7 +4239,7 @@ HgfsServerResEnumExit(void *enumState)           // IN/OUT: enumeration state
-+  *
-+  * HgfsServerEnumerateSharedFolders --
-+  *
-+- *    Enumerates all exisitng shared folders and registers shared folders with
-++ *    Enumerates all existing shared folders and registers shared folders with
-+  *    directory notification package.
-+  *
-+  * Results:
-+@@ -6536,11 +6536,13 @@ HgfsServerRead(HgfsInputParam *input)  // IN: Input params
-+             payload = &reply->payload[0];
-+          }
-+          if (payload) {
-++            uint32 actualSize = 0;
-+             status = HgfsPlatformReadFile(readFd, input->session, offset,
-+                                           requiredSize, payload,
-+-                                          &reply->actualSize);
-++                                          &actualSize);
-+             if (HGFS_ERROR_SUCCESS == status) {
-+                reply->reserved = 0;
-++               reply->actualSize = actualSize;
-+                replyPayloadSize = sizeof *reply;
-+ 
-+                if (readUseDataBuffer) {
-+@@ -6556,11 +6558,13 @@ HgfsServerRead(HgfsInputParam *input)  // IN: Input params
-+          break;
-+       }
-+    case HGFS_OP_READ: {
-++         uint32 actualSize = 0;
-+          HgfsReplyRead *reply = replyRead;
-+ 
-+          status = HgfsPlatformReadFile(readFd, input->session, offset, requiredSize,
-+-                                       reply->payload, &reply->actualSize);
-++                                       reply->payload, &actualSize);
-+          if (HGFS_ERROR_SUCCESS == status) {
-++            reply->actualSize = actualSize;
-+             replyPayloadSize = sizeof *reply + reply->actualSize;
-+          } else {
-+             LOG(4, ("%s: V1 Failed to read-> %d.\n", __FUNCTION__, status));
-+diff --git a/open-vm-tools/vmhgfs-fuse/dir.c b/open-vm-tools/vmhgfs-fuse/dir.c
-+index 6298a4ea..e71b7afd 100644
-+--- a/open-vm-tools/vmhgfs-fuse/dir.c
-++++ b/open-vm-tools/vmhgfs-fuse/dir.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2013 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2013,2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -54,38 +54,53 @@ HgfsPackDirOpenRequest(const char *path,    // IN: Path of the dir to open
-+                        HgfsOp opUsed,       // IN: Op to be used
-+                        HgfsReq *req)        // IN/OUT: Packet to write into
-+ {
-+-   char *name;
-+-   unsigned int *nameLength = NULL;
-+    size_t reqSize;
-+-   int result;
-+ 
-+    ASSERT(path);
-+    ASSERT(req);
-+    LOG(4, ("Path = %s \n", path));
-+    switch (opUsed) {
-+    case HGFS_OP_SEARCH_OPEN_V3: {
-++      int result;
-+       HgfsRequestSearchOpenV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+-      /* We'll use these later. */
-+-      name = requestV3->dirName.name;
-+-      nameLength = &requestV3->dirName.length;
-+       requestV3->dirName.flags = 0;
-+       requestV3->dirName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       requestV3->dirName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->reserved = 0;
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                requestV3->dirName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed\n"));
-++         return -EINVAL;
-++      }
-++      LOG(4, ("After conversion = %s\n", requestV3->dirName.name));
-++      requestV3->dirName.length = result;
-++      reqSize += result;
-+       break;
-+    }
-+ 
-+    case HGFS_OP_SEARCH_OPEN: {
-++      int result;
-+       HgfsRequestSearchOpen *request;
-+ 
-+       request = (HgfsRequestSearchOpen *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      name = request->dirName.name;
-+-      nameLength = &request->dirName.length;
-+       reqSize = sizeof *request;
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                request->dirName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed\n"));
-++         return -EINVAL;
-++      }
-++      LOG(4, ("After conversion = %s\n", request->dirName.name));
-++      request->dirName.length = result;
-++      reqSize += result;
-+       break;
-+    }
-+ 
-+@@ -94,21 +109,7 @@ HgfsPackDirOpenRequest(const char *path,    // IN: Path of the dir to open
-+       return -EPROTO;
-+    }
-+ 
-+-   /* Convert to CP name. */
-+-
-+-   LOG(4, ("After buildPath = %s\n", path));
-+-   result = CPName_ConvertTo(path,
-+-                             HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-+-                             name);
-+-   if (result < 0) {
-+-      LOG(4, ("CP conversion failed\n"));
-+-      return -EINVAL;
-+-   }
-+-
-+-   LOG(4, ("After conversion = %s\n", name));
-+-
-+-   *nameLength = (uint32) result;
-+-   req->payloadSize = reqSize + result;
-++   req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+@@ -149,7 +150,6 @@ HgfsDirOpen(const char* path,       // IN: Path of dir to open
-+    int result;
-+    HgfsOp opUsed;
-+    HgfsStatus replyStatus;
-+-   HgfsHandle *replySearch;
-+ 
-+    ASSERT(path);
-+    req = HgfsGetNewRequest();
-+@@ -161,16 +161,6 @@ HgfsDirOpen(const char* path,       // IN: Path of dir to open
-+ 
-+ retry:
-+    opUsed = hgfsVersionSearchOpen;
-+-   if (opUsed == HGFS_OP_SEARCH_OPEN_V3) {
-+-      HgfsReplySearchOpenV3 *requestV3 = HgfsGetReplyPayload(req);
-+-
-+-     replySearch = &requestV3->search;
-+-
-+-   } else {
-+-      HgfsReplySearchOpen *request = (HgfsReplySearchOpen *)HGFS_REQ_PAYLOAD(req);
-+-
-+-      replySearch = &request->search;
-+-   }
-+ 
-+    result = HgfsPackDirOpenRequest(path, opUsed, req);
-+    if (result != 0) {
-+@@ -187,8 +177,14 @@ retry:
-+ 
-+       switch (result) {
-+       case 0:
-+-         *handle = *replySearch;
-+-         LOG(6, ("Set handle to %u\n", *replySearch));
-++         if (opUsed == HGFS_OP_SEARCH_OPEN_V3) {
-++            HgfsReplySearchOpenV3 *requestV3 = HgfsGetReplyPayload(req);
-++            *handle = requestV3->search;
-++         } else {
-++            HgfsReplySearchOpen *request = (HgfsReplySearchOpen *)HGFS_REQ_PAYLOAD(req);
-++            *handle = request->search;
-++         }
-++         LOG(6, ("Set handle to %u\n", *handle));
-+          break;
-+       case -EPROTO:
-+          /* Retry with older version(s). Set globally. */
-+@@ -626,25 +622,30 @@ HgfsPackCreateDirRequest(const char *path,
-+                          HgfsOp opUsed,         // IN: Op to be used.
-+                          HgfsReq *req)          // IN/OUT: Packet to write into
-+ {
-+-   char *fileName = NULL;
-+-   uint32 *fileNameLength;
-+    size_t reqSize;
-+-   int result;
-++
-+ 
-+    ASSERT(req);
-+ 
-+    switch (opUsed) {
-+    case HGFS_OP_CREATE_DIR_V3: {
-++      int result;
-+       HgfsRequestCreateDirV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-+-      /* We'll use these later. */
-+-      fileName = requestV3->fileName.name;
-+-      fileNameLength = &requestV3->fileName.length;
-+       requestV3->fileName.flags = 0;
-+       requestV3->fileName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->fileName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+-
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                requestV3->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV3->fileName.length = result;
-++      reqSize += result;
-+       requestV3->mask = HGFS_CREATE_DIR_MASK;
-+ 
-+       /* Set permissions. */
-+@@ -656,15 +657,23 @@ HgfsPackCreateDirRequest(const char *path,
-+       break;
-+    }
-+    case HGFS_OP_CREATE_DIR_V2: {
-++      int result;
-+       HgfsRequestCreateDirV2 *requestV2;
-+ 
-+       requestV2 = (HgfsRequestCreateDirV2 *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      fileName = requestV2->fileName.name;
-+-      fileNameLength = &requestV2->fileName.length;
-+       reqSize = sizeof *requestV2;
-+ 
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                requestV2->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV2->fileName.length = result;
-++      reqSize += result;
-+       requestV2->mask = HGFS_CREATE_DIR_MASK;
-+ 
-+       /* Set permissions. */
-+@@ -675,15 +684,22 @@ HgfsPackCreateDirRequest(const char *path,
-+       break;
-+    }
-+    case HGFS_OP_CREATE_DIR: {
-++      int result;
-+       HgfsRequestCreateDir *request;
-+ 
-+       request = (HgfsRequestCreateDir *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      fileName = request->fileName.name;
-+-      fileNameLength = &request->fileName.length;
-+       reqSize = sizeof *request;
-+-
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      request->fileName.length = result;
-++      reqSize += result;
-+       /* Set permissions. */
-+       request->permissions = (permsMode & S_IRWXU) >> 6;
-+       break;
-+@@ -693,18 +709,7 @@ HgfsPackCreateDirRequest(const char *path,
-+       return -EPROTO;
-+    }
-+ 
-+-
-+-   /* Convert to CP name. */
-+-   result = CPName_ConvertTo(path,
-+-                             HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-+-                             fileName);
-+-   if (result < 0) {
-+-      LOG(4, ("CP conversion failed.\n"));
-+-      return -EINVAL;
-+-   }
-+-
-+-   *fileNameLength = result;
-+-   req->payloadSize = reqSize + result;
-++   req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+@@ -827,8 +832,6 @@ HgfsDelete(const char* path,       // IN: Path to file
-+    HgfsReq *req = NULL;
-+    int result = 0;
-+    HgfsStatus replyStatus;
-+-   char *fileName = NULL;
-+-   uint32 *fileNameLength;
-+    uint32 reqSize;
-+    HgfsOp opUsed;
-+    HgfsAttrInfo newAttr = {0};
-+@@ -862,8 +865,17 @@ HgfsDelete(const char* path,       // IN: Path to file
-+ 
-+       reqSize = sizeof(*request) + HgfsGetRequestHeaderSize();
-+       request->hints = 0;
-+-      fileName = request->fileName.name;
-+-      fileNameLength = &request->fileName.length;
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-++      request->fileName.length = result;
-++      reqSize += result;
-+       request->fileName.fid = HGFS_INVALID_HANDLE;
-+       request->fileName.flags = 0;
-+       request->fileName.caseType = HGFS_FILE_NAME_DEFAULT_CASE;
-+@@ -874,24 +886,21 @@ HgfsDelete(const char* path,       // IN: Path to file
-+ 
-+       request = (HgfsRequestDelete *)(HGFS_REQ_PAYLOAD(req));
-+       /* Fill out the request packet. */
-+-      fileName = request->fileName.name;
-+-      fileNameLength = &request->fileName.length;
-+       reqSize = sizeof *request;
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-++      request->fileName.length = result;
-++      reqSize += result;
-+    }
-+ 
-+-
-+-   /* Convert to CP name. */
-+-   result = CPName_ConvertTo(path,
-+-                             HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-+-                             fileName);
-+-   if (result < 0) {
-+-      LOG(4, ("CP conversion failed.\n"));
-+-      result = -EINVAL;
-+-      goto out;
-+-   }
-+-
-+-   *fileNameLength = result;
-+-   req->payloadSize = reqSize + result;
-++   req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+diff --git a/open-vm-tools/vmhgfs-fuse/file.c b/open-vm-tools/vmhgfs-fuse/file.c
-+index 389ebba8..0b6c48bc 100644
-+--- a/open-vm-tools/vmhgfs-fuse/file.c
-++++ b/open-vm-tools/vmhgfs-fuse/file.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2013,2017 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2013,2018-2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -66,10 +66,7 @@ HgfsPackOpenRequest(const char *path,          // IN: Path to file
-+                     HgfsOp opUsed,             // IN: Op to use
-+                     HgfsReq *req)              // IN/OUT: Packet to write into
-+ {
-+-   char *name;
-+-   uint32 *nameLength;
-+    size_t reqSize;
-+-   int result;
-+    int openMode, openFlags;
-+ 
-+    ASSERT(path);
-+@@ -88,14 +85,22 @@ HgfsPackOpenRequest(const char *path,          // IN: Path to file
-+ 
-+    switch (opUsed) {
-+     case HGFS_OP_OPEN_V3: {
-++      int result;
-+       HgfsRequestOpenV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-+ 
-+-      /* We'll use these later. */
-+-      name = requestV3->fileName.name;
-+-      nameLength = &requestV3->fileName.length;
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                requestV3->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-+ 
-++      requestV3->fileName.length = result;
-++      reqSize += result;
-+       /* Linux clients need case-sensitive lookups. */
-+       requestV3->fileName.flags = 0;
-+       requestV3->fileName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+@@ -122,15 +127,24 @@ HgfsPackOpenRequest(const char *path,          // IN: Path to file
-+    }
-+ 
-+    case HGFS_OP_OPEN_V2: {
-++      int result;
-+       HgfsRequestOpenV2 *requestV2;
-+ 
-+       requestV2 = (HgfsRequestOpenV2 *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      name = requestV2->fileName.name;
-+-      nameLength = &requestV2->fileName.length;
-+       reqSize = sizeof *requestV2;
-+ 
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                requestV2->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++
-++      requestV2->fileName.length = result;
-++      reqSize += result;
-+       requestV2->mask = mask;
-+       requestV2->mode = openMode;
-+       requestV2->flags = openFlags;
-+@@ -148,14 +162,23 @@ HgfsPackOpenRequest(const char *path,          // IN: Path to file
-+       break;
-+    }
-+    case HGFS_OP_OPEN: {
-++      int result;
-+       HgfsRequestOpen *request;
-+ 
-+       request = (HgfsRequestOpen *)(HGFS_REQ_PAYLOAD(req));
-+-      /* We'll use these later. */
-+-      name = request->fileName.name;
-+-      nameLength = &request->fileName.length;
-+       reqSize = sizeof *request;
-+ 
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++
-++      request->fileName.length = result;
-++      reqSize += result;
-+       request->mode = openMode;
-+       request->flags = openFlags;
-+ 
-+@@ -168,18 +191,7 @@ HgfsPackOpenRequest(const char *path,          // IN: Path to file
-+       return -EPROTO;
-+    }
-+ 
-+-
-+-   /* Convert to CP name. */
-+-   result = CPName_ConvertTo(path,
-+-                             HGFS_LARGE_PACKET_MAX - (reqSize - 1),
-+-                             name);
-+-   if (result < 0) {
-+-      LOG(4, ("CP conversion failed.\n"));
-+-      return -EINVAL;
-+-   }
-+-
-+-   *nameLength = (uint32) result;
-+-   req->payloadSize = reqSize + result;
-++   req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+@@ -915,10 +927,6 @@ int
-+ HgfsRename(const char* from, const char* to)
-+ {
-+    HgfsReq *req = NULL;
-+-   char *oldName;
-+-   char *newName;
-+-   uint32 *oldNameLength;
-+-   uint32 *newNameLength;
-+    int result = 0;
-+    uint32 reqSize;
-+    HgfsOp opUsed;
-+@@ -942,33 +950,41 @@ retry:
-+    if (opUsed == HGFS_OP_RENAME_V3) {
-+       HgfsRequestRenameV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+-      oldName = requestV3->oldName.name;
-+-      oldNameLength = &requestV3->oldName.length;
-+       requestV3->hints = 0;
-+       requestV3->oldName.flags = 0;
-+       requestV3->oldName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->oldName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       requestV3->reserved = 0;
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-++      /* Convert old name to CP format. */
-++      result = CPName_ConvertTo(from,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-++                                requestV3->oldName.name);
-++      if (result < 0) {
-++         LOG(4, ("oldName CP conversion failed\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-++
-++      requestV3->oldName.length = result;
-++      reqSize += result;
-+    } else {
-+       HgfsRequestRename *request = (HgfsRequestRename *)HGFS_REQ_PAYLOAD(req);
-+ 
-+-      oldName = request->oldName.name;
-+-      oldNameLength = &request->oldName.length;
-+       reqSize = sizeof *request;
-+-   }
-+-   /* Convert old name to CP format. */
-+-   result = CPName_ConvertTo(from,
-+-                             HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-+-                             oldName);
-+-   if (result < 0) {
-+-      LOG(4, ("oldName CP conversion failed\n"));
-+-      result = -EINVAL;
-+-      goto out;
-+-   }
-++      /* Convert old name to CP format. */
-++      result = CPName_ConvertTo(from,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize),
-++                                request->oldName.name);
-++      if (result < 0) {
-++         LOG(4, ("oldName CP conversion failed\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-+ 
-+-   *oldNameLength = result;
-+-   reqSize += result;
-++      request->oldName.length = result;
-++      reqSize += result;
-++   }
-+ 
-+    /*
-+     * Build full new name to send to server.
-+@@ -983,8 +999,20 @@ retry:
-+ 
-+       newNameP = (HgfsFileNameV3 *)((char *)&requestV3->oldName +
-+                                     sizeof requestV3->oldName + result);
-+-      newName = newNameP->name;
-+-      newNameLength = &newNameP->length;
-++
-++      LOG(6, ("New name: \"%s\"\n", newNameP->name));
-++
-++      /* Convert new name to CP format. */
-++      result = CPName_ConvertTo(to,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize) - result,
-++                                newNameP->name);
-++      if (result < 0) {
-++         LOG(4, ("newName CP conversion failed\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-++      newNameP->length = result;
-++      reqSize += result;
-+       newNameP->flags = 0;
-+       newNameP->fid = HGFS_INVALID_HANDLE;
-+       newNameP->caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+@@ -993,24 +1021,22 @@ retry:
-+       HgfsFileName *newNameP;
-+       newNameP = (HgfsFileName *)((char *)&request->oldName +
-+                                   sizeof request->oldName + result);
-+-      newName = newNameP->name;
-+-      newNameLength = &newNameP->length;
-+-   }
-+ 
-+-   LOG(6, ("New name: \"%s\"\n", newName));
-++      LOG(6, ("New name: \"%s\"\n", newNameP->name));
-+ 
-+-   /* Convert new name to CP format. */
-+-   result = CPName_ConvertTo(to,
-+-                             HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize) - result,
-+-                             newName);
-+-   if (result < 0) {
-+-      LOG(4, ("newName CP conversion failed\n"));
-+-      result = -EINVAL;
-+-      goto out;
-++      /* Convert new name to CP format. */
-++      result = CPName_ConvertTo(to,
-++                                HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize) - result,
-++                                newNameP->name);
-++      if (result < 0) {
-++         LOG(4, ("newName CP conversion failed\n"));
-++         result = -EINVAL;
-++         goto out;
-++      }
-++      newNameP->length = result;
-++      reqSize += result;
-+    }
-+ 
-+-   *newNameLength = result;
-+-   reqSize += result;
-+    req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+@@ -1068,7 +1094,7 @@ retry:
-+          }
-+          break;
-+       default:
-+-         LOG(4, ("failed with result %d\n", result));
-++         LOG(4, ("Server protocol result %d\n", result));
-+       }
-+       break;
-+    default:
-+@@ -1109,21 +1135,17 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+ {
-+    HgfsAttrV2 *attrV2;
-+    HgfsAttr *attrV1;
-+-   HgfsAttrHint *hints;
-+    HgfsAttrChanges *update;
-+-   char *fileName = NULL;
-+-   uint32 *fileNameLength = NULL;
-+    size_t reqBufferSize;
-+    size_t reqSize;
-+-   int result = 0;
-+    ASSERT(req);
-+ 
-+    switch (opUsed) {
-+    case HGFS_OP_SETATTR_V3: {
-++      int result;
-+       HgfsRequestSetattrV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+       attrV2 = &requestV3->attr;
-+-      hints = &requestV3->hints;
-+ 
-+       /*
-+        * Clear attributes, mask, and hints before touching them.
-+@@ -1131,7 +1153,7 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+        * make sure to zero them all here.
-+        */
-+       memset(attrV2, 0, sizeof *attrV2);
-+-      memset(hints, 0, sizeof *hints);
-++      requestV3->hints = 0;
-+ 
-+       /*
-+        * When possible, issue a setattr using an existing handle. This will
-+@@ -1143,14 +1165,21 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+        * the times also requires write permissions on Windows, so we require it
-+        * here too. Otherwise, any handle will do.
-+        */
-+-      fileName = requestV3->fileName.name;
-+-      fileNameLength = &requestV3->fileName.length;
-+       requestV3->fileName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       requestV3->fileName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->fileName.flags = 0;
-+       requestV3->reserved = 0;
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize);
-++      result = CPName_ConvertTo(path,
-++                                reqBufferSize,
-++                                requestV3->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV3->fileName.length = result;
-++      reqSize += result;
-+ 
-+       attrV2->mask = attr->mask;
-+       if (attr->mask & (HGFS_ATTR_VALID_SPECIAL_PERMS |
-+@@ -1173,22 +1202,22 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+       }
-+       if (attr->mask & HGFS_ATTR_VALID_ACCESS_TIME) {
-+          attrV2->accessTime = attr->accessTime;
-+-         *hints |= HGFS_ATTR_HINT_SET_ACCESS_TIME;
-++         requestV3->hints |= HGFS_ATTR_HINT_SET_ACCESS_TIME;
-+       }
-+       if (attr->mask & HGFS_ATTR_VALID_WRITE_TIME) {
-+          attrV2->writeTime = attr->writeTime;
-+-         *hints |= HGFS_ATTR_HINT_SET_WRITE_TIME;
-++         requestV3->hints |= HGFS_ATTR_HINT_SET_WRITE_TIME;
-+       }
-+ 
-+       break;
-+    }
-+    case HGFS_OP_SETATTR_V2: {
-++      int result;
-+       HgfsRequestSetattrV2 *requestV2;
-+ 
-+       requestV2 = (HgfsRequestSetattrV2 *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+       attrV2 = &requestV2->attr;
-+-      hints = &requestV2->hints;
-+ 
-+       /*
-+        * Clear attributes, mask, and hints before touching them.
-+@@ -1196,13 +1225,19 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+        * make sure to zero them all here.
-+        */
-+       memset(attrV2, 0, sizeof *attrV2);
-+-      memset(hints, 0, sizeof *hints);
-+-
-+-      fileName = requestV2->fileName.name;
-+-      fileNameLength = &requestV2->fileName.length;
-++      requestV2->hints = 0;
-+ 
-+       reqSize = sizeof *requestV2;
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZE(HGFS_LARGE_PACKET_MAX, requestV2);
-++      result = CPName_ConvertTo(path,
-++                                reqBufferSize,
-++                                requestV2->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV2->fileName.length = result;
-++      reqSize += result;
-+ 
-+       if (attr->mask & (HGFS_ATTR_VALID_SPECIAL_PERMS |
-+                           HGFS_ATTR_VALID_OWNER_PERMS |
-+@@ -1224,16 +1259,17 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+       }
-+       if (attr->mask & HGFS_ATTR_VALID_ACCESS_TIME) {
-+          attrV2->accessTime = attr->accessTime;
-+-         *hints |= HGFS_ATTR_HINT_SET_ACCESS_TIME;
-++         requestV2->hints |= HGFS_ATTR_HINT_SET_ACCESS_TIME;
-+       }
-+       if (attr->mask & HGFS_ATTR_VALID_WRITE_TIME) {
-+          attrV2->writeTime = attr->writeTime;
-+-         *hints |= HGFS_ATTR_HINT_SET_WRITE_TIME;
-++         requestV2->hints |= HGFS_ATTR_HINT_SET_WRITE_TIME;
-+       }
-+ 
-+       break;
-+    }
-+    case HGFS_OP_SETATTR: {
-++      int result;
-+       HgfsRequestSetattr *request;
-+ 
-+       request = (HgfsRequestSetattr *)(HGFS_REQ_PAYLOAD(req));
-+@@ -1241,11 +1277,17 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+       attrV1 = &request->attr;
-+       update = &request->update;
-+ 
-+-      /* We'll use these later. */
-+-      fileName = request->fileName.name;
-+-      fileNameLength = &request->fileName.length;
-+       reqSize = sizeof *request;
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZE(HGFS_LARGE_PACKET_MAX, request);
-++      result = CPName_ConvertTo(path,
-++                                reqBufferSize,
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      request->fileName.length = result;
-++      reqSize += result;
-+ 
-+       /*
-+        * Clear attributes before touching them.
-+@@ -1284,16 +1326,7 @@ HgfsPackSetattrRequest(const char *path,   // IN:  path to file
-+       return -EPROTO;
-+    }
-+ 
-+-   result = CPName_ConvertTo(path,
-+-                             reqBufferSize,
-+-                             fileName);
-+-      if (result < 0) {
-+-         LOG(4, ("CP conversion failed.\n"));
-+-         return -EINVAL;
-+-   }
-+-
-+-   *fileNameLength = result;
-+-   req->payloadSize = reqSize + result;
-++   req->payloadSize = reqSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+diff --git a/open-vm-tools/vmhgfs-fuse/filesystem.c b/open-vm-tools/vmhgfs-fuse/filesystem.c
-+index fb9d547d..1931a5d2 100644
-+--- a/open-vm-tools/vmhgfs-fuse/filesystem.c
-++++ b/open-vm-tools/vmhgfs-fuse/filesystem.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2013 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2013,2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -123,36 +123,50 @@ HgfsPackQueryVolumeRequest(const char *path,        // IN: File pointer for this
-+                            HgfsOp opUsed,           // IN: Op to be used.
-+                            HgfsReq *req)            // IN/OUT: Packet to write into
-+ {
-+-   char *name;
-+-   uint32 *nameLength;
-+    size_t requestSize;
-+-   int result;
-++
-+ 
-+    ASSERT(req);
-+ 
-+    switch (opUsed) {
-+    case HGFS_OP_QUERY_VOLUME_INFO_V3: {
-++      int result;
-+       HgfsRequestQueryVolumeV3 *requestV3 = HgfsGetRequestPayload(req);
-+ 
-+-      /* We'll use these later. */
-+-      name = requestV3->fileName.name;
-+-      nameLength = &requestV3->fileName.length;
-+       requestV3->fileName.flags = 0;
-+       requestV3->fileName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->fileName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       requestV3->reserved = 0;
-+       requestSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-++                                requestV3->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV3->fileName.length = result;
-++      requestSize += result;
-+       break;
-+    }
-+    case HGFS_OP_QUERY_VOLUME_INFO: {
-++      int result;
-+       HgfsRequestQueryVolume *request;
-+ 
-+       request = (HgfsRequestQueryVolume *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      name = request->fileName.name;
-+-      nameLength = &request->fileName.length;
-+       requestSize = sizeof *request;
-++      /* Convert to CP name. */
-++      result = CPName_ConvertTo(path,
-++                                HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-++                                request->fileName.name);
-++      if (result < 0) {
-++         LOG(4, ("CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      request->fileName.length = result;
-++      requestSize += result;
-+       break;
-+    }
-+    default:
-+@@ -160,17 +174,7 @@ HgfsPackQueryVolumeRequest(const char *path,        // IN: File pointer for this
-+       return -EPROTO;
-+    }
-+ 
-+-   /* Convert to CP name. */
-+-   result = CPName_ConvertTo(path,
-+-                             HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-+-                             name);
-+-   if (result < 0) {
-+-      LOG(4, ("CP conversion failed.\n"));
-+-      return -EINVAL;
-+-   }
-+-
-+-   *nameLength = (uint32) result;
-+-   req->payloadSize = requestSize + result;
-++   req->payloadSize = requestSize;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+    HgfsPackHeader(req, opUsed);
-+diff --git a/open-vm-tools/vmhgfs-fuse/fsutil.c b/open-vm-tools/vmhgfs-fuse/fsutil.c
-+index 042c223c..af85c405 100644
-+--- a/open-vm-tools/vmhgfs-fuse/fsutil.c
-++++ b/open-vm-tools/vmhgfs-fuse/fsutil.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2013 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2013,2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -189,8 +189,6 @@ HgfsPackGetattrRequest(HgfsReq *req,            // IN/OUT: Request buffer
-+    size_t reqBufferSize;
-+    size_t reqSize;
-+    int result = 0;
-+-   char *fileName = NULL;
-+-   uint32 *fileNameLength = NULL;
-+    ASSERT(attr);
-+    ASSERT(req);
-+    ASSERT(path);
-+@@ -204,8 +202,6 @@ HgfsPackGetattrRequest(HgfsReq *req,            // IN/OUT: Request buffer
-+ 
-+       /* Fill out the request packet. */
-+       requestV3->hints = 0;
-+-      fileName = requestV3->fileName.name;
-+-      fileNameLength = &requestV3->fileName.length;
-+       requestV3->fileName.flags = 0;
-+       requestV3->fileName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->fileName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+@@ -213,6 +209,19 @@ HgfsPackGetattrRequest(HgfsReq *req,            // IN/OUT: Request buffer
-+       requestV3->reserved = 0;
-+       reqSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZET(HGFS_LARGE_PACKET_MAX, reqSize);
-++      if (requestV3->fileName.name != NULL) {
-++         /* Convert to CP name. */
-++         result = CPName_ConvertTo(path,
-++                                   reqBufferSize,
-++                                   requestV3->fileName.name);
-++         LOG(8, ("Converted path %s\n", requestV3->fileName.name));
-++         if (result < 0) {
-++            LOG(8, ("CP conversion failed.\n"));
-++            result = -EINVAL;
-++            goto out;
-++         }
-++         requestV3->fileName.length = result;
-++      }
-+       break;
-+    }
-+ 
-+@@ -223,20 +232,42 @@ HgfsPackGetattrRequest(HgfsReq *req,            // IN/OUT: Request buffer
-+ 
-+       requestV2 = (HgfsRequestGetattrV2 *)(HGFS_REQ_PAYLOAD(req));
-+       requestV2->hints = 0;
-+-      fileName = requestV2->fileName.name;
-+-      fileNameLength = &requestV2->fileName.length;
-+       reqSize = sizeof *requestV2;
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZE(HGFS_LARGE_PACKET_MAX, requestV2);
-++      if (requestV2->fileName.name != NULL) {
-++         /* Convert to CP name. */
-++         result = CPName_ConvertTo(path,
-++                                   reqBufferSize,
-++                                   requestV2->fileName.name);
-++         LOG(8, ("Converted path %s\n", requestV2->fileName.name));
-++         if (result < 0) {
-++            LOG(8, ("CP conversion failed.\n"));
-++            result = -EINVAL;
-++            goto out;
-++         }
-++         requestV2->fileName.length = result;
-++      }
-+       break;
-+    }
-+ 
-+    case HGFS_OP_GETATTR: {
-+       HgfsRequestGetattr *requestV1;
-+       requestV1 = (HgfsRequestGetattr *)(HGFS_REQ_PAYLOAD(req));
-+-      fileName = requestV1->fileName.name;
-+-      fileNameLength = &requestV1->fileName.length;
-+       reqSize = sizeof *requestV1;
-+       reqBufferSize = HGFS_NAME_BUFFER_SIZE(HGFS_LARGE_PACKET_MAX, requestV1);
-++      if (requestV1->fileName.name != NULL) {
-++         /* Convert to CP name. */
-++         result = CPName_ConvertTo(path,
-++                                   reqBufferSize,
-++                                   requestV1->fileName.name);
-++         LOG(8, ("Converted path %s\n", requestV1->fileName.name));
-++         if (result < 0) {
-++            LOG(8, ("CP conversion failed.\n"));
-++            result = -EINVAL;
-++            goto out;
-++         }
-++         requestV1->fileName.length = result;
-++      }
-+       break;
-+    }
-+ 
-+@@ -246,20 +277,6 @@ HgfsPackGetattrRequest(HgfsReq *req,            // IN/OUT: Request buffer
-+       goto out;
-+    }
-+ 
-+-   if (fileName != NULL) {
-+-      /* Convert to CP name. */
-+-      result = CPName_ConvertTo(path,
-+-                                reqBufferSize,
-+-                                fileName);
-+-      LOG(8, ("Converted path %s\n", fileName));
-+-      if (result < 0) {
-+-         LOG(8, ("CP conversion failed.\n"));
-+-         result = -EINVAL;
-+-         goto out;
-+-      }
-+-      *fileNameLength = result;
-+-   }
-+-
-+    req->payloadSize = reqSize + result;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-+diff --git a/open-vm-tools/vmhgfs-fuse/link.c b/open-vm-tools/vmhgfs-fuse/link.c
-+index a00e8446..777eb76e 100644
-+--- a/open-vm-tools/vmhgfs-fuse/link.c
-++++ b/open-vm-tools/vmhgfs-fuse/link.c
-+@@ -1,5 +1,5 @@
-+ /*********************************************************
-+- * Copyright (C) 2013 VMware, Inc. All rights reserved.
-++ * Copyright (C) 2013,2019 VMware, Inc. All rights reserved.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -51,36 +51,81 @@ HgfsPackSymlinkCreateRequest(const char* symlink,     // IN: path of the link
-+ {
-+    HgfsRequestSymlinkCreateV3 *requestV3 = NULL;
-+    HgfsRequestSymlinkCreate *request = NULL;
-+-   char *symlinkName;
-+-   uint32 *symlinkNameLength;
-+-   char *targetName;
-+-   uint32 *targetNameLength;
-+    size_t targetNameBytes;
-+-
-+    size_t requestSize;
-+-   int result;
-++
-++   targetNameBytes = strlen(symname) + 1;
-+ 
-+    switch (opUsed) {
-+    case HGFS_OP_CREATE_SYMLINK_V3: {
-++      int result;
-++      HgfsFileNameV3 *fileNameP;
-+       requestV3 = HgfsGetRequestPayload(req);
-+ 
-+-      /* We'll use these later. */
-+-      symlinkName = requestV3->symlinkName.name;
-+-      symlinkNameLength = &requestV3->symlinkName.length;
-+       requestV3->symlinkName.flags = 0;
-+       requestV3->symlinkName.fid = HGFS_INVALID_HANDLE;
-+       requestV3->symlinkName.caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       requestV3->reserved = 0;
-+       requestSize = sizeof(*requestV3) + HgfsGetRequestHeaderSize();
-++      /* Convert symlink name to CP format. */
-++      result = CPName_ConvertTo(symlink,
-++                                HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-++                                requestV3->symlinkName.name);
-++      if (result < 0) {
-++         LOG(4, ("SymlinkName CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      requestV3->symlinkName.length = result;
-++      requestSize += result;
-++
-++      /* Copy target name into request packet. */
-++      if (targetNameBytes > HGFS_LARGE_PACKET_MAX - (requestSize - 1)) {
-++         LOG(4, ("Target name is too long.\n"));
-++         return -EINVAL;
-++      }
-++
-++      fileNameP = (HgfsFileNameV3 *)((char *)&requestV3->symlinkName +
-++                                     sizeof requestV3->symlinkName + result);
-++      memcpy(fileNameP->name, symname, targetNameBytes);
-++      LOG(6, ("Target name: \"%s\"\n", fileNameP->name));
-++      /* Convert target name to CPName-lite format. */
-++      CPNameLite_ConvertTo(fileNameP->name, targetNameBytes - 1, '/');
-++      fileNameP->length = targetNameBytes - 1;
-++      fileNameP->flags = 0;
-++      fileNameP->fid = HGFS_INVALID_HANDLE;
-++      fileNameP->caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+       break;
-+    }
-+    case HGFS_OP_CREATE_SYMLINK: {
-++      int result;
-++      HgfsFileName *fileNameP;
-+       request = (HgfsRequestSymlinkCreate *)(HGFS_REQ_PAYLOAD(req));
-+ 
-+-      /* We'll use these later. */
-+-      symlinkName = request->symlinkName.name;
-+-      symlinkNameLength = &request->symlinkName.length;
-+       requestSize = sizeof *request;
-++      /* Convert symlink name to CP format. */
-++      result = CPName_ConvertTo(symlink,
-++                                HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-++                                request->symlinkName.name);
-++      if (result < 0) {
-++         LOG(4, ("SymlinkName CP conversion failed.\n"));
-++         return -EINVAL;
-++      }
-++      request->symlinkName.length = result;
-++      requestSize += result;
-++
-++      /* Copy target name into request packet. */
-++      if (targetNameBytes > HGFS_LARGE_PACKET_MAX - (requestSize - 1)) {
-++         LOG(4, ("Target name is too long.\n"));
-++         return -EINVAL;
-++      }
-++
-++      fileNameP = (HgfsFileName *)((char *)&request->symlinkName +
-++                                   sizeof request->symlinkName + result);
-++      memcpy(fileNameP->name, symname, targetNameBytes);
-++      LOG(6, ("Target name: \"%s\"\n", fileNameP->name));
-++      /* Convert target name to CPName-lite format. */
-++      CPNameLite_ConvertTo(fileNameP->name, targetNameBytes - 1, '/');
-++      fileNameP->length = targetNameBytes - 1;
-+       break;
-+    }
-+    default:
-+@@ -88,59 +133,13 @@ HgfsPackSymlinkCreateRequest(const char* symlink,     // IN: path of the link
-+       return -EPROTO;
-+    }
-+ 
-+-
-+-   /* Convert symlink name to CP format. */
-+-   result = CPName_ConvertTo(symlink,
-+-                             HGFS_LARGE_PACKET_MAX - (requestSize - 1),
-+-                             symlinkName);
-+-   if (result < 0) {
-+-      LOG(4, ("SymlinkName CP conversion failed.\n"));
-+-      return -EINVAL;
-+-   }
-+-
-+-   *symlinkNameLength = result;
-+-   req->payloadSize = requestSize + result;
-++   req->payloadSize = requestSize;
-+ 
-+    /*
-+-    * Note the different buffer length. This is because HgfsRequestSymlink
-+-    * contains two filenames, and once we place the first into the packet we
-+-    * must account for it when determining the amount of buffer available for
-+-    * the second.
-+-    *
-+-    * Also note that targetNameBytes accounts for the NUL character. Once
-+-    * we've converted it to CP name, it won't be NUL-terminated and the length
-+-    * of the string in the packet itself won't account for it.
-++    * targetNameBytes accounts for the NUL character. Once we've converted
-++    * it to CP name, it won't be NUL-terminated and the length of the string
-++    * in the packet itself won't account for it.
-+     */
-+-   if (opUsed == HGFS_OP_CREATE_SYMLINK_V3) {
-+-      HgfsFileNameV3 *fileNameP;
-+-      fileNameP = (HgfsFileNameV3 *)((char *)&requestV3->symlinkName +
-+-                                     sizeof requestV3->symlinkName + result);
-+-      targetName = fileNameP->name;
-+-      targetNameLength = &fileNameP->length;
-+-      fileNameP->flags = 0;
-+-      fileNameP->fid = HGFS_INVALID_HANDLE;
-+-      fileNameP->caseType = HGFS_FILE_NAME_CASE_SENSITIVE;
-+-   } else {
-+-      HgfsFileName *fileNameP;
-+-      fileNameP = (HgfsFileName *)((char *)&request->symlinkName +
-+-                                   sizeof request->symlinkName + result);
-+-      targetName = fileNameP->name;
-+-      targetNameLength = &fileNameP->length;
-+-   }
-+-   targetNameBytes = strlen(symname) + 1;
-+-
-+-   /* Copy target name into request packet. */
-+-   if (targetNameBytes > HGFS_LARGE_PACKET_MAX - (requestSize - 1)) {
-+-      LOG(4, ("Target name is too long.\n"));
-+-      return -EINVAL;
-+-   }
-+-   memcpy(targetName, symname, targetNameBytes);
-+-   LOG(6, ("Target name: \"%s\"\n", targetName));
-+-
-+-   /* Convert target name to CPName-lite format. */
-+-   CPNameLite_ConvertTo(targetName, targetNameBytes - 1, '/');
-+-
-+-   *targetNameLength = targetNameBytes - 1;
-+    req->payloadSize += targetNameBytes - 1;
-+ 
-+    /* Fill in header here as payloadSize needs to be there. */
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.3.5.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.3.5.bb
-index cea18c6c4e..63a64fc712 100644
---- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.3.5.bb
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.3.5.bb
-@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
-     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
-     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
-     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
-+    file://0014-Fix-new-warnings-from-gcc9.patch;patchdir=.. \
++     RedChannel *self = RED_CHANNEL(object);
++ 
++-    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsigned long)self->priv->thread_id);
+++    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->priv->thread_id);
++ 
++     RedChannelClass *klass = RED_CHANNEL_GET_CLASS(self);
++ 
++@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, RedChannelClient *rcc)
++ 
++     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
++         red_channel_warning(channel,
++-                            "channel->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++                            "channel->thread_id (0x%lx) != "
+++                            "pthread_self (0x%lx)."
++                             "If one of the threads is != io-thread && != vcpu-thread, "
++                             "this might be a BUG",
++                             (unsigned long)channel->priv->thread_id,
++diff --git a/server/red-client.c b/server/red-client.c
++index 2b859cb..ff4da2a 100644
++--- a/server/red-client.c
+++++ b/server/red-client.c
++@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
++     RedChannel *channel;
++ 
++     if (!pthread_equal(pthread_self(), client->thread_id)) {
++-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++        spice_warning("client->thread_id (0x%lx) != "
+++                      "pthread_self (0x%lx)."
++                       "If one of the threads is != io-thread && != vcpu-thread,"
++                       " this might be a BUG",
++                       (unsigned long)client->thread_id, (unsigned long)pthread_self());
++@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
++     RedChannelClient *rcc;
++ 
++     if (!pthread_equal(pthread_self(), client->thread_id)) {
++-        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) != "
++-                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+++        spice_warning("client->thread_id (0x%lx) != "
+++                      "pthread_self (0x%lx)."
++                       "If one of the threads is != io-thread && != vcpu-thread,"
++                       " this might be a BUG",
++                       (unsigned long)client->thread_id,
++diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
++index 6d34818..0deb406 100644
++--- a/server/red-replay-qxl.c
+++++ b/server/red-replay-qxl.c
++@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, const char *prefix, size_t *siz
++             exit(1);
++         }
++         if ((ret = inflate(&strm, Z_NO_FLUSH)) != Z_STREAM_END) {
++-            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")",
+++            spice_error("inflate error %d (disc: %li)",
++                         ret, *size - strm.total_out);
++             if (ret == Z_DATA_ERROR) {
++                 /* last operation may be wrong. since we do the recording
++-- 
++2.8.1
++
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index b0fab0d65f..552f81df0a 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -24,6 +24,7 @@ SRC_URI = " \
+     git://anongit.freedesktop.org/spice/spice;name=spice \
+     git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
+     file://0001-Convert-pthread_t-to-be-numeric.patch \
++    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
  "
- # stable-10.3.5
- SRCREV = "f2ff192717375b95a6b7e278fb47dbb3d3bc56d1"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
