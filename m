@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
-	[209.85.222.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C7127E976
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A33237D278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 18:57:11 +0000 (UTC)
-Received: by mail-qk1-f169.google.com with SMTP id r6so2387938qkc.0
+	Fri, 14 Jun 2019 19:05:16 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id s15so3705905qtk.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 11:57:12 -0700 (PDT)
+	Fri, 14 Jun 2019 12:05:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=vtdbLbU0h6YbOdY3R6sByIZjRAFN6kgSvNBguGk51G0=;
-	b=Akp0dv3Wq5YJa9D4EsY+9tcbIwaGQIBUoIt1ol2qvMPDITvlXRlwK5FeKzBIu2FfHz
-	by8d4tC33xfuKM3FNNjSKnByrqcEvuMgVKKquKaySO7KOuMg4sf/1bsTRFta1X16uqk3
-	Nf7uvXWgEpGE1bxLYd7TcnkDRs5cSMozSQAF7Hs1QGcFVjE5nu/bOrIydALkz5pNmOrt
-	D1rRN8Cen2ZlDglmUQ1nymnCEiZG++YEx/+OpjkPyd0l6zVvr5Raz7TbhUIsyh5ZDTUB
-	bAvtMmd7ls/sABV1AsiD08GENgxKUtn9FqTGvIp74ghPiKLJsI64hL1u9hiab0NZgvKF
-	iT3Q==
+	:cc; bh=6vlceaMj/0QdhSdXQBqvYKbwTLYjlZWdSukeH+H0DwM=;
+	b=P8gZocfDrw4nXutRs6vtYizDnEH/uz2dDS77uPq/f2hbaWFGsGTjiDEGo/bLyVhdxi
+	EZgQ/zTkZA0ZutGNFqcScwKhqMXiC5sgbHgZQrp/62lP5Qw5UNC1XQRwvIEKxcr2+y3f
+	RJhcQK4EHr/F0EMZmOaOTt7U1slbTWU1Dly8rwAOPE9YjRW1JTGuwLlAgX7wU2li7NdW
+	ZM8E7X/3zNgTptkG97TZ9VzobEosgOy/0fxTXHfx+IOf31TsBsdH2Z7UW2MY+xd6g1pS
+	Vlx0Qwt/hcRjZR+tU6C0M2Rxxs03zvfXLNlSmniiRSCBusbsbw60hgq6TImvndk4o4gm
+	4xtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=vtdbLbU0h6YbOdY3R6sByIZjRAFN6kgSvNBguGk51G0=;
-	b=aITolaa/D0HZYNZwAz6KR6sGzLycUVEmYFHjLwFyD5IMn6eMh5tFQUq6Z9I4vfvkbb
-	+cDfrWhpBvUyv65aYO/NXAULZ9bpcRLYI3wpoXZfDnYV96FXyYebM1yi3KwPrD5P3Akk
-	YNiJUiQP9uyKEWRbJvzej4WFMVltqXMhAmbbsoIlwNpi0jsvPet2P4cLjC5MPbBa52m+
-	ebZnCbIrWf/L4WdLMf7fhfD1aJlq4PhfQv/EDZ8OoR/Essjtd0WKlJLK6L9pQ+8S8wJt
-	AZvfWhwnGeuiWnhFmZIebNGMi4/If+Om2GORa9BkmECu7+s4HuG6uQzcHsX5atBkAtoX
-	z99w==
-X-Gm-Message-State: APjAAAVi8Sh29vRMdwtckKmcMQupX6gG86YZAdJQ2ofhz0vJEO5lYQu5
-	n8szfyYmQtfD1ALHIn4eU+D7TMRWV43+ytJ/SV8=
-X-Google-Smtp-Source: APXvYqzMhqUEpEX60J9+irOzKHT+8EktDXvNCjjMoxBR2+Q33QWnw4cnm2NRDmC19ygLmv5s7JePNM3EiGN+b48h7NE=
-X-Received: by 2002:a37:b0c6:: with SMTP id
-	z189mr28778092qke.208.1560538632139; 
-	Fri, 14 Jun 2019 11:57:12 -0700 (PDT)
+	bh=6vlceaMj/0QdhSdXQBqvYKbwTLYjlZWdSukeH+H0DwM=;
+	b=gRtvC0eRSMb2O+rQjHdpFJx8z7jr4br3KU+pA0D1a4lfofMksATQsrtVwLW3qaAp8X
+	YTAxqbdR/7Vq/9RZENhIi++mZ4pcGMO3LfFUZ3syCeFy0yGqOGdjz/FsS1XRfmEKRYK0
+	zqVpTA9srCYCRrej9tyomYYUSrfl6SOpPyxZMR+T0c8bfa6xpxDcUQgOhos9//GM8xxN
+	evaXJ9kHKMNqN2W1GcJVcJmMVM/9a67W1cZHDnc/u97ml2eGrV8BMqbB3U4Vlv9NsIBQ
+	WLWvLGd/1Bk6IqX0NNjgaA0tQ8ei5jJkQgXgF6HaKnaR1aVQs2Xgr3bMDaMo6nt2MgGf
+	ZeXw==
+X-Gm-Message-State: APjAAAV1W9mMv3aUk3jpNK+94V1M72+x/b2/HHFcWCqs4J2Ivh2FhFY4
+	SVl+WDZSJAZ78w7Z6+2aotoVBwhefR+kzLYQbikcd5VA
+X-Google-Smtp-Source: APXvYqy3CJQn6CrbS/3u9lImQgsCPM/+ksjWgykbzaszIVUGiPZfFaeDS5uqHfUKD8ALayheQfZKd810lmSpv+jCjyY=
+X-Received: by 2002:ac8:2cfc:: with SMTP id 57mr80834182qtx.194.1560539117270; 
+	Fri, 14 Jun 2019 12:05:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190606065308.23766-1-pascal.bach@siemens.com>
-In-Reply-To: <20190606065308.23766-1-pascal.bach@siemens.com>
+References: <1559305488-7112-1-git-send-email-maciej.pijanowski@3mdeb.com>
+In-Reply-To: <1559305488-7112-1-git-send-email-maciej.pijanowski@3mdeb.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Jun 2019 11:56:46 -0700
-Message-ID: <CAMKF1so=LUh2W27sVt5dhB6ASpOW0F9WqL-F48nJYimZN8Av2A@mail.gmail.com>
-To: Pascal Bach <pascal.bach@siemens.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCHv2] protobuf: 3.6.1 -> 3.8.0
+Date: Fri, 14 Jun 2019 12:04:51 -0700
+Message-ID: <CAMKF1srcujMyTL1OaRa+AZyjKnNqOJEvSVZ34uh+CYpv+FqJkg@mail.gmail.com>
+To: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	piotr.krol@3mdeb.com
+Subject: Re: [meta-oe][PATCH] recipes-benchmark/stressapptest_1.0.9.bb: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jun 2019 18:57:11 -0000
+X-List-Received-Date: Fri, 14 Jun 2019 19:05:16 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jun 5, 2019 at 11:53 PM Pascal Bach <pascal.bach@siemens.com> wrote:
->
-> Simple update to latest release
->
+I see it fail on qemuarm/musl
 
-I guess you also need to bring python-protobuf upto speed as well. I
-see this failure
-https://errors.yoctoproject.org/Errors/Details/248690/
+https://errors.yoctoproject.org/Errors/Details/248676/
 
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+On Fri, May 31, 2019 at 6:42 AM Maciej Pijanowski
+<maciej.pijanowski@3mdeb.com> wrote:
+>
+> This patch introduces recipe for the stressapptest utility.
+> The recipe builds without errors and warnings (tested on thud).
+> It basically uses autootools to buildm so should build just fine
+> on the other releases as well.
+> Basic commands from the project's README were tested on a few
+> armv7 / armv8 platforms.
+>
+> Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 > ---
->  .../protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb}               | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-devtools/protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb} (95%)
+>  .../stressapptest/stressapptest_1.0.9.bb              | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
 >
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
-> similarity index 95%
-> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
-> index cf72d9ca7..0892178c0 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
-> @@ -10,11 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
->  DEPENDS = "zlib"
->  DEPENDS_append_class-target = " protobuf-native"
->
-> -PV .= "+git${SRCPV}"
-> +SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
->
-> -SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
-> -
-> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
-> +SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
->             file://run-ptest \
->             file://0001-protobuf-fix-configure-error.patch \
->  "
+> diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+> new file mode 100644
+> index 000000000000..3e5748a3a12c
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY = "Stressful Application Test"
+> +DESCRIPTION = "Stressful Application Test (or stressapptest, its unix name) \
+> + is a memory interface test. It tries to maximize randomized traffic to memory \
+> + from processor and I/O, with the intent of creating a realistic high load \
+> + situation in order to test the existing hardware devices in a computer. \
+> +"
+> +HOMEPAGE = "https://github.com/stressapptest/stressapptest"
+> +SECTION = "benchmark"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
+> +
+> +SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
+> +SRC_URI[sha256sum] = "2ba470587ad4f6ae92057d427c3a2a2756e5f10bd25cd91e62eaef55a40b30a1"
+> +
+> +S = "${WORKDIR}/${PN}-${PV}"
+> +
+> +inherit autotools
 > --
-> 2.11.0
+> 2.7.4
 >
 > --
 > _______________________________________________
