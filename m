@@ -1,46 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 414767E8CC
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+	[209.85.167.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D6A37E8BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jun 2019 23:06:15 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id y57so404125qtk.4
+	Fri, 14 Jun 2019 00:59:13 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id y17so517606lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jun 2019 16:06:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gIVeyx+JYtLI/dSfcHYrnkWxkeOqUJoiqBp7XvAw5b4=;
-	b=r9V4VgTodLE0ymnbrC7nKEvH/w/D+QL4AZIZV+0WwrPJd064eoHfvVn4sVsS4vokAO
-	jAAynnhubC/74/yG4+08q28ROLgF0r06N2zIBpkXObOtCt74H6VHH7W/PaGwWEhSdqhL
-	rybg9XGsRq53dgIlRLpf9eAy1SfVTyOOI11PBVrqnxMqVgS81lYyufgHKS6aHlC4wCs9
-	av9TmHtUs30AMWCiSadu3XW4HTl24jSbyHq/CU5cAA2IsUxCXmKdoZpq+aq9I97eSamS
-	1ptKVyQJPSatiypuuaaMCM7vhRGsTYBhFBUs6JwrLH/GYgemOsA8PHtTYYkEfxm5jgSZ
-	mJAw==
+	Thu, 13 Jun 2019 17:59:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=3XTW5P4VHEnpNINtlYyrWSC9ha03uXvLjvCd45NqSE8=;
+	b=zDB3Fc0fHDwOA7NzKIMmY3QodOpd4UbsD62YGEVS7Gg9g+GQVGQUh23LF/sAY/P9Q2
+	wwjIEh4IBVGMZc+cnIRDdxJsDxJXz5+d2R0FR3oUanDTicBcRsbR0/EXkkkIJrBE/yEp
+	BbZsINCZSTmYsX8/KI8z/vF9sPPr/W+MqSFk43Ftk/aUJFR48wGqbvztbTwsVoQKBhg1
+	x5tS7hfvIB2jH93F1h2grZYpV8N0jHDI95fX8hjlfMSVXCuqdsKaiwIlI+4AxIcwEO6n
+	l9cSwOcn3+Z3S5inAnlH3/UMzfc11H0HAKFkbCVqGKpbW7i6xRgOboTmQZcR9+ZPV+sM
+	Ip1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=gIVeyx+JYtLI/dSfcHYrnkWxkeOqUJoiqBp7XvAw5b4=;
-	b=Hql9l39QRANGfOn4Fdbu1Ij+gPOAjO2b3AQGa0+T1AyXVmPztI72b1+fRydJqzkzQi
-	qWznB44y/lWd7iECO8uavuo29agvRmJ04hKGfsLSjqsVZr7cx/7t5p7pBccvby9G+eq3
-	QZGdtGWGFHXxWTS0FpNXTpIR0Ij16WmW5yasHCJVojA9VLwPYwEHnry5Dy7zCgknAqHt
-	x5HzMrnPoD1EduxixGPqlifDOnCr6YHTEkVMVB1VyHb83O4x596gcGLDkB4+PyVKoW5+
-	U5H9L0dkz+JLrDYJcsGTAec9qJsw4HGA2WnYMwjJbYsFSU2hKO1qnPMiATT75M+Q888X
-	G6eg==
-X-Gm-Message-State: APjAAAUH01fypUW4f2jD9l0ysQZK3t9Ybs1rIVPD5KYTsbVz3/1Q6LVq
-	u40Q5NM7sPSZfteWim57CVzNWoh43Aq+ARjwcXE=
-X-Google-Smtp-Source: APXvYqynLJdNhYZR4PIGO/dZ08difoBZIlGsj7MMx4pmB0itrgz3m4kuN3Ijh5L3jxVvZ0gqisqeOwFMmi1OEIe/G/w=
-X-Received: by 2002:ac8:e05:: with SMTP id a5mr42885522qti.53.1560467175790;
-	Thu, 13 Jun 2019 16:06:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190530055149.48837-1-yongxin.liu@windriver.com>
-In-Reply-To: <20190530055149.48837-1-yongxin.liu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Jun 2019 16:05:49 -0700
-Message-ID: <CAMKF1sr3nsW=Czi48++hsWs+J6Nqus8rM0mEe2Xh+Fo_9PNc2g@mail.gmail.com>
-To: Yongxin Liu <yongxin.liu@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ndctl: v63 -> v65
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3XTW5P4VHEnpNINtlYyrWSC9ha03uXvLjvCd45NqSE8=;
+	b=SOMH69zLIqfvvAarzHkdl3n/cF8BzToF49yHj4Wr7tQRAw+BNlA0yosa7e7kNWwUt2
+	Ku2xCItRPl42yiPhWD7fusg4sFf3ioMFRcKXFhmIqwNUFg5fl9jjq/9KRcv9NlanKLYp
+	Ly9plqjR/FBi0xinuhff9FthCcnKqVx3X/nGqha/OiNts6irg4+dntLSGR/kL5gasfpZ
+	7ys9dsVHnQnuo5dPijt2ArnmpcRWpiNL9DbuOOILYqeD0vaKSpG/kBNvmLIpSisN7t/V
+	68cerEwwr05MSMbNSSA0lPaviPFZkBXVZnBHJ9ukHvoormpUjXLESXNrVi/LtNI7p52H
+	nbRg==
+X-Gm-Message-State: APjAAAWfTUB1XrNS1kGIs+hJnTnPKsTYem8fp3vG3Ira9P94d0vmTrNz
+	KYzg9w4PvXlUo0Z6nC7iLGS30acZZCo=
+X-Google-Smtp-Source: APXvYqzfzJr2bts5EVh0WZHYsArp3zzAzC1jLdssKVohyT+EvW+4J/KGmbzt7oUy7bqRNvvQlRc8xw==
+X-Received: by 2002:a19:bec1:: with SMTP id o184mr17077610lff.86.1560473954405;
+	Thu, 13 Jun 2019 17:59:14 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id 25sm270176ljn.62.2019.06.13.17.59.13
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 13 Jun 2019 17:59:13 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Jun 2019 02:59:06 +0200
+Message-Id: <20190614005906.3342-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] libspatialite: update to 4.3.0a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,57 +56,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jun 2019 23:06:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 14 Jun 2019 00:59:14 -0000
 
-On Wed, May 29, 2019 at 11:02 PM Yongxin Liu <yongxin.liu@windriver.com> wrote:
->
-> Add keyutils to DEPENDS.
-> Set FILES to package /usr/share/daxctl/daxctl.conf.
->
-> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
-> ---
->  meta-oe/recipes-core/ndctl/{ndctl_v63.bb => ndctl_v65.bb} | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-core/ndctl/{ndctl_v63.bb => ndctl_v65.bb} (87%)
->
-> diff --git a/meta-oe/recipes-core/ndctl/ndctl_v63.bb b/meta-oe/recipes-core/ndctl/ndctl_v65.bb
-> similarity index 87%
-> rename from meta-oe/recipes-core/ndctl/ndctl_v63.bb
-> rename to meta-oe/recipes-core/ndctl/ndctl_v65.bb
-> index 61e53029b..8648ad580 100644
-> --- a/meta-oe/recipes-core/ndctl/ndctl_v63.bb
-> +++ b/meta-oe/recipes-core/ndctl/ndctl_v65.bb
-> @@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
->
->  inherit autotools-brokensep pkgconfig bash-completion systemd
->
-> -SRCREV = "cb2d678dd6d286dd96d31548c32449a8b883ae32"
-> +SRCREV = "ed17fd14608d8de072c8c090ffc5fcf78c4f48ff"
->  SRC_URI = "git://github.com/pmem/ndctl.git"
->
-> -DEPENDS = "virtual/kernel kmod udev json-c"
-> +DEPENDS = "virtual/kernel kmod udev json-c keyutils"
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../geos-config.patch                                  |  0
+ ...{libspatialite_4.2.0.bb => libspatialite_4.3.0a.bb} | 10 ++++------
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-navigation/libspatialite/{libspatialite-4.2.0 => libspatialite}/geos-config.patch (100%)
+ rename meta-oe/recipes-navigation/libspatialite/{libspatialite_4.2.0.bb => libspatialite_4.3.0a.bb} (73%)
 
-Please bring in the recipe for keyutils as well. Since its not in
-OE-Core we should not depend
-on other layers for this
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/geos-config.patch
+similarity index 100%
+rename from meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
+rename to meta-oe/recipes-navigation/libspatialite/libspatialite/geos-config.patch
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0a.bb
+similarity index 73%
+rename from meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+rename to meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0a.bb
+index d66dc875b..a3f09036c 100644
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
++++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0a.bb
+@@ -6,7 +6,10 @@ DEPENDS = "proj geos sqlite3 libxml2 zlib"
+ LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
+ 
+-SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
++SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz \
++           file://geos-config.patch"
++SRC_URI[md5sum] = "6b380b332c00da6f76f432b10a1a338c"
++SRC_URI[sha256sum] = "88900030a4762904a7880273f292e5e8ca6b15b7c6c3fb88ffa9e67ee8a5a499"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -16,8 +19,3 @@ EXTRA_OECONF = "--enable-freexl=no"
+ PACKAGES += "${PN}-plugin"
+ INSANE_SKIP_${PN}-plugin = "dev-so"
+ FILES_${PN}-plugin += "${libdir}/mod_*"
+-
+-SRC_URI[md5sum] = "83305ed694a77152120d1f74c5151779"
+-SRC_URI[sha256sum] = "9f138a6854740c7827fdee53845eb1485fce3e805a7aa9fc9151f8046ebd312d"
+-
+-SRC_URI += "file://geos-config.patch"
+-- 
+2.17.1
 
->
->  S = "${WORKDIR}/git"
->
-> @@ -31,3 +31,5 @@ do_configure_prepend() {
->
->  SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
->  SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-> +
-> +FILES_${PN} += "${datadir}/daxctl/daxctl.conf"
-> --
-> 2.14.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
