@@ -1,50 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B80D7EB5A
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 4217D7EB0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 21:34:52 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id k8so5415068eds.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 14:34:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=f2pOQZXZM1LcyzAID6uTjG4XhMncz8cRWyLlEnbWqDI=;
-	b=kwkn45QVA9DGMmLvRSEIt6xfkXX5VU1x/8IWJr88WWwYnoEfo/4hdjTJWJLVca7wif
-	vDjWs6q2g1vLMlnTNqwBO10+yUnmH6CA1RM/OYfi8dLAFR0YeEsHK0Yp8/XG3zfDNNW6
-	xYmgg589wif+C9muZT8EXmz6V5KQWCnM+hwIgbRTgyrn9Au9cEsBvs2ul3adzK84o8Kh
-	3WsggxX7lxOOkR31d+3FtjmKyXBT93umhPGeHKXUzOomt6LQQGwZ9m7DzYv32MAqi5/U
-	h9yDQW2pQQaGCH466AoSnazABDrcP/FMeHx3l1Bh+gKuF1QO8CXN63QR00rS/+Nrx3cr
-	kgcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=f2pOQZXZM1LcyzAID6uTjG4XhMncz8cRWyLlEnbWqDI=;
-	b=pCeP4fWMm01CUio1LbOb+MEHjI2gI62yURaF1D+9DnaCF9Zs8YlexM+b5t+Zipwrxv
-	n4PJwhCYqiBViHq/lfzIVPTSLnFOYcpD9OKLEMgOeVOXR1/sGM0e/YXHzZT53h54DmdZ
-	G7PpRajxcbyE3LclPpLBFS5Z7Dve/dAusEFGd5DTK0oWmMyutHFma4LqbzosLaXxOGZP
-	hK9uOEzZ4UMZ+ZXjKi6701Q4duoqvSbIzq8k/JGBENgHqdvTeXGuLVuLUCIXvM1qgJDL
-	kXE9x/O804Mn3J749Zp+oBmHtXSH/QmiacIBwo/qJdneFiMoYXpQlJx3KYhIoD+mXGtb
-	6Zgg==
-X-Gm-Message-State: APjAAAVWNaWLtPJhpPgJtu0j9CzuZmF3bE9g2n3PHImyGyAvseqvY75l
-	OFpWthd8fB/6OzMGMnapM2v7a7m2QmvzYwryAlM=
-X-Google-Smtp-Source: APXvYqyx+j0pFTsJE/5pI6PyX319h/fKtKlMZWz5qzEqhjOrwmHW8bNs9TprBWAgBDOSGv17b9GMkaqh9LjpO7KVnBA=
-X-Received: by 2002:a17:906:546:: with SMTP id
-	k6mr78514394eja.53.1560548093080; 
-	Fri, 14 Jun 2019 14:34:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-	<20190523115505.18245-3-Martin.Jansa@gmail.com>
-	<CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 14 Jun 2019 23:34:41 +0200
-Message-ID: <CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
+	Fri, 14 Jun 2019 23:29:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45QcJb3jDbz1n;
+	Sat, 15 Jun 2019 01:29:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1560554976;
+	bh=i8gVRaPDclsnvhKF41ZGgHEMQsq14fJnCF8HzXHr8dY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=el/dxlTczPrK0qOy6mEJF/lS0RcH3FBe4CGRXHUdxz69GUq6RWlQ6MvUOo1ARnAIh
+	r2/uRcncPu/RTqkccpWtGfDPOreNKvkZpqRsfU1YwhaRUFf+dTdeJjCC2cKHdJns1Q
+	/GonKEDBXDm2+5mEjWaDXwkgXVN+50p4mnBAuESAd+teNPwBbM584zIDwEbViuqnUi
+	0QlnZ26thBWK9kunSfBPCWAnayqGRZ4n7W9BA0iqQlWYEsSme77iJ5IuA87Ds35g2P
+	OLSdOSSELCfo4xda4SLRV6VSODqMFFLvKhioviovadKV5a5mtIQNnKhTdwhl6WNO4z
+	56+5w/zF9kEt/g4NWbRAIgG8dKcaJ1X82nJgN9/C5JfKaCrXQ22kOo3ycDws1Sngdr
+	tqngzQ6E/UwyZa6g2Q1vMqurBk4ZnTol+KKxQW1EduGSMVNRhYpbw6yN2kpgXIGB/T
+	/HjfbgPcJj/9SQseyRJN+Aeo1N+EcfUTSEKu1Ru54f8DsrKjPB+IYzBleFnzUUYRsq
+	izEk5rYkEU8jsquyvXOBGJBUdiGO+K9WrXg8k9Mzp2R0lJ8IMiXAmlgyugiQ/RlyM5
+	nyV8Xz3/mzWf77nyO42FkELqjLohlb+4mRyiKLSw3LtzJv9kiearqa6w8juCQaW4nb
+	3Su4+AHOTHBcmj7q2Iy0s9Zg=
+Date: Sat, 15 Jun 2019 02:29:33 +0300
+From: Adrian Bunk <bunk@stusta.de>
 To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Message-ID: <20190614232933.GA23784@localhost>
+References: <1559271137-240663-1-git-send-email-zhe.he@windriver.com>
+	<20190531084447.GA18583@localhost>
+	<CAMKF1spX4zGYv4D4WVSs9boWkP6LMVhTeNMhcJtx4Qc_ZdKAoQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1spX4zGYv4D4WVSs9boWkP6LMVhTeNMhcJtx4Qc_ZdKAoQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/8] funyahoo-plusplus, icyque, pidgin-sipe, purple-skypeweb: add couple plugins for pidgin
+Subject: Re: [meta-oe][PATCH] rocksdb: Fix build failure due to GCC9 deprecated-copy pessimizing-move
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,205 +45,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jun 2019 21:34:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 14 Jun 2019 23:29:36 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-It builds fine for me with qemux86-64 with glibc.
-
-I'll check what's going on.
-
-Thanks
-
-On Fri, Jun 14, 2019 at 8:10 PM Khem Raj <raj.khem@gmail.com> wrote:
-
-> Hi Martin
->
-> I noticed this error on qemux86-64
->
-> https://errors.yoctoproject.org/Errors/Details/248480/
->
-> It seems we need to bring in recipe for gmime for this to work. This
-> is already in master
-> so can you work on fixing this?
->
-> On Thu, May 23, 2019 at 4:55 AM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
+On Fri, Jun 14, 2019 at 12:25:11PM -0700, Khem Raj wrote:
+> On Fri, May 31, 2019 at 1:45 AM Adrian Bunk <bunk@stusta.de> wrote:
 > >
-> > * import from luneos to make pidgin here in meta-oe a bit more useful
+> > On Fri, May 31, 2019 at 10:52:17AM +0800, zhe.he@windriver.com wrote:
+> > > From: He Zhe <zhe.he@windriver.com>
+> > >
+> > > GCC9 introduce more stricter checks deprecated-copy and pessimizing-move, while
+> > > rocksdb uses -Werror and causes the following build error.
+> > >
+> > > db/version_edit.h:178:33: error: implicitly-declared 'constexpr rocksdb::FileDescriptor::FileDescriptor(const rocksdb::FileDescriptor&)' is deprecated [-Werror=deprecated-copy]
+> > >
+> > > utilities/persistent_cache/persistent_cache_util.h:51:23: error: moving a local object in a return statement prevents copy elision [-Werror=pessimizing-move]
+> > >
+> > > Signed-off-by: He Zhe <zhe.he@windriver.com>
+> > > ---
+> > >  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 3 +++
+> > >  1 file changed, 3 insertions(+)
+> > >
+> > > diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> > > index 8d84619..bbd8e4f 100644
+> > > --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> > > +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> > > @@ -31,6 +31,9 @@ EXTRA_OECMAKE = "\
+> > >      -DWITH_TESTS=OFF \
+> > >      -DWITH_TOOLS=OFF \
+> > >  "
+> > > +do_compile_prepend() {
+> > > +    sed -i 's/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow -Wno-error=deprecated-copy -Wno-error=pessimizing-move")/' ${S}/CMakeLists.txt
+> > > +}
+> > >...
 > >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../pidgin/funyahoo-plusplus_git.bb           | 25 ++++++++++++++
-> >  meta-oe/recipes-support/pidgin/icyque_git.bb  | 27 +++++++++++++++
-> >  .../pidgin/pidgin-sipe_1.24.0.bb              | 34 +++++++++++++++++++
-> >  .../pidgin/purple-skypeweb_git.bb             | 26 ++++++++++++++
-> >  4 files changed, 112 insertions(+)
-> >  create mode 100644 meta-oe/recipes-support/pidgin/
-> funyahoo-plusplus_git.bb
-> >  create mode 100644 meta-oe/recipes-support/pidgin/icyque_git.bb
-> >  create mode 100644 meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-> >  create mode 100644 meta-oe/recipes-support/pidgin/
-> purple-skypeweb_git.bb
+> > It would be more elegant to add -DFAIL_ON_WARNINGS=OFF to EXTRA_OECMAKE
+> > instead.
 > >
-> > diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
-> b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
-> > new file mode 100644
-> > index 0000000000..3a437659e7
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
-> > @@ -0,0 +1,25 @@
-> > +SUMMARY = "Protocol plugin for New Yahoo (2016) for Adium, Pidgin,
-> Miranda and Telepathy IM Framework"
-> > +SECTION = "webos/services"
-> > +LICENSE = "GPLv3.0"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
-> > +
-> > +DEPENDS = "pidgin json-glib glib-2.0"
-> > +
-> > +inherit pkgconfig
-> > +
-> > +SRC_URI = "git://
-> github.com/EionRobb/funyahoo-plusplus;branch=master;protocol=git"
-> > +SRCREV = "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +do_compile() {
-> > +    oe_runmake CC="${CC}" CXX="${CXX}"
-> EXTRA_INCLUDES="${TARGET_CFLAGS}" AR="${AR}";
-> > +}
-> > +
-> > +do_install() {
-> > +    oe_runmake DESTDIR="${D}" install;
-> > +}
-> > +
-> > +FILES_${PN} += " \
-> > +    ${libdir} \
-> > +"
-> > diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb
-> b/meta-oe/recipes-support/pidgin/icyque_git.bb
-> > new file mode 100644
-> > index 0000000000..0f32dc3a39
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
-> > @@ -0,0 +1,27 @@
-> > +SUMMARY = "WIM Protocol plugin for ICQ for Adium, Pidgin, Miranda and
-> Telepathy IM Framework"
-> > +SECTION = "webos/services"
-> > +LICENSE = "GPLv3.0"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
-> > +
-> > +DEPENDS = "pidgin json-glib"
-> > +
-> > +PV = "0.1+gitr${SRCPV}"
-> > +
-> > +inherit pkgconfig
-> > +
-> > +SRC_URI = "git://github.com/EionRobb/icyque"
-> > +SRCREV = "513fc162d5d1a201c2b044e2b42941436d1069d5"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +do_compile() {
-> > +    oe_runmake;
-> > +}
-> > +
-> > +do_install() {
-> > +    oe_runmake DESTDIR="${D}" install;
-> > +}
-> > +
-> > +FILES_${PN} += " \
-> > +    ${libdir} \
-> > +"
-> > diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-> b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-> > new file mode 100644
-> > index 0000000000..beae281a30
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-> > @@ -0,0 +1,34 @@
-> > +SUMMARY = "Protocol plugin for Office 365/Lync/OCS for Adium, Pidgin,
-> Miranda and Telepathy IM Framework"
-> > +SECTION = "webos/services"
-> > +LICENSE = "GPLv2.0"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-> > +
-> > +DEPENDS = "pidgin intltool-native glib-2.0-native"
-> > +
-> > +inherit pkgconfig
-> > +inherit autotools
-> > +
-> > +SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
-> > +"
-> > +
-> > +SRC_URI[md5sum] = "b91106d28c235b347a63dcb676f7b66a"
-> > +SRC_URI[sha256sum] =
-> "958803722b23d869131f76bd90df9da19116d4ca5a873e5253371479b7390f43"
-> > +
-> > +PACKAGECONFIG ??= "nss krb5"
-> > +PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
-> > +PACKAGECONFIG[openssl] =
-> "--enable-openssl=yes,--enable-openssl=no,openssl"
-> > +PACKAGECONFIG[krb5] = "--with-krb5=yes,--with-krb5=no,krb5"
-> > +#PACKAGECONFIG[voice_and_video] = "--with-vv=yes,--with-vv=no,libnice
-> gstreamer"
-> > +PACKAGECONFIG[telepathy] =
-> "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib gmime"
-> > +#PACKAGECONFIG[gssapi_only] =
-> "--enable-gssapi-only=yes,--enable-gssapi-only=no,krb5"
-> > +PACKAGECONFIG[debug] = "--enable-debug=yes,--enable-debug=no,valgrind"
-> > +
-> > +FILES_${PN}-dev += " \
-> > +    ${libdir}/purple-2/*.la \
-> > +"
-> > +
-> > +FILES_${PN} += " \
-> > +    ${libdir}/purple-2/libsipe.so \
-> > +    ${datadir}/appdata \
-> > +    ${datadir}/metainfo \
-> > +"
-> > diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
-> b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
-> > new file mode 100644
-> > index 0000000000..092e6059b8
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
-> > @@ -0,0 +1,26 @@
-> > +SUMMARY = "Skype protocol plug-in for libpurple"
-> > +SECTION = "webos/services"
-> > +LICENSE = "GPLv3"
-> > +LIC_FILES_CHKSUM =
-> "file://skypeweb/gpl3.txt;md5=d90260d32cef39f3c8d6c0f05d3adb8e"
-> > +
-> > +DEPENDS = "pidgin json-glib glib-2.0 zlib"
-> > +
-> > +inherit pkgconfig
-> > +
-> > +SRC_URI = "git://
-> github.com/EionRobb/skype4pidgin;branch=master;protocol=git"
-> > +SRCREV = "14f1b69b6292bbdc98cca484b050ec8359394c4e"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +PV = "1.5+git${SRCPV}"
-> > +
-> > +do_compile() {
-> > +    oe_runmake -C skypeweb;
-> > +}
-> > +
-> > +do_install() {
-> > +    oe_runmake -C skypeweb DESTDIR="${D}" install;
-> > +}
-> > +
-> > +FILES_${PN} += " \
-> > +    ${libdir} \
-> > +"
-> > --
-> > 2.17.1
+> > This is also correct in general, since the few packages using -Werror
+> > are frequently causing this kind of problem for distributions.
 > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> 
+> we also have a patch for new 6.x version, I am inclined to take that,
+> so please check if this patch is still needed or not on that version
+>...
+
+The 6.0.2 patch adds a fix for this on top of 6.0.2:
+    This also includes a patch that fixes GCC9 compatibility, it's currently submitted
+    upstream but not yet accepted due to style issues.
+
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
