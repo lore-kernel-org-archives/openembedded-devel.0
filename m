@@ -1,24 +1,26 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 44EA87E8B5
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CA2AF7E916
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 03:20:45 +0000 (UTC)
+	Fri, 14 Jun 2019 03:20:48 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5E3KkwH005438
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x5E3KnR1004312
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jun 2019 20:20:46 -0700 (PDT)
+	Thu, 13 Jun 2019 20:20:50 -0700 (PDT)
 Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Thu, 13 Jun 2019 20:20:45 -0700
+	Thu, 13 Jun 2019 20:20:49 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Jun 2019 11:20:41 +0800
-Message-ID: <1560482443-5210-1-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 14 Jun 2019 11:20:42 +0800
+Message-ID: <1560482443-5210-2-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1560482443-5210-1-git-send-email-yi.zhao@windriver.com>
+References: <1560482443-5210-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.195]
-Subject: [meta-webserver][PATCH 1/3] fcgi: upgrade 2.4.1+git -> 2.4.2
+Subject: [meta-webserver][PATCH 2/3] xdebug: upgrade 2.7.0RC2 -> 2.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,62 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jun 2019 03:20:45 -0000
+X-List-Received-Date: Fri, 14 Jun 2019 03:20:48 -0000
 Content-Type: text/plain
-
-Remove add_foreign_to_AM_INIT_AUTOMAKE.patch as the issue had been fixed
-upstream.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch    | 18 ------------------
- meta-webserver/recipes-support/fcgi/fcgi_git.bb        |  7 +++----
- 2 files changed, 3 insertions(+), 22 deletions(-)
- delete mode 100644 meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
+ .../recipes-php/xdebug/{xdebug_2.7.0RC2.bb => xdebug_2.7.2.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_2.7.0RC2.bb => xdebug_2.7.2.bb} (86%)
 
-diff --git a/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch b/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
-deleted file mode 100644
-index eec9dd7..0000000
---- a/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Upstream-Status: Pending
--
--use automake options "foreign" to set the strictness as appropriate
--
--Signed-off-by: Yang Haibo <b40869@freescale.com>
----- fcgi-ori/configure.in	2014-08-05 14:58:35.000000000 +0800
--+++ fcgi-2.4.0/configure.in	2014-08-05 14:59:08.000000000 +0800
--@@ -4,8 +4,8 @@
-- dnl     generate the file "configure", which is run during the build
-- dnl     to configure the system for the local environment.
-- 
---AC_INIT
---AM_INIT_AUTOMAKE(fcgi, 2.4.1-SNAP-0910052249)
--+AC_INIT([fcgi], [2.4.1-SNAP-0910052249])
--+AM_INIT_AUTOMAKE([foreign])
-- 
-- AM_CONFIG_HEADER(fcgi_config.h)
-- 
-diff --git a/meta-webserver/recipes-support/fcgi/fcgi_git.bb b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
-index a17e70f..6df58ad 100644
---- a/meta-webserver/recipes-support/fcgi/fcgi_git.bb
-+++ b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
-@@ -3,12 +3,11 @@ HOMEPAGE = "http://www.fastcgi.com"
- LICENSE = "OML"
- LIC_FILES_CHKSUM = "file://LICENSE.TERMS;md5=e3aacac3a647af6e7e31f181cda0a06a"
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.7.0RC2.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.7.2.bb
+similarity index 86%
+rename from meta-webserver/recipes-php/xdebug/xdebug_2.7.0RC2.bb
+rename to meta-webserver/recipes-php/xdebug/xdebug_2.7.2.bb
+index 7be62cb..32d52a6 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_2.7.0RC2.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_2.7.2.bb
+@@ -6,8 +6,8 @@ DEPENDS = "php re2c-native"
  
--SRCREV = "68100b5b8cb26f04b784778ed19ccef4fe389f57"
--PV = "2.4.1+git${SRCPV}"
-+SRCREV = "382aa2b0d53a87c27f2f647dfaf670375ba0b85f"
-+PV = "2.4.2"
+ SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
  
- SRC_URI = "git://github.com/FastCGI-Archives/fcgi2.git;protocol=https \
--           file://add_foreign_to_AM_INIT_AUTOMAKE.patch \
--"
-+          "
+-SRC_URI[md5sum] = "e8cabe003d6990b157d0d8caee374844"
+-SRC_URI[sha256sum] = "5aa6d1772937e9f11b91ad8ced586aa0e16281dc178c405ac380d45d4731f8b0"
++SRC_URI[md5sum] = "5d1a8ca3101df93938d283933f256493"
++SRC_URI[sha256sum] = "b0f3283aa185c23fcd0137c3aaa58554d330995ef7a3421e983e8d018b05a4a6"
  
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
  
 -- 
 2.7.4
