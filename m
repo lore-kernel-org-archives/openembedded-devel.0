@@ -1,49 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 533377EABA
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 874657EAA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 23:46:14 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id h21so4433820qtn.13
+	Sat, 15 Jun 2019 09:49:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,370,1557158400"; d="scan'208";a="67534307"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2019 17:49:58 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id EE83D4CDBF7D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2019 16:46:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=pfb/xJ+eky90iPqjTYpTCUcS9Htp4lWwd/CoJsjmGUU=;
-	b=bpBW9RXm6Uvmd35zmaXTm8CSAQ6m9g0RElbTxLoNcc+GdTgNDNdlvqtrEbhGJfec9Y
-	x9oJHpN+tld8jZPhd7sKYEdmQMsNcMiuI7z8c24NRgLV2ESff98TD8mn9C/R8mTz8c0P
-	K1aATS17B4RyfPoE/WwSiaHwDXH11ueOjT1Af7fq7cKQ/PnT59Pl73cNHHPJXq7ZqLrF
-	n8+ojXuNYirdS9alvk4EJ00EkpzEofxN/QoO69tkwW7YzjGyuJ/t1F6ty/RA7Jsbf0+R
-	HOD331RBKVMZwYLHuxCh0xA0p1D3YyFA2E6Qtd0azmkbpIwIEFBWKQolXV9abyja/335
-	+40Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=pfb/xJ+eky90iPqjTYpTCUcS9Htp4lWwd/CoJsjmGUU=;
-	b=M/dTXfd+aCmA2XwTF6KzFdi2JbPvCPpZ9J0NuEBljnDYwDl46W6IewHz9sGG0WkQr2
-	U89zN4MIHJUyRXsC9SCLf0SB1SfkSBQrf/7gyYSKkO6osJAxr9lQFPQNCDl1YfBsKCs9
-	RyT33kYPZgCO37VCiZ3wg8rWTlWvby6FSPbdaannA9sOrcLECBJ/o8OFU5oc7w6SWbYU
-	ynK0B5Mm/muCj5crY+tGY5W6gBG+73X8df4QnTS4OQPLZ7eHrJbvLazM7HCWbGSnVmhw
-	JmNrGFD9BGfRgCr4JDRvB+aJh7ldAUVrVgykqqCcngUFlE3E27DQUdnx9dSnI6dQ6WsV
-	hWng==
-X-Gm-Message-State: APjAAAXNNc3lVzX26ZkOa1x0ZLb28Mx0IZWga/ekYs9i/pMt1lFKortm
-	+y8o9+2Kk7+SMQB+LtzJ5bmkoAk9+qj6nrdCTXLVEA==
-X-Google-Smtp-Source: APXvYqx1iVYpP1f6A6V2MRPoe9n6bRAHsmghMxkUJquq1fReyLeLmMoDvvk4jyqxp3SZRe4X+8+AT9wogzdPHvt+jeE=
-X-Received: by 2002:ac8:26dc:: with SMTP id 28mr80535640qtp.88.1560555975074; 
-	Fri, 14 Jun 2019 16:46:15 -0700 (PDT)
+	Sat, 15 Jun 2019 17:49:57 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0439.000; Sat, 15 Jun 2019 17:49:59 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][patch v3] dnf-plugin-tui: new recipe
+Thread-Index: AQHVFJjlRLGZPnhgsESi1itTXBdRxKaclOBg
+Date: Sat, 15 Jun 2019 09:49:57 +0000
+Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C3786C@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C2E980@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C32558@G08CNEXMBPEKD01.g08.fujitsu.local>
+In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C32558@G08CNEXMBPEKD01.g08.fujitsu.local>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.225.35]
 MIME-Version: 1.0
-References: <1559271137-240663-1-git-send-email-zhe.he@windriver.com>
-	<20190531084447.GA18583@localhost>
-	<CAMKF1spX4zGYv4D4WVSs9boWkP6LMVhTeNMhcJtx4Qc_ZdKAoQ@mail.gmail.com>
-	<20190614232933.GA23784@localhost>
-In-Reply-To: <20190614232933.GA23784@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Jun 2019 16:45:49 -0700
-Message-ID: <CAMKF1squyZmYdpptg=1EZNc7haotMWX8MMNA3OpDqFqSpw2i9w@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rocksdb: Fix build failure due to GCC9 deprecated-copy pessimizing-move
+X-yoursite-MailScanner-ID: EE83D4CDBF7D.AFBC7
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-oe][patch v3] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,69 +46,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jun 2019 23:46:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 15 Jun 2019 09:50:00 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-On Fri, Jun 14, 2019 at 4:29 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Fri, Jun 14, 2019 at 12:25:11PM -0700, Khem Raj wrote:
-> > On Fri, May 31, 2019 at 1:45 AM Adrian Bunk <bunk@stusta.de> wrote:
-> > >
-> > > On Fri, May 31, 2019 at 10:52:17AM +0800, zhe.he@windriver.com wrote:
-> > > > From: He Zhe <zhe.he@windriver.com>
-> > > >
-> > > > GCC9 introduce more stricter checks deprecated-copy and pessimizing-move, while
-> > > > rocksdb uses -Werror and causes the following build error.
-> > > >
-> > > > db/version_edit.h:178:33: error: implicitly-declared 'constexpr rocksdb::FileDescriptor::FileDescriptor(const rocksdb::FileDescriptor&)' is deprecated [-Werror=deprecated-copy]
-> > > >
-> > > > utilities/persistent_cache/persistent_cache_util.h:51:23: error: moving a local object in a return statement prevents copy elision [-Werror=pessimizing-move]
-> > > >
-> > > > Signed-off-by: He Zhe <zhe.he@windriver.com>
-> > > > ---
-> > > >  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 3 +++
-> > > >  1 file changed, 3 insertions(+)
-> > > >
-> > > > diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> > > > index 8d84619..bbd8e4f 100644
-> > > > --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> > > > +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> > > > @@ -31,6 +31,9 @@ EXTRA_OECMAKE = "\
-> > > >      -DWITH_TESTS=OFF \
-> > > >      -DWITH_TOOLS=OFF \
-> > > >  "
-> > > > +do_compile_prepend() {
-> > > > +    sed -i 's/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")/set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow -Wno-error=deprecated-copy -Wno-error=pessimizing-move")/' ${S}/CMakeLists.txt
-> > > > +}
-> > > >...
-> > >
-> > > It would be more elegant to add -DFAIL_ON_WARNINGS=OFF to EXTRA_OECMAKE
-> > > instead.
-> > >
-> > > This is also correct in general, since the few packages using -Werror
-> > > are frequently causing this kind of problem for distributions.
-> > >
-> >
-> > we also have a patch for new 6.x version, I am inclined to take that,
-> > so please check if this patch is still needed or not on that version
-> >...
->
-> The 6.0.2 patch adds a fix for this on top of 6.0.2:
->     This also includes a patch that fixes GCC9 compatibility, it's currently submitted
->     upstream but not yet accepted due to style issues.
-
-yeah I think the patch is quite gcc specific, not upstream worthy IMO
-
->
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
+SGkNCg0KVGhpcyBwYXRjaCBpcyBzdGlsbCBiZSBpZ25vcmVkLiBEb2VzIGFu
+eW9uZSBoYXZlIGFueSBjb21tZW50IGFib3V0IHRoaXMgcGF0Y2g/DQoNCkJl
+c3QgcmVnYXJkcy4NClpoZW5nIFJ1b3Fpbg0KDQotLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVv
+cWluDQpOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28u
+LCBMdGQuKEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdh
+cmUgQXZlbnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1B
+SUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20NCg0KPiAtLS0tLU9y
+aWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2
+ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86
+b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZ10gT24gQmVoYWxmIE9mDQo+IFpoZW5nLCBSdW9xaW4NCj4gU2VudDog
+TW9uZGF5LCBNYXkgMjcsIDIwMTkgMTA6MzEgUE0NCj4gVG86IG9wZW5lbWJl
+ZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6
+IFJlOiBbb2VdIFttZXRhLW9lXVtwYXRjaCB2M10gZG5mLXBsdWdpbi10dWk6
+IG5ldyByZWNpcGUNCj4gDQo+IFBpbmcNCj4gDQo+IC0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+IFpoZW5n
+IFJ1b3Fpbg0KPiBOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVj
+aC4gQ28uLCBMdGQuKEZOU1QpDQo+IEFERFIuOiBOby42IFdlbnpodSBSb2Fk
+LCBTb2Z0d2FyZSBBdmVudWUsDQo+ICAgICAgICBOYW5qaW5nLCAyMTAwMTIs
+IENoaW5hDQo+IE1BSUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20N
+Cj4gDQo+ID4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gPiBGcm9t
+OiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnDQo+ID4gW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNl
+c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYNCj4gPiBPZiBa
+aGVuZywgUnVvcWluDQo+ID4gU2VudDogVHVlc2RheSwgTWF5IDIxLCAyMDE5
+IDY6MTIgUE0NCj4gPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmcNCj4gPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1v
+ZV1bcGF0Y2ggdjNdIGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+ID4N
+Cj4gPiBQaW5nDQo+ID4NCj4gPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+IFpoZW5nIFJ1b3Fpbg0K
+PiA+IE5hbmppbmcgRnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4s
+IEx0ZC4oRk5TVCkNCj4gPiBBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29m
+dHdhcmUgQXZlbnVlLA0KPiA+ICAgICAgICBOYW5qaW5nLCAyMTAwMTIsIENo
+aW5hDQo+ID4gTUFJTCA6IHpoZW5ncnEuZm5zdEBjbi5mdWppc3R1LmNvbQ0K
+PiA+DQo+ID4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+ID4g
+RnJvbTogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVDQo+ID4gPiBTZW50OiBTdW5k
+YXksIE1heSAxMiwgMjAxOSA1OjI5IEFNDQo+ID4gPiBUbzogb3BlbmVtYmVk
+ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiA+IENjOiBa
+aGVuZywgUnVvcWluL9ajIMj0x9UgPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1
+LmNvbT4NCj4gPiA+IFN1YmplY3Q6IFtvZV1bbWV0YS1vZV1bcGF0Y2ggdjNd
+IGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+ID4gPg0KPiA+ID4gVGhp
+cyBkbmYgcGx1Z2luIGFpbXMgdG8gc3VwcGx5IGEgdHVpIGludGVyZmFjZSBm
+b3IgdXNlciB0byBtYW5hZ2UNCj4gPiA+IHBhY2thZ2VzLiBJdCBoYXMgZmVh
+dHVyZXMgYXMgZm9sbG93aW5nOg0KPiA+ID4gICAxLiBBZGQgbmV3IGNvbW1h
+bmQgZG5mIHR1aSAtLWluaXQgdG8gbWFrZSBkbmYgdG8gd29yayBvbiBob3N0
+Lg0KPiA+ID4gICAyLiBUZXh0LWJhc2VkIHVzZXIgaW50ZXJmYWNlIGZvciBk
+bmYuDQo+ID4gPiAgIDMuIE1hbmFnZSBTUERYIGZpbGVzLg0KPiA+ID4gICA0
+LiBNYW5hZ2UgU1JQTSBmaWxlcy4NCj4gPiA+ICAgNS4gQWRkIGluc3RhbGxh
+dGlvbiBzYW1wbGVzIGZvciBkbmYuDQo+ID4gPg0KPiA+ID4gTW9yZSBkZXRh
+aWxzIHBsZWFzZSByZWZlciB0byBodHRwczovL2dpdGh1Yi5jb20vdWJpbnV4
+L2RuZi1wbHVnaW4tdHVpLg0KPiA+ID4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6
+IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0K
+PiA+ID4gLS0tDQo+ID4gPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVn
+aW4tdHVpX2dpdC5iYiAgICAgICAgICAgfCAzOCArKysrKysrKysrKysrKysr
+KysrKysrDQo+ID4gPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLXJl
+bW90ZS5yZXBvLnNhbXBsZSAgICAgfCAgNSArKysNCj4gPiA+ICAyIGZpbGVz
+IGNoYW5nZWQsIDQzIGluc2VydGlvbnMoKykNCj4gPiA+ICBjcmVhdGUgbW9k
+ZSAxMDA2NDQNCj4gPiA+IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYt
+cGx1Z2luLXR1aS9kbmYtcGx1Z2luLQ0KPiA+ID4gdHVpX2dpdC5iYg0KPiA+
+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+ID4gbWV0YS1vZS9yZWNpcGVz
+LWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLQ0KPiA+ID4gcmVt
+b3RlLnJlcG8uc2FtcGxlDQo+ID4gPg0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+
+ID4gYS9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkv
+ZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+ID4gPiBiL21ldGEtb2UvcmVjaXBl
+cy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQu
+YmINCj4gPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gPiBpbmRleCAw
+MDAwMDAwLi5lODkxODY4DQo+ID4gPiAtLS0gL2Rldi9udWxsDQo+ID4gPiAr
+KysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkv
+ZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+ID4gPiBAQCAtMCwwICsxLDM4IEBA
+DQo+ID4gPiArU1VNTUFSWSA9ICJBIHRleHQtYmFzZWQgdXNlciBpbnRlcmZh
+Y2UgcGx1Z2luIG9mIGRuZiBmb3IgdXNlciB0bw0KPiA+ID4gK21hbmFnZQ0K
+PiA+ID4gcGFja2FnZXMuICINCj4gPiA+ICtMSUNFTlNFID0gIkdQTHYyIg0K
+PiA+ID4gKw0KPiA+ID4gK0xJQ19GSUxFU19DSEtTVU0gPQ0KPiA+ID4gImZp
+bGU6Ly9DT1BZSU5HO21kNT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRh
+NDI2MyINCj4gPiA+ICsNCj4gPiA+ICtTUkNfVVJJID0gImdpdDovL2dpdGh1
+Yi5jb20vdWJpbnV4L2RuZi1wbHVnaW4tdHVpLmdpdDticmFuY2g9bWFzdGVy
+ICINCj4gPiA+ICtTUkNSRVYgPSAiMzFkNjg2NmQ1ZWRhMDJiZTlhNmJmYjFm
+Y2E5ZTkwOTViMTJlZWNkMSINCj4gPiA+ICtQViA9ICIxLjAiDQo+ID4gPiAr
+DQo+ID4gPiArU1JDX1VSSV9hcHBlbmRfY2xhc3MtdGFyZ2V0ID0gImZpbGU6
+Ly9vZS1yZW1vdGUucmVwby5zYW1wbGUiDQo+ID4gPiArDQo+ID4gPiAraW5o
+ZXJpdCBkaXN0dXRpbHMzLWJhc2UNCj4gPiA+ICsNCj4gPiA+ICtTID0gIiR7
+V09SS0RJUn0vZ2l0Ig0KPiA+ID4gKw0KPiA+ID4gK2RvX2luc3RhbGxfYXBw
+ZW5kKCkgew0KPiA+ID4gKyAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtkYXRh
+ZGlyfS9kbmYNCj4gPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke1N9
+L3NhbXBsZXMvKiAke0R9JHtkYXRhZGlyfS9kbmYNCj4gPiA+ICsgICAgICAg
+IGluc3RhbGwgLWQgJHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9L2Ru
+Zi1wbHVnaW5zL21raW1nDQo+ID4gPiArICAgICAgICBpbnN0YWxsIC1tIDA3
+NTUgJHtTfS9kbmYtcGx1Z2lucy9ta2ltZy8qDQo+ID4gPiAke0R9JHtQWVRI
+T05fU0lURVBBQ0tBR0VTX0RJUn0vZG5mLXBsdWdpbnMvbWtpbWcNCj4gPiA+
+ICsgICAgICAgIGZvciBmaWxlIGluICQobHMgJHtTfS9kbmYtcGx1Z2lucy8g
+fCBncmVwIC12IG1raW1nKTsgZG8NCj4gPiA+ICsgICAgICAgICAgICBpbnN0
+YWxsIC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy8kZmlsZQ0KPiA+ID4gJHtE
+fSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9L2RuZi1wbHVnaW5zDQo+ID4g
+PiArICAgICAgICBkb25lDQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK2Rv
+X2luc3RhbGxfYXBwZW5kX2NsYXNzLXRhcmdldCgpIHsNCj4gPiA+ICsgICAg
+ICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0veXVtLnJlcG9zLmQN
+Cj4gPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L29l
+LXJlbW90ZS5yZXBvLnNhbXBsZQ0KPiA+ID4gKyR7RH0ke3N5c2NvbmZkaXJ9
+L3l1bS5yZXBvcy5kIH0NCj4gPiA+ICsNCj4gPiA+ICtGSUxFU18ke1BOfSAr
+PSAiJHtkYXRhZGlyfS9kbmYiDQo+ID4gPiArDQo+ID4gPiArUkRFUEVORFNf
+JHtQTn0gKz0gIiBcDQo+ID4gPiArICBkbmYgXA0KPiA+ID4gKyAgbGlibmV3
+dC1weXRob24gXA0KPiA+ID4gKyAgIg0KPiA+ID4gKw0KPiA+ID4gK0JCQ0xB
+U1NFWFRFTkQgPSAibmF0aXZlc2RrIg0KPiA+ID4gZGlmZiAtLWdpdCBhL21l
+dGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9v
+ZS0NCj4gPiA+IHJlbW90ZS5yZXBvLnNhbXBsZQ0KPiA+ID4gYi9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2UtDQo+
+ID4gPiByZW1vdGUucmVwby5zYW1wbGUNCj4gPiA+IG5ldyBmaWxlIG1vZGUg
+MTAwNjQ0DQo+ID4gPiBpbmRleCAwMDAwMDAwLi42YzQ1MDJlDQo+ID4gPiAt
+LS0gL2Rldi9udWxsDQo+ID4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2
+dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2UtcmVtb3RlLnJlcG8ucw0K
+PiA+ID4gKysrIGFtDQo+ID4gPiArKysgcGwNCj4gPiA+ICsrKyBlDQo+ID4g
+PiBAQCAtMCwwICsxLDUgQEANCj4gPiA+ICtbYmFzZV0NCj4gPiA+ICtuYW1l
+PW15cmVwbw0KPiA+ID4gK2Jhc2V1cmw9aHR0cDovLzEyNy4wLjAuMS9vZV9y
+ZXBvLw0KPiA+ID4gK2VuYWJsZWQ9MQ0KPiA+ID4gK2dwZ2NoZWNrPTANCj4g
+PiA+IC0tDQo+ID4gPiAyLjcuNA0KPiA+DQo+ID4NCj4gPg0KPiA+IC0tDQo+
+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+
+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
+Cj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gDQo+IC0tDQo+IF9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+DQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVt
+YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDov
+L2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
+ZW1iZWRkZWQtZGV2ZWwNCgoK
 
