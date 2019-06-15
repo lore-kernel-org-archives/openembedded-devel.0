@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DF807D9E5
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
+	[209.85.214.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F5C37EB51
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 17:57:49 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id v11so3414363pgl.5
+	Sat, 15 Jun 2019 17:57:50 +0000 (UTC)
+Received: by mail-pl1-f173.google.com with SMTP id s24so2356077plr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 10:57:51 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=OfgY++drjHG4Nay1KFg9l0oGNXHPFLPliWnKWNjsVF4=;
-	b=q/BdrEY0k2Kw90otO2mGayTdRY1MK6QGSFk9l8ssMZ1ueLq73qPHbW0gMOrH2wZIOh
-	pYq7vKhAirPWWinLP1qWzDQR4HtviFuUg10XlyfRCibSyrLN7GUiUnwPNZPn+CASJ1W8
-	myWEtP/k3ys4UJGBqB5veyi3/MLVoEF+Gpdz+XQCHoCKf+GXV5KFXBkttwe9lv5GJbe8
-	lut/upEhltJVKYWO6is4piw61b5p7UVDd35UyPEyUqsauOj0Af32QPpa9qGfo6poWOSZ
-	YrzR7IFKuVPNdxi1ZBHYR5uQMI117P39iY5iyE9pbeGKk2zsotF3oJsr4Zmcm/RvwD03
-	Ra8g==
+	bh=9o71N3tCdYUUnbPfLuHfYBBTgAnxvFQXb8UDXuPx5WE=;
+	b=gG1gdDpeA6N2TXoS1SNHcGHn+1ievzUb3ax7x/FBnu7sHfcqO4fQngOCj2+/O6oJB/
+	N4I3Ydwtv3qHTMKJtyAV6Qf/FonSMhdH3gtejNdiF52BRqrkM4b4sw+NzVbx0hSpLPXN
+	P0s1A3qahHsKd2MeLG8x25l8rmr5gLNVmGxP9RkQYmDKROYQ96KMV2H4KAMPQJltJlkc
+	eZ8EM6OngJZYKtG4ZiSsTAoHQddTq1zP7SdjifhPRwdvqPJ78dD845tfFStbXfr6MY5O
+	VacOpa+01kiBAUdhS9urasmxRkoI3M4JU5XU/jwWVhAy1t+BlOwV98CHlw8w3Ep3x6Vp
+	8GUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=OfgY++drjHG4Nay1KFg9l0oGNXHPFLPliWnKWNjsVF4=;
-	b=PiNNKsffdbxpQbfLYmfiqVOREEJ0OxPRI8XQhvEYPebchkg/A28TvDHs00hIsSSUrg
-	h6g4Bsn5rlq0Ld2YcqbZRPJOUL0cMjVGaZVl2tFTuGaWqyeB10QWpE9yE4PpSljx/W2H
-	kkpOoPk3EojjB8luGqg3ZdTVT7GmCgC+HsWC8GWWPq71Hs2DhmPAoZZiKjOMU+dJQ+PU
-	rM+425NAgEPagm0niQU50QLf65/TCpGddb3nuPkaiQD39p6CP1+9rR/S/lVZYhl76NWC
-	SkqOD+LbeYVoyjhdeVTq9OZ4TslZX/DHl6X/VyiPwvoGd0tDkwUD/gIjnOLdmJpKNgsH
-	D0zg==
-X-Gm-Message-State: APjAAAWraSGrCTHu4NaY9BCP15F8vSvS/ZUa7X/fdklaoSrLMCJjawYd
-	lweU1KYZAiDf6cXA7vp+SyhxCTmR
-X-Google-Smtp-Source: APXvYqx6CZFX3eEzDJL8vaAS8MgcxCSqNGcd6ofrxqFFmPn1d3sSZ02fHHvQYqfUkz1M9hKoy25PmA==
-X-Received: by 2002:a17:90a:7787:: with SMTP id
-	v7mr14168051pjk.143.1560621470741; 
-	Sat, 15 Jun 2019 10:57:50 -0700 (PDT)
+	bh=9o71N3tCdYUUnbPfLuHfYBBTgAnxvFQXb8UDXuPx5WE=;
+	b=rlqp8H1HNzMru97cZJrS1OpMbSh1ZSaQPe0KweFtYkqwRVF0GIO7hnbLrMp+98IoqR
+	AUGsKixea0XpP4aCrTJppmw0dp8YTPdZD/lDxqtUr2EeCNsYvQP2xuv7AWYDOgDyELuq
+	CaMC47EPM2jnT85ZzNxSBFQAfUc7MMKtbLYMfaWSx57CMMeb0D4dC3y3enXbvBCTHYFP
+	c79ay0Gh19UOzpU43saDnJ7HgMR6+jTtWh6waYxSHZx5RIWLOtYIzWuQhqTYDy3TuzPb
+	8TkMbsWa4Dq6TieMXXEzPdNh8NGi1tuIFZGOOcdepkssKwempj+bbXC1Nu637limSdLU
+	dSUA==
+X-Gm-Message-State: APjAAAVJEa7RZQujOVrzY6zIZx5yLrsyw0Ulxl3PhCn/s3wRdTwpaQtX
+	YaHA3mSqN/TC6AalG2MQJ5RmOwK2
+X-Google-Smtp-Source: APXvYqzHQarHdMy0Vk7RQvqdUfORU+y34pBDtFn9LPNlFTN+uoiLkV8sugYrTtUq7yWnVbJEkHPiqw==
+X-Received: by 2002:a17:902:9689:: with SMTP id
+	n9mr2989497plp.241.1560621471555; 
+	Sat, 15 Jun 2019 10:57:51 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:5942:80bf:dc9c:15ab])
 	by smtp.gmail.com with ESMTPSA id
 	f14sm8561221pfn.53.2019.06.15.10.57.50
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Jun 2019 10:57:50 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:51 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Jun 2019 10:57:25 -0700
-Message-Id: <624b41537a60683169185f479d85c32b0b4b2157.1560620937.git.akuster808@gmail.com>
+Date: Sat, 15 Jun 2019 10:57:26 -0700
+Message-Id: <9814a993ba65cfd84a8707a22dc02a85082de513.1560620937.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1560620937.git.akuster808@gmail.com>
 References: <cover.1560620937.git.akuster808@gmail.com>
-Subject: [Warror][ 21/23] uthash: do not use unstable github archive tarballs
+Subject: [Warror][ 22/23] netkit-telnet: add rconflicts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,43 +60,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jun 2019 17:57:49 -0000
+X-List-Received-Date: Sat, 15 Jun 2019 17:57:50 -0000
 
-From: nick83ola <nick83ola@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Since commit [21f84fc insane: add sanity checks to SRC_URI] applied
-in oe-core, do not use unstable github archive tarballs.
+fix below error:
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+file /etc/xinetd.d/telnet conflicts between attempted installs of netkit-telnet-0.17-r0.i586 and inetutils-telnetd-1.9.4-r0.i586
+file /usr/sbin/in.telnetd conflicts between attempted installs of netkit-telnet-0.17-r0.i586 and inetutils-telnetd-1.9.4-r0.i586
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/uthash/uthash_2.1.0.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-index 7eb1383..d01a06c 100644
---- a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-+++ b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
-@@ -9,15 +9,14 @@ HOMEPAGE = "https://troydhanson.github.io/uthash/"
- SECTION = "base"
- LICENSE = "BSD-1-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a2513f7d2291df840527b76b2a8f9718"
-+SRCREV = "8b214aefcb81df86a7e5e0d4fa20e59a6c18bc02"
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index db4b1c9..4b035af 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -63,3 +63,4 @@ FILES_${PN} += "${sbindir}/in.* ${libdir}/* ${sysconfdir}/xinetd.d/*"
  
- SRC_URI = "\
--    https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-+    git://github.com/troydhanson/${BPN}.git \
-     file://run-ptest \
- "
--UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
- 
--SRC_URI[md5sum] = "4d0a33f6393260926032f1fad4bad39a"
--SRC_URI[sha256sum] = "152ccd8e64d0f495377232e3964d06c7ec8bb8c3fbd3217f8a5702614f9a669e"
-+S = "${WORKDIR}/git"
- 
- inherit ptest
- 
+ # http://errors.yoctoproject.org/Errors/Details/186954/
+ EXCLUDE_FROM_WORLD_libc-musl = "1"
++RCONFLICTS_${PN} = "inetutils-telnetd"
 -- 
 2.7.4
 
