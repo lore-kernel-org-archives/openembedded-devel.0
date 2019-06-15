@@ -1,39 +1,49 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 874657EAA5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id E5B047EA8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 09:49:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,370,1557158400"; d="scan'208";a="67534307"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2019 17:49:58 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id EE83D4CDBF7D
+	Sat, 15 Jun 2019 17:57:31 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id s21so3391832pga.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 17:49:57 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0439.000; Sat, 15 Jun 2019 17:49:59 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][patch v3] dnf-plugin-tui: new recipe
-Thread-Index: AQHVFJjlRLGZPnhgsESi1itTXBdRxKaclOBg
-Date: Sat, 15 Jun 2019 09:49:57 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C3786C@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C2E980@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C32558@G08CNEXMBPEKD01.g08.fujitsu.local>
-In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C32558@G08CNEXMBPEKD01.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
-MIME-Version: 1.0
-X-yoursite-MailScanner-ID: EE83D4CDBF7D.AFBC7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][patch v3] dnf-plugin-tui: new recipe
+	Sat, 15 Jun 2019 10:57:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=k02GN0UTATudfVCULAcwxsZQv2/5mP4AIRz/5qja6x0=;
+	b=vK8IB/n6wOf3YVX3MbXAQS61rHhM7plz82M5KLA7zi44oHsk7Ve96SGk+mc5i4T1Cg
+	bfXsUi+NgxIwc8MI3JVyPxUjpRk0lnSWBt1TLmk/bj5bdwEUYtEDQ4Gk0vU9nPJ+Q4Et
+	ZVKAgWiwIczICUha4xnYEAcJY2ACk9xWUduRctrE4Jg+3waz5n/YMp0eSJJftn8GzU/n
+	TafbhbnYllmWxvDwW84AwcObgIGXhSXUTeB39rhUz7UrJgQH8eRNynzaH5VXMXH3dPI3
+	+nCVglyeHy9Y2gPC4+JwVC2cq1LLdtXqV2NFxJAxlVvSLlZUDdLDCPH/1oe5djM0ikfN
+	9K9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=k02GN0UTATudfVCULAcwxsZQv2/5mP4AIRz/5qja6x0=;
+	b=alNgiMpAoelgHqV/5AubT/28wLScdKO9Ps0LkYieiM9l+5X0c3oxO4Hg7mr4I3+Iyn
+	Bm1MB97XeCSoZd2yz+QxX4UenaNazPV6NQeqpEasm9r8nMUvwdPI4IXJCNPY+LkhRMZi
+	zN88hXrEq9h6geGoZ4n0kpIHxTlELqn5oJSzdWum/qolHXTAITCJlVAk/1TuG/K5nR9f
+	tcu2KH1qo+hKQlc5qa7F+6Bj4LcmZPXzNfSxuGN1A+Du3pLGBlakMzkeFRyx8pD1sv7n
+	DPAeOxFRHzejFXtY2yXXwNsfNrqOU6X40o6Z4/kxImJRiGen61MvzpZdrM4vW5AyoOF/
+	0XMg==
+X-Gm-Message-State: APjAAAW2VCMdEN7fUdCX1+KPs8UWPuBNd3Sgzr9+YhZhwUCaONMtsI+9
+	m0RzF8DYxDjBJmyW7Uuci3yAGj+I
+X-Google-Smtp-Source: APXvYqzA7fcLfxm1jomx7LZRCJDfZHr/MSCcIlRm9tUhzwXMiPTAE4Otb94NQEhRZl/QwTkH7TERlw==
+X-Received: by 2002:a63:4509:: with SMTP id s9mr40798742pga.231.1560621452772; 
+	Sat, 15 Jun 2019 10:57:32 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:c33:5942:80bf:dc9c:15ab])
+	by smtp.gmail.com with ESMTPSA id
+	f14sm8561221pfn.53.2019.06.15.10.57.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 15 Jun 2019 10:57:32 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 15 Jun 2019 10:57:04 -0700
+Message-Id: <cover.1560620937.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [Warror][ 00/23] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,135 +56,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jun 2019 09:50:00 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sat, 15 Jun 2019 17:57:32 -0000
 
-SGkNCg0KVGhpcyBwYXRjaCBpcyBzdGlsbCBiZSBpZ25vcmVkLiBEb2VzIGFu
-eW9uZSBoYXZlIGFueSBjb21tZW50IGFib3V0IHRoaXMgcGF0Y2g/DQoNCkJl
-c3QgcmVnYXJkcy4NClpoZW5nIFJ1b3Fpbg0KDQotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVv
-cWluDQpOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28u
-LCBMdGQuKEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdh
-cmUgQXZlbnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1B
-SUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20NCg0KPiAtLS0tLU9y
-aWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2
-ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86
-b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZ10gT24gQmVoYWxmIE9mDQo+IFpoZW5nLCBSdW9xaW4NCj4gU2VudDog
-TW9uZGF5LCBNYXkgMjcsIDIwMTkgMTA6MzEgUE0NCj4gVG86IG9wZW5lbWJl
-ZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6
-IFJlOiBbb2VdIFttZXRhLW9lXVtwYXRjaCB2M10gZG5mLXBsdWdpbi10dWk6
-IG5ldyByZWNpcGUNCj4gDQo+IFBpbmcNCj4gDQo+IC0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+IFpoZW5n
-IFJ1b3Fpbg0KPiBOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVj
-aC4gQ28uLCBMdGQuKEZOU1QpDQo+IEFERFIuOiBOby42IFdlbnpodSBSb2Fk
-LCBTb2Z0d2FyZSBBdmVudWUsDQo+ICAgICAgICBOYW5qaW5nLCAyMTAwMTIs
-IENoaW5hDQo+IE1BSUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20N
-Cj4gDQo+ID4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gPiBGcm9t
-OiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQo+ID4gW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNl
-c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYNCj4gPiBPZiBa
-aGVuZywgUnVvcWluDQo+ID4gU2VudDogVHVlc2RheSwgTWF5IDIxLCAyMDE5
-IDY6MTIgUE0NCj4gPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcNCj4gPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1v
-ZV1bcGF0Y2ggdjNdIGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+ID4N
-Cj4gPiBQaW5nDQo+ID4NCj4gPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+IFpoZW5nIFJ1b3Fpbg0K
-PiA+IE5hbmppbmcgRnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4s
-IEx0ZC4oRk5TVCkNCj4gPiBBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29m
-dHdhcmUgQXZlbnVlLA0KPiA+ICAgICAgICBOYW5qaW5nLCAyMTAwMTIsIENo
-aW5hDQo+ID4gTUFJTCA6IHpoZW5ncnEuZm5zdEBjbi5mdWppc3R1LmNvbQ0K
-PiA+DQo+ID4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+ID4g
-RnJvbTogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVDQo+ID4gPiBTZW50OiBTdW5k
-YXksIE1heSAxMiwgMjAxOSA1OjI5IEFNDQo+ID4gPiBUbzogb3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiA+IENjOiBa
-aGVuZywgUnVvcWluL9ajIMj0x9UgPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1
-LmNvbT4NCj4gPiA+IFN1YmplY3Q6IFtvZV1bbWV0YS1vZV1bcGF0Y2ggdjNd
-IGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+ID4gPg0KPiA+ID4gVGhp
-cyBkbmYgcGx1Z2luIGFpbXMgdG8gc3VwcGx5IGEgdHVpIGludGVyZmFjZSBm
-b3IgdXNlciB0byBtYW5hZ2UNCj4gPiA+IHBhY2thZ2VzLiBJdCBoYXMgZmVh
-dHVyZXMgYXMgZm9sbG93aW5nOg0KPiA+ID4gICAxLiBBZGQgbmV3IGNvbW1h
-bmQgZG5mIHR1aSAtLWluaXQgdG8gbWFrZSBkbmYgdG8gd29yayBvbiBob3N0
-Lg0KPiA+ID4gICAyLiBUZXh0LWJhc2VkIHVzZXIgaW50ZXJmYWNlIGZvciBk
-bmYuDQo+ID4gPiAgIDMuIE1hbmFnZSBTUERYIGZpbGVzLg0KPiA+ID4gICA0
-LiBNYW5hZ2UgU1JQTSBmaWxlcy4NCj4gPiA+ICAgNS4gQWRkIGluc3RhbGxh
-dGlvbiBzYW1wbGVzIGZvciBkbmYuDQo+ID4gPg0KPiA+ID4gTW9yZSBkZXRh
-aWxzIHBsZWFzZSByZWZlciB0byBodHRwczovL2dpdGh1Yi5jb20vdWJpbnV4
-L2RuZi1wbHVnaW4tdHVpLg0KPiA+ID4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6
-IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0K
-PiA+ID4gLS0tDQo+ID4gPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVn
-aW4tdHVpX2dpdC5iYiAgICAgICAgICAgfCAzOCArKysrKysrKysrKysrKysr
-KysrKysrDQo+ID4gPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLXJl
-bW90ZS5yZXBvLnNhbXBsZSAgICAgfCAgNSArKysNCj4gPiA+ICAyIGZpbGVz
-IGNoYW5nZWQsIDQzIGluc2VydGlvbnMoKykNCj4gPiA+ICBjcmVhdGUgbW9k
-ZSAxMDA2NDQNCj4gPiA+IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYt
-cGx1Z2luLXR1aS9kbmYtcGx1Z2luLQ0KPiA+ID4gdHVpX2dpdC5iYg0KPiA+
-ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+ID4gbWV0YS1vZS9yZWNpcGVz
-LWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLQ0KPiA+ID4gcmVt
-b3RlLnJlcG8uc2FtcGxlDQo+ID4gPg0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+
-ID4gYS9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkv
-ZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+ID4gPiBiL21ldGEtb2UvcmVjaXBl
-cy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQu
-YmINCj4gPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gPiBpbmRleCAw
-MDAwMDAwLi5lODkxODY4DQo+ID4gPiAtLS0gL2Rldi9udWxsDQo+ID4gPiAr
-KysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkv
-ZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+ID4gPiBAQCAtMCwwICsxLDM4IEBA
-DQo+ID4gPiArU1VNTUFSWSA9ICJBIHRleHQtYmFzZWQgdXNlciBpbnRlcmZh
-Y2UgcGx1Z2luIG9mIGRuZiBmb3IgdXNlciB0bw0KPiA+ID4gK21hbmFnZQ0K
-PiA+ID4gcGFja2FnZXMuICINCj4gPiA+ICtMSUNFTlNFID0gIkdQTHYyIg0K
-PiA+ID4gKw0KPiA+ID4gK0xJQ19GSUxFU19DSEtTVU0gPQ0KPiA+ID4gImZp
-bGU6Ly9DT1BZSU5HO21kNT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRh
-NDI2MyINCj4gPiA+ICsNCj4gPiA+ICtTUkNfVVJJID0gImdpdDovL2dpdGh1
-Yi5jb20vdWJpbnV4L2RuZi1wbHVnaW4tdHVpLmdpdDticmFuY2g9bWFzdGVy
-ICINCj4gPiA+ICtTUkNSRVYgPSAiMzFkNjg2NmQ1ZWRhMDJiZTlhNmJmYjFm
-Y2E5ZTkwOTViMTJlZWNkMSINCj4gPiA+ICtQViA9ICIxLjAiDQo+ID4gPiAr
-DQo+ID4gPiArU1JDX1VSSV9hcHBlbmRfY2xhc3MtdGFyZ2V0ID0gImZpbGU6
-Ly9vZS1yZW1vdGUucmVwby5zYW1wbGUiDQo+ID4gPiArDQo+ID4gPiAraW5o
-ZXJpdCBkaXN0dXRpbHMzLWJhc2UNCj4gPiA+ICsNCj4gPiA+ICtTID0gIiR7
-V09SS0RJUn0vZ2l0Ig0KPiA+ID4gKw0KPiA+ID4gK2RvX2luc3RhbGxfYXBw
-ZW5kKCkgew0KPiA+ID4gKyAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtkYXRh
-ZGlyfS9kbmYNCj4gPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke1N9
-L3NhbXBsZXMvKiAke0R9JHtkYXRhZGlyfS9kbmYNCj4gPiA+ICsgICAgICAg
-IGluc3RhbGwgLWQgJHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9L2Ru
-Zi1wbHVnaW5zL21raW1nDQo+ID4gPiArICAgICAgICBpbnN0YWxsIC1tIDA3
-NTUgJHtTfS9kbmYtcGx1Z2lucy9ta2ltZy8qDQo+ID4gPiAke0R9JHtQWVRI
-T05fU0lURVBBQ0tBR0VTX0RJUn0vZG5mLXBsdWdpbnMvbWtpbWcNCj4gPiA+
-ICsgICAgICAgIGZvciBmaWxlIGluICQobHMgJHtTfS9kbmYtcGx1Z2lucy8g
-fCBncmVwIC12IG1raW1nKTsgZG8NCj4gPiA+ICsgICAgICAgICAgICBpbnN0
-YWxsIC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy8kZmlsZQ0KPiA+ID4gJHtE
-fSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9L2RuZi1wbHVnaW5zDQo+ID4g
-PiArICAgICAgICBkb25lDQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK2Rv
-X2luc3RhbGxfYXBwZW5kX2NsYXNzLXRhcmdldCgpIHsNCj4gPiA+ICsgICAg
-ICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0veXVtLnJlcG9zLmQN
-Cj4gPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L29l
-LXJlbW90ZS5yZXBvLnNhbXBsZQ0KPiA+ID4gKyR7RH0ke3N5c2NvbmZkaXJ9
-L3l1bS5yZXBvcy5kIH0NCj4gPiA+ICsNCj4gPiA+ICtGSUxFU18ke1BOfSAr
-PSAiJHtkYXRhZGlyfS9kbmYiDQo+ID4gPiArDQo+ID4gPiArUkRFUEVORFNf
-JHtQTn0gKz0gIiBcDQo+ID4gPiArICBkbmYgXA0KPiA+ID4gKyAgbGlibmV3
-dC1weXRob24gXA0KPiA+ID4gKyAgIg0KPiA+ID4gKw0KPiA+ID4gK0JCQ0xB
-U1NFWFRFTkQgPSAibmF0aXZlc2RrIg0KPiA+ID4gZGlmZiAtLWdpdCBhL21l
-dGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9v
-ZS0NCj4gPiA+IHJlbW90ZS5yZXBvLnNhbXBsZQ0KPiA+ID4gYi9tZXRhLW9l
-L3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2UtDQo+
-ID4gPiByZW1vdGUucmVwby5zYW1wbGUNCj4gPiA+IG5ldyBmaWxlIG1vZGUg
-MTAwNjQ0DQo+ID4gPiBpbmRleCAwMDAwMDAwLi42YzQ1MDJlDQo+ID4gPiAt
-LS0gL2Rldi9udWxsDQo+ID4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2
-dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMvb2UtcmVtb3RlLnJlcG8ucw0K
-PiA+ID4gKysrIGFtDQo+ID4gPiArKysgcGwNCj4gPiA+ICsrKyBlDQo+ID4g
-PiBAQCAtMCwwICsxLDUgQEANCj4gPiA+ICtbYmFzZV0NCj4gPiA+ICtuYW1l
-PW15cmVwbw0KPiA+ID4gK2Jhc2V1cmw9aHR0cDovLzEyNy4wLjAuMS9vZV9y
-ZXBvLw0KPiA+ID4gK2VuYWJsZWQ9MQ0KPiA+ID4gK2dwZ2NoZWNrPTANCj4g
-PiA+IC0tDQo+ID4gPiAyLjcuNA0KPiA+DQo+ID4NCj4gPg0KPiA+IC0tDQo+
-ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+
-ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
-Cj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gDQo+IC0tDQo+IF9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-DQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVt
-YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDov
-L2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
-ZW1iZWRkZWQtZGV2ZWwNCgoK
+Most of these where back port requests so I am giving a short review window.
+Commnets by Sunday.
+
+The following changes since commit 21cbe3ec166696b4d67d2ef5486a394d14d29269:
+
+  aufs-util: prevent native aufs-util depending on target kernel (2019-05-18 07:38:39 -0700)
+
+are available in the git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib stable/warrior-nmut
+  http://cgit.openembedded.org//log/?h=stable/warrior-nmut
+
+Changqing Li (1):
+  netkit-telnet: add rconflicts
+
+Hongxu Jia (1):
+  crash: do not use unstable github archive tarballs
+
+Liwei Song (1):
+  turbostat: copy bits.h from kernel to turbostat
+
+Martin Jansa (16):
+  gtkwave: add distro_features_check
+  ndctl: make MACHINE_ARCH and ignore from libblockdev
+  oprofile: make MACHINE_ARCH
+  umip: make MACHINE_ARCH
+  mscgen: fix SRC_URI for multilib
+  triggerhappy: fix issues
+  python-cassandra-driver.inc: fix DEPENDS
+  opencv: use the same package name in PACKAGES and RDEPENDS
+  igmpproxy: remove
+    0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch and
+    _GNU_SOURCE
+  libvncserver: set PV in the recipe
+  ccid: fix SRC_URI
+  ne10, libopus: add armv7ve override as well
+  hunspell: use git fetcher instead of github archive
+  ttf-mplus, ttf-vlgothic: add ttf-mplus license
+  libmikmod: fix SRC_URI
+  leptonica: fix SRC_URI
+
+Mingli Yu (1):
+  mariadb: Upgrade to 10.3.15
+
+Qi.Chen@windriver.com (1):
+  polkit: fix CVE-2019-6133
+
+Scott Ellis (1):
+  wireguard: Upgrade 20190123 -> 20190406
+
+nick83ola (1):
+  uthash: do not use unstable github archive tarballs
+
+ .../recipes-connectivity/umip/umip_1.0.bb          |   3 +
+ ...xy.h-Include-sys-types.h-for-u_short-u_in.patch |  25 ---
+ .../recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb   |   6 +-
+ ...0190123.bb => wireguard-module_0.0.20190406.bb} |   0
+ ...20190123.bb => wireguard-tools_0.0.20190406.bb} |   0
+ .../recipes-kernel/wireguard/wireguard.inc         |   4 +-
+ .../netkit-telnet/netkit-telnet_0.17.bb            |   1 +
+ meta-oe/conf/layer.conf                            |   6 +
+ meta-oe/licenses/ttf-mplus                         |  16 ++
+ meta-oe/recipes-core/ndctl/ndctl_v63.bb            |   3 +
+ .../packagegroups/packagegroup-meta-oe.bb          |   3 +-
+ ...native_10.3.13.bb => mariadb-native_10.3.15.bb} |   0
+ meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
+ .../{mariadb_10.3.13.bb => mariadb_10.3.15.bb}     |   0
+ ...pare-PolkitUnixProcess-uids-for-temporary.patch | 186 +++++++++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   7 +-
+ .../{triggerhappy_0.5.0.bb => triggerhappy_git.bb} |  22 +--
+ meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb |   4 +
+ .../recipes-graphics/leptonica/leptonica_1.74.4.bb |   2 +-
+ .../libvncserver/libvncserver_git.bb               |   2 +-
+ .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |   2 +-
+ .../ttf-fonts/ttf-vlgothic_20141206.bb             |   2 +-
+ meta-oe/recipes-kernel/crash/crash_7.2.5.bb        |   8 +-
+ meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  |   3 +
+ meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb  |   2 +
+ .../recipes-multimedia/libopus/libopus_1.1.3.bb    |   3 +-
+ .../recipes-multimedia/mikmod/libmikmod_3.3.6.bb   |   2 +-
+ meta-oe/recipes-support/ccid/ccid_1.4.24.bb        |   4 +-
+ meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb |   7 +-
+ meta-oe/recipes-support/mscgen/mscgen_0.20.bb      |   2 +-
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb         |   4 +-
+ meta-oe/recipes-support/opencv/opencv_3.4.5.bb     |   2 +-
+ meta-oe/recipes-support/uthash/uthash_2.1.0.bb     |   7 +-
+ .../python/python-cassandra-driver.inc             |   2 +-
+ 34 files changed, 272 insertions(+), 72 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/igmpproxy/igmpproxy/0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190123.bb => wireguard-module_0.0.20190406.bb} (100%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190123.bb => wireguard-tools_0.0.20190406.bb} (100%)
+ create mode 100644 meta-oe/licenses/ttf-mplus
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.13.bb => mariadb-native_10.3.15.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.13.bb => mariadb_10.3.15.bb} (100%)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch
+ rename meta-oe/recipes-extended/triggerhappy/{triggerhappy_0.5.0.bb => triggerhappy_git.bb} (73%)
+
+-- 
+2.7.4
+
 
