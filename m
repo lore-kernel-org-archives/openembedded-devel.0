@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DB7FC7E8DB
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C0F4D7E7EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 17:57:43 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id l19so3400519pgh.9
+	Sat, 15 Jun 2019 17:57:44 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id f21so3420411pgi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 10:57:45 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=wIyn74LDC4SUJLEJ3sb9ZEvu00jX+RARb2fvWovKxYg=;
-	b=MTkdNRUsy7XbpQ7KOecGNw3R23pPCaVc5HihzHV2vXCHEXPT+WdvYBXbMkSrf0F/Kt
-	kx8pvMrw6L4S5b6zmSVAMVBRmdU8QkQvMiwSoPRT/4P/d30tJKh/CqJUzPzYO29Fr5Iy
-	UbmLFU+EckIpFxNPcdtcbi6qr5ccKLj8P6C5uNEf/XRyFTfopZNLuRFCB6Olq/CCGKd4
-	7bU0/8mR7E2SKgogY8ChKxFCW2pKW0UanDHXVsu8DYtg8ueh7QAbdwoC0c9EQCnt6ojv
-	IHo9i0nVyhG2ffucoEGypHBbnebYtZ9quZhfdFJcnCp/nWXOi4V1FsuXjTnWcADSSeWD
-	ejFw==
+	bh=UDmw4HRzVkFQaGbRMiSOLyQCZW7RVrHRFyfg5uIS10Q=;
+	b=jDFCGsSb08UqvqaZUYttoi4ppORIrUSsgyAB+MxrH4GDKn+CFJ4r64rVJoS30gl09X
+	MrXNXVOveYx0px9mKXAxC0yRwPdb0w2Sv7+gixGlUXlj/d4apPYAc/UyXsRC8ltCsOZ3
+	QP/R3VfSkkU0jkE7vwLbs6/HUF9a4+3KL7DSU7AW+05NQakLsXo/JbS7hWV7Z8+jZr8t
+	wvPv1oTn1rooP0OzX/ByASHlbXrUx5acN9bPCQE5rY4eGimdmjfW8ZfzPXwfITcGWATB
+	2tQqj/pAgm2cMQCQc1fBD6RN+zOoY0Z4/Za1J98GTdZG2zNWdGCTUcw9IGFQ7J/PnCsV
+	Q5eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=wIyn74LDC4SUJLEJ3sb9ZEvu00jX+RARb2fvWovKxYg=;
-	b=KxGKpoIYcGueo+CUNoGDaWM1Ro5aEJZ7Wq156EprKADFbJKVyhi44irzZUWgqRt3O3
-	ucgDH+oKkD8KPikP8neF15mDMc0dFFIwEnu6uVbrLBzBKwsV6eX5SpQ9D+yJ4h8/YWph
-	Hvv7KeQg+WfLna+a/fLvXXQrYHeH78XYoO6x9uLCzLL1Z0k8m5bfIBH3w4qyY9eZihhy
-	gPKTSrz4yd8HnFOCDLtAE1BdbHaUNBJ7JTxzpFxE/zBQ93B1ipiJaqPn7ZIswQp2/tsB
-	+ysQN0KSTVhcJur+SARlpQeyProS/IEMWhgl4d2HUZRlVysnk3SZkCYz8nZTPhKWCfQN
-	4WcQ==
-X-Gm-Message-State: APjAAAV1sI/e7XfMh6V9a2TzkySaUloWbteyCpPyK3xgTnq1+gSVP/NI
-	0S5bG+gTJDhW0FkFlbE2RhsEGH3W
-X-Google-Smtp-Source: APXvYqx1RsvlNmGzLoM1vJmVRPzKihmBd+Uwh6Qsudjk1bqTnGlWi6Q54VWcPtbtIQmqUJJwc6dCyA==
-X-Received: by 2002:a63:234c:: with SMTP id u12mr41959828pgm.264.1560621464876;
-	Sat, 15 Jun 2019 10:57:44 -0700 (PDT)
+	bh=UDmw4HRzVkFQaGbRMiSOLyQCZW7RVrHRFyfg5uIS10Q=;
+	b=dCPx44qkA7kxMgMYa9oiEpaf94GpgLJkhvdeGpBcYGe2aZRJ+Rviqf3TL5JZo7DPPC
+	uK4oAsk5CcFHoyJL5LrizXY9+pl+X3m2p3XpX1mDIv9owah0RwoQllFoMudeGGFrTe9m
+	gapmgPiuapVlbH+nLFaZlXQPEoRh1D2sFpGMpYsnh0GHywNrFsKq3/iyLekfhczFM0qr
+	k9mp/gobUTYkkiH98acTKCHpK61UetOPu4D+QvNfRIbNtG9T7wgXYjT+ehBCMiiMuMbW
+	s5GeI/v0H7xtj7nEe5sHkDssq+JwKM8H7u6Rgzb3PbGuG6DThTXCT9B3ku/QD/KX1BKH
+	b4Cg==
+X-Gm-Message-State: APjAAAWQlopDKFQukDx1XCq4eLk11CSjO6bR+yqsF3uNW8Y+Gy1sz47M
+	bP9zanzlZC8tYThuF25sx2c81EZ5
+X-Google-Smtp-Source: APXvYqyDDnvpnKUX/HatGHCXuY/MOvINC1ZomYMuBiRPXA8kKdwumO/D5jfwjzQso1S9XHuC8LrIkw==
+X-Received: by 2002:a63:eb0d:: with SMTP id t13mr42541989pgh.37.1560621465699; 
+	Sat, 15 Jun 2019 10:57:45 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:5942:80bf:dc9c:15ab])
 	by smtp.gmail.com with ESMTPSA id
-	f14sm8561221pfn.53.2019.06.15.10.57.44
+	f14sm8561221pfn.53.2019.06.15.10.57.45
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Jun 2019 10:57:44 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:45 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Jun 2019 10:57:18 -0700
-Message-Id: <d102c4e29e4bc5af10422aa9161a869e32c116b0.1560620937.git.akuster808@gmail.com>
+Date: Sat, 15 Jun 2019 10:57:19 -0700
+Message-Id: <d37d0857592a709e1e0a290da0d44bae9fdd6971.1560620937.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1560620937.git.akuster808@gmail.com>
 References: <cover.1560620937.git.akuster808@gmail.com>
-Subject: [Warror][ 14/23] hunspell: use git fetcher instead of github archive
+Subject: [Warror][ 15/23] ttf-mplus, ttf-vlgothic: add ttf-mplus license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,108 +63,71 @@ X-List-Received-Date: Sat, 15 Jun 2019 17:57:44 -0000
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-* fixes:
-  ERROR: QA Issue: https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz: SRC_URI uses unstable GitHub archives [src-uri-bad]
-* there is developer uploaded tarball in:
-  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
-  but it's already reconfigured which we don't need, so I've used git fetcher
-  to stay closer to what we already use.
-* the diff between:
-  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
-  and
-  https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz
-
-docker-shr @ ~/hunspell $ diff -rq hunspell-1.7.0*/
-Only in hunspell-1.7.0-archive/: .gitignore
-Only in hunspell-1.7.0-archive/: .travis.yml
-Only in hunspell-1.7.0-archive/: COPYING.MPL
-Only in hunspell-1.7.0/: INSTALL
-Only in hunspell-1.7.0/: Makefile.in
-Only in hunspell-1.7.0-archive/: README.md
-Only in hunspell-1.7.0/: aclocal.m4
-Only in hunspell-1.7.0-archive/: appveyor.yml
-Only in hunspell-1.7.0/: compile
-Only in hunspell-1.7.0/: config.guess
-Only in hunspell-1.7.0/: config.h.in
-Only in hunspell-1.7.0/: config.sub
-Only in hunspell-1.7.0/: configure
-Only in hunspell-1.7.0/: depcomp
-Only in hunspell-1.7.0/: install-sh
-Only in hunspell-1.7.0/: ltmain.sh
-Only in hunspell-1.7.0-archive/m4: ChangeLog
-Only in hunspell-1.7.0-archive/m4: README
-Only in hunspell-1.7.0/m4: libtool.m4
-Only in hunspell-1.7.0/m4: ltoptions.m4
-Only in hunspell-1.7.0/m4: ltsugar.m4
-Only in hunspell-1.7.0/m4: ltversion.m4
-Only in hunspell-1.7.0/m4: lt~obsolete.m4
-Only in hunspell-1.7.0/man: Makefile.in
-Only in hunspell-1.7.0/man/hu: Makefile.in
-Only in hunspell-1.7.0/: missing
-Only in hunspell-1.7.0-archive/: msvc
-Only in hunspell-1.7.0-archive/po: .gitignore
-Only in hunspell-1.7.0/po: ca.gmo
-Files hunspell-1.7.0-archive/po/ca.po and hunspell-1.7.0/po/ca.po differ
-Only in hunspell-1.7.0/po: de.gmo
-Files hunspell-1.7.0-archive/po/de.po and hunspell-1.7.0/po/de.po differ
-Only in hunspell-1.7.0/po: es.gmo
-Files hunspell-1.7.0-archive/po/es.po and hunspell-1.7.0/po/es.po differ
-Only in hunspell-1.7.0/po: hu.gmo
-Files hunspell-1.7.0-archive/po/hu.po and hunspell-1.7.0/po/hu.po differ
-Files hunspell-1.7.0-archive/po/hunspell.pot and hunspell-1.7.0/po/hunspell.pot differ
-Only in hunspell-1.7.0/po: it.gmo
-Files hunspell-1.7.0-archive/po/it.po and hunspell-1.7.0/po/it.po differ
-Only in hunspell-1.7.0/po: pl.gmo
-Files hunspell-1.7.0-archive/po/pl.po and hunspell-1.7.0/po/pl.po differ
-Only in hunspell-1.7.0/po: pt_BR.gmo
-Files hunspell-1.7.0-archive/po/pt_BR.po and hunspell-1.7.0/po/pt_BR.po differ
-Only in hunspell-1.7.0/po: tg.gmo
-Files hunspell-1.7.0-archive/po/tg.po and hunspell-1.7.0/po/tg.po differ
-Only in hunspell-1.7.0/src: Makefile.in
-Only in hunspell-1.7.0/src/hunspell: Makefile.in
-Only in hunspell-1.7.0-archive/src/parsers: .gitignore
-Only in hunspell-1.7.0/src/parsers: Makefile.in
-Only in hunspell-1.7.0-archive/src/tools: .gitignore
-Only in hunspell-1.7.0/src/tools: Makefile.in
-Only in hunspell-1.7.0-archive/src/tools: fuzzer.cxx
-Only in hunspell-1.7.0/: tap-driver.sh
-Only in hunspell-1.7.0/: test-driver
-Only in hunspell-1.7.0-archive/tests: .gitattributes
-Only in hunspell-1.7.0-archive/tests: .gitignore
-Only in hunspell-1.7.0/tests: Makefile.in
-Only in hunspell-1.7.0-archive/tests: hu.wrong
-Only in hunspell-1.7.0-archive/tests: nepali.wrong
-Only in hunspell-1.7.0-archive/tests: ph2.good
-Only in hunspell-1.7.0-archive/tests/suggestiontest: .gitignore
-Only in hunspell-1.7.0/tests/suggestiontest: Makefile.in
-Only in hunspell-1.7.0-archive/tests/suggestiontest: prepare2
-Only in hunspell-1.7.0-archive/tests: wordpair.good
+* add meta-oe/licenses/ttf-mplus from ttf-mplus/027-r4/mplus-TESTFLIGHT-027/LICENSE_E
+* use BPN to use the same LICENSE even with multilib
+* use the same license name from ttf-vlgothic
+* fixes following warnings:
+  WARNING: ttf-mplus-027-r4 do_populate_lic: ttf-mplus: No generic license file exists for: ttf-mplus in any provider
+  WARNING: ttf-vlgothic-20141206-r0 do_populate_lic: ttf-vlgothic: No generic license file exists for: mplus in any provider
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ meta-oe/licenses/ttf-mplus                               | 16 ++++++++++++++++
+ meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb      |  2 +-
+ .../recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb  |  2 +-
+ 3 files changed, 18 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/licenses/ttf-mplus
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-index 40da3b4..c2fb4fa 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
- "
- 
--SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
--SRC_URI[md5sum] = "b2399a4aa927e8b3e171d9ea6737cc02"
--SRC_URI[sha256sum] = "bb27b86eb910a8285407cf3ca33b62643a02798cf2eef468c0a74f6c3ee6bc8a"
-+SRCREV = "4ddd8ed5ca6484b930b111aec50c2750a6119a0f"
-+SRC_URI = "git://github.com/${BPN}/${BPN}.git"
+diff --git a/meta-oe/licenses/ttf-mplus b/meta-oe/licenses/ttf-mplus
+new file mode 100644
+index 0000000..c9cdca3
+--- /dev/null
++++ b/meta-oe/licenses/ttf-mplus
+@@ -0,0 +1,16 @@
++M+ FONTS                                Copyright (C) 2002-2009 M+ FONTS PROJECT
 +
-+S = "${WORKDIR}/git"
++-
++
++LICENSE_E
++
++
++
++
++These fonts are free softwares.
++Unlimited permission is granted to use, copy, and distribute it, with
++or without modification, either commercially and noncommercially.
++THESE FONTS ARE PROVIDED "AS IS" WITHOUT WARRANTY.
++
++
++http://mplus-fonts.sourceforge.jp/mplus-outline-fonts/
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+index 9ad348d..efcf1b6 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+@@ -2,7 +2,7 @@ require ttf.inc
  
- inherit autotools pkgconfig gettext
+ SUMMARY = "MPlus font - TTF Edition"
+ HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
+-LICENSE = "${PN}"
++LICENSE = "${BPN}"
+ LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \
+                     file://LICENSE_J;md5=a120ca8d7c8e4a475d5277c9aeb95221 \
+ "
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
+index 62f2bb2..e522810 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
+@@ -4,7 +4,7 @@ SUMMARY = "Japanese TrueType fonts from Vine Linux"
+ AUTHOR = "Contributor: noonov <noonov@gmail.com>"
+ HOMEPAGE = "http://vlgothic.dicey.org/"
  
+-LICENSE = "mplus & BSD"
++LICENSE = "ttf-mplus & BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.en;md5=66ecd0fd7e4da6246fa30317c7b66755 \
+                     file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
+ "
 -- 
 2.7.4
 
