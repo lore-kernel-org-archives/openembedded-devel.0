@@ -1,53 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C9F27E86E
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id DB7FC7E8DB
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 15 Jun 2019 17:57:43 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id bh12so2363033plb.4
+Received: by mail-pg1-f195.google.com with SMTP id l19so3400519pgh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2019 10:57:44 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=CKH0cpG0IOEp/fLYKbbcZj5KCoIBUDL0dOrjcIlnTXM=;
-	b=tcCSpZRW7V2nEx5I4BhyZPu6yZ6fQZI+AFcphHb5S9VGxZ4zAEIf+4CJFtQ8W/b7HP
-	reSY/cZFFJ9wGRnV9ih3CRM6i6NA3xDrJIGcqMCsH4vW2TjYwRpd3d7fCDIJx/UO9nUA
-	lZAqA73uign/hQSmD/sTisw54bbBgAP4O0zyAQkju0G/g+E9fGakWWI4WDTdIZEbW4VO
-	bHwZRqWg0kOn3BLcARY0QkZIbinZcvialMn5GtQNoPlv5oSXXLGZHD17WcOLx8IKVMQt
-	gqPSWmZvT7zoUyTB9VTh68NWOqkjUc4S/WUbiD9slBLSYOWWtuKi9rr9zjmD1pUTuH4E
-	GRIQ==
+	bh=wIyn74LDC4SUJLEJ3sb9ZEvu00jX+RARb2fvWovKxYg=;
+	b=MTkdNRUsy7XbpQ7KOecGNw3R23pPCaVc5HihzHV2vXCHEXPT+WdvYBXbMkSrf0F/Kt
+	kx8pvMrw6L4S5b6zmSVAMVBRmdU8QkQvMiwSoPRT/4P/d30tJKh/CqJUzPzYO29Fr5Iy
+	UbmLFU+EckIpFxNPcdtcbi6qr5ccKLj8P6C5uNEf/XRyFTfopZNLuRFCB6Olq/CCGKd4
+	7bU0/8mR7E2SKgogY8ChKxFCW2pKW0UanDHXVsu8DYtg8ueh7QAbdwoC0c9EQCnt6ojv
+	IHo9i0nVyhG2ffucoEGypHBbnebYtZ9quZhfdFJcnCp/nWXOi4V1FsuXjTnWcADSSeWD
+	ejFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=CKH0cpG0IOEp/fLYKbbcZj5KCoIBUDL0dOrjcIlnTXM=;
-	b=gpudNGdmTXxkXY5HRsG0IxiPXjzZGSybos99qlyrEwNce1AqVKNIMIQrl/KODSukl/
-	u44W13HVkA4ulkhBldDyp7Vh0LDwM2tRFHyyfx6KblWfcv8mP5/LfeKMwuNecpYbKjz+
-	7kvCmeDKKomcWaLaxzYzDXdin4Yq8IQuvoqtNczMUibprUj8jDeB9uVInhPfwJ2hlZ2o
-	Voz4RnvcD6AHQ3jSgMF5YpIF37wkj72xXimYPegMGmb/rar7vgtHVPGE8fwEiTNbY8e9
-	MK9ohvyEUt4RUJeNYc9+hjRM1othDPak25XpDHMcTcjFov41zu4fdA0a29EK3qjkMNVA
-	/AzA==
-X-Gm-Message-State: APjAAAX7gaPVta1bmApsnDmH4bog4tfKfQb7FdovRCJVtTeJVR9Nhqkb
-	BMp9wD19a/NDu+Gu6N63rqPHpcfW
-X-Google-Smtp-Source: APXvYqwqNdwnNlFKI0JcVbxDMa44dpfNX6XYW9UWSdV3bF91KdfGsmElh9hJG8dRpfy14o2l0gzSzg==
-X-Received: by 2002:a17:902:324:: with SMTP id
-	33mr99476704pld.284.1560621464102; 
+	bh=wIyn74LDC4SUJLEJ3sb9ZEvu00jX+RARb2fvWovKxYg=;
+	b=KxGKpoIYcGueo+CUNoGDaWM1Ro5aEJZ7Wq156EprKADFbJKVyhi44irzZUWgqRt3O3
+	ucgDH+oKkD8KPikP8neF15mDMc0dFFIwEnu6uVbrLBzBKwsV6eX5SpQ9D+yJ4h8/YWph
+	Hvv7KeQg+WfLna+a/fLvXXQrYHeH78XYoO6x9uLCzLL1Z0k8m5bfIBH3w4qyY9eZihhy
+	gPKTSrz4yd8HnFOCDLtAE1BdbHaUNBJ7JTxzpFxE/zBQ93B1ipiJaqPn7ZIswQp2/tsB
+	+ysQN0KSTVhcJur+SARlpQeyProS/IEMWhgl4d2HUZRlVysnk3SZkCYz8nZTPhKWCfQN
+	4WcQ==
+X-Gm-Message-State: APjAAAV1sI/e7XfMh6V9a2TzkySaUloWbteyCpPyK3xgTnq1+gSVP/NI
+	0S5bG+gTJDhW0FkFlbE2RhsEGH3W
+X-Google-Smtp-Source: APXvYqx1RsvlNmGzLoM1vJmVRPzKihmBd+Uwh6Qsudjk1bqTnGlWi6Q54VWcPtbtIQmqUJJwc6dCyA==
+X-Received: by 2002:a63:234c:: with SMTP id u12mr41959828pgm.264.1560621464876;
 	Sat, 15 Jun 2019 10:57:44 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:5942:80bf:dc9c:15ab])
 	by smtp.gmail.com with ESMTPSA id
-	f14sm8561221pfn.53.2019.06.15.10.57.43
+	f14sm8561221pfn.53.2019.06.15.10.57.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Jun 2019 10:57:43 -0700 (PDT)
+	Sat, 15 Jun 2019 10:57:44 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Jun 2019 10:57:17 -0700
-Message-Id: <e68fd1c8e982fc5470f7606cff57fe59272c9017.1560620937.git.akuster808@gmail.com>
+Date: Sat, 15 Jun 2019 10:57:18 -0700
+Message-Id: <d102c4e29e4bc5af10422aa9161a869e32c116b0.1560620937.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1560620937.git.akuster808@gmail.com>
 References: <cover.1560620937.git.akuster808@gmail.com>
-Subject: [Warror][ 13/23] ne10, libopus: add armv7ve override as well
+Subject: [Warror][ 14/23] hunspell: use git fetcher instead of github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,72 +59,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jun 2019 17:57:43 -0000
+X-List-Received-Date: Sat, 15 Jun 2019 17:57:44 -0000
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-* fix the override in packagegroup-meta-oe.bb
-* alllow building ne10 for armv7ve (e.g. Cortex-A15)
+* fixes:
+  ERROR: QA Issue: https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz: SRC_URI uses unstable GitHub archives [src-uri-bad]
+* there is developer uploaded tarball in:
+  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
+  but it's already reconfigured which we don't need, so I've used git fetcher
+  to stay closer to what we already use.
+* the diff between:
+  https://github.com/hunspell/hunspell/files/2573619/hunspell-1.7.0.tar.gz
+  and
+  https://github.com/hunspell/hunspell/archive/v1.7.0.tar.gz
+
+docker-shr @ ~/hunspell $ diff -rq hunspell-1.7.0*/
+Only in hunspell-1.7.0-archive/: .gitignore
+Only in hunspell-1.7.0-archive/: .travis.yml
+Only in hunspell-1.7.0-archive/: COPYING.MPL
+Only in hunspell-1.7.0/: INSTALL
+Only in hunspell-1.7.0/: Makefile.in
+Only in hunspell-1.7.0-archive/: README.md
+Only in hunspell-1.7.0/: aclocal.m4
+Only in hunspell-1.7.0-archive/: appveyor.yml
+Only in hunspell-1.7.0/: compile
+Only in hunspell-1.7.0/: config.guess
+Only in hunspell-1.7.0/: config.h.in
+Only in hunspell-1.7.0/: config.sub
+Only in hunspell-1.7.0/: configure
+Only in hunspell-1.7.0/: depcomp
+Only in hunspell-1.7.0/: install-sh
+Only in hunspell-1.7.0/: ltmain.sh
+Only in hunspell-1.7.0-archive/m4: ChangeLog
+Only in hunspell-1.7.0-archive/m4: README
+Only in hunspell-1.7.0/m4: libtool.m4
+Only in hunspell-1.7.0/m4: ltoptions.m4
+Only in hunspell-1.7.0/m4: ltsugar.m4
+Only in hunspell-1.7.0/m4: ltversion.m4
+Only in hunspell-1.7.0/m4: lt~obsolete.m4
+Only in hunspell-1.7.0/man: Makefile.in
+Only in hunspell-1.7.0/man/hu: Makefile.in
+Only in hunspell-1.7.0/: missing
+Only in hunspell-1.7.0-archive/: msvc
+Only in hunspell-1.7.0-archive/po: .gitignore
+Only in hunspell-1.7.0/po: ca.gmo
+Files hunspell-1.7.0-archive/po/ca.po and hunspell-1.7.0/po/ca.po differ
+Only in hunspell-1.7.0/po: de.gmo
+Files hunspell-1.7.0-archive/po/de.po and hunspell-1.7.0/po/de.po differ
+Only in hunspell-1.7.0/po: es.gmo
+Files hunspell-1.7.0-archive/po/es.po and hunspell-1.7.0/po/es.po differ
+Only in hunspell-1.7.0/po: hu.gmo
+Files hunspell-1.7.0-archive/po/hu.po and hunspell-1.7.0/po/hu.po differ
+Files hunspell-1.7.0-archive/po/hunspell.pot and hunspell-1.7.0/po/hunspell.pot differ
+Only in hunspell-1.7.0/po: it.gmo
+Files hunspell-1.7.0-archive/po/it.po and hunspell-1.7.0/po/it.po differ
+Only in hunspell-1.7.0/po: pl.gmo
+Files hunspell-1.7.0-archive/po/pl.po and hunspell-1.7.0/po/pl.po differ
+Only in hunspell-1.7.0/po: pt_BR.gmo
+Files hunspell-1.7.0-archive/po/pt_BR.po and hunspell-1.7.0/po/pt_BR.po differ
+Only in hunspell-1.7.0/po: tg.gmo
+Files hunspell-1.7.0-archive/po/tg.po and hunspell-1.7.0/po/tg.po differ
+Only in hunspell-1.7.0/src: Makefile.in
+Only in hunspell-1.7.0/src/hunspell: Makefile.in
+Only in hunspell-1.7.0-archive/src/parsers: .gitignore
+Only in hunspell-1.7.0/src/parsers: Makefile.in
+Only in hunspell-1.7.0-archive/src/tools: .gitignore
+Only in hunspell-1.7.0/src/tools: Makefile.in
+Only in hunspell-1.7.0-archive/src/tools: fuzzer.cxx
+Only in hunspell-1.7.0/: tap-driver.sh
+Only in hunspell-1.7.0/: test-driver
+Only in hunspell-1.7.0-archive/tests: .gitattributes
+Only in hunspell-1.7.0-archive/tests: .gitignore
+Only in hunspell-1.7.0/tests: Makefile.in
+Only in hunspell-1.7.0-archive/tests: hu.wrong
+Only in hunspell-1.7.0-archive/tests: nepali.wrong
+Only in hunspell-1.7.0-archive/tests: ph2.good
+Only in hunspell-1.7.0-archive/tests/suggestiontest: .gitignore
+Only in hunspell-1.7.0/tests/suggestiontest: Makefile.in
+Only in hunspell-1.7.0-archive/tests/suggestiontest: prepare2
+Only in hunspell-1.7.0-archive/tests: wordpair.good
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
- meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb        | 3 ++-
- meta-oe/recipes-support/ne10/ne10_1.2.1.bb                 | 4 +++-
- 3 files changed, 7 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 5fcf989..af3e848 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -220,7 +220,8 @@ RDEPENDS_packagegroup-meta-oe-shells ="\
- 
- NE10 = ""
- NE10_aarch64 = "ne10"
--NE10_arm7 = "ne10"
-+NE10_armv7a = "ne10"
-+NE10_armv7ve = "ne10"
- 
- RDEPENDS_packagegroup-meta-oe-support ="\
-     anthy asio atop augeas avro-c bdwgc frame grail \
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-index 50d4937..fb9bdc7 100644
---- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-@@ -28,9 +28,10 @@ EXTRA_OECONF = " \
-     --enable-custom-modes \
+diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
+index 40da3b4..c2fb4fa 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
+@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
  "
  
--# ne10 is available only for armv7a and aarch64
-+# ne10 is available only for armv7a, armv7ve and aarch64
- DEPENDS_append_aarch64 = " ne10"
- DEPENDS_append_armv7a = " ne10"
-+DEPENDS_append_armv7ve = " ne10"
+-SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
+-SRC_URI[md5sum] = "b2399a4aa927e8b3e171d9ea6737cc02"
+-SRC_URI[sha256sum] = "bb27b86eb910a8285407cf3ca33b62643a02798cf2eef468c0a74f6c3ee6bc8a"
++SRCREV = "4ddd8ed5ca6484b930b111aec50c2750a6119a0f"
++SRC_URI = "git://github.com/${BPN}/${BPN}.git"
++
++S = "${WORKDIR}/git"
  
- python () {
-     if d.getVar('TARGET_FPU') in [ 'soft' ]:
-diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-index 4e8986d..f37ccde 100644
---- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-+++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-@@ -15,13 +15,15 @@ PV .= "gitr+${SRCPV}"
- 
- inherit cmake
- 
--# Incompatible with archs other than armv7 and aarch64
-+# Incompatible with archs other than armv7, armv7ve and aarch64
- COMPATIBLE_MACHINE = "(^$)"
- COMPATIBLE_MACHINE_aarch64 = "(.*)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
-+COMPATIBLE_MACHINE_armv7ve = "(.*)"
- NE10_TARGET_ARCH = ""
- NE10_TARGET_ARCH_aarch64 = "aarch64"
- NE10_TARGET_ARCH_armv7a = "armv7"
-+NE10_TARGET_ARCH_armv7ve = "armv7"
- 
- EXTRA_OECMAKE = '-DGNULINUX_PLATFORM=ON -DNE10_BUILD_SHARED=ON -DNE10_LINUX_TARGET_ARCH="${NE10_TARGET_ARCH}"'
+ inherit autotools pkgconfig gettext
  
 -- 
 2.7.4
