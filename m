@@ -1,50 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B80B77E508
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A0007E508
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 17 Jun 2019 05:24:48 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id p10so5119047pgn.1
+Received: by mail-pl1-f193.google.com with SMTP id s24so3581292plr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Jun 2019 22:24:49 -0700 (PDT)
+	Sun, 16 Jun 2019 22:24:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=MoQGfpULCP3fk5EDxhQYJrRP5foSydwG7g277HRuqFo=;
-	b=WQoG+ayKgJIgFZivddz1ynEedruhDGBdtBWMm5TK+BfnXUY307gbm1y5BDP3v2fpqb
-	QDBRlwAAsG4Vrl+jRFZvVznrEw8p28gppGgVjPPDkbfQ3jFpRRFtmBdvKRRm/PXjejX7
-	T7N9h36mQA8KdGm9la4JQ7FnRpHHOCOVrPPzWGEV/VYmDoPFXaT8/jaXUN/21EIVdkGL
-	CtMzvdLDUHEFk+gJBCFsYwAGdg45b8EnZV9op61KUDl9dNwe/etElbK5gGUWPaiHO22N
-	q+SAqK0UYQZP3Z9l/OO1v8o9m8es08Jfigd2Ni9pYhfgs569gULnFFnAnGMvfJ/ErAUH
-	mhcw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=bqCuQ8dPDOpb9DpTgpZTmFeh3etK9YkTzrTk1UeYAno=;
+	b=OVX56YH/2NSt5D2Eks37Z2k5gYtgo9gwVaIy+IT9iryKI54SnmugszTRTrgtWefcRL
+	9boHm5uOx/nNIP524WTw283ScHVBmCyHM7U8yrZUa7vZSfZu3gyC0xG1oRHRiTG+QYnT
+	ItKeTU2t7wxqCtRXRGJrowtyFCiwsA12O1HbzPY06bru03g1VW6F5cfrVfp0djM62JoI
+	HCKBzJm/F/fqn46MPEfbn2ZyQY/w6uxTawNeceU+C2Yz07II82DTH9wrUSlc2yHNvqMC
+	7cy8MpNxZX176U/pnUwRSxgTwYdgsrvIiBJzpKPEXp59cLLOC+UWwaETlbwJQ/BNHDzL
+	MS4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=MoQGfpULCP3fk5EDxhQYJrRP5foSydwG7g277HRuqFo=;
-	b=NPkHzVWZw3QTW5FZmaonTQwoSL0A3/BBE0xhZ6E7ktSNIwzP2nrHUUAkECQEsO6j3s
-	C/2f9Psj27Pkk+FB3cctCaaxv0jiUNkjK8pqDopXRXLNPVKMnhGgVUcBMh6aQOvx0la1
-	ooPeXVb2bGOwzWmqF2UfwTdjs58f3NjHuoDOH4CJbnH2fSSH6JgLOEMOGaajIzgsr5Qx
-	TfAOCqJza+TX+BqmLQ7HDrErFErcgAdyPz8/+J5mrhIWcujocnF0w+8TST5RQ82RdNRn
-	GPKayZe6cfRznQ3UA5lVboMhEm+8G8TvesB4UOEEue5JZ9mpiEVTIsJ+6K9ueRL68jZ6
-	3Naw==
-X-Gm-Message-State: APjAAAXvwT5B+ikv1jq8txgllmiZqlqVxEMkZZxDzSNdipRWfh1dscV2
-	GjfMtDOq37bzcqVoSQZpQOFCGE7pj1w=
-X-Google-Smtp-Source: APXvYqzxnn0YAuaHpwDoaZ3vtyWCSMBy092tKfYqSKrSdqMdb2dw3kMp+/hhHpLOTLGxBBzt7drUIg==
-X-Received: by 2002:a65:6102:: with SMTP id z2mr1700455pgu.194.1560749088999; 
-	Sun, 16 Jun 2019 22:24:48 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=bqCuQ8dPDOpb9DpTgpZTmFeh3etK9YkTzrTk1UeYAno=;
+	b=rhJGFDQ+DQ17qR9wao0grJHKXnvFAHGLFxgKvxsSg3FOUV3IneLYZBFYqHxPMfHdEb
+	5oA6geSac/9C4J2sEILRxRZLLKq+QrUFbxX5hDpF/qvv3KkApRfTQkTg4dl0pCUBWINO
+	cvPEg9iEjNgFyUOoE3XUUAGhDuqNSWuOwfYlQlCob3lv1PuSc80MJ/R+s8Tkx+1SamNm
+	W6iGKQxeQCfe6UDPY5bER/4lcA9Z8a+VjaIovIvDg1Zpy89xdZefqx7S1n8qr00XUXE2
+	WS7m5CoqGgfbCA56qbKdnNoq+R2sXczMi2DE9dYunK5RSY74vKl34UZKDNyWBgqz5u/Z
+	RAew==
+X-Gm-Message-State: APjAAAUJUEUnfML/kRGvlLZbLjtGoDwPb/695zpZPfISA15JKIUsif5e
+	TpeybOrY2kIxPN7hrXhxiUQO9SKH0gg=
+X-Google-Smtp-Source: APXvYqxolc65kSY98Q5jhzstK8NTs0/vUATYmcvIj+pAPlz8aaG2SltiV85VVTSs/Tg9lcL4TmOPAw==
+X-Received: by 2002:a17:902:2ae7:: with SMTP id
+	j94mr21874568plb.270.1560749089722; 
+	Sun, 16 Jun 2019 22:24:49 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::3c7b])
 	by smtp.gmail.com with ESMTPSA id
-	c124sm10156911pfa.115.2019.06.16.22.24.48
+	c124sm10156911pfa.115.2019.06.16.22.24.49
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 16 Jun 2019 22:24:48 -0700 (PDT)
+	Sun, 16 Jun 2019 22:24:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Jun 2019 22:24:38 -0700
-Message-Id: <20190617052440.18958-1-raj.khem@gmail.com>
+Date: Sun, 16 Jun 2019 22:24:39 -0700
+Message-Id: <20190617052440.18958-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <20190617052440.18958-1-raj.khem@gmail.com>
+References: <20190617052440.18958-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/3] stressapptest: Fix build with libc++
+Subject: [meta-oe][PATCH 2/3] stressapptest: Implement reading sysfs and use it if sysconf is not there
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,68 +60,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 05:24:48 -0000
+X-List-Received-Date: Mon, 17 Jun 2019 05:24:49 -0000
 Content-Transfer-Encoding: 8bit
 
-when using libc++ instead of libstdc++, __gnu_cxx namespace
+This helps in building on musl platform where _SC_LEVEL1_DCACHE_LINESIZE
 is not available
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../stressapptest/libcplusplus-compat.patch   | 28 +++++++++++++++++++
- .../stressapptest/stressapptest_1.0.9.bb      |  4 ++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
+ .../read_sysfs_for_cachesize.patch            | 72 +++++++++++++++++++
+ .../stressapptest/stressapptest_1.0.9.bb      |  1 +
+ 2 files changed, 73 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
 
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
 new file mode 100644
-index 0000000000..f5e7da359d
+index 0000000000..8c251aeb97
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
-@@ -0,0 +1,28 @@
-+Fix compile on sytems using libc++ instead of libstdc++
-+
-+libc++ does not really implement __gnu_cxx namespace and it
-+compiles fine without this namespace, therefore detect libc++
-+and if it is used them exclude this namespace 
-+
-+See https://github.com/stressapptest/stressapptest/issues/47
-+
-+Fixes
-+
-+./sattypes.h:33:17: error: expected namespace name
-+using namespace __gnu_cxx; //NOLINT
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
+@@ -0,0 +1,72 @@
++sysconf params like _SC_LEVEL1_DCACHE_LINESIZE are not universally
++implemented, therefore check for them being available, if not there
++then read the sysfs directly to get the value
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- stressapptest-1.0.9.orig/src/sattypes.h
-++++ stressapptest-1.0.9/src/sattypes.h
-+@@ -30,7 +30,9 @@
-+ #include "stressapptest_config_android.h"  // NOLINT
-+ #else
-+ #include "stressapptest_config.h"  // NOLINT
-++#ifndef _LIBCPP_VERSION
-+ using namespace __gnu_cxx;  //NOLINT
-++#endif  // _LIBCPP_VERSION
-+ #endif  // __ANDROID__
-+ using namespace std;
-+
++--- a/src/sat.cc
+++++ b/src/sat.cc
++@@ -1482,15 +1482,47 @@ int Sat::CpuCount() {
++   return sysconf(_SC_NPROCESSORS_CONF);
++ }
++ 
+++int Sat::ReadInt(const char *filename, int *value) {
+++  char line[64];
+++  int fd = open(filename, O_RDONLY), err = -1;
+++
+++  if (fd < 0)
+++    return -1;
+++  if (read(fd, line, sizeof(line)) > 0) {
+++    *value = atoi(line);
+++    err = 0;
+++  }
+++
+++  close(fd);
+++  return err;
+++}
+++
++ // Return the worst case (largest) cache line size of the various levels of
++ // cache actually prsent in the machine.
++ int Sat::CacheLineSize() {
++-  int max_linesize = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
++-  int linesize = sysconf(_SC_LEVEL2_CACHE_LINESIZE);
+++  int max_linesize, linesize;
+++#ifdef _SC_LEVEL1_DCACHE_LINESIZE
+++  max_linesize = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+++#else
+++  ReadInt("/sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size", &max_linesize);
+++#endif
+++#ifdef _SC_LEVEL2_DCACHE_LINESIZE
+++  linesize = sysconf(_SC_LEVEL2_DCACHE_LINESIZE);
+++#else
+++  ReadInt("/sys/devices/system/cpu/cpu0/cache/index1/coherency_line_size", &linesize);
+++#endif
++   if (linesize > max_linesize) max_linesize = linesize;
++-  linesize = sysconf(_SC_LEVEL3_CACHE_LINESIZE);
+++#ifdef _SC_LEVEL3_DCACHE_LINESIZE
+++  linesize = sysconf(_SC_LEVEL3_DCACHE_LINESIZE);
+++#else
+++  ReadInt("/sys/devices/system/cpu/cpu0/cache/index2/coherency_line_size", &linesize);
+++#endif
++   if (linesize > max_linesize) max_linesize = linesize;
++-  linesize = sysconf(_SC_LEVEL4_CACHE_LINESIZE);
+++#ifdef _SC_LEVEL4_DCACHE_LINESIZE
+++  linesize = sysconf(_SC_LEVEL4_DCACHE_LINESIZE);
+++#else
+++  ReadInt("/sys/devices/system/cpu/cpu0/cache/index3/coherency_line_size", &linesize);
+++#endif
++   if (linesize > max_linesize) max_linesize = linesize;
++   return max_linesize;
++ }
++--- a/src/sat.h
+++++ b/src/sat.h
++@@ -136,7 +136,8 @@ class Sat {
++   int CpuCount();
++   // Return the worst-case (largest) cache line size of the system.
++   int CacheLineSize();
++-
+++  // Read int values from kernel file system e.g. sysfs
+++  int ReadInt(const char *filename, int *value);
++   // Collect error counts from threads.
++   int64 GetTotalErrorCount();
++ 
 diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-index 3e5748a3a1..679201c528 100644
+index 679201c528..aa1bf1cd32 100644
 --- a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
 +++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-@@ -9,7 +9,9 @@ SECTION = "benchmark"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
  
--SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
-+SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz \
-+           file://libcplusplus-compat.patch \
-+          "
+ SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz \
+            file://libcplusplus-compat.patch \
++           file://read_sysfs_for_cachesize.patch \
+           "
  
  SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
- SRC_URI[sha256sum] = "2ba470587ad4f6ae92057d427c3a2a2756e5f10bd25cd91e62eaef55a40b30a1"
 -- 
 2.22.0
 
