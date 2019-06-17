@@ -1,28 +1,50 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 71D417E6BD
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F5187E73A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 10:23:20 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x5HANKMP027812
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Mon, 17 Jun 2019 13:14:54 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id z23so9060237wma.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 12:23:20 +0200
-Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
-	[139.16.117.28])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x5HANICU001916;
-	Mon, 17 Jun 2019 12:23:18 +0200
-Received: from dev.localdomain (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 5934F10D1262;
-	Mon, 17 Jun 2019 12:23:18 +0200 (CEST)
-From: Pascal Bach <pascal.bach@siemens.com>
+	Mon, 17 Jun 2019 06:14:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HhnYD1LkyZMG7ySTVB+/P0OrQtSsTv/MvOQLEVQqwRE=;
+	b=G0Mc1+QydhFropeHkz5M6TUOtaAp5C+8ladqjjHkpAscDHv3O65YWb/r9RJEI9Namx
+	VpdoKSYz5vKbWQ8VLVBjF6M9E+7t1YQdr846svXOlpQTrASGEdj16DH7lBKUnc+Mu7Rb
+	TN0pz4PcbVtwLmNwSOPeFNFJrOlzFxdcD+OP2S1oAaMYxJyJdgR1xJLC6KXoPlIz7UNp
+	sVRj9sxF+KbrmaG8utm1sfN96vcNzOVyfJxjU2ngeIGsBxBpGyK0BnowRIWAl8IdZiHL
+	nXns3Yy/4I7/dBGzAPmXCI5wic0rGgXkdqz5AIv0SayjB2pfN7nme8MuSDbk+IU/n7iU
+	X5TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HhnYD1LkyZMG7ySTVB+/P0OrQtSsTv/MvOQLEVQqwRE=;
+	b=bEmJ2rHjJAKX64/RjYj1nIwf5ha4+utMS8sDMoXzyH2jbeQ5UD8kJ6vPBDD9u3T9C/
+	+8F7NjWlEHmmuhVa/vg/iOkWM0iaKRXuTgJAGX3s6wQHzF0N4R81j4kaQ2hqi0UtWgxX
+	KVKDSU/p5wvZgjkL9c5CZlIeGjAvm4tDU5ovhOC3Ln1WUKskGUcW1DK+Gkb0CbYji7HL
+	NRapIEjqSqB2GLk36O41yIEc6EUoQq+ZDsblhPStB0K+RrMMeGwHNFuAofQEPOefmJLH
+	H0qo4YbN00y1zQzqfGQ2e1ZzfuAUumroNeN2Tl83+GbZf9IG5ZxmV00pA76X7u8RAzIv
+	qPXw==
+X-Gm-Message-State: APjAAAVASH5NkWV5rEh4GiJUOpO95vhExUCh7Olx6z6k2C3jWwZKK9Er
+	4E2CAZR8caO5rfG/9SctmJ31PmlR4V4=
+X-Google-Smtp-Source: APXvYqzopTyuidTqOwi1QMv6+9qwTwPa8B7Q1P06OBWGVGLD2DNAD9w7QX9h174r8mQeY8RxUeio8Q==
+X-Received: by 2002:a1c:ab06:: with SMTP id u6mr18417801wme.125.1560777295303; 
+	Mon, 17 Jun 2019 06:14:55 -0700 (PDT)
+Received: from nick-beastie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	j132sm13160049wmj.21.2019.06.17.06.14.54
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 17 Jun 2019 06:14:54 -0700 (PDT)
+From: Nicola Lunghi <nick83ola@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jun 2019 12:23:05 +0200
-Message-Id: <20190617102305.20150-3-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190617102305.20150-1-pascal.bach@siemens.com>
-References: <20190617102305.20150-1-pascal.bach@siemens.com>
-Subject: [meta-oe][PATCHv4 3/3] python3-protobuf, python-protobuf: 3.6.1 -> 3.8.0
+Date: Mon, 17 Jun 2019 14:14:37 +0100
+Message-Id: <20190617131436.24210-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] openjdk-8: Enable HotSpot builds on 5.x Linux kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,160 +57,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 10:23:20 -0000
+X-List-Received-Date: Mon, 17 Jun 2019 13:14:55 -0000
+Content-Transfer-Encoding: 8bit
 
-The patch for Python 3.7 compatibility is already in 3.8.0.
+This is a backport of a patch to enable hotspot builds
+with 5.x kernels.
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
 ---
- .../recipes-devtools/python/python-protobuf.inc    |  4 +-
- ...-protobuf_3.6.1.bb => python-protobuf_3.8.0.bb} |  0
- .../0001-Add-Python-3.7-compatibility-4862.patch   | 98 ----------------------
- ...protobuf_3.6.1.bb => python3-protobuf_3.8.0.bb} |  1 -
- 4 files changed, 2 insertions(+), 101 deletions(-)
- rename meta-python/recipes-devtools/python/{python-protobuf_3.6.1.bb => python-protobuf_3.8.0.bb} (100%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-protobuf/0001-Add-Python-3.7-compatibility-4862.patch
- rename meta-python/recipes-devtools/python/{python3-protobuf_3.6.1.bb => python3-protobuf_3.8.0.bb} (78%)
+ .../openjdk-8-release-172b11-common.inc       |  1 +
+ ...-HotSpot-builds-on-5.x-Linux-kernels.patch | 43 +++++++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc b/meta-python/recipes-devtools/python/python-protobuf.inc
-index 54eacc0b7..2929700a0 100644
---- a/meta-python/recipes-devtools/python/python-protobuf.inc
-+++ b/meta-python/recipes-devtools/python/python-protobuf.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
- 
- inherit pypi
- 
--SRC_URI[md5sum] = "e2daef80e70249aa1f05363670c6b3f8"
--SRC_URI[sha256sum] = "1489b376b0f364bcc6f89519718c057eb191d7ad6f1b395ffd93d1aa45587811"
-+SRC_URI[md5sum] = "b7095f3eb736459716d606677b5a29ee"
-+SRC_URI[sha256sum] = "8c61cc8a76e9d381c665aecc5105fa0f1878cf7db8b5cd17202603bcb386d0fc"
- 
- # http://errors.yoctoproject.org/Errors/Details/184715/
- # Can't find required file: ../src/google/protobuf/descriptor.proto
-diff --git a/meta-python/recipes-devtools/python/python-protobuf_3.6.1.bb b/meta-python/recipes-devtools/python/python-protobuf_3.8.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-protobuf_3.6.1.bb
-rename to meta-python/recipes-devtools/python/python-protobuf_3.8.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf/0001-Add-Python-3.7-compatibility-4862.patch b/meta-python/recipes-devtools/python/python3-protobuf/0001-Add-Python-3.7-compatibility-4862.patch
-deleted file mode 100644
-index da5e73b15..000000000
---- a/meta-python/recipes-devtools/python/python3-protobuf/0001-Add-Python-3.7-compatibility-4862.patch
-+++ /dev/null
-@@ -1,98 +0,0 @@
--From 539bc017a62f91bdf7c547b58948cb5a2f59d918 Mon Sep 17 00:00:00 2001
--From: Ben Webb <ben@salilab.org>
--Date: Thu, 12 Jul 2018 10:58:10 -0700
--Subject: [PATCH] Add Python 3.7 compatibility (#4862)
--
--Compilation of Python wrappers fails with Python 3.7 because
--the Python folks changed their C API such that
--PyUnicode_AsUTF8AndSize() now returns a const char* rather
--than a char*. Add a patch to work around. Relates #4086.
--
--Upstream-Status: Backport [https://github.com/protocolbuffers/protobuf.git]
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
--
-----
-- google/protobuf/pyext/descriptor.cc            | 2 +-
-- google/protobuf/pyext/descriptor_containers.cc | 2 +-
-- google/protobuf/pyext/descriptor_pool.cc       | 2 +-
-- google/protobuf/pyext/extension_dict.cc        | 2 +-
-- google/protobuf/pyext/message.cc               | 4 ++--
-- 5 files changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/google/protobuf/pyext/descriptor.cc b/google/protobuf/pyext/descriptor.cc
--index 8af0cb1..19a1c38 100644
----- a/google/protobuf/pyext/descriptor.cc
--+++ b/google/protobuf/pyext/descriptor.cc
--@@ -56,7 +56,7 @@
--   #endif
--   #define PyString_AsStringAndSize(ob, charpp, sizep) \
--     (PyUnicode_Check(ob)? \
---       ((*(charpp) = PyUnicode_AsUTF8AndSize(ob, (sizep))) == NULL? -1: 0): \
--+       ((*(charpp) = const_cast<char*>(PyUnicode_AsUTF8AndSize(ob, (sizep)))) == NULL? -1: 0): \
--        PyBytes_AsStringAndSize(ob, (charpp), (sizep)))
-- #endif
-- 
--diff --git a/google/protobuf/pyext/descriptor_containers.cc b/google/protobuf/pyext/descriptor_containers.cc
--index bc007f7..0153664 100644
----- a/google/protobuf/pyext/descriptor_containers.cc
--+++ b/google/protobuf/pyext/descriptor_containers.cc
--@@ -66,7 +66,7 @@
--   #endif
--   #define PyString_AsStringAndSize(ob, charpp, sizep) \
--     (PyUnicode_Check(ob)? \
---       ((*(charpp) = PyUnicode_AsUTF8AndSize(ob, (sizep))) == NULL? -1: 0): \
--+       ((*(charpp) = const_cast<char*>(PyUnicode_AsUTF8AndSize(ob, (sizep)))) == NULL? -1: 0): \
--        PyBytes_AsStringAndSize(ob, (charpp), (sizep)))
-- #endif
-- 
--diff --git a/google/protobuf/pyext/descriptor_pool.cc b/google/protobuf/pyext/descriptor_pool.cc
--index 95882ae..962accc 100644
----- a/google/protobuf/pyext/descriptor_pool.cc
--+++ b/google/protobuf/pyext/descriptor_pool.cc
--@@ -48,7 +48,7 @@
--   #endif
--   #define PyString_AsStringAndSize(ob, charpp, sizep) \
--     (PyUnicode_Check(ob)? \
---       ((*(charpp) = PyUnicode_AsUTF8AndSize(ob, (sizep))) == NULL? -1: 0): \
--+       ((*(charpp) = const_cast<char*>(PyUnicode_AsUTF8AndSize(ob, (sizep)))) == NULL? -1: 0): \
--        PyBytes_AsStringAndSize(ob, (charpp), (sizep)))
-- #endif
-- 
--diff --git a/google/protobuf/pyext/extension_dict.cc b/google/protobuf/pyext/extension_dict.cc
--index 018b5c2..174c547 100644
----- a/google/protobuf/pyext/extension_dict.cc
--+++ b/google/protobuf/pyext/extension_dict.cc
--@@ -53,7 +53,7 @@
--   #endif
--   #define PyString_AsStringAndSize(ob, charpp, sizep) \
--     (PyUnicode_Check(ob)? \
---       ((*(charpp) = PyUnicode_AsUTF8AndSize(ob, (sizep))) == NULL? -1: 0): \
--+       ((*(charpp) = const_cast<char*>(PyUnicode_AsUTF8AndSize(ob, (sizep)))) == NULL? -1: 0): \
--        PyBytes_AsStringAndSize(ob, (charpp), (sizep)))
-- #endif
-- 
--diff --git a/google/protobuf/pyext/message.cc b/google/protobuf/pyext/message.cc
--index 5893533..31094b7 100644
----- a/google/protobuf/pyext/message.cc
--+++ b/google/protobuf/pyext/message.cc
--@@ -79,7 +79,7 @@
--     (PyUnicode_Check(ob)? PyUnicode_AsUTF8(ob): PyBytes_AsString(ob))
--   #define PyString_AsStringAndSize(ob, charpp, sizep) \
--     (PyUnicode_Check(ob)? \
---       ((*(charpp) = PyUnicode_AsUTF8AndSize(ob, (sizep))) == NULL? -1: 0): \
--+       ((*(charpp) = const_cast<char*>(PyUnicode_AsUTF8AndSize(ob, (sizep)))) == NULL? -1: 0): \
--        PyBytes_AsStringAndSize(ob, (charpp), (sizep)))
--   #endif
-- #endif
--@@ -1529,7 +1529,7 @@ PyObject* HasField(CMessage* self, PyObject* arg) {
--     return NULL;
--   }
-- #else
---  field_name = PyUnicode_AsUTF8AndSize(arg, &size);
--+  field_name = const_cast<char*>(PyUnicode_AsUTF8AndSize(arg, &size));
--   if (!field_name) {
--     return NULL;
--   }
---- 
--2.7.4
--
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.6.1.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.8.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-protobuf_3.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-protobuf_3.8.0.bb
-index 9b0668a02..30ea34e90 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_3.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.8.0.bb
-@@ -1,7 +1,6 @@
- inherit setuptools3
- require python-protobuf.inc
- 
--SRC_URI += "file://0001-Add-Python-3.7-compatibility-4862.patch"
- DEPENDS += "protobuf"
- DISTUTILS_BUILD_ARGS += "--cpp_implementation"
- DISTUTILS_INSTALL_ARGS += "--cpp_implementation"
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+index ad20585..a8d3ccb 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+@@ -29,6 +29,7 @@ HOTSPOT_UB_PATCH = "\
+     file://0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch \
+     file://0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch \
+     file://0019-hotspot-Turn-on-the-Wreturn-type-warning.patch \
++    file://0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch \
+ "
+ HOTSPOT_UB_PATCH_prepend_aarch64 = "\
+     file://0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch \
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch b/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
+new file mode 100644
+index 0000000..f9feca0
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
+@@ -0,0 +1,43 @@
++From 90220d41f65910b108c901977eefe78fc1edecc5 Mon Sep 17 00:00:00 2001
++From: Nicola Lunghi <nicola.lunghi@jci.com>
++Date: Mon, 17 Jun 2019 13:59:26 +0100
++Subject: [PATCH] Enable HotSpot builds on 5.x Linux kernels
++
++8217753: Enable HotSpot builds on 5.x Linux kernels
++Summary: Remove Linux kernel version check as very unlikely a kernel older than 2.4 will be used.
++Reviewed-by: erikj
++
++Upstream-Status: Backport (http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/5af8ec63c21c)
++---
++ hotspot/make/linux/Makefile | 15 +--------------
++ 1 file changed, 1 insertion(+), 14 deletions(-)
++
++diff --git a/hotspot/make/linux/Makefile b/hotspot/make/linux/Makefile
++index 17c14097..e8f20104 100644
++--- a/hotspot/make/linux/Makefile
+++++ b/hotspot/make/linux/Makefile
++@@ -227,20 +227,7 @@ all:
++ 	@echo "  $(TARGETS_SHARK)"
++ 	@echo "  $(TARGETS_MINIMAL1)"
++ 
++-checks: check_os_version check_j2se_version
++-
++-# We do not want people accidentally building on old systems (e.g. Linux 2.2.x,
++-# Solaris 2.5.1, 2.6).
++-# Disable this check by setting DISABLE_HOTSPOT_OS_VERSION_CHECK=ok.
++-
++-SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
++-OS_VERSION := $(shell uname -r)
++-EMPTY_IF_NOT_SUPPORTED = $(filter $(SUPPORTED_OS_VERSION),$(OS_VERSION))
++-
++-check_os_version:
++-ifeq ($(DISABLE_HOTSPOT_OS_VERSION_CHECK)$(EMPTY_IF_NOT_SUPPORTED),)
++-	$(QUIETLY) >&2 echo "*** This OS is not supported:" `uname -a`; exit 1;
++-endif
+++checks: check_j2se_version
++ 
++ # jvmti.make requires XSLT (J2SE 1.4.x or newer):
++ XSLT_CHECK	= $(REMOTE) $(RUN.JAVAP) javax.xml.transform.TransformerFactory
++-- 
++2.20.1
++
 -- 
-2.11.0
+2.20.1
 
 
