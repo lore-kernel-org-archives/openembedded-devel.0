@@ -1,48 +1,33 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E01C77C7A2
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 94A476C3B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 06:02:14 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id s7so18542221iob.11
+	Mon, 17 Jun 2019 07:43:39 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45S39l4nyhz2C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Jun 2019 23:02:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NbD3GZ+kHIkhc0rOPih+dO+JniQHUUZJxiy7L/5EwK4=;
-	b=Yd9nM8L1MKKAWY/ZKfXBDD1HQAF2CYMqt69IgSWIOWClMdoBmu8haKOJYhJ1DQHNnR
-	hgRaX/MRDoslNQcBEwB0m5m6T0UJrCfgS0cfVKhKTf0w9qPtnNmpw+CIiw4X+9fu2FtD
-	PUb0W2cShkZ0A7GmBNBA6Yutkt0U3HZU6OYFgavVLi+T07Za/7py/1fKLQ/s5rxo3Aa4
-	qT3y5kmymu1MPn49rJBiJMdqxe6pP+42zjOn3SOjRSxXd11FWy6GF5mJVE2i5QTvFJ9w
-	ZYAyL1JfXBpWYJ8xjX3h4IgZ0LroQLZxXRC2eeUnm/TBUEuayap4fLh2Tlv13RPWzDoo
-	RC+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=NbD3GZ+kHIkhc0rOPih+dO+JniQHUUZJxiy7L/5EwK4=;
-	b=pyEfkfa7aCgxGiq3r9FkWYuJb6Ez/MnHPGuprOaYXsqDX88CHXOTawfbzqwcoVKyv0
-	XkJK1+GCBYmp0erzjwc6lW3ZyhjmuebPj71kmQS9gBnn4l2XGHG6Qgj7oOrI5NLfjU2p
-	CCn7yQWbwSap8qz9nCQVYGswnzAvIGi7jT4dN4bZ3VJS7gfLQNslTtgZZCwfUvCNKzjC
-	gljyoLaIGpPf0f6XS0wkMMoTwzcI6hl9+RyusSSQ3Ycm5crsXJPWJLk9YgMT6Nl7Ol6v
-	5OdgDevkADYCBRL4SIVmeZ3LXODlzUnGK4zmghPJRoUBSmnp9ym2QiH7VKryB3WQa35E
-	wT8Q==
-X-Gm-Message-State: APjAAAXc5oVrWzqIZuRyC/VTMI72NOD5vfzoX+vCROfFRNnikPa3jzmE
-	q4iuBIUIHqr9AesBdQnfrvJp+4Hkxl0zHzpAdTw=
-X-Google-Smtp-Source: APXvYqyZkuRrGsDfD+CGePsflvGcbvlOGqOp6PFyg95xuRXwjPCVxtC97zMWnSrzIwjufDbq5HwoeMG98ueuWCTLUtY=
-X-Received: by 2002:a02:8a:: with SMTP id 132mr37997457jaa.89.1560751335629;
-	Sun, 16 Jun 2019 23:02:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190601045815.30790-1-thstead@steadtechnology.co.uk>
-	<CAMKF1spavEc8viLvhVV+VbXadEmssW8LiTFpFVAEJAOJ0E1NDg@mail.gmail.com>
-In-Reply-To: <CAMKF1spavEc8viLvhVV+VbXadEmssW8LiTFpFVAEJAOJ0E1NDg@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Sun, 16 Jun 2019 23:02:04 -0700
-Message-ID: <CANx9H-CKt4UH1VHaa+gxLXz4gBttkpPMrJb_YnwE4aKKiSsyjw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] Created recipes for python2 and python3 packages for pysnmp and its dependencies.
+	Mon, 17 Jun 2019 09:43:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1560757419;
+	bh=D/Y9R2WnHRHXd9Ai37l8MnbsPLjhXH56sBsSSc8D6Ac=;
+	h=From:To:Subject:Date:From;
+	b=N3D7KphB0uSOFVDX/+rTTy7G49e9FOMqkRJ6263atye6BT1EsHz+J9jCTAh4Dcbww
+	Ry+vVJHNJdIk7rvq+zHvk4DyfF8MHDuE+vK5nzubNdIiw1a4ylxIQ+mF3AZnpnGzhF
+	m5Pr9NH1E5+2Gbz5adLAccbN4dUlEmeeLWSHw+Gq3y3LxYEJCyA+neJ4pL1Ro+LoxP
+	Lsn/TLJqHToasN1PlFupL1wDAj/sOghkJoAI8zFwqH/pD8ITdhRzPEI7s8GaGJtXsb
+	B3/vOubpXfs2/Y8F3kVzvnKcnJ2NE74XHU2je64VNVzZaP83tN27oG/9xRVGHlGBjs
+	ogUZxkxIOhcEX8MN0W0LXnWz+2RyzGJcBqDrJ9UG3nXpO6oLjebxy7a9E8nI63ljVW
+	ZIm7byoGQtdk5/RiSU6Nt4TNcu1iiNnslLLwxGxeeqvQYpyqueRVro11Ulb44Yef+g
+	wHlp6MjDuyQOtTdpdhaGVUCwiZH3kwjjOtk8Sj+EOsbWlTW3gcLH3keXBaaIl1hVtW
+	viNjGHxi8cCWcw9CxMjRaEansRuguwfMdl2gqHzJYXYkowVMxSTO2mV6fEJg02agbW
+	3Ml/vBZ7kZkO9eC9CusYG9fBn72vheaRjLok1Q8rMHBuhdJH5Fakutvj0WjzwyKMqF
+	LO5hDvMP5NQ6TR31cfgL0X+E=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Jun 2019 10:43:39 +0300
+Message-Id: <20190617074339.13836-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-perl][PATCH] libauthen-radius-perl: Remove manual RDEPENDS from PN-ptest to PN package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,313 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 06:02:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Jun 2019 07:43:39 -0000
 
-Also, the short log (subject) is awkward. Please follow the pattern of
-other commits. Perhaps split into three commits for each of the modules?
-=E2=80=9Dpython-foo: add recipe for v1.0=E2=80=9D
+They are now added automatically by the ptest class.
 
-Also, Signed-off-by is a legal indication that you are the author and have
-the rights to contribute. This means a legal name and not your nickname is
-expected. Many folks do not realize the implications.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thank you for contributing. We appreciate it.
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+index ea5bb1b0c..fb18fe2a4 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+@@ -34,6 +34,6 @@ RDEPENDS_${PN} += "\
+     perl-module-io-select \
+     perl-module-io-socket \
+ "
+-RDEPENDS_${PN}-ptest += "${PN} freeradius"
++RDEPENDS_${PN}-ptest += "freeradius"
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.17.1
 
-On Sun, Jun 16, 2019 at 10:51 PM Khem Raj <raj.khem@gmail.com> wrote:
-
-> this has gone stale and does not apply on top of master anymore. Can
-> you please rebase it and send again
->
-> On Fri, May 31, 2019 at 9:58 PM thstead <thstead@steadtechnology.co.uk>
-> wrote:
-> >
-> > Created Python2 and Python 3 packages for:
-> > - pysnmp
-> > - ply
-> > - pysmi
-> >
-> > Signed-off-by: thstead <thstead@steadtechnology.co.uk>
-> > ---
-> >  meta-python/recipes-devtools/python/python-ply.inc | 17 ++++++++++++++
-> >  .../recipes-devtools/python/python-ply_3.10.bb     | 18 ++------------=
--
-> >  .../recipes-devtools/python/python-pysmi.inc       | 19 ++++++++++++++=
-+
-> >  .../recipes-devtools/python/python-pysmi_0.1.2.bb  | 21
-> ++---------------
-> >  .../recipes-devtools/python/python-pysnmp.inc      | 21
-> +++++++++++++++++
-> >  .../recipes-devtools/python/python-pysnmp_4.4.9.bb | 27
-> +++-------------------
-> >  .../recipes-devtools/python/python3-ply_3.10.bb    |  3 +++
-> >  .../recipes-devtools/python/python3-pysmi_0.1.2.bb |  3 +++
-> >  .../python/python3-pysnmp_4.4.9.bb                 |  5 ++++
-> >  9 files changed, 75 insertions(+), 59 deletions(-)
-> >  create mode 100644 meta-python/recipes-devtools/python/python-ply.inc
-> >  create mode 100644 meta-python/recipes-devtools/python/python-pysmi.in=
-c
-> >  create mode 100644 meta-python/recipes-devtools/python/python-pysnmp.i=
-nc
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-ply_3.10.bb
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-pysmi_0.1.2.bb
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-pysnmp_4.4.9.bb
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-ply.inc
-> b/meta-python/recipes-devtools/python/python-ply.inc
-> > new file mode 100644
-> > index 000000000..8e61efa79
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python-ply.inc
-> > @@ -0,0 +1,17 @@
-> > +SUMMARY =3D "Python Lex and Yacc"
-> > +DESCRIPTION =3D "Python ply: PLY is yet another implementation of lex =
-and
-> yacc for Python"
-> > +HOMEPAGE =3D "https://pypi.python.org/pypi/ply"
-> > +SECTION =3D "devel/python"
-> > +LICENSE =3D "BSD"
-> > +LIC_FILES_CHKSUM =3D
-> "file://README.md;beginline=3D3;endline=3D30;md5=3Dfcb04bc2f765e46ab7084d=
-6ab6e452bb"
-> > +
-> > +SRCNAME =3D "ply"
-> > +
-> > +SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > +
-> > +SRC_URI[md5sum] =3D "1d63c166ab250bab87d8dcc42dcca70e"
-> > +SRC_URI[sha256sum] =3D
-> "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
-> > +
-> > +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > +
-> > +inherit setuptools
-> > diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb
-> b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-> > index 8e61efa79..6f5c4e6c8 100644
-> > --- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
-> > +++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-> > @@ -1,17 +1,3 @@
-> > -SUMMARY =3D "Python Lex and Yacc"
-> > -DESCRIPTION =3D "Python ply: PLY is yet another implementation of lex =
-and
-> yacc for Python"
-> > -HOMEPAGE =3D "https://pypi.python.org/pypi/ply"
-> > -SECTION =3D "devel/python"
-> > -LICENSE =3D "BSD"
-> > -LIC_FILES_CHKSUM =3D
-> "file://README.md;beginline=3D3;endline=3D30;md5=3Dfcb04bc2f765e46ab7084d=
-6ab6e452bb"
-> > -
-> > -SRCNAME =3D "ply"
-> > -
-> > -SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > -
-> > -SRC_URI[md5sum] =3D "1d63c166ab250bab87d8dcc42dcca70e"
-> > -SRC_URI[sha256sum] =3D
-> "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
-> > -
-> > -S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > -
-> >  inherit setuptools
-> > +require python-ply.inc
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python-pysmi.inc
-> b/meta-python/recipes-devtools/python/python-pysmi.inc
-> > new file mode 100644
-> > index 000000000..12ba0c68a
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python-pysmi.inc
-> > @@ -0,0 +1,19 @@
-> > +SUMMARY =3D "SNMP SMI/MIB Parser"
-> > +DESCRIPTION =3D "A pure-Python implementation of SNMP/SMI MIB \
-> > +  parsing and conversion library. Can produce PySNMP MIB modules. \
-> > +"
-> > +HOMEPAGE =3D "https://pypi.python.org/pypi/pysmi"
-> > +SECTION =3D "devel/python"
-> > +
-> > +LICENSE =3D "BSD"
-> > +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.rst;md5=3Dd8b1bbadd635f187dee74d999a8c67b8"
-> > +
-> > +SRCNAME =3D "pysmi"
-> > +
-> > +SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > +
-> > +SRC_URI[md5sum] =3D "f8754e9ed75698cc16b40f125df85b12"
-> > +SRC_URI[sha256sum] =3D
-> "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
-> > +
-> > +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-> b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-> > index aa234dd70..2fe56ca04 100644
-> > --- a/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python-pysmi_0.1.2.bb
-> > @@ -1,22 +1,5 @@
-> > -SUMMARY =3D "SNMP SMI/MIB Parser"
-> > -DESCRIPTION =3D "A pure-Python implementation of SNMP/SMI MIB \
-> > -  parsing and conversion library. Can produce PySNMP MIB modules. \
-> > -"
-> > -HOMEPAGE =3D "https://pypi.python.org/pypi/pysmi"
-> > -SECTION =3D "devel/python"
-> > -
-> > -LICENSE =3D "BSD"
-> > -LIC_FILES_CHKSUM =3D
-> "file://LICENSE.rst;md5=3Dd8b1bbadd635f187dee74d999a8c67b8"
-> > -
-> > -SRCNAME =3D "pysmi"
-> > -
-> > -SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > -
-> > -SRC_URI[md5sum] =3D "f8754e9ed75698cc16b40f125df85b12"
-> > -SRC_URI[sha256sum] =3D
-> "e0912180fc6faa9c264df78f97e7c451f77f84f5bd840098d2ce7b1bf70082bc"
-> > -
-> > -S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > -
-> >  inherit setuptools
-> > +require python-pysmi.inc
-> >
-> >  RDEPENDS_${PN} =3D "python-ply"
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python-pysnmp.inc
-> b/meta-python/recipes-devtools/python/python-pysnmp.inc
-> > new file mode 100644
-> > index 000000000..9b67f6bc7
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python-pysnmp.inc
-> > @@ -0,0 +1,21 @@
-> > +SUMMARY =3D "A pure-Python SNMPv1/v2c/v3 library"
-> > +DESCRIPTION =3D "SNMP v1/v2c/v3 engine and apps written in pure-Python=
-. \
-> > +  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
-> > +  operation (asyncio, twisted, asyncore) and multiple transports.\
-> > +"
-> > +HOMEPAGE =3D "https://pypi.python.org/pypi/pysnmp"
-> > +SECTION =3D "devel/python"
-> > +LICENSE =3D "BSD"
-> > +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.rst;md5=3Db15d29f500f748d1c2a15709769090a8"
-> > +
-> > +SRCNAME =3D "pysnmp"
-> > +
-> > +SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > +
-> > +SRC_URI[md5sum] =3D "6d1b514997326bed18f1ae1510f6b1c9"
-> > +SRC_URI[sha256sum] =3D
-> "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
-> > +
-> > +
-> > +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > +
-> > +RDEPENDS_${PN} +=3D "python-pycrypto"
-> > diff --git a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-> b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-> > index 9ff4df2c9..c36d69b6a 100644
-> > --- a/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-> > +++ b/meta-python/recipes-devtools/python/python-pysnmp_4.4.9.bb
-> > @@ -1,26 +1,5 @@
-> > -SUMMARY =3D "A pure-Python SNMPv1/v2c/v3 library"
-> > -DESCRIPTION =3D "SNMP v1/v2c/v3 engine and apps written in pure-Python=
-. \
-> > -  Supports Manager/Agent/Proxy roles, scriptable MIBs, asynchronous \
-> > -  operation (asyncio, twisted, asyncore) and multiple transports.\
-> > -"
-> > -HOMEPAGE =3D "https://pypi.python.org/pypi/pysnmp"
-> > -SECTION =3D "devel/python"
-> > -LICENSE =3D "BSD"
-> > -LIC_FILES_CHKSUM =3D
-> "file://LICENSE.rst;md5=3Db15d29f500f748d1c2a15709769090a8"
-> > -
-> > -SRCNAME =3D "pysnmp"
-> > -
-> > -SRC_URI =3D "
-> https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${=
-PV}.tar.gz
-> "
-> > -
-> > -SRC_URI[md5sum] =3D "6d1b514997326bed18f1ae1510f6b1c9"
-> > -SRC_URI[sha256sum] =3D
-> "d5d1e59780126e963dd92e25993b783295734e71bef181f602e51f7393260441"
-> > -
-> > -
-> > -S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> > -
-> >  inherit setuptools
-> > +require python-pysnmp.inc
-> > +
-> > +RDEPENDS_${PN} +=3D "python-pyasn1 python-pysmi"
-> >
-> > -RDEPENDS_${PN} +=3D "python-pycrypto \
-> > -                   python-pyasn1 \
-> > -                   python-pysmi \
-> > -"
-> > diff --git a/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-> b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-> > new file mode 100644
-> > index 000000000..401dd0df5
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-> > @@ -0,0 +1,3 @@
-> > +inherit setuptools3
-> > +require python-ply.inc
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
-> b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
-> > new file mode 100644
-> > index 000000000..829f16682
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-pysmi_0.1.2.bb
-> > @@ -0,0 +1,3 @@
-> > +inherit setuptools3
-> > +require python-pysmi.inc
-> > +RDEPENDS_${PN} =3D "python3-ply"
-> > diff --git a/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.b=
-b
-> b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
-> > new file mode 100644
-> > index 000000000..046d3e5d0
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-pysnmp_4.4.9.bb
-> > @@ -0,0 +1,5 @@
-> > +inherit setuptools3
-> > +require python-pysnmp.inc
-> > +
-> > +RDEPENDS_${PN} +=3D "python3-pyasn1 python3-pysmi"
-> > +
-> > --
-> > 2.11.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
