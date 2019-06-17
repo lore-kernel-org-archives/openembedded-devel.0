@@ -1,22 +1,26 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5161C7E8B1
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E37C605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 08:41:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5H8fpCH012708
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Jun 2019 01:41:51 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 17 Jun 2019 01:41:51 -0700
-From: <mingli.yu@windriver.com>
-To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Jun 2019 01:41:51 -0700
-Message-ID: <20190617084151.62468-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.3.16
+	Mon, 17 Jun 2019 10:23:16 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x5HANGFH023707
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jun 2019 12:23:16 +0200
+Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
+	[139.16.117.28])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id x5HANE99019489;
+	Mon, 17 Jun 2019 12:23:14 +0200
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 250A010D1262;
+	Mon, 17 Jun 2019 12:23:14 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Jun 2019 12:23:03 +0200
+Message-Id: <20190617102305.20150-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCHv4 1/3] protobuf: 3.6.1 -> 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,68 +33,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 08:41:51 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Jun 2019 10:23:17 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Simple update to latest release
 
-License-Update:
-The address of Free Software Foundation updated
+The patch is needed to make python3-protobuf compile
+as otherwise a file it expects is missing.
 
-Bug fixes:
- MDEV-19490: show tables fails when selecting the information_schema database
- MDEV-19541: InnoDB crashes when trying to recover a corrupted page
-
-More details check:
- https://jira.mariadb.org/browse/MDEV-19490
- https://jira.mariadb.org/browse/MDEV-19541
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- ...ariadb-native_10.3.15.bb => mariadb-native_10.3.16.bb} | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                     | 8 ++++----
- .../mysql/{mariadb_10.3.15.bb => mariadb_10.3.16.bb}      | 0
- 3 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.15.bb => mariadb-native_10.3.16.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.15.bb => mariadb_10.3.16.bb} (100%)
+ ...s-map_util.h-to-list-of-installed-headers.patch | 52 ++++++++++++++++++++++
+ .../{protobuf_3.6.1.bb => protobuf_3.8.0.bb}       |  7 ++-
+ 2 files changed, 55 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.6.1.bb => protobuf_3.8.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index eed23d28a..9a398b308 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -2,9 +2,9 @@ SUMMARY = "A robust, scalable, and reliable SQL server"
- HOMEPAGE = "http://mariadb.org"
- SECTION = "libs"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b1becf0cfa3366e0f4d854d1d264f311"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+new file mode 100644
+index 000000000..a160e5e97
+--- /dev/null
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+@@ -0,0 +1,52 @@
++From ea6e776e50971c89ad2293046b6ae2a6a9753c56 Mon Sep 17 00:00:00 2001
++From: Adam Cozzette <acozzette@google.com>
++Date: Thu, 6 Jun 2019 10:29:58 -0700
++Subject: [PATCH] Added stubs/map_util.h to list of installed headers
++
++This should fix issue #6186. I also had to remove a couple unnecessary
++const keywords in map_util.h because the no_warning_test was showing
++errors about those.
++
++Upstream-Status: Submitted [https://github.com/protocolbuffers/protobuf/pull/6223]
++---
++ src/Makefile.am                      | 1 +
++ src/google/protobuf/stubs/map_util.h | 4 ++--
++ 2 files changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/src/Makefile.am b/src/Makefile.am
++index be18ba76..1689e221 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -72,6 +72,7 @@ nobase_include_HEADERS =                                         \
++   google/protobuf/stubs/hash.h                                   \
++   google/protobuf/stubs/logging.h                                \
++   google/protobuf/stubs/macros.h                                 \
+++  google/protobuf/stubs/map_util.h                               \
++   google/protobuf/stubs/mutex.h                                  \
++   google/protobuf/stubs/once.h                                   \
++   google/protobuf/stubs/platform_macros.h                        \
++diff --git a/src/google/protobuf/stubs/map_util.h b/src/google/protobuf/stubs/map_util.h
++index 2313e1f5..b04d9d46 100644
++--- a/src/google/protobuf/stubs/map_util.h
+++++ b/src/google/protobuf/stubs/map_util.h
++@@ -620,7 +620,7 @@ bool UpdateReturnCopy(Collection* const collection,
++ // twice. Unlike UpdateReturnCopy this also does not come with the issue of an
++ // undefined previous* in case new data was inserted.
++ template <class Collection>
++-typename Collection::value_type::second_type* const
+++typename Collection::value_type::second_type*
++ InsertOrReturnExisting(Collection* const collection,
++                        const typename Collection::value_type& vt) {
++   std::pair<typename Collection::iterator, bool> ret = collection->insert(vt);
++@@ -633,7 +633,7 @@ InsertOrReturnExisting(Collection* const collection,
++
++ // Same as above, except for explicit key and data.
++ template <class Collection>
++-typename Collection::value_type::second_type* const
+++typename Collection::value_type::second_type*
++ InsertOrReturnExisting(
++     Collection* const collection,
++     const typename Collection::value_type::first_type& key,
++--
++2.11.0
++
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+index cf72d9ca7..476d1e309 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+@@ -10,13 +10,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib"
+ DEPENDS_append_class-target = " protobuf-native"
  
--SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}-${PV}.tar.gz \
-+SRC_URI = "https://downloads.mariadb.com/MariaDB/${BPN}-${PV}/source/${BPN}-${PV}.tar.gz \
-            file://my.cnf \
-            file://mysqld.service \
-            file://install_db.service \
-@@ -19,8 +19,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
-            file://clang_version_header_conflict.patch \
-            file://fix-arm-atomic.patch \
-           "
--SRC_URI[md5sum] = "08edd8b5060a181e6dd3c6aac23218cd"
--SRC_URI[sha256sum] = "27f391a54d544f93850d4edfb3ef1b4cf24f8e27e61e51727b0e7d31bb4d6968"
-+SRC_URI[md5sum] = "11220d0b94c5c24caa2e1e9eaba38e31"
-+SRC_URI[sha256sum] = "39e9723eaf620afd99b0925b2c2a5a50a89110ba50040adf14cce7cf89e5e21b"
+-PV .= "+git${SRCPV}"
++SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
  
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+-SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+-
+-SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
++SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
+            file://run-ptest \
+            file://0001-protobuf-fix-configure-error.patch \
++           file://0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch \
+ "
+ S = "${WORKDIR}/git"
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
 -- 
-2.21.0
+2.11.0
 
 
