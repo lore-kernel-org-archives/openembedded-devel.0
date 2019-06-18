@@ -1,23 +1,72 @@
-Return-Path: <naveen.kumar.saini@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 6163B7E09B
+Return-Path: <sbabic@denx.de>
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 691E66D548
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 09:30:25 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	18 Jun 2019 02:30:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,388,1557212400"; d="scan'208";a="242935098"
-Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by orsmga001.jf.intel.com with ESMTP; 18 Jun 2019 02:30:25 -0700
-From: Naveen Saini <naveen.kumar.saini@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jun 2019 17:30:23 +0800
-Message-Id: <1560850223-83235-1-git-send-email-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] pm-graph: fix multilib build failure
+	Tue, 18 Jun 2019 09:48:09 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 45Sjtx4mkNz1rbM7;
+	Tue, 18 Jun 2019 11:48:09 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 45Sjtx4NcBz1qqkk;
+	Tue, 18 Jun 2019 11:48:09 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+	port 10024)
+	with ESMTP id 0eacV21z0MA5; Tue, 18 Jun 2019 11:48:06 +0200 (CEST)
+Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net
+	[88.217.136.221])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPS;
+	Tue, 18 Jun 2019 11:48:06 +0200 (CEST)
+Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
+	by babic.homelinux.org (Postfix) with ESMTP id C9090454045E;
+	Tue, 18 Jun 2019 11:47:59 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
+Received: from babic.homelinux.org ([IPv6:::1])
+	by localhost (mail.babic.homelinux.org [IPv6:::1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 1N-Otps7Iuas; Tue, 18 Jun 2019 11:47:51 +0200 (CEST)
+Received: from [192.168.178.132] (papero.fritz.box [192.168.178.132])
+	by babic.homelinux.org (Postfix) with ESMTP id 0C72645402A6;
+	Tue, 18 Jun 2019 11:47:49 +0200 (CEST)
+To: Khem Raj <raj.khem@gmail.com>, Stefano Babic <sbabic@denx.de>
+References: <20190531085447.827-1-sbabic@denx.de>
+	<CAMKF1spDK7+JRvnJMkWhA_RqPcZwwZ4_2xoLv=_RcewU+imfag@mail.gmail.com>
+From: Stefano Babic <sbabic@denx.de>
+Openpgp: preference=signencrypt
+Autocrypt: addr=sbabic@denx.de; prefer-encrypt=mutual; keydata=
+	xsDiBEfdB5IRBADkpYcnh2BoAkGD5p186ysEkWlcp5DU07m7BKzvkEMRhFjeFUOU0klKNmh0
+	ZM6rKpYpAYPYBm9YahMyqvj9DmLrZ4yfJ5MssvW9SRETmHpva+h1rN+DzmEcwrqZmLG1JWGy
+	LA5ruJaFSzxJHBoROoog1NDMbNDB8A9F7VKrePfkVwCgmODpW/uh2IuMYLVidzDeuvo7alED
+	/iV8rwU7C+eBcKy2htuDsEmsqlkBxIDM7IO6h5XxdyqbZOYizuBP3Ksb6xK54weEaB5aQs7S
+	8N9Soi0p1Xh0LMWj6PBCzTC4LF+OCGEMBPc6bBHNzivChgztJlUMioCDSVpOXB/QpBaK302G
+	yP5WdmcB1Jn6neq/YRlxHN38MV2yA/46jnzeUotL9LliVZKA/ql4GmyWg2Ae1BUiCqEJQNwl
+	knGJOmIS4uABLArB5HjsfDU5hA9FORaNGCIiZlezBkZ3JXA2uQMQhfgqBXrZt4j1fcw9I7E+
+	7IZ2kSCeTPZFLd5FiGQPDOm3Z9eHrpK6pmBGMeBG0pDgUEbN9awyLNBLj80eU3RlZmFubyBC
+	YWJpYyA8c2JhYmljQGRlbnguZGU+wmMEExECACMCGwMGCwkIBwMCBBUCCAMEFgIDAQIeAQIX
+	gAUCT9deSgIZAQAKCRD09WXkmmjvppF1AKCRl8d49K4yxWzdBVRTTWG55cyo/gCfRD1RAttl
+	R1ofs2wGLHNtXousyL3OwU0ER90HmBAIAIFfX4bKnOmCyB3nPh+jbXZuBSMZTuyDEnguRxl5
+	N8Q0ayofQwucCBjXYv65sQ9Rq6FNhEnWqUZBu8A5CwvSakOFOGNC5ta/8VxVRLh0Z0ZTgEep
+	SKiPonJyacCbmgWDECdVrKowV7QB9be3Wu67uAZ74rPw2Kd7f0FKnL3djvVRMaBWFIpyQ6SE
+	bGOCJjhRQ5L1pIM1Soko+reU7eO+1g6IBw6YkFJisdQE6fzTwaSqUKPPsQLz/W03invQltOb
+	Eg7ZwtFs0DFonr1DMm57ksiEhW6SN1wylRO/JzRYG1Qe7u1EVln6iV3ilBvbbfkyRssk4/0e
+	kicpSnQknA72YOMAAwYH+QGpAiQ4hAMHrp1bUrtyGXYdeQpYufIZAM4etOnBy/G+e1nfu6y+
+	jH4SN9sVK7bwBBAbhEJqkqR5LVsFIRapThJQOWB11rQxLpwkBU9wao/pRM+o95ujGo32WUzf
+	wWrzWrkTDy7vMCZuUOLVi4n1GZlUAwpG4rzb6UxPC6GWymkVWGgXp1NC58og5i3Y+rKT7+Xi
+	XT2BtvC6PDepoH4JhD+9OkHQO6UfTxPSmtgNbTgtl6L6tj+bm5dOHgkPJFMkEiG8qhUZYQzb
+	bYz37orRbA72M2bxK76e9QKn0mVu+d/YCd8wRcvvJbGsozpzcxPvD5Wy5RNJCES8McPtAseU
+	tMfCSQQYEQIACQUCR90HmAIbDAAKCRD09WXkmmjvpv+3AJ9RakBsH1j0X/Kxp6t2lf0VUfS2
+	qACfZ+J6ktk8PKNuyHf0J/I0mbCrhV4=
+Message-ID: <9e82e2e5-dffa-49dd-cb9d-a8f3587f8f89@denx.de>
+Date: Tue, 18 Jun 2019 11:47:38 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1spDK7+JRvnJMkWhA_RqPcZwwZ4_2xoLv=_RcewU+imfag@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] systat: systemd never enables the service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,132 +79,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 09:30:25 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 09:48:10 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 
-Added the generic library path used by multilib code
+On 17/06/19 07:44, Khem Raj wrote:
+> this is wrong ml for this package, please send this to oe-core ml.
 
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
----
- .../0001-Makefile-fix-multilib-build-failure.patch | 89 ++++++++++++++++++++++
- meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb    |  5 +-
- 2 files changed, 92 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-Makefile-fix-multilib-build-failure.patch
+Ouch...thanks Khem, I will repost.
 
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-Makefile-fix-multilib-build-failure.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-Makefile-fix-multilib-build-failure.patch
-new file mode 100644
-index 0000000..56981d9
---- /dev/null
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-Makefile-fix-multilib-build-failure.patch
-@@ -0,0 +1,89 @@
-+From 50cea8fd3c07ab27da6edce865a49339f16f3b57 Mon Sep 17 00:00:00 2001
-+From: Naveen Saini <naveen.kumar.saini@intel.com>
-+Date: Tue, 18 Jun 2019 17:10:15 +0800
-+Subject: [PATCH] Makefile: fix multilib build failure
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-+---
-+ Makefile | 50 +++++++++++++++++++++++++++-----------------------
-+ 1 file changed, 27 insertions(+), 23 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 8455415..4aa0786 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -1,30 +1,34 @@
-+ # SPDX-License-Identifier: GPL-2.0
-+ PREFIX		?= /usr
-+ DESTDIR		?=
-++BASELIB		?=
-+ 
-+ all:
-+ 	@echo "Nothing to build"
-+ 
-++clean:
-++	@echo "Nothing to clean"
-++
-+ install : uninstall
-+-	install -d  $(DESTDIR)$(PREFIX)/lib/pm-graph
-+-	install sleepgraph.py $(DESTDIR)$(PREFIX)/lib/pm-graph
-+-	install bootgraph.py $(DESTDIR)$(PREFIX)/lib/pm-graph
-+-	install -d  $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/cgskip.txt $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/freeze-callgraph.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/freeze.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/freeze-dev.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/standby-callgraph.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/standby.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/standby-dev.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/suspend-callgraph.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/suspend.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/suspend-dev.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-+-	install -m 644 config/suspend-x2-proc.cfg $(DESTDIR)$(PREFIX)/lib/pm-graph/config
-++	install -d  $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph
-++	install sleepgraph.py $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph
-++	install bootgraph.py $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph
-++	install -d  $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/cgskip.txt $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/freeze-callgraph.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/freeze.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/freeze-dev.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/standby-callgraph.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/standby.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/standby-dev.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/suspend-callgraph.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/suspend.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/suspend-dev.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-++	install -m 644 config/suspend-x2-proc.cfg $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config
-+ 
-+ 	install -d  $(DESTDIR)$(PREFIX)/bin
-+-	ln -s ../lib/pm-graph/bootgraph.py $(DESTDIR)$(PREFIX)/bin/bootgraph
-+-	ln -s ../lib/pm-graph/sleepgraph.py $(DESTDIR)$(PREFIX)/bin/sleepgraph
-++	ln -s ../$(BASELIB)/pm-graph/bootgraph.py $(DESTDIR)$(PREFIX)/bin/bootgraph
-++	ln -s ../$(BASELIB)/pm-graph/sleepgraph.py $(DESTDIR)$(PREFIX)/bin/sleepgraph
-+ 
-+ 	install -d  $(DESTDIR)$(PREFIX)/share/man/man8
-+ 	install bootgraph.8 $(DESTDIR)$(PREFIX)/share/man/man8
-+@@ -37,11 +41,11 @@ uninstall :
-+ 	rm -f $(DESTDIR)$(PREFIX)/bin/bootgraph
-+ 	rm -f $(DESTDIR)$(PREFIX)/bin/sleepgraph
-+ 
-+-	rm -f $(DESTDIR)$(PREFIX)/lib/pm-graph/config/*
-+-	if [ -d $(DESTDIR)$(PREFIX)/lib/pm-graph/config ] ; then \
-+-		rmdir $(DESTDIR)$(PREFIX)/lib/pm-graph/config; \
-++	rm -f $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config/*
-++	if [ -d $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config ] ; then \
-++		rmdir $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/config; \
-+ 	fi;
-+-	rm -f $(DESTDIR)$(PREFIX)/lib/pm-graph/*
-+-	if [ -d $(DESTDIR)$(PREFIX)/lib/pm-graph ] ; then \
-+-		rmdir $(DESTDIR)$(PREFIX)/lib/pm-graph; \
-++	rm -f $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph/*
-++	if [ -d $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph ] ; then \
-++		rmdir $(DESTDIR)$(PREFIX)/$(BASELIB)/pm-graph; \
-+ 	fi;
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-index de2d46d..ea12e05 100644
---- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-@@ -6,11 +6,12 @@ LICENSE  = "GPL-2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
- 
- SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
--SRC_URI = "git://github.com/intel/pm-graph.git"
-+SRC_URI = "git://github.com/intel/pm-graph.git \
-+           file://0001-Makefile-fix-multilib-build-failure.patch"
- S = "${WORKDIR}/git"
- 
- COMPATIBLE_HOST='(i.86|x86_64).*'
--EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
-+EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} BASELIB=${baselib}"
- 
- do_install() {
-         oe_runmake install
+Stefano
+
+> 
+> On Fri, May 31, 2019 at 2:04 AM Stefano Babic <sbabic@denx.de> wrote:
+>>
+>> Even if SYSTEMD_AUTO_ENABLE is set to "enable", the service is never
+>> activated by systemd. The cause is the postinst function in the recipe:
+>>
+>>  pkg_postinst_${PN} () {
+>>          if [ -n "$D" ]; then
+>>                  exit 0
+>>          fi
+>>          if [ -e /etc/init.d/populate-volatile.sh ]; then
+>>                  /etc/init.d/populate-volatile.sh update
+>>          fi
+>>  }
+>>
+>> This generates with activated systemd the following postinst script:
+>>
+>>         set -e
+>>                 if [ -n "$D" ]; then
+>>                         exit 0
+>>                 fi
+>>                 if [ -e /etc/init.d/populate-volatile.sh ]; then
+>>                         /etc/init.d/populate-volatile.sh update
+>>                 fi
+>>         OPTS=""
+>>
+>>         if [ -n "$D" ]; then
+>>             OPTS="--root=$D"
+>>         fi
+>>
+>>         if type systemctl >/dev/null 2>/dev/null; then
+>>                 if [ -z "$D" ]; then
+>>                         systemctl daemon-reload
+>>                 fi
+>>
+>>                 systemctl $OPTS enable sysstat.service
+>>
+>>                 if [ -z "$D" -a "enable" = "enable" ]; then
+>>                         systemctl --no-block restart sysstat.service
+>>                 fi
+>>         fi
+>>
+>> Due to the exit statement, systemctl is never called and the service is
+>> never enabled in rootfs.
+>> Invert the logic for the check to let run the rest of postinst script.
+>>
+>> Signed-off-by: Stefano Babic <sbabic@denx.de>
+>> ---
+>>  meta/recipes-extended/sysstat/sysstat.inc | 11 +++++------
+>>  1 file changed, 5 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/meta/recipes-extended/sysstat/sysstat.inc b/meta/recipes-extended/sysstat/sysstat.inc
+>> index 0bc7e14d36..850a6d1465 100644
+>> --- a/meta/recipes-extended/sysstat/sysstat.inc
+>> +++ b/meta/recipes-extended/sysstat/sysstat.inc
+>> @@ -51,12 +51,11 @@ do_install() {
+>>  }
+>>
+>>  pkg_postinst_${PN} () {
+>> -        if [ -n "$D" ]; then
+>> -                exit 0
+>> -        fi
+>> -        if [ -e /etc/init.d/populate-volatile.sh ]; then
+>> -                /etc/init.d/populate-volatile.sh update
+>> -        fi
+>> +       if [  ! -n "$D" ]; then
+>> +               if [ -e /etc/init.d/populate-volatile.sh ]; then
+>> +                       /etc/init.d/populate-volatile.sh update
+>> +               fi
+>> +       fi
+>>  }
+>>
+>>
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 -- 
-2.7.4
-
+=====================================================================
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
 
