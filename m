@@ -1,47 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 204797E84F
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 487387E71E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 19:01:37 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id z25so17651783edq.9
+	Tue, 18 Jun 2019 03:28:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="67855216"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Jun 2019 11:28:06 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id AAFCD4CDD994
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 12:01:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=abChJ69m5JnNypO2OfKKuc0kKM7U1HYPMng7uQT4y50=;
-	b=HQB3FVsLhJKRBgg4xu/8vdrahhqvmx0pHtTneFD7oAkjmGE5goHhqy+palUtXL4OhT
-	0oGZ3pv5JDFt9PPHpjQhgm1dQvEwqM3Ns+k8pts98GRzETNQLekJYAGNjdDik7sACFV6
-	nBuLEVXhU9rAPQlw8SYdPungwwJ7m0AL/TSEOpKDAvP3VjdCw1yMhWENOFH6LceRLqtG
-	HqjzDaIpIed+5sdZ8MPaK2n3GL64j3QOGKxdNtQSGChwDmybeqsSNA3mur1mVfTCibAS
-	IuqkcKKMFeOa35htKem4LTrmtgVdax4VZ9xvXtG3wXiINvZMTpM1hz8SuDGfa5WyiGgo
-	9CRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=abChJ69m5JnNypO2OfKKuc0kKM7U1HYPMng7uQT4y50=;
-	b=nzGJkdwDYzUeyyKYMAZLF0EdxSrAYqDtykjI04w9UrHqwE5vTPmAEwDI/dKj+cYavo
-	L2aqLVWmWRcciZF9yB2NOQwHGscgwRckKFJpxJFITjCJDTFE450VquKVETakwmjqiBzG
-	QBAh9XoUB1Ars2jUS89Pkwv0qQpJqH2zmCfajfFNo0XvmzllU4DjwVfH64TKff9IeLOB
-	a/ogFgYylhkHC6fZSvHOQ7gPK2QpBbqrv7LSNwTPc4mdYWEc5tLEYjtMC6+mqOgyLPmD
-	9c+G9SNopzTVMQ9SvBxKX5mie86qGo5W4hoPy9J5V5EYo+B0Z7pLLa5uf//zkC209K+y
-	La3g==
-X-Gm-Message-State: APjAAAVTTY1Zsrj0ZVBOChC6qiu0DIz4L/HQkf3LoC7KIYN51opYjFsq
-	MUCKl6CwQoFCHJGzgVPhmI6G4aPlDuTwuzGyWXeVLVQx
-X-Google-Smtp-Source: APXvYqza8xDWMgZVZHrWeSVJZgS7FXrkt4UZ9cAQPF4dVd9CqekN7WVIf7tBKJoMgUCAEmq9HgH7plQ0hJrQANFT8Ps=
-X-Received: by 2002:a50:95d3:: with SMTP id x19mr75726961eda.98.1560798097830; 
-	Mon, 17 Jun 2019 12:01:37 -0700 (PDT)
+	Tue, 18 Jun 2019 11:28:05 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 18 Jun 2019 11:28:10 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Jun 2019 11:29:28 +0800
+Message-ID: <20190618032928.638-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190522065246.14793-1-naveen.kumar.saini@intel.com>
-In-Reply-To: <20190522065246.14793-1-naveen.kumar.saini@intel.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 17 Jun 2019 21:01:33 +0200
-Message-ID: <CA+chaQcyOZCUZCd-RjG8eYoo0_RpcpPnSgJS_jLb7Spb54cqAA@mail.gmail.com>
-To: Naveen Saini <naveen.kumar.saini@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] pm-graph: add recipe
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: AAFCD4CDD994.ADF34
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-twisted: upgrade 19.2.0 -> 19.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,87 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 19:01:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 18 Jun 2019 03:28:08 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi,
+-Upgrade from python-twisted_19.2.0.bb to python-twisted_19.2.1.bb.
 
-it doesn't respect libdir variable and fails when multilib is enabled
-(because files are installed in /usr/lib while FILES_${PN} expects
-/usr/lib64):
+-Upgrade from python3-twisted_19.2.0.bb to python3-twisted_19.2.1.bb.
 
-ERROR: QA Issue: pm-graph: Files/directories were installed but not shipped
-in any package:
-  /usr/lib
-  /usr/lib/pm-graph
-  /usr/lib/pm-graph/sleepgraph.py
-  /usr/lib/pm-graph/bootgraph.py
-  /usr/lib/pm-graph/config
-  /usr/lib/pm-graph/config/freeze.cfg
-  /usr/lib/pm-graph/config/suspend.cfg
-  /usr/lib/pm-graph/config/cgskip.txt
-  /usr/lib/pm-graph/config/standby-callgraph.cfg
-  /usr/lib/pm-graph/config/suspend-callgraph.cfg
-  /usr/lib/pm-graph/config/freeze-dev.cfg
-  /usr/lib/pm-graph/config/standby.cfg
-  /usr/lib/pm-graph/config/freeze-callgraph.cfg
-  /usr/lib/pm-graph/config/suspend-dev.cfg
-  /usr/lib/pm-graph/config/standby-dev.cfg
-  /usr/lib/pm-graph/config/suspend-x2-proc.cfg
-Please set FILES such that these items are packaged. Alternatively if they
-are unneeded, avoid installing them or delete them within do_install.
-pm-graph: 16 installed and not shipped files. [installed-vs-shipped]
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-twisted.inc        | 4 ++--
+ .../{python-twisted_19.2.0.bb => python-twisted_19.2.1.bb}    | 0
+ .../{python3-twisted_19.2.0.bb => python3-twisted_19.2.1.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-twisted_19.2.0.bb => python-twisted_19.2.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-twisted_19.2.0.bb => python3-twisted_19.2.1.bb} (100%)
 
-On Wed, May 22, 2019 at 8:59 AM Naveen Saini <naveen.kumar.saini@intel.com>
-wrote:
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index ddef414a1..005aaadef 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -7,8 +7,8 @@ HOMEPAGE = "http://www.twistedmatrix.com"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d136e8cf7b52f2e64079186ae2060d8a"
+ 
+-SRC_URI[sha256sum] = "1708e1928ae84ec9d3ebab0d427e20e1e38ff721b15bbced476d047d4a43abbe"
+-SRC_URI[md5sum] = "473e12f4226e0fecc0ca5698e418e3f6"
++SRC_URI[sha256sum] = "fa2c04c2d68a9be7fc3975ba4947f653a57a656776f24be58ff0fe4b9aaf3e52"
++SRC_URI[md5sum] = "528b7856938edc2a752c244aebd94981"
+ 
+ PYPI_PACKAGE = "Twisted"
+ PYPI_PACKAGE_EXT = "tar.bz2"
+diff --git a/meta-python/recipes-devtools/python/python-twisted_19.2.0.bb b/meta-python/recipes-devtools/python/python-twisted_19.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-twisted_19.2.0.bb
+rename to meta-python/recipes-devtools/python/python-twisted_19.2.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_19.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_19.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-twisted_19.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_19.2.1.bb
+-- 
+2.20.1
 
-> This tool suite is designed to assist kernel and OS developers
-> in optimizing their linux stack's suspend/resume & boot time.
->
-> For more details and usage, please check:
-> https://01.org/pm-graph
->
-> Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-> ---
->  .../recipes-kernel/pm-graph/pm-graph_5.3.bb   | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
->
-> diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-> b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-> new file mode 100644
-> index 000000000..de2d46dca
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY  = "Timing analysis tools for suspend/resume/boot"
-> +DESCRIPTION = "This tool suite is designed to assist kernel and OS
-> developers \
-> +in optimizing their linux stack's suspend/resume & boot time."
-> +HOMEPAGE = "https://01.org/pm-graph"
-> +LICENSE  = "GPL-2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-> +
-> +SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
-> +SRC_URI = "git://github.com/intel/pm-graph.git"
-> +S = "${WORKDIR}/git"
-> +
-> +COMPATIBLE_HOST='(i.86|x86_64).*'
-> +EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
-> +
-> +do_install() {
-> +        oe_runmake install
-> +}
-> +
-> +RDEPENDS_${PN} += "python-core python-threading python-datetime
-> python-subprocess python-compression"
-> --
-> 2.17.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+
 
