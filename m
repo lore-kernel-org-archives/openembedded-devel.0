@@ -1,48 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
-	[209.85.208.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BD7877E90E
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E577B7E7F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 11:34:31 +0000 (UTC)
-Received: by mail-ed1-f42.google.com with SMTP id d4so21206382edr.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 04:34:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ct5e6Co3YdL1nOVoM0x+7C0YZMPYcRoBXKgBCBdrrtg=;
-	b=euFyAL5r6+bLT8JkbRuYKyk05Iaeb6PAsPIvSt3HjlmikK8iRLupbK/E5ytuuzUkAR
-	1V6fN75I2mv2dPnNJdOmu93Ipp31JZHNO7XXZbqob/gH1BszVLwxpFcOdsToebWHMyHy
-	CHPxWDZRF+DSicfZODrx08ZhsQN/+tu4l4Hd5/KQZV8M1DrIOadbuqV6/Rz7gV7dWoQA
-	z7qcUOdrH48jq8O2FtXCaYhHUVF1FLO7pHwjTM1baxugq3OvHLqDAyVFxgpAUBD52erF
-	Vgluy3A4HvdS5rxFWyJmSUGK/dTxBk7fCvrMZ6ccEE00BB4w9xuzgOVZLIRAm49AM6vS
-	5SwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ct5e6Co3YdL1nOVoM0x+7C0YZMPYcRoBXKgBCBdrrtg=;
-	b=Xre9aCurSVk+8ebzW6cWC6NieHy8UxA18/QVnKMK7IItld/sHEfvKTeb3YFYuFzZbG
-	mg9GwJK3wcoNgXBWN448yOSuS/bUa/unULaMIa6hRXiUn5Xko8ggLvvrgHkb/oyfeeQ3
-	DP8qX0gRv5W4Nb78sa8wK6ipiYqghj6gM/7w326OeT7pTyNANeMaW2OBpW6m0yobQmwg
-	DLhkLbV2JwwtXRW8LxUXvc9hJ975H5nq+xG7GCwzMW7y1WKH7r+xEB17qmLmYGDT40pG
-	a/FCvO0rlY0l7uBya4sUFvU+HX1ETj6wTFDN0GEWkrcdmW6T6ym1hA/hwI5pezT4dZA3
-	WQ7A==
-X-Gm-Message-State: APjAAAU35KJzKKCG29oQIqkE92bpLFbUn0OHYUttU2XHgR1ihN1a4Qdc
-	89dZma0fB6VjxeE+ZiUStq9ULWwLlmjFGruKl889CENY
-X-Google-Smtp-Source: APXvYqzF2IiWUSUxiS716jLxdrWB3wxH/5lR25yhjMapSwCnJqzHTNoAl/0TtowTCCZdTdL6EZazkcdVvFU4XMiJN9w=
-X-Received: by 2002:a17:906:55d4:: with SMTP id
-	z20mr8671596ejp.205.1560857672281; 
-	Tue, 18 Jun 2019 04:34:32 -0700 (PDT)
+	Tue, 18 Jun 2019 12:25:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="67913040"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Jun 2019 20:25:08 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id F33E14CDB1CE;
+	Tue, 18 Jun 2019 20:25:03 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0439.000; Tue, 18 Jun 2019 20:25:05 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe][meta-oe][patch v3] dnf-plugin-tui: new recipe
+Thread-Index: AQHVB/UV7sM6hF26jkGzUva10+WitKaha5FA
+Date: Tue, 18 Jun 2019 12:25:08 +0000
+Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C38CC0@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.225.35]
 MIME-Version: 1.0
-References: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 18 Jun 2019 13:34:27 +0200
-Message-ID: <CA+chaQePCd=cHgYpx1TQydMOopA9FN8WjDK2Jtn60d6J2h1cNw@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] libowfat: update to 0.32
+X-yoursite-MailScanner-ID: F33E14CDB1CE.AC07A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-oe][patch v3] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,79 +43,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 11:34:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 18 Jun 2019 12:25:11 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-Hi, have you seen libowfat randomly failing with error: conflicting types
-for 'socklen_t' ? It happens with both 0.31 and 0.32 versions.
-
-I sometimes see this failure in world builds:
-
-| In file included from socket/socket_recv6.c:12:
-| ./havesl.h:1:13: error: conflicting types for 'socklen_t'
-|     1 | typedef int socklen_t;
-|       |             ^~~~~~~~~
-| In file included from
-libowfat/0.31-r0/recipe-sysroot/usr/include/sys/socket.h:33,
-|                  from socket/socket_recv6.c:4:
-| libowfat/0.31-r0/recipe-sysroot/usr/include/bits/socket.h:33:21: note:
-previous declaration of 'socklen_t' was here
-|    33 | typedef __socklen_t socklen_t;
-|       |                     ^~~~~~~~~
-| GNUmakefile:179: recipe for target 'socket_recv6.o' failed
-| make: *** [socket_recv6.o] Error 1
-
-Checking what GNUmakefile does, this really shouldn't happen, but the log
-doesn't show anything useful to see why the trysl.c test failed (and caused
-havesl.h to exist and contain the conflicting typedef).
-
-I've added small patch on top of this upgrade which should make the compile
-tests more verbose:
-http://git.openembedded.org/meta-openembedded-contrib/commit/?h=jansa/master&id=3d3ac51e43926ec8a3254411845fa025af6d1c2b
-now I'm waiting for the build to fail again to hopefully see why.
-
-Have you seen this before?
-
-Cheers,
-
-On Sun, Apr 7, 2019 at 3:09 PM Oleksandr Kravchuk <
-open.source@oleksandr-kravchuk.com> wrote:
-
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}                | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb =>
-> libowfat_0.32.bb} (84%)
->
-> diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
-> b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> similarity index 84%
-> rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
-> rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> index 4b072f7e7..fba35526d 100644
-> --- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
-> +++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-> @@ -7,8 +7,8 @@ LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->
->  SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
-> -SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
-> -SRC_URI[sha256sum] =
-> "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
-> +SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
-> +SRC_URI[sha256sum] =
-> "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
->
->  EXTRA_OEMAKE = "\
->      DIET= \
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+SGkNCg0KVGhpcyBwYXRjaCBpcyBzdGlsbCBiZSBpZ25vcmVkLiBEb2VzIGFu
+eW9uZSBoYXZlIGFueSBjb21tZW50IGFib3V0IHRoaXMgcGF0Y2g/DQoNCkJl
+c3QgcmVnYXJkcy4NClpoZW5nIFJ1b3Fpbg0KDQotLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVv
+cWluDQpOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28u
+LCBMdGQuKEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdh
+cmUgQXZlbnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1B
+SUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20NCg0KDQo+IC0tLS0t
+T3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFpoZW5nLCBSdW9xaW4v
+1qMgyPTH1Q0KPiBTZW50OiBTdW5kYXksIE1heSAxMiwgMjAxOSA1OjI5IEFN
+DQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZw0KPiBDYzogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVIDx6aGVuZ3JxLmZu
+c3RAY24uZnVqaXRzdS5jb20+DQo+IFN1YmplY3Q6IFtvZV1bbWV0YS1vZV1b
+cGF0Y2ggdjNdIGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+IA0KPiBU
+aGlzIGRuZiBwbHVnaW4gYWltcyB0byBzdXBwbHkgYSB0dWkgaW50ZXJmYWNl
+IGZvciB1c2VyIHRvIG1hbmFnZSBwYWNrYWdlcy4gSXQgaGFzDQo+IGZlYXR1
+cmVzIGFzIGZvbGxvd2luZzoNCj4gICAxLiBBZGQgbmV3IGNvbW1hbmQgZG5m
+IHR1aSAtLWluaXQgdG8gbWFrZSBkbmYgdG8gd29yayBvbiBob3N0Lg0KPiAg
+IDIuIFRleHQtYmFzZWQgdXNlciBpbnRlcmZhY2UgZm9yIGRuZi4NCj4gICAz
+LiBNYW5hZ2UgU1BEWCBmaWxlcy4NCj4gICA0LiBNYW5hZ2UgU1JQTSBmaWxl
+cy4NCj4gICA1LiBBZGQgaW5zdGFsbGF0aW9uIHNhbXBsZXMgZm9yIGRuZi4N
+Cj4gDQo+IE1vcmUgZGV0YWlscyBwbGVhc2UgcmVmZXIgdG8gaHR0cHM6Ly9n
+aXRodWIuY29tL3ViaW51eC9kbmYtcGx1Z2luLXR1aS4NCj4gDQo+IFNpZ25l
+ZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0
+c3UuY29tPg0KPiAtLS0NCj4gIC4uLi9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1
+Z2luLXR1aV9naXQuYmIgICAgICAgICAgIHwgMzggKysrKysrKysrKysrKysr
+KysrKysrKw0KPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLXJlbW90
+ZS5yZXBvLnNhbXBsZSAgICAgfCAgNSArKysNCj4gIDIgZmlsZXMgY2hhbmdl
+ZCwgNDMgaW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1l
+dGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1
+Z2luLQ0KPiB0dWlfZ2l0LmJiDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0
+YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29l
+LQ0KPiByZW1vdGUucmVwby5zYW1wbGUNCj4gDQo+IGRpZmYgLS1naXQgYS9t
+ZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBs
+dWdpbi10dWlfZ2l0LmJiDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xz
+L2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0KPiBuZXcg
+ZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwLi5lODkxODY4DQo+
+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRv
+b2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0KPiBA
+QCAtMCwwICsxLDM4IEBADQo+ICtTVU1NQVJZID0gIkEgdGV4dC1iYXNlZCB1
+c2VyIGludGVyZmFjZSBwbHVnaW4gb2YgZG5mIGZvciB1c2VyIHRvIG1hbmFn
+ZQ0KPiBwYWNrYWdlcy4gIg0KPiArTElDRU5TRSA9ICJHUEx2MiINCj4gKw0K
+PiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vQ09QWUlORzttZDU9
+YjIzNGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMiDQo+ICsNCj4gK1NS
+Q19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS91YmludXgvZG5mLXBsdWdpbi10
+dWkuZ2l0O2JyYW5jaD1tYXN0ZXIgIg0KPiArU1JDUkVWID0gIjMxZDY4NjZk
+NWVkYTAyYmU5YTZiZmIxZmNhOWU5MDk1YjEyZWVjZDEiDQo+ICtQViA9ICIx
+LjAiDQo+ICsNCj4gK1NSQ19VUklfYXBwZW5kX2NsYXNzLXRhcmdldCA9ICJm
+aWxlOi8vb2UtcmVtb3RlLnJlcG8uc2FtcGxlIg0KPiArDQo+ICtpbmhlcml0
+IGRpc3R1dGlsczMtYmFzZQ0KPiArDQo+ICtTID0gIiR7V09SS0RJUn0vZ2l0
+Ig0KPiArDQo+ICtkb19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gKyAgICAgICAg
+aW5zdGFsbCAtZCAke0R9JHtkYXRhZGlyfS9kbmYNCj4gKyAgICAgICAgaW5z
+dGFsbCAtbSAwNzU1ICR7U30vc2FtcGxlcy8qICR7RH0ke2RhdGFkaXJ9L2Ru
+Zg0KPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0ke1BZVEhPTl9TSVRFUEFD
+S0FHRVNfRElSfS9kbmYtcGx1Z2lucy9ta2ltZw0KPiArICAgICAgICBpbnN0
+YWxsIC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy9ta2ltZy8qDQo+ICR7RH0k
+e1BZVEhPTl9TSVRFUEFDS0FHRVNfRElSfS9kbmYtcGx1Z2lucy9ta2ltZw0K
+PiArICAgICAgICBmb3IgZmlsZSBpbiAkKGxzICR7U30vZG5mLXBsdWdpbnMv
+IHwgZ3JlcCAtdiBta2ltZyk7IGRvDQo+ICsgICAgICAgICAgICBpbnN0YWxs
+IC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy8kZmlsZQ0KPiAke0R9JHtQWVRI
+T05fU0lURVBBQ0tBR0VTX0RJUn0vZG5mLXBsdWdpbnMNCj4gKyAgICAgICAg
+ZG9uZQ0KPiArfQ0KPiArDQo+ICtkb19pbnN0YWxsX2FwcGVuZF9jbGFzcy10
+YXJnZXQoKSB7DQo+ICsgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29u
+ZmRpcn0veXVtLnJlcG9zLmQNCj4gKyAgICAgICAgaW5zdGFsbCAtbSAwNjQ0
+ICR7V09SS0RJUn0vb2UtcmVtb3RlLnJlcG8uc2FtcGxlDQo+ICske0R9JHtz
+eXNjb25mZGlyfS95dW0ucmVwb3MuZCB9DQo+ICsNCj4gK0ZJTEVTXyR7UE59
+ICs9ICIke2RhdGFkaXJ9L2RuZiINCj4gKw0KPiArUkRFUEVORFNfJHtQTn0g
+Kz0gIiBcDQo+ICsgIGRuZiBcDQo+ICsgIGxpYm5ld3QtcHl0aG9uIFwNCj4g
+KyAgIg0KPiArDQo+ICtCQkNMQVNTRVhURU5EID0gIm5hdGl2ZXNkayINCj4g
+ZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1
+Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3RlLnJlcG8uc2FtcGxlIGIvbWV0
+YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29l
+LQ0KPiByZW1vdGUucmVwby5zYW1wbGUNCj4gbmV3IGZpbGUgbW9kZSAxMDA2
+NDQNCj4gaW5kZXggMDAwMDAwMC4uNmM0NTAyZQ0KPiAtLS0gL2Rldi9udWxs
+DQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2lu
+LXR1aS9maWxlcy9vZS1yZW1vdGUucmVwby5zYW1wbA0KPiArKysgZQ0KPiBA
+QCAtMCwwICsxLDUgQEANCj4gK1tiYXNlXQ0KPiArbmFtZT1teXJlcG8NCj4g
+K2Jhc2V1cmw9aHR0cDovLzEyNy4wLjAuMS9vZV9yZXBvLw0KPiArZW5hYmxl
+ZD0xDQo+ICtncGdjaGVjaz0wDQo+IC0tDQo+IDIuNy40DQoNCgoK
 
