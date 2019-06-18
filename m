@@ -1,50 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D3C1A7D597
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A9B17E6E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 06:02:39 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id w13so19847633eds.4
+	Tue, 18 Jun 2019 07:12:47 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id d4so20074161edr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2019 23:02:41 -0700 (PDT)
+	Tue, 18 Jun 2019 00:12:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DtGaXfjWobP6SOjc1WU2hYorbg7BdlfL8O3RZjGP6F0=;
-	b=VLA00A1624ZAh5Y3ZD5acGuw1B9K3ZZFvhYeJ0M6cX5kp6t09qU5it5hMCtL59JdKT
-	gnuKP6JV/jduJ/iO+rBD4uRpFuYTTclMYRsBjVyz9B1TiAot+wFt1lth9P2MxQYFkeNp
-	s1KfC4vR5W/MIWTYZeoQKCdhSGBfVWhQ/4BCfb7N0RzcwQ0Ngjtg6aCAq2klhsFk47Ol
-	hwsMp1ORLF9LMoAEVcPPS8hef9dFse6zInyRgakTMWeTFN+BXNi0WnAtSe3cUG0gV08w
-	alT9Q8Y93thcf/MMQMXyFTP3BDiSTgYm4GDo002VGJWV/fZqEK4GaWAS2z/ZV7Y5oINB
-	mkjQ==
+	:cc; bh=IWpcX+ocNkc08v20z0DdLhpJtKnXmGyiXaoUJy6mraQ=;
+	b=G2/rTDfco0/UK0v+p2bVSUU9swDCm2YF+i2OJN6kT1QLcenhRGgOXZ3/cZhZB2R6le
+	6QBMNi5d1oZF9LXXEUIRHc/yOLi4UkBHyE5/AI6flUiRD8BzxNyUbeFcibMES5qXXgEs
+	siWoNKzD1cndGKKGWsgQcb3klx0ZsKKHOSYxwMPRXXfwibjfTxV0SdWmJUwgna2dBP+8
+	a6LvHu8lv+7Rin3zcq4aYB6sLv7UFPB47LDberd94ras4UkH/j9ghfuX5EXKqWYX9t8r
+	eQaz7Evmlldmfni4MDwjAuxjlJJUa1ghQ9WEnBIj5fvtJdE+ZHa6tZ9nf5TO0b9A7mq8
+	ZcLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=DtGaXfjWobP6SOjc1WU2hYorbg7BdlfL8O3RZjGP6F0=;
-	b=pWInMP0GMOqfyDiKWinhFw83BFHfeSI9Q5E8XRpc1ztOkZi9yrL1C/46vvToe9xIzG
-	lo20BmdL+vTvDA1ozJdJROdCJ7xGQm805snZDfhM1QPZFiRUdtdaC3c5xeKzx++HJ27C
-	cNPMqUwlciiAr3sLowS8WAjDX8dYyMSQabthELos6yVpdHvoSGyjhpEpgGyn1UukGFEl
-	TSQJDsHd7B4Ge/2ZoBvharWlWi1ogY/xeqt4MmhDQmWu23Xvmjdm0uWbwjiFTgHDCAuR
-	DQzcrJrIwMi//v6o6FoygwULWGP3sNFMBT0VRPnzSYNfOCuRdPWBemPvT76Eh8pLv53Y
-	xwNw==
-X-Gm-Message-State: APjAAAXIMNwMeCIgh5I5Mn+uLdLjIuPRUvJmJSWEIcJTGcGxOpngEdi9
-	y2GN1SIPT0lIwZuys1BsDEqecM/fmL46jGi9KNE=
-X-Google-Smtp-Source: APXvYqyreSWAEL/ELRR/0cNvZa4VjgTUlWx+tI9GSg26arE04xBSAWFI4uT9lZJfdo04lWSAn6P+IBVLweXNMRAtHtg=
-X-Received: by 2002:a17:906:6a87:: with SMTP id
-	p7mr79909470ejr.277.1560837760163; 
-	Mon, 17 Jun 2019 23:02:40 -0700 (PDT)
+	bh=IWpcX+ocNkc08v20z0DdLhpJtKnXmGyiXaoUJy6mraQ=;
+	b=VE2z4T3v98S1K8G0P0fjB5G2QJBNYPE1viWhcMpbblqBGIe4GvzPJ7e0vc+JlG/Bsv
+	r6F+JIXKFoMAvtCwgg8H9/QcWNqycPmb3fH/Nylk48gCElldYklfzWFbnWE6cYn+x47q
+	zzkUEr2l1TIGhpB2K3ED83nD4ZB5wxDGMn3XUr3pIJDWFDdSBUK+CpqjLjlm4eslCAHy
+	vpEMsTGvdokbdUW9q0v6/hlI4glunqBocwDJ+0+0Ytk+gnrC3XcB6pJeaA6DBhl1tDPE
+	co4NzsHXR3FU0ZDWQmKDPiGUYBDA2fF8Ae9Ur3KRUvZDi7BcuUXEj0Kx2+7Ifz4NEVUB
+	jTKg==
+X-Gm-Message-State: APjAAAWujqVFXP2ZiE0g/PnZmza0p1qYmIwnKbNLnFJ3hfl7U+Viprse
+	x/kXoqucuHFeTThz7N68ku581KXG+CxBVXO1dIY=
+X-Google-Smtp-Source: APXvYqzJ9lguEREgS0Fx7fptqYq0nlN/Cm9KyHg+A++I1xGeOC0McAjawHGgQM25/8DG1AOeNxvql0To2neXH44u6U0=
+X-Received: by 2002:a05:6402:6d0:: with SMTP id
+	n16mr61073206edy.168.1560841967993; 
+	Tue, 18 Jun 2019 00:12:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190529084806.13342-1-ankit.tarot@gmail.com>
-	<CAMKF1soiTZwgAQM3-RD6PttxUJw88rLqpvomL-0j9X1sCJn9qQ@mail.gmail.com>
-	<CAM_RqkNM+uqH4HsM6Y=cdWpPSJLyDoXUaf5_rY++fYwXy42W5A@mail.gmail.com>
-In-Reply-To: <CAM_RqkNM+uqH4HsM6Y=cdWpPSJLyDoXUaf5_rY++fYwXy42W5A@mail.gmail.com>
+References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
+	<20190523115505.18245-3-Martin.Jansa@gmail.com>
+	<CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
+	<CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
+In-Reply-To: <CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 18 Jun 2019 08:02:35 +0200
-Message-ID: <CA+chaQcaiox8wTmgf9V6-Pp0a9zMcZaurX9yDoubgY1_s7rhfQ@mail.gmail.com>
-To: Ankit Navik <ankit.tarot@gmail.com>
+Date: Tue, 18 Jun 2019 09:12:43 +0200
+Message-ID: <CA+chaQf3J5=1A99rpmGkvOT5gFqzS+gKU5GNC-VYW1AJw_wCSw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
+Subject: Re: [meta-oe][PATCH 3/8] funyahoo-plusplus, icyque, pidgin-sipe, purple-skypeweb: add couple plugins for pidgin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,214 +58,224 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 06:02:40 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 07:12:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+I've rebuilt it on 4 different hosts with qemux86-64/glibc.
 
-it seems to fail for aarch64, I've noticed it in world build for
-raspberrypi3-64:
+And also with musl locally (first gobject-introspection was failing because
+of qemu-native segfaults, so I've disabled that with DISTRO_FEATURES_remove
+= "gobject-introspection-data") and then pidgin-sipe built fine again.
 
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
--mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
--Wformat-security -Werror=format-security
---sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
--DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
--I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
--Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
--Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
--Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
--Wmissing-noreturn -Winit-self -Wmissing-include-dirs
--Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
--Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
--Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
--Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
--Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
--Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
--Wno-error=missing-field-initializers -O2 -pipe -g
--feliminate-unused-debug-types
--fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
--c ../../git/src/wchar/wcscpy_s.c  -fPIC -DPIC -o wchar/.libs/wcscpy_s.o
-{standard input}: Assembler messages:
-{standard input}:161: Error: unknown mnemonic `memory_barrier' --
-`memory_barrier'
-{standard input}:389: Error: unknown mnemonic `memory_barrier' --
-`memory_barrier'
-{standard input}:649: Error: unknown mnemonic `memory_barrier' --
-`memory_barrier'
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
--mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
--Wformat-security -Werror=format-security
---sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
--DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
--I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
--Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
--Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
--Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
--Wmissing-noreturn -Winit-self -Wmissing-include-dirs
--Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
--Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
--Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
--Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
--Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
--Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
--Wno-error=missing-field-initializers -O2 -pipe -g
--feliminate-unused-debug-types
--fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
--c ../../git/src/wchar/wcsncpy_s.c  -fPIC -DPIC -o wchar/.libs/wcsncpy_s.o
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
--mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
--Wformat-security -Werror=format-security
---sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
--DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
--I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
--Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
--Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
--Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
--Wmissing-noreturn -Winit-self -Wmissing-include-dirs
--Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
--Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
--Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
--Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
--Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
--Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
--Wno-error=missing-field-initializers -O2 -pipe -g
--feliminate-unused-debug-types
--fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
--fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
--c ../../git/src/wchar/wmemcpy_s.c  -fPIC -DPIC -o wchar/.libs/wmemcpy_s.o
-../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
-aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
- -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
---sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
--DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
--I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
--Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
--Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
--Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
--Wmissing-noreturn -Winit-self -Wmissing-include-dirs
--Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
--Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
--Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
--Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
--Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
--Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
--Wno-error=missing-field-initializers  -O2 -pipe -g
--feliminate-unused-debug-types
--fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+Is it always failing for you reliably or was is random failure just in one
+build?
 
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+Cheers,
 
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+On Fri, Jun 14, 2019 at 11:34 PM Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
-  -c -o wchar/wscanf_s.lo ../../git/src/wchar/wscanf_s.c
-../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
-aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
- -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
---sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
--DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
--I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
--Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
--Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
--Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
--Wmissing-noreturn -Winit-self -Wmissing-include-dirs
--Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
--Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
--Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
--Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
--Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
--Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
--Wno-error=missing-field-initializers  -O2 -pipe -g
--feliminate-unused-debug-types
--fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
-
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
-
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
-
- -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
-  -c -o wchar/vfwscanf_s.lo ../../git/src/wchar/vfwscanf_s.c
-Makefile:1432: recipe for target 'mem/mem_primitives_lib.lo' failed
-make[2]: *** [mem/mem_primitives_lib.lo] Error 1
-make[2]: *** Waiting for unfinished jobs....
-
-On Wed, May 29, 2019 at 12:31 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
-
-> Hi Raj,
+> It builds fine for me with qemux86-64 with glibc.
 >
-> On Wed, May 29, 2019 at 2:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+> I'll check what's going on.
 >
-> > On Wed, May 29, 2019 at 10:48 AM Ankit Navik <ankit.tarot@gmail.com>
-> > wrote:
-> > >
-> > > Add generic recipe for safe C library.
-> > > This library implements the secure C11 Annex K functions on top of most
-> > libc
-> > > implementations, which are missing from them.
-> > >
-> > > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-> > > ---
-> > >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
-> > >  1 file changed, 15 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
-> > >
-> > > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
-> > b/meta-oe/recipes-core/safec/safec_3.4.bb
-> > > new file mode 100644
-> > > index 000000000..d55d081f3
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-> > > @@ -0,0 +1,15 @@
-> > > +SUMMARY  = "Safe C Library"
-> > > +
-> > > +LICENSE  = "safec"
-> > > +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
-> > > +SECTION = "lib"
-> > > +
-> > > +inherit autotools pkgconfig
-> > > +
-> > > +S = "${WORKDIR}/git"
-> > > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
-> > > +SRC_URI = "git://github.com/rurban/safeclib.git"
-> > > +
-> > > +COMPATIBLE_HOST =
-> '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
-> > > +
-> >
-> > I see its excluding mips/mips64 from core supported architectures, is
-> > that intentional ?
-> >
+> Thanks
 >
-> I'm not sure. This library is required for another component i.e. ipmctl.
+> On Fri, Jun 14, 2019 at 8:10 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Regards,
-> Ankit
->
-> >
-> > > +RDEPENDS_${PN} = "perl"
-> > > --
-> > > 2.20.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> Hi Martin
+>>
+>> I noticed this error on qemux86-64
+>>
+>> https://errors.yoctoproject.org/Errors/Details/248480/
+>>
+>> It seems we need to bring in recipe for gmime for this to work. This
+>> is already in master
+>> so can you work on fixing this?
+>>
+>> On Thu, May 23, 2019 at 4:55 AM Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>> >
+>> > * import from luneos to make pidgin here in meta-oe a bit more useful
+>> >
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> > ---
+>> >  .../pidgin/funyahoo-plusplus_git.bb           | 25 ++++++++++++++
+>> >  meta-oe/recipes-support/pidgin/icyque_git.bb  | 27 +++++++++++++++
+>> >  .../pidgin/pidgin-sipe_1.24.0.bb              | 34 +++++++++++++++++++
+>> >  .../pidgin/purple-skypeweb_git.bb             | 26 ++++++++++++++
+>> >  4 files changed, 112 insertions(+)
+>> >  create mode 100644 meta-oe/recipes-support/pidgin/
+>> funyahoo-plusplus_git.bb
+>> >  create mode 100644 meta-oe/recipes-support/pidgin/icyque_git.bb
+>> >  create mode 100644 meta-oe/recipes-support/pidgin/
+>> pidgin-sipe_1.24.0.bb
+>> >  create mode 100644 meta-oe/recipes-support/pidgin/
+>> purple-skypeweb_git.bb
+>> >
+>> > diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+>> b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+>> > new file mode 100644
+>> > index 0000000000..3a437659e7
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+>> > @@ -0,0 +1,25 @@
+>> > +SUMMARY = "Protocol plugin for New Yahoo (2016) for Adium, Pidgin,
+>> Miranda and Telepathy IM Framework"
+>> > +SECTION = "webos/services"
+>> > +LICENSE = "GPLv3.0"
+>> > +LIC_FILES_CHKSUM =
+>> "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+>> > +
+>> > +DEPENDS = "pidgin json-glib glib-2.0"
+>> > +
+>> > +inherit pkgconfig
+>> > +
+>> > +SRC_URI = "git://
+>> github.com/EionRobb/funyahoo-plusplus;branch=master;protocol=git"
+>> > +SRCREV = "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
+>> > +
+>> > +S = "${WORKDIR}/git"
+>> > +
+>> > +do_compile() {
+>> > +    oe_runmake CC="${CC}" CXX="${CXX}"
+>> EXTRA_INCLUDES="${TARGET_CFLAGS}" AR="${AR}";
+>> > +}
+>> > +
+>> > +do_install() {
+>> > +    oe_runmake DESTDIR="${D}" install;
+>> > +}
+>> > +
+>> > +FILES_${PN} += " \
+>> > +    ${libdir} \
+>> > +"
+>> > diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb
+>> b/meta-oe/recipes-support/pidgin/icyque_git.bb
+>> > new file mode 100644
+>> > index 0000000000..0f32dc3a39
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
+>> > @@ -0,0 +1,27 @@
+>> > +SUMMARY = "WIM Protocol plugin for ICQ for Adium, Pidgin, Miranda and
+>> Telepathy IM Framework"
+>> > +SECTION = "webos/services"
+>> > +LICENSE = "GPLv3.0"
+>> > +LIC_FILES_CHKSUM =
+>> "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
+>> > +
+>> > +DEPENDS = "pidgin json-glib"
+>> > +
+>> > +PV = "0.1+gitr${SRCPV}"
+>> > +
+>> > +inherit pkgconfig
+>> > +
+>> > +SRC_URI = "git://github.com/EionRobb/icyque"
+>> > +SRCREV = "513fc162d5d1a201c2b044e2b42941436d1069d5"
+>> > +
+>> > +S = "${WORKDIR}/git"
+>> > +
+>> > +do_compile() {
+>> > +    oe_runmake;
+>> > +}
+>> > +
+>> > +do_install() {
+>> > +    oe_runmake DESTDIR="${D}" install;
+>> > +}
+>> > +
+>> > +FILES_${PN} += " \
+>> > +    ${libdir} \
+>> > +"
+>> > diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+>> b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+>> > new file mode 100644
+>> > index 0000000000..beae281a30
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+>> > @@ -0,0 +1,34 @@
+>> > +SUMMARY = "Protocol plugin for Office 365/Lync/OCS for Adium, Pidgin,
+>> Miranda and Telepathy IM Framework"
+>> > +SECTION = "webos/services"
+>> > +LICENSE = "GPLv2.0"
+>> > +LIC_FILES_CHKSUM =
+>> "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>> > +
+>> > +DEPENDS = "pidgin intltool-native glib-2.0-native"
+>> > +
+>> > +inherit pkgconfig
+>> > +inherit autotools
+>> > +
+>> > +SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
+>> > +"
+>> > +
+>> > +SRC_URI[md5sum] = "b91106d28c235b347a63dcb676f7b66a"
+>> > +SRC_URI[sha256sum] =
+>> "958803722b23d869131f76bd90df9da19116d4ca5a873e5253371479b7390f43"
+>> > +
+>> > +PACKAGECONFIG ??= "nss krb5"
+>> > +PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
+>> > +PACKAGECONFIG[openssl] =
+>> "--enable-openssl=yes,--enable-openssl=no,openssl"
+>> > +PACKAGECONFIG[krb5] = "--with-krb5=yes,--with-krb5=no,krb5"
+>> > +#PACKAGECONFIG[voice_and_video] = "--with-vv=yes,--with-vv=no,libnice
+>> gstreamer"
+>> > +PACKAGECONFIG[telepathy] =
+>> "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib gmime"
+>> > +#PACKAGECONFIG[gssapi_only] =
+>> "--enable-gssapi-only=yes,--enable-gssapi-only=no,krb5"
+>> > +PACKAGECONFIG[debug] = "--enable-debug=yes,--enable-debug=no,valgrind"
+>> > +
+>> > +FILES_${PN}-dev += " \
+>> > +    ${libdir}/purple-2/*.la \
+>> > +"
+>> > +
+>> > +FILES_${PN} += " \
+>> > +    ${libdir}/purple-2/libsipe.so \
+>> > +    ${datadir}/appdata \
+>> > +    ${datadir}/metainfo \
+>> > +"
+>> > diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+>> b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+>> > new file mode 100644
+>> > index 0000000000..092e6059b8
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+>> > @@ -0,0 +1,26 @@
+>> > +SUMMARY = "Skype protocol plug-in for libpurple"
+>> > +SECTION = "webos/services"
+>> > +LICENSE = "GPLv3"
+>> > +LIC_FILES_CHKSUM =
+>> "file://skypeweb/gpl3.txt;md5=d90260d32cef39f3c8d6c0f05d3adb8e"
+>> > +
+>> > +DEPENDS = "pidgin json-glib glib-2.0 zlib"
+>> > +
+>> > +inherit pkgconfig
+>> > +
+>> > +SRC_URI = "git://
+>> github.com/EionRobb/skype4pidgin;branch=master;protocol=git"
+>> > +SRCREV = "14f1b69b6292bbdc98cca484b050ec8359394c4e"
+>> > +
+>> > +S = "${WORKDIR}/git"
+>> > +PV = "1.5+git${SRCPV}"
+>> > +
+>> > +do_compile() {
+>> > +    oe_runmake -C skypeweb;
+>> > +}
+>> > +
+>> > +do_install() {
+>> > +    oe_runmake -C skypeweb DESTDIR="${D}" install;
+>> > +}
+>> > +
+>> > +FILES_${PN} += " \
+>> > +    ${libdir} \
+>> > +"
+>> > --
+>> > 2.17.1
+>> >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
 
