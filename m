@@ -1,36 +1,53 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E577B7E7F2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D6F337E8D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 12:25:09 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="67913040"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Jun 2019 20:25:08 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id F33E14CDB1CE;
-	Tue, 18 Jun 2019 20:25:03 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0439.000; Tue, 18 Jun 2019 20:25:05 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][patch v3] dnf-plugin-tui: new recipe
-Thread-Index: AQHVB/UV7sM6hF26jkGzUva10+WitKaha5FA
-Date: Tue, 18 Jun 2019 12:25:08 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C38CC0@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
+	Tue, 18 Jun 2019 13:06:57 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id c11so8460839qkk.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jun 2019 06:06:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=iRRvkBOueF3nkV1iBtB2Zb4pugGd7yzI0+q9XrTdRVI=;
+	b=iIZoXYlQHdBrYga1KC4yRG2X0mhuQPoi1tgOsFo/pAGyfwL2SRxKbRptlHVPVJa87e
+	k72lG39NFBrqEM6Zu8Dp+sDCnyt0Z6AnIlzzZGXYT2Bq4VrJv5u4FGUsBg01N8jrVeXt
+	XSc1PhP4e6VWoDW+Y+gqGK+EQzVwuMTxpIabYxy53pU4QqL3aEGelh09XjLBbUjvjlhC
+	VUpNuhDT/qYwkT4A3R5/+XURalVsnSxp0MsmPUDJ6RP7cKcHH9LIiRj+1G1LhkIom99Z
+	PZXqyKTCANBQh8wM0/lLAH6znVksXkAI9Un3Yh1pxmbtwJx9PkDs1F7GjsL68Q9cptM7
+	IseQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=iRRvkBOueF3nkV1iBtB2Zb4pugGd7yzI0+q9XrTdRVI=;
+	b=b5pi+/D46GGVkUzRynvsP1cC+ulDx9Spv8d5ghllRnf/pAzpRWiXBJ8cQBHevhBlmz
+	TeooWFcYFdH/KU27N9KwZFC57Swt3mub0iKJxj5Eo3JSoIFWdZ0DDqDeqFC6rxNIZRZx
+	bJm9I5kU99XtixQLMhjIXg/YuBdtAnuMURscdkfC1Tv5TvKjKK0tvhZkafWSU/y08Aoj
+	KY66Xki66HKKTDL0QXsmXUkDRdW7seZxB4J7VROIRLMUthS+ZkdFeMwdMVLV8THf20k1
+	AbkM2HgJkJqTWG5LmFVwY3+2CsKuGmF/BGNQu95k9lZkXstGj9vSoArtaIwKI2V/pDDC
+	QstQ==
+X-Gm-Message-State: APjAAAWfwBU10vtTIWEYAPGLKl9CPhOSjQsc4O3lKSOV9zgZvMZy6gXe
+	vpAOrNR9Zi/mzX486iOBJVSPJp6KpTByDz9g0cY=
+X-Google-Smtp-Source: APXvYqzIvlPvOkeimGdWc/PkbkY+HLjbxSou0aMt30JqdsJhXqDKEPpZQw6BxQ1UFyOC07+8qKAs/3xo4dsW6672jgo=
+X-Received: by 2002:a05:620a:1407:: with SMTP id
+	d7mr82214427qkj.20.1560863218438; 
+	Tue, 18 Jun 2019 06:06:58 -0700 (PDT)
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: F33E14CDB1CE.AC07A
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][patch v3] dnf-plugin-tui: new recipe
+References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
+	<20190523115505.18245-3-Martin.Jansa@gmail.com>
+	<CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
+	<CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
+	<CA+chaQf3J5=1A99rpmGkvOT5gFqzS+gKU5GNC-VYW1AJw_wCSw@mail.gmail.com>
+	<CA+chaQckC5_m9yKCHStx_LesVfbjC0fkAPYHaiDnLFCvJs0iQw@mail.gmail.com>
+In-Reply-To: <CA+chaQckC5_m9yKCHStx_LesVfbjC0fkAPYHaiDnLFCvJs0iQw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Jun 2019 06:06:32 -0700
+Message-ID: <CAMKF1spuMgbHJVRYDYdR1-ZEcS835pvHX5PcOH9B1kqUxsj7Dg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 3/8] funyahoo-plusplus, icyque, pidgin-sipe, purple-skypeweb: add couple plugins for pidgin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,88 +60,288 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 12:25:11 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 18 Jun 2019 13:06:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-SGkNCg0KVGhpcyBwYXRjaCBpcyBzdGlsbCBiZSBpZ25vcmVkLiBEb2VzIGFu
-eW9uZSBoYXZlIGFueSBjb21tZW50IGFib3V0IHRoaXMgcGF0Y2g/DQoNCkJl
-c3QgcmVnYXJkcy4NClpoZW5nIFJ1b3Fpbg0KDQotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVv
-cWluDQpOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28u
-LCBMdGQuKEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdh
-cmUgQXZlbnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1B
-SUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20NCg0KDQo+IC0tLS0t
-T3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFpoZW5nLCBSdW9xaW4v
-1qMgyPTH1Q0KPiBTZW50OiBTdW5kYXksIE1heSAxMiwgMjAxOSA1OjI5IEFN
-DQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KPiBDYzogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVIDx6aGVuZ3JxLmZu
-c3RAY24uZnVqaXRzdS5jb20+DQo+IFN1YmplY3Q6IFtvZV1bbWV0YS1vZV1b
-cGF0Y2ggdjNdIGRuZi1wbHVnaW4tdHVpOiBuZXcgcmVjaXBlDQo+IA0KPiBU
-aGlzIGRuZiBwbHVnaW4gYWltcyB0byBzdXBwbHkgYSB0dWkgaW50ZXJmYWNl
-IGZvciB1c2VyIHRvIG1hbmFnZSBwYWNrYWdlcy4gSXQgaGFzDQo+IGZlYXR1
-cmVzIGFzIGZvbGxvd2luZzoNCj4gICAxLiBBZGQgbmV3IGNvbW1hbmQgZG5m
-IHR1aSAtLWluaXQgdG8gbWFrZSBkbmYgdG8gd29yayBvbiBob3N0Lg0KPiAg
-IDIuIFRleHQtYmFzZWQgdXNlciBpbnRlcmZhY2UgZm9yIGRuZi4NCj4gICAz
-LiBNYW5hZ2UgU1BEWCBmaWxlcy4NCj4gICA0LiBNYW5hZ2UgU1JQTSBmaWxl
-cy4NCj4gICA1LiBBZGQgaW5zdGFsbGF0aW9uIHNhbXBsZXMgZm9yIGRuZi4N
-Cj4gDQo+IE1vcmUgZGV0YWlscyBwbGVhc2UgcmVmZXIgdG8gaHR0cHM6Ly9n
-aXRodWIuY29tL3ViaW51eC9kbmYtcGx1Z2luLXR1aS4NCj4gDQo+IFNpZ25l
-ZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0
-c3UuY29tPg0KPiAtLS0NCj4gIC4uLi9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1
-Z2luLXR1aV9naXQuYmIgICAgICAgICAgIHwgMzggKysrKysrKysrKysrKysr
-KysrKysrKw0KPiAgLi4uL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLXJlbW90
-ZS5yZXBvLnNhbXBsZSAgICAgfCAgNSArKysNCj4gIDIgZmlsZXMgY2hhbmdl
-ZCwgNDMgaW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1l
-dGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1
-Z2luLQ0KPiB0dWlfZ2l0LmJiDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0
-YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29l
-LQ0KPiByZW1vdGUucmVwby5zYW1wbGUNCj4gDQo+IGRpZmYgLS1naXQgYS9t
-ZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBs
-dWdpbi10dWlfZ2l0LmJiDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xz
-L2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0KPiBuZXcg
-ZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwLi5lODkxODY4DQo+
-IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRv
-b2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0KPiBA
-QCAtMCwwICsxLDM4IEBADQo+ICtTVU1NQVJZID0gIkEgdGV4dC1iYXNlZCB1
-c2VyIGludGVyZmFjZSBwbHVnaW4gb2YgZG5mIGZvciB1c2VyIHRvIG1hbmFn
-ZQ0KPiBwYWNrYWdlcy4gIg0KPiArTElDRU5TRSA9ICJHUEx2MiINCj4gKw0K
-PiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vQ09QWUlORzttZDU9
-YjIzNGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMiDQo+ICsNCj4gK1NS
-Q19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS91YmludXgvZG5mLXBsdWdpbi10
-dWkuZ2l0O2JyYW5jaD1tYXN0ZXIgIg0KPiArU1JDUkVWID0gIjMxZDY4NjZk
-NWVkYTAyYmU5YTZiZmIxZmNhOWU5MDk1YjEyZWVjZDEiDQo+ICtQViA9ICIx
-LjAiDQo+ICsNCj4gK1NSQ19VUklfYXBwZW5kX2NsYXNzLXRhcmdldCA9ICJm
-aWxlOi8vb2UtcmVtb3RlLnJlcG8uc2FtcGxlIg0KPiArDQo+ICtpbmhlcml0
-IGRpc3R1dGlsczMtYmFzZQ0KPiArDQo+ICtTID0gIiR7V09SS0RJUn0vZ2l0
-Ig0KPiArDQo+ICtkb19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gKyAgICAgICAg
-aW5zdGFsbCAtZCAke0R9JHtkYXRhZGlyfS9kbmYNCj4gKyAgICAgICAgaW5z
-dGFsbCAtbSAwNzU1ICR7U30vc2FtcGxlcy8qICR7RH0ke2RhdGFkaXJ9L2Ru
-Zg0KPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0ke1BZVEhPTl9TSVRFUEFD
-S0FHRVNfRElSfS9kbmYtcGx1Z2lucy9ta2ltZw0KPiArICAgICAgICBpbnN0
-YWxsIC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy9ta2ltZy8qDQo+ICR7RH0k
-e1BZVEhPTl9TSVRFUEFDS0FHRVNfRElSfS9kbmYtcGx1Z2lucy9ta2ltZw0K
-PiArICAgICAgICBmb3IgZmlsZSBpbiAkKGxzICR7U30vZG5mLXBsdWdpbnMv
-IHwgZ3JlcCAtdiBta2ltZyk7IGRvDQo+ICsgICAgICAgICAgICBpbnN0YWxs
-IC1tIDA3NTUgJHtTfS9kbmYtcGx1Z2lucy8kZmlsZQ0KPiAke0R9JHtQWVRI
-T05fU0lURVBBQ0tBR0VTX0RJUn0vZG5mLXBsdWdpbnMNCj4gKyAgICAgICAg
-ZG9uZQ0KPiArfQ0KPiArDQo+ICtkb19pbnN0YWxsX2FwcGVuZF9jbGFzcy10
-YXJnZXQoKSB7DQo+ICsgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29u
-ZmRpcn0veXVtLnJlcG9zLmQNCj4gKyAgICAgICAgaW5zdGFsbCAtbSAwNjQ0
-ICR7V09SS0RJUn0vb2UtcmVtb3RlLnJlcG8uc2FtcGxlDQo+ICske0R9JHtz
-eXNjb25mZGlyfS95dW0ucmVwb3MuZCB9DQo+ICsNCj4gK0ZJTEVTXyR7UE59
-ICs9ICIke2RhdGFkaXJ9L2RuZiINCj4gKw0KPiArUkRFUEVORFNfJHtQTn0g
-Kz0gIiBcDQo+ICsgIGRuZiBcDQo+ICsgIGxpYm5ld3QtcHl0aG9uIFwNCj4g
-KyAgIg0KPiArDQo+ICtCQkNMQVNTRVhURU5EID0gIm5hdGl2ZXNkayINCj4g
-ZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1
-Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3RlLnJlcG8uc2FtcGxlIGIvbWV0
-YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29l
-LQ0KPiByZW1vdGUucmVwby5zYW1wbGUNCj4gbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCj4gaW5kZXggMDAwMDAwMC4uNmM0NTAyZQ0KPiAtLS0gL2Rldi9udWxs
-DQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2lu
-LXR1aS9maWxlcy9vZS1yZW1vdGUucmVwby5zYW1wbA0KPiArKysgZQ0KPiBA
-QCAtMCwwICsxLDUgQEANCj4gK1tiYXNlXQ0KPiArbmFtZT1teXJlcG8NCj4g
-K2Jhc2V1cmw9aHR0cDovLzEyNy4wLjAuMS9vZV9yZXBvLw0KPiArZW5hYmxl
-ZD0xDQo+ICtncGdjaGVjaz0wDQo+IC0tDQo+IDIuNy40DQoNCgoK
+On Tue, Jun 18, 2019 at 3:43 AM Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+>
+> > It seems we need to bring in recipe for gmime for this to work. This is=
+ already in master
+>
+> sipe-mime.c shown in the error is built only with SIPE_MIME_GMIME
+>
+> src/core/Makefile.am:
+> if SIPE_MIME_GMIME
+> noinst_LTLIBRARIES           +=3D libsipe_core_mime.la
+> libsipe_core_mime_la_SOURCES  =3D sipe-mime.c
+> libsipe_core_mime_la_CFLAGS   =3D $(libsipe_core_la_CFLAGS) $(GMIME_CFLAG=
+S)
+> endif
+>
+> And that gets enabled only when pkg-config finds gmime-3.0 in gmime-2.6:
+> configure.ac:
+> dnl check for gmime
+> PKG_CHECK_MODULES(GMIME, [gmime-3.0 >=3D 3.0.0],
+>         [ac_have_gmime=3Dyes],
+>         [PKG_CHECK_MODULES(GMIME, [gmime-2.6 >=3D 2.6.0],
+>                 [ac_have_gmime=3Dyes],
+>                 [ac_have_gmime=3Dno])
+>         ])
+> AM_CONDITIONAL(SIPE_MIME_GMIME, [test "x$ac_have_gmime" =3D xyes])
+> AS_IF([test "x$ac_have_gmime" =3D xyes],
+>         [AC_DEFINE(HAVE_GMIME, 1, [Define if gmime should be used in sipe=
+.])])
+>
+> which it really shouldn't as there isn't anything which should pull it in=
+to RSS.
+>
+> There is some old gmime recipe in meta-guacamayo:
+> https://github.com/Guacamayo/meta-guacamayo/commit/cc3e1020cb696a6a4227b1=
+8009e99b137059b0a4#diff-2de762e26fa1d5e913b81b43a4b5c92c
+
+I have written an updated one for 3.x, will post soon,
+>
+> but still this shouldn't be needed as long as you don't enable telepathy =
+PACKAGECONFIG in pidgin-sipe. I don't know how to reproduce this locally, s=
+ipe-mime.c build isn't mentioned at all in my log.do_compile files (and PKG=
+_CHECK_MODULES seems to work correctly - not to detect gmime from the host)=
+.
+>
+> It would be great if you could share log.do_configure/config.log from the=
+ build where it was failing.
+>
+
+thanks for looking into it, so you need to have gmime-2.6 installed on
+your build host for this error to trigger
+it seems to be looking into build host's sysroot.
+> Cheers,
+>
+>
+>
+>
+>
+> On Tue, Jun 18, 2019 at 9:12 AM Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+>>
+>> I've rebuilt it on 4 different hosts with qemux86-64/glibc.
+>>
+>> And also with musl locally (first gobject-introspection was failing beca=
+use of qemu-native segfaults, so I've disabled that with DISTRO_FEATURES_re=
+move =3D "gobject-introspection-data") and then pidgin-sipe built fine agai=
+n.
+>>
+>> Is it always failing for you reliably or was is random failure just in o=
+ne build?
+>>
+>> Cheers,
+>>
+>> On Fri, Jun 14, 2019 at 11:34 PM Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>>>
+>>> It builds fine for me with qemux86-64 with glibc.
+>>>
+>>> I'll check what's going on.
+>>>
+>>> Thanks
+>>>
+>>> On Fri, Jun 14, 2019 at 8:10 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>>>
+>>>> Hi Martin
+>>>>
+>>>> I noticed this error on qemux86-64
+>>>>
+>>>> https://errors.yoctoproject.org/Errors/Details/248480/
+>>>>
+>>>> It seems we need to bring in recipe for gmime for this to work. This
+>>>> is already in master
+>>>> so can you work on fixing this?
+>>>>
+>>>> On Thu, May 23, 2019 at 4:55 AM Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>>>> >
+>>>> > * import from luneos to make pidgin here in meta-oe a bit more usefu=
+l
+>>>> >
+>>>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>>> > ---
+>>>> >  .../pidgin/funyahoo-plusplus_git.bb           | 25 ++++++++++++++
+>>>> >  meta-oe/recipes-support/pidgin/icyque_git.bb  | 27 +++++++++++++++
+>>>> >  .../pidgin/pidgin-sipe_1.24.0.bb              | 34 ++++++++++++++++=
++++
+>>>> >  .../pidgin/purple-skypeweb_git.bb             | 26 ++++++++++++++
+>>>> >  4 files changed, 112 insertions(+)
+>>>> >  create mode 100644 meta-oe/recipes-support/pidgin/funyahoo-plusplus=
+_git.bb
+>>>> >  create mode 100644 meta-oe/recipes-support/pidgin/icyque_git.bb
+>>>> >  create mode 100644 meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.=
+0.bb
+>>>> >  create mode 100644 meta-oe/recipes-support/pidgin/purple-skypeweb_g=
+it.bb
+>>>> >
+>>>> > diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb=
+ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+>>>> > new file mode 100644
+>>>> > index 0000000000..3a437659e7
+>>>> > --- /dev/null
+>>>> > +++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+>>>> > @@ -0,0 +1,25 @@
+>>>> > +SUMMARY =3D "Protocol plugin for New Yahoo (2016) for Adium, Pidgin=
+, Miranda and Telepathy IM Framework"
+>>>> > +SECTION =3D "webos/services"
+>>>> > +LICENSE =3D "GPLv3.0"
+>>>> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D84dcc94da3adb52b53ae4fa3=
+8fe49e5d"
+>>>> > +
+>>>> > +DEPENDS =3D "pidgin json-glib glib-2.0"
+>>>> > +
+>>>> > +inherit pkgconfig
+>>>> > +
+>>>> > +SRC_URI =3D "git://github.com/EionRobb/funyahoo-plusplus;branch=3Dm=
+aster;protocol=3Dgit"
+>>>> > +SRCREV =3D "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
+>>>> > +
+>>>> > +S =3D "${WORKDIR}/git"
+>>>> > +
+>>>> > +do_compile() {
+>>>> > +    oe_runmake CC=3D"${CC}" CXX=3D"${CXX}" EXTRA_INCLUDES=3D"${TARG=
+ET_CFLAGS}" AR=3D"${AR}";
+>>>> > +}
+>>>> > +
+>>>> > +do_install() {
+>>>> > +    oe_runmake DESTDIR=3D"${D}" install;
+>>>> > +}
+>>>> > +
+>>>> > +FILES_${PN} +=3D " \
+>>>> > +    ${libdir} \
+>>>> > +"
+>>>> > diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb b/meta-oe/=
+recipes-support/pidgin/icyque_git.bb
+>>>> > new file mode 100644
+>>>> > index 0000000000..0f32dc3a39
+>>>> > --- /dev/null
+>>>> > +++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
+>>>> > @@ -0,0 +1,27 @@
+>>>> > +SUMMARY =3D "WIM Protocol plugin for ICQ for Adium, Pidgin, Miranda=
+ and Telepathy IM Framework"
+>>>> > +SECTION =3D "webos/services"
+>>>> > +LICENSE =3D "GPLv3.0"
+>>>> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1ebbd3e34237af26da5dc08a=
+4e440464"
+>>>> > +
+>>>> > +DEPENDS =3D "pidgin json-glib"
+>>>> > +
+>>>> > +PV =3D "0.1+gitr${SRCPV}"
+>>>> > +
+>>>> > +inherit pkgconfig
+>>>> > +
+>>>> > +SRC_URI =3D "git://github.com/EionRobb/icyque"
+>>>> > +SRCREV =3D "513fc162d5d1a201c2b044e2b42941436d1069d5"
+>>>> > +
+>>>> > +S =3D "${WORKDIR}/git"
+>>>> > +
+>>>> > +do_compile() {
+>>>> > +    oe_runmake;
+>>>> > +}
+>>>> > +
+>>>> > +do_install() {
+>>>> > +    oe_runmake DESTDIR=3D"${D}" install;
+>>>> > +}
+>>>> > +
+>>>> > +FILES_${PN} +=3D " \
+>>>> > +    ${libdir} \
+>>>> > +"
+>>>> > diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb b/=
+meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+>>>> > new file mode 100644
+>>>> > index 0000000000..beae281a30
+>>>> > --- /dev/null
+>>>> > +++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+>>>> > @@ -0,0 +1,34 @@
+>>>> > +SUMMARY =3D "Protocol plugin for Office 365/Lync/OCS for Adium, Pid=
+gin, Miranda and Telepathy IM Framework"
+>>>> > +SECTION =3D "webos/services"
+>>>> > +LICENSE =3D "GPLv2.0"
+>>>> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaab=
+aa882bbe"
+>>>> > +
+>>>> > +DEPENDS =3D "pidgin intltool-native glib-2.0-native"
+>>>> > +
+>>>> > +inherit pkgconfig
+>>>> > +inherit autotools
+>>>> > +
+>>>> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
+>>>> > +"
+>>>> > +
+>>>> > +SRC_URI[md5sum] =3D "b91106d28c235b347a63dcb676f7b66a"
+>>>> > +SRC_URI[sha256sum] =3D "958803722b23d869131f76bd90df9da19116d4ca5a8=
+73e5253371479b7390f43"
+>>>> > +
+>>>> > +PACKAGECONFIG ??=3D "nss krb5"
+>>>> > +PACKAGECONFIG[nss] =3D "--enable-nss=3Dyes,--enable-nss=3Dno,nss"
+>>>> > +PACKAGECONFIG[openssl] =3D "--enable-openssl=3Dyes,--enable-openssl=
+=3Dno,openssl"
+>>>> > +PACKAGECONFIG[krb5] =3D "--with-krb5=3Dyes,--with-krb5=3Dno,krb5"
+>>>> > +#PACKAGECONFIG[voice_and_video] =3D "--with-vv=3Dyes,--with-vv=3Dno=
+,libnice gstreamer"
+>>>> > +PACKAGECONFIG[telepathy] =3D "--enable-telepathy=3Dyes,--enable-tel=
+epathy=3Dno,telepathy-glib gmime"
+>>>> > +#PACKAGECONFIG[gssapi_only] =3D "--enable-gssapi-only=3Dyes,--enabl=
+e-gssapi-only=3Dno,krb5"
+>>>> > +PACKAGECONFIG[debug] =3D "--enable-debug=3Dyes,--enable-debug=3Dno,=
+valgrind"
+>>>> > +
+>>>> > +FILES_${PN}-dev +=3D " \
+>>>> > +    ${libdir}/purple-2/*.la \
+>>>> > +"
+>>>> > +
+>>>> > +FILES_${PN} +=3D " \
+>>>> > +    ${libdir}/purple-2/libsipe.so \
+>>>> > +    ${datadir}/appdata \
+>>>> > +    ${datadir}/metainfo \
+>>>> > +"
+>>>> > diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb b=
+/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+>>>> > new file mode 100644
+>>>> > index 0000000000..092e6059b8
+>>>> > --- /dev/null
+>>>> > +++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+>>>> > @@ -0,0 +1,26 @@
+>>>> > +SUMMARY =3D "Skype protocol plug-in for libpurple"
+>>>> > +SECTION =3D "webos/services"
+>>>> > +LICENSE =3D "GPLv3"
+>>>> > +LIC_FILES_CHKSUM =3D "file://skypeweb/gpl3.txt;md5=3Dd90260d32cef39=
+f3c8d6c0f05d3adb8e"
+>>>> > +
+>>>> > +DEPENDS =3D "pidgin json-glib glib-2.0 zlib"
+>>>> > +
+>>>> > +inherit pkgconfig
+>>>> > +
+>>>> > +SRC_URI =3D "git://github.com/EionRobb/skype4pidgin;branch=3Dmaster=
+;protocol=3Dgit"
+>>>> > +SRCREV =3D "14f1b69b6292bbdc98cca484b050ec8359394c4e"
+>>>> > +
+>>>> > +S =3D "${WORKDIR}/git"
+>>>> > +PV =3D "1.5+git${SRCPV}"
+>>>> > +
+>>>> > +do_compile() {
+>>>> > +    oe_runmake -C skypeweb;
+>>>> > +}
+>>>> > +
+>>>> > +do_install() {
+>>>> > +    oe_runmake -C skypeweb DESTDIR=3D"${D}" install;
+>>>> > +}
+>>>> > +
+>>>> > +FILES_${PN} +=3D " \
+>>>> > +    ${libdir} \
+>>>> > +"
+>>>> > --
+>>>> > 2.17.1
+>>>> >
+>>>> > --
+>>>> > _______________________________________________
+>>>> > Openembedded-devel mailing list
+>>>> > Openembedded-devel@lists.openembedded.org
+>>>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
