@@ -1,53 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D6F337E8D3
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CF9C7E8D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 13:06:57 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id c11so8460839qkk.8
+	Tue, 18 Jun 2019 13:10:54 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id d17so10198463qtj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 06:06:59 -0700 (PDT)
+	Tue, 18 Jun 2019 06:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=iRRvkBOueF3nkV1iBtB2Zb4pugGd7yzI0+q9XrTdRVI=;
-	b=iIZoXYlQHdBrYga1KC4yRG2X0mhuQPoi1tgOsFo/pAGyfwL2SRxKbRptlHVPVJa87e
-	k72lG39NFBrqEM6Zu8Dp+sDCnyt0Z6AnIlzzZGXYT2Bq4VrJv5u4FGUsBg01N8jrVeXt
-	XSc1PhP4e6VWoDW+Y+gqGK+EQzVwuMTxpIabYxy53pU4QqL3aEGelh09XjLBbUjvjlhC
-	VUpNuhDT/qYwkT4A3R5/+XURalVsnSxp0MsmPUDJ6RP7cKcHH9LIiRj+1G1LhkIom99Z
-	PZXqyKTCANBQh8wM0/lLAH6znVksXkAI9Un3Yh1pxmbtwJx9PkDs1F7GjsL68Q9cptM7
-	IseQ==
+	bh=nez526DC3Ks3nC66zN8sx8dwax7kEb7s+rKOS9R6e7M=;
+	b=VL4Gty8rguMprOp2X614toG/x8vOK0QBEXnK1Jobjia2U7fxAhWxkMh84EsdqjNYzJ
+	ehbpFsfWWRXvCzPiPYOuBb3s5M/AkJpl+AxGAvhL/4U9yb14owqZy2sQTyZ4ZsHh2UQl
+	DRgP/MO3I5keIb3sid/rPTv0LtjkJxXdh2jrZd05ihccEWGSPnIv4h+szlltMm3kmh3p
+	Lr9jgVgvHaE5UwwmO+GT690jlWnf8qiPvovah3wWIJt1gytdeSLtRMJH+zz/PfPi98qL
+	d1O2msj6EkBgpvFeM3QvVLXcOkjPKNBmza6aW7rjMS0pxPCfT1aGoP1wPeq2XnJ4Setx
+	+AdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=iRRvkBOueF3nkV1iBtB2Zb4pugGd7yzI0+q9XrTdRVI=;
-	b=b5pi+/D46GGVkUzRynvsP1cC+ulDx9Spv8d5ghllRnf/pAzpRWiXBJ8cQBHevhBlmz
-	TeooWFcYFdH/KU27N9KwZFC57Swt3mub0iKJxj5Eo3JSoIFWdZ0DDqDeqFC6rxNIZRZx
-	bJm9I5kU99XtixQLMhjIXg/YuBdtAnuMURscdkfC1Tv5TvKjKK0tvhZkafWSU/y08Aoj
-	KY66Xki66HKKTDL0QXsmXUkDRdW7seZxB4J7VROIRLMUthS+ZkdFeMwdMVLV8THf20k1
-	AbkM2HgJkJqTWG5LmFVwY3+2CsKuGmF/BGNQu95k9lZkXstGj9vSoArtaIwKI2V/pDDC
-	QstQ==
-X-Gm-Message-State: APjAAAWfwBU10vtTIWEYAPGLKl9CPhOSjQsc4O3lKSOV9zgZvMZy6gXe
-	vpAOrNR9Zi/mzX486iOBJVSPJp6KpTByDz9g0cY=
-X-Google-Smtp-Source: APXvYqzIvlPvOkeimGdWc/PkbkY+HLjbxSou0aMt30JqdsJhXqDKEPpZQw6BxQ1UFyOC07+8qKAs/3xo4dsW6672jgo=
-X-Received: by 2002:a05:620a:1407:: with SMTP id
-	d7mr82214427qkj.20.1560863218438; 
-	Tue, 18 Jun 2019 06:06:58 -0700 (PDT)
+	bh=nez526DC3Ks3nC66zN8sx8dwax7kEb7s+rKOS9R6e7M=;
+	b=l9mByr//C0H/sQagQj48PMs5jTWQqT7g6f0JdhmR7mh9fueFO50/PmH9Xv7aEb1ZFn
+	rPkWBq7lhK9d+GnTlJXo7u9RxlJO14m+ZwXrufoaUT8VRb40bX0W/kiZf7mP2Z+GzSJ6
+	6YBXCHnMOV+P5nFrbaz7SAPzp0GrqOqjpwnzWZ+EKY8X0mXLZab/ZX4RljY/EUjQB8GH
+	PCyDAK6mGhh/ctVLBRFhSQ5tgCRBNU+hqVOF3AvNXRDiTUSjl2AeuU3HqObvAqlz0ErO
+	URdL1lZ518UW+E1/GxJXA1WKgq5gxfkudxouNnnnVOVmPce2mcn507YenRVdyfQjLZzA
+	yTLA==
+X-Gm-Message-State: APjAAAXD++daWSIfSX8Ng1RwTJr2/wxTQp5fCV0I3u6mIqdWXB+qmfc6
+	JLVsPfwvwG6/co3zHHaZ/BNYXbMFTit7COUEgLo=
+X-Google-Smtp-Source: APXvYqyu0s66GGFYrjsPlufVbaF/a1NKrRrKkjJSgf7LTSa6Qwk1WeDsTtoXbK7YmBCb8nxQgU7x6y89NsLzz4388BE=
+X-Received: by 2002:ac8:26dc:: with SMTP id 28mr96745516qtp.88.1560863455139; 
+	Tue, 18 Jun 2019 06:10:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-	<20190523115505.18245-3-Martin.Jansa@gmail.com>
-	<CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
-	<CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
-	<CA+chaQf3J5=1A99rpmGkvOT5gFqzS+gKU5GNC-VYW1AJw_wCSw@mail.gmail.com>
-	<CA+chaQckC5_m9yKCHStx_LesVfbjC0fkAPYHaiDnLFCvJs0iQw@mail.gmail.com>
-In-Reply-To: <CA+chaQckC5_m9yKCHStx_LesVfbjC0fkAPYHaiDnLFCvJs0iQw@mail.gmail.com>
+References: <1557610134-3197-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<33D4DBCAC5F2D74E96B07F6E7632BF73B1C38CC0@G08CNEXMBPEKD01.g08.fujitsu.local>
+In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF73B1C38CC0@G08CNEXMBPEKD01.g08.fujitsu.local>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Jun 2019 06:06:32 -0700
-Message-ID: <CAMKF1spuMgbHJVRYDYdR1-ZEcS835pvHX5PcOH9B1kqUxsj7Dg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/8] funyahoo-plusplus, icyque, pidgin-sipe, purple-skypeweb: add couple plugins for pidgin
+Date: Tue, 18 Jun 2019 06:10:28 -0700
+Message-ID: <CAMKF1sr6-JLUOLJk7CZAENiKkrA5QGKJ8WNWzCEhf_B2ifKoCw@mail.gmail.com>
+To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][patch v3] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,288 +56,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 13:06:58 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 13:10:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 18, 2019 at 3:43 AM Martin Jansa <martin.jansa@gmail.com> wrote=
-:
+On Tue, Jun 18, 2019 at 5:26 AM Zheng, Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
-> > It seems we need to bring in recipe for gmime for this to work. This is=
- already in master
+> Hi
 >
-> sipe-mime.c shown in the error is built only with SIPE_MIME_GMIME
->
-> src/core/Makefile.am:
-> if SIPE_MIME_GMIME
-> noinst_LTLIBRARIES           +=3D libsipe_core_mime.la
-> libsipe_core_mime_la_SOURCES  =3D sipe-mime.c
-> libsipe_core_mime_la_CFLAGS   =3D $(libsipe_core_la_CFLAGS) $(GMIME_CFLAG=
-S)
-> endif
->
-> And that gets enabled only when pkg-config finds gmime-3.0 in gmime-2.6:
-> configure.ac:
-> dnl check for gmime
-> PKG_CHECK_MODULES(GMIME, [gmime-3.0 >=3D 3.0.0],
->         [ac_have_gmime=3Dyes],
->         [PKG_CHECK_MODULES(GMIME, [gmime-2.6 >=3D 2.6.0],
->                 [ac_have_gmime=3Dyes],
->                 [ac_have_gmime=3Dno])
->         ])
-> AM_CONDITIONAL(SIPE_MIME_GMIME, [test "x$ac_have_gmime" =3D xyes])
-> AS_IF([test "x$ac_have_gmime" =3D xyes],
->         [AC_DEFINE(HAVE_GMIME, 1, [Define if gmime should be used in sipe=
-.])])
->
-> which it really shouldn't as there isn't anything which should pull it in=
-to RSS.
->
-> There is some old gmime recipe in meta-guacamayo:
-> https://github.com/Guacamayo/meta-guacamayo/commit/cc3e1020cb696a6a4227b1=
-8009e99b137059b0a4#diff-2de762e26fa1d5e913b81b43a4b5c92c
-
-I have written an updated one for 3.x, will post soon,
->
-> but still this shouldn't be needed as long as you don't enable telepathy =
-PACKAGECONFIG in pidgin-sipe. I don't know how to reproduce this locally, s=
-ipe-mime.c build isn't mentioned at all in my log.do_compile files (and PKG=
-_CHECK_MODULES seems to work correctly - not to detect gmime from the host)=
-.
->
-> It would be great if you could share log.do_configure/config.log from the=
- build where it was failing.
+> This patch is still be ignored. Does anyone have any comment about this p=
+atch?
 >
 
-thanks for looking into it, so you need to have gmime-2.6 installed on
-your build host for this error to trigger
-it seems to be looking into build host's sysroot.
-> Cheers,
+somehow it has gone off from patchwork. Can you resend it after
+rebasing on top of master again
+so that patchwork can capture it from ml.
+
+> Best regards.
+> Zheng Ruoqin
+>
+> --------------------------------------------------
+> Zheng Ruoqin
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
+> ADDR.: No.6 Wenzhu Road, Software Avenue,
+>        Nanjing, 210012, China
+> MAIL : zhengrq.fnst@cn.fujistu.com
 >
 >
->
->
->
-> On Tue, Jun 18, 2019 at 9:12 AM Martin Jansa <martin.jansa@gmail.com> wro=
-te:
->>
->> I've rebuilt it on 4 different hosts with qemux86-64/glibc.
->>
->> And also with musl locally (first gobject-introspection was failing beca=
-use of qemu-native segfaults, so I've disabled that with DISTRO_FEATURES_re=
-move =3D "gobject-introspection-data") and then pidgin-sipe built fine agai=
-n.
->>
->> Is it always failing for you reliably or was is random failure just in o=
-ne build?
->>
->> Cheers,
->>
->> On Fri, Jun 14, 2019 at 11:34 PM Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->>>
->>> It builds fine for me with qemux86-64 with glibc.
->>>
->>> I'll check what's going on.
->>>
->>> Thanks
->>>
->>> On Fri, Jun 14, 2019 at 8:10 PM Khem Raj <raj.khem@gmail.com> wrote:
->>>>
->>>> Hi Martin
->>>>
->>>> I noticed this error on qemux86-64
->>>>
->>>> https://errors.yoctoproject.org/Errors/Details/248480/
->>>>
->>>> It seems we need to bring in recipe for gmime for this to work. This
->>>> is already in master
->>>> so can you work on fixing this?
->>>>
->>>> On Thu, May 23, 2019 at 4:55 AM Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->>>> >
->>>> > * import from luneos to make pidgin here in meta-oe a bit more usefu=
+> > -----Original Message-----
+> > From: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6
+> > Sent: Sunday, May 12, 2019 5:29 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 <zhengrq.fnst@cn.fujitsu=
+.com>
+> > Subject: [oe][meta-oe][patch v3] dnf-plugin-tui: new recipe
+> >
+> > This dnf plugin aims to supply a tui interface for user to manage packa=
+ges. It has
+> > features as following:
+> >   1. Add new command dnf tui --init to make dnf to work on host.
+> >   2. Text-based user interface for dnf.
+> >   3. Manage SPDX files.
+> >   4. Manage SRPM files.
+> >   5. Add installation samples for dnf.
+> >
+> > More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+> >
+> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> > ---
+> >  .../dnf-plugin-tui/dnf-plugin-tui_git.bb           | 38 ++++++++++++++=
+++++++++
+> >  .../dnf-plugin-tui/files/oe-remote.repo.sample     |  5 +++
+> >  2 files changed, 43 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-
+> > tui_git.bb
+> >  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
+> > remote.repo.sample
+> >
+> > diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git=
+.bb
+> > b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+> > new file mode 100644
+> > index 0000000..e891868
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+> > @@ -0,0 +1,38 @@
+> > +SUMMARY =3D "A text-based user interface plugin of dnf for user to man=
+age
+> > packages. "
+> > +LICENSE =3D "GPLv2"
+> > +
+> > +LIC_FILES_CHKSUM =3D
+> > "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+> > +
+> > +SRC_URI =3D "git://github.com/ubinux/dnf-plugin-tui.git;branch=3Dmaste=
+r "
+> > +SRCREV =3D "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
+> > +PV =3D "1.0"
+> > +
+> > +SRC_URI_append_class-target =3D "file://oe-remote.repo.sample"
+> > +
+> > +inherit distutils3-base
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +do_install_append() {
+> > +        install -d ${D}${datadir}/dnf
+> > +        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
+> > +        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
+> > +        install -m 0755 ${S}/dnf-plugins/mkimg/*
+> > ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
+> > +        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
+> > +            install -m 0755 ${S}/dnf-plugins/$file
+> > ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
+> > +        done
+> > +}
+> > +
+> > +do_install_append_class-target() {
+> > +        install -d ${D}${sysconfdir}/yum.repos.d
+> > +        install -m 0644 ${WORKDIR}/oe-remote.repo.sample
+> > +${D}${sysconfdir}/yum.repos.d }
+> > +
+> > +FILES_${PN} +=3D "${datadir}/dnf"
+> > +
+> > +RDEPENDS_${PN} +=3D " \
+> > +  dnf \
+> > +  libnewt-python \
+> > +  "
+> > +
+> > +BBCLASSEXTEND =3D "nativesdk"
+> > diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
+> > remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-
+> > remote.repo.sample
+> > new file mode 100644
+> > index 0000000..6c4502e
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.samp=
 l
->>>> >
->>>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>>> > ---
->>>> >  .../pidgin/funyahoo-plusplus_git.bb           | 25 ++++++++++++++
->>>> >  meta-oe/recipes-support/pidgin/icyque_git.bb  | 27 +++++++++++++++
->>>> >  .../pidgin/pidgin-sipe_1.24.0.bb              | 34 ++++++++++++++++=
-+++
->>>> >  .../pidgin/purple-skypeweb_git.bb             | 26 ++++++++++++++
->>>> >  4 files changed, 112 insertions(+)
->>>> >  create mode 100644 meta-oe/recipes-support/pidgin/funyahoo-plusplus=
-_git.bb
->>>> >  create mode 100644 meta-oe/recipes-support/pidgin/icyque_git.bb
->>>> >  create mode 100644 meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.=
-0.bb
->>>> >  create mode 100644 meta-oe/recipes-support/pidgin/purple-skypeweb_g=
-it.bb
->>>> >
->>>> > diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb=
- b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
->>>> > new file mode 100644
->>>> > index 0000000000..3a437659e7
->>>> > --- /dev/null
->>>> > +++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
->>>> > @@ -0,0 +1,25 @@
->>>> > +SUMMARY =3D "Protocol plugin for New Yahoo (2016) for Adium, Pidgin=
-, Miranda and Telepathy IM Framework"
->>>> > +SECTION =3D "webos/services"
->>>> > +LICENSE =3D "GPLv3.0"
->>>> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D84dcc94da3adb52b53ae4fa3=
-8fe49e5d"
->>>> > +
->>>> > +DEPENDS =3D "pidgin json-glib glib-2.0"
->>>> > +
->>>> > +inherit pkgconfig
->>>> > +
->>>> > +SRC_URI =3D "git://github.com/EionRobb/funyahoo-plusplus;branch=3Dm=
-aster;protocol=3Dgit"
->>>> > +SRCREV =3D "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
->>>> > +
->>>> > +S =3D "${WORKDIR}/git"
->>>> > +
->>>> > +do_compile() {
->>>> > +    oe_runmake CC=3D"${CC}" CXX=3D"${CXX}" EXTRA_INCLUDES=3D"${TARG=
-ET_CFLAGS}" AR=3D"${AR}";
->>>> > +}
->>>> > +
->>>> > +do_install() {
->>>> > +    oe_runmake DESTDIR=3D"${D}" install;
->>>> > +}
->>>> > +
->>>> > +FILES_${PN} +=3D " \
->>>> > +    ${libdir} \
->>>> > +"
->>>> > diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb b/meta-oe/=
-recipes-support/pidgin/icyque_git.bb
->>>> > new file mode 100644
->>>> > index 0000000000..0f32dc3a39
->>>> > --- /dev/null
->>>> > +++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
->>>> > @@ -0,0 +1,27 @@
->>>> > +SUMMARY =3D "WIM Protocol plugin for ICQ for Adium, Pidgin, Miranda=
- and Telepathy IM Framework"
->>>> > +SECTION =3D "webos/services"
->>>> > +LICENSE =3D "GPLv3.0"
->>>> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1ebbd3e34237af26da5dc08a=
-4e440464"
->>>> > +
->>>> > +DEPENDS =3D "pidgin json-glib"
->>>> > +
->>>> > +PV =3D "0.1+gitr${SRCPV}"
->>>> > +
->>>> > +inherit pkgconfig
->>>> > +
->>>> > +SRC_URI =3D "git://github.com/EionRobb/icyque"
->>>> > +SRCREV =3D "513fc162d5d1a201c2b044e2b42941436d1069d5"
->>>> > +
->>>> > +S =3D "${WORKDIR}/git"
->>>> > +
->>>> > +do_compile() {
->>>> > +    oe_runmake;
->>>> > +}
->>>> > +
->>>> > +do_install() {
->>>> > +    oe_runmake DESTDIR=3D"${D}" install;
->>>> > +}
->>>> > +
->>>> > +FILES_${PN} +=3D " \
->>>> > +    ${libdir} \
->>>> > +"
->>>> > diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb b/=
-meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
->>>> > new file mode 100644
->>>> > index 0000000000..beae281a30
->>>> > --- /dev/null
->>>> > +++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
->>>> > @@ -0,0 +1,34 @@
->>>> > +SUMMARY =3D "Protocol plugin for Office 365/Lync/OCS for Adium, Pid=
-gin, Miranda and Telepathy IM Framework"
->>>> > +SECTION =3D "webos/services"
->>>> > +LICENSE =3D "GPLv2.0"
->>>> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaab=
-aa882bbe"
->>>> > +
->>>> > +DEPENDS =3D "pidgin intltool-native glib-2.0-native"
->>>> > +
->>>> > +inherit pkgconfig
->>>> > +inherit autotools
->>>> > +
->>>> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
->>>> > +"
->>>> > +
->>>> > +SRC_URI[md5sum] =3D "b91106d28c235b347a63dcb676f7b66a"
->>>> > +SRC_URI[sha256sum] =3D "958803722b23d869131f76bd90df9da19116d4ca5a8=
-73e5253371479b7390f43"
->>>> > +
->>>> > +PACKAGECONFIG ??=3D "nss krb5"
->>>> > +PACKAGECONFIG[nss] =3D "--enable-nss=3Dyes,--enable-nss=3Dno,nss"
->>>> > +PACKAGECONFIG[openssl] =3D "--enable-openssl=3Dyes,--enable-openssl=
-=3Dno,openssl"
->>>> > +PACKAGECONFIG[krb5] =3D "--with-krb5=3Dyes,--with-krb5=3Dno,krb5"
->>>> > +#PACKAGECONFIG[voice_and_video] =3D "--with-vv=3Dyes,--with-vv=3Dno=
-,libnice gstreamer"
->>>> > +PACKAGECONFIG[telepathy] =3D "--enable-telepathy=3Dyes,--enable-tel=
-epathy=3Dno,telepathy-glib gmime"
->>>> > +#PACKAGECONFIG[gssapi_only] =3D "--enable-gssapi-only=3Dyes,--enabl=
-e-gssapi-only=3Dno,krb5"
->>>> > +PACKAGECONFIG[debug] =3D "--enable-debug=3Dyes,--enable-debug=3Dno,=
-valgrind"
->>>> > +
->>>> > +FILES_${PN}-dev +=3D " \
->>>> > +    ${libdir}/purple-2/*.la \
->>>> > +"
->>>> > +
->>>> > +FILES_${PN} +=3D " \
->>>> > +    ${libdir}/purple-2/libsipe.so \
->>>> > +    ${datadir}/appdata \
->>>> > +    ${datadir}/metainfo \
->>>> > +"
->>>> > diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb b=
-/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
->>>> > new file mode 100644
->>>> > index 0000000000..092e6059b8
->>>> > --- /dev/null
->>>> > +++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
->>>> > @@ -0,0 +1,26 @@
->>>> > +SUMMARY =3D "Skype protocol plug-in for libpurple"
->>>> > +SECTION =3D "webos/services"
->>>> > +LICENSE =3D "GPLv3"
->>>> > +LIC_FILES_CHKSUM =3D "file://skypeweb/gpl3.txt;md5=3Dd90260d32cef39=
-f3c8d6c0f05d3adb8e"
->>>> > +
->>>> > +DEPENDS =3D "pidgin json-glib glib-2.0 zlib"
->>>> > +
->>>> > +inherit pkgconfig
->>>> > +
->>>> > +SRC_URI =3D "git://github.com/EionRobb/skype4pidgin;branch=3Dmaster=
-;protocol=3Dgit"
->>>> > +SRCREV =3D "14f1b69b6292bbdc98cca484b050ec8359394c4e"
->>>> > +
->>>> > +S =3D "${WORKDIR}/git"
->>>> > +PV =3D "1.5+git${SRCPV}"
->>>> > +
->>>> > +do_compile() {
->>>> > +    oe_runmake -C skypeweb;
->>>> > +}
->>>> > +
->>>> > +do_install() {
->>>> > +    oe_runmake -C skypeweb DESTDIR=3D"${D}" install;
->>>> > +}
->>>> > +
->>>> > +FILES_${PN} +=3D " \
->>>> > +    ${libdir} \
->>>> > +"
->>>> > --
->>>> > 2.17.1
->>>> >
->>>> > --
->>>> > _______________________________________________
->>>> > Openembedded-devel mailing list
->>>> > Openembedded-devel@lists.openembedded.org
->>>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > +++ e
+> > @@ -0,0 +1,5 @@
+> > +[base]
+> > +name=3Dmyrepo
+> > +baseurl=3Dhttp://127.0.0.1/oe_repo/
+> > +enabled=3D1
+> > +gpgcheck=3D0
+> > --
+> > 2.7.4
+>
+>
+>
 
