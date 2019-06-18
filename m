@@ -1,52 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D27E7E6FE
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+	[209.85.208.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BD7877E90E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 10:43:46 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id e3so20947605edr.10
+	Tue, 18 Jun 2019 11:34:31 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id d4so21206382edr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 03:43:47 -0700 (PDT)
+	Tue, 18 Jun 2019 04:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Y4/6aTMetcQpgT7zbQFOfvEW/XxIXkXVviivE1ZUaPc=;
-	b=i9M02o2GWevxxUs/z9L1fmROQc9X//OtANfUhfzg9QFBkFW2lpAdWRzFsG1tfBroGA
-	WAfD+ayaEJylGUkSbuW09EIJcbzn22zuNJV2frQARv07AbGHBjHE2Moz/X6eBztgJcn6
-	UGc8fGfzAdlEWlRe9qzHfvpUDzf9TayrE8a5s6cAPNv3Ks+AxQE94BWBrbHYfaXBs4Zz
-	zAHZksK73NSAU8Al5k4TqP1GKgnTOVXY2J/Apam8qu0iGvIXlFQScJk/otFGcMIU4Ptr
-	oysDuR77/m8nwC7maCC5D4UI9EEbBRQH86SF9p2eWO7nzHv7xO58n4x+S+dtA0JiDwoz
-	paIQ==
+	:cc; bh=ct5e6Co3YdL1nOVoM0x+7C0YZMPYcRoBXKgBCBdrrtg=;
+	b=euFyAL5r6+bLT8JkbRuYKyk05Iaeb6PAsPIvSt3HjlmikK8iRLupbK/E5ytuuzUkAR
+	1V6fN75I2mv2dPnNJdOmu93Ipp31JZHNO7XXZbqob/gH1BszVLwxpFcOdsToebWHMyHy
+	CHPxWDZRF+DSicfZODrx08ZhsQN/+tu4l4Hd5/KQZV8M1DrIOadbuqV6/Rz7gV7dWoQA
+	z7qcUOdrH48jq8O2FtXCaYhHUVF1FLO7pHwjTM1baxugq3OvHLqDAyVFxgpAUBD52erF
+	Vgluy3A4HvdS5rxFWyJmSUGK/dTxBk7fCvrMZ6ccEE00BB4w9xuzgOVZLIRAm49AM6vS
+	5SwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Y4/6aTMetcQpgT7zbQFOfvEW/XxIXkXVviivE1ZUaPc=;
-	b=CZedL5PNaV+FWg5w/TTeEal8BUy4rLPQdfAp+W6b6a6Kj40VVvzqg7nh33rE/84Bxm
-	JOBKg0echfzU3QWuNnBRleLUpSMQ1I8stOLiQtlJYZZUUqR2w62EuF2uituN6cCEShET
-	F+PsI1FyNsFURCQq1Q24yyeENk82nxWMc9VCEUjODgAHCm3Fy13HD3xtLA0l02yxsYTK
-	0+px1RumFYmRCrL43zcaCbjsNUn4C8CsODninLlCpP/X75sFLUp8UVwiiRdy1GrwZnCZ
-	+73pGAOROf9dPJ31qri/Rmtwz39gHgvqBmbm8zew87bb9zJWHaWhhHzA93aq2Xrgbq1j
-	ALWw==
-X-Gm-Message-State: APjAAAWUcRZ0rZe+tTYEzn67iA2KJnvisOOqST1VylxhsLL2oj3ezSiE
-	TBVpcm8UGG4B6oDg0yT8rzgCbDyaNEmZa6PrMmQ=
-X-Google-Smtp-Source: APXvYqx0yE2EY764572C3LEFiD+lla6t0XhGidC+0JwtNJXJoFpJlFDMrp8OuD1eomm0zGy4t498Uu/qRpiltVXG+xo=
-X-Received: by 2002:a17:906:9705:: with SMTP id
-	k5mr65756386ejx.5.1560854627280; 
-	Tue, 18 Jun 2019 03:43:47 -0700 (PDT)
+	bh=ct5e6Co3YdL1nOVoM0x+7C0YZMPYcRoBXKgBCBdrrtg=;
+	b=Xre9aCurSVk+8ebzW6cWC6NieHy8UxA18/QVnKMK7IItld/sHEfvKTeb3YFYuFzZbG
+	mg9GwJK3wcoNgXBWN448yOSuS/bUa/unULaMIa6hRXiUn5Xko8ggLvvrgHkb/oyfeeQ3
+	DP8qX0gRv5W4Nb78sa8wK6ipiYqghj6gM/7w326OeT7pTyNANeMaW2OBpW6m0yobQmwg
+	DLhkLbV2JwwtXRW8LxUXvc9hJ975H5nq+xG7GCwzMW7y1WKH7r+xEB17qmLmYGDT40pG
+	a/FCvO0rlY0l7uBya4sUFvU+HX1ETj6wTFDN0GEWkrcdmW6T6ym1hA/hwI5pezT4dZA3
+	WQ7A==
+X-Gm-Message-State: APjAAAU35KJzKKCG29oQIqkE92bpLFbUn0OHYUttU2XHgR1ihN1a4Qdc
+	89dZma0fB6VjxeE+ZiUStq9ULWwLlmjFGruKl889CENY
+X-Google-Smtp-Source: APXvYqzF2IiWUSUxiS716jLxdrWB3wxH/5lR25yhjMapSwCnJqzHTNoAl/0TtowTCCZdTdL6EZazkcdVvFU4XMiJN9w=
+X-Received: by 2002:a17:906:55d4:: with SMTP id
+	z20mr8671596ejp.205.1560857672281; 
+	Tue, 18 Jun 2019 04:34:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190523115505.18245-1-Martin.Jansa@gmail.com>
-	<20190523115505.18245-3-Martin.Jansa@gmail.com>
-	<CAMKF1sraHDXnk1iL_vpZfZUngVvLXQ3fWRiCKTP1YW3e5vUkrQ@mail.gmail.com>
-	<CA+chaQdUYmmJ8KZV_fc+-85LLZh7YCKLttaygD73Rx_9Qfd5yQ@mail.gmail.com>
-	<CA+chaQf3J5=1A99rpmGkvOT5gFqzS+gKU5GNC-VYW1AJw_wCSw@mail.gmail.com>
-In-Reply-To: <CA+chaQf3J5=1A99rpmGkvOT5gFqzS+gKU5GNC-VYW1AJw_wCSw@mail.gmail.com>
+References: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190407130935.10670-1-open.source@oleksandr-kravchuk.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 18 Jun 2019 12:43:35 +0200
-Message-ID: <CA+chaQckC5_m9yKCHStx_LesVfbjC0fkAPYHaiDnLFCvJs0iQw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Jun 2019 13:34:27 +0200
+Message-ID: <CA+chaQePCd=cHgYpx1TQydMOopA9FN8WjDK2Jtn60d6J2h1cNw@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/8] funyahoo-plusplus, icyque, pidgin-sipe, purple-skypeweb: add couple plugins for pidgin
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-networking] libowfat: update to 0.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,275 +55,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 10:43:46 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 11:34:32 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-> It seems we need to bring in recipe for gmime for this to work. This is
-already in master
+Hi, have you seen libowfat randomly failing with error: conflicting types
+for 'socklen_t' ? It happens with both 0.31 and 0.32 versions.
 
-sipe-mime.c shown in the error is built only with SIPE_MIME_GMIME
+I sometimes see this failure in world builds:
 
-src/core/Makefile.am:
-if SIPE_MIME_GMIME
-noinst_LTLIBRARIES           += libsipe_core_mime.la
-libsipe_core_mime_la_SOURCES  = sipe-mime.c
-libsipe_core_mime_la_CFLAGS   = $(libsipe_core_la_CFLAGS) $(GMIME_CFLAGS)
-endif
+| In file included from socket/socket_recv6.c:12:
+| ./havesl.h:1:13: error: conflicting types for 'socklen_t'
+|     1 | typedef int socklen_t;
+|       |             ^~~~~~~~~
+| In file included from
+libowfat/0.31-r0/recipe-sysroot/usr/include/sys/socket.h:33,
+|                  from socket/socket_recv6.c:4:
+| libowfat/0.31-r0/recipe-sysroot/usr/include/bits/socket.h:33:21: note:
+previous declaration of 'socklen_t' was here
+|    33 | typedef __socklen_t socklen_t;
+|       |                     ^~~~~~~~~
+| GNUmakefile:179: recipe for target 'socket_recv6.o' failed
+| make: *** [socket_recv6.o] Error 1
 
-And that gets enabled only when pkg-config finds gmime-3.0 in gmime-2.6:
-configure.ac:
-dnl check for gmime
-PKG_CHECK_MODULES(GMIME, [gmime-3.0 >= 3.0.0],
-        [ac_have_gmime=yes],
-        [PKG_CHECK_MODULES(GMIME, [gmime-2.6 >= 2.6.0],
-                [ac_have_gmime=yes],
-                [ac_have_gmime=no])
-        ])
-AM_CONDITIONAL(SIPE_MIME_GMIME, [test "x$ac_have_gmime" = xyes])
-AS_IF([test "x$ac_have_gmime" = xyes],
-        [AC_DEFINE(HAVE_GMIME, 1, [Define if gmime should be used in
-sipe.])])
+Checking what GNUmakefile does, this really shouldn't happen, but the log
+doesn't show anything useful to see why the trysl.c test failed (and caused
+havesl.h to exist and contain the conflicting typedef).
 
-which it really shouldn't as there isn't anything which should pull it into
-RSS.
+I've added small patch on top of this upgrade which should make the compile
+tests more verbose:
+http://git.openembedded.org/meta-openembedded-contrib/commit/?h=jansa/master&id=3d3ac51e43926ec8a3254411845fa025af6d1c2b
+now I'm waiting for the build to fail again to hopefully see why.
 
-There is some old gmime recipe in meta-guacamayo:
-https://github.com/Guacamayo/meta-guacamayo/commit/cc3e1020cb696a6a4227b18009e99b137059b0a4#diff-2de762e26fa1d5e913b81b43a4b5c92c
-
-but still this shouldn't be needed as long as you don't enable telepathy
-PACKAGECONFIG in pidgin-sipe. I don't know how to reproduce this locally,
-sipe-mime.c build isn't mentioned at all in my log.do_compile files (and
-PKG_CHECK_MODULES seems to work correctly - not to detect gmime from the
-host).
-
-It would be great if you could share log.do_configure/config.log from the
-build where it was failing.
+Have you seen this before?
 
 Cheers,
 
+On Sun, Apr 7, 2019 at 3:09 PM Oleksandr Kravchuk <
+open.source@oleksandr-kravchuk.com> wrote:
 
-
-
-
-On Tue, Jun 18, 2019 at 9:12 AM Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> I've rebuilt it on 4 different hosts with qemux86-64/glibc.
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../ncp/{libowfat_0.31.bb => libowfat_0.32.bb}                | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb =>
+> libowfat_0.32.bb} (84%)
 >
-> And also with musl locally (first gobject-introspection was failing
-> because of qemu-native segfaults, so I've disabled that
-> with DISTRO_FEATURES_remove = "gobject-introspection-data") and then
-> pidgin-sipe built fine again.
+> diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> similarity index 84%
+> rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> index 4b072f7e7..fba35526d 100644
+> --- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
+> +++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+> @@ -7,8 +7,8 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 >
-> Is it always failing for you reliably or was is random failure just in one
-> build?
+>  SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
+> -SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
+> -SRC_URI[sha256sum] =
+> "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
+> +SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
+> +SRC_URI[sha256sum] =
+> "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
 >
-> Cheers,
+>  EXTRA_OEMAKE = "\
+>      DIET= \
+> --
+> 2.17.1
 >
-> On Fri, Jun 14, 2019 at 11:34 PM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
->> It builds fine for me with qemux86-64 with glibc.
->>
->> I'll check what's going on.
->>
->> Thanks
->>
->> On Fri, Jun 14, 2019 at 8:10 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->>> Hi Martin
->>>
->>> I noticed this error on qemux86-64
->>>
->>> https://errors.yoctoproject.org/Errors/Details/248480/
->>>
->>> It seems we need to bring in recipe for gmime for this to work. This
->>> is already in master
->>> so can you work on fixing this?
->>>
->>> On Thu, May 23, 2019 at 4:55 AM Martin Jansa <martin.jansa@gmail.com>
->>> wrote:
->>> >
->>> > * import from luneos to make pidgin here in meta-oe a bit more useful
->>> >
->>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>> > ---
->>> >  .../pidgin/funyahoo-plusplus_git.bb           | 25 ++++++++++++++
->>> >  meta-oe/recipes-support/pidgin/icyque_git.bb  | 27 +++++++++++++++
->>> >  .../pidgin/pidgin-sipe_1.24.0.bb              | 34
->>> +++++++++++++++++++
->>> >  .../pidgin/purple-skypeweb_git.bb             | 26 ++++++++++++++
->>> >  4 files changed, 112 insertions(+)
->>> >  create mode 100644 meta-oe/recipes-support/pidgin/
->>> funyahoo-plusplus_git.bb
->>> >  create mode 100644 meta-oe/recipes-support/pidgin/icyque_git.bb
->>> >  create mode 100644 meta-oe/recipes-support/pidgin/
->>> pidgin-sipe_1.24.0.bb
->>> >  create mode 100644 meta-oe/recipes-support/pidgin/
->>> purple-skypeweb_git.bb
->>> >
->>> > diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
->>> b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
->>> > new file mode 100644
->>> > index 0000000000..3a437659e7
->>> > --- /dev/null
->>> > +++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
->>> > @@ -0,0 +1,25 @@
->>> > +SUMMARY = "Protocol plugin for New Yahoo (2016) for Adium, Pidgin,
->>> Miranda and Telepathy IM Framework"
->>> > +SECTION = "webos/services"
->>> > +LICENSE = "GPLv3.0"
->>> > +LIC_FILES_CHKSUM =
->>> "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
->>> > +
->>> > +DEPENDS = "pidgin json-glib glib-2.0"
->>> > +
->>> > +inherit pkgconfig
->>> > +
->>> > +SRC_URI = "git://
->>> github.com/EionRobb/funyahoo-plusplus;branch=master;protocol=git"
->>> > +SRCREV = "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
->>> > +
->>> > +S = "${WORKDIR}/git"
->>> > +
->>> > +do_compile() {
->>> > +    oe_runmake CC="${CC}" CXX="${CXX}"
->>> EXTRA_INCLUDES="${TARGET_CFLAGS}" AR="${AR}";
->>> > +}
->>> > +
->>> > +do_install() {
->>> > +    oe_runmake DESTDIR="${D}" install;
->>> > +}
->>> > +
->>> > +FILES_${PN} += " \
->>> > +    ${libdir} \
->>> > +"
->>> > diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb
->>> b/meta-oe/recipes-support/pidgin/icyque_git.bb
->>> > new file mode 100644
->>> > index 0000000000..0f32dc3a39
->>> > --- /dev/null
->>> > +++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
->>> > @@ -0,0 +1,27 @@
->>> > +SUMMARY = "WIM Protocol plugin for ICQ for Adium, Pidgin, Miranda and
->>> Telepathy IM Framework"
->>> > +SECTION = "webos/services"
->>> > +LICENSE = "GPLv3.0"
->>> > +LIC_FILES_CHKSUM =
->>> "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
->>> > +
->>> > +DEPENDS = "pidgin json-glib"
->>> > +
->>> > +PV = "0.1+gitr${SRCPV}"
->>> > +
->>> > +inherit pkgconfig
->>> > +
->>> > +SRC_URI = "git://github.com/EionRobb/icyque"
->>> > +SRCREV = "513fc162d5d1a201c2b044e2b42941436d1069d5"
->>> > +
->>> > +S = "${WORKDIR}/git"
->>> > +
->>> > +do_compile() {
->>> > +    oe_runmake;
->>> > +}
->>> > +
->>> > +do_install() {
->>> > +    oe_runmake DESTDIR="${D}" install;
->>> > +}
->>> > +
->>> > +FILES_${PN} += " \
->>> > +    ${libdir} \
->>> > +"
->>> > diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
->>> b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
->>> > new file mode 100644
->>> > index 0000000000..beae281a30
->>> > --- /dev/null
->>> > +++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
->>> > @@ -0,0 +1,34 @@
->>> > +SUMMARY = "Protocol plugin for Office 365/Lync/OCS for Adium, Pidgin,
->>> Miranda and Telepathy IM Framework"
->>> > +SECTION = "webos/services"
->>> > +LICENSE = "GPLv2.0"
->>> > +LIC_FILES_CHKSUM =
->>> "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->>> > +
->>> > +DEPENDS = "pidgin intltool-native glib-2.0-native"
->>> > +
->>> > +inherit pkgconfig
->>> > +inherit autotools
->>> > +
->>> > +SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
->>> > +"
->>> > +
->>> > +SRC_URI[md5sum] = "b91106d28c235b347a63dcb676f7b66a"
->>> > +SRC_URI[sha256sum] =
->>> "958803722b23d869131f76bd90df9da19116d4ca5a873e5253371479b7390f43"
->>> > +
->>> > +PACKAGECONFIG ??= "nss krb5"
->>> > +PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
->>> > +PACKAGECONFIG[openssl] =
->>> "--enable-openssl=yes,--enable-openssl=no,openssl"
->>> > +PACKAGECONFIG[krb5] = "--with-krb5=yes,--with-krb5=no,krb5"
->>> > +#PACKAGECONFIG[voice_and_video] = "--with-vv=yes,--with-vv=no,libnice
->>> gstreamer"
->>> > +PACKAGECONFIG[telepathy] =
->>> "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib gmime"
->>> > +#PACKAGECONFIG[gssapi_only] =
->>> "--enable-gssapi-only=yes,--enable-gssapi-only=no,krb5"
->>> > +PACKAGECONFIG[debug] = "--enable-debug=yes,--enable-debug=no,valgrind"
->>> > +
->>> > +FILES_${PN}-dev += " \
->>> > +    ${libdir}/purple-2/*.la \
->>> > +"
->>> > +
->>> > +FILES_${PN} += " \
->>> > +    ${libdir}/purple-2/libsipe.so \
->>> > +    ${datadir}/appdata \
->>> > +    ${datadir}/metainfo \
->>> > +"
->>> > diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
->>> b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
->>> > new file mode 100644
->>> > index 0000000000..092e6059b8
->>> > --- /dev/null
->>> > +++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
->>> > @@ -0,0 +1,26 @@
->>> > +SUMMARY = "Skype protocol plug-in for libpurple"
->>> > +SECTION = "webos/services"
->>> > +LICENSE = "GPLv3"
->>> > +LIC_FILES_CHKSUM =
->>> "file://skypeweb/gpl3.txt;md5=d90260d32cef39f3c8d6c0f05d3adb8e"
->>> > +
->>> > +DEPENDS = "pidgin json-glib glib-2.0 zlib"
->>> > +
->>> > +inherit pkgconfig
->>> > +
->>> > +SRC_URI = "git://
->>> github.com/EionRobb/skype4pidgin;branch=master;protocol=git"
->>> > +SRCREV = "14f1b69b6292bbdc98cca484b050ec8359394c4e"
->>> > +
->>> > +S = "${WORKDIR}/git"
->>> > +PV = "1.5+git${SRCPV}"
->>> > +
->>> > +do_compile() {
->>> > +    oe_runmake -C skypeweb;
->>> > +}
->>> > +
->>> > +do_install() {
->>> > +    oe_runmake -C skypeweb DESTDIR="${D}" install;
->>> > +}
->>> > +
->>> > +FILES_${PN} += " \
->>> > +    ${libdir} \
->>> > +"
->>> > --
->>> > 2.17.1
->>> >
->>> > --
->>> > _______________________________________________
->>> > Openembedded-devel mailing list
->>> > Openembedded-devel@lists.openembedded.org
->>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
 
