@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 0062C7E6B2
+	by mail.openembedded.org (Postfix) with ESMTP id 0150B7E6D1
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 19 Jun 2019 17:50:14 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45TXXl2CMLz5Q
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45TXXk5TDCz4s
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 19:50:15 +0200 (CEST)
+	Wed, 19 Jun 2019 19:50:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1560966615;
-	bh=iV9lyycAR3zZePZDKbI0ntNGG/4lOLkQZsmj0zEMcM8=;
+	bh=BvA64oPlTcVDli07VY7+7b/II/BcwMGfZvVjoeXb6fw=;
 	h=From:To:Subject:Date:From;
-	b=q+7d1w9B7V973tPilPwhRJeXLBaodFW0Aur9TIaqdV8+HgBk8vMBTPDpq8vcv/vrV
-	SL+2EjwtP7L+S2ypMy8EIV1Uj6YlxmQ1nl7TpNfjJYF46Cog+kfalPFr4vPxUk5I0h
-	BtICw4BDPj62wwvnsYSBWqOAItGgl7noO+0vdar6ISaEpfddFOas/JxW3HQAuWtHny
-	KgAd+wc37OSwCsj3DInfJDwwkwjPTvXI9tI7Nd51bUvvfkLDe3osQ+DiB4SuUIaikz
-	v3Ada2d7G7CY//qF8/e58LGrMxYA8fTCMNMJajZzQOSrGa6yxcRm623tvdgN5QYMJl
-	GY2/ziL6k0cJGw234Fn0tR6Xqwe4fK2g+n7lz2avI4WA4h75eiBo5ePUZCdHZ7Ks1o
-	IpROTaXXu0BvIcvTo0HGgCbdsKjuv1ACKsrXYnrDcafsVijgR+XOq++vjzQK12CB5X
-	E+oXth3YXNW0WhDifJ5vcgSTKi7Gdqulc+s2XW9SD5sQ2Jg3YxuNVi4IXJoNOQjwrw
-	h2hCub1w23lW78G/X9cUK9hbf2rDxHcMFXHRraqflBB49wpsUKXxyIgLLXN9TL1/TD
-	t8Xeb3reFD6yEsHI+qPsKQjeS53otUlUNVfntbemqet+yGsNdCgldi5VDbNHwV/fdx
-	UkUFaZUEewxhP6HNqSXtkpyE=
+	b=NLOnutiJ0ZYO55bJIc3eZgNVU9TwxG+u+BWkkcJ04YGIxUBGslaNH28H4Q/EUOx2H
+	BOV2kt3LGppDP8cmpZoBk9dOCC/OkJVledMW+yLrBlL+3PXh7csq0wn8xxYUiwA35G
+	/Op+NRgLhXu+RKQUJPCB+y8fs7NlN84gRxqm43YakgvnF1UZQCsu5UvZPXqOQozzjc
+	C5AikAgO9eo4/4PV1sD9PkU7lNqZfEYZah6SwHfQ0Gq/6bZI60huDCjsKDRZgcWqx6
+	oVfHnQQUEi2fbl9F4Z8ZmB/LY7nrXzvZQy248TTOj29I+pnQOSPdXuXAkk1zjMvi+g
+	Zx8LHcb3nAWmmN4VoHu0vLail1eHw0TruaAD5aev+cwvsPzb+nsPJ3Lqe9xI3GBoYS
+	LiuuFu0KZtgIFshnIr2o8J6dHA23IGm93K98p/KZKt89tZhg1vmYsajlektjHFmjT0
+	OX6xsbBopRMNszfmjagHglczBqBceWXA8eAnYUCcRkLf1C8KixcwpIje4HQn7cR4Sj
+	vNv8m/iYDWQc2kJyENr5oMGx01e27+ltlOu9nAIxoavXSbgf6ww2sv0QFqwZVkxMaO
+	GraujNb1i19ZtWEwZeLbU4isvbHLv2rv3yv5qiudHS7al4o9l35SC+mT7lXnRM4g7I
+	QnzrcVfM2Z0aDw6/h/2IwhSI=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Jun 2019 20:50:12 +0300
-Message-Id: <20190619175012.10984-2-bunk@stusta.de>
+Date: Wed, 19 Jun 2019 20:50:11 +0300
+Message-Id: <20190619175012.10984-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] efivar: Remove, was moved to oe-core
+Subject: [meta-oe][PATCH] efibootmgr: Remove, was moved to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,186 +44,83 @@ X-List-Received-Date: Wed, 19 Jun 2019 17:50:15 -0000
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../0001-efivar-fix-for-cross-compile.patch   | 32 --------------
- ...04-fix-unknow-option-for-gold-linker.patch | 35 ---------------
- .../allow-multi-definitions-for-native.patch  | 36 ----------------
- meta-oe/recipes-bsp/efivar/efivar_37.bb       | 43 -------------------
- 4 files changed, 146 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0004-fix-unknow-option-for-gold-linker.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar_37.bb
+ .../recipes-bsp/efibootmgr/efibootmgr_17.bb   | 28 -----------------
+ .../files/0001-remove-extra-decl.patch        | 31 -------------------
+ 2 files changed, 59 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/efibootmgr/efibootmgr_17.bb
+ delete mode 100644 meta-oe/recipes-bsp/efibootmgr/files/0001-remove-extra-decl.patch
 
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+diff --git a/meta-oe/recipes-bsp/efibootmgr/efibootmgr_17.bb b/meta-oe/recipes-bsp/efibootmgr/efibootmgr_17.bb
 deleted file mode 100644
-index 251e50c90..000000000
---- a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+index 4edb2e664..000000000
+--- a/meta-oe/recipes-bsp/efibootmgr/efibootmgr_17.bb
 +++ /dev/null
-@@ -1,32 +0,0 @@
--From a9115d9e6f0f62d6bb735ce3698858d1f89f8d73 Mon Sep 17 00:00:00 2001
--From: Kai Kang <kai.kang@windriver.com>
--Date: Fri, 25 Sep 2015 18:14:31 +0800
--Subject: [PATCH] efivar: fix for cross compile
+@@ -1,28 +0,0 @@
+-DESCRIPTION = "Linux user-space application to modify the EFI Boot Manager."
+-SUMMARY = "EFI Boot Manager"
+-HOMEPAGE = "https://github.com/rhinstaller/efibootmgr"
+-SECTION = "base"
 -
--It builds and calls elf file makeguids to generate a header file which
--doesn't work for cross compile. Fix it.
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 -
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--Upstream-Status: Pending
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
--
-----
-- src/Makefile | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/Makefile b/src/Makefile
--index 0c16597..dcc7fc8 100644
----- a/src/Makefile
--+++ b/src/Makefile
--@@ -40,8 +40,8 @@ abicheck : $(patsubst %.so,%.abicheck,$(LIBTARGETS))
-- ./guid-symbols.c : include/efivar/efivar-guids.h
-- ./guids.bin : include/efivar/efivar-guids.h
-- ./names.bin : include/efivar/efivar-guids.h
---include/efivar/efivar-guids.h : makeguids guids.txt
---	./makeguids guids.txt guids.bin names.bin \
--+include/efivar/efivar-guids.h : guids.txt
--+	makeguids guids.txt guids.bin names.bin \
-- 		guid-symbols.c include/efivar/efivar-guids.h
-- 
-- makeguids : CPPFLAGS+=-DEFIVAR_BUILD_ENVIRONMENT
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/0004-fix-unknow-option-for-gold-linker.patch b/meta-oe/recipes-bsp/efivar/efivar/0004-fix-unknow-option-for-gold-linker.patch
-deleted file mode 100644
-index 96d0c6b3b..000000000
---- a/meta-oe/recipes-bsp/efivar/efivar/0004-fix-unknow-option-for-gold-linker.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From b3d35e7dd27a755df5acbe050837885914dbb28b Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 10 May 2016 11:34:50 -0400
--Subject: [PATCH]  fix unknow option for gold linker
--
--- Revert the following patch, since oe-core work with gcc 5
--...
--commit 3055a3797f16693dfdd855fa68bc57fd900dc408
--Author: Peter Jones <pjones@redhat.com>
--Date:   Mon Feb 15 14:15:40 2016 -0500
--
--    Make gcc.specs work with gcc 6 / binutils 2.26
--
--    Apparently binutils 2.26 gets real picky about "ld -PIC" vs "ld -fPIC".
--
--    Signed-off-by: Peter Jones <pjones@redhat.com>
--...
--
--- Remove unknown option '--add-needed'
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- gcc.specs | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--Index: git/gcc.specs
--===================================================================
----- git.orig/gcc.specs
--+++ git/gcc.specs
--@@ -14,4 +14,4 @@
-- + %{!shared:%{!static:%{!r:-pie}}} %{static:-Wl,-no-fatal-warnings -Wl,-static -static -Wl,-z,relro,-z,now}
-- 
-- *link:
---+ %{!static:--fatal-warnings} --no-undefined-version --no-allow-shlib-undefined --add-needed -z now --build-id %{!static:%{!shared:-pie}} %{shared:-z relro} %{static:%<pie}
--++ %{!static:--fatal-warnings} --no-undefined-version --no-allow-shlib-undefined -z now --build-id %{!static:%{!shared:-pie}} %{shared:-z relro} %{static:%<pie}
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch b/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
-deleted file mode 100644
-index 043b07a65..000000000
---- a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From c10368b397483a2fc7b493c099d8416d902f8cd8 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 31 Jul 2018 14:18:35 +0800
--Subject: [PATCH] allow multi definitions for native
--
--Upstream-Status: Pending
--
--It fails to create .so file when build efivar-native:
--
--| lib.o:(*IND*+0x0): multiple definition of `efi_set_variable'
--| lib.o:lib.c:(.text+0xa0): first defined here
--
--Add link option '-z muldefs' to fix it.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- Make.rules | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/Make.rules b/Make.rules
--index 042585b..257ba45 100644
----- a/Make.rules
--+++ b/Make.rules
--@@ -20,6 +20,7 @@ include $(TOPDIR)/Make.version
-- 	$(CCLD) $(ccldflags) $(CPPFLAGS) $(SOFLAGS) \
-- 	  -Wl,-soname,$@.1 \
-- 	  -Wl,--version-script=$(MAP) \
--+	  -Wl,-z,muldefs \
-- 	  -o $@ $^ $(LDLIBS)
-- 	ln -vfs $@ $@.1
-- 
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-bsp/efivar/efivar_37.bb b/meta-oe/recipes-bsp/efivar/efivar_37.bb
-deleted file mode 100644
-index 4b458dedd..000000000
---- a/meta-oe/recipes-bsp/efivar/efivar_37.bb
-+++ /dev/null
-@@ -1,43 +0,0 @@
--SUMMARY = "Tools to manipulate UEFI variables"
--DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
--HOMEPAGE = "https://github.com/rhinstaller/efivar"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
--
--DEPENDS = "popt"
--DEPENDS_append_class-target = " efivar-native"
--
--inherit pkgconfig
+-DEPENDS = "pciutils zlib efivar"
 -
 -COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 -
--SRCREV = "c1d6b10e1ed4ba2be07f385eae5bceb694478a10"
--SRC_URI = "git://github.com/rhinstaller/efivar.git \
--           file://allow-multi-definitions-for-native.patch \
--           "
--SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
--                                ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
--                              "
--
+-SRCREV = "e067160ecef8208e1944002e5d50b275733211fb"
+-SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
+-           file://0001-remove-extra-decl.patch \
+-          "
 -S = "${WORKDIR}/git"
 -
--do_compile_prepend() {
--    sed -i -e s:-Werror::g ${S}/gcc.specs
+-inherit pkgconfig
+-
+-EXTRA_OEMAKE = "'EFIDIR=/' 'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar`'"
+-
+-CFLAGS_append_toolchain-clang = " -Wno-error"
+-do_install () {
+-    install -D -p -m0755 ${B}/src/efibootmgr ${D}/${sbindir}/efibootmgr
 -}
 -
--do_compile_class-native() {
--    oe_runmake -C src makeguids CC_FOR_BUILD="${BUILD_CC}"
--}
+-CLEANBROKEN = "1"
+diff --git a/meta-oe/recipes-bsp/efibootmgr/files/0001-remove-extra-decl.patch b/meta-oe/recipes-bsp/efibootmgr/files/0001-remove-extra-decl.patch
+deleted file mode 100644
+index 42f3a8182..000000000
+--- a/meta-oe/recipes-bsp/efibootmgr/files/0001-remove-extra-decl.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 99b578501643377e0b1994b2a068b790d189d5ad Mon Sep 17 00:00:00 2001
+-From: Peter Jones <pjones@redhat.com>
+-Date: Wed, 13 Jun 2018 09:41:01 -0400
+-Subject: [PATCH] remove extra decl
 -
--do_install() {
--    oe_runmake install DESTDIR=${D}
--}
+-Signed-off-by: Peter Jones <pjones@redhat.com>
 -
--do_install_class-native() {
--    install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
--}
+-Upstream-Status: Backport [git://github.com/rhinstaller/efibootmgr.git]
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 -
--BBCLASSEXTEND = "native"
+----
+- src/efibootmgr.c | 3 ---
+- 1 file changed, 3 deletions(-)
 -
--RRECOMMENDS_${PN}_class-target = "kernel-module-efivarfs"
+-diff --git a/src/efibootmgr.c b/src/efibootmgr.c
+-index de38f01..4e1a680 100644
+---- a/src/efibootmgr.c
+-+++ b/src/efibootmgr.c
+-@@ -1536,9 +1536,6 @@ parse_opts(int argc, char **argv)
+- 					       "invalid numeric value %s\n",
+- 					       optarg);
+- 			}
+--                        /* XXX efivar-36 accidentally doesn't have a public
+--                         * header for this */
+--			extern int efi_set_verbose(int verbosity, FILE *errlog);
+- 			efi_set_verbose(opts.verbose - 2, stderr);
+- 			break;
+- 		case 'V':
+--- 
+-2.7.4
+-
 -- 
 2.17.1
 
