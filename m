@@ -1,47 +1,26 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
-	[209.85.208.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 915D37E635
+Return-Path: <timothy.t.orling@linux.intel.com>
+X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 19 Jun 2019 15:06:37 UTC
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 410857E9A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 10:08:38 +0000 (UTC)
-Received: by mail-ed1-f47.google.com with SMTP id a14so26305551edv.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 03:08:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=/iV1tO3mxH5UHSGys4crT7x91jo30CoMIbmn66HwcsU=;
-	b=XpR8MB7yheyPMmqghTiGyUVQDLJoX88OeBr36Gg0v7Wj+YhZ/Admoqc42bTAzhujJQ
-	KGQG1QPUg7zcdMjrOZ7qQdqpkwJ97T6fYehkHDMjPSOhvqutO8SqBr5yIf6xfjQMzTK1
-	kD4y6/DfeuYU09sq7MFATC+CGtXh6gEUqEhw4Cp9jiseNUMh9uV28nPtSif/kB2gG562
-	46+1/JJBsOy+8gyP4GEP5IGg3hnj6e8/FiBUJqRMb/4kknJybWUDKgPxqJQihARr8AK1
-	ArKHOEjArKpDBx6uXwR+QGQDJIYLeIcEdOgZBuC5CMFKqIsnOwqlVtA8F7yPowNBOClM
-	GmIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=/iV1tO3mxH5UHSGys4crT7x91jo30CoMIbmn66HwcsU=;
-	b=dkOZuIVBIRkCWxerqdg6bf253PSuY5at4s4oo4mLcGksuWRBDR+nep9Jj7sPtPJ3m3
-	vSbvAmrhGMuZ/PZI4GG4jwyFVo0uaKerVnBTeUN1TlpTfbH/N6jcxFjoT8RCiqDzynJZ
-	GFuWBRzK5J93iWkPvJaQWYt64ZAlcPRS5chw/EKmQHzZum4uhiBLU6wFgYIhOC+YwdJW
-	K0z2alWA6M0vbRqLd7UMPjVoZARDtY0jNHtz2W1m0ktCVb7a+pYCVBDRWZINrBUgRALq
-	cfRGNhI/+DHh21aWcfb2VMYHFXfZSabL531qhfGMlG965IgqU6+dTZw/v+uQw6RQYzOJ
-	g4ZQ==
-X-Gm-Message-State: APjAAAV+Kks3hWDomIt1AJTgxjNtWaR84WjGc3858y6xNlNmKsjzH3bF
-	oCUefqSSJoPrV968j76AIeoLXMAdg1//Sw==
-X-Google-Smtp-Source: APXvYqwSirj5kD/6/TICkCTkRnlrrP9SigAccPJ837I+rgjeeCbdYhzN028ne0kFuS8STLTCN4PrIw==
-X-Received: by 2002:a50:aa7c:: with SMTP id p57mr82884278edc.179.1560938919071;
-	Wed, 19 Jun 2019 03:08:39 -0700 (PDT)
-Received: from ahersrvbspbld01.lgs-net.com ([193.8.40.126])
-	by smtp.gmail.com with ESMTPSA id
-	v32sm5520352edm.92.2019.06.19.03.08.38
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 19 Jun 2019 03:08:38 -0700 (PDT)
-From: Andrey Zhizhikin <andrey.z@gmail.com>
+	Wed, 19 Jun 2019 15:06:37 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	19 Jun 2019 07:59:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,392,1557212400"; d="scan'208";a="150629080"
+Received: from chiron.jf.intel.com ([10.54.74.38])
+	by orsmga007.jf.intel.com with ESMTP; 19 Jun 2019 07:59:30 -0700
+From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Jun 2019 10:08:28 +0000
-Message-Id: <20190619100828.17965-2-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] cpuburn-arm: add aarch64 machine and build configuration
+Date: Wed, 19 Jun 2019 07:59:18 -0700
+Message-Id: <20190619145918.20187-1-timothy.t.orling@linux.intel.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-perl][PATCH] libmodule-build-perl: drop, has moved to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,73 +33,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 10:08:38 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 15:06:37 -0000
+Content-Transfer-Encoding: 8bit
 
-Add aarch64 as a valid machine to cpuburn recipe and split compilation
-task.
+libmodule-build-perl is a dependency for cpan_build.bbclass
+and as such has been moved to oe-core
 
-The only source file which supports the aarch64 build is cpuburn-a53.S,
-and in case if TUNE is set to aarch64 - this should be the only file to
-be assembled to the application.
+OE-Core rev: 81ba07d85d21456bf7248b2f04082958e8d724c2
 
-In case of 32-bit build - all sources are compiled as they are, since
-cpuburn-a53.S supports both 32- and 64-bit tunes.
-
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- .../cpuburn/cpuburn-arm_git.bb                | 32 +++++++++++++------
- 1 file changed, 23 insertions(+), 9 deletions(-)
+ .../libmodule/libmodule-build-perl_0.4224.bb  | 34 -------------------
+ 1 file changed, 34 deletions(-)
+ delete mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
 
-diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
-index 6189da39f..b21212a43 100644
---- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
-+++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
-@@ -18,21 +18,35 @@ SRC_URI = "git://github.com/ssvb/cpuburn-arm.git \
- S = "${WORKDIR}/git"
- 
- do_compile() {
--    ${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
--    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a7.S -o burn-a7
--    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a8.S -o burn-a8
--    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a9.S -o burn-a9
--    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a53.S -o burn-a53
--    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-krait.S -o burn-krait
-+
-+    # If the arch is set to ARM 64-bit -  we only produce and ship burn-a53 version.
-+    # In case of ARM 32-bit - we would build all variants, since burn-a53 supports both
-+    # 32 and 64-bit builds
-+    if ${@bb.utils.contains('TUNE_FEATURES', 'aarch64', 'true', 'false', d)}; then
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a53.S -o burn-a53
-+    else
-+        ${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a7.S -o burn-a7
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a8.S -o burn-a8
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a9.S -o burn-a9
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a53.S -o burn-a53
-+        ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-krait.S -o burn-krait
-+    fi
- }
- 
- do_install() {
-     install -d ${D}${bindir}
--    for f in burn burn-a7 burn-a8 burn-a9 burn-a53 burn-krait; do
--        install -m 0755 $f ${D}${bindir}/$f
--    done
-+
-+    if ${@bb.utils.contains('TUNE_FEATURES', 'aarch64', 'true', 'false', d)}; then
-+        install -m 0755 burn-a53 ${D}${bindir}
-+    else
-+        for f in burn burn-a7 burn-a8 burn-a9 burn-a53 burn-krait; do
-+            install -m 0755 $f ${D}${bindir}/$f
-+        done
-+    fi
- }
- 
- COMPATIBLE_MACHINE ?= "(^$)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
- COMPATIBLE_MACHINE_armv7ve = "(.*)"
-+COMPATIBLE_MACHINE_aarch64 = "(.*)"
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
+deleted file mode 100644
+index d523a7a0c7..0000000000
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-SUMMARY = "Module::Build - Build and install Perl modules"
+-DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
+-Makefile.PL file to drive distribution configuration, build, test and \
+-installation. Traditionally, Build.PL uses Module::Build as the underlying \
+-build system. This module provides a simple, lightweight, drop-in replacement. \
+-Whereas Module::Build has over 6,700 lines of code; this module has less than \
+-120, yet supports the features needed by most distributions."
+-
+-SECTION = "libs"
+-
+-HOMEPAGE = "https://metacpan.org/release/Module-Build"
+-
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
+-LIC_FILES_CHKSUM = "file://README;beginline=960;endline=965;md5=624c06db56a2af4d70cf9edc29fcae1b"
+-
+-SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-${PV}.tar.gz"
+-SRC_URI[md5sum] = "b74c2f6e84b60aad3a3defd30b6f0f4d"
+-SRC_URI[sha256sum] = "a6ca15d78244a7b50fdbf27f85c85f4035aa799ce7dd018a0d98b358ef7bc782"
+-
+-S = "${WORKDIR}/Module-Build-${PV}"
+-
+-inherit cpan_build
+-
+-# From:
+-# https://github.com/rehsack/meta-cpan/blob/master/recipes-devel/module-build-perl/module-build-perl_0.4216.bb
+-#
+-do_patch_module_build () {
+-    cd ${S}
+-    sed -i -e 's,my $interpreter = $self->{properties}{perl};,my $interpreter = "${bindir}/perl";,g' lib/Module/Build/Base.pm
+-}
+-
+-do_patch[postfuncs] += "do_patch_module_build"
+-
+-BBCLASSEXTEND = "native"
 -- 
-2.17.1
+2.20.1
 
 
