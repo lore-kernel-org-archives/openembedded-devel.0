@@ -1,25 +1,22 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 056D77CF1B
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AD207BFB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 05:50:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5J5o9tt011548
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 22:50:47 -0700
-Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Tue, 18 Jun 2019 22:50:05 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Jun 2019 13:50:03 +0800
-Message-ID: <1560923403-21694-1-git-send-email-yi.zhao@windriver.com>
+	Wed, 19 Jun 2019 06:47:47 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x5J6llpK021894
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 18 Jun 2019 23:47:47 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Tue, 18 Jun 2019 23:47:46 -0700
+From: <mingli.yu@windriver.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Jun 2019 14:47:45 +0800
+Message-ID: <1560926865-286631-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [meta-networking][PATCH] snort: upgrade 2.9.11.1 -> 2.9.13
+Subject: [meta-oe][PATCH] mozjs: Fix do_patch error for mips64-n32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,171 +29,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 05:50:57 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 06:47:47 -0000
 Content-Type: text/plain
 
-* Add PACKAGECONFIG[appid] for application identification support.
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-* Set the variables 'have_daq_packet_trace' and
-  'have_daq_verdict_reason' to 'no' since they are only supported in daq
-  2.2.2 but not in 2.0.6.
+After mozjs upgrade to 60.5.2 in below commit:
+9ca3aad9c mozjs: Upgrade to version 60.x
 
-* Cleanup snort.init script and fix the incorrect argument of mkdir
+With below logic in local.conf:
+MACHINE ??= "qemumips64"
+MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+MULTILIBS ?= "multilib:lib32 multilib:libn32"
+DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+require conf/multilib.conf
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+$ bitbake libn32-mozjs -cpatch
+| NOTE: Applying patch '0001-fix-compiling-failure-on-mips64-n32-bsp.patch' (../layers/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-failure-on-mips64-n32-bsp.patch)
+| ERROR: Command Error: 'quilt --quiltrc TOPDIR/tmp/work/mips64-n32-wrsmllibn32-linux-gnun32/libn32-mozjs/60.5.2-r0/recipe-sysroot-native/etc/quiltrc push' exited with 0  Output:
+| Applying patch 0001-fix-compiling-failure-on-mips64-n32-bsp.patch
+| patching file build/moz.configure/init.configure
+| patching file js/src/jit/mips-shared/Architecture-mips-shared.h
+| Hunk #1 succeeded at 28 with fuzz 2 (offset 2 lines).
+| Hunk #2 FAILED at 95.
+| 1 out of 2 hunks FAILED -- rejects in file js/src/jit/mips-shared/Architecture-mips-shared.h
+| patching file python/mozbuild/mozbuild/configure/constants.py
+| Patch 0001-fix-compiling-failure-on-mips64-n32-bsp.patch does not apply (enforce with -f)
+
+Rework 0001-fix-compiling-failure-on-mips64-n32-bsp.patch
+to fix the above do_patch error.
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- ...le-run-test-program-while-cross-compiling.patch |  4 +-
- .../recipes-connectivity/snort/snort/snort.init    | 53 +++++++++++-----------
- .../snort/{snort_2.9.11.1.bb => snort_2.9.13.bb}   |  5 +-
- 3 files changed, 32 insertions(+), 30 deletions(-)
- rename meta-networking/recipes-connectivity/snort/{snort_2.9.11.1.bb => snort_2.9.13.bb} (94%)
+ ...1-fix-compiling-failure-on-mips64-n32-bsp.patch | 36 ++++++++++++++--------
+ 1 file changed, 23 insertions(+), 13 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch b/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
-index 037962f..30ec174 100644
---- a/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
-+++ b/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
-@@ -226,7 +226,7 @@ index 4b3a5db..a6c5498 100644
- -]])],
- -[have_daq_packet_trace="yes"],
- -[have_daq_packet_trace="no"])
--+have_daq_packet_trace="yes"
-++have_daq_packet_trace="no"
-  AC_MSG_RESULT($have_daq_packet_trace)
-  if test "x$have_daq_packet_trace" = "xyes"; then
-      AC_DEFINE([HAVE_DAQ_PKT_TRACE],[1],
-@@ -245,7 +245,7 @@ index 4b3a5db..a6c5498 100644
- -]])],
- -[have_daq_verdict_reason="yes"],
- -[have_daq_verdict_reason="no"])
--+have_daq_verdict_reason="yes"
-++have_daq_verdict_reason="no"
-  AC_MSG_RESULT($have_daq_verdict_reason)
-  if test "x$have_daq_verdict_reason" = "xyes"; then
-      AC_DEFINE([HAVE_DAQ_VERDICT_REASON],[1],
-diff --git a/meta-networking/recipes-connectivity/snort/snort/snort.init b/meta-networking/recipes-connectivity/snort/snort/snort.init
-index d8a00c4..0d90c9a 100644
---- a/meta-networking/recipes-connectivity/snort/snort/snort.init
-+++ b/meta-networking/recipes-connectivity/snort/snort/snort.init
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-failure-on-mips64-n32-bsp.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-failure-on-mips64-n32-bsp.patch
+index a36478b..b882d76 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-failure-on-mips64-n32-bsp.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-failure-on-mips64-n32-bsp.patch
 @@ -1,6 +1,6 @@
- #!/bin/sh
- #
--#   Snort Startup Script modified for OpenEmbedded
-+# Snort Startup Script modified for OpenEmbedded
- #
+-From 5ad700c92224193bfc789f7d53af38fc6f8b8904 Mon Sep 17 00:00:00 2001
++From f2f8be496c8e34b4d909b688a95c6f8565201081 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Thu, 19 Jul 2018 17:31:35 +0800
++Date: Wed, 19 Jun 2019 14:30:44 +0800
+ Subject: [PATCH] fix compiling failure on mips64-n32 bsp
  
- # Script variables
-@@ -30,16 +30,16 @@ fi
+ - Tweak mips64-n32 with mips32
+@@ -16,15 +16,18 @@ Subject: [PATCH] fix compiling failure on mips64-n32 bsp
+ Upstream-Status: Inappropriate [oe specific]
  
- start()
- {
--
-     [ -n "$LAN_INTERFACE" ] || return 0
-     # Check if log diratory is present. Otherwise, create it.
-     if [ ! -d $LOGDIR/$DATE ]; then
--        mkdir -d $LOGDIR/$DATE
-+        mkdir -p $LOGDIR/$DATE
-         /bin/chown -R $USER:$USER $LOGDIR/$DATE
--    /bin/chmod -R 700 $LOGDIR/$DATE
-+        /bin/chmod -R 700 $LOGDIR/$DATE
-     fi
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+ ---
+  build/moz.configure/init.configure                | 5 ++++-
+  js/src/jit/mips-shared/Architecture-mips-shared.h | 4 +++-
+  python/mozbuild/mozbuild/configure/constants.py   | 2 +-
+  3 files changed, 8 insertions(+), 3 deletions(-)
  
-     /bin/echo "Starting $PROG: "
++diff --git a/build/moz.configure/init.configure b/build/moz.configure/init.configure
++index 648ac2d..d0bcaf8 100644
+ --- a/build/moz.configure/init.configure
+ +++ b/build/moz.configure/init.configure
+-@@ -650,7 +650,10 @@ def split_triplet(triplet, allow_unknown
++@@ -650,7 +650,10 @@ def split_triplet(triplet, allow_unknown=False):
+          canonical_cpu = 'mips32'
+          endianness = 'little' if 'el' in cpu else 'big'
+      elif cpu in ('mips64', 'mips64el'):
+@@ -36,26 +39,30 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+          endianness = 'little' if 'el' in cpu else 'big'
+      elif cpu.startswith('aarch64'):
+          canonical_cpu = 'aarch64'
++diff --git a/js/src/jit/mips-shared/Architecture-mips-shared.h b/js/src/jit/mips-shared/Architecture-mips-shared.h
++index e95ffd4..caf83f7 100644
+ --- a/js/src/jit/mips-shared/Architecture-mips-shared.h
+ +++ b/js/src/jit/mips-shared/Architecture-mips-shared.h
+-@@ -26,6 +26,8 @@
+- #define USES_O32_ABI
+- #elif (defined(_MIPS_SIM) && (_MIPS_SIM == _ABI64)) || defined(JS_SIMULATOR_MIPS64)
++@@ -28,6 +28,8 @@
++ #elif (defined(_MIPS_SIM) && (_MIPS_SIM == _ABI64)) || \
++     defined(JS_SIMULATOR_MIPS64)
+  #define USES_N64_ABI
+ +#elif (defined(_MIPS_SIM) && (_MIPS_SIM == _ABIN32))
+ +#define USES_N32_ABI
+  #else
+  #error "Unsupported ABI"
+  #endif
+-@@ -93,7 +95,7 @@ class Registers
+-         ta1 = t5,
+-         ta2 = t6,
+-         ta3 = t7,
++@@ -94,7 +96,7 @@ class Registers {
++     ta1 = t5,
++     ta2 = t6,
++     ta3 = t7,
+ -#elif defined(USES_N64_ABI)
+ +#elif defined(USES_N64_ABI) || defined(USES_N32_ABI)
+-         a4 = r8,
+-         a5 = r9,
+-         a6 = r10,
++     a4 = r8,
++     a5 = r9,
++     a6 = r10,
++diff --git a/python/mozbuild/mozbuild/configure/constants.py b/python/mozbuild/mozbuild/configure/constants.py
++index 1067b6a..e0f0405 100644
+ --- a/python/mozbuild/mozbuild/configure/constants.py
+ +++ b/python/mozbuild/mozbuild/configure/constants.py
+ @@ -90,8 +90,8 @@ CPU_preprocessor_checks = OrderedDict((
+@@ -68,3 +75,6 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+      ('sh4', '__sh__'),
+  ))
+  
++-- 
++2.7.4
 +
-     # Snort parameters
-     # -D Run Snort in background (daemon) mode
-     # -i <if> Listen on interface <if>
-@@ -64,7 +64,7 @@ stop()
-         RETURN_VAL=$?
-         /bin/echo "$PROG shutdown complete."
-         [ -e $DEL_PID ] && rm -f $DEL_PID
--    [ -e $DEL_PID.lck ] && rm -f $DEL_PID.lck
-+        [ -e $DEL_PID.lck ] && rm -f $DEL_PID.lck
-     else
-         /bin/echo "ERROR: PID in $PID file not found."
-         RETURN_VAL=1
-@@ -72,12 +72,13 @@ stop()
-     return $RETURN_VAL
- }
- 
--status() {
--        if [ -s $PID ]; then
--                echo "$PROG is running as pid `cat $PID`:"
--        else
--                echo "$PROG is not running."
--        fi
-+status()
-+{
-+    if [ -s $PID ]; then
-+        echo "$PROG is running as pid `cat $PID`:"
-+    else
-+        echo "$PROG is not running."
-+    fi
- }
- 
- restart()
-@@ -89,21 +90,21 @@ restart()
- }
- 
- case "$1" in
-- start)
--       start
--    ;;
-- stop)
--       stop
--    ;;
-- status)
--       status
--    ;;
-- restart|reload)
--       restart
--    ;;
-- *)
--    /bin/echo "Usage: $0 {start|stop|status|restart|reload}"
--    RETURN_VAL=1
-+    start)
-+        start
-+        ;;
-+    stop)
-+        stop
-+        ;;
-+    status)
-+        status
-+        ;;
-+    restart|reload)
-+        restart
-+        ;;
-+    *)
-+        /bin/echo "Usage: $0 {start|stop|status|restart|reload}"
-+        RETURN_VAL=1
- esac
- 
- exit $RETURN_VAL
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-similarity index 94%
-rename from meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
-rename to meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-index c2eb95f..1b10dbd 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-@@ -13,8 +13,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
-     file://disable-run-test-program-while-cross-compiling.patch \
- "
- 
--SRC_URI[md5sum] = "378e3938b2b5c8e358f942d0ffce18cc"
--SRC_URI[sha256sum] = "9f6b3aeac5a109f55504bd370564ac431cb1773507929dc461626898f33f46cd"
-+SRC_URI[md5sum] = "b61ae846af022018b05511076baad60c"
-+SRC_URI[sha256sum] = "31447393d15286b848810dd78ab2cb3ad231fcd1f1663f959587690eeea75413"
- 
- UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
- UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
-@@ -45,6 +45,7 @@ EXTRA_OECONF = " \
- PACKAGECONFIG ?= "openssl lzma"
- PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
- PACKAGECONFIG[lzma] = "--with-lzma-includes=${STAGING_INCDIR} --with-lzma-libraries=${STAGING_LIBDIR}, --without-lzma-includes --without-lzma-libraries, xz,"
-+PACKAGECONFIG[appid] = "--enable-open-appid, --disable-open-appid, luajit, bash"
- 
- CFLAGS += "-I${STAGING_INCDIR}/tirpc"
- LDFLAGS += " -ltirpc"
 -- 
 2.7.4
 
