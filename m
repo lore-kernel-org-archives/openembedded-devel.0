@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 61AB06D50C
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E4FFA6D50C
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 19 Jun 2019 04:24:00 +0000 (UTC)
-Received: by mail-pg1-f179.google.com with SMTP id l19so8869348pgh.9
+Received: by mail-pf1-f196.google.com with SMTP id r1so8928514pfq.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 21:24:01 -0700 (PDT)
+	Tue, 18 Jun 2019 21:24:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=63DT37qtIa0UBCl8mHOIYxjCCKRgCHAdFFBX57unxkU=;
-	b=jEBHt7f3xgPJEondEs6k/jn09nJ9FoLKL52ymPRtAsm2AhFdabeiy/1C0QrrcxN1JJ
-	VPEqaY02KuXV7JC6dpmXb/cosUrlMx3dzFsKjmv/srZ4ULLvuJz24JAPQUe469coVYR0
-	cd1ktA1eb5gWdMKjixn0Q5nM8k9HnK+/lN5Wr0XvIotvRl3Ox9+ptaG+JowXm7JIZ5rN
-	0NGBRGHB+95rwS2h/ILpEtN8ibrEEsOpZS3AjZYrCZtt96OcTPZb2DpO1xJd8eKkVNzd
-	kI5TvazNNzHfwyw1CgfkF5aKjXNJkh+ShaTReWS7nkwmHyqm3zoyKhA1j5lIy8qDFDuS
-	bVTg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=C2ZevHa8Avb24lq+q9pFsmfbhWDiNhJfQXzS1nbhWDA=;
+	b=h0ZSX9A3cMX7xLvGBhMr9+9eBwsvYf5gTVB8D9efJYZW+/j47zJi7lsmdCVJFi6FSQ
+	Dge+sji8lgoCxPWaFcMFmu/UZ1695hX5rN79M6vfVEJe1ZR2KkdY3NPiOkLYQAVNrW5M
+	YfrQ6m2L2wRz2xqFt1uOIdQjjs9WTQkzNkc0HNkXa2F01y3zxrjWPyY3dyU2Kx5pqMRj
+	VMC+esX+6JBd1x9uvdXdhtRjT0W3CC3BM/k5NERcOo+1WbYzeP3qbaWfVO+5C2ybBprQ
+	h9yBMN0HNAlK42SPN4db1/ElY236NweUll5aDALyFdTDPLvUh5TM3fDu+smC2AANNDaZ
+	D5TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=63DT37qtIa0UBCl8mHOIYxjCCKRgCHAdFFBX57unxkU=;
-	b=Vz8wSQElZmHDZD88EAV0QllIniWA/991mvQcMdTlfPP0YvyIna9QvXsKkif1ifgROd
-	E5pc7O6BNJBgS9/H8VgnmXScclblrnON0cgPtQpKN3cc0NsfZvytcmEUCYjecRvwDKMm
-	XMTvK1cX+1kUET4g5hTrynLMd7BcLWObXSXHHxUfrhH1AIJY0168SW28n+YlB9pfVB6S
-	e6psT7EchbzokyqC3FvbeZmukWoiskfxLipKqqcl+Cr8YIfObMQvBS4y3gHwK2cwTrW6
-	BmP2qMxmFibML277FBlKQVznxe/Uw8VR3v/bHZTUzhZFby5VOlViLcRYFK0VKn6ZalV1
-	5Lbw==
-X-Gm-Message-State: APjAAAUFfGW1Cst8sj7SbNNwKNa639Y2+BCHJQUvvgaP1MY+MLfVK/U9
-	+rAg0xX7NFtZMETcI1w3O1ABxQuhhuI=
-X-Google-Smtp-Source: APXvYqxdl0m76wh/TLOl+9zroaiN5b08/X466i9pKavkFlAdhTvpJ4hn8zIviafmcrQkgamfo1usmA==
-X-Received: by 2002:a17:90a:3086:: with SMTP id
-	h6mr9211951pjb.14.1560918241001; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=C2ZevHa8Avb24lq+q9pFsmfbhWDiNhJfQXzS1nbhWDA=;
+	b=N33yNDx+CRk1XiEbeH78nKOjgm4FmNyDgLdaYDgQ8oQnuUkwb16ymXooJFhFES7y0S
+	up5nmQ3wslndbl6Nt58dpw/wekUwMOlv6GP2o3E0aUXANTlEn2OPfbz1BX5rXA85LEZh
+	Bg4WBo0gde1Q1ggpLcKiiUZ67sxUQteqEz5yd+yj+YfyPyPXXNBPDICIh2mn7QyhL8H5
+	iuXqL3zd9ga9bcy9qZo1fyeaKf1CW+RhXe8VYfantSojSJydvsjWGv8u8t3bUMsh7xu4
+	6sXGKPAc0EHeNx/coQtBpaIWu0V6owKu83ejzrrKnC+iqUpw3iBH61riZqglPkV97LGW
+	x2XQ==
+X-Gm-Message-State: APjAAAUYYYBv0WNmC9uhl2v/l5k1SzIHZ9t7S7GwJEmiVpz0Ns+1b3kD
+	SZNVQqpSUY6xxOdcfV/rENCTNPJDvnU=
+X-Google-Smtp-Source: APXvYqyYeRvK7kYnEVxHq1icuSk2oWkpaulzAz1WN0bWglRnNlGdwWrfJN+ju6QUdFRUGn6vi5Cj0Q==
+X-Received: by 2002:a17:90a:1951:: with SMTP id
+	17mr8938872pjh.79.1560918241632; 
 	Tue, 18 Jun 2019 21:24:01 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::32b0])
 	by smtp.gmail.com with ESMTPSA id
-	r7sm26092845pfl.134.2019.06.18.21.24.00
+	r7sm26092845pfl.134.2019.06.18.21.24.01
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 18 Jun 2019 21:24:00 -0700 (PDT)
+	Tue, 18 Jun 2019 21:24:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jun 2019 21:23:51 -0700
-Message-Id: <20190619042352.22919-1-raj.khem@gmail.com>
+Date: Tue, 18 Jun 2019 21:23:52 -0700
+Message-Id: <20190619042352.22919-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <20190619042352.22919-1-raj.khem@gmail.com>
+References: <20190619042352.22919-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] gmime: Add recipe
+Subject: [meta-oe][PATCH 2/2] pidgin-sipe: Depend on gmime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,77 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 04:24:00 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 04:24:01 -0000
 Content-Transfer-Encoding: 8bit
 
-gmime is needed for pidgin-sipe
+gmime is used if detected, some build hosts the detection logic
+fails, make the dependency unconditional to fix build failures
+when it detects host's gmime install
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../pidgin/gmime/iconv-detect.h               |  5 ++++
- .../recipes-support/pidgin/gmime/nodolt.patch | 10 ++++++++
- meta-oe/recipes-support/pidgin/gmime_3.2.3.bb | 23 +++++++++++++++++++
- 3 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/pidgin/gmime/iconv-detect.h
- create mode 100644 meta-oe/recipes-support/pidgin/gmime/nodolt.patch
- create mode 100644 meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+ meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pidgin/gmime/iconv-detect.h b/meta-oe/recipes-support/pidgin/gmime/iconv-detect.h
-new file mode 100644
-index 0000000000..714cb5aa9d
---- /dev/null
-+++ b/meta-oe/recipes-support/pidgin/gmime/iconv-detect.h
-@@ -0,0 +1,5 @@
-+/* This is an auto-generated header, DO NOT EDIT! */
-+
-+#define ICONV_ISO_INT_FORMAT "iso-%u-%u"
-+#define ICONV_ISO_STR_FORMAT "iso-%u-%s"
-+#define ICONV_10646 "iso-10646"
-diff --git a/meta-oe/recipes-support/pidgin/gmime/nodolt.patch b/meta-oe/recipes-support/pidgin/gmime/nodolt.patch
-new file mode 100644
-index 0000000000..1f9bdd3041
---- /dev/null
-+++ b/meta-oe/recipes-support/pidgin/gmime/nodolt.patch
-@@ -0,0 +1,10 @@
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -150,7 +150,6 @@ AC_EXEEXT
-+ AC_PROG_LIBTOOL
-+ dnl when using libtool 2.x create libtool early, because it's used in configure
-+ m4_ifdef([LT_OUTPUT], [LT_OUTPUT])
-+-DOLT
-+ 
-+ dnl Checks for header files.
-+ AC_CHECK_HEADERS(sys/mman.h)
-diff --git a/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
-new file mode 100644
-index 0000000000..8c6f0b010a
---- /dev/null
-+++ b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
-@@ -0,0 +1,23 @@
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+DESCRIPTION = "Runtime libraries for parsing and creating MIME mail"
-+SECTION = "libs"
-+DEPENDS = "glib-2.0 zlib"
-+
-+inherit gnome autotools gobject-introspection
-+
-+SRC_URI += "file://iconv-detect.h \
-+            file://nodolt.patch"
-+
-+SRC_URI[archive.md5sum] = "69ae21a0b1df966a7d39a9431856ac81"
-+SRC_URI[archive.sha256sum] = "6a0875eeb552ab447dd54853a68ced62217d863631048737dd97eaa2713e7311"
-+
-+EXTRA_OECONF_remove = "--disable-schemas-install"
-+
-+export ac_cv_have_iconv_detect_h="yes"
-+do_configure_append = "cp ${WORKDIR}/iconv-detect.h ${S}"
-+
-+# we do not need GNOME 1 gnome-config support
-+do_install_append () {
-+    rm -f ${D}${libdir}/gmimeConf.sh
-+}
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+index beae281a30..7632fd2de7 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+@@ -3,7 +3,7 @@ SECTION = "webos/services"
+ LICENSE = "GPLv2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-DEPENDS = "pidgin intltool-native glib-2.0-native"
++DEPENDS = "pidgin gmime intltool-native glib-2.0-native"
+ 
+ inherit pkgconfig
+ inherit autotools
+@@ -19,7 +19,7 @@ PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
+ PACKAGECONFIG[openssl] = "--enable-openssl=yes,--enable-openssl=no,openssl"
+ PACKAGECONFIG[krb5] = "--with-krb5=yes,--with-krb5=no,krb5"
+ #PACKAGECONFIG[voice_and_video] = "--with-vv=yes,--with-vv=no,libnice gstreamer"
+-PACKAGECONFIG[telepathy] = "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib gmime"
++PACKAGECONFIG[telepathy] = "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib"
+ #PACKAGECONFIG[gssapi_only] = "--enable-gssapi-only=yes,--enable-gssapi-only=no,krb5"
+ PACKAGECONFIG[debug] = "--enable-debug=yes,--enable-debug=no,valgrind"
+ 
 -- 
 2.22.0
 
