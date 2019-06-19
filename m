@@ -1,53 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E4FFA6D50C
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 056D77CF1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2019 04:24:00 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id r1so8928514pfq.12
+	Wed, 19 Jun 2019 05:50:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5J5o9tt011548
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2019 21:24:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=C2ZevHa8Avb24lq+q9pFsmfbhWDiNhJfQXzS1nbhWDA=;
-	b=h0ZSX9A3cMX7xLvGBhMr9+9eBwsvYf5gTVB8D9efJYZW+/j47zJi7lsmdCVJFi6FSQ
-	Dge+sji8lgoCxPWaFcMFmu/UZ1695hX5rN79M6vfVEJe1ZR2KkdY3NPiOkLYQAVNrW5M
-	YfrQ6m2L2wRz2xqFt1uOIdQjjs9WTQkzNkc0HNkXa2F01y3zxrjWPyY3dyU2Kx5pqMRj
-	VMC+esX+6JBd1x9uvdXdhtRjT0W3CC3BM/k5NERcOo+1WbYzeP3qbaWfVO+5C2ybBprQ
-	h9yBMN0HNAlK42SPN4db1/ElY236NweUll5aDALyFdTDPLvUh5TM3fDu+smC2AANNDaZ
-	D5TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=C2ZevHa8Avb24lq+q9pFsmfbhWDiNhJfQXzS1nbhWDA=;
-	b=N33yNDx+CRk1XiEbeH78nKOjgm4FmNyDgLdaYDgQ8oQnuUkwb16ymXooJFhFES7y0S
-	up5nmQ3wslndbl6Nt58dpw/wekUwMOlv6GP2o3E0aUXANTlEn2OPfbz1BX5rXA85LEZh
-	Bg4WBo0gde1Q1ggpLcKiiUZ67sxUQteqEz5yd+yj+YfyPyPXXNBPDICIh2mn7QyhL8H5
-	iuXqL3zd9ga9bcy9qZo1fyeaKf1CW+RhXe8VYfantSojSJydvsjWGv8u8t3bUMsh7xu4
-	6sXGKPAc0EHeNx/coQtBpaIWu0V6owKu83ejzrrKnC+iqUpw3iBH61riZqglPkV97LGW
-	x2XQ==
-X-Gm-Message-State: APjAAAUYYYBv0WNmC9uhl2v/l5k1SzIHZ9t7S7GwJEmiVpz0Ns+1b3kD
-	SZNVQqpSUY6xxOdcfV/rENCTNPJDvnU=
-X-Google-Smtp-Source: APXvYqyYeRvK7kYnEVxHq1icuSk2oWkpaulzAz1WN0bWglRnNlGdwWrfJN+ju6QUdFRUGn6vi5Cj0Q==
-X-Received: by 2002:a17:90a:1951:: with SMTP id
-	17mr8938872pjh.79.1560918241632; 
-	Tue, 18 Jun 2019 21:24:01 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:6bc6::32b0])
-	by smtp.gmail.com with ESMTPSA id
-	r7sm26092845pfl.134.2019.06.18.21.24.01
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 18 Jun 2019 21:24:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jun 2019 21:23:52 -0700
-Message-Id: <20190619042352.22919-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190619042352.22919-1-raj.khem@gmail.com>
-References: <20190619042352.22919-1-raj.khem@gmail.com>
+	Tue, 18 Jun 2019 22:50:47 -0700
+Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
+	Tue, 18 Jun 2019 22:50:05 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Jun 2019 13:50:03 +0800
+Message-ID: <1560923403-21694-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] pidgin-sipe: Depend on gmime
+X-Originating-IP: [128.224.162.195]
+Subject: [meta-networking][PATCH] snort: upgrade 2.9.11.1 -> 2.9.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,41 +32,172 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 04:24:01 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Jun 2019 05:50:57 -0000
+Content-Type: text/plain
 
-gmime is used if detected, some build hosts the detection logic
-fails, make the dependency unconditional to fix build failures
-when it detects host's gmime install
+* Add PACKAGECONFIG[appid] for application identification support.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* Set the variables 'have_daq_packet_trace' and
+  'have_daq_verdict_reason' to 'no' since they are only supported in daq
+  2.2.2 but not in 2.0.6.
+
+* Cleanup snort.init script and fix the incorrect argument of mkdir
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...le-run-test-program-while-cross-compiling.patch |  4 +-
+ .../recipes-connectivity/snort/snort/snort.init    | 53 +++++++++++-----------
+ .../snort/{snort_2.9.11.1.bb => snort_2.9.13.bb}   |  5 +-
+ 3 files changed, 32 insertions(+), 30 deletions(-)
+ rename meta-networking/recipes-connectivity/snort/{snort_2.9.11.1.bb => snort_2.9.13.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-index beae281a30..7632fd2de7 100644
---- a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
-@@ -3,7 +3,7 @@ SECTION = "webos/services"
- LICENSE = "GPLv2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch b/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
+index 037962f..30ec174 100644
+--- a/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
++++ b/meta-networking/recipes-connectivity/snort/snort/disable-run-test-program-while-cross-compiling.patch
+@@ -226,7 +226,7 @@ index 4b3a5db..a6c5498 100644
+ -]])],
+ -[have_daq_packet_trace="yes"],
+ -[have_daq_packet_trace="no"])
+-+have_daq_packet_trace="yes"
+++have_daq_packet_trace="no"
+  AC_MSG_RESULT($have_daq_packet_trace)
+  if test "x$have_daq_packet_trace" = "xyes"; then
+      AC_DEFINE([HAVE_DAQ_PKT_TRACE],[1],
+@@ -245,7 +245,7 @@ index 4b3a5db..a6c5498 100644
+ -]])],
+ -[have_daq_verdict_reason="yes"],
+ -[have_daq_verdict_reason="no"])
+-+have_daq_verdict_reason="yes"
+++have_daq_verdict_reason="no"
+  AC_MSG_RESULT($have_daq_verdict_reason)
+  if test "x$have_daq_verdict_reason" = "xyes"; then
+      AC_DEFINE([HAVE_DAQ_VERDICT_REASON],[1],
+diff --git a/meta-networking/recipes-connectivity/snort/snort/snort.init b/meta-networking/recipes-connectivity/snort/snort/snort.init
+index d8a00c4..0d90c9a 100644
+--- a/meta-networking/recipes-connectivity/snort/snort/snort.init
++++ b/meta-networking/recipes-connectivity/snort/snort/snort.init
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ #
+-#   Snort Startup Script modified for OpenEmbedded
++# Snort Startup Script modified for OpenEmbedded
+ #
  
--DEPENDS = "pidgin intltool-native glib-2.0-native"
-+DEPENDS = "pidgin gmime intltool-native glib-2.0-native"
+ # Script variables
+@@ -30,16 +30,16 @@ fi
  
- inherit pkgconfig
- inherit autotools
-@@ -19,7 +19,7 @@ PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
- PACKAGECONFIG[openssl] = "--enable-openssl=yes,--enable-openssl=no,openssl"
- PACKAGECONFIG[krb5] = "--with-krb5=yes,--with-krb5=no,krb5"
- #PACKAGECONFIG[voice_and_video] = "--with-vv=yes,--with-vv=no,libnice gstreamer"
--PACKAGECONFIG[telepathy] = "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib gmime"
-+PACKAGECONFIG[telepathy] = "--enable-telepathy=yes,--enable-telepathy=no,telepathy-glib"
- #PACKAGECONFIG[gssapi_only] = "--enable-gssapi-only=yes,--enable-gssapi-only=no,krb5"
- PACKAGECONFIG[debug] = "--enable-debug=yes,--enable-debug=no,valgrind"
+ start()
+ {
+-
+     [ -n "$LAN_INTERFACE" ] || return 0
+     # Check if log diratory is present. Otherwise, create it.
+     if [ ! -d $LOGDIR/$DATE ]; then
+-        mkdir -d $LOGDIR/$DATE
++        mkdir -p $LOGDIR/$DATE
+         /bin/chown -R $USER:$USER $LOGDIR/$DATE
+-    /bin/chmod -R 700 $LOGDIR/$DATE
++        /bin/chmod -R 700 $LOGDIR/$DATE
+     fi
  
+     /bin/echo "Starting $PROG: "
++
+     # Snort parameters
+     # -D Run Snort in background (daemon) mode
+     # -i <if> Listen on interface <if>
+@@ -64,7 +64,7 @@ stop()
+         RETURN_VAL=$?
+         /bin/echo "$PROG shutdown complete."
+         [ -e $DEL_PID ] && rm -f $DEL_PID
+-    [ -e $DEL_PID.lck ] && rm -f $DEL_PID.lck
++        [ -e $DEL_PID.lck ] && rm -f $DEL_PID.lck
+     else
+         /bin/echo "ERROR: PID in $PID file not found."
+         RETURN_VAL=1
+@@ -72,12 +72,13 @@ stop()
+     return $RETURN_VAL
+ }
+ 
+-status() {
+-        if [ -s $PID ]; then
+-                echo "$PROG is running as pid `cat $PID`:"
+-        else
+-                echo "$PROG is not running."
+-        fi
++status()
++{
++    if [ -s $PID ]; then
++        echo "$PROG is running as pid `cat $PID`:"
++    else
++        echo "$PROG is not running."
++    fi
+ }
+ 
+ restart()
+@@ -89,21 +90,21 @@ restart()
+ }
+ 
+ case "$1" in
+- start)
+-       start
+-    ;;
+- stop)
+-       stop
+-    ;;
+- status)
+-       status
+-    ;;
+- restart|reload)
+-       restart
+-    ;;
+- *)
+-    /bin/echo "Usage: $0 {start|stop|status|restart|reload}"
+-    RETURN_VAL=1
++    start)
++        start
++        ;;
++    stop)
++        stop
++        ;;
++    status)
++        status
++        ;;
++    restart|reload)
++        restart
++        ;;
++    *)
++        /bin/echo "Usage: $0 {start|stop|status|restart|reload}"
++        RETURN_VAL=1
+ esac
+ 
+ exit $RETURN_VAL
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
+rename to meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
+index c2eb95f..1b10dbd 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
+@@ -13,8 +13,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
+     file://disable-run-test-program-while-cross-compiling.patch \
+ "
+ 
+-SRC_URI[md5sum] = "378e3938b2b5c8e358f942d0ffce18cc"
+-SRC_URI[sha256sum] = "9f6b3aeac5a109f55504bd370564ac431cb1773507929dc461626898f33f46cd"
++SRC_URI[md5sum] = "b61ae846af022018b05511076baad60c"
++SRC_URI[sha256sum] = "31447393d15286b848810dd78ab2cb3ad231fcd1f1663f959587690eeea75413"
+ 
+ UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
+ UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
+@@ -45,6 +45,7 @@ EXTRA_OECONF = " \
+ PACKAGECONFIG ?= "openssl lzma"
+ PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
+ PACKAGECONFIG[lzma] = "--with-lzma-includes=${STAGING_INCDIR} --with-lzma-libraries=${STAGING_LIBDIR}, --without-lzma-includes --without-lzma-libraries, xz,"
++PACKAGECONFIG[appid] = "--enable-open-appid, --disable-open-appid, luajit, bash"
+ 
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+ LDFLAGS += " -ltirpc"
 -- 
-2.22.0
+2.7.4
 
 
