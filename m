@@ -1,47 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DB137E871
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E6E87E7DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2019 17:15:48 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id x2so4008765qtr.0
+	Thu, 20 Jun 2019 18:14:28 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id u19so214257ior.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2019 10:15:49 -0700 (PDT)
+	Thu, 20 Jun 2019 11:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=UJ4etv/N4SZP7KoklY7PlOyIIGEMokQB0Szob36pw+c=;
-	b=ADOjje5j3IHtklzeQL6Pv67xPh9IiHAY7e7aQMZJwtO8drmED7SlAVFBJS1jPFK9pr
-	HheYLsXiyDLnq2L+CAX2BXN+Y14kGfgfEna65nW/dDPZeU7a5DcPw+sc1C6B7nKxSWTY
-	AO2zHyx0FUJYtwzEmAS4TI9phd3ifNlYD2Bcc8pZOO9ud3DEIA8xVZn9jfH6E/W9t+xC
-	p8/l93ijOUEyjO+Su68v+qr2ZJIE1WNz1mlF0woKyiYpOFfxwPiT4DWkqrAaGroEco+O
-	XMkb3pEsNU5Ggg0MLlJUFktVAnfNhAS9GTNaT0OeAi0FcBatXg9FGk60bFYz17G24u/n
-	ij7g==
+	:cc; bh=ZM5+mR4himpkTMkaDtMGJSzAqhAyeWLULU15M1Lt8Fs=;
+	b=efYjZCUS1KrAcedkmXUYSXqGcRCIiVa3HnEGVQy7vb74Jzek2EDkIexp28dOdgD3br
+	xS8O9/tTZQ/BtWh7CQZ3VeqzMkMQV/c5bCbMuEbNEKRc96InaZS9hpr3HxsokjTuei8w
+	KHcOhg3AkdJtDhgzQEpb9s67QBNxVuBwx/v0lOIFp+LHGzMUHKW3D07mUOAVyKUW9+DE
+	pRGOox7yIDwqCretLUEiIwg2AlLa1kmDFY2h6cSMQS00wQTdJl6SICpPwgomsPQBmDY6
+	Dd07sYbt9fB2Srj9uUHVYhgW9pNxY8LeTOKZ36ibGZjJGr8Lkz881TVioCDDSeVHMKud
+	k8eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=UJ4etv/N4SZP7KoklY7PlOyIIGEMokQB0Szob36pw+c=;
-	b=DAj9G7AOth2S3qNJg6cW40o0GdHOoBL2keY+aNbCKBtuINk5NBw55Xyzl9cIFM7GdS
-	Cz3HJq2ZHBHIZgtkUjZcIUYhkxlqqzmNl1YvOpjV2G6FpyJNk4KmOiuNe0movq2ABo8I
-	VT7ifXvD9PEf7gtuot4byIjTCMQySqYpoIf+f8BrhIIYxKaf1kToUuQ7suTotkBafH7i
-	Xahw9XeB1dO+2wPzEenRNnUVLyGPI3rS36QiWtYWA1QMCZ//shn7RA4yhiaW9swBzrR1
-	9S4j7LuEk69Jh4g3amgwIAsuY4tSRubQ3CqarolZpfRMuesgKDzOXlRKM5qnp5Du2su2
-	NcwQ==
-X-Gm-Message-State: APjAAAV9cOeBnE3UJAGDO2cUKsMxhZhCNIzG/0H0iWV8xcMqZdFzvIQZ
-	lmf8EX0tFnsHV0zzILzyLSdE+trI4CnN+1K7u4Y=
-X-Google-Smtp-Source: APXvYqzq3fn9A+qH29pKmYtX/RyPEVx4UG3M11PQ8Ta7byf8lzZkfrCap1qu0b454dAUKHk1/UIy80tnGNT8AcbOcOw=
-X-Received: by 2002:aed:3f1d:: with SMTP id
-	p29mr113137990qtf.378.1561050948995; 
-	Thu, 20 Jun 2019 10:15:48 -0700 (PDT)
+	bh=ZM5+mR4himpkTMkaDtMGJSzAqhAyeWLULU15M1Lt8Fs=;
+	b=uPiBt3Exsih6klfjdeuO+CwUwHMtJsYlyesTsn2kExpsOZFV6rg+2uXb/iEEEYHpQi
+	In+a8jhA2GbOfp6hrNTZji2kyYzo4OUHEPcuycEwG1h4ljKh3PE+QbWIUtOnPZyF+Pc6
+	I1ElD8ll2VplghJKsOyEmbqGMF96D5MCkkDTkXG0W7f5e4uZqtJfKdKnY+TzzmHJMI78
+	/dxkle4IDFAcM4LFR0FTlXUDfNDCG+pF6E1iQZzi2flhEig9XWs6nw4i/614/e290+/d
+	OrgloZdXmxsaHwDSc6GX5QnzbYKBV1cdWJ2+hExS1nOjb5/DvfzXeDeR9QMmL87YQ7M1
+	o01g==
+X-Gm-Message-State: APjAAAVulkj1O1Myb1sSw+3zOj00wprSTxzodCmygp/iaUdqLJGz73xs
+	UwwPvv7uApZ5PD6h4XXYFQeakcqE7D5a9me6mlniWprNbOM=
+X-Google-Smtp-Source: APXvYqxPJZuPttP0fayN4xMW+ZqJARYMr6m6TcBf3660WOScIlbQkNcm19wEZM8mRGvFEwb4NrSNI361XVJU7yLSAUg=
+X-Received: by 2002:a02:a806:: with SMTP id f6mr2426178jaj.74.1561054469153;
+	Thu, 20 Jun 2019 11:14:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190620055011.71854-1-mingli.yu@windriver.com>
-In-Reply-To: <20190620055011.71854-1-mingli.yu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Jun 2019 11:15:22 -0600
-Message-ID: <CAMKF1sog3jtW+da=UiBEAB9zq-gXNgAi0ch-5jzKT1Gba+y-TA@mail.gmail.com>
-To: Mingli Yu <mingli.yu@windriver.com>
+References: <20190316144936.4768-1-open.source@oleksandr-kravchuk.com>
+	<CAB2nKc9OS+c5MYdCbjjTTNcg0Qh-nrEXZ-T+cZ36Wy_O0qUBtg@mail.gmail.com>
+	<6fcc4e72-0ff0-7048-5a8d-69da48c6c484@oleksandr-kravchuk.com>
+In-Reply-To: <6fcc4e72-0ff0-7048-5a8d-69da48c6c484@oleksandr-kravchuk.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Thu, 20 Jun 2019 20:14:17 +0200
+Message-ID: <CAB2nKc_W9n0rsMBq1MqZoSUZh65Oz5EX0JnSAJq0_qf4D_tjbQ@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-lxml: replace -Og with -O for mips64-32
+Subject: Re: [meta-networking][PATCH] openconnect: update to 8.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,68 +56,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2019 17:15:48 -0000
+X-List-Received-Date: Thu, 20 Jun 2019 18:14:28 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 19, 2019 at 11:50 PM <mingli.yu@windriver.com> wrote:
->
-> From: Mingli Yu <Mingli.Yu@windriver.com>
->
-> With below logic in local.conf:
-> MACHINE ??= "qemumips64"
-> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
-> MULTILIBS ?= "multilib:lib32 multilib:libn32"
-> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
-> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
-> require conf/multilib.conf
-> DEBUG_BUILD = "1"
-> $ bitbake lib32-python-lxml
-> [snip]
-> | {standard input}: Assembler messages:
-> | {standard input}:1488805: Error: branch out of range
-> | Compile failed: command 'mips-pokymllib32-linux-gcc' failed with exit status 1
-> | creating tmp
-> | cc -I/yocto/builds//tmp/work/mips-pokymllib32-linux/lib32-python-lxml/4.3.4-r0/lib32-recipe-sysroot/usr/include/libxml2 -I/usr/include/libxml2 -c /tmp/xmlXPathInitPZiWuM.c -o tmp/xmlXPathInitPZiWuM.o
-> | unable to execute 'cc': No such file or directory
-> [snip]
->
-> When DEBUG_BUILD enabled, -Og pass to compiler,
-> replace -Og with -O to fix the above compile error.
->
-> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-> ---
->  meta-python/recipes-devtools/python/python-lxml.inc | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-> index d67c17883..dd73a412b 100644
-> --- a/meta-python/recipes-devtools/python/python-lxml.inc
-> +++ b/meta-python/recipes-devtools/python/python-lxml.inc
-> @@ -33,6 +33,18 @@ DISTUTILS_INSTALL_ARGS += " \
->
->  inherit pypi
->
-> +# {standard input}: Assembler messages:
-> +# {standard input}:1488805: Error: branch out of range
-> +DEBUG_OPTIMIZATION_remove_mips = " -Og"
-> +DEBUG_OPTIMIZATION_append_mips = " -O"
-> +BUILD_OPTIMIZATION_remove_mips = " -Og"
-> +BUILD_OPTIMIZATION_append_mips = " -O"
-> +
-> +DEBUG_OPTIMIZATION_remove_mipsel = " -Og"
-> +DEBUG_OPTIMIZATION_append_mipsel = " -O"
-> +BUILD_OPTIMIZATION_remove_mipsel = " -Og"
-> +BUILD_OPTIMIZATION_append_mipsel = " -O"
-> +
+Thanks for reply,
 
-this is a workaround and probably ok in meanwhile. However can you
-generaste a preprocessed file
-where it breaks the assembly. So we can report it upstream
+For now I added those lines to gitconfig to get rid of proxy issue:
 
->  do_configure_prepend() {
->      sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py
->  }
-> --
-> 2.21.0
+[url "https://gitlab.com/openconnect/openconnect.git"]
+    insteadOf =3D git://git.infradead.org/users/dwmw2/openconnect.git
+
+Regards
+
+Le mer. 19 juin 2019 =C3=A0 00:23, Oleksandr Kravchuk <
+open.source@oleksandr-kravchuk.com> a =C3=A9crit :
+
+> I do not know how Yocto mirrors work, but according to
+> http://downloads.yoctoproject.org/mirror/sources/ last copy of the repo
+> was made in November 2018, while 8.02 was released in January 2019, so it
+> does make sense that 6487ee8763e1b63 isn't in it.
+>
+> Perhaps someone can force Yocto mirrors to fetch the latest version?
+> On 18/06/2019 10:01, Vincent Prince wrote:
+>
+> Hi all,
+>
+> After this update I have some difficulties to populate my download
+> pre-mirror with bitbake runall=3Dfetch universe, warrior branch.
+>
+> I can't access infradead.org in my company but it seems yocto mirrors
+> does not contain following revision, this command fails:
+> git -c core.fsyncobjectfiles=3D0 branch --contains
+> 6487ee8763e1b6345718684909aca970befbc49d --list master
+>
+> For now, I just ignore the error as I don't use openconnect, anyone have
+> same issue with it?
+>
+> Best regards,
+> Vincent
+>
+> Le sam. 16 mars 2019 =C3=A0 15:50, Oleksandr Kravchuk <
+> open.source@oleksandr-kravchuk.com> a =C3=A9crit :
+>
+>> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+>> ---
+>>  .../openconnect/openconnect_git.bb                 | 14 ++++++++++----
+>>  1 file changed, 10 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/openconnect/
+>> openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/
+>> openconnect_git.bb
+>> index c944144e2..050a2833c 100644
+>> --- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.b=
+b
+>> +++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.b=
+b
+>> @@ -2,7 +2,11 @@ SUMMARY =3D "Open client for Cisco AnyConnect VPN"
+>>  LICENSE =3D "LGPLv2.1"
+>>  LIC_FILES_CHKSUM =3D
+>> "file://COPYING.LGPL;md5=3D243b725d71bb5df4a1e5920b344b86ad"
+>>
+>> +SRC_URI =3D "git://git.infradead.org/users/dwmw2/openconnect.git"
+>> +SRCREV =3D "6487ee8763e1b6345718684909aca970befbc49d"
+>> +
+>>  DEPENDS =3D "vpnc libxml2 krb5 gettext-native"
+>> +RDEPENDS_${PN} =3D "bash python"
+>>
+>>  PACKAGECONFIG ??=3D "gnutls lz4 libproxy"
+>>
+>> @@ -14,10 +18,7 @@ PACKAGECONFIG[libproxy]  =3D
+>> "--with-libproxy,--without-libproxy,libproxy,"
+>>  # not config defaults
+>>  PACKAGECONFIG[pcsc-lite] =3D
+>> "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
+>>
+>> -PV =3D "7.08"
+>> -
+>> -SRCREV =3D "9697bea0e50952cab57063238b43a7099e498cbb"
+>> -SRC_URI =3D "git://git.infradead.org/users/dwmw2/openconnect.git"
+>> +PV =3D "8.02"
+>>
+>>  S =3D "${WORKDIR}/git"
+>>
+>> @@ -25,3 +26,8 @@ inherit autotools pkgconfig
+>>
+>>  EXTRA_OECONF +=3D
+>> "--with-vpnc-script=3D${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
+>>                   --disable-static"
+>> +
+>> +do_configure_append() {
+>> +    # script has /usr/bin/python2 path hardcoded
+>> +    sed -i -e 's=3Dpython2\.*=3Dpython=3Dg' ${S}/trojans/tncc-wrapper.p=
+y
+>> +}
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
 
