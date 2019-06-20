@@ -1,49 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 037997E915
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DB137E871
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2019 17:01:49 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id w17so3879208qto.10
+	Thu, 20 Jun 2019 17:15:48 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id x2so4008765qtr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2019 10:01:51 -0700 (PDT)
+	Thu, 20 Jun 2019 10:15:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wUi0dvNbocbGj/t9IJh8jvpEaJtsZmdDUEh4yqvsils=;
-	b=Nw6gPDb3DxFVs3NqmusSrJHK9elCAveOKr6Ew5EEUHowcDeBv+V6wj52QA1KwnOms6
-	O6q9jA4DJ4VKZTwsA2+0mlvUA7lv/LzFic2HQY7n3hXhFUuUPkOAOeNX71Na4fJsuCSG
-	uB8O+VT+IW2hOg426Uo42oi4Sjx/5kEhEG0fAMJaLhkjSKrbpKWdkiYPleE26xkAyKQ1
-	ZgUxKxx27RSv1kWTtDFgbc0CcHxDTIfXwWQZjXCTerjz2bBhyFCM99K/SrvXsxPRN6KC
-	7y4O2eKw3H4giIAjvm6eOLGK6Ns4natrfcndcuq+Wdl8DSK3PhkZ7i58O2zfDckjbauK
-	rPmg==
+	:cc; bh=UJ4etv/N4SZP7KoklY7PlOyIIGEMokQB0Szob36pw+c=;
+	b=ADOjje5j3IHtklzeQL6Pv67xPh9IiHAY7e7aQMZJwtO8drmED7SlAVFBJS1jPFK9pr
+	HheYLsXiyDLnq2L+CAX2BXN+Y14kGfgfEna65nW/dDPZeU7a5DcPw+sc1C6B7nKxSWTY
+	AO2zHyx0FUJYtwzEmAS4TI9phd3ifNlYD2Bcc8pZOO9ud3DEIA8xVZn9jfH6E/W9t+xC
+	p8/l93ijOUEyjO+Su68v+qr2ZJIE1WNz1mlF0woKyiYpOFfxwPiT4DWkqrAaGroEco+O
+	XMkb3pEsNU5Ggg0MLlJUFktVAnfNhAS9GTNaT0OeAi0FcBatXg9FGk60bFYz17G24u/n
+	ij7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=wUi0dvNbocbGj/t9IJh8jvpEaJtsZmdDUEh4yqvsils=;
-	b=C5otlSMrgtxSqPR2Cugh8RfbO0Zw5XynRYAailnxnRt7zuAwgiU7Xx2DvQdW5MMUS6
-	jP/Mrot8vxBFZZtbF9sdTA4bewrjgI+AVhwL9YOUA+V90/AjPppsINTlIrzMCGOvq/MK
-	9BZow9iIEPRy8JVHCEDNpsO9mpYAh31J8ss5QxJncQD0d4P1XfM4GpNo7CMfZTulD+sp
-	CMx5ZlmFXzajcdRG6Q5B4N6jUym5QFETFoiVXq7Up2R+Q4PdhQ5t2Ht+d5KCdfp7VWWn
-	ZsIb8gOAjEN3L4Hn0t52ccP/Amg9LbN4M70n7HNThbx5ffAHObZ0Y4t583iYcvLzte+F
-	dD6g==
-X-Gm-Message-State: APjAAAWd3jJXY1M23CzsGYtgrFb6RKCMiE2GNNt54PmOKzQVmZlBmszc
-	bnrKba5TkkETzXdZMTGlgKVH/5OikRNahBHrC+0=
-X-Google-Smtp-Source: APXvYqwOi/QHedap5A3bDvxNbSxhtgVQYRwSBzXD1zgVP4gJoS3tjLJcGMcME4YJHSkiZp/A36CzzxW/s4hTYeDffns=
-X-Received: by 2002:a0c:bd1d:: with SMTP id m29mr40602834qvg.181.1561050110571;
-	Thu, 20 Jun 2019 10:01:50 -0700 (PDT)
+	bh=UJ4etv/N4SZP7KoklY7PlOyIIGEMokQB0Szob36pw+c=;
+	b=DAj9G7AOth2S3qNJg6cW40o0GdHOoBL2keY+aNbCKBtuINk5NBw55Xyzl9cIFM7GdS
+	Cz3HJq2ZHBHIZgtkUjZcIUYhkxlqqzmNl1YvOpjV2G6FpyJNk4KmOiuNe0movq2ABo8I
+	VT7ifXvD9PEf7gtuot4byIjTCMQySqYpoIf+f8BrhIIYxKaf1kToUuQ7suTotkBafH7i
+	Xahw9XeB1dO+2wPzEenRNnUVLyGPI3rS36QiWtYWA1QMCZ//shn7RA4yhiaW9swBzrR1
+	9S4j7LuEk69Jh4g3amgwIAsuY4tSRubQ3CqarolZpfRMuesgKDzOXlRKM5qnp5Du2su2
+	NcwQ==
+X-Gm-Message-State: APjAAAV9cOeBnE3UJAGDO2cUKsMxhZhCNIzG/0H0iWV8xcMqZdFzvIQZ
+	lmf8EX0tFnsHV0zzILzyLSdE+trI4CnN+1K7u4Y=
+X-Google-Smtp-Source: APXvYqzq3fn9A+qH29pKmYtX/RyPEVx4UG3M11PQ8Ta7byf8lzZkfrCap1qu0b454dAUKHk1/UIy80tnGNT8AcbOcOw=
+X-Received: by 2002:aed:3f1d:: with SMTP id
+	p29mr113137990qtf.378.1561050948995; 
+	Thu, 20 Jun 2019 10:15:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190530055149.48837-1-yongxin.liu@windriver.com>
-	<CAMKF1sr3nsW=Czi48++hsWs+J6Nqus8rM0mEe2Xh+Fo_9PNc2g@mail.gmail.com>
-	<597B109EC20B76429F71A8A97770610D19C1AC20@ALA-MBD.corp.ad.wrs.com>
-	<CAMKF1srxKi9LfgEwWjTOwGNQXLZxGEF5LhdVMW8tSacBNNXa2w@mail.gmail.com>
-In-Reply-To: <CAMKF1srxKi9LfgEwWjTOwGNQXLZxGEF5LhdVMW8tSacBNNXa2w@mail.gmail.com>
+References: <20190620055011.71854-1-mingli.yu@windriver.com>
+In-Reply-To: <20190620055011.71854-1-mingli.yu@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Jun 2019 11:01:24 -0600
-Message-ID: <CAMKF1sogcJRJxQeePXzzdbiYRGRmJ5JrD30wH1ydCt8hYYpU_g@mail.gmail.com>
-To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>
+Date: Thu, 20 Jun 2019 11:15:22 -0600
+Message-ID: <CAMKF1sog3jtW+da=UiBEAB9zq-gXNgAi0ch-5jzKT1Gba+y-TA@mail.gmail.com>
+To: Mingli Yu <mingli.yu@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ndctl: v63 -> v65
+Subject: Re: [meta-python][PATCH] python-lxml: replace -Og with -O for mips64-32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,88 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2019 17:01:50 -0000
+X-List-Received-Date: Thu, 20 Jun 2019 17:15:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jun 20, 2019 at 11:00 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Wed, Jun 19, 2019 at 11:50 PM <mingli.yu@windriver.com> wrote:
 >
-> On Thu, Jun 20, 2019 at 2:55 AM Liu, Yongxin <Yongxin.Liu@windriver.com> wrote:
-> >
-> >
-> > > -----Original Message-----
-> > > From: Khem Raj [mailto:raj.khem@gmail.com]
-> > > Sent: Friday, June 14, 2019 07:06
-> > > To: Liu, Yongxin
-> > > Cc: openembeded-devel
-> > > Subject: Re: [oe] [meta-oe][PATCH] ndctl: v63 -> v65
-> > >
-> > > On Wed, May 29, 2019 at 11:02 PM Yongxin Liu <yongxin.liu@windriver.com>
-> > > wrote:
-> > > >
-> > > > Add keyutils to DEPENDS.
-> > > > Set FILES to package /usr/share/daxctl/daxctl.conf.
-> > > >
-> > > > Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
-> > > > ---
-> > > >  meta-oe/recipes-core/ndctl/{ndctl_v63.bb => ndctl_v65.bb} | 6 ++++--
-> > > >  1 file changed, 4 insertions(+), 2 deletions(-)
-> > > >  rename meta-oe/recipes-core/ndctl/{ndctl_v63.bb => ndctl_v65.bb} (87%)
-> > > >
-> > > > diff --git a/meta-oe/recipes-core/ndctl/ndctl_v63.bb b/meta-oe/recipes-
-> > > core/ndctl/ndctl_v65.bb
-> > > > similarity index 87%
-> > > > rename from meta-oe/recipes-core/ndctl/ndctl_v63.bb
-> > > > rename to meta-oe/recipes-core/ndctl/ndctl_v65.bb
-> > > > index 61e53029b..8648ad580 100644
-> > > > --- a/meta-oe/recipes-core/ndctl/ndctl_v63.bb
-> > > > +++ b/meta-oe/recipes-core/ndctl/ndctl_v65.bb
-> > > > @@ -10,10 +10,10 @@ LIC_FILES_CHKSUM =
-> > > "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
-> > > >
-> > > >  inherit autotools-brokensep pkgconfig bash-completion systemd
-> > > >
-> > > > -SRCREV = "cb2d678dd6d286dd96d31548c32449a8b883ae32"
-> > > > +SRCREV = "ed17fd14608d8de072c8c090ffc5fcf78c4f48ff"
-> > > >  SRC_URI = "git://github.com/pmem/ndctl.git"
-> > > >
-> > > > -DEPENDS = "virtual/kernel kmod udev json-c"
-> > > > +DEPENDS = "virtual/kernel kmod udev json-c keyutils"
-> > >
-> > > Please bring in the recipe for keyutils as well. Since its not in
-> > > OE-Core we should not depend
-> > > on other layers for this
-> >
-> > The recipe for keyutils is in meta-security/recipes-security/keyutils
-> > (git://git.yoctoproject.org/meta-security).
-> >
-> > Do you mean I should move keyutils from meta-security layer to OE-Core?
-> >
+> From: Mingli Yu <Mingli.Yu@windriver.com>
+>
+> With below logic in local.conf:
+> MACHINE ??= "qemumips64"
+> MULTILIB_GLOBAL_VARIANTS_append = " libn32"
+> MULTILIBS ?= "multilib:lib32 multilib:libn32"
+> DEFAULTTUNE_virtclass-multilib-lib32 ?= "mips"
+> DEFAULTTUNE_virtclass-multilib-libn32 ?= "mips64-n32"
+> require conf/multilib.conf
+> DEBUG_BUILD = "1"
+> $ bitbake lib32-python-lxml
+> [snip]
+> | {standard input}: Assembler messages:
+> | {standard input}:1488805: Error: branch out of range
+> | Compile failed: command 'mips-pokymllib32-linux-gcc' failed with exit status 1
+> | creating tmp
+> | cc -I/yocto/builds//tmp/work/mips-pokymllib32-linux/lib32-python-lxml/4.3.4-r0/lib32-recipe-sysroot/usr/include/libxml2 -I/usr/include/libxml2 -c /tmp/xmlXPathInitPZiWuM.c -o tmp/xmlXPathInitPZiWuM.o
+> | unable to execute 'cc': No such file or directory
+> [snip]
+>
+> When DEBUG_BUILD enabled, -Og pass to compiler,
+> replace -Og with -O to fix the above compile error.
+>
+> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+> ---
+>  meta-python/recipes-devtools/python/python-lxml.inc | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+> index d67c17883..dd73a412b 100644
+> --- a/meta-python/recipes-devtools/python/python-lxml.inc
+> +++ b/meta-python/recipes-devtools/python/python-lxml.inc
+> @@ -33,6 +33,18 @@ DISTUTILS_INSTALL_ARGS += " \
+>
+>  inherit pypi
+>
+> +# {standard input}: Assembler messages:
+> +# {standard input}:1488805: Error: branch out of range
+> +DEBUG_OPTIMIZATION_remove_mips = " -Og"
+> +DEBUG_OPTIMIZATION_append_mips = " -O"
+> +BUILD_OPTIMIZATION_remove_mips = " -Og"
+> +BUILD_OPTIMIZATION_append_mips = " -O"
+> +
+> +DEBUG_OPTIMIZATION_remove_mipsel = " -Og"
+> +DEBUG_OPTIMIZATION_append_mipsel = " -O"
+> +BUILD_OPTIMIZATION_remove_mipsel = " -Og"
+> +BUILD_OPTIMIZATION_append_mipsel = " -O"
+> +
 
-or to atleast meta-oe
+this is a workaround and probably ok in meanwhile. However can you
+generaste a preprocessed file
+where it breaks the assembly. So we can report it upstream
 
-> >
+>  do_configure_prepend() {
+>      sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py
+>  }
+> --
+> 2.21.0
 >
-> yes
->
-> > Thanks,
-> > Yongxin
-> >
-> >
-> > > >
-> > > >  S = "${WORKDIR}/git"
-> > > >
-> > > > @@ -31,3 +31,5 @@ do_configure_prepend() {
-> > > >
-> > > >  SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
-> > > >  SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-> > > > +
-> > > > +FILES_${PN} += "${datadir}/daxctl/daxctl.conf"
-> > > > --
-> > > > 2.14.4
-> > > >
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
