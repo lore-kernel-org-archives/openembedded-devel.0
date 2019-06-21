@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 19D637E7DA
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
+	[209.85.208.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 99A337E833
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 22:05:14 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id h10so7290970ljg.0
+	Fri, 21 Jun 2019 22:14:24 +0000 (UTC)
+Received: by mail-lj1-f182.google.com with SMTP id p17so7298108ljg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 15:05:16 -0700 (PDT)
+	Fri, 21 Jun 2019 15:14:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=E83UfHsUwX8J7rKizO/jhRJM4mNhkQKi/+4sRYP74Qw=;
-	b=cQs5e3m5yTNGU6doOOTVIq1usHaOSVYmrm+zCJl73kZ0NlwR7cTTvU2YTt6VEoJJ8q
-	EUkLSho1t9QuFemOnKKEUdet3UzX2c2YGEmHftnqBvQHU46ZIfEY8zUSJkbAN9oC3ZGC
-	39tzAQQk3JykLNMoyb6M2MfhlDrfJsAt5GTirvmct1tMIvnqgMfTXVibUBM70fnapnvJ
-	m1sKw6204f/rgYkZLo7Finuy4lSFA7TG42Hk1RkFxFRDV6R2CcRbI71K5TTrDMNYEufF
-	ZU4lmwGxO4mJVSbDyNukFZlpP1mMcypUAQ4FlJ49dKP7pZMd6mz1NRjxHml7yOZItM04
-	E91A==
+	bh=yr1nwEMwCYyn5NaO/g68hYn1Yc5LFGbycUwhEitO9FA=;
+	b=QpCyHkRUEbrJiLipRJ/yHC21/j9L5QvQXN1mNYkDMbPIIusb0zNkP/Hzco2Z2cY2rK
+	Fi7DWiHpS1p5LsWMIezBDZi1GBHpitcSxxHhoO0OfWGeP/9QIh7nt5zQdZvEZ8hgdnye
+	pjdz4/e79HmhKx0g89ZgqqRGO2yE0+oip9ApnUkSivDxg+bC4bRVONfE7bP2K6LOOtkc
+	atdT32yqBcVhaeQIG6bIb1gST3cNDzws3WFrJsxnaqKgBi4hdGfut2Tb7GWeLrKgDWJH
+	Jjz+Yf1kC1IaU9Z9nuQ0PXJVtBvMP+H6MHAVO72oHoXwW+rBH5OKmReriPi2btPVPAA6
+	N9iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=E83UfHsUwX8J7rKizO/jhRJM4mNhkQKi/+4sRYP74Qw=;
-	b=RDKKNn9P0aeRf28mBPTh/n5lRb3eCnsQpgMf1XBitIP3nusx4BLnntekuWr0rRcGuK
-	pA+FKurYy9FanpssPYJGLJ8u2ySp4X+5VtiAz1L1NOROPIddcflq51V8pq6sN+uGoM2k
-	s6fcebaYgSsn3BqQOWbfjGiSZA204nOJAhMRqk1k9iS1yxqk5Fk3ICfKT3LHksI1IlK8
-	9N+jwadz2QxAM202lHQvVLLVfyHa6VTa2rZqxYO17RjugO8iCRNXzVx3OReU3GWwiHVK
-	FBl3SWB1plgew729JnCVEcdxEr9HWEEMBq4bCGj/a6Kc2zeMVlmqgLKHNIuTSfndVWOL
-	WVLQ==
-X-Gm-Message-State: APjAAAVTm+vtnlh2x30K7LnYpW+KHdyzKH/UcArtzrMSdMhuY5cn8HQC
-	/zobn3tlZa2V0MUslZ585uQ+k9gc8I4=
-X-Google-Smtp-Source: APXvYqyj45kq9WNPKDInkfmPtdELhMxmqDpDn3ScWFvYG00N5PU2ouMe/uTUGogFEGZLBHno0vZ4QA==
-X-Received: by 2002:a2e:8613:: with SMTP id a19mr12979334lji.163.1561154715369;
-	Fri, 21 Jun 2019 15:05:15 -0700 (PDT)
+	bh=yr1nwEMwCYyn5NaO/g68hYn1Yc5LFGbycUwhEitO9FA=;
+	b=pFkBGSSw7g/F+125WzdXro6dB/pmrTzTL6gAKTw6XPuwg35axurhXRKdlezAuMBQy2
+	WXuuj6qqiAHloOECtxI3hb9YVux2VAfOOboiolDFPt0zAisB7xfmwPGoEork9djqcGk3
+	dJ3mdF7x6vysKtoRXCoVxhNjsSNdCvUM7MFviknvwrLxxhWeQMWYbYN0xMRKBmhmJX5+
+	0ru5OEml+dPWMFraojHyfTGUtgXBSWUUghqtLuJgXECWRCCVOrTmMhoY27fiDZ6zfQyV
+	J/f2QR+94apKU20RbaykHuTcOwGk/xi/AvJXD/C89ehKtj/hHXTWFdTp4hbGdJULeXVt
+	dREg==
+X-Gm-Message-State: APjAAAX3Yh/gG9vUZQYZX6rv8lWLpeuyIW5HN5zW80ztGkfsF1/P8G4L
+	ldXdt5iGY9picX93hwU/Q+fQeU7HtM4=
+X-Google-Smtp-Source: APXvYqweWO4lNscjLfPg/wgAa97P6oEuhdUed60sbQ0fJyzH8Az1B/SqC2OHe7t5Pa2w16iIUvK00A==
+X-Received: by 2002:a2e:29c4:: with SMTP id p65mr46063495ljp.141.1561155264789;
+	Fri, 21 Jun 2019 15:14:24 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	e13sm552947ljg.102.2019.06.21.15.05.14
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id 25sm554664ljv.40.2019.06.21.15.14.24
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 21 Jun 2019 15:05:14 -0700 (PDT)
+	Fri, 21 Jun 2019 15:14:24 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Jun 2019 00:05:12 +0200
-Message-Id: <20190621220512.30211-1-open.source@oleksandr-kravchuk.com>
+Date: Sat, 22 Jun 2019 00:14:21 +0200
+Message-Id: <20190621221422.13592-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nghttp2: update to 1.39.1
+Subject: [PATCH][meta-networking 1/2] drbd-utils: update to 9.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 22:05:15 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 22:14:24 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../nghttp2/{nghttp2_1.38.0.bb => nghttp2_1.39.1.bb}        | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/nghttp2/{nghttp2_1.38.0.bb => nghttp2_1.39.1.bb} (63%)
+ .../drbd/{drbd-utils_9.8.0.bb => drbd-utils_9.10.0.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/drbd/{drbd-utils_9.8.0.bb => drbd-utils_9.10.0.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
-similarity index 63%
-rename from meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
-rename to meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
-index 42b437933..6077daf76 100644
---- a/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
-+++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
-@@ -4,9 +4,11 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+similarity index 94%
+rename from meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb
+rename to meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+index 70e04b943..d1189f108 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.8.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
+            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
+           "
+-# v9.8.0
+-SRCREV_drbd-utils = "c30216b49330216bf8a567b7727da6e24f099f08"
+-SRCREV_drbd-headers = "2357a11fb49bcbadf6b490e6d4cfe982a3d24813"
++# v9.10.0
++SRCREV_drbd-utils = "147860216bf307433e2d0d7cfd6fad3642027b8d"
++SRCREV_drbd-headers = "0955b3423f08f8e11ff05092bc1b766609fd804b"
  
-++UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
-+
- SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
--SRC_URI[md5sum] = "45b47086ee6da8171e11887c1665f275"
--SRC_URI[sha256sum] = "ef75c761858241c6b4372fa6397aa0481a984b84b7b07c4ec7dc2d7b9eee87f8"
-+SRC_URI[md5sum] = "02b015cb178c46f27dd87228e33db35f"
-+SRC_URI[sha256sum] = "679160766401f474731fd60c3aca095f88451e3cc4709b72306e4c34cf981448"
- 
- DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
+ S = "${WORKDIR}/git"
  
 -- 
 2.17.1
