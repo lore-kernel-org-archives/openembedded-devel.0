@@ -1,53 +1,23 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 919A47CF98
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F0406011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 08:31:38 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id r12so8903697edo.5
+	Fri, 21 Jun 2019 09:57:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5L9vH9C000250
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 01:31:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=93lA0f4bfTsdUvytvdJ4eGQmnaIIyQcR0kp+teSxpFM=;
-	b=fBV9GMBIHIz2UYXwf0r0qcbecsHX1jv9xM/x7uqvhKJyVgaFhITWV4Upz73Y4uq93h
-	oaJmAmahAGpvokc5Z4RcrSHQrgARFmbUY4EyXgjcbsKGXVaLBlC0LsmJtqRZfti8MeLV
-	F7hAs5029fExjNG8SWLxThx4/7dsSveQ3qRFR+A9HPg16BjAAqxj0fg9tZOAmBcb35PX
-	bmKN8yHFnViwF2cz1JGBEB7epRfqHU10ybkR8Whx94WFtCCb9rMoFmrxM+Lm7h8ulgXV
-	B2s8gXgTa+e7ZGQZtiTyWFnCRfBYQxidoaSWxh+w+/CCBBhQTBGgWjDHLGiYbGWSuMl8
-	U9VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:mime-version:content-transfer-encoding;
-	bh=93lA0f4bfTsdUvytvdJ4eGQmnaIIyQcR0kp+teSxpFM=;
-	b=fpnJQFzic1DzzAOAyN+pPJEASD5lUOOgXDPdqP7WdZ8HTZNhObOapLOtxefLEcJPlh
-	xTBFfa5RDsOix/F/FMOvDsbWrRdp6I9tGUDdWzJ/D/sd5Vd82cNBaK1cwgEDq8uZfVcY
-	b70fSttwUY6uT3T/eo08JjvZKffvTj0IPS2IKzXxkEMCuXdXnE9BLu26kzN8b9XQJ1qp
-	OxKmrRHLl8tww9JtnRHHmeEFYe5mBQX9R5TUKIGKyKvWBCceKbSO3KqE1XGb+Griogg6
-	70DslYO2q/lzuZ/S0c9zRogT3LaFeB0FrQoDAeP2Bf92AcrbO/kUlmObJ5ONwH3mEZfw
-	Q8vg==
-X-Gm-Message-State: APjAAAX6h1eaKgeN40G53+gfRaL0/xOMks0SuiaWuR291f8t7B1WGa4K
-	fx7BRuKmiJmm1A2Gs9IawGz5njC0o6U=
-X-Google-Smtp-Source: APXvYqxpQkFUXKWnfsWv6OZTrJ1tNQA0W+quYH8vucmaB4EVSUZ6GkGdfSRkbwwh6/5O9Lwo1ZDYvA==
-X-Received: by 2002:a17:906:4882:: with SMTP id
-	v2mr40950551ejq.100.1561105898947; 
-	Fri, 21 Jun 2019 01:31:38 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id 93sm617455edk.84.2019.06.21.01.31.37
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 21 Jun 2019 01:31:38 -0700 (PDT)
-Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jun 2019 10:31:36 +0200
-Message-Id: <20190621083136.21492-1-ricardo@ribalda.com>
-X-Mailer: git-send-email 2.20.1
+	Fri, 21 Jun 2019 02:57:17 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Fri, 21 Jun 2019 02:57:17 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Jun 2019 05:57:08 -0400
+Message-ID: <20190621095708.11282-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH] classpath: Fix build with aarch64
+Subject: [PATCH] xfce4-screensaver: 0.1.4 -> 0.1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,62 +30,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 08:31:38 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 09:57:16 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Fixes:
-| In file included from ../../../classpath-0.99/native/fdlibm/fdlibm.h:36,
-|                  from ../../../classpath-0.99/native/fdlibm/e_exp.c:76:
-| ../../../classpath-0.99/native/fdlibm/ieeefp.h:163:2: error: #error Endianess not declared!!
-|  #error Endianess not declared!!
-|   ^~~~~
-| In file included from ../../classpath-0.99/native/fdlibm/fdlibm.h:40,
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+Upgrade xfce4-screensaver from 0.1.4 to 0.1.5.
+
+* install pam config file and add a patch to remove unsupported
+  syntax '@include'
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../classpath/classpath-0.99/aarch64.patch    | 19 +++++++++++++++++++
- recipes-core/classpath/classpath_0.99.bb      |  1 +
- 2 files changed, 20 insertions(+)
- create mode 100644 recipes-core/classpath/classpath-0.99/aarch64.patch
+ .../xfce4-screensaver/fix-pam-config.patch         | 14 ++++++++++++++
+ ...ensaver_0.1.4.bb => xfce4-screensaver_0.1.5.bb} | 13 ++++++++++---
+ 2 files changed, 24 insertions(+), 3 deletions(-)
+ create mode 100644 meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
+ rename meta-xfce/recipes-apps/xfce4-screensaver/{xfce4-screensaver_0.1.4.bb => xfce4-screensaver_0.1.5.bb} (64%)
 
-diff --git a/recipes-core/classpath/classpath-0.99/aarch64.patch b/recipes-core/classpath/classpath-0.99/aarch64.patch
+diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
 new file mode 100644
-index 0000000..4de40fb
+index 000000000..94cad23f8
 --- /dev/null
-+++ b/recipes-core/classpath/classpath-0.99/aarch64.patch
-@@ -0,0 +1,19 @@
-+Upstream-Status: Inappropriate [upstream is dead]
++++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
+@@ -0,0 +1,14 @@
++'@include' is not a standard sysntax and not supported by oe.
 +
-+Signed-off-by: Ricardo Ribalda <ricardo@ribalda.com>
++Upstream-Status: Submitted [https://bugzilla.xfce.org/show_bug.cgi?id=15626]
 +
-+diff --git a/native/fdlibm/ieeefp.h b/native/fdlibm/ieeefp.h
-+index c230bbb..700dd3a 100644
-+--- a/native/fdlibm/ieeefp.h
-++++ b/native/fdlibm/ieeefp.h
-+@@ -158,6 +158,10 @@
-+ #define __IEEE_BIG_ENDIAN
-+ #endif
-+ 
-++#ifdef __aarch64__
-++#define __IEEE_LITTLE_ENDIAN
-++#endif
-++
-+ #ifndef __IEEE_BIG_ENDIAN
-+ #ifndef __IEEE_LITTLE_ENDIAN
-+ #error Endianess not declared!!
-diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
-index 6aa3baa..714503a 100644
---- a/recipes-core/classpath/classpath_0.99.bb
-+++ b/recipes-core/classpath/classpath_0.99.bb
-@@ -14,6 +14,7 @@ SRC_URI += " \
-             file://toolwrapper-exithook.patch \
-             file://use_libdir.patch \
-             file://freetype2.patch \
-+            file://aarch64.patch \
-            "
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++diff --git a/data/xfce4-screensaver.common-auth b/data/xfce4-screensaver.common-auth
++index a9fd9ce..3bfea70 100644
++--- a/data/xfce4-screensaver.common-auth
+++++ b/data/xfce4-screensaver.common-auth
++@@ -1,2 +1,2 @@
++-@include common-auth
+++auth include common-auth
++ auth optional pam_gnome_keyring.so
+diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
+similarity index 64%
+rename from meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
+rename to meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
+index fb2be6609..4a1aae764 100644
+--- a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
++++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
+@@ -12,8 +12,15 @@ DEPENDS = "dbus-glib garcon gtk+3 libxklavier libxscrnsaver virtual/libx11 xfcon
  
- SRC_URI[md5sum] = "0ae1571249172acd82488724a3b8acb4"
+ inherit xfce-app
+ 
+-SRC_URI_append = " file://fix-cross-compile.patch"
+-SRC_URI[md5sum] = "18a619849f85c24d784c7fa27279ca4b"
+-SRC_URI[sha256sum] = "ed04ae32034b8e13a78495ca2bd7789a20ec7f67891ab9e92826a944371eabef"
++SRC_URI_append = " \
++    file://fix-cross-compile.patch \
++    file://fix-pam-config.patch \
++"
++SRC_URI[md5sum] = "982f9a355456320933ec08313523a567"
++SRC_URI[sha256sum] = "fdecf0fc432b59defba2dd706051696d47227ca0744c7971014021190126f2d5"
++
++do_install_append() {
++    install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sysconfdir}/pam.d/xfce4-screensaver
++}
+ 
+ FILES_${PN} += "${datadir}/dbus-1 ${datadir}/desktop-directories"
 -- 
-2.20.1
+2.20.0
 
 
