@@ -1,48 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D92CC7E553
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 19D637E7DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 17:29:01 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id w20so3522396edd.2
+	Fri, 21 Jun 2019 22:05:14 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id h10so7290970ljg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 10:29:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5T0LBYcBsxnyJwc9ilCZtMiTQyXXEzxOztqboBm+LhI=;
-	b=JveoAgcQzhSguMsRoZm0sC2ULx/SI7o1iKchQfKBN4ad5Lt5TuktPIX5qd0IC7LqDH
-	kh6xLN2mqCX+rxnN56vHuNlwJppaAYPgf7pI7YxG146DWtMrlJvQdoTYqQL+3tIw6B3n
-	U7mGynVle15Jy9edoYRPfoF5PDx40pI8I8fvcG5d7/hX8RImUseEcN3SZVBWdzJqyujx
-	rwLFJe69rpS7t+rsj8q3p8kD3V6+9r/TGMwCxx9LluIhO+RL4AMXoic8hTLuXmcKKPPL
-	sIeungzFzzpmWIXQnZOoppT2RTv7yiXtknolxkw2y6VDnLQowbS2r4KPforAnOGLJcla
-	KJYg==
+	Fri, 21 Jun 2019 15:05:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=E83UfHsUwX8J7rKizO/jhRJM4mNhkQKi/+4sRYP74Qw=;
+	b=cQs5e3m5yTNGU6doOOTVIq1usHaOSVYmrm+zCJl73kZ0NlwR7cTTvU2YTt6VEoJJ8q
+	EUkLSho1t9QuFemOnKKEUdet3UzX2c2YGEmHftnqBvQHU46ZIfEY8zUSJkbAN9oC3ZGC
+	39tzAQQk3JykLNMoyb6M2MfhlDrfJsAt5GTirvmct1tMIvnqgMfTXVibUBM70fnapnvJ
+	m1sKw6204f/rgYkZLo7Finuy4lSFA7TG42Hk1RkFxFRDV6R2CcRbI71K5TTrDMNYEufF
+	ZU4lmwGxO4mJVSbDyNukFZlpP1mMcypUAQ4FlJ49dKP7pZMd6mz1NRjxHml7yOZItM04
+	E91A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5T0LBYcBsxnyJwc9ilCZtMiTQyXXEzxOztqboBm+LhI=;
-	b=Onb66x0SrSd4w3kCgJKjIQrH5hnq9Notm8tXu164C8gRmqTsKLTp9zvG4uQXK5pT3C
-	p0QbWVsreZSvMwRcJPYs6sCAjd9b29VsVwnQnRmqUedcipaPUDFLSnQqTIX31C4jDn0A
-	Yr7UZvFB/cUZNQ1zWjApEdW85gMt0KA49U4dMXwe9PBHl4WHeWvTX+73pbDhN8+HzHHs
-	pKcA/ka5i5cLivAfVlfJMtEw5K6AVHzTlH083l7sknzXtnYx+nDKm9p96ANDGj9WkuQt
-	y+m53gyfhZcJZiB8Ujh8PQf+9xet6vz83rKLD2m2xeEBdbZjsin1hXbjv6XRYNl8Q43E
-	M9MQ==
-X-Gm-Message-State: APjAAAVi5JsyGP1ODlA5Y4jDMAKv3hoXjcLCL/O7sAgcCI6zh2XH0xaL
-	xj3WMrzUGyYcyeinRNO5b37lue3i1KmDhqbvpno=
-X-Google-Smtp-Source: APXvYqzzDi59id5Rr5oHO9oWU7hgPadIWTgVTTOFAcOT+3i02z8vuZyx7U0C39e4XU4ZMbrf2MEFEkuL+yWRjrnB1xA=
-X-Received: by 2002:a50:8be8:: with SMTP id
-	n37mr126817606edn.216.1561138142627; 
-	Fri, 21 Jun 2019 10:29:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190621151424.25736-1-ankit.tarot@gmail.com>
-In-Reply-To: <20190621151424.25736-1-ankit.tarot@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 21 Jun 2019 19:28:51 +0200
-Message-ID: <CA+chaQfj9RQPmPKKzw-uzNTy9xPh5euJ6yFBt3bAW9W9h_uDuQ@mail.gmail.com>
-To: Ankit Navik <ankit.tarot@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] safec: Remove aarch64 from COMPATIBLE_HOST
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=E83UfHsUwX8J7rKizO/jhRJM4mNhkQKi/+4sRYP74Qw=;
+	b=RDKKNn9P0aeRf28mBPTh/n5lRb3eCnsQpgMf1XBitIP3nusx4BLnntekuWr0rRcGuK
+	pA+FKurYy9FanpssPYJGLJ8u2ySp4X+5VtiAz1L1NOROPIddcflq51V8pq6sN+uGoM2k
+	s6fcebaYgSsn3BqQOWbfjGiSZA204nOJAhMRqk1k9iS1yxqk5Fk3ICfKT3LHksI1IlK8
+	9N+jwadz2QxAM202lHQvVLLVfyHa6VTa2rZqxYO17RjugO8iCRNXzVx3OReU3GWwiHVK
+	FBl3SWB1plgew729JnCVEcdxEr9HWEEMBq4bCGj/a6Kc2zeMVlmqgLKHNIuTSfndVWOL
+	WVLQ==
+X-Gm-Message-State: APjAAAVTm+vtnlh2x30K7LnYpW+KHdyzKH/UcArtzrMSdMhuY5cn8HQC
+	/zobn3tlZa2V0MUslZ585uQ+k9gc8I4=
+X-Google-Smtp-Source: APXvYqyj45kq9WNPKDInkfmPtdELhMxmqDpDn3ScWFvYG00N5PU2ouMe/uTUGogFEGZLBHno0vZ4QA==
+X-Received: by 2002:a2e:8613:: with SMTP id a19mr12979334lji.163.1561154715369;
+	Fri, 21 Jun 2019 15:05:15 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	e13sm552947ljg.102.2019.06.21.15.05.14
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Fri, 21 Jun 2019 15:05:14 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 22 Jun 2019 00:05:12 +0200
+Message-Id: <20190621220512.30211-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] nghttp2: update to 1.39.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 17:29:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Jun 2019 22:05:15 -0000
 
-FWIW: I've the same commit with "slightly" longer commit message in
-jansa/master branch:
-http://git.openembedded.org/meta-openembedded-contrib/commit/?h=jansa/master&id=ec8d03074c65ce1dfa90b740f2b074086371139b
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../nghttp2/{nghttp2_1.38.0.bb => nghttp2_1.39.1.bb}        | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/nghttp2/{nghttp2_1.38.0.bb => nghttp2_1.39.1.bb} (63%)
 
+diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
+similarity index 63%
+rename from meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
+index 42b437933..6077daf76 100644
+--- a/meta-networking/recipes-support/nghttp2/nghttp2_1.38.0.bb
++++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
+@@ -4,9 +4,11 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
+ 
+++UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
++
+ SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
+-SRC_URI[md5sum] = "45b47086ee6da8171e11887c1665f275"
+-SRC_URI[sha256sum] = "ef75c761858241c6b4372fa6397aa0481a984b84b7b07c4ec7dc2d7b9eee87f8"
++SRC_URI[md5sum] = "02b015cb178c46f27dd87228e33db35f"
++SRC_URI[sha256sum] = "679160766401f474731fd60c3aca095f88451e3cc4709b72306e4c34cf981448"
+ 
+ DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
+ 
+-- 
+2.17.1
 
-On Fri, Jun 21, 2019 at 5:14 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
-
-> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
-> ---
->  meta-oe/recipes-core/safec/safec_3.4.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
-> b/meta-oe/recipes-core/safec/safec_3.4.bb
-> index d55d081f346b..b4c125faf433 100644
-> --- a/meta-oe/recipes-core/safec/safec_3.4.bb
-> +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-> @@ -10,6 +10,6 @@ S = "${WORKDIR}/git"
->  SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
->  SRC_URI = "git://github.com/rurban/safeclib.git"
->
-> -COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
-> +COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm).*-linux'
->
->  RDEPENDS_${PN} = "perl"
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
