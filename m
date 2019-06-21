@@ -1,23 +1,52 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F0406011C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 28F257CF7D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 09:57:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5L9vH9C000250
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 21 Jun 2019 13:12:34 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id y57so6842324qtk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 02:57:17 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 21 Jun 2019 02:57:17 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Jun 2019 05:57:08 -0400
-Message-ID: <20190621095708.11282-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Fri, 21 Jun 2019 06:12:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=wi6SsljQ2Fpjg3AgZsrQB20PwEFt/5y+QzG6sY/ibvA=;
+	b=IB3vlKaSBFvRZOFXES2O8aLKHmlgsZ4RLJO5i2awC6DFWjb1cOB6K/x7C3+GCU/GUA
+	82okj77bBpIFTymHsXJotLNphHLsFHp5RSpWsC7r4REs4SIDoJTV/wQxKHz0Jwv6cGIZ
+	N3k8C05v/qLkvSXoMFyiVRFJ2ctyBt9K5xEIh35uedFC21ZaN5zQANOVU/hIQXe4+Zgo
+	EqxHGl7gg3F5q8FjCKX/0OPLWp9QnyfvaMgUoYjsziUe5iD1HE06yCOyaPbfZwKTovTX
+	0LBtUn6yVAxtcX2OhvY9tn0p6aZRtgSreoN+QX2/vlVSlO6NzcbSm8adqLjnq7aYE9mo
+	As/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=wi6SsljQ2Fpjg3AgZsrQB20PwEFt/5y+QzG6sY/ibvA=;
+	b=fi+4pncHFxUaTXPtQ11cwXxgPu0qWYuhac1Ruzfp4waO8sIGPfNnfkh8op8emPE0yV
+	bzrZv8XaeQ17rNQLB+z5aAk1ZbHjoKFTqrJxKKMv90VyUGh5sX+HyctnagURmudjJnF/
+	eUvhUfAnGbnNNDlYnScf5FhE4YofjAJ5l6ipwnbo2dJXIhSlJcjjXqdx+KNchSZg8Bei
+	r/er4CKjSRptk2p7xta2c5OxG91BYfSwUMid8FQUzjzv5q+YkIdHYb2xt5lAfPqVNHd6
+	PkZycyf63dNylMxxbDEvuDyPQ4j5NKG3a/uBbBNMigP+NAZbAqyGPKkWIlTR7TqcvkF8
+	0Ugw==
+X-Gm-Message-State: APjAAAU+HU/mEQsSfTnfBFGzpl90+EUGrEx+L5Jht6/f2yGzYxQP707W
+	2G41JJ+Ot7WgkEFosp8dWuh+Yt2TPdfy/qwtOEw=
+X-Google-Smtp-Source: APXvYqzEJ5gQhNVBJy9LoWYbTbe26UM1nwRnHu86KaQ6yi1dZWNZTlj5ZZy1F/9Cpwwhm90qplUAz/idS3D10aCKbag=
+X-Received: by 2002:a0c:b0ce:: with SMTP id p14mr44880809qvc.51.1561122754758; 
+	Fri, 21 Jun 2019 06:12:34 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] xfce4-screensaver: 0.1.4 -> 0.1.5
+References: <20190529084806.13342-1-ankit.tarot@gmail.com>
+	<CAMKF1soiTZwgAQM3-RD6PttxUJw88rLqpvomL-0j9X1sCJn9qQ@mail.gmail.com>
+	<CAM_RqkNM+uqH4HsM6Y=cdWpPSJLyDoXUaf5_rY++fYwXy42W5A@mail.gmail.com>
+	<CA+chaQcaiox8wTmgf9V6-Pp0a9zMcZaurX9yDoubgY1_s7rhfQ@mail.gmail.com>
+	<CA+chaQcUxQX_k-c_qDu_XNR+39B-trmqih9fSAbHU=1y_9mBSQ@mail.gmail.com>
+	<CAM_RqkPzmXNUkTZxt0H-FgvPiG4V0HEYPOJ1joet0NxWa8DDsA@mail.gmail.com>
+In-Reply-To: <CAM_RqkPzmXNUkTZxt0H-FgvPiG4V0HEYPOJ1joet0NxWa8DDsA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 21 Jun 2019 07:12:23 -0600
+Message-ID: <CAMKF1sq0f9zP46zQ9ZkjbTQ+Tp-m36hBoSt_o4APBjJfsfvSXw@mail.gmail.com>
+To: Ankit Navik <ankit.tarot@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,72 +59,247 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 09:57:16 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Jun 2019 13:12:34 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Kai Kang <kai.kang@windriver.com>
+On Fri, Jun 21, 2019 at 12:20 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
 
-Upgrade xfce4-screensaver from 0.1.4 to 0.1.5.
+> Hi Martin,
+>
+> On Fri, Jun 21, 2019 at 12:39 AM Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+>
+>> And there is also:
+>> WARNING: safec-3.4-r0 do_populate_lic: safec: No generic license file
+>> exists for: safec in any provider
+>>
+>> Add the license text to the meta-oe/licenses/ directory.
+>>
+>  I have already added licenses.
+> https://patchwork.openembedded.org/patch/161305/
+> There are no comment on the patch but it is in change requested state.
+>
 
-* install pam config file and add a patch to remove unsupported
-  syntax '@include'
+It was part of series where one patch was in that state and was updated and
+applied but this one missed out resending full series would have helped I
+will cherry pick this again
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../xfce4-screensaver/fix-pam-config.patch         | 14 ++++++++++++++
- ...ensaver_0.1.4.bb => xfce4-screensaver_0.1.5.bb} | 13 ++++++++++---
- 2 files changed, 24 insertions(+), 3 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
- rename meta-xfce/recipes-apps/xfce4-screensaver/{xfce4-screensaver_0.1.4.bb => xfce4-screensaver_0.1.5.bb} (64%)
-
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
-new file mode 100644
-index 000000000..94cad23f8
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-pam-config.patch
-@@ -0,0 +1,14 @@
-+'@include' is not a standard sysntax and not supported by oe.
-+
-+Upstream-Status: Submitted [https://bugzilla.xfce.org/show_bug.cgi?id=15626]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/data/xfce4-screensaver.common-auth b/data/xfce4-screensaver.common-auth
-+index a9fd9ce..3bfea70 100644
-+--- a/data/xfce4-screensaver.common-auth
-++++ b/data/xfce4-screensaver.common-auth
-+@@ -1,2 +1,2 @@
-+-@include common-auth
-++auth include common-auth
-+ auth optional pam_gnome_keyring.so
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
-similarity index 64%
-rename from meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
-rename to meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
-index fb2be6609..4a1aae764 100644
---- a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.4.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.5.bb
-@@ -12,8 +12,15 @@ DEPENDS = "dbus-glib garcon gtk+3 libxklavier libxscrnsaver virtual/libx11 xfcon
- 
- inherit xfce-app
- 
--SRC_URI_append = " file://fix-cross-compile.patch"
--SRC_URI[md5sum] = "18a619849f85c24d784c7fa27279ca4b"
--SRC_URI[sha256sum] = "ed04ae32034b8e13a78495ca2bd7789a20ec7f67891ab9e92826a944371eabef"
-+SRC_URI_append = " \
-+    file://fix-cross-compile.patch \
-+    file://fix-pam-config.patch \
-+"
-+SRC_URI[md5sum] = "982f9a355456320933ec08313523a567"
-+SRC_URI[sha256sum] = "fdecf0fc432b59defba2dd706051696d47227ca0744c7971014021190126f2d5"
-+
-+do_install_append() {
-+    install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sysconfdir}/pam.d/xfce4-screensaver
-+}
- 
- FILES_${PN} += "${datadir}/dbus-1 ${datadir}/desktop-directories"
--- 
-2.20.0
-
+>
+> Regards,
+> Ankit
+>
+> On Tue, Jun 18, 2019 at 8:02 AM Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>>
+>>> Hi,
+>>>
+>>> it seems to fail for aarch64, I've noticed it in world build for
+>>> raspberrypi3-64:
+>>>
+>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>> -Wformat-security -Werror=format-security
+>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>> -feliminate-unused-debug-types
+>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>> -c ../../git/src/wchar/wcscpy_s.c  -fPIC -DPIC -o wchar/.libs/wcscpy_s.o
+>>> {standard input}: Assembler messages:
+>>> {standard input}:161: Error: unknown mnemonic `memory_barrier' --
+>>> `memory_barrier'
+>>> {standard input}:389: Error: unknown mnemonic `memory_barrier' --
+>>> `memory_barrier'
+>>> {standard input}:649: Error: unknown mnemonic `memory_barrier' --
+>>> `memory_barrier'
+>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>> -Wformat-security -Werror=format-security
+>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>> -feliminate-unused-debug-types
+>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>> -c ../../git/src/wchar/wcsncpy_s.c  -fPIC -DPIC -o wchar/.libs/wcsncpy_s.o
+>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>> -Wformat-security -Werror=format-security
+>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>> -feliminate-unused-debug-types
+>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>> -c ../../git/src/wchar/wmemcpy_s.c  -fPIC -DPIC -o wchar/.libs/wmemcpy_s.o
+>>> ../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
+>>> aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
+>>>  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>> -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
+>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>> -Wno-error=missing-field-initializers  -O2 -pipe -g
+>>> -feliminate-unused-debug-types
+>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>   -c -o wchar/wscanf_s.lo ../../git/src/wchar/wscanf_s.c
+>>> ../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
+>>> aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
+>>>  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>> -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
+>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>> -Wno-error=missing-field-initializers  -O2 -pipe -g
+>>> -feliminate-unused-debug-types
+>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>
+>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>   -c -o wchar/vfwscanf_s.lo ../../git/src/wchar/vfwscanf_s.c
+>>> Makefile:1432: recipe for target 'mem/mem_primitives_lib.lo' failed
+>>> make[2]: *** [mem/mem_primitives_lib.lo] Error 1
+>>> make[2]: *** Waiting for unfinished jobs....
+>>>
+>>> On Wed, May 29, 2019 at 12:31 PM Ankit Navik <ankit.tarot@gmail.com>
+>>> wrote:
+>>>
+>>>> Hi Raj,
+>>>>
+>>>> On Wed, May 29, 2019 at 2:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>>>
+>>>> > On Wed, May 29, 2019 at 10:48 AM Ankit Navik <ankit.tarot@gmail.com>
+>>>> > wrote:
+>>>> > >
+>>>> > > Add generic recipe for safe C library.
+>>>> > > This library implements the secure C11 Annex K functions on top of
+>>>> most
+>>>> > libc
+>>>> > > implementations, which are missing from them.
+>>>> > >
+>>>> > > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+>>>> > > ---
+>>>> > >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
+>>>> > >  1 file changed, 15 insertions(+)
+>>>> > >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+>>>> > >
+>>>> > > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>> > b/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>> > > new file mode 100644
+>>>> > > index 000000000..d55d081f3
+>>>> > > --- /dev/null
+>>>> > > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>> > > @@ -0,0 +1,15 @@
+>>>> > > +SUMMARY  = "Safe C Library"
+>>>> > > +
+>>>> > > +LICENSE  = "safec"
+>>>> > > +LIC_FILES_CHKSUM =
+>>>> "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
+>>>> > > +SECTION = "lib"
+>>>> > > +
+>>>> > > +inherit autotools pkgconfig
+>>>> > > +
+>>>> > > +S = "${WORKDIR}/git"
+>>>> > > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
+>>>> > > +SRC_URI = "git://github.com/rurban/safeclib.git"
+>>>> > > +
+>>>> > > +COMPATIBLE_HOST =
+>>>> '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
+>>>> > > +
+>>>> >
+>>>> > I see its excluding mips/mips64 from core supported architectures, is
+>>>> > that intentional ?
+>>>> >
+>>>>
+>>>> I'm not sure. This library is required for another component i.e.
+>>>> ipmctl.
+>>>>
+>>>> Regards,
+>>>> Ankit
+>>>>
+>>>> >
+>>>> > > +RDEPENDS_${PN} = "perl"
+>>>> > > --
+>>>> > > 2.20.1
+>>>> > >
+>>>> > > --
+>>>> > > _______________________________________________
+>>>> > > Openembedded-devel mailing list
+>>>> > > Openembedded-devel@lists.openembedded.org
+>>>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>> >
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>
+>>>
 
