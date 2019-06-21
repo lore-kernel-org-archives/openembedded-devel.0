@@ -1,42 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 14FC17E7E6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 13:46:49 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id y57so6962220qtk.4
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jun 2019 06:46:51 -0700 (PDT)
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D40427E790
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jun 2019 15:09:27 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id x15so3773262pfq.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Jun 2019 08:09:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=InxHHitLnixp2yX9qcFSEXha+pdiHb10UnBZbbsDE4Y=;
-	b=V0TaE8vkcutD2BBjQoZomDYVnm7E6M3gtJ0WuJ6yfpnQqWty9HqS9iOcu81YwapyaD
-	2HQoSZJsekpI2lTxf424a0foHytJqZeJ9FSEDcvXtUcPWjqo49Lu7wZ3e1KgUoM5DyAz
-	pjawrlOLWLNjpk+/lchNCUQyacaLSqKp+9oGHkPhr25hmGqFtusXwgje9faXHlOOKlck
-	yttLYHFaUSr79eyI0sOog/H0aimdUETWJ4qkZKkcn/uDEQl5tLn3m6uTZekr70WeuJLP
-	XjqW1pKM2f439hlLIyQy8rIvLgMQmSlEeZVhYU71cp25v3/cf7hCXaiQjPgDvt8vFqEV
-	mnSQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=71aqJHa8CjhMqqY/TzasVgy1EPK/iDbQQt4ErI0g65c=;
+	b=FT6WHJ8XVjoUnKAFSgAlrSXPDyC0OAzHdDHf12d0RnNjcjI5gK+ydvhrHtGfZbnA32
+	0ZDGLlzVLikdD37Vk+TmMqlUGc7tNbo4eGZaiuEgcARYiSu7XLYEXg3zSukPHtI+RI7w
+	uJKWIfs5njSub0NCiiQx4kPe/VsciuVcyHbHAAA4jFjiQKPreVPqxPOw5RNcTbPMdvn3
+	zJCbAMYXcBIeLuIP/2RtdYwkvUDlxPEd76khOUrkGY+eFSlb3BpnbCF1g21AMKyHgFic
+	qDS4juhBfG+rAz4YVcl3jhBpLu6Z+cvCPA3uPeJJ0A0godQvDBiM4Fg+wkqOf05qu0gE
+	SvFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=InxHHitLnixp2yX9qcFSEXha+pdiHb10UnBZbbsDE4Y=;
-	b=FTrQTejRqqyCk2UCMnw4KFWtweiPc0o136GsCg4brBifrLsxuB6hJ+PYedS/IKL8P3
-	fbRy8RSdQjCJBiWPEKG+6zUn3dIGYfNA3CBtOa1tpKLZHA3EWJ2nS3bNj8i34ruNOOAW
-	+A6OyLzCDw347RIfwG8XZvp0USpn0rlcI2E1wl/ifJt6aW2fi8DY1aFHs42N8ttbzSRz
-	tJQQJ815ALlKyshrS0rl+/N5GoEs4L0WI9GZKGKmphVbls//5PaRSNwU2aoQzAcXOVaz
-	E+bPGxgWt0yQbZheF539xS2+5O3I8T4Ad02XqN3tr7Q3PakuDVNgt8kaBUEtWu43xvg4
-	9EKA==
-X-Gm-Message-State: APjAAAXB6L6F7tqp1DbXCObwe5ur/MzHxnRcLCOSBss2cxXRJBM5gMz4
-	/QfvKMJVf6sf2JdP+7HcLlzEuuGVvPMIgKfsV6Nh3+ky8Q4=
-X-Google-Smtp-Source: APXvYqxjMgLrki/lP6FVXU0PLNfCQxsxBSA5Ip26RMqWXGh0o1MmiDFEc07E4qTkKQ+3qrjhsbLxCPLdyonivm3AGLw=
-X-Received: by 2002:a0c:ae5a:: with SMTP id z26mr44713683qvc.65.1561124810178; 
-	Fri, 21 Jun 2019 06:46:50 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=71aqJHa8CjhMqqY/TzasVgy1EPK/iDbQQt4ErI0g65c=;
+	b=WhmIWAbMBgEynOPHh89ayta7EKt0tCbsXhNmbwCIWGmc9dIDlWuoufD8XxDmpHywdT
+	+KGE2UEZzWWYPD8kvEhCgcp6g7Jc7+AJexLw4taU87jUUukmomopD2QmHsBGvdOqGolf
+	P54qDH4M/5h1PcHZHRHVyFFRqXFPd5SvUlF5JMzF6kW+ctIlQ5TyXvcPSjqNMCGrbuqv
+	r4u5dyCrq/8EH79CrLyx5WAKzOgna7u3HNgrtvumv8i3ftKFIt8w9jPYDh/JQSuUTpcQ
+	HzgbPj6NDzP7bke7TuX/alWxc0VNAg+7NIGeeC1FOPQmb6j7Fr5rS8WvC2nBrp5cy0Jz
+	bQgA==
+X-Gm-Message-State: APjAAAXT4pyiIv3wOYQRV5a+9QsPM6mkg+6g3taK3qiRexe5Nau+SZym
+	h8RTdnEjO4oDAPeOyvYqeKFVfDt+M4f3oJiKh/0=
+X-Google-Smtp-Source: APXvYqyvTBIhNvl/osMEqWwXv2vaEPAQQPjGEyF7OGoQemeWy8xYKuuVK/OOzTfUFMhVchoeoyoYIwCEfass9EIujis=
+X-Received: by 2002:a63:5726:: with SMTP id l38mr19615557pgb.344.1561129768756;
+	Fri, 21 Jun 2019 08:09:28 -0700 (PDT)
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Jun 2019 07:46:24 -0600
-Message-ID: <CAMKF1sq9A588GMOHSQQMiSHLqxHJQvBs+Ts0P0XA8DFVoo1FxA@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of OE World, 2019-06-19
+References: <20190529084806.13342-1-ankit.tarot@gmail.com>
+	<CAMKF1soiTZwgAQM3-RD6PttxUJw88rLqpvomL-0j9X1sCJn9qQ@mail.gmail.com>
+	<CAM_RqkNM+uqH4HsM6Y=cdWpPSJLyDoXUaf5_rY++fYwXy42W5A@mail.gmail.com>
+	<CA+chaQcaiox8wTmgf9V6-Pp0a9zMcZaurX9yDoubgY1_s7rhfQ@mail.gmail.com>
+	<CA+chaQcUxQX_k-c_qDu_XNR+39B-trmqih9fSAbHU=1y_9mBSQ@mail.gmail.com>
+	<CAM_RqkPzmXNUkTZxt0H-FgvPiG4V0HEYPOJ1joet0NxWa8DDsA@mail.gmail.com>
+	<CAMKF1sq0f9zP46zQ9ZkjbTQ+Tp-m36hBoSt_o4APBjJfsfvSXw@mail.gmail.com>
+In-Reply-To: <CAMKF1sq0f9zP46zQ9ZkjbTQ+Tp-m36hBoSt_o4APBjJfsfvSXw@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Fri, 21 Jun 2019 20:39:17 +0530
+Message-ID: <CAM_RqkMtOhH5e+WR+-NP2bgMEXg+qve-B2V_V7MwEk1=EpHAdg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] safec: Initial recipe for safe C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,347 +60,262 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 13:46:50 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 15:09:28 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-After a while now jenkins builds are working again. here are latest
-run results for details check
-https://www.openembedded.org/wiki/Bitbake_World_Status_Zeus
+Hi Raj,
 
-== Failed tasks 2019-06-19 ==
+On Fri, Jun 21, 2019 at 6:42 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-INFO: jenkins-job.sh-1.8.45 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190621_062638.log
+>
+>
+> On Fri, Jun 21, 2019 at 12:20 AM Ankit Navik <ankit.tarot@gmail.com>
+> wrote:
+>
+>> Hi Martin,
+>>
+>> On Fri, Jun 21, 2019 at 12:39 AM Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>>
+>>> And there is also:
+>>> WARNING: safec-3.4-r0 do_populate_lic: safec: No generic license file
+>>> exists for: safec in any provider
+>>>
+>>> Add the license text to the meta-oe/licenses/ directory.
+>>>
+>>  I have already added licenses.
+>> https://patchwork.openembedded.org/patch/161305/
+>> There are no comment on the patch but it is in change requested state.
+>>
+>
+> It was part of series where one patch was in that state and was updated
+> and applied but this one missed out resending full series would have helped
+> I will cherry pick this again
+>
+Thanks for the information. I will take care next time.
+and I will submit patch to aarch64 from safec.
 
-=== common (2) ===
-    * sources/meta-openembedded/meta-oe/recipes-devtools/openocd/openocd_git.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb:do_compile
+Regards,
+Ankit
 
-=== common-x86 (0) ===
-
-=== qemuarm (10) ===
-    * sources/meta-browser/dynamic-layers/rust-layer/recipes-browser/firefox/firefox_60.4.0esr.bb:do_compile
-    * sources/meta-browser/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.90.bb:do_compile
-    * sources/meta-freescale/recipes-kernel/kernel-modules/kernel-module-qca6174_2.1.bb:do_compile
-    * sources/meta-freescale/recipes-kernel/kernel-modules/kernel-module-qca9377_2.1.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_install
-    * sources/meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
-    * sources/meta-rust/recipes-devtools/rust/rust_1.34.2.bb:do_compile
-    * sources/openembedded-core/meta/recipes-multimedia/mpeg2dec/mpeg2dec_0.5.1.bb:do_package_qa
-
-=== qemuarm64 (5) ===
-    * sources/meta-browser/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.100.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-core/safec/safec_3.4.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qtquickcontrols2_git.bb:do_package_qa
-
-=== qemux86 (7) ===
-    * sources/meta-browser/recipes-browser/chromium/chromium-x11_75.0.3770.90.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/breakpad/breakpad_git.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb:do_compile
-    * sources/meta-rust/recipes-devtools/rust/libstd-rs_1.34.2.bb:do_compile
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (39) ===
-{| class=wikitable
-|-
-|| qemuarm || 12 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190618_213721.log/
-||
-|-
-|| qemuarm64 || 13 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190619_114514.log/
-||
-|-
-|| qemux86 || 11 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190618_213711.log/
-||
-|-
-|| qemux86_64 || 3 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190619_092706.log/
-||
-|}
-
-=== PNBLACKLISTs (2) ===
-
-=== QA issues (2) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||build-deps
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||0 ||unknown-configure-option
-|-
-||0 ||version-going-backwards
-|-
-||1 ||host-user-contaminated
-|-
-||1 ||textrel
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190620_024235.log/
-
-
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-480p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemux86copy
-in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-480p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemux86 in
-/home/jenkins/oe/world/yoe/build/tmpfs/stamps
-    * ERROR: Nothing RPROVIDES 'bigbuckbunny-720p' (but
-/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-RDEPENDS on or otherwise requires it)
-    * ERROR: Required build target 'meta-world-pkgdata' has no
-buildable providers.
-    * ERROR: no sigdata files were generated for MACHINE qemuarm in
-/home/jenkins/oe/world/yoe/build/tmpfs/stamps
-
-
-PNBLACKLISTs:
-sources/meta-96boards:
-sources/meta-atmel:
-sources/meta-browser:
-sources/meta-freescale:
-sources/meta-freescale-3rdparty:
-sources/meta-intel:
-sources/meta-odroid:
-sources/meta-openembedded:
-meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb:PNBLACKLIST[librcf]
-= " error: invalid use of incomplete type 'RCF::AsioIoService {aka
-class boost::asio::io_service}; among others?"
-sources/meta-qcom:
-sources/meta-qt5:
-sources/meta-raspberrypi:
-sources/meta-riscv:
-sources/meta-rust:
-sources/meta-ti:
-sources/meta-variscite-fslc:
-sources/meta-yoe:
-sources/openembedded-core:
-meta/lib/oeqa/selftest/cases/imagefeatures.py:PNBLACKLIST[busybox] =
-"Don't build this"
-PNBLACKLIST[android-system] = "depends on lxc from
-meta-virtualiazation which isn't included in my world builds"
-PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-directory in /home/builder/poky :/"
-PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
-PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
-PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
-PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
-PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
-PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 1 issue: textrel
-mpeg2dec-0.5.1: ELF binary
-'/tmp/work/armv7vet2hf-neon-yoe-linux-gnueabi/mpeg2dec/0.5.1-r0/packages-split/libmpeg2/usr/lib/libmpeg2.so.0.1.0'
-has relocations in .text [textrel]
-
-
-count: 0 issue: build-deps
-
-
-count: 0 issue: file-rdeps
-
-
-count: 0 issue: version-going-backwards
-
-
-count: 1 issue: host-user-contaminated
-qtquickcontrols2-5.12.3+gitAUTOINC+f7ba074ca1: qtquickcontrols2:
-/qtquickcontrols2-qmlplugins/usr/lib/qml/QtQuick/Controls.2/Fusion/TabBar.qml
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination [host-user-contaminated]
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 0 issue: unknown-configure-option
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/yoe ~/oe/world/yoe
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-19291f7c cooker: list all nonexistent bblayer directories
-not included in master yet:
-
-== Tested changes (not included in master yet) - openembedded-core ==
-latest upstream commit:
-b071a1a209 gcc-runtime: fix C++ header mapping for n32/x32 tune
-not included in master yet:
-d0a30c1c57 runtime/cases/logrotate: make test more reliable
-40ea686112 libevent:upgrade 2.1.8 -> 2.1.10
-7ddbe6483d libevdev:upgrade 1.6.0 -> 1.7.0
-8a21559bd4 target-sdk-provides-dummy: add libperl.so.5 to DUMMY_PROVIDES
-b34486a616 gnutls:upgrade 3.6.7 -> 3.6.8
-825be9d66a gnupg:upgrade 2.2.15 -> 2.2.16
-e3b7cb02a8 curl:upgrade 7.64.1 -> 7.65.1
-dc25e95254 lttng-ust:upgrade 2.10.3 -> 2.10.4
-23dfbb2746 xkeyboard:upgrade 2.26 -> 2.27
-3b556cbdff gobject-introspection:upgrade 1.60.1 -> 1.60.2
-c7b0823f9a wic/bootimg-efi: allow multiple initrd
-24f4b2a8f2 libffi: Add RISC-V support
-112ca2174d opensbi: Initial commit of OpenSBI
-11b6020dff qemuriscv64: Add the QEMU RISC-V 64-bit machine
-7cc98b0f34 linux-yocto: Mark qemuriscv64 as compatible
-2abfbf1869 systemd-conf: not configure network for nfs root
-7ce8b1bc51 serf: stop scons trying to create directories in hosts rootfs
-00c5a665b4 wireless-regdb: Add recipe
-05c9fb5a02 glib-2.0: fix host path appearing in gsocketclient-slow test script
-580d7f3325 dpkg: Use less as pager
-3e09c8b5b6 rng-tools: 6.6 -> 6.7
-f7a470531d meson: Fix native patch to python3
-4e315dd23c rootfs: Fix dependency for every dpkg run
-2106a56782 python3: python3: Fix build error x86->x86
-641529503a libxcrypt: Switch to disable obsolete APIs
-f6a064d02c libxcrypt-compat: Add recipe to build the obsolete APIs
-43a7a213a9 uninative-tarball: Add libxcrypt-compat
-b052d76678 createrepo-c: upgrade 0.14.0 -> 0.14.2
-ba107eb246 libmodulemd: upgrade 2.4.0 -> 2.5.0
-55c410fd9f vala: upgrade 0.44.3 -> 0.44.5
-e8e6e4593f libnewt: merge libnewt-python recipe into the main recipe
-712fadb95c epiphany: update to 3.32.3
-75e255a95e btrfs-tools: update to 5.1.1
-461094cbef cve-update-db: New recipe to update CVE database
-6c6c16a9a0 cve-check: Remove dependency to cve-check-tool-native
-d8ae775458 cve-check: Manage CVE_PRODUCT with more than one name
-c52d5b4f8c cve-check: Consider CVE that affects versions with less than operator
-da6f7e81aa oeqa/logparser: ignore test failure commentary
-bbb403936c openssh: Add missing DEPENDS on virtual/crypt
-0aa57768ed recipes: Add runit and related recipes
-7e974240da oeqa: Recognise svlogd as another logger
-f257206468 pam_systemd: Include missing.h for secure_getenv
-9dceda5291 musl-obstack: Add recipe
-23792d6f87 elfutils: Fix eu-* utils builds for musl
-d11ea758f2 maintainers: Account for musl-obstack and libssp-nonshared
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-latest upstream commit:
-3b245e4fe openipmi: upgrade 2.0.25 -> 2.0.27
-not included in master yet:
-10c39b96a blueman_%.bbappend: Avoid PAK archive (application/x-pak)
-0e342ecaa gitver: Pass git directory argument to gitrev_run
-70c2f87bf recipes-benchmark/stressapptest_1.0.9.bb: add recipe
-36fcb1a8d stressapptest: Fix build with libc++
-5673dae7b stressapptest: Implement reading sysfs and use it if sysconf
-is not there
-8b5ebbf6e stressapptest: Use git SHA instead of git archive
-d7a9d7089 libgpiod: upgrade to v1.4
-e3875cdcf libp11: No need to delete *.la anymore
-e49a68fa6 libauthen-radius-perl: Remove manual RDEPENDS from PN-ptest
-to PN package
-52a326728 mariadb: Upgrade to 10.3.16
-50440a488 protobuf: 3.6.1 -> 3.8.0
-fb3bd9c06 protobuf-c: add patch for protobuf 3 compatibility
-1e0ec61f7 python3-protobuf, python-protobuf: 3.6.1 -> 3.8.0
-d29f84835 python-twisted: upgrade 19.2.0 -> 19.2.1
-86407337b pm-graph: fix multilib build failure
-e01261885 network-manager-applet: Remove obsolete dbus-glib and
-libnm-glib dependencies
-7727e4cb9 ndctl: Remove the unnecessary dependency on virtual/kernel
-4257adeeb tipcutils: Remove the unnecessary dependency on virtual/kernel
-de09894f3 xl2tpd: Remove the old 1.3.6 version
-23cb89eaf openconnect: update to 8.03
-875f071ad gmime: Add recipe
-c3b19334d pidgin-sipe: Depend on gmime
-3e03fe998 snort: upgrade 2.9.11.1 -> 2.9.13
-fce37fcfa mozjs: Fix do_patch error for mips64-n32
-b25ee28b9 python-wrapt: upgrade 1.11.1 -> 1.11.2
-357be4862 python-certifi: upgrade 2019.3.9 -> 2019.6.16
-fad26cc14 cpuburn-arm: add aarch64 machine and build configuration
-0642700df libmodule-build-perl: drop, has moved to oe-core
-22bfe06d1 gpsd: Force using python-scons-native for now
-d8dac5d31 sysdig: Upgrade to 0.24.2+
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-2a5f941 qtbase: fix build with gcc-9
-not included in master yet:
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-e883c12 chromium: Update to 75.0.3770.100.
-not included in master yet:
-~/oe/world/yoe
+>
+>
+>>
+>> Regards,
+>> Ankit
+>>
+>> On Tue, Jun 18, 2019 at 8:02 AM Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> it seems to fail for aarch64, I've noticed it in world build for
+>>>> raspberrypi3-64:
+>>>>
+>>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>>> -Wformat-security -Werror=format-security
+>>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>>> -feliminate-unused-debug-types
+>>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>> -c ../../git/src/wchar/wcscpy_s.c  -fPIC -DPIC -o wchar/.libs/wcscpy_s.o
+>>>> {standard input}: Assembler messages:
+>>>> {standard input}:161: Error: unknown mnemonic `memory_barrier' --
+>>>> `memory_barrier'
+>>>> {standard input}:389: Error: unknown mnemonic `memory_barrier' --
+>>>> `memory_barrier'
+>>>> {standard input}:649: Error: unknown mnemonic `memory_barrier' --
+>>>> `memory_barrier'
+>>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>>> -Wformat-security -Werror=format-security
+>>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>>> -feliminate-unused-debug-types
+>>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>> -c ../../git/src/wchar/wcsncpy_s.c  -fPIC -DPIC -o wchar/.libs/wcsncpy_s.o
+>>>> aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc
+>>>> -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>>>> -Wformat-security -Werror=format-security
+>>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>>> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include
+>>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>>> -Wno-error=missing-field-initializers -O2 -pipe -g
+>>>> -feliminate-unused-debug-types
+>>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>> -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>> -c ../../git/src/wchar/wmemcpy_s.c  -fPIC -DPIC -o wchar/.libs/wmemcpy_s.o
+>>>> ../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
+>>>> aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
+>>>>  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+>>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>>> -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
+>>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>>> -Wno-error=missing-field-initializers  -O2 -pipe -g
+>>>> -feliminate-unused-debug-types
+>>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>>   -c -o wchar/wscanf_s.lo ../../git/src/wchar/wscanf_s.c
+>>>> ../aarch64-webos-linux-libtool  --tag=CC   --mode=compile
+>>>> aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong
+>>>>  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+>>>> --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot
+>>>> -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include
+>>>> -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef
+>>>> -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls
+>>>> -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align
+>>>> -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked
+>>>> -Wmissing-noreturn -Winit-self -Wmissing-include-dirs
+>>>> -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum
+>>>> -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op
+>>>> -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs
+>>>> -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement
+>>>> -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init
+>>>> -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter
+>>>> -Wno-error=missing-field-initializers  -O2 -pipe -g
+>>>> -feliminate-unused-debug-types
+>>>> -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=
+>>>>
+>>>>  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=
+>>>>   -c -o wchar/vfwscanf_s.lo ../../git/src/wchar/vfwscanf_s.c
+>>>> Makefile:1432: recipe for target 'mem/mem_primitives_lib.lo' failed
+>>>> make[2]: *** [mem/mem_primitives_lib.lo] Error 1
+>>>> make[2]: *** Waiting for unfinished jobs....
+>>>>
+>>>> On Wed, May 29, 2019 at 12:31 PM Ankit Navik <ankit.tarot@gmail.com>
+>>>> wrote:
+>>>>
+>>>>> Hi Raj,
+>>>>>
+>>>>> On Wed, May 29, 2019 at 2:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>
+>>>>> > On Wed, May 29, 2019 at 10:48 AM Ankit Navik <ankit.tarot@gmail.com>
+>>>>> > wrote:
+>>>>> > >
+>>>>> > > Add generic recipe for safe C library.
+>>>>> > > This library implements the secure C11 Annex K functions on top of
+>>>>> most
+>>>>> > libc
+>>>>> > > implementations, which are missing from them.
+>>>>> > >
+>>>>> > > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+>>>>> > > ---
+>>>>> > >  meta-oe/recipes-core/safec/safec_3.4.bb | 15 +++++++++++++++
+>>>>> > >  1 file changed, 15 insertions(+)
+>>>>> > >  create mode 100644 meta-oe/recipes-core/safec/safec_3.4.bb
+>>>>> > >
+>>>>> > > diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>>> > b/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>>> > > new file mode 100644
+>>>>> > > index 000000000..d55d081f3
+>>>>> > > --- /dev/null
+>>>>> > > +++ b/meta-oe/recipes-core/safec/safec_3.4.bb
+>>>>> > > @@ -0,0 +1,15 @@
+>>>>> > > +SUMMARY  = "Safe C Library"
+>>>>> > > +
+>>>>> > > +LICENSE  = "safec"
+>>>>> > > +LIC_FILES_CHKSUM =
+>>>>> "file://COPYING;md5=6d0eb7dfc57806a006fcbc4e389cf164"
+>>>>> > > +SECTION = "lib"
+>>>>> > > +
+>>>>> > > +inherit autotools pkgconfig
+>>>>> > > +
+>>>>> > > +S = "${WORKDIR}/git"
+>>>>> > > +SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
+>>>>> > > +SRC_URI = "git://github.com/rurban/safeclib.git"
+>>>>> > > +
+>>>>> > > +COMPATIBLE_HOST =
+>>>>> '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
+>>>>> > > +
+>>>>> >
+>>>>> > I see its excluding mips/mips64 from core supported architectures, is
+>>>>> > that intentional ?
+>>>>> >
+>>>>>
+>>>>> I'm not sure. This library is required for another component i.e.
+>>>>> ipmctl.
+>>>>>
+>>>>> Regards,
+>>>>> Ankit
+>>>>>
+>>>>> >
+>>>>> > > +RDEPENDS_${PN} = "perl"
+>>>>> > > --
+>>>>> > > 2.20.1
+>>>>> > >
+>>>>> > > --
+>>>>> > > _______________________________________________
+>>>>> > > Openembedded-devel mailing list
+>>>>> > > Openembedded-devel@lists.openembedded.org
+>>>>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>> >
+>>>>> --
+>>>>> _______________________________________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>
+>>>>
 
