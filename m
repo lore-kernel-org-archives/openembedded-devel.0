@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DC337C87C
+	by mail.openembedded.org (Postfix) with ESMTP id D5B2F605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 19:32:11 +0000 (UTC)
+	Sun, 23 Jun 2019 19:34:43 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45X2cX4pFJz4X
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45X2gS2gCDz4X
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 21:32:12 +0200 (CEST)
+	Sun, 23 Jun 2019 21:34:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561318332;
-	bh=q3MYRN5ipEtIXzXaeURto5NMEX0L0azEXUSeRCvIvzY=;
+	s=default; t=1561318484;
+	bh=Q6t+3Q/avgqu4kIzBIaJCBzMBlMvSJn+N4RTM18zJUA=;
 	h=From:To:Subject:Date:From;
-	b=hFEIPCDwDgzLLnvccfRSRY5zjFnyQjQM8nTm31EK7So59Fsj2afCWSb3hcr/Rb5Vy
-	l2lADuclq/27dMtxOoA7XMZbgN2YJNC48yNkXdGGCeLCWdqPRf8XRKjYJijRXMEYOs
-	XTqM622aDs3GrYN5y8aWXGteycmLHXVWgs+W/ch0bTr9YUbIYws4Hd+c056dw45LzO
-	nZYg2jqvq+gZ1OSp0yIaIipKtjRLK886qwYj7H34k0jLOM+vuFfOJAjmy6ifo+u/1t
-	RalrvSVQ4RAbqesLrZyrbIA2E7UfUO+fKTJqDEHevQECz4Q+V3f3TeU+aQZPMenLwI
-	hYc9nIaT4ZJrzjQLpLYDIuWyhFaqwAtXfnXCyRSeH4AqSGnC2VSQFdVmxG0PEmP24u
-	uBs0AIPOZW5gQDcsRdBe93iCfzt9oXF1/gLcWvbKkS43F9Wh4qnPC9k0iE+N8MxReE
-	9Yu6fNXWnvsSluw47SILWoCxjaeVb0EFrMvx/qVh/ZBbC0om7stZAG1Cb6KrmLkwR5
-	9XxgiRF7RgYIwYd7p0z+y4KESyV/3obET8/ePXoDjB+DQndrcdnSNUap8Q+9nhXezE
-	mXgT8HsjJ62T8qzrKAP2WVFvcP+CpSVoECu+/kokQyse3wMi0jIcRIqKfLzcj3L5QU
-	QboC6uw0mq0PBm7gT/BnR1/0=
+	b=Z6GbBjnN1vxD4zNYNQNX3soi4ozAvlxTZ9XuBoKFtT8+qABf3OfyvJ2Ql0qd3v+6V
+	/ne1LbTED6Qe5m2xEfRIVMeaLjA5Uj+NVQZqq+3ab4YIdTYqpgvJ3YYzga/OlLN13f
+	J8M8Oqjn8iHq/gxu/axbGEzG8/+jtEsvEx1/Q/5+RqP6nZlehcdWsWBPdW8vNpTKQ2
+	k4GSo4dAGGFlt8F1fRGEujgcwjbjw1bRlFgqBU94EoBpKbPsyais4hCLV4snyK2whc
+	bDrVqofnuP/CNrEMgJ0dKcOCs4I/TX0s3qe4miRMHcdgdvspeqm26s+bFjnRBpKWjv
+	RdJ7JcmggwvcQ/sz+bUlCixFkHiBmdgVau4wm6sXKW2/RHwZQypJg5gT/POXNQ3alW
+	rne0EKycmIGuKwAeuhwMOuYabyEwcfuSNADqnQeqSMOE2HODC+1UXc1OV3AVXaHLd+
+	itc2NMH7Kvfi+ksTiEwjnCFGzKV1BLYGxJkt7UYeHoVbLKNUjWFfEtV9Pak5gnalNV
+	S6VBhHT++BP9jewUCTIbN18pVqeBnRsRC/os/4uhobmTCA306i8vUn4rD7kXThRrCj
+	1jkTwKtobXdvwQZSpP+75pZucDlkyhtWi4l0jawETiCoxwRq3qFHanVdNLW3uchcZo
+	hQi4+T/SoL+kM+VkPxo133Is=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Jun 2019 22:32:11 +0300
-Message-Id: <20190623193211.16625-1-bunk@stusta.de>
+Date: Sun, 23 Jun 2019 22:34:42 +0300
+Message-Id: <20190623193443.16840-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-gnome][PATCH] modemmanager: Remove the obsolete dependency on dbus-glib
+Subject: [meta-oe][PATCH] gpsd: Remove the obsolete dependency on dbus-glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,28 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jun 2019 19:32:12 -0000
+X-List-Received-Date: Sun, 23 Jun 2019 19:34:44 -0000
 
-Upstream stopped using it in 2012.
+Upstream stopped using it in 2011.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../recipes-connectivity/modemmanager/modemmanager_1.10.0.bb    | 2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-index 8254a85fc..1ad19e8f7 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb
+index 7752e76b5..7e1122457 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+-DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-replacement-native pps-tools"
++DEPENDS = "dbus ncurses python libusb1 chrpath-replacement-native pps-tools"
+ PROVIDES = "virtual/gpsd"
  
- inherit gnomebase gettext systemd vala gobject-introspection bash-completion
- 
--DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native libxslt-native"
-+DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
- 
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
-            file://0001-Do-not-set-Wno-unused-but-set-variable.patch \
+ # SConstruct in gpsd does not yet support Python 3
 -- 
 2.17.1
 
