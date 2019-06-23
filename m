@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1580A6C1BE
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+	[209.85.167.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 331996C106
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 22:36:03 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id m23so10643007lje.12
+	Sun, 23 Jun 2019 23:15:41 +0000 (UTC)
+Received: by mail-lf1-f46.google.com with SMTP id d11so8627540lfb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 15:36:05 -0700 (PDT)
+	Sun, 23 Jun 2019 16:15:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=rxs/g1pu0FtzvRhou2q+VuLLH/v7PirsYNVHL1RtauI=;
-	b=dw0p4EZ9T02bWUk9sUfSyYF/0yYBauVW87OR9MibUk4V0CO4PH2lQMxQ5nc/kGG8kN
-	XnPfSgPajoP709TIsh0owXz17s/7E9T0avY95oE6Ytbfy34SJAd0fXYa9fDU7M91573l
-	AYZQCeJjtfDxr05CXu1rQqva7r+mTqRYVjMo8EmbR8FSVUK2RuGgUbtrhMv1DlSCi52U
-	GztD5ZBNxvMOZI0i8pEESpa6uK/BGO+mF21+OJrkdcNMW4nD6jz5n5fU9GmweyaZtucP
-	SPt7fMp9TG8Cqx8eq9Qjar8I3/+atx7eE8p4OtkxBmtopETSLEFPMGvNa3ay4K0pZg5M
-	n6/g==
+	bh=AWd2rsEqzfZGhwdCuPf9bGguAij789Zd0DvMKJKLqPg=;
+	b=BTLx/zKvKgfshDBY36K9leazuB0uD6n2scpGGlVMKhXbO5/WsTz5Kw9EEjeoC7ROuH
+	tzVLBB27RXPQApe+25RYJKvnzhwF6x4NQyGPAA5t+ipxhAoSZyrA5+rIVrm95yBB0hmv
+	gBxmZ83itNPo6IHvF40U77wka9MVwy0xhZ4cZYqfOLGTUWYbJ1Rl4Hp2+xxzL3NEbiLk
+	sjkOzOgldb7aE9SUuLk5hN9vGxyVYfzgrjpmYncClsnoNu3a9EZXTjhvaFMLnk+X2qr7
+	8BckNL+2l7c2ehBzUFIf0L6j690AYvJosL9L6pmuKHqnZvjFO2et8R4yaBxcnV9cZVY5
+	DsvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rxs/g1pu0FtzvRhou2q+VuLLH/v7PirsYNVHL1RtauI=;
-	b=NP3oopHQsDUKesmzFFp8FY5aiqUhu+ocFwobqphuq9va2vpzsmWRGJ9smFN3jqq39x
-	fyimJIpN6lsticK2NvK3cmDhc0MSfxTIPKvRCvkYnSvohoxHuVICbSpVe3ubdh9SeWpz
-	+6sDMH+PilDDNL+HNaRKIVlc6mJUK/sUCEsP6hoiKhS/Mkvfq/3V5L06l2v9Wl5fxYQR
-	CmM9kaS/OGsufyL1olXtA+uOLMlo8A/7obOySicaB1t8zS1UFgp28bP0x+Gefv/7AnIh
-	KZ99BPZV+yCULhgF9HKHrfdXaBlx6g25VWYW953G01Kid6FxBjCBo8nPjcsfciEDKnZY
-	3lAA==
-X-Gm-Message-State: APjAAAVEl7jDK32P56SGNj57NbyXnVEUnkTGgqre4OYSPZXQOX0+rzRn
-	FcK4JXC/OyLkLyRZi7JG2mqNW17MLw8=
-X-Google-Smtp-Source: APXvYqz7xj5sDx+iqLcwnQOAVMrl8NJ6VbIwLzRLmHFRe0jGAN9+cwIB9211UVifGXT1oa0fjlrGYA==
-X-Received: by 2002:a2e:824f:: with SMTP id j15mr21914146ljh.117.1561329364166;
-	Sun, 23 Jun 2019 15:36:04 -0700 (PDT)
+	bh=AWd2rsEqzfZGhwdCuPf9bGguAij789Zd0DvMKJKLqPg=;
+	b=GC68crccXjwyIxkV9Q0FutoPPeGYr3XkQDShkSS2TqJ+cU5WV5pyaPBhdiyGBPVAKa
+	hmRI7dyrMlnrnxYMMDpQNemjtIqCHIuT9CWKbfazImlKhQkYLZ07V0JSIh1Z1aPCwzR0
+	p7wSNsLsA0g6M++hTqvDImwSxrqRfR0Mx8BRIpQcRR8j13cdaR8D7/HmaBRFtuSPdv8z
+	1ZKAyuDllBSJeiudfmzWbFWGoHC0LrDsqtdJ6xkxla3pokfeDnHARjDC0lOwh9pZmBqb
+	eC1ACpQF5HbdgArAkWD8pbI9uokdOvYfqxoNLDWbqGI2dm4HWeBO6mh7Y3mj+1itcfV2
+	KazQ==
+X-Gm-Message-State: APjAAAXO/bCGsStpgTKFQWhbAOFrEb6qIR8QtjDF1KMsDosvLL2WJCml
+	3wHjAZpZD6YqExf65tFvxhlUMbfuINk=
+X-Google-Smtp-Source: APXvYqwXSyZI9BrfBN4UQUVcFyLcU/Xqa4UelJWrv2Ey82MVBipxOM6lq7Y4DeHEj2ne4FgWMfJQWQ==
+X-Received: by 2002:a19:c301:: with SMTP id t1mr76388710lff.137.1561331742286; 
+	Sun, 23 Jun 2019 16:15:42 -0700 (PDT)
 Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id t3sm1295841lfk.59.2019.06.23.15.36.03
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	y62sm1461942lje.100.2019.06.23.16.15.41
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 23 Jun 2019 15:36:03 -0700 (PDT)
+	Sun, 23 Jun 2019 16:15:41 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jun 2019 00:35:54 +0200
-Message-Id: <20190623223554.13989-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 24 Jun 2019 01:15:40 +0200
+Message-Id: <20190623231540.25388-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nuttcp: add systemd unit file
+Subject: [PATCH][meta-networking] mbedtls: update to 2.16.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,75 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jun 2019 22:36:04 -0000
+X-List-Received-Date: Sun, 23 Jun 2019 23:15:42 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-support/nuttcp/nuttcp/nuttcp.socket      |  9 +++++++++
- .../recipes-support/nuttcp/nuttcp/nuttcp@.service    |  8 ++++++++
- .../recipes-support/nuttcp/nuttcp_8.2.2.bb           | 12 +++++++++++-
- 3 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
- create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+ .../mbedtls/{mbedtls_2.16.0.bb => mbedtls_2.16.2.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.16.0.bb => mbedtls_2.16.2.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
-new file mode 100644
-index 000000000..a8ae74fb8
---- /dev/null
-+++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
-@@ -0,0 +1,9 @@
-+[Unit]
-+Description=Network Performance Testing Server Activation Socket
-+
-+[Socket]
-+ListenStream=5000
-+Accept=true
-+
-+[Install]
-+WantedBy=sockets.target
-diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
-new file mode 100644
-index 000000000..b778e8552
---- /dev/null
-+++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
-@@ -0,0 +1,8 @@
-+[Unit]
-+Description=Network Performance Testing Server
-+After=local-fs.target
-+
-+[Service]
-+User=nobody
-+ExecStart=/usr/bin/nuttcp -S
-+StandardInput=socket
-diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
-index 2fd563123..193caf3cf 100644
---- a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
-+++ b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
-@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff52
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb
+index 2e9d01e14..b0bd942ee 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.0.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb
+@@ -23,8 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
+ SECTION = "libs"
  
- UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
+ SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
+-SRC_URI[md5sum] = "eae9cf16114f4491dbbc0fe36bb7e6c3"
+-SRC_URI[sha256sum] = "e3dab56e9093c790b7d5e0f7eb19451010fe680649d25cf1dcca9d5441669ae2"
++SRC_URI[md5sum] = "37cdec398ae9ebdd4640df74af893c95"
++SRC_URI[sha256sum] = "a6834fcd7b7e64b83dfaaa6ee695198cb5019a929b2806cb0162e049f98206a4"
  
--SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
-+SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
-+           file://nuttcp@.service \
-+           file://nuttcp.socket"
- SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
- SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
+ inherit cmake
  
-@@ -24,5 +26,13 @@ do_compile () {
- 
- do_install () {
-     install -d ${D}${bindir}
-+    install -d ${D}${systemd_system_unitdir}
-     install -m 0755 nuttcp ${D}${bindir}
-+    install -m 0644 ${WORKDIR}/nuttcp@.service ${D}${systemd_system_unitdir}
-+    install -m 0644 ${WORKDIR}/nuttcp.socket ${D}${systemd_system_unitdir}
- }
-+
-+FILES_${PN} += " \
-+    ${bindir} \
-+    ${systemd_system_unitdir} \
-+"
 -- 
 2.17.1
 
