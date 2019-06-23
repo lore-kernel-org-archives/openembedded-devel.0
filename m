@@ -1,33 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F34F605BA
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1580A6C1BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 19:34:44 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45X2gS5W8hz4c
+	Sun, 23 Jun 2019 22:36:03 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id m23so10643007lje.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 21:34:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561318484;
-	bh=xfSIb48FDvouCeV5JhRZvYMqilqUQGvD5dlp/mN2DIg=;
-	h=From:To:Subject:Date:From;
-	b=Q/0ZgIl22KkjK9Fp4RPJ+D99EihDkPOEljqO+xf6wGQ68WLSvEUft7OvcvJ5A5dpr
-	rRBLdHHLR8fxfqIOGM/fQkZ3TxZ1KxQsz9R9zl7TDjyksrNw4cBFEr+t+S+6EAofAL
-	FFVT3z1XJUjykm9YgdfnIpPtaDzHFzb4tlREcfOmBL+BWJQlfDx9KbsyitPTRLN22y
-	bG8SgPUiMtRlAMQRCt5RoBmoUwJT1OghAUH2gWg5i5v2nc6UhH9o0gFIIJkfp79NkP
-	sa7Ds3qtZyNc/Ms0L4tvayyVGlcU+1yWRH38DkOPqrW40Kqhn8+GPOxlbZ2rdy8ZrX
-	1Rcek5YS6ZbDMcKCdWvysqgL445A9L0Bt6uDPIE6yaSCp1Fcn8yJGDRwTuF9HdsB08
-	89Ui5Z5PWjRbdPnik9kK76wSf44bGdtAdyyoANvRiOq8m3HdsI9EsihcMvtc8NGUIa
-	PrhcSfbSU6MaKeAd/5wWP8qn+8r8JDVjnZ38EFdok1vqdir82YXbhUeKOFA6PvlPqQ
-	YbNirZWxvLivGmgzmaCIKHSqL3zkzT1e0vIzEgmX3V4eLP00+rzbL18IF/E28kRwTs
-	fCNojMxEFTVTQPXc9tcyNWn894GXnwRGmqKuG7tV/YdT4xp9mqjJnmSIk/XR9M5f61
-	HqSNaFSxY5XGsZQRD8qeSb+Y=
-From: Adrian Bunk <bunk@stusta.de>
+	Sun, 23 Jun 2019 15:36:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=rxs/g1pu0FtzvRhou2q+VuLLH/v7PirsYNVHL1RtauI=;
+	b=dw0p4EZ9T02bWUk9sUfSyYF/0yYBauVW87OR9MibUk4V0CO4PH2lQMxQ5nc/kGG8kN
+	XnPfSgPajoP709TIsh0owXz17s/7E9T0avY95oE6Ytbfy34SJAd0fXYa9fDU7M91573l
+	AYZQCeJjtfDxr05CXu1rQqva7r+mTqRYVjMo8EmbR8FSVUK2RuGgUbtrhMv1DlSCi52U
+	GztD5ZBNxvMOZI0i8pEESpa6uK/BGO+mF21+OJrkdcNMW4nD6jz5n5fU9GmweyaZtucP
+	SPt7fMp9TG8Cqx8eq9Qjar8I3/+atx7eE8p4OtkxBmtopETSLEFPMGvNa3ay4K0pZg5M
+	n6/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rxs/g1pu0FtzvRhou2q+VuLLH/v7PirsYNVHL1RtauI=;
+	b=NP3oopHQsDUKesmzFFp8FY5aiqUhu+ocFwobqphuq9va2vpzsmWRGJ9smFN3jqq39x
+	fyimJIpN6lsticK2NvK3cmDhc0MSfxTIPKvRCvkYnSvohoxHuVICbSpVe3ubdh9SeWpz
+	+6sDMH+PilDDNL+HNaRKIVlc6mJUK/sUCEsP6hoiKhS/Mkvfq/3V5L06l2v9Wl5fxYQR
+	CmM9kaS/OGsufyL1olXtA+uOLMlo8A/7obOySicaB1t8zS1UFgp28bP0x+Gefv/7AnIh
+	KZ99BPZV+yCULhgF9HKHrfdXaBlx6g25VWYW953G01Kid6FxBjCBo8nPjcsfciEDKnZY
+	3lAA==
+X-Gm-Message-State: APjAAAVEl7jDK32P56SGNj57NbyXnVEUnkTGgqre4OYSPZXQOX0+rzRn
+	FcK4JXC/OyLkLyRZi7JG2mqNW17MLw8=
+X-Google-Smtp-Source: APXvYqz7xj5sDx+iqLcwnQOAVMrl8NJ6VbIwLzRLmHFRe0jGAN9+cwIB9211UVifGXT1oa0fjlrGYA==
+X-Received: by 2002:a2e:824f:: with SMTP id j15mr21914146ljh.117.1561329364166;
+	Sun, 23 Jun 2019 15:36:04 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id t3sm1295841lfk.59.2019.06.23.15.36.03
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sun, 23 Jun 2019 15:36:03 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Jun 2019 22:34:43 +0300
-Message-Id: <20190623193443.16840-2-bunk@stusta.de>
+Date: Mon, 24 Jun 2019 00:35:54 +0200
+Message-Id: <20190623223554.13989-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] eggdbus: Remove this obsolete package
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] nuttcp: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,147 +56,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Jun 2019 19:34:44 -0000
+X-List-Received-Date: Sun, 23 Jun 2019 22:36:04 -0000
 
-Users migrated to GDBus years ago.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../eggdbus/eggdbus/gtk-doc.patch             | 34 -------------------
- .../eggdbus/eggdbus/marshal.patch             | 28 ---------------
- meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb   | 33 ------------------
- .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
- 4 files changed, 1 insertion(+), 96 deletions(-)
- delete mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
- delete mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
- delete mode 100644 meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
+ .../recipes-support/nuttcp/nuttcp/nuttcp.socket      |  9 +++++++++
+ .../recipes-support/nuttcp/nuttcp/nuttcp@.service    |  8 ++++++++
+ .../recipes-support/nuttcp/nuttcp_8.2.2.bb           | 12 +++++++++++-
+ 3 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+ create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
 
-diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch b/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
-deleted file mode 100644
-index abd7ff416..000000000
---- a/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--Upstream-Status: Inappropriate [configuration] 
--
--Index: eggdbus-0.6/docs/eggdbus/Makefile.am
--===================================================================
----- eggdbus-0.6.orig/docs/eggdbus/Makefile.am
--+++ eggdbus-0.6/docs/eggdbus/Makefile.am
--@@ -87,11 +87,7 @@ HTML_IMAGES = 				\
-- # Extra options to supply to gtkdoc-fixref
-- FIXXREF_OPTIONS=
-- 
---if ENABLE_GTK_DOC
---include $(top_srcdir)/gtk-doc.make
---else
-- CLEANFILES =
---endif
-- 
-- CLEANFILES +=   *~				\
-- 		eggdbus-scan.*			\
--Index: eggdbus-0.6/docs/tests/Makefile.am
--===================================================================
----- eggdbus-0.6.orig/docs/tests/Makefile.am
--+++ eggdbus-0.6/docs/tests/Makefile.am
--@@ -65,11 +65,7 @@ HTML_IMAGES = 				\
-- # Extra options to supply to gtkdoc-fixref
-- FIXXREF_OPTIONS=
-- 
---if ENABLE_GTK_DOC
---include $(top_srcdir)/gtk-doc.make
---else
-- CLEANFILES =
---endif
-- 
-- CLEANFILES +=   *~				\
-- 		tests-scan.*			\
-diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch b/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
-deleted file mode 100644
-index a605a34c8..000000000
---- a/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Inappropriate [configuration]
--
--Index: eggdbus-0.6/src/eggdbus/Makefile.am
--===================================================================
----- eggdbus-0.6.orig/src/eggdbus/Makefile.am
--+++ eggdbus-0.6/src/eggdbus/Makefile.am
--@@ -130,7 +130,7 @@ BUILT_SOURCES =								\
-- 	$(NULL)
-- 
-- eggdbus-built-sources.stamp : eggdbus-binding-tool Makefile.am org.freedesktop.DBus.xml org.freedesktop.DBus.Peer.xml org.freedesktop.DBus.Properties.xml org.freedesktop.DBus.Introspectable.xml eggdbus-glib-genmarshal
---	EGG_DBUS_GENMARSHAL=$(top_builddir)/src/eggdbus/eggdbus-glib-genmarshal $(top_builddir)/src/eggdbus/eggdbus-binding-tool							\
--+	EGG_DBUS_GENMARSHAL=eggdbus-glib-genmarshal eggdbus-binding-tool							\
-- 		--namespace EggDBus									\
-- 		--dbus-namespace org.freedesktop.DBus							\
-- 		--interfaces-only									\
--Index: eggdbus-0.6/src/tests/Makefile.am
--===================================================================
----- eggdbus-0.6.orig/src/tests/Makefile.am
--+++ eggdbus-0.6/src/tests/Makefile.am
--@@ -25,7 +25,7 @@ BUILT_SOURCES = 							\
-- 	$(NULL)
-- 
-- test-built-sources.stamp : Makefile.am $(top_builddir)/src/eggdbus/eggdbus-binding-tool com.example.Frob.xml com.example.Tweak.xml com.example.Twiddle.xml
---	EGG_DBUS_GENMARSHAL=$(top_builddir)/src/eggdbus/eggdbus-glib-genmarshal $(top_builddir)/src/eggdbus/eggdbus-binding-tool									\
--+	EGG_DBUS_GENMARSHAL=eggdbus-glib-genmarshal eggdbus-binding-tool									\
-- 	  --namespace       "Test"										\
-- 	  --dbus-namespace  "com.example"									\
-- 	  --include-header  testtypes.h										\
-diff --git a/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb b/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
-deleted file mode 100644
-index cc28ec77c..000000000
---- a/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--SUMMARY = "An alternative to dbug-glib."
--DESCRIPTION = "An alternative to dbus-glib. It is designed specifically to \
--make it comfortable to work with very large and potentially \
--complex D-Bus services like e.g. DeviceKit-disks"
--
--HOMEPAGE = "http://cgit.freedesktop.org/~david/eggdbus"
--LICENSE = "LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
--                    file://src/eggdbus/eggdbus.h;md5=6b312aef57ed8d738b3f131ad037d6c2"
--
--DEPENDS = "dbus glib-2.0 dbus-glib eggdbus-native"
--DEPENDS_class-native = "dbus-native glib-2.0-native dbus-glib-native"
--
--SRC_URI = "http://cgit.freedesktop.org/~david/${BPN}/snapshot/${BPN}-${PV}.tar.bz2 \
--    file://gtk-doc.patch \
--"
--SRC_URI_append_class-target = "file://marshal.patch"
--SRC_URI[md5sum] = "0a111faa54dfba2cf432c2c8e8a76e06"
--SRC_URI[sha256sum] = "3ad26e271c1a879bafcd181e065fe0ed53b542299a773c3188c9edb25b895ed1"
--
--inherit autotools gtk-doc
--
--EXTRA_OECONF = " --disable-man-pages "
--
--BBCLASSEXTEND = "native"
--
--PARALLEL_MAKE = ""
--
--do_configure_prepend() {
--    # Create ChangeLog to walk around automake error.
--    # " Makefile.am: error: required file './ChangeLog' not found "
--    touch ${S}/ChangeLog
--}
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index e34cce4eb..e7246b2c5 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -74,7 +74,7 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+new file mode 100644
+index 000000000..a8ae74fb8
+--- /dev/null
++++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+@@ -0,0 +1,9 @@
++[Unit]
++Description=Network Performance Testing Server Activation Socket
++
++[Socket]
++ListenStream=5000
++Accept=true
++
++[Install]
++WantedBy=sockets.target
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+new file mode 100644
+index 000000000..b778e8552
+--- /dev/null
++++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+@@ -0,0 +1,8 @@
++[Unit]
++Description=Network Performance Testing Server
++After=local-fs.target
++
++[Service]
++User=nobody
++ExecStart=/usr/bin/nuttcp -S
++StandardInput=socket
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+index 2fd563123..193caf3cf 100644
+--- a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
++++ b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff52
  
- # dracut needs dracut
- RDEPENDS_packagegroup-meta-oe-core ="\
--    dbus-daemon-proxy libdbus-c++ eggdbus \
-+    dbus-daemon-proxy libdbus-c++ \
-     ell glibmm libsigc++-2.0 libxml++ distro-feed-configs \
-     mm-common opencl-headers opencl-icd-loader \
-     proxy-libintl usleep \
+ UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
+ 
+-SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
++SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
++           file://nuttcp@.service \
++           file://nuttcp.socket"
+ SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
+ SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
+ 
+@@ -24,5 +26,13 @@ do_compile () {
+ 
+ do_install () {
+     install -d ${D}${bindir}
++    install -d ${D}${systemd_system_unitdir}
+     install -m 0755 nuttcp ${D}${bindir}
++    install -m 0644 ${WORKDIR}/nuttcp@.service ${D}${systemd_system_unitdir}
++    install -m 0644 ${WORKDIR}/nuttcp.socket ${D}${systemd_system_unitdir}
+ }
++
++FILES_${PN} += " \
++    ${bindir} \
++    ${systemd_system_unitdir} \
++"
 -- 
 2.17.1
 
