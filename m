@@ -1,33 +1,24 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E8496BCA4
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B690A6C230
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 07:33:38 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45XLcy3MndzGB
+	Mon, 24 Jun 2019 08:30:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5O8U8n1012433
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 09:33:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561361618;
-	bh=cuURhZjLWTmUWJFWWnF4z355vbgmuTscxXKW/slWtYo=;
-	h=From:To:Subject:Date:From;
-	b=Bozu3DfG0HXpyvK11g+dkOgxaqmXiGDZkIaHNHHUaC/zaJDhWK/vRqjtUdSnIabeu
-	FoS31Z/aqDtCa5qAU5HWDHRm1ONfcBMtfUMlwFvh7txR4iDQLGS2Qz9Hq4BX+tzg8M
-	O1Bb8nE5UezfeXbbNKTu3R0EbfkFku122UWlRM7E7k+LJPSNHPjLKoi9qYI5kYIFMB
-	XepCjlIxCzshqaj2eom86HralzCodc6EzJutAQqZ4lS5J+lPdNnwil2sSYVkk7Cc3e
-	wUv7joCm89gh93ZaxW/hrRXQuGYkrbiQlqztAwX9RFFozf+yG36hcM7ksZH/GSbdYb
-	wBfjFtX9947g3gio6eAiLxTOe8gloy4Q/78/JfzMQgPZeE9b3uqiIu5FNyZuYQz5bt
-	IG+Y2BCHwfqfN9EsSSdF8qFBFQPmsbPegQh3Pv94G6GcDFQMtt3N2GEronFVDuIHsw
-	heIQdl3Q2kyY79uX6K9UvRmftOUMph8qlyx5n/kxccwGqmyfTU3tx2dMYB3TuPPoep
-	LEPBLylqCj0E+aaTluNi0kH74W5ySi+MTxkjO7gCWUgBbbsZAVMDGnvynHrVxnHDat
-	+K4zmuRD+6tZxv3o2HY9YTg+L3XhyFm13vFjJVtwvFxWzkLKs1U57xP0HR0h8Qlpcm
-	ueqJQjGd+Tt95TIrafp9Lw94=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jun 2019 10:33:37 +0300
-Message-Id: <20190624073337.14103-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-gnome][PATCH] sanity-meta-gnome: Remove obsolete class
+	Mon, 24 Jun 2019 01:30:18 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Mon, 24 Jun 2019 01:29:57 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 24 Jun 2019 16:29:56 +0800
+Message-ID: <1561364996-208468-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] python-pygobject: fix install dir for python2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,77 +31,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 07:33:39 -0000
+X-List-Received-Date: Mon, 24 Jun 2019 08:30:27 -0000
+Content-Type: text/plain
 
-There are no bbappend left in meta-gnome.
-Individual recipes that require x11 already provide a proper
-error for that.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+* after upgrade to 3.32.1, pygobject switch to build with meson, and
+  default python option is python3, switch to python2
+
+* default install dir get by python.install_sources and
+python.get_install_dir is get from python's sysconfig info,
+not like python3, for python2, the install dir include prefix of
+recipe-sysroot-native dir, like "build/tmp-glibc/work/core2-32-wrs-linux/
+python-pygobject/3.32.1-r0/recipe-sysroot-native/usr/lib/python2.7/site-packages"
+add stagedir option for user to config correct install dir.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-gnome/README                            | 20 --------------------
- meta-gnome/classes/sanity-meta-gnome.bbclass | 10 ----------
- meta-gnome/conf/layer.conf                   |  4 ----
- 3 files changed, 34 deletions(-)
- delete mode 100644 meta-gnome/classes/sanity-meta-gnome.bbclass
+ .../0001-python-pyobject-fix-install-dir.patch     | 121 +++++++++++++++++++++
+ .../python/python-pygobject_3.32.1.bb              |   6 +-
+ 2 files changed, 126 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
 
-diff --git a/meta-gnome/README b/meta-gnome/README
-index 2a682e72d..3c5b4c5f9 100644
---- a/meta-gnome/README
-+++ b/meta-gnome/README
-@@ -1,23 +1,3 @@
--meta-gnome
--===========
--
--The recipe in this layer needs to have 'x11' in DISTRO_FEATURES 
--to have effect. To enable them, add in configuration file the following line.
--
--  DISTRO_FEATURES_append = " x11"
--
--If meta-gnome is included, but x11 is not enabled as a
--distro feature a warning is printed at parse time:
--
--    You have included the meta-gnome layer, but
--    'x11' has not been enabled in your DISTRO_FEATURES.
--
--If you know what you are doing, this warning can be disabled by setting the following
--variable in your configuration:
--
--  SKIP_META_GNOME_SANITY_CHECK = 1
--
--
- Dependencies
- ------------
- This layer depends on:
-diff --git a/meta-gnome/classes/sanity-meta-gnome.bbclass b/meta-gnome/classes/sanity-meta-gnome.bbclass
-deleted file mode 100644
-index 331ea193d..000000000
---- a/meta-gnome/classes/sanity-meta-gnome.bbclass
-+++ /dev/null
-@@ -1,10 +0,0 @@
--addhandler gnome_bbappend_distrocheck
--gnome_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
--python gnome_bbappend_distrocheck() {
--    skip_check = e.data.getVar('SKIP_META_GNOME_SANITY_CHECK') == "1"
--    if 'x11' not in e.data.getVar('DISTRO_FEATURES').split() and not skip_check:
--        bb.warn("You have included the meta-gnome layer, but \
--'x11' has not been enabled in your DISTRO_FEATURES. Some bbappend files \
--may not take effect. See the meta-gnome README for details on enabling \
--meta-gnome support.")
--}
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 0b68232de..9ed142198 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -15,7 +15,3 @@ LAYERVERSION_gnome-layer = "1"
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch b/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
+new file mode 100644
+index 0000000..848cda5
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
+@@ -0,0 +1,121 @@
++From 8b4648d5bc50cb1c14961ed38bf97d5a693f5237 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Mon, 24 Jun 2019 14:51:52 +0800
++Subject: [PATCH] python-pyobject: fix the wrong install dir for python2
++
++* after upgrade to 3.32.1, pygobject switch to build with meson, and
++  default python option is python3, switch to python2
++
++* default install dir get by python.install_sources and 
++python.get_install_dir is get from python's sysconfig info,
++not like python3, for python2, the install dir include the basedir of
++recipe-sysroot-native, add stagedir option for user to config
++correct install dir.
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ gi/meson.build            | 7 +++----
++ gi/overrides/meson.build  | 4 ++--
++ gi/repository/meson.build | 4 ++--
++ meson.build               | 4 +++-
++ meson_options.txt         | 1 +
++ pygtkcompat/meson.build   | 4 ++--
++ 6 files changed, 13 insertions(+), 11 deletions(-)
++
++diff --git a/gi/meson.build b/gi/meson.build
++index c1afd68..249c23d 100644
++--- a/gi/meson.build
+++++ b/gi/meson.build
++@@ -60,9 +60,8 @@ python_sources = [
++   'types.py',
++ ]
++ 
++-python.install_sources(python_sources,
++-  pure : false,
++-  subdir : 'gi'
+++install_data(python_sources,
+++  install_dir: join_paths(stagedir, 'gi')
++ )
++ 
++ # https://github.com/mesonbuild/meson/issues/4117
++@@ -76,7 +75,7 @@ giext = python.extension_module('_gi', sources,
++   dependencies : [python_ext_dep, glib_dep, gi_dep, ffi_dep],
++   include_directories: include_directories('..'),
++   install: true,
++-  subdir : 'gi',
+++  install_dir: join_paths(stagedir, 'gi'),
++   c_args: pyext_c_args + main_c_args
++ )
++
++diff --git a/gi/overrides/meson.build b/gi/overrides/meson.build
++index 6ff073f..964fef1 100644
++--- a/gi/overrides/meson.build
+++++ b/gi/overrides/meson.build
++@@ -10,6 +10,6 @@ python_sources = [
++   'keysyms.py',
++   '__init__.py']
++ 
++-python.install_sources(python_sources,
++-  subdir : join_paths('gi', 'overrides')
+++install_data(python_sources,
+++  install_dir: join_paths(stagedir, 'gi', 'overrides')
++ )
++diff --git a/gi/repository/meson.build b/gi/repository/meson.build
++index fdc136b..fc88adf 100644
++--- a/gi/repository/meson.build
+++++ b/gi/repository/meson.build
++@@ -1,5 +1,5 @@
++ python_sources = ['__init__.py']
++ 
++-python.install_sources(python_sources,
++-  subdir : join_paths('gi', 'repository')
+++install_data(python_sources,
+++  install_dir: join_paths(stagedir, 'gi', 'repository')
++ )
++diff --git a/meson.build b/meson.build
++index d27a005..ecd55d5 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -165,12 +165,14 @@ else
++   py_version = pygobject_version
++ endif
++ 
+++stagedir = get_option('stagedir')
+++
++ pkginfo_conf = configuration_data()
++ pkginfo_conf.set('VERSION', py_version)
++ configure_file(input : 'PKG-INFO.in',
++   output : 'PyGObject-@0@.egg-info'.format(py_version),
++   configuration : pkginfo_conf,
++-  install_dir : python.get_install_dir(pure : false))
+++  install_dir : stagedir)
++ 
++ subdir('gi')
++ subdir('pygtkcompat')
++diff --git a/meson_options.txt b/meson_options.txt
++index 5dd4cbc..21def16 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -1,3 +1,4 @@
++ option('python', type : 'string', value : 'python3')
++ option('pycairo', type : 'boolean', value : true, description : 'build with pycairo integration')
++ option('tests', type : 'boolean', value : true, description : 'build unit tests')
+++option('stagedir', type : 'string', value : '')
++diff --git a/pygtkcompat/meson.build b/pygtkcompat/meson.build
++index 9e43c44..ef3322d 100644
++--- a/pygtkcompat/meson.build
+++++ b/pygtkcompat/meson.build
++@@ -3,6 +3,6 @@ python_sources = [
++   'generictreemodel.py',
++   'pygtkcompat.py']
++ 
++-python.install_sources(python_sources,
++-  subdir : 'pygtkcompat'
+++install_data(python_sources,
+++  install_dir: join_paths(stagedir, 'pygtkcompat')
++ )
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
+index c26b383..8f63c76 100644
+--- a/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
+@@ -12,6 +12,7 @@ DEPENDS += "python glib-2.0"
+ SRCNAME = "pygobject"
+ SRC_URI = " \
+     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
++    file://0001-python-pyobject-fix-install-dir.patch \
+ "
  
- LAYERSERIES_COMPAT_gnome-layer = "thud warrior"
+ SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
+@@ -21,9 +22,12 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+ UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+ 
++PACKAGECONFIG ??= "stagedir"
++
+ PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo python-pycairo, python-pycairo"
+ PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
 -
--# Sanity check for meta-gnome layer.
--# Setting SKIP_META_GNOME_SANITY_CHECK to "1" would skip the bbappend files check.
--INHERIT += "sanity-meta-gnome"
++PACKAGECONFIG[python] = "-Dpython=python3, -Dpython=python2, , "
++PACKAGECONFIG[stagedir] = "-Dstagedir=${PYTHON_SITEPACKAGES_DIR}, -Dstagedir="", , "
+ 
+ BBCLASSEXTEND = "native"
+ RDEPENDS_${PN} = "python-setuptools"
 -- 
-2.17.1
+2.7.4
 
 
