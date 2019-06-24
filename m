@@ -1,57 +1,48 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
-	[209.85.208.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 58BE17E3F8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+	[209.85.208.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F1D87E3F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 18:03:41 +0000 (UTC)
-Received: by mail-lj1-f170.google.com with SMTP id 16so13484489ljv.10
+	Mon, 24 Jun 2019 18:08:31 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id i11so23082333edq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 11:03:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=iSera7N57DAgoMgkuPh/loNY28VmHf0msQroln7RLu0=;
-	b=uTL2axWq0jxd3WC8A1bkW4fua+DH3bGQpyI6wUFVM5+ltSWEZfNQNPOYe8FlENbDP8
-	ic4HHwATgiO4O4tz5ENVjO9Q/KYY3VYDZjLGoCwq/TTkAVxTpxjx+yhmd9FYM41Otywf
-	4pAQfss3lU/3IVHbx5H/kP2WSY5Em8rEWMGO3c7KgZF/w/YA6ULwllvw5CDe7I5iDzx7
-	Uf0wxzwgbFu59QnTaYnyLi7+z+xgD74IJ6DqUIV4dcVVFabdFD87935SLwr3xwGuhOku
-	FaIzs39wBF3X7v88jIgv4eyz+ubmhwrNElkKJnSXDUtfbHgaJ1il8dSLLsvuIrS9TAK2
-	8U3A==
+	Mon, 24 Jun 2019 11:08:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=SP9rXjTkqDg92TKQr1dmUUPKqrrzyxskE7OqzA0yDPs=;
+	b=F+MslDxxK+v8mRKDhAP8xgXPGdwBF4NRXpjS4jsW6Ri6gTEJn2gIdTg9kY1JaVbR3y
+	0LmPy0IoUwbZkJGTEeuMbe+7IDRap6uICG4YtTlsWrNOAl8lZHIHtLWCTuVdpBLErk3g
+	tAfb/a9QV/X5ljs6DvJuz9vEEUOFuL013H+eVAFGcZrtPJi8C9U5NRemXJCWRrPgT7sM
+	qTmc2Qy3pk79lYmZA0maFe+DzJEGZRZjoNILL++qSce5xMtNkOxm5C8jDdZmOReGiX6V
+	NwVK/iSa4oTknF+2BFFU+mBqCqcCxeYs+f5NLhI5SM9D5Jz99Zv0pGu1pwznBgPCSlJm
+	SMBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=iSera7N57DAgoMgkuPh/loNY28VmHf0msQroln7RLu0=;
-	b=RmEm8WHsUn8ga7g798F3OAyNxXNUWkVvs2kZp5lTT3zHvPPINRYl35WdaCyaw5qFr3
-	fZksiSkWMhzhQy4zCi+B69Qk4NgZlNGgnxE8lIPU0DSinl1ZWNb0bEt7c9phSOI8t+Yg
-	/ho716CZH8AD+u9GIULkNvQCVGKAggj2VrNrMs/zup7PjQit0gillVefqF9ab1kSaedl
-	5jAoEMbVHh+6qfWqf8O7yayejIlYzng3fyV4mWEsFitvx47q2tou21YJXHRF5gHrCxfb
-	TlyqphHtPzN0Htchh4zD/Mump0l9rNkJgRj6pTvL0kj2Y6pbwA+Wt22J84clMYgmQ9+H
-	u6gQ==
-X-Gm-Message-State: APjAAAVwOwuC+EqYiVpXSxAlETk32pS54BJNumqi+Ne+CjrrzYvfISd4
-	YM5FS/R37WRYhigs1LdGtez+cmhUTsY=
-X-Google-Smtp-Source: APXvYqy0h+1A1AFYOvmTwhBiCYE4RT+cMc/hDI5vYzSIoi18oixvQBWBNzEEVDsNj+RPbYup4QIv7Q==
-X-Received: by 2002:a2e:89c8:: with SMTP id c8mr31198258ljk.70.1561399421528; 
-	Mon, 24 Jun 2019 11:03:41 -0700 (PDT)
-Received: from [192.168.0.8] (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108])
-	by smtp.gmail.com with ESMTPSA id u9sm1635623lfb.38.2019.06.24.11.03.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Jun 2019 11:03:40 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190623223554.13989-1-open.source@oleksandr-kravchuk.com>
-	<CAMKF1soezey1nig9E+7ZGt_Lq=tycPfL0-OXMvdFaeRomai3+w@mail.gmail.com>
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Message-ID: <3e80014a-a5fa-ebf2-4617-29fd4dd67456@oleksandr-kravchuk.com>
-Date: Mon, 24 Jun 2019 20:03:40 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=SP9rXjTkqDg92TKQr1dmUUPKqrrzyxskE7OqzA0yDPs=;
+	b=suSus1DCyTkLkF/V4WhsmJ5lHxjA8yV4Sceq6YwWCExWMj0kWAO5zyOKsozolAdnPS
+	dZUE/A3wuamH5m9aLPcpiq4hSYtV/WQ1HIPj94ApUIqaAbTsd356w/yP0W7xl4DfhOe7
+	tZll9MErEGfL5svqMrhR7Ccl7NlUG05DCaf1w/IbcLp8C0qm2gvEdugRJsbAlToAo84z
+	A9Zedof6Ojy3d5XEdWCAVWludCZOyrOOcNNK80WC80ym++O59GwWhu8awtVgDPdXazSx
+	vOCavSr2mExc1GvvmreYiBP8yHSsuVeCEXUzWnGt0XCysgPZObU/t+r64Z9TmcEzFPNg
+	3aBQ==
+X-Gm-Message-State: APjAAAXYPQWPSHfPro74aYw+e0IfRyccIbj9FgXuLPNFzkaaMOmVWuwc
+	soHGYFLVLUpV3AOcDR1AZaPpP4frvtPbAZBG1os=
+X-Google-Smtp-Source: APXvYqyycBP/SGTkQrEpH/0VCJM7hZYjBbtS2IOhmjAAXB3D0hsExQ5fUYnFUYDvAx1nTG5nTYl+r/PvXgw42mlezAU=
+X-Received: by 2002:a05:6402:6d0:: with SMTP id
+	n16mr15852494edy.168.1561399712248; 
+	Mon, 24 Jun 2019 11:08:32 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soezey1nig9E+7ZGt_Lq=tycPfL0-OXMvdFaeRomai3+w@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] nuttcp: add systemd unit file
+References: <20190617102305.20150-1-pascal.bach@siemens.com>
+In-Reply-To: <20190617102305.20150-1-pascal.bach@siemens.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 24 Jun 2019 20:08:22 +0200
+Message-ID: <CA+chaQc4CwpKA2E4rHM-baNj-2pdWA9rKmocut-47_QR3CfSow@mail.gmail.com>
+To: Pascal Bach <pascal.bach@siemens.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCHv4 1/3] protobuf: 3.6.1 -> 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,92 +55,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 18:03:43 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 24 Jun 2019 18:08:32 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-I thought the same. I am not sure how this is supposed to work, but when
-I add `inherit systemd`, unit files do not end up in the package.
+With the upgrade now merged in master I'm seeing following failure:
 
-On 24/06/2019 02:54, Khem Raj wrote:
-> On Sun, Jun 23, 2019 at 3:36 PM Oleksandr Kravchuk
-> <open.source@oleksandr-kravchuk.com> wrote:
->> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
->> ---
->>  .../recipes-support/nuttcp/nuttcp/nuttcp.socket      |  9 +++++++++
->>  .../recipes-support/nuttcp/nuttcp/nuttcp@.service    |  8 ++++++++
->>  .../recipes-support/nuttcp/nuttcp_8.2.2.bb           | 12 +++++++++++-
->>  3 files changed, 28 insertions(+), 1 deletion(-)
->>  create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
->>  create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
->>
->> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
->> new file mode 100644
->> index 000000000..a8ae74fb8
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
->> @@ -0,0 +1,9 @@
->> +[Unit]
->> +Description=Network Performance Testing Server Activation Socket
->> +
->> +[Socket]
->> +ListenStream=5000
->> +Accept=true
->> +
->> +[Install]
->> +WantedBy=sockets.target
->> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
->> new file mode 100644
->> index 000000000..b778e8552
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
->> @@ -0,0 +1,8 @@
->> +[Unit]
->> +Description=Network Performance Testing Server
->> +After=local-fs.target
->> +
->> +[Service]
->> +User=nobody
->> +ExecStart=/usr/bin/nuttcp -S
->> +StandardInput=socket
->> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
->> index 2fd563123..193caf3cf 100644
->> --- a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
->> +++ b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
->> @@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff52
->>
->>  UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
->>
->> -SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
->> +SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
->> +           file://nuttcp@.service \
->> +           file://nuttcp.socket"
->>  SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
->>  SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
->>
-> I think we also need to inherit systemd bbclass,
+./.libs/libprotoc.so: error: undefined reference to
+'descriptor_table_google_2fprotobuf_2fdescriptor_2eproto'
+./.libs/libprotoc.so: error: undefined reference to
+'scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto'
+collect2: error: ld returned 1 exit status
+Makefile:3923: recipe for target 'protoc' failed
+
+My guess it's caused by gold linker being used in my builds (with
+ld-is-gold DISTRO_FEATURE).
+
+Anyone else seeing this?
+
+On Mon, Jun 17, 2019 at 12:23 PM Pascal Bach <pascal.bach@siemens.com>
+wrote:
+
+> Simple update to latest release
 >
->> @@ -24,5 +26,13 @@ do_compile () {
->>
->>  do_install () {
->>      install -d ${D}${bindir}
->> +    install -d ${D}${systemd_system_unitdir}
->>      install -m 0755 nuttcp ${D}${bindir}
->> +    install -m 0644 ${WORKDIR}/nuttcp@.service ${D}${systemd_system_unitdir}
->> +    install -m 0644 ${WORKDIR}/nuttcp.socket ${D}${systemd_system_unitdir}
->>  }
->> +
->> +FILES_${PN} += " \
->> +    ${bindir} \
->> +    ${systemd_system_unitdir} \
->> +"
->> --
->> 2.17.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> The patch is needed to make python3-protobuf compile
+> as otherwise a file it expects is missing.
+>
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+> ---
+>  ...s-map_util.h-to-list-of-installed-headers.patch | 52
+> ++++++++++++++++++++++
+>  .../{protobuf_3.6.1.bb => protobuf_3.8.0.bb}       |  7 ++-
+>  2 files changed, 55 insertions(+), 4 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+>  rename meta-oe/recipes-devtools/protobuf/{protobuf_3.6.1.bb =>
+> protobuf_3.8.0.bb} (93%)
+>
+> diff --git
+> a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+> new file mode 100644
+> index 000000000..a160e5e97
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
+> @@ -0,0 +1,52 @@
+> +From ea6e776e50971c89ad2293046b6ae2a6a9753c56 Mon Sep 17 00:00:00 2001
+> +From: Adam Cozzette <acozzette@google.com>
+> +Date: Thu, 6 Jun 2019 10:29:58 -0700
+> +Subject: [PATCH] Added stubs/map_util.h to list of installed headers
+> +
+> +This should fix issue #6186. I also had to remove a couple unnecessary
+> +const keywords in map_util.h because the no_warning_test was showing
+> +errors about those.
+> +
+> +Upstream-Status: Submitted [
+> https://github.com/protocolbuffers/protobuf/pull/6223]
+> +---
+> + src/Makefile.am                      | 1 +
+> + src/google/protobuf/stubs/map_util.h | 4 ++--
+> + 2 files changed, 3 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/Makefile.am b/src/Makefile.am
+> +index be18ba76..1689e221 100644
+> +--- a/src/Makefile.am
+> ++++ b/src/Makefile.am
+> +@@ -72,6 +72,7 @@ nobase_include_HEADERS =
+>          \
+> +   google/protobuf/stubs/hash.h                                   \
+> +   google/protobuf/stubs/logging.h                                \
+> +   google/protobuf/stubs/macros.h                                 \
+> ++  google/protobuf/stubs/map_util.h                               \
+> +   google/protobuf/stubs/mutex.h                                  \
+> +   google/protobuf/stubs/once.h                                   \
+> +   google/protobuf/stubs/platform_macros.h                        \
+> +diff --git a/src/google/protobuf/stubs/map_util.h
+> b/src/google/protobuf/stubs/map_util.h
+> +index 2313e1f5..b04d9d46 100644
+> +--- a/src/google/protobuf/stubs/map_util.h
+> ++++ b/src/google/protobuf/stubs/map_util.h
+> +@@ -620,7 +620,7 @@ bool UpdateReturnCopy(Collection* const collection,
+> + // twice. Unlike UpdateReturnCopy this also does not come with the issue
+> of an
+> + // undefined previous* in case new data was inserted.
+> + template <class Collection>
+> +-typename Collection::value_type::second_type* const
+> ++typename Collection::value_type::second_type*
+> + InsertOrReturnExisting(Collection* const collection,
+> +                        const typename Collection::value_type& vt) {
+> +   std::pair<typename Collection::iterator, bool> ret =
+> collection->insert(vt);
+> +@@ -633,7 +633,7 @@ InsertOrReturnExisting(Collection* const collection,
+> +
+> + // Same as above, except for explicit key and data.
+> + template <class Collection>
+> +-typename Collection::value_type::second_type* const
+> ++typename Collection::value_type::second_type*
+> + InsertOrReturnExisting(
+> +     Collection* const collection,
+> +     const typename Collection::value_type::first_type& key,
+> +--
+> +2.11.0
+> +
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> index cf72d9ca7..476d1e309 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.6.1.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+> @@ -10,13 +10,12 @@ LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+>  DEPENDS = "zlib"
+>  DEPENDS_append_class-target = " protobuf-native"
+>
+> -PV .= "+git${SRCPV}"
+> +SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
+>
+> -SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+> -
+> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
+> +SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
+>             file://run-ptest \
+>             file://0001-protobuf-fix-configure-error.patch \
+> +
+>  file://0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch \
+>  "
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
