@@ -1,24 +1,57 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B690A6C230
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
+	[209.85.208.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 58BE17E3F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 08:30:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5O8U8n1012433
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 24 Jun 2019 18:03:41 +0000 (UTC)
+Received: by mail-lj1-f170.google.com with SMTP id 16so13484489ljv.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 01:30:18 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Mon, 24 Jun 2019 01:29:57 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Jun 2019 16:29:56 +0800
-Message-ID: <1561364996-208468-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 24 Jun 2019 11:03:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=iSera7N57DAgoMgkuPh/loNY28VmHf0msQroln7RLu0=;
+	b=uTL2axWq0jxd3WC8A1bkW4fua+DH3bGQpyI6wUFVM5+ltSWEZfNQNPOYe8FlENbDP8
+	ic4HHwATgiO4O4tz5ENVjO9Q/KYY3VYDZjLGoCwq/TTkAVxTpxjx+yhmd9FYM41Otywf
+	4pAQfss3lU/3IVHbx5H/kP2WSY5Em8rEWMGO3c7KgZF/w/YA6ULwllvw5CDe7I5iDzx7
+	Uf0wxzwgbFu59QnTaYnyLi7+z+xgD74IJ6DqUIV4dcVVFabdFD87935SLwr3xwGuhOku
+	FaIzs39wBF3X7v88jIgv4eyz+ubmhwrNElkKJnSXDUtfbHgaJ1il8dSLLsvuIrS9TAK2
+	8U3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=iSera7N57DAgoMgkuPh/loNY28VmHf0msQroln7RLu0=;
+	b=RmEm8WHsUn8ga7g798F3OAyNxXNUWkVvs2kZp5lTT3zHvPPINRYl35WdaCyaw5qFr3
+	fZksiSkWMhzhQy4zCi+B69Qk4NgZlNGgnxE8lIPU0DSinl1ZWNb0bEt7c9phSOI8t+Yg
+	/ho716CZH8AD+u9GIULkNvQCVGKAggj2VrNrMs/zup7PjQit0gillVefqF9ab1kSaedl
+	5jAoEMbVHh+6qfWqf8O7yayejIlYzng3fyV4mWEsFitvx47q2tou21YJXHRF5gHrCxfb
+	TlyqphHtPzN0Htchh4zD/Mump0l9rNkJgRj6pTvL0kj2Y6pbwA+Wt22J84clMYgmQ9+H
+	u6gQ==
+X-Gm-Message-State: APjAAAVwOwuC+EqYiVpXSxAlETk32pS54BJNumqi+Ne+CjrrzYvfISd4
+	YM5FS/R37WRYhigs1LdGtez+cmhUTsY=
+X-Google-Smtp-Source: APXvYqy0h+1A1AFYOvmTwhBiCYE4RT+cMc/hDI5vYzSIoi18oixvQBWBNzEEVDsNj+RPbYup4QIv7Q==
+X-Received: by 2002:a2e:89c8:: with SMTP id c8mr31198258ljk.70.1561399421528; 
+	Mon, 24 Jun 2019 11:03:41 -0700 (PDT)
+Received: from [192.168.0.8] (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id u9sm1635623lfb.38.2019.06.24.11.03.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Jun 2019 11:03:40 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190623223554.13989-1-open.source@oleksandr-kravchuk.com>
+	<CAMKF1soezey1nig9E+7ZGt_Lq=tycPfL0-OXMvdFaeRomai3+w@mail.gmail.com>
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Message-ID: <3e80014a-a5fa-ebf2-4617-29fd4dd67456@oleksandr-kravchuk.com>
+Date: Mon, 24 Jun 2019 20:03:40 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] python-pygobject: fix install dir for python2
+In-Reply-To: <CAMKF1soezey1nig9E+7ZGt_Lq=tycPfL0-OXMvdFaeRomai3+w@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-networking] nuttcp: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,182 +64,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 08:30:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Jun 2019 18:03:43 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Changqing Li <changqing.li@windriver.com>
+I thought the same. I am not sure how this is supposed to work, but when
+I add `inherit systemd`, unit files do not end up in the package.
 
-* after upgrade to 3.32.1, pygobject switch to build with meson, and
-  default python option is python3, switch to python2
-
-* default install dir get by python.install_sources and
-python.get_install_dir is get from python's sysconfig info,
-not like python3, for python2, the install dir include prefix of
-recipe-sysroot-native dir, like "build/tmp-glibc/work/core2-32-wrs-linux/
-python-pygobject/3.32.1-r0/recipe-sysroot-native/usr/lib/python2.7/site-packages"
-add stagedir option for user to config correct install dir.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../0001-python-pyobject-fix-install-dir.patch     | 121 +++++++++++++++++++++
- .../python/python-pygobject_3.32.1.bb              |   6 +-
- 2 files changed, 126 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
-
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch b/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
-new file mode 100644
-index 0000000..848cda5
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-pygobject/0001-python-pyobject-fix-install-dir.patch
-@@ -0,0 +1,121 @@
-+From 8b4648d5bc50cb1c14961ed38bf97d5a693f5237 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Mon, 24 Jun 2019 14:51:52 +0800
-+Subject: [PATCH] python-pyobject: fix the wrong install dir for python2
-+
-+* after upgrade to 3.32.1, pygobject switch to build with meson, and
-+  default python option is python3, switch to python2
-+
-+* default install dir get by python.install_sources and 
-+python.get_install_dir is get from python's sysconfig info,
-+not like python3, for python2, the install dir include the basedir of
-+recipe-sysroot-native, add stagedir option for user to config
-+correct install dir.
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ gi/meson.build            | 7 +++----
-+ gi/overrides/meson.build  | 4 ++--
-+ gi/repository/meson.build | 4 ++--
-+ meson.build               | 4 +++-
-+ meson_options.txt         | 1 +
-+ pygtkcompat/meson.build   | 4 ++--
-+ 6 files changed, 13 insertions(+), 11 deletions(-)
-+
-+diff --git a/gi/meson.build b/gi/meson.build
-+index c1afd68..249c23d 100644
-+--- a/gi/meson.build
-++++ b/gi/meson.build
-+@@ -60,9 +60,8 @@ python_sources = [
-+   'types.py',
-+ ]
-+ 
-+-python.install_sources(python_sources,
-+-  pure : false,
-+-  subdir : 'gi'
-++install_data(python_sources,
-++  install_dir: join_paths(stagedir, 'gi')
-+ )
-+ 
-+ # https://github.com/mesonbuild/meson/issues/4117
-+@@ -76,7 +75,7 @@ giext = python.extension_module('_gi', sources,
-+   dependencies : [python_ext_dep, glib_dep, gi_dep, ffi_dep],
-+   include_directories: include_directories('..'),
-+   install: true,
-+-  subdir : 'gi',
-++  install_dir: join_paths(stagedir, 'gi'),
-+   c_args: pyext_c_args + main_c_args
-+ )
-+
-+diff --git a/gi/overrides/meson.build b/gi/overrides/meson.build
-+index 6ff073f..964fef1 100644
-+--- a/gi/overrides/meson.build
-++++ b/gi/overrides/meson.build
-+@@ -10,6 +10,6 @@ python_sources = [
-+   'keysyms.py',
-+   '__init__.py']
-+ 
-+-python.install_sources(python_sources,
-+-  subdir : join_paths('gi', 'overrides')
-++install_data(python_sources,
-++  install_dir: join_paths(stagedir, 'gi', 'overrides')
-+ )
-+diff --git a/gi/repository/meson.build b/gi/repository/meson.build
-+index fdc136b..fc88adf 100644
-+--- a/gi/repository/meson.build
-++++ b/gi/repository/meson.build
-+@@ -1,5 +1,5 @@
-+ python_sources = ['__init__.py']
-+ 
-+-python.install_sources(python_sources,
-+-  subdir : join_paths('gi', 'repository')
-++install_data(python_sources,
-++  install_dir: join_paths(stagedir, 'gi', 'repository')
-+ )
-+diff --git a/meson.build b/meson.build
-+index d27a005..ecd55d5 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -165,12 +165,14 @@ else
-+   py_version = pygobject_version
-+ endif
-+ 
-++stagedir = get_option('stagedir')
-++
-+ pkginfo_conf = configuration_data()
-+ pkginfo_conf.set('VERSION', py_version)
-+ configure_file(input : 'PKG-INFO.in',
-+   output : 'PyGObject-@0@.egg-info'.format(py_version),
-+   configuration : pkginfo_conf,
-+-  install_dir : python.get_install_dir(pure : false))
-++  install_dir : stagedir)
-+ 
-+ subdir('gi')
-+ subdir('pygtkcompat')
-+diff --git a/meson_options.txt b/meson_options.txt
-+index 5dd4cbc..21def16 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -1,3 +1,4 @@
-+ option('python', type : 'string', value : 'python3')
-+ option('pycairo', type : 'boolean', value : true, description : 'build with pycairo integration')
-+ option('tests', type : 'boolean', value : true, description : 'build unit tests')
-++option('stagedir', type : 'string', value : '')
-+diff --git a/pygtkcompat/meson.build b/pygtkcompat/meson.build
-+index 9e43c44..ef3322d 100644
-+--- a/pygtkcompat/meson.build
-++++ b/pygtkcompat/meson.build
-+@@ -3,6 +3,6 @@ python_sources = [
-+   'generictreemodel.py',
-+   'pygtkcompat.py']
-+ 
-+-python.install_sources(python_sources,
-+-  subdir : 'pygtkcompat'
-++install_data(python_sources,
-++  install_dir: join_paths(stagedir, 'pygtkcompat')
-+ )
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
-index c26b383..8f63c76 100644
---- a/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-pygobject_3.32.1.bb
-@@ -12,6 +12,7 @@ DEPENDS += "python glib-2.0"
- SRCNAME = "pygobject"
- SRC_URI = " \
-     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
-+    file://0001-python-pyobject-fix-install-dir.patch \
- "
- 
- SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
-@@ -21,9 +22,12 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
- UNKNOWN_CONFIGURE_WHITELIST = "introspection"
- 
-+PACKAGECONFIG ??= "stagedir"
-+
- PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo python-pycairo, python-pycairo"
- PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
--
-+PACKAGECONFIG[python] = "-Dpython=python3, -Dpython=python2, , "
-+PACKAGECONFIG[stagedir] = "-Dstagedir=${PYTHON_SITEPACKAGES_DIR}, -Dstagedir="", , "
- 
- BBCLASSEXTEND = "native"
- RDEPENDS_${PN} = "python-setuptools"
--- 
-2.7.4
-
+On 24/06/2019 02:54, Khem Raj wrote:
+> On Sun, Jun 23, 2019 at 3:36 PM Oleksandr Kravchuk
+> <open.source@oleksandr-kravchuk.com> wrote:
+>> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+>> ---
+>>  .../recipes-support/nuttcp/nuttcp/nuttcp.socket      |  9 +++++++++
+>>  .../recipes-support/nuttcp/nuttcp/nuttcp@.service    |  8 ++++++++
+>>  .../recipes-support/nuttcp/nuttcp_8.2.2.bb           | 12 +++++++++++-
+>>  3 files changed, 28 insertions(+), 1 deletion(-)
+>>  create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+>>  create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+>>
+>> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+>> new file mode 100644
+>> index 000000000..a8ae74fb8
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp.socket
+>> @@ -0,0 +1,9 @@
+>> +[Unit]
+>> +Description=Network Performance Testing Server Activation Socket
+>> +
+>> +[Socket]
+>> +ListenStream=5000
+>> +Accept=true
+>> +
+>> +[Install]
+>> +WantedBy=sockets.target
+>> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+>> new file mode 100644
+>> index 000000000..b778e8552
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-support/nuttcp/nuttcp/nuttcp@.service
+>> @@ -0,0 +1,8 @@
+>> +[Unit]
+>> +Description=Network Performance Testing Server
+>> +After=local-fs.target
+>> +
+>> +[Service]
+>> +User=nobody
+>> +ExecStart=/usr/bin/nuttcp -S
+>> +StandardInput=socket
+>> diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+>> index 2fd563123..193caf3cf 100644
+>> --- a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+>> +++ b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+>> @@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff52
+>>
+>>  UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
+>>
+>> -SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
+>> +SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
+>> +           file://nuttcp@.service \
+>> +           file://nuttcp.socket"
+>>  SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
+>>  SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
+>>
+> I think we also need to inherit systemd bbclass,
+>
+>> @@ -24,5 +26,13 @@ do_compile () {
+>>
+>>  do_install () {
+>>      install -d ${D}${bindir}
+>> +    install -d ${D}${systemd_system_unitdir}
+>>      install -m 0755 nuttcp ${D}${bindir}
+>> +    install -m 0644 ${WORKDIR}/nuttcp@.service ${D}${systemd_system_unitdir}
+>> +    install -m 0644 ${WORKDIR}/nuttcp.socket ${D}${systemd_system_unitdir}
+>>  }
+>> +
+>> +FILES_${PN} += " \
+>> +    ${bindir} \
+>> +    ${systemd_system_unitdir} \
+>> +"
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
