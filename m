@@ -1,25 +1,43 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 617576B073
+Return-Path: <prvs=07136487e=Richard.Leitner@skidata.com>
+X-Greylist: delayed 430 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 24 Jun 2019 06:23:05 UTC
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F1527E4F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2019 04:50:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5O4oELh007464
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jun 2019 21:50:24 -0700
-Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Sun, 23 Jun 2019 21:50:01 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Jun 2019 12:49:59 +0800
-Message-ID: <1561351799-7702-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 24 Jun 2019 06:23:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1561357386; x=1592893386;
+	h=subject:to:references:from:message-id:date:mime-version:
+	in-reply-to:content-transfer-encoding;
+	bh=DB0Xh2qs9oitsPXr7tc1McO+9UfZyMk7cFvR8tq/hJo=;
+	b=YbL7oFOnQLzS84NK1Evx+tId/Q1j6ROEkhUp4dYVsw2CmfKmkDsXs6e9
+	zKX9SxFusv7oANIp3fmherqXigA3axm4/vS/vH0G1EkQVO7rsRLcyd1Uy
+	M4+EjFOdk4V7aI7b95L6EOk242NHGU8BKiiCkzzwETHg2eJ9VRf4ikF7n
+	wAMFUNLFJV9WW3f9a322Bi+bbFtPQh3QH1hqPJR5GTSVpP1/K72yqYOVg
+	EQGZ1ZVZ/FT3X7nhi96nA00KY2XDS7HTE+xxFZ0BJIDmhFEXjH2ddjAd1
+	Ze1Cs/OvjfQaXE393TNUXR9vukGFeoi/lg0CSiaGgd4Dh0Cye5puyu/rG w==;
+IronPort-SDR: vgHly+oX/tEoHlYbSpDNeB5wQHiyDMJA33AuC80EqeNohrStl6SmRluP87thE2jiallXndwcDI
+	KyIjR/Nbux0jXobkeca3u2m0wplqSQA0Df2DGp/Ne2X51AajNOqt51Mw9/l55KBkowyiB9u3vq
+	DQwlBXVp0AQTFQy5fTrAqNKwH8gsGlvxBNAdPYOqXs7f+OJFxoc9PuhP3xyTXUg4UupopQb7oj
+	y1GCR5YjFj+N8HNfhoVHkdUR+r7IixB860oHzIFepdXEcxetGdkYmhzb7FpakQUo1O0Cc4Xdy2
+	cs4=
+X-IronPort-AV: E=Sophos;i="5.63,411,1557180000"; 
+   d="scan'208";a="2204184"
+To: Ricardo Ribalda Delgado <ricardo@ribalda.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20190621083136.21492-1-ricardo@ribalda.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <45e7ac92-f7f5-4302-a0f3-f31ef2c32b3d@skidata.com>
+Date: Mon, 24 Jun 2019 08:15:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [meta-networking][PATCH] strongswan: upgrade 5.7.1 -> 5.8.0
+In-Reply-To: <20190621083136.21492-1-ricardo@ribalda.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH] classpath: Fix build with aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,60 +50,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 04:50:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Jun 2019 06:23:06 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Rename systemd service units since it uses strongswan-starter.service
-for the legacy unit and strongswan.service for the modern one.
+Hi Ricardo,
+thanks for the patch!
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb}      | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-networking/recipes-support/strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb} (94%)
+I'll add it to my tests asap and give you feedback.
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-similarity index 94%
-rename from meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-rename to meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-index 5a4e2d3..fa1bd97 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
-            "
- 
--SRC_URI[md5sum] = "86b7e9321cde075cf382268fd282e0b0"
--SRC_URI[sha256sum] = "006f9c9126e2a2f4e7a874b5e1bd2abec1bbbb193c8b3b3a4c6ccd8c2d454bec"
-+SRC_URI[md5sum] = "e05f2d16a7479a2a9591609c256d523a"
-+SRC_URI[sha256sum] = "15b1e10c7dd6253ab5d791fe9b9cb84624e24c118aecd9b90251b4e60daa0933"
- 
- UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
- 
-@@ -23,7 +23,6 @@ EXTRA_OECONF = " \
- 
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
- 
--
- PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
-         ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
- "
-@@ -48,7 +47,7 @@ inherit autotools systemd pkgconfig
- RRECOMMENDS_${PN} = "kernel-module-ipsec"
- 
- FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS}"
--FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/ipsec/.debug ${libexecdir}/ipsec/.debug"
-+FILES_${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug ${libdir}/ipsec/.debug ${libexecdir}/ipsec/.debug"
- FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV} ${libdir}/ipsec/*.la"
- FILES_${PN}-staticdev += "${libdir}/ipsec/*.a"
- 
-@@ -131,4 +130,4 @@ RDEPENDS_${PN} += "\
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}-swanctl.service', '${BPN}.service', d)}"
-+SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} ${BPN}-starter.service"
--- 
-2.7.4
+Nonetheless, to me (from the commit messages) it's not clear if this 
+patch fixes a problem when compiling for aarch64 or on aarch64. Could 
+you please describe your change a little more in the commit message and 
+send a v2?
+Keeping the "Fixes:" is of course fine!
 
+regards;Richard.L
+
+On 21/06/2019 10:31, Ricardo Ribalda Delgado wrote:
+> Fixes:
+> | In file included from ../../../classpath-0.99/native/fdlibm/fdlibm.h:36,
+> |                  from ../../../classpath-0.99/native/fdlibm/e_exp.c:76:
+> | ../../../classpath-0.99/native/fdlibm/ieeefp.h:163:2: error: #error Endianess not declared!!
+> |  #error Endianess not declared!!
+> |   ^~~~~
+> | In file included from ../../classpath-0.99/native/fdlibm/fdlibm.h:40,
+> 
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+> ---
+>   .../classpath/classpath-0.99/aarch64.patch    | 19 +++++++++++++++++++
+>   recipes-core/classpath/classpath_0.99.bb      |  1 +
+>   2 files changed, 20 insertions(+)
+>   create mode 100644 recipes-core/classpath/classpath-0.99/aarch64.patch
+> 
+> diff --git a/recipes-core/classpath/classpath-0.99/aarch64.patch b/recipes-core/classpath/classpath-0.99/aarch64.patch
+> new file mode 100644
+> index 0000000..4de40fb
+> --- /dev/null
+> +++ b/recipes-core/classpath/classpath-0.99/aarch64.patch
+> @@ -0,0 +1,19 @@
+> +Upstream-Status: Inappropriate [upstream is dead]
+> +
+> +Signed-off-by: Ricardo Ribalda <ricardo@ribalda.com>
+> +
+> +diff --git a/native/fdlibm/ieeefp.h b/native/fdlibm/ieeefp.h
+> +index c230bbb..700dd3a 100644
+> +--- a/native/fdlibm/ieeefp.h
+> ++++ b/native/fdlibm/ieeefp.h
+> +@@ -158,6 +158,10 @@
+> + #define __IEEE_BIG_ENDIAN
+> + #endif
+> +
+> ++#ifdef __aarch64__
+> ++#define __IEEE_LITTLE_ENDIAN
+> ++#endif
+> ++
+> + #ifndef __IEEE_BIG_ENDIAN
+> + #ifndef __IEEE_LITTLE_ENDIAN
+> + #error Endianess not declared!!
+> diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
+> index 6aa3baa..714503a 100644
+> --- a/recipes-core/classpath/classpath_0.99.bb
+> +++ b/recipes-core/classpath/classpath_0.99.bb
+> @@ -14,6 +14,7 @@ SRC_URI += " \
+>               file://toolwrapper-exithook.patch \
+>               file://use_libdir.patch \
+>               file://freetype2.patch \
+> +            file://aarch64.patch \
+>              "
+>   
+>   SRC_URI[md5sum] = "0ae1571249172acd82488724a3b8acb4"
+> 
 
