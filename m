@@ -1,39 +1,37 @@
 Return-Path: <prvs=072d76755=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id DC8CE7DE38
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 02A067D71B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 11:12:04 +0000 (UTC)
+	Tue, 25 Jun 2019 11:53:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1561461126; x=1592997126;
-	h=subject:to:references:from:cc:message-id:date:
-	mime-version:in-reply-to:content-transfer-encoding;
-	bh=vOAL5vkGDHc2O4OZd28RZplf5uIuWcQmTPQvbIAGt78=;
-	b=gclHT0dwvEQL2aTFw9JmrGBw24ihrhGYpK7U4a+RSrgAFWYdFMatj9Y2
-	53y4fXDUSmTKmRV8GbYbESuuBlMStRe6pouwZw7jfOMGZMgDjjRde1ymi
-	VANOmIcqct9qXkKslI7sdrxFaYJwNNfJUAM/Pe/YJv8KRouX8xe788IyT
-	s3jVIF57Pu1f86jzizfSgVlLTACWIm4U3dBdeRn0wP/iONbxUupguet1u
-	hbCzp2l8qB/ZxzQqLY0ttAWM5JBsWLf9nN33m/vl5PgmoACeosiBq2f2W
-	UwRyvw3maN/9FSkhN2PfFTKdEE6zn8I4879tmxIvw2PtLfS7lkJFoDs7F g==;
-IronPort-SDR: NTms7WjyYuF6m/XYkpE+4TJaVNNrM1QWy7BrueCnR1RDuASR8KOBgwmyWyrRKt3VLO1IXaof+A
-	OdiXmHEo+eoVoCI64ahwLD2wzgVAj7hMFDnM+wqQhXAlfMIK3w69OALBvDhVkIsuc2XpIpznsj
-	DRidEelp4p3+duVpTvSgolTrJ1V/oLqC8Fp9OeYf0geEdaIMzc6vorVHCo/nSN1E0oYjKyQb/V
-	LkakbBv2SGsxHDSjjyIWRX0yolBdMCe1P7ezQBWbtU99kgDcc3f+wgTu1KhOpGuJ2d2W0Dh83Y
-	c2Y=
-X-IronPort-AV: E=Sophos;i="5.63,415,1557180000"; d="scan'208";a="17957686"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20190617131436.24210-1-nick83ola@gmail.com>
+	t=1561463630; x=1592999630;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=mE1uKLUihX7WmqAggavzRx/frZU0ByTllw/0/lL5WBo=;
+	b=td7r21swwe4dfSINaddRoouWBrzO1rRTmTd9S5BqQKGby/2HtVSOohM5
+	ekoAULfY7tq99Z56UxBpXL1YGHuaDylRuFoc+yT75XpD2GWdZTs4pDmhi
+	sdUPfJHLyx+T8x+uw5zq/NmoPVrcDr3wUT0njERGqVk05Spvqr3r2PBxD
+	k28DFpzFnlTGiyKNiKvTzoWhBXS9v5zn0Ez9Z1twBPVrBxCW+MhGd2cf/
+	Kiv72Ym0TQWddxxSi5Rd1Jtagavqv85FQvD/LL7iwrozuF+4faRUmVo6B
+	6J9Atwn7MHnveFiiF/5Qy5eB+pj8ooDS+4eA+kQjE98NYLFPTXWIqzN6e Q==;
+IronPort-SDR: rZFAIzryzMp/Vx/Rvpqc/VyMcqhJiraAeZDSk0701p7RXL2q51TOxqdqefrYhsXsSckfyOWJIp
+	2hM6M36c8WU1ayEZVAyAwlIwzs3MCkLkOtqljuHqghJmMy7dEhEb1fiLoS+RDjj4BCaDSEgpS3
+	aJFDmD5If8Z4zPMcQ1ZSl7GCZNxlMM/Q4nFuwGrFbe0tkWk/k0Uodt/7loWe3J4j10qdazxQ4m
+	KvjWc0ykCb/8/UmBWGkJDW8WdZoIH2hK2Ogj678yETls6xLFcoQToX3R6m/Xj3tGsmzd2rVsKh
+	UOQ=
+X-IronPort-AV: E=Sophos;i="5.63,415,1557180000"; 
+   d="scan'208";a="2207510"
 From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <6d8f7ca6-c335-6266-51de-f891d4a62ca8@skidata.com>
-Date: Tue, 25 Jun 2019 13:12:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.0
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Jun 2019 13:53:23 +0200
+Message-ID: <20190625115327.9314-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20190617131436.24210-1-nick83ola@gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] openjdk-8: Enable HotSpot builds on 5.x Linux kernels
+Subject: [meta-java][PATCH 0/4] fix build errors for Fedora 29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,94 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 11:12:05 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Jun 2019 11:53:49 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+This series fixes openjdk-7 and openjdk-8  builds for Fedora 29.
+Setting Wno-error for compiler warnings is only a workaround and
+will be removed when we update openjdk/icedtea native to the latest
+versions again.
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Richard Leitner (4):
+  cacao: update to latest staging tip 2d6f6c14daf9
+  README: rewrite build host dependencies
+  icedtea7-native: disable new compiler warnings
+  openjdk-8: disable stringop-overflow compiler errors
 
-If you have any questions, please let me know.
+ README                                                    | 8 ++++----
+ .../cacao-1.6.1-do-not-rely-on-absolute-paths.patch       | 0
+ .../system-boehm-gc.patch                                 | 0
+ .../cacao/{cacao_1.6.1.bb => cacao_2d6f6c14daf9.bb}       | 7 ++++---
+ recipes-core/icedtea/icedtea7-native.inc                  | 3 +++
+ recipes-core/openjdk/openjdk-8-release-172b11-common.inc  | 5 +++++
+ 6 files changed, 16 insertions(+), 7 deletions(-)
+ rename recipes-core/cacao/{cacao-1.6.1 => cacao-2d6f6c14daf9}/cacao-1.6.1-do-not-rely-on-absolute-paths.patch (100%)
+ rename recipes-core/cacao/{cacao-1.6.1 => cacao-2d6f6c14daf9}/system-boehm-gc.patch (100%)
+ rename recipes-core/cacao/{cacao_1.6.1.bb => cacao_2d6f6c14daf9.bb} (89%)
 
-regards;Richard.L
+-- 
+2.20.1
 
-On 17/06/2019 15:14, Nicola Lunghi wrote:
-> This is a backport of a patch to enable hotspot builds
-> with 5.x kernels.
-> 
-> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
-> ---
->   .../openjdk-8-release-172b11-common.inc       |  1 +
->   ...-HotSpot-builds-on-5.x-Linux-kernels.patch | 43 +++++++++++++++++++
->   2 files changed, 44 insertions(+)
->   create mode 100644 recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
-> 
-> diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-> index ad20585..a8d3ccb 100644
-> --- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-> @@ -29,6 +29,7 @@ HOTSPOT_UB_PATCH = "\
->       file://0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch \
->       file://0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch \
->       file://0019-hotspot-Turn-on-the-Wreturn-type-warning.patch \
-> +    file://0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch \
->   "
->   HOTSPOT_UB_PATCH_prepend_aarch64 = "\
->       file://0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch \
-> diff --git a/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch b/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
-> new file mode 100644
-> index 0000000..f9feca0
-> --- /dev/null
-> +++ b/recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
-> @@ -0,0 +1,43 @@
-> +From 90220d41f65910b108c901977eefe78fc1edecc5 Mon Sep 17 00:00:00 2001
-> +From: Nicola Lunghi <nicola.lunghi@jci.com>
-> +Date: Mon, 17 Jun 2019 13:59:26 +0100
-> +Subject: [PATCH] Enable HotSpot builds on 5.x Linux kernels
-> +
-> +8217753: Enable HotSpot builds on 5.x Linux kernels
-> +Summary: Remove Linux kernel version check as very unlikely a kernel older than 2.4 will be used.
-> +Reviewed-by: erikj
-> +
-> +Upstream-Status: Backport (http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/5af8ec63c21c)
-> +---
-> + hotspot/make/linux/Makefile | 15 +--------------
-> + 1 file changed, 1 insertion(+), 14 deletions(-)
-> +
-> +diff --git a/hotspot/make/linux/Makefile b/hotspot/make/linux/Makefile
-> +index 17c14097..e8f20104 100644
-> +--- a/hotspot/make/linux/Makefile
-> ++++ b/hotspot/make/linux/Makefile
-> +@@ -227,20 +227,7 @@ all:
-> + 	@echo "  $(TARGETS_SHARK)"
-> + 	@echo "  $(TARGETS_MINIMAL1)"
-> +
-> +-checks: check_os_version check_j2se_version
-> +-
-> +-# We do not want people accidentally building on old systems (e.g. Linux 2.2.x,
-> +-# Solaris 2.5.1, 2.6).
-> +-# Disable this check by setting DISABLE_HOTSPOT_OS_VERSION_CHECK=ok.
-> +-
-> +-SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
-> +-OS_VERSION := $(shell uname -r)
-> +-EMPTY_IF_NOT_SUPPORTED = $(filter $(SUPPORTED_OS_VERSION),$(OS_VERSION))
-> +-
-> +-check_os_version:
-> +-ifeq ($(DISABLE_HOTSPOT_OS_VERSION_CHECK)$(EMPTY_IF_NOT_SUPPORTED),)
-> +-	$(QUIETLY) >&2 echo "*** This OS is not supported:" `uname -a`; exit 1;
-> +-endif
-> ++checks: check_j2se_version
-> +
-> + # jvmti.make requires XSLT (J2SE 1.4.x or newer):
-> + XSLT_CHECK	= $(REMOTE) $(RUN.JAVAP) javax.xml.transform.TransformerFactory
-> +--
-> +2.20.1
-> +
-> 
 
