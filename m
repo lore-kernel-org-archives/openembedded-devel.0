@@ -1,55 +1,56 @@
 Return-Path: <ricardo.ribalda@gmail.com>
 Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
 	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E1E987DD6E
+	by mail.openembedded.org (Postfix) with ESMTP id 312CA7DD6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:41 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id z25so25720369edq.9
+	Tue, 25 Jun 2019 07:52:43 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id s49so25770250edb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:43 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=t1rRpptFg/WWWPRfbmgFb05EUnuBwnsZvEqBWfO+mT0=;
-	b=TP+OWqvcl6p7oVFO2J/rWoVExut4PT1JDx1AJs3AoQkCbslvTyqNPHRXlhE6jtF4VI
-	spW2WOqIA2EmpBv4qrLV3zFD0ZzNdQdnwoo1e0rZNjWAB7qJndU7lqqTNAamOp+yzHXV
-	XZ8E49uAXdpBqZFjMeeWa3G6wdZbgQpbu9J5zwyEZMqijeXvSwmR2cnGOLttwLqCWS0R
-	vCkmLiPbX6mW9ZgMcMdxaP3qrqEoDx9avbgHjgkp32IoODBkXBLHb6NxYakYGUbIx6DE
-	OuMFM+50GTIj1Yl6PqFLlB90LB8+bKwXizJzJRB04RjTcEd36IdzbdBVOkk5uQWdER+7
-	gnVA==
+	bh=1DNvxUm3TVDxkwMc7WwDM+gkbGQQGNNNCz7bvwcsWOs=;
+	b=WNYNcxpOGrvsmE5M+Y/5FQ0MPY/mwGaM2KXRzWsX6SFmDDxfElsLUQP+79yAOuP4LV
+	r9zcNTIG8oB1JYLYjnpry5HoXGFb5l05M42Qo4kCpQP7FhEWmSOLXr52X2RKlVvItsOu
+	bmV31CHFWXxbSmzYnW4bOU2OZbymjbLq1me60WrTmtXNsVlETE4d02yvUOu7PSFvZpMa
+	R9Pid4NigdUNfBEmcLxFSZmCwKXQae88MNLQbObbL8knEMPy2iUcTr2C1a59cKd8IutJ
+	AqzIzsImG3urTvKUYExTeCRHxVgFrGGJ6ihmfS6HKGbugntzOyL9+mDoqf3Qne9LJXcO
+	r6aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=t1rRpptFg/WWWPRfbmgFb05EUnuBwnsZvEqBWfO+mT0=;
-	b=pnmAAyFC+zbD+5YoNUdv20x6aN4I2MDNU4qtVFWfLYuRCcxPTT+bSszFlmk/I0CTG5
-	a5Q7HkKBL0kbbu5s4CsXJNrMk6u6k7AfhaKxUjmEV24SQKUt5ifsJL+rOzifXgacmnkZ
-	l0nOGcu7vhn2i6cwa6HI8IWcLdqvMoEPQ46GjeVshxqtfloDRvxwlCUj6c+O3M50ZTAF
-	f/DIUJIsWprBSJzjRZ41UP/bH2hK2RmcHfIBaVoM9JGKjg5SqxTErRFKg+uexxGri4UI
-	dNUNqm5D8aXRxs1S/gDhE9ix3ITI/T6Xir9sVt00CHLXAp5+XLnAJnD+tDOFQKyl/UqR
-	9+Ww==
-X-Gm-Message-State: APjAAAU9BF72yt2GgMxMo4InMv7Zm4E8QKW0paIhmL9TRXDi8holImH7
-	r5m2DjjUqA/KrUKIBC9tYg1+tsCJlnc=
-X-Google-Smtp-Source: APXvYqzASavqKJ9wX0tlSD5uPykdhLzBu7wIlGvnPtc++064npYSlGqMUe+V5FDWCvCA1zKQYmCdAA==
-X-Received: by 2002:a50:fa83:: with SMTP id w3mr92248828edr.47.1561449162527; 
-	Tue, 25 Jun 2019 00:52:42 -0700 (PDT)
+	bh=1DNvxUm3TVDxkwMc7WwDM+gkbGQQGNNNCz7bvwcsWOs=;
+	b=gWjsucZ/LSt4AJlpPfV8+3Ee2oinx/XSABgFb6lZqCVLx1Wc1k5w5dCvG8t12Q3/3Q
+	jwAdxPr5N8VWNnGcxymKYLKOGF8YC4BJHAphhTvhTzNI0GrowLS5hK57CIveTKJivQSW
+	B3lj9RqhXQUO7u85J0oYfRHcrUC3R1D4DRrgdxY9wqLh/iJLeYrhxuO1bqQbssL4HCjD
+	6gHHFnYavZkIC5oh2Pwoj4Hl49TUg62WSwKVhd/99oWl38OO0SuqXRau2uabKYHD00+i
+	ECZr53xmG+bSpnInTxFpoMaWu9p9uJ5wx/PYMgpgwt4z60Yh8hAar7djbXUfp8h40ph+
+	TexA==
+X-Gm-Message-State: APjAAAUo3sA1J1sNAJ6+IDsGAfGMFrAorKcjlrq+qxwyThZVhxxodgeo
+	XQRlsNsqXt4yrTiVtmLYxu/zarhgiY4=
+X-Google-Smtp-Source: APXvYqzM+1vtXXCxB0r8rBZhzXMk6xV+H+NngzBGvlan8fd7ancSFTAwFsG8kO1tb31Lnl0hA1vY6A==
+X-Received: by 2002:a05:6402:12d2:: with SMTP id
+	k18mr51302530edx.197.1561449163790; 
+	Tue, 25 Jun 2019 00:52:43 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.41
+	y22sm4308640edw.94.2019.06.25.00.52.42
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:41 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:42 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:11 +0200
-Message-Id: <20190625075223.13585-12-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:12 +0200
+Message-Id: <20190625075223.13585-13-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 11/23] cup: Do not use all as PACKAGE_ARCH
+Subject: [meta-java][PATCH 12/23] dbus-java: Do not use all as PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,46 +63,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:42 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:43 -0000
 Content-Transfer-Encoding: 8bit
 
-cup has RDEPEND that are not PACKAGE_ARCH=all
+dbus-java has RDEPEND that are not PACKAGE_ARCH=all
 
 Fixes:
-ERROR: mc:qt5022:cup-0.10k-r0 do_package_write_deb_setscene: Error executing a python function in exec_python_func() autogenerated:
+ERROR: dbus-java-2.7-r0 do_populate_sysroot_setscene: Error executing a python function in exec_python_func() autogenerated:
 
 The stack trace of python calls that resulted in this exception/failure was:
 File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
      0001:
- *** 0002:do_package_write_deb_setscene(d)
+ *** 0002:do_populate_sysroot_setscene(d)
      0003:
-File: '/workdir/repo/poky/meta/classes/package_deb.bbclass', lineno: 296, function: do_package_write_deb_setscene
-     0292:
-     0293:    if os.access(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"),os.R_OK):
-     0294:        os.unlink(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"))
-     0295:
- *** 0296:    sstate_setscene(d)
-     0297:}
-     0298:addtask do_package_write_deb_setscene
-     0299:
-     0300:python () {
+File: '/workdir/repo/poky/meta/classes/staging.bbclass', lineno: 126, function: do_populate_sysroot_setscene
+     0122:do_populate_sysroot[sstate-outputdirs] = "${COMPONENTS_DIR}/${PACKAGE_ARCH}/${PN}"
+     0123:do_populate_sysroot[sstate-fixmedir] = "${COMPONENTS_DIR}/${PACKAGE_ARCH}/${PN}"
+     0124:
+     0125:python do_populate_sysroot_setscene () {
+ *** 0126:    sstate_setscene(d)
+     0127:}
+     0128:addtask do_populate_sysroot_setscene
+     0129:
+     0130:def staging_copyfile(c, target, dest, postinsts, seendirs):
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/cup/cup_0.10k.bb | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-extended/dbus/dbus-java_2.7.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
-index 7792c62..3ce5a21 100644
---- a/recipes-core/cup/cup_0.10k.bb
-+++ b/recipes-core/cup/cup_0.10k.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c
+diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
+index 0b093a0..7715325 100644
+--- a/recipes-extended/dbus/dbus-java_2.7.bb
++++ b/recipes-extended/dbus/dbus-java_2.7.bb
+@@ -11,7 +11,9 @@ RDEPENDS_${PN}-viewer = "java2-runtime libunixsocket-java ${PN}-bin libmatthew-d
+ RDEPENDS_${PN}-bin = "java2-runtime libunixsocket-java libmatthew-debug-java ${JPN}"
+ RSUGGESTS_${JPN} = "libunixsocket-java"
  
- RDEPENDS_${PN} = "java2-runtime"
- RDEPENDS_${PN}_class-native = ""
+-PR = "r0"
 +PACKAGE_ARCH = "${TUNE_PKGARCH}"
- 
- inherit java-library
++
++PE = "1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=72cc739fb93ae32741edbae802490e92"
+ SRC_URI = "http://dbus.freedesktop.org/releases/dbus-java/dbus-java-${PV}.tar.gz"
  
 -- 
 2.20.1
