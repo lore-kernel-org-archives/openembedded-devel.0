@@ -1,38 +1,41 @@
-Return-Path: <prvs=072d76755=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id B1A337E508
+Return-Path: <andrej.valek@siemens.com>
+X-Greylist: delayed 805 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 25 Jun 2019 12:16:20 UTC
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id E29667E4E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 11:54:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1561463662; x=1592999662;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=vCMntmBDqsFY3T+LlFO8NJN2Fyzdw/7CvhIoPpjQHAA=;
-	b=A/Fl6gZMqaU8kh0zOK/wPErTThOcWNHiDHsA+C/FPo8UrBS7g1NLxnZN
-	Nz6mMPIjINb2JGI4cHRKR/++DbjQDUqdO2iF5Xy2JJAfB7c1o1ygqspCT
-	3DvcpYbuds5OpJ6bj4qxDA/hH+R+y3Qkxx4GaOphhAbYnmAvIltcDajpQ
-	J83XV6yWF0BmontPx9CClRcdHXnkFH+jyqEaAP7FXbgjhWhEFYTKOHMaN
-	7TkslYZIVPPDmkYYRooEeeV1Xdah8U0NHxMQvAz2s66Fvk06mBnKyGna3
-	s8xOsfLhE2IDm/OWotHDkAhRyTZnVR1FIynwC9draO9slJpxnb7rj7PLl w==;
-IronPort-SDR: bilaFWx/vch3k4j0ukIR4HnnbBjuNXcaFP4FrHnXZKlJzEclaKspa5CWbI7oJ3tCAiy2DzQ8on
-	M7RJLX0lh9QrNvpA8HmBqhn/grEqjCqQXMEeunJVF7xL/uqnSL4I4jabBglH1mviCE17Zo03MX
-	PjR3OK8AN3oC4A8jScDYqlfYmWtZXzbc/JKj65HFWPxqyZCs82oJCUaanpNAwNbNUEkXYaQ+5S
-	FW3NAIe+pDPo9TtoGBfM9ptL7bTkc+SJ8mHqwqbY8a60Tbvm4I8musJmCo9ZT5192m8Af2N6AU
-	oII=
-X-IronPort-AV: E=Sophos;i="5.63,415,1557180000"; d="scan'208";a="17958611"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Jun 2019 13:53:27 +0200
-Message-ID: <20190625115327.9314-5-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190625115327.9314-1-richard.leitner@skidata.com>
-References: <20190625115327.9314-1-richard.leitner@skidata.com>
+	Tue, 25 Jun 2019 12:16:20 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x5PC2tJM002959
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Tue, 25 Jun 2019 14:02:55 +0200
+Received: from atvies991u6msx.ww300.siemens.net
+	(atvies991u6msx.ww300.siemens.net [158.226.163.40])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTPS id x5PC2sZZ020269
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Tue, 25 Jun 2019 14:02:55 +0200
+Received: from ATNETS9912WMSX.ww300.siemens.net ([169.254.10.82]) by
+	atvies991u6msx.ww300.siemens.net ([158.226.163.40]) with mapi id
+	14.03.0439.000; Tue, 25 Jun 2019 14:02:54 +0200
+From: "Valek, Andrej" <andrej.valek@siemens.com>
+To: Adrian Bunk <bunk@stusta.de>, Oleksandr Kravchuk
+	<open.source@oleksandr-kravchuk.com>
+Thread-Topic: [oe] [PATCH][meta-networking] dhcpcd: update to 7.2.2
+Thread-Index: AQHVKJySAJzwLOJwwEmES+xvi0IFP6anNA8AgAUVXCA=
+Date: Tue, 25 Jun 2019 12:02:54 +0000
+Message-ID: <D55698ECEC159B488D62A508E18D7FEC124BEBB3@ATNETS9912WMSX.ww300.siemens.net>
+References: <20190622014747.8719-1-open.source@oleksandr-kravchuk.com>
+	<20190622082052.GA9472@localhost>
+In-Reply-To: <20190622082052.GA9472@localhost>
+Accept-Language: en-US, de-AT
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [158.226.163.13]
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH 4/4] openjdk-8: disable stringop-overflow compiler errors
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "Scasny,
+	Radovan" <radovan.scasny@siemens.com>
+Subject: Re: [PATCH][meta-networking] dhcpcd: update to 7.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 11:54:21 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Jun 2019 12:16:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-As new compilers generate this error we disable it for now as a
-WORKAROUND. This will be removed when openjdk-8 is updated to the latest
-version
+Hello Oleksandr!
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- recipes-core/openjdk/openjdk-8-release-172b11-common.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+From the maintainer webpage (https://roy.marples.name/projects/dhcpcd/featu=
+res) I can see, that ipv6 feature hasn't been removed.
 
-diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-index a8d3ccb..d4e80f6 100644
---- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-@@ -95,6 +95,11 @@ ARM_INSTRUCTION_SET_armv4t = "ARM"
- BUILD_CFLAGS_append = " -Wno-error=deprecated-declarations"
- TARGET_CFLAGS_append = " -Wno-error=deprecated-declarations"
- 
-+# WORKAROUND: disable the "specified bound depends on the length of the source argument"
-+# compiler error until we update openjdk8 to a fixed version
-+BUILD_CFLAGS_append = " -Wno-error=stringop-overflow"
-+TARGET_CFLAGS_append = " -Wno-error=stringop-overflow"
-+
- # Enable zero mode for arm based builds, as normal hotspot fails to build
- PACKAGECONFIG_append_armv4 = " zero"
- PACKAGECONFIG_append_armv5 = " zero"
--- 
-2.20.1
+Are you going to re-submit the correct patch?
 
+Regards,
+Andrej
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel=
+-bounces@lists.openembedded.org> On Behalf Of Adrian Bunk
+Sent: Saturday, June 22, 2019 10:21 AM
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH][meta-networking] dhcpcd: update to 7.2.2
+
+On Sat, Jun 22, 2019 at 03:47:47AM +0200, Oleksandr Kravchuk wrote:
+> udev is now explicitly requested.
+>...
+
+What do you mean?
+
+If udev can no longer be disabled it should no longer be a PACKAGECONFIG.
+Otherwise I do not understand what you actually want to change.
+
+> -PACKAGECONFIG ?=3D "udev ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d=
+)}"
+> +PACKAGECONFIG +=3D "udev"
+>...
+
+Why is ipv6 support no longer enabled?
+
+cu
+Adrian
+
+--=20
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
