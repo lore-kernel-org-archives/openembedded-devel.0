@@ -1,55 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
-	[209.85.208.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 081B97DE38
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+	[209.85.208.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 63D7B7DE38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:53 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id s49so25771036edb.1
+	Tue, 25 Jun 2019 07:52:55 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id w13so25762377eds.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:55 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=aDQHn5c2n00aAa5HLluxVgFo0N1WLJ5IE5OUu3wPCuk=;
-	b=ewGMgTz/eOfZbtVJK6oTIJK2Y/qYFGw1x0771JBQ6eA5kd61zx4riJYsRmgWmmxhJe
-	uzDTykWhbsJdQTfHmxRBfmsLS4nRWstqipeqAFR2nyPFIFdCChzg3Bi6xYmjeaelsbmK
-	+iK8Yf1Q8OdU+73PIqAPCi26wE7ot5GjqW+imxuo3/NqvIdPTcUNJvz9ZFnD2+lg62HE
-	iVXMEbv66GQJmRKWAbgIVBbsBnlFRzkxOyXnIvwOpyJQmt+4jI86lUz2817CsrkvGdRI
-	7S0FF27PySZuJ5vEL9YcHfDSfOI2YtN03wML9gBo6km7/4emj2LGkk7F669aNKw8CNs8
-	7LSA==
+	bh=fNM6evOrPfXr7hXm4VeJ5FhAvggwnW7YopB9wxsvKu0=;
+	b=VnOIB+j5AnftjmOt2MRc4XqthmZ2xXXJ0YWSlXVohgbZcBLorPo/y17hqSkbu2aqgi
+	337CbMnNULT1cWNF7Z7/T9f1vN7QM5fc8o318hm9j9oOyody/ip0l/wJINK9mJmC6jFj
+	WPc62WDAK8apxL5WFCG3vpcMAVeTrAyXsQURgMS4zzIMXMi9E33C9y/rNk+Hlt6JDYkD
+	AqSklpNHlLhoVwDsMvKGUuH6Tu/OC4Q4YBwbW+/3ItiDw5ORano3llpR+gD9ZSWGSqr6
+	zx5JSDe5APLfAlc9ZJkT6pgR817tlQ4PyXeBJjb3rVjIQydhknKdr3HW7rFWTX+hUe2k
+	5oIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=aDQHn5c2n00aAa5HLluxVgFo0N1WLJ5IE5OUu3wPCuk=;
-	b=g121bbxaCAn7YsCMqJMiczTCsV7thyiJg3GaTIxfbSSUpixJv2dcJqj9JzCFrsM9tg
-	zzxiA6HiTcJm9YUeArgiwT/ie4s0uH4LF1ANqdPCdMwJPO9gYdyOyTHON4erd6xKKmkt
-	ARDQHbepDkRvACNY/tXz6LGgd/tr6g7kjlTvayJBR9rlrWfdX/0GdI6Gd/hlesqKV+AM
-	x34OVY7PSf+qAGoIA9sQrCH6tfE5wN8VfCd9BmCUGN5G5Dz7h+sH7f+/M5WIFxlTwiUo
-	rskamo2iXESErY6ePI+e3f/TGOIqU/kLcI4nzApf/11iLcPZHgDMfEgRyntlX9U51cTz
-	EiYg==
-X-Gm-Message-State: APjAAAXhtm9daAgfv4k2tRxZ8FPM3qPFtpE3YDAAqCqJJVjqUUW/YpRh
-	x2l3KJjtt9542U/RmF3zMSGMDY+I+Nc=
-X-Google-Smtp-Source: APXvYqyaB/6rpV/zKDYKahjE261ITSE5r2TlFz5Jg7bb99x1FvMYTCgzcpj5FpL5Ie4G0K8XnVXN1g==
-X-Received: by 2002:a50:9871:: with SMTP id h46mr150824031edb.69.1561449174303;
-	Tue, 25 Jun 2019 00:52:54 -0700 (PDT)
+	bh=fNM6evOrPfXr7hXm4VeJ5FhAvggwnW7YopB9wxsvKu0=;
+	b=Q2EjgC6VsfJ4wwUz3zvtPmWDKJuE6aX70XTNXhcMK+1xKEtAvPvdFowg874/SxYzWU
+	FW14HMTopsunWQHdiRQcGrMCnED3OqduR86brVyk3kKizABR5Y5XN3NspniL3I8og7+q
+	gW1G5PJ2198SzEN/leO7nl/RG6h1fPDA3Xa2dNYWYXEVbx0UnfqCIVAkNbAnnVAJyZAW
+	pLdZek9hmHQYma3q0jWzLASMI/4JUGScq+Y5asbiGz69U+GwzEXCYEBRwuipz/8Lsq3a
+	FlYfNHj/gLab3chxOV2DHTAvDUyxV0gqLpDSk2IpPY1VA1uCrGu8ggEaIPVN+E9GIf08
+	37fw==
+X-Gm-Message-State: APjAAAVQkfjdermWT/A6MeTip1C855svMsMwRswCd7aF7NuZFxsDaKTY
+	llTwKBj1u8lRYRAu7fALtIqOmmc3h5Y=
+X-Google-Smtp-Source: APXvYqyU+zrp4uKNAVAKxVGa3WCLB7jpqX+OYx5e2pSekisOL3JkZE2zA2eIx+3b+ObGipuMtF+2WA==
+X-Received: by 2002:a50:ad01:: with SMTP id y1mr145726254edc.180.1561449175858;
+	Tue, 25 Jun 2019 00:52:55 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.52
+	y22sm4308640edw.94.2019.06.25.00.52.54
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:52 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:54 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:20 +0200
-Message-Id: <20190625075223.13585-21-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:21 +0200
+Message-Id: <20190625075223.13585-22-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 20/23] poi: Do not build as all PACKAGE_ARCH
+Subject: [meta-java][PATCH 21/23] xom: Allow re-running do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,37 +62,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:54 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:55 -0000
 Content-Transfer-Encoding: 8bit
 
-poi DEPENDS on non -native packages, which breaks multiconfig.
+do_compile modified the source directory destructively (mv and rm),
+avoiding its re-run.
 
 Fixes:
-
-ERROR: mc:inteli7:poi-3.0-r0 do_packagedata: Command 'cd /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/pkgdata; find . -type d -print | tar --xattrs --xattrs-include='*' -cf - -S -C /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/pkgdata -p --no-recursion --files-from - | tar --xattrs --xattrs-include='*' -xhf - -C /workdir/build/tmp/pkgdata/inteli7' returned non-zero exit status 2
-ERROR: mc:inteli7:poi-3.0-r0 do_packagedata: Function failed: sstate_task_postfunc
-ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/temp/log.do_packagedata.27730
-NOTE: recipe poi-3.0-r0: task do_packagedata: Failed
-ERROR: Task (multiconfig:inteli7:/workdir/repo/poky/../meta-java/recipes-core/jakarta-libs/poi_3.0.bb:do_packagedata) failed with exit code '1'
+ERROR: xom-1.2.10-r0 do_compile: Function failed: do_compile (log file is located at /workdir/build/tmp/work/dbfp4-poky-linux/xom/1.2.10-r0/temp/log.do_compile.1523)
+ERROR: Logfile of failure stored in: /workdir/build/tmp/work/dbfp4-poky-linux/xom/1.2.10-r0/temp/log.do_compile.1523
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| mv: cannot stat '/workdir/build/tmp/work/dbfp4-poky-linux/xom/1.2.10-r0/git/jaxen': No such file or directory
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /workdir/build/tmp/work/dbfp4-poky-linux/xom/1.2.10-r0/temp/log.do_compile.1523)
+NOTE: recipe xom-1.2.10-r0: task do_compile: Failed
+ERROR: Task (/workdir/repo/poky/../meta-java/recipes-core/xml-commons/xom_1.2.10.bb:do_compile) failed with exit code '1'
+ERROR: mc:inteli7:xom-1.2.10-r0 do_compile: Function failed: do_compile (log file is located at /workdir/build/tmp/work/corei7-64-poky-linux/xom/1.2.10-r0/temp/log.do_compile.1522)
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/jakarta-libs/poi_3.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-core/xml-commons/xom_1.2.10.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/jakarta-libs/poi_3.0.bb b/recipes-core/jakarta-libs/poi_3.0.bb
-index f9178f2..e33f2f2 100644
---- a/recipes-core/jakarta-libs/poi_3.0.bb
-+++ b/recipes-core/jakarta-libs/poi_3.0.bb
-@@ -7,6 +7,8 @@ SRC_URI = "http://archive.apache.org/dist/jakarta/poi/release/src/${BPN}-src-${P
+diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
+index 8755ddc..621a5e1 100644
+--- a/recipes-core/xml-commons/xom_1.2.10.bb
++++ b/recipes-core/xml-commons/xom_1.2.10.bb
+@@ -34,8 +34,11 @@ do_compile() {
+     oe_makeclasspath cp -s xercesImpl xalan2
+     cp=build:$cp
  
- S = "${WORKDIR}/${BPN}-3.0-rc4"
- 
-+PACKAGE_ARCH = "${TUNE_PKGARCH}"
+-    mv ${WORKDIR}/git/jaxen ${WORKDIR}/jaxen-${PV_jaxen}
+-    rm -rf ${WORKDIR}/git
++    if [ -d ${WORKDIR}/git ] ; then
++        mv ${WORKDIR}/git/jaxen ${WORKDIR}/jaxen-${PV_jaxen}
++        rm -rf ${WORKDIR}/git
++    fi
 +
- inherit java-library
+     scp="${WORKDIR}/jaxen-${PV_jaxen}/src/java/main"
  
- DEPENDS = "fastjar-native commons-collections3 commons-logging commons-lang commons-beanutils log4j1.2 xalan-j"
+     javac -sourcepath src:$scp -cp $cp -d build `find src -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
 -- 
 2.20.1
 
