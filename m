@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AA3F7E49C
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F03207E508
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 13:14:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5PDElFq001472
+	Tue, 25 Jun 2019 13:14:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5PDEOTI030285
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 25 Jun 2019 06:14:47 -0700 (PDT)
+	Tue, 25 Jun 2019 06:14:34 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 25 Jun 2019 06:14:46 -0700
+	14.3.439.0; Tue, 25 Jun 2019 06:14:13 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 25 Jun 2019 21:14:08 +0800
-Message-ID: <1561468448-24834-5-git-send-email-hongxu.jia@windriver.com>
+Date: Tue, 25 Jun 2019 21:14:06 +0800
+Message-ID: <1561468448-24834-3-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1561468448-24834-1-git-send-email-hongxu.jia@windriver.com>
 References: <1561468448-24834-1-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 5/5] gvfs: add meson option admin and udisks2 to PACKAGECONFIG
+Subject: [meta-xfce][PATCH 3/5] xfce4-session: optional support polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,79 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 13:14:46 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 13:15:00 -0000
 Content-Type: text/plain
 
-Both of admin and udisks2 depend on polkit, conditional support them
+If polkit not in DISTRO_FEATURES, it failed
+...
+|ERROR: Nothing PROVIDES 'polkit' (but meta-openembedded/meta-xfce/recipes-xfce/
+xfce4-session/xfce4-session_4.13.2.bb DEPENDS on or otherwise requires it)
+|polkit was skipped: missing required distro feature 'polkit' (not in DISTRO_FEATURES)
+|ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+|Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'xfce4-session', 'polkit']
+...
 
-See upstream commit:
-https://gitlab.gnome.org/GNOME/gvfs/commit/cdc33bf54f501a8b4574f86945628ab6c2036d64
+Upstream optional support polkit:
+https://github.com/xfce-mirror/xfce4-session/commit/560219ad500c73e0fc2c3d959f96bcb8e2a54556
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-index 7caee27..3a4714a 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
- GNOMEBASEBUILDCLASS = "meson"
- inherit gnome bash-completion gettext upstream-version-is-even
- 
--DEPENDS += "libsecret glib-2.0 gconf libgudev udisks2 polkit shadow-native"
-+DEPENDS += "libsecret glib-2.0 gconf libgudev shadow-native"
- 
- SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
- 
-@@ -18,7 +18,6 @@ EXTRA_OEMESON = " \
-     -Dgoa=false \
-     -Dgoogle=false \
-     -Dnfs=false \
--    -Dudisks2=true \
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
+index dc44c4b..7f7888e 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
+@@ -11,7 +11,6 @@ DEPENDS = " \
+     libsm \
+     libxfce4ui \
+     libxfce4util \
+-    polkit \
+     virtual/libx11 \
+     xfconf \
  "
+@@ -20,6 +19,9 @@ inherit xfce update-alternatives distro_features_check
  
- PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
-@@ -31,7 +30,6 @@ FILES_${PN} += " \
-     ${libdir}/tmpfiles.d \
-     ${systemd_user_unitdir} \
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
++PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
++
+ SRC_URI += " \
+     file://0001-configure.in-hard-code-path-to-iceauth.patch \
  "
--RDEPENDS_${PN} = "udisks2"
- 
- FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/*"
- FILES_${PN}-dev += "${libdir}/gio/modules/*.la"
-@@ -42,8 +40,14 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
- 
- RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
- 
--PACKAGECONFIG ?= "libgphoto2 ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ?= "libgphoto2 \
-+                  ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES','polkit','udisks2','',d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES','polkit','admin','',d)} \
-+                 "
- 
-+PACKAGECONFIG[udisks2] = "-Dudisks2=true, -Dudisks2=false, udisks2, udisks2"
-+PACKAGECONFIG[admin] = "-Dadmin=true, -Dadmin=false, libcap polkit"
- PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
- PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
- PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
-@@ -62,9 +66,11 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
- PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
- 
- do_install_append() {
--    # Fix up permissions on polkit rules.d to work with rpm4 constraints
--    chmod 700 ${D}/${datadir}/polkit-1/rules.d
--    chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'true', 'false', d)}; then
-+        # Fix up permissions on polkit rules.d to work with rpm4 constraints
-+        chmod 700 ${D}/${datadir}/polkit-1/rules.d
-+        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+    fi
- 
-     # After rebuilds (not from scracth) it can happen that the executables in
-     # libexec ar missing executable permission flag. Not sure but it came up
 -- 
 2.7.4
 
