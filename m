@@ -1,56 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 61C3E6C230
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B77F7DD6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:32 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id w20so18121124edd.2
+	Tue, 25 Jun 2019 07:52:33 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id z25so25719761edq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:33 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=93lA0f4bfTsdUvytvdJ4eGQmnaIIyQcR0kp+teSxpFM=;
-	b=T2RGttR64bMbTeBT4Jgl1Yol8TB3+XFmmmQTmY15SvHTS0jysxoGWSF7UQTcJ1GgF/
-	gf5fpf2Qd7AoCA/ewoZ8Fsx8kTb1w5SsfvgpPrDI9ucSkNGFL+a1gIALgPFAC+O2VPxn
-	OyDjJIJBHJrAHevTujE/3pDN2B61qssCHSkvcCNkWekj4ohCplqqRvwMXeA1Dggthwwt
-	sH4iyZiwROkmlgqKAyZ0qvn27lttfEINt9m4O19kR3CNdzX1vj6c42V6s61VMNSgGchT
-	uv9F6/B4jXd/gXimVP/iNctpugRusKvr4OhyzMqgXi3ahbhEz3dx3ScKqDZ31wKS82yx
-	eHcw==
+	bh=IUxboybVBa49WY5X9+EO5DnA8oAara3vk1VLRy/vAVM=;
+	b=TUQZvVK0LsTGuszWQuBV11/uTdpQuR7kXplaY8cc3KHtUtHtaVceTHrVTbZuoeTdut
+	Sq4WCDHGo5GrFQU7DbF0G0OdaWjMWcfCkLxzPOmPcs7nswJqyDHVeQDrR9l5g6Hgwy8J
+	47VGTGdQ85JUKfB7cnOAF4uJRvss59BWnE5iAlPJeJNiAMm+b0iNg2yZRNBqI9TDPM2N
+	MfLOeskQhEXy4T/CD2GOS/0f/jN8sLGSa8Q4DB4l1VwuE3rbijV9+BvTBOSFdYQys87m
+	UOqCYEdF07U/xXWolw1/fsqqIBzGou2QSxxU3Kc2XT+VgITCt0oj0dGo0F042uomvaKZ
+	/WTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=93lA0f4bfTsdUvytvdJ4eGQmnaIIyQcR0kp+teSxpFM=;
-	b=CXv8aifWZUkn/xo1oFfc3zrXcFcr+Zf3IzDGNBCILZNlYaxpT7jmFYY2/stcU1FR6P
-	Ukr8t1P9JrdMzMiC4Er48FNku8+Ym8Uvdc7rclB6PfCZZNsbn4PhDajAUMYgJ+Hr+aIB
-	kLDr7MoBF2cJhNduKbMyknQYQf1gWWT7rxvxGKUBlHFZ9r/x/sSshH2R6CUqPv6I8NVB
-	AYEblMaGQ0RWsq3zg10W7kZZOfVSU4tx9JuJg6TqWdZUED82B8XoFQNmfFBFZKRS85l+
-	AC1OM238GX5S6MzuQjrbrCuT9tYEC+E8jReyeQLjZ0EZgRQbQeAMQXs73gogAa+H++qa
-	LWWw==
-X-Gm-Message-State: APjAAAWoMjPufQEpTDj9/IOZN/mfyyNzXbYSFy1q15N4P3kPiqdDyTMH
-	QgTsM8Kp3u1nJdXGUbwCAwVfVS+BMu8=
-X-Google-Smtp-Source: APXvYqxeF/0EjvnM4ncO4OLh/YEnqqt7KYnAFSKlRbBUy8BZDpeyAA3PA+4wa8nnfy+lqkOmGKEdjw==
-X-Received: by 2002:a17:906:45d7:: with SMTP id
-	z23mr82182625ejq.54.1561449152811; 
-	Tue, 25 Jun 2019 00:52:32 -0700 (PDT)
+	bh=IUxboybVBa49WY5X9+EO5DnA8oAara3vk1VLRy/vAVM=;
+	b=QAVErQTYIVcolDRXafkNnTEYAX9gV3q+mGoMr3dhXXjspreWKYn+BbZeR/OD5SacVp
+	rsDFe9hhkoK7zysqC14RANQZzPOBcDiraKNbp3gScs4NAHr77Lb1oC/Swi0jUEAZIiTU
+	/Em8SRRaPej8bZkdhn9kGOTn6qZkRjrEJdkIUy4gk30b6PspSQxOjI4S5kcTrH8UId8P
+	ViwXUbPfjKx2QCCBnIB26ptPDfh+V6ivjoPRvuKP1FMxzTfx/QeQx/IdnSmnKZeXUZaw
+	dbg5cWRxc4dyBdt6dvz3usFSJV+MhVLOLOlxX6eWym1aidOVe9cEshzBKT4MhNVFuiJs
+	7VgA==
+X-Gm-Message-State: APjAAAVs3/dJ3FluvOeP9DrHd95N+7HW+Sm484HofR+w8Cd+J0Kn5Ulx
+	tobtG6TJ+aqRiOoXQJ2kn1Zu/Fy5VZk=
+X-Google-Smtp-Source: APXvYqz9wRhvuPDCeitrxTBDSUsDcecAIkDyjhjkjKQ+7CrcXv4KUpGPN6yFpZwXV7I6REQgO75jow==
+X-Received: by 2002:a50:97da:: with SMTP id f26mr133512721edb.88.1561449154148;
+	Tue, 25 Jun 2019 00:52:34 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.31
+	y22sm4308640edw.94.2019.06.25.00.52.32
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:31 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:33 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:04 +0200
-Message-Id: <20190625075223.13585-5-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:05 +0200
+Message-Id: <20190625075223.13585-6-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 04/23] classpath: Fix build with targets aarch64
+Subject: [meta-java][PATCH 05/23] jamvm: Do not build for aarch64 targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,61 +62,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:32 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:33 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes:
-| In file included from ../../../classpath-0.99/native/fdlibm/fdlibm.h:36,
-|                  from ../../../classpath-0.99/native/fdlibm/e_exp.c:76:
-| ../../../classpath-0.99/native/fdlibm/ieeefp.h:163:2: error: #error Endianess not declared!!
-|  #error Endianess not declared!!
-|   ^~~~~
-| In file included from ../../classpath-0.99/native/fdlibm/fdlibm.h:40,
+Avoids:
+| configure: error: aarch64-poky-linux-gnu not supported
+| NOTE: The following config.log files may provide further information.
+| NOTE: /workdir/build/tmp/work/aarch64-poky-linux/jamvm/2.0.0-devel+gitAUTOINC+6cef41d859-r0/build/config.log
+| ERROR: configure failed
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- .../classpath/classpath-0.99/aarch64.patch    | 19 +++++++++++++++++++
- recipes-core/classpath/classpath_0.99.bb      |  1 +
- 2 files changed, 20 insertions(+)
- create mode 100644 recipes-core/classpath/classpath-0.99/aarch64.patch
+ recipes-core/jamvm/jamvm_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-core/classpath/classpath-0.99/aarch64.patch b/recipes-core/classpath/classpath-0.99/aarch64.patch
-new file mode 100644
-index 0000000..4de40fb
---- /dev/null
-+++ b/recipes-core/classpath/classpath-0.99/aarch64.patch
-@@ -0,0 +1,19 @@
-+Upstream-Status: Inappropriate [upstream is dead]
-+
-+Signed-off-by: Ricardo Ribalda <ricardo@ribalda.com>
-+
-+diff --git a/native/fdlibm/ieeefp.h b/native/fdlibm/ieeefp.h
-+index c230bbb..700dd3a 100644
-+--- a/native/fdlibm/ieeefp.h
-++++ b/native/fdlibm/ieeefp.h
-+@@ -158,6 +158,10 @@
-+ #define __IEEE_BIG_ENDIAN
-+ #endif
-+ 
-++#ifdef __aarch64__
-++#define __IEEE_LITTLE_ENDIAN
-++#endif
-++
-+ #ifndef __IEEE_BIG_ENDIAN
-+ #ifndef __IEEE_LITTLE_ENDIAN
-+ #error Endianess not declared!!
-diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
-index 6aa3baa..714503a 100644
---- a/recipes-core/classpath/classpath_0.99.bb
-+++ b/recipes-core/classpath/classpath_0.99.bb
-@@ -14,6 +14,7 @@ SRC_URI += " \
-             file://toolwrapper-exithook.patch \
-             file://use_libdir.patch \
-             file://freetype2.patch \
-+            file://aarch64.patch \
-            "
+diff --git a/recipes-core/jamvm/jamvm_git.bb b/recipes-core/jamvm/jamvm_git.bb
+index 1762ade..57f7e64 100644
+--- a/recipes-core/jamvm/jamvm_git.bb
++++ b/recipes-core/jamvm/jamvm_git.bb
+@@ -15,3 +15,4 @@ SRC_URI = "git://git.code.sf.net/p/jamvm/code;protocol=git \
  
- SRC_URI[md5sum] = "0ae1571249172acd82488724a3b8acb4"
+ S = "${WORKDIR}/git"
+ 
++COMPATIBLE_MACHINE_aarch64 = "-"
 -- 
 2.20.1
 
