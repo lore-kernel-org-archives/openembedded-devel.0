@@ -1,55 +1,56 @@
 Return-Path: <ricardo.ribalda@gmail.com>
 Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
 	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 339547DD6E
+	by mail.openembedded.org (Postfix) with ESMTP id 7484B7DE87
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:47 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id p15so25695894eds.8
+	Tue, 25 Jun 2019 07:52:48 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id k21so25763942edq.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:48 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=sKvf86NsyrbgE9kmiCKTrfl+t6prK8Hx3eT0PnFbAtI=;
-	b=X0qudz6DWFubWMpu6Jp8OzCk0d5MtFKTfqavMNXU0teD3OjPxazRKtMUGpA3GmdsnB
-	UNCTnGSNx6JYM0kdK2FFqcYWYdYkc2gCmyJuZrei3o6sCTHsnOQabelUNxaYifm8S6TO
-	XbPPqM+CI4x4thN2QklAPPL+lusj/d/t9ES8I9ZWS3mz/3NFrpzy+AnJBJ1DBwDWen35
-	f2pvTgcflu/obRiFrhW696yV1ThK2egCT9ry4lEtZVB70SJIEz9uu0vHBNyoJ9CWKzWg
-	eatAHRAOCeFWUIaoYtfb872PbhUUDJ93FsYCPviXeV6YBGXtpOGAspJGXZcGTqIWEnwI
-	banw==
+	bh=J1XfRq/vqjfHHAGsvP3TQC11JFE5ke/BLSP9Ewh4AtY=;
+	b=sZ0AxG3KOE9kQeNmsZf04AZV/6FKkp3rfc0mntqDOOkVgagzr/qUCHv0hxFpjQPgxD
+	2ALF0F0MysQsMJ99Vk4KhXanGXsVAbIZLbBBeF3Zb9hDi6XpUEoa+Zinpyjpy9HjZNxN
+	gsQxsUwdvhWbO1KHNSteLDehDWTnDSHWsrvK2HN05dtbwOeVoJ6m38PIpcFjb8SsDTNe
+	n+JO3ZbvwgATm6E1Ifo6wEzaUABaa1WmpFLbGyEe/S1XbmOxcVHoPyx24ARDAJFGw6Xu
+	EUZwXfjZFTgOSPpqW/bwzZ0axPo5KKCJ877uxjWIOZdbJVl6EFm8eyxG698adkgpy5il
+	nGEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=sKvf86NsyrbgE9kmiCKTrfl+t6prK8Hx3eT0PnFbAtI=;
-	b=jI5nffQl3JPc3hsZ8WD+aDnckMH6iVV8Y+y4lDAE/LQbJtIM8W6Fqg12tGfSugjK33
-	ycK0Yf2tylPDjQ66BurHWyoxBebKLYxEQKHArZKsT4cCy9Eu9v6OVVvRiWxOTi+ocBtx
-	KgtHYAzIV84d4k6m6oPGnQ2uoXXmJCcv1mC2v8vj02uFT6Jw8Cx7qySaSqL2utzT2l0N
-	0NfZIuzpR7Wvjqo3GRNBS6ZHOBWJqxmKKF0X3S/WnDmzMsgN0zK5GM7H+MgJsuP7nKbg
-	NFiXdhzCeI9NcKmJXBP4UPOcikTczgqg9POorV2Gof0lyGcQDR1U1P7UcIHJEr4/MWli
-	zw6A==
-X-Gm-Message-State: APjAAAW+ihD/YWx0u8S3IJoq0pXBImPUBNHvVjQPyDnE2/hiyXhdcVTa
-	9V6vRGJEK68ujkFFBTh+oSvhnkSrUIU=
-X-Google-Smtp-Source: APXvYqyXCXSai6+6+V4dYL5Qqo7k02EoUQL+bdcDvHAI9ZV4DlvLO9Mk2UZOaZ+CDMbJJZ4b2MQtdw==
-X-Received: by 2002:a50:a56b:: with SMTP id z40mr118055655edb.99.1561449167760;
-	Tue, 25 Jun 2019 00:52:47 -0700 (PDT)
+	bh=J1XfRq/vqjfHHAGsvP3TQC11JFE5ke/BLSP9Ewh4AtY=;
+	b=lbbcQILMhTHyKAAGh3lI4nETtCytyWIBd5lA655Z3luWgjXdWFEcUiOnfEn85sN/P2
+	h2Bo7rSfEUB+UcKsy0/X7P6W6V1rsGYZ4uEqzRhnnlGdhGuKSyWegBhu0xCob1Ewa+RW
+	TQukL+YrjH6O4NyXAPXy74adNjktJUBh/obuqbJB4MwOlX8jkYClyKOCTYW7KVDTMRmF
+	SBkkthRjBifVqShd6FBLesCFJj7aFw9cY+y/Q730sn4ETOVUU7x8+ucQIXKviH6ZFUll
+	xplEOqMhJgfQoIWF1sIamHQGK5ZDKI4jbMFjjIsR6+hjc/Rw1DCINLh5PFcflCwL3JWX
+	sgLg==
+X-Gm-Message-State: APjAAAUiE+S47UiZTEGbOq9cAKO6o2grzWVMimTnx795YXw2pdXrPzR0
+	LACLhnNuxw5KtPIRQx9QWCVrkGHPRZI=
+X-Google-Smtp-Source: APXvYqyDmxuuD8gEneEClfvHDG14dTje+HNCr5+pC5FKwkQM7b96v42VPOAjIob97UKrcaJerGMGrQ==
+X-Received: by 2002:a50:913c:: with SMTP id
+	e57mr118552805eda.257.1561449169003; 
+	Tue, 25 Jun 2019 00:52:49 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.46
+	y22sm4308640edw.94.2019.06.25.00.52.47
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:46 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:48 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:15 +0200
-Message-Id: <20190625075223.13585-16-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:16 +0200
+Message-Id: <20190625075223.13585-17-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 15/23] xalan-j: Do not use all as PACKAGE_ARCH
+Subject: [meta-java][PATCH 16/23] xom: Do not use all as PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,59 +63,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:47 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:48 -0000
 Content-Transfer-Encoding: 8bit
 
-It has DEPENDS that are not -native.
+It RDEPENDS on packages that ar not PACKAGE_ARCH=all
 
 Fixes:
-
-ERROR: mc:inteli7:xalan-j-2.7.1-r1 do_package: Error executing a python function in exec_python_func() autogenerated:
-
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:emit_pkgdata(d)
-     0003:
-File: '/workdir/repo/poky/meta/classes/package.bbclass', lineno: 1502, function: emit_pkgdata
-     1498:        allow_empty = d.getVar('ALLOW_EMPTY_%s' % pkg)
-     1499:        if not allow_empty:
-     1500:            allow_empty = d.getVar('ALLOW_EMPTY')
-     1501:        root = "%s/%s" % (pkgdest, pkg)
- *** 1502:        os.chdir(root)
-     1503:        g = glob('*')
-     1504:        if g or allow_empty == "1":
-     1505:            # Symlinks needed for reverse lookups (from the final package name)
-     1506:            subdata_sym = pkgdatadir + "/runtime-reverse/%s" % pkgval
-Exception: FileNotFoundError: [Errno 2] No such file or directory: '/workdir/build/tmp/work/all-poky-linux/xalan-j/2.7.1-r1/packages-split/xalan-j-src'
+ERROR: mc:qt5507:xom-1.2.10-r0 do_compile: Function failed: do_compile (log file is located at /workdir/build/tmp/work/all-poky-linux/xom/1.2.10-r0/temp/log.do_compile.3256)
+ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/xom/1.2.10-r0/temp/log.do_compile.3256
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| mv: cannot stat '/workdir/build/tmp/work/all-poky-linux/xom/1.2.10-r0/git/jaxen': No such file or directory
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /workdir/build/tmp/work/all-poky-linux/xom/1.2.10-r0/temp/log.do_compile.3256)
+NOTE: recipe xom-1.2.10-r0: task do_compile: Failed
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/xalan-j/xalan-j_2.7.1.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-core/xml-commons/xom_1.2.10.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/xalan-j/xalan-j_2.7.1.bb b/recipes-core/xalan-j/xalan-j_2.7.1.bb
-index 7c68fba..922e293 100644
---- a/recipes-core/xalan-j/xalan-j_2.7.1.bb
-+++ b/recipes-core/xalan-j/xalan-j_2.7.1.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
- AUTHOR = "Apache Software Foundation"
- HOMEPAGE = "http://xml.apache.org/xalan-j"
+diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
+index 0e923d4..8755ddc 100644
+--- a/recipes-core/xml-commons/xom_1.2.10.bb
++++ b/recipes-core/xml-commons/xom_1.2.10.bb
+@@ -22,6 +22,8 @@ SRC_URI[archive.sha256sum] = "39985c2debb8044005fd07b09cb06f10e75652b3c048c9b443
  
--PR = "r1"
-+PE = "1"
- 
- DEPENDS = "xerces-j regexp jlex cup jaxp1.3 bcel"
- 
-@@ -18,6 +18,8 @@ SRC_URI = "\
- 
- S = "${WORKDIR}/${BPN}_2_7_1"
+ S = "${WORKDIR}/XOM"
  
 +PACKAGE_ARCH = "${TUNE_PKGARCH}"
 +
  inherit java-library
  
- JPN = "libxalan2-java"
+ DEPENDS = "fastjar-native virtual/javac-native xerces-j xalan-j"
 -- 
 2.20.1
 
