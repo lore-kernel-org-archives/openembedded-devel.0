@@ -1,55 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D5A167DD6E
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+	[209.85.208.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 233857E5E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:50 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id s49so25770824edb.1
+	Tue, 25 Jun 2019 07:52:52 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id r12so25769466edo.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:52 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=EaRONJQR4isqYdrUoQwHJ5Wa1zBhjclla+owtWnis0I=;
-	b=ELcNVi07/oooz8K2Fo5BxVog+UkBuG+m9BSFTXaNHO/PYdwzH9kaFFoF0BloE8wg5v
-	r1J7MlAK3hjIqZo7aGKAj6ekPthkTXbsu7O/9r6pbFCvOyIepE+wRqwJ7pPZP1R3sof8
-	nzTXm/svKAZNYt6sGOpySi3aS/4R3cxor6TSVp4MroFOZu6olj9MIkIS4SCfKHcODXwn
-	TiSBz+DFdNaK4NtznG1xc9fyC4Itkmr+TWYvRSHww24LB4zv6UjpXZjqf/7mCXe+xBiP
-	O4pvTJyEk2IP1eLbaBGGy4cSahwVMbkFPNYC+EbLTvCHCRIpHLWpHURVLswweL6qZ/EJ
-	93jQ==
+	bh=n6tsIi5HfC4MWKL8Kyn40UuJ+Wn0Aqdi082vvKoZZB8=;
+	b=FcADesEES/F3D8IWBUhNy/XpM5uTrtRbjiyT68PhI9i9PFDo+Yfk3hDiCLE7o2NtN8
+	U2ZQVo9b8KKObI6A9g3RydMf6EJNDLgewfppesLr/BIgJDVM8VG0A8E46CyaZcn3zL/L
+	thrcuE3kBu1tvFeX1CIZqww8aRFN40hnfQfNj9eUFOnT4t/0PwOOSSQf53anHWrv+Slx
+	kCgUeSyyUFfrEMWSJzIGvfAU5wq68We0fG097A9DJOq9ftQxhOT0yOB4R3rzKe2xkqOL
+	HuyupWIzQuDIsOjdxEztC1SfmpcTnk1KVI0e4TPR1jB4hZWM3wWUY/3Af/HhleWgRVJ2
+	82gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=EaRONJQR4isqYdrUoQwHJ5Wa1zBhjclla+owtWnis0I=;
-	b=o0Mt3iR4J6WFjIccEFF+W9/qyUj5tofqyg6rRx8u1vW0CcIu2FBNBBWIvGLy4dltRi
-	mV/I+htmDVttVhqb6pTlS98DosoA9Ar4Q0R+fsD7ONGn8m7RDYueW5xIo9PEVkkGyJxh
-	uPosI0GKI/AvRVztEj5rcdK0BArGrnC0LZb1My5liolZuIP1A3sNSTx836n8FKSbmVso
-	ZE8CE0e6sKQdhsQPfxcQnSbtFk9cLmmgq57r0nEN7DPtPSjV+/cMVz2P6SUv2+iXtIX+
-	/kS3degzHX2fR1MLJ9UPVDsWBA3q8YImCLfGVzp7+Ret83fEdOFieWsTdrK7DF2Cs73f
-	3WNQ==
-X-Gm-Message-State: APjAAAWqL5+5vfM0JjkK5QG5AveSLXs1D8Ve4Bm0v4aW9wGLHBTYEr+H
-	s5+lxBDdH9xD46VES8bb36/MG3uBQJc=
-X-Google-Smtp-Source: APXvYqzwV2TYT41ePn1yrH+X1t0uvaTLU1F2SLvl3YSK1RmRRyaDRWKLUabTy0l7Y/1XpFuWLq7ViQ==
-X-Received: by 2002:a50:974b:: with SMTP id d11mr133638551edb.24.1561449171472;
-	Tue, 25 Jun 2019 00:52:51 -0700 (PDT)
+	bh=n6tsIi5HfC4MWKL8Kyn40UuJ+Wn0Aqdi082vvKoZZB8=;
+	b=ovNHwAjbRwNhn3c3AOfWYRMAaueIfdaCYBV/4ux3xyQ0TCwoMv55MzT09a6OFvsjr7
+	phiGcFNnpz4ne1YnEK7oRsQ2b19jcTVo5h8Uo2jIwmWDIFxCkddMo3HjovRWl40MkNpR
+	ryEcU79/YsosPpEkk8SgZyO9ZFYIqxP6raTNbaD6FuB52yjVTXiKfsTQB0xdQNB7Ggrw
+	EXOgmqRi5kyhIXa4NKeIeX53QvLWx9THLOVWCfVFNDR4j+aHgNTlO//B1hAHI8HcEkvC
+	FmkfhwKTjao0KxRmWf/r+03p2yU2MVlpdKwqDcmnBo8wfGnuN0SDwhsL+M66uoWQU39K
+	PtUA==
+X-Gm-Message-State: APjAAAVqHjXJlnH6ERuxCzGkMPvWr8H/e+5BQVqs06ZuXKoyi1L/LvyC
+	lCMBW4qMVqWmm/Jv7csrh0Q63MdC4ys=
+X-Google-Smtp-Source: APXvYqzpo+KjT8X/KeLdI6WdL8B9aJDQuhVEUVYNm7lzU3Gp7D7Ku20sNj4GKTduuMMXgpbIR1B6Ew==
+X-Received: by 2002:a50:9003:: with SMTP id b3mr122919587eda.40.1561449172746; 
+	Tue, 25 Jun 2019 00:52:52 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.50
+	y22sm4308640edw.94.2019.06.25.00.52.51
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:50 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:51 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:18 +0200
-Message-Id: <20190625075223.13585-19-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:19 +0200
+Message-Id: <20190625075223.13585-20-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 18/23] jlex: Do not build as an all PACKAGE_ARCH
+Subject: [meta-java][PATCH 19/23] bsf: Do not build as all PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,40 +62,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:51 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:52 -0000
 Content-Transfer-Encoding: 8bit
 
-jlex RDEPENDS on non -all package and breaks multiconfig.
+The package DEPENDS on non -native package, which breaks multiconfig.
 
 Fixes:
 
-ERROR: mc:qt5506:jlex-1.2.6-r0 do_package_write_deb: Fatal errors occurred in subprocesses:
-Command 'PATH="/workdir/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/workdir/repo/poky/scripts:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot-native/usr/bin/allarch-poky-linux:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot/usr/bin/crossscripts:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot-native/usr/sbin:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot-native/usr/bin:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot-native/sbin:/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/recipe-sysroot-native/bin:/workdir/repo/poky/bitbake/bin:/workdir/build/tmp/hosttools" dpkg-deb -b /workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/packages-split/jlex /workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/deploy-debs/all' returned non-zero exit status 2
-Subprocess output:dpkg-deb: building package 'jlex' in '/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/deploy-debs/all'.
-dpkg-deb: error: unable to create '/workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/deploy-debs/all': No such file or directory
+NOTE: recipe bsf-2.4.0-r1: task do_package: Succeeded
+ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: Error executing a python function in exec_python_func() autogenerated:
 
-ERROR: mc:qt5506:jlex-1.2.6-r0 do_package_write_deb:
-ERROR: mc:qt5506:jlex-1.2.6-r0 do_package_write_deb: Function failed: do_package_deb
-ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/jlex/1.2.6-r0/temp/log.do_package_write_deb.1491
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:populate_packages(d)
+     0003:
+File: '/workdir/repo/poky/meta/classes/package.bbclass', lineno: 1237, function: populate_packages
+     1233:
+     1234:            mkdir_recurse(dvar, root, os.path.dirname(file))
+     1235:            fpath = os.path.join(root,file)
+     1236:            if not cpath.islink(file):
+ *** 1237:                os.link(file, fpath)
+     1238:                continue
+     1239:            ret = bb.utils.copyfile(file, fpath)
+     1240:            if ret is False or ret == 0:
+     1241:                bb.fatal("File population failed")
+Exception: FileExistsError: [Errno 17] File exists: './usr/share/java/bsf-2.4.0.jar' -> '/workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/packages-split/libbsf-java/./usr/share/java/bsf-2.4.0.jar'
+
+ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: [Errno 17] File exists: './usr/share/java/bsf-2.4.0.jar' -> '/workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/packages-split/libbsf-java/./usr/share/java/bsf-2.4.0.jar'
+ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: Function failed: populate_packages
+ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/temp/log.do_package.12673
+NOTE: recipe bsf-2.4.0-r1: task do_package: Failed
+ERROR: Task (multiconfig:qt5507:/workdir/repo/poky/../meta-java/recipes-core/jakarta-libs/bsf_2.4.0.bb:do_package) failed with exit code '1'
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/jlex/jlex_1.2.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-core/jakarta-libs/bsf_2.4.0.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-core/jlex/jlex_1.2.6.bb b/recipes-core/jlex/jlex_1.2.6.bb
-index 45d76ed..b8f9ffb 100644
---- a/recipes-core/jlex/jlex_1.2.6.bb
-+++ b/recipes-core/jlex/jlex_1.2.6.bb
-@@ -3,6 +3,8 @@ AUTHOR = "Elliot Berk, A. Appel, C. Scott Ananian"
- LICENSE = "JLEX"
- LIC_FILES_CHKSUM = "file://Main.java;beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
+diff --git a/recipes-core/jakarta-libs/bsf_2.4.0.bb b/recipes-core/jakarta-libs/bsf_2.4.0.bb
+index 1037396..e1cb34f 100644
+--- a/recipes-core/jakarta-libs/bsf_2.4.0.bb
++++ b/recipes-core/jakarta-libs/bsf_2.4.0.bb
+@@ -1,11 +1,13 @@
+ SUMMARY = "Bean Scripting Framework package"
+ AUTHOR = "Apache Software Foundation"
+ LICENSE = "Apache-2.0"
+-PR = "r1"
++PE = "1"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b1e01b26bacfc2232046c90a330332b3"
+ 
+ SRC_URI = "http://archive.apache.org/dist/jakarta/bsf/source/bsf-src-${PV}.tar.gz"
  
 +PACKAGE_ARCH = "${TUNE_PKGARCH}"
 +
- RDEPENDS_${PN} = "java2-runtime"
- RDEPENDS_${PN}_class-native = ""
+ inherit java-library
  
+ DEPENDS = "jacl commons-logging rhino xalan-j bcel"
 -- 
 2.20.1
 
