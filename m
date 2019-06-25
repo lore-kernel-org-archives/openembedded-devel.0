@@ -1,31 +1,30 @@
 Return-Path: <prvs=072d76755=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id AC4087E600
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B1A337E508
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 11:54:11 +0000 (UTC)
+	Tue, 25 Jun 2019 11:54:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1561463653; x=1592999653;
+	t=1561463662; x=1592999662;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=UKsXxIfVOk6nt3eUJ77N5Hoe+8xx9laJtVNlC5sqF74=;
-	b=hnFMwUBsOMKXUNFfJ253GxBZtyz8faSZaXNsCK5DGtcmImEAUN7f8gkK
-	IIv3kTXM1GCMsl4QV7rem9nCAsPjs2vFSZ4kqrEXnhzMULL5Qeq7EIWGS
-	uaE/LdXXO7Y3i8iTy+9rYGw1ISe7KmS1QBNaEQaXY8+yYGawkL+IMvLCz
-	+qPIwziz6dTudfpGYLE5xEtvDUgatH6JdjNXd0Lg/8yaP3AlkdThoibBc
-	LzqaCnK1TLq8RbpLyVszNX3yAApouAebdXN0cAHGXFsFOpdTh5NwN8c3b
-	TGN525SDC0UelMv8Lqracx2/u2B4BqanoQE7yP7g/XFYZlDMHq3wMvomW w==;
-IronPort-SDR: vdP3DrVVsIAu1iFmnSkMoBRP42kFDCVsLlKeQXH2bNad9NgfM/JYQkDOMGYf+cWXA+ZfPyric3
-	XlzAdXssZAYwfRK7UqAyTt+q1DhyDRlnIJb0BRVpd0fGIe+QljI8S7bkLAYTjCTZwtZZ9BmkDE
-	64OcK67S1PQS5No8DpeqrkH2uOe2sY765Xxbed7rIdQd9lYTfoXZ9zRrvVI3zwHad1dM4rd4Zn
-	dVLOv5kveOk16ZK/H/8Bm6mrz6UPRm66cuHQUrlXqP6TgtKGSrKh5F3+6Hj/LbOXz9xG9UsglY
-	V2o=
-X-IronPort-AV: E=Sophos;i="5.63,415,1557180000"; 
-   d="scan'208";a="2207512"
+	bh=vCMntmBDqsFY3T+LlFO8NJN2Fyzdw/7CvhIoPpjQHAA=;
+	b=A/Fl6gZMqaU8kh0zOK/wPErTThOcWNHiDHsA+C/FPo8UrBS7g1NLxnZN
+	Nz6mMPIjINb2JGI4cHRKR/++DbjQDUqdO2iF5Xy2JJAfB7c1o1ygqspCT
+	3DvcpYbuds5OpJ6bj4qxDA/hH+R+y3Qkxx4GaOphhAbYnmAvIltcDajpQ
+	J83XV6yWF0BmontPx9CClRcdHXnkFH+jyqEaAP7FXbgjhWhEFYTKOHMaN
+	7TkslYZIVPPDmkYYRooEeeV1Xdah8U0NHxMQvAz2s66Fvk06mBnKyGna3
+	s8xOsfLhE2IDm/OWotHDkAhRyTZnVR1FIynwC9draO9slJpxnb7rj7PLl w==;
+IronPort-SDR: bilaFWx/vch3k4j0ukIR4HnnbBjuNXcaFP4FrHnXZKlJzEclaKspa5CWbI7oJ3tCAiy2DzQ8on
+	M7RJLX0lh9QrNvpA8HmBqhn/grEqjCqQXMEeunJVF7xL/uqnSL4I4jabBglH1mviCE17Zo03MX
+	PjR3OK8AN3oC4A8jScDYqlfYmWtZXzbc/JKj65HFWPxqyZCs82oJCUaanpNAwNbNUEkXYaQ+5S
+	FW3NAIe+pDPo9TtoGBfM9ptL7bTkc+SJ8mHqwqbY8a60Tbvm4I8musJmCo9ZT5192m8Af2N6AU
+	oII=
+X-IronPort-AV: E=Sophos;i="5.63,415,1557180000"; d="scan'208";a="17958611"
 From: Richard Leitner <richard.leitner@skidata.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Jun 2019 13:53:26 +0200
-Message-ID: <20190625115327.9314-4-richard.leitner@skidata.com>
+Date: Tue, 25 Jun 2019 13:53:27 +0200
+Message-ID: <20190625115327.9314-5-richard.leitner@skidata.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625115327.9314-1-richard.leitner@skidata.com>
 References: <20190625115327.9314-1-richard.leitner@skidata.com>
@@ -33,7 +32,7 @@ MIME-Version: 1.0
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH 3/4] icedtea7-native: disable new compiler warnings
+Subject: [meta-java][PATCH 4/4] openjdk-8: disable stringop-overflow compiler errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,33 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 11:54:12 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 11:54:21 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-As new compilers throw new errors/warnings disable them for
-icedtea7-native as a quick workaround until we updated it to the latest
-version.
+As new compilers generate this error we disable it for now as a
+WORKAROUND. This will be removed when openjdk-8 is updated to the latest
+version
 
 Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-core/openjdk/openjdk-8-release-172b11-common.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 69f5d25..70b935a 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -24,6 +24,9 @@ CFLAGS_append = " -fno-tree-dse"
- CXXFLAGS_append = " -fno-tree-dse"
- CXX_append = " -std=gnu++98"
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+index a8d3ccb..d4e80f6 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+@@ -95,6 +95,11 @@ ARM_INSTRUCTION_SET_armv4t = "ARM"
+ BUILD_CFLAGS_append = " -Wno-error=deprecated-declarations"
+ TARGET_CFLAGS_append = " -Wno-error=deprecated-declarations"
  
-+# WORKAROUND: ignore errors from new compilers
-+CFLAGS_append = " -Wno-error=stringop-overflow -Wno-error=return-type"
++# WORKAROUND: disable the "specified bound depends on the length of the source argument"
++# compiler error until we update openjdk8 to a fixed version
++BUILD_CFLAGS_append = " -Wno-error=stringop-overflow"
++TARGET_CFLAGS_append = " -Wno-error=stringop-overflow"
 +
- inherit native java autotools pkgconfig
- inherit openjdk-build-helper
- 
+ # Enable zero mode for arm based builds, as normal hotspot fails to build
+ PACKAGECONFIG_append_armv4 = " zero"
+ PACKAGECONFIG_append_armv5 = " zero"
 -- 
 2.20.1
 
