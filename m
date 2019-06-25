@@ -1,55 +1,43 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A55927E3F0
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D3FF27D5C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:57 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id w20so18122944edd.2
+	Tue, 25 Jun 2019 09:06:04 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id x25so15478604ljh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=nvXsyYIBAtZM0JfwYMsynOq9Vu5402tHCsuH6+tLQfk=;
-	b=YSMuVUo4t8pWKFi6z3brEduyg283T7NsM0OZX31PkKSlDdr9evEHBaCzOWk9yD4MLC
-	IvIbH7zkACYIgF0ObhGq9jkPWpBu8Z/CaJKiwUURknpcuRKXZoag9S0OzZjsrcydDjtQ
-	QKx4h/dnkJnvudusvkaO1rYvbtkGz5pCDGU1OnwIhw9oi12NUmeDzST/E66kB2wCeffJ
-	w9Jau+yYACy3vSVoxO+0GLSF+3oGvhK5Nx/Btis2jOz/jIphnbyYQoTsUTXlVi7IlPzH
-	jJBPEm4LRnKlgQj/CuFcv5URxy0wA45as04A3fIYHwfI/Q3uKRwWVOKWC4HGVo4+X3G9
-	bqiA==
+	Tue, 25 Jun 2019 02:06:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=nvXsyYIBAtZM0JfwYMsynOq9Vu5402tHCsuH6+tLQfk=;
-	b=W+nb7nbqQOhsQWWV6T+Yj0PhbDsjlb5S5PUmCUxagW5rPwhgKOVsPXmsSGGntTXle1
-	WM6yvEjli0KAWQ2RRGGgLW0BzNVs6c2m10OUuUkLcrKyIvRKwf3O6sQsB6lFUF3LIeYq
-	aINWZgP4NFtkthlidouFyxe8kkpLIz+DuA4asINznzFNUaVM8YoSFDR9c1oZYfnLQV5R
-	E5xffTqG+x3W54yfm1v4CSWWPe+3ZK27VNdBnFsWq5QbWtxZrlHipL+dlCvvrxUK1WPS
-	Tjk789du54BwuSV/kDDBt3afpo4PanrxkaOGEhW/fZuSZifwaJsFXgIuiprqmx1kx96q
-	BPxQ==
-X-Gm-Message-State: APjAAAWAPgnBJTN9TXfLvD/Xw42rktNzF7dWjMR4Yd/7nQ0xkmP9QntA
-	KuokUqqT6SsyFJFGu7ceZ3WWBVMy0Uw=
-X-Google-Smtp-Source: APXvYqymNis2IYMIHtvbHRctclTO+UI1U1v7KHDecFw2XGk47uowxJFORhjAzZYPlZm8bClYOdmk8w==
-X-Received: by 2002:a50:b6e6:: with SMTP id f35mr129956617ede.82.1561449178273;
-	Tue, 25 Jun 2019 00:52:58 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.57
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:57 -0700 (PDT)
-Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:23 +0200
-Message-Id: <20190625075223.13585-24-ricardo@ribalda.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
-References: <20190625075223.13585-1-ricardo@ribalda.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=czjvLrGcwQZO9qGeJeT036HFGAQ7ZvjnFCOcoLD53KY=;
+	b=A/1SCN82PJxKi+op5pBYvDPSOptIWfw2zWdpPfUkMnkaoamjsbiWhDYXERvVzuhMha
+	1BV0NPTenF+pjj5BskdH8Aap6kOEuboX4u5x4vUBfZD+6uS7RR1GnyqIsVJ0Y/n4dksw
+	qpomvQ6oHmHhdRv19g7wcSbZ+qEqTlPbJIbQOo11CqqIkgOVm/CrBW64G924yqWzLUn9
+	uUJ0s3r3cVnxJUmjZWRY8ISFicaPcLhViwFU4PIiSqm7OPqvBwTnus1++Yt4NUreSz7W
+	wn9UQyJf2yQBumLHox+agExfxsk8LnyGhc80VAuPV7j5yo0dHwPWcIyv4IUY4nMmbaal
+	nZNA==
+X-Gm-Message-State: APjAAAWEGopvvE0Ool6fjnwPP7m6PsaShdFt4jIR8GpAAro0TW04wOrk
+	qvl3jesMidtDhPBAsukqSr+EDMYwFZo7w1agZUU=
+X-Google-Smtp-Source: APXvYqzinENQN5s9Kj4bB9b0AZx8HCa7XjvWlpgOM0koqk5qYsIj34dwfoXIPBn4qd5jNqECvo81qvFTa737uCtru6A=
+X-Received: by 2002:a2e:480a:: with SMTP id v10mr13620719lja.94.1561453565376; 
+	Tue, 25 Jun 2019 02:06:05 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 23/23] dom4j: Do not use all as PACKAGE_ARCH
+References: <20190625075223.13585-1-ricardo@ribalda.com>
+	<20190625075223.13585-2-ricardo@ribalda.com>
+	<3f5e60b7-c850-f052-88e7-cd41d1d4d65c@mikrodidakt.se>
+	<CAPybu_0Kpt2mTGBWpWC_7ZnNoM3gLEYn9S3kJnrshMBmqkurTA@mail.gmail.com>
+	<CAPybu_0XSbxwpbiUvCSf=fGfc7VpadRPNSZ9v-jSMi6wcHn-EQ@mail.gmail.com>
+	<11924260-4718-e57b-9684-728e5ded0a4f@mikrodidakt.se>
+In-Reply-To: <11924260-4718-e57b-9684-728e5ded0a4f@mikrodidakt.se>
+From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 11:05:48 +0200
+Message-ID: <CAPybu_1h3RqMjQ-B=4PzToLYTaaooP+RBAwLS6AK__tHmXkSBA@mail.gmail.com>
+To: Jacob Kroon <jacob.kroon@mikrodidakt.se>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH 01/23] icedtea7: Add x11 as default pkgconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,60 +50,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:58 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 25 Jun 2019 09:06:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It has DEPENDS that are not -native
+Hi
 
-Fixes:
+On Tue, Jun 25, 2019 at 11:04 AM Jacob Kroon <jacob.kroon@mikrodidakt.se> w=
+rote:
+>
+> Hi Ricardo,
+>
+> FYI, I notice that we have gone off-list.
 
-ERROR: mc:qt5506:dom4j-1.6.1-r0 do_packagedata: Error executing a python function in exec_python_func() autogenerated:
+Sorry, not on purpose :S
 
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:sstate_task_postfunc(d)
-     0003:
-File: '/workdir/repo/poky/meta/classes/sstate.bbclass', lineno: 739, function: sstate_task_postfunc
-     0735:
-     0736:    sstateinst = d.getVar("SSTATE_INSTDIR")
-     0737:    d.setVar('SSTATE_FIXMEDIR', shared_state['fixmedir'])
-     0738:
- *** 0739:    sstate_installpkgdir(shared_state, d)
-     0740:
-     0741:    bb.utils.remove(d.getVar("SSTATE_BUILDDIR"), recurse=True)
-     0742:}
-     0743:sstate_task_postfunc[dirs] = "${WORKDIR}"
-File: '/workdir/repo/poky/meta/classes/sstate.bbclass', lineno: 379, function: sstate_installpkgdir
-     0375:        oe.path.remove(dir)
-     0376:
-     0377:    for state in ss['dirs']:
-     0378:        prepdir(state[1])
- *** 0379:        os.rename(sstateinst + state[0], state[1])
-     0380:    sstate_install(ss, d)
-     0381:
-     0382:    for plain in ss['plaindirs']:
-     0383:        workdir = d.getVar('WORKDIR')
-Exception: FileNotFoundError: [Errno 2] No such file or directory: '/workdir/build/tmp/work/all-poky-linux/dom4j/1.6.1-r0/sstate-build-packagedata/pkgdata' ->
+Will try also with that
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
----
- recipes-core/xml-commons/dom4j_1.6.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+thanks
 
-diff --git a/recipes-core/xml-commons/dom4j_1.6.1.bb b/recipes-core/xml-commons/dom4j_1.6.1.bb
-index 97c9947..ee46dfd 100644
---- a/recipes-core/xml-commons/dom4j_1.6.1.bb
-+++ b/recipes-core/xml-commons/dom4j_1.6.1.bb
-@@ -18,6 +18,7 @@ SRC_URI[archive.sha256sum] = "01b4abf86bce337a2a900bf121b3107320ba63b4c0f352e192
- SRC_URI[jaxme.md5sum] = "084ebfe4a816058f8ff6bd731fa70df4"
- SRC_URI[jaxme.sha256sum] = "0415d721259acf95c564fb84606bb17f6227c1cc444e89b78d1cd9903c1c88dc"
- 
-+PACKAGE_ARCH = "${TUNE_PKGARCH}"
- inherit java-library
- 
- do_compile() {
--- 
-2.20.1
+>
+> You probably need to add more dependencies as you iterate the builds.
+>
+> It looks like "libx11-native" is missing now.
+>
+> /Jacob
+>
+> On 6/25/19 10:57 AM, Ricardo Ribalda Delgado wrote:
+> > Hi Jacob
+> >
+> > Unfortunately it crashes at do_compile: :(
+> >
+> > build-boot/tmp/sun/sun.awt/awt/obj64/Disposer.o
+> > ../../../src/share/native/sun/awt/../java2d/Disposer.c
+> > | In file included from
+> > ../../../src/share/native/sun/awt/../java2d/pipe/Region.h:34:0,
+> > |                  from
+> > ../../../src/share/native/sun/awt/../java2d/pipe/Region.c:30:
+> > | ../../../src/solaris/native/sun/awt/utility/rect.h:31:22: fatal
+> > error: X11/Xlib.h: No such file or directory
+> > |  #include <X11/Xlib.h>
+> > |                       ^
+> > | compilation terminated.
+> > | make[6]: *** [/workdir/build/tmp/work/x86_64-linux/icedtea7-native/2.=
+1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/common/internal/NativeCo=
+mpileRules.gmk:75:
+> > /workdir/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea=
+-2.1.3/build/openjdk.build-boot/tmp/sun/sun.awt/awt/obj64/Region.o]
+> > Error 1
+> > | make[6]: *** Waiting for unfinished jobs....
+> >
+> > So the initial proposal stays. Unless you want to fix it :P
+> >
+> > Cheers!
+> >
+> > On Tue, Jun 25, 2019 at 10:44 AM Ricardo Ribalda Delgado
+> > <ricardo@ribalda.com> wrote:
+> >>
+> >> Hi Jacob
+> >>
+> >>
+> >> On Tue, Jun 25, 2019 at 10:35 AM Jacob Kroon <jacob.kroon@mikrodidakt.=
+se> wrote:
+> >>>
+> >>> Hi Ricardo,
+> >>>
+> >>> On 6/25/19 9:52 AM, Ricardo Ribalda Delgado wrote:
+> >>>> Seems to be a basic dependency, not optional.
+> >>>>
+> >>>> Fixes:
+> >>>> | checking X11/X.h usability... no
+> >>>> | checking X11/X.h presence... no
+> >>>> | checking for X11/X.h... no
+> >>>> | configure: error: "xorg headers were not found -
+> >>>> | try installing xorg-x11-proto-devel."
+> >>>> | NOTE: The following config.log files may provide further informati=
+on.
+> >>>> | NOTE: /workdir/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r=
+1.0/icedtea-2.1.3/build/config.log
+> >>>> | ERROR: configure failed
+> >>>> | WARNING: exit code 1 from a shell command.
+> >>>> | ERROR: Function failed: do_configure (log file is located at /work=
+dir/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/temp/log.do_conf=
+igure.29594)
+> >>>> ERROR: Task (/workdir/repo/poky/../meta-java/recipes-core/icedtea/ic=
+edtea7-native_2.1.3.bb:do_configure) failed with exit code '1'
+> >>>>
+> >>>> Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+> >>>> ---
+> >>>>    recipes-core/icedtea/icedtea7-native.inc | 2 +-
+> >>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core=
+/icedtea/icedtea7-native.inc
+> >>>> index 69f5d25..747bb72 100644
+> >>>> --- a/recipes-core/icedtea/icedtea7-native.inc
+> >>>> +++ b/recipes-core/icedtea/icedtea7-native.inc
+> >>>> @@ -11,7 +11,7 @@ DEPENDS =3D "virtual/javac-native virtual/java-nat=
+ive classpath-native \
+> >>>>       unzip-native make-native util-linux-native\
+> >>>>              "
+> >>>>
+> >>>> -PACKAGECONFIG ??=3D ""
+> >>>> +PACKAGECONFIG ??=3D "x11"
+> >>>>    PACKAGECONFIG[x11] =3D ",--disable-headful,libx11-native xorgprot=
+o-native libxt-native libxext-native libxrender-native"
+> >>>>
+> >>>>    OEMAKE_BUILD_HEADLESS_ONLY =3D "${@bb.utils.contains('PACKAGECONF=
+IG', 'x11', '', 'BUILD_HEADLESS_ONLY=3D1', d)}"
+> >>>>
+> >>>
+> >>> I have run into this as well; instead of turning on x11 by default,
+> >>> wouldn't it be better to add "xorgproto-native" to DEPENDS ? I doubt =
+the
+> >>> native build needs x11 support in most cases.
+> >>
+> >> That is definitely better. I have fixed the patch on
+> >> https://github.com/ribalda/meta-java/commit/1f48e7d72ac9eeb45b5d9c872e=
+95e3b32fd74f8d
+> >>
+> >> I will resend the set when I get more comments
+> >>
+> >> Thanks!
+> >>
+> >>>
+> >>> /Jacob
+> >>>
+> >>>
+> >>> [mikrodidakt]
+> >>> Jacob Kroon =E2=80=A2 +46 46325040
+> >>>
+> >>> mikrodidakt.se =E2=80=A2 Skifferv=C3=A4gen 48, SE-224 78 LUND, Sweden
+> >>>
+> >>> Consultans since 1980 =E2=80=A2 SW, HW, Embedded Systems, Linux
+> >>>
+> >>>
+> >>
+> >>
+> >> --
+> >> Ricardo Ribalda
+> >
+> >
+> >
+>
+>
+> [mikrodidakt]
+> Jacob Kroon =E2=80=A2 +46 46325040
+>
+> mikrodidakt.se =E2=80=A2 Skifferv=C3=A4gen 48, SE-224 78 LUND, Sweden
+>
+> Consultans since 1980 =E2=80=A2 SW, HW, Embedded Systems, Linux
+>
+>
 
+
+--=20
+Ricardo Ribalda
 
