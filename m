@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F03207E508
+	by mail.openembedded.org (Postfix) with ESMTP id 26B3B7E554
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 13:14:59 +0000 (UTC)
+	Tue, 25 Jun 2019 13:15:04 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5PDEOTI030285
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5PDEOTK030285
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 25 Jun 2019 06:14:34 -0700
+	Tue, 25 Jun 2019 06:14:45 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 25 Jun 2019 06:14:13 -0700
+	14.3.439.0; Tue, 25 Jun 2019 06:14:40 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 25 Jun 2019 21:14:06 +0800
-Message-ID: <1561468448-24834-3-git-send-email-hongxu.jia@windriver.com>
+Date: Tue, 25 Jun 2019 21:14:07 +0800
+Message-ID: <1561468448-24834-4-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1561468448-24834-1-git-send-email-hongxu.jia@windriver.com>
 References: <1561468448-24834-1-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 3/5] xfce4-session: optional support polkit
+Subject: [meta-oe][PATCH 4/5] upower: remove polkit dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 13:15:00 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 13:15:05 -0000
 Content-Type: text/plain
 
-If polkit not in DISTRO_FEATURES, it failed
-...
-|ERROR: Nothing PROVIDES 'polkit' (but meta-openembedded/meta-xfce/recipes-xfce/
-xfce4-session/xfce4-session_4.13.2.bb DEPENDS on or otherwise requires it)
-|polkit was skipped: missing required distro feature 'polkit' (not in DISTRO_FEATURES)
-|ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-|Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'xfce4-session', 'polkit']
-...
-
-Upstream optional support polkit:
-https://github.com/xfce-mirror/xfce4-session/commit/560219ad500c73e0fc2c3d959f96bcb8e2a54556
+Follow upstream upower:
+https://gitlab.freedesktop.org/upower/upower/commit/9a2b2633095fb901fc1931ab0c600392d68bb3b4
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/upower/upower_0.99.7.bb | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-index dc44c4b..7f7888e 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.13.2.bb
-@@ -11,7 +11,6 @@ DEPENDS = " \
-     libsm \
-     libxfce4ui \
-     libxfce4util \
--    polkit \
-     virtual/libx11 \
-     xfconf \
- "
-@@ -20,6 +19,9 @@ inherit xfce update-alternatives distro_features_check
+diff --git a/meta-oe/recipes-support/upower/upower_0.99.7.bb b/meta-oe/recipes-support/upower/upower_0.99.7.bb
+index 3fd91e9..ffa2c49 100644
+--- a/meta-oe/recipes-support/upower/upower_0.99.7.bb
++++ b/meta-oe/recipes-support/upower/upower_0.99.7.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "UPower is an abstraction for enumerating power devices, listening
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+-DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
++DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib"
  
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-+PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
-+
- SRC_URI += " \
-     file://0001-configure.in-hard-code-path-to-iceauth.patch \
+ SRC_URI = " \
+     http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
+@@ -13,8 +13,6 @@ SRC_URI[sha256sum] = "24bcc2f6ab25a2533bac70b587bcb019e591293076920f5b5e04bdedc1
+ 
+ inherit autotools pkgconfig gettext gobject-introspection systemd distro_features_check
+ 
+-REQUIRED_DISTRO_FEATURES = "polkit"
+-
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[idevice] = "--with-idevice,--without-idevice,libimobiledevice libplist"
+ PACKAGECONFIG[systemd] = "--with-systemdutildir=${systemd_unitdir} --with-systemdsystemunitdir=${systemd_system_unitdir}, \
+@@ -34,6 +32,5 @@ do_configure_prepend() {
+ RDEPENDS_${PN} += "dbus"
+ RRECOMMENDS_${PN} += "pm-utils"
+ FILES_${PN} += "${datadir}/dbus-1/ \
+-                ${datadir}/polkit-1/ \
+                 ${base_libdir}/udev/* \
  "
 -- 
 2.7.4
