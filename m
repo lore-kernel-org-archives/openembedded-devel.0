@@ -1,55 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
-	[209.85.208.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 799517DE4B
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A55927E3F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:52:56 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id e3so25677161edr.10
+	Tue, 25 Jun 2019 07:52:57 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id w20so18122944edd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 00:52:57 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=MALl+egEZmE29ydwTVWqNsaqgNitc1zmQBrvmRE2wEk=;
-	b=FEAzgpBi/F/Ol+a/8rxRjzXK8bPou0Wym+UgKv6OHPVyyzpv3+YjDOTp8O1gZ2Jfev
-	/agAaA/tXJGRLHuDAJX7zqZr98aIvdKHbsKQfKLFM7LtNMcasaEY0jmqxI78oraqr+zT
-	KPXxI57PEZrV7k4EV2ER5bIGBUDYSNmOtpsDItvPa20QeCMqbIjRQyIp6Kjb84+2LgoK
-	H8et4V8Mp4REgDpci3Zp0+fmzAccH6Bhv8ukYdLPNUeeIS8kUFdv3i8kUYTOoRWwX5vm
-	AJfBsQjC3nZ99Q2pYxQqR6TH66OB6O9f85V1XBO/UaMUC5iMokAf5uzKkanjh214uEry
-	1opA==
+	bh=nvXsyYIBAtZM0JfwYMsynOq9Vu5402tHCsuH6+tLQfk=;
+	b=YSMuVUo4t8pWKFi6z3brEduyg283T7NsM0OZX31PkKSlDdr9evEHBaCzOWk9yD4MLC
+	IvIbH7zkACYIgF0ObhGq9jkPWpBu8Z/CaJKiwUURknpcuRKXZoag9S0OzZjsrcydDjtQ
+	QKx4h/dnkJnvudusvkaO1rYvbtkGz5pCDGU1OnwIhw9oi12NUmeDzST/E66kB2wCeffJ
+	w9Jau+yYACy3vSVoxO+0GLSF+3oGvhK5Nx/Btis2jOz/jIphnbyYQoTsUTXlVi7IlPzH
+	jJBPEm4LRnKlgQj/CuFcv5URxy0wA45as04A3fIYHwfI/Q3uKRwWVOKWC4HGVo4+X3G9
+	bqiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=MALl+egEZmE29ydwTVWqNsaqgNitc1zmQBrvmRE2wEk=;
-	b=uhA+iUF3/HtlPk8fRP7dk0Te+KxDq6bBcKDcD+2YBJdX/Jyez7d0EOjSOk1d9Yxg9n
-	HMbzpDc0hgeujdy4I4fO4jveGfTpTWjbVVmL+Jh8fhn6IABdooUTfpNa8e6RVOGP95Hb
-	CSpMwf3EP6UQOsFLNJsC3ukyliPyBCFhrYZsQ3d5mJE5vUN28HG5TNK59zh9QKzag9Q0
-	PBjyj4FBQRu58PgIFGXNjnu/Eh3cYMFgga/ZCUHXYNHMSOhbHo26jjUsasodRzQbBdO+
-	gvCBh7/fc9WGBpCzslRKZB/6ouYsJifn1V4DOhEb5b469nIAYYPkVMaWyMm7251iJ+zw
-	OJHA==
-X-Gm-Message-State: APjAAAUDODNTJ39tya3FmZhxnfLu3RandhI0qvhQicB/Wi4EdOfYAbYo
-	rgE3/vRQiIYtxbj5qFNsXm2zgjYYaYU=
-X-Google-Smtp-Source: APXvYqxyYwa5KaxDBhjVXR16MxGi7Rz1QKmfLeCioOlbIEDZo5Y0je7QDFcUxLEWbAQa37VCxsF5eg==
-X-Received: by 2002:a50:87d0:: with SMTP id 16mr116621196edz.133.1561449177017;
-	Tue, 25 Jun 2019 00:52:57 -0700 (PDT)
+	bh=nvXsyYIBAtZM0JfwYMsynOq9Vu5402tHCsuH6+tLQfk=;
+	b=W+nb7nbqQOhsQWWV6T+Yj0PhbDsjlb5S5PUmCUxagW5rPwhgKOVsPXmsSGGntTXle1
+	WM6yvEjli0KAWQ2RRGGgLW0BzNVs6c2m10OUuUkLcrKyIvRKwf3O6sQsB6lFUF3LIeYq
+	aINWZgP4NFtkthlidouFyxe8kkpLIz+DuA4asINznzFNUaVM8YoSFDR9c1oZYfnLQV5R
+	E5xffTqG+x3W54yfm1v4CSWWPe+3ZK27VNdBnFsWq5QbWtxZrlHipL+dlCvvrxUK1WPS
+	Tjk789du54BwuSV/kDDBt3afpo4PanrxkaOGEhW/fZuSZifwaJsFXgIuiprqmx1kx96q
+	BPxQ==
+X-Gm-Message-State: APjAAAWAPgnBJTN9TXfLvD/Xw42rktNzF7dWjMR4Yd/7nQ0xkmP9QntA
+	KuokUqqT6SsyFJFGu7ceZ3WWBVMy0Uw=
+X-Google-Smtp-Source: APXvYqymNis2IYMIHtvbHRctclTO+UI1U1v7KHDecFw2XGk47uowxJFORhjAzZYPlZm8bClYOdmk8w==
+X-Received: by 2002:a50:b6e6:: with SMTP id f35mr129956617ede.82.1561449178273;
+	Tue, 25 Jun 2019 00:52:58 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	y22sm4308640edw.94.2019.06.25.00.52.55
+	y22sm4308640edw.94.2019.06.25.00.52.57
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 25 Jun 2019 00:52:56 -0700 (PDT)
+	Tue, 25 Jun 2019 00:52:57 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Jun 2019 09:52:22 +0200
-Message-Id: <20190625075223.13585-23-ricardo@ribalda.com>
+Date: Tue, 25 Jun 2019 09:52:23 +0200
+Message-Id: <20190625075223.13585-24-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190625075223.13585-1-ricardo@ribalda.com>
 References: <20190625075223.13585-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH 22/23] jdom: Do not use all as PACKAGE_ARCH
+Subject: [meta-java][PATCH 23/23] dom4j: Do not use all as PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,36 +62,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:52:57 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:58 -0000
 Content-Transfer-Encoding: 8bit
 
-It DEPENDS on packages that are not -native.
+It has DEPENDS that are not -native
 
 Fixes:
 
-ERROR: mc:qt5506:jdom-1.1.3-r0 do_package: Package already staged (/workdir/build/tmp/sstate-control/manifest-allarch-jdom.package)?!
-ERROR: mc:qt5506:jdom-1.1.3-r0 do_package:
-ERROR: mc:qt5506:jdom-1.1.3-r0 do_package: Function failed: sstate_task_postfunc
-ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/jdom/1.1.3-r0/temp/log.do_package.5632
+ERROR: mc:qt5506:dom4j-1.6.1-r0 do_packagedata: Error executing a python function in exec_python_func() autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:sstate_task_postfunc(d)
+     0003:
+File: '/workdir/repo/poky/meta/classes/sstate.bbclass', lineno: 739, function: sstate_task_postfunc
+     0735:
+     0736:    sstateinst = d.getVar("SSTATE_INSTDIR")
+     0737:    d.setVar('SSTATE_FIXMEDIR', shared_state['fixmedir'])
+     0738:
+ *** 0739:    sstate_installpkgdir(shared_state, d)
+     0740:
+     0741:    bb.utils.remove(d.getVar("SSTATE_BUILDDIR"), recurse=True)
+     0742:}
+     0743:sstate_task_postfunc[dirs] = "${WORKDIR}"
+File: '/workdir/repo/poky/meta/classes/sstate.bbclass', lineno: 379, function: sstate_installpkgdir
+     0375:        oe.path.remove(dir)
+     0376:
+     0377:    for state in ss['dirs']:
+     0378:        prepdir(state[1])
+ *** 0379:        os.rename(sstateinst + state[0], state[1])
+     0380:    sstate_install(ss, d)
+     0381:
+     0382:    for plain in ss['plaindirs']:
+     0383:        workdir = d.getVar('WORKDIR')
+Exception: FileNotFoundError: [Errno 2] No such file or directory: '/workdir/build/tmp/work/all-poky-linux/dom4j/1.6.1-r0/sstate-build-packagedata/pkgdata' ->
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/xml-commons/jdom_1.1.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-core/xml-commons/dom4j_1.6.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-core/xml-commons/jdom_1.1.3.bb b/recipes-core/xml-commons/jdom_1.1.3.bb
-index 8073819..df9125d 100644
---- a/recipes-core/xml-commons/jdom_1.1.3.bb
-+++ b/recipes-core/xml-commons/jdom_1.1.3.bb
-@@ -12,6 +12,8 @@ SRC_URI = "http://www.jdom.org/dist/source/archive/jdom-${PV}.tar.gz"
- SRC_URI[md5sum] = "dc8391e84cfdb170fcd8279aa370019f"
- SRC_URI[sha256sum] = "d471718c4ac7a1a2f10715b93cb3fcd2ecbab60384b73ad1c089712e47bd8d1f"
+diff --git a/recipes-core/xml-commons/dom4j_1.6.1.bb b/recipes-core/xml-commons/dom4j_1.6.1.bb
+index 97c9947..ee46dfd 100644
+--- a/recipes-core/xml-commons/dom4j_1.6.1.bb
++++ b/recipes-core/xml-commons/dom4j_1.6.1.bb
+@@ -18,6 +18,7 @@ SRC_URI[archive.sha256sum] = "01b4abf86bce337a2a900bf121b3107320ba63b4c0f352e192
+ SRC_URI[jaxme.md5sum] = "084ebfe4a816058f8ff6bd731fa70df4"
+ SRC_URI[jaxme.sha256sum] = "0415d721259acf95c564fb84606bb17f6227c1cc444e89b78d1cd9903c1c88dc"
  
 +PACKAGE_ARCH = "${TUNE_PKGARCH}"
-+
  inherit java-library
  
- S = "${WORKDIR}/${PN}"
+ do_compile() {
 -- 
 2.20.1
 
