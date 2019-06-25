@@ -1,63 +1,54 @@
-Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 82300 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 25 Jun 2019 07:19:13 UTC
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
-	(mail-oln040092253068.outbound.protection.outlook.com [40.92.253.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C5A067DE38
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+	[209.85.208.42])
+	by mail.openembedded.org (Postfix) with ESMTP id AF2746C230
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2019 07:19:13 +0000 (UTC)
-Received: from SG2APC01FT019.eop-APC01.prod.protection.outlook.com
-	(10.152.250.51) by SG2APC01HT013.eop-APC01.prod.protection.outlook.com
-	(10.152.250.189) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2008.13;
-	Tue, 25 Jun 2019 05:46:02 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.250.55) by
-	SG2APC01FT019.mail.protection.outlook.com (10.152.250.121) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
-	15.20.2008.13 via Frontend Transport; Tue, 25 Jun 2019 05:46:02 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::b8c4:a082:8a02:5f9]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::b8c4:a082:8a02:5f9%4]) with mapi id 15.20.2008.014;
-	Tue, 25 Jun 2019 05:46:02 +0000
-From: Alistair Francis <alistair@alistair23.me>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [PATCH v2] gpsd: Upgrade from 3.17 to 3.18.1
-Thread-Index: AQHVKxlFG+HF+DOGl0uXS7nvPhcb0g==
-Date: Tue, 25 Jun 2019 05:46:02 +0000
-Message-ID: <PSXP216MB02772E83E6C1839E25C722E8DDE30@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
-Accept-Language: en-AU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BYAPR05CA0030.namprd05.prod.outlook.com
-	(2603:10b6:a03:c0::43) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	(2603:1096:300:a::18)
-x-incomingtopheadermarker: OriginalChecksum:76A00C4FD776D0D166756E46F01BD5F6AA517278C5F0EF2629AAD74BAC71F6DE;
-	UpperCasedChecksum:B3C012A1BCE327D9A144CC51644853D16CEB53FF58E5F39C7501A53AE1D7BE51;
-	SizeAsReceived:7465; Count:48
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.21.0
-x-tmn: [Crr+Orm00zRtyszazgxRnyL6qbwTN/s1RO8N2vxIqHlSm6WMX/V8q5Z4i59EQouo]
-x-microsoft-original-message-id: <20190625054547.2761-1-alistair@alistair23.me>
-x-ms-publictraffictype: Email
-x-incomingheadercount: 48
-x-eopattributedmessage: 0
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(5050001)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031322404)(2017031323274)(2017031324274)(1601125500)(1603101475)(1701031045);
-	SRVR:SG2APC01HT013; 
-x-ms-traffictypediagnostic: SG2APC01HT013:
-x-microsoft-antispam-message-info: eTjA6bbrGHgw2hLAljJvrNHcfjaydNF9Q2n9iae8LDXxfzLhARssrbw3sJfi2j/coabaCZJeQrt8I0cwXwX7OlRlZUtibyXHUhuXv2j/KcPl0JFDcbqT9xeg4FpPfvE/SxvMOM2OwqRrU+TWsKKHcK4CD9pQTIRppOhmivcODC6o6Z8YjZf5oWnvAXb5Lp91
+	Tue, 25 Jun 2019 07:52:26 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id p15so25694474eds.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Jun 2019 00:52:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Gbc0A+5OGo57qBgdoIFhCw4xefHjhcHz40alVpylRog=;
+	b=bC3JrQK7qdAOvsI59u2L8z9nSslncwZTMTB82QlJUeb3wOgH3hvcIR40oArLcpNdWS
+	zHqfpwnzJRgMb5wn5FcfLF9uZOqHGtsPTHfdOq96+XUgpFwFN5ClJLYbD3J4qHnu1ikr
+	nn07Na+CEFuT/iaeuJBMUng6CkN7Wrg0Ov1TrDb5pkzMNEsyTTpOHIjvbtcN1RcdQCtG
+	UC0m+zLI1+7dt66PTQ7SvCJeO7l4HddpN2htSBkDCv71HweUQiKe2NRRqTEj9NpnyBq0
+	We+qxFQ4t9enQ22UvH/nH32fOWDj6jHnG8jkazUyT0LzKDdt/5t7ZmeUAorKpi40k/Xu
+	Xebw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding;
+	bh=Gbc0A+5OGo57qBgdoIFhCw4xefHjhcHz40alVpylRog=;
+	b=iKs7VMC6vhCyfkw4FsJ8mI2FeMnmqHj0lZQG295Sf7AIiXO/otDo2HrV+5zn1POQwj
+	32tmNu8s9onFAk0LGN9he66RlkKU9emaAKAQxSAu6yznZvJryy0a2wLvjwnE5i0N5EEI
+	OoYC3QVzuoUlva9OryDcWWdayQxNdmG5YQSp0TLTfyAicCLZQeNVhIHV9o3JmHBnpQ+r
+	RAfPFSuklJ8wsG7g8MyBA45roDlLcD8xRWH8IGOVnP9TjKf/FI6Su6SGYG0/Cb5EeF2a
+	JK+BifwQ+DA+ZX8MoxxzMZfif4vhYG0WwMEfrNsVH10ztGR7SybgIUcjV09g3NURP6Gh
+	W62g==
+X-Gm-Message-State: APjAAAU/HcgRTjHnnnHTmxx5yFEljS9IEaY3AK2P/sUgzaemZYz5+kqy
+	5Ul6V0Ewq0K+2r5Evr6NbLAXOerePa4=
+X-Google-Smtp-Source: APXvYqwuVXyVlab58rZ/8SyspdChF8fpMme1dceLaQotXcyVjPgHUQK3bzPuTlhhl4J9bd8KbjWzzQ==
+X-Received: by 2002:a17:906:370c:: with SMTP id
+	d12mr12546524ejc.140.1561449147027; 
+	Tue, 25 Jun 2019 00:52:27 -0700 (PDT)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id
+	y22sm4308640edw.94.2019.06.25.00.52.25
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Tue, 25 Jun 2019 00:52:26 -0700 (PDT)
+Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Jun 2019 09:52:00 +0200
+Message-Id: <20190625075223.13585-1-ricardo@ribalda.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: bbb5de91-b9e9-41ea-d4d0-08d6f93067de
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jun 2019 05:46:02.2852 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2APC01HT013
-Subject: [PATCH v2] gpsd: Upgrade from 3.17 to 3.18.1
+Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+Subject: [meta-java][PATCH 00/23] Multiple patches for multiconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,135 +61,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 07:19:14 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 25 Jun 2019 07:52:26 -0000
+Content-Transfer-Encoding: 8bit
 
-U2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXJAYWxpc3RhaXIyMy5tZT4N
-Ci0tLQ0KdjI6DQogLSBGaXggaW5zdGFsbCB3YXJuaW5ncw0KDQogLi4ueC1pbmNsdWRlcHktd2l0
-aC1zeXNyb290LWFuZC1kcm9wLXN5LnBhdGNoIHwgMzIgKysrKysrKysrLS0tLS0tLS0tLQ0KIC4u
-Li8wMDAyLWluY2x1ZGUtc3lzLXR0eWRlZmF1bHRzLmgucGF0Y2h9ICAgICB8ICAwDQogLi4uZS1o
-dG1sLWFuZC1tYW4tZG9jcy1idWlsZGluZy1iZWNhdXMucGF0Y2h9IHwgIDANCiAuLi4vZ3BzZC97
-Z3BzZF8zLjE3LmJiID0+IGdwc2RfMy4xOC4xLmJifSAgICAgfCAxMCArKystLS0NCiA0IGZpbGVz
-IGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQ0KIHJlbmFtZSBtZXRh
-LW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL3tncHNkLTMuMTcgPT4gZ3BzZC0zLjE4LjF9LzAw
-MDEtU0NvbnN0cnVjdC1wcmVmaXgtaW5jbHVkZXB5LXdpdGgtc3lzcm9vdC1hbmQtZHJvcC1zeS5w
-YXRjaCAoODElKQ0KIHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL3tncHNk
-LTMuMTcvMDAwMS1pbmNsdWRlLXN5cy10dHlkZWZhdWx0cy5oLnBhdGNoID0+IGdwc2QtMy4xOC4x
-LzAwMDItaW5jbHVkZS1zeXMtdHR5ZGVmYXVsdHMuaC5wYXRjaH0gKDEwMCUpDQogcmVuYW1lIG1l
-dGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2Qve2dwc2QtMy4xNy8wMDA0LVNDb25zdHJ1Y3Qt
-ZGlzYWJsZS1odG1sLWFuZC1tYW4tZG9jcy1idWlsZGluZy1iZWNhdXMucGF0Y2ggPT4gZ3BzZC0z
-LjE4LjEvMDAwMy1TQ29uc3RydWN0LWRpc2FibGUtaHRtbC1hbmQtbWFuLWRvY3MtYnVpbGRpbmct
-YmVjYXVzLnBhdGNofSAoMTAwJSkNCiByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLW5hdmlnYXRpb24v
-Z3BzZC97Z3BzZF8zLjE3LmJiID0+IGdwc2RfMy4xOC4xLmJifSAoOTMlKQ0KDQpkaWZmIC0tZ2l0
-IGEvbWV0YS1vZS9yZWNpcGVzLW5hdmlnYXRpb24vZ3BzZC9ncHNkLTMuMTcvMDAwMS1TQ29uc3Ry
-dWN0LXByZWZpeC1pbmNsdWRlcHktd2l0aC1zeXNyb290LWFuZC1kcm9wLXN5LnBhdGNoIGIvbWV0
-YS1vZS9yZWNpcGVzLW5hdmlnYXRpb24vZ3BzZC9ncHNkLTMuMTguMS8wMDAxLVNDb25zdHJ1Y3Qt
-cHJlZml4LWluY2x1ZGVweS13aXRoLXN5c3Jvb3QtYW5kLWRyb3Atc3kucGF0Y2gNCnNpbWlsYXJp
-dHkgaW5kZXggODElDQpyZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNk
-L2dwc2QtMy4xNy8wMDAxLVNDb25zdHJ1Y3QtcHJlZml4LWluY2x1ZGVweS13aXRoLXN5c3Jvb3Qt
-YW5kLWRyb3Atc3kucGF0Y2gNCnJlbmFtZSB0byBtZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9n
-cHNkL2dwc2QtMy4xOC4xLzAwMDEtU0NvbnN0cnVjdC1wcmVmaXgtaW5jbHVkZXB5LXdpdGgtc3lz
-cm9vdC1hbmQtZHJvcC1zeS5wYXRjaA0KaW5kZXggMWZhMjdjMjEwLi4yM2FlNWU1MDkgMTAwNjQ0
-DQotLS0gYS9tZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2QtMy4xNy8wMDAxLVND
-b25zdHJ1Y3QtcHJlZml4LWluY2x1ZGVweS13aXRoLXN5c3Jvb3QtYW5kLWRyb3Atc3kucGF0Y2gN
-CisrKyBiL21ldGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC0zLjE4LjEvMDAwMS1T
-Q29uc3RydWN0LXByZWZpeC1pbmNsdWRlcHktd2l0aC1zeXNyb290LWFuZC1kcm9wLXN5LnBhdGNo
-DQpAQCAtMSw0ICsxLDQgQEANCi1Gcm9tIDFlMmNlYTg5NDViYzIxODNmYmUxYTAxMmRjZDYzM2Ez
-NTIxMjU5NTIgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQorRnJvbSA1NDY0ZDllMWJmZDFhMWM1
-NDMzOGVjN2M0MTQ4Y2FkMWIyMjJlZjkzIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KIEZyb206
-IE1hcnRpbiBKYW5zYSA8TWFydGluLkphbnNhQGdtYWlsLmNvbT4NCiBEYXRlOiBUdWUsIDI0IEFw
-ciAyMDEyIDE4OjQ1OjE0ICswMjAwDQogU3ViamVjdDogW1BBVENIXSBTQ29uc3RydWN0OiBwcmVm
-aXggaW5jbHVkZXB5IHdpdGggc3lzcm9vdCBhbmQgZHJvcCBzeXNyb290DQpAQCAtMzQsMTUgKzM0
-LDE2IEBAIFVwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBbZW1iZWRkZWQgc3BlY2lmaWNd
-DQogDQogU2lnbmVkLW9mZi1ieTogTWFydGluIEphbnNhIDxNYXJ0aW4uSmFuc2FAZ21haWwuY29t
-Pg0KIFNpZ25lZC1vZmYtYnk6IFBldGVyIEEuIEJpZ290IDxwYWJAcGFiaWdvdC5jb20+DQorDQog
-LS0tDQotIFNDb25zdHJ1Y3QgfCA5ICsrKysrKysrKw0KLSAxIGZpbGUgY2hhbmdlZCwgOSBpbnNl
-cnRpb25zKCspDQorIFNDb25zdHJ1Y3QgfCA4ICsrKysrLS0tDQorIDEgZmlsZSBjaGFuZ2VkLCA1
-IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQogDQogZGlmZiAtLWdpdCBhL1NDb25zdHJ1
-Y3QgYi9TQ29uc3RydWN0DQotaW5kZXggMzMxOGJiNDguLmUxYzRmOTYzIDEwMDY0NA0KK2luZGV4
-IGI4ZjNmYjEuLjg4M2UwNmQgMTAwNjQ0DQogLS0tIGEvU0NvbnN0cnVjdA0KICsrKyBiL1NDb25z
-dHJ1Y3QNCi1AQCAtOTM0LDcgKzkzNCw3IEBAIGVsc2U6DQorQEAgLTk4MCw3ICs5ODAsNyBAQCBl
-bHNlOg0KICANCiAgIyBTZXQgdXAgY29uZmlndXJhdGlvbiBmb3IgdGFyZ2V0IFB5dGhvbg0KICAN
-CkBAIC01MSw3ICs1Miw3IEBAIGluZGV4IDMzMThiYjQ4Li5lMWM0Zjk2MyAxMDA2NDQNCiAgDQog
-IFBZVEhPTl9DT05GSUdfTkFNRVMgPSBbJ0NDJywgJ0NYWCcsICdPUFQnLCAnQkFTRUNGTEFHUycs
-DQogICAgICAgICAgICAgICAgICAgICAgICAgJ0NDU0hBUkVEJywgJ0xEU0hBUkVEJywgJ1NPJywg
-J0lOQ0xVREVQWScsICdMREZMQUdTJ10NCi1AQCAtMTM2NCw3ICsxMzY0LDcgQEAgZWxzZToNCitA
-QCAtMTUwNiw3ICsxNTA2LDcgQEAgZWxzZToNCiAgICAgICAgICAgICAgICAgICAgICAgICBMSU5L
-PWxkc2hhcmVkLA0KICAgICAgICAgICAgICAgICAgICAgICAgIFNITElCUFJFRklYPSIiLA0KICAg
-ICAgICAgICAgICAgICAgICAgICAgIFNITElCU1VGRklYPXB5dGhvbl9jb25maWdbJ1NPJ10sDQpA
-QCAtNjAsMjIgKzYxLDE5IEBAIGluZGV4IDMzMThiYjQ4Li5lMWM0Zjk2MyAxMDA2NDQNCiAgICAg
-ICAgICAgICAgICAgICAgICAgICBDUFBGTEFHUz1weXRob25fY29uZmlnWydPUFQnXSwNCiAgICAg
-ICAgICAgICAgICAgICAgICAgICBDRkxBR1M9cHl0aG9uX2NvbmZpZ1snQkFTRUNGTEFHUyddLA0K
-ICAgICAgICAgICAgICAgICAgICAgICAgIENYWEZMQUdTPXB5dGhvbl9jb25maWdbJ0JBU0VDRkxB
-R1MnXSkNCi1AQCAtMTY2MiwxMiArMTY2MiwxNSBAQCBpZiAoKG5vdCBlbnZbJ2RlYnVnJ10gYW5k
-IG5vdCBlbnZbJ3Byb2ZpbGluZyddIGFuZCBub3QgZW52Wydub3N0cmlwJ10NCi0gaWYgbm90IGVu
-dlsncHl0aG9uJ106DQotICAgICBweXRob25faW5zdGFsbCA9IFtdDQotIGVsc2U6DQotKyAgICBw
-eXRob25fbGliZGlyID0gcHl0aG9uX2xpYmRpci5yZXBsYWNlKGVudlsnc3lzcm9vdCddLCAnJykN
-Ci0gICAgIHB5dGhvbl9tb2R1bGVfZGlyID0gcHl0aG9uX2xpYmRpciArIG9zLnNlcCArICdncHMn
-DQorQEAgLTE4MDgsMTIgKzE4MDgsMTQgQEAgaWYgKChub3QgZW52WydkZWJ1ZyddIGFuZCBub3Qg
-ZW52Wydwcm9maWxpbmcnXSBhbmQgbm90IGVudlsnbm9zdHJpcCddIGFuZA0KKyAgICAgZW52LkFk
-ZFBvc3RBY3Rpb24oYmluYXJ5aW5zdGFsbCwgJyRTVFJJUCAkVEFSR0VUJykNCisgDQorIGlmIGVu
-dlsncHl0aG9uJ106DQorLSAgICBweXRob25fbW9kdWxlX2RpciA9IHN0cihweXRob25fbGliZGly
-KSArIG9zLnNlcCArICdncHMnDQorKyAgICBweXRob25fbW9kdWxlX2RpciA9IHB5dGhvbl9saWJk
-aXIucmVwbGFjZShlbnZbJ3N5c3Jvb3QnXSwgJycpICsgb3Muc2VwICsgJ2dwcycNCiAgICAgIHB5
-dGhvbl9leHRlbnNpb25zX2luc3RhbGwgPSBweXRob25fZW52Lkluc3RhbGwoREVTVERJUiArIHB5
-dGhvbl9tb2R1bGVfZGlyLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBweXRob25fYnVpbHRfZXh0ZW5zaW9ucykNCi0gICAgIGlmICgobm90IGVu
-dlsnZGVidWcnXSBhbmQgbm90IGVudlsncHJvZmlsaW5nJ10NCi0gICAgICAgICAgYW5kIG5vdCBl
-bnZbJ25vc3RyaXAnXSBhbmQgbm90IHN5cy5wbGF0Zm9ybS5zdGFydHN3aXRoKCdkYXJ3aW4nKSkp
-Og0KKyAgICAgaWYgKChub3QgZW52WydkZWJ1ZyddIGFuZCBub3QgZW52Wydwcm9maWxpbmcnXSBh
-bmQNCisgICAgICAgICAgbm90IGVudlsnbm9zdHJpcCddIGFuZCBub3Qgc3lzLnBsYXRmb3JtLnN0
-YXJ0c3dpdGgoJ2RhcndpbicpKSk6DQogICAgICAgICAgcHl0aG9uX2Vudi5BZGRQb3N0QWN0aW9u
-KHB5dGhvbl9leHRlbnNpb25zX2luc3RhbGwsICckU1RSSVAgJFRBUkdFVCcpDQogKyAgICBlbnYu
-QWRkUG9zdEFjdGlvbihweXRob25fZXh0ZW5zaW9uc19pbnN0YWxsLCAnJENIUlBBVEggLXIgIiVz
-IiAiJFRBUkdFVCInIFwNCiArICAgICAgICAgICAgICAgICAgICAgJSAocHl0aG9uX2xpYmRpciwg
-KSkNCiAgDQogICAgICBweXRob25fbW9kdWxlc19pbnN0YWxsID0gcHl0aG9uX2Vudi5JbnN0YWxs
-KERFU1RESVIgKyBweXRob25fbW9kdWxlX2RpciwNCiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcHl0aG9uX21vZHVsZXMpDQotLS0gDQotMi4xLjANCi0N
-CmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2QtMy4xNy8w
-MDAxLWluY2x1ZGUtc3lzLXR0eWRlZmF1bHRzLmgucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtbmF2
-aWdhdGlvbi9ncHNkL2dwc2QtMy4xOC4xLzAwMDItaW5jbHVkZS1zeXMtdHR5ZGVmYXVsdHMuaC5w
-YXRjaA0Kc2ltaWxhcml0eSBpbmRleCAxMDAlDQpyZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lwZXMt
-bmF2aWdhdGlvbi9ncHNkL2dwc2QtMy4xNy8wMDAxLWluY2x1ZGUtc3lzLXR0eWRlZmF1bHRzLmgu
-cGF0Y2gNCnJlbmFtZSB0byBtZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2QtMy4x
-OC4xLzAwMDItaW5jbHVkZS1zeXMtdHR5ZGVmYXVsdHMuaC5wYXRjaA0KZGlmZiAtLWdpdCBhL21l
-dGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC0zLjE3LzAwMDQtU0NvbnN0cnVjdC1k
-aXNhYmxlLWh0bWwtYW5kLW1hbi1kb2NzLWJ1aWxkaW5nLWJlY2F1cy5wYXRjaCBiL21ldGEtb2Uv
-cmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC0zLjE4LjEvMDAwMy1TQ29uc3RydWN0LWRpc2Fi
-bGUtaHRtbC1hbmQtbWFuLWRvY3MtYnVpbGRpbmctYmVjYXVzLnBhdGNoDQpzaW1pbGFyaXR5IGlu
-ZGV4IDEwMCUNCnJlbmFtZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3Bz
-ZC0zLjE3LzAwMDQtU0NvbnN0cnVjdC1kaXNhYmxlLWh0bWwtYW5kLW1hbi1kb2NzLWJ1aWxkaW5n
-LWJlY2F1cy5wYXRjaA0KcmVuYW1lIHRvIG1ldGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2Qv
-Z3BzZC0zLjE4LjEvMDAwMy1TQ29uc3RydWN0LWRpc2FibGUtaHRtbC1hbmQtbWFuLWRvY3MtYnVp
-bGRpbmctYmVjYXVzLnBhdGNoDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLW5hdmlnYXRp
-b24vZ3BzZC9ncHNkXzMuMTcuYmIgYi9tZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dw
-c2RfMy4xOC4xLmJiDQpzaW1pbGFyaXR5IGluZGV4IDkzJQ0KcmVuYW1lIGZyb20gbWV0YS1vZS9y
-ZWNpcGVzLW5hdmlnYXRpb24vZ3BzZC9ncHNkXzMuMTcuYmINCnJlbmFtZSB0byBtZXRhLW9lL3Jl
-Y2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2RfMy4xOC4xLmJiDQppbmRleCA3NzUyZTc2YjUuLmVm
-NjlhZTA5NiAxMDA2NDQNCi0tLSBhL21ldGEtb2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3Bz
-ZF8zLjE3LmJiDQorKysgYi9tZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2RfMy4x
-OC4xLmJiDQpAQCAtMTMsMTEgKzEzLDExIEBAIEVYVFJBTkFUSVZFUEFUSCArPSAiY2hycGF0aC1u
-YXRpdmUiDQogDQogU1JDX1VSSSA9ICIke1NBVkFOTkFIX0dOVV9NSVJST1J9LyR7QlBOfS8ke0JQ
-fS50YXIuZ3ogXA0KICAgICBmaWxlOi8vMDAwMS1TQ29uc3RydWN0LXByZWZpeC1pbmNsdWRlcHkt
-d2l0aC1zeXNyb290LWFuZC1kcm9wLXN5LnBhdGNoIFwNCi0gICAgZmlsZTovLzAwMDQtU0NvbnN0
-cnVjdC1kaXNhYmxlLWh0bWwtYW5kLW1hbi1kb2NzLWJ1aWxkaW5nLWJlY2F1cy5wYXRjaCBcDQot
-ICAgIGZpbGU6Ly8wMDAxLWluY2x1ZGUtc3lzLXR0eWRlZmF1bHRzLmgucGF0Y2ggXA0KKyAgICBm
-aWxlOi8vMDAwMi1pbmNsdWRlLXN5cy10dHlkZWZhdWx0cy5oLnBhdGNoIFwNCisgICAgZmlsZTov
-LzAwMDMtU0NvbnN0cnVjdC1kaXNhYmxlLWh0bWwtYW5kLW1hbi1kb2NzLWJ1aWxkaW5nLWJlY2F1
-cy5wYXRjaCBcDQogIg0KLVNSQ19VUklbbWQ1c3VtXSA9ICJlMGNmYWRjZjRhNjVkZmJkZDJhZmIx
-MWM1OGY0ZTRhMSINCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiNjhlMGRiZWNmYjU4MzE5OTdmOGIz
-ZDZiYTQ4YWVkODEyZWI0NjVkOGMwMDg5NDIwYWI2OGY5Y2U0ZDg1ZTc3YSINCitTUkNfVVJJW21k
-NXN1bV0gPSAiM2IxMWYyNmIyOTUwMTA2NjZiMTc2N2IzMDhmOTBiYzUiDQorU1JDX1VSSVtzaGEy
-NTZzdW1dID0gIjVjYjFlNmQ4ODBlYzlhNTJjNjI0OTJkZDBlM2Q3NzQ1MWI3YzdhZDYyNTg5NWJk
-NjUyZjYzNTQyMTVhZWMyM2UiDQogDQogaW5oZXJpdCBzY29ucyB1cGRhdGUtcmMuZCBweXRob24t
-ZGlyIHB5dGhvbm5hdGl2ZSBzeXN0ZW1kIGJsdWV0b290aCB1cGRhdGUtYWx0ZXJuYXRpdmVzDQog
-DQpAQCAtNjEsNyArNjEsNyBAQCBkb19pbnN0YWxsKCkgew0KIA0KICAgICBleHBvcnQgREVTVERJ
-Uj0iJHtEfSINCiAgICAgIyBwcmVmaXggaXMgdXNlZCBmb3IgUlBBVEggYW5kIERFU1RESVIvcHJl
-Zml4IGZvciBpbnN0YWxhdGlvbg0KLSAgICAke1NUQUdJTkdfQklORElSX05BVElWRX0vc2NvbnMg
-cHJlZml4PSR7cHJlZml4fSBpbnN0YWxsICR7RVhUUkFfT0VTQ09OU318fCBcDQorICAgICR7U1RB
-R0lOR19CSU5ESVJfTkFUSVZFfS9zY29ucyBwcmVmaXg9JHtwcmVmaXh9IHB5dGhvbl9saWJkaXI9
-JHtsaWJkaXJ9aW5zdGFsbCAke0VYVFJBX09FU0NPTlN9IHx8IFwNCiAgICAgICBiYmZhdGFsICJz
-Y29ucyBpbnN0YWxsIGV4ZWN1dGlvbiBmYWlsZWQuIg0KIH0NCiANCi0tIA0KMi4yMS4wDQoNCg==
+Patches to build meta-java with multiconfig and aarch64.
+
+Ricardo Ribalda Delgado (23):
+  icedtea7: Add x11 as default pkgconfig
+  openjd7: remove support for kerberos
+  openjd8: remove support for kerberos
+  classpath: Fix build with targets aarch64
+  jamvm: Do not build for aarch64 targets
+  cacao: Do not build for aarch64 targets
+  javasqlite: Create cc tool to make libtool happy
+  jdon: Fix location of S
+  rxtx: Fix path of javac
+  jamvm: Fix binary location for ecj-initial
+  cup: Do not use all as PACKAGE_ARCH
+  dbus-java: Do not use all as PACKAGE_ARCH
+  rhino: Do not use all as PACKAGE_ARCH
+  ca-certificates: Cannot be an allarch package
+  xalan-j: Do not use all as PACKAGE_ARCH
+  xom: Do not use all as PACKAGE_ARCH
+  jaxen: Do not build an all PACKAGE_ARCH
+  jlex: Do not build as an all PACKAGE_ARCH
+  bsf: Do not build as all PACKAGE_ARCH
+  poi: Do not build as all PACKAGE_ARCH
+  xom: Allow re-running do_compile
+  jdom: Do not use all as PACKAGE_ARCH
+  dom4j: Do not use all as PACKAGE_ARCH
+
+ .../ca-certificates-java_20180516.bb          |  2 +-
+ recipes-core/cacao/cacao_1.6.1.bb             |  2 ++
+ .../classpath/classpath-0.99/aarch64.patch    | 19 +++++++++++++++
+ recipes-core/classpath/classpath_0.99.bb      |  1 +
+ recipes-core/cup/cup_0.10k.bb                 |  1 +
+ recipes-core/icedtea/icedtea7-native.inc      |  2 +-
+ recipes-core/jakarta-libs/bsf_2.4.0.bb        |  4 +++-
+ recipes-core/jakarta-libs/poi_3.0.bb          |  2 ++
+ recipes-core/jamvm/jamvm.inc                  |  2 +-
+ recipes-core/jamvm/jamvm_git.bb               |  1 +
+ .../javasqlite/javasqlite_20150419.bb         |  8 ++++++-
+ recipes-core/jlex/jlex_1.2.6.bb               |  2 ++
+ recipes-core/openjdk/openjdk-7-common.inc     |  3 ++-
+ recipes-core/openjdk/openjdk-8-cross.inc      |  2 +-
+ recipes-core/rhino/rhino_1.7r4.bb             |  2 ++
+ recipes-core/xalan-j/xalan-j_2.7.1.bb         |  4 +++-
+ recipes-core/xml-commons/dom4j_1.6.1.bb       |  1 +
+ recipes-core/xml-commons/jaxen_1.1.6.bb       |  2 ++
+ recipes-core/xml-commons/jdom_1.1.3.bb        |  4 ++++
+ recipes-core/xml-commons/xom_1.2.10.bb        |  9 ++++++--
+ recipes-extended/dbus/dbus-java_2.7.bb        |  4 +++-
+ recipes-extended/rxtx/files/javapath.patch    | 23 +++++++++++++++++++
+ recipes-extended/rxtx/rxtx_2.2.0.bb           |  5 ++--
+ 23 files changed, 92 insertions(+), 13 deletions(-)
+ create mode 100644 recipes-core/classpath/classpath-0.99/aarch64.patch
+ create mode 100644 recipes-extended/rxtx/files/javapath.patch
+
+-- 
+2.20.1
+
 
