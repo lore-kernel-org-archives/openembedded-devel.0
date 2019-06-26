@@ -1,33 +1,34 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id A582D60111
+Return-Path: <uol@pengutronix.de>
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+	[85.220.165.71])
+	by mail.openembedded.org (Postfix) with ESMTP id 55F9260111
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jun 2019 08:50:52 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45YcF85L64z23
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jun 2019 10:50:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561539052;
-	bh=XmXcGnR4SZthe37SSOe8++p12bY0MrcE5baW0aNFlQI=;
-	h=From:To:Subject:Date:From;
-	b=HGk9zdNymzyB+miWBad4qSAlWElSwWHK8PMm2jD3Aa9R7fF4J0ri/LVct7jgfwli5
-	GrRJerHrV9JdvAIyJhJZ+5rKV6kT+rMfmTS67Un+/vMQrrtJoWtqpLWzsktALq/LcO
-	Tp9PSTUuDUBnki/2kR0w9aF0fUWtuNz8gHThY3VV8eCaVpJBleZMePwCGUJ2zfabzq
-	HmxZZuAG8Bd13yqNI0JWnYIDMtBVMwoBKk3Z5K0zW8fujX9uZSixfL4mbtHdT06Otx
-	j/N78yl4CixqcOxQoniIAfkzhe1Y6FpIXcvDtVqpfnwqq0GzC2HMU6JG1e19BOtQv0
-	lh/OWWRuWQQ2cRRV5g46WMlovyH1oqatUJ5AdKybZgCisf6bhM1rPyVeT5Yuryq6Vx
-	v48cPkXMm9PHqS5HE08ix7cykNExTFfWfbymLEGfh9rfae557MoXwr9IwU8Yi6b0L9
-	8/zKos4jdT4ZJw6aB38JnXuurjfhJ8c/U8dymCOYiWY48kVgbCVIm6XDQaxuvwD0YS
-	ENewuOGFAbE6YuXYtWKK2Vy6gkOxJcX4RrEvM96llP5/tMoAdGYAIDYQTryQdUe8hO
-	irB56W5SnlRHQVl18hb80vBiXNgUQblePfuSnDC/TqstfyZ55rmnI0BKNVevd6Gj0K
-	+oo6/hAE19Ano8rprxJzKnAI=
-From: Adrian Bunk <bunk@stusta.de>
+	Wed, 26 Jun 2019 12:29:12 +0000 (UTC)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps
+	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1hg733-0004xD-3w; Wed, 26 Jun 2019 14:29:13 +0200
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1hg731-0001En-6h; Wed, 26 Jun 2019 14:29:11 +0200
+User-agent: mu4e 1.1.0; emacs 26.1
+From: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jun 2019 11:50:51 +0300
-Message-Id: <20190626085052.5193-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] gssdp: Merge inc
+Date: Wed, 26 Jun 2019 14:29:11 +0200
+Message-ID: <6ry31owmw8.fsf@pengutronix.de>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+	SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Cc: Maksim Sisov <msisov@igalia.com>,
+	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
+	Denis Carikli <denis@eukrea.com>,
+	Eric =?utf-8?Q?B=C3=A9nard?= <eric@eukrea.com>,
+	=?utf-8?Q?S=C3=B8ren?= Andersen <san@skov.dk>
+Subject: [meta-browser] host leaking wayland-scanner?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,78 +41,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 08:50:53 -0000
+X-List-Received-Date: Wed, 26 Jun 2019 12:29:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-This recipe stopped having multiple versions in 2014.
+Hi developers of meta-browser,
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../recipes-connectivity/gupnp/gssdp.inc      | 20 ---------------
- .../recipes-connectivity/gupnp/gssdp_1.0.2.bb | 25 +++++++++++++++----
- 2 files changed, 20 insertions(+), 25 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
+while building meta-browser's latest chromium-ozone-wayland recipe (my
+meta-browser's current state is [1], integrated into a customer's thud
+based Yocto-BSP) I faced the following problem (excerpt from log.do_com-
+pile)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc b/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
-deleted file mode 100644
-index 23f17eddf..000000000
---- a/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
-+++ /dev/null
-@@ -1,20 +0,0 @@
--SUMMARY = "Resource discovery and announcement over SSDP"
--DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
--LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
--DEPENDS = "glib-2.0 libsoup-2.4"
--
--inherit autotools pkgconfig gobject-introspection vala
--
--# Copy vapigen.m4 so that it doesn't get removed by vala class
--# (normally this would be the right thing to do, but in gssdp the vapigen.m4 has only a custom macro)
--do_configure_prepend() {
--        cp -f ${S}/m4/vapigen.m4 ${S}/m4/vapigen-custom.m4 || true
--}
--
--PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
--PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+"
--
--PACKAGES =+ "gssdp-tools"
--
--FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
-index b60d1ea44..6088ef195 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
-@@ -1,9 +1,24 @@
--require gssdp.inc
--
--inherit gtk-doc
--
--PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+3"
-+SUMMARY = "Resource discovery and announcement over SSDP"
-+DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
-+DEPENDS = "glib-2.0 libsoup-2.4"
- 
- SRC_URI = "${GNOME_MIRROR}/${BPN}/1.0/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "b30c9a406853c6a3a012d151d6e7ad2c"
- SRC_URI[sha256sum] = "a1e17c09c7e1a185b0bd84fd6ff3794045a3cd729b707c23e422ff66471535dc"
-+
-+inherit autotools pkgconfig gobject-introspection vala gtk-doc
-+
-+# Copy vapigen.m4 so that it doesn't get removed by vala class
-+# (normally this would be the right thing to do, but in gssdp the vapigen.m4 has only a custom macro)
-+do_configure_prepend() {
-+        cp -f ${S}/m4/vapigen.m4 ${S}/m4/vapigen-custom.m4 || true
-+}
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
-+PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+3"
-+
-+PACKAGES =+ "gssdp-tools"
-+
-+FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
--- 
-2.17.1
+  [9109/37430] python ../../third_party/wayland/wayland_scanner_wrapper.py =
+third_party/wayland-protocols/src/unstable/linux-dmabuf/linux-dmabuf-unstab=
+le-v1.xml --src-root ../../ --root-gen-dir gen --cmd /usr/bin/wayland-scann=
+er
+  FAILED: gen/third_party/wayland-protocols/src/unstable/linux-dmabuf/linux=
+-dmabuf-unstable-v1-protocol.c gen/third_party/wayland-protocols/src/unstab=
+le/linux-dmabuf/linux-dmabuf-unstable-v1-client-protocol.h gen/third_party/=
+wayland-protocols/src/unstable/linux-dmabuf/linux-dmabuf-unstable-v1-server=
+-protocol.h
+  python ../../third_party/wayland/wayland_scanner_wrapper.py third_party/w=
+ayland-protocols/src/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml --s=
+rc-root ../../ --root-gen-dir gen --cmd /usr/bin/wayland-scanner
+  Traceback (most recent call last):
+    File "../../third_party/wayland/wayland_scanner_wrapper.py", line 48, i=
+n <module>
+      main(sys.argv)
+    File "../../third_party/wayland/wayland_scanner_wrapper.py", line 40, i=
+n main
+      generate_code(cmd, "code", protocol_path, out_base_name + "-protocol.=
+c")
+    File "../../third_party/wayland/wayland_scanner_wrapper.py", line 18, i=
+n generate_code
+      ret =3D subprocess.call([wayland_scanner_cmd, code_type, path_in, pat=
+h_out])
+    File "<UNDISCLOSED_PATH>/build/YOCTO.BSP/tmp/work/cortexa9hf-neon-pmc-l=
+inux-gnueabi/chromium-ozone-wayland/75.0.3770.100-r0/recipe-sysroot-native/=
+usr/lib/python2.7/subprocess.py", line 172, in call
+      return Popen(*popenargs, **kwargs).wait()
+    File "<UNDISCLOSED_PATH>/build/YOCTO.BSP/tmp/work/cortexa9hf-neon-pmc-l=
+inux-gnueabi/chromium-ozone-wayland/75.0.3770.100-r0/recipe-sysroot-native/=
+usr/lib/python2.7/subprocess.py", line 394, in __init__
+      errread, errwrite)
+    File "<UNDISCLOSED_PATH>/build/YOCTO.BSP/tmp/work/cortexa9hf-neon-pmc-l=
+inux-gnueabi/chromium-ozone-wayland/75.0.3770.100-r0/recipe-sysroot-native/=
+usr/lib/python2.7/subprocess.py", line 1047, in _execute_child
+      raise child_exception
+  OSError: [Errno 2] No such file or directory
 
+which seems to come from my build host not providing '/usr/bin/wayland-
+scanner' and which suggests that we have a host tool leakage here. This
+all originally results from Chromium's commit [2], particularly [3].
+
+Unfortunately up to now I am not familiar with Google's build tool 'GN'
+(see [4]), so I can't present a solution straightaway. But I would like
+to start working on a patch now, hence my questions are:
+
+  - did anyone notice the same issue?
+  - is my analysis correct that [3] has to be patched somehow and the
+    recipe [5] lacks a dependency on wayland-native?
+
+Best regards
+Ulrich
+
+
+P.S.: Sending this message a second time as I have not been subscribed
+to the oe-devel list before so that the original mail got rejected.
+
+
+[1] e0d1e299d691 ("chromium: fix "pure virtual method called" problem.")
+[2] https://chromium.googlesource.com/chromium/src/+/a64f758399d26a1c80ab0d=
+3dfecee3abf0714305
+    a64f758399d2 ("Run wayland-scanner as part of build")
+[3] https://chromium.googlesource.com/chromium/src/+/a64f758399d26a1c80ab0d=
+3dfecee3abf0714305/third_party/wayland/features.gni#12
+[4] https://gn.googlesource.com/gn/
+[5] https://github.com/OSSystems/meta-browser/blob/master/recipes-browser/c=
+hromium/chromium-ozone-wayland_75.0.3770.100.bb
+--=20
+Pengutronix e.K.                           | Ulrich =C3=96lmann            =
+   |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
