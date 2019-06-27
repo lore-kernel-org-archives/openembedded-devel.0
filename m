@@ -1,30 +1,50 @@
-Return-Path: <radovan.scasny@siemens.com>
-X-Greylist: delayed 447 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 27 Jun 2019 07:23:13 UTC
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id B82E07E6F2
+Return-Path: <jean-tiare.le-bigot@easymile.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 426DC78F72
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 07:23:13 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x5R7Fkkw008994
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Thu, 27 Jun 2019 09:15:46 +0200
-Received: from dev.vm6.ccp.siemens.com (md1yarhc.ad001.siemens.net
-	[163.242.44.42])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id x5R7FhXQ024165;
-	Thu, 27 Jun 2019 09:15:43 +0200
-Received: from mail1.siemens.de (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id E4D9E233CC4F;
-	Thu, 27 Jun 2019 09:15:43 +0200 (CEST)
-From: Radovan Scasny <radovan.scasny@siemens.com>
+	Thu, 27 Jun 2019 08:59:08 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id n9so1610532wru.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jun 2019 01:59:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=easymile.com; s=easymile;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XFq3/T3xgj4Ac9Qvs7m83YqXni/vlP+gQ2uPnzKwkp8=;
+	b=KI48ZyYP7I4YT0fBy3UEOzNRKAayHyhTy0tzxbjgcH0RM+GF34GDjwyIt/CUyPo1hu
+	eIkGU5tYKDan3Ws3zCAmqQIeRJd3i+yTDsrKDEKaY9X3LtjuJzeOYN4yYjW5lWxl80Vu
+	gbqmpLPjM+2X0FkfTWKrRV2PzFZ0i+BXa4vCQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XFq3/T3xgj4Ac9Qvs7m83YqXni/vlP+gQ2uPnzKwkp8=;
+	b=UaZDAtfFYJVzZNqMl2dajyuphQAmX/y9tvIR2Y0D/5lx4dOycp5d027lcdhHxvxeIT
+	Cj3ZjuuQF/8Yfamp7wy/liYmlb3D9C1D/NaDqnZVhZ1z/dHN28zfY57lWQ7QtRNXzcm9
+	Wy9M1hFRj0HghAHdiwhXMk3kUzSy4oDafpogz3gs35VFSbsrbnOYZs7iFLvexcT6iz8T
+	iqEnGxycVKfgv++KviuZWbfZHVAMwqYPSP7G8XD8rhZEbarYShREPnIIyfWyAM7Mp61V
+	vJI0VApruq45P8r9eZbTfPq73dQuo+1lqdRTV6AEHGXHAbFLfpgYg97l+feIkQYS/hrN
+	GgfQ==
+X-Gm-Message-State: APjAAAXXRqWnI31xMrBSqA3QglsQlXbYcWAh1wLfZbvSr50ICA5uiJ7C
+	a9trXVsKgsieKGkG/bJzbesu9oaYVCb0kO6ZYJ84YfvSp5IaKkMhV0z/XSJfG/gR2NxCNs9bpxn
+	3YWjU4ptMygk2CIGN4Lee2d80kVdETegR/rogofKT4qi7dNku0MFyMs8eH2+0k6yU1hbNyA+TZ3
+	1bvh1ZkIbJY8Mbdsy5xpj0/erk19jHIz2faA==
+X-Google-Smtp-Source: APXvYqwzGjx3FgQQVDiinUB1qrywj5T2mMoZ4cjX4kuvsSsQVtV6mZjXQLp4Oy+tiGG55DR/s7q28Q==
+X-Received: by 2002:a5d:484e:: with SMTP id n14mr2216831wrs.348.1561625948827; 
+	Thu, 27 Jun 2019 01:59:08 -0700 (PDT)
+Received: from localhost.localdomain ([185.116.129.142])
+	by smtp.gmail.com with ESMTPSA id r5sm4434354wrg.10.2019.06.27.01.59.08
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 27 Jun 2019 01:59:08 -0700 (PDT)
+From: Jean-Tiare Le Bigot <jean-tiare.le-bigot@easymile.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jun 2019 09:14:36 +0200
-Message-Id: <20190627071436.4561-1-radovan.scasny@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190625205516.16072-1-open.source@oleksandr-kravchuk.com>
-References: <20190625205516.16072-1-open.source@oleksandr-kravchuk.com>
-Cc: open.source@oleksandr-kravchuk.com
-Subject: [meta-networking][PATCH v3] dhcpcd: update to 7.2.2
+Date: Thu, 27 Jun 2019 10:59:04 +0200
+Message-Id: <20190627085904.9461-1-jean-tiare.le-bigot@easymile.com>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Jo=C3=ABl=20Esponde?= <joel.esponde@easymile.com>
+Subject: [PATCH] package.bbclass: fix directories setuid and setgid bits
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,40 +57,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 07:23:14 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 08:59:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-License checksum changed due to modified copyright year.
+From: Joël Esponde <joel.esponde@easymile.com>
 
-Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
+populate_packages relies on ``mkdir`` to both create a directory and set
+its permissions. However, ``mkdir`` honors the ``umask`` value.
+Therefore, some bits may be lost in the operation. In our case, the
+setgid bit on the directories were lost.
+
+This commit fixes this by having a distinct call to create the directory
+and to set the permissions.
+
+Signed-off-by: Jean-Tiare Le Bigot <jean-tiare.le-bigot@easymile.com>
 ---
- .../dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb}                     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb} (78%)
+ meta/classes/package.bbclass | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-similarity index 78%
-rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
-rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-index 84c3db7a5..9c3f4f7a4 100644
---- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
-+++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-@@ -5,12 +5,12 @@ DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer
- HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
- 
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1e8f17e4edcccc38152ccf60374e0f89"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
- 
- SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
- 
--SRC_URI[md5sum] = "77bbb1d73b6f30d6ddcc8b0fd3eae266"
--SRC_URI[sha256sum] = "96968e883369ab4afd11eba9dfd9bb109f5dfff65b2814ce6c432f36362dc9b5"
-+SRC_URI[md5sum] = "2f17034432ea10415ee84a97ef131128"
-+SRC_URI[sha256sum] = "3db7ff18cba9274da1d2176fb3c7cbe23926a8e58d5c8e244ad55c62d38ba09e"
- 
- SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
- 
+diff --git a/meta/classes/package.bbclass b/meta/classes/package.bbclass
+index 20d72bba79..cd223a121e 100644
+--- a/meta/classes/package.bbclass
++++ b/meta/classes/package.bbclass
+@@ -1216,7 +1216,8 @@ python populate_packages () {
+                 src = os.path.join(src, p)
+                 dest = os.path.join(dest, p)
+                 fstat = cpath.stat(src)
+-                os.mkdir(dest, fstat.st_mode)
++                os.mkdir(dest)
++                os.chmod(dest, fstat.st_mode)
+                 os.chown(dest, fstat.st_uid, fstat.st_gid)
+                 if p not in seen:
+                     seen.append(p)
 -- 
-2.11.0
+2.19.1
 
 
