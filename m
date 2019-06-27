@@ -1,26 +1,24 @@
 Return-Path: <chin.huat.ang@intel.com>
-X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 27 Jun 2019 21:45:28 UTC
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ADE36B067
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 35D5E7D419
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 21:45:28 +0000 (UTC)
+	Thu, 27 Jun 2019 21:46:39 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Jun 2019 14:38:22 -0700
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Jun 2019 14:46:40 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,425,1557212400"; d="scan'208";a="183544818"
+X-IronPort-AV: E=Sophos;i="5.63,425,1557212400"; d="scan'208";a="313939879"
 Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by fmsmga001.fm.intel.com with ESMTP; 27 Jun 2019 14:38:19 -0700
+	by orsmga004.jf.intel.com with ESMTP; 27 Jun 2019 14:46:38 -0700
 From: Chin Huat Ang <chin.huat.ang@intel.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Jun 2019 05:38:13 +0800
-Message-Id: <1561671493-67520-1-git-send-email-chin.huat.ang@intel.com>
+Date: Fri, 28 Jun 2019 05:46:21 +0800
+Message-Id: <1561671981-67750-1-git-send-email-chin.huat.ang@intel.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] opencv: 3.4.5 -> 4.1.0
+Subject: [meta-oe][PATCH] opencv: 3.4.5 -> 4.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 21:45:28 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 21:46:39 -0000
 
 Update both opencv and opencv_contrib to 4.1.0 and refresh all patches.
 
