@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 418197C136
+	by mail.openembedded.org (Postfix) with ESMTP id ED7966B5C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 05:31:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,422,1557158400"; d="scan'208";a="69650591"
+	Thu, 27 Jun 2019 05:57:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,422,1557158400"; d="scan'208";a="69655343"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jun 2019 13:31:25 +0800
+	by heian.cn.fujitsu.com with ESMTP; 27 Jun 2019 13:57:05 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id D20C44CDE645
+	by cn.fujitsu.com (Postfix) with ESMTP id 1B2C84CDDD22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 13:31:26 +0800 (CST)
+	Thu, 27 Jun 2019 13:57:06 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.227) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 27 Jun 2019 13:31:35 +0800
+	Server (TLS) id 14.3.439.0; Thu, 27 Jun 2019 13:57:17 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1559869853-38632-1-git-send-email-leimaohui@cn.fujitsu.com>
+Message-ID: <1559871393-38760-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.227]
-X-yoursite-MailScanner-ID: D20C44CDE645.AEDC5
+X-yoursite-MailScanner-ID: 1B2C84CDDD22.AD165
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking][PATCH] adcli: added new recipe.
+Subject: [meta-networking][PATCH v2] adcli: added new recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,12 +36,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Thu, 27 Jun 2019 05:31:27 -0000
-X-Original-Date: Fri, 7 Jun 2019 09:10:53 +0800
-X-List-Received-Date: Thu, 27 Jun 2019 05:31:27 -0000
+Date: Thu, 27 Jun 2019 05:57:06 -0000
+X-Original-Date: Fri, 7 Jun 2019 09:36:33 +0800
+X-List-Received-Date: Thu, 27 Jun 2019 05:57:06 -0000
 Content-Type: text/plain
 
-Freeradius is too old. So, added a substitute.
+radiusclient-ng is too old. So, added a substitute.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
