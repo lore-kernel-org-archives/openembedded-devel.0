@@ -1,29 +1,30 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id ED7966B5C5
+Return-Path: <radovan.scasny@siemens.com>
+X-Greylist: delayed 447 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 27 Jun 2019 07:23:13 UTC
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id B82E07E6F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 05:57:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,422,1557158400"; d="scan'208";a="69655343"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jun 2019 13:57:05 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1B2C84CDDD22
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 13:57:06 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.227) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 27 Jun 2019 13:57:17 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1559871393-38760-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-yoursite-MailScanner-ID: 1B2C84CDDD22.AD165
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH v2] adcli: added new recipe.
+	Thu, 27 Jun 2019 07:23:13 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x5R7Fkkw008994
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Thu, 27 Jun 2019 09:15:46 +0200
+Received: from dev.vm6.ccp.siemens.com (md1yarhc.ad001.siemens.net
+	[163.242.44.42])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id x5R7FhXQ024165;
+	Thu, 27 Jun 2019 09:15:43 +0200
+Received: from mail1.siemens.de (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id E4D9E233CC4F;
+	Thu, 27 Jun 2019 09:15:43 +0200 (CEST)
+From: Radovan Scasny <radovan.scasny@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Jun 2019 09:14:36 +0200
+Message-Id: <20190627071436.4561-1-radovan.scasny@siemens.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20190625205516.16072-1-open.source@oleksandr-kravchuk.com>
+References: <20190625205516.16072-1-open.source@oleksandr-kravchuk.com>
+Cc: open.source@oleksandr-kravchuk.com
+Subject: [meta-networking][PATCH v3] dhcpcd: update to 7.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,54 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Thu, 27 Jun 2019 05:57:06 -0000
-X-Original-Date: Fri, 7 Jun 2019 09:36:33 +0800
-X-List-Received-Date: Thu, 27 Jun 2019 05:57:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Jun 2019 07:23:14 -0000
 
-radiusclient-ng is too old. So, added a substitute.
+License checksum changed due to modified copyright year.
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
 ---
- .../recipes-connectivity/adcli/adcli_0.8.2.bb      | 26 ++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
+ .../dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb}                     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb} (78%)
 
-diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
-new file mode 100644
-index 0000000..a98a1b3
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Active Directory enrollment"
-+DESCRIPTION = "A helper library and tools for Active Directory client operations."
-+
-+HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
-+SECTION = "net"
-+
-+SRCREV = "cc3ef52884a48863a81acbfc741735fe09cd85f7"
-+
-+SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
-+          "
-+
-+S = "${WORKDIR}/git"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
-+
-+inherit autotools xmlcatalog 
-+
-+DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
-+            cyrus-sasl libxslt-native xmlto-native coreutils-native\
-+           "
-+
-+EXTRA_OECONF += "--disable-static \
-+                 --disable-silent-rules \
-+                 --disable-doc \
-+                "
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
+similarity index 78%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
+index 84c3db7a5..9c3f4f7a4 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
+@@ -5,12 +5,12 @@ DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer
+ HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
+ 
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1e8f17e4edcccc38152ccf60374e0f89"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
+ 
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "77bbb1d73b6f30d6ddcc8b0fd3eae266"
+-SRC_URI[sha256sum] = "96968e883369ab4afd11eba9dfd9bb109f5dfff65b2814ce6c432f36362dc9b5"
++SRC_URI[md5sum] = "2f17034432ea10415ee84a97ef131128"
++SRC_URI[sha256sum] = "3db7ff18cba9274da1d2176fb3c7cbe23926a8e58d5c8e244ad55c62d38ba09e"
+ 
+ SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
+ 
 -- 
-2.7.4
-
-
+2.11.0
 
 
