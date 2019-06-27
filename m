@@ -1,32 +1,23 @@
-Return-Path: <uol@pengutronix.de>
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
-	[85.220.165.71])
-	by mail.openembedded.org (Postfix) with ESMTP id A99797E8F3
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CCB97E8F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 13:39:08 +0000 (UTC)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps
-	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1hgUcG-0000ZT-Cu; Thu, 27 Jun 2019 15:39:08 +0200
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1hgUcC-0001n6-T5; Thu, 27 Jun 2019 15:39:04 +0200
-From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jun 2019 15:38:59 +0200
-Message-Id: <20190627133859.6843-1-u.oelmann@pengutronix.de>
-X-Mailer: git-send-email 2.20.1
+	Thu, 27 Jun 2019 13:48:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5RDmXnj000628
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 27 Jun 2019 06:48:33 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 27 Jun 2019 06:48:33 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Thu, 27 Jun 2019 09:47:49 -0400
+Message-ID: <1561643269-130343-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: uol@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
-	SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Cc: Maksim Sisov <msisov@igalia.com>,
-	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
-	=?UTF-8?q?S=C3=B8ren=20Andersen?= <san@skov.dk>
-Subject: [meta-browser][PATCH] chromium-ozone-wayland: Stop depending on the system's wayland-scanner binary
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] networkmanager: goodbye libnm-glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,69 +30,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 13:39:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Jun 2019 13:48:33 -0000
+Content-Type: text/plain
 
-This commit re-applies the changes of the commit given below to the current
-chromium-ozone-wayland recipe as they got lost in the meantime.
+Since commit [061953143 networkmanager: Update to 1.18.0] applied,
+upstream disable libnm-glib by default. And in further networkmanager,
+upstream removes libnm-glib, libnm-glib-vpn, and libnm-util for good
 
-| commit cd88d7be61bc39726b8ecf7ddc19e6942bcf8cb4
-| Author: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-| Date:   Thu May 2 12:08:54 2019 +0200
-|
-|     chromium-ozone-wayland: Stop depending on the system's wayland-scanner
-|     binary
-|
-|     So far, we were using Chromium's default GN path for the system
-|     wayland-scanner binary, "/usr/bin/wayland-scanner", which may not be present
-|     at all and which should never be used anyway. Instead, we now point to the
-|     version built by the wayland-native recipe.
-|
-|     Doing so of course requires depending on wayland-native in the first place,
-|     and that requires adding back REQUIRED_DISTRO_FEATURES and a DEPENDS block
-|     that got removed with no explanation when the recipe was updated to
-|     M72 (commit 97876fab, "chromium: Update to 72.0.3626.81").
-|
-|     Fixes #241
-|
-|     Signed-off-by: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+https://github.com/NetworkManager/NetworkManager/commit/df58895fb3479c4f00b9107126759d138250fef2
+https://github.com/NetworkManager/NetworkManager/commit/5801f89f4d1464fc15cb1d97755b73f9f68cb2e6
 
-Fixes: 1f363e25cb7d ("chromium: Update to 74.0.3729.131")
-Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../chromium/chromium-ozone-wayland_75.0.3770.100.bb   | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ .../networkmanager/networkmanager_1.18.0.bb                | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.100.bb b/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.100.bb
-index 22afa52aec20..1e4ed2958d2d 100644
---- a/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.100.bb
-+++ b/recipes-browser/chromium/chromium-ozone-wayland_75.0.3770.100.bb
-@@ -31,6 +31,15 @@ SRC_URI += " \
-         file://0001-ozone-wayland-Fix-method-prototype-match.patch \
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+index 9215a8676..cc84d614d 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+@@ -87,21 +87,16 @@ PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp,ppp"
+ PACKAGECONFIG[dhclient] = "--with-dhclient=${base_sbindir}/dhclient,,,dhcp-client"
+ PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
+ PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
+-PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
+ PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls"
+ PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
+ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+ PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+ 
+-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
++PACKAGES =+ " \
+   ${PN}-nmtui ${PN}-nmtui-doc \
+   ${PN}-adsl \
  "
  
-+REQUIRED_DISTRO_FEATURES = "wayland"
-+
-+DEPENDS += "\
-+        libxkbcommon \
-+        virtual/egl \
-+        wayland \
-+        wayland-native \
-+"
-+
- # Chromium can use v4l2 device for hardware accelerated video decoding. Make sure that
- # /dev/video-dec exists.
- PACKAGECONFIG[use-linux-v4l2] = "use_v4l2_codec=true use_v4lplugin=true use_linux_v4l2_only=true"
-@@ -42,6 +51,7 @@ GN_ARGS += "\
-         ozone_platform_headless=true \
-         ozone_platform_wayland=true \
-         ozone_platform_x11=false \
-+        system_wayland_scanner_path="${STAGING_BINDIR_NATIVE}/wayland-scanner" \
-         use_xkbcommon=true \
-         use_system_libwayland=true \
-         use_system_minigbm=true \
+-FILES_libnmutil += "${libdir}/libnm-util.so.*"
+-FILES_libnmglib += "${libdir}/libnm-glib.so.*"
+-FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
+-
+ FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
+ 
+ FILES_${PN} += " \
 -- 
-2.20.1
+2.17.1
 
 
