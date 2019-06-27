@@ -1,35 +1,23 @@
-Return-Path: <uol@pengutronix.de>
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
-	[85.220.165.71])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A8587E7D4
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E34B17E978
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 15:56:37 +0000 (UTC)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps
-	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1hgWlK-0007JQ-Eu; Thu, 27 Jun 2019 17:56:38 +0200
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <uol@pengutronix.de>)
-	id 1hgWlH-00084j-1c; Thu, 27 Jun 2019 17:56:35 +0200
-References: <CAP9ODKooyOFZb7fYcLGM8QRaJR2skz-xhWX+Epq1DECzNBQbOQ@mail.gmail.com>
-	<20190626232342.9017-1-u.oelmann@pengutronix.de>
-User-agent: mu4e 1.1.0; emacs 26.1
-From: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-In-reply-to: <20190626232342.9017-1-u.oelmann@pengutronix.de>
-Date: Thu, 27 Jun 2019 17:56:35 +0200
-Message-ID: <6rsgrvvx70.fsf@pengutronix.de>
+	Thu, 27 Jun 2019 16:02:37 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5RG2clU029423
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 27 Jun 2019 09:02:38 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Thu, 27 Jun 2019 09:02:37 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Fri, 28 Jun 2019 00:02:34 +0800
+Message-ID: <1561651356-12247-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: uol@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
-	SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Cc: Maksim Sisov <msisov@igalia.com>,
-	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
-	=?utf-8?Q?S=C3=B8ren?= Andersen <san@skov.dk>
-Subject: Re: [meta-browser][PATCH] README: update list of maintainers
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH 1/3] python-six: remove duplicated recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,56 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:56:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Jun 2019 16:02:38 -0000
+Content-Type: text/plain
 
-Hi there,
+Since commit [e3392ec python-six: put python2/3 variant together] applied,
+python-six recipe was moved to meta-oe, but not remove the duplicated one
 
-to ease the development flow I created a pull request on GitHub for this
-subthread's patch as well :)
+The python3-six recipe and python-six.inc is in oe-core
 
-  https://github.com/OSSystems/meta-browser/pull/279
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-python/recipes-devtools/python/python-six.inc    | 19 -------------------
+ .../recipes-devtools/python/python-six_1.12.0.bb      |  2 --
+ 2 files changed, 21 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-six.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python-six_1.12.0.bb
 
-Best regards
-Ulrich
+diff --git a/meta-python/recipes-devtools/python/python-six.inc b/meta-python/recipes-devtools/python/python-six.inc
+deleted file mode 100644
+index 4712925..0000000
+--- a/meta-python/recipes-devtools/python/python-six.inc
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "Python 2 and 3 compatibility library"
+-HOMEPAGE = "http://pypi.python.org/pypi/six/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=83e0f622bd5ac7d575dbd83d094d69b5"
+-
+-SRC_URI[md5sum] = "9ae5d1feed8c0215f4ae4adcd9207fcb"
+-SRC_URI[sha256sum] = "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"
+-
+-do_compile_append() {
+-    ${PYTHON} setup.py -q bdist_egg --dist-dir ./
+-}
+-do_install_append() {
+-    install -m 0644 ${S}/*.egg ${D}/${PYTHON_SITEPACKAGES_DIR}/
+-}
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-io"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+diff --git a/meta-python/recipes-devtools/python/python-six_1.12.0.bb b/meta-python/recipes-devtools/python/python-six_1.12.0.bb
+deleted file mode 100644
+index 9075745..0000000
+--- a/meta-python/recipes-devtools/python/python-six_1.12.0.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools
+-require python-six.inc
+-- 
+2.7.4
 
-
-On Thu, Jun 27 2019 at 01:23 +0200, Ulrich =C3=96lmann <u.oelmann@pengutron=
-ix.de> wrote:
-> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
-> ---
->  README | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/README b/README
-> index 0a005a8b5ea6..31d361d2ab41 100644
-> --- a/README
-> +++ b/README
-> @@ -23,13 +23,15 @@ revision: HEAD
->  Contributing
->  ------------
->
-> -To contribute to this layer you should the patches for review to the
-> +To contribute to this layer you should send the patches for review to the
->  OpenEmbedded dev mailing list openembedded-devel@lists.openembedded.org
->  and please cc the maintainers.
->
-> -Maintainers: Eric B=C3=A9nard <eric@eukrea.com>
-> -             Denis Carikli <denis@eukrea.com>
-> +Maintainers: Fabio Berton <fabio.berton@ossystems.com.br>
-> +             Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-> +             Khem Raj <raj.khem@gmail.com>
->               Otavio Salvador <otavio@ossystems.com.br>
-> +             Maksim Sisov <msisov@igalia.com>
->
->  When sending single patches, please use something like :
->  git send-email -1 -s --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-browser][PATCH'
---=20
-Pengutronix e.K.                           | Ulrich =C3=96lmann            =
-   |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
