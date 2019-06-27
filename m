@@ -1,23 +1,29 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 216886D561
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 418197C136
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2019 05:22:20 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5R5ML9T013811
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 26 Jun 2019 22:22:21 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 26 Jun 2019 22:22:15 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 27 Jun 2019 01:22:12 -0400
-Message-ID: <20190627052213.127012-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Thu, 27 Jun 2019 05:31:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,422,1557158400"; d="scan'208";a="69650591"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 Jun 2019 13:31:25 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id D20C44CDE645
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jun 2019 13:31:26 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 27 Jun 2019 13:31:35 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <1559869853-38632-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mozjs: fix configure failure on CentOS 7.6
+X-Originating-IP: [10.167.225.227]
+X-yoursite-MailScanner-ID: D20C44CDE645.AEDC5
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] adcli: added new recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,89 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 05:22:21 -0000
-Content-Transfer-Encoding: 8bit
+Date: Thu, 27 Jun 2019 05:31:27 -0000
+X-Original-Date: Fri, 7 Jun 2019 09:10:53 +0800
+X-List-Received-Date: Thu, 27 Jun 2019 05:31:27 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+Freeradius is too old. So, added a substitute.
 
-Option '-std=gnu++14' has been supported from gcc 4.9. But on some build hosts
-such as CentOS 7.6 which only has gcc 4.8.5 and fails to configure:
-
-| checking whether the host C compiler can be used... no
-| ERROR: Only GCC 4.9 or newer is supported (found version 4.8.5).
-
-Fallback to 2011 C++ standard and lower required gcc version to 4.8.0 which is
-the same as in previous version 52.9.1 of mozjs.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../mozjs/fallback-to-2011-C++-standard.patch | 42 +++++++++++++++++++
- .../recipes-extended/mozjs/mozjs_60.5.2.bb    |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-standard.patch
+ .../recipes-connectivity/adcli/adcli_0.8.2.bb      | 26 ++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-standard.patch b/meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-standard.patch
+diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
 new file mode 100644
-index 000000000..7a0d286e1
+index 0000000..a98a1b3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-standard.patch
-@@ -0,0 +1,42 @@
-+Option '-std=gnu++14' has been supported from gcc 4.9. But on some build hosts
-+such as CentOS 7.6 which only has gcc 4.8.5 and fails to configure:
++++ b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Active Directory enrollment"
++DESCRIPTION = "A helper library and tools for Active Directory client operations."
 +
-+| checking whether the host C compiler can be used... no
-+| ERROR: Only GCC 4.9 or newer is supported (found version 4.8.5).
++HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
++SECTION = "net"
 +
-+Fallback to 2011 C++ standard and lower required gcc version to 4.8.0 which is
-+the same as in previous version 52.9.1 of mozjs.
++SRCREV = "cc3ef52884a48863a81acbfc741735fe09cd85f7"
 +
-+Upstream-Status: Inappropriate [Workaround]
++SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
++          "
 +
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
-+index 9c772a8..fc640c7 100755
-+--- a/build/moz.configure/toolchain.configure
-++++ b/build/moz.configure/toolchain.configure
-+@@ -502,10 +502,8 @@ def check_compiler(compiler, language, target):
-+             append_flag('-std=c++14')
-+         # GCC 4.9 indicates that it implements draft C++14 features
-+         # instead of the full language.
-+-        elif info.type == 'gcc' and \
-+-                info.language_version not in (draft_cxx14_version,
-+-                                              cxx14_version):
-+-            append_flag('-std=gnu++14')
-++        elif info.type == 'gcc' and info.language_version != 201103:
-++            append_flag('-std=gnu++11')
-+ 
-+     # We force clang-cl to emulate Visual C++ 2017 version 15.4
-+     if info.type == 'clang-cl' and info.version != '19.11.25547':
-+@@ -903,9 +901,9 @@ def compiler(language, host_or_target, c_compiler=None, other_compiler=None,
-+         # Check the compiler version here instead of in `compiler_version` so
-+         # that the `checking` message doesn't pretend the compiler can be used
-+         # to then bail out one line later.
-+-        if info.type == 'gcc' and info.version < '4.9.0':
-++        if info.type == 'gcc' and info.version < '4.8.0':
-+             raise FatalCheckError(
-+-                'Only GCC 4.9 or newer is supported (found version %s).'
-++                'Only GCC 4.8 or newer is supported (found version %s).'
-+                 % info.version)
-+ 
-+         if info.type == 'gcc' and host_or_target.os == 'Android':
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-index 70bdbc168..c89aba773 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://dev.gentoo.org/~axs/distfiles/mozjs-60.5.2.tar.bz2 \
-            file://0001-To-fix-build-error-on-arm32BE.patch \
-            file://JS_PUBLIC_API.patch \
-            file://0001-riscv-Disable-atomic-operations.patch \
-+           file://fallback-to-2011-C++-standard.patch \
-            "
- SRC_URI_append_libc-musl = " \
-            file://0006-support-musl.patch \
++S = "${WORKDIR}/git"
++
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
++
++inherit autotools xmlcatalog 
++
++DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
++            cyrus-sasl libxslt-native xmlto-native coreutils-native\
++           "
++
++EXTRA_OECONF += "--disable-static \
++                 --disable-silent-rules \
++                 --disable-doc \
++                "
 -- 
-2.20.0
+2.7.4
+
+
 
 
