@@ -1,28 +1,49 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D3827E819
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7AB61606B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2019 15:50:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5SFnpU2031100
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 28 Jun 2019 08:50:12 -0700
-Received: from [128.224.162.157] (128.224.162.157) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Fri, 28 Jun 2019 08:49:56 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-References: <1561651356-12247-1-git-send-email-hongxu.jia@windriver.com>
-	<1561651356-12247-3-git-send-email-hongxu.jia@windriver.com>
-Message-ID: <0a6d9c17-705a-e27b-05fc-6e7e4a0cb09a@windriver.com>
-Date: Fri, 28 Jun 2019 23:49:54 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <1561651356-12247-3-git-send-email-hongxu.jia@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-multimedia][PATCH V3 3/3] tvheadend: do not inherit gitpkgv
+	Fri, 28 Jun 2019 17:08:49 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id r9so6702819ljg.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Jun 2019 10:08:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=mijP1gtLHc+qDOCcCfzqQKUOAXiNjdrIUZlH7Fx/aOQ=;
+	b=oaWR+13IBFrUPbAbax++jD15luw6hHo2LRjoTj+O3x4JwxFhyvpRwAKalLzw6q/+Rh
+	Uc1ZajvW9f9R8OkYIxqo5suNardNdQGsEaJSj9rg8uHrWOInl9VNg3H4kVoksfZqALTH
+	SwrA7U5YfYT+4i3rjoKbk8Lfdl9WRNawpNWT14b06JtspQ0EN1bsfcuHWNif5SolCCs+
+	GEBckspvJ+q2E8S8NEnQG6bO55RpCcFEJGNRnA3sLQpzCJ2GQDyaS0ULwlAGCDOuNMjf
+	FEBt0tadQkrXZEeaWfg+Ga2Dktzl4U54y7HhyR8mBn5Zyv2e077Vtr/kY0S3zQTdCRYU
+	HOBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=mijP1gtLHc+qDOCcCfzqQKUOAXiNjdrIUZlH7Fx/aOQ=;
+	b=CfQn4sHwQ85iosQmGjUmXi+SSmUBbDSEsB+wcypj273Ky6V2M15ILsL2XCjkNd/wNk
+	OxJlCOp97KpnAjEPA0g7Y5f3B2KGbMKh1dDOJjMGhaqVSuGsNGWCjjIKsB+I4pnaJELM
+	wBlCVwwxQuBLtVy+nIehACoi0WSW3E7/dxZ3pRE3unv2YcL+dx+NZ1y5AnC36JyRrwup
+	a6NR3oIsOgtp2WsleRdk7XRyB40IsfFwNuX+J0Het/sQU5UzgHiPYe0xViueUcg3hSu8
+	6KzT6/c0p3voZKgW2VXiNO58Uwjw4c7W1f/Nh7uV8WezFlRy6yLnQ0oIe/VUhHLYPS3W
+	Y2/A==
+X-Gm-Message-State: APjAAAUCxPTzZuzbFHFVfatPhpJAnxWN6Yuo9BlBUq/PLQkgsg2VkRM7
+	YNPcZmVXJJa1g9vrOh6DpAosAKQcdD8=
+X-Google-Smtp-Source: APXvYqzqLmg4Iv1D4bhdkx/F+fYaNkWhgkCNwNbQmdhSfYG5AzkU90EBjtFPT5qAYlVPIiq1dyOndg==
+X-Received: by 2002:a2e:635d:: with SMTP id x90mr6886693ljb.140.1561741729584; 
+	Fri, 28 Jun 2019 10:08:49 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108])
+	by smtp.gmail.com with ESMTPSA id b11sm887678ljf.8.2019.06.28.10.08.48
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Fri, 28 Jun 2019 10:08:48 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 28 Jun 2019 19:08:46 +0200
+Message-Id: <20190628170846.3510-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] strongswan: update to 5.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,56 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 15:50:37 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 28 Jun 2019 17:08:50 -0000
 
-Please drop this fix, since meta-multimedia depends on meta-python,
-and meta-python depends on meta-oe, the fix is not necessary
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb} (97%)
 
-//Hongxu
-
-On 6/28/19 12:02 AM, Hongxu Jia wrote:
-> Do not inherit gitpkgv in meta-oe, since meta-multimedia
-> does not depends on meta-oe.
->
-> The pkg version will be minor changed
->
-> Before the fix:
-> tvheadend-4.3+git10478+bdc2ae9-r0.core2_64.rpm
->
-> After the fix:
-> tvheadend-4.3+git20+bdc2ae9e19-r0.core2_64.rpm
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->   meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> index dc6cd46..e3875a2 100644
-> --- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> +++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-> @@ -1,7 +1,7 @@
->   SUMMARY = "Tvheadend: TV streaming server and recorder"
->   HOMEPAGE = "https://tvheadend.org/"
->   
-> -inherit autotools-brokensep gettext gitpkgv pkgconfig
-> +inherit autotools-brokensep gettext pkgconfig
->   
->   DEPENDS = "avahi cmake-native dvb-apps libdvbcsa libpcre2 openssl uriparser zlib"
->   
-> @@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
->   SRC_URI = "git://github.com/tvheadend/tvheadend.git"
->   
->   SRCREV = "bdc2ae9e19520a10cdf0bec0fcc0050b32bc75ff"
-> -PV = "4.3+git${SRCPV}"
-> -PKGV = "4.3+git${GITPKGV}"
-> +PV = "4.3+git2${SRCPV}"
-> +PE = "1"
->   
->   S = "${WORKDIR}/git"
->   
-
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+similarity index 97%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+index 5a4e2d36f..082061725 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+            "
+ 
+-SRC_URI[md5sum] = "86b7e9321cde075cf382268fd282e0b0"
+-SRC_URI[sha256sum] = "006f9c9126e2a2f4e7a874b5e1bd2abec1bbbb193c8b3b3a4c6ccd8c2d454bec"
++SRC_URI[md5sum] = "e05f2d16a7479a2a9591609c256d523a"
++SRC_URI[sha256sum] = "15b1e10c7dd6253ab5d791fe9b9cb84624e24c118aecd9b90251b4e60daa0933"
+ 
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+-- 
+2.17.1
 
 
