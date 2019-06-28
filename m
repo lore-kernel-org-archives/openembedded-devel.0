@@ -1,25 +1,36 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E5467EA59
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A26D606B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2019 07:50:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x5S7o5Nc016786
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2019 00:50:21 -0700
-Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Fri, 28 Jun 2019 00:49:59 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Jun 2019 15:49:57 +0800
-Message-ID: <1561708197-8471-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 28 Jun 2019 09:43:37 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45ZsK46cwNz3l;
+	Fri, 28 Jun 2019 11:43:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1561715017;
+	bh=CCm2Mw8/1sKmTITZNsfvgRqBvbhXeFZUfQ++2sXZ+5A=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=aFMVwtgaRf68DRxgzA4r/8BCl7RK4c5UIpTPQqMr8f6iaQxaSbMEeb2j5hVwawa5I
+	eU1YfcVOD09xRFLbjEITLjSg59e48Rp9N8Nx3fNbgCUCEV8bZKWIuedU5QBewORdsY
+	eeqoavSAu3RoIosPWXl2k7wWXFXs60Q+IIda2jiVpoCsWRT0KrL5Jg12ufZKyiDHIx
+	xaedTpOxdMHLqJbu0S9Cv/Wyij2OHQ4ChLCctOwSOxEWAqfA4K7ounXwC72US73YHy
+	kD57lpX72R9q028f+fJskBLKKW8VvFRuH4+xTsUXTFTtcbTdjjiDbBrCNDXteF9uuJ
+	CvbRajbRAjRMLdpcs1brI+PcR9tooZD/tv/5xEnB8crgA65I/8sBjq1Tv1id+NyI9T
+	FJ6uA1cO+ZwV8igQ1HnR6ALiX8wFLSEt0PIig5XGWHxuFrzY82mCZMh82QHuZfh9SE
+	apSrMFzeFVdWxmMKeXMPWuaA6WOpD8Pf8O+g5nX7va4Rl03xy+Lpsomt7exyTzsS/R
+	f9aSg5BCBJS6m8uvgwr5fTQdnZrwNVxkwlZt+c0RIVRp3rqKD4XaDDYyVsxUTKe/Yj
+	iC8jZ/KpEF5jMz39mDhu11rQ8q3gXDJeOFagXtPajxUJsigk5kMcFt7hLn4FmWLGf0
+	ZF64aCWBzsAZVua1iD9uR2Ts=
+Date: Fri, 28 Jun 2019 12:43:32 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: changqing.li@windriver.com
+Message-ID: <20190628094332.GA18526@localhost>
+References: <1561686490-12445-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [meta-networking][PATCH] snort: fix compile-host-path QA issue
+In-Reply-To: <1561686490-12445-1-git-send-email-changqing.li@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 0/6] Upgrade 5 packages build with waf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,105 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 07:50:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Jun 2019 09:43:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-The Fedora 28+ does not have inbuilt SunRPC support in glibc and is
-separately availble in tirpc package. So it enables tirpc checking for
-fedora in configure.
+On Fri, Jun 28, 2019 at 09:48:04AM +0800, changqing.li@windriver.com wrote:
+>...
+> Changqing Li (6):
+>...
+>   libldb: upgrade 1.4.1 -> 1.6.3
+>...
+>   samba: upgrade 4.8.12 -> 4.10.5
+>...
 
-Drop this piece of code since we had specify '-ltirpc' in LDFLAGS
-explicitly. Otherwise it will cause a compile-host-path QA issue if the
-host is Fedora 28+:
-cc1: warning: include location "/usr/include/tirpc" is unsafe for
-cross-compilation [-Wpoison-system-directories]
+It was a mistake that required workarounds in both libldb and samba
+when libldb was upgraded to 1.4.1 (which doesn't work with samba 4.8).
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- ...gure.in-disable-tirpc-checking-for-fedora.patch | 60 ++++++++++++++++++++++
- .../recipes-connectivity/snort/snort_2.9.13.bb     |  1 +
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/snort/snort/configure.in-disable-tirpc-checking-for-fedora.patch
+Now that samba gets upgraded, all these workarounds should be removed
+and samba should use the external libldb again.
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort/configure.in-disable-tirpc-checking-for-fedora.patch b/meta-networking/recipes-connectivity/snort/snort/configure.in-disable-tirpc-checking-for-fedora.patch
-new file mode 100644
-index 0000000..87fd05b
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/snort/snort/configure.in-disable-tirpc-checking-for-fedora.patch
-@@ -0,0 +1,60 @@
-+From 65463a7c5cb2514b1523a81911810effffb75a79 Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Fri, 28 Jun 2019 15:05:31 +0800
-+Subject: [PATCH] configure.in: disable tirpc checking for fedora
-+
-+The Fedora 28+ does not have inbuilt SunRPC support in glibc and is
-+separately availble in tirpc package. So it enables tirpc checking for
-+fedora in configure.
-+
-+Drop this piece of code since we had specify '-ltirpc' in LDFLAGS
-+explicitly. Otherwise it will cause a compile-host-path QA issue if the
-+host is Fedora 28+:
-+cc1: warning: include location "/usr/include/tirpc" is unsafe for
-+cross-compilation [-Wpoison-system-directories]
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ configure.in | 24 ------------------------
-+ 1 file changed, 24 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 8662cdd..0ff7e27 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -895,30 +895,6 @@ if test "x$enable_dlclose" = "xno"; then
-+     AC_DEFINE([DISABLE_DLCLOSE_FOR_VALGRIND_TESTING],[1],[Don't close opened shared objects for valgrind leak testing of dynamic libraries])
-+ fi
-+ 
-+-##################################################
-+-# Fedora 28+ does not have inbuilt SunRPC support#
-+-# in glibc and is separately availble in tirpc   #
-+-# package. Make sure we've got the library and   #
-+-# link it                                        #
-+-##################################################
-+-
-+-if test -f /etc/fedora-release ; then
-+-    DISTRO_VERSION=$(awk '{ print $3 }' /etc/fedora-release)
-+-    if test $DISTRO_VERSION -ge 28 ; then
-+-        TIRPC=""
-+-        AC_CHECK_LIB(tirpc,bindresvport,, TIRPC="no")
-+-        echo "$TIRPC"
-+-        if test "x$TIRPC" = "xno"; then
-+-            echo
-+-            echo " ERROR! tirpc not found, get it by running "
-+-            echo " yum install libtirpc-devel "
-+-            exit
-+-        fi
-+-        LIBS="${LIBS} -ltirpc"
-+-        extra_incl="-I/usr/include/tirpc"
-+-    fi
-+-fi
-+-
-+ Z_LIB=""
-+ AC_CHECK_HEADERS(zlib.h,, Z_LIB="no")
-+ if test "x$Z_LIB" = "xno"; then
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-index 1b10dbd..c7e47e1 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
-     file://0001-libpcap-search-sysroot-for-headers.patch \
-     file://fix-host-contamination-when-enable-static-daq.patch \
-     file://disable-run-test-program-while-cross-compiling.patch \
-+    file://configure.in-disable-tirpc-checking-for-fedora.patch \
- "
- 
- SRC_URI[md5sum] = "b61ae846af022018b05511076baad60c"
+For samba 4.10 this also means that libldb has to be upgraded to 1.5,
+not to 1.6.
+
+cu
+Adrian
+
 -- 
-2.7.4
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
