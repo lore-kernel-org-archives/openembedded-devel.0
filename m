@@ -1,26 +1,23 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 06E9A7EA55
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C7447EA35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2019 05:00:20 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Jun 2019 21:53:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,426,1557212400"; d="scan'208";a="246055510"
-Received: from chiron.jf.intel.com ([10.54.74.38])
-	by orsmga001.jf.intel.com with ESMTP; 27 Jun 2019 21:53:17 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jun 2019 21:52:25 -0700
-Message-Id: <22f7d4cbabcf01245da4cd75f742f8b5f9a61dd8.1561696450.git.timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
-References: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
+	Fri, 28 Jun 2019 05:54:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x5S5slpb002008
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jun 2019 22:54:47 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.439.0; Thu, 27 Jun 2019 22:54:34 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 28 Jun 2019 13:54:33 +0800
+Message-ID: <1561701273-246802-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH 9/9] libunicode-linebreak-perl: upgrade 2017.004 -> 2019.001; enable ptest
+Subject: [meta-oe][PATCH] uthash: remove uthash-ptest dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,155 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 05:00:20 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 28 Jun 2019 05:54:48 -0000
+Content-Type: text/plain
 
-* Update HOMEPAGE
-* Use CPAN_MIRROR in SRC_URI
-* Add to RDEPENDS, not overwrite
-* Add runtime and ptest dependencies
-* Add RPROVIDES
+From: Changqing Li <changqing.li@windriver.com>
 
-License-Update: update copyright year; only use lines which apply to license and copyright
+after commit https://git.openembedded.org/openembedded-core/
+commit/meta/classes/ptest.bbclass?id=b47194b57d94260b4e6438c5bf74914027f0b520
+package ${PN}-ptest will depend on ${PN} by default,
+but for uthash, ${PN} is empty package, remove it from dependency
+to avoid image do rootfs failure since nothing provides error.
 
-Upstream release notes:
-
-019.001  Sat Dec 29
-! Makefile.PL
-  - GH PR#4: Added timeout to wget call in Makefile.PL by J. Bargsten.
-  - CPAN RT#125079: Installation stuck after a wget.
-    Fixed by changing scheme from ftp to https.
-! lib/Text/LineFold.pm
-! t/04fold.t
-  - Fix: Text::LineFold: new() & config() did not allow multiple Prep option
-! t/01break.t
-! t/02hangul.t
-! t/03ns.t
-! t/04fold.t
-! t/05urgent.t
-! t/06context.t
-! t/07sea.t
-! t/08partial.t
-! t/09uri.t
-! t/11format.t
-! t/12fold2.t
-! t/13flowedsp.t
-! t/14sea_al.t
-! t/15array.t
-! t/16regex.t
-! t/17prop.t
-! t/18currency.t
-  - CPAN RT #120535: Fails tests when no "." in @INC.
-
-2018.012  Sat Dec 29 2018
-
-2018.003  Thu Mar 29 2018
-! Makefile.PL.sombok
-  - CPAN RT#120370: Build fails with recent EUMM and some make variants.
-    Patch by Alexandr Ciornii.
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../libunicode-linebreak-perl_2017.004.bb     | 26 ---------
- .../libunicode-linebreak-perl_2019.001.bb     | 55 +++++++++++++++++++
- 2 files changed, 55 insertions(+), 26 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb
- create mode 100644 meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
+ meta-oe/recipes-support/uthash/uthash_2.1.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb
-deleted file mode 100644
-index 5ccb411fa5..0000000000
---- a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "Unicode::LineBreak - UAX #14 Unicode Line Breaking Algorithm."
--DESCRIPTION = "Unicode::LineBreak performs Line Breaking Algorithm described in Unicode \
--Standard Annex #14 [UAX #14]. East_Asian_Width informative property \
--defined by Annex #11 [UAX #11] will be concerned to determine breaking \
--positions."
--SECTION = "libs"
--
--HOMEPAGE = "http://search.cpan.org/~nezumi/Unicode-LineBreak-${PV}/"
--
--LICENSE = "Artistic-1.0 | GPLv1+"
--LIC_FILES_CHKSUM = "file://README;md5=77241abd74fec561b3f3de1b44c0241b"
--
--SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "de7672227922260ac92d20bbad29660b"
--SRC_URI[sha256sum] = "655bc3c4cb60ad0770d97816716cfe322f24e602c70e595f5941dfa02c40cb76"
--
--S = "${WORKDIR}/Unicode-LineBreak-${PV}"
--
--DEPENDS = "libsombok3 libmime-charset-perl"
--
--RDEPENDS_${PN} = "libsombok3 libmime-charset-perl"
--
--inherit cpan
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
-new file mode 100644
-index 0000000000..304b375777
---- /dev/null
-+++ b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
-@@ -0,0 +1,55 @@
-+SUMMARY = "Unicode::LineBreak - UAX #14 Unicode Line Breaking Algorithm."
-+DESCRIPTION = "Unicode::LineBreak performs Line Breaking Algorithm described in Unicode \
-+Standard Annex #14 [UAX #14]. East_Asian_Width informative property \
-+defined by Annex #11 [UAX #11] will be concerned to determine breaking \
-+positions."
-+SECTION = "libs"
-+
-+HOMEPAGE = "https://metacpan.org/release/Unicode-LineBreak"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;beginline=5;endline=9;md5=b5e8b1099b86b86fbc315b50484231ab"
-+
-+SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "003d6da7a13700e069afed9238c864b9"
-+SRC_URI[sha256sum] = "486762e4cacddcc77b13989f979a029f84630b8175e7fef17989e157d4b6318a"
-+
-+S = "${WORKDIR}/Unicode-LineBreak-${PV}"
-+
-+DEPENDS = "libsombok3 libmime-charset-perl"
-+
-+inherit cpan ptest-perl
-+
-+do_install_ptest() {
-+    cp -r ${B}/test-data ${D}${PTEST_PATH}
-+    chown -R root:root ${D}${PTEST_PATH}
-+}
-+
-+RDEPENDS_${PN} += " \
-+    libmime-charset-perl \
-+    libsombok3 \
-+    perl-module-carp \
-+    perl-module-constant \
-+    perl-module-encode \
-+    perl-module-exporter \
-+    perl-module-overload \
-+    perl-module-strict \
-+    perl-module-vars \
-+    perl-module-warnings \
-+    perl-module-xsloader \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+    perl-module-findbin \
-+    perl-module-lib \
-+    perl-module-strict \
-+    perl-module-test-more \
-+"
-+
-+RPROVIDES_${PN} += " \
-+    libtext-linefold-perl \
-+    libunicode-gcstring-perl \
-+"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
+index d01a06c..09cef44 100644
+--- a/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
++++ b/meta-oe/recipes-support/uthash/uthash_2.1.0.bb
+@@ -41,5 +41,6 @@ do_install_ptest() {
+ # The main package is empty and non-existent, so -dev
+ # should not depend on it...
+ RDEPENDS_${PN}-dev = ""
++RDEPENDS_${PN}-ptest_remove = "${PN}"
+ 
+ BBCLASSEXTEND = "native"
 -- 
-2.20.1
+2.7.4
 
 
