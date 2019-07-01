@@ -1,28 +1,30 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6315A7E79F
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3109460125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 02:29:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x612TJsM026605
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 30 Jun 2019 19:29:19 -0700 (PDT)
-Received: from [128.224.162.186] (128.224.162.186) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.439.0;
-	Sun, 30 Jun 2019 19:29:17 -0700
-To: Adrian Bunk <bunk@stusta.de>
-References: <1561686490-12445-1-git-send-email-changqing.li@windriver.com>
-	<20190628094332.GA18526@localhost>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <2d0ef380-ec48-eadc-a4e0-84ddb90ac254@windriver.com>
-Date: Mon, 1 Jul 2019 10:29:14 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.0
+	Mon,  1 Jul 2019 08:07:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,437,1557158400"; d="scan'208";a="70357292"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 01 Jul 2019 16:07:37 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3A5F14CDDD45
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Jul 2019 16:07:39 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 1 Jul 2019 16:07:46 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 1 Jul 2019 16:09:13 +0800
+Message-ID: <20190701080913.11639-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20190628094332.GA18526@localhost>
-X-Originating-IP: [128.224.162.186]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 0/6] Upgrade 5 packages build with waf
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 3A5F14CDDD45.AA9D1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] wireshark: upgrade 3.0.1 -> 3.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,37 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 02:29:19 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Mon, 01 Jul 2019 08:07:39 -0000
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Content-Type: text/plain
 
+-Upgrade from wireshark_3.0.1.bb to wireshark_3.0.2.bb.
 
-On 6/28/19 5:43 PM, Adrian Bunk wrote:
-> On Fri, Jun 28, 2019 at 09:48:04AM +0800, changqing.li@windriver.com wrote:
->> ...
->> Changqing Li (6):
->> ...
->>    libldb: upgrade 1.4.1 -> 1.6.3
->> ...
->>    samba: upgrade 4.8.12 -> 4.10.5
->> ...
-> It was a mistake that required workarounds in both libldb and samba
-> when libldb was upgraded to 1.4.1 (which doesn't work with samba 4.8).
->
-> Now that samba gets upgraded, all these workarounds should be removed
-> and samba should use the external libldb again.
->
-> For samba 4.10 this also means that libldb has to be upgraded to 1.5,
-> not to 1.6.
->
-> cu
-> Adrian
-Thanks,  I will check this.
->
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../wireshark/{wireshark_3.0.1.bb => wireshark_3.0.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.0.1.bb => wireshark_3.0.2.bb} (95%)
+
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb
+similarity index 95%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb
+index 572dc1a45..3e6ffa3a6 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb
+@@ -12,8 +12,8 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "370a113e1c8ec240c4621cfb5abb0c52"
+-SRC_URI[sha256sum] = "86864c3d0f6c2311992a98d8ea7dfd429097fe62dae2e5516e1a2f6bef2ac08c"
++SRC_URI[md5sum] = "e344675283d6329a4bc213b621d7f46a"
++SRC_URI[sha256sum] = "7e1ec5664a0dba4493d8729f9922378bdd05040fb159c2b03b42111efda2e53b"
+ 
+ PE = "1"
+ 
 -- 
-BRs
+2.20.1
 
-Sandy(Li Changqing)
+
 
 
