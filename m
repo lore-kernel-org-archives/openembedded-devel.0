@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DCEC07D3A6
+	by mail.openembedded.org (Postfix) with ESMTP id 94CE17D3A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 09:21:16 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,438,1557158400"; d="scan'208";a="70366435"
+	Mon,  1 Jul 2019 09:33:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,438,1557158400"; d="scan'208";a="70367870"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Jul 2019 17:21:13 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Jul 2019 17:33:26 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2C5034CDE647
+	by cn.fujitsu.com (Postfix) with ESMTP id 2FF084CDE647
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 17:21:14 +0800 (CST)
+	Mon,  1 Jul 2019 17:33:29 +0800 (CST)
 Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 1 Jul 2019 17:21:16 +0800
+	Server (TLS) id 14.3.439.0; Mon, 1 Jul 2019 17:33:31 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Jul 2019 17:22:49 +0800
-Message-ID: <20190701092249.18839-1-zangrc.fnst@cn.fujitsu.com>
+Date: Mon, 1 Jul 2019 17:35:05 +0800
+Message-ID: <20190701093505.22962-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 2C5034CDE647.A84DA
+X-yoursite-MailScanner-ID: 2FF084CDE647.A89EB
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking] [PATCH] strongswan: upgrade 5.7.1 -> 5.8.0
+Subject: [meta-oe] [PATCH] logwatch: upgrade 7.4.3 -> 7.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 09:21:18 -0000
+X-List-Received-Date: Mon, 01 Jul 2019 09:33:29 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from strongswan_5.7.1.bb to strongswan_5.8.0.bb.
+-Upgrade from logwatch_7.4.3.bb to logwatch_7.5.1.bb.
+
+-License-Update: Copyright year updated to 2018.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb} (97%)
+ .../logwatch/{logwatch_7.4.3.bb => logwatch_7.5.1.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/logwatch/{logwatch_7.4.3.bb => logwatch_7.5.1.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-similarity index 97%
-rename from meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-rename to meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-index 5a4e2d36f..082061725 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
-            "
+diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.5.1.bb
+similarity index 92%
+rename from meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb
+rename to meta-oe/recipes-extended/logwatch/logwatch_7.5.1.bb
+index 275a8f238..b6ab43ccf 100644
+--- a/meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb
++++ b/meta-oe/recipes-extended/logwatch/logwatch_7.5.1.bb
+@@ -8,12 +8,12 @@ the package on many systems.\
+ SECTION = "devel"
+ HOMEPAGE = "http://www.logwatch.org/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f2566bb12b16d2d80d90ebc533261aa7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ad199c8aca74e70f296f731ad9a1521c"
+ RDEPENDS_${PN} = "perl"
  
--SRC_URI[md5sum] = "86b7e9321cde075cf382268fd282e0b0"
--SRC_URI[sha256sum] = "006f9c9126e2a2f4e7a874b5e1bd2abec1bbbb193c8b3b3a4c6ccd8c2d454bec"
-+SRC_URI[md5sum] = "e05f2d16a7479a2a9591609c256d523a"
-+SRC_URI[sha256sum] = "15b1e10c7dd6253ab5d791fe9b9cb84624e24c118aecd9b90251b4e60daa0933"
+ SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "22bd22841caa45f12c605abc3e0c2b09"
+-SRC_URI[sha256sum] = "1dbdc48d65e150f2dbb43f1e4f4700d94166e053b1c7bbbdedf4ad670283720e"
++SRC_URI[md5sum] = "3d14fa6e0fb56f890d2b3fd9cbc3162f"
++SRC_URI[sha256sum] = "9d4a00625065f25058f8966e7fb11f9f72db25507b4dd9c05f57e14447c33295"
  
- UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
- 
+ do_install() {
+     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
 -- 
 2.20.1
 
