@@ -1,38 +1,50 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DE127E8F3
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B03817E659
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 12:55:32 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45cnR82WjPz3t;
-	Mon,  1 Jul 2019 14:55:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561985733;
-	bh=+wLUixfCjX4tThh6DklwKbGD8p5Y3qBHSJfNSRhPhrc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Kr9G0kkuxzN462qs3RRa9d1ZaOtF94/4hWY/JDuh1v49rELwRPeE2MhyptCySLmlW
-	0+syqZ7js9kUK/tI9LVJsvB2SXPhTl1w5UZAReEv9bB11XiQyNRCPbB2xujZjY+Tlg
-	6zyiynaSTj+nCbc7SmaTOMjnTW0gmpNWuqLgYWRy+EowIAnMwUsXSCGZvDMqTrPJPO
-	BZLVWn32TS2jtvT8Otz52BDGP2/pUcvsXBYR53Dl1EEPKMZM6SEueHA5WtVlfKTv+H
-	ZcY6DA+0cV0OSfdi5CWwqlj32/3T7HEk3wSicbGvNG+eQFShFzsJ2LKrcPHq9xw3JR
-	+bL50TO1uDiv6Fa5fLNaJzbBV2FcJ/g+mUL+824Cl6DqRQe4DKTPzyh2lQSsvnCFaB
-	oRlWo1D7qCG+Mdfnz40ngL+/JsKzgZ8MdalgOWtH5RS1yU1YMgrI67bskLjkumHuQ4
-	ZiChiMGF29IQOCElfmG+ZWksSKruEGqQM6Mn/liPGK9lcF61NtHcsAZmOnJ3pkLk7J
-	qxpiuAFV5ZR+tRokstPh+VJEMPcdVlz0uCU/uar+CaAXCY1AwbEJ7gA5+6qhYiergt
-	1jnkvUiu7JMJ1JFX517m4yik787rklNMpOvBsH36ohN3E/tBalbksMfc/Yl4MBUCIz
-	P4AUUJsSxf1fYzVTlc6iseq8=
-Date: Mon, 1 Jul 2019 15:55:29 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20190701125529.GB7483@localhost>
-References: <1561643269-130343-1-git-send-email-hongxu.jia@windriver.com>
-	<20190628100721.GB18526@localhost>
-	<0b346c3b-22e5-2e09-3a81-d199e5c8591a@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <0b346c3b-22e5-2e09-3a81-d199e5c8591a@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkmanager: goodbye libnm-glib
+	Mon,  1 Jul 2019 13:30:08 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id p15so23530091eds.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Jul 2019 06:30:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=ERHMtCZL/duqD3fnaB3mpEBcTBeOx8mAa7AV5JlEtXg=;
+	b=u+DucmngDj3qR59rfk+4/Pj50pE63oWKcCd9E1W/6nWNfSi1avsIN+aUJlqgQypb1B
+	p9XvGfgQ+fThnIDFUSTq9x5fzH+zbJvTI2JMXpftsJ2CuJvgjA4jCpTu36WiL+Xu8jzm
+	+ui3z2x3v5R6kjtV1BHJU2yMCckHBHGkDXdZo2cnyiZO70JWZjJgsPf9eFy7/lGus+m4
+	GS3OtDStjWIk3njfOgb8T6uLrsI1Cu+L/1Stc5fFpchtc74SvKMARHubxmnfWCZNXCLA
+	aVCWf1sHUOT66murncXEs5FK0xwliqJZ/KPOqyQtm+RIO1AmzRFk/ppf5KIh8sGmctbe
+	SvrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ERHMtCZL/duqD3fnaB3mpEBcTBeOx8mAa7AV5JlEtXg=;
+	b=ZSdgIHi8NPOVgcoOnG4W+XkWc2tZ2AkQ/JMzKZ2EaPwbHXcJqJzDxxNawNeIVKCTps
+	mpL4IxjY1ck/16QksQFYLEZQLNbtiNKKGb/kJOKliM84V33sXj77140w1Y7rc6rZlUSH
+	DCuu2GBFeikHG8W9AekUteNjfJwoKT8lUdhkvVy+J5+1RFBXQPPY11HPfDgJdy8ZOmoO
+	lw5Erj1QBX2nCMCJ1p4C4F2/177V60DWJR/P9REPxv2tW06ora+dzeNuMqhbXPZzbXZ7
+	a20DrN3OU60QQUnDey7Awite03hAVhFc85USXldB/1Xs+koQEQTYWiryhT8/V0PWvj0C
+	Pbjg==
+X-Gm-Message-State: APjAAAWnLqMdnxUtUcfp6p5qESvb/SpVygLbSoTICgLula6U2olZ6mHC
+	WrKMKcwMpa5YL/uAaOMFdIiUN9EY
+X-Google-Smtp-Source: APXvYqy409ES1JzqXDKKEsB8hmVHkrjeMXYSNIj5BC6EAru5mHvL332Br3wJMLkPST3NkjUZsof0Mw==
+X-Received: by 2002:a17:906:a394:: with SMTP id
+	k20mr22460954ejz.46.1561987809284; 
+	Mon, 01 Jul 2019 06:30:09 -0700 (PDT)
+Received: from linuxdev2.toradex.int ([46.140.72.82])
+	by smtp.gmail.com with ESMTPSA id
+	z40sm3686288edb.61.2019.07.01.06.30.08
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 01 Jul 2019 06:30:08 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Jul 2019 15:29:11 +0200
+Message-Id: <20190701132911.19209-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.13.6
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH] joe: update to 4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,60 +57,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 12:55:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Jul 2019 13:30:08 -0000
 
-On Fri, Jun 28, 2019 at 10:57:02PM +0800, Hongxu Jia wrote:
-> On 6/28/19 6:07 PM, Adrian Bunk wrote:
-> > On Thu, Jun 27, 2019 at 09:47:49AM -0400, Hongxu Jia wrote:
-> > > Since commit [061953143 networkmanager: Update to 1.18.0] applied,
-> > > upstream disable libnm-glib by default. And in further networkmanager,
-> > > upstream removes libnm-glib, libnm-glib-vpn, and libnm-util for good
-> > > ...
-> > Any strong reason for removing this already now?
-> 
-> Make sure to clean up empty package, in 1.18
-> 
-> libnm-glib is already disabled, and left three empty
-> 
-> packages(no package generated acturally). I found
-> 
-> the issue, trace the reason and provide fix
+The licence changed to GPLv2.
+The fix from 0001-adjust-signature-of-main.patch is applied upstream.
 
-What problem does this issue cause?
+joe 3.1 segfaults on aarch64, the update fixes this.
 
-> You may note original PACKAGECONFIG[glib] does not have
-> 
-> without option, so clean up it rather than add missing without option
-> 
-> PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ .../joe/joe/0001-adjust-signature-of-main.patch    | 30 ----------------------
+ .../recipes-support/joe/{joe_3.1.bb => joe_4.6.bb} | 14 +++++-----
+ 2 files changed, 6 insertions(+), 38 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
+ rename meta-oe/recipes-support/joe/{joe_3.1.bb => joe_4.6.bb} (41%)
 
-That is actually fine and doesn't need a fix - the library is only built 
-if explicitely requested --with-libnm-glib.
-
-> > It's gone in 1.20 so removal then is clear, but if someone wants
-> > to use it for legacy code with 1.18 this should stay possible as
-> > long as <= 1.18 is shipped.
-> 
-> I think it will be upgraded 1.20 soon, and if someone wants
-> 
-> to use legacy code, I think 1.16 in warrior is better choose
-> 
-> which libnm-glib is always enabled
-
-"soon" might be after Yocto 2.8 branches.
-
-> //Hongxu
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch b/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
+deleted file mode 100644
+index 00f48e8a2..000000000
+--- a/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 27e4639254f2b2eb7d04790bd8cf16ecfcbac1c2 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 19 Oct 2016 01:07:16 +0000
+-Subject: [PATCH] adjust signature of main()
+-
+-clang complains about the types of main() function
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- main.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/main.c b/main.c
+-index 81ba543..ee7506c 100644
+---- a/main.c
+-+++ b/main.c
+-@@ -159,7 +159,7 @@ extern int breakflg;
+- 
+- unsigned char **mainenv;
+- 
+--int main(int argc, unsigned char **argv, unsigned char **envv)
+-+int main(int argc, char **argv, char **envv)
+- {
+- 	CAP *cap;
+- 	unsigned char *s;
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-support/joe/joe_3.1.bb b/meta-oe/recipes-support/joe/joe_4.6.bb
+similarity index 41%
+rename from meta-oe/recipes-support/joe/joe_3.1.bb
+rename to meta-oe/recipes-support/joe/joe_4.6.bb
+index 1ad355b5a..b79e028f3 100644
+--- a/meta-oe/recipes-support/joe/joe_3.1.bb
++++ b/meta-oe/recipes-support/joe/joe_4.6.bb
+@@ -1,17 +1,15 @@
+ SECTION = "console/utils"
+ SUMMARY = "Console text editor with good functionality, good choice for vi-haters"
+ HOMEPAGE = "http://joe-editor.sourceforge.net/"
+-LICENSE = "GPLv1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=da10ed7cf8038981c580e11c1d3e8fb6"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz \
+-           file://0001-adjust-signature-of-main.patch \
+-           "
++SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz"
+ 
+ PACKAGECONFIG ??= "curses"
+ PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-terminfo"
+ 
+-inherit autotools
++inherit autotools-brokensep
+ 
+-SRC_URI[md5sum] = "2a6ef018870fca9b7df85401994fb0e0"
+-SRC_URI[sha256sum] = "252390e4bc687957f09f334095904c8cc53b39c7b663ed47861ae1d11aef5946"
++SRC_URI[md5sum] = "9017484e6116830d846678b625ea5c43"
++SRC_URI[sha256sum] = "495a0a61f26404070fe8a719d80406dc7f337623788e445b92a9f6de512ab9de"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.13.6
 
 
