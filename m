@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 435217D6AF
+	by mail.openembedded.org (Postfix) with ESMTP id 5E6777E807
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 11:07:51 +0000 (UTC)
+	Mon,  1 Jul 2019 12:44:04 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45cl2w09Gbz2C
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45cn9w3Pxfz3t
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 13:07:51 +0200 (CEST)
+	Mon,  1 Jul 2019 14:44:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561979272;
-	bh=3ploHad3MZOoGtwCuV/D7q4LLxiKeD+L+aWG4Hatc0g=;
+	s=default; t=1561985044;
+	bh=G+lAmnBSA6pk5SfnUXo8hD3ZujzXYuhMY7t1Ne8JBvo=;
 	h=From:To:Subject:Date:From;
-	b=ciJidRLo+n5kSKnb/UUYcDYaLd03pxuE7M+Q81yUiUfVByizBQx02SrMxWMNDu4Uz
-	J+CGGQC4r7lF64HbBbkIAcbWzcsWIpFk4PQVvMJINQpMoqnMHWp1XyAZF++pVjPAXo
-	2NlSPNwOVLaFfeN1GJapz9Phq0VN/lfZYE8MJKuYlpOCy4wElQxGLjR6fV5JsDL84h
-	ofbBppMCE+hPXEoNEKcJKpeeWONfA3+PP2I1ElHc2juDgRSMbKI5uv2qq3sg4yMQ13
-	TuVI+Kn9NJQ8EIm3/dJsDRYHIpF+GjWd5olaz1UZ88es1/qX+PbXbPiSfWhoDLQJJm
-	DRzwKCSCre7C/a+WqV7/vpaQmc/G8cJOchYdZJTQTDtSwwzy0NYF6x/j+fDNyd7yK9
-	EXJd2KH+lkJcQpLWbzOGDoU2gd6f5KjSF3fQSdQOBfJ1uiRAFnG98YIasZapad7WBC
-	LzGsQC2i0+hlC7b3EoWaXcYDkduqoGgJqwXMB1+PKR18V2W12/mOgsRche1K2hADNv
-	C8Ya11B5Jb9jFYulP6EtovOo+DXISgKWXMO5l4JiU1NtExF1DwFd5UhVlkTfPtdqum
-	0wBlsvP5lbNuTpReCnY7ArjFvKLyNH4PCFHyan/SW5tGzx3UWCK1sNcw2bPDk6SiZE
-	OvVBajGbmx1vaD+kirL9GgcA=
+	b=oZym6x5hxxiYnWWndxj/mIl5g46M9cX4mtl63zWGlVmuhfyCTRLZy8V77rRGTMOFS
+	vaVss8Ra/V14gIqNqtILvGjcQE64gsl1VPqHjJXPVY6p68eoVv4EfDLgGMC0DjEFfb
+	CSW+jmyMuPZcgHdvTPZZggZHy2jn/RxTST4Bdo4cPSzgRh4w7ENIGQ4nJeA19B71lb
+	ZzYtuDnIfYO5bFglQ0JXgVu1NI6vmAQRY0CmWt2+YBCConfNxq6jfNS1KsPV/1YqV5
+	h8AaekaPLKB1Vyv6vIuTZ9JSzxveHbsI1ojGarm87h3Kl8u+PtQgg8HlfczKKSUP7P
+	rA1QOFrcj4Qvt2ftRtneuYAgzhsPWfc87FAMBqKv6QNzdB+9EmrcjrwKMycEm8EbtM
+	BLaufFpsVf+Zc/kO7FU7vkC7hxnOOXgAQmZqSLTN3Imkg9h3AAJ07jDGCpzoZMDuLj
+	SXaGkpbZxAGzLwW/ZFVm/Sb9sZa/nezksHBImg6w+daZEngN32k8r1S1gCQ9Lyg6CF
+	yRaFApkTTV6AD87JtssqB7IDo+vXDcsnPhJbOl6bm7W77FYHJT1k3AqSSZNWBZtwxX
+	ZfdJM8HRNCdS6HpCVlfpli5BWXsS4ECo5EXJmKzC9+aPhmGGHYmAVG9/wt9Xluf6hI
+	Fhs+jZDLxDsAZmsmyimk+FwA=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jul 2019 14:07:50 +0300
-Message-Id: <20190701110750.22462-1-bunk@stusta.de>
+Date: Mon,  1 Jul 2019 15:44:03 +0300
+Message-Id: <20190701124403.26479-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] vlc: Remove the obsolete dependency on dbus-glib
+Subject: [meta-networking][PATCH] blueman: Enable thunar support by default but don't rdepend on it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,26 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 11:07:52 -0000
+X-List-Received-Date: Mon, 01 Jul 2019 12:44:04 -0000
+
+This matches upstream default.
+The no longer required bbappend in meta-xfce is also removed.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-connectivity/blueman/blueman_git.bb | 3 ++-
+ meta-xfce/recipes-connectivity/blueman/blueman_%.bbappend   | 2 --
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+ delete mode 100644 meta-xfce/recipes-connectivity/blueman/blueman_%.bbappend
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 0bedc5da9..5c38be31f 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_git.bb b/meta-networking/recipes-connectivity/blueman/blueman_git.bb
+index 947db7836..91b64a36b 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_git.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_git.bb
+@@ -28,7 +28,8 @@ RDEPENDS_${PN} += " \
+     packagegroup-tools-bluetooth \
+ "
  
- DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
--   dbus dbus-glib libxml2 gnutls \
-+   dbus libxml2 gnutls \
-    tremor faad2 ffmpeg flac fluidsynth alsa-lib \
-    lua-native lua libidn \
-    avahi jpeg xz libmodplug mpeg2dec \
+-PACKAGECONFIG[thunar] = "--enable-thunar-sendto,--disable-thunar-sendto,,thunar"
++PACKAGECONFIG ??= "thunar"
++PACKAGECONFIG[thunar] = "--enable-thunar-sendto,--disable-thunar-sendto"
+ 
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+diff --git a/meta-xfce/recipes-connectivity/blueman/blueman_%.bbappend b/meta-xfce/recipes-connectivity/blueman/blueman_%.bbappend
+deleted file mode 100644
+index 916f083b9..000000000
+--- a/meta-xfce/recipes-connectivity/blueman/blueman_%.bbappend
++++ /dev/null
+@@ -1,2 +0,0 @@
+-# Just a comment line to avoid PAK archive (application/x-pak)
+-PACKAGECONFIG_append = " thunar"
 -- 
 2.17.1
 
