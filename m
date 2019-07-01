@@ -1,33 +1,30 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 077F07E726
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DCEC07D3A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 09:02:01 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45chFk2gvdz4q
+	Mon,  1 Jul 2019 09:21:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,438,1557158400"; d="scan'208";a="70366435"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 01 Jul 2019 17:21:13 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2C5034CDE647
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 11:02:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561971722;
-	bh=qhyP3Ufy9hnwIruxAmfaVbuve3kubjx46Ag3+JxzyKY=;
-	h=From:To:Subject:Date:From;
-	b=j5DMwFEy6hFnEhI4+9BHc4qfXfv3FPRtLCT2ZYnkWQ8SZPoN4bhAmswYMDaXyr7pB
-	iWWsUMmu4Ef4rG2f2lIPdYiU9ft/BRy6YId55bCOVQ1l3QX+w8eHjoeXAxXlWXRzCv
-	y54jgbmmm6VxDEyExqVdw3QHm4syjU2uKxX/VQRwQxT+T4U8l6AroYMH8OyH6PgPY0
-	+MwYyjyL6fOVDWlFEQeKq8NNflbBokAr1vYcXUEbSpNd5auIWBXN5X6Q9c0ZoYSJA8
-	79jg43VaRcC5KnvpJITQr1xm7wDGfTRthEyZ/mvhF7rf045+KK5pNS06kGiK3XmN9u
-	lgq/JjYjMWZRYVKIoIjWn0+wR/AC1qm5laUj8T6mS17JYnMW2gLtkBSOQE9BlsKbJF
-	ETJjLm+GGHu98eWwCCBDOgjBTZXucLXRDwVzMgbUjJdZh0hUXhfYguRlWO+nKkbnU7
-	72DtIg94+yMYT8AcMfu3q2541X76Ea5VL37wuzr1X8isnBnTucgFukGrE8REcLtdF7
-	UmlnLvmJYtS60+vLCcWpKYzNeg0pae3eirK5G5z+Vig5eM39j6Z2taFIdXhN874qQX
-	V/UiLzQnhB0P5T5qRW5f3XMflvm3xx2NseN8tMr0zTnMiqSY8iqtdSqneI8vVppan2
-	0tx1CFOznZMse3KYL90X5Wq4=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jul 2019 12:02:01 +0300
-Message-Id: <20190701090201.19613-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] tremor: Upgrade 20150107 -> 20180319
+	Mon,  1 Jul 2019 17:21:14 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 1 Jul 2019 17:21:16 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 1 Jul 2019 17:22:49 +0800
+Message-ID: <20190701092249.18839-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 2C5034CDE647.A84DA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] strongswan: upgrade 5.7.1 -> 5.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,48 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 09:02:02 -0000
+X-List-Received-Date: Mon, 01 Jul 2019 09:21:18 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Also switch to the new repository.
+-Upgrade from strongswan_5.7.1.bb to strongswan_5.8.0.bb.
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{tremor_20150107.bb => tremor_20180319.bb}       | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
- rename meta-multimedia/recipes-multimedia/tremor/{tremor_20150107.bb => tremor_20180319.bb} (64%)
+ .../strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.7.1.bb => strongswan_5.8.0.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20150107.bb b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-similarity index 64%
-rename from meta-multimedia/recipes-multimedia/tremor/tremor_20150107.bb
-rename to meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-index 937894a73..beeb23ae2 100644
---- a/meta-multimedia/recipes-multimedia/tremor/tremor_20150107.bb
-+++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
-@@ -5,20 +5,14 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=db1b7a668b2a6f47b2af88fb008ad555 \
-                     file://os.h;beginline=3;endline=14;md5=5c0af5e1bedef3ce8178c89f48cd6f1f"
- DEPENDS = "libogg"
--SRCDATE = "${PV}"
--PR = "r1"
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+similarity index 97%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+index 5a4e2d36f..082061725 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.7.1.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+            "
  
--# SVN support for upstream version check isn't implemented yet
--RECIPE_UPSTREAM_VERSION = "20150107"
--RECIPE_UPSTREAM_DATE = "Jan 07, 2015"
--CHECK_DATE = "Aug 12, 2015"
--
--SRC_URI = "svn://svn.xiph.org/trunk;module=Tremor;rev=19427;protocol=http \
-+SRC_URI = "git://git.xiph.org/tremor.git;protocol=https \
-            file://obsolete_automake_macros.patch;striplevel=0 \
-            file://tremor-arm-thumb2.patch \
- "
-+SRCREV = "7c30a66346199f3f09017a09567c6c8a3a0eedc8"
+-SRC_URI[md5sum] = "86b7e9321cde075cf382268fd282e0b0"
+-SRC_URI[sha256sum] = "006f9c9126e2a2f4e7a874b5e1bd2abec1bbbb193c8b3b3a4c6ccd8c2d454bec"
++SRC_URI[md5sum] = "e05f2d16a7479a2a9591609c256d523a"
++SRC_URI[sha256sum] = "15b1e10c7dd6253ab5d791fe9b9cb84624e24c118aecd9b90251b4e60daa0933"
  
--S = "${WORKDIR}/Tremor"
-+S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
  
 -- 
-2.17.1
+2.20.1
+
+
 
 
