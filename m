@@ -1,33 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D0F37E52D
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+	[209.85.208.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B1E707D3B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 15:00:20 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45crC93L6Jz3t
+	Mon,  1 Jul 2019 17:43:42 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id 205so14101219ljj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jul 2019 17:00:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1561993221;
-	bh=KJ+my5C/xzf/GrKqfJk5Vlyvy+koWYFyMfnzmnPjKWc=;
-	h=From:To:Subject:Date:From;
-	b=ipNauPcvM+HSmOAWDDQboiKz6FLPXz0dhhQcERIIsQf90A1edo1OaO3am9Fy7VE3a
-	o24zrzN8NyCRmVaMxEQzQil6mMADEeMziMWCdBtHrctvguuZgR/F0Omr+Qa9XfjhwY
-	3B9L8yd2gTQyRus3i9O11EvFU35OORIVk0fNekvvAnw4kdzkzSMyIY7Uhm2YivUWY+
-	EKO0tbbSAT4SCVJge6VTS5cG0ght5IZbaDZsMG+Be4kELuagWYwSykg+V2oTe9Q0/5
-	czcTmexLHqf/FP5TAAGn8sExhaVHf/iFVWSrKR5+8PUF80LEuY2qzV5oLI9Q2rFEp2
-	mFxiE+sIFRY7rdii3J79mS70iNesa9DhMrNgsh1Wweww3zccBxFrLzXXCUvaPajj3t
-	9dQ9DhZlQOdNTtTqyU9rM6QZ8D5mO7XQ3y8xQm90LJqPkp+57jW3ht42C6IpiVGLrb
-	lr6MgROyJwvy36b+sK/7676l5u7+LvygPTUQp6L+NpUdsHfEPCeeqbnHJ0az1MO2rT
-	K9JBjvYmaJgG9BHQ08s76edUMzuc8iFDFyVP9a/MMJYtikOG81dSqvDbKYUzgUAVpA
-	yj4tZYDlmfTQHm/jx9OXMZs4nDSweFrmMdr7vhPY0JeCpYH/vNMhHFPbgHiXWmgQ5q
-	FGWtoubFDea1knJytWxLaJwM=
-From: Adrian Bunk <bunk@stusta.de>
+	Mon, 01 Jul 2019 10:43:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=sHTu6VWkv/Jzhoec7Quj63W2B49wXsXXHeANTlQZkiA=;
+	b=zIHpqsfhEvs3no6B4G/7SmnAppJwK4mWjpZe6kyJIY9vYhrchiCNG1oYEpDa9Cvq5z
+	FrvSsG/c5gGVmYUcY4OfqdxfgrfKET0c15ZzIcJAZfd5zXrt2OZNE2PJmuc1peLqMCGo
+	sdyv5E6Oab17A7ehtF6+L/8FJvOBDO5R2ijwH0MZyKGHAlmHcIN69ErdxAaONumApGAX
+	6w5Vz5l4hl+sTYIMGhp0FuE9MbfKDS1Q0ir3tRLj3m4ACh7wwGm37LvwMDmdD+884h3Q
+	YjB4Tnk11So08ixv5gVHqugyCKT4gFuYsx9ZxpJGl0Xrgg1QcYCRXz67omEKRFvYytA3
+	lLBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sHTu6VWkv/Jzhoec7Quj63W2B49wXsXXHeANTlQZkiA=;
+	b=Qol9E19X8jO/bO1p0vxKSTgw2vw09VYtZoE+0OaMB8ogglcLHqFLEQ5AlpBfdTzlSF
+	hjauzCZaPkALeP1B5aszjN1dBxMMMkwLo/p5qOBWeAQiAnIomiqIAGm3vbToYo3pPw8J
+	q5cYpkw3DaAOfkYA/hjpbAh7c60UUm9tvIW9ESBNGVUtYEYvw9CT1XFHlPUwnr03vblm
+	wSIpSimhLVnvtO4sV6/O2nWi1uO1YvKMbPkJbxecz/JKqrHTfiRTZhKm39VB/MNLEzMa
+	Cb7m80BdAlhoHu7MPtT7ixv5BvvYgF9CXS2ZoV27zbXRau9qfaAfrxAhoVP3hgTXFM57
+	0gJg==
+X-Gm-Message-State: APjAAAWdAs8/qnw+qwxNzn9eiTDx85w3YlNdmEuBMs205MO/xTfwjYcE
+	O6HL3N0eT1vLZy6sh1tghyqTeO5wHRo=
+X-Google-Smtp-Source: APXvYqwraYSq3NWS3dEy56M+3ZdI6gfEqZy6tqJlAfuSySzxzIWOT0NWO5O1qvCPOD0MHNqvWZaufw==
+X-Received: by 2002:a2e:3c1a:: with SMTP id j26mr15088874lja.230.1562003022800;
+	Mon, 01 Jul 2019 10:43:42 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	y10sm2534642lfb.28.2019.07.01.10.43.41
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 01 Jul 2019 10:43:42 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jul 2019 18:00:20 +0300
-Message-Id: <20190701150020.3737-1-bunk@stusta.de>
+Date: Mon,  1 Jul 2019 19:43:40 +0200
+Message-Id: <20190701174340.14512-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] networkmanager: Drop bluez4 support
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-networking] sethdlc: set PV in filename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,37 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 15:00:21 -0000
+X-List-Received-Date: Mon, 01 Jul 2019 17:43:43 -0000
 
-bluez4 was removed from meta-oe 2 years ago.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../networkmanager/networkmanager_1.18.0.bb                   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../sethdlc/{sethdlc.bb => sethdlc_1.18.bb}                   | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/sethdlc/{sethdlc.bb => sethdlc_1.18.bb} (88%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-index 9215a8676..21fbea9c1 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-@@ -20,7 +20,7 @@ DEPENDS = " \
-     curl \
+diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc_1.18.bb
+similarity index 88%
+rename from meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+rename to meta-networking/recipes-connectivity/sethdlc/sethdlc_1.18.bb
+index fc304fae7..5c7180b6a 100644
+--- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
++++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc_1.18.bb
+@@ -5,15 +5,13 @@ LICENSE = "GPLv2 & GPLv2+ "
+ LIC_FILES_CHKSUM = "file://sethdlc.c;endline=10;md5=90f936879e9f8b755a138aeb348782eb"
+ 
+ 
+-SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
++SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BP}.tar.gz \
+            file://sethdlc-fix-host-contamination.patch \
  "
+ SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
+ SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
  
--inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection gtk-doc
-+inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc
  
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-@@ -70,7 +70,7 @@ do_compile_prepend() {
+-S = "${WORKDIR}/${BPN}-1.18"
+-
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ DEPENDS = "virtual/kernel"
  
- PACKAGECONFIG ??= "nss ifupdown dhclient dnsmasq \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez5', '', d)} \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'wifi polkit', d)} \
- "
- PACKAGECONFIG[systemd] = " \
 -- 
 2.17.1
 
