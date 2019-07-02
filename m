@@ -1,30 +1,25 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DB0A37D32D
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 399907D32D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 01:28:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,441,1557158400"; d="scan'208";a="70445766"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Jul 2019 09:28:04 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id EF3A84CE0309
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 09:20:09 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 2 Jul 2019 09:20:14 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 2 Jul 2019 09:21:46 +0800
-Message-ID: <20190702012146.6939-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Tue,  2 Jul 2019 01:29:42 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x621Tgeq023528
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 1 Jul 2019 18:29:42 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Mon, 1 Jul 2019 18:29:42 -0700
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Mon, 1 Jul 2019 21:29:04 -0400
+Message-ID: <20190702012913.7163-3-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20190702012913.7163-1-kai.kang@windriver.com>
+References: <20190702012913.7163-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: EF3A84CE0309.A84D0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-cython: upgrade 0.29.10 -> 0.29.11
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][Patch 02/11] exo: 0.12.5 -> 0.12.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:28:07 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 01:29:42 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Upgrade from python-cython_0.29.10.bb to python-cython_0.29.11.bb.
+From: Kai Kang <kai.kang@windriver.com>
 
--Upgrade from python3-cython_0.29.10.bb to python3-cython_0.29.11.bb.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-cython.inc         | 4 ++--
- .../{python-cython_0.29.10.bb => python-cython_0.29.11.bb}    | 0
- .../{python3-cython_0.29.10.bb => python3-cython_0.29.11.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.29.10.bb => python-cython_0.29.11.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.29.10.bb => python3-cython_0.29.11.bb} (100%)
+ meta-xfce/recipes-xfce/exo/{exo_0.12.5.bb => exo_0.12.6.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.12.5.bb => exo_0.12.6.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 10cfef58b..1d2c45880 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.5.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.6.bb
+similarity index 87%
+rename from meta-xfce/recipes-xfce/exo/exo_0.12.5.bb
+rename to meta-xfce/recipes-xfce/exo/exo_0.12.6.bb
+index 7d61e8f83..43d8eb54d 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.12.5.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.12.6.bb
+@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
+     file://reduce-build-to-exo-csource-only.patch \
+ "
  
--SRC_URI[md5sum] = "08939b99869f59007387aea0d1a86341"
--SRC_URI[sha256sum] = "26229570d6787ff3caa932fe9d802960f51a89239b990d275ae845405ce43857"
-+SRC_URI[md5sum] = "785fa46921b4cbb4028b27b825a268d4"
-+SRC_URI[sha256sum] = "763a522cc5d1673ba7a4092c0914790f11704b1d4c41e2671e50d0f702a8c6a0"
+-SRC_URI[md5sum] = "1de1d539262847d49474d20cbebc78ea"
+-SRC_URI[sha256sum] = "e8f434d6436ae647dd1614e8a24aba23c83f70cb14037b5bc98652f558be43e8"
++SRC_URI[md5sum] = "e97267e5d5a41bf5b95e9bfdaa62e47a"
++SRC_URI[sha256sum] = "1417fffc593225d61ba57b050ae2ce66ef37615c9ec66944db32019761441003"
  
- inherit pypi
+ PACKAGES =+ "exo-csource"
  
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.29.10.bb b/meta-python/recipes-devtools/python/python-cython_0.29.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.29.10.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.29.11.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.29.10.bb b/meta-python/recipes-devtools/python/python3-cython_0.29.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.29.10.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.29.11.bb
 -- 
-2.20.1
-
-
+2.20.0
 
 
