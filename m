@@ -1,25 +1,24 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D41B7D32D
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 000037E7BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 01:29:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x621ThCO010200
+	Tue,  2 Jul 2019 01:29:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x621TG4A024119
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Jul 2019 18:29:43 -0700 (PDT)
+	Mon, 1 Jul 2019 18:29:31 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 1 Jul 2019 18:29:43 -0700
+	Mon, 1 Jul 2019 18:29:17 -0700
 From: <kai.kang@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Mon, 1 Jul 2019 21:29:05 -0400
-Message-ID: <20190702012913.7163-4-kai.kang@windriver.com>
+Date: Mon, 1 Jul 2019 21:29:02 -0400
+Message-ID: <20190702012913.7163-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190702012913.7163-1-kai.kang@windriver.com>
-References: <20190702012913.7163-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][Patch 03/11] garcon: 0.6.2 -> 0.6.3
+Subject: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:29:43 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 01:29:56 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../recipes-xfce/garcon/{garcon_0.6.2.bb => garcon_0.6.3.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.6.2.bb => garcon_0.6.3.bb} (76%)
+Upgrade core packages of xfce to 4.14pre2
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.6.2.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.6.3.bb
-similarity index 76%
-rename from meta-xfce/recipes-xfce/garcon/garcon_0.6.2.bb
-rename to meta-xfce/recipes-xfce/garcon/garcon_0.6.3.bb
-index 27096da60..fe58ed9e5 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.6.2.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_0.6.3.bb
-@@ -9,8 +9,8 @@ inherit xfce gtk-doc distro_features_check
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
--SRC_URI[md5sum] = "a4b6332ff6f090575d534d6a9d2761d8"
--SRC_URI[sha256sum] = "a87f09648ff10d45c524b3bfe618f18622bdd8b205589d35fed2f12d9c79c47c"
-+SRC_URI[md5sum] = "3b54d210adec3b6be781a1da26b53da2"
-+SRC_URI[sha256sum] = "76b1fea531363e9c5e767f1899039b4fe854edf23f6c0f260807e5551f798401"
- 
- EXTRA_OECONF = "--disable-gtk-doc"
- 
+Kai Kang (11):
+  thunar: 1.8.6 -> 1.8.7
+  exo: 0.12.5 -> 0.12.6
+  garcon: 0.6.2 -> 0.6.3
+  thunar-volman: 0.9.2 -> 0.9.3
+  xfce4-dev-tools: 4.12.0 -> 4.13.0
+  xfce4-panel: 4.13.5 -> 4.13.6
+  xfce4-power-manager: 1.6.2 -> 1.6.3
+  xfce4-session: 4.13.2 -> 4.13.3
+  xfdesktop: 4.13.4 -> 4.13.5
+  xfwm4: 4.13.2 -> 4.13.3
+  xfconf: 4.13.7 -> 4.13.8
+
+ meta-xfce/recipes-xfce/exo/{exo_0.12.5.bb => exo_0.12.6.bb} | 4 ++--
+ .../garcon/{garcon_0.6.2.bb => garcon_0.6.3.bb}             | 4 ++--
+ .../{thunar-volman_0.9.2.bb => thunar-volman_0.9.3.bb}      | 4 ++--
+ .../thunar/{thunar_1.8.6.bb => thunar_1.8.7.bb}             | 4 ++--
+ ...{xfce4-dev-tools_4.12.0.bb => xfce4-dev-tools_4.13.0.bb} | 4 ++--
+ .../{xfce4-panel_4.13.5.bb => xfce4-panel_4.13.6.bb}        | 4 ++--
+ ...-power-manager_1.6.2.bb => xfce4-power-manager_1.6.3.bb} | 4 ++--
+ .../{xfce4-session_4.13.2.bb => xfce4-session_4.13.3.bb}    | 4 ++--
+ .../xfconf/{xfconf_4.13.7.bb => xfconf_4.13.8.bb}           | 6 +++---
+ .../xfdesktop/{xfdesktop_4.13.4.bb => xfdesktop_4.13.5.bb}  | 4 ++--
+ .../recipes-xfce/xfwm4/{xfwm4_4.13.2.bb => xfwm4_4.13.3.bb} | 4 ++--
+ 11 files changed, 23 insertions(+), 23 deletions(-)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.12.5.bb => exo_0.12.6.bb} (87%)
+ rename meta-xfce/recipes-xfce/garcon/{garcon_0.6.2.bb => garcon_0.6.3.bb} (76%)
+ rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.9.2.bb => thunar-volman_0.9.3.bb} (76%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.6.bb => thunar_1.8.7.bb} (86%)
+ rename meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.12.0.bb => xfce4-dev-tools_4.13.0.bb} (79%)
+ rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.13.5.bb => xfce4-panel_4.13.6.bb} (90%)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.2.bb => xfce4-power-manager_1.6.3.bb} (90%)
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.13.2.bb => xfce4-session_4.13.3.bb} (87%)
+ rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.7.bb => xfconf_4.13.8.bb} (78%)
+ rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.13.4.bb => xfdesktop_4.13.5.bb} (76%)
+ rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.13.2.bb => xfwm4_4.13.3.bb} (89%)
+
 -- 
 2.20.0
 
