@@ -1,26 +1,33 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id D99777EB97
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E55C7EB0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 11:10:46 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x62BAkxh029333
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Tue,  2 Jul 2019 12:33:05 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45dNtm5PR5z3t
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Jul 2019 13:10:47 +0200
-Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
-	[139.16.117.127])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x62BAikH019877;
-	Tue, 2 Jul 2019 13:10:44 +0200
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 7286210D496A;
-	Tue,  2 Jul 2019 13:10:44 +0200 (CEST)
-From: Pascal Bach <pascal.bach@siemens.com>
+	Tue,  2 Jul 2019 14:33:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1562070784;
+	bh=Xyghpm2h1tuwyTTYR8BioD4nmwFv4hkSLKFp/ugGy3U=;
+	h=From:To:Subject:Date:From;
+	b=FdsVHRXM/dOxwQiTKYgA2frAHHUuDse8no1MgG+dNQrgP3l/d16ofCdWGzy5dTq2J
+	Ewm81jaAaoq3P5swJrZ/za1meo6LiNVbbZfuJ52nOuszp6XeYL3UF3t2fC80skGM1k
+	iiORJPzzU+pK6CFkh5O7V/Vkn1TGJdp0QocTzNTxvF7GeG3yAW3jQzI8N5q4hfIJyf
+	nm2C1jwF4KMlTo1n5DT7OInXZ4sUe4v7rYUT3r9PIJdKOnj+7h1hO08P5rhy1bjxum
+	j7RsEiRYmQplKBe8mAo9vi1vqO/k/FHd9ChorIvQtIZyyROqu/jWUdC0ig4LH/bQN+
+	lpZjcfK5V1ctAzyA2cNXdbn9IzyAI609dxEur6Xvy+CZm3xfw7GlVCs56GK0YK31RW
+	CyFRKcqghpOTjHX8KFABl8fbscy0XgCjTub9UR0va77DOhp+kmX5d8YcTaUg9QfEbh
+	RBM7AvxbCuoJnlmG8XbnA4RwAzCpx18/cx5mX6Udabvs+S1WDfbBncbkMKkOo0A5to
+	I/FUohwYilbQnAawRlZyVJ1Zv4dMlysnda0O0t9wTsKcTbmJV0GgxVfj2zFJI9l1HO
+	t/ijhGAVuEVk04W1jhTaLyOkRHCsKaiCnTyNP5X8tOuM+rD5T5UFyL2qGEaRYj8y1P
+	qzM8WG1HY4lIp6UZRTqYDzh0=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jul 2019 13:10:32 +0200
-Message-Id: <20190702111032.999-1-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] protobuf: 1.3.1 -> 1.3.2
+Date: Tue,  2 Jul 2019 15:33:04 +0300
+Message-Id: <20190702123304.7357-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] packagegroup-meta-networking-connectivity: Correct a DISTRO_FEATURES check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,101 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 11:10:47 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 12:33:05 -0000
 
-The patch can be dropped as it is included in this release.
-Also drop the +git suffix as the version matches the version exactly.
+bluez5 is backfilled since it means "not bluez4".
+bluetooth is what actually indicates bluetooth support.
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../protobuf-c/protobuf3-compatibility.patch       | 55 ----------------------
- .../{protobuf-c_1.3.1.bb => protobuf-c_1.3.2.bb}   |  4 +-
- 2 files changed, 1 insertion(+), 58 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
- rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.1.bb => protobuf-c_1.3.2.bb} (90%)
+ .../recipes-core/packagegroups/packagegroup-meta-networking.bb  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
-deleted file mode 100644
-index 35914952d..000000000
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
-+++ /dev/null
-@@ -1,55 +0,0 @@
--From 7456d1621223d425b8a3fd74e435a79c046169fb Mon Sep 17 00:00:00 2001
--From: Robert Edmonds <edmonds@users.noreply.github.com>
--Date: Wed, 10 Apr 2019 20:47:48 -0400
--Subject: [PATCH] t/generated-code2/cxx-generate-packed-data.cc: Fix build
-- failure on newer protobuf
--
-- Upstream-Status: Backport [https://github.com/protobuf-c/protobuf-c/pull/369]
--
--google::protobuf::Message::Reflection has been removed in newer versions
--of protobuf. The replacement is google::protobuf::Reflection.
--
--protobuf in commit 779f61c6a3ce02a119e28e802f229e61b69b9046 ("Integrate
--recent changes from google3.", from August 2008) changed the following
--in message.h:
--
--    @@ -336,7 +337,8 @@ class LIBPROTOBUF_EXPORT Message {
--
--       // Introspection ---------------------------------------------------
--
--    -  class Reflection;  // Defined below.
--    +  // Typedef for backwards-compatibility.
--    +  typedef google::protobuf::Reflection Reflection;
--
--The "typedef for backwards-compatibility" apparently lasted ten years
--until protobuf commit 6bbe197e9c1b6fc38cbdc45e3bf83fa7ced792a3
--("Down-integrate from google3.", from August 2018) which finally removed
--the typedef:
--
--    @@ -327,8 +344,6 @@ class LIBPROTOBUF_EXPORT Message : public MessageLite {
--
--       // Introspection ---------------------------------------------------
--
--    -  // Typedef for backwards-compatibility.
--    -  typedef google::protobuf::Reflection Reflection;
--
--This commit updates the only use of this typedef (in the test suite) to
--directly refer to the replacement, google::protobuf::Reflection. This
--fixes the build failure in the test suite.
-----
-- t/generated-code2/cxx-generate-packed-data.cc | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/t/generated-code2/cxx-generate-packed-data.cc b/t/generated-code2/cxx-generate-packed-data.cc
--index 4fd3e25..0865d2e 100644
----- a/t/generated-code2/cxx-generate-packed-data.cc
--+++ b/t/generated-code2/cxx-generate-packed-data.cc
--@@ -998,7 +998,7 @@ static void dump_test_packed_repeated_enum (void)
-- static void dump_test_unknown_fields (void)
-- {
--   EmptyMess mess;
---  const google::protobuf::Message::Reflection *reflection = mess.GetReflection();
--+  const google::protobuf::Reflection *reflection = mess.GetReflection();
--   google::protobuf::UnknownFieldSet *fs = reflection->MutableUnknownFields(&mess);
--
-- #if GOOGLE_PROTOBUF_VERSION >= 2001000
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-index 1d1782306..6d1ffc3f4 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-@@ -12,11 +12,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
- 
- DEPENDS = "protobuf-native protobuf"
- 
--PV .= "+git${SRCPV}"
--SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
-+SRCREV = "1390409f4ee4e26d0635310995b516eb702c3f9e"
- 
- SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
--           file://protobuf3-compatibility.patch \
-           "
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index bbc5e1299..29ce51b23 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -37,7 +37,7 @@ RDEPENDS_packagegroup-meta-networking-connectivity = "\
+     mbedtls relayd snort dhcpcd rdate vlan vpnc \
+     inetutils wolfssl lftp miniupnpd networkmanager \
+     networkmanager-openvpn rdist nanomsg python-networkmanager \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "bluez5 x11", "blueman", "", d)} \
++    ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth x11", "blueman", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
+     "
 -- 
-2.11.0
+2.17.1
 
 
