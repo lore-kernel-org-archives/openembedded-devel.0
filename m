@@ -1,26 +1,49 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8678779C92
+Return-Path: <jupiter.hce@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E54C77C132
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 08:19:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x628IYsC001928
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 2 Jul 2019 01:19:10 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Tue, 2 Jul 2019 01:18:50 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 2 Jul 2019 16:16:21 +0800
-Message-ID: <96c7f671cb019153edc03e0ab1ef873f0bb5efe9.1562055251.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1562055251.git.hongxu.jia@windriver.com>
-References: <cover.1562055251.git.hongxu.jia@windriver.com>
+	Tue,  2 Jul 2019 10:05:24 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id e3so35588560ioc.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Jul 2019 03:05:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=fmigIhvaGys0hrUIT98tr/xtxj4ZnOlEvoReSTHQX7M=;
+	b=qnqBap7TEAryLxkM61u9nkp7H+pSkmDl9WL0B1ykbe/qxiDX2VQ4CuYm7cNI1Q/yeN
+	wll6OmYAd3Wxwpi9H2mOYunhXq94N5e67rFy1ntWf5xofP78Zf7zpDZ6u5k0CJsErDBu
+	VmalLCUypxC1tnPxxKZqmxXqE3L61p8HRNK9Xz/RRBGjZEowFLACNMSIH2Kq9cLC7IKc
+	0CA/tsniVxtKdobzi4fxufCIUFMnl9M352WJ42hQ2kXfxi/t9wqbaAlZVSGlxCDF4HjO
+	U2u+c/YO9Gum0J95LxF4XVmSRWdQ3++ERaTDZdA0wDpjG30DV1q9Cv+n+aTMLgBmO23o
+	wQgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=fmigIhvaGys0hrUIT98tr/xtxj4ZnOlEvoReSTHQX7M=;
+	b=gYo5ppWFHXbg8l0pNVw3tL/lTl68TgB5mBHX7enA8ZX/gpmVfWfu6Z+OHKV5wopTwT
+	lwp+/pfxHUHxElLSR/lbWJsO/OTA6Ha0Nb/qPQKJ81NDqZsF/3mH8kSt1wUKaFKyIilc
+	m1bDSPGXpKi3S0LL31Ml1IQrrFQuqJKOzyD/bO+JSEbe5UQy1rv9N19M0dcyfjd5w4Lt
+	wJ/rkV5i2Tx/rCmXkru2Na6ojYCSRjGSdyGZ48Oo0uh2DdYlepsF0uDpRSJNpP3nbh+L
+	v6YOc4a6Px0diGNn2JiE+dyb4C2B3GLeHC4FoD6Jqq6f+AQyk0qlNvnfatLB4vjyv3zW
+	0c2g==
+X-Gm-Message-State: APjAAAXBBV3aJFSonW4YIrZciD2HQsBFouDAjsh9TsDTyWzKFFWbxE0b
+	BkJ0NIx0HJ6ix7hxDq71krrUB5nGeAjSoz/X/SuQuahV
+X-Google-Smtp-Source: APXvYqxE4apz0vPGIEB/k1u3t2RboKvQUfW9DrDOHoXCtFaYytqAy2oihr3jOyKQ+H+FDJ91s3qHwo8SGo96o2IuznQ=
+X-Received: by 2002:a02:230a:: with SMTP id u10mr7473718jau.117.1562061925816; 
+	Tue, 02 Jul 2019 03:05:25 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 7/8] thin-provisioning-tools: 0.7.6 -> 0.8.5
+Received: by 2002:ac0:8a3d:0:0:0:0:0 with HTTP;
+	Tue, 2 Jul 2019 03:05:25 -0700 (PDT)
+In-Reply-To: <CAA=hcWTMO58OJmo2hqfMWqHKxB53XYzveKb2mULztW7BLiJYjA@mail.gmail.com>
+References: <CAA=hcWS+-bC8S+90VqbRMW2wpTz2Rfv7umxKSHovQXWD2K6imA@mail.gmail.com>
+	<CAA=hcWS-tgsh2Yyx6oZOjkiSKS0WPh9Z6nrhsiCzWScwWpuGOQ@mail.gmail.com>
+	<CAA=hcWTMO58OJmo2hqfMWqHKxB53XYzveKb2mULztW7BLiJYjA@mail.gmail.com>
+From: JH <jupiter.hce@gmail.com>
+Date: Tue, 2 Jul 2019 20:05:25 +1000
+Message-ID: <CAA=hcWSRpk950q2Yj_sX+z2L255OeWwrH-9ZH_-JY6vifFSaPw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Allow choose of U-Boot config for machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,133 +56,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 08:19:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Jul 2019 10:05:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-- Rebase use-sh-on-path.patch
-- Drop 0001-fix-compile-failed-with-libc-musl.patch which
-  upstream has merged it
+Fixed, thank you
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../0001-fix-compile-failed-with-libc-musl.patch   | 42 ----------------------
- .../files/use-sh-on-path.patch                     | 21 ++++++++---
- ...s_0.7.6.bb => thin-provisioning-tools_0.8.5.bb} |  3 +-
- 3 files changed, 18 insertions(+), 48 deletions(-)
- delete mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
- rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.7.6.bb => thin-provisioning-tools_0.8.5.bb} (84%)
-
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
-deleted file mode 100644
-index 28b44da..0000000
---- a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From fcbcf9c494cca166106ae4cb03c1dd135ee4f25c Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Wed, 1 Aug 2018 09:34:00 +0800
--Subject: [PATCH] fix compile failed with libc musl
--
--There is a failure while compiling with libc musl:
--[snip]
--|./block-cache/io_engine.h:18:17: error: expected
--unqualified-id before numeric constant
--|  unsigned const PAGE_SIZE = 4096;
--[snip]
--
--The musl defeines macro PAGE_SIZE, undef it conditionally
--could fix the issue.
--
--http://musl.openwall.narkive.com/tO8vrHdP/why-musl-define-page-size
--
--Upstream-Status: Submitted [git://github.com/jthornber/thin-provisioning-tools]
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- block-cache/io_engine.h | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/block-cache/io_engine.h b/block-cache/io_engine.h
--index 1704251..e36b932 100644
----- a/block-cache/io_engine.h
--+++ b/block-cache/io_engine.h
--@@ -12,6 +12,10 @@
-- 
-- //----------------------------------------------------------------
-- 
--+// Musl defines
--+#ifdef PAGE_SIZE
--+#undef PAGE_SIZE
--+#endif
-- namespace bcache {
-- 	using sector_t = uint64_t;
-- 
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/use-sh-on-path.patch b/meta-oe/recipes-support/thin-provisioning-tools/files/use-sh-on-path.patch
-index 8cb16de..de934c1 100644
---- a/meta-oe/recipes-support/thin-provisioning-tools/files/use-sh-on-path.patch
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/files/use-sh-on-path.patch
-@@ -1,5 +1,7 @@
--
--thin-provisioning-tools: use sh on path when invoking txt2man
-+From 38397b42e2c3450c2aee20e6fb92f362db4e35ef Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Tue, 2 Jul 2019 13:20:39 +0800
-+Subject: [PATCH] thin-provisioning-tools: use sh on path when invoking txt2man
- 
- txt2man contains a test which might try to use ksh to run the script, so we
- avoid running /bin/sh.
-@@ -8,14 +10,25 @@ Upstream-Status: Inappropriate [oe specific]
- 
- Signed-off-by: joe.slater <joe.slater@windriver.com>
- 
-+Rebase to 0.8.5
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ Makefile.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 7c867b2..5303994 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -210,7 +210,7 @@ endif
-- 
-+@@ -223,7 +223,7 @@ endif
-  %.8: %.txt bin/txt2man
-  	@echo "    [txt2man] $<"
-+ 	@mkdir -p $(dir $@)
- -	$(V) bin/txt2man -p -t $(basename $(notdir $<)) $< > $@
- +	$(V) sh bin/txt2man -p -t $(basename $(notdir $<)) $< > $@
-  
-  #----------------------------------------------------------------
-  
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
-similarity index 84%
-rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb
-rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
-index 5f6ba9e..9f89bac 100644
---- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
-@@ -9,11 +9,10 @@ S = "${WORKDIR}/git"
- 
- SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
-            file://0001-do-not-strip-pdata_tools-at-do_install.patch \
--           file://0001-fix-compile-failed-with-libc-musl.patch \
-            file://use-sh-on-path.patch \
- "
- 
--SRCREV = "6f936992b8e6208a7838fcf1ec87c5bd3a694a77"
-+SRCREV = "5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
--- 
-2.7.4
-
+On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
+> ERROR: Unable to start bitbake server (None)
+> --- Starting bitbake server pid 2673 at 2019-07-02 11:54:24.011086 ---
+> ERROR: local.conf:34: unparsed line: 'UBOOT_CONFIG=nand'
+>
+>
+> On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
+>> Tried to add  UBOOT_CONFIG=nand to local.conf and from command line,
+>> bitbake does not like it????
+>>
+>> On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
+>>> Hi,
+>>>
+>>> I am running BitBake Build Tool Core version 1.40.0, originally I
+>>> built an image on imx6ullevk booting from SD card, I am building a new
+>>> image for a customized i.MX6ULL board booting from NAND. The following
+>>> link commented by Otavio Salvador for a patch to allow user to use
+>>> UBOOT_CONFIG=nand either in local.conf or command line. Given the
+>>> patch was many years old, I think that the current version is able to
+>>> support UBOOT_CONFIG=nand either in local.conf or command line, there
+>>> is no need to run the patch, is that correct?
+>>>
+>>> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082284.html
+>>>
+>>> Thank you.
+>>>
+>>> Kind regards,
+>>>
+>>> - JH
+>>>
+>>
+>
 
