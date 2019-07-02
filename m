@@ -1,49 +1,26 @@
-Return-Path: <jupiter.hce@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E54C77C132
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id D99777EB97
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 10:05:24 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id e3so35588560ioc.12
+	Tue,  2 Jul 2019 11:10:46 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x62BAkxh029333
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jul 2019 03:05:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=fmigIhvaGys0hrUIT98tr/xtxj4ZnOlEvoReSTHQX7M=;
-	b=qnqBap7TEAryLxkM61u9nkp7H+pSkmDl9WL0B1ykbe/qxiDX2VQ4CuYm7cNI1Q/yeN
-	wll6OmYAd3Wxwpi9H2mOYunhXq94N5e67rFy1ntWf5xofP78Zf7zpDZ6u5k0CJsErDBu
-	VmalLCUypxC1tnPxxKZqmxXqE3L61p8HRNK9Xz/RRBGjZEowFLACNMSIH2Kq9cLC7IKc
-	0CA/tsniVxtKdobzi4fxufCIUFMnl9M352WJ42hQ2kXfxi/t9wqbaAlZVSGlxCDF4HjO
-	U2u+c/YO9Gum0J95LxF4XVmSRWdQ3++ERaTDZdA0wDpjG30DV1q9Cv+n+aTMLgBmO23o
-	wQgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=fmigIhvaGys0hrUIT98tr/xtxj4ZnOlEvoReSTHQX7M=;
-	b=gYo5ppWFHXbg8l0pNVw3tL/lTl68TgB5mBHX7enA8ZX/gpmVfWfu6Z+OHKV5wopTwT
-	lwp+/pfxHUHxElLSR/lbWJsO/OTA6Ha0Nb/qPQKJ81NDqZsF/3mH8kSt1wUKaFKyIilc
-	m1bDSPGXpKi3S0LL31Ml1IQrrFQuqJKOzyD/bO+JSEbe5UQy1rv9N19M0dcyfjd5w4Lt
-	wJ/rkV5i2Tx/rCmXkru2Na6ojYCSRjGSdyGZ48Oo0uh2DdYlepsF0uDpRSJNpP3nbh+L
-	v6YOc4a6Px0diGNn2JiE+dyb4C2B3GLeHC4FoD6Jqq6f+AQyk0qlNvnfatLB4vjyv3zW
-	0c2g==
-X-Gm-Message-State: APjAAAXBBV3aJFSonW4YIrZciD2HQsBFouDAjsh9TsDTyWzKFFWbxE0b
-	BkJ0NIx0HJ6ix7hxDq71krrUB5nGeAjSoz/X/SuQuahV
-X-Google-Smtp-Source: APXvYqxE4apz0vPGIEB/k1u3t2RboKvQUfW9DrDOHoXCtFaYytqAy2oihr3jOyKQ+H+FDJ91s3qHwo8SGo96o2IuznQ=
-X-Received: by 2002:a02:230a:: with SMTP id u10mr7473718jau.117.1562061925816; 
-	Tue, 02 Jul 2019 03:05:25 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac0:8a3d:0:0:0:0:0 with HTTP;
-	Tue, 2 Jul 2019 03:05:25 -0700 (PDT)
-In-Reply-To: <CAA=hcWTMO58OJmo2hqfMWqHKxB53XYzveKb2mULztW7BLiJYjA@mail.gmail.com>
-References: <CAA=hcWS+-bC8S+90VqbRMW2wpTz2Rfv7umxKSHovQXWD2K6imA@mail.gmail.com>
-	<CAA=hcWS-tgsh2Yyx6oZOjkiSKS0WPh9Z6nrhsiCzWScwWpuGOQ@mail.gmail.com>
-	<CAA=hcWTMO58OJmo2hqfMWqHKxB53XYzveKb2mULztW7BLiJYjA@mail.gmail.com>
-From: JH <jupiter.hce@gmail.com>
-Date: Tue, 2 Jul 2019 20:05:25 +1000
-Message-ID: <CAA=hcWSRpk950q2Yj_sX+z2L255OeWwrH-9ZH_-JY6vifFSaPw@mail.gmail.com>
+	Tue, 2 Jul 2019 13:10:47 +0200
+Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
+	[139.16.117.127])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id x62BAikH019877;
+	Tue, 2 Jul 2019 13:10:44 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 7286210D496A;
+	Tue,  2 Jul 2019 13:10:44 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Allow choose of U-Boot config for machine
+Date: Tue,  2 Jul 2019 13:10:32 +0200
+Message-Id: <20190702111032.999-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] protobuf: 1.3.1 -> 1.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,41 +33,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 10:05:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 02 Jul 2019 11:10:47 -0000
 
-Fixed, thank you
+The patch can be dropped as it is included in this release.
+Also drop the +git suffix as the version matches the version exactly.
 
-On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
-> ERROR: Unable to start bitbake server (None)
-> --- Starting bitbake server pid 2673 at 2019-07-02 11:54:24.011086 ---
-> ERROR: local.conf:34: unparsed line: 'UBOOT_CONFIG=nand'
->
->
-> On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
->> Tried to add  UBOOT_CONFIG=nand to local.conf and from command line,
->> bitbake does not like it????
->>
->> On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
->>> Hi,
->>>
->>> I am running BitBake Build Tool Core version 1.40.0, originally I
->>> built an image on imx6ullevk booting from SD card, I am building a new
->>> image for a customized i.MX6ULL board booting from NAND. The following
->>> link commented by Otavio Salvador for a patch to allow user to use
->>> UBOOT_CONFIG=nand either in local.conf or command line. Given the
->>> patch was many years old, I think that the current version is able to
->>> support UBOOT_CONFIG=nand either in local.conf or command line, there
->>> is no need to run the patch, is that correct?
->>>
->>> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082284.html
->>>
->>> Thank you.
->>>
->>> Kind regards,
->>>
->>> - JH
->>>
->>
->
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ .../protobuf-c/protobuf3-compatibility.patch       | 55 ----------------------
+ .../{protobuf-c_1.3.1.bb => protobuf-c_1.3.2.bb}   |  4 +-
+ 2 files changed, 1 insertion(+), 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
+ rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.1.bb => protobuf-c_1.3.2.bb} (90%)
+
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
+deleted file mode 100644
+index 35914952d..000000000
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c/protobuf3-compatibility.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From 7456d1621223d425b8a3fd74e435a79c046169fb Mon Sep 17 00:00:00 2001
+-From: Robert Edmonds <edmonds@users.noreply.github.com>
+-Date: Wed, 10 Apr 2019 20:47:48 -0400
+-Subject: [PATCH] t/generated-code2/cxx-generate-packed-data.cc: Fix build
+- failure on newer protobuf
+-
+- Upstream-Status: Backport [https://github.com/protobuf-c/protobuf-c/pull/369]
+-
+-google::protobuf::Message::Reflection has been removed in newer versions
+-of protobuf. The replacement is google::protobuf::Reflection.
+-
+-protobuf in commit 779f61c6a3ce02a119e28e802f229e61b69b9046 ("Integrate
+-recent changes from google3.", from August 2008) changed the following
+-in message.h:
+-
+-    @@ -336,7 +337,8 @@ class LIBPROTOBUF_EXPORT Message {
+-
+-       // Introspection ---------------------------------------------------
+-
+-    -  class Reflection;  // Defined below.
+-    +  // Typedef for backwards-compatibility.
+-    +  typedef google::protobuf::Reflection Reflection;
+-
+-The "typedef for backwards-compatibility" apparently lasted ten years
+-until protobuf commit 6bbe197e9c1b6fc38cbdc45e3bf83fa7ced792a3
+-("Down-integrate from google3.", from August 2018) which finally removed
+-the typedef:
+-
+-    @@ -327,8 +344,6 @@ class LIBPROTOBUF_EXPORT Message : public MessageLite {
+-
+-       // Introspection ---------------------------------------------------
+-
+-    -  // Typedef for backwards-compatibility.
+-    -  typedef google::protobuf::Reflection Reflection;
+-
+-This commit updates the only use of this typedef (in the test suite) to
+-directly refer to the replacement, google::protobuf::Reflection. This
+-fixes the build failure in the test suite.
+----
+- t/generated-code2/cxx-generate-packed-data.cc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/t/generated-code2/cxx-generate-packed-data.cc b/t/generated-code2/cxx-generate-packed-data.cc
+-index 4fd3e25..0865d2e 100644
+---- a/t/generated-code2/cxx-generate-packed-data.cc
+-+++ b/t/generated-code2/cxx-generate-packed-data.cc
+-@@ -998,7 +998,7 @@ static void dump_test_packed_repeated_enum (void)
+- static void dump_test_unknown_fields (void)
+- {
+-   EmptyMess mess;
+--  const google::protobuf::Message::Reflection *reflection = mess.GetReflection();
+-+  const google::protobuf::Reflection *reflection = mess.GetReflection();
+-   google::protobuf::UnknownFieldSet *fs = reflection->MutableUnknownFields(&mess);
+-
+- #if GOOGLE_PROTOBUF_VERSION >= 2001000
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+index 1d1782306..6d1ffc3f4 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+@@ -12,11 +12,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
+ 
+ DEPENDS = "protobuf-native protobuf"
+ 
+-PV .= "+git${SRCPV}"
+-SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
++SRCREV = "1390409f4ee4e26d0635310995b516eb702c3f9e"
+ 
+ SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
+-           file://protobuf3-compatibility.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.11.0
+
 
