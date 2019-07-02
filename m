@@ -1,46 +1,24 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
-	[209.85.166.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CF717E6FE
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D44979C92
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 07:47:43 +0000 (UTC)
-Received: by mail-io1-f45.google.com with SMTP id u13so34944676iop.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jul 2019 00:47:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0MsBP7mw73RLmXNMXv52E37AnbCA/NJRfXhdT6dzYxQ=;
-	b=jiUfr0b/QsYMWUfMKeaGd0wn+C6VUwc1cUj+5M2axuIKmLnFcIinlzijj8pLq07THj
-	0FVWBkG9aZU/n+49Wcav+sUxzTidfLPBOBMzuQHlkMT+gDZbGxx2y2ryi6cTigm4Q8Wc
-	WhFF/uDcYZTOMZLhd6MOnO8CPzUeXsEYLP3VxAh2WZWF9md+Rpr8Oqs7BrrYHNU+dxwg
-	zmer1EN3+voi0M0LVOmw6jfiujfSNU+Hia6CXCJYHUgb0lwu/zXjVqU3kgoEleVbpFPB
-	1upGjfVpMa+M3QwgW8lC1/bfm7ZyJloGUkXlXd345khbT0HQ1gJAfdyX11YlXLJx4AVB
-	Rt5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0MsBP7mw73RLmXNMXv52E37AnbCA/NJRfXhdT6dzYxQ=;
-	b=LdDQc8AdItemJmbqQC/rqfkfDb7fHz93CkHqL7bEkMRZbe7YgoICtGwVXXDOQKlWi3
-	nKzBGEbB9ExmgvRPGiEnHvKOukr/QBvA4lyP0350PjD5xBdPd8lCHTPhlVXNNRDmP1Be
-	69fHLRgzGIpKMi9nic9S1kbGxdwoSE5A3HLYFy1/bF1sli9B7pysCud5ahpxyDFFAyLp
-	cbUsmx4ggj61RRbNBL2lejCtqq2xZLilYXdeccOj3aARABfnxsV+s0n/g78ZOCgR9VzG
-	UahFi2ypP75saMHUjoll477WhW4LOwi8iOMVfvzHdUPSq7N3+EgEilO2f35F/R0gLQkQ
-	1EVQ==
-X-Gm-Message-State: APjAAAXxD0wr3L0o/beqmOhin0FeV5x4uM0D6cCT5NXGzniUvJef5P/8
-	LYiNN83qnQyfKEWX7wM0uLJK1QetX8ZaVoHmdQQ=
-X-Google-Smtp-Source: APXvYqwvnAZmTyiRW0+1iSXp/ocwRmwN0XKa+ieOqrSnPN1ZxpdiKaSnDGbqpR+gUA6tUCH0ak2oi8rNug79UGyJ9Vk=
-X-Received: by 2002:a5e:8a05:: with SMTP id d5mr2633607iok.147.1562053664542; 
-	Tue, 02 Jul 2019 00:47:44 -0700 (PDT)
+	Tue,  2 Jul 2019 08:18:00 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x628FgiV001817
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 2 Jul 2019 01:17:41 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Tue, 2 Jul 2019 01:16:23 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Tue, 2 Jul 2019 16:16:14 +0800
+Message-ID: <cover.1562055251.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20190702012913.7163-1-kai.kang@windriver.com>
-In-Reply-To: <20190702012913.7163-1-kai.kang@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 2 Jul 2019 09:47:33 +0200
-Message-ID: <CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/8] Upgrade 8 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,43 +31,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 07:47:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 02 Jul 2019 08:18:01 -0000
+Content-Type: text/plain
 
-On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Upgrade core packages of xfce to 4.14pre2
->
-> Kai Kang (11):
->   thunar: 1.8.6 -> 1.8.7
->   exo: 0.12.5 -> 0.12.6
->   garcon: 0.6.2 -> 0.6.3
->   thunar-volman: 0.9.2 -> 0.9.3
->   xfce4-dev-tools: 4.12.0 -> 4.13.0
->   xfce4-panel: 4.13.5 -> 4.13.6
->   xfce4-power-manager: 1.6.2 -> 1.6.3
->   xfce4-session: 4.13.2 -> 4.13.3
->   xfdesktop: 4.13.4 -> 4.13.5
->   xfwm4: 4.13.2 -> 4.13.3
->   xfconf: 4.13.7 -> 4.13.8
-First of all thanks for taking care. One suggestion/wish: Could you
-please update xfce4-settings to latest upstream and move away from my
-fork?
+The following changes since commit 64974b8779291419486338f75f229a732e450d78:
 
-Background: The fork I created added two functionalities:
-* Optionally hide mouse pointer for certain pointer devices. This
-stopped working anyway (and was problematic for Qt application from
-the beginning)
-* Datetime-setter: I created a new project for that based on GTK3 [1].
-It is not quite finished but I use it frequently and am happy to have
-it (e.g on machines without RTC backup and missing network). So if
-somebody wants this either it could be added later.
+  xfce4-screensaver: 0.1.4 -> 0.1.5 (2019-06-21 06:22:19 -0700)
 
-Unfortunately I have no time to do this myself.
+are available in the git repository at:
 
-Thanks
+  git://git.openembedded.org/meta-openembedded-contrib hongxu/upgrade-20190702
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=hongxu/upgrade-20190702
 
-Andreas
+Hongxu Jia (8):
+  python3-pykickstart: 3.18 -> 3.20
+  python3-blivet: 3.1.2 -> 3.1.4
+  python-pyparted/python3-pyparted: 3.11.1 -> 3.11.2
+  libbytesize: 1.4 -> 2.0
+  libblockdev: 2.20 -> 2.22
+  network-manager-applet: 1.8.20 -> 1.8.22
+  thin-provisioning-tools: 0.7.6 -> 0.8.5
+  libreport: 2.9.7 -> 2.10.0
+
+ ..._1.8.20.bb => network-manager-applet_1.8.22.bb} |  6 ++--
+ .../{libblockdev_2.20.bb => libblockdev_2.22.bb}   |  2 +-
+ .../{libreport_2.9.7.bb => libreport_2.10.0.bb}    |  2 +-
+ .../files/0001-fix-out-of-tree-build-failure.patch | 37 +++++++++++++++++++
+ .../{libbytesize_1.4.bb => libbytesize_2.0.bb}     |  8 ++---
+ .../0001-fix-compile-failed-with-libc-musl.patch   | 42 ----------------------
+ .../files/use-sh-on-path.patch                     | 21 ++++++++---
+ ...s_0.7.6.bb => thin-provisioning-tools_0.8.5.bb} |  3 +-
+ ...on3-blivet_3.1.2.bb => python3-blivet_3.1.4.bb} |  2 +-
+ ...ckstart_3.18.bb => python3-pykickstart_3.20.bb} |  2 +-
+ .../python-pyparted/python-pyparted.inc            |  2 +-
+ ...yparted_3.11.1.bb => python-pyparted_3.11.2.bb} |  0
+ ...parted_3.11.1.bb => python3-pyparted_3.11.2.bb} |  0
+ 13 files changed, 67 insertions(+), 60 deletions(-)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.20.bb => network-manager-applet_1.8.22.bb} (87%)
+ rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.20.bb => libblockdev_2.22.bb} (97%)
+ rename meta-oe/recipes-extended/libreport/{libreport_2.9.7.bb => libreport_2.10.0.bb} (96%)
+ create mode 100644 meta-oe/recipes-support/libbytesize/files/0001-fix-out-of-tree-build-failure.patch
+ rename meta-oe/recipes-support/libbytesize/{libbytesize_1.4.bb => libbytesize_2.0.bb} (84%)
+ delete mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
+ rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.7.6.bb => thin-provisioning-tools_0.8.5.bb} (84%)
+ rename meta-python/recipes-extended/python-blivet/{python3-blivet_3.1.2.bb => python3-blivet_3.1.4.bb} (96%)
+ rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.18.bb => python3-pykickstart_3.20.bb} (94%)
+ rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.11.1.bb => python-pyparted_3.11.2.bb} (100%)
+ rename meta-python/recipes-extended/python-pyparted/{python3-pyparted_3.11.1.bb => python3-pyparted_3.11.2.bb} (100%)
+
+-- 
+2.7.4
+
 
