@@ -1,51 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 30FD77E9FE
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E33FA7E8F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 14:48:20 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id x15so1134969wmj.3
+	Tue,  2 Jul 2019 16:35:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45dVGX1PCcz23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jul 2019 07:48:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ipXjhSOAIMeNxv0AwvBV8H6OypRMrZkUIHkBqyqh3NI=;
-	b=fRIZO+KyDUCWRSU+cmYH1LN0aFjDml9MQh7PYyJ5auxlr7UAd/Znwj+bVTNOiZkIK6
-	XLyXoWzdGVTk60RMCmvgaZXgiBDgSKtvoB2du3+pEXCkfBBPHY5GSvM9FYITAomfP73f
-	liFqZxpMsX/DhgfQIrUiBt7NJ5/9/d8YOCeWGaAhZ5PAKE+uRzP9S2MhkF+XQcLiXy8E
-	agPQM09VzVzeCP+zAn1PSwX4Ol7Unb53EDgEkT4zCowA3SiwR+RyPmV+a6wojnNThMGw
-	6mMW5hiOC9rzR2vnjHk5GnvcWu7ndHHjBSFfA4pBfqQpLv3cvd3pqsZuFZ6kn00zT0D/
-	TKXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ipXjhSOAIMeNxv0AwvBV8H6OypRMrZkUIHkBqyqh3NI=;
-	b=AKmTF5AsbTkOMVACM7mCtcypqZJh0qbZadA3egGuw6IjbyANDsbCMChV5rYZf1ULE9
-	Ihlx7VjrslLffnuiPbMLqyRVA4TYu2sEgBh6pEgGI9G/17dUw1U5a1L7+QjXrk7XJrvU
-	NMLLca2/uNfYGNQ6nsPFXHGLrRq1m4KSfHXHj4M0J8Y/6twxKNVYCflLuqrkfAeF8wq+
-	9mvDq3phaRoAgE9kVLdpd+HeqMXnC/BeasLfieGJkn6xzqVDOY1NA9OYd/s9OSMJbjbV
-	OCKZ1zYQd8FHm5re8XWgjcPO1iHnozeGKcYzK/UGET04iWi4YvXBBs6Xgp91tIHg3pcI
-	6G+w==
-X-Gm-Message-State: APjAAAWnCtReO041lLML29IG06Fslmmli60mIRVP03rDGmFOvlpVVNbe
-	RG37A7PifH6t4Bg9RmDEcOStGbqk
-X-Google-Smtp-Source: APXvYqySR96wBj/S5uc++2xPlx7VtK33WsEnxi8LNNB5XjOJaBRM4tMgDBGt1zLuWKouoaeY/8TKqA==
-X-Received: by 2002:a1c:7d8e:: with SMTP id y136mr3644071wmc.16.1562078900635; 
-	Tue, 02 Jul 2019 07:48:20 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	l124sm3425336wmf.36.2019.07.02.07.48.20
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 02 Jul 2019 07:48:20 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue,  2 Jul 2019 18:35:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1562085332;
+	bh=53ZWFvtnDtLboU42KL6XnfovvnY8ckpNDw1MSphFWWo=;
+	h=From:To:Subject:Date:From;
+	b=WaBuofsI2tTDOOF+x4aRBnd1Ff52W8J2Xa1nWJvv8gQW+Xg0Os83K+As6sT7R9TRs
+	VA7+ZGdiSO+XN+g7trFTE6ayHl2wshvQFN7HEqMKsOgeg0jTD22vYBo7nkoIhquZFg
+	F3lMJPwzaw33j6LWQIPV8k53V2kVKBGqucrDmrsHBKJIpImFmnXYr1upeyE8Sy8RET
+	RMAI1fl3B91WlnQU3rDfm3fnmML651cspSVjNjgX7fPjxb+QpCtdsB0RBjw7Ir39o6
+	S3WngYYl1MXJnKAk48dNLQi1w5DOrL5eSobFKa5v9JnkhPnMJws55zrhP7sImuJg7Y
+	9O9I8w5x3+ppYhx7WbPKyWy0KKh69Ng7TEAqOiWt5VS6eovNXlsr/+Wej9lzUvilga
+	m9QCEI320rmfUekkdVinW0ZlJ0qagoTc4qHl1rZBXqSZP/8+NCQ1FjhfhQGuavJvuc
+	i80rTWXlj8UEN5InS1z9He0BvwB89Rjy1UtrL+f4gP0Ops1n3PSwAPMIZRxqsG6Rt5
+	xkud7ouK+lpXabFnIuPOoAtvVDM8MKjA2rMcgC9O9jI8AgvQXBT9Pv88BGZzKuAOPP
+	OAYSryTTjzpvvIRJJ3X60zLO3SO0n38ReKTrOTaErUc0UdrEpwKiGt1jeXMxURqsVb
+	qxbU5Iel8iyHCid4I73JfUYI=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jul 2019 14:48:16 +0000
-Message-Id: <20190702144816.7520-3-Martin.Jansa@gmail.com>
+Date: Tue,  2 Jul 2019 19:35:31 +0300
+Message-Id: <20190702163531.14061-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190702144816.7520-1-Martin.Jansa@gmail.com>
-References: <20190702144816.7520-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb and util-linux for phoronix-test-suite
+Subject: [meta-oe][PATCH] cpprest: Fix build failure with gcc 8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 14:48:20 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 16:35:32 -0000
 
-* phoronix-test-suite is allarch, but util-linux and lsb aren't
-   === Comparing signatures for task do_package_write_ipk.sigdata between qemux86 and qemux86copy ===
-  ERROR: phoronix-test-suite different signature for task do_package_write_ipk.sigdata between qemux86 and qemux86copy
-  Hash for dependent task lsb/lsb_5.0.bb.do_packagedata changed from 7baca400e354b600fe967ea615032052 to 67888a6c7511339a873b547745287ef2
+The workaround for gcc 9 broke building with gcc 8:
+     cc1plus: error: -Werror=deprecated-copy: no option -Wdeprecated-copy
+     cc1plus: error: -Werror=redundant-move: no option -Wredundant-move
+     ninja: build stopped: subcommand failed.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-Werror is often problematic in distribution builds,
+disable it globally and permanently.
+
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-oe/conf/layer.conf | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 31f2f17fc8..4ddef29a3d 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -49,6 +49,9 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   phoronix-test-suite->bash \
-   phoronix-test-suite->python \
-   phoronix-test-suite->php \
-+  phoronix-test-suite->lsb \
-+  phoronix-test-suite->util-linux \
-+  phoronix-test-suite->busybox \
- "
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb
+index 070451211..3e42a002e 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.13.bb
+@@ -18,6 +18,4 @@ S = "${WORKDIR}/git"
  
- # ttf.inc inherits fontcache which adds fontconfig-utils to RDEPENDS
+ inherit cmake pkgconfig
+ 
+-# Temporary until https://github.com/Microsoft/cpprestsdk/issues/1099
+-# is fixed properly
+-CXXFLAGS += "-Wno-error=deprecated-copy -Wno-error=redundant-move"
++CXXFLAGS += "-Wno-error"
 -- 
 2.17.1
 
