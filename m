@@ -1,29 +1,44 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 67B377E726
+Return-Path: <jupiter.hce@gmail.com>
+Received: from mail-io1-f44.google.com (mail-io1-f44.google.com
+	[209.85.166.44])
+	by mail.openembedded.org (Postfix) with ESMTP id F36547E726
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 01:27:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x621RbTu023354
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Jul 2019 18:27:37 -0700 (PDT)
-Received: from [128.224.162.157] (128.224.162.157) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Mon, 1 Jul 2019 18:27:36 -0700
-To: Adrian Bunk <bunk@stusta.de>
-References: <1561643269-130343-1-git-send-email-hongxu.jia@windriver.com>
-	<20190628100721.GB18526@localhost>
-	<0b346c3b-22e5-2e09-3a81-d199e5c8591a@windriver.com>
-	<20190701125529.GB7483@localhost>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <3ae724ee-85b4-af57-0437-d6be2169874f@windriver.com>
-Date: Tue, 2 Jul 2019 09:27:34 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.0
+	Tue,  2 Jul 2019 01:27:44 +0000 (UTC)
+Received: by mail-io1-f44.google.com with SMTP id n5so33262012ioc.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Jul 2019 18:27:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=s9ay9OgD+8uo+9PRMuFqGwo5nlGByL05y+qkt8AWkko=;
+	b=ArNBmnX286EjV7IaRfkIsdHqJgIIz6Xl6B32SraTCd2odbvvjDJUdaLTPitFQosniy
+	iQO0+TeCpY/vjrU+uM0vuFyRcXe/rgMAWoCsgXwhf1Hd3eafhomtS0kBcmrvzqdOVnfg
+	GzJri8pdiCQsMjrhU4qdz1rWudj36pM2NBC6mSdKJR51qRh8R00ar2UUthl0vZ+avWWW
+	Huhy7L38oxHVdAwOOH0QjtsY2tmlFYFvhyj3YRIR2hApwBX8JlKnZqjoqzxBVfAWS3gO
+	OOkgZeCZmPVB62BAcFC6URBWe5gExWr/bkyvoawiJlAgX8jO1GTgmWRRrNIVW/+sKl7x
+	9nyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=s9ay9OgD+8uo+9PRMuFqGwo5nlGByL05y+qkt8AWkko=;
+	b=KCmGBeKBrENr99IGiJgd48B5/qha38f/R25yG4slssCrwAvhjW/h3S4xa4h1Rz6Sjm
+	IuUJzP9irLeWRONeaHQzlWc+iPD4f8PP50sfWCGmIQRQTdfuXvnDG5T0XKYKehLP/37m
+	mhwuACZ8GMaU1m5Hcz++BxSa4rxTtOOJcUFtR3rhDgJH2a4m1VpLf8JlmrdwLZzendPJ
+	4NZK095kQq6mJ/yt1wzo4jXLKd6jcSBuFNnlmXRsaQ1rQVhM1coJJeIEGQ85pE07mV35
+	N0nIKJ2RDydowFluAbbqoy9jCVxwr783vZSNizCzdxHll2cdYr6iteAd7G9k8ZnT13Y/
+	jVYA==
+X-Gm-Message-State: APjAAAU6A3Uj5QNdBTU4h1jAuE1zVod/9Sth2SjMSGV2N1j7stTnTVs8
+	dX+xE0f33Pe4rDvajBxjojpIao+9uD8i9axoer6fFv8J
+X-Google-Smtp-Source: APXvYqwsFKKufSWF6THk6q9eAHrCvtBvQR7rYIi5TV3S6kn1CH7hzo2J4DuIMZFYvSrOmT7iQdZ38Q1AgwuejtWoIT0=
+X-Received: by 2002:a02:230a:: with SMTP id u10mr5451803jau.117.1562030865929; 
+	Mon, 01 Jul 2019 18:27:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190701125529.GB7483@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkmanager: goodbye libnm-glib
+Received: by 2002:ac0:8a3d:0:0:0:0:0 with HTTP;
+	Mon, 1 Jul 2019 18:27:45 -0700 (PDT)
+From: JH <jupiter.hce@gmail.com>
+Date: Tue, 2 Jul 2019 11:27:45 +1000
+Message-ID: <CAA=hcWS+-bC8S+90VqbRMW2wpTz2Rfv7umxKSHovQXWD2K6imA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Allow choose of U-Boot config for machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,95 +51,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:27:36 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 02 Jul 2019 01:27:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 7/1/19 8:55 PM, Adrian Bunk wrote:
-> On Fri, Jun 28, 2019 at 10:57:02PM +0800, Hongxu Jia wrote:
->> On 6/28/19 6:07 PM, Adrian Bunk wrote:
->>> On Thu, Jun 27, 2019 at 09:47:49AM -0400, Hongxu Jia wrote:
->>>> Since commit [061953143 networkmanager: Update to 1.18.0] applied,
->>>> upstream disable libnm-glib by default. And in further networkmanager,
->>>> upstream removes libnm-glib, libnm-glib-vpn, and libnm-util for good
->>>> ...
->>> Any strong reason for removing this already now?
->> Make sure to clean up empty package, in 1.18
->>
->> libnm-glib is already disabled, and left three empty
->>
->> packages(no package generated acturally). I found
->>
->> the issue, trace the reason and provide fix
-> What problem does this issue cause?
+Hi,
 
-This is the fix on meta-anaconda, if you do not like to remove
+I am running BitBake Build Tool Core version 1.40.0, originally I
+built an image on imx6ullevk booting from SD card, I am building a new
+image for a customized i.MX6ULL board booting from NAND. The following
+link commented by Otavio Salvador for a patch to allow user to use
+UBOOT_CONFIG=nand either in local.conf or command line. Given the
+patch was many years old, I think that the current version is able to
+support UBOOT_CONFIG=nand either in local.conf or command line, there
+is no need to run the patch, is that correct?
 
-libnm-glib in this version, please do it in next upgrading
+http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082284.html
 
-...
+Thank you.
 
-commit 270a8f01c17941f73539f22e131b9df6f3af81c3
-Author: Hongxu Jia <hongxu.jia@windriver.com>
-Date:   Thu Jun 27 13:37:54 2019 +0000
+Kind regards,
 
-     python3-anaconda: do not runtime depends on libnmutil libnmglib 
-libnmglib-vpn
-
-     Since commit [061953143 networkmanager: Update to 1.18.0] applied 
-in OE,
-     upstream networkmanager  disable libnm-glib by default. And in 
-further networkmanager,
-     upstream networkmanager removes libnm-glib, libnm-glib-vpn, and 
-libnm-util for good
-
-https://github.com/NetworkManager/NetworkManager/commit/df58895fb3479c4f00b9107126759d138250fef2
-https://github.com/NetworkManager/NetworkManager/commit/5801f89f4d1464fc15cb1d97755b73f9f68cb2e6
-
-     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-
-diff --git a/recipes-installer/anaconda/python3-anaconda_28.22.11.bb 
-b/recipes-installer/anaconda/python3-anaconda_28.22.11.bb
-index 32770e3..96aa201 100755
---- a/recipes-installer/anaconda/python3-anaconda_28.22.11.bb
-+++ b/recipes-installer/anaconda/python3-anaconda_28.22.11.bb
-@@ -42,7 +42,7 @@ RDEPENDS_${PN} = "e2fsprogs e2fsprogs-e2fsck 
-e2fsprogs-mke2fs \
-                     python3-systemd python3-pydbus python3-simpleline \
-                  "
-
--RDEPENDS_${PN} += "networkmanager libnmutil libnmglib libnmglib-vpn \
-+RDEPENDS_${PN} += "networkmanager \
-                     network-manager-applet \
-
-...
-
-//Hongxu
-
-
->
->> You may note original PACKAGECONFIG[glib] does not have
->>
->> without option, so clean up it rather than add missing without option
->>
->> PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
-> That is actually fine and doesn't need a fix - the library is only built
-> if explicitely requested --with-libnm-glib.
->
->>> It's gone in 1.20 so removal then is clear, but if someone wants
->>> to use it for legacy code with 1.18 this should stay possible as
->>> long as <= 1.18 is shipped.
->> I think it will be upgraded 1.20 soon, and if someone wants
->>
->> to use legacy code, I think 1.16 in warrior is better choose
->>
->> which libnm-glib is always enabled
-> "soon" might be after Yocto 2.8 branches.
->
->> //Hongxu
-> cu
-> Adrian
->
-
+- JH
 
