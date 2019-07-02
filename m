@@ -1,26 +1,33 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A96E7EB0E
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E6D5B7EB12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 13:31:57 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x62DVwJl003056
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Tue,  2 Jul 2019 13:38:14 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45dQKz03Vhz3t
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Jul 2019 15:31:58 +0200
-Received: from dev.vm6.ccp.siemens.com (md1wg6qc.ad001.siemens.net
-	[163.242.44.88])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id x62DVwMK013857;
-	Tue, 2 Jul 2019 15:31:58 +0200
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id A02D574B930;
-	Tue,  2 Jul 2019 15:31:57 +0200 (CEST)
-From: Andrej Valek <andrej.valek@siemens.com>
+	Tue,  2 Jul 2019 15:38:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1562074695;
+	bh=mpxHYsRn8yLX6lfQgAjuwmLSWea0koEEvjDGacP8deQ=;
+	h=From:To:Subject:Date:From;
+	b=Uh583qerbT+eba5VpgHjFJavUbSpWCHNfw1+3Fai3Ldw9Vvr+8YqIikFcDRvcWX1e
+	56KVcGsqPrNYa2vnIIAhbeP0WDfg00qwLWdfpY20O7z1PAR53hnssZGqrbZP6rpibT
+	q2zKGdYJvrJ8Q6imFgT8eU/C/bHbpOaSDZpF4XArYIjqrWKTc/h/FljWD0a5cT59bi
+	fWyxtbnIxmy9+x/KK9Sn+i/LHyZv9Zirzz76JoqOxNl2xc8rujah6Vput0Vwy0JzXW
+	Qpp0U4oh6ecTRNcWNtIHGdqPIdaPoLOd6F4irdHPdQkkH4yJXiWxErQ3HNXPDGk1+R
+	0GpMCs03WBHrAdmGgPgW6ZWFuF5q5Kmv9LPlwtqDBelyQ/wQqj6XjN2qwj9jsRuCQX
+	eBhg7F8QCM30WRgFtZf0TP9kkICTohnH2c2oh/h2p6Gdx7SWGj1alEt5dkvcDtoeKT
+	iWDXeU1xxZA7rZO2o9kH8FSlduZtpIdPrmtoj9naBgyhikGbKItpC0RnLySLax/rkK
+	GDd1KtjbFBkfy7+ShuIBx7vL0OhdFEKsTOCAbu4Kq1Kk5VXc+x/vhx6WCK2yQoCXt1
+	hK8TvWTVLypgYV3BjTHe5BbPSfRFdnGHwasOTS8Biy3JbLIyEFBqdjVJNk4M1HvPVY
+	ld0yHZBqML0DJwXhVu83Gvxk=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jul 2019 15:31:47 +0200
-Message-Id: <20190702133147.30986-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] nodejs: 10.15.3 -> 10.16.0
+Date: Tue,  2 Jul 2019 16:38:14 +0300
+Message-Id: <20190702133814.26787-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] packagegroup-tools-bluetooth: Remove bluez4 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,76 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 13:31:58 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 13:38:15 -0000
 
-Update nodejs to active 10.x LTS release 10.16.0.
-- make dependencies configurable
-License checksum changed due to added bundled dependencies to:
-- siphash
-- large_pages
-- brotli
+bluez4 was removed 2 years ago.
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../nodejs/{nodejs_10.15.3.bb => nodejs_10.16.0.bb}     | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_10.15.3.bb => nodejs_10.16.0.bb} (89%)
+ .../packagegroups/packagegroup-tools-bluetooth.bb     | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
-similarity index 89%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
-index d2e77ea0d..aaa1da0aa 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.15.3.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=9ceeba79eb2ea1067b7b3ed16fff8bab"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=be980eb7ccafe287cb438076a65e888c"
+diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+index 913e31111..2b4448a22 100644
+--- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
++++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+@@ -6,17 +6,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
+                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
  
--DEPENDS = "openssl zlib icu"
-+DEPENDS = "openssl"
- DEPENDS_append_class-target = " nodejs-native"
+ SUMMARY = "Set of Bluetooth related tools for inclusion in images"
+-DESCRIPTION = "Includes bluetooth specific tools for this version of BlueZ.\
+-These tools are used at runtime. \
+-Supports BlueZ4 and BlueZ5."
++DESCRIPTION = "Includes bluetooth specific tools for BlueZ.\
++These tools are used at runtime."
  
- inherit pkgconfig
-@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
-            "
+ inherit packagegroup
+-inherit bluetooth
+-
+-RDEPENDS_bluez4 = " \
+-    obexftp \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'libasound-module-bluez', '', d)} \
+-"
  
--SRC_URI[md5sum] = "d76210a6ae1ea73d10254947684836fb"
--SRC_URI[sha256sum] = "4e22d926f054150002055474e452ed6cbb85860aa7dc5422213a2002ed9791d5"
-+SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
-+SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -49,16 +49,21 @@ ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
- GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
- ARCHFLAGS ?= ""
- 
-+PACKAGECONFIG ??= "zlib icu"
-+PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
-+PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
-+
- # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
- do_configure () {
-     rm -rf ${S}/deps/openssl
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--   ./configure --prefix=${prefix} --with-intl=system-icu --without-snapshot --shared-openssl --shared-zlib \
-+   ./configure --prefix=${prefix} --without-snapshot --shared-openssl \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
-                --dest-os=linux \
--               ${ARCHFLAGS}
-+               ${ARCHFLAGS} \
-+               ${PACKAGECONFIG_CONFARGS}
- }
- 
- do_compile () {
+ RDEPENDS_bluez5 = " \
+     bluez5-noinst-tools \
 -- 
-2.11.0
+2.17.1
 
 
