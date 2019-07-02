@@ -1,48 +1,23 @@
-Return-Path: <jupiter.hce@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 2313B7D476
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6303F7E7BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 01:55:34 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id u19so24852994ior.9
+	Tue,  2 Jul 2019 01:58:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x621wDqo026387
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Jul 2019 18:55:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=cOXM2Gy/JFkdw66z843vLKwnnUogPhSOqINhvJF21oM=;
-	b=UL6Bqe4sD6Q1qbRYvFw0z4bTGkBcwyeXdt1fTfpWWIS9MRpe3j2c5d+gSZRvS9Cv97
-	ae0W9jp8sDWYxQjqOx8sYhtRHLtOrxtGU7vIVePdyP0VmLkixibQpKK6jMfNiTuvcORT
-	C7krXQtZCKOy1SczzBNihDIgN2KgeRfjU9RuIgIT+xXztw0vltROFiydxtXh0mqK+3wN
-	8yQoFrgKUM1JJa1J2nnd2Ua3i3yt+wQeGgOPrAOQXQywIP5Aw2Vr8haehQ5FF3QmES8/
-	IhYsRko1nBrzLjmOLy1TNrD4MbTkA2xp3M+w2SgqGlwAQgEmvymYujKxm9BxNwlinmjp
-	B7Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=cOXM2Gy/JFkdw66z843vLKwnnUogPhSOqINhvJF21oM=;
-	b=oTU4QU+/9V54YsGI2Oc9UDVSBI41590Iz2mk5A97JAcxbKTb6plafR8+Jah+vP7toe
-	GexXpQlwgIRIHhUBWG3yy/x7V9eAcTMHJ08oVASWCNhUB9zosHIV/kV1bb+Mda/LiaYj
-	Xf1X9kAbRICz1b45JBDk1T3ZSCfVNosjafzbKyypPtt+SCsKHpHgKws9R7ZXqc3BnLHs
-	aZJ4Nt5GLKQZtIT2Oy+KGbBzO/iBs77nex/POI47LpI/T0wJueESCZlCjhEuIvxBpUkT
-	8C86rIkw7HO4Dx8OyaWZWqLaAcM5Ub6nbrn0fIJuplzpDhMi3+bf6ywpBZVI62VIQS/1
-	SvsQ==
-X-Gm-Message-State: APjAAAVWEVOiWJVmdiQBS3kVSLQDizv/VdlAcDb6XarDJeRedoYUo0di
-	h5zQhkddtQVFajkAU7OBUU9IYbjblz5cSCqZK5NYRCjU
-X-Google-Smtp-Source: APXvYqx1rUVCJptvNj0mPxKx7dnywz3mSidVr++FgPrg2JRsz23yfoCF6g1f2C9O6VXNUv5Adiq2KUTstX8Wo5xdP1Q=
-X-Received: by 2002:a5e:db02:: with SMTP id q2mr14026820iop.306.1562032535964; 
-	Mon, 01 Jul 2019 18:55:35 -0700 (PDT)
+	Mon, 1 Jul 2019 18:58:13 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.439.0; Mon, 1 Jul 2019 18:58:13 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 2 Jul 2019 09:58:05 +0800
+Message-ID: <1562032691-128301-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 2002:ac0:8a3d:0:0:0:0:0 with HTTP;
-	Mon, 1 Jul 2019 18:55:35 -0700 (PDT)
-In-Reply-To: <CAA=hcWS-tgsh2Yyx6oZOjkiSKS0WPh9Z6nrhsiCzWScwWpuGOQ@mail.gmail.com>
-References: <CAA=hcWS+-bC8S+90VqbRMW2wpTz2Rfv7umxKSHovQXWD2K6imA@mail.gmail.com>
-	<CAA=hcWS-tgsh2Yyx6oZOjkiSKS0WPh9Z6nrhsiCzWScwWpuGOQ@mail.gmail.com>
-From: JH <jupiter.hce@gmail.com>
-Date: Tue, 2 Jul 2019 11:55:35 +1000
-Message-ID: <CAA=hcWTMO58OJmo2hqfMWqHKxB53XYzveKb2mULztW7BLiJYjA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Allow choose of U-Boot config for machine
+Subject: [meta-networking][PATCH 0/6 V2] Upgrade 5 packages build with waf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +30,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:55:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 02 Jul 2019 01:58:12 -0000
+Content-Type: text/plain
 
-ERROR: Unable to start bitbake server (None)
---- Starting bitbake server pid 2673 at 2019-07-02 11:54:24.011086 ---
-ERROR: local.conf:34: unparsed line: 'UBOOT_CONFIG=nand'
+From: Changqing Li <changqing.li@windriver.com>
+
+1. refer below link:
+https://github.com/samba-team/samba/commit/63d20d7822ead1626f7cb41fdbae6c9300893314#diff-ddc0f7d4ad007f8ee36297b5887dcd24
+waf switch to default use python3, so switch waf-samba.bbclass to python3 
+and also upgrade 5 recipes that use waf to switch to python3
+2. After upgrade, waf have a bug when cross-compile, fix for all the recipe
 
 
-On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
-> Tried to add  UBOOT_CONFIG=nand to local.conf and from command line,
-> bitbake does not like it????
->
-> On 7/2/19, JH <jupiter.hce@gmail.com> wrote:
->> Hi,
->>
->> I am running BitBake Build Tool Core version 1.40.0, originally I
->> built an image on imx6ullevk booting from SD card, I am building a new
->> image for a customized i.MX6ULL board booting from NAND. The following
->> link commented by Otavio Salvador for a patch to allow user to use
->> UBOOT_CONFIG=nand either in local.conf or command line. Given the
->> patch was many years old, I think that the current version is able to
->> support UBOOT_CONFIG=nand either in local.conf or command line, there
->> is no need to run the patch, is that correct?
->>
->> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082284.html
->>
->> Thank you.
->>
->> Kind regards,
->>
->> - JH
->>
->
+Changqing Li (6):
+  waf-samba: switch to python3
+  libldb: upgrade 1.4.1 -> 1.5.4
+  libtevent: upgrade 0.9.37 -> 0.10.0
+  libtdb: upgrade 1.3.17 -> 1.4.0
+  libtalloc: upgrade 2.1.14 -> 2.2.0
+  samba: upgrade 4.8.12 -> 4.10.5
+
+ meta-networking/classes/waf-samba.bbclass          |  6 +-
+ .../waf-cross-answers/cross-answers-aarch64.txt    |  1 +
+ .../waf-cross-answers/cross-answers-aarch64_be.txt |  1 +
+ .../files/waf-cross-answers/cross-answers-arm.txt  |  1 +
+ .../waf-cross-answers/cross-answers-armeb.txt      |  1 +
+ .../files/waf-cross-answers/cross-answers-i586.txt |  1 +
+ .../files/waf-cross-answers/cross-answers-i686.txt |  1 +
+ .../files/waf-cross-answers/cross-answers-mips.txt |  1 +
+ .../waf-cross-answers/cross-answers-mips64.txt     |  1 +
+ .../waf-cross-answers/cross-answers-mips64el.txt   |  1 +
+ .../waf-cross-answers/cross-answers-mipsel.txt     |  1 +
+ .../waf-cross-answers/cross-answers-powerpc.txt    |  1 +
+ .../waf-cross-answers/cross-answers-powerpc64.txt  |  1 +
+ .../waf-cross-answers/cross-answers-riscv64.txt    |  1 +
+ .../waf-cross-answers/cross-answers-x86_64.txt     |  1 +
+ .../0001-samba-fix-musl-lib-without-innetgr.patch  | 42 +++++++++++
+ .../0001-waf-add-support-of-cross_compile.patch    | 62 +++++++++++++++
+ ...-import-target-module-while-cross-compile.patch | 59 ++++++++-------
+ .../21-add-config-option-without-valgrind.patch    | 48 +++++-------
+ .../samba/samba/glibc_only.patch                   | 29 ++++++--
+ .../samba/{samba_4.8.12.bb => samba_4.10.5.bb}     | 52 ++++++-------
+ .../libldb/0001-libldb-fix-config-error.patch      | 87 ----------------------
+ .../0001-waf-add-support-of-cross_compile.patch    | 62 +++++++++++++++
+ ...-import-target-module-while-cross-compile.patch | 56 +++++++-------
+ .../{options-1.4.1.patch => options-1.5.4.patch}   | 67 +++++++----------
+ .../libldb/{libldb_1.4.1.bb => libldb_1.5.4.bb}    | 24 +++---
+ .../0001-waf-add-support-of-cross_compile.patch    | 62 +++++++++++++++
+ .../{options-2.1.14.patch => options-2.2.0.patch}  | 47 ++++++------
+ .../{libtalloc_2.1.14.bb => libtalloc_2.2.0.bb}    | 13 +++-
+ ...akefile-fix-problem-that-waf-cannot-found.patch | 35 ---------
+ .../libtdb/do-not-check-xsltproc-manpages.patch    | 15 ----
+ .../tdb-Add-configure-options-for-packages.patch   | 33 ++++----
+ .../libtdb/{libtdb_1.3.17.bb => libtdb_1.4.0.bb}   | 21 ++++--
+ .../0001-waf-add-support-of-cross_compile.patch    | 62 +++++++++++++++
+ .../{options-0.9.36.patch => options-0.10.0.patch} | 62 +++++++--------
+ .../{libtevent_0.9.37.bb => libtevent_0.10.0.bb}   | 26 +++++--
+ 36 files changed, 580 insertions(+), 404 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-samba-fix-musl-lib-without-innetgr.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-connectivity/samba/{samba_4.8.12.bb => samba_4.10.5.bb} (89%)
+ delete mode 100644 meta-networking/recipes-support/libldb/libldb/0001-libldb-fix-config-error.patch
+ create mode 100644 meta-networking/recipes-support/libldb/libldb/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libldb/libldb/{options-1.4.1.patch => options-1.5.4.patch} (79%)
+ rename meta-networking/recipes-support/libldb/{libldb_1.4.1.bb => libldb_1.5.4.bb} (79%)
+ create mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libtalloc/libtalloc/{options-2.1.14.patch => options-2.2.0.patch} (87%)
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.14.bb => libtalloc_2.2.0.bb} (80%)
+ delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
+ delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.3.17.bb => libtdb_1.4.0.bb} (71%)
+ create mode 100644 meta-networking/recipes-support/libtevent/libtevent/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libtevent/libtevent/{options-0.9.36.patch => options-0.10.0.patch} (82%)
+ rename meta-networking/recipes-support/libtevent/{libtevent_0.9.37.bb => libtevent_0.10.0.bb} (60%)
+
+-- 
+2.7.4
+
 
