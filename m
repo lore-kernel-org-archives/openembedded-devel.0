@@ -1,26 +1,50 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A60497E999
+Return-Path: <erik.boto@gmail.com>
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D51F27EABC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 01:59:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x621wnwx025039
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  2 Jul 2019 06:05:18 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id b11so10463978lfa.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Jul 2019 18:58:59 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.439.0; Mon, 1 Jul 2019 18:58:39 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 2 Jul 2019 09:58:09 +0800
-Message-ID: <1562032691-128301-5-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1562032691-128301-1-git-send-email-changqing.li@windriver.com>
-References: <1562032691-128301-1-git-send-email-changqing.li@windriver.com>
+	Mon, 01 Jul 2019 23:05:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S5PJ4L6OV/cRBIWCi82FDVC+ZllNzf+ixJnqS3TdsHQ=;
+	b=TCoVKvUN6qUEAilwGscDsC51LGauQ0gTknBxCZBD8yY4E7IQr0Bwl22B+ErX+KZcFz
+	jN3/vHXvxY9UvKI84701JKrokolXDthrYB5ekCUfMxb0Bv8S9CMjPWhZfkswJfFm6aFb
+	RFqZidCTZWnXo/euPtAs2mMHw9AVMise+hpyypsR/HrsZ9EaeplNHiDXcKfe8+GLLiTZ
+	7xtPb4XIwUBpQ7XWRJxXG81d8UqcnwMRRoVB49ooGFx9uXJ3CF6DhU6UB/pvM44I9EEi
+	UCk1m1mWjw3gCG0MNRTz88s+Fra0z9nbXtwI2V+3NzyGqHiaPT5jTr2oBJVZjTU5r1nI
+	Q9jA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S5PJ4L6OV/cRBIWCi82FDVC+ZllNzf+ixJnqS3TdsHQ=;
+	b=GmsDCJi6UudB4LU4MXh4Vj5yzmotHP0OqRzvEpiz2Nha+NYHbpZsYxgPJO7lmtgPYt
+	D9xdkqTlKsAuxdISRYhXe3ddOQkxS1w0qmVoz4xyNZ0VDNCs30uGqDw1G1kfbQP6Olui
+	7WQ93gQW/bhUJDK3QwxgnwT1dJ5l5XYGPizLcxFXwmlqWd2ZwX2U47W0g/qV4rJpzhCd
+	PYVQugjU2BlEnhQhS/3B8gWaErUaXknYF6LbUv9sqyWU2kt/PaX34Pl4wywgz3+qQkmY
+	PdYl5Y0kKGESQzXiVfbeuVKVf/V6JTjgPfE5Jet046W1A6Fp17saq5k2QocX8mkjmxIV
+	ieqg==
+X-Gm-Message-State: APjAAAWmnQnTl1WsdAMCTwmQbomTFMNQ85XHpLOXxDNatR+UrQct8FaY
+	qioFYI4anDWxkYOHR39Nv5y+DHXR5X0=
+X-Google-Smtp-Source: APXvYqyH40Zc4i9fZhSLXop7Knw53rEBz3CSPeP6FfDMd47Bn3tTduq9+eCraaLs+Ek83f8vZVyaZQ==
+X-Received: by 2002:a19:c301:: with SMTP id t1mr14070108lff.137.1562047519070; 
+	Mon, 01 Jul 2019 23:05:19 -0700 (PDT)
+Received: from localhost.localdomain (90-231-37-116-no154.tbcn.telia.com.
+	[90.231.37.116])
+	by smtp.gmail.com with ESMTPSA id h4sm3645913ljj.31.2019.07.01.23.05.18
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 01 Jul 2019 23:05:18 -0700 (PDT)
+From: =?UTF-8?q?Erik=20Bot=C3=B6?= <erik.boto@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Jul 2019 08:05:15 +0200
+Message-Id: <20190702060515.123130-1-erik.boto@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 4/6 V2] libtdb: upgrade 1.3.17 -> 1.4.0
+Subject: [meta-oe][PATCH] paho-mqtt-c: enable SSL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,226 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:59:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Jul 2019 06:05:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+Pass the option PAHO_WITH_SSL=ON when invoking cmake in order to enable
+the build of the SSL variants of the libraries.
 
-1. switch to python3
-2. fix cross-compile problem caused by waf
-3. refresh patches
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Erik Botö <erik.boto@gmail.com>
 ---
- ...akefile-fix-problem-that-waf-cannot-found.patch | 35 ----------------------
- .../libtdb/do-not-check-xsltproc-manpages.patch    | 15 ----------
- .../tdb-Add-configure-options-for-packages.patch   | 33 ++++++++------------
- .../libtdb/{libtdb_1.3.17.bb => libtdb_1.4.0.bb}   | 21 ++++++++-----
- 4 files changed, 26 insertions(+), 78 deletions(-)
- delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
- delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
- rename meta-networking/recipes-support/libtdb/{libtdb_1.3.17.bb => libtdb_1.4.0.bb} (71%)
+ meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
-deleted file mode 100644
-index 10f2ef8..0000000
---- a/meta-networking/recipes-support/libtdb/libtdb/0001-Makefile-fix-problem-that-waf-cannot-found.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 7205761d654636a6c1fad03a3ca40d38e253e192 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Fri, 25 Jan 2019 16:01:07 +0800
--Subject: [PATCH] Makefile: fix problem that waf cannot found
--
--tdb is subfolder of samba, but it can also build independently.
--so both path need to be added into PATH
--
--Upsteam-Status: Inappropriate [oe specific]
--
--Fix reject by upstream since upsteam need to support both python2/3,
--so drop add append PATH. refer link:
--https://gitlab.com/samba-team/samba/merge_requests/209
--https://gitlab.com/samba-team/samba/merge_requests/211
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- Makefile | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile b/Makefile
--index 3e70146..64bb393 100644
----- a/Makefile
--+++ b/Makefile
--@@ -1,6 +1,6 @@
-- # simple makefile wrapper to run waf
-- 
---WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf
--+WAF_BINARY=PATH=buildtools/bin:../../buildtools/bin:$$PATH waf
-- WAF=PYTHONHASHSEED=1 WAF_MAKE=1 $(WAF_BINARY)
-- 
-- all:
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch b/meta-networking/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
-deleted file mode 100644
-index bcc45c9..0000000
---- a/meta-networking/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
-+++ /dev/null
-@@ -1,15 +0,0 @@
--Don't check manpages for xsltproc.
--
--Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
--
----- tdb-1.3.0.orig/wscript	2015-04-22 09:52:32.366000222 +0900
--+++ tdb-1.3.0/wscript	2015-04-22 09:51:57.720000205 +0900
--@@ -90,7 +90,7 @@ def configure(conf):
--         not conf.env.disable_tdb_mutex_locking):
--         conf.define('USE_TDB_MUTEX_LOCKING', 1)
-- 
---    conf.CHECK_XSLTPROC_MANPAGES()
--+    conf.find_program('xsltproc', var='XSLTPROC')
-- 
--     if not conf.env.disable_python:
--         # also disable if we don't have the python libs installed
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-index e6e1023..481fd68 100644
---- a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-+++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-@@ -1,6 +1,6 @@
--From 13bbc851d9fd7396f087758e614abba60eeb2aad Mon Sep 17 00:00:00 2001
-+From 71a10c176c34da898c0169371b3c1b032d2f88b1 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
--Date: Wed, 23 Jan 2019 10:14:05 +0800
-+Date: Wed, 19 Jun 2019 17:53:34 +0800
- Subject: [PATCH] tdb: Add configure options for packages
- 
- Add configure options for the following packages:
-@@ -15,22 +15,16 @@ Upstream-Status: Inappropriate [oe deterministic build specific]
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
- 
--Update for libtdb_1.3.14.
-+Update to 1.4.0
- 
--Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
--
--Update for libtdb_1.3.16
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
--
--Update for libtdb_1.3.17
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-- lib/replace/wscript | 95 ++++++++++++++++++++++++++++++++++++++++-------------
-+ lib/replace/wscript | 94 ++++++++++++++++++++++++++++++++++++++++-------------
-  wscript             |  6 ++++
-- 2 files changed, 79 insertions(+), 22 deletions(-)
-+ 2 files changed, 78 insertions(+), 22 deletions(-)
- 
- diff --git a/lib/replace/wscript b/lib/replace/wscript
--index 6cbae93..7aeaf46 100644
-+index 1d01e1e..2336dc3 100644
- --- a/lib/replace/wscript
- +++ b/lib/replace/wscript
- @@ -25,6 +25,41 @@ def options(opt):
-@@ -104,26 +98,26 @@ index 6cbae93..7aeaf46 100644
- +        conf.CHECK_HEADERS('sys/capability.h')
- +
-      conf.CHECK_HEADERS('port.h')
--     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
-+     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
-      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
--@@ -110,8 +158,10 @@ def configure(conf):
-+@@ -110,9 +158,10 @@ def configure(conf):
-      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
-      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
-  
- -    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
- -    conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
-+-    conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
- +    if Options.options.enable_valgrind:
- +        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
- +        conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
- +
--     conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
-      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
-      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
--@@ -379,21 +429,22 @@ def configure(conf):
--     conf.CHECK_FUNCS('prctl dirname basename')
-+     conf.CHECK_HEADERS('syscall.h sys/syscall.h inttypes.h')
-+@@ -380,20 +429,21 @@ def configure(conf):
-  
-      strlcpy_in_bsd = False
---
-+ 
- -    # libbsd on some platforms provides strlcpy and strlcat
- -    if not conf.CHECK_FUNCS('strlcpy strlcat'):
- -        if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
-@@ -138,7 +132,6 @@ index 6cbae93..7aeaf46 100644
- -
- -    if not conf.CHECK_FUNCS('closefrom'):
- -        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
--+    
- +    if Options.options.enable_libbsd:
- +        # libbsd on some platforms provides strlcpy and strlcat
- +        if not conf.CHECK_FUNCS('strlcpy strlcat'):
-@@ -158,7 +151,7 @@ index 6cbae93..7aeaf46 100644
-      conf.CHECK_CODE('''
-                  struct ucred cred;
- diff --git a/wscript b/wscript
--index bc5ee26..9ac10b6 100644
-+index 5598d02..8d47244 100644
- --- a/wscript
- +++ b/wscript
- @@ -69,6 +69,12 @@ def options(opt):
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb
-similarity index 71%
-rename from meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb
-rename to meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb
-index 4c7755c..acc94d9 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.3.17.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb
-@@ -7,14 +7,12 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
-                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
- 
- SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
--           file://do-not-check-xsltproc-manpages.patch \
-            file://tdb-Add-configure-options-for-packages.patch \
-            file://0001-waf-add-support-of-cross_compile.patch \
--           file://0001-Makefile-fix-problem-that-waf-cannot-found.patch \
- "
- 
--SRC_URI[md5sum] = "519d373ac72a66b0a2739dbb495de127"
--SRC_URI[sha256sum] = "1cb4399394c60a773430ca54848359adcf54fb6f136afdcfcbbe62b5f4245614"
-+SRC_URI[md5sum] = "c4c2f8cf9e691244a7f2ecfa3baadecc"
-+SRC_URI[sha256sum] = "c1a0729c5400fb495465fa4bd953ae290db43c28dacd0506aef50dc482132d35"
- 
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
-@@ -42,11 +40,18 @@ EXTRA_OECONF += "--disable-rpath \
-                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
-                 "
- 
--PACKAGES += "tdb-tools python-tdb"
-+do_install_append() {
-+     # add this link for cross check python module existence. eg: on x86-64 host, check python module
-+     # under recipe-sysroot which is mips64.
-+     cd ${D}${PYTHON_SITEPACKAGES_DIR}; ln -s tdb.*.so tdb.so
-+}
- 
--RPROVIDES_${PN}-dbg += "python-tdb-dbg"
-+PACKAGES += "tdb-tools python3-tdb"
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.0.bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.0.bb
+index 79a8f43d7..f3086315d 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.0.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.0.bb
+@@ -26,3 +26,5 @@ do_install_append() {
+     rm -rf ${D}${prefix}/samples
+     find ${D}${prefix} -maxdepth 1 -type f -delete
+ }
 +
-+RPROVIDES_${PN}-dbg += "python3-tdb-dbg"
- 
- FILES_${PN} = "${libdir}/*.so.*"
- FILES_tdb-tools = "${bindir}/*"
--FILES_python-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
--RDEPENDS_python-tdb = "python"
-+FILES_python3-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-+RDEPENDS_python3-tdb = "python3"
-+INSANE_SKIP_python3-tdb = "dev-so"
++EXTRA_OECMAKE = "-DPAHO_WITH_SSL=ON"
 -- 
-2.7.4
+2.20.1
 
 
