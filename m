@@ -1,48 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EA2B27E9FE
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 16CE27E9FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2019 14:48:17 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id s3so1130248wms.2
+	Tue,  2 Jul 2019 14:48:19 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id n4so18194829wrs.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jul 2019 07:48:19 -0700 (PDT)
+	Tue, 02 Jul 2019 07:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=5AFQ+yplpft1m4lMIRaO9u9jYAb1DIJwGnjxbjLcja8=;
-	b=bgWQSc9c7CnzQnnG1walrWg7/tDUQFoIQau8816FBJK8W6jvOqgWJm3wWX1EkLsRlv
-	jK7TIixFTEhw9H/PlqOS4VF49x6wMCD2b1wOGjm0OjiUeS/t1YqEGHARzDogzWZna9AT
-	Pag4BTGvHC26BH1znxaFdXl5hWEDVh2JmbEp77nbVKZFtwz/aqnJICFyA44iOiZWZPYv
-	yG07NHNuo92FhRyrKVF4Lr0w2lZMeKIQbZp5LMNv/jDsjufnjw7rqf+m+/O5PbUTZOup
-	7aF1f0EFIRUw+XnCFvwmdvdgacx9RK6iNqVz2JSyrTQRv0b3ReJjtJjK3CFG6eKQbYNt
-	+wMQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=wBDXDLFkhGS4swOIRQeaVXsNBatzXgM7Y2sJ5jyAKjQ=;
+	b=eQy/nMP6eHr7UxkWKpTACpaTPVFq14w1AlcMDM9XPgQUv1UXnUgd/DKDiD6AdltP9Q
+	JMZuPUXxjAlX6D1UwBXW9ZINDFPMypZOmEgfmQLl+SVzKMrcHT3XDnjLXNzQ8AU2lhKy
+	o+dz+ZxLzEJD8JbCRi5xPY03q177kkWO4MV3RvLkCpcHUQGs8btuDQEXioAhyI2TjLVf
+	nQaCr5RNpnE/AqJWPoPbvxhRRYeTqeSKVeYPh/4YjTo2aRMKSj40MnJox4w6FUHgaDnm
+	emfU1duTUik3Qfb/JdvgyTlyt3xbgxWQda12iwpPtwsui/LgCaNpGTNL9g/d3QkUhveK
+	EwvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5AFQ+yplpft1m4lMIRaO9u9jYAb1DIJwGnjxbjLcja8=;
-	b=gVEVB1m4kQ1yTEkWWeqwDzwNL/fOOxT1DE4gQkJYKY8ZjNZPuMN/kWcQQukBQsSr6J
-	am4t2zbvKRufm1ggTIoUL7XDdJnCGeQ0ejgrZ2oXETZ9QWvkjwdFPTpdtI9wYhVSNfUS
-	3Y+ma+2XoFTn+NWOut6ZJG5a1eoKNvwS3OXfMLafCMavaDJFtj93DMF7742K/QO65JdN
-	uqKkx9aW9oejp8QIygLebg5EY5t4oVRJXLo8ProAXtlJr8n4zlAiNPE+Tzy8pgxgp1lf
-	o3A8wrP66GiOvqFI/rjN8ltGzaHPBwXOe5MHReR6h5aFItQl46w+0zuq/faCHSMfL/Zk
-	rluA==
-X-Gm-Message-State: APjAAAVKVXwCE/s+UVHbnJUTT4uTNIcw0DzvBHXAKM64iyV+WQwXBfFi
-	mcjZb/R1b8TX3JSFyalMatyOzutV
-X-Google-Smtp-Source: APXvYqybW3dYAWsm16eERY1+FxOvCWj/lV9fINCiu7kcFbRQZ2DbfP2B6XuDavp/nyGVGjHVivWioQ==
-X-Received: by 2002:a1c:f918:: with SMTP id x24mr3534212wmh.132.1562078898360; 
-	Tue, 02 Jul 2019 07:48:18 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=wBDXDLFkhGS4swOIRQeaVXsNBatzXgM7Y2sJ5jyAKjQ=;
+	b=ai0EKw6ILYHdzCGC9NCdACYan+kkhIb3lFsr1pS8amLXFrJ9x+xFyDRoamtCaYL8Ji
+	RTBfq3uKjEqTalCJ+JGnDArEYXQTtO5zYFS71yrAO2FNAo7cULchP2sMGQ5guBgJpCIi
+	1OJgasr/i7y4TCqD+MTd68a3+TqgC17xCgBbMmyth0hLTV87GvUgx9dQDcflC6wM4gf5
+	JGaGMFyaNKWZFrmlCqQ/AJGyIATv6N7U9RBDnZrDHccwkT4BBK9IsC7cgbjbPTfD40xQ
+	r9GE92cBnNRLxYkcKzmogtRD3Pyde41b+/GTIRnWtETCs5NYb8SCVCJ+wpXTnZhM4oVu
+	kaSQ==
+X-Gm-Message-State: APjAAAXSf0pH8YmP9r9tuxOBgqB9g/fR1FDWxicXjRYNKN5/ZL0CvuHk
+	8ypr/K6hblXF1auEjrdzEFC6rpk2
+X-Google-Smtp-Source: APXvYqxHWEAW4TQLTdPjyWPwWdxOd1gB41OkU/Czow/f2TEBbLKvt50edOdJ5O9/PNlt/0JR2WQRuw==
+X-Received: by 2002:adf:e50b:: with SMTP id j11mr23675059wrm.351.1562078899583;
+	Tue, 02 Jul 2019 07:48:19 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	o20sm34473790wrh.8.2019.07.02.07.48.17
+	n125sm3981509wmf.6.2019.07.02.07.48.18
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 02 Jul 2019 07:48:17 -0700 (PDT)
+	Tue, 02 Jul 2019 07:48:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jul 2019 14:48:14 +0000
-Message-Id: <20190702144816.7520-1-Martin.Jansa@gmail.com>
+Date: Tue,  2 Jul 2019 14:48:15 +0000
+Message-Id: <20190702144816.7520-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/3] safec: drop aarch64 from COMPATIBLE_HOST
+In-Reply-To: <20190702144816.7520-1-Martin.Jansa@gmail.com>
+References: <20190702144816.7520-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/3] protobuf: fix build with gold
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,45 +58,162 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 14:48:18 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 14:48:19 -0000
 
-fails for aarch64, I've noticed it in world build for raspberrypi3-64:
+* Makefile.am: include descriptor.pb.cc when building libprotoc.so
 
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type
-  -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter -Wno-error=missing-field-initializers -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot= -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native= -c ../../git/src/wchar/wcscpy_s.c  -fPIC -DPIC -o wchar/.libs/wcscpy_s.o
-{standard input}: Assembler messages:
-{standard input}:161: Error: unknown mnemonic `memory_barrier' -- `memory_barrier'
-{standard input}:389: Error: unknown mnemonic `memory_barrier' -- `memory_barrier'
-{standard input}:649: Error: unknown mnemonic `memory_barrier' -- `memory_barrier'
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type
-  -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter -Wno-error=missing-field-initializers -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot= -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native= -c ../../git/src/wchar/wcsncpy_s.c  -fPIC -DPIC -o wchar/.libs/wcsncpy_s.o
-aarch64-webos-linux-libtool: compile:  aarch64-webos-linux-gcc -mcpu=cortex-a53+crc -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot -DHAVE_CONFIG_H -I. -I../../git/src -I.. -I../../git/include -I../include -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type
-  -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter -Wno-error=missing-field-initializers -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0 -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot= -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native= -c ../../git/src/wchar/wmemcpy_s.c  -fPIC -DPIC -o wchar/.libs/wmemcpy_s.o
-../aarch64-webos-linux-libtool  --tag=CC   --mode=compile aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type
-  -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter -Wno-error=missing-field-initializers  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=   -c -o wchar/wscanf_s.lo ../../git/src/wchar/wscanf_s.c
-../aarch64-webos-linux-libtool  --tag=CC   --mode=compile aarch64-webos-linux-gcc  -mcpu=cortex-a53+crc -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot -DHAVE_CONFIG_H -I. -I../../git/src -I..  -I../../git/include  -I../include -I../../git/src -pedantic -fno-strict-aliasing -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wcast-align -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Wpacked -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type
-  -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wdeclaration-after-statement -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wno-error=unused-parameter -Wno-error=missing-field-initializers  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0=/usr/src/debug/safec/3.4-r0                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot=                      -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi3_64-webos-linux/safec/3.4-r0/recipe-sysroot-native=   -c -o wchar/vfwscanf_s.lo ../../git/src/wchar/vfwscanf_s.c
-Makefile:1432: recipe for target 'mem/mem_primitives_lib.lo' failed
-make[2]: *** [mem/mem_primitives_lib.lo] Error 1
-make[2]: *** Waiting for unfinished jobs....
+* otherwise plugin.pb.o has undefined symbol scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto
+  and build with gold fails with:
+  core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot-native/usr/bin/i686-oe-linux/../../libexec/i686-oe-linux/gcc/i686-oe-linux/9.1.0/ld.bfd: ./.libs/libprotoc.so: undefined reference to `descriptor_table_google_2fprotobuf_2fdescriptor_2eproto'
+  core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot-native/usr/bin/i686-oe-linux/../../libexec/i686-oe-linux/gcc/i686-oe-linux/9.1.0/ld.bfd: ./.libs/libprotoc.so: undefined reference to `scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto'
+
+* examples/Makefile: respect CXX,LDFLAGS variables, fix build with gold
+
+* move pkg-config call to separate variable, so that the final version
+  of the whole command so it's shown in log.do_compile_ptest_base
+* add ../src/google/protobuf/.libs/timestamp.pb.o when linking
+  add_person_cpp otherwise it fails to link with gold:
+  i686-oe-linux-g++  -m32 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+  /tmp/cccjSJQs.o:addressbook.pb.cc:scc_info_Person_addressbook_2eproto: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto'
+  /tmp/cccjSJQs.o:addressbook.pb.cc:descriptor_table_addressbook_2eproto_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_2ftimestamp_2eproto'
+  collect2: error: ld returned 1 exit status
+  Makefile:43: recipe for target 'add_person_cpp' failed
+
+* and the same with list_people_cpp this time with pkg-config already through the variable:
+  i686-oe-linux-g++  -m32 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -pthread -Icore2-32-oe-linux/protobuf/3.8.0-r0/git/src -Lcore2-32-oe-linux/protobuf/3.8.0-r0/git/src/.libs -Lcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot/usr/lib -lprotobuf list_people.cc addressbook.pb.cc -o list_people_cpp
+  /tmp/ccpaI5Su.o:addressbook.pb.cc:scc_info_Person_addressbook_2eproto: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto'
+  /tmp/ccpaI5Su.o:addressbook.pb.cc:descriptor_table_addressbook_2eproto_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_2ftimestamp_2eproto'
+  collect2: error: ld returned 1 exit status
+  Makefile:49: recipe for target 'list_people_cpp' failed
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/safec/safec_3.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...ude-descriptor.cc-when-building-libp.patch | 28 ++++++++++
+ ...e-respect-CXX-LDFLAGS-variables-fix-.patch | 56 +++++++++++++++++++
+ .../protobuf/protobuf_3.8.0.bb                |  5 +-
+ 3 files changed, 86 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
+ create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
 
-diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
-index d55d081f34..b4c125faf4 100644
---- a/meta-oe/recipes-core/safec/safec_3.4.bb
-+++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-@@ -10,6 +10,6 @@ S = "${WORKDIR}/git"
- SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
- SRC_URI = "git://github.com/rurban/safeclib.git"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
+new file mode 100644
+index 0000000000..fc7286122c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Makefile.am-include-descriptor.cc-when-building-libp.patch
+@@ -0,0 +1,28 @@
++From 321709837f412e2f590e36e3fe33571bb40036a7 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Thu, 27 Jun 2019 13:27:18 +0000
++Subject: [PATCH] Makefile.am: include descriptor.pb.cc when building libprotoc.so
++
++* otherwise plugin.pb.o has undefined symbol scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto
++  and build with gold fails with:
++  core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot-native/usr/bin/i686-oe-linux/../../libexec/i686-oe-linux/gcc/i686-oe-linux/9.1.0/ld.bfd: ./.libs/libprotoc.so: undefined reference to `descriptor_table_google_2fprotobuf_2fdescriptor_2eproto'
++  core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot-native/usr/bin/i686-oe-linux/../../libexec/i686-oe-linux/gcc/i686-oe-linux/9.1.0/ld.bfd: ./.libs/libprotoc.so: undefined reference to `scc_info_FileDescriptorProto_google_2fprotobuf_2fdescriptor_2eproto'
++
++Upstream-Status: Pending
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ src/Makefile.am | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/Makefile.am b/src/Makefile.am
++index be18ba761..57e3daec1 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -313,6 +313,7 @@ libprotoc_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotoc.map
++ EXTRA_libprotoc_la_DEPENDENCIES = libprotoc.map
++ endif
++ libprotoc_la_SOURCES =                                         \
+++  google/protobuf/descriptor.pb.cc                             \
++   google/protobuf/compiler/code_generator.cc                   \
++   google/protobuf/compiler/command_line_interface.cc           \
++   google/protobuf/compiler/plugin.cc                           \
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+new file mode 100644
+index 0000000000..029abfdae3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+@@ -0,0 +1,56 @@
++From a28e15092a298e0c73c6fc1ded0913275cf27cb0 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Fri, 28 Jun 2019 13:50:52 +0000
++Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix build
++ with gold
++
++* move pkg-config call to separate variable, so that the final version
++  of the whole command so it's shown in log.do_compile_ptest_base
++* add ../src/google/protobuf/.libs/timestamp.pb.o when linking
++  add_person_cpp otherwise it fails to link with gold:
++  i686-oe-linux-g++  -m32 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
++  /tmp/cccjSJQs.o:addressbook.pb.cc:scc_info_Person_addressbook_2eproto: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto'
++  /tmp/cccjSJQs.o:addressbook.pb.cc:descriptor_table_addressbook_2eproto_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_2ftimestamp_2eproto'
++  collect2: error: ld returned 1 exit status
++  Makefile:43: recipe for target 'add_person_cpp' failed
++
++* and the same with list_people_cpp this time with pkg-config already through the variable:
++  i686-oe-linux-g++  -m32 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=core2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -pthread -Icore2-32-oe-linux/protobuf/3.8.0-r0/git/src -Lcore2-32-oe-linux/protobuf/3.8.0-r0/git/src/.libs -Lcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot/usr/lib -lprotobuf list_people.cc addressbook.pb.cc -o list_people_cpp
++  /tmp/ccpaI5Su.o:addressbook.pb.cc:scc_info_Person_addressbook_2eproto: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2ftimestamp_2eproto'
++  /tmp/ccpaI5Su.o:addressbook.pb.cc:descriptor_table_addressbook_2eproto_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_2ftimestamp_2eproto'
++  collect2: error: ld returned 1 exit status
++  Makefile:49: recipe for target 'list_people_cpp' failed
++
++Upstream-Status: Pending
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ examples/Makefile | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
++
++diff --git a/examples/Makefile b/examples/Makefile
++index 4ad605641..31d887639 100644
++--- a/examples/Makefile
+++++ b/examples/Makefile
++@@ -2,6 +2,8 @@
++ 
++ .PHONY: all cpp java python clean
++ 
+++PROTOBUF := $(shell pkg-config --cflags --libs protobuf)
+++
++ all: cpp java python
++ 
++ cpp:    add_person_cpp    list_people_cpp
++@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
++ 
++ add_person_cpp: add_person.cc protoc_middleman
++ 	pkg-config --cflags protobuf  # fails if protobuf is not installed
++-	c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+++	$(CXX) $(LDFLAGS) $(PROTOBUF) ../src/google/protobuf/.libs/timestamp.pb.o add_person.cc addressbook.pb.cc -o add_person_cpp
++ 
++ list_people_cpp: list_people.cc protoc_middleman
++ 	pkg-config --cflags protobuf  # fails if protobuf is not installed
++-	c++ list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+++	$(CXX) $(LDFLAGS) $(PROTOBUF) ../src/google/protobuf/.libs/timestamp.pb.o list_people.cc addressbook.pb.cc -o list_people_cpp
++ 
++ add_person_dart: add_person.dart protoc_middleman_dart
++ 
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+index 476d1e3091..be5caa4da4 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
+@@ -16,6 +16,8 @@ SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
+            file://run-ptest \
+            file://0001-protobuf-fix-configure-error.patch \
+            file://0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch \
++           file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
++           file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+ "
+ S = "${WORKDIR}/git"
  
--COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
-+COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm).*-linux'
+@@ -30,9 +32,6 @@ TEST_SRC_DIR = "examples"
+ LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
  
- RDEPENDS_${PN} = "perl"
+ do_compile_ptest() {
+-	# Modify makefile to use the cross-compiler
+-	sed -e "s|c++|${CXX} \$(LDFLAGS)|g" -i "${S}/${TEST_SRC_DIR}/Makefile"
+-
+ 	mkdir -p "${B}/${TEST_SRC_DIR}"
+ 
+ 	# Add the location of the cross-compiled header and library files
 -- 
 2.17.1
 
