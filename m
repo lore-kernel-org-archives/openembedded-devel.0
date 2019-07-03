@@ -1,56 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B6DB57E85B
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jul 2019 08:09:00 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id n9so1194486wmi.0
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jul 2019 01:09:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=7StvO6pdZVziMwJ73vMIIFaFiDVRQYdrCXqjvlBx5kY=;
-	b=SJxmx06g2G6sEiojsey2EEe+RXv51cjR8nAvC5M6vJHp4iedJj3ljJStnm4UOX3jBk
-	0lc79XQrUJJQmWiCwtr08UxTxfEjCXkUmGkYgPTXc99Mms7bKKuzt3amBxpO2CY7BWAX
-	pE8wwyok9ai1p1GbSmtzQAzE7IC2KsLaIJbvw0vQHUn2Bu1KH22i17HS7EDkzBi+Difc
-	MbQjsxK1o7Kn0l9tFrPna3N4NeNoBXx/cvJzwA2xvRl8R7O8HbSyj3xcfOch6XEL80DS
-	24tVzDLvyBQzeaIiuf4MBeCRFkRzQfMAOX/MCvLGc2Y6qtyYJQjNqYjwoWtD5DYV74vY
-	mYAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=7StvO6pdZVziMwJ73vMIIFaFiDVRQYdrCXqjvlBx5kY=;
-	b=PEXSa57rfC9c7jYCtVqtDYSHwrzrWelDwciqHkVnUyzpkYa5gBy9YlmPZycxkJLrkw
-	n9J1kbbN4PkstFoio/JKflu3K4IHZeyE93EBV3hmwmbg0vI/Uu1zzqxpGJglnG98hEQk
-	7vILEzOeDdcMC6DH3oQI1i8fa94x8W86ovksx7zBMwxtYk/XXQcscltPi27ycuXnKjXL
-	L8GfVV9z7VOmdPz0I+D+v753gssMfbBjQVu72pt/frp4EkodbAGWrDKlTkQym/NLEVZY
-	i6Y/smsdf+H1XTXEDqICdhGKwky64uxJuWiQBzPCD2rHpRFqL8D4E30iSbekGFYYix5K
-	uqVA==
-X-Gm-Message-State: APjAAAXe2yYB7fhVlURruCC92CGPkA66uRQmxvdDZ2ZCA2SS1CDkHimr
-	BgOOkNd8UgJD6qq8zRdt0fP4UMh1
-X-Google-Smtp-Source: APXvYqwvFaVhoLng9WR4f47rIFqgZcDbZmktBPU3+NdoMSISq87Tiw5sNStlfF6ViBkFx/eJiS5vlQ==
-X-Received: by 2002:a1c:a483:: with SMTP id n125mr6681961wme.172.1562141341444;
-	Wed, 03 Jul 2019 01:09:01 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id c6sm1477908wma.25.2019.07.03.01.09.00
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 03 Jul 2019 01:09:00 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 3 Jul 2019 10:09:01 +0200
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20190703080901.GD1484@jama>
-References: <CAMKF1sr9T0K71M5K4Qh+K-PrFv1dn5L0aNpn2hkN4usLY5hDpg@mail.gmail.com>
-	<f69d8e4b-1603-e599-a56e-2b65a0eeb27e@gmail.com>
-	<CAMKF1sqWjwdsArsPO1D3Ky3dFa8pkAO092hqdKLsPzbKBJd3JA@mail.gmail.com>
-	<d28b367b-ebaa-9fba-6e48-c62438d92bbd@gmail.com>
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CF7326C3E1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Jul 2019 08:47:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x638lS7J003689
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 3 Jul 2019 01:47:28 -0700 (PDT)
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Wed, 3 Jul 2019 01:47:27 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+References: <20190702012913.7163-1-kai.kang@windriver.com>
+	<CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <fd7961f9-5e9f-ba49-9152-e426e010ef32@windriver.com>
+Date: Wed, 3 Jul 2019 16:46:30 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.1
 MIME-Version: 1.0
-In-Reply-To: <d28b367b-ebaa-9fba-6e48-c62438d92bbd@gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: Delays in patch merges
+In-Reply-To: <CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,42 +34,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jul 2019 08:09:01 -0000
-X-Groupsio-MsgNum: 78384
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9l24NVCWtSuIVIod"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Jul 2019 08:47:28 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
---9l24NVCWtSuIVIod
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2019/7/2 下午3:47, Andreas Müller wrote:
+> On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Upgrade core packages of xfce to 4.14pre2
+>>
+>> Kai Kang (11):
+>>    thunar: 1.8.6 -> 1.8.7
+>>    exo: 0.12.5 -> 0.12.6
+>>    garcon: 0.6.2 -> 0.6.3
+>>    thunar-volman: 0.9.2 -> 0.9.3
+>>    xfce4-dev-tools: 4.12.0 -> 4.13.0
+>>    xfce4-panel: 4.13.5 -> 4.13.6
+>>    xfce4-power-manager: 1.6.2 -> 1.6.3
+>>    xfce4-session: 4.13.2 -> 4.13.3
+>>    xfdesktop: 4.13.4 -> 4.13.5
+>>    xfwm4: 4.13.2 -> 4.13.3
+>>    xfconf: 4.13.7 -> 4.13.8
+> First of all thanks for taking care. One suggestion/wish: Could you
+> please update xfce4-settings to latest upstream and move away from my
+> fork?
+>
+> Background: The fork I created added two functionalities:
+> * Optionally hide mouse pointer for certain pointer devices. This
+> stopped working anyway (and was problematic for Qt application from
+> the beginning)
+> * Datetime-setter: I created a new project for that based on GTK3 [1].
+> It is not quite finished but I use it frequently and am happy to have
+> it (e.g on machines without RTC backup and missing network). So if
+> somebody wants this either it could be added later.
 
-On Mon, May 27, 2019 at 02:10:23PM -0700, akuster808 wrote:
->=20
->=20
-> On 5/27/19 12:02 PM, Khem Raj wrote:
-> > Primarily master if we have stable merges I still have one day
->=20
-> what is in warrior-next is good to go.
+That's why I didn't upgrade xfce4-settings. I didn't find a replacement 
+of 'Datetime-setter'.  OK then, I'll upgrade it to
+latest upstream without 'Datetime-setter' for now.
 
-can we get the last batch of 20 commits merged from warrior-next to warrior?
+Regards,
+Kai
 
-I can try to merge it to see if I still have permissions to do that if you =
-approve
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> Unfortunately I have no time to do this myself.
+>
+> Thanks
+>
+> Andreas
+>
 
---9l24NVCWtSuIVIod
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+-- 
+Kai Kang
 
------BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXRxinAAKCRA3VSO3ZXaA
-HGZKAJsFU1uWRK0ONL8enH1Kca3v7tt4QACgopTGgJ5/mvW0HnGD2PBDiSIxpC0=
-=AwCV
------END PGP SIGNATURE-----
-
---9l24NVCWtSuIVIod--
