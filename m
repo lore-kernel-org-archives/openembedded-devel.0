@@ -1,27 +1,51 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CF7326C3E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jul 2019 08:47:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x638lS7J003689
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 3 Jul 2019 01:47:28 -0700 (PDT)
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 3 Jul 2019 01:47:27 -0700
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20190702012913.7163-1-kai.kang@windriver.com>
-	<CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <fd7961f9-5e9f-ba49-9152-e426e010ef32@windriver.com>
-Date: Wed, 3 Jul 2019 16:46:30 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
+	[209.85.160.178])
+	by mail.openembedded.org (Postfix) with ESMTP id DE5487EB5D
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Jul 2019 10:46:00 +0000 (UTC)
+Received: by mail-qt1-f178.google.com with SMTP id m29so2221125qtu.1
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Jul 2019 03:46:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=cQjQ0txhv71uNCr10rIxnf6wqugSJLfNAb4/J/bR7dc=;
+	b=OnUzOrk0u5DheVrAXwv8VV/elmTWEoKrEozOWSoLHPd9rLIgyZfUlDXiifgKoxl3ml
+	aiZOVyFWMYNBVa8E5vH2ZtoLpArbfDt6/X3XfRzrhn7mJjyRVXGtpVpLf+Pu2ZiBuS89
+	UJvZMQc1+b/GkrGn5ZAkJUrTRXjKmGCAFScVQyJvFlcGcAWqy26fOKfdWHIamWsHVLby
+	1p08wvh9zZeJdRfBvBn5ahTxifENeWA2FCM4432Ps11YX1QwuN0MYwb2xota/BivZ/kz
+	IUSzzQPLsDVkkRiNMCddlXeWvD637CqwwSS1Nlhazdt9QAWXQ/dsnKA+1L5xgnZoTkDy
+	syoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=cQjQ0txhv71uNCr10rIxnf6wqugSJLfNAb4/J/bR7dc=;
+	b=PlwQXdGFw7uSW2jeuF9xr+rKT5Qg8xMSKG70ieLM/WuV+mT2IRcLhVVAm4bNOkpAIL
+	JgEJZMuHvYOV2i+KOUE7cmOjML9F5HT/E5JElUZk1C+lsl8GQ6uHkmfM9N+Dieo3IAxv
+	SIcQOfwk9P81LRl1V3irVqem6wnm5r0yXFy7s4drNHeCPrj+n5VFNtQk6u4Y9wbndH3e
+	8wmFEo/2Bndv25LviIybAvEpGFg7UlHGeia4bhu5r28a9ClR3a+VPL0gVfEb6zPrcUXK
+	d/3TYthkWMNls7Mhe46Mz4gI+4rW5xRD1HsN42D+BuVCEQBqy3J8537RYEJaUvyrHdfM
+	DLZA==
+X-Gm-Message-State: APjAAAXrCinFxxk73/YufaMqxGLmYL5B5ZqPRURBlLisfSgOoDMhyRzz
+	nwyuWQIYUKMR0/OHfYluswqrLDuDVvRelDpBlUM=
+X-Google-Smtp-Source: APXvYqyh4l7D3eMd4M52XKjQWxN2DfDKqHYSsgFjOycdMO2vxgzSislyoPrThuUT3+uKBWe4PxwvW9Bi0GVzla3YTVY=
+X-Received: by 2002:aed:3f1d:: with SMTP id p29mr30144889qtf.378.1562150761619;
+	Wed, 03 Jul 2019 03:46:01 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
+References: <CAMKF1sr9T0K71M5K4Qh+K-PrFv1dn5L0aNpn2hkN4usLY5hDpg@mail.gmail.com>
+	<f69d8e4b-1603-e599-a56e-2b65a0eeb27e@gmail.com>
+	<CAMKF1sqWjwdsArsPO1D3Ky3dFa8pkAO092hqdKLsPzbKBJd3JA@mail.gmail.com>
+	<d28b367b-ebaa-9fba-6e48-c62438d92bbd@gmail.com>
+	<20190703080901.GD1484@jama>
+In-Reply-To: <20190703080901.GD1484@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 3 Jul 2019 06:45:35 -0400
+Message-ID: <CAMKF1spG+qjOM1KJfaZ--133k-iUBjHQbHzXAgf6f-4TnONdkg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: Delays in patch merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,59 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jul 2019 08:47:28 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 03 Jul 2019 10:46:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2019/7/2 下午3:47, Andreas Müller wrote:
-> On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Upgrade core packages of xfce to 4.14pre2
->>
->> Kai Kang (11):
->>    thunar: 1.8.6 -> 1.8.7
->>    exo: 0.12.5 -> 0.12.6
->>    garcon: 0.6.2 -> 0.6.3
->>    thunar-volman: 0.9.2 -> 0.9.3
->>    xfce4-dev-tools: 4.12.0 -> 4.13.0
->>    xfce4-panel: 4.13.5 -> 4.13.6
->>    xfce4-power-manager: 1.6.2 -> 1.6.3
->>    xfce4-session: 4.13.2 -> 4.13.3
->>    xfdesktop: 4.13.4 -> 4.13.5
->>    xfwm4: 4.13.2 -> 4.13.3
->>    xfconf: 4.13.7 -> 4.13.8
-> First of all thanks for taking care. One suggestion/wish: Could you
-> please update xfce4-settings to latest upstream and move away from my
-> fork?
+I thought we still wanted to review if all the changes are ok with this
+pull.
+
+My access to remote machine at home has been severed while I was traveling
+this week. I am getting back today evening then things will start again.
+
+On Wed, Jul 3, 2019 at 4:09 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+
+> On Mon, May 27, 2019 at 02:10:23PM -0700, akuster808 wrote:
+> >
+> >
+> > On 5/27/19 12:02 PM, Khem Raj wrote:
+> > > Primarily master if we have stable merges I still have one day
+> >
+> > what is in warrior-next is good to go.
 >
-> Background: The fork I created added two functionalities:
-> * Optionally hide mouse pointer for certain pointer devices. This
-> stopped working anyway (and was problematic for Qt application from
-> the beginning)
-> * Datetime-setter: I created a new project for that based on GTK3 [1].
-> It is not quite finished but I use it frequently and am happy to have
-> it (e.g on machines without RTC backup and missing network). So if
-> somebody wants this either it could be added later.
-
-That's why I didn't upgrade xfce4-settings. I didn't find a replacement 
-of 'Datetime-setter'.  OK then, I'll upgrade it to
-latest upstream without 'Datetime-setter' for now.
-
-Regards,
-Kai
-
-
+> can we get the last batch of 20 commits merged from warrior-next to
+> warrior?
 >
-> Unfortunately I have no time to do this myself.
+> I can try to merge it to see if I still have permissions to do that if you
+> approve
 >
-> Thanks
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
-> Andreas
->
-
--- 
-Kai Kang
-
 
