@@ -1,24 +1,28 @@
-Return-Path: <Liwei.Song@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EE4047EAEC
+Return-Path: <naveen.kumar.saini@intel.com>
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by mail.openembedded.org (Postfix) with ESMTP id 91E1D6BC7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2019 09:22:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x649MPWC027966
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Jul 2019 02:22:35 -0700
-Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 4 Jul 2019 02:22:15 -0700
-From: Liwei Song <liwei.song@windriver.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Jul 2019 05:20:55 -0400
-Message-ID: <1562232055-238768-1-git-send-email-liwei.song@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu,  4 Jul 2019 10:30:16 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	04 Jul 2019 03:30:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,450,1557212400"; d="scan'208";a="184971644"
+Received: from optimus-prime.png.intel.com (HELO [172.30.199.130])
+	([172.30.199.130])
+	by fmsmga001.fm.intel.com with ESMTP; 04 Jul 2019 03:30:16 -0700
+To: openembedded-devel@lists.openembedded.org
+References: <1562232055-238768-1-git-send-email-liwei.song@windriver.com>
+From: "Saini, Naveen Kumar" <naveen.kumar.saini@intel.com>
+Message-ID: <c136bc02-35be-44d8-6382-b8c8239dcbc4@intel.com>
+Date: Thu, 4 Jul 2019 18:31:54 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] pm-graph: package the pm-graph files
+In-Reply-To: <1562232055-238768-1-git-send-email-liwei.song@windriver.com>
+Subject: Re: [meta-oe][PATCH] pm-graph: package the pm-graph files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +35,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2019 09:22:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Jul 2019 10:30:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-package /usr/lib/pm-grap and /bin/* files created by pm-graph
-to aviod "Files were installed but not shipped in any package"
-error.
 
-Signed-off-by: Liwei Song <liwei.song@windriver.com>
----
- meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-index de2d46dcafef..393e8c83573b 100644
---- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-@@ -17,3 +17,8 @@ do_install() {
- }
- 
- RDEPENDS_${PN} += "python-core python-threading python-datetime python-subprocess python-compression"
-+
-+FILES_${PN} = "${nonarch_libdir}/pm-graph \
-+               ${bindir}/sleepgraph \
-+               ${bindir}/bootgraph \
-+"
--- 
-2.7.4
+On 7/4/19 5:20 PM, Liwei Song wrote:
+> +FILES_${PN} = "${nonarch_libdir}/pm-graph \
+> +               ${bindir}/sleepgraph \
+> +               ${bindir}/bootgraph \
+> +"
 
+FILES_${PN} inherits ${bindir} & ${libdir} by default. So it is not 
+required.
 
