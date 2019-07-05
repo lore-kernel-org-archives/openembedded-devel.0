@@ -1,55 +1,54 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
-	[209.85.208.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 627117ECF4
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
+	[209.85.208.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 437F27ED31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2019 11:19:02 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id i11so7953570edq.0
+	Fri,  5 Jul 2019 11:19:04 +0000 (UTC)
+Received: by mail-ed1-f52.google.com with SMTP id k8so7913206edr.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2019 04:19:03 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=oPCJ5W5GJ62o4lzI7rAYXIKQQzsDrnZiiwhchg5RRp8=;
-	b=B7H2jJe+8ELT/FpAe1cft4KiejlzrpdOGqnDw1nEUrp4ObK54R5gcIMwVG3HgGKfmi
-	vNSbO2YZw1BqJV6oZquVJ6xbD7XDUnGvDVDAgU+UZD4i9x+hm/a5lJerh2j6vRtZlvWU
-	1HtWIyG+kzWKlOQF5RicshORo4BirVZKxF3LGAfDSBmSgENB2mZ/vbft5bRE3rvqpUy6
-	F+JxZOugFpGp3uUpRhmUCzPvaTbH6A+wUN1095LQqzO6ILgWpe40T2A+QX+S1dvyB6dV
-	I4cnzx6Yyhz/7iNsepEvwDolbdw+IUL10Kle6mLpAaCAVuC4hWttIvOZ8tPXGQc7iNyi
-	/LkA==
+	bh=iFMpLtk8wIszjk763qb549bpT593nqz5rLfhdqzpfYU=;
+	b=u0coW04apW64QRuc2kXjUzDZIHWYRbG8zVQSj5bYzSSwVHHvkJU8CONXPOpv5mENXf
+	n9AWa4mOTRhzT3n7aJSB259Vsf1wKWjr3IH5yrVRJAxepYNK1Le5Fgn/jNG5URFo2ewM
+	Wwy6dn3sDL7APQTMCF00jyfTKyrhla152OoM0UJGgFdAn1vaRZlc/K5Uaud9jpudm5nY
+	aDKX2FUmFDX2ORjMNj/uO9GdXFKsV+cjZJr+kvUPxZ8+sGve+pQsjX+ZKxTYZUZae2bo
+	Qf/K6Z8BzjUf/W1k73236iMPsFs53n+L90yE03ZAy/Imuct3rHmL+y4YdyVC4ndegtzX
+	5c5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=oPCJ5W5GJ62o4lzI7rAYXIKQQzsDrnZiiwhchg5RRp8=;
-	b=lI8Xhn/GPiFLOKpv2Q97VYwXd63QGRhhiD02nm6mcexFHL2GRAPx8Vhad2xXGW8ypn
-	WuZlljsDCIBy36BLKsMm2MwSFIDUXGNqCamgmv5uMhW8Na+eDPX6wyM9192n0nTWcTIT
-	2X0sYTbv6nZXfr8MbFzwFV89rRyfxRTJlQ0b2ES6D18OvBtLeArTYLaiCO311KLkxM+F
-	Idu02QfAlwok4FdfGd3wfVJ0gg2pBVvYNOZrGdZ7Ds3OwXVdeS4JQ2J/VUudzy202gam
-	SBD3Pgbf5ynHlrml38hnahXBcWjz9NgfMVt5jO7VtTlEXCRIr5C5hgF/RytJgsAnQwpb
-	K4Kw==
-X-Gm-Message-State: APjAAAXSQcsq9i+2y/q4lWeyWuoYkTqk9TMa7bWv0Z189f2agC41EesR
-	NAAmrVCPXflw3OUuoANqh7/cC3GEKwg=
-X-Google-Smtp-Source: APXvYqwXiQTJFiG3fMIBAduxeszMtTWXhseeaj2k45xyHI30f092nDPjJHeF5QaWo0K1/qi3xLcv5A==
-X-Received: by 2002:a05:6402:8cc:: with SMTP id
-	d12mr3938529edz.60.1562325542781; 
-	Fri, 05 Jul 2019 04:19:02 -0700 (PDT)
+	bh=iFMpLtk8wIszjk763qb549bpT593nqz5rLfhdqzpfYU=;
+	b=ierHVm/eW+67STX7IsYqYnbMOuWGA/HSKYe4MaLum1WZ4t4PlCtRh9yo0eVAGpz97V
+	45mL2ARerVF+C6MTecLhWKKQ5JjPxnuAQa2i4fubSNnKZTJUAGS1H9D9TZQcD4yh8QyX
+	1IvGa9kXFsCnm3hNTg0Gzr/0ouzgdSlK7JR42X/sOz3N8FHl5LGNn8GRIa16Eow2WFSD
+	kVgV/gtC/pnRrPFYSukX4ZeSJZBpQKBHlv7XDqWLE76py8l2Uthw6utKm8BIRZ6kwgNF
+	UTZW1FKSWQAarfer3srD9faGXdVY6Tg9q2Xr29MwZ8XlhQy4Jt9tIW9ylrwVuIhcOlZ2
+	6AfA==
+X-Gm-Message-State: APjAAAUpBxV4Ub/T9aRc6uZr89L7LsQw/AWcVWDXX8eDLk1Xjz7Q24Ld
+	BEFD2dZ0PMuByGI8MOGAXnAO0LxdzoM=
+X-Google-Smtp-Source: APXvYqzS4XI4EQqXcMKa+xkT/9yGv4VjkxG+LHZqWErGmlgYW2RAg03FXSnZ7U7cAuzSRhVkQmirag==
+X-Received: by 2002:a17:906:1845:: with SMTP id w5mr3052347eje.0.1562325544713;
+	Fri, 05 Jul 2019 04:19:04 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.01
+	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.02
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 05 Jul 2019 04:19:01 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:03 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2019 13:18:15 +0200
-Message-Id: <20190705111824.22255-15-ricardo@ribalda.com>
+Date: Fri,  5 Jul 2019 13:18:16 +0200
+Message-Id: <20190705111824.22255-16-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190705111824.22255-1-ricardo@ribalda.com>
 References: <20190705111824.22255-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH v4 14/23] ca-certificates: Cannot be an allarch package
+Subject: [meta-java][PATCH v4 15/23] xalan-j: Do not use all as PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,29 +61,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 11:19:02 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 11:19:04 -0000
 Content-Transfer-Encoding: 8bit
 
-It RDEPENDS on PACKAGE_ARCH!=all packages
+It has DEPENDS that are not -native.
+
+Fixes:
+
+ERROR: mc:inteli7:xalan-j-2.7.1-r1 do_package: Error executing a python function in exec_python_func() autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:emit_pkgdata(d)
+     0003:
+File: '/workdir/repo/poky/meta/classes/package.bbclass', lineno: 1502, function: emit_pkgdata
+     1498:        allow_empty = d.getVar('ALLOW_EMPTY_%s' % pkg)
+     1499:        if not allow_empty:
+     1500:            allow_empty = d.getVar('ALLOW_EMPTY')
+     1501:        root = "%s/%s" % (pkgdest, pkg)
+ *** 1502:        os.chdir(root)
+     1503:        g = glob('*')
+     1504:        if g or allow_empty == "1":
+     1505:            # Symlinks needed for reverse lookups (from the final package name)
+     1506:            subdata_sym = pkgdatadir + "/runtime-reverse/%s" % pkgval
+Exception: FileNotFoundError: [Errno 2] No such file or directory: '/workdir/build/tmp/work/all-poky-linux/xalan-j/2.7.1-r1/packages-split/xalan-j-src'
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- .../ca-certificates-java/ca-certificates-java_20180516.bb       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-core/xalan-j/xalan-j_2.7.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-index 2db1915..feaa7dc 100644
---- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-+++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-@@ -24,7 +24,7 @@ SRC_URI = "\
+diff --git a/recipes-core/xalan-j/xalan-j_2.7.1.bb b/recipes-core/xalan-j/xalan-j_2.7.1.bb
+index 7c68fba..ad985cb 100644
+--- a/recipes-core/xalan-j/xalan-j_2.7.1.bb
++++ b/recipes-core/xalan-j/xalan-j_2.7.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
+ AUTHOR = "Apache Software Foundation"
+ HOMEPAGE = "http://xml.apache.org/xalan-j"
  
- SRCREV = "793b846dcd4e79371bbe8069e4125ec2fd462e57"
+-PR = "r1"
++PR = "r2"
  
--inherit java allarch
-+inherit java
+ DEPENDS = "xerces-j regexp jlex cup jaxp1.3 bcel"
  
- S = "${WORKDIR}/git"
- B = "${WORKDIR}/build"
+@@ -18,6 +18,8 @@ SRC_URI = "\
+ 
+ S = "${WORKDIR}/${BPN}_2_7_1"
+ 
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
++
+ inherit java-library
+ 
+ JPN = "libxalan2-java"
 -- 
 2.20.1
 
