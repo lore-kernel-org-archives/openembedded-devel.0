@@ -1,54 +1,54 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
-	[209.85.208.45])
-	by mail.openembedded.org (Postfix) with ESMTP id CFA937ED58
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+	[209.85.208.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 78C677ED17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2019 11:19:08 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id s49so7968488edb.1
+	Fri,  5 Jul 2019 11:19:10 +0000 (UTC)
+Received: by mail-ed1-f43.google.com with SMTP id s49so7968540edb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2019 04:19:10 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=jbmPfhXyCCSr24C9OeZbJS2zV0acWCtELm8vUVT9wrY=;
-	b=ts5kXZuq2T75ms+ckNDFBM/6rl7dPpOQH6D2+tBM/IzxL2HZHSpkcNJpVOMppPwspS
-	KZdHWY/632lO53GJehIAIzuYo7dwuOizjuLmCTqqfWyj40FWPWJJfkmUvfqknUnVBFtE
-	MmFeKPBqxuxejiIjM24mmkOrjRzdYlp4qjksaHnxz+COWlbMkBpp0sykpvW2bKpcwEqH
-	rpExlhAUetAyLd96n3C0VWmbeAiz9VWQk7P1rF4FKv1NzQIY/pLDMPOMlEDsoeVt7CZ5
-	QFtsVmwL0h+TaoF8AdF3MmEmW8LPSw51BsHFaCqf9WgiH369Ae1KsVDAdMuYwtTMhATI
-	nnqg==
+	bh=aDQHn5c2n00aAa5HLluxVgFo0N1WLJ5IE5OUu3wPCuk=;
+	b=dX9EAKPtFOKqxfJMwX2UGZR/0a/LbqPtNbI6tT4O9wXDax0IdE6mLiE6G7Bqk+Y3Ig
+	5X//6F4/xYhb7D1uqQoc4haBq8KZt+SK3cSXAaJ5SFfCwDm6XtAyIYdYT+lg0FU0DBBR
+	wa+GzKVAh8jpitMHvJUsVGQblUablTtl6WjcQfjDkXD/GeA3lOUHICaz7PL+T67Le+jX
+	EVUPFWLvlLIw0WyKzcX5K1ABfwncrhVURcHSdOngjZBM7i64dnbUfiIAJy4LYfdCDKKa
+	fKA0AHg+59uWx9PjPqoIDaCJD6ucw0eO/5AvMi8wG5/AqRMwmkqLcrCdcie+uRT2mZx6
+	JpHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=jbmPfhXyCCSr24C9OeZbJS2zV0acWCtELm8vUVT9wrY=;
-	b=Q0Dswiw4kYf36zzUpGfj818ifHSmLsqEXt87sW6CVQF6jkQU4X5LebLTVI3HZXonuG
-	CRNyQPmfSZ5gwnFhhnGqRBMwTuZ6szy13dZwP0cmtg2yhA5z110F1Vnb52HqHNFwgWwu
-	RnJv6YhEAeDL1iBPs1/ctv3Au8xbTe0c9RhYZlfk0xEMkje7bHuZhet2HtaOZb308YnE
-	tYYyB8M+2dQ/AAr8M//oU64t4+128oPR0eu+wdHxnMWcDnCtJFy9KPm1IVgxQWdTuoGH
-	Te48yNS84YEu9MfheJ4N+m+GTZVZK6kzunXjT/KAGQHNCMqUC/YhxG4kUNNPT7XlQLRI
-	52Kw==
-X-Gm-Message-State: APjAAAX0e71PPLkOLw194CVnmyTYzlqodW5RuJL65zMufJKnrSWZg3Hb
-	DVfo9XnIo5XCDEDw9bwsbjbtyADQa1s=
-X-Google-Smtp-Source: APXvYqx1NVsJ/Rf8DwfYbelpmp+IEH6LDqeHpN35f5VZpsTteKuHZVBMBYBcYS9O/xnVFHh19wCjYw==
-X-Received: by 2002:a50:e703:: with SMTP id a3mr3928194edn.291.1562325549383; 
-	Fri, 05 Jul 2019 04:19:09 -0700 (PDT)
+	bh=aDQHn5c2n00aAa5HLluxVgFo0N1WLJ5IE5OUu3wPCuk=;
+	b=AUfx+ZRoQr8U5o44JLFEcA3Mucu46Wy3f0xF4ORiduaSqONO7DiDYcobR3OfTGc0Xc
+	RY7YaTG32zSsMaBf3tu53uvy40/xI6u/lv1NP2lhSD+fQyZ5cwRTWuV9o5tz8X3+Yp3x
+	sUFQQd9yPx0gX9ZjYf9DG2I8J2cL4BNw1nkebbeCSuvhLTvZD8ir9Bxexe2Lng6Ps2Kc
+	TLlYuviwoJNUFAQFvYsIYZNHCvuCsQqQZHMVt/Uv+FJw4Ly0K2odRnSUNz5ubJVZA7GO
+	BpOTWQa+fvZjBZ5QnKzIxqHuL22J8qvy8WSv6dQRffUJLdmvj7U2USq4ebH+WM28cpnJ
+	L7Fg==
+X-Gm-Message-State: APjAAAXxIWx1/nugYk6K6UgacT4TEiD9ry77Fx80oxs3wdjMarNoC5Vq
+	gemEv2KM4vQeUdGanTKjNGKfIT96LvQ=
+X-Google-Smtp-Source: APXvYqymi6MEu8hwWnQTD31buW8HyKo67LT7V4j/tjcWOGQx4iKqp2rJEyqhz0s6xmSXyX6FpBDmbQ==
+X-Received: by 2002:aa7:d617:: with SMTP id c23mr3980461edr.54.1562325550926; 
+	Fri, 05 Jul 2019 04:19:10 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.08
+	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.09
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 05 Jul 2019 04:19:08 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:09 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2019 13:18:20 +0200
-Message-Id: <20190705111824.22255-20-ricardo@ribalda.com>
+Date: Fri,  5 Jul 2019 13:18:21 +0200
+Message-Id: <20190705111824.22255-21-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190705111824.22255-1-ricardo@ribalda.com>
 References: <20190705111824.22255-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH v4 19/23] bsf: Do not build as all PACKAGE_ARCH
+Subject: [meta-java][PATCH v4 20/23] poi: Do not build as all PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,63 +61,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 11:19:09 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 11:19:10 -0000
 Content-Transfer-Encoding: 8bit
 
-The package DEPENDS on non -native package, which breaks multiconfig.
+poi DEPENDS on non -native packages, which breaks multiconfig.
 
 Fixes:
 
-NOTE: recipe bsf-2.4.0-r1: task do_package: Succeeded
-ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: Error executing a python function in exec_python_func() autogenerated:
-
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:populate_packages(d)
-     0003:
-File: '/workdir/repo/poky/meta/classes/package.bbclass', lineno: 1237, function: populate_packages
-     1233:
-     1234:            mkdir_recurse(dvar, root, os.path.dirname(file))
-     1235:            fpath = os.path.join(root,file)
-     1236:            if not cpath.islink(file):
- *** 1237:                os.link(file, fpath)
-     1238:                continue
-     1239:            ret = bb.utils.copyfile(file, fpath)
-     1240:            if ret is False or ret == 0:
-     1241:                bb.fatal("File population failed")
-Exception: FileExistsError: [Errno 17] File exists: './usr/share/java/bsf-2.4.0.jar' -> '/workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/packages-split/libbsf-java/./usr/share/java/bsf-2.4.0.jar'
-
-ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: [Errno 17] File exists: './usr/share/java/bsf-2.4.0.jar' -> '/workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/packages-split/libbsf-java/./usr/share/java/bsf-2.4.0.jar'
-ERROR: mc:qt5507:bsf-2.4.0-r1 do_package: Function failed: populate_packages
-ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/bsf/2.4.0-r1/temp/log.do_package.12673
-NOTE: recipe bsf-2.4.0-r1: task do_package: Failed
-ERROR: Task (multiconfig:qt5507:/workdir/repo/poky/../meta-java/recipes-core/jakarta-libs/bsf_2.4.0.bb:do_package) failed with exit code '1'
+ERROR: mc:inteli7:poi-3.0-r0 do_packagedata: Command 'cd /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/pkgdata; find . -type d -print | tar --xattrs --xattrs-include='*' -cf - -S -C /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/pkgdata -p --no-recursion --files-from - | tar --xattrs --xattrs-include='*' -xhf - -C /workdir/build/tmp/pkgdata/inteli7' returned non-zero exit status 2
+ERROR: mc:inteli7:poi-3.0-r0 do_packagedata: Function failed: sstate_task_postfunc
+ERROR: Logfile of failure stored in: /workdir/build/tmp/work/all-poky-linux/poi/3.0-r0/temp/log.do_packagedata.27730
+NOTE: recipe poi-3.0-r0: task do_packagedata: Failed
+ERROR: Task (multiconfig:inteli7:/workdir/repo/poky/../meta-java/recipes-core/jakarta-libs/poi_3.0.bb:do_packagedata) failed with exit code '1'
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/jakarta-libs/bsf_2.4.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-core/jakarta-libs/poi_3.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/jakarta-libs/bsf_2.4.0.bb b/recipes-core/jakarta-libs/bsf_2.4.0.bb
-index 1037396..a79cbf4 100644
---- a/recipes-core/jakarta-libs/bsf_2.4.0.bb
-+++ b/recipes-core/jakarta-libs/bsf_2.4.0.bb
-@@ -1,11 +1,13 @@
- SUMMARY = "Bean Scripting Framework package"
- AUTHOR = "Apache Software Foundation"
- LICENSE = "Apache-2.0"
--PR = "r1"
-+PR = "r2"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b1e01b26bacfc2232046c90a330332b3"
+diff --git a/recipes-core/jakarta-libs/poi_3.0.bb b/recipes-core/jakarta-libs/poi_3.0.bb
+index f9178f2..e33f2f2 100644
+--- a/recipes-core/jakarta-libs/poi_3.0.bb
++++ b/recipes-core/jakarta-libs/poi_3.0.bb
+@@ -7,6 +7,8 @@ SRC_URI = "http://archive.apache.org/dist/jakarta/poi/release/src/${BPN}-src-${P
  
- SRC_URI = "http://archive.apache.org/dist/jakarta/bsf/source/bsf-src-${PV}.tar.gz"
+ S = "${WORKDIR}/${BPN}-3.0-rc4"
  
 +PACKAGE_ARCH = "${TUNE_PKGARCH}"
 +
  inherit java-library
  
- DEPENDS = "jacl commons-logging rhino xalan-j bcel"
+ DEPENDS = "fastjar-native commons-collections3 commons-logging commons-lang commons-beanutils log4j1.2 xalan-j"
 -- 
 2.20.1
 
