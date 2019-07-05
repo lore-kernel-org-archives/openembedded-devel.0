@@ -1,55 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DAF97ED1C
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
+	[209.85.208.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 627117ECF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2019 11:19:00 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id i11so7953520edq.0
+	Fri,  5 Jul 2019 11:19:02 +0000 (UTC)
+Received: by mail-ed1-f44.google.com with SMTP id i11so7953570edq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2019 04:19:02 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=sU9+A6b5ky/7aFiV4NU4nMHNRnVX/Zyq8P+3C8063u4=;
-	b=dEMOUfOiO/33q95MeX9cLdZROr9AFNbAxS52y0GOcp+nHCKhmT3gPHK/TN17SVlIeM
-	WYz2bkTisJD5qGeojG0O9IEOwxzsUIKwk/ayU2zFZ4yELtjPLy39JmNf35seZN3mYvuV
-	6XzoYcnc/i9lbGwIws2sJ+P9W2YJxeoStsyCF6oUp0CWub+CosplygH8lKV+qdgZjyof
-	3UqmoWPaPy1vbMp6eororJI5b0Jjwc6xTGxucltEBnSu6Vh1b0/Ziop6jCaUv/Zqp3pV
-	yhKC9kagVRnexuO2Nkqo8E50dZZAt+GfPJaJowCjaAYEEWnimOM7eGelJ52LtqVDC0Vl
-	3LGQ==
+	bh=oPCJ5W5GJ62o4lzI7rAYXIKQQzsDrnZiiwhchg5RRp8=;
+	b=B7H2jJe+8ELT/FpAe1cft4KiejlzrpdOGqnDw1nEUrp4ObK54R5gcIMwVG3HgGKfmi
+	vNSbO2YZw1BqJV6oZquVJ6xbD7XDUnGvDVDAgU+UZD4i9x+hm/a5lJerh2j6vRtZlvWU
+	1HtWIyG+kzWKlOQF5RicshORo4BirVZKxF3LGAfDSBmSgENB2mZ/vbft5bRE3rvqpUy6
+	F+JxZOugFpGp3uUpRhmUCzPvaTbH6A+wUN1095LQqzO6ILgWpe40T2A+QX+S1dvyB6dV
+	I4cnzx6Yyhz/7iNsepEvwDolbdw+IUL10Kle6mLpAaCAVuC4hWttIvOZ8tPXGQc7iNyi
+	/LkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=sU9+A6b5ky/7aFiV4NU4nMHNRnVX/Zyq8P+3C8063u4=;
-	b=DJgsbpq6/OiDzDOMT8YZ5Wb5ViYuBdTydViJl9YIPvOvnqFCRL5JPfleTBn+L5Esi9
-	8VQQQLEd/kaMyUMxU4sGLergUvInzXu0pMLwF21dr9S1HxEhXfIfPDJErtKShHXlZyqR
-	Rn6gkh4EUsDyPOHe6PKUT0xVQpdZ73jSFX7saEyqTLLly0R7RD0wxGX97a4J7dMNOOS3
-	r0SlFt9sQBW+V0quT3NJ1d1YhOfg666HA2SrNvUTi+/odoBzyrU0Tse/CPX0/JEa+22r
-	cpOXmpwXMo+pkBXK5CGvmpPPuNMbbD3eLFShDMHK3OjubD+w0Txwwlu2Ac34+13WOoow
-	rIwQ==
-X-Gm-Message-State: APjAAAVfSvd/qeoa7E+sLPO3eRJCA6IKYNpMSjTHb8fPT95eBcTKeJ8V
-	aDJ7ZSwFlE5c+okcnPpFDiGrFArG09g=
-X-Google-Smtp-Source: APXvYqzu1WKkqG4B5GRE0Tj12vwsGNUoq/UFD1JRFrRwkdzFRLDvBLgi90lsb4iY6jMSclXtLJAuvg==
-X-Received: by 2002:a05:6402:12d2:: with SMTP id
-	k18mr3805306edx.197.1562325541601; 
-	Fri, 05 Jul 2019 04:19:01 -0700 (PDT)
+	bh=oPCJ5W5GJ62o4lzI7rAYXIKQQzsDrnZiiwhchg5RRp8=;
+	b=lI8Xhn/GPiFLOKpv2Q97VYwXd63QGRhhiD02nm6mcexFHL2GRAPx8Vhad2xXGW8ypn
+	WuZlljsDCIBy36BLKsMm2MwSFIDUXGNqCamgmv5uMhW8Na+eDPX6wyM9192n0nTWcTIT
+	2X0sYTbv6nZXfr8MbFzwFV89rRyfxRTJlQ0b2ES6D18OvBtLeArTYLaiCO311KLkxM+F
+	Idu02QfAlwok4FdfGd3wfVJ0gg2pBVvYNOZrGdZ7Ds3OwXVdeS4JQ2J/VUudzy202gam
+	SBD3Pgbf5ynHlrml38hnahXBcWjz9NgfMVt5jO7VtTlEXCRIr5C5hgF/RytJgsAnQwpb
+	K4Kw==
+X-Gm-Message-State: APjAAAXSQcsq9i+2y/q4lWeyWuoYkTqk9TMa7bWv0Z189f2agC41EesR
+	NAAmrVCPXflw3OUuoANqh7/cC3GEKwg=
+X-Google-Smtp-Source: APXvYqwXiQTJFiG3fMIBAduxeszMtTWXhseeaj2k45xyHI30f092nDPjJHeF5QaWo0K1/qi3xLcv5A==
+X-Received: by 2002:a05:6402:8cc:: with SMTP id
+	d12mr3938529edz.60.1562325542781; 
+	Fri, 05 Jul 2019 04:19:02 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.00
+	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.19.01
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 05 Jul 2019 04:19:00 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:01 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2019 13:18:14 +0200
-Message-Id: <20190705111824.22255-14-ricardo@ribalda.com>
+Date: Fri,  5 Jul 2019 13:18:15 +0200
+Message-Id: <20190705111824.22255-15-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190705111824.22255-1-ricardo@ribalda.com>
 References: <20190705111824.22255-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH v4 13/23] rhino: Do not use all as PACKAGE_ARCH
+Subject: [meta-java][PATCH v4 14/23] ca-certificates: Cannot be an allarch package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,49 +62,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 11:19:01 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 11:19:02 -0000
 Content-Transfer-Encoding: 8bit
 
-rhino has RDEPEND that are not PACKAGE_ARCH=all
-
-Fixes:
-
-ERROR: mc:inteli7:rhino-1.7r4-r0 do_package_write_deb_setscene: Error executing a python function in exec_python_func() autogenerated:
-
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:do_package_write_deb_setscene(d)
-     0003:
-File: '/workdir/repo/poky/meta/classes/package_deb.bbclass', lineno: 296, function: do_package_write_deb_setscene
-     0292:
-     0293:    if os.access(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"),os.R_OK):
-     0294:        os.unlink(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"))
-     0295:
- *** 0296:    sstate_setscene(d)
-     0297:}
-     0298:addtask do_package_write_deb_setscene
-     0299:
-     0300:python () {
+It RDEPENDS on PACKAGE_ARCH!=all packages
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/rhino/rhino_1.7r4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../ca-certificates-java/ca-certificates-java_20180516.bb       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
-index 0a84473..4242005 100644
---- a/recipes-core/rhino/rhino_1.7r4.bb
-+++ b/recipes-core/rhino/rhino_1.7r4.bb
-@@ -6,6 +6,8 @@ DEPENDS_class-native += "classpath-native"
+diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+index 2db1915..feaa7dc 100644
+--- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
++++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+@@ -24,7 +24,7 @@ SRC_URI = "\
  
- BBCLASSEXTEND = "native"
+ SRCREV = "793b846dcd4e79371bbe8069e4125ec2fd462e57"
  
-+PACKAGE_ARCH = "${TUNE_PKGARCH}"
-+
- inherit java-library
+-inherit java allarch
++inherit java
  
- SRC_URI = "\
+ S = "${WORKDIR}/git"
+ B = "${WORKDIR}/build"
 -- 
 2.20.1
 
