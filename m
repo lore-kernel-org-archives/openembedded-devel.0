@@ -1,55 +1,55 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 73CEA7ED21
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
+	[209.85.208.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D720E7ED24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2019 11:18:57 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id v15so1297654eds.9
+	Fri,  5 Jul 2019 11:18:58 +0000 (UTC)
+Received: by mail-ed1-f51.google.com with SMTP id w20so7952928edd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2019 04:18:58 -0700 (PDT)
+	Fri, 05 Jul 2019 04:19:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=m9aSAk9d/bgKXTmXATTFgyDa5v4oI8VmMcaUWB34WkQ=;
-	b=PisTvw+uEivHu2syrRy/VeZAtWsFfgbtS7eWRH5Ph0YpOhLrs57POC0dWc7ExW0Pm3
-	5Yk1CCVX0q9vxAa4WELbB1rxPAgc6sypaFqNhiFXl6w9mkxVrfpmvXWk4TS7njXmtOSr
-	/5ELFl3TktLTogaTHEIMBaEIPwHBdGWLc+o2NdNeTcAQM6JiCnlnEwZYiVBbZBC6+nep
-	08SbyAU6x1exsO0ottxi1zWtTzt5huElu094pDhAhst2YET7HkFQbxatkMmC9nOOQOwJ
-	vRUKfrUbRIGIP2OsLkxVLrqJeyaWQZb6fBIpXT/9x7065LIODgPTVnb39A6FK3oy+BLC
-	ejrQ==
+	bh=t1rRpptFg/WWWPRfbmgFb05EUnuBwnsZvEqBWfO+mT0=;
+	b=dpIt9dwcEA615I9SJLZassHBmHsWQIcPj8ITpq13+Vn/SLWWjfMAyZMgOLEtJ+PuPb
+	Pvtei8lyOGd1U5O5C/3/nDCJOZ7Ez8hOY0xcC/81vHvVG4Fzfd7gYGaMfPJoTHNLDxXA
+	kjkkpPwIrhKXCXDGukdBHGQ+JYomBPYFjO3Ii652r6GQC2NkYQ56HIRQG3aL/7KWT/El
+	7Ew+3Wlu0mm/bcC3RCl9TZR20//sSFvxTVfwtdyeOInc4scVGTw7b8mUdpS9ZU2mUCEB
+	Id1Q/4Q5J+v2HDJJwimX2jO5frxRFJvuPP2y4dXWpn2+5bCs0QdzlVW4mIyvHUR5Rxem
+	tITg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=m9aSAk9d/bgKXTmXATTFgyDa5v4oI8VmMcaUWB34WkQ=;
-	b=JbCWkqFhi9S8rc7D3W5OUDkRw5rcKns7GozDHXSoWJPCUWtoyIZvueTD6CsgHTcV3w
-	U9Z02KeGNBpd90epXGHnHQkFjZhCeiS9orDRGTS/JWUXXtMkjy4gKhiSMacggO1660e3
-	IYdYvuhTeXeHc4N3RExDEb/vELAlYXgHe1ecT6qBtK+zZwAsuWKqKV/tp/jKBxRe6uIw
-	cPeBKgJ8f8CX2iy6s4U725GWMnRExUg2VFTiNPIpG9wWMbcDO+Mr+jdTh3KrrVXVf2R3
-	aV7WviO/m9msxl3Rv7DHmFxyofd304rKBbaKg2nAGxsru7B2hWoRQQ/Z0wVWe+lH6TOG
-	9c3A==
-X-Gm-Message-State: APjAAAUXYalieuoTh7s2913i80ugDXOGYkayi+CiAI3HpgRJFwg8tNwC
-	GWYv+nFn3Y1l5ZWwKDFBzn4ELAcmUH0=
-X-Google-Smtp-Source: APXvYqzDEnkFAp8FPdj51UlQh9ppCwq14QB6aqgJTZ7puU3cqmiZ9YjzeC91TtuvAb6RqkGqlCmswQ==
-X-Received: by 2002:a17:906:12d7:: with SMTP id
-	l23mr2971209ejb.282.1562325538039; 
-	Fri, 05 Jul 2019 04:18:58 -0700 (PDT)
+	bh=t1rRpptFg/WWWPRfbmgFb05EUnuBwnsZvEqBWfO+mT0=;
+	b=heXti/f/gM04UOLMCqEgCKKPa0vFywaZZ+uUHiOFpkDrqsZtOFqci2MbnHEhfrpy5l
+	sGG+fBnhObkh03E4z90mjgaezUEWTsLIHeVqGoYamTtYSlsvsMSfA4Y+k3RY7M1LZp8B
+	tne9xHtQ3oo7dGl4G12kWa5iDsl9glMXqcBMW06N/EeAKv4L4l+fd1fsjTJQgWddy85c
+	uB79sk6hswmpkgT2vtDO/3wwEiz9Wga2v3jcKnsXYQfiVpRGO/el0Om7zdmS9o0beyA/
+	P0z7feNW84yiJ04h705DPlcyMOWZb9MBjfqLDQz1xIqbh0i+9ib0LLuTbl46kOL8dWLy
+	9fDw==
+X-Gm-Message-State: APjAAAXcW08/DyR2P31JL5MwuFB0MEi2wR1SbtQxw0ai6WQbXIKEELAb
+	8v5u7MVzAXKTfLoCaTbux3Wyk/cyO9U=
+X-Google-Smtp-Source: APXvYqyBqApBCRlktJBPnnhXCtf8IPxt8KW7ojm0TDMe2l+PYvAQuAxeD/u2zsH5p1Wxn4vxIc7xSA==
+X-Received: by 2002:a17:906:43c4:: with SMTP id
+	j4mr2938071ejn.227.1562325539252; 
+	Fri, 05 Jul 2019 04:18:59 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.18.56
+	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.18.58
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 05 Jul 2019 04:18:57 -0700 (PDT)
+	Fri, 05 Jul 2019 04:18:58 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2019 13:18:11 +0200
-Message-Id: <20190705111824.22255-11-ricardo@ribalda.com>
+Date: Fri,  5 Jul 2019 13:18:12 +0200
+Message-Id: <20190705111824.22255-12-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190705111824.22255-1-ricardo@ribalda.com>
 References: <20190705111824.22255-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH v4 10/23] jamvm: Fix binary name for javac
+Subject: [meta-java][PATCH v4 11/23] cup: Do not use all as PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,37 +62,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 11:18:57 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 11:18:59 -0000
 Content-Transfer-Encoding: 8bit
 
-ecj-initial-native is not a dependency, and even if we add it, we get a
-compilation error.
+cup has RDEPEND that are not PACKAGE_ARCH=all
 
 Fixes:
-| /bin/bash: /workdir/build/tmp/work/dbfp4-poky-linux/jamvm/2.0.0-devel+gitAUTOINC+6cef41d859-r0/recipe-sysroot-native/usr/bin/ecj-initial: No such file or directory
-| Makefile:663: recipe for target 'classes.zip' failed
+ERROR: mc:qt5022:cup-0.10k-r0 do_package_write_deb_setscene: Error executing a python function in exec_python_func() autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:do_package_write_deb_setscene(d)
+     0003:
+File: '/workdir/repo/poky/meta/classes/package_deb.bbclass', lineno: 296, function: do_package_write_deb_setscene
+     0292:
+     0293:    if os.access(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"),os.R_OK):
+     0294:        os.unlink(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"))
+     0295:
+ *** 0296:    sstate_setscene(d)
+     0297:}
+     0298:addtask do_package_write_deb_setscene
+     0299:
+     0300:python () {
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 ---
- recipes-core/jamvm/jamvm.inc | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ recipes-core/cup/cup_0.10k.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-index fc21380..cdf087e 100644
---- a/recipes-core/jamvm/jamvm.inc
-+++ b/recipes-core/jamvm/jamvm.inc
-@@ -34,8 +34,11 @@ EXTRA_OECONF = "--with-classpath-install-dir=${prefix} --libdir=${libdir}/jamvm
- # Needed for big compilation targets like OpenJDK
- CFLAGS_append_class-native = " -DDEFAULT_MAX_HEAP=1024*MB"
+diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
+index 7792c62..3ce5a21 100644
+--- a/recipes-core/cup/cup_0.10k.bb
++++ b/recipes-core/cup/cup_0.10k.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c
  
-+EXTRA_OEMAKE = "JAVAC=${STAGING_BINDIR_NATIVE}/javac \
-+                GLIBJ_ZIP=${STAGING_DATADIR_NATIVE}/classpath/glibj.zip \
-+               "
- # Enforce usage of ecj-initial.
--EXTRA_OEMAKE = "JAVAC=${STAGING_BINDIR_NATIVE}/ecj-initial \
-+EXTRA_OEMAKE_class-native = "JAVAC=${STAGING_BINDIR_NATIVE}/ecj-initial \
-                 GLIBJ_ZIP=${STAGING_DATADIR_NATIVE}/classpath/glibj.zip \
-                "
+ RDEPENDS_${PN} = "java2-runtime"
+ RDEPENDS_${PN}_class-native = ""
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
+ 
+ inherit java-library
  
 -- 
 2.20.1
