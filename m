@@ -1,52 +1,54 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
-	[209.85.208.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 87FC87EC95
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 076617ECDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2019 11:18:29 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id m10so7934657edv.6
+	Fri,  5 Jul 2019 11:18:45 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id k8so7930020eds.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2019 04:18:30 -0700 (PDT)
+	Fri, 05 Jul 2019 04:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=aB0ZAUonkXqRO4062phpxKktj3xEMk7KEUa1PAo37o4=;
-	b=GUzwd0OIQk/4GV7gRBtG8rwBdDhV9IqTbsQMeM76u5ua/HPdNOuwMNwPXiAIWRbtag
-	7uJQWs3YJ8v1tEpqRlyS2tBRllgwwUBB9TpfEql1EtEI5ceyxGNlC5Qas6+VdJQxEh4e
-	CC/MC1b3TR4/n/oiv6qm0PB6GLiwdzmYDjPyM48Mi/rKp5RLEYsghBvaWM2Bp+AW77r8
-	+gQTWzS48d5rY8/N4eqlHQQz8nn8Rq5UMqmWfKd1e7ODI/+0FLLPi/iEad1Lg5/tCElh
-	JMG80MYaGkWoW/SEfqgM8jJabfqJiKiXdThuGsc8hLx0z+Wf0NNV7wvZH5e2f6Eyd9Nb
-	PlGQ==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=7Rbquoktc80IW3Cz9bVt0h1bmLXwcYU5bOj/Y8otFls=;
+	b=m0GlwwWvsXER695V+d8m1O1AuQAFmAiguCZGJeR/+G1zQ1m8v6ylOh6h5DH5MUbqSu
+	o+2Elrm/335wmbZ7BrCn944gPlXrccJ9BB/cO7g4UY4AmkUmA6fFYG7Y1PglVR5uP75E
+	nrME63B7LqSrSdwF9LHGdAhyO+IXCJbkAAj3UBmL0Fcnwnsgwwihb9TI7NYGb5ckRohm
+	xRE0qQ5Afnw+seV1XDrkbvD7IK0UJkG9jSVh3aS8dKaWr2+Bkrmkpb3AS1IfVG7BSvIC
+	swaygGcUrlec65QAlNySWwS2ceZqbPMy3WRsrMcXBDPDfnNNu04qIf5Xq24mA+9xCBxA
+	ih4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:mime-version:content-transfer-encoding;
-	bh=aB0ZAUonkXqRO4062phpxKktj3xEMk7KEUa1PAo37o4=;
-	b=EeTUsl/Av4eFjFw+wHz5GEExzCDQ48Lmz7hhdWE7EhUWNzFEToBJrOEG9J95TsINRG
-	JIyXJQgO+EPG+qO65QWkprYHBBWGPIuQH/Om75g+718Dj8vkJA4sPjmmhb9D1WXMCHnr
-	Uzi1NYMU5fOULIXiKTuIsg5IZJhnvR6ednBrD/JKerlF1duA/D0lSim5F/1bUHtpd6HH
-	hqPlgtvAyhMz1uwAcewODmTdkvR9+NxSL9AKcqSu+WOFljZ0eFK+3yD6hKFrmp5muLK4
-	nvH51YSEnhXahSNuEyRED8kiyGnYluU1uDjBlbo5vs6Hkx+/MoNr5qoCG0zYIQY8ndJd
-	MfVA==
-X-Gm-Message-State: APjAAAXkID8qeIvAFPe70/P4HfJ8HcRfTtKobzkElZzM9ovbW3pDy2FE
-	KUMeMB/95fhe6H8i4EJQHm3cHmaF39A=
-X-Google-Smtp-Source: APXvYqysmbxaS/VfulA0u7nu4zwXar8PSmJ/OR/siFe9SJsC2N5bdWCCY5+pL7zK3FImNI2UD2SyUA==
-X-Received: by 2002:a50:9730:: with SMTP id c45mr3965656edb.196.1562325509855; 
-	Fri, 05 Jul 2019 04:18:29 -0700 (PDT)
+	:in-reply-to:references:mime-version:content-transfer-encoding;
+	bh=7Rbquoktc80IW3Cz9bVt0h1bmLXwcYU5bOj/Y8otFls=;
+	b=ft0Fx8iIzQpvRkwF4V0/VtPM0+FChXr1ijsM15GHc8gRKSQZZqWegJ6xRwDKB+VRNA
+	SRbvWcDAnWF5KrN4jFS2BjFZoKPsqXGB4+mVBZUlrTf97CZ2PkZjce7s1lUlDjQCJn+H
+	O7drGW4BKSFcNZo/bgQfAeBw43+3a9nNimPiYZ/o+l+mOWMajv+yY9wmdTlq/FhwT8kl
+	lrEJH86HGk3yH6TTCEqsIfmS52raTt8/poZnM0cMhWoRAQli7chpMvWdXRrRsftP5SB0
+	0tJaSq5/XwkNszlifIy2Lm62jb9HHO9QnWj5J7Y87PncesKeHb7GeHxItSv38f6o5rz3
+	Y/kA==
+X-Gm-Message-State: APjAAAU98DdW/AKzqEgGUQ0IN0YEB8pOMrZvRhhvG1UzzYGHQQCzZvWH
+	Vg1JOwBoXrrQS6cUqD+unSQR3ep1Ybg=
+X-Google-Smtp-Source: APXvYqx3hjDE0bfZQ80gXX7AU/OFm39wjiycwsNjYkMYXO3m6PX4KK0RXVJr9f+333L/ecPcEGVSHw==
+X-Received: by 2002:a50:8d54:: with SMTP id t20mr3827716edt.143.1562325526434; 
+	Fri, 05 Jul 2019 04:18:46 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.18.28
+	by smtp.gmail.com with ESMTPSA id h10sm136604edh.64.2019.07.05.04.18.45
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 05 Jul 2019 04:18:28 -0700 (PDT)
+	Fri, 05 Jul 2019 04:18:45 -0700 (PDT)
 Sender: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo@ribalda.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2019 13:18:01 +0200
-Message-Id: <20190705111824.22255-1-ricardo@ribalda.com>
+Date: Fri,  5 Jul 2019 13:18:02 +0200
+Message-Id: <20190705111824.22255-2-ricardo@ribalda.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190705111824.22255-1-ricardo@ribalda.com>
+References: <20190705111824.22255-1-ricardo@ribalda.com>
 MIME-Version: 1.0
 Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
-Subject: [meta-java][PATCH v4 00/23] Multiple patches for multiconfig
+Subject: [meta-java][PATCH v4 01/23] icedtea7: Add missing DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,70 +61,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 11:18:29 -0000
+X-List-Received-Date: Fri, 05 Jul 2019 11:18:46 -0000
 Content-Transfer-Encoding: 8bit
 
-Patches to build meta-java with multiconfig and aarch64.
+Fixes:
+| checking X11/X.h usability... no
+| checking X11/X.h presence... no
+| checking for X11/X.h... no
+| configure: error: "xorg headers were not found -
+| 	try installing xorg-x11-proto-devel."
+| NOTE: The following config.log files may provide further information.
+| NOTE: /workdir/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/config.log
+| ERROR: configure failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /workdir/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/temp/log.do_configure.29594)
+ERROR: Task (/workdir/repo/poky/../meta-java/recipes-core/icedtea/icedtea7-native_2.1.3.bb:do_configure) failed with exit code '1'
 
-v2 and v3 have been reviewed at
-https://github.com/ribalda/meta-java/tree/v2
-https://github.com/ribalda/meta-java/tree/v3
+Suggested-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+Signed-off-by: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+---
+ recipes-core/icedtea/icedtea7-native.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Richard, thanks for your patience :)
-
-
-Ricardo Ribalda Delgado (23):
-  icedtea7: Add missing DEPENDS
-  openjdk7: Make kerberos optional through PACKAGECONFIG
-  openjdk8: Make kerberos optional through PACKAGECONFIG
-  classpath: Fix build with targets aarch64
-  jamvm: Do not build for aarch64 targets
-  cacao: Do not build for aarch64 targets
-  javasqlite: Create cc tool to make libtool happy
-  jdon: Fix location of S
-  rxtx: Fix path of javac
-  jamvm: Fix binary name for javac
-  cup: Do not use all as PACKAGE_ARCH
-  dbus-java: Do not use all as PACKAGE_ARCH
-  rhino: Do not use all as PACKAGE_ARCH
-  ca-certificates: Cannot be an allarch package
-  xalan-j: Do not use all as PACKAGE_ARCH
-  xom: Do not use all as PACKAGE_ARCH
-  jaxen: Do not build an all PACKAGE_ARCH
-  jlex: Do not build as an all PACKAGE_ARCH
-  bsf: Do not build as all PACKAGE_ARCH
-  poi: Do not build as all PACKAGE_ARCH
-  xom: Allow re-running do_compile
-  jdom: Do not use all as PACKAGE_ARCH
-  dom4j: Do not use all as PACKAGE_ARCH
-
- .../ca-certificates-java_20180516.bb          |  2 +-
- recipes-core/cacao/cacao_2d6f6c14daf9.bb      |  2 ++
- .../classpath/classpath-0.99/aarch64.patch    | 19 +++++++++++++++
- recipes-core/classpath/classpath_0.99.bb      |  1 +
- recipes-core/cup/cup_0.10k.bb                 |  1 +
- recipes-core/icedtea/icedtea7-native.inc      |  3 ++-
- recipes-core/jakarta-libs/bsf_2.4.0.bb        |  4 +++-
- recipes-core/jakarta-libs/poi_3.0.bb          |  2 ++
- recipes-core/jamvm/jamvm.inc                  |  5 +++-
- recipes-core/jamvm/jamvm_git.bb               |  1 +
- .../javasqlite/javasqlite_20150419.bb         |  8 ++++++-
- recipes-core/jlex/jlex_1.2.6.bb               |  2 ++
- recipes-core/openjdk/openjdk-7-common.inc     |  4 +++-
- recipes-core/openjdk/openjdk-8-cross.inc      |  4 +++-
- recipes-core/rhino/rhino_1.7r4.bb             |  2 ++
- recipes-core/xalan-j/xalan-j_2.7.1.bb         |  4 +++-
- recipes-core/xml-commons/dom4j_1.6.1.bb       |  1 +
- recipes-core/xml-commons/jaxen_1.1.6.bb       |  2 ++
- recipes-core/xml-commons/jdom_1.1.3.bb        |  4 ++++
- recipes-core/xml-commons/xom_1.2.10.bb        | 14 +++++++++--
- recipes-extended/dbus/dbus-java_2.7.bb        |  5 +++-
- recipes-extended/rxtx/files/javapath.patch    | 23 +++++++++++++++++++
- recipes-extended/rxtx/rxtx_2.2.0.bb           |  5 ++--
- 23 files changed, 105 insertions(+), 13 deletions(-)
- create mode 100644 recipes-core/classpath/classpath-0.99/aarch64.patch
- create mode 100644 recipes-extended/rxtx/files/javapath.patch
-
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index 70b935a..b578cb2 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -8,7 +8,8 @@ DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
+            giflib-native jpeg-native libpng-native \
+            glib-2.0-native freetype-native zlib-native \
+            fontconfig-native zip-native \
+-	   unzip-native make-native util-linux-native\
++	   unzip-native make-native util-linux-native \
++	   xorgproto-native libx11-native \
+           "
+ 
+ PACKAGECONFIG ??= ""
 -- 
 2.20.1
 
