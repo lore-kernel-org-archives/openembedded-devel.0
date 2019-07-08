@@ -1,42 +1,48 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
-	[209.85.208.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EDA87D2AE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 499DE7D30C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 07:10:52 +0000 (UTC)
-Received: by mail-lj1-f174.google.com with SMTP id k18so14742701ljc.11
+	Mon,  8 Jul 2019 18:36:51 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id n4so18281611wrs.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jul 2019 00:10:53 -0700 (PDT)
+	Mon, 08 Jul 2019 11:36:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=JWmT+QKGfjXYLw9VIfGKIAXtHLV7IAWwwFpzyJ48eio=;
-	b=ZCBy45HRhiNsy4VkDHCm9rNyIh67Nm07MhIyRf4cTsN9grIogzNfY51M6bsY8Cezi8
-	WN3+RTzDrR1uzWYnGA3VywCbtjQfCWVveEvBRjW06pDCwD9hLNbCQZSI5Kyk74kmiYs/
-	PJKzi2S4Fcf3l/IruwRp86SCiZS+62mP0M5xzxYTXOm6hzHm0Fzi9zb48Po2wpg2DW9+
-	Mnj996H+cIbxfttCp0Km5vBzipbhz23X1emnhFvQ084wV/yt7oP+DXKzGpj/QjHVTJGi
-	/CwilZfbIKH9J5V1gKuQuOs8eOhsbQYoeA3B4U5UkpKv+6JutjIY5V1G3n/TxdNQbvuy
-	mB+Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=PgRfIvtayKD9M8ycEjcgWsC/7QPYZ3/OrwEOsEApapE=;
+	b=TjXCUCraa1UG9gam63m67TtSGNdtQWNUgHs1SfMRtOKE7+pdbTKe7UWNxSuWeCIwns
+	kwUGGvECNxqMcixhDL6G1g3KZo+yOjCFpkKDV4c+QpfRyUI7wMddYwzCm5u+Qc2ppQq1
+	sdGY9M5SfT8HpqnJZYqFic5rsFMhDCr07V3E6HqhNZGZOTGOd73GaGL1L9HvarzaRcB0
+	6MKsxJzJwYMZ2LpVNC7k3oozef1kzMJWEo2X57kybwu/MqgqtB2Z3cSl9BWqpW8n40P3
+	4ZA+kqMPnMJzf7KVHsIFiY1LWTzmtZywUtXe4x8JVKb5C/Hu3fAAM0zWXDn1B1+0t5e1
+	FpXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=JWmT+QKGfjXYLw9VIfGKIAXtHLV7IAWwwFpzyJ48eio=;
-	b=LoTtw2yS674+cURov+m7pf5XuHBGRwM0eebSD1XaC5rDiDIkg4V08vrf1Dz1XwR0y5
-	GIpi1rpAf1Xgw5drPL+ZXO81jIBpcm3thdGQl5iPsLKO6RmUIOWBEyTRdfKLw42QixpI
-	qzUvZqx83w6oDUJm4VksdmqfPivRLSeRZwcGlLC1FDUZ+Yx7hpp7U1rUc1MnFj05FOUa
-	7UO2+DHTqcwCezDyS1XLkiq6/2iXl77LK/OFaXeatDOTKL1c5cD71cC/DhCBvDhymZ+n
-	3WY4DHo02BuzFvjDeVGf+Qqq0k+2AKHmJqWXGcUm53gWyX53kPyLh0auCceiUEPW0PR1
-	pM6Q==
-X-Gm-Message-State: APjAAAVLbMEhstSVCKxkCOIT5zELU6SvjqBnApGsYiOdk3zUyZsNeyWs
-	z1f4+455mnZdD3OFJJBDw6G+1cI/hUXuPkEJ0qgnow6ebfc=
-X-Google-Smtp-Source: APXvYqxImLLQHLNxjjUEwKJ2H4nAQGE2D7kRwqxZaIKmabEMjYtnMOHawXM4bwetycACJK+rnYnT0qeFw0EoYQ6XNfM=
-X-Received: by 2002:a2e:480a:: with SMTP id v10mr2598lja.94.1562569852375;
-	Mon, 08 Jul 2019 00:10:52 -0700 (PDT)
-MIME-Version: 1.0
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Mon, 8 Jul 2019 09:10:36 +0200
-Message-ID: <CAPybu_0wQV+iwkbUTYm1hF3SQDa9pqke8z4u1oSwDX75eJyKug@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: WARNING: on wrong $PACKAGE_ARCH
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=PgRfIvtayKD9M8ycEjcgWsC/7QPYZ3/OrwEOsEApapE=;
+	b=Zc+xaQ9Q7tW31hzwEpPXFeRLn7N7DWnKmJNb5tdAx/t3/Dca+NWhSab1r3tPPUBF/I
+	WxR+cAhU8XqAcn8YRDSr/Ne8JoOXYW5qGpnriABimxIXdkWsjp1ZSu7p13CCi4pCIY2c
+	EKN0Paoe8xLyQrQLn1cAeayfXTOC9dFNoWYSRsBdRPW8M24ljC3mJYeSXR0orG7XTorr
+	EgjKOHIBCzs1Yl/OqiksfUu/9JEN6o0iIed0TQKHPc0u2Hy1V5kGGOctZwIkOo3BGwsN
+	o2CTofQZIMaEl3EZ+DxrMifCsjhxjbMNhdD1MkqiqS4WpdW0chNFl6sgHylY2iUeyfwx
+	GEWw==
+X-Gm-Message-State: APjAAAVjrT4ymkL0XYRkrEHisq5/RY+CviFlF2VfWGLZPI35+PfM22fS
+	A/ZuB1F4aN2zlR4mZqRqKkovrmx/
+X-Google-Smtp-Source: APXvYqyg3j/wq4yODcFgdv8j4Sl2j6BD373JrbvoEen6OMRFGeSGGZBfaRBD6NmDIZXdgdyqDsBdnw==
+X-Received: by 2002:a5d:4e8a:: with SMTP id e10mr1421594wru.26.1562611011766; 
+	Mon, 08 Jul 2019 11:36:51 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	c30sm18050681wrb.15.2019.07.08.11.36.51
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 08 Jul 2019 11:36:51 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  8 Jul 2019 18:36:50 +0000
+Message-Id: <20190708183650.1057-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [warrior][PATCH] turbostat: copy bits.h from kernel to turbostat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,44 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 07:10:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 08 Jul 2019 18:36:51 -0000
 
-Hello
+From: Liwei Song <liwei.song@windriver.com>
 
-On our organisation ( qtec.com ) we support a distribution on multiple
-architectures and machines. Since the introduction of multiconfig we
-have a single builder and a single package repository, what we really
-appreciate.
+because bits.h was included in msr-index.h, so we also need
+copy bits.h from kernel to tubostat to aviod compile error.
 
-Unfortunately, there is one single frustration, and is "wrong"
-PACKAGE_ARCH. For example:
+Signed-off-by: Liwei Song <liwei.song@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-- -native packages that DEPEND on non-native recipes
-- tune-arch that have some  variable dependency on MACHINE
-
-Some of this errors result the same workdir used twice and invalid
-packages.  Debugging such errors is not trivial, involves horrible
-error messages, bitbake-diffsigs and non deterministic errors (the
-build order can hide such errors),
-
-So I was thinking that perhaps I could implement some tests such as:
-- all and native can only depend on -native
-- tunearch cannot depend on machine
-
-I HAVE NO IDEA how difficult could it be, but before implementing I
-would like to know if that is something that upstream would be
-interested in, because if it is not upstream I will have hard time
-convincing my management for getting the hours required.
-
-What is your opinion?
-
-
-Regards!
-
-
-
-
+diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+index dc3e78febb..3f25e6f004 100644
+--- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
++++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+@@ -41,11 +41,13 @@ do_configure_prepend() {
+ 	mkdir -p ${S}
+ 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
+ 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
++	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
+ 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
+ 	cp -r ${WORKDIR}/COPYING ${S}
+ }
+ 
+ do_compile() {
++	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
+ 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
+ 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
+ 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
 -- 
-Ricardo Ribalda
+2.17.1
+
 
