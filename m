@@ -1,49 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BE1F57D1E9
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 88A0E7D217
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 02:42:53 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id y15so6837226pfn.5
+	Mon,  8 Jul 2019 02:44:32 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id y15so6838745pfn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jul 2019 19:42:55 -0700 (PDT)
+	Sun, 07 Jul 2019 19:44:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=WhaJumdG3gJBCTbMQVg0pqjsXNf+FfaIZlPqo/uLo58=;
-	b=p87VgRhiwsM2VxtrNkW2IxftPzLS/XMnx3baFQxX65KNx/MGi4smfHWOMSvN8lUtLT
-	vW7ZOhndJC2xDABPNxOLknhaBdRDh6ZYyYXEGkAi1cxM9JjPqyqGLwvrTjx2bLNkzrIn
-	mAhp+nuxq9mOgD04Jaq69h/Tyl5BcbUvaxP9QxDG0Mw1S1SGwbjAvyVAW+IwDdUgeXWN
-	9VHKZJrWexjJMCm0EpJqeFdL7m5oq7rV7vcBNjtuBReliPHewuwp4mZUe0L9ThbE0C/2
-	ZCtlJQTWHEmwbNn8ijb4WM1Sb81OWXcn3g/N4Qtce8NVMo8xP0a6iKLubjy1hUwPqQOh
-	R8Cg==
+	bh=JJz51Kns6n9ejB2oUoqSQNyBPvn/ivX1PqLGcpSc+yY=;
+	b=FBM89GN6/swLisLyEfjobB2AroHiaQJCoiyiyOdjkLBg0bINTzOoC14K/jDEkkwj/4
+	19AwTU7mYJAbOi2tiRZNjFKvgGxMxHfWO9KB1UivJ/txM88yVeduGT+qdeQjT2QKOfxP
+	wKiNwPCb9SFKY+Qhf2EPCftzieX4vkmYxAG7PaYvA7tTvxqIPcWUTCxSgAmUeJ3i+sHv
+	gVqi1Hspn+03JjEKB1prsn9m6Z8NS+EfAtgnHkFcAi+FgLo5ODl0W4YN7CswdD++qbMV
+	q1PkWlvpQKdmT3b6DK+pRrlo1woK5StJ8dquLeAIqgRcEIaj4sZcouahDfqtOg/+3gSO
+	Ot9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=WhaJumdG3gJBCTbMQVg0pqjsXNf+FfaIZlPqo/uLo58=;
-	b=ImQxMj4u8D28MSj/SOuJjsMejAi04D/8UZ4cdFUwnbzsx0QtSgk8g39n/6SGs3UIXs
-	VU5XqLLYrhPow2L5HLEi4cm6xYjEyeR/z9HCSycw2Qbnz/+X5awV+NfWgOytlJmpJxUQ
-	tDIJOovysFwSelDeq3O6oBsxqCF0v39QCIDAJSkTt3UcdaYC4i819Anuhdmu2iHGO3K7
-	JrZsCef6uT3PEoymP3tK6yHFWlJu2lygLcqpoTQn0/A2WRlUUHNTlHeMz7oYXwHyJODz
-	3j50FdJLRtJTQGcMYddjWD96eWoLrq73fJvDgDzDOeEY3ocnZ8NSlH7+xHHc71hIc8YV
-	cuJg==
-X-Gm-Message-State: APjAAAUGxoEcuAZLO8JR+Poy1NPNKXYbcSi+35ihCT5R4SidEuLpgqck
-	WWQDzXkujENDrO45mepr4WYrr+d6L4A=
-X-Google-Smtp-Source: APXvYqwIeftDJVZdIjSmhpzxqcMyIbsm2k4T4pm49coK3QvlnV/zbO+mwCJADqOFSIqbRWawN3JB/w==
-X-Received: by 2002:a65:6294:: with SMTP id f20mr10906083pgv.349.1562553774706;
-	Sun, 07 Jul 2019 19:42:54 -0700 (PDT)
+	bh=JJz51Kns6n9ejB2oUoqSQNyBPvn/ivX1PqLGcpSc+yY=;
+	b=Bcj7Iq7M8n5EX9KUeAbmSXHl+xZ84B+kreOFTksRIZ2UIS6+k8RdmJJyX0aFOsDV9v
+	MBIGvXyiQXstxf5Xn1WKvgYM7xuIlggricfsTHVmmll5+vVt3ZXcYfJLygGNVPt+yxfA
+	nAU0ihYvd7WTe9L5h+kC64Uq605Ny7EatL5IvOqASzYKGXIFCDMm02xZpzupz+3KfbzL
+	8NCW1v9M7oJNQCX7E6QjQOZK2W8CooBfCHKmf9kdmJci0M36SuIcfdFvuUONU8m7L7fN
+	Afo0ip2XPPSiIGsqufgY6LbuP7pqa++/MQ8/C5Skqv9a8l+N3uBkGWGHe8bFBUmUGt5W
+	HhlQ==
+X-Gm-Message-State: APjAAAV0JW90acYNAVRvUjGY8f6j6qtithz+Cm6H3Q0oIXL7r3gMB+wx
+	8dOal4kns6WatixYF/O9l/cQ+eV3ZbU=
+X-Google-Smtp-Source: APXvYqwXRBgOkfVZSL+lVcvySM6KrAbChZtREw/Cvqu/DNuMYRMhegRdSfmDPDdU1a9w+boxNHlwjw==
+X-Received: by 2002:a17:90a:5288:: with SMTP id
+	w8mr22147698pjh.61.1562553873508; 
+	Sun, 07 Jul 2019 19:44:33 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:c2e:f46a:e59c:dae7?
 	([2601:202:4180:c33:c2e:f46a:e59c:dae7])
 	by smtp.gmail.com with ESMTPSA id
-	y12sm19547563pfn.187.2019.07.07.19.42.53
+	m11sm3404107pgk.65.2019.07.07.19.44.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Jul 2019 19:42:54 -0700 (PDT)
+	Sun, 07 Jul 2019 19:44:33 -0700 (PDT)
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
 	openembedded-devel@lists.openembedded.org
-References: <20190708004749.11268-1-open.source@oleksandr-kravchuk.com>
+References: <20190708005345.6211-1-open.source@oleksandr-kravchuk.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +90,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <33ea17ac-1dc1-c16e-8040-f9c90e20921d@gmail.com>
-Date: Sun, 7 Jul 2019 19:42:52 -0700
+Message-ID: <02e59b59-5d3c-0c7e-6259-0caebbbf6e6c@gmail.com>
+Date: Sun, 7 Jul 2019 19:44:32 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <20190708004749.11268-1-open.source@oleksandr-kravchuk.com>
-Subject: Re: [PATCH][meta-networking] uftp: update to 4.9.11
+In-Reply-To: <20190708005345.6211-1-open.source@oleksandr-kravchuk.com>
+Subject: Re: [PATCH][meta-networking] ipvsadm: update to 1.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,88 +109,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 02:42:53 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 02:44:32 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 7/7/19 5:47 PM, Oleksandr Kravchuk wrote:
+On 7/7/19 5:53 PM, Oleksandr Kravchuk wrote:
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  .../recipes-support/tnftp/tnftp_20190602.bb   | 39 +++++++++++++++++++
->  .../uftp/{uftp_4.9.9.bb => uftp_4.9.11.bb}    |  4 +-
->  2 files changed, 41 insertions(+), 2 deletions(-)
->  create mode 100644 meta-networking/recipes-support/tnftp/tnftp_20190602.bb
->  rename meta-networking/recipes-support/uftp/{uftp_4.9.9.bb => uftp_4.9.11.bb} (77%)
-
-There is a new recipe here too. please submit independently.
+>  .../ipvsadm/{ipvsadm_1.29.bb => ipvsadm_1.30.bb}            | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-support/ipvsadm/{ipvsadm_1.29.bb => ipvsadm_1.30.bb} (90%)
+>
+> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
+> similarity index 90%
+> rename from meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
+> rename to meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
+> index 4f3c16dc3..22cb88ac1 100644
+> --- a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
+> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
+> @@ -16,14 +16,14 @@ LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=b4e40069f15598d0e3
+>  
+>  DEPENDS += "libnl popt"
+>  
+> -SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.tar.gz \
+> +SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.tar.xz \
+Is the src uri dropping gz files?
 
 - armin
->
-> diff --git a/meta-networking/recipes-support/tnftp/tnftp_20190602.bb b/meta-networking/recipes-support/tnftp/tnftp_20190602.bb
-> new file mode 100644
-> index 000000000..83ad11b0e
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tnftp/tnftp_20190602.bb
-> @@ -0,0 +1,39 @@
-> +SUMMARY = "Enhanced NetBSD ftp client"
-> +DESCRIPTION = "tnftp (formerly known as lukemftp) is a port of the NetBSD FTP client \
-> +to other systems. It offers many enhancements over the traditional \
-> +BSD FTP client, including command-line editing, command-line fetches \
-> +of FTP and HTTP URLs (including via proxies), command-line uploads of \
-> +FTP URLs, context-sensitive word completion, dynamic progress bar, \
-> +IPv6 support, modification time preservation, paging of local and \
-> +remote files, passive mode support (with fallback to active mode), \
-> +SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
-> +throttling."
-> +
-> +SECTION = "net"
-> +LICENSE = "BSD-4-Clause"
-> +
-> +DEPENDS = "ncurses"
-> +
-> +SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-> +    file://tnftp-autotools.patch \
-> +"
-> +
-> +inherit autotools update-alternatives pkgconfig
-> +
-> +ALTERNATIVE_PRIORITY = "100"
-> +
-> +ALTERNATIVE_${PN} = "ftp"
-> +ALTERNATIVE_LINK_NAME_${PN} = "${bindir}/ftp"
-> +ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
-> +
-> +FILES_${PN} = "${bindir}/tnftp"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=6d6796cb166a9bb050958241dad9479e"
-> +SRC_URI[md5sum] = "a49fbe752318d5a7893f900046ea00d5"
-> +SRC_URI[sha256sum] = "c94a8a49d3f4aec1965feea831d4d5bf6f90c65fd8381ee0863d11a5029a43a0"
-> +
-> +PACKAGECONFIG ?= "openssl \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
-> +"
-> +PACKAGECONFIG[openssl] = "--enable-ssl, --disable-ssl --with-ssl=no, openssl"
-> +PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
-> diff --git a/meta-networking/recipes-support/uftp/uftp_4.9.9.bb b/meta-networking/recipes-support/uftp/uftp_4.9.11.bb
-> similarity index 77%
-> rename from meta-networking/recipes-support/uftp/uftp_4.9.9.bb
-> rename to meta-networking/recipes-support/uftp/uftp_4.9.11.bb
-> index a64d081cf..8b47bd16f 100644
-> --- a/meta-networking/recipes-support/uftp/uftp_4.9.9.bb
-> +++ b/meta-networking/recipes-support/uftp/uftp_4.9.11.bb
-> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
->  UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
+>          file://0001-Modify-the-Makefile-for-cross-compile.patch \
+>          file://0003-ipvsadm-remove-dependency-on-bash.patch \
+>          file://makefile-add-ldflags.patch \
+>  "
 >  
->  SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
-> -SRC_URI[md5sum] = "154e2c82a33fd4999040f8836e2dca2c"
-> -SRC_URI[sha256sum] = "c04bc75a88fc3d57504269f260be4d0b1bc440508b5a5ca587df6c16b771aa48"
-> +SRC_URI[md5sum] = "c0bc86b3067825a3866de9ef80c7451a"
-> +SRC_URI[sha256sum] = "2ddc835a35f669d55df27ab6883ba19bb00bc8e4b66897ceaedb160b02246b1a"
+> -SRC_URI[md5sum] = "88b35030b4766b3e44ad15aacdef65c4"
+> -SRC_URI[sha256sum] = "297f5cd459c3eef81ed0ca32e53bf320ed6b132fe7ed6ea5e44aa6b1fbd2a7de"
+> +SRC_URI[md5sum] = "97f11b6af1920fde5a9d9eac0d7f9e50"
+> +SRC_URI[sha256sum] = "95573d70df473c9f63fc4ac496c044c69e3a6de7ccac119922210c0b44cd7a0c"
 >  
->  DEPENDS = "openssl"
+>  UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/ipvsadm"
 >  
 
 
