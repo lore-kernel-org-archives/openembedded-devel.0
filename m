@@ -1,49 +1,22 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AC8E60685
+Return-Path: <Yongxin.Liu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 78A176C108
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 00:53:46 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id m8so4631246lji.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jul 2019 17:53:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Xz1bpiNRNwgSqCDk5NCbLiRX7x09SuC1g+oM4iMmwKY=;
-	b=pLiZGmP+wu6g2vdX+DElQl50barK20h7WNQWNo1oLQ2K43OKQX6yJ4TujdecxIyOMy
-	PeNjn4+YCjNGySEcVm8yIRKIefFseFujRv2awiG+1dJE3pB8tzoHLn5FYkJz469NGj4D
-	o3TssBxnaiW8KWpMdRPk51t6Ls0wq156MFavFt4/4B+YgTtygpvqEl5luAKWtSaAAHpC
-	SrJALnO1+JqVzin75TQNuJViOQU/xPaiTuQi8gCKEwWdqw+VskJRV/3mIc9fJ4IkKP0U
-	tsx6VJK4FmEbcgmXkYDwdWZ4MXs53Z5Fz1vsF1DVUO9ovNBSO31Il99Hg15nke7SZESP
-	rJ9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Xz1bpiNRNwgSqCDk5NCbLiRX7x09SuC1g+oM4iMmwKY=;
-	b=tSbkVDpIliir428imzge1xrb57rx3QVp+lDIo+5cft4QEom4trbE6RT+hQwojWhDgp
-	mqhte4nDx/zAR9oql2jAgTvfoFa82i1UHnKEaxlx+Ut7W5/W7HkK581lSWBfn6lLjc6L
-	YpSvL3JBKD+AYP+BKRXKeewSAYT5yXK8YqA7b3pKwzUUjr3f8AJ4/kqm9yquoxnuPHr9
-	tSGsHTfr3kg6tMFFQdsrmlJ1OqVuxyXxnS/cz0F8ZSmTEQsP5pzH4Yo1aHnfSNBi2b1f
-	ACgw25EwfJE1kSL9lf9Hf0NS2ptcQJb6kODBIwcz+FsDTsZJXW2+SRK0KMZuGTB1cYhn
-	ndVQ==
-X-Gm-Message-State: APjAAAXdeSgAa6H1V7Y+jKOI+SwCznNBoaq7nY2vBQF77qz30anEbX3H
-	V2bOGJQDL4ln5DMK84j4U0MMMdxQ/e4=
-X-Google-Smtp-Source: APXvYqwxpn7OuY0qg3c7GWj3rbldWHi8YLU5xk2iDlw8MJdOmtdG7Uul5o/uQasj1+SngXc62PbDzw==
-X-Received: by 2002:a2e:3c1a:: with SMTP id j26mr8628429lja.230.1562547227341; 
-	Sun, 07 Jul 2019 17:53:47 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	s19sm3291947lji.38.2019.07.07.17.53.46
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 07 Jul 2019 17:53:46 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jul 2019 02:53:45 +0200
-Message-Id: <20190708005345.6211-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] ipvsadm: update to 1.30
+	Mon,  8 Jul 2019 01:54:32 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x681sW6t005223
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 7 Jul 2019 18:54:32 -0700 (PDT)
+Received: from pek-lpggp6.wrs.com (128.224.153.40) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Sun, 7 Jul 2019 18:54:20 -0700
+From: Yongxin Liu <yongxin.liu@windriver.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Jul 2019 09:52:35 +0800
+Message-ID: <20190708015236.42034-1-yongxin.liu@windriver.com>
+X-Mailer: git-send-email 2.14.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2 1/2] keyutils: add new recipe for version 1.6.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,40 +29,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 00:53:47 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 01:54:32 -0000
+Content-Type: text/plain
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
 ---
- .../ipvsadm/{ipvsadm_1.29.bb => ipvsadm_1.30.bb}            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/ipvsadm/{ipvsadm_1.29.bb => ipvsadm_1.30.bb} (90%)
+ meta-oe/recipes-security/keyutils/keyutils_1.6.bb | 38 +++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-security/keyutils/keyutils_1.6.bb
 
-diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-similarity index 90%
-rename from meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
-rename to meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-index 4f3c16dc3..22cb88ac1 100644
---- a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
-+++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-@@ -16,14 +16,14 @@ LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=b4e40069f15598d0e3
- 
- DEPENDS += "libnl popt"
- 
--SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.tar.gz \
-+SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.tar.xz \
-         file://0001-Modify-the-Makefile-for-cross-compile.patch \
-         file://0003-ipvsadm-remove-dependency-on-bash.patch \
-         file://makefile-add-ldflags.patch \
- "
- 
--SRC_URI[md5sum] = "88b35030b4766b3e44ad15aacdef65c4"
--SRC_URI[sha256sum] = "297f5cd459c3eef81ed0ca32e53bf320ed6b132fe7ed6ea5e44aa6b1fbd2a7de"
-+SRC_URI[md5sum] = "97f11b6af1920fde5a9d9eac0d7f9e50"
-+SRC_URI[sha256sum] = "95573d70df473c9f63fc4ac496c044c69e3a6de7ccac119922210c0b44cd7a0c"
- 
- UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/ipvsadm"
- 
+diff --git a/meta-oe/recipes-security/keyutils/keyutils_1.6.bb b/meta-oe/recipes-security/keyutils/keyutils_1.6.bb
+new file mode 100644
+index 000000000..3a26c902a
+--- /dev/null
++++ b/meta-oe/recipes-security/keyutils/keyutils_1.6.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Linux Key Management Utilities"
++DESCRIPTION = "These tools are used to control the key management system built into the Linux."
++
++SECTION = "base"
++
++LICENSE = "LGPLv2.1+ & GPLv2.0+"
++LIC_FILES_CHKSUM = "file://LICENCE.GPL;md5=5f6e72824f5da505c1f4a7197f004b45 \
++                    file://LICENCE.LGPL;md5=7d1cacaa3ea752b72ea5e525df54a21f"
++
++PV = "1.6+git${SRCPV}"
++
++SRC_URI = "\
++    git://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git \
++"
++
++SRCREV = "4723f0185d11b13df243ad3cd41fbddfed53b5b1"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -Wall'"
++
++INSTALL_FLAGS = "\
++    LIBDIR=${libdir} \
++    USRLIBDIR=${libdir} \
++    BINDIR=${bindir} \
++    SBINDIR=${sbindir} \
++    ETCDIR=${sysconfdir} \
++    SHAREDIR=${datadir} \
++    MANDIR=${mandir} \
++    INCLUDEDIR=${includedir} \
++    DESTDIR=${D} \
++"
++
++do_install() {
++    cd ${S} && oe_runmake ${INSTALL_FLAGS} install
++}
++
++FILES_${PN} += "${datadir}/request-key-debug.sh"
 -- 
-2.17.1
+2.14.4
 
 
