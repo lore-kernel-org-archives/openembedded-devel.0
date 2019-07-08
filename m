@@ -1,53 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 24BED7D19E
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C6ADA7D217
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 02:09:02 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id t132so6827079pgb.9
+	Mon,  8 Jul 2019 02:39:38 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id f25so6860883pgv.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jul 2019 19:09:03 -0700 (PDT)
+	Sun, 07 Jul 2019 19:39:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=DsG6HZNrnvJeTkUdSm7JlgS2QZDzZUXQ+v7qX3NYD0g=;
-	b=hRzligh3UtZ6lG3EPCv4hd/ehi+JYBCXAP/7HEUQ0NOheTCO4CJaiF2zWmGWdCFmSt
-	/kYSvxy7ew4WAsa/yxOZyNn1KLdeyk52ArGUozjYD+J6TfRrpb1+ffgz5CyZYJbUqaR2
-	62HiTQOIcxXj4dSaQTf/4cajprU3k0uSQwHCQSmUTtKA7OjhvxThW8NcAesdcg0mUeoX
-	xE4i2J2hW+0Zgf/uLzxNM4gEWML4C97fg0Khq6twQT9GyObfuUjqfLZDNFHPB7s6s+lE
-	ee5FhkWMt0QcWDoTbhKZRrkOZOn8mxdP8wrfOA2TIn7MM6NFsFLUWTNH0wct2UviBz4n
-	oJmA==
+	bh=ldLQwFi2bSq6rvByHsXTDYniKrJkDEKatkCAy2Q4uH4=;
+	b=hArHrkT2X9M3x2spG1yIekAt4egYhXd/oYJGhq9KuaWSVP3EtfbqV+PPkI8ISdiCg9
+	YpLLN5/ggkGteeFWhN1XrheBXVaEFeTFH0OpVPJA8iu2xF5K22fAR1eWwQxieCYOoXx9
+	Zx+BRGitAXOcWYJUaVz6Wsarysi7WokfeYQ4OaQqCmOMjkY28y+OXeB81Kf2uEM28aSF
+	C7Z0A1TN9Lpo+BZ/yQsu+LXEvM2wuuBgJcv2niPZvivl6mCS2osBKPQGOv3x7BTbB1gM
+	n10MLtt0X0lPfsDOuydJ8uH0Ep/EM3fAJ85sVEy98um+WMw9G9qfETdQ6Pm7K4mhZZW/
+	+1Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=DsG6HZNrnvJeTkUdSm7JlgS2QZDzZUXQ+v7qX3NYD0g=;
-	b=SWq3c85TQfMgaUTyNalVGXvnAFDhcsBf//IoJTzE98t3VF+cfHpooCJoMu7LBsLSx6
-	JUz63TKyLDObAdzhtvyaDRTsRh0fJg+TZz4OZgpBMbwE40omdIy8+FoO/ef+f4jabXOQ
-	yxgfn6kHg/JVBrmF9uklTBb/VBaO9UFox3Bl92SJGaDnhaAY/+V0LJ41Gu170gQDxiXu
-	8j6IeQVaLBIqd9xNDheAygkX10ynoeFxQ/884v9h88ue3LfXORDub09+gm7j8rcqlJZK
-	VRie76xUhrn2t0B7l42DmwvDkYTF3MrrM/EzWls7b9KjjEUnMHFkA2AgzC0ShJT/DXAj
-	3eSA==
-X-Gm-Message-State: APjAAAUvOwHM820V7uPauh0wSDbKh/7bkAB42IhZ7S1yngTbyfP/OHbK
-	heTi2vSP12wrP1bpU5KLMr8H/eEtcrQ=
-X-Google-Smtp-Source: APXvYqydPs/OBvlz+5zRhl79BjsdB1Bsao+zCVcNfgde2ip9j7lQxQTt294miFJWltnoVMNaidec8A==
-X-Received: by 2002:a63:7e1d:: with SMTP id z29mr20234399pgc.346.1562551742973;
-	Sun, 07 Jul 2019 19:09:02 -0700 (PDT)
+	bh=ldLQwFi2bSq6rvByHsXTDYniKrJkDEKatkCAy2Q4uH4=;
+	b=tfNn3J97QKMl169aaHQLcUfTomg+4AO5lAf8gSMVD5qu517dBvz33ZXu3eoX3IluMj
+	vcnvEuPr29Wx1Uj2jv+0fe5ILeAwo2XFvYBOdugMk0Hx+IhWcuKrAw59XJl7fck8aqOC
+	BPKYuWeyvNnw8+sazz279J1gEATDh9ZB/P6mq8sSO1ywwHzuaqIfpYmTSL/aWhIyM96A
+	OJkmQAXtIOzKTiowZa4gteWbaAXQAe7MY3MtVC/Q4zkPtjrQqvj6aSVzZeEr7SrHjq7n
+	J5fLU2tWD+88z/O06rf2++YtIQ/j1vmqTvuTBCWQx5TW5AJLyWsft36g41gyC/A2LfDA
+	vBOg==
+X-Gm-Message-State: APjAAAUMaOd84xwIkeH/ArXH95AXFU5dA6nT+tdEyIi/Yc0lcL26r5/a
+	wHn828YVLBqVHbcdLzP0CuDhlfkqdb8=
+X-Google-Smtp-Source: APXvYqyn3OTbgrEg5ca5kBOcmPvQ4o9VfqbgnOySkR+M7dykaAYQ0upT7nsTU3PucF5nKThbdCduCw==
+X-Received: by 2002:a63:6507:: with SMTP id z7mr19472314pgb.186.1562553579730; 
+	Sun, 07 Jul 2019 19:39:39 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:c2e:f46a:e59c:dae7?
 	([2601:202:4180:c33:c2e:f46a:e59c:dae7])
 	by smtp.gmail.com with ESMTPSA id
-	h6sm14928710pfn.79.2019.07.07.19.09.01
+	p23sm17866635pfn.10.2019.07.07.19.39.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Jul 2019 19:09:02 -0700 (PDT)
-To: "Liu, Yongxin" <Yongxin.Liu@windriver.com>,
-	"raj.khem@gmail.com" <raj.khem@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <20190708015236.42034-1-yongxin.liu@windriver.com>
-	<afcf7ce5-1f2e-c5d1-fca9-a2fcda677b35@gmail.com>
-	<597B109EC20B76429F71A8A97770610D19C4EB56@ALA-MBD.corp.ad.wrs.com>
+	Sun, 07 Jul 2019 19:39:39 -0700 (PDT)
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20190708003555.8064-1-open.source@oleksandr-kravchuk.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -93,13 +89,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <300f0a37-4f44-7424-c3cb-95237fec6196@gmail.com>
-Date: Sun, 7 Jul 2019 19:09:01 -0700
+Message-ID: <d3a2b3cd-906f-d652-e5d8-f721fc3848f3@gmail.com>
+Date: Sun, 7 Jul 2019 19:39:38 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <597B109EC20B76429F71A8A97770610D19C4EB56@ALA-MBD.corp.ad.wrs.com>
-Subject: Re: [meta-oe][PATCH v2 1/2] keyutils: add new recipe for version 1.6.
+In-Reply-To: <20190708003555.8064-1-open.source@oleksandr-kravchuk.com>
+Subject: Re: [PATCH][meta-networking] mosquitto: update to 1.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -112,98 +108,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 02:09:02 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 02:39:38 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 7/7/19 7:03 PM, Liu, Yongxin wrote:
->> -----Original Message-----
->> From: akuster808 [mailto:akuster808@gmail.com]
->> Sent: Monday, July 8, 2019 09:59
->> To: Liu, Yongxin; raj.khem@gmail.com; openembedded-
->> devel@lists.openembedded.org
->> Subject: Re: [oe] [meta-oe][PATCH v2 1/2] keyutils: add new recipe for
->> version 1.6.
->>
->>
->>
->> On 7/7/19 6:52 PM, Yongxin Liu wrote:
->>> Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
->>> ---
->>>  meta-oe/recipes-security/keyutils/keyutils_1.6.bb | 38
->> +++++++++++++++++++++++
->>>  1 file changed, 38 insertions(+)
->>>  create mode 100644 meta-oe/recipes-security/keyutils/keyutils_1.6.bb
->>>
->>> diff --git a/meta-oe/recipes-security/keyutils/keyutils_1.6.bb b/meta-
->> oe/recipes-security/keyutils/keyutils_1.6.bb
->>> new file mode 100644
->>> index 000000000..3a26c902a
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-security/keyutils/keyutils_1.6.bb
->> This recipe is in meta-security and contains ptests. Did you want the
->> ptests and other fixes too?
-> This recipe is intended to be used by other recipes in OE.
-> For other layers, I think they can use their own keyutils.
+On 7/7/19 5:35 PM, Oleksandr Kravchuk wrote:
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../mosquitto/{mosquitto_1.5.8.bb => mosquitto_1.6.3.bb} | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.5.8.bb => mosquitto_1.6.3.bb} (89%)
+>
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.3.bb
+> similarity index 89%
+> rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb
+> rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.3.bb
+> index 768b5930f..0a2555747 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb
+> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.3.bb
 
-I mean, it should move out of meta-security to meta-oe.  And if you
-don't want to do that, you should pick up the fixes.
-
-Please have a look and compare.
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-security/tree/recipes-security/keyutils/keyutils_1.6.bb
+There is more here than just a version updates. Please explain what the
+other changes are.
 
 - armin
-
->
-> Thanks,
-> Yongxin
->
->> - armin
->>> @@ -0,0 +1,38 @@
->>> +SUMMARY = "Linux Key Management Utilities"
->>> +DESCRIPTION = "These tools are used to control the key management
->> system built into the Linux."
->>> +
->>> +SECTION = "base"
->>> +
->>> +LICENSE = "LGPLv2.1+ & GPLv2.0+"
->>> +LIC_FILES_CHKSUM =
->> "file://LICENCE.GPL;md5=5f6e72824f5da505c1f4a7197f004b45 \
->>> +
->> file://LICENCE.LGPL;md5=7d1cacaa3ea752b72ea5e525df54a21f"
->>> +
->>> +PV = "1.6+git${SRCPV}"
->>> +
->>> +SRC_URI = "\
->>> +
->> git://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git \
->>> +"
->>> +
->>> +SRCREV = "4723f0185d11b13df243ad3cd41fbddfed53b5b1"
->>> +
->>> +S = "${WORKDIR}/git"
->>> +
->>> +EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -Wall'"
->>> +
->>> +INSTALL_FLAGS = "\
->>> +    LIBDIR=${libdir} \
->>> +    USRLIBDIR=${libdir} \
->>> +    BINDIR=${bindir} \
->>> +    SBINDIR=${sbindir} \
->>> +    ETCDIR=${sysconfdir} \
->>> +    SHAREDIR=${datadir} \
->>> +    MANDIR=${mandir} \
->>> +    INCLUDEDIR=${includedir} \
->>> +    DESTDIR=${D} \
->>> +"
->>> +
->>> +do_install() {
->>> +    cd ${S} && oe_runmake ${INSTALL_FLAGS} install
->>> +}
->>> +
->>> +FILES_${PN} += "${datadir}/request-key-debug.sh"
+> @@ -1,5 +1,7 @@
+>  SUMMARY = "Open source MQTT v3.1/3.1.1 implemention"
+> -DESCRIPTION = "Mosquitto is an open source (Eclipse licensed) message broker that implements the MQ Telemetry Transport protocol version 3.1 and 3.1.1. MQTT provides a lightweight method of carrying out messaging using a publish/subscribe model. "
+> +DESCRIPTION = "Mosquitto is an open source (Eclipse licensed) message broker that \
+> +implements the MQ Telemetry Transport protocol version 3.1 and 3.1.1. MQTT provides \
+> +a lightweight method of carrying out messaging using a publish/subscribe model. "
+>  HOMEPAGE = "http://mosquitto.org/"
+>  SECTION = "console/network"
+>  LICENSE = "EPL-1.0 | EDL-1.0"
+> @@ -14,8 +16,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+>             file://mosquitto.init \
+>  "
+>  
+> -SRC_URI[md5sum] = "bbbcceb32db3657d9d436a8440a9db1c"
+> -SRC_URI[sha256sum] = "78d7e70c3794dc3a1d484b4f2f8d3addebe9c2da3f5a1cebe557f7d13beb0da4"
+> +SRC_URI[md5sum] = "bd19cf124459ee26040912786ef177f7"
+> +SRC_URI[sha256sum] = "9ef5cc75f4fe31d7bf50654ddf4728ad9e1ae2e5609a4b42ecbbcb4a209ed17e"
+>  
+>  inherit systemd update-rc.d useradd
+>  
+> @@ -66,6 +68,7 @@ PACKAGE_BEFORE_PN = "${PN}-examples"
+>  
+>  FILES_${PN} = "${sbindir}/mosquitto \
+>                 ${bindir}/mosquitto_passwd \
+> +               ${bindir}/mosquitto_rr \
+>                 ${sysconfdir}/mosquitto \
+>                 ${sysconfdir}/init.d \
+>                 ${systemd_unitdir}/system/mosquitto.service \
 
 
