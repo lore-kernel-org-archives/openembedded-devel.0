@@ -1,48 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 499DE7D30C
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E32B76D6DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 18:36:51 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id n4so18281611wrs.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jul 2019 11:36:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=PgRfIvtayKD9M8ycEjcgWsC/7QPYZ3/OrwEOsEApapE=;
-	b=TjXCUCraa1UG9gam63m67TtSGNdtQWNUgHs1SfMRtOKE7+pdbTKe7UWNxSuWeCIwns
-	kwUGGvECNxqMcixhDL6G1g3KZo+yOjCFpkKDV4c+QpfRyUI7wMddYwzCm5u+Qc2ppQq1
-	sdGY9M5SfT8HpqnJZYqFic5rsFMhDCr07V3E6HqhNZGZOTGOd73GaGL1L9HvarzaRcB0
-	6MKsxJzJwYMZ2LpVNC7k3oozef1kzMJWEo2X57kybwu/MqgqtB2Z3cSl9BWqpW8n40P3
-	4ZA+kqMPnMJzf7KVHsIFiY1LWTzmtZywUtXe4x8JVKb5C/Hu3fAAM0zWXDn1B1+0t5e1
-	FpXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=PgRfIvtayKD9M8ycEjcgWsC/7QPYZ3/OrwEOsEApapE=;
-	b=Zc+xaQ9Q7tW31hzwEpPXFeRLn7N7DWnKmJNb5tdAx/t3/Dca+NWhSab1r3tPPUBF/I
-	WxR+cAhU8XqAcn8YRDSr/Ne8JoOXYW5qGpnriABimxIXdkWsjp1ZSu7p13CCi4pCIY2c
-	EKN0Paoe8xLyQrQLn1cAeayfXTOC9dFNoWYSRsBdRPW8M24ljC3mJYeSXR0orG7XTorr
-	EgjKOHIBCzs1Yl/OqiksfUu/9JEN6o0iIed0TQKHPc0u2Hy1V5kGGOctZwIkOo3BGwsN
-	o2CTofQZIMaEl3EZ+DxrMifCsjhxjbMNhdD1MkqiqS4WpdW0chNFl6sgHylY2iUeyfwx
-	GEWw==
-X-Gm-Message-State: APjAAAVjrT4ymkL0XYRkrEHisq5/RY+CviFlF2VfWGLZPI35+PfM22fS
-	A/ZuB1F4aN2zlR4mZqRqKkovrmx/
-X-Google-Smtp-Source: APXvYqyg3j/wq4yODcFgdv8j4Sl2j6BD373JrbvoEen6OMRFGeSGGZBfaRBD6NmDIZXdgdyqDsBdnw==
-X-Received: by 2002:a5d:4e8a:: with SMTP id e10mr1421594wru.26.1562611011766; 
-	Mon, 08 Jul 2019 11:36:51 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	c30sm18050681wrb.15.2019.07.08.11.36.51
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 08 Jul 2019 11:36:51 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jul 2019 18:36:50 +0000
-Message-Id: <20190708183650.1057-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [warrior][PATCH] turbostat: copy bits.h from kernel to turbostat
+	Mon,  8 Jul 2019 19:03:05 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45jFG16lSxz5p;
+	Mon,  8 Jul 2019 21:03:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1562612586;
+	bh=bYnaKx+MSeXp1zG7iZW6A1VKwZQbANlQHh0yzuMKIHI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=moZ6+dWuN9C1h9FQhEmGrk2t+0C8DhXKRB/2iw6fZwtq1TX0/O2jq04Rnvs8wWI2A
+	RHP7IRq90gcpwB/WwIKhTVxY35SxjFuCwaf+sz0x1xwcIbc/3PHNvLm/+wQd7T21nR
+	VEztsMqSo2WbJauCrP7yfTeelY6BiPLpepgPZJFgmxtKN99e2x2LScsk0gu73yjidh
+	/0INts8liEQrSd8sqJ2A8sHu8uIx2hxgyeP6To89ENP+h1mjbvjlPGCeR+jWNIwL3i
+	y78oYY0vIdOfK9aIA/BXkFu8RTuW1FAtS7HmyazUALoXsXgpHKiRKLPQdZTu4ydHFx
+	58PyiJroeUkD9GBOa7MUoFdayOTuXkEt9MS1ZcsaPke8VwCh7v9T6PyLjraCo6x5Ti
+	/yrX1qwUpMkmxx2svaJycM/1mnphSD7EHE7T6WtVmHt6g8VMF+V+bPYfnhtx/QcYAo
+	D2yhS/x7khcku0FJ4NdUBHkmQU29sBD+GAKRN3iuJjr6kMI44VEertR/bgNZi7eGua
+	+OT68WdWBRVyH2pT91HvASxoPsxBMI2na+YAqtRGvk2E33D3+uH7SIdlz5O+jZLTeS
+	Njnha3TohoVjE9xDNULOocT1qmQi0Biii3+ouaTiGLfPd9JcAKWLU3YVUT7eA0zE+M
+	BxD7mO+cry+pYxhf/EVSu27o=
+Date: Mon, 8 Jul 2019 22:03:03 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Message-ID: <20190708190303.GA26276@localhost>
+References: <20190708052411.28158-1-zangrc.fnst@cn.fujitsu.com>
+MIME-Version: 1.0
+In-Reply-To: <20190708052411.28158-1-zangrc.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python] [PATCH] python-mako: upgrade 1.0.12 -> 1.0.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 18:36:51 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 19:03:07 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Liwei Song <liwei.song@windriver.com>
+On Mon, Jul 08, 2019 at 01:24:11PM +0800, Zang Ruochen wrote:
+>...
+> -Add python3-mako_1.0.13.bb.
+>...
 
-because bits.h was included in msr-index.h, so we also need
-copy bits.h from kernel to tubostat to aviod compile error.
+That's already in oe-core.
 
-Signed-off-by: Liwei Song <liwei.song@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+cu
+Adrian
 
-diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-index dc3e78febb..3f25e6f004 100644
---- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-+++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-@@ -41,11 +41,13 @@ do_configure_prepend() {
- 	mkdir -p ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
-+	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
- 	cp -r ${WORKDIR}/COPYING ${S}
- }
- 
- do_compile() {
-+	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
- 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
- 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
- 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
