@@ -1,33 +1,45 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FFE97ED5D
+Return-Path: <3cRElXQMKABgKy84CC492.0CA@flex--wak.bounces.google.com>
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com
+	[209.85.210.201])
+	by mail.openembedded.org (Postfix) with ESMTP id 61C6F7ED3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 20:52:38 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45jvdy6lCLz56
+	Tue,  9 Jul 2019 22:13:04 +0000 (UTC)
+Received: by mail-pf1-f201.google.com with SMTP id i2so81079pfe.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 22:52:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1562705559;
-	bh=0z1jXk6JaI3f7bgw80KKHVo86G5oruRQQcxQQTSdcAE=;
-	h=From:To:Subject:Date:From;
-	b=VjMmoRPWHg8w8yrvQ8j3sHQWP9eE591OdPd7W3opuuDJaR5y1xtgxlNJDNa37MQoV
-	h9mw3r3UupPkYves590M9luO7D+U8pUFl2G4pymopopigwMjM/RWm1CaeBN6y1zApa
-	ngYGdHkO0jRL9XiM6tzq+K7bSX4q81DzqyAapuNWh+ja391opSHcIW5VY2+1lgyHiB
-	ZpVWKwINekdfFrtl5cK0aOcS7IPGWb8v1xi5hxfL+AejGwWVtvdo8P/LS+5WoYDYlJ
-	xBD12RAkoJnOaxZJ+3WP0pKvuKePX/ONmMuHPhN6YtU9+uX3+S8GXofzUK4Zj04z2T
-	VH9k/fb3Js85JHw/DC6j70EnvliPJlLrV9sX3YT3QlhKjuXwmp2muUK/CVgvjIHr6w
-	/a/3AoqgffYXeylOI5iALtJf3WwdR4ngWL5MwdR4BERj1ofOZkI3+z81yakQqtQQpR
-	QNSaVkO90A2enac2jmtOIt23L2+g25UuqkJOFHegGBvfHaqNhjGGmhCP3OxDsQzECY
-	I0Yp7DTZ/k779MeP156K7JW5zZgT3WmFQWMvFwl3+LpXGQOfStGPPSMJqoSJqNFmGY
-	GPqSNc0x7nI5hIgzEXPOTXzGiEkgKlzyCfzF4TSTn+OdZ1lImUq12DWTXd+5oRJo6l
-	dyFReXQlF85Vo19sDiW/kifE=
-From: Adrian Bunk <bunk@stusta.de>
+	Tue, 09 Jul 2019 15:13:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:message-id:mime-version:subject:from:to:cc;
+	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
+	b=Y4pDuEwG1gvbqKmfbJo1EW5nGX9f71aCRWsk1437x1lT+4RIp8P5Jb1kQwMK/l6PPc
+	/q7r1dQvWqig2uTLEQeGYchsV8FCE7X+lALKN8bQ5NQnPvbhsazNn9dNp7oVfxp70N6E
+	kwmoTqtT7nTyrbcpjxVIsbjo0L+IGs1mn1M2lBKMqQXOWFLhsRATU26wGy2np8bdYmZX
+	4U/Rx4w1BJVa25U8+IWGYaCkcJju7AhA5zD2/YHk4bxepkkX5Y7jLG9Sx9Lbfq6zE37B
+	zNBXKkDD3SBb+mH84A0AZXiZq2QgzR2agADYhfmg7xzAOVpFTvslNm+dP1i/TVkeingg
+	YQdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
+	b=OPLweqWmhGXUj4LTpohOgMJMcqt3r1DEakaomg+oTvI0SK/NwBHTjVFq+NqBVcYgxL
+	qXysH/LKY+0pnNYZ3mzkaVw3BEh28s3II6c6fsaMl2MPRGxgxHI1dMII1AiXqn9Ldvb4
+	z2QgTj9JroMNuu+bgW/fd0fyhm2w5n650gR03G+oGy5iTz+JivuKDLFs93TDn3uiM8je
+	RHNwq/NLLe1ToiLbl2WIfIfMaavu6fHR+hZzcJfRxv+E97bQJYPkUjUqEJFc16v9AiQ9
+	DO3CL/UWRqg20ooQSJjn9f+Gpu/bXsb6ip/mcRa/9QfI4kwaqZcntoZXzI8JAjkctHw/
+	x44A==
+X-Gm-Message-State: APjAAAUyMjUfnvD5jYi+xKAl+k5TbPj0+ndFufB7PEUHIYeScWB2FrvZ
+	LVF2Sdimm2RkIZNBKxgUixWVq3SWZSsyXt5tuTJuFvLE9oLeIbcVWOei5EzuW0zZpItrHNmugP9
+	lulSUQL0HNQRjvLZorZm3u0KUPQb9+Ddds5ZF0J00dTfM80d3+aYkSE57vdezYbg3eki0e4CpWR
+	vxH3o=
+X-Google-Smtp-Source: APXvYqyuwRezH4UWauZw/c62ypDSOh3ToaMrGw5XAgFBgEXCJnwiP7iduIxXq3AcQOngqmZ4IWFMUhc=
+X-Received: by 2002:a63:505a:: with SMTP id q26mr17221025pgl.18.1562710385074; 
+	Tue, 09 Jul 2019 15:13:05 -0700 (PDT)
+Date: Tue,  9 Jul 2019 15:13:01 -0700
+Message-Id: <20190709221301.112133-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.22.0
+From: "William A. Kennington III" <wak@google.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Jul 2019 23:52:34 +0300
-Message-Id: <20190709205234.13737-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] gpsd: Don't build without optimization
+Subject: [meta-oe][PATCH] fmt: Init at 5.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,34 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 20:52:38 -0000
+X-List-Received-Date: Tue, 09 Jul 2019 22:13:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-What the upstream debug option does is to add -O0 -g.
--O0 is unwanted, and -g also added through CFLAGS.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: William A. Kennington III <wak@google.com>
 ---
-v2: better description
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/fmt/fmt_5.3.0.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fmt/fmt_5.3.0.bb
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-index 91b1b9399..b0f946cee 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-@@ -35,8 +35,8 @@ PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
- EXTRA_OESCONS = " \
-     sysroot=${STAGING_DIR_TARGET} \
-     libQgpsmm='false' \
--    debug='true' \
--    strip='false' \
-+    debug='false' \
-+    nostrip='true' \
-     chrpath='yes' \
-     systemd='${SYSTEMD_OESCONS}' \
-     libdir='${libdir}' \
+diff --git a/meta-oe/recipes-support/fmt/fmt_5.3.0.bb b/meta-oe/recipes-support/fmt/fmt_5.3.0.bb
+new file mode 100644
+index 000000000..be33bb863
+--- /dev/null
++++ b/meta-oe/recipes-support/fmt/fmt_5.3.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "open-source formatting library for C++"
++DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
++HOMEPAGE = "https://fmt.dev"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c2e38bc8629eac247a73b65c1548b2f0"
++SRCREV = "9e554999ce02cf86fcdfe74fe740c4fe3f5a56d5"
++PV .= "+git${SRCPV}"
++
++SRC_URI += "git://github.com/fmtlib/fmt"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++inherit ptest
++
++EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 -- 
-2.17.1
+2.22.0
 
 
