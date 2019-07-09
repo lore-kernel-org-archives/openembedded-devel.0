@@ -1,45 +1,45 @@
-Return-Path: <3sRElXQMKAFgM0A6EE6B4.2EC@flex--wak.bounces.google.com>
-Received: from mail-ua1-f73.google.com (mail-ua1-f73.google.com
-	[209.85.222.73])
-	by mail.openembedded.org (Postfix) with ESMTP id B8B957EC44
+Return-Path: <3DxIlXQMKALYsWgckkcha.Yki@flex--wak.bounces.google.com>
+Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com
+	[209.85.214.202])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E66C7EC44
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 22:14:08 +0000 (UTC)
-Received: by mail-ua1-f73.google.com with SMTP id r11so57364uao.3
+	Tue,  9 Jul 2019 22:15:42 +0000 (UTC)
+Received: by mail-pl1-f202.google.com with SMTP id y9so147214plp.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2019 15:14:10 -0700 (PDT)
+	Tue, 09 Jul 2019 15:15:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
 	h=date:message-id:mime-version:subject:from:to:cc;
-	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
-	b=N4JSq2Ojyu9eZTw/lTO1YCBNjRaXlXUpj7uKUu8+HJXreQyXGvWEBM2fZocvGP7bzq
-	QWxmm91eOst6MyOiZ7s3fSOO9evwZ6b3Z7NRbcOoEGUZt2CI2LOUgTgCJcugvyEv6iHR
-	jaVpcoDjcQO/ViqylOdfuWIrIoDEq0J1dkohHeQz3TySHRY2buU23QtwsAdB+KtZzvbX
-	v33xL9OkNi8X/AbBh0dHc11JfryTnNluVOBK87oZXA5rAl249JGteaMPDcbTJUZhrpPC
-	6TpvhbZp0clOv80bkHpWWR4W0gNEOovmc/W2EIMETyF++e/QbAvcBRJKlsmywp+sWlGN
-	xdFg==
+	bh=2BuQz5UHtHqnshiNkSAJrffI9L/D1IVKYObSofYchVU=;
+	b=agI4pE0QkJpWWT6V8YSpkU2fGbcjjSvy7ux7KjBgIryuS2HHIKGFrp2QvBBnKTnxZd
+	GBARlWdUPyKK0l2Bbboi5rj55xaY1cq2e5YZLjt1H7D7VoiscUVB56Y3N1NhWW4xBZoQ
+	oGbX/qvp5mO4penFP3PoXU2gclp9a5Sop/UouMS/SbnwpTPdcetw0QmjChZMTMPQ4cDr
+	BOXvedUs0naevyrGm/BFwwXKh4xGBiuEadxtg9fLey458xOnGVu/VsAeHR7XSjM4zvEl
+	jUY6EH84INudyPC1sulDl2StfsfLMXpIGXzZF3lX+s/UjXANBF1hTBADGLZQiknJHtvQ
+	IbFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
-	b=qH1pJKjT5hMieQ3t5h887tGqXulQD/VcdEy8LwLG43HBfLoqTcBGSsex/t5V64VGrY
-	WHsSbeKqVaK4Gct5O6llYau5tkAGR3mt2EV6mG7In+nNgl1qMTI/ANXAQWdkSneAK2BD
-	x+jUN5SnGeqGbfD7yDp/RAtRn1FErjR7kjryLNibLz7kyQFwUaBu/unbkhVC4h5G9RxN
-	axRWbG8VyAwoQRVujvp2B0aWhNFX9/cdbhaChFcQTzaGU7D9FMkBkJd67HqTummm/O+l
-	SCYf4jNRNx/Nd44cT0AadjPRncKsyY5AHAYyDpacqowkX/r63IZNBVe/E5zSAHFOLQZU
-	3N8A==
-X-Gm-Message-State: APjAAAXvECF98agUh1OCNAxb4QNGztfb6k2BeiA1gUCT0EOVCjE4sxcb
-	Uvun5iWUI4kYQrxZEgY9SiLeoURSCY0WK7Kc36yOKvyGhzUaS2XjkK8rDArTRXH+Ih+amrBatoa
-	dUQPyzVafmxMf0/DyOnxlpBJ7f7MCSxfyvihN7X4DM6Ba2H1ZeFGNu/XRdq1djraG0v9Zkucv6s
-	T8egQ=
-X-Google-Smtp-Source: APXvYqyJWmFbMEjF/aDcTwymaAy3KaBTzWx3kmCMt4XWeHrc1FA2alakyng3r4raqJmei86htvRt7ps=
-X-Received: by 2002:ab0:7442:: with SMTP id p2mr401923uaq.92.1562710449588;
-	Tue, 09 Jul 2019 15:14:09 -0700 (PDT)
-Date: Tue,  9 Jul 2019 15:14:03 -0700
-Message-Id: <20190709221403.114088-1-wak@google.com>
+	bh=2BuQz5UHtHqnshiNkSAJrffI9L/D1IVKYObSofYchVU=;
+	b=HQp/0kFQUWs8fAmcDje1nBMAp5B+KdIMDmGHaeyGZIeHuM4NFViIJUt9mNAbFlaB5T
+	nWMXsRK5be65453XEU/2PiWTldHkesmrGVt/+XnX8Cw5lYOoj8OFwXbKXO/J1DRAqjp5
+	8gxpMoPU4ks2a2sayUpHL0OB37f8KgkK3ugv+pDpnXl6do8faZYpAKT6NuO0gaXj0bdG
+	jPlQnuOwGPWlmAhYrW3ck622GpwkZyulrbh8umJ6Y8U8jLhTjU1G+A3X5qWGV9X1OcjP
+	b1MD3NNzwLgqaKZuuNEYmxHfqb5PylqKAKMLmd3MNPd8e+ScGdbxGONMBDl4DOSKw2Wt
+	LHuw==
+X-Gm-Message-State: APjAAAXJDpojGSCXbDSkcyhsuqMxbCpChw/HWfCIuVVG8dveNUeLyISd
+	5+aj4XTmQCJS2lgrwA3EfC3wNPeXggE1rz7w45hOdXkVtJOFT6ROR2f9gJBwdktbjAiKmekwBJ4
+	Lp1M/XygqhmNDArPn0sBnuWvNOoyyyZlNIDVxrBq7x7j/hHF38KAkodFqfbPCabdtplT5dOrHJZ
+	XlJss=
+X-Google-Smtp-Source: APXvYqzp5nrci0TyNdr04OHz9UmUkis+m9fuf3xgmw0TNhc4kq0BNFl0bwpv80Ucswl71xPr6z+volA=
+X-Received: by 2002:a63:56:: with SMTP id 83mr33611669pga.145.1562710543209;
+	Tue, 09 Jul 2019 15:15:43 -0700 (PDT)
+Date: Tue,  9 Jul 2019 15:15:38 -0700
+Message-Id: <20190709221538.116780-1-wak@google.com>
 Mime-Version: 1.0
 X-Mailer: git-send-email 2.22.0
 From: "William A. Kennington III" <wak@google.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] fmt: Init at 5.3.0
+Subject: [meta-oe][PATCH] cli11: 1.7.1 -> 1.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,37 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 22:14:09 -0000
+X-List-Received-Date: Tue, 09 Jul 2019 22:15:42 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 Signed-off-by: William A. Kennington III <wak@google.com>
 ---
- meta-oe/recipes-support/fmt/fmt_5.3.0.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-support/fmt/fmt_5.3.0.bb
+ .../recipes-support/cli11/{cli11_1.7.1.bb => cli11_1.8.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/cli11/{cli11_1.7.1.bb => cli11_1.8.0.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/fmt/fmt_5.3.0.bb b/meta-oe/recipes-support/fmt/fmt_5.3.0.bb
-new file mode 100644
-index 000000000..be33bb863
---- /dev/null
-+++ b/meta-oe/recipes-support/fmt/fmt_5.3.0.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "open-source formatting library for C++"
-+DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
-+HOMEPAGE = "https://fmt.dev"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c2e38bc8629eac247a73b65c1548b2f0"
-+SRCREV = "9e554999ce02cf86fcdfe74fe740c4fe3f5a56d5"
-+PV .= "+git${SRCPV}"
-+
-+SRC_URI += "git://github.com/fmtlib/fmt"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+inherit ptest
-+
-+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
+diff --git a/meta-oe/recipes-support/cli11/cli11_1.7.1.bb b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+similarity index 79%
+rename from meta-oe/recipes-support/cli11/cli11_1.7.1.bb
+rename to meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+index 1ed97a27e..b6a434159 100644
+--- a/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
++++ b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+@@ -2,8 +2,8 @@ SUMMARY = "C++11 command line parser"
+ DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
+ HOMEPAGE = "https://github.com/CLIUtils/CLI11"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8489f3831fc7b75264c1d5e346251a74"
+-SRCREV = "49ac989a9527ee9bb496de9ded7b4872c2e0e5ca"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
++SRCREV = "13becaddb657eacd090537719a669d66d393b8b2"
+ PV .= "+git${SRCPV}"
+ 
+ SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
 -- 
 2.22.0
 
