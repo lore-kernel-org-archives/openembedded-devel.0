@@ -1,40 +1,40 @@
-Return-Path: <3cRElXQMKABgKy84CC492.0CA@flex--wak.bounces.google.com>
-Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com
-	[209.85.210.201])
-	by mail.openembedded.org (Postfix) with ESMTP id 61C6F7ED3F
+Return-Path: <3sRElXQMKAFgM0A6EE6B4.2EC@flex--wak.bounces.google.com>
+Received: from mail-ua1-f73.google.com (mail-ua1-f73.google.com
+	[209.85.222.73])
+	by mail.openembedded.org (Postfix) with ESMTP id B8B957EC44
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 22:13:04 +0000 (UTC)
-Received: by mail-pf1-f201.google.com with SMTP id i2so81079pfe.1
+	Tue,  9 Jul 2019 22:14:08 +0000 (UTC)
+Received: by mail-ua1-f73.google.com with SMTP id r11so57364uao.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2019 15:13:05 -0700 (PDT)
+	Tue, 09 Jul 2019 15:14:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
 	h=date:message-id:mime-version:subject:from:to:cc;
 	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
-	b=Y4pDuEwG1gvbqKmfbJo1EW5nGX9f71aCRWsk1437x1lT+4RIp8P5Jb1kQwMK/l6PPc
-	/q7r1dQvWqig2uTLEQeGYchsV8FCE7X+lALKN8bQ5NQnPvbhsazNn9dNp7oVfxp70N6E
-	kwmoTqtT7nTyrbcpjxVIsbjo0L+IGs1mn1M2lBKMqQXOWFLhsRATU26wGy2np8bdYmZX
-	4U/Rx4w1BJVa25U8+IWGYaCkcJju7AhA5zD2/YHk4bxepkkX5Y7jLG9Sx9Lbfq6zE37B
-	zNBXKkDD3SBb+mH84A0AZXiZq2QgzR2agADYhfmg7xzAOVpFTvslNm+dP1i/TVkeingg
-	YQdw==
+	b=N4JSq2Ojyu9eZTw/lTO1YCBNjRaXlXUpj7uKUu8+HJXreQyXGvWEBM2fZocvGP7bzq
+	QWxmm91eOst6MyOiZ7s3fSOO9evwZ6b3Z7NRbcOoEGUZt2CI2LOUgTgCJcugvyEv6iHR
+	jaVpcoDjcQO/ViqylOdfuWIrIoDEq0J1dkohHeQz3TySHRY2buU23QtwsAdB+KtZzvbX
+	v33xL9OkNi8X/AbBh0dHc11JfryTnNluVOBK87oZXA5rAl249JGteaMPDcbTJUZhrpPC
+	6TpvhbZp0clOv80bkHpWWR4W0gNEOovmc/W2EIMETyF++e/QbAvcBRJKlsmywp+sWlGN
+	xdFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
 	bh=Wp5WbsVuVDxXIELLmabN8igz/YDIq8eaZWQkUCEE3nI=;
-	b=OPLweqWmhGXUj4LTpohOgMJMcqt3r1DEakaomg+oTvI0SK/NwBHTjVFq+NqBVcYgxL
-	qXysH/LKY+0pnNYZ3mzkaVw3BEh28s3II6c6fsaMl2MPRGxgxHI1dMII1AiXqn9Ldvb4
-	z2QgTj9JroMNuu+bgW/fd0fyhm2w5n650gR03G+oGy5iTz+JivuKDLFs93TDn3uiM8je
-	RHNwq/NLLe1ToiLbl2WIfIfMaavu6fHR+hZzcJfRxv+E97bQJYPkUjUqEJFc16v9AiQ9
-	DO3CL/UWRqg20ooQSJjn9f+Gpu/bXsb6ip/mcRa/9QfI4kwaqZcntoZXzI8JAjkctHw/
-	x44A==
-X-Gm-Message-State: APjAAAUyMjUfnvD5jYi+xKAl+k5TbPj0+ndFufB7PEUHIYeScWB2FrvZ
-	LVF2Sdimm2RkIZNBKxgUixWVq3SWZSsyXt5tuTJuFvLE9oLeIbcVWOei5EzuW0zZpItrHNmugP9
-	lulSUQL0HNQRjvLZorZm3u0KUPQb9+Ddds5ZF0J00dTfM80d3+aYkSE57vdezYbg3eki0e4CpWR
-	vxH3o=
-X-Google-Smtp-Source: APXvYqyuwRezH4UWauZw/c62ypDSOh3ToaMrGw5XAgFBgEXCJnwiP7iduIxXq3AcQOngqmZ4IWFMUhc=
-X-Received: by 2002:a63:505a:: with SMTP id q26mr17221025pgl.18.1562710385074; 
-	Tue, 09 Jul 2019 15:13:05 -0700 (PDT)
-Date: Tue,  9 Jul 2019 15:13:01 -0700
-Message-Id: <20190709221301.112133-1-wak@google.com>
+	b=qH1pJKjT5hMieQ3t5h887tGqXulQD/VcdEy8LwLG43HBfLoqTcBGSsex/t5V64VGrY
+	WHsSbeKqVaK4Gct5O6llYau5tkAGR3mt2EV6mG7In+nNgl1qMTI/ANXAQWdkSneAK2BD
+	x+jUN5SnGeqGbfD7yDp/RAtRn1FErjR7kjryLNibLz7kyQFwUaBu/unbkhVC4h5G9RxN
+	axRWbG8VyAwoQRVujvp2B0aWhNFX9/cdbhaChFcQTzaGU7D9FMkBkJd67HqTummm/O+l
+	SCYf4jNRNx/Nd44cT0AadjPRncKsyY5AHAYyDpacqowkX/r63IZNBVe/E5zSAHFOLQZU
+	3N8A==
+X-Gm-Message-State: APjAAAXvECF98agUh1OCNAxb4QNGztfb6k2BeiA1gUCT0EOVCjE4sxcb
+	Uvun5iWUI4kYQrxZEgY9SiLeoURSCY0WK7Kc36yOKvyGhzUaS2XjkK8rDArTRXH+Ih+amrBatoa
+	dUQPyzVafmxMf0/DyOnxlpBJ7f7MCSxfyvihN7X4DM6Ba2H1ZeFGNu/XRdq1djraG0v9Zkucv6s
+	T8egQ=
+X-Google-Smtp-Source: APXvYqyJWmFbMEjF/aDcTwymaAy3KaBTzWx3kmCMt4XWeHrc1FA2alakyng3r4raqJmei86htvRt7ps=
+X-Received: by 2002:ab0:7442:: with SMTP id p2mr401923uaq.92.1562710449588;
+	Tue, 09 Jul 2019 15:14:09 -0700 (PDT)
+Date: Tue,  9 Jul 2019 15:14:03 -0700
+Message-Id: <20190709221403.114088-1-wak@google.com>
 Mime-Version: 1.0
 X-Mailer: git-send-email 2.22.0
 From: "William A. Kennington III" <wak@google.com>
@@ -52,7 +52,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 22:13:04 -0000
+X-List-Received-Date: Tue, 09 Jul 2019 22:14:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 Signed-off-by: William A. Kennington III <wak@google.com>
