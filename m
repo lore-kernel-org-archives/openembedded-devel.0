@@ -1,38 +1,46 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E8A487EC54
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7461E7E3B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 18:52:49 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45jrzh3W3nz56;
-	Tue,  9 Jul 2019 20:52:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1562698369;
-	bh=/Z8Dl2+dGTrx58FZp1g7FP35vv1RR3fFq/LeaFDS9XE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Zm9NtrZmna10phevsXvPhT+pTXE4Y4TbqYn9K2np8AukOXYbeRScSRvoXr1EIX23s
-	KP+nH9USEX6l/9W2lxMqJywMMD8GqLZ8wavWn6SGM7ev4BxxAmNmOLEGvEBIYQoGs7
-	7E2+cufEwci97sth8qHc9YM0pRspqVJ5jaGR3CXnu2uaBkAhLEA5zClR2KsABXL3n5
-	/dFifKDjYyIYoW8ml9KUECzdeItAm3TX5SYHTCu17e280CwAslAImhSrvBiTXkJsFH
-	/CyE0Gs+fe6PAywNaM7r2Fez+n2tjD5ar1S3SMBrNbzM9dsR/ln7ZHRDuHPHzyzCcJ
-	G2PFcZYY5Wg5rGsCo10EZbJNwQroK1syYcrc4CwSLhyrdgOHIvoY+YgSLRGExDGMRN
-	m7nwUO4dOak+c+0mqhBaeVn9Lw0IQwdiXRzzhLJeubeZtKtksbzP1Bbe4wJ1h/toTx
-	F0pORMUuzPnCGQvcuCo1t4OgkK11gxI0jWxBEjBSzks+r8NYVTjmVKO2jy5BEDBovy
-	ujaVt/p496TAY9ge0ZE5wmtpqPgpiULVrOio84l6ZfvrqMSkJCybl5ZXEM5GF77Vwt
-	En2Zm1pEkFPjAhdqthCyfSBbtEztLuEezNs+Ra5liux8xVy/4UzwjTEUjXjo1cogfi
-	a0URIWi8JGVRcW388vfgFAzc=
-Date: Tue, 9 Jul 2019 21:52:41 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190709185241.GB15450@localhost>
-References: <1562032691-128301-1-git-send-email-changqing.li@windriver.com>
-	<1562032691-128301-3-git-send-email-changqing.li@windriver.com>
-	<CAMKF1sosi=qQyKEk6uHJKAWibFwpF7G2eTCwPrVEEe2zLubjzg@mail.gmail.com>
+	Tue,  9 Jul 2019 18:54:33 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id k10so15103314qtq.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Jul 2019 11:54:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=uVhw7xvbltoBMN+eLUyvKiOO/QyeVIxYXrtGr7hHi3U=;
+	b=Fgn4OG24wdt+Bi45YoxtCDmT+femgBV21AWMdEx0uHNWCTADvWqXs0Kac0XF1/ACB7
+	A+mfciCnnHt9ztxB9eDZMN9d/byKoc2+JVgzeBM/MfAIkvBC7Sx+ddQbuHlipR5BCrVF
+	aIMl4gAjCCJjRNoOTJ0bBmgz0ygmX985f+EXs6tnD7V36HUJzSsL/1QaBPhVw0OzSS0A
+	WMiqepN2wuCXCXLACuMFhMl40S2sev4kr4PKb7sHpr3uCxoaJ36itm+gTqE7DX3BEcX2
+	g3XB2MevjtfHvPCI6I1HUJws1+Xa/t1+DPPlh4lmgbrnXwdZkPIiDhVeR930yoRtc6lx
+	jZLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=uVhw7xvbltoBMN+eLUyvKiOO/QyeVIxYXrtGr7hHi3U=;
+	b=iEGqTH3o6mYBxmHLJvEh4K5n0tb3M9N3dVjB2HUH8VPjBL3QZEVxdM4sLLjYIv8N2v
+	TRfqLJeyspyY6x02X4oNUDcj3MEcaoBKUvy2O9d105c8P/rDiJ8ReRyrd9zdUuNDVdFE
+	/OYTjwTdqOISUdANhUo4mONFowhxEVIRl4TP1OX9j5ub4A1bYR7kd+JkL1x9M2DD+KSw
+	EJklghF7AZc2br7CtPS16NntQdiEMBIeXCRLIUrQsIuWn7CKYM1AHz7VBzWogi3+MvKR
+	keUndHb0zSjJfXQbM9Xp8YpqlBS9KG2I/jju2Cbxj2Z0Cs9olSIoXUGAwFhbpoqE78LO
+	t62w==
+X-Gm-Message-State: APjAAAWZs/Pss+eQjgIx/J/d7jVOSBO1GYvpchCiStBDVAQUrcbbwwho
+	AMPX/feNzil0QN6TvZloxDQmUJg1UbqmR3nT8do6H9Rs
+X-Google-Smtp-Source: APXvYqzOCpj6IYazTKI07UHpcY2gfqix6F+yw/7Mr5XsnvO3mjZxQBmz0ABF4NOk67irhMvElBNNV0TrKEtCNjUjKcY=
+X-Received: by 2002:aed:3644:: with SMTP id e62mr19526343qtb.80.1562698474151; 
+	Tue, 09 Jul 2019 11:54:34 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sosi=qQyKEk6uHJKAWibFwpF7G2eTCwPrVEEe2zLubjzg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20190709172623.26073-1-bunk@stusta.de>
+In-Reply-To: <20190709172623.26073-1-bunk@stusta.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 9 Jul 2019 11:54:19 -0700
+Message-ID: <CAMKF1sp_S44k9HRapQiOLps3ZCbR6c6xPsjW3vOdhniU5nZ6DA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/6 V2] libldb: upgrade 1.4.1 -> 1.5.4
+Subject: Re: [meta-oe][PATCH] gpsd: Don't build without optimization
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 18:52:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Jul 2019 18:54:33 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jul 09, 2019 at 11:16:04AM -0700, Khem Raj wrote:
-> there is another patch to upgrade to 1.6.3 I will take that
+On Tue, Jul 9, 2019 at 10:26 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> The upstream build system adds -O0 when debug is enabled.
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
+> index 6716f402a..43bf25a93 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
+> @@ -36,8 +36,8 @@ PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
+>  EXTRA_OESCONS = " \
+>      sysroot=${STAGING_DIR_TARGET} \
+>      libQgpsmm='false' \
+> -    debug='true' \
+> -    strip='false' \
+> +    debug='false' \
+> +    nostrip='true' \
 
-Please don't, see [1] for the rationale.
+I think this change is improvement over what we have, however it will
+be nicer if it was knobbed with
+DEBUG_BUILD flag, then we can get proper debug info when doing a debug
+build as user will expect.
 
-cu
-Adrian
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2019-June/200359.html
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+>      chrpath='yes' \
+>      systemd='${SYSTEMD_OESCONS}' \
+>      libdir='${libdir}' \
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
