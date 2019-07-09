@@ -1,36 +1,29 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E32B76D6DE
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by mail.openembedded.org (Postfix) with ESMTP id 75F627D279
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2019 19:03:05 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45jFG16lSxz5p;
-	Mon,  8 Jul 2019 21:03:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1562612586;
-	bh=bYnaKx+MSeXp1zG7iZW6A1VKwZQbANlQHh0yzuMKIHI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=moZ6+dWuN9C1h9FQhEmGrk2t+0C8DhXKRB/2iw6fZwtq1TX0/O2jq04Rnvs8wWI2A
-	RHP7IRq90gcpwB/WwIKhTVxY35SxjFuCwaf+sz0x1xwcIbc/3PHNvLm/+wQd7T21nR
-	VEztsMqSo2WbJauCrP7yfTeelY6BiPLpepgPZJFgmxtKN99e2x2LScsk0gu73yjidh
-	/0INts8liEQrSd8sqJ2A8sHu8uIx2hxgyeP6To89ENP+h1mjbvjlPGCeR+jWNIwL3i
-	y78oYY0vIdOfK9aIA/BXkFu8RTuW1FAtS7HmyazUALoXsXgpHKiRKLPQdZTu4ydHFx
-	58PyiJroeUkD9GBOa7MUoFdayOTuXkEt9MS1ZcsaPke8VwCh7v9T6PyLjraCo6x5Ti
-	/yrX1qwUpMkmxx2svaJycM/1mnphSD7EHE7T6WtVmHt6g8VMF+V+bPYfnhtx/QcYAo
-	D2yhS/x7khcku0FJ4NdUBHkmQU29sBD+GAKRN3iuJjr6kMI44VEertR/bgNZi7eGua
-	+OT68WdWBRVyH2pT91HvASxoPsxBMI2na+YAqtRGvk2E33D3+uH7SIdlz5O+jZLTeS
-	Njnha3TohoVjE9xDNULOocT1qmQi0Biii3+ouaTiGLfPd9JcAKWLU3YVUT7eA0zE+M
-	BxD7mO+cry+pYxhf/EVSu27o=
-Date: Mon, 8 Jul 2019 22:03:03 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Message-ID: <20190708190303.GA26276@localhost>
-References: <20190708052411.28158-1-zangrc.fnst@cn.fujitsu.com>
+	Tue,  9 Jul 2019 05:05:59 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	08 Jul 2019 22:06:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,469,1557212400"; d="scan'208";a="364024518"
+Received: from mmohdha1-mobl.gar.corp.intel.com (HELO localhost.localdomain)
+	([10.255.150.37])
+	by fmsmga005.fm.intel.com with ESMTP; 08 Jul 2019 22:05:57 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org,
+	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Date: Tue, 09 Jul 2019 17:05:55 +1200
+Message-ID: <1876612.PddKUuPPg8@localhost.localdomain>
+Organization: Intel Corporation
+In-Reply-To: <d3a2b3cd-906f-d652-e5d8-f721fc3848f3@gmail.com>
+References: <20190708003555.8064-1-open.source@oleksandr-kravchuk.com>
+	<d3a2b3cd-906f-d652-e5d8-f721fc3848f3@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20190708052411.28158-1-zangrc.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python] [PATCH] python-mako: upgrade 1.0.12 -> 1.0.13
+Subject: Re: [PATCH][meta-networking] mosquitto: update to 1.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,25 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 19:03:07 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Jul 2019 05:06:00 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Jul 08, 2019 at 01:24:11PM +0800, Zang Ruochen wrote:
->...
-> -Add python3-mako_1.0.13.bb.
->...
+On Monday, 8 July 2019 2:39:38 PM NZST akuster808 wrote:
+> There is more here than just a version updates. Please explain what the
+> other changes are.
 
-That's already in oe-core.
+Presumably it would be enough to just note them in the commit message.
 
-cu
-Adrian
+BTW the new version supports MQTT 5.0 so we probably would want SUMMARY and 
+DESCRIPTION to reflect that with this update (or drop the version numbers).
+
+Cheers,
+Paul
 
 -- 
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
 
