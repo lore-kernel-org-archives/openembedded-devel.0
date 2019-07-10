@@ -1,23 +1,46 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EF597EDE5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id A7CED7EDDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 03:54:31 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	09 Jul 2019 20:54:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,473,1557212400"; d="scan'208";a="249341790"
-Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by orsmga001.jf.intel.com with ESMTP; 09 Jul 2019 20:54:31 -0700
-From: Anuj Mittal <anuj.mittal@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jul 2019 11:54:29 +0800
-Message-Id: <1562730869-3214-1-git-send-email-anuj.mittal@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] xterm: upgrade 330 -> 347
+	Wed, 10 Jul 2019 04:59:06 +0000 (UTC)
+Received: by mail-qt1-f177.google.com with SMTP id h24so1126267qto.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Jul 2019 21:59:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=kEhcwEHLxg9XOVvQKtlylbgrs6YVH98g3mA9MAwolaI=;
+	b=OmT+hc7+VDwNfA4RPdEYYeyXMg3gZAQNQotYa+yAtZh0dVZlGqbvIvNszCykdDD8SQ
+	BcLmXrK0qeCCcsIyjEFGQciZ5+qs1cbDDfLG49rskBxPfMGy6qJnV9NeMGBvkyfteFvQ
+	jY+0q09ulvHw2ohI/mbXdfEtO+Q395sLmDeZJGkeA6kqr1XHRxAHLJhFRuSmrZV19eoK
+	jVqwvScYUEdQsYRFrZlXStL+guBOAGn6FRFsUb/IkjrIHNV/hm2YCfIvOkxQGOHvCx9M
+	m7UB6jgEi1akh8/xY+EkE3g6TXG6xq+s1rGWfOrM6yJbZBpg9Pqi5jrWYCRbC6/8e8J4
+	LIJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=kEhcwEHLxg9XOVvQKtlylbgrs6YVH98g3mA9MAwolaI=;
+	b=uYAsal1xKy5G9+N/gxnEBB+kqDyH+hTG7hMfSNRueOEXlAd6W24Bgd/u9piNVnDUgw
+	8RZ3MsGrbLg1O6s5LczCwUhTUH0Sz+NN3y+7yo0L9pTuhiCVxQj/EHoRwzHduMqjkhSy
+	82lRR1R56xAa6NQKVxGTJfkDKQ+gZFfcWrlMakfIAR3c8VY4pbW8XHFB2FMWGY30IvPU
+	4UN4x43oHvcHHOY3/2ZlxWa34wS0jPf6U1QTO5GSHEUAeTFGNWhrBXzGyZI4W+iVMQLn
+	/ZR0uy8JTcr4q97aYFTnjEzLwvkRC2t/8JIaXk26qEbUcx80TA7ae5Weqrb9kMeJC3Sb
+	4jOg==
+X-Gm-Message-State: APjAAAWNnkS9vhvHXeQ75b0EMOTTCNSf6yDSBpm6TvBvsngHsE0t4+zk
+	xWMN4ybyiXhplbg5JxaemFjAwJaTS4QwjkqgQW4=
+X-Google-Smtp-Source: APXvYqzkKGK1uu3AzZxHf+/VHNFmpJc35oImkK5tjlY/x1VugYWgUIgfAfj3xNlxHd8JVBN4c3ioRO0iTeXS09PnD08=
+X-Received: by 2002:ac8:764f:: with SMTP id i15mr16402108qtr.194.1562734747254;
+	Tue, 09 Jul 2019 21:59:07 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAPybu_0wQV+iwkbUTYm1hF3SQDa9pqke8z4u1oSwDX75eJyKug@mail.gmail.com>
+In-Reply-To: <CAPybu_0wQV+iwkbUTYm1hF3SQDa9pqke8z4u1oSwDX75eJyKug@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 9 Jul 2019 21:58:51 -0700
+Message-ID: <CAMKF1sp_CAk9AhPa766bJ3fX6LGb2KL+w-JYPrOMYx+GacYwjw@mail.gmail.com>
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: WARNING: on wrong $PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,65 +53,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 03:54:31 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 04:59:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Install the resources in ${datadir} to make it consistent with other apps.
-License checksum changed because of change in Copyright year.
+On Mon, Jul 8, 2019 at 12:11 AM Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+>
+> Hello
+>
+> On our organisation ( qtec.com ) we support a distribution on multiple
+> architectures and machines. Since the introduction of multiconfig we
+> have a single builder and a single package repository, what we really
+> appreciate.
+>
+> Unfortunately, there is one single frustration, and is "wrong"
+> PACKAGE_ARCH. For example:
+>
+> - -native packages that DEPEND on non-native recipes
+> - tune-arch that have some  variable dependency on MACHINE
+>
+> Some of this errors result the same workdir used twice and invalid
+> packages.  Debugging such errors is not trivial, involves horrible
+> error messages, bitbake-diffsigs and non deterministic errors (the
+> build order can hide such errors),
+>
+> So I was thinking that perhaps I could implement some tests such as:
+> - all and native can only depend on -native
+> - tunearch cannot depend on machine
+>
+> I HAVE NO IDEA how difficult could it be, but before implementing I
+> would like to know if that is something that upstream would be
+> interested in, because if it is not upstream I will have hard time
+> convincing my management for getting the hours required.
+>
+> What is your opinion?
+>
 
-Changelog:
+this would be a good check for QA or parser sub-systems for sure. I think
+you should propose it to architecture mailing list once you have formulated
+how to go about it.
 
-https://invisible-island.net/xterm/xterm.log.html
-
-Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
----
- .../recipes-graphics/xorg-app/{xterm_330.bb => xterm_347.bb} | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_330.bb => xterm_347.bb} (70%)
-
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb b/meta-oe/recipes-graphics/xorg-app/xterm_347.bb
-similarity index 70%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_347.bb
-index c2feb81..92d8491 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_347.bb
-@@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
- DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
- 
--LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=f02ab9ebda87b770ecf711dbb3784a33"
-+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7c0ad90e90c390d"
- 
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
- 
--SRC_URI[md5sum] = "9a6db7974aa4ccbb50eabebf72618467"
--SRC_URI[sha256sum] = "7aeef9f29f6b95e09f481173c8c3053357bf5ffe162585647f690fd1707556df"
-+SRC_URI[md5sum] = "5d2c56ebd1d81ee40f23236d6e3c2e5b"
-+SRC_URI[sha256sum] = "400f73e1277ef96dfcb3885388525e6a13a3657a4032b83c1203e812b710b908"
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
- 
-@@ -16,7 +16,9 @@ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
-                  FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
-                  --disable-imake \
-                  --disable-rpath-hack \
--                 --disable-setuid"
-+                 --disable-setuid \
-+                 --with-app-defaults=${datadir}/X11/app-defaults \
-+                 "
- 
- B = "${S}"
- 
-@@ -26,8 +28,6 @@ do_configure() {
-     oe_runconf
- }
- 
--FILES_${PN} += "/usr/lib/X11"
--
- # busybox can supply resize too
- inherit update-alternatives
- 
--- 
-2.7.4
-
+>
+> Regards!
+>
+>
+>
+>
+> --
+> Ricardo Ribalda
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
