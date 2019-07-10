@@ -1,33 +1,24 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id A83B07F00D
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 143DD7F00E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 20:57:36 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45kWjF2PjczJ2
+	Wed, 10 Jul 2019 23:57:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6ANv8U6010198
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 22:57:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1562792257;
-	bh=QXo5rCX2za+AFrRQu0uae0gnKde1pX7Rr6D17fqVCa8=;
-	h=From:To:Subject:Date:From;
-	b=pK3jKST4Wl8G0coiJXS2j6RoCbx3AprEWJVYuU7KkvLcrdajXAJjcIz51iiUO4hbw
-	H1DcEhV0xY/vtj2O+wQzZZjJXQgKwFnYgHJA/w7SzaRmxDXRttwOgflISy5PYn29Re
-	9LZwNVATba+SeUy2rurmfyqCgZx+qjGjlY2oBoVuGLTCjkcJ0AHh8sMHFQ9H0AVwuM
-	bQE1psxHSJGMsMlAg3ewbNXNfMC1GnZu0fxWYTTdh10hb5F+v9HcRYr2WI2MZkW/r2
-	ZjNx7D8JTedgvJ7AowIuojVhZdMDRTifP2C4BnRXogfLC33dFah/zA5Lbut1Km4zhD
-	CUV8XSJyy2/Jad3vmCFltVEEOttvl/KJuFUG1xE4MtLKTXXlIfkkG/+EkJEnA6Infw
-	HQd4agYSqtPp2inF0i495h/rdC4BkM0BHC5SPiHY4T+9m86D8ka1IQXBVjkWNnCAQf
-	yOsHO+h0lFpON4O6vvF+NFJ0FrOnu16WMHA8Zq9c/GdwtiQidoQfZGeSwio+Ki42kb
-	jmGa67jmPLwWKTb2l41D+0O/FMRurmxDLy2vpBSAFO44Jb8xBKW4xpUT2NUp8spOHJ
-	KQhgq+WUoPDtRhkPa/tyuQgkr5+foHd+Bdzl2WHPlMc2PYQv176gkOQPd7aUBWQfJH
-	+J1kicxFiSPLj07OsuIbCxOA=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jul 2019 23:57:34 +0300
-Message-Id: <20190710205734.12377-4-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] gpsd: Drop bluez4 support
+	Wed, 10 Jul 2019 16:57:19 -0700
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Wed, 10 Jul 2019 16:56:58 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 10 Jul 2019 16:56:57 -0700
+Message-ID: <20190710235657.97551-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,38 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 20:57:37 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 23:57:28 -0000
+Content-Type: text/plain
 
-bluez4 was removed from meta-oe 2 years ago.
+Enable use of SOURCE_DATE_EPOCH from the reproducible_build bbclass.
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-index 583fde6ca..b0f946cee 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
-@@ -18,7 +18,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
- SRC_URI[md5sum] = "3b11f26b295010666b1767b308f90bc5"
- SRC_URI[sha256sum] = "5cb1e6d880ec9a52c62492dd0e3d77451b7c7ad625895bd652f6354215aec23e"
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+index 70e04b9..7fd3090 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+@@ -35,6 +35,9 @@ EXTRA_OECONF = " \
+                 --without-manual \
+                "
  
--inherit scons update-rc.d python-dir pythonnative systemd bluetooth update-alternatives
-+inherit scons update-rc.d python-dir pythonnative systemd update-alternatives
- 
- INITSCRIPT_PACKAGES = "gpsd-conf"
- INITSCRIPT_NAME = "gpsd"
-@@ -30,7 +30,7 @@ export STAGING_INCDIR
- export STAGING_LIBDIR
- 
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
--PACKAGECONFIG[bluez] = "bluez='true',bluez='false',${BLUEZ}"
-+PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez5"
- PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
- EXTRA_OESCONS = " \
-     sysroot=${STAGING_DIR_TARGET} \
++# If we have inherited reproducible_build, we want to use it.
++export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
++
+ do_configure_prepend() {
+     # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
 -- 
-2.17.1
+2.7.4
 
 
