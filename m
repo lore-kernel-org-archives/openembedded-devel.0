@@ -1,37 +1,30 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A624F7D729
+Return-Path: <Liwei.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EF2A7EEAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 05:46:53 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,473,1557158400"; d="scan'208";a="71079495"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 10 Jul 2019 13:46:51 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 37B304B4041E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 13:46:52 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0439.000; Wed, 10 Jul 2019 13:46:52 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][patch v4] dnf-plugin-tui: new recipe
-Thread-Index: AQHVJxBJfuRH9SDvZ0W223ohkniEtKbDd3Uw
-Date: Wed, 10 Jul 2019 05:46:56 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FD01BF14B00C@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1559868144-38423-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1559868144-38423-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.227]
+	Wed, 10 Jul 2019 06:16:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6A6FSKI015118
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 9 Jul 2019 23:15:43 -0700
+Received: from [128.224.162.229] (128.224.162.229) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 9 Jul 2019 23:15:17 -0700
+Message-ID: <5D258274.20706@windriver.com>
+Date: Wed, 10 Jul 2019 14:15:16 +0800
+From: Liwei Song <liwei.song@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 37B304B4041E.A98AF
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][patch v4] dnf-plugin-tui: new recipe
+To: "Saini, Naveen Kumar" <naveen.kumar.saini@intel.com>, openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
+References: <1562291023-261126-1-git-send-email-liwei.song@windriver.com>
+	<32b2fbe7-f358-474a-d71a-2eb82e9b834e@intel.com>
+	<5D1EB004.8080305@windriver.com>
+	<db14fa8f-8fd7-34b0-6e53-3e6aa0062c41@intel.com>
+In-Reply-To: <db14fa8f-8fd7-34b0-6e53-3e6aa0062c41@intel.com>
+Subject: Re: [meta-oe][PATCH v2] pm-graph: package the pm-graph files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,81 +37,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 05:46:54 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 10 Jul 2019 06:16:09 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-UGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206
-IFpoZW5nLCBSdW9xaW4NCj4gU2VudDogRnJpZGF5LCBKdW5lIDA3LCAyMDE5
-IDg6NDIgQU0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnDQo+IENjOiBMZWksIE1hb2h1aTsgWmhlbmcsIFJ1b3Fp
-bg0KPiBTdWJqZWN0OiBbb2VdIFttZXRhLW9lXVtwYXRjaCB2NF0gZG5mLXBs
-dWdpbi10dWk6IG5ldyByZWNpcGUNCj4gDQo+IEZyb206IExlaSBNYW9odWkg
-PGxlaW1hb2h1aUBjbi5mdWppdHN1LmNvbT4NCj4gDQo+IFRoaXMgZG5mIHBs
-dWdpbiBhaW0gdG8gc3VwcGx5IGEgdHVpIGludGVyZmFjZSBmb3IgdXNlciB0
-byBtYW5hZ2UNCj4gcGFja2FnZXMuIEl0IGhhcyBmZWF0dXJlcyBhcyBmb2xs
-b3dpbmc6DQo+ICAgMS4gQWRkIG5ldyBjb21tYW5kIGRuZiB0dWkgLS1pbml0
-IHRvIG1ha2UgZG5mIHRvIHdvcmsgb24gaG9zdC4NCj4gICAyLiBUZXh0LWJh
-c2VkIHVzZXIgaW50ZXJmYWNlIGZvciBkbmYuDQo+ICAgMy4gTWFuYWdlIFNQ
-RFggZmlsZXMuDQo+ICAgNC4gTWFuYWdlIFNSUE0gZmlsZXMuDQo+ICAgNS4g
-QWRkIGluc3RhbGxhdGlvbiBzYW1wbGVzIGZvciBkbmYuDQo+IA0KPiBNb3Jl
-IGRldGFpbHMgcGxlYXNlIHJlZmVyIHRvIGh0dHBzOi8vZ2l0aHViLmNvbS91
-YmludXgvZG5mLXBsdWdpbi10dWkuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBa
-aGVuZyBSdW9xaW4gPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4g
-LS0tDQo+ICAuLi4vZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi10dWlfZ2l0
-LmJiICAgICAgICAgICB8IDM4ICsrKysrKysrKysrKysrKysrKysrKysNCj4g
-IC4uLi9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS1yZW1vdGUucmVwby5zYW1w
-bGUgICAgIHwgIDUgKysrDQo+ICAyIGZpbGVzIGNoYW5nZWQsIDQzIGluc2Vy
-dGlvbnMoKykNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lw
-ZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi0NCj4gdHVp
-X2dpdC5iYg0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBl
-cy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3Rl
-LnJlcG8uc2FtcGxlDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNp
-cGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dp
-dC5iYg0KPiBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2lu
-LXR1aS9kbmYtcGx1Z2luLXR1aV9naXQuYmINCj4gbmV3IGZpbGUgbW9kZSAx
-MDA2NDQNCj4gaW5kZXggMDAwMDAwMC4uZTg5MTg2OA0KPiAtLS0gL2Rldi9u
-dWxsDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1
-Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQuYmINCj4gQEAgLTAsMCArMSwz
-OCBAQA0KPiArU1VNTUFSWSA9ICJBIHRleHQtYmFzZWQgdXNlciBpbnRlcmZh
-Y2UgcGx1Z2luIG9mIGRuZiBmb3IgdXNlciB0byBtYW5hZ2UNCj4gcGFja2Fn
-ZXMuICINCj4gK0xJQ0VOU0UgPSAiR1BMdjIiDQo+ICsNCj4gK0xJQ19GSUxF
-U19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PWIyMzRlZTRkNjlmNWZj
-ZTQ0ODZhODBmZGFmNGE0MjYzIg0KPiArDQo+ICtTUkNfVVJJID0gImdpdDov
-L2dpdGh1Yi5jb20vdWJpbnV4L2RuZi1wbHVnaW4tdHVpLmdpdDticmFuY2g9
-bWFzdGVyICINCj4gK1NSQ1JFViA9ICIzMWQ2ODY2ZDVlZGEwMmJlOWE2YmZi
-MWZjYTllOTA5NWIxMmVlY2QxIg0KPiArUFYgPSAiMS4wIg0KPiArDQo+ICtT
-UkNfVVJJX2FwcGVuZF9jbGFzcy10YXJnZXQgPSAiZmlsZTovL29lLXJlbW90
-ZS5yZXBvLnNhbXBsZSINCj4gKw0KPiAraW5oZXJpdCBkaXN0dXRpbHMzLWJh
-c2UNCj4gKw0KPiArUyA9ICIke1dPUktESVJ9L2dpdCINCj4gKw0KPiArZG9f
-aW5zdGFsbF9hcHBlbmQoKSB7DQo+ICsgICAgICAgIGluc3RhbGwgLWQgJHtE
-fSR7ZGF0YWRpcn0vZG5mDQo+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAk
-e1N9L3NhbXBsZXMvKiAke0R9JHtkYXRhZGlyfS9kbmYNCj4gKyAgICAgICAg
-aW5zdGFsbCAtZCAke0R9JHtQWVRIT05fU0lURVBBQ0tBR0VTX0RJUn0vZG5m
-LXBsdWdpbnMvbWtpbWcNCj4gKyAgICAgICAgaW5zdGFsbCAtbSAwNzU1ICR7
-U30vZG5mLXBsdWdpbnMvbWtpbWcvKg0KPiAke0R9JHtQWVRIT05fU0lURVBB
-Q0tBR0VTX0RJUn0vZG5mLXBsdWdpbnMvbWtpbWcNCj4gKyAgICAgICAgZm9y
-IGZpbGUgaW4gJChscyAke1N9L2RuZi1wbHVnaW5zLyB8IGdyZXAgLXYgbWtp
-bWcpOyBkbw0KPiArICAgICAgICAgICAgaW5zdGFsbCAtbSAwNzU1ICR7U30v
-ZG5mLXBsdWdpbnMvJGZpbGUNCj4gJHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdF
-U19ESVJ9L2RuZi1wbHVnaW5zDQo+ICsgICAgICAgIGRvbmUNCj4gK30NCj4g
-Kw0KPiArZG9faW5zdGFsbF9hcHBlbmRfY2xhc3MtdGFyZ2V0KCkgew0KPiAr
-ICAgICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L3l1bS5yZXBv
-cy5kDQo+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L29l
-LXJlbW90ZS5yZXBvLnNhbXBsZQ0KPiAke0R9JHtzeXNjb25mZGlyfS95dW0u
-cmVwb3MuZA0KPiArfQ0KPiArDQo+ICtGSUxFU18ke1BOfSArPSAiJHtkYXRh
-ZGlyfS9kbmYiDQo+ICsNCj4gK1JERVBFTkRTXyR7UE59ICs9ICIgXA0KPiAr
-ICBkbmYgXA0KPiArICBsaWJuZXd0LXB5dGhvbiBcDQo+ICsgICINCj4gKw0K
-PiArQkJDTEFTU0VYVEVORCA9ICJuYXRpdmVzZGsiDQo+IGRpZmYgLS1naXQg
-YS9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmls
-ZXMvb2UtDQo+IHJlbW90ZS5yZXBvLnNhbXBsZSBiL21ldGEtb2UvcmVjaXBl
-cy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3Rl
-LnJlcG8uc2FtcGxlDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4
-IDAwMDAwMDAuLjZjNDUwMmUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9t
-ZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZmlsZXMv
-b2UtcmVtb3RlLnJlcG8uc2FtcGxlDQo+IEBAIC0wLDAgKzEsNSBAQA0KPiAr
-W2Jhc2VdDQo+ICtuYW1lPW15cmVwbw0KPiArYmFzZXVybD1odHRwOi8vMTI3
-LjAuMC4xL29lX3JlcG8vDQo+ICtlbmFibGVkPTENCj4gK2dwZ2NoZWNrPTAN
-Cj4gLS0NCj4gMi43LjQNCg0KCgo=
+
+
+On 07/10/2019 10:33 AM, Saini, Naveen Kumar wrote:
+> 
+> 
+> On 7/5/19 10:03 AM, Liwei Song wrote:
+>>
+>>
+>> On 07/05/2019 10:01 AM, Saini, Naveen Kumar wrote:
+>>>
+>>>
+>>> On 7/5/19 9:43 AM, Liwei Song wrote:
+>>>> package /usr/lib/pm-grap and /bin/* files created by pm-graph
+>>>> to aviod "Files were installed but not shipped in any package"
+>>>> error.
+>>>>
+>>>> Signed-off-by: Liwei Song <liwei.song@windriver.com>
+>>>> ---
+>>>>    meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb | 3 +++
+>>>>    1 file changed, 3 insertions(+)
+>>>>
+>>>> diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>>> index ea12e054d3ab..00301298309e 100644
+>>>> --- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>>> +++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>>> @@ -18,3 +18,6 @@ do_install() {
+>>>>    }
+>>>>      RDEPENDS_${PN} += "python-core python-threading python-datetime python-subprocess python-compression"
+>>>> +
+>>>> +FILES_${PN} += "${nonarch_libdir}/pm-graph \
+>>> This too not required. Please have a look at
+>>> https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/conf/bitbake.conf
+>>>
+>>> Could you share your error !
+>>
+>> The error I got:
+>> ERROR: pm-graph-5.3-r0 do_package: QA Issue: pm-graph: Files/directories were installed but not shipped in any package:
+>>    /usr/lib
+>>    /usr/lib/pm-graph
+>>    /usr/lib/pm-graph/sleepgraph.py
+>>    /usr/lib/pm-graph/bootgraph.py
+>>    /usr/lib/pm-graph/config
+>>    /usr/lib/pm-graph/config/cgskip.txt
+>>    /usr/lib/pm-graph/config/freeze-callgraph.cfg
+>>    /usr/lib/pm-graph/config/freeze.cfg
+>>    /usr/lib/pm-graph/config/freeze-dev.cfg
+>>    /usr/lib/pm-graph/config/standby-callgraph.cfg
+>>    /usr/lib/pm-graph/config/standby.cfg
+>>    /usr/lib/pm-graph/config/standby-dev.cfg
+>>    /usr/lib/pm-graph/config/suspend-callgraph.cfg
+>>    /usr/lib/pm-graph/config/suspend.cfg
+>>    /usr/lib/pm-graph/config/suspend-dev.cfg
+>>    /usr/lib/pm-graph/config/suspend-x2-proc.cfg
+>> Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+>> pm-graph: 16 installed and not shipped files. [installed-vs-shipped]
+>> ERROR: pm-graph-5.3-r0 do_package: Fatal QA errors found, failing task.
+>> ERROR: pm-graph-5.3-r0 do_package:
+>> ERROR: pm-graph-5.3-r0 do_package: Function failed: do_package
+> 
+> Hmm.. what is ${BASELIB} variable value?
+> 
+> Are you using latest code?
+
+it's my fault that my code is old without the following patch:
+86407337b940 ("pm-graph: fix multilib build failure")
+
+Now it work well.
+Sorry to disturb, please ignore this review.
+
+Thanks,
+Liwei.
+
+
+> 
+> I do not see this error. Below configuration I am using for multilib build:
+> 
+> require conf/multilib.conf
+> MULTILIBS = "multilib:lib32"
+> DEFAULTTUNE_virtclass-multilib-lib32 = "x86"
+> 
+> 
+>>
+>>
+>> Thanks,
+>> Liwei.
+>>>> +"
+>>>>
+>>>
+>>>
+> 
+> 
 
