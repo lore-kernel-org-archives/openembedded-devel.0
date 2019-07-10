@@ -1,44 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B2BD77ECA0
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 116C97EE00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 03:14:34 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id r6so829882qkc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2019 20:14:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=IvjzH6q3EEXgTHLD5Rym+STOdcfmqbxlVywrkqdlsVQ=;
-	b=o3YX/KUyyXsEQJ6PJyHG6hDMdEPQN3wX/T4Hlg13Sq25RieMNENsZ7m17l/5PDHgAC
-	nDtTcClrxfkjq/Fdli6iPLS7YLwqJf/Ntn3jur9OdJUhS0A4TyUsJ30iUeOV2C2N3I3G
-	pNbMEecLfsMLtaUTq4OhTQnAp8uYiqu5n4xhAY2iDo4bijdvPAgRghD9grDyHejPyQfh
-	varlOCVap4800xiLxuBPLo52KAY/+o/J0+kVKS+QJBd5P/YE0GrvPPeXeRdEC09zuAF1
-	VQMuN2WPRhYlCVtJQ+yXm/MkdEwFFcKoga+5jccxhNwY6ckizYeEPNgUc8fjgtbXvTii
-	9v2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=IvjzH6q3EEXgTHLD5Rym+STOdcfmqbxlVywrkqdlsVQ=;
-	b=ij07joXW+tDTJ3ZTFU5muVbDTC8EJ8tbmBcXVV1C8sGdwe/fujCcdLRgPjLdUlSO4W
-	blUoyrLTWfT4OX7pjgazMjO3CfWCaoMFlFGbaYqh7aKW3BNA/USc3U1XZ2WdRCXyQ9tR
-	47jeOon34734lnO0pMnH8005rV0LdRXP8VJc6VaX/xQHWsWGjKLTelQyZBLpNon3O2S4
-	pldx/TSHobhNcJV6SpGt/CZl+VaHBc1BZi0ao/0nsM1XQv/BmfOCKstgqPQOPXaBpInp
-	YnttNoqEfq1cS96xUlNBLnLBt+dHhA0YJV4tW2xNEc6ts72M4FbMjjaB4O/+qdaWdXzL
-	QQeg==
-X-Gm-Message-State: APjAAAU77dccPWhHs1vXmlkRmzoxaHAIQCprXPQC0ij7fP7HGeOyU6TH
-	MiERJjiN0viQyhTHgpkVfitkkM5bnKhDmffxdFo=
-X-Google-Smtp-Source: APXvYqzScPiVwF03iJvj2AA9wi0JeUBK0jTbCGZctq/mcyUSysyicw5/4GM3i774UeIDXgNgOT4FJPMukSQnWq0lhco=
-X-Received: by 2002:a37:4243:: with SMTP id p64mr21560378qka.9.1562728475588; 
-	Tue, 09 Jul 2019 20:14:35 -0700 (PDT)
-MIME-Version: 1.0
+	Wed, 10 Jul 2019 03:18:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6A3I2cR007368
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 9 Jul 2019 20:18:02 -0700 (PDT)
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 9 Jul 2019 20:18:01 -0700
+To: Khem Raj <raj.khem@gmail.com>
 References: <20190710023525.25506-1-kai.kang@windriver.com>
-In-Reply-To: <20190710023525.25506-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 Jul 2019 20:14:21 -0700
-Message-ID: <CAMKF1sq+-Zic8ZBCwQ4vGoupT61DrSMbffeOrqoTnj73AM3QWw@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
+	<CAMKF1sq+-Zic8ZBCwQ4vGoupT61DrSMbffeOrqoTnj73AM3QWw@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <6206c8fd-78d4-38b3-7683-64edbf823655@windriver.com>
+Date: Wed, 10 Jul 2019 11:17:55 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.1
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sq+-Zic8ZBCwQ4vGoupT61DrSMbffeOrqoTnj73AM3QWw@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] libvncserver: update to latest commit 1354f7f
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -53,56 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 03:14:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 10 Jul 2019 03:18:02 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Tue, Jul 9, 2019 at 7:35 PM <kai.kang@windriver.com> wrote:
+On 2019/7/10 上午11:14, Khem Raj wrote:
+> On Tue, Jul 9, 2019 at 7:35 PM <kai.kang@windriver.com> wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Update libvncserver to latest git commit 1354f7f which could help to fix
+>> do_package error when multilib is enabled:
+>>
+>> | Files/directories were installed but not shipped in any package:
+>> |   /usr/lib/libvncclient.so.0.9.12
+>> |   /usr/lib/libvncclient.so.1
+>> |   /usr/lib/libvncclient.so
+>> |   /usr/lib/libvncserver.so.0.9.12
+>> |   /usr/lib/libvncserver.so.1
+>> |   /usr/lib/libvncserver.so
+>> |   /usr/lib/pkgconfig
+>> |   /usr/lib/pkgconfig/libvncserver.pc
+>> |   /usr/lib/pkgconfig/libvncclient.pc
+>>
+>> Rename recipe name from _git.bb to _${version}.bb as well.
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   .../{libvncserver_git.bb => libvncserver_0.9.12.bb}           | 4 +++-
+>>   1 file changed, 3 insertions(+), 1 deletion(-)
+>>   rename meta-oe/recipes-graphics/libvncserver/{libvncserver_git.bb => libvncserver_0.9.12.bb} (92%)
+>>
+>> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+>> similarity index 92%
+>> rename from meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+>> rename to meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+>> index bc47a3f15..683a29f94 100644
+>> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+>> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+>> @@ -31,7 +31,9 @@ FILES_libvncclient = "${libdir}/libvncclient.*"
+>>   inherit cmake
+>>
+>>   SRC_URI = "git://github.com/LibVNC/libvncserver"
+>> -SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
+>> +SRCREV = "1354f7f1bb6962dab209eddb9d6aac1f03408110"
+>>   PV = "0.9.12+git${SRCPV}"
+> now that PV is set in recipe name you might want to turn this into
 >
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Update libvncserver to latest git commit 1354f7f which could help to fix
-> do_package error when multilib is enabled:
->
-> | Files/directories were installed but not shipped in any package:
-> |   /usr/lib/libvncclient.so.0.9.12
-> |   /usr/lib/libvncclient.so.1
-> |   /usr/lib/libvncclient.so
-> |   /usr/lib/libvncserver.so.0.9.12
-> |   /usr/lib/libvncserver.so.1
-> |   /usr/lib/libvncserver.so
-> |   /usr/lib/pkgconfig
-> |   /usr/lib/pkgconfig/libvncserver.pc
-> |   /usr/lib/pkgconfig/libvncclient.pc
->
-> Rename recipe name from _git.bb to _${version}.bb as well.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  .../{libvncserver_git.bb => libvncserver_0.9.12.bb}           | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-graphics/libvncserver/{libvncserver_git.bb => libvncserver_0.9.12.bb} (92%)
->
-> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-> similarity index 92%
-> rename from meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> rename to meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-> index bc47a3f15..683a29f94 100644
-> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-> @@ -31,7 +31,9 @@ FILES_libvncclient = "${libdir}/libvncclient.*"
->  inherit cmake
->
->  SRC_URI = "git://github.com/LibVNC/libvncserver"
-> -SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
-> +SRCREV = "1354f7f1bb6962dab209eddb9d6aac1f03408110"
->  PV = "0.9.12+git${SRCPV}"
+> PV .= "+git{SRCPV}"
 
-now that PV is set in recipe name you might want to turn this into
+OK. V2 will be sent.
 
-PV .= "+git{SRCPV}"
+Regards,
+Kai
 
->
->  S = "${WORKDIR}/git"
+
+>   S = "${WORKDIR}/git"
 > +
 > +EXTRA_OECMAKE = "-DMAKE_INSTALL_LIBDIR=${libdir}"
 > --
@@ -113,4 +100,9 @@ PV .= "+git{SRCPV}"
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+-- 
+Kai Kang
+
 
