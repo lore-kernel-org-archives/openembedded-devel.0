@@ -1,45 +1,30 @@
-Return-Path: <3DxIlXQMKALYsWgckkcha.Yki@flex--wak.bounces.google.com>
-Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com
-	[209.85.214.202])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E66C7EC44
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A8187ED87
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2019 22:15:42 +0000 (UTC)
-Received: by mail-pl1-f202.google.com with SMTP id y9so147214plp.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2019 15:15:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=date:message-id:mime-version:subject:from:to:cc;
-	bh=2BuQz5UHtHqnshiNkSAJrffI9L/D1IVKYObSofYchVU=;
-	b=agI4pE0QkJpWWT6V8YSpkU2fGbcjjSvy7ux7KjBgIryuS2HHIKGFrp2QvBBnKTnxZd
-	GBARlWdUPyKK0l2Bbboi5rj55xaY1cq2e5YZLjt1H7D7VoiscUVB56Y3N1NhWW4xBZoQ
-	oGbX/qvp5mO4penFP3PoXU2gclp9a5Sop/UouMS/SbnwpTPdcetw0QmjChZMTMPQ4cDr
-	BOXvedUs0naevyrGm/BFwwXKh4xGBiuEadxtg9fLey458xOnGVu/VsAeHR7XSjM4zvEl
-	jUY6EH84INudyPC1sulDl2StfsfLMXpIGXzZF3lX+s/UjXANBF1hTBADGLZQiknJHtvQ
-	IbFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-	bh=2BuQz5UHtHqnshiNkSAJrffI9L/D1IVKYObSofYchVU=;
-	b=HQp/0kFQUWs8fAmcDje1nBMAp5B+KdIMDmGHaeyGZIeHuM4NFViIJUt9mNAbFlaB5T
-	nWMXsRK5be65453XEU/2PiWTldHkesmrGVt/+XnX8Cw5lYOoj8OFwXbKXO/J1DRAqjp5
-	8gxpMoPU4ks2a2sayUpHL0OB37f8KgkK3ugv+pDpnXl6do8faZYpAKT6NuO0gaXj0bdG
-	jPlQnuOwGPWlmAhYrW3ck622GpwkZyulrbh8umJ6Y8U8jLhTjU1G+A3X5qWGV9X1OcjP
-	b1MD3NNzwLgqaKZuuNEYmxHfqb5PylqKAKMLmd3MNPd8e+ScGdbxGONMBDl4DOSKw2Wt
-	LHuw==
-X-Gm-Message-State: APjAAAXJDpojGSCXbDSkcyhsuqMxbCpChw/HWfCIuVVG8dveNUeLyISd
-	5+aj4XTmQCJS2lgrwA3EfC3wNPeXggE1rz7w45hOdXkVtJOFT6ROR2f9gJBwdktbjAiKmekwBJ4
-	Lp1M/XygqhmNDArPn0sBnuWvNOoyyyZlNIDVxrBq7x7j/hHF38KAkodFqfbPCabdtplT5dOrHJZ
-	XlJss=
-X-Google-Smtp-Source: APXvYqzp5nrci0TyNdr04OHz9UmUkis+m9fuf3xgmw0TNhc4kq0BNFl0bwpv80Ucswl71xPr6z+volA=
-X-Received: by 2002:a63:56:: with SMTP id 83mr33611669pga.145.1562710543209;
-	Tue, 09 Jul 2019 15:15:43 -0700 (PDT)
-Date: Tue,  9 Jul 2019 15:15:38 -0700
-Message-Id: <20190709221538.116780-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.22.0
-From: "William A. Kennington III" <wak@google.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cli11: 1.7.1 -> 1.8.0
+	Wed, 10 Jul 2019 01:20:22 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6A1KLcm002113
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 9 Jul 2019 18:20:21 -0700 (PDT)
+Received: from [128.224.162.157] (128.224.162.157) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 9 Jul 2019 18:20:08 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1561643269-130343-1-git-send-email-hongxu.jia@windriver.com>
+	<20190628100721.GB18526@localhost>
+	<0b346c3b-22e5-2e09-3a81-d199e5c8591a@windriver.com>
+	<CAMKF1sqfgaDzxRuce8uACF7wascrtR6xj8rGT7GOpf7E=oV8tA@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <85785fbc-ebec-f406-786b-6f69d5e719c3@windriver.com>
+Date: Wed, 10 Jul 2019 09:20:07 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqfgaDzxRuce8uACF7wascrtR6xj8rGT7GOpf7E=oV8tA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-networking][PATCH] networkmanager: goodbye libnm-glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,34 +37,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 22:15:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 10 Jul 2019 01:20:23 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Signed-off-by: William A. Kennington III <wak@google.com>
----
- .../recipes-support/cli11/{cli11_1.7.1.bb => cli11_1.8.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cli11/{cli11_1.7.1.bb => cli11_1.8.0.bb} (79%)
+On 7/10/19 1:40 AM, Khem Raj wrote:
+> Hi Hongxu
+>
+> Lets wait until 1.20 release of network manager. Can you propose this
+> again after
+> 1.20 is released and upgraded in OE?
 
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.7.1.bb b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
-similarity index 79%
-rename from meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-rename to meta-oe/recipes-support/cli11/cli11_1.8.0.bb
-index 1ed97a27e..b6a434159 100644
---- a/meta-oe/recipes-support/cli11/cli11_1.7.1.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "C++11 command line parser"
- DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
- HOMEPAGE = "https://github.com/CLIUtils/CLI11"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8489f3831fc7b75264c1d5e346251a74"
--SRCREV = "49ac989a9527ee9bb496de9ded7b4872c2e0e5ca"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
-+SRCREV = "13becaddb657eacd090537719a669d66d393b8b2"
- PV .= "+git${SRCPV}"
- 
- SRC_URI += "gitsm://github.com/CLIUtils/CLI11 \
--- 
-2.22.0
+No problem
+
+//Hongxu
+
+
+> On Fri, Jun 28, 2019 at 7:57 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> On 6/28/19 6:07 PM, Adrian Bunk wrote:
+>>> On Thu, Jun 27, 2019 at 09:47:49AM -0400, Hongxu Jia wrote:
+>>>> Since commit [061953143 networkmanager: Update to 1.18.0] applied,
+>>>> upstream disable libnm-glib by default. And in further networkmanager,
+>>>> upstream removes libnm-glib, libnm-glib-vpn, and libnm-util for good
+>>>> ...
+>>> Any strong reason for removing this already now?
+>> Make sure to clean up empty package, in 1.18
+>>
+>> libnm-glib is already disabled, and left three empty
+>>
+>> packages(no package generated acturally). I found
+>>
+>> the issue, trace the reason and provide fix
+>>
+>>
+>> You may note original PACKAGECONFIG[glib] does not have
+>>
+>> without option, so clean up it rather than add missing without option
+>>
+>> PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
+>>
+>>
+>>> It's gone in 1.20 so removal then is clear, but if someone wants
+>>> to use it for legacy code with 1.18 this should stay possible as
+>>> long as <= 1.18 is shipped.
+>> I think it will be upgraded 1.20 soon, and if someone wants
+>>
+>> to use legacy code, I think 1.16 in warrior is better choose
+>>
+>> which libnm-glib is always enabled
+>>
+>> //Hongxu
+>>
+>>
+>>> cu
+>>> Adrian
+>>>
 
 
