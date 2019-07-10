@@ -1,51 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 17BBB7EF41
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 431F17EF3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 10:46:55 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id x15so1787712wmj.3
+	Wed, 10 Jul 2019 10:46:56 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id p17so1894242wrf.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 03:46:56 -0700 (PDT)
+	Wed, 10 Jul 2019 03:46:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mARFYRW2JjZF6hXzArQf2S3Oll/WhL4hnM/Fhn4b+80=;
-	b=fdKDTIzKQAZDrMYEoNSmwgHRB9gu53bc4QC1QKYiUXeA1INpKij2HeaxfVCsOMoWOv
-	qfWHw1CfNldkiEFoHriSQy3RXZaD/r3zmV+jVcjPSO7w2fRucuEeY1pbsazgAhRZNaDD
-	D/wWKacCEFLjakVjWB9UQ4RJ2is/QaX1WSOuWVNwL6tYCRFXSvb2tbtWP8PkRIesf4N6
-	Zgj+wOuZuKk0XxC4Z1ritmI+5udvtmIpJfqY+SJFc8/sR93d2NGu74gsctU8h+UnwlUy
-	ywJLeCvG+oH7bbGmoOSzk5dy4Jl2hzykMgjWssoc6siuY2QzAAwtcNHHq6GH/EdvCAdW
-	KnoA==
+	bh=W01Djw16jklmKDBKa00NdgW53BNL284sBNNYAzku5Yc=;
+	b=q1W8Kud9e7e5K+RtL2ecCWEWlWiwLb9o+tlyDdccAH3V/PsrJXKUeN/aJxCQPC8mxK
+	F0vJJi1uM6GR99Nzdwe5YxVsuIuEGuZJYCNYiqw/noYgvWKfGV69nF6nXpXWsZYv6ywt
+	t9LaCHZuuwOBVDVbUlpTvy3TsAF1yBausLc+fzThGyRKmC9FlCJse8an4Eanxyx9Xime
+	87136q2ib1FxTN2WM3XFnjMYcVqv6LdWI7k1I4IBcBVpXIhylG92SJJ48SsYXBSGIlNs
+	3Jq8L5AguFhc1WteT97JSpdgXGTm2XemmRXsyLtIvm8qBlwKiX/8E7s+67yZ3CMpCpq1
+	w5sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=mARFYRW2JjZF6hXzArQf2S3Oll/WhL4hnM/Fhn4b+80=;
-	b=NAbE6lQoi6xeeIHfly6fNJdo2ccTb4rYmtEI04w4TO4EMYkhTaIRrabtbVwtAjmAZa
-	ixTGLJ98EwyzVNJbmY1YLbta3Ikr2HD1nIF8OqTOjx9vl4jJmdI0Jlfw5pxsMMFz42G1
-	RGzsUvPy8I5afCVfEoBuIbCsiiIwxQbGc9yUZxZm0mh1KZeBznOLFMha/ST2Q0zJknBH
-	3iCr/y7zHZEL/tUyI11idIE3OWw+oGAqHfx6NOWJFIwvPigxdqY1QrSevl8nU+qsselV
-	vJw58si4GOvACs1KDCNL+CFC49FbS3xm28qQi8llzQqE0DVnJpTM+5f8xxWAAedpByJW
-	6LDA==
-X-Gm-Message-State: APjAAAWutYqvrTWrCkW2yLj23YKY3CX9RFvfNQlwkC3uG5RpXRWE19ka
-	CcrefAsTnZXpzUmWmq7xwbv5MdcM
-X-Google-Smtp-Source: APXvYqw9PA+WHJadgQgkuCOlM7u9rj009XJiSRBScr7bkmAlgYEJ8EAZr8XBF44ku25Vw//gIMqHdg==
-X-Received: by 2002:a1c:f116:: with SMTP id p22mr4821670wmh.70.1562755615609; 
-	Wed, 10 Jul 2019 03:46:55 -0700 (PDT)
+	bh=W01Djw16jklmKDBKa00NdgW53BNL284sBNNYAzku5Yc=;
+	b=CuCwImzipCDyLcXYLhkQt4PVHgz8Ho+P4kG7zPbQCK8C9QU3nOf35TXybN6bnKM4Wd
+	dZJYlaPr6IF1HlZmfR6TXWCgCQRqkWAcN9qq3BCdfGdFREweLl2OXlBuCaRHkbdRSX/F
+	Uwo2IpCIbeXcHLkNQcIETCCQTjzKVMUqhhubAYTCXFG7WKiuxN1YrVImtedAcnZd/JEv
+	9HyBiR+SpxyOVEAJaaIcH93prCTbn4ckmal1YCkooJL6c/2ClxVvPD3aYN+b5JjCvXLz
+	Dghc8riXHVVIe+BgZMkcqmel6mnJqoKm1pc9CkUE8CvjNBOzrWm8RycMWA7g+BZrkAfv
+	T10g==
+X-Gm-Message-State: APjAAAVY8i1j4W27TWQyaPfYTqq0xf56FkdOsp0F85E+K8CJGh1/7iBJ
+	pTNPYFH1l9kmoozQXyach++QOGza
+X-Google-Smtp-Source: APXvYqyCz9N2Cv0Z5kyNiOM+xZIEk1xLrQMQMHFCLfiOgyZofEw+soLCZUDUQsPHK941OK6xzZ9uWQ==
+X-Received: by 2002:adf:fc52:: with SMTP id e18mr29571985wrs.14.1562755616749; 
+	Wed, 10 Jul 2019 03:46:56 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	v15sm1262545wru.61.2019.07.10.03.46.54
+	by smtp.gmail.com with ESMTPSA id 32sm1205033wrh.76.2019.07.10.03.46.56
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 10 Jul 2019 03:46:55 -0700 (PDT)
+	Wed, 10 Jul 2019 03:46:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jul 2019 10:46:53 +0000
-Message-Id: <20190710104655.2229-3-Martin.Jansa@gmail.com>
+Date: Wed, 10 Jul 2019 10:46:54 +0000
+Message-Id: <20190710104655.2229-4-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190710104655.2229-1-Martin.Jansa@gmail.com>
 References: <20190710104655.2229-1-Martin.Jansa@gmail.com>
-Subject: [warrior][PATCH 3/5] oprofile: make MACHINE_ARCH
+Subject: [warrior][PATCH 4/5] oprofile: drop virtual/kernel dependency and switch back to TUNE_PKGARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,41 +57,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 10:46:55 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 10:46:56 -0000
 
-* fixes:
-ERROR: oprofile different signature for task do_configure.sigdata between hammerhead and mako
-Hash for dependent task oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot changed from deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb to d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
-Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb.do_prepare_recipe_sysroot with hashes deecd34bc94f47935ce3dc7f83f9a8407269959e446518bd9700a2ebae4324bb or d4d6301a72fcd061c167a6715372a6e35f57bf08152a6223b1571957834428f0
+From: Martin Jansa <martin.jansa@gmail.com>
 
-$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/oprofile/*do_prepare*.sigdata*
-runtaskdeps changed:
-['autoconf/autoconf_2.69.bb.do_populate_sysroot:virtual:native automake/automake_1.16.1.bb.do_populate_sysroot:virtual:native binutils/binutils_2.32.bb.do_populate_sysroot gcc/gcc-cross_7.3.bb.do_populate_sysroot gcc/gcc-runtime_7.3.bb.do_populate_sysroot glibc/glibc_2.29.bb.do_populate_sysroot gnu-config/gnu-config_git.bb.do_populate_sysroot:virtual:native libtool/libtool-cross_2.4.6.bb.do_populate_sysroot libtool/libtool-native_2.4.6.bb.do_populate_sysroot', -linux/linux-lg-hammerhead_git.bb.do_populate_sysroot, +linux/linux-lg-mako_git.bb.do_populate_sysroot, 'oprofile/oprofile_1.3.0.bb.do_fetch pkgconfig/pkgconfig_git.bb.do_populate_sysroot:virtual:native popt/popt_1.16.bb.do_populate_sysroot']
-linux/linux-lg-hammerhead_git.bb.do_populate_sysroot with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
- changed to
-linux/linux-lg-mako_git.bb.do_populate_sysroot with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-Dependency on task linux/linux-lg-mako_git.bb.do_populate_sysroot was added with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
-Dependency on task linux/linux-lg-hammerhead_git.bb.do_populate_sysroot was removed with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
+* the kernel dependency was added couple years ago with:
+  https://git.openembedded.org/openembedded-core/commit/?id=16bc366877a2e02d96adb91b90e30710777e6f09
+  the reasons for it no longer seem valid as it build ok
+  without the dependency
 
-* as detected with:
-openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
+* there as some differences in the resulting binaries (built with and without
+  kernel dependency):
+docker-shr qemux86-64@ ~/build/oe-core $ diff -rq tmp-glibc/work/*/oprofile/*/image
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/ocount and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/ocount differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/opannotate and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/opannotate differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/oparchive and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/oparchive differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/operf and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/operf differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/opgprof and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/opgprof differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/ophelp and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/ophelp differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/opimport and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/opimport differ
+Files tmp-glibc/work/core2-64-oe-linux/oprofile/1.3.0-r0-without-kernel-dep/image/usr/bin/opreport and tmp-glibc/work/qemux86_64-oe-linux/oprofile/1.3.0-r0-with-kernel-dep/image/usr/bin/opreport differ
+
+* comparing the first one with diffoscope shows only 2 insignificant changes:
+
+  -  GNU                  0x00000014    NT_GNU_BUILD_ID (unique build ID bitstring)         Build ID: 71d68718f2b1393cce55605691453ca0615a985d
+  +  GNU                  0x00000014    NT_GNU_BUILD_ID (unique build ID bitstring)         Build ID: 3b6d2e8b3ce02b99a41e594fafb756e5648edd3c
+
+  -  0x0041ab00 31203230 31390032 323a3334 3a333100 1 2019.22:34:31.
+  +  0x0041ab00 31203230 31390032 323a3239 3a303600 1 2019.22:29:06.
+
+* similarly for other binaries
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
 diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-index 1dc535ed8d..8d706e4a50 100644
+index 8d706e4a50..4e5b6ca33c 100644
 --- a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
 +++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-@@ -3,6 +3,9 @@ require oprofile.inc
- DEPENDS += "virtual/kernel"
+@@ -1,11 +1,7 @@
+ require oprofile.inc
+ 
+-DEPENDS += "virtual/kernel"
  DEPENDS_append_powerpc64 = " libpfm4"
  
-+# Depends on MACHINE_ARCH kernel
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
+-# Depends on MACHINE_ARCH kernel
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
  SRC_URI[md5sum] = "bd998df5521ebedae31e71cd3fb6200b"
  SRC_URI[sha256sum] = "95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6"
  
