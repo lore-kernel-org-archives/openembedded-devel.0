@@ -1,30 +1,23 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A8187ED87
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FD227EBFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 01:20:22 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6A1KLcm002113
+	Wed, 10 Jul 2019 01:31:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6A1VlbQ006219
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 9 Jul 2019 18:20:21 -0700 (PDT)
-Received: from [128.224.162.157] (128.224.162.157) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 9 Jul 2019 18:20:08 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1561643269-130343-1-git-send-email-hongxu.jia@windriver.com>
-	<20190628100721.GB18526@localhost>
-	<0b346c3b-22e5-2e09-3a81-d199e5c8591a@windriver.com>
-	<CAMKF1sqfgaDzxRuce8uACF7wascrtR6xj8rGT7GOpf7E=oV8tA@mail.gmail.com>
+	Tue, 9 Jul 2019 18:31:47 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
+	Tue, 9 Jul 2019 18:31:47 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <85785fbc-ebec-f406-786b-6f69d5e719c3@windriver.com>
-Date: Wed, 10 Jul 2019 09:20:07 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+To: <raj.khem@gmail.com>
+Date: Tue, 9 Jul 2019 21:30:59 -0400
+Message-ID: <1562722259-183795-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqfgaDzxRuce8uACF7wascrtR6xj8rGT7GOpf7E=oV8tA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-networking][PATCH] networkmanager: goodbye libnm-glib
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-blivetgui: fix blivet-gui broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,61 +30,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 01:20:23 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 10 Jul 2019 01:31:47 -0000
+Content-Type: text/plain
 
-On 7/10/19 1:40 AM, Khem Raj wrote:
-> Hi Hongxu
->
-> Lets wait until 1.20 release of network manager. Can you propose this
-> again after
-> 1.20 is released and upgraded in OE?
+In target installer anaconda 30, when they try to go to blivet-gui,
+anaconda.log shows a traceback:
 
-No problem
+23:02:49,842 INF threading: Thread Done: AnaExecuteStorageThread (140274838624000)
+23:02:49,844 DBG exception: running handleException
+23:02:49,845 CRT exception: Traceback (most recent call last):
 
-//Hongxu
+  File "/usr/lib/python3.7/site-packages/blivetgui/list_devices.py", line 165, in on_disk_selection_changed
+    selection.select_iter(self.last_iter)
 
+TypeError: Argument 1 does not allow None as a value
 
-> On Fri, Jun 28, 2019 at 7:57 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
->> On 6/28/19 6:07 PM, Adrian Bunk wrote:
->>> On Thu, Jun 27, 2019 at 09:47:49AM -0400, Hongxu Jia wrote:
->>>> Since commit [061953143 networkmanager: Update to 1.18.0] applied,
->>>> upstream disable libnm-glib by default. And in further networkmanager,
->>>> upstream removes libnm-glib, libnm-glib-vpn, and libnm-util for good
->>>> ...
->>> Any strong reason for removing this already now?
->> Make sure to clean up empty package, in 1.18
->>
->> libnm-glib is already disabled, and left three empty
->>
->> packages(no package generated acturally). I found
->>
->> the issue, trace the reason and provide fix
->>
->>
->> You may note original PACKAGECONFIG[glib] does not have
->>
->> without option, so clean up it rather than add missing without option
->>
->> PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
->>
->>
->>> It's gone in 1.20 so removal then is clear, but if someone wants
->>> to use it for legacy code with 1.18 this should stay possible as
->>> long as <= 1.18 is shipped.
->> I think it will be upgraded 1.20 soon, and if someone wants
->>
->> to use legacy code, I think 1.16 in warrior is better choose
->>
->> which libnm-glib is always enabled
->>
->> //Hongxu
->>
->>
->>> cu
->>> Adrian
->>>
+23:02:49,845 DBG exception: Gtk running, queuing exception handler to the main loop
+23:02:49,858 DBG ui.common: Entered spoke: BlivetGuiSpoke
+23:02:49,858 DBG exception: running handleException
+23:02:49,859 CRT exception: Traceback (most recent call last):
+
+  File "/usr/lib/python3.7/site-packages/blivetgui/list_devices.py", line 165, in on_disk_selection_changed
+    selection.select_iter(self.last_iter)
+
+TypeError: Argument 1 does not allow None as a value
+
+Backport a patch from upstream could fix the issue
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...urn-type-of-BlivetUtils.get_disks-1658893.patch | 32 ++++++++++++++++++++++
+ .../python-blivet/python3-blivetgui_2.1.10.bb      |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
+
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
+new file mode 100644
+index 0000000..cf80566
+--- /dev/null
++++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
+@@ -0,0 +1,32 @@
++From 4d0f9f961704bc1dd83fdf6808fb6ab91dc6a768 Mon Sep 17 00:00:00 2001
++From: Vojtech Trefny <vtrefny@redhat.com>
++Date: Thu, 13 Dec 2018 13:39:03 +0100
++Subject: [PATCH] Fix return type of BlivetUtils.get_disks (#1658893)
++
++This must be a list, not a generator, because we are iterating
++over it multiple times in some cases.
++
++Upstream-Status: Backport[git://github.com/rhinstaller/blivet-gui]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++---
++ blivetgui/blivet_utils.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/blivetgui/blivet_utils.py b/blivetgui/blivet_utils.py
++index e2bd802..ddb04fc 100644
++--- a/blivetgui/blivet_utils.py
+++++ b/blivetgui/blivet_utils.py
++@@ -204,7 +204,7 @@ class BlivetUtils(object):
++ 
++         """
++ 
++-        return (device for device in self.storage.disks if device.type != "mdarray")
+++        return [device for device in self.storage.disks if device.type != "mdarray"]
++ 
++     def get_group_devices(self):
++         """ Return list of LVM2 Volume Group devices
++-- 
++2.7.4
++
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
+index 2ea8103..b7e2493 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
+@@ -10,6 +10,7 @@ B = "${S}"
+ 
+ SRCREV = "67ec0b7a0e065ba24ab87963409bfb21b2aac6dd"
+ SRC_URI = "git://github.com/rhinstaller/blivet-gui;branch=master \
++           file://0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch \
+ "
+ 
+ inherit distro_features_check
+-- 
+2.8.1
 
 
