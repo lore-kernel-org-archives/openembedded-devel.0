@@ -1,24 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E384C7D27B
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EF597EDE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 03:28:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6A3SBGe011000
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 9 Jul 2019 20:28:27 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 9 Jul 2019 20:28:03 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 9 Jul 2019 23:28:00 -0400
-Message-ID: <20190710032800.97661-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] libvncserver: update to latest commit 1354f7f
+	Wed, 10 Jul 2019 03:54:31 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Jul 2019 20:54:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,473,1557212400"; d="scan'208";a="249341790"
+Received: from andromeda02.png.intel.com ([10.221.183.11])
+	by orsmga001.jf.intel.com with ESMTP; 09 Jul 2019 20:54:31 -0700
+From: Anuj Mittal <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Jul 2019 11:54:29 +0800
+Message-Id: <1562730869-3214-1-git-send-email-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] xterm: upgrade 330 -> 347
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,54 +30,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 03:28:53 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Jul 2019 03:54:31 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+Install the resources in ${datadir} to make it consistent with other apps.
+License checksum changed because of change in Copyright year.
 
-Update libvncserver to latest git commit 1354f7f which could help to fix
-do_package error when multilib is enabled:
+Changelog:
 
-| Files/directories were installed but not shipped in any package:
-|   /usr/lib/libvncclient.so.0.9.12
-|   /usr/lib/libvncclient.so.1
-|   /usr/lib/libvncclient.so
-|   /usr/lib/libvncserver.so.0.9.12
-|   /usr/lib/libvncserver.so.1
-|   /usr/lib/libvncserver.so
-|   /usr/lib/pkgconfig
-|   /usr/lib/pkgconfig/libvncserver.pc
-|   /usr/lib/pkgconfig/libvncclient.pc
+https://invisible-island.net/xterm/xterm.log.html
 
-Rename recipe name from _git.bb to _${version}.bb as well.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../{libvncserver_git.bb => libvncserver_0.9.12.bb}         | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/libvncserver/{libvncserver_git.bb => libvncserver_0.9.12.bb} (90%)
+ .../recipes-graphics/xorg-app/{xterm_330.bb => xterm_347.bb} | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_330.bb => xterm_347.bb} (70%)
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-similarity index 90%
-rename from meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-rename to meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-index bc47a3f15..4e4acb835 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-@@ -31,7 +31,9 @@ FILES_libvncclient = "${libdir}/libvncclient.*"
- inherit cmake
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb b/meta-oe/recipes-graphics/xorg-app/xterm_347.bb
+similarity index 70%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_330.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_347.bb
+index c2feb81..92d8491 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_347.bb
+@@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
  
- SRC_URI = "git://github.com/LibVNC/libvncserver"
--SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
--PV = "0.9.12+git${SRCPV}"
-+SRCREV = "1354f7f1bb6962dab209eddb9d6aac1f03408110"
-+PV .= "+git${SRCPV}"
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=f02ab9ebda87b770ecf711dbb3784a33"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7c0ad90e90c390d"
  
- S = "${WORKDIR}/git"
-+
-+EXTRA_OECMAKE = "-DMAKE_INSTALL_LIBDIR=${libdir}"
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ 
+-SRC_URI[md5sum] = "9a6db7974aa4ccbb50eabebf72618467"
+-SRC_URI[sha256sum] = "7aeef9f29f6b95e09f481173c8c3053357bf5ffe162585647f690fd1707556df"
++SRC_URI[md5sum] = "5d2c56ebd1d81ee40f23236d6e3c2e5b"
++SRC_URI[sha256sum] = "400f73e1277ef96dfcb3885388525e6a13a3657a4032b83c1203e812b710b908"
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ 
+@@ -16,7 +16,9 @@ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+                  FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
+                  --disable-imake \
+                  --disable-rpath-hack \
+-                 --disable-setuid"
++                 --disable-setuid \
++                 --with-app-defaults=${datadir}/X11/app-defaults \
++                 "
+ 
+ B = "${S}"
+ 
+@@ -26,8 +28,6 @@ do_configure() {
+     oe_runconf
+ }
+ 
+-FILES_${PN} += "/usr/lib/X11"
+-
+ # busybox can supply resize too
+ inherit update-alternatives
+ 
 -- 
-2.20.0
+2.7.4
 
 
