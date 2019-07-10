@@ -1,23 +1,31 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FD227EBFA
+Return-Path: <naveen.kumar.saini@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A89D7ED9A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 01:31:47 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6A1VlbQ006219
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 9 Jul 2019 18:31:47 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Tue, 9 Jul 2019 18:31:47 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 9 Jul 2019 21:30:59 -0400
-Message-ID: <1562722259-183795-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Wed, 10 Jul 2019 02:31:16 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Jul 2019 19:31:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,472,1557212400"; d="scan'208";a="176694967"
+Received: from optimus-prime.png.intel.com (HELO [172.30.199.130])
+	([172.30.199.130])
+	by orsmga002.jf.intel.com with ESMTP; 09 Jul 2019 19:31:17 -0700
+To: Liwei Song <liwei.song@windriver.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <1562291023-261126-1-git-send-email-liwei.song@windriver.com>
+	<32b2fbe7-f358-474a-d71a-2eb82e9b834e@intel.com>
+	<5D1EB004.8080305@windriver.com>
+From: "Saini, Naveen Kumar" <naveen.kumar.saini@intel.com>
+Message-ID: <db14fa8f-8fd7-34b0-6e53-3e6aa0062c41@intel.com>
+Date: Wed, 10 Jul 2019 10:33:01 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-blivetgui: fix blivet-gui broken
+In-Reply-To: <5D1EB004.8080305@windriver.com>
+Subject: Re: [meta-oe][PATCH v2] pm-graph: package the pm-graph files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,90 +38,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 01:31:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Jul 2019 02:31:17 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-In target installer anaconda 30, when they try to go to blivet-gui,
-anaconda.log shows a traceback:
 
-23:02:49,842 INF threading: Thread Done: AnaExecuteStorageThread (140274838624000)
-23:02:49,844 DBG exception: running handleException
-23:02:49,845 CRT exception: Traceback (most recent call last):
 
-  File "/usr/lib/python3.7/site-packages/blivetgui/list_devices.py", line 165, in on_disk_selection_changed
-    selection.select_iter(self.last_iter)
+On 7/5/19 10:03 AM, Liwei Song wrote:
+> 
+> 
+> On 07/05/2019 10:01 AM, Saini, Naveen Kumar wrote:
+>>
+>>
+>> On 7/5/19 9:43 AM, Liwei Song wrote:
+>>> package /usr/lib/pm-grap and /bin/* files created by pm-graph
+>>> to aviod "Files were installed but not shipped in any package"
+>>> error.
+>>>
+>>> Signed-off-by: Liwei Song <liwei.song@windriver.com>
+>>> ---
+>>>    meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb | 3 +++
+>>>    1 file changed, 3 insertions(+)
+>>>
+>>> diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>> index ea12e054d3ab..00301298309e 100644
+>>> --- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>> +++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>>> @@ -18,3 +18,6 @@ do_install() {
+>>>    }
+>>>      RDEPENDS_${PN} += "python-core python-threading python-datetime python-subprocess python-compression"
+>>> +
+>>> +FILES_${PN} += "${nonarch_libdir}/pm-graph \
+>> This too not required. Please have a look at
+>> https://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/conf/bitbake.conf
+>>
+>> Could you share your error !
+> 
+> The error I got:
+> ERROR: pm-graph-5.3-r0 do_package: QA Issue: pm-graph: Files/directories were installed but not shipped in any package:
+>    /usr/lib
+>    /usr/lib/pm-graph
+>    /usr/lib/pm-graph/sleepgraph.py
+>    /usr/lib/pm-graph/bootgraph.py
+>    /usr/lib/pm-graph/config
+>    /usr/lib/pm-graph/config/cgskip.txt
+>    /usr/lib/pm-graph/config/freeze-callgraph.cfg
+>    /usr/lib/pm-graph/config/freeze.cfg
+>    /usr/lib/pm-graph/config/freeze-dev.cfg
+>    /usr/lib/pm-graph/config/standby-callgraph.cfg
+>    /usr/lib/pm-graph/config/standby.cfg
+>    /usr/lib/pm-graph/config/standby-dev.cfg
+>    /usr/lib/pm-graph/config/suspend-callgraph.cfg
+>    /usr/lib/pm-graph/config/suspend.cfg
+>    /usr/lib/pm-graph/config/suspend-dev.cfg
+>    /usr/lib/pm-graph/config/suspend-x2-proc.cfg
+> Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+> pm-graph: 16 installed and not shipped files. [installed-vs-shipped]
+> ERROR: pm-graph-5.3-r0 do_package: Fatal QA errors found, failing task.
+> ERROR: pm-graph-5.3-r0 do_package:
+> ERROR: pm-graph-5.3-r0 do_package: Function failed: do_package
 
-TypeError: Argument 1 does not allow None as a value
+Hmm.. what is ${BASELIB} variable value?
 
-23:02:49,845 DBG exception: Gtk running, queuing exception handler to the main loop
-23:02:49,858 DBG ui.common: Entered spoke: BlivetGuiSpoke
-23:02:49,858 DBG exception: running handleException
-23:02:49,859 CRT exception: Traceback (most recent call last):
+Are you using latest code?
 
-  File "/usr/lib/python3.7/site-packages/blivetgui/list_devices.py", line 165, in on_disk_selection_changed
-    selection.select_iter(self.last_iter)
+I do not see this error. Below configuration I am using for multilib build:
 
-TypeError: Argument 1 does not allow None as a value
+require conf/multilib.conf
+MULTILIBS = "multilib:lib32"
+DEFAULTTUNE_virtclass-multilib-lib32 = "x86"
 
-Backport a patch from upstream could fix the issue
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- ...urn-type-of-BlivetUtils.get_disks-1658893.patch | 32 ++++++++++++++++++++++
- .../python-blivet/python3-blivetgui_2.1.10.bb      |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
 
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
-new file mode 100644
-index 0000000..cf80566
---- /dev/null
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch
-@@ -0,0 +1,32 @@
-+From 4d0f9f961704bc1dd83fdf6808fb6ab91dc6a768 Mon Sep 17 00:00:00 2001
-+From: Vojtech Trefny <vtrefny@redhat.com>
-+Date: Thu, 13 Dec 2018 13:39:03 +0100
-+Subject: [PATCH] Fix return type of BlivetUtils.get_disks (#1658893)
-+
-+This must be a list, not a generator, because we are iterating
-+over it multiple times in some cases.
-+
-+Upstream-Status: Backport[git://github.com/rhinstaller/blivet-gui]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
-+---
-+ blivetgui/blivet_utils.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/blivetgui/blivet_utils.py b/blivetgui/blivet_utils.py
-+index e2bd802..ddb04fc 100644
-+--- a/blivetgui/blivet_utils.py
-++++ b/blivetgui/blivet_utils.py
-+@@ -204,7 +204,7 @@ class BlivetUtils(object):
-+ 
-+         """
-+ 
-+-        return (device for device in self.storage.disks if device.type != "mdarray")
-++        return [device for device in self.storage.disks if device.type != "mdarray"]
-+ 
-+     def get_group_devices(self):
-+         """ Return list of LVM2 Volume Group devices
-+-- 
-+2.7.4
-+
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
-index 2ea8103..b7e2493 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb
-@@ -10,6 +10,7 @@ B = "${S}"
- 
- SRCREV = "67ec0b7a0e065ba24ab87963409bfb21b2aac6dd"
- SRC_URI = "git://github.com/rhinstaller/blivet-gui;branch=master \
-+           file://0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch \
- "
- 
- inherit distro_features_check
--- 
-2.8.1
-
+> 
+> 
+> Thanks,
+> Liwei.
+>>> +"
+>>>
+>>
+>>
 
