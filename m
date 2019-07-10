@@ -1,46 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DDB287EDB2
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 04B2D7EF4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 16:23:32 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id j19so3027858qtr.12
+	Wed, 10 Jul 2019 16:28:17 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id m14so2345896qka.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 09:23:34 -0700 (PDT)
+	Wed, 10 Jul 2019 09:28:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=1J4C/9JF9h/qWJc3uOeQY+J1ZyaiBTZtJ8v/c2jJG7s=;
-	b=UrQhIUWzmEZNylCwdSKeYxrBue5zx/u0NG++tKQONiQFrFptbgjldFw2RICkUiSCSn
-	dMQ2Urkv9ffGfW+v9LFLojtU1YNEyU1TNNz+Een7kuh65WosDJKqkPAX1xJhFZ665v5n
-	aP5AXHX4N65jH7lBInq2S5JptfvahG//nKd8a/KsbRrnMLDIE3EoSdsRLNV0nyorADga
-	kHs0+It7Co5w66NzzEMPLkYEjtseDZ8+9JnUozAy3adbYartHluNqAc7V9nhD8+7bbYK
-	JWP2J4weioKOCHzl2T29cixE4cAKbE4qGxiSbMSzR/JqP6gL2tUj2wX0sKUwSChnYPl7
-	OYdA==
+	:cc; bh=WEXHl7cRfKTC8hgbZ9BLYT2SSxG2fwoMuiMutdRGe9o=;
+	b=ovhk7M0erWl3jSw+rygekOuHyl+08V1vCUirMDxDKIcxg1ntu0x/7t70MacYHHJOEh
+	k7QV1903FHJLKpVjBIvTCsJmvbgH/vwrZwC14qlkgpuyfsR/oKRswWcbqRIcJM087MeH
+	h/hjn+InZIucoFndgNTCIx2nCJEdB5cf+d0csYI82nU4I3oQ5aDVMR32asWtO0QrmEJl
+	uQtnl+YLR3rwmC6EMXCYMdojpSt4BCDWS5VF06sAg9Z+APKrbl55ItV9qexQ8ZxLxuD7
+	9jzczptNPfmydUAPd99pWQGIjmXQNFFIc6kJWVBYXzLqiUQl6TIzz8ZJDhq45itZTwH8
+	qwvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=1J4C/9JF9h/qWJc3uOeQY+J1ZyaiBTZtJ8v/c2jJG7s=;
-	b=dRoytvxDi9Rhhht6cIoF+YhWVzXrIex7olHZ28vUk1fFY5vwml8aW8JoPf764qYbnL
-	aziovTy33d2aI5QCpJ1gyAnXKuXQJF1MfiUWF7vj229jBj9pOMXl0FgVWK/39KyvUSZ4
-	vpj/VyXQF1CUjWMhpFqY8Ga5Yc1qQnCiR+spkZpaIbCD2ixCovn5n/lVymyUbSWZSmRS
-	EqUXu/xUalL127ZeRU3w1mHaL5kbzr8I3JeL+8RLSj0goOZIeVWYxATlh/K+Ocn2l8au
-	iOiX6E6/y/A0k5U5cBGrK9+n4+lvQhSi3OBdCZdMxHzwvK/nW/CVW/o3VRhqSQyeaQjE
-	R63A==
-X-Gm-Message-State: APjAAAUt3TjR+P7EPP4zKJAvk70xKCsG+ygIMxNLWkTC31/lV/+uYVb2
-	hrXjSZqJ9G0NzTaS03nkRrEDC8uqO3qMYu+SD9z9+FEWcZQ=
-X-Google-Smtp-Source: APXvYqxpxWU9WMG0mEUtg897BrAZFglw9RHagBaabt4XtytEywq1DKjiHnhyd8/VlC+MpCB38C1JahPnr60W4rFjTwA=
-X-Received: by 2002:aed:3644:: with SMTP id e62mr23918526qtb.80.1562775813360; 
-	Wed, 10 Jul 2019 09:23:33 -0700 (PDT)
+	bh=WEXHl7cRfKTC8hgbZ9BLYT2SSxG2fwoMuiMutdRGe9o=;
+	b=XjW24FH5NJPwK14jTUDJpGnGbLbRtHAj6N6S03rILQZ057Zowzp6KT0l3v9i5skMk+
+	AWnoLzVkCn0Zi6mZVAlpu+y9i13LDsfqipQEYq7eePTBtg4ak3Qk+ZfvaCVuN+/MSJ/H
+	EwbCsYgD/BAZPael+1O5Zzt/j7kNlicZj/utmU+3M3dfstJR3L01T82otVN2CVXMalMz
+	MEaWtPU9E5OEsBrDdZkh6V4SNbsXxJ43PYNR90tZl7Esj0ncDzygzJyFmHDp8ncYW6QH
+	No1kNfY7djfOlp7ivh1Ej1rpkMrid67aZQSg1OIa0lxH9kIXMUBArIrGt7T7mU1CRs6j
+	iWaA==
+X-Gm-Message-State: APjAAAXGKvQFc5CzwXSR8yyIJOLAOt+XMsexHYcOyv0pYhAxjQSDs9Y7
+	vEbI1pd9+xfVJJvBY5JQnuwUCk2ro0ll3AC08wHUwjfrEBM=
+X-Google-Smtp-Source: APXvYqzLN9I/z3kW/PCKtqyK5pG4i1p5GFzOxzPysF1TRF/UlVJeQh/WSpIR7kSOyxt5swyMW8deZcTxou23HIDR38c=
+X-Received: by 2002:a37:7083:: with SMTP id l125mr23602513qkc.71.1562776098747;
+	Wed, 10 Jul 2019 09:28:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <1559871393-38760-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1559871393-38760-1-git-send-email-leimaohui@cn.fujitsu.com>
+References: <cover.1562675891.git.paul.eggleton@linux.intel.com>
+	<11d497c0ecd5157b41e0a5e2c24d1778e6bdab63.1562675891.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <11d497c0ecd5157b41e0a5e2c24d1778e6bdab63.1562675891.git.paul.eggleton@linux.intel.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 10 Jul 2019 09:23:07 -0700
-Message-ID: <CAMKF1sqOR-Ljt5p3mMZanUtQwf5qUNdhUFEyt+zFuMv+NGoD2A@mail.gmail.com>
-To: Lei Maohui <leimaohui@cn.fujitsu.com>
+Date: Wed, 10 Jul 2019 09:27:52 -0700
+Message-ID: <CAMKF1sqoimXah8dJ9Z4s5eJNzPn2Jj-8Z_bN0_iFsEm8tD+E3Q@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] adcli: added new recipe.
+Subject: Re: [meta-oe][PATCH 3/3] picocom: update to 3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,74 +54,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 16:23:33 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 16:28:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jun 26, 2019 at 10:57 PM Lei Maohui <leimaohui@cn.fujitsu.com> wrote:
->
-> radiusclient-ng is too old. So, added a substitute.
->
+Hi Paul
 
 This fails to build on musl
-https://errors.yoctoproject.org/Errors/Details/251280/
 
-Can you try a patch like this and see if it works for you?
-it will also fix the build on musl
+see
+https://errors.yoctoproject.org/Errors/Details/251294/
 
---- a/library/adutil.c
-+++ b/library/adutil.c
-@@ -30,6 +30,7 @@
- #include <assert.h>
- #include <ctype.h>
- #include <errno.h>
-+#include <endian.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
+I think we need a fix similar to this one
+https://github.com/serialport/node-serialport/commit/02e2bfecf0b32037121abb5bc2925dcb83785934
 
+can you try it out and send a v2 if it works ?
 
-> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+On Tue, Jul 9, 2019 at 5:39 AM Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+>
+> There have been a couple of releases since we last upgraded, including
+> a number of additional features. Changelog is here:
+>
+>   https://github.com/npat-efault/picocom/releases
+>
+> Also tweak SUMMARY - I don't think this has been 20k in a while; with
+> this upgrade the binary alone went from 60k to 70k.
+>
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 > ---
->  .../recipes-connectivity/adcli/adcli_0.8.2.bb      | 26 ++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
+>  meta-oe/recipes-support/picocom/picocom_git.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
-> new file mode 100644
-> index 0000000..a98a1b3
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/adcli/adcli_0.8.2.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY = "Active Directory enrollment"
-> +DESCRIPTION = "A helper library and tools for Active Directory client operations."
-> +
-> +HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
-> +SECTION = "net"
-> +
-> +SRCREV = "cc3ef52884a48863a81acbfc741735fe09cd85f7"
-> +
-> +SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
-> +          "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +LICENSE = "LGPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
-> +
-> +inherit autotools xmlcatalog
-> +
-> +DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
-> +            cyrus-sasl libxslt-native xmlto-native coreutils-native\
-> +           "
-> +
-> +EXTRA_OECONF += "--disable-static \
-> +                 --disable-silent-rules \
-> +                 --disable-doc \
-> +                "
+> diff --git a/meta-oe/recipes-support/picocom/picocom_git.bb b/meta-oe/recipes-support/picocom/picocom_git.bb
+> index e091094cf4..0d65453b7c 100644
+> --- a/meta-oe/recipes-support/picocom/picocom_git.bb
+> +++ b/meta-oe/recipes-support/picocom/picocom_git.bb
+> @@ -1,13 +1,13 @@
+> -SUMMARY = "Lightweight and minimal (~20K) dumb-terminal emulation program"
+> +SUMMARY = "Lightweight and minimal dumb-terminal emulation program"
+>  SECTION = "console/utils"
+>  LICENSE = "GPLv2+"
+> -HOMEPAGE = "http://code.google.com/p/picocom/"
+> +HOMEPAGE = "https://github.com/npat-efault/picocom"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3000e4830620e310fe65c0eb69df9e8a"
+>
+> -BASEPV = "2.2"
+> +BASEPV = "3.1"
+>  PV = "${BASEPV}+git${SRCPV}"
+>
+> -SRCREV = "deffd18c24145bd6f965f44e735a50b65810ccdc"
+> +SRCREV = "90385aabe2b51f39fa130627d46b377569f82d4a"
+>
+>  SRC_URI = "git://github.com/npat-efault/picocom"
+>
 > --
-> 2.7.4
->
->
+> 2.20.1
 >
 > --
 > _______________________________________________
