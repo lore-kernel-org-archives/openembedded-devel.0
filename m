@@ -1,31 +1,47 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EAAC7EFEF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EBD97EF58
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 17:14:28 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6BHDmhg005041
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 11 Jul 2019 10:14:03 -0700
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.194]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0439.000;
-	Thu, 11 Jul 2019 10:13:47 -0700
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-networking][PATCH 1/1] drbd-utils: enable
-	reproducible_build awareness
-Thread-Index: AQHVN3sp+ZckOnUhY0OM82wL52bd/KbFfDgAgAAsB5A=
-Date: Thu, 11 Jul 2019 17:13:46 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
+	Thu, 11 Jul 2019 17:47:54 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id r21so4324299qke.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Jul 2019 10:47:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=G+lP2Hlplz0ywKblw2fwkOKPsp4+mxMSXB2P7YKifRc=;
+	b=ivpOTaSlfgIna/jm7XagAx9myHV7cstC72nAdx38spOVwMcb8yr1bWzfZJLMwhwLCe
+	x4+W4fJajoXxaH07IvLMmYMr6YU2v5BxXk18YwJ1pnm0Jn+TRGHlzJabI/CnX8p8merB
+	T09cnr7MrLwHUh2jihSKtdu5166O7AnNeBavZonvC+EmUU/d5n3JYpRrYHQm1bpkk7EU
+	xUimKdBwaonCw2iHFxl8vLEoi03Ip2CPAygIc8Ek/a2gBN7e1qIF+Tjk3Kfr5fmPJJPV
+	tESF9LhAmo/shALjXrt+kkAg1QKG6xeHL/JZeA1h16L4R8dBkGFyRiaMKMC5uywav6No
+	ernA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=G+lP2Hlplz0ywKblw2fwkOKPsp4+mxMSXB2P7YKifRc=;
+	b=FwaKInrH3YFWzAmAloiiHcDaea6TXDAzuWW5KCbvcw99G0PhH/rT3dz2A61i59uy8I
+	xQQEHcavKYTx/iqUnnl2oTRztB4WgofovObhXNr5DQEduQCtn+qow6Xui74ByNi3FMmP
+	TsX6INEgKKzKQ26tErIxxMfY59y6FBFttNKM/3Hp0BVyfYZ1VvxAa8Bgz6/W61G5o5IT
+	xzoCqW+8UlvibZRCQyEyK8Bjl8NIxmXRzkXpd5TZ6T8+9W49eBUaUaanbOiVuZ+cBBqi
+	Ek3RnnsWZxBkJy+e6Ql3GIxKW8yo5mUq767wSBj2/YAIBxNYjs+Y/erditwCjDU2CVbI
+	YZqg==
+X-Gm-Message-State: APjAAAU54b3ao1XK48H1fGt4zGoodSLgn5ozHVAd4ozPfs9CBcSW0NIb
+	UoN+X+Pg8LbDVlfkybwFiz9aHwBZZS2aSH+FB7A=
+X-Google-Smtp-Source: APXvYqxXIEPDYV3K+ySwNpdxIBHrSiEUClRF/N8bIpdqrXOzCE7dVXEAib7i3w/Z5Xkti+iTK+0SmZHeFpSi3KDBZTY=
+X-Received: by 2002:a37:7083:: with SMTP id l125mr2759392qkc.71.1562867275810; 
+	Thu, 11 Jul 2019 10:47:55 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190710235657.97551-1-joe.slater@windriver.com>
 	<CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.209.216]
-MIME-Version: 1.0
+	<007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
+In-Reply-To: <007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 Jul 2019 10:47:45 -0700
+Message-ID: <CAMKF1sq+BMac-f5VGhiUyagy3VUCM082EEXA_Mt1X3QxaZO4kQ@mail.gmail.com>
+To: "Slater, Joseph" <joe.slater@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,42 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 17:14:28 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 11 Jul 2019 17:47:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
-bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBKdWx5IDExLCAyMDE5IDEy
-OjMzIEFNDQo+IFRvOiBTbGF0ZXIsIEpvc2VwaA0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwNCj4g
-U3ViamVjdDogUmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggMS8xXSBkcmJkLXV0aWxz
-OiBlbmFibGUNCj4gcmVwcm9kdWNpYmxlX2J1aWxkIGF3YXJlbmVzcw0KPiANCj4gT24gV2VkLCBK
-dWwgMTAsIDIwMTkgYXQgNDo1NyBQTSBKb2UgU2xhdGVyIDxqb2Uuc2xhdGVyQHdpbmRyaXZlci5j
-b20+DQo+IHdyb3RlOg0KPiA+DQo+ID4gRW5hYmxlIHVzZSBvZiBTT1VSQ0VfREFURV9FUE9DSCBm
-cm9tIHRoZSByZXByb2R1Y2libGVfYnVpbGQgYmJjbGFzcy4NCj4gPg0KPiA+IFNpZ25lZC1vZmYt
-Ynk6IEpvZSBTbGF0ZXIgPGpvZS5zbGF0ZXJAd2luZHJpdmVyLmNvbT4NCj4gPiAtLS0NCj4gPiAg
-bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2RyYmQtdXRpbHNfOS4xMC4wLmJi
-IHwgMyArKysNCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQ0KPiA+DQo+ID4g
-ZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkLXV0
-aWxzXzkuMTAuMC5iYg0KPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9k
-cmJkLXV0aWxzXzkuMTAuMC5iYg0KPiA+IGluZGV4IDcwZTA0YjkuLjdmZDMwOTAgMTAwNjQ0DQo+
-ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2RyYmQtdXRpbHNf
-OS4xMC4wLmJiDQo+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJk
-L2RyYmQtdXRpbHNfOS4xMC4wLmJiDQo+ID4gQEAgLTM1LDYgKzM1LDkgQEAgRVhUUkFfT0VDT05G
-ID0gIiBcDQo+ID4gICAgICAgICAgICAgICAgICAtLXdpdGhvdXQtbWFudWFsIFwNCj4gPiAgICAg
-ICAgICAgICAgICAgIg0KPiA+DQo+ID4gKyMgSWYgd2UgaGF2ZSBpbmhlcml0ZWQgcmVwcm9kdWNp
-YmxlX2J1aWxkLCB3ZSB3YW50IHRvIHVzZSBpdC4NCj4gPiArZXhwb3J0IFdBTlRfRFJCRF9SRVBS
-T0RVQ0lCTEVfQlVJTEQgPSAieWVzIg0KPiANCj4gc2hvdWxkIHRoaXMgYmUgc2V0IGFmdGVyIGNo
-ZWNraW5nIGZvciBpbmhlcml0IA0KDQpbSm9lIFNsYXRlcl0gVGhpcyB2YXJpYWJsZSBpcyBhbHdh
-eXMgcXVlcmllZCBhbmQgdGhlIGNvZGUgY2hlY2tzIGZvciBhIHJlcHJvZHVjaWJsZV9idWlsZCBl
-bnZpcm9ubWVudCwgc28gd2UgZG9uJ3QgbmVlZCB0byB0ZXN0IGhlcmUuDQoNCj4gPiArDQo+ID4g
-IGRvX2NvbmZpZ3VyZV9wcmVwZW5kKCkgew0KPiA+ICAgICAgIyBtb3ZlIHRoZSB0aGUgZmlsZSB1
-bmRlciBmb2xkZXIgL2xpYi9kcmJkLyB0byAvdXNyL2xpYi9kcmJkIHdoZW4NCj4gdXNybWVyZ2Ug
-ZW5hYmxlZA0KPiA+ICAgICAgaWYgJHtAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RST19GRUFUVVJF
-UycsICd1c3JtZXJnZScsICd0cnVlJywgJ2ZhbHNlJywgZCl9Ow0KPiB0aGVuDQo+ID4gLS0NCj4g
-PiAyLjcuNA0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4g
-PiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVs
-DQo=
+Ok, thanks.
+
+On Thu, Jul 11, 2019 at 10:14 AM Slater, Joseph <joe.slater@windriver.com>
+wrote:
+
+>
+>
+> > -----Original Message-----
+> > From: Khem Raj [mailto:raj.khem@gmail.com]
+> > Sent: Thursday, July 11, 2019 12:33 AM
+> > To: Slater, Joseph
+> > Cc: openembeded-devel
+> > Subject: Re: [oe] [meta-networking][PATCH 1/1] drbd-utils: enable
+> > reproducible_build awareness
+> >
+> > On Wed, Jul 10, 2019 at 4:57 PM Joe Slater <joe.slater@windriver.com>
+> > wrote:
+> > >
+> > > Enable use of SOURCE_DATE_EPOCH from the reproducible_build bbclass.
+> > >
+> > > Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > > ---
+> > >  meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 3 +++
+> > >  1 file changed, 3 insertions(+)
+> > >
+> > > diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+> > b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+> > > index 70e04b9..7fd3090 100644
+> > > --- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+> > > +++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
+> > > @@ -35,6 +35,9 @@ EXTRA_OECONF = " \
+> > >                  --without-manual \
+> > >                 "
+> > >
+> > > +# If we have inherited reproducible_build, we want to use it.
+> > > +export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
+> >
+> > should this be set after checking for inherit
+>
+> [Joe Slater] This variable is always queried and the code checks for a
+> reproducible_build environment, so we don't need to test here.
+>
+> > > +
+> > >  do_configure_prepend() {
+> > >      # move the the file under folder /lib/drbd/ to /usr/lib/drbd when
+> > usrmerge enabled
+> > >      if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true',
+> 'false', d)};
+> > then
+> > > --
+> > > 2.7.4
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
