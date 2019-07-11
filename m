@@ -1,49 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-yw1-f41.google.com (mail-yw1-f41.google.com
-	[209.85.161.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 326DD7EFE3
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EAAC7EFEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 14:58:34 +0000 (UTC)
-Received: by mail-yw1-f41.google.com with SMTP id q128so3988659ywc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 07:58:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fntBKsdvKjgzaUJ5ns9AeXT+kZMUr6SNLaGBGYorJek=;
-	b=imvBDg91QhLIpMMwyBs5W+HsBpvLVLvtUZimlcABO2Nop+/3zybvlLrHqOrvm26kUs
-	qtCvWsx4F8eDsoP6h7HMcWk1zf+yNxT9VcrmLsoqFq5Q87/3rS2qN18FXcCngTcDRm7V
-	38SGYGY4FMZhpr7WCmIjh851SZauJmZ9+D3V7PvEQhKx9ARm5E26GKoc00icyBYAeZP3
-	pkM05sp6GaVt9xwz3nR8RRU8JXtkyDxxG+OHhECsAQpSanyJpjWM37i9JlnUDwSwgodt
-	VMFkm6+2wZaNoyQIMMXjXdUP4xBJZwCZIfujjyRhZ+bcCeqjY+6UAyy8VAKx5xA3XslL
-	fu6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=fntBKsdvKjgzaUJ5ns9AeXT+kZMUr6SNLaGBGYorJek=;
-	b=HDQjhQ8LOXIrGyT5fBGGnbVs2xoQrWVuSEEIbEPBDBuaWEZ5AqLvl6ux6ffYsuPWX4
-	z7bmL0j3ZyBTlY4+aOL4hhYSaJU2R5mjsZB7PG82H7QzHLhWwauw4PrTNA5OZYppLzd5
-	s0TEAUWDRmq+INPcIw1kz1mlKUYLKMenN9O+GtUO8+EJvljShBDvwep8bpO29Uiph0mI
-	7Ob/mo5PWG7V5/mCTqg+XWQ8TLnmeyv26JHNhxpJJTQMpMeaUJCNxp266GqsiC5u+bLG
-	hj1zyRSrlNXxNIxKme1b9dGig5SDB0LXC9fNtGpCZd8j1585qgdQqSD0CS+CiglKs8gY
-	hO1Q==
-X-Gm-Message-State: APjAAAUyKmh+6L3pXDku0/5VcesgscQM2NrNLRrz7pFK8UljmAFFoxtL
-	Geznj/I+//KLKXUXPxTZs49gS5yaSKSS7aIh0BU=
-X-Google-Smtp-Source: APXvYqyEb4geOgCjLABgwT9WhqUUI7q+KAcJxRZE1oTaBcHu27FLHLLc2VUTMzWlg0HUryB+om2s/k1Uaw0wBIqXxm4=
-X-Received: by 2002:ac8:764f:: with SMTP id i15mr2286097qtr.194.1562857114884; 
-	Thu, 11 Jul 2019 07:58:34 -0700 (PDT)
+	Thu, 11 Jul 2019 17:14:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6BHDmhg005041
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 11 Jul 2019 10:14:03 -0700
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.194]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0439.000;
+	Thu, 11 Jul 2019 10:13:47 -0700
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-networking][PATCH 1/1] drbd-utils: enable
+	reproducible_build awareness
+Thread-Index: AQHVN3sp+ZckOnUhY0OM82wL52bd/KbFfDgAgAAsB5A=
+Date: Thu, 11 Jul 2019 17:13:46 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
+References: <20190710235657.97551-1-joe.slater@windriver.com>
+	<CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
+In-Reply-To: <CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.209.216]
 MIME-Version: 1.0
-References: <20190702012913.7163-1-kai.kang@windriver.com>
-	<CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
-	<2e8537cd-be5e-5e5a-31c6-490809fb00e2@windriver.com>
-In-Reply-To: <2e8537cd-be5e-5e5a-31c6-490809fb00e2@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 Jul 2019 07:58:24 -0700
-Message-ID: <CAMKF1sqHPJ=LqAfqYdE8oeg-A=XBJ=2f3TOCPQfmHkHdsOAp_g@mail.gmail.com>
-To: Kang Kai <Kai.Kang@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
+Subject: Re: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,64 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 14:58:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Jul 2019 17:14:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-They should be in now
-
-On Thu, Jul 11, 2019 at 12:51 AM Kang Kai <Kai.Kang@windriver.com> wrote:
-
-> On 2019/7/2 =E4=B8=8B=E5=8D=883:47, Andreas M=C3=BCller wrote:
-> > On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
-> >> From: Kai Kang <kai.kang@windriver.com>
-> >>
-> >> Upgrade core packages of xfce to 4.14pre2
-> >>
-> >> Kai Kang (11):
-> >>    thunar: 1.8.6 -> 1.8.7
-> >>    exo: 0.12.5 -> 0.12.6
-> >>    garcon: 0.6.2 -> 0.6.3
-> >>    thunar-volman: 0.9.2 -> 0.9.3
-> >>    xfce4-dev-tools: 4.12.0 -> 4.13.0
-> >>    xfce4-panel: 4.13.5 -> 4.13.6
-> >>    xfce4-power-manager: 1.6.2 -> 1.6.3
-> >>    xfce4-session: 4.13.2 -> 4.13.3
-> >>    xfdesktop: 4.13.4 -> 4.13.5
-> >>    xfwm4: 4.13.2 -> 4.13.3
-> >>    xfconf: 4.13.7 -> 4.13.8
-> > First of all thanks for taking care. One suggestion/wish: Could you
-> > please update xfce4-settings to latest upstream and move away from my
-> > fork?
-> >
-> > Background: The fork I created added two functionalities:
-> > * Optionally hide mouse pointer for certain pointer devices. This
-> > stopped working anyway (and was problematic for Qt application from
-> > the beginning)
-> > * Datetime-setter: I created a new project for that based on GTK3 [1].
-> > It is not quite finished but I use it frequently and am happy to have
-> > it (e.g on machines without RTC backup and missing network). So if
-> > somebody wants this either it could be added later.
-> >
-> > Unfortunately I have no time to do this myself.
->
-> Hi Khem,
->
-> Upgrade xfce4-settings doesn't bock this series update. Would you like
-> to merge them? Thanks.
->
->
-> Kai
->
->
-> >
-> > Thanks
-> >
-> > Andreas
-> >
->
-> --
-> Kai Kang
->
->
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
+bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBKdWx5IDExLCAyMDE5IDEy
+OjMzIEFNDQo+IFRvOiBTbGF0ZXIsIEpvc2VwaA0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwNCj4g
+U3ViamVjdDogUmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggMS8xXSBkcmJkLXV0aWxz
+OiBlbmFibGUNCj4gcmVwcm9kdWNpYmxlX2J1aWxkIGF3YXJlbmVzcw0KPiANCj4gT24gV2VkLCBK
+dWwgMTAsIDIwMTkgYXQgNDo1NyBQTSBKb2UgU2xhdGVyIDxqb2Uuc2xhdGVyQHdpbmRyaXZlci5j
+b20+DQo+IHdyb3RlOg0KPiA+DQo+ID4gRW5hYmxlIHVzZSBvZiBTT1VSQ0VfREFURV9FUE9DSCBm
+cm9tIHRoZSByZXByb2R1Y2libGVfYnVpbGQgYmJjbGFzcy4NCj4gPg0KPiA+IFNpZ25lZC1vZmYt
+Ynk6IEpvZSBTbGF0ZXIgPGpvZS5zbGF0ZXJAd2luZHJpdmVyLmNvbT4NCj4gPiAtLS0NCj4gPiAg
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2RyYmQtdXRpbHNfOS4xMC4wLmJi
+IHwgMyArKysNCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQ0KPiA+DQo+ID4g
+ZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkLXV0
+aWxzXzkuMTAuMC5iYg0KPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9k
+cmJkLXV0aWxzXzkuMTAuMC5iYg0KPiA+IGluZGV4IDcwZTA0YjkuLjdmZDMwOTAgMTAwNjQ0DQo+
+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2RyYmQtdXRpbHNf
+OS4xMC4wLmJiDQo+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJk
+L2RyYmQtdXRpbHNfOS4xMC4wLmJiDQo+ID4gQEAgLTM1LDYgKzM1LDkgQEAgRVhUUkFfT0VDT05G
+ID0gIiBcDQo+ID4gICAgICAgICAgICAgICAgICAtLXdpdGhvdXQtbWFudWFsIFwNCj4gPiAgICAg
+ICAgICAgICAgICAgIg0KPiA+DQo+ID4gKyMgSWYgd2UgaGF2ZSBpbmhlcml0ZWQgcmVwcm9kdWNp
+YmxlX2J1aWxkLCB3ZSB3YW50IHRvIHVzZSBpdC4NCj4gPiArZXhwb3J0IFdBTlRfRFJCRF9SRVBS
+T0RVQ0lCTEVfQlVJTEQgPSAieWVzIg0KPiANCj4gc2hvdWxkIHRoaXMgYmUgc2V0IGFmdGVyIGNo
+ZWNraW5nIGZvciBpbmhlcml0IA0KDQpbSm9lIFNsYXRlcl0gVGhpcyB2YXJpYWJsZSBpcyBhbHdh
+eXMgcXVlcmllZCBhbmQgdGhlIGNvZGUgY2hlY2tzIGZvciBhIHJlcHJvZHVjaWJsZV9idWlsZCBl
+bnZpcm9ubWVudCwgc28gd2UgZG9uJ3QgbmVlZCB0byB0ZXN0IGhlcmUuDQoNCj4gPiArDQo+ID4g
+IGRvX2NvbmZpZ3VyZV9wcmVwZW5kKCkgew0KPiA+ICAgICAgIyBtb3ZlIHRoZSB0aGUgZmlsZSB1
+bmRlciBmb2xkZXIgL2xpYi9kcmJkLyB0byAvdXNyL2xpYi9kcmJkIHdoZW4NCj4gdXNybWVyZ2Ug
+ZW5hYmxlZA0KPiA+ICAgICAgaWYgJHtAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RST19GRUFUVVJF
+UycsICd1c3JtZXJnZScsICd0cnVlJywgJ2ZhbHNlJywgZCl9Ow0KPiB0aGVuDQo+ID4gLS0NCj4g
+PiAyLjcuNA0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4g
+PiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9s
+aXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVs
+DQo=
 
