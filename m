@@ -1,46 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
-	[209.85.161.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 65D8E7EF73
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E9BB17EC44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 07:33:47 +0000 (UTC)
-Received: by mail-yw1-f66.google.com with SMTP id u141so2160474ywe.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 00:33:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8jht1GBiQM5xvy6I/ARvbE3yu+ZUb/TgRqcjMSQkxJw=;
-	b=fEW0hx86vuRv5xVq+TSHQUNs7oBlIL97B8ln0R57EcdtkqWSqQHhyXsAJAbQGQu0qB
-	4nc75fSBE/BGWIcnlSTB1+2EQn5+k/NTmDrsNo4iCaY2Hnljn6katNJRmhxheI+HX4uI
-	A3y5Sfd69Ly3JaroB5G8W85nAUVWpRZujJYPOUjkT86WH97vvlpBMP5kjVUEo5sOoHc1
-	s89mdSfZrT5A75eqiWvsDtP1cwoPSFZURbCDipgQhPabA8StzeAYG/z+9Ze/L7lpRrky
-	WE+T2+atmPMiUHTG/ApWuUtD4RhcXhgb2vpKh7YTYOLCxjwLg0N8MoXiDfOe9PZIsJKx
-	KDuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8jht1GBiQM5xvy6I/ARvbE3yu+ZUb/TgRqcjMSQkxJw=;
-	b=K3JuoT88zBdn+xC1n787oRO8nx0JvDvhtoE4FagmCVf9BlCgq2Dk+lgfzF0mHoMAF8
-	JZZlbHamvbHi7viVzSPClNB0QYauW5JB7OLlRNf4YnAI4JTewcWgdcARbIwXWZASZwFH
-	k4C81RPUvvnR2uVpuSW0YpVMn/poJxcl9Qtd9DMQL8cSULr45ChotqLP2GCe3Q8/v3FM
-	BPyUFcgr1D61sJF1jIqlVcRvlZrcfrqM9WeHHSzF3VMQlcdweit2pZM6LiAdDnmX6wtx
-	CopEu/zntprfp314074VKjy1bCjKoFz/HfaObu6sS4hrq8kS6nGVED9l2WmNkd0Sdgl+
-	8PrQ==
-X-Gm-Message-State: APjAAAXGbzy+fo62vedCoEqENp9xlLBA+Qz96t7+pNPUFEDynX6BNBa1
-	BINsIIavscYNJpgomFd039LOBTprX6XKAjNGzRvM7/p1
-X-Google-Smtp-Source: APXvYqwV3kOwNgD/duLk2SozohXH6YKHshMbywue7OjvxwOJjqXWYMeEKVr6Yubet0nTgC6aNhnuGKEwgtdpQ4PilQM=
-X-Received: by 2002:aed:3644:: with SMTP id e62mr1480978qtb.80.1562830427957; 
-	Thu, 11 Jul 2019 00:33:47 -0700 (PDT)
+	Thu, 11 Jul 2019 07:51:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6B7oifa022297
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 11 Jul 2019 00:50:54 -0700
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 11 Jul 2019 00:50:33 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190702012913.7163-1-kai.kang@windriver.com>
+	<CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <2e8537cd-be5e-5e5a-31c6-490809fb00e2@windriver.com>
+Date: Thu, 11 Jul 2019 15:50:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.1
 MIME-Version: 1.0
-References: <20190710235657.97551-1-joe.slater@windriver.com>
-In-Reply-To: <20190710235657.97551-1-joe.slater@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 Jul 2019 00:33:22 -0700
-Message-ID: <CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
-To: Joe Slater <joe.slater@windriver.com>
+In-Reply-To: <CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
+Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 07:33:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 11 Jul 2019 07:51:20 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Wed, Jul 10, 2019 at 4:57 PM Joe Slater <joe.slater@windriver.com> wrote:
+On 2019/7/2 下午3:47, Andreas Müller wrote:
+> On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Upgrade core packages of xfce to 4.14pre2
+>>
+>> Kai Kang (11):
+>>    thunar: 1.8.6 -> 1.8.7
+>>    exo: 0.12.5 -> 0.12.6
+>>    garcon: 0.6.2 -> 0.6.3
+>>    thunar-volman: 0.9.2 -> 0.9.3
+>>    xfce4-dev-tools: 4.12.0 -> 4.13.0
+>>    xfce4-panel: 4.13.5 -> 4.13.6
+>>    xfce4-power-manager: 1.6.2 -> 1.6.3
+>>    xfce4-session: 4.13.2 -> 4.13.3
+>>    xfdesktop: 4.13.4 -> 4.13.5
+>>    xfwm4: 4.13.2 -> 4.13.3
+>>    xfconf: 4.13.7 -> 4.13.8
+> First of all thanks for taking care. One suggestion/wish: Could you
+> please update xfce4-settings to latest upstream and move away from my
+> fork?
 >
-> Enable use of SOURCE_DATE_EPOCH from the reproducible_build bbclass.
+> Background: The fork I created added two functionalities:
+> * Optionally hide mouse pointer for certain pointer devices. This
+> stopped working anyway (and was problematic for Qt application from
+> the beginning)
+> * Datetime-setter: I created a new project for that based on GTK3 [1].
+> It is not quite finished but I use it frequently and am happy to have
+> it (e.g on machines without RTC backup and missing network). So if
+> somebody wants this either it could be added later.
 >
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->  meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> index 70e04b9..7fd3090 100644
-> --- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> +++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> @@ -35,6 +35,9 @@ EXTRA_OECONF = " \
->                  --without-manual \
->                 "
->
-> +# If we have inherited reproducible_build, we want to use it.
-> +export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
+> Unfortunately I have no time to do this myself.
 
-should this be set after checking for inherit ?
-> +
->  do_configure_prepend() {
->      # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
->      if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
-> --
-> 2.7.4
+Hi Khem,
+
+Upgrade xfce4-settings doesn't bock this series update. Would you like 
+to merge them? Thanks.
+
+
+Kai
+
+
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Thanks
+>
+> Andreas
+>
+
+-- 
+Kai Kang
+
 
