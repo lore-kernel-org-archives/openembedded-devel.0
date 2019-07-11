@@ -1,24 +1,30 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 143DD7F00E
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A15717F00A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 23:57:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6ANv8U6010198
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 11 Jul 2019 03:24:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,476,1557158400"; d="scan'208";a="71152176"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Jul 2019 11:24:37 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4103B4CDDD5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jul 2019 16:57:19 -0700
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.439.0;
-	Wed, 10 Jul 2019 16:56:58 -0700
-From: Joe Slater <joe.slater@windriver.com>
+	Thu, 11 Jul 2019 11:24:38 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 11 Jul 2019 11:24:40 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Jul 2019 16:56:57 -0700
-Message-ID: <20190710235657.97551-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.13.0
+Date: Thu, 11 Jul 2019 11:23:51 +0800
+Message-ID: <20190711032351.611-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 4103B4CDDD5A.A91A8
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCHv2] python-mako: upgrade 1.0.12 -> 1.0.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,31 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 23:57:28 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 03:24:39 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Enable use of SOURCE_DATE_EPOCH from the reproducible_build bbclass.
+-Upgrade from python-mako_1.0.12.bb to python-mako_1.0.13.bb.
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-python/recipes-devtools/python/python-mako.inc                   | 4 ++--
+ .../python/{python-mako_1.0.12.bb => python-mako_1.0.13.bb}           | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-mako_1.0.12.bb => python-mako_1.0.13.bb} (100%)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-index 70e04b9..7fd3090 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-@@ -35,6 +35,9 @@ EXTRA_OECONF = " \
-                 --without-manual \
-                "
+diff --git a/meta-python/recipes-devtools/python/python-mako.inc b/meta-python/recipes-devtools/python/python-mako.inc
+index dc27ada..0b3fe14 100644
+--- a/meta-python/recipes-devtools/python/python-mako.inc
++++ b/meta-python/recipes-devtools/python/python-mako.inc
+@@ -8,8 +8,8 @@ PYPI_PACKAGE = "Mako"
  
-+# If we have inherited reproducible_build, we want to use it.
-+export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
-+
- do_configure_prepend() {
-     # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
+ inherit pypi
+ 
+-SRC_URI[md5sum] = "4a7aef27217a8e6c1a29447c9b1b00ab"
+-SRC_URI[sha256sum] = "0cfa65de3a835e87eeca6ac856b3013aade55f49e32515f65d999f91a2324162"
++SRC_URI[md5sum] = "ad6c7dcb5d39c99f4fdf4fec892c5dee"
++SRC_URI[sha256sum] = "95ee720cc3453063788515d55bd7ce4a2a77b7b209e4ac70ec5c86091eb02541"
+ 
+ RDEPENDS_${PN} = " \
+     ${PYTHON_PN}-html \
+diff --git a/meta-python/recipes-devtools/python/python-mako_1.0.12.bb b/meta-python/recipes-devtools/python/python-mako_1.0.13.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-mako_1.0.12.bb
+rename to meta-python/recipes-devtools/python/python-mako_1.0.13.bb
 -- 
 2.7.4
+
+
 
 
