@@ -1,26 +1,49 @@
-Return-Path: <jwessel@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 15B0C7EEAF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-yw1-f41.google.com (mail-yw1-f41.google.com
+	[209.85.161.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 326DD7EFE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 14:10:23 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6BE9sQX032414
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 11 Jul 2019 14:58:34 +0000 (UTC)
+Received: by mail-yw1-f41.google.com with SMTP id q128so3988659ywc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 07:10:14 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
-	Thu, 11 Jul 2019 07:10:01 -0700
-Received: by ala-lpggp2.wrs.com (Postfix, from userid 5002)	id 203B4AA3488;
-	Thu, 11 Jul 2019 07:10:00 -0700 (PDT)
-From: Jason Wessel <jason.wessel@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Jul 2019 07:10:00 -0700
-Message-ID: <20190711141000.3115-1-jason.wessel@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Thu, 11 Jul 2019 07:58:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=fntBKsdvKjgzaUJ5ns9AeXT+kZMUr6SNLaGBGYorJek=;
+	b=imvBDg91QhLIpMMwyBs5W+HsBpvLVLvtUZimlcABO2Nop+/3zybvlLrHqOrvm26kUs
+	qtCvWsx4F8eDsoP6h7HMcWk1zf+yNxT9VcrmLsoqFq5Q87/3rS2qN18FXcCngTcDRm7V
+	38SGYGY4FMZhpr7WCmIjh851SZauJmZ9+D3V7PvEQhKx9ARm5E26GKoc00icyBYAeZP3
+	pkM05sp6GaVt9xwz3nR8RRU8JXtkyDxxG+OHhECsAQpSanyJpjWM37i9JlnUDwSwgodt
+	VMFkm6+2wZaNoyQIMMXjXdUP4xBJZwCZIfujjyRhZ+bcCeqjY+6UAyy8VAKx5xA3XslL
+	fu6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=fntBKsdvKjgzaUJ5ns9AeXT+kZMUr6SNLaGBGYorJek=;
+	b=HDQjhQ8LOXIrGyT5fBGGnbVs2xoQrWVuSEEIbEPBDBuaWEZ5AqLvl6ux6ffYsuPWX4
+	z7bmL0j3ZyBTlY4+aOL4hhYSaJU2R5mjsZB7PG82H7QzHLhWwauw4PrTNA5OZYppLzd5
+	s0TEAUWDRmq+INPcIw1kz1mlKUYLKMenN9O+GtUO8+EJvljShBDvwep8bpO29Uiph0mI
+	7Ob/mo5PWG7V5/mCTqg+XWQ8TLnmeyv26JHNhxpJJTQMpMeaUJCNxp266GqsiC5u+bLG
+	hj1zyRSrlNXxNIxKme1b9dGig5SDB0LXC9fNtGpCZd8j1585qgdQqSD0CS+CiglKs8gY
+	hO1Q==
+X-Gm-Message-State: APjAAAUyKmh+6L3pXDku0/5VcesgscQM2NrNLRrz7pFK8UljmAFFoxtL
+	Geznj/I+//KLKXUXPxTZs49gS5yaSKSS7aIh0BU=
+X-Google-Smtp-Source: APXvYqyEb4geOgCjLABgwT9WhqUUI7q+KAcJxRZE1oTaBcHu27FLHLLc2VUTMzWlg0HUryB+om2s/k1Uaw0wBIqXxm4=
+X-Received: by 2002:ac8:764f:: with SMTP id i15mr2286097qtr.194.1562857114884; 
+	Thu, 11 Jul 2019 07:58:34 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libbtyesize: Add depends for gettext-native
+References: <20190702012913.7163-1-kai.kang@windriver.com>
+	<CALbNGRRWQW24kwTwjoB=0w3MkAMa-GCKgpP5jUsYhnzsD4ajtA@mail.gmail.com>
+	<2e8537cd-be5e-5e5a-31c6-490809fb00e2@windriver.com>
+In-Reply-To: <2e8537cd-be5e-5e5a-31c6-490809fb00e2@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 Jul 2019 07:58:24 -0700
+Message-ID: <CAMKF1sqHPJ=LqAfqYdE8oeg-A=XBJ=2f3TOCPQfmHkHdsOAp_g@mail.gmail.com>
+To: Kang Kai <Kai.Kang@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][Patch 00/11] Upgrade to xfce 4.14 pre2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,42 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 14:10:24 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Jul 2019 14:58:35 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-If the local.conf has set 'USE_NLS = "no"' the build of libbytesize
-will fail with the following message:
+They should be in now
 
-| configure: error: in `/build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build':
-| configure: error: gettext not found
-| See `config.log' for more details
-| NOTE: The following config.log files may provide further information.
-| NOTE: /build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build/config.log
-| ERROR: configure failed
+On Thu, Jul 11, 2019 at 12:51 AM Kang Kai <Kai.Kang@windriver.com> wrote:
 
-The issue is that libbtyesize needs to full version of gettext in
-order to configure properly, and not the minimal version which is
-provided by default when building with 'USE_NLS = "no"'.
-
-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
----
- meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-index 863ce428f..cd67ab1b2 100644
---- a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-+++ b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-@@ -19,6 +19,7 @@ DEPENDS += " \
-     libpcre \
-     gmp \
-     mpfr \
-+    gettext-native \
- "
- 
- FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
--- 
-2.21.0
-
+> On 2019/7/2 =E4=B8=8B=E5=8D=883:47, Andreas M=C3=BCller wrote:
+> > On Tue, Jul 2, 2019 at 3:29 AM <kai.kang@windriver.com> wrote:
+> >> From: Kai Kang <kai.kang@windriver.com>
+> >>
+> >> Upgrade core packages of xfce to 4.14pre2
+> >>
+> >> Kai Kang (11):
+> >>    thunar: 1.8.6 -> 1.8.7
+> >>    exo: 0.12.5 -> 0.12.6
+> >>    garcon: 0.6.2 -> 0.6.3
+> >>    thunar-volman: 0.9.2 -> 0.9.3
+> >>    xfce4-dev-tools: 4.12.0 -> 4.13.0
+> >>    xfce4-panel: 4.13.5 -> 4.13.6
+> >>    xfce4-power-manager: 1.6.2 -> 1.6.3
+> >>    xfce4-session: 4.13.2 -> 4.13.3
+> >>    xfdesktop: 4.13.4 -> 4.13.5
+> >>    xfwm4: 4.13.2 -> 4.13.3
+> >>    xfconf: 4.13.7 -> 4.13.8
+> > First of all thanks for taking care. One suggestion/wish: Could you
+> > please update xfce4-settings to latest upstream and move away from my
+> > fork?
+> >
+> > Background: The fork I created added two functionalities:
+> > * Optionally hide mouse pointer for certain pointer devices. This
+> > stopped working anyway (and was problematic for Qt application from
+> > the beginning)
+> > * Datetime-setter: I created a new project for that based on GTK3 [1].
+> > It is not quite finished but I use it frequently and am happy to have
+> > it (e.g on machines without RTC backup and missing network). So if
+> > somebody wants this either it could be added later.
+> >
+> > Unfortunately I have no time to do this myself.
+>
+> Hi Khem,
+>
+> Upgrade xfce4-settings doesn't bock this series update. Would you like
+> to merge them? Thanks.
+>
+>
+> Kai
+>
+>
+> >
+> > Thanks
+> >
+> > Andreas
+> >
+>
+> --
+> Kai Kang
+>
+>
 
