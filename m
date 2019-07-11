@@ -1,46 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 78A5E7F03B
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B3457F03B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 20:59:57 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id d23so5911612qto.2
+	Thu, 11 Jul 2019 21:01:25 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id 201so4786330qkm.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 13:59:58 -0700 (PDT)
+	Thu, 11 Jul 2019 14:01:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OiNCR1ssNdfrumD861yqpUSLfR0osw83yXZGfFJVbSI=;
-	b=a8T9/Zs4vEaDAHrQ/Nybv72y4g8kCf0TDsWtsdgRrbNtzFqD07VlJ+TYMsDweXOLEK
-	2gW7UdgGUYnWblNR+MBAzNXfGBfPgDwmVD77hi0wgQ4sJJpfuy5xBYKlLsAHQS0A+uYX
-	WGiy42T8Ixoavj5PsPcojGMglVZfyxGy2u8xwiGkxjmxpAhvQV5g1S/Uph50YjXi4QyN
-	l3GDtj5Iav9pJF4Uoct4DdrDHZWgZRVwlJ6+smo6cF+5y/d34fSjepaZYoDmRFBfyaBZ
-	p+C0JgnC3CNSksS1TthovshwmL1zwGUlBD2kjSBkOdJf1awcQC1xWhWLEctJoipN6Yc6
-	cbqg==
+	:cc:content-transfer-encoding;
+	bh=yZV+E2CRdR+csGERH9N6TlEE+PX4ukOH5gEAefoFeI8=;
+	b=XnbyLtO72VtYfzcPepzh6oZ75bjX8qfO2rzThTWQNzRPURgsq5M4qpRpLA7OnNzY8W
+	xX2mweRKUL+2XzqxcXk3jMWEetrkiBg7yOox70X0GjjGnVhSWVmY4b8AuWJwrUp6LYyR
+	mEJKHS1t1Nd7SHDdgFzn4ofzpsHK9c4TGtJ+8pjL3kYNYb9qTbMt/fbeTagcC6+hcOj7
+	0SboVjOePqXZlTPWASEkGgMbGTqprC2u1QEcPy38VGJnG7mFPJNgPBS/h/wGg3bmz/On
+	SfZXIdSDGmSvk2QWu337UdkDlqRjMu0GelECBniaayF+AcVEflwTAXJFxD0LN5hQuaUz
+	eJ5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=OiNCR1ssNdfrumD861yqpUSLfR0osw83yXZGfFJVbSI=;
-	b=VBf19Eyf52rIBRiUkIO/tE8eld+ouTiOyiN78dS15nkhYFXJOdWVqgftqmSHfgxW88
-	Fjff9YwcHAIYuYLJzD8mK5xYk/J9xxQoz+sa5j5TzQKSdWraVQ2Z3+tLg6XR0G/n3FLi
-	AcCdzlZzgMWnZFhQiJxhZ0gshwsDHJo6ptxRwhENRfNr/Wd2PvlOlYft3SBXRKyxiTiU
-	BZWoK5EqeaJYJcmGnJXC5d94qfY9pNdCtCNTfNbZQ61g3Vtaw+j1zqjLnQ32mnyfMvka
-	Fhsbv8frHR8ISIhzE413aHiuCbUDfseYitFhfWsJQmmaFVm5yyy0d0DZhtGWxfrNfVfB
-	x9Eg==
-X-Gm-Message-State: APjAAAULa7B8i0o1yLP1oeqJsg0l7HWImfMxxElf4MIeSs3q0ceA9TsZ
-	N2duNFjx+grSV6fOvWLT1wNCWG6v2aFEemoabB8=
-X-Google-Smtp-Source: APXvYqzRV4cLG1UQ/SVaRNrgFu8PoQroDDtOAmLnKucXunpTY35ZpKf0F36Yrb3pFOdK1BE/QOaV77RKpRhMQZC+Wts=
-X-Received: by 2002:a0c:ae5a:: with SMTP id z26mr3559266qvc.65.1562878798105; 
-	Thu, 11 Jul 2019 13:59:58 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=yZV+E2CRdR+csGERH9N6TlEE+PX4ukOH5gEAefoFeI8=;
+	b=jK0oBQZ5KeEAEmm9ZH0E28pV/iUFmHiDvRPAyGLzdcrNMwbKZYMCMKhiN6DfXJfzw0
+	rwumRUXzdjuHyQ8aPvSLyKNrBlkDvsG9j8BwzqrHbRKxvcDgyDv5XpW/gQwtZYhpcuuY
+	Zl6MPYHtXkfOpKYl0+LSn+89TXj4y2bc4GyOyx3qZeKVuwxnZAxdxsZZwLtqbT7BchOM
+	6TG5VGE2nhymXVztSV7YG0Epp26ffCfdhQdzBpzwdzkLCaTSZCBRMhCxbnVTDpRKtLRk
+	ya97nOhk+wG4Lv7LUl+eq+IYbiV8ta0E25RDeoVELJN/ajfbQHigZzr33BRW+Yh+Nccb
+	G8Lw==
+X-Gm-Message-State: APjAAAV2ENaJcU1KXbxzgvhfwatE9+GbPXZM8O6g8jbS0XZuIz7CVe1K
+	mvG/9Y+Aa1hkc5CbDbhxBt57kEPrRLSfBfhoe5s=
+X-Google-Smtp-Source: APXvYqyhqmwwSmXoavkvLpl6vKw2LuSzcU86tOQMU2Xd7PLwIVxU6/APjd2wzLZ/e6fkEjYxm6nVPlmpxqdUKVuFJPM=
+X-Received: by 2002:a37:a20f:: with SMTP id l15mr3462413qke.212.1562878885851; 
+	Thu, 11 Jul 2019 14:01:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190711141000.3115-1-jason.wessel@windriver.com>
-In-Reply-To: <20190711141000.3115-1-jason.wessel@windriver.com>
+References: <20190711090803.18931-1-windel.bouwman@gmail.com>
+	<CANx9H-AeowZ0OR+yq353qjSsYvGC=6H6eZuDZbvBywDNEyQTCg@mail.gmail.com>
+In-Reply-To: <CANx9H-AeowZ0OR+yq353qjSsYvGC=6H6eZuDZbvBywDNEyQTCg@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 Jul 2019 13:59:32 -0700
-Message-ID: <CAMKF1soGEOUVMtE6VohwgEaB=XuWMr3epP6NWT_P8tgGEaF9Zg@mail.gmail.com>
-To: Jason Wessel <jason.wessel@windriver.com>
+Date: Thu, 11 Jul 2019 14:01:00 -0700
+Message-ID: <CAMKF1spngtnreVamNq+FZe0XZUcBJAJ-gev+4_XZAp4Ay3Ocgg@mail.gmail.com>
+To: Tim Orling <ticotimo@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libbtyesize: Add depends for gettext-native
+Subject: Re: [PATCH] python-humanfriendly: Add recipe for the humanfriendly package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,49 +55,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 20:59:57 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 21:01:25 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 11, 2019 at 7:10 AM Jason Wessel <jason.wessel@windriver.com> wrote:
+On Thu, Jul 11, 2019 at 6:47 AM Tim Orling <ticotimo@gmail.com> wrote:
 >
-> If the local.conf has set 'USE_NLS = "no"' the build of libbytesize
-> will fail with the following message:
+> https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 >
-> | configure: error: in `/build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build':
-> | configure: error: gettext not found
-> | See `config.log' for more details
-> | NOTE: The following config.log files may provide further information.
-> | NOTE: /build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build/config.log
-> | ERROR: configure failed
+> You are missing the subject prefix indicating which layer and the fact th=
+at
+> this is a v2.
 >
-> The issue is that libbtyesize needs to full version of gettext in
-> order to configure properly, and not the minimal version which is
-> provided by default when building with 'USE_NLS = "no"'.
+> Add this argument to git send-mail:
 >
-> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
-> ---
->  meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb | 1 +
->  1 file changed, 1 insertion(+)
+> --subject-prefix=3D=E2=80=9Cmeta-python][PATCH v2=E2=80=9D
 >
-> diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-> index 863ce428f..cd67ab1b2 100644
-> --- a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-> +++ b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
-> @@ -19,6 +19,7 @@ DEPENDS += " \
->      libpcre \
->      gmp \
->      mpfr \
-> +    gettext-native \
 
-change is fine but please rebase it on latest master and also the
-recipe name has typo in subject.
+And this has duped me. I have applied v1, so please address the delta
+between what we have in master
+in v3.
 
->  "
+> On Thu, Jul 11, 2019 at 2:08 AM Windel Bouwman <windel.bouwman@gmail.com>
+> wrote:
 >
->  FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
-> --
-> 2.21.0
->
+> > Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
+> > ---
+> >  .../python/python-humanfriendly.inc           | 25 +++++++++++++++++++
+> >  .../python/python-humanfriendly_4.18.bb       |  2 ++
+> >  .../python/python3-humanfriendly_4.18.bb      |  2 ++
+> >  3 files changed, 29 insertions(+)
+> >  create mode 100644
+> > meta-python/recipes-devtools/python/python-humanfriendly.inc
+> >  create mode 100644 meta-python/recipes-devtools/python/
+> > python-humanfriendly_4.18.bb
+> >  create mode 100644 meta-python/recipes-devtools/python/
+> > python3-humanfriendly_4.18.bb
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-humanfriendly.i=
+nc
+> > b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+> > new file mode 100644
+> > index 000000000..94f7f8b81
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+> > @@ -0,0 +1,25 @@
+> > +DESCRIPTION =3D "Human friendly output for text interfaces using Pytho=
+n"
+> > +HOMEPAGE =3D "https://humanfriendly.readthedocs.io/"
+> > +SECTION =3D "devel/python"
+> > +LICENSE =3D "MIT"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://LICENSE.txt;md5=3D690da298a43805797a4fa7bbe180b3c6"
+> > +
+> > +PYPI_PACKAGE =3D "humanfriendly"
+> > +
+> > +SRC_URI[md5sum] =3D "9573f9f37a5454d8205cfd1b9b8db9d2"
+> > +SRC_URI[sha256sum] =3D
+> > "33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
+> > +
+> > +inherit pypi
+> > +
+> > +RDEPENDS_${PN}_class-target +=3D " \
+> > +    ${PYTHON_PN}-datetime \
+> > +    ${PYTHON_PN}-fcntl \
+> > +    ${PYTHON_PN}-io \
+> > +    ${PYTHON_PN}-logging \
+> > +    ${PYTHON_PN}-math \
+> > +    ${PYTHON_PN}-numbers \
+> > +    ${PYTHON_PN}-shell \
+> > +    ${PYTHON_PN}-stringold \
+> > +"
+> > +
+> > +BBCLASSEXTEND =3D "native"
+> > diff --git a/meta-python/recipes-devtools/python/
+> > python-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
+> > python-humanfriendly_4.18.bb
+> > new file mode 100644
+> > index 000000000..4e03a654c
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
+> > @@ -0,0 +1,2 @@
+> > +inherit setuptools
+> > +require python-humanfriendly.inc
+> > diff --git a/meta-python/recipes-devtools/python/
+> > python3-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
+> > python3-humanfriendly_4.18.bb
+> > new file mode 100644
+> > index 000000000..2ca5fe36f
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
+> > @@ -0,0 +1,2 @@
+> > +inherit setuptools3
+> > +require python-humanfriendly.inc
+> > --
+> > 2.17.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
