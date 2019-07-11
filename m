@@ -1,33 +1,47 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C5ADB7F07F
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D0B697EFF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 11:41:04 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45kvJc4jZGz6b
+	Thu, 11 Jul 2019 13:46:42 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id i10so12561411iol.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 13:41:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1562845264;
-	bh=NzEaQ5fuZ1h3gaioWY1V5ONfRQoOegaoVguizkeTx94=;
-	h=From:To:Subject:Date:From;
-	b=O9Ew0eiVA6LhVrhwD5sS53R/flQDo+32GqiZ6yX5dzVnUCw9j7ua2I2omlmrrMDUu
-	UaE2e/aBiLZI+Uen9FfUO6CLh1oyGUY70ihmLwbGmulaRz+SaFXduZVYT9hjAGWzxq
-	C4v4OB4PhrkFYpwciF3CFpLcc0i5ppNLa92gNq/zMWx012UslxHJU5ieN7aiYOSSY3
-	QKSUtF0HmZzZ3RA1ZpVOohJa8xjRwWskKOROtmZUentwd9dPUod3E+h6XX2o3OMhl+
-	rlxYKTarfD/APOAYLRk9eeVVhDPVROMiVIUv3YJ6iJTJ+J82VfHZ5QoECBspGbUxD3
-	9VWX4TOBfWv3K4cPeNPV4vOdrXTnBbF7ZbTZBZ+wFr7DvoDrEkzapGvGVnF+xNXhEL
-	PRVqp9/HqFq6NitMk8RBaxb2C+P4vZAEafibwm5V+t/Hx41LQHoEbBe5lfsZJbz2U6
-	X64yO/8MnDyL/V7UDQWSm41Au17DA9dj1DLtiyWaSjghyqS1cG9AtrEx/an7pxFHyX
-	ugmyxNRDaUxw42kEawdsyJZdlOWBMs6sCaQlsXtvDW2IuBgfgB7AHJX8PQH176e0WN
-	89570KyC7toWNI1FpOl5zkCL/+eI9XYCxVQTtdK1yF0Z4XdL3b9e8p1qD/mPltj6Yj
-	1Wur+KWB6XrUNpSCVas6h1+I=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Jul 2019 14:41:03 +0300
-Message-Id: <20190711114103.20709-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] libao: Remove the non-default esound PACKAGECONFIG
+	Thu, 11 Jul 2019 06:46:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=KJ9e92Lf5webMm1xbfVKWoPB0NikEQtJJoKmvI1tXrE=;
+	b=aAjCrk+DfC+WJveNGGbQLb3jgO9853fH4/0fjRw7VkDuIXhhtqgg9NfAXRJCZsqK77
+	dwuH2MldjKvBOlEXX9AuDIb+G6N55Bx3ASRKeKyPtY4Rns8lC9AAQTEOq1mgE15MijLm
+	3icVLUrnGgvBerHn3bx1ufcZAl77TAfgW+Jgw4+FqQxTwvcOgY9kSGNJMo7iKBIlNq6r
+	mLwxKEIVbIRhwQofjSqFCWpbEgbsGuJs0/LVL0T07ugR6iEIoUtDicEKv8BYmKaeaU/6
+	BaMquNGrnZayIJFErZvLGinTdYIj5VxXk8nOtadA/RQmCL4oTosVi7CBlQQSeDrCK22q
+	7CqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=KJ9e92Lf5webMm1xbfVKWoPB0NikEQtJJoKmvI1tXrE=;
+	b=UfsDio2VDKDg+/9sYhCIFVvBy2j1tX8dnTeXFjyHTe+6uqIGtTZt+VV/1dSM0y+5jv
+	B5JY+vwPhNmtSBD0j16+Fpt6EewbvQBfN1+zG8ebaiddWgKObKH3LWAT8GCy6QG5X5jv
+	8VINdDpvY3eEhmAT0UtW3RUb6afcr9Tva5qvOGMd5/Mh+TvGV6xWpqMhlYZVIfRDgsZt
+	1GsUQgSt6j2QzRbKp6MfO4DrgYK8GnQhky3C7i4CCDw7sywf97J13V9uxBu/64guiI7d
+	M04ny5l1kUO3sbdglrFpuA4L3risy1m772Ja/AhryV2MV6prz2irv3bcIbPuSfOAnsqf
+	dzNA==
+X-Gm-Message-State: APjAAAU9VbP8OZHZZBPwHDxsFuMubk0lY2i7QWF6aZ/9RlV3ej++44fL
+	v5C0v5xgvqTpySoNBVkgOaw1U8b46TFWTu6vWs0=
+X-Google-Smtp-Source: APXvYqyXUm/GgKommWZp6z0hJ4CtT+xqBWlKv6PPtFjUZEyASdCazHx7pKrhRUupZC38uqkVh8B0B4gOINvlFicIIts=
+X-Received: by 2002:a6b:c9d8:: with SMTP id z207mr4241433iof.184.1562852803760;
+	Thu, 11 Jul 2019 06:46:43 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190711090803.18931-1-windel.bouwman@gmail.com>
+In-Reply-To: <20190711090803.18931-1-windel.bouwman@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 11 Jul 2019 06:46:33 -0700
+Message-ID: <CANx9H-AeowZ0OR+yq353qjSsYvGC=6H6eZuDZbvBywDNEyQTCg@mail.gmail.com>
+To: Windel Bouwman <windel.bouwman@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] python-humanfriendly: Add recipe for the humanfriendly package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,28 +54,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 11:41:05 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 13:46:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-esound has been removed.
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb | 1 -
- 1 file changed, 1 deletion(-)
+You are missing the subject prefix indicating which layer and the fact that
+this is a v2.
 
-diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-index 4c0976e43..05134614a 100644
---- a/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
-@@ -28,7 +28,6 @@ python populate_packages_prepend () {
- }
- 
- PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
--PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
- PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
- PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
- FILES_${BPN}-ckport = "${libdir}/ckport"
--- 
-2.17.1
+Add this argument to git send-mail:
 
+--subject-prefix=3D=E2=80=9Cmeta-python][PATCH v2=E2=80=9D
+
+On Thu, Jul 11, 2019 at 2:08 AM Windel Bouwman <windel.bouwman@gmail.com>
+wrote:
+
+> Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
+> ---
+>  .../python/python-humanfriendly.inc           | 25 +++++++++++++++++++
+>  .../python/python-humanfriendly_4.18.bb       |  2 ++
+>  .../python/python3-humanfriendly_4.18.bb      |  2 ++
+>  3 files changed, 29 insertions(+)
+>  create mode 100644
+> meta-python/recipes-devtools/python/python-humanfriendly.inc
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-humanfriendly_4.18.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-humanfriendly_4.18.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-humanfriendly.inc
+> b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+> new file mode 100644
+> index 000000000..94f7f8b81
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+> @@ -0,0 +1,25 @@
+> +DESCRIPTION =3D "Human friendly output for text interfaces using Python"
+> +HOMEPAGE =3D "https://humanfriendly.readthedocs.io/"
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D
+> "file://LICENSE.txt;md5=3D690da298a43805797a4fa7bbe180b3c6"
+> +
+> +PYPI_PACKAGE =3D "humanfriendly"
+> +
+> +SRC_URI[md5sum] =3D "9573f9f37a5454d8205cfd1b9b8db9d2"
+> +SRC_URI[sha256sum] =3D
+> "33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
+> +
+> +inherit pypi
+> +
+> +RDEPENDS_${PN}_class-target +=3D " \
+> +    ${PYTHON_PN}-datetime \
+> +    ${PYTHON_PN}-fcntl \
+> +    ${PYTHON_PN}-io \
+> +    ${PYTHON_PN}-logging \
+> +    ${PYTHON_PN}-math \
+> +    ${PYTHON_PN}-numbers \
+> +    ${PYTHON_PN}-shell \
+> +    ${PYTHON_PN}-stringold \
+> +"
+> +
+> +BBCLASSEXTEND =3D "native"
+> diff --git a/meta-python/recipes-devtools/python/
+> python-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
+> python-humanfriendly_4.18.bb
+> new file mode 100644
+> index 000000000..4e03a654c
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools
+> +require python-humanfriendly.inc
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
+> python3-humanfriendly_4.18.bb
+> new file mode 100644
+> index 000000000..2ca5fe36f
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools3
+> +require python-humanfriendly.inc
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
