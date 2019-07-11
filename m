@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2EBD97EF58
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 78A5E7F03B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 17:47:54 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id r21so4324299qke.2
+	Thu, 11 Jul 2019 20:59:57 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id d23so5911612qto.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 10:47:56 -0700 (PDT)
+	Thu, 11 Jul 2019 13:59:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=G+lP2Hlplz0ywKblw2fwkOKPsp4+mxMSXB2P7YKifRc=;
-	b=ivpOTaSlfgIna/jm7XagAx9myHV7cstC72nAdx38spOVwMcb8yr1bWzfZJLMwhwLCe
-	x4+W4fJajoXxaH07IvLMmYMr6YU2v5BxXk18YwJ1pnm0Jn+TRGHlzJabI/CnX8p8merB
-	T09cnr7MrLwHUh2jihSKtdu5166O7AnNeBavZonvC+EmUU/d5n3JYpRrYHQm1bpkk7EU
-	xUimKdBwaonCw2iHFxl8vLEoi03Ip2CPAygIc8Ek/a2gBN7e1qIF+Tjk3Kfr5fmPJJPV
-	tESF9LhAmo/shALjXrt+kkAg1QKG6xeHL/JZeA1h16L4R8dBkGFyRiaMKMC5uywav6No
-	ernA==
+	:cc; bh=OiNCR1ssNdfrumD861yqpUSLfR0osw83yXZGfFJVbSI=;
+	b=a8T9/Zs4vEaDAHrQ/Nybv72y4g8kCf0TDsWtsdgRrbNtzFqD07VlJ+TYMsDweXOLEK
+	2gW7UdgGUYnWblNR+MBAzNXfGBfPgDwmVD77hi0wgQ4sJJpfuy5xBYKlLsAHQS0A+uYX
+	WGiy42T8Ixoavj5PsPcojGMglVZfyxGy2u8xwiGkxjmxpAhvQV5g1S/Uph50YjXi4QyN
+	l3GDtj5Iav9pJF4Uoct4DdrDHZWgZRVwlJ6+smo6cF+5y/d34fSjepaZYoDmRFBfyaBZ
+	p+C0JgnC3CNSksS1TthovshwmL1zwGUlBD2kjSBkOdJf1awcQC1xWhWLEctJoipN6Yc6
+	cbqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=G+lP2Hlplz0ywKblw2fwkOKPsp4+mxMSXB2P7YKifRc=;
-	b=FwaKInrH3YFWzAmAloiiHcDaea6TXDAzuWW5KCbvcw99G0PhH/rT3dz2A61i59uy8I
-	xQQEHcavKYTx/iqUnnl2oTRztB4WgofovObhXNr5DQEduQCtn+qow6Xui74ByNi3FMmP
-	TsX6INEgKKzKQ26tErIxxMfY59y6FBFttNKM/3Hp0BVyfYZ1VvxAa8Bgz6/W61G5o5IT
-	xzoCqW+8UlvibZRCQyEyK8Bjl8NIxmXRzkXpd5TZ6T8+9W49eBUaUaanbOiVuZ+cBBqi
-	Ek3RnnsWZxBkJy+e6Ql3GIxKW8yo5mUq767wSBj2/YAIBxNYjs+Y/erditwCjDU2CVbI
-	YZqg==
-X-Gm-Message-State: APjAAAU54b3ao1XK48H1fGt4zGoodSLgn5ozHVAd4ozPfs9CBcSW0NIb
-	UoN+X+Pg8LbDVlfkybwFiz9aHwBZZS2aSH+FB7A=
-X-Google-Smtp-Source: APXvYqxXIEPDYV3K+ySwNpdxIBHrSiEUClRF/N8bIpdqrXOzCE7dVXEAib7i3w/Z5Xkti+iTK+0SmZHeFpSi3KDBZTY=
-X-Received: by 2002:a37:7083:: with SMTP id l125mr2759392qkc.71.1562867275810; 
-	Thu, 11 Jul 2019 10:47:55 -0700 (PDT)
+	bh=OiNCR1ssNdfrumD861yqpUSLfR0osw83yXZGfFJVbSI=;
+	b=VBf19Eyf52rIBRiUkIO/tE8eld+ouTiOyiN78dS15nkhYFXJOdWVqgftqmSHfgxW88
+	Fjff9YwcHAIYuYLJzD8mK5xYk/J9xxQoz+sa5j5TzQKSdWraVQ2Z3+tLg6XR0G/n3FLi
+	AcCdzlZzgMWnZFhQiJxhZ0gshwsDHJo6ptxRwhENRfNr/Wd2PvlOlYft3SBXRKyxiTiU
+	BZWoK5EqeaJYJcmGnJXC5d94qfY9pNdCtCNTfNbZQ61g3Vtaw+j1zqjLnQ32mnyfMvka
+	Fhsbv8frHR8ISIhzE413aHiuCbUDfseYitFhfWsJQmmaFVm5yyy0d0DZhtGWxfrNfVfB
+	x9Eg==
+X-Gm-Message-State: APjAAAULa7B8i0o1yLP1oeqJsg0l7HWImfMxxElf4MIeSs3q0ceA9TsZ
+	N2duNFjx+grSV6fOvWLT1wNCWG6v2aFEemoabB8=
+X-Google-Smtp-Source: APXvYqzRV4cLG1UQ/SVaRNrgFu8PoQroDDtOAmLnKucXunpTY35ZpKf0F36Yrb3pFOdK1BE/QOaV77RKpRhMQZC+Wts=
+X-Received: by 2002:a0c:ae5a:: with SMTP id z26mr3559266qvc.65.1562878798105; 
+	Thu, 11 Jul 2019 13:59:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190710235657.97551-1-joe.slater@windriver.com>
-	<CAMKF1sqf=s9QFozJc0tsUZOt=aAAG_R7jiiaVyuyb22YiXgWjg@mail.gmail.com>
-	<007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
-In-Reply-To: <007BD92917A2324FA403BCF9A464CF84FA81B350@ALA-MBD.corp.ad.wrs.com>
+References: <20190711141000.3115-1-jason.wessel@windriver.com>
+In-Reply-To: <20190711141000.3115-1-jason.wessel@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 Jul 2019 10:47:45 -0700
-Message-ID: <CAMKF1sq+BMac-f5VGhiUyagy3VUCM082EEXA_Mt1X3QxaZO4kQ@mail.gmail.com>
-To: "Slater, Joseph" <joe.slater@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Date: Thu, 11 Jul 2019 13:59:32 -0700
+Message-ID: <CAMKF1soGEOUVMtE6VohwgEaB=XuWMr3epP6NWT_P8tgGEaF9Zg@mail.gmail.com>
+To: Jason Wessel <jason.wessel@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/1] drbd-utils: enable reproducible_build awareness
+Subject: Re: [meta-oe][PATCH] libbtyesize: Add depends for gettext-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 17:47:55 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 20:59:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Ok, thanks.
+On Thu, Jul 11, 2019 at 7:10 AM Jason Wessel <jason.wessel@windriver.com> wrote:
+>
+> If the local.conf has set 'USE_NLS = "no"' the build of libbytesize
+> will fail with the following message:
+>
+> | configure: error: in `/build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build':
+> | configure: error: gettext not found
+> | See `config.log' for more details
+> | NOTE: The following config.log files may provide further information.
+> | NOTE: /build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build/config.log
+> | ERROR: configure failed
+>
+> The issue is that libbtyesize needs to full version of gettext in
+> order to configure properly, and not the minimal version which is
+> provided by default when building with 'USE_NLS = "no"'.
+>
+> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+> ---
+>  meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
+> index 863ce428f..cd67ab1b2 100644
+> --- a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
+> +++ b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
+> @@ -19,6 +19,7 @@ DEPENDS += " \
+>      libpcre \
+>      gmp \
+>      mpfr \
+> +    gettext-native \
 
-On Thu, Jul 11, 2019 at 10:14 AM Slater, Joseph <joe.slater@windriver.com>
-wrote:
+change is fine but please rebase it on latest master and also the
+recipe name has typo in subject.
 
+>  "
 >
+>  FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
+> --
+> 2.21.0
 >
-> > -----Original Message-----
-> > From: Khem Raj [mailto:raj.khem@gmail.com]
-> > Sent: Thursday, July 11, 2019 12:33 AM
-> > To: Slater, Joseph
-> > Cc: openembeded-devel
-> > Subject: Re: [oe] [meta-networking][PATCH 1/1] drbd-utils: enable
-> > reproducible_build awareness
-> >
-> > On Wed, Jul 10, 2019 at 4:57 PM Joe Slater <joe.slater@windriver.com>
-> > wrote:
-> > >
-> > > Enable use of SOURCE_DATE_EPOCH from the reproducible_build bbclass.
-> > >
-> > > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > > ---
-> > >  meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> > b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> > > index 70e04b9..7fd3090 100644
-> > > --- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> > > +++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-> > > @@ -35,6 +35,9 @@ EXTRA_OECONF = " \
-> > >                  --without-manual \
-> > >                 "
-> > >
-> > > +# If we have inherited reproducible_build, we want to use it.
-> > > +export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
-> >
-> > should this be set after checking for inherit
->
-> [Joe Slater] This variable is always queried and the code checks for a
-> reproducible_build environment, so we don't need to test here.
->
-> > > +
-> > >  do_configure_prepend() {
-> > >      # move the the file under folder /lib/drbd/ to /usr/lib/drbd when
-> > usrmerge enabled
-> > >      if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true',
-> 'false', d)};
-> > then
-> > > --
-> > > 2.7.4
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
