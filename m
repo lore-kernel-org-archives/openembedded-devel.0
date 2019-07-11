@@ -1,47 +1,48 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A4F46C397
+Return-Path: <windel.bouwman@gmail.com>
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+	[209.85.208.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 57D5C6BA0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 08:42:22 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id v19so4812756wmj.5
+	Thu, 11 Jul 2019 09:08:27 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id e2so4995822edi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 01:42:23 -0700 (PDT)
+	Thu, 11 Jul 2019 02:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=WIIfS6PQAghtoS8J/q8aTsZvvfjmIjib4DSBSsFmo4s=;
-	b=EdvcAii2fgmu1n4lPuv8uF9J+LYAbiQWYthbETMt43PrdNS9WL2NpKzSsvJaBoYZ/s
-	u8orexRpLxMEfd5XzatADbBmK9hE2iT7RnTdb6wBjrKxOBlCyJT7VUcPmqNgLxQUPSkO
-	Q6rpBehheEt0qmdPTcc7cNYNv9gUwTSmTp9qf/PvixgEZ0lqG1OKsl6yrhWERYd6mDsx
-	ij8oPpFpuhJekYhQ0wNQp5x48IyGK70RZxJmglLvALwHE858Uovew/u6PM5q+e6NzU7T
-	Toopk62P6S3bC1K8x72NbWfCuVi4u/J0SqTvG50PnqAs5HiFIy5hdDF5dIqiNbWqDiAm
-	wcYA==
+	bh=0Ei/t+CVlBmAWmw6+oyMXc3rJnvoUpU4Ff5pI+tHlyw=;
+	b=tLGdlQAQTNyKN8xjQvKCM36mlR1ei1yWzbX8+wrx3usmhlUJGD6mg+CwFJWzU7LUki
+	FdKWE81+zep9dW/lo9HallRnvH3pO0/Jcd0YuYFSA4xOeUH6pdJoY/n32lSKo+d4JiwM
+	O8esn61RG+dNpzjzsjBvfqlFtUioPTIpk2tf1PKDXYz8eN9KnpNK7EWVWjFNoCXWvbgO
+	fDFNKzJ7+iBCeBsHb+jHbeE3Ims59qndqD2VHUXHHmpM/N3TViEjFer5l0Vt9lv5QQpC
+	Sn+ejdJVCNowa0rYcEcm5/OuklKZ3EscZylbRQvc1GoflSukP/IadOqGtNeVw6/z11eN
+	sLcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WIIfS6PQAghtoS8J/q8aTsZvvfjmIjib4DSBSsFmo4s=;
-	b=j5zDm0GgP4mXbV2Leatjz6u4kzUEP4eE11+HkAKK6FjFmtIsk0dLB1IcKP6DLp1ZUd
-	T7ow0vZQWbnpLF5KwiaVnsTMW5qDxNmsiypnn9l862ouKazSOsuN2IRMjKnGqgy1n+i/
-	vPF8YXsxJlc7rT1iTg2H+hKhv0jXx3X2+ePKFZ3Qbim7DxtfCPRG5Cs1k1/S7yoqTZQy
-	34mh5YrPaWdx0PfyhMlQi0CaGlUsRp3y7laQDX1BdvvW3XK2I6Hn4mEVjUZQnsjWotJE
-	BiDxk67eaeFeJOyeKw08DRbjSb1WEFUOj5ADCiuieJWpAHu/GpvxeZqHDYm27zvfGGU2
-	Q0UA==
-X-Gm-Message-State: APjAAAU9+pLYI36wMK/G0c4zgYPg1bP7CNWAccqe7d45btgJFEhNxw9W
-	VBJZ29+SROmmEA4EXFXTKfdeSAmzFqQ=
-X-Google-Smtp-Source: APXvYqxeqSj57s1RTt9rZ6CzQFhPGVwWboqBg7RqS1oSxHgPartKqKvvbpQXobnzqmz/lup7iokusA==
-X-Received: by 2002:a1c:a909:: with SMTP id s9mr2857515wme.20.1562834542894;
-	Thu, 11 Jul 2019 01:42:22 -0700 (PDT)
-Received: from localhost.localdomain (193.164.125.18.ip.redstone-isp.net.
-	[193.164.125.18])
-	by smtp.gmail.com with ESMTPSA id 4sm7853621wro.78.2019.07.11.01.42.21
+	bh=0Ei/t+CVlBmAWmw6+oyMXc3rJnvoUpU4Ff5pI+tHlyw=;
+	b=iBIf7rMrQ8UmGfuIA79V0CoDexydtjIvm8Xo62PDF2phmiijX899ahJ9ooVAmORPZX
+	RXzwt2KZTKmF8Y4al/0VUdOSL9LbEK6kd21+y3pHj7Nx8X1YgdIxLFYZL9tgR48Qnn/R
+	jqtTY84Ycu1slPOEXOIe8VWcU46SXQvqEmWmodn8FKvJCkTl0uE5Nf48t8y5gX4cS8Bx
+	tyhS68QHZZdkBgvtOjyX3tpSeoSyRdTjTFKhnyA1bbiDrtJDy84thtD2sRDL1083nEA9
+	A5QpbvLBJvBZCeVhZ1TfKssGCjHcYIULtgUom0SL7eB4s+rklNyFd4RvZ3+A9f10wIDJ
+	Evgw==
+X-Gm-Message-State: APjAAAV34nGEkbBFaNawCU7woMjFiCUiokdyy08hTuZxva3ASm6I/z2y
+	8PsXrOzDkvACgjwg45q2DEHs3V5L
+X-Google-Smtp-Source: APXvYqxVpmjW0SvC6xRD5J6GeSHKRK8zljMd8XGr8X7kG8dradS7PRgypTZowX6vViO5ZHHGeLSlhg==
+X-Received: by 2002:a17:906:6dd4:: with SMTP id
+	j20mr2162919ejt.173.1562836107619; 
+	Thu, 11 Jul 2019 02:08:27 -0700 (PDT)
+Received: from PC771.demcon.guest ([87.215.69.65])
+	by smtp.gmail.com with ESMTPSA id
+	gz5sm1050687ejb.21.2019.07.11.02.08.26
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 11 Jul 2019 01:42:22 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	Thu, 11 Jul 2019 02:08:27 -0700 (PDT)
+From: Windel Bouwman <windel.bouwman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Jul 2019 09:42:19 +0100
-Message-Id: <20190711084219.84500-1-alex.kiernan@gmail.com>
+Date: Thu, 11 Jul 2019 11:08:03 +0200
+Message-Id: <20190711090803.18931-1-windel.bouwman@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] iwd: update to 0.18
+Subject: [PATCH] python-humanfriendly: Add recipe for the humanfriendly package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +55,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 08:42:22 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 09:08:27 -0000
 
-Also add RRECOMMENDS for asymmetric crypto modules.
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
 ---
+ .../python/python-humanfriendly.inc           | 25 +++++++++++++++++++
+ .../python/python-humanfriendly_4.18.bb       |  2 ++
+ .../python/python3-humanfriendly_4.18.bb      |  2 ++
+ 3 files changed, 29 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-humanfriendly.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
 
- .../iwd/{iwd_0.14.bb => iwd_0.18.bb}                   | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_0.14.bb => iwd_0.18.bb} (78%)
-
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.14.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
-similarity index 78%
-rename from meta-oe/recipes-connectivity/iwd/iwd_0.14.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
-index 1dfbed9fd48a..f56c88b821e1 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_0.14.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
-@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
- DEPENDS = "ell readline dbus"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
--SRCREV = "f87159964cf8fd9f85b0699d50e4a051d4f7c948"
-+SRCREV = "c923448bacf8a855b40017fe53ba2edcd062eec1"
- S = "${WORKDIR}/git"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-@@ -26,6 +26,12 @@ do_install_append() {
-     install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
- }
- 
--FILES_${PN} += "${datadir}/dbus-1"
-+FILES_${PN} += "${datadir}/dbus-1 ${libdir}/modules-load.d"
- 
- SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
+diff --git a/meta-python/recipes-devtools/python/python-humanfriendly.inc b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+new file mode 100644
+index 000000000..94f7f8b81
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-humanfriendly.inc
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Human friendly output for text interfaces using Python"
++HOMEPAGE = "https://humanfriendly.readthedocs.io/"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
 +
-+RRECOMMENDS_${PN} = "\
-+    kernel-module-pkcs7-message \
-+    kernel-module-pkcs8-key-parser \
-+    kernel-module-x509-key-parser \
++PYPI_PACKAGE = "humanfriendly"
++
++SRC_URI[md5sum] = "9573f9f37a5454d8205cfd1b9b8db9d2"
++SRC_URI[sha256sum] = "33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
++
++inherit pypi
++
++RDEPENDS_${PN}_class-target += " \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-stringold \
 +"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
+new file mode 100644
+index 000000000..4e03a654c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-humanfriendly.inc
+diff --git a/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
+new file mode 100644
+index 000000000..2ca5fe36f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-humanfriendly.inc
 -- 
 2.17.1
 
