@@ -1,47 +1,26 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D0B697EFF5
+Return-Path: <jwessel@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 15B0C7EEAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 13:46:42 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id i10so12561411iol.13
+	Thu, 11 Jul 2019 14:10:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6BE9sQX032414
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 06:46:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=KJ9e92Lf5webMm1xbfVKWoPB0NikEQtJJoKmvI1tXrE=;
-	b=aAjCrk+DfC+WJveNGGbQLb3jgO9853fH4/0fjRw7VkDuIXhhtqgg9NfAXRJCZsqK77
-	dwuH2MldjKvBOlEXX9AuDIb+G6N55Bx3ASRKeKyPtY4Rns8lC9AAQTEOq1mgE15MijLm
-	3icVLUrnGgvBerHn3bx1ufcZAl77TAfgW+Jgw4+FqQxTwvcOgY9kSGNJMo7iKBIlNq6r
-	mLwxKEIVbIRhwQofjSqFCWpbEgbsGuJs0/LVL0T07ugR6iEIoUtDicEKv8BYmKaeaU/6
-	BaMquNGrnZayIJFErZvLGinTdYIj5VxXk8nOtadA/RQmCL4oTosVi7CBlQQSeDrCK22q
-	7CqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=KJ9e92Lf5webMm1xbfVKWoPB0NikEQtJJoKmvI1tXrE=;
-	b=UfsDio2VDKDg+/9sYhCIFVvBy2j1tX8dnTeXFjyHTe+6uqIGtTZt+VV/1dSM0y+5jv
-	B5JY+vwPhNmtSBD0j16+Fpt6EewbvQBfN1+zG8ebaiddWgKObKH3LWAT8GCy6QG5X5jv
-	8VINdDpvY3eEhmAT0UtW3RUb6afcr9Tva5qvOGMd5/Mh+TvGV6xWpqMhlYZVIfRDgsZt
-	1GsUQgSt6j2QzRbKp6MfO4DrgYK8GnQhky3C7i4CCDw7sywf97J13V9uxBu/64guiI7d
-	M04ny5l1kUO3sbdglrFpuA4L3risy1m772Ja/AhryV2MV6prz2irv3bcIbPuSfOAnsqf
-	dzNA==
-X-Gm-Message-State: APjAAAU9VbP8OZHZZBPwHDxsFuMubk0lY2i7QWF6aZ/9RlV3ej++44fL
-	v5C0v5xgvqTpySoNBVkgOaw1U8b46TFWTu6vWs0=
-X-Google-Smtp-Source: APXvYqyXUm/GgKommWZp6z0hJ4CtT+xqBWlKv6PPtFjUZEyASdCazHx7pKrhRUupZC38uqkVh8B0B4gOINvlFicIIts=
-X-Received: by 2002:a6b:c9d8:: with SMTP id z207mr4241433iof.184.1562852803760;
-	Thu, 11 Jul 2019 06:46:43 -0700 (PDT)
+	Thu, 11 Jul 2019 07:10:14 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.439.0;
+	Thu, 11 Jul 2019 07:10:01 -0700
+Received: by ala-lpggp2.wrs.com (Postfix, from userid 5002)	id 203B4AA3488;
+	Thu, 11 Jul 2019 07:10:00 -0700 (PDT)
+From: Jason Wessel <jason.wessel@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 11 Jul 2019 07:10:00 -0700
+Message-ID: <20190711141000.3115-1-jason.wessel@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20190711090803.18931-1-windel.bouwman@gmail.com>
-In-Reply-To: <20190711090803.18931-1-windel.bouwman@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 11 Jul 2019 06:46:33 -0700
-Message-ID: <CANx9H-AeowZ0OR+yq353qjSsYvGC=6H6eZuDZbvBywDNEyQTCg@mail.gmail.com>
-To: Windel Bouwman <windel.bouwman@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] python-humanfriendly: Add recipe for the humanfriendly package.
+Subject: [meta-oe][PATCH] libbtyesize: Add depends for gettext-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,96 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 13:46:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Jul 2019 14:10:24 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+If the local.conf has set 'USE_NLS = "no"' the build of libbytesize
+will fail with the following message:
 
-You are missing the subject prefix indicating which layer and the fact that
-this is a v2.
+| configure: error: in `/build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build':
+| configure: error: gettext not found
+| See `config.log' for more details
+| NOTE: The following config.log files may provide further information.
+| NOTE: /build/tmp/work/core2-64-poky-linux/libbytesize/1.4-r0/build/config.log
+| ERROR: configure failed
 
-Add this argument to git send-mail:
+The issue is that libbtyesize needs to full version of gettext in
+order to configure properly, and not the minimal version which is
+provided by default when building with 'USE_NLS = "no"'.
 
---subject-prefix=3D=E2=80=9Cmeta-python][PATCH v2=E2=80=9D
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+---
+ meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Thu, Jul 11, 2019 at 2:08 AM Windel Bouwman <windel.bouwman@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
+index 863ce428f..cd67ab1b2 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_1.4.bb
+@@ -19,6 +19,7 @@ DEPENDS += " \
+     libpcre \
+     gmp \
+     mpfr \
++    gettext-native \
+ "
+ 
+ FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
+-- 
+2.21.0
 
-> Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
-> ---
->  .../python/python-humanfriendly.inc           | 25 +++++++++++++++++++
->  .../python/python-humanfriendly_4.18.bb       |  2 ++
->  .../python/python3-humanfriendly_4.18.bb      |  2 ++
->  3 files changed, 29 insertions(+)
->  create mode 100644
-> meta-python/recipes-devtools/python/python-humanfriendly.inc
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-humanfriendly_4.18.bb
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-humanfriendly_4.18.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python-humanfriendly.inc
-> b/meta-python/recipes-devtools/python/python-humanfriendly.inc
-> new file mode 100644
-> index 000000000..94f7f8b81
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-humanfriendly.inc
-> @@ -0,0 +1,25 @@
-> +DESCRIPTION =3D "Human friendly output for text interfaces using Python"
-> +HOMEPAGE =3D "https://humanfriendly.readthedocs.io/"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3D690da298a43805797a4fa7bbe180b3c6"
-> +
-> +PYPI_PACKAGE =3D "humanfriendly"
-> +
-> +SRC_URI[md5sum] =3D "9573f9f37a5454d8205cfd1b9b8db9d2"
-> +SRC_URI[sha256sum] =3D
-> "33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
-> +
-> +inherit pypi
-> +
-> +RDEPENDS_${PN}_class-target +=3D " \
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-fcntl \
-> +    ${PYTHON_PN}-io \
-> +    ${PYTHON_PN}-logging \
-> +    ${PYTHON_PN}-math \
-> +    ${PYTHON_PN}-numbers \
-> +    ${PYTHON_PN}-shell \
-> +    ${PYTHON_PN}-stringold \
-> +"
-> +
-> +BBCLASSEXTEND =3D "native"
-> diff --git a/meta-python/recipes-devtools/python/
-> python-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
-> python-humanfriendly_4.18.bb
-> new file mode 100644
-> index 000000000..4e03a654c
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-humanfriendly_4.18.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools
-> +require python-humanfriendly.inc
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-humanfriendly_4.18.bb b/meta-python/recipes-devtools/python/
-> python3-humanfriendly_4.18.bb
-> new file mode 100644
-> index 000000000..2ca5fe36f
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-humanfriendly_4.18.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools3
-> +require python-humanfriendly.inc
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
