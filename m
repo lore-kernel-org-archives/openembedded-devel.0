@@ -1,51 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 92D7E7F0E1
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F55C7F0BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jul 2019 16:38:10 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id h21so8671415qtn.13
+	Fri, 12 Jul 2019 16:41:04 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id a15so8701750qtn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jul 2019 09:38:12 -0700 (PDT)
+	Fri, 12 Jul 2019 09:41:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=v72RLFktEsg5i9danIrZUJvyvCzIBJu4gyKitNNtXw4=;
-	b=I+8uhJCNEsQ2lV3vT/F4DhPQKmA4gRa1w5B8/X0EKT/QKsiX86tX4KIL6OTDE2+RSl
-	lzwzhAypatQuFs2Jb+niQ0Dz1DTIyfqddi2zaShDzXp8sUX1i/dpmOf9QKJxQ2+dL5Ze
-	SCiT+cKQGuFMVaxQibe9qnhK+UDRrxxTaKSir/kn/mZ7Wna5hzqMHunxorn+MTQS+kN/
-	cptI1eEXIV8XkVVF/HO2V+sVgwI3LqJoAVWyKLVscegimDRtXvCz2sWF6c1z8hsCGexx
-	61Ilc1PTqeucMlsMWF4Li51ctcZSLeUd8ynVIW99rPWCcX4sAqnJ/1sYLj9V1z7RIXQC
-	9q7w==
+	:cc; bh=FWwv0L61Y8ilJPhjlpOBshuQg1I3V1AOSFxT8oktxv8=;
+	b=uNXHOHPTeqxpH8GoqfqDX0U+63IdEYI9+4nPY7Shxv8RyZxC2QysyVPoA9EuwFHo8a
+	FwwvlHIuD0Cy8soeOQNOxBZjXFujKMw0Q6qfYo2c2agMTX2fJBsDTvgUBB3F4uYOvVys
+	dDBV3Yi4NiX9tLbfGeRLeXCeDN3P+0lf+YKCHxBHn672j9jamdXU/OH+RCEhvttm0NWm
+	mO0GuCoXLZ+qyb7jUv14goKUCYaa09k13X93sIn7BEQ2yxi1kDN1ufhSCYZQG2NnSMfX
+	oPDvkBlZEyQUoFqTPyY/qC0KO/j7Ynw8x40Ui0hgni33j6uObEjGfWOS/5l0jsVZ6w4V
+	Mqeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=v72RLFktEsg5i9danIrZUJvyvCzIBJu4gyKitNNtXw4=;
-	b=LdpSKAEGWVlprdZLobbmqMQKl+NmV0YjTlZm1YFFUnQi3YdHzFBKNbQM8fOQTMuhJ7
-	ZZveRuZbpnQWgSKWEwbmUFRTkbNGKzO6r7N5VC9d8tnW0Upzi5/k9lKNqSA3tPEF+v8A
-	v69YTKceookwSWSNh32wDuyHi0wel2nWvtkv9oM0cszQSpDfPM7tuahTYoIxoOIhrg85
-	bu0CkYIZo4Junnz6y/Bodi6/c/HXf6g243xZvV8HbYb3Q4Uc2LJP6z3FroaX3iFLPGfm
-	wuLMLrjXuoAAbEeNd2oAzjq7oXC625cdEah3+WI6G4d1wFcf98vOzRDVkGeqQFQxyhQI
-	rOww==
-X-Gm-Message-State: APjAAAVUgyK+haRZehoB+kOhJRmcX4QxcnHXuQO7Mlv2pKfIEF9mz9Qx
-	tSVyWmSZcgtBTFfMvKgoEZ+EycCbcAPhGbZ0sMA=
-X-Google-Smtp-Source: APXvYqyy7ORAvHDWgQU7SIxS0hwqA8jy3dvc3pmeGTXR4FZDzL0AU8VVvwWBdhqIGCFSXJY8uVhlfO9j2iwDdPPLLaE=
-X-Received: by 2002:aed:3644:: with SMTP id e62mr6999098qtb.80.1562949491296; 
-	Fri, 12 Jul 2019 09:38:11 -0700 (PDT)
+	bh=FWwv0L61Y8ilJPhjlpOBshuQg1I3V1AOSFxT8oktxv8=;
+	b=oQJoiMoRLJYawWy0UugSk9TtkvnfORDJcd6SDa/VMW6ql5sz5H3TP4gRYaw+4cgLMU
+	/4V2yAPOR1lTKxoB9gJMJfbkyDglFc5eHQXvFzRveQjbDMFfqM2qkQXhx3CUhVP8Acbl
+	o1EgL9rZThyPVihIl7NSvtD+S9NTXZf6JJ6EpakcBQFAr1MPRUAZVBmgoBu2kGBZB6SN
+	xV91peuU6GoMolHTrupIG+n5xuIJ9WgVeaG0PA1DaG7HDZ2N5UjnUzi5NAMb3B+YZbJ0
+	3tNtRfPO1tR1kQG2skvlD60vzg9/DbsrX9u5bedgn53E6DCOQB2LvnXGfrN9QpHWoS7A
+	x/3Q==
+X-Gm-Message-State: APjAAAWyylDmrVG6Rw1CAtQo3Aui+TxgKT/B4YpWMOG9ZcMMmDHkC5AX
+	/Lereqwi8LGSI2FQhhybnYq3gKrls/I8+3Vuf2Y=
+X-Google-Smtp-Source: APXvYqzR4GLRI1xfbJL/sbRwWW9P3ru23s+c8znfoMTh3X33Os7oaDRP6Tl0Fe8Yc1foTY/R6a0O6m3AIA9apMAEhOA=
+X-Received: by 2002:ac8:764f:: with SMTP id i15mr7111854qtr.194.1562949665832; 
+	Fri, 12 Jul 2019 09:41:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190625205516.16072-1-open.source@oleksandr-kravchuk.com>
-	<D55698ECEC159B488D62A508E18D7FEC124BEEAB@ATNETS9912WMSX.ww300.siemens.net>
-	<CAMKF1sruh5+Uy1f8useibqbossecsftyG7Bk-Gf4B2SOCnJJqw@mail.gmail.com>
-	<66a42934-83cb-56ef-72c2-71b3377a6c38@siemens.com>
-In-Reply-To: <66a42934-83cb-56ef-72c2-71b3377a6c38@siemens.com>
+References: <1562930807-28919-1-git-send-email-mikko.rapeli@bmw.de>
+	<CA+chaQe9QVLqAos53+svN0-V-9+hF=xgWEvyhR8bLGP-gL-Dow@mail.gmail.com>
+In-Reply-To: <CA+chaQe9QVLqAos53+svN0-V-9+hF=xgWEvyhR8bLGP-gL-Dow@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 12 Jul 2019 09:37:45 -0700
-Message-ID: <CAMKF1spFA8atd93-bUGvfE1Px6eQvcxea5ixxBy1EZVekTF_ig@mail.gmail.com>
-To: Andrej Valek <andrej.valek@siemens.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: Re: [PATCH v2][meta-networking] dhcpcd: update to 7.2.2
+Date: Fri, 12 Jul 2019 09:40:39 -0700
+Message-ID: <CAMKF1so5c5hSWn3CbxSp_U22-u5N+rp=E0MDLs3aZoUE2wesqw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf: fix ptest compilation with hardening flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,105 +54,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jul 2019 16:38:10 -0000
+X-List-Received-Date: Fri, 12 Jul 2019 16:41:05 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Jul 12, 2019 at 1:03 AM Andrej Valek <andrej.valek@siemens.com> wrote:
+On Fri, Jul 12, 2019 at 5:15 AM Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> Hi Khem!
->
-> We have identified the problem. There was missing inheriting pkgconfig.
-> Fix is here
-> http://lists.openembedded.org/pipermail/openembedded-devel/2019-July/200609.html
-> .
->
+> Doesn't
+> http://git.openembedded.org/meta-openembedded/commit/?id=a2fac5a0a4848c2486cb3982f930f45f04469860
+> resolve
+> the same?
 
-thanks for taking care of this quickly.
+actually I see they regressed see
+https://errors.yoctoproject.org/Errors/Details/251505/
 
-> Regards,
-> Andrej
 >
-> On 7/12/19 8:13 AM, Khem Raj wrote:
-> > Hi Oleksandr
+> Your change might be better (then we should partially revert mine), because
+> I'm still seeing some recipes which depend on protobuf failing with similar
+> errors like protobuf itself did.
+
+and the above commit is applied, so this change should be made on top
+of that if not done already
+
+>
+> On Fri, Jul 12, 2019 at 1:58 PM Mikko Rapeli <mikko.rapeli@bmw.de> wrote:
+>
+> > Build fails when conf/local.conf has both hardening and ptests enabled:
 > >
-> > It fails to build on mips see
-> > https://errors.yoctoproject.org/Errors/Details/251424/
+> > require conf/distro/include/security_flags.inc
 > >
-> > I wonder if udev has something to do here
+> > DISTRO_FEATURES_append = " ptest"
 > >
-> > On Tue, Jun 25, 2019 at 11:30 PM Valek, Andrej <andrej.valek@siemens.com> wrote:
-> >>
-> >> Hi Oleksandr!
-> >>
-> >> You have removed udev from default configuration. Because if udev is not in PACKAGECONFIG anymore, '--without-udev' will be passed as parameter in configure step.
-> >>
-> >> There are multiple options how to do that.
-> >> 1. put 'udev' into DEPENDS, RDEPENDS and put '--with-udev' into EXTRA_OECONF
-> >>  - missing option to disable it
-> >> 2. keep 'udev' in PACKAGECONFIG
-> >>  - will be enabled automatically while is not explicitly overridden by another PACKAGECONFIG
-> >>
-> >> I prefer an option 2. . Udev will be enabled by default with option to disable it.
-> >>
-> >> Regards,
-> >> Andrej
-> >>
-> >> -----Original Message-----
-> >> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel-bounces@lists.openembedded.org> On Behalf Of Oleksandr Kravchuk
-> >> Sent: Tuesday, June 25, 2019 10:55 PM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> >> Subject: [oe] [PATCH v2][meta-networking] dhcpcd: update to 7.2.2
-> >>
-> >> udev is now enabled by default and is always requested.
-> >>
-> >> License checksum changed due to modified copyright year.
-> >>
-> >> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> >> ---
-> >>  .../dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb}        | 10 ++++------
-> >>  1 file changed, 4 insertions(+), 6 deletions(-)  rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.0.8.bb => dhcpcd_7.2.2.bb} (70%)
-> >>
-> >> diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-> >> similarity index 70%
-> >> rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
-> >> rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-> >> index 84c3db7a5..e2759f47a 100644
-> >> --- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.0.8.bb
-> >> +++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
-> >> @@ -5,18 +5,16 @@ DESCRIPTION = "dhcpcd runs on your machine and silently configures your computer  HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
-> >>
-> >>  LICENSE = "BSD-2-Clause"
-> >> -LIC_FILES_CHKSUM = "file://LICENSE;md5=1e8f17e4edcccc38152ccf60374e0f89"
-> >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
-> >>
-> >>  SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
-> >> -
-> >> -SRC_URI[md5sum] = "77bbb1d73b6f30d6ddcc8b0fd3eae266"
-> >> -SRC_URI[sha256sum] = "96968e883369ab4afd11eba9dfd9bb109f5dfff65b2814ce6c432f36362dc9b5"
-> >> -
-> >>  SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
-> >> +SRC_URI[md5sum] = "2f17034432ea10415ee84a97ef131128"
-> >> +SRC_URI[sha256sum] = "3db7ff18cba9274da1d2176fb3c7cbe23926a8e58d5c8e244ad55c62d38ba09e"
-> >>
-> >>  inherit autotools-brokensep
-> >>
-> >> -PACKAGECONFIG ?= "udev ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
-> >> +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
-> >>
-> >>  PACKAGECONFIG[udev] = "--with-udev,--without-udev,udev,udev"
-> >>  PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6"
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > Use CXXFLAGS for examples too to avoid hardening warnings
+> > about using O0 optimization.
+> >
+> > Then change linking order to avoid linker failures:
+> >
+> > aarch64-poky-linux-g++  -fstack-protector-strong  -D_FORTIFY_SOURCE=2
+> > -Wformat -Wformat-security -Werror=form
+> > at-security -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+> > -Wformat-security -Werror=format-security
+> >
+> > --sysroot=/home/builder/src/base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r0/recipe-sysroot
+> >  -O2 -pipe -g -feliminate-unused-debug-types
+> > -fmacro-prefix-map=/home/builder/src/base/build/tmp/work/aar
+> > ch64-poky-linux/protobuf/3.8.0-r0=/usr/src/debug/protobuf/3.8.0-r0
+> >               -fdebug-pre
+> >
+> > fix-map=/home/builder/src/base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r0=/usr/src/debug/pr
+> > otobuf/3.8.0-r0
+> > -fdebug-prefix-map=/home/builder/src/base/build/tmp/work/aarch6
+> > 4-poky-linux/protobuf/3.8.0-r0/recipe-sysroot=
+> > -fdebug-prefix-map=/home/builder/src
+> > /base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r0/recipe-sysroot-native=
+> > -fvisibility-inlin
+> > es-hidden -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+> > -fstack-protector-strong -Wl,-z,relro,-z,now -fstack-p
+> > rotector-strong -Wl,-z,relro,-z,now -pthread
+> > -I/home/builder/src/base/build/tmp/work/aarch64-poky-linux/p
+> > rotobuf/3.8.0-r0/git/src
+> > -L/home/builder/src/base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r
+> > 0/git/src/.libs
+> > -L/home/builder/src/base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r0/re
+> > cipe-sysroot/usr/lib -lprotobuf
+> > ../src/google/protobuf/.libs/timestamp.pb.o add_person.cc
+> > addressbook.pb.cc -
+> > o add_person_cpp
+> >
+> > /home/builder/src/base/build/tmp/work/aarch64-poky-linux/protobuf/3.8.0-r0/recipe-sysroot-native/usr
+> > /bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/9.1.0/ld:
+> > ../src/google/protobuf/.libs/timestamp.pb.o: in function
+> > `google::protobuf::Timestamp::SerializeWithCachedSizes(google::protobuf::io::CodedOutputStream*)
+> > const':
+> > /usr/src/debug/protobuf/3.8.0-r0/git/src/google/protobuf/
+> > timestamp.pb.cc:279: undefined reference to
+> > `google::protobuf::internal::WireFormat::SerializeUnknownFields(google::protobuf::UnknownFieldSet
+> > const&, google::protobuf::io::CodedOutputStream*)'
+> >
+> > Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+> > ---
+> >  .../0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch   | 4
+> > ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git
+> > a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> > b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> > index 029abfd..0a2e5e2 100644
+> > ---
+> > a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> > +++
+> > b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> > @@ -45,12 +45,12 @@ index 4ad605641..31d887639 100644
+> >   add_person_cpp: add_person.cc protoc_middleman
+> >         pkg-config --cflags protobuf  # fails if protobuf is not installed
+> >  -      c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config
+> > --cflags --libs protobuf`
+> > -+      $(CXX) $(LDFLAGS) $(PROTOBUF)
+> > ../src/google/protobuf/.libs/timestamp.pb.o add_person.cc
+> > addressbook.pb.cc -o add_person_cpp
+> > ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> > ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc
+> > addressbook.pb.cc -o add_person_cpp
+> >
+> >   list_people_cpp: list_people.cc protoc_middleman
+> >         pkg-config --cflags protobuf  # fails if protobuf is not installed
+> >  -      c++ list_people.cc addressbook.pb.cc -o list_people_cpp
+> > `pkg-config --cflags --libs protobuf`
+> > -+      $(CXX) $(LDFLAGS) $(PROTOBUF)
+> > ../src/google/protobuf/.libs/timestamp.pb.o list_people.cc
+> > addressbook.pb.cc -o list_people_cpp
+> > ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> > ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc
+> > addressbook.pb.cc -o list_people_cpp
+> >
+> >   add_person_dart: add_person.dart protoc_middleman_dart
+> >
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
