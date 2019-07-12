@@ -1,47 +1,30 @@
-Return-Path: <windel.bouwman@gmail.com>
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
-	[209.85.208.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B2A57EE18
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 61CF47D2E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jul 2019 06:56:33 +0000 (UTC)
-Received: by mail-ed1-f51.google.com with SMTP id r12so8225295edo.5
+	Fri, 12 Jul 2019 07:46:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.63,481,1557158400"; d="scan'208";a="71248552"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Jul 2019 15:46:41 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id A3BBB4CDDD3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jul 2019 23:56:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=zQwntw6UYEUyKkdO8/cDAlxu2mi3ApPVOG2qy5VJCdc=;
-	b=OgCkORBdULpuA+zZs5W+AJAD9GCXfRbyYKnVWiKGG35KmoVQqhiKFtXWDcxXN94own
-	ATH7v+jEM1YZD6qUaLt1wMT7hFvsUqWHpOizOXInzDBnSvG+maeuBnrjcXI03OCx76bi
-	McemlR2Wq0uWBolEKMnppCxfzJvbmL8fM7yP8rJ0lDyE4DTCC8CdbSjCOvhjd8I0mLuK
-	7zLiMeQYDs8XMxQnEug57j8JHisdbTTPGJ1OgFEHnhQAQXrkQy8Sw+GKbIq3/6tKV7mB
-	jgMrsm0fV5PWCmGR9GoVSdb/KFLdqjrmjEcyiGgUVrhetZF3yscFQtLEiHLjyAXPOW5S
-	BW1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=zQwntw6UYEUyKkdO8/cDAlxu2mi3ApPVOG2qy5VJCdc=;
-	b=Rmq3NKIo5w6TNCr8sHaBF2SBSaL/g7sXkcFJHTvuDL0egvz27AK9tnIcRQNnuxUYEq
-	Zpa9p3imZz8fL6GxxLeK76dz5FKKeF5uv5yJZ0XhejJO841RNr82RceBQU8bu+RjPFre
-	LgU6imsIYrldtVG+gudTfc/XUw+fF46hpUsHqCt7BA6B+1u6B0RuQOPPinIzDBpPnY/U
-	YOZK8oYcWPEQxzjY19dw3noUimN/EX8Nu69kmgtDG6xRUwZ/Fr7orK7hmaqw5beD5OJv
-	f3xRVAsk/2w3C7QQkhDi4xzmtsOEOw5NGCWYXx8TRgPOu8Pj7ylVE76SY6noZl/yJY0L
-	4xKA==
-X-Gm-Message-State: APjAAAWo9Ou6q1hGWK9PsErAeTBw+9mdj6MoUJVdHdom8b93wPRfKKUd
-	SBDoGSFc8uDiMUZOX5xfmU2FyEL5
-X-Google-Smtp-Source: APXvYqw6uDRu4T86SPWIZ1Kbs008behzcTlq9W8N50ls5xNkTN/UAtovfKnz6vjc/lSHP4o0y8G22A==
-X-Received: by 2002:a50:b6c7:: with SMTP id f7mr7489237ede.275.1562914593850; 
-	Thu, 11 Jul 2019 23:56:33 -0700 (PDT)
-Received: from PC771.demcon.guest ([87.215.69.65])
-	by smtp.gmail.com with ESMTPSA id
-	d12sm2233824edp.16.2019.07.11.23.56.32
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 11 Jul 2019 23:56:33 -0700 (PDT)
-From: Windel Bouwman <windel.bouwman@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Jul 2019 08:56:17 +0200
-Message-Id: <20190712065617.30992-1-windel.bouwman@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python] Add coloredlogs python package.
+	Fri, 12 Jul 2019 15:46:36 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 12 Jul 2019 15:46:38 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 Jul 2019 15:45:53 +0800
+Message-ID: <20190712074553.23291-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: A3BBB4CDDD3F.AC8C8
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pyflakes: upgrade 1.6.0 -> 2.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,65 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jul 2019 06:56:35 -0000
+X-List-Received-Date: Fri, 12 Jul 2019 07:46:42 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
+-Upgrade from python-pyflakes_1.6.0.bb to python-pyflakes_2.1.1.bb.
+
+-License-Update: Now,it supports all active versions of Python: 2.7 and 3.4 to 3.7.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../python/python-coloredlogs.inc             | 24 +++++++++++++++++++
- .../python/python-coloredlogs_10.0.bb         |  2 ++
- .../python/python3-coloredlogs_10.0.bb        |  2 ++
- 3 files changed, 28 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-coloredlogs.inc
- create mode 100644 meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
+ .../python/{python-pyflakes_1.6.0.bb => python-pyflakes_2.1.1.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyflakes_1.6.0.bb => python-pyflakes_2.1.1.bb} (56%)
 
-diff --git a/meta-python/recipes-devtools/python/python-coloredlogs.inc b/meta-python/recipes-devtools/python/python-coloredlogs.inc
-new file mode 100644
-index 000000000..4a35806db
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-coloredlogs.inc
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Colored terminal output for Python's logging module"
-+HOMEPAGE = "https://coloredlogs.readthedocs.io"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
-+
-+SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
-+SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
-+
-+inherit pypi
-+
-+do_compile_prepend() {
-+    sed -ie "s/find_pth_directory(),/'',/g" setup.py
-+}
-+
-+do_install_append() {
-+    rm -rf ${D}${prefix}/share
-+}
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-humanfriendly \
-+"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
-new file mode 100644
-index 000000000..0fc1b258c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-coloredlogs.inc
-diff --git a/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-new file mode 100644
-index 000000000..387239966
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-coloredlogs.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyflakes_1.6.0.bb b/meta-python/recipes-devtools/python/python-pyflakes_2.1.1.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python-pyflakes_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python-pyflakes_2.1.1.bb
+index a16a880..1c03f39 100644
+--- a/meta-python/recipes-devtools/python/python-pyflakes_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-pyflakes_2.1.1.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "passive checker of Python programs"
+ HOMEPAGE = "https://github.com/dreamhost/cliff"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://README.rst;md5=029ce1beb023f2c4ca9f417e4984a865"
++LIC_FILES_CHKSUM = "file://README.rst;md5=5127315117a8561a1504343d59620647"
+ 
+-SRC_URI[md5sum] = "b385b0e4cd40a522553e97cd2d83573e"
+-SRC_URI[sha256sum] = "8d616a382f243dbf19b54743f280b80198be0bca3a5396f1d2e1fca6223e8805"
++SRC_URI[md5sum] = "a0f71a15724e553c46e03ba5ed56703c"
++SRC_URI[sha256sum] = "d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2"
+ 
+ inherit pypi setuptools
+ 
 -- 
-2.17.1
+2.7.4
+
+
 
 
