@@ -1,24 +1,50 @@
-Return-Path: <Zhe.He@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F3987E993
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 834457D34E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jul 2019 03:52:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6D3qKku028261
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sun, 14 Jul 2019 06:29:01 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id y15so6028971pfn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jul 2019 20:52:30 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Fri, 12 Jul 2019 20:52:09 -0700
-From: <zhe.he@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 13 Jul 2019 11:52:08 +0800
-Message-ID: <1562989928-131914-1-git-send-email-zhe.he@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Sat, 13 Jul 2019 23:29:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XUfv5GIysxHU6rAjlOzyn/mzFE5xsjnQpTdsBqJq2dE=;
+	b=gAh59pUJTa0unBYkuawuGZgqO8tMNvQ8R5guMRkVz95tcCPvz02BJekswrzQDm7YFT
+	6erPY5u5kk35l/hg9hFXyQ1jnIviDIulbwV+z2VeI8OBYw8oRSlSIJr152egTi4gIH/b
+	o+CHEXELHXRYEKvkW+qyh/fIJ4+AIKdkwqGuyLgBAIUp2QAWHgi2HbEg+JHfrhIKBzne
+	FWVbXrdGxlg+pn4DaXp/Hhqcc7tclVpseutgm7IjqiL1kkVbyvV9zUL4fK38XolpXDQ/
+	BuTDHatY9vVi0lNdDUX2FqAcRtoxDYtJC0rdci2KYDhCMMyfbA4KBOPDKdkZ4keUSd3i
+	I33g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XUfv5GIysxHU6rAjlOzyn/mzFE5xsjnQpTdsBqJq2dE=;
+	b=nRKnN1lsHv7ZbUXTvgo+t4VIVYUHN5AlOowwrp0xU7zB3KJvUJdaX+GdSSqAGuKkIt
+	60YKusDih6RfXcfv2MZektbwtTJbZYzUKLxnJHjSkiBbIBX9qjSzep2kDLqBNbQXI/6d
+	8bF6koCiRaTsFrcC4yClgXG2nRZtFCEzl7eRIQWjEpRqZxkjJ4dovZHiPsrCo2S//hx6
+	zRmLdMI/tvgyQF4aDQzmZl3BrQ2063X+QD3rgP2vAy0VEylBhczI6pYl5sYMBL+AdMXL
+	vuXEDSRYvgZYVY3VwharJDsywnolsNR081mOFgVT0nRM6L63L+KY9Y4TORqztWfj5gIQ
+	8QWQ==
+X-Gm-Message-State: APjAAAXOBqkWdYnEG2BSKbkTrXpIfkISUozF9LdmY1m1Onh3zOHBgzUH
+	a/TCjfXZB+zs5VgJB6WYPYmna85o7n4=
+X-Google-Smtp-Source: APXvYqyACmJMThgrQGbeng/ghINNXf8JzJ2I8pYtR/JLA+LriLDWowPTimVUawyi4sNs6mx+G+In3A==
+X-Received: by 2002:a63:6904:: with SMTP id e4mr20042678pgc.321.1563085741845; 
+	Sat, 13 Jul 2019 23:29:01 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	11sm14567157pfw.33.2019.07.13.23.29.00
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sat, 13 Jul 2019 23:29:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 13 Jul 2019 23:28:52 -0700
+Message-Id: <20190714062852.39619-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-Subject: [PATCH v2] drbd-utils: Fix netlink failure with nested attributes for kernel v5.2
+Subject: [meta-oe][PATCH] wvdial: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +57,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jul 2019 03:52:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 14 Jul 2019 06:29:01 -0000
+Content-Transfer-Encoding: 8bit
 
-From: He Zhe <zhe.he@windriver.com>
-
-Bump up SRCREV_drbd-utils to includes two more commits to fix the following
-netlink failure with nested attributes.
-
-$ drbdsetup new-resource r0
-Invalid argument
-
-92ade5989027 ("netlink: prepare for kernel v5.2")
-859151b228d3 ("netlink: Add NLA_F_NESTED flag to nested attribute")
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Add failure met in commit log
+ .../wvdial/wvdial/musl-support.patch          | 25 +++++++++++++++++++
+ .../wvdial/wvdial_1.61.bb                     |  6 +----
+ 2 files changed, 26 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvdial/musl-support.patch
 
- meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-index d1189f1..5aeef7b 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
-           "
- # v9.10.0
--SRCREV_drbd-utils = "147860216bf307433e2d0d7cfd6fad3642027b8d"
-+SRCREV_drbd-utils = "859151b228d3b3aacefb09d06d515a2589c22e35"
- SRCREV_drbd-headers = "0955b3423f08f8e11ff05092bc1b766609fd804b"
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial/musl-support.patch b/meta-oe/recipes-connectivity/wvdial/wvdial/musl-support.patch
+new file mode 100644
+index 0000000000..b5ad4823a0
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvdial/musl-support.patch
+@@ -0,0 +1,25 @@
++Drop support for glibc < 2.10, in master we are at 2.28
++in process get it working with musl as well.
++
++Upstream-Status: Inappropriate [No upstream]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/wvmodemscan.cc
+++++ b/wvmodemscan.cc
++@@ -495,16 +495,8 @@ static int fileselect(const struct diren
++ 	// (no internal ISDN support)   || !strncmp(e->d_name, "ttyI", 4);
++ }
++ 
++-#if defined(__GLIBC__) && __GLIBC_PREREQ(2, 10)
++ static int filesort(const dirent **e1, const dirent **e2)
++-#else
++-static int filesort(const void *_e1, const void *_e2)
++-#endif
++ {
++-#if !(defined(__GLIBC__) && __GLIBC_PREREQ(2, 10))
++-    dirent const * const *e1 = (dirent const * const *)_e1;
++-    dirent const * const *e2 = (dirent const * const *)_e2;
++-#endif
++     const char *p1, *p2;
++     int diff;
++     
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+index 5154208175..36580952f1 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+@@ -11,8 +11,8 @@ RDEPENDS_${PN} = "ppp"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.bz2 \
+            file://typo_pon.wvdial.1.patch \
++           file://musl-support.patch \
+           "
+-
+ SRC_URI[md5sum] = "37e9a2d664effe4efd44c0e1a20136de"
+ SRC_URI[sha256sum] = "99906d9560cbdbc97e1855e7b0a7169f1e11983be3ac539140423f09debced82"
+ 
+@@ -21,8 +21,6 @@ export WVLINK="${LD}"
+ 
+ PARALLEL_MAKE = ""
+ 
+-BUILD_CPPFLAGS += "-I${STAGING_INCDIR}/wvstreams"
+-
+ do_configure() {
+     sed -i 's/LDFLAGS+=-luniconf/LIBS+=-luniconf/' ${S}/Makefile
+ }
+@@ -30,5 +28,3 @@ do_configure() {
+ do_install() {
+     oe_runmake prefix=${D}/usr PPPDIR=${D}/etc/ppp/peers install
+ }
+-# http://errors.yoctoproject.org/Errors/Details/186959/
+-EXCLUDE_FROM_WORLD_libc-musl = "1"
 -- 
-2.7.4
+2.22.0
 
 
