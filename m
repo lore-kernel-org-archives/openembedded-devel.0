@@ -1,30 +1,23 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D09577ED62
+Return-Path: <Ovidiu.Panait@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D35B87DC1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jul 2019 05:55:02 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.63,493,1557158400"; d="scan'208";a="71445994"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jul 2019 13:55:03 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 05B104CDDB0D
+	Mon, 15 Jul 2019 07:39:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6F7dY0p023240
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jul 2019 13:54:48 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 15 Jul 2019 13:55:03 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Mon, 15 Jul 2019 00:39:34 -0700 (PDT)
+Received: from otp-opanait-l1.corp.ad.wrs.com (128.224.124.169) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Mon, 15 Jul 2019 00:39:33 -0700
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jul 2019 13:54:13 +0800
-Message-ID: <20190715055413.17875-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Mon, 15 Jul 2019 10:38:43 +0300
+Message-ID: <20190715073844.7334-1-ovidiu.panait@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 05B104CDDB0D.AD261
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] protobuf: upgrade 3.8.0 -> 3.9.0
+Subject: [meta-python][PATCH 1/2] python3-pillow: 5.4.1 -> 6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,106 +30,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jul 2019 05:55:03 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 Jul 2019 07:39:34 -0000
 Content-Type: text/plain
 
--Upgrade from protobuf_3.8.0.bb to protobuf_3.9.0.bb.
+Update python3-pillow to version 6.1 and refresh patches.
 
--protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
- Removed since this is included in 3.9.0.
+License-Update: copyright years
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 ---
- ...s-map_util.h-to-list-of-installed-headers.patch | 52 ----------------------
- .../{protobuf_3.8.0.bb => protobuf_3.9.0.bb}       |  5 +--
- 2 files changed, 2 insertions(+), 55 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.8.0.bb => protobuf_3.9.0.bb} (93%)
+ .../0001-explicitly-set-compile-options.patch | 10 +++---
+ .../0001-support-cross-compiling.patch        | 32 +++++++++----------
+ ...-pillow_5.4.1.bb => python3-pillow_6.1.bb} |  6 ++--
+ 3 files changed, 24 insertions(+), 24 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_5.4.1.bb => python3-pillow_6.1.bb} (74%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
-deleted file mode 100644
-index a160e5e..0000000
---- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From ea6e776e50971c89ad2293046b6ae2a6a9753c56 Mon Sep 17 00:00:00 2001
--From: Adam Cozzette <acozzette@google.com>
--Date: Thu, 6 Jun 2019 10:29:58 -0700
--Subject: [PATCH] Added stubs/map_util.h to list of installed headers
--
--This should fix issue #6186. I also had to remove a couple unnecessary
--const keywords in map_util.h because the no_warning_test was showing
--errors about those.
--
--Upstream-Status: Submitted [https://github.com/protocolbuffers/protobuf/pull/6223]
-----
-- src/Makefile.am                      | 1 +
-- src/google/protobuf/stubs/map_util.h | 4 ++--
-- 2 files changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/src/Makefile.am b/src/Makefile.am
--index be18ba76..1689e221 100644
----- a/src/Makefile.am
--+++ b/src/Makefile.am
--@@ -72,6 +72,7 @@ nobase_include_HEADERS =                                         \
--   google/protobuf/stubs/hash.h                                   \
--   google/protobuf/stubs/logging.h                                \
--   google/protobuf/stubs/macros.h                                 \
--+  google/protobuf/stubs/map_util.h                               \
--   google/protobuf/stubs/mutex.h                                  \
--   google/protobuf/stubs/once.h                                   \
--   google/protobuf/stubs/platform_macros.h                        \
--diff --git a/src/google/protobuf/stubs/map_util.h b/src/google/protobuf/stubs/map_util.h
--index 2313e1f5..b04d9d46 100644
----- a/src/google/protobuf/stubs/map_util.h
--+++ b/src/google/protobuf/stubs/map_util.h
--@@ -620,7 +620,7 @@ bool UpdateReturnCopy(Collection* const collection,
-- // twice. Unlike UpdateReturnCopy this also does not come with the issue of an
-- // undefined previous* in case new data was inserted.
-- template <class Collection>
---typename Collection::value_type::second_type* const
--+typename Collection::value_type::second_type*
-- InsertOrReturnExisting(Collection* const collection,
--                        const typename Collection::value_type& vt) {
--   std::pair<typename Collection::iterator, bool> ret = collection->insert(vt);
--@@ -633,7 +633,7 @@ InsertOrReturnExisting(Collection* const collection,
--
-- // Same as above, except for explicit key and data.
-- template <class Collection>
---typename Collection::value_type::second_type* const
--+typename Collection::value_type::second_type*
-- InsertOrReturnExisting(
--     Collection* const collection,
--     const typename Collection::value_type::first_type& key,
----
--2.11.0
--
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
-index be5caa4..38e2286 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.8.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
-@@ -10,12 +10,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
- DEPENDS = "zlib"
- DEPENDS_append_class-target = " protobuf-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+index de89ba005..d4372696f 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+@@ -1,4 +1,4 @@
+-From 52879439f2976662140b76951f43f16e1d5ef08e Mon Sep 17 00:00:00 2001
++From 9f3073bf6a7c7c51bb49d25f65c8f75cc704a5ee Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Mon, 18 Mar 2019 23:23:55 -0400
+ Subject: [PATCH] explicitly set compile options
+@@ -15,12 +15,12 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  1 file changed, 12 insertions(+)
  
--SRCREV = "09745575a923640154bcf307fba8aedff47f240a"
-+SRCREV = "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
+ diff --git a/setup.cfg b/setup.cfg
+-index 95900ff..27da313 100644
++index 3ab2e127..e92615f3 100644
+ --- a/setup.cfg
+ +++ b/setup.cfg
+-@@ -9,3 +9,15 @@ addopts = -vx Tests
+- 
++@@ -4,3 +4,15 @@ test=pytest
+  [flake8]
++ extend-ignore = E203, W503
+  max-line-length = 88
+ +
+ +[build_ext]
+@@ -35,5 +35,5 @@ index 95900ff..27da313 100644
+ +disable-webpmux = 1
+ +disable-imagequant = 1
+ -- 
+-2.8.1
++2.20.1
  
--SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
-+SRC_URI = "git://github.com/google/protobuf.git;branch=3.9.x \
-            file://run-ptest \
-            file://0001-protobuf-fix-configure-error.patch \
--           file://0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch \
-            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
-            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
+index e86293421..6de19ad87 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
++++ b/meta-python/recipes-devtools/python/python3-pillow/0001-support-cross-compiling.patch
+@@ -1,4 +1,4 @@
+-From a78411402c824668283beb94db4bf7e206a4cf60 Mon Sep 17 00:00:00 2001
++From ae7c8d0336381dd4c10e809e9c8926f9deeafeb8 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Thu, 14 Mar 2019 03:48:10 -0400
+ Subject: [PATCH] support cross compiling
+@@ -11,29 +11,29 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  1 file changed, 3 insertions(+), 10 deletions(-)
+ 
+ diff --git a/setup.py b/setup.py
+-index 79f912b..37e5827 100755
++index 5ceae344..07863340 100755
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -50,7 +50,7 @@ _LIB_IMAGING = (
+-     "ZipEncode", "TiffDecode", "Jpeg2KDecode", "Jpeg2KEncode", "BoxBlur",
+-     "QuantPngQuant", "codec_fd")
++@@ -105,7 +105,7 @@ _LIB_IMAGING = (
++     "codec_fd",
++ )
+  
+ -DEBUG = False
+ +DEBUG = True
+  
+  
+  class DependencyException(Exception):
+-@@ -345,21 +345,16 @@ class pil_build_ext(build_ext):
++@@ -396,21 +396,16 @@ class pil_build_ext(build_ext):
+                      _add_directory(library_dirs, match.group(1))
+  
+          # include, rpath, if set as environment variables:
+--        for k in ('C_INCLUDE_PATH', 'CPATH', 'INCLUDE'):
++-        for k in ("C_INCLUDE_PATH", "CPATH", "INCLUDE"):
+ +        for k in ('C_INCLUDE_PATH', 'CPATH', 'INCLUDE', 'STAGING_INCDIR'):
+              if k in os.environ:
+                  for d in os.environ[k].split(os.path.pathsep):
+                      _add_directory(include_dirs, d)
+  
+--        for k in ('LD_RUN_PATH', 'LIBRARY_PATH', 'LIB'):
++-        for k in ("LD_RUN_PATH", "LIBRARY_PATH", "LIB"):
+ +        for k in ('LD_RUN_PATH', 'LIBRARY_PATH', 'LIB', 'STAGING_LIBDIR'):
+              if k in os.environ:
+                  for d in os.environ[k].split(os.path.pathsep):
+@@ -47,15 +47,15 @@ index 79f912b..37e5827 100755
+          #
+          # add platform directories
+  
+-@@ -413,8 +408,6 @@ class pil_build_ext(build_ext):
+-         elif sys.platform.startswith("linux") or \
+-                 sys.platform.startswith("gnu") or \
+-                 sys.platform.startswith("freebsd"):
++@@ -469,8 +464,6 @@ class pil_build_ext(build_ext):
++             or sys.platform.startswith("gnu")
++             or sys.platform.startswith("freebsd")
++         ):
+ -            for dirname in _find_library_dirs_ldconfig():
+ -                _add_directory(library_dirs, dirname)
+-             if sys.platform.startswith("linux") and \
+-                     os.environ.get('ANDROID_ROOT', None):
+-                 # termux support for android.
++             if sys.platform.startswith("linux") and os.environ.get(
++                 "ANDROID_ROOT", None
++             ):
+ -- 
+-2.8.1
++2.20.1
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb b/meta-python/recipes-devtools/python/python3-pillow_6.1.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_6.1.bb
+index 6fce1623d..13e6b4143 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_5.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_6.1.bb
+@@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
+ Contributors."
+ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c6379001ecb47e2a0420c40177fc1125"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
+ 
+-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=5.4.x \
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.1.x \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
  "
+-SRCREV ?= "f38f01bbe3a0a9f49ce592c86ff20c01c9655133"
++SRCREV ?= "aaca672173413883fbcefd659f04d74fe44fb5d5"
+ 
+ 
+ inherit setuptools3
 -- 
-2.7.4
-
-
+2.20.1
 
 
