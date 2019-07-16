@@ -1,56 +1,55 @@
 Return-Path: <joshuagloe@gmail.com>
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 7401A7ECB2
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+	[209.85.128.47])
+	by mail.openembedded.org (Postfix) with ESMTP id E8A837ECB2
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 16 Jul 2019 15:46:18 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id p74so19142284wme.4
+Received: by mail-wm1-f47.google.com with SMTP id p74so19142311wme.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
+	Tue, 16 Jul 2019 08:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=DAZBOfHi8WFk9AOCkWLPqQmwVk2JeA7wIobf8nrutRc=;
-	b=N9xhFWXgGqeAgea4qH2tbqzuJx632xw8TimRrxan46ttgi304IsX1DGqLYlzTslO8e
-	foiaC28qx3UZYZrjg5xvuoogUc1QBc0pzTE9D107vrNWs+vtxWlLzOEEe+ZlSclqw4Ql
-	zmo/bvWLYU7r6N/FqzvQ8/wtCKXGNuGrvP05D4GerfAP7qWUmBIKgL5HomEmbeTYunlD
-	7c+9H1vNnJAqGCAKOs7Lk/OSp4dvp5V114vh740oamywVyfUr2mwshJeqi10okKLPTUB
-	Se8tNrt0TleJwIKBELt9yjqzwL3OTm+Kp2HtCA6Z/cE+28arAi8ymoF6Kj5h9XPeATV3
-	jYJw==
+	bh=V676cx9bQO/LRJaRdDxqE8dlEa4UpvnERxprJjhK2NQ=;
+	b=HTTT9FhVDrXQzf6zvJJKwuHWlV8bfNqI6jI/gJYH7OQRVvuxbYGfkWwn/tx1x28cpW
+	jTRFyFJq7vaL9/6AtextaiHJ6C0NMd6P4KEX4TfUZUSFJ9W7K/ZdEeUkSaLddDlYii6G
+	GYQdC/b8VpiN/61KkqFpWw9q+PmXrYnd3WZTbUIHTbJ1S0Zw7w3tf/K4nEZgiWOmrCh8
+	4CKjNtwIIArDkukG2tbG9VG3ZXt0zqWTWoCS8RCKPz7EhjyvEEbVJ9QJfdVGUngjyNVb
+	aKl6YvbTtXeW7JdMQaIIyDoYqMi64cIVnbAgjNcBzAHwBxjxVJj/OQzBoyrfhNj57Ija
+	Oiyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=DAZBOfHi8WFk9AOCkWLPqQmwVk2JeA7wIobf8nrutRc=;
-	b=XOuVbnT8YYna4/nyF0yZt6unRqQB+oncXGiy7im3W2sC/mevYJdUH6zdaE+0tgeKZn
-	ujDkFelb6Y8L3Pc05X8c4reozUJrS56h2M9Vkv1JNbj3FJhDAvQJ2e5xKD658Oj2z/r/
-	XGM+s9msGDWb3ROcW0fRwHovUIXaQ9H67liZ2lNNM2VEB+ke4Ug3xgeTn0uirWCQ4kzo
-	VX9poSwwoPnjoxWEhBiQaU85aWhovJ8OlerSWovZFB5z+okmWISrlhARaFHpUNkqzoTW
-	rHmQ/F7rwIs6NtXyQ+JTLIVsRcJMq4vlbrLFLwlilxr97EhwF2P2rifvYoeNPx3hVhpf
-	TKrA==
-X-Gm-Message-State: APjAAAV3DblsDMaJs8ti9IECRcY4jz51x8WqTbm8mDDV4x/ntF3NoPNl
-	kIr0N/ZAH+txUssavKqP/50vVDm1/gs=
-X-Google-Smtp-Source: APXvYqwZj6Asl7ZK9f8dU95espR17Mjc75F9ZyrhYxM6d1TL1erbZ/tbwDv3mGjC+qav+tI/T4k2aQ==
-X-Received: by 2002:a05:600c:2503:: with SMTP id
-	d3mr32249982wma.41.1563291978951; 
-	Tue, 16 Jul 2019 08:46:18 -0700 (PDT)
+	bh=V676cx9bQO/LRJaRdDxqE8dlEa4UpvnERxprJjhK2NQ=;
+	b=i7HE3xQmJJJX78AXQKCUEp4InX1jk0WnzawDTC5YOfDVKOuoPdw5Efd1Ci0yenp239
+	x6pUES/2bhFFuIAS8phjhhk/UdTYj5dmcWTH3MCa6IklKmDRJzPc6JcxlS7zacHdDPLD
+	gWxCWQAnHyugGbPO/EiR3TlT6dGqNCiBuXPd9fhxipzubNEPjfwhH6hetz7nyBHHeK3S
+	pkUrvCXZfPFZarlNBOYGIE+2fPOhO02Hfvzuv0brgE9t7+Ix89CXMNTdyXtG0y+h+WFl
+	mT4ub5TVefsxrWWZH9o0URdxFzYAxkrUsJWZATEwCGR5Patj6UA/CcdM79tlUhGP+asD
+	+VqQ==
+X-Gm-Message-State: APjAAAWd53YJrR0u1WdFZZLkVnlsM6e2nnH5LzVCnOtAOm9I/m9uC4Gf
+	dJ+QJojHDhPS2mMDGMvIskYsSmfDkf4=
+X-Google-Smtp-Source: APXvYqyrTzvLL/ZFtIXk/wf6243L21mffIHGalwePY2pxodbnfUdMT2o6+xmNu1f/XVkamZhAQ8Q1g==
+X-Received: by 2002:a1c:9c8a:: with SMTP id f132mr31423365wme.29.1563291979602;
+	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
 Received: from localhost.localdomain
 	(host165-120-157-205.range165-120.btcentralplus.com.
 	[165.120.157.205]) by smtp.gmail.com with ESMTPSA id
 	o6sm39537200wra.27.2019.07.16.08.46.18
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 16 Jul 2019 08:46:18 -0700 (PDT)
+	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
 From: Joshua Lock <joshuagloe@gmail.com>
 X-Google-Original-From: Joshua Lock <jlock@vmware.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Jul 2019 16:45:45 +0100
-Message-Id: <20190716154546.3601-2-jlock@vmware.com>
+Date: Tue, 16 Jul 2019 16:45:46 +0100
+Message-Id: <20190716154546.3601-3-jlock@vmware.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190716154546.3601-1-jlock@vmware.com>
 References: <20190716154546.3601-1-jlock@vmware.com>
 MIME-Version: 1.0
 Cc: Joshua Lock <jlock@vmware.com>
-Subject: [meta-python][PATCH 2/3] python-attrs: add native BBCLASSEXTEND
+Subject: [meta-python][PATCH 3/3] python-dateutil: add native BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,21 +62,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 15:46:18 -0000
+X-List-Received-Date: Tue, 16 Jul 2019 15:46:19 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Joshua Lock <jlock@vmware.com>
 ---
- meta-python/recipes-devtools/python/python-attrs.inc | 2 ++
+ meta-python/recipes-devtools/python/python-dateutil.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
-index 1f767ba19..bd0f7ee2c 100644
---- a/meta-python/recipes-devtools/python/python-attrs.inc
-+++ b/meta-python/recipes-devtools/python/python-attrs.inc
-@@ -12,3 +12,5 @@ RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-crypt \
-     ${PYTHON_PN}-ctypes \
+diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
+index e230f15dd..8cc2373cd 100644
+--- a/meta-python/recipes-devtools/python/python-dateutil.inc
++++ b/meta-python/recipes-devtools/python/python-dateutil.inc
+@@ -21,3 +21,5 @@ RDEPENDS_${PN}_class-target = "\
+     ${PYTHON_PN}-six \
+     ${PYTHON_PN}-stringold \
  "
 +
 +BBCLASSEXTEND = "native"
