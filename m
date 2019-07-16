@@ -1,47 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D69747ECB2
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A2DC7ECDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 15:58:55 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id r6so15022259qkc.0
+	Tue, 16 Jul 2019 16:56:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45p6422shhz63
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 08:58:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gBNj/ZqKNz6sjm4zTQJ0xt9IbuPpNzpolGRxTWJi+Zw=;
-	b=q/NInLWEVr8cZUZPO++g49oy0DMoRYkS/3sp0Bw/bmGTU/xSBpDOT3tqSHwNo5cj3d
-	xNXte9ePHFvgYpkPwLfgsXof+GM46Q5O20uPEvY9mlCPdjAfalmG0RPajFzq68V+AYsq
-	Xfc7QveqePqzowV0rCePMi4ebVkyRvIo6cJIBvsPS/DL5xL3y2MgaUqZJpV0VJcXCyvQ
-	hgiQdq0a1C/y1tD3QKVFsC40Dip+YXxD2gYLtVY9K+hEMj2EJ73X6zLmrsBvKsFCJeQV
-	i6Ir8nLA6iWgZe1Jgr0CdEscv/qY0CM+GGDsoZ00qA4DBGk9WdRpFbhFj512GRL/1llH
-	fCPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=gBNj/ZqKNz6sjm4zTQJ0xt9IbuPpNzpolGRxTWJi+Zw=;
-	b=YbIzsrK7lAMeT+oETEz2WhZk5bA9NwEsuZEUGpV8canx2DhDBJKbu/spZ6acZS2L6p
-	z54ynNprUeuHt8otoVRhB4gnxu9R/FotCBtKoQGzO4hhgZaAHooIb8M4LFQPh+0O+MsN
-	DDlMKegpbaCvR4e6UVRNeTWi5DpL49b004uuohAgcLZmwa4QeeKW3LYWpJjULGXA37yf
-	EIY/day2QLvOp1csbwUbc0Ia3J7wrkN6cFNEr4q+r7dfzVsKMeVEkPh0IWLGeRkdGJNX
-	PBAZGPQ+i10Ur9LhpJw0idB5hSQS0sEUjOm6rF9wt41/nLOt6fL8hFxMg+PZbuSjWmAi
-	6Ajw==
-X-Gm-Message-State: APjAAAX97nWK93ye/kE4LdmP7Vxm+fDyr9qlfdoPEOs4Ub0D3TksNVUa
-	8wb8ZQ3wfvxJJ9drmNRnCrL6jFsTgx/h0mr31Js=
-X-Google-Smtp-Source: APXvYqwZ6VXOEEE9mbXpKliEsQ3jI0s+8U7sq08ar2N6iDv552tc+6xHLG2fyIOPbcQqS38nPZvEXVhnUegdCDH8tVI=
-X-Received: by 2002:a37:7083:: with SMTP id l125mr21343029qkc.71.1563292736355;
-	Tue, 16 Jul 2019 08:58:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190715144901.25305-1-luca@lucaceresoli.net>
-	<dcbe6593-85d8-c238-3e55-6e3a027a8cf9@gmail.com>
-In-Reply-To: <dcbe6593-85d8-c238-3e55-6e3a027a8cf9@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Jul 2019 08:58:30 -0700
-Message-ID: <CAMKF1soS_atifnv9YY8sHL6G2zaB_eUb1eCHY7X2mBLavBvtZA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH 1/4] fuse-exfat: moved to github
+	Tue, 16 Jul 2019 18:56:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1563296178;
+	bh=cMzEJAABWKUgkgm/+S83MHNQcWNYJ3nArSm5clNN4as=;
+	h=From:To:Subject:Date:From;
+	b=cDcx/cMVoVoR41DyuHB5mUBb9llAxsXF9rkDFWtiXqLqbDJ5RZOP0+YNcOjI1STW7
+	ckGD9xBCICbvAk/p1L9U9SUierjg6Vt0Z++Mp5AtQlo6HCzYAOdDApx0oQiUa5rNWi
+	tc9+U2yWjs8gZiJDZMlcZAU+yZkpuhp8KLT1rddmWUUmJ+6OaukEyiCqEm2+z44s2I
+	vYUKASu2RlOBblOk4UFtTy6RdjQfkDhzG04kmzai1VyfhfuziAyzJ7If+ty++OVExj
+	v2yNEH8ZHu80UJnb9faxEql1pjLBqo7TYaIvemaAdbE8HbvdDPZYp2U/ZvN/o4btIH
+	25/tf37ReQ9EfSf9C2Esx9QaUJ/5GEJwlPhC6QRor6GYELICx59qtaY1y9U++U3Bt5
+	w5728r+mKzdm4jax6Q/3mf1YIVFxC0TdtiWKh/7zYoMnsyptlOHVg4pgDBwCVqiuLD
+	JrbzBO1qeZmMlsknSGUgjuWw0KN9qhpiiict4N7bJMJbOR3jUMmHEQUz+BjL1/VLqb
+	XL3BiIlrv9Q+odx94tK79FBqG8oGU8avx3b+Q1CtA2+w7gvavChLVQo40sncpYb7O9
+	p0UyQR6sfIV953k5zwYd4b+00LU/ALliCsm0OgO3ELsJzty+vAH3OqIg6VgId+DE76
+	wrvOTj8SIE6hLRYurgVlNdbU=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Jul 2019 19:56:16 +0300
+Message-Id: <20190716165616.31970-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] gpsd: Upgrade 3.18.1 -> 3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,53 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 15:58:56 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 16 Jul 2019 16:56:18 -0000
 
-On Tue, Jul 16, 2019 at 7:54 AM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 7/15/19 7:48 AM, Luca Ceresoli wrote:
-> > fuse-exfat has been moved long ago to github. Update URLs.
-> >
-> > Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
-> > ---
-> >  .../recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb      | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-> > index 18fc9cd6f13d..a70653f607f6 100644
-> > --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-> > +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-> > @@ -3,12 +3,12 @@ DESCRIPTION = "fuse-exfat is a read and write driver implementing the \
-> >  extended file allocation table as a filesystem in userspace. A mounthelper \
-> >  is provided under the name mount.exfat-fuse. \
-> >  "
-> > -HOMEPAGE = "http://code.google.com/p/exfat/"
-> > +HOMEPAGE = "https://github.com/relan/exfat"
-> >  SECTION = "universe/otherosfs"
-> >  LICENSE = "GPLv2+"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> > -SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
-> > -"
-> > +SRC_URI = "https://github.com/relan/exfat/releases/download/v${PV}/${BP}.tar.gz"
->
-> IIRC, the tarball are regenerated on github so it has not been a source
-> we can trust. Using the clone method is recommended in these cases.
->
+Licencing changed from 3-clause BSD to 2-clause BSD.
 
-Thats for general archives, not for release artifacts.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...struct-prefix-includepy-with-sysroot-and-drop-sy.patch | 0
+ .../gpsd/{gpsd_3.18.1.bb => gpsd_3.19.bb}                 | 8 ++++----
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-navigation/gpsd/{gpsd-3.18.1 => gpsd}/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch (100%)
+ rename meta-oe/recipes-navigation/gpsd/{gpsd_3.18.1.bb => gpsd_3.19.bb} (95%)
 
-> - armin
-> > +
-> >  DEPENDS = "fuse virtual/libc"
-> >  RRECOMMENDS_${PN} = "util-linux-mount"
-> >
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.18.1/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+similarity index 100%
+rename from meta-oe/recipes-navigation/gpsd/gpsd-3.18.1/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+rename to meta-oe/recipes-navigation/gpsd/gpsd/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+similarity index 95%
+rename from meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
+rename to meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index ebbc7f3b3..558b7c1d5 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.18.1.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
+ DEPENDS = "dbus ncurses python libusb1 chrpath-replacement-native pps-tools"
+ PROVIDES = "virtual/gpsd"
+ 
+@@ -14,8 +14,8 @@ EXTRANATIVEPATH += "chrpath-native"
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+ "
+-SRC_URI[md5sum] = "3b11f26b295010666b1767b308f90bc5"
+-SRC_URI[sha256sum] = "5cb1e6d880ec9a52c62492dd0e3d77451b7c7ad625895bd652f6354215aec23e"
++SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
++SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
+ 
+ inherit scons update-rc.d python-dir pythonnative systemd update-alternatives
+ 
+-- 
+2.17.1
+
 
