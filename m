@@ -1,26 +1,101 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F0A697ECC2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 023CF7ECCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 14:15:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6GEEdoZ019624
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 16 Jul 2019 07:14:49 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 16 Jul 2019 07:14:28 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 16 Jul 2019 10:12:30 -0400
-Message-ID: <20190716141231.77957-15-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190716141231.77957-1-kai.kang@windriver.com>
-References: <20190716141231.77957-1-kai.kang@windriver.com>
+	Tue, 16 Jul 2019 14:54:33 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id i189so9235532pfg.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jul 2019 07:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=6Gu5p0RgreGRAZKNBViT8Y2uGuw5+uW2EwYqF7gF67w=;
+	b=eCuIJf4jbXpKRFe4ZMZSvNB4rWiHnHPRkeRbi/Of7shjByF2FrA8jP7D8ewCiim7OM
+	SW7wtoRimjaiYVivIz6aTJlyxisaD8d1jK8iMg1GfVceKXeM5l8l652wl622RmlQsNuf
+	aPlyl0ZEbSpC2URR0yZmYdw3l82mIV6OoXsTe+vQonokF/vZ0w1P48I2PPerAQZ2kxtM
+	xxZABvWu7y8KF1wTYEIIAB6vIzfKQhs4y65zCrx59KAuSWKSiiDlXbN3Hhokpugg8xAI
+	e7fIyqX9xwiLRYlNahZwB1qVLMoPIEfj5vZs350jtS+R6goeE8G9D/XhpwDcmIUVQupU
+	lroA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=6Gu5p0RgreGRAZKNBViT8Y2uGuw5+uW2EwYqF7gF67w=;
+	b=KhDzUnbINDxiOFzqQK6Jm23n3ouhOb3iVa08/L1xbGZKkzBTBorQNcl/UC7A9QxDEP
+	Ivg2QzIYdGgkauFNQtuJ4A9BJ79emmVPlGPNOQOU4/XT+SsJau5fpoxRyJ1oroDOR9/m
+	jB92nSOcO/XQlYXGfH1Q6Yh3SZElU6TmGPD2tasAtANybgoQ0LSwcg75844LQZ1lTwdQ
+	BWKRYDPbDYuG0+n42MC8hz9aweau6dZBKhkEEGzf1u9LZT2mUlp4C0tD6RzKk8uPtBrz
+	Bs/P/yrb7OlvMK/CdaBU3j62N+5gvrHn12w+4RvAbEBS8bNjnIYn/Z9+osU8CmVz92qP
+	lAfQ==
+X-Gm-Message-State: APjAAAX2TBESwUzh+Eu+UskVJTYMNnZDh9QW9eXRfQcrWkXBgEOVLq3F
+	dI4aNddTNq3qoXXH95TNz0Xj8dtq
+X-Google-Smtp-Source: APXvYqxMcivLQEJyVrwA3W71q3ShhuZCYuioEOnCq1NXfs5R8l4Wtq1c3mYMM0clHG5deMNY69oSCg==
+X-Received: by 2002:a63:6149:: with SMTP id v70mr33078332pgb.64.1563288874510; 
+	Tue, 16 Jul 2019 07:54:34 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:60a4:b905:b5f:2007?
+	([2601:202:4180:c33:60a4:b905:b5f:2007])
+	by smtp.gmail.com with ESMTPSA id
+	l4sm20553878pff.50.2019.07.16.07.54.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 16 Jul 2019 07:54:33 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <20190715144901.25305-1-luca@lucaceresoli.net>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	mQINBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+	aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+	mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+	C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+	Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+	7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+	dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+	FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABtCFha3VzdGVyODA4
+	IDxha3VzdGVyODA4QGdtYWlsLmNvbT6JAj0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+	FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+	vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+	ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+	IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+	g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+	rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+	FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+	wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+	t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+	aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+	oRoyDxC5Ag0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+	Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+	37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+	0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+	IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+	0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+	0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+	ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+	UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+	Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAGJAiUEGAEI
+	AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+	mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+	ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+	vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+	JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+	EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+	dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+	/mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+	8CS2NxU=
+Message-ID: <dcbe6593-85d8-c238-3e55-6e3a027a8cf9@gmail.com>
+Date: Tue, 16 Jul 2019 07:54:32 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 14/15] xfce4-settings: 4.12.4 -> 4.13.7
+In-Reply-To: <20190715144901.25305-1-luca@lucaceresoli.net>
+Subject: Re: [meta-filesystems][PATCH 1/4] fuse-exfat: moved to github
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,122 +108,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 14:15:14 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Jul 2019 14:54:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Kai Kang <kai.kang@windriver.com>
 
-Upgrade xfce4-settings from 4.12.4 to 4.13.7:
-* update SRC_URI to re-use official tarball and not inherit xfce-git
-* remove unneeded backport patch
-* remove dependency gtk+ that gtk+3 is used now
-* remove dependency dbus-glib which is replaced by gdbus
-* clean DEPENDS that libxfce4util and xfconf are requried by libxfce4ui
-  which is required by exo and garcon
-* remove packageconfig datetime-setter
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...2-Fix-linking-to-dbus-glib-bug-13633.patch | 41 -------------------
- ...ttings_git.bb => xfce4-settings_4.13.7.bb} | 19 +++------
- 2 files changed, 5 insertions(+), 55 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
- rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_git.bb => xfce4-settings_4.13.7.bb} (52%)
+On 7/15/19 7:48 AM, Luca Ceresoli wrote:
+> fuse-exfat has been moved long ago to github. Update URLs.
+>
+> Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
+> ---
+>  .../recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb      | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> index 18fc9cd6f13d..a70653f607f6 100644
+> --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> @@ -3,12 +3,12 @@ DESCRIPTION = "fuse-exfat is a read and write driver implementing the \
+>  extended file allocation table as a filesystem in userspace. A mounthelper \
+>  is provided under the name mount.exfat-fuse. \
+>  "
+> -HOMEPAGE = "http://code.google.com/p/exfat/"
+> +HOMEPAGE = "https://github.com/relan/exfat"
+>  SECTION = "universe/otherosfs"
+>  LICENSE = "GPLv2+"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> -SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
+> -"
+> +SRC_URI = "https://github.com/relan/exfat/releases/download/v${PV}/${BP}.tar.gz"
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch b/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
-deleted file mode 100644
-index 109b7b145..000000000
---- a/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From b6e46e6a84e45f7bd954687be703987825a54c1e Mon Sep 17 00:00:00 2001
--From: Eric Koegel <eric.koegel@gmail.com>
--Date: Sun, 11 Jun 2017 11:38:26 +0300
--Subject: [PATCH] Fix linking to dbus-glib (bug #13633)
--
--With xfconf moving to GDBus nothing provides the libs for dbus-glib
--that xfce4-settings requires. This patch adds the libs back in until
--settings can be ported to GDBus.
--
--Signed-off-by: Sean Davis <smd.seandavis@gmail.com>
--
--Upstream-Status: Backport
-----
-- xfce4-settings-editor/Makefile.am | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
--diff --git a/xfce4-settings-editor/Makefile.am b/xfce4-settings-editor/Makefile.am
--index 5964366..c2c7c4b 100644
----- a/xfce4-settings-editor/Makefile.am
--+++ b/xfce4-settings-editor/Makefile.am
--@@ -28,6 +28,7 @@ xfce4_settings_editor_CFLAGS = \
-- 	$(LIBXFCE4UTIL_CFLAGS) \
-- 	$(LIBXFCE4UI_CFLAGS) \
-- 	$(XFCONF_CFLAGS) \
--+	$(DBUS_GLIB_CFLAGS) \
-- 	$(PLATFORM_CFLAGS)
-- 
-- xfce4_settings_editor_LDFLAGS = \
--@@ -39,7 +40,8 @@ xfce4_settings_editor_LDADD = \
-- 	$(DBUS_GLIB_LIBS) \
-- 	$(LIBXFCE4UTIL_LIBS) \
-- 	$(LIBXFCE4UI_LIBS) \
---	$(XFCONF_LIBS)
--+	$(XFCONF_LIBS) \
--+	$(DBUS_GLIB_LIBS)
-- 
-- desktopdir = $(datadir)/applications
-- desktop_in_files = xfce4-settings-editor.desktop.in
---- 
--2.14.3
--
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-similarity index 52%
-rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-index a4685aed3..e79b0ab0b 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-@@ -2,32 +2,23 @@ SUMMARY = "Xfce4 settings"
- SECTION = "x11/wm"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx11 xrandr libxcursor libxklavier upower"
-+DEPENDS = "exo exo-native garcon libxi virtual/libx11 xrandr libxcursor libxklavier upower"
- 
--inherit xfce xfce-git distro_features_check
-+inherit xfce distro_features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--# schnitzeltony git repo is the mainline repo
--# + datetime-setter - sent to mainline but strange response
--# + minor bugfixes - sent mainline but no response
--# + option to hide mousepointer for a specific (touch) input device - sent mainline but no response
--SRC_URI = " \
--    git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.4 \
-+SRC_URI += " \
-     file://0001-xsettings.xml-Set-default-themes.patch \
--    file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
- "
--SRCREV = "75d7c9b15e5ccce12b0864d3659ae9b6de96e245"
--S = "${WORKDIR}/git"
--PV = "4.12.4+git${SRCPV}"
-+SRC_URI[md5sum] = "ec0a3daa810bce57cf140317243eeb1d"
-+SRC_URI[sha256sum] = "ac11391eee22cb5fbffe3342916bcf9805f29c722aca825c2f57d98dc167a065"
- 
- EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
- 
- PACKAGECONFIG ??= " \
--    ${@bb.utils.contains('DISTRO_FEATURES','systemd','datetime-setter','',d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES','alsa','sound-setter', bb.utils.contains('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
- "
--PACKAGECONFIG[datetime-setter] = "--enable-datetime-settings, --disable-datetime-settings,, tzdata"
- PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
- PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
- 
--- 
-2.20.0
+IIRC, the tarball are regenerated on github so it has not been a source
+we can trust. Using the clone method is recommended in these cases.
+
+- armin
+> +
+>  DEPENDS = "fuse virtual/libc"
+>  RRECOMMENDS_${PN} = "util-linux-mount"
+>  
 
 
