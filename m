@@ -1,55 +1,47 @@
-Return-Path: <joshuagloe@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id E8A837ECB2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D69747ECB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 15:46:18 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id p74so19142311wme.4
+	Tue, 16 Jul 2019 15:58:55 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id r6so15022259qkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 08:46:20 -0700 (PDT)
+	Tue, 16 Jul 2019 08:58:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=V676cx9bQO/LRJaRdDxqE8dlEa4UpvnERxprJjhK2NQ=;
-	b=HTTT9FhVDrXQzf6zvJJKwuHWlV8bfNqI6jI/gJYH7OQRVvuxbYGfkWwn/tx1x28cpW
-	jTRFyFJq7vaL9/6AtextaiHJ6C0NMd6P4KEX4TfUZUSFJ9W7K/ZdEeUkSaLddDlYii6G
-	GYQdC/b8VpiN/61KkqFpWw9q+PmXrYnd3WZTbUIHTbJ1S0Zw7w3tf/K4nEZgiWOmrCh8
-	4CKjNtwIIArDkukG2tbG9VG3ZXt0zqWTWoCS8RCKPz7EhjyvEEbVJ9QJfdVGUngjyNVb
-	aKl6YvbTtXeW7JdMQaIIyDoYqMi64cIVnbAgjNcBzAHwBxjxVJj/OQzBoyrfhNj57Ija
-	Oiyw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=gBNj/ZqKNz6sjm4zTQJ0xt9IbuPpNzpolGRxTWJi+Zw=;
+	b=q/NInLWEVr8cZUZPO++g49oy0DMoRYkS/3sp0Bw/bmGTU/xSBpDOT3tqSHwNo5cj3d
+	xNXte9ePHFvgYpkPwLfgsXof+GM46Q5O20uPEvY9mlCPdjAfalmG0RPajFzq68V+AYsq
+	Xfc7QveqePqzowV0rCePMi4ebVkyRvIo6cJIBvsPS/DL5xL3y2MgaUqZJpV0VJcXCyvQ
+	hgiQdq0a1C/y1tD3QKVFsC40Dip+YXxD2gYLtVY9K+hEMj2EJ73X6zLmrsBvKsFCJeQV
+	i6Ir8nLA6iWgZe1Jgr0CdEscv/qY0CM+GGDsoZ00qA4DBGk9WdRpFbhFj512GRL/1llH
+	fCPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=V676cx9bQO/LRJaRdDxqE8dlEa4UpvnERxprJjhK2NQ=;
-	b=i7HE3xQmJJJX78AXQKCUEp4InX1jk0WnzawDTC5YOfDVKOuoPdw5Efd1Ci0yenp239
-	x6pUES/2bhFFuIAS8phjhhk/UdTYj5dmcWTH3MCa6IklKmDRJzPc6JcxlS7zacHdDPLD
-	gWxCWQAnHyugGbPO/EiR3TlT6dGqNCiBuXPd9fhxipzubNEPjfwhH6hetz7nyBHHeK3S
-	pkUrvCXZfPFZarlNBOYGIE+2fPOhO02Hfvzuv0brgE9t7+Ix89CXMNTdyXtG0y+h+WFl
-	mT4ub5TVefsxrWWZH9o0URdxFzYAxkrUsJWZATEwCGR5Patj6UA/CcdM79tlUhGP+asD
-	+VqQ==
-X-Gm-Message-State: APjAAAWd53YJrR0u1WdFZZLkVnlsM6e2nnH5LzVCnOtAOm9I/m9uC4Gf
-	dJ+QJojHDhPS2mMDGMvIskYsSmfDkf4=
-X-Google-Smtp-Source: APXvYqyrTzvLL/ZFtIXk/wf6243L21mffIHGalwePY2pxodbnfUdMT2o6+xmNu1f/XVkamZhAQ8Q1g==
-X-Received: by 2002:a1c:9c8a:: with SMTP id f132mr31423365wme.29.1563291979602;
-	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
-Received: from localhost.localdomain
-	(host165-120-157-205.range165-120.btcentralplus.com.
-	[165.120.157.205]) by smtp.gmail.com with ESMTPSA id
-	o6sm39537200wra.27.2019.07.16.08.46.18
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
-From: Joshua Lock <joshuagloe@gmail.com>
-X-Google-Original-From: Joshua Lock <jlock@vmware.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Jul 2019 16:45:46 +0100
-Message-Id: <20190716154546.3601-3-jlock@vmware.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190716154546.3601-1-jlock@vmware.com>
-References: <20190716154546.3601-1-jlock@vmware.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=gBNj/ZqKNz6sjm4zTQJ0xt9IbuPpNzpolGRxTWJi+Zw=;
+	b=YbIzsrK7lAMeT+oETEz2WhZk5bA9NwEsuZEUGpV8canx2DhDBJKbu/spZ6acZS2L6p
+	z54ynNprUeuHt8otoVRhB4gnxu9R/FotCBtKoQGzO4hhgZaAHooIb8M4LFQPh+0O+MsN
+	DDlMKegpbaCvR4e6UVRNeTWi5DpL49b004uuohAgcLZmwa4QeeKW3LYWpJjULGXA37yf
+	EIY/day2QLvOp1csbwUbc0Ia3J7wrkN6cFNEr4q+r7dfzVsKMeVEkPh0IWLGeRkdGJNX
+	PBAZGPQ+i10Ur9LhpJw0idB5hSQS0sEUjOm6rF9wt41/nLOt6fL8hFxMg+PZbuSjWmAi
+	6Ajw==
+X-Gm-Message-State: APjAAAX97nWK93ye/kE4LdmP7Vxm+fDyr9qlfdoPEOs4Ub0D3TksNVUa
+	8wb8ZQ3wfvxJJ9drmNRnCrL6jFsTgx/h0mr31Js=
+X-Google-Smtp-Source: APXvYqwZ6VXOEEE9mbXpKliEsQ3jI0s+8U7sq08ar2N6iDv552tc+6xHLG2fyIOPbcQqS38nPZvEXVhnUegdCDH8tVI=
+X-Received: by 2002:a37:7083:: with SMTP id l125mr21343029qkc.71.1563292736355;
+	Tue, 16 Jul 2019 08:58:56 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Joshua Lock <jlock@vmware.com>
-Subject: [meta-python][PATCH 3/3] python-dateutil: add native BBCLASSEXTEND
+References: <20190715144901.25305-1-luca@lucaceresoli.net>
+	<dcbe6593-85d8-c238-3e55-6e3a027a8cf9@gmail.com>
+In-Reply-To: <dcbe6593-85d8-c238-3e55-6e3a027a8cf9@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 Jul 2019 08:58:30 -0700
+Message-ID: <CAMKF1soS_atifnv9YY8sHL6G2zaB_eUb1eCHY7X2mBLavBvtZA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH 1/4] fuse-exfat: moved to github
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,25 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 15:46:19 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 16 Jul 2019 15:58:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Joshua Lock <jlock@vmware.com>
----
- meta-python/recipes-devtools/python/python-dateutil.inc | 2 ++
- 1 file changed, 2 insertions(+)
+On Tue, Jul 16, 2019 at 7:54 AM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 7/15/19 7:48 AM, Luca Ceresoli wrote:
+> > fuse-exfat has been moved long ago to github. Update URLs.
+> >
+> > Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
+> > ---
+> >  .../recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb      | 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> > index 18fc9cd6f13d..a70653f607f6 100644
+> > --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> > +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+> > @@ -3,12 +3,12 @@ DESCRIPTION = "fuse-exfat is a read and write driver implementing the \
+> >  extended file allocation table as a filesystem in userspace. A mounthelper \
+> >  is provided under the name mount.exfat-fuse. \
+> >  "
+> > -HOMEPAGE = "http://code.google.com/p/exfat/"
+> > +HOMEPAGE = "https://github.com/relan/exfat"
+> >  SECTION = "universe/otherosfs"
+> >  LICENSE = "GPLv2+"
+> >  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> > -SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
+> > -"
+> > +SRC_URI = "https://github.com/relan/exfat/releases/download/v${PV}/${BP}.tar.gz"
+>
+> IIRC, the tarball are regenerated on github so it has not been a source
+> we can trust. Using the clone method is recommended in these cases.
+>
 
-diff --git a/meta-python/recipes-devtools/python/python-dateutil.inc b/meta-python/recipes-devtools/python/python-dateutil.inc
-index e230f15dd..8cc2373cd 100644
---- a/meta-python/recipes-devtools/python/python-dateutil.inc
-+++ b/meta-python/recipes-devtools/python/python-dateutil.inc
-@@ -21,3 +21,5 @@ RDEPENDS_${PN}_class-target = "\
-     ${PYTHON_PN}-six \
-     ${PYTHON_PN}-stringold \
- "
-+
-+BBCLASSEXTEND = "native"
--- 
-2.21.0
+Thats for general archives, not for release artifacts.
 
+> - armin
+> > +
+> >  DEPENDS = "fuse virtual/libc"
+> >  RRECOMMENDS_${PN} = "util-linux-mount"
+> >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
