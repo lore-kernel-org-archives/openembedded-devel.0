@@ -1,53 +1,56 @@
 Return-Path: <joshuagloe@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1126E7ECB2
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 7401A7ECB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2019 15:46:17 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id 31so21540368wrm.1
+	Tue, 16 Jul 2019 15:46:18 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id p74so19142284wme.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 16 Jul 2019 08:46:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=wR3yBGW+DNC4HKmZBPJ7XqXfwtr58/H7lOMIHE3x/f8=;
-	b=CNTWMVgKhQvxciilragmjNb1Vi7nhsFE+D509lo/83grqah617Os2ELWd7UpDoiCBf
-	kgIAMaUJO/2f0s7d6i9oPV0i5nNqAANxGcUlImQHBOsuaib1XSlxkmgnxJozkXMsSrpc
-	gs5iVS46MhZJPaQCoedWVcEh1WEk77yjljfV3jH25n6G5rJ+A/jX7AvDO/FL7wozGwzm
-	380lXUblUCmN+VaQiOnsu2rAA4Qyf6HPnUj4snFgvrZVcL2bBnrJMaFELERqWgorjnQU
-	D3yI7GFtLzB2+RAJ90ZLTiYUlfr0JwAQL/jfyAkYUMlAMqaElWkvhf2hc4Wic63NbCem
-	Z5lQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=DAZBOfHi8WFk9AOCkWLPqQmwVk2JeA7wIobf8nrutRc=;
+	b=N9xhFWXgGqeAgea4qH2tbqzuJx632xw8TimRrxan46ttgi304IsX1DGqLYlzTslO8e
+	foiaC28qx3UZYZrjg5xvuoogUc1QBc0pzTE9D107vrNWs+vtxWlLzOEEe+ZlSclqw4Ql
+	zmo/bvWLYU7r6N/FqzvQ8/wtCKXGNuGrvP05D4GerfAP7qWUmBIKgL5HomEmbeTYunlD
+	7c+9H1vNnJAqGCAKOs7Lk/OSp4dvp5V114vh740oamywVyfUr2mwshJeqi10okKLPTUB
+	Se8tNrt0TleJwIKBELt9yjqzwL3OTm+Kp2HtCA6Z/cE+28arAi8ymoF6Kj5h9XPeATV3
+	jYJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=wR3yBGW+DNC4HKmZBPJ7XqXfwtr58/H7lOMIHE3x/f8=;
-	b=e63rv2TzD93eg6jBxdv9Daht1CQIHmsdyYwG5UiWyPq1xjNX0oKEu9RQwdYfAsxSSH
-	TlRSHxN4FCBcuVFGQf0Vr2d0DvrOsTKn9z06eMpJhpfjHtu5V/WpdtJ2G7ymYHf1/KOa
-	lry22jtXa+/44eMjamtEHgKcaCsLoG9sPkb30oCSumcz0WmhlrEvoxLfcoYY8vILM/yQ
-	9L2zhVFfTYUS6H/wWkXVDt7hYgEAvPnmMeM3YiwgJAimKIf3cWGnf8CNimzQfFi3wv8V
-	RbpTKtAzhxM+20NuSR7e7BP584LGj+N5AL8UWFeu1AVEX8MJOybJ5EW0FZr7YqcenrpL
-	CLVQ==
-X-Gm-Message-State: APjAAAX3m6E3jZWm0fFJlfAUyLiEOAz5im39JJYGX96Cmn3BmQHvFnlD
-	9nYSIc3hyIuLYyoAwHSuAp5QZuvs1Og=
-X-Google-Smtp-Source: APXvYqze7jEMOLCdEkRT8Ihwo61n2ciE7aljRoDo8k4RbBegbQ2po47rOTE/qJMa7kXdsR9/jHlFAA==
-X-Received: by 2002:adf:f601:: with SMTP id t1mr36915695wrp.337.1563291978181; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=DAZBOfHi8WFk9AOCkWLPqQmwVk2JeA7wIobf8nrutRc=;
+	b=XOuVbnT8YYna4/nyF0yZt6unRqQB+oncXGiy7im3W2sC/mevYJdUH6zdaE+0tgeKZn
+	ujDkFelb6Y8L3Pc05X8c4reozUJrS56h2M9Vkv1JNbj3FJhDAvQJ2e5xKD658Oj2z/r/
+	XGM+s9msGDWb3ROcW0fRwHovUIXaQ9H67liZ2lNNM2VEB+ke4Ug3xgeTn0uirWCQ4kzo
+	VX9poSwwoPnjoxWEhBiQaU85aWhovJ8OlerSWovZFB5z+okmWISrlhARaFHpUNkqzoTW
+	rHmQ/F7rwIs6NtXyQ+JTLIVsRcJMq4vlbrLFLwlilxr97EhwF2P2rifvYoeNPx3hVhpf
+	TKrA==
+X-Gm-Message-State: APjAAAV3DblsDMaJs8ti9IECRcY4jz51x8WqTbm8mDDV4x/ntF3NoPNl
+	kIr0N/ZAH+txUssavKqP/50vVDm1/gs=
+X-Google-Smtp-Source: APXvYqwZj6Asl7ZK9f8dU95espR17Mjc75F9ZyrhYxM6d1TL1erbZ/tbwDv3mGjC+qav+tI/T4k2aQ==
+X-Received: by 2002:a05:600c:2503:: with SMTP id
+	d3mr32249982wma.41.1563291978951; 
 	Tue, 16 Jul 2019 08:46:18 -0700 (PDT)
 Received: from localhost.localdomain
 	(host165-120-157-205.range165-120.btcentralplus.com.
 	[165.120.157.205]) by smtp.gmail.com with ESMTPSA id
-	o6sm39537200wra.27.2019.07.16.08.46.17
+	o6sm39537200wra.27.2019.07.16.08.46.18
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Tue, 16 Jul 2019 08:46:17 -0700 (PDT)
+	Tue, 16 Jul 2019 08:46:18 -0700 (PDT)
 From: Joshua Lock <joshuagloe@gmail.com>
 X-Google-Original-From: Joshua Lock <jlock@vmware.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Jul 2019 16:45:44 +0100
-Message-Id: <20190716154546.3601-1-jlock@vmware.com>
+Date: Tue, 16 Jul 2019 16:45:45 +0100
+Message-Id: <20190716154546.3601-2-jlock@vmware.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190716154546.3601-1-jlock@vmware.com>
+References: <20190716154546.3601-1-jlock@vmware.com>
 MIME-Version: 1.0
 Cc: Joshua Lock <jlock@vmware.com>
-Subject: [meta-python][PATCH 1/3] python-cffi: add missing RDEPENDS on pycparser
+Subject: [meta-python][PATCH 2/3] python-attrs: add native BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,26 +66,21 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 16 Jul 2019 15:46:18 -0000
 Content-Transfer-Encoding: 8bit
 
-pycparser is a dependency as listed in the installation docs:
-https://cffi.readthedocs.io/en/release-1.12/installation.html
-
 Signed-off-by: Joshua Lock <jlock@vmware.com>
 ---
- meta-python/recipes-devtools/python/python-cffi.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python-attrs.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-index d86306bac..818d23815 100644
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ b/meta-python/recipes-devtools/python/python-cffi.inc
-@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "041c81822e9f84b1d9c401182e174996f0bae9991f33725d059b771744
- RDEPENDS_${PN}_class-target = " \
+diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
+index 1f767ba19..bd0f7ee2c 100644
+--- a/meta-python/recipes-devtools/python/python-attrs.inc
++++ b/meta-python/recipes-devtools/python/python-attrs.inc
+@@ -12,3 +12,5 @@ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-crypt \
      ${PYTHON_PN}-ctypes \
-     ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-pycparser \
-     ${PYTHON_PN}-shell \
  "
- 
++
++BBCLASSEXTEND = "native"
 -- 
 2.21.0
 
