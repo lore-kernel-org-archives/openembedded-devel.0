@@ -1,24 +1,49 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C805D6C397
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
+	[209.85.208.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FD036D6F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2019 08:05:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6H85CMZ014155
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 17 Jul 2019 13:05:01 +0000 (UTC)
+Received: by mail-ed1-f48.google.com with SMTP id k21so25547648edq.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2019 01:05:28 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 17 Jul 2019 01:05:05 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Jul 2019 16:05:04 +0800
-Message-ID: <1563350704-152367-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 17 Jul 2019 06:05:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Lr4W9eOFbXkMnKBJ+HN+isnlHRZT3IIkB0mdXr9ofQA=;
+	b=YSwoodKbottZ4bzFVxzCvZpXzNi5YYvggwFO4uQTEe25Ti4vfTMilVFUM0V3k7m73J
+	PNcSygyzmHPwDOXQyFRcjsKzTWrfjU1oQ0qSwhH4a/7qeETUXwmEyWE6KQqLpngVDOhI
+	/KmzxpNZz2NGfLTPnlnMVmOPNzBo22mUZWGHHEY2m2zbMyWewEXFIybU2oEI2O7x8Quh
+	dYfZXv6zLqDodIDUY4O3bEG0YPFPG8oDVTgtZutU5nhv/RGrX+UIQrwXgTgXyLvc+tOz
+	dwdZwS9ovbwL9+3ZQvGCk2PSthz9VyE5GXPgAS740n6kqtvONqVMJO6JnHw5BbrgfoXh
+	jqOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Lr4W9eOFbXkMnKBJ+HN+isnlHRZT3IIkB0mdXr9ofQA=;
+	b=AjgBE8dm4XPcCbnDDrIP2K3pmslfa1mOFaDBaxkxmXgP6TIy29E4UOoKnVFj1NA7kY
+	wKjDn0o/CaAd9SSTZbX4QiVm81c4mg/b2RTIEsLWgVj+RqVoX7GgW5suPVsTTP0C/apq
+	HDjw/PqXltFGYvU3YvB2l9O1is2AU1A3f6wf4Z3yTBgs+zpWxAQFY4Ujm8f1+jVBQb5x
+	9/7IVnYwYSgBTPc7F8a2YaTt7MPQoGsY3OA2o/hO1EUmNsODvOW3olEsz9VQYjcoUVYm
+	/fa9cZBZH755Ut2zG9AiOELjNY2j8EPO6enRMGZxxjqjF2qXgPe6eVzrlyOWKRnG+ltK
+	4GJQ==
+X-Gm-Message-State: APjAAAUXQ4E9Vc4SIkIkk3yZKmihUVtw+eQlur5t2+DLySLgikroHLSY
+	V93zn1m/inZrQa5nEajx+zqNWXHd4dWY64TD+x4=
+X-Google-Smtp-Source: APXvYqzfAVnj6xpeZLHG6m/CTKLqmWPCu008MhVoz1RspRuL32eou8CqkkmmGURbSQ7oTpL6GH99DAKcu6wIrhFnO2I=
+X-Received: by 2002:a17:906:e95:: with SMTP id
+	p21mr30387163ejf.205.1563368702185; 
+	Wed, 17 Jul 2019 06:05:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] libtevent: fix do_package_qa issue
+References: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
+	<a853162aa82bf2c1723190f00fc6ad608ab21fc8.1561696450.git.timothy.t.orling@linux.intel.com>
+In-Reply-To: <a853162aa82bf2c1723190f00fc6ad608ab21fc8.1561696450.git.timothy.t.orling@linux.intel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 17 Jul 2019 15:04:57 +0200
+Message-ID: <CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
+To: Tim Orling <timothy.t.orling@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/9] libdbi-perl: fix dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,30 +56,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2019 08:05:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 17 Jul 2019 13:05:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Changqing Li <changqing.li@windriver.com>
+This causes libdbi-perl-native to depend on target perl again, why did you
+revert the fix from:
+http://git.openembedded.org/meta-openembedded/commit/?id=eb868d056d15a56596cbf6ed3a4b66b054f2d563
+?
 
-fix below error:
-ERROR: lib32-libtevent-0.10.0-r0 do_package_qa: QA Issue: non -dev/-dbg/nativesdk- package contains symlink .so: lib32-python3-tevent path '/work/core2-32-wrsmllib32-linux/lib32-libtevent/0.10.0-r0/packages-split/lib32-python3-tevent/usr/lib/python3.7/site-packages/_tevent.so' [dev-so]
+ === Comparing signatures for task do_populate_sysroot.sigdata between
+qemux86 and qemux86copy ===
+ERROR: libdbi-perl-native different signature for task
+do_populate_sysroot.sigdata between qemux86 and qemux86copy
+NOTE: Starting bitbake server...
+NOTE: Started PRServer with DBfile: build/cache/prserv.sqlite3, IP:
+127.0.0.1, PORT: 38307, PID: 13970
+Hash for dependent task perl/perl_5.30.0.bb.do_populate_sysroot
+changed from e3a38726fc849347a14b574ef52a59f5578632accbf70259a6ffd09fea54dc4e
+to de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
+Unable to find matching sigdata for
+oe-core/meta/recipes-devtools/perl/perl_5.30.0.bb.do_populate_sysroot
+with hash de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-networking/recipes-support/libtevent/libtevent_0.10.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ERROR: 1 errors found in
+sstate-diff/1563367471/signatures.qemux86copy.do_populate_sysroot.sigdata.log
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.10.0.bb b/meta-networking/recipes-support/libtevent/libtevent_0.10.0.bb
-index 25ad7c1..a581d3a 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.10.0.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.10.0.bb
-@@ -55,4 +55,4 @@ RPROVIDES_${PN}-dbg += "python3-tevent-dbg"
- 
- FILES_python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
- 
--INSANE_SKIP_python3-tevent = "dev-so"
-+INSANE_SKIP_${MLPREFIX}python3-tevent = "dev-so"
--- 
-2.7.4
 
+
+On Fri, Jun 28, 2019 at 7:00 AM Tim Orling <timothy.t.orling@linux.intel.com>
+wrote:
+
+> * Fix RDEPENDS, drop class-target (dependencies are the same for native)
+> * Reorganize recipe to best practices
+> * Add ptest dependencies
+>
+> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+> ---
+>  .../perl/libdbi-perl_1.642.bb                 | 38 +++++++++++++++----
+>  1 file changed, 31 insertions(+), 7 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+> b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+> index ff4a9d0610..77991bd158 100644
+> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+> @@ -7,13 +7,6 @@ database interface independent of the actual database
+> being used. \
+>  HOMEPAGE = "http://search.cpan.org/dist/DBI/"
+>  SECTION = "libs"
+>  LICENSE = "Artistic-1.0 | GPL-1.0+"
+> -RDEPENDS_${PN}_class-target = " \
+> -    perl-module-carp \
+> -    perl-module-exporter \
+> -    perl-module-exporter-heavy \
+> -    perl-module-dynaloader \
+> -"
+> -
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
+>
+>  SRC_URI = "
+> http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
+> @@ -34,4 +27,35 @@ do_install_prepend() {
+>         rm -rf ${B}/t/z*.t
+>  }
+>
+> +RDEPENDS_${PN} = " \
+> +    perl-module-carp \
+> +    perl-module-exporter \
+> +    perl-module-exporter-heavy \
+> +    perl-module-dynaloader \
+> +    perl-module-io-dir \
+> +    perl-module-scalar-util \
+> +    perl-module-universal \
+> +"
+> +
+> +RDEPENDS_${PN}-ptest = " \
+> +    ${PN} \
+> +    perl-module-b \
+> +    perl-module-benchmark \
+> +    perl-module-cwd \
+> +    perl-module-data-dumper \
+> +    perl-module-encode \
+> +    perl-module-encode-byte \
+> +    perl-module-encode-encoding \
+> +    perl-module-file-copy \
+> +    perl-module-file-path \
+> +    perl-module-lib \
+> +    perl-module-perlio \
+> +    perl-module-perlio-scalar \
+> +    perl-module-perlio-via \
+> +    perl-module-sdbm-file \
+> +    perl-module-storable \
+> +    perl-module-test-more \
+> +    perl-module-utf8 \
+> +    "
+> +
+>  BBCLASSEXTEND = "native"
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
