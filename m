@@ -1,23 +1,51 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EAD706BF37
+Return-Path: <paolo.valente@linaro.org>
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+	[209.85.221.50])
+	by mail.openembedded.org (Postfix) with ESMTP id DCBC67EE52
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 10:03:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6IA3Pvu015158
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 18 Jul 2019 11:53:21 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id x1so13365736wrr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 03:03:26 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 18 Jul 2019 03:03:25 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Jul 2019 06:03:22 -0400
-Message-ID: <20190718100322.88945-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Thu, 18 Jul 2019 04:53:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6LD5Bji91zXXyI2GDy50qlPS2Vvyf9+V+RZRzFV8olg=;
+	b=mYcRWVvyBGAX82lyaoyWlawZSufYBhuCVDBQRhJ8uXaVBp7T4RQTzd7RQolZCVIxrE
+	tNl2DAkznjReixFCFooY6NuwnlK7GdMbZqHngffJsKedaReIGF39qjmUoRTEqP21YOz/
+	lFAVgorrHqdvxmhPw/btzf3UXnHrT+1uBo8QczFrU3gxVCWBTkXm174b/mHLBO/xDkhT
+	VtFMOg1Jv6oCMT7nTOQiIes3zCa07aJ04qKqzjJ9YmrlcKKc6SWCPNxaoP0xPM+IHxpb
+	kAtpzTNJI6QiqC04J8+Yt8LOa/qAMAFiIlhDTg1t8YKvX5JACoHdrMHtYLBnTPgAZlbI
+	4c0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6LD5Bji91zXXyI2GDy50qlPS2Vvyf9+V+RZRzFV8olg=;
+	b=eoKXpKfexXtIH7StBBA2Inx3eO/QUefx/zxHV9Jsj2/s+Qmo77y25EH2KT1PpDh0ck
+	jNttKbL3pQ6dKVexaK3SY/38TRzb5dhKxKWog5RqRzFL7lW++MYRJQ5oj69dOWdwRY9F
+	PAaSezD3+kwPVOHxj+f1HqtN+PHijuruJ7VL00SH0kBAz8ExQgKGWt+tkIuLE9M7+iOW
+	gOe3yvqgi642yvFtzeBNWPUYGXu6fX/HVpRU23EzZHYApWflxmUTPsa5n7nhdYUVZ9kV
+	mclkdwuwDNxo7YmQSZuqeyB+rHnHszSiXQqEK8/JTA6dILG6LKQBf1lMcv8EKbAnFGBd
+	xx8A==
+X-Gm-Message-State: APjAAAVVVkssWoRSImCHerFtgn0y8gS8zxpPwyFtWA2OrSR/dKz6+jR0
+	FT7aYAKuFa6BLVRoor6iUBn01TvHKuk=
+X-Google-Smtp-Source: APXvYqyFL7AMvkexBkqQhWIrI+RI8OKvy8ylIukhPv6bh/uJMYWk5XrJW3Rzrcv6MYPk8QpTRpTv9w==
+X-Received: by 2002:adf:ea45:: with SMTP id j5mr20585529wrn.11.1563450802507; 
+	Thu, 18 Jul 2019 04:53:22 -0700 (PDT)
+Received: from localhost.localdomain (146-241-85-178.dyn.eolo.it.
+	[146.241.85.178]) by smtp.gmail.com with ESMTPSA id
+	t6sm26764962wmb.29.2019.07.18.04.53.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 Jul 2019 04:53:22 -0700 (PDT)
+From: Paolo Valente <paolo.valente@linaro.org>
+To: raj.khem@gmail.com
+Date: Thu, 18 Jul 2019 13:53:11 +0200
+Message-Id: <20190718115311.36772-1-paolo.valente@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] xfce4-verve-plugin: 1.1.0 -> 2.0.0
+Cc: ulf.hansson@linaro.org, openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] s-suite: push SRCREV to version 3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,38 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jul 2019 10:03:25 -0000
+X-List-Received-Date: Thu, 18 Jul 2019 11:53:22 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
-
-xfce4-verve-plugin 2.0.0 is first GTK+ 3 release.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
 ---
- ...e4-verve-plugin_1.1.0.bb => xfce4-verve-plugin_2.0.0.bb} | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-panel-plugins/verve/{xfce4-verve-plugin_1.1.0.bb => xfce4-verve-plugin_2.0.0.bb} (62%)
+ meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.0.bb
-similarity index 62%
-rename from meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb
-rename to meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.0.bb
-index 57951608f..36e04a438 100644
---- a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.0.bb
-@@ -5,7 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 741142c50..8c49b4674 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
  
- inherit xfce-panel-plugin
+-SRCREV = "8d22ab8a4cc1484622c47ac9c5944fb9a61a5c0f"
+-PV = "3.4"
++SRCREV = "3b9eef2259a70f412ab02fbe6b3a4d313d09c38a"
++PV = "3.5"
+ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
  
--DEPENDS += "dbus-glib-native"
--
--SRC_URI[md5sum] = "ddd0190ae56f6117dbcf9ff2bf5a8cbf"
--SRC_URI[sha256sum] = "a3196f818c7ad57d19cd6581e168fd2b9f96de070246aea70c35ce2e5f9d9c84"
-+SRC_URI[md5sum] = "94429b1be9d66ba9b31e4aafb726a8c7"
-+SRC_URI[sha256sum] = "9e6510ba6c48fcfc60d1c6ab14613dd7b6ff095cabbf4746f82bf788d8ab4cd2"
+ S = "${WORKDIR}/git"
 -- 
-2.20.0
+2.20.1
 
 
