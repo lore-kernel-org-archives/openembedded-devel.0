@@ -1,30 +1,49 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AAC07EEA8
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C47E7EF3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 02:25:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,276,1559491200"; d="scan'208";a="71678589"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Jul 2019 10:25:01 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 35F724CDDD42
+	Thu, 18 Jul 2019 03:06:43 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id z28so25782585ljn.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 10:25:01 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 18 Jul 2019 10:25:06 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Jul 2019 10:24:16 +0800
-Message-ID: <20190718022416.12700-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 35F724CDDD42.A87F6
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] uftrace: upgrade 0.9.2 -> 0.9.3
+	Wed, 17 Jul 2019 20:06:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=w8aW0P6r0klVW1SNHnTrp4DRl9m4nQ4f6WCanR4c+yM=;
+	b=ds0a7E7Vig8psvYhkwO+gq+pS8wZTY43V07bHn7eojaT2NpsKMjDY9qxaNyjMVSM1y
+	BqPHKcYorbJzUTIsrB+Zvyj7h0fMOKNSjtLPeSoo+N/2idE6aqX4EEaZx/vSUx3x1ti2
+	KA6K37uGB3MA1JPUt48dUT8JAz8v3rAxKqtBwXjsX9MKVhd4pupaS2bkSl0kbrov8wTx
+	MAl1T8GcpQT9xisXE4nbN30bF/J+ylORbnBKztwrRg4eANRxnzptAzJb5TXtaQG6eRXu
+	KQbsS7WGm+bzFkHeUoajeohdYUcuwr/f5di0hX7ECteoLVEFHvEbn/NivDVmItL9WKci
+	JhSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=w8aW0P6r0klVW1SNHnTrp4DRl9m4nQ4f6WCanR4c+yM=;
+	b=WRjGZ6n70qurvt81BBiyXqEwZxBTozN6bkJgtg3Gk5kjpOXF/2vZXtQnMcTFOrsJip
+	3I7flj070fT4+pIqfhPadErVPUMqz80iQJnG2VT3cRozd3soX7WfWzSNYtD2X3xkMtH5
+	oMHBdtq9DJbfcRx55QVmS6PiFp7g9+7ukV+Fmt5yviuG8jlqAbBB8Q9bfi1qIEcPS6ms
+	YGd7Gzz3xK8nqWFVU7pHNzhjKN4FccImxVXAc0kvmXW5CGIXrKO0/FgjXvdE9OvfTAS2
+	v5nZE7cTqj9ExTNEpEOhd/fstsQz4GZw3N2usmb2wxnbIA6qtWXW+tc94fFg6ZQVpBfs
+	a/Sw==
+X-Gm-Message-State: APjAAAWamtJuGKQbHcNGp+u89T7Ft0L/uz26Lu8rKarqDy3yIjzjGN1G
+	HwSe9AJEVJKX/OiDms76vjrRclA1
+X-Google-Smtp-Source: APXvYqwDiQ0KxVXOdsVeqdoKzQKUGF96h4HmvGKm8XIQPCr5EpLj8JFVlY966et1RKNaSwaBkWlFnQ==
+X-Received: by 2002:a2e:9dd7:: with SMTP id x23mr23521776ljj.160.1563419203589;
+	Wed, 17 Jul 2019 20:06:43 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	m25sm3773780lfp.97.2019.07.17.20.06.42
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 17 Jul 2019 20:06:43 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Jul 2019 05:06:38 +0200
+Message-Id: <20190718030638.20816-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking] dhcpcd: update to 7.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jul 2019 02:25:02 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Jul 2019 03:06:43 -0000
 
--Upgrade from uftrace_0.9.2.bb to uftrace_0.9.3.bb.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-devtools/uftrace/{uftrace_0.9.2.bb => uftrace_0.9.3.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/uftrace/{uftrace_0.9.2.bb => uftrace_0.9.3.bb} (94%)
+ .../dhcpcd/{dhcpcd_7.2.2.bb => dhcpcd_7.2.3.bb}             | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.2.2.bb => dhcpcd_7.2.3.bb} (80%)
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.2.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.3.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/uftrace/uftrace_0.9.2.bb
-rename to meta-oe/recipes-devtools/uftrace/uftrace_0.9.3.bb
-index 4f40168..dba607c 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.9.2.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.9.3.bb
-@@ -10,8 +10,8 @@ DEPENDS_append_libc-musl = " argp-standalone"
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
+similarity index 80%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
+index 3cd13884d..161810a2c 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.2.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
+@@ -7,10 +7,12 @@ HOMEPAGE = "http://roy.marples.name/projects/dhcpcd/"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
  
- inherit autotools
++UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
++
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+ SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
+-SRC_URI[md5sum] = "2f17034432ea10415ee84a97ef131128"
+-SRC_URI[sha256sum] = "3db7ff18cba9274da1d2176fb3c7cbe23926a8e58d5c8e244ad55c62d38ba09e"
++SRC_URI[md5sum] = "b7aade2cc47afa6d645f798103365402"
++SRC_URI[sha256sum] = "74ab38177548abe968c2abacefffdd97b573acaedd4f77b6c0a54ae38f68566e"
  
--# v0.9.2
--SRCREV = "66fc1fb973f4a44aecd216541405ffe05196f11e"
-+# v0.9.3
-+SRCREV = "e77780e7524c0a97f25313b205837191bbe9712a"
- SRC_URI = "git://github.com/namhyung/${BPN} \
-            "
- S = "${WORKDIR}/git"
+ inherit pkgconfig autotools-brokensep
+ 
 -- 
-2.7.4
-
-
+2.17.1
 
 
