@@ -1,51 +1,23 @@
-Return-Path: <paolo.valente@linaro.org>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id DCBC67EE52
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0946D7F034
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 11:53:21 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id x1so13365736wrr.9
+	Thu, 18 Jul 2019 20:27:05 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6IKR6QB020548
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 04:53:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6LD5Bji91zXXyI2GDy50qlPS2Vvyf9+V+RZRzFV8olg=;
-	b=mYcRWVvyBGAX82lyaoyWlawZSufYBhuCVDBQRhJ8uXaVBp7T4RQTzd7RQolZCVIxrE
-	tNl2DAkznjReixFCFooY6NuwnlK7GdMbZqHngffJsKedaReIGF39qjmUoRTEqP21YOz/
-	lFAVgorrHqdvxmhPw/btzf3UXnHrT+1uBo8QczFrU3gxVCWBTkXm174b/mHLBO/xDkhT
-	VtFMOg1Jv6oCMT7nTOQiIes3zCa07aJ04qKqzjJ9YmrlcKKc6SWCPNxaoP0xPM+IHxpb
-	kAtpzTNJI6QiqC04J8+Yt8LOa/qAMAFiIlhDTg1t8YKvX5JACoHdrMHtYLBnTPgAZlbI
-	4c0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6LD5Bji91zXXyI2GDy50qlPS2Vvyf9+V+RZRzFV8olg=;
-	b=eoKXpKfexXtIH7StBBA2Inx3eO/QUefx/zxHV9Jsj2/s+Qmo77y25EH2KT1PpDh0ck
-	jNttKbL3pQ6dKVexaK3SY/38TRzb5dhKxKWog5RqRzFL7lW++MYRJQ5oj69dOWdwRY9F
-	PAaSezD3+kwPVOHxj+f1HqtN+PHijuruJ7VL00SH0kBAz8ExQgKGWt+tkIuLE9M7+iOW
-	gOe3yvqgi642yvFtzeBNWPUYGXu6fX/HVpRU23EzZHYApWflxmUTPsa5n7nhdYUVZ9kV
-	mclkdwuwDNxo7YmQSZuqeyB+rHnHszSiXQqEK8/JTA6dILG6LKQBf1lMcv8EKbAnFGBd
-	xx8A==
-X-Gm-Message-State: APjAAAVVVkssWoRSImCHerFtgn0y8gS8zxpPwyFtWA2OrSR/dKz6+jR0
-	FT7aYAKuFa6BLVRoor6iUBn01TvHKuk=
-X-Google-Smtp-Source: APXvYqyFL7AMvkexBkqQhWIrI+RI8OKvy8ylIukhPv6bh/uJMYWk5XrJW3Rzrcv6MYPk8QpTRpTv9w==
-X-Received: by 2002:adf:ea45:: with SMTP id j5mr20585529wrn.11.1563450802507; 
-	Thu, 18 Jul 2019 04:53:22 -0700 (PDT)
-Received: from localhost.localdomain (146-241-85-178.dyn.eolo.it.
-	[146.241.85.178]) by smtp.gmail.com with ESMTPSA id
-	t6sm26764962wmb.29.2019.07.18.04.53.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Jul 2019 04:53:22 -0700 (PDT)
-From: Paolo Valente <paolo.valente@linaro.org>
-To: raj.khem@gmail.com
-Date: Thu, 18 Jul 2019 13:53:11 +0200
-Message-Id: <20190718115311.36772-1-paolo.valente@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	Thu, 18 Jul 2019 13:27:06 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 18 Jul 2019 13:26:53 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Jul 2019 13:26:53 -0700
+Message-ID: <20190718202653.209093-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
 MIME-Version: 1.0
-Cc: ulf.hansson@linaro.org, openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] s-suite: push SRCREV to version 3.5
+Subject: [meta-oe][PATCH 1/1] php: remove host specific info from header file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +30,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jul 2019 11:53:22 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Jul 2019 20:27:06 -0000
+Content-Type: text/plain
 
-Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
+Import patch from Debian.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../php/php/debian-php-fixheader.patch             | 31 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.3.7.bb          |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100755 meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
 
-diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-index 741142c50..8c49b4674 100644
---- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-+++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-@@ -2,8 +2,8 @@ SUMMARY = "Small collection of benchmarks for storage I/O"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b529aaa6a0c50f15d29f89609b5c22f3"
- 
--SRCREV = "8d22ab8a4cc1484622c47ac9c5944fb9a61a5c0f"
--PV = "3.4"
-+SRCREV = "3b9eef2259a70f412ab02fbe6b3a4d313d09c38a"
-+PV = "3.5"
- SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
+new file mode 100755
+index 0000000..21050f7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
+@@ -0,0 +1,31 @@
++php: remove host specific info from header file
++
++https://sources.debian.org/data/main/p/php7.3/7.3.6-1/debian/patches/
++        0036-php-5.4.9-fixheader.patch
++
++Upstream-Status: Inappropriate [not author]
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++---
++From: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
++Date: Sat, 2 May 2015 10:26:56 +0200
++Subject: php-5.4.9-fixheader
++
++Make generated php_config.h constant across rebuilds.
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 433d7e6..41893d7 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1357,7 +1357,7 @@ PHP_BUILD_DATE=`date -u +%Y-%m-%d`
++ fi
++ AC_DEFINE_UNQUOTED(PHP_BUILD_DATE,"$PHP_BUILD_DATE",[PHP build date])
++ 
++-PHP_UNAME=`uname -a | xargs`
+++PHP_UNAME=`uname | xargs`
++ AC_DEFINE_UNQUOTED(PHP_UNAME,"$PHP_UNAME",[uname -a output])
++ PHP_OS=`uname | xargs`
++ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS",[uname output])
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.7.bb b/meta-oe/recipes-devtools/php/php_7.3.7.bb
+index 1028cf1..72e4c26 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.7.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.7.bb
+@@ -6,6 +6,7 @@ SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+             file://0048-Use-pkg-config-for-FreeType2-detection.patch \
+             file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
+             file://0001-Use-pkg-config-for-libxml2-detection.patch \
++            file://debian-php-fixheader.patch \
+            "
+ SRC_URI_append_class-target = " \
+                                 file://pear-makefile.patch \
 -- 
-2.20.1
+2.7.4
 
 
