@@ -1,102 +1,22 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 472037F0F5
+Return-Path: <Yongxin.Liu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BFBCE7EFFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 00:06:22 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id 4so7714887pld.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2019 17:06:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=FZ11czqNrMy18o9soY6ewtvstVhjQS2+MChOPrhAxbc=;
-	b=XmGnfqorD4yEzq74OLWlGZBQmrlmJg8t23mgeRpjQCOHqb72DexyBaEB3BhGvJuvrY
-	ZU0ArCmwGlMOhCDREaz1InDWAls3AoucPIT7a9hiPsWIyW6HPIhjOyENDhA7B3+4qT7e
-	kN6XEH2r8DhKElxpT5s27ZHKdAvqo1o6lenX4CKojiFEDQRGXmIlkMrHL4O4RoDEfA19
-	AEhkfi9HRKnDYiBNN04B4WxLrf1YG8RfUCJMv1hjHJYKpSlwoErSM92NfZefr+3sSgPC
-	GwM72kUxWbD/wxuTZQKkJzh1TIJdaldFh4zui28qABalyH6ltc5jrQUDNtwlmxs4qFa7
-	xnfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=FZ11czqNrMy18o9soY6ewtvstVhjQS2+MChOPrhAxbc=;
-	b=fb+4LMJVEZ5v7kl+dugN5K7BP0ja1PE2fPzorMUytsXY0MAWPgJp+ZgzbQ0fpIIF5K
-	7sG9XoqyTET5l8uP3Qdh/q6msrlYuYdQt6KLubt6toDRcCMF7ttGf6BQWzmI4mrrwpJC
-	uDB9Pof0oCSeCxPjNztwDRHd7k0dZFLyJUR7qqEEB2Ki6NKs7CeUmF0TIB6ip/7PpSC4
-	CKuNvxMLIawnn6cKNZjdNLoa0QothMOyPFqyGMuhCYuM8haSFRRw9FO1NzDS15BYYU84
-	R7YF/wQ9njbzNcu1FYF08glNc3pIRHPQQ05Zqwirig1z2gniq0/h0e3utxC4BBD3jfVA
-	VWKg==
-X-Gm-Message-State: APjAAAU8HjU/luEABjniemcJtFQHq2M3cnA3yGeAtb7Z5TBH8Ahg5wpB
-	fKtlJ0CzTc24Z38Z/eheETUHqwB7
-X-Google-Smtp-Source: APXvYqyErpRqX7kEYGTWNiXtm8sRlXUEDvBVsfdMcCmGDkKrVwlpvagZTHJ9VpjzWR0jtl/+3WWD2w==
-X-Received: by 2002:a17:902:7887:: with SMTP id
-	q7mr53931107pll.129.1563494782919; 
-	Thu, 18 Jul 2019 17:06:22 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:c4ab:f842:37b:5f24?
-	([2601:202:4180:c33:c4ab:f842:37b:5f24])
-	by smtp.gmail.com with ESMTPSA id
-	x22sm33410213pff.5.2019.07.18.17.06.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Jul 2019 17:06:22 -0700 (PDT)
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20190718022356.12639-1-zangrc.fnst@cn.fujitsu.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <12350e5f-3fdc-c934-61d7-0ea6ee80fe85@gmail.com>
-Date: Thu, 18 Jul 2019 17:06:18 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	Fri, 19 Jul 2019 02:31:07 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6J2V87h025561
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 18 Jul 2019 19:31:08 -0700 (PDT)
+Received: from pek-lpggp6.wrs.com (128.224.153.40) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 18 Jul 2019 19:31:07 -0700
+From: Yongxin Liu <yongxin.liu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Jul 2019 10:29:56 +0800
+Message-ID: <20190719022956.2537-1-yongxin.liu@windriver.com>
+X-Mailer: git-send-email 2.14.4
 MIME-Version: 1.0
-In-Reply-To: <20190718022356.12639-1-zangrc.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe] [PATCH] setxkbmap: upgrade 1.3.1 -> 1.3.2
+Subject: [meta-oe][PATCH] pmdk: update from 1.4.2 to 1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,54 +29,312 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2019 00:06:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
+X-List-Received-Date: Fri, 19 Jul 2019 02:31:07 -0000
+Content-Type: text/plain
 
-Zang,
+1) Use git repo instead of github archive tarball.
+2) PMDK libraries can be installed in lib or lib64, depending on
+   host building system. If host has /usr/local/lib64, libraries will
+   be installed in lib64, otherwise they will be installed in lib.
+   PMDK is only for 64-bit system, so use LIB_PREFIX=lib64 to force
+   the install path to be lib64.
+3) Use prefix instead of PREFIX to install.
+4) Remove unneeded files in /usr/lib64/pmdk_debug.
+5) Add "/usr/etc" and "/usr/share" to fix package QA issue.
+6) Revise patches for version 1.6. Remove upstream accepted patches.
 
-On 7/17/19 7:23 PM, Zang Ruochen wrote:
-> -Upgrade from setxkbmap_1.3.1.bb to setxkbmap_1.3.2.bb.
+Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+---
+ ...malloc.cfg-Specify-the-host-when-building.patch |  4 +--
+ .../0002-Makefile-Don-t-install-the-docs.patch     | 12 ++++----
+ .../0003-Makefile-Don-t-build-the-examples.patch   | 14 ++++-----
+ ...nually-implement-secure_getenv-if-require.patch | 30 --------------------
+ ...mempool-Remove-unused-__USE_UNIX98-define.patch | 30 --------------------
+ ...file.inc-Allow-extra-libs-to-be-specified.patch | 29 -------------------
+ .../pmdk/{pmdk_1.4.2.bb => pmdk_1.6.bb}            | 33 ++++++----------------
+ 7 files changed, 24 insertions(+), 128 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/pmdk/files/0004-os_posix-Manually-implement-secure_getenv-if-require.patch
+ delete mode 100644 meta-oe/recipes-extended/pmdk/files/0005-pmempool-Remove-unused-__USE_UNIX98-define.patch
+ delete mode 100644 meta-oe/recipes-extended/pmdk/files/0006-Makefile.inc-Allow-extra-libs-to-be-specified.patch
+ rename meta-oe/recipes-extended/pmdk/{pmdk_1.4.2.bb => pmdk_1.6.bb} (57%)
 
-We understand this is an upgrade so i don't think the above line is
-necessary as it is covered in the subject line.
-
-I find it more helpful if=C2=A0 a comment like "this a bug fix only" or
-includes new features.
-
-Information like that helps in stable branch backport selection.
-
-thank you for taking the time to update this package.
-regards,
-Armin
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  .../xorg-app/{setxkbmap_1.3.1.bb =3D> setxkbmap_1.3.2.bb}             =
-  | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-graphics/xorg-app/{setxkbmap_1.3.1.bb =3D> setx=
-kbmap_1.3.2.bb} (78%)
->
-> diff --git a/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb b/met=
-a-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> similarity index 78%
-> rename from meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb
-> rename to meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> index 8402753..30fbd1b 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> @@ -15,5 +15,5 @@ DEPENDS +=3D "libxkbfile"
-> =20
->  BBCLASSEXTEND =3D "native"
-> =20
-> -SRC_URI[md5sum] =3D "2c47a1b8e268df73963c4eb2316b1a89"
-> -SRC_URI[sha256sum] =3D "a9ddb3963f263ba13f0ea105d8c45a531832140530217c=
-c559587bb94f02d3e1"
-> +SRC_URI[md5sum] =3D "93e736c98fb75856ee8227a0c49a128d"
-> +SRC_URI[sha256sum] =3D "8ff27486442725e50b02d7049152f51d125ecad71b7ce5=
-03cfa09d5d8ceeb9f5"
-
+diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+index 747538b0c..ca2a1f643 100644
+--- a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
++++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+@@ -1,4 +1,4 @@
+-From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
++From 231eb4c75fbfaaf90bca7702bdaf55cf701a3527 Mon Sep 17 00:00:00 2001
+ From: Alistair Francis <alistair.francis@wdc.com>
+ Date: Mon, 23 Jul 2018 11:23:39 -0700
+ Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
+@@ -25,5 +25,5 @@ index 196129de6..79ebbab1c 100644
+  --disable-munmap
+ +--host=${HOST_SYS}
+ -- 
+-2.17.1
++2.14.4
+ 
+diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+index bd1b97c24..82b96cf95 100644
+--- a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
++++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+@@ -1,7 +1,7 @@
+-From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
++From 3863d8bd71d6a5638cf984f8d8f9cccac0c7f2a4 Mon Sep 17 00:00:00 2001
+ From: Alistair Francis <alistair.francis@wdc.com>
+ Date: Mon, 23 Jul 2018 11:31:17 -0700
+-Subject: [PATCH 2/2] Makefile: Don't install the docs
++Subject: [PATCH] Makefile: Don't install the docs
+ 
+ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+ Upstream-Status: Inappropriate [disable feature]
+@@ -10,17 +10,17 @@ Upstream-Status: Inappropriate [disable feature]
+  1 file changed, 1 deletion(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 224a315f6..ce7f84afb 100644
++index 47a447f12..7c0f9848f 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
++@@ -148,7 +148,6 @@ rpm dpkg: pkg-clean
+  
+  install uninstall:
+  	$(MAKE) -C src $@
+ -	$(MAKE) -C doc $@
+  
+  .PHONY: all clean clobber test check cstyle check-license install uninstall\
+- 	source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
++ 	source rpm dpkg pkg-clean pcheck check-remote format doc require-rpmem\
+ -- 
+-2.17.1
++2.14.4
+ 
+diff --git a/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch b/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
+index f75d94197..dbe9c45e1 100644
+--- a/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
++++ b/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
+@@ -1,6 +1,6 @@
+-From a7f07dca2468ea226d2f07fc0105166e75cadaf8 Mon Sep 17 00:00:00 2001
++From ac24c78f5aa62ba43bb87b74301b659bcc506f11 Mon Sep 17 00:00:00 2001
+ From: Alistair Francis <alistair.francis@wdc.com>
+-Date: Thu, 6 Sep 2018 16:18:50 -0700
++Date: Thu, 18 Jul 2019 15:40:22 +0800
+ Subject: [PATCH] Makefile: Don't build the examples
+ 
+ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+@@ -10,25 +10,25 @@ Upstream-Status: Inappropriate [disable feature]
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 4b50dd8b5..e00501e31 100644
++index 773ab1387..58912f0ab 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -38,13 +38,13 @@ include $(TOP)/src/version.inc
++@@ -37,13 +37,13 @@ include $(TOP)/src/common.inc
+  
+  TARGETS = libpmem libvmem libpmemblk libpmemlog libpmemobj libpmempool\
+- 		  libpmemcto libvmmalloc tools
++ 		  libvmmalloc tools
+ -ALL_TARGETS = $(TARGETS) common librpmem examples benchmarks
+ +ALL_TARGETS = $(TARGETS) common librpmem benchmarks
+  
+  SCOPE_DIRS = $(TARGETS) common librpmem rpmem_common
+  
+  DEBUG_RELEASE_TARGETS = common libpmem libvmem libpmemblk libpmemlog libpmemobj\
+- 	libpmempool libvmmalloc librpmem libpmemcto
++ 	libpmempool libvmmalloc librpmem
+ -RELEASE_TARGETS = tools examples benchmarks
+ +RELEASE_TARGETS = tools benchmarks
+  
+  CLEAN_NO_JE_TARGETS = $(ALL_TARGETS) rpmem_common test
+  CLEAN_TARGETS = $(CLEAN_NO_JE_TARGETS) jemalloc
+ -- 
+-2.17.1
++2.14.4
+ 
+diff --git a/meta-oe/recipes-extended/pmdk/files/0004-os_posix-Manually-implement-secure_getenv-if-require.patch b/meta-oe/recipes-extended/pmdk/files/0004-os_posix-Manually-implement-secure_getenv-if-require.patch
+deleted file mode 100644
+index 624f17bd4..000000000
+--- a/meta-oe/recipes-extended/pmdk/files/0004-os_posix-Manually-implement-secure_getenv-if-require.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 33affa9ee97691efb73f439fcdba4adb8625a26a Mon Sep 17 00:00:00 2001
+-From: Alistair Francis <alistair.francis@wdc.com>
+-Date: Mon, 10 Sep 2018 12:59:48 -0700
+-Subject: [PATCH] os_posix: Manually implement secure_getenv() if required
+-
+-Manually implement the secure_getenv() if we need to, this is required
+-if using musl.
+-
+-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Pending
+----
+- src/common/os_posix.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/common/os_posix.c b/src/common/os_posix.c
+-index 2d70a0a29..fb09b6ce0 100644
+---- a/src/common/os_posix.c
+-+++ b/src/common/os_posix.c
+-@@ -261,7 +261,7 @@ os_setenv(const char *name, const char *value, int overwrite)
+- /*
+-  * secure_getenv -- provide GNU secure_getenv for FreeBSD
+-  */
+--#ifdef __FreeBSD__
+-+#if defined(__FreeBSD__) || !HAVE___SECURE_GETENV
+- static char *
+- secure_getenv(const char *name)
+- {
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/pmdk/files/0005-pmempool-Remove-unused-__USE_UNIX98-define.patch b/meta-oe/recipes-extended/pmdk/files/0005-pmempool-Remove-unused-__USE_UNIX98-define.patch
+deleted file mode 100644
+index 75c35f865..000000000
+--- a/meta-oe/recipes-extended/pmdk/files/0005-pmempool-Remove-unused-__USE_UNIX98-define.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 92e63699ea83074298971b0251f002562be4dbd3 Mon Sep 17 00:00:00 2001
+-From: Alistair Francis <alistair.francis@wdc.com>
+-Date: Mon, 10 Sep 2018 13:23:37 -0700
+-Subject: [PATCH 2/3] pmempool: Remove unused __USE_UNIX98 define
+-
+-Remove the unused __USE_UNIX98 to fix musl build failures.
+-
+-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Pending
+----
+- src/tools/pmempool/info.c | 3 ---
+- 1 file changed, 3 deletions(-)
+-
+-diff --git a/src/tools/pmempool/info.c b/src/tools/pmempool/info.c
+-index b4010bf35..7b890a123 100644
+---- a/src/tools/pmempool/info.c
+-+++ b/src/tools/pmempool/info.c
+-@@ -45,9 +45,6 @@
+- #include <inttypes.h>
+- #include <assert.h>
+- #include <sys/param.h>
+--#ifndef __FreeBSD__
+--#define __USE_UNIX98
+--#endif
+- #include <unistd.h>
+- #include <sys/mman.h>
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/pmdk/files/0006-Makefile.inc-Allow-extra-libs-to-be-specified.patch b/meta-oe/recipes-extended/pmdk/files/0006-Makefile.inc-Allow-extra-libs-to-be-specified.patch
+deleted file mode 100644
+index 2042fdb25..000000000
+--- a/meta-oe/recipes-extended/pmdk/files/0006-Makefile.inc-Allow-extra-libs-to-be-specified.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From a88e806f9ce8cc071e81abad688643d53f393176 Mon Sep 17 00:00:00 2001
+-From: Alistair Francis <alistair.francis@wdc.com>
+-Date: Mon, 10 Sep 2018 14:18:38 -0700
+-Subject: [PATCH 3/3] Makefile.inc: Allow extra libs to be specified
+-
+-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Pending
+----
+- src/Makefile.inc       | 2 ++
+- src/common.inc         | 2 ++
+- src/tools/Makefile.inc | 1 +
+- 3 files changed, 5 insertions(+)
+-
+-diff --git a/src/common.inc b/src/common.inc
+-index 032cb83ea..2d5c4bedf 100644
+---- a/src/common.inc
+-+++ b/src/common.inc
+-@@ -74,6 +74,8 @@ GCOV_CFLAGS=-fprofile-arcs -ftest-coverage --coverage
+- GCOV_LDFLAGS=-fprofile-arcs -ftest-coverage
+- GCOV_LIBS=-lgcov
+- 
+-+LIBS += $(EXTRA_LIBS)
+-+
+- osdep = $(1)_$(shell uname -s | tr "[:upper:]" "[:lower:]")$(2)
+- get_arch = $(shell $(CC) -dumpmachine | awk -F'[/-]' '{print $$1}')
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.6.bb
+similarity index 57%
+rename from meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
+rename to meta-oe/recipes-extended/pmdk/pmdk_1.6.bb
+index 3da22a970..a5096fdad 100644
+--- a/meta-oe/recipes-extended/pmdk/pmdk_1.4.2.bb
++++ b/meta-oe/recipes-extended/pmdk/pmdk_1.6.bb
+@@ -9,18 +9,15 @@ DEPENDS = "ndctl"
+ # Required to have the fts.h header for musl
+ DEPENDS_append_libc-musl = " fts"
+ 
+-SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
++S = "${WORKDIR}/git"
++
++SRC_URI = "git://github.com/pmem/pmdk.git \
+            file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
+            file://0002-Makefile-Don-t-install-the-docs.patch \
+            file://0003-Makefile-Don-t-build-the-examples.patch \
+-           file://0005-pmempool-Remove-unused-__USE_UNIX98-define.patch \
+-           file://0006-Makefile.inc-Allow-extra-libs-to-be-specified.patch \
+           "
+ 
+-SRC_URI_append_libc-musl = " file://0004-os_posix-Manually-implement-secure_getenv-if-require.patch"
+-
+-SRC_URI[md5sum] = "bde73bca9ef5b90911deb0fdcfb15ccf"
+-SRC_URI[sha256sum] = "df7e658e75d28cd80f6d2ff7b9fc9ae2885d52f8923fdbacecfd46215115fb4c"
++SRCREV = "695e6eba28c53a69a0ef7bad3cc0f45c21ef3e00"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+@@ -29,30 +26,16 @@ inherit autotools-brokensep pkgconfig
+ # | If you meant to cross compile, use `--host'.
+ #
+ # Also fix #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp]
+-EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}'"
++EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}' LIB_PREFIX=lib64"
+ 
+ # Fix the missing fts libs when using musl
+ EXTRA_OEMAKE_append_libc-musl = " EXTRA_LIBS='-lfts'"
+ 
+ do_install() {
+-	oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+-
+-	# Copy these into the standard directories
+-	install -d ${D}${bindir}/
+-	mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
+-	mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+-
+-	install -d ${D}${libdir}
+-	mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+-
+-	install -d ${D}${libdir}/pkgconfig
+-	mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
+-
+-	install -d ${D}${includedir}
+-	mv ${D}/usr/local/include/* ${D}${includedir}/
++	oe_runmake prefix=${prefix} DESTDIR=${D} install
+ 
+ 	# Remove uneeded files
+-	rm -rf ${D}/usr/local/
++	rm -rf ${D}/usr/lib64/pmdk_debug
+ }
+ 
+ # Include these by default otherwise the SDK is not very useful
+@@ -60,5 +43,7 @@ FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
+ FILES_${PN} += "${libdir}/*so*"
+ FILES_${PN} += "${libdir}/pkgconfig/*.pc"
+ FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
++FILES_${PN} += "/usr/etc"
++FILES_${PN} += "/usr/share"
+ 
+ COMPATIBLE_HOST='(x86_64).*'
+-- 
+2.14.4
 
 
