@@ -1,26 +1,24 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FB797F172
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B5BD77F102
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 09:16:17 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6J9Fwk8029085
+	Fri, 19 Jul 2019 10:07:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6JA7oR3029366
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 02:16:08 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 19 Jul 2019 02:15:47 -0700
-From: <mingli.yu@windriver.com>
+	Fri, 19 Jul 2019 03:07:50 -0700 (PDT)
+Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Fri, 19 Jul 2019 03:07:50 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Jul 2019 02:15:38 -0700
-Message-ID: <20190719091539.100373-3-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190719091539.100373-1-mingli.yu@windriver.com>
-References: <20190719091539.100373-1-mingli.yu@windriver.com>
+Date: Fri, 19 Jul 2019 18:07:46 +0800
+Message-ID: <1563530867-20806-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/4] hwloc: Upgrade to 1.11.13
+X-Originating-IP: [128.224.162.195]
+Subject: [meta-networking][PATCH 1/2] libldb: upgrade 1.5.4 -> 1.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2019 09:16:17 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Jul 2019 10:07:49 -0000
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../hwloc/{hwloc_1.11.12.bb => hwloc_1.11.13.bb}              | 4 ++--
+ .../recipes-support/libldb/{libldb_1.5.4.bb => libldb_1.5.5.bb}       | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/hwloc/{hwloc_1.11.12.bb => hwloc_1.11.13.bb} (89%)
+ rename meta-networking/recipes-support/libldb/{libldb_1.5.4.bb => libldb_1.5.5.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.13.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb
-rename to meta-oe/recipes-extended/hwloc/hwloc_1.11.13.bb
-index 4f5b248c4..7231484fe 100644
---- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.12.bb
-+++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.13.bb
-@@ -8,8 +8,8 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.4.bb b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+similarity index 95%
+rename from meta-networking/recipes-support/libldb/libldb_1.5.4.bb
+rename to meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+index 65a6431..b19c964 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.5.4.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+@@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
+                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
  
- SRC_URI = "https://www.open-mpi.org/software/${BPN}/v1.11/downloads/${BP}.tar.bz2"
--SRC_URI[md5sum] = "c2a2e4e23eeb719ed31a755684697cf9"
--SRC_URI[sha256sum] = "ddfb7b9b4571551165b0fd824a340e58814c8c2b4af64c818579d4bc695a417d"
-+SRC_URI[md5sum] = "3c792e23c209e9e1bafe9bdbc613d401"
-+SRC_URI[sha256sum] = "a4494b7765f517c0990d1c7f09d98cb87755bb6b841e4e2cbfebca1b14bac9c8"
+-SRC_URI[md5sum] = "24d9f18b085ba27f96d4dec643abea39"
+-SRC_URI[sha256sum] = "db5beea64e305ef002a28fc6b6ca8e42b5fbee268bd713ff41e76c56a0a071d3"
++SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
++SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
  
- UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v1.11/"
- 
+ inherit waf-samba distro_features_check
+ REQUIRED_DISTRO_FEATURES = "pam"
 -- 
-2.21.0
+2.7.4
 
 
