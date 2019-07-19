@@ -1,53 +1,48 @@
-Return-Path: <drew.moseley@northern.tech>
-Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
-	[209.85.217.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DC537EEFD
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id F04107F1D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 19:58:56 +0000 (UTC)
-Received: by mail-vs1-f68.google.com with SMTP id h28so22262999vsl.12
+	Fri, 19 Jul 2019 20:45:10 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id q22so61130409iog.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 12:58:57 -0700 (PDT)
+	Fri, 19 Jul 2019 13:45:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=northern.tech; s=google;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=kD1gbV9zVnNTvczuw0I6gCGKmjwgYI2MSY0cYoDdG74=;
-	b=bcT2ETauDFMV+TSbUnJXRiEyGk7SaBTsaQ8HH3O8eGhuqbWPtc1BnifQ+H11q+gSdC
-	ajHVBOe76+LvDXNLzI+m87XfxUM/WyM6Byh3d1SnFsqyUqKj7Jup6g4EDODWNc3cCLIX
-	rzKB8Lz6TinxEqfyQg4CCMN6oZVQKPe+N28WQDGGPgbBzG2NqLUT8q9eg845fO8dY0DH
-	N2btt2NZWnDHAnaN5ocDK3pJ4de7DOwgaTRDFcUHSPD+DhxFMoQSBlU9WLlP7Vex9GKj
-	7hIIE2H0e7oRTjye9eVybYBWwEHXAzNcKPZpA5z9MJLx3GUHAdHZRMbSBO/Sx0nwLIC3
-	hpgQ==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=LjUyIeM4gb068bP2oRsrZ1x03Mz1IUvGxFpPh7N4r9M=;
+	b=kpukhXlf0myo8oVWwmjVPUmio9d8AGPcGSRFFZ0ISQmneqkJq2RfTIDKvJj3KAAfIc
+	RIZ+7UjqroFb+A9ReAil/J1F+OgRUVKwOO7YdjA0mgJ8sHVJ1ES0mhtFr6+TBhfrIUsI
+	jNKdq5cJNsSD7SMv5sMtz7HwFYwS/998sJToDjN9dtcAVQFYIpTvFMJUdhPDX6PtiygB
+	uIXLRp72mWivh/vdPyyTxFg/eKJVxxzIuuhhIXz4CeDYnhG7LSsV475R+Fzs7jn1R/io
+	Gd3R1KRZlFg6uHcaDUDR97QR4HL9CDBC3tQet79402R8gPmXZBInMgMkjBoZ5gmB2h/+
+	WsSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=kD1gbV9zVnNTvczuw0I6gCGKmjwgYI2MSY0cYoDdG74=;
-	b=uVkQ05m4euHZ1XWFRsvwDPTqVJJ6iOnDEcgqT3wODR2Up1Pe5XrJXnK/Dkp9G/5AXD
-	22CJ2kI9sbzgsH6Q3J/hkh64AnrzjbHfYaoTpK+csQDbQPNAfVVFBaNAObD3IP19/ByE
-	IeV6RZMGy8vW/6h0h/stZplR+6FbTx1vMDNxAM9vpjqYCO3bwetviS3xsPENozMf1SmQ
-	vV89juQspfAHpP5IEMYW5UnFxlmKIskXd+Mpw745fWeXqyWmeHsK4dXw5SWmgIiRiit6
-	de+qzxxgTpS9K/aKUwlI0BjRAopnhNw+3IHD+zm0cXrmrIvsQ1HpewWRrq0sRMjefWSC
-	J2Ow==
-X-Gm-Message-State: APjAAAXfZ5mSZn7u4gCFlilQetyTB09ya24jPQn1Gffy6jx8oS2ceOa4
-	VTxF/FZhBJGgjj+5f7Tcq/FV+D+pCI5Bqw==
-X-Google-Smtp-Source: APXvYqwsV40jSxuiesQf0ofWjohEFPDGpO5TcpR9LwED3fERQ1Pwe5gR3grCO2FUJ418OMqeMoI5DQ==
-X-Received: by 2002:a67:e9d9:: with SMTP id q25mr32705144vso.74.1563566336784; 
-	Fri, 19 Jul 2019 12:58:56 -0700 (PDT)
-Received: from dmoseley-build.c.developers-build-hub.internal
-	(189.109.211.35.bc.googleusercontent.com. [35.211.109.189])
-	by smtp.googlemail.com with ESMTPSA id
-	q190sm7628198vkb.39.2019.07.19.12.58.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 Jul 2019 12:58:56 -0700 (PDT)
-From: drew.moseley@northern.tech
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Jul 2019 19:58:56 +0000
-Message-Id: <20190719195856.4305-1-drew.moseley@northern.tech>
-X-Mailer: git-send-email 2.22.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=LjUyIeM4gb068bP2oRsrZ1x03Mz1IUvGxFpPh7N4r9M=;
+	b=Es/ajN2YEOg9BFpVYv0wMuAZR9hou3UTKBStC8v0J3mA4FwaepTLHyC0NiMP2QmIKY
+	DJY+Nn8fGuNpl49KtLsVp+ZpNs/j9u6zPgVttgONsBk49t1G5Bn7KfSCWv4tVxYaQdqI
+	ZQ2bHgX9JKpicBoNRZhKLKK1YrcFbxiLIq2smt/MjFz74/GZ2BUiA+fCkMfGHFTnkkko
+	OaX8C0XEPvGgMKFcEtmXB7GahYf0pawVbOP7QgXtz3ZpuJzgSHM8Y710RUJSCwVDDfOA
+	N6zUWTsLWvD32dotrGi+D2FNti3A+pepLMyyt/4pW4Nj8yCTeEy1PSdzXmMx9MYFdy6e
+	jvKw==
+X-Gm-Message-State: APjAAAWlbDOmK75RW+ceZi2yBW8pkOIYWr6GhrpBrwZRdW8ubW+urzql
+	jy1VABWVStuU3ukswCeItmyxK4oo0wRUBKAzkZCpKQ==
+X-Google-Smtp-Source: APXvYqxY0nDHW2wCM9Ju/JlS0pwqyfHXkxg6pdQReMY5egiihdbIwjzAMlLFdB4OrAmSgBCYhHGgsN4GePXWCOOo9nU=
+X-Received: by 2002:a02:3093:: with SMTP id
+	q141mr57848000jaq.128.1563569111973; 
+	Fri, 19 Jul 2019 13:45:11 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] networkmanager: Use ALTERNATIVES for resolv-conf handling.
+References: <20190719134256.1854-1-alex.kiernan@gmail.com>
+In-Reply-To: <20190719134256.1854-1-alex.kiernan@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 19 Jul 2019 21:45:00 +0100
+Message-ID: <CAJTo0Lb7E-oe-X_mZS9ESDqOfQyGnJQ=D=SBAGpmCh=MOZsgQA@mail.gmail.com>
+To: Alex Kiernan <alex.kiernan@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] zstd: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,50 +55,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2019 19:58:56 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Jul 2019 20:45:11 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Drew Moseley <drew.moseley@northern.tech>
+On Fri, 19 Jul 2019 at 14:43, Alex Kiernan <alex.kiernan@gmail.com> wrote:
+> +PACKAGE_BEFORE_PN += " \
+> +    ${PN}-compress \
+> +    ${PN}-decompress \
+> +    ${PN}-frugal \
 
-This brings the networkmanager in sync with how systemd-resolved and connman
-work. Additionally this allows it to function with a read-only rootFS.
+Is there a good reason to do this?
 
-Signed-off-by: Drew Moseley <drew.moseley@northern.tech>
----
- .../networkmanager/networkmanager_1.18.0.bb          | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-index 21fbea9c1..037566783 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
-@@ -20,7 +20,7 @@ DEPENDS = " \
-     curl \
- "
- 
--inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc
-+inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
- 
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-@@ -141,6 +141,16 @@ FILES_${PN}-nmtui-doc = " \
- 
- SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
- 
-+ALTERNATIVE_PRIORITY = "100"
-+ALTERNATIVE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
-+ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
-+ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
-+
- do_install_append() {
-     rm -rf ${D}/run ${D}${localstatedir}/run
-+
-+    # For read-only filesystem, do not create links during bootup
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
-+    fi
- }
--- 
-2.22.0
-
+Ross
 
