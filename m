@@ -1,47 +1,48 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1583F7CE4E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 294597F0C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2019 06:43:11 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id h6so63034191iom.7
+	Sat, 20 Jul 2019 18:11:30 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id r21so25743335qke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 23:43:13 -0700 (PDT)
+	Sat, 20 Jul 2019 11:11:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7RonPC+WGJY/AIsJ6dYLZhIRhTbj/snkSHCz7rWlREc=;
-	b=VWnVmYMs71Tcd/HxrQxEl7nQDLEcMX95YPJmz2ol8zc2TpSPfj15wwtdZfLaGtF6/8
-	WqpBdcHSQdu17OFcyG0ogQbVOHxJGDEdHmw98/Pi/wsT0OKwUT5nHl0kL5eGU9JNrbem
-	3YRl8ToGS0gokPuDvLvuLUrjZsmnaeKElnMw9XbQqCByOohIZixCsjxouo7MFH9BRVoA
-	sL+X3SuiHxYbqKVNWNpPTcISv0Jpbbn7qOiTy2NLeGOJm7OARqziyuDjHKu46a5k5q79
-	bdM/0YuE/YZzAhizuZuNz0vRPPklV6IrHOIp9++5/rESlEWYR8izsd4pzr6gRBgDfgpj
-	zb8g==
+	:cc; bh=Qyh0yrPgj/TuJWhjOdHP2UcCDIL4ae52aH+CYIdhv6A=;
+	b=AOxOMRB43YUbW/pvEgE1avbrwIovdVoDxI/B9mq2aEET1VH49wRzekhlN8Y/IhyowH
+	7XwDPY87nEhgJn6ve8btBIFjyOJc+rLvIPCIx7X9ncinx+0PTVXnI0kJxBq8+UNYFEBo
+	mBfnR4vLvcplRPc80ekXiSvheKCEn697FDBFgAC/s4sXaSV3RemRpE5XaLOsoPEIje20
+	BjSShfagqLgH0R2Fof4n3GMPz5WQ8twlXGimGsOJ2hTpxsltVebGTqWt/450skLobmhB
+	qj2Tw9jeSKDMBJIEdtvplbrMlgJK65QFGWu4/0wqUrconhfVQOLG6+L1sZA19rMMsIZ4
+	k1pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=7RonPC+WGJY/AIsJ6dYLZhIRhTbj/snkSHCz7rWlREc=;
-	b=ngscAFJoT4F0ax8oCREjLlfL8B+7DQLpRddprDd/QviDYVjX8JCAcBAgaDJVJOld6a
-	fPdPWU3cJz9OQ+p8hbxcIpwUcBrUvgm97jO2LGYIjxJ6j9PTyZafLf1CY01vgJKjszgR
-	alVSelNxOcURlOLbCO3ic4m/STk9CXXjoVEPhgVCiE9yx0t4tpjbOv1x+lWQ1XTRvYEq
-	90RrWSuovicVTuWmUjRRef5i4lCkoqs7uOL5G/sAnYXIbjvQo9SKGXAslbAQMU+QZWrH
-	hbsmmo5w1Az0FfPWekkcLQvoGNTEG4XktVB6V9Ouc0zsUj/ono0DyLz+z91k8b849AHO
-	KKzg==
-X-Gm-Message-State: APjAAAW4tWJbtdFuZdDflDxEoa9+fhU0R0ndZsx4BROd10Fg1oq9ehBt
-	wrHn42+lUNuxqX696Hazr5W5r94vjOymaP/iSbI=
-X-Google-Smtp-Source: APXvYqxNHZHEGiV7K4tQqN+61MNZ2j3ALpe+ASLYfBTP9utIiy0D0oaNNdlJ1VuejkXjXzKkXBsDXgjfRbXBNEI1a24=
-X-Received: by 2002:a5d:87c6:: with SMTP id q6mr31384566ios.115.1563604992948; 
-	Fri, 19 Jul 2019 23:43:12 -0700 (PDT)
+	bh=Qyh0yrPgj/TuJWhjOdHP2UcCDIL4ae52aH+CYIdhv6A=;
+	b=d7G+PFxTJxFfO+EpYveJf+l8czVwuSTAt0aO6k47K5OTwxEQmEJXNsq+d8ywgQ0dIg
+	U0Rxkf/pPW+yVq8vStJFr9Pv8xxd6heTR4M+yWx8BhuBxi3n6onrKcZMH9Agos/hOQ8S
+	kGKjFmrDuyT/aiQXkl01YrKgYGpUSEMNLbnYeJCq8uBdQsQz0rfPag0wwcCnAwJPZ+44
+	Inr8xiuuuZ2a+kqEBpBI7uSlmfk02lWHCHlgmb7SD4MR81+E9wSMzpSomHGd4dHLuuce
+	klzvipd7PuIATkX3s6deigVThmJi/K0KU8JWl6rwLHTG832kl+e5xBPOv4wE5RxKaWDc
+	U9tw==
+X-Gm-Message-State: APjAAAVRuvI8toy8XTI23Bb7FDn4yi1ppNqIJVSS6vfcGAoju1p61oyv
+	7grJQ7C/KkjSOoDKX0eP+xLjkl8/jVouYmoarLbWcwZ6qfk=
+X-Google-Smtp-Source: APXvYqz3oRaguUfd8Tg8PY1/HYCQR+YC+md7O/c9tctcJzMBtr/i11wdEEjm4dNe8HJegrN4ibN+FtenZOZF+juF+rU=
+X-Received: by 2002:a37:4243:: with SMTP id p64mr21899495qka.9.1563646290821; 
+	Sat, 20 Jul 2019 11:11:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190719134256.1854-1-alex.kiernan@gmail.com>
-	<CAJTo0Lb7E-oe-X_mZS9ESDqOfQyGnJQ=D=SBAGpmCh=MOZsgQA@mail.gmail.com>
-In-Reply-To: <CAJTo0Lb7E-oe-X_mZS9ESDqOfQyGnJQ=D=SBAGpmCh=MOZsgQA@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Sat, 20 Jul 2019 07:43:01 +0100
-Message-ID: <CAO5Uq5QeCwrEOkVLtqG8MkZ3dku+PM0cz2kfzLheVwTmZ=z6eQ@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] zstd: New recipe
+References: <1563602668-35526-1-git-send-email-andromeda@intel.com>
+	<AA9B40170ABA1047B45E714CB2B866B706BC069D@PGSMSX103.gar.corp.intel.com>
+In-Reply-To: <AA9B40170ABA1047B45E714CB2B866B706BC069D@PGSMSX103.gar.corp.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 20 Jul 2019 11:11:04 -0700
+Message-ID: <CAMKF1soCg3ytMiOoy63ePT+nR1kpnj8ntuNTjg0cngBKJX3NmA@mail.gmail.com>
+To: "Chan, Aaron Chun Yew" <aaron.chun.yew.chan@intel.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2] python3-pyatspi: Add Dbus ATSPI recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +55,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2019 06:43:12 -0000
+X-List-Received-Date: Sat, 20 Jul 2019 18:11:30 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Jul 19, 2019 at 9:45 PM Burton, Ross <ross.burton@intel.com> wrote:
->
-> On Fri, 19 Jul 2019 at 14:43, Alex Kiernan <alex.kiernan@gmail.com> wrote:
-> > +PACKAGE_BEFORE_PN += " \
-> > +    ${PN}-compress \
-> > +    ${PN}-decompress \
-> > +    ${PN}-frugal \
->
-> Is there a good reason to do this?
->
+Parsing errors seen
 
-They're cut down versions, so it doesn't make a lot of sense for them
-to be in the main package - I guess you'd really want them as
-PACKAGECONFIG, but upstream builds them as completely separate things.
+18:07:40 ERROR: Nothing PROVIDES 'python3-dbus-native' (but
+/mnt/jenkins/workspace/yocto-world/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+DEPENDS on or otherwise requires it). Close matches:
+18:07:40   python3-absl-native
+18:07:40   python3-gitdb-native
+18:07:40   python3-six-native
+.....
 
-I should probably pull them out to a local bbappend as they're likely
-not of general use - my use case is only for zstd-decompress where I
-want the smallest thing I can to go inside an initramfs which then
-lives on a 3M boot partition.
+18:07:41 ERROR: Nothing RPROVIDES 'python3-pyatspi' (but
+/mnt/jenkins/workspace/yocto-world/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+RDEPENDS on or otherwise requires it)
+18:07:41 No eligible RPROVIDERs exist for 'python3-pyatspi'
+18:07:41 ERROR: Nothing RPROVIDES 'python3-pyatspi-dev' (but
+/mnt/jenkins/workspace/yocto-world/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+RDEPENDS on or otherwise requires it)
+18:07:41 No eligible RPROVIDERs exist for 'python3-pyatspi-dev'
 
--- 
-Alex Kiernan
+
+On Fri, Jul 19, 2019 at 11:17 PM Chan, Aaron Chun Yew
+<aaron.chun.yew.chan@intel.com> wrote:
+>
+> From: Aaron Chan <aaron.chun.yew.chan@intel.com>
+>
+> pyatspi provide python3 support for Assistive Technology Service Provide Interface (AT-SPI2) protocol over Dbus.
+>
+> This is useful not only for Accessibility (a11y) but also provides a medium for automation of GUI testing (such as python3-dogtail).
+>
+> Signed-off-by: Aaron Chan <aaron.chun.yew.chan@intel.com>
+> ---
+>  .../recipes-devtools/python/python3-pyatspi_2.32.1.bb    | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+> new file mode 100644
+> index 0000000..6d80c10
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY = "Python bindings for DBus AT-SPI2 accessibility"
+> +DESCRIPTION = "AT-SPI2 is a protocol over DBus, toolkit widgets use to provide content to screen readers such as Orca"
+> +SECTION = "devel/python"
+> +HOMEPAGE = "https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=e9f288ba982d60518f375b5898283886 \
+> +                    file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
+> +DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
+> +
+> +SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=gnome-3-32"
+> +SRCREV = "dc4565208fca00da06b972915a080ad3c63f640d"
+> +S = "${WORKDIR}/git"
+> +
+> +inherit pkgconfig autotools python3native
+> +
+> +FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/pyatspi/*"
+> --
+> 2.7.4
+>
 
