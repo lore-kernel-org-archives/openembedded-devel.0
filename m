@@ -1,60 +1,63 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D66F7E66A
+Return-Path: <alistair@alistair23.me>
+X-Greylist: delayed 61228 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 21 Jul 2019 14:34:04 UTC
+Received: from APC01-PU1-obe.outbound.protection.outlook.com
+	(mail-oln040092254065.outbound.protection.outlook.com [40.92.254.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 792167ED61
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 02:22:31 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id w10so16060659pgj.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2019 19:22:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=oaem70AZxEObqjA4X9kfGFF17gkBfTfzdCNK6CjR4ZU=;
-	b=PlWyr3tRIALlzeVhFdKBHcznGp8+m+pV6LD8qY//6FbUK6+zo2XbhOqebwkLK/QXNC
-	RZeOxs38AkzfjPLt5NRPysxW9q1GwTKWTt1XnP6KeonNAbrXVAKuf/ZCbxSyZc0YTsMg
-	DgRI68jVw9ZsgYKSpLuK9LGeSAlKGHS+G/VMqd10QUX1IDMDzqa/udn5LwSuRNjEttqE
-	y7TMDtdTPKw2b0+zEsWR+I0bxCAmhkhEnEUKdFDxMjPHPXL/Ez33ZOgZeJtu+Za1rHtt
-	H2UnlkUCuuGiKwR96zh9saxXsvc4rFsZRPNV3MDMjIpnq2+P8tkKR+oJjBk7EbVXTcWF
-	9/pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=oaem70AZxEObqjA4X9kfGFF17gkBfTfzdCNK6CjR4ZU=;
-	b=FVA2bCOJhb2irXdenCECdtRo3+kSO7vUg9KTG+MtZtLu6S29MH6LC7Wnp6u+jwXWp8
-	TQxHEJ8U6YJXn1+oJCk7W3e8LwxUK5mS0Gw3k3JdBRxzt6miIgm2TZLSp4cOg9n8gpPF
-	AUntb70g8hpkPzAXxtHmOy9joASMlQIPz4YMlNW0903/6eHOdv/s58Uip3hYzMVfiU0C
-	epwBfnUyszgiXbaRNm2W48V7agsbteophB2qoy4XA0GsNuOKGU7kFbfH6vHu2c6zhAYs
-	pD1xZraE9YD5DS5nbMuO4MbwrjT0XkRy10JSy4gL5QVuBPb2vwwBOOWMcR/xjuKen7Su
-	E9yA==
-X-Gm-Message-State: APjAAAXmKBxThSmwx0eqZApHCawLAS9DFC7w25oHq6uXNQhZ4zkax3Z+
-	CF1IxduKY2tT04SIMycCE1RGHI41h0Q=
-X-Google-Smtp-Source: APXvYqytd8hs6QiQjf4CCeDru3zThPdxuWjplW6hs1VyA/l+yFPs31ANSP1A78Jp01s+uwZzuayeng==
-X-Received: by 2002:a65:51c1:: with SMTP id i1mr42135503pgq.417.1563675752627; 
-	Sat, 20 Jul 2019 19:22:32 -0700 (PDT)
-Received: from ?IPv6:2601:646:8500:6bc6::effc? ([2601:646:8500:6bc6::effc])
-	by smtp.gmail.com with ESMTPSA id
-	i124sm65472087pfe.61.2019.07.20.19.22.31
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Sat, 20 Jul 2019 19:22:31 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	Tim Orling <timothy.t.orling@linux.intel.com>
-References: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
-	<a853162aa82bf2c1723190f00fc6ad608ab21fc8.1561696450.git.timothy.t.orling@linux.intel.com>
-	<CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS
-Message-ID: <910f1d32-e526-6ecc-ba4f-cf5c75461725@gmail.com>
-Date: Sat, 20 Jul 2019 19:22:41 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Sun, 21 Jul 2019 14:34:04 +0000 (UTC)
+Received: from PU1APC01FT010.eop-APC01.prod.protection.outlook.com
+	(10.152.252.53) by PU1APC01HT189.eop-APC01.prod.protection.outlook.com
+	(10.152.252.253) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2052.18;
+	Sat, 20 Jul 2019 16:59:06 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.252.58) by
+	PU1APC01FT010.mail.protection.outlook.com (10.152.252.83) with
+	Microsoft SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2052.18 via Frontend Transport; Sat, 20 Jul 2019 16:59:06 +0000
+Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::149e:5882:56e4:98f8]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	([fe80::149e:5882:56e4:98f8%4]) with mapi id 15.20.2094.013;
+	Sat, 20 Jul 2019 16:59:06 +0000
+From: Alistair Francis <alistair@alistair23.me>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-python][PATCH] python: pypi: Add python3-term
+Thread-Index: AQHVPxxwjcgCBxzX5EasfORV6ffvbQ==
+Date: Sat, 20 Jul 2019 16:59:05 +0000
+Message-ID: <PSXP216MB027758D2A51CD416FBB406E3DDCA0@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
+Accept-Language: en-AU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BYAPR05CA0073.namprd05.prod.outlook.com
+	(2603:10b6:a03:e0::14) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
+	(2603:1096:300:a::18)
+x-incomingtopheadermarker: OriginalChecksum:14B82B4B1F6BDA375930FB1D7BCEAC6B904688E14427811B548881DA06A66BAD;
+	UpperCasedChecksum:519FC26ED79FCBB4AB7DE577142A0905C774EAB742EA48FA9CA7DE8BD2D039EB;
+	SizeAsReceived:7454; Count:48
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.21.0
+x-tmn: [gS+HQVPqvLKkMmJO27CgyHCuw5vSZBGxjHDU5K5QX+MljEIua4p9/nx3Kasd/wIW]
+x-microsoft-original-message-id: <20190720165851.20759-1-alistair@alistair23.me>
+x-ms-publictraffictype: Email
+x-incomingheadercount: 48
+x-eopattributedmessage: 0
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(5050001)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031323274)(2017031324274)(2017031322404)(1601125500)(1603101475)(1701031045);
+	SRVR:PU1APC01HT189; 
+x-ms-traffictypediagnostic: PU1APC01HT189:
+x-microsoft-antispam-message-info: qoahR1GGImArYPvXEPbbIJ4d3SCSt1lqG7tZXnfLm4rhkiNm0f8HymzaO5RaHGjxf7fagFlmPjxL4IEiC+q5uxQg4FHNS+mRD4FDgj+qHBEo58pAzKULSTAuATcNOM4kjchm1qmLa9Lk81Jk1Ss06wW8dBmxCdsrtXmrL+Ujcs4xOTsTx+BGBQRvZLEW0qFg
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/9] libdbi-perl: fix dependencies
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: ab180219-4f89-4ad6-c700-08d70d3392b2
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2019 16:59:06.0353 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PU1APC01HT189
+Subject: [meta-python][PATCH] python: pypi: Add python3-term
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,122 +70,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 02:22:32 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Jul 2019 14:34:04 -0000
 Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
+Signed-off-by: Alistair Francis <alistair@alistair23.me>
+---
+ meta-python/recipes-devtools/python/python-term.inc     | 9 +++++++++
+ meta-python/recipes-devtools/python/python3-term_2.3.bb | 2 ++
+ 2 files changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-term.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-term_2.3.bb
 
-On 7/17/19 6:04 AM, Martin Jansa wrote:
-> This causes libdbi-perl-native to depend on target perl again, why did you
-> revert the fix from:
-> http://git.openembedded.org/meta-openembedded/commit/?id=eb868d056d15a56596cbf6ed3a4b66b054f2d563
-> ?
+diff --git a/meta-python/recipes-devtools/python/python-term.inc b/meta-pyt=
+hon/recipes-devtools/python/python-term.inc
+new file mode 100644
+index 000000000..8a2df0e19
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-term.inc
+@@ -0,0 +1,9 @@
++SUMMARY =3D "An enhanced version of the tty module"
++SECTION =3D "devel/python"
++LICENSE =3D "Python-2"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd90e2d280a4836c607520383d1639be=
+1"
++
++PYPI_PACKAGE_EXT =3D "zip"
++
++SRC_URI[md5sum] =3D "ab0c1bce381b1109fe4390c56aa06237"
++SRC_URI[sha256sum] =3D "3dcc8c212e04700784e5c1c5b601916ba0549ae6025b35b64f=
+d62144899e7180"
+diff --git a/meta-python/recipes-devtools/python/python3-term_2.3.bb b/meta=
+-python/recipes-devtools/python/python3-term_2.3.bb
+new file mode 100644
+index 000000000..372cffe04
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-term_2.3.bb
+@@ -0,0 +1,2 @@
++require python-term.inc
++inherit pypi setuptools3
+--=20
+2.21.0
 
-
-I think we should reintroduce the above patch Martin, would you be 
-interested to send patch ? we need to rejig the checksum match tests on 
-jenkins so
-
-such oversight does not happen.
-
-
->
->   === Comparing signatures for task do_populate_sysroot.sigdata between
-> qemux86 and qemux86copy ===
-> ERROR: libdbi-perl-native different signature for task
-> do_populate_sysroot.sigdata between qemux86 and qemux86copy
-> NOTE: Starting bitbake server...
-> NOTE: Started PRServer with DBfile: build/cache/prserv.sqlite3, IP:
-> 127.0.0.1, PORT: 38307, PID: 13970
-> Hash for dependent task perl/perl_5.30.0.bb.do_populate_sysroot
-> changed from e3a38726fc849347a14b574ef52a59f5578632accbf70259a6ffd09fea54dc4e
-> to de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
-> Unable to find matching sigdata for
-> oe-core/meta/recipes-devtools/perl/perl_5.30.0.bb.do_populate_sysroot
-> with hash de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
->
-> ERROR: 1 errors found in
-> sstate-diff/1563367471/signatures.qemux86copy.do_populate_sysroot.sigdata.log
->
->
->
-> On Fri, Jun 28, 2019 at 7:00 AM Tim Orling <timothy.t.orling@linux.intel.com>
-> wrote:
->
->> * Fix RDEPENDS, drop class-target (dependencies are the same for native)
->> * Reorganize recipe to best practices
->> * Add ptest dependencies
->>
->> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
->> ---
->>   .../perl/libdbi-perl_1.642.bb                 | 38 +++++++++++++++----
->>   1 file changed, 31 insertions(+), 7 deletions(-)
->>
->> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> index ff4a9d0610..77991bd158 100644
->> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> @@ -7,13 +7,6 @@ database interface independent of the actual database
->> being used. \
->>   HOMEPAGE = "http://search.cpan.org/dist/DBI/"
->>   SECTION = "libs"
->>   LICENSE = "Artistic-1.0 | GPL-1.0+"
->> -RDEPENDS_${PN}_class-target = " \
->> -    perl-module-carp \
->> -    perl-module-exporter \
->> -    perl-module-exporter-heavy \
->> -    perl-module-dynaloader \
->> -"
->> -
->>   LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
->>
->>   SRC_URI = "
->> http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
->> @@ -34,4 +27,35 @@ do_install_prepend() {
->>          rm -rf ${B}/t/z*.t
->>   }
->>
->> +RDEPENDS_${PN} = " \
->> +    perl-module-carp \
->> +    perl-module-exporter \
->> +    perl-module-exporter-heavy \
->> +    perl-module-dynaloader \
->> +    perl-module-io-dir \
->> +    perl-module-scalar-util \
->> +    perl-module-universal \
->> +"
->> +
->> +RDEPENDS_${PN}-ptest = " \
->> +    ${PN} \
->> +    perl-module-b \
->> +    perl-module-benchmark \
->> +    perl-module-cwd \
->> +    perl-module-data-dumper \
->> +    perl-module-encode \
->> +    perl-module-encode-byte \
->> +    perl-module-encode-encoding \
->> +    perl-module-file-copy \
->> +    perl-module-file-path \
->> +    perl-module-lib \
->> +    perl-module-perlio \
->> +    perl-module-perlio-scalar \
->> +    perl-module-perlio-via \
->> +    perl-module-sdbm-file \
->> +    perl-module-storable \
->> +    perl-module-test-more \
->> +    perl-module-utf8 \
->> +    "
->> +
->>   BBCLASSEXTEND = "native"
->> --
->> 2.20.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
 
