@@ -1,51 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DFFD37CF9E
+Return-Path: <aaron.chun.yew.chan@intel.com>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id DD9307D5C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2019 05:14:29 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id x15so4982921pgg.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 22:14:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=66G6jxm9XeLmzsw/46dEmuqdY1HHOwslaZmxG+rvZps=;
-	b=o8qT2OzJH724jCykfqW29nts3MbK1W5BeG+AoQXs2VcV4//fWQvm8zlozXFncEiCs7
-	wYk1iyIjv1MExnTgt5gQ3XlL9A3BJH96034XtnA9lpc1JZXzJ9ZKY/iNJ2vJuW06F5WO
-	CvoZC+F8ODJoAWahj0wOy4hRYLQGu1udonsAErUHDOzV/t+eHBNXY+ayBOok44Y67H/t
-	SX/GamuJld5hfvJvDinqsk9odRVQOvIyFdpC7seI4rTdLtldoA/phN/4Ew12e7JLHaJN
-	vQ8HYqXGxGR+OyrGv3APnkBvbxreI/Rk2p3Gh0YdO9jeEORp4psT143kfQcVPmKK4aIG
-	ZHiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=66G6jxm9XeLmzsw/46dEmuqdY1HHOwslaZmxG+rvZps=;
-	b=moXcyWFilKFCt1n8MXjW4l1okCeGtpilzCy7XxGM7BHES+af7+I0OIIbzCZnUolpbM
-	gd0vsAHu0PLm+r9NkSwfoFi0MHyu66hyCN4aQMts7UdF25DDGtD4Yitjc5eAzJQAuEig
-	wjdH4ceVk2929QgrqvAQiUdqk7LEADQfNi+Ffmic84bQZWOAM88+Fs6tMNbdOeQG/Kih
-	h5zws0RpsKOPzPNAHv9uHXYXz0mUPqALp2f5Esr5SlEdUs4CXhATA3fLTMAJ2dvKaIS0
-	bjvOZqkMnrotbxlbX5WKpY3ZNz0Cr+ZRFwa5zQB8YA7MWSdCX3bfAw7EXc/tMFcOJAYu
-	p1Og==
-X-Gm-Message-State: APjAAAV4FljRhUCB3191CtD23LU9am6s7SOWhDQn5b5H28LXZPCCOfPi
-	8Lu9E23+gjbfOsZvemCdQeryTbvGLOk=
-X-Google-Smtp-Source: APXvYqzEtuWqaP03BQjjTGE1/6HA4DFoZhqvZumWOHYcSAYUJjbRCTdRwETKZ2WEbHxLlWWOiCOtPQ==
-X-Received: by 2002:a63:3046:: with SMTP id w67mr19649299pgw.37.1563599670252; 
-	Fri, 19 Jul 2019 22:14:30 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	u69sm38863075pgu.77.2019.07.19.22.14.29
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 19 Jul 2019 22:14:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Jul 2019 22:14:18 -0700
-Message-Id: <20190720051418.15137-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.0
+	Sat, 20 Jul 2019 06:17:14 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	19 Jul 2019 23:17:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,285,1559545200"; d="scan'208";a="159315328"
+Received: from kmsmsx153.gar.corp.intel.com ([172.21.73.88])
+	by orsmga007.jf.intel.com with ESMTP; 19 Jul 2019 23:17:15 -0700
+Received: from pgsmsx103.gar.corp.intel.com ([169.254.2.4]) by
+	KMSMSX153.gar.corp.intel.com ([169.254.5.152]) with mapi id
+	14.03.0439.000; Sat, 20 Jul 2019 14:07:43 +0800
+From: "Chan, Aaron Chun Yew" <aaron.chun.yew.chan@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [meta-python][PATCH v2] python3-pyatspi: Add Dbus ATSPI recipe
+Thread-Index: AQHVPsEK4NxBpe6OrkKmwhkD8w3bU6bTBMDw
+Date: Sat, 20 Jul 2019 06:07:43 +0000
+Message-ID: <AA9B40170ABA1047B45E714CB2B866B706BC069D@PGSMSX103.gar.corp.intel.com>
+References: <1563602668-35526-1-git-send-email-andromeda@intel.com>
+In-Reply-To: <1563602668-35526-1-git-send-email-andromeda@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ctpclassification: CTP_NT
+x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiYmRmYzFjNDktNzM2MC00NzQwLWJmYmQtNGQ5ZGM0NDU2ZmZhIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjEwLjE4MDQuNDkiLCJUcnVzdGVkTGFiZWxIYXNoIjoiQ0V0M0JzbmJEcXFrVkpQTkhQeXNiT1B1YWhuS21Hd3V1ckdWTVR1b1A0V000SnZhdUEwMjV1bmRKbU5qYVdDbSJ9
+dlp-product: dlpe-windows
+dlp-version: 11.0.600.7
+dlp-reaction: no-action
+x-originating-ip: [172.30.20.206]
 MIME-Version: 1.0
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] librelp: Pass Wno-error to compiler
+Subject: [meta-python][PATCH v2] python3-pyatspi: Add Dbus ATSPI recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,47 +47,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2019 05:14:30 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 20 Jul 2019 06:17:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-After autoconf-archive was upgraded to 2019.01.06 it started to add
-extra warning flags via WARN_CFLAGS along with -Werror which means that
-now compiler could be stricter and break the build if any of the new
-warnings are flagged
+From: Aaron Chan <aaron.chun.yew.chan@intel.com>
 
-The difference is
+pyatspi provide python3 support for Assistive Technology Service Provide In=
+terface (AT-SPI2) protocol over Dbus.
 
-old
+This is useful not only for Accessibility (a11y) but also provides a medium=
+ for automation of GUI testing (such as python3-dogtail).
 
-WARN_CFLAGS='-fno-strict-aliasing  -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wunused-parameter -Wmissing-field-initializers'
-
-new
-
-WARN_CFLAGS='-fno-strict-aliasing  -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wformat=2 -Wcast-align -Wformat-nonliteral -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Winline -Wpacked -Wmissing-format-attribute -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -pedantic -Wunused-parameter -Wmissing-field-initializers -Werror -Wno-suggest-attribute=format -Wunused-parameter -Wmissing-field-initializers'
-
-Hence we started seing build failure like https://errors.yoctoproject.org/Errors/Details/252684/
-
-This fix just turns off warnings-as-errors so build can still go on, if
-we need to fix the warnings they still are present in log.do_compile
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Aaron Chan <aaron.chun.yew.chan@intel.com>
 ---
- meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-devtools/python/python3-pyatspi_2.32.1.bb    | 16 ++++++++++++=
+++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyatspi_2.3=
+2.1.bb
 
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-index 9e57dd520d..16c63a7523 100644
---- a/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
-@@ -14,3 +14,5 @@ SRCREV = "e96443dda3c080fa991decec26bc4ac98d24b9a2"
- S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
+diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb =
+b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+new file mode 100644
+index 0000000..6d80c10
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY =3D "Python bindings for DBus AT-SPI2 accessibility"
++DESCRIPTION =3D "AT-SPI2 is a protocol over DBus, toolkit widgets use to p=
+rovide content to screen readers such as Orca"
++SECTION =3D "devel/python"
++HOMEPAGE =3D "https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/"
++LICENSE =3D "GPLv2"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De9f288ba982d60518f375b589828388=
+6 \
++                    file://COPYING.GPL;md5=3D751419260aa954499f7abaabaa882=
+bbe"
++DEPENDS =3D "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ pytho=
+n3-pygobject"
 +
-+CPPFLAGS += "-Wno-error"
--- 
-2.22.0
++SRC_URI =3D "git://github.com/GNOME/pyatspi2.git;protocol=3Dhttps;branch=
+=3Dgnome-3-32"
++SRCREV =3D "dc4565208fca00da06b972915a080ad3c63f640d"
++S =3D "${WORKDIR}/git"=20
++
++inherit pkgconfig autotools python3native
++
++FILES_${PN} +=3D "${PYTHON_SITEPACKAGES_DIR}/pyatspi/*"
+--
+2.7.4
 
 
