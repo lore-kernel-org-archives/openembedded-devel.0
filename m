@@ -1,47 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C2497F17F
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DFFD37CF9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 23:13:19 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id d23so32817015qto.2
+	Sat, 20 Jul 2019 05:14:29 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id x15so4982921pgg.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2019 16:13:20 -0700 (PDT)
+	Fri, 19 Jul 2019 22:14:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=mtf/rNbdCcF7qDzWXzwlggH0lYac8+e/cgm2NIpIib4=;
-	b=UkAtxgGu1P0YV0KPhwl8NgUGu3kR8O/XgV0UnVZi1wp59bebpWCHYlAfCORMVFGzgI
-	ThvzDYGzClV8AzDRxsGFzahj+y1f87SeHHikCO8zq1TQ3EPrtpIUDg89ZmNKP0OQx4Zl
-	xQPJ1eH9vPwWOTf8MqAAlMaS4TDcQ1wUGJTd/7kGhL0M0iJKrvNUCkW3VA1mhAv8Ee4G
-	k24q+cGjW40vk7Gsaacm2AEGzrhG0b55CzXt7OUf1ZjG5XqphBEuLODhjTfZQk7kPnEr
-	1ZBnjrLa60ocULCkdKBZ1P4hFQrD1htB/U0fIP3VwRs0S4CSd17LlSSwy+CCsQm32x00
-	rI2Q==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=66G6jxm9XeLmzsw/46dEmuqdY1HHOwslaZmxG+rvZps=;
+	b=o8qT2OzJH724jCykfqW29nts3MbK1W5BeG+AoQXs2VcV4//fWQvm8zlozXFncEiCs7
+	wYk1iyIjv1MExnTgt5gQ3XlL9A3BJH96034XtnA9lpc1JZXzJ9ZKY/iNJ2vJuW06F5WO
+	CvoZC+F8ODJoAWahj0wOy4hRYLQGu1udonsAErUHDOzV/t+eHBNXY+ayBOok44Y67H/t
+	SX/GamuJld5hfvJvDinqsk9odRVQOvIyFdpC7seI4rTdLtldoA/phN/4Ew12e7JLHaJN
+	vQ8HYqXGxGR+OyrGv3APnkBvbxreI/Rk2p3Gh0YdO9jeEORp4psT143kfQcVPmKK4aIG
+	ZHiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=mtf/rNbdCcF7qDzWXzwlggH0lYac8+e/cgm2NIpIib4=;
-	b=V7JVjW4y0CBWQSaduYsrh7gZP9J5Ewx9VNVWORNXSA+QChdByF2f3AnwlsuIrQRa+p
-	sn9DiI/2Nk/WrF3qok3KPvSePVl61dlo2Y0OrMBNGObmOTtwuBkcJuQYFNFe90+aTOOu
-	5+tbeFvNoZZnH70Hs7V9baEeUUlRz6zrFi10/arUg8GvAZ0/cUzlqD7k0t7XlIKWis2f
-	/n2gcyHQDh5iacShUQSQCo9BiSoQJHeJpWlitaq0ojXoKBE9BxEFnvgOBQsuqkZ7cqI3
-	or68EdB/orlJOglytlxHpmCwZIS9wrfhbkkup9emXfgn73X/yOEwTpuKmwivWOQ9gcAT
-	HKMg==
-X-Gm-Message-State: APjAAAWBftcwSyIjvnpV+3gjlL3sgDQSK/qtKqyxf0ArwW8WEHctUEjj
-	ykZqCezrJHk1Frz90+KKQBXJRWvmhkTPbenT0OM=
-X-Google-Smtp-Source: APXvYqw3kdxS+j41wlv7GSWw89c6WI6OiSFdXcSm4/YVQocnXIYHncvMfoqgCOf5vXWChPeS2HlkGX4DqXJg4pRiN+k=
-X-Received: by 2002:aed:36e8:: with SMTP id f95mr38737227qtb.88.1563577999942; 
-	Fri, 19 Jul 2019 16:13:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190718022356.12639-1-zangrc.fnst@cn.fujitsu.com>
-	<12350e5f-3fdc-c934-61d7-0ea6ee80fe85@gmail.com>
-In-Reply-To: <12350e5f-3fdc-c934-61d7-0ea6ee80fe85@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=66G6jxm9XeLmzsw/46dEmuqdY1HHOwslaZmxG+rvZps=;
+	b=moXcyWFilKFCt1n8MXjW4l1okCeGtpilzCy7XxGM7BHES+af7+I0OIIbzCZnUolpbM
+	gd0vsAHu0PLm+r9NkSwfoFi0MHyu66hyCN4aQMts7UdF25DDGtD4Yitjc5eAzJQAuEig
+	wjdH4ceVk2929QgrqvAQiUdqk7LEADQfNi+Ffmic84bQZWOAM88+Fs6tMNbdOeQG/Kih
+	h5zws0RpsKOPzPNAHv9uHXYXz0mUPqALp2f5Esr5SlEdUs4CXhATA3fLTMAJ2dvKaIS0
+	bjvOZqkMnrotbxlbX5WKpY3ZNz0Cr+ZRFwa5zQB8YA7MWSdCX3bfAw7EXc/tMFcOJAYu
+	p1Og==
+X-Gm-Message-State: APjAAAV4FljRhUCB3191CtD23LU9am6s7SOWhDQn5b5H28LXZPCCOfPi
+	8Lu9E23+gjbfOsZvemCdQeryTbvGLOk=
+X-Google-Smtp-Source: APXvYqzEtuWqaP03BQjjTGE1/6HA4DFoZhqvZumWOHYcSAYUJjbRCTdRwETKZ2WEbHxLlWWOiCOtPQ==
+X-Received: by 2002:a63:3046:: with SMTP id w67mr19649299pgw.37.1563599670252; 
+	Fri, 19 Jul 2019 22:14:30 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	u69sm38863075pgu.77.2019.07.19.22.14.29
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Fri, 19 Jul 2019 22:14:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 19 Jul 2019 16:12:54 -0700
-Message-ID: <CAMKF1sorF8dNyehVtg9gGZWpagJTwVuZ8ww=D3nQtELOXX9ZKg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH] setxkbmap: upgrade 1.3.1 -> 1.3.2
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Jul 2019 22:14:18 -0700
+Message-Id: <20190720051418.15137-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] librelp: Pass Wno-error to compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2019 23:13:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 20 Jul 2019 05:14:30 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 18, 2019 at 5:06 PM akuster808 <akuster808@gmail.com> wrote:
->
-> Zang,
->
-> On 7/17/19 7:23 PM, Zang Ruochen wrote:
-> > -Upgrade from setxkbmap_1.3.1.bb to setxkbmap_1.3.2.bb.
->
-> We understand this is an upgrade so i don't think the above line is
-> necessary as it is covered in the subject line.
->
-> I find it more helpful if  a comment like "this a bug fix only" or
-> includes new features.
->
-> Information like that helps in stable branch backport selection.
->
+After autoconf-archive was upgraded to 2019.01.06 it started to add
+extra warning flags via WARN_CFLAGS along with -Werror which means that
+now compiler could be stricter and break the build if any of the new
+warnings are flagged
 
-https://gitlab.freedesktop.org/xorg/app/setxkbmap/-/tags
-tells me that its has been 4 years since 1.3.1 was released
+The difference is
 
-but changes are small, and seems fine to be backported
+old
 
-> thank you for taking the time to update this package.
-> regards,
-> Armin
-> >
-> > Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> > ---
-> >  .../xorg-app/{setxkbmap_1.3.1.bb => setxkbmap_1.3.2.bb}               | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-oe/recipes-graphics/xorg-app/{setxkbmap_1.3.1.bb => setxkbmap_1.3.2.bb} (78%)
-> >
-> > diff --git a/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb b/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> > similarity index 78%
-> > rename from meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb
-> > rename to meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> > index 8402753..30fbd1b 100644
-> > --- a/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.1.bb
-> > +++ b/meta-oe/recipes-graphics/xorg-app/setxkbmap_1.3.2.bb
-> > @@ -15,5 +15,5 @@ DEPENDS += "libxkbfile"
-> >
-> >  BBCLASSEXTEND = "native"
-> >
-> > -SRC_URI[md5sum] = "2c47a1b8e268df73963c4eb2316b1a89"
-> > -SRC_URI[sha256sum] = "a9ddb3963f263ba13f0ea105d8c45a531832140530217cc559587bb94f02d3e1"
-> > +SRC_URI[md5sum] = "93e736c98fb75856ee8227a0c49a128d"
-> > +SRC_URI[sha256sum] = "8ff27486442725e50b02d7049152f51d125ecad71b7ce503cfa09d5d8ceeb9f5"
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+WARN_CFLAGS='-fno-strict-aliasing  -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Werror -Wno-suggest-attribute=format -Wunused-parameter -Wmissing-field-initializers'
+
+new
+
+WARN_CFLAGS='-fno-strict-aliasing  -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wformat=2 -Wcast-align -Wformat-nonliteral -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Winline -Wpacked -Wmissing-format-attribute -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -pedantic -Wunused-parameter -Wmissing-field-initializers -Werror -Wno-suggest-attribute=format -Wunused-parameter -Wmissing-field-initializers'
+
+Hence we started seing build failure like https://errors.yoctoproject.org/Errors/Details/252684/
+
+This fix just turns off warnings-as-errors so build can still go on, if
+we need to fix the warnings they still are present in log.do_compile
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
+index 9e57dd520d..16c63a7523 100644
+--- a/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/librelp_1.4.0.bb
+@@ -14,3 +14,5 @@ SRCREV = "e96443dda3c080fa991decec26bc4ac98d24b9a2"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
++
++CPPFLAGS += "-Wno-error"
+-- 
+2.22.0
+
 
