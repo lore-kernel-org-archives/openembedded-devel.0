@@ -1,63 +1,53 @@
-Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 61228 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 21 Jul 2019 14:34:04 UTC
-Received: from APC01-PU1-obe.outbound.protection.outlook.com
-	(mail-oln040092254065.outbound.protection.outlook.com [40.92.254.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 792167ED61
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 505C871B99
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 14:34:04 +0000 (UTC)
-Received: from PU1APC01FT010.eop-APC01.prod.protection.outlook.com
-	(10.152.252.53) by PU1APC01HT189.eop-APC01.prod.protection.outlook.com
-	(10.152.252.253) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2052.18;
-	Sat, 20 Jul 2019 16:59:06 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM (10.152.252.58) by
-	PU1APC01FT010.mail.protection.outlook.com (10.152.252.83) with
-	Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2052.18 via Frontend Transport; Sat, 20 Jul 2019 16:59:06 +0000
-Received: from PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::149e:5882:56e4:98f8]) by PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	([fe80::149e:5882:56e4:98f8%4]) with mapi id 15.20.2094.013;
-	Sat, 20 Jul 2019 16:59:06 +0000
-From: Alistair Francis <alistair@alistair23.me>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-python][PATCH] python: pypi: Add python3-term
-Thread-Index: AQHVPxxwjcgCBxzX5EasfORV6ffvbQ==
-Date: Sat, 20 Jul 2019 16:59:05 +0000
-Message-ID: <PSXP216MB027758D2A51CD416FBB406E3DDCA0@PSXP216MB0277.KORP216.PROD.OUTLOOK.COM>
-Accept-Language: en-AU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BYAPR05CA0073.namprd05.prod.outlook.com
-	(2603:10b6:a03:e0::14) To PSXP216MB0277.KORP216.PROD.OUTLOOK.COM
-	(2603:1096:300:a::18)
-x-incomingtopheadermarker: OriginalChecksum:14B82B4B1F6BDA375930FB1D7BCEAC6B904688E14427811B548881DA06A66BAD;
-	UpperCasedChecksum:519FC26ED79FCBB4AB7DE577142A0905C774EAB742EA48FA9CA7DE8BD2D039EB;
-	SizeAsReceived:7454; Count:48
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.21.0
-x-tmn: [gS+HQVPqvLKkMmJO27CgyHCuw5vSZBGxjHDU5K5QX+MljEIua4p9/nx3Kasd/wIW]
-x-microsoft-original-message-id: <20190720165851.20759-1-alistair@alistair23.me>
-x-ms-publictraffictype: Email
-x-incomingheadercount: 48
-x-eopattributedmessage: 0
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(5050001)(7020095)(20181119110)(201702061078)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031323274)(2017031324274)(2017031322404)(1601125500)(1603101475)(1701031045);
-	SRVR:PU1APC01HT189; 
-x-ms-traffictypediagnostic: PU1APC01HT189:
-x-microsoft-antispam-message-info: qoahR1GGImArYPvXEPbbIJ4d3SCSt1lqG7tZXnfLm4rhkiNm0f8HymzaO5RaHGjxf7fagFlmPjxL4IEiC+q5uxQg4FHNS+mRD4FDgj+qHBEo58pAzKULSTAuATcNOM4kjchm1qmLa9Lk81Jk1Ss06wW8dBmxCdsrtXmrL+Ujcs4xOTsTx+BGBQRvZLEW0qFg
+	Sun, 21 Jul 2019 14:41:41 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id i2so17915695plt.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Jul 2019 07:41:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dPPgVOGhqdQHj9NkFE5JgxZymweRp7TQPsN6neo+PNc=;
+	b=s3nPsWmnVTg8zvWcDkoJTGzBLYLgmE7rRDPIV29dajAhwUNszjN6ppN0EAEDA3+VI8
+	4XnJiJp+Y4REFuldJVD6xXx/5vvhFOYO/XaOCb/7qHbO2KE9MXeQ/Hh5QAD2r1YUSbN4
+	lKETMGJHkldzNc0l+xLmxrtL4r+5IuXQClr6GAJ4UH3I1wEGOtgi+IKWKlN4bqxflKEI
+	3/77Mhy9AVOEkeniv2pADtbYhr+wkTMWlkbuJtd07z694eD0eDJKIy5mNwgUA0J3b65w
+	vyFvSVBLGtJ+JRrz4UHo9BU+qZNGMpf/VQAQjtyoWjciEN6LPBsESwiCsM35xzbythyU
+	g4/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dPPgVOGhqdQHj9NkFE5JgxZymweRp7TQPsN6neo+PNc=;
+	b=qbWJofLQfvBqF7r1nBCJplt6gV8jtVKRSHTv8GL91oVBGmqDBT0j/NzkjAH3VOuSxs
+	hyLyJtapO/MmDJt5REfXsqMT/QqXJwLn8eg2qCT55TT6M1cBGvoWqDa5wWdib0QnSqJ5
+	yPITaKd7Qo9nz0vkTPAnS12LZ4rkoCqnd+TCO8yZSqxeKD/J1sGnVulEnt5Pp9HRQtD7
+	3fNLZ1DyfntUihbQHfL1fM1WOgySZU7ZxR+se6/TKTnM02GDJmPiyURRqPA3mFvBcMm+
+	VrobSWjXH34v26xV8vVMlU1wDTJAyJ/tHLGDpXeuc/hX1G/rD0H1VQNb2T8POuL04DbV
+	oqmg==
+X-Gm-Message-State: APjAAAWEmYVtDKML6mAkd7tq8noGQS+KoVxAIvwYe4v+3z2JHwHB7JBV
+	D5VeRQh3AHB7H+rK6buYNcB0048p
+X-Google-Smtp-Source: APXvYqziy6vBDb4j8KDlStpkQVhn7oypunWAD9eQ15BDRKBWK0WoxrmDIlAjRyNZrkFL3WqAd3Ik/A==
+X-Received: by 2002:a17:902:6b86:: with SMTP id
+	p6mr71917242plk.14.1563720102289; 
+	Sun, 21 Jul 2019 07:41:42 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:c33:bd4d:a6f4:da99:27b4])
+	by smtp.gmail.com with ESMTPSA id
+	t9sm37392604pji.18.2019.07.21.07.41.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 21 Jul 2019 07:41:41 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 21 Jul 2019 07:41:28 -0700
+Message-Id: <cover.1563719996.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab180219-4f89-4ad6-c700-08d70d3392b2
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jul 2019 16:59:06.0353 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PU1APC01HT189
-Subject: [meta-python][PATCH] python: pypi: Add python3-term
+Subject: [warrior] 0/8] patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,47 +60,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 14:34:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 21 Jul 2019 14:41:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
----
- meta-python/recipes-devtools/python/python-term.inc     | 9 +++++++++
- meta-python/recipes-devtools/python/python3-term_2.3.bb | 2 ++
- 2 files changed, 11 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-term.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-term_2.3.bb
+Patch comments window closes on Wednesday.
 
-diff --git a/meta-python/recipes-devtools/python/python-term.inc b/meta-pyt=
-hon/recipes-devtools/python/python-term.inc
-new file mode 100644
-index 000000000..8a2df0e19
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-term.inc
-@@ -0,0 +1,9 @@
-+SUMMARY =3D "An enhanced version of the tty module"
-+SECTION =3D "devel/python"
-+LICENSE =3D "Python-2"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd90e2d280a4836c607520383d1639be=
-1"
-+
-+PYPI_PACKAGE_EXT =3D "zip"
-+
-+SRC_URI[md5sum] =3D "ab0c1bce381b1109fe4390c56aa06237"
-+SRC_URI[sha256sum] =3D "3dcc8c212e04700784e5c1c5b601916ba0549ae6025b35b64f=
-d62144899e7180"
-diff --git a/meta-python/recipes-devtools/python/python3-term_2.3.bb b/meta=
--python/recipes-devtools/python/python3-term_2.3.bb
-new file mode 100644
-index 000000000..372cffe04
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-term_2.3.bb
-@@ -0,0 +1,2 @@
-+require python-term.inc
-+inherit pypi setuptools3
---=20
-2.21.0
+The following changes since commit 8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
+
+  turbostat: copy bits.h from kernel to turbostat (2019-06-16 08:15:44 -0700)
+
+are available in the git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib stable/warrior-nmut
+  http://cgit.openembedded.org//log/?h=stable/warrior-nmut
+
+Adrian Bunk (2):
+  ndctl: Remove the unnecessary dependency on virtual/kernel
+  wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
+
+Andreas Müller (2):
+  gnome-desktop3: set correct meson gtk doc option
+  evince: add patch to fix build with recent gobject-introspection
+
+Martin Jansa (4):
+  ndctl: make MACHINE_ARCH and ignore from libblockdev
+  oprofile: make MACHINE_ARCH
+  oprofile: drop virtual/kernel dependency and switch back to
+    TUNE_PKGARCH
+  SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and util-linux for
+    phoronix-test-suite
+
+ ...ove-EvDocumentModel-get-type-function-dec.patch | 33 ++++++++++++++++++++++
+ meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
+ .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  1 +
+ ..._2019.03.01.bb => wireless-regdb_2019.06.03.bb} |  4 +--
+ meta-oe/conf/layer.conf                            |  3 ++
+ meta-oe/recipes-core/ndctl/ndctl_v63.bb            |  2 +-
+ meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  |  1 -
+ 7 files changed, 47 insertions(+), 9 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+ rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb => wireless-regdb_2019.06.03.bb} (91%)
+
+-- 
+2.7.4
 
 
