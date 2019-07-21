@@ -1,57 +1,60 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A0FE7E26B
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D66F7E66A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 02:17:03 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id t132so16044033pgb.9
+	Sun, 21 Jul 2019 02:22:31 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id w10so16060659pgj.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2019 19:17:05 -0700 (PDT)
+	Sat, 20 Jul 2019 19:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=VJiON97yHpN8FDtftA1WHnboVNBURxtGvpPisWDaN1s=;
-	b=sZFqbhBLGtFT7r368BCaDqSSYOAkcgPa2rx471xnRbQ8/oEYpKFON1KhAnXSqinZoX
-	Oh8RqKby5CpsOsvv9W9njnGR/YyNWTjfkIvCLZieQaaXZOzr04hCZ57lcMAqE7MRlhI+
-	6JBJi5ZGqehfUp4IYtJnNSVIuSm/84U7qvlpqot0XuInr7pBnceMl7HvDKX2EEag2ZFY
-	wwgiumr8Gm/3kR2OSxnd833jcj2L06KjqfnzYsrvsjJ5ciDiAwAfqGleWXEx7TXGatLy
-	YajsblunSVr8y8/B4JsQ1X+NyLowQfaycHvW+27amgEge1Q0apk3Uv7ygj5HNJHYumF7
-	vkrg==
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=oaem70AZxEObqjA4X9kfGFF17gkBfTfzdCNK6CjR4ZU=;
+	b=PlWyr3tRIALlzeVhFdKBHcznGp8+m+pV6LD8qY//6FbUK6+zo2XbhOqebwkLK/QXNC
+	RZeOxs38AkzfjPLt5NRPysxW9q1GwTKWTt1XnP6KeonNAbrXVAKuf/ZCbxSyZc0YTsMg
+	DgRI68jVw9ZsgYKSpLuK9LGeSAlKGHS+G/VMqd10QUX1IDMDzqa/udn5LwSuRNjEttqE
+	y7TMDtdTPKw2b0+zEsWR+I0bxCAmhkhEnEUKdFDxMjPHPXL/Ez33ZOgZeJtu+Za1rHtt
+	H2UnlkUCuuGiKwR96zh9saxXsvc4rFsZRPNV3MDMjIpnq2+P8tkKR+oJjBk7EbVXTcWF
+	9/pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
+	h=x-gm-message-state:subject:to:cc:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=VJiON97yHpN8FDtftA1WHnboVNBURxtGvpPisWDaN1s=;
-	b=naVXnNLZh/IpRLARPV7A2x0NIg6m9Nry4iWK+UGM3xPCyhiw9Vo/Kn2aIr6RVJSUsD
-	p6xnzhGQ1pAQuyH39+Cf/RL714ryqxoDInu+FOQkNLr4iTu/YfDIVfMWMIRUFmjBiUxw
-	5OrUk9SCDrDLObzOZDaXVtVMJAmnUWqRB+4OBU0zKVCv9rjer9zXBDkxhXvdJDAyCYEH
-	g+KnjcheX23GiOjfmVyGs960aoE+cdEQX9nj+H/rib9tytuyqo/ty+4GcDpvMj8pd5VO
-	oLT0hdSQT4oQ3dW3NP4ogCmOHbRrRnGAbRQKZNqADiFvIz3juk9ITq1wgTn5apoHmBtY
-	0NfQ==
-X-Gm-Message-State: APjAAAVvUiHKOu3NY7RSjUGihABgsTkJkvTcHv8Uzod7qMN2/xuFtdTz
-	9wXUaDHkk7Esk9OmyBih2mrEVZKYtkA=
-X-Google-Smtp-Source: APXvYqwCJ1kU1Wtpqb3v3XNHa/NBrr4Ees1dGl4C8kT8JhJmlCAa70DbtqbKWNyr+QEQroQeRsjq7A==
-X-Received: by 2002:a63:69c1:: with SMTP id
-	e184mr61541904pgc.198.1563675424081; 
-	Sat, 20 Jul 2019 19:17:04 -0700 (PDT)
+	bh=oaem70AZxEObqjA4X9kfGFF17gkBfTfzdCNK6CjR4ZU=;
+	b=FVA2bCOJhb2irXdenCECdtRo3+kSO7vUg9KTG+MtZtLu6S29MH6LC7Wnp6u+jwXWp8
+	TQxHEJ8U6YJXn1+oJCk7W3e8LwxUK5mS0Gw3k3JdBRxzt6miIgm2TZLSp4cOg9n8gpPF
+	AUntb70g8hpkPzAXxtHmOy9joASMlQIPz4YMlNW0903/6eHOdv/s58Uip3hYzMVfiU0C
+	epwBfnUyszgiXbaRNm2W48V7agsbteophB2qoy4XA0GsNuOKGU7kFbfH6vHu2c6zhAYs
+	pD1xZraE9YD5DS5nbMuO4MbwrjT0XkRy10JSy4gL5QVuBPb2vwwBOOWMcR/xjuKen7Su
+	E9yA==
+X-Gm-Message-State: APjAAAXmKBxThSmwx0eqZApHCawLAS9DFC7w25oHq6uXNQhZ4zkax3Z+
+	CF1IxduKY2tT04SIMycCE1RGHI41h0Q=
+X-Google-Smtp-Source: APXvYqytd8hs6QiQjf4CCeDru3zThPdxuWjplW6hs1VyA/l+yFPs31ANSP1A78Jp01s+uwZzuayeng==
+X-Received: by 2002:a65:51c1:: with SMTP id i1mr42135503pgq.417.1563675752627; 
+	Sat, 20 Jul 2019 19:22:32 -0700 (PDT)
 Received: from ?IPv6:2601:646:8500:6bc6::effc? ([2601:646:8500:6bc6::effc])
 	by smtp.gmail.com with ESMTPSA id
-	i9sm23941820pgg.38.2019.07.20.19.17.03
+	i124sm65472087pfe.61.2019.07.20.19.22.31
 	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Sat, 20 Jul 2019 19:17:03 -0700 (PDT)
-To: anatol.oe@belski.net, Anatol Belski <anbelski@microsoft.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20190721013327.27634-1-anbelski@microsoft.com>
+	Sat, 20 Jul 2019 19:22:31 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	Tim Orling <timothy.t.orling@linux.intel.com>
+References: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
+	<a853162aa82bf2c1723190f00fc6ad608ab21fc8.1561696450.git.timothy.t.orling@linux.intel.com>
+	<CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS
-Message-ID: <497ba06b-0113-3430-f9be-8d80a6ed6fde@gmail.com>
-Date: Sat, 20 Jul 2019 19:17:13 -0700
+Message-ID: <910f1d32-e526-6ecc-ba4f-cf5c75461725@gmail.com>
+Date: Sat, 20 Jul 2019 19:22:41 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190721013327.27634-1-anbelski@microsoft.com>
-Subject: Re: [meta-oe][PATCH] Finer gperftools packaging
+In-Reply-To: <CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/9] libdbi-perl: fix dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,75 +67,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 02:17:04 -0000
+X-List-Received-Date: Sun, 21 Jul 2019 02:22:32 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
-Hi Anatol
 
-On 7/20/19 6:33 PM, Anatol Belski via Openembedded-devel wrote:
-> This splits gperftools into
+On 7/17/19 6:04 AM, Martin Jansa wrote:
+> This causes libdbi-perl-native to depend on target perl again, why did you
+> revert the fix from:
+> http://git.openembedded.org/meta-openembedded/commit/?id=eb868d056d15a56596cbf6ed3a4b66b054f2d563
+> ?
+
+
+I think we should reintroduce the above patch Martin, would you be 
+interested to send patch ? we need to rejig the checksum match tests on 
+jenkins so
+
+such oversight does not happen.
+
+
 >
-> - gperftools script
-> - gperftools profiler and other libs
-> - libtcmalloc-minimal
-> - docs and other stuff
+>   === Comparing signatures for task do_populate_sysroot.sigdata between
+> qemux86 and qemux86copy ===
+> ERROR: libdbi-perl-native different signature for task
+> do_populate_sysroot.sigdata between qemux86 and qemux86copy
+> NOTE: Starting bitbake server...
+> NOTE: Started PRServer with DBfile: build/cache/prserv.sqlite3, IP:
+> 127.0.0.1, PORT: 38307, PID: 13970
+> Hash for dependent task perl/perl_5.30.0.bb.do_populate_sysroot
+> changed from e3a38726fc849347a14b574ef52a59f5578632accbf70259a6ffd09fea54dc4e
+> to de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
+> Unable to find matching sigdata for
+> oe-core/meta/recipes-devtools/perl/perl_5.30.0.bb.do_populate_sysroot
+> with hash de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
 >
-> Especially the libctmalloc-minimal is what is useful if only an improved
-> allocator needs to be used. The gperftools package stays otherwise fully
-> backward compatible, as it depends on any necessary lib packages.
-> Though, the lib packages can be installed separately, which allows for
-> more flexibility and for cleaner image contents.
+> ERROR: 1 errors found in
+> sstate-diff/1563367471/signatures.qemux86copy.do_populate_sysroot.sigdata.log
 >
-> Signed-off-by: Anatol Belski <anbelski@microsoft.com>
-> ---
->   .../gperftools/gperftools_2.7.bb              | 23 +++++++++++++++++++
->   1 file changed, 23 insertions(+)
 >
-> diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-> index c8b91278d..badf0d203 100644
-> --- a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-> +++ b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-> @@ -28,3 +28,26 @@ COMPATIBLE_HOST_mipsarch_libc-glibc = "null"
->   ARM_INSTRUCTION_SET_armv5 = "arm"
->   ARM_INSTRUCTION_SET_toolchain-clang_arm = "arm"
->   
-> +PACKAGES = "${PN} ${PN}-dbg ${PN}-doc ${PN}-libs ${PN}-libs-dev ${PN}-libs-staticdev libtcmalloc-minimal"
-> +
-
-some of these are default so instead of rewriting the variable 
-completely lets add/delete whatever is needed
-
-PACKAGE_BREFORE_PN += "libtcmalloc-minimal ${PN}-libs"
-
-> +EXTRA_OECONF_append += " --enable-static"
-> +
-why do we need this ?
-> +FILES_${PN} = "${bindir}/*"
-> +FILES_${PN}-doc = "${docdir} ${mandir}"
-
-we wont need these
-
-> +FILES_${PN}-libs = "${libdir}/libprofiler*${SOLIBS} ${libdir}/libprofiler*${SOLIBS}\
-> +		${libdir}/libtcmalloc${SOLIBS} \
-> +		${libdir}/libtcmalloc_debug${SOLIBS} \
-> +		${libdir}/libtcmalloc_and_profiler*${SOLIBS}"
-
-do we need a separate libs package ? what does it give us ?
-
-> +FILES_${PN}-libs-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/lib*.la ${libdir}/pkgconfig"
-> +FILES_${PN}-libs-staticdev = "${libdir}/*.a"
-not needed
-> +FILES_libtcmalloc-minimal = "${libdir}/libtcmalloc_minimal*${SOLIBS} ${libdir}/libtcmalloc_minimal_debug*${SOLIBS}"
-> +
-> +RDEPENDS_${PN} = "${PN}-libs (= ${EXTENDPKGV})"
-> +RDEPENDS_${PN}-libs = "libtcmalloc-minimal (= ${EXTENDPKGV})"
-> +RDEPENDS_${PN}-libs-dev = "${PN}-libs (= ${EXTENDPKGV}) libtcmalloc-minimal (= ${EXTENDPKGV})"
-> +RDEPENDS_${PN}-libs-staticdev = "${PN}-libs-dev (= ${EXTENDPKGV})"
-> +
-> +SECTION_${$PN}-doc = "doc"
-> +SECTION_${PN}-libs-dev = "devel"
-> +SECTION_${PN}-libs-staticdev = "devel"
-> +
+>
+> On Fri, Jun 28, 2019 at 7:00 AM Tim Orling <timothy.t.orling@linux.intel.com>
+> wrote:
+>
+>> * Fix RDEPENDS, drop class-target (dependencies are the same for native)
+>> * Reorganize recipe to best practices
+>> * Add ptest dependencies
+>>
+>> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+>> ---
+>>   .../perl/libdbi-perl_1.642.bb                 | 38 +++++++++++++++----
+>>   1 file changed, 31 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+>> b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+>> index ff4a9d0610..77991bd158 100644
+>> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+>> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
+>> @@ -7,13 +7,6 @@ database interface independent of the actual database
+>> being used. \
+>>   HOMEPAGE = "http://search.cpan.org/dist/DBI/"
+>>   SECTION = "libs"
+>>   LICENSE = "Artistic-1.0 | GPL-1.0+"
+>> -RDEPENDS_${PN}_class-target = " \
+>> -    perl-module-carp \
+>> -    perl-module-exporter \
+>> -    perl-module-exporter-heavy \
+>> -    perl-module-dynaloader \
+>> -"
+>> -
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
+>>
+>>   SRC_URI = "
+>> http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
+>> @@ -34,4 +27,35 @@ do_install_prepend() {
+>>          rm -rf ${B}/t/z*.t
+>>   }
+>>
+>> +RDEPENDS_${PN} = " \
+>> +    perl-module-carp \
+>> +    perl-module-exporter \
+>> +    perl-module-exporter-heavy \
+>> +    perl-module-dynaloader \
+>> +    perl-module-io-dir \
+>> +    perl-module-scalar-util \
+>> +    perl-module-universal \
+>> +"
+>> +
+>> +RDEPENDS_${PN}-ptest = " \
+>> +    ${PN} \
+>> +    perl-module-b \
+>> +    perl-module-benchmark \
+>> +    perl-module-cwd \
+>> +    perl-module-data-dumper \
+>> +    perl-module-encode \
+>> +    perl-module-encode-byte \
+>> +    perl-module-encode-encoding \
+>> +    perl-module-file-copy \
+>> +    perl-module-file-path \
+>> +    perl-module-lib \
+>> +    perl-module-perlio \
+>> +    perl-module-perlio-scalar \
+>> +    perl-module-perlio-via \
+>> +    perl-module-sdbm-file \
+>> +    perl-module-storable \
+>> +    perl-module-test-more \
+>> +    perl-module-utf8 \
+>> +    "
+>> +
+>>   BBCLASSEXTEND = "native"
+>> --
+>> 2.20.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
