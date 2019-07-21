@@ -1,30 +1,28 @@
 Return-Path: <ayoub.zaki@embexus.com>
 Received: from mailrelay1-3.pub.mailoutpod1-cph3.one.com
 	(mailrelay1-3.pub.mailoutpod1-cph3.one.com [46.30.212.10])
-	by mail.openembedded.org (Postfix) with ESMTP id B85BB7D41F
+	by mail.openembedded.org (Postfix) with ESMTP id BA2C37EF09
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 18:06:10 +0000 (UTC)
+	Sun, 21 Jul 2019 18:06:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=embexus.com; s=20140924;
-	h=references:in-reply-to:message-id:date:subject:cc:to:from:from;
-	bh=oBoMraYGZ3KozAqei8KjF4dM0ti4xalMWm9oNP2wGlk=;
-	b=eWr/5gWrZmdGIaKbhTnA93tLGZ0nbdUh/NNhziSgvMeMi0+zENR41OTxU2o9WZLdDrVG6tLLVV9Xc
-	L+4RY8QSNclQjb0Q2bv89g4DfzxhQ9sJRMj4bBDA+XM9ByrQREbBFrX+vDSXpYdJ1xcgqw3/8GTDqc
-	jgykkzzcsFIoggKI=
-X-HalOne-Cookie: d7729012abf3d7b3c9e8a75cac479ec9aaa90b68
-X-HalOne-ID: 383f8fde-abe2-11e9-aee2-d0431ea8a283
+	h=message-id:date:subject:cc:to:from:from;
+	bh=gor2J6nL9enxqg1/SY7DO/yvMar7j+dpOGbAjL7A2iI=;
+	b=mZI2URDrDuWY5dZj6h2Ar1PyQAQPFXziNvgpYWqOgfvNnTp4Gc3KBmx4OMilkP1AwfQftZfZ5YJ1w
+	XZ+A+duCht9wltIt37/tP/Y75NjVe9VYOuAPWwjJbBg9hz7vzA9Mwrbe1QAE2SNToFCqwjrv81J29K
+	ocgcNSoAm1hLg3JE=
+X-HalOne-Cookie: 1909a802749ed07dc359df02e00a05ff0c59a398
+X-HalOne-ID: 36f6243b-abe2-11e9-aee2-d0431ea8a283
 Received: from xps.fritz.box (unknown [77.181.243.113])
 	by mailrelay1.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id 383f8fde-abe2-11e9-aee2-d0431ea8a283;
-	Sun, 21 Jul 2019 18:06:10 +0000 (UTC)
+	id 36f6243b-abe2-11e9-aee2-d0431ea8a283;
+	Sun, 21 Jul 2019 18:06:09 +0000 (UTC)
 From: Ayoub Zaki <ayoub.zaki@embexus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 20:06:05 +0200
-Message-Id: <20190721180605.5356-2-ayoub.zaki@embexus.com>
+Date: Sun, 21 Jul 2019 20:06:04 +0200
+Message-Id: <20190721180605.5356-1-ayoub.zaki@embexus.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190721180605.5356-1-ayoub.zaki@embexus.com>
-References: <20190721180605.5356-1-ayoub.zaki@embexus.com>
-Subject: [meta-oe][PATCH 2/2] usbguard: Initial recipe
+Subject: [meta-oe][PATCH 1/2] pegtl: Initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,58 +37,34 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 21 Jul 2019 18:06:11 -0000
 
-Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
-by implementing basic whitelisting and blacklisting capabilities based on device attributes.
+Introduce the Parsing Expression Grammar Template Library (PEGTL)
+a zero-dependency C++ header-only parser combinator library for creating parsers
+according to the Parsing Expression Grammar (PEG).
 
 Signed-off-by: Ayoub Zaki <ayoub.zaki@embexus.com>
 ---
- .../usbguard/usbguard_0.7.4.bb                | 37 +++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+ meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
 
-diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+diff --git a/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb b/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
 new file mode 100644
-index 000000000..a77694cc3
+index 000000000..ca175f868
 --- /dev/null
-+++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION="USBGuard framework helps to protect against BadUSB."
-+HOMEPAGE="https://github.com/dkopecek/usbguard"
-+LICENSE="GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
++++ b/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION="header-only library for creating parsers according to Parsing Expression Grammar"
++HOMEPAGE="https://github.com/taocpp/PEGTL"
++LICENSE="MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=80cb066ab204c7fe022f1cfe0c2c6818"
 +
-+SRC_URI="https://github.com/USBGuard/usbguard/archive/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "ddaa9ae884200c861ad946f34dfd5ab9"
-+SRC_URI[sha256sum] = "d37886508583565aae0df6a110b11524c59b39e0deb25ee49fc34274e4784f55"
++SRC_URI="https://github.com/taocpp/PEGTL/archive/${PV}.tar.gz"
++SRC_URI[md5sum] = "fe96a704913523763642a2c4c4618091"
++SRC_URI[sha256sum] = "5699558ce06e8fad0530143199eeaefd29128fb4584879975c87947c8ad0395f"
 +
-+inherit autotools pkgconfig systemd bash-completion
++inherit cmake
 +
-+S= "${WORKDIR}/${PN}-${PN}-${PV}"
-+
-+DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
-+	dbus dbus-glib libqb libseccomp libcap-ng libgcrypt libsodium protobuf pegtl"
-+
-+EXTRA_OECONF += "--with-bundled-catch"
-+
-+PACKAGECONFIG ??= "libsodium \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-+
-+PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
-+PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
-+PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
-+PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
-+PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
-+
-+SYSTEMD_SERVICE_${PN} = "${PN}.service"
-+SYSTEMD_PACKAGES += "${PN}"
-+
-+
-+do_install_append(){
-+	
-+	sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \ 
-+						${D}${sysconfdir}/usbguard/usbguard-daemon.conf
-+}
++S="${WORKDIR}/PEGTL-${PV}"
 -- 
 2.17.1
 
