@@ -1,53 +1,55 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 505C871B99
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 111C97ED5F
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 21 Jul 2019 14:41:41 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id i2so17915695plt.1
+Received: by mail-pg1-f179.google.com with SMTP id x15so6083089pgg.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 07:41:42 -0700 (PDT)
+	Sun, 21 Jul 2019 07:41:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=dPPgVOGhqdQHj9NkFE5JgxZymweRp7TQPsN6neo+PNc=;
-	b=s3nPsWmnVTg8zvWcDkoJTGzBLYLgmE7rRDPIV29dajAhwUNszjN6ppN0EAEDA3+VI8
-	4XnJiJp+Y4REFuldJVD6xXx/5vvhFOYO/XaOCb/7qHbO2KE9MXeQ/Hh5QAD2r1YUSbN4
-	lKETMGJHkldzNc0l+xLmxrtL4r+5IuXQClr6GAJ4UH3I1wEGOtgi+IKWKlN4bqxflKEI
-	3/77Mhy9AVOEkeniv2pADtbYhr+wkTMWlkbuJtd07z694eD0eDJKIy5mNwgUA0J3b65w
-	vyFvSVBLGtJ+JRrz4UHo9BU+qZNGMpf/VQAQjtyoWjciEN6LPBsESwiCsM35xzbythyU
-	g4/Q==
+	bh=xVu7bnjmzoEZkAdVunhkJMKVOF7+WmsmLUtASo2P3QM=;
+	b=aY0L/EVVy2PCsnA+O+G+aDXxeMf66swDfIui4TmuBrN8fwC/N0GjFabc/bppYdlTuX
+	N0khP33NJCW7MJjNqdhIaN41f0xFSCytkcFxWZGqkiAjEXP+pz5syzl5MbPuMfNPP3U+
+	gx/eX6XbeKOOYrI2MA7S1iR+v4rmqnNZd7rSLGcwfESli6Xz9pFcGDPVx/7ZCIF4GC85
+	nIm7bjT7L0zq8C5nt8fypdHQuWcfbdcM7VAX3rSQmoKLsxSs/GKe7oiX9G5AiJch3O9Z
+	PGYiO028mQY7fxDhRgb7FFY7Bm+wKsbfcsJ4Y9Zh9FqYxNZi+K7orbGSCxMrPEShto+r
+	b6AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dPPgVOGhqdQHj9NkFE5JgxZymweRp7TQPsN6neo+PNc=;
-	b=qbWJofLQfvBqF7r1nBCJplt6gV8jtVKRSHTv8GL91oVBGmqDBT0j/NzkjAH3VOuSxs
-	hyLyJtapO/MmDJt5REfXsqMT/QqXJwLn8eg2qCT55TT6M1cBGvoWqDa5wWdib0QnSqJ5
-	yPITaKd7Qo9nz0vkTPAnS12LZ4rkoCqnd+TCO8yZSqxeKD/J1sGnVulEnt5Pp9HRQtD7
-	3fNLZ1DyfntUihbQHfL1fM1WOgySZU7ZxR+se6/TKTnM02GDJmPiyURRqPA3mFvBcMm+
-	VrobSWjXH34v26xV8vVMlU1wDTJAyJ/tHLGDpXeuc/hX1G/rD0H1VQNb2T8POuL04DbV
-	oqmg==
-X-Gm-Message-State: APjAAAWEmYVtDKML6mAkd7tq8noGQS+KoVxAIvwYe4v+3z2JHwHB7JBV
-	D5VeRQh3AHB7H+rK6buYNcB0048p
-X-Google-Smtp-Source: APXvYqziy6vBDb4j8KDlStpkQVhn7oypunWAD9eQ15BDRKBWK0WoxrmDIlAjRyNZrkFL3WqAd3Ik/A==
-X-Received: by 2002:a17:902:6b86:: with SMTP id
-	p6mr71917242plk.14.1563720102289; 
-	Sun, 21 Jul 2019 07:41:42 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=xVu7bnjmzoEZkAdVunhkJMKVOF7+WmsmLUtASo2P3QM=;
+	b=MSBHDCDYh2HgABXsvZT8ZtBOByubQdzcEYk6pO5XzNW/h5crg0YynjGGVcr0wG4pLS
+	rY7UwNC4pq29w+VVgdN4wrCQC/K42jTVqNlzHQt1dPQyyBqohbQYgGRZ3PwdY7I5aW58
+	vH8o3GxdcG/SkkzruXoYBjt3htymD96TtIalPgf4lLsuyU3PK1siN35tF4GaNftZzRu3
+	0lNOPsdMKMYxha91XNeWgqKukH6TAyAe4axZ20Z8mBdhZWc9QBU9qbuai/eX5y1SVX81
+	XhwCtaZ5U6Vzs1HcoX0rk1ZQKNObItz0ekphgCJs+fevYACLJ7gU/V1WdY3T9A3YBGN8
+	X6Vg==
+X-Gm-Message-State: APjAAAV4oPBHyYj7C31IJsxp2lAwjKd1Zu3GctsDWq8sGEKaJBsKaFAd
+	QWxefM0qt3tCIrkAh7YXy6p9rE6f
+X-Google-Smtp-Source: APXvYqwukRScVqcouoX/Wi8VdcZNyAoWF+sigWWccC/kgsdyR0b+f5vTecqMvcs2AwT6pUqNMKnS1w==
+X-Received: by 2002:a17:90a:eb08:: with SMTP id
+	j8mr35367855pjz.72.1563720103005; 
+	Sun, 21 Jul 2019 07:41:43 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:bd4d:a6f4:da99:27b4])
 	by smtp.gmail.com with ESMTPSA id
-	t9sm37392604pji.18.2019.07.21.07.41.41
+	t9sm37392604pji.18.2019.07.21.07.41.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jul 2019 07:41:41 -0700 (PDT)
+	Sun, 21 Jul 2019 07:41:42 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 07:41:28 -0700
-Message-Id: <cover.1563719996.git.akuster808@gmail.com>
+Date: Sun, 21 Jul 2019 07:41:29 -0700
+Message-Id: <b58af98c6cd8e45ba4839844151ae7508b81460c.1563719996.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <cover.1563719996.git.akuster808@gmail.com>
+References: <cover.1563719996.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Subject: [warrior] 0/8] patch review
+Subject: [warrior] 1/8] gnome-desktop3: set correct meson gtk doc option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,48 +62,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 14:41:41 -0000
+X-List-Received-Date: Sun, 21 Jul 2019 14:41:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Patch comments window closes on Wednesday.
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-The following changes since commit 8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
+Fixes:
+| ERROR: gnome-desktop3-3.32.0-r0 do_configure: QA Issue: gnome-desktop3: configure was passed unrecognised options: docs [unknown-configure-option]
 
-  turbostat: copy bits.h from kernel to turbostat (2019-06-16 08:15:44 -0700)
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-are available in the git repository at:
-
-  https://git.openembedded.org/meta-openembedded-contrib stable/warrior-nmut
-  http://cgit.openembedded.org//log/?h=stable/warrior-nmut
-
-Adrian Bunk (2):
-  ndctl: Remove the unnecessary dependency on virtual/kernel
-  wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
-
-Andreas Müller (2):
-  gnome-desktop3: set correct meson gtk doc option
-  evince: add patch to fix build with recent gobject-introspection
-
-Martin Jansa (4):
-  ndctl: make MACHINE_ARCH and ignore from libblockdev
-  oprofile: make MACHINE_ARCH
-  oprofile: drop virtual/kernel dependency and switch back to
-    TUNE_PKGARCH
-  SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and util-linux for
-    phoronix-test-suite
-
- ...ove-EvDocumentModel-get-type-function-dec.patch | 33 ++++++++++++++++++++++
- meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
- .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  1 +
- ..._2019.03.01.bb => wireless-regdb_2019.06.03.bb} |  4 +--
- meta-oe/conf/layer.conf                            |  3 ++
- meta-oe/recipes-core/ndctl/ndctl_v63.bb            |  2 +-
- meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  |  1 -
- 7 files changed, 47 insertions(+), 9 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
- rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb => wireless-regdb_2019.06.03.bb} (91%)
-
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+index ffd7dce..0acbb21 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+@@ -27,6 +27,7 @@ DEPENDS += "itstool-native gsettings-desktop-schemas virtual/libx11 gtk+3 startu
+ inherit distro_features_check gtk-doc
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
++GTKDOC_MESON_OPTION = "gtk_doc"
+ EXTRA_OEMESON = "-Ddesktop_docs=false"
+ 
+ PACKAGES =+ "libgnome-desktop3"
 -- 
 2.7.4
 
