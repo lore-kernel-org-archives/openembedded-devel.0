@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
-	[209.85.210.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CC5BD7EEC2
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 75C8D7EEC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 16:39:34 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id b13so16207233pfo.1
+	Sun, 21 Jul 2019 16:39:35 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id w10so16490840pgj.7
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 21 Jul 2019 09:39:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=w/zuleIKWoCmDzgslEya2lJa7b/pmGv1ZNKiqEydxVk=;
-	b=jfHJ94noN1Jp802BbN7ckTi3JjuowqT1VvAeBgmjFQnqzo8GIsWXOmKYwnY7xfPIhk
-	z2qyjpKRcxNn/VssTl4dkmYtrOT/RNaWd/+oVxejAYPdjTOElqJ7He/WA8irZ+rkHKJY
-	+/eRyQXd+5JSTAMcmQAv60+5P0VfXocadECSV3RefJT9fvrHstQ0/A3DG8wQ49SvgWIu
-	18ZJw2ruTzW4vCUcNtaHFoYlBDWdUNAZBQ0x84Rpnt8oUi2q5cB73o1SRmYsjiaZifKB
-	Ed2ig2uWmrgFAZuoixbYZi6LXcE5mg35KAZJj8HNwF/P3bcEPQ4tnYQBLnXq8YuvcMWO
-	y35A==
+	bh=2hWri7aYP2FEbc9/PC7Id84WQeY74tiFXsDZS+5C2mo=;
+	b=BEIp39r2ta7yNfdMHxreOL0Pz+8ErtREZvI6AwC5GDko9PKR+P0zkmDiKLTqfWi0mZ
+	UihpS/WdwtFnMjIi3zPxsoO/HCAFGtj7xX0yDCYNcyLNwYANVWxRCgYzv/4BvB7zXlGN
+	bya35noSfV/PIM6LjLDyFUZZBtcxQ9s55lzLlGhbPhSWh5TYilEW7rvF6rH4qzngPN5z
+	HavjYvANZNaHWyehyT2TiaQ7ZNEhUcJXttnjZr1G5DTKVG6+9QKz6JtqCmMwI/IosrtX
+	PtShv2PptC+VU2JMz+BChqi4VZR93YgATqTXOdwY1pOE9qkaNRJNeuznuxZnUjH3hDCe
+	7ALg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=w/zuleIKWoCmDzgslEya2lJa7b/pmGv1ZNKiqEydxVk=;
-	b=ZEpBnWU8MC9xgGDpcU3X2YUlR+H33lmQrjN02VA8grL/LLoAxr6vTOoFc8QdU7gLXa
-	k5wjAI9OxJFz93TyRJBs96uFhHMDlszP4WlRZvOW9zRV66eRRSfDRGiSunAHJP73+CK1
-	InxLncmo13bAGeksNAJ+NbfdTcC2735zSMg/q7TAzBCnAo4U6QRRtLi5osuiYLm+ow2m
-	0Z8ZYg/xHLZDK9jpFtppG1mQD+NUg0692WzGFESAx7Iy/W5hrxcZ7Ik4fOsK9+se5dXw
-	ULqHIbp+3uOtkEgcW0p+GUVom33SBZe5yOQgRGtdqfVpEwV26fScOACaE1pZuPH5TTpz
-	KHiA==
-X-Gm-Message-State: APjAAAWRUbrTpBOoz5lYKprD2xUK9vyr6JKm/zSmMM54vbJQjieVx8Ht
-	ZCsYRm+Bdtsa7N5YROnZIPfvRnr785c=
-X-Google-Smtp-Source: APXvYqzxq/GGOQn0/twYc+LCiZFXxyYpvXi2H00xpgWwma1Ov6UZWFjg7P4g6pMzustnovSdZQKEWQ==
-X-Received: by 2002:a63:f13:: with SMTP id e19mr66997829pgl.132.1563727175529; 
-	Sun, 21 Jul 2019 09:39:35 -0700 (PDT)
+	bh=2hWri7aYP2FEbc9/PC7Id84WQeY74tiFXsDZS+5C2mo=;
+	b=KoTKxlaDeHt43RmvN0Jh5oBaPBHLExY1k+Hc02RLvCCxGu1n4vqj+kuexVQPc80U/g
+	u2prS3eFzV6WzCjq60KYbPn9t1cujqELIO9BtZjV7wQvR6aumAKFwA/Wm7ju3EcrEtWU
+	CseuTgKFc9XrXZpTE4fxuoPV0nKhCfB9SLHYU5Tx57gFxqw9YAreUGkbbMQxkv0TaUB0
+	BTz6VXN3y6Aa6CGO1Bp9DmyaZ2ql8Fuml+QsNwecepexCKKXeSFgtLuzK/uwnBbqUOj1
+	mZIRpdBCt6TcYk1TRaW6Sl4JtXKM7NgNKupsKURHRl41pZzJ6hRYX9+EuKMAwDdEL9f6
+	VE+w==
+X-Gm-Message-State: APjAAAUjgpYM4jex7KZfa8/zD/qhRyo3KtGxkSCPW7F+7Kexg+IVwWq+
+	1/0j6v0mHD1IYqL8qC97/T9BAfwiCFA=
+X-Google-Smtp-Source: APXvYqw7ReuwTFSNsCaz4B6M/2YHaQBaMdsocXnJkCJQvSHvWeqaNwRPBx4YTOmuEbPwUq7BY/SNvQ==
+X-Received: by 2002:a17:90a:9301:: with SMTP id
+	p1mr72155749pjo.22.1563727176212; 
+	Sun, 21 Jul 2019 09:39:36 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	35sm38763285pgw.91.2019.07.21.09.39.34
+	35sm38763285pgw.91.2019.07.21.09.39.35
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
 	Sun, 21 Jul 2019 09:39:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 09:39:14 -0700
-Message-Id: <20190721163919.32659-9-raj.khem@gmail.com>
+Date: Sun, 21 Jul 2019 09:39:15 -0700
+Message-Id: <20190721163919.32659-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190721163919.32659-1-raj.khem@gmail.com>
 References: <20190721163919.32659-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 09/14] dumb-init: Switch to git fetcher
+Subject: [meta-oe][PATCH 10/14] pam-plugin-ldapdb: Use git fetcher
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,30 +67,28 @@ github archives are not reliable
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../dumb-init/{dumb-init_1.2.0.bb => dumb-init_1.2.2.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/dumb-init/{dumb-init_1.2.0.bb => dumb-init_1.2.2.bb} (63%)
+ meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.0.bb b/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.2.bb
-similarity index 63%
-rename from meta-oe/recipes-extended/dumb-init/dumb-init_1.2.0.bb
-rename to meta-oe/recipes-extended/dumb-init/dumb-init_1.2.2.bb
-index e1a6d9508b..09eab9dcd0 100644
---- a/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.0.bb
-+++ b/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.2.bb
-@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/Yelp/dumb-init/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5940d39995ea6857d01b8227109c2e9c"
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+index c59a259fc3..2fdadcbc9f 100644
+--- a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+@@ -10,11 +10,10 @@ DEPENDS = "libpam openldap"
+ inherit distro_features_check
+ REQUIRED_DISTRO_FEATURES = "pam"
  
--SRC_URI = "https://github.com/Yelp/dumb-init/archive/v${PV}.tar.gz"
--SRC_URI[md5sum] = "4eb7f43d7823686723ff7ac1bad097cb"
--SRC_URI[sha256sum] = "74486997321bd939cad2ee6af030f481d39751bc9aa0ece84ed55f864e309a3f"
-+SRCREV = "b1e978e486114797347deefcc03ab12629a13cc3"
-+SRC_URI = "git://github.com/Yelp/dumb-init"
+-SRC_URI = "https://github.com/rmbreak/pam_ldapdb/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
+-SRC_URI[md5sum] = "2dd4f1370fcfe995ee0ad09611109b87"
+-SRC_URI[sha256sum] = "8ed92b36523556bb5d9bf3eb33a1035e46041d4be767c8d62136930c0ca0e45b"
++SRCREV = "84d7b260f1ae6857ae36e014c9a5968e8aa1cbe8"
++SRC_URI = "git://github.com/rmbreak/pam_ldapdb"
+ 
+-S = "${WORKDIR}/pam_ldapdb-${PV}"
 +S = "${WORKDIR}/git"
  
- EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS} ${LDFLAGS}'"
- 
+ do_install () {
+     oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security
 -- 
 2.22.0
 
