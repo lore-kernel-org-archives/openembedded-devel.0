@@ -1,55 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id C7ED57ED5C
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+	[209.85.210.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B3DB7EE4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 14:41:42 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id f20so7196328pgj.0
+	Sun, 21 Jul 2019 14:41:43 +0000 (UTC)
+Received: by mail-pf1-f181.google.com with SMTP id r1so16128069pfq.12
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 21 Jul 2019 07:41:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=ydU6bUXp0vN1WxXJ8vqC4YaqaL3euJIh56R+eqhuuUA=;
-	b=u/pNXG1Wiry0IUue8lesnDVZjE2Kxx73Ab7IWHC7wUf6h3yKv9ky4hqu7UW1520TQV
-	yIbBVJXzmZdz4+98Xf6Su9e6zNWNVOc3rW0fzjno7VEh2hlXfFlQSrE6IakbsRbmDXiD
-	yb94VwZWOE3OMZc+Pb5Wr9QRIwMbQVDbrrcE0Az3Myk89ivcJqaY5P86ysEhGe+Z917n
-	pSX46i/CFDcdNsw99iDZLN2mdnZIawWDbwPwPqF6m7zwEjAfP5MdfiwitcgNEWpAnq29
-	Kj2cVs16eQC4JQpIGhjP6lLrEjD4WlEnNTpA9gpeNyMMWtsDqn9YzFrOSBJdteboTRWZ
-	M1sg==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=xuKDgfqBiJuB8lwRLZGCP9+2aIbKtDR0jTp2nPNGYDU=;
+	b=h8wSk8Cj5joj2zT9v/yEgtnyW8oBIbK1dODvgAoL9XpYgvjN6u9wNbAd3oal+gluPs
+	6ToQOVpoLq5kiY71IljPIx3wLy8DYw2b8QycNZKlLZKXI054idmCCwwKQPcq+hcpT3z8
+	lhwdtnUGEM+2nMxpEp6pF6IwcYaVzfEilcae5irWvUA2scUVTGI2v9ysLYzHfnVlUfb/
+	Pw9b7o7+ZwUHrsenhzwwDAl2tmaFQ2J5xxy+oBp4pF3IpTqaH9mKWth0WJHFo5OangKq
+	HDdCVc4L0QMoTqH3sekiZgbrHx43vbkBk52H9gbWABXCTiWId7V/C8iOjEuzwA7l4IAf
+	zTSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ydU6bUXp0vN1WxXJ8vqC4YaqaL3euJIh56R+eqhuuUA=;
-	b=Pl7DH2qBWoGRKSqtnIqmODF7mUdTYRtpLTTljJqD/wjFbHjtflKVxvS6U/2bZBEuWG
-	x5UeZl+fbmlNGjpDbX5xz/MFfLmZUgZG+XNBmmjUWBA/epu52Sb2Ih4EPdDSqDVORLD6
-	FpDNUWh2oaQdRxmLFmvSVbwgQglTFtUCHMXL/v55voJSX7P98ZSpg+c1lZgEfw6BHwIJ
-	iYHtl4HXCnzKabtkUqY5M6Yng/7QXoN11jMl6tpA3Vpdi1gXZpkaHuSZnBzL8vlYFTCD
-	u4TG5bbGKWspdsjfM9V0ekfELXmrslsTfeXoEDM+Zn+IED1TNFwNAfKJ5Yek8gJ/H+KM
-	VHRQ==
-X-Gm-Message-State: APjAAAVmZY2ze9wRQX1EiWXqNTHdMQE6Y+O09ffmF/WG93Hk8693blip
-	V40NRQEbE46LT09RQFJh0vjGftiz
-X-Google-Smtp-Source: APXvYqz89BQOpybDtsC6TS7Hf7in7QCa/6wqafv0CGem3Nu4iwDyNXQk7VyLZXaIphj8CLNdC4F1Tw==
-X-Received: by 2002:a17:90a:d151:: with SMTP id
-	t17mr70930567pjw.60.1563720103724; 
-	Sun, 21 Jul 2019 07:41:43 -0700 (PDT)
+	:references;
+	bh=xuKDgfqBiJuB8lwRLZGCP9+2aIbKtDR0jTp2nPNGYDU=;
+	b=Th1Ci//T2UpBCwAzA9zL9UICUGXtow+3JQYcyMBVF6MGwmpkkLXmcRynj3/6dSA+bO
+	qDAnr+eAfyER7tmlkPwXTVLjLZjzrj0LmmI9Fmi04nLh3eogCsmzVVhSsVnrHMh/Kmql
+	lPVXMj+DjAhKRfZxPsu09ZFNR4z3s+K8FAqMO1Nhk1NigssVq5I55hMKSIw0vH6m6rm0
+	7gFixQHj8K0+K7z97jSejXFf0LncMmZ6oezDVUEkMfqO2InhBB1bKWHNkIIfBOghp4Ql
+	7NI1uC5BdmqE7OyUxs+LhVXn/K4o9CLF8rlSvafPq2UvjWofEJ6dpzqx2zFZ7Gorkrpx
+	M9BA==
+X-Gm-Message-State: APjAAAUjC/1g+Fj9G7tAT4hjkFXqFt0sIFcR+2UbpH5NNqq3UKL8rfMN
+	58fXrHaxmBS5L2g/MZYgKxz2KbSD
+X-Google-Smtp-Source: APXvYqyCjmIQ1dHvvAQi/1Mf8s1lgKNUHws94tqfH57+6fQFeF06aklJAOuWwzN/UBhbDPZOgJ8R+w==
+X-Received: by 2002:a17:90a:ca11:: with SMTP id
+	x17mr72396755pjt.107.1563720104463; 
+	Sun, 21 Jul 2019 07:41:44 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:c33:bd4d:a6f4:da99:27b4])
 	by smtp.gmail.com with ESMTPSA id
 	t9sm37392604pji.18.2019.07.21.07.41.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jul 2019 07:41:43 -0700 (PDT)
+	Sun, 21 Jul 2019 07:41:44 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 07:41:30 -0700
-Message-Id: <26e6bf0f26815b06e4335c6a3bd34f52754faec5.1563719997.git.akuster808@gmail.com>
+Date: Sun, 21 Jul 2019 07:41:31 -0700
+Message-Id: <f18acea25953f5e0b2d5ebe5aa95c970c26f2ffc.1563719997.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1563719996.git.akuster808@gmail.com>
 References: <cover.1563719996.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [warrior] 2/8] evince: add patch to fix build with recent gobject-introspection
+Subject: [warrior] 3/8] ndctl: make MACHINE_ARCH and ignore from libblockdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,89 +60,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 14:41:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 21 Jul 2019 14:41:43 -0000
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-gobject-introspection torned some warnings to errors. That caused:
+* fixes:
+ERROR: libblockdev different signature for task do_configure.sigdata between hammerhead and mako
+Hash for dependent task libblockdev/libblockdev_2.20.bb.do_prepare_recipe_sysroot changed from bee357e6fd2c8479c9dbf9ccef6f30c416df1eb608b53a775383069a4215286b to 23a2ff7864fbd6d38b77918829651cff8d009702894ee670fab145c520d05be8
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-extended/libblockdev/libblockdev_2.20.bb.do_prepare_recipe_sysroot with hashes bee357e6fd2c8479c9dbf9ccef6f30c416df1eb608b53a775383069a4215286b or 23a2ff7864fbd6d38b77918829651cff8d009702894ee670fab145c520d05be8
 
-| ../../evince-3.28.2/libview/ev-document-model.h:57: Fatal: EvinceView: Namespace conflict for 'document_model_get_type'
+ERROR: ndctl different signature for task do_configure.sigdata between hammerhead and mako
+Hash for dependent task ndctl/ndctl_v63.bb.do_prepare_recipe_sysroot changed from ea34e9d64a9f30c3ed898bd3850e43e95297dacc560732e1d6bdfa961a6b357b to f886d72844b05c99cd241b8402d760d2c02e0264bfc66503d1e8742815463b3c
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-core/ndctl/ndctl_v63.bb.do_prepare_recipe_sysroot with hashes ea34e9d64a9f30c3ed898bd3850e43e95297dacc560732e1d6bdfa961a6b357b or f886d72844b05c99cd241b8402d760d2c02e0264bfc66503d1e8742815463b3c
 
-Have tried to fix evince by update to 3.28.5 and 3.32.0 but that causes nasty
-gettext errors which I was not able to fix yet.
+$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/ndctl/*do_prepare*.sigdata*
+runtaskdeps changed:
+['autoconf/autoconf_2.69.bb.do_populate_sysroot:virtual:native automake/automake_1.16.1.bb.do_populate_sysroot:virtual:native bash-completion/bash-completion_2.8.bb.do_populate_sysroot gcc/gcc-cross_7.3.bb.do_populate_sysroot gcc/gcc-runtime_7.3.bb.do_populate_sysroot glibc/glibc_2.29.bb.do_populate_sysroot gnu-config/gnu-config_git.bb.do_populate_sysroot:virtual:native json-c/json-c_0.13.1.bb.do_populate_sysroot kmod/kmod_git.bb.do_populate_sysroot libtool/libtool-cross_2.4.6.bb.do_populate_sysroot libtool/libtool-native_2.4.6.bb.do_populate_sysroot', -linux/linux-lg-hammerhead_git.bb.do_populate_sysroot, +linux/linux-lg-mako_git.bb.do_populate_sysroot, 'ndctl/ndctl_v63.bb.do_fetch pkgconfig/pkgconfig_git.bb.do_populate_sysroot:virtual:native systemd/systemd-systemctl-native.bb.do_populate_sysroot systemd/systemd_242.bb.do_populate_sysroot']
+linux/linux-lg-hammerhead_git.bb.do_populate_sysroot with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
+ changed to
+linux/linux-lg-mako_git.bb.do_populate_sysroot with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
+Dependency on task linux/linux-lg-mako_git.bb.do_populate_sysroot was added with hash 4c7372d0063be9d5c96bfad20a2052ded3a7121a06027c21a75e79a4f6a678e3
+Dependency on task linux/linux-lg-hammerhead_git.bb.do_populate_sysroot was removed with hash e58e94601af73831ea51ca6cc18578c26b9b491bcadb82a2c590b22498447438
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+$ bitbake-diffsigs /OE/build/luneos-master/webos-ports/tmp-glibc/sstate-diff/1557963509/[hm]*/*/libblockdev/*do_prepare*.sigdata*
+Hash for dependent task ndctl/ndctl_v63.bb.do_populate_sysroot changed from 0d123eb0e330a9e34d199eb012da9ae2eb614063f9412725ef39a06b152341f1 to 40077996bc35ac047210928559ad692f4eb20e37b07ef675bf49c9c39c46fe1e
+Unable to find matching sigdata for /OE/build/luneos-master/webos-ports/meta-openembedded/meta-oe/recipes-core/ndctl/ndctl_v63.bb.do_populate_sysroot with hashes 0d123eb0e330a9e34d199eb012da9ae2eb614063f9412725ef39a06b152341f1 or 40077996bc35ac047210928559ad692f4eb20e37b07ef675bf49c9c39c46fe1e
+
+as detected with:
+openembedded-core/scripts/sstate-diff-machines.sh --targets=world --tmpdir=tmp-glibc/ --analyze --machines="hammerhead mako qemux86"
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ove-EvDocumentModel-get-type-function-dec.patch | 33 ++++++++++++++++++++++
- meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
- 2 files changed, 40 insertions(+), 5 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+ meta-oe/conf/layer.conf                 | 6 ++++++
+ meta-oe/recipes-core/ndctl/ndctl_v63.bb | 3 +++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
-new file mode 100644
-index 0000000..dcc4a4e
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
-@@ -0,0 +1,33 @@
-+From 0cdce687d3edfa5ac0fd19539ba1815d039026d5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?I=C3=B1igo=20Mart=C3=ADnez?= <inigomartinez@gmail.com>
-+Date: Fri, 7 Sep 2018 22:34:29 +0200
-+Subject: [PATCH] libview: Remove EvDocumentModel get type function declaration
-+
-+The EvDocumentModel class declares the `ev_document_model_get_type`
-+function as part of the `GObject` boilerplate code.
-+
-+However, this declaration is not necessary and also causes a warning
-+when introspection data file, `EvinceView-3.0.gir`, is generated.
-+
-+Upstream-Status: Applied [1]
-+
-+
-+---
-+ libview/ev-document-model.h | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/libview/ev-document-model.h b/libview/ev-document-model.h
-+index 784e27d6..6a99e43a 100644
-+--- a/libview/ev-document-model.h
-++++ b/libview/ev-document-model.h
-+@@ -54,7 +54,6 @@ typedef enum {
-+ 	EV_PAGE_LAYOUT_AUTOMATIC
-+ } EvPageLayout;
-+ 
-+-GType            ev_document_model_get_type          (void) G_GNUC_CONST;
-+ EvDocumentModel *ev_document_model_new               (void);
-+ EvDocumentModel *ev_document_model_new_with_document (EvDocument      *document);
-+ 
-+-- 
-+2.20.1
-+
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-index 01f581a..d288590 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-@@ -6,11 +6,13 @@ DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-d
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index bc90390..c7dbbc1 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -51,6 +51,12 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   phoronix-test-suite->php \
+ "
  
- inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
- 
--SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
--           file://0001-help-remove-YELP-macro.patch \
--           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
--           file://0001-add-a-formatting-attribute-check.patch \
--           "
-+SRC_URI = " \
-+    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-+    file://0001-help-remove-YELP-macro.patch \
-+    file://0001-Add-format-attribute-to-_synctex_malloc.patch \
-+    file://0001-add-a-formatting-attribute-check.patch \
-+    file://0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch \
++# Depends on ndctl (through nvdimm PACKAGECONFIG) which depends on MACHINE_ARCH kernel
++# and making libblockdev MACHINE_ARCH is not an option as python3-blivet, udisks2, gvfs
++# would be MACHINE_ARCH as well
++SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
++  libblockdev->ndctl \
 +"
- SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
- SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
+ # ttf.inc inherits fontcache which adds fontconfig-utils to RDEPENDS
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   terminus-font->fontconfig \
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_v63.bb b/meta-oe/recipes-core/ndctl/ndctl_v63.bb
+index 1f3abf5..61e5302 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_v63.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_v63.bb
+@@ -19,6 +19,9 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+ 
++# Depends on MACHINE_ARCH kernel
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+ PACKAGECONFIG[systemd] = "--with-systemd, --without-systemd, systemd"
  
 -- 
 2.7.4
