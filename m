@@ -1,52 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 82F2B7EEAB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BDB271B99
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 14:41:47 +0000 (UTC)
-Received: by mail-pg1-f179.google.com with SMTP id n9so10205066pgc.1
+	Sun, 21 Jul 2019 14:47:58 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id d15so26768125qkl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 07:41:48 -0700 (PDT)
+	Sun, 21 Jul 2019 07:47:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=9x9aCJXXa79OE1eMSnVJAkzgxanIwypmnA64feJeGHg=;
-	b=lqPfJHYso6Yo5L+ZGo3EvhlzHfXQiR6h3S+gZoCYDnvcaUW+sJVfyr2Iz11bpywlCv
-	vpjGlCxLEC9gSw5QYpLYCPH4V13KclymCxvasAI+avqHoqPS1+QonI2ny2Na4cdUVmdl
-	ukDIU9mh5dJvS2fw+4ilTb/5M6KO6WB3qgDoEH4pZMI4/Ycakdbpp3w+XFBjzNF6Guqn
-	XoESuPxsFeENeQk5lT7ZvCuOWqiqcLfxJUsYRY7+5WvKd8yReNJzyF5iieSJmwBpdc9t
-	tu09BImBHAP3p8GXHstgx9ohn9oSetHIDcCKAMQdJx3p77UXZ+icAzFUghT0hSh9Y7/E
-	2OQA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=73p7RmOBnJTL/ejcP3fNLm8bRXUs8BIJQlcfa6ejJPQ=;
+	b=M5GR3rhK1WGpKQBwBuqNrlmJzeZg8WGBaH6+7NaK+C68tMrD6I1rxtK7vSbhqMA8Yj
+	2DW7LvzL5nGvPiCllHQvjiXbp2Ysw5BEEeCUTMW2YIhd1OdVAuHWJLFeYukZ05PKix3N
+	vETANuozfTiO6Gm/vlpw+bJRYx5jJrZ0E/0XZ+I7Prg5RMy4Dg14GdlIiPyrEPYKxtJq
+	subUBbK9ZVswCQGOaOztkXCS3IHsXKPULCRrwhzNfulk4bopYTtK/1PglrJlf2FNEbEL
+	BlEnHlep2I0cwSrA7JZNm8MIMf9KJxYllQyBTVqusjxAG9qY+4N5WkN4nPYOEvHlK8TL
+	X7Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=9x9aCJXXa79OE1eMSnVJAkzgxanIwypmnA64feJeGHg=;
-	b=FWi46j73/HuNL9L90jwQAhDeOddMip6dlezcbLAHgu1j6PQHfwgEA7nWPHMorAMqn9
-	kPfpJosQnszFg8vPuXPTDIhWS28vhaYQyW/YHKIgZyBUjGh8O/JRl+zEgA6NxCzKSpRs
-	WDTD2rRJeoitD/pt93Dym37Drao1dgPsQ3MDYFs5vbd2OERqKXlLYYrGcWel2iXnbyHZ
-	mj3YaHfZ8L6Zt2+FFqKaOpK7qxrkaBzhwRsl2/EjWgvVSdbNcJnNUR3wXKHJXfcjO4TE
-	PEOhYd7gN4dMmTt3WPtnqsxLGj7R7guXRudxqodmPIHpqGJ+Jsn5imp1zhifJOi6H12m
-	ctpg==
-X-Gm-Message-State: APjAAAVuYDKQZ9vMfwhgZ4yhmtgc0W2LK5Sx4h36mmrbawWYYz02rdTg
-	3qu+tE5qfo4996Dg6SoSXFgqhFUf
-X-Google-Smtp-Source: APXvYqwZn9csfvKr1CVBg7TQAA7K1RmImJ0Py9b5tpkrV8NJT2aWPElb7iJDoZElyiB3HvctSpaPiQ==
-X-Received: by 2002:a65:5c4b:: with SMTP id v11mr23875747pgr.62.1563720108451; 
-	Sun, 21 Jul 2019 07:41:48 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:c33:bd4d:a6f4:da99:27b4])
-	by smtp.gmail.com with ESMTPSA id
-	t9sm37392604pji.18.2019.07.21.07.41.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jul 2019 07:41:48 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 07:41:36 -0700
-Message-Id: <222cafdcd97549f67c98833721b4f8f33607555e.1563719997.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1563719996.git.akuster808@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=73p7RmOBnJTL/ejcP3fNLm8bRXUs8BIJQlcfa6ejJPQ=;
+	b=f2NyVjB8+l2fWXHUub1ZYxTXofXXBBeEg6VlMqjbLoa5b4Cc6tk5ar0VPcxjGEeQNT
+	OK/WkiFdqhPaKnxaQ9YedhRR8o0gGkbbI/wZpNBCQGqwZA8YnDVTu86ETNjrZGCzBBrU
+	gHTStBmQ9KcUkNfqViThaiyXSlJO0lZTpYf9SJCJ7WrQQqRQ7+8oxIYQ0AwwQEWV/l0n
+	8q2YkW7lyZp4DEyXGUtkG3yEj13Ds7Wpz3W9C5GHXrtbEOhcrA0Ea1oHQN2VaFBM8ULd
+	fpN6qfTWoGb61l3Fc1Ekm3lBEMsvVyys3QCZ8LUZFuiMJsxHMM4HAU3lQAljdHqc6W68
+	zgJQ==
+X-Gm-Message-State: APjAAAUtbkRQWVfyH7wJi/Re+zHXdzcXcFYFROOSGYQqRvioFtbVWKWW
+	ZO8kpCwXEVrVheenoy6fLZ11QrATy9RYgUEAXWE=
+X-Google-Smtp-Source: APXvYqxtFSxYUx22f0kWCtH25jzhiC9p1Ts5EGSoBRpbc09eZxA/yx+qOYPs5uUGNDbhd85Ms5CBCCrHgD6J3o0Z24A=
+X-Received: by 2002:a37:7083:: with SMTP id l125mr41921310qkc.71.1563720479115;
+	Sun, 21 Jul 2019 07:47:59 -0700 (PDT)
+MIME-Version: 1.0
 References: <cover.1563719996.git.akuster808@gmail.com>
-Subject: [warrior] 8/8] wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
+In-Reply-To: <cover.1563719996.git.akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 21 Jul 2019 07:47:32 -0700
+Message-ID: <CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [warrior] 0/8] patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +54,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 14:41:47 -0000
+X-List-Received-Date: Sun, 21 Jul 2019 14:47:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Adrian Bunk <bunk@stusta.de>
+On Sun, Jul 21, 2019 at 7:41 AM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> Patch comments window closes on Wednesday.
+>
 
-This includes deletion of a frequency where transmission
-is no longer legal in Japan.
+series looks fine to me
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../{wireless-regdb_2019.03.01.bb => wireless-regdb_2019.06.03.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb => wireless-regdb_2019.06.03.bb} (91%)
-
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.03.01.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.03.01.bb
-rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-index 7b7de58..ded44b3 100644
---- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.03.01.bb
-+++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2019.06.03.bb
-@@ -5,8 +5,8 @@ LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
- 
- SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
--SRC_URI[md5sum] = "b5eb2d0cc23f5e495a59405e34ce437f"
--SRC_URI[sha256sum] = "3a4e6f7006599bc5764f86e1e86422710da13ad80e0242147b61c6855ebc915f"
-+SRC_URI[md5sum] = "4b5ba3f089db7fdb7b9daae6a7c1f2cb"
-+SRC_URI[sha256sum] = "cd917ed86b63ce8d93947979f1f18948f03a4ac0ad89ec25227b36ac00dc54bf"
- 
- inherit bin_package allarch
- 
--- 
-2.7.4
-
+> The following changes since commit 8d5dcd6522e9d15e68637b6d7dda0401f9bb91=
+d0:
+>
+>   turbostat: copy bits.h from kernel to turbostat (2019-06-16 08:15:44 -0=
+700)
+>
+> are available in the git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded-contrib stable/warrior-n=
+mut
+>   http://cgit.openembedded.org//log/?h=3Dstable/warrior-nmut
+>
+> Adrian Bunk (2):
+>   ndctl: Remove the unnecessary dependency on virtual/kernel
+>   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
+>
+> Andreas M=C3=BCller (2):
+>   gnome-desktop3: set correct meson gtk doc option
+>   evince: add patch to fix build with recent gobject-introspection
+>
+> Martin Jansa (4):
+>   ndctl: make MACHINE_ARCH and ignore from libblockdev
+>   oprofile: make MACHINE_ARCH
+>   oprofile: drop virtual/kernel dependency and switch back to
+>     TUNE_PKGARCH
+>   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and util-linux for
+>     phoronix-test-suite
+>
+>  ...ove-EvDocumentModel-get-type-function-dec.patch | 33 ++++++++++++++++=
+++++++
+>  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
+>  .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  1 +
+>  ..._2019.03.01.bb =3D> wireless-regdb_2019.06.03.bb} |  4 +--
+>  meta-oe/conf/layer.conf                            |  3 ++
+>  meta-oe/recipes-core/ndctl/ndctl_v63.bb            |  2 +-
+>  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  |  1 -
+>  7 files changed, 47 insertions(+), 9 deletions(-)
+>  create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-libview-R=
+emove-EvDocumentModel-get-type-function-dec.patch
+>  rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-reg=
+db_2019.03.01.bb =3D> wireless-regdb_2019.06.03.bb} (91%)
+>
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
