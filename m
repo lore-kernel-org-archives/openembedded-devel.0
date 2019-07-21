@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
-	[209.85.210.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 912AA7EEB5
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 7328A7EEBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 16:39:32 +0000 (UTC)
-Received: by mail-pf1-f173.google.com with SMTP id y15so16204657pfn.5
+	Sun, 21 Jul 2019 16:39:33 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id m30so16209080pff.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 09:39:33 -0700 (PDT)
+	Sun, 21 Jul 2019 09:39:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=rDHUXPJBFIrO3Fwl5UTbMZUmbzksy+u2jWHK1VkxWjw=;
-	b=CCJ/FUyQ9udT2f1ZwXX2tQHQgrrf7GF+EBp4KegINmvE9aR02oeVZF8kdlVGg5GwkW
-	KpemengdvIFmV56A2ugvw16dDS45SUvKnxFVF5EpDdh4cLBkW/7cSxRQSXbfFXEZnLeA
-	N0CFef8GfwkUwvwL6EgNsvSaZATkIyFADEerxZx0KY1hSKGqQfxkWAF8SZ0GywWXxYNP
-	Hu3eBBCixIGbq4WW4XDAP803gU9h/j0KuTFIlynEWrTMt9iSSxDdzZUWRmcb30cwBxzf
-	OIKsBJrIrRJQdwFtmaxhiB7sxalovrP5iGRIVapVTyebG4EzjfQ94Vpx2Xl5jCZsT5gl
-	33pw==
+	bh=okFvScxrjcARuf2SKlQ3mpkKkonqJybUhKdb1VzbDeY=;
+	b=XKdcvRQjg/+7wG/WumxsrKvVozzFkj7Kt23A4vymcpIzdqDOUNDZsFVRfO56iDus/A
+	eG38ORkKTWTCISwHDUSX07zlNsk1iF5QGM82kJYoYT5fbZD+01EZNZXZNKO34S49HWPU
+	kg2u60vwAgTN/oyloUkAwk/3hqvsElfd9VPv87FtQSXgHvRsQRwX4GcPttp7SlxW57NA
+	GdqKeRmyC1b12IxlNb9mNUWMlqmbbbROnwyK7OMpt7qC2C9tDOjFKhlilIGHO7akKoJl
+	IZEj+eRYSphlGQnBqA48t4EjhCc3ba8/EKDOlCmIbgCcb1oPtyrpb0u9V47yec6IP8tT
+	BV+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=rDHUXPJBFIrO3Fwl5UTbMZUmbzksy+u2jWHK1VkxWjw=;
-	b=n34aIclTiB6KinL7miwNqC3Y4Fc8ajAwCyy/bAUKeAJsQ+tI2+5knBppID5n/tnsh5
-	5J/avr/qeRtMy+B9VTkwUD+KfT7dM+0VpEyCBrUJitzVAgGLbG+MiZlhToHA7LSDWND2
-	P8As764uDnxVniyBs5iQOzZ68hIWIBFy6enGY6KZfb6RDR726nGM34afXswFCLrqOo8G
-	87+zug4+N9WMwkY10XX3o8sGzLDaAQNSywUULqzO0Fk3YHuA/LeHh3bzOVFhGBGrKKx2
-	9LGZS5rM1rVwcMTO0m02ompNVhfmaS/n/ljDvxboV7vaHeY+QKQnOAdfTF+vv7dVCeOF
-	IiMw==
-X-Gm-Message-State: APjAAAWL19/Ia8G7qu84C9wtUNMDo3FL9zRkBAJiGoBkk/8+uCcemihI
-	yl3Grk5fnwB0HE08v13h07aa25XyKrE=
-X-Google-Smtp-Source: APXvYqwwSAg49fhy6hOGbmfaMj8Y0VPkhLcldYlN4pgBNaSghqeLX0Dpue01wW1N4A4Gvpy7cxp7/Q==
-X-Received: by 2002:a63:d23:: with SMTP id c35mr66802965pgl.376.1563727173170; 
-	Sun, 21 Jul 2019 09:39:33 -0700 (PDT)
+	bh=okFvScxrjcARuf2SKlQ3mpkKkonqJybUhKdb1VzbDeY=;
+	b=ER19moxGogQJXZpNqB1pDXWsw1Q4GNzdXyq1vktzfrNzzAv569UG6oKwqQeeHNINz7
+	9M6PtS6JS7RwDlRD68gEAv/+2fsd/veO5I592IGYMugIIU918TLK86nPzbJ4EhfHd9tI
+	IgLn1nROc4W+OZatPB3YLGP5aVH4J/uRZHPgRArnOFZ+OoopIY568dPXW+lVHXL5UGtV
+	9rpFGxnG/ucjyIoH4HjyfCVOcD0f/PUZSBGIJbhBjgXO4iXpUYM8sP4NoGlpugZA+v+D
+	pkhZOXPU9EEacCAJXUzI7vowOOWbDJpnnSTq3VstZwtr3twgq+rxwIJA+Xp9szVLxzzR
+	Foow==
+X-Gm-Message-State: APjAAAVNl3ZIxZPJZS9QkAT3xK3h9sfICHXG35u64p5eXTVxaxegvdXM
+	8DeRsPv4qmecdPn1sDZRfBB56E6D75k=
+X-Google-Smtp-Source: APXvYqxNwjHz+GKGem5jORvfYluzir+E1/W5JTjt1gIz3M31F9tJLTCqiOmypvu+tAyORCkjVGbT4A==
+X-Received: by 2002:a65:6846:: with SMTP id q6mr28388155pgt.150.1563727174155; 
+	Sun, 21 Jul 2019 09:39:34 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	35sm38763285pgw.91.2019.07.21.09.39.32
+	35sm38763285pgw.91.2019.07.21.09.39.33
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 21 Jul 2019 09:39:32 -0700 (PDT)
+	Sun, 21 Jul 2019 09:39:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jul 2019 09:39:11 -0700
-Message-Id: <20190721163919.32659-6-raj.khem@gmail.com>
+Date: Sun, 21 Jul 2019 09:39:12 -0700
+Message-Id: <20190721163919.32659-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190721163919.32659-1-raj.khem@gmail.com>
 References: <20190721163919.32659-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 06/14] python-matplotlib: Use git src_uri
+Subject: [meta-oe][PATCH 07/14] mpv: Switch to using git fetcher
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,38 +59,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jul 2019 16:39:32 -0000
+X-List-Received-Date: Sun, 21 Jul 2019 16:39:33 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes
-python-matplotlib-2.0.2: SRC_URI uses unstable GitHub archives [src-uri-bad]
+github tarballs are unreliable, fixes
+
+SRC_URI uses unstable GitHub archives [src-uri-bad]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python-matplotlib_2.0.2.bb    | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-matplotlib_2.0.2.bb b/meta-python/recipes-devtools/python/python-matplotlib_2.0.2.bb
-index 5b1c3f05b9..e586ee4dac 100644
---- a/meta-python/recipes-devtools/python/python-matplotlib_2.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-matplotlib_2.0.2.bb
-@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74"
- DEPENDS += "python-numpy freetype libpng python-dateutil python-pytz"
- RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng python-dateutil python-pytz"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+index 6586e352ea..d334956a8f 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+@@ -14,15 +14,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
+ # While this item does not require it, it depends on ffmpeg which does
+ LICENSE_FLAGS = "commercial"
  
--SRC_URI = "https://github.com/matplotlib/matplotlib/archive/v${PV}.tar.gz \
-+SRCREV = "e175a41cb81880dbc553d9140e6ae5717457afa8"
-+SRC_URI = "git://github.com/matplotlib/matplotlib \
-            file://fix_setupext.patch \
++SRCREV_mpv = "4db82f04502cbcd20d9a975df9dfde91d8c389e3"
+ SRC_URI = " \
+-    https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
+-    http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf;downloadfilename=waf;subdir=${BPN}-${PV} \
++    git://github.com/mpv-player/mpv;name=mpv \
++    http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf;downloadfilename=waf;subdir=git \
  "
--SRC_URI[md5sum] = "89717c1ef3c6fdcd6fb1f3b597a4858c"
--SRC_URI[sha256sum] = "aebed23921562792b68b8ca355de5abc176af4424f1987e2fa95f65e5c5e7e89"
--S = "${WORKDIR}/matplotlib-${PV}"
+-SRC_URI[mpv.md5sum] = "038d0b660de07ff645ad6a741704ecab"
+-SRC_URI[mpv.sha256sum] = "daf3ef358d5f260f2269f7caabce27f446c291457ec330077152127133b71b46"
+ SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
+ SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
+ 
 +S = "${WORKDIR}/git"
 +
- EXTRA_OECONF = "--disable-docs"
+ inherit waf pkgconfig pythonnative distro_features_check
  
- inherit setuptools pkgconfig
+ LUA ?= "lua"
 -- 
 2.22.0
 
