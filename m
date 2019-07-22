@@ -1,48 +1,52 @@
-Return-Path: <shantanu@senic.com>
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
-	[209.85.167.50])
-	by mail.openembedded.org (Postfix) with ESMTP id A06027CFE9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+	[209.85.214.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 848287E97A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 19:55:05 +0000 (UTC)
-Received: by mail-lf1-f50.google.com with SMTP id p197so27529618lfa.2
+	Mon, 22 Jul 2019 21:18:23 +0000 (UTC)
+Received: by mail-pl1-f177.google.com with SMTP id 4so12711381pld.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 12:55:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=senic-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=qH7dIkg0h6SA4v1c41us5s6FpR0eoJ4H4MtIlJbDgrE=;
-	b=XO0+sJ1iZir43nlQNZ9faFY+2uvzdoErx9c2zfLHyXezMoeLNYBiQNw0/CEW3ZeLyk
-	Oeb4I30LPGKXDiXc6N9SOz/KzMOosIcvZvGdRoy+eb78ChteSZ4Q+J+tj+Uc9saMwlPJ
-	Iit4zck+7f7EGJqtpNifmOR0OEvDZQcZq5FZnyfW3+W2SalmKFrJP1/BnSS72mjoV93l
-	iVKQw90D2bnXb4PH7xnYrXV1wC3yRErxiL8XnWXdE9GVt9pa7a8YpVXHgMxujuHeKIdI
-	pBlicOup8St1KlowlttGmidAiTLjhTHLOgJ5/Fk1VqVsvMCjNpqlg28FUp5ntU6E9r2i
-	DMvQ==
+	Mon, 22 Jul 2019 14:18:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AIaLrf4mSDBJwDXQMwoumKcNwb02kzaZOj3JkjAf9tQ=;
+	b=JVJyZ4U+uBlkkvQhqll/TX1OxyqxLNtopWgEKe7NgkQf5jQkYHvvZvKtpgnG9VsCkB
+	URIGF3gDf6hL/lQZ+u12vihE1AeIqaYdV4JwNqrRofcTJ215ICyAzEPw0MvKw1Fk51Y6
+	lme6iqZhWI/YZhXeLJZz8+JmaX8opWRGmD4bByvApy0LPLoxJAzIP5mhcLV1BXPOC6Gj
+	gEutDHu8uSDbhV+vKgZOaIrc6G/aiyNROYGdpRlZUSQPG437ev2wY7us5NTWCnWJ02sl
+	oJlPtTaQOER5+QgQIPIw+YbqrVQm5aT2nOZ8Fa+cfOlmcqMfMkOQS6Xtd4Xy4y7rkMWD
+	B9BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=qH7dIkg0h6SA4v1c41us5s6FpR0eoJ4H4MtIlJbDgrE=;
-	b=kAj8qyDMpVBbFLgaFpbvlk1+kzySUSBana8QMG5hMpuGjciV6OHKf0yHEJ5Qwut6BY
-	9EheRNV0xaCUHtV0b9neHX0biIEkmipwyOCcrQ+TnTRQxGYZt4VO/puipT8iWcyh7666
-	kMTXEzI7hswq2BTwBE4kNKp5J+SDyIrkmKiwC6PCxXFe6qfQCRj7KV3CZkp1vePnKsYZ
-	Ru+nk7euqAls6eUWRWaeGQs7br0+mPu8FImZleCiBv9QKLxztvWSd7CG3dSR6foD/Kgd
-	1fSjK/FNfi8vrGl0h7WckdFFN/ecF2PNdYREovJjsUXoq/3cGjbwMN42u/C1dS0UMrWa
-	B0FQ==
-X-Gm-Message-State: APjAAAW0ZjK88BuKtPJg868VcJeKR7yOKfvcwWlNZQOcyRmO8NZpUFmA
-	YwupfxzQs1auNU4SPFWNphDAglZidQDxlg1mlpiNE7/rZ+c=
-X-Google-Smtp-Source: APXvYqzaG/55S2iKLUR73yDodFAm+gVUpnVde7MBthUXDKAFa5ze2wN2V1CB0LBjcElMsAPpmbnNM4yDg95LuPcCsHU=
-X-Received: by 2002:a05:6512:1da:: with SMTP id
-	f26mr32337449lfp.129.1563825305973; 
-	Mon, 22 Jul 2019 12:55:05 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AIaLrf4mSDBJwDXQMwoumKcNwb02kzaZOj3JkjAf9tQ=;
+	b=RhJIbogcZ5DNjfXct7l/OT2JE2X6ZKBCxlbDYxxCOHkNaEMmymg4rqm4A5nYy3qtQV
+	NwOT41ayz0/F1cU6DgbRooBpoSWts0NVZD2sIUNSippEm2ObKS8BUlPPIeEaK3QUcECZ
+	rheee4Wr2u3ZRW/znM670+d5JnMuTdjLNyEdak3V1xiEYPvMxOPR7CmewMam3XkdlBV8
+	2jNohqRybaGblABr+YBk8bpR8xeSl4ebUB21OgCJ+jmekD9WBzEnLUj95sJmkKH8BHK4
+	aDY+3mUEUZ69y7uMBF7VPEC37nfBwM3VIETsrDkGr6OyiJF3BFH/0FQ8Xnm24dPSV7cW
+	4jmA==
+X-Gm-Message-State: APjAAAWdF7TzF8lA5jTJSi/1JgwEBb3fM/lqOmVaYhbTkdh0UEUfXgJw
+	arfYiRiic+7BhO9K2XEYvObCDV+YrCM=
+X-Google-Smtp-Source: APXvYqywZqEzyITcfKXOoA3pAVXZVrrwez5nb/yC7txEPoxTqupbqGeh34RcM90Q1Vxo4LFnUZQsgg==
+X-Received: by 2002:a17:902:9346:: with SMTP id
+	g6mr76903305plp.61.1563830304027; 
+	Mon, 22 Jul 2019 14:18:24 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	a3sm36347816pfl.145.2019.07.22.14.18.23
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 22 Jul 2019 14:18:23 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Jul 2019 14:18:13 -0700
+Message-Id: <20190722211814.14237-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-References: <20190722195241.2820-1-shantanu@senic.com>
-In-Reply-To: <20190722195241.2820-1-shantanu@senic.com>
-From: Shantanu Choudhary <shantanu@senic.com>
-Date: Tue, 23 Jul 2019 01:24:54 +0530
-Message-ID: <CAGeQtJRX1_RZO5_s9+e0nOT8imV0fHMdYtjHro2Er_ROncgO8Q@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2] Add recipe for python bindings of Berkeley DB
+Cc: sangelovic <angelovic.s@gmail.com>
+Subject: [meta-oe][PATCH] Introduce recipes for sdbus-c++ library and its tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,87 +59,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 19:55:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Jul 2019 21:18:23 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jul 23, 2019 at 1:22 AM Shantanu <shantanu@senic.com> wrote:
+From: sangelovic <angelovic.s@gmail.com>
 
-> Included correction suggested from Khem of using STAGING_EXECPREFIXDIR
-> and including python3 with DEPENDS.
->
+---
+ .../sdbus-c++/sdbus-c++-0.7.2/run-ptest       | 15 ++++++
+ .../sdbus-c++/sdbus-c++-tools-native_0.7.2.bb | 14 ++++++
+ .../recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb | 49 +++++++++++++++++++
+ 3 files changed, 78 insertions(+)
+ create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
+ create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
+ create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
 
-I don't have access to the master branch to test the suggestions, could
-someone help me out and confirm if this recipe works okay on the master,
-please?
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
+new file mode 100644
+index 0000000000..8fa9453e39
+--- /dev/null
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
+@@ -0,0 +1,15 @@
++#!/bin/sh
++set -e
++set -o pipefail
++
++logger "** Starting sdbus-c++-unit-tests"
++/opt/test/bin/sdbus-c++-unit-tests --gtest_output=xml:/data/ptest/sdbus-c++/sdbus-c++-unit-tests.xml |& \
++sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
++sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
++awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}'
++
++logger "** Starting sdbus-c++-integration-tests"
++/opt/test/bin/sdbus-c++-integration-tests --gtest_output=xml:/data/ptest/sdbus-c++/sdbus-c++-integration-tests.xml |& \
++sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
++sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
++awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}' 
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
+new file mode 100644
+index 0000000000..e319404f49
+--- /dev/null
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "sdbus-c++ native tools"
++DESCRIPTION = "Native interface code generator for development with sdbus-c++"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git-tools/COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
++
++inherit cmake native
++
++DEPENDS += "expat"
++
++SRCREV = "750dab39270f338181db8d841cd4b1a9a50ae4d7"
++SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;destsuffix=git-tools;branch=master;subpath=tools"
++
++S = "${WORKDIR}/git-tools"
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
+new file mode 100644
+index 0000000000..457f5d676a
+--- /dev/null
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
+@@ -0,0 +1,49 @@
++SUMMARY = "sdbus-c++"
++DESCRIPTION = "High-level C++ D-Bus library designed to provide easy-to-use yet powerful API in modern C++"
++
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
++
++inherit cmake pkgconfig systemd ptest python3native
++
++TEST_BIN_DIR = "/opt/test/bin"
++
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-external-libsystemd', 'with-builtin-libsystemd', d)} \
++                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
++PACKAGECONFIG[with-builtin-libsystemd] = "-DBUILD_LIBSYSTEMD=ON,-DBUILD_LIBSYSTEMD=OFF,meson-native ninja-native git-native gperf-native gettext-native util-linux libcap,libcap"
++PACKAGECONFIG[with-external-libsystemd] = "-DBUILD_LIBSYSTEMD=OFF,-DBUILD_LIBSYSTEMD=ON,systemd,libsystemd"
++PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${TEST_BIN_DIR},-DBUILD_TESTS=OFF"
++
++DEPENDS += "expat"
++
++SRCREV = "750dab39270f338181db8d841cd4b1a9a50ae4d7"
++SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;destsuffix=sdbus-cpp-${PV};branch=master"
++SRC_URI += "file://run-ptest"
++
++# Allow CMake to use git on the host machine
++OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
++# Ninja is the default CMake generator in Yocto now, so let's set Unix Makefiles explicitly
++OECMAKE_GENERATOR = "Unix Makefiles"
++
++EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
++                 -DBUILD_DOC=ON \
++                 -DBUILD_DOXYGEN_DOC=OFF"
++
++S = "${WORKDIR}/sdbus-cpp-${PV}"
++
++PACKAGES += "${PN}-test"
++ALLOW_EMPTY_${PN}-test = "1"
++RDEPENDS_${PN}-test = "${PN}"
++RDEPENDS_${PN}-ptest = "${PN}-test"
++
++# Don't take org.sdbuscpp.integrationtests.conf file into the base package
++FILES_${PN} = "${libdir}/"
++
++FILES_${PN}-test += "${sysconfdir}/dbus-1/system.d/"
++FILES_${PN}-test += "${TEST_BIN_DIR}/"
++
++FILES_${PN}-dev += "${bindir}/sdbus-c++-xml2cpp"
++FILES_${PN}-dev += "${libdir}/cmake/sdbus-c++/sdbus-c++-config.cmake"
++FILES_${PN}-dev += "${libdir}/cmake/sdbus-c++/sdbus-c++-config-version.cmake"
+-- 
+2.22.0
 
-
->
-> Signed-off-by: Shantanu <shantanu@senic.com>
-> ---
->  .../python/python3-bsddb3_6.2.6.bb            | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-bsddb3_6.2.6.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
-> b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
-> new file mode 100644
-> index 000000000..7a298014b
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-bsddb3_6.2.6.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY =3D "pybsddb is the Python binding for the Oracle Berkeley DB"
-> +HOMEPAGE =3D "https://www.jcea.es/programacion/pybsddb.htm"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3Db3c8796b7e1f8eda0aef7e242e18ed43"
-> +SRC_URI[sha256sum] =3D
-> "42d621f4037425afcb16b67d5600c4556271a071a9a7f7f2c2b1ba65bc582d05"
-> +
-> +inherit pypi setuptools3
-> +
-> +PYPI_PACKAGE =3D "bsddb3"
-> +
-> +DEPENDS =3D "db \
-> +  python3 \
-> +"
-> +
-> +DISTUTILS_BUILD_ARGS =3D "--berkeley-db=3D${STAGING_EXECPREFIXDIR}"
-> +DISTUTILS_INSTALL_ARGS =3D "--berkeley-db=3D${STAGING_EXECPREFIXDIR}"
-> +
-> +RDEPENDS_${PN} =3D "db"
-> \ No newline at end of file
-> --
-> 2.17.1
->
->
-
---=20
-
-*Shantanu *
-
-Software Developer at Senic <https://www.senic.com>
-
-
-Buy Nuimo Click
-<http://www.senic.com/en/nuimo-click?utm_source=3Demailsignature&utm_medium=
-=3Dorganic>
- =C2=B7 Buy Nuimo Control
-<http://www.senic.com/en/nuimo-control?utm_source=3Demailsignature&utm_medi=
-um=3Dorganic>
-
-Join Newsletter <https://senic.co/join-newsletter> =C2=B7 We're hiring
-<https://senic.co/about-senic> =C2=B7 In the News <https://senic.co/in-the-=
-news>
-
-SENIC GmbH
-Pfuelstr. 5
-10997 Berlin
-Germany
-
-Amtsgericht Charlottenburg, HRB160913, Ust-Ident.Nr.: DE294820161
-
-IBAN: DE 77 59070070 0026919100 BIC: DEUTDEDB595 Deutsche Bank
 
