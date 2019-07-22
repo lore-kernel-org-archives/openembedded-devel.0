@@ -1,27 +1,30 @@
-Return-Path: <Fang.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F0C06B50B
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id AA29F606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 02:52:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6M2qMdQ026720
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 21 Jul 2019 19:52:23 -0700 (PDT)
-Received: from [0.0.0.0] (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Sun, 21 Jul 2019 19:52:22 -0700
-To: <git@andred.net>, <openembedded-devel@lists.openembedded.org>, Richard
-	Leitner <richard.leitner@skidata.com>
-References: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
-	<1550719388-9980-2-git-send-email-fang.jia@windriver.com>
-From: "Jia, Fang" <fang.jia@windriver.com>
-Message-ID: <787bb142-49fb-9108-3307-af1741c48dcf@windriver.com>
-Date: Mon, 22 Jul 2019 10:53:07 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.7.2
+	Mon, 22 Jul 2019 05:12:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,293,1559491200"; d="scan'208";a="71929148"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 22 Jul 2019 13:12:48 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 05B204CDDD5C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jul 2019 13:12:50 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 22 Jul 2019 13:12:57 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 22 Jul 2019 13:12:05 +0800
+Message-ID: <20190722051205.16478-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <1550719388-9980-2-git-send-email-fang.jia@windriver.com>
-Subject: Re: [PATCH 2/2] openjdk: add openjdk-config
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 05B204CDDD5C.AC373
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] dstat: upgrade 0.7.3 -> 0.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,104 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 02:52:33 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Jul 2019 05:12:50 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi, Richard Leitner
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-support/dstat/{dstat_0.7.3.bb => dstat_0.7.4.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/dstat/{dstat_0.7.3.bb => dstat_0.7.4.bb} (93%)
 
-How about this patch ? Could you help to give some suggestions ?
+diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.3.bb b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+similarity index 93%
+rename from meta-oe/recipes-support/dstat/dstat_0.7.3.bb
+rename to meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+index 18af738..8eb7157 100644
+--- a/meta-oe/recipes-support/dstat/dstat_0.7.3.bb
++++ b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+@@ -11,7 +11,7 @@ DEPENDS += "asciidoc-native xmlto-native"
+ 
+ SRC_URI = "git://github.com/dagwieers/dstat.git"
+ 
+-SRCREV = "ebace6d4177f8748f35cec87f7a49946046b0a20"
++SRCREV = "6f5db0aed26bf8cf2700d4ffe90a9bd3436ac728"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.7.4
 
-Thanks,
-Fang
 
-On 21/02/2019 11:23, Fang Jia wrote:
-> * Create a new package openjdk-config which used to set variable value
->   for openjdk.
-> * The LICENSE file of openjdk-config is COPYING.MIT.
-> * Allow JAVA_HOME to be configured via a variable of the same name.
-> * Define JAVA_HOME by default in openjdk-config.sh file.
-> 
-> Signed-off-by: Fang Jia <fang.jia@windriver.com>
-> ---
->  recipes-core/openjdk/openjdk-config.bb             | 24 ++++++++++++++++++++++
->  recipes-core/openjdk/openjdk-config/COPYING.MIT    | 17 +++++++++++++++
->  .../openjdk/openjdk-config/openjdk-config.sh       | 11 ++++++++++
->  3 files changed, 52 insertions(+)
->  create mode 100644 recipes-core/openjdk/openjdk-config.bb
->  create mode 100644 recipes-core/openjdk/openjdk-config/COPYING.MIT
->  create mode 100644 recipes-core/openjdk/openjdk-config/openjdk-config.sh
-> 
-> diff --git a/recipes-core/openjdk/openjdk-config.bb b/recipes-core/openjdk/openjdk-config.bb
-> new file mode 100644
-> index 0000000..34f9356
-> --- /dev/null
-> +++ b/recipes-core/openjdk/openjdk-config.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Configuration script to set variables"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-> +
-> +PR = "r1"
-> +
-> +SRC_URI = "file://COPYING.MIT \
-> +	   file://openjdk-config.sh \
-> +"
-> +
-> +S = "${WORKDIR}"
-> +
-> +# Set the default value
-> +JAVA_HOME ?= ""
-> +
-> +do_configure() {
-> +	sed -i "s%@JAVA_HOME@%${JAVA_HOME}%" openjdk-config.sh
-> +	sed -i "s%@libdir@%${libdir}%" openjdk-config.sh
-> +}
-> +
-> +do_install() {
-> +	install -d ${D}${sysconfdir}/profile.d
-> +	install -m 0755 openjdk-config.sh ${D}${sysconfdir}/profile.d/
-> +}
-> diff --git a/recipes-core/openjdk/openjdk-config/COPYING.MIT b/recipes-core/openjdk/openjdk-config/COPYING.MIT
-> new file mode 100644
-> index 0000000..fb950dc
-> --- /dev/null
-> +++ b/recipes-core/openjdk/openjdk-config/COPYING.MIT
-> @@ -0,0 +1,17 @@
-> +Permission is hereby granted, free of charge, to any person obtaining a copy 
-> +of this software and associated documentation files (the "Software"), to deal 
-> +in the Software without restriction, including without limitation the rights 
-> +to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-> +copies of the Software, and to permit persons to whom the Software is 
-> +furnished to do so, subject to the following conditions:
-> +
-> +The above copyright notice and this permission notice shall be included in 
-> +all copies or substantial portions of the Software.
-> +
-> +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-> +IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-> +FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-> +AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-> +LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-> +OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
-> +THE SOFTWARE.
-> diff --git a/recipes-core/openjdk/openjdk-config/openjdk-config.sh b/recipes-core/openjdk/openjdk-config/openjdk-config.sh
-> new file mode 100644
-> index 0000000..34b49d6
-> --- /dev/null
-> +++ b/recipes-core/openjdk/openjdk-config/openjdk-config.sh
-> @@ -0,0 +1,11 @@
-> +JAVA_HOME="@JAVA_HOME@"
-> +libdir="@libdir@"
-> +
-> +for dir in ${libdir}/jvm/*; do
-> +	if [ -x "${dir}/bin/java" ]; then
-> +		[ -z "${JAVA_HOME}" ] && JAVA_HOME="${dir}"
-> +	fi
-> +done
-> +if [ -n "${JAVA_HOME}" ]; then
-> +	export JAVA_HOME=${JAVA_HOME}
-> +fi
-> 
+
 
