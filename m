@@ -1,24 +1,26 @@
-Return-Path: <anbelski@microsoft.com>
+Return-Path: <anatol.oe@belski.net>
 Received: from h1123647.serverkompetenz.net (klapt.com [85.214.73.107])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F9987EF4A
+	by mail.openembedded.org (Postfix) with ESMTP id 4D8797EF4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 00:53:43 +0000 (UTC)
+	Mon, 22 Jul 2019 00:59:44 +0000 (UTC)
 Received: by h1123647.serverkompetenz.net (Postfix, from userid 1006)
-	id 4525317A0316; Mon, 22 Jul 2019 02:53:43 +0200 (CEST)
-Received: from
-	anbelski-lsg-linux-yocto-0.jls0im4d1fsuxcyoqe2kuaxlef.yx.internal.cloudapp.net
-	(unknown [13.78.141.35])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	id 046F717A0316; Mon, 22 Jul 2019 02:59:44 +0200 (CEST)
+Received: from fringe.fritz.box (i5387DFE8.versanet.de [83.135.223.232])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by h1123647.serverkompetenz.net (Postfix) with ESMTPSA id 57FF117A0316; 
-	Mon, 22 Jul 2019 02:53:40 +0200 (CEST)
-From: Anatol Belski <anbelski@microsoft.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jul 2019 00:53:30 +0000
-Message-Id: <20190722005330.69615-1-anbelski@microsoft.com>
-X-Mailer: git-send-email 2.17.1
-Reply-To: anatol.oe@belski.net
-Subject: [meta-oe][PATCH] gperftools: separate off libtcmalloc-minimal
+	by h1123647.serverkompetenz.net (Postfix) with ESMTPSA id 7985F17A0316; 
+	Mon, 22 Jul 2019 02:59:42 +0200 (CEST)
+Message-ID: <79a42ab135c11b37f3706056fed158e7add92a95.camel@belski.net>
+From: Anatol Belski <anatol.oe@belski.net>
+To: Khem Raj <raj.khem@gmail.com>, Anatol Belski <anbelski@microsoft.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Jul 2019 02:59:39 +0200
+In-Reply-To: <497ba06b-0113-3430-f9be-8d80a6ed6fde@gmail.com>
+References: <20190721013327.27634-1-anbelski@microsoft.com>
+	<497ba06b-0113-3430-f9be-8d80a6ed6fde@gmail.com>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH] Finer gperftools packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,46 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 00:53:43 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 00:59:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Anatol Belski <anatol.oe@belski.net>
+Hi Khem,
 
-From: Anatol Belski <anbelski@microsoft.com>
+On Sat, 2019-07-20 at 19:17 -0700, Khem Raj wrote:
 
-The libctmalloc-minimal is what is useful for C++ apps if only the
-improved allocator is needed. The gperftools package stays otherwise
-fully backward compatible as it's going to depend on libtcmalloc-minimal.
-The libtcmalloc-minimal can be installed separately, which allows for
-more flexibility and for cleaner image contents.
+> > +FILES_${PN}-libs = "${libdir}/libprofiler*${SOLIBS}
+> > ${libdir}/libprofiler*${SOLIBS}\
+> > +		${libdir}/libtcmalloc${SOLIBS} \
+> > +		${libdir}/libtcmalloc_debug${SOLIBS} \
+> > +		${libdir}/libtcmalloc_and_profiler*${SOLIBS}"
+> 
+> do we need a separate libs package ? what does it give us ?
+> 
+I've submitted another patch
 
-The discussion on the patch
-https://patchwork.openembedded.org/patch/163234/ has shown, that a
-separate package for other libs might have less sense in this case, so
-it's not done. The patch 163234 can be abandoned in favor of this for
-now.
+https://patchwork.openembedded.org/patch/163267/
 
-Signed-off-by: Anatol Belski <anbelski@microsoft.com>
----
- meta-oe/recipes-support/gperftools/gperftools_2.7.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+which only cares about the libtcmalloc-minimal.
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-index c8b91278d..c48a98183 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-@@ -28,3 +28,11 @@ COMPATIBLE_HOST_mipsarch_libc-glibc = "null"
- ARM_INSTRUCTION_SET_armv5 = "arm"
- ARM_INSTRUCTION_SET_toolchain-clang_arm = "arm"
- 
-+# Ensure static libs are always enabled, as they seem to be not produced by
-+# default at least on ARM.
-+EXTRA_OECONF_append += " --enable-static"
-+
-+PACKAGE_BEFORE_PN += "libtcmalloc-minimal"
-+FILES_libtcmalloc-minimal = "${libdir}/libtcmalloc_minimal*${SOLIBS} ${libdir}/libtcmalloc_minimal_debug*${SOLIBS}"
-+RDEPENDS_${PN} += "libtcmalloc-minimal (= ${EXTENDPKGV})"
-+
--- 
-2.17.1
+I've tried your suggestion and indeed an extra lib package simply
+doesn't make sense, the only diff would be that the pprof script would
+be packaged separately.
+
+Please abandon this one, small steps having libtcmalloc-minimal is good
+enough for C++ apps just using the allocator.
+
+Thanks
+
+Anatol
+
 
 
