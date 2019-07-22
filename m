@@ -1,26 +1,30 @@
-Return-Path: <anatol.oe@belski.net>
-Received: from h1123647.serverkompetenz.net (klapt.com [85.214.73.107])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D8797EF4C
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 616847EFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 00:59:44 +0000 (UTC)
-Received: by h1123647.serverkompetenz.net (Postfix, from userid 1006)
-	id 046F717A0316; Mon, 22 Jul 2019 02:59:44 +0200 (CEST)
-Received: from fringe.fritz.box (i5387DFE8.versanet.de [83.135.223.232])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by h1123647.serverkompetenz.net (Postfix) with ESMTPSA id 7985F17A0316; 
-	Mon, 22 Jul 2019 02:59:42 +0200 (CEST)
-Message-ID: <79a42ab135c11b37f3706056fed158e7add92a95.camel@belski.net>
-From: Anatol Belski <anatol.oe@belski.net>
-To: Khem Raj <raj.khem@gmail.com>, Anatol Belski <anbelski@microsoft.com>, 
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jul 2019 02:59:39 +0200
-In-Reply-To: <497ba06b-0113-3430-f9be-8d80a6ed6fde@gmail.com>
-References: <20190721013327.27634-1-anbelski@microsoft.com>
-	<497ba06b-0113-3430-f9be-8d80a6ed6fde@gmail.com>
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH] Finer gperftools packaging
+	Mon, 22 Jul 2019 00:59:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,292,1559491200"; d="scan'208";a="71914472"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 22 Jul 2019 08:59:52 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id B967A4CDDD5C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jul 2019 08:59:51 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 22 Jul 2019 09:00:06 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 22 Jul 2019 08:59:07 +0800
+Message-ID: <20190722005907.21560-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: B967A4CDDD5C.AC2BB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] wireshark: upgrade 3.0.2 -> 3.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,38 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 00:59:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Jul 2019 00:59:52 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Khem,
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../wireshark/{wireshark_3.0.2.bb => wireshark_3.0.3.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.0.2.bb => wireshark_3.0.3.bb} (95%)
 
-On Sat, 2019-07-20 at 19:17 -0700, Khem Raj wrote:
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+similarity index 95%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+index 3e6ffa3..d442925 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.2.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+@@ -12,8 +12,8 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "e344675283d6329a4bc213b621d7f46a"
+-SRC_URI[sha256sum] = "7e1ec5664a0dba4493d8729f9922378bdd05040fb159c2b03b42111efda2e53b"
++SRC_URI[md5sum] = "e945d76a57db2c3e6cf776f95da2cf0e"
++SRC_URI[sha256sum] = "af92729c781d870110885c31ebcbe4c4224ed51bb580d00c896fe9746994211c"
+ 
+ PE = "1"
+ 
+-- 
+2.7.4
 
-> > +FILES_${PN}-libs = "${libdir}/libprofiler*${SOLIBS}
-> > ${libdir}/libprofiler*${SOLIBS}\
-> > +		${libdir}/libtcmalloc${SOLIBS} \
-> > +		${libdir}/libtcmalloc_debug${SOLIBS} \
-> > +		${libdir}/libtcmalloc_and_profiler*${SOLIBS}"
-> 
-> do we need a separate libs package ? what does it give us ?
-> 
-I've submitted another patch
-
-https://patchwork.openembedded.org/patch/163267/
-
-which only cares about the libtcmalloc-minimal.
-
-I've tried your suggestion and indeed an extra lib package simply
-doesn't make sense, the only diff would be that the pprof script would
-be packaged separately.
-
-Please abandon this one, small steps having libtcmalloc-minimal is good
-enough for C++ apps just using the allocator.
-
-Thanks
-
-Anatol
 
 
 
