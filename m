@@ -1,49 +1,27 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
-	[209.85.208.174])
-	by mail.openembedded.org (Postfix) with ESMTP id CDF107EF58
+Return-Path: <Fang.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F0C06B50B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 01:11:26 +0000 (UTC)
-Received: by mail-lj1-f174.google.com with SMTP id i21so35852748ljj.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jul 2019 18:11:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=CBaWCgXUqJJK6vLmX/3DbVOynzd/jY1aBbMRITkaCcE=;
-	b=bzUaczJ6N3F4QC6PzCoe6ChKvs2GhptAjK60J0kNgwpd/zQu2QQA/DNlH7ekYjKSPi
-	eaIFZm+PboS19H/mkT2wZNABdy5HxqjA824tk6+LUi595JiL8aIixXMtyKCkRV9QDxnl
-	NdycUBpUpjuCowZmxj2YKbyr7pVl9aov5JQC2GHuqWp7ZBiK1142ZHH4b3ptdRiFsTiN
-	xBN4ORniFwkYk5dHiWbl3bSM0ogpIZLsj4yP6yuAsIlbsL+4KXMADHtagpt0MbTpRVWU
-	epEtr6APIBUQ64MTk+sckcjdeBsNWBcKk1qNwWeVyskfKDTehw1HZdlqO0XsXaCsvcCI
-	StBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CBaWCgXUqJJK6vLmX/3DbVOynzd/jY1aBbMRITkaCcE=;
-	b=XWVV9Ud1mFeoZHuEVPYXqCxwsciDa17CI0tqt/3q1DCvxIlJin7ex3SUV5MvxG5hQQ
-	rh9akgU5AJghhYRqlxe489cp7UJUvZx9Bt7LSZ1lAeMmpUo7+J8QC84SgPSqV86p+c7a
-	gWtX5bCt0SvApF3X7RnStJdBxAVAbLwTkf0ODMR0bzWJysnWgfDSEXRREpFZ2QgtREkM
-	dIEPPGDZTEADywW3iFnLaaooKulRL5OCziBcKWhK0ya+WlI94nmvSg6OY1aI6TXkcz0D
-	mK69F3ZYt8j2LXvVcPHKuCP0KahIue072UflYVsbQnZeP7livFUJUImS4JKc7CTbHYCz
-	ulhg==
-X-Gm-Message-State: APjAAAX5WD2lt0o6IZl8NEe0V4S1U0Ze9PzgGP3NVAe/QDMl+VlKgCrc
-	cbJ5fLgvMQUMwzKj/z8VCYI5t99K
-X-Google-Smtp-Source: APXvYqx2mTOhyETTEv88DnNRiDQNnLhdMFJY1iPebeFG7hlA6ejY6wLjOFjAaxuk6lV7haNPpB6OzQ==
-X-Received: by 2002:a2e:3e01:: with SMTP id l1mr13082723lja.208.1563757887020; 
-	Sun, 21 Jul 2019 18:11:27 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	b25sm5807431lfq.11.2019.07.21.18.11.26
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 21 Jul 2019 18:11:26 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jul 2019 03:11:18 +0200
-Message-Id: <20190722011118.9778-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] htpdate: update to 1.2.1
+	Mon, 22 Jul 2019 02:52:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6M2qMdQ026720
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 21 Jul 2019 19:52:23 -0700 (PDT)
+Received: from [0.0.0.0] (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 21 Jul 2019 19:52:22 -0700
+To: <git@andred.net>, <openembedded-devel@lists.openembedded.org>, Richard
+	Leitner <richard.leitner@skidata.com>
+References: <1550719388-9980-1-git-send-email-fang.jia@windriver.com>
+	<1550719388-9980-2-git-send-email-fang.jia@windriver.com>
+From: "Jia, Fang" <fang.jia@windriver.com>
+Message-ID: <787bb142-49fb-9108-3307-af1741c48dcf@windriver.com>
+Date: Mon, 22 Jul 2019 10:53:07 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <1550719388-9980-2-git-send-email-fang.jia@windriver.com>
+Subject: Re: [PATCH 2/2] openjdk: add openjdk-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +34,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 01:11:27 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 02:52:33 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../htpdate/{htpdate_1.2.0.bb => htpdate_1.2.1.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/htpdate/{htpdate_1.2.0.bb => htpdate_1.2.1.bb} (90%)
+Hi, Richard Leitner
 
-diff --git a/meta-networking/recipes-support/htpdate/htpdate_1.2.0.bb b/meta-networking/recipes-support/htpdate/htpdate_1.2.1.bb
-similarity index 90%
-rename from meta-networking/recipes-support/htpdate/htpdate_1.2.0.bb
-rename to meta-networking/recipes-support/htpdate/htpdate_1.2.1.bb
-index eb6787846..d4fd73e3d 100644
---- a/meta-networking/recipes-support/htpdate/htpdate_1.2.0.bb
-+++ b/meta-networking/recipes-support/htpdate/htpdate_1.2.1.bb
-@@ -22,8 +22,8 @@ SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.xz \
-            file://0001-Make-environment-variables-assignments-to-be-weak.patch \
-            file://0001-Replace-ntp_adjtime-with-adjtimex.patch \
-            "
--SRC_URI[md5sum] = "9d5ca69be06edf5d535b52b5f790da4e"
--SRC_URI[sha256sum] = "22b2cf3ec45b0eedecddd3ad2a3d754ac57942ae7dcbac410d254935f0bdbc03"
-+SRC_URI[md5sum] = "cab01ddcb62bd84154670a37a7a0c31c"
-+SRC_URI[sha256sum] = "186c69509ba68178e2894cb8900e240bb688870ec25de2ac4676724e1e1d1cbf"
- 
- do_configure () {
- 	:
--- 
-2.17.1
+How about this patch ? Could you help to give some suggestions ?
 
+Thanks,
+Fang
+
+On 21/02/2019 11:23, Fang Jia wrote:
+> * Create a new package openjdk-config which used to set variable value
+>   for openjdk.
+> * The LICENSE file of openjdk-config is COPYING.MIT.
+> * Allow JAVA_HOME to be configured via a variable of the same name.
+> * Define JAVA_HOME by default in openjdk-config.sh file.
+> 
+> Signed-off-by: Fang Jia <fang.jia@windriver.com>
+> ---
+>  recipes-core/openjdk/openjdk-config.bb             | 24 ++++++++++++++++++++++
+>  recipes-core/openjdk/openjdk-config/COPYING.MIT    | 17 +++++++++++++++
+>  .../openjdk/openjdk-config/openjdk-config.sh       | 11 ++++++++++
+>  3 files changed, 52 insertions(+)
+>  create mode 100644 recipes-core/openjdk/openjdk-config.bb
+>  create mode 100644 recipes-core/openjdk/openjdk-config/COPYING.MIT
+>  create mode 100644 recipes-core/openjdk/openjdk-config/openjdk-config.sh
+> 
+> diff --git a/recipes-core/openjdk/openjdk-config.bb b/recipes-core/openjdk/openjdk-config.bb
+> new file mode 100644
+> index 0000000..34f9356
+> --- /dev/null
+> +++ b/recipes-core/openjdk/openjdk-config.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "Configuration script to set variables"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+> +
+> +PR = "r1"
+> +
+> +SRC_URI = "file://COPYING.MIT \
+> +	   file://openjdk-config.sh \
+> +"
+> +
+> +S = "${WORKDIR}"
+> +
+> +# Set the default value
+> +JAVA_HOME ?= ""
+> +
+> +do_configure() {
+> +	sed -i "s%@JAVA_HOME@%${JAVA_HOME}%" openjdk-config.sh
+> +	sed -i "s%@libdir@%${libdir}%" openjdk-config.sh
+> +}
+> +
+> +do_install() {
+> +	install -d ${D}${sysconfdir}/profile.d
+> +	install -m 0755 openjdk-config.sh ${D}${sysconfdir}/profile.d/
+> +}
+> diff --git a/recipes-core/openjdk/openjdk-config/COPYING.MIT b/recipes-core/openjdk/openjdk-config/COPYING.MIT
+> new file mode 100644
+> index 0000000..fb950dc
+> --- /dev/null
+> +++ b/recipes-core/openjdk/openjdk-config/COPYING.MIT
+> @@ -0,0 +1,17 @@
+> +Permission is hereby granted, free of charge, to any person obtaining a copy 
+> +of this software and associated documentation files (the "Software"), to deal 
+> +in the Software without restriction, including without limitation the rights 
+> +to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+> +copies of the Software, and to permit persons to whom the Software is 
+> +furnished to do so, subject to the following conditions:
+> +
+> +The above copyright notice and this permission notice shall be included in 
+> +all copies or substantial portions of the Software.
+> +
+> +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+> +IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+> +FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+> +AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+> +LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+> +OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+> +THE SOFTWARE.
+> diff --git a/recipes-core/openjdk/openjdk-config/openjdk-config.sh b/recipes-core/openjdk/openjdk-config/openjdk-config.sh
+> new file mode 100644
+> index 0000000..34b49d6
+> --- /dev/null
+> +++ b/recipes-core/openjdk/openjdk-config/openjdk-config.sh
+> @@ -0,0 +1,11 @@
+> +JAVA_HOME="@JAVA_HOME@"
+> +libdir="@libdir@"
+> +
+> +for dir in ${libdir}/jvm/*; do
+> +	if [ -x "${dir}/bin/java" ]; then
+> +		[ -z "${JAVA_HOME}" ] && JAVA_HOME="${dir}"
+> +	fi
+> +done
+> +if [ -n "${JAVA_HOME}" ]; then
+> +	export JAVA_HOME=${JAVA_HOME}
+> +fi
+> 
 
