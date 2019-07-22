@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 56D9C7EE0E
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E6E57EC66
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 16:07:45 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id x22so34129398qtp.12
+	Mon, 22 Jul 2019 16:09:14 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id l9so39020699qtu.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 09:07:46 -0700 (PDT)
+	Mon, 22 Jul 2019 09:09:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=h7LukCJ4GM85IYyho+445nF69MDoUS4BGnrg33sIcSU=;
-	b=RXT4Rfg3Ql+xtrBpQY9aS/hN4pKFsRjUACGTVniTqZpMtD9Uc5yf2ddCFaohz8tMh5
-	PC5FOOAqzxI0neJHTXJonXA4zQ6szcxgFBdN0Ul+fG2C+e+DA9/XB1ItACe0qVqC4nkw
-	CYQNpOiCEb36z/k+j/wCN/CwZ+iHazymg7CnAYkIXmMRMia1TmHBwaoiR1bDEbNrM+/k
-	F3wTHKHsGU5sdSsoQ+q95zsojGbMpleHkXzPBWnpdtHMupIeaDjfnyxwYHN2eRppnwAh
-	QZyfJvcvHfeGyDUNWAzBArIbODpxHZHw5n/kG39wSGcRvFoNotIfobGdNuVk6cGOqiYI
-	Sqlg==
+	:cc; bh=weTOsXTYy6NWoD6tAWzVtJhtUjZoWUqpzMAW/Do6qWo=;
+	b=jJGccMEfYcJUQZTaGHI2H9gdKoIisd2aRMyCLWVTklErBpnPa7LrxipRH1JP5I6WEt
+	Izu9LrRV7MZh7NXHsJcWeFpSz/AoBbyiAWF2RCAoTIAKVJTUA1WH6n3Vid9K09uoKXse
+	XMPZ0FpK4rtprQWpuUlhHbRsonFAdVP+wZm0LUHLU1XHh5WLxcS7zYetHz5Y+E3DGe6i
+	edPTL1cYFbBs8gTGHmWxZRFP8U2+io7tohkzOCXnB6n7WClw25GLjdAjDOAzjS3zUOyY
+	Rm42+A0gWprEYu609QOjVB+7IWQHY/bP9ffzTEhDZSWSjQreW1e3hIpB+DWSRoF3vpEV
+	9dVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=h7LukCJ4GM85IYyho+445nF69MDoUS4BGnrg33sIcSU=;
-	b=Dir8rBlUC3ckGo03EjHMcXbYEE1A6jQyckbBrkCmR+PQNucWCrTAeYqNWATABic+QS
-	Pu3D8fVRc1zKOE+cDLm29WcKYhg5Np7dtrLiOF3WSm7wGRBQO/FUXqxBi3xtlVxDbVfj
-	flg/fqCV0CWaM81PrFCAYRfzq1OefUaVFApOTBEDksX9EjdT4KDhpqLiWC7UZzArfDKn
-	Xmf16hFHnkMH/6sl4qkMMOSFTbVdKhsO2ParOSfvp3vfIirYqeUXB+VqUmzkXL/CXf6/
-	PLuh0h9WlV9OLNkTC3A+z1HWvx9kIAuZ/OaVl5bMCED3bHfTLv+Rqn0Zf9YE7/AVjsjn
-	TBAQ==
-X-Gm-Message-State: APjAAAUNoqZuQYmHDLim4bho86YSCpdpqXg3yYI50mOtr0YpMx/QJF7b
-	9rGwOe+5yVL0zIx4VvZOJbWMT9Z+fYAcgSdjrbeyEeOa9dA=
-X-Google-Smtp-Source: APXvYqxz1otscPnDDv6xlwA8mZaun58B0kPTjn4REN2gEvv2k3rCOTgTIQJgy03TdnrX6AoVG7XbWwil/KiP9hsnr9E=
-X-Received: by 2002:aed:3644:: with SMTP id e62mr48981429qtb.80.1563811666128; 
-	Mon, 22 Jul 2019 09:07:46 -0700 (PDT)
+	bh=weTOsXTYy6NWoD6tAWzVtJhtUjZoWUqpzMAW/Do6qWo=;
+	b=Wr/9PHyW0Y2DtTzEGDR3XBxrSjbzOZnKUT5dKSWbfbiSSO1tpSfq1MA4spfBHJKU7D
+	ziuitOUct6Hrx6ATD6UEFuqL4U2wibqWTRB8YGzEsdFKNolJ3eoIx9F4vZaNNe6/DYEw
+	xjCqHkcxelaQoBeessTEFg8EQrvBH4T2EKXM/7QHXEpIV1cDrEWfCz3oSR5bBx6ywDxX
+	z/FAQu3VkdzhdCctfpoRAzIXMkuJu+hlxEA4Xcq5F3pIRZ58jGc1RbkhFw09ktxTLXWF
+	rkof8oFBZLBNVbk0SHpaExyA9qPeYK02OrI2Ad0cF3fq8uiR54dRFLBjbHYIvdij8PB+
+	y/8A==
+X-Gm-Message-State: APjAAAUuwDisNHt8J5EbDsun8FaGAARaenvEZOJhVX9XQ+iQjgkASkuf
+	4pXxV1qBhtO1Z68+NCEn2nEoGKlKLtMxEOv2WnQDBQnGq6E=
+X-Google-Smtp-Source: APXvYqwi+vx7GHnlo/dFMVVxOxXMQfbguKLfeDX7YhKRrIAAoX12Ukoh1sRyquUULlXRMNDIaeCKpiHkaDM5+5x6XLQ=
+X-Received: by 2002:a0c:ae5a:: with SMTP id z26mr50758373qvc.65.1563811755050; 
+	Mon, 22 Jul 2019 09:09:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190722130224.9972-1-bunk@stusta.de>
-In-Reply-To: <20190722130224.9972-1-bunk@stusta.de>
+References: <20190722073224.9950-2-bunk@stusta.de>
+In-Reply-To: <20190722073224.9950-2-bunk@stusta.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Jul 2019 09:07:20 -0700
-Message-ID: <CAMKF1sqM6spF1vd0+=fzJz0WyzHx1u_FofPUn=uiE8w9ybc1fw@mail.gmail.com>
+Date: Mon, 22 Jul 2019 09:08:49 -0700
+Message-ID: <CAMKF1sqf6ReJqaJOhKbcExG558jEcMeqPmjxKerEk==WVid93w@mail.gmail.com>
 To: Adrian Bunk <bunk@stusta.de>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH] meta-gnome: Inherit gnomebase instead of gnome
+Subject: Re: [meta-oe][PATCH] meta-oe: Inherit gnomebase instead of gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,107 +53,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 16:07:46 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 16:09:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Adrian
+pavucontrol fails
 
-Seeing this failure
+https://errors.yoctoproject.org/Errors/Details/253672/
 
-https://errors.yoctoproject.org/Errors/Details/253680/
-
-On Mon, Jul 22, 2019 at 6:02 AM Adrian Bunk <bunk@stusta.de> wrote:
+On Mon, Jul 22, 2019 at 12:32 AM Adrian Bunk <bunk@stusta.de> wrote:
 >
 > The gnome class pulls in usually unwanted dependencies like gconf.
 >
 > Signed-off-by: Adrian Bunk <bunk@stusta.de>
 > ---
->  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb                | 2 +-
->  meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb                  | 2 +-
->  meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb | 2 +-
->  meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb                    | 2 +-
->  meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb         | 2 +-
->  meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb               | 2 +-
->  6 files changed, 6 insertions(+), 6 deletions(-)
+>  meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb                | 2 +-
+>  meta-oe/recipes-gnome/vte9/vte9.inc                      | 2 +-
+>  meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb             | 3 ++-
+>  meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb | 2 +-
+>  meta-oe/recipes-support/pidgin/gmime_3.2.3.bb            | 2 +-
+>  5 files changed, 6 insertions(+), 5 deletions(-)
 >
-> diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-> index d2885906f..f45180e79 100644
-> --- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-> +++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
-> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
->  SECTION = "x11/office"
->  DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
+> diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
+> index 63f4f09ba..e587e2a10 100644
+> --- a/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
+> +++ b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 >
-> -inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
-> +inherit gnomebase pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+>  DEPENDS = "atk glibmm"
 >
->  SRC_URI = " \
->      ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-> diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-> index ea6439d91..9046645f5 100644
-> --- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-> +++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-> @@ -9,7 +9,7 @@ DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ \
->
->  LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
->
-> -inherit distro_features_check gnome gettext python3native
-> +inherit distro_features_check gnomebase gconf gettext python3native
+> -inherit distro_features_check gnome autotools pkgconfig
+> +inherit distro_features_check gnomebase autotools pkgconfig
 >
 >  REQUIRED_DISTRO_FEATURES = "x11"
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> index 1dad1e95b..85ee5e6cf 100644
-> --- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-> @@ -8,7 +8,7 @@ BPN = "gnome-desktop"
+> diff --git a/meta-oe/recipes-gnome/vte9/vte9.inc b/meta-oe/recipes-gnome/vte9/vte9.inc
+> index 206c430da..d860d44e2 100644
+> --- a/meta-oe/recipes-gnome/vte9/vte9.inc
+> +++ b/meta-oe/recipes-gnome/vte9/vte9.inc
+> @@ -8,7 +8,7 @@ RDEPENDS_libvte = "vte-termcap"
+>  GNOMEBN = "vte"
+>  S = "${WORKDIR}/vte-${PV}"
 >
->  GNOMEBASEBUILDCLASS = "meson"
+> -inherit gnome gtk-doc distro_features_check upstream-version-is-even gobject-introspection
+> +inherit gnomebase gtk-doc distro_features_check upstream-version-is-even gobject-introspection
+>  ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 >
-> -inherit gnome pkgconfig upstream-version-is-even gobject-introspection distro_features_check
-> +inherit gnomebase pkgconfig upstream-version-is-even gobject-introspection distro_features_check
+>  EXTRA_OECONF = "--disable-python"
+> diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+> index 943986e77..1d64910fd 100644
+> --- a/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+> +++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+> @@ -8,6 +8,7 @@ DEPENDS = " \
+>      gdk-pixbuf-native \
+>      intltool-native \
+>      libxslt-native \
+> +    dbus-glib \
+>      gtk+ \
+>      babl \
+>      gegl \
+> @@ -24,7 +25,7 @@ DEPENDS = " \
+>  "
+>  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
 >
->  # gobject-introspection is mandatory and cannot be configured
->  REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-> index 3a4714a12..86778aaeb 100644
-> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
-> @@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
->
->  GNOMEBASEBUILDCLASS = "meson"
-> -inherit gnome bash-completion gettext upstream-version-is-even
-> +inherit gnomebase bash-completion gettext upstream-version-is-even
->
->  DEPENDS += "libsecret glib-2.0 gconf libgudev shadow-native"
->
-> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-> index 7babbd0a8..d9f643106 100644
-> --- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-> @@ -6,7 +6,7 @@ SECTION = "x11/gnome/libs"
->
->  DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
->
-> -inherit distro_features_check gnome gobject-introspection gettext
-> +inherit distro_features_check gnomebase gobject-introspection gettext
+> -inherit distro_features_check gnome gtk-doc
+> +inherit distro_features_check gnomebase gtk-icon-cache gtk-doc
 >
 >  REQUIRED_DISTRO_FEATURES = "x11"
 >
-> diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
-> index 08e52241b..e2a838b3a 100644
-> --- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
-> +++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
-> @@ -7,7 +7,7 @@ SECTION = "libs"
+> diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
+> index 6a8274405..44801c8d9 100644
+> --- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
+> +++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
+> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 >
->  DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native gnome-common-native"
+>  DEPENDS = "intltool-native gtkmm3 libcanberra pulseaudio"
 >
-> -inherit autotools pkgconfig gnome gconf gobject-introspection
-> +inherit autotools pkgconfig gnomebase gconf gobject-introspection
+> -inherit gnome distro_features_check
+> +inherit gnomebase distro_features_check
 >
->  SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
+>  REQUIRED_DISTRO_FEATURES = "x11"
 >
+> diff --git a/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+> index 8c6f0b010..bce89bec8 100644
+> --- a/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+> +++ b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "Runtime libraries for parsing and creating MIME mail"
+>  SECTION = "libs"
+>  DEPENDS = "glib-2.0 zlib"
+>
+> -inherit gnome autotools gobject-introspection
+> +inherit gnomebase autotools gobject-introspection
+>
+>  SRC_URI += "file://iconv-detect.h \
+>              file://nodolt.patch"
 > --
 > 2.17.1
 >
