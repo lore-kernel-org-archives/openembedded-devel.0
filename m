@@ -1,36 +1,37 @@
 Return-Path: <ayoub.zaki@embexus.com>
-Received: from mailrelay2-3.pub.mailoutpod1-cph3.one.com
-	(mailrelay2-3.pub.mailoutpod1-cph3.one.com [46.30.212.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 58E657D58A
+Received: from mailrelay4-3.pub.mailoutpod1-cph3.one.com
+	(mailrelay4-3.pub.mailoutpod1-cph3.one.com [46.30.212.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 15CB27D58A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 10:17:51 +0000 (UTC)
+	Tue, 23 Jul 2019 10:20:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=embexus.com; s=20140924;
 	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
 	message-id:from:references:cc:to:subject:from;
-	bh=+5TqkOB7E/gyzZxTJi0Jbvt1jo2gQANAmcLUBz/idcI=;
-	b=OcBG3DM0UYZXg0QwYA4iZIEIXDramfM4HoPpU96jUUHeft8GLDqCa6A85iHXcl0qOb50VcakBubPG
-	20rvT15dRUhNFAtHNFrZHQSRuU4wrzDr+SinjPCfn8F7nlqMoeLdFssWj1xB5fALStTLDgLJAWvcyj
-	WBfZ8Nenobu8jZ8o=
-X-HalOne-Cookie: c73bca86461aedc73d4d1d51c9dcb5171b85350c
-X-HalOne-ID: 205ce079-ad33-11e9-b9fe-d0431ea8a290
+	bh=c5ZqtvWbLGHMAmz+OT/+yJS/1br65gG6zIqForBPay0=;
+	b=QQYW1WcEPhJnYsNDIfWWwq/DR8MBy3HN7VHKSBEzdn+ocZNC1uyG0cL3+Fq284oj1d/bCzyPUuXrg
+	aW2e1Vw+cAtwksspRDomg7f9PszhGy4il2MrnBf+uox84QG7HAvs9rKsX0MLKtVKNPSmXy4HfHFrw1
+	gOlcpUcmhtwaikec=
+X-HalOne-Cookie: e413b4a7abd73aafb6facb71465faf6c92bff3cf
+X-HalOne-ID: 6f31c4ea-ad33-11e9-8280-d0431ea8bb10
 Received: from [10.40.86.158] (unknown [193.240.242.3])
-	by mailrelay2.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id 205ce079-ad33-11e9-b9fe-d0431ea8a290;
-	Tue, 23 Jul 2019 10:17:51 +0000 (UTC)
+	by mailrelay4.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+	id 6f31c4ea-ad33-11e9-8280-d0431ea8bb10;
+	Tue, 23 Jul 2019 10:20:03 +0000 (UTC)
 To: Khem Raj <raj.khem@gmail.com>
 References: <20190721185137.27323-1-ayoub.zaki@embexus.com>
-	<CAMKF1spu1cVMrCcuTMLgFxRqpc1LzvZ_RH7TeZb6dMu0DTwYEw@mail.gmail.com>
+	<20190721185137.27323-2-ayoub.zaki@embexus.com>
+	<CAMKF1soc=iL9HotW4WDdkHLDS_10b2zWOGaOCN7FswcK_M7y2g@mail.gmail.com>
 From: Ayoub Zaki <ayoub.zaki@embexus.com>
 Organization: Embexus
-Message-ID: <77a6e07f-5203-87b6-3028-b178c2419605@embexus.com>
-Date: Tue, 23 Jul 2019 12:17:50 +0200
+Message-ID: <f2096ec3-e4b4-e0d9-f543-5b5cbd895d5b@embexus.com>
+Date: Tue, 23 Jul 2019 12:20:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spu1cVMrCcuTMLgFxRqpc1LzvZ_RH7TeZb6dMu0DTwYEw@mail.gmail.com>
+In-Reply-To: <CAMKF1soc=iL9HotW4WDdkHLDS_10b2zWOGaOCN7FswcK_M7y2g@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 1/2] pegtl: Initial recipe
+Subject: Re: [meta-oe][PATCH v2 2/2] usbguard: Initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,64 +44,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 10:17:52 -0000
+X-List-Received-Date: Tue, 23 Jul 2019 10:20:04 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
 Hi Khem,
 
-On 22.07.19 18:30, Khem Raj wrote:
+
+On 22.07.19 09:41, Khem Raj wrote:
+> it seems to be using recipes from other layers see
+>
+> ERROR: Nothing PROVIDES 'libseccomp' (but
+> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+> DEPENDS on or otherwise requires it). Close matches:
+>    libcomps
+> ERROR: Nothing RPROVIDES 'usbguard-dev' (but
+> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+> RDEPENDS on or otherwise requires it)
+> No eligible RPROVIDERs exist for 'usbguard-dev'
+> NOTE: Runtime target 'usbguard-dev' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['usbguard-dev']
+> ERROR: Nothing RPROVIDES 'usbguard' (but
+> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+> RDEPENDS on or otherwise requires it)
+> No eligible RPROVIDERs exist for 'usbguard'
+> NOTE: Runtime target 'usbguard' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['usbguard']
+>
+> I would prefer it to be a packageconfig and disabled by default so it
+> can build without libseccomp
+
+
+Right libseccomp is provided by meta-security layer, it is not a 
+required dependency, I will remove it and send a new patch.
+
+>
 > On Sun, Jul 21, 2019 at 11:51 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
->> Introduce the Parsing Expression Grammar Template Library (PEGTL)
->> a zero-dependency C++ header-only parser combinator library for creating parsers
->> according to the Parsing Expression Grammar (PEG).
+>> Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
+>> by implementing basic whitelisting and blacklisting capabilities based on device attributes.
 >> ---
->>   meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb | 12 ++++++++++++
->>   1 file changed, 12 insertions(+)
->>   create mode 100644 meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
+>>   .../usbguard/usbguard_0.7.4.bb                | 37 +++++++++++++++++++
+>>   1 file changed, 37 insertions(+)
+>>   create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
 >>
->> diff --git a/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb b/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
+>> diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
 >> new file mode 100644
->> index 000000000..ca175f868
+>> index 000000000..eee381fbe
 >> --- /dev/null
->> +++ b/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
->> @@ -0,0 +1,12 @@
->> +DESCRIPTION="header-only library for creating parsers according to Parsing Expression Grammar"
->> +HOMEPAGE="https://github.com/taocpp/PEGTL"
->> +LICENSE="MIT"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=80cb066ab204c7fe022f1cfe0c2c6818"
+>> +++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+>> @@ -0,0 +1,37 @@
+>> +DESCRIPTION="USBGuard framework helps to protect against BadUSB."
+>> +HOMEPAGE="https://github.com/dkopecek/usbguard"
+>> +LICENSE="GPLv2"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
 >> +
->> +SRC_URI="https://github.com/taocpp/PEGTL/archive/${PV}.tar.gz"
-> lets not use archive from github instead use git fetcher itslelf
->
-> pegtl-2.1.4: https://github.com/taocpp/PEGTL/archive/2.1.4.tar.gz:
-> SRC_URI uses unstable GitHub archives [src-uri-bad]
-
-
-you are right, I'll change that to use git fetcher.
-
-I will send new patch.
-
-
-Thanks !
-
->
->
-> secondly it also fails to build with clang/libc++, not going to block
-> on that but it will be good if there is a fix for it
-> https://errors.yoctoproject.org/Errors/Details/253679/
-
-
-It does not seems an easy fix for build using clang/c++
-
->
->> +SRC_URI[md5sum] = "fe96a704913523763642a2c4c4618091"
->> +SRC_URI[sha256sum] = "5699558ce06e8fad0530143199eeaefd29128fb4584879975c87947c8ad0395f"
+>> +SRC_URI="https://github.com/USBGuard/usbguard/archive/${BP}.tar.gz"
+>> +SRC_URI[md5sum] = "ddaa9ae884200c861ad946f34dfd5ab9"
+>> +SRC_URI[sha256sum] = "d37886508583565aae0df6a110b11524c59b39e0deb25ee49fc34274e4784f55"
 >> +
->> +inherit cmake
+>> +inherit autotools pkgconfig systemd bash-completion
 >> +
->> +S="${WORKDIR}/PEGTL-${PV}"
+>> +S= "${WORKDIR}/${BPN}-${BP}"
+>> +
+>> +DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
+>> +       dbus dbus-glib libqb libseccomp libcap-ng libgcrypt libsodium protobuf pegtl"
+>> +
+>> +EXTRA_OECONF += "--with-bundled-catch"
+>> +
+>> +PACKAGECONFIG ??= "libsodium \
+>> +       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+>> +       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
+>> +
+>> +PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
+>> +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
+>> +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
+>> +PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
+>> +PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
+>> +
+>> +SYSTEMD_SERVICE_${PN} = "${PN}.service"
+>> +SYSTEMD_PACKAGES += "${PN}"
+>> +
+>> +
+>> +do_install_append(){
+>> +
+>> +       sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \
+>> +                                               ${D}${sysconfdir}/usbguard/usbguard-daemon.conf
+>> +}
 >> --
 >> 2.17.1
 >>
@@ -109,8 +139,6 @@ It does not seems an easy fix for build using clang/c++
 >> Openembedded-devel mailing list
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
 
 Mit freundlichen Grüßen / Kind regards
 
