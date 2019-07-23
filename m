@@ -1,24 +1,46 @@
-Return-Path: <stefan@herbrechtsmeier.net>
-X-Greylist: delayed 332 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 23 Jul 2019 19:31:01 UTC
-Received: from dd41138.kasserver.com (dd41138.kasserver.com [85.13.157.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 36CE87ED59
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+	[209.85.160.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BF9C7D597
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 19:31:01 +0000 (UTC)
-Received: from [192.168.178.29] (i59F77E0B.versanet.de [89.247.126.11])
-	by dd41138.kasserver.com (Postfix) with ESMTPSA id 9092111A0652;
-	Tue, 23 Jul 2019 21:25:29 +0200 (CEST)
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20190722211814.14237-1-raj.khem@gmail.com>
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-Message-ID: <00aec8c0-9378-c77d-67e2-0331c0dc29d1@herbrechtsmeier.net>
-Date: Tue, 23 Jul 2019 21:25:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Tue, 23 Jul 2019 21:03:09 +0000 (UTC)
+Received: by mail-qt1-f182.google.com with SMTP id z4so43332064qtc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2019 14:03:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=NrhgHKLsRzdprnFVz5aBaK7uDpHwC0j+towFCJnkgGY=;
+	b=OS06Ur/dcXlDOUQmarZkypg8Cl2p4N/jZNclGz46J5/jOEetH6yW69m3YOSIS9cWES
+	v0AK/di0xHG4fkX1dHsqNbIcad1rt3X6LpaKLHErqONO5FUCGwwyyd03xM5yRvmYCXPo
+	YwHm5CZjU/7vJEbFay/4jy3hlDMItvN955TK7t2akD8W48RtIO42ENKihNUNzuZVYFkn
+	8V4wii6lanjLXv3qkHZ7YCmPZ3D5RYcBgWFLpctUijjH3xRQkB/siRTzXwjQT3qUUGW0
+	aUuHhYkQpqzgEaVM3c6MysuOYwKGvaW07ZRwKPakBN+W/JqIFX5zrljhh5Gwf/uZxhku
+	GPYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=NrhgHKLsRzdprnFVz5aBaK7uDpHwC0j+towFCJnkgGY=;
+	b=rDwEr8uGyJ9s1vIW0ylbbbRd3DB8ZmSQDiK/22QEykpId8mxmHKoCE/3boJo/ba8M4
+	BsL4PwR4xQi11mB0/BFqdGvK7s8MX7a88w5JsXI+yF83BlyTQDxS9lf0Cj/G/YunY40I
+	/6HzOSnpZ+g/uWSftlAIE5GGxY7zPkHEKucjXQ3VvR3pRXjHBjB/9kMTe2hl/x7rG9pn
+	Ic8M4EOjCRhlRc9yVXJjvObYY55872NNMsjJySRGhOveR7vrZsbIfCQwQAtHh7xZKEHO
+	a4DcrGkLeTtVVY16/6/AwXB7O7O94QlKIKq2nDjvhcZIQHIIpyqd7Pz2+yXIAVtSd6sT
+	YnVg==
+X-Gm-Message-State: APjAAAX+rYjGxb+E1v5ERyOX9dXiFvsSXB0e20Va2O1qvdCIvxBLGM7Y
+	ieDRnwsvU3BFK9i3tz2cdl93iMUX2+mlC2VGiJrbN/wjXWA=
+X-Google-Smtp-Source: APXvYqxSX7GUNM5nVFHV+u0sSYDe6cUwBpD8n/X9FinXrXlo24zZPtacyrHb8gc/bZaZNNSpdQIGAm7WnnmXz6iymnI=
+X-Received: by 2002:aed:3644:: with SMTP id e62mr53227959qtb.80.1563915789739; 
+	Tue, 23 Jul 2019 14:03:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190722211814.14237-1-raj.khem@gmail.com>
-Cc: sangelovic <angelovic.s@gmail.com>
-Subject: Re: [meta-oe][PATCH] Introduce recipes for sdbus-c++ library and its tools
+References: <20190723151739.9337-1-bunk@stusta.de>
+In-Reply-To: <20190723151739.9337-1-bunk@stusta.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Jul 2019 14:02:52 -0700
+Message-ID: <CAMKF1srK9e7bZravC4r_1rwL-J_xPHmQipwAbu7796FLHyDjfA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-gnome][PATCH v2] meta-gnome: Inherit gnomebase instead of gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,142 +53,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 19:31:01 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Jul 2019 21:03:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem,
+https://errors.yoctoproject.org/Errors/Details/253908/
 
-Am 22.07.19 um 23:18 schrieb Khem Raj:
-> From: sangelovic <angelovic.s@gmail.com>
-> 
+On Tue, Jul 23, 2019 at 8:17 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> The gnome class pulls in usually unwanted dependencies like gconf.
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
 > ---
->   .../sdbus-c++/sdbus-c++-0.7.2/run-ptest       | 15 ++++++
->   .../sdbus-c++/sdbus-c++-tools-native_0.7.2.bb | 14 ++++++
->   .../recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb | 49 +++++++++++++++++++
->   3 files changed, 78 insertions(+)
->   create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
->   create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
->   create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
-> 
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
-> new file mode 100644
-> index 0000000000..8fa9453e39
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.7.2/run-ptest
-> @@ -0,0 +1,15 @@
-> +#!/bin/sh
-> +set -e
-> +set -o pipefail
-> +
-> +logger "** Starting sdbus-c++-unit-tests"
-> +/opt/test/bin/sdbus-c++-unit-tests --gtest_output=xml:/data/ptest/sdbus-c++/sdbus-c++-unit-tests.xml |& \
-> +sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
-> +sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
-> +awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}'
-> +
-> +logger "** Starting sdbus-c++-integration-tests"
-> +/opt/test/bin/sdbus-c++-integration-tests --gtest_output=xml:/data/ptest/sdbus-c++/sdbus-c++-integration-tests.xml |& \
-> +sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
-> +sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
-> +awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}'
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
-> new file mode 100644
-> index 0000000000..e319404f49
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools-native_0.7.2.bb
-> @@ -0,0 +1,14 @@
-> +SUMMARY = "sdbus-c++ native tools"
-> +DESCRIPTION = "Native interface code generator for development with sdbus-c++"
-> +
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://${WORKDIR}/git-tools/COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
-Why you need the "${WORKDIR}/git-tools"?
-
-> +
-> +inherit cmake native
-> +
-> +DEPENDS += "expat"
-> +
-> +SRCREV = "750dab39270f338181db8d841cd4b1a9a50ae4d7"
-> +SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;destsuffix=git-tools;branch=master;subpath=tools"
-> +
-> +S = "${WORKDIR}/git-tools"
-Why don't you use "${WORKDIR}/git" and skip the destsuffix in SRC_URI?
-
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
-> new file mode 100644
-> index 0000000000..457f5d676a
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.7.2.bb
-> @@ -0,0 +1,49 @@
-> +SUMMARY = "sdbus-c++"
-> +DESCRIPTION = "High-level C++ D-Bus library designed to provide easy-to-use yet powerful API in modern C++"
-> +
-> +SECTION = "libs"
-> +
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
-> +
-> +inherit cmake pkgconfig systemd ptest python3native
-> +
-> +TEST_BIN_DIR = "/opt/test/bin"
-Is this a correct path for a test? Shouldn't we set TESTS_INSTALL_PATH 
-to a correct path.
-
-> +
-> +PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-external-libsystemd', 'with-builtin-libsystemd', d)} \
-> +                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
-> +PACKAGECONFIG[with-builtin-libsystemd] = "-DBUILD_LIBSYSTEMD=ON,-DBUILD_LIBSYSTEMD=OFF,meson-native ninja-native git-native gperf-native gettext-native util-linux libcap,libcap"
-Should we really support an embedded systemd build? Furthermore this 
-will build systemd with a hidden version and bypass the bitbake fetcher. 
-Is there a real use case for this and isn't the correct solution to 
-create a systemd library only recipe?
-
-> +PACKAGECONFIG[with-external-libsystemd] = "-DBUILD_LIBSYSTEMD=OFF,-DBUILD_LIBSYSTEMD=ON,systemd,libsystemd"
-> +PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${TEST_BIN_DIR},-DBUILD_TESTS=OFF"
-> +
-> +DEPENDS += "expat"
-> +
-> +SRCREV = "750dab39270f338181db8d841cd4b1a9a50ae4d7"
-> +SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;destsuffix=sdbus-cpp-${PV};branch=master"
-> +SRC_URI += "file://run-ptest"
-> +
-> +# Allow CMake to use git on the host machine
-> +OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
-> +# Ninja is the default CMake generator in Yocto now, so let's set Unix Makefiles explicitly
-> +OECMAKE_GENERATOR = "Unix Makefiles"
-> +
-> +EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
-> +                 -DBUILD_DOC=ON \
-> +                 -DBUILD_DOXYGEN_DOC=OFF"
-> +
-> +S = "${WORKDIR}/sdbus-cpp-${PV}"
-Why don't you use "${WORKDIR}/git" and remove the destsuffix from the 
-SRC_URI?
-
-> +
-> +PACKAGES += "${PN}-test"
-> +ALLOW_EMPTY_${PN}-test = "1"
-> +RDEPENDS_${PN}-test = "${PN}"
-It is common to create an additional test package?
-
-> +RDEPENDS_${PN}-ptest = "${PN}-test"
-> +
-> +# Don't take org.sdbuscpp.integrationtests.conf file into the base package
-> +FILES_${PN} = "${libdir}/"
-Why don't you use PACKAGE_BEFORE_PN or PACKAGES =+ ?
-
-> +
-> +FILES_${PN}-test += "${sysconfdir}/dbus-1/system.d/"
-> +FILES_${PN}-test += "${TEST_BIN_DIR}/"
-> +
-> +FILES_${PN}-dev += "${bindir}/sdbus-c++-xml2cpp"
-> +FILES_${PN}-dev += "${libdir}/cmake/sdbus-c++/sdbus-c++-config.cmake"
-> +FILES_${PN}-dev += "${libdir}/cmake/sdbus-c++/sdbus-c++-config-version.cmake"
-You don't need to add the two cmake paths any longer.
-
-Regards
-   Stefan
+>  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb              | 2 +-
+>  meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb                | 2 +-
+>  .../recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb      | 2 +-
+>  .../gnome-system-monitor/gnome-system-monitor_3.32.0.bb       | 2 +-
+>  meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb                  | 4 ++--
+>  meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb       | 2 +-
+>  meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb             | 2 +-
+>  7 files changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> index d2885906f..f45180e79 100644
+> --- a/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> +++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
+>  SECTION = "x11/office"
+>  DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
+>
+> -inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+> +inherit gnomebase pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
+>
+>  SRC_URI = " \
+>      ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+> diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+> index ea6439d91..9046645f5 100644
+> --- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+> +++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+> @@ -9,7 +9,7 @@ DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ \
+>
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+>
+> -inherit distro_features_check gnome gettext python3native
+> +inherit distro_features_check gnomebase gconf gettext python3native
+>
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+> index 1dad1e95b..85ee5e6cf 100644
+> --- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+> @@ -8,7 +8,7 @@ BPN = "gnome-desktop"
+>
+>  GNOMEBASEBUILDCLASS = "meson"
+>
+> -inherit gnome pkgconfig upstream-version-is-even gobject-introspection distro_features_check
+> +inherit gnomebase pkgconfig upstream-version-is-even gobject-introspection distro_features_check
+>
+>  # gobject-introspection is mandatory and cannot be configured
+>  REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+> diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
+> index c2432a322..701b0891c 100644
+> --- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
+> @@ -14,7 +14,7 @@ DEPENDS = " \
+>
+>  GNOMEBASEBUILDCLASS = "meson"
+>
+> -inherit gnomebase gtk-icon-cache distro_features_check gettext
+> +inherit gnomebase gconf gtk-icon-cache distro_features_check gettext
+>
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>
+> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+> index 3a4714a12..893379b52 100644
+> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.40.0.bb
+> @@ -3,9 +3,9 @@ LICENSE = "LGPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
+>
+>  GNOMEBASEBUILDCLASS = "meson"
+> -inherit gnome bash-completion gettext upstream-version-is-even
+> +inherit gnomebase bash-completion gettext upstream-version-is-even
+>
+> -DEPENDS += "libsecret glib-2.0 gconf libgudev shadow-native"
+> +DEPENDS += "libsecret glib-2.0 glib-2.0-native gconf libgudev shadow-native"
+>
+>  SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+>
+> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+> index 7babbd0a8..d9f643106 100644
+> --- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
+> @@ -6,7 +6,7 @@ SECTION = "x11/gnome/libs"
+>
+>  DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
+>
+> -inherit distro_features_check gnome gobject-introspection gettext
+> +inherit distro_features_check gnomebase gobject-introspection gettext
+>
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>
+> diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
+> index 08e52241b..e2a838b3a 100644
+> --- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
+> +++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
+> @@ -7,7 +7,7 @@ SECTION = "libs"
+>
+>  DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native gnome-common-native"
+>
+> -inherit autotools pkgconfig gnome gconf gobject-introspection
+> +inherit autotools pkgconfig gnomebase gconf gobject-introspection
+>
+>  SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
+>
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
