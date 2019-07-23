@@ -1,37 +1,48 @@
-Return-Path: <ayoub.zaki@embexus.com>
-Received: from mailrelay4-3.pub.mailoutpod1-cph3.one.com
-	(mailrelay4-3.pub.mailoutpod1-cph3.one.com [46.30.212.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 15CB27D58A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6624E7D718
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 10:20:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=embexus.com; s=20140924;
-	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
-	message-id:from:references:cc:to:subject:from;
-	bh=c5ZqtvWbLGHMAmz+OT/+yJS/1br65gG6zIqForBPay0=;
-	b=QQYW1WcEPhJnYsNDIfWWwq/DR8MBy3HN7VHKSBEzdn+ocZNC1uyG0cL3+Fq284oj1d/bCzyPUuXrg
-	aW2e1Vw+cAtwksspRDomg7f9PszhGy4il2MrnBf+uox84QG7HAvs9rKsX0MLKtVKNPSmXy4HfHFrw1
-	gOlcpUcmhtwaikec=
-X-HalOne-Cookie: e413b4a7abd73aafb6facb71465faf6c92bff3cf
-X-HalOne-ID: 6f31c4ea-ad33-11e9-8280-d0431ea8bb10
-Received: from [10.40.86.158] (unknown [193.240.242.3])
-	by mailrelay4.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id 6f31c4ea-ad33-11e9-8280-d0431ea8bb10;
-	Tue, 23 Jul 2019 10:20:03 +0000 (UTC)
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190721185137.27323-1-ayoub.zaki@embexus.com>
-	<20190721185137.27323-2-ayoub.zaki@embexus.com>
-	<CAMKF1soc=iL9HotW4WDdkHLDS_10b2zWOGaOCN7FswcK_M7y2g@mail.gmail.com>
-From: Ayoub Zaki <ayoub.zaki@embexus.com>
-Organization: Embexus
-Message-ID: <f2096ec3-e4b4-e0d9-f543-5b5cbd895d5b@embexus.com>
-Date: Tue, 23 Jul 2019 12:20:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Tue, 23 Jul 2019 13:58:47 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id w190so31153362qkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2019 06:58:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=B+8aAQHlsYdfS54GT2YnVimUdabT2QUElEZukKFUXR0=;
+	b=ceNQ5Yx7O4ih02Ztx/66fEJ1yFuM2JbXUCThr9KeRBJpn/yBEMNniu/OHu9fKkA5lB
+	HKFLyln39ohPPso8yrHuZ8lO/yXL0k+sLUVlB9UGUkSesNPJWlbxffsUshN+UghIaGhD
+	DsAlkfg0aeKpfaihP45ZC2pITaUohP4Ldmw1YNZlkdsfLkCUnC8QTn9vVPrEdu7Frk93
+	TKLPKfBhEzbE1s0SvQrCsEFOhbwje0eLIRkTr/gSE1bbNykFJisT9oDc+JLrnr/c/0L7
+	xYfZDZK/S8NoO+/QqGqvEi9a45bB7jwMyV2TKzhfcQiF/Loi39iM1LQm23V+3m6Q6EWd
+	bP3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=B+8aAQHlsYdfS54GT2YnVimUdabT2QUElEZukKFUXR0=;
+	b=pEQTZcxFSowW+6EFdFGSiAuTJQobItYD1fhldDeLwuMfRqUIvqRJulDqYrXt4RP3HX
+	P/HP3HLAQ7L3byrKW4b6b8AqXjtO5zDSaLvtY1SwiI/2bbiNlgSh3RPuUlJk2W7Fx0bp
+	AP/8YEOadystdUT1m5bDoJeZquusKONtR3qX6oI1cCM94H2cfENMUfpxWZK5ZvPQ5kMi
+	gwfsjow88bhhrr0ZzQ7+w0bWE9JTM+MnFxopzgbgz5MO9pEmqDToNRetA1kYrgdi9TzO
+	fXFZlQv0ZbukgWkBZDVriE/gAjcX+18MQuOu6HD9vdsi5Umsrb2z3x6srODkfEKFFLU6
+	/WCA==
+X-Gm-Message-State: APjAAAV8FUWZNySu0C4o17UW09N7IroAn030i/R4PL4tTJBI6TNH9jQb
+	woX7NjuacEjE+JmuQ7jp1v3qLc1tbFHfepTRrhq4AIYb
+X-Google-Smtp-Source: APXvYqxJd0NjqDCqB2Hd0IHPxs94iV8c/BIyk6vPBD7lvl4Y9/2Jtx8baWwtZxe6uyA6loXdOuN7za6RjfeoCXnx+Ys=
+X-Received: by 2002:a37:7083:: with SMTP id l125mr48778439qkc.71.1563890328028;
+	Tue, 23 Jul 2019 06:58:48 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soc=iL9HotW4WDdkHLDS_10b2zWOGaOCN7FswcK_M7y2g@mail.gmail.com>
+References: <20190722211814.14237-1-raj.khem@gmail.com>
+	<20190722211814.14237-2-raj.khem@gmail.com>
+	<20190723075341.GB27144@localhost>
+In-Reply-To: <20190723075341.GB27144@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Jul 2019 06:58:32 -0700
+Message-ID: <CAMKF1soNwAgvn1mCQPcA4ugCtMvq1k7kWr8A4dWbafCofcV5EA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 2/2] usbguard: Initial recipe
+Subject: Re: [meta-oe][PATCH] log4cplus: Fix build with gold linker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,114 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 10:20:04 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 23 Jul 2019 13:58:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem,
-
-
-On 22.07.19 09:41, Khem Raj wrote:
-> it seems to be using recipes from other layers see
+On Tue, Jul 23, 2019 at 12:53 AM Adrian Bunk <bunk@stusta.de> wrote:
 >
-> ERROR: Nothing PROVIDES 'libseccomp' (but
-> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> DEPENDS on or otherwise requires it). Close matches:
->    libcomps
-> ERROR: Nothing RPROVIDES 'usbguard-dev' (but
-> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> RDEPENDS on or otherwise requires it)
-> No eligible RPROVIDERs exist for 'usbguard-dev'
-> NOTE: Runtime target 'usbguard-dev' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['usbguard-dev']
-> ERROR: Nothing RPROVIDES 'usbguard' (but
-> /mnt/a/yoe/sources/meta-openembedded/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> RDEPENDS on or otherwise requires it)
-> No eligible RPROVIDERs exist for 'usbguard'
-> NOTE: Runtime target 'usbguard' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['usbguard']
+> On Mon, Jul 22, 2019 at 02:18:14PM -0700, Khem Raj wrote:
+> > Fixes a potential linker error and eventual linker crash when using gold
+> > linker [1]
+> >
+> > [1] https://errors.yoctoproject.org/Errors/Details/253440/
+> >...
 >
-> I would prefer it to be a packageconfig and disabled by default so it
-> can build without libseccomp
-
-
-Right libseccomp is provided by meta-security layer, it is not a 
-required dependency, I will remove it and send a new patch.
-
+> AFAIR these build logs are not permanently stored, so quoting the error
+> message might be more useful than a soon defunct URL in the git history.
 >
-> On Sun, Jul 21, 2019 at 11:51 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
->> Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
->> by implementing basic whitelisting and blacklisting capabilities based on device attributes.
->> ---
->>   .../usbguard/usbguard_0.7.4.bb                | 37 +++++++++++++++++++
->>   1 file changed, 37 insertions(+)
->>   create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
->>
->> diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
->> new file mode 100644
->> index 000000000..eee381fbe
->> --- /dev/null
->> +++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
->> @@ -0,0 +1,37 @@
->> +DESCRIPTION="USBGuard framework helps to protect against BadUSB."
->> +HOMEPAGE="https://github.com/dkopecek/usbguard"
->> +LICENSE="GPLv2"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
->> +
->> +SRC_URI="https://github.com/USBGuard/usbguard/archive/${BP}.tar.gz"
->> +SRC_URI[md5sum] = "ddaa9ae884200c861ad946f34dfd5ab9"
->> +SRC_URI[sha256sum] = "d37886508583565aae0df6a110b11524c59b39e0deb25ee49fc34274e4784f55"
->> +
->> +inherit autotools pkgconfig systemd bash-completion
->> +
->> +S= "${WORKDIR}/${BPN}-${BP}"
->> +
->> +DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
->> +       dbus dbus-glib libqb libseccomp libcap-ng libgcrypt libsodium protobuf pegtl"
->> +
->> +EXTRA_OECONF += "--with-bundled-catch"
->> +
->> +PACKAGECONFIG ??= "libsodium \
->> +       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
->> +       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
->> +
->> +PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
->> +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
->> +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
->> +PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
->> +PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
->> +
->> +SYSTEMD_SERVICE_${PN} = "${PN}.service"
->> +SYSTEMD_PACKAGES += "${PN}"
->> +
->> +
->> +do_install_append(){
->> +
->> +       sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \
->> +                                               ${D}${sysconfdir}/usbguard/usbguard-daemon.conf
->> +}
->> --
->> 2.17.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Mit freundlichen Grüßen / Kind regards
+thats a good point
 
--- 
-Ayoub Zaki
-Embedded Systems Consultant
-
-Vaihinger Straße 2/1
-D-71634 Ludwigsburg
-
-Mobile   : +4917662901545
-Email    : ayoub.zaki@embexus.com
-Homepage : https://embexus.com
-VAT No.  : DE313902634
-
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
 
