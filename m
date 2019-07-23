@@ -1,24 +1,37 @@
-Return-Path: <wouter@wouterlucas.com>
-X-Greylist: delayed 1143 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 23 Jul 2019 04:23:32 UTC
-Received: from h0stless.netw0rk.nl (h0stless.netw0rk.nl [149.210.182.68])
-	by mail.openembedded.org (Postfix) with ESMTP id B95467E995
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id CBD7A7DE37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 04:23:32 +0000 (UTC)
-Received: from c-69-181-203-201.hsd1.ca.comcast.net ([69.181.203.201]
-	helo=valravn.hsd1.ca.comcast.net) by h0stless.netw0rk.nl with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92)
-	(envelope-from <wouter@wouterlucas.com>) id 1hpm2P-0001nE-OC
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jul 2019 06:04:29 +0200
-From: Wouter-lucas van Boesschoten <wouter@wouterlucas.com>
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
-Message-Id: <6C148EBD-DAFD-4D3A-9C58-53C6DF1E00FE@wouterlucas.com>
-Date: Mon, 22 Jul 2019 21:04:27 -0700
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3445.104.11)
-X-Authenticated-Id: wouter
-Subject: [meta-python] [PATCH] python-jsonref: add recipe
+	Tue, 23 Jul 2019 07:53:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45t9hl6R7Qz1n;
+	Tue, 23 Jul 2019 09:53:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1563868424;
+	bh=vYkbZxuZV6SHRtu4POqgwm1lWfd0uMIgom6rhxF4mZw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Gv3pPTn+mRiRFkEy71w3p/gmJHknEdKO/f2QPj99i/b/X+h60PRrrVIAPpgIbEIF4
+	a+MMlPnbS9aQ8nMS3o7KLRRSl4MPyySLmuP8Y1ePsmPCIzqjVN4JnL8udJHb2bA5fa
+	fpbE4P//bOCAzfrb8QfbqbxQV2OXhmTQ6elSLHlHPI+J2RQb78JOL+AvBnusjs+uA8
+	TEJxhKPs2/3Am0bTJvM9zkVrZr7KYxtp4T3lrnlZxEINq5tP+9xC0/3UV4fawWcw2I
+	NswEZNbj0SmkHUz6T9pvd3B1CfR81oCe0lViPlbOOkJRH64eVRR2ZUaYKdNut+y63P
+	qx3iu4C18Kh+uB1Nusd1t2jHJfleimJLgNXYLWeEx86DRB1UDh3+tRkaTQDz7EzA9e
+	s8CQkjvQ1m8RGU6vgjzOXu7Sismy5h4ewwpsoPcHKLYISSmdXB0SC0/o6CFTu6drdI
+	fWOt4rwHt+cdin7F7kvETPek9a/Hly7YOuG/eCdhk/Z0mKyz31ghFb22ojQfpEW9fT
+	99kkrW8rA1RyEVJDV0VbJLdK+hK+c9RULh03pMImBENJW9kqYRCirmh9Jdira+3CwA
+	xOCuxML5mYRGLjtxWGZdGwrcHEWPEy+XgJog2PX/92Nu56Oj4HETaqblWHwZnrUnQ9
+	Hi/mCbluLbJTV/6cmQoSDC0w=
+Date: Tue, 23 Jul 2019 10:53:41 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190723075341.GB27144@localhost>
+References: <20190722211814.14237-1-raj.khem@gmail.com>
+	<20190722211814.14237-2-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20190722211814.14237-2-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] log4cplus: Fix build with gold linker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,54 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 04:23:33 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Jul 2019 07:53:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
+On Mon, Jul 22, 2019 at 02:18:14PM -0700, Khem Raj wrote:
+> Fixes a potential linker error and eventual linker crash when using gold
+> linker [1]
+> 
+> [1] https://errors.yoctoproject.org/Errors/Details/253440/
+>...
 
-Signed-off-by: Wouter-lucas van Boesschoten <wouter@wouterlucas.com>
----
- .../python-jsonref/python-jsonref.inc                 | 11 +++++++++++
- .../python-jsonref/python-jsonref_0.2.bb              |  1 +
- 2 files changed, 12 insertions(+)
- create mode 100644 =
-meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
- create mode 100644 =
-meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
+AFAIR these build logs are not permanently stored, so quoting the error 
+message might be more useful than a soon defunct URL in the git history.
 
-diff --git =
-a/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc =
-b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
-new file mode 100644
-index 000000000..0e69e4534
---- /dev/null
-+++ b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
-@@ -0,0 +1,11 @@
-+SUMMARY =3D "jsonref is a library for automatic dereferencing of JSON =
-Reference objects for Python"
-+HOMEPAGE =3D "https://github.com/gazpachoking/jsonref"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3Da34264f25338d41744dca1abfe4eb18f"
-+
-+SRC_URI[md5sum] =3D "42b518b9ccd6852d1d709749bc96cb70"
-+SRC_URI[sha256sum] =3D =
-"f3c45b121cf6257eafabdc3a8008763aed1cd7da06dbabc59a9e4d2a5e4e6697"
-+
-+inherit pypi setuptools
-+
-+BBCLASSEXTEND =3D "native nativesdk"
-diff --git =
-a/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb =
-b/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
-new file mode 100644
-index 000000000..d97893f5a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
-@@ -0,0 +1 @@
-+require python-jsonref.inc
---=20
-2.21.0
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
