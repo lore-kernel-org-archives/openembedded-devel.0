@@ -1,24 +1,30 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B7F687F044
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6095C7E265
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 00:54:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6N0s3WP017064
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 23 Jul 2019 03:17:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,297,1559491200"; d="scan'208";a="71997809"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2019 11:17:25 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2B1424CDE81D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jul 2019 17:54:03 -0700 (PDT)
-Received: from localhost (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Mon, 22 Jul 2019 17:54:02 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Tue, 23 Jul 2019 11:17:24 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 23 Jul 2019 11:17:23 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Jul 2019 08:54:00 +0800
-Message-ID: <1563843240-6038-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Tue, 23 Jul 2019 11:16:39 +0800
+Message-ID: <20190723031639.10770-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.136]
-Subject: [meta-networking][PATCH] snort: upgrade 2.9.13 -> 2.9.14
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 2B1424CDE81D.A8848
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-mako: upgrade 1.0.13 -> 1.0.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 00:54:02 -0000
+X-List-Received-Date: Tue, 23 Jul 2019 03:17:26 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../recipes-connectivity/snort/{snort_2.9.13.bb => snort_2.9.14.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/snort/{snort_2.9.13.bb => snort_2.9.14.bb} (96%)
+ meta-python/recipes-devtools/python/python-mako.inc                   | 4 ++--
+ .../python/{python-mako_1.0.13.bb => python-mako_1.0.14.bb}           | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-mako_1.0.13.bb => python-mako_1.0.14.bb} (100%)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.14.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-rename to meta-networking/recipes-connectivity/snort/snort_2.9.14.bb
-index c7e47e1..b11890c 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.13.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.14.bb
-@@ -14,8 +14,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
-     file://configure.in-disable-tirpc-checking-for-fedora.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python-mako.inc b/meta-python/recipes-devtools/python/python-mako.inc
+index 0b3fe14..27d14a3 100644
+--- a/meta-python/recipes-devtools/python/python-mako.inc
++++ b/meta-python/recipes-devtools/python/python-mako.inc
+@@ -8,8 +8,8 @@ PYPI_PACKAGE = "Mako"
  
--SRC_URI[md5sum] = "b61ae846af022018b05511076baad60c"
--SRC_URI[sha256sum] = "31447393d15286b848810dd78ab2cb3ad231fcd1f1663f959587690eeea75413"
-+SRC_URI[md5sum] = "d1689c7ccaaa7bfcfa83b5bff6b8f9b8"
-+SRC_URI[sha256sum] = "c0306db9ce64f45cc7c64c9afc70abe9689daa860020345ec3ba099928b7464b"
+ inherit pypi
  
- UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
- UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
+-SRC_URI[md5sum] = "ad6c7dcb5d39c99f4fdf4fec892c5dee"
+-SRC_URI[sha256sum] = "95ee720cc3453063788515d55bd7ce4a2a77b7b209e4ac70ec5c86091eb02541"
++SRC_URI[md5sum] = "e162578170331f0cc6a4adb063c7c0f6"
++SRC_URI[sha256sum] = "f5a642d8c5699269ab62a68b296ff990767eb120f51e2e8f3d6afb16bdb57f4b"
+ 
+ RDEPENDS_${PN} = " \
+     ${PYTHON_PN}-html \
+diff --git a/meta-python/recipes-devtools/python/python-mako_1.0.13.bb b/meta-python/recipes-devtools/python/python-mako_1.0.14.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-mako_1.0.13.bb
+rename to meta-python/recipes-devtools/python/python-mako_1.0.14.bb
 -- 
 2.7.4
+
+
 
 
