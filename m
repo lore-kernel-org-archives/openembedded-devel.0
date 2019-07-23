@@ -1,48 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B0E16D230
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id AA10A7D1F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 15:45:36 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id d79so31447892qke.11
+	Tue, 23 Jul 2019 16:46:12 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45tPW82PWWz23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 08:45:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=p3NGPzFteTp2qEuJZM/EyDWvPnOKgpMeSfRElO0MatE=;
-	b=aC5UFZQ61JBYIi1syjUCrXVFe/fVvRDodtErhFVk4VMeFYEAX9bBguCD2Jo31sW1BP
-	fPbk4cOyjSfWyiXbKdygm8Jg3t4kLDZVzJ8qeur5Zjp00tphxyYVvjepa+hnvsE2QcW+
-	lyUwycwoYZZvt5ayDYlSVXTeFszaM1EpEqZ2l2yFH6O3Lt/E9dNnBDC7+O2zamQYbj+8
-	h6cr+Mb/jz7vCt4mgofkshopQGI+ayyNu4WRBVN16X8CsGdTXaizAzi2MfR4Abcks+vL
-	xAWIH0mQwAIQMw+gW+ANZx+hgHiqs8/iLyLYe96RiyiKLfQ28wFb8HPISnQ/krywsYij
-	CaCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=p3NGPzFteTp2qEuJZM/EyDWvPnOKgpMeSfRElO0MatE=;
-	b=DTSmoAo5H2RFIhq4Nt5iy6BsA+bNfL4g4WGu17kWIFf/oblm2jB+A6cO2Fg3TH0mst
-	h4FmNP7qvlu2irdpt4kcruB/9bVyBEWTPEVP7AaMDkdTmeeBIjHzsic1uk+9coMBaNV4
-	LVP9uJm2HieTaI7TM+ikpV1iuD0STGkGIACrdu2SnD/kpW+ADcC8nvovunjvP0SAzl3V
-	SjE4mH/fAAcWlB8TFmElqEWE8IaoY8p2pE0ZdD++8uurrzfS6JFlUdJoDTYlRbZ+LXa9
-	QGuyFMwDUsQDB/tXqOziSsvEvteI70ZurOxpNtBdPr2wkJk2RWV4sT1piVON/7TGmpP7
-	h4dw==
-X-Gm-Message-State: APjAAAVdYA/5yt3c2ZROWsbJT4vumt8SCIpWoghDiMm7W/fPglrxMe3M
-	js3YdcfegzX7ZYbTDJHdmBk4GiHNoPp5ovhYe5t5SfA2
-X-Google-Smtp-Source: APXvYqxhjG4yqOMMCK7MWkwiaiHJuaoutp6qBvvHoytkGx1qX68GuWuXR+vhiHpp4FmFbrRDwp3T1pwRbDbiw/xjeT4=
-X-Received: by 2002:a37:4243:: with SMTP id p64mr32824292qka.9.1563896736993; 
-	Tue, 23 Jul 2019 08:45:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190722130224.9972-1-bunk@stusta.de>
-	<CAMKF1sqM6spF1vd0+=fzJz0WyzHx1u_FofPUn=uiE8w9ybc1fw@mail.gmail.com>
-	<20190723152012.GA25024@localhost>
-In-Reply-To: <20190723152012.GA25024@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Jul 2019 08:45:10 -0700
-Message-ID: <CAMKF1sqjVQrEGYDkxhH-66qY_pD3cQFDkU6FkE8iEB+_FE5LCg@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH] meta-gnome: Inherit gnomebase instead of gnome
+	Tue, 23 Jul 2019 18:46:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1563900372;
+	bh=zoSqa+WW5YiXFPV33q8tqztqND/Rlgy/E1i2tB5MW0s=;
+	h=From:To:Subject:Date:From;
+	b=GKw7ikA4pI7Sb8JpeHGcMApLkv+G6qakHsRLouPzqmBqpJxPz/lQpuxEev/ZCKi4h
+	neNmqVthLpwF+2eUMw33jBpTiWrqi7/jq3Q3//QzMl0zQ3CGKpn1v9ZGJpAuk693L3
+	+rk3PtP+ZawwFdU0e0cFhQe6e22pFQeYBYjj9AfqJ5htXOOmvTJRJtQCl+ae/OnF/j
+	8Sj55k5aoGasmqBg5MjUFDMpJBhbeHWzrpW3RLeT0MyUU4miO/dDRDDc8P8+kXQkdq
+	YeKpm+T1Z9J9ifgBa4lrnvPuHSJBDOgMPM4ZeAtMBpqdJ9EoZSI+Eh3C2F01QhpdVQ
+	M+lHP/6jO8Cml+7IvB8fd0o7ngbyw+anh7wb1GUy3uDYicSiXccklleTPKaEXmp/FX
+	QbauHCJ1Th9peAb5OcZUj5erm4v467nWcMPZyz43DnVOyAxXpTTfNFoUG3wBPSZdJY
+	8nH5wX5IhFUJQvXDBuZZUsJzCFkKGnzHvdij3eGen3E7FpcHQl8Qbug0BIx6RmNkvD
+	6t5yddJxenDZO6Jvaq6JTKGUN6XVVk30JOs3TP1lIIg3yODXJPUItfcFUmb0nj05e1
+	EBuDhQ2D2X0Bpd3gRM5SitFbnoT6zhIJUETcINL7/wWLl6TshFc5sfG+VK3p3XqJl0
+	Wxb1W5rSTfzWGFGNeZgmFGaQ=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Jul 2019 19:46:07 +0300
+Message-Id: <20190723164607.14935-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] gpsd: Switch from python-scons-native to python3-scons-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,34 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 15:45:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 Jul 2019 16:46:12 -0000
 
-On Tue, Jul 23, 2019 at 8:20 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Mon, Jul 22, 2019 at 09:07:20AM -0700, Khem Raj wrote:
-> > Adrian
-> >
-> > Seeing this failure
-> >
-> > https://errors.yoctoproject.org/Errors/Details/253680/
->
-> A reverse dependency lacked a direct DEPENDS, and this was exposed now.
->
-> I've updated both patches and did some more testbuilds,
-> please let me know if you find more build failures I missed.
->
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-thanks
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index 558b7c1d5..7b7f33520 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -2,13 +2,9 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
+-DEPENDS = "dbus ncurses python libusb1 chrpath-replacement-native pps-tools"
++DEPENDS = "dbus ncurses python python3 libusb1 chrpath-replacement-native pps-tools"
+ PROVIDES = "virtual/gpsd"
+ 
+-# SConstruct in gpsd does not yet support Python 3
+-DEPENDS += "python-scons-native"
+-DEPENDS_remove = "python3-scons-native"
+-
+ EXTRANATIVEPATH += "chrpath-native"
+ 
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+-- 
+2.17.1
 
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
 
