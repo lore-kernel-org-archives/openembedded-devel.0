@@ -1,48 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6624E7D718
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id CF55E7BFD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 13:58:47 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id w190so31153362qkc.6
+	Tue, 23 Jul 2019 15:16:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45tMX55b6nz23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 06:58:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=B+8aAQHlsYdfS54GT2YnVimUdabT2QUElEZukKFUXR0=;
-	b=ceNQ5Yx7O4ih02Ztx/66fEJ1yFuM2JbXUCThr9KeRBJpn/yBEMNniu/OHu9fKkA5lB
-	HKFLyln39ohPPso8yrHuZ8lO/yXL0k+sLUVlB9UGUkSesNPJWlbxffsUshN+UghIaGhD
-	DsAlkfg0aeKpfaihP45ZC2pITaUohP4Ldmw1YNZlkdsfLkCUnC8QTn9vVPrEdu7Frk93
-	TKLPKfBhEzbE1s0SvQrCsEFOhbwje0eLIRkTr/gSE1bbNykFJisT9oDc+JLrnr/c/0L7
-	xYfZDZK/S8NoO+/QqGqvEi9a45bB7jwMyV2TKzhfcQiF/Loi39iM1LQm23V+3m6Q6EWd
-	bP3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=B+8aAQHlsYdfS54GT2YnVimUdabT2QUElEZukKFUXR0=;
-	b=pEQTZcxFSowW+6EFdFGSiAuTJQobItYD1fhldDeLwuMfRqUIvqRJulDqYrXt4RP3HX
-	P/HP3HLAQ7L3byrKW4b6b8AqXjtO5zDSaLvtY1SwiI/2bbiNlgSh3RPuUlJk2W7Fx0bp
-	AP/8YEOadystdUT1m5bDoJeZquusKONtR3qX6oI1cCM94H2cfENMUfpxWZK5ZvPQ5kMi
-	gwfsjow88bhhrr0ZzQ7+w0bWE9JTM+MnFxopzgbgz5MO9pEmqDToNRetA1kYrgdi9TzO
-	fXFZlQv0ZbukgWkBZDVriE/gAjcX+18MQuOu6HD9vdsi5Umsrb2z3x6srODkfEKFFLU6
-	/WCA==
-X-Gm-Message-State: APjAAAV8FUWZNySu0C4o17UW09N7IroAn030i/R4PL4tTJBI6TNH9jQb
-	woX7NjuacEjE+JmuQ7jp1v3qLc1tbFHfepTRrhq4AIYb
-X-Google-Smtp-Source: APXvYqxJd0NjqDCqB2Hd0IHPxs94iV8c/BIyk6vPBD7lvl4Y9/2Jtx8baWwtZxe6uyA6loXdOuN7za6RjfeoCXnx+Ys=
-X-Received: by 2002:a37:7083:: with SMTP id l125mr48778439qkc.71.1563890328028;
-	Tue, 23 Jul 2019 06:58:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190722211814.14237-1-raj.khem@gmail.com>
-	<20190722211814.14237-2-raj.khem@gmail.com>
-	<20190723075341.GB27144@localhost>
-In-Reply-To: <20190723075341.GB27144@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Jul 2019 06:58:32 -0700
-Message-ID: <CAMKF1soNwAgvn1mCQPcA4ugCtMvq1k7kWr8A4dWbafCofcV5EA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] log4cplus: Fix build with gold linker
+	Tue, 23 Jul 2019 17:16:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1563895013;
+	bh=A/tBkK4CyZbXsgiiPcjtMhrLmmWeF8FmXE1pcWcXtRk=;
+	h=From:To:Subject:Date:From;
+	b=ZFioI0XuUeLt6bS9EiP7F8ne3F+TSVIB71cNPtQ/i1C180NED2eXH66SeWEFdXv4q
+	FntQ+er87rYJB4+EWP0vrEkjZGOfGVP322W87T4URaMNI/z/TK+6u7FWZ/SjtAk7oL
+	HvJnhpJduywB0/irJLsDVAclfB0GDnn3CnFZBsFfc1RaYtDQuuoBZJ0fAKacJj6JTd
+	WbUlaIMcSDTKvMX97Vs7bYJ+ec7JY7rtNWeCZlIPKLAgTcPXEBI4riFRl3yZb/T8ju
+	tNcPM6BzZ+TvuDZcQDH/6VeoqYJRKXJhQJnVI+VZdVEAD8otB5Z/gY3CP39hJiO1X3
+	tnRpn1OpQccsROBV2KPF1qgG6UeATj78mGmhWtgm+n9ufbm1vpMs6TyDt96TOKArEk
+	k2+GTzdqVioo7ktB/PPfenY40YFDWwjndnxXrbi7/IARaPdKtIt0B0LPR+1SPaNupH
+	cxeWk1HSajgG71hn2mDFxGhQkEXLRN9EHqJihTiMNOLLJRAPKdyA+533y0Rkdb1oHX
+	evcCVTBjENWU6eqoIXR3V9yXBR0xVZf+pIxayLk0wQJ8macxx5RqLk5f2kfaaPH6wi
+	NiOEHVoGXtyy/d1TpLwEHZ6hR+uy+pXm/mkfQ6jtwPWvwYMGvP85ddg/MxKJB9dDq5
+	rcijwgHNVhnurkcJh7t9xxuw=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Jul 2019 18:16:49 +0300
+Message-Id: <20190723151649.9238-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v2] meta-oe: Inherit gnomebase instead of gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,32 +40,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 13:58:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 Jul 2019 15:16:54 -0000
 
-On Tue, Jul 23, 2019 at 12:53 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Mon, Jul 22, 2019 at 02:18:14PM -0700, Khem Raj wrote:
-> > Fixes a potential linker error and eventual linker crash when using gold
-> > linker [1]
-> >
-> > [1] https://errors.yoctoproject.org/Errors/Details/253440/
-> >...
->
-> AFAIR these build logs are not permanently stored, so quoting the error
-> message might be more useful than a soon defunct URL in the git history.
->
+The gnome class pulls in usually unwanted dependencies like gconf.
 
-thats a good point
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb                | 2 +-
+ meta-oe/recipes-gnome/vte9/vte9.inc                      | 2 +-
+ meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb             | 3 ++-
+ meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb | 4 ++--
+ meta-oe/recipes-support/pidgin/gmime_3.2.3.bb            | 2 +-
+ 5 files changed, 7 insertions(+), 6 deletions(-)
 
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
+diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
+index 63f4f09ba..e587e2a10 100644
+--- a/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
++++ b/meta-oe/recipes-gnome/atk/atkmm_2.28.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+ 
+ DEPENDS = "atk glibmm"
+ 
+-inherit distro_features_check gnome autotools pkgconfig
++inherit distro_features_check gnomebase autotools pkgconfig
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/meta-oe/recipes-gnome/vte9/vte9.inc b/meta-oe/recipes-gnome/vte9/vte9.inc
+index 206c430da..d860d44e2 100644
+--- a/meta-oe/recipes-gnome/vte9/vte9.inc
++++ b/meta-oe/recipes-gnome/vte9/vte9.inc
+@@ -8,7 +8,7 @@ RDEPENDS_libvte = "vte-termcap"
+ GNOMEBN = "vte"
+ S = "${WORKDIR}/vte-${PV}"
+ 
+-inherit gnome gtk-doc distro_features_check upstream-version-is-even gobject-introspection
++inherit gnomebase gtk-doc distro_features_check upstream-version-is-even gobject-introspection
+ ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
+ 
+ EXTRA_OECONF = "--disable-python"
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+index 943986e77..1d64910fd 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+@@ -8,6 +8,7 @@ DEPENDS = " \
+     gdk-pixbuf-native \
+     intltool-native \
+     libxslt-native \
++    dbus-glib \
+     gtk+ \
+     babl \
+     gegl \
+@@ -24,7 +25,7 @@ DEPENDS = " \
+ "
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
+ 
+-inherit distro_features_check gnome gtk-doc
++inherit distro_features_check gnomebase gtk-icon-cache gtk-doc
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
+index 6a8274405..421ea9d5c 100644
+--- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
++++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based vol
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-DEPENDS = "intltool-native gtkmm3 libcanberra pulseaudio"
++DEPENDS = "intltool-native gtk+3-native gtkmm3 libcanberra pulseaudio"
+ 
+-inherit gnome distro_features_check
++inherit gnomebase distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+index 8c6f0b010..bce89bec8 100644
+--- a/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
++++ b/meta-oe/recipes-support/pidgin/gmime_3.2.3.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "Runtime libraries for parsing and creating MIME mail"
+ SECTION = "libs"
+ DEPENDS = "glib-2.0 zlib"
+ 
+-inherit gnome autotools gobject-introspection
++inherit gnomebase autotools gobject-introspection
+ 
+ SRC_URI += "file://iconv-detect.h \
+             file://nodolt.patch"
+-- 
+2.17.1
+
 
