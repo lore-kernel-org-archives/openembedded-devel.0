@@ -1,30 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 09B617F01D
+Return-Path: <wouter@wouterlucas.com>
+X-Greylist: delayed 1143 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 23 Jul 2019 04:23:32 UTC
+Received: from h0stless.netw0rk.nl (h0stless.netw0rk.nl [149.210.182.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B95467E995
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 03:17:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,297,1559491200"; d="scan'208";a="71997828"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2019 11:17:37 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id CFD2B4CDDD5C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 11:17:37 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 23 Jul 2019 11:17:37 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Jul 2019 11:16:53 +0800
-Message-ID: <20190723031653.10822-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: CFD2B4CDDD5C.AE0C1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-filesystems] [PATCH] xfsprogs: upgrade 5.0.0 -> 5.1.0
+	Tue, 23 Jul 2019 04:23:32 +0000 (UTC)
+Received: from c-69-181-203-201.hsd1.ca.comcast.net ([69.181.203.201]
+	helo=valravn.hsd1.ca.comcast.net) by h0stless.netw0rk.nl with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92)
+	(envelope-from <wouter@wouterlucas.com>) id 1hpm2P-0001nE-OC
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jul 2019 06:04:29 +0200
+From: Wouter-lucas van Boesschoten <wouter@wouterlucas.com>
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
+Message-Id: <6C148EBD-DAFD-4D3A-9C58-53C6DF1E00FE@wouterlucas.com>
+Date: Mon, 22 Jul 2019 21:04:27 -0700
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3445.104.11)
+X-Authenticated-Id: wouter
+Subject: [meta-python] [PATCH] python-jsonref: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,37 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 03:17:37 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Jul 2019 04:23:33 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+
+Signed-off-by: Wouter-lucas van Boesschoten <wouter@wouterlucas.com>
 ---
- .../recipes-utils/xfsprogs/{xfsprogs_5.0.0.bb => xfsprogs_5.1.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.0.0.bb => xfsprogs_5.1.0.bb} (94%)
+ .../python-jsonref/python-jsonref.inc                 | 11 +++++++++++
+ .../python-jsonref/python-jsonref_0.2.bb              |  1 +
+ 2 files changed, 12 insertions(+)
+ create mode 100644 =
+meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
+ create mode 100644 =
+meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.0.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-similarity index 94%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.0.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-index 188c566..0130fd2 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.0.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-@@ -12,8 +12,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            "
--SRC_URI[md5sum] = "b6acc4aa93a952595fc8f2e7447be6f2"
--SRC_URI[sha256sum] = "fcc2e6478aed55408a341567c0459f514e575296d8827d9004cae8aa0367dc4a"
-+SRC_URI[md5sum] = "7199b7aaf088d82fc8a1660ffeb63626"
-+SRC_URI[sha256sum] = "ca8b4e73dfc5b6227bb6d4e73d019035a1975b83ea41e218cdff15058a9f6c45"
- 
- inherit autotools-brokensep
- 
--- 
-2.7.4
-
-
+diff --git =
+a/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc =
+b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
+new file mode 100644
+index 000000000..0e69e4534
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
+@@ -0,0 +1,11 @@
++SUMMARY =3D "jsonref is a library for automatic dereferencing of JSON =
+Reference objects for Python"
++HOMEPAGE =3D "https://github.com/gazpachoking/jsonref"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3Da34264f25338d41744dca1abfe4eb18f"
++
++SRC_URI[md5sum] =3D "42b518b9ccd6852d1d709749bc96cb70"
++SRC_URI[sha256sum] =3D =
+"f3c45b121cf6257eafabdc3a8008763aed1cd7da06dbabc59a9e4d2a5e4e6697"
++
++inherit pypi setuptools
++
++BBCLASSEXTEND =3D "native nativesdk"
+diff --git =
+a/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb =
+b/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
+new file mode 100644
+index 000000000..d97893f5a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
+@@ -0,0 +1 @@
++require python-jsonref.inc
+--=20
+2.21.0
 
 
