@@ -1,25 +1,25 @@
 Return-Path: <psaavedra@igalia.com>
 Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 704017F1B2
+	by mail.openembedded.org (Postfix) with ESMTP id E3E317F1CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 14:59:01 +0000 (UTC)
+	Wed, 24 Jul 2019 14:59:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; 
 	h=References:In-Reply-To:Message-Id:Date:Subject:To:From;
-	bh=cGD+oHMbpbnrAJlnJJ/mMzc5d1rrqK5eWO9nfP6sU0w=; 
-	b=Fl0CXedidYTfA4mTzCWU6oSLVy2gsmVGtBiQ5pLpJPCsla/eA7vfR9hdit+SrbAf+onH7lWahYRtSSwgkzWrg1NLdSds6hxoCQmFBM3+YPEb30feRw3r+cCutew3f2wniUsWewZkV1bouq/q1v9uiL8gp0USdB1f8pBcCUMue6lkUlt2RU454ws75tYJzDuZooV94tyX5DPefTe/wGbsJ5P56fU6sFzs4A7SG6hzEAjEyYp0gD/c8JmDH7dBYvWugUimsV79YTFQgnj2SBaq52CNxU2MafFsmMtgTZI7vlFY0XwRhz0sf0KYo1/Tbhr4n6rGCRQzDIZTFL0/yOcYcQ==;
+	bh=bVFvufxFFsvoFflMwLhlvqHE+NJxBTXaRnV6XapgOvs=; 
+	b=c8sGftFPohRVKiJihmHPPudZqir4CNqtXa3GiqbnKfJ60hsiyrMqwUUVnZMVcGSJXQkLP5oo8Sxm/f6G1bYIQI3A0IbItqQBtO+8KRNODRzFo/W8BL7RoKP4KHvMNuE6uHLEsEWHGYhMQeGulaSH4vYfs4fRTogBgxTpQQDu0l5kH8FQcFNwQPowkXPFxm4W90TXrUUeTAUg+oymLNISPLKGkZPmKbKUe8HRirVEiUIoywX1unZ6wFd4RM255DlfMlmRZlz/6kM2dRRZbAXbvHzBiCA9wWc8NHZl7uAzBp9vluqQpvLKAqBoOcImmQLuLoMoPxmnvcDqfmyPccwubw==;
 Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1hqIbr-0003aA-I5
+	by fanzine.igalia.com with esmtp (Exim) id 1hqIbo-0003aA-PG
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 16:51:15 +0200
+	Wed, 24 Jul 2019 16:51:12 +0200
 From: Pablo Saavedra <psaavedra@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2019 16:50:58 +0200
-Message-Id: <20190724145100.88293-5-psaavedra@igalia.com>
+Date: Wed, 24 Jul 2019 16:50:55 +0200
+Message-Id: <20190724145100.88293-2-psaavedra@igalia.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20190724145100.88293-1-psaavedra@igalia.com>
 References: <20190724145100.88293-1-psaavedra@igalia.com>
-Subject: [meta-openembedded][PATCH v5 5/7] ibus-table: add ibus-table recipe
+Subject: [meta-openembedded][PATCH v5 2/7] ibus: add ibus recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,49 +32,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2019 14:59:01 -0000
+X-List-Received-Date: Wed, 24 Jul 2019 14:59:06 -0000
+
+Intelligent Input Bus for Linux/Unix https://github.com/ibus/ibus/wiki
+
+Collision with: https://patchwork.openembedded.org/patch/155947/
 
 Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
 ---
- meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb | 29 +++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb
+ meta-oe/recipes-support/ibus/ibus_1.5.19.bb | 97 +++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ibus/ibus_1.5.19.bb
 
-diff --git a/meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb b/meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb
+diff --git a/meta-oe/recipes-support/ibus/ibus_1.5.19.bb b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
 new file mode 100644
-index 000000000..faa331031
+index 000000000..57afe0ade
 --- /dev/null
-+++ b/meta-oe/recipes-support/ibus/ibus-table_1.9.21.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "framework for table based input methods using IBus"
-+LICENSE = "LGPLv2.1"
++++ b/meta-oe/recipes-support/ibus/ibus_1.5.19.bb
+@@ -0,0 +1,97 @@
++DESCRIPTION = "A multilingual user input method library"
++LICENSE = "GPLv2"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +SECTION = "inputmethods"
 +
-+SRC_URI = "https://github.com/kaio/${PN}/releases/download/${PV}/${PN}-${PV}.tar.gz \
++SRC_URI = "https://github.com/ibus/ibus/releases/download/${PV}/${BPN}-${PV}.tar.gz \
 +          "
-+SRC_URI[md5sum] = "1f7b3fab7271e409c9ef4c43f5c3fc78"
-+SRC_URI[sha256sum] = "017bcd1cb9f5a79df46d1e4ac28f166ce2338938a2037ebe86783da0abca0c24"
++SRC_URI[md5sum] = "a2be6f200dd9ada2501474a6877a73ef"
++SRC_URI[sha256sum] = "4b66c798dab093f0fa738e5c10688d395a463287d13678c208a81051af5d2429"
 +
-+inherit distro_features_check autotools gettext lib_package gsettings
++inherit autotools pkgconfig gettext gtk-immodules-cache gobject-introspection gtk-doc gtk-icon-cache gsettings
 +
-+DEPENDS = " ibus"
-+RDEPENDS_${PN} += " ibus"
++REQUIRED_DISTRO_FEATURES = "x11"
 +
-+BBCLASSEXTEND = "native"
++DEPENDS = " intltool dbus-glib python3-dbus iso-codes dconf libnotify python3-pygobject adwaita-icon-theme librsvg"
++DEPENDS_append_class-target = " intltool-native python-pygobject-native"
++RDEPENDS_${PN} += " iso-codes adwaita-icon-theme librsvg-gtk"
++
++PACKAGECONFIG[gtk+] = ",--disable-gtk2,gtk+,gtk+"
++PACKAGECONFIG[gtk+3] = ",--disable-gtk3,gtk+3,gtk+3"
++PACKAGECONFIG[wayland] = "--enable-wayland,,wayland,wayland"
++
++PACKAGECONFIG ?= "gtk+ gtk+3"
++PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
++
++GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+', 'ibus-gtk2.0', '', d)}"
++GTKIMMODULES_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'gtk+3', 'ibus-gtk3', '', d)}"
++
++EXTRA_OECONF += " \
++    --disable-emoji-dict \
++    --disable-unicode-dict \
++"
++
++BBCLASSEXTEND = "native pythonnative"
++
++FILES_${PN} += " \
++    ${sysconfdir}/dconf/profile \
++    ${sysconfdir}/dconf/db/ibus.d/00-upstream-settings \
++    ${sysconfdir}/dconf/profile/ibus \
++    ${libdir}/libibus-1.0.so.5.0.518 \
++    ${libdir}/libibus-1.0.so.5 \
++    ${libdir}/gtk-?.?/*/immodules/im-ibus.so \
++    ${bindir}/ibus \
++    ${bindir}/ibus-setup \
++    ${bindir}/ibus-daemon \
++    ${datadir}/ibus/engine \
++    ${datadir}/ibus/component \
++    ${datadir}/ibus/setup \
++    ${datadir}/ibus/component/gtkpanel.xml \
++    ${datadir}/ibus/component/simple.xml \
++    ${datadir}/ibus/component/dconf.xml \
++    ${datadir}/ibus/setup/emojilang.py \
++    ${datadir}/ibus/setup/main.py \
++    ${datadir}/ibus/setup/enginecombobox.py \
++    ${datadir}/ibus/setup/setup.ui \
++    ${datadir}/ibus/setup/enginedialog.py \
++    ${datadir}/ibus/setup/i18n.py \
++    ${datadir}/ibus/setup/engineabout.py \
++    ${datadir}/ibus/setup/icon.py \
++    ${datadir}/ibus/setup/keyboardshortcut.py \
++    ${datadir}/ibus/setup/enginetreeview.py \
++    ${datadir}/ibus/keymaps/jp \
++    ${datadir}/ibus/keymaps/kr \
++    ${datadir}/ibus/keymaps/common \
++    ${datadir}/ibus/keymaps/modifiers \
++    ${datadir}/ibus/keymaps/us \
++    ${datadir}/ibus/keymaps/in \
++    ${datadir}/applications/ibus-setup.desktop \
++    ${datadir}/dbus-1/services/org.freedesktop.IBus.service \
++    ${datadir}/dbus-1/services/org.freedesktop.portal.IBus.service \
++    ${datadir}/vala/vapi/ibus-1.0.vapi \
++    ${datadir}/vala/vapi/ibus-1.0.deps \
++    ${libexecdir}/ibus-engine-simple \
++    ${libexecdir}/ibus-portal \
++    ${libexecdir}/ibus-dconf \
++    ${libexecdir}/ibus-x11 \
++    ${libexecdir}/ibus-ui-gtk3 \
++    ${datadir}/GConf/gsettings/ibus.convert \
++    ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.gschema.xml \
++    ${datadir}/bash-completion/* \
++    ${datadir}/icons/* \
++    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py \
++    ${libdir}/python?.?/????-packages/gi/overrides/IBus.py? \
++"
 +
 +do_configure_prepend() {
 +    export PYTHON=python3
 +}
 +
-+FILES_${PN} += "${datadir}/ibus/component/pinyin.xml \
-+  ${datadir}/metainfo \
-+  ${datadir}/ibus \
-+  ${datadir}/glib-2.0 \
-+  ${datadir}/metainfo/ibus-table.appdata.xml \
-+  ${datadir}/ibus/component/table.xml \
-+  ${datadir}/glib-2.0/schemas/org.freedesktop.ibus.engine.table.gschema.xml \
-+"
++do_install_append() {
++  # Fix the installation path of the GObject Inspection overrides for Python3
++  python_version=$(python3 -c 'import sys; print("%s.%s" % (sys.version_info.major, sys.version_info.minor))')
++  mkdir -p ${D}/usr/lib/python${python_version}/site-packages/gi/overrides
++  cp ${S}/bindings/pygobject/gi/overrides/IBus.py ${D}/usr/lib/python${python_version}/site-packages/gi/overrides/
++  rm -rf ${D}/${RECIPE_SYSROOT_NATIVE}/usr/lib/python${python_version}/site-packages/gi/overrides
++  find ${D} -type d -empty -delete
++}
 -- 
 2.11.0
 
