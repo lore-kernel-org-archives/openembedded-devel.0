@@ -1,24 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C4257C132
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B43627D9D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 04:59:27 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6O4x82o013856
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 24 Jul 2019 05:12:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,300,1559491200"; d="scan'208";a="72067302"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Jul 2019 13:12:05 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 81B874CDCCC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2019 21:59:18 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 23 Jul 2019 21:58:51 -0700
-From: <kai.kang@windriver.com>
+	Wed, 24 Jul 2019 13:12:07 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 24 Jul 2019 13:12:07 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Jul 2019 00:58:49 -0400
-Message-ID: <20190724045849.99375-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+Date: Wed, 24 Jul 2019 13:11:22 +0800
+Message-ID: <20190724051122.6117-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] xfwm4: fix assertion error
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 81B874CDCCC4.AACEA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-beautifulsoup4: upgrade 4.7.1 -> 4.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,136 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2019 04:59:28 -0000
+X-List-Received-Date: Wed, 24 Jul 2019 05:12:06 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
-
-It fails to start xfwm4 on intel_x86_64 boards:
-
-| xfwm4: ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
-| intel_miptree_match_image: Assertion `image->TexObject->Target == mt->target' failed.
-| Aborted
-
-Revert the upstream commit which introduce the issue.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...r-Revert-to-GLX-as-default-vblank-me.patch | 90 +++++++++++++++++++
- meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.3.bb  |  1 +
- 2 files changed, 91 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
+ meta-python/recipes-devtools/python/python-beautifulsoup4.inc | 4 ++--
+ ...beautifulsoup4_4.7.1.bb => python-beautifulsoup4_4.8.0.bb} | 0
+ ...eautifulsoup4_4.7.1.bb => python3-beautifulsoup4_4.8.0.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-beautifulsoup4_4.7.1.bb => python-beautifulsoup4_4.8.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.7.1.bb => python3-beautifulsoup4_4.8.0.bb} (100%)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
-new file mode 100644
-index 000000000..380021250
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfwm4/files/0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch
-@@ -0,0 +1,90 @@
-+From acdceb0b28d86199b8c2233880fa8a04cb24d4d4 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Wed, 24 Jul 2019 09:48:04 +0800
-+Subject: [PATCH] Revert "compositor: Revert to GLX as default vblank method
-+ (again)"
-+
-+This reverts commit e07574d6e7a2dbaa08c3ba4765c6306073d9493e.
-+
-+It sets the default vblank method (auto) to GLX from 4.13.2. But it
-+fails to start xfwm4 on intel-x86-64 boards with error:
-+
-+| xfwm4: ../mesa-19.1.1/src/mesa/drivers/dri/i965/intel_mipmap_tree.c:1293:
-+| intel_miptree_match_image: Assertion `image->TexObject->Target == mt->target' failed.
-+| Aborted
-+
-+There is also a RHEL defect:
-+https://bugzilla.redhat.com/show_bug.cgi?id=1678334
-+
-+Revert the commit to fix the issue.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ src/compositor.c | 41 +++++++++++++++++++----------------------
-+ 1 file changed, 19 insertions(+), 22 deletions(-)
-+
-+diff --git a/src/compositor.c b/src/compositor.c
-+index 25615282..daced607 100644
-+--- a/src/compositor.c
-++++ b/src/compositor.c
-+@@ -4483,13 +4483,28 @@ compositorManageScreen (ScreenInfo *screen_info)
-+     XClearArea (display_info->dpy, screen_info->output, 0, 0, 0, 0, TRUE);
-+     TRACE ("manual compositing enabled");
-+ 
-++#ifdef HAVE_PRESENT_EXTENSION
-++    screen_info->use_present = display_info->have_present &&
-++                               (screen_info->vblank_mode == VBLANK_AUTO ||
-++                                screen_info->vblank_mode == VBLANK_XPRESENT);
-++    if (screen_info->use_present)
-++    {
-++        screen_info->present_pending = FALSE;
-++        XPresentSelectInput (display_info->dpy,
-++                             screen_info->output,
-++                             PresentCompleteNotifyMask);
-++    }
-++#else /* HAVE_PRESENT_EXTENSION */
-++    screen_info->use_present = FALSE;
-++#endif /* HAVE_PRESENT_EXTENSION */
-++
-+ #ifdef HAVE_EPOXY
-+-    screen_info->use_glx = (screen_info->vblank_mode == VBLANK_AUTO ||
-+-                            screen_info->vblank_mode == VBLANK_GLX);
-++    screen_info->use_glx = !screen_info->use_present &&
-+ #ifdef HAVE_XSYNC
-+-    screen_info->use_glx &= display_info->have_xsync;
-++                            display_info->have_xsync &&
-+ #endif /* HAVE_XSYNC */
-+-
-++                            (screen_info->vblank_mode == VBLANK_AUTO ||
-++                             screen_info->vblank_mode == VBLANK_GLX);
-+     if (screen_info->use_glx)
-+     {
-+         screen_info->glx_context = None;
-+@@ -4503,24 +4518,6 @@ compositorManageScreen (ScreenInfo *screen_info)
-+     screen_info->use_glx = FALSE;
-+ #endif /* HAVE_EPOXY */
-+ 
-+-#ifdef HAVE_PRESENT_EXTENSION
-+-    screen_info->use_present = display_info->have_present &&
-+-#ifdef HAVE_EPOXY
-+-                               !screen_info->use_glx &&
-+-#endif /* HAVE_EPOXY */
-+-                               (screen_info->vblank_mode == VBLANK_AUTO ||
-+-                                screen_info->vblank_mode == VBLANK_XPRESENT);
-+-    if (screen_info->use_present)
-+-    {
-+-        screen_info->present_pending = FALSE;
-+-        XPresentSelectInput (display_info->dpy,
-+-                             screen_info->output,
-+-                             PresentCompleteNotifyMask);
-+-    }
-+-#else /* HAVE_PRESENT_EXTENSION */
-+-    screen_info->use_present = FALSE;
-+-#endif /* HAVE_PRESENT_EXTENSION */
-+-
-+     if (screen_info->use_present)
-+     {
-+         g_info ("Compositor using XPresent for vsync");
-+-- 
-+2.20.1
-+
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.3.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.3.bb
-index f4ebb45e0..591580b84 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.3.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.3.bb
-@@ -8,6 +8,7 @@ inherit xfce update-alternatives distro_features_check
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+index a33d8f4be..a7fa081e4 100644
+--- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+-SRC_URI[md5sum] = "c71f53fcb2580c376ab7b010a9178983"
+-SRC_URI[sha256sum] = "945065979fb8529dd2f37dbb58f00b661bdbcbebf954f93b32fdf5263ef35348"
++SRC_URI[md5sum] = "2b34208b26b5c49d4c84a4b9cf78656a"
++SRC_URI[sha256sum] = "25288c9e176f354bf277c0a10aa96c782a6a18a17122dba2e8cec4a97e03343b"
  
-+SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
- SRC_URI[md5sum] = "e53081e5928d401604d158429716e699"
- SRC_URI[sha256sum] = "12ad274f6662c8afee35fd9b9310e73bd462c423578d448b2d7353e3c8eda6c1"
+ inherit pypi
  
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4_4.7.1.bb b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-beautifulsoup4_4.7.1.bb
+rename to meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.7.1.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.0.bb
 -- 
-2.20.0
+2.20.1
+
+
 
 
