@@ -1,54 +1,37 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 970D27F162
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 843417EC65
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 08:53:12 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id y4so46050423wrm.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 01:53:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+X+KlbywmxNyaDmub0wPTzIXfvLnVd7ekmy6+Q+IEjI=;
-	b=VJDSHX9Z7yO2KUuWZ1yWfJh3bZBsvnoH97ZnTliTjFoqiElz+jikTKTJDw268angJd
-	rFutqb/6/CkykL21RgHy7BaPvINoEpBpKStxiGAmqBh06FY1VEgSlXsunyHfKw6tbpc2
-	aTg4YwQQn6iAqYjv1qzlTiy28kyxmPfqqzc+jUUedM4ly9IW6pfXDMgLZDZRaEMQ+tDk
-	srUwxYpTBmBPRSnMYcuQoMO6kpNNi56dCDPJTJ+yTwcBhFgS+RFaGhYir9LDvhXCFCmB
-	js8YAeiBROEl6GI6OT+ZY/ZtKtJxJM3tzlZn8pAGtv4nd8PVCxigI5iFLbjIPG+CTpBE
-	UJBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+X+KlbywmxNyaDmub0wPTzIXfvLnVd7ekmy6+Q+IEjI=;
-	b=UdSnCGUyOD1q1asgwJ7O8VF9/b5kJ3jViQuk5vjvbYsaG6Sdh/efPDthbeX8LE3JoN
-	bOBe1Yh4B4cbOiW4JKXgObUaFkJEi0wbgN4sTwKE92EcqGisup3GAH2ExDeg2E/r157S
-	c4Scw8D59q6TWl1PqkQkNwInBEb62Rzr0Ha2DNAly4APuiDR1PMGgOHYRBxw4lie0XTl
-	pJldUz2+zCf8TzRuVfpE39uvAmiYM1fbbmVJBI8jJtnlSczRPvMy3f9V5tht+TdWqsur
-	8Z+rL8rQTwNxRhK5igf+1OQjLmTWrqGSHtBHs3BedeDuaXu5VFKB/xArqH8JQpe0ijD+
-	X9Fg==
-X-Gm-Message-State: APjAAAV5AyVDpnJgGq44W6ZBC4fO1Zmg+UV4lK6NOqDY1IfT9JK27ii5
-	yfd1fUAwNQnVA2Rd011dS7c=
-X-Google-Smtp-Source: APXvYqxUd7nFuh69Yz8kedHQnZGyJa0VGPKBJhEkC4a9CdxGqq4PIstNWu+Es3FsW1QCOrhZXl4JlA==
-X-Received: by 2002:adf:e504:: with SMTP id j4mr84146629wrm.222.1563958393263; 
-	Wed, 24 Jul 2019 01:53:13 -0700 (PDT)
-Received: from localhost.localdomain
-	(amontpellier-652-1-281-69.w109-210.abo.wanadoo.fr. [109.210.96.69])
-	by smtp.gmail.com with ESMTPSA id
-	c7sm38847266wro.70.2019.07.24.01.53.12
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 24 Jul 2019 01:53:12 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2019 10:53:06 +0200
-Message-Id: <20190724085306.27277-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.21.0
+	Wed, 24 Jul 2019 10:38:37 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45tsJY1dKgz23;
+	Wed, 24 Jul 2019 12:38:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1563964717;
+	bh=/SHsCyqhQLu/K2l61oq8e+0BNTy79w7QzEKyRp+smQc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=dPv3aWvqC2BPmfMEsUZZo08DRtkksxphUes5v8lZVqugfyCfvISUCZsoN7TWHAWTV
+	fGVD5zQWXzIGSR4m7MkQZSC3p30TpN8nR/AzwDQCn3N8jsA3ehOEGiaycukcMpeuQp
+	KzulNEL9ll+XnIAhHXWicccnFNOFp67zrVeS23Fn+1YyCR0a9ueS18tpYT2gJ6ukS/
+	98aUrps/K5+SlB0n3vJd8gX23p8reO8HbI1wDUtT6jkz1xk9LVpmRcQw6H3hGTv931
+	cqj/pp8QrR1rJKEcMXRJsLF+lm4zGMu9AYT5BCsG/I3qD+Idq0wsThVjbq1VOF1bOj
+	KSnbbhBdAdVFD78wEkvzdaOoFr59GcyNxFP+YgbYH8V7l9NtMqlH1IMtfPoGuhOkib
+	dVFn5rhC1TUgonrnqM9xVKUR6l1DaDVeZ5fq5mi2OI9/IAbW/USz04IIJBdGvJ6tJf
+	O8822yailpPDjLc/p9l1EXNtcnTgE3s0PWCExfxZ+3R4eV6S+2mH4dP851h3pWWz5r
+	OoMQnPgrei6PY3dejmD4L0PsQdKiFWGpoD6+QqbDa4BdFjwnaxOSJftn5ccbhYbpGX
+	aP9Nv9rADNYY3ANw5gWvecyxqM1fZHNM4VeFLQY5xfLhmY16H1uHEx5SPVY4Jeh9KR
+	wFYTgU4WZ+ztk1IXSHZTBPGk=
+Date: Wed, 24 Jul 2019 13:38:35 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190724103835.GA27634@localhost>
+References: <20190723151649.9238-1-bunk@stusta.de>
+	<CAMKF1srWP3iFCHveAGELyZzQ0QeB16PG7+2H536au1QAoWOqCA@mail.gmail.com>
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-oe][PATCH] bats: new package
+In-Reply-To: <CAMKF1srWP3iFCHveAGELyZzQ0QeB16PG7+2H536au1QAoWOqCA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] meta-oe: Inherit gnomebase instead of gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,49 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2019 08:53:12 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 24 Jul 2019 10:38:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Tue, Jul 23, 2019 at 06:44:49PM -0700, Khem Raj wrote:
+> This causes
+> https://errors.yoctoproject.org/Errors/Details/253988/
+> maybe due to atkmm change is exposing another missing inherit
+>  gnome-system-monitor -> gtkmm3 -> atkmm
 
-This adds a recipe for the bats package. Bats is a TAP-compliant
-testing framework for Bash. The recipe is very simple - it just
-installs a bunch of bash scripts.
+Does gnome-system-monitor build for you with musl without my patches 
+applied? It doesn't for me.
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- meta-oe/recipes-test/bats/bats_1.1.0.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-test/bats/bats_1.1.0.bb
+cu
+Adrian
 
-diff --git a/meta-oe/recipes-test/bats/bats_1.1.0.bb b/meta-oe/recipes-test/bats/bats_1.1.0.bb
-new file mode 100644
-index 000000000..a8179744a
---- /dev/null
-+++ b/meta-oe/recipes-test/bats/bats_1.1.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Bash Automated Testing System"
-+DESCRIPTION = "Bats is a TAP-compliant testing framework for Bash. It \
-+provides a simple way to verify that the UNIX programs you write behave as expected."
-+AUTHOR = "Sam Stephenson & bats-core organization"
-+HOMEPAGE = "https://github.com/bats-core/bats-core"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
-+
-+SRC_URI = "git://github.com/bats-core/bats-core.git \
-+          "
-+# v1.1.0
-+SRCREV = "c706d1470dd1376687776bbe985ac22d09780327"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install() {
-+	# Just a bunch of bash scripts to install
-+	${S}/install.sh ${D}${prefix}
-+}
-+
-+RDEPENDS_bats = "bash"
 -- 
-2.21.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
