@@ -1,24 +1,54 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 07FC07F0BB
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 970D27F162
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 08:32:55 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x6O8WaXL020254
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 24 Jul 2019 08:53:12 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id y4so46050423wrm.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 01:32:47 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Wed, 24 Jul 2019 01:32:26 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Jul 2019 04:32:22 -0400
-Message-ID: <20190724083222.7161-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Wed, 24 Jul 2019 01:53:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+X+KlbywmxNyaDmub0wPTzIXfvLnVd7ekmy6+Q+IEjI=;
+	b=VJDSHX9Z7yO2KUuWZ1yWfJh3bZBsvnoH97ZnTliTjFoqiElz+jikTKTJDw268angJd
+	rFutqb/6/CkykL21RgHy7BaPvINoEpBpKStxiGAmqBh06FY1VEgSlXsunyHfKw6tbpc2
+	aTg4YwQQn6iAqYjv1qzlTiy28kyxmPfqqzc+jUUedM4ly9IW6pfXDMgLZDZRaEMQ+tDk
+	srUwxYpTBmBPRSnMYcuQoMO6kpNNi56dCDPJTJ+yTwcBhFgS+RFaGhYir9LDvhXCFCmB
+	js8YAeiBROEl6GI6OT+ZY/ZtKtJxJM3tzlZn8pAGtv4nd8PVCxigI5iFLbjIPG+CTpBE
+	UJBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+X+KlbywmxNyaDmub0wPTzIXfvLnVd7ekmy6+Q+IEjI=;
+	b=UdSnCGUyOD1q1asgwJ7O8VF9/b5kJ3jViQuk5vjvbYsaG6Sdh/efPDthbeX8LE3JoN
+	bOBe1Yh4B4cbOiW4JKXgObUaFkJEi0wbgN4sTwKE92EcqGisup3GAH2ExDeg2E/r157S
+	c4Scw8D59q6TWl1PqkQkNwInBEb62Rzr0Ha2DNAly4APuiDR1PMGgOHYRBxw4lie0XTl
+	pJldUz2+zCf8TzRuVfpE39uvAmiYM1fbbmVJBI8jJtnlSczRPvMy3f9V5tht+TdWqsur
+	8Z+rL8rQTwNxRhK5igf+1OQjLmTWrqGSHtBHs3BedeDuaXu5VFKB/xArqH8JQpe0ijD+
+	X9Fg==
+X-Gm-Message-State: APjAAAV5AyVDpnJgGq44W6ZBC4fO1Zmg+UV4lK6NOqDY1IfT9JK27ii5
+	yfd1fUAwNQnVA2Rd011dS7c=
+X-Google-Smtp-Source: APXvYqxUd7nFuh69Yz8kedHQnZGyJa0VGPKBJhEkC4a9CdxGqq4PIstNWu+Es3FsW1QCOrhZXl4JlA==
+X-Received: by 2002:adf:e504:: with SMTP id j4mr84146629wrm.222.1563958393263; 
+	Wed, 24 Jul 2019 01:53:13 -0700 (PDT)
+Received: from localhost.localdomain
+	(amontpellier-652-1-281-69.w109-210.abo.wanadoo.fr. [109.210.96.69])
+	by smtp.gmail.com with ESMTPSA id
+	c7sm38847266wro.70.2019.07.24.01.53.12
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 24 Jul 2019 01:53:12 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Jul 2019 10:53:06 +0200
+Message-Id: <20190724085306.27277-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] net-snmp: update SRC_URI
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] bats: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,44 +61,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2019 08:32:56 -0000
+X-List-Received-Date: Wed, 24 Jul 2019 08:53:12 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Replace source zip ball with tarball for net-snmp to avoid zip bomb issue.
+This adds a recipe for the bats package. Bats is a TAP-compliant
+testing framework for Bash. The recipe is very simple - it just
+installs a bunch of bash scripts.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-test/bats/bats_1.1.0.bb | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-test/bats/bats_1.1.0.bb
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index f0acaa801..60b2b389d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
- 
- DEPENDS = "openssl libnl pciutils"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://init \
-            file://snmpd.conf \
-            file://snmptrapd.conf \
-@@ -28,8 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-            file://reproducibility-accept-configure-options-from-env.patch \
-            file://0001-net-snmp-fix-compile-error-disable-des.patch \
-            "
--SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
--SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
-+SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
-+SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
- UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
+diff --git a/meta-oe/recipes-test/bats/bats_1.1.0.bb b/meta-oe/recipes-test/bats/bats_1.1.0.bb
+new file mode 100644
+index 000000000..a8179744a
+--- /dev/null
++++ b/meta-oe/recipes-test/bats/bats_1.1.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Bash Automated Testing System"
++DESCRIPTION = "Bats is a TAP-compliant testing framework for Bash. It \
++provides a simple way to verify that the UNIX programs you write behave as expected."
++AUTHOR = "Sam Stephenson & bats-core organization"
++HOMEPAGE = "https://github.com/bats-core/bats-core"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
++
++SRC_URI = "git://github.com/bats-core/bats-core.git \
++          "
++# v1.1.0
++SRCREV = "c706d1470dd1376687776bbe985ac22d09780327"
++
++S = "${WORKDIR}/git"
++
++do_install() {
++	# Just a bunch of bash scripts to install
++	${S}/install.sh ${D}${prefix}
++}
++
++RDEPENDS_bats = "bash"
 -- 
-2.20.0
+2.21.0
 
 
