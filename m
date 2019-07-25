@@ -1,49 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C5027F094
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FEEB7F1C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 18:53:11 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id x22so41625397qtp.12
+	Thu, 25 Jul 2019 04:54:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,305,1559491200"; d="scan'208";a="72166461"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Jul 2019 12:54:05 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id EE8C24CDE65E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2019 11:53:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3aSmragdCbjmdsQwbBnPmjv8qZCDWgwQ4md6uwfc7lU=;
-	b=tr8RD9rVXUXxPdhnxfEu2pXjPWEvc9+dAYnQyD9Qt1T+t3mGifCJpuJxxMVKbTS5M+
-	QiB4niZYRGsfpm+KZTgMYUc9ssIidl3lf/AEjo3YNQ+RGF+uSXtM910nuXHdO3QRkccY
-	tmz3S3Og4QqrgOp5zPn+5DCNYWOe2DOWxuWb6vqDsBTxavV9rmHmeYF1I+jYdSX9y1XD
-	OhGRAZgLLPvtkhLXipBvbuh0pmF0mbZFZFKl9cA569yvcCFSSVhMwqtIFSSDm79triuT
-	0eBXj8XfYIfGMk2nv/RD2SkPIEYcNTPMr5d4nLJcBTliTVR+DENzbIjZzXnBmZPOI+Vy
-	FVhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=3aSmragdCbjmdsQwbBnPmjv8qZCDWgwQ4md6uwfc7lU=;
-	b=Wb7QQhgs7QTjjcLPAUofEr6Y7cab/0sWUulEj3Rk4x+Lu0re4jeow4QFTLAGpY3f6G
-	qLHdvRjr7/3osdmcqoT1yZC3lYRzndPcQ0SomHLJPhdAX8TEB8cm+r+dnjA9Xmp0OM6I
-	vIIFjQLCdGezjBWSYka4ay0/Sssdq7mlO2iZisjICtI9b9fsKXajXpYVMMF2p8fGr4Yb
-	3DFyI+4QokOU/P73ZnP22Pb6xVHkw6DaUrbxhsm9if15rQibf4jj7Akeb/Fe/Iku/kgx
-	ZZ49+4k4gTrej8vQ3y0LKHeKxFQznfsF3KH9vVnrwzVhPh64lGbbTfjvDlF5ZAkmtk/E
-	ZwhQ==
-X-Gm-Message-State: APjAAAW+Ejw73uv8s+8jRJxMtOSz5TicoyJS2AXLXY+hRe8GEpDp18yN
-	8SsZ4jn/1PEc17Qtu+FWQxVrML4EamS+XpGxzpEUzi5Z
-X-Google-Smtp-Source: APXvYqy+lPLOs6NEVbgo7pjWFNPAvHbQEeizNjbc+wiiP6vOOBwLeg5QHLbQkG+V0NGQq5ReQuGvRH0rj66yCqlMKRo=
-X-Received: by 2002:aed:3644:: with SMTP id e62mr57379318qtb.80.1563994392312; 
-	Wed, 24 Jul 2019 11:53:12 -0700 (PDT)
+	Thu, 25 Jul 2019 12:54:07 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 25 Jul 2019 12:54:07 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Jul 2019 12:53:23 +0800
+Message-ID: <20190725045323.31353-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190723151649.9238-1-bunk@stusta.de>
-	<CAMKF1srWP3iFCHveAGELyZzQ0QeB16PG7+2H536au1QAoWOqCA@mail.gmail.com>
-	<20190724103835.GA27634@localhost>
-	<CAMKF1spNvU2v5n+_a479E5ZEjGD5nti5Wmcv2aaV07nE_kg4mg@mail.gmail.com>
-In-Reply-To: <CAMKF1spNvU2v5n+_a479E5ZEjGD5nti5Wmcv2aaV07nE_kg4mg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Jul 2019 11:52:45 -0700
-Message-ID: <CAMKF1spr1WkWTO_e61wQwagLeoOMgyUWxq=FKswNar9=wPtYxw@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] meta-oe: Inherit gnomebase instead of gnome
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: EE8C24CDE65E.AA3CC
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] xterm: upgrade 347 -> 348
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2019 18:53:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 25 Jul 2019 04:54:06 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, Jul 24, 2019 at 6:34 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->
->
-> On Wed, Jul 24, 2019 at 3:38 AM Adrian Bunk <bunk@stusta.de> wrote:
->>
->> On Tue, Jul 23, 2019 at 06:44:49PM -0700, Khem Raj wrote:
->> > This causes
->> > https://errors.yoctoproject.org/Errors/Details/253988/
->> > maybe due to atkmm change is exposing another missing inherit
->> >  gnome-system-monitor -> gtkmm3 -> atkmm
->>
->> Does gnome-system-monitor build for you with musl without my patches
->> applied? It doesn't for me.
->
->
-> Yes it did and build again after reverting there is a chance of race condition but this package has not failed before
->
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/xorg-app/{xterm_347.bb => xterm_348.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_347.bb => xterm_348.bb} (88%)
 
-a simple rebuild is successful with the patch as well.
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_347.bb b/meta-oe/recipes-graphics/xorg-app/xterm_348.bb
+similarity index 88%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_347.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_348.bb
+index 92d8491..2dd8322 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_347.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_348.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7
+ 
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ 
+-SRC_URI[md5sum] = "5d2c56ebd1d81ee40f23236d6e3c2e5b"
+-SRC_URI[sha256sum] = "400f73e1277ef96dfcb3885388525e6a13a3657a4032b83c1203e812b710b908"
++SRC_URI[md5sum] = "05340ef6eabb96826953346c64b35225"
++SRC_URI[sha256sum] = "8b1f5121dbf3690de9d85a3b9329e3357021705dd7c21da192e47542769275be"
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ 
+-- 
+2.7.4
+
+
+
 
