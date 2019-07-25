@@ -1,47 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
-	[209.85.160.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C26CB7EEF8
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+	[209.85.221.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1452F6010D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2019 14:54:00 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id y26so49338827qto.4
+	Thu, 25 Jul 2019 22:29:36 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id n9so27255543wrr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2019 07:54:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=jBRe2OCyRrtcj+0Cdjjl3iVk5NXPJhyxRcd2qUAeUmA=;
-	b=ujKd/BRBSDD8AgNXdl7c8QTmtSbPRO5Z4Xu3HuIZnFNqSDltkb2V+YQb4ossKFe8QY
-	AKynoOmP4fSASQAhS0/E6dibSHVdAkMdZgF6qY8agZ9yNTOhFe39QqW5Dkx4dsMv38Tj
-	2E2yv44Zo7z5opRMPjiAyQbrk7xTxgKGbi8GCa1wH8TeMb9yefpS8RJj+bCGIvQbH33V
-	Qhbx/lVUTXyWBkcfkYeeS1Ju2kBDXXdWGN7yRfG3Hmw9Nmyeti3Pxo8JaXhOk/hYDS2x
-	Chy4pXHgmPhyXFrZwqkRri6cALYL5TVTVD2z3XReBfzwYHMEWzRket2SyEpYiOPn0KLW
-	5YFQ==
+	Thu, 25 Jul 2019 15:29:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:user-agent:mime-version:content-transfer-encoding;
+	bh=M2m1iAYp6UBrtXwGaZaSD0xfQ46OKES3IQZpVtGGSvo=;
+	b=GBbwXOCj+rgpd+nxvHhGSoz9hQqrO6BHoQCK/LnKwy6/203ptvFj2WcFo71CjOUeeL
+	bqiGON+t0zzMeKH9nn+TECHdS2rYTGjOdDBZjmJheDaZvCNezE8gWGcDIKkzEJyiPvZx
+	Co+pASmBXtUFv6ssHl/OQZ2807I7loOR9eNEE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=jBRe2OCyRrtcj+0Cdjjl3iVk5NXPJhyxRcd2qUAeUmA=;
-	b=W5OWR07CFHC84RfBnOQO0ZRRb/+A7Axv42fFyLRCJto59TAqAT/mdplYJM5QLfV+Zz
-	eKZdDWZStbWP3XD3nxoQplxErGk0BOV5/52TcK4aQTL2da55uCqgNiPNG76k3TMEdjW0
-	BGjcYCSm2l/LGR4qx2rpK614lAPyupBTwpSZnoG4k70B5+9yVaz8gVAPhUI9z/NawXph
-	o8F98Q/EsIBkx9fqElyUg+RhxF3UgfF7XeUVS9qkRYg0S4wrsF8HbRlSBKJWtABKjAzi
-	du8+tdlECFtgmS/DLXnrBDqaMPk+IslMqV8p3zws+GlCMMd7CFAy5OQ75lUUuRLUyxx0
-	jFMA==
-X-Gm-Message-State: APjAAAVior2XZ/F11NtX5ViLUmQzPUTyfGBRnU5jpuVGbbFrBRwUjrV2
-	a7dK/wD7L+ye5mt79KaPEOH/44RUehcROd6Z9qo=
-X-Google-Smtp-Source: APXvYqx0zCv9/DkuCPpLJWawTe7yrO+AT+2INqhHN9hheQU3evPUp8J8KqkYkM6yamlkqyTccsnnt+VGWaxmsLjQlwI=
-X-Received: by 2002:a0c:b115:: with SMTP id q21mr64357761qvc.68.1564066441440; 
-	Thu, 25 Jul 2019 07:54:01 -0700 (PDT)
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:user-agent:mime-version:content-transfer-encoding;
+	bh=M2m1iAYp6UBrtXwGaZaSD0xfQ46OKES3IQZpVtGGSvo=;
+	b=HAGBAzdKniY+f6oqT6s2nboR8g4i4ORTa+M4bcdp+1Rqr7xEsqIcJ8rkSCknQMbcYx
+	wEXX3yJ3iRnaZrmCQyW+eRW9CwANfBku/CfowhoC1LyMxuP/38KomIXbIT4zb651wSY8
+	A/+SlF0fbFpxVVSiuhyKEB+Yq29AOmnsHSY+NK0khm2PKudIgteSPYFx5lmIxVad9BIM
+	bqu70KdYMKydcTzpUQ4UO4LXk2ucnus0ecV4EPi+dz+suCejKoO/JCEyiz5APPKhg1/i
+	TvgurZRKNGPvBN4mLk3XUEgAx8gTpMM+2qAOIvNjO1WfukWUA9lZj5i2GuajTDk9Cmn3
+	7mDA==
+X-Gm-Message-State: APjAAAUGCzQ/+XRSKtagOE3GuPaVPxOd/IH3Ja4ZuAWkox7Lo9m2sB00
+	wk7DkawJsLvFDMILsidLmJwT1g==
+X-Google-Smtp-Source: APXvYqypB8XApzHYW67PTmtJy/WAuRkO34klq78D8UpzbW8RE/bdJpqBaicPcDbNv8tAdG5p23t3nQ==
+X-Received: by 2002:adf:91c2:: with SMTP id 60mr40674673wri.334.1564093776769; 
+	Thu, 25 Jul 2019 15:29:36 -0700 (PDT)
+Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
+	by smtp.gmail.com with ESMTPSA id
+	n3sm44881646wrt.31.2019.07.25.15.29.35
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 25 Jul 2019 15:29:36 -0700 (PDT)
+Message-ID: <e14fe2b9f2fa5009794676e3e7e4b1837e80cb79.camel@linuxfoundation.org>
+From: richard.purdie@linuxfoundation.org
+To: Jens Rehsack <sno@netbsd.org>, Alexander Kanavin
+	<alex.kanavin@gmail.com>,  Tim Orling <ticotimo@gmail.com>, Khem Raj
+	<raj.khem@gmail.com>, Alberto =?UTF-8?Q?Sim=C3=B5es_=F0=9F=90=AA?=
+	<ambs@zbr.pt>, Leon Timmermans <fawaka@gmail.com>
+Date: Thu, 25 Jul 2019 23:29:34 +0100
+In-Reply-To: <A3D1BC0A-704E-4F87-9D63-86C8DBCBA1E7@netbsd.org>
+References: <A3D1BC0A-704E-4F87-9D63-86C8DBCBA1E7@netbsd.org>
+User-Agent: Evolution 3.32.2-1 
 MIME-Version: 1.0
-References: <20190724145100.88293-1-psaavedra@igalia.com>
-	<20190724145100.88293-4-psaavedra@igalia.com>
-In-Reply-To: <20190724145100.88293-4-psaavedra@igalia.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 25 Jul 2019 07:53:45 -0700
-Message-ID: <CAMKF1sqr4VaNv2bSYwPmUmEuW8sNkHzo4xc=VXZKH98MuLFsLg@mail.gmail.com>
-To: Pablo Saavedra <psaavedra@igalia.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-openembedded][PATCH v5 4/7] ibus-pinyin: add ibus-pinyin recipe
+Cc: Ingmar Gebhardt <ige@ivu.de>, openembedded-devel@lists.openembedded.org,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Perl5 build issues (meta-cpan only?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +62,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 14:54:01 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 22:29:37 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jul 24, 2019 at 7:59 AM Pablo Saavedra <psaavedra@igalia.com> wrote:
->
-> PinYin engine for IBus.
->
-> Requires: pyzy
->
-> Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
-> ---
->  meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb | 30 +++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
->  create mode 100644 meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
->
-> diff --git a/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb b/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
-> new file mode 100644
-> index 000000000..a91ed33cb
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/ibus/ibus-pinyin_1.5.0.bb
-> @@ -0,0 +1,30 @@
-> +DESCRIPTION = "PinYin engine for IBus."
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-> +SECTION = "inputmethods"
-> +
-> +SRC_URI = "https://github.com/ibus/${PN}/archive/${PV}.tar.gz \
+On Thu, 2019-07-25 at 14:52 +0200, Jens Rehsack wrote:
+> Maybe one or the other has already seen the following message in
+> connection with modules::Build-based Perl modules:
+> ERROR: hash-fieldhash-perl-0.15-r0 do_package_qa: QA Issue: No
+> GNU_HASH in the ELF binary /home/sno/gpw-community-bsp/gpw-yocto-
+> platform/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/hash-fieldhash-
+> perl/0.15-r0/packages-split/hash-fieldhash-
+> perl/usr/lib/perl5/vendor_perl/5.30.0/arm-
+> linux/auto/Hash/FieldHash/FieldHash.so, didn't pass LDFLAGS?
+> [ldflags]
+> ERROR: hash-fieldhash-perl-0.15-r0 do_package_qa: QA run found fatal
+> errors. Please consider fixing them.
+> ERROR: hash-fieldhash-perl-0.15-r0 do_package_qa:
+> ERROR: hash-fieldhash-perl-0.15-r0 do_package_qa: Function failed:
+> do_package_qa
+> ERROR: Logfile of failure stored in: /home/sno/gpw-community-bsp/gpw-
+> yocto-platform/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/hash-
+> fieldhash-perl/0.15-r0/temp/log.do_package_qa.12168
+> ERROR: Task (/home/sno/gpw-community-bsp/sources/meta-cpan/recipes-
+> devel/hash-fieldhash-perl/hash-fieldhash-perl_0.15.bb:do_package_qa)
+> failed with exit code '1'
+> 
+> I think the reason is in 
+> https://metacpan.org/source/AMBS/ExtUtils-CBuilder-0.280231/lib/ExtUtils/CBuilder/Base.pm#L319
+> where the arguments from ldflags are thrown away.
 
-causes
-WARNING: ibus-pinyin-1.5.0-r0 do_package_qa: QA Issue:
-https://github.com/ibus/ibus-pinyin/archive/1.5.0.tar.gz           :
-SRC_URI uses unstable GitHub archives [src-uri-bad]
+That seems very likely, yes.
 
-Lets use git:// fetcher instead of archive
+> When those issues came up somewhere else than in meta-cpan, please
+> let me know (only open-source ^^). We should develop a fix like 
+> https://github.com/meta-cpan/meta-cpan/commit/52ded0759daa3bff909bf5fac6d31c6bc52d713e
+> then ...
+> 
+> For now - I think Alberto should receive a patch to use ldflags, too.
+> 
+> I cannot decide how critic and important that is to make it into
+> perl-5.30.1 ...
+> When ExtUtils::CBuilder is properly fixed, no changed are required to
+> cpan_build.bbclass, aren't they?
 
-> +          "
-> +SRC_URI[md5sum] = "9a794c76f3e8fa888c7a0a097de2ebf0"
-> +SRC_URI[sha256sum] = "79fc51517ab8dec696cbbbca9526459b59f4eb045492ea88e5f9e01160b905db"
-> +
-> +inherit distro_features_check autotools lib_package
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +DEPENDS = "ibus enchant hunspell pyzy pyxdg"
-> +DEPENDS_append_class-target = " intltool-native glib-2.0-native"
-> +RDEPENDS_${PN} += " ibus enchant hunspell pyzy pyxdg"
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +EXTRA_OECONF += "--disable-static \
-> +           --disable-boost \
-> +"
-> +
-> +FILES_${PN} += "${datadir}/ibus/component/pinyin.xml \
-> +"
-> +
-> +do_configure_prepend() {
-> +    export PYTHON=python3
-> +}
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I'm not sure I understand exactly what you're asking. I think that if
+the question is whether we should fix this in the perl recipe itself
+with a patch, so we don't have to add workarounds all over the
+metadata, I think the answer is yes, we should.
+
+It would obviously be ideal if such a change were a backported on which
+was accepted upstream so we don't have to carry the patch forever! :)
+
+Cheers,
+
+Richard
+
 
