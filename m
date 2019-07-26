@@ -1,49 +1,47 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id ED76D7F111
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+	[209.85.222.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 418D265CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2019 16:01:20 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id y17so27394422ljk.10
+	Fri, 26 Jul 2019 21:19:48 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id 201so40097803qkm.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2019 09:01:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=KRSZHBVBxpwDjSu5JGeyXY3GU4BXuFu9FD7fZirHmVc=;
-	b=GDeotTsUDbyxXlUKmb3+heMEYD6L8LybE53/AsixPmKYyrCa+Aos4nuNaeod1wCm5h
-	4X/LcjhF1ZDh2ENC3LSB8Ls2SUdnBhMQa3XmyVL8jrrYefivQjFWjTYZISt8COWPWpv9
-	fqZkgVK5Up+wcuCEQL82RShXZ/13Kd8vUViMn/CtQl7wlMGpw5roUUkIYAaeJP/cmgtS
-	Y/LaK2c8iWRNjZsMdFYGahmlJp8c0TK3EaMlslQ9G1+ErrE5C9bJNer77Zp31wRSM/Z4
-	CUBpUO6Y7JKKykqC1FtJKkMFUyiT7QhUMpKlD47uHaswDOO2qre1i0IoLj/rjYl8ReH/
-	wHTA==
+	Fri, 26 Jul 2019 14:19:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qT33Psn3S4SKFATo/etk/n2UB5rIEARFF/t5op89Bpw=;
+	b=DTL8amsjfTTB2djy4W7EnibllLZ2x1muGE+0BW6fUjZgF1oWWW9uVZt8uqqbbvbyEg
+	IHE33a5UWToT6RLnLbIRFvNn6uFZKP4QV2XwxzNlJ7Aw0Wb/f16PTY5kgByiVLrAyf9k
+	zBodH/QEbBnjZze7tQFWgTF0g5nLYIJrvYMrv9zz1V6a9WQ9B2O8gE94tIG3Etkkinx0
+	2S32QvvJZEn6SFtpUKuRtzXkr0eegqKIeaILWZoTjscXBfUaTlLycI8C6rqGEHHLQeUa
+	ASMCt/ywdIE73UjPmqxc4/eqzc/14Pd5PON40rpEZWKXkFvMhOO24b71dDmudxLZuQqD
+	JC2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KRSZHBVBxpwDjSu5JGeyXY3GU4BXuFu9FD7fZirHmVc=;
-	b=eUR95mgUX4/TJLommRlQAY5m9LGMKezQYdit1HC5YEJmYiJ0D2rAf4VrsJ+sYGvtp1
-	ervNUIgYgMhvRElUWUOUMiNfkeze33OZlpPTI3sdkNDnqnhU/cTWTlCY6MuJg9UJ4AI0
-	WsNUsZSfHwUfccgRT5AVMrvForGoLwUSx5GE3wTs4DrtNuqbkT6/lUgGRrRwvt3l3GXt
-	vx8NP0k4nCSaMR+oTFXmoc7oLD6GSCeTB6nGStJ5/nfo561xHEyRpMq4Oj4LfMfbEqND
-	2mfxezilmLk0CHFoW3ySyVYeG2ZWA5qnicpNrb26SJ9iWb8/X3eqc9D/yHtfuTuosgJE
-	aL/A==
-X-Gm-Message-State: APjAAAWtzsJPSENLF5dqiKLE9kqQlI5F8zmEojgdv+5cx+R3n7izMx1/
-	Bm8/LDl+bCNkoQPS+K8qk/RvlwB4
-X-Google-Smtp-Source: APXvYqxEWC4YnXo3Re0h4j36PxMXyajtMFyBCklPu3yKz0H+1bLwa6QqntM0UImlMX+ZHLmOPjfLlA==
-X-Received: by 2002:a2e:870f:: with SMTP id m15mr50197738lji.223.1564156880030;
-	Fri, 26 Jul 2019 09:01:20 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	r68sm8475621lff.52.2019.07.26.09.01.17
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 26 Jul 2019 09:01:18 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jul 2019 18:01:14 +0200
-Message-Id: <20190726160114.13709-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking]] dhcpcd: update to 8.0.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qT33Psn3S4SKFATo/etk/n2UB5rIEARFF/t5op89Bpw=;
+	b=HFVy0A1lhhonXGIGxJidDJH3BI4DNpo20d1yfLbx5YiI5UFbj1Rf3/K7RzgG60usS4
+	h6/d/AKEkEsilDMF2nWDexs00w6rEDTWzYPo7xb6MY243ZObQ7bfJAfIk43kp2Uh68/F
+	ZuUyPHcz6jWnwkueXn2r9y5XFcitCllX5nru7JmLPdfxn+HdwKMshV7DenOicX9Fu37D
+	ndSvaNvt2WLpPuKLcG5+AILwJ68QAyC7exRzWa3Og1kSdnWqT7TpbhYhvMCGLiFSLxY7
+	plmDhoASZGEaVWsRsZZ6/G0LGFXO+Ln70hNlR0KstxaSCLG42jVGVT2+MypYtMqsK5W7
+	LFBw==
+X-Gm-Message-State: APjAAAUJ5cVqRWfOU4O6w/S4kPGZGRa2KJ0kKmfFXjn0fHQaMP5mh00J
+	5Z6JhJ17YpVRJHtkD2G+qZlSkfzrYSljSoat8i0=
+X-Google-Smtp-Source: APXvYqxwbT3zmnBAM7wA4dOJ5mxkC75O+6zuCwzvUj0dP0sZVgNCxtVqWA0k1if63SALQ+uXV6SfWVNs4wliRxBpLLY=
+X-Received: by 2002:a37:c81:: with SMTP id 123mr66326496qkm.474.1564175988865; 
+	Fri, 26 Jul 2019 14:19:48 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190712065617.30992-1-windel.bouwman@gmail.com>
+	<CAHMaQtBtf_BGSwzjDY9r8AX+=OoaqqJYd3zoznX_7kzgCsh0-w@mail.gmail.com>
+In-Reply-To: <CAHMaQtBtf_BGSwzjDY9r8AX+=OoaqqJYd3zoznX_7kzgCsh0-w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 26 Jul 2019 14:19:32 -0700
+Message-ID: <CAMKF1spg0BxOmB2Cn3ny_5ZBjzWgzXVtfHzPHvOTWTMjU3c9ug@mail.gmail.com>
+To: Windel Bouwman <windel.bouwman@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python] Add coloredlogs python package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,37 +54,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 16:01:22 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 21:19:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../dhcpcd/{dhcpcd_7.2.3.bb => dhcpcd_8.0.1.bb}           | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.2.3.bb => dhcpcd_8.0.1.bb} (78%)
+On Fri, Jul 26, 2019 at 12:50 AM Windel Bouwman
+<windel.bouwman@gmail.com> wrote:
+>
+> Are there any issues with this recipe? Can this recipe be included in the
+> meta-python layer?
 
-diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
-similarity index 78%
-rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
-rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
-index 161810a2c..6438daea7 100644
---- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
-+++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
-@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
- 
- UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
- 
--SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
--SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
--SRC_URI[md5sum] = "b7aade2cc47afa6d645f798103365402"
--SRC_URI[sha256sum] = "74ab38177548abe968c2abacefffdd97b573acaedd4f77b6c0a54ae38f68566e"
-+SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
-+           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
-+SRC_URI[md5sum] = "b9c3b3a116f1abafc346f80cb511f8c1"
-+SRC_URI[sha256sum] = "031f4fbef5ad41b44714fec343ff5be898e3e3cd5e7c53d6ef3aaec43cdba931"
- 
- inherit pkgconfig autotools-brokensep
- 
--- 
-2.17.1
+they look fine with few nits below. But somehow this patch never
+showed up on patchwork https://patchwork.openembedded.org/
+so please send a v2 and maybe this time pw catches it
+>
+> On Fri, Jul 12, 2019 at 8:56 AM Windel Bouwman <windel.bouwman@gmail.com>
+> wrote:
+>
+> > Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
+> > ---
+> >  .../python/python-coloredlogs.inc             | 24 +++++++++++++++++++
+> >  .../python/python-coloredlogs_10.0.bb         |  2 ++
+> >  .../python/python3-coloredlogs_10.0.bb        |  2 ++
+> >  3 files changed, 28 insertions(+)
+> >  create mode 100644
+> > meta-python/recipes-devtools/python/python-coloredlogs.inc
+> >  create mode 100644 meta-python/recipes-devtools/python/
+> > python-coloredlogs_10.0.bb
+> >  create mode 100644 meta-python/recipes-devtools/python/
+> > python3-coloredlogs_10.0.bb
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-coloredlogs.inc
+> > b/meta-python/recipes-devtools/python/python-coloredlogs.inc
+> > new file mode 100644
+> > index 000000000..4a35806db
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python-coloredlogs.inc
+> > @@ -0,0 +1,24 @@
+> > +DESCRIPTION = "Colored terminal output for Python's logging module"
+> > +HOMEPAGE = "https://coloredlogs.readthedocs.io"
+> > +SECTION = "devel/python"
+> > +LICENSE = "MIT"
+> > +LIC_FILES_CHKSUM =
+> > "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
+> > +
+> > +SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
+> > +SRC_URI[sha256sum] =
+> > "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
+> > +
+> > +inherit pypi
+> > +
+> > +do_compile_prepend() {
+> > +    sed -ie "s/find_pth_directory(),/'',/g" setup.py
+> > +}
+> > +
+> > +do_install_append() {
+> > +    rm -rf ${D}${prefix}/share
 
+using bitbake variables as much as possible is better e.g.
+${D}${prefix}${datadir}
+
+> > +}
+> > +
+> > +RDEPENDS_${PN} += "\
+> > +    ${PYTHON_PN}-humanfriendly \
+> > +"
+> > +
+> > +BBCLASSEXTEND = "native"
+> > diff --git a/meta-python/recipes-devtools/python/
+> > python-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/
+> > python-coloredlogs_10.0.bb
+> > new file mode 100644
+> > index 000000000..0fc1b258c
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
+> > @@ -0,0 +1,2 @@
+> > +inherit setuptools
+> > +require python-coloredlogs.inc
+> > diff --git a/meta-python/recipes-devtools/python/
+> > python3-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/
+> > python3-coloredlogs_10.0.bb
+> > new file mode 100644
+> > index 000000000..387239966
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
+> > @@ -0,0 +1,2 @@
+> > +inherit setuptools3
+> > +require python-coloredlogs.inc
+> > --
+> > 2.17.1
+> >
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
