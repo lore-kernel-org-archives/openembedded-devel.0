@@ -1,30 +1,49 @@
-Return-Path: <ayoub.zaki@embexus.com>
-Received: from mailrelay2-3.pub.mailoutpod1-cph3.one.com
-	(mailrelay2-3.pub.mailoutpod1-cph3.one.com [46.30.212.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 997207F119
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id ED76D7F111
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2019 09:37:42 +0000 (UTC)
+	Fri, 26 Jul 2019 16:01:20 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id y17so27394422ljk.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jul 2019 09:01:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=embexus.com; s=20140924;
-	h=references:in-reply-to:message-id:date:subject:cc:to:from:from;
-	bh=7DJasP+FR8U3Y0y3mapZgIx8k7gyieTVAW1lfls7vNg=;
-	b=Wj7+7y2ocIxHGQ9vMhctcBuFKg0UZHN9D7thbpoRvKEoS4cKa+Mp2+eZLBMCVPpn1rF9/r1mMno0r
-	iIJUEK+FOz8Y/L/xw/viOJeAbqmHowWN0IOzOjbJo+ahq5hgtW6XwoHAO4BSHawsFIp4Gs769dypKy
-	vhUep55S2w5jhAqY=
-X-HalOne-Cookie: e532dfbf157871bd365ab23c0fa4e0032bfd6ef8
-X-HalOne-ID: 0402d925-af89-11e9-b9fe-d0431ea8a290
-Received: from xps.cvs.cvsdiv.com (unknown [193.240.242.3])
-	by mailrelay2.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
-	id 0402d925-af89-11e9-b9fe-d0431ea8a290;
-	Fri, 26 Jul 2019 09:37:42 +0000 (UTC)
-From: Ayoub Zaki <ayoub.zaki@embexus.com>
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=KRSZHBVBxpwDjSu5JGeyXY3GU4BXuFu9FD7fZirHmVc=;
+	b=GDeotTsUDbyxXlUKmb3+heMEYD6L8LybE53/AsixPmKYyrCa+Aos4nuNaeod1wCm5h
+	4X/LcjhF1ZDh2ENC3LSB8Ls2SUdnBhMQa3XmyVL8jrrYefivQjFWjTYZISt8COWPWpv9
+	fqZkgVK5Up+wcuCEQL82RShXZ/13Kd8vUViMn/CtQl7wlMGpw5roUUkIYAaeJP/cmgtS
+	Y/LaK2c8iWRNjZsMdFYGahmlJp8c0TK3EaMlslQ9G1+ErrE5C9bJNer77Zp31wRSM/Z4
+	CUBpUO6Y7JKKykqC1FtJKkMFUyiT7QhUMpKlD47uHaswDOO2qre1i0IoLj/rjYl8ReH/
+	wHTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KRSZHBVBxpwDjSu5JGeyXY3GU4BXuFu9FD7fZirHmVc=;
+	b=eUR95mgUX4/TJLommRlQAY5m9LGMKezQYdit1HC5YEJmYiJ0D2rAf4VrsJ+sYGvtp1
+	ervNUIgYgMhvRElUWUOUMiNfkeze33OZlpPTI3sdkNDnqnhU/cTWTlCY6MuJg9UJ4AI0
+	WsNUsZSfHwUfccgRT5AVMrvForGoLwUSx5GE3wTs4DrtNuqbkT6/lUgGRrRwvt3l3GXt
+	vx8NP0k4nCSaMR+oTFXmoc7oLD6GSCeTB6nGStJ5/nfo561xHEyRpMq4Oj4LfMfbEqND
+	2mfxezilmLk0CHFoW3ySyVYeG2ZWA5qnicpNrb26SJ9iWb8/X3eqc9D/yHtfuTuosgJE
+	aL/A==
+X-Gm-Message-State: APjAAAWtzsJPSENLF5dqiKLE9kqQlI5F8zmEojgdv+5cx+R3n7izMx1/
+	Bm8/LDl+bCNkoQPS+K8qk/RvlwB4
+X-Google-Smtp-Source: APXvYqxEWC4YnXo3Re0h4j36PxMXyajtMFyBCklPu3yKz0H+1bLwa6QqntM0UImlMX+ZHLmOPjfLlA==
+X-Received: by 2002:a2e:870f:: with SMTP id m15mr50197738lji.223.1564156880030;
+	Fri, 26 Jul 2019 09:01:20 -0700 (PDT)
+Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
+	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
+	r68sm8475621lff.52.2019.07.26.09.01.17
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Fri, 26 Jul 2019 09:01:18 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jul 2019 11:37:36 +0200
-Message-Id: <20190726093736.24607-2-ayoub.zaki@embexus.com>
+Date: Fri, 26 Jul 2019 18:01:14 +0200
+Message-Id: <20190726160114.13709-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190726093736.24607-1-ayoub.zaki@embexus.com>
-References: <20190726093736.24607-1-ayoub.zaki@embexus.com>
-Subject: [meta-oe][PATCH v3 2/2] usbguard: Initial recipe
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-networking]] dhcpcd: update to 8.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,56 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 09:37:43 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 16:01:22 -0000
 
-Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
-by implementing basic whitelisting and blacklisting capabilities based on device attributes.
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../usbguard/usbguard_0.7.4.bb                | 35 +++++++++++++++++++
- 1 file changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+ .../dhcpcd/{dhcpcd_7.2.3.bb => dhcpcd_8.0.1.bb}           | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_7.2.3.bb => dhcpcd_8.0.1.bb} (78%)
 
-diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-new file mode 100644
-index 000000000..9ec21d2c7
---- /dev/null
-+++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-@@ -0,0 +1,35 @@
-+DESCRIPTION="USBGuard framework helps to protect against BadUSB."
-+HOMEPAGE="https://github.com/dkopecek/usbguard"
-+LICENSE="GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-+
-+SRCREV = "0ab32d7fa092067030fcbef530968b5cc237b08c"
-+SRC_URI = "git://git@github.com/USBGuard/usbguard.git;protocol=https;branch=master"
-+
-+inherit autotools pkgconfig systemd bash-completion
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
-+	dbus dbus-glib libqb libcap-ng libgcrypt libsodium protobuf pegtl"
-+
-+EXTRA_OECONF += "--with-bundled-catch"
-+
-+PACKAGECONFIG ??= "libsodium \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-+
-+PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
-+PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
-+PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
-+PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
-+PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
-+
-+SYSTEMD_SERVICE_${PN} = "${PN}.service"
-+SYSTEMD_PACKAGES += "${PN}"
-+
-+do_install_append(){
-+	
-+	sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \ 
-+						${D}${sysconfdir}/usbguard/usbguard-daemon.conf
-+}
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
+similarity index 78%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
+index 161810a2c..6438daea7 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_7.2.3.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.1.bb
+@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
+ 
+ UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
+ 
+-SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+-SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
+-SRC_URI[md5sum] = "b7aade2cc47afa6d645f798103365402"
+-SRC_URI[sha256sum] = "74ab38177548abe968c2abacefffdd97b573acaedd4f77b6c0a54ae38f68566e"
++SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
++           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
++SRC_URI[md5sum] = "b9c3b3a116f1abafc346f80cb511f8c1"
++SRC_URI[sha256sum] = "031f4fbef5ad41b44714fec343ff5be898e3e3cd5e7c53d6ef3aaec43cdba931"
+ 
+ inherit pkgconfig autotools-brokensep
+ 
 -- 
 2.17.1
 
