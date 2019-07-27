@@ -1,46 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id B58EB6C45D
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E28287ED3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jul 2019 16:31:09 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id w17so11374054qto.10
+	Sat, 27 Jul 2019 18:59:45 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id c3so2888638pfa.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jul 2019 09:31:11 -0700 (PDT)
+	Sat, 27 Jul 2019 11:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xdgInEwBruC5DwJWAJBv9lo04Ic+Jz0Cwh7SWqU3RoU=;
-	b=RzY/k+y6xpWYIYPHTE+FV/P2sF5tPHdaB9+xU/d9EGF+bYz3GrNHliU4cA7qOIEDAM
-	leG/MtMGOGqtilFWrVroIfoQ/fvDWxHrAhZXttJ9lZXzryhOemyuezWqqVMlxEuE7C9J
-	iCMlJTYuPvHRnJdsPRgBxPDsOCOTBHBw7tPPhuJUp6EEegFBiiHwW26sHSz/4KXTr67Q
-	tgMjhbXSO5M36RarUClxBAHHMFZjkdIXqeUEAIV9mT6XpAQQPTpDhNze+1m+j/7Ynjb4
-	YkYNuOBVIrnftJ+AwtPLEe6lCZWqxq1zjbDBvqJ3b2Kqb2yVrZ6zEO9H0y0I06uKuMCM
-	fFhw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=nbaivUiuB41Ox7ktbvI8eQAbtUA1g0OefCcV3bOndjk=;
+	b=JiInR199HCajsieAji9mYB/lB1wMqbSzXz8h5SkjEFp8e2FdNYzSYXmeiOL7jLxmNH
+	tsX8cTNE35VwxTR4gllXwQ9lbwwAxhwT7JchaSLYGkeaw5yFfy4wXN0nUuWEwChFVUXU
+	qlvJRCE99ccRRLVkDJwi9Ad9FqIeXUfyezlMzqmI3sS+febDVnbZtkAobxsMO1pm5Ajn
+	6w/xvsDUF7/bqaPb7s9mqscd0BsDNPfJxbLV/Z8e9LC1u9+q7ztl21b00w0Gv1fGJAxZ
+	itC8xA32TlhSImBBfomZjRcyHAkVP7rUFuyFWIsGt/+jOifhQWQTrz/uWIBViqH3bbJx
+	QGtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xdgInEwBruC5DwJWAJBv9lo04Ic+Jz0Cwh7SWqU3RoU=;
-	b=phv4BkKlEA/SZbZdc3wxOh2SenSQ3fVwanOdFyXFbFMOpKUTf8H66MmPlW1PGx3NRm
-	7pfhUeatzdmyckhsB4SxLadvEWtyirH7LXhwIR/suV9xTkWcWkoQCmQddnukHcXddt4I
-	azql2wJ0DwSCu+JHrjWnEDESYxCeyFuydgtibz4rAZIgQ+6vOQC+DiV9KuFiYvSCPLfh
-	grs2gSFGEiZSFd8gOmLaQax1k4Th4WgclcxuNQwZHSmQkpaipRbCgSB+cFY1ou1wAPOO
-	vzd08Wv/tI0g17nhcHFDbEs+d0JCeyDS5tbq/ETQGZVka3H65Ars0qQ/SVJB0NIYljG7
-	cgzg==
-X-Gm-Message-State: APjAAAXcDduigh/3fBPvu4WkwoMbuU862TKUR20UP7d8DL37AaQ6R5HZ
-	Rhe3GjSO5mQgaYqVVTtUI7x0uH9xjYhlRV1CfqqxKD92
-X-Google-Smtp-Source: APXvYqzquE5pzgoR74L7oVjdTZHyTVkSl+fsImoLdMBo4IFWN+00JM8+b6fZJxMgPfjfO9rzYmvNMf4kYYObWnMPiU8=
-X-Received: by 2002:a0c:d2da:: with SMTP id x26mr74070876qvh.51.1564245070241; 
-	Sat, 27 Jul 2019 09:31:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190727124846.27068-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190727124846.27068-1-open.source@oleksandr-kravchuk.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=nbaivUiuB41Ox7ktbvI8eQAbtUA1g0OefCcV3bOndjk=;
+	b=hoNjRSY/rFGRvifCztdWWZRYvtg6M7v1IIyMSV5yWgKDxyhvhnraP3la8gruRd6xcZ
+	MtvJM524tjsULnV2hO3n6HpOnjiCGRpyEll7esY6MVWQoZ06zCfeNZmzPz2IwbPsKUA7
+	2v+exvgLLC7N56idDaaWb0iBfrcVx4/YjDT7yd7FGwpppvAOhX3XqaAzETZyXwsmVCpG
+	cQ/wnnMKh6RXa58eNo5iUfK1AVigpHLAk0tSV1VlbMm4PBnGezTaFOZAervsRuulzLLn
+	7phRYGcgDaej89jfvLFKxEK7PtZFYnG/HiAhlOWWEG/7SFwJgUiNMJmcFO5cRzfWv9Yh
+	F18Q==
+X-Gm-Message-State: APjAAAUIEG9VIlYw0huYm2xca2trd6GyUvzARN59K9kkdmLrofdDvlrX
+	VpWIbrNab9BqOgW4MRKnAZFu9gokqyw=
+X-Google-Smtp-Source: APXvYqxauK69KZUKYLtkVk7z7qSMnM0Ttg09dB3xGqXppWLNUaoRqUln37jXPjG886SSIWjmgsvU0A==
+X-Received: by 2002:a62:18d4:: with SMTP id 203mr28832819pfy.165.1564253985701;
+	Sat, 27 Jul 2019 11:59:45 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	k22sm60178333pfk.157.2019.07.27.11.59.44
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sat, 27 Jul 2019 11:59:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 27 Jul 2019 09:30:44 -0700
-Message-ID: <CAMKF1soF68P-BfW+vEwQHEXVQ6MgA2Dr4XNwj-=c3tzU=720Lg@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking]] chrony: update to 3.5
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Jul 2019 11:59:34 -0700
+Message-Id: <20190727185937.29832-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/4] postfix: Fix build failures with glibc 2.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,130 +57,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jul 2019 16:31:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 27 Jul 2019 18:59:46 -0000
+Content-Transfer-Encoding: 8bit
 
-Oleksandr
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...ure-with-glibc-2.30-due-to-dropped-R.patch | 37 +++++++++++++++++++
+ .../recipes-daemons/postfix/postfix.inc       | 11 ------
+ .../recipes-daemons/postfix/postfix_3.4.5.bb  | 18 +++++++--
+ 3 files changed, 51 insertions(+), 15 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
 
-The patch headers are causing an additional `]' in the commit subject
-please avoid adding double ]]
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+new file mode 100644
+index 0000000000..22adaff729
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/files/0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch
+@@ -0,0 +1,37 @@
++From 8b3792830f4930fee7fbb00c854d9766f2b74dca Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 27 Jul 2019 11:35:38 -0700
++Subject: [PATCH] Fixed build failure with glibc 2.30 due to dropped
++ RES_INSECURE1/2 macros
++
++see [1]
++
++[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=333221862ecbebde60dd16e7ca17d26444e62f50
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/dns/dns_str_resflags.c | 6 ++++++
++ 1 file changed, 6 insertions(+)
++
++diff --git a/src/dns/dns_str_resflags.c b/src/dns/dns_str_resflags.c
++index 5f2cce5..df32345 100644
++--- a/src/dns/dns_str_resflags.c
+++++ b/src/dns/dns_str_resflags.c
++@@ -60,10 +60,16 @@ static const LONG_NAME_MASK resflag_table[] = {
++     "RES_DEFNAMES", RES_DEFNAMES,
++     "RES_STAYOPEN", RES_STAYOPEN,
++     "RES_DNSRCH", RES_DNSRCH,
+++#ifdef RES_INSECURE1
++     "RES_INSECURE1", RES_INSECURE1,
+++#endif
+++#ifdef RES_INSECURE2
++     "RES_INSECURE2", RES_INSECURE2,
+++#endif
++     "RES_NOALIASES", RES_NOALIASES,
+++#ifdef RES_USE_INET6
++     "RES_USE_INET6", RES_USE_INET6,
+++#endif
++ #ifdef RES_ROTATE
++     "RES_ROTATE", RES_ROTATE,
++ #endif
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index 94379412f9..7781005336 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -14,17 +14,6 @@ DEPENDS = "db icu libpcre libnsl2 openssl postfix-native \
+ LICENSE = "IPL-1.0 | EPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b181651ad99a7dc4cc8c4ce2f491ed1a"
+ 
+-SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
+-    file://makedefs.patch \
+-    file://install.patch \
+-    file://main.cf \
+-    file://postfix \
+-    file://internal_recipient \
+-    file://postfix.service \
+-    file://aliasesdb \
+-    file://check_hostname.sh \
+-"
+-
+ S = "${WORKDIR}/postfix-${PV}"
+ 
+ CLEANBROKEN = "1"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb b/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
+index 3ce8055539..189baea5c3 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.4.5.bb
+@@ -1,9 +1,19 @@
+ require postfix.inc
+ 
+-SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
+-            file://postfix-install.patch \
+-            file://icu-config.patch \
+-            file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
++SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
++           file://makedefs.patch \
++           file://install.patch \
++           file://main.cf \
++           file://postfix \
++           file://internal_recipient \
++           file://postfix.service \
++           file://aliasesdb \
++           file://check_hostname.sh \
++           file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
++           file://postfix-install.patch \
++           file://icu-config.patch \
++           file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
++           file://0001-Fixed-build-failure-with-glibc-2.30-due-to-dropped-R.patch \
+            "
+ SRC_URI[md5sum] = "093109941095390562166de766d4720d"
+ SRC_URI[sha256sum] = "8b2ba54f9d2a049582a0ed3ee2dbe96ba57e278feea9cb4f80e1a61844e6319f"
+-- 
+2.22.0
 
-On Sat, Jul 27, 2019 at 5:49 AM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Also updated arm_eabi patch.
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../chrony/chrony/arm_eabi.patch              | 33 ++++++++++---------
->  .../chrony/{chrony_3.4.bb => chrony_3.5.bb}   |  5 ++-
->  2 files changed, 20 insertions(+), 18 deletions(-)
->  rename meta-networking/recipes-support/chrony/{chrony_3.4.bb => chrony_3.5.bb} (97%)
->
-> diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-> index 9f943cdce..187898a6e 100644
-> --- a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-> +++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-> @@ -1,7 +1,7 @@
-> -From 9ca48a6fef1da1bb0dd67ab94256c7e240da1834 Mon Sep 17 00:00:00 2001
-> +From f35e07aceb4a16121d83b47ee77990018bec98ea Mon Sep 17 00:00:00 2001
->  From: Joe Slater <jslater@windriver.com>
->  Date: Thu, 9 Mar 2017 10:58:06 -0800
-> -Subject: [PATCH]     chrony: fix build failure for arma9
-> +Subject: [PATCH] chrony: fix build failure for arma9
->
->      Eliminate references to syscalls not available
->      for ARM_EABI.  Also add a dependency on libseccomp
-> @@ -18,16 +18,15 @@ Subject: [PATCH]     chrony: fix build failure for arma9
->      Refresh patch for new upstream version.
->
->      Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
-> -
->  ---
-> - sys_linux.c | 19 +++++++++++++------
-> - 1 file changed, 13 insertions(+), 6 deletions(-)
-> + sys_linux.c | 20 ++++++++++++++------
-> + 1 file changed, 14 insertions(+), 6 deletions(-)
->
->  diff --git a/sys_linux.c b/sys_linux.c
-> -index f4b532d..d05fa24 100644
-> +index 898dc7a..b268ad1 100644
->  --- a/sys_linux.c
->  +++ b/sys_linux.c
-> -@@ -482,14 +482,14 @@ SYS_Linux_EnableSystemCallFilter(int level)
-> +@@ -479,14 +479,14 @@ SYS_Linux_EnableSystemCallFilter(int level)
->     const int syscalls[] = {
->       /* Clock */
->       SCMP_SYS(adjtimex), SCMP_SYS(clock_gettime), SCMP_SYS(gettimeofday),
-> @@ -38,24 +37,24 @@ index f4b532d..d05fa24 100644
->  -    SCMP_SYS(getrlimit), SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn),
->  +    SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn),
->       SCMP_SYS(rt_sigprocmask), SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn),
-> -     SCMP_SYS(wait4),
-> +     SCMP_SYS(wait4), SCMP_SYS(waitpid),
->       /* Memory */
->  -    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
->  +    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
->       SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
->       /* Filesystem */
-> -     SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
-> -@@ -500,14 +500,21 @@ SYS_Linux_EnableSystemCallFilter(int level)
-> +     SCMP_SYS(_llseek), SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown),
-> +@@ -499,14 +499,22 @@ SYS_Linux_EnableSystemCallFilter(int level)
->       SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname), SCMP_SYS(getsockopt),
-> -     SCMP_SYS(recvfrom), SCMP_SYS(recvmmsg), SCMP_SYS(recvmsg),
-> -     SCMP_SYS(sendmmsg), SCMP_SYS(sendmsg), SCMP_SYS(sendto),
-> +     SCMP_SYS(recv), SCMP_SYS(recvfrom), SCMP_SYS(recvmmsg), SCMP_SYS(recvmsg),
-> +     SCMP_SYS(send), SCMP_SYS(sendmmsg), SCMP_SYS(sendmsg), SCMP_SYS(sendto),
->  -    /* TODO: check socketcall arguments */
->  -    SCMP_SYS(socketcall),
->       /* General I/O */
->       SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(openat), SCMP_SYS(pipe),
-> --    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
-> -+    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
-> -     SCMP_SYS(set_robust_list), SCMP_SYS(write),
-> +     SCMP_SYS(pipe2), SCMP_SYS(poll), SCMP_SYS(ppoll), SCMP_SYS(pselect6), SCMP_SYS(read),
-> +-    SCMP_SYS(futex), SCMP_SYS(select), SCMP_SYS(set_robust_list), SCMP_SYS(write),
-> ++    SCMP_SYS(futex), SCMP_SYS(set_robust_list), SCMP_SYS(write),
->       /* Miscellaneous */
->       SCMP_SYS(getrandom), SCMP_SYS(sysinfo), SCMP_SYS(uname),
->  +    /* not always available */
-> @@ -67,6 +66,10 @@ index f4b532d..d05fa24 100644
->  +    /* TODO: check socketcall arguments */
->  +    SCMP_SYS(socketcall),
->  +#endif
-> ++
->     };
->
->     const int socket_domains[] = {
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-networking/recipes-support/chrony/chrony_3.4.bb b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-> similarity index 97%
-> rename from meta-networking/recipes-support/chrony/chrony_3.4.bb
-> rename to meta-networking/recipes-support/chrony/chrony_3.5.bb
-> index f6898c0b7..7c6356d26 100644
-> --- a/meta-networking/recipes-support/chrony/chrony_3.4.bb
-> +++ b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-> @@ -39,9 +39,8 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
->  SRC_URI_append_libc-musl = " \
->      file://0001-Fix-compilation-with-musl.patch \
->  "
-> -
-> -SRC_URI[md5sum] = "7170e750469c198fc6784047d6f71144"
-> -SRC_URI[sha256sum] = "af77e47c2610a7e55c8af5b89a8aeff52d9a867dd5983d848b52d374bc0e6b9f"
-> +SRC_URI[md5sum] = "5f66338bc940a9b51eede8f391e7bed3"
-> +SRC_URI[sha256sum] = "4e02795b1260a4ec51e6ace84149036305cc9fc340e65edb9f8452aa611339b5"
->
->  DEPENDS = "pps-tools"
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
