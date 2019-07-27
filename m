@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
-	[209.85.210.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 82B887F20D
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+	[209.85.214.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D8E497F20C
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 27 Jul 2019 18:59:46 +0000 (UTC)
-Received: by mail-pf1-f171.google.com with SMTP id m30so26037401pff.8
+Received: by mail-pl1-f171.google.com with SMTP id b7so25997748pls.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jul 2019 11:59:47 -0700 (PDT)
+	Sat, 27 Jul 2019 11:59:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=qaBg2p+L4Ery/9cj7VWcHz5jDoDT6nfEAZ4FxfOFpG4=;
-	b=KNxntvvc0C9MJgDrsF3dylDRAPN9TG/UI6w54ye/zqhF2xb7rvxZt89WXGlJmud4KD
-	C8Aypfbaj1tYqub0v+Sy4eAhqtPAgVRY0xzrzvRlpNogml87OsgHBpfV50z0X4c6GXJO
-	0BqwWvjeMmi7TwEYsjCkNlnSgrYTNSRlk/AVPlrP3QPdqGuuDMoGd5ozpbqRC+2s30Ij
-	e8lzjg6KL5uoCe0KNOgWa2vvGBjipihVZxBwQswI+KyrmNBUYovAU6b34csQGQGK2yli
-	zV3W7Qkrk6EUKmeMBAzWG+6wZgK2u/UEMN8W59+4IiK3xFIfLQERnD/btt6DZEEV+JPi
-	JX8w==
+	bh=5gLyBq5Cql3FCZBB6u9x4DXPrOiwlmJzJEKxZ46TSgI=;
+	b=bNKcQt2YPJoUA3E9aM1HO38sMWnrmaLxP/vQBQEIDI5E05pZJF9Fe5SOpMVmzmDTA1
+	fAiLvLkHH25EnZufa6gMMWhupEIGv3yRPR99Bdg5mRt76HRUM8xUJkVYXtsVUI/jILia
+	zJ1uEuYQpsmNQ1ntJlHQAzn0ItTSegc6loShRs4NW5oD/VdYG607nmXod9V9pA5yz+K5
+	EvXpXPt5eGFDHZ18EYAyPJOFiwE8d/QPfoIli6RzeKw/ZhAPzLZ2uT6S29DttniiTcxi
+	UwyoLlIDSZwp67ZdYc1WJD8vKG10SPxYpSwf3QSVudYvmNfNC4ZpyJMa7GxGMsWwYsdN
+	dPdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=qaBg2p+L4Ery/9cj7VWcHz5jDoDT6nfEAZ4FxfOFpG4=;
-	b=M5cdbQc7cRjnaNYsYIwre8aQ3HVF02VJtvml5BZCkkC6eD+rWoy8cQxZXxtmM5nmvB
-	JDe2iKbM/AjkZB++T7NqlyKd0VcwZGCTvY/88o8CGG3xQyMZMm0by1sAPhfLsMvEOLdC
-	Bykq2jOV7Uh+j/VE3RcUV7PF+ReOB0+GrAADrTdwXhtNExvCrEHvBvymUYP7wjOhBwKG
-	t1+1VTTZiwvSWfS40rTHbP8IANOW6VR2lV7oKVPgflG8P7GqrPUMafijv13S81/n6DdH
-	fYF+K7w727rIfdjE+rp8ft5jDb2d86ArBdgOvnNHlXgMwSru6XaXsF9VaAE1AxmRqpr2
-	qR5Q==
-X-Gm-Message-State: APjAAAWDOhQp25aSWkgly75A5ja4xZS8HW/GupMy6z2GoJIHy0+BIKLl
-	AxFOrwwvJKsPUN/sBmyw3VyCQpiByQc=
-X-Google-Smtp-Source: APXvYqzns9Z1ablvsUu6AAQ0Wb/sD7dtexqSPvi6h0BqB8uOqaSxub6lUHDAgXtrFVAnALqHJ4B5kQ==
-X-Received: by 2002:aa7:8651:: with SMTP id a17mr28317239pfo.138.1564253986970;
-	Sat, 27 Jul 2019 11:59:46 -0700 (PDT)
+	bh=5gLyBq5Cql3FCZBB6u9x4DXPrOiwlmJzJEKxZ46TSgI=;
+	b=XZxcA7Bs81HKG6GkAJybbV6G2cHvBVktvnt6OX96nvdw1/GP9sH4uRE74FdBTXqacL
+	jczaz7/yieDC+1ddoI3L8MupGm5bhgnzi2a9ivedi9DcEh2DDVpirNfyANXXcwcmbUtn
+	wnEpcyJd0MEjavljBgG34ovkN186o3KJSAWocfa8tcJDeEZn7bDwWQfBF/M/tCTshczG
+	KMx42Jdn+tZamRKGuCY2QAKXSkUVdfciq/qDmVe110LDDRmHSIOBEan5BC8fnKfeYbFT
+	B+fEbkKo8HdP4vLprKiBlrMjZG3iIpkMYmHlzrLgPiSPZyPOR4WB4W9ihCRBL/8SKl4g
+	JUpw==
+X-Gm-Message-State: APjAAAWqSpvXsKEIy1W4Ot3oCqvevjTa9398rr+4oP7HENwtLjwOBZcX
+	FPPjH7GqIGQWD4BIUUeUoVir0fFRnvk=
+X-Google-Smtp-Source: APXvYqy1MIF+1sXMrAXxohrvmMP82lz401VccLnczLR7wg+mdDRPp7lzpYDKyhIWg1R0ALUhRZBd6Q==
+X-Received: by 2002:a17:902:61:: with SMTP id 88mr97723650pla.50.1564253987571;
+	Sat, 27 Jul 2019 11:59:47 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	k22sm60178333pfk.157.2019.07.27.11.59.46
+	k22sm60178333pfk.157.2019.07.27.11.59.47
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sat, 27 Jul 2019 11:59:46 -0700 (PDT)
+	Sat, 27 Jul 2019 11:59:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Jul 2019 11:59:36 -0700
-Message-Id: <20190727185937.29832-3-raj.khem@gmail.com>
+Date: Sat, 27 Jul 2019 11:59:37 -0700
+Message-Id: <20190727185937.29832-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190727185937.29832-1-raj.khem@gmail.com>
 References: <20190727185937.29832-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/4] opensaf: Add configure time check to detect gettid API in libc
+Subject: [meta-networking][PATCH 4/4] ypbind-mt: Fix build with glibc 2.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,103 +59,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jul 2019 18:59:46 -0000
+X-List-Received-Date: Sat, 27 Jul 2019 18:59:47 -0000
 Content-Transfer-Encoding: 8bit
-
-Also fixes build with glibc 2.30
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-configure-time-check-for-gettid-API.patch | 67 +++++++++++++++++++
- .../opensaf/opensaf_5.19.03.bb                |  1 +
- 2 files changed, 68 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-Add-configure-time-check-for-gettid-API.patch
+ ...-configure-time-check-for-gettid-API.patch | 45 +++++++++++++++++++
+ .../recipes-support/nis/ypbind-mt_2.6.bb      |  1 +
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-networking/recipes-support/nis/ypbind-mt/0001-Add-configure-time-check-for-gettid-API.patch
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Add-configure-time-check-for-gettid-API.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Add-configure-time-check-for-gettid-API.patch
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt/0001-Add-configure-time-check-for-gettid-API.patch b/meta-networking/recipes-support/nis/ypbind-mt/0001-Add-configure-time-check-for-gettid-API.patch
 new file mode 100644
-index 0000000000..2b03b1800a
+index 0000000000..9484d0b007
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Add-configure-time-check-for-gettid-API.patch
-@@ -0,0 +1,67 @@
-+From 91c7362834ccd88d1432b3e6c5c51748b72b10ad Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/nis/ypbind-mt/0001-Add-configure-time-check-for-gettid-API.patch
+@@ -0,0 +1,45 @@
++From 25d5daf30aa2dc451ba528712f668036d8506054 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 27 Jul 2019 07:21:16 -0700
++Date: Sat, 27 Jul 2019 07:50:26 -0700
 +Subject: [PATCH] Add configure time check for gettid API
 +
-+glibc 2.30 has added syscalls wrapper for gettid
-+it should now be checked during configure if C library provides
-+this API then do not define local function
++glibc 2.30 has added this syscalls wrapper
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac         | 4 ++++
-+ src/base/logtrace.cc | 3 +++
-+ src/osaf/config.h.in | 3 +++
-+ 3 files changed, 10 insertions(+)
++ configure.ac  | 1 +
++ src/log_msg.c | 2 ++
++ 2 files changed, 3 insertions(+)
 +
 +diff --git a/configure.ac b/configure.ac
-+index 22ab936..90f3da4 100644
++index 9e32a4a..6d1067b 100644
 +--- a/configure.ac
 ++++ b/configure.ac
-+@@ -480,6 +480,10 @@ fi
++@@ -33,6 +33,7 @@ if test -n "$TIRPC_LIBS"; then
++   AC_DEFINE(HAVE_TIRPC, 1, [Define to 1 if TIRPC is available])
++ fi
 + 
-+ AC_SUBST([localstatedir])
+++AC_CHECK_FUNCS(gettid)
++ dnl The difficult part: could we reconfigure NSS or must we use DNS ?
++ AC_CHECK_FUNCS(__nss_configure_lookup)
++ if eval "test \"`echo '$ac_cv_func___nss_configure_lookup'`\" != yes"; then
++diff --git a/src/log_msg.c b/src/log_msg.c
++index 49f0905..37da311 100644
++--- a/src/log_msg.c
+++++ b/src/log_msg.c
++@@ -26,6 +26,7 @@
++ #include "log_msg.h"
 + 
-++#############################################
-++# Checks for functions.
-++#############################################
-++AC_CHECK_FUNCS([ gettid ])
-+ 
-+ #############################################
-+ # Checks for programs.
-+diff --git a/src/base/logtrace.cc b/src/base/logtrace.cc
-+index 8908c1f..fe87e8d 100644
-+--- a/src/base/logtrace.cc
-++++ b/src/base/logtrace.cc
-+@@ -31,6 +31,7 @@
-+ #include "base/logtrace_client.h"
-+ #include "base/logtrace_buffer.h"
-+ #include "base/ncsgl_defs.h"
-++#include "osaf/config.h"
-+ 
-+ namespace global {
-+ 
-+@@ -58,7 +59,9 @@ std::once_flag init_flag;
-+ thread_local LogTraceBuffer gl_thread_buffer{gl_local_thread_trace,
-+   global::thread_trace_buffer_size};
-+ 
-++#ifndef HAVE_GETTID
-+ static pid_t gettid() { return syscall(SYS_gettid); }
++ #include <sys/syscall.h>
+++#if !HAVE_GETTID
++ #ifdef __NR_gettid
++ static pid_t
++ gettid (void)
++@@ -39,6 +40,7 @@ gettid (void)
++     return getpid ();
++ }
++ #endif
 ++#endif
 + 
-+ /**
-+  * USR2 signal handler to enable/disable trace (toggle)
-+diff --git a/src/osaf/config.h.in b/src/osaf/config.h.in
-+index d1f6d1a..0a3f27d 100644
-+--- a/src/osaf/config.h.in
-++++ b/src/osaf/config.h.in
-+@@ -18,6 +18,9 @@
-+ /* Define if experimental code is enabled */
-+ #undef HAVE_EXPERIMENTAL
-+ 
-++/* Define to 1 if you have the `gettid' function. */
-++#undef HAVE_GETTID
-++
-+ /* SAHPI_INTERFACE_VERSION == A01 */
-+ #undef HAVE_HPI_A01
-+ 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
-index 0cccebdfcd..505c087f17 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
-@@ -24,6 +24,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
-            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
-            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
++ int debug_flag = 0;
++ int logfile_flag = 0;
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
+index 1a64e6c2e1..4f7f8aa3ef 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_2.6.bb
+@@ -32,6 +32,7 @@ SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-
+            file://ypbind.init \
+            file://ypbind.service \
+            file://0001-dns_hosts-Fix-build-with-musl.patch \
 +           file://0001-Add-configure-time-check-for-gettid-API.patch \
             "
- SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
- SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
+ SRC_URI[md5sum] = "7cf89641fdc128d0919207e4b7caaf1d"
+ SRC_URI[sha256sum] = "0696c0263c4fd48a4ff2ce6c109f05f37aab0f71646d81cb22c7c28591bf80eb"
 -- 
 2.22.0
 
