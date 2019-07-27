@@ -1,53 +1,20 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ACB37EEC4
+Return-Path: <tworaz@tworaz.net>
+X-Greylist: delayed 405 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 27 Jul 2019 09:03:06 UTC
+Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
+	by mail.openembedded.org (Postfix) with ESMTP id 86AEB6BBE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2019 22:27:51 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id l9so54122980qtu.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2019 15:27:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=iZ15y6mLD/czJSg/F6WKu+66YcZ/haYDAXJykkC+wrQ=;
-	b=UhICjhV3+mcgbcfkMJS8ZbThaS2sQSTZfEHSuCsXPCpMrDNroSnB3x54XyeRngI5v+
-	JMwmKRA5nOT5nfvBvqKJyqxPrl5oaplmeMoAJHDnGTg7dCxGfAUnACVkySyo3q5X61ji
-	evIOcTZJ9aU3Uyx9UvsKAIEjIb06r37CiMEN9zsX/ByR637Hd61q+vHnFPHTRnefbjKR
-	fl1YEJ60ur0ViAKbC+gEYZDIZcEgZZ0QhAFAm0ZT21+fSS7gHz+Uh0fxOUBYGaKoOAaT
-	zGunaiAIV31O4bbUaxTM0EKNxwT2o2haEd3H5LMAHQkvyEHME7C8SClBgst5JgncBPkT
-	so0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=iZ15y6mLD/czJSg/F6WKu+66YcZ/haYDAXJykkC+wrQ=;
-	b=b7qx1JiGKqJQ6+LeX8zktnyvmc7uroLj+/xhgc6W4ori35Rsxol5XXeweubzpHbSn/
-	fy23cKwdqAqzuVacrwIvR4lCTkzD75BwSDmxPwMifI+BWBA/YEHG5b9SFsAUstBeBorX
-	hwFq2F0ui/lYWnnmKVrNSrd1mCKTUx4p9ql8fAlNKQSKUx6LRI/Gd9dhqMDIykHIUeRy
-	eUV8mP1PVox1UvBYl7C79j4jtxBioO6QxHI8yK2P28sNi60MzXg5BYxinmdo5cCI9b03
-	pGsmEB0B3lNbrSJDicsafT9B9NlzOaMhhhrYwD+qb+kWkfrkeDbsFewUVWBzQm8Oi+pD
-	Pk+g==
-X-Gm-Message-State: APjAAAW3i5qezG9bl0qJbI1lfiBSXLtOtHem1nlPk6jBUeH6gP+TCmcf
-	hAsUpckksI6PeNZjABtBs7y1YXnr1ruzWwee87Y=
-X-Google-Smtp-Source: APXvYqxubwUqvW1JPWn1giFh1wJa+5oUTbbz2g46FqX5qv5siGbZ3j3I5A8lpgH0hDIj4LncNkwWl4107V2rE/jA4wA=
-X-Received: by 2002:ac8:1183:: with SMTP id d3mr6501683qtj.53.1564180071972;
-	Fri, 26 Jul 2019 15:27:51 -0700 (PDT)
+	Sat, 27 Jul 2019 09:03:06 +0000 (UTC)
+Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
+	by mail.tworaz.net (Postfix) with ESMTPSA id A9FFC1001CC;
+	Sat, 27 Jul 2019 08:56:22 +0000 (UTC)
+From: Piotr Tworek <tworaz@tworaz.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Jul 2019 10:56:16 +0200
+Message-Id: <20190727085616.14529-1-tworaz@tworaz.net>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <1564038385-372982-1-git-send-email-mingli.yu@windriver.com>
-	<CADkTA4N3zMSfjBe=eOvvbrArfXEenwpYZcJGgwqt2Mhrr-1tGw@mail.gmail.com>
-	<5D3A65EA.9090601@windriver.com>
-	<CADkTA4OS653HqdcG8nm=VqmUQ85m-tPniauwUD8a=gZZY-3whQ@mail.gmail.com>
-	<5D3A6DB3.9080207@windriver.com>
-	<CADkTA4NOAUebSDV2dUZzhoKS2pQefZentgwrXeaEOT3W8qxMzg@mail.gmail.com>
-	<cdafa962-f7b1-bf15-c3bf-fa10bb76d160@gmail.com>
-In-Reply-To: <cdafa962-f7b1-bf15-c3bf-fa10bb76d160@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Jul 2019 15:27:36 -0700
-Message-ID: <CAMKF1spDOFiZQ22QnHHnhnyyX_oOtuF1NjrLDiAdMVYgtoUM5Q@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libseccomp: import from meta-security
+Subject: [meta-oe][PATCH] itstool: Don't use hardcoded, absolute path to python3 binary.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,234 +27,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 22:27:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Jul 2019 09:03:06 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jul 26, 2019 at 2:00 AM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 7/25/19 8:23 PM, Bruce Ashfield wrote:
-> > On Thu, Jul 25, 2019 at 11:01 PM Yu, Mingli <mingli.yu@windriver.com> w=
-rote:
-> >>
-> >>
-> >> On 2019=E5=B9=B407=E6=9C=8826=E6=97=A5 10:46, Bruce Ashfield wrote:
-> >>>
-> >>> On Thu, Jul 25, 2019 at 10:28 PM Yu, Mingli <mingli.yu@windriver.com
-> >>> <mailto:mingli.yu@windriver.com>> wrote:
-> >>>
-> >>>
-> >>>
-> >>>     On 2019=E5=B9=B407=E6=9C=8825=E6=97=A5 21:45, Bruce Ashfield wrot=
-e:
-> >>>      > On Thu, Jul 25, 2019 at 3:06 AM <mingli.yu@windriver.com
-> >>>     <mailto:mingli.yu@windriver.com>> wrote:
-> >>>      >>
-> >>>      >> From: Mingli Yu <Mingli.Yu@windriver.com
-> >>>     <mailto:Mingli.Yu@windriver.com>>
-> >>>      >
-> >>>      > Can you share some details as to why this should be pulled fro=
-m
-> >>>      > meta-security into a different repo ?
-> >>>
-> >>>     Considering there is also some security related recipe under
-> >>>     meta-oe/recipes-security/, I think it's not strange to add a new =
-one
-> >>>     libseccomp and libseccomp also provides a basic common filtering
-> >>>     mechanism.
-> >>>
-> >>>
-> >>> .. but it is literally churn for the sake of churn.
-> >>>
-> >>> Meaning, that isn't a great reason to move something. If Armin wanted=
- to
-> >>> put the recipe in meta-oe, he would have done it himself.
-> >> ^_^, I noticed Armin did try to do this in this thread "[oe]
-> >> [meta-oe][PATCH 1/2] libseccomp: move lib from meta-security to meta-o=
-e"
-> >> in Jun 1, 2018.
-> > In that case, follow up to that thread so folks can remember why it
-> > didn't happen, or check to see if it was simply forgotten. Putting the
-> > maintainers on the cc' from the start of something like this helps
-> > immensely.
-> >
-> > But I see you added Armin to this thread, so that should be enough.
->
-> I am fine if we move the recipe. The issue was Khem didn't want the
-> "bash" dependency and I never followed up to clean that up.
->
+Unfortunately itstoll build system produces script file which contains
+absolute path to python3 binary used during packaging. In case of OE
+this refers to recipe-sysroot-native directory. This obviously make the
+resulting script unusable for both target and native builds. This
+problem was patched in OE using sed after the script file was installed.
+The sed line replaced one absolute path with /usr/bin/python3. This
+seems to work fine for target builds but is still not good enough for
+native targets.s
 
-I think this cleanup would be good to have before we move this in. It
-has built well
-in preliminary build testing, since there are recipes in meta-oe using
-this package it
-will become a common place to have it so there might be value.
+The main problem with native builds is we can't mix host and OE provided
+python3 when recipe using the tool inherits python3native bbclass. This
+bbclass exports _PYTHON_SYSCONFIGDATA_NAME="_sysconfigdata" which is
+likely to break host python3.
 
-Other way would be to see if security-recipes in meta-oe could be
-moved out into meta-security
+To make sure itstool is usable on both build host and target replace
+/usr/bin/python3 absolute path with /usr/bin/env python3.
 
-> I would have responded sooner but this is the first time I have reliable
-> Internet.
->
-> - armin
-> >
-> > Bruce
-> >
-> >>>
-> >>>     Meanwhile, the below yocto compliance check error disappears once=
- we
-> >>>     move libseccomp from meta-security to meta-oe.
-> >>>     ERROR: Nothing PROVIDES 'libseccomp' (but
-> >>>     /buildarea/layers/meta-virtualization/recipes-containers/cri-o/cr=
-i-o_git.bb
-> >>>     <http://cri-o_git.bb>
-> >>>     DEPENDS on or otherwise requires it).
-> >>>     Close matches:
-> >>>     libcomps
-> >>>     ERROR: Required build target 'meta-world-pkgdata' has no buildabl=
-e
-> >>>     providers.
-> >>>
-> >>>     Missing or unbuildable dependency chain was: ['meta-world-pkgdata=
-',
-> >>>     'cri-o', 'libseccomp']
-> >>>
-> >>>
-> >>> Also not a valid reason. We've just fixed meta-virtualization, so
-> >>> there's no need to shuffle something like this around, just to keep
-> >>> another layers compliance check working.
-> >>>
-> >>> Bruce
-> >>>
-> >>>
-> >>>     Thanks,
-> >>>
-> >>>      >
-> >>>      > It seems to fit the mandate of meta-security quite nicely ;)
-> >>>      >
-> >>>      > Is there some sort of dependency issue, or other technical pro=
-blem
-> >>>      > that is causing a problem ?
-> >>>      >
-> >>>      > Bruce
-> >>>      >
-> >>>      >>
-> >>>      >> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com
-> >>>     <mailto:Mingli.Yu@windriver.com>>
-> >>>      >> ---
-> >>>      >>   .../recipes-security/libseccomp/files/run-ptest    |  4 +++
-> >>>      >>   .../libseccomp/libseccomp_2.4.1.bb
-> >>>     <http://libseccomp_2.4.1.bb>                 | 41 +++++++++++++++=
-+++++++
-> >>>      >>   2 files changed, 45 insertions(+)
-> >>>      >>   create mode 100644
-> >>>     meta-oe/recipes-security/libseccomp/files/run-ptest
-> >>>      >>   create mode 100644
-> >>>     meta-oe/recipes-security/libseccomp/libseccomp_2.4.1.bb
-> >>>     <http://libseccomp_2.4.1.bb>
-> >>>      >>
-> >>>      >> diff --git a/meta-oe/recipes-security/libseccomp/files/run-pt=
-est
-> >>>     b/meta-oe/recipes-security/libseccomp/files/run-ptest
-> >>>      >> new file mode 100644
-> >>>      >> index 0000000..54b4a63
-> >>>      >> --- /dev/null
-> >>>      >> +++ b/meta-oe/recipes-security/libseccomp/files/run-ptest
-> >>>      >> @@ -0,0 +1,4 @@
-> >>>      >> +#!/bin/sh
-> >>>      >> +
-> >>>      >> +cd tests
-> >>>      >> +./regression -a
-> >>>      >> diff --git
-> >>>     a/meta-oe/recipes-security/libseccomp/libseccomp_2.4.1.bb
-> >>>     <http://libseccomp_2.4.1.bb>
-> >>>     b/meta-oe/recipes-security/libseccomp/libseccomp_2.4.1.bb
-> >>>     <http://libseccomp_2.4.1.bb>
-> >>>      >> new file mode 100644
-> >>>      >> index 0000000..dba1be5
-> >>>      >> --- /dev/null
-> >>>      >> +++ b/meta-oe/recipes-security/libseccomp/libseccomp_2.4.1.bb
-> >>>     <http://libseccomp_2.4.1.bb>
-> >>>      >> @@ -0,0 +1,41 @@
-> >>>      >> +SUMMARY =3D "interface to seccomp filtering mechanism"
-> >>>      >> +DESCRIPTION =3D "The libseccomp library provides and easy to=
- use,
-> >>>     platform independent,interface to the Linux Kernel's syscall
-> >>>     filtering mechanism: seccomp."
-> >>>      >> +SECTION =3D "security"
-> >>>      >> +LICENSE =3D "LGPL-2.1"
-> >>>      >> +LIC_FILES_CHKSUM =3D
-> >>>     "file://LICENSE;beginline=3D0;endline=3D1;md5=3D8eac08d2211388035=
-7ceb8e7c37f989f"
-> >>>      >> +
-> >>>      >> +SRCREV =3D "fb43972ea1aab24f2a70193fb7445c2674f594e3"
-> >>>      >> +
-> >>>      >> +SRC_URI =3D
-> >>>     "git://github.com/seccomp/libseccomp.git;branch=3Drelease-2.4
-> >>>     <http://github.com/seccomp/libseccomp.git;branch=3Drelease-2.4> \
-> >>>      >> +           file://run-ptest \
-> >>>      >> +"
-> >>>      >> +
-> >>>      >> +S =3D "${WORKDIR}/git"
-> >>>      >> +
-> >>>      >> +inherit autotools-brokensep pkgconfig ptest
-> >>>      >> +
-> >>>      >> +PACKAGECONFIG ??=3D ""
-> >>>      >> +PACKAGECONFIG[python] =3D "--enable-python, --disable-python=
-, python"
-> >>>      >> +
-> >>>      >> +do_compile_ptest() {
-> >>>      >> +    oe_runmake -C tests check-build
-> >>>      >> +}
-> >>>      >> +
-> >>>      >> +do_install_ptest() {
-> >>>      >> +    install -d ${D}${PTEST_PATH}/tests
-> >>>      >> +    install -d ${D}${PTEST_PATH}/tools
-> >>>      >> +    for file in $(find tests/* -executable -type f); do
-> >>>      >> +        install -m 744 ${S}/${file} ${D}/${PTEST_PATH}/tests
-> >>>      >> +    done
-> >>>      >> +    for file in $(find tests/*.tests -type f); do
-> >>>      >> +        install -m 744 ${S}/${file} ${D}/${PTEST_PATH}/tests
-> >>>      >> +    done
-> >>>      >> +    for file in $(find tools/* -executable -type f); do
-> >>>      >> +        install -m 744 ${S}/${file} ${D}/${PTEST_PATH}/tools
-> >>>      >> +    done
-> >>>      >> +}
-> >>>      >> +
-> >>>      >> +FILES_${PN} =3D "${bindir} ${libdir}/${BPN}.so*"
-> >>>      >> +FILES_${PN}-dbg +=3D "${libdir}/${PN}/tests/.debug/*
-> >>>     ${libdir}/${PN}/tools/.debug"
-> >>>      >> +
-> >>>      >> +RDEPENDS_${PN}-ptest =3D "bash"
-> >>>      >> --
-> >>>      >> 2.7.4
-> >>>      >>
-> >>>      >> --
-> >>>      >> _______________________________________________
-> >>>      >> Openembedded-devel mailing list
-> >>>      >> Openembedded-devel@lists.openembedded.org
-> >>>     <mailto:Openembedded-devel@lists.openembedded.org>
-> >>>      >> http://lists.openembedded.org/mailman/listinfo/openembedded-d=
-evel
-> >>>      >
-> >>>      >
-> >>>      >
-> >>>
-> >>>
-> >>>
-> >>> --
-> >>> - Thou shalt not follow the NULL pointer, for chaos and madness await
-> >>> thee at its end
-> >>> - "Use the force Harry" - Gandalf, Star Trek II
-> >>>
-> >
-> >
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
+---
+ ...ld-time-hardcoded-python-binary-path.patch | 29 +++++++++++++++++++
+ .../recipes-support/itstool/itstool_2.0.5.bb  |  8 ++---
+ 2 files changed, 31 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-support/itstool/itstool/0001-Don-t-use-build-time-hardcoded-python-binary-path.patch
+
+diff --git a/meta-oe/recipes-support/itstool/itstool/0001-Don-t-use-build-time-hardcoded-python-binary-path.patch b/meta-oe/recipes-support/itstool/itstool/0001-Don-t-use-build-time-hardcoded-python-binary-path.patch
+new file mode 100644
+index 000000000..b91105330
+--- /dev/null
++++ b/meta-oe/recipes-support/itstool/itstool/0001-Don-t-use-build-time-hardcoded-python-binary-path.patch
+@@ -0,0 +1,29 @@
++From cd9b56224895576125e91cca317ace8a80f3eb77 Mon Sep 17 00:00:00 2001
++From: Piotr Tworek <tworaz@tworaz.net>
++Date: Sat, 27 Jul 2019 10:19:11 +0200
++Subject: [PATCH] Don't use build time hardcoded python binary path.
++
++This path obviously won't work on target since they refer to build
++machine directory structure. Native builds will also fail if local.conf
++has INHERIT+=rm_work. Instread of hardcoding path to python binary use
++whatever is found in PATH first. This should also allow the tool to use
++python3 binary provided in recipe-sysroot-native.
++
++Upstream-Status: Inappropriate [OE specific]
++---
++ itstool.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/itstool.in b/itstool.in
++index b3c0033..7df2476 100755
++--- a/itstool.in
+++++ b/itstool.in
++@@ -1,4 +1,4 @@
++-#!@PYTHON@ -s
+++#!/usr/bin/env -S python3 -s
++ #
++ # Copyright (c) 2010-2018 Shaun McCance <shaunm@gnome.org>
++ #
++--
++2.21.0
++
+diff --git a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
+index a0af44a71..2e7e8f194 100644
+--- a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
++++ b/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
+@@ -7,15 +7,11 @@ inherit autotools python3native
+ 
+ DEPENDS = "libxml2-native"
+ 
+-SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2 \
++           file://0001-Don-t-use-build-time-hardcoded-python-binary-path.patch"
+ SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
+ SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
+ 
+-do_install_append() {
+-    # fix shebang of main script
+-    sed -i 's:^#!${WORKDIR}.*${PYTHON_PN} -s:#!${bindir_native}/${PYTHON_PN} -s:' ${D}${bindir}/itstool
+-}
+-
+ BBCLASSEXTEND = "native"
+ 
+ RDEPENDS_${PN} += "libxml2-python"
+-- 
+2.21.0
+
 
