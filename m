@@ -1,47 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E4367EE74
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 62C746C1BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 00:21:01 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id g18so41755721qkl.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jul 2019 17:21:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=sZNqExiAWrTXW2FiWaZOmDwklD0NLOben4g+s0hbSeo=;
-	b=DvPxYqkAGLWjS+LRON/oDB1VvlUg4QkSngzVtMCiMseJ1RxRZyLm/WcPS4tSayjBBQ
-	UPio16mKnFZm5KWFHpYUIYTLKWt9dGiCqA3JKaIKD+ocPWCUSNsHddW1CpO/XNd5liPA
-	lgt6iNWWMmVwebxEaHuiWFkPIFaMWCPwfNB0GykTsV32W9t+cWZTOpoRRXOs+2iPqVdo
-	QfuPRkmAW8X3SwzGkE4SaVaOy0yyyPtKq8XOEvEGfVbv1VdIUiqYoWZnYs7T/ZBBVJM5
-	0TsDKrYBnOHfohIKxATlk7/+QCb29s8v28MFoHg+1GeYNvtxgU5t6wkZJiJ3O49H6Xhv
-	9MDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=sZNqExiAWrTXW2FiWaZOmDwklD0NLOben4g+s0hbSeo=;
-	b=t0zYuqAgOmxYDeMniVSaxMa+8FExSiGAJVBal1f+0DIqL8vuURXLEhSRNvJYRfxkWR
-	uKGEBOru5EGHvnRI5KD4a1gl7bncBpQpiw189qx/thSdC88iabNq886FFvx8kKQNqoHy
-	6daOuY6N93ODS2VjzJF4JtrXS9Tbf4/BxOVO0GHtHIxcyeLesGzKjQV93apFW4Y+Gk86
-	F/qnR+d0ORhQJkA3wGaEXgJ3weE4Rbc7RQdQnDm+cXXk2O1qbLpNai6/J7MQEP9p/sAs
-	krgA57wYxMotlWEuH0xqidNu08g8s5gAj012/mKE3k+HOM00g8TgysnEk2C8eEgdj/0u
-	sOhQ==
-X-Gm-Message-State: APjAAAXdC8B5CPlk6yKWgyD3JS+CxlcUnLD3kMWSMEuJPCq9L1rO/Ko+
-	1FDytgsNYK1aCB3RnfV59OPpBk4/yThJtk3G3ma6n3bo9fY=
-X-Google-Smtp-Source: APXvYqzLQErjs5nelDC4167Xd4gP8mVGeQSMY/G9YnfshFsScMBxTNtwkXw959fLBnHa4ePR6nPqIhH5Yo6zApkMZCg=
-X-Received: by 2002:a37:c81:: with SMTP id 123mr70238795qkm.474.1564273261733; 
-	Sat, 27 Jul 2019 17:21:01 -0700 (PDT)
+	Sun, 28 Jul 2019 09:37:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45xHmS20Qsz4t;
+	Sun, 28 Jul 2019 11:37:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1564306664;
+	bh=kOWnYWpSKYh1pswzbmK1pcgF26pZQE8NjxtZjdsDqK0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=hK4TrFK3abuVZQZCB2mFSdJqm8GCeOZ3usQ8tchvv3oTn2k8xrCHJNSBS0rmOvfTR
+	Rk9AQmrzwm/9Y1isNvO4datdeGeUu6XfL3/nqOFl1lZ/gmnfe4w9JJ0WHy2DHtNc/I
+	qNAXIcD8VQ+TYdR9XpQStEmsnvqAgzgqDSUuiWb62x6RVKaXXYUwi1rGanv8yB4i8i
+	3d9tnG4QMTRZTHsVfUcJ2WJCnjOx4Sj88QmwUGJpnpuYLLlo7fmpwy2tKba40gq6/Z
+	ou2ZnaLd8+Acdqd5fm4RBmwDYYwp0VkwgivRhGzPOm9bNh/3enSTBXh6eE0kGCEtec
+	yn3C30PZP05X6p5BNKTzMNFnqtT+lDTewoMY/0sog3vhHqSBeINTjoUd1Z9j0YhVbU
+	K4Qy6A769pqSSeQLfu/SlCpatOxn7XXY+llNgRxS+Br9L+fOcdW+cmwUkqLiCWwrh0
+	BfNWzF7+SfC7a/DK+K9NEygN4khA6TPsgwl380xlU86PLj1JBHgm3gf5796gDpGVnr
+	iBABqOhj++MlOIQafQVRoSD/jZs6o8ylGIDuSzzEmBVT5mYzmvJXd5+nlY22r0UWZQ
+	6GGCWTLTOSuJRDSGYu5aCbzlDCcv1G++nPfivct801GfNVnxnpBJOCFm1FXVed/zVY
+	6rGRfAdkNMXAyMBqA705Ovek=
+Date: Sun, 28 Jul 2019 12:37:41 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190728093741.GB15666@localhost>
+References: <20190727200614.5661-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20190726093736.24607-1-ayoub.zaki@embexus.com>
-	<20190726093736.24607-2-ayoub.zaki@embexus.com>
-In-Reply-To: <20190726093736.24607-2-ayoub.zaki@embexus.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 27 Jul 2019 17:20:35 -0700
-Message-ID: <CAMKF1sp1ehMTaBQPeGJDGmL-s9RYrHVdwuzVrzgDjHYsvk=cRA@mail.gmail.com>
-To: Ayoub Zaki <ayoub.zaki@embexus.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3 2/2] usbguard: Initial recipe
+In-Reply-To: <20190727200614.5661-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] collectd: Fix build with glibc 2.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,73 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jul 2019 00:21:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 28 Jul 2019 09:37:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-We are seeing below failures on mips
+On Sat, Jul 27, 2019 at 01:06:13PM -0700, Khem Raj wrote:
+>...
+> +Glibc 2.30 has added deprecation notice and collectd detects it as
+> +warning
+> +
+> +Fixes
+> +sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
+>...
 
-checking for LIBGCRYPT - version >= 1.5.0... ERROR:
-/usr/bin/libgcrypt-config should not be used, use an alternative such
-as pkg-config
+This package accumulates patches in OE that could be avoided by 
+configuring with --disable-werror instead.
 
-see https://errors.yoctoproject.org/Errors/Details/254961/
+cu
+Adrian
 
-On Fri, Jul 26, 2019 at 2:37 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
->
-> Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
-> by implementing basic whitelisting and blacklisting capabilities based on device attributes.
-> ---
->  .../usbguard/usbguard_0.7.4.bb                | 35 +++++++++++++++++++
->  1 file changed, 35 insertions(+)
->  create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
->
-> diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> new file mode 100644
-> index 000000000..9ec21d2c7
-> --- /dev/null
-> +++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> @@ -0,0 +1,35 @@
-> +DESCRIPTION="USBGuard framework helps to protect against BadUSB."
-> +HOMEPAGE="https://github.com/dkopecek/usbguard"
-> +LICENSE="GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-> +
-> +SRCREV = "0ab32d7fa092067030fcbef530968b5cc237b08c"
-> +SRC_URI = "git://git@github.com/USBGuard/usbguard.git;protocol=https;branch=master"
-> +
-> +inherit autotools pkgconfig systemd bash-completion
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
-> +       dbus dbus-glib libqb libcap-ng libgcrypt libsodium protobuf pegtl"
-> +
-> +EXTRA_OECONF += "--with-bundled-catch"
-> +
-> +PACKAGECONFIG ??= "libsodium \
-> +       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-> +       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-> +
-> +PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
-> +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
-> +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
-> +PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
-> +PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
-> +
-> +SYSTEMD_SERVICE_${PN} = "${PN}.service"
-> +SYSTEMD_PACKAGES += "${PN}"
-> +
-> +do_install_append(){
-> +
-> +       sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \
-> +                                               ${D}${sysconfdir}/usbguard/usbguard-daemon.conf
-> +}
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
