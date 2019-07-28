@@ -1,36 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 239867F20A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 1234E731CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 16:20:15 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45xShw3bNRz2C;
-	Sun, 28 Jul 2019 18:20:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564330816;
-	bh=3n/R4nNH2LqvymkXHbegM2xmQMYMFHgIBKkmDoScO1w=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=tjnGXNjZyfiaUhbBas075EwfiziX8tVQKwiL0vS4IwU5XYpOvPhkQSCSkfgb5O1eA
-	YJSTdFw3P6p7oI92n+G4ZRAmHGCmXBqeKXgyfcW1QSlewiGJqznqtrd8DfUnxkcx1d
-	sf1nBDsAVRirIHSP6CYIxBknFBpu7xIBarZ89hUJeV254vQ0n5nPyV424Upy9x/44k
-	k24NmR8Ic4Qv9nvLi8fSJj2Hk2uz/NdyNMIwot6Pcep1V+3Z482WH0//djCSO/6INt
-	H0gTIam6ZpJeZ2ftBZIkmplERiqqQM7vZm/PXfC3PsO9h5hKkJIJqdlWKn1+ivwp16
-	LVpznRsMJkNXdSIHc8znmdAguyS0h7NaNldF783rfbR7E09keBR0bBHZ6loX4FcwBw
-	5pY9NX7pLuFdDfM1TdjOaS05zSiZS5SHSX/+z/sF/H/5W6Itfyc63RqDRvfKvWB8cO
-	krNu4hshQkNfbnk0Mx7MyxDNXkAWK0I7ntRgfBfaxHEQAUjztylMobTTV9abL+YnGf
-	lGUR8yTo+z/1cZ4K69KutrKmCjkq2T6vivcIkBuxkKdajqODOpGaAdfrXke6ZF1bwy
-	IpswawQwiDV/GFTsjZ7V8dmNBORD5EEJJQUmG28kDGQv8zPQjhm7ESqo+eBwJ2EJa2
-	rebgXMUhZx72a/SBPgC8ei40=
-Date: Sun, 28 Jul 2019 19:20:13 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190728162013.GA13799@localhost>
+	Sun, 28 Jul 2019 20:08:18 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id i11so57510782edq.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Jul 2019 13:08:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Ij5fvEKlXZqCjEKgMB+PsLXj3MHof4HRxEBILPCN0aI=;
+	b=kjhZurry8HnLX1aiPh8WDngLQKivc+LYYCPAz+6/XLUS8a9CDmB3UwPqQ6yXPJbZ7c
+	+b+/9JVmn3zmR6e1yTknVCfwuVrJrMyMa8IYcZypiMNyykccvj1+hivrOB5AZr/aaDeG
+	DyOjX4rWacb7954vPby/+eZ13xy0X1wVfmtvvZzSRugXyvUc+tsEBG2HxK1w0wXkqN6k
+	iNqNKpq+6ZPQsgNxmtUNPko12f49RnfpXtIXC1W0x75NKZsdYbo5O4/QQ3yIupMcM6xl
+	8vSztlek7CSFOYVGVPLWCDOeFgHLIwhh8Ktl/td4+op09dM7x6kItLEPY1TSud0mfax6
+	Kmpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Ij5fvEKlXZqCjEKgMB+PsLXj3MHof4HRxEBILPCN0aI=;
+	b=iN0Db9XAC7VmYa367M2VOXAFkoAlF/9zi9Ww/O10+4CudNzJAIh7dS3nire1CPMHDv
+	g7+Sp3gxFinLoujOfdpNu7fn9nrt3iOobYpZCz1NdmsISF+FNaVCh6y9Z2X2rL8Ze2st
+	p/OmPk6uZhbICPJcGuqX2IHlb2Yv7GfnLERnEsYirc3tvtZO/LiojS9vXDtB1y6NDn65
+	HwMziSz2qUcPN/KdE1v3l+f/FJMrHw2X0bPIaJ5GbBvTbQjfV08/0vagvB3RAEs8DTh0
+	BzCQX0OqGveduivQKfguIfR1+4ohoIOiFnlnPvcOt6vhk7U8jCMlA2iipfcT55YI0MvS
+	r4/A==
+X-Gm-Message-State: APjAAAXQGdQKrFNoAkIclZxleLZDknBAdEgTUbqVJc0gEZB2sg0cISxz
+	PsFNxvPZ6j4HpiQV/LPhu+1WBwhUbMeaaYe75qM=
+X-Google-Smtp-Source: APXvYqzYAlamt/VuoDdQ+wQKABBmfBfdbL7rW/Rx8xgsIpNICe3YmUaYrQrcFZQHdwd4fTr39pqtXpepOiPGjmpuCT4=
+X-Received: by 2002:a17:906:e95:: with SMTP id
+	p21mr80428559ejf.205.1564344499535; 
+	Sun, 28 Jul 2019 13:08:19 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190728105220.20595-1-bunk@stusta.de>
 	<69940a08-dfb2-cd3b-1e31-af3f69aa5591@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <69940a08-dfb2-cd3b-1e31-af3f69aa5591@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
+	<20190728162013.GA13799@localhost>
+In-Reply-To: <20190728162013.GA13799@localhost>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 28 Jul 2019 22:08:24 +0200
+Message-ID: <CA+chaQcF5WfXW_Ryo9q0Ub2rjMKmPUQVXNA_dAw5Nqr-9dCMWA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-gnome][PATCH] gnome-system-monitor: Add DEPENDS on polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,50 +57,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jul 2019 16:20:17 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Sun, 28 Jul 2019 20:08:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Jul 28, 2019 at 08:32:37AM -0700, Khem Raj wrote:
-> 
-> On 7/28/19 3:52 AM, Adrian Bunk wrote:
-> > The build fails without polkit in DISTRO_FEATURES:
-> > FAILED: org.gnome.gnome-system-monitor.policy
-> > msgfmt: cannot locate ITS rules for org.gnome.gnome-system-monitor.policy.in
-> > 
-> > Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> > ---
-> >   .../gnome-system-monitor/gnome-system-monitor_3.32.0.bb          | 1 +
-> >   1 file changed, 1 insertion(+)
-> > 
-> > diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-> > index 701b0891c..8d39101e9 100644
-> > --- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-> > +++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-> > @@ -10,6 +10,7 @@ DEPENDS = " \
-> >       gtkmm3 \
-> >       libgtop \
-> >       librsvg \
-> > +    polkit \
-> >   "
-> this should be probably guarded with polkit as DISTRO_FEATURE knob as well.
+It does tell that there are errors, but we don't want errors in "bitbake
+world" :).
 
-The error message already tells that automatically:
+inherit distro_features_check
+REQUIRED_DISTRO_FEATURES = "polkit"
 
-ERROR: Nothing PROVIDES 'polkit' (but /home/bunk/sources/meta-openembedded/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb DEPENDS on or otherwise requires it)
-polkit was skipped: missing required distro feature 'polkit' (not in DISTRO_FEATURES)
-ERROR: Required build target 'gnome-system-monitor' has no buildable providers.
-Missing or unbuildable dependency chain was: ['gnome-system-monitor', 'polkit']
+tells the same for gnome-system-monitor directly without showing any errors
+(because it's automatically skipped when polkit isn't in DISTRO_FEATURES).
 
+On Sun, Jul 28, 2019 at 6:20 PM Adrian Bunk <bunk@stusta.de> wrote:
 
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+> On Sun, Jul 28, 2019 at 08:32:37AM -0700, Khem Raj wrote:
+> >
+> > On 7/28/19 3:52 AM, Adrian Bunk wrote:
+> > > The build fails without polkit in DISTRO_FEATURES:
+> > > FAILED: org.gnome.gnome-system-monitor.policy
+> > > msgfmt: cannot locate ITS rules for
+> org.gnome.gnome-system-monitor.policy.in
+> > >
+> > > Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> > > ---
+> > >   .../gnome-system-monitor/gnome-system-monitor_3.32.0.bb          |
+> 1 +
+> > >   1 file changed, 1 insertion(+)
+> > >
+> > > diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/
+> gnome-system-monitor_3.32.0.bb
+> b/meta-gnome/recipes-gnome/gnome-system-monitor/
+> gnome-system-monitor_3.32.0.bb
+> > > index 701b0891c..8d39101e9 100644
+> > > --- a/meta-gnome/recipes-gnome/gnome-system-monitor/
+> gnome-system-monitor_3.32.0.bb
+> > > +++ b/meta-gnome/recipes-gnome/gnome-system-monitor/
+> gnome-system-monitor_3.32.0.bb
+> > > @@ -10,6 +10,7 @@ DEPENDS = " \
+> > >       gtkmm3 \
+> > >       libgtop \
+> > >       librsvg \
+> > > +    polkit \
+> > >   "
+> > this should be probably guarded with polkit as DISTRO_FEATURE knob as
+> well.
+>
+> The error message already tells that automatically:
+>
+> ERROR: Nothing PROVIDES 'polkit' (but
+> /home/bunk/sources/meta-openembedded/meta-gnome/recipes-gnome/gnome-system-monitor/
+> gnome-system-monitor_3.32.0.bb DEPENDS on or otherwise requires it)
+> polkit was skipped: missing required distro feature 'polkit' (not in
+> DISTRO_FEATURES)
+> ERROR: Required build target 'gnome-system-monitor' has no buildable
+> providers.
+> Missing or unbuildable dependency chain was: ['gnome-system-monitor',
+> 'polkit']
+>
+>
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
