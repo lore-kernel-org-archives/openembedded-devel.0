@@ -1,33 +1,58 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 520A27F211
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D2D67D6B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 10:52:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45xKQh62cRz4M
+	Sun, 28 Jul 2019 15:26:10 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id b13so26722962pfo.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 12:52:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564311149;
-	bh=rfxH6EgXnNOVrVh0NCYtPrREtYdKRTcAzF+UI1NZ8uU=;
-	h=From:To:Subject:Date:From;
-	b=B+ruqhwcptNVEtTRgzriDT7xizUNFAHiRO3kacAKOHV/zQswC+o7q0i5xt7ZzGn7W
-	kVQTFIa7I1HsgGajo+JRfJ6oDN8oPHIn7nshA78rKeOpBUCUzYSPG6X0RcP5VXAThc
-	Kxhbna1lk1zXUX3vArJpsoyxgLXHz+0XJXLz5ngI95b4oiSlLr7GwPldNfMykF0eCu
-	tess9q4HVXfM67RKZ5JaD3J3AV1VxYrNjpdu28mkHyfDVkfrhhMvGFU4NN4DUBz6gj
-	goACAeI3QVh6I3wh/bjRGLWITgmuvIlyMlkjhbSpZhpEpIiQ2Hb9+m/+FS9jVzzkm6
-	CRD+3Vy3WmyTrZVOo+Z8G//7f2SGjLMXFVgST3gWv00R+8U5s8/rGRzx5lbI2M2jqb
-	8F92fWJFA47M/7iIt4z9cEGsPN+exkdzGRl4B7FSTHdWlx9X6hEmZhPOu2r/1c/sMp
-	GQUpY6nGfX+7BtOcyDh8q8FiD2k9DjS8/c9y9kTJjcEjYVMwPStFlvsBBj1cglH1HL
-	Ydg75UTLEaqpr7J2tH+n4Zl8EYVm7TCNz+JTKgOduTopWN8ijwTdB8vuOptesRfLNp
-	Mw8xDBddQxHVpDd+PRkMsZbL6YHDzL777KQhsGU9/pPMrYV3VF0C/Gtfaf2FLRWTuj
-	dvZIkvBnvFnuVg6hfJ2wj3y0=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Jul 2019 13:52:20 +0300
-Message-Id: <20190728105220.20595-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-gnome][PATCH] gnome-system-monitor: Add DEPENDS on polkit
+	Sun, 28 Jul 2019 08:26:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=4P4QatV92OEuMKmGZW3wRIGkyisBSVEoov+WHp3YRHA=;
+	b=X5U29COxmGiFt8fDqcd/TIBcSthnXGigPyvMZ2atZ3DwX7XuPEzDNK3gz3gO6wYb6J
+	syQtG1SMlKK5i3Z4HaC1AkGVhPgVDWkLgzfa6kxbxhkDOiFJTmMUlKZUeD8FA93FnkDt
+	TAizUS8KL1shgNsmKKmT1id/M9X1xSnizioZ9jP5DzrrmE3Z6IWWgL0FqXZWdKJuJA5o
+	eyxdbgAQenDq2vaMuMjv4R9Pu9fV5LE3vb6mk+mRWcJy4gSAs33G18Q22OcP/Utou3ll
+	5/JjDo0o+mqYhzBqGnDo2QW2AhgH2fyAW6GzeS6R4kCjhgJKBV1wqSI8ps7OwSmd45Nh
+	xrsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=4P4QatV92OEuMKmGZW3wRIGkyisBSVEoov+WHp3YRHA=;
+	b=ijFrER0e5AqqtI6Rn0ZN+ipoKl6hoT7Fo3TOg8RtprThwQyTNUk2VYQT6QMueDY8NY
+	wAr/ZXPJgTFgDQ8TLMYbnb2fT8Q5p4au3OW/8xNc9oWiNF14DohBzAN6Y6N5kWFFTBdA
+	7xTAb+U8ILaUYpdxOTOajDxv0rNweo5SinuHLwBxkZDdX4qIYyzh/txh8FMXuKmhOtst
+	0h5vhDPG7JeB00iElJrKE2PQyOXTgROoFPb4fUdl2no5/evMb5vPgcocVzddKPGypXov
+	jeDYBx65j5eBR3MgKGoc9KcTa5YJTO1mLLGMjdLBe4EmIiVIfTGnV4TjQ8k/IsyU/x8a
+	cSlA==
+X-Gm-Message-State: APjAAAWPTUbLLGDkVf+YE4caKxDAn1gUy4KZUMbfxDSYQOtR4GggyEE0
+	R0gbrF9G0Ig9oH4+MoNyPSBAzQyHcE8=
+X-Google-Smtp-Source: APXvYqyjlsl89NBvsUCJCcWFfkPztWmIXovRp0QNd5lJIvYEQq1QScaS5vGSizz3YmPRDKMUDYq3yg==
+X-Received: by 2002:a63:e907:: with SMTP id i7mr98631458pgh.84.1564327570907; 
+	Sun, 28 Jul 2019 08:26:10 -0700 (PDT)
+Received: from ?IPv6:2601:646:8500:6bc6::e5a4? ([2601:646:8500:6bc6::e5a4])
+	by smtp.gmail.com with ESMTPSA id
+	v138sm66602494pfc.15.2019.07.28.08.26.09
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Sun, 28 Jul 2019 08:26:10 -0700 (PDT)
+To: Adrian Bunk <bunk@stusta.de>
+References: <20190727200614.5661-1-raj.khem@gmail.com>
+	<20190728093741.GB15666@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS
+Message-ID: <70043baa-9e74-53c0-c22c-0fd6fad7383b@gmail.com>
+Date: Sun, 28 Jul 2019 08:26:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <20190728093741.GB15666@localhost>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] collectd: Fix build with glibc 2.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,30 +65,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jul 2019 10:52:28 -0000
+X-List-Received-Date: Sun, 28 Jul 2019 15:26:10 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-The build fails without polkit in DISTRO_FEATURES:
-FAILED: org.gnome.gnome-system-monitor.policy
-msgfmt: cannot locate ITS rules for org.gnome.gnome-system-monitor.policy.in
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../gnome-system-monitor/gnome-system-monitor_3.32.0.bb          | 1 +
- 1 file changed, 1 insertion(+)
+On 7/28/19 2:37 AM, Adrian Bunk wrote:
+> On Sat, Jul 27, 2019 at 01:06:13PM -0700, Khem Raj wrote:
+>> ...
+>> +Glibc 2.30 has added deprecation notice and collectd detects it as
+>> +warning
+>> +
+>> +Fixes
+>> +sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
+>> ...
+> This package accumulates patches in OE that could be avoided by
+> configuring with --disable-werror instead.
 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-index 701b0891c..8d39101e9 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
-@@ -10,6 +10,7 @@ DEPENDS = " \
-     gtkmm3 \
-     libgtop \
-     librsvg \
-+    polkit \
- "
- 
- GNOMEBASEBUILDCLASS = "meson"
--- 
-2.17.1
+thats true but it would mask these issues by disabling werror and we 
+wont be doing submissions like 
+https://github.com/collectd/collectd/pull/3234, I would like us to fix 
+things upstream instead of masking them.
 
+>
+> cu
+> Adrian
+>
 
