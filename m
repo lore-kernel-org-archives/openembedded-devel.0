@@ -1,53 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C87227BD9A
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EDDD7F24A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 16:04:09 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id a93so26491994pla.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 09:04:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=28d1IDl2001hRXgb9etoA9b3fY+DEvl2dCuTroG3iQA=;
-	b=nAecGqefe1FBh4OdRXPCTxJYqFwDkQiOlkEbSPz2H6JdTqZB46tsm11Z/KYfNFX1LG
-	ykDVySL0m+AbytwQPVhVSda7wP3Eod+3ShRLRoLY69NV76Och5CTT5T5W+SyIcEFFbhg
-	b2AGmSMNRPluD2fxlbkuuo/6T5wEnA+R91g2+bTSNCvrbuTeckmZFzQCYv8UQhq401V5
-	QQ6tHFyJ7OIQVBrQWLLhRMvQckk0zaquDtCAyO3CVhYs5GWEtYRq56AtIFqsSar5N9gp
-	YvrPN42v0aMFPfNrnOmREx6ewVHJd3/0peR5/F81syUEwHfTZ48mzPuhp3xWD+B6vdiZ
-	n7mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=28d1IDl2001hRXgb9etoA9b3fY+DEvl2dCuTroG3iQA=;
-	b=b6dZ9vFdagakOHw8xfha3GAjwgUru2va1FrVTlAO1IpQqUibeiZzXlr1EZ3LgJXxtp
-	dfmH9JTt1DHbu37XzmrVvOnSUPfEYIntSGkIzz6kPsuJ2TSJY59CSpDOczkdXapku+z0
-	mhnCeY4gue40yQLrabvjWJTbIOqAMGUUZL5aCt8+PzJfBuzHxyRpODbvYrTJUoLDdbIQ
-	jVueGE+HjKfUANlOOe9mR560v3hfc9OrSz2f0KTAC0WkwvXegU5T866hAupZUhif/Va4
-	rCVxiINpoXud0YJC5McmGqenkTVdcWMVfSMRKEiQ5ngJzNXK0vuMooSDmr8eHieYEkjm
-	sdXg==
-X-Gm-Message-State: APjAAAVxgBi0iczBCGwPEOllG7kQOxFPk5ADfrEqMVqf7oqwPpy9ULG6
-	Bx21LS7MlfdGUwCa8CGGp3LPU6PN58M=
-X-Google-Smtp-Source: APXvYqzk3KhI15EXJZQJnOVb7KzxTzsKUD9tqUIfSwU39/OWJoJRLy4GHQ+SoiDBbgGCuqnXKgjcFQ==
-X-Received: by 2002:a17:902:1102:: with SMTP id
-	d2mr105825455pla.149.1564329850713; 
-	Sun, 28 Jul 2019 09:04:10 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	j1sm82508439pgl.12.2019.07.28.09.04.10
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 28 Jul 2019 09:04:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Jul 2019 09:04:01 -0700
-Message-Id: <20190728160401.23849-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190728160401.23849-1-raj.khem@gmail.com>
-References: <20190728160401.23849-1-raj.khem@gmail.com>
+	Sun, 28 Jul 2019 16:15:11 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45xSb322cGz2C;
+	Sun, 28 Jul 2019 18:15:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1564330511;
+	bh=mkqnvrMU2wiLy/d7Ul14HiKXEdxT6xkMByf2rEUK/bc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=tygi5E71bzaRMEyYJiOaavo0mjx7/FoH0954+aYs3hmYps/TG/hJi/gZYsm8c1hwD
+	t9WAz6MWPKkUWFTdqlT+5EuoMqiTX42nsEpGT7GIschmJvQMuPVi+yUIWgEGRo0GbD
+	7GT0wYaO8lKGYzUDPMgaOlLPGhmKjiqOgxFaV+TalmpqxNuEw9bak3wz4/jf9l2z5E
+	vksV0Oy9mLYI2Knguo/WacxAYX03k5r2y29sg3lxSJ+wC92TLU0CDYeu1WwmO0dAfR
+	lNy9MkaORyMQKVHVGYpkpCZI7iVRUNB96JAIAe0/XuHYBDqK5l86S0f3lw8f7+hGDY
+	qX6PeS9rPI8duK+KyxE1jGzoGPVyF7K7AlrC5RsD5LbFQ/fgp2OgKOGSYaBdx7S22X
+	To3Z/fwPfNXixUd2eiNpBn6pZwmC0e5h4dfZ+TINk2wGYT6Jtj7yEjHM7z5s+NeHnO
+	9ap4LKXbGuMBT94FRNFZwHKeTXbnUBEzcQBSk9A1d75zFl/dFqlW2bucumz90Z5yaR
+	XEvjFn8/hOAgsV+upFOI0MVynhIM8IN6sQSDI3vhZxdToRLWREKBV/kzE5WaV5v/OR
+	hgJQdxNMZq5kjnXcUW9L8ch8dd0sfat0mApZfpbUO2mpxL2nJs7BT1dRM/URsWdvE/
+	wjv7cRDXKkx8jiI5O+uTLEY0=
+Date: Sun, 28 Jul 2019 19:15:09 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190728161509.GA12635@localhost>
+References: <20190727200614.5661-1-raj.khem@gmail.com>
+	<20190728093741.GB15666@localhost>
+	<70043baa-9e74-53c0-c22c-0fd6fad7383b@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 2/2] collectd: Fix build with glibc 2.30
+In-Reply-To: <70043baa-9e74-53c0-c22c-0fd6fad7383b@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] collectd: Fix build with glibc 2.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,113 +45,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jul 2019 16:04:10 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 28 Jul 2019 16:15:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Apply the fix just for glibc based systems
+On Sun, Jul 28, 2019 at 08:26:18AM -0700, Khem Raj wrote:
+> 
+> On 7/28/19 2:37 AM, Adrian Bunk wrote:
+> > On Sat, Jul 27, 2019 at 01:06:13PM -0700, Khem Raj wrote:
+> > > ...
+> > > +Glibc 2.30 has added deprecation notice and collectd detects it as
+> > > +warning
+> > > +
+> > > +Fixes
+> > > +sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
+> > > ...
+> > This package accumulates patches in OE that could be avoided by
+> > configuring with --disable-werror instead.
+> 
+> thats true but it would mask these issues by disabling werror and we wont be
+> doing submissions like https://github.com/collectd/collectd/pull/3234,
 
- ...-sys-sysctl.h-on-glibc-based-systems.patch | 76 +++++++++++++++++++
- .../collectd/collectd_5.8.1.bb                |  1 +
- 2 files changed, 77 insertions(+)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch
+With what range of glibc versions has this submission been verified?
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch b/meta-oe/recipes-extended/collectd/collectd/0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch
-new file mode 100644
-index 0000000000..86a1a82cf7
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch
-@@ -0,0 +1,76 @@
-+From 090a17ca338a9311d682ecc5933b32bff67cf07f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 27 Jul 2019 14:20:14 -0700
-+Subject: [PATCH] Remove including sys/sysctl.h on glibc based systems
-+
-+Glibc 2.30 has added deprecation notice and collectd detects it as warning [1]
-+
-+Fixes
-+sys/sysctl.h:21:2: error: "The <sys/sysctl.h> header is deprecated and will be removed." [-Werror,-W#warnings]
-+
-+[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=744e829637162bb7d5029632aacf341c64b86990
-+
-+Upstream-Status: Submitted [https://github.com/collectd/collectd/pull/3234]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/contextswitch.c | 2 +-
-+ src/memory.c        | 2 +-
-+ src/swap.c          | 2 +-
-+ src/uuid.c          | 2 +-
-+ 4 files changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/contextswitch.c b/src/contextswitch.c
-+index cf3d3dae..4711e66d 100644
-+--- a/src/contextswitch.c
-++++ b/src/contextswitch.c
-+@@ -26,7 +26,7 @@
-+ #include "plugin.h"
-+ #include "utils/common/common.h"
-+ 
-+-#ifdef HAVE_SYS_SYSCTL_H
-++#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
-+ #include <sys/sysctl.h>
-+ #endif
-+ 
-+diff --git a/src/memory.c b/src/memory.c
-+index 10bccdee..50a80868 100644
-+--- a/src/memory.c
-++++ b/src/memory.c
-+@@ -28,7 +28,7 @@
-+ #include "plugin.h"
-+ #include "utils/common/common.h"
-+ 
-+-#ifdef HAVE_SYS_SYSCTL_H
-++#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
-+ #include <sys/sysctl.h>
-+ #endif
-+ #ifdef HAVE_SYS_VMMETER_H
-+diff --git a/src/swap.c b/src/swap.c
-+index 61c9e284..5a475e4f 100644
-+--- a/src/swap.c
-++++ b/src/swap.c
-+@@ -49,7 +49,7 @@
-+ #if HAVE_SYS_PARAM_H
-+ #include <sys/param.h>
-+ #endif
-+-#if HAVE_SYS_SYSCTL_H
-++#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
-+ #include <sys/sysctl.h>
-+ #endif
-+ #if HAVE_SYS_DKSTAT_H
-+diff --git a/src/uuid.c b/src/uuid.c
-+index 60d09b51..17e4dd81 100644
-+--- a/src/uuid.c
-++++ b/src/uuid.c
-+@@ -29,7 +29,7 @@
-+ #include "plugin.h"
-+ #include "utils/common/common.h"
-+ 
-+-#if HAVE_SYS_SYSCTL_H
-++#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
-+ #include <sys/sysctl.h>
-+ #endif
-+ 
-+-- 
-+2.22.0
-+
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb b/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-index 6dff18c16b..0951ac076f 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.8.1.bb
-@@ -14,6 +14,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
-            file://0005-Disable-new-gcc8-warnings.patch \
-            file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
-+           file://0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch \
-            "
- SRC_URI[md5sum] = "bfce96c42cede5243028510bcc57c1e6"
- SRC_URI[sha256sum] = "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
+Putting !defined(__GLIBC__) into source files is usually wrong,
+and in this case it is unclear what happens with ancient glibc versions.
+
+Note that --disable-werror would do the right thing will all glibc 
+versions past, present and future since the file will no longer be
+included without any patch needed once the header is actually gone.
+
+> I would like us to fix things upstream instead of masking them.
+
+Status quo is that people look at harmless issues like this one in the 
+tiny subset of packages where -Werror is used, but noone seems to care 
+about serious runtime problems like implicit function declarations in 
+other packages.
+
+And looking at the huge number of questionable patches in OE I don't 
+agree that it would in general be a good idea to apply fixes for random 
+issues in OE before they have been applied upstream - there are plenty 
+examples in the open source world where downstreams "fixing" issues in 
+upstream software caused problems, including major security issues
+(I remember Debian/Ubuntu releases shipping a patched openssl generating 
+predictable private keys due to a bogus Debian "fix" for a Valgrind warning).
+
+Reality is often more complicated, but in general downstream 
+distributions should try to avoid touching the upstream code
+and aim at shipping unpatched upstream sources whenever possible.
+
+cu
+Adrian
+
 -- 
-2.22.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
