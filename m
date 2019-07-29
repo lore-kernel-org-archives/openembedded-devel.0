@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A7807F291
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D31497F27D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 14:40:59 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id v22so44293750qkj.8
+	Mon, 29 Jul 2019 15:02:00 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id q22so894699iog.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 07:41:00 -0700 (PDT)
+	Mon, 29 Jul 2019 08:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DT6vThhioLuZ8WZRx3bGwyIES1mq8rsTmzlpnNV3COg=;
-	b=EwXSJB62wo9yEZfx3f4PT9u1bCRCmkTjtfZLaqUo7v0krQyK7Kk3RnpiP8d8IW6fDX
-	CLYXPwdxEYKGKeSW13RghY1aS1xtIAbp2W6j1oy728LFKJV9JdixTRc7HXuxUeRhlXMN
-	UTaaPv6eQMSV8RVvhlInkpyhK+w5Bdrf5jDNM375Vw7YtHJZvlsGuOUD/joIYcNe62EJ
-	QmT43AazaM17LG/IReEXO3zd5VAYWOG+LXTkWEjZShrD9MJ5fr2yLZdxLxxKNjpN2K0W
-	DBE47OgqGJBs057Ax4iX+iBST7EGGfVtXufFokTojh3PkHlmO7EN2gezAZJ+JOd1WIB3
-	z1xw==
+	:cc; bh=cWGtdIgV8jPG3mllpt/zgmytTuXemHA1kLF8i+o+b5U=;
+	b=tRoPvTdvmYHqpZ1Ffs/ihOr+6hh8rUpgEN11jKncgBaJRYPFizR2wDj7yOkqnZpb6i
+	lOMakaaCe4DPayt/+b6RwvJAjiu+YnQtP/kku7RIGNYxb7v+UZ4GnjbiB5ij1lTrBNwJ
+	AhCJYkH1bKrmEHmUeGA2oMSW/+OoAZmY5Wk4+0kngVXTP2RToPJXgPxTWQBw6XS+X5xJ
+	dVbPlaQYnNnaGSliKeUlVyVzECDki28MUAImKLm6mQZxY2XiGzUsSO2h7MtDEkjrizbW
+	q1REqxyq2buUmZJVEzArYYgv08Su6yyKpejCvgTYyzu7TLThDwEJioHkzYDxfahZHIdZ
+	Rgsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=DT6vThhioLuZ8WZRx3bGwyIES1mq8rsTmzlpnNV3COg=;
-	b=iDJlWn44QS+0MDVMHh982IpeXO6HUG96E9PtmRdM7nx+vb4nvzaeQ5Ir0pn6tBghFd
-	j8l2XAb93sQi6vE/6RGm4m8cxqzlb/ncsJRqllYr7tbmOkAHHN+toGRrHeKavuJYILs0
-	oyl/P79IKZgwTPu44ITNw6j9+lEL/NlKkFEjDA8pfwtJFwvG8udE/i4WGJUqH37HGX1u
-	cniz7GzkkIAC6pzgMlyNMynMxMObXvIByP2ledqtFpfqmHlTk//epZ7YtOiA3Ox9vi/r
-	27EY1h8q8cLpZ+iKz7vHxZyOFFQAikeZ50hZhK5mL6PH6/7o3/06lhNr65AbjBwG9jOo
-	5rnA==
-X-Gm-Message-State: APjAAAXHB1BK9XHdeTjl48YENp9s3NUxd/hf+q0fRF6mlUJX6Zyc68Ll
-	uVp/KlF89HY1WgbEQFiP+e1L4nrx14IAOfXo1S4moJ3ZEsc=
-X-Google-Smtp-Source: APXvYqwYmYG7m+R2x/uep86O43BY4vFwHG1ES0vi+fXNy5zfgxFgGr6rpwurs9nm5Y+JM9Xkmx62OPFKEzybZgfAKBA=
-X-Received: by 2002:a37:c81:: with SMTP id 123mr75481574qkm.474.1564411259751; 
-	Mon, 29 Jul 2019 07:40:59 -0700 (PDT)
+	bh=cWGtdIgV8jPG3mllpt/zgmytTuXemHA1kLF8i+o+b5U=;
+	b=gDJY3HB1X6r6oB6tjVuY5S0BM8VOWKRWezMxe1D8E4cj/z0Ri7k3goCCTGQkrQ9bLP
+	ZHqm0bI6lVAvMBTRQW/eOjUoTIvcaljMYSxa76j8oVXZ5S0y1nCfY4rwUP62ieroN+f/
+	x3IA7z8qTb+Jjwh+F56AEzdcZ+iwVLiS4DAxxoiuHJw/wOC3kV8zigNCPTYuY307GxV4
+	xF25N8K/bLOZ6yo6lBrWliE5kZ00UELkHdKC4Jb759+/jnVMiJddm8fNccnqQaUYSKr/
+	SjewPju6OhikjU63Ie1rBeCMxU3e0qwaR+MxzGbacuytdi47ny7B030GRCMPK2KrVHjw
+	ouvQ==
+X-Gm-Message-State: APjAAAU3t7XB1Bz+SH+iRr715eStP+Hig4OQTJx/rN5G5r4x+iykklGZ
+	q4gWO1Awpr71rz1Q7UEu/CCTiTuacWqrxnl+kF4=
+X-Google-Smtp-Source: APXvYqxH4BOP8pK3sy6ufDLAKRvTgxf1IELkW2DuVxoal2YnVCkEZ8F/5t1j+/eDo7JVk55UJOIC/JBAGvL6P2R2y7M=
+X-Received: by 2002:a5e:a712:: with SMTP id
+	b18mr100071896iod.220.1564412521309; 
+	Mon, 29 Jul 2019 08:02:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190729080432.20866-1-ayoub.zaki@embexus.com>
-	<CAMKF1sqUeboVgvtsuo5GR+VrvtPfO_Z9xS2cSzkgYT813LbG2g@mail.gmail.com>
-In-Reply-To: <CAMKF1sqUeboVgvtsuo5GR+VrvtPfO_Z9xS2cSzkgYT813LbG2g@mail.gmail.com>
+References: <20190727203020.30368-1-brgl@bgdev.pl>
+In-Reply-To: <20190727203020.30368-1-brgl@bgdev.pl>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Jul 2019 07:40:43 -0700
-Message-ID: <CAMKF1so-GUvD7pJ9Btq3Pge1Eoe6EaLvFEEz5DL4D0vQfM+SHg@mail.gmail.com>
-To: Ayoub Zaki <ayoub.zaki@embexus.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v4] usbguard: Initial recipe
+Date: Mon, 29 Jul 2019 08:01:45 -0700
+Message-ID: <CAMKF1spcBm6CRL10TxFjSL4GOxgLBzk5EaA7PKFnLF12N0y5RA@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libgpiod: put gpio utils into an actual separate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,119 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 14:40:59 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 15:02:01 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-there are build failures still
+Fails to build
 
-https://errors.yoctoproject.org/Errors/Details/255457/
+https://errors.yoctoproject.org/Errors/Details/255488/
 
-On Mon, Jul 29, 2019 at 7:14 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Sat, Jul 27, 2019 at 1:30 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
-> On Mon, Jul 29, 2019 at 1:04 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
-> >
-> > Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
-> > by implementing basic whitelisting and blacklisting capabilities based on device attributes.
-> > ---
-> >  ...kgconfig-instead-of-libgcrypt-config.patch | 25 +++++++++++++
-> >  .../usbguard/usbguard_0.7.4.bb                | 37 +++++++++++++++++++
-> >  2 files changed, 62 insertions(+)
-> >  create mode 100644 meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
-> >  create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> >
-> > diff --git a/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch b/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
-> > new file mode 100644
-> > index 000000000..022320b40
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
-> > @@ -0,0 +1,25 @@
-> > +From 85a3c46fa0bcf05d824b86b7e5412ec65924e86a Mon Sep 17 00:00:00 2001
-> > +From: Ayoub Zaki <ayoub.zaki@embexus.com>
-> > +Date: Mon, 29 Jul 2019 09:46:56 +0200
-> > +Subject: [PATCH 1/1] Use pkgconfig instead of libgcrypt-config
-> > +
-> > +---
-> > + m4/libgcrypt.m4 | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/m4/libgcrypt.m4 b/m4/libgcrypt.m4
-> > +index 6cf482f..d674eae 100644
-> > +--- a/m4/libgcrypt.m4
-> > ++++ b/m4/libgcrypt.m4
-> > +@@ -28,7 +28,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-> > +      libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
-> > +   if test x$libgcrypt_config_prefix != x ; then
-> > +      if test x${LIBGCRYPT_CONFIG+set} != xset ; then
-> > +-        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
-> > ++        LIBGCRYPT_CONFIG=$(shell pkg-config libgcrypt)
-> > +      fi
-> > +   fi
-> > +
-> > +--
-> > +2.17.1
-> > +
-> > diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> > new file mode 100644
-> > index 000000000..75ab62c3a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
-> > @@ -0,0 +1,37 @@
-> > +DESCRIPTION="USBGuard framework helps to protect against BadUSB."
-> > +HOMEPAGE="https://github.com/dkopecek/usbguard"
-> > +LICENSE="GPLv2"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-> > +
-> > +SRCREV = "0ab32d7fa092067030fcbef530968b5cc237b08c"
-> > +SRC_URI = "git://git@github.com/USBGuard/usbguard.git;protocol=https;branch=master \
-> > +           file://0001-Use-pkgconfig-instead-of-libgcrypt-config.patch \
-> > +          "
-> > +
-> > +inherit autotools pkgconfig systemd bash-completion
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
-> > +       dbus dbus-glib libqb libcap-ng libgcrypt libsodium protobuf pegtl"
-> > +
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 >
-> make it +=
+> Currently tools are built conditionally depending on whether the
+> corresponding PACKAGECONFIG option has been set and, although they
+> live in a separate libgpiod-tools package, the user cannot simply
+> select it - he has to additionally extend PACKAGECONFIG. While this
+> makes sense for python and C++ bindings, the tools don't have any
+> dependencies other the libgpiod. Make libgpiod-tools an actual
+> stand-alone package: always build them but install them only if
+> user selected libgpiod-tools.
 >
-> > +EXTRA_OECONF += "--with-bundled-catch"
-> > +
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>  meta-oe/recipes-support/libgpiod/libgpiod.inc | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 >
-> we do have catch package recipe, have you considered using that
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> index 89679cb91..07ce35a7f 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
+> @@ -8,11 +8,9 @@ SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
+>  inherit autotools pkgconfig
 >
-> > +PACKAGECONFIG ??= "libsodium \
-> > +       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-> > +       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-> > +
-> > +PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
-> > +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
-> > +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
-> > +PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
-> > +PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
-> > +
+>  PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> -PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
+> +
+> +EXTRA_OECONF = "--enable-tools"
 >
-> I think the dependencies added unconditionally above should be added
-> via packageconfigs.
+>  PACKAGES =+ " ${PN}-tools"
 >
-> > +SYSTEMD_SERVICE_${PN} = "${PN}.service"
-> > +SYSTEMD_PACKAGES += "${PN}"
+>  FILES_${PN}-tools = "${bindir}/*"
+> -
+> -RRECOMMENDS_TOOLS = "${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '',d)}"
+> -RRECOMMENDS_${PN} += "${RRECOMMENDS_TOOLS}"
+> --
+> 2.21.0
 >
-> Using PN on right hand side will fail for multilib builds. May be use BPN
->
-> > +
-> > +do_install_append(){
-> > +
-> > +       sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \
-> > +                                               ${D}${sysconfdir}/usbguard/usbguard-daemon.conf
-> > +}
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
