@@ -1,49 +1,23 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
-	[209.85.167.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C8A37D534
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 22:40:27 +0000 (UTC)
-Received: by mail-lf1-f53.google.com with SMTP id s19so40688616lfb.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Jul 2019 15:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=0yPbc2DO/Sn1qARnaCURxAQk7yzeL7iEH1uKBd7Y11s=;
-	b=ft3xd3juSIZi19GiMMew7qD6VLH6r30XYm47zeyDUa+Pp+Jiys38+Htsglm58xsoox
-	gppQ9EDQSBhJIj2o9ORIHIFPosZdqeSe3kQPgneo/NAlsh1/2HemRXa14TdiY6b53mK3
-	j5v53JtnyCl3lHEVm+oZMVftEgKYTHTwAPgKcJ/p2G9SXWrCQdJ5wVyNlgu51R11Yb1k
-	pPCx2AgiAdw4xvm8vWtyKeQseXvmdDjzo6ikEZh71jcFkW0lQvxdiob8+s7dUq3AGCSI
-	9tvn6gSgFC/0wo5nULm1IJ3DAgcmAy4CmpXvWr+SxW48ce/ptEFGZ2EPIFS7ZeD3QRN4
-	3CGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0yPbc2DO/Sn1qARnaCURxAQk7yzeL7iEH1uKBd7Y11s=;
-	b=oeZWD0pe0bXaREUXJeCGMYVlAM37w4ZBxHP/hkr7FTrJRWCLAaI21JGJaoVer3bJHe
-	dl05YLPMZznad8NyRl/JQdCFY98v8t/CzmWc9Uen7s1kMxOOl/6GaVy7+DQlaIYUx6fE
-	waDwNYGr2oEV37UClTzVShvfkvssew3ooUADLHXT+PVVmszQ/VnvDeqOpxmdYSUuN6bF
-	Nzjn+8j5DxFVxpnXrrVv59rYCqn+qexvBVejFLrjdiPDTD+hb0w9bqxpkE9qpolsoxhO
-	SMCtKvDUqM4OMAwdwngnOEoa+VnPWvbcVavz0yKdvCKgJ3nql9cpLOFDGQF1Gu+nhGVE
-	V93Q==
-X-Gm-Message-State: APjAAAXYSe+prJiS6qqtviPnT3LVQBxm33WtfeM6dG/JYgUJ/M/6XkWF
-	McJ9OFW3gec2buPX3npWf6hKMDJJ
-X-Google-Smtp-Source: APXvYqxEVuNToQvYj5VhbC69342p3mZ557VUUxXGR1bZc1RrUI4HKMzT8SOrs8f820dNCkys8a5WXg==
-X-Received: by 2002:ac2:47fa:: with SMTP id b26mr34829479lfp.82.1564353627356; 
-	Sun, 28 Jul 2019 15:40:27 -0700 (PDT)
-Received: from lund.luxoft.com (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	u27sm10362089lfn.87.2019.07.28.15.40.26
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 28 Jul 2019 15:40:26 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Jul 2019 00:40:23 +0200
-Message-Id: <20190728224023.28039-1-open.source@oleksandr-kravchuk.com>
+Return-Path: <naveen.kumar.saini@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 342F765CF3
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jul 2019 04:09:29 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	28 Jul 2019 21:09:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,321,1559545200"; d="scan'208";a="255088095"
+Received: from optimus-prime.png.intel.com ([172.30.199.130])
+	by orsmga001.jf.intel.com with ESMTP; 28 Jul 2019 21:09:30 -0700
+From: Naveen Saini <naveen.kumar.saini@intel.com>
+To: Openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Jul 2019 12:11:28 +0800
+Message-Id: <20190729041128.2874-1-naveen.kumar.saini@intel.com>
 X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] wolfssl: update to 4.1.0
+Subject: [PATCH] icewm: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +30,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jul 2019 22:40:28 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 04:09:30 -0000
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+From: "Yong, Jonathan" <jonathan.yong@intel.com>
+
+IceWM is a window manager for the X Window System.
+
+The goal of IceWM is to provide speed and simplicity.
+
+It comes with a taskbar with pager, global and per-window
+keybindings and a dynamic menu system.
+
+Website:
+https://ice-wm.org/
+
+Manual:
+https://ice-wm.org/manual/
+
+Themes Howto
+https://ice-wm.org/themes/
+
+Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- .../wolfssl/{wolfssl_4.0.0.bb => wolfssl_4.1.0.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_4.0.0.bb => wolfssl_4.1.0.bb} (93%)
+ ...p-running-test-program-when-cross-co.patch | 39 ++++++++++++++++++
+ meta-oe/recipes-extended/icewm/icewm_1.5.5.bb | 40 +++++++++++++++++++
+ 2 files changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
+ create mode 100644 meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.0.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.1.0.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_4.0.0.bb
-rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_4.1.0.bb
-index d8883a77f..ae379383a 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.0.0.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_4.1.0.bb
-@@ -13,7 +13,7 @@ PROVIDES += "cyassl"
- RPROVIDES_${PN} = "cyassl"
- 
- SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https"
--SRCREV = "21f2beca9f320199fcea4a96df3e19967804144b"
-+SRCREV = "50fbdb961fd8c2d8123064e567ae8ec44167732d"
- S = "${WORKDIR}/git"
- 
- inherit autotools
+diff --git a/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
+new file mode 100644
+index 000000000..98fd78c5c
+--- /dev/null
++++ b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
+@@ -0,0 +1,39 @@
++From 84620376d568c2c5e3ebd4f33de9793c68a36463 Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Mon, 22 Jul 2019 16:17:19 +0800
++Subject: [PATCH] configure.ac: skip running test program when cross-compiling
++
++Modified patch from Yong, Jonathan.
++
++Upstream-Status: Inappropriate [OE-Specific]
++
++Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ configure.ac | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index c5e3ca03..61d2d5a0 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -139,6 +139,7 @@ AC_CHECK_FUNCS([sysctl sysctlbyname sysinfo uname wordexp])
++ AC_CHECK_FUNC([getloadavg],[AC_DEFINE([HAVE_GETLOADAVG2], 1, [getloadavg() is available])])
++ AC_FUNC_SELECT_ARGTYPES
++ 
+++if test "$cross_compiling" = no ; then
++ AC_MSG_CHECKING([for strlcpy])
++ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
++                char a[2];
++@@ -170,7 +171,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
++                AH_TEMPLATE([HAVE_STRLCAT],
++                            [Define to 1 if you have the strlcat function.])
++               ])
++-
+++fi
++ 
++ PKG_CHECK_MODULES([CORE],[fontconfig xext x11])
++ AC_SUBST([CORE_CFLAGS])
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
+new file mode 100644
+index 000000000..db81021d0
+--- /dev/null
++++ b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
+@@ -0,0 +1,40 @@
++DESCRIPTION = "Ice Window Manager (IceWM)"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
++
++SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.xz \
++           file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
++           "
++SRC_URI[md5sum] = "6eba94a7935a0531d2c14eeb1426aeef"
++SRC_URI[sha256sum] = "f1c1344b20a9e8635143f70ee27930b55f813c15ca61f84d77584d311b6ac027"
++
++inherit autotools pkgconfig gettext perlnative distro_features_check qemu
++REQUIRED_DISTRO_FEATURES = "x11"
++
++EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
++                --with-cfgdir=${sysconfdir}/icewm \
++                --with-docdir=${docdir}/icewm \
++                --enable-fribidi \
++                --enable-xinerama \
++                --enable-shape"
++
++DEPENDS = "asciidoc-native gdk-pixbuf libxft libxpm libxrandr libxinerama"
++DEPENDS_append = " qemu-native"
++RDEPENDS_${PN} = "perl"
++
++do_compile_prepend_class-target() {
++
++    cd ${B}
++    oe_runmake -C src genpref
++
++    qemu_binary="${@qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}',['$PWD/src/.libs','$STAGING_DIR_HOST/${libdir}','$STAGING_DIR_HOST/${base_libdir}'])}"
++    cat >qemuwrapper <<EOF
++#!/bin/sh
++${qemu_binary} src/genpref "\$@"
++EOF
++    chmod +x qemuwrapper
++    ./qemuwrapper > src/preferences
++}
++
++
++FILES_${PN} += "${datadir}/xsessions"
 -- 
 2.17.1
 
