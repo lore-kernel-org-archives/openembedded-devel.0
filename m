@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 898F46C230
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 14:39:26 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id d23so59918639qto.2
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 07:39:27 -0700 (PDT)
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A7807F291
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jul 2019 14:40:59 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id v22so44293750qkj.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jul 2019 07:41:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=rpHYivz/CmDJj9nW+yg8Ii3ln959pH2LyU/4DvWl/YA=;
-	b=QuGSLNBNbzOLgEsXnJ7zs0BBmSwukAXh/0pbG+K+0UtPwyUnXoGSQkT2dpPL6Qy0m4
-	ssLiW5M9mHn6Vc753guJ3+g4HjPNqGGTKmrfnfXwf3vUJqHeUjqK8Oz4kzmfUKpfnWft
-	ysGzywXkkFdwknR2JZ7JZSDeQ+nFfYe6nT8GhSHCtU8uzqRJANJ9C2bWOe1f7yNS1tx0
-	SzYOt9Muj/6ktjWeg1HPkHGzDwr9OXU/5wevwe0pBORLqzqOSXYPdOOA7+pTFyV5IVyv
-	0y5RTA3RP2L/gp5YwXOGf9xhTmRqfK4YpP/Kg+Hh7DvwT4VAx0iNzBgsC6m3qXQfZ/wk
-	KmAQ==
+	:cc; bh=DT6vThhioLuZ8WZRx3bGwyIES1mq8rsTmzlpnNV3COg=;
+	b=EwXSJB62wo9yEZfx3f4PT9u1bCRCmkTjtfZLaqUo7v0krQyK7Kk3RnpiP8d8IW6fDX
+	CLYXPwdxEYKGKeSW13RghY1aS1xtIAbp2W6j1oy728LFKJV9JdixTRc7HXuxUeRhlXMN
+	UTaaPv6eQMSV8RVvhlInkpyhK+w5Bdrf5jDNM375Vw7YtHJZvlsGuOUD/joIYcNe62EJ
+	QmT43AazaM17LG/IReEXO3zd5VAYWOG+LXTkWEjZShrD9MJ5fr2yLZdxLxxKNjpN2K0W
+	DBE47OgqGJBs057Ax4iX+iBST7EGGfVtXufFokTojh3PkHlmO7EN2gezAZJ+JOd1WIB3
+	z1xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=rpHYivz/CmDJj9nW+yg8Ii3ln959pH2LyU/4DvWl/YA=;
-	b=Y89peOCc+OjcZS9VaDJXGYBk7B1SKk/u6KG1jqC/9XVY59ClGwJh5FFDFgPysUvjSw
-	socSCEHyI1Gzkzb5UKQQZjY0j2SsqXxCEwrCh6pJVKX+2To4G1XqOGFDJfqQOh3kigMZ
-	nwDQCQs8VIUEdZmkIYF/SQOpf9e1Y9/JqMZy5PsGKfDc01QBckFk/cMPDU3bo4N84qnF
-	H6+JPu3tfdkW+54oei3ypNsJhdkvGwpJhxL2is/A1/DA7FGW5A2KVDbFKKNa+iBCMv7L
-	Gm73KnaWIYXMi+2bBE0IdpB9kMyYxNQDHGFxp5UcSckVmgVaf0Ba6J5JcY4Me9wjD5nz
-	AgdQ==
-X-Gm-Message-State: APjAAAV1QddGnQ/ezZuK2J33uNY4epNS5/t1rG0+j6fPgu1JjsYnFiib
-	N8/pltbm8Ny6c1WDBYDQrZ5bVOCJFpEiWtyfG2g=
-X-Google-Smtp-Source: APXvYqznmq9khUZMNbYohZa/a/AVEQA5TE9qz5ggkiYrKPJY0F09LBEevulJJU1hkB6EQF402gpxscFnHhuHi2TeMoU=
-X-Received: by 2002:a0c:bd1d:: with SMTP id m29mr81102154qvg.181.1564411167155;
-	Mon, 29 Jul 2019 07:39:27 -0700 (PDT)
+	bh=DT6vThhioLuZ8WZRx3bGwyIES1mq8rsTmzlpnNV3COg=;
+	b=iDJlWn44QS+0MDVMHh982IpeXO6HUG96E9PtmRdM7nx+vb4nvzaeQ5Ir0pn6tBghFd
+	j8l2XAb93sQi6vE/6RGm4m8cxqzlb/ncsJRqllYr7tbmOkAHHN+toGRrHeKavuJYILs0
+	oyl/P79IKZgwTPu44ITNw6j9+lEL/NlKkFEjDA8pfwtJFwvG8udE/i4WGJUqH37HGX1u
+	cniz7GzkkIAC6pzgMlyNMynMxMObXvIByP2ledqtFpfqmHlTk//epZ7YtOiA3Ox9vi/r
+	27EY1h8q8cLpZ+iKz7vHxZyOFFQAikeZ50hZhK5mL6PH6/7o3/06lhNr65AbjBwG9jOo
+	5rnA==
+X-Gm-Message-State: APjAAAXHB1BK9XHdeTjl48YENp9s3NUxd/hf+q0fRF6mlUJX6Zyc68Ll
+	uVp/KlF89HY1WgbEQFiP+e1L4nrx14IAOfXo1S4moJ3ZEsc=
+X-Google-Smtp-Source: APXvYqwYmYG7m+R2x/uep86O43BY4vFwHG1ES0vi+fXNy5zfgxFgGr6rpwurs9nm5Y+JM9Xkmx62OPFKEzybZgfAKBA=
+X-Received: by 2002:a37:c81:: with SMTP id 123mr75481574qkm.474.1564411259751; 
+	Mon, 29 Jul 2019 07:40:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190729041128.2874-1-naveen.kumar.saini@intel.com>
-	<CAMKF1sqYr+Kni1_YyLNPnNgZvpqtx0VOWW6PUi0duyC-yoiEpg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqYr+Kni1_YyLNPnNgZvpqtx0VOWW6PUi0duyC-yoiEpg@mail.gmail.com>
+References: <20190729080432.20866-1-ayoub.zaki@embexus.com>
+	<CAMKF1sqUeboVgvtsuo5GR+VrvtPfO_Z9xS2cSzkgYT813LbG2g@mail.gmail.com>
+In-Reply-To: <CAMKF1sqUeboVgvtsuo5GR+VrvtPfO_Z9xS2cSzkgYT813LbG2g@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Jul 2019 07:39:10 -0700
-Message-ID: <CAMKF1sp7KKLoc5zd7O9cWVTdWPYxrXycWbh5Baa2PAzBMuGC-Q@mail.gmail.com>
-To: Naveen Saini <naveen.kumar.saini@intel.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] icewm: add recipe
+Date: Mon, 29 Jul 2019 07:40:43 -0700
+Message-ID: <CAMKF1so-GUvD7pJ9Btq3Pge1Eoe6EaLvFEEz5DL4D0vQfM+SHg@mail.gmail.com>
+To: Ayoub Zaki <ayoub.zaki@embexus.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v4] usbguard: Initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,144 +54,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 14:39:26 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 14:40:59 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-fails to build with aarch64/musl see
+there are build failures still
 
-https://errors.yoctoproject.org/Errors/Details/255459/
+https://errors.yoctoproject.org/Errors/Details/255457/
 
-On Mon, Jul 29, 2019 at 7:22 AM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Jul 29, 2019 at 7:14 AM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> On Sun, Jul 28, 2019 at 9:09 PM Naveen Saini
-> <naveen.kumar.saini@intel.com> wrote:
+> On Mon, Jul 29, 2019 at 1:04 AM Ayoub Zaki <ayoub.zaki@embexus.com> wrote:
 > >
-> > From: "Yong, Jonathan" <jonathan.yong@intel.com>
-> >
-> > IceWM is a window manager for the X Window System.
-> >
-> > The goal of IceWM is to provide speed and simplicity.
-> >
-> > It comes with a taskbar with pager, global and per-window
-> > keybindings and a dynamic menu system.
-> >
-> > Website:
-> > https://ice-wm.org/
-> >
-> > Manual:
-> > https://ice-wm.org/manual/
-> >
-> > Themes Howto
-> > https://ice-wm.org/themes/
-> >
-> > Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
-> > Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-> >
-> > Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> > Introduce the USBGuard software framework that helps to protect against rogue USB devices (a.k.a. BadUSB)
+> > by implementing basic whitelisting and blacklisting capabilities based on device attributes.
 > > ---
-> >  ...p-running-test-program-when-cross-co.patch | 39 ++++++++++++++++++
-> >  meta-oe/recipes-extended/icewm/icewm_1.5.5.bb | 40 +++++++++++++++++++
-> >  2 files changed, 79 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
-> >  create mode 100644 meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
+> >  ...kgconfig-instead-of-libgcrypt-config.patch | 25 +++++++++++++
+> >  .../usbguard/usbguard_0.7.4.bb                | 37 +++++++++++++++++++
+> >  2 files changed, 62 insertions(+)
+> >  create mode 100644 meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
+> >  create mode 100644 meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
 > >
-> > diff --git a/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
+> > diff --git a/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch b/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
 > > new file mode 100644
-> > index 000000000..98fd78c5c
+> > index 000000000..022320b40
 > > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
-> > @@ -0,0 +1,39 @@
-> > +From 84620376d568c2c5e3ebd4f33de9793c68a36463 Mon Sep 17 00:00:00 2001
-> > +From: Naveen Saini <naveen.kumar.saini@intel.com>
-> > +Date: Mon, 22 Jul 2019 16:17:19 +0800
-> > +Subject: [PATCH] configure.ac: skip running test program when cross-compiling
+> > +++ b/meta-oe/recipes-security/usbguard/usbguard/0001-Use-pkgconfig-instead-of-libgcrypt-config.patch
+> > @@ -0,0 +1,25 @@
+> > +From 85a3c46fa0bcf05d824b86b7e5412ec65924e86a Mon Sep 17 00:00:00 2001
+> > +From: Ayoub Zaki <ayoub.zaki@embexus.com>
+> > +Date: Mon, 29 Jul 2019 09:46:56 +0200
+> > +Subject: [PATCH 1/1] Use pkgconfig instead of libgcrypt-config
 > > +
-> > +Modified patch from Yong, Jonathan.
-> > +
-> > +Upstream-Status: Inappropriate [OE-Specific]
-> > +
-> > +Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
-> > +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 > > +---
-> > + configure.ac | 3 ++-
-> > + 1 file changed, 2 insertions(+), 1 deletion(-)
+> > + m4/libgcrypt.m4 | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
 > > +
-> > +diff --git a/configure.ac b/configure.ac
-> > +index c5e3ca03..61d2d5a0 100644
-> > +--- a/configure.ac
-> > ++++ b/configure.ac
-> > +@@ -139,6 +139,7 @@ AC_CHECK_FUNCS([sysctl sysctlbyname sysinfo uname wordexp])
-> > + AC_CHECK_FUNC([getloadavg],[AC_DEFINE([HAVE_GETLOADAVG2], 1, [getloadavg() is available])])
-> > + AC_FUNC_SELECT_ARGTYPES
+> > +diff --git a/m4/libgcrypt.m4 b/m4/libgcrypt.m4
+> > +index 6cf482f..d674eae 100644
+> > +--- a/m4/libgcrypt.m4
+> > ++++ b/m4/libgcrypt.m4
+> > +@@ -28,7 +28,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
+> > +      libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
+> > +   if test x$libgcrypt_config_prefix != x ; then
+> > +      if test x${LIBGCRYPT_CONFIG+set} != xset ; then
+> > +-        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
+> > ++        LIBGCRYPT_CONFIG=$(shell pkg-config libgcrypt)
+> > +      fi
+> > +   fi
 > > +
-> > ++if test "$cross_compiling" = no ; then
-> > + AC_MSG_CHECKING([for strlcpy])
-> > + AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-> > +                char a[2];
-> > +@@ -170,7 +171,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-> > +                AH_TEMPLATE([HAVE_STRLCAT],
-> > +                            [Define to 1 if you have the strlcat function.])
-> > +               ])
-> > +-
-> > ++fi
-> > +
-> > + PKG_CHECK_MODULES([CORE],[fontconfig xext x11])
-> > + AC_SUBST([CORE_CFLAGS])
 > > +--
 > > +2.17.1
 > > +
-> > diff --git a/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
+> > diff --git a/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
 > > new file mode 100644
-> > index 000000000..db81021d0
+> > index 000000000..75ab62c3a
 > > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
-> > @@ -0,0 +1,40 @@
-> > +DESCRIPTION = "Ice Window Manager (IceWM)"
-> > +LICENSE = "GPLv2"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
+> > +++ b/meta-oe/recipes-security/usbguard/usbguard_0.7.4.bb
+> > @@ -0,0 +1,37 @@
+> > +DESCRIPTION="USBGuard framework helps to protect against BadUSB."
+> > +HOMEPAGE="https://github.com/dkopecek/usbguard"
+> > +LICENSE="GPLv2"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
 > > +
-> > +SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.xz \
-> > +           file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-> > +           "
-> > +SRC_URI[md5sum] = "6eba94a7935a0531d2c14eeb1426aeef"
-> > +SRC_URI[sha256sum] = "f1c1344b20a9e8635143f70ee27930b55f813c15ca61f84d77584d311b6ac027"
+> > +SRCREV = "0ab32d7fa092067030fcbef530968b5cc237b08c"
+> > +SRC_URI = "git://git@github.com/USBGuard/usbguard.git;protocol=https;branch=master \
+> > +           file://0001-Use-pkgconfig-instead-of-libgcrypt-config.patch \
+> > +          "
 > > +
-> > +inherit autotools pkgconfig gettext perlnative distro_features_check qemu
-> > +REQUIRED_DISTRO_FEATURES = "x11"
+> > +inherit autotools pkgconfig systemd bash-completion
 > > +
-> > +EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
-> > +                --with-cfgdir=${sysconfdir}/icewm \
-> > +                --with-docdir=${docdir}/icewm \
-> > +                --enable-fribidi \
+> > +S = "${WORKDIR}/git"
+> > +
+> > +DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
+> > +       dbus dbus-glib libqb libcap-ng libgcrypt libsodium protobuf pegtl"
+> > +
 >
-> libfribidi is not in rdeps, so I wonder if this will fail during runtime.
+> make it +=
 >
-> > +                --enable-xinerama \
-> > +                --enable-shape"
+> > +EXTRA_OECONF += "--with-bundled-catch"
 > > +
-> > +DEPENDS = "asciidoc-native gdk-pixbuf libxft libxpm libxrandr libxinerama"
-> > +DEPENDS_append = " qemu-native"
-> > +RDEPENDS_${PN} = "perl"
-> > +
-> > +do_compile_prepend_class-target() {
-> > +
-> > +    cd ${B}
-> > +    oe_runmake -C src genpref
-> > +
-> > +    qemu_binary="${@qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}',['$PWD/src/.libs','$STAGING_DIR_HOST/${libdir}','$STAGING_DIR_HOST/${base_libdir}'])}"
 >
-> using PWD is not advised, probably you can construct it by using S or B
+> we do have catch package recipe, have you considered using that
 >
-> > +    cat >qemuwrapper <<EOF
-> > +#!/bin/sh
-> > +${qemu_binary} src/genpref "\$@"
-> > +EOF
-> > +    chmod +x qemuwrapper
-> > +    ./qemuwrapper > src/preferences
+> > +PACKAGECONFIG ??= "libsodium \
+> > +       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+> > +       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
+> > +
+> > +PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
+> > +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
+> > +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
+> > +PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
+> > +PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
+> > +
+>
+> I think the dependencies added unconditionally above should be added
+> via packageconfigs.
+>
+> > +SYSTEMD_SERVICE_${PN} = "${PN}.service"
+> > +SYSTEMD_PACKAGES += "${PN}"
+>
+> Using PN on right hand side will fail for multilib builds. May be use BPN
+>
+> > +
+> > +do_install_append(){
+> > +
+> > +       sed -i 's|/var/log/usbguard/usbguard-audit.log|/var/log/usbguard-audit.log|g' \
+> > +                                               ${D}${sysconfdir}/usbguard/usbguard-daemon.conf
 > > +}
-> > +
-> > +
-> > +FILES_${PN} += "${datadir}/xsessions"
 > > --
 > > 2.17.1
 > >
