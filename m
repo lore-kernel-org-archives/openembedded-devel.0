@@ -1,39 +1,31 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1959565CF3
+Return-Path: <Fabian.Klemp@axino-group.com>
+X-Greylist: delayed 556 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 30 Jul 2019 10:45:00 UTC
+Received: from smtp01.ascom-ac.de (smtp01.axino-group.com [192.109.213.30])
+	by mail.openembedded.org (Postfix) with ESMTP id AA7797F2D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 07:46:47 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45yTCX4bJZz2M;
-	Tue, 30 Jul 2019 09:46:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564472808;
-	bh=9QYFZr6OulEcikgT0pP+WEGrCrhWLFHDfe+LGOAyoNY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=fx88AdzWjo84GW8tgYsnT1rxs4bVRxj+McxBPPGw7weygOesKwz2gc7qWSkSrvPbI
-	2bINXdb+9R6J10ztKggf0jwQQygf+nNgK49gv1Fa8DnDItge/lO/A3hJB1omNwMh77
-	60ANDuOAQKhJWRgE6pVjGgRRT/SYw7vOw0bKm/1jAymY3MriO9RQEzb6SCYTsL848C
-	HZ1qhgkLjk/2yRdK13A8EjLODPabqIL+Wvt7MIeM01klVdr3VHi14YplgYCCNMx9UL
-	UamA8bp88fOT8DUmPazoJTUThCQMUnv1+Y4Odc/fnG8uSN2oE8OYYHzI+BqmIvzkz6
-	rfoikQNhOHJbexGmwh+bP6IX1Q9he/ue3C4EIFZffXyxHQnVrSMdlI7on8Hmsi4KQK
-	Sl4zXI4cGtvR9KiVsHls9iTkPO3VrJMbUOMN8E9zi/MmpXFUqrxyrwEJqaFTS9gg10
-	3mWkMmbhcgG9HxxCYSRHdxuAbfXuvh1FWvRl5E2FADnYUbaKy/HGSgyklR6m2N7+14
-	XoiBvvuDiei6sTzZ3b+dksdPzVzBXHoAR/HrrFNvWnNEF9rwFTCEJ1BwQanSORjg+l
-	Mi8msBKaOtowxz3m2mgOPa6+4sm9XIqoe1dSqYNVXr51wH5/3VjqlLXTArm7uiFGIp
-	+7JvbWCISDgiKI1iCMvyH81s=
-Date: Tue, 30 Jul 2019 10:46:45 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20190730074645.GA11235@localhost>
-References: <20190728105220.20595-1-bunk@stusta.de>
-	<69940a08-dfb2-cd3b-1e31-af3f69aa5591@gmail.com>
-	<20190728162013.GA13799@localhost>
-	<CA+chaQcF5WfXW_Ryo9q0Ub2rjMKmPUQVXNA_dAw5Nqr-9dCMWA@mail.gmail.com>
+	Tue, 30 Jul 2019 10:45:00 +0000 (UTC)
+Received: from Mail-Srv01.Ascom-SuS.local (unknown [192.168.52.5])
+	by smtp01.ascom-ac.de (Postfix) with ESMTPS id 868954BBC3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jul 2019 12:35:45 +0200 (CEST)
+Received: from debian-vm-fabian.ascom-sus.local (192.168.50.65) by
+	Mail-Srv01.Ascom-SuS.local (192.168.52.5) with Microsoft SMTP Server
+	(TLS) id 15.0.1130.7; Tue, 30 Jul 2019 12:35:45 +0200
+From: Fabian Klemp <fabian.klemp@axino-group.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 30 Jul 2019 12:35:36 +0200
+Message-ID: <20190730103536.31081-1-fabian.klemp@axino-group.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcF5WfXW_Ryo9q0Ub2rjMKmPUQVXNA_dAw5Nqr-9dCMWA@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH] gnome-system-monitor: Add DEPENDS on polkit
+X-Originating-IP: [192.168.50.65]
+X-ClientProxiedBy: Mail-Srv01.Ascom-SuS.local (192.168.52.5) To
+	Mail-Srv01.Ascom-SuS.local (192.168.52.5)
+X-GFI-SMTP-Submission: 1
+X-GFI-SMTP-HelloDomain: debian-vm-fabian.ascom-sus.local
+X-GFI-SMTP-RemoteIP: 192.168.50.65
+X-C2ProcessedOrg: 7f026971-614e-446f-ae8c-729d16d48d9c
+Subject: [meta-networking][PATCH] openvpn: respect pid file in init.d service start
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2019 07:46:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 30 Jul 2019 10:45:01 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Sun, Jul 28, 2019 at 10:08:24PM +0200, Martin Jansa wrote:
-> It does tell that there are errors, but we don't want errors in "bitbake
-> world" :).
->...
+openvpn only provides options to update a pid file but not to check it
+for running processes. Consecutive issued start commands therefore lead
+to multiple running processes with the same configurations, which is the
+origin of all kinds of problems of which unnecessary resource usage is the least.
 
-Thanks, now I get it.
+Using start-stop-daemon the pid file is inspected for running processes
+before start.
 
-v2 sent.
+Signed-off-by: Fabian Klemp <fabian.klemp@axino-group.com>
+---
+ .../recipes-support/openvpn/openvpn/openvpn          | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-cu
-Adrian
-
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn b/meta-networking/recipes-support/openvpn/openvpn/openvpn
+index a3cd6a2f4..e5af4b230 100755
+--- a/meta-networking/recipes-support/openvpn/openvpn/openvpn
++++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn
+@@ -4,6 +4,7 @@
+ # <rob@mars.org>, edited by iwj and cs
+ # Modified for openvpn by Alberto Gonzalez Iniesta <agi@agi.as>
+ # Modified for restarting / starting / stopping single tunnels by Richard Mueller <mueller@teamix.net>
++# Modified for respecting pid file on service start by Fabian Klemp <fabian.klemp@axino-group.com>
+ 
+ test $DEBIAN_SCRIPT_DEBUG && set -v -x
+ 
+@@ -14,10 +15,17 @@ test -d $CONFIG_DIR || exit 0
+ 
+ start_vpn () {
+     modprobe tun >/dev/null 2>&1 || true
+-    $DAEMON --daemon --writepid /var/run/openvpn.$NAME.pid \
+-            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || echo -n " FAILED->"
++    start-stop-daemon --start --quiet --pidfile /var/run/openvpn.$NAME.pid \
++            --exec $DAEMON -- \
++            --daemon --writepid /var/run/openvpn.$NAME.pid \
++            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || rc="$?"
++    case $rc in
++        1) echo -n " ALREADY STARTED->";;
++        3) echo -n " FAILED->";;
++    esac
+     echo -n " $NAME"
+ }
++
+ stop_vpn () {
+    kill `cat $PIDFILE` || true
+   rm $PIDFILE
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.20.1
 
 
