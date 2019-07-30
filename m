@@ -1,48 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D31497F27D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 15:02:00 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id q22so894699iog.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 08:02:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=cWGtdIgV8jPG3mllpt/zgmytTuXemHA1kLF8i+o+b5U=;
-	b=tRoPvTdvmYHqpZ1Ffs/ihOr+6hh8rUpgEN11jKncgBaJRYPFizR2wDj7yOkqnZpb6i
-	lOMakaaCe4DPayt/+b6RwvJAjiu+YnQtP/kku7RIGNYxb7v+UZ4GnjbiB5ij1lTrBNwJ
-	AhCJYkH1bKrmEHmUeGA2oMSW/+OoAZmY5Wk4+0kngVXTP2RToPJXgPxTWQBw6XS+X5xJ
-	dVbPlaQYnNnaGSliKeUlVyVzECDki28MUAImKLm6mQZxY2XiGzUsSO2h7MtDEkjrizbW
-	q1REqxyq2buUmZJVEzArYYgv08Su6yyKpejCvgTYyzu7TLThDwEJioHkzYDxfahZHIdZ
-	Rgsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=cWGtdIgV8jPG3mllpt/zgmytTuXemHA1kLF8i+o+b5U=;
-	b=gDJY3HB1X6r6oB6tjVuY5S0BM8VOWKRWezMxe1D8E4cj/z0Ri7k3goCCTGQkrQ9bLP
-	ZHqm0bI6lVAvMBTRQW/eOjUoTIvcaljMYSxa76j8oVXZ5S0y1nCfY4rwUP62ieroN+f/
-	x3IA7z8qTb+Jjwh+F56AEzdcZ+iwVLiS4DAxxoiuHJw/wOC3kV8zigNCPTYuY307GxV4
-	xF25N8K/bLOZ6yo6lBrWliE5kZ00UELkHdKC4Jb759+/jnVMiJddm8fNccnqQaUYSKr/
-	SjewPju6OhikjU63Ie1rBeCMxU3e0qwaR+MxzGbacuytdi47ny7B030GRCMPK2KrVHjw
-	ouvQ==
-X-Gm-Message-State: APjAAAU3t7XB1Bz+SH+iRr715eStP+Hig4OQTJx/rN5G5r4x+iykklGZ
-	q4gWO1Awpr71rz1Q7UEu/CCTiTuacWqrxnl+kF4=
-X-Google-Smtp-Source: APXvYqxH4BOP8pK3sy6ufDLAKRvTgxf1IELkW2DuVxoal2YnVCkEZ8F/5t1j+/eDo7JVk55UJOIC/JBAGvL6P2R2y7M=
-X-Received: by 2002:a5e:a712:: with SMTP id
-	b18mr100071896iod.220.1564412521309; 
-	Mon, 29 Jul 2019 08:02:01 -0700 (PDT)
+Return-Path: <jonathan.yong@intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AD007F2C6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jul 2019 01:42:44 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	29 Jul 2019 18:42:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,325,1559545200"; d="scan'208";a="182967031"
+Received: from kmsmsx155.gar.corp.intel.com ([172.21.73.106])
+	by orsmga002.jf.intel.com with ESMTP; 29 Jul 2019 18:42:43 -0700
+Received: from pgsmsx109.gar.corp.intel.com (10.221.44.109) by
+	KMSMSX155.gar.corp.intel.com (172.21.73.106) with Microsoft SMTP Server
+	(TLS) id 14.3.439.0; Tue, 30 Jul 2019 09:42:42 +0800
+Received: from pgsmsx113.gar.corp.intel.com ([169.254.6.230]) by
+	PGSMSX109.gar.corp.intel.com ([169.254.14.91]) with mapi id
+	14.03.0439.000; Tue, 30 Jul 2019 09:42:42 +0800
+From: "Yong, Jonathan" <jonathan.yong@intel.com>
+To: Khem Raj <raj.khem@gmail.com>, "Saini, Naveen Kumar"
+	<naveen.kumar.saini@intel.com>
+Thread-Topic: [oe] [PATCH] icewm: add recipe
+Thread-Index: AQHVRhtizrsjF7NSN0G3ICSieCPaE6biY3WA
+Date: Tue, 30 Jul 2019 01:42:41 +0000
+Message-ID: <A2839490D87BE64781D1FF17AA14CEC30BAC102F@pgsmsx113.gar.corp.intel.com>
+References: <20190729041128.2874-1-naveen.kumar.saini@intel.com>
+	<CAMKF1sqYr+Kni1_YyLNPnNgZvpqtx0VOWW6PUi0duyC-yoiEpg@mail.gmail.com>
+	<CAMKF1sp7KKLoc5zd7O9cWVTdWPYxrXycWbh5Baa2PAzBMuGC-Q@mail.gmail.com>
+In-Reply-To: <CAMKF1sp7KKLoc5zd7O9cWVTdWPYxrXycWbh5Baa2PAzBMuGC-Q@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.600.7
+dlp-reaction: no-action
+x-originating-ip: [172.30.20.206]
 MIME-Version: 1.0
-References: <20190727203020.30368-1-brgl@bgdev.pl>
-In-Reply-To: <20190727203020.30368-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Jul 2019 08:01:45 -0700
-Message-ID: <CAMKF1spcBm6CRL10TxFjSL4GOxgLBzk5EaA7PKFnLF12N0y5RA@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libgpiod: put gpio utils into an actual separate package
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] icewm: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,50 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 15:02:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 30 Jul 2019 01:42:44 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Fails to build
+Probably better to reduce it to a compile and link test instead of outright=
+ skipping the strlcat runtime test.
 
-https://errors.yoctoproject.org/Errors/Details/255488/
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+Sent: Monday, July 29, 2019 22:39
+To: Saini, Naveen Kumar <naveen.kumar.saini@intel.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH] icewm: add recipe
 
-On Sat, Jul 27, 2019 at 1:30 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> Currently tools are built conditionally depending on whether the
-> corresponding PACKAGECONFIG option has been set and, although they
-> live in a separate libgpiod-tools package, the user cannot simply
-> select it - he has to additionally extend PACKAGECONFIG. While this
-> makes sense for python and C++ bindings, the tools don't have any
-> dependencies other the libgpiod. Make libgpiod-tools an actual
-> stand-alone package: always build them but install them only if
-> user selected libgpiod-tools.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  meta-oe/recipes-support/libgpiod/libgpiod.inc | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/recipes-support/libgpiod/libgpiod.inc
-> index 89679cb91..07ce35a7f 100644
-> --- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
-> +++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
-> @@ -8,11 +8,9 @@ SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
->  inherit autotools pkgconfig
->
->  PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
-> -PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
-> +
-> +EXTRA_OECONF = "--enable-tools"
->
->  PACKAGES =+ " ${PN}-tools"
->
->  FILES_${PN}-tools = "${bindir}/*"
-> -
-> -RRECOMMENDS_TOOLS = "${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '',d)}"
-> -RRECOMMENDS_${PN} += "${RRECOMMENDS_TOOLS}"
-> --
-> 2.21.0
->
+fails to build with aarch64/musl see
+
+https://errors.yoctoproject.org/Errors/Details/255459/
+
 
