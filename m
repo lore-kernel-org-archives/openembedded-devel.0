@@ -1,31 +1,38 @@
-Return-Path: <Fabian.Klemp@axino-group.com>
-X-Greylist: delayed 556 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 30 Jul 2019 10:45:00 UTC
-Received: from smtp01.ascom-ac.de (smtp01.axino-group.com [192.109.213.30])
-	by mail.openembedded.org (Postfix) with ESMTP id AA7797F2D9
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E4CDC7F2D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 10:45:00 +0000 (UTC)
-Received: from Mail-Srv01.Ascom-SuS.local (unknown [192.168.52.5])
-	by smtp01.ascom-ac.de (Postfix) with ESMTPS id 868954BBC3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 12:35:45 +0200 (CEST)
-Received: from debian-vm-fabian.ascom-sus.local (192.168.50.65) by
-	Mail-Srv01.Ascom-SuS.local (192.168.52.5) with Microsoft SMTP Server
-	(TLS) id 15.0.1130.7; Tue, 30 Jul 2019 12:35:45 +0200
-From: Fabian Klemp <fabian.klemp@axino-group.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Jul 2019 12:35:36 +0200
-Message-ID: <20190730103536.31081-1-fabian.klemp@axino-group.com>
-X-Mailer: git-send-email 2.20.1
+	Tue, 30 Jul 2019 10:55:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45yYP53PX0z1n;
+	Tue, 30 Jul 2019 12:55:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1564484122;
+	bh=ygJMxMLi/UZm3xms65/6hFT6CjDEFayhm2oGB0w42RU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pPxDyva4K1lt6jKh1mhPNSI8+Hz69jfWmObwBk1R/FzXwEqKndO/DkzdNKLZKRel4
+	Rnj0vvjcl7yVzQ4F1tKNAGy2w8agGJ44DzjSNIoO0BLdS4q3o7nwnxWFB1fsXEU9D2
+	7KpoVGaSabj4xp4xQsXDaGNr1XUogPJwn6DdvEldiANkOzcVDPucQEJ20XE7qKSbqj
+	r4byn+o3V78Gr6dy3NYf1kFItyVPjDqVxvQTHZ2PHXNYvgjtCKz3T5pW2SBanR0qaw
+	SHAiwH0wqQC11vi328VCl/CFDp9XwZytXuXu5xrTw1uNX00Y0fwrZEZ04FLCnnK+GF
+	gwMTzhCSDJuCJ8Czlo0GXdWPgJcmHGwOztFck/c4+PJqWlK9o5vaNBIQetKVHC/N/M
+	AJkmI7HLPHZywOuQsSf6ocnTqXYXzWSdAhSkHTQQvb9TdxFty7LYT/132jrVyMTdhb
+	bzM/qK/Z5tltYR/+5FWJ4ufHEQINyfOYbFPxQy45hwBgGtTVEvDSk2D2bGvcB/23Yu
+	dLICb9GIxCtyuVVNkA3zoyP+Yr8Xyw5xACR2i7szSlJgtnEmVhVAUSEGTEfvlm0h5e
+	AxebEYN3ksWmPoIKPr/QP2m0CezxGQje4vlatcZ2yY5p4Fj/U2fsj6AzavblWAiMEq
+	orc2R+qGWTQuxlNDogA5hHE0=
+Date: Tue, 30 Jul 2019 13:55:17 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190730105517.GC11235@localhost>
+References: <20190729080432.20866-1-ayoub.zaki@embexus.com>
+	<CAMKF1sqUeboVgvtsuo5GR+VrvtPfO_Z9xS2cSzkgYT813LbG2g@mail.gmail.com>
+	<CAMKF1so-GUvD7pJ9Btq3Pge1Eoe6EaLvFEEz5DL4D0vQfM+SHg@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.50.65]
-X-ClientProxiedBy: Mail-Srv01.Ascom-SuS.local (192.168.52.5) To
-	Mail-Srv01.Ascom-SuS.local (192.168.52.5)
-X-GFI-SMTP-Submission: 1
-X-GFI-SMTP-HelloDomain: debian-vm-fabian.ascom-sus.local
-X-GFI-SMTP-RemoteIP: 192.168.50.65
-X-C2ProcessedOrg: 7f026971-614e-446f-ae8c-729d16d48d9c
-Subject: [meta-networking][PATCH] openvpn: respect pid file in init.d service start
+In-Reply-To: <CAMKF1so-GUvD7pJ9Btq3Pge1Eoe6EaLvFEEz5DL4D0vQfM+SHg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v4] usbguard: Initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,56 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2019 10:45:01 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 30 Jul 2019 10:55:22 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-openvpn only provides options to update a pid file but not to check it
-for running processes. Consecutive issued start commands therefore lead
-to multiple running processes with the same configurations, which is the
-origin of all kinds of problems of which unnecessary resource usage is the least.
+On Mon, Jul 29, 2019 at 07:40:43AM -0700, Khem Raj wrote:
+> there are build failures still
+> 
+> https://errors.yoctoproject.org/Errors/Details/255457/
 
-Using start-stop-daemon the pid file is inspected for running processes
-before start.
-
-Signed-off-by: Fabian Klemp <fabian.klemp@axino-group.com>
----
- .../recipes-support/openvpn/openvpn/openvpn          | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn b/meta-networking/recipes-support/openvpn/openvpn/openvpn
-index a3cd6a2f4..e5af4b230 100755
---- a/meta-networking/recipes-support/openvpn/openvpn/openvpn
-+++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn
-@@ -4,6 +4,7 @@
- # <rob@mars.org>, edited by iwj and cs
- # Modified for openvpn by Alberto Gonzalez Iniesta <agi@agi.as>
- # Modified for restarting / starting / stopping single tunnels by Richard Mueller <mueller@teamix.net>
-+# Modified for respecting pid file on service start by Fabian Klemp <fabian.klemp@axino-group.com>
- 
- test $DEBIAN_SCRIPT_DEBUG && set -v -x
- 
-@@ -14,10 +15,17 @@ test -d $CONFIG_DIR || exit 0
- 
- start_vpn () {
-     modprobe tun >/dev/null 2>&1 || true
--    $DAEMON --daemon --writepid /var/run/openvpn.$NAME.pid \
--            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || echo -n " FAILED->"
-+    start-stop-daemon --start --quiet --pidfile /var/run/openvpn.$NAME.pid \
-+            --exec $DAEMON -- \
-+            --daemon --writepid /var/run/openvpn.$NAME.pid \
-+            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || rc="$?"
-+    case $rc in
-+        1) echo -n " ALREADY STARTED->";;
-+        3) echo -n " FAILED->";;
-+    esac
-     echo -n " $NAME"
- }
++DEPENDS = "protobuf-native libxml2-native libxslt-native xmlto-native glib-2.0-native \
++       dbus dbus-glib libqb libcap-ng libgcrypt libsodium protobuf pegtl"
+...
++PACKAGECONFIG ??= "libsodium \
++       ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
++       ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
 +
- stop_vpn () {
-    kill `cat $PIDFILE` || true
-   rm $PIDFILE
++PACKAGECONFIG[systemd]   = "--enable-systemd,--disable-systemd"
++PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium"
++PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt"
++PACKAGECONFIG[polkit]    = "--with-polkit,--without-polkit"
++PACKAGECONFIG[dbus]      = "--with-dbus,--without-dbus"
+
+The problem is that dependencies should be added as third parameter to 
+PACKAGECONFIG, which is missing here for polkit.
+
+Note that there is also the (less harmful) opposite problem here:
+The libsodium, libgcrypt and dbus/dbus-glib dependencies are likely only 
+required when the corresponding functionality is enabled via PACKAGECONFIG.
+
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
