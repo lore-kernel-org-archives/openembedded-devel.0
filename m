@@ -1,48 +1,33 @@
-Return-Path: <windel.bouwman@gmail.com>
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
-	[209.85.208.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ABD260291
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 7716A65CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 05:27:32 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id d4so61425668edr.13
+	Tue, 30 Jul 2019 07:46:42 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45yTCQ0Ppjz2M
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jul 2019 22:27:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=0VeE8zT7ptobSxKvN9F6MJKr02p2wGqxtbgXm8T1jfM=;
-	b=Jwni5QuF02J/Egg3/eGIiX278UOGjrCtPGLGbsH8EO2M5grtXJQ9vBtHMjM6pPx/+q
-	EwNuQUIOjm/GSjoxJiWzUf8OByb3qb8lZejZonsfitT/obFHbqkVLRrhN1A1CvsQPV9x
-	gXmvpbTaHGOrGdBqYytjrD+C+weh0TFMYrEOxQlPcBQcX4fs/lNmHPsrH+D27wkbQt9I
-	jMZgV0sjzTJfyXYvXwrPRO2irhxS62xyGZi6+zcWsQOSn/pyUoVqgyzsbZkfqd6MWfoD
-	yL1mEtHBZudomFVurWyIGbutKKA4PES8BX0vBHEvOOiU07QX6fShqdGEiWksYZ8fPVjL
-	OAcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0VeE8zT7ptobSxKvN9F6MJKr02p2wGqxtbgXm8T1jfM=;
-	b=o2jiwDXmAR8lT6ScppOJHNxVXx+h2K93MK8ojvk4sIimj43kB9SqMwbUrMSavE+Ynr
-	qVOglg4K5DtjZaSOJAuIL3sfV6iJmv/3PRg+KRIFqnffeHU5t3Yp2ufDxrxbrkLVq9i9
-	40U1U6UmwB9kM/8SB0CGYNCa/QA7em1QXwoFmsFx3fTuTow4yRMWC/FMMsVjS2t1hXKP
-	RMN2Y2IXVAX3XDU27JQWeS4Yq456kurbYLpAsfoTFMvAloeKwtc3e85Sv21Sl5hGU5oE
-	CGVeORcKr7Rrp1D5qB9t/hOOJslD49BysIKYiotSZHYot/k+Oh5EudXjQ6hQIaJKqGxM
-	bSzw==
-X-Gm-Message-State: APjAAAVLXN8tDZkPOqXogg0dGJ8dQ/IB8Jq+TYEtVN2yfmFTCgIOz691
-	zwzEP9JFct++ekHMmWYzcY50fNXL
-X-Google-Smtp-Source: APXvYqxWdM6QmZD3ARYl7mrhB2a/YXyiYSGpMeGeDBdpNjM/2C9Ydh7/V7V2T5+t/AkUamZ2IrSvPA==
-X-Received: by 2002:a17:906:698e:: with SMTP id
-	i14mr70891065ejr.122.1564464452562; 
-	Mon, 29 Jul 2019 22:27:32 -0700 (PDT)
-Received: from PC771.demcon.guest ([87.215.69.65])
-	by smtp.gmail.com with ESMTPSA id
-	a67sm16277084edf.6.2019.07.29.22.27.31
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Mon, 29 Jul 2019 22:27:31 -0700 (PDT)
-From: Windel Bouwman <windel.bouwman@gmail.com>
+	Tue, 30 Jul 2019 09:46:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1564472802;
+	bh=ydZjxRUlGyYUrUcCbnlS/aiwVUCcRedxhD3eofC9+GM=;
+	h=From:To:Subject:Date:From;
+	b=tK/AptZWJzEyhV8L0vZuuQrFUi+ej1IXNmwZnmJtVw+HAwuSPQxEPJhpK61KPebZV
+	pxPjB8JySbwTKrEEMbQf+V2jop204PyHw8AIuaOlaUBSHS4vZE3BrKgOqv/zWPVwbW
+	2l/bk6BakFPzJTSzee7xhSJDF4c90FlSSlx6To1Yp1Lf1ZTaj4baS16rn7je1xuNa7
+	qBGXbRakln3oC8BY4kgc1c566eez1bLSIpwH4LjNIPhtrdEQ75BGgLx0iYT18gN7Fh
+	JRgNpNVTh047cobdhBHLfld7NiChU87vP36i5D8xch/2NzuZqM2AhH68poiLL+Xw86
+	YbEK/Q3+ei03sQ31UsnrqKIgo4YQ0MF7Ky1pX7etyKt0OBWI4gKys9UOo7PGv6MXqB
+	5AkJUGeKKh6tDvznuvu5XGzgpBLRXGqkUGOz3Zup3hPg43lrd5ef8EVgzjS9fbCOtg
+	yHVMScz9GZbi8e/BffZyor7WehW8hqu8hkM/nskOlqFKnSPz4S06Nx6ll26OLn/zaq
+	RvgCp7MrCqRiGQySixMwmwDP10uv3dk9qA65mf5/8uaiEXM3VZk73HTPlnvJO1yaLJ
+	T2hVTKsvlzUIVC6Dldzi7a/sVZ+/1Q+SOAMTIPQjiuGh9que/WugzuPpSpVVi7v/TW
+	rTH2kTWT3+tKpFzOP+6sUbR4=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jul 2019 07:27:21 +0200
-Message-Id: <20190730052721.15128-1-windel.bouwman@gmail.com>
+Date: Tue, 30 Jul 2019 10:46:41 +0300
+Message-Id: <20190730074641.2127-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH v3] Add recipe for the coloredlogs python package.
+Subject: [meta-gnome][PATCH v2] gnome-system-monitor: Add DEPENDS on polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,64 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2019 05:27:32 -0000
+X-List-Received-Date: Tue, 30 Jul 2019 07:46:42 -0000
 
-Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com>
+The build fails without polkit in DISTRO_FEATURES:
+FAILED: org.gnome.gnome-system-monitor.policy
+msgfmt: cannot locate ITS rules for org.gnome.gnome-system-monitor.policy.in
+
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../python/python-coloredlogs.inc             | 24 +++++++++++++++++++
- .../python/python-coloredlogs_10.0.bb         |  2 ++
- .../python/python3-coloredlogs_10.0.bb        |  2 ++
- 3 files changed, 28 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-coloredlogs.inc
- create mode 100644 meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
+ .../gnome-system-monitor/gnome-system-monitor_3.32.0.bb        | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-coloredlogs.inc b/meta-python/recipes-devtools/python/python-coloredlogs.inc
-new file mode 100644
-index 000000000..f43bea1f7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-coloredlogs.inc
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Colored terminal output for Python's logging module"
-+HOMEPAGE = "https://coloredlogs.readthedocs.io"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
-+
-+SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
-+SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
-+
-+inherit pypi
-+
-+do_compile_prepend() {
-+    sed -ie "s/find_pth_directory(),/'',/g" setup.py
-+}
-+
-+do_install_append() {
-+    rm -rf ${D}${datadir}
-+}
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-humanfriendly \
-+"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
-new file mode 100644
-index 000000000..0fc1b258c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-coloredlogs_10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-coloredlogs.inc
-diff --git a/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-new file mode 100644
-index 000000000..387239966
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-coloredlogs.inc
+diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
+index 701b0891c..8930e1222 100644
+--- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.0.bb
+@@ -10,13 +10,14 @@ DEPENDS = " \
+     gtkmm3 \
+     libgtop \
+     librsvg \
++    polkit \
+ "
+ 
+ GNOMEBASEBUILDCLASS = "meson"
+ 
+ inherit gnomebase gconf gtk-icon-cache distro_features_check gettext
+ 
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 polkit"
+ 
+ SRC_URI[archive.md5sum] = "6c2c5c5bf8f15d3e6985faacbd3055dd"
+ SRC_URI[archive.sha256sum] = "af00c4a42dd1db17d9abe88edb11c7751b20982db1a8a2a467bab206fd8a77e3"
 -- 
 2.17.1
 
