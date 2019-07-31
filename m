@@ -1,23 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 07C037F377
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C0E507F3BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 06:11:20 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6V6BMLu022468
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 31 Jul 2019 06:12:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,328,1559491200"; d="scan'208";a="72571025"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2019 14:12:27 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 1B32A4CDE65E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 23:11:22 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 30 Jul 2019 23:11:09 -0700
-From: <kai.kang@windriver.com>
+	Wed, 31 Jul 2019 14:12:26 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 31 Jul 2019 14:12:28 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Jul 2019 02:11:07 -0400
-Message-ID: <20190731061107.129941-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+Date: Wed, 31 Jul 2019 14:11:45 +0800
+Message-ID: <20190731061145.24649-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] poppler: 0.75.0 -> 0.79.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 1B32A4CDE65E.A8D6B
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] dialog: upgrade 1.3-20190211 -> 1.3-20190728
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,94 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 06:11:21 -0000
+X-List-Received-Date: Wed, 31 Jul 2019 06:12:27 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
-
-Update poppler from 0.75.0 to 0.79.0:
-
-* remove patch which has been fixed in upstream
-* correct the way to toggle gobject-introspect support respect to
-  variable GI_DATA_ENABLED
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...txt-Add-libpoppler-to-link-along-wit.patch | 32 -------------------
- .../{poppler_0.75.0.bb => poppler_0.79.0.bb}  |  6 ++--
- 2 files changed, 3 insertions(+), 35 deletions(-)
- delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
- rename meta-oe/recipes-support/poppler/{poppler_0.75.0.bb => poppler_0.79.0.bb} (89%)
+ .../dialog/{dialog_1.3-20190211.bb => dialog_1.3-20190728.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/dialog/{dialog_1.3-20190211.bb => dialog_1.3-20190728.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
-deleted file mode 100644
-index c364d7372..000000000
---- a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From d488de23b75b2f3e235f1c184b2253d1402b4c0f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 10 May 2018 23:47:56 -0700
--Subject: [PATCH] glib/CMakeLists.txt: Add libpoppler to link along with
-- poppler-glib
--
--This is required since poppler-glib uses symbols from poppler and
--we use --as-needed
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- glib/CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
--index 6f91669..ca5021f 100644
----- a/glib/CMakeLists.txt
--+++ b/glib/CMakeLists.txt
--@@ -135,7 +135,7 @@ if (HAVE_INTROSPECTION AND BUILD_SHARED_LIBS)
--   get_directory_property(_tmp_includes INCLUDE_DIRECTORIES)
--   _list_prefix(_includes _tmp_includes "-I")
--   set(Poppler_0_18_gir_CFLAGS ${_includes} -L${CMAKE_BINARY_DIR} -L${CMAKE_CURRENT_BINARY_DIR})
---  set(Poppler_0_18_gir_LIBS poppler-glib)
--+  set(Poppler_0_18_gir_LIBS poppler-glib poppler)
--   _list_prefix(_abs_introspection_files introspection_files "${CMAKE_CURRENT_SOURCE_DIR}/")
--   list(APPEND _abs_introspection_files
--     ${CMAKE_CURRENT_BINARY_DIR}/poppler-enums.c
---- 
--2.20.1
--
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-similarity index 89%
-rename from meta-oe/recipes-support/poppler/poppler_0.75.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-index 0704f1a2a..b285eecd2 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
--           file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[md5sum] = "3fb4ca803d989742695ca586c5cc489e"
--SRC_URI[sha256sum] = "3bbaedb0fa2797cac933a0659d144303e4d09eec6892c65600da987d8707199a"
-+SRC_URI[md5sum] = "0aac1fcb6466f8b7bdf51871264c7e83"
-+SRC_URI[sha256sum] = "f985a4608fe592d2546d9d37d4182e502ff6b4c42f8db4be0a021a1c369528c8"
+diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20190211.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20190728.bb
+similarity index 86%
+rename from meta-oe/recipes-extended/dialog/dialog_1.3-20190211.bb
+rename to meta-oe/recipes-extended/dialog/dialog_1.3-20190728.bb
+index f232dd0..d414bc6 100644
+--- a/meta-oe/recipes-extended/dialog/dialog_1.3-20190211.bb
++++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20190728.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ SRC_URI = "ftp://ftp.invisible-island.net/${BPN}/${BP}.tgz \
+           "
+-SRC_URI[md5sum] = "27d05caef648e8e02d0908a59951d44c"
+-SRC_URI[sha256sum] = "49c0e289d77dcd7806f67056c54f36a96826a9b73a53fb0ffda1ffa6f25ea0d3"
++SRC_URI[md5sum] = "e9d7f8b5e7b17183b0fb9297c0f57840"
++SRC_URI[sha256sum] = "e5eb0eaaef9cae8c822887bd998e33c2c3b94ebadd37b4f6aba018c0194a2a87"
  
-@@ -35,6 +34,7 @@ EXTRA_OECMAKE += " \
-     -DBUILD_GTK_TESTS=OFF \
-     -DENABLE_ZLIB=ON \
-     -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='${STAGING_INCDIR}' \
-+    ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_GOBJECT_INTROSPECTION=ON', '-DENABLE_GOBJECT_INTROSPECTION=OFF', d)} \
- "
- 
- do_configure_append() {
+ # hardcoded here for use in dialog-static recipe
+ S = "${WORKDIR}/dialog-${PV}"
 -- 
-2.20.0
+2.7.4
+
+
 
 
