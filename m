@@ -1,47 +1,30 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 55E737F3A6
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 45C6E7ECB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 03:40:32 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id m24so133204928ioo.2
+	Wed, 31 Jul 2019 06:04:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,328,1559491200"; d="scan'208";a="72570415"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2019 14:04:41 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 22CFD4B4041E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2019 20:40:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=CsCdpShkh1shDhX+1qLn7E+DhK9VZZ6EQc+XRGLNwW4=;
-	b=pXL6P4KTPBl0beQVYqloYExarbVyhCxCrubjroixRg7F5WHeC914okWS9LCJeladyW
-	NpmZ7QYYQZ536hr7sXBmX7yWFdZ3eABRaUdkIpEL3KyuP5I5dT8ne8yhleoRrl7IzAfY
-	sHt7SbXPrcc+Z8ADF+EvETTE/bk9rqrhYZ7WQh7qbwn2tVihspcvqFvUpW9PXN5y94EB
-	0Fc2ML/qvwTXWiXFZcZBhufWmju3F2GXGwlnqqGczCTk97EGWdjLFcyD/N45DeYgSEtP
-	Rtg7i5sGMhYvgGsBOCbjPTSQxqFFAYdl69bsWBpoBX/J88wwGrORKuvBLB9ggyYjPtYM
-	zYgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=CsCdpShkh1shDhX+1qLn7E+DhK9VZZ6EQc+XRGLNwW4=;
-	b=DEJNB98fmWwYct0e41cgT4Sw6eKMJOBUaW2uLj7x+x4qkbpewlDaDXEXR3SO2dmtar
-	SI/Wvw8HTU/d9wUrJ/5GB56NxmWYxCvSW3ySnB2/tI2F58aFucLhM8cwxKDYFJBrkUdg
-	tNqwk3fVX7X1YUgGBt0+bptRoH7lgzCdgV40QnURKdvL1xx1pDnQzA+u9twedbgv7rXn
-	BZCbLT/X0XLXxEczY+T1Hyz4uGU/SuBrS/1HmX+xm90LY/WAYqTNyXsXvJczrVP1HxEb
-	vkALlPFy3xCYb8ZUqeniX4Nl+op5j4U7CPJZpobxJrXEjQxKpI8AAyv+EU+fU4OvVcPc
-	q5Lg==
-X-Gm-Message-State: APjAAAWtuIsvbJGOOfJ0OpCXt2Ru4RVIzpjflxRorL7+b88SguCZeteY
-	OhQ85Fs3b0BJBywCicw2cfoIsiNe6oJuaCBAr5E=
-X-Google-Smtp-Source: APXvYqzLzV9FNloIbynLUmyDJjsLzxPraVSwLAp5fXBJ2CJZ3r83vC91H0I/X0Yw9Cxs29lfVCyeDTQCAVJagW5XmQs=
-X-Received: by 2002:a02:bca:: with SMTP id 193mr83887993jad.46.1564544433138; 
-	Tue, 30 Jul 2019 20:40:33 -0700 (PDT)
+	Wed, 31 Jul 2019 14:04:37 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 31 Jul 2019 14:04:40 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Jul 2019 14:03:55 +0800
+Message-ID: <20190731060355.24511-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190730185545.20310-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20190730185545.20310-1-Martin.Jansa@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 30 Jul 2019 20:40:22 -0700
-Message-ID: <CANx9H-AjC3VrqsDj3m1KAOOChaHhYFVDvd7K_6QudYujXfP5+Q@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] libdbi-perl: prevent native libdbi-perl depending on target perl
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 22CFD4B4041E.A7639
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] opensaf: upgrade 5.19.03 -> 5.19.07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,85 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 03:40:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Jul 2019 06:04:57 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Sorry for clobbering this change previously. I hadn=E2=80=99t seen the comm=
-it
-message about the error and I meant to send an email to open up discussion
-once I saw it (randomly)...we discussed it in the bug triage meeting and a
-weekly engineering sync meeting.
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb}                | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb} (95%)
 
-I do wonder why this is needed (which is why I naively dropped it), or
-better said why other Perl modules are not affected. This feels like a fix
-for an underlying problem. I would expect ALL libfoo-perl recipes to have
-the same behavior. Bitbake is supposed to be smart enough to handle
-RDEPENDS properly for native recipes.
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+similarity index 95%
+rename from meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
+rename to meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+index 0cccebd..0f2ba2f 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+@@ -25,8 +25,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
+            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
+            "
+-SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
+-SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
++SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
++SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
+ 
+ inherit autotools useradd systemd pkgconfig
+ 
+-- 
+2.7.4
 
-Have you only seen it on this package because of usage, or is it special in
-some way? Did it affect releases before the perl-cross change when we moved
-to perl 5.28.0? Trying to sleuth out the underlying cause...otherwise we
-need a sweeping change for all other native perl module recipes...
 
-On Tue, Jul 30, 2019 at 11:56 AM Martin Jansa <martin.jansa@gmail.com>
-wrote:
 
-> From: Martin Jansa <martin.jansa@gmail.com>
->
-> * detected with:
->   openembedded-core/scripts/sstate-diff-machines.sh --tmpdir=3Dtmp-glibc
-> --machines=3D"qemux86 qemux86copy qemuarm" --targets=3D"libdbi-perl-nativ=
-e"
-> --analyze
->   ...
->   ERROR: libdbi-perl-native different signature for task
-> do_populate_sysroot.sigdata between qemux86 and qemuarm
->   Hash for dependent task perl-sanity/perl_5.28.2.bb.do_populate_sysroot
-> changed from
-> 00c0f30e40a144255fc3054e9a71ce73170a89832318774bd2a8fc5e8dcd20ad to
-> e22ff8375c4ee6bda646dae8a1d6b1ddeb6d373678fc036fdc406e91a026b497
->
-> * it was already merged in:
->
-> http://git.openembedded.org/meta-openembedded/commit/?id=3Dd98e62e64219b3=
-65063fdb299d35f2af999d8f6e
->   and then silently reverted in:
->
-> http://git.openembedded.org/meta-openembedded/commit/?id=3D784285981b1ce9=
-825575981f2b60e2b286251283
->   see:
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2019-July/2006=
-76.html
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> index 77991bd158..91f94a1aa0 100644
-> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> @@ -27,7 +27,7 @@ do_install_prepend() {
->         rm -rf ${B}/t/z*.t
->  }
->
-> -RDEPENDS_${PN} =3D " \
-> +RDEPENDS_${PN}_class-target =3D " \
->      perl-module-carp \
->      perl-module-exporter \
->      perl-module-exporter-heavy \
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
