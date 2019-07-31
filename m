@@ -1,23 +1,46 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EDD577F462
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 76BAF7F4B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 13:23:40 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x6VDNgMt014250
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 31 Jul 2019 15:41:36 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id d17so66916207qtj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 06:23:42 -0700 (PDT)
-Received: from fidler.wrs.com (172.25.44.5) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Wed, 31 Jul 2019 06:23:41 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Jul 2019 09:23:40 -0400
-Message-ID: <20190731132340.9235-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.22.0
+	Wed, 31 Jul 2019 08:41:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Lg3oUq+G149/78ZRot3fQNvtW8rWvHYQRSKpua1v+vE=;
+	b=NOO4QUijmjhsO62CjfMdeb2rkk8C42myKbHgb4s5JSe/S5otHqzTdytOzEI4i8pbjw
+	1njQKKZXtblE17LIKI0AQodey3g8CneMHj7qJ1jcGv/9fLPsorOcLJA0X1Y/fJBW/+m9
+	+36KWCoDQFugiBlzcy4GKJmixRJvZz/zPP80a7pdtAuP9HuKWsnAk12NtjJkSMAYeiNu
+	9kuIL/gTLzyh7xb7oLU3/YpL4/MTCBPlEx+dNqZtu5GXvwh/8NzBHhYcUKeUVc7fEJS5
+	+p2rX+tXx2cWAi5xv+ffGXSprhS5sZYBhwc/i2TpZR6Ac6oWTGiQr3LcEDGOJtwn5lcT
+	2Ywg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Lg3oUq+G149/78ZRot3fQNvtW8rWvHYQRSKpua1v+vE=;
+	b=S+zrpRTv9fjCzJsq0TuqlOQOE05J5RCQfJdYTISW+RYlJKQAmpKGl+WH9hEEKZ2h1S
+	Vlr9M9DE9vvkaxnkHxQmTcPsmKPw/uiqxm+RIe/KKCS71LjgVfRhXbJYNwseatHm/u0G
+	cKhi5izbUSOYmegOeXrWR+Bv4Dz2n3KSMutuLzg1CfmqC+ZUkpG2zUu5WYQ7SJYPbrJj
+	IYeIauUWiINVct1rU2Nu1LTwCWiOsDWO0i0vnbv3HnJyfrWta29+kU6fp/QhYZosDqd3
+	B1YdWmYsZFyWf6wOhBRPcLwstPatSW190BlP9na73jd4XZJJW0XaLFz+DlQZNMZgnX8C
+	Fu1Q==
+X-Gm-Message-State: APjAAAUm1oXFH3ECHFnR1a4P8d0C1OY/BoPyaErjjaS/3y3S5qOMPiIU
+	0VcDCAanzR5CrLYxF2S77asWaK/49yGLvC1eCTsiRGRb
+X-Google-Smtp-Source: APXvYqy5xkTpyqE+N+mUy8sgqff7scb1aTGp12ojYqFJgRy5JMuOk4PF38HC5AnTty78B8U5qnzWLN2M7v60Gg89eCQ=
+X-Received: by 2002:a0c:bd1d:: with SMTP id m29mr89710252qvg.181.1564587696945;
+	Wed, 31 Jul 2019 08:41:36 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rsyslog: update from 8.1903.0 to 8.1907.0
+References: <20190731060355.24511-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20190731060355.24511-1-zangrc.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 31 Jul 2019 08:41:09 -0700
+Message-ID: <CAMKF1spnRZ8=OAWEDH-KonkMSH=qMYGM6EsTfgaJk7konVNsbw@mail.gmail.com>
+To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking] [PATCH] opensaf: upgrade 5.19.03 -> 5.19.07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,36 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 13:23:41 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Jul 2019 15:41:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../rsyslog/{rsyslog_8.1903.0.bb => rsyslog_8.1907.0.bb}     | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1903.0.bb => rsyslog_8.1907.0.bb} (98%)
+Can you rebase it on master-next and resend
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb
-index f1a6e8535..4092833fc 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1903.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb
-@@ -29,9 +29,8 @@ SRC_URI_append_libc-musl = " \
-     file://0001-Include-sys-time-h.patch \
- "
- 
--SRC_URI[md5sum] = "f0d454c79d4040e3f25fcd12f8f33fe2"
--SRC_URI[sha256sum] = "d0d23a493dcec64c7b6807a1bb8ee864ed0f3760c2ff3088008bb661d304056f"
--
-+SRC_URI[md5sum] = "97682af2b1d87f903458cfb41725fba6"
-+SRC_URI[sha256sum] = "eb27535ece93174ef6b551c88467d2c9cd826b62479625bb881a53d50b079fb5"
- 
- UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
--- 
-2.22.0
-
+On Tue, Jul 30, 2019 at 11:05 PM Zang Ruochen
+<zangrc.fnst@cn.fujitsu.com> wrote:
+>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> ---
+>  .../opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb}                | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-daemons/opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb} (95%)
+>
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+> similarity index 95%
+> rename from meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
+> rename to meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+> index 0cccebd..0f2ba2f 100644
+> --- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+> @@ -25,8 +25,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+>             file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
+>             file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
+>             "
+> -SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
+> -SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
+> +SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
+> +SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
+>
+>  inherit autotools useradd systemd pkgconfig
+>
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
