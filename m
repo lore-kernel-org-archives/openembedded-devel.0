@@ -1,30 +1,23 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 45C6E7ECB9
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 07C037F377
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 06:04:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,328,1559491200"; d="scan'208";a="72570415"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Jul 2019 14:04:41 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 22CFD4B4041E
+	Wed, 31 Jul 2019 06:11:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x6V6BMLu022468
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2019 14:04:37 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 31 Jul 2019 14:04:40 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Tue, 30 Jul 2019 23:11:22 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Tue, 30 Jul 2019 23:11:09 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Jul 2019 14:03:55 +0800
-Message-ID: <20190731060355.24511-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Wed, 31 Jul 2019 02:11:07 -0400
+Message-ID: <20190731061107.129941-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 22CFD4B4041E.A7639
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [PATCH] opensaf: upgrade 5.19.03 -> 5.19.07
+Subject: [meta-oe][PATCH] poppler: 0.75.0 -> 0.79.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,37 +30,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 06:04:57 -0000
+X-List-Received-Date: Wed, 31 Jul 2019 06:11:21 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+From: Kai Kang <kai.kang@windriver.com>
+
+Update poppler from 0.75.0 to 0.79.0:
+
+* remove patch which has been fixed in upstream
+* correct the way to toggle gobject-introspect support respect to
+  variable GI_DATA_ENABLED
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb}                | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb} (95%)
+ ...txt-Add-libpoppler-to-link-along-wit.patch | 32 -------------------
+ .../{poppler_0.75.0.bb => poppler_0.79.0.bb}  |  6 ++--
+ 2 files changed, 3 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+ rename meta-oe/recipes-support/poppler/{poppler_0.75.0.bb => poppler_0.79.0.bb} (89%)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-similarity index 95%
-rename from meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
-rename to meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-index 0cccebd..0f2ba2f 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-@@ -25,8 +25,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
-            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+deleted file mode 100644
+index c364d7372..000000000
+--- a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From d488de23b75b2f3e235f1c184b2253d1402b4c0f Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 10 May 2018 23:47:56 -0700
+-Subject: [PATCH] glib/CMakeLists.txt: Add libpoppler to link along with
+- poppler-glib
+-
+-This is required since poppler-glib uses symbols from poppler and
+-we use --as-needed
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- glib/CMakeLists.txt | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
+-index 6f91669..ca5021f 100644
+---- a/glib/CMakeLists.txt
+-+++ b/glib/CMakeLists.txt
+-@@ -135,7 +135,7 @@ if (HAVE_INTROSPECTION AND BUILD_SHARED_LIBS)
+-   get_directory_property(_tmp_includes INCLUDE_DIRECTORIES)
+-   _list_prefix(_includes _tmp_includes "-I")
+-   set(Poppler_0_18_gir_CFLAGS ${_includes} -L${CMAKE_BINARY_DIR} -L${CMAKE_CURRENT_BINARY_DIR})
+--  set(Poppler_0_18_gir_LIBS poppler-glib)
+-+  set(Poppler_0_18_gir_LIBS poppler-glib poppler)
+-   _list_prefix(_abs_introspection_files introspection_files "${CMAKE_CURRENT_SOURCE_DIR}/")
+-   list(APPEND _abs_introspection_files
+-     ${CMAKE_CURRENT_BINARY_DIR}/poppler-enums.c
+--- 
+-2.20.1
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/poppler/poppler_0.75.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.79.0.bb
+index 0704f1a2a..b285eecd2 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.75.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
+@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
+-           file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
+            file://basename-include.patch \
             "
--SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
--SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
-+SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
-+SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
+-SRC_URI[md5sum] = "3fb4ca803d989742695ca586c5cc489e"
+-SRC_URI[sha256sum] = "3bbaedb0fa2797cac933a0659d144303e4d09eec6892c65600da987d8707199a"
++SRC_URI[md5sum] = "0aac1fcb6466f8b7bdf51871264c7e83"
++SRC_URI[sha256sum] = "f985a4608fe592d2546d9d37d4182e502ff6b4c42f8db4be0a021a1c369528c8"
  
- inherit autotools useradd systemd pkgconfig
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
+@@ -35,6 +34,7 @@ EXTRA_OECMAKE += " \
+     -DBUILD_GTK_TESTS=OFF \
+     -DENABLE_ZLIB=ON \
+     -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='${STAGING_INCDIR}' \
++    ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_GOBJECT_INTROSPECTION=ON', '-DENABLE_GOBJECT_INTROSPECTION=OFF', d)} \
+ "
+ 
+ do_configure_append() {
 -- 
-2.7.4
-
-
+2.20.0
 
 
