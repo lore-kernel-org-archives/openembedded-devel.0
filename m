@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C83017F546
+	by mail.openembedded.org (Postfix) with ESMTP id A31C27F52A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2019 01:54:49 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,332,1559491200"; d="scan'208";a="72633342"
+	Thu,  1 Aug 2019 02:10:55 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,332,1559491200"; d="scan'208";a="72634363"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Aug 2019 09:54:45 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Aug 2019 10:10:55 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id EBBA24CDDAEB
+	by cn.fujitsu.com (Postfix) with ESMTP id 3807B4CDD99E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2019 09:54:42 +0800 (CST)
+	Thu,  1 Aug 2019 10:10:53 +0800 (CST)
 Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 1 Aug 2019 09:54:47 +0800
+	Server (TLS) id 14.3.439.0; Thu, 1 Aug 2019 10:10:55 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 1 Aug 2019 09:54:01 +0800
-Message-ID: <20190801015401.4956-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 1 Aug 2019 10:10:11 +0800
+Message-ID: <20190801021011.5222-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: EBBA24CDDAEB.AD8B9
+X-yoursite-MailScanner-ID: 3807B4CDD99E.AA275
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe] [PATCHv2] openldap: upgrade 2.4.47 -> 2.4.48
+Subject: [meta-python] [PATCH] python-cython: upgrade 0.29.12 -> 0.29.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2019 01:54:50 -0000
+X-List-Received-Date: Thu, 01 Aug 2019 02:10:56 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2019.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../openldap/{openldap_2.4.47.bb => openldap_2.4.48.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.47.bb => openldap_2.4.48.bb} (97%)
+ meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
+ .../python/{python-cython_0.29.12.bb => python-cython_0.29.13.bb}     | 0
+ .../python/{python3-cython_0.29.12.bb => python3-cython_0.29.13.bb}   | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cython_0.29.12.bb => python-cython_0.29.13.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.29.12.bb => python3-cython_0.29.13.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.47.bb b/meta-oe/recipes-support/openldap/openldap_2.4.48.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.47.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.48.bb
-index 4345d7d..ecc219d 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.47.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.48.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25b4ead0e45182e7c2914e59ff57009f \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ad914c35f97b468f421f8ac0f3d821f4 \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
-                     "
- SECTION = "libs"
-@@ -26,8 +26,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://remove-user-host-pwd-from-version.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index e326da4..4261594 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native nativesdk"
  
--SRC_URI[md5sum] = "e508f97bfd778fec7799f286e5c07176"
--SRC_URI[sha256sum] = "f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b"
-+SRC_URI[md5sum] = "0729a0711fe096831dedc159e0bbe73f"
-+SRC_URI[sha256sum] = "d9523ffcab5cd14b709fcf3cb4d04e8bc76bb8970113255f372bc74954c6074d"
+-SRC_URI[md5sum] = "f212574687a52706ff53738a64f91398"
+-SRC_URI[sha256sum] = "20da832a5e9a8e93d1e1eb64650258956723940968eb585506531719b55b804f"
++SRC_URI[md5sum] = "f8109a2a86cded40b3896ee7a63bc5a5"
++SRC_URI[sha256sum] = "c29d069a4a30f472482343c866f7486731ad638ef9af92bfe5fca9c7323d638e"
  
- DEPENDS = "util-linux groff-native"
+ inherit pypi
  
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.29.12.bb b/meta-python/recipes-devtools/python/python-cython_0.29.13.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cython_0.29.12.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.29.13.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.29.12.bb b/meta-python/recipes-devtools/python/python3-cython_0.29.13.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cython_0.29.12.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.29.13.bb
 -- 
 2.7.4
 
