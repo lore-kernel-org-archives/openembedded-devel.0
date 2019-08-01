@@ -1,33 +1,70 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D3E07F53F
+Return-Path: <saravanan@linumiz.com>
+X-Greylist: delayed 2399 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 01 Aug 2019 21:01:40 UTC
+Received: from gproxy8-pub.mail.unifiedlayer.com
+	(gproxy8-pub.mail.unifiedlayer.com [67.222.33.93])
+	by mail.openembedded.org (Postfix) with ESMTP id DDDC26BC44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2019 17:20:56 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 45zxs529rBz3J
+	Thu,  1 Aug 2019 21:01:40 +0000 (UTC)
+Received: from cmgw10.unifiedlayer.com (unknown [10.9.0.10])
+	by gproxy8.mail.unifiedlayer.com (Postfix) with ESMTP id 10F7C1AC790
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2019 19:20:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564680057;
-	bh=m93YzM/UhWfB23T2LDD1xF7qw/nRquqgvMZvOO5ggTU=;
-	h=From:To:Subject:Date:From;
-	b=p+KsWNXyfcg/kJYeE1bx8acqPjBGfSfLzpSfihepBwYGmSZdLzmIJG6Nf+KP4je9T
-	g3pNo60DMR/yed1vqrgAqPgG/uDPQr0BPh23RC5XJaTnVNaHoe5idTZTsSZiqdlMxF
-	Dq6vNBzMA0FHuQfo0rLT/IboLlk/6IeyHAgYIO5PIZY6Iuzblcn27RYL30K2smJJXD
-	H3Ozto96ugNQZ2eZCFdj5c4fV4uI4fgUzIy/EVaJ656Hs44S+zBlhmOW7jc6mRwdKd
-	4eLiQqsY1inVk7r5lGs6IVuxWZNIS9NYqeeHQAMNsRPm60/zWdl0+FYcrQrOW7QsZ+
-	3+A5jDgVrmitIgwnq5s0IcM4Ga2dx/Wepm3JteEQwfCNaFMBSiGNIAazKhWszSGRxE
-	Ei5ajXAK+ixCafXDU9eDqJVzx0DF+1ZQAMNkO9spd9x7B5FltpGtcXpssAy+lWTN0A
-	uqoXrwuu8IM9oytSP+qrddfLn5hjmJEPNPYO7S70LihfarEQwrM71m28h352RTHnP5
-	j5eCKBi8PkQJa37c7X1fUHijEtq1H7acN06ewiOxEfy/IOq+7Y/i9HLsE40fCTK2Ur
-	18w37QIDKUt2OHHCRYlaFW2QVHiny7wgoCrJq/8JdnGyEmXMSlxK+43ZAMtFCz1fE1
-	SM4Fgnkq6zRwawUw208wP+KI=
-From: Adrian Bunk <bunk@stusta.de>
+	Thu,  1 Aug 2019 14:04:34 -0600 (MDT)
+Received: from md-in-79.webhostbox.net ([43.225.55.182]) by cmsmtp with ESMTP
+	id tHJPhSVayVUbhtHJRhpamh; Thu, 01 Aug 2019 14:04:34 -0600
+X-Authority-Reason: nr=8
+X-Authority-Analysis: v=2.3 cv=PKQhB8iC c=1 sm=1 tr=0
+	a=LfuyaZh/8e9VOkaVZk0aRw==:117 a=LfuyaZh/8e9VOkaVZk0aRw==:17
+	a=FmdZ9Uzk2mMA:10:nop_rcvd_month_year
+	a=oz0wMknONp8A:10:endurance_base64_authed_username_1 a=vU9dKmh3AAAA:8
+	a=r45qBiYaAAAA:20 a=bOpFcRUdDVKRQkKqBMwA:9 a=rsP06fVo5MYu2ilr0aT5:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=linumiz.com
+	; s=default;
+	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=iL1R6Di52mCDVKqV5kKuxxdwNffCLHdK0pUrQg3D19I=;
+	b=NYWzBAIU5ejY6QlLUwAk2A7cc+
+	mZdpY5Cw6g/5n0Eu5eMeB/4lReLZBvBOh7W6cgJtNcq0yumVtQbjGZEs1V3eLA9pjEsTDQ1FHH7QG
+	+RW0hdfu0+RoYLQ7DbZhRrs51bKSrMmix0BXyEIdulKsm60rBk/RpAs+x4aDmf7dFqv+zf+Q/6RmV
+	jUfhq4aaUSFAbhoNETOchRsT5Pbx+0h9DpjzagA+pDZfnSzryh+21VHS5+ugMXWZusdJO8OOqdW4p
+	tnebPLYoTVrv2aERn5CsrmO8Z+EGrZTQiciGUWW57c4Er5/MekUEYg3jUGBHf3nboSLKUdPEXu2tm
+	I+u1551Q==;
+Received: from p5b3f6e3e.dip0.t-ipconnect.de ([91.63.110.62]:53324
+	helo=localhost.localdomain) by md-in-79.webhostbox.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92)
+	(envelope-from <saravanan@linumiz.com>)
+	id 1htHJK-000uuU-Lp; Thu, 01 Aug 2019 20:04:31 +0000
+From: Saravanan Sekar <saravanan@linumiz.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Aug 2019 20:20:56 +0300
-Message-Id: <20190801172056.32722-1-bunk@stusta.de>
+Date: Thu,  1 Aug 2019 22:04:07 +0200
+Message-Id: <20190801200407.2239-1-saravanan@linumiz.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] meta-oe: Use GNU_MIRROR in more recipes
+X-Authenticated_sender: saravanan@linumiz.com
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - md-in-79.webhostbox.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - linumiz.com
+X-BWhitelist: no
+X-Source-IP: 91.63.110.62
+X-Source-L: No
+X-Exim-ID: 1htHJK-000uuU-Lp
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: p5b3f6e3e.dip0.t-ipconnect.de (localhost.localdomain)
+	[91.63.110.62]:53324
+X-Source-Auth: saravanan@linumiz.com
+X-Email-Count: 0
+X-Source-Cap: bGludW1jbWM7aG9zdGdhdG9yO21kLWluLTc5LndlYmhvc3Rib3gubmV0
+X-Local-Domain: yes
+Cc: Saravanan Sekar <saravanan@linumiz.com>
+Subject: [PATCH] liblightmodbus: Add version 2.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,68 +77,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2019 17:20:57 -0000
+X-List-Received-Date: Thu, 01 Aug 2019 21:01:41 -0000
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+A cross-platform, lightweight Modbus RTU library
+
+Signed-off-by: Saravanan Sekar <saravanan@linumiz.com>
 ---
- meta-oe/recipes-devtools/octave/octave_4.4.1.bb               | 2 +-
- meta-oe/recipes-kernel/crash/crash_7.2.6.bb                   | 2 +-
- meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb | 2 +-
- meta-oe/recipes-support/zile/zile_2.4.14.bb                   | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ .../liblightmodbus/liblightmodbus_2.0.2.bb          | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
 
-diff --git a/meta-oe/recipes-devtools/octave/octave_4.4.1.bb b/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-index 1ec32ce89..71d24504f 100644
---- a/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-+++ b/meta-oe/recipes-devtools/octave/octave_4.4.1.bb
-@@ -11,7 +11,7 @@ inherit autotools pkgconfig texinfo gettext
- 
- EXTRA_OECONF = "--disable-java --disable-docs"
- 
--SRC_URI = "https://ftp.gnu.org/gnu/octave/${PN}-${PV}.tar.gz \
-+SRC_URI = "${GNU_MIRROR}/octave/${PN}-${PV}.tar.gz \
-            file://fix-blas-library-integer-size.patch \
- "
- 
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.6.bb b/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-index a8bfe27da..0a7c384a7 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-@@ -14,7 +14,7 @@ DEPENDS = "zlib readline coreutils-native"
- 
- S = "${WORKDIR}/git"
- SRC_URI = "git://github.com/crash-utility/${BPN}.git \
--           http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=git \
-+           ${GNU_MIRROR}/gdb/gdb-7.6.tar.gz;name=gdb;subdir=git \
-            file://7001force_define_architecture.patch \
-            file://7003cross_ranlib.patch \
-            file://0001-cross_add_configure_option.patch \
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-index b44c66af7..7e50edf7b 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
- SECTION = "net"
- DEPENDS = "file"
- 
--SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
-+SRC_URI = "${GNU_MIRROR}/libmicrohttpd/${BPN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "8ab5123535549195aff19e91b4e49f48"
- SRC_URI[sha256sum] = "9b9ccd7d0b11b0e179f1f58dc2caa3e0c62c8609e1e1dc7dcaadf941b67d923c"
- 
-diff --git a/meta-oe/recipes-support/zile/zile_2.4.14.bb b/meta-oe/recipes-support/zile/zile_2.4.14.bb
-index 515cf4136..3b846c151 100644
---- a/meta-oe/recipes-support/zile/zile_2.4.14.bb
-+++ b/meta-oe/recipes-support/zile/zile_2.4.14.bb
-@@ -5,7 +5,7 @@ DEPENDS = "ncurses bdwgc"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
- 
--SRC_URI = "http://ftp.gnu.org/gnu/zile/${BP}.tar.gz \
-+SRC_URI = "${GNU_MIRROR}/zile/${BP}.tar.gz \
-            file://remove-help2man.patch \
- "
- 
+diff --git a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+new file mode 100644
+index 000000000..1e35f08c0
+--- /dev/null
++++ b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "A cross-platform, lightweight Modbus RTU library"
++DESCRIPTION = "liblightmodbus is a very lightweight, highly configurable, \
++	       platform-independent Modbus RTU library."
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
++
++inherit cmake pkgconfig
++
++SRC_URI = "git://github.com/Jacajack/liblightmodbus.git;protocol=https"
++SRCREV = "59d2b405f95701e5b04326589786dbb43ce49e81"
++
++S = "${WORKDIR}/git"
 -- 
 2.17.1
 
