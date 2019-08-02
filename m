@@ -1,54 +1,54 @@
 Return-Path: <contact@lpzone.it>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 19AAA7CDE4
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 43DF865CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 08:25:24 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id r1so76215893wrl.7
+	Fri,  2 Aug 2019 08:46:34 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id k10so3960194qtq.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Aug 2019 01:25:25 -0700 (PDT)
+	Fri, 02 Aug 2019 01:46:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=lpzone-it.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=hHyp2Kbs3SURDssvH2pBBq+NENJnOmLe9NYWYdknoyg=;
-	b=T5TJ//PYWp9w1iQUOLzsPIhNA0CZP+K9wABQvUjRrLHxz4EJ0uoGoB8WQtpKmJvcPE
-	zNJqWFxOdjmXe63Bj1yR26iIqZFoeveHXceFjmoMq2yZXAm0HbQXKZT8PXIuRQCxMzUM
-	I/gQBfv2EFU5qABaUHlS2fO7JqFrC72BAlxeAGT5l7qeUd6IAXqNWyevBAFVlWlEnWjz
-	wiyJ3AHxUs7TE8fRgewHF6b/c8oMcPUEdBgIe9wCgYNQQMgJ08ehWy8XsbLXGpRtNzY1
-	zxwfD+Kd12f2kkoF6ZkEJzjBhh2RnVIFX6yhkTZsm6R3LXv7m3/hI5MI2QWL8yUlp4a+
-	dd2Q==
+	b=FMgkHP8CX7Ix5w5fdX1sod6N87aY6saPLn0P0g3Fz03oJ7pLUDocgy89nQz5CXALgX
+	ZMrA5qle2g414fDT7GaEcbUjS8VmKM0BhPD96X+AMXSbJaoSvs1iIIcsNW5+2Nna3krB
+	cbQ5qRbt3Y82WQNn91cNoC7nQXTd1E3qd6LqFVEbZ9+g4avpMm/Z4dxypWGmohk+qCqv
+	aomPIluAUv/2kayrRE7uJIKCIccqLVhxXaRJGtE8VQ3rBeUaRj0wyLdL4NKml6gMxxFH
+	CUkjAA/kWbfUp2QQuVEcdslHigpG8uSEUMvdsrAtiTyMAZ5QzRd/D753wRnFSdT2ueDc
+	Frmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:mime-version:content-transfer-encoding;
 	bh=hHyp2Kbs3SURDssvH2pBBq+NENJnOmLe9NYWYdknoyg=;
-	b=mWviU7VOx+Z07ASvyQX800tiXNh/YTJCCJI0iqSmZLoB50Y6eXUc9C/pWZK/606eJG
-	vj37Kvz0uNWtOHq1TFeFpRZ7dJ/4CKgYQuWGc9mXa7RNwPfXKk+nVYIheJYgONdPWVhL
-	4a9dSbzxJ4/BiGeI6QarcdbRcoBQy4qzaBwuQyWlEQCRxyqIz7tNrsZiUS/5dyDILRYj
-	RriTGH2XVbxqrcztmTK0E4xllQVRH/A47MV2ti8N/mkHsIL9Id8jBUuHlguR17yM/ZhI
-	tjV0x+zVMoe+fWLyeOgRg77YeC/qsUAv0UeY6dgqTTz7Q7omR4f1AtMxcPLEGy3sbXyC
-	DXCw==
-X-Gm-Message-State: APjAAAWlfBL8CqehzcmXPSdvyVLc+llcD1+sUTMCT5L6uaRAHIN3vhMK
-	TFsv26/1mXe2hiKvpJ8yFkgTwwdY
-X-Google-Smtp-Source: APXvYqx8NcSJs4j7PK4mXBpYP4aD/00zt3n5KQdHFAjgYnPJS1JxKIcvX+3nNT+I5UhW74rZCfe7Dw==
-X-Received: by 2002:adf:8183:: with SMTP id 3mr146347376wra.181.1564734324192; 
-	Fri, 02 Aug 2019 01:25:24 -0700 (PDT)
+	b=LEAHQdbH4zw3z5qWPWkK01gsTUEcWenjFrNF1+0+Z3U9e1w4+tEbORNNDEupmWAFNB
+	1oUF+9Dx2QG6A6Oc7ukmcYsE+DLW/Pm1hCDUYdIQXQS2UAAHjC9L0jAkITv+biTeIR7s
+	koepcFkqhvXK6OLpWECqv4cFCui/R6JctiTkh0anLIEJH0EMh7yW/0d0l6Q2jZAmvCYe
+	jq6yBO5IE+N+r6iyEmpoxBtTQi/9VNmZRy4UmKaXekxU7UpBloxI78knieLFxXenwLM2
+	iA+F19XR+TJWGXeQxpVQ2lZc3rnwn8MqJVCelW/5CVZ8LFuM48GgqFn0pUVxv8iqvUCA
+	PfLg==
+X-Gm-Message-State: APjAAAWtwNSnl+Iupar+rTwm5oE6+160Koa0ANM5J7nNS+iTwWOh8xyE
+	rDXxmXXNR3o6FO3VM8BfPos4GfwH
+X-Google-Smtp-Source: APXvYqxc94YHwKJzvgKoPGMv9Aurk/DOQQKUV8HYP+TxF9lzh/KtnWr6UXdS2ilX3wvcZtPcN8BDQA==
+X-Received: by 2002:ac8:5315:: with SMTP id t21mr12136324qtn.66.1564735594836; 
+	Fri, 02 Aug 2019 01:46:34 -0700 (PDT)
 Received: from MBP-di-Luca.bticino.bt
 	(host98-19-static.110-62-b.business.telecomitalia.it. [62.110.19.98])
 	by smtp.gmail.com with ESMTPSA id
-	x17sm55035980wrq.64.2019.08.02.01.25.23
+	q32sm31187463qtd.79.2019.08.02.01.46.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Aug 2019 01:25:23 -0700 (PDT)
+	Fri, 02 Aug 2019 01:46:34 -0700 (PDT)
 Sender: Luca Palano <luca.palano@lpzone.it>
-From: contact@lpzone.it
+From: Luca Palano <contact@lpzone.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Aug 2019 10:25:12 +0200
-Message-Id: <20190802082512.21214-1-contact@lpzone.it>
+Date: Fri,  2 Aug 2019 10:45:43 +0200
+Message-Id: <20190802084543.22167-1-contact@lpzone.it>
 X-Mailer: git-send-email 2.20.1 (Apple Git-117)
 MIME-Version: 1.0
 Cc: Luca Palano <github@lpzone.it>
-Subject: [PATCH] Netdata upgrade: 1.8.0 -> 1.16.0
+Subject: [meta-webserver] [PATCH] Netdata upgrade: 1.8.0 -> 1.16.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,7 +61,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 08:25:24 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 08:46:34 -0000
 Content-Transfer-Encoding: 8bit
 
 From: Luca Palano <github@lpzone.it>
