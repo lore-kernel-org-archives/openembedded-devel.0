@@ -1,30 +1,56 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 280F960807
+Return-Path: <Arturo.Buzarra@digi.com>
+Received: from mail1.bemta23.messagelabs.com (mail1.bemta23.messagelabs.com
+	[67.219.246.4])
+	by mail.openembedded.org (Postfix) with ESMTP id ADE0D7F2B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 06:50:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,337,1559491200"; d="scan'208";a="72734425"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 14:50:22 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id D9EEB4CDF07F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 14:50:18 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 14:50:22 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Fri,  2 Aug 2019 07:02:43 +0000 (UTC)
+Received: from [67.219.246.101] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-b.us-east-1.aws.symcld.net id A5/1C-10960-410E34D5;
+	Fri, 02 Aug 2019 07:02:44 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsXi5LtOQFf4gXO
+	sQe9mbouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNL8yT2ggfcFcdO3mdpYFzJ1cXIxSEksIpR
+	4uWFY2wQzmpGiaV35jBBOBsYJTpff2XpYuTkYBPQk/j2ZRYziC0ioC+xdPYeMFtYwFvi39XbQ
+	DYHB4uAisT1afYgYV4BG4n9t68zgtgSAvISnTt2s0DEBSVOznwCZjMDxZu3zmaGsCUkDr54AT
+	ZGCGjM8ye2EK0KEtfeL2afwMg3C0n3LCTds5B0L2BkXsVollSUmZ5RkpuYmaNraGCga2hopAs
+	kLSz1Eqt0k/RKi3VTE4tLdA31EsuL9Yorc5NzUvTyUks2MQJDMaWAYe8Oxt2z3ugdYpTkYFIS
+	5d1U6RwrxJeUn1KZkVicEV9UmpNafIhRhoNDSYL3x22gnGBRanpqRVpmDjAuYNISHDxKIrzZ9
+	4DSvMUFibnFmekQqVOMuhxPO9qWMAux5OXnpUqJ8+qAFAmAFGWU5sGNgMXoJUZZKWFeRgYGBi
+	GegtSi3MwSVPlXjOIcjErCvOb3gabwZOaVwG16BXQEE9ARwqxOIEeUJCKkpBqYcidMbI1j9b/
+	e4fzn4ylP9Qt/uFwqzqRMl5p+sMT+m06OUnbcLaUDadNeSMf4vbTfu39tpPoF5Yd7nhklviz6
+	f3Gef6DHm9Q0Vo6ZyY3vczZd3WO7Me+zdHbLjd8HllmK/3GIiP5n4bp6cZJH1Zq31j/kC0JvN
+	bo1vlFbwVLPHl3nsvHNJ+dgbvMXTjLZ32fEyLh7a8zNuNj4c4LW1ALm7eEe2buFFuyZMukTg6
+	fsDwG1q7LcFR++3M9tTo70qbq3nd+1ws1w15P9d+qcrFO4133lOLrG4vjc7Yv5At/f5FRzM9G
+	+xfdBaEneK5mV137ZHd/6OSJzm2qEfu/+DBmmds5Yl8CnLU46nWJfDskqsRRnJBpqMRcVJwIA
+	4nxsX0wDAAA=
+X-Env-Sender: Arturo.Buzarra@digi.com
+X-Msg-Ref: server-16.tower-385.messagelabs.com!1564729320!123511!17
+X-Originating-IP: [66.77.174.16]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.43.9; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 1340 invoked from network); 2 Aug 2019 07:02:42 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-16.tower-385.messagelabs.com with ECDHE-RSA-AES256-SHA384
+	encrypted SMTP; 2 Aug 2019 07:02:42 -0000
+Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Fri, 2 Aug 2019 02:02:35 -0500
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH03.digi.com
+	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Fri, 2 Aug 2019 02:02:36 -0500
+Received: from LOG-CLN-ABUZARRA2.digi.com (10.101.2.112) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.468.0; Fri, 2 Aug 2019 09:02:32 +0200
+From: Arturo Buzarra <arturo.buzarra@digi.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Aug 2019 14:49:37 +0800
-Message-ID: <20190802064937.22577-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Fri, 2 Aug 2019 09:02:21 +0200
+Message-ID: <20190802070221.15706-1-arturo.buzarra@digi.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: D9EEB4CDF07F.AD020
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pyparsing: upgrade 2.4.0 -> 2.4.2
+X-Originating-IP: [10.101.2.112]
+Subject: [meta-oe][thud][PATCH] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +63,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 06:50:24 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 07:02:44 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Commit c6e963f9e ("lvm2: Add RDEPEND on lvm2 to lvm2-udevrules") added
+a package dependency due to lvm2-udevrules needs dmsetup, however
+dmsetup was moved to libdevmapper in commit 269d009a81d4 ("lvm2:
+libdevicemapper package needs udev rules and dmsetup"), so this
+dependency should be only for libdevmapper instead of the full package.
+
+With the current implementation, a package that has a dependency with
+lvm2-udev rules will include also many unnecessary packages like lvm2,
+lvm2-scripts, etc. and their dependencies.
+
+Signed-off-by: Arturo Buzarra <arturo.buzarra@digi.com>
 ---
- meta-python/recipes-devtools/python/python-pyparsing.inc              | 4 ++--
- .../python/{python-pyparsing_2.4.0.bb => python-pyparsing_2.4.2.bb}   | 0
- .../python/{python3-pyparsing_2.4.0.bb => python3-pyparsing_2.4.2.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyparsing_2.4.0.bb => python-pyparsing_2.4.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyparsing_2.4.0.bb => python3-pyparsing_2.4.2.bb} (100%)
+ meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyparsing.inc b/meta-python/recipes-devtools/python/python-pyparsing.inc
-index e0df4e9..556946e 100644
---- a/meta-python/recipes-devtools/python/python-pyparsing.inc
-+++ b/meta-python/recipes-devtools/python/python-pyparsing.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyparsing.wikispaces.com/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=657a566233888513e1f07ba13e2f47f1"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
+index 7bd7b09d8..08287e358 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
+@@ -48,11 +48,11 @@ FILES_${PN}-scripts = " \
+     ${sbindir}/lvmdump \
+ "
+ # Specified explicitly for the udev rules, just in case that it does not get picked
+ # up automatically:
+ FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
+-RDEPENDS_${PN}-udevrules = "${PN}"
++RDEPENDS_${PN}-udevrules = "libdevmapper"
+ RDEPENDS_${PN}_append_class-target = " libdevmapper"
+ RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
  
--SRC_URI[md5sum] = "e534c0ca755155823bf45fdd8d084922"
--SRC_URI[sha256sum] = "1873c03321fc118f4e9746baf201ff990ceb915f433f23b395f5580d1840cb2a"
-+SRC_URI[md5sum] = "46d02cbe0461fe0571d51649e6006ef5"
-+SRC_URI[sha256sum] = "6f98a7b9397e206d78cc01df10131398f1c8b8510a2f4d97d9abd82e1aacdd80"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.4.0.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.4.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyparsing_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python-pyparsing_2.4.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.0.bb b/meta-python/recipes-devtools/python/python3-pyparsing_2.4.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyparsing_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyparsing_2.4.2.bb
+ RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
+ RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
 -- 
-2.7.4
-
-
+2.22.0
 
 
