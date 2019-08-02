@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 28EC57D6C5
+	by mail.openembedded.org (Postfix) with ESMTP id 280F960807
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 06:39:04 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,337,1559491200"; d="scan'208";a="72733924"
+	Fri,  2 Aug 2019 06:50:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,337,1559491200"; d="scan'208";a="72734425"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 14:39:05 +0800
+	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 14:50:22 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6411B4CDFAAD
+	by cn.fujitsu.com (Postfix) with ESMTP id D9EEB4CDF07F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 14:39:03 +0800 (CST)
+	Fri,  2 Aug 2019 14:50:18 +0800 (CST)
 Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 14:39:05 +0800
+	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 14:50:22 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Aug 2019 14:38:21 +0800
-Message-ID: <20190802063821.22273-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 2 Aug 2019 14:49:37 +0800
+Message-ID: <20190802064937.22577-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 6411B4CDFAAD.AACC0
+X-yoursite-MailScanner-ID: D9EEB4CDF07F.AD020
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pyasn1-modules: upgrade 0.2.2 -> 0.2.6
+Subject: [meta-python] [PATCH] python-pyparsing: upgrade 2.4.0 -> 2.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,47 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 06:39:05 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 06:50:24 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2019.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-pyasn1-modules.inc       | 6 +++---
- ...ython-pyasn1-modules_0.2.2.bb => python-pyasn1-modules_0.2.6.bb} | 0
- ...hon3-pyasn1-modules_0.2.2.bb => python3-pyasn1-modules_0.2.6.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyasn1-modules_0.2.2.bb => python-pyasn1-modules_0.2.6.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyasn1-modules_0.2.2.bb => python3-pyasn1-modules_0.2.6.bb} (100%)
+ meta-python/recipes-devtools/python/python-pyparsing.inc              | 4 ++--
+ .../python/{python-pyparsing_2.4.0.bb => python-pyparsing_2.4.2.bb}   | 0
+ .../python/{python3-pyparsing_2.4.0.bb => python3-pyparsing_2.4.2.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyparsing_2.4.0.bb => python-pyparsing_2.4.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyparsing_2.4.0.bb => python3-pyparsing_2.4.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc b/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
-index 87dbd1d..a9e4bbe 100644
---- a/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
-+++ b/meta-python/recipes-devtools/python/python-pyasn1-modules.inc
-@@ -4,10 +4,10 @@ DESCRIPTION = "A collection of ASN.1 modules expressed in form of pyasn1\
-  data structures (X.509, PKCS etc.)."
- HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=815ac3f9ca693006349094b358ab3155"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd"
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing.inc b/meta-python/recipes-devtools/python/python-pyparsing.inc
+index e0df4e9..556946e 100644
+--- a/meta-python/recipes-devtools/python/python-pyparsing.inc
++++ b/meta-python/recipes-devtools/python/python-pyparsing.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyparsing.wikispaces.com/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=657a566233888513e1f07ba13e2f47f1"
  
--SRC_URI[md5sum] = "65ce1ea1021679bffe96065baab232de"
--SRC_URI[sha256sum] = "a0cf3e1842e7c60fde97cb22d275eb6f9524f5c5250489e292529de841417547"
-+SRC_URI[md5sum] = "c0bbe9820c971a97f156ff343ae67911"
-+SRC_URI[sha256sum] = "43c17a83c155229839cc5c6b868e8d0c6041dba149789b6d6e28801c64821722"
+-SRC_URI[md5sum] = "e534c0ca755155823bf45fdd8d084922"
+-SRC_URI[sha256sum] = "1873c03321fc118f4e9746baf201ff990ceb915f433f23b395f5580d1840cb2a"
++SRC_URI[md5sum] = "46d02cbe0461fe0571d51649e6006ef5"
++SRC_URI[sha256sum] = "6f98a7b9397e206d78cc01df10131398f1c8b8510a2f4d97d9abd82e1aacdd80"
  
  inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-pyasn1-modules_0.2.2.bb b/meta-python/recipes-devtools/python/python-pyasn1-modules_0.2.6.bb
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.4.0.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.4.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyasn1-modules_0.2.2.bb
-rename to meta-python/recipes-devtools/python/python-pyasn1-modules_0.2.6.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.2.bb b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.6.bb
+rename from meta-python/recipes-devtools/python/python-pyparsing_2.4.0.bb
+rename to meta-python/recipes-devtools/python/python-pyparsing_2.4.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.0.bb b/meta-python/recipes-devtools/python/python3-pyparsing_2.4.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-pyasn1-modules_0.2.6.bb
+rename from meta-python/recipes-devtools/python/python3-pyparsing_2.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyparsing_2.4.2.bb
 -- 
 2.7.4
 
