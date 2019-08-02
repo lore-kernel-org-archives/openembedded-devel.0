@@ -1,23 +1,30 @@
-Return-Path: <naveen.kumar.saini@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D0957F2AF
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 06:00:30 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	01 Aug 2019 23:00:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,337,1559545200"; d="scan'208";a="191788508"
-Received: from optimus-prime.png.intel.com ([172.30.199.130])
-	by fmsmga001.fm.intel.com with ESMTP; 01 Aug 2019 23:00:30 -0700
-From: Naveen Saini <naveen.kumar.saini@intel.com>
-To: Openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Aug 2019 14:02:34 +0800
-Message-Id: <20190802060234.14186-1-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [PATCH v2] icewm: add recipe
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3547F6BD08
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Aug 2019 06:11:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,337,1559491200"; d="scan'208";a="72732402"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 14:11:10 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 31B144CDF07B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Aug 2019 14:11:06 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 14:11:09 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Aug 2019 14:10:24 +0800
+Message-ID: <20190802061024.21808-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 31B144CDF07B.A82C5
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pyasn1: upgrade 0.4.5 -> 0.4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,124 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 06:00:31 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 06:11:10 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: "Yong, Jonathan" <jonathan.yong@intel.com>
-
-IceWM is a window manager for the X Window System.
-
-The goal of IceWM is to provide speed and simplicity.
-
-It comes with a taskbar with pager, global and per-window
-keybindings and a dynamic menu system.
-
-Website:
-https://ice-wm.org/
-
-Manual:
-https://ice-wm.org/manual/
-
-Themes Howto
-https://ice-wm.org/themes/
-
-Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...p-running-test-program-when-cross-co.patch | 37 ++++++++++++++++++
- meta-oe/recipes-extended/icewm/icewm_1.5.5.bb | 39 +++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
- create mode 100644 meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
+ meta-python/recipes-devtools/python/python-pyasn1.inc                 | 4 ++--
+ .../python/{python-pyasn1_0.4.5.bb => python-pyasn1_0.4.6.bb}         | 0
+ .../python/{python3-pyasn1_0.4.5.bb => python3-pyasn1_0.4.6.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.5.bb => python-pyasn1_0.4.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.5.bb => python3-pyasn1_0.4.6.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
-new file mode 100644
-index 000000000..794394855
---- /dev/null
-+++ b/meta-oe/recipes-extended/icewm/icewm/0001-configure.ac-skip-running-test-program-when-cross-co.patch
-@@ -0,0 +1,37 @@
-+From c2a67c1f62175ab061bc03d10dd766f968c6a097 Mon Sep 17 00:00:00 2001
-+From: Naveen Saini <naveen.kumar.saini@intel.com>
-+Date: Fri, 2 Aug 2019 10:41:26 +0800
-+Subject: [PATCH] configure.ac: skip running test program when cross-compiling
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-+---
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index c5e3ca03..4b89396a 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -140,7 +140,7 @@ AC_CHECK_FUNC([getloadavg],[AC_DEFINE([HAVE_GETLOADAVG2], 1, [getloadavg() is av
-+ AC_FUNC_SELECT_ARGTYPES
-+ 
-+ AC_MSG_CHECKING([for strlcpy])
-+-AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-++AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-+                char a[2];
-+                if (strlcpy(a, "yes", 2) != 3)
-+                    return 1;]])],
-+@@ -156,7 +156,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-+               ])
-+ 
-+ AC_MSG_CHECKING([for strlcat])
-+-AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-++AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
-+                char a[4] = "no";
-+                if (strlcat(a, "yes", 4) != 5)
-+                    return 1;]])],
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
-new file mode 100644
-index 000000000..63fca1dd1
---- /dev/null
-+++ b/meta-oe/recipes-extended/icewm/icewm_1.5.5.bb
-@@ -0,0 +1,39 @@
-+DESCRIPTION = "Ice Window Manager (IceWM)"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
-+
-+SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.xz \
-+           file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-+           "
-+SRC_URI[md5sum] = "6eba94a7935a0531d2c14eeb1426aeef"
-+SRC_URI[sha256sum] = "f1c1344b20a9e8635143f70ee27930b55f813c15ca61f84d77584d311b6ac027"
-+
-+inherit autotools pkgconfig gettext perlnative distro_features_check qemu
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
-+                --with-cfgdir=${sysconfdir}/icewm \
-+                --with-docdir=${docdir}/icewm \
-+                --enable-fribidi \
-+                --enable-xinerama \
-+                --enable-shape"
-+
-+DEPENDS = "asciidoc-native fontconfig gdk-pixbuf libxft libxpm libxrandr libxinerama libice libsm libx11 libxext libxrender"
-+DEPENDS_append = " qemu-native"
-+RDEPENDS_${PN} = "perl fribidi"
-+
-+do_compile_prepend_class-target() {
-+
-+    cd ${B}
-+    oe_runmake -C src genpref
-+
-+    qemu_binary="${@qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}',['${B}/src/.libs','${STAGING_DIR_TARGET}/${libdir}','${STAGING_DIR_TARGET}/${base_libdir}'])}"
-+    cat >qemuwrapper <<EOF
-+#!/bin/sh
-+${qemu_binary} src/genpref "\$@"
-+EOF
-+    chmod +x qemuwrapper
-+    ./qemuwrapper > src/preferences
-+}
-+
-+FILES_${PN} += "${datadir}/xsessions"
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index 3827fea..1086f30 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyasn1.sourceforge.net/"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a14482d15c2249de3b6f0e8a47e021fd"
+ 
+-SRC_URI[md5sum] = "f3c0cfbf882a20811be5ad5a41f74b82"
+-SRC_URI[sha256sum] = "da2420fe13a9452d8ae97a0e478adde1dee153b11ba832a95b223a2ba01c10f7"
++SRC_URI[md5sum] = "67f1da0cf680761d29169e54e7d53159"
++SRC_URI[sha256sum] = "b773d5c9196ffbc3a1e13bdf909d446cad80a039aa3340bcad72f395b76ebc86"
+ 
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.5.bb
+rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.5.bb
+rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.6.bb
 -- 
-2.17.1
+2.7.4
+
+
 
 
