@@ -1,46 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
-	[209.85.222.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CBD260291
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id AFA527F2BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 01:16:12 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id t8so53585668qkt.1
+	Fri,  2 Aug 2019 01:31:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,336,1559491200"; d="scan'208";a="72703529"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 09:31:22 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 142EE4CDF074
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Aug 2019 18:16:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xUzWVbZMoozd1rns6Qg5I2Kd4hRAHa+6r+yh+R2RVBs=;
-	b=SbugZC0pQVz2B3NwJ7QqOrr4/IjHuG8xyTZlAmBZAWa6av9iSdjNq0XwFXvFFTm62Z
-	M6lnfgQ4h2+Ad48qK+EqJw0hMcGi+mg7r7QcjqbAWI5L6tK0lsBo5HuEHVqNXwUGSOUI
-	lZtNmSYmR0p07Ud69nFOcx58KHzFLP+wFoOu2FlGLMKbEQBN1k6THsWkMAiJX1hPhBW+
-	ySOQLDD07nrAUz6FGk42oTzEPfEqPTuM4sN4ahaI92Oj0m+D+jCIHRUchlN/GXp3MAGK
-	yPPABuvWa3mGLh2tfiAgYagvhJfzIrIAq2MAnEnb0uwSHY8dZbl5j3Sue7B6BYvlE7Da
-	vIXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xUzWVbZMoozd1rns6Qg5I2Kd4hRAHa+6r+yh+R2RVBs=;
-	b=XE5zQvRapxPNL1Sh/ZW9nrHkooLaKqit8wCBHZlpDJ1lD69AMxjVyPHeidnu91Jx/w
-	NDTtXYE0SNnymqTox/domoYeCWDaVjfLOjECnJ1+FyppWRuJ3ghMDBvucMKXlJ7SfSZr
-	4bPcEgeS0ShYm3NCZQrLnaNNkyrJgKJoluIz1XFcwQJPAoWlj4mHK8MCBty5Rm0QxJCm
-	ulL7cnjtvuKHSCDGtoyoLzNPtKKEO7gd/dkfWcZUI2LyeFCQI7NCf9VpPt3yIFB79tDS
-	qy6YhCoz/9ev4Du304UBc/qBMCTpA/M8A0CBf7qWQR4PQiTdUu5C6K+vJNk3FAv4+xU7
-	I+ag==
-X-Gm-Message-State: APjAAAXsrEm65Fu4tZFHnI2Mm5VBUVdVVDbxYVdA0O0eijDnLCM1x3vZ
-	TwaMtsSZRB2zk5E3UCcgvE32gld57qGveD2LIlfW2xwP
-X-Google-Smtp-Source: APXvYqwBDmDbaTGTiw6Rw4sGHqd5CeKzdMvj4lpu33VZiP7vj92JNDwp9byy/UfGt26ciIiqbCF1zL0vvtirwIirOXg=
-X-Received: by 2002:ae9:f101:: with SMTP id k1mr55195764qkg.337.1564708572834; 
-	Thu, 01 Aug 2019 18:16:12 -0700 (PDT)
+	Fri,  2 Aug 2019 09:31:17 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 09:31:21 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Aug 2019 09:30:35 +0800
+Message-ID: <20190802013035.18267-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <CADiSOrHSURivdpcASjc5FSNVySwazwApQkv8E=1n-W+UJ_-Dpg@mail.gmail.com>
-In-Reply-To: <CADiSOrHSURivdpcASjc5FSNVySwazwApQkv8E=1n-W+UJ_-Dpg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 1 Aug 2019 18:15:46 -0700
-Message-ID: <CAMKF1sod39MhtC7ppfr=+Wet22Px0ds+fQ2p4Lf=sHQ+2RRE8w@mail.gmail.com>
-To: Luca Palano <contact@lpzone.it>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver] [PATCH] Netdata upgrade: 1.8.0 -> 1.16.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 142EE4CDF074.AC53E
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] itstool: upgrade 2.0.5 -> 2.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,18 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 01:16:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 02 Aug 2019 01:31:23 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Can you send the patch inline, maybe use git send-email so that
-patchwork can catch it
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../recipes-support/itstool/{itstool_2.0.5.bb => itstool_2.0.6.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/itstool/{itstool_2.0.5.bb => itstool_2.0.6.bb} (80%)
 
-On Thu, Aug 1, 2019 at 8:26 AM Luca Palano <contact@lpzone.it> wrote:
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb b/meta-oe/recipes-support/itstool/itstool_2.0.6.bb
+similarity index 80%
+rename from meta-oe/recipes-support/itstool/itstool_2.0.5.bb
+rename to meta-oe/recipes-support/itstool/itstool_2.0.6.bb
+index a0af44a..7ea253c 100644
+--- a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
++++ b/meta-oe/recipes-support/itstool/itstool_2.0.6.bb
+@@ -8,8 +8,8 @@ inherit autotools python3native
+ DEPENDS = "libxml2-native"
+ 
+ SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
+-SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
++SRC_URI[md5sum] = "4306eeba4f4aee6b393d14f9c3c57ca1"
++SRC_URI[sha256sum] = "6233cc22726a9a5a83664bf67d1af79549a298c23185d926c3677afa917b92a9"
+ 
+ do_install_append() {
+     # fix shebang of main script
+-- 
+2.7.4
+
+
+
 
