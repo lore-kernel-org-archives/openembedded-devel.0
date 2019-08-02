@@ -1,30 +1,27 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DBEF7D3A6
+Return-Path: <Liwei.Song@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 34EF47F2F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 03:38:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,336,1559491200"; d="scan'208";a="72712929"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 11:38:21 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 01D4B4CDD99E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 11:38:20 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 11:38:22 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Aug 2019 11:37:38 +0800
-Message-ID: <20190802033738.20132-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Fri,  2 Aug 2019 03:39:24 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x723dO8N006590
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 1 Aug 2019 20:39:24 -0700 (PDT)
+Received: from [128.224.162.229] (128.224.162.229) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 1 Aug 2019 20:39:24 -0700
+Message-ID: <5D43B06A.1050905@windriver.com>
+Date: Fri, 2 Aug 2019 11:39:22 +0800
+From: Liwei Song <liwei.song@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 01D4B4CDD99E.AE6E5
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] hwdata: upgrade 0.322 -> 0.326
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190802030005.63180-1-liwei.song@windriver.com>
+	<CAMKF1sq4f8v4TK3y6KTU3hVB_GtMVOXz9uyDbp44EiM6g3-JXw@mail.gmail.com>
+In-Reply-To: <CAMKF1sq4f8v4TK3y6KTU3hVB_GtMVOXz9uyDbp44EiM6g3-JXw@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] pm-graph: fix time format parse error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +34,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 03:38:21 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-index 58a0607..198a771 100644
---- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
-+++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
-@@ -5,8 +5,8 @@ SECTION = "System/Base"
- LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
- 
--PV = "0.322"
--SRCREV = "a65d28807d8f2446faa4734c758d1607f0a56ded"
-+PV = "0.326"
-+SRCREV = "dc8574c8e01ac758ba4dd23e7574492e261ad9ea"
- SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
- 
- S = "${WORKDIR}/git"
--- 
-2.7.4
+X-List-Received-Date: Fri, 02 Aug 2019 03:39:24 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
 
 
+On 08/02/2019 11:17 AM, Khem Raj wrote:
+> On Thu, Aug 1, 2019 at 8:01 PM Liwei Song <liwei.song@windriver.com> wrote:
+>>
+>> Time format in dmesg has been changed from "%Y-%m-%d %H:%M:%S" to
+>> "%Y-%m-%dT%H:%M:%S", backport an upstream patch to fix this error.
+>>
+>> Signed-off-by: Liwei Song <liwei.song@windriver.com>
+>> ---
+>>  .../pm-graph/pm-graph/0001-bootgraph.py.patch | 32 +++++++++++++++++++
+>>  .../recipes-kernel/pm-graph/pm-graph_5.3.bb   |  4 ++-
+>>  2 files changed, 35 insertions(+), 1 deletion(-)
+>>  create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+>>
+>> diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+>> new file mode 100644
+>> index 000000000000..79685d612abe
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+>> @@ -0,0 +1,32 @@
+>> +From 0c94e32b218c31f31a7988577fb9bec595034e7b Mon Sep 17 00:00:00 2001
+>> +From: Todd Brandt <todd.e.brandt@linux.intel.com>
+>> +Date: Fri, 10 May 2019 15:10:35 -0700
+>> +Subject: [PATCH] bootgraph.py: - handle boot time start grep better, the regex
+>> + needs more complexity
+>> +
+>> +Upstream-Status: Backport
+>> +
+> 
+> can you add the link to backport location here ?
+
+Got it, will change it in v2:
+Upstream-Status: Backport [https://github.com/intel/pm-graph/commit/0c94e32b218c31f31a7988577fb9bec595034e7b]
+
+Thanks,
+Liwei.
+
+
+> 
+> Upstream-Status: Backport [ <detail> ]
+> 
+>> +Signed-off-by: Liwei Song <liwei.song@windriver.com>
+>> +---
+>> + bootgraph.py | 4 ++--
+>> + 1 file changed, 2 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/bootgraph.py b/bootgraph.py
+>> +index a2b1b1897307..d7f4bd152bf1 100755
+>> +--- a/bootgraph.py
+>> ++++ b/bootgraph.py
+>> +@@ -333,9 +333,9 @@ def parseKernelLog():
+>> +                       if(not sysvals.stamp['kernel']):
+>> +                               sysvals.stamp['kernel'] = sysvals.kernelVersion(msg)
+>> +                       continue
+>> +-              m = re.match('.* setting system clock to (?P<t>.*) UTC.*', msg)
+>> ++              m = re.match('.* setting system clock to (?P<d>[0-9\-]*)[ A-Z](?P<t>[0-9:]*) UTC.*', msg)
+>> +               if(m):
+>> +-                      bt = datetime.strptime(m.group('t'), '%Y-%m-%d %H:%M:%S')
+>> ++                      bt = datetime.strptime(m.group('d')+' '+m.group('t'), '%Y-%m-%d %H:%M:%S')
+>> +                       bt = bt - timedelta(seconds=int(ktime))
+>> +                       data.boottime = bt.strftime('%Y-%m-%d_%H:%M:%S')
+>> +                       sysvals.stamp['time'] = bt.strftime('%B %d %Y, %I:%M:%S %p')
+>> +--
+>> +2.22.0
+>> +
+>> diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>> index ea12e054d3ab..a9f540ab8605 100644
+>> --- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>> +++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+>> @@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+>>
+>>  SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
+>>  SRC_URI = "git://github.com/intel/pm-graph.git \
+>> -           file://0001-Makefile-fix-multilib-build-failure.patch"
+>> +           file://0001-Makefile-fix-multilib-build-failure.patch \
+>> +           file://0001-bootgraph.py.patch \
+>> +"
+>>  S = "${WORKDIR}/git"
+>>
+>>  COMPATIBLE_HOST='(i.86|x86_64).*'
+>> --
+>> 2.22.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
 
