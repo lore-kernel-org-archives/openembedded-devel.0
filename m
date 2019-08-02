@@ -1,27 +1,23 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 996E87E31D
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id F02986B06C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 19:37:10 +0000 (UTC)
-Received: from menoah.home (apoitiers-652-1-11-81.w92-146.abo.wanadoo.fr
-	[92.146.125.81]) by koncepto.io (Postfix) with ESMTPSA id 0C78D602B3;
-	Fri,  2 Aug 2019 21:37:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1564774630;
-	bh=Ns+gkvGAdLF57njpdbVxHUPYbDkbBeX5jd1Gh2Zw7Vo=;
-	h=From:To:Cc:Subject:Date:From;
-	b=lQqsSUvtoDXyI3v0jRuknzKHqGOTInvxFYlDkoA0ET9Uz+uDaOfjV/0sPR1NPPXH5
-	0YxPVd+BS2SfamSsrZ83Sh4xEcao0K8iC40CAWreJwt8b1WkhzhuIP+GhmfsY0FW1f
-	ZcxF8MWWAne5pWAIDRUwMCjxfJoq8Ti1CDzDFbXiPFzudxMHhxRawusXmT1YWKKnEx
-	oYBFhKDRmIW0SV2jG7ff/wVRjiSlpS5ymwFgcgwK2tFc1N2rOkePG+qtrUSVCyzVfr
-	Ni815cKPiUQTR3l8+uP1VcSXFr8EsRDvEMzgwzOzor7nJ/9rGvW5cbiGsIUzjZYk2c
-	PFHFkqG+3xoyQ==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Aug 2019 21:36:51 +0200
-Message-Id: <1564774611-12607-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] cppzmq: bump to version 4.4.1
+	Fri,  2 Aug 2019 19:59:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x72JxZAt017483
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Aug 2019 12:59:35 -0700 (PDT)
+Received: from yow-tgamblin-lx.wrs.com (128.224.56.218) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 2 Aug 2019 12:59:34 -0700
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Aug 2019 15:59:34 -0400
+Message-ID: <20190802195934.5380-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Subject: [meta-gnome][PATCH] metacity; upgrade from 3.30.1 to 3.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,29 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 19:37:10 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 19:59:34 -0000
+Content-Type: text/plain
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../metacity/{metacity_3.30.1.bb => metacity_3.32.0.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.30.1.bb => metacity_3.32.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-index 11ea3be..cdd2f78 100644
---- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
- DEPENDS = "zeromq"
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.32.0.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb
+rename to meta-gnome/recipes-gnome/metacity/metacity_3.32.0.bb
+index 253f7ef36..ef6ea7946 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_3.30.1.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_3.32.0.bb
+@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/GNOME/metacity.git;branch=master \
+ "
  
--SRCREV = "213da0b04ae3b4d846c9abc46bab87f86bfb9cf4"
--PV = "4.3.0"
-+SRCREV = "f5b36e563598d48fcc0d82e589d3596afef945ae"
-+PV = "4.4.1"
+ S = "${WORKDIR}/git"
+-SRCREV = "d69fba052cdd0aa8348dc1bbbbb1ecbadfbebbd8"
++SRCREV = "bf1bfbadf47eff97703df17e95b15168e2034222"
  
- SRC_URI = "git://github.com/zeromq/cppzmq.git"
+ EXTRA_OECONF += "--disable-xinerama"
  
 -- 
-2.7.4
+2.17.1
 
 
