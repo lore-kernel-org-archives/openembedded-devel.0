@@ -1,23 +1,30 @@
-Return-Path: <Liwei.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D093A6B076
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B5486C1D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2019 03:41:11 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x723fC46007034
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  2 Aug 2019 05:23:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,337,1559491200"; d="scan'208";a="72729053"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Aug 2019 13:23:20 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 31B314CDCCC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Aug 2019 20:41:13 -0700 (PDT)
-Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 1 Aug 2019 20:41:05 -0700
-From: Liwei Song <liwei.song@windriver.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 1 Aug 2019 23:39:43 -0400
-Message-ID: <20190802033943.82078-1-liwei.song@windriver.com>
-X-Mailer: git-send-email 2.22.0
+	Fri,  2 Aug 2019 13:23:17 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 2 Aug 2019 13:23:30 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Aug 2019 13:22:35 +0800
+Message-ID: <20190802052235.21224-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] pm-graph: fix time format parse error
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 31B314CDCCC4.A9CB0
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-jsonpatch: upgrade 1.23 -> 1.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,74 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2019 03:41:12 -0000
+X-List-Received-Date: Fri, 02 Aug 2019 05:23:20 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Time format in dmesg has been changed from "%Y-%m-%d %H:%M:%S" to
-"%Y-%m-%dT%H:%M:%S", backport an upstream patch to fix this error.
-
-Signed-off-by: Liwei Song <liwei.song@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../pm-graph/pm-graph/0001-bootgraph.py.patch | 32 +++++++++++++++++++
- .../recipes-kernel/pm-graph/pm-graph_5.3.bb   |  4 ++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+ meta-python/recipes-devtools/python/python-jsonpatch.inc              | 4 ++--
+ .../python/{python-jsonpatch_1.23.bb => python-jsonpatch_1.24.bb}     | 0
+ .../python/{python3-jsonpatch_1.23.bb => python3-jsonpatch_1.24.bb}   | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-jsonpatch_1.23.bb => python-jsonpatch_1.24.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.23.bb => python3-jsonpatch_1.24.bb} (100%)
 
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
-new file mode 100644
-index 000000000000..d49ce0138aec
---- /dev/null
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
-@@ -0,0 +1,32 @@
-+From 0c94e32b218c31f31a7988577fb9bec595034e7b Mon Sep 17 00:00:00 2001
-+From: Todd Brandt <todd.e.brandt@linux.intel.com>
-+Date: Fri, 10 May 2019 15:10:35 -0700
-+Subject: [PATCH] bootgraph.py: - handle boot time start grep better, the regex
-+ needs more complexity
-+
-+Upstream-Status: Backport [https://github.com/intel/pm-graph/commit/0c94e32b218c31f31a7988577fb9bec595034e7b]
-+
-+Signed-off-by: Liwei Song <liwei.song@windriver.com>
-+---
-+ bootgraph.py | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/bootgraph.py b/bootgraph.py
-+index a2b1b1897307..d7f4bd152bf1 100755
-+--- a/bootgraph.py
-++++ b/bootgraph.py
-+@@ -333,9 +333,9 @@ def parseKernelLog():
-+ 			if(not sysvals.stamp['kernel']):
-+ 				sysvals.stamp['kernel'] = sysvals.kernelVersion(msg)
-+ 			continue
-+-		m = re.match('.* setting system clock to (?P<t>.*) UTC.*', msg)
-++		m = re.match('.* setting system clock to (?P<d>[0-9\-]*)[ A-Z](?P<t>[0-9:]*) UTC.*', msg)
-+ 		if(m):
-+-			bt = datetime.strptime(m.group('t'), '%Y-%m-%d %H:%M:%S')
-++			bt = datetime.strptime(m.group('d')+' '+m.group('t'), '%Y-%m-%d %H:%M:%S')
-+ 			bt = bt - timedelta(seconds=int(ktime))
-+ 			data.boottime = bt.strftime('%Y-%m-%d_%H:%M:%S')
-+ 			sysvals.stamp['time'] = bt.strftime('%B %d %Y, %I:%M:%S %p')
-+-- 
-+2.22.0
-+
-diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-index ea12e054d3ab..a9f540ab8605 100644
---- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-+++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+index 409c09a..8f64c2a 100644
+--- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
++++ b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
  
- SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
- SRC_URI = "git://github.com/intel/pm-graph.git \
--           file://0001-Makefile-fix-multilib-build-failure.patch"
-+           file://0001-Makefile-fix-multilib-build-failure.patch \
-+           file://0001-bootgraph.py.patch \
-+"
- S = "${WORKDIR}/git"
+ inherit pypi
  
- COMPATIBLE_HOST='(i.86|x86_64).*'
+-SRC_URI[md5sum] = "83c4c9faccb4a2ff8c1db80cbddc590d"
+-SRC_URI[sha256sum] = "49f29cab70e9068db3b1dc6b656cbe2ee4edf7dfe9bf5a0055f17a4b6804a4b9"
++SRC_URI[md5sum] = "e86503f05fa192fa870d7004b8ce929a"
++SRC_URI[sha256sum] = "cbb72f8bf35260628aea6b508a107245f757d1ec839a19c34349985e2c05645a"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.24.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb
+rename to meta-python/recipes-devtools/python/python-jsonpatch_1.24.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.24.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.24.bb
 -- 
-2.22.0
+2.7.4
+
+
 
 
