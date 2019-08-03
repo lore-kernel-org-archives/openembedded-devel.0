@@ -1,53 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 811C271CBD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
+	[209.85.208.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 451877D65D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2019 01:10:49 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id k189so17817244pgk.13
+	Sat,  3 Aug 2019 10:11:43 +0000 (UTC)
+Received: by mail-ed1-f51.google.com with SMTP id k8so74492787edr.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Aug 2019 18:10:50 -0700 (PDT)
+	Sat, 03 Aug 2019 03:11:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=WtCZ6cpDq/1gSHIbasN3uMzdOamWMuPp6k5D7dKjM6c=;
-	b=PtFG6w7JjxSL7CczXrmtOJmH5+OR7RcXxIfK4uxfvVVwh6yynMLnZZhGQTim9+5oUL
-	fKDmJtIOOHwFHPoIDoq0O99EDCTGoTVPc2R2yTWGd9bnA6MKkIdKFW9jBkOTTEHIsRpS
-	qcz5SYHQWU/Q0HA81vDh9THBTTrDHOaKuZ6n4fkcFmDjPNh0SpZRVI3iomihHxCBPAJ5
-	YFnJxnxlW6tUyRU4WUj9T493Q/kxox4+8jthiblKDLXFRtndKplr+FKugf7uVl9qHQOy
-	bhrXjKSkfMevv9w2jxckLQOwF+zFvTMrbRTMICJ7iYqjRwQ66ymQyroBNISBua1fI8/K
-	nXnw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=q9/plLoPEJf0rhKL67tTQIEH3Dyxf4/8zfWAXVIfIZk=;
+	b=okOO+md1d6/4qgHoRKVIzd7h00DyhUOihEfrU4SRL+nwnp7+N+OPkMss+xUrsNM0x5
+	J7YYt3dYXqNvFIbaJLFAiFRDlG448MB+W+RYCfzETT4C8Qi+aTW93xXb/fvlD+xVq9YX
+	tWU8h1Uc6X0elotGmZPug0Mhv9t4eQvSztV6h2lvdYPmMZQ9LpWqYX5TcyENWnMBzknX
+	envvK++DmMDcc0Gqrflkqnv8r7Nyx1kxo58c+SmZMqzSPEir+yXHyanc9862b/14R1cg
+	zmlWLR+KpPPeaic/qHqMdb9yEqG91YZVStwvW3tbeCFGfFxZughOqcNOj8rP+jxBjBCR
+	54tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=WtCZ6cpDq/1gSHIbasN3uMzdOamWMuPp6k5D7dKjM6c=;
-	b=XL2nB9xcSLlBqeWE8yGqhNeAZztM2AQ4G8EagZKqWaf7tFwM4qtGzSkrFDCSK+qi+9
-	+rtasztg7kOAvLdfh2RE7i0izYvUXFxQC3d4oHjQVcYfa9ANgSKQetUFzMj03txJXjEE
-	X/WnIuTpvpgh+BUucy3v64HqdV8EKTbvxjh/lNvn+sPNm7QhiZIGKFK2OIkY68O6tizw
-	GJ2tPQ7cwt68oce2gLL7ByBMMLufbVNeipGxDysT+s05/C950cmwjJyWed3D8csAPfY6
-	deSFrkFRemu2FYUXlkHvxf9PDWS7LDmspZkE1EWvMOPbo6eV6kNCf2bWIEW1gWQWBVhk
-	5Frw==
-X-Gm-Message-State: APjAAAVX01UxiGa8QV3+y7PTxBheya7ED8eDe0k1IXENC5poFYeQiWvq
-	xN9HEQkgpTazYQ6YUzKonPXJi9u/gvk=
-X-Google-Smtp-Source: APXvYqz+gydO9K/OfXQOwg2XZ5qDNtph3ZbnvWS4zz9qMLeM0Z8xp04L9LBDQm4XRnfit5ndcFau5w==
-X-Received: by 2002:a17:90a:ba94:: with SMTP id
-	t20mr7169503pjr.116.1564794650143; 
-	Fri, 02 Aug 2019 18:10:50 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	22sm86976937pfu.179.2019.08.02.18.10.49
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 02 Aug 2019 18:10:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Aug 2019 18:10:37 -0700
-Message-Id: <20190803011037.41864-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190803011037.41864-1-raj.khem@gmail.com>
-References: <20190803011037.41864-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=q9/plLoPEJf0rhKL67tTQIEH3Dyxf4/8zfWAXVIfIZk=;
+	b=GxhHzGuDLr0A4pDna6KVGPH2PBIGzWwshERkdR8k0jQ9jtu6bCFuA1exQj7OBWpjeT
+	B1zhvG5gIAuo/lpu5b6z5F6BTIWLAimGXRX2Mp17PMxerOeCJA1AbfDbjyev5PugbXyu
+	leYofXU+5+H0tNz01pK4c0yfGJ08U7F9uHgD2cQKnDDHXSqzIUCNK30uksQQ3VoptoZ/
+	4C2i2DbRNEcUzgN2dZtbL7e5Q0qnYzKcY4qWBTo8VCJzIoxpWTHde614M4mnPQqtVXVe
+	vF5diqtqR+bHSZYHoRqnN4jwvMkZAZwBGksBiqgU2NNyqHptzwouuBUetSxfvLrUtiWg
+	oFPg==
+X-Gm-Message-State: APjAAAWLmAZbcWKFg71184CvejVB+htdHtGyCkVxz+4l2dmWz09+Vr7i
+	49pGYS41P3GwHiY8s5TAqukngnyFfvzhk3yrFyA=
+X-Google-Smtp-Source: APXvYqwq50FOT4KszV7yMIW76jtIGtZSJqNnXuPn+mYNOIzisxycHE+YDo2H5duy8qTv1UdMKH48Kp85rkSFDMEJ4kc=
+X-Received: by 2002:a17:906:6a87:: with SMTP id
+	p7mr37734289ejr.277.1564827103805; 
+	Sat, 03 Aug 2019 03:11:43 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-initramfs][PATCH 2/2] klcc-cross: Recognise --unwindlib clang option
+References: <20190803011037.41864-1-raj.khem@gmail.com>
+In-Reply-To: <20190803011037.41864-1-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 3 Aug 2019 12:11:32 +0200
+Message-ID: <CA+chaQfYoTzL3EBN9HP4=8ZY7ooR2jZDWzquS7uQond4Tg6dTw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH 1/2] libsub-exporter-progressive-perl: Replace DEPENDS_PN with DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,42 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2019 01:10:49 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 03 Aug 2019 10:11:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../klibc/files/klcc-cross-accept-clang-options.patch | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+Shouldn't this one be rather RDEPENDS_${PN}?
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-index 07703aa536..3b7031e981 100644
---- a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-+++ b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
-@@ -3,16 +3,17 @@ meta-clang passes this option to compiler defaults
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
--Index: git/klcc/klcc.in
--===================================================================
----- git.orig/klcc/klcc.in
--+++ git/klcc/klcc.in
--@@ -207,6 +207,9 @@ while ( defined($a = shift(@ARGV)) ) {
-+--- a/klcc/klcc.in
-++++ b/klcc/klcc.in
-+@@ -207,6 +207,12 @@ while ( defined($a = shift(@ARGV)) ) {
-      } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
-  	# Override gcc encoded sysroot
-  	push(@ccopt, $a);
- +    } elsif ( $a eq '-no-integrated-as' ) {
- +	# Allow clang options
-++	push(@ccopt, $a);
-++    } elsif ( $a =~ '--unwindlib=.*' ) {
-++	# Allow clang options
- +	push(@ccopt, $a);
-      } else {
-  	die "$0: unknown option: $a\n";
--- 
-2.22.0
+It was building without this build time dependency before and it's not
+-native, so I guess it was rather typo in runtime dependency?
 
+On Sat, Aug 3, 2019 at 3:11 AM Khem Raj <raj.khem@gmail.com> wrote:
+
+> Fixes
+> libsub-exporter-progressive-perl_0.001013.bb: QA Issue: recipe uses
+> DEPENDS_${PN}, should use DEPENDS [pkgvarcheck]
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../libsub/libsub-exporter-progressive-perl_0.001013.bb         | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-perl/recipes-perl/libsub/
+> libsub-exporter-progressive-perl_0.001013.bb
+> b/meta-perl/recipes-perl/libsub/
+> libsub-exporter-progressive-perl_0.001013.bb
+> index 64d19c0f1f..e484f4a7a0 100644
+> --- a/meta-perl/recipes-perl/libsub/
+> libsub-exporter-progressive-perl_0.001013.bb
+> +++ b/meta-perl/recipes-perl/libsub/
+> libsub-exporter-progressive-perl_0.001013.bb
+> @@ -13,7 +13,7 @@ HOMEPAGE = "
+> https://metacpan.org/pod/Sub-Exporter-Progressive/"
+>  LICENSE = "Artistic-1.0 | GPL-1.0+"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=003fa970662359a43ac2c2961108b0f1"
+>
+> -DEPENDS_${PN} = " perl-module-test-more"
+> +DEPENDS += " perl-module-test-more"
+>
+>  SRC_URI =
+> "${CPAN_MIRROR}/authors/id/F/FR/FREW/Sub-Exporter-Progressive-${PV}.tar.gz"
+>  SRC_URI[md5sum] = "72cf6acdd2a0a8b105821a4db98e4ebe"
+> --
+> 2.22.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
