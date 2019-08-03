@@ -1,37 +1,33 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 106067F3D8
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 533 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 03 Aug 2019 19:54:00 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A3046D7C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2019 15:27:42 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4617FV59DXz2Y;
-	Sat,  3 Aug 2019 17:27:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564846063;
-	bh=wySM0G/T539TVRAFZHb/uCB6AhawB/GdIj8nQ2BIofc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=MmnpkvAJd4B3X2iUj+zndx9Nz6c5FJTHVoyTYLPqZgcT9lPFGGgkTDizz6qDuDXGK
-	owNrqUj7gPPe1vqDsWfqXHpaYNs56kH2eX0Vdj6G6xpfYkM2wAeFBZGfW5xfk5i0mm
-	XmYZVp0Lh52c/7VAYqP1FdbMqDZsHuJHvXgSwnzPkADe1vsDTxbpLc+y33gxz012pA
-	/g1HBAnMXZgZkJk60zlEcvfl4eMiREi5eYIO5hlFxl90A5clp3Ik9/o0xZVhurVMb0
-	EjeINnok2UP6jtFcvTDQXBQWrdkoIpJcHcM2hVudavtQAFV8nsZXu4etZsp1SJbcPZ
-	3T/8kiB3m5T4l2pwzlbaRwARlhWxJTTDCu51Q4mjv33fsNgca3yeHQ/1t4PDr6m5C2
-	g3Lw75+aX4NQclzV8W0uEfFrLGYC6OfXipfta4rP+IvJOeH4vbHwpChmreUWyAFHb7
-	YfW993fz/QVVY4vYmClSJxvyz3A2fNQULomvL+Tw+PV5do+0ayCco7TA5IsaAS345c
-	2NraexKeKoT5eiglRZp17AB+odYc4Jmcm/gLND80DJXSW1p6sfer8xQ0TytbozzKlo
-	wwOfEY8kG5no5gRWLjKtTeLI0iwHJk9/IL6Oo02S47PdjvlqXJerdSuk0+RaFRQJm2
-	+wy7NQdZ5k8BQnPpYZSKUHkE=
-Date: Sat, 3 Aug 2019 18:27:38 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20190803152738.GA10277@localhost>
-References: <20190803011037.41864-1-raj.khem@gmail.com>
-	<CA+chaQfYoTzL3EBN9HP4=8ZY7ooR2jZDWzquS7uQond4Tg6dTw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQfYoTzL3EBN9HP4=8ZY7ooR2jZDWzquS7uQond4Tg6dTw@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-perl][PATCH 1/2] libsub-exporter-progressive-perl: Replace DEPENDS_PN with DEPENDS
+	Sat,  3 Aug 2019 19:53:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 67C6F40BDC;
+	Sat,  3 Aug 2019 19:45:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id PBm0_HdcA4xI; Sat,  3 Aug 2019 19:45:08 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4C05F40AB7;
+	Sat,  3 Aug 2019 19:45:07 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 7E643171F4B;
+	Sat,  3 Aug 2019 15:45:06 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Aug 2019 15:44:59 -0400
+Message-Id: <1564861499-24954-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-filesystems][PATCH] ufs-tool: add tool to access UFS (Universal Flash Storage) devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2019 15:27:43 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Sat, 03 Aug 2019 19:54:00 -0000
 
-On Sat, Aug 03, 2019 at 12:11:32PM +0200, Martin Jansa wrote:
-> Shouldn't this one be rather RDEPENDS_${PN}?
-> 
-> It was building without this build time dependency before and it's not
-> -native, so I guess it was rather typo in runtime dependency?
+From: Denys Dmytriyenko <denys@ti.com>
 
-This also sounds wrong to me.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../recipes-utils/ufs-tool/ufs-tool_git.bb           | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
 
-As expected it uses Test::More only when running tests,
-so forcing a runtime dependency is unnecessary.
-
-RDEPENDS_${PN}-ptest would be correct if there was a ptest package.
-
-cu
-Adrian
-
+diff --git a/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
+new file mode 100644
+index 0000000..e074b51
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Tool to access UFS (Universal Flash Storage) devices"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++
++PV = "1.3+git${SRCPV}"
++
++BRANCH ?= "dev"
++
++SRCREV = "8b00e33003b57d7071943f63863fcf8cc48d5be9"
++
++SRC_URI = "git://github.com/westerndigitalcorporation/ufs-tool.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
++
++do_install() {
++	install -d ${D}${bindir}/
++	install -c -m 755 ${S}/ufs-tool ${D}${bindir}/
++}
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.7.4
 
 
