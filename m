@@ -1,36 +1,48 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 908C17F31A
+Return-Path: <scottellis.developer@gmail.com>
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
+	[209.85.219.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 70D597CE79
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Aug 2019 09:05:32 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 461Zk24873z4R;
-	Sun,  4 Aug 2019 11:05:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564909531;
-	bh=ZIZD/hSVW2jh9URgM2hOU7HCnWBTr7TCqRpxfYYctk8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=JfeFWPNLuMN0QIP+aZgA7FtSJFfIlWN+YJvpc4EusTpkQ5vTjI+TjE1fVBH3pDzjU
-	i6DqvxFv1vRspQr7CiIbtHNGDRuSI5eEc1l80kYIrmuCAfH/vrzY/Kr4wIUWV5oN31
-	3EezXbZaIv7uZAChct6Bikc2H1RBLF+9Wzlk76o3uKzO1LjBfFfweZnwjKagBLdX5b
-	p6pQdQQpm8r9VBE6aGdY17pWglQg87MauHZJYjiSZinC9dUiP2VhviDSVhpMDYMwUN
-	Qj3UMTJAr4BN7n/loizAOBW9Br7+vUayMxYD02ageEAmJeN9qFqHh5Yd69zPr5bEzn
-	ZPBRZVsVp9u3WFsU4oZhJ+Fmqwx0DpcRu5Wm5yGMvEkpm0Gx+nKHrCdHsc6Yq1U6OB
-	OnWGzZOu49JplqnXidZmcddr/xYVIRwUYwVstCFqBtgh2UiDomMKx6XLNCqirUbvd8
-	bpWsFjf5eqp3QxQW/qazHmN1LKZB3xwEO3jsPk9Rvq3Y3L83oLJQMoCQ0SLidzzcWN
-	QsLyr2cJlIrIGWzFPXQLcALdgt4aLu8goJmsreyE1XcY1IzW0lAjzkCWJNz+XfJtwe
-	Lyn0QmAl1G8JZyFQnqvGqOUH/4YBwrQGrC+OtWGkI+/BuV4MwCNG99RglL4BKyVp1j
-	M6VwFyPG25fvJe/nOchx8IwE=
-Date: Sun, 4 Aug 2019 12:05:28 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190804090528.GA18199@localhost>
-References: <20190731064819.134342-1-kai.kang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <20190731064819.134342-1-kai.kang@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] poppler: toggle gobject-introspection support
+	Sun,  4 Aug 2019 14:52:47 +0000 (UTC)
+Received: by mail-yb1-f180.google.com with SMTP id d9so21984688ybf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Aug 2019 07:52:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=opfFkqbm8kptGZ4VeVOJowE57azVFas5UnLdFJVe4Zg=;
+	b=RPZGccekPIqaUPr7sRSQq7qJFa0mKvlPvK+CYGxqaIMuHAdtebQ4QC/1bTpUx8ZaMR
+	ZUvwpQGwG/CgRf7ZkNzBwcoTaRNLn+lLIwGTV5nBzi3FZiTvttkQngj2KGgI+S+zGTgW
+	vYbaJZVBNTVWcNHbRFHXX0Wd62A/EsRlkPfsFfYR0VBgTOsdnW4dFN5xfF05YiSLqAiE
+	sKtgxbGrYR6JP2V/zNLvkytjUSfzjUMSV1ZzcxIJnc7EcMMAaODKqtKPYnquaDwr48HX
+	/VlAxWf7ry5jB1UIkuwLFbYE5cczOvtEu4McIt6drwxcIT263+cG9SnC/5sza2hagn+/
+	/snQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=opfFkqbm8kptGZ4VeVOJowE57azVFas5UnLdFJVe4Zg=;
+	b=Q2Jjk1FLSw39wLvurNmMkeQLw2i/2h9/9UYWfooYA7gvrX1zpnm30RWXRpmvB/tcxy
+	kPM/0DAHAeFXD+J0xd/6wCXA7KEasGmLxGSaFBoBwW3/aLz9BU4i1FI7HjpijJIw8A09
+	jL/EdO+Lg5kQ1VDo9rpgJgtSwq4zaRwuEki1n7cDPXEYuIJ9BnSzJEhHpuzhqElNxzKq
+	bHQGYhzehTxii1/TpQxVYKRVZm9OZYfsO9CQ1g076eOrMynlLMZrVnViE7DrdxW4jeUV
+	wHuhz+dzNavHX0XOewZFyRzG5MzVRzuYY5YZJ9kamYK35S+/lyf3Zm5BsgPcqY09pvPd
+	be+g==
+X-Gm-Message-State: APjAAAV29ryqhaVMVLqxMIkte+DV76y1D27Uv7vtyK+IoLo++gQ1nCPB
+	xn02Ggv6dmqpPZxrICiPAPrAhBzR
+X-Google-Smtp-Source: APXvYqzwXkyDionW3HoUxMFK0cSz+G0I7uysNdQ3hclbGytmDK2CidN+BZRizFp1Qtpiysm2SXpAqQ==
+X-Received: by 2002:a25:7109:: with SMTP id m9mr52263788ybc.454.1564930368099; 
+	Sun, 04 Aug 2019 07:52:48 -0700 (PDT)
+Received: from fractal.jumpnow (c-73-234-253-132.hsd1.me.comcast.net.
+	[73.234.253.132]) by smtp.gmail.com with ESMTPSA id
+	d124sm19283898ywc.100.2019.08.04.07.52.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 04 Aug 2019 07:52:47 -0700 (PDT)
+From: Scott Ellis <scottellis.developer@gmail.com>
+X-Google-Original-From: Scott Ellis <scott@jumpnowtek.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  4 Aug 2019 10:52:43 -0400
+Message-Id: <1564930363-7169-1-git-send-email-scott@jumpnowtek.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] wireguard: Upgrade 20190406 to 20190702
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,47 +55,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2019 09:05:32 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Sun, 04 Aug 2019 14:52:47 -0000
 
-Khem, did you miss this patch due to openembedded-devel@ only being in
-the Cc or other reasons?
+Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
+---
+ ...eguard-module_0.0.20190406.bb => wireguard-module_0.0.20190702.bb} | 0
+ ...ireguard-tools_0.0.20190406.bb => wireguard-tools_0.0.20190702.bb} | 0
+ meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190406.bb => wireguard-module_0.0.20190702.bb} (100%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190406.bb => wireguard-tools_0.0.20190702.bb} (100%)
 
-Thanks
-Adrian
-
-
-On Wed, Jul 31, 2019 at 02:48:19AM -0400, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
-> 
-> It doesn't provide a way to enable or disable gobject-introspection
-> support for poppler. Toggle it respect to variable GI_DATA_ENABLED.
-> 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-oe/recipes-support/poppler/poppler_0.79.0.bb | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/meta-oe/recipes-support/poppler/poppler_0.79.0.bb b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-> index 068433475..b285eecd2 100644
-> --- a/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-> +++ b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
-> @@ -34,6 +34,7 @@ EXTRA_OECMAKE += " \
->      -DBUILD_GTK_TESTS=OFF \
->      -DENABLE_ZLIB=ON \
->      -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='${STAGING_INCDIR}' \
-> +    ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_GOBJECT_INTROSPECTION=ON', '-DENABLE_GOBJECT_INTROSPECTION=OFF', d)} \
->  "
->  
->  do_configure_append() {
-> -- 
-> 2.20.0
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190406.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190406.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 5cf745e..12dd9c8 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+-SRC_URI[md5sum] = "c11254fe48695e61c145a7e82756ecba"
+-SRC_URI[sha256sum] = "2f06f3adf70b95e74a7736a22dcf6e9ef623b311a15b7d55b5474e57c3d0415b"
++SRC_URI[md5sum] = "7410a52bacc5eb85e1634a20c07d3bed"
++SRC_URI[sha256sum] = "1a1311bc71abd47a72c47d918be3bacc486b3de90734661858af75cc990dbaac"
+ 
+ S = "${WORKDIR}/WireGuard-${PV}/src/"
+-- 
+2.7.4
 
 
