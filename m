@@ -1,33 +1,50 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 533 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 03 Aug 2019 19:54:00 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A3046D7C1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 91FCE7F3B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2019 19:53:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 67C6F40BDC;
-	Sat,  3 Aug 2019 19:45:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id PBm0_HdcA4xI; Sat,  3 Aug 2019 19:45:08 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4C05F40AB7;
-	Sat,  3 Aug 2019 19:45:07 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 7E643171F4B;
-	Sat,  3 Aug 2019 15:45:06 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Sun,  4 Aug 2019 00:06:09 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id n4so2585651pgv.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Aug 2019 17:06:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=P6cOqzbDQvSUj/TTaIXN4T1/H/DxPdFmtztRVrwvj2k=;
+	b=o9a6tx4QB3v6rUh7bUMOQ9fYN4gc0hePNmpIPr++YhHo/+HpVZ+uB47xnwPTxAISUG
+	uO1Hr4hJpmcV4Sgooh+JSYs2D4XRCPhUGOaF6relKlLhxV1jc63rCbDZn/nW46aUc2oe
+	/gyd2fbBxIGRTuR3H1O9/P/X/wZOr5CbLBeS0NRPBU6mfX6GgbbkY3RhhCYvs0QFl9Fg
+	qMmlVyBUxTbN+y0N81nTXXrpCek3qBKuThql5J4PZTD6c6kPiaq9VhWPt5/r8iwGPYFX
+	Lz2VCzE3Tu5Ugdn1oaedXUoTnzd+X8u3oa7JZL9LlwwB6HxO2dqMKK9bdTRLlLz0JB8R
+	15nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=P6cOqzbDQvSUj/TTaIXN4T1/H/DxPdFmtztRVrwvj2k=;
+	b=gsKYNCisZzxNd5kBfslN3KIi+so9S2P7/qVcihksF8b1c5fAk6mFs9akm9EfgO8M6G
+	OB/IgPS5NJFZKWrEjqS5Q3M3iKzCTfULNjbRyUaTwOTqzme01lxXBlQnuQKoDpC2sK5F
+	BMOLFjFHofWeY2dUKBSNQ0UbZmw2ntddl8b2WsbtT8i6p5BvwaXz2fOGYHQG/6FQ5LgJ
+	dEt7Nw8GmGskrgn6vz+IVdOmEkFWKLXileVP/FZQqcWRMv710AGodzaDFxOA6OnWZ691
+	uFPaFXpT77kIv0PwyaN/jxrvsnWsrcUJ92XQo6Nl+OhYz7RTjeFG5NRXvJmbKZIDADZj
+	OqvA==
+X-Gm-Message-State: APjAAAXWqBpfIsDqNwgf+phntqxzD7MLgI0XAyD/ZCpEqKN4d6/NRGCI
+	b/hPNKBxFTmPmcGp3CgbuH8LnVjXWdw=
+X-Google-Smtp-Source: APXvYqyr9C7CAdZ7Jc79fyA6jcWT9M6IRO6Sc3PbDNX7FyG3S6RywzHH4ttFiScNb5ajJo3ZEXaAGA==
+X-Received: by 2002:a63:e5a:: with SMTP id 26mr125786183pgo.3.1564877170089;
+	Sat, 03 Aug 2019 17:06:10 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	n5sm84139190pfn.38.2019.08.03.17.06.09
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sat, 03 Aug 2019 17:06:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Aug 2019 15:44:59 -0400
-Message-Id: <1564861499-24954-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-filesystems][PATCH] ufs-tool: add tool to access UFS (Universal Flash Storage) devices
+Date: Sat,  3 Aug 2019 17:06:01 -0700
+Message-Id: <20190804000601.35371-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libedit: Delete
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,43 +57,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2019 19:54:00 -0000
+X-List-Received-Date: Sun, 04 Aug 2019 00:06:09 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+Its in oe-core now
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-utils/ufs-tool/ufs-tool_git.bb           | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
+ .../libedit/libedit/stdc-predef.patch         | 17 --------------
+ .../libedit/libedit_20190324-3.1.bb           | 23 -------------------
+ 2 files changed, 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
+ delete mode 100644 meta-oe/recipes-devtools/libedit/libedit_20190324-3.1.bb
 
-diff --git a/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
-new file mode 100644
-index 0000000..e074b51
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Tool to access UFS (Universal Flash Storage) devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+
-+PV = "1.3+git${SRCPV}"
-+
-+BRANCH ?= "dev"
-+
-+SRCREV = "8b00e33003b57d7071943f63863fcf8cc48d5be9"
-+
-+SRC_URI = "git://github.com/westerndigitalcorporation/ufs-tool.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
-+
-+do_install() {
-+	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/ufs-tool ${D}${bindir}/
-+}
+diff --git a/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch b/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
+deleted file mode 100644
+index c95cdc9d2d..0000000000
+--- a/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-__STDC_ISO_10646__ is defined in stdc-predef.h
+-therefore include it to see if its there on a platform
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-Index: libedit-20160903-3.1/src/chartype.h
+-===================================================================
+---- libedit-20160903-3.1.orig/src/chartype.h
+-+++ libedit-20160903-3.1/src/chartype.h
+-@@ -29,6 +29,7 @@
+- #ifndef _h_chartype_f
+- #define _h_chartype_f
+- 
+-+#include <stdc-predef.h>
+- /* Ideally we should also test the value of the define to see if it
+-  * supports non-BMP code points without requiring UTF-16, but nothing
+-  * seems to actually advertise this properly, despite Unicode 3.1 having
+diff --git a/meta-oe/recipes-devtools/libedit/libedit_20190324-3.1.bb b/meta-oe/recipes-devtools/libedit/libedit_20190324-3.1.bb
+deleted file mode 100644
+index 9d333e7aa1..0000000000
+--- a/meta-oe/recipes-devtools/libedit/libedit_20190324-3.1.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "BSD replacement for libreadline"
+-DESCRIPTION = "Command line editor library providing generic line editing, \
+-history, and tokenization functions"
+-HOMEPAGE = "http://www.thrysoee.dk/editline/"
+-SECTION = "libs"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1e4228d0c5a9093b01aeaaeae6641533"
+-
+-DEPENDS = "ncurses"
+-
+-inherit autotools
+-
+-# upstream site does not allow wget's User-Agent
+-FETCHCMD_wget += "-U bitbake"
+-SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
+-           file://stdc-predef.patch \
+-          "
+-SRC_URI[md5sum] = "bec755c8044ad84b752dfe49a0b371d8"
+-SRC_URI[sha256sum] = "ac8f0f51c1cf65492e4d1e3ed2be360bda41e54633444666422fbf393bba1bae"
+-
+-S = "${WORKDIR}/${BPN}-${PV}"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
+2.22.0
 
 
