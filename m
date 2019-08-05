@@ -1,33 +1,47 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 34B98608B1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
+	[209.85.160.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CF1F67F265
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 18:24:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 462R524JQMz65
+	Mon,  5 Aug 2019 19:13:29 +0000 (UTC)
+Received: by mail-qt1-f178.google.com with SMTP id h21so82019367qtn.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 20:24:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1565029495;
-	bh=XvJmKOFp1iRgkCXARAsxItO4y1VSUN6OZw+doAcDL6A=;
-	h=From:To:Subject:Date:From;
-	b=A7yMJrGAHEDTloj5eph8HZOoJSqJ0FDHT+QKKiLNUhYtDSeeu7+SLhkAK+WrhIl68
-	qjSa1Kh/3yt2oXK/oMlBsJ7wX6zoSuaZED/vQu9f6mAhTfKYhD6aqtLowUNywg923U
-	wrAYMR9kBfkdnl3aDbguDY+xOHzQ4w7cgQsL4PsSvUp+v2eR3U7cT+H6D4YPylLrZb
-	/OZJQ0c/oXVVFB5mDKGY8wdQVvTIsQoSKJq6GOU2bkWoJH2LyD1dR7B2LYpR/eMuqK
-	y/3dfoRBBPoCDRn40w2Bnbd/U34Sa67ydpPVSv255/5T09fk562Gd1HHJqO6ptgpCD
-	Y6hNpLlvn4b3tfXErMYaj1kA0HXhEhko8VFsvuH2NNwWDaHLnnZuIt+tm3rOWWwxj2
-	lxToUNBPz79yITQEL4T0BfospGMD6vjD2zrWQmKlZTDZUleFDAvoIKUynjBZzn+ESL
-	j8ZC5kGcu4vunQiagYeHgaToge7C8cGTlIp8EWvd9sMvBTYcURthYFcNsGfoiClCr+
-	CEcipRjHIeUWcjgHPH8aJfeJI/CphkkEU8S6yv9h7b+Ifb/2p1ReNB7uwzwsr7LgTG
-	2G/Z+8gAN+lw+bFLPFV/iLe2lnbAbc4ioDoDOQNMt+GDYV6wxqE1a86Ga3cvK8FwXt
-	b5fnqNfvse8Ev3lWoDNWTqtA=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Aug 2019 21:24:53 +0300
-Message-Id: <20190805182453.30420-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] wireshark: Use an upstream URL that stays valid longer
+	Mon, 05 Aug 2019 12:13:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=J2dqjIdrI23nHfmmiZQmBmqxQB3XqiqmyAp/VThzpqQ=;
+	b=O+UjbcedcEPtqyHGPMEdV61wMRSWucayE+QswFvlSaMpHrWqLftANuTbLvc4P1YVM3
+	wf3Q1qHzULWHsHRcPMdB2O1b+7MsgHvsP9H/iV9gc+lpFkMUBPcAckq37DH9EBRj0yam
+	8jhGAL3T8Wms7N+TwDbcWr9q3mp+hF/hZI2F0rDvJjzG9ITh8n6Xfil81spAvlXZ7jf2
+	cDbheeqSbYzLBwyGk/3Bvip3OA2IUCE5rynOjDwXWQ5p26/DPXXJaZ1GpOn/5fwkB8BV
+	JokwScHa1O5DwaQRhTDzm+Xfx42qtGRkieSsUBlcI73ullWMrE+axtjNPlI6Hf87xL1Q
+	H4Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=J2dqjIdrI23nHfmmiZQmBmqxQB3XqiqmyAp/VThzpqQ=;
+	b=DpiZzbA4QQDc3t3KEU21rSbKKTpL6geMoYQRqH5VWJsmq8ub/1H67JigkpI8lBBesE
+	rCKiU4CSI5r36Dr7DimdbOeUqY1Z914x30AhJzjmNVFtStFbdFRPaki8ENuQfr89ZFU/
+	vH7lMGVByHWgOjx/lEYPWWO7DG2r9EhquY9gWKOWqk4mFwEiNYK4uWFu5HpYt51tZHmt
+	OJpg+MTXIyHXc18gqDs5MZzglzyFI5Ntpzh5qvvSTwWIhuzV1QTPp7QBwDPnTHnJw7Cv
+	45GNC5qA0dLkNvYNbgh9sWnhsSSIt7HNHxPBV98ktoZM1OWZ9I3j6+8JXjqWQ92gfV0E
+	7GsA==
+X-Gm-Message-State: APjAAAUITCKFmrXUaveqmGVah62FbbizxCx5bFwI6E/SdZ4+kftNT/PE
+	99nHxCuI8tUxT9Pk9f1R4wcH8LUpEV+XpCO0QjfoCy/Y/VQ=
+X-Google-Smtp-Source: APXvYqzUbWmD+4kFUXyBOAeTpzXpkjfjVQCwKQKzwcPr6marJZ3K3D+24WquBL+l6rkPQ/kOkPqcqMhivWFeX29uHTo=
+X-Received: by 2002:ac8:525a:: with SMTP id
+	y26mr107820238qtn.378.1565032410518; 
+	Mon, 05 Aug 2019 12:13:30 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190805182453.30420-1-bunk@stusta.de>
+In-Reply-To: <20190805182453.30420-1-bunk@stusta.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 5 Aug 2019 12:13:14 -0700
+Message-ID: <CAMKF1sqH_1E-2KpyMBYs3r3iSdmjKBv9dM=yT9PP+t0DOqos1Q@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] wireshark: Use an upstream URL that stays valid longer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,27 +54,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 18:24:55 -0000
+X-List-Received-Date: Mon, 05 Aug 2019 19:13:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, Aug 5, 2019 at 11:25 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>  meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+> index d442925ee..efcd5e42e 100644
+> --- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+> @@ -8,7 +8,7 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
+>
+>  DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+>
+> -SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
+> +SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-index d442925ee..efcd5e42e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-@@ -8,7 +8,7 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
- 
- DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
- 
--SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
-+SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--- 
-2.17.1
+perhaps use BP instead of wireshark-${PV}. Can you make that change as
+well while you are here.
 
+>
+>  UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+>
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
