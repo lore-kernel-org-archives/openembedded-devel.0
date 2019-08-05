@@ -1,56 +1,56 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A72A67E95B
+Return-Path: <Arturo.Buzarra@digi.com>
+Received: from mail1.bemta24.messagelabs.com (mail1.bemta24.messagelabs.com
+	[67.219.250.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 81A467F32C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 07:53:01 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id w3so2079025pgt.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Aug 2019 00:53:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=qSdcDUQ58iCzrkOIg5+ojBymaXRIfLd3TDWlBvIdHhI=;
-	b=t9QLYm3UQXPawgSNJZ+6ppjLeynTamlA70lcTmcID5jzlBiVTmnVa4bQ5nY7R54CHX
-	2KJCUWDQTYowQBUMfJ4AJ0M/0h3+CzeJTyQPWIbARvz5dNflf/Xj1w6X1G95oCUUJKbd
-	uf+OHNmp9+qOl1RzNMl0SFYfVbblDhBxC8TP0w9FOxkMZwAP+fCptA9BUnQLB/Q5Vjqa
-	i8gjNwhivHqtEgWn5WCKPL9HwUh4bO5ODlw92KR11ve+NXKVUEL5783Fn1abg9N3v3yH
-	oQFwFgQAGqcborZM6td/Qm5v2AIj3A75RXf5fOd0sXvJEywWzf08Hu4oXWeuNFVy92Rg
-	OWZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=qSdcDUQ58iCzrkOIg5+ojBymaXRIfLd3TDWlBvIdHhI=;
-	b=F+26BfNZTdSUh9+4RMgMgn4wZ/X3jCvLNsJyDnfAiuCCGdoO6bZJoyCj0v7CZ+7CFE
-	nBElEZJVMEP3QjP0vVpdfvVJ0YsbMOZ0JSaF82wUO47pQBQ/6OILAYqgHvwOpqprz81Z
-	xI6PVz8wn/K2A9p4P9ckdR+GFLn/BbRMfBDWIVA0VUL1TsPAZNK/mbBdhWp8E/xZjqfW
-	YgbLrC0VQVgaZWDvj0G2uMQmnRlZs08E/4xSrYv0Uj2PVs5gpHh91JTmGY6B08zrnCsB
-	arzZXuDm9rA4YmTCmxKrCWWOMFu3sO5CCnLJnmJR/p0KHM7xqU9D+J9DsvJPCsE4vr1L
-	cbnQ==
-X-Gm-Message-State: APjAAAXjZpnyAH08bLS/0CrP3jOg/hZGUwTNrGrrEI6ynJvCXc+U5+rj
-	ve0TesFkEhi6ehi/F+jqIofDmbJztP0=
-X-Google-Smtp-Source: APXvYqy2sRsqwcqiFvzhlBn+Qunp1JxDyRCqFMvnQ2KrAq0VLfmwXUkPF3BmSS83YYGH+dJORaVZwg==
-X-Received: by 2002:a63:5162:: with SMTP id r34mr17692325pgl.229.1564991582365;
-	Mon, 05 Aug 2019 00:53:02 -0700 (PDT)
-Received: from ?IPv6:2601:646:8500:6bc6::31f9? ([2601:646:8500:6bc6::31f9])
-	by smtp.gmail.com with ESMTPSA id
-	q22sm77413448pgh.49.2019.08.05.00.52.59
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Aug 2019 00:53:01 -0700 (PDT)
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20190802013035.18267-1-zangrc.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS
-Message-ID: <d8684e43-688f-7f25-0ac9-e82d4a85f970@gmail.com>
-Date: Mon, 5 Aug 2019 00:53:08 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Mon,  5 Aug 2019 08:24:21 +0000 (UTC)
+Received: from [67.219.250.101] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.us-west-2.aws.symcld.net id 8C/EE-10817-6B7E74D5;
+	Mon, 05 Aug 2019 08:24:22 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsXi5LtOQHfrc/d
+	Yg4U3jCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owNi/+wFNzmrvi77hdjA+MSri5GTg4hgVWM
+	Equ+e3UxcgHZqxklulr/skM4Gxgl5iz5xARSxSagJ/HtyyxmEFtEQF9i6ew9YLawgJ/E7g1NQ
+	DUcHCwCKhK/toiAhHkFrCWW3e4FK5EQkJfo3LGbBSIuKHFy5hMwmxko3rx1NjOELSFx8MULZp
+	AxQkBjnj+xhWhVkLj2fjH7BEa+WUi6ZyHpnoWkewEj8ypG86SizPSMktzEzBxdQwMDXUNDI11
+	DYyBtoZdYpZuoV1qsW55aXKJrpJdYXqxXXJmbnJOil5dasokRGIopBU1COxgnznqjd4hRkoNJ
+	SZT3/2rXWCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvCHP3GOFBItS01Mr0jJzgHEBk5bg4FES4
+	d3yFCjNW1yQmFucmQ6ROsWoy/G0o20JsxBLXn5eqpQ4rzHIDAGQoozSPLgRsBi9xCgrJczLyM
+	DAIMRTkFqUm1mCKv+KUZyDUUmYtwlkCk9mXgncpldARzABHbH9pyvIESWJCCmpBqbtkpLPA+Z
+	8UtecqKff8o/f4umZZR/Eu3rC4jn8xD4/dT66SdL+2LKGW/4z4/9Z2ga+4Vq8XfVSuq2uhZN4
+	luO9TQkmLNcKuas8ZQRvqesvbdedk3Jx/z8Gb462x45sjR13uBu6Cn8x/1fKDy+sPqd/RVL/1
+	r/U7RLZebNZJhbKcD/89K3q30T91QahaqdbZOpuq2Remu8rvunAJrXPvzbN+OmskC3S9ylwja
+	tg+YyfC7xf5qd6Sj1SvXWfT7dtSadJxIPn69e0Fjtfjbu81LFMcPvEkIJvsybcEoqV5lBc9rT
+	oXVHJmiduQsfW/JvNcCWY/cIT5+rwPdcFGpYp/r52xUiR68Da3ak+e24d/aDEUpyRaKjFXFSc
+	CADYeFZ2TAMAAA==
+X-Env-Sender: Arturo.Buzarra@digi.com
+X-Msg-Ref: server-4.tower-325.messagelabs.com!1564993460!246099!1
+X-Originating-IP: [66.77.174.16]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.43.9; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 16595 invoked from network); 5 Aug 2019 08:24:21 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-4.tower-325.messagelabs.com with ECDHE-RSA-AES256-SHA384
+	encrypted SMTP; 5 Aug 2019 08:24:21 -0000
+Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Mon, 5 Aug 2019 03:24:20 -0500
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
+	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Mon, 5 Aug 2019 03:24:19 -0500
+Received: from LOG-CLN-ABUZARRA2.digi.com (10.101.2.112) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.468.0; Mon, 5 Aug 2019 10:24:17 +0200
+From: Arturo Buzarra <arturo.buzarra@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 5 Aug 2019 10:24:12 +0200
+Message-ID: <20190805082412.5380-1-arturo.buzarra@digi.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-In-Reply-To: <20190802013035.18267-1-zangrc.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe] [PATCH] itstool: upgrade 2.0.5 -> 2.0.6
+X-Originating-IP: [10.101.2.112]
+Subject: [meta-oe][thud][PATCH v2] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,37 +63,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 07:53:01 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 05 Aug 2019 08:24:21 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Can you rebase it on top of latest master and resend please ? it does 
-not apply cleanly.
+Commit c6e963f9e ("lvm2: Add RDEPEND on lvm2 to lvm2-udevrules") added
+a package dependency due to lvm2-udevrules needs dmsetup, however
+dmsetup was moved to libdevmapper in commit 269d009a81d4 ("lvm2:
+libdevicemapper package needs udev rules and dmsetup"), so this
+dependency should be only for libdevmapper instead of the full package.
 
-On 8/1/19 6:30 PM, Zang Ruochen wrote:
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->   .../recipes-support/itstool/{itstool_2.0.5.bb => itstool_2.0.6.bb}    | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-oe/recipes-support/itstool/{itstool_2.0.5.bb => itstool_2.0.6.bb} (80%)
->
-> diff --git a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb b/meta-oe/recipes-support/itstool/itstool_2.0.6.bb
-> similarity index 80%
-> rename from meta-oe/recipes-support/itstool/itstool_2.0.5.bb
-> rename to meta-oe/recipes-support/itstool/itstool_2.0.6.bb
-> index a0af44a..7ea253c 100644
-> --- a/meta-oe/recipes-support/itstool/itstool_2.0.5.bb
-> +++ b/meta-oe/recipes-support/itstool/itstool_2.0.6.bb
-> @@ -8,8 +8,8 @@ inherit autotools python3native
->   DEPENDS = "libxml2-native"
->   
->   SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
-> -SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
-> -SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
-> +SRC_URI[md5sum] = "4306eeba4f4aee6b393d14f9c3c57ca1"
-> +SRC_URI[sha256sum] = "6233cc22726a9a5a83664bf67d1af79549a298c23185d926c3677afa917b92a9"
->   
->   do_install_append() {
->       # fix shebang of main script
+With the current implementation, a package that has a dependency with
+lvm2-udev rules will include also many unnecessary packages like lvm2,
+lvm2-scripts, etc. and their dependencies.
+
+Signed-off-by: Arturo Buzarra <arturo.buzarra@digi.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+index e2ce95c81..4ae0a62ab 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+@@ -48,11 +48,11 @@ FILES_${PN}-scripts = " \
+     ${sbindir}/lvmdump \
+ "
+ # Specified explicitly for the udev rules, just in case that it does not get picked
+ # up automatically:
+ FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
+-RDEPENDS_${PN}-udevrules = "${PN}"
++RDEPENDS_${PN}-udevrules = "libdevmapper"
+ RDEPENDS_${PN}_append_class-target = " libdevmapper"
+ RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
+ 
+ RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
+ RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
+-- 
+2.22.0
+
 
