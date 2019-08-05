@@ -1,36 +1,30 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 997727F343
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C258D79CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 05:06:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4625N71x7fz4s;
-	Mon,  5 Aug 2019 07:06:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1564981607;
-	bh=t3GaHG7NPhMXjid+36YMo8k1kQeTXLVRvNKVTP42F9E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=lqw7YBr7hek6TmPdHpD/z/iYR/HaFkD5s7I6Ff/FP9icE2aXBMdyEHcHyqYOfJEmV
-	oYd/i/bLxDMBYPxZ4/G5p92Jc0hFvdjon9T4OmAiRj8pKCAvmPpjoP1g5UQgmzkXfQ
-	b1Pk7h+XBh8CNuL71yMR7DMB6SmmFhBGL4rD4sfJfPnuBtSSMvAC5eMG4W52M9Gstl
-	riWT1ydnJsX4TRgkLgX/a0XjXTltmRQI4/mKTqv4rCUf/Pvq6ikBh/vSFgIMLoqETL
-	FYSAz00DqiUoc5lVm7FqvosmX/f2FQo8s3H3NRtVN8pbzRyCd9Kh/WUV+gjGsFghYx
-	Kl3zOJ9rGOI+OfYDXi5EaCKy/AXK0krPERRA2K16kj1Fp/GA2KMxAL+wM5EdGPBI1h
-	o2wfJrbmfLjVBS546+sv3WBvAUwArw5telYc2eXkS80IHe+9Qel3yuwxXKPiD5q+Hz
-	r2/xJkLAAiTj7Xt3dvn22tM8IP/EKDlt3hLumoSl+QFM9Syvv7olkur4MDfJsohgFT
-	7BgEkQ7GFB1YjhpXiLylHcuJ9lNzHmU7DNecCNjbRSZNAcI/b5CXckncLKlu1Ppi6f
-	wkSdqPBolFk+ksTYgj0PMxh+//uOCGyvba0LatP/XUBAJS1ZC/Y/D5yOQM+YbpDFS+
-	jtgYyUDKNUw3kPHAMhCjQ5aA=
-Date: Mon, 5 Aug 2019 08:06:44 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: changqing.li@windriver.com
-Message-ID: <20190805050644.GB4799@localhost>
-References: <1564975877-276033-1-git-send-email-changqing.li@windriver.com>
+	Mon,  5 Aug 2019 07:09:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,348,1559491200"; d="scan'208";a="72981678"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2019 15:09:23 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6D4A94CDB941
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  5 Aug 2019 15:09:25 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 5 Aug 2019 15:09:29 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 5 Aug 2019 15:08:43 +0800
+Message-ID: <20190805070843.30763-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <1564975877-276033-1-git-send-email-changqing.li@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] fio: fix typo
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 6D4A94CDB941.AD43A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-jsonpatch: upgrade 1.23 -> 1.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 05:06:46 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Aug 2019 07:09:24 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Mon, Aug 05, 2019 at 11:31:17AM +0800, changqing.li@windriver.com wrote:
-> From: Changqing Li <changqing.li@windriver.com>
-> 
-> fix typo "rev for v3.8" in fio_3.15.bb
-> 
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  meta-oe/recipes-benchmark/fio/fio_3.15.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-benchmark/fio/fio_3.15.bb b/meta-oe/recipes-benchmark/fio/fio_3.15.bb
-> index c44075c..f8fa434 100644
-> --- a/meta-oe/recipes-benchmark/fio/fio_3.15.bb
-> +++ b/meta-oe/recipes-benchmark/fio/fio_3.15.bb
-> @@ -21,7 +21,7 @@ PACKAGECONFIG_NUMA_armeb = ""
->  PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
->  PACKAGECONFIG[numa] = ",--disable-numa,numactl"
->  
-> -# rev for v3.8
-> +# rev for v3.15
->  SRCREV = "01bf5128d0581e267383f280c6a1dcd26517240f"
->...
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-It might be better to just delete the comment.
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-jsonpatch.inc              | 4 ++--
+ .../python/{python-jsonpatch_1.23.bb => python-jsonpatch_1.24.bb}     | 0
+ .../python/{python3-jsonpatch_1.23.bb => python3-jsonpatch_1.24.bb}   | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-jsonpatch_1.23.bb => python-jsonpatch_1.24.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.23.bb => python3-jsonpatch_1.24.bb} (100%)
 
-cu
-Adrian
-
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+index 409c09a..8f64c2a 100644
+--- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
++++ b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+ 
+ inherit pypi
+ 
+-SRC_URI[md5sum] = "83c4c9faccb4a2ff8c1db80cbddc590d"
+-SRC_URI[sha256sum] = "49f29cab70e9068db3b1dc6b656cbe2ee4edf7dfe9bf5a0055f17a4b6804a4b9"
++SRC_URI[md5sum] = "e86503f05fa192fa870d7004b8ce929a"
++SRC_URI[sha256sum] = "cbb72f8bf35260628aea6b508a107245f757d1ec839a19c34349985e2c05645a"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.24.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb
+rename to meta-python/recipes-devtools/python/python-jsonpatch_1.24.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.24.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb
+rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.24.bb
 -- 
+2.7.4
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+
 
 
