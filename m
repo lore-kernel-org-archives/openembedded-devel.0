@@ -1,30 +1,51 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CF8F379CB3
+Return-Path: <luca.boccassi@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C0387F34B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 10:59:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,349,1559491200"; d="scan'208";a="72994295"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Aug 2019 18:59:05 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id BFB164CDB941
+	Mon,  5 Aug 2019 11:03:12 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id g17so83956159wrr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2019 18:59:07 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 5 Aug 2019 18:59:10 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Aug 2019 03:59:05 +0800
-Message-ID: <1565035145-3093-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 05 Aug 2019 04:03:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1z9jxEzPfnU9SIHTknNA+Lwo6mjC2UJO8oGC4e24mVI=;
+	b=Ds1uozLu/illwcOyF1Qq8zn6n36fQwpEJ3GqKyvEm0/4qsDq4TV7uE6AYX3j5OiUim
+	r9LEY91F7PtVzpXRua7XcZsdEYQXpbI7HEuU1W4S6/DKk/yGazQJYJw8Kfzac0INGFPI
+	del77JFQrufS+Ju2EnxyUnQHos3RfeZojL5PRhdlf8YR0t3gyWrO/8vOPCNA4m2y6Ae9
+	kVbz0M0mzyOR0B83j3JihulQyD/vPB9RrIhWuF/5TuJbAMrSqXlSWvX8bhz5+EbAjbhE
+	WIqAaFw+0VrvCyVWrQdQYYuJFRPPmFw7XXA6O96fG0v/gNn+sqb790yxS2jHooM/nklT
+	RU3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1z9jxEzPfnU9SIHTknNA+Lwo6mjC2UJO8oGC4e24mVI=;
+	b=pNDhAVGVsXm5LG01ggvO2covZ5F75k0Hs3TSvda3GvtFz4D2k9JMbuw0asctscq/2v
+	2UnaB5O+oOjkdC8kVNvnPt/HzVfeXYSHMn+T7h+/h2KelukIk8kVVQM1hxZp9JjFNUyU
+	ZHowph70KBTM1FCvZBzE3pVf8fNWH46bsN6GCBIQWYr5LzA8vZ6wGUQnjGnAj9cDoemw
+	jleXJC3wMpPWE4E2XwOQg5qreBOEONBW7xOpphwvcx7mlI8ol6hXheQ0YH7P/V4LgXUk
+	22PhtzoWVRFQZqVXeeUbLAaLPO18Yc5QMKT2t2Irl+F+aOHtQgUSgv40oJ752mnheLpx
+	n8mw==
+X-Gm-Message-State: APjAAAWM+ve1QmzluH231q+cWa2th2+PcC971ztinNRzuu2RJ8Z7OjsE
+	86CRZ6LLjRuppXgJci/zyCT60TPA
+X-Google-Smtp-Source: APXvYqyxj5vEl2NQxRnNsdLQjpl6/CC8ihYRVlJy+sGziImzfnoocPGg619/v0LAq8o75A04haWmxg==
+X-Received: by 2002:adf:de8b:: with SMTP id w11mr45544807wrl.134.1565002992430;
+	Mon, 05 Aug 2019 04:03:12 -0700 (PDT)
+Received: from localhost ([2a01:4b00:f419:6f00:7a8e:ed70:5c52:ea3])
+	by smtp.gmail.com with ESMTPSA id
+	t24sm77699031wmj.14.2019.08.05.04.03.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Mon, 05 Aug 2019 04:03:11 -0700 (PDT)
+From: luca.boccassi@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Aug 2019 12:03:08 +0100
+Message-Id: <20190805110308.19949-1-luca.boccassi@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: BFB164CDB941.A70C7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-mako: upgrade 1.0.14 -> 1.1.0
+Subject: [meta-oe][PATCH] python-pygobject: move python-setuptools from RDEPENDS to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 10:59:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Aug 2019 11:03:12 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+From: Luca Boccassi <luca.boccassi@microsoft.com>
+
+python-setuptools is necessary to build pygobject but not to run it, as
+also documented by the upstream packaging guide:
+
+https://gitlab.gnome.org/GNOME/pygobject/blob/master/docs/packagingguide.rst
+
+Move it to DEPENDS to shrink the runtime dependency chain, as setuptools
+includes scripts to download other packages, which might not be desired on
+a minimal image.
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
 ---
- meta-python/recipes-devtools/python/python-mako.inc           | 4 ++--
- .../python/{python-mako_1.0.14.bb => python-mako_1.1.0.bb}    | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-mako_1.0.14.bb => python-mako_1.1.0.bb} (100%)
+ meta-oe/recipes-devtools/python/python-pygobject_3.32.2.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-mako.inc b/meta-python/recipes-devtools/python/python-mako.inc
-index 27d14a308..abcbb8841 100644
---- a/meta-python/recipes-devtools/python/python-mako.inc
-+++ b/meta-python/recipes-devtools/python/python-mako.inc
-@@ -8,8 +8,8 @@ PYPI_PACKAGE = "Mako"
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.32.2.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.32.2.bb
+index 4d26a78ae..9c175e682 100644
+--- a/meta-oe/recipes-devtools/python/python-pygobject_3.32.2.bb
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.32.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
+ GNOMEBASEBUILDCLASS = "meson"
+ inherit gnomebase gobject-introspection distutils-base upstream-version-is-even
  
- inherit pypi
+-DEPENDS += "python glib-2.0"
++DEPENDS += "python python-setuptools glib-2.0"
  
--SRC_URI[md5sum] = "e162578170331f0cc6a4adb063c7c0f6"
--SRC_URI[sha256sum] = "f5a642d8c5699269ab62a68b296ff990767eb120f51e2e8f3d6afb16bdb57f4b"
-+SRC_URI[md5sum] = "6c3f2da0b74af529a4c4a537d0848bf2"
-+SRC_URI[sha256sum] = "a36919599a9b7dc5d86a7a8988f23a9a3a3d083070023bab23d64f7f1d1e0a4b"
+ SRCNAME = "pygobject"
+ SRC_URI = " \
+@@ -30,7 +30,6 @@ PACKAGECONFIG[python] = "-Dpython=python3, -Dpython=python2, , "
+ PACKAGECONFIG[stagedir] = "-Dstagedir=${PYTHON_SITEPACKAGES_DIR}, -Dstagedir="", , "
  
- RDEPENDS_${PN} = " \
-     ${PYTHON_PN}-html \
-diff --git a/meta-python/recipes-devtools/python/python-mako_1.0.14.bb b/meta-python/recipes-devtools/python/python-mako_1.1.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-mako_1.0.14.bb
-rename to meta-python/recipes-devtools/python/python-mako_1.1.0.bb
+ BBCLASSEXTEND = "native"
+-RDEPENDS_${PN} = "python-setuptools"
+ RDEPENDS_${PN}_class-native = ""
+ 
+ do_install_append() {
 -- 
-2.17.1
-
-
+2.20.1
 
 
