@@ -1,39 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D66575E2D
+	by mail.openembedded.org (Postfix) with ESMTP id 12B6C7F300
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Aug 2019 14:55:44 +0000 (UTC)
+	Tue,  6 Aug 2019 15:39:09 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 462yPD4HpVz65;
-	Tue,  6 Aug 2019 16:55:44 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 462zML0Z6Qz65
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  6 Aug 2019 17:39:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1565103344;
-	bh=us5izhZAJsnOMnApE3x159MPJK4BKAG0AmbxejkkAMM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bC5UNu2ey0SSucas5N3dBwRCJDWEEnxVse4kUHoKDTrjdXRriex7t5LAphH05EZcL
-	ny5SHWysmmnKVnA3TozGYLdZ8ZBPmJGzr87xE+GP+HuxVy7WHkuR55+l7TGWH3jb0/
-	16qynuzghSz7PyPnbDEaOcZD7qdhagdACCuJm4xoNPCmiF+XIHslqTZVpsl8U0B+ld
-	3FRM09cz+Yu2sgujtFszgAoE+nxn9TzbtLCEDzKdQeoXHZiSWIT8hssgQkKZS2Tx8P
-	fzpIXzkDc5dqKvIF4/yt++WavQ0YCkTY6IqOAXGNmzC6EVBakqaS5h1FdMiypGD4yF
-	JUml7lzxttUQcWq2h8VGJEhCUefBuI2+5t9TmJbKh9W898i6C+KuGIyFt29wpAdmAu
-	AZf2uRRRO4pmpExLo+yuak8XlFi/qBlE4SHVoGr72QXgo3v1p0XkE3XMKa7nWgZl9s
-	ZPojLQu4854E/3bJ7PdszWumA04DIJBBcLV14/GPetQ93Po1/36veUBiwjFCJatOUe
-	0fhFJ3lpLRrGd1XZ3lnQS18KGip5rzMb2VsFVfCBIpTjz9jbz6uRCPvhzJsfEDKcT/
-	ZADXjxHnVFbh3JBE66kgJDSLEDPkqIz8f8Nowm4VspYdCWs2O3Vfouah+GiQ+K1yxB
-	yuFtA/cQjVwMpWbbWV4yhqzA=
-Date: Tue, 6 Aug 2019 17:55:42 +0300
+	s=default; t=1565105950;
+	bh=iBug3DwtY3uBYk7sPIu9ojUj+BisBNxYxeanq5Y4EGU=;
+	h=From:To:Subject:Date:From;
+	b=ee+90G+qTnwexh5WjGxFXMAi93JAzbWKU+DmDQ1dReByAgHcYbmY4nuolzZ2BFCKs
+	IPkxXgIrqoU6e8a9Ule1cDFBfkg/F+LBfXsHy/2L7qAghZ/PHn2OpFZfR7Om0pPLRU
+	zOffV4EAcPWnrCR/+mdpnTfRYmyFNBYydpik79JvoKNqO880TQW3VeoW0CIQZBQtSr
+	PU3tyu/ByhNqmXsf/Ny1ox5h3NUSbghxhBPcywTpk774bD7RfRElsx0u1JoIPwxBU6
+	eZiPdzgX/qwXhau0KpToxnyrjgSXTr+Gd9HefLAKf9CMbbrz0U/BiStL4vaf/S8C3B
+	zcBwOF4zcErYKOL8z2tAIYdUhPtBxdy6VUlHuC2qAp5ITlmaAoabU0Hf340A5+rAQC
+	CWWo33V5MG7H2V+S3sFPrDUyBkxu1YvZhbOhTo9GEOG1C4vqYnSwtZfMsT2KZcqARa
+	L2hZlvAxNjTLQ12EmPYtd05bxl4PgP9PSY23MO+UspgSCzbHrDiT0iNW1auung9CZI
+	H1HxrUN+vOMLi9bCmfLxXCIGIegZk0KAEERe5yNAqcutQeMac7Z5QJ/S8vLbV6ziTK
+	uUwQAGYtOZYNtcpfeqNL7LdTOohF5/+jC8PwSNXEG1UxUVeADz0MJLRfu7tFYjSLMb
+	N6f8PQQ+voRskNEZHfgSjqEU=
 From: Adrian Bunk <bunk@stusta.de>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20190806145542.GA19671@localhost>
-References: <20190805182453.30420-1-bunk@stusta.de>
-	<CAMKF1sqH_1E-2KpyMBYs3r3iSdmjKBv9dM=yT9PP+t0DOqos1Q@mail.gmail.com>
-	<20190806064312.GA12298@localhost>
-	<ce6dc916-68a8-377b-4fdb-4ee4d2ed8744@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ce6dc916-68a8-377b-4fdb-4ee4d2ed8744@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] wireshark: Use an upstream URL that stays valid longer
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Aug 2019 18:39:09 +0300
+Message-Id: <20190806153909.5965-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] modemmanager: Use a simpler workaround for the clang build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,55 +40,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2019 14:55:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 06 Aug 2019 15:39:10 -0000
 
-On Tue, Aug 06, 2019 at 07:43:34AM -0700, akuster808 wrote:
-> 
-> 
-> On 8/5/19 11:43 PM, Adrian Bunk wrote:
-> > On Mon, Aug 05, 2019 at 12:13:14PM -0700, Khem Raj wrote:
-> >> On Mon, Aug 5, 2019 at 11:25 AM Adrian Bunk <bunk@stusta.de> wrote:
-> >>> Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> >>> ---
-> >>>  meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb | 2 +-
-> >>>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> >>> index d442925ee..efcd5e42e 100644
-> >>> --- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> >>> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> >>> @@ -8,7 +8,7 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
-> >>>
-> >>>  DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
-> >>>
-> >>> -SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
-> >>> +SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
-> >> perhaps use BP instead of wireshark-${PV}. Can you make that change as
-> >> well while you are here.
-> > I was aiming at a minimal change, since backporting to warrior is
-> > where it is urgently needed (can't build wireshark there right now).
-> 
-> Would defining a MIRROR help ?  IIRC a new release of wireshark may not
-> always be in the "all-versions".
+The check whether the compiler understands an option is broken
+in m4/compiler_warnings.m4, but if we are just workarounding it
+then do a minimal workaround without patching.
 
-"all" seems to actually mean all here.
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...-not-set-Wno-unused-but-set-variable.patch | 30 -------------------
+ .../modemmanager/modemmanager_1.10.0.bb       |  3 +-
+ 2 files changed, 1 insertion(+), 32 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-set-Wno-unused-but-set-variable.patch
 
-And the problem you describe would anyways not happen suddenly during
-a stable series.
-
-> - armin
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-set-Wno-unused-but-set-variable.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-set-Wno-unused-but-set-variable.patch
+deleted file mode 100644
+index dcbe01d5e..000000000
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Do-not-set-Wno-unused-but-set-variable.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From d4f73b037d11d20f080e74c05df28853fb833075 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 7 Dec 2018 22:59:47 -0800
+-Subject: [PATCH] Do not set Wno-unused-but-set-variable
+-
+-This is gcc specific warning, not implemented by  pretending to be  gcc
+-like compilers e.g. clang.
+-
+-We will pass this option from recipe
+-
+-Upstream-Status: Inappropriate [OE-Specific]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- m4/compiler_warnings.m4 | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/m4/compiler_warnings.m4 b/m4/compiler_warnings.m4
+-index f498a28..e65e97f 100644
+---- a/m4/compiler_warnings.m4
+-+++ b/m4/compiler_warnings.m4
+-@@ -11,7 +11,7 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
+- 		      -Wdeclaration-after-statement -Wstrict-prototypes \
+- 		      -Wno-unused-parameter -Wno-sign-compare \
+- 		      -Wno-deprecated-declarations \
+--		      -Wno-unused-but-set-variable -Wformat-security; do
+-+		      -Wno-unused -Wformat-security; do
+- 		SAVE_CFLAGS="$CFLAGS"
+- 		CFLAGS="$CFLAGS $option"
+- 		AC_MSG_CHECKING([whether gcc understands $option])
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
+index 1ad19e8f7..ef5af3a57 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.0.bb
+@@ -12,7 +12,6 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
+ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ 
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
+-           file://0001-Do-not-set-Wno-unused-but-set-variable.patch \
+            "
+ SRC_URI[md5sum] = "92d25176d0cc9d588ca29700b33c7d98"
+ SRC_URI[sha256sum] = "fd0f39996025dac96995daea8a58ec7dd571582f7563a8ae0d5f65b571b76ee2"
+@@ -33,7 +32,7 @@ PACKAGECONFIG[qmi] = "--with-qmi,--without-qmi,libqmi"
+ EXTRA_OECONF = " \
+     --with-udev-base-dir=${nonarch_base_libdir}/udev \
+ "
+-CFLAGS_append_toolchain-gcc = " -Wno-unused-but-set-variable"
++EXTRA_OECONF_append_toolchain-clang = " --enable-more-warnings=no"
+ 
+ FILES_${PN} += " \
+     ${datadir}/icons \
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.17.1
 
 
