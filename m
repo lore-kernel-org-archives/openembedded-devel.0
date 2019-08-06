@@ -1,23 +1,33 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 710627F2A8
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 4ADF57F3D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Aug 2019 18:38:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x76Icqtj007958
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  6 Aug 2019 22:05:06 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4637wf2P2Pz4s
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Aug 2019 11:38:52 -0700 (PDT)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 6 Aug 2019 11:38:51 -0700
-From: Joe Slater <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Aug 2019 11:38:51 -0700
-Message-ID: <20190806183851.159161-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.13.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] mozjs: do not expose intl api for mips64
+	Wed,  7 Aug 2019 00:05:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1565129106;
+	bh=IDOv1+Dr+Y8aBk8NSqpfwOIxwKQnCJCrx5xCSaqpHus=;
+	h=From:To:Subject:Date:From;
+	b=Yr0ICqBZ84XLNA0aegTOyZxoA/X/No/i3lzV7GqTTNSjG1VXG8pkEw/40ijcoimPX
+	icByNPvkzJnh1QVvzp+cvqI41VaPjPV1Ez9QN6m/urpSGUEyuCAF6qpZsB/wPehFrF
+	rFyfVWc+5sFsldXFsWy24CUJZLQnoUUaZi4cFGmc7CkzITP3PsMsQ9ly9APF23nEGw
+	QQSJkPGF7NHIjxtmA/gST/0c9CibBvvw2Re6vurnNKKADKBk6twrYfOTDsnjGOSwsI
+	0o8Zq6zkrkU1cMy+2NE/7L358vPKO2umCZrCKKN/jI+XG1sY6XgmumZI1WQn7pLrer
+	bp8/zOaMMGaH23QwpGHJxrR+DNTd/fax/UjlH4qpq4iSYQ5or2jWwssOwfpxPl7jmw
+	enz5XjBMKjtiHD6mXHdiy2L1yETIpxJK/TMG0Zg1euPi8/HiYihZWT8/49JK4RCMin
+	OFONS9ZJdjCS/5QKtMnDGMl6vOBfokj9nFBXGSxOZ0ZuNNBDgaCy98jmFQDW9ZQc/L
+	O2PMKBar45BrzbFp0AYLPPMwldzgeGXRN8tt70RiIUHLXl6WOzE6OIp4gR7/A/VeWa
+	Ci+AkXykE1lXERBAZvusa//LBaWbG2QiZ3WT5cdqdELej/LlQRn4OirNDdsRZGwNtj
+	L46SDaXFR89Q25DxqgGTqZjo=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Aug 2019 01:05:04 +0300
+Message-Id: <20190806220505.21835-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-gnome][PATCH] network-manager-applet: Remove obsolete do_configure_append
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,32 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2019 18:38:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Aug 2019 22:05:06 -0000
 
-Add --with-intl-api=build to configure options.  Otherwise,
-JS_Init() will fail.
+Upstream no longer enables -Werror by default.
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../network-manager-applet_1.8.22.bb                       | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-index c89aba7..33142d6 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-@@ -55,6 +55,9 @@ EXTRA_OECONF = " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.22.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.22.bb
+index 1f3f6112b..e7033aec6 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.22.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.22.bb
+@@ -23,13 +23,6 @@ EXTRA_OECONF = " \
+     --without-selinux \
  "
  
-+# Without this, JS_Init() will fail for mips64.
-+EXTRA_OECONF_append_mips64 = " --with-intl-api=build"
-+
- EXTRA_OECONF_append_mipsarch = " --disable-ion"
- EXTRA_OECONF_append_riscv64 = " --disable-ion"
- EXTRA_OECONF_append_riscv32 = " --disable-ion"
+-do_configure_append() {
+-    # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
+-    for i in $(find ${B} -name "Makefile") ; do
+-        sed -i -e s%-Werror[^[:space:]]*%%g $i
+-    done
+-}
+-
+ # gobject-introspection related
+ GI_DATA_ENABLED_libc-musl = "False"
+ 
 -- 
-2.7.4
+2.17.1
 
 
