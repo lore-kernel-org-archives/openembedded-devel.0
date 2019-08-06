@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E2C6B7F2E4
+	by mail.openembedded.org (Postfix) with ESMTP id A4B2F7F307
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Aug 2019 01:11:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,350,1559491200"; d="scan'208";a="73028588"
+	Tue,  6 Aug 2019 02:19:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,352,1559491200"; d="scan'208";a="73032560"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2019 09:11:19 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Aug 2019 10:19:20 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id A5CC54CDFAD2
+	by cn.fujitsu.com (Postfix) with ESMTP id 97C864CDFACD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Aug 2019 09:11:17 +0800 (CST)
+	Tue,  6 Aug 2019 10:19:18 +0800 (CST)
 Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 6 Aug 2019 09:11:17 +0800
+	Server (TLS) id 14.3.439.0; Tue, 6 Aug 2019 10:19:18 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Aug 2019 09:10:35 +0800
-Message-ID: <20190806011035.7702-1-zangrc.fnst@cn.fujitsu.com>
+Date: Tue, 6 Aug 2019 10:18:36 +0800
+Message-ID: <20190806021836.8809-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: A5CC54CDFAD2.AD2DE
+X-yoursite-MailScanner-ID: 97C864CDFACD.AB684
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe] [PATCHv2] libkcapi: upgrade 1.1.4 -> 1.1.5
+Subject: [meta-networking] [PATCHv2] opensaf: upgrade 5.19.03 -> 5.19.07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,30 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2019 01:11:19 -0000
+X-List-Received-Date: Tue, 06 Aug 2019 02:19:20 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb | 4 ++--
+ .../opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb}                | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/opensaf/{opensaf_5.19.03.bb => opensaf_5.19.07.bb} (95%)
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-index 46c66a1..887dedc 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=14d5a68b28755c04ebdba226e888b157"
- DEPENDS = "libtool"
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+similarity index 95%
+rename from meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
+rename to meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+index 505c087..e466cc2 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.03.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+@@ -26,8 +26,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
+            file://0001-Add-configure-time-check-for-gettid-API.patch \
+            "
+-SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
+-SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
++SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
++SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
  
- S = "${WORKDIR}/git"
--SRCREV = "3c56934f44a8f5a1257c342942e6e034fc6f20be"
--PV = "1.1.4+git${SRCPV}"
-+SRCREV = "5649050d201856bf06c8738b5d2aa1710c86ac2f"
-+PV = "1.1.5"
- SRC_URI = " \
-     git://github.com/smuellerDD/libkcapi.git \
- "
+ inherit autotools useradd systemd pkgconfig
+ 
 -- 
 2.7.4
 
