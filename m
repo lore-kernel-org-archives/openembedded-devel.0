@@ -1,36 +1,41 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id A2A3C7F437
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 15A507F456
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 07:59:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 463P6R4S7Bz4s;
-	Wed,  7 Aug 2019 09:59:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1565164767;
-	bh=Z2aHJWPLtazNo6M8IXh8Z1cm9teqfvfcEUqh3LOxvvE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=VWOZS2R6OvDJ4PpPW/DEDU4cnI08U8bq5V9LsE5F8K0nqKmsKA7nh+nXQ8XsOj7v8
-	rlkfvz2TMPJeXqg/z823HBKzmyHeqeIsdDRHeuEmWs3f2wkAs0+wOlGTOY2XMDvDAj
-	FPV4d2aImM82FyecsNKoM5pPaZC+MnCE4Vm+ZMK7bLWNJHDHYJ7tngRDFfgY44cgrm
-	27F1+SsO/BRuVYaJMZXD4heqz0okGwNpVsYrhWfKZNmTStQAeWcRcNEvJZ501+YR4y
-	OVZcv5M2uc+gkbpvm2VO/Ox0UbeqzwnsjBJsP+fLVHsX/oJJTp54PF7G9teLtd7v1w
-	Z7vKucXBn5jU/BX9lXx1wWJ8yG9aw3Rk1GHOOXpn6EiZK6LZvHFMHuK7Dop40hMRSZ
-	SYO61gchj7DCDU9swR8R5/P4JzwbZpeaavV1JYFYhmTrmgIDkeCV13JUs5MEbANeXv
-	+PvPZ5Um15lDcD627HfymIK/qJrnKM8EnW8inP6qzH1+sIMBNFVw6+Imr1fsrZKOjI
-	dQ2e0IOJVJwKP/R5G3t/1Zn4YgOUNMbUvTKyIm3Tk9lvpez0n3aCfUBT/2MU67fnTR
-	GagrfCEWJUW9EseNEdUiq2wJwT/GlIg4A/xacpRQXLuXpJLF65UeIrVQW3pK/ft7Bz
-	OGwq6uGLZTiZc3XK7J0jkOVY=
-Date: Wed, 7 Aug 2019 10:59:25 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Message-ID: <20190807075925.GA21771@localhost>
-References: <1565195585-37801-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	Wed,  7 Aug 2019 08:32:17 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id p17so90429247wrf.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Aug 2019 01:32:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kEJ94NBOopzb/ze8WTx0+07n/sW0WO8G/Xlc5EZ2dJU=;
+	b=X8X5HpxjHROhjoLKosh4KJQOA3GjH2mC7mrX+uf2VSN4FIY+KTlPiO8PAdcX53Nfaf
+	0Rq3xkq7z2hptoWO3EUy0/PdkDdSyqC9tP97KJOrGTmNKNpT6oAaHaOHmz41Vwk1qeBV
+	Vysy8gqMuauQfetiPulNgxl60Rnb2YF3C9FkJhjo9g4r1ao3o/e92Kw8lSEfy4Wa1YNq
+	nNcNSBTU1UvUVDTonli8eZ1l25eBolbY26IExOjPS3ioQs3YAkSQFFkoH9tKtLxXl+Lr
+	2/MUcT9vrvJZ2MYey+enGtiaUaHmiBXQH6RIslvsu77x1S4cMfG09ZZDywkidCn3m3rR
+	m66w==
+X-Gm-Message-State: APjAAAVE1Ghb3vHJFix7rNcIwKCTMwdvdTdsILQ6dGLz5ilccKXOk5sJ
+	JtUygi5wFr2/2FQDJtfjzflgzA3d+6I=
+X-Google-Smtp-Source: APXvYqzxdA7o3k3dB7OtHlzOGOZdp1QpGtaLF8gW1jpInpqGv/0I+F0s7KrjvEfwXjBLF62uSa296w==
+X-Received: by 2002:a5d:4492:: with SMTP id j18mr6635579wrq.53.1565166738388; 
+	Wed, 07 Aug 2019 01:32:18 -0700 (PDT)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	f12sm99893502wrg.5.2019.08.07.01.32.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Wed, 07 Aug 2019 01:32:17 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Aug 2019 09:32:17 +0100
+Message-Id: <20190807083217.16515-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-In-Reply-To: <1565195585-37801-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python-pbr: Add python3 version
+Subject: [meta-networking][PATCH] layer.conf: ignore wireless-regdb->crda dep for siggen purposes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,24 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 07:59:28 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Aug 2019 08:32:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 08, 2019 at 12:33:05AM +0800, Zheng Ruoqin wrote:
-> Providing a python3 version of python-pbr.
->...
+From: André Draszik <andre.draszik@jci.com>
 
-python3-pbr is already in oe-core.
+In commit bae481e9331f ("wireless-regdb: make wireless-regdb architecture independent")
+wireless-regdb has been made allarch, but it depends
+(via RSUGGESTS) on a TUNE_PKGARCH recipe (crda).
+This causes needless rebuilds of wireless-regdb when crda
+changes (due to changing sstate checksum).
 
-cu
-Adrian
+Add this dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS so
+as to avoid that. Even though wireless-regdb has been
+moved to OE-core since, we still add this dependeny here
+(and not there), as crda is provided in this layer here.
 
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ meta-networking/conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index 67f58bcc2..6f0046cf3 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -23,4 +23,5 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   wireguard-tools->wireguard-module \
++  wireless-regdb->crda \
+ "
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.23.0.rc1
 
 
