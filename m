@@ -1,53 +1,42 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
-	[209.85.210.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A89617F325
+Return-Path: <rbilovol@cisco.com>
+X-Greylist: delayed 377 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 07 Aug 2019 12:30:08 UTC
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E18FF7F45D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 12:29:21 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id n5so103555749otk.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Aug 2019 05:29:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=K53bVpz9XXliELRGfUC6ZelNPGIeAOP2x6kH3m2ODHA=;
-	b=BtCnTMmVf0NmacXCtJ5ZhzUeNom1F940Rp1NAhDJ73fbTnEylwsu+dz0T1i+k62/JM
-	PSa/YhAXnXRLq6W39cefEk4FQaHEMKSX6UA9gAaJrHzdF5c9ykAEjBVOiZpmVMZ9G+IN
-	GMPJprYWnnMZt0hzEkSdcmj+aztvHdNluHOu5gWQ4Q07gvkkpwu/YUOUQOsH/uxvpW06
-	YEJwvaKcfv5xaoaj3P4Nl4/nN2lBpl5PMvxrDyplSKaWnHdpRKTqkKPKMEQu7cF1Aimg
-	DWDR7lp/FHOqiVCvaFkS7GO9pduc7LY3N25XiYSR3+FAmbzZYQ50XGgtDpSPMjyECxrg
-	j8WQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=K53bVpz9XXliELRGfUC6ZelNPGIeAOP2x6kH3m2ODHA=;
-	b=nyCHz3IO7Z2wdCQ6v35V+M+/Ig8eSkWR7Qjr+qQKwf0w+gb+jb8gnlKh02ziNgtU83
-	jQZLqqjwW2PkmPclOVEnixnHcNJ+QYy7Mrn6OvpTsD8hqd+OzxBlPpYin6DXwc1Z4Jdw
-	qvSj/EIZ5twsjZNuBeWO5thPoR4+ds2YobL/mXzWA3BfeChZ6XaqszxIvMl53mx3e2UM
-	BZOmZ9nmRKPQ4o5EZViab5RegmNHQnvU0JAWJgANfyVmgWg//5fSSomCYfq3D+6FSDUD
-	Mak4Z9Cwm+lvIJWkjL4s7tAq0q+SM9/OR3TZUFVOgW1xAaJTN4/jjShBv6LOl3s7BlQb
-	J/Tg==
-X-Gm-Message-State: APjAAAVUxvrNLY4oMInnkX+7GGdDubXgp0mAcZ+9chJVwy8YtuTtZ7Ie
-	Z7Q3Vp1vAW795SQnmFP0uyWuZzNBJFXKocVVOdU=
-X-Google-Smtp-Source: APXvYqzF74jcGBdVy6WiyqY7ipKpN6FFcUaCAtoJGpCvnDjHqrRmJHYOUWDhZzgnbb+4Xv9nPvbFuAkRhJX4OPl0nIU=
-X-Received: by 2002:a5e:de0d:: with SMTP id e13mr7797925iok.144.1565180962138; 
-	Wed, 07 Aug 2019 05:29:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <1564038304-372775-1-git-send-email-mingli.yu@windriver.com>
-	<CADkTA4NafYpQLV2VgTgb4BajL=-KH1gQLU2_rk3ur7b3aqOjSA@mail.gmail.com>
-	<CAMKF1sqi9aRud1UQQCFsOakEQ1qKbfRhBSKFeEbwPxQChh45_A@mail.gmail.com>
-	<5D3ABBD8.2050107@windriver.com>
-	<0263423f4903ea25247352460c6a906b@agner.ch>
-	<CAO5Uq5R=bCUcr83yvZwd54Ya61wmxsO9rZ2zztRXfz2VyzQyhg@mail.gmail.com>
-In-Reply-To: <CAO5Uq5R=bCUcr83yvZwd54Ya61wmxsO9rZ2zztRXfz2VyzQyhg@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Wed, 7 Aug 2019 13:29:11 +0100
-Message-ID: <CAO5Uq5Q6aib4QMbaRknPeU6==Y_Q88e87YDL-qgvVmDV3aFEAQ@mail.gmail.com>
-To: Stefan Agner <stefan@agner.ch>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	liu.ming50@gmail.com
-Subject: Re: [meta-filesystems][PATCH] ostree: import from meta-overc
+	Wed,  7 Aug 2019 12:30:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=1804; q=dns/txt; s=iport;
+	t=1565181010; x=1566390610;
+	h=from:to:cc:subject:date:message-id;
+	bh=9ucCUTYWXAy0i3ECFV70rVqc3jy3x6fKGQ6K5ET+T2A=;
+	b=X2/BArx6s+kKzPxOGd3IMsNLEwZRZoK0dRGOqji1av1nxXi1a5GGE5WF
+	XGoPNE4b148kaKIzFQpYPPFTsLvEcHkaRCcrgKrrUFyye81PL2jySG0za
+	22xXbinVzODpJdu2jrXlbuj68eay3UkSUWQmjnQ9LHi06Aj4Kug9/huQe Y=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0BdAgAbw0pd/xbLJq1lHQEBBQEHBQG?=
+	=?us-ascii?q?BVgUBCwGDBFIgEiqNGodymgeBZwkBAQEOIwwBAYQ/gnc3Bg4BBAEBBAEBAwE?=
+	=?us-ascii?q?GbYUnDIZKgVGDIgGCCg+sDoQ0AQsBgQiDOIFJFIEgAYcKhHCBQD+BEYNQgmE?=
+	=?us-ascii?q?CgSYjZYUWBJVNlV8Jgh6GXY1FAhmDHJUUAZREY5BCgWYigVgzGggbFYMnCYJ?=
+	=?us-ascii?q?GFoIpgSWFFIVCPAMwjyQBAQ?=
+X-IronPort-AV: E=Sophos;i="5.64,357,1559520000"; d="scan'208";a="15189924"
+Received: from aer-iport-nat.cisco.com (HELO aer-core-4.cisco.com)
+	([173.38.203.22])
+	by aer-iport-1.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA;
+	07 Aug 2019 12:30:09 +0000
+Received: from localhost ([10.63.15.140])
+	by aer-core-4.cisco.com (8.15.2/8.15.2) with ESMTP id x77CU8Wb026703;
+	Wed, 7 Aug 2019 12:30:09 GMT
+From: Ruslan Bilovol <rbilovol@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Aug 2019 15:30:07 +0300
+Message-Id: <1565181007-2883-1-git-send-email-rbilovol@cisco.com>
+X-Mailer: git-send-email 1.9.1
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Outbound-SMTP-Client: 10.63.15.140, [10.63.15.140]
+X-Outbound-Node: aer-core-4.cisco.com
+Cc: xe-linux-external@cisco.com
+Subject: [PATCH] libnss-nisplus: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,70 +49,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 12:29:21 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Aug 2019 12:30:09 -0000
 
-On Tue, Aug 6, 2019 at 2:48 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> On Tue, Aug 6, 2019 at 2:26 PM Stefan Agner <stefan@agner.ch> wrote:
-> >
-> > On 2019-07-26 10:37, Yu, Mingli wrote:
-> > > On 2019=E5=B9=B407=E6=9C=8825=E6=97=A5 21:58, Khem Raj wrote:
-> > >> On Thu, Jul 25, 2019 at 6:42 AM Bruce Ashfield <bruce.ashfield@gmail=
-.com> wrote:
-> > >>>
-> > >>> On Thu, Jul 25, 2019 at 3:05 AM <mingli.yu@windriver.com> wrote:
-> > >>>>
-> > >>>> From: Mingli Yu <Mingli.Yu@windriver.com>
-> > >>>
-> > >>> This doesn't make any sense to "import from meta-overc". meta-overc=
-,
-> > >>> was never the authoritative upstream for ostree. That layer has to
-> > >>> carry a specific version to meet the requirements of some of the
-> > >>> container libraries, etc, that it requires.
-> > >>>
-> > >>> You need to have a look at the latest ostree, the various layers th=
-at
-> > >>> are currently maintaining it, and pick the right version if you wan=
-t
-> > >>> to consolidate things here. I'm very doubtful that the right choice=
- is
-> > >>> the one from meta-overc.
-> > >>
-> > >> Yes agreed and this version fails on musl e.g.
-> > >
-> > > Make sense, please ignore this patch.
-> >
-> > What layers are you considering?
-> >
-> > We use OSTree integration of meta-updater and would welcome having a
-> > common upstream implementation which works for everyone:
-> >
-> > https://github.com/advancedtelematic/meta-updater
-> >
->
-> My current one is here:
->
-> https://github.com/akiernan/meta-ostree-core/tree/master/recipes-ostree/o=
-stree
->
-> Which started off in life from the Intel IoT refkit.
->
-> And the sidebranch folks have one here:
->
-> https://github.com/sidebranch/meta-ostree/tree/sumo/recipes-ostree/ostree
->
-> Getting just a common ostree recipe in meta-oe(?) would be good.
->
+Same as with libnss-nis - this will substitute
+the glibc nisplus module which has been removed
 
-How does this look... fixing MUSL, removing the hack for MIRRORS and
-(I expect) fixing how it interacts with grub are things I think I've
-not picked from these other layers:
+SRCREV points to 1.3 release plus patch on top which
+allows to build with recent glibc versions
 
-https://github.com/akiernan/meta-ostree-core/blob/master/recipes-ostree/ost=
-ree/ostree.inc
+Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+---
 
---=20
-Alex Kiernan
+Resent to meta-oe as was discussed here:
+https://patchwork.openembedded.org/patch/159586/
+
+ .../libnss-nisplus/libnss-nisplus.bb               | 31 ++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+
+diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+new file mode 100644
+index 0000000..2dbeee7
+--- /dev/null
++++ b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+@@ -0,0 +1,31 @@
++# Copyright (C) 2019 Ruslan Bilovol <rbilovol@cisco.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "NSS module for glibc, to provide NIS+ support for glibc"
++
++DESCRIPTION = "This package contains the NSS NIS+ plugin for glibc.\
++This code was formerly part of glibc, but is now standalone to\
++be able to link against TI-RPC for IPv6 support."
++
++HOMEPAGE = "https://github.com/thkukuk/libnss_nisplus"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++SECTION = "libs"
++DEPENDS += "libtirpc libnsl2"
++
++PV = "1.3+git${SRCPV}"
++
++SRCREV = "c6934373c7bac91499ff7bbe7d2439599325ca63"
++
++SRC_URI = "git://github.com/thkukuk/libnss_nisplus \
++          "
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++BBCLASSEXTEND += "native nativesdk"
++#
++# We will skip parsing this packagegeoup for non-glibc systems
++#
++COMPATIBLE_HOST_libc-musl = 'null'
+-- 
+1.9.1
+
 
