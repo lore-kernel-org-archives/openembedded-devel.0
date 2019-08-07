@@ -1,30 +1,30 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 52B1D7F445
+	by mail.openembedded.org (Postfix) with ESMTP id E7CF37F459
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 07:04:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,356,1559491200"; d="scan'208";a="73132256"
+	Wed,  7 Aug 2019 07:33:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,356,1559491200"; d="scan'208";a="73134267"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Aug 2019 15:04:13 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id D1EE94CDFCDE
+	by heian.cn.fujitsu.com with ESMTP; 07 Aug 2019 15:33:19 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id A98884CDFCDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 15:04:13 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 7 Aug 2019 15:04:23 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Wed,  7 Aug 2019 15:33:19 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 7 Aug 2019 15:33:27 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Aug 2019 15:03:31 +0800
-Message-ID: <20190807070331.30385-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 8 Aug 2019 00:33:05 +0800
+Message-ID: <1565195585-37801-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: D1EE94CDFCDE.AD661
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: A98884CDFCDA.AB87C
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe] [PATCH] protobuf: upgrade 3.9.0 -> 3.9.1
+Subject: [meta-python][PATCH] python-pbr: Add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +37,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 07:04:16 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 07 Aug 2019 07:33:30 -0000
 Content-Type: text/plain
 
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Providing a python3 version of python-pbr.
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../recipes-devtools/protobuf/{protobuf_3.9.0.bb => protobuf_3.9.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.9.0.bb => protobuf_3.9.1.bb} (98%)
+ meta-python/recipes-devtools/python/python-pbr.inc  | 12 ++++++++++++
+ .../recipes-devtools/python/python-pbr_5.4.2.bb     | 13 +------------
+ .../recipes-devtools/python/python3-pbr_5.4.2.bb    |  2 ++
+ 3 files changed, 15 insertions(+), 12 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pbr.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pbr_5.4.2.bb
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
-index 38e2286..94d8def 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
- DEPENDS = "zlib"
- DEPENDS_append_class-target = " protobuf-native"
- 
--SRCREV = "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
-+SRCREV = "655310ca192a6e3a050e0ca0b7084a2968072260"
- 
- SRC_URI = "git://github.com/google/protobuf.git;branch=3.9.x \
-            file://run-ptest \
+diff --git a/meta-python/recipes-devtools/python/python-pbr.inc b/meta-python/recipes-devtools/python/python-pbr.inc
+new file mode 100644
+index 000000000..6c5d4b1cc
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pbr.inc
+@@ -0,0 +1,12 @@
++# The inc file is in oe-core
++require recipes-devtools/python/python-pbr.inc
++
++SRC_URI[md5sum] = "ea90e1118a0132da752d45e68d10b2b8"
++SRC_URI[sha256sum] = "9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
++
++do_install_append() {
++        if [ -f ${D}${bindir}/pbr ]; then
++                mv ${D}${bindir}/pbr ${D}${bindir}/pbr-2
++        fi
++}
++
+diff --git a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb b/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
+index 1023b2031..8f7f924da 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
+@@ -1,13 +1,2 @@
+ inherit setuptools
+-# The inc file is in oe-core
+-require recipes-devtools/python/python-pbr.inc
+-
+-SRC_URI[md5sum] = "ea90e1118a0132da752d45e68d10b2b8"
+-SRC_URI[sha256sum] = "9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
+-
+-do_install_append() {
+-        if [ -f ${D}${bindir}/pbr ]; then
+-                mv ${D}${bindir}/pbr ${D}${bindir}/pbr-2
+-        fi
+-}
+-
++require python-pbr.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pbr_5.4.2.bb b/meta-python/recipes-devtools/python/python3-pbr_5.4.2.bb
+new file mode 100644
+index 000000000..97e7361b1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pbr_5.4.2.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pbr.inc
 -- 
-2.7.4
+2.17.1
 
 
 
