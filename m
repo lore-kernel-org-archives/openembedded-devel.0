@@ -1,24 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 42F237F445
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 52B1D7F445
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 05:18:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x775HXNi003952
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Aug 2019 22:17:43 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 6 Aug 2019 22:17:10 -0700
-From: <kai.kang@windriver.com>
-To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
-Date: Wed, 7 Aug 2019 01:17:05 -0400
-Message-ID: <20190807051707.8709-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Wed,  7 Aug 2019 07:04:14 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,356,1559491200"; d="scan'208";a="73132256"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Aug 2019 15:04:13 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id D1EE94CDFCDE
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Aug 2019 15:04:13 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 7 Aug 2019 15:04:23 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 Aug 2019 15:03:31 +0800
+Message-ID: <20190807070331.30385-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][Patch 0/2] Add recipe of xfce4-datetime-setter
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: D1EE94CDFCDE.AD661
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] protobuf: upgrade 3.9.0 -> 3.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 05:18:09 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 07:04:16 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-Hi Andreas,
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ .../recipes-devtools/protobuf/{protobuf_3.9.0.bb => protobuf_3.9.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.9.0.bb => protobuf_3.9.1.bb} (98%)
 
-I add recipe of xfce4-datetime-setter which is from your repo from
-github. But I found it requires dbus service org.freedesktop.timedate1
-which is from systemd. So make xfce4-settings requires it only when init manger
-is sytemd. Any comment on that please?
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
+index 38e2286..94d8def 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.9.0.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.9.1.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib"
+ DEPENDS_append_class-target = " protobuf-native"
+ 
+-SRCREV = "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
++SRCREV = "655310ca192a6e3a050e0ca0b7084a2968072260"
+ 
+ SRC_URI = "git://github.com/google/protobuf.git;branch=3.9.x \
+            file://run-ptest \
+-- 
+2.7.4
 
-Regards,
-Kai
 
-Kai Kang (2):
-  xfce4-datetime-setter: add recipe
-  xfce4-settings: rrecommends xfce4-datetime-setter
-
- .../xfce4-datetime-setter_3.32.2.bb            | 18 ++++++++++++++++++
- .../xfce4-settings/xfce4-settings_4.13.7.bb    |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-
---
-2.20.0
 
 
