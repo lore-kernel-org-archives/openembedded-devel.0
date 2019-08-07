@@ -1,30 +1,36 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A7B937D6B4
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A2A3C7F437
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 07:42:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,356,1559491200"; d="scan'208";a="73134864"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Aug 2019 15:42:25 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 716144CDFCE1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 15:42:26 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 7 Aug 2019 15:42:25 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Aug 2019 15:41:44 +0800
-Message-ID: <20190807074144.31016-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Wed,  7 Aug 2019 07:59:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 463P6R4S7Bz4s;
+	Wed,  7 Aug 2019 09:59:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1565164767;
+	bh=Z2aHJWPLtazNo6M8IXh8Z1cm9teqfvfcEUqh3LOxvvE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=VWOZS2R6OvDJ4PpPW/DEDU4cnI08U8bq5V9LsE5F8K0nqKmsKA7nh+nXQ8XsOj7v8
+	rlkfvz2TMPJeXqg/z823HBKzmyHeqeIsdDRHeuEmWs3f2wkAs0+wOlGTOY2XMDvDAj
+	FPV4d2aImM82FyecsNKoM5pPaZC+MnCE4Vm+ZMK7bLWNJHDHYJ7tngRDFfgY44cgrm
+	27F1+SsO/BRuVYaJMZXD4heqz0okGwNpVsYrhWfKZNmTStQAeWcRcNEvJZ501+YR4y
+	OVZcv5M2uc+gkbpvm2VO/Ox0UbeqzwnsjBJsP+fLVHsX/oJJTp54PF7G9teLtd7v1w
+	Z7vKucXBn5jU/BX9lXx1wWJ8yG9aw3Rk1GHOOXpn6EiZK6LZvHFMHuK7Dop40hMRSZ
+	SYO61gchj7DCDU9swR8R5/P4JzwbZpeaavV1JYFYhmTrmgIDkeCV13JUs5MEbANeXv
+	+PvPZ5Um15lDcD627HfymIK/qJrnKM8EnW8inP6qzH1+sIMBNFVw6+Imr1fsrZKOjI
+	dQ2e0IOJVJwKP/R5G3t/1Zn4YgOUNMbUvTKyIm3Tk9lvpez0n3aCfUBT/2MU67fnTR
+	GagrfCEWJUW9EseNEdUiq2wJwT/GlIg4A/xacpRQXLuXpJLF65UeIrVQW3pK/ft7Bz
+	OGwq6uGLZTiZc3XK7J0jkOVY=
+Date: Wed, 7 Aug 2019 10:59:25 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Message-ID: <20190807075925.GA21771@localhost>
+References: <1565195585-37801-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 716144CDFCE1.A9B5D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-markupsafe: upgrade 1.0 -> 1.1.1
+In-Reply-To: <1565195585-37801-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] python-pbr: Add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,76 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 07:42:26 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Aug 2019 07:59:28 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+On Thu, Aug 08, 2019 at 12:33:05AM +0800, Zheng Ruoqin wrote:
+> Providing a python3 version of python-pbr.
+>...
 
-License file changed LICENSE -> LICENSE.rst
-Changes of license file as follows:
+python3-pbr is already in oe-core.
 
-* Copyright (c) 2010 by Armin Ronacher and contributors.  See AUTHORS
-  for more details.
+cu
+Adrian
 
-  Some rights reserved.
-  ->
-  Copyright 2010 Pallets
-
-* Redistribution and use in source and binary forms of the software as well
-  as documentation, with or without modification, are permitted provided
-  that the following conditions are met:
-  ->
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are
-  met:
-
-* The names of the contributors may not be used to endorse or
-  promote products derived from this software without specific
-  prior written permission.
-  ->
-  Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-markupsafe.inc           | 6 +++---
- .../python/{python-markupsafe_1.0.bb => python-markupsafe_1.1.1.bb} | 0
- .../{python3-markupsafe_1.0.bb => python3-markupsafe_1.1.1.bb}      | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-markupsafe_1.0.bb => python-markupsafe_1.1.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-markupsafe_1.0.bb => python3-markupsafe_1.1.1.bb} (100%)
-
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe.inc b/meta-python/recipes-devtools/python/python-markupsafe.inc
-index 437a60c..33d63b3 100644
---- a/meta-python/recipes-devtools/python/python-markupsafe.inc
-+++ b/meta-python/recipes-devtools/python/python-markupsafe.inc
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Implements a XML/HTML/XHTML Markup safe string for Python"
- HOMEPAGE = "http://github.com/mitsuhiko/markupsafe"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c6d1adcf45d69359f256c1cea3254127"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
- 
--SRC_URI[md5sum] = "2fcedc9284d50e577b5192e8e3578355"
--SRC_URI[sha256sum] = "a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665"
-+SRC_URI[md5sum] = "43fd756864fe42063068e092e220c57b"
-+SRC_URI[sha256sum] = "29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b"
- 
- PYPI_PACKAGE = "MarkupSafe"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe_1.0.bb b/meta-python/recipes-devtools/python/python-markupsafe_1.1.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-markupsafe_1.0.bb
-rename to meta-python/recipes-devtools/python/python-markupsafe_1.1.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-markupsafe_1.0.bb b/meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-markupsafe_1.0.bb
-rename to meta-python/recipes-devtools/python/python3-markupsafe_1.1.1.bb
 -- 
-2.7.4
 
-
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
