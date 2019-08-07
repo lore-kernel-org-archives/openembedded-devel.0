@@ -1,53 +1,53 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 39B437F331
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
+	[209.85.210.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A89617F325
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 12:00:22 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id f17so79707282wme.2
+	Wed,  7 Aug 2019 12:29:21 +0000 (UTC)
+Received: by mail-ot1-f65.google.com with SMTP id n5so103555749otk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Aug 2019 05:00:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=K8GCYl3pnlf3SsPIGqL/xT3jJ2evWbqy+U8POOvKfhc=;
-	b=nX3BKBDAJ30XYg4jazN3R2pmvRPG1EyUVQerhwD2moA2e7uA7kZxTdrSFgcx8GSmm0
-	exDxeBep64aj0lpMELEN8G77gaRn9NOjJCwBcGRg5kEDL7pHgEv/hWi7tri5VUZ5yEkg
-	cFdj2N8+b/8AfRHzofSV9vZi92yy+i3qrH9Bwzvw1rtCzOyThFbfPE0Kqa52kMoQWUDo
-	8Trf5pDSk5QAcyQzaKk0C9lIcrSwYWRUUgn9Skx47bMdpX340DbwypjYdhubhRkGj42n
-	+wGJ2eRVFDfb3k1Jt3OzsX8pc1WiTFaYbX6a37zjRYEZV8IwiTKyURIblvuwZW7enqt1
-	mpGw==
+	Wed, 07 Aug 2019 05:29:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=K53bVpz9XXliELRGfUC6ZelNPGIeAOP2x6kH3m2ODHA=;
+	b=BtCnTMmVf0NmacXCtJ5ZhzUeNom1F940Rp1NAhDJ73fbTnEylwsu+dz0T1i+k62/JM
+	PSa/YhAXnXRLq6W39cefEk4FQaHEMKSX6UA9gAaJrHzdF5c9ykAEjBVOiZpmVMZ9G+IN
+	GMPJprYWnnMZt0hzEkSdcmj+aztvHdNluHOu5gWQ4Q07gvkkpwu/YUOUQOsH/uxvpW06
+	YEJwvaKcfv5xaoaj3P4Nl4/nN2lBpl5PMvxrDyplSKaWnHdpRKTqkKPKMEQu7cF1Aimg
+	DWDR7lp/FHOqiVCvaFkS7GO9pduc7LY3N25XiYSR3+FAmbzZYQ50XGgtDpSPMjyECxrg
+	j8WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=K8GCYl3pnlf3SsPIGqL/xT3jJ2evWbqy+U8POOvKfhc=;
-	b=A14RAlUDgSBNrQqAKksxH5O0u3NJ8bFggSTNnZFpu4koZnb94hIr9+zIcoT1+vKPiv
-	LPSk1uixUUGTZ4JpwjLzHDoSE302IM2/tobr3a1I3mU6N9FKbFsrEmPu8Eed6Dxt+4QN
-	ddPLlwHumMHHoZcrhKNwK6Yn3KTqazMwuoS+ssRbGJToU2LF8BY4ZBrCrnZXmyV3S+7q
-	f5Cj/6FI5xAZzVR3VPMneCTnxs1/emqVVE95oZsrKbO3dQRiFOj9CTGVy7uV95OkhhhX
-	DHmG8uLwmJLtEL2E0i0r4nn7M6zawyBgmOWSdB0wzBymrZVmz4y2Y+hiKdKLugRReTCr
-	61Xw==
-X-Gm-Message-State: APjAAAVMX+wctHVpMXdHbs8hi5I0spGnIlLsBa8+6nu9Eiq83OQfJ8de
-	IqRD1t9rzOJXIuxjYJleqjU4mw==
-X-Google-Smtp-Source: APXvYqz9y08KuInSaDicqZZ5hamKAspfgjfltfEzBMBnQpnT/S7GQ8TH6m7JB++A1ZTOEhRbFlDLZw==
-X-Received: by 2002:a1c:6a03:: with SMTP id f3mr4618216wmc.35.1565179222899;
-	Wed, 07 Aug 2019 05:00:22 -0700 (PDT)
-Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id
-	f134sm3136514wmg.20.2019.08.07.05.00.21
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 07 Aug 2019 05:00:22 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Aug 2019 14:00:14 +0200
-Message-Id: <20190807120014.25225-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=K53bVpz9XXliELRGfUC6ZelNPGIeAOP2x6kH3m2ODHA=;
+	b=nyCHz3IO7Z2wdCQ6v35V+M+/Ig8eSkWR7Qjr+qQKwf0w+gb+jb8gnlKh02ziNgtU83
+	jQZLqqjwW2PkmPclOVEnixnHcNJ+QYy7Mrn6OvpTsD8hqd+OzxBlPpYin6DXwc1Z4Jdw
+	qvSj/EIZ5twsjZNuBeWO5thPoR4+ds2YobL/mXzWA3BfeChZ6XaqszxIvMl53mx3e2UM
+	BZOmZ9nmRKPQ4o5EZViab5RegmNHQnvU0JAWJgANfyVmgWg//5fSSomCYfq3D+6FSDUD
+	Mak4Z9Cwm+lvIJWkjL4s7tAq0q+SM9/OR3TZUFVOgW1xAaJTN4/jjShBv6LOl3s7BlQb
+	J/Tg==
+X-Gm-Message-State: APjAAAVUxvrNLY4oMInnkX+7GGdDubXgp0mAcZ+9chJVwy8YtuTtZ7Ie
+	Z7Q3Vp1vAW795SQnmFP0uyWuZzNBJFXKocVVOdU=
+X-Google-Smtp-Source: APXvYqzF74jcGBdVy6WiyqY7ipKpN6FFcUaCAtoJGpCvnDjHqrRmJHYOUWDhZzgnbb+4Xv9nPvbFuAkRhJX4OPl0nIU=
+X-Received: by 2002:a5e:de0d:: with SMTP id e13mr7797925iok.144.1565180962138; 
+	Wed, 07 Aug 2019 05:29:22 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-oe][PATCH] libgpiod: bump version to v1.4.1
+References: <1564038304-372775-1-git-send-email-mingli.yu@windriver.com>
+	<CADkTA4NafYpQLV2VgTgb4BajL=-KH1gQLU2_rk3ur7b3aqOjSA@mail.gmail.com>
+	<CAMKF1sqi9aRud1UQQCFsOakEQ1qKbfRhBSKFeEbwPxQChh45_A@mail.gmail.com>
+	<5D3ABBD8.2050107@windriver.com>
+	<0263423f4903ea25247352460c6a906b@agner.ch>
+	<CAO5Uq5R=bCUcr83yvZwd54Ya61wmxsO9rZ2zztRXfz2VyzQyhg@mail.gmail.com>
+In-Reply-To: <CAO5Uq5R=bCUcr83yvZwd54Ya61wmxsO9rZ2zztRXfz2VyzQyhg@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Wed, 7 Aug 2019 13:29:11 +0100
+Message-ID: <CAO5Uq5Q6aib4QMbaRknPeU6==Y_Q88e87YDL-qgvVmDV3aFEAQ@mail.gmail.com>
+To: Stefan Agner <stefan@agner.ch>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	liu.ming50@gmail.com
+Subject: Re: [meta-filesystems][PATCH] ostree: import from meta-overc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,45 +60,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 12:00:22 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 07 Aug 2019 12:29:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Tue, Aug 6, 2019 at 2:48 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+>
+> On Tue, Aug 6, 2019 at 2:26 PM Stefan Agner <stefan@agner.ch> wrote:
+> >
+> > On 2019-07-26 10:37, Yu, Mingli wrote:
+> > > On 2019=E5=B9=B407=E6=9C=8825=E6=97=A5 21:58, Khem Raj wrote:
+> > >> On Thu, Jul 25, 2019 at 6:42 AM Bruce Ashfield <bruce.ashfield@gmail=
+.com> wrote:
+> > >>>
+> > >>> On Thu, Jul 25, 2019 at 3:05 AM <mingli.yu@windriver.com> wrote:
+> > >>>>
+> > >>>> From: Mingli Yu <Mingli.Yu@windriver.com>
+> > >>>
+> > >>> This doesn't make any sense to "import from meta-overc". meta-overc=
+,
+> > >>> was never the authoritative upstream for ostree. That layer has to
+> > >>> carry a specific version to meet the requirements of some of the
+> > >>> container libraries, etc, that it requires.
+> > >>>
+> > >>> You need to have a look at the latest ostree, the various layers th=
+at
+> > >>> are currently maintaining it, and pick the right version if you wan=
+t
+> > >>> to consolidate things here. I'm very doubtful that the right choice=
+ is
+> > >>> the one from meta-overc.
+> > >>
+> > >> Yes agreed and this version fails on musl e.g.
+> > >
+> > > Make sense, please ignore this patch.
+> >
+> > What layers are you considering?
+> >
+> > We use OSTree integration of meta-updater and would welcome having a
+> > common upstream implementation which works for everyone:
+> >
+> > https://github.com/advancedtelematic/meta-updater
+> >
+>
+> My current one is here:
+>
+> https://github.com/akiernan/meta-ostree-core/tree/master/recipes-ostree/o=
+stree
+>
+> Which started off in life from the Intel IoT refkit.
+>
+> And the sidebranch folks have one here:
+>
+> https://github.com/sidebranch/meta-ostree/tree/sumo/recipes-ostree/ostree
+>
+> Getting just a common ostree recipe in meta-oe(?) would be good.
+>
 
-This is a bug-fix release addressing the following issues:
+How does this look... fixing MUSL, removing the hack for MIRRORS and
+(I expect) fixing how it interacts with grub are things I think I've
+not picked from these other layers:
 
-- fix GCC8 warnings when building python bindings
-- fix a bug in gpioinfo where lines used by the kernel without any
-  consumer string were reported as unused
-- fix a bug in line::event_get_fd() in C++ bindings where the exception
-  wouldn't be thrown in error cases due to a missing 'throw' keyword
-- fix a couple issues with the test-suite
+https://github.com/akiernan/meta-ostree-core/blob/master/recipes-ostree/ost=
+ree/ostree.inc
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- .../libgpiod/{libgpiod_1.4.bb => libgpiod_1.4.1.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgpiod/{libgpiod_1.4.bb => libgpiod_1.4.1.bb} (82%)
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
-similarity index 82%
-rename from meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb
-rename to meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
-index 71a45edb9..756b143ef 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
-@@ -2,8 +2,8 @@ require libgpiod.inc
- 
- DEPENDS += "autoconf-archive-native"
- 
--SRC_URI[md5sum] = "bd52d764017215a30e2f014d2081dc3e"
--SRC_URI[sha256sum] = "ebde83aaf14be3abd33e7a90faa487a2ee231e242897afe7fdefb765386b3c8b"
-+SRC_URI[md5sum] = "585b4bb431f99c4ba9b3ee58b9d494c1"
-+SRC_URI[sha256sum] = "21ae8fd1f8dafc2eb2ba50e652390cf533d21351419a7426255895cb52e21b1c"
- 
- # enable tools and cxx bindings
- PACKAGECONFIG ?= "cxx tools"
--- 
-2.21.0
-
+--=20
+Alex Kiernan
 
