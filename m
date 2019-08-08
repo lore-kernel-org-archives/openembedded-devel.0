@@ -1,47 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E4DBC7ED62
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id DD9FA65CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 21:52:59 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id v38so1477175qtb.0
+	Thu,  8 Aug 2019 23:12:55 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id e8so4691518wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Aug 2019 14:53:01 -0700 (PDT)
+	Thu, 08 Aug 2019 16:12:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4yqt+1QxzCz1bo49WlmhZkJoGbxrcP9dFfg5y1ugyts=;
-	b=fxWlXjlMzWkTv2ifFhEik3rJhn9+Xc21NQLcuhREI6YfrPZ6AOVqWdJhJRPii+AYkm
-	tmWOIEIDtQbk3lAmRFWGXmyowJmKTIUCrZG8wjI9R/eya3NR8TXOSyJeyXnSUDq+Vcc6
-	sdN85O8jTfcgeYx+YSulq6eSYFlO5DqPjicXcMug72xMovkYOxe8TcYA8MBMBiXlqHGF
-	72qnRqV1JuudxNh4loRd8AjtUBU452nvhg3OsccTWTOHciOpwxLAgtq3ekTW80q8hQgS
-	cCaJKXz6K/VfafQe7KDroUeyw8Cwqtn8SXhJZPkJrgfeJjStJdirvgurzzjA50zw1YJF
-	fJzA==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8M+FusffJ5T8/JJPKVE1tZUtxfavMpj4D55vZoiBcSo=;
+	b=H73Utivc6W/B3FyBx7wBalzdfFO8InjBhKJeNvcJLM1HnTQOl/66CHRSzjkjIek3kX
+	o+79mPCU+ljh9JEXJR436ugo36sXTLPBQfy/35SJtsWt6lOQ1KOEIeOlm8t+H7liOtu6
+	ht78h26ny0af9gWqXB1e+V8o8wH2v8bZRZloyQaZ6qm0r1mb+bb9NJNnIeJmTdb5g/K0
+	feLHbyHtG23LO1YrrNRszLPER0eesrgisdafntO4YBnUobgxm0OmjpHQx3tQ95qxMuE5
+	PjfSLBdwWwNQMeb4xRAxcEaZvvrwh+BLH3l1pLOqbmEGmsyChUAPjFRbcxOUUP234tCm
+	DSKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4yqt+1QxzCz1bo49WlmhZkJoGbxrcP9dFfg5y1ugyts=;
-	b=nkooszV5yTcvNQhmBpBLCj00qfsoJpojImg3RJ9ThLaj0O2keLz1ykyelTCioN4/S5
-	uXT1eKuPEOSo2XoSmgifMyGeOp/4W05W+NofK/2Zgv9+eqDc9neC8D8QFKoZrds4W4Z0
-	l6SNc6lfugzH5E4jTa2QDudlKS8pU25lya4/q8HrW5LqIugt61VA0pGflCHbRoARoVW6
-	4VgHS6YDU3mttOnnOXMphPvglgFuFi7YEc4slrtuvhNG718Pk6812vHLOs/RMwNyoDRP
-	1Mu2NN1ZJ1j0oyXUyZGrORDNV9Fdm2MktcC5MJJqgsYIhUDhSHI4coxf1tQquMokNCEU
-	MqJQ==
-X-Gm-Message-State: APjAAAWl7ljD0YY9dV6FyZY4bGIODj5FN24wc2zmwZVQWJxj0UbHqagD
-	eTUmtdJzCgZelI6D0+QDPuDNTPhUYWXyTcpl9cs=
-X-Google-Smtp-Source: APXvYqy7ZQ78nL04eeHe1UijIAuW8gWz3/k/yBUHbDbhkvCOg1oJGQ6EQbZRc0UHMzAs/nYj68bhF+x8IXzYRWq4Dic=
-X-Received: by 2002:ac8:525a:: with SMTP id y26mr15300882qtn.378.1565301180504;
-	Thu, 08 Aug 2019 14:53:00 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8M+FusffJ5T8/JJPKVE1tZUtxfavMpj4D55vZoiBcSo=;
+	b=spObaMAlS6hhNn00xx7+0mN9bO07z0EZP46DJhsJ1ftCFWdM1FJKVN3gda49K6vhkG
+	s/uU+4LrLuzhhm0X1V3rQLJG1KW95SW7GA+XyJqdw8a6gpw9mBIaJsAIVCotQeZn5Zz4
+	F16UuMCUljqNt5ajUgrdK67rS41zG1LeXm0GM45d/I7Qf9QPPUfe9czQyVLIpD8LpqBq
+	Rt166Ja77wb0WF+39qYw2/DsWErnOV3xSwFmCeL1dRwci/JJpXh46UpJIBj2WOo5ohJ3
+	qMZpCQom0t/5qRJjG3r8dRCa6jpFZZZnm1Y/do/Dh5Pc8Pjq9Uft6y7P7fyIaN5DH6Vy
+	N3fw==
+X-Gm-Message-State: APjAAAUXO8R3N7c92zYKqm5KxZ6E0WMwwMdpkHAQnCf+ydQ+kgSnn1K8
+	7XyGQQjsB4fN4L/MZKXl5jr/jCGx
+X-Google-Smtp-Source: APXvYqxnhGn69MznbIX3thPVqNt9KTopxGQJDzy4FtBfGiy3ZFYgKZ1o+WJAEL322EBb9WOgQzoonQ==
+X-Received: by 2002:a1c:1f41:: with SMTP id f62mr7106245wmf.176.1565305976294; 
+	Thu, 08 Aug 2019 16:12:56 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F025B43B1D39927B00A68F0.dip0.t-ipconnect.de.
+	[2003:f0:7f02:5b43:b1d3:9927:b00a:68f0])
+	by smtp.gmail.com with ESMTPSA id
+	s15sm74357695wrw.21.2019.08.08.16.12.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 08 Aug 2019 16:12:55 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Aug 2019 01:12:45 +0200
+Message-Id: <20190808231245.2941-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20190808093210.149215-1-kai.kang@windriver.com>
-	<20190808093210.149215-2-kai.kang@windriver.com>
-In-Reply-To: <20190808093210.149215-2-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 8 Aug 2019 14:52:34 -0700
-Message-ID: <CAMKF1soxeBna0ocvLeqGSj4pemgaSv0JoxR5TS2TDvpXvOcVZA@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 1/2] xfce4-datetime-setter: add recipe
+Subject: [PATCH] meta-xfce: Make Kai Kang layer maintainer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,58 +60,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 21:53:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 08 Aug 2019 23:12:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 8, 2019 at 2:33 AM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Because xfce4-settings turn back to its official upstream, it missing
-> function to set date and time. Add it from Andreas's repo on github.
-> It depends on dbus service org.freedesktop.timedate1 which is provided
-> by systemd, so add systemd to RDEPENDS.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  .../xfce4-datetime-setter_3.32.2.bb            | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
->
-> diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-> new file mode 100644
-> index 000000000..7a28b6101
-> --- /dev/null
-> +++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "A fork of (early) gnome-control-center datetime panel for XFCE. \
-> +It is based upon GTK3 and embedds into recent xfce4-settings."
-> +HOMEPAGE = "https://github.com/schnitzeltony/xfce4-datetime-setter"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
-> +
-> +DEPENDS = "glib-2.0-native libxfce4ui"
-> +
-> +SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https"
-> +SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit gettext meson
-> +
-> +FILES_${PN} += "${datadir}/icons/hicolor"
-> +
-> +RDEPENDS_${PN} = "systemd tzdata"
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-xfce/README | 1 +
+ 1 file changed, 1 insertion(+)
 
-On systemd-less systems it wont work
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 84b019896..70ad47a2d 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -19,3 +19,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
+ When sending single patches, please using something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
+ 
++Layer maintainer: Kai Kang <kai.kang@windriver.com>
+-- 
+2.21.0
 
-ERROR: Nothing RPROVIDES 'systemd' (but
-/mnt/a/yoe/sources/meta-openembedded/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-RDEPENDS on or otherwise requires it)
-systemd was skipped: missing required distro feature 'systemd' (not in
-DISTRO_FEATURES)
-
-> --
-> 2.20.0
->
 
