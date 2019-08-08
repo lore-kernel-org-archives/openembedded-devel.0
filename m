@@ -1,28 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 064C47F335
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 012E07D344
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 09:03:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7892CbK013926
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 8 Aug 2019 02:02:54 -0700
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 8 Aug 2019 02:02:32 -0700
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20190807051707.8709-1-kai.kang@windriver.com>
-	<CALbNGRQ-e5SvSJVeet6MsZJ9Ux0K06jrxxH_T=YztAgCqGOUug@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <80d262d5-643d-0ccb-bd6d-1a1207d06833@windriver.com>
-Date: Thu, 8 Aug 2019 17:00:42 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Thu,  8 Aug 2019 09:13:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,360,1559491200"; d="scan'208";a="73213321"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 08 Aug 2019 17:13:14 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 231074CDFCF6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Aug 2019 17:13:15 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 8 Aug 2019 17:13:21 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Aug 2019 02:12:48 +0800
+Message-ID: <1565287968-58605-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQ-e5SvSJVeet6MsZJ9Ux0K06jrxxH_T=YztAgCqGOUug@mail.gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce][Patch 0/2] Add recipe of xfce4-datetime-setter
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: 231074CDFCF6.A80A2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][patch v6] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,56 +37,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 09:03:20 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 08 Aug 2019 09:13:26 -0000
+Content-Type: text/plain
 
-On 2019/8/7 下午10:02, Andreas Müller wrote:
-> On Wed, Aug 7, 2019 at 7:18 AM <kai.kang@windriver.com> wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Hi Andreas,
->>
->> I add recipe of xfce4-datetime-setter which is from your repo from
->> github. But I found it requires dbus service org.freedesktop.timedate1
->> which is from systemd. So make xfce4-settings requires it only when init manger
->> is sytemd. Any comment on that please?
->>
->> Regards,
->> Kai
-> Hi Kai,
->
-> * had short glance on your patches: they look good to me. In the
-> 'old-days' when datetime-setter was part of xfce-settings, there was a
-> packageconfig for it. That was enabled if systemd was in distro
-> features - so your suggestion should behave same.
+This dnf plugin aims to supply a tui interface for user to manage
+packages. It has features as following:
+  1. Add new command dnf tui --init to make dnf work on host.
+  2. Text-based user interface for dnf.
+  3. Manage SPDX files.
+  4. Manage SRPM files.
+  5. Add installation samples for dnf.
 
-It reminds me that it is better to check distro systemd for 
-xfce4-datetime-setter. v2 will be sent.
+More details please refer to https://github.com/ubinux/dnf-plugin-tui.
 
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../dnf-plugin-tui/dnf-plugin-tui_git.bb      | 38 +++++++++++++++++++
+ .../files/oe-remote.repo.sample               |  5 +++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
 
-> * thanks for taking care for meta-xfce for very long time now
-
-My pleasure.
-
-
-> * would anybody complain making you maintainer of meta-xfce?
-
-It will be my honor if I have chance to take more responsibility and 
-contribute more to oe community.
-
-Thanks,
-Kai
-
->
-> Regards
->
->
-> Andreas
->
-
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+new file mode 100644
+index 000000000..cb26729be
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git"
++SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
++PV = "1.0"
++
++SRC_URI_append_class-target = " file://oe-remote.repo.sample"
++
++inherit distutils3-base
++
++S = "${WORKDIR}/git"
++
++do_install_append() {
++        install -d ${D}${datadir}/dnf
++        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
++            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
++        done
++}
++
++do_install_append_class-target() {
++        install -d ${D}${sysconfdir}/yum.repos.d
++        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
++}
++
++FILES_${PN} += "${datadir}/dnf"
++
++RDEPENDS_${PN} += " \
++  dnf \
++  libnewt-python \
++  "
++
++BBCLASSEXTEND = "nativesdk"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+new file mode 100644
+index 000000000..6c4502e17
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+@@ -0,0 +1,5 @@
++[base]
++name=myrepo
++baseurl=http://127.0.0.1/oe_repo/
++enabled=1
++gpgcheck=0
 -- 
-Kai Kang
+2.17.1
+
+
 
 
