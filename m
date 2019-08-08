@@ -1,27 +1,47 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id EEAD47F288
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 61FD97F2AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 14:49:13 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x78EnExs026511
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Thu,  8 Aug 2019 14:55:17 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id g17so95232133wrr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 8 Aug 2019 16:49:14 +0200
-Received: from dev.vm6.ccp.siemens.com ([163.242.58.54])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id x78EnEPc011365;
-	Thu, 8 Aug 2019 16:49:14 +0200
-Received: from dev.localdomain (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 6494398021E;
-	Thu,  8 Aug 2019 16:49:13 +0200 (CEST)
-From: Andrej Valek <andrej.valek@siemens.com>
+	Thu, 08 Aug 2019 07:55:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=fWk+TUkOZGq0EsrRsgQyrZVMW+edB7YOwNCbgcxbmSs=;
+	b=WJ637TW7S1A7OMjZdoguttx1raoCpgPlGRFZGRq3NEXuDsQk9uYpbfIzVnl4r0/f1X
+	LXF6xci9GI9h63z/+iRBcfaT+3RNYHii82hmVLoociHmQBaoscAWKHq1wuL8iWhYWTju
+	/Z2eNIjFSsHtCjQ3iAXHefVdLvTsoTWRPNtiR91dYML1cBEb+YlsVucr+SxFY0v5AbHn
+	7a0dEHIwUBwbLnRsWuFefdZqNyGHDr/XJHOAyLe8xkjY0pTURKkg38kf4egTSRj0Yc90
+	y6BbcGlWz3o3qTxhEN0wFsUjRuKzLGgBUOB6D+vyEFz47hSbNquhVScicYo4kaBeeJZ9
+	Kvnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fWk+TUkOZGq0EsrRsgQyrZVMW+edB7YOwNCbgcxbmSs=;
+	b=UIoaM143AGGblU9ZJA4CrUYeMd96oDtjIkhZhJolMnV3axSxWtVMqr4Fbs+A9yz5qV
+	AAs559+508/kg6/Y3UN8O5WdVPNJuSKFalrANHSBxAutSZJoowvBRItrrtFQ5asEaQ0c
+	zaE/3nn9DeVGuTNkn9X+GZZVmhQ7B2aekY1wjkDyaUtV6KZSJ1sINTByC6TGMTTrV8P2
+	acx5wkGnMHB0/TE6aaQxmMqnwd6iJQsZzJJDtfcA0lcLPlqBtesncu9gtdapsJiH0vvf
+	FT8JlXKocPhwg0kG4kYguay+klLc66XH63QHuzOSnAnNBQdxvmQd4LfNgi0j8s1ILqhb
+	JOpg==
+X-Gm-Message-State: APjAAAVCrszZFMSsRWv/akEf1dO62G/3ppyXauGRrGRiIVkL05qRz+AW
+	GlQeXO3SoebOb6LnSlD7jybQGSsy
+X-Google-Smtp-Source: APXvYqwwaNpPN3LsMkBTq+0ZA5IWA+V1NB505Fkzy/R56/obxHHqCbL8ioH6sVYvpq2ergmqH4mCuA==
+X-Received: by 2002:adf:db0e:: with SMTP id s14mr5225702wri.333.1565276117623; 
+	Thu, 08 Aug 2019 07:55:17 -0700 (PDT)
+Received: from localhost.localdomain (193.164.125.18.ip.redstone-isp.net.
+	[193.164.125.18]) by smtp.gmail.com with ESMTPSA id
+	b5sm77490103wru.69.2019.08.08.07.55.16
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Thu, 08 Aug 2019 07:55:17 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Aug 2019 16:49:03 +0200
-Message-Id: <20190808144903.2875-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190806064731.17490-1-andrej.valek@siemens.com>
-References: <20190806064731.17490-1-andrej.valek@siemens.com>
-Subject: [meta-oe][PATCH v2] nodejs: 10.16.0 -> 10.16.2
+Date: Thu,  8 Aug 2019 15:55:14 +0100
+Message-Id: <20190808145514.1338-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] iwd: Upgrade 0.18 -> 0.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,45 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 14:49:14 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 14:55:17 -0000
 
-- update nodejs to active 10.x LTS release 10.16.2.
-- add python running dependency due to samples.py requirements
-
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- .../nodejs/{nodejs_10.16.0.bb => nodejs_10.16.2.bb}                 | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.0.bb => nodejs_10.16.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
-index aaa1da0aa..e0eac47ae 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
-@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
-            "
+ meta-oe/recipes-connectivity/iwd/{iwd_0.18.bb => iwd_0.19.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_0.18.bb => iwd_0.19.bb} (95%)
+
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
+index f56c88b821e1..2b4530e3c5d8 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
+@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
+ DEPENDS = "ell readline dbus"
  
--SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
--SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
-+SRC_URI[md5sum] = "fa70b942c5e3379ce96219fe90f50c8f"
-+SRC_URI[sha256sum] = "6cbc17795e9259dce7a8f5fd5a2e46f9e6920fb48b7d9539c5b2faa5bb5db4d8
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+-SRCREV = "c923448bacf8a855b40017fe53ba2edcd062eec1"
++SRCREV = "899d802744b7e12409e259f546ba5594ab90262c"
+ S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -100,7 +100,7 @@ do_install_append_class-target() {
- 
- PACKAGES =+ "${PN}-npm"
- FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm ${bindir}/npx"
--RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils \
-+RDEPENDS_${PN}-npm = "bash python python-shell python-datetime python-subprocess python-textutils \
-     python-compiler python-misc python-multiprocessing"
- 
- PACKAGES =+ "${PN}-systemtap"
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 -- 
-2.11.0
+2.17.1
 
 
