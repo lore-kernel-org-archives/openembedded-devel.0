@@ -1,62 +1,58 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 982C260807
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B23B37F2AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 15:14:40 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id u17so44226999pgi.6
+	Thu,  8 Aug 2019 15:56:08 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id i18so44284991pgl.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Aug 2019 08:14:42 -0700 (PDT)
+	Thu, 08 Aug 2019 08:56:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:organization:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language;
-	bh=aK636kFov+KVdL4xsmtpFxFadRhER9hkNCAvf2HktWA=;
-	b=C5Rglsa/tKIAT4mut8HUBiVZ2jEyDXS7sgQkSnDyFXvcdA8rJKz6aWHUKDTyeMx3m4
-	Cj6HvP3OzJwEJRtaoAFcHVbjmpo+j3OKqZwvPULbjJRjZXoUJ+b10fBIudnLcBVHUPG5
-	RbfKLixLPFmKcdrKG5w0Gcfp9hG6pgsx+mot1Qqkx891gyT2gwGKTW4YuL5heamnG5+m
-	gGDztXFp4Uz4dchoxnRQ67B8hT8eXbY9qArXNDCH8pu2g9ObNkyehudRsai7U9RHKJmB
-	+AULadRkfHKHMgOi1HtuZSrreexjMMfs6raG4PV6wwwFCrUIHoKJD6Slnyw7d/rPP/aw
-	PaJw==
+	bh=YDx4YMXDmzkwd3XhSGyHS8JyNUQHiVi93oSnNzJu3x0=;
+	b=k7Tmo3dwhIOnoRoF7Y4gXPwDV+bkbGgau1QU/tADW0N5zhcA+CnXhMPo4ZxMbCWpxD
+	bHJtw4RU/DhhbK0q958y5rZPonp00dXKKhm+olLsbe6QFX3OKa/YyaPCBzbDKb2/5bLw
+	jlN6dz+bmHHL3A1QxWlZ692e2L02h55kMn0RIbOfM4jXx+fOdhwFvHw9qlnOr5Jr6nxj
+	+61lYJjDRYOzi4AFF6F32Bh87imzQH3pomQB9Nc1IGNUdHb8Dw2NHpWF+eGK3sFFEjy8
+	PqlrYXHP/AgsPg8+RB2O4i33XMh4JRVOsZfTS4gp6Nq0XZWx+pLo9l7WXta1uYhh5rnB
+	zedQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language;
-	bh=aK636kFov+KVdL4xsmtpFxFadRhER9hkNCAvf2HktWA=;
-	b=eTJA2HWPiIDuX/Mo1mf1zOL/YmCF//pBDsjGYV0o0cyxdv/RPMuDX5v4ExPmJq0EJK
-	jYu8xcuNFeJoUftSDCHxx1GRbci1POwwdZ/jgw8N86akX3/uP8NDLoPsX8IDRA5hDzBQ
-	AWLdeY4V/+AuVF6GznLyuUJHygy/fx9//EglGTURFHVkyNqp6nIS3GbtmgWP92bFumz2
-	JTqadeAbm8dbk6r6hQGlsGS7Ru6eRtZpQblS/GL8FMEgJbwsVBxo3Ynna2GGnuNpwbRi
-	Krz/EdMKfts9L+Cc3s4oeqW3HsA32TDIEcp71aGnZ051/+Ah98K6O1uOU1VOQKzk34ED
-	/rKg==
-X-Gm-Message-State: APjAAAWoLif7XCc5/FtTzat1TlLY7/ETMX45Y6azvp31+ulLXvb4Hy22
-	CD82X4znmB14uPLYXfdVoexCkgsRkas=
-X-Google-Smtp-Source: APXvYqy6VjDyGLDtXxiWeL/rXwmmdzcsY7Loqa1gx4eRiyoENIO07shyHrt19Z6iyq52El8leKpQ8Q==
-X-Received: by 2002:a17:90a:2641:: with SMTP id
-	l59mr4339806pje.55.1565277281026; 
-	Thu, 08 Aug 2019 08:14:41 -0700 (PDT)
+	bh=YDx4YMXDmzkwd3XhSGyHS8JyNUQHiVi93oSnNzJu3x0=;
+	b=aESDCClhpjsssLWopG6qW4y7op2vS7LbNZhqv0L/Ts8o0IX8fsbTBRdYVeplzII4Sg
+	Ga5VpvRjgPI2jayssOT85jovSSkkqohfZ5KUG4LYcz5lxt322qNgwNqLVV5tPLrAbJsW
+	j2OdzdOvQX6yTgS5a5976CAOJfpoPCkfya2dCRJ1UjYj81TKzQrGoZlZctii9FE630uI
+	DhyIWb5bKUjpmdZh/VcXq0xT/nZaXgLw81sDVVBUy2qjkaA7E+AYYMgOm/pJ+xQ1A5Qd
+	QF/3pPS9n07w8KAS+DlgsI5lCBlc1ZNncbVrTfkXv50Xe3cLvpM1+Ct1mfkmzLw8NL78
+	M/kg==
+X-Gm-Message-State: APjAAAVxn4ws0Ytinq+isJKiyzzllg8IU7F0YGjs8xUz4PAnuhzT2QbH
+	FDV0j/3i9lYGbBhSb/6FpDz/qHoQmLI=
+X-Google-Smtp-Source: APXvYqwJDpwTlodQsq2Qu4Uf3TmuuecHBrFpCJENnmWfj0YBqZ0kDFj4UsPGe8B0lwgcBUsQf6wqMA==
+X-Received: by 2002:a63:7d49:: with SMTP id m9mr13804048pgn.161.1565279768860; 
+	Thu, 08 Aug 2019 08:56:08 -0700 (PDT)
 Received: from ?IPv6:2601:646:8500:6bc6::bbfb? ([2601:646:8500:6bc6::bbfb])
 	by smtp.gmail.com with ESMTPSA id
-	q198sm98130821pfq.155.2019.08.08.08.14.40
+	v18sm93614597pgl.87.2019.08.08.08.56.07
 	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Aug 2019 08:14:40 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	Andrej Valek <andrej.valek@siemens.com>
-References: <20190806064731.17490-1-andrej.valek@siemens.com>
-	<76644068-fffd-3398-0898-e00db5a9f026@gmail.com>
-	<233c3c9c-9cd6-aead-3ddf-3adfb6d7d554@siemens.com>
-	<CA+chaQe1_bMvan17fjGrgXUf-ArJ43bu4iqC9PKq9BU6oRe_1g@mail.gmail.com>
+	Thu, 08 Aug 2019 08:56:08 -0700 (PDT)
+To: Adrian Bunk <bunk@stusta.de>
+References: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<134762b5-0997-950d-e47b-3fda6e6c885e@gmail.com>
+	<20190808052714.GA27264@localhost>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <cf2cd666-4c43-d9d1-c2fa-8081f5de0494@gmail.com>
-Date: Thu, 8 Aug 2019 08:14:50 -0700
+Message-ID: <d157a719-cd11-30b8-5733-3ce6789a9824@gmail.com>
+Date: Thu, 8 Aug 2019 08:56:17 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQe1_bMvan17fjGrgXUf-ArJ43bu4iqC9PKq9BU6oRe_1g@mail.gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] nodejs: 10.16.0 -> 10.16.1
+In-Reply-To: <20190808052714.GA27264@localhost>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][patch v5] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,141 +65,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 15:14:40 -0000
-X-Groupsio-MsgNum: 78994
-Content-Type: multipart/mixed; boundary="------------F3C4EAF1F6719B531E483612"
+X-List-Received-Date: Thu, 08 Aug 2019 15:56:08 -0000
+X-Groupsio-MsgNum: 78995
+Content-Type: multipart/mixed; boundary="------------27EE9B543B83DE26540EDDE8"
 Content-Language: en-US
 
---------------F3C4EAF1F6719B531E483612
+--------------27EE9B543B83DE26540EDDE8
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 8/8/19 6:26 AM, Martin Jansa wrote:
-> My guess: it's the recent insane.bbclass change in oe-core/master-next
+On 8/7/19 10:27 PM, Adrian Bunk wrote:
+> On Wed, Aug 07, 2019 at 09:29:24PM -0700, Khem Raj wrote:
+>> ...
+>> On 8/8/19 4:24 AM, Zheng Ruoqin wrote:
+>> ...
+>>> diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_g=
+it.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+>> ...
+>>> +SRCREV =3D "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
+>>> +PV =3D "1.0"
+>>
+>> Drop PV
+>> ...
+>=20
+> This is needed when the file is named _git.
+
+=46rom feeds point of view, PR would do so its not a dealbreaker, secondl=
+y
+my assumption was in this case it was set sythesized, and eventually
+package might release starting 0.0.1 or somesuch but when I looked into
+the component code, then 1.0 is a real release [1], therefore it is ok.
+
+>=20
+> cu
+> Adrian
 >=20
 
-yes it is due to that, and the error looks genuine to me.
+[1]
+https://github.com/ubinux/dnf-plugin-tui/commit/31d6866d5eda02be9a6bfb1fc=
+a9e9095b12eecd1
 
-> On Thu, Aug 8, 2019 at 8:31 AM Andrej Valek <andrej.valek@siemens.com
-> <mailto:andrej.valek@siemens.com>> wrote:
->=20
->     Hi Khem!
->=20
->     I have checked the task, what you mentioned, but there is no errors=
- on
->     my side.
->=20
->     DEBUG: Executing python function do_package_qa
->     NOTE: DO PACKAGE QA
->     DEBUG: Executing python function read_subpackage_metadata
->     DEBUG: Python function read_subpackage_metadata finished
->     NOTE: Checking Package: nodejs-doc
->     NOTE: Checking Package: nodejs
->     NOTE: mips-poky-linux-objdump -p .../packages-split/nodejs/usr/bin/=
-node
->     NOTE: Checking Package: nodejs-locale
->     NOTE: Checking Package: nodejs-staticdev
->     NOTE: Checking Package: nodejs-src
->     NOTE: Checking Package: nodejs-systemtap
->     NOTE: Checking Package: nodejs-dev
->     NOTE: Checking Package: nodejs-dbg
->     NOTE: mips-poky-linux-objdump -p
->     .../packages-split/nodejs-dbg/usr/bin/.debug/node
->     NOTE: Checking Package: nodejs-npm
->     NOTE: DONE with PACKAGE QA
->     DEBUG: Python function do_package_qa finished
->     DEBUG: Executing python function sstate_task_postfunc
->     NOTE: Using umask 0o002 (not 22) for sstate packaging
->     DEBUG: Executing python function sstate_hardcode_path
->     NOTE: Removing hardcoded paths from sstate package: ...
->     DEBUG: Python function sstate_hardcode_path finished
->     DEBUG: Executing python function sstate_report_unihash
->     DEBUG: Python function sstate_report_unihash finished
->     DEBUG: Executing shell function sstate_create_package
->     DEBUG: Shell function sstate_create_package finished
->     DEBUG: Executing python function sstate_sign_package
->     DEBUG: Python function sstate_sign_package finished
->     DEBUG: Executing python function sstate_hardcode_path_unpack
->     DEBUG: Python function sstate_hardcode_path_unpack finished
->     DEBUG: Executing python function uninative_changeinterp
->     DEBUG: Python function uninative_changeinterp finished
->     DEBUG: Python function sstate_task_postfunc finished
->=20
->=20
->     What is your testing setup?
->     Is it fully reproducible? Could you please run only package_qa task=
-?
->=20
->     Regards,
->     Andrej
->=20
->     On 8/8/19 6:32 AM, Khem Raj wrote:
->     > Hi Andrej
->     >
->     > I am seeing
->     >
->     > ERROR: nodejs-10.16.1-r0 do_package_qa: QA Issue:
->     > /usr/lib/node_modules/npm/node_modules/node-gyp/gyp/samples/sampl=
-es
->     > contained in package nodejs-npm requires /usr/bin/python, but no
->     > providers found in RDEPENDS_nodejs-npm? [file-rdeps]
->     >
->     > Can you see whats going on ?
->     >
->     > On 8/5/19 11:47 PM, Andrej Valek wrote:
->     >> Update nodejs to active 10.x LTS release 10.16.1.
->     >>
->     >> Signed-off-by: Andrej Valek <andrej.valek@siemens.com
->     <mailto:andrej.valek@siemens.com>>
->     >> ---
->     >>=C2=A0 .../recipes-devtools/nodejs/{nodejs_10.16.0.bb
->     <http://nodejs_10.16.0.bb> =3D> nodejs_10.16.1.bb
->     <http://nodejs_10.16.1.bb>}=C2=A0 | 4 ++--
->     >>=C2=A0 1 file changed, 2 insertions(+), 2 deletions(-)
->     >>=C2=A0 rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.0.bb
->     <http://nodejs_10.16.0.bb> =3D> nodejs_10.16.1.bb
->     <http://nodejs_10.16.1.bb>} (97%)
->     >>
->     >> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
->     <http://nodejs_10.16.0.bb>
->     b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->     <http://nodejs_10.16.1.bb>
->     >> similarity index 97%
->     >> rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
->     <http://nodejs_10.16.0.bb>
->     >> rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->     <http://nodejs_10.16.1.bb>
->     >> index aaa1da0aa..8c7795c76 100644
->     >> --- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
->     <http://nodejs_10.16.0.bb>
->     >> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->     <http://nodejs_10.16.1.bb>
->     >> @@ -23,8 +23,8 @@ SRC_URI_append_class-target =3D " \
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0002-Using=
--native-torque.patch \
->     >>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0"
->     >>=C2=A0
->     >> -SRC_URI[md5sum] =3D "c9a7ab43f8b50c8a4d5545de307b7540"
->     >> -SRC_URI[sha256sum] =3D
->     "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
->     >> +SRC_URI[md5sum] =3D "009e079ce7e2d695642fb61372459a77"
->     >> +SRC_URI[sha256sum] =3D
->     "6268319c8dddfdaa7886ea3f253ac5c2d133a6c682c00786296227e03f322009"
->     >>=C2=A0
->     >>=C2=A0 S =3D "${WORKDIR}/node-v${PV}"
->     >>=C2=A0
->     >>
->     --=20
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-
---------------F3C4EAF1F6719B531E483612
+--------------27EE9B543B83DE26540EDDE8
 Content-Type: application/pgp-keys;
  name="pEpkey.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -250,4 +154,4 @@ prldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
 =3Dsj8j
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------F3C4EAF1F6719B531E483612--
+--------------27EE9B543B83DE26540EDDE8--
