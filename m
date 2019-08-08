@@ -1,28 +1,28 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id D17867E31D
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 064C47F335
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 06:31:28 +0000 (UTC)
-Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id x786VR8j007377
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Thu, 8 Aug 2019 08:31:28 +0200
-Received: from [192.168.20.128] ([163.242.58.54])
-	by mail2.sbs.de (8.15.2/8.15.2) with ESMTP id x786VRp8005731;
-	Thu, 8 Aug 2019 08:31:27 +0200
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <20190806064731.17490-1-andrej.valek@siemens.com>
-	<76644068-fffd-3398-0898-e00db5a9f026@gmail.com>
-From: Andrej Valek <andrej.valek@siemens.com>
-Openpgp: preference=signencrypt
-Message-ID: <233c3c9c-9cd6-aead-3ddf-3adfb6d7d554@siemens.com>
-Date: Thu, 8 Aug 2019 08:31:27 +0200
+	Thu,  8 Aug 2019 09:03:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7892CbK013926
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 8 Aug 2019 02:02:54 -0700
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 8 Aug 2019 02:02:32 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+References: <20190807051707.8709-1-kai.kang@windriver.com>
+	<CALbNGRQ-e5SvSJVeet6MsZJ9Ux0K06jrxxH_T=YztAgCqGOUug@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <80d262d5-643d-0ccb-bd6d-1a1207d06833@windriver.com>
+Date: Thu, 8 Aug 2019 17:00:42 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <76644068-fffd-3398-0898-e00db5a9f026@gmail.com>
-Subject: Re: [meta-oe][PATCH] nodejs: 10.16.0 -> 10.16.1
+In-Reply-To: <CALbNGRQ-e5SvSJVeet6MsZJ9Ux0K06jrxxH_T=YztAgCqGOUug@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][Patch 0/2] Add recipe of xfce4-datetime-setter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,96 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 06:31:29 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Thu, 08 Aug 2019 09:03:20 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-Hi Khem!
-
-I have checked the task, what you mentioned, but there is no errors on
-my side.
-
-DEBUG: Executing python function do_package_qa
-NOTE: DO PACKAGE QA
-DEBUG: Executing python function read_subpackage_metadata
-DEBUG: Python function read_subpackage_metadata finished
-NOTE: Checking Package: nodejs-doc
-NOTE: Checking Package: nodejs
-NOTE: mips-poky-linux-objdump -p .../packages-split/nodejs/usr/bin/node
-NOTE: Checking Package: nodejs-locale
-NOTE: Checking Package: nodejs-staticdev
-NOTE: Checking Package: nodejs-src
-NOTE: Checking Package: nodejs-systemtap
-NOTE: Checking Package: nodejs-dev
-NOTE: Checking Package: nodejs-dbg
-NOTE: mips-poky-linux-objdump -p
-.../packages-split/nodejs-dbg/usr/bin/.debug/node
-NOTE: Checking Package: nodejs-npm
-NOTE: DONE with PACKAGE QA
-DEBUG: Python function do_package_qa finished
-DEBUG: Executing python function sstate_task_postfunc
-NOTE: Using umask 0o002 (not 22) for sstate packaging
-DEBUG: Executing python function sstate_hardcode_path
-NOTE: Removing hardcoded paths from sstate package: ...
-DEBUG: Python function sstate_hardcode_path finished
-DEBUG: Executing python function sstate_report_unihash
-DEBUG: Python function sstate_report_unihash finished
-DEBUG: Executing shell function sstate_create_package
-DEBUG: Shell function sstate_create_package finished
-DEBUG: Executing python function sstate_sign_package
-DEBUG: Python function sstate_sign_package finished
-DEBUG: Executing python function sstate_hardcode_path_unpack
-DEBUG: Python function sstate_hardcode_path_unpack finished
-DEBUG: Executing python function uninative_changeinterp
-DEBUG: Python function uninative_changeinterp finished
-DEBUG: Python function sstate_task_postfunc finished
-
-
-What is your testing setup?
-Is it fully reproducible? Could you please run only package_qa task?
-
-Regards,
-Andrej
-
-On 8/8/19 6:32 AM, Khem Raj wrote:
-> Hi Andrej
-> 
-> I am seeing
-> 
-> ERROR: nodejs-10.16.1-r0 do_package_qa: QA Issue:
-> /usr/lib/node_modules/npm/node_modules/node-gyp/gyp/samples/samples
-> contained in package nodejs-npm requires /usr/bin/python, but no
-> providers found in RDEPENDS_nodejs-npm? [file-rdeps]
-> 
-> Can you see whats going on ?
-> 
-> On 8/5/19 11:47 PM, Andrej Valek wrote:
->> Update nodejs to active 10.x LTS release 10.16.1.
+On 2019/8/7 下午10:02, Andreas Müller wrote:
+> On Wed, Aug 7, 2019 at 7:18 AM <kai.kang@windriver.com> wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
 >>
->> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
->> ---
->>  .../recipes-devtools/nodejs/{nodejs_10.16.0.bb => nodejs_10.16.1.bb}  | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>  rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.0.bb => nodejs_10.16.1.bb} (97%)
+>> Hi Andreas,
 >>
->> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->> similarity index 97%
->> rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
->> rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->> index aaa1da0aa..8c7795c76 100644
->> --- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
->> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.1.bb
->> @@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
->>             file://0002-Using-native-torque.patch \
->>             "
->>  
->> -SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
->> -SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
->> +SRC_URI[md5sum] = "009e079ce7e2d695642fb61372459a77"
->> +SRC_URI[sha256sum] = "6268319c8dddfdaa7886ea3f253ac5c2d133a6c682c00786296227e03f322009"
->>  
->>  S = "${WORKDIR}/node-v${PV}"
->>  
+>> I add recipe of xfce4-datetime-setter which is from your repo from
+>> github. But I found it requires dbus service org.freedesktop.timedate1
+>> which is from systemd. So make xfce4-settings requires it only when init manger
+>> is sytemd. Any comment on that please?
 >>
+>> Regards,
+>> Kai
+> Hi Kai,
+>
+> * had short glance on your patches: they look good to me. In the
+> 'old-days' when datetime-setter was part of xfce-settings, there was a
+> packageconfig for it. That was enabled if systemd was in distro
+> features - so your suggestion should behave same.
+
+It reminds me that it is better to check distro systemd for 
+xfce4-datetime-setter. v2 will be sent.
+
+
+> * thanks for taking care for meta-xfce for very long time now
+
+My pleasure.
+
+
+> * would anybody complain making you maintainer of meta-xfce?
+
+It will be my honor if I have chance to take more responsibility and 
+contribute more to oe community.
+
+Thanks,
+Kai
+
+>
+> Regards
+>
+>
+> Andreas
+>
+
+-- 
+Kai Kang
+
 
