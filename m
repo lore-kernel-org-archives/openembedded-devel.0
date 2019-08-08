@@ -1,52 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E87DD7F3A2
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 59C507EC65
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2019 16:43:32 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id y8so41649304plr.12
+	Thu,  8 Aug 2019 02:25:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,358,1559491200"; d="scan'208";a="73182965"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 08 Aug 2019 10:25:01 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7F4A74CDFCDD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Aug 2019 09:43:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=e5ISdWTtvtQHrK+bUPHKlCDYbYPNxjH5wSNND0tJDuM=;
-	b=p4uq9O6KkC++oMRhrWI8xUOcP4FhkqnJyZFQ9rwS/CfmwNqSWQaTic5hDmwXu7oMi0
-	DXaptMFifuLZzepJEV3Y5c2vkp4BL7Tyi2tjHvn+wQOuuvabdQ8ArjoHEAY/V8mfEa8x
-	jZUR0AYYJdT+b9nmWFID/Spd9/XG8INpS/7Kn71ehB474JDupk+3DgPcTkKqCDgFeoF6
-	iA50ZAATq8yYurFmMQEj0GtBBxTOIqV/1F8pGhdF6YWavfM59xJoLIo5g8X3rSCLvzAo
-	aVYP/dIHGG3ik2yYCL6XasfMhfJmo+bb9iS5vo/crTgx3t5NvT3Ysw4A9Z3RSFwLVgRD
-	blcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=e5ISdWTtvtQHrK+bUPHKlCDYbYPNxjH5wSNND0tJDuM=;
-	b=DAHaudHpQjm9eUxNkktpcX7nHtK9Ixn+GCHF20E3tmF59Y2ww6ZxuiDBxeFCGy3cUE
-	/xmeQ2C/XLKKWaUx++vLP22xev+xO9sBxsJiqbU3lAA30KG3is88LKsTaK5zWb+UJW9D
-	1USAIjGNRotk0rSSxx0NhD+FSB5ZDqKJi8HAvkkfgvyrLdUmdvGSGsX90GoB3mnvFWU2
-	ommA8g4JPqnJbbx+2gtzIx8kt+iGU4CmpZB/P22/Vl054aAJO4MnIpN16Ad+EK4Z38iW
-	wQJENI/8c68uGBkDDbq57vjtNRXK2FEC2yoAO/cbOB1E5lXgkiIXExKjTlEf19J9GRZF
-	0rqA==
-X-Gm-Message-State: APjAAAXmba3/FPHmFc2MYIOJLSKOmwvVRwrBrnxMdrcUKu0AQ8wU8OQc
-	Gv+aOoJ1mn9/L5SDYtx6Dk8cFdHnYZM=
-X-Google-Smtp-Source: APXvYqxw7Maom8kspcFysauU4CWAlmD+aFAjJ9A7crrlTe5IJqVu5rg+GMn8MnIhw2ZgXU5WEq6pmQ==
-X-Received: by 2002:a63:ff03:: with SMTP id k3mr8697603pgi.40.1565196213448;
-	Wed, 07 Aug 2019 09:43:33 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	o11sm168735060pfh.114.2019.08.07.09.43.32
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 07 Aug 2019 09:43:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Aug 2019 09:43:21 -0700
-Message-Id: <20190807164321.44571-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190807164321.44571-1-raj.khem@gmail.com>
-References: <20190807164321.44571-1-raj.khem@gmail.com>
+	Thu,  8 Aug 2019 10:25:00 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 8 Aug 2019 10:25:07 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 8 Aug 2019 19:24:13 +0800
+Message-ID: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] android-tools: Fix build with glibc 2.30
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: 7F4A74CDFCDD.A9DE7
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][patch v5] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,88 +37,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 16:43:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 08 Aug 2019 02:25:33 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This dnf plugin aims to supply a tui interface for user to manage
+packages. It has features as following:
+  1. Add new command dnf tui --init to make dnf work on host.
+  2. Text-based user interface for dnf.
+  3. Manage SPDX files.
+  4. Manage SRPM files.
+  5. Add installation samples for dnf.
+
+More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- ...t-define-gettid-if-glibc-2.30-is-use.patch | 52 +++++++++++++++++++
- .../android-tools/android-tools_5.1.1.r37.bb  |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
+ .../dnf-plugin-tui/dnf-plugin-tui_git.bb      | 38 +++++++++++++++++++
+ .../files/oe-remote.repo.sample               |  5 +++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+ create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch b/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
 new file mode 100644
-index 0000000000..8524517cb6
+index 000000000..e891868cd
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
-@@ -0,0 +1,52 @@
-+From f4f9d24860e1b5cd4f6a014f3fda7cd33ebe5be7 Mon Sep 17 00:00:00 2001
-+From: Petr Lautrbach <plautrba@redhat.com>
-+Date: Sat, 27 Jul 2019 08:20:20 -0700
-+Subject: [PATCH] libselinux: Do not define gettid() if glibc >= 2.30 is used
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "A text-based user interface plugin of dnf for user to manage packages. "
++LICENSE = "GPLv2"
 +
-+Since version 2.30 glibc implements gettid() system call wrapper, see
-+https://sourceware.org/bugzilla/show_bug.cgi?id=6399
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+Fixes:
-+cc -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -I../include -D_GNU_SOURCE  -DNO_ANDROID_BACKEND   -c -o procattr.o procattr.c
-+procattr.c:28:14: error: static declaration of ‘gettid’ follows non-static declaration
-+   28 | static pid_t gettid(void)
-+      |              ^~~~~~
-+In file included from /usr/include/unistd.h:1170,
-+                 from procattr.c:2:
-+/usr/include/bits/unistd_ext.h:34:16: note: previous declaration of ‘gettid’ was here
-+   34 | extern __pid_t gettid (void) __THROW;
-+      |                ^~~~~~
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master "
++SRCREV = "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
++PV = "1.0"
 +
-+Signed-off-by: Petr Lautrbach <plautrba@redhat.com>
-+Acked-by: Stephen Smalley <sds@tycho.nsa.gov>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/procattr.c | 14 +++++++++++++-
-+ 1 file changed, 13 insertions(+), 1 deletion(-)
++SRC_URI_append_class-target = "file://oe-remote.repo.sample"
 +
-+--- a/src/procattr.c
-++++ b/src/procattr.c
-+@@ -8,7 +8,19 @@
-+ #include "selinux_internal.h"
-+ #include "policy.h"
-+ 
-+-#ifndef __BIONIC__
-++/* Bionic and glibc >= 2.30 declare gettid() system call wrapper in unistd.h and
-++ * has a definition for it */
-++#ifdef __BIONIC__
-++  #define OVERRIDE_GETTID 0
-++#elif !defined(__GLIBC_PREREQ)
-++  #define OVERRIDE_GETTID 1
-++#elif !__GLIBC_PREREQ(2,29)
-++  #define OVERRIDE_GETTID 1
-++#else
-++  #define OVERRIDE_GETTID 0
-++#endif
-++
-++#if OVERRIDE_GETTID
-+ static pid_t gettid(void)
-+ {
-+ 	return syscall(__NR_gettid);
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index e09cd829d7..d84fcaecc9 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -41,6 +41,7 @@ SRC_URI = " \
-     file://extras/0001-ext4_utils-remove-selinux-extensions.patch;patchdir=system/extras \
-     file://extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch;patchdir=system/extras \
-     file://libselinux/0001-Remove-bionic-specific-calls.patch;patchdir=external/libselinux \
-+    file://libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch;patchdir=external/libselinux \
-     file://android-tools-adbd.service \
-     file://gitignore \
-     file://adb.mk;subdir=${BPN} \
++inherit distutils3-base
++
++S = "${WORKDIR}/git"
++
++do_install_append() {
++        install -d ${D}${datadir}/dnf
++        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
++        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
++            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins
++        done
++}
++
++do_install_append_class-target() {
++        install -d ${D}${sysconfdir}/yum.repos.d
++        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconfdir}/yum.repos.d
++}
++
++FILES_${PN} += "${datadir}/dnf"
++
++RDEPENDS_${PN} += " \
++  dnf \
++  libnewt-python \
++  "
++
++BBCLASSEXTEND = "nativesdk"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+new file mode 100644
+index 000000000..6c4502e17
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.sample
+@@ -0,0 +1,5 @@
++[base]
++name=myrepo
++baseurl=http://127.0.0.1/oe_repo/
++enabled=1
++gpgcheck=0
 -- 
-2.22.0
+2.17.1
+
+
 
 
