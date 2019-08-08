@@ -1,88 +1,56 @@
-Return-Path: <danc@opengear.com>
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
-	(mail-eopbgr800077.outbound.protection.outlook.com [40.107.80.77])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CBB07F331
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 412747D279
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 03:40:31 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=gtAqOeF9ZHuaHwZJwH9GxiNDcv8vFsM+8TGK+SiYo3i3+kLpzNzWx3qJJKGWxrTvjDec+0O6f23D/nTncyd2jtecjV7o4KMNeBhh1ct+INuBqkrXxtn11qGtSdwFarZKFoL6djtiabNuNLLPetgBnpt9p+41kT2EsF14CDLCWS7+bR2Svd2ta2tc1jxluSGxRuUw/BAHEKRkxMd3zMLW1UO5Lpic+uLjvStIWoIg9Rs7nziKClSMQPt2Wafsl+UocT/YDMCE7dm+f7CY/OBdM0P3PnIhrqH06K7Ylvc39RddY+WHSZSoDNDHyzxEuGNtvr5BftmFZ2XowK/4q6Y5VQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=JHHouS2SuKUag3FGRCZwKmomC7mhtsIyI54eHRQWtHk=;
-	b=lENEDpl9BKl9Wpqx3Z+T6HwFp5ds5HxMJEOo6NyfQurfvOWa8pnrMyeVCWA/ORmbUOlaQhtEYRmCUrP0FX4EI/utycyOes+4KsyMUx4cQ6zUfFPnCbcKjOKeSB6+JljzDXYP3p8jGBN/1kvQgj+WZPYxp2oVyJ3+0ZjbEFVDG2L3/AYR9lwyNyWZEKfu/qQIcqab2Eb8nb6YoXsukENQmhcqYYboHyPOfbMOgTuEFUeWXe92QvP7z8EVbkxAufxIvaQA32fOZVFdW9I4z71SqhZvGnw+HBLliLOR+Glziz6qgTJ+HkPWga9SCzWUuYhBDI4YmI565urC8YD5z1OuxQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=permerror (sender ip
-	is 60.241.24.90) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=opengear.com;
-	dmarc=fail (p=none sp=reject pct=100) action=none
-	header.from=opengear.com;dkim=none (message not signed);arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=JHHouS2SuKUag3FGRCZwKmomC7mhtsIyI54eHRQWtHk=;
-	b=FHIPN0X3uX02O3tjJsnAOIcVg+iD0Pz1AXiGSpMcU1uRSLIx9rQqCA7Jb/w7E3rYbMi6ModNHBKqZVTy7NX+emgCEr7tncNLanphHVwj76jO3mQVGBAdpAQE/OlcCB7p+QYXEYE5GEeqb0L2itstODJCi/19UBJO7jVrY+CFGTE=
-Received: from CY4PR15CA0007.namprd15.prod.outlook.com (10.172.74.17) by
-	BN6PR15MB1937.namprd15.prod.outlook.com (10.172.210.11) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2136.17; Thu, 8 Aug 2019 03:40:29 +0000
-Received: from CO1NAM04FT004.eop-NAM04.prod.protection.outlook.com
-	(2a01:111:f400:7e4d::208) by CY4PR15CA0007.outlook.office365.com
-	(2603:10b6:910:14::17) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2157.14 via
-	Frontend Transport; Thu, 8 Aug 2019 03:40:29 +0000
-Authentication-Results: spf=permerror (sender IP is 60.241.24.90)
-	smtp.mailfrom=opengear.com; lists.openembedded.org;
-	dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=fail action=none
-	header.from=opengear.com;
-Received-SPF: PermError (protection.outlook.com: domain of opengear.com used
-	an invalid SPF mechanism)
-Received: from postman.bne.opengear.com (60.241.24.90) by
-	CO1NAM04FT004.mail.protection.outlook.com (10.152.90.121) with
-	Microsoft SMTP
-	Server id 15.20.2157.15 via Frontend Transport; Thu, 8 Aug 2019 03:40:27
-	+0000
-Received: from galangal.danc.bne.opengear.com (danc.bne.opengear.com
-	[192.168.254.90])
-	by postman.bne.opengear.com (Postfix) with ESMTPS id 7F959DFC5B;
-	Thu,  8 Aug 2019 13:40:25 +1000 (AEST)
-Received: by galangal.danc.bne.opengear.com (Postfix, from userid 1090)
-	id 616AA42CD5C7; Thu,  8 Aug 2019 13:40:25 +1000 (AEST)
-From: Dan Callaghan <dan.callaghan@opengear.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Aug 2019 13:40:22 +1000
-Message-Id: <20190808034022.2337-1-dan.callaghan@opengear.com>
-X-Mailer: git-send-email 2.20.1
+	Thu,  8 Aug 2019 04:29:15 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id u17so43328006pgi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Aug 2019 21:29:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=UZtILiW1/BTdAHPCwefmNV8O8HxO4hB49w5V5HR8mEI=;
+	b=kaV/qNHsR84X7cB6B9iaNGtc1z1TWm7nF83tLqCBJAm9Kf5aPBpn96IY5SwrE1j/ya
+	bwkfuqH1PcQF7MYdw7wLZNN7/Pz4gO/AK/MrXA9+mfbAyzGR7f0GM2vkx30fdg18Y9Z/
+	IDilzzJUFLpL8iTbbHQrqnu404c4VDVkWiQ6x7xLW/7dk/IITqcpUDwbPMqWjFtmVbhk
+	2HcOxS4ak0mgFy6mynGTMkoldYMmyzSG1S2j01fpqCgQKLnYzpNXW7l+mSGD4kB6nh1g
+	VAzAS/3WJOrG8K8Va1C8NqM65CgsRxidRnXS3ihvYQEEOZR/XrKd+Kb9q0dajZYvGGeU
+	zC2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language;
+	bh=UZtILiW1/BTdAHPCwefmNV8O8HxO4hB49w5V5HR8mEI=;
+	b=SlUAOK1M3QzYzygPKjz19ehzAzoipc3tz09aVjprZpEBCaA2GIjVBYQBucJFcqhN4G
+	abetduPXcfod8rJekN29YLDjXCU7XqWBri5SbUmgUFMrq6XqEi5vlrc/n153mhHHWMmE
+	OOuiZpxTTGqP3HthzYBnEv8B9imSnZqdIdTS21rMCTdkytEeVe49WMx71RmVxVf8sKm6
+	qrDakjfDhdAE3rm8j1hfJLU054Ad21xtQx4qQiZ3Bw8+wb8q6A4MB46fPx4o05/0+JKe
+	ri53u1FNy7Lyx+kEgt/k6BZ9ndlZJCg0xPbc0fBcLyUO+DA3hoY+Ly3NlPBGHYFS6x7r
+	M8Mg==
+X-Gm-Message-State: APjAAAXVp0xlNqm7IFWL5JRGurV22wLRvpDoxbos7ME7j1b2oFVWw5Th
+	sx7KAQ4qtABOZR/Y9yYoEv2A3kJ1Bxo=
+X-Google-Smtp-Source: APXvYqwz4/SjZ98vgp9TBnN3kiK86U3jdozzegOnPXZEYGKfjpl21ZFCQdrZ+0uv7VxMdC6dkQoEfw==
+X-Received: by 2002:aa7:93a5:: with SMTP id x5mr12959337pff.87.1565238555784; 
+	Wed, 07 Aug 2019 21:29:15 -0700 (PDT)
+Received: from ?IPv6:2601:646:8500:6bc6::baaf? ([2601:646:8500:6bc6::baaf])
+	by smtp.gmail.com with ESMTPSA id
+	v12sm81195150pgr.86.2019.08.07.21.29.14
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 Aug 2019 21:29:15 -0700 (PDT)
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <134762b5-0997-950d-e47b-3fda6e6c885e@gmail.com>
+Date: Wed, 7 Aug 2019 21:29:24 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:60.241.24.90; IPV:CAL; CTRY:AU; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(4636009)(376002)(396003)(39840400004)(346002)(136003)(2980300002)(448002)(189003)(199004)(36906005)(126002)(4744005)(4326008)(8936002)(8676002)(14444005)(36756003)(50466002)(6916009)(44832011)(50226002)(48376002)(2616005)(6306002)(486006)(5660300002)(476003)(76130400001)(52956003)(103686004)(107886003)(47776003)(2870700001)(2351001)(26005)(186003)(246002)(70586007)(7636002)(2906002)(305945005)(2361001)(356004)(42186006)(426003)(1076003)(6266002)(26826003)(70206006)(51416003)(478600001)(336012)(6666004)(316002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR15MB1937;
-	H:postman.bne.opengear.com; FPR:; SPF:PermError; LANG:en;
-	PTR:brisbane.opengear.com; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3939d47e-45b6-448b-dea8-08d71bb227e6
-X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328);
-	SRVR:BN6PR15MB1937; 
-X-MS-TrafficTypeDiagnostic: BN6PR15MB1937:
-X-MS-Exchange-PUrlCount: 2
-X-Microsoft-Antispam-PRVS: <BN6PR15MB19379C6045E85D84A40A00E3B8D70@BN6PR15MB1937.namprd15.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
-X-Forefront-PRVS: 012349AD1C
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: RfXsKzNk5ou0AYJUESDPkYX+9RCEVq4cSwl8PfE/ot/mUWx9caTNsxSx/tQwP0G0BsqvuYyh2TtS71mz4dhpDDYiso9iiYqvg9vEkpmJlL6oOcN99x0ECLEX4j2jFLZGRwkISjdZZSfLBNQRvD/I5gma6w5csJ1P/ArM/NmleGg3snqMh+ogE4VOhcCiiJmaVVb2NOBlk0dKLyzhLS1dvJTWPQ4gmFqJic1Ulp8YWbzVfdYWaZI3fhn/aWukgWVjw2LlrW8KQOjJC1ExbcyTrpHylZ1GQSlhAVf4xevmqoBtwtDOCXO+TGgLIsm9hFz8MPjIEkgtVYgq9MO82Qn+l77i/xxL92OGIkfNn1Z4Q9Y0rm8Qsop2PRj9jonp7u/QUGW4019zxW6ToMMZTx8qgW99CFevrujNs8fPvMPtG3k=
-X-OriginatorOrg: opengear.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2019 03:40:27.9601 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3939d47e-45b6-448b-dea8-08d71bb227e6
-X-MS-Exchange-CrossTenant-Id: a6251c26-d21f-4164-a225-1f4eaebf5f9a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a6251c26-d21f-4164-a225-1f4eaebf5f9a; Ip=[60.241.24.90];
-	Helo=[postman.bne.opengear.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR15MB1937
-Subject: [meta-oe][PATCH] unixodbc: mysql5 is not required but readline is
+In-Reply-To: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Subject: Re: [meta-oe][patch v5] dnf-plugin-tui: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,35 +63,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 03:40:31 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 08 Aug 2019 04:29:15 -0000
+X-Groupsio-MsgNum: 78978
+Content-Type: multipart/mixed; boundary="------------81F5DD04ECBA0E24D1A8B7FC"
+Content-Language: en-US
 
-The unixODBC package no longer includes a driver for MySQL (that lives
-elsewhere) so there is no reason to require MySQL libs at build time.
+--------------81F5DD04ECBA0E24D1A8B7FC
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-It does, however, want to build against readline, which was being pulled
-in transitively by mysql5 before.
+Thanks for resending. I have some comments below.
 
-Signed-off-by: Dan Callaghan <dan.callaghan@opengear.com>
----
- meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 8/8/19 4:24 AM, Zheng Ruoqin wrote:
+> This dnf plugin aims to supply a tui interface for user to manage
+> packages. It has features as following:
+>   1. Add new command dnf tui --init to make dnf work on host.
+>   2. Text-based user interface for dnf.
+>   3. Manage SPDX files.
+>   4. Manage SRPM files.
+>   5. Add installation samples for dnf.
+>=20
+> More details please refer to https://github.com/ubinux/dnf-plugin-tui.
+>=20
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  .../dnf-plugin-tui/dnf-plugin-tui_git.bb      | 38 +++++++++++++++++++=
 
-diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
-index 563badf57..61378fec2 100644
---- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
-+++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.unixodbc.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7b37bf80a3df5a65b355433ae36d206"
- 
--DEPENDS = "libtool mysql5"
-+DEPENDS = "libtool readline"
- 
- SRC_URI = "http://ftp.unixodbc.org/unixODBC-${PV}.tar.gz \
-            file://do-not-use-libltdl-source-directory.patch \
--- 
-2.20.1
+>  .../files/oe-remote.repo.sample               |  5 +++
+>  2 files changed, 43 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-=
+tui_git.bb
+>  create mode 100644 meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-re=
+mote.repo.sample
+>=20
+> diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git=
+=2Ebb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+> new file mode 100644
+> index 000000000..e891868cd
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+> @@ -0,0 +1,38 @@
+> +SUMMARY =3D "A text-based user interface plugin of dnf for user to man=
+age packages. "
+> +LICENSE =3D "GPLv2"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a4263"
+> +
+> +SRC_URI =3D "git://github.com/ubinux/dnf-plugin-tui.git;branch=3Dmaste=
+r "
 
+master is default so lets drop setting branch here
 
+> +SRCREV =3D "31d6866d5eda02be9a6bfb1fca9e9095b12eecd1"
+> +PV =3D "1.0"
+
+Drop PV
+
+> +
+> +SRC_URI_append_class-target =3D "file://oe-remote.repo.sample"
+                                  ^^
+missing space
+
+> +
+> +inherit distutils3-base
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +do_install_append() {
+> +        install -d ${D}${datadir}/dnf
+> +        install -m 0755 ${S}/samples/* ${D}${datadir}/dnf
+> +        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/dnf-plugins/mkimg
+> +        install -m 0755 ${S}/dnf-plugins/mkimg/* ${D}${PYTHON_SITEPACK=
+AGES_DIR}/dnf-plugins/mkimg
+> +        for file in $(ls ${S}/dnf-plugins/ | grep -v mkimg); do
+> +            install -m 0755 ${S}/dnf-plugins/$file ${D}${PYTHON_SITEPA=
+CKAGES_DIR}/dnf-plugins
+> +        done
+> +}
+> +
+> +do_install_append_class-target() {
+> +        install -d ${D}${sysconfdir}/yum.repos.d
+> +        install -m 0644 ${WORKDIR}/oe-remote.repo.sample ${D}${sysconf=
+dir}/yum.repos.d
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}/dnf"
+> +
+> +RDEPENDS_${PN} +=3D " \
+> +  dnf \
+> +  libnewt-python \
+> +  "
+> +
+> +BBCLASSEXTEND =3D "nativesdk"
+> diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.re=
+po.sample b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.=
+sample
+> new file mode 100644
+> index 000000000..6c4502e17
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/dnf-plugin-tui/files/oe-remote.repo.samp=
+le
+> @@ -0,0 +1,5 @@
+> +[base]
+> +name=3Dmyrepo
+> +baseurl=3Dhttp://127.0.0.1/oe_repo/
+> +enabled=3D1
+> +gpgcheck=3D0
+>=20
+
+--------------81F5DD04ECBA0E24D1A8B7FC
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnm
+DLpLSdfvZw2ZDXeaQbGU2thctxXTyYf6N1fY6P5Tww6mWKInuGU3yAv8Mg5p+Xd8
+itwOoVR41DOBkftVmiO2G7FtXsnqonB6F43a2yvc+h9OwPRVxAFss5mSmwCglSXP
+WndN1Ka4M/hzt7g+FmeyEssD/1V/G8lLeAS9gQCNjS7jch+uHMFJuWgHzMXdw99e
+1ywlIkvXN77NPkW+FLVxKxNAHyWZZ3wO4BQ9/GVR2y0s/rrF1lQSIcfnUmzZrh/B
+h0b1wVOSLhl0Vx4MI0/MbdL3xx17JAWy+s67evuKER4Y8ycTq3gbIGJtVrIJjWPC
+zWF8BACAA2u52uDmJ2pS8SIhEW0jMK/zYQ5Od9l9fM6BmS6QjnIlzzcuMvRdZn2I
+rnuE/YoC8yyzBK3mN+MVc2jWN9rfSg6ml7r14Zjem9Ee0O5Ca7Jg3ZvN6g3vSlrR
+JqKgsnq3vdatDF+5rd0NJ7ZKUy6x2i1Pavgtv3qaAgPGa1qQdLQdS2hlbSBSYWog
+PHJhai5raGVtQGdtYWlsLmNvbT6IYAQTEQIAIAUCSpdokQIbAwYLCQgHAwIEFQII
+AwQWAgMBAh4BAheAAAoJELsFM1WRnTMUhOMAoJJleT2hdT7uw9Fyn26+w+/K4i0g
+AJ9wRt36PqfjNe904evWolFf5cMmp7kEDQRKl2iREBAAjjbVQ55RAouAe0l0nPsK
+kWdtMuUHwBdLBkpF3rGM/f0uDlPaQzYGLjKT7xDoyRh8x2tFwWvOfiqrZFArxX8e
+4fsACmJdL0kahTbxC/8SmSWVHXi10JUX2fmZ5ufzlXAnl0ivXkWnrUfLX9DdNwL6
+DR4DeFK9qBFqtHmK5TQXMu87G+MJwgNJIwCKQX4iI9YJILMuqInVwaxg5/ALdKfE
+3QPmtadnKb/cuUm4gICdaJeyQfI6qdYLcSuyBWCbAEMM1wmhRAhw5RgzMRRIquZl
+xPt7lZkXXjals7M6juh87VGRoIJwYoQi97Q1ZHzPBo3AlMPe3haNihkd6D3lwvdB
+4pmjYG4I6bHCgtEhEss3hHvsBaqV9jV1dMUSs95ZxQtT9qtkOxydHgOlwRX3CG+r
+584J/s4vWm+iPQtLvDY1u4UFwOLjCOFe709BcLJdPR2GQiOPoyZF7lVY8nu/dtTr
+AEuiZFk4HD7afUlcr/IKwPWID1V9kRLoDlzdbNuoUy/XfVErK8wcoiGowerEMed4
+ajNoKxCxBweIkjxqKMt8CKgp30n9UxljglEcgf+/UumwSHxqZcCPVbWXtdhy/hwM
+k27shOdUvaiynep8OsVGqAzSseL4qZIJ5XzCcyV4KJCmwmdQzt5+ZylcVmeq6R4o
+b+d8JIDU0ELqdwxwIDiTj0cAAwUP/inN3/r8IFDms4g5xafPrCw31o2jIYahkIfN
+0WVPWI5K/hFCo2PczPStzDcTsZx7mN2qwpGOe3Lz9/0krZeksrz1ZIHNi5LTasuz
+XyFJbO05Y+eiHgV1rV7VVEipOrpV1496w112Y/0SZ/FhOfEmEA1TeDejy2sZiTOU
+W4gyzewbHMpE07d27F2qM2NfMMhKQCcvzr+N0VJmAOeATEivxPUHn+DpX/NniBWO
+cWv++wHlxv0Xr63gsRKSt62eFKGjgF50hHD5lM31ziqycc42sbgcqAZ+rYFlb9k0
+3JcKyq1XdVUSm+xcC2DMSstTI6iqFMGo6FnEO+gyE5VdceajbuZ1GOmJXJUCyYId
+GuvCyIoKjTE9lcIYSEEDZQej5xdiGk9eUz0MPmZEUwSR/nLmmwjHDJi0prVvs9xq
+e5bvS3ddPAqepvZ5UrisgtWD+TDI8ktkt5VLh3XsG9FuXUVAaahOvFMGiZtsioDX
+TorL4AfMeuA9f+yLwrCVQO3xmH/WA0Tgf/5gYB3t9KoHPjLBNruVOuQbAjubi0pv
+RAOUcMdBfmPofksK4uWS1zGtPWS7Uu1csuq7Hnb7vszlFYdbzeqjY81LSyxA0kcp
+gJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7RXlQNlB5grwH9o6uNtPbV7q/u
+RqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1VACcCkdaO3rb8/gR
+prldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
+=3Dsj8j
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------81F5DD04ECBA0E24D1A8B7FC--
