@@ -1,47 +1,48 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 61FD97F2AD
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 384717F288
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 14:55:17 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id g17so95232133wrr.5
+	Thu,  8 Aug 2019 14:59:11 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id l2so2763890wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Aug 2019 07:55:18 -0700 (PDT)
+	Thu, 08 Aug 2019 07:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=fWk+TUkOZGq0EsrRsgQyrZVMW+edB7YOwNCbgcxbmSs=;
-	b=WJ637TW7S1A7OMjZdoguttx1raoCpgPlGRFZGRq3NEXuDsQk9uYpbfIzVnl4r0/f1X
-	LXF6xci9GI9h63z/+iRBcfaT+3RNYHii82hmVLoociHmQBaoscAWKHq1wuL8iWhYWTju
-	/Z2eNIjFSsHtCjQ3iAXHefVdLvTsoTWRPNtiR91dYML1cBEb+YlsVucr+SxFY0v5AbHn
-	7a0dEHIwUBwbLnRsWuFefdZqNyGHDr/XJHOAyLe8xkjY0pTURKkg38kf4egTSRj0Yc90
-	y6BbcGlWz3o3qTxhEN0wFsUjRuKzLGgBUOB6D+vyEFz47hSbNquhVScicYo4kaBeeJZ9
-	Kvnw==
+	bh=F+IKScGBNvWXU3rRNrOd+T3K4aJ46cvpGYUdLswiyH4=;
+	b=vNi+Hp3ZCg9htxerIG+i9g39ezEsAzAIKJxeYIYfBbJqQQR2Mabnkn8Btv2mu8HH6K
+	6yuUb+QTX8ILAOENlxIX8sxdlZrAKQKRRfB1jzExzsNP6KrdMp3W6TNQ/TbEgIZV4Jhj
+	JQ1vj5GR8EN0i/8N10MWy1PD1S2AxWXxF+DWj4wVqUrxt7lwaEicsBsmBoXq7ij7Q7wa
+	h/HU3r8xHMwJo2urkTEprqCwTEcBKsKLXUtXXiSlFamP6Vgziz3e2yTjKHxmM1OWIhJs
+	/THi4NMorbka6tLFTCYNUrxK3InszMmqbNU7G+wO6EGnvjTTfNHP8DHXVs2VFQcNiYZq
+	KZyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fWk+TUkOZGq0EsrRsgQyrZVMW+edB7YOwNCbgcxbmSs=;
-	b=UIoaM143AGGblU9ZJA4CrUYeMd96oDtjIkhZhJolMnV3axSxWtVMqr4Fbs+A9yz5qV
-	AAs559+508/kg6/Y3UN8O5WdVPNJuSKFalrANHSBxAutSZJoowvBRItrrtFQ5asEaQ0c
-	zaE/3nn9DeVGuTNkn9X+GZZVmhQ7B2aekY1wjkDyaUtV6KZSJ1sINTByC6TGMTTrV8P2
-	acx5wkGnMHB0/TE6aaQxmMqnwd6iJQsZzJJDtfcA0lcLPlqBtesncu9gtdapsJiH0vvf
-	FT8JlXKocPhwg0kG4kYguay+klLc66XH63QHuzOSnAnNBQdxvmQd4LfNgi0j8s1ILqhb
-	JOpg==
-X-Gm-Message-State: APjAAAVCrszZFMSsRWv/akEf1dO62G/3ppyXauGRrGRiIVkL05qRz+AW
-	GlQeXO3SoebOb6LnSlD7jybQGSsy
-X-Google-Smtp-Source: APXvYqwwaNpPN3LsMkBTq+0ZA5IWA+V1NB505Fkzy/R56/obxHHqCbL8ioH6sVYvpq2ergmqH4mCuA==
-X-Received: by 2002:adf:db0e:: with SMTP id s14mr5225702wri.333.1565276117623; 
-	Thu, 08 Aug 2019 07:55:17 -0700 (PDT)
-Received: from localhost.localdomain (193.164.125.18.ip.redstone-isp.net.
-	[193.164.125.18]) by smtp.gmail.com with ESMTPSA id
-	b5sm77490103wru.69.2019.08.08.07.55.16
+	bh=F+IKScGBNvWXU3rRNrOd+T3K4aJ46cvpGYUdLswiyH4=;
+	b=KQXF6MU2SOK1SbrmEpzRzcn+I7qu6TjwhBcyrwGI5j2E/aTbh3R1cPs75FNrF5Dc55
+	lGMBKM+NJWqOPPMW4/3L2cAraaT+tSYwTQsomDZf8akFnsgBtb6rAXYOmfYJIg272cxf
+	OPPDtgMC9WxPdAdjwom3dld6XGVCrEcXeu2FuLyhbEuGTgi/NVnqXAIO8izHAsytm2w2
+	kwlcqzlyQb0UOEBzmiRYwk5/sMmjNUClrT/jZeCaxx1Xb+yC+dVYNAhQn8LQRQSqhHDX
+	8llBXdnxo4lGoRcaVrkkz5ncs2EsbWUhdrmqcjKmil8jym8VcKGyVtZfJ2FcuHTqSOXa
+	wAhg==
+X-Gm-Message-State: APjAAAUbQVu6EwseUFW+ozDGjhTDkToh55+Z/TCcLUaa/91IcEmkpG8Q
+	AEZb85EUgudAOuhWfgotbiGoIJD4LNc=
+X-Google-Smtp-Source: APXvYqwjIpxJ8O/mSCtjp3awinxIZtfsemi26O1BGEPOJSykLz8cPFUxThmK+/pJaI+ecE1yeprQ3A==
+X-Received: by 2002:a05:600c:54f:: with SMTP id
+	k15mr4609089wmc.165.1565276351638; 
+	Thu, 08 Aug 2019 07:59:11 -0700 (PDT)
+Received: from alexander-box.luxoft.com ([62.96.135.139])
+	by smtp.gmail.com with ESMTPSA id
+	f3sm79537623wrt.56.2019.08.08.07.59.10
 	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 08 Aug 2019 07:55:17 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	Thu, 08 Aug 2019 07:59:11 -0700 (PDT)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Aug 2019 15:55:14 +0100
-Message-Id: <20190808145514.1338-1-alex.kiernan@gmail.com>
+Date: Thu,  8 Aug 2019 16:59:06 +0200
+Message-Id: <20190808145906.53657-1-alex.kanavin@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] iwd: Upgrade 0.18 -> 0.19
+Subject: [PATCH] python-oauthlib: remove the 2.x version of the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +55,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 14:55:17 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 14:59:11 -0000
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+As it requires python-nose, which will be removed from oe-core.
+
+3.x version remains available.
+
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
 ---
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 2 +-
+ meta-python/recipes-devtools/python/python-oauthlib_2.0.6.bb  | 4 ----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-oauthlib_2.0.6.bb
 
- meta-oe/recipes-connectivity/iwd/{iwd_0.18.bb => iwd_0.19.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_0.18.bb => iwd_0.19.bb} (95%)
-
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
-index f56c88b821e1..2b4530e3c5d8 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_0.18.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
-@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
- DEPENDS = "ell readline dbus"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
--SRCREV = "c923448bacf8a855b40017fe53ba2edcd062eec1"
-+SRCREV = "899d802744b7e12409e259f546ba5594ab90262c"
- S = "${WORKDIR}/git"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 34be9d762..e037abf53 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -33,7 +33,7 @@ RDEPENDS_packagegroup-meta-python = "\
+     python-robotframework-seriallibrary python-pyalsaaudio python-pytest-helpers-namespace \
+     python-alembic python-flask-pymongo python-slip-dbus python-pydbus python-automat python-rfc3987 \
+     python-tzlocal python-backports-ssl python-subprocess32 python-asn1crypto python-pybind11 \
+-    python-ptyprocess python-babel python-passlib python-oauthlib python-sdnotify \
++    python-ptyprocess python-babel python-passlib python-sdnotify \
+     python-lazy-object-proxy python-cryptography-vectors python-crcmod python-pyusb python-vobject \
+     python-webcolors python-pyparsing python-beautifulsoup4 python-cffi python-tornado-redis \
+     python-itsdangerous python-pyasn1-modules python-netaddr python-vcversioner \
+diff --git a/meta-python/recipes-devtools/python/python-oauthlib_2.0.6.bb b/meta-python/recipes-devtools/python/python-oauthlib_2.0.6.bb
+deleted file mode 100644
+index 4329d21a1..000000000
+--- a/meta-python/recipes-devtools/python/python-oauthlib_2.0.6.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-inherit setuptools
+-require python-oauthlib.inc
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-re ${PYTHON_PN}-lang"
 -- 
 2.17.1
 
