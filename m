@@ -1,37 +1,88 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E7DC17EC65
+Return-Path: <danc@opengear.com>
+Received: from NAM03-DM3-obe.outbound.protection.outlook.com
+	(mail-eopbgr800077.outbound.protection.outlook.com [40.107.80.77])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CBB07F331
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 02:28:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,358,1559491200"; d="scan'208";a="73183254"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 08 Aug 2019 10:28:39 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 83ACA4CDFCDD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 10:28:42 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0439.000; Thu, 8 Aug 2019 10:28:49 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][patch v5] dnf-plugin-tui: new recipe
-Thread-Index: AQHVTZB+QBaphBHs4Ui/S9u7H9ACzabwheZg
-Date: Thu, 8 Aug 2019 02:28:46 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B5B61082@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1565263453-52779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
+	Thu,  8 Aug 2019 03:40:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=gtAqOeF9ZHuaHwZJwH9GxiNDcv8vFsM+8TGK+SiYo3i3+kLpzNzWx3qJJKGWxrTvjDec+0O6f23D/nTncyd2jtecjV7o4KMNeBhh1ct+INuBqkrXxtn11qGtSdwFarZKFoL6djtiabNuNLLPetgBnpt9p+41kT2EsF14CDLCWS7+bR2Svd2ta2tc1jxluSGxRuUw/BAHEKRkxMd3zMLW1UO5Lpic+uLjvStIWoIg9Rs7nziKClSMQPt2Wafsl+UocT/YDMCE7dm+f7CY/OBdM0P3PnIhrqH06K7Ylvc39RddY+WHSZSoDNDHyzxEuGNtvr5BftmFZ2XowK/4q6Y5VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=JHHouS2SuKUag3FGRCZwKmomC7mhtsIyI54eHRQWtHk=;
+	b=lENEDpl9BKl9Wpqx3Z+T6HwFp5ds5HxMJEOo6NyfQurfvOWa8pnrMyeVCWA/ORmbUOlaQhtEYRmCUrP0FX4EI/utycyOes+4KsyMUx4cQ6zUfFPnCbcKjOKeSB6+JljzDXYP3p8jGBN/1kvQgj+WZPYxp2oVyJ3+0ZjbEFVDG2L3/AYR9lwyNyWZEKfu/qQIcqab2Eb8nb6YoXsukENQmhcqYYboHyPOfbMOgTuEFUeWXe92QvP7z8EVbkxAufxIvaQA32fOZVFdW9I4z71SqhZvGnw+HBLliLOR+Glziz6qgTJ+HkPWga9SCzWUuYhBDI4YmI565urC8YD5z1OuxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=permerror (sender ip
+	is 60.241.24.90) smtp.rcpttodomain=lists.openembedded.org
+	smtp.mailfrom=opengear.com;
+	dmarc=fail (p=none sp=reject pct=100) action=none
+	header.from=opengear.com;dkim=none (message not signed);arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
+	s=selector2;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=JHHouS2SuKUag3FGRCZwKmomC7mhtsIyI54eHRQWtHk=;
+	b=FHIPN0X3uX02O3tjJsnAOIcVg+iD0Pz1AXiGSpMcU1uRSLIx9rQqCA7Jb/w7E3rYbMi6ModNHBKqZVTy7NX+emgCEr7tncNLanphHVwj76jO3mQVGBAdpAQE/OlcCB7p+QYXEYE5GEeqb0L2itstODJCi/19UBJO7jVrY+CFGTE=
+Received: from CY4PR15CA0007.namprd15.prod.outlook.com (10.172.74.17) by
+	BN6PR15MB1937.namprd15.prod.outlook.com (10.172.210.11) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2136.17; Thu, 8 Aug 2019 03:40:29 +0000
+Received: from CO1NAM04FT004.eop-NAM04.prod.protection.outlook.com
+	(2a01:111:f400:7e4d::208) by CY4PR15CA0007.outlook.office365.com
+	(2603:10b6:910:14::17) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2157.14 via
+	Frontend Transport; Thu, 8 Aug 2019 03:40:29 +0000
+Authentication-Results: spf=permerror (sender IP is 60.241.24.90)
+	smtp.mailfrom=opengear.com; lists.openembedded.org;
+	dkim=none (message not
+	signed) header.d=none;lists.openembedded.org; dmarc=fail action=none
+	header.from=opengear.com;
+Received-SPF: PermError (protection.outlook.com: domain of opengear.com used
+	an invalid SPF mechanism)
+Received: from postman.bne.opengear.com (60.241.24.90) by
+	CO1NAM04FT004.mail.protection.outlook.com (10.152.90.121) with
+	Microsoft SMTP
+	Server id 15.20.2157.15 via Frontend Transport; Thu, 8 Aug 2019 03:40:27
+	+0000
+Received: from galangal.danc.bne.opengear.com (danc.bne.opengear.com
+	[192.168.254.90])
+	by postman.bne.opengear.com (Postfix) with ESMTPS id 7F959DFC5B;
+	Thu,  8 Aug 2019 13:40:25 +1000 (AEST)
+Received: by galangal.danc.bne.opengear.com (Postfix, from userid 1090)
+	id 616AA42CD5C7; Thu,  8 Aug 2019 13:40:25 +1000 (AEST)
+From: Dan Callaghan <dan.callaghan@opengear.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  8 Aug 2019 13:40:22 +1000
+Message-Id: <20190808034022.2337-1-dan.callaghan@opengear.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 83ACA4CDFCDD.AD1C1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][patch v5] dnf-plugin-tui: new recipe
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:60.241.24.90; IPV:CAL; CTRY:AU; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10009020)(4636009)(376002)(396003)(39840400004)(346002)(136003)(2980300002)(448002)(189003)(199004)(36906005)(126002)(4744005)(4326008)(8936002)(8676002)(14444005)(36756003)(50466002)(6916009)(44832011)(50226002)(48376002)(2616005)(6306002)(486006)(5660300002)(476003)(76130400001)(52956003)(103686004)(107886003)(47776003)(2870700001)(2351001)(26005)(186003)(246002)(70586007)(7636002)(2906002)(305945005)(2361001)(356004)(42186006)(426003)(1076003)(6266002)(26826003)(70206006)(51416003)(478600001)(336012)(6666004)(316002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR15MB1937;
+	H:postman.bne.opengear.com; FPR:; SPF:PermError; LANG:en;
+	PTR:brisbane.opengear.com; MX:1; A:1; 
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3939d47e-45b6-448b-dea8-08d71bb227e6
+X-Microsoft-Antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328);
+	SRVR:BN6PR15MB1937; 
+X-MS-TrafficTypeDiagnostic: BN6PR15MB1937:
+X-MS-Exchange-PUrlCount: 2
+X-Microsoft-Antispam-PRVS: <BN6PR15MB19379C6045E85D84A40A00E3B8D70@BN6PR15MB1937.namprd15.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
+X-Forefront-PRVS: 012349AD1C
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: RfXsKzNk5ou0AYJUESDPkYX+9RCEVq4cSwl8PfE/ot/mUWx9caTNsxSx/tQwP0G0BsqvuYyh2TtS71mz4dhpDDYiso9iiYqvg9vEkpmJlL6oOcN99x0ECLEX4j2jFLZGRwkISjdZZSfLBNQRvD/I5gma6w5csJ1P/ArM/NmleGg3snqMh+ogE4VOhcCiiJmaVVb2NOBlk0dKLyzhLS1dvJTWPQ4gmFqJic1Ulp8YWbzVfdYWaZI3fhn/aWukgWVjw2LlrW8KQOjJC1ExbcyTrpHylZ1GQSlhAVf4xevmqoBtwtDOCXO+TGgLIsm9hFz8MPjIEkgtVYgq9MO82Qn+l77i/xxL92OGIkfNn1Z4Q9Y0rm8Qsop2PRj9jonp7u/QUGW4019zxW6ToMMZTx8qgW99CFevrujNs8fPvMPtG3k=
+X-OriginatorOrg: opengear.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2019 03:40:27.9601 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3939d47e-45b6-448b-dea8-08d71bb227e6
+X-MS-Exchange-CrossTenant-Id: a6251c26-d21f-4164-a225-1f4eaebf5f9a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a6251c26-d21f-4164-a225-1f4eaebf5f9a; Ip=[60.241.24.90];
+	Helo=[postman.bne.opengear.com]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR15MB1937
+Subject: [meta-oe][PATCH] unixodbc: mysql5 is not required but readline is
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,89 +95,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 02:28:39 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 08 Aug 2019 03:40:31 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-SGkNCg0KTG9uZyB0aW1lIG5vIHJlcGx5LiBTbyBJIHJlc2VuZCBpdCBhZnRl
-ciByZWJhc2luZyBvbiB0b3Agb2YgbWFzdGVyIGJyYW5jaCwgSSBob3BlIHBh
-dGNod29yayBjYW4gY2FwdHVyZSBpdC4NCg0KQmVzdCByZWdhcmRzLg0KWmhl
-bmcgUnVvcWluDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5nIEZ1aml0
-c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpDQpBRERS
-LjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZlbnVlLA0KICAgICAg
-IE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3JxLmZuc3RA
-Y24uZnVqaXN0dS5jb20NCg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQo+IEZyb206IFpoZW5nLCBSdW9xaW4v1qMgyPTH1Q0KPiBTZW50OiBU
-aHVyc2RheSwgQXVndXN0IDA4LCAyMDE5IDc6MjQgUE0NCj4gVG86IG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IENjOiBa
-aGVuZywgUnVvcWluL9ajIMj0x9UgPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1
-LmNvbT4NCj4gU3ViamVjdDogW29lXVttZXRhLW9lXVtwYXRjaCB2NV0gZG5m
-LXBsdWdpbi10dWk6IG5ldyByZWNpcGUNCj4gDQo+IFRoaXMgZG5mIHBsdWdp
-biBhaW1zIHRvIHN1cHBseSBhIHR1aSBpbnRlcmZhY2UgZm9yIHVzZXIgdG8g
-bWFuYWdlIHBhY2thZ2VzLiBJdCBoYXMNCj4gZmVhdHVyZXMgYXMgZm9sbG93
-aW5nOg0KPiAgIDEuIEFkZCBuZXcgY29tbWFuZCBkbmYgdHVpIC0taW5pdCB0
-byBtYWtlIGRuZiB3b3JrIG9uIGhvc3QuDQo+ICAgMi4gVGV4dC1iYXNlZCB1
-c2VyIGludGVyZmFjZSBmb3IgZG5mLg0KPiAgIDMuIE1hbmFnZSBTUERYIGZp
-bGVzLg0KPiAgIDQuIE1hbmFnZSBTUlBNIGZpbGVzLg0KPiAgIDUuIEFkZCBp
-bnN0YWxsYXRpb24gc2FtcGxlcyBmb3IgZG5mLg0KPiANCj4gTW9yZSBkZXRh
-aWxzIHBsZWFzZSByZWZlciB0byBodHRwczovL2dpdGh1Yi5jb20vdWJpbnV4
-L2RuZi1wbHVnaW4tdHVpLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogWmhlbmcg
-UnVvcWluIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQo+IC0tLQ0K
-PiAgLi4uL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYiAg
-ICAgIHwgMzggKysrKysrKysrKysrKysrKysrKw0KPiAgLi4uL2ZpbGVzL29l
-LXJlbW90ZS5yZXBvLnNhbXBsZSAgICAgICAgICAgICAgIHwgIDUgKysrDQo+
-ICAyIGZpbGVzIGNoYW5nZWQsIDQzIGluc2VydGlvbnMoKykNCj4gIGNyZWF0
-ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBs
-dWdpbi10dWkvZG5mLXBsdWdpbi0NCj4gdHVpX2dpdC5iYg0KPiAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1
-Z2luLXR1aS9maWxlcy9vZS0NCj4gcmVtb3RlLnJlcG8uc2FtcGxlDQo+IA0K
-PiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1w
-bHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYg0KPiBiL21ldGEtb2Uv
-cmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1
-aV9naXQuYmINCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAw
-MDAwMDAwLi5lODkxODY4Y2QNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9t
-ZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBs
-dWdpbi10dWlfZ2l0LmJiDQo+IEBAIC0wLDAgKzEsMzggQEANCj4gK1NVTU1B
-UlkgPSAiQSB0ZXh0LWJhc2VkIHVzZXIgaW50ZXJmYWNlIHBsdWdpbiBvZiBk
-bmYgZm9yIHVzZXIgdG8gbWFuYWdlDQo+IHBhY2thZ2VzLiAiDQo+ICtMSUNF
-TlNFID0gIkdQTHYyIg0KPiArDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4g
-ImZpbGU6Ly9DT1BZSU5HO21kNT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRh
-ZjRhNDI2MyINCj4gKw0KPiArU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29t
-L3ViaW51eC9kbmYtcGx1Z2luLXR1aS5naXQ7YnJhbmNoPW1hc3RlciAiDQo+
-ICtTUkNSRVYgPSAiMzFkNjg2NmQ1ZWRhMDJiZTlhNmJmYjFmY2E5ZTkwOTVi
-MTJlZWNkMSINCj4gK1BWID0gIjEuMCINCj4gKw0KPiArU1JDX1VSSV9hcHBl
-bmRfY2xhc3MtdGFyZ2V0ID0gImZpbGU6Ly9vZS1yZW1vdGUucmVwby5zYW1w
-bGUiDQo+ICsNCj4gK2luaGVyaXQgZGlzdHV0aWxzMy1iYXNlDQo+ICsNCj4g
-K1MgPSAiJHtXT1JLRElSfS9naXQiDQo+ICsNCj4gK2RvX2luc3RhbGxfYXBw
-ZW5kKCkgew0KPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0ke2RhdGFkaXJ9
-L2RuZg0KPiArICAgICAgICBpbnN0YWxsIC1tIDA3NTUgJHtTfS9zYW1wbGVz
-LyogJHtEfSR7ZGF0YWRpcn0vZG5mDQo+ICsgICAgICAgIGluc3RhbGwgLWQg
-JHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9L2RuZi1wbHVnaW5zL21r
-aW1nDQo+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke1N9L2RuZi1wbHVn
-aW5zL21raW1nLyoNCj4gJHtEfSR7UFlUSE9OX1NJVEVQQUNLQUdFU19ESVJ9
-L2RuZi1wbHVnaW5zL21raW1nDQo+ICsgICAgICAgIGZvciBmaWxlIGluICQo
-bHMgJHtTfS9kbmYtcGx1Z2lucy8gfCBncmVwIC12IG1raW1nKTsgZG8NCj4g
-KyAgICAgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke1N9L2RuZi1wbHVnaW5z
-LyRmaWxlDQo+ICR7RH0ke1BZVEhPTl9TSVRFUEFDS0FHRVNfRElSfS9kbmYt
-cGx1Z2lucw0KPiArICAgICAgICBkb25lDQo+ICt9DQo+ICsNCj4gK2RvX2lu
-c3RhbGxfYXBwZW5kX2NsYXNzLXRhcmdldCgpIHsNCj4gKyAgICAgICAgaW5z
-dGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS95dW0ucmVwb3MuZA0KPiArICAg
-ICAgICBpbnN0YWxsIC1tIDA2NDQgJHtXT1JLRElSfS9vZS1yZW1vdGUucmVw
-by5zYW1wbGUNCj4gKyR7RH0ke3N5c2NvbmZkaXJ9L3l1bS5yZXBvcy5kIH0N
-Cj4gKw0KPiArRklMRVNfJHtQTn0gKz0gIiR7ZGF0YWRpcn0vZG5mIg0KPiAr
-DQo+ICtSREVQRU5EU18ke1BOfSArPSAiIFwNCj4gKyAgZG5mIFwNCj4gKyAg
-bGlibmV3dC1weXRob24gXA0KPiArICAiDQo+ICsNCj4gK0JCQ0xBU1NFWFRF
-TkQgPSAibmF0aXZlc2RrIg0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNp
-cGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2ZpbGVzL29lLQ0KPiByZW1v
-dGUucmVwby5zYW1wbGUgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvZG5m
-LXBsdWdpbi10dWkvZmlsZXMvb2UtDQo+IHJlbW90ZS5yZXBvLnNhbXBsZQ0K
-PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAuLjZj
-NDUwMmUxNw0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtb2UvcmVj
-aXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9maWxlcy9vZS1yZW1vdGUu
-cmVwby5zYW1wbA0KPiArKysgZQ0KPiBAQCAtMCwwICsxLDUgQEANCj4gK1ti
-YXNlXQ0KPiArbmFtZT1teXJlcG8NCj4gK2Jhc2V1cmw9aHR0cDovLzEyNy4w
-LjAuMS9vZV9yZXBvLw0KPiArZW5hYmxlZD0xDQo+ICtncGdjaGVjaz0wDQo+
-IC0tDQo+IDIuMTcuMQ0KDQoKCg==
+The unixODBC package no longer includes a driver for MySQL (that lives
+elsewhere) so there is no reason to require MySQL libs at build time.
+
+It does, however, want to build against readline, which was being pulled
+in transitively by mysql5 before.
+
+Signed-off-by: Dan Callaghan <dan.callaghan@opengear.com>
+---
+ meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
+index 563badf57..61378fec2 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.7.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.unixodbc.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7b37bf80a3df5a65b355433ae36d206"
+ 
+-DEPENDS = "libtool mysql5"
++DEPENDS = "libtool readline"
+ 
+ SRC_URI = "http://ftp.unixodbc.org/unixODBC-${PV}.tar.gz \
+            file://do-not-use-libltdl-source-directory.patch \
+-- 
+2.20.1
+
 
