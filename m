@@ -1,47 +1,47 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 0373B7F317
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 11C027F32E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 14:06:32 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id r1so98328955wrl.7
+	Fri,  9 Aug 2019 18:14:57 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id l9so96620311qtu.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2019 07:06:34 -0700 (PDT)
+	Fri, 09 Aug 2019 11:14:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=xhnMt8NcMp9y/mYcnx9vN+2UyktYFQt9EPskcKh05Sc=;
-	b=APnfIrIInhLFwp5PtIRWvGWd1834WAC0Gmff8CNEDWSdE2orR3ujBQO36NjxrdjZrn
-	cS9kI7Gvu4hOCZ83dUlGJ53GnlHY01MTdi7/+aVnzKGnDP47cDAa0PMoKNCYTwvimnFL
-	7ufQgOeXqyc588MqSWrgfxpO8rZJVXwL0xjMOY1DBamvVziBcAVhovzXeJ1fe7z20h4A
-	W95Vp6v/Z0k+TOSibVM4OeOV1TnReqOEH6qYsScGo3GJPOow5zwUWQk7wpan0727RodY
-	3OMwbwlwhG27PpMIOIfko874lKEkjXKMEN35wNw5l42Fl9mejmf3AF7TtK5mYE5yF3aG
-	GApw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Umdpp7vQF+Dd9n3RQkod2pySEnLAalFnv/5NGo6aCJo=;
+	b=ts81XWHNZBYYDZDC5ESIchaF02Ew+nOoTruF4xbQV4PHG3xEPdMy7HyktmBt+K37cS
+	f52a+0z98xI4BSHPcZcZHc2xBPvW+ZciFIh0mHj9wEx0OU8rAg/GscUAHz9IVfRzGa/s
+	4YfM/URmswtRE/K2T5MJjD4KLMiR2Ntk/2SSZtv1cwjRkHYSC2LDIsx3TftmlgfrVdqG
+	YFx7E85hZhmuBmQxXgyk5MtzLmYH44Ju0++TUSsK9C94sqtqB5y+nsO8/GBLbvMeX2yB
+	6fayYygawdcoT1xzlmI9+AuoIH3q/joe4bmJMfokfbz0ipX41k6Q3EsszgASS6hxyhlv
+	qsKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xhnMt8NcMp9y/mYcnx9vN+2UyktYFQt9EPskcKh05Sc=;
-	b=bwUoX7+E8y8McPXSuOsKAGOypUbCqrWtmihaHs7gfXDVX5jJL6DrX1NFeFyYYcCgPB
-	z9+TgTQcqMPPjUkqmaVJutbewCbfhLp3sJJrGEA2aK+QIsl6ePGHm1VTOKFGE7XE1Lmh
-	qn4oABR2P19dYfffThgaQey2aQkYhiY7s6HOTA1r2Y5OloFXN2/LaAHRe9ycKy43y20W
-	cj5kKQxvIE2tFC6tPHQzbRc+AtVVgoPrhCAEtWo+EG8cTVy57JJsgp0bBBhg8EiZtVKo
-	u6dD/3W1c4cCO3BlkBOT5ibp4y6lgT5hHKnPHvoPEGT+A5cpuGMTIS0vR36wOKDElJSu
-	nUMA==
-X-Gm-Message-State: APjAAAXNmXrGberorH4SdeGoFTFIEmqXj5AAdVt9VQvMxLUiNJ8Tisku
-	AoOwELF8f1EcQMUmRqOcgvKrvJWQg/YSdg==
-X-Google-Smtp-Source: APXvYqxskchlIEboL3ThtQ4Wt0F+wBV+6k2OGLY4c6CptiFHgHi3E0R46hlt3vvk8ShAyidx3vUivA==
-X-Received: by 2002:adf:edc9:: with SMTP id v9mr15977683wro.125.1565359593492; 
-	Fri, 09 Aug 2019 07:06:33 -0700 (PDT)
-Received: from alexander-box.luxoft.com ([62.96.135.139])
-	by smtp.gmail.com with ESMTPSA id
-	w13sm19226141wre.44.2019.08.09.07.06.32
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Fri, 09 Aug 2019 07:06:32 -0700 (PDT)
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Aug 2019 16:06:26 +0200
-Message-Id: <20190809140626.64555-1-alex.kanavin@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [PATCH] python-panads: remove the python 2.x version of the recipe
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Umdpp7vQF+Dd9n3RQkod2pySEnLAalFnv/5NGo6aCJo=;
+	b=Nsji/xWaU4RUQt5G9KaMbLtx4t7xdSF+BxK0+Mh6L2EPhM09bNI1BBSzRVOd4n6neq
+	AkWuTwjCeOtkY8UkXXW5CIDNz/uE+um1R+2cy6Xy6tpSE38MoD83N46UN9elqrkwVwpj
+	ba80r1NDIjhFwlJ3S8zqWYLfgp9NdPrw6wuzMrwJpMei1Rv12uiL9KfcwuJSUaN0wkRR
+	oB5YjjCkWKUlCYy9xB6Xdu+w1/Tn4U3z5JtVDN8TvUPR4GYRAmVdNrswHPUUutqQWrfS
+	cCTQM6iPxors2XOjaWoeDfRtCuIQg7ragBOGlxCtJBv8mL0BAFToe61H87kLGTgLhiG7
+	wYtA==
+X-Gm-Message-State: APjAAAWUvwToiiqaUPQcVFILz+4e/CC0WmFc4BemuoZgpJ7rE2QFA3T4
+	Smnv7Yj59uS0ApyA4NOZtmsk+sY+omqjal/vYvw=
+X-Google-Smtp-Source: APXvYqxSNZrfEFAacHp0jGCMtW8wUOCRYg9ZKAF61zCZjp+VWnLElKu34PIEPX6bQ7SJkPURFIRnx14Ux8PJfEQMexY=
+X-Received: by 2002:ac8:1183:: with SMTP id d3mr19186237qtj.53.1565374498648; 
+	Fri, 09 Aug 2019 11:14:58 -0700 (PDT)
+MIME-Version: 1.0
+References: <1565181007-2883-1-git-send-email-rbilovol@cisco.com>
+In-Reply-To: <1565181007-2883-1-git-send-email-rbilovol@cisco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 9 Aug 2019 11:14:32 -0700
+Message-ID: <CAMKF1sqn9JZr2w56t795a318sZUxeVt4obg8Q4sK4CZBdv2Y4Q@mail.gmail.com>
+To: Ruslan Bilovol <rbilovol@cisco.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	XE-Linux <xe-linux-external@cisco.com>
+Subject: Re: [PATCH] libnss-nisplus: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,44 +54,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 14:06:33 -0000
+X-List-Received-Date: Fri, 09 Aug 2019 18:14:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-As it depends on pathon 2.x Numpy which has been removed from oe-core.
+Ruslan
 
-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
----
- .../recipes-core/packagegroups/packagegroup-meta-python.bb | 2 +-
- .../recipes-devtools/python/python-pandas_0.23.4.bb        | 7 -------
- 2 files changed, 1 insertion(+), 8 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pandas_0.23.4.bb
+This has gone in but in parallel glibc 2.30 has gone in
+as well in oe-core and now it fails see
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index e037abf53..42f416346 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -40,7 +40,7 @@ RDEPENDS_packagegroup-meta-python = "\
-     python-sh python-greenlet python-paho-mqtt python-traceback2 python-gdata python-dbusmock \
-     python-whoosh python-lockfile python-isort python-wtforms python-feedparser python-flask-restful \
-     python-pysnmp python-flask-babel python-pytest-tempdir python-flask-nav python-pyzmq python-pyyaml \
--    python-protobuf python-pluggy python-jsonschema python-msgpack python-pandas \
-+    python-protobuf python-pluggy python-jsonschema python-msgpack \
-     python-periphery python-pint python-pycryptodome python-yappi python-pycrypto python-pretend \
-     python-pyserial python-pyiface python-docutils python-grpcio-tools python-django-south \
-     python-backports-functools-lru-cache python-py python-click python-flask-migrate \
-diff --git a/meta-python/recipes-devtools/python/python-pandas_0.23.4.bb b/meta-python/recipes-devtools/python/python-pandas_0.23.4.bb
-deleted file mode 100644
-index b3bfab969..000000000
---- a/meta-python/recipes-devtools/python/python-pandas_0.23.4.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--inherit setuptools
--require python-pandas.inc
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-future \
--    ${PYTHON_PN}-json \
--"
--- 
-2.17.1
+https://errors.yoctoproject.org/Errors/Details/260172/
 
+you might need something like
+
+https://github.com/thkukuk/libnss_nis/commit/e9f0f4286d5a923eca1a9c84ff125268d144822e
+
+can you check this
+
+On Wed, Aug 7, 2019 at 5:30 AM Ruslan Bilovol via Openembedded-devel
+<openembedded-devel@lists.openembedded.org> wrote:
+>
+> Same as with libnss-nis - this will substitute
+> the glibc nisplus module which has been removed
+>
+> SRCREV points to 1.3 release plus patch on top which
+> allows to build with recent glibc versions
+>
+> Signed-off-by: Ruslan Bilovol <rbilovol@cisco.com>
+> ---
+>
+> Resent to meta-oe as was discussed here:
+> https://patchwork.openembedded.org/patch/159586/
+>
+>  .../libnss-nisplus/libnss-nisplus.bb               | 31 ++++++++++++++++++++++
+>  1 file changed, 31 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+>
+> diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+> new file mode 100644
+> index 0000000..2dbeee7
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+> @@ -0,0 +1,31 @@
+> +# Copyright (C) 2019 Ruslan Bilovol <rbilovol@cisco.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +SUMMARY = "NSS module for glibc, to provide NIS+ support for glibc"
+> +
+> +DESCRIPTION = "This package contains the NSS NIS+ plugin for glibc.\
+> +This code was formerly part of glibc, but is now standalone to\
+> +be able to link against TI-RPC for IPv6 support."
+> +
+> +HOMEPAGE = "https://github.com/thkukuk/libnss_nisplus"
+> +LICENSE = "LGPL-2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+> +SECTION = "libs"
+> +DEPENDS += "libtirpc libnsl2"
+> +
+> +PV = "1.3+git${SRCPV}"
+> +
+> +SRCREV = "c6934373c7bac91499ff7bbe7d2439599325ca63"
+> +
+> +SRC_URI = "git://github.com/thkukuk/libnss_nisplus \
+> +          "
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit autotools pkgconfig
+> +
+> +BBCLASSEXTEND += "native nativesdk"
+> +#
+> +# We will skip parsing this packagegeoup for non-glibc systems
+> +#
+> +COMPATIBLE_HOST_libc-musl = 'null'
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
