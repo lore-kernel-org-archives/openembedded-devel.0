@@ -1,30 +1,25 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A316F7DB52
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B24687E3B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 02:06:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7926pql015872
+	Fri,  9 Aug 2019 05:32:03 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x795W3kK018101
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 8 Aug 2019 19:06:51 -0700 (PDT)
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 8 Aug 2019 19:06:50 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190808093210.149215-1-kai.kang@windriver.com>
-	<20190808093210.149215-2-kai.kang@windriver.com>
-	<CAMKF1soxeBna0ocvLeqGSj4pemgaSv0JoxR5TS2TDvpXvOcVZA@mail.gmail.com>
-	<3b1c9841-d845-210e-c89f-462846900907@windriver.com>
-	<CAMKF1spEVAwpwCtJo-=nP1LnebzUHPVys8qkcZ_aJ=ZAr6dvnw@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <810fca20-661f-879a-62ae-59d7672f81c2@windriver.com>
-Date: Fri, 9 Aug 2019 10:04:57 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Thu, 8 Aug 2019 22:32:03 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 8 Aug 2019 22:32:02 -0700
+From: <kai.kang@windriver.com>
+To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
+Date: Fri, 9 Aug 2019 01:31:22 -0400
+Message-ID: <20190809053122.192238-3-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20190809053122.192238-1-kai.kang@windriver.com>
+References: <20190809053122.192238-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spEVAwpwCtJo-=nP1LnebzUHPVys8qkcZ_aJ=ZAr6dvnw@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 1/2] xfce4-datetime-setter: add recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v3 2/2] xfce4-settings: rrecommends xfce4-datetime-setter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,88 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 02:06:50 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 09 Aug 2019 05:32:03 -0000
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Content-Type: text/plain
 
-On 2019/8/9 上午10:04, Khem Raj wrote:
-> On Thu, Aug 8, 2019 at 6:43 PM Kang Kai <Kai.Kang@windriver.com> wrote:
->> On 2019/8/9 上午5:52, Khem Raj wrote:
->>> On Thu, Aug 8, 2019 at 2:33 AM <kai.kang@windriver.com> wrote:
->>>> From: Kai Kang <kai.kang@windriver.com>
->>>>
->>>> Because xfce4-settings turn back to its official upstream, it missing
->>>> function to set date and time. Add it from Andreas's repo on github.
->>>> It depends on dbus service org.freedesktop.timedate1 which is provided
->>>> by systemd, so add systemd to RDEPENDS.
->>>>
->>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>>> ---
->>>>    .../xfce4-datetime-setter_3.32.2.bb            | 18 ++++++++++++++++++
->>>>    1 file changed, 18 insertions(+)
->>>>    create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
->>>>
->>>> diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
->>>> new file mode 100644
->>>> index 000000000..7a28b6101
->>>> --- /dev/null
->>>> +++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
->>>> @@ -0,0 +1,18 @@
->>>> +DESCRIPTION = "A fork of (early) gnome-control-center datetime panel for XFCE. \
->>>> +It is based upon GTK3 and embedds into recent xfce4-settings."
->>>> +HOMEPAGE = "https://github.com/schnitzeltony/xfce4-datetime-setter"
->>>> +LICENSE = "GPLv2"
->>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
->>>> +
->>>> +DEPENDS = "glib-2.0-native libxfce4ui"
->>>> +
->>>> +SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https"
->>>> +SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
->>>> +
->>>> +S = "${WORKDIR}/git"
->>>> +
->>>> +inherit gettext meson
->>>> +
->>>> +FILES_${PN} += "${datadir}/icons/hicolor"
->>>> +
->>>> +RDEPENDS_${PN} = "systemd tzdata"
->>> On systemd-less systems it wont work
->>>
->>> ERROR: Nothing RPROVIDES 'systemd' (but
->>> /mnt/a/yoe/sources/meta-openembedded/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
->>> RDEPENDS on or otherwise requires it)
->>> systemd was skipped: missing required distro feature 'systemd' (not in
->>> DISTRO_FEATURES)
->> It uses functions from dbus service org.freedesktop.timedate1 to set
->> time and date. Without this dbus service, xfce4-datetime-setter doesn't
->> work.
->> And this dbus service is provides by systemd. The alternative is to
->> require distro feature 'systemd'. But I think RRDEPENDS should be more
->> proper.
-> In such cases, it means the package is systemd specific and since we
-> can only have one init system for a distro this package
-> should be guarded with that distro feature as well. rdepends does not
-> know distro nuances.
+From: Kai Kang <kai.kang@windriver.com>
 
-OK. v3 will sent with respecting distro feature systemd.
+xfce4-datetime-setter provides function to set date and time. But it
+depends on dbus service org.freedesktop.timedate1 which is provided by
+systemd. Make xfce4-settings rrecommends xfce4-datetime-setter only
+systemd is set in DISTRO_FEATURES.
 
-Kai
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-
->
->> Regards,
->> Kai
->>
->>
->>>> --
->>>> 2.20.0
->>>>
->> --
->> Kai Kang
->>
-
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
+index e79b0ab0b..2d16a02ce 100644
+--- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
++++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
+@@ -30,3 +30,4 @@ FILES_${PN} += " \
+ RRECOMMENDS_${PN} += "adwaita-icon-theme"
+ RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
+ RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','pulseaudio','libcanberra-pulse','',d)}"
++RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','xfce4-datetime-setter','',d)}"
 -- 
-Kai Kang
+2.20.0
 
 
