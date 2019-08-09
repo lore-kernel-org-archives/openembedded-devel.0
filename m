@@ -1,53 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DD9FA65CF3
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 214D57F2AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2019 23:12:55 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id e8so4691518wme.1
+	Fri,  9 Aug 2019 00:58:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,362,1559491200"; d="scan'208";a="73255619"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Aug 2019 08:58:33 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4166B4CDFCE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Aug 2019 16:12:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=8M+FusffJ5T8/JJPKVE1tZUtxfavMpj4D55vZoiBcSo=;
-	b=H73Utivc6W/B3FyBx7wBalzdfFO8InjBhKJeNvcJLM1HnTQOl/66CHRSzjkjIek3kX
-	o+79mPCU+ljh9JEXJR436ugo36sXTLPBQfy/35SJtsWt6lOQ1KOEIeOlm8t+H7liOtu6
-	ht78h26ny0af9gWqXB1e+V8o8wH2v8bZRZloyQaZ6qm0r1mb+bb9NJNnIeJmTdb5g/K0
-	feLHbyHtG23LO1YrrNRszLPER0eesrgisdafntO4YBnUobgxm0OmjpHQx3tQ95qxMuE5
-	PjfSLBdwWwNQMeb4xRAxcEaZvvrwh+BLH3l1pLOqbmEGmsyChUAPjFRbcxOUUP234tCm
-	DSKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=8M+FusffJ5T8/JJPKVE1tZUtxfavMpj4D55vZoiBcSo=;
-	b=spObaMAlS6hhNn00xx7+0mN9bO07z0EZP46DJhsJ1ftCFWdM1FJKVN3gda49K6vhkG
-	s/uU+4LrLuzhhm0X1V3rQLJG1KW95SW7GA+XyJqdw8a6gpw9mBIaJsAIVCotQeZn5Zz4
-	F16UuMCUljqNt5ajUgrdK67rS41zG1LeXm0GM45d/I7Qf9QPPUfe9czQyVLIpD8LpqBq
-	Rt166Ja77wb0WF+39qYw2/DsWErnOV3xSwFmCeL1dRwci/JJpXh46UpJIBj2WOo5ohJ3
-	qMZpCQom0t/5qRJjG3r8dRCa6jpFZZZnm1Y/do/Dh5Pc8Pjq9Uft6y7P7fyIaN5DH6Vy
-	N3fw==
-X-Gm-Message-State: APjAAAUXO8R3N7c92zYKqm5KxZ6E0WMwwMdpkHAQnCf+ydQ+kgSnn1K8
-	7XyGQQjsB4fN4L/MZKXl5jr/jCGx
-X-Google-Smtp-Source: APXvYqxnhGn69MznbIX3thPVqNt9KTopxGQJDzy4FtBfGiy3ZFYgKZ1o+WJAEL322EBb9WOgQzoonQ==
-X-Received: by 2002:a1c:1f41:: with SMTP id f62mr7106245wmf.176.1565305976294; 
-	Thu, 08 Aug 2019 16:12:56 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F025B43B1D39927B00A68F0.dip0.t-ipconnect.de.
-	[2003:f0:7f02:5b43:b1d3:9927:b00a:68f0])
-	by smtp.gmail.com with ESMTPSA id
-	s15sm74357695wrw.21.2019.08.08.16.12.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Thu, 08 Aug 2019 16:12:55 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Aug 2019 01:12:45 +0200
-Message-Id: <20190808231245.2941-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Fri,  9 Aug 2019 08:58:37 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 9 Aug 2019 08:58:42 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Aug 2019 08:57:54 +0800
+Message-ID: <20190809005754.20397-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH] meta-xfce: Make Kai Kang layer maintainer
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 4166B4CDFCE8.A7C92
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] hostapd: upgrade 2.8 -> 2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,25 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 23:12:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Aug 2019 00:58:51 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- meta-xfce/README | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-connectivity/hostapd/{hostapd_2.8.bb => hostapd_2.9.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/hostapd/{hostapd_2.8.bb => hostapd_2.9.bb} (91%)
 
-diff --git a/meta-xfce/README b/meta-xfce/README
-index 84b019896..70ad47a2d 100644
---- a/meta-xfce/README
-+++ b/meta-xfce/README
-@@ -19,3 +19,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.8.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
+similarity index 91%
+rename from meta-oe/recipes-connectivity/hostapd/hostapd_2.8.bb
+rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
+index 15884d0..e26a6ff 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.8.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.9.bb
+@@ -13,8 +13,8 @@ SRC_URI = " \
+     file://hostapd.service \
+ "
  
-+Layer maintainer: Kai Kang <kai.kang@windriver.com>
+-SRC_URI[md5sum] = "ed2c254e5f400838cb9d8e7b6e43b86c"
+-SRC_URI[sha256sum] = "929f522be6eeec38c53147e7bc084df028f65f148a3f7e4fa6c4c3f955cee4b0"
++SRC_URI[md5sum] = "f188fc53a495fe7af3b6d77d3c31dee8"
++SRC_URI[sha256sum] = "881d7d6a90b2428479288d64233151448f8990ab4958e0ecaca7eeb3c9db2bd7"
+ 
+ S = "${WORKDIR}/hostapd-${PV}"
+ B = "${WORKDIR}/hostapd-${PV}/hostapd"
 -- 
-2.21.0
+2.7.4
+
+
 
 
