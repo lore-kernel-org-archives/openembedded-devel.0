@@ -1,30 +1,27 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B87DF7F274
+Return-Path: <andrej.valek@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id EA61D7F270
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 06:06:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,364,1559491200"; d="scan'208";a="73287424"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Aug 2019 14:06:48 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 266074CDFCF5
+	Fri,  9 Aug 2019 06:17:48 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id x796HmRe009601
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 14:06:50 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 9 Aug 2019 14:06:49 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Aug 2019 14:06:07 +0800
-Message-ID: <20190809060607.25725-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 266074CDFCF5.A75F6
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] zabbix: upgrade 3.0.9 -> 4.2.5
+	Fri, 9 Aug 2019 08:17:49 +0200
+Received: from dev.vm6.ccp.siemens.com ([163.242.58.54])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id x796Hmaa022872;
+	Fri, 9 Aug 2019 08:17:48 +0200
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 1BE4898021E;
+	Fri,  9 Aug 2019 08:17:48 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Aug 2019 08:17:42 +0200
+Message-Id: <20190809061742.3749-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20190806064731.17490-1-andrej.valek@siemens.com>
+References: <20190806064731.17490-1-andrej.valek@siemens.com>
+Subject: [meta-oe][PATCH v3] nodejs: 10.16.0 -> 10.16.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,48 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 06:06:51 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 09 Aug 2019 06:17:49 -0000
 
--The latest version needs to rely on libpcre.
+- update nodejs to active 10.x LTS release 10.16.2.
+- add python running dependency due to samples.py requirements
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- .../zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb}                     | 6 +++---
+ .../nodejs/{nodejs_10.16.0.bb => nodejs_10.16.2.bb}                 | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb} (93%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.0.bb => nodejs_10.16.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
-rename to meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-index bab5a6a..80db999 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-@@ -19,7 +19,7 @@ HOMEPAGE = "http://www.zabbix.com/"
- SECTION = "Applications/Internet"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=300e938ad303147fede2294ed78fe02e"
--DEPENDS  = "openldap virtual/libiconv"
-+DEPENDS  = "openldap virtual/libiconv libpcre"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
+index aaa1da0aa..e259c45be 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
+@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
+            file://0002-Using-native-torque.patch \
+            "
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
+-SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
++SRC_URI[md5sum] = "fa70b942c5e3379ce96219fe90f50c8f"
++SRC_URI[sha256sum] = "6cbc17795e9259dce7a8f5fd5a2e46f9e6920fb48b7d9539c5b2faa5bb5db4d8"
  
-@@ -28,8 +28,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
-     file://zabbix-agent.service \
- "
+ S = "${WORKDIR}/node-v${PV}"
  
--SRC_URI[md5sum] = "489d21b464277c0d412155c7e5611a8f"
--SRC_URI[sha256sum] = "4445f26c025009681c29c9b350aa6c4ee7b124ddcaf1609ae36c55997bcb8cf2"
-+SRC_URI[md5sum] = "4dd3fe96a5da8598ba0caf181387a3f7"
-+SRC_URI[sha256sum] = "4dba94cc8c5f1d97b596e636ff9346c3bdea59ac04a97f1236a6d5e69d72ab8c"
+@@ -100,7 +100,7 @@ do_install_append_class-target() {
  
- inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
+ PACKAGES =+ "${PN}-npm"
+ FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm ${bindir}/npx"
+-RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils \
++RDEPENDS_${PN}-npm = "bash python python-shell python-datetime python-subprocess python-textutils \
+     python-compiler python-misc python-multiprocessing"
  
+ PACKAGES =+ "${PN}-systemtap"
 -- 
-2.7.4
-
-
+2.11.0
 
 
