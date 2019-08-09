@@ -1,43 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 413377F340
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id CB0417D476
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 15:21:10 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id z16so2094325qka.1
+	Fri,  9 Aug 2019 19:36:51 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id j19so60244242otq.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2019 08:21:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=zdJcUHlv4vwu9oQANo+BxLpISo1U7/StMaUvu23A7TI=;
-	b=NyrTL1GFhnTS5i9fRwHsBA9bh+RlRuTxXbk30SzCYiDNUWNq70j1GQ8FwOYAATsJpr
-	zFNa0Cx6fROGwv/ZX0S+qHOSDCFFfclg5IpHr4Pxm2QIEc5fR1YfX+vmO9tvK5Aj8UaJ
-	MGcwYZ3DRmKLz7mchpejoOKOoZqSrTUbEWeksMAngzQG7SuClcO3gGUDQTEo111oJW+X
-	cGHMnP+db/f88seFDkronp3DaojVBVynAvW6r8hiDkMrhwhB0/6WtDnBvQHsut5i2N+M
-	eF2F88Hrnbyr2Sm7nDD1eR/w8fHjEKaa7MMqEuEjTOd9SPKBZsZlBJnmni0+aanigMEh
-	Q3rA==
+	Fri, 09 Aug 2019 12:36:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=cN2DunCb0G53Is2PldAr8Zkuw0dVTohJLVg+sZTy+G0=;
+	b=oPZwSZNqf77bpgIUpz1iKgse+rQG+G0YiPEL215tvnlTKi6y/pS4GDOaUGzd0cMjCj
+	h7LFjwf5jlUaC69B8W7FBHqO/cIMDMOIcOUZaVXfxPwomqqflbkoekUaJ36CsFUbSkNE
+	AS7/Y1BS909xGZ5e3mXKtgklT2Ad4Chd38NKSohX/EzhccIO4zuQfGOHrzR7BE7+1QBt
+	kNdQdY+TREo7Eizj95O/jDyiMcCpCXxzP/TNJyH+a8cTLQzUNKHjhPa7DsS+vJ08Q16J
+	+hHZDvFW3Enbum1WOFqBKCQwf05CxIy4DPROt+74hK29AAFe2tje3aajG2lVyG1a11Fs
+	ofJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
 	:message-id:subject:to:cc;
-	bh=zdJcUHlv4vwu9oQANo+BxLpISo1U7/StMaUvu23A7TI=;
-	b=uXNGdB7PNBNnGDx3piLZGR7kHI5fm1Oig9qW+JmeM5mU8fzpY8woSSZAe5JJCyu5QV
-	d4yZgorhfR5uiUCIL6vbcINkhLMlqoJ6Yf9lykaOdu2D3Qg4VpXD88iaGfjbt0iGLv/Z
-	yBCtZ50gpIYklkjpCbQP5e6ktHvVRgCfzLZUmFkggIA26I4msqfTEa3RqNBaTpLKiTd4
-	5/6aCoXpgw7Y7r33MdQAmYWLOXU67BT9l8GNGaMjAt/8fkn3mK7uBBXqLFKdoufDzpcN
-	WJKgAfSWwMjYfAAs5ruAg5yIZ+NqMiOVKHJe9+U8WYjA6TGBflicGSM9cw1J7N8xlvEJ
-	z8hw==
-X-Gm-Message-State: APjAAAXGKrRDTVriR0ALgRZ2NCMGu32f8Y0vgPPsjouc6BaQHE9mpM4j
-	LOoaEsXIQS0rBYyDdcUtaF9gdkR2QfC0SQ6Tjfc=
-X-Google-Smtp-Source: APXvYqw/hfjlL8VnhsD0QY4zDCLaIKfx8hs+mNEoYYe+5YzhjembhmGARMuMa6M372LAGUmKF1FagOxye7reszf9La8=
-X-Received: by 2002:a37:ef1a:: with SMTP id j26mr9125640qkk.474.1565364070928; 
-	Fri, 09 Aug 2019 08:21:10 -0700 (PDT)
+	bh=cN2DunCb0G53Is2PldAr8Zkuw0dVTohJLVg+sZTy+G0=;
+	b=uKGRBmEJeoIMZKt52gmYkpkQGcdN2Sn3/EZ5IqIwjs+OREmLm5Vz9gWrAR/a5XVdfC
+	UHgZ4A+ZxQJh223m9I9y956GTm4gcPKqLhtEPP9SP5igfBECyUikw38hpdTryO+m1eP1
+	SP52MlRuC6WT1TExX5Uo2rapI4L4SPAwlyLBcXEKIv20On+BIYG3/amAGklTL9dM/5CD
+	hdMrUSFAZQvFBh4gVH/9A+7a0GiTLCEBYYfdUAUo1pyRUTpJ5XDDnenx3zJqjoSzmEl8
+	8lfLIzuswDPl3ySFB7PNUBAWdm2dD2GeNunmmvIzCATXPCAriascjN94mTfLIVeeekU+
+	vj0g==
+X-Gm-Message-State: APjAAAUqL52OHyn+5d7GvDcFpHHviRwvx4X0EkNgSMhWPQSt0xQvixEk
+	SLoyIT+GsIDkjfQBYtHPatGQr7NzvraWOg==
+X-Google-Smtp-Source: APXvYqzZDfENKnueGghBJHSOCGR7jXT0vhovcwdmtBJDZMaDhYqhOrBF/b+WMIIe73eg9hdmnCL2Vw==
+X-Received: by 2002:a05:6830:119:: with SMTP id
+	i25mr20217021otp.288.1565379411715; 
+	Fri, 09 Aug 2019 12:36:51 -0700 (PDT)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com.
+	[209.85.210.45]) by smtp.gmail.com with ESMTPSA id
+	e205sm34169399oia.23.2019.08.09.12.36.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Fri, 09 Aug 2019 12:36:50 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ot1-f45.google.com with SMTP id j19so60243583otq.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Aug 2019 12:36:50 -0700 (PDT)
+X-Received: by 2002:aca:f084:: with SMTP id o126mr6710607oih.37.1565379409534; 
+	Fri, 09 Aug 2019 12:36:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190809092013.32650-1-rasmus.villemoes@prevas.dk>
 In-Reply-To: <20190809092013.32650-1-rasmus.villemoes@prevas.dk>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 9 Aug 2019 08:20:44 -0700
-Message-ID: <CAMKF1sqASJcH0avUKEMG03suVr0-x1WHnyQCtLjJPcDMU_iHLg@mail.gmail.com>
+Date: Fri, 9 Aug 2019 16:36:38 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKoV=wNxrhyapU6rud+YzSK3AOdVc-VXi0qnQrXzKjPNDA@mail.gmail.com>
+Message-ID: <CAP9ODKoV=wNxrhyapU6rud+YzSK3AOdVc-VXi0qnQrXzKjPNDA@mail.gmail.com>
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 X-Mailman-Approved-At: Mon, 19 Aug 2019 08:55:33 +0000
 Cc: Maksim Sisov <msisov@igalia.com>,
@@ -60,10 +75,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 15:21:10 -0000
+X-List-Received-Date: Fri, 09 Aug 2019 19:36:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Aug 9, 2019 at 2:20 AM Rasmus Villemoes
+On Fri, Aug 9, 2019 at 6:20 AM Rasmus Villemoes
 <rasmus.villemoes@prevas.dk> wrote:
 >
 > When setting the PACKAGECONFIG component-build, the build breaks
@@ -78,28 +93,11 @@ On Fri, Aug 9, 2019 at 2:20 AM Rasmus Villemoes
 > So we must make is_official_build the negative of component-build.
 >
 > Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> ---
->  recipes-browser/chromium/chromium-gn.inc | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/recipes-browser/chromium/chromium-gn.inc b/recipes-browser/chromium/chromium-gn.inc
-> index d5258c0..d9735ab 100644
-> --- a/recipes-browser/chromium/chromium-gn.inc
-> +++ b/recipes-browser/chromium/chromium-gn.inc
-> @@ -138,7 +138,8 @@ GN_ARGS += 'host_pkg_config="pkg-config-native"'
->  # (debug, release, official) but for historical reasons there are two
->  # separate flags.
->  # See also: https://groups.google.com/a/chromium.org/d/msg/chromium-dev/hkcb6AOX5gE/PPT1ukWoBwAJ
-> -GN_ARGS += "is_debug=false is_official_build=true"
-> +GN_ARGS += "is_debug=false"
-> +GN_ARGS += "is_official_build=${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'false', 'true', d)}"
->
 
-this looks good.
+Good, please open a PR on GitHub so we can merge it :-)
 
->  # Starting with M61, Chromium defaults to building with its own copy of libc++
->  # instead of the system's libstdc++. Explicitly disable this behavior.
-> --
-> 2.20.1
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
