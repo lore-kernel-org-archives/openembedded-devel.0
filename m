@@ -1,26 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BA0217F3F2
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B87DF7F274
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 05:32:22 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x795VkUs014220
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 8 Aug 2019 22:32:02 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 8 Aug 2019 22:31:58 -0700
-From: <kai.kang@windriver.com>
-To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
-Date: Fri, 9 Aug 2019 01:31:21 -0400
-Message-ID: <20190809053122.192238-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190809053122.192238-1-kai.kang@windriver.com>
-References: <20190809053122.192238-1-kai.kang@windriver.com>
+	Fri,  9 Aug 2019 06:06:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,364,1559491200"; d="scan'208";a="73287424"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Aug 2019 14:06:48 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 266074CDFCF5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Aug 2019 14:06:50 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 9 Aug 2019 14:06:49 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Aug 2019 14:06:07 +0800
+Message-ID: <20190809060607.25725-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v3 1/2] xfce4-datetime-setter: add recipe
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 266074CDFCF5.A75F6
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] zabbix: upgrade 3.0.9 -> 4.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,51 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 05:32:23 -0000
+X-List-Received-Date: Fri, 09 Aug 2019 06:06:51 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+-The latest version needs to rely on libpcre.
 
-Because xfce4-settings turn back to its official upstream, it missing
-function to set date and time. Add it from Andreas's repo on github.
-xfce4-datetime-setter calls functions from dbus service
-org.freedesktop.timedate1 to set date and time. And the dbus service is
-provided by systemd. So check distro feature 'systemd' that
-xfce4-datetime-setter is imcompatible with sysvinit.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../xfce4-datetime-setter_3.32.2.bb           | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+ .../zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb}                     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb} (93%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-new file mode 100644
-index 000000000..d64358537
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "A fork of (early) gnome-control-center datetime panel for XFCE. \
-+It is based upon GTK3 and embedds into recent xfce4-settings."
-+HOMEPAGE = "https://github.com/schnitzeltony/xfce4-datetime-setter"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
-+
-+DEPENDS = "glib-2.0-native libxfce4ui"
-+
-+SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https"
-+SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit gettext meson distro_features_check
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+FILES_${PN} += "${datadir}/icons/hicolor"
-+
-+RDEPENDS_${PN} = "tzdata"
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
+rename to meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
+index bab5a6a..80db999 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
+@@ -19,7 +19,7 @@ HOMEPAGE = "http://www.zabbix.com/"
+ SECTION = "Applications/Internet"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=300e938ad303147fede2294ed78fe02e"
+-DEPENDS  = "openldap virtual/libiconv"
++DEPENDS  = "openldap virtual/libiconv libpcre"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+@@ -28,8 +28,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
+     file://zabbix-agent.service \
+ "
+ 
+-SRC_URI[md5sum] = "489d21b464277c0d412155c7e5611a8f"
+-SRC_URI[sha256sum] = "4445f26c025009681c29c9b350aa6c4ee7b124ddcaf1609ae36c55997bcb8cf2"
++SRC_URI[md5sum] = "4dd3fe96a5da8598ba0caf181387a3f7"
++SRC_URI[sha256sum] = "4dba94cc8c5f1d97b596e636ff9346c3bdea59ac04a97f1236a6d5e69d72ab8c"
+ 
+ inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
+ 
 -- 
-2.20.0
+2.7.4
+
+
 
 
