@@ -1,25 +1,24 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B24687E3B2
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id ACC167F3F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 05:32:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x795W3kK018101
+	Fri,  9 Aug 2019 05:32:22 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x795VkUr014220
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 8 Aug 2019 22:32:03 -0700 (PDT)
+	Thu, 8 Aug 2019 22:31:57 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 8 Aug 2019 22:32:02 -0700
+	Thu, 8 Aug 2019 22:31:24 -0700
 From: <kai.kang@windriver.com>
 To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
-Date: Fri, 9 Aug 2019 01:31:22 -0400
-Message-ID: <20190809053122.192238-3-kai.kang@windriver.com>
+Date: Fri, 9 Aug 2019 01:31:20 -0400
+Message-ID: <20190809053122.192238-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.20.0
-In-Reply-To: <20190809053122.192238-1-kai.kang@windriver.com>
-References: <20190809053122.192238-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v3 2/2] xfce4-settings: rrecommends xfce4-datetime-setter
+Subject: [PATCH v3 0/2] Add recipe of xfce4-datetime-setter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 05:32:03 -0000
+X-List-Received-Date: Fri, 09 Aug 2019 05:32:22 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-xfce4-datetime-setter provides function to set date and time. But it
-depends on dbus service org.freedesktop.timedate1 which is provided by
-systemd. Make xfce4-settings rrecommends xfce4-datetime-setter only
-systemd is set in DISTRO_FEATURES.
+v3:
+* check distro feature systemd rather than rdepends on systemd
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb | 1 +
- 1 file changed, 1 insertion(+)
+v2:
+* make xfce4-datetime-setter rdepends on systemd
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-index e79b0ab0b..2d16a02ce 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.13.7.bb
-@@ -30,3 +30,4 @@ FILES_${PN} += " \
- RRECOMMENDS_${PN} += "adwaita-icon-theme"
- RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
- RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','pulseaudio','libcanberra-pulse','',d)}"
-+RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','xfce4-datetime-setter','',d)}"
+Kai Kang (2):
+  xfce4-datetime-setter: add recipe
+  xfce4-settings: rrecommends xfce4-datetime-setter
+
+ .../xfce4-datetime-setter_3.32.2.bb           | 19 +++++++++++++++++++
+ .../xfce4-settings/xfce4-settings_4.13.7.bb   |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+
 -- 
 2.20.0
 
