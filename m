@@ -1,53 +1,88 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 382327F261
+Return-Path: <Rasmus.Villemoes@prevas.se>
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+	(mail-eopbgr10135.outbound.protection.outlook.com [40.107.1.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 15D807F420
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2019 07:25:11 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id s18so7567065wrn.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2019 00:25:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IR1GTJIq1EYFZJYoyITOBuvtDt6c4X1IzsaOl/bFmLk=;
-	b=TdjtTeK4+iDkuxdiFNVZm3BGSBy+y5FDqSoIXDoERMz/3p6b+bY0uvi5BnY7ZwfFH0
-	4DHizpcUs4aDg9m7RC8SmrO8syt45RStJA9hiB+2CajzM99rZD8QSQIb5s6ni+W/0XPC
-	VKbFsVJzsHNs9Gp87VBnZ6lmafj5Va2zQwHlpOlAGY0Rh0hrgRev0MXl/IKVmYejiwg+
-	aBr6q3WLPtZVNOr1rtRpviI/Wtl5M1PN89DdCC3G8TJoIYAHhz/icQ5eCbvQ1MMH0XUZ
-	cxuSj5BsJmJfuPLdB/vMdhTjPSQ5p7fayOiQLr8AoLa6qcJmdE71hclBMhNOUBfcmqKV
-	lIbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IR1GTJIq1EYFZJYoyITOBuvtDt6c4X1IzsaOl/bFmLk=;
-	b=L6zZjZD3iOPxTVunggHLevZDm7hDnLJU7xply7Y7W4UDe7JnnpJ6unZjeU5abPI0ab
-	XzEHp4y13sPjxSQX9TqxUwcZGPSa1WOunjw7mGXQB6vGehEQJuUtlLbBqHG3FSUPNMVB
-	mKh1rd4SOzz9wdQMlL42B+DHSP34ledAkErHjcPAPvrGxoBmGaFe4ETU9Zp0ggsaezwx
-	w+ssXX8v+IWq+4Z0Glu0+/TuENO8WfEJRVb65ejpjuGrtjSsXj7SYDLifTSr9cukNB48
-	IJxzuyhNQfp1eKD3Z2LtfUgPe1VoR7pHXMGST8X1+CQ0sPLFTeIVVnZsU2RqFwWtSuHb
-	+z5w==
-X-Gm-Message-State: APjAAAWmXAn7HtJNGYp/nXck3qURkV8+24Wxqyc2ZfIO7Uo8Rwrop607
-	PUg7TS6ddSrdJF7aMe7+rilLUt5x
-X-Google-Smtp-Source: APXvYqz8GOT5NUfUDHUAdxI7RpbanwfUHQFpINJxOFxxlDhh997v+4iFw9nE4dpat9Ig2ts3yY+OuA==
-X-Received: by 2002:a5d:534f:: with SMTP id t15mr13717340wrv.239.1566199511529;
-	Mon, 19 Aug 2019 00:25:11 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F2D8767E02EEDE8604E907E.dip0.t-ipconnect.de.
-	[2003:f0:7f2d:8767:e02e:ede8:604e:907e])
-	by smtp.gmail.com with ESMTPSA id
-	c12sm11940127wrx.46.2019.08.19.00.25.10
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 19 Aug 2019 00:25:10 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	kai.kang@windriver.com
-Date: Mon, 19 Aug 2019 09:25:03 +0200
-Message-Id: <20190819072503.2896-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Fri,  9 Aug 2019 09:20:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=fAJZxgp0qEGTPNXUyEX+44qhRA6PNBfMDwoH5jhli2nCjfiZm1EhFG9//V4nmq8y7qgKJWn1yGWSE3/NMdsq4L2lcUuSskxwMVgA8NCnRHCLdWl+IpIqOg8tsxYdySHLWmV2rcyqdNEbAJVQ8tr95DpIjue1EIwDYgMpIogpfT4b85taB9R4EPWgmvIY3IMPXUMksjoldJfRi5bbH5KXiJD02ZoRc1h7qbL3cyrMRWaczvtW3l/J9nu40j2jjCXw89hpkByP8xyf32l6y9bzY2dGfeMZnGyC0OwxEeupIhaYTsipZBpdG6yIW/PC2eLFKYW2FzI6MZow+4DYxSNpiQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=GOM5pXIIL1R2hWb7Fw+n4iZm8glVNkN7ysWKGEUT41Y=;
+	b=J/ifBOyFbX0fvBR06cwu+y4Zd7NbG6LyKdoYxKPAH+Dlqfe3u7idEAd9kwD/1pTnH1TuHmURgMBWta42a3rSLpPLYZdhxDpESxumMK8xul7JxgaPV9e6V7uHWyU8PeNZrUwPDaYIhvhxPSFz5Duu8reFKh+t0P5fqQNB/QGCSGQMTQoWP6LjeFVYcyCJjGLN7hBQBD11SPDzfoEX3+HVUIEzqZph5WYwB6rnrnsvs0pMBRKDyMuHS5IYWAFjSanDWqs0kH89ongQtNTKugrkG8hSQaJDau4xI3cpiSPmO9Go4sOi7UeiBervsFElmuoAz2oiPqE+RPyGoLmClt/kuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=prevas.se; dmarc=pass action=none header.from=prevas.dk; 
+	dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.se; s=selector2;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=GOM5pXIIL1R2hWb7Fw+n4iZm8glVNkN7ysWKGEUT41Y=;
+	b=dQBsKUXJ8jLYOkTYTEMETlo0sRBdEFkPsDb9OSOYn03GidPhd/NPGojCVDYmq+JtRcHLnHa/FbK+tCrpY4CcQXqU3gyhb57/5R/CED0/fcszwGHoMLLseAU3GXCIG3UwpV4hXJdvfVaSlRNxcBiZaGgtk0tS4zWff6ysjXsptoA=
+Received: from AM0PR10MB3476.EURPRD10.PROD.OUTLOOK.COM (10.186.175.83) by
+	AM0PR10MB2180.EURPRD10.PROD.OUTLOOK.COM (20.177.109.91) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2157.16; Fri, 9 Aug 2019 09:20:29 +0000
+Received: from AM0PR10MB3476.EURPRD10.PROD.OUTLOOK.COM
+	([fe80::9451:861a:85cc:daa0]) by
+	AM0PR10MB3476.EURPRD10.PROD.OUTLOOK.COM
+	([fe80::9451:861a:85cc:daa0%2]) with mapi id 15.20.2157.020;
+	Fri, 9 Aug 2019 09:20:29 +0000
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-browser][PATCH 1/2] chromium: don't pass
+	is_official_build=true when doing a component-build
+Thread-Index: AQHVTpOv46vLQG1vlEiRH21DEsnXhA==
+Date: Fri, 9 Aug 2019 09:20:29 +0000
+Message-ID: <20190809092013.32650-1-rasmus.villemoes@prevas.dk>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: HE1PR09CA0046.eurprd09.prod.outlook.com
+	(2603:10a6:7:3c::14) To AM0PR10MB3476.EURPRD10.PROD.OUTLOOK.COM
+	(2603:10a6:20b:15e::19)
+x-mailer: git-send-email 2.20.1
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Rasmus.Villemoes@prevas.se; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [81.216.59.226]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a83e0bf3-d9c1-48d7-3b81-08d71caad24f
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
+	SRVR:AM0PR10MB2180; 
+x-ms-traffictypediagnostic: AM0PR10MB2180:
+x-ms-exchange-purlcount: 1
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <AM0PR10MB218031CB15BC3CC8C196EFBF8AD60@AM0PR10MB2180.EURPRD10.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 01244308DF
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(366004)(39850400004)(136003)(396003)(346002)(376002)(189003)(199004)(186003)(66476007)(66946007)(102836004)(1076003)(14454004)(476003)(5660300002)(66556008)(8936002)(6506007)(8976002)(305945005)(66446008)(386003)(6916009)(966005)(26005)(25786009)(2906002)(7736002)(66574012)(8676002)(71190400001)(3846002)(64756008)(6116002)(508600001)(71200400001)(81156014)(6486002)(107886003)(36756003)(4326008)(81166006)(6306002)(316002)(44832011)(6512007)(50226002)(486006)(54906003)(6436002)(2351001)(14444005)(256004)(42882007)(53936002)(99286004)(66066001)(52116002)(5640700003)(2501003)(2616005);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:AM0PR10MB2180;
+	H:AM0PR10MB3476.EURPRD10.PROD.OUTLOOK.COM; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: prevas.se does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: 0U7F54o0WQaEgGsDqUph1Hlmo/WqjZmENasjBdXMP7TNSAwVeyAmByIqv3NVM+QkPq3A3V3EfuVhdBCKsBjo0LhiqI0Q23xjmpJ3RnjUg1whzBplrdejTH+Hh++bqF1WgVqnMUpfcnHuFNvF8dEF6LlUV615I7wI85vZMdbbp7JTqarA9KLUPccL3sVbkcvQ73KFruL4682pIwDgxmuJNsSsK1QaCXwBDDZQun1wQ2XdFIWyjj3YKvfS0Eb/gsJdA3H225Vxw3d5rW4N+PlzaOVEW/w/2CiM6B/RHEjg+yQMA6Jebkg7QF/tkqk1WAg/B+5vuZ/9SpJBBeSsEPWeNMlPgCQRgIb2hMUVnkIhTYjDYGgiDGbeEdNV9U33NOFSKP917jioPYnloILSG7N1XwAz0CEq3sbVLwbCXgsz+uQ=
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH][v2 02/10] xfce4-battery-plugin: 1.1.2 -> 1.1.3
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: a83e0bf3-d9c1-48d7-3b81-08d71caad24f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Aug 2019 09:20:29.6491 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: xm1Ql947fbFqvE8jol/AjGKhY4bAGG1fqEuIldDte6YpWGKYmWnQi76IL8B0j3Iewmxo6hTsGEDzoA1aYETuEqxnSW/499SNvUslHajILbI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB2180
+X-Mailman-Approved-At: Mon, 19 Aug 2019 08:55:33 +0000
+Cc: Maksim Sisov <msisov@igalia.com>,
+	Rasmus Villemoes <Rasmus.Villemoes@prevas.se>,
+	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
+	Jakob Dyhr Thomsen <jakob.dyhr@prevas.dk>,
+	Jonas Suhr Christensen <Jonas.Christensen@prevas.dk>
+Subject: [meta-browser][PATCH 1/2] chromium: don't pass is_official_build=true when doing a component-build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,40 +95,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 07:25:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 09 Aug 2019 09:20:31 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Minor bugfix & translation update release
+When setting the PACKAGECONFIG component-build, the build breaks
+immediately due to this from the toplevel BUILD.gn:
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+if (is_official_build) {
+  # An official (maximally optimized!) component (optimized for build times=
+)
+  # build doesn't make sense and usually doesn't work.
+  assert(!is_component_build)
+}
+
+So we must make is_official_build the negative of component-build.
+
+Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 ---
-V2: Fix typo in commit message - have to learn to write 'bugfix' correctly
- ...attery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-panel-plugins/battery/{xfce4-battery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} (47%)
+ recipes-browser/chromium/chromium-gn.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
-similarity index 47%
-rename from meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
-rename to meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
-index 5de1ce5e0..ecbdc265e 100644
---- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
-+HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "ba1cfe619046373f9af5b903c77d1858"
--SRC_URI[sha256sum] = "d601349fa9a979dae99ace39b24d99b97f62b80f42ac5dea5a99e5af3e88d7db"
-+SRC_URI[md5sum] = "9f82c7e77de0a417716d68d33367973b"
-+SRC_URI[sha256sum] = "12be0a44d16bd1e1618513ee64f946814925872db7d1c1188ab1454b00d040a3"
--- 
-2.21.0
+diff --git a/recipes-browser/chromium/chromium-gn.inc b/recipes-browser/chr=
+omium/chromium-gn.inc
+index d5258c0..d9735ab 100644
+--- a/recipes-browser/chromium/chromium-gn.inc
++++ b/recipes-browser/chromium/chromium-gn.inc
+@@ -138,7 +138,8 @@ GN_ARGS +=3D 'host_pkg_config=3D"pkg-config-native"'
+ # (debug, release, official) but for historical reasons there are two
+ # separate flags.
+ # See also: https://groups.google.com/a/chromium.org/d/msg/chromium-dev/hk=
+cb6AOX5gE/PPT1ukWoBwAJ
+-GN_ARGS +=3D "is_debug=3Dfalse is_official_build=3Dtrue"
++GN_ARGS +=3D "is_debug=3Dfalse"
++GN_ARGS +=3D "is_official_build=3D${@bb.utils.contains('PACKAGECONFIG', 'c=
+omponent-build', 'false', 'true', d)}"
+=20
+ # Starting with M61, Chromium defaults to building with its own copy of li=
+bc++
+ # instead of the system's libstdc++. Explicitly disable this behavior.
+--=20
+2.20.1
 
 
