@@ -1,32 +1,33 @@
 Return-Path: <maciej.pijanowski@3mdeb.com>
 X-Greylist: delayed 8400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 10 Aug 2019 23:47:29 UTC
-Received: from 4.mo68.mail-out.ovh.net (4.mo68.mail-out.ovh.net [46.105.59.63])
-	by mail.openembedded.org (Postfix) with ESMTP id BCCBB7ED3F
+	Sat, 10 Aug 2019 23:50:30 UTC
+Received: from 1.mo177.mail-out.ovh.net (1.mo177.mail-out.ovh.net
+	[178.33.107.143])
+	by mail.openembedded.org (Postfix) with ESMTP id E24167D11F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 23:47:29 +0000 (UTC)
-Received: from player750.ha.ovh.net (unknown [10.109.159.69])
-	by mo68.mail-out.ovh.net (Postfix) with ESMTP id 5288A13E913
+	Sat, 10 Aug 2019 23:50:30 +0000 (UTC)
+Received: from player750.ha.ovh.net (unknown [10.108.54.133])
+	by mo177.mail-out.ovh.net (Postfix) with ESMTP id 06A74FFDB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 23:20:56 +0200 (CEST)
+	Sat, 10 Aug 2019 23:20:38 +0200 (CEST)
 Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
 	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player750.ha.ovh.net (Postfix) with ESMTPSA id DD6168DD8AF0;
-	Sat, 10 Aug 2019 21:20:52 +0000 (UTC)
+	by player750.ha.ovh.net (Postfix) with ESMTPSA id 800FD8DD8AC2;
+	Sat, 10 Aug 2019 21:20:35 +0000 (UTC)
 From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 Aug 2019 23:20:13 +0200
-Message-Id: <20190810212014.23197-6-maciej.pijanowski@3mdeb.com>
+Date: Sat, 10 Aug 2019 23:20:09 +0200
+Message-Id: <20190810212014.23197-2-maciej.pijanowski@3mdeb.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
 References: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 3834815085647572552
+X-Ovh-Tracer-Id: 3829748535356304968
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
 X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddrudduledgudeiudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecu
 Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
-Subject: [meta-python][PATCH 6/7] python-async-timeout: add asyncio to RDEPENDS
+Subject: [meta-python][PATCH 2/7] python3-multidict: upgrade to 4.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,28 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 23:47:30 -0000
+X-List-Received-Date: Sat, 10 Aug 2019 23:50:31 -0000
 Content-Transfer-Encoding: 8bit
 
-It is required to properly import the module. Tested on python 3.7.4
+According to the comment and issue link, the workaround is no longer
+needed.
 
 Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 ---
- meta-python/recipes-devtools/python/python-async-timeout.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../python/python3-multidict_3.3.2.bb               | 13 -------------
+ .../python/python3-multidict_4.5.2.bb               |  9 +++++++++
+ 2 files changed, 9 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-async-timeout.inc b/meta-python/recipes-devtools/python/python-async-timeout.inc
-index 7e4959ebc4ad..e71a00262b0f 100644
---- a/meta-python/recipes-devtools/python/python-async-timeout.inc
-+++ b/meta-python/recipes-devtools/python/python-async-timeout.inc
-@@ -13,3 +13,7 @@ SRC_URI[sha256sum] = "0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b2
- 
- PYPI_PACKAGE = "async-timeout"
- inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
+deleted file mode 100644
+index e65d7d4f2902..000000000000
+--- a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
+-HOMEPAGE = "https://github.com/aio-libs/multidict/"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[md5sum] = "06ca91d993de2d04c7ee6df0cbb44ea2"
+-SRC_URI[sha256sum] = "f82e61c7408ed0dce1862100db55595481911f159d6ddec0b375d35b6449509b"
+-
+-# Work-around for broken make clean. Note this is fixed in v4.0.0.
+-# https://github.com/aio-libs/multidict/issues/194
+-CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+new file mode 100644
+index 000000000000..57167f219d27
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
++HOMEPAGE = "https://github.com/aio-libs/multidict/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
 +
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-asyncio \
-+"
++inherit pypi setuptools3
++
++SRC_URI[md5sum] = "5e9d8f7e1ada9a22932aed6a72f88e43"
++SRC_URI[sha256sum] = "024b8129695a952ebd93373e45b5d341dbb87c17ce49637b34000093f243dd4f"
 -- 
 2.20.1
 
