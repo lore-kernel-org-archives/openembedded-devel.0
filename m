@@ -1,48 +1,33 @@
-Return-Path: <roman.stratiienko@globallogic.com>
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
-	[209.85.208.182])
-	by mail.openembedded.org (Postfix) with ESMTP id BB89E7ED22
+Return-Path: <maciej.pijanowski@3mdeb.com>
+X-Greylist: delayed 453 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 10 Aug 2019 21:37:17 UTC
+Received: from 6.mo173.mail-out.ovh.net (6.mo173.mail-out.ovh.net
+	[46.105.43.93])
+	by mail.openembedded.org (Postfix) with ESMTP id C1CC37E3AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 17:41:25 +0000 (UTC)
-Received: by mail-lj1-f182.google.com with SMTP id p17so94941385ljg.1
+	Sat, 10 Aug 2019 21:37:17 +0000 (UTC)
+Received: from player750.ha.ovh.net (unknown [10.109.159.178])
+	by mo173.mail-out.ovh.net (Postfix) with ESMTP id B066D1152FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 10:41:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=globallogic.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=qCdS47TlzPfwKL+yk+gQcnSV+0Nwtx+AXxL4nwnPVxA=;
-	b=PSVlF3DZgFNfOyUFbuIk40zvCCZPrkbEfd5aJzgpnVui8Q4MhXTt4aMzkN7wSK5tPH
-	/dDm9B8TDNWOhE3U6C70H4v0vfQ9sIKqIXliCt4uwYVmMSdIfJuMW2pk6A9kxuaWzCct
-	no/qo3YKoy4ZSwyv/WCTGkS/DN8cARG+UBiR3nDqdzZtiXc6MbG+vxvjaQXBCVJ38Vpu
-	TIuL2RGkx5HVJB0KcE38qkufxYY7u1sYW+rjnol+8/0Siw+ADf/0m7JmTpix4JvnCchy
-	vKGzcVAC3TRcTV3qlZVXyClMcRUyfrEzTsqLEzscgEvlL4Xr/J3AxLcCK28siQh+S0m+
-	gSUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qCdS47TlzPfwKL+yk+gQcnSV+0Nwtx+AXxL4nwnPVxA=;
-	b=acPpdZ28Y+cvLyqDq2+kbqwoBNX7dR1l03h9W3O04SNJilEpfb2h7mCy5quEQGmkox
-	BTdq3DtiRAoYM/vfovrFR4DzOvkqFxyNQQKGB3fstgrsWjGZQ0tybbY/YXLBRjIuRPmT
-	YSJKh0KFITGaWXVuvEfsZWuOz0bny6DgTA5I2wkLCLpjIGTmaZCbak0wpr94EShsn5Gu
-	IdktYGDlPm9vHIu8VbLUxUM6ekwDY/ARA7TEkiU2Mk5R7Imq+wRDhh599nKI8XWRK9u5
-	lhGOuvpmvfupTRi1DBpkgqBkRVywKdLxqgMcuAh6cyydM7e0h6bVdHajCxItgcQudokx
-	LFfQ==
-X-Gm-Message-State: APjAAAVd0nFVH14pduUby4G+vzFjsviPdTCZrla+W3uuAgCzFm10HpYG
-	4mYQAxMpGQr1clRP6ySW3MigAVCjKzQ=
-X-Google-Smtp-Source: APXvYqxRdaAmertxjEj+kIa2g4WOv7AuczzMnQ4KVaSMv0F4CvSG+KPalIhwnfP+kpR1mMIZiTtdIA==
-X-Received: by 2002:a2e:8e99:: with SMTP id z25mr2476335ljk.121.1565458886147; 
-	Sat, 10 Aug 2019 10:41:26 -0700 (PDT)
-Received: from virtualhost-PowerEdge-R810.synapse.com ([195.238.92.107])
-	by smtp.gmail.com with ESMTPSA id
-	r5sm18150080lfn.89.2019.08.10.10.41.25
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sat, 10 Aug 2019 10:41:25 -0700 (PDT)
-From: roman.stratiienko@globallogic.com
+	Sat, 10 Aug 2019 23:21:01 +0200 (CEST)
+Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
+	(Authenticated sender: maciej.pijanowski@3mdeb.com)
+	by player750.ha.ovh.net (Postfix) with ESMTPSA id 4CE348DD8AFB;
+	Sat, 10 Aug 2019 21:20:56 +0000 (UTC)
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 Aug 2019 20:41:16 +0300
-Message-Id: <20190810174116.21284-1-roman.stratiienko@globallogic.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] glmark2: Upgrade SRCREV to latest
+Date: Sat, 10 Aug 2019 23:20:14 +0200
+Message-Id: <20190810212014.23197-7-maciej.pijanowski@3mdeb.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
+References: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 3836222458559082056
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddrudduledgudeiudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecu
+Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
+Subject: [meta-python][PATCH 7/7] python-socketio.inc: add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,34 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 17:41:26 -0000
+X-List-Received-Date: Sat, 10 Aug 2019 21:37:18 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Roman Stratiienko <roman.stratiienko@globallogic.com>
+Without additional RDEPENDS module could not be properly imported on
+python 3.7.4. Additional RDEPENDS had to be added in order to start the
+most basic examples from documentation:
+https://python-socketio.readthedocs.io/en/latest/client.html
 
-Fixes QA Issue: /usr/bin/glmark2-es2-drm contained in package glmark2 requires
-libgbm.so, libEGL.so, libGLESv2.so, but no providers found in RDEPENDS_glmark2.
-
-Fixes missing libraries listed above at runtime in glmark2-es2-drm.
-
-Signed-off-by: Roman Stratiienko <roman.stratiienko@globallogic.com>
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 ---
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python-socketio.inc       | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 7ed5cd028..605417634 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -15,7 +15,7 @@ PV = "20190205+${SRCPV}"
- COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
+diff --git a/meta-python/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
+index a23e780795c6..c69963f1a6a9 100644
+--- a/meta-python/recipes-devtools/python/python-socketio.inc
++++ b/meta-python/recipes-devtools/python/python-socketio.inc
+@@ -12,6 +12,17 @@ PYPI_PACKAGE = "python-socketio"
+ SRC_URI[md5sum] = "0b57da61a9464d2e0dc9a8d0164d86d2"
+ SRC_URI[sha256sum] = "64feb0817f1bf7e3e7fc05f6f65e28d76146d8061cb7de25b63502717f80e908"
  
- SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https"
--SRCREV = "0c90dd48df43a6b0db1d9aabca6298240f4968f7"
-+SRCREV = "c17fd14505f30d9e4dbad276f7aa956fd21a637b"
- 
- S = "${WORKDIR}/git"
- 
++PACKAGECONFIG ?= "asyncio_client client"
++PACKAGECONFIG[asyncio_client] = ",,,python3-aiohttp python3-websockets"
++PACKAGECONFIG[client] = ",,,python3-requests python3-websocket-client"
++
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-engineio \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-pickle \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-attrs \
+     "
 -- 
-2.17.1
+2.20.1
 
 
