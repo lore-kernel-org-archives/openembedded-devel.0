@@ -1,33 +1,48 @@
-Return-Path: <maciej.pijanowski@3mdeb.com>
-X-Greylist: delayed 8400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 10 Aug 2019 23:50:30 UTC
-Received: from 1.mo177.mail-out.ovh.net (1.mo177.mail-out.ovh.net
-	[178.33.107.143])
-	by mail.openembedded.org (Postfix) with ESMTP id E24167D11F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B0C636C44A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 23:50:30 +0000 (UTC)
-Received: from player750.ha.ovh.net (unknown [10.108.54.133])
-	by mo177.mail-out.ovh.net (Postfix) with ESMTP id 06A74FFDB5
+	Sun, 11 Aug 2019 07:39:58 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id d79so74767377qke.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2019 23:20:38 +0200 (CEST)
-Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
-	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player750.ha.ovh.net (Postfix) with ESMTPSA id 800FD8DD8AC2;
-	Sat, 10 Aug 2019 21:20:35 +0000 (UTC)
-From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 Aug 2019 23:20:09 +0200
-Message-Id: <20190810212014.23197-2-maciej.pijanowski@3mdeb.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
-References: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
+	Sun, 11 Aug 2019 00:40:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=WWjwmkpFcSwwiZh+aA90GxcnMk0skx3fzFB0DA7HPuI=;
+	b=KXZ1yfketvh85oY/IP5/5DKvSQ+WQczcECdr3v43cA+qfqm+NclzVYllduJub7ZzMK
+	6+phpAogde1R+wzopOvpE453IAI4MWMoQBnYHhXI4b0gBQUTy3gvZyGlNc9nlO/c974P
+	vY7VCdcf0++l8epUYES0ctjYOwfDMELtvoC6m0gvBZx5i2lwlbJZN61aYETIPaP7Q/zI
+	yPecgvUY66hjBKahKZLUB28J7gX7NjsvqNtleMhTearQ8rdLxi4CCs6aWum+5mnWA5Wh
+	chmV2R671obuw/bue5Po7dC5d4RrF4WayXtdxsU1AwDuRH1ncq0jir/bJaZz/Bug0ZPp
+	zwKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=WWjwmkpFcSwwiZh+aA90GxcnMk0skx3fzFB0DA7HPuI=;
+	b=hJULJWAcNpAuKTIyyZETTKxnhmIM7hUomk8vhyQ+abcEcLkGR5fA97jhM1rNPSzZX5
+	6gmYSGh92VrHHiA7RxOket2kJkJMzXXgsKAJB9BgTkq3i4yEmpiSYXGwz1EOEhudgPlU
+	BUHUbyO3chjEyQZ1oykguQkxC4R5ilFG3OWxkrpy6TdVub9mFrUVvQ8QxMUDfjoh2YVJ
+	ELJXY/u03eNDHQmP97gA3UmWEww3Nhf95QI6pQyTan9OQTi0/W26fPTF6YeEW7CiJuKW
+	Z8JYbReP+MmjCy2knSUwbGjhLALB6AzEydLkke8iI5beaIGGdl3ImfAfylL3ccH0QaKf
+	xscA==
+X-Gm-Message-State: APjAAAVnZrnwPapzOk+ZOG4srgeyLZ30TVEaHPfX1chTJG7yzgXvd8UC
+	R/D2SLLz8IaEFpPf61EBk9acapMEJf83zMd8LOfwWriNddA=
+X-Google-Smtp-Source: APXvYqxH4MhacDFz3MO8fBLYgcEkGtJdlc9VABY46RyUGTzpqwxJ/ODPHyf7qcqlueKOIo7TmFuVd9jGEV6LF6oXW+I=
+X-Received: by 2002:a37:4243:: with SMTP id p64mr13947239qka.9.1565509199212; 
+	Sun, 11 Aug 2019 00:39:59 -0700 (PDT)
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 3829748535356304968
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddrudduledgudeiudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecu
-Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
-Subject: [meta-python][PATCH 2/7] python3-multidict: upgrade to 4.5.2
+References: <20190810212014.23197-1-maciej.pijanowski@3mdeb.com>
+	<20190810212014.23197-3-maciej.pijanowski@3mdeb.com>
+In-Reply-To: <20190810212014.23197-3-maciej.pijanowski@3mdeb.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Aug 2019 00:39:43 -0700
+Message-ID: <CAMKF1spHtAufpqMCUwnxhZn1yp5yGQk5je_GhjNNYu3FGis5Gg@mail.gmail.com>
+To: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	piotr.krol@3mdeb.com
+Subject: Re: [meta-python][PATCH 3/7] python-engineio: upgrade to 3.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,55 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 23:50:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 11 Aug 2019 07:40:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-According to the comment and issue link, the workaround is no longer
-needed.
+seeing fetch fails
 
-Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
----
- .../python/python3-multidict_3.3.2.bb               | 13 -------------
- .../python/python3-multidict_4.5.2.bb               |  9 +++++++++
- 2 files changed, 9 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+https://errors.yoctoproject.org/Errors/Details/260608/
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-deleted file mode 100644
-index e65d7d4f2902..000000000000
---- a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
--HOMEPAGE = "https://github.com/aio-libs/multidict/"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
--
--inherit pypi setuptools3
--
--SRC_URI[md5sum] = "06ca91d993de2d04c7ee6df0cbb44ea2"
--SRC_URI[sha256sum] = "f82e61c7408ed0dce1862100db55595481911f159d6ddec0b375d35b6449509b"
--
--# Work-around for broken make clean. Note this is fixed in v4.0.0.
--# https://github.com/aio-libs/multidict/issues/194
--CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
-new file mode 100644
-index 000000000000..57167f219d27
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
-+HOMEPAGE = "https://github.com/aio-libs/multidict/"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "5e9d8f7e1ada9a22932aed6a72f88e43"
-+SRC_URI[sha256sum] = "024b8129695a952ebd93373e45b5d341dbb87c17ce49637b34000093f243dd4f"
--- 
-2.20.1
-
+On Sat, Aug 10, 2019 at 2:39 PM Maciej Pijanowski
+<maciej.pijanowski@3mdeb.com> wrote:
+>
+> Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+> ---
+>  .../python/{python-engineio_3.5.0.bb => python-engineio_3.9.3.bb} | 0
+>  .../{python3-engineio_3.5.0.bb => python3-engineio_3.9.3.bb}      | 0
+>  2 files changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-engineio_3.5.0.bb => python-engineio_3.9.3.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-engineio_3.5.0.bb => python3-engineio_3.9.3.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python-engineio_3.9.3.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
+> rename to meta-python/recipes-devtools/python/python-engineio_3.9.3.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python3-engineio_3.9.3.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
+> rename to meta-python/recipes-devtools/python/python3-engineio_3.9.3.bb
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
