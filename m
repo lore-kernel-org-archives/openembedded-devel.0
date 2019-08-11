@@ -1,47 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id C7F816BC19
+Return-Path: <maciej.pijanowski@3mdeb.com>
+Received: from 1.mo2.mail-out.ovh.net (1.mo2.mail-out.ovh.net [46.105.63.121])
+	by mail.openembedded.org (Postfix) with ESMTP id B07C76BC19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 15:13:36 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id d17so21545764qtj.8
+	Sun, 11 Aug 2019 15:16:52 +0000 (UTC)
+Received: from player760.ha.ovh.net (unknown [10.109.159.248])
+	by mo2.mail-out.ovh.net (Postfix) with ESMTP id 4A4271A6A1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 08:13:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wZjQxmO6OXosgBlOQ3nFojC883akrX69uzb61KQolfM=;
-	b=SfUJoTz+mdvyU0BpDThbzDalbESV4xkPog3QtTkty3hCT36wokokrh4v8rs0dUDQib
-	1/NcrBQE3crZcCEWD+eahGSm0cBK3QggO23DWcRk0TJPqdAWVnYSdE4YCdsYXquRigU0
-	chnaiLu60PXWWNCeREzc5GaicAo5pp28Hm6ZKOIYv5VLHBJfZ7TZvrDXI6jz5/TDISp8
-	CeHbBLdPOJUGZPjGf9XpjJ6q1TV+6AyidfT4QJFsp5eShjQRmle6HaFQtzjFa5JzoU8c
-	zg5AkYAlFfjFCFoOCBah2/QOr+X3ZGrnUF17EgM9OBoTC/0qVoGNJnQSNHLuvTnJChRT
-	gRjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wZjQxmO6OXosgBlOQ3nFojC883akrX69uzb61KQolfM=;
-	b=Cy5NR0tecpY8g87/POtTiLtjR5xiN29p14YUsi0fqIqCoQ+JLZBSwBxQ+p/Sn3CJLy
-	fdV9HvvQi0BmHFDsari1KH78ZoXlRTHUDgOlcBwC59wd2cPEWKCXW8dnKKK1sr6IzdLl
-	aJZ0XzOv+40GsK/U9XH5YlxbqxwhyLH0K+he22LlEiHABvaBJ4e9czxneq2INjIeKdNO
-	uh+WkY+87sjscDDha9IB3TD2b1DvIe/vALaYOjZkn6RErq+OT3YqFl6cZSHO28f0x312
-	dK3Ti33EbsZvdxn0Sx7w/Au69Equ2jMjaE6UYjuIaV5ebPofCzZLSMtg+gTqz/kTxT+C
-	nDcA==
-X-Gm-Message-State: APjAAAWC3FSdnJYmiMMHqFwpOBo7ehUGiGSQ1WzXu7sRHMPWqMihFetr
-	eU2AN7zedhyybV96HtL6qZtjWNop2MLmRO4kFk/AIMjc
-X-Google-Smtp-Source: APXvYqxhfJI5MTaIMpRTJZw1sRJ7/BhvyWIgRoUbeqCH8brMm6NcQ0noth3uUEda4OzrUX8msHmCByuFEib3JNdVdR8=
-X-Received: by 2002:ad4:4112:: with SMTP id i18mr9332540qvp.175.1565536417267; 
-	Sun, 11 Aug 2019 08:13:37 -0700 (PDT)
+	Sun, 11 Aug 2019 17:16:53 +0200 (CEST)
+Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
+	(Authenticated sender: maciej.pijanowski@3mdeb.com)
+	by player760.ha.ovh.net (Postfix) with ESMTPSA id 11C228CC0989;
+	Sun, 11 Aug 2019 15:16:48 +0000 (UTC)
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 11 Aug 2019 17:16:21 +0200
+Message-Id: <20190811151626.13990-2-maciej.pijanowski@3mdeb.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190811151626.13990-1-maciej.pijanowski@3mdeb.com>
+References: <20190811151626.13990-1-maciej.pijanowski@3mdeb.com>
 MIME-Version: 1.0
-References: <20190811085130.15815-1-maciej.pijanowski@3mdeb.com>
-In-Reply-To: <20190811085130.15815-1-maciej.pijanowski@3mdeb.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Aug 2019 08:13:20 -0700
-Message-ID: <CAMKF1sq1_Xa-JrQGVd3A3mreTqvd7fEB2ky0qMHYjYYJYxqOoQ@mail.gmail.com>
-To: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	piotr.krol@3mdeb.com
-Subject: Re: [meta-python][PATCH v2] python-socketio: upgrade to 4.3.1
+X-Ovh-Tracer-Id: 3559251082086198856
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddruddvvddgkeejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenuc
+Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
+Subject: [meta-python][PATCH v2 2/7] python3-multidict: upgrade to 4.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 15:13:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 11 Aug 2019 15:16:52 -0000
+Content-Transfer-Encoding: 8bit
 
-Can you resend the whole series
+According to the comment and issue link, the workaround is no longer
+needed.
 
-On Sun, Aug 11, 2019 at 1:51 AM Maciej Pijanowski
-<maciej.pijanowski@3mdeb.com> wrote:
->
-> Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
-> ---
->  meta-python/recipes-devtools/python/python-socketio.inc       | 4 ++--
->  .../{python-socketio_4.0.0.bb => python-socketio_4.3.1.bb}    | 0
->  .../{python3-socketio_4.0.0.bb => python3-socketio_4.3.1.bb}  | 0
->  3 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-socketio_4.0.0.bb => python-socketio_4.3.1.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-socketio_4.0.0.bb => python3-socketio_4.3.1.bb} (100%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
-> index a23e780795c6..fa62afce1546 100644
-> --- a/meta-python/recipes-devtools/python/python-socketio.inc
-> +++ b/meta-python/recipes-devtools/python/python-socketio.inc
-> @@ -9,8 +9,8 @@ inherit pypi
->
->  PYPI_PACKAGE = "python-socketio"
->
-> -SRC_URI[md5sum] = "0b57da61a9464d2e0dc9a8d0164d86d2"
-> -SRC_URI[sha256sum] = "64feb0817f1bf7e3e7fc05f6f65e28d76146d8061cb7de25b63502717f80e908"
-> +SRC_URI[md5sum] = "86cd47dddea1785ce7a6c72f55c93fe7"
-> +SRC_URI[sha256sum] = "506b2cf7a520b40ea0b3f25e1272eff8de134dce6f471c1f6bc0de8c90fe8c57"
->
->  RDEPENDS_${PN} += "\
->      ${PYTHON_PN}-engineio \
-> diff --git a/meta-python/recipes-devtools/python/python-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python-socketio_4.3.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-socketio_4.0.0.bb
-> rename to meta-python/recipes-devtools/python/python-socketio_4.3.1.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb b/meta-python/recipes-devtools/python/python3-socketio_4.3.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-socketio_4.0.0.bb
-> rename to meta-python/recipes-devtools/python/python3-socketio_4.3.1.bb
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+---
+ .../python/python3-multidict_3.3.2.bb               | 13 -------------
+ .../python/python3-multidict_4.5.2.bb               |  9 +++++++++
+ 2 files changed, 9 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
+deleted file mode 100644
+index e65d7d4f2902..000000000000
+--- a/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
+-HOMEPAGE = "https://github.com/aio-libs/multidict/"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[md5sum] = "06ca91d993de2d04c7ee6df0cbb44ea2"
+-SRC_URI[sha256sum] = "f82e61c7408ed0dce1862100db55595481911f159d6ddec0b375d35b6449509b"
+-
+-# Work-around for broken make clean. Note this is fixed in v4.0.0.
+-# https://github.com/aio-libs/multidict/issues/194
+-CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+new file mode 100644
+index 000000000000..57167f219d27
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-multidict_4.5.2.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
++HOMEPAGE = "https://github.com/aio-libs/multidict/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
++
++inherit pypi setuptools3
++
++SRC_URI[md5sum] = "5e9d8f7e1ada9a22932aed6a72f88e43"
++SRC_URI[sha256sum] = "024b8129695a952ebd93373e45b5d341dbb87c17ce49637b34000093f243dd4f"
+-- 
+2.20.1
+
 
