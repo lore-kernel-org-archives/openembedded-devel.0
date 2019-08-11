@@ -1,30 +1,33 @@
 Return-Path: <maciej.pijanowski@3mdeb.com>
-X-Greylist: delayed 24101 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 11 Aug 2019 15:25:56 UTC
-Received: from 6.mo5.mail-out.ovh.net (6.mo5.mail-out.ovh.net [178.32.119.138])
-	by mail.openembedded.org (Postfix) with ESMTP id A0DCC7ECB5
+X-Greylist: delayed 64507 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 11 Aug 2019 15:32:36 UTC
+Received: from 10.mo68.mail-out.ovh.net (10.mo68.mail-out.ovh.net
+	[46.105.79.203])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DF167ECB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 15:25:56 +0000 (UTC)
-Received: from player760.ha.ovh.net (unknown [10.109.143.201])
-	by mo5.mail-out.ovh.net (Postfix) with ESMTP id 33684248A85
+	Sun, 11 Aug 2019 15:32:36 +0000 (UTC)
+Received: from player760.ha.ovh.net (unknown [10.109.143.136])
+	by mo68.mail-out.ovh.net (Postfix) with ESMTP id D551B13DF7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 17:16:48 +0200 (CEST)
+	Sun, 11 Aug 2019 17:16:56 +0200 (CEST)
 Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
 	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player760.ha.ovh.net (Postfix) with ESMTPSA id 91EC08CC097E;
-	Sun, 11 Aug 2019 15:16:45 +0000 (UTC)
+	by player760.ha.ovh.net (Postfix) with ESMTPSA id 470E28CC09B5;
+	Sun, 11 Aug 2019 15:16:53 +0000 (UTC)
 From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Aug 2019 17:16:20 +0200
-Message-Id: <20190811151626.13990-1-maciej.pijanowski@3mdeb.com>
+Date: Sun, 11 Aug 2019 17:16:22 +0200
+Message-Id: <20190811151626.13990-3-maciej.pijanowski@3mdeb.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190811151626.13990-1-maciej.pijanowski@3mdeb.com>
+References: <20190811151626.13990-1-maciej.pijanowski@3mdeb.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 3557562234483781192
+X-Ovh-Tracer-Id: 3560095507659828808
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
 X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddruddvvddgkeejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenuc
 Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
-Subject: [meta-python][PATCH v2 1/7] python3-websockets: upgrade to 8.0.2
+Subject: [meta-python][PATCH v2 3/7] python-engineio: upgrade to 3.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,48 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 15:25:56 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 15:32:36 -0000
 Content-Transfer-Encoding: 8bit
-
-The present version was not compatible with python 3.7 because async is
-now the proper keyword. The reported werror was:
-
-    asyncio_ensure_future = asyncio.async           # Python < 3.5
-                                        ^
-SyntaxError: invalid syntax
-
-Issues like this one: https://github.com/psf/requests-html/issues/65
-explains the reason of that.
 
 Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
 ---
- ...hon3-websockets_4.0.1.bb => python3-websockets_8.0.2.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-websockets_4.0.1.bb => python3-websockets_8.0.2.bb} (54%)
+ meta-python/recipes-devtools/python/python-engineio.inc       | 4 ++--
+ .../{python-engineio_3.5.0.bb => python-engineio_3.9.3.bb}    | 0
+ .../{python3-engineio_3.5.0.bb => python3-engineio_3.9.3.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-engineio_3.5.0.bb => python-engineio_3.9.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-engineio_3.5.0.bb => python3-engineio_3.9.3.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb b/meta-python/recipes-devtools/python/python3-websockets_8.0.2.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-websockets_8.0.2.bb
-index 414129c59d2f..6da73ce35836 100644
---- a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-websockets_8.0.2.bb
-@@ -2,12 +2,12 @@ SUMMARY = "An implementation of the WebSocket Protocol (RFC 6455)"
- HOMEPAGE = "https://github.com/aaugustin/websockets"
+diff --git a/meta-python/recipes-devtools/python/python-engineio.inc b/meta-python/recipes-devtools/python/python-engineio.inc
+index c399d7dda56c..f24da1284b40 100644
+--- a/meta-python/recipes-devtools/python/python-engineio.inc
++++ b/meta-python/recipes-devtools/python/python-engineio.inc
+@@ -9,5 +9,5 @@ inherit pypi
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5070256738c06d2e59adbec1f4057dac"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ad5c6d36b3d0098b2f33a5ab69a9e750"
+ PYPI_PACKAGE = "python-engineio"
  
- inherit pypi setuptools3
- 
--SRC_URI[md5sum] = "9e8c6b3c70def4146d75fbb0f52bdfc7"
--SRC_URI[sha256sum] = "da4d4fbe059b0453e726d6d993760065d69b823a27efc3040402a6fcfe6a1ed9"
-+SRC_URI[md5sum] = "a37f0e22c3aa5f1cf12a6a3ae22b36ca"
-+SRC_URI[sha256sum] = "882a7266fa867a2ebb2c0baaa0f9159cabf131cf18c1b4270d79ad42f9208dc5"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
+-SRC_URI[md5sum] = "011a61f1ee84755043cf862c8cc24f21"
+-SRC_URI[sha256sum] = "b2756ce53076163eb24f59c1d1a903ac72f071ad4fb7b3ef6dab1b1b9ae9a44f"
++SRC_URI[md5sum] = "11a4f18f5b08a36d07d3c0ff85e7c047"
++SRC_URI[sha256sum] = "2a4c874aea686e79f8ea9efc30748110df581df6d577d18bb5eaa1a8f2199d12"
+diff --git a/meta-python/recipes-devtools/python/python-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python-engineio_3.9.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-engineio_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python-engineio_3.9.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb b/meta-python/recipes-devtools/python/python3-engineio_3.9.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-engineio_3.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-engineio_3.9.3.bb
 -- 
 2.20.1
 
