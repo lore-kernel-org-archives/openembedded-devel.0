@@ -1,46 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E34497F02F
+Return-Path: <laszlth@gmail.com>
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 003D37E468
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 15:57:38 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id q4so3397679qtp.1
+	Sun, 11 Aug 2019 17:51:37 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id p74so10180317wme.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 08:57:40 -0700 (PDT)
+	Sun, 11 Aug 2019 10:51:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8ezDLEuVICRRMxRlj0s9W8wdf0L8QLzeO5RgAJMA3Eg=;
-	b=t+11MtxeUT/9qoT2S6E4bXNrYv9uvs7pTfW54Vxw4DGW9qgLyHpcWTytIcBv98W/An
-	/hRdES8HcvS1C110Tnpv2iMS9KIufUrdjit5drI8hiurhdYdWQf/cS10BRvX6d7hWeD1
-	RkcJ2o5zfA0b5MUQUzNrtKlkiOyPDws6hhsDpwY21SMvEmYoHOqgloVmsFSpu2lF5xK2
-	HR2LQIgA5biZCIXzZrfiyVIYtdMdB+cAtzASWwj8kNYZE+8xvlfldEjjMBu4+juYCFoL
-	Uq563FuEiAbFl5A9j3arOjrtbou95a6/QZtWjGRccvt0Hr/0Fo8a1CFriNCRGVAXA64j
-	Pjsw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=M6RDLnAccYyGcU3P4ffExWlHmZ4f33IwCkmp+H0sfXk=;
+	b=TrtnUS4nvT21gu1RLUnkIJIcAw7Bc3/xQhY+7nyU3MgEONpX9W3JWH1FiQgO7QFl6R
+	Hh6+5HR+ItS3D7T3s5eTxwTtwIUIahTcOhlnZTZ4aqbA0JOd/EPWfXWvAYNl36OlBfmU
+	DiHKdiVCHgjUsjIW+KTxoc+bB2OaZy+4gdgY/bcVQXFB7xyczQ8Eqs/jPKql82M4PjJd
+	XE94qlKDwZXuVJ88SGABtDwGnd/7FNMt+b6vVsl4YQUNQCg36eX5HeCWLy1fS7a1ROy/
+	qHGld7YaEeM+jzWxaFdI17czvNHhNQLA7HnPT3sOY5dER+jSUAZz74Zil6d/jARRHaau
+	IPkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8ezDLEuVICRRMxRlj0s9W8wdf0L8QLzeO5RgAJMA3Eg=;
-	b=jR50SXX76tITB69l45AkjgjgwiE8qDJEdoy0exKUtREBWHAVy14p8uH7f7ak1sR8h2
-	cT4as2bgvhb3M6KRGMMkP3cEcdjwrrXd33tvpzt+5z6toZqXNA29hS53AbSM0SsTnvqz
-	S/0OCOTKI3/sXMKRA3i3giia/j3sY6rqk9WD6Nrk3MwgJlu98tJCfybOwJFT7yLzzBiu
-	UJGrmSNhRx9Ne15hQJyQfDMi4af0BWuKNUx6AH8FtgKj9kFJs43BQ7O1U6Z6fofsZ5fD
-	+nmffzwimxvJmC88Okg0horr0OjW40kmGtUNvrtftTyHiYEajYv+3ozL7sf3cl2icwxE
-	i+dg==
-X-Gm-Message-State: APjAAAUn5LpHbf5klm0u9f36j/hdo2Bs4yBZOg7RdpR7tvcEMzY2OAxX
-	kgDa7JGaXvsd4tSRk80azmmMGUCFVMh7bIajE2GmXNtUT90=
-X-Google-Smtp-Source: APXvYqzSEnNe1sbUnMGL/EpJuJozHOmP687Par4HM8qzDopP1KALddwuUrrbxarJTwN98IuZzhda1NHWtP96cDyw+ec=
-X-Received: by 2002:ac8:764f:: with SMTP id i15mr26222421qtr.194.1565539059379;
-	Sun, 11 Aug 2019 08:57:39 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=M6RDLnAccYyGcU3P4ffExWlHmZ4f33IwCkmp+H0sfXk=;
+	b=pA1/YPmW3vkKXif++kvz2STY9nBbop/yXen71kdB5iORE+DoNskB3iqUWP8YWLGmXW
+	yMdskcQCYpvtRwSX/hhbHuWI7RiIcc0hkeo2hziT9YsE39YZloEnuHHss1RBULc8wbit
+	KwE56DTBDHbWkxlBYgmuhMZirzGUS34h2lG1YyBMqSRlUiH02MvoN8eFY5H7ZN5KiIu9
+	WUizCibxXKd/ccFBF2fwOjqypSeFgrmgIlPDg/7MVdy5eyahm3FI7vc1vnEURRSWgYoH
+	9kGrc1pcEkdHRXoYnquku3uqiuX5soniDqZLleit5JdumEqEdSgSKRAitVFxgjUET+5a
+	e8uQ==
+X-Gm-Message-State: APjAAAWD/IcqWReIM1iJEIdYn7FTWBdlgvukHOdHvs9MWLV2CRUZwjFb
+	SVaMdtSjmor32s+AwIkurlfJRyy5
+X-Google-Smtp-Source: APXvYqwqL6tq+cPPHKZdpheiHoTMhLYp7khZzSc4d/OS9VhAUmOcETGTW7Verzc7QnAf7AmZ3S2W8A==
+X-Received: by 2002:a1c:107:: with SMTP id 7mr23390192wmb.84.1565545898618;
+	Sun, 11 Aug 2019 10:51:38 -0700 (PDT)
+Received: from latitude-5590.localdomain (catv-176-63-45-62.catv.broadband.hu.
+	[176.63.45.62]) by smtp.gmail.com with ESMTPSA id
+	s64sm18384891wmf.16.2019.08.11.10.51.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+	Sun, 11 Aug 2019 10:51:38 -0700 (PDT)
+From: Laszlo Toth <laszlth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 11 Aug 2019 19:54:23 +0200
+Message-Id: <20190811175423.19351-1-laszlth@gmail.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-References: <20190809060607.25725-1-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <20190809060607.25725-1-zangrc.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Aug 2019 08:57:23 -0700
-Message-ID: <CAMKF1srWb=tO7zHpX+0DRmFyeMBGC==Ez70oY+f675fKtchssg@mail.gmail.com>
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH] zabbix: upgrade 3.0.9 -> 4.2.5
+Subject: [meta-oe][PATCH] networkmanager: fix typo in nonarch_base_libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,60 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 15:57:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 11 Aug 2019 17:51:38 -0000
+Content-Transfer-Encoding: 8bit
 
-Hi Zang
+Signed-off-by: Laszlo Toth <laszlth@gmail.com>
+---
+ .../networkmanager/networkmanager_1.18.0.bb                     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This fails to build seemingly its missing libpcre dependency
-https://errors.yoctoproject.org/Errors/Details/260676/
-https://errors.yoctoproject.org/Errors/Details/260726/
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+index 037566783..58968dfb0 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+@@ -111,7 +111,7 @@ FILES_${PN} += " \
+     ${nonarch_libdir}/NetworkManager/conf.d \
+     ${datadir}/polkit-1 \
+     ${datadir}/dbus-1 \
+-    ${noarch_base_libdir}/udev/* \
++    ${nonarch_base_libdir}/udev/* \
+     ${systemd_unitdir}/system \
+     ${libdir}/pppd \
+ "
+-- 
+2.22.0
 
-On Thu, Aug 8, 2019 at 11:07 PM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
->
-> -The latest version needs to rely on libpcre.
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  .../zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb}                     | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-connectivity/zabbix/{zabbix_3.0.9.bb => zabbix_4.2.5.bb} (93%)
->
-> diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-> similarity index 93%
-> rename from meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
-> rename to meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-> index bab5a6a..80db999 100644
-> --- a/meta-oe/recipes-connectivity/zabbix/zabbix_3.0.9.bb
-> +++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.5.bb
-> @@ -19,7 +19,7 @@ HOMEPAGE = "http://www.zabbix.com/"
->  SECTION = "Applications/Internet"
->  LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=300e938ad303147fede2294ed78fe02e"
-> -DEPENDS  = "openldap virtual/libiconv"
-> +DEPENDS  = "openldap virtual/libiconv libpcre"
->
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->
-> @@ -28,8 +28,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
->      file://zabbix-agent.service \
->  "
->
-> -SRC_URI[md5sum] = "489d21b464277c0d412155c7e5611a8f"
-> -SRC_URI[sha256sum] = "4445f26c025009681c29c9b350aa6c4ee7b124ddcaf1609ae36c55997bcb8cf2"
-> +SRC_URI[md5sum] = "4dd3fe96a5da8598ba0caf181387a3f7"
-> +SRC_URI[sha256sum] = "4dba94cc8c5f1d97b596e636ff9346c3bdea59ac04a97f1236a6d5e69d72ab8c"
->
->  inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
->
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
