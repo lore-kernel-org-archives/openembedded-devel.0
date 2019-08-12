@@ -1,34 +1,35 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 61DB973196
+	by mail.openembedded.org (Postfix) with ESMTP id D4C8E73196
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 12 Aug 2019 12:06:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 466ZMK11qBz28
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 466ZMK3ZSDz4q
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 12 Aug 2019 14:06:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1565611597;
-	bh=qqjkmTr5jvy+eZlWWdFiNPO/jxK7WU41ANvEuSlgeeg=;
-	h=From:To:Subject:Date:From;
-	b=PPrKNEO5jojryv84pQHVds2a8xFibqWZrkjiQgDlN16N3JtioY5dMlYUZYIIhNJro
-	pCKy6UyWz3k+SUHFexUluUlHESjqMXt2GVJ+LjEyiGaJOQ7m5EH7mvwjEQFlIiVilH
-	UD1Q5VHvEAuv91rmHG+JJcMBazgQ5HPGC+4/bmBqscTgVDwRoEE9cKldTvIA7ttnjU
-	9NHkYEN86n2q4wKcGCr29rdF+cAOsynA3tKzrI0Ku7O4kFyTqJqbLDDB5nEDM5sAdA
-	33yu44lyyWSNhLZJNZupMtQHZGiAS1uzS0s22+iLSKRhlHJw4sVaYOPNuns1ZGi6HT
-	qGQGKTT0OFvVx20449CRzG9F/Uh6PPtz9lxuTx4gnnb6W7k9iELBG1vL9v8VBgJGOX
-	HqRKdYSVNk+Uncln3lxS0TMcBe+FkyR5b6J/sxJb+QF8R0fn2SwBnMc7JPQKPv6S3S
-	q6BHnCHPPszTjItjxWG2m5jTLDU4efUIsA5uwHuEuka689iWWsN4tGsOioziZDe+Ux
-	dV1Hs0NC5XNYFhBfvvNgXJsygFSbceSYAyChtPrt5vjDxMw72o8b9tVC2NySkwG0OB
-	+SvOjh6Q3p8AnrVbicK3pe7XAehbCNi00+DfsePnye9AYCOoyEqNinOnIVTUAbS9k0
-	6mTpeoaZ31zc5Z/Br9Yy5UX0=
+	bh=X/rsykDYHc+a9mse65eSbeW6aJpL3QF5qGNAbpJWAyI=;
+	h=From:To:Subject:Date:In-Reply-To:References:From;
+	b=f6/oztuEyjXtr2mbdS9L+TskoLJ8Dfe4ZbM5XkDg/SwByRkiYa68LHKV0g7jGohE9
+	5WcWJwAKrzWWq7uvYzWQ0tdPbwvRJ10cGTcu3z9tmD+bnhdfUQbsw2KnacAv0hJLun
+	QUimHoSWWstaLGwZhQZVbo4JwIn20tm11ArJmQFTYy7NRImENtpbmOFhVhCqVobzPb
+	t8s6Bm2BGKhtW9ez0QGwxZjKGDKhd+PP+g2aApc+iPBJUZWuFy4pU8VTHWt3SC4dRJ
+	UN1oxCMn8T0Od3LFKC132JR7sxWz8bT7qVxL4/tX4/gLe2AgBS23LPYR3jWqwuOWtI
+	6jH2Iqwa86usbxzm2WmL4ZNfyH1NYlkZnwrqzR2v2Bw5lwNBBCNhNtBWHkqMotHQIm
+	oGzbgtrN+Qph/Z2aMV6TzWjtrvJHqwkqcYZ3Iks9b93xjMfEj9aXttf45MwvXPndXB
+	6Um+K2LBLLoxkoJrBqM/uOo+sAmCeaWGtV1XYHc09/fGb3y18iP/hD0kETYsm2pu6N
+	i9GkYS+Mx/yhPYop223gaoXDIBuExU2bLC4EvyuzOXodFI4Ufe5sSVvnPBYHRbcoV0
+	1Nn2QFoQy6O+W3XxcZyS6K2462HvGLUb0/SNrwneeL0JDRbBt57xDJ6Wfyw1OuV+/Q
+	J53m469d5yx0OokHJattdu2c=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Aug 2019 15:06:35 +0300
-Message-Id: <20190812120636.22643-1-bunk@stusta.de>
+Date: Mon, 12 Aug 2019 15:06:36 +0300
+Message-Id: <20190812120636.22643-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gtkmathview: Remove, abiword was the last user
+In-Reply-To: <20190812120636.22643-1-bunk@stusta.de>
+References: <20190812120636.22643-1-bunk@stusta.de>
+Subject: [meta-oe][PATCH] t1lib: Remove, gtkmathview was the last user
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,339 +42,432 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 12:06:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 12 Aug 2019 12:06:37 -0000
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
 The recipe will be submitted to meta-office.
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
- ...formatting-for-modern-c-11-compilers.patch | 31 -------
- ...ude-cstdio-to-get-printf-definitions.patch | 28 ------
- ...der-detection-of-hash_map-is-broken-.patch | 63 -------------
- .../0003-gcc-6.0-build-fixes.patch            | 93 -------------------
- .../mml-widget/gtkmathview/use_hostcxx.patch  | 18 ----
- .../mml-widget/gtkmathview_0.8.0.bb           | 28 ------
- 7 files changed, 1 insertion(+), 262 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/0001-Fix-formatting-for-modern-c-11-compilers.patch
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/0001-include-cstdio-to-get-printf-definitions.patch
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/0002-configure.ac-header-detection-of-hash_map-is-broken-.patch
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/0003-gcc-6.0-build-fixes.patch
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/use_hostcxx.patch
- delete mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+ .../packagegroups/packagegroup-meta-oe.bb     |   2 +-
+ .../t1lib/t1lib-5.1.2/configure.patch         | 141 -----------------
+ .../t1lib/t1lib-5.1.2/format_security.patch   |  58 -------
+ .../t1lib/t1lib-5.1.2/libtool.patch           | 144 ------------------
+ meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb |  29 ----
+ 5 files changed, 1 insertion(+), 373 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
+ delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
+ delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
+ delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
 
 diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index f7eafe2e3..6a9592cfa 100644
+index 6a9592cfa..c77a1e54e 100644
 --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
 +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
 @@ -142,7 +142,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
      can-utils libsocketcan tipcutils tiptop \
      tmux uml-utilities upm vlock volume-key wipe zlog zram \
      ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim t1lib gnuplot libwmf gtkmathview", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim t1lib gnuplot libwmf", "", d)} \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim t1lib gnuplot libwmf", "", d)} \
++    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim gnuplot libwmf", "", d)} \
      ${@bb.utils.contains("DISTRO_FEATURES", "bluez", "collectd", "", d)} \
      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb", "", d)} \
      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-ssh-agent-auth openwsman sblim-sfcb ", "", d)} \
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-Fix-formatting-for-modern-c-11-compilers.patch b/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-Fix-formatting-for-modern-c-11-compilers.patch
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
 deleted file mode 100644
-index 8b0096630..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-Fix-formatting-for-modern-c-11-compilers.patch
+index 976e0380e..000000000
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
 +++ /dev/null
-@@ -1,31 +0,0 @@
--From 90411a7f5e0e9582e79f0a8ccc1e2f158615e451 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 19 May 2018 23:18:11 -0700
--Subject: [PATCH] Fix formatting for modern c++11 compilers
+@@ -1,141 +0,0 @@
+-From 81c1ba940415595584a837ab1078c64855072f0c Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 21 Nov 2011 12:00:54 +0100
+-Subject: [PATCH] t1lib: add 5.1.2
 -
--Fixes
--error: invalid suffix on literal; C++11 requires a space between literal and identifier [-Wreserved-user-defined-literal]
+-#
+-# Patch managed by http://www.holgerschurig.de/patcher.html
+-#
 -
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- src/backend/svg/SVG_RenderingContext.cc | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- configure.in | 95 ++++++++++++++++++++++++------------------------------------
+- 1 file changed, 38 insertions(+), 57 deletions(-)
 -
--diff --git a/src/backend/svg/SVG_RenderingContext.cc b/src/backend/svg/SVG_RenderingContext.cc
--index 55d6097..0d50702 100644
----- a/src/backend/svg/SVG_RenderingContext.cc
--+++ b/src/backend/svg/SVG_RenderingContext.cc
--@@ -68,7 +68,7 @@ void
-- SVG_RenderingContext::documentStart(const BoundingBox& bbox)
-- {
--   beginDocument(bbox);
---  metadata("Created by "PACKAGE" version "VERSION);
--+  metadata("Created by " PACKAGE " version " VERSION);
-- }
+-diff --git a/configure.in b/configure.in
+-index eade4c0..e649ea9 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -74,9 +74,9 @@ T1LIB_PATCHLEVEL=builtin(eval, MACRO_T1LIB_LT_REVISION)
+- T1LIB_VERSIONSTRING=\"MACRO_T1LIB_IDENTIFIER\"
 - 
-- void
---- 
--2.17.0
--
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-include-cstdio-to-get-printf-definitions.patch b/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-include-cstdio-to-get-printf-definitions.patch
-deleted file mode 100644
-index c5814bfe2..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview/0001-include-cstdio-to-get-printf-definitions.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From c92890c5e18bb6ee23bdb14074bacf306dd9428f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 5 May 2015 20:35:01 -0700
--Subject: [PATCH] include cstdio to get printf definitions
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/engine/boxml/BoxMLHOVElement.cc | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/engine/boxml/BoxMLHOVElement.cc b/src/engine/boxml/BoxMLHOVElement.cc
--index 1a2812c..96c9eea 100644
----- a/src/engine/boxml/BoxMLHOVElement.cc
--+++ b/src/engine/boxml/BoxMLHOVElement.cc
--@@ -21,7 +21,7 @@
-- // <http://www.gnu.org/licenses/>.
 - 
-- #include <config.h>
+--dnl We use this file by Andreas Zeller to check for libXaw
+--builtin(include, ac-tools/ice_find_athena.m4)
+--builtin(include, ac-tools/aclocal.m4)
+-+#dnl We use this file by Andreas Zeller to check for libXaw
+-+#builtin(include, ac-tools/ice_find_athena.m4)
+-+#builtin(include, ac-tools/aclocal.m4)
+- 
+- dnl We want these before the checks, so the checks can modify their values.
+- test -z "$LDLIBS" && LDLIBS=-lm   AC_SUBST(LDLIBS)
+-@@ -162,6 +162,7 @@ fi
+- 
+- dnl **** Check for underscore on external symbols ****
+- 
+-+AH_TEMPLATE([NEED_UNDERSCORE_PREFIX], [Define if external symbols need an underscore prefix])
+- AC_CACHE_CHECK("whether external symbols need an underscore prefix",
+-                ac_cv_c_extern_prefix,
+- [saved_libs=$LIBS
+-@@ -179,68 +180,48 @@ then
+-   AC_DEFINE(NEED_UNDERSCORE_PREFIX)
+- fi
+- 
+--dnl **** Check which ANSI integer type is 16 bit 
 --
--+#include <cstdio>
-- #include "BoxMLAttributeSignatures.hh"
-- #include "BoxMLHOVElement.hh"
-- #include "BoxMLHElement.hh"
---- 
--2.1.4
--
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview/0002-configure.ac-header-detection-of-hash_map-is-broken-.patch b/meta-oe/recipes-extended/mml-widget/gtkmathview/0002-configure.ac-header-detection-of-hash_map-is-broken-.patch
+--AC_CACHE_CHECK( "which ANSI integer type is 16 bit", ac_16bit_type,
+--		AC_TRY_RUN([
+--int main(void) {
+--  if (sizeof(short)==2)
+--    return(0);
+--  else if (sizeof(int)==2)
+--    return(1);
+--  else
+--    return(2);
+--}], ac_16bit_type="short", ac_16bit_type="int", ac_16bit_type=))
+--if test "$ac_16bit_type" = "short"
+--then
+--  T1_AA_TYPE16="-DT1_AA_TYPE16=short"
+--  T1_INT16="short"
+--else
+--  T1_AA_TYPE16="-DT1_AA_TYPE16=int"
+--  T1_INT16="int"
+-+dnl **** Check which ANSI integer type is 16 bit
+-+T1_AA_TYPE16=""
+-+for type in short int; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x2"; then
+-+		T1_AA_TYPE16="-DT1_AA_TYPE16=$type"
+-+		T1_INT16="$type"
+-+		break
+-+	fi
+-+done
+-+
+-+if test x"$T1_AA_TYPE16" = "x"; then
+-+	AC_MSG_ERROR("Unable to determine which integer type is 16 bit.")
+- fi
+- 
+--
+- dnl **** Check which ANSI integer type is 32 bit 
+--
+--AC_CACHE_CHECK( "which ANSI integer type is 32 bit", ac_32bit_type,
+--		AC_TRY_RUN([
+--int main(void) {
+--  if (sizeof(int)==4)
+--    return(0);
+--  else if (sizeof(long)==4)
+--    return(1);
+--  else
+--    return(2);
+--}], ac_32bit_type="int", ac_32bit_type="long", ac_32bit_type=))
+--if test "$ac_32bit_type" = "int"
+--then
+--  T1_AA_TYPE32="-DT1_AA_TYPE32=int"
+--  T1_INT32="int"
+--else
+--  T1_AA_TYPE32="-DT1_AA_TYPE32=long"
+--  T1_INT32="long"
+-+T1_AA_TYPE32=""
+-+for type in int long; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x4"; then
+-+		T1_AA_TYPE32="-DT1_AA_TYPE32=$type"
+-+		T1_INT32="$type"
+-+		break
+-+	fi
+-+done
+-+
+-+if test x"$T1_AA_TYPE32" = "x"; then
+-+	AC_MSG_ERROR("Unable to determine which integer type is 32 bit.")
+- fi
+- 
+--
+- dnl **** Check which ANSI integer type is 64 bit 
+--
+--AC_CACHE_CHECK( "which ANSI integer type is 64 bit", ac_64bit_type,
+--		AC_TRY_RUN([
+--int main(void) {
+--  if (sizeof(long)==8)
+--    return(0);
+--  else
+--    return(1);
+--}], ac_64bit_type="long", ac_64bit_type="<none>"))
+--if test "$ac_64bit_type" = "long"
+--then
+--  T1_AA_TYPE64="-DT1_AA_TYPE64=long"
+--else
+--  T1_AA_TYPE64=
+-+T1_AA_TYPE64=""
+-+for type in long long_long; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x8"; then
+-+		AC_MSG_WARN("$type is 64 bit")
+-+		T1_AA_TYPE64="-DT1_AA_TYPE64=\"`echo $type|tr '_' ' '`\""
+-+		break
+-+	fi
+-+done
+-+
+-+if test x"$T1_AA_TYPE64" = "x"; then
+-+	AC_MSG_ERROR("Unable to determine which integer type is 64 bit.")
+- fi
+- 
+--
+- CFLAGS="${CFLAGS} -DT1LIB_IDENT=\"\\\"${T1LIB_IDENTIFIER}\\\"\" -DGLOBAL_CONFIG_DIR=\"\\\"${T1LIB_DATA_DIR}\\\"\""
+- 
+- dnl **** Check for functions and header files ****
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
 deleted file mode 100644
-index b879d6a51..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview/0002-configure.ac-header-detection-of-hash_map-is-broken-.patch
+index bc2476bfc..000000000
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
 +++ /dev/null
-@@ -1,63 +0,0 @@
--From 9c226fbc6a42540cb492fcfcb81ff16fffb086d6 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Tue, 30 Aug 2016 23:24:53 +0200
--Subject: [PATCH] configure.ac: header detection of hash_map is broken - pin to
-- correct implementation
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,58 +0,0 @@
+-From cea83003de3ffebde92becd1e599fe3b28f0a7c4 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 6 Mar 2017 23:13:36 -0800
+-Subject: [PATCH] t1lib: Fix printf format string errors
 -
+-Fix printf formats to use format qualifiers
+-fixes
+-
+-error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 -Upstream-Status: Pending
 -
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ----
-- configure.ac | 31 ++++---------------------------
-- 1 file changed, 4 insertions(+), 27 deletions(-)
+- lib/t1lib/t1subset.c | 2 +-
+- lib/type1/objects.c  | 2 +-
+- lib/type1/objects.h  | 2 +-
+- 3 files changed, 3 insertions(+), 3 deletions(-)
 -
--diff --git a/configure.ac b/configure.ac
--index 4f2118e..16c09d5 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -252,35 +252,12 @@ AC_SUBST(GTKMATHVIEW_SIZEOF_WCHAR_T, "$ac_cv_sizeof_wchar_t")
-- 
-- AC_LANG_PUSH(C++)
-- 
---AC_CHECK_HEADERS(unordered_map,
---	[
---		AC_DEFINE(GMV_HAVE_UNORDERED_MAP,1,[Define if <unordered_map> is provided])
---		GMV_HAVE_UNORDERED_MAP_CFLAGS=-DGMV_HAVE_UNORDERED_MAP=1
---	],
---	[
---		GMV_HAVE_UNORDERED_MAP_CFLAGS=
---	]
---)
--+GMV_HAVE_UNORDERED_MAP_CFLAGS=
-- AC_SUBST(GMV_HAVE_UNORDERED_MAP_CFLAGS)
---AC_CHECK_HEADERS(hash_map,
---	[
---		AC_DEFINE(GMV_HAVE_HASH_MAP,1,[Define if <hash_map> is provided])
---		GMV_HAVE_HASH_MAP_CFLAGS=-DGMV_HAVE_HASH_MAP=1
---	],
---	[
---		GMV_HAVE_HASH_MAP_CFLAGS=
---	]
---)
--+GMV_HAVE_HASH_MAP_CFLAGS=
-- AC_SUBST(GMV_HAVE_HASH_MAP_CFLAGS)
---AC_CHECK_HEADERS(ext/hash_map,
---	[
---		AC_DEFINE(GMV_HAVE_EXT_HASH_MAP,1,[Define if <ext/hash_map> is provided])
---		GMV_HAVE_EXT_HASH_MAP_CFLAGS=-DGMV_HAVE_EXT_HASH_MAP=1
---	],
---	[
---		GMV_HAVE_EXT_HASH_MAP_CFLAGS=
---	]
---)
--+AC_DEFINE(GMV_HAVE_EXT_HASH_MAP,1,[Define if <ext/hash_map> is provided])
--+GMV_HAVE_EXT_HASH_MAP_CFLAGS=-DGMV_HAVE_EXT_HASH_MAP=1
-- AC_SUBST(GMV_HAVE_EXT_HASH_MAP_CFLAGS)
-- 
-- AC_MSG_CHECKING([whether the C++ compiler supports the standard character traits])
---- 
--2.5.5
--
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview/0003-gcc-6.0-build-fixes.patch b/meta-oe/recipes-extended/mml-widget/gtkmathview/0003-gcc-6.0-build-fixes.patch
-deleted file mode 100644
-index 356274d17..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview/0003-gcc-6.0-build-fixes.patch
-+++ /dev/null
-@@ -1,93 +0,0 @@
--From: Gert Wollny <gw.fossdev@gmail.com>
--Date: Sun, 26 Jun 2016 13:25:00 +0200
--Description: gcc 6.0 build fixes
--Bug: https://bugs.debian.org/811682
--
--Slightly adapted to our environment
--
--Upstream-Status: Pending
--
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----- a/src/engine/common/View.cc
--+++ b/src/engine/common/View.cc
--@@ -291,7 +291,7 @@
-- 	  }
--     }
-- 
---  return false;
--+  return SmartPtr<Element>();
-- }
-- 
-- bool
----- a/src/backend/common/tfm/TFM.hh
--+++ b/src/backend/common/tfm/TFM.hh
--@@ -37,7 +37,7 @@
--     unsigned char face;
--     const char* codingScheme;
--     int designSize;
---    int checksum;
--+    unsigned int checksum;
--     unsigned int nDimensions;
--     unsigned int nCharacters;
--   };
--@@ -52,7 +52,7 @@
--   struct Kerning
--   {
--     UChar8 index;
---    int value;
--+    unsigned int value;
--   };
-- 
--   struct Ligature
--@@ -67,7 +67,7 @@
--     UChar8 index;
--     int width;
--     int height;
---    int depth;
--+    unsigned int depth;
--     int italicCorrection;
--     unsigned char nKernings;
--     const Kerning* kerning;
----- a/src/backend/common/StandardSymbolsShaper.hh
--+++ b/src/backend/common/StandardSymbolsShaper.hh
--@@ -32,20 +32,20 @@
--   struct HStretchyChar
--   {
--     Char16 ch;
---    Char8 normal;
---    Char8 left;
---    Char8 glue;
---    Char8 right;
--+    UChar8 normal;
--+    UChar8 left;
--+    UChar8 glue;
--+    UChar8 right;
--   };
+-diff --git a/lib/t1lib/t1subset.c b/lib/t1lib/t1subset.c
+-index da427b2..e76974f 100644
+---- a/lib/t1lib/t1subset.c
+-+++ b/lib/t1lib/t1subset.c
+-@@ -759,7 +759,7 @@ char *T1_SubsetFont( int FontID,
+- 	     tr_len);
+-     T1_PrintLog( "T1_SubsetFont()", err_warn_msg_buf,
+- 		 T1LOG_DEBUG);
+--    l+=sprintf( &(trailerbuf[l]), linebuf); /* contains the PostScript trailer */
+-+    l+=sprintf( &(trailerbuf[l]), "%s", linebuf); /* contains the PostScript trailer */
+-   }
 -   
--   struct VStretchyChar
--   {
--     Char16 ch;
---    Char8 normal;
---    Char8 top;
---    Char8 glue;
---    Char8 middle;
---    Char8 bottom;
--+    UChar8 normal;
--+    UChar8 top;
--+    UChar8 glue;
--+    UChar8 middle;
--+    UChar8 bottom;
--   };
-- 
-- protected:
----- a/src/backend/common/StandardSymbolsShaper.cc
--+++ b/src/backend/common/StandardSymbolsShaper.cc
--@@ -29,7 +29,7 @@
-- #include "ShapingContext.hh"
-- 
-- struct GlyphMap {
---  Char8 index;
--+  UChar8 index;
--   Char16 ch;
-- };
-- 
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview/use_hostcxx.patch b/meta-oe/recipes-extended/mml-widget/gtkmathview/use_hostcxx.patch
+-   /* compute size of output file */
+-diff --git a/lib/type1/objects.c b/lib/type1/objects.c
+-index c413a0f..f828e6a 100644
+---- a/lib/type1/objects.c
+-+++ b/lib/type1/objects.c
+-@@ -957,7 +957,7 @@ struct xobject *TypeErr(name, obj, expect, ret) /* non-ANSI avoids overly strict
+-  
+-        sprintf(typemsg, "Wrong object type in %s; expected %s, found %s.\n",
+-                   name, TypeFmt(expect), TypeFmt(obj->type));
+--       IfTrace0(TRUE,typemsg);
+-+       IfTrace1(TRUE, "%s", typemsg);
+-  
+-        ObjectPostMortem(obj);
+-  
+-diff --git a/lib/type1/objects.h b/lib/type1/objects.h
+-index 13cbae7..3a1d337 100644
+---- a/lib/type1/objects.h
+-+++ b/lib/type1/objects.h
+-@@ -214,7 +214,7 @@ struct xobject {
+- /*SHARED*/
+- /* NDW: personally, I want to see status and error messages! */
+- #define IfTrace0(condition,model)                                 \
+--        {if (condition) printf(model);}
+-+        {if (condition) fputs(model,stdout);}
+- #define IfTrace1(condition,model,arg0)                            \
+-         {if (condition) printf(model,arg0);}
+- #define IfTrace2(condition,model,arg0,arg1)                       \
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
 deleted file mode 100644
-index 3fe632860..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview/use_hostcxx.patch
+index da54f87ab..000000000
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
 +++ /dev/null
-@@ -1,18 +0,0 @@
--Use build_cc to compile the programs to run on build host
--helps with cross compiling
+@@ -1,144 +0,0 @@
+-From bab41f5e1fc1fc809da1371e6a0222e0eb21e5f0 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 21 Nov 2011 12:00:54 +0100
+-Subject: [PATCH] t1lib: add 5.1.2
 -
--Upstream-Status: Inappropriate [Cross-compiled OE specific]
+-#
+-# Patch managed by http://www.holgerschurig.de/patcher.html
+-#
 -
--diff --git a/src/common/mathvariants/Makefile.am b/src/common/mathvariants/Makefile.am
--index 636ccf0..ed9921d 100644
----- a/src/common/mathvariants/Makefile.am
--+++ b/src/common/mathvariants/Makefile.am
--@@ -52,7 +52,7 @@ XSLTPROC = xsltproc
-- %.cc : %_gen.cc $(srcdir)/variant.top $(srcdir)/variant.bot
-- 	cat $(srcdir)/variant.top >$@
-- 	$(XSLTPROC) --novalid --param temp "false()" $(srcdir)/extract.xsl $(<:%_gen.cc=$(srcdir)/xml/%.xml) >>$@
---	$(CXX) -o $(@:%.cc=%) -I$(top_builddir)/auto $<
--+	$(BUILD_CXX) -o $(@:%.cc=%) -I$(top_builddir)/auto $<
-- 	echo "Char32 " >>$@
-- 	basename map_variant_$@ .cc | tr "-" "_" >>$@
-- 	echo "(Char32 ch)" >>$@
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+----
+- Makefile.in           | 5 +++--
+- examples/Makefile.in  | 5 +++--
+- lib/Makefile.in       | 6 ++++--
+- lib/t1lib/Makefile.in | 6 ++++--
+- lib/type1/Makefile.in | 6 ++++--
+- type1afm/Makefile.in  | 6 ++++--
+- xglyph/Makefile.in    | 6 ++++--
+- 7 files changed, 26 insertions(+), 14 deletions(-)
+-
+-diff --git a/Makefile.in b/Makefile.in
+-index 29c3468..396c020 100644
+---- a/Makefile.in
+-+++ b/Makefile.in
+-@@ -18,7 +18,8 @@
+- # Last modified:       2005-05-01
+- #
+- 
+--SHELL     = /bin/sh
+-+SHELL     = @SHELL@
+-+LIBTOOL   = @LIBTOOL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-@@ -149,7 +150,7 @@ distclean: clean
+- 	$(RM) examples/Makefile
+- 	$(RM) xglyph/Makefile
+- 	$(RM) doc/Makefile
+--	$(RM) libtool
+-+	$(RM) $(LIBTOOL)
+- 
+- 
+- # The following two targets are for building and cleaning the python-
+-diff --git a/examples/Makefile.in b/examples/Makefile.in
+-index b301db5..7a6a514 100644
+---- a/examples/Makefile.in
+-+++ b/examples/Makefile.in
+-@@ -14,9 +14,10 @@
+- # Last modified:       2001-04-01
+- #
+- 
+-+top_builddir = @top_builddir@
+- 
+--LIBTOOL   = ../libtool
+--SHELL     = /bin/sh
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-diff --git a/lib/Makefile.in b/lib/Makefile.in
+-index 89e5e86..6e0f960 100644
+---- a/lib/Makefile.in
+-+++ b/lib/Makefile.in
+-@@ -15,8 +15,10 @@
+- #
+- # Contributions by H.Kakugawa to use libtool!
+- 
+--LIBTOOL   = ../libtool
+--SHELL     = /bin/sh
+-+top_builddir = @top_builddir@
+-+
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-diff --git a/lib/t1lib/Makefile.in b/lib/t1lib/Makefile.in
+-index a6c2478..32434b3 100644
+---- a/lib/t1lib/Makefile.in
+-+++ b/lib/t1lib/Makefile.in
+-@@ -14,8 +14,10 @@
+- #
+- # Modified by H.Kakugawa to use libtool
+- 
+--LIBTOOL   = ../../libtool
+--SHELL     = /bin/sh
+-+top_builddir = @top_builddir@
+-+
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-diff --git a/lib/type1/Makefile.in b/lib/type1/Makefile.in
+-index 241f124..42efa94 100644
+---- a/lib/type1/Makefile.in
+-+++ b/lib/type1/Makefile.in
+-@@ -14,8 +14,10 @@
+- #
+- # Modified by H.Kakugawa to use libtool
+- 
+--LIBTOOL   = ../../libtool
+--SHELL     = /bin/sh
+-+top_builddir = @top_builddir@
+-+
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-diff --git a/type1afm/Makefile.in b/type1afm/Makefile.in
+-index 61611e1..9b51406 100644
+---- a/type1afm/Makefile.in
+-+++ b/type1afm/Makefile.in
+-@@ -15,8 +15,10 @@
+- #
+- # Modified by H.Kakugawa to use libtool
+- 
+--LIBTOOL   = ../libtool
+--SHELL     = /bin/sh
+-+top_builddir = @top_builddir@
+-+
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+-diff --git a/xglyph/Makefile.in b/xglyph/Makefile.in
+-index 8da9b63..741334c 100644
+---- a/xglyph/Makefile.in
+-+++ b/xglyph/Makefile.in
+-@@ -15,8 +15,10 @@
+- #
+- # Modified by H.Kakugawa to use libtool
+- 
+--LIBTOOL   = ../libtool
+--SHELL     = /bin/sh
+-+top_builddir = @top_builddir@
+-+
+-+LIBTOOL   = @LIBTOOL@
+-+SHELL     = @SHELL@
+- CC        = @CC@
+- CPP       = @CPP@
+- CFLAGS    = @CFLAGS@
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb b/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
 deleted file mode 100644
-index 9ee9e3035..000000000
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+index 826dbda85..000000000
+--- a/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
 +++ /dev/null
-@@ -1,28 +0,0 @@
--HOMEPAGE = "http://helm.cs.unibo.it/mml-widget/"
--DEPENDS = "t1lib gtk+ popt libxslt-native libxml2"
+@@ -1,29 +0,0 @@
+-SUMMARY = "A Type1 Font Rastering Library"
+-SECTION = "libs"
+-DEPENDS = "virtual/libx11 libxaw"
 -
--LICENSE = "LGPLv3"
--LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
--
--PR = "r3"
--SRCREV = "0bc2cfa0a47aed2c8a63abd989cb8da4dcceb2ec"
--PV = "0.8.0+git${SRCPV}"
--
--SRC_URI = "git://github.com/GNOME/gtkmathview.git \
--    file://use_hostcxx.patch \
--    file://0001-include-cstdio-to-get-printf-definitions.patch \
--    file://0002-configure.ac-header-detection-of-hash_map-is-broken-.patch \
--    file://0003-gcc-6.0-build-fixes.patch \
--    file://0001-Fix-formatting-for-modern-c-11-compilers.patch \
+-LICENSE = "LGPLv2 & GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8ca43cbc842c2336e835926c2166c28b \
+-                    file://LGPL;md5=6e29c688d912da12b66b73e32b03d812 \
 -"
 -
--S = "${WORKDIR}/git"
+-SRC_URI = "${DEBIAN_MIRROR}/main/t/t1lib/t1lib_${PV}.orig.tar.gz \
+-           file://configure.patch \
+-           file://libtool.patch \
+-           file://format_security.patch"
+-SRC_URI[md5sum] = "a5629b56b93134377718009df1435f3c"
+-SRC_URI[sha256sum] = "821328b5054f7890a0d0cd2f52825270705df3641dbd476d58d17e56ed957b59"
 -
--inherit distro_features_check autotools pkgconfig
--
+-inherit autotools-brokensep distro_features_check
+-# depends on virtual/libx11
 -REQUIRED_DISTRO_FEATURES = "x11"
 -
--do_configure_append() {
--    # avoid host polution inf pkg-config files
--    sed -i "s:${STAGING_DIR_HOST}::g" `find -name '*.pc'`
--}
+-# Fix GNU_HASH problem
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+-EXTRA_OECONF = "--with-x --without-athena"
+-EXTRA_OEMAKE = "without_doc"
+-
+-FILES_${PN} += " ${datadir}/t1lib/t1lib.config"
+-FILES_${PN}-doc = "${datadir}/t1lib/doc/t1lib_doc.pdf"
+-
 -- 
 2.17.1
 
