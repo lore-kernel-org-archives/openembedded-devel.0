@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 4969B7D3B1
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C82C57E71B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 07:34:19 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id g67so10855629wme.1
+	Mon, 12 Aug 2019 07:34:34 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id m125so6794315wmm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 00:34:20 -0700 (PDT)
+	Mon, 12 Aug 2019 00:34:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=hm9w1vxusCnivyr74sG2O7vkJdekyNKhyqclWDtOY9A=;
-	b=l2F6q5qzX8zPHvesohEFSYP32gMYSPXMGTFeb+sLXqL/8DCKFpokS78FuOegUQTL40
-	8Bhmf4Z6F9L0Kh7173J9dpsJy7wJp95Kk6YCkOWP4Y2w8vtdxYQbcis0aDydIeSbKtwQ
-	zuFkDcfBX7q0ncDB9Tp/Mq8OlJ/b9JZg5kZKYXZxu/uJG/HbzqQXxpBZVQze5roFefYQ
-	9IH4st0vGtzbYtyclWPFUJ8llAMkXZn6m0ZRgQeyS4KhqHKuBlYfzgZLXBgj5vZZE0NT
-	Zc9mdBUSjCkMjpgK2MH7IIorBlkDBsjAUMsn3b3BXOkQnaTKnhlk74kn6iBKMCMd3E7D
-	/pIg==
+	bh=Lc6WDTOjYl4h2DWF49ymn+u92y1JmiuPoUoEWZVqcbY=;
+	b=CtRqFBcNwjoyK5PO3oevD/h1ffkW9XBwYzok4rlOPZGtfaH+HJfTvGlDCtAO8cl/mM
+	YNfLnBeMdD1C1pZpL4ZC0VAIAoA3Aiv7mEN3Ok/Cgn9J8q3ukxNi0sbvbR46igb6op8B
+	BnhxWlDtNpsSRrLnKGYkHmbjujk7Pb/wZNY2UFk13GfbwS9PK477Z0KnHWMxT9ZfkfRU
+	ANIuc5Fi7V+hnqwSaLN3nBnha08hBAo2A7uH+9PCN7k5DHOf6OSRvPcWMthpGTVnFlNZ
+	STy4f5RG7PWS/A9Eb6ewxIGvjP6I7x3wvkx4yg3oQNZKLfrtdEmMGNCR48ehd0qFvnZ9
+	VCww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hm9w1vxusCnivyr74sG2O7vkJdekyNKhyqclWDtOY9A=;
-	b=LN2OmXOmVGBU+7PfBVhjtnsL/15f+PG6pOhKz6sLVb66WxwMtxXTs7NmBYfLootctz
-	9lpH/ytcxZhF6z8h5bNOhGZv5SU4V4P3iQqCzp3tck/K/j8ARupOMTReUEKrBas8Ozka
-	mHXbBFfGRCtL8xKsX8lmFS7tCHx7TWpCc2cyonOcEtDpFv1TTv9MV1sdXdVpZ566NuKc
-	9F+jn0KjDrqvaa08M8Dv8NruSkEBJzjg9FLTNLzO38db+bgaDzl2lDPuU9C1JK1NyNWQ
-	5pLKt9AxURRNHLO5K49BcaAkFGdYieI9f7bkC+jgShqXbdLxjI1tm37H+jYOrNT98Nu1
-	icSQ==
-X-Gm-Message-State: APjAAAWOlSoWnjJcjJ5XEmoUR4nPG8bF0RctwBw/za7AEdQsgSAkUKTj
-	sFngU+U2noS189Na0GxzyUUpvSJ+
-X-Google-Smtp-Source: APXvYqxxgXXagp7G3dr5deL0gToq+8HXk/miu7rP0Iek3o+3wGp1J/qtmbt/86EMP1tbLJRSzZ9eZw==
-X-Received: by 2002:a1c:f618:: with SMTP id w24mr20035773wmc.112.1565595259584;
-	Mon, 12 Aug 2019 00:34:19 -0700 (PDT)
+	bh=Lc6WDTOjYl4h2DWF49ymn+u92y1JmiuPoUoEWZVqcbY=;
+	b=f6X6IoxZMVxhIHOK5pVaiaiwuLf5gHm5tUw5q3cLFpESEipo8luqtwaw62b/7eSmQ7
+	76+kuKMIMrl1qo1MOFMECYkkU3s+LSRkjQjvHWgAH0OWJFYLXZGYUFBDulP/vTa3Orcn
+	kJqfwYi0G+B4WxXt1z++/LAC5JXrGz+/Lc3amOGMi7SdobQTd0TXcRCL7T4ZTuAHpLsM
+	b6EWtWsWYo2MtTARYdvPRoW3TaAa9vX599/Oj3B4r8rDXfZluJNeQt96+wMJfTVTIZ0L
+	ex09M+r1Ty789s8r1AaC5PRv+r3mGMjTTdU3La5tmi1rusqJZV6Hpqoxjps+XXf2alJL
+	m2Mg==
+X-Gm-Message-State: APjAAAXLK5ZshDiP7rU53Slcr9Rr1jY0Qv26Ge+Px/8FjTDWjVEG/Qgy
+	xQvw7mrNtG6Mc1mMFEO6yLSx3aIO
+X-Google-Smtp-Source: APXvYqzRH+JMr66s6fOjwNFyNgZzfAOOlRSnjMxBKtJ5kA9Ef/CSHnseFRZMWf3YJZOJtWI+donomQ==
+X-Received: by 2002:a1c:770d:: with SMTP id t13mr993979wmi.27.1565595275217;
+	Mon, 12 Aug 2019 00:34:35 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	h97sm29210551wrh.74.2019.08.12.00.34.18
+	j16sm60097315wrp.62.2019.08.12.00.34.34
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 12 Aug 2019 00:34:19 -0700 (PDT)
+	Mon, 12 Aug 2019 00:34:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Aug 2019 07:34:17 +0000
-Message-Id: <20190812073417.21-1-Martin.Jansa@gmail.com>
+Date: Mon, 12 Aug 2019 07:34:32 +0000
+Message-Id: <20190812073432.68-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] redis: backport a fix for stack trace generation on aarch64
+Subject: [meta-networking][PATCH] ntop: fix missing return from non-void function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,78 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 07:34:19 -0000
+X-List-Received-Date: Mon, 12 Aug 2019 07:34:35 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...ed-stack-trace-generation-on-aarch64.patch | 45 +++++++++++++++++++
- .../recipes-extended/redis/redis_4.0.14.bb    |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+ ...issing-return-from-non-void-function.patch | 19 +++++++++++++++++++
+ .../recipes-support/ntop/ntop_5.0.1.bb        |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch b/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+diff --git a/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch b/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
 new file mode 100644
-index 0000000000..82ca307391
+index 0000000000..e627e59a59
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
-@@ -0,0 +1,45 @@
-+From c8ca71d40bc51e255457cd4374dd45ec9ebf8ae1 Mon Sep 17 00:00:00 2001
-+From: Jun He <jun.he@arm.com>
-+Date: Mon, 3 Jul 2017 07:18:32 +0000
-+Subject: [PATCH] Fixed stack trace generation on aarch64
++++ b/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
+@@ -0,0 +1,19 @@
++Fix following error:
 +
-+Change-Id: I9801239c98cb7362ed07e8b9ec2ba7e45749dba7
-+Signed-off-by: Jun He <jun.he@arm.com>
++netflowPlugin.c: In function 'netflowUtilsLoop':
++netflowPlugin.c:2144:1: error: no return statement in function returning non-void [-Werror=return-type]
++ 2144 | }
++      | ^
 +
-+* fixes also this error when building with -Werror=return-type:
-+  debug.c:698:1: error: no return statement in function returning non-void [-Werror=return-type]
++Return NULL like netflowMainLoop does.
 +
-+Upstream-Status: Backport [https://github.com/antirez/redis/commit/c8ca71d40bc51e255457cd4374dd45ec9ebf8ae1]
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/Makefile | 2 +-
-+ src/debug.c  | 2 ++
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index 24e960593eb..a1ff4258a9d 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -40,7 +40,7 @@
-+ endif
++--- ntop-5.0.1.orig/plugins/netflowPlugin.c	2012-03-09 17:44:17.000000000 +0000
+++++ ntop-5.0.1/plugins/netflowPlugin.c	2019-08-09 10:25:40.878799852 +0000
++@@ -2141,6 +2141,7 @@
++       waitCondvar(&myGlobals.device[deviceId].netflowGlobals->ifStatsQueueCondvar);
++     }
++   }
+++  return(NULL);
++ }
++ #endif
 + 
-+ # To get ARM stack traces if Redis crashes we need a special C flag.
-+-ifneq (,$(findstring armv,$(uname_M)))
-++ifneq (,$(filter aarch64 armv,$(uname_M)))
-+         CFLAGS+=-funwind-tables
-+ endif
-+ 
-+diff --git a/src/debug.c b/src/debug.c
-+index a4caa49f285..c976d0ed919 100644
-+--- a/src/debug.c
-++++ b/src/debug.c
-+@@ -691,6 +691,8 @@
-+     return (void*) uc->uc_mcontext.sc_ip;
-+     #elif defined(__arm__) /* Linux ARM */
-+     return (void*) uc->uc_mcontext.arm_pc;
-++    #elif defined(__aarch64__) /* Linux AArch64 */
-++    return (void*) uc->uc_mcontext.pc;
-+     #endif
-+ #else
-+     return NULL;
-diff --git a/meta-oe/recipes-extended/redis/redis_4.0.14.bb b/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-index 63ab44b6a4..5df5312a0f 100644
---- a/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-+++ b/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-@@ -10,6 +10,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://hiredis-use-default-CC-if-it-is-set.patch \
-            file://lua-update-Makefile-to-use-environment-build-setting.patch \
-            file://oe-use-libc-malloc.patch \
-+           file://Fixed-stack-trace-generation-on-aarch64.patch \
-            file://redis.conf \
-            file://init-redis-server \
-            file://redis.service \
+diff --git a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+index 2a7a7f2cb0..80f009b7c3 100644
+--- a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
++++ b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+@@ -18,6 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ntop/ntop-${PV}.tar.gz \
+            file://use-static-inline.patch \
+            file://0001-nDPI-Include-sys-types.h.patch \
+            file://0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch \
++           file://fix-missing-return-from-non-void-function.patch \
+           "
+ SRC_URI[md5sum] = "01710b6925a8a5ffe1a41b8b512ebd69"
+ SRC_URI[sha256sum] = "7e8e84cb14d2173beaca4d4cb991a14d84a4bef84ec37b2276bc363f45c52ef8"
 -- 
 2.17.1
 
