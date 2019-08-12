@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 398326058C
+	by mail.openembedded.org (Postfix) with ESMTP id 684577E797
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 06:03:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,376,1559491200"; d="scan'208";a="73487676"
+	Mon, 12 Aug 2019 06:03:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,376,1559491200"; d="scan'208";a="73487741"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Aug 2019 14:03:01 +0800
+	by heian.cn.fujitsu.com with ESMTP; 12 Aug 2019 14:03:56 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 194A34CE030F
+	by cn.fujitsu.com (Postfix) with ESMTP id 5946B4CE030F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 14:03:01 +0800 (CST)
+	Mon, 12 Aug 2019 14:03:58 +0800 (CST)
 Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 12 Aug 2019 14:03:03 +0800
+	Server (TLS) id 14.3.439.0; Mon, 12 Aug 2019 14:04:00 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 Aug 2019 14:02:19 +0800
-Message-ID: <20190812060219.29267-1-zangrc.fnst@cn.fujitsu.com>
+Date: Mon, 12 Aug 2019 14:03:17 +0800
+Message-ID: <20190812060317.29326-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 194A34CE030F.A9958
+X-yoursite-MailScanner-ID: 5946B4CE030F.A96BF
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-configparser: upgrade 3.7.4 -> 3.8.1
+Subject: [meta-python] [PATCH] python-lxml: upgrade 4.4.0 -> 4.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 06:03:13 -0000
+X-List-Received-Date: Mon, 12 Aug 2019 06:03:57 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -45,35 +45,36 @@ From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
 Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-configparser.inc           | 4 ++--
- .../{python-configparser_3.7.4.bb => python-configparser_3.8.1.bb}    | 0
- .../{python3-configparser_3.7.4.bb => python3-configparser_3.8.1.bb}  | 0
+ meta-python/recipes-devtools/python/python-lxml.inc                   | 4 ++--
+ .../python/{python-lxml_4.4.0.bb => python-lxml_4.4.1.bb}             | 0
+ .../python/{python3-lxml_4.4.0.bb => python3-lxml_4.4.1.bb}           | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-configparser_3.7.4.bb => python-configparser_3.8.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-configparser_3.7.4.bb => python3-configparser_3.8.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-lxml_4.4.0.bb => python-lxml_4.4.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_4.4.0.bb => python3-lxml_4.4.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-configparser.inc b/meta-python/recipes-devtools/python/python-configparser.inc
-index 2860989..7f4385e 100644
---- a/meta-python/recipes-devtools/python/python-configparser.inc
-+++ b/meta-python/recipes-devtools/python/python-configparser.inc
-@@ -5,7 +5,7 @@ LICENSE = "unknown"
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+index 45e52b5..a97167f 100644
+--- a/meta-python/recipes-devtools/python/python-lxml.inc
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
  
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
+ DEPENDS += "libxml2 libxslt"
  
--SRC_URI[md5sum] = "aaa80b58b6b0810e54f66486860b3ed1"
--SRC_URI[sha256sum] = "da60d0014fd8c55eb48c1c5354352e363e2d30bbf7057e5e171a468390184c75"
-+SRC_URI[md5sum] = "bc1558ed941cb1acb80ff650726d5af8"
-+SRC_URI[sha256sum] = "bc37850f0cc42a1725a796ef7d92690651bf1af37d744cc63161dac62cabee17"
+-SRC_URI[md5sum] = "7d585daedcd51011c3217a61982afd3d"
+-SRC_URI[sha256sum] = "3b57dc5ed7b6a7d852c961f2389ca99404c2b59fd2088baec6fbaca02f688be4"
++SRC_URI[md5sum] = "ce976a2d3c630d7fde86d3a4c3a1c606"
++SRC_URI[sha256sum] = "c81cb40bff373ab7a7446d6bbca0190bccc5be3448b47b51d729e37799bb5692"
  
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-configparser_3.7.4.bb b/meta-python/recipes-devtools/python/python-configparser_3.8.1.bb
+ DISTUTILS_BUILD_ARGS += " \
+                      --with-xslt-config='pkg-config libxslt' \
+diff --git a/meta-python/recipes-devtools/python/python-lxml_4.4.0.bb b/meta-python/recipes-devtools/python/python-lxml_4.4.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-configparser_3.7.4.bb
-rename to meta-python/recipes-devtools/python/python-configparser_3.8.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-configparser_3.7.4.bb b/meta-python/recipes-devtools/python/python3-configparser_3.8.1.bb
+rename from meta-python/recipes-devtools/python/python-lxml_4.4.0.bb
+rename to meta-python/recipes-devtools/python/python-lxml_4.4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.4.0.bb b/meta-python/recipes-devtools/python/python3-lxml_4.4.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-configparser_3.7.4.bb
-rename to meta-python/recipes-devtools/python/python3-configparser_3.8.1.bb
+rename from meta-python/recipes-devtools/python/python3-lxml_4.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_4.4.1.bb
 -- 
 2.7.4
 
