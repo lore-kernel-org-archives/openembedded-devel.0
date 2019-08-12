@@ -1,53 +1,42 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id A312B7D3A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 22:32:26 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id 31so103057449wrm.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 15:32:28 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
+	[209.85.222.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 15BBF6BCDC
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Aug 2019 04:05:46 +0000 (UTC)
+Received: by mail-qk1-f178.google.com with SMTP id g17so5392110qkk.8
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Aug 2019 21:05:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zDBCB1o1GBe3MmpYMkgYyiiFB/AHM/fcFZ/taTM/3+4=;
-	b=GMpId+Mkeo5vVMK5S8zRHijzsFEyC9HZs1UZifVKJyqlrGROgcZ5yfzxlV3opRnn3Z
-	AF86eY6iPTcEzDnb/TlwPTdkROF/s1gnpLXkReyFQsnt9krSWQc8BlQJSgBK9k0pPN+K
-	ivIIvDmnz8S4iNwGmSqCD1BRptpwQizTrd+q1FkAKEnCRKb0I1RLr5aQUjcL43BBfyZ2
-	A/LKPKV818yvM03lR63H2q2omD2C2fX75PhdRkWrlXJrwMHGI8FZRNAlEy7Xpre/OVYv
-	0u6UUPLr6YjPps8n5hF/kSch6JNaJUe1IntefuX2ZuUh1Gt+CYY/BfmuBNucZP0CiBZk
-	vi+w==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=zBo85f14BW17WiaKqVHf1GV6NnaHdG6c/ZJkSrtmUlI=;
+	b=OS3AD8KivrIA62MEg64lvUiv1mSK/sXFnbSIdEMhIhgZLmQ8O0n87LGxjQ2LYCt1qe
+	Op/Hs+LD9nggTszsq8TxZXUk5dFgu3biLB6fAWZLc/+IVgEJCvEMAt3Yh9NdgHhWJmz0
+	EfwGULxxD/pPc6S5JFaCAAmJ7spwTWtkMbUl2ZLIhegGfgxlFw03eEM7SifFxCEgWMYL
+	shUyj/u9f0thPCqQnZXTg1nTJH2Wpj0iFbbkz6k4HymKdaPWW6ingk4hUXwWiTxknCQ3
+	FTkJYKq050qEG7UOnLLZFy49ztLe+EztOHOFjXs5UvvjVF88h4xfky5/Ybj9UKrd0uTH
+	quGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zDBCB1o1GBe3MmpYMkgYyiiFB/AHM/fcFZ/taTM/3+4=;
-	b=G7EyfQ1psBYAgMqUKfF++71mL4A8eS+Ac0Py8yajx2h3UEGaZXK0htk1PR84Qgkya/
-	iiHmD63AXj/ePamqdHz8aQL1xcp8z219AKmysulw7ld3ub/1N1uh7LseuDbyB0BkrYz9
-	2AydRoCM0EnG7LSHEth/5l69vNUngDTNucqUa3Bp+PYM8A1yun03it+YQ24i2+GUqDWi
-	9JMSSJanJ8Tfe5LdyhfEqHNdwgn2GI/Z3gpkkCWKkwks31qXqr9qSHg7d/8X8dyEMQkJ
-	XTiMPdln9hvkRp1SzbH4BDGkkdyAIc664BDvVfqqzMJNGN5/ygRv+/YETDzE7FIC8cLv
-	6UwA==
-X-Gm-Message-State: APjAAAVu9ipdu9JqVx1gg6lp8yQzNTgGNzx1AWLRlb77EE87YfbvVPnd
-	zyh8qw7FFPpzeYuMdO5me1HoLW+j
-X-Google-Smtp-Source: APXvYqyFdGQiIH5EtQZA+JbJcZssJ7q7Q0tWPbdWgr0EIq6yo7CqY8WQUr5H6GPGN77SvOc2id7zTg==
-X-Received: by 2002:a5d:6b84:: with SMTP id n4mr28521819wrx.118.1565562746752; 
-	Sun, 11 Aug 2019 15:32:26 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F030F985E2ABE145B1E262D.dip0.t-ipconnect.de.
-	[2003:f0:7f03:f98:5e2a:be14:5b1e:262d])
-	by smtp.gmail.com with ESMTPSA id
-	c65sm11964260wma.44.2019.08.11.15.32.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Sun, 11 Aug 2019 15:32:26 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Aug 2019 00:32:18 +0200
-Message-Id: <20190811223218.3734-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=zBo85f14BW17WiaKqVHf1GV6NnaHdG6c/ZJkSrtmUlI=;
+	b=dnNCYYPravXbegVDc3fQm19wN3dcbRldpAV14cF83hZ6y6uSsiqNDPQfSk1mzc6/Ib
+	RAahzqeJ8sE3XH4ZF1J346BGGf9Eey2VMllTyfUibRbtoB9FQ+0yh+9YMW/ZUfiwZqkA
+	Tfs1hOneYDj+Ac6GZckhE+Mawtzxz9N4MSgmAkP+PFzctrFfe2bWbOIjrHVe1dekAcWA
+	bqzbzeaNserWnRIg9AwytDDXpXcZdIJg00+NWndGdiUdVw4VMKcJET/zXrPmDEcBtzP1
+	1bUR+IcjpHoFNfH5OFcUVaVG1AxQnr7oQIZ8th8G7DZu1EVVQdlXIrvV8X7hHsWGLAwF
+	2PXw==
+X-Gm-Message-State: APjAAAXs5FQKvGzUSUddMixHcsiDOYl3LqQdsgDmE2VG8GKfqlE+jkIj
+	vRF1j0pLq+Q4Cmeupp2NLQqRhzBGjf7bkHrPQrASWsMFpkg=
+X-Google-Smtp-Source: APXvYqwhmJSjxd3g9rIFdwJMLoqTuxyvWK0JEmclo0FOTbXHmEZzIwTRIBfdheGDwQaHFuaItuGL9c7V9JYsUi7p7po=
+X-Received: by 2002:a37:ef1a:: with SMTP id j26mr19298097qkk.474.1565582747189;
+	Sun, 11 Aug 2019 21:05:47 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] abiword: remove
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Aug 2019 21:05:21 -0700
+Message-ID: <CAMKF1spmCv1=Zm4FBLVTf-OrECFobjeQkZRVc8RzNkZX+W6N0A@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of OE world 2019-08-11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,404 +49,515 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 22:32:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 12 Aug 2019 04:05:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Last release was 2016.
+== Failed tasks 2019-08-11 ==
 
-For sentimental reasons it was added to meta-office as a place for retirement.
+INFO: jenkins-job.sh-1.8.45 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190811_195557.log
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- ...1-Bug-13770-Require-C-11-from-now-on.patch | 180 ------------------
- ...s-Makefile.am-remove-uncomplete-opti.patch |  39 ----
- .../recipes-gnome/abiword/abiword_3.0.2.bb    | 142 --------------
- 3 files changed, 361 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
+=== common (3) ===
+    * sources/meta-openembedded/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb:do_package_qa
+    * sources/meta-openembedded/meta-oe/recipes-devtools/openocd/openocd_git.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch b/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
-deleted file mode 100644
-index 3731a23f1..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword/0001-Bug-13770-Require-C-11-from-now-on.patch
-+++ /dev/null
-@@ -1,180 +0,0 @@
--From f6d0dc338fe867c1b064682ae7f15bffe019b306 Mon Sep 17 00:00:00 2001
--From: Hubert Figuiere <hub@figuiere.net>
--Date: Tue, 12 Apr 2016 02:55:47 +0000
--Subject: [PATCH] Bug 13770 - Require C++11 from now on.
--
--git-svn-id: svn+ssh://svn.abisource.com/svnroot/abiword/trunk@35197 bcba8976-2d24-0410-9c9c-aab3bd5fdfd6
--
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- ax_cxx_compile_stdcxx_11.m4  | 133 +++++++++++++++++++++++++++++++++++
-- configure.ac                 |   1 +
-- src/wp/ap/gtk/ap_UnixApp.cpp |   2 +-
-- 3 files changed, 135 insertions(+), 1 deletion(-)
-- create mode 100644 ax_cxx_compile_stdcxx_11.m4
--
--diff --git a/ax_cxx_compile_stdcxx_11.m4 b/ax_cxx_compile_stdcxx_11.m4
--new file mode 100644
--index 0000000..af37acd
----- /dev/null
--+++ b/ax_cxx_compile_stdcxx_11.m4
--@@ -0,0 +1,133 @@
--+# ============================================================================
--+#  http://www.gnu.org/software/autoconf-archive/ax_cxx_compile_stdcxx_11.html
--+# ============================================================================
--+#
--+# SYNOPSIS
--+#
--+#   AX_CXX_COMPILE_STDCXX_11([ext|noext],[mandatory|optional])
--+#
--+# DESCRIPTION
--+#
--+#   Check for baseline language coverage in the compiler for the C++11
--+#   standard; if necessary, add switches to CXXFLAGS to enable support.
--+#
--+#   The first argument, if specified, indicates whether you insist on an
--+#   extended mode (e.g. -std=gnu++11) or a strict conformance mode (e.g.
--+#   -std=c++11).  If neither is specified, you get whatever works, with
--+#   preference for an extended mode.
--+#
--+#   The second argument, if specified 'mandatory' or if left unspecified,
--+#   indicates that baseline C++11 support is required and that the macro
--+#   should error out if no mode with that support is found.  If specified
--+#   'optional', then configuration proceeds regardless, after defining
--+#   HAVE_CXX11 if and only if a supporting mode is found.
--+#
--+# LICENSE
--+#
--+#   Copyright (c) 2008 Benjamin Kosnik <bkoz@redhat.com>
--+#   Copyright (c) 2012 Zack Weinberg <zackw@panix.com>
--+#   Copyright (c) 2013 Roy Stogner <roystgnr@ices.utexas.edu>
--+#
--+#   Copying and distribution of this file, with or without modification, are
--+#   permitted in any medium without royalty provided the copyright notice
--+#   and this notice are preserved. This file is offered as-is, without any
--+#   warranty.
--+
--+#serial 3
--+
--+m4_define([_AX_CXX_COMPILE_STDCXX_11_testbody], [
--+  template <typename T>
--+    struct check
--+    {
--+      static_assert(sizeof(int) <= sizeof(T), "not big enough");
--+    };
--+
--+    typedef check<check<bool>> right_angle_brackets;
--+
--+    int a;
--+    decltype(a) b;
--+
--+    typedef check<int> check_type;
--+    check_type c;
--+    check_type&& cr = static_cast<check_type&&>(c);
--+
--+    auto d = a;
--+])
--+
--+AC_DEFUN([AX_CXX_COMPILE_STDCXX_11], [dnl
--+  m4_if([$1], [], [],
--+        [$1], [ext], [],
--+        [$1], [noext], [],
--+        [m4_fatal([invalid argument `$1' to AX_CXX_COMPILE_STDCXX_11])])dnl
--+  m4_if([$2], [], [ax_cxx_compile_cxx11_required=true],
--+        [$2], [mandatory], [ax_cxx_compile_cxx11_required=true],
--+        [$2], [optional], [ax_cxx_compile_cxx11_required=false],
--+        [m4_fatal([invalid second argument `$2' to AX_CXX_COMPILE_STDCXX_11])])dnl
--+  AC_LANG_PUSH([C++])dnl
--+  ac_success=no
--+  AC_CACHE_CHECK(whether $CXX supports C++11 features by default,
--+  ax_cv_cxx_compile_cxx11,
--+  [AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+    [ax_cv_cxx_compile_cxx11=yes],
--+    [ax_cv_cxx_compile_cxx11=no])])
--+  if test x$ax_cv_cxx_compile_cxx11 = xyes; then
--+    ac_success=yes
--+  fi
--+
--+  m4_if([$1], [noext], [], [dnl
--+  if test x$ac_success = xno; then
--+    for switch in -std=gnu++11 -std=gnu++0x; do
--+      cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx11_$switch])
--+      AC_CACHE_CHECK(whether $CXX supports C++11 features with $switch,
--+                     $cachevar,
--+        [ac_save_CXXFLAGS="$CXXFLAGS"
--+         CXXFLAGS="$CXXFLAGS $switch"
--+         AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+          [eval $cachevar=yes],
--+          [eval $cachevar=no])
--+         CXXFLAGS="$ac_save_CXXFLAGS"])
--+      if eval test x\$$cachevar = xyes; then
--+        CXXFLAGS="$CXXFLAGS $switch"
--+        ac_success=yes
--+        break
--+      fi
--+    done
--+  fi])
--+
--+  m4_if([$1], [ext], [], [dnl
--+  if test x$ac_success = xno; then
--+    for switch in -std=c++11 -std=c++0x; do
--+      cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx11_$switch])
--+      AC_CACHE_CHECK(whether $CXX supports C++11 features with $switch,
--+                     $cachevar,
--+        [ac_save_CXXFLAGS="$CXXFLAGS"
--+         CXXFLAGS="$CXXFLAGS $switch"
--+         AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_11_testbody])],
--+          [eval $cachevar=yes],
--+          [eval $cachevar=no])
--+         CXXFLAGS="$ac_save_CXXFLAGS"])
--+      if eval test x\$$cachevar = xyes; then
--+        CXXFLAGS="$CXXFLAGS $switch"
--+        ac_success=yes
--+        break
--+      fi
--+    done
--+  fi])
--+  AC_LANG_POP([C++])
--+  if test x$ax_cxx_compile_cxx11_required = xtrue; then
--+    if test x$ac_success = xno; then
--+      AC_MSG_ERROR([*** A compiler with support for C++11 language features is required.])
--+    fi
--+  else
--+    if test x$ac_success = xno; then
--+      HAVE_CXX11=0
--+      AC_MSG_NOTICE([No compiler with C++11 support was found])
--+    else
--+      HAVE_CXX11=1
--+      AC_DEFINE(HAVE_CXX11,1,
--+                [define if the compiler supports basic C++11 syntax])
--+    fi
--+
--+    AC_SUBST(HAVE_CXX11)
--+  fi
--+])
--diff --git a/configure.ac b/configure.ac
--index 48228be..f7be7de 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -131,6 +131,7 @@ win_pkgs="$enchant_req"
-- 
-- AC_PROG_CC
-- AC_PROG_CXX
--+AX_CXX_COMPILE_STDCXX_11(noext,mandatory)
-- #AC_PROG_OBJC
-- AC_PROG_INSTALL
-- # For libtool 1.5.x compatability (AC_PROG_LIBTOOL is deprecated version of LT_INIT)
--diff --git a/src/wp/ap/gtk/ap_UnixApp.cpp b/src/wp/ap/gtk/ap_UnixApp.cpp
--index 061a304..260f8e5 100644
----- a/src/wp/ap/gtk/ap_UnixApp.cpp
--+++ b/src/wp/ap/gtk/ap_UnixApp.cpp
--@@ -863,7 +863,7 @@ static bool is_so (const char *file) {
-- 	if (len < (strlen(G_MODULE_SUFFIX) + 2)) // this is ".so" and at least one char for the filename
-- 		return false;
-- 	const char *suffix = file+(len-3);
---	if(0 == strcmp (suffix, "."G_MODULE_SUFFIX))
--+	if(0 == strcmp (suffix, "." G_MODULE_SUFFIX))
-- 		return true;
-- 	return false;
-- }
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch b/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
-deleted file mode 100644
-index 0dff1411d..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword/0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From c646159ce817506131b58fdab1cdc1cd6364df7a Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Sun, 7 Feb 2016 21:45:20 +0100
--Subject: [PATCH] plugins/aiksaurus/Makefile.am: remove uncomplete options
-- WITH_BUILTIN_AIKSAURUS_GTK
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--* with gtk2 we won't use it
--* it is missing in configure.ac causing
--
--| plugins/aiksaurus/Makefile.am:5: error: WITH_BUILTIN_AIKSAURUS_GTK does not appear in AM_CONDITIONAL
--
--Upstream-Status: Pending
--
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-----
-- plugins/aiksaurus/Makefile.am | 4 ----
-- 1 file changed, 4 deletions(-)
--
--diff --git a/plugins/aiksaurus/Makefile.am b/plugins/aiksaurus/Makefile.am
--index d402c58..1034e2a 100644
----- a/plugins/aiksaurus/Makefile.am
--+++ b/plugins/aiksaurus/Makefile.am
--@@ -2,10 +2,6 @@ SUBDIRS =
-- 
-- if TOOLKIT_GTK
-- 
---if WITH_BUILTIN_AIKSAURUS_GTK
---SUBDIRS += aiksaurusgtk3
---platform_lib = aiksaurusgtk3/libAiksaurusGtk3.la
---endif
-- 
-- endif
-- 
---- 
--2.5.0
--
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-deleted file mode 100644
-index 36b056fdd..000000000
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-+++ /dev/null
-@@ -1,142 +0,0 @@
--SUMMARY = "AbiWord is free word processing program similar to Microsoft(r) Word"
--HOMEPAGE = "http://www.abiword.org"
--SECTION = "x11/office"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
--DEPENDS  = " \
--    perl-native \
--    gtk+ \
--    gtkmathview \
--    wv \
--    fribidi \
--    jpeg \
--    libpng \
--    librsvg \
--    libwmf-native \
--    asio \
--    evolution-data-server \
--    libxslt \
--    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
--"
--RDEPENDS_${PN}_append_libc-glibc = " \
--    glibc-gconv-ibm850 glibc-gconv-cp1252 \
--    glibc-gconv-iso8859-15 glibc-gconv-iso8859-1 \
--"
--RCONFLICTS_${PN} = "${PN}-embedded"
--
--SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
--           file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
--           file://0001-Bug-13770-Require-C-11-from-now-on.patch \
--           "
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
--
--SRC_URI[md5sum] = "cda6dd58c747c133b421cc7eb18f5796"
--SRC_URI[sha256sum] = "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
--
--#want 3.x from 3.x.y for the installation directory
--SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
--
--inherit distro_features_check autotools-brokensep pkgconfig
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--PACKAGECONFIG ??= " \
--    collab-backend-xmpp collab-backend-tcp \
--    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
--"
--PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
--PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
--PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
--PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
--PACKAGECONFIG[collab-backend-service] = "--enable-collab-backend-service,--disable-collab-backend-service,libgsf libxml2 libsoup-2.4 gnutls"
--PACKAGECONFIG[collab-backend-telepathy] = "--enable-collab-backend-telepathy,--disable-collab-backend-telepathy,libgsf libxml2 telepathy-glib telepathy-mission-control"
--PACKAGECONFIG[collab-backend-sugar] = "--enable-collab-backend-sugar,--disable-collab-backend-sugar,libgsf libxml2 dbus-glib"
--
--EXTRA_OECONF = " --disable-static  \
--                 --enable-plugins \
--                 --enable-clipart \
--                 --enable-templates \
--                 --without-gnomevfs \
--                 --with-gtk2 \
--                 --with-libwmf-config=${STAGING_DIR} \
--"
--
--LDFLAGS += "-lgmodule-2.0"
--
--do_compile() {
--    cd goffice-bits2
--    make goffice-paths.h
--    make libgoffice.la
--    cd ${B}
--    oe_runmake
--}
--
--PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
--
--FILES_${PN} += " \
--                ${libdir}/lib${PN}-*.so \
--                ${datadir}/mime-info \
--                ${datadir}/icons/* \
--                ${datadir}/${PN}-${SHRT_VER}/glade \
--                ${datadir}/${PN}-${SHRT_VER}/scripts \
--                ${datadir}/${PN}-${SHRT_VER}/system.profile-en \
--                ${datadir}/${PN}-${SHRT_VER}/system.profile-en_GB \
--                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt-en_GB \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Employee-Directory.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Business-Report.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Fax-Coversheet.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Resume.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Two-Columns.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Memo.awt \
--                ${datadir}/${PN}-${SHRT_VER}/templates/Press-Release.awt \
--                ${datadir}/${PN}-${SHRT_VER}/certs \
--                ${datadir}/${PN}-${SHRT_VER}/ui \
--                ${datadir}/${PN}-${SHRT_VER}/xsl* \
--                ${datadir}/${PN}-${SHRT_VER}/mime-info \
--                ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
--"
--
--# don't steal /usr/lib/libabiword-3.0.so from ${PN}
--# in this case it's needed in ${PN}
--FILES_${PN}-dev = " \
--                  ${includedir} \
--                  ${libdir}/pkgconfig \
--                  ${libdir}/${PN}*.la \
--                  ${libdir}/lib${PN}*.la \
--                  ${libdir}/${PN}-${SHRT_VER}/plugins/*.la \
--"
--FILES_${PN}-dbg += "${libdir}/${PN}-${SHRT_VER}/plugins/.debug"
--FILES_${PN}-doc += "${datadir}/${PN}-*/readme*"
--
--FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"
--FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/system.profile*"
--FILES_${PN}-clipart        += "${datadir}/${PN}-${SHRT_VER}/clipart"
--FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
--FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
--FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
--
--PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
--
--python populate_packages_prepend () {
--    abiword_libdir    = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
--    do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
--
--    metapkg = "abiword-meta"
--    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
--    d.setVar('FILES_' + metapkg, "")
--    blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
--    metapkg_rdepends = []
--    packages = d.getVar('PACKAGES').split()
--    for pkg in packages[1:]:
--        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
--            print("Modifying %s" % pkg)
--            metapkg_rdepends.append(pkg)
--    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
--    d.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package')
--    packages.append(metapkg)
--    d.setVar('PACKAGES', ' '.join(packages))
--}
--
--FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
--- 
-2.21.0
+=== common-x86 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb:do_compile
 
+=== qemuarm (6) ===
+    * sources/meta-freescale/recipes-extended/dpdk/dpdk_18.11.bb:do_compile
+    * sources/meta-freescale/recipes-extended/vpp-core/dpdkvpp.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/bpftool/bpftool.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_install
+    * sources/openembedded-core/meta/recipes-devtools/python-numpy/python3-numpy_1.17.0.bb:do_compile
+
+=== qemuarm64 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_compile
+
+=== qemux86 (3) ===
+    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-devtools/breakpad/breakpad_git.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb:do_compile
+
+=== qemux86_64 (2) ===
+    * build/tmpfs/work/core2-64-yoe-linux/sysdig/0.26.1+gitAUTOINC+baf311c42c-r0/build/openssl-prefix/src/openssl/target
+    * sources/openembedded-core/meta/recipes-core/glibc/glibc-locale_2.30.bb:do_package_qa
+
+=== Number of failed tasks (37) ===
+{| class=wikitable
+|-
+|| qemuarm || 9 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190811_105925.log/
+||
+|-
+|| qemuarm64 || 9 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190811_133156.log/
+||
+|-
+|| qemux86 || 8 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190811_145632.log/
+||
+|-
+|| qemux86_64 || 11 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190811_172248.log/
+||
+|}
+
+=== PNBLACKLISTs (3) ===
+
+=== QA issues (58) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||textrel
+|-
+||0 ||unknown-configure-option
+|-
+||1 ||build-deps
+|-
+||1 ||host-user-contaminated
+|-
+||56 ||version-going-backwards
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190811_160010.log/
+
+
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-480p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemux86copy
+in /home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-1080p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemux86 in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+    * ERROR: Nothing RPROVIDES 'bigbuckbunny-1080p' (but
+/home/jenkins/oe/world/yoe/sources/meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+RDEPENDS on or otherwise requires it)
+    * ERROR: Required build target 'meta-world-pkgdata' has no
+buildable providers.
+    * ERROR: no sigdata files were generated for MACHINE qemuarm in
+/home/jenkins/oe/world/yoe/build/tmpfs/stamps
+
+
+PNBLACKLISTs:
+sources/meta-96boards:
+sources/meta-atmel:
+sources/meta-browser:
+sources/meta-clang:
+sources/meta-freescale:
+sources/meta-freescale-3rdparty:
+sources/meta-intel:
+sources/meta-odroid:
+sources/meta-openembedded:
+meta-oe/recipes-dbs/mongodb/mongodb_git.bb:PNBLACKLIST[mongodb] =
+"Since bbclass scons convert to python3, build mongodb failed"
+meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb:PNBLACKLIST[librcf]
+= " error: invalid use of incomplete type 'RCF::AsioIoService {aka
+class boost::asio::io_service}; among others?"
+sources/meta-qcom:
+sources/meta-qt5:
+sources/meta-raspberrypi:
+sources/meta-riscv:
+sources/meta-rust:
+sources/meta-ti:
+sources/meta-variscite-fslc:
+sources/meta-yoe:
+sources/openembedded-core:
+meta/lib/oeqa/selftest/cases/imagefeatures.py:PNBLACKLIST[busybox] =
+"Don't build this"
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
+PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
+PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 0 issue: textrel
+
+
+count: 1 issue: build-deps
+gparted-0.33.0: gparted rdepends on hicolor-icon-theme, but it isn't a
+build dependency, missing hicolor-icon-theme in DEPENDS or
+PACKAGECONFIG? [build-deps]
+
+
+count: 0 issue: file-rdeps
+
+
+count: 56 issue: version-going-backwards
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dbg went backwards which would break package feeds
+from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dbg went backwards which would break package feeds
+from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dev went backwards which would break package feeds
+from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-dev went backwards which would break package feeds
+from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-doc went backwards which would break package feeds
+from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-doc went backwards which would break package feeds
+from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-locale went backwards which would break package
+feeds from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-locale went backwards which would break package
+feeds from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-src went backwards which would break package feeds
+from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-src went backwards which would break package feeds
+from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-staticdev went backwards which would break package
+feeds from (0:1.1-r2.178 to 0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package
+atmel-qt-demo-init-staticdev went backwards which would break package
+feeds from (0:1.1-r2.187 to 0:1.1-r2.186) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
+went backwards which would break package feeds from (0:1.1-r2.178 to
+0:1.1-r2.177) [version-going-backwards]
+atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
+went backwards which would break package feeds from (0:1.1-r2.187 to
+0:1.1-r2.186) [version-going-backwards]
+os-release-1.0: Package version for package os-release-dbg went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release-dev went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release-doc went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release-locale went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release-src went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release-staticdev went
+backwards which would break package feeds from (0:1.0-r0.190 to
+0:1.0-r0.189) [version-going-backwards]
+os-release-1.0: Package version for package os-release went backwards
+which would break package feeds from (0:1.0-r0.190 to 0:1.0-r0.189)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dbg went backwards
+which would break package feeds from (0:1.0-r8.242 to 0:1.0-r8.241)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dev went backwards
+which would break package feeds from (0:1.0-r8.242 to 0:1.0-r8.241)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-ptest went backwards
+which would break package feeds from (0:1.0-r8.242 to 0:1.0-r8.241)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-src went backwards
+which would break package feeds from (0:1.0-r8.242 to 0:1.0-r8.241)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target went backwards which
+would break package feeds from (0:1.0-r8.242 to 0:1.0-r8.241)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dbg went backwards which would break
+package feeds from (0:1.0-r3.241 to 0:1.0-r3.240)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dev went backwards which would break
+package feeds from (0:1.0-r3.241 to 0:1.0-r3.240)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-ptest went backwards which would break
+package feeds from (0:1.0-r3.241 to 0:1.0-r3.240)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-src went backwards which would break
+package feeds from (0:1.0-r3.241 to 0:1.0-r3.240)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug went backwards which would break package
+feeds from (0:1.0-r3.241 to 0:1.0-r3.240) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dbg went backwards which would break package
+feeds from (0:1.0-r13.242 to 0:1.0-r13.241) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dbg went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dev went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-ptest went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dev went backwards which would break package
+feeds from (0:1.0-r13.242 to 0:1.0-r13.241) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dbg went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dev went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-ptest went backwards which would
+break package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dbg went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dev went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-ptest went backwards which would
+break package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dbg went backwards which would
+break package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dev went backwards which would
+break package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-ptest went backwards which would
+break package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-ptest went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dbg went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dev went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-ptest went backwards which would break
+package feeds from (0:1.0-r13.242 to 0:1.0-r13.241)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk went backwards which would break package
+feeds from (0:1.0-r13.242 to 0:1.0-r13.241) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-src went backwards which would break package
+feeds from (0:1.0-r13.242 to 0:1.0-r13.241) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted went backwards which would break package
+feeds from (0:1.0-r13.242 to 0:1.0-r13.241) [version-going-backwards]
+
+
+count: 1 issue: host-user-contaminated
+glibc-locale-2.30: glibc-locale:
+/usr/lib/locale/so_SO.ISO-8859-1/LC_PAPER is owned by uid 3004, which
+is the same as the user running bitbake. This may be due to host
+contamination [host-user-contaminated]
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+8c26b451 knotty: Fix for the Second Keyboard Interrupt
+not included in master yet:
+a93ca226 runqueue: Handle covered tasks when rehashing
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+30a2af80f5 libx11: replace libtool patch with upstreamed patch
+not included in master yet:
+34196d2913 musl: Update to master tip
+4e00ceaf38 deb: allow custom dpkg command
+933286bdcb grub/grub-efi: fix conflict for aach64
+a99791672e man-db:upgrade 2.8.5 -> 2.8.6.1
+022d642b0c cmake: 3.14.5 -> 3.15.1
+cdde0265b1 python3-mako: 1.0.14 -> 1.1.0
+1f64ecf92f ovmf: Update to version edk2-stable201905
+b9851d612b ovmf: Set PV
+435d1f8ffe ovmf: Use HOSTTOOLS' python3
+daaf9d7bd8 ovmf: Generate test Platform key and first Key Exchange Key
+5e47316ae6 runqemu: Add support to handle EnrollDefaultKeys PK/KEK1 certificate
+8b76048da9 sstatesig: Fix leftover splitting issue from siggen change
+42293d7540 image_types_wic.bbclass: Copy the .wks and .env files to
+deploy image dir
+56add7cc54 wic: Add partition type for msdos partition tables
+8e48b4d6c4 wic: Make disk partition size consistently computed
+e6d51c9472 dpkg: Provide update-alternative for start-stop-daemon
+90edb9c2e2 maintainers.inc: give python recipes to Oleksandr Kravchuk
+4e9659f24e python-numpy: remove the python 2.x version of the recipe
+6508c47e49 python3-numpy: update to 1.17.0
+bd79b5ee67 python-scons: remove the python 2.x version of the recipe
+727f582d4f python-nose: remove the python 2.x version of the recipe
+6befdbfa83 libinput: update to 1.14.0
+15e2d87e19 wpa-supplicant: update to 2.9
+681e658f0e python3-pygobject: remove python3-setuptools from RDEPENDS
+3409049f6e aspell: update to 0.60.7
+b95417164f screen: Backport fix for an implicit function declaration
+6d57d8f8f5 e2fsprogs: 1.44.5 -> 1.45.3
+21dcf03310 python3-pygobject: Add missing pkgutil RDEPENDS
+8246e17925 recipes: Add runit and related recipes
+5f270a499f oeqa: Recognise svlogd as another logger
+54f0ce78b3 oeqa/buildgalculator.py: Add dependency on gtk+3
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+cb036c840 hostapd: upgrade 2.8 -> 2.9
+not included in master yet:
+b2c96a97f xfce4-datetime-setter: add recipe
+58c865e46 nodejs: 10.16.0 -> 10.16.2
+493aa5b89 snort: upgrade 2.9.14 -> 2.9.14.1
+ff074c9bf kpatch: upgrade 0.61 -> 0.71
+a6043b70a mongodb: add mongo shell as a PACKAGECONF option
+5f0f3e0ea python-pandas: remove the python 2.x version of the recipe
+ae88e1a5d gvfs: upgrade from 1.40.0 to 1.40.2
+2ea549618 python3-pillow: Provide python3-imaging
+3947b77ac glmark2: Upgrade SRCREV to latest
+21e53693a python3-websockets: upgrade to 8.0.2
+ac31a6d34 python3-multidict: upgrade to 4.5.2
+8f3d728b3 python-engineio: upgrade to 3.9.3
+54645121c python-socketio: upgrade to 4.3.1
+311dfa83b python-aiohttp.inc: add missing RDEPENDS
+e70ba86d7 python-async-timeout: add asyncio to RDEPENDS
+8d2633b8d python-socketio.inc: add missing RDEPENDS
+c5f294f46 sysdig: Upgrade to 0.26.1+
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+6463bea qt5everywheredemo: update HOMEPAGE
+not included in master yet:
+8da88b0 Allow enabling gui for native and nativesdk
+8d2e1b4 qt5: Upgrade to Qt 5.13.0
+c7f8827 qtremoteobjects: Use OE_PATH_EXTERNAL_HOST_BINS to enable
+cmake to find repc
+c8b3085 qtwebengine: refresh the patches to apply
+8f0e741 qtwebengine: Fix build on aarch64
+708be17 maliit-framework-qt5: Fix build when ptest is enabled
+09913e9 qttools: Enable clang support when using clang
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+74b9cb0 firefox: Avoid crash on opening about:support on certain SoC
+not included in master yet:
+~/oe/world/yoe
 
