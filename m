@@ -1,35 +1,48 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id D4C8E73196
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0585D6004D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 12:06:36 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 466ZMK3ZSDz4q
+	Mon, 12 Aug 2019 13:06:30 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id j16so2234828wrr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 14:06:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1565611597;
-	bh=X/rsykDYHc+a9mse65eSbeW6aJpL3QF5qGNAbpJWAyI=;
-	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=f6/oztuEyjXtr2mbdS9L+TskoLJ8Dfe4ZbM5XkDg/SwByRkiYa68LHKV0g7jGohE9
-	5WcWJwAKrzWWq7uvYzWQ0tdPbwvRJ10cGTcu3z9tmD+bnhdfUQbsw2KnacAv0hJLun
-	QUimHoSWWstaLGwZhQZVbo4JwIn20tm11ArJmQFTYy7NRImENtpbmOFhVhCqVobzPb
-	t8s6Bm2BGKhtW9ez0QGwxZjKGDKhd+PP+g2aApc+iPBJUZWuFy4pU8VTHWt3SC4dRJ
-	UN1oxCMn8T0Od3LFKC132JR7sxWz8bT7qVxL4/tX4/gLe2AgBS23LPYR3jWqwuOWtI
-	6jH2Iqwa86usbxzm2WmL4ZNfyH1NYlkZnwrqzR2v2Bw5lwNBBCNhNtBWHkqMotHQIm
-	oGzbgtrN+Qph/Z2aMV6TzWjtrvJHqwkqcYZ3Iks9b93xjMfEj9aXttf45MwvXPndXB
-	6Um+K2LBLLoxkoJrBqM/uOo+sAmCeaWGtV1XYHc09/fGb3y18iP/hD0kETYsm2pu6N
-	i9GkYS+Mx/yhPYop223gaoXDIBuExU2bLC4EvyuzOXodFI4Ufe5sSVvnPBYHRbcoV0
-	1Nn2QFoQy6O+W3XxcZyS6K2462HvGLUb0/SNrwneeL0JDRbBt57xDJ6Wfyw1OuV+/Q
-	J53m469d5yx0OokHJattdu2c=
-From: Adrian Bunk <bunk@stusta.de>
+	Mon, 12 Aug 2019 06:06:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=n/ICl+XiV0E91fghku5FAhMKk7F2fM2qXhLgNpPHr3k=;
+	b=IQvADkCLfEx8RUWhKfwZvCdzRfeMlmFTvMGXLzYt4iMQjVIMASfJyY1KZaTh4RzALD
+	NeXmC7WjCaO6boVNnnEQ8iuro9Ij1qFmv7A39jXbuksI6tsCxEHPhZCjy27f4Z6CKaNH
+	7UZKOfM+/Vx/q95nQfsAAI52FfE4fhZDwNbIvCqXiGrVFUqKXlDbVPoAESr+mKhwsPcQ
+	HJQ4B5YcOlPiKlYfH25M1XDisHImTptKHpR75Yauj3agBbhGXdjT02K81vbFcLPALuAq
+	aRhoHK+aBwTZzWCqGvQLnPuedaqK8UIK/Naur1quCzAidPyE75pfAmRodn+Wqwd1fN1o
+	6Umw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=n/ICl+XiV0E91fghku5FAhMKk7F2fM2qXhLgNpPHr3k=;
+	b=aU6VhSjH+zYgf3EQdzAF1J3e9tkMp/4z8V1dkYD6xLf1rlcQtGF8bwtZ0y3fDG2H4P
+	rYrvbfxmQZxVQrg0u2xcULDxP9oHsg1gp8z3XttFUC8SJk0PYyy0fMqxP5PpOw6LKZlO
+	+CVt2d8xqVAhjwPsVBBnpRqbrLCzHLT5BDM2jHdAHcnDOiRaHyU9iHMtjtt4XGe7wLF9
+	CiVRSmxUfKCBBMS5HgiLeJWBmekA/My/iVkXrwJl47Etp8PIkb31l5ddMmL8h3j/dgUV
+	El/hqXGnMoNQw433jOOJlGllou/PiwVqOklN3eBFM6HyOgFG353x8AEZHtLtfN/EuNNK
+	D/rw==
+X-Gm-Message-State: APjAAAVEv1BIxiwBRIQioudp/HAGltumh5pZ1k5pvGnVXSxFwbln96NB
+	Wg0kre5J9UDfOkXBaNuPrkcjKdAL
+X-Google-Smtp-Source: APXvYqwfY6Eh/hHD3qx2/F+UU5HkePPfSRthRpV3TIsEUyJ5vOGxYF7pz85+XtbMHorgCVSh9YhehA==
+X-Received: by 2002:adf:c7c7:: with SMTP id y7mr40121627wrg.44.1565615191256; 
+	Mon, 12 Aug 2019 06:06:31 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	h12sm10390415wrq.73.2019.08.12.06.06.30
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 12 Aug 2019 06:06:30 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Aug 2019 15:06:36 +0300
-Message-Id: <20190812120636.22643-2-bunk@stusta.de>
+Date: Mon, 12 Aug 2019 13:06:30 +0000
+Message-Id: <20190812130630.877-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190812120636.22643-1-bunk@stusta.de>
-References: <20190812120636.22643-1-bunk@stusta.de>
-Subject: [meta-oe][PATCH] t1lib: Remove, gtkmathview was the last user
+Subject: [meta-oe][PATCH] kernel-selftest: skip -Werror=format-security and fortify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,432 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 12:06:37 -0000
+X-List-Received-Date: Mon, 12 Aug 2019 13:06:31 -0000
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
-The recipe will be submitted to meta-office.
----
- .../packagegroups/packagegroup-meta-oe.bb     |   2 +-
- .../t1lib/t1lib-5.1.2/configure.patch         | 141 -----------------
- .../t1lib/t1lib-5.1.2/format_security.patch   |  58 -------
- .../t1lib/t1lib-5.1.2/libtool.patch           | 144 ------------------
- meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb |  29 ----
- 5 files changed, 1 insertion(+), 373 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
- delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
- delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
- delete mode 100644 meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
+ .../recipes-kernel/kernel-selftest/kernel-selftest.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 6a9592cfa..c77a1e54e 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -142,7 +142,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-     can-utils libsocketcan tipcutils tiptop \
-     tmux uml-utilities upm vlock volume-key wipe zlog zram \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim t1lib gnuplot libwmf", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", " libgxim gnuplot libwmf", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "bluez", "collectd", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-ssh-agent-auth openwsman sblim-sfcb ", "", d)} \
-diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
-deleted file mode 100644
-index 976e0380e..000000000
---- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
-+++ /dev/null
-@@ -1,141 +0,0 @@
--From 81c1ba940415595584a837ab1078c64855072f0c Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Mon, 21 Nov 2011 12:00:54 +0100
--Subject: [PATCH] t1lib: add 5.1.2
--
--#
--# Patch managed by http://www.holgerschurig.de/patcher.html
--#
--
-----
-- configure.in | 95 ++++++++++++++++++++++++------------------------------------
-- 1 file changed, 38 insertions(+), 57 deletions(-)
--
--diff --git a/configure.in b/configure.in
--index eade4c0..e649ea9 100644
----- a/configure.in
--+++ b/configure.in
--@@ -74,9 +74,9 @@ T1LIB_PATCHLEVEL=builtin(eval, MACRO_T1LIB_LT_REVISION)
-- T1LIB_VERSIONSTRING=\"MACRO_T1LIB_IDENTIFIER\"
-- 
-- 
---dnl We use this file by Andreas Zeller to check for libXaw
---builtin(include, ac-tools/ice_find_athena.m4)
---builtin(include, ac-tools/aclocal.m4)
--+#dnl We use this file by Andreas Zeller to check for libXaw
--+#builtin(include, ac-tools/ice_find_athena.m4)
--+#builtin(include, ac-tools/aclocal.m4)
-- 
-- dnl We want these before the checks, so the checks can modify their values.
-- test -z "$LDLIBS" && LDLIBS=-lm   AC_SUBST(LDLIBS)
--@@ -162,6 +162,7 @@ fi
-- 
-- dnl **** Check for underscore on external symbols ****
-- 
--+AH_TEMPLATE([NEED_UNDERSCORE_PREFIX], [Define if external symbols need an underscore prefix])
-- AC_CACHE_CHECK("whether external symbols need an underscore prefix",
--                ac_cv_c_extern_prefix,
-- [saved_libs=$LIBS
--@@ -179,68 +180,48 @@ then
--   AC_DEFINE(NEED_UNDERSCORE_PREFIX)
-- fi
-- 
---dnl **** Check which ANSI integer type is 16 bit 
---
---AC_CACHE_CHECK( "which ANSI integer type is 16 bit", ac_16bit_type,
---		AC_TRY_RUN([
---int main(void) {
---  if (sizeof(short)==2)
---    return(0);
---  else if (sizeof(int)==2)
---    return(1);
---  else
---    return(2);
---}], ac_16bit_type="short", ac_16bit_type="int", ac_16bit_type=))
---if test "$ac_16bit_type" = "short"
---then
---  T1_AA_TYPE16="-DT1_AA_TYPE16=short"
---  T1_INT16="short"
---else
---  T1_AA_TYPE16="-DT1_AA_TYPE16=int"
---  T1_INT16="int"
--+dnl **** Check which ANSI integer type is 16 bit
--+T1_AA_TYPE16=""
--+for type in short int; do
--+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x2"; then
--+		T1_AA_TYPE16="-DT1_AA_TYPE16=$type"
--+		T1_INT16="$type"
--+		break
--+	fi
--+done
--+
--+if test x"$T1_AA_TYPE16" = "x"; then
--+	AC_MSG_ERROR("Unable to determine which integer type is 16 bit.")
-- fi
-- 
---
-- dnl **** Check which ANSI integer type is 32 bit 
---
---AC_CACHE_CHECK( "which ANSI integer type is 32 bit", ac_32bit_type,
---		AC_TRY_RUN([
---int main(void) {
---  if (sizeof(int)==4)
---    return(0);
---  else if (sizeof(long)==4)
---    return(1);
---  else
---    return(2);
---}], ac_32bit_type="int", ac_32bit_type="long", ac_32bit_type=))
---if test "$ac_32bit_type" = "int"
---then
---  T1_AA_TYPE32="-DT1_AA_TYPE32=int"
---  T1_INT32="int"
---else
---  T1_AA_TYPE32="-DT1_AA_TYPE32=long"
---  T1_INT32="long"
--+T1_AA_TYPE32=""
--+for type in int long; do
--+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x4"; then
--+		T1_AA_TYPE32="-DT1_AA_TYPE32=$type"
--+		T1_INT32="$type"
--+		break
--+	fi
--+done
--+
--+if test x"$T1_AA_TYPE32" = "x"; then
--+	AC_MSG_ERROR("Unable to determine which integer type is 32 bit.")
-- fi
-- 
---
-- dnl **** Check which ANSI integer type is 64 bit 
---
---AC_CACHE_CHECK( "which ANSI integer type is 64 bit", ac_64bit_type,
---		AC_TRY_RUN([
---int main(void) {
---  if (sizeof(long)==8)
---    return(0);
---  else
---    return(1);
---}], ac_64bit_type="long", ac_64bit_type="<none>"))
---if test "$ac_64bit_type" = "long"
---then
---  T1_AA_TYPE64="-DT1_AA_TYPE64=long"
---else
---  T1_AA_TYPE64=
--+T1_AA_TYPE64=""
--+for type in long long_long; do
--+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x8"; then
--+		AC_MSG_WARN("$type is 64 bit")
--+		T1_AA_TYPE64="-DT1_AA_TYPE64=\"`echo $type|tr '_' ' '`\""
--+		break
--+	fi
--+done
--+
--+if test x"$T1_AA_TYPE64" = "x"; then
--+	AC_MSG_ERROR("Unable to determine which integer type is 64 bit.")
-- fi
-- 
---
-- CFLAGS="${CFLAGS} -DT1LIB_IDENT=\"\\\"${T1LIB_IDENTIFIER}\\\"\" -DGLOBAL_CONFIG_DIR=\"\\\"${T1LIB_DATA_DIR}\\\"\""
-- 
-- dnl **** Check for functions and header files ****
-diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
-deleted file mode 100644
-index bc2476bfc..000000000
---- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--From cea83003de3ffebde92becd1e599fe3b28f0a7c4 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 6 Mar 2017 23:13:36 -0800
--Subject: [PATCH] t1lib: Fix printf format string errors
--
--Fix printf formats to use format qualifiers
--fixes
--
--error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Pending
--
-----
-- lib/t1lib/t1subset.c | 2 +-
-- lib/type1/objects.c  | 2 +-
-- lib/type1/objects.h  | 2 +-
-- 3 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/lib/t1lib/t1subset.c b/lib/t1lib/t1subset.c
--index da427b2..e76974f 100644
----- a/lib/t1lib/t1subset.c
--+++ b/lib/t1lib/t1subset.c
--@@ -759,7 +759,7 @@ char *T1_SubsetFont( int FontID,
-- 	     tr_len);
--     T1_PrintLog( "T1_SubsetFont()", err_warn_msg_buf,
-- 		 T1LOG_DEBUG);
---    l+=sprintf( &(trailerbuf[l]), linebuf); /* contains the PostScript trailer */
--+    l+=sprintf( &(trailerbuf[l]), "%s", linebuf); /* contains the PostScript trailer */
--   }
--   
--   /* compute size of output file */
--diff --git a/lib/type1/objects.c b/lib/type1/objects.c
--index c413a0f..f828e6a 100644
----- a/lib/type1/objects.c
--+++ b/lib/type1/objects.c
--@@ -957,7 +957,7 @@ struct xobject *TypeErr(name, obj, expect, ret) /* non-ANSI avoids overly strict
--  
--        sprintf(typemsg, "Wrong object type in %s; expected %s, found %s.\n",
--                   name, TypeFmt(expect), TypeFmt(obj->type));
---       IfTrace0(TRUE,typemsg);
--+       IfTrace1(TRUE, "%s", typemsg);
--  
--        ObjectPostMortem(obj);
--  
--diff --git a/lib/type1/objects.h b/lib/type1/objects.h
--index 13cbae7..3a1d337 100644
----- a/lib/type1/objects.h
--+++ b/lib/type1/objects.h
--@@ -214,7 +214,7 @@ struct xobject {
-- /*SHARED*/
-- /* NDW: personally, I want to see status and error messages! */
-- #define IfTrace0(condition,model)                                 \
---        {if (condition) printf(model);}
--+        {if (condition) fputs(model,stdout);}
-- #define IfTrace1(condition,model,arg0)                            \
--         {if (condition) printf(model,arg0);}
-- #define IfTrace2(condition,model,arg0,arg1)                       \
-diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
-deleted file mode 100644
-index da54f87ab..000000000
---- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
-+++ /dev/null
-@@ -1,144 +0,0 @@
--From bab41f5e1fc1fc809da1371e6a0222e0eb21e5f0 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Mon, 21 Nov 2011 12:00:54 +0100
--Subject: [PATCH] t1lib: add 5.1.2
--
--#
--# Patch managed by http://www.holgerschurig.de/patcher.html
--#
--
-----
-- Makefile.in           | 5 +++--
-- examples/Makefile.in  | 5 +++--
-- lib/Makefile.in       | 6 ++++--
-- lib/t1lib/Makefile.in | 6 ++++--
-- lib/type1/Makefile.in | 6 ++++--
-- type1afm/Makefile.in  | 6 ++++--
-- xglyph/Makefile.in    | 6 ++++--
-- 7 files changed, 26 insertions(+), 14 deletions(-)
--
--diff --git a/Makefile.in b/Makefile.in
--index 29c3468..396c020 100644
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -18,7 +18,8 @@
-- # Last modified:       2005-05-01
-- #
-- 
---SHELL     = /bin/sh
--+SHELL     = @SHELL@
--+LIBTOOL   = @LIBTOOL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--@@ -149,7 +150,7 @@ distclean: clean
-- 	$(RM) examples/Makefile
-- 	$(RM) xglyph/Makefile
-- 	$(RM) doc/Makefile
---	$(RM) libtool
--+	$(RM) $(LIBTOOL)
-- 
-- 
-- # The following two targets are for building and cleaning the python-
--diff --git a/examples/Makefile.in b/examples/Makefile.in
--index b301db5..7a6a514 100644
----- a/examples/Makefile.in
--+++ b/examples/Makefile.in
--@@ -14,9 +14,10 @@
-- # Last modified:       2001-04-01
-- #
-- 
--+top_builddir = @top_builddir@
-- 
---LIBTOOL   = ../libtool
---SHELL     = /bin/sh
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--diff --git a/lib/Makefile.in b/lib/Makefile.in
--index 89e5e86..6e0f960 100644
----- a/lib/Makefile.in
--+++ b/lib/Makefile.in
--@@ -15,8 +15,10 @@
-- #
-- # Contributions by H.Kakugawa to use libtool!
-- 
---LIBTOOL   = ../libtool
---SHELL     = /bin/sh
--+top_builddir = @top_builddir@
--+
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--diff --git a/lib/t1lib/Makefile.in b/lib/t1lib/Makefile.in
--index a6c2478..32434b3 100644
----- a/lib/t1lib/Makefile.in
--+++ b/lib/t1lib/Makefile.in
--@@ -14,8 +14,10 @@
-- #
-- # Modified by H.Kakugawa to use libtool
-- 
---LIBTOOL   = ../../libtool
---SHELL     = /bin/sh
--+top_builddir = @top_builddir@
--+
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--diff --git a/lib/type1/Makefile.in b/lib/type1/Makefile.in
--index 241f124..42efa94 100644
----- a/lib/type1/Makefile.in
--+++ b/lib/type1/Makefile.in
--@@ -14,8 +14,10 @@
-- #
-- # Modified by H.Kakugawa to use libtool
-- 
---LIBTOOL   = ../../libtool
---SHELL     = /bin/sh
--+top_builddir = @top_builddir@
--+
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--diff --git a/type1afm/Makefile.in b/type1afm/Makefile.in
--index 61611e1..9b51406 100644
----- a/type1afm/Makefile.in
--+++ b/type1afm/Makefile.in
--@@ -15,8 +15,10 @@
-- #
-- # Modified by H.Kakugawa to use libtool
-- 
---LIBTOOL   = ../libtool
---SHELL     = /bin/sh
--+top_builddir = @top_builddir@
--+
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
--diff --git a/xglyph/Makefile.in b/xglyph/Makefile.in
--index 8da9b63..741334c 100644
----- a/xglyph/Makefile.in
--+++ b/xglyph/Makefile.in
--@@ -15,8 +15,10 @@
-- #
-- # Modified by H.Kakugawa to use libtool
-- 
---LIBTOOL   = ../libtool
---SHELL     = /bin/sh
--+top_builddir = @top_builddir@
--+
--+LIBTOOL   = @LIBTOOL@
--+SHELL     = @SHELL@
-- CC        = @CC@
-- CPP       = @CPP@
-- CFLAGS    = @CFLAGS@
-diff --git a/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb b/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
-deleted file mode 100644
-index 826dbda85..000000000
---- a/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--SUMMARY = "A Type1 Font Rastering Library"
--SECTION = "libs"
--DEPENDS = "virtual/libx11 libxaw"
--
--LICENSE = "LGPLv2 & GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8ca43cbc842c2336e835926c2166c28b \
--                    file://LGPL;md5=6e29c688d912da12b66b73e32b03d812 \
--"
--
--SRC_URI = "${DEBIAN_MIRROR}/main/t/t1lib/t1lib_${PV}.orig.tar.gz \
--           file://configure.patch \
--           file://libtool.patch \
--           file://format_security.patch"
--SRC_URI[md5sum] = "a5629b56b93134377718009df1435f3c"
--SRC_URI[sha256sum] = "821328b5054f7890a0d0cd2f52825270705df3641dbd476d58d17e56ed957b59"
--
--inherit autotools-brokensep distro_features_check
--# depends on virtual/libx11
--REQUIRED_DISTRO_FEATURES = "x11"
--
--# Fix GNU_HASH problem
--TARGET_CC_ARCH += "${LDFLAGS}"
--
--EXTRA_OECONF = "--with-x --without-athena"
--EXTRA_OEMAKE = "without_doc"
--
--FILES_${PN} += " ${datadir}/t1lib/t1lib.config"
--FILES_${PN}-doc = "${datadir}/t1lib/doc/t1lib_doc.pdf"
--
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 181e97cac9..7370f9fb41 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -121,3 +121,14 @@ FILES_${PN} += "/usr/kernel-selftest"
+ RDEPENDS_${PN} += "python3"
+ # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
+ INSANE_SKIP_${PN} += "ldflags"
++
++# userfaultfd.c:126:2: error: format not a string literal and no format arguments [-Werror=format-security]
++#  fprintf(stderr, examples);
++#  ^~~~~~~
++SECURITY_STRINGFORMAT = ""
++
++# https://errors.yoctoproject.org/Errors/Details/261657/
++# kernel-selftest/1.0-r0/recipe-sysroot/usr/include/bits/fcntl2.h:50:4: error: call to '__open_missing_mode' declared with attribute error: open with O_CREAT or O_TMPFILE in second argument needs 3 arguments
++#     __open_missing_mode ();
++#     ^~~~~~~~~~~~~~~~~~~~~~
++lcl_maybe_fortify = ""
 -- 
 2.17.1
 
