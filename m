@@ -1,50 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
-	[209.85.160.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FE2B7E797
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 398326058C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2019 04:44:55 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id q4so4515571qtp.1
+	Mon, 12 Aug 2019 06:03:08 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,376,1559491200"; d="scan'208";a="73487676"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Aug 2019 14:03:01 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 194A34CE030F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2019 21:44:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ngKS6+4KAkLq26OytDdDakmnEJ7GNndcXiEfh4CA2+A=;
-	b=ueSOg0lU1KoUvf2NEaFAfzl/KM17lQU2hFxTTJS/aAfe7xa9J3Lmv5Og+u8/5FFNYe
-	23DabbNRVoJqGbZfZUMC1Jl9+HPilDN+hgwFR0bSRBCnt+ySVFs7lqkYR+29ocM9MIwN
-	ztmLz77vFpIN2yCCDUiWCYw6agZIrCF6fLILpOrtfduW92mMEB87vSnaqxIZeHP55bLy
-	MKbTOgPNdhXz/SVmjTn24MzBY2TbjJbw8VuP4ciNcWCU+t2UaFWMxJlC5eN03CJDQJ+P
-	KPblkmGZPzUaqpt7jxGD9P9Jf4VREbQMdq4ERFOUJ2N0OUqT9ukNUaT5cItv1S+Jt/7r
-	xlqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ngKS6+4KAkLq26OytDdDakmnEJ7GNndcXiEfh4CA2+A=;
-	b=ndtJ1it0Ww8rE3N3uUCeb915xkcy8uKNzDfvCmhhu3+oHxPyxZMZ88PZUqbMZCV+JI
-	Q3wuTfNLf1z4xNT9IzWJdG+RU+zNFQVdLBKNdqX3ylL091iQkTkNzGWl69ngIZBY+MZx
-	8EBI0cbmk3LvcNfxI6bP5//UftMUMY6v9q0/H3tuFjTCEud6B6tIRBZgVMg4l/lKmclF
-	KpOFF2Yc3W6lKyElLdB0XDuMXWMzPdEZzxTAbL9MGXhlDGPwuMC1Ehz4XJchXBRzV37f
-	UWVIEqIY9bRcveIDD3+5sP+YosGX7XZK1WoqbJjVeAULnLVAZCCIPhBSSHHz1T8rPL67
-	9Cuw==
-X-Gm-Message-State: APjAAAXE6FIoedz3umHLNXSEjTTbrRsfFJ/A7SYTfJoGmAcQHaNOwBxc
-	zDyyV+f1809EnnqqGaMkk0+jK5zJUpMFLNGQL+U=
-X-Google-Smtp-Source: APXvYqzKY6JPH0z65n9dIteEWyiJNolbWDI75WOWWRq2X73yRQKPbLiKKlPbb/2haom0U0IBcxgM9RCApPfq+aX8zEc=
-X-Received: by 2002:ac8:525a:: with SMTP id y26mr28627644qtn.378.1565585096276;
-	Sun, 11 Aug 2019 21:44:56 -0700 (PDT)
+	Mon, 12 Aug 2019 14:03:01 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 12 Aug 2019 14:03:03 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 12 Aug 2019 14:02:19 +0800
+Message-ID: <20190812060219.29267-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <cover.1561696450.git.timothy.t.orling@linux.intel.com>
-	<a853162aa82bf2c1723190f00fc6ad608ab21fc8.1561696450.git.timothy.t.orling@linux.intel.com>
-	<CA+chaQfnfvnSjEJbKoEf7gtF-FaM0rfNoRVWiJtSPcfuR+s4oQ@mail.gmail.com>
-	<910f1d32-e526-6ecc-ba4f-cf5c75461725@gmail.com>
-	<CA+chaQdCTa5q5ds7OVxiss-rwTvjj_uP8fGcoz=oVNBYnehkKg@mail.gmail.com>
-In-Reply-To: <CA+chaQdCTa5q5ds7OVxiss-rwTvjj_uP8fGcoz=oVNBYnehkKg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Aug 2019 21:44:30 -0700
-Message-ID: <CAMKF1sroB7p8YhnLCumPT+Fk1cCk5s90SdDPdhzeXfyOf6bAng@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/9] libdbi-perl: fix dependencies
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 194A34CE030F.A9958
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-configparser: upgrade 3.7.4 -> 3.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,130 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 04:44:55 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 12 Aug 2019 06:03:13 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-thx applied, lets see in next run
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-On Sun, Aug 11, 2019 at 9:40 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> khem: see
-> https://github.com/kraj/jenkins-jobs/pull/1
-> which might fix the oe_world_workspace-compare-signatures jenkins job for you.
->
-> On Sun, Jul 21, 2019 at 4:22 AM Khem Raj <raj.khem@gmail.com> wrote:
->>
->>
->> On 7/17/19 6:04 AM, Martin Jansa wrote:
->> > This causes libdbi-perl-native to depend on target perl again, why did you
->> > revert the fix from:
->> > http://git.openembedded.org/meta-openembedded/commit/?id=eb868d056d15a56596cbf6ed3a4b66b054f2d563
->> > ?
->>
->>
->> I think we should reintroduce the above patch Martin, would you be
->> interested to send patch ? we need to rejig the checksum match tests on
->> jenkins so
->>
->> such oversight does not happen.
->>
->>
->> >
->> >   === Comparing signatures for task do_populate_sysroot.sigdata between
->> > qemux86 and qemux86copy ===
->> > ERROR: libdbi-perl-native different signature for task
->> > do_populate_sysroot.sigdata between qemux86 and qemux86copy
->> > NOTE: Starting bitbake server...
->> > NOTE: Started PRServer with DBfile: build/cache/prserv.sqlite3, IP:
->> > 127.0.0.1, PORT: 38307, PID: 13970
->> > Hash for dependent task perl/perl_5.30.0.bb.do_populate_sysroot
->> > changed from e3a38726fc849347a14b574ef52a59f5578632accbf70259a6ffd09fea54dc4e
->> > to de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
->> > Unable to find matching sigdata for
->> > oe-core/meta/recipes-devtools/perl/perl_5.30.0.bb.do_populate_sysroot
->> > with hash de2eb1fa749aab50f0e99c144a875bd50025fbb6299723f2e7ad28b49bbadf78
->> >
->> > ERROR: 1 errors found in
->> > sstate-diff/1563367471/signatures.qemux86copy.do_populate_sysroot.sigdata.log
->> >
->> >
->> >
->> > On Fri, Jun 28, 2019 at 7:00 AM Tim Orling <timothy.t.orling@linux.intel.com>
->> > wrote:
->> >
->> >> * Fix RDEPENDS, drop class-target (dependencies are the same for native)
->> >> * Reorganize recipe to best practices
->> >> * Add ptest dependencies
->> >>
->> >> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
->> >> ---
->> >>   .../perl/libdbi-perl_1.642.bb                 | 38 +++++++++++++++----
->> >>   1 file changed, 31 insertions(+), 7 deletions(-)
->> >>
->> >> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> >> b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> >> index ff4a9d0610..77991bd158 100644
->> >> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> >> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
->> >> @@ -7,13 +7,6 @@ database interface independent of the actual database
->> >> being used. \
->> >>   HOMEPAGE = "http://search.cpan.org/dist/DBI/"
->> >>   SECTION = "libs"
->> >>   LICENSE = "Artistic-1.0 | GPL-1.0+"
->> >> -RDEPENDS_${PN}_class-target = " \
->> >> -    perl-module-carp \
->> >> -    perl-module-exporter \
->> >> -    perl-module-exporter-heavy \
->> >> -    perl-module-dynaloader \
->> >> -"
->> >> -
->> >>   LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
->> >>
->> >>   SRC_URI = "
->> >> http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
->> >> @@ -34,4 +27,35 @@ do_install_prepend() {
->> >>          rm -rf ${B}/t/z*.t
->> >>   }
->> >>
->> >> +RDEPENDS_${PN} = " \
->> >> +    perl-module-carp \
->> >> +    perl-module-exporter \
->> >> +    perl-module-exporter-heavy \
->> >> +    perl-module-dynaloader \
->> >> +    perl-module-io-dir \
->> >> +    perl-module-scalar-util \
->> >> +    perl-module-universal \
->> >> +"
->> >> +
->> >> +RDEPENDS_${PN}-ptest = " \
->> >> +    ${PN} \
->> >> +    perl-module-b \
->> >> +    perl-module-benchmark \
->> >> +    perl-module-cwd \
->> >> +    perl-module-data-dumper \
->> >> +    perl-module-encode \
->> >> +    perl-module-encode-byte \
->> >> +    perl-module-encode-encoding \
->> >> +    perl-module-file-copy \
->> >> +    perl-module-file-path \
->> >> +    perl-module-lib \
->> >> +    perl-module-perlio \
->> >> +    perl-module-perlio-scalar \
->> >> +    perl-module-perlio-via \
->> >> +    perl-module-sdbm-file \
->> >> +    perl-module-storable \
->> >> +    perl-module-test-more \
->> >> +    perl-module-utf8 \
->> >> +    "
->> >> +
->> >>   BBCLASSEXTEND = "native"
->> >> --
->> >> 2.20.1
->> >>
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-configparser.inc           | 4 ++--
+ .../{python-configparser_3.7.4.bb => python-configparser_3.8.1.bb}    | 0
+ .../{python3-configparser_3.7.4.bb => python3-configparser_3.8.1.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-configparser_3.7.4.bb => python-configparser_3.8.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-configparser_3.7.4.bb => python3-configparser_3.8.1.bb} (100%)
+
+diff --git a/meta-python/recipes-devtools/python/python-configparser.inc b/meta-python/recipes-devtools/python/python-configparser.inc
+index 2860989..7f4385e 100644
+--- a/meta-python/recipes-devtools/python/python-configparser.inc
++++ b/meta-python/recipes-devtools/python/python-configparser.inc
+@@ -5,7 +5,7 @@ LICENSE = "unknown"
+ 
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
+ 
+-SRC_URI[md5sum] = "aaa80b58b6b0810e54f66486860b3ed1"
+-SRC_URI[sha256sum] = "da60d0014fd8c55eb48c1c5354352e363e2d30bbf7057e5e171a468390184c75"
++SRC_URI[md5sum] = "bc1558ed941cb1acb80ff650726d5af8"
++SRC_URI[sha256sum] = "bc37850f0cc42a1725a796ef7d92690651bf1af37d744cc63161dac62cabee17"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-configparser_3.7.4.bb b/meta-python/recipes-devtools/python/python-configparser_3.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-configparser_3.7.4.bb
+rename to meta-python/recipes-devtools/python/python-configparser_3.8.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-configparser_3.7.4.bb b/meta-python/recipes-devtools/python/python3-configparser_3.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-configparser_3.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-configparser_3.8.1.bb
+-- 
+2.7.4
+
+
+
 
