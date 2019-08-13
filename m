@@ -1,62 +1,30 @@
-Return-Path: <Arturo.Buzarra@digi.com>
-Received: from mail1.bemta24.messagelabs.com (mail1.bemta24.messagelabs.com
-	[67.219.250.4])
-	by mail.openembedded.org (Postfix) with ESMTP id DAE637DD6A
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EAEF7D5B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2019 07:31:46 +0000 (UTC)
-Received: from [67.219.250.101] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.us-west-2.aws.symcld.net id 7B/5A-17907-367625D5;
-	Tue, 13 Aug 2019 07:31:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNKsWRWlGSWpSXmKPExsXi5LtOQDcxPSj
-	WYEO7lcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjH10ynGggmCFYebv7M0MD7k72Lk4hASWMUo
-	cfDkUnYIZy+jxO1/y1i7GDk52AQMJT72zmQBsUUEYiSWnj/PBmILC4QBNXxngohHS0xf9ROon
-	gPI1pO4+UsRJMwioCqxY8JeJpAwr4CvxN2vsSBhIQFTiZn7frGBhBkFVCQm7C8GCTMLiEvcej
-	IfbKCEgIDEkj3nmSFsUYmXj/+xQtgKEksXHWOFqM+TuH/3PiOIzSsgKHFy5hMWiPEqEs+fL2e
-	fwCg0C8nYWUhaZiFpgYjrSCzY/YkNwtaWWLbwNTOMfebAYyZk8QWM7KsYLZKKMtMzSnITM3N0
-	DQ0MdA0NjXQNjUG0oV5ilW6iXmmxbnlqcYmukV5iebFecWVuck6KXl5qySZGYCylFDTl72B8P
-	/ON3iFGSQ4mJVHe6WcCY4X4kvJTKjMSizPii0pzUosPMcpwcChJ8IqmBsUKCRalpqdWpGXmAO
-	MaJi3BwaMkwssMkuYtLkjMLc5Mh0idYrTnmPBy7iJmjjurlgDJj2DyO4gUYsnLz0uVEuf9DtI
-	mANKWUZoHNxSWhi4xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZNBZnCk5lXArf7FdBZTEBn
-	vbkRCHJWSSJCSqqByacj48Zth/0+0Vqn/3kn9L+9r9BwiqPSZw/7D5sspcauH+KtCgpKe+vKO
-	lOVFN8Yrv02aZuq+94Z02zuvRXN4/luzXYmVPgXc6nNvZAD8+pcWvpOsX174PbooJ5TWc31OR
-	ZMd6QMlsT5nJoo/9eFP4b3+11d1mtHZ8VfmO7U0c0erMX6yVbrttSdFyL1vVNXbOJ+cP0XY3r
-	QLA5x0apjNTUaJ75eN/sm8Td8c6G7gzzLM51kSZ0pSxzm+v/uuc1rqWd25FtrP9Mnh+3fRE1b
-	Q3In2zeF71Wat8vyab9vHbPCrsmxpq/yrUKjrS4JhERsXRIdFrK20S9U8f38j1uOdzgzy5W9k
-	Hna1i9TxK3EUpyRaKjFXFScCAC2ViBQvgMAAA==
-X-Env-Sender: Arturo.Buzarra@digi.com
-X-Msg-Ref: server-18.tower-325.messagelabs.com!1565681504!3179!1
-X-Originating-IP: [66.77.174.16]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.43.9; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 32218 invoked from network); 13 Aug 2019 07:31:45 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-18.tower-325.messagelabs.com with ECDHE-RSA-AES256-SHA384
-	encrypted SMTP; 13 Aug 2019 07:31:45 -0000
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 13 Aug 2019 02:31:44 -0500
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([fe80::c47f:be41:1dc7:5ab8%11]) with mapi id
-	14.03.0468.000; Tue, 13 Aug 2019 09:31:42 +0200
-From: "Buzarra, Arturo" <Arturo.Buzarra@digi.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Re: Re: [oe] [meta-oe][PATCH v2] lvm2: Fix RDEPEND on lvm2 to
-	lvm2-udevrules
-Thread-Index: AdVRpY8OSkqyGKGfShCA8tz3GZh99Q==
-Date: Tue, 13 Aug 2019 07:31:41 +0000
-Message-ID: <1F1C12BB7E7BAA40ACCAD76309F0BEC301C8D8D3@dor-sms-xch01.digi.com>
-Reply-To: "Buzarra, Arturo" <Arturo.Buzarra@digi.com>
-Accept-Language: es-ES, es-ES, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.101.2.111]
+	Tue, 13 Aug 2019 08:20:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,380,1559491200"; d="scan'208";a="73574270"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 13 Aug 2019 16:20:01 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id C5BBD4CE0326
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Aug 2019 16:20:02 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 13 Aug 2019 16:20:00 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 Aug 2019 16:19:21 +0800
+Message-ID: <20190813081921.8178-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: C5BBD4CE0326.A9A9F
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-filesystems] [PATCH] xfsprogs: upgrade 5.1.0 -> 5.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,12 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 07:31:47 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 Aug 2019 08:20:03 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Any feedback about this patch?
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-Thanks,
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ .../recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb} (94%)
+
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
+similarity index 94%
+rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
+rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
+index 0130fd2..10d1b70 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
+@@ -12,8 +12,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
+            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
+            "
+-SRC_URI[md5sum] = "7199b7aaf088d82fc8a1660ffeb63626"
+-SRC_URI[sha256sum] = "ca8b4e73dfc5b6227bb6d4e73d019035a1975b83ea41e218cdff15058a9f6c45"
++SRC_URI[md5sum] = "e38032818aa3b1ef224a69b6184fc12a"
++SRC_URI[sha256sum] = "e41cdaa43d92b38c8a12ce9cb612ab911ba0e019c2e0762c494a8a601f533fd6"
+ 
+ inherit autotools-brokensep
+ 
+-- 
+2.7.4
+
+
+
 
