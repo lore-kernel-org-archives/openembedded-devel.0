@@ -1,32 +1,28 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F4937319F
+Return-Path: <maciej.pijanowski@3mdeb.com>
+Received: from 1.mo2.mail-out.ovh.net (1.mo2.mail-out.ovh.net [46.105.63.121])
+	by mail.openembedded.org (Postfix) with ESMTP id ABC0C7EC64
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2019 17:00:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7DH0ZBd017005
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 13 Aug 2019 10:00:38 -0700 (PDT)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.10]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0468.000;
-	Tue, 13 Aug 2019 10:00:34 -0700
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: Adrian Bunk <bunk@stusta.de>
-Thread-Topic: [oe] [meta-oe][PATCH 1/1] php: zlib and zip support
-Thread-Index: AQHVUUNC/vrmkq9WB0eliswKDId4Xab49/WAgABWeiA=
-Date: Tue, 13 Aug 2019 17:00:33 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF84FA87EF1C@ALA-MBD.corp.ad.wrs.com>
-References: <20190812192220.238334-1-joe.slater@windriver.com>
-	<20190813045003.GA5396@localhost>
-In-Reply-To: <20190813045003.GA5396@localhost>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.117.223]
+	Tue, 13 Aug 2019 18:24:35 +0000 (UTC)
+Received: from player711.ha.ovh.net (unknown [10.109.143.18])
+	by mo2.mail-out.ovh.net (Postfix) with ESMTP id 8EA691A6497
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Aug 2019 20:24:35 +0200 (CEST)
+Received: from 3mdeb.com (89-66-81-159.dynamic.chello.pl [89.66.81.159])
+	(Authenticated sender: maciej.pijanowski@3mdeb.com)
+	by player711.ha.ovh.net (Postfix) with ESMTPSA id 136FB8BFE585;
+	Tue, 13 Aug 2019 18:24:33 +0000 (UTC)
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 13 Aug 2019 20:24:13 +0200
+Message-Id: <20190813182413.28313-1-maciej.pijanowski@3mdeb.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] php: zlib and zip support
+X-Ovh-Tracer-Id: 27866022749417032
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduvddruddviedguddvtdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecu
+Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
+Subject: [meta-python][PATCH] python3-aiofiles: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,31 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 17:00:44 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 13 Aug 2019 18:24:36 -0000
+Content-Transfer-Encoding: 8bit
 
-VGhhdCdzIHByb2JhYmx5IGJlc3QuICBUaGUgYnVuZGxlZCB3YXkgd29uJ3QgYmUgc3VwcG9ydGVk
-IGF0IHNvbWUgZnV0dXJlIGRhdGUsIGFueXdheS4gICAgICBKb2UNCg0KLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCkZyb206IEFkcmlhbiBCdW5rIDxidW5rQHN0dXN0YS5kZT4gDQpTZW50OiBN
-b25kYXksIEF1Z3VzdCAxMiwgMjAxOSA5OjUwIFBNDQpUbzogU2xhdGVyLCBKb3NlcGggPGpvZS5z
-bGF0ZXJAd2luZHJpdmVyLmNvbT4NCkNjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIDEvMV0gcGhwOiB6
-bGliIGFuZCB6aXAgc3VwcG9ydA0KDQpPbiBNb24sIEF1ZyAxMiwgMjAxOSBhdCAxMjoyMjoyMFBN
-IC0wNzAwLCBKb2UgU2xhdGVyIHdyb3RlOg0KPiBBZGQgYmFjayB6bGliIHN1cHBvcnQuICBEZWZp
-bmUgemlwIHN1cHBvcnQgYnV0IGRvIG5vdCBlbmFibGUgaXQuDQo+Li4uDQo+ICsjIEZvciB6aXAs
-IHNlbGVjdCBvbmUgb3Igbm9uZS4gIG9sZHppcCB1c2VzIGEgYnVuZGxlZCBsaWJyYXJ5IGFuZCBp
-cyBkZXByZWNhdGVkLg0KPiArIw0KPiArUEFDS0FHRUNPTkZJR1tuZXd6aXBdID0gIi0tZW5hYmxl
-LXppcCAtLXdpdGgtbGliemlwPSR7U1RBR0lOR19FWEVDUFJFRklYRElSfSwsbGliemlwIg0KPiAr
-UEFDS0FHRUNPTkZJR1tvbGR6aXBdID0gIi0tZW5hYmxlLXppcCAtLXdpdGhvdXQtbGliemlwLCIN
-Cj4uLi4NCg0KQW55IHJlYXNvbiB3aHkgdGhpcyBjYW4ndCBiZSBQQUNLQUdFQ09ORklHW3ppcF0g
-Zm9yIHRoZSBleHRlcm5hbCBsaWJ6aXAgb25seSB3aXRob3V0IGFueSBvcHRpb24gZm9yIHRoZSBi
-dW5kbGVkIGxpYnJhcnk/DQoNCkJ1bmRsZWQgbGlicmFyaWVzIGFyZSB1c3VhbGx5IGJlaGluZCBv
-biBzZWN1cml0eSBmaXhlcywgYW5kIHBocCBpcyBhIHNvZnR3YXJlIHdoZXJlIHRoaXMgdGVuZHMg
-dG8gbWF0dGVyLg0KDQpjdQ0KQWRyaWFuDQoNCi0tIA0KDQogICAgICAgIklzIHRoZXJlIG5vdCBw
-cm9taXNlIG9mIHJhaW4/IiBMaW5nIFRhbiBhc2tlZCBzdWRkZW5seSBvdXQNCiAgICAgICAgb2Yg
-dGhlIGRhcmtuZXNzLiBUaGVyZSBoYWQgYmVlbiBuZWVkIG9mIHJhaW4gZm9yIG1hbnkgZGF5cy4N
-CiAgICAgICAiT25seSBhIHByb21pc2UsIiBMYW8gRXIgc2FpZC4NCiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIFBlYXJsIFMuIEJ1Y2sgLSBEcmFnb24gU2VlZA0KDQo=
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+---
+ .../recipes-devtools/python/python-aiofiles.inc    | 14 ++++++++++++++
+ .../python/python3-aiofiles_0.4.0.bb               |  2 ++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-aiofiles.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiofiles_0.4.0.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-aiofiles.inc b/meta-python/recipes-devtools/python/python-aiofiles.inc
+new file mode 100644
+index 000000000000..3ecb21c86dd2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-aiofiles.inc
+@@ -0,0 +1,14 @@
++SUMMARY = "File support for asyncio"
++DESCRIPTION = "Asynchronous local file IO library for asyncio and Python"
++HOMEPAGE = "https://github.com/aio-libs/aiohttp"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
++
++SRC_URI[md5sum] = "cb33cf96c371fbd56fc27ab0bd81bd61"
++SRC_URI[sha256sum] = "021ea0ba314a86027c166ecc4b4c07f2d40fc0f4b3a950d1868a0f2571c2bbee"
++
++PYPI_PACKAGE = "aiofiles"
++inherit pypi
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-asyncio \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-aiofiles_0.4.0.bb b/meta-python/recipes-devtools/python/python3-aiofiles_0.4.0.bb
+new file mode 100644
+index 000000000000..b4d188b2edf3
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiofiles_0.4.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-aiofiles.inc
+-- 
+2.20.1
+
 
