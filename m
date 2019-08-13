@@ -1,30 +1,25 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EAEF7D5B9
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B09C17ED40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2019 08:20:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,380,1559491200"; d="scan'208";a="73574270"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Aug 2019 16:20:01 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id C5BBD4CE0326
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2019 16:20:02 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 13 Aug 2019 16:20:00 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Aug 2019 16:19:21 +0800
-Message-ID: <20190813081921.8178-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Tue, 13 Aug 2019 09:21:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7D9LvkS016982
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 13 Aug 2019 02:21:57 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Tue, 13 Aug 2019 02:21:57 -0700
+From: <kai.kang@windriver.com>
+To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
+Date: Tue, 13 Aug 2019 05:21:04 -0400
+Message-ID: <20190813092118.113213-3-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20190813092118.113213-1-kai.kang@windriver.com>
+References: <20190813092118.113213-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: C5BBD4CE0326.A9A9F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-filesystems] [PATCH] xfsprogs: upgrade 5.1.0 -> 5.2.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][Patch 02/16] xfconf: 4.13.8 -> 4.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2019 08:20:03 -0000
+X-List-Received-Date: Tue, 13 Aug 2019 09:21:57 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb}   | 4 ++--
+ .../xfconf/{xfconf_4.13.8.bb => xfconf_4.14.1.bb}             | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb} (94%)
+ rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.8.bb => xfconf_4.14.1.bb} (83%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-similarity index 94%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-index 0130fd2..10d1b70 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-@@ -12,8 +12,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            "
--SRC_URI[md5sum] = "7199b7aaf088d82fc8a1660ffeb63626"
--SRC_URI[sha256sum] = "ca8b4e73dfc5b6227bb6d4e73d019035a1975b83ea41e218cdff15058a9f6c45"
-+SRC_URI[md5sum] = "e38032818aa3b1ef224a69b6184fc12a"
-+SRC_URI[sha256sum] = "e41cdaa43d92b38c8a12ce9cb612ab911ba0e019c2e0762c494a8a601f533fd6"
+diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.8.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb
+similarity index 83%
+rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.13.8.bb
+rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb
+index 54d051c6f..8da96a420 100644
+--- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.13.8.bb
++++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.14.1.bb
+@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection
  
- inherit autotools-brokensep
+ EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
  
+-SRC_URI[md5sum] = "5d48e8d50f7bfadd31e804ce602a5cf3"
+-SRC_URI[sha256sum] = "55e2441c4ff78a7006fabb59647f7bc1f190cbb82327b93ba063ff624a896591"
++SRC_URI[md5sum] = "cb51a59e2a89d05232f825ad8c74a7c0"
++SRC_URI[sha256sum] = "b893e0a329aee00902fec2f0509f56916c9dcc7844e1b1f9e3c7399458290d59"
+ 
+ FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
+                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
 -- 
-2.7.4
-
-
+2.20.0
 
 
