@@ -1,57 +1,59 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 25C427CE73
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AB02D7CE73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2019 04:42:06 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id x15so42086336pgg.8
+	Wed, 14 Aug 2019 04:42:56 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id x15so42087471pgg.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2019 21:42:08 -0700 (PDT)
+	Tue, 13 Aug 2019 21:42:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=0X0mr0FxqHtUKxY+BBKl93L7jephgw0R/lPpHgZ0Kh8=;
-	b=ldNgB6QXW358zvll6+Ws3eW7vkY4d/9q4p1hCFTJkPP10jdiL4eo/wzZxIlVUs7bk2
-	k9270Ljhje6OZM7EsBfEiOnrjuCXfUS3AC90fGZL0HWY9cyyFFhqtAFutHEFAsoCg7Ch
-	q3f8xqiiHzlULAweOVWIBNCUVBymMZ0CnGEYC4HLgNkn/j8BbcRTi+Ann5DSoRh9v6HF
-	nAWUn8+EtLjpsXgYfGhLDS025XCSYp6zNq4VIHqbQOOM9fU1S4LmNeh477DJF0ew1u7w
-	p3kjwEybix5heSrClRv68/LFxK1g/uvSsQnY8DuXTISH8BTevZSLQzCLondU0vuKrRu3
-	/x3A==
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=cbFDh1FH7qkHZ2tv/OzZ6RsrghDO3ioOD+dSgo+/Vew=;
+	b=Nf+jyBgG8cZjjZizHZtiwcGW+huld4c+tjFd8hKShr6j/4qdyOfKv5IxOtAqjRruaM
+	5aBx9DsUifaLWdiZvHRhGGHhMJzI1hk9kO7v9m9Ncbps7CtSxugqIUDkMocf+SVXTSwg
+	IoiZj4OZD9ywTLssX/xXsFjq8LWW3uSxxY3RV2xmOGOCGvtJWj5z+jwfd4bFBfyVT+s4
+	NWWG/jEK4GuwT8eQSDIzAJDpCIpSunFhRtwETEE1SWbymFOHq+FAuCg+v0SeYfRuiIax
+	w7s6IqN1dFp8xaZXwceDjANpAYpOJpAaBXZCjVtdoOlLLzFfi06xnB9ifwwLarRyGUPt
+	HEkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
+	h=x-gm-message-state:subject:to:cc:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language;
-	bh=0X0mr0FxqHtUKxY+BBKl93L7jephgw0R/lPpHgZ0Kh8=;
-	b=SUO83/ZwVc5sRFZsCk7pCjYmgeu4l2JdG4VXVNqvRUSAap45YMkTVBpdkJoUbvv0+k
-	DcoOlh2EjSoSAnmfDtuM2CFx7iuRZS7/C4ksKL684BMXEwNDSe3hRMt2BMMlMR4IRlrA
-	Bz2NdqmBICRaAJha/mLqgz3yadf14I2pMdOKRMqu5SR3SFETvu5397gANTC749EYi7zO
-	a/AZrVMP5KR8x7+M+Lqa2nundaP1Qz6AkdjrIBvX1VmvP0ErLn0VIKdoZtUSSzEeFZga
-	7+h5AsoSN2XASP3Mym8i9+1J5O8SvCTDHmTxeQknsFzbkEv4VgrklbpJZsYpVtvCbc97
-	XxHg==
-X-Gm-Message-State: APjAAAX1jCewtRl5ehX17zm3PYdXxdEQuzRf06iHy2L8kjm5wxRZUJBM
-	gVdwBWUBcwY9ez+HBb+fA1TBMUVAiuA=
-X-Google-Smtp-Source: APXvYqyAl/+sAakZQ6v4yK6mLsMWLb5KSYaANcS/ZJO2GDq0e5teMaZelsE4MdPLkHXJjf96cTIdhQ==
-X-Received: by 2002:a17:90a:3646:: with SMTP id
-	s64mr5410171pjb.44.1565757727329; 
-	Tue, 13 Aug 2019 21:42:07 -0700 (PDT)
+	bh=cbFDh1FH7qkHZ2tv/OzZ6RsrghDO3ioOD+dSgo+/Vew=;
+	b=pulilQm9R9sUkLUglVI2medl6jcgG9ERIX5A4fyW3O/ZHcdvve6TZmDeEMZ7aIMWqE
+	WYFx/JqTBlRTydZsslsJGZQE0Md3iGbOARWVNc+l8HR5y4Ue5Z1muzxtgiLuwCs4CSPz
+	EHRybrs3ANyyt0g/1xi2UpH/J7D2b8WckvhVtIccTJElY/qhIFlrP7PhWbrJZsqJlMtf
+	nQGqCBPd75ESYT5kh4qnoimo/MkOjKrvJag+7bQ9dJztwQb7M5x+itBoGRRy8zXHyr15
+	57abpmSZg2XMH+j1yAf4AsHMNHYzrxiOVUT3q4T0FP+ZlUcnmqZVeHY1JprQHTQoYHno
+	W0jw==
+X-Gm-Message-State: APjAAAV5Nn6sZhqoSrw/eJXsKq4tPjABm+QPzkzo9aMmIq3/3+iPFpcK
+	iXpGIoPkT6+WoaHt6MaVb6PDPy2ZVBM=
+X-Google-Smtp-Source: APXvYqwMGv22Vxw9NGebo+ta1ZQeIQjk+zOpHqFBbcfg83Ce33GTP2FhlRBhR2vB5abchWvlRbBFUA==
+X-Received: by 2002:a63:ec48:: with SMTP id r8mr35745034pgj.387.1565757777058; 
+	Tue, 13 Aug 2019 21:42:57 -0700 (PDT)
 Received: from ?IPv6:2601:646:8500:6bc6::afc4? ([2601:646:8500:6bc6::afc4])
-	by smtp.gmail.com with ESMTPSA id p90sm9121719pjp.7.2019.08.13.21.42.06
+	by smtp.gmail.com with ESMTPSA id
+	v22sm107699164pgk.69.2019.08.13.21.42.56
 	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 Aug 2019 21:42:06 -0700 (PDT)
-To: "Buzarra, Arturo" <Arturo.Buzarra@digi.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1F1C12BB7E7BAA40ACCAD76309F0BEC301C8D8D3@dor-sms-xch01.digi.com>
+	Tue, 13 Aug 2019 21:42:56 -0700 (PDT)
+To: "Slater, Joseph" <joe.slater@windriver.com>, Adrian Bunk <bunk@stusta.de>
+References: <20190812192220.238334-1-joe.slater@windriver.com>
+	<20190813045003.GA5396@localhost>
+	<007BD92917A2324FA403BCF9A464CF84FA87EF1C@ALA-MBD.corp.ad.wrs.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <5cfc2cf4-7023-d0b9-54e5-683f4891e144@gmail.com>
-Date: Tue, 13 Aug 2019 21:42:16 -0700
+Message-ID: <9b6458c3-65a2-6bd5-3475-da9193505838@gmail.com>
+Date: Tue, 13 Aug 2019 21:43:06 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1F1C12BB7E7BAA40ACCAD76309F0BEC301C8D8D3@dor-sms-xch01.digi.com>
-Subject: Re: [meta-oe][PATCH v2] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
+In-Reply-To: <007BD92917A2324FA403BCF9A464CF84FA87EF1C@ALA-MBD.corp.ad.wrs.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1] php: zlib and zip support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,30 +66,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2019 04:42:07 -0000
-X-Groupsio-MsgNum: 79091
-Content-Type: multipart/mixed; boundary="------------18EAC04523FA0042C4860A4A"
+X-List-Received-Date: Wed, 14 Aug 2019 04:42:56 -0000
+X-Groupsio-MsgNum: 79092
+Content-Type: multipart/mixed; boundary="------------5CAF2CAF16FBA3268CE84BD3"
 Content-Language: en-US
 
---------------18EAC04523FA0042C4860A4A
+--------------5CAF2CAF16FBA3268CE84BD3
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 8/13/19 12:31 AM, Buzarra, Arturo wrote:
-> Any feedback about this patch?
-
-thanks for reminder, this is same as [1], then thud in subject line
-confused me and I assigned it to Armin for release maintainance but
-now I see that we can apply this patch for master as well. which I have
-queued
-
->=20
-> Thanks,
+On 8/13/19 10:00 AM, Slater, Joseph wrote:
+> That's probably best.  The bundled way won't be supported at some futur=
+e date, anyway.      Joe
 >=20
 
---------------18EAC04523FA0042C4860A4A
+I think so too. Would you send a v2 ?
+
+> -----Original Message-----
+> From: Adrian Bunk <bunk@stusta.de>=20
+> Sent: Monday, August 12, 2019 9:50 PM
+> To: Slater, Joseph <joe.slater@windriver.com>
+> Cc: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 1/1] php: zlib and zip support
+>=20
+> On Mon, Aug 12, 2019 at 12:22:20PM -0700, Joe Slater wrote:
+>> Add back zlib support.  Define zip support but do not enable it.
+>> ...
+>> +# For zip, select one or none.  oldzip uses a bundled library and is =
+deprecated.
+>> +#
+>> +PACKAGECONFIG[newzip] =3D "--enable-zip --with-libzip=3D${STAGING_EXE=
+CPREFIXDIR},,libzip"
+>> +PACKAGECONFIG[oldzip] =3D "--enable-zip --without-libzip,"
+>> ...
+>=20
+> Any reason why this can't be PACKAGECONFIG[zip] for the external libzip=
+ only without any option for the bundled library?
+>=20
+> Bundled libraries are usually behind on security fixes, and php is a so=
+ftware where this tends to matter.
+>=20
+> cu
+> Adrian
+>=20
+
+--------------5CAF2CAF16FBA3268CE84BD3
 Content-Type: application/pgp-keys;
  name="pEpkey.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -134,4 +159,4 @@ prldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
 =3Dsj8j
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------18EAC04523FA0042C4860A4A--
+--------------5CAF2CAF16FBA3268CE84BD3--
