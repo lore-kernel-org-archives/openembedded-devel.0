@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
 	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 9013F7F29D
+	by mail.openembedded.org (Postfix) with ESMTP id BF1CA7F2EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2019 21:56:17 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id c3so3512947wrd.7
+	Thu, 15 Aug 2019 21:56:18 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id c3so3512980wrd.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2019 14:56:18 -0700 (PDT)
+	Thu, 15 Aug 2019 14:56:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=NHPl/YueGeU8mCcH4jZOLHCrkwQBfHj9GxhOxyoS4jc=;
-	b=EhosMRsTxoP4i3kD6WtjVfzwYtzU1eSpuRUCBZRYkTDxQD+6EoooaG6khhd4bl6aos
-	0o9SnrlqDEVFKQ5SSYb1SjkJznCZPBVLkDzZ8vKooF7R1bUbwP7Ecy0ZBd5Fmx4AHus5
-	7W3uGQQcbDfC9f4OKwMtCO+13Tj7a/BQ/G1C2dGmpaPVCRd1HaUcK4MUzfuEEDUpqUG3
-	d3CaMUXuu9FH1CRgC96Cm+QWFoILr3p8EW3M40oCU/lAAfXSC6UjjENT9Rt2J8u7WBMH
-	VnPSjKFn3bRuPQZU836OXxiKK/O+QLxC8VeCtpJkt4B+lW6rsS5KpgyNtgbSKq4lw2zJ
-	e/lQ==
+	bh=XrukXEHnz6J9h56GFCnoylhExF16jpFaRZrOCZlq/Uo=;
+	b=lnnc/q/TqzQ/VYd0YWrCdA1uW/XiLG20xhj/nT2j5VcgpaHNFhYA8RBJL3b/rsLmfv
+	/zTHGnVlVOxa/BHzrlzkxa5BtfQtQ11jgRF7u6jiP/BsjqEkq8WyrzmJZsolHfpMDTMU
+	6fV0CHmG10pqyE1XPCNAVSx8Jcew5/0GHPhZjcwGaPtVc9iZhtJ0VEbAiY2Su77CyiI5
+	rbMPxVjoamRBOGOo8qPL4G9D81ghjkU6+XYbyZSkn7Aii1aq5qovz1UqGF1QGimKL6XN
+	In+8qNs0VxuGZmiz9+69mOb29cUc0G3lm/34EyjEv3YWPkDmxQW2dfsyQ8feMHRGPE14
+	F7ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=NHPl/YueGeU8mCcH4jZOLHCrkwQBfHj9GxhOxyoS4jc=;
-	b=UIwSzwcZ6wVO0/E1g5Grt9p6B1Q9pD/M+Xqlhs+lLee6HO0Q/+Y4ZdTtc113r7MKX+
-	DJ86pdUcPNkc+bRHYkMiJNGIBShp+LnQlGvMK9WDZkjjAgWQJnc6yVf+CCIA+GiyLI14
-	LvM+KX8jCKzAzw/I/D2uefB8EIZIdtQtxMgTMVhZQzU1JkZ3j44l8HUjHta4U/zoMlBA
-	m8Or5O+oheEyU/ZqAZNcPihQhVgjAD8jWre/aSXt7blbxSHWFXUQGsXlRx6ofS7JEEqn
-	aPOBqgoqtfK0bWkHrkRb55GxfOXQc9uixJFEssbIQ6W+z+z0ebjdNXFTVlHM2zOQLg08
-	m/sg==
-X-Gm-Message-State: APjAAAUMrYNJAPLcAZ8AsiU8464S9ahJE0wotTMQrPZ8qZbP/y0aZfm9
-	GjpAKovOzJwCg479DcnHj/GLkMOY
-X-Google-Smtp-Source: APXvYqw9/kGpK2Ly1Lz+b5fYdTSUTd+KtLwuRCqbTKxBCAQ/cFWoiGmdy2g4C0nHi2o38xgucs6ufw==
-X-Received: by 2002:adf:f30e:: with SMTP id i14mr7474913wro.288.1565906178021; 
-	Thu, 15 Aug 2019 14:56:18 -0700 (PDT)
+	bh=XrukXEHnz6J9h56GFCnoylhExF16jpFaRZrOCZlq/Uo=;
+	b=j3n2Uj43pXEyRCcQBQ/6vzIyzP/j9EXEz1SZQ91WHlIn1RxUjunYqlBxPgvCH9OS1K
+	sAXAYgFExfK2QPZyrRM+PhzuqIwaxiqdfdVJaAD9ALEbsuqUe2lxRGx/hzXkP7UWi3RD
+	FChSR/Yg+mRWkuylNDeAY58DItLvQqP4hRg1T9u+ldEiBpZfuG1sbvaTk9T6t/akm6rY
+	EvkjZch/qxOOoVjJbKPVWISRabvFPFO3VnqWK5vtKlvzOnYeJXIVmFPBsiaHaX7TTZSf
+	M1D5P2G+lj7o5oEZphGTT79B+SJHTGCMAwyBpfLMvTx2mOWRy73PXjJegx7lsNzwS1jl
+	YH6w==
+X-Gm-Message-State: APjAAAXwsikONw5mMI1fGRo/GGgEaP/39rJLDdvvd68LWlS9iRZ4i3O1
+	sXzff32zICMeEorgRs7Cqn0GOsgm
+X-Google-Smtp-Source: APXvYqwCGYYsl1YFOJtyX1+sf32m3AG3JuX2gHZMefRcxq3w/ptaO4nEcK4psg8GJBjrkG8r1m7MWg==
+X-Received: by 2002:adf:a55d:: with SMTP id j29mr6906445wrb.275.1565906179204; 
+	Thu, 15 Aug 2019 14:56:19 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F042332D9169E9166842542.dip0.t-ipconnect.de.
 	[2003:f0:7f04:2332:d916:9e91:6684:2542])
 	by smtp.gmail.com with ESMTPSA id
-	h97sm10555192wrh.74.2019.08.15.14.56.17
+	h97sm10555192wrh.74.2019.08.15.14.56.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 15 Aug 2019 14:56:17 -0700 (PDT)
+	Thu, 15 Aug 2019 14:56:18 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	kai.kang@windriver.com
-Date: Thu, 15 Aug 2019 23:55:56 +0200
-Message-Id: <20190815215605.19600-5-schnitzeltony@gmail.com>
+Date: Thu, 15 Aug 2019 23:55:57 +0200
+Message-Id: <20190815215605.19600-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190815215605.19600-1-schnitzeltony@gmail.com>
 References: <20190815215605.19600-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 04/13] xfce4-terminal: upgrase 0.8.7.4 -> 0.8.8
+Subject: [PATCH 05/13] gtksourceview3: upgrade 3.24.10 -> 3.24.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,33 +62,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:56:17 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 21:56:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* this an improvement and bugfix release [1]
+* add upstream-version-is-even
+
+[1] http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-3.24.11.news
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-terminal_0.8.7.4.bb => xfce4-terminal_0.8.8.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.7.4.bb => xfce4-terminal_0.8.8.bb} (70%)
+ ...{gtksourceview3_3.24.10.bb => gtksourceview3_3.24.11.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview3_3.24.10.bb => gtksourceview3_3.24.11.bb} (75%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.8.bb
-similarity index 70%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.8.bb
-index 426282e14..ebc046b78 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.8.bb
-@@ -8,7 +8,7 @@ inherit xfce-app
- FILES_${PN} += "${datadir}/xfce4 \
-                 ${datadir}/gnome-control-center"
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+similarity index 75%
+rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
+rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+index d91e479d8..f7884930c 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.10.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+@@ -10,12 +10,12 @@ PNAME = "gtksourceview"
  
--SRC_URI[md5sum] = "c861540dd1dd05f56e62382b3851cf66"
--SRC_URI[sha256sum] = "a88f98af4da72394f2cfbd7f14b0f053ec0a3b58a4f6a577836357c60a6c42ab"
-+SRC_URI[md5sum] = "4295d4d783f6d6dfe92f5bb15d96f6c6"
-+SRC_URI[sha256sum] = "8fba6a60d3a0fee07417ad7c36bf78cc45be1b27f0759e125051aa73f08487fd"
+ S = "${WORKDIR}/${PNAME}-${PV}"
  
- RRECOMMENDS_${PN} += "vte-prompt"
+-inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-introspection
++inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-introspection upstream-version-is-even
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/${PNAME}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "e43337d17c40eae440a76630db76c54e"
+-SRC_URI[sha256sum] = "ab5406cdd0bdcf66afcd52b1e048a2f43c0f3ab391644ee30d9ac419b93cd59b"
++SRC_URI[md5sum] = "b748da426a7d64e1304f0c532b0f2a67"
++SRC_URI[sha256sum] = "691b074a37b2a307f7f48edc5b8c7afa7301709be56378ccf9cc9735909077fd"
+ 
+ FILES_${PN} += " ${datadir}/gtksourceview-3.0"
 -- 
 2.21.0
 
