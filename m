@@ -1,27 +1,23 @@
-Return-Path: <r01007@nxp.com>
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E6017E555
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D39AF7F2F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2019 06:54:36 +0000 (UTC)
-Received: from inva020.nxp.com (localhost [127.0.0.1])
-	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 238CF1A00EA;
-	Thu, 15 Aug 2019 08:54:37 +0200 (CEST)
-Received: from invc005.ap-rdc01.nxp.com (invc005.ap-rdc01.nxp.com
-	[165.114.16.14])
-	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id A89551A0084;
-	Thu, 15 Aug 2019 08:54:35 +0200 (CEST)
-Received: from yb6 (yb6.am.freescale.net [10.81.19.196])
-	by invc005.ap-rdc01.nxp.com (Postfix) with ESMTP id 89CAA402F1;
-	Thu, 15 Aug 2019 14:54:33 +0800 (SGT)
-Received: by yb6 (Postfix, from userid 1004)
-	id BDAD12E02A55; Thu, 15 Aug 2019 01:54:32 -0500 (CDT)
-From: Jun Zhu <junzhu@nxp.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2019 01:54:30 -0500
-Message-Id: <20190815065430.32384-1-junzhu@nxp.com>
-X-Mailer: git-send-email 2.17.1
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [meta-oe][warrior][PATCH] packagegroup-tools-bluetooth: Fix blank RDEPENDS list
+	Thu, 15 Aug 2019 14:32:34 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7FEWaLf013513
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Aug 2019 07:32:36 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 15 Aug 2019 07:32:35 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 15 Aug 2019 10:32:30 -0400
+Message-ID: <20190815143230.69482-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+MIME-Version: 1.0
+Subject: [meta-oe][Patch] packagegroup-tools-bluetooth: correct RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,27 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 06:54:36 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 14:32:35 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-This reverts commit 521a3b0326c56b212ddbb5bf68998e57b498de14, which causes
-the blank RDEPENDS-${PN} for this packagegroup.
+From: Kai Kang <kai.kang@windriver.com>
+
+RDEPENDS_${PN} is wrongly removed and then packagegroup-tools-bluetooth
+requires no package now.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../packagegroups/packagegroup-tools-bluetooth.bb                     | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../packagegroups/packagegroup-tools-bluetooth.bb               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-index 913e311..f2a16dc 100644
+index 2b4448a22..efa3467a7 100644
 --- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
 +++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-@@ -31,3 +31,7 @@ RDEPENDS_bluez5 = " \
-          pulseaudio-module-loopback', \
-         '', d)} \
- "
-+
-+# Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
-+# Otherwise install nothing.
-+RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
+@@ -11,7 +11,7 @@ These tools are used at runtime."
+ 
+ inherit packagegroup
+ 
+-RDEPENDS_bluez5 = " \
++RDEPENDS_${PN} = " \
+     bluez5-noinst-tools \
+     bluez5-obex \
+     bluez5-testtools  \
 -- 
-2.7.4
+2.20.0
 
 
