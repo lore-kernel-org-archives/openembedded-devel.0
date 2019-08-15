@@ -1,46 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C47587ECA6
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C69D7E506
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2019 20:12:22 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id 201so60832qkm.9
+	Thu, 15 Aug 2019 03:21:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,387,1559491200"; d="scan'208";a="73695181"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Aug 2019 11:21:22 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id F0E314CE0337
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2019 13:12:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=t9yNGgbdfsSshiuz4hd+tn8BYHbbQlT0PYA4bHxhKsk=;
-	b=OwMMcQKtUlzkDOejEt4YUd5yydj/XbDQ0mm/2EL+g3OxVHXsoADGiKXYwNRHfDfR5K
-	5yRjOznPJgotbCMRgORIKmSL87QUN2PucGP3weFpWFxILsneaeWiNuCzIgJBbwUa9+fW
-	LBvnEYZc0KGJ9sNPQGSxa+jm/KOneEuZEvwBWCPsAKVQGsyPVY45+iW8H7vorS8jWjMK
-	J58GqOHYl3sOzJEosqziilzZ9DyPNGEim6LPpuYT1J6aINXqa9DReemhdREJAAXiWeSA
-	FD0bqRknsXkdUZ2S8cQrYxs1IRs08JsaEKtltnNcppnUfvjaQMh4/zaWgWiNXg0R6LaM
-	C2Jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=t9yNGgbdfsSshiuz4hd+tn8BYHbbQlT0PYA4bHxhKsk=;
-	b=aPAkBjujWOOCoiHpl1u638vMOMPxtT7FsyzxuwDez7yrjF6d8NYaM1vCG5G44njA/s
-	wQW6mpISe+V8UZhwb0WFDik+aAlKLF5/kYxJpGuuerDDvklEhznpcUUuwy9GWVcGnFvG
-	Y9jmQkUdzoIdZNRBrwDTq12cVP8xzoLdVClYWttr1cwOYgDVo+xJGWXUTbUv+YNmUL9y
-	mDtdwKiFc9JFzEQzllSriXHgESsWEtOn93kO6Udd5PNWb5H/9Ln24eu5slSv2F6pJl+E
-	TQDcAsNH1rX8Ke7opLyS3YuQK6s+9CbTN9ayp8oBJ2r6VWJl933Ghv7QoanF8DMiGvlk
-	lfEA==
-X-Gm-Message-State: APjAAAUmxrs98X+HNQJH5Ipc7FvZG2W9VAu+6Im2ZUyjQRhZcVHEZ/IY
-	lQAFKwTJkJ4G9dXnZ8MM/RUfIdiu7woTaff1kW0fErL0orA=
-X-Google-Smtp-Source: APXvYqwlFPq5KPq96t/77oDFYU4aHPQbEzqNqZUPwgaSzmIjZKE6qdp00zaemsn+40ZdzgvNHf7jhr6O+AhYKFR4TPU=
-X-Received: by 2002:a37:7083:: with SMTP id l125mr1014319qkc.71.1565813543131; 
-	Wed, 14 Aug 2019 13:12:23 -0700 (PDT)
+	Thu, 15 Aug 2019 11:21:21 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 15 Aug 2019 11:21:23 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 15 Aug 2019 11:20:43 +0800
+Message-ID: <20190815032043.25758-2-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190815032043.25758-1-zangrc.fnst@cn.fujitsu.com>
+References: <20190815032043.25758-1-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20190813081921.8178-1-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <20190813081921.8178-1-zangrc.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 14 Aug 2019 13:11:56 -0700
-Message-ID: <CAMKF1srqGAbpKLnNW1Q9UwWmD9sCjq=-5JDr5CZg62S96pr5Vg@mail.gmail.com>
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems] [PATCH] xfsprogs: upgrade 5.1.0 -> 5.2.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: F0E314CE0337.A814F
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-filesystems] [PATCH v2 2/2] xfsdump: fix error to work with xfsprogs 5.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +39,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2019 20:12:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 15 Aug 2019 03:21:23 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-I am seeing this xfsdump failure
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-https://errors.yoctoproject.org/Errors/Details/262092/
+Make it work with xfsprogs 5.2.0.
 
-are these related ?
+"xfs_fsop_geom_v1_t" has changed to "struct xfs_fsop_geom_v1"
+in xfsprogs since version 5.2.0.
 
-On Tue, Aug 13, 2019 at 1:20 AM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
->
-> From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
->
-> Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-> ---
->  .../recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb}   | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.1.0.bb => xfsprogs_5.2.0.bb} (94%)
->
-> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-> similarity index 94%
-> rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-> rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-> index 0130fd2..10d1b70 100644
-> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.1.0.bb
-> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.0.bb
-> @@ -12,8 +12,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
->             file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
->             file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
->             "
-> -SRC_URI[md5sum] = "7199b7aaf088d82fc8a1660ffeb63626"
-> -SRC_URI[sha256sum] = "ca8b4e73dfc5b6227bb6d4e73d019035a1975b83ea41e218cdff15058a9f6c45"
-> +SRC_URI[md5sum] = "e38032818aa3b1ef224a69b6184fc12a"
-> +SRC_URI[sha256sum] = "e41cdaa43d92b38c8a12ce9cb612ab911ba0e019c2e0762c494a8a601f533fd6"
->
->  inherit autotools-brokensep
->
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ .../files/work-with-new-version-of-xfsprogs.patch  | 28 ++++++++++++++++++++++
+ .../recipes-utils/xfsdump/xfsdump_3.1.8.bb         |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/xfsdump/files/work-with-new-version-of-xfsprogs.patch
+
+diff --git a/meta-filesystems/recipes-utils/xfsdump/files/work-with-new-version-of-xfsprogs.patch b/meta-filesystems/recipes-utils/xfsdump/files/work-with-new-version-of-xfsprogs.patch
+new file mode 100644
+index 0000000..4ce23d7
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfsdump/files/work-with-new-version-of-xfsprogs.patch
+@@ -0,0 +1,28 @@
++Make it work with xfsprogs 5.2.0.
++
++"xfs_fsop_geom_v1_t" has changed to "struct xfs_fsop_geom_v1"
++in xfsprogs since version 5.2.0.
++
++Upstream-Status: Pending
++
++Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
++---
++ common/fs.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/common/fs.c b/common/fs.c
++index 60cf0fd..2cc7031 100644
++--- a/common/fs.c
+++++ b/common/fs.c
++@@ -204,7 +204,7 @@ fs_mounted( char *typs, char *chrs, char *mnts, uuid_t *idp )
++ int
++ fs_getid( char *mnts, uuid_t *idb )
++ {
++-	xfs_fsop_geom_v1_t geo;
+++	struct xfs_fsop_geom_v1 geo;
++ 	int fd;
++ 
++ 	fd = open( mnts, O_RDONLY );
++-- 
++2.7.4
++
+diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
+index 54ab30c..0421aa0 100644
+--- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
++++ b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
+@@ -12,6 +12,7 @@ DEPENDS = "xfsprogs attr"
+ 
+ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
+            file://remove-install-as-user.patch \
++           file://work-with-new-version-of-xfsprogs.patch \
+            "
+ SRC_URI[md5sum] = "84d3bc287b4a2bb5d16b2320a47049a7"
+ SRC_URI[sha256sum] = "ed14e67ae5b273c2698e767b43a46f033d361e540fe13feaaf9b110ee0edc585"
+-- 
+2.7.4
+
+
+
 
