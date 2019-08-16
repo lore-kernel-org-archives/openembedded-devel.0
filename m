@@ -1,53 +1,23 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id AB3857D264
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A7357F302
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 07:02:41 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id u16so560873wrr.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 00:02:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4AdQW1GVOtmh2HlCgO6Uvo+5KPcZiz6YFwWd38w0Qlk=;
-	b=beyWtCRnw5bWzg4Bc86PlKHKxiclgacxR6jZGT9U6ezWUI8yyT8alpXYkbVCIgOrp+
-	hAj4ni7DlWf8RFAGeSx0DVO8vSLQwJ0WgKEmFOL9FIiEhCWBb0+V+diSudXRySGsn3Nm
-	FbhU/ulPWZCmDF+kjsl/jX+UsIUmJnFDhrTp46qr6ud3TBcQJTj6xqnzTkA5UcWBix/5
-	E86WtBOAt0ewH5UoV7bqA9JvfGUcgrDmG12qL8JhqQ3AyVrzs30JhVnePl9uoCiswjK2
-	dshZH0Aj2zQfuNvor9wZgaMNLLV5I0X4oSFNbnlLLh7VkwX9ukX25RIz3ApAktlaUpWz
-	48WQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4AdQW1GVOtmh2HlCgO6Uvo+5KPcZiz6YFwWd38w0Qlk=;
-	b=Eh3TSjYYa+RmyZdig0k9bUtiDY9s316PqDzTXvFTrbnRuDsnjsAFoxj/7s/m0iCnIP
-	5ZOv5ieFG1kE4BaE53aft7YsHg48lJ/YfJTB7xDLm0YYPuDAtjNHMNTNiqID7oFjuJwI
-	Njck4Vaaqw/+kUbvFhwOAu+asnkaOE8eF+yXuLslQOhPpAcD8J3+NQTe1s0iSIiPc1e+
-	bG7YUsPEO69YAwdxAAsDO8/L4n3zDjqcCM234FRjtDv9jdUBtwTEWMQWbkP7/HmLXPbH
-	sN8FIehLSsU3VmHoN784ruPPYCtBWJ0Q0kfHqeJeFOGYOCk2zo24A81UQMRTMfsDZYAo
-	g8hw==
-X-Gm-Message-State: APjAAAXsGWR5kmI2Bk838CeBMgKkTyAW+fbECOwY9QA0abNDyZi0Rwad
-	hbH+MoQAuKNMkfwE3QWqTCA9lgxQ
-X-Google-Smtp-Source: APXvYqzSAcqLTYba9YEKeA10Q5+dgIvBMTYT5H5ssOjzsGJjKTjD/tYKeqHq0yCG9no8hWSEvCg+Bg==
-X-Received: by 2002:adf:dfc5:: with SMTP id q5mr9298994wrn.142.1565938962091; 
-	Fri, 16 Aug 2019 00:02:42 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F04237690C67ABE9DBF2FFC.dip0.t-ipconnect.de.
-	[2003:f0:7f04:2376:90c6:7abe:9dbf:2ffc])
-	by smtp.gmail.com with ESMTPSA id
-	p69sm4653120wme.36.2019.08.16.00.02.41
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 16 Aug 2019 00:02:41 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	kai.kang@windriver.com
-Date: Fri, 16 Aug 2019 09:02:33 +0200
-Message-Id: <20190816070233.15416-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Fri, 16 Aug 2019 07:12:53 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7G7CphL023294
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 16 Aug 2019 00:12:51 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 16 Aug 2019 00:12:50 -0700
+From: <kai.kang@windriver.com>
+To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
+Date: Fri, 16 Aug 2019 03:12:46 -0400
+Message-ID: <20190816071246.168087-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [PATCH v2 10/13] parole: upgrade 1.0.2 -> 1.0.4
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][Patch] xfce4-datetime-setter: fix compile error and requires distro feature x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,63 +30,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 07:02:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Aug 2019 07:12:53 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-* This is a bufix release
-* Also removed dependencies redundant with "inherit xfce-app"
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+It fails to compile xfce4-datetime-setter occasionally when system load
+is high:
+
+| ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No such file or directory
+|    42 | #include "cc-datetime-resources.h"
+|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
+| compilation terminated.
+
+Update datetime_panel_dep to make sure cc-datetime-resources.h be
+generated before including.
+
+xfce4-datetime-setter depends on libxfce4ui which requires distro
+feature 'x11', so make it require 'x11' too.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../parole/{parole_1.0.2.bb => parole_1.0.4.bb}       | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
- rename meta-xfce/recipes-multimedia/parole/{parole_1.0.2.bb => parole_1.0.4.bb} (72%)
+ .../files/fix-inner-dependency.patch          | 28 +++++++++++++++++++
+ .../xfce4-datetime-setter_3.32.2.bb           |  7 +++--
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
 
-diff --git a/meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb b/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
-similarity index 72%
-rename from meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb
-rename to meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
-index a286a5adb..68556a2ab 100644
---- a/meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb
-+++ b/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
-@@ -1,15 +1,12 @@
- DESCRIPTION = "Parole is a modern simple media player based on the GStreamer framework"
--HOMEPAGE = "http://goodies.xfce.org/projects/applications/parole"
-+HOMEPAGE = "https://docs.xfce.org/apps/parole/start"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
+new file mode 100644
+index 000000000..9cccb892f
+--- /dev/null
++++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
+@@ -0,0 +1,28 @@
++It fails to compile xfce4-datetime-setter occasionally when system load is high:
++
++| ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No such file or directory
++|    42 | #include "cc-datetime-resources.h"
++|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
++| compilation terminated.
++
++Update datetime_panel_dep to make sure cc-datetime-resources.h be generated
++before including.
++
++Upstream-Status: Submitted [https://github.com/schnitzeltony/xfce4-datetime-setter/pull/2]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++diff --git a/panels/datetime/meson.build b/panels/datetime/meson.build
++index c5bf39c..241e177 100644
++--- a/panels/datetime/meson.build
+++++ b/panels/datetime/meson.build
++@@ -175,7 +175,8 @@ datetime_panel_lib = static_library(
++ 
++ datetime_panel_dep = declare_dependency(
++   include_directories: [ common_inc, include_directories('.') ],
++-  link_with: datetime_panel_lib
+++  link_with: datetime_panel_lib,
+++  sources: resources
++ )
++ 
++ subdir('po-timezones')
+diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+index d64358537..4d128ac51 100644
+--- a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+@@ -6,13 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
  
- inherit xfce-app gtk-doc mime
+ DEPENDS = "glib-2.0-native libxfce4ui"
  
- DEPENDS += " \
--    glib-2.0 \
-     dbus-glib \
--    gtk+3 \
--    \
-     xfce4-dev-tools-native \
-     libxfce4util \
-     libxfce4ui \
-@@ -19,8 +16,8 @@ DEPENDS += " \
-     taglib \
- "
+-SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https"
++SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https \
++           file://fix-inner-dependency.patch \
++"
+ SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
  
--SRC_URI[md5sum] = "cd22ab579470c5728db0aa6c0b9d4c7d"
--SRC_URI[sha256sum] = "bff0fc846d0d7b8f435ac5514976f1cd1d82b62dbf1b7d470e253a5b439407da"
-+SRC_URI[md5sum] = "c23621eb44df292f828e86074d4e719d"
-+SRC_URI[sha256sum] = "e92b8ec369e53d921b47d2473c2e2a1e9e04d3c5d536d419abdff40e5e136dc1"
+ S = "${WORKDIR}/git"
  
- RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
+ inherit gettext meson distro_features_check
+-REQUIRED_DISTRO_FEATURES = "systemd"
++
++REQUIRED_DISTRO_FEATURES = "systemd x11"
  
-@@ -31,6 +28,6 @@ PACKAGECONFIG[clutter] = "--enable-clutter, --disable-clutter, clutter"
- PACKAGECONFIG[notify] = "--enable-notify-plugin, --disable-notify-plugin, libnotify"
+ FILES_${PN} += "${datadir}/icons/hicolor"
  
- FILES_${PN} += " \
--    ${datadir}/appdata \
-+    ${datadir}/metainfo \
-     ${libdir}/parole-0/*.so \
- "
 -- 
-2.21.0
+2.20.0
 
 
