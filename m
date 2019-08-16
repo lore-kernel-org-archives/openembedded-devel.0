@@ -1,51 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 50D137F26D
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DF5879980
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 05:13:47 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id 4so1951382pld.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2019 22:13:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0J4s1v+gYozIuRJJ9km7WiMBCr4OZBh/FpO3K+j/HsA=;
-	b=H3pjowt2b3coKNJhUg6bEZTC/OW7Ht7cH3RHTQd/MHEWCmVSO+FZGHQNL5MqU7iQ2M
-	My36aX/G8KjqavN0YXWrU1Me20ziz41Q/Lo4lg79SBc4r6UwSHlwX6uzgjOhFqmlpJZy
-	a0Q104QEK5ibIaAS722HNblN1LqbWqPrTpwQq/I5gHGFMRRBHcEYFFjcq+cjFUM6fSb5
-	sTu/DXy6LyxlEptAT0kpbKY57+jBz0lqktrzJ5lViZWgnrPhdUlwEFF1TOqgCpICGeK8
-	FhaBEms36Zb4duMoFh7pM+cCS5x2d+rAsIg4GZVL8gZa2YHT6VrNq/2XwQIpXqVbNA63
-	L7dQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0J4s1v+gYozIuRJJ9km7WiMBCr4OZBh/FpO3K+j/HsA=;
-	b=EoJnlT30mOEmPsCxIK3tu7Hbrvc5bDrTytHMjuUwpSiLAHLbDiADnI8FNm1amzHkBm
-	xg2VGd1+x6gf71a9tmVuWoTdnNVOL6/Nl1X2q9Y2oT/SAw2TrTLVVKT84oN3/gzDNiy4
-	WfZyn0Jub4BdoaoKKrZaoJEf3a1tqQDgSpmEKBB23rOX4usTuR7bHceegw08OMkKbvbU
-	0NRMROdyBnzdhKLJWKAikW/ou/wQMs3BcvC5FsGyUVSJyAAtxFwFABf5i0n4kP41KhX7
-	qBL90UTS8WK/V8Z68GSWLKZUcORx/gkyFDCl30c+aGhID4Vjoy5l7CqWZrtE7mdGJeCK
-	B1sg==
-X-Gm-Message-State: APjAAAV6GOddZvF4CU1hclatfdeQdxBgs3BfYCAu18vywEv4mrMKr9FE
-	KdUEuRzl65lYzt9hbMUii7L/CLXiHd0=
-X-Google-Smtp-Source: APXvYqwlQhCJGfTwn7vvcYQvsjB9DdiNh46C627wyA6b31cJKXIR2K244JxxI9OcbhXVFs1iyLzptA==
-X-Received: by 2002:a17:902:ab96:: with SMTP id
-	f22mr7717860plr.147.1565932427809; 
-	Thu, 15 Aug 2019 22:13:47 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	d18sm3536746pgi.40.2019.08.15.22.13.47
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 15 Aug 2019 22:13:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2019 22:13:38 -0700
-Message-Id: <20190816051338.33239-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.1
+	Fri, 16 Aug 2019 06:06:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7G66mhN024499
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 15 Aug 2019 23:06:48 -0700 (PDT)
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 15 Aug 2019 23:06:47 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20190815215605.19600-1-schnitzeltony@gmail.com>
+	<20190815215605.19600-11-schnitzeltony@gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <c58bea78-1db2-ee2e-f26f-ec6c323018e3@windriver.com>
+Date: Fri, 16 Aug 2019 14:06:42 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libopus: Limit forcing ARM mode ISA to v5 only
+In-Reply-To: <20190815215605.19600-11-schnitzeltony@gmail.com>
+Subject: Re: [PATCH 10/13] parole: upgrade 1.0.2 -> 1.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +34,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 05:13:47 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 06:06:50 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-This lets newer armv7+ still use thumb2 ISA
+On 2019/8/16 上午5:56, Andreas Müller wrote:
+> Bufixe release
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+A typo here. Others are fine with me.
 
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-index fb9bdc70fa..1512a1d7d1 100644
---- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-@@ -50,6 +50,6 @@ python () {
- #| {standard input}:761: Error: selected processor does not support Thumb mode `smull fp,r2,r3,r9'
- #| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
- #| make[2]: *** [celt/celt.lo] Error 1
--ARM_INSTRUCTION_SET = "arm"
-+ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- BBCLASSEXTEND = "native nativesdk"
+Acked-by: Kai Kang <kai.kang@windriver.com>
+
+Regards,
+Kai
+
+
+
+>
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>   .../parole/{parole_1.0.2.bb => parole_1.0.4.bb}       | 11 ++++-------
+>   1 file changed, 4 insertions(+), 7 deletions(-)
+>   rename meta-xfce/recipes-multimedia/parole/{parole_1.0.2.bb => parole_1.0.4.bb} (72%)
+>
+> diff --git a/meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb b/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
+> similarity index 72%
+> rename from meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb
+> rename to meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
+> index a286a5adb..68556a2ab 100644
+> --- a/meta-xfce/recipes-multimedia/parole/parole_1.0.2.bb
+> +++ b/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
+> @@ -1,15 +1,12 @@
+>   DESCRIPTION = "Parole is a modern simple media player based on the GStreamer framework"
+> -HOMEPAGE = "http://goodies.xfce.org/projects/applications/parole"
+> +HOMEPAGE = "https://docs.xfce.org/apps/parole/start"
+>   LICENSE = "GPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>   
+>   inherit xfce-app gtk-doc mime
+>   
+>   DEPENDS += " \
+> -    glib-2.0 \
+>       dbus-glib \
+> -    gtk+3 \
+> -    \
+>       xfce4-dev-tools-native \
+>       libxfce4util \
+>       libxfce4ui \
+> @@ -19,8 +16,8 @@ DEPENDS += " \
+>       taglib \
+>   "
+>   
+> -SRC_URI[md5sum] = "cd22ab579470c5728db0aa6c0b9d4c7d"
+> -SRC_URI[sha256sum] = "bff0fc846d0d7b8f435ac5514976f1cd1d82b62dbf1b7d470e253a5b439407da"
+> +SRC_URI[md5sum] = "c23621eb44df292f828e86074d4e719d"
+> +SRC_URI[sha256sum] = "e92b8ec369e53d921b47d2473c2e2a1e9e04d3c5d536d419abdff40e5e136dc1"
+>   
+>   RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
+>   
+> @@ -31,6 +28,6 @@ PACKAGECONFIG[clutter] = "--enable-clutter, --disable-clutter, clutter"
+>   PACKAGECONFIG[notify] = "--enable-notify-plugin, --disable-notify-plugin, libnotify"
+>   
+>   FILES_${PN} += " \
+> -    ${datadir}/appdata \
+> +    ${datadir}/metainfo \
+>       ${libdir}/parole-0/*.so \
+>   "
+
+
 -- 
-2.22.1
+Kai Kang
 
 
