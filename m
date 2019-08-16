@@ -1,50 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F7677F323
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 655437F25B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 10:39:59 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id f72so3663657wmf.5
+	Fri, 16 Aug 2019 14:36:58 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id s14so4936054qkm.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 03:40:00 -0700 (PDT)
+	Fri, 16 Aug 2019 07:36:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=AClnrqvL6RPmNm8HPLIojVM3lckeyL5JLE3jcVhSW6w=;
-	b=Gx8UTAxE2xsMY1hiNyxdLeUousYY1dOZvWxcpKLaznRjhjgvQdEijNC+glagSQpxJt
-	IarrEqQQ+mmEHmVgQ/BU4pRBesLb1wLrtDx01oWE2IvmUjERQ9vct4O11xddhfiYKNAi
-	zHXp/lAgyPWx49Ict63vdEYlDaWlAUfKWSu8ZAd14aYX3b2l55CsIdTe53yP9MRxduDm
-	V72aG+g+8lRPS6zEo+sa9o04Ig9rl8YFmmuTGv/owSJdXCuj96wmtahrUJCnDh+l/Rqg
-	W3cvxDYqq2k0xoA46kwqSSYCAq2i7IRVMi9rAL1Ix2ubIAPEjMjPOni8pRh+kuOLRkrQ
-	VPwQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=PY7hEfZLJABOPfny0qCLKQATkt5Xaqu+QZZDO4cNdac=;
+	b=OyzigbfydRdzRiFBWn+3fYj4AsDnW/jksPENmDen6Ko4MidF59oM6P/gcqyjxo0e9g
+	ATNHyPE71lfSaIIzD6BDMVJLO9N+RrVmt/Yms5P2oDD9DRsMuGXPlFh19SxNh4JcJLr0
+	s8i8MlVkOPij+aK+YQ106bJeZ7xx6eqbKUUtc3SSNuD47nEH2YV6JDoCt7hbQZHsSkce
+	E36VpG3oTNfmUqThgj3LHc0JrdLX3Bqa7mUf+gP7kH0prpkl5kFdqk4xnVnVcSTW3LyN
+	EaqBNO2OSwTPUMNwWvaK4QALzq2buZNAo1XTADVKJewAm7X26GdhjtLIjka46YV4gijj
+	P9ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=AClnrqvL6RPmNm8HPLIojVM3lckeyL5JLE3jcVhSW6w=;
-	b=Z42wZLvENI9p5znlQp2skrcnDYwkpVx8lRohr+d2lAn4p1DnbUxbFjwkpP97+v6hmC
-	tUT7Pqe8/h2uLxBisJoFuuVVG+1B6Nx6r9kN+24iNXn0MLOORcCj2l8GqCAVcpoc/Bvr
-	ChWKC3ftCJH0gzxMPsdNtAOb9EJiG/a/RG9fMUx9unjMTvDl/Z6N0oXXFOmfw0v01ZRV
-	nngNPFX0fN5a7GVOMNE1i9UFmbe707f7AbcfM3+RG7T0LF1sQ85BkTpJfMzJElGyh8AC
-	iiBpxjIOReV41IrGgiXPeaNrGSGzxkmGaemP3oahXNUnfXDHgFcCsEF2KGNuJaA9q23F
-	LCsw==
-X-Gm-Message-State: APjAAAWsGj79soxWhrplUJEdD7bNdvnmB8qm+tIX1jqqnoQL/wTJi+AV
-	PL8cVKwR0ruvdfkxf75+xRaeX5lz9ew=
-X-Google-Smtp-Source: APXvYqxLvZHBQn8xEcpnwr6iykXqw6xedQlokVkY6lXSzH8O4VX7oJ4vQjtNtpJNsfLlbzOTiovVHQ==
-X-Received: by 2002:a1c:5f06:: with SMTP id t6mr6199919wmb.60.1565951999969;
-	Fri, 16 Aug 2019 03:39:59 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id d19sm9312041wrb.7.2019.08.16.03.39.59
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 16 Aug 2019 03:39:59 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Aug 2019 10:39:58 +0000
-Message-Id: <20190816103958.2701581-7-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190816103958.2701581-1-Martin.Jansa@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=PY7hEfZLJABOPfny0qCLKQATkt5Xaqu+QZZDO4cNdac=;
+	b=kurO1qfpsDpPVT+9Jqh2grYZj+rZD1SWbU7O7dY8vcc3dtASfNt3xEh44duIXYi0du
+	AeaY/N7c3GBbbnArzjNoGfttLO3SWWBhBmStQsGcXXcxp60jPXyfBU+DjufH6IHlANeM
+	mPNb9jwTl5ANypGs6RqnILGoWRyLOZxLqH4F2qzWNZZZLJIwTiZ9gigQiLFOZGbju9x3
+	N0ofxdGvzo/JhrJTNoaOX91Ca5bhh63XHC6z57BbyUe8UnISWB5OlDERC9rOJ+DLfca4
+	AXojojvIolbzs15TQFmZQpjrFuTLtReRPKjl4HTKTHo+A6sgbpFO6ektDM0/MkDphMZI
+	DVmA==
+X-Gm-Message-State: APjAAAWsEmqsJXYijWVxdOP9tjw1tir96uZE7FbDulscsxyDrg0DzG+q
+	UjbfVtayWNDRksTUxjzytpA/XhVBD6Ue/nsscfs=
+X-Google-Smtp-Source: APXvYqygO/KWkxW21x18zmxCp7pIUED3ORegbl5lKN2tc/+zPt0HS7S30+rSVETVQK7KX0AFU1A/wsGHXqXpmYYrvBk=
+X-Received: by 2002:a37:a20f:: with SMTP id l15mr9329067qke.212.1565966218808; 
+	Fri, 16 Aug 2019 07:36:58 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190816103958.2701581-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 7/7] libdbi-perl: add runtime dependency on perl
+In-Reply-To: <20190816103958.2701581-1-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 16 Aug 2019 07:36:32 -0700
+Message-ID: <CAMKF1so8LyF_JLc6kGku=VWPTMTss7q9ET=brj4vWfQyD+8MUg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/7] freeradius: add runtime dependency on perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 10:40:00 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 14:36:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* fixes:
-  ERROR: QA Issue: /usr/bin/dbiproxy contained in package libdbi-perl requires /usr/bin/perl, but no providers found in RDEPENDS_libdbi-perl? [file-rdeps]
+Martin thanks for doing these patches, the builds have been showing
+these erorrs for few
+days now. I was also wondering if we should also take opportunity move
+the dependent
+files to their own packages in some cases. but this set looks fine
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-index 91f94a1aa0..7532b3fa22 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-@@ -28,6 +28,7 @@ do_install_prepend() {
- }
- 
- RDEPENDS_${PN}_class-target = " \
-+    perl \
-     perl-module-carp \
-     perl-module-exporter \
-     perl-module-exporter-heavy \
--- 
-2.17.1
-
+On Fri, Aug 16, 2019 at 3:40 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+>
+> * fixes:
+>   ERROR: QA Issue: /usr/bin/radcrypt contained in package freeradius-utils requires /usr/bin/perl, but no providers found in RDEPENDS_freeradius-utils? [file-rdeps]
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../recipes-connectivity/freeradius/freeradius_3.0.17.bb        | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+> index 5ab9a3fb44..e0b04c1101 100644
+> --- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+> +++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+> @@ -224,4 +224,4 @@ FILES_${PN}-unixodbc = "${libdir}/rlm_sql_unixodbc.so*"
+>  FILES_${PN} =+ "${libdir}/rlm_*.so* ${libdir}/proto_*so*"
+>
+>  RDEPENDS_${PN} += "perl"
+> -RDEPENDS_${PN}-utils = "${PN}"
+> +RDEPENDS_${PN}-utils = "${PN} perl"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
