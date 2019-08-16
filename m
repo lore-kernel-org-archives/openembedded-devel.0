@@ -1,23 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A7357F302
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A09A360807
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 07:12:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7G7CphL023294
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 16 Aug 2019 00:12:51 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 16 Aug 2019 00:12:50 -0700
-From: <kai.kang@windriver.com>
-To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
-Date: Fri, 16 Aug 2019 03:12:46 -0400
-Message-ID: <20190816071246.168087-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Fri, 16 Aug 2019 07:50:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,391,1559491200"; d="scan'208";a="73757510"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 16 Aug 2019 15:50:30 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id E11354CE03C0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Aug 2019 15:50:29 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 16 Aug 2019 15:50:31 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 16 Aug 2019 15:49:52 +0800
+Message-ID: <20190816074952.5020-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][Patch] xfce4-datetime-setter: fix compile error and requires distro feature x11
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: E11354CE03C0.A830D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pymongo: upgrade 3.8.0 -> 3.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,91 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 07:12:53 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 07:50:33 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 
-It fails to compile xfce4-datetime-setter occasionally when system load
-is high:
-
-| ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No such file or directory
-|    42 | #include "cc-datetime-resources.h"
-|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
-| compilation terminated.
-
-Update datetime_panel_dep to make sure cc-datetime-resources.h be
-generated before including.
-
-xfce4-datetime-setter depends on libxfce4ui which requires distro
-feature 'x11', so make it require 'x11' too.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- .../files/fix-inner-dependency.patch          | 28 +++++++++++++++++++
- .../xfce4-datetime-setter_3.32.2.bb           |  7 +++--
- 2 files changed, 33 insertions(+), 2 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
+ meta-python/recipes-devtools/python/python-pymongo.inc                | 4 ++--
+ .../python/{python-pymongo_3.8.0.bb => python-pymongo_3.9.0.bb}       | 0
+ .../python/{python3-pymongo_3.8.0.bb => python3-pymongo_3.9.0.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pymongo_3.8.0.bb => python-pymongo_3.9.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pymongo_3.8.0.bb => python3-pymongo_3.9.0.bb} (100%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
-new file mode 100644
-index 000000000..9cccb892f
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-dependency.patch
-@@ -0,0 +1,28 @@
-+It fails to compile xfce4-datetime-setter occasionally when system load is high:
-+
-+| ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No such file or directory
-+|    42 | #include "cc-datetime-resources.h"
-+|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
-+| compilation terminated.
-+
-+Update datetime_panel_dep to make sure cc-datetime-resources.h be generated
-+before including.
-+
-+Upstream-Status: Submitted [https://github.com/schnitzeltony/xfce4-datetime-setter/pull/2]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/panels/datetime/meson.build b/panels/datetime/meson.build
-+index c5bf39c..241e177 100644
-+--- a/panels/datetime/meson.build
-++++ b/panels/datetime/meson.build
-+@@ -175,7 +175,8 @@ datetime_panel_lib = static_library(
-+ 
-+ datetime_panel_dep = declare_dependency(
-+   include_directories: [ common_inc, include_directories('.') ],
-+-  link_with: datetime_panel_lib
-++  link_with: datetime_panel_lib,
-++  sources: resources
-+ )
-+ 
-+ subdir('po-timezones')
-diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-index d64358537..4d128ac51 100644
---- a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
-@@ -6,13 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
+index 88786ec..cd11d98 100644
+--- a/meta-python/recipes-devtools/python/python-pymongo.inc
++++ b/meta-python/recipes-devtools/python/python-pymongo.inc
+@@ -8,8 +8,8 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
- DEPENDS = "glib-2.0-native libxfce4ui"
+-SRC_URI[md5sum] = "3e8035f85cfb2be95207724c59bddfaa"
+-SRC_URI[sha256sum] = "9d50c99c6388863cbfdc5db9bad62e3a7c2e5fc151554a07c7f3c2530334a34f"
++SRC_URI[md5sum] = "531786df7ad98f15c43f1b17edf5f84c"
++SRC_URI[sha256sum] = "4249c6ba45587b959292a727532826c5032d59171f923f7f823788f413c2a5a3"
  
--SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https"
-+SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=https \
-+           file://fix-inner-dependency.patch \
-+"
- SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
+ PACKAGES =+ "${PYTHON_PN}-bson"
  
- S = "${WORKDIR}/git"
- 
- inherit gettext meson distro_features_check
--REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+REQUIRED_DISTRO_FEATURES = "systemd x11"
- 
- FILES_${PN} += "${datadir}/icons/hicolor"
- 
+diff --git a/meta-python/recipes-devtools/python/python-pymongo_3.8.0.bb b/meta-python/recipes-devtools/python/python-pymongo_3.9.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pymongo_3.8.0.bb
+rename to meta-python/recipes-devtools/python/python-pymongo_3.9.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.8.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.9.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pymongo_3.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-pymongo_3.9.0.bb
 -- 
-2.20.0
+2.7.4
+
+
 
 
