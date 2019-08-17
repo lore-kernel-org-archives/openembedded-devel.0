@@ -1,57 +1,46 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 4672F7F367
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id B62927F353
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 08:13:55 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id p74so5768194wme.4
+	Sat, 17 Aug 2019 08:42:07 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id e8so8696916qtp.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 01:13:56 -0700 (PDT)
+	Sat, 17 Aug 2019 01:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=70zbRVdoXLrBBHVBHWoHdwG3Eyt4PsvSWq+qTg/ARUA=;
-	b=UJYdACSHNF6qpzkgAkObQalPUWzoaZgaW9ks2HMMdGNM/wef7ZeI0Twq3q1Lp//xU7
-	IWCC52UOFy857lno9o8sAfE7+9shL6kdPeLYurH/Y20WgLBWrq1z5jd2S0w/t3z7Wl0m
-	gfkrPNAqusydDBVBsGpl5oZxdZfWVKoQH4JHNA2G6RiW/tMkrfr0mkRl97xdq7LrefsZ
-	K9a7auv+ki9pbVzI7siw8BG5a6X72OqQgek3TffejmQVNlPGrxIje+deuf+Y8Y9AVcdi
-	244ijBIFBprlA/dfqixN1GAj+Uc1khdKcgz6wHPglu4MNftB4hHLO+IaRnbmzjoEq+bF
-	qN/g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=T4RsnOBY1E/CCdI7JTPI4p5ogQOuyxYEgSmygP3lVGc=;
+	b=ZIQfrT/0zaIrrRMcssW3KbDbqZYYeZxIctnF0a19nQkV5s6LTuFxD2GDwOjG6/3Spi
+	hj5hL19bB+XORAQyF2dXrEcdowkFWipecc9MQyB0jY1W0cM7w0iSiXB1VcWS/yYrG7xd
+	xtA7LpjeIzeXvj32Az8kchanlCQfponfo+xOTkdS9KuGV3Z1axofEJFt7cQubQ628IBW
+	SU4CXPC9TFIfDsN+ufG2xaG+CaRffuobedrGNkAPwoiW5T5Yl1qD7o9d6qme9Ey10Taz
+	LwCSR6LMA4jhRQKWNa/QinJD6/VQwE2O1bUHODnlfNyDyy6NybrXwEWlLLtAwl7AoItk
+	Npww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=70zbRVdoXLrBBHVBHWoHdwG3Eyt4PsvSWq+qTg/ARUA=;
-	b=XOlMI9tPWHQD05HlYOmtsvAWVyS/44X20F1b0DF+ncD/alHmgfK4liqPyuvskEvLtw
-	jCuPZ202iBDTmgXjEzvkfjwtXLdIphkqPsKeceHJkNyYYtTKQPmldW9BmgtBWtljwYuf
-	hXqiKzxti4dgQ8FgVLKBBK38ICImpDHPRwMYqR7FSaVNe6wVstih90Aicg2TXMmCjoYD
-	B3xUBYaYMHdtBPLv8w5nhHLRzzS4e408JiaEFpUlank31++uLrqhcXkW8tw5Uj4eHrBu
-	OUGgJzoj1E+lB/K5HcKVValO0MJrbuGTpoNvMevNtXNK6IL8BHSo1pduAJSURnlL4Km/
-	evvg==
-X-Gm-Message-State: APjAAAVQfJFqYh9bXRHqF6FtW+ChZEClVs8onDfeXWzE7ugQUXAQJ7FP
-	CRkiWrEsgOdZxyoiPKmg91/Fw0tc
-X-Google-Smtp-Source: APXvYqysJBxH8aeQcm0UjEGwg1z0JJfGrrAp2rNrbYM9ODdyMXgDlpcWwdCOmCsRii1MWmbFOlSIew==
-X-Received: by 2002:a1c:6782:: with SMTP id
-	b124mr11270363wmc.143.1566029629461; 
-	Sat, 17 Aug 2019 01:13:49 -0700 (PDT)
-Received: from mueller-a-nb-linux.speedport.ip
-	(p200300F07F2D875347F2BEDFD5FFA793.dip0.t-ipconnect.de.
-	[2003:f0:7f2d:8753:47f2:bedf:d5ff:a793])
-	by smtp.gmail.com with ESMTPSA id
-	q124sm7592567wma.33.2019.08.17.01.13.48
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 17 Aug 2019 01:13:48 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sat, 17 Aug 2019 10:13:36 +0200
-Message-Id: <20190817081339.22253-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190817081339.22253-1-schnitzeltony@gmail.com>
-References: <20190817081339.22253-1-schnitzeltony@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=T4RsnOBY1E/CCdI7JTPI4p5ogQOuyxYEgSmygP3lVGc=;
+	b=RxZ7HNMfvnDy1gH9IEUrQfyYWfZzjPfyGuvi5Oa3uRj/piSglKbgZuTxZjQX5UaCqX
+	L17Inp2yoBkuEGMGkFEWz0Dnek06BpbKrWRse9bhoHENl5Ub8xbrnk0Bf8YjaklnLd5c
+	0Q7y4o1Nmk0hTW5sHs5DtHkqX+a5V/PJCRuhujab8MPEnF186t6mNdinTT3oIhCmASQs
+	NsRrqomKE4wTSSB7eX1g1hpX4ng/l9QplpRksWbOkHoD+jebwy5klKPYbucQ4oinObyo
+	3Nuh4p430SWKCDnFRCdKWx0RmUmhtMju7qiHn12ltTuzOOgaqlcW0adfcVb74Xp7oxqx
+	gTfA==
+X-Gm-Message-State: APjAAAWmD+yc9IXvTMwRjSJPyjxXWHJyt5qR6olhr/tTZsomOUGpgklt
+	BRBnKZVfRJouNzMk20/pvfnMIEmUi5pSJKlBBFfSGJ7F84A=
+X-Google-Smtp-Source: APXvYqwzMF3BMY6PE4D8e3WX6tQOyZCf8KmKC4EzY8cUpAZ8qv7FuMvHsVn81W+Ht6q+W8kNhKf6qYiu5JiqITlYEQI=
+X-Received: by 2002:ac8:6997:: with SMTP id o23mr12287137qtq.53.1566031328237; 
+	Sat, 17 Aug 2019 01:42:08 -0700 (PDT)
 MIME-Version: 1.0
-Cc: bunk@stusta.de
-Subject: [warrior][PATCH 1/4] vlc: rework qt PACKAGECONFIG
+References: <20190816075631.5171-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20190816075631.5171-1-zangrc.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 17 Aug 2019 01:41:51 -0700
+Message-ID: <CAMKF1sqOL9oG_UzEAdbLD3vb+Griy1EfYVV-=e+hFusQtG4G8A@mail.gmail.com>
+To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python] [PATCH] python-flask-pymongo: upgrade 0.5.1 -> 2.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,73 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 08:13:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 17 Aug 2019 08:42:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* qt4 support is gone -> move to qt5
-* while at it remove noop libtool copy
+Fails to build see https://errors.yoctoproject.org/Errors/Details/263389/
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-multimedia/vlc/vlc.inc            | 24 ++++++++++++-------
- 1 file changed, 15 insertions(+), 9 deletions(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 19ac8206c..9bbc6685d 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -36,12 +36,17 @@ EXTRA_OECONF = "\
-     --enable-realrtsp \
-     --disable-libtar \
-     --enable-avcodec \
--    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
--    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
--    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
-+    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/moc \
-+    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/rcc \
-+    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/uic \
- "
- 
--PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG ?= " \
-+    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+"
-+
-+inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'qmake5_paths', '', d)}
- 
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
-@@ -54,7 +59,7 @@ PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
- PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
- PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base gst-plugins-bad"
- PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
--PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
-+PACKAGECONFIG[qt5] = "--enable-qt,--disable-qt, qtbase-native qtx11extras qtsvg"
- PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
- PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
- PACKAGECONFIG[samba] = "--enable-smbclient,--disable-smbclient, samba"
-@@ -76,12 +81,13 @@ PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util
- PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
- PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
- 
--do_configure_prepend() {
--    cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
--}
--
- do_configure_append() {
-     sed -i -e s:'${top_builddir_slash}libtool':'${top_builddir_slash}'${TARGET_SYS}-libtool:g ${B}/doltlibtool
-+
-+    # moc needs support: precreate build paths
-+    for qtpath in adapters components/epg components/playlist components/sout dialogs managers styles util/buttons; do
-+        mkdir -p "${B}/modules/gui/qt/$qtpath"
-+    done
- }
- 
- # This recipe packages vlc as a library as well, so qt4 dependencies
--- 
-2.20.1
-
+On Fri, Aug 16, 2019 at 12:57 AM Zang Ruochen
+<zangrc.fnst@cn.fujitsu.com> wrote:
+>
+> From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+>
+> Add depends of python-vcversioner.
+>
+> Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+> ---
+>  meta-python/recipes-devtools/python/python-flask-pymongo.inc        | 6 ++++--
+>  ...{python-flask-pymongo_0.5.1.bb => python-flask-pymongo_2.3.0.bb} | 0
+>  ...ython3-flask-pymongo_0.5.1.bb => python3-flask-pymongo_2.3.0.bb} | 0
+>  3 files changed, 4 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-flask-pymongo_0.5.1.bb => python-flask-pymongo_2.3.0.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-flask-pymongo_0.5.1.bb => python3-flask-pymongo_2.3.0.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo.inc b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> index fb2d6ed..21b6ca8 100644
+> --- a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> +++ b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> @@ -5,9 +5,11 @@ SECTION = "devel/python"
+>  LICENSE = "BSD"
+>  LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;beginline=1;endline=24;md5=424c4e1047d28e01b4e4634a069c019d"
+>
+> -SRC_URI[md5sum] = "d7a1b717f27154e1f3a355f8ec2467d6"
+> -SRC_URI[sha256sum] = "2baaa2ba5107d72b3a8bd4b5c0c8881316e35340ad1ae979cc13f1f3c8843b3d"
+> +SRC_URI[md5sum] = "94df71e6800b1d7915cc91a74b70f959"
+> +SRC_URI[sha256sum] = "620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"
+>
+>  PYPI_PACKAGE = "Flask-PyMongo"
+>
+> +DEPENDS = "python-vcversioner python-vcversioner-native"
+> +
+>  RDEPENDS_${PN} = "${PYTHON_PN}-pymongo ${PYTHON_PN}-flask"
+> diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/python-flask-pymongo_2.3.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb
+> rename to meta-python/recipes-devtools/python/python-flask-pymongo_2.3.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb
+> rename to meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
