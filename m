@@ -1,47 +1,54 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E85B07D71A
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+	[209.85.128.43])
+	by mail.openembedded.org (Postfix) with ESMTP id DA71E7CBD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 23:38:11 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id i4so7894349qtj.8
+	Sat, 17 Aug 2019 08:13:47 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id p74so5768038wme.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Aug 2019 16:38:13 -0700 (PDT)
+	Sat, 17 Aug 2019 01:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=HvL244IY5tqmX2TK1ZITp9/51Qsbr/j65UELzU9zSyE=;
-	b=AclYSu+Pj+lXoSoX0dPUu215+DaVgoayYs465g79QVLuLNODGP/AuBmFYx7ykNfqJY
-	RC3usFgTa+y5vgeDPQJAdsk5UQAIVI+mDI6RcDXBLqdzu5BX+XCMkT7SoAnL+pOPZKVo
-	1m1yyVtIdts6zZ8/Dp8zlG2JSby61KuDTSI/nSXiKgafUCXnzuDaAV90DEzTlQZpj5zo
-	eNDQAvznityZVyyKleQDpV7GKOHYsp60dd6TDESee/2Rdsjcp56Y0zF1WZ2WEJQUkgsc
-	E5GX0KMS9MVBhtrmFerL7xBNA+2sK4Lq/enAVmH+0fFWHlfN3v/petB6mZH15VVlWapv
-	d7hg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EYHGeqVqpTOc3kHvCxajHk3MUsqC9pNV9Vo84FRz6Dw=;
+	b=B4Q62HQtRgVXypTpyGmHm3QotmudGCGOcGuqADDq21/8rFGNLIaObkuk2Q2ScNl55F
+	rmzi3K5pWdrZ81i8g7MtiX9DzYWHzt+XRNaQj8Hgx4fhEKrB7CghJ1UbhTinGoQluPzm
+	uN/kJCR7miQSq+73TAY0Z9/aX7ld49PeBqQEXkjT+UQ7t1+kuhzCwzSGYHtXYfXJcKRN
+	DZjH11O+L2Nv0KbPqb/UGCp8EARUXo47Xr8QLYtXIUNQcKwHuFxAZ+4y8LoN26XROTgZ
+	uUP+/lriOizVCZw4ePcsDWUnYRxVs0TOToEMgx5xczyeUf3nFS7Lh5rxaKy1Wilp4ze7
+	l8Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=HvL244IY5tqmX2TK1ZITp9/51Qsbr/j65UELzU9zSyE=;
-	b=mTkAWqQVW4XHw8UAD7dREZdyIzmgDy1DKcw8NyDhV+8aCvHkf24VWz1fPn2w+7YJkL
-	xMjYUUjvDmDAf8GGOcbS/oEaPALPXkHa+Oc11qSO/oanZ+9AVW8Btvp44vDiVhhnhuwe
-	lFJ7N5B169kfUYH6I4ZJQ47GQkFCOB+flcFWukjRyxYuO8nFkNknRoSmIBJJo/xmEdnp
-	1ShwBws6CHwX5hJ27cpkwV7XcS/vpxhLbhZl4mQCDPLgvXa5alY2yEJwiXPbU123mn2Z
-	uSKptfs+mKliL2tCiubYoBlbvjxirTzZQAOCyWkoIXA/6JlyXGtYldy5ssCDXVegCkIf
-	JDbw==
-X-Gm-Message-State: APjAAAXhZjGgoVm68n1Mof+EsnNm+/D/CmUxekEzrHv9GaadIe3P+OqL
-	1HbA12YEJfn0/xMNx7Rp7dhUowV+Km09f4JU58o=
-X-Google-Smtp-Source: APXvYqyNZnM+3dLHSsnouq1uAuhJjVm+DMLHEQBNpjGT/Hz0+Yw8o7X4DuGZb+l1aJq7KZ9+vK/DHaizJSe5fW7oW1s=
-X-Received: by 2002:ac8:d4c:: with SMTP id r12mr71088qti.88.1565998692276;
-	Fri, 16 Aug 2019 16:38:12 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EYHGeqVqpTOc3kHvCxajHk3MUsqC9pNV9Vo84FRz6Dw=;
+	b=LU5JwJZbj5/GN64XnpHEnL/deMOvG/ZZMXY6RKFJoF9JxpbdWo0K/SNQfPTmvO8Tv3
+	y/sXV7t0jVMTR3IY86OAzfNP59zyjluKG9YE4vYwbVWjE8woOG5iRN0JWogXxmLnkuPJ
+	74IRMoy9dZ7GApPpWVG3MNhQDHMLklUVsMnC60ILkarDpTGdtkWZyA/UlWjoTnt18pRh
+	mUWrWtKH/T/VtO/0oij+y36NYFwpYpgXb+RGPyL44Z2vzDYceffmFomN7UfGIzKKB/JS
+	X2aZzuZTgwDJUrCMJXgU28zFb9mmU9JAmUQI18B8FNZAeeP4gGYrP4AKCm11M79fPUoU
+	bDFg==
+X-Gm-Message-State: APjAAAUKMjIfj38ZirPGGykaedndOxpUTzCwxZwQpglN68aHarNNnzxb
+	LoAU5fciKDG4w8wlB7Uf0UHtx5/Y
+X-Google-Smtp-Source: APXvYqw+Ln3Kwlnw6j67XIr4fBjzEwiOcHtF+MNAqbrGl6xrRB1So63qm3cfG0Q8/j/y+StCRyTX+Q==
+X-Received: by 2002:a1c:2015:: with SMTP id g21mr10404643wmg.33.1566029628229; 
+	Sat, 17 Aug 2019 01:13:48 -0700 (PDT)
+Received: from mueller-a-nb-linux.speedport.ip
+	(p200300F07F2D875347F2BEDFD5FFA793.dip0.t-ipconnect.de.
+	[2003:f0:7f2d:8753:47f2:bedf:d5ff:a793])
+	by smtp.gmail.com with ESMTPSA id
+	q124sm7592567wma.33.2019.08.17.01.13.47
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 17 Aug 2019 01:13:47 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Sat, 17 Aug 2019 10:13:35 +0200
+Message-Id: <20190817081339.22253-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190816103958.2701581-1-Martin.Jansa@gmail.com>
-	<20190816103958.2701581-7-Martin.Jansa@gmail.com>
-In-Reply-To: <20190816103958.2701581-7-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 16 Aug 2019 16:37:46 -0700
-Message-ID: <CAMKF1speMTGhaYO9cVT7dUy3anVN-tg0mXwPM+iwJLSnNSMkVg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 7/7] libdbi-perl: add runtime dependency on perl
+Cc: bunk@stusta.de
+Subject: [warrior][PATCH 0/4] vlc adjustments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 23:38:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 17 Aug 2019 08:13:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 16, 2019 at 3:40 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> * fixes:
->   ERROR: QA Issue: /usr/bin/dbiproxy contained in package libdbi-perl requires /usr/bin/perl, but no providers found in RDEPENDS_libdbi-perl? [file-rdeps]
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> index 91f94a1aa0..7532b3fa22 100644
-> --- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> +++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-> @@ -28,6 +28,7 @@ do_install_prepend() {
->  }
->
->  RDEPENDS_${PN}_class-target = " \
-> +    perl \
+Some cherry-picks for vlc
 
-should this be make RDEPENDS_${PN}_append_class-target so it can pick
-the perl rdep from cpan-base class ?
+1. Is mandatory because qt4 support is gone and without qt5 vlc is not useful
+   exactly
+2.- 4. Are good enhancements. It is upon warrior maintainers if they are
+   important enough to make it into stable branch.
 
->      perl-module-carp \
->      perl-module-exporter \
->      perl-module-exporter-heavy \
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Adrian Bunk (3):
+  vlc: Remove workaround and patches for problems fixed upstream
+  vlc: notify switched to GTK+3 some time ago
+  vlc: Remove the obsolete dependency on dbus-glib
+
+Andreas Müller (1):
+  vlc: rework qt PACKAGECONFIG
+
+ .../recipes-multimedia/vlc/vlc.inc            | 28 +++++++++++--------
+ .../0002-glibc-does-not-provide-strlcpy.patch | 15 ----------
+ .../vlc/0005-libpostproc-header-check.patch   | 15 ----------
+ .../recipes-multimedia/vlc/vlc_3.0.6.bb       |  5 ----
+ 4 files changed, 17 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0002-glibc-does-not-provide-strlcpy.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-libpostproc-header-check.patch
+
+-- 
+2.20.1
+
 
