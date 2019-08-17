@@ -1,56 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id E18247F36B
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D2757F370
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 08:13:50 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id 207so5774102wma.1
+	Sat, 17 Aug 2019 08:13:52 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id z11so3677019wrt.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 01:13:52 -0700 (PDT)
+	Sat, 17 Aug 2019 01:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=T9lIDpFJISJKGaYdhl1qD9g2vgIzUUY4aDsNFRjAkFU=;
-	b=ptIR7go7Yn9EDUWSwLag0L0clIl9tJl4toaMDUjI6xWdnX4NdrjQtY/I9WQoXxEdIg
-	lt8UniHUt6+g/nnlkbCRqoHk99mM3CbaVfqHUsVXLQxk1kIk0//H9tFlCGF4itlumNks
-	LgrviZftGFJXLsGbm/NwxO6xosc/r7DOs88xbIbw4MMb0FbxAkxhUztQq0Hz/c9S2ZR6
-	XWCPhvXT/iNPN/PCFixsy8anHy+wpXpSgPtE35cbEOBAu+Vvkv/jAy6+LLyWQtk+aYRC
-	pkBDyKS1rIEUf4UOtWBC1xJEn/WY7KrCXoe1JY+BOzomtpCIrCt/cbFtpzJ5NgneS3ks
-	dfng==
+	bh=b2WwVPsIgFj2hf2ykVOTJr86pncURVnD5COXaDB+6sI=;
+	b=ezJqUIJJ/j/YoxpYhJKQD8ig0RKhqGB5KH3sFVJHXtWJnkuSSP8Ul5imA6H4HSUto8
+	yYTmhe7Il2erpbf/6OJ6H1IwVKB6GNne7MaMV/KgzbYv715u1F6FVn8R4X5V/tZXtvAv
+	Sx8P1/P5UVA+OxTiR8ZHweXuCPisQmKyD2U/YzyXv1WP6rg71INHLvHgk0CnbRCH3b/K
+	Ui5JmPRWLiVlf9GzDleV8aHTO7l/bpuj+F9TBNHumRL+dA7rgqoyepzogvjP8fVUAeaJ
+	9RTHqGalWJ5EJRzG70dZgAoe5c/wHGj2dKvkECijfZof1SCxU7aUWarE3DVjOSb7Twy8
+	dLvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=T9lIDpFJISJKGaYdhl1qD9g2vgIzUUY4aDsNFRjAkFU=;
-	b=IFrvEz5YFyokzPT1Cxlp+2pHfjJ6l88lGvY/HPeZzcuTeqdZMD5Y7gelRf24a69QZb
-	mpuKD607O3fL7hW6T8IVhnsoFd5aqIHuxd4Y9/fVfhVPB2fPLlSk23LoQZCbvQo3aeqB
-	xnyIp0DaH37Fq0DgjffEd0Tcw66PyaOODlIz4IlmD8+ttckn4YzyPXuhUGCXSQYypa/D
-	R8uyaY933hDCYclBbw+Rx3G+krbNrrDgkhTgRPZdlv5PY71vdZq/kRKU02hZXuz5P/pp
-	PxWuNaEFcnjEbtvXr4CwqGWFocPZYH2JxR4Mpq7d4mtFTAeWpqMiBZ5xV8X3dwDIHzlu
-	kwCQ==
-X-Gm-Message-State: APjAAAX5wzFHxCQVTOWvSIQbr9QdrcvIfKuaNuMKCjHBFGLJMmi8Vwm7
-	nNDNq8OPJDmragmO9UfxBX13ESHR
-X-Google-Smtp-Source: APXvYqx+Uwny3F4AFeZxEo2kNkDsJKBHhVkW4LW5JU+Za64FpR77jW6+uRAPL0wS2i1lz93Lh9s3wg==
-X-Received: by 2002:a7b:cb8e:: with SMTP id m14mr11014633wmi.10.1566029631495; 
-	Sat, 17 Aug 2019 01:13:51 -0700 (PDT)
+	bh=b2WwVPsIgFj2hf2ykVOTJr86pncURVnD5COXaDB+6sI=;
+	b=NeFebk6iLRZOMQ9q6eTetlc/w1c63g9/h4WkT80JL8hXx+naV0iHxhZgNMtQImUdLC
+	O69rC7Caq8sTqXoEhhrYPywNSxTenHsMTYEc46yaHuZHaYnmeuM0WtbQTEuvUSxVaEWa
+	lUWide4f7NYlGey4k1wFM5TNoGIr/1Ysv3eeJo7NTFQS66abrebekDqJQYGjFu9BsT/O
+	HelPrAfM+hh+mqt99SoMxPmnn2MsSaZXCPigNKo8/ICcaZ/b3XscI5TSid1zbpeoOKM1
+	1asmUMWQpWJDSkFlq25CR15ifJs5BwCaCF4s7Ns75H11bF+Mq/r7Exvguc5W4qWrqdhs
+	jHpA==
+X-Gm-Message-State: APjAAAXqTJ4/x+/1H0qrfF4RQi2k4TA6oudUqI/SuwlIxEAeworeYUFe
+	ZO0eIgyzpGPnyHgOStP/mbhpjrEU
+X-Google-Smtp-Source: APXvYqycSo1Ekhyh8eeVl+wNOjy8bajj2jrIeq0yuwlUDYnqWedAH6sfu6dEUHF1DKRZwzuq8HH6NA==
+X-Received: by 2002:adf:f991:: with SMTP id f17mr14446450wrr.233.1566029632620;
+	Sat, 17 Aug 2019 01:13:52 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07F2D875347F2BEDFD5FFA793.dip0.t-ipconnect.de.
 	[2003:f0:7f2d:8753:47f2:bedf:d5ff:a793])
 	by smtp.gmail.com with ESMTPSA id
-	q124sm7592567wma.33.2019.08.17.01.13.50
+	q124sm7592567wma.33.2019.08.17.01.13.51
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 17 Aug 2019 01:13:50 -0700 (PDT)
+	Sat, 17 Aug 2019 01:13:51 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Date: Sat, 17 Aug 2019 10:13:38 +0200
-Message-Id: <20190817081339.22253-4-schnitzeltony@gmail.com>
+Date: Sat, 17 Aug 2019 10:13:39 +0200
+Message-Id: <20190817081339.22253-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190817081339.22253-1-schnitzeltony@gmail.com>
 References: <20190817081339.22253-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
 Cc: bunk@stusta.de
-Subject: [warrior][PATCH 3/4] vlc: notify switched to GTK+3 some time ago
+Subject: [warrior][PATCH 4/4] vlc: Remove the obsolete dependency on dbus-glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,7 +63,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 08:13:51 -0000
+X-List-Received-Date: Sat, 17 Aug 2019 08:13:52 -0000
 Content-Transfer-Encoding: 8bit
 
 From: Adrian Bunk <bunk@stusta.de>
@@ -75,18 +75,18 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 9bbc6685d..0bedc5da9 100644
+index 0bedc5da9..5c38be31f 100644
 --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
 +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -72,7 +72,7 @@ PACKAGECONFIG[dc1394] = "--enable-dc1394,--disable-dc1394,libdc1394"
- PACKAGECONFIG[dv1394] = "--enable-dv1394,--disable-dv1394,libraw1394 libavc1394"
- PACKAGECONFIG[svg] = "--enable-svg,--disable-svg,librsvg"
- PACKAGECONFIG[svgdec] = "--enable-svgdec,--disable-svgdec,librsvg cairo"
--PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
-+PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+3"
- PACKAGECONFIG[fontconfig] = "--enable-fontconfig,--disable-fontconfig, fontconfig"
- PACKAGECONFIG[freetype] = "--enable-freetype,--disable-freetype, freetype"
- PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread, libdvdread libdvdcss"
+@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
+-   dbus dbus-glib libxml2 gnutls \
++   dbus libxml2 gnutls \
+    tremor faad2 ffmpeg flac fluidsynth alsa-lib \
+    lua-native lua libidn \
+    avahi jpeg xz libmodplug mpeg2dec \
 -- 
 2.20.1
 
