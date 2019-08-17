@@ -1,20 +1,20 @@
 Return-Path: <tworaz@tworaz.net>
 Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
-	by mail.openembedded.org (Postfix) with ESMTP id E9B3E7F32F
+	by mail.openembedded.org (Postfix) with ESMTP id 0D5D27F33D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 22:00:39 +0000 (UTC)
+	Sat, 17 Aug 2019 22:00:41 +0000 (UTC)
 Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
-	by mail.tworaz.net (Postfix) with ESMTPSA id C4997103740;
-	Sat, 17 Aug 2019 22:00:40 +0000 (UTC)
+	by mail.tworaz.net (Postfix) with ESMTPSA id DC7A6103768;
+	Sat, 17 Aug 2019 22:00:41 +0000 (UTC)
 From: Piotr Tworek <tworaz@tworaz.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Aug 2019 00:00:31 +0200
-Message-Id: <20190817220032.6778-2-tworaz@tworaz.net>
+Date: Sun, 18 Aug 2019 00:00:32 +0200
+Message-Id: <20190817220032.6778-3-tworaz@tworaz.net>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190817220032.6778-1-tworaz@tworaz.net>
 References: <20190817220032.6778-1-tworaz@tworaz.net>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 2/3] libgdata: Update to version 0.17.10.
+Subject: [meta-gnome][PATCH 3/3] libgee: Update to version 0.20.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,105 +27,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 22:00:40 -0000
+X-List-Received-Date: Sat, 17 Aug 2019 22:00:41 -0000
 Content-Transfer-Encoding: 8bit
 
-This is the latest upstream stable version of this library. Besides
-simple version bump this patch also makes the following changes:
+This is the latest upstream stable version of this package.
 
-1. Switch from autotools to meson.
-2. Drop gnome-common-native from DEPENDS. Its no longer needed to build
-   the package.
-3. Drop X11 feature check. This package itself does not actually depend
-   on X11. Its prefectly usable in headless or wayland only environments.
-   The only case where it depends on X11 indirectly is when its build
-   with gtk support which can, but does not have to depend on X11.
-4. Add PACKAGECONFIGs for customization options the package has. The
-   defaults config is left unchanged compared to the previous version.
+While doing the update also switch the package to use gnomebase bbclass
+from oe-core. This bbclass uses much  better SRC_URI pattern that can
+also use GNOME mirrors.
 
 Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
 ---
- .../recipes-gnome/libgdata/libgdata_0.16.1.bb | 33 -------------------
- .../libgdata/libgdata_0.17.10.bb              | 30 +++++++++++++++++
- 2 files changed, 30 insertions(+), 33 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
- create mode 100644 meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
+ .../libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb}        | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-devtools/libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb} (57%)
 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-deleted file mode 100644
-index 80cbae39f..000000000
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--SUMMARY = "GLib-based library for accessing online service APIs using the GData protocol"
--HOMEPAGE = "http://live.gnome.org/libgdata"
--BUGTRACKER = "https://bugzilla.gnome.org/"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
--                    file://gdata/gdata.h;endline=20;md5=079a554efcf65d46f96a515806e7e99a \
--                    file://gdata/gdata-types.h;endline=20;md5=7399b111aac8718da13888fc634be6ef"
--
--DEPENDS = "gnome-common-native libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
--
--inherit distro_features_check gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--do_configure_prepend_class-target () {
--    # introspection.m4 pre-packaged with upstream tarballs does not yet
--    # have our fixes
--    rm -f ${S}/introspection.m4
--    
--    # remove the pre-built gtk-doc files, as they're installed (or attempted to be installed)
--    # even if gtk-doc is explicitly disabled
--    rm -rf ${S}/docs/reference/html
--}
--
--do_compile_prepend() {
--    export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
--}
--
--EXTRA_OECONF += "--disable-goa --disable-tests --disable-gtk-doc"
--
--SRC_URI[archive.md5sum] = "eb552a8a8482e4231a3d1baf7262e64d"
--SRC_URI[archive.sha256sum] = "8740e071ecb2ae0d2a4b9f180d2ae5fdf9dc4c41e7ff9dc7e057f62442800827"
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
-new file mode 100644
-index 000000000..7bedd87ad
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "GLib-based library for accessing online service APIs using the GData protocol"
-+HOMEPAGE = "http://live.gnome.org/libgdata"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
-+                    file://gdata/gdata.h;endline=20;md5=079a554efcf65d46f96a515806e7e99a \
-+                    file://gdata/gdata-types.h;endline=20;md5=7399b111aac8718da13888fc634be6ef"
-+
-+DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
-+
-+GTKDOC_MESON_OPTION = "gtk_doc"
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages
-+
-+do_compile_prepend() {
-+    export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
-+}
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
-+PACKAGECONFIG[goa] = "-Dgoa=enabled,-Dgoa=disabled,gnome-online-accounts"
-+PACKAGECONFIG[gtk] = "-Dgtk=enabled,-Dgtk=disabled,gtk+3"
-+PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
-+
-+EXTRA_OEMESON = "-Dalways_build_tests=false"
-+
-+SRC_URI[archive.md5sum] = "d858d411ad394c275643b14993dfeed4"
-+SRC_URI[archive.sha256sum] = "c1d3d1f303f6a0416a0dac355a195276c31157a74bb1d040772d46d1cb15b012"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
+similarity index 57%
+rename from meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
+rename to meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
+index 190e5dd4e..94ea0a19d 100644
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
+@@ -8,9 +8,8 @@ BBCLASSEXTEND = "native"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+ 
+-PE = "1"
++inherit gnomebase vala gobject-introspection
+ 
+-inherit autotools vala pkgconfig gobject-introspection
+ do_configure_prepend() {
+     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+     for i in ${MACROS}; do
+@@ -18,7 +17,5 @@ do_configure_prepend() {
+     done
+ }
+ 
+-SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "d224dca55bb909f6730f40cc267337be"
+-SRC_URI[sha256sum] = "bb2802d29a518e8c6d2992884691f06ccfcc25792a5686178575c7111fea4630"
++SRC_URI[archive.md5sum] = "45db478f2b300ada8e039ebc6c9458de"
++SRC_URI[archive.sha256sum] = "9e035c4b755f46bfae70ba81cdcf8328b03f554373cec8c816e8b5680f85353c"
 -- 
 2.21.0
 
