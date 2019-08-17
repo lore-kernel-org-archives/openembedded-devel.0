@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id C08677F270
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 4275C7F270
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 19:40:55 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id go14so3551875plb.0
+	Sat, 17 Aug 2019 19:40:56 +0000 (UTC)
+Received: by mail-pg1-f173.google.com with SMTP id m3so4029948pgv.13
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 17 Aug 2019 12:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7RArKWeGp9xqWPkmK2kbdpWKKTYHcvVTgdrSiPi9p0E=;
-	b=ET2dgsYhLZDCcCOMx6ZhD+npr4sHGqwq0CbKPCQ7tgnlnl6TW/Pl02nr61FmWJO7qH
-	xR+Fu0IcY1TN1Lk81aFGhnfi8sv9N9WS1cuUWKwan5n6kygN24t5VSx/iCcoN1vfVE1k
-	fEKOdUn6XWepX4/dqe9x6DU1DB6TLsOvTDb5qC3abfzJzsvbp/cDESM/lYmEc8evZx2Q
-	tAjbJMwh+zOC6ek6bzOHRysE2OM7AyYHCY9de9/XLPk2F9RuK0FcLDn8a1SXa7wSU4Jk
-	MGZrM1w3SrFJx+El0D/UCTuO1FJIdvCgW0tbt4dIRsvvcsq8nmDBZ6VsSpdTR8k0VR0i
-	MYEQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=SjH2ToV6HaS3zshxR9IDvKONyssW3N4cS2XGLsa0bsE=;
+	b=JB36zB7Tvl165v7CSB/uhwOabtLUaDXkOUP0tMXw0in1mE+bUM9L7YrBlYQrqR3bIO
+	+ZcKj+qrDz8kG4TyKGRsM8dKA1WqBDhIRGXLbO+e5IVK1FCM/qQkspJ56Zq1ilopwKCt
+	eOH2gvLkaW19bwbAeCNmEv3iWi/1QQ/fp72wp822bXvvY7gHejNjkjLNp33jBY32LE+I
+	LcsWAWhQHn40XD/pRGyBy2SdRk+mcH3gmVmw+v3WjcsBu6JbIeIgJM4KWRTs1oVvzBtx
+	Btyb0jKfgqofDnyVB0lQWmnSEyN9UatOHrVEdwAo2M/Vc4ZWCRTMP6gopQf/G0i1WOwH
+	9k9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7RArKWeGp9xqWPkmK2kbdpWKKTYHcvVTgdrSiPi9p0E=;
-	b=mYYb2vk3ZxN85nEFo61mF58Hgm9tTgSsOwXvOczyH39SyV1bnYGczdPjEqp+Mr+cDd
-	T0cWBX856XEt+s0U1nN13WwWdsN5/bj1gv1cZIN6qqfmHMe3lasAhd0lXiVW4BYscVMq
-	2tzPxoOuxcsNXrbL+OTjPsu+LRkaM+8BMj2BreudPPzextE48hQVLjIlzZRFUpSkdbyJ
-	OivhBAXO3DFLLAtd3s1XsjKgLCiegTd3KS3jKt/2Sd4XJykFXZ9cK1AJA6VbIrnk5R8m
-	vXhVEyjwxaI9hjvVp5DCYcO5NC4hqy7Vvz+ODtlYoCsm3zJ3hMjb2EEG472QQEvcEpQd
-	Yo3Q==
-X-Gm-Message-State: APjAAAUAmvBMXAMRS9utqAMGbjsyqKugDjOQeP56IK2m24drbMDNZ3ay
-	eBFc8O6YzGBgHJqx0efngRatg0Y4Hlc=
-X-Google-Smtp-Source: APXvYqyOqS/1J/ewxx6l6nA4Rqqir1acYzvKTXXhJVX9+zAGNhVPH5jIJHlVZa+gl5HaYRd2S0RFIA==
-X-Received: by 2002:a17:902:e613:: with SMTP id
-	cm19mr8320258plb.299.1566070856395; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=SjH2ToV6HaS3zshxR9IDvKONyssW3N4cS2XGLsa0bsE=;
+	b=pMnGpP1DW3gfuH3XjnnbFva2iNhWpKOfPrlIejlsb1tbYxgfCfRM0wEyY6Mbi5R+J8
+	DQpAPKEzYnOoKx50xhsuFX6rz6Zq2KmY81VrAorvqlNGcqqNqhJ1nq65DxvE2SwXTtdp
+	KhCCP+6TUO9h8Twmv8QD7yVZ7QLHsbixje6wG2TgyOWcfvL1NtNQPt7bzWAQDIn/UuFE
+	2kYlw7eayAnGR4LE8KUsfMi+9GQtPgGhJrKxRogk8/WqT8PEDVSIEfZOu26nHimGDFnV
+	Zv49UIUDOxlDg2qrgn/cK2hDBUMd8Rp+lGrD/IxXx9atbEHikbF5DN7PRC/8alb4rI8x
+	LCqA==
+X-Gm-Message-State: APjAAAWtWrz0sLD/l8Z7hef0U//Nhl8GhKYvivq77NwukO5Gx9F5qBmq
+	F0dutE/t5E+5nqdd0o2zr6xgh79y45U=
+X-Google-Smtp-Source: APXvYqwPEL6IDQH/+36RUxsL0xEh03VMSf4iANJSe3TN8Q2QDKEdk09sHNODS+rY67gxJSanAbsJww==
+X-Received: by 2002:a17:90a:a789:: with SMTP id
+	f9mr13302770pjq.19.1566070856998; 
 	Sat, 17 Aug 2019 12:40:56 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	u24sm9679542pgk.31.2019.08.17.12.40.55
+	u24sm9679542pgk.31.2019.08.17.12.40.56
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 17 Aug 2019 12:40:55 -0700 (PDT)
+	Sat, 17 Aug 2019 12:40:56 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Aug 2019 12:40:48 -0700
-Message-Id: <20190817194049.40413-1-raj.khem@gmail.com>
+Date: Sat, 17 Aug 2019 12:40:49 -0700
+Message-Id: <20190817194049.40413-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.1
+In-Reply-To: <20190817194049.40413-1-raj.khem@gmail.com>
+References: <20190817194049.40413-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 1/2] python3-blivet: Add python3 to rdeps
+Subject: [meta-initramfs][PATCH 2/2] grubby: Add bash to rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +60,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 19:40:55 -0000
+X-List-Received-Date: Sat, 17 Aug 2019 19:40:56 -0000
 Content-Transfer-Encoding: 8bit
 
-Fix do_package_qa error
-ERROR: QA Issue: /usr/libexec/blivetd contained in package python3-blivet requires /usr/bin/python3, but no providers found in RDEPENDS_python3-blivet? [file-rdeps]
+Fixes
+ERROR: QA Issue: /sbin/new-kernel-pkg contained in package grubby requires /bin/bash, but no providers found in RDEPENDS_grubby? [file-rdeps]
+
+I wonder if new-kernel-pkg should be packaged at all, but dracut might
+need to be cleaned first to not need it
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-extended/python-blivet/python3-blivet_3.1.4.bb      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb | 1 +
+ meta-initramfs/recipes-devtools/grubby/grubby_git.bb  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
-index 817ef9bafb..fe9d27ab8f 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
-@@ -30,7 +30,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+index dc3a70bb52..7403cf64f7 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+@@ -35,6 +35,7 @@ do_install_ptest() {
+     sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
+ }
  
- inherit setuptools3 python3native
++RDEPENDS_${PN} += "bash"
+ RDEPENDS_${PN}-ptest = "util-linux-getopt bash"
  
--RDEPENDS_${PN} = "python3-pykickstart python3-pyudev \
-+RDEPENDS_${PN} += "python3-pykickstart python3-pyudev \
-                   parted python3-pyparted multipath-tools \
-                   lsof cryptsetup libblockdev \
-                   libbytesize \
+ COMPATIBLE_HOST = '(x86_64.*|i.86.*)-(linux|freebsd.*)'
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+index 8430b7e102..6d53f48cd1 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+@@ -35,6 +35,7 @@ do_install_ptest() {
+     sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
+ }
+ 
++RDEPENDS_${PN} += "bash"
+ RDEPENDS_${PN}-ptest = "util-linux-getopt bash"
+ 
+ COMPATIBLE_HOST = '(x86_64.*|i.86.*)-(linux|freebsd.*)'
 -- 
 2.22.1
 
