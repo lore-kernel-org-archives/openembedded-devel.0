@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 427CF7F270
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id C08677F270
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 19:20:30 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id 196so4833415pfz.8
+	Sat, 17 Aug 2019 19:40:55 +0000 (UTC)
+Received: by mail-pl1-f181.google.com with SMTP id go14so3551875plb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 12:20:31 -0700 (PDT)
+	Sat, 17 Aug 2019 12:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=zct7F/xJ+w0etGa7EIXrlVd17UpFgURqAwVVPDCKnY0=;
-	b=aB9jnhBqxOciOH/ZscBJYKE//kgIWHTCcZbnij2uT8z1bifTdndKf3kaeDQykQqPFz
-	WHrsjX+OYrdDLu64Vq3Np4BgNE7Iue7Vo7khBUvG9Ypu9kjVM5YQ2qKJwfnAsGdvYJAF
-	ax84ln05OsYqqCT95DAkEWbxa4QWGb/uMorF/oznGGbc/TdET0X8syUXQ2YmVk9uSVsY
-	9caALHAP21VrBAvcYdRmrbUo8kd7R1FemoB5LxcmN71O9z4wXu7u0B2uwz4PzZf9oLMW
-	7K7gnN1PvC+TCdzf2sUv+JZcERqwLCpjeCBt+7j2Ipexhm0REJJc0LIgUDA28IaFyuJt
-	uL+A==
+	bh=7RArKWeGp9xqWPkmK2kbdpWKKTYHcvVTgdrSiPi9p0E=;
+	b=ET2dgsYhLZDCcCOMx6ZhD+npr4sHGqwq0CbKPCQ7tgnlnl6TW/Pl02nr61FmWJO7qH
+	xR+Fu0IcY1TN1Lk81aFGhnfi8sv9N9WS1cuUWKwan5n6kygN24t5VSx/iCcoN1vfVE1k
+	fEKOdUn6XWepX4/dqe9x6DU1DB6TLsOvTDb5qC3abfzJzsvbp/cDESM/lYmEc8evZx2Q
+	tAjbJMwh+zOC6ek6bzOHRysE2OM7AyYHCY9de9/XLPk2F9RuK0FcLDn8a1SXa7wSU4Jk
+	MGZrM1w3SrFJx+El0D/UCTuO1FJIdvCgW0tbt4dIRsvvcsq8nmDBZ6VsSpdTR8k0VR0i
+	MYEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=zct7F/xJ+w0etGa7EIXrlVd17UpFgURqAwVVPDCKnY0=;
-	b=PIO6681vaGiIUoDgI3JdlkvrlhOmrUayNl2FvcQj92uc8zKenUsgClIYn/OwB8/3YE
-	cIAZ0HV2+tDfEuRP0bx9swWSQF/KKZW7pMF4fDu3q9fHptbQ7c1kf/sQWPLWdCNk2shr
-	Qekixv/Jclgr4jlPsAjL53WgbmrBw7BmHMcULTHEfIoGOC9BkJvTtznfy7k0y1DdGehz
-	CBszDg6bVMdjhjxk7NL7L5ucidipWKNpi7maDYckt1Jux1j++NG99L24MWjX69HnX9YO
-	MYQS34R5CVms8oum/uLDj6hZYT/n5J6uzeuUIDQeNcMg8WzWZNWgnRy1rmuWSdQrebYs
-	0qvQ==
-X-Gm-Message-State: APjAAAXWu+u+J2eAF76sJDweMdsLiiPE/zV7N/L4EXSzx+9gsOWyZR2l
-	qmsICYeNe4MxWnXtLaXoiL7pOsVdfgw=
-X-Google-Smtp-Source: APXvYqy7nGbIstCfKQMVC28h7KzQG/XLJOk/zZYdwgO5dxhcp+uP9UK5y5KeXfeKS2TAZ+XR2CHe6Q==
-X-Received: by 2002:a17:90a:4485:: with SMTP id
-	t5mr13022470pjg.65.1566069630849; 
-	Sat, 17 Aug 2019 12:20:30 -0700 (PDT)
+	bh=7RArKWeGp9xqWPkmK2kbdpWKKTYHcvVTgdrSiPi9p0E=;
+	b=mYYb2vk3ZxN85nEFo61mF58Hgm9tTgSsOwXvOczyH39SyV1bnYGczdPjEqp+Mr+cDd
+	T0cWBX856XEt+s0U1nN13WwWdsN5/bj1gv1cZIN6qqfmHMe3lasAhd0lXiVW4BYscVMq
+	2tzPxoOuxcsNXrbL+OTjPsu+LRkaM+8BMj2BreudPPzextE48hQVLjIlzZRFUpSkdbyJ
+	OivhBAXO3DFLLAtd3s1XsjKgLCiegTd3KS3jKt/2Sd4XJykFXZ9cK1AJA6VbIrnk5R8m
+	vXhVEyjwxaI9hjvVp5DCYcO5NC4hqy7Vvz+ODtlYoCsm3zJ3hMjb2EEG472QQEvcEpQd
+	Yo3Q==
+X-Gm-Message-State: APjAAAUAmvBMXAMRS9utqAMGbjsyqKugDjOQeP56IK2m24drbMDNZ3ay
+	eBFc8O6YzGBgHJqx0efngRatg0Y4Hlc=
+X-Google-Smtp-Source: APXvYqyOqS/1J/ewxx6l6nA4Rqqir1acYzvKTXXhJVX9+zAGNhVPH5jIJHlVZa+gl5HaYRd2S0RFIA==
+X-Received: by 2002:a17:902:e613:: with SMTP id
+	cm19mr8320258plb.299.1566070856395; 
+	Sat, 17 Aug 2019 12:40:56 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	y23sm11409238pfr.86.2019.08.17.12.20.29
+	u24sm9679542pgk.31.2019.08.17.12.40.55
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 17 Aug 2019 12:20:30 -0700 (PDT)
+	Sat, 17 Aug 2019 12:40:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Aug 2019 12:20:20 -0700
-Message-Id: <20190817192020.31315-1-raj.khem@gmail.com>
+Date: Sat, 17 Aug 2019 12:40:48 -0700
+Message-Id: <20190817194049.40413-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.22.1
 MIME-Version: 1.0
-Subject: [meta-initramfs][PATCH] klibc: Disable bcmp builtin for clang on glibc as well
+Subject: [meta-python][PATCH 1/2] python3-blivet: Add python3 to rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 19:20:30 -0000
+X-List-Received-Date: Sat, 17 Aug 2019 19:40:55 -0000
 Content-Transfer-Encoding: 8bit
+
+Fix do_package_qa error
+ERROR: QA Issue: /usr/libexec/blivetd contained in package python3-blivet requires /usr/bin/python3, but no providers found in RDEPENDS_python3-blivet? [file-rdeps]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 2 +-
+ .../recipes-extended/python-blivet/python3-blivet_3.1.4.bb      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 7faf0cabbf..86aae33407 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -34,7 +34,7 @@ ARMPATCHES_arm = "file://klibc-config-eabi.patch \
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
+index 817ef9bafb..fe9d27ab8f 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.1.4.bb
+@@ -30,7 +30,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
  
- OPTFLAGS = "${TUNE_CCARGS} -Os"
--OPTFLAGS_append_libc-musl_toolchain-clang = " -fno-builtin-bcmp"
-+OPTFLAGS_append_toolchain-clang = " -fno-builtin-bcmp"
+ inherit setuptools3 python3native
  
- PARALLEL_MAKE = ""
- EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+-RDEPENDS_${PN} = "python3-pykickstart python3-pyudev \
++RDEPENDS_${PN} += "python3-pykickstart python3-pyudev \
+                   parted python3-pyparted multipath-tools \
+                   lsof cryptsetup libblockdev \
+                   libbytesize \
 -- 
 2.22.1
 
