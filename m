@@ -1,52 +1,18 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C1A087F2ED
+Return-Path: <tworaz@tworaz.net>
+Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E4097F317
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 20:22:27 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id z3so3893869pln.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Aug 2019 13:22:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=W1heeCkvmIIIMB/KARwUH9g2Q4W5lq9pnPZEmuCs300=;
-	b=ZVbWmOh+A6hIVUn7Qk7c+YdPcPweYvlUR0DZamQlG8QfO8uznHPjo+3RIxy+WI10HN
-	FcfSzbgg+KlfJHCMRQN1V7lTJHsQ2VRWmFPsCsoBKOm8BsUYrrt8h+myaP6SoLm6gJCq
-	dD4fel7cq0KqXlesTLpilS4VGGenqam8/jvUZW2VLB1UK35WE8GcwZ6SatTpPVRwNgyW
-	Oe/eT3ckW5T7yf32+/LDxiYFeFhpCGEzdbgG4ns+st6gOVm/bx62CGackXadwt8Wcuux
-	X1fzfuEiXUL80Qak4/AoxAOQvJ5gpQnfYd9you6l3HhQv4pm5zLZ8R1yrxsCSrytTkkL
-	I1Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=W1heeCkvmIIIMB/KARwUH9g2Q4W5lq9pnPZEmuCs300=;
-	b=DdSAM/8GxYpWVtkCu069FogXEL3Uyxf8/CC7595JVzW0zp4EZWMfi965dlfI2CRGTt
-	vE58SJu6DEJnTxSf3UHPZel2lm49lO/lEjdn43qBQlk9JS25e+CgknNdxEAZkMtIzYwW
-	nATN3P2uIt0cFvHSKNIjE8726EtTn8hklPrUoVZ/QvPk7NbnnY7dgIKFIK7va0OjkMI5
-	wQuo1nGOxvn2o8GJPZyp8TEF7OTORJnNoj9sSSkYNAKNVyb1G2sZ5wt28uQYO6voaVbl
-	6c9ZcXYvMCU1BUAuHtoAPsKk83sFDdKL+kRqavqPP/o9Knv2BHF17EyQw40Tv+YuQaOf
-	hTIw==
-X-Gm-Message-State: APjAAAVrtAmYjeVXB7Tc4dENqlJngKQZ/d7kxFfv41xTsBee0XzBhd2e
-	wwgdisXbkH5uDXxgp+09jWTQFzZDP2Q=
-X-Google-Smtp-Source: APXvYqydLVAcoqnC+EQfghkngGCCUFqcCe1/7uJtFZpzcgteDY1GTq7FzNpELgxhRckKhpNuD6i+GQ==
-X-Received: by 2002:a17:902:f082:: with SMTP id
-	go2mr16124582plb.25.1566073348113; 
-	Sat, 17 Aug 2019 13:22:28 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	h13sm11294096pfn.13.2019.08.17.13.22.27
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 17 Aug 2019 13:22:27 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 17 Aug 2019 21:58:26 +0000 (UTC)
+Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
+	by mail.tworaz.net (Postfix) with ESMTPSA id BC8A1103755;
+	Sat, 17 Aug 2019 21:58:27 +0000 (UTC)
+From: Piotr Tworek <tworaz@tworaz.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Aug 2019 13:22:20 -0700
-Message-Id: <20190817202220.3802-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.22.1
+Date: Sat, 17 Aug 2019 23:58:07 +0200
+Message-Id: <20190817215808.6585-1-tworaz@tworaz.net>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] ufs-tool: Do not force static linking
+Subject: [meta-oe][PATCH 1/2] telepathy-glib: Update to version 0.24.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,46 +25,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2019 20:22:27 -0000
+X-List-Received-Date: Sat, 17 Aug 2019 21:58:27 -0000
 Content-Transfer-Encoding: 8bit
 
-build forced static linking if it detect cross-compilation, static
-linking with glibc does not work in all circumstances, e.g. when using
-clang, glibc expects libgcc to be linked in to provide unwinding, which
-may not be the case, ideally the symbols should be looked up independent
-of libraries linked in but thats not the case
+This is the latest upstream bugfix release.
 
-fixes
-
-| /mnt/a/yoe/build/tmp/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/ufs-tool/1.3+gitAUTOINC+8b00e33003-r0/recipe-sysroot-native/usr/bin/arm-yoe-linux-gnueabi/arm-yoe-linux-gnueabi-ld: /mnt/a/yoe/build/tmp/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/ufs-tool/1.3+gitAUTOINC+8b00e33003-r0/recipe-sysroot/usr/lib//arm-yoe-linux-gnueabi/9.2.0/../../../lib/libpthread.a(unwind.o): in function `__pthread_unwind':
-| /usr/src/debug/glibc/2.30-r0/git/nptl/unwind.c:121: undefined reference to `_Unwind_ForcedUnwind'
-| clang-9: error: linker command failed with exit code 1 (use -v to see invocation)
-| make: *** [Makefile:40: ufs-tool] Error 1
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
 ---
- meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../{telepathy-glib_0.24.0.bb => telepathy-glib_0.24.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/telepathy/{telepathy-glib_0.24.0.bb => telepathy-glib_0.24.1.bb} (80%)
 
-diff --git a/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
-index e074b51971..208ac3c58b 100644
---- a/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
-+++ b/meta-filesystems/recipes-utils/ufs-tool/ufs-tool_git.bb
-@@ -12,8 +12,11 @@ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-tool.git;protocol=git;
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
+similarity index 80%
+rename from meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
+rename to meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
+index 01c6e3781..8bbfcc085 100644
+--- a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb
+@@ -5,8 +5,8 @@ DEPENDS = "glib-2.0 dbus hostpython-runtime-native dbus-native dbus-glib libxslt
+ LICENSE = "LGPLv2.1+"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-glib/${BP}.tar.gz"
+-SRC_URI[md5sum] = "93c429e37750b25dcf8de86bb514664f"
+-SRC_URI[sha256sum] = "ae0002134991217f42e503c43dea7817853afc18863b913744d51ffa029818cf"
++SRC_URI[md5sum] = "cbeb0a24acc26e7f095be281c324da69"
++SRC_URI[sha256sum] = "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
  
--EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" CFLAGS="${CFLAGS}""
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
  
-+do_configure() {
-+	sed -i -e "s|-static$||g" ${S}/Makefile
-+}
- do_install() {
- 	install -d ${D}${bindir}/
- 	install -c -m 755 ${S}/ufs-tool ${D}${bindir}/
 -- 
-2.22.1
+2.21.0
 
 
