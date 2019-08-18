@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 90FF27F29A
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+	[209.85.128.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DD4D7F290
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 22:33:42 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id k2so6713237wrq.2
+	Sun, 18 Aug 2019 22:33:43 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id 10so1353669wmp.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 15:33:43 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=ZsgHRTGDvTTik2dRAfnyXwI6tz/bm/0L2Ci/9IJXri0=;
-	b=F2zdWfCZ5dEaLs6SwEsYqJeGfdKJ4n1CCcsML2r/QlGoEFBS3tixg95GrJqxFL37dm
-	aG6YmKgsJI1kYn5pdRyiOC9HugwhboUKso0cH8vWbRyAss5A1m/OG5pvvXy+HASK010B
-	kSk0TL2WAGAJLgsfJsVkNGuNL/xVskJSzUWfVdkgk4PTxyC8daoJEoC+sYqriZJTptqa
-	cRNWbJNSPTHH6VM6HcMfp09q0k2MKiYhHETMpdp0P0IjoQZ+WEvZhEMc7aY9j7JOk+Jz
-	SLHZPYbYMdAnHi2EExhDR9x3y3ije9ZSApxnwwhuuEOM9kAmvMpkIp3kgi7G0p5akGau
-	p1Dw==
+	bh=n2uiE9URik7o/3cseDD2Qrk7CLBqc+cE0JdPZYvS3/I=;
+	b=ql4KZT7Mm5rl69NfF7CMO6HFJqCpFXlOU4du4rciB12wHcFP4zo/KfeMehG6Gj1rii
+	ZtiIJtQvkuhwDHZIlYYNCUuFrvJXe7A6qzq2+TPrgbRCTeOae6jbLWHYWWcG3Hn/rRWY
+	pI27gB7tNsuAE39tcCxc+P/ynGsZbt6DOgONT1rSfNHRsVgKLcJ8dmGq1SQOhko4P7vs
+	X9RkbhOYiKt7CslB9mJpBDthZb54IHd4LDzAo9euewH/bML/2DWldf/4YcrEh35CKhsM
+	r2QwuYlx5zLYkiw29XTV8C52+QjVNu6D3ZxD2y9rWxaum2CFxciNin7FKywMyzNBl0sw
+	t90w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=ZsgHRTGDvTTik2dRAfnyXwI6tz/bm/0L2Ci/9IJXri0=;
-	b=Zr7ZYS8J15h2hYw1/DSh77yeEj9BGELBB6xFEdOAUGwVkj68QZ7eG52JoM1m5uUfjM
-	swe2HcKebdQ3IFWshDKqF/+1j6kqOGGkXW3y7jY1c1Os540GYbYwWwxQo117KuNdM2gz
-	OAV6PTa6iO2KW8xqsmMeFH9OAqvNGGp2xyz/2V95/KXmFQwdLGJJTZPeYzFtb3MPOy13
-	bZYFOd7yV2yFzdEXLeOcACElN+vUauY9XfdBrtTZMEMW8KwKq7UcXeI5msWYUsrLoiq/
-	AaSRgX4qoMnuLlZFkwXgadC6Ye9GbY0desn2K8b7+E8ETY/af0fgnijEiSI8K82QoWTU
-	koIA==
-X-Gm-Message-State: APjAAAVVkLEksAnU1kA9xOXxjGnOqDRp6OtgFjve6IkYjvEintOzoVzI
-	7+nfIv2IGQtSFo0HafP1zoqbCcKQ
-X-Google-Smtp-Source: APXvYqyGOR37LwHqpP2Vw7lI0DXZj7BL6xcPUqQIwtlgvRnfCUG97XUsfcjivsYJZ3n/7GV559snpQ==
-X-Received: by 2002:a5d:6744:: with SMTP id l4mr15824387wrw.186.1566167622982; 
-	Sun, 18 Aug 2019 15:33:42 -0700 (PDT)
+	bh=n2uiE9URik7o/3cseDD2Qrk7CLBqc+cE0JdPZYvS3/I=;
+	b=H7WCfg25s5mmbxRTAV7JlxX9a09+bSNUwP90nEtFI3UDs4xqa0adbPSB5k44ZTrDnA
+	UWAs7nnMfaMnRsVsSy+NoXmnsxAtHEdOzoz1TMvPeq5DWC9rsYCSDvkjbhUHZ85FM0fB
+	7s78djmPUzsp6s787eQuwhv/4yL4GYc0rmXKBt86GhH7QLYr54l08y8UKR17wL5ybojk
+	vsaxpe5xUfxfVftnWvHZ1WXovJedxnztqTBulFMLKnrbSQpx0bN96DHqGdjnvsFpUZc0
+	z5AhpJtkKpeyXIKmZxnB18QWQB+G7ZRBY4cRXg/DeVb52+Bcjm/RxU1jBYLy8hS3KD/I
+	SzFA==
+X-Gm-Message-State: APjAAAV5qFhh+GOgVD2GKyny2ocfe44PGDDr8P6L5K3gDZEtlTgES9D1
+	tTDL7SjOg2KnOgGqwHAAxUGBFVXg
+X-Google-Smtp-Source: APXvYqxWRM1bVevlIqfHEQ+NT+c4aHmzcW9EouuZznDNoQCi8BEuK8WDM6vTI6fvPszQmpgEqf2BEg==
+X-Received: by 2002:a1c:770d:: with SMTP id t13mr17336236wmi.27.1566167624093; 
+	Sun, 18 Aug 2019 15:33:44 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F2D8718C84C5511B02F056F.dip0.t-ipconnect.de.
 	[2003:f0:7f2d:8718:c84c:5511:b02f:56f])
 	by smtp.gmail.com with ESMTPSA id
-	k124sm30390814wmk.47.2019.08.18.15.33.42
+	k124sm30390814wmk.47.2019.08.18.15.33.43
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 18 Aug 2019 15:33:42 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:43 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	kai.kang@windriver.com
-Date: Mon, 19 Aug 2019 00:33:13 +0200
-Message-Id: <20190818223316.19772-8-schnitzeltony@gmail.com>
+Date: Mon, 19 Aug 2019 00:33:14 +0200
+Message-Id: <20190818223316.19772-9-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190818223316.19772-1-schnitzeltony@gmail.com>
 References: <20190818223316.19772-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 07/10] xfce4-mpc-plugin: upgrade 0.5.1 -> 0.5.2
+Subject: [meta-xfce][PATCH 08/10] xfce4-fsguard-plugin: upgrade 1.1.0 -> 1.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,43 +62,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 22:33:43 -0000
+X-List-Received-Date: Sun, 18 Aug 2019 22:33:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From release notes:
-* fix crash when parsing MPD 0.21 outputs response in some cases (bug #15415)
-* new translations: hy_AM, ie, fi
-* many updated translations
+Announcement says it is a translation-updates-only-release but it seems they
+changed licence either.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...{xfce4-mpc-plugin_0.5.1.bb => xfce4-mpc-plugin_0.5.2.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-multimedia/xfce4-mpc-plugin/{xfce4-mpc-plugin_0.5.1.bb => xfce4-mpc-plugin_0.5.2.bb} (64%)
+ ...d-plugin_1.1.0.bb => xfce4-fsguard-plugin_1.1.1.bb} | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.1.0.bb => xfce4-fsguard-plugin_1.1.1.bb} (33%)
 
-diff --git a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.1.bb b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.2.bb
-similarity index 64%
-rename from meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.1.bb
-rename to meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.2.bb
-index 85235490c..ff954acb8 100644
---- a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.1.bb
-+++ b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Simple client plugin for Music Player Daemon"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin"
-+HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin"
- SECTION = "x11/application"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3604d987e6dfdfc672c754d08953b0e0"
-@@ -14,5 +14,5 @@ LICENSE_FLAGS = "commercial"
- # for now we recommend our own mpd-server
- RRECOMMENDS_${PN} = "mpd"
+diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.1.bb
+similarity index 33%
+rename from meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
+rename to meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.1.bb
+index 8b924ac75..183d521af 100644
+--- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
++++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.1.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "The FSGuard panel plugin checks free space on a chosen mount point frequently and displays a message when a limit is reached"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin?&#recet_releases"
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3434d79d62df09abf5f78bb76d6cd21b"
  
--SRC_URI[md5sum] = "305dfdacb2b2198e1f1673d61f86e4f5"
--SRC_URI[sha256sum] = "635e678c9729663e9eaadfcf58426f7cea37e6d3fda5e818955fbc8ade00de01"
-+SRC_URI[md5sum] = "26a1e8658df2b51967dc2250e23f467d"
-+SRC_URI[sha256sum] = "eefe78b7b6b95312b3a52814b7f632dc92970c1b3e9535de616315749bf67760"
+ inherit xfce-panel-plugin
+ 
+-SRC_URI[md5sum] = "c9fcc1ff37f38e6ed518eca3b9887aa8"
+-SRC_URI[sha256sum] = "6b038322b49d29625219e6a54497085b8f834b9c1fd15282ce286a6529d7c445"
++SRC_URI[md5sum] = "d1e1fda4e80c36741643b1d9eca5c5c1"
++SRC_URI[sha256sum] = "d6d05d0a90a68453d65cdceec5ca7eeaef864393ab62eef532a7ba58f374d516"
 -- 
 2.21.0
 
