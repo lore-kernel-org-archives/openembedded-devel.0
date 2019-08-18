@@ -1,20 +1,33 @@
-Return-Path: <tworaz@tworaz.net>
-Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CD786C44B
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A54097E265
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 18:11:14 +0000 (UTC)
-Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
-	by mail.tworaz.net (Postfix) with ESMTPSA id E2050102F17;
-	Sun, 18 Aug 2019 18:11:14 +0000 (UTC)
-From: Piotr Tworek <tworaz@tworaz.net>
+	Sun, 18 Aug 2019 20:24:22 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46BT6t4RLmz3y
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Aug 2019 22:24:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1566159862;
+	bh=iIkrUdbb6zYMTlPMkUX06tT8oNfc3UWZJFxfDHfBwY8=;
+	h=From:To:Subject:Date:From;
+	b=NlWSdQhxwSvUl9Sh5UllX5zixwTP0ocgfmSaisHMCIN10pd61SWDSLAem1Aueac1O
+	7BI9zzgBSumYAoIU1h/p+LjbP9oUWEt7ll2dHlmU0jqoEwJmQMnAJ4OlfN3PD1IN+p
+	fgCiMBHzFMcxl/bqijQCfRn4fLPLqHvQamxhL1wdPxtaN6brLvF95iOJXdMbCZKcks
+	oR3YAmpbxpComQwLSlrHOKO/D42aQ6JmEP0CXBR2WFpPyyn62+2SDppe4HnnilJd+j
+	MG+J7kuiHZ30vOVKtCwMA9Xkt3cBiks3ZjE6+7sCGp+PuAbcvAoDZgGumy55t1xlpm
+	j1hJXHUyOjx8YgyrcejEM/yvVi+FI4juVlycV27g2GBt58+BEqQpAJSIxR+JtonaJy
+	MBPrUpVvIgL0ktSrf7aob9MoLPv3nHycWBYxhUREINoqvW7Lh6rJdsnH6dG2e/Wf8z
+	4MFUeRAYbHyHFfwO/EXPbX4Rjme1ocCajfAQn2BS+Df5nLdOmnl6B3DJ46VFYcMWet
+	6YSnQoLqUugm9mq3d9mPD0WYixa8UpkUxnlv0PK0zRjDASi1DuAN3ZaBaB21nFVxon
+	Z3vVQ1B5Hg7+6MrB5ALm9rAWB1l81ALGSVtLxN6evSx5QiJ0JSpH4tBD+RkNKMmmGK
+	LESLYQcUE0HMy3dEj2CZexj4=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Aug 2019 20:11:09 +0200
-Message-Id: <20190818181109.2980-1-tworaz@tworaz.net>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190817220032.6778-3-tworaz@tworaz.net>
-References: <20190817220032.6778-3-tworaz@tworaz.net>
-MIME-Version: 1.0
-Subject: [meta-gnome][PATCH v2] libgee: Update to version 0.20.2
+Date: Sun, 18 Aug 2019 23:24:21 +0300
+Message-Id: <20190818202421.13622-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] libgit2: Upgrade 0.27.8 -> 0.27.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,49 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 18:11:14 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 18 Aug 2019 20:24:22 -0000
 
-This is the latest upstream stable version of this package.
+This is a security release on the 0.27 branch.
 
-While doing the update also switch the package to use gnomebase bbclass
-from oe-core. This bbclass uses much  better SRC_URI pattern that can
-also use GNOME mirrors.
-
-Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb}         | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb} (58%)
+ .../libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb}           | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb} (90%)
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-similarity index 58%
-rename from meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-rename to meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-index 190e5dd4e..a048e4832 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-@@ -9,8 +9,8 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
+similarity index 90%
+rename from meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
+rename to meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
+index a43408908..3ef7bee43 100644
+--- a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
++++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
+ DEPENDS = "curl openssl zlib libssh2 libgcrypt"
  
- PE = "1"
-+inherit gnomebase vala gobject-introspection
+ SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
+-#v0.27.8
+-SRCREV = "2882803ca2b2cdedd069746422155a23fdd002b2"
++SRCREV = "3828d7afdd08b595584048e8e4dab6ddd4506ed1"
  
--inherit autotools vala pkgconfig gobject-introspection
- do_configure_prepend() {
-     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
-     for i in ${MACROS}; do
-@@ -18,7 +18,5 @@ do_configure_prepend() {
-     done
- }
+ S = "${WORKDIR}/git"
  
--SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
--SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
--SRC_URI[md5sum] = "d224dca55bb909f6730f40cc267337be"
--SRC_URI[sha256sum] = "bb2802d29a518e8c6d2992884691f06ccfcc25792a5686178575c7111fea4630"
-+SRC_URI[archive.md5sum] = "45db478f2b300ada8e039ebc6c9458de"
-+SRC_URI[archive.sha256sum] = "9e035c4b755f46bfae70ba81cdcf8328b03f554373cec8c816e8b5680f85353c"
 -- 
-2.21.0
+2.17.1
 
 
