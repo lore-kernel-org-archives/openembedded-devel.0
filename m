@@ -1,53 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F25F7CF98
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+	[209.85.128.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B90997CF98
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 22:33:35 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id b16so6703603wrq.9
+	Sun, 18 Aug 2019 22:33:36 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id z23so1350020wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 15:33:36 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Du+PiHx4fJUwYbE12zmcHej3MKdxa3nR06c4qBl9HdU=;
-	b=hF2O1JtRpoeo3W9Kc+J3L8V9tf26hn45Okm0WO5nKzaQgo16JGWmUx5Bvi/HzDOefH
-	yO/uGsG1wZ37x6YFgEmf581vv6KYieP0JlBgVwGmmwOYmVRNqYNFXE8yFUjaXSu1qhvD
-	k11z/+QdVfKRVvjd4f8A3QTSF2bSIgvhxSYVm4MmPUH62VejVWq3eFWE0TERaTwJXnGq
-	tMD5zVw4MxOXK6aBPiMQefTYATuJ6F0IdlD4sIRqgBsbTWbZCD4cs1XflniINmMlPcuZ
-	KXOh9aHFJkIxC+pKista7LcI+u464v6/JDv27PBFng1mnuMdK2/+S9n+Yr0Hw8YETB3S
-	xQxQ==
+	bh=Y7krPcJPry9oQCca3ebVKBH9x121PcCXgoXQBTzcsIw=;
+	b=rg6LTm+dRnHViG37wPWt2rqm1wWRbLCjuFLZdbDsggC1+Om//+5d2YomFCy6uD7RUU
+	YSpshe6ia7SAg+6Vw78X0pB6dYx3msymiGc8IQCrvyKfAXIC5pJ73Wvo1Xt3u16gV4UV
+	ocAST41qQvVjUBedutlXfZVD6+L9ALnNGRGXxucTE6czcDxqO0w/lKGF8yxnUrJB4aG7
+	oJEMVEd75CBYxlg2IUqWHnkvVRPraJnybl/aL/nbGtu6wrXW1ktqMqxZn2OLEKaVMf7k
+	SonUwYTVSJx01zerwk0QyGdAQBZx3oVpZEXf6Q6lH8He4heLJL8BNXX5Cdri/c0hX9t/
+	W9AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Du+PiHx4fJUwYbE12zmcHej3MKdxa3nR06c4qBl9HdU=;
-	b=Pt7e4FEliUgUfJ041Lodgx4+wXke/BK6jPTpjFxoGFsXqA4epbRVuaEbQuCojQ5Uip
-	0skG1PL6sXIfvizFWW5NySp5T9Py5ZfA7kWmY0tXil8WvvO8YTzoVafdyoyP0ZdPsKA5
-	lRrmUyMLcCqc5kz273412k7RYduVJokYN3rBneuaCYxvNYpKRzjZnJ/KB753rXsMqhff
-	nKCf6Yk+Xzy6cbuGoHanUFZ8ibD6zOJKcGnmlYd55U7RiYDY/ZXGPxsDECJ1ru+IFEBp
-	gBsZwq9jhbKaYgzpSEkjQDQ+8elfLLIWam5NRamVYyLD4pnyhPPiMTUWctCCR8ThfuH2
-	8P7Q==
-X-Gm-Message-State: APjAAAWZ+ZI5hDdTPLGi8ByL1fPREwXJP0FbCkbZEgPOfjEIvVI2nbDZ
-	Mjp50w5VeYz1pI3lOAogP614eXYJ
-X-Google-Smtp-Source: APXvYqzfLm90twcW9sSHK9iFSnSoDpU9omacYkqZH+izhopgAxv5r46bE75uir+8usDgkuQ4xBL7bw==
-X-Received: by 2002:a5d:628d:: with SMTP id k13mr23402672wru.69.1566167615723; 
-	Sun, 18 Aug 2019 15:33:35 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Y7krPcJPry9oQCca3ebVKBH9x121PcCXgoXQBTzcsIw=;
+	b=f+aaDkjNF578w/fLY3VPBEBHvfgsBK9bMPf0XofjEVhIKu31td3CyRmRWu07iCB7GU
+	1AzMuBCiR26r8fYj+QJrys5n0jPWwFNJmWGp5Rn7q3y+IxOnuuUsRjlF8iS0kqwG41sD
+	Q8ZLq1n1tw8HoTV9dH0GCcnSO0QS65PIRdKE8q2s3DBdVExpbm9Xgx768T/Tyw17d04K
+	4LujdMKoussZ9qm9BZjPu8W1Pu0AaC27M69eocXGGxestDj/D9onpRxCzCd9TL346/xb
+	S1afj0PkT/OXYpa+XgSDRnWnCMIMQkdB/LCB0yOaLxYfxSg1x4sr8HbOpC9HS252XTEY
+	Qbrw==
+X-Gm-Message-State: APjAAAVZD6ml6YQDq/b8UdebFuHWZD33LfuZ+4SPFFKbKBKI7ye4eQVC
+	ieBswdAkt8dz6ufFhEriXhJF319O
+X-Google-Smtp-Source: APXvYqxLEzR/9i32hj33laK2YIPkCGooIvx9iCG6UAsMz5xU+x0+zjObUTxsTPOLAQjMY2s919JdsQ==
+X-Received: by 2002:a1c:1d08:: with SMTP id d8mr16642124wmd.22.1566167617006; 
+	Sun, 18 Aug 2019 15:33:37 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F2D8718C84C5511B02F056F.dip0.t-ipconnect.de.
 	[2003:f0:7f2d:8718:c84c:5511:b02f:56f])
 	by smtp.gmail.com with ESMTPSA id
-	k124sm30390814wmk.47.2019.08.18.15.33.34
+	k124sm30390814wmk.47.2019.08.18.15.33.35
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 18 Aug 2019 15:33:35 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	kai.kang@windriver.com
-Date: Mon, 19 Aug 2019 00:33:06 +0200
-Message-Id: <20190818223316.19772-1-schnitzeltony@gmail.com>
+Date: Mon, 19 Aug 2019 00:33:07 +0200
+Message-Id: <20190818223316.19772-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190818223316.19772-1-schnitzeltony@gmail.com>
+References: <20190818223316.19772-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 00/10] further xfce updates
+Subject: [meta-xfce][PATCH 01/10] xfce4-time-out-plugin: upgrade 1.0.2 -> 1.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,64 +62,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 22:33:35 -0000
+X-List-Received-Date: Sun, 18 Aug 2019 22:33:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Not exactly exciting updates 
+Bugix/layout/translation release (still GTK2)
 
-Andreas Müller (10):
-  xfce4-time-out-plugin: upgrade 1.0.2 -> 1.0.3
-  xfce4-battery-plugin: 1.1.2 -> 1.1.3
-  xfce4-smartbookmark-plugin: upgrade 0.5.0 -> 0.5.1
-  xfce4-wavelan-plugin: upgrade 0.6.0 -> 0.6.1
-  xfce4-netload-plugin: upgrade 1.3.1 -> 1.3.2
-  xfce4-systemload-plugin: upgrade 1.2.2 -> 1.2.3
-  xfce4-mpc-plugin: upgrade 0.5.1 -> 0.5.2
-  xfce4-fsguard-plugin: upgrade 1.1.0 -> 1.1.1
-  xfce4-diskperf-plugin: upgrade 2.6.1 -> 2.6.2
-  gigolo: upgrade 0.4.2 -> 0.5.0
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...e-out-plugin_1.0.2.bb => xfce4-time-out-plugin_1.0.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/time-out/{xfce4-time-out-plugin_1.0.2.bb => xfce4-time-out-plugin_1.0.3.bb} (48%)
 
- .../{gigolo_0.4.2.bb => gigolo_0.5.0.bb}      |  6 ++--
- ...gin_0.5.1.bb => xfce4-mpc-plugin_0.5.2.bb} |  6 ++--
- .../battery/xfce4-battery-plugin_1.1.2.bb     |  9 ------
- .../battery/xfce4-battery-plugin_1.1.3.bb     |  9 ++++++
- ...lude-sys-sysmacros.h-for-major-minor.patch | 30 -------------------
- .../diskperf/xfce4-diskperf-plugin_2.6.1.bb   | 12 --------
- .../diskperf/xfce4-diskperf-plugin_2.6.2.bb   | 10 +++++++
- .../fsguard/xfce4-fsguard-plugin_1.1.0.bb     |  9 ------
- .../fsguard/xfce4-fsguard-plugin_1.1.1.bb     |  9 ++++++
- ...ys-sysctl.h-its-unused-on-linux-port.patch | 25 ----------------
- .../netload/xfce4-netload-plugin_1.3.1.bb     | 12 --------
- .../netload/xfce4-netload-plugin_1.3.2.bb     | 10 +++++++
- .../xfce4-smartbookmark-plugin_0.5.0.bb       |  9 ------
- .../xfce4-smartbookmark-plugin_0.5.1.bb       |  9 ++++++
- ....2.bb => xfce4-systemload-plugin_1.2.3.bb} |  6 ++--
- .../time-out/xfce4-time-out-plugin_1.0.2.bb   | 10 -------
- .../time-out/xfce4-time-out-plugin_1.0.3.bb   | 10 +++++++
- .../wavelan/xfce4-wavelan-plugin_0.6.0.bb     |  9 ------
- .../wavelan/xfce4-wavelan-plugin_0.6.1.bb     |  9 ++++++
- 19 files changed, 75 insertions(+), 134 deletions(-)
- rename meta-xfce/recipes-apps/gigolo/{gigolo_0.4.2.bb => gigolo_0.5.0.bb} (54%)
- rename meta-xfce/recipes-multimedia/xfce4-mpc-plugin/{xfce4-mpc-plugin_0.5.1.bb => xfce4-mpc-plugin_0.5.2.bb} (64%)
- delete mode 100644 meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin/0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch
- delete mode 100644 meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.1.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.2.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.1.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
- delete mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.2.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.0.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.1.bb
- rename meta-xfce/recipes-panel-plugins/systemload/{xfce4-systemload-plugin_1.2.2.bb => xfce4-systemload-plugin_1.2.3.bb} (53%)
- delete mode 100644 meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.2.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.3.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.0.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.1.bb
-
+diff --git a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.2.bb b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.3.bb
+similarity index 48%
+rename from meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.2.bb
+rename to meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.3.bb
+index facbb0d86..4218c0c50 100644
+--- a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.2.bb
++++ b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.0.3.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "This plugin makes it possible to take periodical breaks"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-time-out-plugin"
++HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-time-out-plugin"
+ SECTION = "x11/application"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+ inherit xfce-panel-plugin
+ 
+-SRC_URI[md5sum] = "d7d743794a766ba1b00647828a099053"
+-SRC_URI[sha256sum] = "c69fb7218c685e516454810291c5245c49a80d774a6bded59c645a1af427c4e5"
++SRC_URI[md5sum] = "81e1a961032c7b87d672bed09c681a73"
++SRC_URI[sha256sum] = "7f9cd4694e83d9cc5e41140d174dcc5ffe00fd546f2706f619031039ad7e0f6b"
 -- 
 2.21.0
 
