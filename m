@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
-	[209.85.128.50])
-	by mail.openembedded.org (Postfix) with ESMTP id CBBAF7F27E
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+	[209.85.221.51])
+	by mail.openembedded.org (Postfix) with ESMTP id CE1FA7F27C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 22:33:39 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id v15so1358756wml.0
+	Sun, 18 Aug 2019 22:33:40 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id j16so6703809wrr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 15:33:41 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=fJaa7qt5Emc0QD0RZHGDQwrq8jZ+JxABRxnCfCyUupM=;
-	b=cVyESx82LD+p2bo7hidBnOEVSpDXnF+EXvtTWeLfJ6cz9PlipMp3B+uGV4MohqJUdO
-	qkhuW4PAR0KvjYONcNaPJJXbGVFb28c7gGXMCe8ayiempoHqx6OAXYRha0O+AtJqP2fV
-	JnIotg3vMyLbQmlIgO24zw8fqJJ4oBXzDCUSUWkqIKaeakWBKbx83oD/EgiVczTLQfBN
-	tNt6u8i1fNDRe3QQN0mbP6tQaeuFqfBLvtErrgzG84nPG8a0qrmRvmjJLj5CKO6HpzEr
-	gj3pCrNvYhC3WmkASMOhX8zzFv7TTD58eCDM/CF5FvzYyWoI7kotuxWSnZhN1kOt6Mrw
-	zEGw==
+	bh=Tip+npxBWjswQq3ETqHTtdMUl0CUBp0TsAc7u29zi80=;
+	b=Tg812Y+0bRRtvTKsynoMAjJBOIg9zN373pscd8Qc7W8vwp7jkgZ/kfFN3ELAbs+r/2
+	WyW98jtLiWXgiqnxDMGOqgIBfqudab8Rw40R4Uz6Yg+TPNO77lCuBgc0newpi4mLuQjU
+	TYbZ8+ErHCsvSeIb9bRnhV3S5yvqIAhZ/wURIiRR0FiP1r1ckncTkngtI1q1Htpb1vlV
+	UFudIPbAqv46tg4ILA8Wi4vwDpfMCa6hLBTj3t3nAtek4mY3J5W/yuTu/Y7NDmAVUqet
+	UaPpMthkhwqKGjlohIIQwaQ91nA70sTjr8cEts/1n+1qmRx1EPfJifpbS+++VOwiOfnn
+	Fccw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=fJaa7qt5Emc0QD0RZHGDQwrq8jZ+JxABRxnCfCyUupM=;
-	b=SxlHUpvwJOukeULpMIGIknrBPJ3MqweLQ2HfhQRYKweMv9rsM/bkKMz6wehLdXtaTm
-	SnUNupkrjACyZkhn2craHvOzRQnL0omgfoohN1LzqkFva84G2lOXNJUiNdppYm1ehVdy
-	6kIGx0hZKZZFOtV9OMjjYiwP15C6sKyo6DpIOnIgLDdxk0/RKE041sQjv6O/U0xojWWc
-	vlCLZAhia1bJZnBNDgTI9aJkxy934zBP6cd+dySIUPuGhQeNMRCaWmeniHpP5QUl/nTV
-	W7gldzC+xMxLr2/2WjV5fKJUbPBTS60TtzKbcAXaPhF1Aj2q80lacHM/+M3EKcP+shgf
-	T+dg==
-X-Gm-Message-State: APjAAAUQzYyuJYazxLtYa78gVNJdktngyLlLqXgJl4tQNPpf6Jp7RDOl
-	p/EgZaVdH/HmVVE6qle6LHaY6/57
-X-Google-Smtp-Source: APXvYqwKQof7kqYQsagH95llEsn+eLdg8vyasJv+DDoueB1Xg8CMb1Q4zDry38NgRF5gE9gmRhXyXg==
-X-Received: by 2002:a05:600c:145:: with SMTP id
-	w5mr16856315wmm.75.1566167620339; 
-	Sun, 18 Aug 2019 15:33:40 -0700 (PDT)
+	bh=Tip+npxBWjswQq3ETqHTtdMUl0CUBp0TsAc7u29zi80=;
+	b=plQMH6ND8oHzuDhoxgfG7QldJPt92POJT4AcErnL6wDj8aDkMvYFxfmin3cGNqWntT
+	uptEb6PXhBkp+afxUr81LiSTE2gltQoqKmXdQvkxGtfIn9p21ewS/PyVVdx8q9SwDP8k
+	V7V7KKlO+TxDTeyMZU03EGXmek96RtJCWY/ZEkavRWCmpTS2S3t+gIjWkJUuYpOuuxJd
+	6dOi29/RSNQ2GfK0GmrhZ4V6YGxO/5yY4V/5uNau8Wmdbza9QUnO3AdpMdjCMmOvRU2G
+	shkJDB27/oMzbW5yF97AnDdlUb3DU4qmHpxenuahTIqJ9UIzvbFN4jqlaaEAjqS2Wfbt
+	EN9g==
+X-Gm-Message-State: APjAAAXecetp/VWEXCT3oO3fLjeScy1QxjsL6azynZVgY99aVEiwxubk
+	Pj4v52xgdlKPaTfyh8qvQh43EJ6e
+X-Google-Smtp-Source: APXvYqztS+0N+ruGtVYWy02vXbRxksjCPcntN++mOqe9hdOzthlF83TWoMtrkkIFkqGAElFcQ/KlHg==
+X-Received: by 2002:adf:dd88:: with SMTP id x8mr24543527wrl.331.1566167621294; 
+	Sun, 18 Aug 2019 15:33:41 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F2D8718C84C5511B02F056F.dip0.t-ipconnect.de.
 	[2003:f0:7f2d:8718:c84c:5511:b02f:56f])
 	by smtp.gmail.com with ESMTPSA id
-	k124sm30390814wmk.47.2019.08.18.15.33.39
+	k124sm30390814wmk.47.2019.08.18.15.33.40
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 18 Aug 2019 15:33:39 -0700 (PDT)
+	Sun, 18 Aug 2019 15:33:40 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	kai.kang@windriver.com
-Date: Mon, 19 Aug 2019 00:33:10 +0200
-Message-Id: <20190818223316.19772-5-schnitzeltony@gmail.com>
+Date: Mon, 19 Aug 2019 00:33:11 +0200
+Message-Id: <20190818223316.19772-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190818223316.19772-1-schnitzeltony@gmail.com>
 References: <20190818223316.19772-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 04/10] xfce4-wavelan-plugin: upgrade 0.6.0 -> 0.6.1
+Subject: [meta-xfce][PATCH 05/10] xfce4-netload-plugin: upgrade 1.3.1 -> 1.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,38 +62,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 22:33:40 -0000
+X-List-Received-Date: Sun, 18 Aug 2019 22:33:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Layout, bugfixes & translation release
+* release changed layout and fixed minor bugs
+* patch applied with fuzz warning. Looking into showed that it changes
+  unrelated parts of code and upstream did change file already in correct way
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...avelan-plugin_0.6.0.bb => xfce4-wavelan-plugin_0.6.1.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-panel-plugins/wavelan/{xfce4-wavelan-plugin_0.6.0.bb => xfce4-wavelan-plugin_0.6.1.bb} (45%)
+ ...ys-sysctl.h-its-unused-on-linux-port.patch | 25 -------------------
+ ...1.3.1.bb => xfce4-netload-plugin_1.3.2.bb} | 10 +++-----
+ 2 files changed, 4 insertions(+), 31 deletions(-)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
+ rename meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.3.1.bb => xfce4-netload-plugin_1.3.2.bb} (42%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.0.bb b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.1.bb
-similarity index 45%
-rename from meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.0.bb
-rename to meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.1.bb
-index 0c94f3c4b..6ffa35aad 100644
---- a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.1.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Panel plugin displaying stats from a wireless lan interface"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-wavelan-plugin"
-+HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-wavelan-plugin"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e1e5872df9c5cf1a23f16493d9104920"
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
+deleted file mode 100644
+index e35418192..000000000
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 7fcc7352ec11644ac8be4e9ec1584a5be3333684 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 12 Jul 2017 18:18:30 -0700
+-Subject: [PATCH] Do not include sys/sysctl.h its unused on linux port
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- panel-plugin/os.h | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/panel-plugin/os.h b/panel-plugin/os.h
+-index 473c2a4..9a5c544 100644
+---- a/panel-plugin/os.h
+-+++ b/panel-plugin/os.h
+-@@ -170,7 +170,6 @@
+- #elif __linux__             /* L I N U X */
+- #  include <stdio.h>
+- #  include <sys/param.h>
+--#  include <sys/sysctl.h>
+- #  include <stdlib.h>
+- #  include <stdarg.h>
+- #  include <unistd.h>
+--- 
+-2.13.2
+-
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.2.bb
+similarity index 42%
+rename from meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
+rename to meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.2.bb
+index 35c8861bc..13e7b1db7 100644
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.2.bb
+@@ -1,12 +1,10 @@
+ SUMMARY = "Panel plugin displaying current load of the network interfaces"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin"
++HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "b163b22f8543e5e5767a68af35c9028e"
--SRC_URI[sha256sum] = "4d5bd6654cfd077f3432b08d296f7bd052e765e51b77c629886a9542f4e5ecdc"
-+SRC_URI[md5sum] = "e4e3d5240297253d242464e77f6145df"
-+SRC_URI[sha256sum] = "f41f81ea063ae3c7d7904e1ee647a6b5efafc7436f47caed662ee417038eed17"
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2 \
+-           file://0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch \
+-           "
+-SRC_URI[md5sum] = "f25aa3242e3119b49f259a3e4a1af08b"
+-SRC_URI[sha256sum] = "99762781099d1e0ab9aa6a7b30c2bd94d8f658dbe61c760410d5d42d0766391c"
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
++SRC_URI[md5sum] = "ae4652711812a77a58c3dc96650a74dc"
++SRC_URI[sha256sum] = "22e40425cfe1e07b01fe275b1afddc7c788af34d9c2c7e2842166963cb41215d"
 -- 
 2.21.0
 
