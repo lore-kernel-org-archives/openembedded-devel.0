@@ -1,68 +1,26 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id CB0417D476
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 19 Aug 2019 10:24:13 UTC
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 38C647F2DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2019 19:36:51 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id j19so60244242otq.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2019 12:36:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-	:cc; bh=cN2DunCb0G53Is2PldAr8Zkuw0dVTohJLVg+sZTy+G0=;
-	b=oPZwSZNqf77bpgIUpz1iKgse+rQG+G0YiPEL215tvnlTKi6y/pS4GDOaUGzd0cMjCj
-	h7LFjwf5jlUaC69B8W7FBHqO/cIMDMOIcOUZaVXfxPwomqqflbkoekUaJ36CsFUbSkNE
-	AS7/Y1BS909xGZ5e3mXKtgklT2Ad4Chd38NKSohX/EzhccIO4zuQfGOHrzR7BE7+1QBt
-	kNdQdY+TREo7Eizj95O/jDyiMcCpCXxzP/TNJyH+a8cTLQzUNKHjhPa7DsS+vJ08Q16J
-	+hHZDvFW3Enbum1WOFqBKCQwf05CxIy4DPROt+74hK29AAFe2tje3aajG2lVyG1a11Fs
-	ofJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-	:message-id:subject:to:cc;
-	bh=cN2DunCb0G53Is2PldAr8Zkuw0dVTohJLVg+sZTy+G0=;
-	b=uKGRBmEJeoIMZKt52gmYkpkQGcdN2Sn3/EZ5IqIwjs+OREmLm5Vz9gWrAR/a5XVdfC
-	UHgZ4A+ZxQJh223m9I9y956GTm4gcPKqLhtEPP9SP5igfBECyUikw38hpdTryO+m1eP1
-	SP52MlRuC6WT1TExX5Uo2rapI4L4SPAwlyLBcXEKIv20On+BIYG3/amAGklTL9dM/5CD
-	hdMrUSFAZQvFBh4gVH/9A+7a0GiTLCEBYYfdUAUo1pyRUTpJ5XDDnenx3zJqjoSzmEl8
-	8lfLIzuswDPl3ySFB7PNUBAWdm2dD2GeNunmmvIzCATXPCAriascjN94mTfLIVeeekU+
-	vj0g==
-X-Gm-Message-State: APjAAAUqL52OHyn+5d7GvDcFpHHviRwvx4X0EkNgSMhWPQSt0xQvixEk
-	SLoyIT+GsIDkjfQBYtHPatGQr7NzvraWOg==
-X-Google-Smtp-Source: APXvYqzZDfENKnueGghBJHSOCGR7jXT0vhovcwdmtBJDZMaDhYqhOrBF/b+WMIIe73eg9hdmnCL2Vw==
-X-Received: by 2002:a05:6830:119:: with SMTP id
-	i25mr20217021otp.288.1565379411715; 
-	Fri, 09 Aug 2019 12:36:51 -0700 (PDT)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com.
-	[209.85.210.45]) by smtp.gmail.com with ESMTPSA id
-	e205sm34169399oia.23.2019.08.09.12.36.50
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Fri, 09 Aug 2019 12:36:50 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ot1-f45.google.com with SMTP id j19so60243583otq.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2019 12:36:50 -0700 (PDT)
-X-Received: by 2002:aca:f084:: with SMTP id o126mr6710607oih.37.1565379409534; 
-	Fri, 09 Aug 2019 12:36:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190809092013.32650-1-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20190809092013.32650-1-rasmus.villemoes@prevas.dk>
-Date: Fri, 9 Aug 2019 16:36:38 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKoV=wNxrhyapU6rud+YzSK3AOdVc-VXi0qnQrXzKjPNDA@mail.gmail.com>
-Message-ID: <CAP9ODKoV=wNxrhyapU6rud+YzSK3AOdVc-VXi0qnQrXzKjPNDA@mail.gmail.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-X-Mailman-Approved-At: Mon, 19 Aug 2019 08:55:33 +0000
-Cc: Maksim Sisov <msisov@igalia.com>,
-	Rasmus Villemoes <Rasmus.Villemoes@prevas.se>,
-	Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
-	Jakob Dyhr Thomsen <jakob.dyhr@prevas.dk>,
-	"openembedded-devel@lists.openembedded.org"
+	Mon, 19 Aug 2019 10:24:13 +0000 (UTC)
+Received: (qmail 11538 invoked by uid 1003); 19 Aug 2019 10:17:33 -0000
+Received: from unknown (HELO ?10.8.0.6?) (philip@opensdr.com@73.152.143.112)
+	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
+	19 Aug 2019 10:17:33 -0000
+To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>,
-	Jonas Suhr Christensen <Jonas.Christensen@prevas.dk>
-Subject: Re: [meta-browser][PATCH 1/2] chromium: don't pass is_official_build=true when doing a component-build
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Message-ID: <1a542261-a335-db48-e7ce-7c1dda207ff1@balister.org>
+Date: Mon, 19 Aug 2019 12:17:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+Subject: Yocto Project Summit at ELCE Call for Particpation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,29 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 19:36:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 19 Aug 2019 10:24:13 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 9, 2019 at 6:20 AM Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
->
-> When setting the PACKAGECONFIG component-build, the build breaks
-> immediately due to this from the toplevel BUILD.gn:
->
-> if (is_official_build) {
->   # An official (maximally optimized!) component (optimized for build times)
->   # build doesn't make sense and usually doesn't work.
->   assert(!is_component_build)
-> }
->
-> So we must make is_official_build the negative of component-build.
->
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+At the past few OopenEmbedded developer meetings, people have been
+asking for more developer and user focused events like a miniconf.
+Partly based on this feedback, there is a two day event sponsored by the
+Yocto Project that provides a chance for people to talk about the Yocto
+Project and OpenEmbedded. The CFP is a bit buried on the page and I like
+to get it more exposure, so here the direct link:
 
-Good, please open a PR on GitHub so we can merge it :-)
+https://events.linuxfoundation.org/wp-content/uploads/2019/08/Yocto-Project-Summit-2019-CFP-1.pdf
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+We'd like to see new faces talking. We know there are a lot of good
+stories out there, that will help lots of people become better users and
+developers.
+
+The link to the event is here:
+
+https://events.linuxfoundation.org/events/embedded-linux-conference-europe-2019/program/co-located-events/
+
+Follow the path to the Yocto Project Summit. If you are alrady signed up
+for ELCE, you should be able to update your registration to include the
+Summit.
+
+Philip
 
