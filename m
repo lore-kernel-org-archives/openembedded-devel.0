@@ -1,30 +1,53 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E5377CED3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 382327F261
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2019 05:33:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,403,1559491200"; d="scan'208";a="73867832"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Aug 2019 13:33:20 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id E8A064CE03D2
+	Mon, 19 Aug 2019 07:25:11 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id s18so7567065wrn.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2019 13:33:22 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 19 Aug 2019 13:33:25 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 Aug 2019 13:32:45 +0800
-Message-ID: <20190819053245.15242-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Mon, 19 Aug 2019 00:25:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IR1GTJIq1EYFZJYoyITOBuvtDt6c4X1IzsaOl/bFmLk=;
+	b=TdjtTeK4+iDkuxdiFNVZm3BGSBy+y5FDqSoIXDoERMz/3p6b+bY0uvi5BnY7ZwfFH0
+	4DHizpcUs4aDg9m7RC8SmrO8syt45RStJA9hiB+2CajzM99rZD8QSQIb5s6ni+W/0XPC
+	VKbFsVJzsHNs9Gp87VBnZ6lmafj5Va2zQwHlpOlAGY0Rh0hrgRev0MXl/IKVmYejiwg+
+	aBr6q3WLPtZVNOr1rtRpviI/Wtl5M1PN89DdCC3G8TJoIYAHhz/icQ5eCbvQ1MMH0XUZ
+	cxuSj5BsJmJfuPLdB/vMdhTjPSQ5p7fayOiQLr8AoLa6qcJmdE71hclBMhNOUBfcmqKV
+	lIbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IR1GTJIq1EYFZJYoyITOBuvtDt6c4X1IzsaOl/bFmLk=;
+	b=L6zZjZD3iOPxTVunggHLevZDm7hDnLJU7xply7Y7W4UDe7JnnpJ6unZjeU5abPI0ab
+	XzEHp4y13sPjxSQX9TqxUwcZGPSa1WOunjw7mGXQB6vGehEQJuUtlLbBqHG3FSUPNMVB
+	mKh1rd4SOzz9wdQMlL42B+DHSP34ledAkErHjcPAPvrGxoBmGaFe4ETU9Zp0ggsaezwx
+	w+ssXX8v+IWq+4Z0Glu0+/TuENO8WfEJRVb65ejpjuGrtjSsXj7SYDLifTSr9cukNB48
+	IJxzuyhNQfp1eKD3Z2LtfUgPe1VoR7pHXMGST8X1+CQ0sPLFTeIVVnZsU2RqFwWtSuHb
+	+z5w==
+X-Gm-Message-State: APjAAAWmXAn7HtJNGYp/nXck3qURkV8+24Wxqyc2ZfIO7Uo8Rwrop607
+	PUg7TS6ddSrdJF7aMe7+rilLUt5x
+X-Google-Smtp-Source: APXvYqz8GOT5NUfUDHUAdxI7RpbanwfUHQFpINJxOFxxlDhh997v+4iFw9nE4dpat9Ig2ts3yY+OuA==
+X-Received: by 2002:a5d:534f:: with SMTP id t15mr13717340wrv.239.1566199511529;
+	Mon, 19 Aug 2019 00:25:11 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F2D8767E02EEDE8604E907E.dip0.t-ipconnect.de.
+	[2003:f0:7f2d:8767:e02e:ede8:604e:907e])
+	by smtp.gmail.com with ESMTPSA id
+	c12sm11940127wrx.46.2019.08.19.00.25.10
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 19 Aug 2019 00:25:10 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	kai.kang@windriver.com
+Date: Mon, 19 Aug 2019 09:25:03 +0200
+Message-Id: <20190819072503.2896-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: E8A064CE03D2.A846F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] cryptsetup: upgrade 2.1.0 -> 2.2.0.
+Subject: [meta-xfce][PATCH][v2 02/10] xfce4-battery-plugin: 1.1.2 -> 1.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,37 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 05:33:27 -0000
+X-List-Received-Date: Mon, 19 Aug 2019 07:25:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Minor bugfix & translation update release
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../cryptsetup/{cryptsetup_2.1.0.bb => cryptsetup_2.2.0.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.1.0.bb => cryptsetup_2.2.0.bb} (96%)
+V2: Fix typo in commit message - have to learn to write 'bugfix' correctly
+ ...attery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/battery/{xfce4-battery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} (47%)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-similarity index 96%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-index deaede8..6ebf1e2 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.1.0.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-@@ -17,8 +17,8 @@ DEPENDS = " \
- "
+diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+similarity index 47%
+rename from meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
+rename to meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+index 5de1ce5e0..ecbdc265e 100644
+--- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
++++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
++HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[md5sum] = "41d8b985ef69242852b93e95d53e8e28"
--SRC_URI[sha256sum] = "a3eeb2741f8f3376d16585191f3c60e067dd987e096c3c4b073fab7748b1c897"
-+SRC_URI[md5sum] = "f7818082056e5bc0be12e4c7fc20345a"
-+SRC_URI[sha256sum] = "9d8f8cac2836a1623c075b5cba96032271dc81a28b2aa27fbd8331e831416bb1"
+ inherit xfce-panel-plugin
  
- inherit autotools gettext pkgconfig
- 
+-SRC_URI[md5sum] = "ba1cfe619046373f9af5b903c77d1858"
+-SRC_URI[sha256sum] = "d601349fa9a979dae99ace39b24d99b97f62b80f42ac5dea5a99e5af3e88d7db"
++SRC_URI[md5sum] = "9f82c7e77de0a417716d68d33367973b"
++SRC_URI[sha256sum] = "12be0a44d16bd1e1618513ee64f946814925872db7d1c1188ab1454b00d040a3"
 -- 
-2.7.4
-
-
+2.21.0
 
 
