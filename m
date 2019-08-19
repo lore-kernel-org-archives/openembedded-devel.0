@@ -1,55 +1,28 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
-	[209.85.221.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 72B0C7F278
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 266AA7E502
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 22:33:45 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id c3so6713508wrd.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2019 15:33:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=rZUT4t0I3+cYPk6JsJDl9TzVi94mqKx+Oy/F0aeBr/s=;
-	b=EMMW4egLojXc+7IKurcTvRf0qU+2tS6dpmq30RW6ZQ6KFUbkWw5aVk6twWBHlda76F
-	y8vZHVTqo+aGKCQV3/2kEvKBW+1UwnThbUE3r/C5NFS6VRSy67yqWWuUdRb7rAcXbmF4
-	ocknP+YagyCFGxeuh4MtkQwb3LKuu6nfR/uYkz0DpU8tXB+1+4ajOdQfQq5b+ak1niRm
-	K/MsAi/+PqqlJKW4IrcNSrtcYpuxnEFbOjLfKqoMP/T7YbQCda86sLrIQq2AsGPklc5h
-	d25V68U5+gG+u1Sxn9pGybKSpxzTbnA2dp1+CopMwbr15SpzGbae4Sz1dwU66x/tBe2k
-	1n4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=rZUT4t0I3+cYPk6JsJDl9TzVi94mqKx+Oy/F0aeBr/s=;
-	b=kKFWFaT+6+5lz/RxND2J57ZHyxscOnQtaQ5YjnioM5gEIMVcvjpuC6yFTMJKGEfeks
-	zV06Tyto4aLSFLM4VbajeRy8J9/N2N8//Z8vnQCxYIu+GwlC3LXlE8hdbAy56UhCAtZX
-	F6edXUKoxwR/+IMDLAjQNTKbKhtnMQcmKvz+V9A85O8Td4KxCa+WTs4FiZCbFcpSIM5k
-	bhe3/rI5YpFGMAkY64wSE/nf0s8an+gv9DW3JMQihru5UO5Zf2E3ro4JVpnVzfIp3e52
-	gD4fXH4P6pdH+Nm1TakLLA5kw+UHbfzYTN/8lLTtMiUnSto6r7z3wP6qqM379brO4rz/
-	Wisw==
-X-Gm-Message-State: APjAAAUVhGd/PGyLQwMnxYlrZA0H1xvoDqwtqrtfLNq2X9elzrkmghdK
-	PLi2ON9VbuZuD6PPOInxK/f65O7s
-X-Google-Smtp-Source: APXvYqzsynQ1XmgOx8K7QR80WGpE7cPrJAVltIByBZQkN6ltDGlAncvRJbsdCxLvDbWI5+09+o0eDQ==
-X-Received: by 2002:a5d:424d:: with SMTP id s13mr24003970wrr.178.1566167625894;
-	Sun, 18 Aug 2019 15:33:45 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F2D8718C84C5511B02F056F.dip0.t-ipconnect.de.
-	[2003:f0:7f2d:8718:c84c:5511:b02f:56f])
-	by smtp.gmail.com with ESMTPSA id
-	k124sm30390814wmk.47.2019.08.18.15.33.45
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 18 Aug 2019 15:33:45 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	kai.kang@windriver.com
-Date: Mon, 19 Aug 2019 00:33:16 +0200
-Message-Id: <20190818223316.19772-11-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190818223316.19772-1-schnitzeltony@gmail.com>
+	Mon, 19 Aug 2019 01:39:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7J1cpLJ014710
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 18 Aug 2019 18:39:01 -0700
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 18 Aug 2019 18:38:40 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
 References: <20190818223316.19772-1-schnitzeltony@gmail.com>
+	<20190818223316.19772-3-schnitzeltony@gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <e0c19d2b-7902-d11d-16f8-1906907dccdf@windriver.com>
+Date: Mon, 19 Aug 2019 09:38:24 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 10/10] gigolo: upgrade 0.4.2 -> 0.5.0
+In-Reply-To: <20190818223316.19772-3-schnitzeltony@gmail.com>
+Subject: Re: [meta-xfce][PATCH 02/10] xfce4-battery-plugin: 1.1.2 -> 1.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,43 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 22:33:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Aug 2019 01:39:28 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Frome release announcements:
+On 2019/8/19 上午6:33, Andreas Müller wrote:
+> Minor bugfixe & translation update release
 
-* Stable GTK+3 release to go along Xfce 4.14
-* Migrate gvfs commands to gio
-* Updated translations
+Typo here. Other is fine with me.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../gigolo/{gigolo_0.4.2.bb => gigolo_0.5.0.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-apps/gigolo/{gigolo_0.4.2.bb => gigolo_0.5.0.bb} (54%)
+Regards,
+Kai
 
-diff --git a/meta-xfce/recipes-apps/gigolo/gigolo_0.4.2.bb b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb
-similarity index 54%
-rename from meta-xfce/recipes-apps/gigolo/gigolo_0.4.2.bb
-rename to meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb
-index c846e7802..4446214f8 100644
---- a/meta-xfce/recipes-apps/gigolo/gigolo_0.4.2.bb
-+++ b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb
-@@ -3,9 +3,9 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "gtk+ intltool-native xfce4-dev-tools-native"
-+DEPENDS = "gtk+3 intltool-native xfce4-dev-tools-native"
- 
- inherit xfce-app
- 
--SRC_URI[md5sum] = "4abc6fde56572adf3ec3a0181092584c"
--SRC_URI[sha256sum] = "553fc78fe4e7bd2f01f3851baea7e63f6414fe652dfb4b08c60b5c4b2b909164"
-+SRC_URI[md5sum] = "273111f5d7c26898e5ddea7b97d5dfe1"
-+SRC_URI[sha256sum] = "97a301aff012a143d0b99e7ecbb27084d3872aa203a74745e8357aab3a1880dc"
+
+>
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>   ...attery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-xfce/recipes-panel-plugins/battery/{xfce4-battery-plugin_1.1.2.bb => xfce4-battery-plugin_1.1.3.bb} (47%)
+>
+> diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+> similarity index 47%
+> rename from meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
+> rename to meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+> index 5de1ce5e0..ecbdc265e 100644
+> --- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.2.bb
+> +++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.3.bb
+> @@ -1,9 +1,9 @@
+>   SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
+> -HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
+> +HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
+>   LICENSE = "GPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+>   
+>   inherit xfce-panel-plugin
+>   
+> -SRC_URI[md5sum] = "ba1cfe619046373f9af5b903c77d1858"
+> -SRC_URI[sha256sum] = "d601349fa9a979dae99ace39b24d99b97f62b80f42ac5dea5a99e5af3e88d7db"
+> +SRC_URI[md5sum] = "9f82c7e77de0a417716d68d33367973b"
+> +SRC_URI[sha256sum] = "12be0a44d16bd1e1618513ee64f946814925872db7d1c1188ab1454b00d040a3"
+
+
 -- 
-2.21.0
+Kai Kang
 
 
