@@ -1,20 +1,18 @@
 Return-Path: <tworaz@tworaz.net>
 Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
-	by mail.openembedded.org (Postfix) with ESMTP id B105A7EB0F
+	by mail.openembedded.org (Postfix) with ESMTP id B20147ECB9
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 20 Aug 2019 18:54:40 +0000 (UTC)
 Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
-	by mail.tworaz.net (Postfix) with ESMTPSA id 00F791037FD;
+	by mail.tworaz.net (Postfix) with ESMTPSA id BA8B21014BA;
 	Tue, 20 Aug 2019 18:54:40 +0000 (UTC)
 From: Piotr Tworek <tworaz@tworaz.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Aug 2019 20:54:33 +0200
-Message-Id: <20190820185434.2637-2-tworaz@tworaz.net>
+Date: Tue, 20 Aug 2019 20:54:32 +0200
+Message-Id: <20190820185434.2637-1-tworaz@tworaz.net>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190820185434.2637-1-tworaz@tworaz.net>
-References: <20190820185434.2637-1-tworaz@tworaz.net>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 2/3] gnome-keyring: Update to version 3.28.2
+Subject: [meta-gnome][PATCH 1/3] gnome-bluetooth: Update to version 3.32.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,75 +28,83 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 20 Aug 2019 18:54:42 -0000
 Content-Transfer-Encoding: 8bit
 
-This is the latest stable upstream release.
+This is the latest upstream stable version.
 
-For the most part this is a simple version bump. There are however
-some small additional changes this patch makes.
-1. Inherit gettext bbclass since the build system used by this pacakge
-   does use it.
-2. Inherit upstream-version-is-even bbclass. GNOME components like this
-   do follow versioning scheme checked by this bbclass.
-3. Use PACKAGECONFIG to handle pam feature.
-4. Add optional, disabled by default feature for ssh-agent integration
-   this new version of gnome-keyring has. This does not introduce any
-   additional build time dependencies. For the feature to work ssh-add
-   and ssh-agent tools need to be provided in the rootfs. Both are shipped
-   in openssh-misc package. For the configure script to work reliably in
-   all setups we also need to tell it said tools are available in
-   bindir. This is done by specifying ac_cv_path_SSH_ADD and
-   ac_cv_path_SSH_AGENT. Without those configure can fail if the host
-   system does not have both tools instsalled in /usr/bin.
+Besides simple version bump this patch also makes the following changes:
+1. Switch build system from autotools to meson.
+2. Drop x11 as required distro feature. This package by itself does not
+   depend on x11. It's perfectly usable in headles or wayland only
+   environments.
+3. Drop intltool-native and gnome-common-native from DEPENDS since those
+   packages no longer seem to be needed by meson based build setup.
+4. Add runtime dependency on bluez5. The package obviously needs it to
+   function, but since it does not link with any libs provided by bluez5
+   (it talks to bluez stack via dbus) this dependency won't be added
+   automatically.
+5. Inherit upstream-version-is-even since GNOME packages do follow
+   versioning convention checked by this bbclass.
 
 Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
 ---
- ...keyring_3.20.0.bb => gnome-keyring_3.28.2.bb} | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-keyring/{gnome-keyring_3.20.0.bb => gnome-keyring_3.28.2.bb} (55%)
+ .../gnome-bluetooth/gnome-bluetooth_3.18.2.bb | 19 ----------------
+ .../gnome-bluetooth/gnome-bluetooth_3.32.1.bb | 22 +++++++++++++++++++
+ 2 files changed, 22 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+ create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
-similarity index 55%
-rename from meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
-rename to meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
-index 55640625d..8dc11c85d 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
- "
- 
--inherit distro_features_check gnomebase remove-libtool
-+inherit distro_features_check gnomebase remove-libtool gettext upstream-version-is-even
- 
- DEPENDS = " \
-     intltool-native \
-@@ -20,19 +20,21 @@ DEPENDS = " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
- "
- 
--SRC_URI[archive.md5sum] = "e09efe8021944dae404736b5a2adb98e"
--SRC_URI[archive.sha256sum] = "bc17cecd748a0e46e302171d11c3ae3d76bba5258c441fabec3786f418e7ec99"
-+SRC_URI[archive.md5sum] = "284580f954f762caf62aed2ae7358177"
-+SRC_URI[archive.sha256sum] = "81171b7d07211b216b4c9bb79bf2deb3deca18fe8d56d46dda1c4549b4a2646a"
- SRC_URI += "file://musl.patch"
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
- 
--EXTRA_OECONF = " \
--    --disable-doc \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-pam-dir=${base_libdir}/security', '--disable-pam', d)} \
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
+deleted file mode 100644
+index d0eebda38..000000000
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "GNOME bluetooth manager"
+-LICENSE = "GPLv2 & LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+-                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 -"
-+EXTRA_OECONF = "--disable-doc \
-+                ac_cv_path_SSH_AGENT=${bindir}/ssh-agent \
-+                ac_cv_path_SSH_ADD=${bindir}/ssh-add"
- 
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
-+PACKAGECONFIG[pam] = "--enable-pam --with-pam-dir=${base_libdir}/security, --disable-pam"
-+PACKAGECONFIG[ssh-agent] = "--enable-ssh-agent,--disable-ssh-agent,,openssh-misc"
- 
- FILES_${PN} += " \
-     ${datadir}/dbus-1/services \
+-
+-SECTION = "x11/gnome"
+-
+-DEPENDS = "udev gtk+3 libnotify libcanberra intltool-native gnome-common-native \
+-    bluez5 \
+-"
+-
+-inherit gnomebase gtk-icon-cache gobject-introspection distro_features_check
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI[archive.md5sum] = "75d09c924468ec0c687f9ab3acf7f113"
+-SRC_URI[archive.sha256sum] = "d8df073c331df0f97261869fb77ffcdbf4e3e4eaf460d3c3ed2b16e03d9c5398"
+-
+-FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
+new file mode 100644
+index 000000000..3c4438e7e
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "GNOME bluetooth manager"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
++                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
++"
++
++SECTION = "x11/gnome"
++
++DEPENDS = "udev gtk+3 libnotify libcanberra bluez5"
++
++GNOMEBASEBUILDCLASS = "meson"
++GTKDOC_MESON_OPTION = "gtk_doc"
++
++inherit gnomebase gtk-icon-cache gtk-doc gobject-introspection upstream-version-is-even
++
++# gtk-icon-cache bbclass will take care of this for us.
++EXTRA_OEMESON = "-Dicon_update=false"
++
++SRC_URI[archive.md5sum] = "5b3d66f564a5067ea154750cdb6d850d"
++SRC_URI[archive.sha256sum] = "6441cafd313af94fba28b701698074f97d693b9023788a74e8e6f16f817ba1aa"
++
++RDEPENDS_${PN} += "bluez5"
 -- 
 2.21.0
 
