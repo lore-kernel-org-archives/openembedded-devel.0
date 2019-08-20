@@ -1,40 +1,24 @@
-Return-Path: <johannes.pointner@br-automation.com>
-X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 20 Aug 2019 09:26:36 UTC
-Received: from mail2.br-automation.com (mail2.br-automation.com
-	[213.33.116.61])
-	by mail.openembedded.org (Postfix) with ESMTP id A7A607ED48
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B7B67ED3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2019 09:26:36 +0000 (UTC)
-X-AuditID: c0a80110-4dbff70000001e6d-7b-5d5bb947e33f
-Received: from brsmtp01.br-automation.co.at (Unknown_Domain [192.168.1.60])
-	by mail2.br-automation.com () with SMTP id E4.9F.07789.749BB5D5;
-	Tue, 20 Aug 2019 11:11:36 +0200 (CEST)
-From: "Johannes Pointner" <johannes.pointner@br-automation.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Aug 2019 11:10:35 +0200
-Message-Id: <20190820091035.4189-1-johannes.pointner@br-automation.com>
-X-Mailer: git-send-email 2.22.1
+	Tue, 20 Aug 2019 09:37:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7K9b3rO028704
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 20 Aug 2019 02:37:13 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Tue, 20 Aug 2019 02:36:51 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Tue, 20 Aug 2019 17:36:50 +0800
+Message-ID: <1566293810-37527-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 20/08/2019 11:11:38,
-	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 20/08/2019 11:11:38,
-	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 9.0.1FP10
-	HF197|April 16, 2018) at 08/20/2019 11:11:35 AM
-X-TNEFEvaluated: 1
-X-Disclaimed: 47895
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNJMWRmVeSWpSXmKPExsVyYAWjja7HzuhYg5UfGC0uHl7K7MDocW7j
-	CsYAxigum5TUnMyy1CJ9uwSujP0nHzEX3OeuaJzwlq2BcT1XFyMnh4SAicTEF+1MXYxcHEIC
-	WxklZv+/xgSSYBOwl/j5sI0NxBYR0JX4+GEuI4jNLGAr8fD/bTBbWMBM4s+ij2A1LAKqEq0t
-	/8HivALuEhdaVrFC1GtLLFv4mhlimbzEqy/nmSBqBCVOznzCArJYQuAJk8StPetYIYqEJE4v
-	PgvVICzx/MlcpgmMfLOQzJqFpH8BI9MqRvHcxMwcI72kIt3E0pL83MSSzPw8veT83E2MkAAS
-	2MG4+432IUYmDsZDjBIczEoivBVzomKFeFMSK6tSi/Lji0pzUosPMUpzsCiJ865cwRErJJCe
-	WJKanZpakFoEk2Xi4JRqYFQ/9zKSVVGOl1E5eV3YPFPOpew7dA90/K4zcH63+KXE2wVybNIe
-	E4uvlrqFTn+1i/kci+6y5J+LeE6cm8d73T+w5XqCdtwauYnik41nfUt73HT0C9/v34a79XQ5
-	q+ZcfPK9jGu7YMzBG0I6Rz6f3h9ho1Bt3vxFKPX2BDn3W5wf55y4psTz6oASS3FGoqEWc1Fx
-	IgDU4UtTDgIAAA==
-Subject: [meta-oe][PATCH] libtinyxml2: update to 7.1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] poppler: compile with -fpermissive to workaround code diagnostics errors on armv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,47 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 09:26:37 -0000
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Aug 2019 09:37:39 -0000
+Content-Type: text/plain
 
-Also use license from new LICENSE.txt instead of using text from
-tinyxml2.cpp.
+Build on qemuarmv5 failed:
+...
+|poppler-0.79.0/splash/SplashFont.h:69:36: error: passing '    const
+SplashCoord' {aka 'const FixedPoint'} as 'this' argument discards
+qualifiers [-fpermissive]
+...
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+Compile with -fpermissive to workaround error with warning
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../{libtinyxml2=5F7.0.1.bb =3D> libtinyxml2=5F7.1.0.bb}            | 4 ++=
---
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2=5F7.0.1.bb =3D> li=
-btinyxml2=5F7.1.0.bb} (69%)
+ meta-oe/recipes-support/poppler/poppler_0.79.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.0.1.bb b/m=
-eta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.1.0.bb
-similarity index 69%
-rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.0.1.bb
-rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.1.0.bb
-index e4bb3f326..9e197a918 100644
---- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.0.1.bb
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F7.1.0.bb
-@@ -2,11 +2,11 @@ SUMMARY =3D "TinyXML-2 is a simple, small, efficient, C++=
- XML parser that can be e
- HOMEPAGE =3D "http://www.grinninglizard.com/tinyxml2/"
- SECTION =3D "libs"
- LICENSE =3D "Zlib"
--LIC=5FFILES=5FCHKSUM =3D "file://tinyxml2.cpp;endline=3D22;md5=3Dc19221dbd=
-8a66ad3090462af4c5de5e7"
-+LIC=5FFILES=5FCHKSUM =3D "file://LICENSE.txt;md5=3D135624eef03e1f1101b9ba9=
-ac9b5fffd"
-=20
- SRC=5FURI =3D "git://github.com/leethomason/tinyxml2.git"
-=20
--SRCREV =3D "de6d164822076f9b1e26a7222808a25ac03867d8"
-+SRCREV =3D "9c740e8d2341bd46dbe8e87053cdb4d931971967"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.22.1
-
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.79.0.bb b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
+index b285eec..7a5ec13 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.79.0.bb
+@@ -28,6 +28,8 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ 
+ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+ 
++CXXFLAGS_append_armv5 = " -fpermissive"
++
+ EXTRA_OECMAKE += " \
+     -DENABLE_CMS=lcms2 \
+     -DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+-- 
+2.7.4
 
 
