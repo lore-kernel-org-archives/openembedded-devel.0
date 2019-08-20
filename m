@@ -1,18 +1,47 @@
-Return-Path: <tworaz@tworaz.net>
-Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A3F66C102
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f50.google.com (mail-io1-f50.google.com
+	[209.85.166.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 54DE66D545
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2019 18:18:45 +0000 (UTC)
-Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
-	by mail.tworaz.net (Postfix) with ESMTPSA id 6005410378E;
-	Mon, 19 Aug 2019 18:18:46 +0000 (UTC)
-From: Piotr Tworek <tworaz@tworaz.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Aug 2019 20:18:39 +0200
-Message-Id: <20190819181839.12349-1-tworaz@tworaz.net>
-X-Mailer: git-send-email 2.21.0
+	Tue, 20 Aug 2019 01:03:12 +0000 (UTC)
+Received: by mail-io1-f50.google.com with SMTP id t6so8527341ios.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Aug 2019 18:03:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=weqEC5DiUG2ZdcKdTSYGAPZ77PMIJ/8NQz482itnhlk=;
+	b=dzW/YznfdJTlDL/84sWqjp/Wcp0hbiWb/ZPyJLUfkJUki7nhqFSxo2p9B1M80H3nqU
+	6JukM162lkqJUZnETaQkbaROIkA1C931zhZNU4tbiD5UwXhAI8basiGZ6RTzIr5hDiPg
+	jqJKcd8U1QgsvixqYN/vGFy7QWQSRD6YMET/g6yrTzm7fVaXdYXS8doUkPkfuNe5o+Vc
+	PYN2HEh4gRlQGbQrO6HHNN2dwT2n8FigWWKKbxK2a3duipvLxOWKXR8cwSfukUpH2BbR
+	D3aoGPw7y5rfRsjXl/dxZ4prk7sM6hSdtZefyhTNmCZm+tSgXCpuEUoop8Umb8qBUhws
+	ULGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=weqEC5DiUG2ZdcKdTSYGAPZ77PMIJ/8NQz482itnhlk=;
+	b=bYmKfliI9+cY1TWdrtvWjx/L/135pfIckolkpHYrGsMjU5TtVhyd78fhThbj9rwK1D
+	W7tq4I5m9zmz2DJKSAXQksuRsOTWT/AFXIknEyyLv1A1wORgKEwjT453Aq8b/vukQ3Md
+	jUwCofJGKunt5ig9SgBrey6AlaNgDq+Pz0OmM7s0jK/11GNmKc79oH1y5S3TfUo7FWsV
+	l4DyTHbkp9rXMED/SG+49eWMvt7gmcxnmdpB4VVTyy4S+6pKQhZxZWWWNDrqm25vWR3I
+	xk8ytwQ0cp6Y8ZPMUOFzPuXDITaURZQ/lBr3akLUB68EJxzweusAugS5e4yc3q4a7zj9
+	zRBQ==
+X-Gm-Message-State: APjAAAXA61NwmEtrQa/GOArRb0FWO+yhJY3p/k3HpApyk4x1noOkwTMb
+	mW8k8InOwWKF7JIP4hnaoKAhgxg5hSr1wEzqe+c=
+X-Google-Smtp-Source: APXvYqwrhpZZBudWAvWfZep56/UARUxv4krxrA/TobG5uqiRWg6NnGf1DGpsHIt+5Hiag3eAamL0uAuBx9EvxHPOstA=
+X-Received: by 2002:a5d:9904:: with SMTP id x4mr5593260iol.198.1566262993135; 
+	Mon, 19 Aug 2019 18:03:13 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH v2] libgee: Update to version 0.20.2
+References: <20190819021234.1470-1-yuanc.fnst@cn.fujitsu.com>
+In-Reply-To: <20190819021234.1470-1-yuanc.fnst@cn.fujitsu.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 19 Aug 2019 18:03:02 -0700
+Message-ID: <CANx9H-Ax0-Lmm-mzabDf-mYH3jajd6XgCSGEC85bVk_tzSXadA@mail.gmail.com>
+To: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python] [PATCH v2] python-flask-pymongo: upgrade 0.5.1 -> 2.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,49 +54,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 18:18:46 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 20 Aug 2019 01:03:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is the latest upstream stable version of this package.
+On Sun, Aug 18, 2019 at 7:13 PM Yuan Chao <yuanc.fnst@cn.fujitsu.com> wrote=
+:
 
-While doing the update also switch the package to use gnomebase bbclass
-from oe-core. This bbclass uses much  better SRC_URI pattern that can
-also use GNOME mirrors.
+> Add depends of python-vcversioner and python3-vcversioner.
+>
+> Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+> ---
+>  meta-python/recipes-devtools/python/python-flask-pymongo.inc        | 6
+> ++++--
+>  ...{python-flask-pymongo_0.5.1.bb =3D> python-flask-pymongo_2.3.0.bb} | =
+0
+>  ...ython3-flask-pymongo_0.5.1.bb =3D> python3-flask-pymongo_2.3.0.bb} | =
+0
+>  3 files changed, 4 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-flask-pymongo_0.5.1.b=
+b
+> =3D> python-flask-pymongo_2.3.0.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{
+> python3-flask-pymongo_0.5.1.bb =3D> python3-flask-pymongo_2.3.0.bb} (100%=
+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> index fb2d6ed..bc41fd2 100644
+> --- a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> +++ b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+> @@ -5,9 +5,11 @@ SECTION =3D "devel/python"
+>  LICENSE =3D "BSD"
+>  LIC_FILES_CHKSUM =3D
+> "file://flask_pymongo/wrappers.py;beginline=3D1;endline=3D24;md5=3D424c4e=
+1047d28e01b4e4634a069c019d"
+>
+> -SRC_URI[md5sum] =3D "d7a1b717f27154e1f3a355f8ec2467d6"
+> -SRC_URI[sha256sum] =3D
+> "2baaa2ba5107d72b3a8bd4b5c0c8881316e35340ad1ae979cc13f1f3c8843b3d"
+> +SRC_URI[md5sum] =3D "94df71e6800b1d7915cc91a74b70f959"
+> +SRC_URI[sha256sum] =3D
+> "620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"
+>
+>  PYPI_PACKAGE =3D "Flask-PyMongo"
+>
+> +DEPENDS =3D "python-vcversioner python-vcversioner-native
+> python3-vcversioner python3-vcversioner-native"
+> +
 
-Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
----
- .../libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb}         | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.20.1.bb => libgee_0.20.2.bb} (58%)
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-similarity index 58%
-rename from meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-rename to meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-index 190e5dd4e..a048e4832 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.20.1.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-@@ -9,8 +9,8 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- PE = "1"
-+inherit gnomebase vala gobject-introspection
- 
--inherit autotools vala pkgconfig gobject-introspection
- do_configure_prepend() {
-     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
-     for i in ${MACROS}; do
-@@ -18,7 +18,5 @@ do_configure_prepend() {
-     done
- }
- 
--SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
--SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
--SRC_URI[md5sum] = "d224dca55bb909f6730f40cc267337be"
--SRC_URI[sha256sum] = "bb2802d29a518e8c6d2992884691f06ccfcc25792a5686178575c7111fea4630"
-+SRC_URI[archive.md5sum] = "45db478f2b300ada8e039ebc6c9458de"
-+SRC_URI[archive.sha256sum] = "9e035c4b755f46bfae70ba81cdcf8328b03f554373cec8c816e8b5680f85353c"
--- 
-2.21.0
+Nacked-by: Tim Orling <ticotimo@gmail.com>
 
+This is not the right way to do this. Use ${PYTHON_PN} otherwise you are
+forcing build of both python 2 and python 3 packages every time. We will be
+moving python 2 support out of meta-python in preparation for Python 2 EOL
+next year.
+
+Also, does it DEPEND (build time dependency) on both the native and target
+vcversioner? That doesn=E2=80=99t feel right.
+
+>
+>  RDEPENDS_${PN} =3D "${PYTHON_PN}-pymongo ${PYTHON_PN}-flask"
+> diff --git a/meta-python/recipes-devtools/python/
+> python-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/
+> python-flask-pymongo_2.3.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/
+> python-flask-pymongo_0.5.1.bb
+> rename to meta-python/recipes-devtools/python/
+> python-flask-pymongo_2.3.0.bb
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/
+> python3-flask-pymongo_2.3.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/
+> python3-flask-pymongo_0.5.1.bb
+> rename to meta-python/recipes-devtools/python/
+> python3-flask-pymongo_2.3.0.bb
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
