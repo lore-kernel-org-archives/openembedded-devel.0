@@ -1,40 +1,25 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DCC246C10B
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AC76E7ECB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2019 02:19:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,407,1559491200"; d="scan'208,217";a="73919270"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Aug 2019 10:19:23 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id A79EF4CE03D2;
-	Tue, 20 Aug 2019 10:19:19 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0439.000; Tue, 20 Aug 2019 10:19:35 +0800
-From: "Yuan, Chao" <yuanc.fnst@cn.fujitsu.com>
-To: Tim Orling <ticotimo@gmail.com>
-Thread-Topic: [oe] [meta-python] [PATCH v2] python-flask-pymongo: upgrade
-	0.5.1 -> 2.3.0
-Thread-Index: AQHVVvMTo8rzGKabbkKRbMAIlInaxqcDTJDg
-Date: Tue, 20 Aug 2019 02:19:24 +0000
-Message-ID: <90B94BBA23AFC744A826A4F23375C2D1018E285BF0@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <20190819021234.1470-1-yuanc.fnst@cn.fujitsu.com>
-	<CANx9H-Ax0-Lmm-mzabDf-mYH3jajd6XgCSGEC85bVk_tzSXadA@mail.gmail.com>
-In-Reply-To: <CANx9H-Ax0-Lmm-mzabDf-mYH3jajd6XgCSGEC85bVk_tzSXadA@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.21]
+	Tue, 20 Aug 2019 06:48:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7K6mwTQ027370
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 19 Aug 2019 23:48:58 -0700 (PDT)
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Mon, 19 Aug 2019 23:48:57 -0700
+To: <drew.moseley@northern.tech>, <openembedded-devel@lists.openembedded.org>
+References: <20190719195856.4305-1-drew.moseley@northern.tech>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <e92453f6-cd7b-6adc-23cc-8c2255c3b232@windriver.com>
+Date: Tue, 20 Aug 2019 14:48:36 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: A79EF4CE03D2.A5A8B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] [PATCH v2] python-flask-pymongo: upgrade 0.5.1 -> 2.3.0
+In-Reply-To: <20190719195856.4305-1-drew.moseley@northern.tech>
+Subject: Re: [meta-networking][PATCH] networkmanager: Use ALTERNATIVES for resolv-conf handling.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,113 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 02:19:27 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 20 Aug 2019 06:48:57 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-VGhhbmtzLCBJIHdpbGwgdXNlICR7UFlUSE9OX1BOfSBpbiBhIHYzLg0KDQpE
-RVBFTkQgb24gdmN2ZXJzaW9uZXIgaXMgbmVlZGVkIGJ5IHNldHVwLnB5Og0K
-ICAgICAgICAgc2V0dXBfcmVxdWlyZXM9WyJ2Y3ZlcnNpb25lciJdLA0KQW5k
-IEkgaGF2ZSB0cmllZCB0aGF0IGlmIGRvIG5vdCBhZGQgbmF0aXZlIGluIERF
-UEVORCwgaXQgd2lsbCB0aHJvdyBhbiBlcnJvciB3aGVuIGRvX2NvbmZpZ3Vy
-ZSA6DQogICAgICAgICBUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFz
-dCk6DQogICAgICAgICAgICAgICAgICAgRmlsZSAic2V0dXAucHkiLCBsaW5l
-IDE4LCBpbiA8bW9kdWxlPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGZyb20gc2V0dXB0b29scyBpbXBvcnQgZmluZF9wYWNrYWdlcywgc2V0dXAN
-CkltcG9ydEVycm9yOiBObyBtb2R1bGUgbmFtZWQgc2V0dXB0b29scw0KV0FS
-TklORzogZXhpdCBjb2RlIDEgZnJvbSBhIHNoZWxsIGNvbW1hbmQuDQpIb3dl
-dmVyLCBzZXR1cHRvb2xzIGlzIGFjdHVhbGx5IGluaGVyaXQgaW4gLmJiIGZp
-bGUuDQpJIGRvbuKAmXQga25vdyB3aHkgYnV0LCB3aGVuIGFkZGluZyBuYXRp
-dmUgaW4gREVQRU5ELCBpdCB3b3JrcyB3ZWxsLg0KDQpCZXN0IFJlZ2FyZHMs
-DQpZdWFuDQoNCkZyb206IFRpbSBPcmxpbmcgPHRpY290aW1vQGdtYWlsLmNv
-bT4NClNlbnQ6IFR1ZXNkYXksIEF1Z3VzdCAyMCwgMjAxOSA5OjAzIEFNDQpU
-bzogWXVhbiwgQ2hhby/oooEg6LaFIDx5dWFuYy5mbnN0QGNuLmZ1aml0c3Uu
-Y29tPg0KQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1weXRob25dIFtQQVRD
-SCB2Ml0gcHl0aG9uLWZsYXNrLXB5bW9uZ286IHVwZ3JhZGUgMC41LjEgLT4g
-Mi4zLjANCg0KDQoNCk9uIFN1biwgQXVnIDE4LCAyMDE5IGF0IDc6MTMgUE0g
-WXVhbiBDaGFvIDx5dWFuYy5mbnN0QGNuLmZ1aml0c3UuY29tPG1haWx0bzp5
-dWFuYy5mbnN0QGNuLmZ1aml0c3UuY29tPj4gd3JvdGU6DQpBZGQgZGVwZW5k
-cyBvZiBweXRob24tdmN2ZXJzaW9uZXIgYW5kIHB5dGhvbjMtdmN2ZXJzaW9u
-ZXIuDQoNClNpZ25lZC1vZmYtYnk6IFl1YW4gQ2hhbyA8eXVhbmMuZm5zdEBj
-bi5mdWppdHN1LmNvbTxtYWlsdG86eXVhbmMuZm5zdEBjbi5mdWppdHN1LmNv
-bT4+DQotLS0NCiBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
-bi9weXRob24tZmxhc2stcHltb25nby5pbmMgICAgICAgIHwgNiArKysrLS0N
-CiAuLi57cHl0aG9uLWZsYXNrLXB5bW9uZ29fMC41LjEuYmI8aHR0cDovL3B5
-dGhvbi1mbGFzay1weW1vbmdvXzAuNS4xLmJiPiA9PiBweXRob24tZmxhc2st
-cHltb25nb18yLjMuMC5iYjxodHRwOi8vcHl0aG9uLWZsYXNrLXB5bW9uZ29f
-Mi4zLjAuYmI+fSB8IDANCiAuLi55dGhvbjMtZmxhc2stcHltb25nb18wLjUu
-MS5iYjxodHRwOi8veXRob24zLWZsYXNrLXB5bW9uZ29fMC41LjEuYmI+ID0+
-IHB5dGhvbjMtZmxhc2stcHltb25nb18yLjMuMC5iYjxodHRwOi8vcHl0aG9u
-My1mbGFzay1weW1vbmdvXzIuMy4wLmJiPn0gfCAwDQogMyBmaWxlcyBjaGFu
-Z2VkLCA0IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQogcmVuYW1l
-IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3tweXRob24t
-Zmxhc2stcHltb25nb18wLjUuMS5iYjxodHRwOi8vcHl0aG9uLWZsYXNrLXB5
-bW9uZ29fMC41LjEuYmI+ID0+IHB5dGhvbi1mbGFzay1weW1vbmdvXzIuMy4w
-LmJiPGh0dHA6Ly9weXRob24tZmxhc2stcHltb25nb18yLjMuMC5iYj59ICgx
-MDAlKQ0KIHJlbmFtZSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5
-dGhvbi97cHl0aG9uMy1mbGFzay1weW1vbmdvXzAuNS4xLmJiPGh0dHA6Ly9w
-eXRob24zLWZsYXNrLXB5bW9uZ29fMC41LjEuYmI+ID0+IHB5dGhvbjMtZmxh
-c2stcHltb25nb18yLjMuMC5iYjxodHRwOi8vcHl0aG9uMy1mbGFzay1weW1v
-bmdvXzIuMy4wLmJiPn0gKDEwMCUpDQoNCmRpZmYgLS1naXQgYS9tZXRhLXB5
-dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tZmxhc2stcHlt
-b25nby5pbmMgYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
-bi9weXRob24tZmxhc2stcHltb25nby5pbmMNCmluZGV4IGZiMmQ2ZWQuLmJj
-NDFmZDIgMTAwNjQ0DQotLS0gYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRv
-b2xzL3B5dGhvbi9weXRob24tZmxhc2stcHltb25nby5pbmMNCisrKyBiL21l
-dGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi1mbGFz
-ay1weW1vbmdvLmluYw0KQEAgLTUsOSArNSwxMSBAQCBTRUNUSU9OID0gImRl
-dmVsL3B5dGhvbiINCiBMSUNFTlNFID0gIkJTRCINCiBMSUNfRklMRVNfQ0hL
-U1VNID0gImZpbGU6Ly9mbGFza19weW1vbmdvL3dyYXBwZXJzLnB5O2JlZ2lu
-bGluZT0xO2VuZGxpbmU9MjQ7bWQ1PTQyNGM0ZTEwNDdkMjhlMDFiNGU0NjM0
-YTA2OWMwMTlkIg0KDQotU1JDX1VSSVttZDVzdW1dID0gImQ3YTFiNzE3ZjI3
-MTU0ZTFmM2EzNTVmOGVjMjQ2N2Q2Ig0KLVNSQ19VUklbc2hhMjU2c3VtXSA9
-ICIyYmFhYTJiYTUxMDdkNzJiM2E4YmQ0YjVjMGM4ODgxMzE2ZTM1MzQwYWQx
-YWU5NzljYzEzZjFmM2M4ODQzYjNkIg0KK1NSQ19VUklbbWQ1c3VtXSA9ICI5
-NGRmNzFlNjgwMGIxZDc5MTVjYzkxYTc0YjcwZjk1OSINCitTUkNfVVJJW3No
-YTI1NnN1bV0gPSAiNjIwZWIwMmRjODgwOGE1ZmNiOTBmMjZjYWI2Y2JhOWQ2
-YmY0OTdiMTUwMzJhZTNjYTk5ZGY4MDM2NmUzMzMxNCINCg0KIFBZUElfUEFD
-S0FHRSA9ICJGbGFzay1QeU1vbmdvIg0KDQorREVQRU5EUyA9ICJweXRob24t
-dmN2ZXJzaW9uZXIgcHl0aG9uLXZjdmVyc2lvbmVyLW5hdGl2ZSBweXRob24z
-LXZjdmVyc2lvbmVyIHB5dGhvbjMtdmN2ZXJzaW9uZXItbmF0aXZlIg0KKw0K
-DQpOYWNrZWQtYnk6IFRpbSBPcmxpbmcgPHRpY290aW1vQGdtYWlsLmNvbTxt
-YWlsdG86dGljb3RpbW9AZ21haWwuY29tPj4NCg0KVGhpcyBpcyBub3QgdGhl
-IHJpZ2h0IHdheSB0byBkbyB0aGlzLiBVc2UgJHtQWVRIT05fUE59IG90aGVy
-d2lzZSB5b3UgYXJlIGZvcmNpbmcgYnVpbGQgb2YgYm90aCBweXRob24gMiBh
-bmQgcHl0aG9uIDMgcGFja2FnZXMgZXZlcnkgdGltZS4gV2Ugd2lsbCBiZSBt
-b3ZpbmcgcHl0aG9uIDIgc3VwcG9ydCBvdXQgb2YgbWV0YS1weXRob24gaW4g
-cHJlcGFyYXRpb24gZm9yIFB5dGhvbiAyIEVPTCBuZXh0IHllYXIuDQoNCkFs
-c28sIGRvZXMgaXQgREVQRU5EIChidWlsZCB0aW1lIGRlcGVuZGVuY3kpIG9u
-IGJvdGggdGhlIG5hdGl2ZSBhbmQgdGFyZ2V0IHZjdmVyc2lvbmVyPyBUaGF0
-IGRvZXNu4oCZdCBmZWVsIHJpZ2h0Lg0KDQogUkRFUEVORFNfJHtQTn0gPSAi
-JHtQWVRIT05fUE59LXB5bW9uZ28gJHtQWVRIT05fUE59LWZsYXNrIg0KZGlm
-ZiAtLWdpdCBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
-L3B5dGhvbi1mbGFzay1weW1vbmdvXzAuNS4xLmJiPGh0dHA6Ly9weXRob24t
-Zmxhc2stcHltb25nb18wLjUuMS5iYj4gYi9tZXRhLXB5dGhvbi9yZWNpcGVz
-LWRldnRvb2xzL3B5dGhvbi9weXRob24tZmxhc2stcHltb25nb18yLjMuMC5i
-YjxodHRwOi8vcHl0aG9uLWZsYXNrLXB5bW9uZ29fMi4zLjAuYmI+DQpzaW1p
-bGFyaXR5IGluZGV4IDEwMCUNCnJlbmFtZSBmcm9tIG1ldGEtcHl0aG9uL3Jl
-Y2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi1mbGFzay1weW1vbmdvXzAu
-NS4xLmJiPGh0dHA6Ly9weXRob24tZmxhc2stcHltb25nb18wLjUuMS5iYj4N
-CnJlbmFtZSB0byBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
-bi9weXRob24tZmxhc2stcHltb25nb18yLjMuMC5iYjxodHRwOi8vcHl0aG9u
-LWZsYXNrLXB5bW9uZ29fMi4zLjAuYmI+DQpkaWZmIC0tZ2l0IGEvbWV0YS1w
-eXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1mbGFzay1w
-eW1vbmdvXzAuNS4xLmJiPGh0dHA6Ly9weXRob24zLWZsYXNrLXB5bW9uZ29f
-MC41LjEuYmI+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
-b24vcHl0aG9uMy1mbGFzay1weW1vbmdvXzIuMy4wLmJiPGh0dHA6Ly9weXRo
-b24zLWZsYXNrLXB5bW9uZ29fMi4zLjAuYmI+DQpzaW1pbGFyaXR5IGluZGV4
-IDEwMCUNCnJlbmFtZSBmcm9tIG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9v
-bHMvcHl0aG9uL3B5dGhvbjMtZmxhc2stcHltb25nb18wLjUuMS5iYjxodHRw
-Oi8vcHl0aG9uMy1mbGFzay1weW1vbmdvXzAuNS4xLmJiPg0KcmVuYW1lIHRv
-IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMt
-Zmxhc2stcHltb25nb18yLjMuMC5iYjxodHRwOi8vcHl0aG9uMy1mbGFzay1w
-eW1vbmdvXzIuMy4wLmJiPg0KLS0NCjIuNy40DQoNCg0KDQotLQ0KX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCk9w
-ZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRk
-ZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCmh0dHA6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVk
-ZGVkLWRldmVsDQoKCg==
+On 2019/7/20 上午3:58, drew.moseley@northern.tech wrote:
+> From: Drew Moseley <drew.moseley@northern.tech>
+>
+> This brings the networkmanager in sync with how systemd-resolved and connman
+> work. Additionally this allows it to function with a read-only rootFS.
+>
+> Signed-off-by: Drew Moseley <drew.moseley@northern.tech>
+> ---
+>   .../networkmanager/networkmanager_1.18.0.bb          | 12 +++++++++++-
+>   1 file changed, 11 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+> index 21fbea9c1..037566783 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.0.bb
+> @@ -20,7 +20,7 @@ DEPENDS = " \
+>       curl \
+>   "
+>   
+> -inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc
+> +inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
+>   
+>   SRC_URI = " \
+>       ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+> @@ -141,6 +141,16 @@ FILES_${PN}-nmtui-doc = " \
+>   
+>   SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
+>   
+> +ALTERNATIVE_PRIORITY = "100"
+> +ALTERNATIVE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
+> +ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
+> +ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
+> +
+>   do_install_append() {
+>       rm -rf ${D}/run ${D}${localstatedir}/run
+> +
+> +    # For read-only filesystem, do not create links during bootup
+> +    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+> +        ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
+> +    fi
+>   }
+
+Hi Drew,
+
+After apply your patch, I meet a error with systemd init manager that 
+/etc/resolv.conf is a mangling link file:
+
+root@qemux86-64:~# ls -l /etc/resolv*
+lrwxrwxrwx    1 root     root            33 Aug 20 03:22 
+/etc/resolv-conf.NetworkManager -> ../run/NetworkManager/resolv.conf
+lrwxrwxrwx    1 root     root            34 Aug 15 06:14 
+/etc/resolv-conf.systemd -> ../run/systemd/resolve/resolv.conf
+lrwxrwxrwx    1 root     root            31 Aug 20 03:26 
+/etc/resolv.conf -> /etc/resolv-conf.NetworkManager
+root@qemux86-64:~# cat /etc/resolv.conf
+cat: can't open '/etc/resolv.conf': No such file or directory
+
+There is no /run/NetworkManager/resolv.conf actually. What's the 
+behavior in your environment?
+
+
+-- 
+Kai Kang
+
 
