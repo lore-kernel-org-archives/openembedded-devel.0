@@ -1,48 +1,20 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C60317ECAD
+Return-Path: <tworaz@tworaz.net>
+Received: from mail.tworaz.net (tworaz.net [139.162.170.142])
+	by mail.openembedded.org (Postfix) with ESMTP id B105A7EB0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2019 16:53:36 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id i4so6800035qtj.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2019 09:53:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/4w6+nUxehinzqI4qWRJpBf0wZ2dptZM3Q2U0NzKLaI=;
-	b=iMdnCKWhL/K1t8CeK1PTMPcTMYKUJa53AXZ6a7A4IK1rkxYq65wiNytASsglt5jxJ+
-	ClTtecl8mwC9acaArU59gZrnr7HzbCnlMdxcXcHTIKGJV507njWQNKo13VUDVPD8vviZ
-	gmskz3T5ZWu/gLboOOEQCBDLMuVcdrv8tnf5bVrLB84fYkOyhopb42b7WaYY/hLy7cBm
-	4BPuDHiIVrUfYpgK5oiiVVIqPJQgTWDFWj5jOmvc1NA0ZB64u07zR2lf/Bpp3yOclhFO
-	vwAYzu2rH+HTTaPnuWdAsh5V96wKsh4vBcSLa3KuT9Nd3h0z0FuD5OuWpW176agVWk95
-	TERA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=/4w6+nUxehinzqI4qWRJpBf0wZ2dptZM3Q2U0NzKLaI=;
-	b=qdDZs1C4F/90XlwIuqvyLwIYVDAGIn5WV1MxP0zArBh5nW8CUVnDL6U4Y+IdUSHnyi
-	JPjEArMoCgSq6l2bHnjObcCS/VQKOmogfXuVN5vRjOL2dazZuvuO0/3q8y8AkU8xXdcM
-	q9XkSt3eLLXeR5egAeBhaGgQaxoNAldv+w9xNg1IfcC0J7Q2OFm3wi7SwwLzt+IILXC3
-	nCH+9FRGDWnKcpUS+gW0z3oTfvZ1cpRcOUvRkIxp3nngccAMPAj00RNmvCbyW/Y3YdVM
-	6R9AbnIIC5rUWCL2TybMLbuEisQ976arWGgnD4NjjLD3sCf8wJt7RErc4SO+B1wAPDZv
-	khug==
-X-Gm-Message-State: APjAAAVcKLH1+7eLVo6n9mB1n9on5VfIxuk4KUTmg3Jlbv4tSyvCCXWc
-	D/7dUO8U7iBHajDFuM6vuVnZME6jTG2PGW6MK0C0g0CU
-X-Google-Smtp-Source: APXvYqysG01x7e8jgeS5fzMAE5XsnX+Q8znMivy9nxyP+7YqP0hn/Ep6DjqllgeKMig60XB/NwR1zfCtYyd8E2MGbik=
-X-Received: by 2002:ad4:44a7:: with SMTP id n7mr11612222qvt.51.1566320017347; 
-	Tue, 20 Aug 2019 09:53:37 -0700 (PDT)
+	Tue, 20 Aug 2019 18:54:40 +0000 (UTC)
+Received: from raven.lan (87-206-69-189.dynamic.chello.pl [87.206.69.189])
+	by mail.tworaz.net (Postfix) with ESMTPSA id 00F791037FD;
+	Tue, 20 Aug 2019 18:54:40 +0000 (UTC)
+From: Piotr Tworek <tworaz@tworaz.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Aug 2019 20:54:33 +0200
+Message-Id: <20190820185434.2637-2-tworaz@tworaz.net>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190820185434.2637-1-tworaz@tworaz.net>
+References: <20190820185434.2637-1-tworaz@tworaz.net>
 MIME-Version: 1.0
-References: <1566293810-37527-1-git-send-email-hongxu.jia@windriver.com>
-	<CAMKF1soZbx6HH9d4Rhe+RpqYgiBNxpGkYu84LGaY7m+9=WahYQ@mail.gmail.com>
-	<20190820164438.GB24268@localhost>
-In-Reply-To: <20190820164438.GB24268@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Aug 2019 09:53:11 -0700
-Message-ID: <CAMKF1sqqUo3haTA8RpCd+8bLb2rw2OKJjVVVPk+tbPhS--tDnA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] poppler: compile with -fpermissive to workaround code diagnostics errors on armv5
+Subject: [meta-gnome][PATCH 2/3] gnome-keyring: Update to version 3.28.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,29 +27,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 16:53:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 20 Aug 2019 18:54:42 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 20, 2019 at 9:44 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Tue, Aug 20, 2019 at 09:30:36AM -0700, Khem Raj wrote:
-> > On Tue, Aug 20, 2019 at 2:37 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> > >
-> > > Build on qemuarmv5 failed:
-> > > ...
-> > > |poppler-0.79.0/splash/SplashFont.h:69:36: error: passing '    const
-> > > SplashCoord' {aka 'const FixedPoint'} as 'this' argument discards
-> > > qualifiers [-fpermissive]
-> > > ...
-> >
-> > I wonder why this warning only shows up for armv5 and not for other
-> > arm subarches or
-> > non-arm arches.
-> >...
->
-> https://gitlab.freedesktop.org/poppler/poppler/issues/821
+This is the latest stable upstream release.
 
-I see. This makes sense now. I wonder if we should just disable the
-support instead of keeping
-it dragging along ?
+For the most part this is a simple version bump. There are however
+some small additional changes this patch makes.
+1. Inherit gettext bbclass since the build system used by this pacakge
+   does use it.
+2. Inherit upstream-version-is-even bbclass. GNOME components like this
+   do follow versioning scheme checked by this bbclass.
+3. Use PACKAGECONFIG to handle pam feature.
+4. Add optional, disabled by default feature for ssh-agent integration
+   this new version of gnome-keyring has. This does not introduce any
+   additional build time dependencies. For the feature to work ssh-add
+   and ssh-agent tools need to be provided in the rootfs. Both are shipped
+   in openssh-misc package. For the configure script to work reliably in
+   all setups we also need to tell it said tools are available in
+   bindir. This is done by specifying ac_cv_path_SSH_ADD and
+   ac_cv_path_SSH_AGENT. Without those configure can fail if the host
+   system does not have both tools instsalled in /usr/bin.
+
+Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
+---
+ ...keyring_3.20.0.bb => gnome-keyring_3.28.2.bb} | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-keyring/{gnome-keyring_3.20.0.bb => gnome-keyring_3.28.2.bb} (55%)
+
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
+similarity index 55%
+rename from meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
+rename to meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
+index 55640625d..8dc11c85d 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.28.2.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+ "
+ 
+-inherit distro_features_check gnomebase remove-libtool
++inherit distro_features_check gnomebase remove-libtool gettext upstream-version-is-even
+ 
+ DEPENDS = " \
+     intltool-native \
+@@ -20,19 +20,21 @@ DEPENDS = " \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
+ "
+ 
+-SRC_URI[archive.md5sum] = "e09efe8021944dae404736b5a2adb98e"
+-SRC_URI[archive.sha256sum] = "bc17cecd748a0e46e302171d11c3ae3d76bba5258c441fabec3786f418e7ec99"
++SRC_URI[archive.md5sum] = "284580f954f762caf62aed2ae7358177"
++SRC_URI[archive.sha256sum] = "81171b7d07211b216b4c9bb79bf2deb3deca18fe8d56d46dda1c4549b4a2646a"
+ SRC_URI += "file://musl.patch"
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
+ 
+-EXTRA_OECONF = " \
+-    --disable-doc \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-pam-dir=${base_libdir}/security', '--disable-pam', d)} \
+-"
++EXTRA_OECONF = "--disable-doc \
++                ac_cv_path_SSH_AGENT=${bindir}/ssh-agent \
++                ac_cv_path_SSH_ADD=${bindir}/ssh-add"
+ 
++PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
++PACKAGECONFIG[pam] = "--enable-pam --with-pam-dir=${base_libdir}/security, --disable-pam"
++PACKAGECONFIG[ssh-agent] = "--enable-ssh-agent,--disable-ssh-agent,,openssh-misc"
+ 
+ FILES_${PN} += " \
+     ${datadir}/dbus-1/services \
+-- 
+2.21.0
+
 
