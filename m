@@ -1,30 +1,26 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 984E77E993
+Return-Path: <anuj.mittal@intel.com>
+X-Greylist: delayed 426 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 21 Aug 2019 04:24:02 UTC
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 048E77C377
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 03:16:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,410,1559491200"; d="scan'208";a="73981062"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2019 11:16:46 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id BE9464CE03DB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 11:16:43 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 21 Aug 2019 11:16:46 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Aug 2019 12:16:08 +0900
-Message-ID: <20190821031608.111251-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+	Wed, 21 Aug 2019 04:24:02 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	20 Aug 2019 21:16:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,410,1559545200"; d="scan'208";a="202896723"
+Received: from anmitta2-mobl1.png.intel.com ([172.30.199.133])
+	by fmsmga004.fm.intel.com with ESMTP; 20 Aug 2019 21:16:56 -0700
+From: Anuj Mittal <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Aug 2019 12:16:55 +0800
+Message-Id: <20190821041655.29741-1-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: BE9464CE03DB.A0884
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [PATCH] libtdb: upgrade 1.4.0 -> 1.4.1
+Subject: [meta-oe][PATCH] ade: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2019 03:16:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Aug 2019 04:24:03 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+ADE Framework is a graph construction, manipulation, and processing
+framework.  ADE Framework is suitable for organizing data flow
+processing and execution.
+
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../libtdb/{libtdb_1.4.0.bb => libtdb_1.4.1.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/libtdb/{libtdb_1.4.0.bb => libtdb_1.4.1.bb} (93%)
+ meta-oe/recipes-support/opencv/ade_0.1.1f.bb | 21 ++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/ade_0.1.1f.bb
 
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb
-similarity index 93%
-rename from meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb
-rename to meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb
-index 6c191fbde..d25c3fa65 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.4.0.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb
-@@ -11,8 +11,8 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-            file://0001-waf-add-support-of-cross_compile.patch \
- "
- 
--SRC_URI[md5sum] = "c4c2f8cf9e691244a7f2ecfa3baadecc"
--SRC_URI[sha256sum] = "c1a0729c5400fb495465fa4bd953ae290db43c28dacd0506aef50dc482132d35"
-+SRC_URI[md5sum] = "d1d0a5d43614add17d1e41bbdb209446"
-+SRC_URI[sha256sum] = "dd4ecd9678e8d3ea772623bd81fe49b43363a2f970a76fb5468322753787aa4b"
- 
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+new file mode 100644
+index 000000000..51e274d3f
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "A graph construction, manipulation, and processing framework"
++DESCRIPTION = "ADE Framework is a graph construction, manipulation, \
++and processing framework. ADE Framework is suitable for \
++organizing data flow processing and execution."
++HOMEPAGE = "https://github.com/opencv/ade"
++
++SRC_URI = "git://github.com/opencv/ade.git;protocol=git \
++           "
++
++SRCREV = "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++inherit cmake
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
++
++FILES_${PN}-dev += "${datadir}/ade/*.cmake"
 -- 
-2.17.1
-
-
+2.21.0
 
 
