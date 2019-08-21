@@ -1,47 +1,57 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AB317E542
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+	[209.85.208.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E9A5E7E542
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 14:19:54 +0000 (UTC)
-Received: by mail-qt1-f174.google.com with SMTP id y26so3227319qto.4
+	Wed, 21 Aug 2019 14:24:29 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id t50so3187853edd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 07:19:55 -0700 (PDT)
+	Wed, 21 Aug 2019 07:24:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=bOVWOKiyIZ9ofpy23Hp0Zm9WZyqe2ZfsoqMf7xCiTlU=;
-	b=cSZStrinpK3jjl03hu+XKs/4jgnWi9CXrOC9vW0vPxxc3uZ1XrWCKvzoYEzmkFGb0P
-	43XqQrBXll3wAlhNXRBPU2ICKGuwDvDcaHth7d5/cqDpVa6Fu2M7YSiLHhs5c2Xg4SSB
-	nOZDWYzb8chba454Uks+qbvUGY3hXDBYjgZ+BAWrKKh9ceQMBDB7li7N2h14ow5hAFQJ
-	fJh/uaqFlRzBVq5LpaCdOcNnzpEKzu/uhce8aGS9tH+t8U+ba2C3ZUq2SnKN/oBntFxj
-	0jeA8fQ/I1eJ91NcHJ/wk8n4VC0Y6Vk9XdJBZwTMEH3+L53eqni2o7euiRpY+fZCrU+k
-	p/Kg==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=oM47VZjWy9xHf4EmApxJET3QerWTvxiKW9VsLdnV6qo=;
+	b=pdG7mLqiqpAEDzy0Ow25oO0wGBQmnApCTYxRZtXxu+O5cwLljrqjEtfufvvYQoocHE
+	9IDUB2B9sQBOZicSYlNL4MnhgbMM3jLQF3GhEsiC7afmfkxczQOlolDZgfObu21DJmc+
+	8oqm2uGSJ5nLKwU5+snjbNdJEKrj/oKFfiGGT6TJVz2IpeKUpQiILiLz6vOx0rcdYRp6
+	1WjIZgjK2o/5GEjW16uXY2CO1HEhyrx+UU3jX1gfk+ckgFfHVEjtXhv/IvUareuHOSuv
+	vtHe/wIQYiT++SY/wyfJhVpsL0b141yb8FnasQMVo62y1J3JI2OX9cC3Ke7/C03uRZmd
+	devw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=bOVWOKiyIZ9ofpy23Hp0Zm9WZyqe2ZfsoqMf7xCiTlU=;
-	b=iMXZ+gX5JxSHCdb+o1+xKmq5qqDLeLk2Rzhyp+mh0uj+4gpsqyUeXGcq6W6k+hVWmM
-	XTOiPD3EIQPvfDMngqJojDsmn3/bnv5JRSC1bHv4J674r1LMyjq8vyPmK45/LE+s00Zv
-	dkXlKxRL+Ybswa8X6zoeYK3Vnqjzb5iMaDnlf+DxET6oZZhYoXsZrf6V5a8dzF1gDYsn
-	9aN9CwZSpaA+ec6lNV1uXhXu/JVYccxwmbFcm7yNeHLO1Ufo26d8zGnuCr3PR9X88Dkb
-	EA0FxkHedKP/ic2i88J6otNxK8h2179u1Dws6Vz9MEaPhTOnitQxW4ulBIhsb4lcqars
-	xi3w==
-X-Gm-Message-State: APjAAAUskCM3c5p5eIeO93VmLCLnuQhPNhFIkgpSdspi1qEBkPZh5dB3
-	tsXN4v7PHSDvbXaA+L3KEwONd7raEgs+C8homnw=
-X-Google-Smtp-Source: APXvYqxT8u1lkiq/QYjLOWWZ4ajCHsFc6ebUWIlGv96zOhwUmO4kXlUVLHfQOY2vepq6ZG1QUETLcqjo2iA7Ul9DSvY=
-X-Received: by 2002:ac8:6997:: with SMTP id o23mr31507475qtq.53.1566397194700; 
-	Wed, 21 Aug 2019 07:19:54 -0700 (PDT)
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=oM47VZjWy9xHf4EmApxJET3QerWTvxiKW9VsLdnV6qo=;
+	b=TNrGBVfF7Jj3m0MOuO5I7q4ewnhSQtBS7xEN7zMi2YwOpUoJBdA55mh0/qhXzjOx2u
+	LWmIak2ffZix4XfEDWDBGB/Fq8X3NnZlx5WjWHQXZL1z3faPXkhDCmhuMlfOaO7PX0fG
+	sfAkDLfC3LypIegJ2uVNcpoCyABZzk+P6yaj4sTUifIYQS5YiJZW/KvAOs7EyjKPqLZp
+	7Aaqtsa3Npv72juwHXgAZtxZh+hUBybIElfz8MYbi85bDGw+ur0YC+ceE6i8EyqvURZn
+	iyx8t9ZGJRNSxpNHqYEQ8PmBCO204E7alSEgXxz7sEvaI6ZhxJrP/KmVqyXBGVLnQKTM
+	y/Gg==
+X-Gm-Message-State: APjAAAUcTkuxIcXKuJECLyDOcHd//VsTBO91SXWS08IgZErAsz1Jva+E
+	SUCq4L2HOCG2zqu3q1ubd54=
+X-Google-Smtp-Source: APXvYqyaUlMnUg2dHUKUnHdNHZD99+PQx3MhCz6KSfjUFRZPK6FtP1wLln3KlIc+PBvbrK2srWRQqg==
+X-Received: by 2002:a17:906:3549:: with SMTP id
+	s9mr31068552eja.82.1566397470342; 
+	Wed, 21 Aug 2019 07:24:30 -0700 (PDT)
+Received: from [192.168.10.117] (37-247-29-68.customers.ownit.se.
+	[37.247.29.68]) by smtp.gmail.com with ESMTPSA id
+	g20sm3262448edp.92.2019.08.21.07.24.29
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Wed, 21 Aug 2019 07:24:29 -0700 (PDT)
+To: Matthias Schoepfer <matthias.schoepfer@googlemail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20190821134646.13589-1-matthias.schoepfer@ithinx.io>
+From: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <13881d01-473f-6551-a5be-756f7063e4e5@gmail.com>
+Date: Wed, 21 Aug 2019 16:24:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <20190821041655.29741-1-anuj.mittal@intel.com>
-In-Reply-To: <20190821041655.29741-1-anuj.mittal@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 Aug 2019 07:19:44 -0700
-Message-ID: <CAMKF1soxLZTRZ42HiMGkTpoN827YN+UTs3THpr8EX+_Kw8jgJg@mail.gmail.com>
-To: Anuj Mittal <anuj.mittal@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ade: add recipe
+In-Reply-To: <20190821134646.13589-1-matthias.schoepfer@ithinx.io>
+Cc: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
+Subject: Re: [meta-java][PATCH] openjdk-8: fix build on machines with linux kernel 5.0+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,68 +64,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2019 14:19:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Aug 2019 14:24:30 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 20, 2019 at 9:24 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
-
-> ADE Framework is a graph construction, manipulation, and processing
-> framework.  ADE Framework is suitable for organizing data flow
-> processing and execution.
->
-> Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+On 8/21/19 3:46 PM, Matthias Schoepfer via Openembedded-devel wrote:
+> Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
 > ---
->  meta-oe/recipes-support/opencv/ade_0.1.1f.bb | 21 ++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->  create mode 100644 meta-oe/recipes-support/opencv/ade_0.1.1f.bb
->
-> diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
-> b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+>   .../openjdk-8-release-172b11-common.inc       |  1 +
+>   ...fixing-build-for-kernel-versions-5.x.patch | 27 +++++++++++++++++++
+>   2 files changed, 28 insertions(+)
+>   create mode 100644 recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> index ad20585..eb7e38a 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+> @@ -21,6 +21,7 @@ PATCHES_URI = "\
+>       ${LIBPNG_NEON_PATCH} \
+>       file://handle_extra_output.patch \
+>       file://hotspot-handle-gcc7-format-overflow.patch \
+> +    file://0001-fixing-build-for-kernel-versions-5.x.patch \
+>   "
+>   HOTSPOT_UB_PATCH = "\
+>       file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
 > new file mode 100644
-> index 000000000..51e274d3f
+> index 0000000..9b17b66
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
-> @@ -0,0 +1,21 @@
-> +SUMMARY =3D "A graph construction, manipulation, and processing framewor=
-k"
-> +DESCRIPTION =3D "ADE Framework is a graph construction, manipulation, \
-> +and processing framework. ADE Framework is suitable for \
-> +organizing data flow processing and execution."
-> +HOMEPAGE =3D "https://github.com/opencv/ade"
+> +++ b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
+> @@ -0,0 +1,27 @@
+> +From 51b022bcc596aa85e72e8d8bb93ffc3be843b8b9 Mon Sep 17 00:00:00 2001
+> +From: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
+> +Date: Wed, 21 Aug 2019 14:33:02 +0200
+> +Subject: [PATCH] fixing build for kernel versions 5.x
 > +
-> +SRC_URI =3D "git://github.com/opencv/ade.git;protocol=3Dgit \
+> +This simply extends the possibility of having a version 5+ linux kernel
+> +
+> +
+> +Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
+> +
+> +---
+> + hotspot/make/linux/Makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/hotspot/make/linux/Makefile b/hotspot/make/linux/Makefile
+> +index 17c14097..02cb0b33 100644
+> +--- a/hotspot/make/linux/Makefile
+> ++++ b/hotspot/make/linux/Makefile
+> +@@ -233,7 +233,7 @@ checks: check_os_version check_j2se_version
+> + # Solaris 2.5.1, 2.6).
+> + # Disable this check by setting DISABLE_HOTSPOT_OS_VERSION_CHECK=ok.
+> +
+> +-SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
+> ++SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4% 5%
+> + OS_VERSION := $(shell uname -r)
+> + EMPTY_IF_NOT_SUPPORTED = $(filter $(SUPPORTED_OS_VERSION),$(OS_VERSION))
+> +
+> 
 
+This is already fixed in master-next.
 
-Drop protocol=3Dgit it=E2=80=99s default
+/me wonders when those patches will be merged to master.
 
->
-> +           "
-> +
-> +SRCREV =3D "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57"
-> +
-> +inherit cmake
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +EXTRA_OECMAKE +=3D " -DCMAKE_BUILD_TYPE=3DRelease"
-> +
-> +FILES_${PN}-dev +=3D "${datadir}/ade/*.cmake"
->
-
-Use BPN instead of hard coding recipe name
-
---=20
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+/Jacob
 
