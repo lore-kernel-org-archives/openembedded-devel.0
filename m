@@ -1,30 +1,24 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F6177CE86
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id AE04F6C1C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 05:34:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,411,1559491200"; d="scan'208";a="73987140"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Aug 2019 13:34:27 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id CE21F4CE03E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 13:34:20 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 21 Aug 2019 13:34:24 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Aug 2019 14:33:45 +0900
-Message-ID: <20190821053345.112245-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+	Wed, 21 Aug 2019 08:07:16 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 Aug 2019 01:07:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,412,1559545200"; d="scan'208";a="202945615"
+Received: from anmitta2-mobl1.gar.corp.intel.com ([10.249.72.192])
+	by fmsmga004.fm.intel.com with ESMTP; 21 Aug 2019 01:07:16 -0700
+From: Anuj Mittal <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Aug 2019 16:07:13 +0800
+Message-Id: <20190821080713.11495-1-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: CE21F4CE03E6.A0875
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH v3] python-flask-pymongo: upgrade 0.5.1 -> 2.3.0
+Subject: [PATCH] clinfo: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2019 05:34:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Aug 2019 08:07:16 -0000
+Content-Transfer-Encoding: 8bit
 
-Add depends of vcversioner.
+clinfo is a simple command-line application that enumerates all possible
+(known) properties of the OpenCL platform and devices available on the
+system.
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../recipes-devtools/python/python-flask-pymongo.inc        | 6 ++++--
- ...flask-pymongo_0.5.1.bb => python-flask-pymongo_2.3.0.bb} | 0
- ...lask-pymongo_0.5.1.bb => python3-flask-pymongo_2.3.0.bb} | 0
- 3 files changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-pymongo_0.5.1.bb => python-flask-pymongo_2.3.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-pymongo_0.5.1.bb => python3-flask-pymongo_2.3.0.bb} (100%)
+ .../opencl/clinfo_2.2.18.04.06.bb             | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencl/clinfo_2.2.18.04.06.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo.inc b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
-index fb2d6ed8b..39251525b 100644
---- a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
-@@ -5,9 +5,11 @@ SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;beginline=1;endline=24;md5=424c4e1047d28e01b4e4634a069c019d"
- 
--SRC_URI[md5sum] = "d7a1b717f27154e1f3a355f8ec2467d6"
--SRC_URI[sha256sum] = "2baaa2ba5107d72b3a8bd4b5c0c8881316e35340ad1ae979cc13f1f3c8843b3d"
-+SRC_URI[md5sum] = "94df71e6800b1d7915cc91a74b70f959"
-+SRC_URI[sha256sum] = "620eb02dc8808a5fcb90f26cab6cba9d6bf497b15032ae3ca99df80366e33314"
- 
- PYPI_PACKAGE = "Flask-PyMongo"
- 
-+DEPENDS = "${PYTHON_PN}-vcversioner ${PYTHON_PN}-vcversioner-native"
+diff --git a/meta-oe/recipes-support/opencl/clinfo_2.2.18.04.06.bb b/meta-oe/recipes-support/opencl/clinfo_2.2.18.04.06.bb
+new file mode 100644
+index 000000000..9fd88ced9
+--- /dev/null
++++ b/meta-oe/recipes-support/opencl/clinfo_2.2.18.04.06.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Enumerate all known properties of OpenCL platform and devices."
++DESCRIPTION = "clinfo is a simple command-line application that enumerates \
++all possible (known) properties of the OpenCL platform and devices \
++available on the system."
++HOMEPAGE = "https://github.com/Oblomov/clinfo"
 +
- RDEPENDS_${PN} = "${PYTHON_PN}-pymongo ${PYTHON_PN}-flask"
-diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/python-flask-pymongo_2.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb
-rename to meta-python/recipes-devtools/python/python-flask-pymongo_2.3.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb b/meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask-pymongo_2.3.0.bb
++LICENSE = "CC0-1.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=fd8857f774dfb0eefe1e80c8f9240a7e"
++
++SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https"
++
++SRCREV = "59d0daf898e48d76ccbb788acbba258fa0a8ba7c"
++
++S = "${WORKDIR}/git"
++
++DEPENDS += "opencl-headers opencl-icd-loader"
++
++do_install() {
++        install -D -m 755 clinfo ${D}${bindir}/clinfo
++}
 -- 
-2.17.1
-
-
+2.21.0
 
 
