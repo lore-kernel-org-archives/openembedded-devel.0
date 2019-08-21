@@ -1,53 +1,47 @@
-Return-Path: <matthias.schoepfer@googlemail.com>
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CB8E6C397
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AB317E542
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 13:46:51 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id l2so2228372wmg.0
+	Wed, 21 Aug 2019 14:19:54 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id y26so3227319qto.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2019 06:46:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=1pVVOTYVlUPo0ceohxfgb7PE/0azKgmXPOUUtOZYGgc=;
-	b=J96RmloE4Np1U28y1z7uo+iRKQ2l9pLbCPg8CvfhCl113oYStpTYcuD4neQtHf8Dct
-	yb/ctF7uK8Aynw+JLruCtTmXOhYPaeGM7HdaQjyL2ewP2Zm5fJQiIZIEeY/KV+BNhTLg
-	rT2ZVb0b2OWooIbuWjn4gJj7ShLZATSi3aTySIX8LDX6oanD4sp7XLniXhTAuRRIp5mk
-	2Z5n0kcNV4H1RSK7NuuIbgez+Mkp7On52oZjpaBrAHsODy3Qv0tUEmm2miiO6pa1IFyw
-	jiVIFHS5BH3TI41d/VC4B8WPq31TnKtHlktMbTkFrOL/ix3c5/Nj0y5yT+v7sLKVKsfU
-	RVnQ==
+	Wed, 21 Aug 2019 07:19:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=bOVWOKiyIZ9ofpy23Hp0Zm9WZyqe2ZfsoqMf7xCiTlU=;
+	b=cSZStrinpK3jjl03hu+XKs/4jgnWi9CXrOC9vW0vPxxc3uZ1XrWCKvzoYEzmkFGb0P
+	43XqQrBXll3wAlhNXRBPU2ICKGuwDvDcaHth7d5/cqDpVa6Fu2M7YSiLHhs5c2Xg4SSB
+	nOZDWYzb8chba454Uks+qbvUGY3hXDBYjgZ+BAWrKKh9ceQMBDB7li7N2h14ow5hAFQJ
+	fJh/uaqFlRzBVq5LpaCdOcNnzpEKzu/uhce8aGS9tH+t8U+ba2C3ZUq2SnKN/oBntFxj
+	0jeA8fQ/I1eJ91NcHJ/wk8n4VC0Y6Vk9XdJBZwTMEH3+L53eqni2o7euiRpY+fZCrU+k
+	p/Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=1pVVOTYVlUPo0ceohxfgb7PE/0azKgmXPOUUtOZYGgc=;
-	b=WFwz4nIz0zS1CY+/DuafGmw3xi/AkzvMZUH8lcljwcb9Vivr9RW60HoZ4x0r4siikE
-	GjihTcFOi5oBRMbf5arYJlhaHHhazvCLBaEEF5oGj46xNzGAQyMkOXM6zloKGd7VE167
-	zR24YVXw3kOlbZxECsQCDoMf9GUzrMTuH0NwmKTwsvEc0ZKlyxSSmU/kWISCpJ10IpCH
-	sD2x+L5D0nC7oeckJhJbXj6kwuBx2b2mx+DfGxrkXQ3RNqrYbcKzQ55WfZf/BYX2VDUA
-	e8RHsoTbuzVSFLOoFqnlT9CTjBp1/3Frkx85Ue2xVAPeAzXtMOkPHddHTnwjK2p56jIb
-	mutw==
-X-Gm-Message-State: APjAAAU590itpc5yY6OYxRaVr4ABJoWrpS7pN0QZniu6rpFMnNFuBbln
-	q5Z/9jB1cG71R2qyTxxaJRMuJ7sP
-X-Google-Smtp-Source: APXvYqyHuMIIUPCVUBev/NStls1OtGjn+yb4i4PKX1JlezkvbJZbkLzHApgHrAkmoRTttOy0x098bA==
-X-Received: by 2002:a7b:ca5a:: with SMTP id m26mr113402wml.134.1566395211928; 
-	Wed, 21 Aug 2019 06:46:51 -0700 (PDT)
-Received: from sl-hw-u100.kelle.grp ([213.168.66.146])
-	by smtp.gmail.com with ESMTPSA id
-	p13sm26099866wrw.90.2019.08.21.06.46.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Aug 2019 06:46:51 -0700 (PDT)
-From: Matthias Schoepfer <matthias.schoepfer@googlemail.com>
-X-Google-Original-From: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Aug 2019 15:46:46 +0200
-Message-Id: <20190821134646.13589-1-matthias.schoepfer@ithinx.io>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=bOVWOKiyIZ9ofpy23Hp0Zm9WZyqe2ZfsoqMf7xCiTlU=;
+	b=iMXZ+gX5JxSHCdb+o1+xKmq5qqDLeLk2Rzhyp+mh0uj+4gpsqyUeXGcq6W6k+hVWmM
+	XTOiPD3EIQPvfDMngqJojDsmn3/bnv5JRSC1bHv4J674r1LMyjq8vyPmK45/LE+s00Zv
+	dkXlKxRL+Ybswa8X6zoeYK3Vnqjzb5iMaDnlf+DxET6oZZhYoXsZrf6V5a8dzF1gDYsn
+	9aN9CwZSpaA+ec6lNV1uXhXu/JVYccxwmbFcm7yNeHLO1Ufo26d8zGnuCr3PR9X88Dkb
+	EA0FxkHedKP/ic2i88J6otNxK8h2179u1Dws6Vz9MEaPhTOnitQxW4ulBIhsb4lcqars
+	xi3w==
+X-Gm-Message-State: APjAAAUskCM3c5p5eIeO93VmLCLnuQhPNhFIkgpSdspi1qEBkPZh5dB3
+	tsXN4v7PHSDvbXaA+L3KEwONd7raEgs+C8homnw=
+X-Google-Smtp-Source: APXvYqxT8u1lkiq/QYjLOWWZ4ajCHsFc6ebUWIlGv96zOhwUmO4kXlUVLHfQOY2vepq6ZG1QUETLcqjo2iA7Ul9DSvY=
+X-Received: by 2002:ac8:6997:: with SMTP id o23mr31507475qtq.53.1566397194700; 
+	Wed, 21 Aug 2019 07:19:54 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
-Subject: [meta-java][PATCH] openjdk-8: fix build on machines with linux kernel 5.0+
+References: <20190821041655.29741-1-anuj.mittal@intel.com>
+In-Reply-To: <20190821041655.29741-1-anuj.mittal@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 21 Aug 2019 07:19:44 -0700
+Message-ID: <CAMKF1soxLZTRZ42HiMGkTpoN827YN+UTs3THpr8EX+_Kw8jgJg@mail.gmail.com>
+To: Anuj Mittal <anuj.mittal@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ade: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,62 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2019 13:46:51 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Aug 2019 14:19:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
----
- .../openjdk-8-release-172b11-common.inc       |  1 +
- ...fixing-build-for-kernel-versions-5.x.patch | 27 +++++++++++++++++++
- 2 files changed, 28 insertions(+)
- create mode 100644 recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
+On Tue, Aug 20, 2019 at 9:24 PM Anuj Mittal <anuj.mittal@intel.com> wrote:
 
-diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-index ad20585..eb7e38a 100644
---- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-@@ -21,6 +21,7 @@ PATCHES_URI = "\
-     ${LIBPNG_NEON_PATCH} \
-     file://handle_extra_output.patch \
-     file://hotspot-handle-gcc7-format-overflow.patch \
-+    file://0001-fixing-build-for-kernel-versions-5.x.patch \
- "
- HOTSPOT_UB_PATCH = "\
-     file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
-diff --git a/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
-new file mode 100644
-index 0000000..9b17b66
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch
-@@ -0,0 +1,27 @@
-+From 51b022bcc596aa85e72e8d8bb93ffc3be843b8b9 Mon Sep 17 00:00:00 2001
-+From: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
-+Date: Wed, 21 Aug 2019 14:33:02 +0200
-+Subject: [PATCH] fixing build for kernel versions 5.x
-+
-+This simply extends the possibility of having a version 5+ linux kernel
-+
-+
-+Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
-+
-+---
-+ hotspot/make/linux/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/hotspot/make/linux/Makefile b/hotspot/make/linux/Makefile
-+index 17c14097..02cb0b33 100644
-+--- a/hotspot/make/linux/Makefile
-++++ b/hotspot/make/linux/Makefile
-+@@ -233,7 +233,7 @@ checks: check_os_version check_j2se_version
-+ # Solaris 2.5.1, 2.6).
-+ # Disable this check by setting DISABLE_HOTSPOT_OS_VERSION_CHECK=ok.
-+ 
-+-SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
-++SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4% 5%
-+ OS_VERSION := $(shell uname -r)
-+ EMPTY_IF_NOT_SUPPORTED = $(filter $(SUPPORTED_OS_VERSION),$(OS_VERSION))
-+ 
--- 
-2.21.0
+> ADE Framework is a graph construction, manipulation, and processing
+> framework.  ADE Framework is suitable for organizing data flow
+> processing and execution.
+>
+> Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> ---
+>  meta-oe/recipes-support/opencv/ade_0.1.1f.bb | 21 ++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+>
+> diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+> b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+> new file mode 100644
+> index 000000000..51e274d3f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY =3D "A graph construction, manipulation, and processing framewor=
+k"
+> +DESCRIPTION =3D "ADE Framework is a graph construction, manipulation, \
+> +and processing framework. ADE Framework is suitable for \
+> +organizing data flow processing and execution."
+> +HOMEPAGE =3D "https://github.com/opencv/ade"
+> +
+> +SRC_URI =3D "git://github.com/opencv/ade.git;protocol=3Dgit \
 
+
+Drop protocol=3Dgit it=E2=80=99s default
+
+>
+> +           "
+> +
+> +SRCREV =3D "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
+> +
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
+> +
+> +inherit cmake
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +EXTRA_OECMAKE +=3D " -DCMAKE_BUILD_TYPE=3DRelease"
+> +
+> +FILES_${PN}-dev +=3D "${datadir}/ade/*.cmake"
+>
+
+Use BPN instead of hard coding recipe name
+
+--=20
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
