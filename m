@@ -1,51 +1,26 @@
-Return-Path: <ja.kaisrlik@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EEDB6BCDC
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 21C566D409
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 12:23:21 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id r3so5229624wrt.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 05:23:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=jBtk7FBdQnqNQmODcZHrUueCUVlf8b4cFxh1UPmnAr8=;
-	b=PS3wgUdwM6iyjwcl6HnOXQS+glRGCZXRaFBk+bfgOPJ8RwWlaqUlcw2I2f8MUBVl7Y
-	dHBYGnkpgY+TxJK8HsHghVMJXmKzgyVEfI9LaDl6sMqFlLo7iVhapgDVseNGvHbSDPO9
-	Chz5zwh6aDpzMO8MuwiYSTG0mWu5a/cOeFLaNVd6g9Ux/VEBiG/BR0BjPpJpzmuN0k4m
-	fPH+UOqqHmBuBMrxv7CE01NSzUrZ7QWY62o8p7UhqCOWFVf56HygBbErFzK4Uk9Bl8Fs
-	T1yYhuVJqtsH5g89boloKaMhUPtzs+ihPIICrSFrkkn6GZ9qj6ntVc/1ixRd9Poob+lO
-	q4+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=jBtk7FBdQnqNQmODcZHrUueCUVlf8b4cFxh1UPmnAr8=;
-	b=WugUsefweZniK9NwINhAgrRRfG7CFGL19OpR2LVBJKWLNfg1aMPXDq0munRYcawz+E
-	8oploC13e93cr4VzuU2POnWbmgEEcq81Yf0pQzSrggVLnjWM80d0y16KLgwvzVwlqkhE
-	vjJwNNpDqwuJse6IgY4qq4Qt/ivOsttl23HeZPZkxsoKqQ43FCK7nogwxdS6MO+ZZaHU
-	vqGflnMIhW6BaK/K/TvWBPJPBjpMxRRvJ9dMS2BjHZmtJyLUO/wKkWWbU0rcw86+CyH1
-	PvS8xd3x3A0d6XoK+NZabpdCwgA+8daZeBGWqHQPdPr2a2CKDl41is0oApH7Be91WWyI
-	xAKg==
-X-Gm-Message-State: APjAAAWkJnDx+gT0w2Ix/cEsdg97vSKUzbmql4WCXY0b0PLpt3Nkaf8T
-	HPq+B0THAE5Qcwz71OlnPM6gJVzCvqA=
-X-Google-Smtp-Source: APXvYqyjfjnv1awkEdS8N4ewL3UmPVURqFgMfkJnCbPYzprSQjR68xzLpPB843JG+WTra5vh4vRvKQ==
-X-Received: by 2002:adf:dd88:: with SMTP id x8mr10647502wrl.331.1566476602278; 
-	Thu, 22 Aug 2019 05:23:22 -0700 (PDT)
-Received: from xeri-steel.it.int.avast.com
-	([2001:67c:284:64:5646:bb87:150a:dd53])
-	by smtp.gmail.com with ESMTPSA id
-	q20sm79177596wrc.79.2019.08.22.05.23.21
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 22 Aug 2019 05:23:21 -0700 (PDT)
-From: ja.kaisrlik@gmail.com
+	Thu, 22 Aug 2019 14:55:07 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 Aug 2019 16:33:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,414,1559545200"; d="scan'208";a="207927533"
+Received: from anmitta2-mobl1.gar.corp.intel.com ([10.249.72.192])
+	by fmsmga002.fm.intel.com with ESMTP; 21 Aug 2019 16:33:22 -0700
+From: Anuj Mittal <anuj.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Aug 2019 14:22:58 +0200
-Message-Id: <20190822122258.30801-1-ja.kaisrlik@gmail.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 22 Aug 2019 07:33:16 +0800
+Message-Id: <20190821233316.27076-1-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <CAMKF1soxLZTRZ42HiMGkTpoN827YN+UTs3THpr8EX+_Kw8jgJg@mail.gmail.com>
+References: <CAMKF1soxLZTRZ42HiMGkTpoN827YN+UTs3THpr8EX+_Kw8jgJg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH v2] networkd-dispatcher: service file is using different location of binary
+Subject: [meta-oe][PATCH v2] ade: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 12:23:21 -0000
+X-List-Received-Date: Thu, 22 Aug 2019 14:55:08 -0000
 Content-Transfer-Encoding: 8bit
 
-From: Jan Kaisrlik <ja.kaisrlik@gmail.com>
+ADE Framework is a graph construction, manipulation, and processing
+framework.  ADE Framework is suitable for organizing data flow
+processing and execution.
 
-Signed-off-by: Jan Kaisrlik <ja.kaisrlik@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/opencv/ade_0.1.1f.bb | 21 ++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/ade_0.1.1f.bb
 
-diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-index affd0aa..008a7ac 100644
---- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-+++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-@@ -24,7 +24,7 @@ do_configure[noexec] = "1"
- do_compile[noexec] = "1"
- 
- do_install() {
--    install -D -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
-+    install -D -m 0755 ${S}/networkd-dispatcher ${D}${bindir}/networkd-dispatcher
-     install -D -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_system_unitdir}/networkd-dispatcher.service
-     install -D -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
- }
+diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+new file mode 100644
+index 000000000..332820d14
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "A graph construction, manipulation, and processing framework"
++DESCRIPTION = "ADE Framework is a graph construction, manipulation, \
++and processing framework. ADE Framework is suitable for \
++organizing data flow processing and execution."
++HOMEPAGE = "https://github.com/opencv/ade"
++
++SRC_URI = "git://github.com/opencv/ade.git \
++           "
++
++SRCREV = "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++inherit cmake
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
++
++FILES_${PN}-dev += "${datadir}/${BPN}/*.cmake"
 -- 
-1.8.3.1
+2.21.0
 
 
