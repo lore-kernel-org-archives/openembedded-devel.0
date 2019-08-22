@@ -1,23 +1,51 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 849BF7F260
+Return-Path: <ja.kaisrlik@gmail.com>
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EEDB6BCDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 09:48:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7M9mWsM024619
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 22 Aug 2019 02:48:32 -0700 (PDT)
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 22 Aug 2019 02:48:31 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 22 Aug 2019 17:48:30 +0800
-Message-ID: <1566467310-28839-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 22 Aug 2019 12:23:21 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id r3so5229624wrt.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Aug 2019 05:23:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=jBtk7FBdQnqNQmODcZHrUueCUVlf8b4cFxh1UPmnAr8=;
+	b=PS3wgUdwM6iyjwcl6HnOXQS+glRGCZXRaFBk+bfgOPJ8RwWlaqUlcw2I2f8MUBVl7Y
+	dHBYGnkpgY+TxJK8HsHghVMJXmKzgyVEfI9LaDl6sMqFlLo7iVhapgDVseNGvHbSDPO9
+	Chz5zwh6aDpzMO8MuwiYSTG0mWu5a/cOeFLaNVd6g9Ux/VEBiG/BR0BjPpJpzmuN0k4m
+	fPH+UOqqHmBuBMrxv7CE01NSzUrZ7QWY62o8p7UhqCOWFVf56HygBbErFzK4Uk9Bl8Fs
+	T1yYhuVJqtsH5g89boloKaMhUPtzs+ihPIICrSFrkkn6GZ9qj6ntVc/1ixRd9Poob+lO
+	q4+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=jBtk7FBdQnqNQmODcZHrUueCUVlf8b4cFxh1UPmnAr8=;
+	b=WugUsefweZniK9NwINhAgrRRfG7CFGL19OpR2LVBJKWLNfg1aMPXDq0munRYcawz+E
+	8oploC13e93cr4VzuU2POnWbmgEEcq81Yf0pQzSrggVLnjWM80d0y16KLgwvzVwlqkhE
+	vjJwNNpDqwuJse6IgY4qq4Qt/ivOsttl23HeZPZkxsoKqQ43FCK7nogwxdS6MO+ZZaHU
+	vqGflnMIhW6BaK/K/TvWBPJPBjpMxRRvJ9dMS2BjHZmtJyLUO/wKkWWbU0rcw86+CyH1
+	PvS8xd3x3A0d6XoK+NZabpdCwgA+8daZeBGWqHQPdPr2a2CKDl41is0oApH7Be91WWyI
+	xAKg==
+X-Gm-Message-State: APjAAAWkJnDx+gT0w2Ix/cEsdg97vSKUzbmql4WCXY0b0PLpt3Nkaf8T
+	HPq+B0THAE5Qcwz71OlnPM6gJVzCvqA=
+X-Google-Smtp-Source: APXvYqyjfjnv1awkEdS8N4ewL3UmPVURqFgMfkJnCbPYzprSQjR68xzLpPB843JG+WTra5vh4vRvKQ==
+X-Received: by 2002:adf:dd88:: with SMTP id x8mr10647502wrl.331.1566476602278; 
+	Thu, 22 Aug 2019 05:23:22 -0700 (PDT)
+Received: from xeri-steel.it.int.avast.com
+	([2001:67c:284:64:5646:bb87:150a:dd53])
+	by smtp.gmail.com with ESMTPSA id
+	q20sm79177596wrc.79.2019.08.22.05.23.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 22 Aug 2019 05:23:21 -0700 (PDT)
+From: ja.kaisrlik@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Aug 2019 14:22:58 +0200
+Message-Id: <20190822122258.30801-1-ja.kaisrlik@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH meta-oe] lvm2: fix circular dependencies while systemd enable cryptsetup
+Subject: [PATCH v2] networkd-dispatcher: service file is using different location of binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,71 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 09:48:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 22 Aug 2019 12:23:21 -0000
+Content-Transfer-Encoding: 8bit
 
-While systemd enable cryptsetup (PACKAGECONFIG_append_pn-systemd = ' cryptsetup'),
-there is a circular dependencies:
-systemd -> systemd -> cryptsetup -> libdevmapper -> udev (PREFERRED_PROVIDER_udev = systemd)
+From: Jan Kaisrlik <ja.kaisrlik@gmail.com>
 
-The libdevmapper was used to break circular dependencies,
-it does not require udev, refer commit [698d512 lvm2: Add a
-PACKAGECONFIG for udev support] to move udev related from
-lvm2.inc to lvm2.bb
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Jan Kaisrlik <ja.kaisrlik@gmail.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc        | 4 +---
- meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb | 6 ++++++
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ .../recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index ca409a6..f358663 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
-                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
+index affd0aa..008a7ac 100644
+--- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
++++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
+@@ -24,7 +24,7 @@ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
  
--DEPENDS += "util-linux libaio"
-+DEPENDS += "libaio"
- 
- SRC_URI = "https://sourceware.org/pub/lvm2/LVM2.${PV}.tgz \
-            file://lvm.conf \
-@@ -27,7 +27,6 @@ LVM2_PACKAGECONFIG = "dmeventd"
- LVM2_PACKAGECONFIG_append_class-target = " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
-     ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
--    udev \
- "
- 
- # odirect is always enabled because there currently is a bug in
-@@ -41,7 +40,6 @@ PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
- PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
--PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
- 
- # Unset user/group to unbreak install.
- EXTRA_OECONF = "--with-user= \
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-index 4ae0a62..9922ef7 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-@@ -40,6 +40,12 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- 
- EXTRA_OECONF_append_class-nativesdk = " --with-confdir=${sysconfdir}"
- 
-+DEPENDS += "util-linux"
-+LVM2_PACKAGECONFIG_append_class-target = " \
-+    udev \
-+"
-+PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
-+
- FILES_${PN} += "${libdir}/device-mapper/*.so"
- FILES_${PN}-scripts = " \
-     ${sbindir}/blkdeactivate \
+ do_install() {
+-    install -D -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
++    install -D -m 0755 ${S}/networkd-dispatcher ${D}${bindir}/networkd-dispatcher
+     install -D -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_system_unitdir}/networkd-dispatcher.service
+     install -D -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
+ }
 -- 
-2.7.4
+1.8.3.1
 
 
