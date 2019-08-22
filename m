@@ -1,42 +1,36 @@
-Return-Path: <prvs=130c1562b=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DC3A7ED57
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 172737E58B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 05:29:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1566451759; x=1597987759;
-	h=subject:to:references:from:message-id:date:mime-version:
-	in-reply-to:content-transfer-encoding;
-	bh=4V6ANzCLEegBjQvlv8Z0tO8C8Rf1sb0kxG1zHfiGEjI=;
-	b=HgRy67tI4VfeiCbo4M/7tEkqeFGB0tKl3hqhFI0oGcFvAjtW5Ocw9LgL
-	EiAGm1xp5ZLyfhgBI9cPrMRsLBDdK1uY+UwormvdyHTTE6wYy/Il6h1jB
-	EWQZJfs2pxz6DIsS3ZAzS5CaMmfpLKfXz7DVkeT0bS6kfI40QeQDl1cxz
-	5vb8W4aBQP2rUVNZmxQaX/qBlS9zyIpfGhQmo9d9zf7jmGRBWAIo6jcVw
-	tMam6M2RNGEQGdKBjK4FPVc6Gd32vCrtvfvPCAS/KjWDpSPRH36NrXYmZ
-	TMmvuutZxFu90aj/D/SXD8NIKSBavlEjLjUJiL5KhbTg+sZhfvDNaZIlC Q==;
-IronPort-SDR: OeOOPFVyYwpfpJqEN7qPLA5e4hdq503H+p9y3+niKmRHSNwBug8E2uCLeHZL0til1b2JaUbBNi
-	17ygXttd0ZSH7n/gcdfhaouOTfbAYdEtrUSbfjpn+Ew/5V5H4hYm+/Fj/8gMGtH6TSTPo/ZgMk
-	iSYve0GkRTgiaB7/L67TEiQSMgwRcjhwKhimd8hb0Q8tL3BE/a2i1Z7AdDOuwAsLndu5/f94PY
-	ok0jSaqz//mZYxRi5tDwyq6tiFRt954lR7a8nBbZqWdts/RxIJQMKm1fwmeAKD0Z2l3SPKOfxV
-	Eqg=
-X-IronPort-AV: E=Sophos;i="5.64,415,1559512800"; d="scan'208";a="19111523"
-To: <openembedded-devel@lists.openembedded.org>,
-	<matthias.schoepfer@googlemail.com>, <matthias.schoepfer@ithinx.io>,
-	<jacob.kroon@gmail.com>
-References: <20190821134646.13589-1-matthias.schoepfer@ithinx.io>
-	<13881d01-473f-6551-a5be-756f7063e4e5@gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <ac04e6b1-c277-d12f-1d74-9a8fdf0d3875@skidata.com>
-Date: Thu, 22 Aug 2019 07:29:11 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Thu, 22 Aug 2019 06:11:45 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46DZ1F5h2tz4q;
+	Thu, 22 Aug 2019 08:11:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1566454306;
+	bh=tgWERsC9vuWy3Ws9HQR9qfSXn+5EU7SHKHaiI31EpOg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pHU/lwomaD5c5UygGvuqF33T7SRhs0hGkxfVCuLV2firr03OYRo+TPvFVWQgFNzHg
+	PXyTdqR5nEf+vub3QVHrS2y95DoBnjvWKkIVWzIPFay1qo8wdoGL67k3S68byHek5d
+	bvNBGIzUWkhmPdftimxsOVAE5A+xUSZbBROiFW1EsKpKTq6plfaW6QG757lkwJTWTO
+	dmtxZE8LyEwcoBNIPuIHdyeJJ4aT+bsW5z6bi1d2HapPCAgXOMIcSwQ44/k+Xrz5bM
+	B3guWGdWeNE1K23fEzPcTaW/OfX8tXkjp2FRLuygqHInNEqF0PQr0NufzZht8xS99T
+	NaJEYBscT50Reph9RzIcBb+i/XTwQ+2+9bCwHMqJMrnoye/T1igHOFs5+RE7qzvUGz
+	xfR5sT0z67WaAuglFYTLB7iBPQtzT7CqYlTFXF5C4P8kyI0qYyfEWQMoig5qlR2czv
+	5+dsaDox27w64ipkH2Q0Ksw5fkJmzVbm5fO7kbcJaqBKvlrawgrk8Lg1XUChX+9FL4
+	5VM0vxrmZDPPKD3YZr8H8L0JPhPl1LqV+oskR41qePNg1FoQEm6RE4DoOErdWUWe/3
+	wrDIOsLnxIMbdyneqnLWP2/u2b4z4363b1itatutN6ti9zF6eX4bzz6Me9v1IXN8Qk
+	PHJjqEzVFnaGPiZaTkrYzJyI=
+Date: Thu, 22 Aug 2019 09:11:43 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Piotr Tworek <tworaz@tworaz.net>
+Message-ID: <20190822061143.GA11915@localhost>
+References: <20190821184927.3393-1-tworaz@tworaz.net>
 MIME-Version: 1.0
-In-Reply-To: <13881d01-473f-6551-a5be-756f7063e4e5@gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] openjdk-8: fix build on machines with linux kernel 5.0+
+In-Reply-To: <20190821184927.3393-1-tworaz@tworaz.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-gnome][PATCH v2 3/3] evolution-data-server: Update to version 3.32.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,89 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 05:29:18 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Aug 2019 06:11:46 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
+On Wed, Aug 21, 2019 at 08:49:27PM +0200, Piotr Tworek wrote:
+> This is the latest stable upstream release. Unfortunately the package
+> needs a bit more than a simple version bump to be in a good shape. The
+> list of changes includes.
+>...
+> This patch also performs a lot of other smaller cleanups like:
+>...
 
+It is very hard to review when there is one huge patch doing many 
+different things.
 
-On 21/08/2019 16:24, Jacob Kroon wrote:
-> On 8/21/19 3:46 PM, Matthias Schoepfer via Openembedded-devel wrote:
->> Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
->> ---
->>   .../openjdk-8-release-172b11-common.inc       |  1 +
->>   ...fixing-build-for-kernel-versions-5.x.patch | 27 +++++++++++++++++++
->>   2 files changed, 28 insertions(+)
->>   create mode 100644 
->> recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch 
->>
->>
->> diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc 
->> b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
->> index ad20585..eb7e38a 100644
->> --- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
->> +++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
->> @@ -21,6 +21,7 @@ PATCHES_URI = "\
->>       ${LIBPNG_NEON_PATCH} \
->>       file://handle_extra_output.patch \
->>       file://hotspot-handle-gcc7-format-overflow.patch \
->> +    file://0001-fixing-build-for-kernel-versions-5.x.patch \
->>   "
->>   HOTSPOT_UB_PATCH = "\
->>       file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
->> diff --git 
->> a/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch 
->> b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch 
->>
->> new file mode 100644
->> index 0000000..9b17b66
->> --- /dev/null
->> +++ 
->> b/recipes-core/openjdk/patches-openjdk-8/0001-fixing-build-for-kernel-versions-5.x.patch 
->>
->> @@ -0,0 +1,27 @@
->> +From 51b022bcc596aa85e72e8d8bb93ffc3be843b8b9 Mon Sep 17 00:00:00 2001
->> +From: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
->> +Date: Wed, 21 Aug 2019 14:33:02 +0200
->> +Subject: [PATCH] fixing build for kernel versions 5.x
->> +
->> +This simply extends the possibility of having a version 5+ linux kernel
->> +
->> +
->> +Signed-off-by: Matthias Schoepfer <matthias.schoepfer@ithinx.io>
->> +
->> +---
->> + hotspot/make/linux/Makefile | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/hotspot/make/linux/Makefile b/hotspot/make/linux/Makefile
->> +index 17c14097..02cb0b33 100644
->> +--- a/hotspot/make/linux/Makefile
->> ++++ b/hotspot/make/linux/Makefile
->> +@@ -233,7 +233,7 @@ checks: check_os_version check_j2se_version
->> + # Solaris 2.5.1, 2.6).
->> + # Disable this check by setting DISABLE_HOTSPOT_OS_VERSION_CHECK=ok.
->> +
->> +-SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
->> ++SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4% 5%
->> + OS_VERSION := $(shell uname -r)
->> + EMPTY_IF_NOT_SUPPORTED = $(filter 
->> $(SUPPORTED_OS_VERSION),$(OS_VERSION))
->> +
->>
-> 
-> This is already fixed in master-next.
+It would be easier if you could submit such changes as patch series,
+e.g. one patch for each of the 4 major items in your list plus one
+for the smaller changes.
 
-True ;-)
+cu
+Adrian
 
-> 
-> /me wonders when those patches will be merged to master.
+-- 
 
-If the tests pass, likely today afternoon or tomorrow morning (CET).
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
-regards;Richard.L
-
-> 
-> /Jacob
 
