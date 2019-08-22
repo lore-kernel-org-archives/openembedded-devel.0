@@ -1,28 +1,23 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C7A67F262
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 849BF7F260
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 09:33:06 +0000 (UTC)
+	Thu, 22 Aug 2019 09:48:32 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7M9X7MO001792
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2019 02:33:07 -0700 (PDT)
-Received: from [128.224.162.195] (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Thu, 22 Aug 2019 02:33:06 -0700
-To: Li Zhou <li.zhou@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1566465799-45676-1-git-send-email-li.zhou@windriver.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <6179834c-de89-9c63-6d65-e61b3ac6d846@windriver.com>
-Date: Thu, 22 Aug 2019 17:33:03 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7M9mWsM024619
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 22 Aug 2019 02:48:32 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 22 Aug 2019 02:48:31 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Thu, 22 Aug 2019 17:48:30 +0800
+Message-ID: <1566467310-28839-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1566465799-45676-1-git-send-email-li.zhou@windriver.com>
-X-Originating-IP: [128.224.162.195]
-Subject: Re: [meta-cgl][PATCH] kernel: fix the recipe that changes signatures
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH meta-oe] lvm2: fix circular dependencies while systemd enable cryptsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +30,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 09:33:06 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 22 Aug 2019 09:48:32 -0000
+Content-Type: text/plain
 
-Wrong mailing list. Please send it to yocto@yoctoproject.org
+While systemd enable cryptsetup (PACKAGECONFIG_append_pn-systemd = ' cryptsetup'),
+there is a circular dependencies:
+systemd -> systemd -> cryptsetup -> libdevmapper -> udev (PREFERRED_PROVIDER_udev = systemd)
 
+The libdevmapper was used to break circular dependencies,
+it does not require udev, refer commit [698d512 lvm2: Add a
+PACKAGECONFIG for udev support] to move udev related from
+lvm2.inc to lvm2.bb
 
-//Yi
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2.inc        | 4 +---
+ meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb | 6 ++++++
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index ca409a6..f358663 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
+                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+ 
+-DEPENDS += "util-linux libaio"
++DEPENDS += "libaio"
+ 
+ SRC_URI = "https://sourceware.org/pub/lvm2/LVM2.${PV}.tgz \
+            file://lvm.conf \
+@@ -27,7 +27,6 @@ LVM2_PACKAGECONFIG = "dmeventd"
+ LVM2_PACKAGECONFIG_append_class-target = " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+     ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
+-    udev \
+ "
+ 
+ # odirect is always enabled because there currently is a bug in
+@@ -41,7 +40,6 @@ PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
+ PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
+ PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
+-PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
+ 
+ # Unset user/group to unbreak install.
+ EXTRA_OECONF = "--with-user= \
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+index 4ae0a62..9922ef7 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+@@ -40,6 +40,12 @@ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ EXTRA_OECONF_append_class-nativesdk = " --with-confdir=${sysconfdir}"
+ 
++DEPENDS += "util-linux"
++LVM2_PACKAGECONFIG_append_class-target = " \
++    udev \
++"
++PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
++
+ FILES_${PN} += "${libdir}/device-mapper/*.so"
+ FILES_${PN}-scripts = " \
+     ${sbindir}/blkdeactivate \
+-- 
+2.7.4
 
-On 8/22/19 5:23 PM, Li Zhou wrote:
-> When test using "yocto-check-layer-wrapper .../meta-cgl
-> --dependency xxx", error occurs:
-> FAIL: test_signatures (common.CommonCheckLayer)
->     linux-yocto:do_fetch: 84ac07191eb371845b8773179913d4f1 -> c36d7d453aca36c5e8dd30644a2e9963
-> ...
->        basehash changed from 3a89fab4c77b51a9ef3ece5eb1270759 to 1e9697c5c2a85520ea36ec5845125f8e
->        Variable SRC_URI value changed:...
->
-> test_signatures are tests to be sure that BSP and DISTRO layers do not
-> come with recipes that change signatures, so here remove the NULL
-> SRC_URI operation.
->
-> Signed-off-by: Li Zhou <li.zhou@windriver.com>
-> ---
->   meta-cgl-common/recipes-kernel/linux/linux-yocto_4.%.bbappend | 2 --
->   1 file changed, 2 deletions(-)
->
-> diff --git a/meta-cgl-common/recipes-kernel/linux/linux-yocto_4.%.bbappend b/meta-cgl-common/recipes-kernel/linux/linux-yocto_4.%.bbappend
-> index 9d1735f..2b9c157 100644
-> --- a/meta-cgl-common/recipes-kernel/linux/linux-yocto_4.%.bbappend
-> +++ b/meta-cgl-common/recipes-kernel/linux/linux-yocto_4.%.bbappend
-> @@ -1,3 +1 @@
->   require cgl-common.inc
-> -
-> -SRC_URI += ""
 
