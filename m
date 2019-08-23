@@ -1,30 +1,30 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A5A27F23C
+	by mail.openembedded.org (Postfix) with ESMTP id 4404F6C1D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 03:10:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,419,1559491200"; d="scan'208";a="74136710"
+	Fri, 23 Aug 2019 05:22:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74142608"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 11:10:46 +0800
+	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 13:22:26 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id DDA994CE0439
+	by cn.fujitsu.com (Postfix) with ESMTP id 9DFB04CE0873
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 11:10:43 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
+	Fri, 23 Aug 2019 13:22:23 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 11:10:51 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 13:22:30 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Aug 2019 11:10:11 +0800
-Message-ID: <20190823031011.28826-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Fri, 23 Aug 2019 14:22:15 +0900
+Message-ID: <20190823052215.3208-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: DDA994CE0439.A9FD2
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: 9DFB04CE0873.A106E
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe] [PATCH] python-futures: upgrade 3.2.0 -> 3.3.0
+Subject: [meta-oe] [PATCH] kpatch: upgrade 0.7.1 -> 0.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 03:10:46 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Aug 2019 05:22:27 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- .../python/{python-futures_3.2.0.bb => python-futures_3.3.0.bb}       | 4 ++--
+ meta-oe/recipes-kernel/kpatch/kpatch_git.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-futures_3.2.0.bb => python-futures_3.3.0.bb} (72%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-futures_3.2.0.bb b/meta-oe/recipes-devtools/python/python-futures_3.3.0.bb
-similarity index 72%
-rename from meta-oe/recipes-devtools/python/python-futures_3.2.0.bb
-rename to meta-oe/recipes-devtools/python/python-futures_3.3.0.bb
-index 3ee945f..1636f73 100644
---- a/meta-oe/recipes-devtools/python/python-futures_3.2.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-futures_3.3.0.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=834d982f973c48b6d662b5944c5ab567"
- HOMEPAGE = "https://github.com/agronholm/pythonfutures"
- DEPENDS = "python"
+diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+index dc247942f..508bddb86 100644
+--- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
++++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+@@ -2,9 +2,9 @@ require kpatch.inc
  
--SRC_URI[md5sum] = "d1b299a06b96ccb59f70324716dc0016"
--SRC_URI[sha256sum] = "9ec02aa7d674acb8618afb127e27fde7fc68994c0437ad759fa094a574adb265"
-+SRC_URI[md5sum] = "b43a39ae1475e3fd6940f2b4f7214675"
-+SRC_URI[sha256sum] = "7e033af76a5e35f58e56da7a91e687706faf4e7bdfb2cbc3f2cca6b9bcda9794"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- inherit pypi setuptools
+-SRCREV = "d7c5810e2a6acacfa5fec1e38d2f75af8e8c818c"
++SRCREV = "2a29bc7dea9a7da12705c7b50315eee1acdd9156"
+ 
+-PV = "0.7.1+git${SRCPV}"
++PV = "0.8.0+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
-2.7.4
+2.17.1
 
 
 
