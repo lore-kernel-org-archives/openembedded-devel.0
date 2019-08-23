@@ -1,37 +1,36 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B6C37F2B1
+	by mail.openembedded.org (Postfix) with ESMTP id C2C587F337
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 08:32:24 +0000 (UTC)
+	Fri, 23 Aug 2019 08:36:39 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46FF544c5Bz4q;
-	Fri, 23 Aug 2019 10:32:23 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46FFB016Grz4q;
+	Fri, 23 Aug 2019 10:36:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566549144;
-	bh=61/xCluangSbBukGLpO+6SbJAzXz8UgIrmtHsDEiKXw=;
+	s=default; t=1566549400;
+	bh=EwEF8gaHVYJPmyDfAIuSeeZTMOlYegzo2rLTm6+Q9N8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=H+eY9qJSx+w5jKbSnRUfV7m2X07G0ubO39lzuRtrlaj3JK2tTrBqQVxV7Bn4jWI/M
-	Hg8qzm+cunPXhBpKNTBM091spItRYuDPRgIT543iNGIKHSPmmWvq72BD+ZIy2B9/k/
-	FQl2Vuess7zYNK8r1tQz/Oh00n1Jl7KexWNdTi5fKEiTnxYgscl7K8iO5IQ/BevBo3
-	EmmDrLv++UfWTgylefZsdytqrJncE5R4aGdiQGlC9jGCxK16M+RmBWPINnZDKDPiIE
-	KmYwRvUrmBCEG68/FeUptUz8tAzPdSiNuRACXqUEMesEmEUCCk2P9ebmj4Jfz9LBvz
-	5+hJHm1svz9MTe6xB7x2xDKK3nTDS1sBWcFyhmKvoC2Bn1T30ZBDGWXCa3/+HZfyls
-	GmueuaqKol7y30Am9/jEYwIGjGWnHwup1RTKloSxzP/mxZZ+oEZQ1kLpT5R2xJdnrj
-	2uwisYF32UvKaxaRyps4iy5ay5Ln3ozDdN68xUooVYvTTOQilDQpdQkZgsnFuWkwSg
-	OiPunjTT3oRvA7VYMu8PA4TxwbgRlaGrGjV4ZmnF+47w8GdNuhRCfhD/SrvV7PfH9e
-	5RAWdgrZs/tufZhGEsrOVe4SoZZaXBQK2tNmKIxIYHBeaPfFPTbFox/mmHQRbGBH5m
-	JZK67FRhiKW2chE3LHqcmgXU=
-Date: Fri, 23 Aug 2019 11:32:21 +0300
+	b=RJsd7fTOazQvKjbAyCRZa6i5jiiq5PfyD5dg4GWZoy7qA2/yjvqirpAHyqHE3+q/g
+	BxX7sIGpFPylSv0nxnAMCYKikOgOIAFsHxrl4t7/W2YzxuXU8a8eFYbTI4eWwez6RU
+	Ebj7oBJhFxkTCNlrSbOfk0jaDWBcpKFTEHWI6GxxOfSAAcvoCWZZklizBZojeRDsV4
+	dYwdgmRWfdAdlCPqn3XgjsCde6GloU1WFjgwPodvkJEUwLTZ53kZTHdN06SbrSUgKt
+	23y89vzoJV4bv1llVihr+4hDqbwDVR/fDHY4Ws1/LZxE3Nx2dtkWmU8Z2aCKQlwa1c
+	0I/ZSJIklr1AMijKKmsZSVot+HXJz1SGhcKWSJBTN6IFOfYQMbmeCnCprqsJwdk8/E
+	AeatFXLqK7zglVW7Hi3G83TzTa3PPQcATyvncC/bkaMrtaC6IiPHwbr++YjQXPaFiN
+	9JYTe0gOTy1urn7JhHlS2ZIT2arA+yOSjSI5KMotRu/Tjiv0PkqYC0r6Yt56fUxnIK
+	nzeKOa+TfRim6gX5XCnk9goarTKHnjSe2x+pWNlTDSZq1YrSphWMCHfKd42uvVGCnk
+	d0PtsmjqOqjK4VKAkEhbUXZMx/NGgbwwuEF0F/vd6xnPCvzu/WF612j6xYlBrbel9I
+	QmCd9e2Qz1NPupa8AqtmhEdQ=
+Date: Fri, 23 Aug 2019 11:36:38 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <20190823083221.GA9224@localhost>
-References: <20190821123824.17831-1-bunk@stusta.de>
-	<53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
+To: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Message-ID: <20190823083638.GB9224@localhost>
+References: <20190823052215.3208-1-yuanc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
+In-Reply-To: <20190823052215.3208-1-yuanc.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkmanager: Upgrade 1.18.0 -> 1.18.2
+Subject: Re: [meta-oe] [PATCH] kpatch: upgrade 0.7.1 -> 0.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,22 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 08:32:25 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 08:36:40 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 23, 2019 at 04:12:25PM +0800, Kang Kai wrote:
-> On 2019/8/21 下午8:38, Adrian Bunk wrote:
-> > Remove a generated file with always changing hash from LIC_FILES_CHKSUM.
+On Fri, Aug 23, 2019 at 02:22:15PM +0900, Yuan Chao wrote:
+> Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-kernel/kpatch/kpatch_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> Why not just upgrade to version 1.20.0 which is the latest major release?
+> diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+> index dc247942f..508bddb86 100644
+> --- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+> +++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+> @@ -2,9 +2,9 @@ require kpatch.inc
+>  
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>  
+> -SRCREV = "d7c5810e2a6acacfa5fec1e38d2f75af8e8c818c"
+> +SRCREV = "2a29bc7dea9a7da12705c7b50315eee1acdd9156"
+>  
+> -PV = "0.7.1+git${SRCPV}"
+> +PV = "0.8.0+git${SRCPV}"
+>...
 
-I was just doing the low-effort upgrade on the same stable branch,
-if you want to upgrade to 1.20 then go ahead.
-
-> Regards,
-> Kai
+This is exactly the 0.8.0 release, please set
+  PV = "0.8.0"
 
 cu
 Adrian
