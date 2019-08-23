@@ -1,28 +1,28 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4404F6C1D5
+	by mail.openembedded.org (Postfix) with ESMTP id 378CF7F2BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 05:22:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74142608"
+	Fri, 23 Aug 2019 05:29:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74142958"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 13:22:26 +0800
+	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 13:29:30 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9DFB04CE0873
+	by cn.fujitsu.com (Postfix) with ESMTP id 011D64CE03EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 13:22:23 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
+	Fri, 23 Aug 2019 13:29:28 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 13:22:30 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 13:29:34 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Aug 2019 14:22:15 +0900
-Message-ID: <20190823052215.3208-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+Date: Fri, 23 Aug 2019 13:28:55 +0800
+Message-ID: <20190823052855.30002-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: 9DFB04CE0873.A106E
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 011D64CE03EB.AF2BF
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
 Subject: [meta-oe] [PATCH] kpatch: upgrade 0.7.1 -> 0.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -37,16 +37,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 05:22:27 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 05:29:30 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
  meta-oe/recipes-kernel/kpatch/kpatch_git.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
-index dc247942f..508bddb86 100644
+index dc24794..508bddb 100644
 --- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
 +++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
 @@ -2,9 +2,9 @@ require kpatch.inc
@@ -62,7 +63,7 @@ index dc247942f..508bddb86 100644
  S = "${WORKDIR}/git"
  
 -- 
-2.17.1
+2.7.4
 
 
 
