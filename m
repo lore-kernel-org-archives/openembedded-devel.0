@@ -1,30 +1,25 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D2C9E7F337
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 73A367F292
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 08:47:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74155250"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 16:47:50 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 93A504CE03FE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 16:47:42 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 16:47:48 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Aug 2019 17:47:35 +0900
-Message-ID: <20190823084735.5606-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+	Fri, 23 Aug 2019 10:06:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7NA62BA017854
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 23 Aug 2019 03:06:03 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 23 Aug 2019 03:06:02 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Fri, 23 Aug 2019 18:05:09 +0800
+Message-ID: <1566554709-22088-3-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1566554709-22088-1-git-send-email-hongxu.jia@windriver.com>
+References: <1566554709-22088-1-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: 93A504CE03FE.ADBDD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH v2] kpatch: upgrade 0.7.1 -> 0.8.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 3/3] multipath-tools: lvm2 to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 08:47:51 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 10:06:02 -0000
 Content-Type: text/plain
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Since commit [libdevmapper/lvm2: force recipe libdevmapper to populate
+sysroot only] applied, if recipe DEPENDS on libdevmapper, we have to
+add lvm2 to DEPENDS
+
+Remove duplicated bash from RDEPENDS
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-kernel/kpatch/kpatch_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
-index dc247942f..6326a2538 100644
---- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
-+++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
-@@ -2,9 +2,9 @@ require kpatch.inc
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
+index 55866e9..8d86e60 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.1.bb
+@@ -19,6 +19,7 @@ and deletion"
+ HOMEPAGE = "http://christophe.varoqui.free.fr/"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "libdevmapper \
++           lvm2 \
+            libaio \
+            liburcu \
+            readline \
+@@ -108,4 +109,4 @@ FILES_kpartx = "${base_sbindir}/kpartx \
+                 ${nonarch_libdir}/udev/kpartx_id \
+                "
  
--SRCREV = "d7c5810e2a6acacfa5fec1e38d2f75af8e8c818c"
-+SRCREV = "2a29bc7dea9a7da12705c7b50315eee1acdd9156"
- 
--PV = "0.7.1+git${SRCPV}"
-+PV = "0.8.0"
- 
- S = "${WORKDIR}/git"
- 
+-RDEPENDS_${PN} += "bash kpartx"
++RDEPENDS_${PN} += "kpartx"
 -- 
-2.17.1
-
-
+2.7.4
 
 
