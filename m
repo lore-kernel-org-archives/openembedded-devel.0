@@ -1,84 +1,33 @@
-Return-Path: <eero.aaltonen@vaisala.com>
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr10057.outbound.protection.outlook.com [40.107.1.57])
-	by mail.openembedded.org (Postfix) with ESMTP id C997F7F284
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 540237F367
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 10:54:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=nEVUSF8KizWuvgGnEcy9zXw3JgNe1V2wwbqYYJC+DJAxFT7EySzEM3k0Ip/znn6czijkRgO/CHsR8XdVZUJL7aiMZF5lQcQUenEDAJVpkLuSYtNzkc8V36qpNSQjfLh0aDRBr1giMqBT48ZewOcADt5l4n29W8fn5oJ/dPwsK/AYxFLIucZvySRQFkyRv3Ndl8rCY7LYi6ik+CXGSMcAoPNo+LIAyvcFGRWYSum3dHZpaKJl4d5OWtz+nNVQUspA089DZMiBcrnW9GzmJNsYqSazi1tylDt7xbEa+tum3St+EzMWGDZgSYVTHDgiRT4TeNCPa9i8SfBQdD1qyx0auQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=Qdv6fdnYDpRWyWpmo0WJkjnOxbUJhb7EAJFHWlut6gc=;
-	b=jOkDwwI63qZ7ak2QWJJ/K0CQyTnzF7GNZysKsb/jxTPlDtC8kx+bA4wkHjXH5uaHvqvo/OyVpKZmk6pTf6cf+ZfADv6U95t0UsUhbqhUn6kMzBNBAz6pGnxn4wd9tecnR2jPJiT0lLXAJuLPSyWLXkS4g8sQwsfYVxeqQNYtwTJ5ZGEJOZuLbFNTIWa9s98MLtWDxG7pZxLqgdSs5HC+yDj4eteKLvhLU/seihD7+gxFYIla4PiiTYsgLsgoVt+PYBHW39sSIYMuf6iJ6bNNKytUvyQoHLgryKvDHSBCsIaSuLOVo7msb/8T0vlnfZUHTDume3kdJKWVvO1s+AO8DQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=vaisala.com;
-	dmarc=pass action=none header.from=vaisala.com; 
-	dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=Qdv6fdnYDpRWyWpmo0WJkjnOxbUJhb7EAJFHWlut6gc=;
-	b=JFZ8e5Eoxna1IaZG6mf0BwCioZvipUNH8WyNt8rRibTOFQr+JD1Y/vPyxecO4O4OiW0ukIDsXf74XZZ1/bkEjnF+ZNA6VIBJxQjP3tdS1HpuH2qzKoW2BYaQaZ3GKzvWY/Z+8c0YxCS8qd5hy9oT8lbvGzVQjkiYoorsbBVUGgU=
-Received: from HE1PR0602MB3436.eurprd06.prod.outlook.com (52.133.4.143) by
-	HE1PR0602MB2809.eurprd06.prod.outlook.com (10.175.32.23) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2178.16; Fri, 23 Aug 2019 10:54:46 +0000
-Received: from HE1PR0602MB3436.eurprd06.prod.outlook.com
-	([fe80::2cf5:efbc:99a9:dd01]) by
-	HE1PR0602MB3436.eurprd06.prod.outlook.com
-	([fe80::2cf5:efbc:99a9:dd01%7]) with mapi id 15.20.2178.020;
-	Fri, 23 Aug 2019 10:54:46 +0000
-From: Aaltonen Eero <eero.aaltonen@vaisala.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
-Thread-Index: AQHVWaEtPmAHeHqTnEGoWqnSUmSmew==
-Date: Fri, 23 Aug 2019 10:54:46 +0000
-Message-ID: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: HE1PR05CA0247.eurprd05.prod.outlook.com
-	(2603:10a6:3:fb::23) To HE1PR0602MB3436.eurprd06.prod.outlook.com
-	(2603:10a6:7:89::15)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=eero.aaltonen@vaisala.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.17.1
-x-originating-ip: [193.143.230.131]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: d2ac4eb3-c7e2-40ce-b882-08d727b84fb0
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);
-	SRVR:HE1PR0602MB2809; 
-x-ms-traffictypediagnostic: HE1PR0602MB2809:
-x-ms-exchange-purlcount: 2
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <HE1PR0602MB28092117D916EEA0F849B76AF5A40@HE1PR0602MB2809.eurprd06.prod.outlook.com>
-x-tenant-id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-forefront-prvs: 0138CD935C
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(136003)(39860400002)(396003)(346002)(376002)(366004)(199004)(189003)(53936002)(66066001)(25786009)(1076003)(316002)(14454004)(6436002)(6486002)(6506007)(107886003)(386003)(4326008)(2351001)(2501003)(6916009)(486006)(966005)(2616005)(66946007)(26005)(66446008)(64756008)(66556008)(66476007)(476003)(186003)(2906002)(99286004)(36756003)(6306002)(52116002)(305945005)(71190400001)(71200400001)(5640700003)(478600001)(8676002)(256004)(102836004)(19627235002)(5660300002)(81166006)(81156014)(8936002)(86362001)(6116002)(6512007)(7736002)(3846002)(50226002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:HE1PR0602MB2809;
-	H:HE1PR0602MB3436.eurprd06.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: vaisala.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: jTlOFhzeOMhgyTsyZOo6JhGINK/0sGsNMDl79GAFwVygGWDtZbMBZXBLzP+4z8ACVqfGVoM3ed+w7sUYqmIK1b1Cz+7SYBDrPJUFOC5MrZ761iB5tG6Z+9t2Uxy/mxv6gJ8ujPPHmNMN7CkEJ5F6rNqxxkI1wRSexcpJqgoo4jA/FD5tpcgHREXl59u9OhEH0+/6UEgZ7HwH1IPZ8ZfV9Qsv/+5hmQ+VFc9uAa/m+nYmGUlxFzaYreqPEPHuxBMxHjM/3hjK6d7mh4cIYfJlVz9MmbYz9H4ozq5skY7DRmPe4ENi+nMmWbJeM2iW+Y03sh/+T5KyWosqsJdHbNUAnIXD2ohsqYPVqN2jHBs1ONhsWZbNlVIQg6z6el5wrvV3fUGI66AMN+D91Ji9I4lQw4KqrO4rHobFw+um/RFxQFY=
-MIME-Version: 1.0
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2ac4eb3-c7e2-40ce-b882-08d727b84fb0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Aug 2019 10:54:46.2021 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: T57eHI6osnHlCYBW7iL1Piag/6eH2B2Ke2SRcN23NOMZAc0ktcSfO3NYFWvufga5AK/5o1a+zw9mjYznub0Nr/dZjTVXfX03KAiL3vJ9Oh4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0602MB2809
-Subject: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
+	Fri, 23 Aug 2019 15:45:37 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46FQhy1DGTz56
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Aug 2019 17:45:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1566575138;
+	bh=1vHEB7PKwkKdoak5yJh+kfuEvWEuAzZsjDbShAnY6Ic=;
+	h=From:To:Subject:Date:From;
+	b=sHAaDzVLI5oTMFjTH+GiItdALsUvzFHG+YAEaaEKwGhsae2oOZ8ohhGPTsrE2LqTK
+	aBQpWZm3Bi1ozV9mYgDtXIpq00ch2MPCxfccXHqLojp5aIf+rOr+afbgP14ctvH6k8
+	v/n0HC/5mMqpz3Y/bvebomCla3WDhKCwa20PhkjPYlYyAp3XtXWB8YNe0tOfrZ6mov
+	syIfQM3nPLfwZYZzgpHfKfwKo5+mguerJjq0DJd+G7VA8dzZKzzvoB8XouU62q4M+U
+	7QMBhzyPFfhSNVALugJ0wG2TeTLec6nK1TiIWVnlJTX4XFrki3bgolrKXBcVmIa55j
+	Hj82GA6ytcbNwmifD/nX1lzlguw1VwDrfJIcSevWYqk5138k0xDnJZ0ptZFRmpKnfR
+	yGyL+ovJnh0d0qMObmFjujB6Uv+mqaPtJU0Y2xw5XsRymf+gZxg5SpgcnJPhwXTadd
+	TtaPs5cpJtnF2tNnyFPnQ+kWqmIVELx74WAoNddWn1XNOOFYkxfkh5ExnQ+TNNRI1f
+	08eS5fioqZ8dGp9oWsO3xDPdmPWl1MGZCUCnOj2j3vyTXCUaEsE2YX4JhZ/Bj3XwLb
+	XYIlJoR6SZeg9xPk9o3j6vQ0S0ZR2OuXANoqErZpqVLPC95is+M3TK6oZ5q3dQ/A61
+	+XHfFO22w/PClc1OEgzs2aUc=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Aug 2019 18:45:37 +0300
+Message-Id: <20190823154537.12461-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] xmlsec1: Import from meta-security
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -91,110 +40,377 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 10:54:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Aug 2019 15:45:38 -0000
 
-Upstream is at
-https://github.com/docopt/docopt.cpp/
+This is not a security tool, it is a support library that
+is needed for vgauth in open-vm-tools and can also be used
+by libreoffice.
 
-Installs with a small build modification to pass QA checks.
-
-Signed-off-by: Eero Aaltonen <eero.aaltonen@vaisala.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- file                                          |  0
- ...01-Set-library-VERSION-and-SOVERSION.patch | 31 +++++++++++++++++++
- .../docopt.cpp/docopt.cpp_git.bb              | 29 +++++++++++++++++
- 3 files changed, 60 insertions(+)
- create mode 100644 file
- create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set=
--library-VERSION-and-SOVERSION.patch
- create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+ .../xmlsec1/change-finding-path-of-nss.patch  | 67 +++++++++++++++
+ .../xmlsec1/xmlsec1/fix-ltmain.sh.patch       | 26 ++++++
+ .../xmlsec1/xmlsec1/makefile-ptest.patch      | 40 +++++++++
+ .../recipes-support/xmlsec1/xmlsec1/run-ptest | 85 +++++++++++++++++++
+ ...examples-allow-build-in-separate-dir.patch | 30 +++++++
+ .../recipes-support/xmlsec1/xmlsec1_1.2.28.bb | 64 ++++++++++++++
+ 6 files changed, 312 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
+ create mode 100755 meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
 
-diff --git a/file b/file
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
 new file mode 100644
-index 000000000..e69de29bb
-diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-librar=
-y-VERSION-and-SOVERSION.patch b/meta-oe/recipes-extended/docopt.cpp/docopt.=
-cpp/0001-Set-library-VERSION-and-SOVERSION.patch
-new file mode 100644
-index 000000000..d4c776569
+index 000000000..1cec47fca
 --- /dev/null
-+++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSI=
-ON-and-SOVERSION.patch
-@@ -0,0 +1,31 @@
-+From a47ca75702318ff43446c70120f7aacde4ccee1b Mon Sep 17 00:00:00 2001
-+From: Eero Aaltonen <eero.aaltonen@vaisala.com>
-+Date: Thu, 20 Jun 2019 16:21:20 +0300
-+Subject: [PATCH] Set library VERSION and SOVERSION
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
+@@ -0,0 +1,67 @@
++From c1c980a95d85bcaf8802524d6148783522b300d7 Mon Sep 17 00:00:00 2001
++From: Yulong Pei <Yulong.pei@windriver.com>
++Date: Wed, 21 Jul 2010 22:33:43 +0800
++Subject: [PATCH] change finding path of nss and nspr
 +
-+With soversion and version specified, `install` target will install the
-+library with the specified version and also create the proper symlink.
++Upstream-Status: Pending
 +
-+Upstream-Status: Submitted [https://github.com/docopt/docopt.cpp/pull/112]
-+but unlikely to be merged soon as it is a duplicate of
-+[https://github.com/docopt/docopt.cpp/pull/112] which has been **Open**
-+since 2016-12-08.
++Signed-off-by: Yulong Pei <Yulong.pei@windriver.com>
++Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +---
-+ CMakeLists.txt | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ configure.ac | 20 ++++++++++----------
++ 1 file changed, 10 insertions(+), 10 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 23da468..feff32e 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -50,6 +50,10 @@ else()
-+     set_target_properties(docopt_o PROPERTIES POSITION_INDEPENDENT_CODE T=
-RUE)
-+=20
-+     add_library(docopt SHARED $<TARGET_OBJECTS:docopt_o>)
-++	set_target_properties(docopt PROPERTIES
-++		VERSION ${PROJECT_VERSION}
-++		SOVERSION ${PROJECT_VERSION_MAJOR}
-++		)
-+     add_library(docopt_s STATIC $<TARGET_OBJECTS:docopt_o>)
-+ endif()
-+=20
-diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb b/meta-o=
-e/recipes-extended/docopt.cpp/docopt.cpp_git.bb
++diff --git a/configure.ac b/configure.ac
++index 951b3eb..1fdeb0f 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -866,10 +866,10 @@ MOZILLA_MIN_VERSION="1.4"
++ NSS_CRYPTO_LIB="$XMLSEC_PACKAGE-nss"
++ NSPR_PACKAGE=mozilla-nspr
++ NSS_PACKAGE=mozilla-nss
++-NSPR_INCLUDE_MARKER="nspr/nspr.h"
+++NSPR_INCLUDE_MARKER="nspr.h"
++ NSPR_LIB_MARKER="libnspr4$shrext"
++ NSPR_LIBS_LIST="-lnspr4 -lplds4 -lplc4"
++-NSS_INCLUDE_MARKER="nss/nss.h"
+++NSS_INCLUDE_MARKER="nss3/nss.h"
++ NSS_LIB_MARKER="libnss3$shrext"
++ NSS_LIBS_LIST="-lnss3 -lsmime3"
++ 
++@@ -898,24 +898,24 @@ fi
++ dnl Priority 1: User specifies the path to installation
++ if test "z$NSPR_FOUND" = "zno" -a "z$with_nspr" != "z" -a "z$with_nspr" != "zyes" ; then
++     AC_MSG_CHECKING(for nspr library installation in "$with_nspr" folder)
++-    if test -f "$with_nspr/include/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/lib/$NSPR_LIB_MARKER" ; then
++-        NSPR_INCLUDE_PATH="$with_nspr/include"
++-        NSPR_LIB_PATH="$with_nspr/lib"
+++    if test -f "$with_nspr/usr/include/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/${libdir}/$NSPR_LIB_MARKER" ; then
+++        NSPR_INCLUDE_PATH="$with_nspr/usr/include"
+++        NSPR_LIB_PATH="$with_nspr/${libdir}"
++         NSPR_FOUND="yes"
++         AC_MSG_RESULT([yes])
++     else
++-        AC_MSG_ERROR([not found: "$with_nspr/include/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/lib/$NSPR_LIB_MARKER" files don't exist), typo?])
+++        AC_MSG_ERROR([not found: "$with_nspr/usr/include/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/${libdir}/$NSPR_LIB_MARKER" files don't exist), typo?])
++     fi
++ fi
++ if test "z$NSS_FOUND" = "zno" -a "z$with_nss" != "z" -a "z$with_nss" != "zyes" ; then
++     AC_MSG_CHECKING(for nss library installation in "$with_nss" folder)
++-    if test -f "$with_nss/include/$NSS_INCLUDE_MARKER" -a -f "$with_nss/lib/$NSS_LIB_MARKER" ; then
++-        NSS_INCLUDE_PATH="$with_nss/include"
++-        NSS_LIB_PATH="$with_nss/lib"
+++    if test -f "$with_nss/usr/include/$NSS_INCLUDE_MARKER" -a -f "$with_nss/${libdir}/$NSS_LIB_MARKER" ; then
+++        NSS_INCLUDE_PATH="$with_nss/usr/include/nss3"
+++        NSS_LIB_PATH="$with_nss/${libdir}"
++         NSS_FOUND="yes"
++         AC_MSG_RESULT([yes])
++     else
++-        AC_MSG_ERROR([not found: "$with_nss/include/$NSS_INCLUDE_MARKER" and/or "$with_nss/lib/$NSS_LIB_MARKER" files don't exist), typo?])
+++        AC_MSG_ERROR([not found: "$with_nss/usr/include/$NSS_INCLUDE_MARKER" and/or "$with_nss/${libdir}/$NSS_LIB_MARKER" files don't exist), typo?])
++     fi
++ fi
++ 
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
 new file mode 100644
-index 000000000..95c60617c
+index 000000000..af598fe74
 --- /dev/null
-+++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
-@@ -0,0 +1,29 @@
-+SUMMARY =3D "C++11 port of docopt command-line interface description langu=
-age and parser"
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
+@@ -0,0 +1,26 @@
++From 847dc52f5a50e34ee4d6e3dc2c708711747a58ca Mon Sep 17 00:00:00 2001
++From: Yulong Pei <Yulong.pei@windriver.com>
++Date: Thu, 21 Jan 2010 14:11:20 +0800
++Subject: [PATCH] force to use our own libtool
 +
-+DESCRIPTION =3D "docopt is library that lets you define a command line int=
-erface with the \
-+utility argument syntax that has been used by command line utilities for \
-+decades (formalized in POSIX.1-2017). From the description, docopt \
-+automatically generates a parser for the command line arguments."
++Upstream-Status: Inappropriate [ OE specific ]
 +
-+HOMEPAGE =3D "https://github.com/docopt/docopt.cpp"
++Signed-off-by: Yulong Pei <Yulong.pei@windriver.com>
 +
-+LICENSE =3D "MIT | BSL-1.0"
-+LIC_FILES_CHKSUM =3D "\
-+    file://LICENSE-Boost-1.0;md5=3De4224ccaecb14d942c71d31bef20d78c \
-+    file://LICENSE-MIT;md5=3D4b242fd9ef20207e18286d73da8a6677 \
-+"
++---
++ ltmain.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+DEPENDS =3D "boost"
-+SRCREV =3D "3dd23e3280f213bacefdf5fcb04857bf52e90917"
-+PV =3D "0.6.2+git${SRCPV}"
++diff --git a/ltmain.sh b/ltmain.sh
++index 147d758..a61f16b 100644
++--- a/ltmain.sh
+++++ b/ltmain.sh
++@@ -6969,7 +6969,7 @@ func_mode_link ()
++ 	dir=$func_resolve_sysroot_result
++ 	# We need an absolute path.
++ 	case $dir in
++-	[\\/]* | [A-Za-z]:[\\/]*) ;;
+++	=* | [\\/]* | [A-Za-z]:[\\/]*) ;;
++ 	*)
++ 	  absdir=`cd "$dir" && pwd`
++ 	  test -z "$absdir" && \
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
+new file mode 100644
+index 000000000..d45356924
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
+@@ -0,0 +1,40 @@
++From 83a1381e1d6bd1b5ec3df6f7c4bc1f4fe4f860b6 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Thu, 15 Jun 2017 14:44:01 +0800
++Subject: [PATCH] xmlsec1: add new recipe
 +
-+SRC_URI =3D "\
-+    git://git@github.com/docopt/docopt.cpp.git;protocol=3Dssh \
-+    file://0001-Set-library-VERSION-and-SOVERSION.patch \
-+"
++This enables the building of the examples directory
++and it's installed as ptest.
 +
-+S =3D "${WORKDIR}/git"
++Upstream-Status: Inappropriate [ OE ptest specific ]
 +
-+inherit cmake gitpkgv
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 +
-+PKGV =3D "0.6.2+git${GITPKGV}"
---=20
++---
++ examples/Makefile | 12 ++++++++++--
++ 1 file changed, 10 insertions(+), 2 deletions(-)
++
++diff --git a/examples/Makefile b/examples/Makefile
++index 89b1d61..c1cbcca 100644
++--- a/examples/Makefile
+++++ b/examples/Makefile
++@@ -8,9 +8,17 @@ PROGRAMS = \
++ 	decrypt1 decrypt2 decrypt3 \
++ 	xmldsigverify
++ 
+++ifndef CC
++ CC	= gcc
++-CFLAGS	+= -g $(shell xmlsec1-config --cflags) -DUNIX_SOCKETS
++-LDLIBS	+= -g $(shell xmlsec1-config --libs)
+++endif
+++
+++CFLAGS  += -I../include -g $(shell PKG_CONFIG_PATH=.. pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
+++LDLIBS += -L../src/.libs -g $(shell PKG_CONFIG_PATH=.. pkg-config --libs xmlsec1 )
+++
+++DESTDIR = /usr/share/xmlsec1
+++install-ptest:
+++	if [ ! -d $(DESTDIR) ]; then mkdir -p $(DESTDIR); fi
+++	cp * $(DESTDIR)
++ 
++ all: $(PROGRAMS)
++ 
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
+new file mode 100755
+index 000000000..a203c38f2
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
+@@ -0,0 +1,85 @@
++#!/bin/sh
++
++check_return() {
++    if [ $? == 0 ]; then
++        echo -e "PASS: $1\n"
++    else
++        echo -e "FAIL: $1\n"
++    fi
++}
++
++echo "---------------------------------------------------"
++echo "Signing a template file..."
++./sign1 sign1-tmpl.xml rsakey.pem > sign1-res.xml
++./verify1 sign1-res.xml rsapub.pem
++check_return sign-tmpl
++
++echo "---------------------------------------------------"
++echo "Signing a dynamicaly created template..."
++./sign2 sign2-doc.xml rsakey.pem > sign2-res.xml
++./verify1 sign2-res.xml rsapub.pem
++check_return sign-dynamic-templ
++
++echo "---------------------------------------------------"
++echo "Signing with X509 certificate..."
++./sign3 sign3-doc.xml rsakey.pem rsacert.pem > sign3-res.xml
++./verify3 sign3-res.xml ca2cert.pem cacert.pem
++check_return sign-x509
++
++echo "---------------------------------------------------"
++echo "Verifying a signature with a single key..."
++./verify1 sign1-res.xml rsapub.pem
++./verify1 sign2-res.xml rsapub.pem
++check_return verify-single-key
++
++echo "---------------------------------------------------"
++echo "Verifying a signature with keys manager..."
++./verify2 sign1-res.xml rsapub.pem
++./verify2 sign2-res.xml rsapub.pem
++check_return verify-keys-manager
++
++echo "---------------------------------------------------"
++echo "Verifying a signature with X509 certificates..."
++./verify3 sign3-res.xml ca2cert.pem cacert.pem
++check_return verify-x509
++
++echo "---------------------------------------------------"
++echo "Verifying a signature with additional restrictions..."
++./verify4 verify4-res.xml ca2cert.pem cacert.pem
++check_return verify-res
++
++echo "---------------------------------------------------"
++echo "Encrypting data with a template file..."
++./encrypt1 encrypt1-tmpl.xml deskey.bin > encrypt1-res.xml
++./decrypt1 encrypt1-res.xml deskey.bin
++check_return encrypt-tmpl
++
++echo "---------------------------------------------------"
++echo "Encrypting data with a dynamicaly created template..."
++./encrypt2 encrypt2-doc.xml deskey.bin > encrypt2-res.xml
++./decrypt1 encrypt2-res.xml deskey.bin
++check_return encrypt-dynamic-tmpl
++
++echo "---------------------------------------------------"
++echo "Encrypting data with a session key..."
++./encrypt3 encrypt3-doc.xml rsakey.pem > encrypt3-res.xml
++./decrypt3 encrypt3-res.xml
++check_return encrypt-session-key
++
++echo "---------------------------------------------------"
++echo "Decrypting data with a single key..."
++./decrypt1 encrypt1-res.xml deskey.bin
++./decrypt1 encrypt2-res.xml deskey.bin
++check_return encrypt-single-key
++
++echo "---------------------------------------------------"
++echo "Decrypting data with keys manager..."
++./decrypt2 encrypt1-res.xml deskey.bin
++./decrypt2 encrypt2-res.xml deskey.bin
++check_return encrypt-keys-manager
++
++echo "---------------------------------------------------"
++echo "Writing a custom keys manager..."
++./decrypt3 encrypt1-res.xml
++./decrypt3 encrypt2-res.xml
++check_return write-keys-manager
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
+new file mode 100644
+index 000000000..8b2533ed9
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
+@@ -0,0 +1,30 @@
++From 0c38c6864e7ba8f53a657d87894f24374a6a4932 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Tue, 30 Dec 2014 11:18:17 +0800
++Subject: [PATCH] examples: allow build in separate dir
++
++Upstream-Status: Inappropriate [ OE specific ]
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++
++---
++ examples/Makefile | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
++
++diff --git a/examples/Makefile b/examples/Makefile
++index c1cbcca..3f1bd14 100644
++--- a/examples/Makefile
+++++ b/examples/Makefile
++@@ -12,8 +12,10 @@ ifndef CC
++ CC	= gcc
++ endif
++ 
++-CFLAGS  += -I../include -g $(shell PKG_CONFIG_PATH=.. pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
++-LDLIBS += -L../src/.libs -g $(shell PKG_CONFIG_PATH=.. pkg-config --libs xmlsec1 )
+++top_srcdir = ..
+++top_builddir = ..
+++CFLAGS  += -I$(top_srcdir)/include -g $(shell PKG_CONFIG_PATH=$(top_srcdir) pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
+++LDLIBS += -L$(top_builddir)/src/.libs -g $(shell PKG_CONFIG_PATH=$(top_srcdir) pkg-config --libs xmlsec1 )
++ 
++ DESTDIR = /usr/share/xmlsec1
++ install-ptest:
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
+new file mode 100644
+index 000000000..0a4c56aa0
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
+@@ -0,0 +1,64 @@
++SUMMARY = "XML Security Library is a C library based on LibXML2"
++DESCRIPTION = "\
++    XML Security Library is a C library based on \
++    LibXML2 and OpenSSL. The library was created with a goal to support major \
++    XML security standards "XML Digital Signature" and "XML Encryption". \
++    "
++HOMEPAGE = "http://www.aleksey.com/xmlsec/"
++DEPENDS = "libtool libxml2 libxslt zlib"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
++
++SECTION = "libs"
++
++SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
++    file://fix-ltmain.sh.patch \
++    file://change-finding-path-of-nss.patch \
++    file://makefile-ptest.patch \
++    file://xmlsec1-examples-allow-build-in-separate-dir.patch \
++    file://run-ptest \
++    "
++
++SRC_URI[md5sum] = "69b8d95c009a404462e19f335e650241"
++SRC_URI[sha256sum] = "13eec4811ea30e3f0e16a734d1dbf7f9d246a71d540b48d143a07b489f6222d4"
++
++inherit autotools-brokensep ptest pkgconfig
++
++CFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
++CPPFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
++
++PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
++PACKAGECONFIG[gnutls] = ",,gnutls"
++PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
++PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/../.. --with-nspr=${STAGING_LIBDIR}/../..,,nss nspr"
++PACKAGECONFIG[openssl] = ",,openssl"
++PACKAGECONFIG[des] = ",--disable-des,,"
++
++# these can be dynamically loaded with xmlSecCryptoDLLoadLibrary()
++FILES_SOLIBSDEV = "${libdir}/libxmlsec1.so"
++FILES_${PN} += "${libdir}/libxmlsec1-*.so"
++INSANE_SKIP_${PN} = "dev-so"
++
++FILES_${PN}-dev += "${libdir}/xmlsec1Conf.sh"
++FILES_${PN}-dbg += "${PTEST_PATH}/.debug/*"
++
++RDEPENDS_${PN}-ptest += "${PN}-dev"
++INSANE_SKIP_${PN}-ptest += "dev-deps"
++
++PTEST_EXTRA_ARGS = "top_srcdir=${S} top_builddir=${B}"
++
++do_compile_ptest () {
++    oe_runmake -C ${S}/examples ${PTEST_EXTRA_ARGS} all
++}
++
++do_install_append() {
++    for i in ${bindir}/xmlsec1-config ${libdir}/xmlsec1Conf.sh \
++        ${libdir}/pkgconfig/xmlsec1-openssl.pc; do
++        sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
++    done
++}
++
++do_install_ptest () {
++    oe_runmake -C ${S}/examples DESTDIR=${D}${PTEST_PATH} ${PTEST_EXTRA_ARGS} install-ptest
++}
+-- 
 2.17.1
 
 
