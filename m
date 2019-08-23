@@ -1,28 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B32C97F31F
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D2C9E7F337
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 08:43:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7N8hM4b007856
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 23 Aug 2019 01:43:23 -0700 (PDT)
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 23 Aug 2019 01:42:37 -0700
-To: Adrian Bunk <bunk@stusta.de>
-References: <20190821123824.17831-1-bunk@stusta.de>
-	<53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
-	<20190823083221.GA9224@localhost>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <2deee8b3-6374-bf4c-56d1-c2c432d87a48@windriver.com>
-Date: Fri, 23 Aug 2019 16:42:06 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Fri, 23 Aug 2019 08:47:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74155250"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 16:47:50 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 93A504CE03FE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Aug 2019 16:47:42 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 16:47:48 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 Aug 2019 17:47:35 +0900
+Message-ID: <20190823084735.5606-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-In-Reply-To: <20190823083221.GA9224@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkmanager: Upgrade 1.18.0 -> 1.18.2
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: 93A504CE03FE.ADBDD
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH v2] kpatch: upgrade 0.7.1 -> 0.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,32 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 08:43:22 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 23 Aug 2019 08:47:51 -0000
+Content-Type: text/plain
 
-On 2019/8/23 下午4:32, Adrian Bunk wrote:
-> On Fri, Aug 23, 2019 at 04:12:25PM +0800, Kang Kai wrote:
->> On 2019/8/21 下午8:38, Adrian Bunk wrote:
->>> Remove a generated file with always changing hash from LIC_FILES_CHKSUM.
->> Why not just upgrade to version 1.20.0 which is the latest major release?
-> I was just doing the low-effort upgrade on the same stable branch,
-> if you want to upgrade to 1.20 then go ahead.
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-kernel/kpatch/kpatch_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-OK.
-
-Kai
-
-
->
->> Regards,
->> Kai
-> cu
-> Adrian
->
-
+diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+index dc247942f..6326a2538 100644
+--- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
++++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+@@ -2,9 +2,9 @@ require kpatch.inc
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRCREV = "d7c5810e2a6acacfa5fec1e38d2f75af8e8c818c"
++SRCREV = "2a29bc7dea9a7da12705c7b50315eee1acdd9156"
+ 
+-PV = "0.7.1+git${SRCPV}"
++PV = "0.8.0"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-Kai Kang
+2.17.1
+
+
 
 
