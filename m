@@ -1,33 +1,48 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 540237F367
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E6DD87F37D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 15:45:37 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46FQhy1DGTz56
+	Fri, 23 Aug 2019 20:38:52 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id p12so23107878iog.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 17:45:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566575138;
-	bh=1vHEB7PKwkKdoak5yJh+kfuEvWEuAzZsjDbShAnY6Ic=;
-	h=From:To:Subject:Date:From;
-	b=sHAaDzVLI5oTMFjTH+GiItdALsUvzFHG+YAEaaEKwGhsae2oOZ8ohhGPTsrE2LqTK
-	aBQpWZm3Bi1ozV9mYgDtXIpq00ch2MPCxfccXHqLojp5aIf+rOr+afbgP14ctvH6k8
-	v/n0HC/5mMqpz3Y/bvebomCla3WDhKCwa20PhkjPYlYyAp3XtXWB8YNe0tOfrZ6mov
-	syIfQM3nPLfwZYZzgpHfKfwKo5+mguerJjq0DJd+G7VA8dzZKzzvoB8XouU62q4M+U
-	7QMBhzyPFfhSNVALugJ0wG2TeTLec6nK1TiIWVnlJTX4XFrki3bgolrKXBcVmIa55j
-	Hj82GA6ytcbNwmifD/nX1lzlguw1VwDrfJIcSevWYqk5138k0xDnJZ0ptZFRmpKnfR
-	yGyL+ovJnh0d0qMObmFjujB6Uv+mqaPtJU0Y2xw5XsRymf+gZxg5SpgcnJPhwXTadd
-	TtaPs5cpJtnF2tNnyFPnQ+kWqmIVELx74WAoNddWn1XNOOFYkxfkh5ExnQ+TNNRI1f
-	08eS5fioqZ8dGp9oWsO3xDPdmPWl1MGZCUCnOj2j3vyTXCUaEsE2YX4JhZ/Bj3XwLb
-	XYIlJoR6SZeg9xPk9o3j6vQ0S0ZR2OuXANoqErZpqVLPC95is+M3TK6oZ5q3dQ/A61
-	+XHfFO22w/PClc1OEgzs2aUc=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Aug 2019 18:45:37 +0300
-Message-Id: <20190823154537.12461-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] xmlsec1: Import from meta-security
+	Fri, 23 Aug 2019 13:38:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=8W1NGCAWaN6KP1g5DSWvYEgQqEYOTPpJMs2RSXf8fL4=;
+	b=H/Fo114v7bVRUwhovHLscIEtqYQedzf1+v3PH8yDyO3bOx4VZkbk1PnKnq6iPNTYxb
+	PLlRVUt8MaKy3/SUE+WHTeNTM+OGF3Gt2IR6DRnOGgAOW6bj6Rxi/sxhdFueL7PkaOt1
+	JOfCDLyOYRTUGFnXDt461sr8vIIVTiCBzsox20jd9Bltmy7NPco+LOjb1+puFGbxxZPR
+	/HZMz/yEP+nOPIV6gVYoPhhQhHg+ihbChNhd3ORxLFzRzg/Thd3rUZlSiYNF+NH2eMEE
+	8wy5S4fcfvZrhXvyUN5aCqxyiYkMNrczXeGBB+aOc+2nkoidmyBm7Ngz4PZkaJE6YA1/
+	J93A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=8W1NGCAWaN6KP1g5DSWvYEgQqEYOTPpJMs2RSXf8fL4=;
+	b=VZhYGblbSpUa3uGhDbwdUld0yElWI3LtiInzhdmUMTDnh3BX5hyJYdgoOeO5x6LCp3
+	1mpsvWW3q95djP1G65TWzPiG0vnNoLneinDK3GoJ1Y5Q65mCbEbcUvnwtSZutRvw1M5U
+	+/4VPKUDDXTdC4YXzryX7MtlTp1Lb4WNWg7Tn7k+vq2AyOSZUzo2TRF2UDVHJsAUc37M
+	4PhWaDAhQgGyyE9BaBKol5jcEbwWMLmNhRPDByMY0HnMO7TJNlMrP+DhhYLqThKLioZ5
+	rNvTmix5qM05EZWGqkyFKSsFaQyAHkjD8Bn+lXxw5vkpv+5UVmqkCI6bG3DthtBF7Hnd
+	4UKg==
+X-Gm-Message-State: APjAAAW7Lzr10OM9hSNrwDWm73tbXt5CIfBb49sv2GT+4CgmIWZARWbv
+	BzdZh3BOMBZg35VwVBO2MWpNbqrSsxtljeb017s=
+X-Google-Smtp-Source: APXvYqzMTvJj2LJIBprogbE5omn7DMnpL6VhNKk+i5Qkf+hxMFQeQHOplUQbgx7RuFV3v8/LVMKwqTo8gI4gmHpIyEI=
+X-Received: by 2002:a6b:5116:: with SMTP id f22mr136627iob.108.1566592733865; 
+	Fri, 23 Aug 2019 13:38:53 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190816071246.168087-1-kai.kang@windriver.com>
+	<28f7200e-c9ed-e8fd-b067-25731c475981@windriver.com>
+In-Reply-To: <28f7200e-c9ed-e8fd-b067-25731c475981@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 23 Aug 2019 22:38:42 +0200
+Message-ID: <CALbNGRT1Xg_TLMmSusD2ESNvuCF=aD8ONJK7_S3L7s4kZwJ4_g@mail.gmail.com>
+To: Kang Kai <Kai.Kang@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-xfce][Patch] xfce4-datetime-setter: fix compile error and requires distro feature x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,377 +55,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 15:45:38 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 20:38:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is not a security tool, it is a support library that
-is needed for vgauth in open-vm-tools and can also be used
-by libreoffice.
+On Fri, Aug 23, 2019 at 3:59 AM Kang Kai <Kai.Kang@windriver.com> wrote:
+>
+> On 2019/8/16 =E4=B8=8B=E5=8D=883:12, kai.kang@windriver.com wrote:
+> > From: Kai Kang <kai.kang@windriver.com>
+> >
+> > It fails to compile xfce4-datetime-setter occasionally when system load
+> > is high:
+> >
+> > | ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No su=
+ch file or directory
+> > |    42 | #include "cc-datetime-resources.h"
+> > |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
+> > | compilation terminated.
+> >
+> > Update datetime_panel_dep to make sure cc-datetime-resources.h be
+> > generated before including.
+>
+> Hi Andreas,
+>
+> Any comment on this patch please? And I also sent a pull request on githu=
+b.
+>
+> Regards,
+> Kai
+>
+>
+> >
+> > xfce4-datetime-setter depends on libxfce4ui which requires distro
+> > feature 'x11', so make it require 'x11' too.
+> >
+> > Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> > ---
+> >   .../files/fix-inner-dependency.patch          | 28 ++++++++++++++++++=
++
+> >   .../xfce4-datetime-setter_3.32.2.bb           |  7 +++--
+> >   2 files changed, 33 insertions(+), 2 deletions(-)
+> >   create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/files=
+/fix-inner-dependency.patch
+> >
+> > diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inn=
+er-dependency.patch b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fi=
+x-inner-dependency.patch
+> > new file mode 100644
+> > index 000000000..9cccb892f
+> > --- /dev/null
+> > +++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/files/fix-inner-depe=
+ndency.patch
+> > @@ -0,0 +1,28 @@
+> > +It fails to compile xfce4-datetime-setter occasionally when system loa=
+d is high:
+> > +
+> > +| ../git/xfce/main.c:42:10: fatal error: cc-datetime-resources.h: No s=
+uch file or directory
+> > +|    42 | #include "cc-datetime-resources.h"
+> > +|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
+> > +| compilation terminated.
+> > +
+> > +Update datetime_panel_dep to make sure cc-datetime-resources.h be gene=
+rated
+> > +before including.
+> > +
+> > +Upstream-Status: Submitted [https://github.com/schnitzeltony/xfce4-dat=
+etime-setter/pull/2]
+> > +
+> > +Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> > +---
+> > +diff --git a/panels/datetime/meson.build b/panels/datetime/meson.build
+> > +index c5bf39c..241e177 100644
+> > +--- a/panels/datetime/meson.build
+> > ++++ b/panels/datetime/meson.build
+> > +@@ -175,7 +175,8 @@ datetime_panel_lib =3D static_library(
+> > +
+> > + datetime_panel_dep =3D declare_dependency(
+> > +   include_directories: [ common_inc, include_directories('.') ],
+> > +-  link_with: datetime_panel_lib
+> > ++  link_with: datetime_panel_lib,
+> > ++  sources: resources
+> > + )
+> > +
+> > + subdir('po-timezones')
+> > diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetim=
+e-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-dat=
+etime-setter_3.32.2.bb
+> > index d64358537..4d128ac51 100644
+> > --- a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-sette=
+r_3.32.2.bb
+> > +++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-sette=
+r_3.32.2.bb
+> > @@ -6,13 +6,16 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7585998954=
+5e37968a99b631ef42722e"
+> >
+> >   DEPENDS =3D "glib-2.0-native libxfce4ui"
+> >
+> > -SRC_URI =3D "git://github.com/schnitzeltony/xfce4-datetime-setter.git;=
+protocol=3Dhttps"
+> > +SRC_URI =3D "git://github.com/schnitzeltony/xfce4-datetime-setter.git;=
+protocol=3Dhttps \
+> > +           file://fix-inner-dependency.patch \
+> > +"
+> >   SRCREV =3D "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
+> >
+> >   S =3D "${WORKDIR}/git"
+> >
+> >   inherit gettext meson distro_features_check
+> > -REQUIRED_DISTRO_FEATURES =3D "systemd"
+> > +
+> > +REQUIRED_DISTRO_FEATURES =3D "systemd x11"
+> >
+> >   FILES_${PN} +=3D "${datadir}/icons/hicolor"
+> >
+>
+Woops I missed that completely - will check
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../xmlsec1/change-finding-path-of-nss.patch  | 67 +++++++++++++++
- .../xmlsec1/xmlsec1/fix-ltmain.sh.patch       | 26 ++++++
- .../xmlsec1/xmlsec1/makefile-ptest.patch      | 40 +++++++++
- .../recipes-support/xmlsec1/xmlsec1/run-ptest | 85 +++++++++++++++++++
- ...examples-allow-build-in-separate-dir.patch | 30 +++++++
- .../recipes-support/xmlsec1/xmlsec1_1.2.28.bb | 64 ++++++++++++++
- 6 files changed, 312 insertions(+)
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
- create mode 100755 meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
- create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
-
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
-new file mode 100644
-index 000000000..1cec47fca
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/change-finding-path-of-nss.patch
-@@ -0,0 +1,67 @@
-+From c1c980a95d85bcaf8802524d6148783522b300d7 Mon Sep 17 00:00:00 2001
-+From: Yulong Pei <Yulong.pei@windriver.com>
-+Date: Wed, 21 Jul 2010 22:33:43 +0800
-+Subject: [PATCH] change finding path of nss and nspr
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yulong Pei <Yulong.pei@windriver.com>
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ configure.ac | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 951b3eb..1fdeb0f 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -866,10 +866,10 @@ MOZILLA_MIN_VERSION="1.4"
-+ NSS_CRYPTO_LIB="$XMLSEC_PACKAGE-nss"
-+ NSPR_PACKAGE=mozilla-nspr
-+ NSS_PACKAGE=mozilla-nss
-+-NSPR_INCLUDE_MARKER="nspr/nspr.h"
-++NSPR_INCLUDE_MARKER="nspr.h"
-+ NSPR_LIB_MARKER="libnspr4$shrext"
-+ NSPR_LIBS_LIST="-lnspr4 -lplds4 -lplc4"
-+-NSS_INCLUDE_MARKER="nss/nss.h"
-++NSS_INCLUDE_MARKER="nss3/nss.h"
-+ NSS_LIB_MARKER="libnss3$shrext"
-+ NSS_LIBS_LIST="-lnss3 -lsmime3"
-+ 
-+@@ -898,24 +898,24 @@ fi
-+ dnl Priority 1: User specifies the path to installation
-+ if test "z$NSPR_FOUND" = "zno" -a "z$with_nspr" != "z" -a "z$with_nspr" != "zyes" ; then
-+     AC_MSG_CHECKING(for nspr library installation in "$with_nspr" folder)
-+-    if test -f "$with_nspr/include/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/lib/$NSPR_LIB_MARKER" ; then
-+-        NSPR_INCLUDE_PATH="$with_nspr/include"
-+-        NSPR_LIB_PATH="$with_nspr/lib"
-++    if test -f "$with_nspr/usr/include/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/${libdir}/$NSPR_LIB_MARKER" ; then
-++        NSPR_INCLUDE_PATH="$with_nspr/usr/include"
-++        NSPR_LIB_PATH="$with_nspr/${libdir}"
-+         NSPR_FOUND="yes"
-+         AC_MSG_RESULT([yes])
-+     else
-+-        AC_MSG_ERROR([not found: "$with_nspr/include/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/lib/$NSPR_LIB_MARKER" files don't exist), typo?])
-++        AC_MSG_ERROR([not found: "$with_nspr/usr/include/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/${libdir}/$NSPR_LIB_MARKER" files don't exist), typo?])
-+     fi
-+ fi
-+ if test "z$NSS_FOUND" = "zno" -a "z$with_nss" != "z" -a "z$with_nss" != "zyes" ; then
-+     AC_MSG_CHECKING(for nss library installation in "$with_nss" folder)
-+-    if test -f "$with_nss/include/$NSS_INCLUDE_MARKER" -a -f "$with_nss/lib/$NSS_LIB_MARKER" ; then
-+-        NSS_INCLUDE_PATH="$with_nss/include"
-+-        NSS_LIB_PATH="$with_nss/lib"
-++    if test -f "$with_nss/usr/include/$NSS_INCLUDE_MARKER" -a -f "$with_nss/${libdir}/$NSS_LIB_MARKER" ; then
-++        NSS_INCLUDE_PATH="$with_nss/usr/include/nss3"
-++        NSS_LIB_PATH="$with_nss/${libdir}"
-+         NSS_FOUND="yes"
-+         AC_MSG_RESULT([yes])
-+     else
-+-        AC_MSG_ERROR([not found: "$with_nss/include/$NSS_INCLUDE_MARKER" and/or "$with_nss/lib/$NSS_LIB_MARKER" files don't exist), typo?])
-++        AC_MSG_ERROR([not found: "$with_nss/usr/include/$NSS_INCLUDE_MARKER" and/or "$with_nss/${libdir}/$NSS_LIB_MARKER" files don't exist), typo?])
-+     fi
-+ fi
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
-new file mode 100644
-index 000000000..af598fe74
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/fix-ltmain.sh.patch
-@@ -0,0 +1,26 @@
-+From 847dc52f5a50e34ee4d6e3dc2c708711747a58ca Mon Sep 17 00:00:00 2001
-+From: Yulong Pei <Yulong.pei@windriver.com>
-+Date: Thu, 21 Jan 2010 14:11:20 +0800
-+Subject: [PATCH] force to use our own libtool
-+
-+Upstream-Status: Inappropriate [ OE specific ]
-+
-+Signed-off-by: Yulong Pei <Yulong.pei@windriver.com>
-+
-+---
-+ ltmain.sh | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ltmain.sh b/ltmain.sh
-+index 147d758..a61f16b 100644
-+--- a/ltmain.sh
-++++ b/ltmain.sh
-+@@ -6969,7 +6969,7 @@ func_mode_link ()
-+ 	dir=$func_resolve_sysroot_result
-+ 	# We need an absolute path.
-+ 	case $dir in
-+-	[\\/]* | [A-Za-z]:[\\/]*) ;;
-++	=* | [\\/]* | [A-Za-z]:[\\/]*) ;;
-+ 	*)
-+ 	  absdir=`cd "$dir" && pwd`
-+ 	  test -z "$absdir" && \
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
-new file mode 100644
-index 000000000..d45356924
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/makefile-ptest.patch
-@@ -0,0 +1,40 @@
-+From 83a1381e1d6bd1b5ec3df6f7c4bc1f4fe4f860b6 Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Thu, 15 Jun 2017 14:44:01 +0800
-+Subject: [PATCH] xmlsec1: add new recipe
-+
-+This enables the building of the examples directory
-+and it's installed as ptest.
-+
-+Upstream-Status: Inappropriate [ OE ptest specific ]
-+
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+---
-+ examples/Makefile | 12 ++++++++++--
-+ 1 file changed, 10 insertions(+), 2 deletions(-)
-+
-+diff --git a/examples/Makefile b/examples/Makefile
-+index 89b1d61..c1cbcca 100644
-+--- a/examples/Makefile
-++++ b/examples/Makefile
-+@@ -8,9 +8,17 @@ PROGRAMS = \
-+ 	decrypt1 decrypt2 decrypt3 \
-+ 	xmldsigverify
-+ 
-++ifndef CC
-+ CC	= gcc
-+-CFLAGS	+= -g $(shell xmlsec1-config --cflags) -DUNIX_SOCKETS
-+-LDLIBS	+= -g $(shell xmlsec1-config --libs)
-++endif
-++
-++CFLAGS  += -I../include -g $(shell PKG_CONFIG_PATH=.. pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
-++LDLIBS += -L../src/.libs -g $(shell PKG_CONFIG_PATH=.. pkg-config --libs xmlsec1 )
-++
-++DESTDIR = /usr/share/xmlsec1
-++install-ptest:
-++	if [ ! -d $(DESTDIR) ]; then mkdir -p $(DESTDIR); fi
-++	cp * $(DESTDIR)
-+ 
-+ all: $(PROGRAMS)
-+ 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
-new file mode 100755
-index 000000000..a203c38f2
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
-@@ -0,0 +1,85 @@
-+#!/bin/sh
-+
-+check_return() {
-+    if [ $? == 0 ]; then
-+        echo -e "PASS: $1\n"
-+    else
-+        echo -e "FAIL: $1\n"
-+    fi
-+}
-+
-+echo "---------------------------------------------------"
-+echo "Signing a template file..."
-+./sign1 sign1-tmpl.xml rsakey.pem > sign1-res.xml
-+./verify1 sign1-res.xml rsapub.pem
-+check_return sign-tmpl
-+
-+echo "---------------------------------------------------"
-+echo "Signing a dynamicaly created template..."
-+./sign2 sign2-doc.xml rsakey.pem > sign2-res.xml
-+./verify1 sign2-res.xml rsapub.pem
-+check_return sign-dynamic-templ
-+
-+echo "---------------------------------------------------"
-+echo "Signing with X509 certificate..."
-+./sign3 sign3-doc.xml rsakey.pem rsacert.pem > sign3-res.xml
-+./verify3 sign3-res.xml ca2cert.pem cacert.pem
-+check_return sign-x509
-+
-+echo "---------------------------------------------------"
-+echo "Verifying a signature with a single key..."
-+./verify1 sign1-res.xml rsapub.pem
-+./verify1 sign2-res.xml rsapub.pem
-+check_return verify-single-key
-+
-+echo "---------------------------------------------------"
-+echo "Verifying a signature with keys manager..."
-+./verify2 sign1-res.xml rsapub.pem
-+./verify2 sign2-res.xml rsapub.pem
-+check_return verify-keys-manager
-+
-+echo "---------------------------------------------------"
-+echo "Verifying a signature with X509 certificates..."
-+./verify3 sign3-res.xml ca2cert.pem cacert.pem
-+check_return verify-x509
-+
-+echo "---------------------------------------------------"
-+echo "Verifying a signature with additional restrictions..."
-+./verify4 verify4-res.xml ca2cert.pem cacert.pem
-+check_return verify-res
-+
-+echo "---------------------------------------------------"
-+echo "Encrypting data with a template file..."
-+./encrypt1 encrypt1-tmpl.xml deskey.bin > encrypt1-res.xml
-+./decrypt1 encrypt1-res.xml deskey.bin
-+check_return encrypt-tmpl
-+
-+echo "---------------------------------------------------"
-+echo "Encrypting data with a dynamicaly created template..."
-+./encrypt2 encrypt2-doc.xml deskey.bin > encrypt2-res.xml
-+./decrypt1 encrypt2-res.xml deskey.bin
-+check_return encrypt-dynamic-tmpl
-+
-+echo "---------------------------------------------------"
-+echo "Encrypting data with a session key..."
-+./encrypt3 encrypt3-doc.xml rsakey.pem > encrypt3-res.xml
-+./decrypt3 encrypt3-res.xml
-+check_return encrypt-session-key
-+
-+echo "---------------------------------------------------"
-+echo "Decrypting data with a single key..."
-+./decrypt1 encrypt1-res.xml deskey.bin
-+./decrypt1 encrypt2-res.xml deskey.bin
-+check_return encrypt-single-key
-+
-+echo "---------------------------------------------------"
-+echo "Decrypting data with keys manager..."
-+./decrypt2 encrypt1-res.xml deskey.bin
-+./decrypt2 encrypt2-res.xml deskey.bin
-+check_return encrypt-keys-manager
-+
-+echo "---------------------------------------------------"
-+echo "Writing a custom keys manager..."
-+./decrypt3 encrypt1-res.xml
-+./decrypt3 encrypt2-res.xml
-+check_return write-keys-manager
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
-new file mode 100644
-index 000000000..8b2533ed9
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/xmlsec1-examples-allow-build-in-separate-dir.patch
-@@ -0,0 +1,30 @@
-+From 0c38c6864e7ba8f53a657d87894f24374a6a4932 Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Tue, 30 Dec 2014 11:18:17 +0800
-+Subject: [PATCH] examples: allow build in separate dir
-+
-+Upstream-Status: Inappropriate [ OE specific ]
-+
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+---
-+ examples/Makefile | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/examples/Makefile b/examples/Makefile
-+index c1cbcca..3f1bd14 100644
-+--- a/examples/Makefile
-++++ b/examples/Makefile
-+@@ -12,8 +12,10 @@ ifndef CC
-+ CC	= gcc
-+ endif
-+ 
-+-CFLAGS  += -I../include -g $(shell PKG_CONFIG_PATH=.. pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
-+-LDLIBS += -L../src/.libs -g $(shell PKG_CONFIG_PATH=.. pkg-config --libs xmlsec1 )
-++top_srcdir = ..
-++top_builddir = ..
-++CFLAGS  += -I$(top_srcdir)/include -g $(shell PKG_CONFIG_PATH=$(top_srcdir) pkg-config --cflags xmlsec1 ) -DUNIX_SOCKETS
-++LDLIBS += -L$(top_builddir)/src/.libs -g $(shell PKG_CONFIG_PATH=$(top_srcdir) pkg-config --libs xmlsec1 )
-+ 
-+ DESTDIR = /usr/share/xmlsec1
-+ install-ptest:
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
-new file mode 100644
-index 000000000..0a4c56aa0
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.28.bb
-@@ -0,0 +1,64 @@
-+SUMMARY = "XML Security Library is a C library based on LibXML2"
-+DESCRIPTION = "\
-+    XML Security Library is a C library based on \
-+    LibXML2 and OpenSSL. The library was created with a goal to support major \
-+    XML security standards "XML Digital Signature" and "XML Encryption". \
-+    "
-+HOMEPAGE = "http://www.aleksey.com/xmlsec/"
-+DEPENDS = "libtool libxml2 libxslt zlib"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
-+
-+SECTION = "libs"
-+
-+SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-+    file://fix-ltmain.sh.patch \
-+    file://change-finding-path-of-nss.patch \
-+    file://makefile-ptest.patch \
-+    file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-+    file://run-ptest \
-+    "
-+
-+SRC_URI[md5sum] = "69b8d95c009a404462e19f335e650241"
-+SRC_URI[sha256sum] = "13eec4811ea30e3f0e16a734d1dbf7f9d246a71d540b48d143a07b489f6222d4"
-+
-+inherit autotools-brokensep ptest pkgconfig
-+
-+CFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
-+CPPFLAGS += "-I${STAGING_INCDIR}/nspr4 -I${STAGING_INCDIR}/nss3"
-+
-+PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
-+PACKAGECONFIG[gnutls] = ",,gnutls"
-+PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
-+PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/../.. --with-nspr=${STAGING_LIBDIR}/../..,,nss nspr"
-+PACKAGECONFIG[openssl] = ",,openssl"
-+PACKAGECONFIG[des] = ",--disable-des,,"
-+
-+# these can be dynamically loaded with xmlSecCryptoDLLoadLibrary()
-+FILES_SOLIBSDEV = "${libdir}/libxmlsec1.so"
-+FILES_${PN} += "${libdir}/libxmlsec1-*.so"
-+INSANE_SKIP_${PN} = "dev-so"
-+
-+FILES_${PN}-dev += "${libdir}/xmlsec1Conf.sh"
-+FILES_${PN}-dbg += "${PTEST_PATH}/.debug/*"
-+
-+RDEPENDS_${PN}-ptest += "${PN}-dev"
-+INSANE_SKIP_${PN}-ptest += "dev-deps"
-+
-+PTEST_EXTRA_ARGS = "top_srcdir=${S} top_builddir=${B}"
-+
-+do_compile_ptest () {
-+    oe_runmake -C ${S}/examples ${PTEST_EXTRA_ARGS} all
-+}
-+
-+do_install_append() {
-+    for i in ${bindir}/xmlsec1-config ${libdir}/xmlsec1Conf.sh \
-+        ${libdir}/pkgconfig/xmlsec1-openssl.pc; do
-+        sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
-+    done
-+}
-+
-+do_install_ptest () {
-+    oe_runmake -C ${S}/examples DESTDIR=${D}${PTEST_PATH} ${PTEST_EXTRA_ARGS} install-ptest
-+}
--- 
-2.17.1
-
+Andreas
 
