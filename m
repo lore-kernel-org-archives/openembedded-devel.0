@@ -1,30 +1,25 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FE9D7F324
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B2997F32F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 06:22:58 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,420,1559491200"; d="scan'208";a="74145847"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Aug 2019 14:22:48 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id B51254CE03FC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2019 14:22:42 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 23 Aug 2019 14:22:48 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Aug 2019 15:22:35 +0900
-Message-ID: <20190823062235.4250-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
+	Fri, 23 Aug 2019 07:44:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7N7iJ4i029771
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 23 Aug 2019 00:44:19 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 23 Aug 2019 00:44:08 -0700
+From: <kai.kang@windriver.com>
+To: <schnitzeltony@gmail.com>, <raj.khem@gmail.com>
+Date: Fri, 23 Aug 2019 03:43:33 -0400
+Message-ID: <20190823074335.162124-2-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
+In-Reply-To: <20190823074335.162124-1-kai.kang@windriver.com>
+References: <20190823074335.162124-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: B51254CE03FC.AF9BD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-jsonschema: upgrade 2.6.0 -> 3.0.2
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][Patch 1/3] xfce-panel-plugin.bbclass: correct SRC_URI with xfce_verdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 06:22:59 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 07:44:20 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Add dependency on setuptools-scm-native
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+The SRC_URI in xfce-panel-plugin.bbclass is not right when first 2
+parts(separated by dot(.)) of PV is longer than 3 such as 0.10. It
+should use function xfce_verdir() which introduced by xfce.bbclass.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-jsonschema.inc   | 6 +++---
- ...ython-jsonschema_2.6.0.bb => python-jsonschema_3.0.2.bb} | 0
- ...hon3-jsonschema_2.6.0.bb => python3-jsonschema_3.0.2.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-jsonschema_2.6.0.bb => python-jsonschema_3.0.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-jsonschema_2.6.0.bb => python3-jsonschema_3.0.2.bb} (100%)
+ meta-xfce/classes/xfce-panel-plugin.bbclass | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
-index 6fdc02498..8f5bdaa58 100644
---- a/meta-python/recipes-devtools/python/python-jsonschema.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
-@@ -2,10 +2,10 @@ SUMMARY = "An implementation of JSON Schema validation for Python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8"
+diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
+index 29c1245ca..f34ee0739 100644
+--- a/meta-xfce/classes/xfce-panel-plugin.bbclass
++++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
+@@ -4,11 +4,11 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "50c6b69a373a8b55ff1e0ec6e78f13f4"
--SRC_URI[sha256sum] = "6ff5f3180870836cae40f06fa10419f557208175f13ad7bc26caa77beb1f6e02"
-+SRC_URI[md5sum] = "2b44d00dccc96d7ba3839190263152eb"
-+SRC_URI[sha256sum] = "8d4a2b7b6c2237e0199c8ea1a6d3e05bf118e289ae2b9d7ba444182a2959560d"
+ DEPENDS += "libxfce4ui libxfce4util xfce4-panel"
  
--DEPENDS += "${PYTHON_PN}-vcversioner-native"
-+DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-core \
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb b/meta-python/recipes-devtools/python/python-jsonschema_3.0.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
-rename to meta-python/recipes-devtools/python/python-jsonschema_3.0.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb b/meta-python/recipes-devtools/python/python3-jsonschema_3.0.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-jsonschema_3.0.2.bb
+ FILES_${PN} += "${datadir}/xfce4/panel-plugins/"
+ FILES_${PN} += "${datadir}/xfce4/panel/plugins/"
+ FILES_${PN} += "${libdir}/xfce4/panel-plugins/*.so"
+ FILES_${PN} += "${libdir}/xfce4/panel/plugins/*.so"
+ 
+-FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.la"
+\ No newline at end of file
++FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.la"
 -- 
-2.17.1
-
-
+2.20.0
 
 
