@@ -1,47 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id DCC8E7F345
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 00E297E1E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 17:35:23 +0000 (UTC)
-Received: by mail-qt1-f180.google.com with SMTP id t12so14291727qtp.9
+	Sat, 24 Aug 2019 17:37:29 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id 201so11010840qkm.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 10:35:25 -0700 (PDT)
+	Sat, 24 Aug 2019 10:37:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5hPpSSQ6j5+93HgbTabmDkwfEqBNYSSpSoxQMR6Q6fg=;
-	b=suo6ycVWFwNZ4Mhcuvhrwx/h+SDg2KjWDwDjZ6dJJyZb0v8h8Pt87+ov7vZ0dt0EHb
-	sO272pZmSgWoJqWd7sXGwOjcR/o2inPn5Jj3xrHdlL1g7KCkt7x4GmEehsvkEMy5cRap
-	PoYvxJkxqhpcyQHh/+x3IPSfeOredA7e7HE0q4HYjGElVDU2zF+AgrHL+/4hPui6LHeM
-	qHZjzhGV11/xJXUUp3vaXzK/ofmWydztAGtMuCmZ46/ZMcAuaD+W+a4K4f78r2CqLkah
-	5mXEdHtsk5Mi5K+/JgA7M4vF+bcno+DXjyRv0dJfSVC9FbAwERs9BvNrEtKtgfalSVWi
-	TM5g==
+	:cc:content-transfer-encoding;
+	bh=Os0FfVfW2Mk77o4+yKzR2vm5RdYZEJGIpmnwL7aa1AI=;
+	b=PKWNjDhiObAYzX0dHMoo7GpIGgTfnzIVLZcFE8iHdOO5QySFwXsJbuADlGkqwBq5Aw
+	25PH91xIW0ezEMaufrFhgnDPDwwWNy8vezR7Ki606IyTTHomLWyYjzEDi+r9Jl8Zt7a7
+	TVegVRCSsSO+zYeKqq6I7GYvy6bSbQcpCV1H2s0igd9vjOOHLmhhzrtYlHkBqS8RhuGj
+	UE5od/x9awCwoJNLjhKbCMyJoUMvSHIN8k8wMVvTNiTer+Ys/yIL+yhiYyf8Bw+GJn+x
+	qrUPzbAAODGm6TGYFIMpuJfyMhVTuqD9oYR/4yYRQuHWpYz5fh22N6p2PLJqUgJaWb7e
+	NaLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5hPpSSQ6j5+93HgbTabmDkwfEqBNYSSpSoxQMR6Q6fg=;
-	b=o2Ky953vGdttcmJ0l7303mWYg13gfE9/YjUe1iyllNa8RQld7nAvxuKnpizG3DKsn1
-	oUZ+Ar3+zYYG/vP8S1tJ4RwOc/gvbMsCrpfh36JwbWJyDhi6I/aFEw3vsrfTVNXy8yv9
-	NdDbL5kriq62ETTZMvNUwI+4jd24eN6uIdndm8yjauoKXaOmB7btPsXtgwsv29fXY//h
-	KzdI75YJfgtHlFfQnxKkCvG8HuNaqNRRMbjoSsw+C9rPCldIDRW5u3L9a2aJGCRG8Eee
-	r7y2QY5TY7E+EMO8aI6lq6YGbHulfiFPyvnATBVa2PhLtp0eHuqOfVom1WnvAmqPc411
-	HChA==
-X-Gm-Message-State: APjAAAUFpYD+ha81RtU71p/qB0jMfCMrLEH6xWpDSu4kEsQ2QM/neWAz
-	nMr1IJeywFLz2i4T43rYWo7P7TUZMJFykKsjJTGeTDhl
-X-Google-Smtp-Source: APXvYqzSCK0WmuDO2ZqlHrFrP3WPfEISeUsBXLWu6IhtNDouZ20Fkm34zHW2DBblDW07RPWq5jDhKkwM1u/0P3yjLxo=
-X-Received: by 2002:ac8:d4c:: with SMTP id r12mr10279837qti.88.1566668124472; 
-	Sat, 24 Aug 2019 10:35:24 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Os0FfVfW2Mk77o4+yKzR2vm5RdYZEJGIpmnwL7aa1AI=;
+	b=sUOvb55FVu6YGm0i3K1pV0hbidBzcq3H1sAM6UDXjZxCDU514SNlh/LePNIlpKzma+
+	2IVclom2HpPRgcBxI52vCA3uIUPmlkoYjEJy2Ksfl559dzLdmrirzXC6yyFIDGAqY+Xf
+	13wJ1VPBWdfoKFbEMZMlpS5eqzirTHHuK6UzKHEWgCdONv4pNJaOx+wD3Yv2OC0jMgOl
+	3o8DPfDfxGV1sMEKbEWwbs5/iK3glexE8WfQD+4lwQiXiOhNv3wRfB1f387425QMsbd4
+	R8/9CnoR/z9E4h42sZvBIv8zABwyUjvrqMq+FHSy2y07fMej2uQ0SXfaRGH2ixS97JLz
+	LKMQ==
+X-Gm-Message-State: APjAAAXg2S5E1VSnCTRRvrrOD3qexYvvnymjFxX+XvcBoCEJQFs4UbA8
+	yTL2yvYJ9DGwGPR6Ied/gdgtE5/8PkGa7wOJGnLhWIm0
+X-Google-Smtp-Source: APXvYqzhsj6pzKglVeGi324lQact3GCcrMPr0R+RgW0mgLC1ymBBsdlLmbpsmITlpWcgJg0PnaCTV7NI42vHjOiKiQk=
+X-Received: by 2002:a37:a20f:: with SMTP id l15mr9855645qke.212.1566668250582; 
+	Sat, 24 Aug 2019 10:37:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
-In-Reply-To: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+References: <20190821123824.17831-1-bunk@stusta.de>
+	<53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
+In-Reply-To: <53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 24 Aug 2019 10:34:58 -0700
-Message-ID: <CAMKF1soopEW2HsmTGjr-iOfyVNENSbNJLCgqSaFshMj-Jba=hw@mail.gmail.com>
-To: Aaltonen Eero <eero.aaltonen@vaisala.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
+Date: Sat, 24 Aug 2019 10:37:04 -0700
+Message-ID: <CAMKF1srz7wYH8AmV_38Nqb12jLDJN_mbd8PpfkGK-LY-5nE-oQ@mail.gmail.com>
+To: Kang Kai <Kai.Kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-networking][PATCH] networkmanager: Upgrade 1.18.0 -> 1.18.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,106 +56,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Aug 2019 17:35:24 -0000
+X-List-Received-Date: Sat, 24 Aug 2019 17:37:30 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 23, 2019 at 3:55 AM Aaltonen Eero <eero.aaltonen@vaisala.com> wrote:
+On Fri, Aug 23, 2019 at 1:14 AM Kang Kai <Kai.Kang@windriver.com> wrote:
 >
-> Upstream is at
-> https://github.com/docopt/docopt.cpp/
+> On 2019/8/21 =E4=B8=8B=E5=8D=888:38, Adrian Bunk wrote:
+> > Remove a generated file with always changing hash from LIC_FILES_CHKSUM=
+.
 >
-> Installs with a small build modification to pass QA checks.
+> Why not just upgrade to version 1.20.0 which is the latest major release?
 >
-> Signed-off-by: Eero Aaltonen <eero.aaltonen@vaisala.com>
-> ---
->  file                                          |  0
->  ...01-Set-library-VERSION-and-SOVERSION.patch | 31 +++++++++++++++++++
->  .../docopt.cpp/docopt.cpp_git.bb              | 29 +++++++++++++++++
->  3 files changed, 60 insertions(+)
->  create mode 100644 file
->  create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
->  create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
->
-> diff --git a/file b/file
-> new file mode 100644
-> index 000000000..e69de29bb
-> diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
-> new file mode 100644
-> index 000000000..d4c776569
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
-> @@ -0,0 +1,31 @@
-> +From a47ca75702318ff43446c70120f7aacde4ccee1b Mon Sep 17 00:00:00 2001
-> +From: Eero Aaltonen <eero.aaltonen@vaisala.com>
-> +Date: Thu, 20 Jun 2019 16:21:20 +0300
-> +Subject: [PATCH] Set library VERSION and SOVERSION
-> +
-> +With soversion and version specified, `install` target will install the
-> +library with the specified version and also create the proper symlink.
-> +
-> +Upstream-Status: Submitted [https://github.com/docopt/docopt.cpp/pull/112]
-> +but unlikely to be merged soon as it is a duplicate of
-> +[https://github.com/docopt/docopt.cpp/pull/112] which has been **Open**
-> +since 2016-12-08.
-> +---
-> + CMakeLists.txt | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 23da468..feff32e 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -50,6 +50,10 @@ else()
-> +     set_target_properties(docopt_o PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
-> +
-> +     add_library(docopt SHARED $<TARGET_OBJECTS:docopt_o>)
-> ++      set_target_properties(docopt PROPERTIES
-> ++              VERSION ${PROJECT_VERSION}
-> ++              SOVERSION ${PROJECT_VERSION_MAJOR}
-> ++              )
-> +     add_library(docopt_s STATIC $<TARGET_OBJECTS:docopt_o>)
-> + endif()
-> +
-> diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
-> new file mode 100644
-> index 000000000..95c60617c
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
-> @@ -0,0 +1,29 @@
-> +SUMMARY = "C++11 port of docopt command-line interface description language and parser"
-> +
-> +DESCRIPTION = "docopt is library that lets you define a command line interface with the \
-> +utility argument syntax that has been used by command line utilities for \
-> +decades (formalized in POSIX.1-2017). From the description, docopt \
-> +automatically generates a parser for the command line arguments."
-> +
-> +HOMEPAGE = "https://github.com/docopt/docopt.cpp"
-> +
-> +LICENSE = "MIT | BSL-1.0"
-> +LIC_FILES_CHKSUM = "\
-> +    file://LICENSE-Boost-1.0;md5=e4224ccaecb14d942c71d31bef20d78c \
-> +    file://LICENSE-MIT;md5=4b242fd9ef20207e18286d73da8a6677 \
-> +"
-> +
-> +DEPENDS = "boost"
-> +SRCREV = "3dd23e3280f213bacefdf5fcb04857bf52e90917"
-> +PV = "0.6.2+git${SRCPV}"
-> +
-> +SRC_URI = "\
-> +    git://git@github.com/docopt/docopt.cpp.git;protocol=ssh \
-> +    file://0001-Set-library-VERSION-and-SOVERSION.patch \
-> +"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake gitpkgv
 
-lets just use SRCPV
+this still is useful, if its a bugfix only release, as it could be
+considered for backport to release branaches.
 
-> +
-> +PKGV = "0.6.2+git${GITPKGV}"
+> Regards,
+> Kai
+>
+> >
+> > Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> > ---
+> >   .../{networkmanager_1.18.0.bb =3D> networkmanager_1.18.2.bb}   | 5 ++=
+---
+> >   1 file changed, 2 insertions(+), 3 deletions(-)
+> >   rename meta-networking/recipes-connectivity/networkmanager/{networkma=
+nager_1.18.0.bb =3D> networkmanager_1.18.2.bb} (95%)
+> >
+> > diff --git a/meta-networking/recipes-connectivity/networkmanager/networ=
+kmanager_1.18.0.bb b/meta-networking/recipes-connectivity/networkmanager/ne=
+tworkmanager_1.18.2.bb
+> > similarity index 95%
+> > rename from meta-networking/recipes-connectivity/networkmanager/network=
+manager_1.18.0.bb
+> > rename to meta-networking/recipes-connectivity/networkmanager/networkma=
+nager_1.18.2.bb
+> > index 9ce2d961d..b760a40c3 100644
+> > --- a/meta-networking/recipes-connectivity/networkmanager/networkmanage=
+r_1.18.0.bb
+> > +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanage=
+r_1.18.2.bb
+> > @@ -5,7 +5,6 @@ SECTION =3D "net/misc"
+> >   LICENSE =3D "GPLv2+"
+> >   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dcbbffd568227ada506640fe950=
+a4823b \
+> >                       file://libnm-util/COPYING;md5=3D1c4fa765d6eb3cd2f=
+bd84344a1b816cd \
+> > -                    file://docs/api/html/license.html;md5=3D233931303e=
+f80eded167add1f60a50c1 \
+> >   "
+> >
+> >   DEPENDS =3D " \
+> > @@ -31,8 +30,8 @@ SRC_URI_append_libc-musl =3D " \
+> >       file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
+> >       file://musl/0002-Fix-build-with-musl.patch \
+> >   "
+> > -SRC_URI[md5sum] =3D "c8c27116a8083bab5d5fcca0d03e988a"
+> > -SRC_URI[sha256sum] =3D "c6e8df25e5a3c7309bc17664be8971689314884cdd08af=
+dd6b0847d29d2a8ba6"
+> > +SRC_URI[md5sum] =3D "ca1e6175c6ba97ca1adf65a67861ccd9"
+> > +SRC_URI[sha256sum] =3D "4dd97ca974cd1f97990746527258f551f4257cbf011fec=
+d01d10b7d74a6fa5c3"
+> >
+> >   UPSTREAM_CHECK_URI =3D "${GNOME_MIRROR}/NetworkManager/1.16/"
+> >   UPSTREAM_CHECK_REGEX =3D "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar=
+.xz"
+>
+>
 > --
-> 2.17.1
+> Kai Kang
 >
 > --
 > _______________________________________________
