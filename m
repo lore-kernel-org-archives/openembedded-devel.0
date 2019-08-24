@@ -1,33 +1,47 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C40679C92
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id DCC8E7F345
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 17:03:45 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46G4Nc54zDz3P
+	Sat, 24 Aug 2019 17:35:23 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id t12so14291727qtp.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 19:03:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566666225;
-	bh=ILsdRPeLReWZEAJlsktqV5ZYCDDweVM7VJJfA4VDhRY=;
-	h=From:To:Subject:Date:From;
-	b=kG6cEvAQyRgBypIcHT6Vtqrh35P46gCis1Afd3Hba7OnRp99uE/Z4HRl5leSA5GwV
-	4xxMLhuSj5wbdSybx88LuTEXegnRTXANR1a2G8fuvF8yjFgZxB8fkVXBTnWtBoEKjR
-	Q0f2H1xHMWvKTCYdmuzF+DwEYGveDTCwXwG4ydXrrbs0kF/SOUf+9go8+R4kYkvXLA
-	zyPhk6SWfEMAYj5zAulWpgSbk4nGO/EifPOhWLm351TR0JszLgRJoFN6WaXPNUiNEf
-	F70tLTiUKN62aSM4p9b1asCq1wSvLuw+IYvLj946NecQBh88qVy0FE1Teg2cZWT06T
-	66VLGWhQWnQ3IVkBg050K0+JcNh3j/xIYDVuRlIm4JRTWnNSS02paf8p+Q7LuOkoJ2
-	Ov5KKP3LG24mAbmaZJTFJKoza4ffgbHTqrh6YThzf8uWhnMDoobzg9PCwaOinU8VSf
-	VGH+3PsqEC3WJioMDB4jJ98z7GiQQSIJvVl2SFs/ixqzU6DCybqoHVwh/CAwG4CKlC
-	waRsIDY9E/bmcjClDHEmqR+FvQ6qmmk3wv8yaUYLK2Qwi4XUhw0VTIl96MfLiAOsGp
-	J1draO6VgajdTrsR11zhHgL/6XhMUsl3cQ52saUH6xHTSnoczUefVRyW6r57ChaQCS
-	t4Oc/C4StELOIe9gQ0dPQUig=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Aug 2019 20:03:44 +0300
-Message-Id: <20190824170344.7320-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] libgit2: Upgrade 0.27.9 -> 0.28.3
+	Sat, 24 Aug 2019 10:35:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=5hPpSSQ6j5+93HgbTabmDkwfEqBNYSSpSoxQMR6Q6fg=;
+	b=suo6ycVWFwNZ4Mhcuvhrwx/h+SDg2KjWDwDjZ6dJJyZb0v8h8Pt87+ov7vZ0dt0EHb
+	sO272pZmSgWoJqWd7sXGwOjcR/o2inPn5Jj3xrHdlL1g7KCkt7x4GmEehsvkEMy5cRap
+	PoYvxJkxqhpcyQHh/+x3IPSfeOredA7e7HE0q4HYjGElVDU2zF+AgrHL+/4hPui6LHeM
+	qHZjzhGV11/xJXUUp3vaXzK/ofmWydztAGtMuCmZ46/ZMcAuaD+W+a4K4f78r2CqLkah
+	5mXEdHtsk5Mi5K+/JgA7M4vF+bcno+DXjyRv0dJfSVC9FbAwERs9BvNrEtKtgfalSVWi
+	TM5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=5hPpSSQ6j5+93HgbTabmDkwfEqBNYSSpSoxQMR6Q6fg=;
+	b=o2Ky953vGdttcmJ0l7303mWYg13gfE9/YjUe1iyllNa8RQld7nAvxuKnpizG3DKsn1
+	oUZ+Ar3+zYYG/vP8S1tJ4RwOc/gvbMsCrpfh36JwbWJyDhi6I/aFEw3vsrfTVNXy8yv9
+	NdDbL5kriq62ETTZMvNUwI+4jd24eN6uIdndm8yjauoKXaOmB7btPsXtgwsv29fXY//h
+	KzdI75YJfgtHlFfQnxKkCvG8HuNaqNRRMbjoSsw+C9rPCldIDRW5u3L9a2aJGCRG8Eee
+	r7y2QY5TY7E+EMO8aI6lq6YGbHulfiFPyvnATBVa2PhLtp0eHuqOfVom1WnvAmqPc411
+	HChA==
+X-Gm-Message-State: APjAAAUFpYD+ha81RtU71p/qB0jMfCMrLEH6xWpDSu4kEsQ2QM/neWAz
+	nMr1IJeywFLz2i4T43rYWo7P7TUZMJFykKsjJTGeTDhl
+X-Google-Smtp-Source: APXvYqzSCK0WmuDO2ZqlHrFrP3WPfEISeUsBXLWu6IhtNDouZ20Fkm34zHW2DBblDW07RPWq5jDhKkwM1u/0P3yjLxo=
+X-Received: by 2002:ac8:d4c:: with SMTP id r12mr10279837qti.88.1566668124472; 
+	Sat, 24 Aug 2019 10:35:24 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+In-Reply-To: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 24 Aug 2019 10:34:58 -0700
+Message-ID: <CAMKF1soopEW2HsmTGjr-iOfyVNENSbNJLCgqSaFshMj-Jba=hw@mail.gmail.com>
+To: Aaltonen Eero <eero.aaltonen@vaisala.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,33 +54,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Aug 2019 17:03:46 -0000
+X-List-Received-Date: Sat, 24 Aug 2019 17:35:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../libgit2/{libgit2_0.27.9.bb => libgit2_0.28.3.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgit2/{libgit2_0.27.9.bb => libgit2_0.28.3.bb} (91%)
+On Fri, Aug 23, 2019 at 3:55 AM Aaltonen Eero <eero.aaltonen@vaisala.com> wrote:
+>
+> Upstream is at
+> https://github.com/docopt/docopt.cpp/
+>
+> Installs with a small build modification to pass QA checks.
+>
+> Signed-off-by: Eero Aaltonen <eero.aaltonen@vaisala.com>
+> ---
+>  file                                          |  0
+>  ...01-Set-library-VERSION-and-SOVERSION.patch | 31 +++++++++++++++++++
+>  .../docopt.cpp/docopt.cpp_git.bb              | 29 +++++++++++++++++
+>  3 files changed, 60 insertions(+)
+>  create mode 100644 file
+>  create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
+>  create mode 100644 meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+>
+> diff --git a/file b/file
+> new file mode 100644
+> index 000000000..e69de29bb
+> diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
+> new file mode 100644
+> index 000000000..d4c776569
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp/0001-Set-library-VERSION-and-SOVERSION.patch
+> @@ -0,0 +1,31 @@
+> +From a47ca75702318ff43446c70120f7aacde4ccee1b Mon Sep 17 00:00:00 2001
+> +From: Eero Aaltonen <eero.aaltonen@vaisala.com>
+> +Date: Thu, 20 Jun 2019 16:21:20 +0300
+> +Subject: [PATCH] Set library VERSION and SOVERSION
+> +
+> +With soversion and version specified, `install` target will install the
+> +library with the specified version and also create the proper symlink.
+> +
+> +Upstream-Status: Submitted [https://github.com/docopt/docopt.cpp/pull/112]
+> +but unlikely to be merged soon as it is a duplicate of
+> +[https://github.com/docopt/docopt.cpp/pull/112] which has been **Open**
+> +since 2016-12-08.
+> +---
+> + CMakeLists.txt | 4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 23da468..feff32e 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -50,6 +50,10 @@ else()
+> +     set_target_properties(docopt_o PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+> +
+> +     add_library(docopt SHARED $<TARGET_OBJECTS:docopt_o>)
+> ++      set_target_properties(docopt PROPERTIES
+> ++              VERSION ${PROJECT_VERSION}
+> ++              SOVERSION ${PROJECT_VERSION_MAJOR}
+> ++              )
+> +     add_library(docopt_s STATIC $<TARGET_OBJECTS:docopt_o>)
+> + endif()
+> +
+> diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+> new file mode 100644
+> index 000000000..95c60617c
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+> @@ -0,0 +1,29 @@
+> +SUMMARY = "C++11 port of docopt command-line interface description language and parser"
+> +
+> +DESCRIPTION = "docopt is library that lets you define a command line interface with the \
+> +utility argument syntax that has been used by command line utilities for \
+> +decades (formalized in POSIX.1-2017). From the description, docopt \
+> +automatically generates a parser for the command line arguments."
+> +
+> +HOMEPAGE = "https://github.com/docopt/docopt.cpp"
+> +
+> +LICENSE = "MIT | BSL-1.0"
+> +LIC_FILES_CHKSUM = "\
+> +    file://LICENSE-Boost-1.0;md5=e4224ccaecb14d942c71d31bef20d78c \
+> +    file://LICENSE-MIT;md5=4b242fd9ef20207e18286d73da8a6677 \
+> +"
+> +
+> +DEPENDS = "boost"
+> +SRCREV = "3dd23e3280f213bacefdf5fcb04857bf52e90917"
+> +PV = "0.6.2+git${SRCPV}"
+> +
+> +SRC_URI = "\
+> +    git://git@github.com/docopt/docopt.cpp.git;protocol=ssh \
+> +    file://0001-Set-library-VERSION-and-SOVERSION.patch \
+> +"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake gitpkgv
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb b/meta-oe/recipes-support/libgit2/libgit2_0.28.3.bb
-similarity index 91%
-rename from meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-rename to meta-oe/recipes-support/libgit2/libgit2_0.28.3.bb
-index 3ef7bee43..f02f5e738 100644
---- a/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.28.3.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
- 
- DEPENDS = "curl openssl zlib libssh2 libgcrypt"
- 
--SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
--SRCREV = "3828d7afdd08b595584048e8e4dab6ddd4506ed1"
-+SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.28"
-+SRCREV = "7ce88e66a19e3b48340abcdd86aeaae1882e63cc"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
+lets just use SRCPV
 
+> +
+> +PKGV = "0.6.2+git${GITPKGV}"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
