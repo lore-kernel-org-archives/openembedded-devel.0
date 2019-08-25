@@ -1,51 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D3E57D53D
+Return-Path: <maxime.roussinbelanger@gmail.com>
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+	[209.85.160.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D87D77D23C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 22:34:59 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id y26so14711230qto.4
+	Sun, 25 Aug 2019 04:48:12 +0000 (UTC)
+Received: by mail-qt1-f170.google.com with SMTP id y26so15068249qto.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2019 15:35:00 -0700 (PDT)
+	Sat, 24 Aug 2019 21:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=qA3OLmw5Rhw5jR2gmOjAOUM4yJuf/LNLZjP631eg4CI=;
-	b=l7XD0CCnoIzUz0B5nx8pNNA1QZuOcjBDkR/LSvBZQWB5GwXpEUYWGNuzhPCPiLzW5F
-	ZvNy4dDkMSdyUhOrDOT9O2wE75uaENBng+7E1eUOaOaY/2NDNFGmd3BRtNtmwNddaFey
-	s2O3BfUWAlpT+FeS2YRnZwFx14DjaPOBUd6Sh9xdaSgAO5AhbU7UWJGy6InKrefm+LRE
-	YeZjVkkYwaMpUOVzLjxunCzcSMXQjWbtVAhyTtLpC+692wRyLbyS+EYz4LLnblycWUeJ
-	MEnXjhjMbl/8otFcmwcxcqgxpfLKJJwLCSp7sgWAjDbPxNMwIhZwPzJKW2VMKueM52ne
-	a1eA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=p1j35Lupt9qwhzqdXpHwAtpYf2N755lf9fcox5urxPY=;
+	b=ZZBGqj84pIW27OLkOkh0fWDqs5BfBFednjmoEVdz8u5OUZREDOVINWFn8MW9S4NNfA
+	VBWu5Af8xIDDF0RGru6UqLmns5gvh49CECrmrz+kkyQO8Z51SYrjD0V1OvygQBKWpr9Y
+	If0+BmvVCMkUyYbvMkgODOmgpHT4GPWzpZeqiYeP2IfwYOe65g1XQccxO0fUWakGXYMW
+	eReQbMpOZeUudGqWn5Q9jVyj4XrxnsElYZxlLm7J+p8SIP+yp+7TSKq2ZN/nvKOYDmqI
+	DUM/pUAjl4cKcTBbPUj3uTgJRqoBN26I9fn9AmZjSRWxx29RUTo5Ret3+1ibigFNA2zY
+	U+WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=qA3OLmw5Rhw5jR2gmOjAOUM4yJuf/LNLZjP631eg4CI=;
-	b=sxY/6lybgSrb3JaYk7WqLKeHjPDrASQFEUZZv39ATD+L/4Hs1UveZagi5XhF7ECK2T
-	5wTDNcY/V0P41+2ET1osIxuxNv6pz3dAYNnwhKEGPj6D25z71zgMx1ENbLpGTjv4hO2i
-	PaHleZzvACFWRyFInFLgAaVMKmTYaxcOztrwJhfDE6tpxp7wD854fV5vTUD5LVnwMdPc
-	y8R6XC5Fo7XLBDiMPXhrXsphbhD0ZpUQLbDbFGRDIDdytQC1ohQM8Ybp+7O0NQcXrcgF
-	sKukt6hofBr7osRSyHH1z7lw7HaGO1IPK9xsRJ21UM953UYri044qCyIyoXtmY78a+AD
-	72rg==
-X-Gm-Message-State: APjAAAVkSTlnvsjX/r17z2J1QCqUwEXbjT84bg+l1ynerl7lN3RoD0S2
-	FNr/dKsR1GpoSK1WNbT4LAgofYX34TeDe8AxsVk=
-X-Google-Smtp-Source: APXvYqzO9EK9fNFWzMD4/eha9u+HUaSWp6yPANK8O2Q7//dbKGuKHr3+KkdbJSmmD6uF8Pli0sVHTn14AAEwtoUf1v8=
-X-Received: by 2002:ac8:2cd6:: with SMTP id 22mr11156790qtx.80.1566686100102; 
-	Sat, 24 Aug 2019 15:35:00 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=p1j35Lupt9qwhzqdXpHwAtpYf2N755lf9fcox5urxPY=;
+	b=LxXgGoMgjRp46CO9tbovun4De7citGZ8T/poJhaUh3DPGvYvbPojUv7gi2OINlJeTn
+	uQE+ck+ORztz+esRFbk5h1bn0qCOVWfRvBCxUjRgsyJstqIfPor/dMRJmk5iLumVybfK
+	fMs5zUC6fCMoUuMG1+AbwYdy+hkzEVyi6OMhE4JQZcWCFLZHOLCiAOuYZ07S6fCxxXzj
+	Ars+EjffFIEeLKuL7wtxOVmFfgsPohCu8Abgm5nYQoRMCKoOLOLC8NJvylkeQi13Xyj/
+	O57yzvOUNO0n+uN41JR1K+Siuf/r7NnzWPBisRoqQZqCB9SXuKHs30vzU9mkHPOXok28
+	5fUQ==
+X-Gm-Message-State: APjAAAW2/ZJgNYx+KbO1CrMCYz/9gu1f1G+9U+ohAo0sZ9fnVnDOYEic
+	9SmvnFzieFmTlZgWnXN3/7TVsQbK2VvHaw==
+X-Google-Smtp-Source: APXvYqxkdw93jYcGQgsDiY9OiL4jd+P5m0scbXs7sW1nDmYh+TpQHhmzp/ki35y/q8uK78mdDg3qrw==
+X-Received: by 2002:a05:6214:136b:: with SMTP id
+	c11mr10368246qvw.5.1566708493379; 
+	Sat, 24 Aug 2019 21:48:13 -0700 (PDT)
+Received: from mbedesk.Sonatest.net
+	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
+	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
+	m38sm5130609qta.43.2019.08.24.21.48.11
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 24 Aug 2019 21:48:12 -0700 (PDT)
+From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 25 Aug 2019 00:47:52 -0400
+Message-Id: <20190825044752.9639-1-maxime.roussinbelanger@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190821123824.17831-1-bunk@stusta.de>
-	<53f16418-c309-9809-969a-faf81fb0c0a9@windriver.com>
-	<CAMKF1srz7wYH8AmV_38Nqb12jLDJN_mbd8PpfkGK-LY-5nE-oQ@mail.gmail.com>
-	<71e003a3-e1ee-294d-da16-12a45d649350@gmail.com>
-In-Reply-To: <71e003a3-e1ee-294d-da16-12a45d649350@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 24 Aug 2019 15:34:49 -0700
-Message-ID: <CAMKF1soZNRmLXcCQt0t-GbF4y7CHs_cdYVQdB_JUexi2ub94CA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-networking][PATCH] networkmanager: Upgrade 1.18.0 -> 1.18.2
+Subject: [meta-oe][thud][PATCH v2] libedit: Add native and nativesdk to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,94 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Aug 2019 22:34:59 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 25 Aug 2019 04:48:13 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sat, Aug 24, 2019 at 2:52 PM akuster808 <akuster808@gmail.com> wrote:
+To keep support of meta-clang support on thud branch.
+It depends on libedit and need it when building SDK
+---
+Changes in v2:
+	- Add missing meta-oe in subject
 
->
->
-> On 8/24/19 10:37 AM, Khem Raj wrote:
-> > On Fri, Aug 23, 2019 at 1:14 AM Kang Kai <Kai.Kang@windriver.com> wrote=
-:
-> >> On 2019/8/21 =E4=B8=8B=E5=8D=888:38, Adrian Bunk wrote:
-> >>> Remove a generated file with always changing hash from
-> LIC_FILES_CHKSUM.
-> >> Why not just upgrade to version 1.20.0 which is the latest major
-> release?
-> >>
-> > this still is useful, if its a bugfix only release, as it could be
-> > considered for backport to release branaches.
-> Warrior is @ 1.16 so I think not.
-> >
+meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+index 8cc0e959e0..60f4f5a22b 100644
+--- a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
++++ b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+@@ -19,3 +19,5 @@ SRC_URI[md5sum] = "97679319742f45d6cdcd6075511b14ac"
+ SRC_URI[sha256sum] = "c41bea8fd140fb57ba67a98ec1d8ae0b8ffa82f4aba9c35a87e5a9499e653116"
+ 
+ S = "${WORKDIR}/${BPN}-${PV}"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.20.1
 
-Yes in that case sure however if someone is working on 1.20 that=E2=80=99s =
-fine I
-can wait but will try with this patch meanwhile
-
->
-> >> Regards,
-> >> Kai
-> >>
-> >>> Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> >>> ---
-> >>>   .../{networkmanager_1.18.0.bb =3D> networkmanager_1.18.2.bb}   | 5
-> ++---
-> >>>   1 file changed, 2 insertions(+), 3 deletions(-)
-> >>>   rename meta-networking/recipes-connectivity/networkmanager/{
-> networkmanager_1.18.0.bb =3D> networkmanager_1.18.2.bb} (95%)
-> >>>
-> >>> diff --git a/meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.0.bb
-> b/meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.2.bb
-> >>> similarity index 95%
-> >>> rename from meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.0.bb
-> >>> rename to meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.2.bb
-> >>> index 9ce2d961d..b760a40c3 100644
-> >>> --- a/meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.0.bb
-> >>> +++ b/meta-networking/recipes-connectivity/networkmanager/
-> networkmanager_1.18.2.bb
-> >>> @@ -5,7 +5,6 @@ SECTION =3D "net/misc"
-> >>>   LICENSE =3D "GPLv2+"
-> >>>   LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dcbbffd568227ada506640fe950a4823b \
-> >>>
->  file://libnm-util/COPYING;md5=3D1c4fa765d6eb3cd2fbd84344a1b816cd \
-> >>> -
-> file://docs/api/html/license.html;md5=3D233931303ef80eded167add1f60a50c1 =
-\
-> >>>   "
-> >>>
-> >>>   DEPENDS =3D " \
-> >>> @@ -31,8 +30,8 @@ SRC_URI_append_libc-musl =3D " \
-> >>>       file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
-> >>>       file://musl/0002-Fix-build-with-musl.patch \
-> >>>   "
-> >>> -SRC_URI[md5sum] =3D "c8c27116a8083bab5d5fcca0d03e988a"
-> >>> -SRC_URI[sha256sum] =3D
-> "c6e8df25e5a3c7309bc17664be8971689314884cdd08afdd6b0847d29d2a8ba6"
-> >>> +SRC_URI[md5sum] =3D "ca1e6175c6ba97ca1adf65a67861ccd9"
-> >>> +SRC_URI[sha256sum] =3D
-> "4dd97ca974cd1f97990746527258f551f4257cbf011fecd01d10b7d74a6fa5c3"
-> >>>
-> >>>   UPSTREAM_CHECK_URI =3D "${GNOME_MIRROR}/NetworkManager/1.16/"
-> >>>   UPSTREAM_CHECK_REGEX =3D
-> "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
-> >>
-> >> --
-> >> Kai Kang
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
