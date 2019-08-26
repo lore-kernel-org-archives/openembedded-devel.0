@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CBE657F52D
+	by mail.openembedded.org (Postfix) with ESMTP id EA9ED7F5AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2019 08:11:11 +0000 (UTC)
+	Mon, 26 Aug 2019 08:11:46 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46H4TD3L9jz4q
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46H4Tv4Z6Wz4q
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2019 10:11:12 +0200 (CEST)
+	Mon, 26 Aug 2019 10:11:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566807072;
-	bh=gH+aid5iQkYv+ygdlrBYM6uhAk5HUMxk3o+Ddng4nrA=;
+	s=default; t=1566807107;
+	bh=ntubuMzJY85348f9XnFUF4Lb0LLfnxoAM/oRuNYW1AY=;
 	h=From:To:Subject:Date:From;
-	b=DutYlXynYtbJmppqel4KH9pHTkIFnnsrqwS+hPRdDb8zP0UjrCUtBEdpeBfL0+/Xx
-	eyFMjQ8drH6QdPmFXyQHxr05VmYjcVs7EDb2Zw/mUEQ+vPRBMrmIEFdfqiPJl0Csh1
-	u8luD8rWkr0ZgaHCXPkHZ4rR6n/Oyibco+RAIIhRjXoslBVPbLtTGR4zqkzD4qCfI8
-	2U0/4ZEeQo3wsDvSwxkSMt5eGXUO6CMyTkJtzpV4UXUhVAQkArx3Av9vjD33IvJ9rb
-	Z/cBGkOJVU6a/2Zw5HnXbmQbxFY0YsW+RFRXKq/AW/xz434stFOTmlQJiCh7NtrtuP
-	zKACORV7aknyIQgjG1bpZqfSulmLLjfIOfCFuqkmW+rJWSilIvDhwwDoI8F9f4Kc+t
-	Peds6L/Yftwj1K49vx1+Y8SXYqscPCMYtUuvbD8eQZ+7kmzH1T9ls9uEBN2bG38H2r
-	FRdoWpZf46qqYLo/1y1Cww7WEaqXvqWCdRlJAiuOGzWD2jd8AD7RIf82qUqT7FKjGi
-	oSKgQN46T77GKO8tRR2bfi1Vj+W6dJ2iZgVOLj8i1suP1xHcFJTMvdqbU0sorWGJk8
-	55f2+XG03LXFjLWU6nnorh0b/3w9QjZmJQyefeiS4kVvEiG2+UVzHyVs5SEG7MO4Cy
-	LoWFyfzy7ZA+29/o/RlfTlNU=
+	b=lUr/oLt/Uo7Dhqi8mAXVEUztT3nvRParhsU0dRKdvroLIJuWzf5ucUVCXjKAPmyZC
+	gZtrghe1Qais7fJx48I+LYem2B1iHcW7qQH5e5Tx56tCDkda5920HEwNEeX2wjMl/W
+	UzoOsKmXeUkKI3BKGy18laQHn8jKf9O/D+JE4vviVhByONMAGfk6mFwgIXrEDnd+w0
+	XGqtgRTzzr4QSsQrxBcjtQ/U602iZraEBSzx4DA/4A+JSdNQSdqi1NCTSdDfQayF/a
+	JjpZGCaSkdslH2mJXAS7Zky3I+xzbfgW2IwLXGVUxz+vZnhLtCtvw2eBYDpmDVuX/1
+	8bIVmSykTml0+O2kdtxraU/z2leJ60+6M85H4t6HNdcePW3zKv4HjgQz71jiWcPh4+
+	tlD/J7nQ4dv9CN3BlA2/e2Cy0oAEQ2tgmrFznclygIgKT6rXhEYEk3FNrca3WQV777
+	XfXfrVAZOPLjDE6bhk6YAPxRwvzgxf4qQNeWY4oswtL3Bab5aMf7Ujoc3kXzMXYs0A
+	YJjyKgYVex0vORN7zRPSvEIuxwQnG0i1kUdX4t5A5urmQ6su5LaxXrBDc7/qHDE17a
+	XBQiBjjRx0yzGI6qbKF9h0UYg6lEzX2w7lHnHLo3ss2/hu3Zq7Jkz5HZwezvnoJ6fu
+	LkcQ3RgJkPkG8iknC7/DETyw=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Aug 2019 11:11:11 +0300
-Message-Id: <20190826081111.25920-1-bunk@stusta.de>
+Date: Mon, 26 Aug 2019 11:11:46 +0300
+Message-Id: <20190826081146.27183-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-gnome][warrior][PATCH] gnome-desktop3: Fix REQUIRED_DISTRO_FEATURES
+Subject: [meta-networking][warrior][PATCH] wireshark: Use an upstream URL that stays valid longer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,29 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2019 08:11:12 -0000
-
-Append instead of overwriting the previous one.
+X-List-Received-Date: Mon, 26 Aug 2019 08:11:47 -0000
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb | 2 +-
+ meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-index 0acbb2117..1dad1e95b 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-@@ -25,7 +25,7 @@ SRC_URI += " \
- DEPENDS += "itstool-native gsettings-desktop-schemas virtual/libx11 gtk+3 startup-notification xkeyboard-config iso-codes udev"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb
+index 572dc1a45..c2552a95b 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.1.bb
+@@ -8,7 +8,7 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
  
- inherit distro_features_check gtk-doc
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES += "x11"
+ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
  
- GTKDOC_MESON_OPTION = "gtk_doc"
- EXTRA_OEMESON = "-Ddesktop_docs=false"
+-SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz"
++SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
 -- 
 2.17.1
 
