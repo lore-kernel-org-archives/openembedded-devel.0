@@ -1,33 +1,37 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CA0877F2B5
+	by mail.openembedded.org (Postfix) with ESMTP id 5D0B27F217
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2019 09:16:39 +0000 (UTC)
+	Mon, 26 Aug 2019 18:04:44 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46H5wl3Pcnz4q
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2019 11:16:39 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46HKf46LZ7z29;
+	Mon, 26 Aug 2019 20:04:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566810999;
-	bh=J6SHIZUoB+eoe0kO0t56nwc2qRLaIDSktO3C4iS+D2Y=;
-	h=From:To:Subject:Date:From;
-	b=oPLm9C1gpjTsZEVRW7guRvOnmG1e9grkLBjPUeR3CVThIq0+OjbjMO52g/6qHW9na
-	XWBeAnONzOazNWDvWaGM3mP/QqlEqponNJJLbyKpwU06UF3bo5Fgs2JZo8amQMG4tP
-	g6ePgZyXYn/yonWY82xbQ/oQDo38GNQTkFPwuJBsifWK3EELSfE848uGU6IJtHK7Z/
-	hd/iGWBOWbGBLJ4umZ44QjNU3hQoNF4tNcnRpNbX5eI0hgBpb13sq/MHaceU+ORq0/
-	aHTC0eooHVD7mwx2mtdMbTdf5LstPxZ+6+AZYjQw6pM8q+i7PPVSGq+E4wnopAHbGo
-	fuaT5XMUWtsov2FIZEYH+VLe6un/5ThraljxP4So+H02JmWh3F6Ttvkyah6JF6FUFF
-	0XhN6jFOmfy47GjmjeBZjWG6sFBrVO7/bikHOKbciD8e1DqYxqhrCEP+QC8Hgc2WVs
-	MCExdLgJYwqoisnNs7X6K8d6FEm2gZZ2fb71FSugT08TVRRFtS9B+yv7x3QCXgnvSi
-	t/uFfJgDPLWpdz2UXuj2KG9EyHo2OS2b+fZT6cOMJ768c/BQlpjdhPug6qABpHjKgI
-	NA4KqXzU3c76Cn1FTAGY3Rtxs3yhHL65ELMZKQjxTkwCQDjzFhINskgmhKOmAVilo2
-	9o70mHisOBkMMBHa/hbAWtPc=
+	s=default; t=1566842685;
+	bh=Y6dmZJFYMxNldjaB40jYNmtJkdCRb9l47k6F0mLtxaQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=kGu1HzzsqQRaVZSc1Mr4ACp8uJ81nOaO+kxMqNR0XDs2MuDgXM2fm4NwmPnV6RatL
+	lwhunmn4Uo5Y2FAiq15Lnx8luW2pI6/WfmHmIbwBC8vvYIdbdmTZDumwtDVoOh1vC4
+	1eVHOFphAoYpiBb/+Fa1m8qVewAYUoENS7VOboa/v5rRsPZn/SBEAv5OiSYkg939HC
+	lZrMJY6A30i+Mcif7Lb0eOwH9Fhqgk9PTmbIOzmR+T9Q87qk5mc8dovKXWlJT8EznF
+	nLsd5c1+sDTTjLB+EPfmiVToZe19QbdbOKip9F3CXovoBDKpOrUmni6ROv8O8B9JY4
+	HPGrywTFLj/4rSoIxcHGSmU7wh1dYfRyk5dNVSxV419mkg7cVCcH6A+hb/JFd/y7IP
+	ZwsYCnN0NU5annJIMEG2iJqTJ0T4OLIxUOhHSmkLoyced4qHJWoATw+OgaI1vcg0Z0
+	EUTfVfGybdjFFEOLOowSnQQegtmvlr+xqbiJjshKzhLL2pfs5qSZ4UT0E3lFyxdaXg
+	Xr6A7UitoFgHUL8ICK/c9WeH5q3HQSbzLSo4ItdBgHuNF/FN0WtoKHAw3rHLVIBic6
+	4hynm64d+22iLaT9REnmNEuuUK8z7BuHai+FgaMzLUO58GEz+MZCYaiNfrdqlJqAI3
+	7YrCRikM4EaIJIiHo8KmeU0E=
+Date: Mon, 26 Aug 2019 21:04:37 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Aug 2019 12:16:38 +0300
-Message-Id: <20190826091638.29174-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][warrior][PATCH] libgit2: Upgrade 0.27.8 -> 0.27.9
+To: Aaltonen Eero <eero.aaltonen@vaisala.com>
+Message-ID: <20190826180437.GA18874@localhost>
+References: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+MIME-Version: 1.0
+In-Reply-To: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2019 09:16:40 -0000
+X-List-Received-Date: Mon, 26 Aug 2019 18:04:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-This is a security release on the 0.27 branch.
+On Fri, Aug 23, 2019 at 10:54:46AM +0000, Aaltonen Eero wrote:
+>...
+> +SRC_URI = "\
+> +    git://git@github.com/docopt/docopt.cpp.git;protocol=ssh \
+>...
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb}           | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb} (90%)
+  The authenticity of host 'github.com (140.82.118.3)' can't be established.
+  RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+  Are you sure you want to continue connecting (yes/no)?
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-similarity index 90%
-rename from meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-rename to meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-index a43408908..3ef7bee43 100644
---- a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
- DEPENDS = "curl openssl zlib libssh2 libgcrypt"
- 
- SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
--#v0.27.8
--SRCREV = "2882803ca2b2cdedd069746422155a23fdd002b2"
-+SRCREV = "3828d7afdd08b595584048e8e4dab6ddd4506ed1"
- 
- S = "${WORKDIR}/git"
- 
+Please use a protocol=https URI, similar to other github URIs.
+
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
