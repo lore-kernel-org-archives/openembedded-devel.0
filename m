@@ -1,37 +1,53 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D0B27F217
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 664C27D41C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2019 18:04:44 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46HKf46LZ7z29;
-	Mon, 26 Aug 2019 20:04:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1566842685;
-	bh=Y6dmZJFYMxNldjaB40jYNmtJkdCRb9l47k6F0mLtxaQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=kGu1HzzsqQRaVZSc1Mr4ACp8uJ81nOaO+kxMqNR0XDs2MuDgXM2fm4NwmPnV6RatL
-	lwhunmn4Uo5Y2FAiq15Lnx8luW2pI6/WfmHmIbwBC8vvYIdbdmTZDumwtDVoOh1vC4
-	1eVHOFphAoYpiBb/+Fa1m8qVewAYUoENS7VOboa/v5rRsPZn/SBEAv5OiSYkg939HC
-	lZrMJY6A30i+Mcif7Lb0eOwH9Fhqgk9PTmbIOzmR+T9Q87qk5mc8dovKXWlJT8EznF
-	nLsd5c1+sDTTjLB+EPfmiVToZe19QbdbOKip9F3CXovoBDKpOrUmni6ROv8O8B9JY4
-	HPGrywTFLj/4rSoIxcHGSmU7wh1dYfRyk5dNVSxV419mkg7cVCcH6A+hb/JFd/y7IP
-	ZwsYCnN0NU5annJIMEG2iJqTJ0T4OLIxUOhHSmkLoyced4qHJWoATw+OgaI1vcg0Z0
-	EUTfVfGybdjFFEOLOowSnQQegtmvlr+xqbiJjshKzhLL2pfs5qSZ4UT0E3lFyxdaXg
-	Xr6A7UitoFgHUL8ICK/c9WeH5q3HQSbzLSo4ItdBgHuNF/FN0WtoKHAw3rHLVIBic6
-	4hynm64d+22iLaT9REnmNEuuUK8z7BuHai+FgaMzLUO58GEz+MZCYaiNfrdqlJqAI3
-	7YrCRikM4EaIJIiHo8KmeU0E=
-Date: Mon, 26 Aug 2019 21:04:37 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Aaltonen Eero <eero.aaltonen@vaisala.com>
-Message-ID: <20190826180437.GA18874@localhost>
-References: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
+	Mon, 26 Aug 2019 20:26:38 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id u16so16572572wrr.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Aug 2019 13:26:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=slPTpGMBWWoHNvRHyqEkRroBbcp1buwgmkDCpXngrUQ=;
+	b=i5NucGHvPI7Dwkr/pZ8J/2/kCe7kvbAcFiul4Xr4rmGyCBLJ1ZHK+Nr7l6Vxw+Ov/x
+	lFSz1bZFtSwHycS1l88tms2RhG9S1Kxidy4abF2mucXO4BcAIApQjKQ6PDSmYT97TmsC
+	eROUA6ZJPKP2cPZahcuWLon+5BnB2moF3kT7NUfw39L/ZpOK82mO4MKvKDyKlxMizQEP
+	hOPtEX7n4OiMQiZGgDVOVAExx5teO+Svk7c7UOUA6L2qTFq+xDSpzq2E7sSTRNQ1YYG0
+	xEAcPtAVeX/nlobVQtXcycQwPmHp5PqDEaw+GUlgCLGPyx1nnibvSNv56EkjE9UX/kS5
+	p9lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=slPTpGMBWWoHNvRHyqEkRroBbcp1buwgmkDCpXngrUQ=;
+	b=Ajw7DmXVx7/dRTemR29+QNmtA1CUXTXHU2Z6xwPQHKoR/X/LqyvQ9l3gqkiTAZ3jIf
+	4lv9gLxT5pnlTqA71qbguBMrVJ1mGOEDrzz5JWMtS1HymFnu2Gv7qDGnmRlJHfqyeFJj
+	jTWixVRXjWB7ArY3pf95Yb/MgJ3iSGuu6OkPesWxzX296aPDzBOGxXpynEeW5KcAPGOz
+	kOgBP15RC9xFkoZ1E7m5vGx/6C/9sWpDHH/0UAoGlb/wAjQGpdLx1SeRj4rA/4zHi5jB
+	1+xyNsjeHxTTY981i1xsqCUtXCnknGFx996DvbR14pxV4qAHWU/A9tqefq/4tyLukC+U
+	So2Q==
+X-Gm-Message-State: APjAAAVgXlpqf4VqTYKNwfBq81YduohydxRY4QQuzhqetBxoeK4M3//n
+	BsdqhZpI8H3KVUPC4yeGMnSq6wsl
+X-Google-Smtp-Source: APXvYqxnjo1xHN//xlVB0ZZ/noX4PxJou5sZqiyBqCLBlWtQrbw2JHxya/9T9l3wrs0BY907RWmODA==
+X-Received: by 2002:adf:f404:: with SMTP id g4mr23844595wro.290.1566851198690; 
+	Mon, 26 Aug 2019 13:26:38 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F43169926A389420D7F9B96.dip0.t-ipconnect.de.
+	[2003:f0:7f43:1699:26a3:8942:d7f:9b96])
+	by smtp.gmail.com with ESMTPSA id
+	u129sm1130163wmb.12.2019.08.26.13.26.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 26 Aug 2019 13:26:38 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Aug 2019 22:26:29 +0200
+Message-Id: <20190826202629.1781-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190823105345.12430-1-eero.aaltonen@vaisala.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] Recipe for docopt.cpp option parsing library
+Subject: [PATCH] cmark: initial add 0.29.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2019 18:04:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 Aug 2019 20:26:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 23, 2019 at 10:54:46AM +0000, Aaltonen Eero wrote:
->...
-> +SRC_URI = "\
-> +    git://git@github.com/docopt/docopt.cpp.git;protocol=ssh \
->...
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-support/cmark/cmark_git.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-support/cmark/cmark_git.bb
 
-  The authenticity of host 'github.com (140.82.118.3)' can't be established.
-  RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-  Are you sure you want to continue connecting (yes/no)?
-
-Please use a protocol=https URI, similar to other github URIs.
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-support/cmark/cmark_git.bb b/meta-oe/recipes-support/cmark/cmark_git.bb
+new file mode 100644
+index 000000000..f74a39b50
+--- /dev/null
++++ b/meta-oe/recipes-support/cmark/cmark_git.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "CommonMark parsing and rendering library and program in C"
++HOMEPAGE = "https://github.com/commonmark/cmark"
++LICENSE = "BSD-2-Clause & MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=81f9cae6293cc0345a9144b78152ab62"
++
++SRC_URI = "git://github.com/commonmark/cmark.git"
++SRCREV = "8daa6b1495124f0b67e6034130e12d7be83e38bd"
++S = "${WORKDIR}/git"
++
++PV = "0.29.0"
++
++inherit cmake lib_package
++
++EXTRA_OECMAKE += " \
++    -DCMARK_TESTS=OFF \
++    -DCMARK_STATIC=OFF \
++"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.21.0
 
 
