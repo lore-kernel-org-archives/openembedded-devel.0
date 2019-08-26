@@ -1,49 +1,30 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
-	[209.85.208.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 41EC17F5EC
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F5047F3D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Aug 2019 21:19:40 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id r12so23535343edo.5
+	Mon, 26 Aug 2019 02:05:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,431,1559491200"; d="scan'208";a="74258789"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Aug 2019 10:05:41 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6F83F4CE0455
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Aug 2019 14:19:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=CXiulHw98wG1B2wqsjMi+ZoBM1ZGESQr6ovZVSpNVmw=;
-	b=bbxpgJPXRxOF7ENZVFrmWMA6D7dCZFKX8IfxQr6vUcYTK108bv1r1LB+Z3mjz748S0
-	ZhUQQlog/+HZQnoO2CxVfmLfRBs2VhbBmyU75LChTmjZPnsmzPkseWFkkM5lkttDs32o
-	ljqX1ZnlB1XZ3DfemCM9A6aVckZMFV8Omr4MbF2x9102iZwV5trjtrbgFhOSgnKfWZcg
-	zc2yTdzxDoQ3lIKkoDXLKIXyBJwyn90LyA2ya7ec83QeCfoEuC8/z2TR238a+uxSbRIk
-	jCEUkoPgx+DZBLa4mp2au1NLO3d2sL7742Z9QPL/fp3lk2jtUdWxIluN48mYiTPG9H//
-	Pb/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CXiulHw98wG1B2wqsjMi+ZoBM1ZGESQr6ovZVSpNVmw=;
-	b=OozTDt6Q25DaSXFnLBZBbJUWlQYAMED9aaEew1d1tLrHoAcYfeWnvHRRbamTZI0R0G
-	KD6ziSqbbvazE9jn+WzdAxrrSZYDCoQF2rVubJ1bRyohkxqEowb5vHWz7ftZZYLvZjFj
-	JemAKyNDcN5wKjrIEWZwSffhLj6XBfV3LS44EPRGRaKGljDUuqwEOgFSNA6JmgD9kGQO
-	98RoeKtYSkkaNiSI9J2Tme9/i8nLSDqLchWivM5SHsQLDeCIkOtFXVd3k4L2YMmrGdC0
-	grYqMpCiIFhVyo5VtCaNqMXZnttLuNtP5ZwpMEtDWwJ+d+tqndcME8kLW7ST+B3ZOluw
-	exZw==
-X-Gm-Message-State: APjAAAW8qYIxn81/sv+Dc42wdCMr3arXi+ajm4X4EvmynXYnMOD5n9r9
-	wFZenhqedXVCW9kApxcbvmqh37ZaC8U=
-X-Google-Smtp-Source: APXvYqxJYvQOasObxl29a9/9oeLaVk8dhpQTlpwCNWAhtfy2WtAaCfUe18OyzCv22Eg5J4WlOWSzFw==
-X-Received: by 2002:a50:fc12:: with SMTP id i18mr15932315edr.23.1566767980694; 
-	Sun, 25 Aug 2019 14:19:40 -0700 (PDT)
-Received: from localhost.localdomain (c83-252-117-108.bredband.comhem.se.
-	[83.252.117.108]) by smtp.gmail.com with ESMTPSA id
-	ch24sm2644044ejb.3.2019.08.25.14.19.39
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 25 Aug 2019 14:19:40 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Aug 2019 23:19:35 +0200
-Message-Id: <20190825211935.27985-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nftables: update to 0.9.2
+	Mon, 26 Aug 2019 10:05:32 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 26 Aug 2019 10:05:45 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 26 Aug 2019 11:05:23 +0900
+Message-ID: <20190826020523.17174-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: 6F83F4CE0455.AFCFF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] libtdb: upgrade 1.4.1 -> 1.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Aug 2019 21:19:40 -0000
+X-List-Received-Date: Mon, 26 Aug 2019 02:05:42 -0000
+Content-Type: text/plain
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- .../nftables/{nftables_0.9.1.bb => nftables_0.9.2.bb}         | 4 ++--
+ .../libtdb/{libtdb_1.4.1.bb => libtdb_1.4.2.bb}               | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-filter/nftables/{nftables_0.9.1.bb => nftables_0.9.2.bb} (85%)
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.4.1.bb => libtdb_1.4.2.bb} (93%)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_0.9.1.bb b/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
-similarity index 85%
-rename from meta-networking/recipes-filter/nftables/nftables_0.9.1.bb
-rename to meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
-index 9d0da33e3..98e8050b8 100644
---- a/meta-networking/recipes-filter/nftables/nftables_0.9.1.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
-@@ -8,8 +8,8 @@ DEPENDS = "libmnl libnftnl readline gmp bison-native"
- UPSTREAM_CHECK_URI = "https://www.netfilter.org/projects/nftables/files/"
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
+similarity index 93%
+rename from meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb
+rename to meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
+index d25c3fa65..4973e80ca 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.1.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
+@@ -11,8 +11,8 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://0001-waf-add-support-of-cross_compile.patch \
+ "
  
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
--SRC_URI[md5sum] = "e2facbcad6c5d9bd87a0bf5081a31522"
--SRC_URI[sha256sum] = "ead3bb68ed540bfbb87a96f2b69c3d65ab0c2a0c3f6e739a395c09377d1b4fce"
-+SRC_URI[md5sum] = "dfe130724d7c998eb26b56447e932899"
-+SRC_URI[sha256sum] = "5cb66180143e6bfc774f4eb316206d40ac1cb6df269a90882404cbf7165513f5"
+-SRC_URI[md5sum] = "d1d0a5d43614add17d1e41bbdb209446"
+-SRC_URI[sha256sum] = "dd4ecd9678e8d3ea772623bd81fe49b43363a2f970a76fb5468322753787aa4b"
++SRC_URI[md5sum] = "b2c05ad68334368d3258a63db709f254"
++SRC_URI[sha256sum] = "9040b2cce4028e392f063f91bbe76b8b28fecc2b7c0c6071c67b5eb3168e004a"
  
- inherit autotools manpages pkgconfig
- 
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
 -- 
 2.17.1
+
+
 
 
