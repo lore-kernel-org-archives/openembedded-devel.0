@@ -1,48 +1,35 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
-	[209.85.167.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 07A207D6C5
+Return-Path: <Daniel.Klauer@gin.de>
+X-Greylist: delayed 1790 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 28 Aug 2019 13:13:51 UTC
+Received: from good-out-33.clustermail.de (good-out-33.clustermail.de
+	[212.223.166.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E185F7D718
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 12:33:50 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id g9so2042532lfb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 05:33:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=GHDXxVbh2rJw5WrffWtDPkF0stfQTGDM74c3+3Dbj4U=;
-	b=YpW0LJOwdfhuvZANol59JniHn5zinsOzZsQMzjFsIohjTJOiOfUOVvHVcJjMvaB6dJ
-	nIIIQfuVN8/JiCFWmA0cQ+doRFOEUaWoe9aptWfoj88Xx/5zcaWwiWiag7/aoQTf5svq
-	j6eMP9QBG4N4e0gsj66VWrCujJtrcWyE39WPJEmt3q2zoXot6u567OWArEYDkRExYNBL
-	fP1eso1VReNZKWqkA/Koc4uNOpVYo5+tr4n8XOJlzGU9o6OZw6lFIZmDZIBf6XPqezWr
-	mvK8UQT26t71Pg/a353qMNjR++RP+227HNLcLOZRO31DcSaJg6vilgBRX6m9saKQFkTJ
-	Q+FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=GHDXxVbh2rJw5WrffWtDPkF0stfQTGDM74c3+3Dbj4U=;
-	b=TKOEDt3jRT1sDZM3kgbepvXiWvWreUhZ4lTBFGvyACH0sbMkZe5FUjokaFhYQtsbkz
-	SbzeskiWGDKt6vwED6MfVFZVwHl0hEfdJxAr71u9g72goWiSIga5UvYmtm3Bc0ovtxw6
-	xoB8OHZe3xglZGE5kfP2GtBQMMAxwTrn6O5jW2QXu+qr7xR2YrAIAgz32KpMvR3ME/Fe
-	/iNKoVtVh+phCq8L04DWh8LEIWkqshOF6IBukDFzxMRBNfnIcniREwQQh8ieRWlcvY8i
-	wvPTbj7Pe6JuUI9cmKiMjEpYZbYTTQ2NdAWyuMdobVmNRbyPBATVLc9DtzIkUwtbqZoK
-	W44Q==
-X-Gm-Message-State: APjAAAXOwVfOCtw4sm8ckLjFqucAei1k6CICI4i/t/cw9O0BVVH7qpzO
-	p35NDe0pZiMzNPTXLMiaOQMH7Qsglke2Mf7B9t4=
-X-Google-Smtp-Source: APXvYqyVZCwkdHdL+b1r0A8rNVIQbmmVZ9JLaOXOEatYSFyI3kXQHbU1gjoSGnG5wLzCXBextlfehyNHsuunsciCcBo=
-X-Received: by 2002:ac2:447c:: with SMTP id y28mr2399990lfl.177.1566995631151; 
-	Wed, 28 Aug 2019 05:33:51 -0700 (PDT)
+	Wed, 28 Aug 2019 13:13:51 +0000 (UTC)
+Received: from [10.0.0.7] (helo=frontend.clustermail.de)
+	by smtpout-03.clustermail.de with esmtp (Exim 4.92)
+	(envelope-from <Daniel.Klauer@gin.de>) id 1i2xIq-0003aM-Rc
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Aug 2019 14:44:02 +0200
+Received: from [217.6.33.237] (helo=Win2012-02.gin-domain.local)
+	by frontend.clustermail.de with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES256-SHA:256) (Exim 4.92)
+	(envelope-from <Daniel.Klauer@gin.de>) id 1i2xIq-0007Ol-Op
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Aug 2019 14:43:56 +0200
+Received: from daniel-desktop.gin-domain.local (10.160.138.39) by
+	Win2012-02.gin-domain.local (192.168.1.12) with Microsoft SMTP Server
+	(TLS) id 15.0.1395.4; Wed, 28 Aug 2019 14:43:56 +0200
+From: Daniel Klauer <daniel.klauer@gin.de>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Aug 2019 14:43:35 +0200
+Message-ID: <20190828124335.1240-1-daniel.klauer@gin.de>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20190828034307.182169-1-kai.kang@windriver.com>
-	<CAMKF1sroS6zWjdRmh2GLbCF62Hnmifzdr282t8JZBB-ONzd82Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sroS6zWjdRmh2GLbCF62Hnmifzdr282t8JZBB-ONzd82Q@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Wed, 28 Aug 2019 08:33:40 -0400
-Message-ID: <CADkTA4MfM16A=+joFJnG6uv-u7Zw73TqzbubsPxzhKuqzeio5Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][RFC PATCH 0/1] Failed to compile networkmanager with musl
+X-Originating-IP: [10.160.138.39]
+X-ClientProxiedBy: Win2012-02.gin-domain.local (192.168.1.12) To
+	Win2012-02.gin-domain.local (192.168.1.12)
+Subject: [meta-oe][PATCH] sjf2410-linux-native: Fix do_deploy sstate caching
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,194 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 12:33:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Aug 2019 13:13:53 -0000
+Content-Type: text/plain
 
-On Wed, Aug 28, 2019 at 12:27 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Tue, Aug 27, 2019 at 8:43 PM <kai.kang@windriver.com> wrote:
-> >
-> > From: Kai Kang <kai.kang@windriver.com>
-> >
-> > Hi Khem,
-> >
-> > I am updating networkmanager to 1.20. But I meet a problem with musl
-> > that "error: redefinition of 'struct ethhdr'". I find a patch for kerne=
-l
-> > which is created in Jan 2018. The musl part has been merged in musl:
-> >
-> > commit b583c5d3b4cc2c54c68eef5eb7855ecfacee8bfc
-> > Author: Hauke Mehrtens <hauke@hauke-m.de>
-> > Date:   Sat Jan 6 23:32:52 2018 +0100
-> >
-> >     add additional uapi guards for Linux kernel header files
-> >
-> >     With Linux kernel 4.16 it will be possible to guard more parts of t=
-he
-> >     Linux header files from a libc. Make use of this in musl to guard a=
-ll
-> >     the structures and other definitions from the Linux header files wh=
-ich
-> >     are also defined by the header files provided by musl. This will ma=
-ke
-> >     it possible to compile source files which include both the libc
-> >     headers and the kernel userspace headers.
-> >
-> >     This extends the definitions done in commit 04983f227238 ("make
-> >     netinet/in.h suppress clashing definitions from kernel headers")
-> >
-> > But the kernel part doesn't exist in current kernel source.
-> > It should not be networkmanager specified.
-> >
-> > Do you have any suggestion to fix this error? Thanks.
->
-> the kernel patch should be applied to linux-libc-headers
+deploy.bbclass requires do_deploy to copy files to DEPLOYDIR (sstate
+input dir) instead of DEPLOY_DIR_TOOLS (sstate output dir), otherwise
+the sstate caching does not work.
 
-.. and please wait a day or so before sending it, since I'm about to
-bump the reference headers to 5.2
+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
+---
+ .../samsung-soc-utils/sjf2410-linux-native_svn.bb              | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Cheers,
+diff --git a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb b/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
+index c56c8b9dd..9e609c4dd 100644
+--- a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
++++ b/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
+@@ -27,8 +27,7 @@ do_install() {
+ }
+ 
+ do_deploy() {
+-    install -d ${DEPLOY_DIR_TOOLS}
+-    install -m 0755 sjf2410 ${DEPLOY_DIR_TOOLS}/sjf2410-${PV}
++    install -m 0755 sjf2410 ${DEPLOYDIR}/sjf2410-${PV}
+ }
+ 
+ addtask deploy before do_build after do_install
+-- 
+2.17.1
 
-Bruce
-
->
-> >
-> >
-> > PS: detailed error messages:
-> >
-> > x86_64-poky-linux-musl-gcc -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -m=
-fpmath=3Dsse -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat -Wform=
-at-security -Werror=3Dformat-security --sysroot=3D/home/kkang/buildarea/222=
--Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkmanager/1=
-.20.0-r0/recipe-sysroot -Isrc/25a6634@@NetworkManager@sta -Isrc -I../Networ=
-kManager-1.20.0/src -Ilibnm-core -I../NetworkManager-1.20.0/libnm-core -I. =
--I../NetworkManager-1.20.0/ -Ishared -I../NetworkManager-1.20.0/shared -I..=
-/NetworkManager-1.20.0/shared/systemd/sd-adapt-shared -I../NetworkManager-1=
-.20.0/shared/systemd/src/basic -I../NetworkManager-1.20.0/shared/systemd/sr=
-c/shared -I/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2=
--64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/gio=
--unix-2.0 -I/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core=
-2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/gl=
-ib-2.0 -I/home/kkang/buildare
->  a/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkm=
-anager/1.20.0-r0/recipe-sysroot/usr/lib/glib-2.0/include -fdiagnostics-colo=
-r=3Dalways -pipe -D_FILE_OFFSET_BITS=3D64 -std=3Dgnu11 -fdata-sections -ffu=
-nction-sections -O2 -g -feliminate-unused-debug-types -fmacro-prefix-map=3D=
-/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-li=
-nux-musl/networkmanager/1.20.0-r0=3D/usr/src/debug/networkmanager/1.20.0-r0=
- -fdebug-prefix-map=3D/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp=
-/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0=3D/usr/src/debug/ne=
-tworkmanager/1.20.0-r0 -fdebug-prefix-map=3D/home/kkang/buildarea/222-Yocto=
-/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-=
-r0/recipe-sysroot=3D -fdebug-prefix-map=3D/home/kkang/buildarea/222-Yocto/b=
-uild-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0=
-/recipe-sysroot-native=3D -DRTLD_DEEPBIND=3D0 -fPIC -pthread -DGLIB_VERSION=
-_MIN_REQUIRED=3DGLIB_VERSION_2_40 -DGLIB_VE
->  RSION_MAX_ALLOWED=3DGLIB_VERSION_2_40 -DNETWORKMANAGER_COMPILATION=3DNM_=
-NETWORKMANAGER_COMPILATION_DAEMON -MD -MQ 'src/25a6634@@NetworkManager@sta/=
-devices_nm-device.c.o' -MF 'src/25a6634@@NetworkManager@sta/devices_nm-devi=
-ce.c.o.d' -o 'src/25a6634@@NetworkManager@sta/devices_nm-device.c.o' -c ../=
-NetworkManager-1.20.0/src/devices/nm-device.c
-> > In file included from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64=
-/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/=
-usr/include/net/ethernet.h:10,
-> >                  from ../NetworkManager-1.20.0/src/systemd/src/systemd/=
-sd-dhcp-client.h:23,
-> >                  from ../NetworkManager-1.20.0/src/systemd/nm-sd.h:21,
-> >                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:=
-76:
-> > /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-pok=
-y-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/netinet/if=
-_ether.h:111:8: error: redefinition of 'struct ethhdr'
-> >   111 | struct ethhdr {
-> >       |        ^~~~~~
-> > In file included from ../NetworkManager-1.20.0/libnm-core/nm-utils.h:32=
-,
-> >                  from ../NetworkManager-1.20.0/libnm-core/nm-setting-ip=
--config.h:29,
-> >                  from ../NetworkManager-1.20.0/src/NetworkManagerUtils.=
-h:26,
-> >                  from ../NetworkManager-1.20.0/src/devices/nm-device.h:=
-31,
-> >                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:=
-23:
-> > /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-pok=
-y-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/linux/if_e=
-ther.h:167:8: note: originally defined here
-> >   167 | struct ethhdr {
-> >       |        ^~~~~~
-> > In file included from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64=
-/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/=
-usr/include/netinet/if_ether.h:118,
-> >                  from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64=
-/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/=
-usr/include/net/ethernet.h:10,
-> >                  from ../NetworkManager-1.20.0/src/systemd/src/systemd/=
-sd-dhcp-client.h:23,
-> >                  from ../NetworkManager-1.20.0/src/systemd/nm-sd.h:21,
-> >                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:=
-76:
-> > /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-pok=
-y-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/net/if_arp=
-.h:22:8: error: redefinition of 'struct arphdr'
-> >    22 | struct arphdr {
-> >       |        ^~~~~~
-> > In file included from ../NetworkManager-1.20.0/src/devices/nm-device.c:=
-34:
-> > /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-pok=
-y-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/linux/if_a=
-rp.h:144:8: note: originally defined here
-> >   144 | struct arphdr {
-> >       |        ^~~~~~
-> >
-> >
-> > Regards,
-> > Kai
-> >
-> >
-> >
-> >
-> > Kai Kang (1):
-> >   networkmanager: 1.18.2 -> 1.20.0
-> >
-> >  ...e.ac-Fix-pkgconfig-sysroot-locations.patch |  22 ---
-> >  ...ttings-settings-property-documentati.patch |  71 ---------
-> >  ...on.build-pkgconfig-sysroot-locations.patch |  23 +++
-> >  ...eate-settings-property-documentation.patch | 146 ++++++++++++++++++
-> >  ...Fix-build-with-musl-systemd-specific.patch |  10 +-
-> >  .../musl/0002-Fix-build-with-musl.patch       |  12 +-
-> >  .../musl/0003-Fix-mrand48_r-with-musl.patch   |  47 ++++++
-> >  ...ger_1.18.2.bb =3D> networkmanager_1.20.0.bb} |  72 +++++----
-> >  8 files changed, 262 insertions(+), 141 deletions(-)
-> >  delete mode 100644 meta-networking/recipes-connectivity/networkmanager=
-/networkmanager/0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.pat=
-ch
-> >  delete mode 100644 meta-networking/recipes-connectivity/networkmanager=
-/networkmanager/0002-Do-not-create-settings-settings-property-documentati.p=
-atch
-> >  create mode 100644 meta-networking/recipes-connectivity/networkmanager=
-/networkmanager/fix-meson.build-pkgconfig-sysroot-locations.patch
-> >  create mode 100644 meta-networking/recipes-connectivity/networkmanager=
-/networkmanager/meson-do-not-create-settings-property-documentation.patch
-> >  create mode 100644 meta-networking/recipes-connectivity/networkmanager=
-/networkmanager/musl/0003-Fix-mrand48_r-with-musl.patch
-> >  rename meta-networking/recipes-connectivity/networkmanager/{networkman=
-ager_1.18.2.bb =3D> networkmanager_1.20.0.bb} (62%)
-> >
-> > --
-> > 2.20.0
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
-
---=20
-- Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end
-- "Use the force Harry" - Gandalf, Star Trek II
 
