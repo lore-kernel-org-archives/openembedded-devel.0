@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 20CE17ED8E
+	by mail.openembedded.org (Postfix) with ESMTP id 1841F7ED8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 17:15:40 +0000 (UTC)
+	Wed, 28 Aug 2019 17:16:44 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46JXSX6D04z3J
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46JXTm60T6z3J
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 19:15:39 +0200 (CEST)
+	Wed, 28 Aug 2019 19:16:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567012541;
-	bh=OEU7UIKpVmCiaeHYRI+R3Gv23/0fnn7lscFOafrgU7o=;
+	s=default; t=1567012605;
+	bh=+g0Yyd5qdTbBbu5CdXShhCbEIxRc/eSfpjctFNck0k0=;
 	h=From:To:Subject:Date:From;
-	b=gCS+8buAvft1OK+Np2Z7NJBXfTx+bjoWQwkHhmg1P2a77GBFIFrX4H543ViSqGf3I
-	n5OsWwOZuQ47aBmGmQ7k5SRSVo70h8GQVxLmzc18Jp3KpkM7SB1e7c71mrnaVf2eqc
-	p0ERwiKYMMlLDKWKXIjbk6ymbARevkf3L8dAjTptqyvajcbGUEugIMPZlN25b/cjsa
-	99r5pG8NovaJWLXqCNNEBngCL0B0ewOgFms+cHz58WoKFISYLGw8hpDRCCGc6qNea0
-	/xJZjB9r+aMhGxh1F4jnlxDg5Hn0mcvjEmwkBDnNNsMFu7y8+oqN4a7B74h32/1n/k
-	7VGcaZL+wq2HLEf+W512F373Vk4MxtZht5AAIAXwOvdJT8F+b8oiaG0h3Z3z0bjoc6
-	ytUasmxalyYqlgDpo3R7y1RPb33PmNWDuIrmGzow19/PdxT+yRRxXBtMx9xqw5owxR
-	U4gwloeLcjXXgRJe4qTuGRzKMkmbBEiZl03N36FIu7R+9FvQUh+Djy53ZL0S4JH49b
-	7DdRIbud1iXBsXrAFwa8DunJMRbzfas+aFvMWGik/Ck77GNhQFc8FykEOX6/W977di
-	Um6kZUfEECuyvQlFwm49V5vF2Y99YC2rqh+iQgfYOjkVFINApcEpkjc/W3bZqAIG8f
-	acludGdIjoxV7+aCDeNF+f5g=
+	b=SorJ7XKl3643wb5j4TXt3AlKOYRx6r2UNe1jEBAM6kSbuTQ7kPhk9u1nZP2hOQ/q1
+	6Bqauu1OOnLmBPqThte7pICY0omYXxkzoNUiTK+PLKIn1WgI7qZwv6MEfJaTIbcAgo
+	DReiletIrtizxfA2XjC4vWa35ALoOdda8OOIGo8scl5QxIXkk3Mk65leBm/9dQO4mp
+	S1rOfnh5KbsuJ+g6s1QtCJNX4VUzL0RmusZUe3GU9Q00c+wE+TX/0s+d4Crj+xG8/o
+	gtlQzNU4rBOsKJvCQE6PJJGuYH8cGe6+GZ8+nRS8SCbn62EJ/qMkNQx5o6dF9bJWpQ
+	ePjwVmD5mljAJqy3petpcfUEV7Q+dWDhYi98wRT2QXySXUVTjLfGtDlKnSMFS0wEGN
+	0YJ7Za6CtFV1SmlwRdbhCVWR5VMYm2cEBjucgw0o0U0JGyaDL4Kv/m5FdxHNR3MgQe
+	PgJU0AnOYU8S9JaKcegKLUgwo9HhUASm3Jk2Ma6JhfWD6War32AIbQRY9EQ+WomYwS
+	VSrbG2eHtClwNImniTkbi5QOqz3d/sEshdEZikX6DbKpfFIxbPTzG2jVe+SB4T4gnS
+	UXJOT6tvXlmmzTjQO0bi5Nk+3Uz5NJa/4rDHZA5HVX7WpL3COdZjfMH25yLne7tG8N
+	Pl+p9eyOrYPZ2J3ATaVWq09o=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Aug 2019 20:15:38 +0300
-Message-Id: <20190828171538.16160-1-bunk@stusta.de>
+Date: Wed, 28 Aug 2019 20:16:43 +0300
+Message-Id: <20190828171643.11134-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
+Subject: [meta-networking][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,59 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 17:15:41 -0000
+X-List-Received-Date: Wed, 28 Aug 2019 17:16:44 -0000
 
 This gives users a proper error message when trying to build
 a known non-building package.
 
+netkit-rsh already had COMPATIBLE_HOST_libc-musl = 'null'.
+
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-oe/recipes-kernel/crash/crash_7.2.6.bb                   | 2 +-
- meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb | 2 +-
- meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb             | 2 +-
- meta-oe/recipes-test/pm-qa/pm-qa_git.bb                       | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb      | 2 +-
+ meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb     | 2 +-
+ meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 3 ---
+ .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb         | 2 +-
+ .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb         | 2 +-
+ 5 files changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.6.bb b/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-index 0a7c384a7..770b99ff0 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.2.6.bb
-@@ -117,4 +117,4 @@ RDEPENDS_${PN}_class-cross = ""
- ARM_INSTRUCTION_SET = "arm"
+diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+index 4fe6893fa..3a27c2c5b 100644
+--- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
++++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+@@ -40,4 +40,4 @@ inherit autotools-brokensep
+ EXTRA_OEMAKE = "BIN_GROUP=root MAN_GROUP=root RDIST_MODE=755 RDISTD_MODE=755 MAN_MODE=644"
  
- # http://errors.yoctoproject.org/Errors/Details/186964/
+ # http://errors.yoctoproject.org/Errors/Details/186972/
 -EXCLUDE_FROM_WORLD_libc-musl = "1"
 +COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index 50dab8d16..051656b5a 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -43,4 +43,4 @@ do_install_append() {
- }
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+index e466cc232..3df6824ff 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+@@ -69,4 +69,4 @@ INSANE_SKIP_${PN} = "dev-so"
+ RDEPENDS_${PN} += "bash python"
  
- # http://errors.yoctoproject.org/Errors/Details/186966/
+ # http://errors.yoctoproject.org/Errors/Details/186970/
 -EXCLUDE_FROM_WORLD_libc-musl = "1"
 +COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb b/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
-index e6b9d6b5b..6b955dcfd 100644
---- a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
-+++ b/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
-@@ -19,4 +19,4 @@ do_configure_prepend () {
- }
+diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+index 6f203c5a8..a6716d06c 100644
+--- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
+@@ -103,6 +103,3 @@ RPROVIDES_${PN}-server = "rshd"
  
- # http://errors.yoctoproject.org/Errors/Details/186961/
+ RDEPENDS_${PN}-server = "xinetd"
+ RDEPENDS_${PN}-server += "tcp-wrappers"
+-
+-# http://errors.yoctoproject.org/Errors/Details/186963/
+-EXCLUDE_FROM_WORLD_libc-musl = "1"
+diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+index 296ebcad2..716794f44 100644
+--- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+@@ -68,4 +68,4 @@ FILES_${PN}-dbg = "${prefix}/src/debug \
+ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+ 
+ # http://errors.yoctoproject.org/Errors/Details/186962/
 -EXCLUDE_FROM_WORLD_libc-musl = "1"
 +COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
-index 09290909d..7e9971ea4 100644
---- a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
-+++ b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
-@@ -65,4 +65,4 @@ do_install () {
- RDEPENDS_${PN} +="bash"
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index 4b035af36..a8d98c940 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -62,5 +62,5 @@ SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2b
+ FILES_${PN} += "${sbindir}/in.* ${libdir}/* ${sysconfdir}/xinetd.d/*"
  
- # http://errors.yoctoproject.org/Errors/Details/186956/
+ # http://errors.yoctoproject.org/Errors/Details/186954/
 -EXCLUDE_FROM_WORLD_libc-musl = "1"
 +COMPATIBLE_HOST_libc-musl = 'null'
+ RCONFLICTS_${PN} = "inetutils-telnetd"
 -- 
 2.17.1
 
