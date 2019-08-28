@@ -1,54 +1,51 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 41B2D7CE21
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+	[209.85.214.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EF1AA7ECBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 13:53:40 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id f72so131994wmf.5
+	Wed, 28 Aug 2019 14:16:18 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id bj8so56066plb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 06:53:42 -0700 (PDT)
+	Wed, 28 Aug 2019 07:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=SsXtcBG83/357WYpytv/3hDxtYyvy80ndNfWjCsn/Ag=;
-	b=ZZDFgyie8Y5XN1okoi5DDdImzeJyDqqhVKbHL31kSNYNIpJW30LMyROA9l6Jq2fFof
-	Uv3Pwxqgu6UJdSeBkj8o00SbXQ5gTI0FUa1WQcYq8p9YtWKD93YcXISrQxSRgAkPIvkI
-	RXW/cEF9B+uxKJnccrCM+t+Xwd8jKIVBuzOAc7l1h1ClUIejTK6lHhyS/PbOJ/QhrAzV
-	rYpMt//mDpJWRHlphSqhA9hD+aMJQmYm9vWrvNBbm3x8ucfU6skQq+zbQcWHv9dkuPc8
-	/LaA7pXrLgclCeyshTxjHYsbJP+G3D1CM5dmbLpsuzNkavlRFYXbxQv/K3FS6zdUJ/Md
-	ILdA==
+	bh=OCgeCQBGJDtCZ2sdONfUK3QPgvHwunrmkoILev74YJE=;
+	b=XDUF7wL7yLSgSjvKXGgceSTW3LUZ0U8O1E5wNX2j4Jwu0MjfkqgyRhKTt1ycF3xlxL
+	NA+G/HwDd6lGoP9PRvPwbIV3rvE/NUQymlVf0eQ5qv4Agr8k/pAn4RS54IqY3MyZBRGi
+	0ms/Pxo8MRkHPmrqaLmw7ZJ1HwpMKI/RyVk3jX8J9DNsv6dFpuQTq70IF025/O861jvE
+	aX4EaFv7Vo3PxlWGfuHQqS/LlOuhNYncarAR2H87kaWddPXvvKA0fepJtTTOYM7EO61U
+	tjF0hF6POFGDvW6VWq9WCAjI2J6nGCugUItwO2hu4+3v5xuCsdVYIm4pDinqUvuLbo87
+	UcxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=SsXtcBG83/357WYpytv/3hDxtYyvy80ndNfWjCsn/Ag=;
-	b=L2c4hiXOxl5dg5+hz9W4MvumjDyNEt6e5zB8Rrvn1J0cQGxue7rXwBPp1uQQznW5Lc
-	jVHEj1oKEWotSwlZuo72DTl7Q8njqMBSB9yEJuT/ZJIvZsHI33VP94zT+VrYWYaIblbt
-	2iEjXSVRn2PAPpHnNlTxpAMvgoojSwnz4Vta/FSYfTIhbNnW3aJlj6HHeFglmeo+XUl7
-	wtzmK8BE5S1oRZOV43uFkBipa+YlUO8Uf/XqvRjnqkfPU0e90uuCyuyEf0MzIy3HDiR1
-	ctVcmoavZAEgIS4TfBEiFf0bZgJcfzz9FVkvRIXtZPD50TWUVlkSFAkEHebnlMRWTlnK
-	B+NA==
-X-Gm-Message-State: APjAAAUVyM0+r+iGwvMAXDkNSoFeb75gHOQuTe9y0q44RHcr0ArXbAuB
-	gK+dHCW3OxV/WLRZOhtxBSObn0uD
-X-Google-Smtp-Source: APXvYqwWkIQ5/B5hzm1MEi10VbCjeuInhJ8QTvN91iHc7FkM/Jp0aJ5IMKo9/MlXtf2Xxk5QDuPMTw==
-X-Received: by 2002:a05:600c:254c:: with SMTP id
-	e12mr4887092wma.168.1567000421172; 
-	Wed, 28 Aug 2019 06:53:41 -0700 (PDT)
-Received: from Unimatrix05-Bionic.lan
-	([2001:b07:5d32:c012:7c5d:97d6:64f2:9ca6])
-	by smtp.gmail.com with ESMTPSA id
-	j20sm5783672wre.65.2019.08.28.06.53.40
+	bh=OCgeCQBGJDtCZ2sdONfUK3QPgvHwunrmkoILev74YJE=;
+	b=Q916COX3XxN8VEMCgA1ZLfclkn3YQrfGdMu3gBEI9Rs2TYYMAS+IIZEH0yrcDb8lbG
+	5hqyxnFyzoYhfx2yNMUBekxG5ZcxsvCQDo+UDhEyXs6hDxLY14eO//h3U3dCTaCLqe4V
+	xWCGEHmxJNxKiaGrUWue2WeT18RqfBC6x6BMlFpL9aKoEQuj0HnXN9LbHNuNs61su/H3
+	v5W5mUvfG0fYYvG1xE50ptTuF+WOxLfdwKZVU+4bB7fu91H1R5TGRMfDJ9jhRTQ62FWK
+	NlxvYrNtg4pYGrF5D0zowOsM83VPosXiiovXhoGWWeMcsBH4enm5SEztLvBc2y3lu9bE
+	SLyw==
+X-Gm-Message-State: APjAAAU8irhse1eTxcb7Ie43ow+AidAbUr0CpaytUbKVtGEog6AVgsQR
+	fpuLuBCNeq0Pv2tllCFCxPx8cQUrELs=
+X-Google-Smtp-Source: APXvYqz+JA3AkcOdUs7ivV1xh72soQmL5now7eXP2XH5/7qf/LUZY66MRjMAJtrUsgdouvXeAVVdcg==
+X-Received: by 2002:a17:902:598b:: with SMTP id
+	p11mr3339319pli.96.1567001779286; 
+	Wed, 28 Aug 2019 07:16:19 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	d189sm4197428pfd.165.2019.08.28.07.16.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 28 Aug 2019 06:53:40 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+	Wed, 28 Aug 2019 07:16:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Aug 2019 15:53:37 +0200
-Message-Id: <20190828135337.9493-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
+Date: Wed, 28 Aug 2019 07:16:10 -0700
+Message-Id: <20190828141610.9991-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] ifmetric: add initial recipe based on Debian packaging and patches
+Subject: [meta-oe][PATCH V2] libgpiod: nherit python3native unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,142 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 13:53:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Aug 2019 14:16:19 -0000
 Content-Transfer-Encoding: 8bit
 
----
- .../ifmetric/ifmetric/ifmetric.8_typo.patch   | 15 ++++++++++++
- .../ifmetric.c_netlink-invalid-arg.patch      | 16 +++++++++++++
- .../ifmetric/ifmetric/ifmetric.c_typo.patch   | 24 +++++++++++++++++++
- .../nlrequest.c_packet-too-small_fix.patch    | 16 +++++++++++++
- .../recipes-support/ifmetric/ifmetric_0.3.bb  | 17 +++++++++++++
- 5 files changed, 88 insertions(+)
- create mode 100644 meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.8_typo.patch
- create mode 100644 meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_netlink-invalid-arg.patch
- create mode 100644 meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_typo.patch
- create mode 100644 meta-networking/recipes-support/ifmetric/ifmetric/nlrequest.c_packet-too-small_fix.patch
- create mode 100644 meta-networking/recipes-support/ifmetric/ifmetric_0.3.bb
+this recipe inherits python3native class conditionally, this condition
+depends on a given packageconfig, however inherit ${VAR} syntax requires
+VAR to be evaluated before inheriting it, therefore if someone appends
+python3 to packageconfig via a bbappend, then the packageconfig will
+become effective and add --enable-bindings-python to configure but
+inherit wont evaluate correctly since the expression adding to
+packageconfig
 
-diff --git a/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.8_typo.patch b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.8_typo.patch
-new file mode 100644
-index 000000000..246910036
---- /dev/null
-+++ b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.8_typo.patch
-@@ -0,0 +1,15 @@
-+Description: Correct typo: s/ommited/omitted/
-+Author: Michael Shuler <michael@pbandjelly.org>
-+Index: ifmetric/man/ifmetric.8
-+===================================================================
-+--- ifmetric.orig/man/ifmetric.8
-++++ ifmetric/man/ifmetric.8
-+@@ -9,7 +9,7 @@ ifmetric is a Linux tool for setting the
-+ 
-+ ifmetric uses the Linux NETLINK interface to manipulate the routes. Because of that it is compatible with routes created with the new iproute2 utility.
-+ .SH OPTIONS
-+-You should specify the interface name as first parameter. The second parameter should be the new metric. If ommited the metric 0 (highest) is used.
-++You should specify the interface name as first parameter. The second parameter should be the new metric. If omitted the metric 0 (highest) is used.
-+ .SH RETURN VALUES
-+ \fI0\f1 Success
-+ 
-diff --git a/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_netlink-invalid-arg.patch b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_netlink-invalid-arg.patch
-new file mode 100644
-index 000000000..374135d4f
---- /dev/null
-+++ b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_netlink-invalid-arg.patch
-@@ -0,0 +1,16 @@
-+Description: Fix "NETLINK: Error: Invalid argument" for links that are down, in kernel 4.4+
-+Author: Jim Paris <jim@jtan.com>
-+Bug-Debian: http://bugs.debian.org/864889
-+Index: ifmetric/src/nlrequest.c
-+===================================================================
-+--- a/src/ifmetric.c
-++++ b/src/ifmetric.c
-+@@ -97,6 +97,8 @@
-+     l = NLMSG_PAYLOAD(n, sizeof(struct rtmsg));
-+     a = RTM_RTA(r);
-+     
-++    r->rtm_flags &= ~(RTNH_F_DEAD | RTNH_F_LINKDOWN);
-++
-+     while(RTA_OK(a, l)) {
-+         switch(a->rta_type) {
-+             case RTA_PRIORITY:
-diff --git a/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_typo.patch b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_typo.patch
-new file mode 100644
-index 000000000..992f7d2fb
---- /dev/null
-+++ b/meta-networking/recipes-support/ifmetric/ifmetric/ifmetric.c_typo.patch
-@@ -0,0 +1,24 @@
-+Description: Correct spelling-error-in-binary s/Recieved/Received/
-+Author: Michael Shuler <michael@pbandjelly.org>
-+Index: ifmetric/src/ifmetric.c
-+===================================================================
-+--- ifmetric.orig/src/ifmetric.c	2013-09-04 18:37:59.000000000 -0500
-++++ ifmetric/src/ifmetric.c	2013-09-04 19:08:38.539750778 -0500
-+@@ -38,7 +38,7 @@
-+             case RTA_OIF:
-+ 
-+                 if (RTA_PAYLOAD(a) != sizeof(int)) {
-+-                    fprintf(stderr, "NETLINK: Recieved corrupt RTA_OIF payload.\n");
-++                    fprintf(stderr, "NETLINK: Received corrupt RTA_OIF payload.\n");
-+                     return -1;
-+                 }
-+                 
-+@@ -102,7 +102,7 @@
-+             case RTA_PRIORITY:
-+ 
-+                 if (RTA_PAYLOAD(a) != sizeof(int)) {
-+-                    fprintf(stderr, "NETLINK: Recieved corrupt RTA_PRIORITY payload.\n");
-++                    fprintf(stderr, "NETLINK: Received corrupt RTA_PRIORITY payload.\n");
-+                     return NULL;
-+                 }
-+ 
-diff --git a/meta-networking/recipes-support/ifmetric/ifmetric/nlrequest.c_packet-too-small_fix.patch b/meta-networking/recipes-support/ifmetric/ifmetric/nlrequest.c_packet-too-small_fix.patch
-new file mode 100644
-index 000000000..15b310333
---- /dev/null
-+++ b/meta-networking/recipes-support/ifmetric/ifmetric/nlrequest.c_packet-too-small_fix.patch
-@@ -0,0 +1,16 @@
-+Description: Fix "NETLINK: Packet too small or truncated!" error.
-+Author: Benedek László <benedekl@gmail.com>
-+Bug-Debian: http://bugs.debian.org/514197
-+Index: ifmetric/src/nlrequest.c
-+===================================================================
-+--- ifmetric.orig/src/nlrequest.c	2013-09-05 14:10:42.000000000 -0500
-++++ ifmetric/src/nlrequest.c	2013-09-05 14:19:06.573420862 -0500
-+@@ -44,7 +44,7 @@
-+ 
-+     for (;;) {
-+         int bytes;
-+-        char replybuf[2048];
-++        char replybuf[4096];
-+         struct nlmsghdr *p = (struct nlmsghdr *) replybuf;
-+         
-+         if ((bytes = recv(s, &replybuf, sizeof(replybuf), 0)) < 0) {
-diff --git a/meta-networking/recipes-support/ifmetric/ifmetric_0.3.bb b/meta-networking/recipes-support/ifmetric/ifmetric_0.3.bb
-new file mode 100644
-index 000000000..4ee7c42a3
---- /dev/null
-+++ b/meta-networking/recipes-support/ifmetric/ifmetric_0.3.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Set routing metrics for a network interface"
+PACKAGECONFIG_append = " python3"
+
+will be coming _after_ the inherit, and the builds will fail e.g.
+
+| ../../../libgpiod-1.3/bindings/python/gpiodmodule.c:8:10: fatal error: Python.h: No such file or directory
+|  #include <Python.h>
+
+This will still mean that python3native is always inherited but the
+effective configure option will be --disable-bindings-python and that
+will do the right thing
+
+See. https://github.com/openembedded/meta-openembedded/issues/140
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Inherit python3native unconditionally
+
+ meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
+index 756b143ef7..d559028989 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
+@@ -12,7 +12,8 @@ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+ 
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+-inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
 +
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+SRC_URI = "http://0pointer.de/lennart/projects/ifmetric/ifmetric-${PV}.tar.gz \
-+	   file://ifmetric.8_typo.patch \
-+	   file://ifmetric.c_netlink-invalid-arg.patch \
-+	   file://ifmetric.c_typo.patch \
-+	   file://nlrequest.c_packet-too-small_fix.patch"
-+SRC_URI[md5sum] = "74aa3f5ee8aca16a87e124ddcc64fa36"
-+SRC_URI[sha256sum] = "0fa8510a4e34e555f136f9df81d26618313f2d69a4880c0fb5967f19502f1aec"
-+
-+inherit autotools
-+
-+# disable lynx support for now
-+EXTRA_OECONF = "--disable-lynx"
++inherit python3native
+ 
+ PACKAGES =+ "${PN}-python"
+ FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
 -- 
-2.17.1
+2.23.0
 
 
