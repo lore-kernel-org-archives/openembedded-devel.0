@@ -1,24 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BE2AD6C1D5
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 25CDB7D58A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 05:48:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7S5mRmv029302
+	Wed, 28 Aug 2019 07:06:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7S75tIm017763
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2019 22:48:27 -0700 (PDT)
-Received: from localhost (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 27 Aug 2019 22:48:26 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Wed, 28 Aug 2019 00:06:06 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Wed, 28 Aug 2019 00:05:44 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Aug 2019 13:48:24 +0800
-Message-ID: <1566971304-27868-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Wed, 28 Aug 2019 15:05:43 +0800
+Message-ID: <20190828070543.19658-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.136]
-Subject: [meta-networking][PATCH] samba: upgrade 4.10.6 -> 4.10.7
+Subject: [meta-oe][PATCH] libblockdev: fix PACKAGECONFIG regarding python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 05:48:29 -0000
+X-List-Received-Date: Wed, 28 Aug 2019 07:06:15 -0000
 Content-Type: text/plain
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../recipes-connectivity/samba/{samba_4.10.6.bb => samba_4.10.7.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.10.6.bb => samba_4.10.7.bb} (98%)
+The python2 PACKAGECONFIG was added during an upgrade, defaulting to
+be disabled. The RDEPENDS part should be 'python' instead 'python2'
+because there's no python2 recipe.
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.7.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.10.6.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.10.7.bb
-index 7c77a16..d13a6b4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.10.6.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.7.bb
-@@ -32,8 +32,8 @@ SRC_URI_append_libc-musl = " \
-            file://0001-samba-fix-musl-lib-without-innetgr.patch \
-           "
+Also, we don't need to inherit some python classes. We just need to specify
+FILES variable. After this change, the python2 and python3 PACKAGECONFIG
+items could correctly work.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb
+index c5fc928a7..985bd03e4 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb
+@@ -8,7 +8,7 @@ SECTION = "devel/lib"
  
--SRC_URI[md5sum] = "9782cac8ef06049942be5f5c93b954be"
--SRC_URI[sha256sum] = "9efbeb52db1203dc779b118f1c48c161e569f7a6af5101e745497ee6296eef42"
-+SRC_URI[md5sum] = "05472d0dd943b3ccbc3be5032a9eb563"
-+SRC_URI[sha256sum] = "34f30494b6b63700f54be22be636e8a6e0430577166a76a017075e11c02a1ebb"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+-inherit autotools python3native gobject-introspection
++inherit autotools gobject-introspection
  
+ SRCREV = "f6e4538485d0442b3674e182c01ffe5a0f258ad4"
+ SRC_URI = " \
+@@ -17,11 +17,11 @@ SRC_URI = " \
+ 
+ S = "${WORKDIR}/git"
+ 
+-FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.7/site-packages"
+ 
+ PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath nvdimm"
+ PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+-PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
++PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python"
+ PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
+ PACKAGECONFIG[lvm-dbus] = "--with-lvm_dbus, --without-lvm_dbus, multipath-tools, lvm2"
+ PACKAGECONFIG[dm] = "--with-dm, --without-dm, multipath-tools, lvm2"
 -- 
-2.7.4
+2.17.1
 
 
