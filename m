@@ -1,89 +1,51 @@
-Return-Path: <chris.laplante@agilent.com>
-Received: from NAM04-CO1-obe.outbound.protection.outlook.com
-	(mail-eopbgr690083.outbound.protection.outlook.com [40.107.69.83])
-	by mail.openembedded.org (Postfix) with ESMTP id DBB837EC92
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1407F7E874
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2019 21:52:32 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=R/vl7MOIIWOJltjp/gR3tRwvoBi2nhRkHta9XqXKBtU39eZmN0cMx7bwfCkI8aF4K9VCjV+xUqtyNXpMavk7R9fgEItnz0ynwgBfRhhxX0HqgH8RD+mHVreE1lR2HM/OeqP23XpUXxy82iD2LytaTU9ccEQ+eMZ2jF63qXm9idBl8FauksLH6d2hh+YTDdrKr1w7mJShrQFDeUZbx0TcYSg1JxJxbtia4z9e0T7FcEhjiANDnGHjcTDNj9DiMyBDqh9XJZV1chWg43FD7DQAv3I4+FjpOikps0gpp1E+q4baTFdtYBXyHl5RzgZhltmVEsC7udJbIyoPsJzPTcaGwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=1zkEkJQRzs1zLweDAyAcCRELuDx3kYKPmXNfErPb3u0=;
-	b=oZEQUd1+r7mW0pWw8n+I2lBhjPp8zjd5TU8gPoe16u6rzoDzHID17PmGJx0O6aRscGa7miKSIjUin/c7M4bx68W8n3SOvdspzz66l4VpuVE6XGeaEkOx+5urZ6iRvvcqEnpYNqQgdQ7wNd5J/FtIjEw8G1RjC9LWUJ1aT+K3yW9pBTfomfjXpMnf8nbjDjUB7x3G+iAYnc6QSvWua7CKnMAfAVOt6eMcz/LEQq7LQUlYb0mmMIQSjYuBRbT04SQOt33ChuxD26mb7Y6xKBUdyJOE0+OWP0JIG6CVe99S2XxtNWcSb7bSJLxULWjpjXFa7wK8D6jBgQjzgQbFHapBBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	192.25.218.34) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=agilent.com;
-	dmarc=pass (p=reject sp=none pct=100) action=none
-	header.from=agilent.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agilent.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=1zkEkJQRzs1zLweDAyAcCRELuDx3kYKPmXNfErPb3u0=;
-	b=cA27jVzJPL82qhD6BVdjmgkUaAqoy6ex3qKKbXZdUFqhWkqTdRbQl1n5pPsVIoQB1FM5VAGVE3nbX18QUDHj1yRJVU85LD1zD69KwCF/FWutMbK9EBlCZui3Gzu2uXXWogVMMJdJSxGf9IQODFSIp2plkakyPY2PvP3ucX9/ebA=
-Received: from DM3PR12CA0054.namprd12.prod.outlook.com (2603:10b6:0:56::22) by
-	BN6PR12MB1652.namprd12.prod.outlook.com (2603:10b6:405:6::15) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2178.16; Tue, 27 Aug 2019 21:52:31 +0000
-Received: from CO1NAM05FT030.eop-nam05.prod.protection.outlook.com
-	(2a01:111:f400:7e50::206) by DM3PR12CA0054.outlook.office365.com
-	(2603:10b6:0:56::22) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2199.14 via
-	Frontend Transport; Tue, 27 Aug 2019 21:52:30 +0000
-Authentication-Results: spf=pass (sender IP is 192.25.218.34)
-	smtp.mailfrom=agilent.com; lists.openembedded.org;
-	dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
-	header.from=agilent.com;
-Received-SPF: Pass (protection.outlook.com: domain of agilent.com designates
-	192.25.218.34 as permitted sender) receiver=protection.outlook.com;
-	client-ip=192.25.218.34; helo=edgeappmail.agilent.com;
-Received: from edgeappmail.agilent.com (192.25.218.34) by
-	CO1NAM05FT030.mail.protection.outlook.com (10.152.96.141) with
-	Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2220.7 via Frontend Transport; Tue, 27 Aug 2019 21:52:30 +0000
-Received: from localhost.localdomain (130.30.246.172) by
-	edgeappmail.agilent.com (192.25.218.34) with Microsoft SMTP Server id
-	15.1.1713.5; Tue, 27 Aug 2019 15:52:21 -0600
-From: Chris Laplante <chris.laplante@agilent.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 27 Aug 2019 17:51:41 -0400
-Message-ID: <1566942701-20679-1-git-send-email-chris.laplante@agilent.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 28 Aug 2019 01:14:43 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id t14so378123plr.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Aug 2019 18:14:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HAX/G+gPkdr30zPaitqT4mM7aH5M0E/PtE9FjJGUx4Q=;
+	b=WHKDViR1HyVYWwxxw9PaYfwX8N71nHD6Z8yk3Z73qZainYY6VQa/sXCOG0NyhaLPY2
+	kLLscRXtopE0C0bkUsgJOsofmpTCl4FYAta8ZAIhqRNonSfRDNAl0ddEnkBJ9V5hL6el
+	vp8KvXchzocV9V0fMf1ivZ6xBNS0YUz2MKeQYSBzIB9gPYS8KV4WWdqXQI18aeWdLHOF
+	hzfvCVw5VcLmY6kyAbmWOA7TCtf3/4RIPdiFn4Xm9/a2PP5vBPSLMOMi+B+bsjMwn28c
+	IKLCJQI4s1Npg28oqdRm+uLEhSgwUByvtT8ofJmMt8a3rIZvabNWoZPPqsZGlGH5/KZx
+	aj7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HAX/G+gPkdr30zPaitqT4mM7aH5M0E/PtE9FjJGUx4Q=;
+	b=goJpFVn05lWvOFVrkWnbHHvJ/PnYah688/XhzhBKN14GlQcP+H57MtUFMCQmZMUhyC
+	1tbGseQu8wkB01ecp1rsd8eItqP2kJCpjH7nPrEyAXXzNAo/nJCAu/DzSlTxyFwCyv1A
+	mC8lHimYhCTUuzzzw1HVvQqjOOdPKzZ/PrRzsZEzNXkLZ+5DA3TQ+YaWvWvHVWMArdT5
+	g0ua2iTsfpV4pYIsLyAcwBXlyrX5RUV024peK2ZZJMFaz0jLZQx5IeNzagq8AHEHQH7y
+	+MGmuc300AFGVGxBiaLPR13TnTnQ1lVz/oCfRlapFxLyX9R98IFzj27fOB9+/W2ySA42
+	8HHA==
+X-Gm-Message-State: APjAAAWxT8heh504UPceFulbWGIdzeWk8Ro9Q+ICTC/Impg24aOmVaDZ
+	Er2dr8XE1E6LRwfFqbLiGoSmMztNlCI=
+X-Google-Smtp-Source: APXvYqyxxvpnZ22VTKsWTTLmYnDgtydSSTRV/Jf2NLZ7j+4Hbnrh8/EwI4fGp6JUnuvZnt9aCYYbZg==
+X-Received: by 2002:a17:902:b40e:: with SMTP id
+	x14mr1744914plr.289.1566954884591; 
+	Tue, 27 Aug 2019 18:14:44 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	z16sm598885pfr.136.2019.08.27.18.14.43
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 27 Aug 2019 18:14:44 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Aug 2019 18:14:36 -0700
+Message-Id: <20190828011436.24057-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Received-SPF: None (wpcosapexchedg3.windmz.agilent.com:
-	chris.laplante@agilent.com does not designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.25.218.34; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(136003)(376002)(346002)(396003)(39860400002)(2980300002)(189003)(29502001)(199004)(50466002)(7636002)(70206006)(305945005)(51416003)(8676002)(356004)(6666004)(246002)(106002)(5660300002)(107886003)(4326008)(6916009)(16586007)(478600001)(36906005)(26005)(50226002)(49486002)(36756003)(336012)(2906002)(956004)(44832011)(426003)(476003)(8936002)(86362001)(2351001)(126002)(486006)(2616005)(14444005)(47776003)(48376002)(316002)(186003)(5001870100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR12MB1652;
-	H:edgeappmail.agilent.com; FPR:; SPF:Pass; LANG:en;
-	PTR:wpcosapexchedg3.windmz.agilent.com,cos.smtp.agilent.com;
-	MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: bb7f9939-3aa5-4a98-b464-08d72b38dc11
-X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(4709080)(1401327)(2017052603328);
-	SRVR:BN6PR12MB1652; 
-X-MS-TrafficTypeDiagnostic: BN6PR12MB1652:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BN6PR12MB1652DC72DCC80D95AE05BABC8BA00@BN6PR12MB1652.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:454;
-X-Forefront-PRVS: 0142F22657
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: QHqL26WLUrwrDtKni9SsssERUaR3D/KP80yNLtTMPNDQQYWhYTp/RfBGI5HH/0muaL7qzfYzMADsvkxIQMAiOzh9SsQI1FGhsHjza57oeXy5OYZaLFqkHUgcLKRLUp+dSFGBRYmjC5O80Pq0Q4nNp7FkH2AIfS665dr/l8C6mULfnz/QcU8UFSpjhN9Rx8O9SolD77h2mwJc+ZkffRgXHJdvhHbbdkYjUMHriK/3CIxGHsCCGxR0SmMhEnoMDuZoS8aC3xjsZENyuvLRH4xnfHHz/JUh8CQV2tpJoSSsAuvv9fUwlNN1RtiTvbv4IcZtOSUvvQTxckOYge8p2TNEpt27jMdKalQxBH8nnjiYkWlZlvXIGzw5AcYcBEUCfg6sWCfWVJYuFKbuHHTbmV9MoIWXVGbRZbK6w8B/xs2sxi4=
-X-OriginatorOrg: agilent.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2019 21:52:30.5264 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb7f9939-3aa5-4a98-b464-08d72b38dc11
-X-MS-Exchange-CrossTenant-Id: a9c0bc09-8b46-4206-9351-2ba12fb4a5c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a9c0bc09-8b46-4206-9351-2ba12fb4a5c0;
-	Ip=[192.25.218.34]; Helo=[edgeappmail.agilent.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1652
-Subject: [meta-oe][PATCH] breakpad: fix patch striplevel to avoid 'devtool modify breakpad' error
+Subject: [meta-oe][PATCH] libgpiod: Enable python3 in default packageconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,46 +58,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 21:52:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 28 Aug 2019 01:14:44 -0000
+Content-Transfer-Encoding: 8bit
 
-Since the patch is modifying files in a self-contained git repo that is
-.gitignored, git ends up thinking we have just touched a submodule.
+this recipe inherits python3native class conditionally, this condition
+depends on a given packageconfig, however inherit ${VAR} syntax requires
+VAR to be evaluated before inheriting it, therefore if someone appends
+python3 to packageconfig via a bbappend, then the packageconfig will
+become effective and add --enable-bindings-python to configure but
+inherit wont evaluate correctly since the expression adding to
+packageconfig
 
-This leads to 'devtool modify breakpad' failing with:
+PACKAGECONFIG_append = " python3"
 
-    Exception: bb.process.ExecutionError: Execution of 'git add .; git -c
-    user.name="OpenEmbedded" -c user.email="oe.patch@oe" commit -a -m
-    "Committing changes from do_patch
+will be coming _after_ the inherit, and the builds will fail e.g.
 
-    %% ignore - from do_patch"' failed with exit code 1:
-    On branch devtool
-    Changes not staged for commit:
-            modified:   src/third_party/lss (modified content)
+| ../../../libgpiod-1.3/bindings/python/gpiodmodule.c:8:10: fatal error: Python.h: No such file or directory
+|  #include <Python.h>
 
-            no changes added to commit
+This patch inverts the logic, meaning if someone has to disable python3
+bindings should write a bbappend e.g.
 
-            ERROR: Function failed: patch_task_postfunc
+PACKAGECONFIG_remove = "python3"
 
-Signed-off-by: Chris Laplante <chris.laplante@agilent.com>
+This will still mean that python3native will be inherited but the
+effective configure option will be --disable-bindings-python and that
+will do the right thing
+
+See. https://github.com/openembedded/meta-openembedded/issues/140
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 +-
+ meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-index 5f9a72e..06f3ee8 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-@@ -42,7 +42,7 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad \
-            file://0001-disable-calls-to-getcontext-with-musl.patch \
-            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
-            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
--           file://dont-clobber-rsp.patch \
-+           file://dont-clobber-rsp.patch;patchdir=src/third_party/lss;striplevel=4 \
- "
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
+index 756b143ef7..ea1e49129b 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.4.1.bb
+@@ -6,7 +6,7 @@ SRC_URI[md5sum] = "585b4bb431f99c4ba9b3ee58b9d494c1"
+ SRC_URI[sha256sum] = "21ae8fd1f8dafc2eb2ba50e652390cf533d21351419a7426255895cb52e21b1c"
  
+ # enable tools and cxx bindings
+-PACKAGECONFIG ?= "cxx tools"
++PACKAGECONFIG ?= "cxx tools python3"
+ 
+ PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
 -- 
-2.7.4
+2.23.0
 
 
