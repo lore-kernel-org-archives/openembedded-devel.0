@@ -1,33 +1,37 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1841F7ED8E
+	by mail.openembedded.org (Postfix) with ESMTP id 1153F7F168
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 17:16:44 +0000 (UTC)
+	Wed, 28 Aug 2019 18:06:19 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46JXTm60T6z3J
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 19:16:44 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46JYZy69S3z3J;
+	Wed, 28 Aug 2019 20:06:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567012605;
-	bh=+g0Yyd5qdTbBbu5CdXShhCbEIxRc/eSfpjctFNck0k0=;
-	h=From:To:Subject:Date:From;
-	b=SorJ7XKl3643wb5j4TXt3AlKOYRx6r2UNe1jEBAM6kSbuTQ7kPhk9u1nZP2hOQ/q1
-	6Bqauu1OOnLmBPqThte7pICY0omYXxkzoNUiTK+PLKIn1WgI7qZwv6MEfJaTIbcAgo
-	DReiletIrtizxfA2XjC4vWa35ALoOdda8OOIGo8scl5QxIXkk3Mk65leBm/9dQO4mp
-	S1rOfnh5KbsuJ+g6s1QtCJNX4VUzL0RmusZUe3GU9Q00c+wE+TX/0s+d4Crj+xG8/o
-	gtlQzNU4rBOsKJvCQE6PJJGuYH8cGe6+GZ8+nRS8SCbn62EJ/qMkNQx5o6dF9bJWpQ
-	ePjwVmD5mljAJqy3petpcfUEV7Q+dWDhYi98wRT2QXySXUVTjLfGtDlKnSMFS0wEGN
-	0YJ7Za6CtFV1SmlwRdbhCVWR5VMYm2cEBjucgw0o0U0JGyaDL4Kv/m5FdxHNR3MgQe
-	PgJU0AnOYU8S9JaKcegKLUgwo9HhUASm3Jk2Ma6JhfWD6War32AIbQRY9EQ+WomYwS
-	VSrbG2eHtClwNImniTkbi5QOqz3d/sEshdEZikX6DbKpfFIxbPTzG2jVe+SB4T4gnS
-	UXJOT6tvXlmmzTjQO0bi5Nk+3Uz5NJa/4rDHZA5HVX7WpL3COdZjfMH25yLne7tG8N
-	Pl+p9eyOrYPZ2J3ATaVWq09o=
+	s=default; t=1567015580;
+	bh=Jkz4vpW83ICAHoV2BDdBxyf7HR6ply/a2r2oR7q/76Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=OL0Vb51z1ZHZc+Cudg1ZUfFSSpIVWbq4e3c/7bcP6hxv7Q9M/U/sAcNZURKRd58VM
+	UfcDjJoSx/jckYxi3rxssOSCsAEbivzFqs8z4L3apFCtIzI8EHsp+Yl19yrqCyWzUY
+	fOTZiG4ZlNmVWoPZQFiBmh9hvS7pVTTebb/0h1uPff4wKjgIzhRnB7C3dn4TW/jk2e
+	uodr5vV++5nOd01EVu1fE/I/Mjb+jEnbSLYDlp18wemCjSdS6XXfXEMhdMUku5plwU
+	PHRwQqDKHQXwkUolusEalbsLx4c2rkhXZZ9yHXPJ6qDbJSw5TqvylGOFvh0HgNb33L
+	w2LLMuLUWfy+tUKEKi3NOOeAR0i9asGUgsmV2Mpw/T3TFk+BOuD9NgC94FUqqL0kh5
+	2K0IrPK5FhyO/W/l7vLtv+w0D1viWYhmfhW4IZdP7X6lWjK+thY+P+Osza7na3UtCX
+	vnU+s8+SYmo+SDx/e3qzDIIm/W5tlbp5R9J6InbmHcpmPys36QcAkoCmhadWQ+kp8P
+	I9VxO+1BQbgGg5+3JRC8ZUkW1XOl2FQCl4NwEPdaB2KH97yHPvpuLoLtfL2dSS3Gqh
+	Ng9IQEianaymOlbKjohgDLXUK6HS8sOLkrQDmMyvzRQbdRwQPUE0bQbqWXDStUtGOm
+	koKx8eXVgwzooNdS12J2gm5Q=
+Date: Wed, 28 Aug 2019 21:06:16 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Aug 2019 20:16:43 +0300
-Message-Id: <20190828171643.11134-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190828180616.GA3044@localhost>
+References: <20190828034307.182169-1-kai.kang@windriver.com>
+	<CAMKF1sroS6zWjdRmh2GLbCF62Hnmifzdr282t8JZBB-ONzd82Q@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sroS6zWjdRmh2GLbCF62Hnmifzdr282t8JZBB-ONzd82Q@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][RFC PATCH 0/1] Failed to compile networkmanager with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,75 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 17:16:44 -0000
+X-List-Received-Date: Wed, 28 Aug 2019 18:06:21 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-This gives users a proper error message when trying to build
-a known non-building package.
+What about marking networkmanager as incompatible with musl instead of 
+maintaining an ever-growing mess?
 
-netkit-rsh already had COMPATIBLE_HOST_libc-musl = 'null'.
+Networkmanager uses parts of systemd as a library and also has own
+glibc-only usages.
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb      | 2 +-
- meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb     | 2 +-
- meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 3 ---
- .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb         | 2 +-
- .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb         | 2 +-
- 5 files changed, 4 insertions(+), 7 deletions(-)
+Both systemd and networkmanager are fundamentally Linux-only,
+and for systemd it is known that upstream has made the design
+decision to not compromise their software for rare usecases
+with C libraries other than glibc.
 
-diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-index 4fe6893fa..3a27c2c5b 100644
---- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-+++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-@@ -40,4 +40,4 @@ inherit autotools-brokensep
- EXTRA_OEMAKE = "BIN_GROUP=root MAN_GROUP=root RDIST_MODE=755 RDISTD_MODE=755 MAN_MODE=644"
- 
- # http://errors.yoctoproject.org/Errors/Details/186972/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-+COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-index e466cc232..3df6824ff 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-@@ -69,4 +69,4 @@ INSANE_SKIP_${PN} = "dev-so"
- RDEPENDS_${PN} += "bash python"
- 
- # http://errors.yoctoproject.org/Errors/Details/186970/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-+COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-index 6f203c5a8..a6716d06c 100644
---- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-@@ -103,6 +103,3 @@ RPROVIDES_${PN}-server = "rshd"
- 
- RDEPENDS_${PN}-server = "xinetd"
- RDEPENDS_${PN}-server += "tcp-wrappers"
--
--# http://errors.yoctoproject.org/Errors/Details/186963/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index 296ebcad2..716794f44 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -68,4 +68,4 @@ FILES_${PN}-dbg = "${prefix}/src/debug \
- RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
- 
- # http://errors.yoctoproject.org/Errors/Details/186962/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-+COMPATIBLE_HOST_libc-musl = 'null'
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 4b035af36..a8d98c940 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -62,5 +62,5 @@ SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2b
- FILES_${PN} += "${sbindir}/in.* ${libdir}/* ${sysconfdir}/xinetd.d/*"
- 
- # http://errors.yoctoproject.org/Errors/Details/186954/
--EXCLUDE_FROM_WORLD_libc-musl = "1"
-+COMPATIBLE_HOST_libc-musl = 'null'
- RCONFLICTS_${PN} = "inetutils-telnetd"
+AFAIK OE is the only distribution trying to build either of these
+with musl, other musl-using distributions are using less heavyweight
+solutions.
+
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
