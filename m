@@ -1,47 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D02607E6F8
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id C5BCA7E6B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2019 04:27:18 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id u190so1285605qkh.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2019 21:27:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=1xQU8oCXnIAWyeMpvI7u9qMK62tNDKg0Y6wMrcuGvD4=;
-	b=s9IdBnL4FvoV3MjlQ9Or/v0ZczG3+oZyULQu4BAP8nlS4aRqEVH5j0cbVELu1AmW7+
-	3L8vnJIRkZkWjMARCl2LCML9ZvG1YvcCMZPi7UuaEfBNxTFzwfMiVxto/khKw8CxisXV
-	xw/5CB21kLIoIcMrNszgwSfEGC+4uPKpFgSX95ZxVd1/xajdjMcv+KgZCiQ43c9BYieD
-	dTWPhFbTSSTOoqw7Vln92R9nHh8Kmy7Wx/N/ACIHHuU1tZhOAficRqjRq2evTBIj3mAj
-	usH+KzIGpJxJV59JPEdIEiKyI3WsqEtiRqcCNRqCVN5Yyh6i3a2kksdbH2zJh6Ak1LTj
-	5cgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=1xQU8oCXnIAWyeMpvI7u9qMK62tNDKg0Y6wMrcuGvD4=;
-	b=CyLsTv1s0VAirptAEZZ6uMtuKEDgC33DY/4XUsxKp3RP5NCpiPxyNSTPHHGGz5fQcO
-	9XroJ/auOooxXktXmx97i5TjQRDqh3citelrohpT4TsU9+f44mbZnITAVGMru/bxCH2V
-	Rl6XVR33JkBEHqtXKqj7XF9L9q0PdyaBI+TXRaSoGjJWw5U+G0DOTAHXQunUuPQEL8Cl
-	f2c2Lm/SQ4x4P1GxIOd2umkMeDkm9ji3wKbsI2Aa7gpNz+6h4vtxzQ3q7isG5pbQadbA
-	zJZ/ap2PItaMOuFUHLPbW/6zN3tGlGGOwhXePx7CZxDUIa46so/qxtduToqxk7PVMhtf
-	j54Q==
-X-Gm-Message-State: APjAAAXAcyJEVzbqeq2SAFWDsbF0UroteqMyckAGRY8sXfnAVlZY1erL
-	dbvM/x+d/h9OoFtX4QfB23FNP5u3i7u4ztK5PAk=
-X-Google-Smtp-Source: APXvYqy/XV1w96hlBN/7RwQRZfhsFMuvfTY5fYQ69HOcPyftFKOPuaNN7u6UbOaRqb1kgBImirUGnmIiqzN6oamrXIk=
-X-Received: by 2002:a37:ef1a:: with SMTP id j26mr2102709qkk.474.1566966439309; 
-	Tue, 27 Aug 2019 21:27:19 -0700 (PDT)
+	Wed, 28 Aug 2019 05:22:36 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46JDdm3Llsz4s;
+	Wed, 28 Aug 2019 07:22:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1566969756;
+	bh=h8LI2get0njOQVhqqX08hWxd5q2p55+RffjdEvI92mE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=oF3laP8tb+hzzupTd23qQJm+Q9R6DvY3u7BvfoSAWLnr/++eTJXuta4XTfCsn9UKW
+	C+FNSuUZQNmtyPtoxuSXOsZhnYNEzz2Scfpjy8caCo6rpPPG2io8S4d++GOQP1a/L+
+	uiUcCUdrn2F2DmIXcrVfNJ+/EWPr5oy2u0uBAGpwT+y2YjDhflja5sCOwlMxE7+Vru
+	WxIN8VwWa1XIXq50YXBfbqJo0pbbcX9KADTf6Cg+JjHZHlPr5BjoPdzAwZFk4WyIod
+	2N6M2GFvQutQHYQRH7+onjgfRsa7WfRzEzf4UDeZCku0vDjp3AtgWYsDQZLQJT+cA9
+	2tGKVmpYjN1FsaRO5EqC5T7RCyAI3UzeCvVuksjVuoBPwL4ZJWF9MJKMUkcne6LPTU
+	gA6L8cxwuPh6Xma+illvQz4civJn15nLMttFfKX4YfDSFgwKrxIoP/4RtizK8wMtnd
+	40bBETSR5GpNJkUETzgxiMeKiwiagKZCSv4VwZbcrRBnoReVlLoMFBG/yFzyeh4NXa
+	ObuvEWqnL87iKFcj95MNifiqY9+vHvGji109NOrrhW7eyJhMpuIdUko/isJ0qEsO9N
+	E8yUXEkZXtSMGij4Vz27iZD2ADP7xcfKK0sJmn33h1Q2yRC0skxVKOWkOc870Iiv5o
+	RAwdfEv+yjigLlB49SXDkelU=
+Date: Wed, 28 Aug 2019 08:22:34 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190828052234.GA15528@localhost>
+References: <20190828011436.24057-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20190828034307.182169-1-kai.kang@windriver.com>
-In-Reply-To: <20190828034307.182169-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 27 Aug 2019 21:27:02 -0700
-Message-ID: <CAMKF1sroS6zWjdRmh2GLbCF62Hnmifzdr282t8JZBB-ONzd82Q@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][RFC PATCH 0/1] Failed to compile networkmanager with musl
+In-Reply-To: <20190828011436.24057-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libgpiod: Enable python3 in default packageconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,165 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 04:27:19 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Aug 2019 05:22:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Tue, Aug 27, 2019 at 8:43 PM <kai.kang@windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Hi Khem,
->
-> I am updating networkmanager to 1.20. But I meet a problem with musl
-> that "error: redefinition of 'struct ethhdr'". I find a patch for kernel
-> which is created in Jan 2018. The musl part has been merged in musl:
->
-> commit b583c5d3b4cc2c54c68eef5eb7855ecfacee8bfc
-> Author: Hauke Mehrtens <hauke@hauke-m.de>
-> Date:   Sat Jan 6 23:32:52 2018 +0100
->
->     add additional uapi guards for Linux kernel header files
->
->     With Linux kernel 4.16 it will be possible to guard more parts of the
->     Linux header files from a libc. Make use of this in musl to guard all
->     the structures and other definitions from the Linux header files whic=
-h
->     are also defined by the header files provided by musl. This will make
->     it possible to compile source files which include both the libc
->     headers and the kernel userspace headers.
->
->     This extends the definitions done in commit 04983f227238 ("make
->     netinet/in.h suppress clashing definitions from kernel headers")
->
-> But the kernel part doesn't exist in current kernel source.
-> It should not be networkmanager specified.
->
-> Do you have any suggestion to fix this error? Thanks.
+On Tue, Aug 27, 2019 at 06:14:36PM -0700, Khem Raj wrote:
+> this recipe inherits python3native class conditionally, this condition
+> depends on a given packageconfig, however inherit ${VAR} syntax requires
+> VAR to be evaluated before inheriting it, therefore if someone appends
+> python3 to packageconfig via a bbappend, then the packageconfig will
+> become effective and add --enable-bindings-python to configure but
+> inherit wont evaluate correctly since the expression adding to
+> packageconfig
+> 
+> PACKAGECONFIG_append = " python3"
+> 
+> will be coming _after_ the inherit, and the builds will fail e.g.
+> 
+> | ../../../libgpiod-1.3/bindings/python/gpiodmodule.c:8:10: fatal error: Python.h: No such file or directory
+> |  #include <Python.h>
+> 
+> This patch inverts the logic, meaning if someone has to disable python3
+> bindings should write a bbappend e.g.
+> 
+> PACKAGECONFIG_remove = "python3"
+> 
+> This will still mean that python3native will be inherited but the
+> effective configure option will be --disable-bindings-python and that
+> will do the right thing
+>...
+>  # enable tools and cxx bindings
+> -PACKAGECONFIG ?= "cxx tools"
+> +PACKAGECONFIG ?= "cxx tools python3"
+>...
 
-the kernel patch should be applied to linux-libc-headers
+It looks very fragile to me when a PACKAGECONFIG has this kind of 
+unexpected side effects.
 
->
->
-> PS: detailed error messages:
->
-> x86_64-poky-linux-musl-gcc -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfp=
-math=3Dsse -fstack-protector-strong -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat=
--security -Werror=3Dformat-security --sysroot=3D/home/kkang/buildarea/222-Y=
-octo/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkmanager/1.2=
-0.0-r0/recipe-sysroot -Isrc/25a6634@@NetworkManager@sta -Isrc -I../NetworkM=
-anager-1.20.0/src -Ilibnm-core -I../NetworkManager-1.20.0/libnm-core -I. -I=
-../NetworkManager-1.20.0/ -Ishared -I../NetworkManager-1.20.0/shared -I../N=
-etworkManager-1.20.0/shared/systemd/sd-adapt-shared -I../NetworkManager-1.2=
-0.0/shared/systemd/src/basic -I../NetworkManager-1.20.0/shared/systemd/src/=
-shared -I/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-6=
-4-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/gio-u=
-nix-2.0 -I/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-=
-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/glib=
--2.0 -I/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-=
-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/lib/glib-2.0/in=
-clude -fdiagnostics-color=3Dalways -pipe -D_FILE_OFFSET_BITS=3D64 -std=3Dgn=
-u11 -fdata-sections -ffunction-sections -O2 -g -feliminate-unused-debug-typ=
-es -fmacro-prefix-map=3D/home/kkang/buildarea/222-Yocto/build-xfce-x86-64/t=
-mp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0=3D/usr/src/debug/=
-networkmanager/1.20.0-r0 -fdebug-prefix-map=3D/home/kkang/buildarea/222-Yoc=
-to/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/networkmanager/1.20.=
-0-r0=3D/usr/src/debug/networkmanager/1.20.0-r0 -fdebug-prefix-map=3D/home/k=
-kang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-linux-mus=
-l/networkmanager/1.20.0-r0/recipe-sysroot=3D -fdebug-prefix-map=3D/home/kka=
-ng/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-linux-musl/=
-networkmanager/1.20.0-r0/recipe-sysroot-native=3D -DRTLD_DEEPBIND=3D0 -fPIC=
- -pthread -DGLIB_VERSION_MIN_REQUIRED=3DGLIB_VERSION_2_40 -DGLIB_VERSION_MA=
-X_ALLOWED=3DGLIB_VERSION_2_40 -DNETWORKMANAGER_COMPILATION=3DNM_NETWORKMANA=
-GER_COMPILATION_DAEMON -MD -MQ 'src/25a6634@@NetworkManager@sta/devices_nm-=
-device.c.o' -MF 'src/25a6634@@NetworkManager@sta/devices_nm-device.c.o.d' -=
-o 'src/25a6634@@NetworkManager@sta/devices_nm-device.c.o' -c ../NetworkMana=
-ger-1.20.0/src/devices/nm-device.c
-> In file included from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/t=
-mp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/us=
-r/include/net/ethernet.h:10,
->                  from ../NetworkManager-1.20.0/src/systemd/src/systemd/sd=
--dhcp-client.h:23,
->                  from ../NetworkManager-1.20.0/src/systemd/nm-sd.h:21,
->                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:76=
-:
-> /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-=
-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/netinet/if_e=
-ther.h:111:8: error: redefinition of 'struct ethhdr'
->   111 | struct ethhdr {
->       |        ^~~~~~
-> In file included from ../NetworkManager-1.20.0/libnm-core/nm-utils.h:32,
->                  from ../NetworkManager-1.20.0/libnm-core/nm-setting-ip-c=
-onfig.h:29,
->                  from ../NetworkManager-1.20.0/src/NetworkManagerUtils.h:=
-26,
->                  from ../NetworkManager-1.20.0/src/devices/nm-device.h:31=
-,
->                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:23=
-:
-> /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-=
-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/linux/if_eth=
-er.h:167:8: note: originally defined here
->   167 | struct ethhdr {
->       |        ^~~~~~
-> In file included from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/t=
-mp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/us=
-r/include/netinet/if_ether.h:118,
->                  from /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/t=
-mp/work/core2-64-poky-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/us=
-r/include/net/ethernet.h:10,
->                  from ../NetworkManager-1.20.0/src/systemd/src/systemd/sd=
--dhcp-client.h:23,
->                  from ../NetworkManager-1.20.0/src/systemd/nm-sd.h:21,
->                  from ../NetworkManager-1.20.0/src/devices/nm-device.c:76=
-:
-> /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-=
-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/net/if_arp.h=
-:22:8: error: redefinition of 'struct arphdr'
->    22 | struct arphdr {
->       |        ^~~~~~
-> In file included from ../NetworkManager-1.20.0/src/devices/nm-device.c:34=
-:
-> /home/kkang/buildarea/222-Yocto/build-xfce-x86-64/tmp/work/core2-64-poky-=
-linux-musl/networkmanager/1.20.0-r0/recipe-sysroot/usr/include/linux/if_arp=
-.h:144:8: note: originally defined here
->   144 | struct arphdr {
->       |        ^~~~~~
->
->
-> Regards,
-> Kai
->
->
->
->
-> Kai Kang (1):
->   networkmanager: 1.18.2 -> 1.20.0
->
->  ...e.ac-Fix-pkgconfig-sysroot-locations.patch |  22 ---
->  ...ttings-settings-property-documentati.patch |  71 ---------
->  ...on.build-pkgconfig-sysroot-locations.patch |  23 +++
->  ...eate-settings-property-documentation.patch | 146 ++++++++++++++++++
->  ...Fix-build-with-musl-systemd-specific.patch |  10 +-
->  .../musl/0002-Fix-build-with-musl.patch       |  12 +-
->  .../musl/0003-Fix-mrand48_r-with-musl.patch   |  47 ++++++
->  ...ger_1.18.2.bb =3D> networkmanager_1.20.0.bb} |  72 +++++----
->  8 files changed, 262 insertions(+), 141 deletions(-)
->  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
-etworkmanager/0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch
->  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
-etworkmanager/0002-Do-not-create-settings-settings-property-documentati.pat=
-ch
->  create mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
-etworkmanager/fix-meson.build-pkgconfig-sysroot-locations.patch
->  create mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
-etworkmanager/meson-do-not-create-settings-property-documentation.patch
->  create mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
-etworkmanager/musl/0003-Fix-mrand48_r-with-musl.patch
->  rename meta-networking/recipes-connectivity/networkmanager/{networkmanag=
-er_1.18.2.bb =3D> networkmanager_1.20.0.bb} (62%)
->
-> --
-> 2.20.0
->
+If I understand it correctly, for solving the problem you want 
+python3native always inherited. And the simple way to do this would
+be to make the inherit unconditionally without touching PACKAGECONFIG.
+
+Anything I miss here?
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
