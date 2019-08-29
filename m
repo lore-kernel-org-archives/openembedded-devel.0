@@ -1,63 +1,37 @@
-Return-Path: <christophe.priouzeau@st.com>
-X-Greylist: delayed 2564 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 29 Aug 2019 15:17:55 UTC
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
-	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DD7D7F1BA
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 92CFE7F333
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 15:17:54 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
-	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x7TEQ9lJ027919 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 16:35:12 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
-	h=from : to : cc : subject
-	: date : message-id : content-type : content-transfer-encoding :
-	mime-version; s=STMicroelectronics;
-	bh=ig+ygBjuCfVhATfii6+DlK5KpEST9BWKU1Nbd0lGalg=;
-	b=0/v8r1aXDfAinOBdMWkzhtglWRhcFGYmTPRyQD3PlvhfjTBi3wwvRVNITF9aK1+QC9Z0
-	1i6Wjd+QAafNVXQLkJqOqE+WFkcnEXANk96vtQ9oJ+1BpmoxHX2wYBa5xRFg6lrhsu++
-	HHCom1GtBX8crTc3/P9+qPytiZAfwc8wcMBhVGT2eFlQjMdpH8uz4gN+xJ0skXBZePfM
-	Ta7N4cPOCzcwLh9YRfWYKb+ZG9v47QTl8pv/QmoYkc2g2ybPp0nG1l1EYBLVpTerOR6b
-	dakH7DkrofIzsZrHtupgU/+LwJ+wdxU4/nkH+4vHfCDKBgV46D8sUJUNh46lkyBdK9B3
-	0g== 
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2upeajrsu0-1
-	(version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 16:35:12 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4AE154B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 14:35:09 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8327C2CF6D3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 16:35:08 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE3.st.com
-	(10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Thu, 29 Aug 2019 16:35:08 +0200
-Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
-	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Thu, 29 Aug 2019 16:35:08 +0200
-From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [PATCH] python-script: update license md5sum
-Thread-Index: AQHVXnb09OjxGk2GxEOw78XQ4qNQyw==
-Date: Thu, 29 Aug 2019 14:35:07 +0000
-Message-ID: <20190829143506.19291-1-christophe.priouzeau@st.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
+	Thu, 29 Aug 2019 15:51:26 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46K6Xt0d6yz2Y;
+	Thu, 29 Aug 2019 17:51:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1567093886;
+	bh=8JGpJZiyWOsgnY4w6zTEAxg9BTfw2effEkBJhgVM9zY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Q1JyMubWb7U1CuOSg/f7CFVDjAiYFXbxwh2pqrG3K522JwRxG3r+Vg8wycF9PYrHY
+	wCGRtotMD6JD38NkNHaP5ZMu0nWkC7TYXSVIDcLsLFNHk0NXQegXH3mF7lgMo5YO21
+	D7laUrlh9ls743U/Ti+ItBtI9jmVILmHP363sE7shlQBQMZkHZLS4b+hJw8kI39ygg
+	/4oRUQpGO3Ls8gkI9TgTq215MUVa1Ud3BA54TciTtvPjTCkxjuUlLlRRgYw8o5V2rr
+	weXF58iH679Gp9c3szNLtx/KNlCkme5PKJjY5Hp67HXvDuTL7LKrNhjoCsCQG+hpLL
+	TrjcCr8xgfBqIUJTvEIbm3eO2pOWNJiTYYyER3bW3yG3+RDlSIFmVmUNKhwKb5ccKa
+	xIZ/KpMRmQWvJvAA6pxbmB5a1z+Dvlpdl76pzD5ZhHcjy8ycSE8SUnbEURIujIHvGp
+	vqD2qqPCOf/vYCLky8kxs23Zgf7sv+nL7csrpFJnzsRE707DIpimLXB1Zht2DkJI4T
+	aHG1JFdf3J25+afmsd1L/ImkhWFtkgOG7X9ZjVMGK8Ec0a1aEDHfZwvGnKrt1eVgeS
+	9Uk2rFXa3yyvX7JyX7N141ypaQZtE/AfxG7qc6Yhl4MnwQmE3Jy9J5Vx75ZUe+/gfd
+	6uQqnWuqlDQeSQVAmFG87mRc=
+Date: Thu, 29 Aug 2019 18:51:22 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+Message-ID: <20190829155122.GA17820@localhost>
+References: <20190829143506.19291-1-christophe.priouzeau@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.70,1.0.8
-	definitions=2019-08-29_06:2019-08-29,2019-08-29 signatures=0
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [PATCH] python-script: update license md5sum
+In-Reply-To: <20190829143506.19291-1-christophe.priouzeau@st.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] python-script: update license md5sum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,33 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 15:17:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Aug 2019 15:51:26 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Update md5sum of license file.
+On Thu, Aug 29, 2019 at 02:35:07PM +0000, Christophe PRIOUZEAU wrote:
+> Update md5sum of license file.
+>...
+> --- a/meta-python/recipes-devtools/python/python-scrypt.inc
+> +++ b/meta-python/recipes-devtools/python/python-scrypt.inc
+> @@ -1,6 +1,6 @@
+>  DESCRIPTION = "Bindings for the scrypt key derivation function library"
+>  LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
+> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f"
+>...
 
-Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
----
- meta-python/recipes-devtools/python/python-scrypt.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The actual problem is that this does not do what LIC_FILES_CHKSUM is 
+supposed to do.
 
-diff --git a/meta-python/recipes-devtools/python/python-scrypt.inc b/meta-p=
-ython/recipes-devtools/python/python-scrypt.inc
-index 783d05b7e..fef6ec976 100644
---- a/meta-python/recipes-devtools/python/python-scrypt.inc
-+++ b/meta-python/recipes-devtools/python/python-scrypt.inc
-@@ -1,6 +1,6 @@
- DESCRIPTION =3D "Bindings for the scrypt key derivation function library"
- LICENSE =3D "BSD-2-Clause"
--LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3D8bef=
-8e6712b1be5aa76af1ebde9d6378"
-+LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=3Dcb64=
-1bc04cda31daea161b1bc15da69f"
- HOMEPAGE=3D"https://bitbucket.org/mhallin/py-scrypt/overview"
-=20
- FILESEXTRAPATHS_prepend :=3D "${THISDIR}/python-scrypt:"
---=20
-2.17.1
+LIC_FILES_CHKSUM should verify that the license information in the 
+software hasn't changed when upgrading it.
+
+These recipes check the copy of the license text in OE instead,
+which wouldn't change if the license of python-scrypt would change.
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
