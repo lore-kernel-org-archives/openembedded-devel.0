@@ -1,37 +1,51 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 794BC7E5FB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id EFDC56BCA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 19:14:19 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46KC2z3JGPz3J;
-	Thu, 29 Aug 2019 21:14:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567106059;
-	bh=EeZciMZQfS/HVhuyYDe6vz5yEN/wWipQDUSHEE+WG4E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ETcd7qBTubJnsLfbqsXIA3pEL+xUUgR93fJB4FNMxdDrmloGKkQ2aMngRCps2h0vW
-	+xHMhe6PfZml6v1hxSVc1jLlSkabNGCfA/huM1CsJJF5GaGStCbirqrK9sKmAWDqzm
-	HoyR4/yKHxqVPjnVWm6fJzvsuysfeEe4+xSRnxhYnVCwrl4i42X4OS7JrQrpytL126
-	InwpeSd7jmj2SlOXtECRo68qpTHnKQ1SXRJiBmMH+Vq0NUGDTZy9Ka1RA1C/V2OUka
-	oQkly7l01JwVddRz24YQE4gAs74TQoEdrpcr/vv2nrQf75YMyOgRmEcTLWK0lQypIS
-	S8rSa6oUoe78vbKaFU4SmVH9E3O6w7GjyUg/0gnEX//mAYWJ45jnRS2wKcQYH/aFuR
-	kiTnQCX1Kk5rnBsUsBLDHSTyOp27OTFShGjJeN6j4+ZVR//rxbfyqAK4angi9sxlKV
-	eGucHLIHNpYfH+5M8p2jFW0QldMQ/+9MlGW8JzfbFV/vfkyI9uUVlCzAeTA4yASLYD
-	VxLyYNcSKXIImlPcq7Q96oL20cwb4/2Btsku1nRnu6SOY7kMadBSMlduAy9HbL7Ijd
-	FoRPs2lnKlYCSvIc176wdj+rSKJcOAhKns2R1Gbf7uXe5d9/+JLrnnodKfCUFIsAEe
-	Getx+8ZOjtUV0HVlZQ/JLomU=
-Date: Thu, 29 Aug 2019 22:14:17 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190829191417.GA24691@localhost>
-References: <20190829103934.21804-1-bunk@stusta.de>
-	<CAMKF1srGz8Zw4vh3_9GJsbmrKzARCrVHrs9k9tmd=aAznXHTHA@mail.gmail.com>
+	Thu, 29 Aug 2019 19:22:14 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id d1so2107638pgp.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Aug 2019 12:22:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1v6Mbj9wPBzkZnhZgqHmzsKYDal/X/bbSpLMuih5qoE=;
+	b=jJ+Vhl+s5iLQvaqPgRFroUUTqppx6V+z4O8H/1np8R3VMTNnDD+6X7CIG+3raXT59q
+	zDXu4N24cdhJrNmysMS3zKi5bpndM4FVdMBL0WXpOryZtyZ6kH3yIqiOaePe561lrEV0
+	35p3bXDGjnTSCZkmBo5ntU/F1WbtH9NVA08/djT92TfzfBOLED/n64ZNWxm5VRECHlE6
+	AJsOHhRcvE6ghpldWVqCDYWKNDJqDAiZxF0s6wlunM9r6wwSNF5UhPTNkqXZDbtJfBxF
+	a3L+tITifLOFBAtb6tSQQ+gbVqzwlOaNifWWIfovETBepDI/jaO95tC9Z8dJWCd8bWI+
+	o2OQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1v6Mbj9wPBzkZnhZgqHmzsKYDal/X/bbSpLMuih5qoE=;
+	b=aS768HgAvVuks7mu79OnS2vMzWuDrOMHxusDV2SlOej98J6PQS6o4O8uGbkCowCy6v
+	h9lAJoLmO7VjxZOjah1YIeWqqUA8YuOfHhZtGFeyEYSPrGxuMhZTdIqMg9OiT1OVSlqs
+	lNkuiMdxm/LvZG7hDwuNXZJciZfFp8/cSCa5GBdabFsq89eNxcH27+mZZiwWn3/S7MM0
+	BTdtiE0Z0zuNF6rNhA9Mpkl9wXIZs5h06JAVFDOCpgZoZwS7xJ0sy3wxuUs/DRRcYtcW
+	BT3x5hhZijiIytYor3S9rLOH7t9LYaUSsBWyHOLZjOeO7A14E71G6FYyloQaALOUQzSV
+	DHsQ==
+X-Gm-Message-State: APjAAAW1677D+KmHrIfVbVBkPZkRsjWrm8ks50DPQNcLVp+S7DhSnHNf
+	p6lHIDa1vLwAGVndAh53sGP8DBJBang=
+X-Google-Smtp-Source: APXvYqzvduqM+1drE4lbgpyA+QhUMgP0iuRCZHwCWrcNC7DeGnMdGbOW3fJrkLijzjF6Q98rNnyyWA==
+X-Received: by 2002:a17:90b:f03:: with SMTP id
+	br3mr11634879pjb.67.1567106535291; 
+	Thu, 29 Aug 2019 12:22:15 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id s16sm4893281pfs.6.2019.08.29.12.22.14
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 29 Aug 2019 12:22:14 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Aug 2019 12:22:02 -0700
+Message-Id: <20190829192206.1200-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srGz8Zw4vh3_9GJsbmrKzARCrVHrs9k9tmd=aAznXHTHA@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libwebsockets: Fix the build with -Os
+Subject: [meta-oe][PATCH 1/5] can-utils: Fix build with kernel headers >= 5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,49 +58,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 19:14:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Aug 2019 19:22:15 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 29, 2019 at 11:46:55AM -0700, Khem Raj wrote:
-> On Thu, Aug 29, 2019 at 3:39 AM Adrian Bunk <bunk@stusta.de> wrote:
-> >
-> > lib/event-libs/libuv/libuv.c: In function 'elops_destroy_context1_uv':
-> > lib/event-libs/libuv/libuv.c:519:7: error: 'm' may be used uninitialized in this function [-Werror=maybe-uninitialized]
-> >     if (m)
-> >        ^
-> >
-> > Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> > ---
-> >  .../recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb   | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
-> > index 50620d99e..fcabeb902 100644
-> > --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
-> > +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
-> > @@ -28,3 +28,5 @@ EXTRA_OECMAKE += " \
-> >  PACKAGES =+ "${PN}-testapps"
-> >
-> >  FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
-> > +
-> > +CFLAGS_append = " -Wno-error"
-> 
-> is it possible to fix the underlying problem? since Os is not default
-> it definitely could be a bug in upstream but
-> by disabling warnings for all kind of builds we are  painting with broad brush
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...o-find-SIOCGSTAMP-with-latest-kernel.patch | 106 ++++++++++++++++++
+ .../socketcan/can-utils_git.bb                |   4 +-
+ 2 files changed, 109 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/socketcan/can-utils/0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch
 
-The underlying problem is that some gcc warnings are not reliable with -Os,
-there are bugs open in the gcc bugzilla for that.
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils/0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch b/meta-oe/recipes-extended/socketcan/can-utils/0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch
+new file mode 100644
+index 0000000000..cbf3aee10f
+--- /dev/null
++++ b/meta-oe/recipes-extended/socketcan/can-utils/0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch
+@@ -0,0 +1,106 @@
++From 20981c8a328747f823b7eef68d0c2812b3eaed30 Mon Sep 17 00:00:00 2001
++From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
++Date: Sun, 14 Jul 2019 21:50:43 +0200
++Subject: [PATCH] fix include to find SIOCGSTAMP with latest kernel
++
++In linux kernel commit 0768e17073dc527ccd18ed5f96ce85f9985e9115
++the asm-generic/sockios.h header no longer defines SIOCGSTAMP.
++Instead it provides only SIOCGSTAMP_OLD.
++
++The linux/sockios.h header now defines SIOCGSTAMP using either
++SIOCGSTAMP_OLD or SIOCGSTAMP_NEW as appropriate. This linux only
++header file is not pulled so we get a build failure.
++
++canlogserver.c: In function 'main':
++canlogserver.c:404:21: error: 'SIOCGSTAMP' undeclared (first use in this function); did you mean 'SIOCGRARP'?
++     if (ioctl(s[i], SIOCGSTAMP, &tv) < 0)
++                     ^~~~~~~~~~
++                     SIOCGRARP
++canlogserver.c:404:21: note: each undeclared identifier is reported only once for each function it appears in
++
++Fixes:
++ - http://autobuild.buildroot.org/results/363de7d9bf433be8bc47ba4ee52ae0bb80fa9021
++
++Upstream-Status: Backport [https://github.com/linux-can/can-utils/commit/e9590b1ca75d360eaf3211bebd86058214d48064]
++Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
++---
++ canlogserver.c | 1 +
++ cansniffer.c   | 1 +
++ isotpdump.c    | 1 +
++ isotpperf.c    | 1 +
++ isotpsniffer.c | 1 +
++ slcanpty.c     | 1 +
++ 6 files changed, 6 insertions(+)
++
++diff --git a/canlogserver.c b/canlogserver.c
++index e3350b7..f53165c 100644
++--- a/canlogserver.c
+++++ b/canlogserver.c
++@@ -61,6 +61,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/raw.h>
+++#include <linux/sockios.h>
++ #include <signal.h>
++ #include <errno.h>
++ 
++diff --git a/cansniffer.c b/cansniffer.c
++index 7b0a3fa..bf7d72e 100644
++--- a/cansniffer.c
+++++ b/cansniffer.c
++@@ -61,6 +61,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/bcm.h>
+++#include <linux/sockios.h>
++ 
++ #include "terminal.h"
++ 
++diff --git a/isotpdump.c b/isotpdump.c
++index b2b650a..36d8af3 100644
++--- a/isotpdump.c
+++++ b/isotpdump.c
++@@ -55,6 +55,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/raw.h>
+++#include <linux/sockios.h>
++ #include "terminal.h"
++ 
++ #define NO_CAN_ID 0xFFFFFFFFU
++diff --git a/isotpperf.c b/isotpperf.c
++index db3a2b7..5852a57 100644
++--- a/isotpperf.c
+++++ b/isotpperf.c
++@@ -56,6 +56,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/raw.h>
+++#include <linux/sockios.h>
++ 
++ #define NO_CAN_ID 0xFFFFFFFFU
++ #define PERCENTRES 2 /* resolution in percent for bargraph */
++diff --git a/isotpsniffer.c b/isotpsniffer.c
++index f42e18b..d7a4c66 100644
++--- a/isotpsniffer.c
+++++ b/isotpsniffer.c
++@@ -55,6 +55,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/isotp.h>
+++#include <linux/sockios.h>
++ #include "terminal.h"
++ 
++ #define NO_CAN_ID 0xFFFFFFFFU
++diff --git a/slcanpty.c b/slcanpty.c
++index 431ca68..7dfaf5c 100644
++--- a/slcanpty.c
+++++ b/slcanpty.c
++@@ -40,6 +40,7 @@
++ 
++ #include <linux/can.h>
++ #include <linux/can/raw.h>
+++#include <linux/sockios.h>
++ 
++ /* maximum rx buffer len: extended CAN frame with timestamp */
++ #define SLC_MTU (sizeof("T1111222281122334455667788EA5F\r")+1)
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+index a2d62c3667..db5055fedd 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=43;md5=390a2c9a3c5e3595a0
+ 
+ DEPENDS = "libsocketcan"
+ 
+-SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git;branch=master"
++SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git;branch=master \
++           file://0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch \
++           "
+ SRCREV = "4c8fb05cb4d6ddcd67299008db54af423f86fd05"
+ 
+ PV = "0.0+gitr${SRCPV}"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.23.0
 
 
