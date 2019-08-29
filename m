@@ -1,37 +1,29 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 92CFE7F333
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 22D847F351
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 15:51:26 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46K6Xt0d6yz2Y;
-	Thu, 29 Aug 2019 17:51:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567093886;
-	bh=8JGpJZiyWOsgnY4w6zTEAxg9BTfw2effEkBJhgVM9zY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Q1JyMubWb7U1CuOSg/f7CFVDjAiYFXbxwh2pqrG3K522JwRxG3r+Vg8wycF9PYrHY
-	wCGRtotMD6JD38NkNHaP5ZMu0nWkC7TYXSVIDcLsLFNHk0NXQegXH3mF7lgMo5YO21
-	D7laUrlh9ls743U/Ti+ItBtI9jmVILmHP363sE7shlQBQMZkHZLS4b+hJw8kI39ygg
-	/4oRUQpGO3Ls8gkI9TgTq215MUVa1Ud3BA54TciTtvPjTCkxjuUlLlRRgYw8o5V2rr
-	weXF58iH679Gp9c3szNLtx/KNlCkme5PKJjY5Hp67HXvDuTL7LKrNhjoCsCQG+hpLL
-	TrjcCr8xgfBqIUJTvEIbm3eO2pOWNJiTYYyER3bW3yG3+RDlSIFmVmUNKhwKb5ccKa
-	xIZ/KpMRmQWvJvAA6pxbmB5a1z+Dvlpdl76pzD5ZhHcjy8ycSE8SUnbEURIujIHvGp
-	vqD2qqPCOf/vYCLky8kxs23Zgf7sv+nL7csrpFJnzsRE707DIpimLXB1Zht2DkJI4T
-	aHG1JFdf3J25+afmsd1L/ImkhWFtkgOG7X9ZjVMGK8Ec0a1aEDHfZwvGnKrt1eVgeS
-	9Uk2rFXa3yyvX7JyX7N141ypaQZtE/AfxG7qc6Yhl4MnwQmE3Jy9J5Vx75ZUe+/gfd
-	6uQqnWuqlDQeSQVAmFG87mRc=
-Date: Thu, 29 Aug 2019 18:51:22 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Message-ID: <20190829155122.GA17820@localhost>
-References: <20190829143506.19291-1-christophe.priouzeau@st.com>
+	Thu, 29 Aug 2019 15:54:16 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7TFrZtB002020
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 29 Aug 2019 08:53:46 -0700
+Received: from [128.224.162.157] (128.224.162.157) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 29 Aug 2019 08:53:25 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1566554709-22088-2-git-send-email-hongxu.jia@windriver.com>
+	<1566955456-20194-1-git-send-email-hongxu.jia@windriver.com>
+	<CAMKF1spiaLD-o1BemHAXRhwJwikeTcZr82P_TmBr12DT2BKWOw@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <3b86c6c6-7bfa-d335-e878-9130c27b5d35@windriver.com>
+Date: Thu, 29 Aug 2019 23:53:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190829143506.19291-1-christophe.priouzeau@st.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] python-script: update license md5sum
+In-Reply-To: <CAMKF1spiaLD-o1BemHAXRhwJwikeTcZr82P_TmBr12DT2BKWOw@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH V2] cryptsetup: add libdevmapper to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +36,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 15:51:26 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Aug 2019 15:54:16 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Thu, Aug 29, 2019 at 02:35:07PM +0000, Christophe PRIOUZEAU wrote:
-> Update md5sum of license file.
->...
-> --- a/meta-python/recipes-devtools/python/python-scrypt.inc
-> +++ b/meta-python/recipes-devtools/python/python-scrypt.inc
-> @@ -1,6 +1,6 @@
->  DESCRIPTION = "Bindings for the scrypt key derivation function library"
->  LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f"
->...
+On 8/29/19 9:44 PM, Khem Raj wrote:
+> https://errors.yoctoproject.org/Errors/Details/266491/
 
-The actual problem is that this does not do what LIC_FILES_CHKSUM is 
-supposed to do.
+Sorry for the error again, I could not reproduce the issue on my build, 
+indeed,
 
-LIC_FILES_CHKSUM should verify that the license information in the 
-software hasn't changed when upgrading it.
+ignoring both of the QA test is no harm for cryptsetup.
 
-These recipes check the copy of the license text in OE instead,
-which wouldn't change if the license of python-scrypt would change.
+V3 incoming, sorry again :(
 
-cu
-Adrian
+//Hongxu
 
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+>
+> On Tue, Aug 27, 2019 at 6:24 PM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> Since commit [libdevmapper/lvm2: force recipe libdevmapper to populate
+>> sysroot only] applied, if recipe DEPENDS on libdevmapper, we have to
+>> add it to packages RDEPENDS to fix [file-rdeps] QA issue
+>>
+>> Skip [build-deps] QA checking, add lvm2 to DEPENDS will triger
+>> circular dependencies, use recipe libdevmapper to replace,
+>> ignore the QA checking is fine.
+>>
+>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>> ---
+>>   meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb | 6 ++++++
+>>   1 file changed, 6 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
+>> index 6ebf1e2..eb155e1 100644
+>> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
+>> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
+>> @@ -16,6 +16,10 @@ DEPENDS = " \
+>>       util-linux \
+>>   "
+>>
+>> +RDEPENDS_${PN} = " \
+>> +    libdevmapper \
+>> +"
+>> +
+>>   SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+>>   SRC_URI[md5sum] = "f7818082056e5bc0be12e4c7fc20345a"
+>>   SRC_URI[sha256sum] = "9d8f8cac2836a1623c075b5cba96032271dc81a28b2aa27fbd8331e831416bb1"
+>> @@ -85,4 +89,6 @@ EXTRA_OECONF += "--disable-libargon2"
+>>
+>>   FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+>>
+>> +INSANE_SKIP_${PN} += "build-deps"
+>> +
+>>   BBCLASSEXTEND = "native nativesdk"
+>> --
+>> 2.7.4
+>>
 
 
