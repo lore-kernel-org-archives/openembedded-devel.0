@@ -1,35 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 9783D7E5FA
+	by mail.openembedded.org (Postfix) with ESMTP id 9286F6D470
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 09:55:17 +0000 (UTC)
+	Thu, 29 Aug 2019 10:39:35 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Jydx2YlYz3J;
-	Thu, 29 Aug 2019 11:55:16 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Jzd32jzjz2Y
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Aug 2019 12:39:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567072517;
-	bh=5+BIzbaOE3dSDf0yT5r7P+ABctllMFoEYxVKKQIricE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ig/cArytyVvjDD7LevuIaj3gB7wpWJuP/cZJhmpsQN1LLgl+ZXKagBM/yulcse4oP
-	iOe61dASUZqLyMXzyVpct4WDiV12QGcU8QVzoYFsb8nNW6HOvElzVRNN0GtJsgYES5
-	0yJNkhUeMIa81sBjOs9Dwt4uKb186L8jIRkmbXKNLA5Lbn2exIYh2eBawE0SUvH6fA
-	LLlHRU1+WJbGM3YGl3wXFtesL4QRDoPyG5/l6kOpGTq7nL0w3d+bvZYy6VYaZ856dK
-	+duJwTOBi+vMJVYkWL56eFPSSOjJo+BHBQCMG0uoDL7winaGmkapDiVU4ZI0WQFp5I
-	LbmfZ+EjWQp6Kh8eQC/xnp8gz7zSiWqYaIPzKMTHdUdHuHkOsdFAiNF12cA0BcUrbn
-	SIC2zKSfDdSrIIurDVRgluAX5KRHNBfDkwSpNyUqlOOor9b1vCvTCtKIV1z64iawma
-	VVkfo5Rz9IMTPVkb11Nwz/DAwHaBy2tnB0Dh9+F4DO0+giGR4uPOCEDIZ8+DiDPIaB
-	+Jz9SF5QiDvEG7y0DKriDhx/oPUztL5gw/AAfUZN5DH7so8iSQhE+GbvqmO9g6vb4A
-	F5yvLcuie9jamYFWK71jQkbvlrEiRBXEtPQ40TogT/F+MG+LfHzflzwjEUejV3BmCQ
-	rWkvoyj+bdqmEQWIpWawVves=
-Date: Thu, 29 Aug 2019 12:55:14 +0300
+	s=default; t=1567075175;
+	bh=TDQvlZhUfEolPg/APSr5h2hMVf3Fy5Amq9sjsftcWPc=;
+	h=From:To:Subject:Date:From;
+	b=t2n0gWizgT3abNkYETLxBpM9InGlAnDlD1Ufh20SMiOTinBMDWINQVcGuCRl2Gngj
+	tJkzulwWcFWVccZ8bzWqT9hJcNrc3tj4N1LWmpHMfZhQ8+Yep//ai+CyiYbckiZeK6
+	5VeczdUuAKAP6G3fx20XrUCnqM7m6PwsEuK92EdGxP6GlfqVPKQKndwsSX1Klotmbl
+	PIfsNd8MrVKlVoQSJ6VjNCYOQn98IA59qYPFVLFzq0u5KV6J9hocqVpSVt6iyETRWT
+	xq13oGsxNdmoc5N22eyS/U4mpbYNOhzpyay7A23qxmYCMhRRJb3R2DD01YfVECxRek
+	fOKnOeCWhb5tzOeTelVxeTc3wOtRLhlYT6oYPUjFP6HO8cZpN2Fhj1Om1NN2lu6+gR
+	KXon+4AZUdh9jIOyj4sS4PZZNyWfDYIPLTairqXuc2AhRIWcJSGnauT4xVGGtx7Jsc
+	DPaZrOy6UOQxi67iZItYNPEOvtZqEPtrHPqY4gT3o0r86kbSKDEe96WNJQYbvpoQXL
+	OeGVvTSi+Vy0duTCG3ApLEAvlA552AXLZ0DNBmoHU/FQV0HWcavw9YE0tcSETDB4LX
+	zq6yZxMS9QqX6hOpsGNW9o3PK7QTOP3IrYg3phBGedRkJ4G3mJ4p99FEUOTaOGzt00
+	D2/jOILq3up7zHEhuYdB1p7Q=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20190829095514.GA32705@localhost>
-References: <20190828171538.16160-1-bunk@stusta.de>
-MIME-Version: 1.0
-In-Reply-To: <20190828171538.16160-1-bunk@stusta.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Subject: Re: [meta-oe][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
+Date: Thu, 29 Aug 2019 13:39:34 +0300
+Message-Id: <20190829103934.21804-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] libwebsockets: Fix the build with -Os
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,21 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 09:55:17 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Aug 2019 10:39:35 -0000
 
-Sorry for the confusing submission, but these were two different patches 
-doing a similar change in different layers that should both be applied.
+lib/event-libs/libuv/libuv.c: In function 'elops_destroy_context1_uv':
+lib/event-libs/libuv/libuv.c:519:7: error: 'm' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+    if (m)
+       ^
 
-cu
-Adrian
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ .../recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb   | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
+index 50620d99e..fcabeb902 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
+@@ -28,3 +28,5 @@ EXTRA_OECMAKE += " \
+ PACKAGES =+ "${PN}-testapps"
+ 
+ FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
++
++CFLAGS_append = " -Wno-error"
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.17.1
 
 
