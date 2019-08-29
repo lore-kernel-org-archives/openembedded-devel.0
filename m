@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
-	[209.85.222.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CAA17F27E
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9693A7F395
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 18:44:41 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id i78so2441029qke.11
+	Thu, 29 Aug 2019 18:47:20 +0000 (UTC)
+Received: by mail-qt1-f177.google.com with SMTP id n7so4843271qtb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 11:44:42 -0700 (PDT)
+	Thu, 29 Aug 2019 11:47:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fxFfPxHjEtEZgn5WmMhDPAD4NuIY5ovx6VBOTtQyDmg=;
-	b=lEZIwIH6Vqfq0wipd8KQMhasUVfIMMZ6z/3mzhrn4prFFB+IU9gkLp//cVMGALJ90h
-	Dup5QuokdI3nTsoQWxzRn3j4W1wwG3JCfXrrO59zpt8S2BOVCbKJVUsGBau0neshotcz
-	SqXlYCwMcYEEWHog3ge4N184eedzSRveafGf/CH9wlcnFpcwe9i03u629aHax8y5wZLD
-	c4HgTOtY+M7r027gyBawWa5sgOBmOPSnWEkzMRqa31n5PS9+u2thEYXgS7ND6yM8hADb
-	8hVr6n+GyvZuBz/M1T0s0BFq0QqiAl1HSMzfdkcBJzYPRZNk2N3H+Etu7y7lVFbp/vbk
-	+WZA==
+	:cc; bh=fZh0w3WWgUIOdClrpb8yqe7Yqz76sV5YUXuJ/elmjuQ=;
+	b=bsmj9zLaESUs0TCXBkgNjQUbbQDw84TuOmnXVeTQFlyViFjblMBGheFrwxIkMTkoew
+	+gaBFMKXYblYJNaAkkDZBEWtJfonGpV2wrMQFdSRKMrqNgeeQwjiYqHZg5GJGpFSmjqa
+	+mls8YQ+7EqR20jgNXsCfwiOaqMbFOe53SUklkk/tE/TVErlxKSqsXG732w1g5IqnlM4
+	SX7yK3xdVktMHQjKZEyqaG2xgDvKQX31pOy7MZCi05NmfSd1NU0ms+sqbe/5exk1ZIzs
+	VCvNeQUJaCPLjrf0kkYA0UlyCWUO2gIXEuQOQa0WdLY3kzmsfxZO+zgSnF5hVBMCuQ5B
+	t41w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=fxFfPxHjEtEZgn5WmMhDPAD4NuIY5ovx6VBOTtQyDmg=;
-	b=EDrnKVPSz7MLx4/Bw/Sm9nZVQ8/+KQYVrcj797KydSDlymg2dXgMhx+em2cwMX9/XH
-	gF0pQ44cE/1Du1r0il3M0rX3/BuFExS5yckf3rWes2DRWKVgXvzgu8AiwsYd1A8oXSiS
-	4Jl9O2o24HQ1KByqnRj3IzfTwU+vldueWzUvxwkZgTIEgXpPn09s0w6Ldnz63Hd+PjAd
-	l7G/Kksar4raG6/lSCA44VnDyMNjO9pMDC5FpzAfD3EwSXREbpcCcbBkSjB7iJwZxcCu
-	A66GgZO6APH08OZoVb5PAV+ms9GTQjGj7M5cVY9H38B2hZcFWQF14BmADVdrr6qmb3n2
-	sBJA==
-X-Gm-Message-State: APjAAAV9gZ44C4NjcMNfxHSu5bcwCv0eqsDjNghfGeIUEULoD70NyzOB
-	HXcxvK+/VY5cOD1uEJOVMvqHuYm2+Ayqpje6MPk=
-X-Google-Smtp-Source: APXvYqxU6NSospCV0+rBA7WgYxfMVrWV/0eilgCkVprmWQQMG0/Ss7o1pVQHu5OzPzKpLuSKJsbowkHFFQH2B8HoyKI=
-X-Received: by 2002:a37:b245:: with SMTP id b66mr11322876qkf.337.1567104281863;
-	Thu, 29 Aug 2019 11:44:41 -0700 (PDT)
+	bh=fZh0w3WWgUIOdClrpb8yqe7Yqz76sV5YUXuJ/elmjuQ=;
+	b=M85h5bHjeaC6W00OGPESvkEzIUzQOUF27lD0nO+sgB3WDUeZ2m6xbZbrJxH0MEQxPZ
+	NOgP73mLx1Z6UyRv8NB4sWTHeOJoaxnccwrQ2E0+9sSo/XFW5ZHPYhLcUxF/+iDwZLKs
+	QH7+rkJAPiXrTSC9d2qLBwMlVTEdLSvgMqOq6URjLYNNRzMSAUi1w+/m3KWrq79Z56yo
+	7Use4Sleuarc9hq37NZ7+pzgZJWuXu/F3eohTKRml2015GpCz0upmqQC2APZX+xbdetf
+	uw11iAP4SRYI4TGg/hfkJ4cKsLUdUTE1hPIsfCPgII9E7DgXaAUBcHLOktsurbkZu7MZ
+	cn/g==
+X-Gm-Message-State: APjAAAUMK5+AKaD2ncoD0dMhvJGBIqSZa1r2Qg+f+iv192O7zUzJz3Sp
+	7Q8eRqwiFC3AKBWERYw2Zoz94vf1AXKfYQPV+fo=
+X-Google-Smtp-Source: APXvYqzLXM8xluo/6V825Gdgr0j/1iCWzWI7xmMIL9AF+7hbg7cxiAsWwg+vpvK+zNosexJpCivzoU/Yqn380UV9nnA=
+X-Received: by 2002:a0c:e485:: with SMTP id n5mr7706039qvl.175.1567104441133; 
+	Thu, 29 Aug 2019 11:47:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190829143506.19291-1-christophe.priouzeau@st.com>
-	<20190829155122.GA17820@localhost>
-In-Reply-To: <20190829155122.GA17820@localhost>
+References: <20190829103934.21804-1-bunk@stusta.de>
+In-Reply-To: <20190829103934.21804-1-bunk@stusta.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 29 Aug 2019 11:44:16 -0700
-Message-ID: <CAMKF1so-8_SBFQHtwx_8DVaDsGgMSBTF35muc-adweze8hOr7g@mail.gmail.com>
+Date: Thu, 29 Aug 2019 11:46:55 -0700
+Message-ID: <CAMKF1srGz8Zw4vh3_9GJsbmrKzARCrVHrs9k9tmd=aAznXHTHA@mail.gmail.com>
 To: Adrian Bunk <bunk@stusta.de>
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] python-script: update license md5sum
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libwebsockets: Fix the build with -Os
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,49 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 18:44:41 -0000
+X-List-Received-Date: Thu, 29 Aug 2019 18:47:20 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Aug 29, 2019 at 8:51 AM Adrian Bunk <bunk@stusta.de> wrote:
+On Thu, Aug 29, 2019 at 3:39 AM Adrian Bunk <bunk@stusta.de> wrote:
 >
-> On Thu, Aug 29, 2019 at 02:35:07PM +0000, Christophe PRIOUZEAU wrote:
-> > Update md5sum of license file.
-> >...
-> > --- a/meta-python/recipes-devtools/python/python-scrypt.inc
-> > +++ b/meta-python/recipes-devtools/python/python-scrypt.inc
-> > @@ -1,6 +1,6 @@
-> >  DESCRIPTION = "Bindings for the scrypt key derivation function library"
-> >  LICENSE = "BSD-2-Clause"
-> > -LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
-> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f"
-> >...
+> lib/event-libs/libuv/libuv.c: In function 'elops_destroy_context1_uv':
+> lib/event-libs/libuv/libuv.c:519:7: error: 'm' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+>     if (m)
+>        ^
 >
-> The actual problem is that this does not do what LIC_FILES_CHKSUM is
-> supposed to do.
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>  .../recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb   | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> LIC_FILES_CHKSUM should verify that the license information in the
-> software hasn't changed when upgrading it.
+> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
+> index 50620d99e..fcabeb902 100644
+> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
+> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.1.0.bb
+> @@ -28,3 +28,5 @@ EXTRA_OECMAKE += " \
+>  PACKAGES =+ "${PN}-testapps"
 >
+>  FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
+> +
+> +CFLAGS_append = " -Wno-error"
 
-thats right and in most cases thats what it does too.
+is it possible to fix the underlying problem? since Os is not default
+it definitely could be a bug in upstream but
+by disabling warnings for all kind of builds we are  painting with broad brush
 
-> These recipes check the copy of the license text in OE instead,
-> which wouldn't change if the license of python-scrypt would change.
->
-
-some packages just use license and do not include a license file in
-which case the recipe
-stubs it in. Not ideal but it is a band aid for such recipes.
-
-> cu
-> Adrian
->
 > --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
+> 2.17.1
 >
 > --
 > _______________________________________________
