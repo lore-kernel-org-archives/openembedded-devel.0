@@ -1,24 +1,35 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C7E37F303
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 9783D7E5FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 08:30:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7T8Tax3023210
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 01:29:57 -0700
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 29 Aug 2019 01:29:45 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Aug 2019 04:29:42 -0400
-Message-ID: <20190829082942.128713-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Thu, 29 Aug 2019 09:55:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Jydx2YlYz3J;
+	Thu, 29 Aug 2019 11:55:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1567072517;
+	bh=5+BIzbaOE3dSDf0yT5r7P+ABctllMFoEYxVKKQIricE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ig/cArytyVvjDD7LevuIaj3gB7wpWJuP/cZJhmpsQN1LLgl+ZXKagBM/yulcse4oP
+	iOe61dASUZqLyMXzyVpct4WDiV12QGcU8QVzoYFsb8nNW6HOvElzVRNN0GtJsgYES5
+	0yJNkhUeMIa81sBjOs9Dwt4uKb186L8jIRkmbXKNLA5Lbn2exIYh2eBawE0SUvH6fA
+	LLlHRU1+WJbGM3YGl3wXFtesL4QRDoPyG5/l6kOpGTq7nL0w3d+bvZYy6VYaZ856dK
+	+duJwTOBi+vMJVYkWL56eFPSSOjJo+BHBQCMG0uoDL7winaGmkapDiVU4ZI0WQFp5I
+	LbmfZ+EjWQp6Kh8eQC/xnp8gz7zSiWqYaIPzKMTHdUdHuHkOsdFAiNF12cA0BcUrbn
+	SIC2zKSfDdSrIIurDVRgluAX5KRHNBfDkwSpNyUqlOOor9b1vCvTCtKIV1z64iawma
+	VVkfo5Rz9IMTPVkb11Nwz/DAwHaBy2tnB0Dh9+F4DO0+giGR4uPOCEDIZ8+DiDPIaB
+	+Jz9SF5QiDvEG7y0DKriDhx/oPUztL5gw/AAfUZN5DH7so8iSQhE+GbvqmO9g6vb4A
+	F5yvLcuie9jamYFWK71jQkbvlrEiRBXEtPQ40TogT/F+MG+LfHzflzwjEUejV3BmCQ
+	rWkvoyj+bdqmEQWIpWawVves=
+Date: Thu, 29 Aug 2019 12:55:14 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20190829095514.GA32705@localhost>
+References: <20190828171538.16160-1-bunk@stusta.de>
 MIME-Version: 1.0
-Subject: [meta-oe][Patch] libwacom: add recipe
+In-Reply-To: <20190828171538.16160-1-bunk@stusta.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Subject: Re: [meta-oe][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,115 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 08:30:06 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Aug 2019 09:55:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Kai Kang <kai.kang@windriver.com>
+Sorry for the confusing submission, but these were two different patches 
+doing a similar change in different layers that should both be applied.
 
-Package libinput has a package config 'libwacom'. When it is set,
-package libwacom is required. So add the recipe of libwacom.
+cu
+Adrian
 
-Add a patch to generate udev rules file on target that it is not
-suitable for cross compile.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../generate-udev-rules-on-target.patch       | 59 +++++++++++++++++++
- .../recipes-extended/libwacom/libwacom_1.0.bb | 17 ++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
- create mode 100644 meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
-
-diff --git a/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
-new file mode 100644
-index 000000000..27e037c98
---- /dev/null
-+++ b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
-@@ -0,0 +1,59 @@
-+libwacom create a native executable file to generate udev rules file. But it is
-+not suitable for cross compile. And it is complicate to create libwacom-native
-+that libgudev-native and udev-native are required.
-+
-+So do not generate udev rules file during compilation. Install the executable
-+file to generate udev rules on target. It should put the generated rules file
-+at /lib/udev/rules.d/65-libwacom.rules.
-+
-+Upstream-Status: Inappropriate [cross-compile specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/meson.build b/meson.build
-+index 6584c86..4009f5f 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -407,20 +407,20 @@ executable('libwacom-list-local-devices',
-+ 	   include_directories: [includes_src],
-+ 	   install: true)
-+ 
-+-tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
-++tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root()), '-DLIBWACOM_DATA_DIR="@0@"'.format(dir_data)]
-+ 
-+-gen_udev_rules = executable('generate-udev-rules',
-++gen_udev_rules = executable('libwacom-generate-udev-rules',
-+ 			    'tools/generate-udev-rules.c',
-+ 			    dependencies: [dep_libwacom, dep_glib],
-+ 			    include_directories: [includes_src],
-+ 			    c_args: tools_cflags,
-+-			    install: false)
-+-custom_target('udev-rules',
-+-	      command: gen_udev_rules,
-+-	      capture: true,
-+-	      output: '65-libwacom.rules',
-+-	      install: true,
-+-	      install_dir: join_paths(dir_udev, 'rules.d'))
-++			    install: true)
-++#custom_target('udev-rules',
-++#	      command: gen_udev_rules,
-++#	      capture: true,
-++#	      output: '65-libwacom.rules',
-++#	      install: true,
-++#	      install_dir: join_paths(dir_udev, 'rules.d'))
-+ 
-+ executable('list-devices',
-+ 	   'tools/list-devices.c',
-+diff --git a/tools/generate-udev-rules.c b/tools/generate-udev-rules.c
-+index bb00e7b..fbf49f0 100644
-+--- a/tools/generate-udev-rules.c
-++++ b/tools/generate-udev-rules.c
-+@@ -229,7 +229,7 @@ int main(int argc, char **argv)
-+ 	}
-+ 
-+ 
-+-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
-++	db = libwacom_database_new_for_path(LIBWACOM_DATA_DIR);
-+ 
-+ 	list = libwacom_list_devices_from_database(db, NULL);
-+ 	if (!list) {
-diff --git a/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
-new file mode 100644
-index 000000000..0787ad246
---- /dev/null
-+++ b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "libwacom is a library to identify wacom tablets and their model-specific features."
-+HOMEPAGE = "https://github.com/linuxwacom/libwacom/wiki"
-+SECTION = "libs"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
-+
-+DEPENDS = "libgudev libxml2"
-+
-+SRC_URI = "git://github.com/linuxwacom/libwacom.git;protocol=https \
-+           file://generate-udev-rules-on-target.patch \
-+           "
-+SRCREV = "ae6c9cf78802844349986ac2a708d87e891a3e6e"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig
 -- 
-2.20.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
