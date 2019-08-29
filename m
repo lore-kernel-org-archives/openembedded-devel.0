@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
-	[209.85.210.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ED887F333
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E16E67D5BE
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 29 Aug 2019 19:22:17 +0000 (UTC)
-Received: by mail-pf1-f179.google.com with SMTP id 26so371952pfp.9
+Received: by mail-pf1-f177.google.com with SMTP id c81so2720060pfc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 12:22:18 -0700 (PDT)
+	Thu, 29 Aug 2019 12:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=vazvWJp9Un5/vzIfclUH+ULn2V+3sfh3OLKHxCyVk0c=;
-	b=ayYB8sGJHJt7KVv5Svx1GbuGPYr0gJOQDH2B310vov5iAhuNl/vwqcRafnWxw21Bb+
-	HzojD4W/sToHKgXie3VCTHbIeuorwFW4kW6JjTtvt+gR0G8J21+xv/D8JMa5d4pRLPgE
-	dfVo9yVUDCOHUjpfF5B2apDwWDx+pvPexX0gEWVtazgmG346VhPg6raLjRRecRUMlUwX
-	UVE6nOdxqMKzgnqcFDhXindMnFD033PzGiXRtvvZoDT2tKbbq52LTKTWUKjZq7iPWzd2
-	k/ZQ1lmvHqBad0jjjp+eIp9XsU3IbCXofucioWDDj823fjMZrMvr71kNQ8ae+0g+x7Ja
-	7VBQ==
+	bh=Li9zX4WCRJmaDhxK0tghbOawlDZMhtvVFeijYUa8kYY=;
+	b=UvzdcC9mfRXLOMEG9uZ0G4h7qSfxBOY+SRlJtqpUgDEhe5f8hzgpVd2VNpQHkGKjyJ
+	jWR+b6gdFPU7Aznm6xjmc4nPErP4waZNBFbH+XxLH9SYXCX277LxoNxVPK9OBmYhbAeL
+	bGri0r7RLDkMwtWCNrqYQgeoZJc99nGmTsWEYFRmq/L1TPt0Qe9VWbCMVjDKrSmzhcf6
+	6Y0nHMwe+SMtuR5ESIyEc3+yrSh+M2WQhPIvrUuJDb2OfWGPIXqah+dEBACdTwPrXDBf
+	376FObTBGZxzb9C2s0gFEQSCRvRYPbEuxfYREIK8ITQOxfMj7ue26046Z3qEBB7GgkND
+	0nSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=vazvWJp9Un5/vzIfclUH+ULn2V+3sfh3OLKHxCyVk0c=;
-	b=mW29n3ZMN2soa3gq12bAZCCP0vsEwoePemVBoHeYz/bK8yw7ga7xMn2LJqQcykzj6p
-	p7GYhJVdBiPsGTIlNP9gPvNYQgWVea33rNLrg0KMsA0sfd0tWbjtSLNYjnuFnYzPg3J2
-	q8Eptmnwg3ayAS718m0Z4LuRJ3mE8IkR7+I247aCoONtMiSkQP4aWf0cUcEcydBMQL9Y
-	CDquxWE08HmLCaKNL0go/wQe5lae2WgiOYqk+3Q+quWkvvY/8WKe4L8xsERg2EXJtZTp
-	HheI+6Q1k7dlBMH3LKTWnN7qbvS5CQ5FAb59gImE+x5QI4ybbmgNMsz3FDedUL/Bt021
-	glWQ==
-X-Gm-Message-State: APjAAAXN4JkPTmAi6q3FGhcHYjqgAhENu95u9UzH9FaiFRDKRYmgh2vW
-	CDHlzLw/dJWWMi8RY3nn7cX3VCpDytA=
-X-Google-Smtp-Source: APXvYqxqq3NlYt4oXxMZtPS+1rEoqRqrxQnsCMQaNp1rWtvOwARTlwPl2LeRGc8zPpyBMysvUc2AYg==
-X-Received: by 2002:a65:518a:: with SMTP id h10mr9617388pgq.117.1567106537611; 
-	Thu, 29 Aug 2019 12:22:17 -0700 (PDT)
+	bh=Li9zX4WCRJmaDhxK0tghbOawlDZMhtvVFeijYUa8kYY=;
+	b=qB0Hr9SjGQ1tcapLVeG/4Awg9TBzFqQ6Lf5snXmZnahha2oDt9VlyJyWqJOE1CUUHe
+	OoxLQQbPii1x5vY8neiNrrW+5n/qyhTzisJFsVu7trmlKcAdACO30fwhq7lwSC4mZqRU
+	PwCoodzjHjT8VhEw+tkayjg8FiY0tIKr5o4UXH1Psq7pQoll4t9cguFJ7T4MZzkp37uB
+	DvljKhj0Nk1tm+DXh/LpradRO19O/I3RkLMwZ7bAgpCqkoqPNZtXmVzBXQiigPWUH8ei
+	b+OIb1/wf4ZSlXDODSorEOA1aHobT9sz7R7feewxIiEJ+pSrHaCXFgmdHNHhmTrBOCet
+	p96A==
+X-Gm-Message-State: APjAAAXytUOw64h8wZVGtUm3T33hTmReCumgWlZPgZUkcAmzZFLXb/4I
+	pXrfOn2/oj62sBIbBmNJHldUAyGXJ90=
+X-Google-Smtp-Source: APXvYqxwez3E5C+KIEHsda90LvhdzcdME7xCfkYn0mKCq3XqZzl1oEKih5heqGwhgzsDYzx4xOLalQ==
+X-Received: by 2002:a17:90a:18e:: with SMTP id
+	14mr11431904pjc.66.1567106538646; 
+	Thu, 29 Aug 2019 12:22:18 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3])
-	by smtp.gmail.com with ESMTPSA id s16sm4893281pfs.6.2019.08.29.12.22.16
+	by smtp.gmail.com with ESMTPSA id s16sm4893281pfs.6.2019.08.29.12.22.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 29 Aug 2019 12:22:17 -0700 (PDT)
+	Thu, 29 Aug 2019 12:22:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2019 12:22:05 -0700
-Message-Id: <20190829192206.1200-4-raj.khem@gmail.com>
+Date: Thu, 29 Aug 2019 12:22:06 -0700
+Message-Id: <20190829192206.1200-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20190829192206.1200-1-raj.khem@gmail.com>
 References: <20190829192206.1200-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 4/5] linux-atm: Fix build with kernel headers 5.2+
+Subject: [meta-networking][PATCH 5/5] drbd: Upgrade to 9.0.19-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,93 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 19:22:17 -0000
+X-List-Received-Date: Thu, 29 Aug 2019 19:22:18 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Include-linux-sockios.h-for-SIOCGST.patch | 59 +++++++++++++++++++
- .../linux-atm/linux-atm_2.5.2.bb              |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
+ .../drbd/{drbd_9.0.18-1.bb => drbd_9.0.19-1.bb}              | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/drbd/{drbd_9.0.18-1.bb => drbd_9.0.19-1.bb} (84%)
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
-new file mode 100644
-index 0000000000..a54869db89
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
-@@ -0,0 +1,59 @@
-+From 4456e13880803a300e4b6f263ad22a37481b5df5 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Aug 2019 09:33:43 -0700
-+Subject: [PATCH] saaldump,atmdump: Include linux/sockios.h for SIOCGSTAMP
-+
-+In linux kernel commit 0768e17073dc527ccd18ed5f96ce85f9985e9115
-+the asm-generic/sockios.h header no longer defines SIOCGSTAMP.
-+Instead it provides only SIOCGSTAMP_OLD.
-+
-+The linux/sockios.h header now defines SIOCGSTAMP using either
-+SIOCGSTAMP_OLD or SIOCGSTAMP_NEW as appropriate. This linux only
-+header file is not pulled so we get a build failure.
-+
-+Fixes
-+../../../linux-atm-2.5.2/src/maint/atmdump.c:142:18: error: use of undeclared identifier 'SIOCGSTAMP'
-+            if (ioctl(s,SIOCGSTAMP,&stamp) < 0) {
-+                        ^
-+1 error generated.
-+make[3]: *** [Makefile:623: atmdump.o] Error 1
-+make[3]: *** Waiting for unfinished jobs....
-+../../../linux-atm-2.5.2/src/maint/saaldump.c:169:14: error: use of undeclared identifier 'SIOCGSTAMP'
-+        if (ioctl(s,SIOCGSTAMP,&stamp) < 0) {
-+                    ^
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/maint/atmdump.c  | 2 +-
-+ src/maint/saaldump.c | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/maint/atmdump.c b/src/maint/atmdump.c
-+index 8b17826..9e4853b 100644
-+--- a/src/maint/atmdump.c
-++++ b/src/maint/atmdump.c
-+@@ -5,7 +5,7 @@
-+ #if HAVE_CONFIG_H
-+ #include <config.h>
-+ #endif
-+-
-++#include <linux/sockios.h>
-+ #include <stdlib.h>
-+ #include <stdio.h>
-+ #include <unistd.h>
-+diff --git a/src/maint/saaldump.c b/src/maint/saaldump.c
-+index 83bdde9..69429a8 100644
-+--- a/src/maint/saaldump.c
-++++ b/src/maint/saaldump.c
-+@@ -5,7 +5,7 @@
-+ #if HAVE_CONFIG_H
-+ #include <config.h>
-+ #endif
-+-
-++#include <linux/sockios.h>
-+ #include <stdlib.h>
-+ #include <stdarg.h>
-+ #include <stdio.h>
-+-- 
-+2.23.0
-+
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index 9ed7ca613b..e594906c33 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -12,6 +12,7 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
-            file://0001-ttcp-Add-printf-format-string.patch \
-            file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
-            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
-+           file://0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch \
- "
+diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.18-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+similarity index 84%
+rename from meta-networking/recipes-support/drbd/drbd_9.0.18-1.bb
+rename to meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+index 6fb621a1f4..6683781af5 100644
+--- a/meta-networking/recipes-support/drbd/drbd_9.0.18-1.bb
++++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+@@ -11,9 +11,8 @@ DEPENDS = "virtual/kernel"
+ SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
+            file://check_existence_of_modules_before_installing.patch \
+            "
+-
+-SRC_URI[md5sum] = "f2e6eaa92861252af0b564f0100f1859"
+-SRC_URI[sha256sum] = "d6b4188ed01d8555c78b04b5e31532d5990ca98bf063230f3e949ee8a7338d58"
++SRC_URI[md5sum] = "bd1202eaaf81641752d0c9b003b10f6c"
++SRC_URI[sha256sum] = "5b3d2bcb99542940e40af903dea783cf04524e9f41cc530e210d2c15ef84fa58"
  
- SRC_URI_append_libc-musl = " file://musl-no-on_exit.patch"
+ inherit module
+ 
 -- 
 2.23.0
 
