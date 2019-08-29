@@ -1,26 +1,47 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 17C317F2FF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BA32A7F2F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 15:58:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7TFvDk7002104
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 29 Aug 2019 08:57:44 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 29 Aug 2019 08:57:30 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 29 Aug 2019 23:57:28 +0800
-Message-ID: <1567094248-9489-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1566955456-20194-1-git-send-email-hongxu.jia@windriver.com>
-References: <1566955456-20194-1-git-send-email-hongxu.jia@windriver.com>
+	Thu, 29 Aug 2019 16:01:19 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id t12so4215129qtp.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Aug 2019 09:01:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=EL74jnADS3rEctjfOa256O5O+rIiNw7UDo5DOgmi73g=;
+	b=ju4JVwhjHcoAHQddjZ7EzjHT+ishO+HZQEHQrlvcNN4Xd5wIfNr1ECeXYWBSvu1hP5
+	92X30ArnfcoePqcfCq3jGDJKG7BrkpwdoUpyIYnNHwJsL8akk6dpk1A03oLx2r6/+60v
+	kHr4VaNA1aBeF8lxVt1Ilci2/8wdtcFt7UhNHv5k6jUG84+V8Uzqe/uB/+UfbQqjV14S
+	+ZwnBfKNwTCVvm6Oi32p9TP8tRqywbv2DR850dtKI65LkSKTbaLBuPIzSfZjOp+RWT24
+	ZB1Pv3ZHoR6sB/HlpqckZlZ2UvvZLmq68JsXf40FIvJq9xdCVOGdw53AQsyUFg7vh/9k
+	ll8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=EL74jnADS3rEctjfOa256O5O+rIiNw7UDo5DOgmi73g=;
+	b=VZ7iQ0FenFc5fcD+BOO2oAoJa9sILMMif7Jm5f31wXnisGfjGSbgB9nbHTMVLYABmu
+	nJIslzY5nR2zkos1bOvcTUAxYvoYv40jfPXtF9vwwcHhrxgfANW9yCqjXKydGp04PCZk
+	9s4+OmYHxF+l51NEnwBNu2+k0GcTqmaiLP+UxyYfXs0Q8W7BtnIYnzYBSU0//0f2ipDL
+	MhUdOQ5M5dRFYGhLR+NShefq+DYPm1BJlcHEiDPM0quJjgfnvLecjmfiJLTMFbJnsdO5
+	AXmvXffX2BY4PDfrYi7tuGR6AReqTJug++tS6UfYcaujAy0NnT0R33ZNTA4PXa2MQeev
+	j8SA==
+X-Gm-Message-State: APjAAAXHu3/DNWfOAGkrLUZV2aakm0s0BNRDmVprKpqfYM5cRSh0jbHE
+	1tIuOJ1CBrDoJCAt4B/Fh4s2lyTDPKdUuUro4Wh2GsaZ
+X-Google-Smtp-Source: APXvYqy6qU600yeG9ZB4RdJWHC7TJ4rv3b8t0cTXbMoD1V7t1SGiicLL0X4BzfvLi32OHZuy1dlEcRMLk5pTDyO1PDs=
+X-Received: by 2002:a0c:c548:: with SMTP id y8mr7107374qvi.68.1567094480195;
+	Thu, 29 Aug 2019 09:01:20 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH V3] cryptsetup: add libdevmapper to RDEPENDS
+References: <20190828171538.16160-1-bunk@stusta.de>
+	<20190829095514.GA32705@localhost>
+In-Reply-To: <20190829095514.GA32705@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 29 Aug 2019 09:00:54 -0700
+Message-ID: <CAMKF1sqjEuq-A-crLhRO7fmqDLg57K3O876EjfjGuw4+AskMnQ@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] Replace EXCLUDE_FROM_WORLD_libc-musl = "1" with COMPATIBLE_HOST_libc-musl = 'null'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,45 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 15:58:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Aug 2019 16:01:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Since commit [libdevmapper/lvm2: force recipe libdevmapper to populate
-sysroot only] applied, if recipe DEPENDS on libdevmapper, we have to
-add it to packages RDEPENDS to fix [file-rdeps] QA issue
+On Thu, Aug 29, 2019 at 2:55 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> Sorry for the confusing submission, but these were two different patches
+> doing a similar change in different layers that should both be applied.
+>
 
-Skip [build-deps] and [file-rdeps] QA checking, add lvm2 to DEPENDS will
-triger circular dependencies, use recipe libdevmapper to replace,
-ignore the QA checking is fine.
+such changes are fine across layers
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-index 6ebf1e2..194842e 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.0.bb
-@@ -16,6 +16,10 @@ DEPENDS = " \
-     util-linux \
- "
- 
-+RDEPENDS_${PN} = " \
-+    libdevmapper \
-+"
-+
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
- SRC_URI[md5sum] = "f7818082056e5bc0be12e4c7fc20345a"
- SRC_URI[sha256sum] = "9d8f8cac2836a1623c075b5cba96032271dc81a28b2aa27fbd8331e831416bb1"
-@@ -85,4 +89,6 @@ EXTRA_OECONF += "--disable-libargon2"
- 
- FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
- 
-+INSANE_SKIP_${PN} += "build-deps file-rdeps"
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.7.4
-
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
 
