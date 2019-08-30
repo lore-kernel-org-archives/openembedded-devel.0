@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E3B06C3E1
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 9AE117F3D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 02:30:46 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id go14so2580483plb.0
+	Fri, 30 Aug 2019 02:30:47 +0000 (UTC)
+Received: by mail-pl1-f181.google.com with SMTP id az1so1605453plb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 19:30:48 -0700 (PDT)
+	Thu, 29 Aug 2019 19:30:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=tzgtmFpdcsE4TCrH8XaINLMb/Io4ZA0UF23fLow0zBk=;
-	b=UkGcYiWkdA3DycA+QO7+m8JlGntU5CkleJWSU4E8vCbyYSJoq6yd4q/bpeu9zIq1E+
-	qzouk5lw9VFz6PtbBudvd63m4WunqRrEAhDBkCfzoMaHQpmqHA9cpKBfIBxLIKgyO94c
-	vtM7bRfdKi0rryQeY2abiakrR/7PVcJ5GlJHLq7hxjkG1pOkJetgSPRO8v5tUP7Z3pVb
-	GDHDtDEkltVlNy3uKJwxnz6yre6FGNtTuhq0rNULqg0mE5r0p/PhzoKf70YTKqzE1fw4
-	vJhcBNGnbDRQan3KnCj36ty8EROyOieuk0B/dXJyzwVdICrTki9/l7K+s2Suc084EYMz
-	gQIQ==
+	bh=UEYOpPqNmVdXFvVmS46maoNrtmIreYYZoUBzm0Bgylw=;
+	b=rr2hSxN55xLIK32243TeXqKNn2zcjEMiH3EroRgI3Q5BS4Qd4WpBrMqTaDbgJkDicK
+	89SD8k81BA7OGnNkVwSNzy3OMIpgKkxOL8460s7wZm5sNUpo56H2Wq6MCq7HJJxuOygU
+	0Rq/CD9giSLL3fgDfflAxNyeIEMRPmh91L5gr9cvwG2mukbrFfDMhaw7th56lN7lg4bp
+	DD1/6bGvfuA3MggnFzMnaAEKHBySzLTqMO5+Hm3300lFJU0jDULvXhzPcsA73KCxul4h
+	ehJ5jNTwlIFASxUZ9z4iWvrr8wpIl4Lvvt5eYkRAicG2ek24EHgyIksve37UaYB9Pg+J
+	5Okg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=tzgtmFpdcsE4TCrH8XaINLMb/Io4ZA0UF23fLow0zBk=;
-	b=Eq8DGiS5oBWmXQV/oZPMiUbM5R8QftWQCwZ52yhBoFD2CpjgNnFSbzEP84i0fw9Lji
-	hK1PSum4XurcsaPrd2tJp92DdznH0AHv0Z2pcw5Y1X9/HNRRIcMBOpq7LqMQft23Gs5t
-	Y+kqzYOPvvZd6WU15pYGvEgrOGL9SBqR9xTDjV5ztNKwQhGE6GFykb4r9vKh2MVBjt54
-	4w6GdYHJLfhRNtFgo2Ge2aY47UVapAOg0Rt7s2ZXq28bKVAZp81qrL5Z3JShwxQwghZe
-	+RvrjWW8o6nXL0QO85akbxeWCV04JkGy28sZDTc35ul1S4YjpeOuqqiYnq+xzDBra6JL
-	PjYA==
-X-Gm-Message-State: APjAAAXDo2TQb0Pjq4/gY1ikCkLyppfJB7Sx7fAElP66emfyBmmFUqpx
-	XRrcN+xMyczNYazgvRi5JwGxRLev
-X-Google-Smtp-Source: APXvYqzrTTdFpSNEAEEdFrlXf1ZiZP7mEdK1EJ5PlSDkgelYGF/z2TN/YGDcN0JIyjanatlNEtEKCQ==
-X-Received: by 2002:a17:902:9b90:: with SMTP id
-	y16mr13107279plp.17.1567132247210; 
-	Thu, 29 Aug 2019 19:30:47 -0700 (PDT)
+	bh=UEYOpPqNmVdXFvVmS46maoNrtmIreYYZoUBzm0Bgylw=;
+	b=IjPZZtY73zVOjolSj7JodFwaWYNanvtP9rosrS0uHM8Oi5hTuaMO8XUYVtvPxfMxAI
+	evMMlb26XJvjzIYpuM/7qsmuVxgGA+bAaSUO8/KGWZgmYa0taMLdEuhKLu0nrRKZoXAs
+	/MNj+5lp9pnJ4CK+gAiOPCftUJS74o6UDG2ES/bm8XZ6XF5FnBZBHvL8fBPvOFuQ8NEi
+	11txCJXNHnNMXieGFZ5oIjOOQi6/34nj97Qboy0PvTXDAc2MXzPWuKzLpZs2iFvCqXwF
+	WCHCy3T/RdaZswfejfY9ZHz9Ln8Wq1gOojh7kFMRibp91BlmUG3HRu9i7qX6pL0l/ahZ
+	ZrNA==
+X-Gm-Message-State: APjAAAX5+v3meIfo798Q+Z9qOy0CjhN5s/ph5k7tB4/MUdLKbx5V42Iy
+	v/tIUnZ9e4raqUJCSUYxbJgBBnXd
+X-Google-Smtp-Source: APXvYqyaLeEC0ONMCOAU9yzf/maE2qXpCQjwyT098dwO+U9MndiV2z98B5ovJKGCKH3xh/XDP4p7lw==
+X-Received: by 2002:a17:902:6a:: with SMTP id
+	97mr13382023pla.257.1567132248436; 
+	Thu, 29 Aug 2019 19:30:48 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:90d2:579e:19f:13b1])
 	by smtp.gmail.com with ESMTPSA id
-	d14sm3731425pjx.17.2019.08.29.19.30.46
+	d14sm3731425pjx.17.2019.08.29.19.30.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 Aug 2019 19:30:46 -0700 (PDT)
+	Thu, 29 Aug 2019 19:30:47 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2019 19:30:39 -0700
-Message-Id: <1567132240-27573-4-git-send-email-akuster808@gmail.com>
+Date: Thu, 29 Aug 2019 19:30:40 -0700
+Message-Id: <1567132240-27573-5-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1567132240-27573-1-git-send-email-akuster808@gmail.com>
 References: <1567132240-27573-1-git-send-email-akuster808@gmail.com>
 Cc: Armin Kuster <akuster@mvista.com>
-Subject: [[meta-webserver][thud] 4/5] apache2: add back patch for set perlbin
+Subject: [[meta-webserver][thud] 5/5] apache2: upgrade 2.4.39 -> 2.4.41
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,76 +60,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2019 02:30:46 -0000
+X-List-Received-Date: Fri, 30 Aug 2019 02:30:47 -0000
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Add back this patch. Without this patch, apxs's shebang will use
-perl under hosttools, which can be too long for shebang, and cause
-error:
-bad interpreter: No such file or directory
+Security fixes:
+  CVE-2019-10081
+  CVE-2019-9517
+  CVE-2019-10098
+  CVE-2019-10092
+  CVE-2019-10097
+  CVE-2019-10082
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+See: http://www.apache.org/dist/httpd/CHANGES_2.4.41
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../apache2/apache2/apache-configure_perlbin.patch | 34 ++++++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.39.bb        |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+ .../recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb} (98%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
-new file mode 100644
-index 0000000..61669e3
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
-@@ -0,0 +1,34 @@
-+From 5412077c398dec74321388fe6e593a44c4c80de6 Mon Sep 17 00:00:00 2001
-+From: echo <fei.geng@windriver.com>
-+Date: Tue, 28 Apr 2009 03:11:06 +0000
-+Subject: [PATCH] Fix perl install directory to /usr/bin
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Add back this patch. Without this patch, apxs's shebang will use
-+perl under hosttools, which can be too long for shebang, and cause
-+error:
-+bad interpreter: No such file or directory
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
-+---
-+ configure.in | 5 +----
-+ 1 file changed, 1 insertion(+), 4 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index d828512..be7bd25 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -855,10 +855,7 @@ AC_DEFINE_UNQUOTED(SERVER_CONFIG_FILE, "${rel_sysconfdir}/${progname}.conf",
-+ AC_DEFINE_UNQUOTED(AP_TYPES_CONFIG_FILE, "${rel_sysconfdir}/mime.types",
-+ 	[Location of the MIME types config file, relative to the Apache root directory])
-+ 
-+-perlbin=`$ac_aux_dir/PrintPath perl`
-+-if test "x$perlbin" = "x"; then
-+-    perlbin="/replace/with/path/to/perl/interpreter"
-+-fi
-++perlbin='/usr/bin/perl'
-+ AC_SUBST(perlbin)
-+ 
-+ dnl If we are running on BSD/OS, we need to use the BSD .include syntax.
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-index c6961ef..70dd1ab 100644
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+similarity index 98%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+index 70dd1ab..f489bba 100644
 --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-@@ -13,6 +13,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0005-replace-lynx-to-curl-in-apachectl-script.patch \
-            file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
-            file://0007-apache2-allow-to-disable-selinux-support.patch \
-+           file://apache-configure_perlbin.patch \
-           "
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
+@@ -25,8 +25,8 @@ SRC_URI_append_class-target = " \
+            "
  
- SRC_URI_append_class-target = " \
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+-SRC_URI[md5sum] = "930e217ba2d71e708a3f1521ecae7ec0"
+-SRC_URI[sha256sum] = "b4ca9d05773aa59b54d66cd8f4744b945289f084d3be17d7981d1783a5decfa2"
++SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
++SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.7.4
 
