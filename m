@@ -1,26 +1,24 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 63D8A7F3A2
+	by mail.openembedded.org (Postfix) with ESMTP id 9DA587F30F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 07:07:22 +0000 (UTC)
+	Fri, 30 Aug 2019 08:03:17 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7U7734O002991
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7U82vgj004856
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 00:07:13 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Fri, 30 Aug 2019 00:06:52 -0700
-From: <changqing.li@windriver.com>
+	Fri, 30 Aug 2019 01:03:08 -0700
+Received: from ala-lpggp7.wrs.com (147.11.105.171) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 30 Aug 2019 01:02:46 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Aug 2019 15:06:48 +0800
-Message-ID: <1567148808-286340-3-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1567148808-286340-1-git-send-email-changqing.li@windriver.com>
-References: <1567148808-286340-1-git-send-email-changqing.li@windriver.com>
+Date: Fri, 30 Aug 2019 01:02:46 -0700
+Message-ID: <20190830080246.46005-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-initramfs][PATCH 3/3] grubby: support usrmerge
+Subject: [meta-networking][PATCH] netcf: Fix Manifest not found issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,30 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2019 07:07:22 -0000
+X-List-Received-Date: Fri, 30 Aug 2019 08:03:17 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+Fixed:
+$ bitbake netcf
+WARNING: netcf-0.2.8+gitAUTOINC+2c5d425585-r0 do_package: Manifest /path/sstate-control/manifest-x86_64_x86_64-nativesdk-gnulib.packagedata not found in intel_x86_64 corei7-64 core2-64 x86_64 allarch x86_64_x86_64-nativesdk (variant '')?
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+This is because gnulib has no related tasks:
+do_package[noexec] = "1"
+do_packagedata[noexec] = "1"
+deltask package_write_ipk
+deltask package_write_deb
+deltask package_write_rpm
+deltask do_deploy_archives
+
+Depends on gnulib:do_populate_sysroot explicitly to fix the problem.
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-initramfs/recipes-devtools/grubby/grubby_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/netcf/netcf_0.2.8.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
-index 6d53f48..7248147 100644
---- a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
-@@ -25,7 +25,7 @@ RDEPENDS_${PN} += "dracut"
+diff --git a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+index a4a9c91c6..0f49d6060 100644
+--- a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
++++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+@@ -14,7 +14,9 @@ SRC_URI = "git://pagure.io/netcf.git;protocol=https \
  
- inherit autotools-brokensep ptest
+ UPSTREAM_CHECK_GITTAGREGEX = "release-(?P<pver>(\d+(\.\d+)+))"
  
--EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}' LIBS='${LIBS}'"
-+EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}' LIBS='${LIBS}' 'PREFIX'=${@bb.utils.contains('DISTRO_FEATURES','usrmerge','/usr','',d)}"
+-DEPENDS += "augeas libnl libxslt libxml2 gnulib"
++DEPENDS += "augeas libnl libxslt libxml2"
++
++do_configure[depends] += "gnulib:do_populate_sysroot"
  
- LIBS_libc-musl = "-lexecinfo"
- LIBS ?= ""
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.7.4
+2.21.0
 
 
