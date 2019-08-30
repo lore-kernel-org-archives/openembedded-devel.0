@@ -1,23 +1,25 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E52C6BDD2
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 56D217F3E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 07:06:49 +0000 (UTC)
+	Fri, 30 Aug 2019 07:06:50 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7U76ojK006941
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x7U76pfc001395
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 00:06:50 -0700 (PDT)
+	Fri, 30 Aug 2019 00:06:51 -0700 (PDT)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Fri, 30 Aug 2019 00:06:49 -0700
+	14.3.468.0; Fri, 30 Aug 2019 00:06:50 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Aug 2019 15:06:46 +0800
-Message-ID: <1567148808-286340-1-git-send-email-changqing.li@windriver.com>
+Date: Fri, 30 Aug 2019 15:06:47 +0800
+Message-ID: <1567148808-286340-2-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1567148808-286340-1-git-send-email-changqing.li@windriver.com>
+References: <1567148808-286340-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH 1/3] xfsprogs: support usrmerge
+Subject: [meta-filesystems][PATCH 2/3] ntfs-3g-ntfsprogs: support usrmerge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,87 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2019 07:06:49 -0000
+X-List-Received-Date: Fri, 30 Aug 2019 07:06:50 -0000
 Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../xfsprogs/files/0001-support-usrmerge.patch     | 40 ++++++++++++++++++++++
- .../recipes-utils/xfsprogs/xfsprogs_5.2.1.bb       |  7 ++--
- 2 files changed, 45 insertions(+), 2 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0001-support-usrmerge.patch
+ .../files/0001-Make-build-support-usrmerge.patch   | 43 ++++++++++++++++++++++
+ .../ntfs-3g-ntfsprogs_2017.3.23.bb                 |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-Make-build-support-usrmerge.patch
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-support-usrmerge.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0001-support-usrmerge.patch
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-Make-build-support-usrmerge.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-Make-build-support-usrmerge.patch
 new file mode 100644
-index 0000000..84f4f88
+index 0000000..fce10b9
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0001-support-usrmerge.patch
-@@ -0,0 +1,40 @@
-+From e81633a276dd6a9f919e5e5c15481ac50a8e485d Mon Sep 17 00:00:00 2001
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-Make-build-support-usrmerge.patch
+@@ -0,0 +1,43 @@
++From 33f678bf74367aab8ddc2858a9f7797455ea9b9f Mon Sep 17 00:00:00 2001
 +From: Changqing Li <changqing.li@windriver.com>
-+Date: Fri, 30 Aug 2019 14:59:06 +0800
-+Subject: [PATCH] support usrmerge
++Date: Thu, 29 Aug 2019 10:21:58 +0800
++Subject: [PATCH] Make build support usrmerge
 +
-+Upstream-Status: Inappropriate [oe-specific]
++Upstream-Status: Inappropriate[oe-specific]
 +
 +Signed-off-by: Changqing Li <changqing.li@windriver.com>
 +---
-+ configure.ac | 7 +++----
-+ 1 file changed, 3 insertions(+), 4 deletions(-)
++ ntfsprogs/Makefile.am | 2 --
++ src/Makefile.am       | 3 ---
++ 2 files changed, 5 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 4b7e4c8..f1afbd6 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -110,8 +110,7 @@ AC_ARG_ENABLE(libicu,
-+ # If the user specified a libdir ending in lib64 do not append another
-+ # 64 to the library names.
-+ #
-+-base_libdir=`basename "$libdir"`
-+-case $base_libdir in
-++case `basename "$libdir"` in
-+ lib64)
-+   enable_lib64=no
-+ esac
-+@@ -125,8 +124,8 @@ esac
-+ #
-+ case $exec_prefix:$prefix in
-+ NONE:NONE | NONE:/usr | /usr:*)
-+-  root_sbindir='/sbin'
-+-  root_libdir="/${base_libdir}"
-++  root_sbindir="${base_sbindir}"
-++  root_libdir="${base_libdir}"
-+   ;;
-+ *)
-+   root_sbindir="${sbindir}"
++diff --git a/ntfsprogs/Makefile.am b/ntfsprogs/Makefile.am
++index f4f9d1b..1f6a673 100644
++--- a/ntfsprogs/Makefile.am
+++++ b/ntfsprogs/Makefile.am
++@@ -165,8 +165,6 @@ extras:	libs $(EXTRA_PROGRAMS)
++ 
++ if ENABLE_MOUNT_HELPER
++ install-exec-hook:
++-	$(INSTALL) -d $(DESTDIR)/sbin
++-	$(LN_S) -f $(sbindir)/mkntfs $(DESTDIR)/sbin/mkfs.ntfs
++ 
++ install-data-hook:
++ 	$(INSTALL) -d $(DESTDIR)$(man8dir)
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 8d98408..d0a6a45 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -66,9 +66,6 @@ endif
++ 
++ if ENABLE_MOUNT_HELPER
++ install-exec-local:	install-rootbinPROGRAMS
++-	$(MKDIR_P) "$(DESTDIR)/sbin"
++-	$(LN_S) -f "$(rootbindir)/ntfs-3g" "$(DESTDIR)/sbin/mount.ntfs-3g"
++-	$(LN_S) -f "$(rootbindir)/lowntfs-3g" "$(DESTDIR)/sbin/mount.lowntfs-3g"
++ 
++ install-data-local:	install-man8
++ 	$(LN_S) -f ntfs-3g.8 "$(DESTDIR)$(man8dir)/mount.ntfs-3g.8"
 +-- 
 +2.7.4
 +
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb
-index bed80a6..5ab1d02 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0001-build-Check-for-sync_file_range-libc-function.patch \
-            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-+           file://0001-support-usrmerge.patch \
-            "
- SRC_URI[md5sum] = "5ca3f79e76e3fb984a03d1b42a2e60ba"
- SRC_URI[sha256sum] = "7b500e148cebd08f99e37cf744c7843817b37e7be2a32c4dc57d6ea16e3019ae"
-@@ -68,6 +69,8 @@ do_install_append() {
-         rm ${D}${libdir}/*.la
-         rmdir --ignore-fail-on-non-empty ${D}${libdir}
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
+index addb4d3..1559bfd 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
  
--        ln -sf -r ${D}${libdir}/libhandle.a ${D}${base_libdir}/libhandle.a
--        ln -sf -r ${D}${base_libdir}/libhandle.so ${D}${libdir}/libhandle.so
-+        if [ ${libdir} != ${base_libdir} ];then
-+            ln -sf -r ${D}${libdir}/libhandle.a ${D}${base_libdir}/libhandle.a
-+            ln -sf -r ${D}${base_libdir}/libhandle.so ${D}${libdir}/libhandle.so
-+        fi
- }
+ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
+            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
++           ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-Make-build-support-usrmerge.patch','',d)} \
+ "
+ S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+ SRC_URI[md5sum] = "d97474ae1954f772c6d2fa386a6f462c"
 -- 
 2.7.4
 
