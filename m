@@ -1,53 +1,62 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AE117F3D4
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 690127F3A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 02:30:47 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id az1so1605453plb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2019 19:30:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UEYOpPqNmVdXFvVmS46maoNrtmIreYYZoUBzm0Bgylw=;
-	b=rr2hSxN55xLIK32243TeXqKNn2zcjEMiH3EroRgI3Q5BS4Qd4WpBrMqTaDbgJkDicK
-	89SD8k81BA7OGnNkVwSNzy3OMIpgKkxOL8460s7wZm5sNUpo56H2Wq6MCq7HJJxuOygU
-	0Rq/CD9giSLL3fgDfflAxNyeIEMRPmh91L5gr9cvwG2mukbrFfDMhaw7th56lN7lg4bp
-	DD1/6bGvfuA3MggnFzMnaAEKHBySzLTqMO5+Hm3300lFJU0jDULvXhzPcsA73KCxul4h
-	ehJ5jNTwlIFASxUZ9z4iWvrr8wpIl4Lvvt5eYkRAicG2ek24EHgyIksve37UaYB9Pg+J
-	5Okg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=UEYOpPqNmVdXFvVmS46maoNrtmIreYYZoUBzm0Bgylw=;
-	b=IjPZZtY73zVOjolSj7JodFwaWYNanvtP9rosrS0uHM8Oi5hTuaMO8XUYVtvPxfMxAI
-	evMMlb26XJvjzIYpuM/7qsmuVxgGA+bAaSUO8/KGWZgmYa0taMLdEuhKLu0nrRKZoXAs
-	/MNj+5lp9pnJ4CK+gAiOPCftUJS74o6UDG2ES/bm8XZ6XF5FnBZBHvL8fBPvOFuQ8NEi
-	11txCJXNHnNMXieGFZ5oIjOOQi6/34nj97Qboy0PvTXDAc2MXzPWuKzLpZs2iFvCqXwF
-	WCHCy3T/RdaZswfejfY9ZHz9Ln8Wq1gOojh7kFMRibp91BlmUG3HRu9i7qX6pL0l/ahZ
-	ZrNA==
-X-Gm-Message-State: APjAAAX5+v3meIfo798Q+Z9qOy0CjhN5s/ph5k7tB4/MUdLKbx5V42Iy
-	v/tIUnZ9e4raqUJCSUYxbJgBBnXd
-X-Google-Smtp-Source: APXvYqyaLeEC0ONMCOAU9yzf/maE2qXpCQjwyT098dwO+U9MndiV2z98B5ovJKGCKH3xh/XDP4p7lw==
-X-Received: by 2002:a17:902:6a:: with SMTP id
-	97mr13382023pla.257.1567132248436; 
-	Thu, 29 Aug 2019 19:30:48 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:90d2:579e:19f:13b1])
-	by smtp.gmail.com with ESMTPSA id
-	d14sm3731425pjx.17.2019.08.29.19.30.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 Aug 2019 19:30:47 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2019 19:30:40 -0700
-Message-Id: <1567132240-27573-5-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1567132240-27573-1-git-send-email-akuster808@gmail.com>
-References: <1567132240-27573-1-git-send-email-akuster808@gmail.com>
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [[meta-webserver][thud] 5/5] apache2: upgrade 2.4.39 -> 2.4.41
+	Fri, 30 Aug 2019 04:07:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id C83DF18551;
+	Fri, 30 Aug 2019 06:07:32 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id JnQXwG8k7Ilw; Fri, 30 Aug 2019 06:07:31 +0200 (CEST)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id E224218527;
+	Fri, 30 Aug 2019 06:07:30 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id CFCB01A0D3;
+	Fri, 30 Aug 2019 06:07:30 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id C42081A0D2;
+	Fri, 30 Aug 2019 06:07:30 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Fri, 30 Aug 2019 06:07:30 +0200 (CEST)
+Received: from XBOX04.axis.com (xbox04.axis.com [10.0.5.18])
+	by thoth.se.axis.com (Postfix) with ESMTP id B7D5D26B2;
+	Fri, 30 Aug 2019 06:07:30 +0200 (CEST)
+Received: from XBOX04.axis.com (10.0.5.18) by XBOX04.axis.com (10.0.5.18) with
+	Microsoft SMTP Server (TLS) id 15.0.1395.4;
+	Fri, 30 Aug 2019 06:07:30 +0200
+Received: from XBOX04.axis.com ([fe80::210a:724b:68cb:a917]) by
+	XBOX04.axis.com ([fe80::210a:724b:68cb:a917%22]) with mapi id
+	15.00.1395.000; Fri, 30 Aug 2019 06:07:30 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>, "Alejandro Enedino Hernandez
+	Samaniego" <alejandro.enedino.hernandez-samaniego@xilinx.com>,
+	"raj.khem@gmail.com" <raj.khem@gmail.com>
+Thread-Topic: [oe] [PATCH V3] cryptsetup: add libdevmapper to RDEPENDS
+Thread-Index: AQHVXoKYfvJR0ztsRk6i0QCoDBxmUacSffGAgABJAoCAAD9REA==
+Date: Fri, 30 Aug 2019 04:07:30 +0000
+Message-ID: <0dce6aadbb574a01892cb847bada6523@XBOX04.axis.com>
+References: <1566955456-20194-1-git-send-email-hongxu.jia@windriver.com>
+	<1567094248-9489-1-git-send-email-hongxu.jia@windriver.com>
+	<7246b4cb-1358-8afc-eb4c-a80788bead19@xilinx.com>
+	<99b98099-6aa3-33c1-0168-6def305be825@windriver.com>
+In-Reply-To: <99b98099-6aa3-33c1-0168-6def305be825@windriver.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH V3] cryptsetup: add libdevmapper to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,47 +69,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2019 02:30:47 -0000
+X-List-Received-Date: Fri, 30 Aug 2019 04:07:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Yi Zhao <yi.zhao@windriver.com>
-
-Security fixes:
-  CVE-2019-10081
-  CVE-2019-9517
-  CVE-2019-10098
-  CVE-2019-10092
-  CVE-2019-10097
-  CVE-2019-10082
-
-See: http://www.apache.org/dist/httpd/CHANGES_2.4.41
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- .../recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb} (98%)
-
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-index 70dd1ab..f489bba 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-@@ -25,8 +25,8 @@ SRC_URI_append_class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
--SRC_URI[md5sum] = "930e217ba2d71e708a3f1521ecae7ec0"
--SRC_URI[sha256sum] = "b4ca9d05773aa59b54d66cd8f4744b945289f084d3be17d7981d1783a5decfa2"
-+SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
-+SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--- 
-2.7.4
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtDQo+IGRldmVsLWJv
+dW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIEhvbmd4dSBKaWENCj4g
+U2VudDogZGVuIDMwIGF1Z3VzdGkgMjAxOSAwMzozMg0KPiBUbzogQWxlamFuZHJvIEVuZWRpbm8g
+SGVybmFuZGV6IFNhbWFuaWVnbyA8YWxlamFuZHJvLmVuZWRpbm8uaGVybmFuZGV6LQ0KPiBzYW1h
+bmllZ29AeGlsaW54LmNvbT47IHJhai5raGVtQGdtYWlsLmNvbQ0KPiBDYzogb3BlbmVtYmVkZGVk
+LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW1BBVENI
+IFYzXSBjcnlwdHNldHVwOiBhZGQgbGliZGV2bWFwcGVyIHRvIFJERVBFTkRTDQo+IA0KPiBPbiA4
+LzMwLzE5IDU6MTAgQU0sIEFsZWphbmRybyBFbmVkaW5vIEhlcm5hbmRleiBTYW1hbmllZ28gd3Jv
+dGU6DQo+ID4NCj4gPiBIZXkgSG9uZ3h1LA0KPiA+DQo+ID4gT24gOC8yOS8xOSA4OjU3IEFNLCBI
+b25neHUgSmlhIHdyb3RlOg0KPiA+PiBTaW5jZSBjb21taXQgW2xpYmRldm1hcHBlci9sdm0yOiBm
+b3JjZSByZWNpcGUgbGliZGV2bWFwcGVyIHRvDQo+IHBvcHVsYXRlDQo+ID4+IHN5c3Jvb3Qgb25s
+eV0gYXBwbGllZCwgaWYgcmVjaXBlIERFUEVORFMgb24gbGliZGV2bWFwcGVyLCB3ZSBoYXZlIHRv
+DQo+ID4+IGFkZCBpdCB0byBwYWNrYWdlcyBSREVQRU5EUyB0byBmaXggW2ZpbGUtcmRlcHNdIFFB
+IGlzc3VlDQo+ID4+DQo+ID4+IFNraXAgW2J1aWxkLWRlcHNdIGFuZCBbZmlsZS1yZGVwc10gUUEg
+Y2hlY2tpbmcsIGFkZCBsdm0yIHRvIERFUEVORFMNCj4gd2lsbA0KPiA+PiB0cmlnZXIgY2lyY3Vs
+YXIgZGVwZW5kZW5jaWVzLCB1c2UgcmVjaXBlIGxpYmRldm1hcHBlciB0byByZXBsYWNlLA0KPiA+
+PiBpZ25vcmUgdGhlIFFBIGNoZWNraW5nIGlzIGZpbmUuDQo+ID4+DQo+ID4+IFNpZ25lZC1vZmYt
+Ynk6IEhvbmd4dSBKaWE8aG9uZ3h1LmppYUB3aW5kcml2ZXIuY29tPg0KPiA+PiAtLS0NCj4gPj4g
+ICBtZXRhLW9lL3JlY2lwZXMtY3J5cHRvL2NyeXB0c2V0dXAvY3J5cHRzZXR1cF8yLjIuMC5iYiB8
+IDYgKysrKysrDQo+ID4+ICAgMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQ0KPiA+Pg0K
+PiA+PiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNyeXB0by9jcnlwdHNldHVwL2NyeXB0
+c2V0dXBfMi4yLjAuYmINCj4gYi9tZXRhLW9lL3JlY2lwZXMtY3J5cHRvL2NyeXB0c2V0dXAvY3J5
+cHRzZXR1cF8yLjIuMC5iYg0KPiA+PiBpbmRleCA2ZWJmMWUyLi4xOTQ4NDJlIDEwMDY0NA0KPiA+
+PiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtY3J5cHRvL2NyeXB0c2V0dXAvY3J5cHRzZXR1cF8yLjIu
+MC5iYg0KPiA+PiArKysgYi9tZXRhLW9lL3JlY2lwZXMtY3J5cHRvL2NyeXB0c2V0dXAvY3J5cHRz
+ZXR1cF8yLjIuMC5iYg0KPiA+PiBAQCAtMTYsNiArMTYsMTAgQEAgREVQRU5EUyA9ICIgXA0KPiA+
+PiAgICAgICB1dGlsLWxpbnV4IFwNCj4gPj4gICAiDQo+ID4+DQo+ID4+ICtSREVQRU5EU18ke1BO
+fSA9ICIgXA0KPiA+PiArICAgIGxpYmRldm1hcHBlciBcDQo+ID4+ICsiDQo+ID4+ICsNCj4gPj4g
+ICBTUkNfVVJJDQo+ID0iJHtLRVJORUxPUkdfTUlSUk9SfS9saW51eC91dGlscy8ke0JQTn0vdiR7
+QGQuZ2V0VmFyKCdQVicpLnNwbGl0KCcuJylbDQo+IDBdfS4ke0BkLmdldFZhcignUFYnKS5zcGxp
+dCgnLicpWzFdfS8ke0JQfS50YXIueHoiDQo+ID4+ICAgU1JDX1VSSVttZDVzdW1dID0gImY3ODE4
+MDgyMDU2ZTViYzBiZTEyZTRjN2ZjMjAzNDVhIg0KPiA+PiAgIFNSQ19VUklbc2hhMjU2c3VtXSA9
+DQo+ICI5ZDhmOGNhYzI4MzZhMTYyM2MwNzViNWNiYTk2MDMyMjcxZGM4MWEyOGIyYWEyN2ZiZDgz
+MzFlODMxNDE2YmIxIg0KPiA+PiBAQCAtODUsNCArODksNiBAQCBFWFRSQV9PRUNPTkYgKz0gIi0t
+ZGlzYWJsZS1saWJhcmdvbjIiDQo+ID4+DQo+ID4+ICAgRklMRVNfJHtQTn0NCj4gKz0iJHtAYmIu
+dXRpbHMuY29udGFpbnMoJ0RJU1RST19GRUFUVVJFUycsJ3N5c3RlbWQnLCcke2V4ZWNfcHJlZml4
+fS9saWINCj4gL3RtcGZpbGVzLmQvY3J5cHRzZXR1cC5jb25mJywNCj4gPj4gJycsIGQpfSINCj4g
+Pj4NCj4gPj4gK0lOU0FORV9TS0lQXyR7UE59ICs9ICJidWlsZC1kZXBzIGZpbGUtcmRlcHMiDQo+
+ID4+ICsNCj4gPj4gICBCQkNMQVNTRVhURU5EID0gIm5hdGl2ZSBuYXRpdmVzZGsiDQo+ID4NCj4g
+Pg0KPiA+IFRoaXMgaXMgdGhlIGVycm9yIEknbSBnZXR0aW5nIGF0IGRvX3Jvb3RmcyBhZnRlciB0
+aGUgbGF0ZXN0IHZlcnNpb24NCj4gb2YNCj4gPiB0aGlzIHBhdGNoOg0KPiA+DQo+ID4gZG9fcm9v
+dGZzOiBDb3VsZCBub3QgaW52b2tlIGRuZi4gQ29tbWFuZA0KPiA+IEVycm9yOg0KPiA+ICDCoFBy
+b2JsZW06IGNvbmZsaWN0aW5nIHJlcXVlc3RzDQo+ID4gIMKgIC0gbm90aGluZyBwcm92aWRlcyBs
+aWJkZXZtYXBwZXIgbmVlZGVkIGJ5IGNyeXB0c2V0dXAtMi4yLjAtDQo+IHIwLnNreWxha2VfNjQN
+Cj4gPiAgwqAgLSBub3RoaW5nIHByb3ZpZGVzIGxpYmRldm1hcHBlci5zby4xLjAyKCkoNjRiaXQp
+IG5lZWRlZCBieQ0KPiBjcnlwdHNldHVwLTIuMi4wLXIwLnNreWxha2VfNjQNCj4gPiAgwqAgLSBu
+b3RoaW5nIHByb3ZpZGVzIGxpYmRldm1hcHBlci5zby4xLjAyKEJhc2UpKDY0Yml0KSBuZWVkZWQg
+YnkNCj4gY3J5cHRzZXR1cC0yLjIuMC1yMC5za3lsYWtlXzY0DQo+ID4gIMKgIC0gbm90aGluZyBw
+cm92aWRlcyBsaWJkZXZtYXBwZXIuc28uMS4wMihETV8xXzAyXzk3KSg2NGJpdCkgbmVlZGVkDQo+
+IGJ5IGNyeXB0c2V0dXAtMi4yLjAtcjAuc2t5bGFrZV82NA0KPiA+ICh0cnkgdG8gYWRkICctLXNr
+aXAtYnJva2VuJyB0byBza2lwIHVuaW5zdGFsbGFibGUgcGFja2FnZXMgb3IgJy0tDQo+IG5vYmVz
+dCcgdG8gdXNlIG5vdCBvbmx5IGJlc3QgY2FuZGlkYXRlIHBhY2thZ2VzKQ0KPiANCj4gU29ycnkg
+Zm9yIHRoZSBpbmNvbnZlbmllbmNlLCBJIHdpbGwgaGF2ZSBhIGxvb2sgYXQgdGhlIGlzc3VlDQo+
+IA0KPiAvL0hvbmd4dQ0KPiANCj4gPiBDaGVlcnMsDQo+ID4NCj4gPiBBbGVqYW5kcm8NCg0KV2Vs
+bCwgdGhlIGVycm9yIHNob3VsZCBiZSBvYnZpb3VzIGdpdmVuIHRoYXQgYWZ0ZXIgdGhlIGxhdGVz
+dCBjaGFuZ2VzIA0KdG8gbGliZGV2bWFwcGVyIGFuZCBsdm0yLCB0aGUgbGliZGV2bWFwcGVyIHJl
+Y2lwZSBubyBsb25nZXIgYnVpbGRzIGEgDQpsaWJkZXZtYXBwZXIgcGFja2FnZSwgaXQgaXMgYnVp
+bHQgYnkgbHZtMiwgYnV0IGNyeXB0c2V0dXAgb25seSBkZXBlbmRzIA0Kb24gbGliZGV2bWFwcGVy
+IGFuZCBzbyB0aGVyZSBpcyBub3RoaW5nIHRvIHRlbGwgYml0YmFrZSB0aGF0IGl0IG5lZWRzIA0K
+dG8gYnVpbGQgbHZtMi4gSSBiZWxpZXZlIHRoZSBjb3JyZWN0IHNvbHV0aW9uIGlzIHRvIGFkZDoN
+Cg0KUFJFRkVSUkVEX1JQUk9WSURFUl9saWJkZXZtYXBwZXIgPSAibHZtMiINCg0KdG8gbWV0YS1v
+ZS9jb25mL2xheWVyLmNvbmYuIFdpdGggdGhhdCBhZGRlZCBhbmQgdGhlIGV4cGxpY2l0IFJERVBF
+TkRTIA0Kb24gbGliZGV2bWFwcGVyIGluIGNyeXB0c2V0dXAsIEkgZG8gbm90IHRoaW5rIHlvdSBu
+ZWVkIHRvIHNraXAgbmVpdGhlciANCmJ1aWxkLWRlcHMgbm9yIGZpbGUtcmRlcHMgaW4gdGhlIGNy
+eXB0c2V0dXAgcmVjaXBlIGFueW1vcmUuDQoNCi8vUGV0ZXINCg0K
 
