@@ -1,24 +1,35 @@
-Return-Path: <Liezhi.Yang@windriver.com>
+Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DA587F30F
+	by mail.openembedded.org (Postfix) with ESMTP id 212757F3B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 08:03:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7U82vgj004856
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2019 01:03:08 -0700
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 30 Aug 2019 01:02:46 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Aug 2019 01:02:46 -0700
-Message-ID: <20190830080246.46005-1-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Fri, 30 Aug 2019 08:19:52 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x7U8IN5R005149
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 30 Aug 2019 01:18:55 -0700
+Received: from [128.224.162.157] (128.224.162.157) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 30 Aug 2019 01:18:41 -0700
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, Alejandro Enedino
+	Hernandez Samaniego <alejandro.enedino.hernandez-samaniego@xilinx.com>, 
+	"raj.khem@gmail.com" <raj.khem@gmail.com>
+References: <1566955456-20194-1-git-send-email-hongxu.jia@windriver.com>
+	<1567094248-9489-1-git-send-email-hongxu.jia@windriver.com>
+	<7246b4cb-1358-8afc-eb4c-a80788bead19@xilinx.com>
+	<99b98099-6aa3-33c1-0168-6def305be825@windriver.com>
+	<0dce6aadbb574a01892cb847bada6523@XBOX04.axis.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <09945c3b-b28a-b4e3-eea1-ea1fa0616040@windriver.com>
+Date: Fri, 30 Aug 2019 16:18:39 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] netcf: Fix Manifest not found issue
+In-Reply-To: <0dce6aadbb574a01892cb847bada6523@XBOX04.axis.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH V3] cryptsetup: add libdevmapper to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2019 08:03:17 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 30 Aug 2019 08:19:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Fixed:
-$ bitbake netcf
-WARNING: netcf-0.2.8+gitAUTOINC+2c5d425585-r0 do_package: Manifest /path/sstate-control/manifest-x86_64_x86_64-nativesdk-gnulib.packagedata not found in intel_x86_64 corei7-64 core2-64 x86_64 allarch x86_64_x86_64-nativesdk (variant '')?
+On 8/30/19 12:07 PM, Peter Kjellerstedt wrote:
+>>> Alejandro
+> Well, the error should be obvious given that after the latest changes
+> to libdevmapper and lvm2, the libdevmapper recipe no longer builds a
+> libdevmapper package, it is built by lvm2, but cryptsetup only depends
+> on libdevmapper and so there is nothing to tell bitbake that it needs
+> to build lvm2. I believe the correct solution is to add:
+>
+> PREFERRED_RPROVIDER_libdevmapper = "lvm2"
 
-This is because gnulib has no related tasks:
-do_package[noexec] = "1"
-do_packagedata[noexec] = "1"
-deltask package_write_ipk
-deltask package_write_deb
-deltask package_write_rpm
-deltask do_deploy_archives
+Yes, you are right, I know why I could not reproduce the QA issue,
 
-Depends on gnulib:do_populate_sysroot explicitly to fix the problem.
+I set PREFERRED_RPROVIDER_libdevmapper = "lvm2" in my project
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- meta-networking/recipes-support/netcf/netcf_0.2.8.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Sorry for the repeated rework which brought troubles for others,
 
-diff --git a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-index a4a9c91c6..0f49d6060 100644
---- a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-+++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-@@ -14,7 +14,9 @@ SRC_URI = "git://pagure.io/netcf.git;protocol=https \
- 
- UPSTREAM_CHECK_GITTAGREGEX = "release-(?P<pver>(\d+(\.\d+)+))"
- 
--DEPENDS += "augeas libnl libxslt libxml2 gnulib"
-+DEPENDS += "augeas libnl libxslt libxml2"
-+
-+do_configure[depends] += "gnulib:do_populate_sysroot"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.21.0
+I indeed to start a community build when I could not reproduce it
+
+on my company project
+
+
+Now, I could reproduce it on the community build to prove you are right
+
+sorry for V4 incoming
+
+//Hongxu
+
+
+> to meta-oe/conf/layer.conf. With that added and the explicit RDEPENDS
+> on libdevmapper in cryptsetup, I do not think you need to skip neither
+> build-deps nor file-rdeps in the cryptsetup recipe anymore.
+>
+> //Peter
+>
 
 
