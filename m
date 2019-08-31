@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B6967F4AC
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+	[209.85.214.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 019BA7F4A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 21:31:48 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id q139so6700558pfc.13
+	Sat, 31 Aug 2019 21:31:49 +0000 (UTC)
+Received: by mail-pl1-f180.google.com with SMTP id gn20so4894031plb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 14:31:50 -0700 (PDT)
+	Sat, 31 Aug 2019 14:31:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=uIyKb4BkgBXHd7ZDyqibYPNtaCz/tmB52GjeIsEPHGI=;
-	b=mwJpuOee4uo/YjSe7B6oA5ouo+LNE5ABWAsl4OHNYcg6DA342D/mJWLiNnzP/rjTNL
-	Wnx42DpdLRY0oKIBTtRmMWcTCMK4bRA65Ro+ma259Es2GwEyLS303x5J4u8dE674Q1wf
-	rwokT2VUDl2b9pEIN6dxnGtuL+ezFV6In4m8hxx0QdGLB3nH/ATy0hUQBpd+Nz2pMuv/
-	JN2MtciHOocM75pWruoQnePj6dOovIrLtCdK20m7zkHm5pbZfnBrAMFhvGNOKYkYPFEZ
-	7Di62qzlp7Gw2MXhPwyF2v5h96aSDqDIsfCPFDUM81PgQTtTXsvkUT61OcohONTzwhQG
-	DV9A==
+	bh=+vLB6+6nNLEvrRCP8Y9wkPJ3Aip+riOQ5AgmbVt1vPA=;
+	b=ebLq8gUQcmhCkJVEtjzZIwH+6neLumVtjTZB8aSynEOSDRzwTG80vjh1rtPR+8W93P
+	5hAQnowBMQH0I7ZYFJxwsdHUf3wBfYN2UjtHyLaPMkr89y3tkPiVSyxcEwW731t9XvJP
+	Ui0K8N9tpD3C0xdYGKyP3McZVy28jlw+z4feawAOih8DyAQc8eijpKhg5RlK9PTc+dfU
+	d/jvdoxzz8LZonqXA9PZ0zn4oEf7BjDvrbC2X4ct29YvI56XiYcpeFK7ASQTTHGNfAe7
+	aclWlDd1TcHZsJLLCmZ6Mv5Zr/CawCpR0x+jYnW86hd2KWJBC2UPkb8/TfTw3KFHQYNr
+	bM9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=uIyKb4BkgBXHd7ZDyqibYPNtaCz/tmB52GjeIsEPHGI=;
-	b=QwKomfEKi5DU+Y9etA0en1Ge8IWZBMpI8FjyHIRPKB4BjCrWWuWUbweWUer2RVbxnS
-	oiPkyG5IBW3DX7bltWR51/u6yenhshLoPj9zxHHlDmHjWdRfg8F61mD9OmmwIsHgs+8n
-	OHV3btOsLXNdEQ5zdRC2VAgI0e32RfCqEuzGnsrUBKiXK2xvZcmE+UOtz16MhS1OKkkA
-	nS/7V5QlGc5guppFRavuBKq+/ijWEFEIvwlCBbmE1EYGva8b4KmwtLz7wL6J5Gp+s3u/
-	oVFxOFJoIT+9uJ7v79I/dcCdCsu8wbhtNaGIKNxslKuKCYcrga6iTEjM7Yaxh8P1Jrhs
-	OPBg==
-X-Gm-Message-State: APjAAAU0mpKdFIWdVy0XGfic9UW+QdxlpaKUz1ahC8lHqLKUzO5pUjlA
-	IFye5lhFJbeQeBsnFM+nur2RxKxE
-X-Google-Smtp-Source: APXvYqy0m+qDy1C/yskOHd0NiR7lCiaqL4oO0wLE+WSlpUpj5RNr6rSoUsF5Hip7JCMDdjWkrwrjQw==
-X-Received: by 2002:a62:34c4:: with SMTP id
-	b187mr26823593pfa.161.1567287110099; 
+	bh=+vLB6+6nNLEvrRCP8Y9wkPJ3Aip+riOQ5AgmbVt1vPA=;
+	b=IAK4lGdCwphROJSGKs6Vs7oWACOjKA3DmyqhMH6NchG6z1Gtud6xY+GDFCVCLdECJx
+	86rw5yi0NbsIFWZfAoIhKxsstWFNJDsB+PCap6BJhU+V4aA6PH9qT/CdzbG2HV8I7T9I
+	1IUYGSxR0kXCHybeOajgYtHZrnXAWTCQVqEJ+KZ2o8EdQ67S4rU9s1VbSUWPTMzT+ggB
+	pYih5WakotfZ7lKAQdUt//kdgnA+x85oubQ731Brvk8NTz1CyMgyKceVAEutyygvVT49
+	sAZk+Iib7vEgHb3zV5iGl1eqkv5/JKMEznUASQIRXg74eMhjCgvM+5su84xjv888DOGX
+	ZfvA==
+X-Gm-Message-State: APjAAAWMSemmHRyNX7fv9xovSvqVyEA32x/Z70zX2p3aP0nUPFlYhBad
+	Wm8+LC7x5a3C8XzTnpOt2Yps06wY
+X-Google-Smtp-Source: APXvYqyvU9S2c3XRKcOeYkkX3zu/6T0ggJEhQ364R+60LaziBVSaJyOeVxm1RyXeFPF3sdZEwvtNyw==
+X-Received: by 2002:a17:902:7b97:: with SMTP id
+	w23mr22635068pll.283.1567287110932; 
 	Sat, 31 Aug 2019 14:31:50 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:8107:6109:754a:f033])
 	by smtp.gmail.com with ESMTPSA id
-	a18sm8060827pgl.44.2019.08.31.14.31.49
+	a18sm8060827pgl.44.2019.08.31.14.31.50
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 31 Aug 2019 14:31:49 -0700 (PDT)
+	Sat, 31 Aug 2019 14:31:50 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Aug 2019 14:31:23 -0700
-Message-Id: <f0d7e8334aa71860da858f9d204488fef717c7f4.1567286967.git.akuster808@gmail.com>
+Date: Sat, 31 Aug 2019 14:31:24 -0700
+Message-Id: <4a2b06e0cc2400f306e97fe1c28adab5940f99e7.1567286967.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1567286967.git.akuster808@gmail.com>
 References: <cover.1567286967.git.akuster808@gmail.com>
-Subject: [warrior 02/23] fuse: upgrade 2.9.8 -> 2.9.9
+Subject: [warrior 03/23] mariadb: Upgrade to 10.3.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,37 +60,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Aug 2019 21:31:49 -0000
+X-List-Received-Date: Sat, 31 Aug 2019 21:31:50 -0000
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+License-Update:
+The address of Free Software Foundation updated
+
+Bug fixes:
+ MDEV-19490: show tables fails when selecting the information_schema database
+ MDEV-19541: InnoDB crashes when trying to recover a corrupted page
+
+More details check:
+ https://jira.mariadb.org/browse/MDEV-19490
+ https://jira.mariadb.org/browse/MDEV-19541
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-[Note: This is a maintenance release from the 2.9 branch of libfuse.]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/fuse/{fuse_2.9.8.bb => fuse_2.9.9.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-support/fuse/{fuse_2.9.8.bb => fuse_2.9.9.bb} (94%)
+ .../{mariadb-native_10.3.15.bb => mariadb-native_10.3.16.bb}      | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                             | 8 ++++----
+ .../recipes-dbs/mysql/{mariadb_10.3.15.bb => mariadb_10.3.16.bb}  | 0
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.15.bb => mariadb-native_10.3.16.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.15.bb => mariadb_10.3.16.bb} (100%)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-similarity index 94%
-rename from meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb
-rename to meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-index caa75c7..c83e7f6 100644
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-@@ -16,8 +16,8 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
-            file://0001-fuse-fix-the-return-value-of-help-option.patch \
-            file://fuse.conf \
- "
--SRC_URI[md5sum] = "f365e848a82504edb0b7a33df790ca78"
--SRC_URI[sha256sum] = "5e84f81d8dd527ea74f39b6bc001c874c02bad6871d7a9b0c14efb57430eafe3"
-+SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
-+SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7c1b4b5"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.15.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index eed23d2..9a398b3 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -2,9 +2,9 @@ SUMMARY = "A robust, scalable, and reliable SQL server"
+ HOMEPAGE = "http://mariadb.org"
+ SECTION = "libs"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b1becf0cfa3366e0f4d854d1d264f311"
  
- UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
- UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
+-SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}-${PV}.tar.gz \
++SRC_URI = "https://downloads.mariadb.com/MariaDB/${BPN}-${PV}/source/${BPN}-${PV}.tar.gz \
+            file://my.cnf \
+            file://mysqld.service \
+            file://install_db.service \
+@@ -19,8 +19,8 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+           "
+-SRC_URI[md5sum] = "08edd8b5060a181e6dd3c6aac23218cd"
+-SRC_URI[sha256sum] = "27f391a54d544f93850d4edfb3ef1b4cf24f8e27e61e51727b0e7d31bb4d6968"
++SRC_URI[md5sum] = "11220d0b94c5c24caa2e1e9eaba38e31"
++SRC_URI[sha256sum] = "39e9723eaf620afd99b0925b2c2a5a50a89110ba50040adf14cce7cf89e5e21b"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.15.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
 -- 
 2.7.4
 
