@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D4A87F4AE
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id B91FD7F4BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 21:31:57 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id m9so4888846pls.8
+	Sat, 31 Aug 2019 21:31:58 +0000 (UTC)
+Received: by mail-pl1-f170.google.com with SMTP id m9so4888859pls.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 14:31:58 -0700 (PDT)
+	Sat, 31 Aug 2019 14:32:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ZQUaN7kzgdZ80sSuuS/GERktM31GmfI5/rpzEkFRlZI=;
-	b=p5hqTRFp7bobl+tRB5OfXyqh9Joq0LtF8kc2jUHz1VJ+I+M2BpZmzUOzNjkhnaK679
-	MUF0EXV8PfmU3mn4q1XAEMBX4k2OTWL2Rb/lr0Nkw3qFa1nIwj5Ii7Qd3rAcYUHIgrJV
-	37s0dluJsGtxtug+TIE3cTBDtjoGEHZ3zCpz6G7hm9lIjRBC5PTdOPpydfGvosW/ADu4
-	R1drTVd/HX5W/Ir/3ZnFHHej0Gnh8UTXW45paRwBZkXw+ynIjbklxl0isNq3IX1C2ssX
-	ifmGYk9vYjdbqPugSguw1Dr8gpiqtpuvfGdN6TiTwnOOqCZWMqU+6ZurFBf+ZN9YxKQX
-	HiFw==
+	bh=ccBsDv23yj+zHmMIpQwxuz6bcBCNsm6QTULF53GWrpk=;
+	b=CRODFxxS3Xg3e2ZygbY/g23+ZLn6MjLmaKO5wR+UY8sSRfaD8h6+EHEvjmCUVtHlrp
+	GN1/FdazDcAocLJR6oitXTRgwFGQqbN6HE4ve1yMmZE7PV9IqQIPnLSBZ0M3kbzv6sAi
+	88bGzxQ0/RpN+CNKDAe712Z0XxG3QUhW0dQYBDWceCLq/4Vyic+Q5I0wF2RAyLPCtCYm
+	qsg3Zr/mcsIQrzD8a8MchD0V/uNR5XFajKKWtPbPwEJxGG+AYY3GfyPoGlqDHPgbgy/r
+	eqbwTCRtG8kyrgiZ6p7HkXZ8i1S9kZzP5iQPidaUhPVVAmCZAUAf2oVfftDQKUupmuVu
+	GwvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=ZQUaN7kzgdZ80sSuuS/GERktM31GmfI5/rpzEkFRlZI=;
-	b=tzsH1u8jduQWG1NxgXhsu0ehYUH2H7Xu8KunoulgXzUWUqTN4rIQpJLmwaFwJx9Msj
-	Q1X04dg+H6LzRUsKe3sb7Qy/EUtmqXVi1143fSy7zvbzDLR6Xt19LlzOCW5xrbrmRP3H
-	PBu5AjcmhBNRua8/Ea2hccOwvzpRiR68VbVFOJqOct/OF1zp+kEWY6oQn9GryvPrEpS/
-	xlmrjhXhYcF2ujvjdyQ3zRFqf6RzKqkHQ76qiQ/IYc+/t5TH2MYRFeRpFB04Wcj/U4/c
-	iQ5TTRYiEazpTixVhnsopimkGWFMtAnqLI2HyjKouh4Hl5NrrTQ9zWhguF9ZyCJRkRUz
-	XCqA==
-X-Gm-Message-State: APjAAAXxL6Qy3xZEppaq415fqU/PoGM4SoMs0cksC2dHO5pC5yf7+U4Q
-	Gy8eGiPMPiKmNY2GRfeRGAnQ3tcG
-X-Google-Smtp-Source: APXvYqyhVnd3lXOcpJKQV4b5vX28+8kOCwN1T32kk/C0y2dUgZTJBd1+Iny1P9GXRBGuZGI2STn3FA==
-X-Received: by 2002:a17:902:d24:: with SMTP id
-	33mr22717208plu.133.1567287118465; 
-	Sat, 31 Aug 2019 14:31:58 -0700 (PDT)
+	bh=ccBsDv23yj+zHmMIpQwxuz6bcBCNsm6QTULF53GWrpk=;
+	b=KHkzS2oIMUiGwF+ROueuKQBIMBNwUJmd/DwZa7W84B5BmsEshUYS37vBnlZIfpfElP
+	eS3vIumnOXFyD9etrnU8vvShWlD2vlEZ8HvI1rcUAC7c1HTdB01raQNXGG+3MhkXrJEo
+	TUyigIQup1sChW7FAJwczAWZgcnWDKDcH9ZKHEcmlQtzDkbnRXgTVPIF7dmaPdDdJcYl
+	d3sc9YVU+o9yVzrWEPah8w+m0vP9U+JZ+uz5TeT9RtAj/ol9EmHysARTyvI9H5VjCl9O
+	ZGHi5QhB/fQd0bT6yc5hrKYEfibQ0OZHdXtevVIiCj1CLTpxK0U4Qg42oY8O86GeA3nA
+	Dtzg==
+X-Gm-Message-State: APjAAAU/oUWqGJLD42TRjhl2lqQ5byBLyo8wvtdbN8HdahHDGaVyNGWn
+	xQ88br3sdb0jPbrF2peQuIKxh4Uq
+X-Google-Smtp-Source: APXvYqxqjS2Q8zfiiVpIAyXHXdsJo4Frmh/Wyw8v0dTKC6uLl3z9mDoDxydctuEw5q7nkKtt6+fwag==
+X-Received: by 2002:a17:902:26b:: with SMTP id
+	98mr22690483plc.61.1567287119663; 
+	Sat, 31 Aug 2019 14:31:59 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:8107:6109:754a:f033])
 	by smtp.gmail.com with ESMTPSA id
-	a18sm8060827pgl.44.2019.08.31.14.31.57
+	a18sm8060827pgl.44.2019.08.31.14.31.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 31 Aug 2019 14:31:58 -0700 (PDT)
+	Sat, 31 Aug 2019 14:31:59 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Aug 2019 14:31:33 -0700
-Message-Id: <7525b914e436ab90164be3a1eff0835387a00a56.1567286967.git.akuster808@gmail.com>
+Date: Sat, 31 Aug 2019 14:31:34 -0700
+Message-Id: <e081b879c76663068b6a473ce61cf5d6a83e4b0e.1567286967.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1567286967.git.akuster808@gmail.com>
 References: <cover.1567286967.git.akuster808@gmail.com>
-Subject: [warrior 12/23] redis: backport a fix for stack trace generation on aarch64
+Subject: [warrior 13/23] ntop: fix missing return from non-void function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,74 +68,48 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../Fixed-stack-trace-generation-on-aarch64.patch  | 45 ++++++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_4.0.14.bb     |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+ .../fix-missing-return-from-non-void-function.patch   | 19 +++++++++++++++++++
+ meta-networking/recipes-support/ntop/ntop_5.0.1.bb    |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch b/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+diff --git a/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch b/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
 new file mode 100644
-index 0000000..82ca307
+index 0000000..e627e59
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
-@@ -0,0 +1,45 @@
-+From c8ca71d40bc51e255457cd4374dd45ec9ebf8ae1 Mon Sep 17 00:00:00 2001
-+From: Jun He <jun.he@arm.com>
-+Date: Mon, 3 Jul 2017 07:18:32 +0000
-+Subject: [PATCH] Fixed stack trace generation on aarch64
++++ b/meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
+@@ -0,0 +1,19 @@
++Fix following error:
 +
-+Change-Id: I9801239c98cb7362ed07e8b9ec2ba7e45749dba7
-+Signed-off-by: Jun He <jun.he@arm.com>
++netflowPlugin.c: In function 'netflowUtilsLoop':
++netflowPlugin.c:2144:1: error: no return statement in function returning non-void [-Werror=return-type]
++ 2144 | }
++      | ^
 +
-+* fixes also this error when building with -Werror=return-type:
-+  debug.c:698:1: error: no return statement in function returning non-void [-Werror=return-type]
++Return NULL like netflowMainLoop does.
 +
-+Upstream-Status: Backport [https://github.com/antirez/redis/commit/c8ca71d40bc51e255457cd4374dd45ec9ebf8ae1]
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/Makefile | 2 +-
-+ src/debug.c  | 2 ++
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index 24e960593eb..a1ff4258a9d 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -40,7 +40,7 @@
-+ endif
++--- ntop-5.0.1.orig/plugins/netflowPlugin.c	2012-03-09 17:44:17.000000000 +0000
+++++ ntop-5.0.1/plugins/netflowPlugin.c	2019-08-09 10:25:40.878799852 +0000
++@@ -2141,6 +2141,7 @@
++       waitCondvar(&myGlobals.device[deviceId].netflowGlobals->ifStatsQueueCondvar);
++     }
++   }
+++  return(NULL);
++ }
++ #endif
 + 
-+ # To get ARM stack traces if Redis crashes we need a special C flag.
-+-ifneq (,$(findstring armv,$(uname_M)))
-++ifneq (,$(filter aarch64 armv,$(uname_M)))
-+         CFLAGS+=-funwind-tables
-+ endif
-+ 
-+diff --git a/src/debug.c b/src/debug.c
-+index a4caa49f285..c976d0ed919 100644
-+--- a/src/debug.c
-++++ b/src/debug.c
-+@@ -691,6 +691,8 @@
-+     return (void*) uc->uc_mcontext.sc_ip;
-+     #elif defined(__arm__) /* Linux ARM */
-+     return (void*) uc->uc_mcontext.arm_pc;
-++    #elif defined(__aarch64__) /* Linux AArch64 */
-++    return (void*) uc->uc_mcontext.pc;
-+     #endif
-+ #else
-+     return NULL;
-diff --git a/meta-oe/recipes-extended/redis/redis_4.0.14.bb b/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-index 63ab44b..5df5312 100644
---- a/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-+++ b/meta-oe/recipes-extended/redis/redis_4.0.14.bb
-@@ -10,6 +10,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://hiredis-use-default-CC-if-it-is-set.patch \
-            file://lua-update-Makefile-to-use-environment-build-setting.patch \
-            file://oe-use-libc-malloc.patch \
-+           file://Fixed-stack-trace-generation-on-aarch64.patch \
-            file://redis.conf \
-            file://init-redis-server \
-            file://redis.service \
+diff --git a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+index 2a7a7f2..80f009b 100644
+--- a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
++++ b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+@@ -18,6 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ntop/ntop-${PV}.tar.gz \
+            file://use-static-inline.patch \
+            file://0001-nDPI-Include-sys-types.h.patch \
+            file://0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch \
++           file://fix-missing-return-from-non-void-function.patch \
+           "
+ SRC_URI[md5sum] = "01710b6925a8a5ffe1a41b8b512ebd69"
+ SRC_URI[sha256sum] = "7e8e84cb14d2173beaca4d4cb991a14d84a4bef84ec37b2276bc363f45c52ef8"
 -- 
 2.7.4
 
