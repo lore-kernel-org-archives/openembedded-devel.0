@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id F24BC7F4D0
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D7ED07F4D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 21:32:05 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id w10so5292269pgj.7
+	Sat, 31 Aug 2019 21:32:06 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id 4so1740583pgm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 14:32:07 -0700 (PDT)
+	Sat, 31 Aug 2019 14:32:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=WN2W0zvfK0ed/oNWTX9QlAz5xQgn19Bc58ko+pSQ1ic=;
-	b=SppUVGyeUEeLdru1awNINyNoQk0R6dBDwvaiZivvyBRREOiOlKneO5jY+ocexL/3ad
-	YISGEO8AXGHPuJWhXoUfMBQOHlrmab9cCdNePKK5WFIuvc4fqvOAiqo7MlSrEpLUUqyx
-	M7kEaV70ttnXRKJBx4YNNDbTTKMsE9onzl7xUelJoib27WnQwF6tBnlGmMqx63fIeI8L
-	3wTirIBIfpzfmqoo8MAy1cy1yw7D6Rg+0Je2SPvV4MzBYtH/MF1k2pI+R7cUH8eSOX1J
-	rRf6bDxbN5bWKYhvLIN1uQh4kJKbOqySsn0bmSegac+w5nxOq4RgHHVKCNe8pIwf1sJa
-	tGZg==
+	bh=x2aEs+u+rHtvxG4ndSGjwk50RS56lckHKQ7BfDetUcA=;
+	b=GbeC38DpYqiulcWqD8co9X8cN0VB6DAD2bgbyONjDgAC+4SrroNWc+zu5S+Q+vvcyr
+	aqCcvq1ueGkuoWUZIsuPrsYyVkwN/qXQ/ImU1eZhViQqS6rq/mIoo1h2Ir0FB5b+wOd5
+	Kuz+5KAQO1vALYNKqIpLLIMySBuJ2ALI7kd2CrwXDySCg64epEFUrioE9I4Gc93aJImi
+	0fS5m95M8MKLruaZrAVhPlJh0CkqKzLZc7YEWSi1/pkGR8uZ6RF/Y07vajnkzmWYeeDa
+	jGS8lg2Bg/VKLhv1kZKk/3feP4/WJs5iFnzrIVar3WUmTJ6YDBpMFKg7f82+YbsHm92Y
+	sSJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=WN2W0zvfK0ed/oNWTX9QlAz5xQgn19Bc58ko+pSQ1ic=;
-	b=atwbvlqnulIYL4FWAcFc1BftW6YAL5BRfwPmAhKYnGeNzQrt+VHyXOj68pmV3lob2l
-	8l9HgG+u5jnAay0RUndrQtsauIsdd3ntP2yxsU8QULgVUICj+nrYYxtwkXqxdip61Dj9
-	o+NLTIXJzoWUER2fjdTnLYnNkrMWW0tz3QF+PKiEvHY6DZHPodrCy3zgBGm3nQ1CD9d8
-	FV30dMGGI9BTzOGKE7eIa0v3+Qneq+M0zsvqKNM8KonsHzfgwJ/kfMgIXtfJsDsvc0lw
-	9GCLVxP6XgOL8uVxGM3nQM8+BXVHo8B3hFOFOoyfJkr3h7Hxsw88YsY1zYhhBwxRBXbH
-	ZFWg==
-X-Gm-Message-State: APjAAAVnPphzIWcg/JyCXbCw2pWxG566Q5MWSovOsSdZEz5NDoDiD+WC
-	kHPp1N2EOTmG5R4huT37WryW9OYG
-X-Google-Smtp-Source: APXvYqzyMQ6w3lnrbaqF9/7neZ8Xv8r7GWAlTbzBlfNWSS4OXC2jKwQm0ClW4/VGojMkkRbZsU66wQ==
-X-Received: by 2002:a17:90a:2182:: with SMTP id
-	q2mr5863854pjc.56.1567287126881; 
-	Sat, 31 Aug 2019 14:32:06 -0700 (PDT)
+	bh=x2aEs+u+rHtvxG4ndSGjwk50RS56lckHKQ7BfDetUcA=;
+	b=EFx6GRa9zdbaCLUppNIOh+ChzAwvCMsRfeBryV0Y/hEOBiaew9hgFYz+yMzIfAMhqU
+	dgfQFytf1/dA5EjE9mrGTGFt+G0MUZnTI8li/TMMirMEn6h186mPQCjrsPndDMxR73Df
+	6THkfdzXKhBP+vsGD+kASslSZkzdp8A4U/FhmgnqOAViJWZVe/73PZaGdX00RjifHXF4
+	mpKojDwQCwNWYOHNI9E4SB1YrFZrkWiCd6s/18Gufuq7ll+bAIEjBneiCK+UNdsZfyNa
+	Xi4Jk1le+dUbzQ5YVlHypaUHLIE+gVjnHCMu7L/95LsQ5OcKgdAkuXqhwTZtR8Y1Scxe
+	X+CA==
+X-Gm-Message-State: APjAAAXyXyZETSSjDEohkxlerUN56KJhyM2CjQK+vx4GHfK22uiGK/r0
+	Fo/15gaaIFPXyflR+/FOoW5NMngE
+X-Google-Smtp-Source: APXvYqxX1ejn6dEhaK/mFjXzhZCS/VbVTdCHUlOT+n8uww6fKNxc15+oAfF2p1gyzHjzYv1G3+Q7xQ==
+X-Received: by 2002:a17:90a:8991:: with SMTP id
+	v17mr5487287pjn.120.1567287127823; 
+	Sat, 31 Aug 2019 14:32:07 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:8107:6109:754a:f033])
 	by smtp.gmail.com with ESMTPSA id
-	a18sm8060827pgl.44.2019.08.31.14.32.06
+	a18sm8060827pgl.44.2019.08.31.14.32.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 31 Aug 2019 14:32:06 -0700 (PDT)
+	Sat, 31 Aug 2019 14:32:07 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Aug 2019 14:31:42 -0700
-Message-Id: <176974498a1db96579b313f3f015b58a1ae10376.1567286967.git.akuster808@gmail.com>
+Date: Sat, 31 Aug 2019 14:31:43 -0700
+Message-Id: <0b781c24eee714134f2a8a150b4bd50377ce0f8b.1567286967.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1567286967.git.akuster808@gmail.com>
 References: <cover.1567286967.git.akuster808@gmail.com>
-Subject: [warrior 21/23] libgit2: Upgrade 0.27.8 -> 0.27.9
+Subject: [warrior 22/23] vlc: notify switched to GTK+3 some time ago
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,37 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Aug 2019 21:32:06 -0000
+X-List-Received-Date: Sat, 31 Aug 2019 21:32:07 -0000
 
 From: Adrian Bunk <bunk@stusta.de>
-
-This is a security release on the 0.27 branch.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb => libgit2_0.27.9.bb} (90%)
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-similarity index 90%
-rename from meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-rename to meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-index a434089..3ef7bee 100644
---- a/meta-oe/recipes-support/libgit2/libgit2_0.27.8.bb
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.27.9.bb
-@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
- DEPENDS = "curl openssl zlib libssh2 libgcrypt"
- 
- SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
--#v0.27.8
--SRCREV = "2882803ca2b2cdedd069746422155a23fdd002b2"
-+SRCREV = "3828d7afdd08b595584048e8e4dab6ddd4506ed1"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index 19ac820..e5102a3 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -67,7 +67,7 @@ PACKAGECONFIG[dc1394] = "--enable-dc1394,--disable-dc1394,libdc1394"
+ PACKAGECONFIG[dv1394] = "--enable-dv1394,--disable-dv1394,libraw1394 libavc1394"
+ PACKAGECONFIG[svg] = "--enable-svg,--disable-svg,librsvg"
+ PACKAGECONFIG[svgdec] = "--enable-svgdec,--disable-svgdec,librsvg cairo"
+-PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+"
++PACKAGECONFIG[notify] = "--enable-notify,--disable-notify, libnotify gtk+3"
+ PACKAGECONFIG[fontconfig] = "--enable-fontconfig,--disable-fontconfig, fontconfig"
+ PACKAGECONFIG[freetype] = "--enable-freetype,--disable-freetype, freetype"
+ PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread, libdvdread libdvdcss"
 -- 
 2.7.4
 
