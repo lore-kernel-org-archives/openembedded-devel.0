@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
-	[209.85.214.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C9C277F4B9
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+	[209.85.210.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 79B637F4A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 21:31:55 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id f19so4900440plr.3
+	Sat, 31 Aug 2019 21:31:56 +0000 (UTC)
+Received: by mail-pf1-f169.google.com with SMTP id y22so1082013pfr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 14:31:57 -0700 (PDT)
+	Sat, 31 Aug 2019 14:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=1/bZ7UytMLpCMLqMMkMdB5gprfAmFHia1iSqZu+xTL0=;
-	b=CjgtynEsjqZw+g6nSxLNIXZ91ZniWpP1SFx3sEfoUYyvV3h9SyKOlmyG7CVi2q6fsq
-	hvxBBatAIBWZX20CSWHwS6FYthnhJZvg1b5mL1BhXprMYxGTtYA/Zhtjsl6GHaSCmeb+
-	OhjGY8t9H9KGPIgZvtQQ85N3o78dHPeetJ/Cpsp0lxfUOZA8/6+Ckc6rhKnqv54Em+k7
-	YO1cDISDMq8oEC2sjOQBFk64bO2C09g+2/W6Zp6wNAClTayWf3hddNp7TJ39wMhK0pqW
-	vw3zUG4LpYC4CGacW1P+DnHDrqGaJWCCS6XdNzulMpfzK5INdal9mWYC3vQmrEraahOV
-	lTbg==
+	bh=fnH8vvetr8vW1tpy8sndizyn2Tl6Hp3cYRaWhgVOSxI=;
+	b=ckf4aARQfQ1vCHoToVz9YGR2JlOIaRgKWOMKhDTo7vaCUHDOTGeDmDIWElxsqCRU3q
+	27FeSWzCCyit8e3HKACy1b37/u4OYklN2z060mu8KE4svoE5oE2QRlJC6mE7Qh7iMKOB
+	LkzzFtjR56GQb/97zqvpgnqzCj2IUtObIZ3cW5TDY2FrDam7qrQatRB5IS+Y5WqbBBcf
+	hREJEr7OWBpQYS53SJ2WkexSla0BbsLtGJkE/M6AbCoO85QwVybVSsQdjqsrzZHLfWub
+	Bc636H/pORhdUqKWznvTKWbdx/6Qwm5EJicIGs0OnsO2WOTp0G1pl79DIeafkkZfYHhd
+	ZTLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=1/bZ7UytMLpCMLqMMkMdB5gprfAmFHia1iSqZu+xTL0=;
-	b=f7ydRZMT+kP4KgsG/gCYRp8CkfoV/+fbV5t1spWlOBrlOXlSEq1NzQDT1K368oS7Cl
-	33u3WlGk7jNDCbXTUA7LQHQ1cUqmn3mvb7roqtCyaXlGNDxGy05rZuZJyfB6l5osp/BJ
-	Pdcgi+BGHP4V2Mf3+yXaqvNzQKLrl8iOKqzswZkH599Tut1g4e9czWBaVRJXKQDSzcJk
-	C7gptTFWuS/BABjeI9ECh9F4TkGm7tNP/BbH0XzjcU/IStMPNqQDMmDbiyBpmlN1LDzd
-	/3tNkDcFcU3OHII1hw59/ah3MVU7AzhFQCdS9Wogj+8AZSI2JOM8hNV7Yt/f4wcym811
-	0b+Q==
-X-Gm-Message-State: APjAAAVTGE+H73od6XEmBa568/oHrU03kSYHi9rfCn1ogjHb6QtOwHNr
-	JIjdM5SLg7Wv6mQMpzvHhtQUx13b
-X-Google-Smtp-Source: APXvYqzJLBIs4RGFTp/1SEB4HTK+cA6nsUuHsqTQPtZIAcYtT/3Ujm019fygLUzTPB1C0vRUMQhe1w==
-X-Received: by 2002:a17:902:d907:: with SMTP id
-	c7mr13332053plz.126.1567287116653; 
-	Sat, 31 Aug 2019 14:31:56 -0700 (PDT)
+	bh=fnH8vvetr8vW1tpy8sndizyn2Tl6Hp3cYRaWhgVOSxI=;
+	b=lF830mdjPbgM2u3gz5Ni094K16GoRAwcRkPsYRkMxxpimJhnpcLIqdgRfzO7UIiRzh
+	sfyusrqGprwimohQjZAegecX4+6iX8MgPVvqCBtJDWucRExo+jJSuz2LMC+F91MiSAdx
+	quDvuEDIO8W8eKX73BG8LeSOFXt9Ip3lRIC58SUyLvtBdvTF97zS16KYykiRF2205KDr
+	xSBdKBHmexa2GdBys2ZLAd0HmmfGbqrBW0EoTuxHG6jYgkrzWlPgOTLflBHojbczZu5+
+	gm6TyBr9Zp2QBbrDAg5AQzHV4P0Tw84zFMoHsfOXU62XelnkfbKmCUMBYjxkyruiftoB
+	kS2g==
+X-Gm-Message-State: APjAAAXfpcHZfk2FMWN1D26n41mfgzOzNBCgrntM/+tUPBDWGYPKAA+n
+	ii4ls2ejeYCSShTYIVZE+MX+1rlq
+X-Google-Smtp-Source: APXvYqyztbkrwFCcRJbw+wBlZSWH7fQwCEdsCGNBPDQ114tQo4vf0Ng109CuxX2emY8AKMRACriKeQ==
+X-Received: by 2002:a63:6ec1:: with SMTP id
+	j184mr18644040pgc.232.1567287117503; 
+	Sat, 31 Aug 2019 14:31:57 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:c33:8107:6109:754a:f033])
 	by smtp.gmail.com with ESMTPSA id
 	a18sm8060827pgl.44.2019.08.31.14.31.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 31 Aug 2019 14:31:56 -0700 (PDT)
+	Sat, 31 Aug 2019 14:31:57 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Aug 2019 14:31:31 -0700
-Message-Id: <3b2b488a57993779d2798220be5b9292b5a28b16.1567286967.git.akuster808@gmail.com>
+Date: Sat, 31 Aug 2019 14:31:32 -0700
+Message-Id: <e17f3657c9949c0c3316d94bc0f75ef3b62f86c9.1567286967.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1567286967.git.akuster808@gmail.com>
 References: <cover.1567286967.git.akuster808@gmail.com>
-Subject: [warrior 10/23] openvpn: respect pid file in init.d service start
+Subject: [warrior 11/23] net-snmp: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,57 +60,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Aug 2019 21:31:56 -0000
+X-List-Received-Date: Sat, 31 Aug 2019 21:31:57 -0000
 
-From: Fabian Klemp <fabian.klemp@axino-group.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-openvpn only provides options to update a pid file but not to check it
-for running processes. Consecutive issued start commands therefore lead
-to multiple running processes with the same configurations, which is the
-origin of all kinds of problems of which unnecessary resource usage is the least.
+Replace source zip ball with tarball for net-snmp to avoid zip bomb issue.
 
-Using start-stop-daemon the pid file is inspected for running processes
-before start.
-
-Signed-off-by: Fabian Klemp <fabian.klemp@axino-group.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/openvpn/openvpn/openvpn | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn b/meta-networking/recipes-support/openvpn/openvpn/openvpn
-index a3cd6a2..e5af4b2 100755
---- a/meta-networking/recipes-support/openvpn/openvpn/openvpn
-+++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn
-@@ -4,6 +4,7 @@
- # <rob@mars.org>, edited by iwj and cs
- # Modified for openvpn by Alberto Gonzalez Iniesta <agi@agi.as>
- # Modified for restarting / starting / stopping single tunnels by Richard Mueller <mueller@teamix.net>
-+# Modified for respecting pid file on service start by Fabian Klemp <fabian.klemp@axino-group.com>
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 673142b..0b3fa62 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
  
- test $DEBIAN_SCRIPT_DEBUG && set -v -x
+ DEPENDS = "openssl libnl pciutils"
  
-@@ -14,10 +15,17 @@ test -d $CONFIG_DIR || exit 0
+-SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
++SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://init \
+            file://snmpd.conf \
+            file://snmptrapd.conf \
+@@ -28,8 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+            file://reproducibility-accept-configure-options-from-env.patch \
+            file://0001-net-snmp-fix-compile-error-disable-des.patch \
+            "
+-SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
+-SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
++SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
++SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
  
- start_vpn () {
-     modprobe tun >/dev/null 2>&1 || true
--    $DAEMON --daemon --writepid /var/run/openvpn.$NAME.pid \
--            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || echo -n " FAILED->"
-+    start-stop-daemon --start --quiet --pidfile /var/run/openvpn.$NAME.pid \
-+            --exec $DAEMON -- \
-+            --daemon --writepid /var/run/openvpn.$NAME.pid \
-+            --config $CONFIG_DIR/$NAME.conf --cd $CONFIG_DIR || rc="$?"
-+    case $rc in
-+        1) echo -n " ALREADY STARTED->";;
-+        3) echo -n " FAILED->";;
-+    esac
-     echo -n " $NAME"
- }
-+
- stop_vpn () {
-    kill `cat $PIDFILE` || true
-   rm $PIDFILE
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
+ UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
 -- 
 2.7.4
 
