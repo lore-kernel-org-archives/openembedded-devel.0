@@ -1,37 +1,53 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A13F7EC56
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+	[209.85.128.41])
+	by mail.openembedded.org (Postfix) with ESMTP id A886E7F37D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Sep 2019 06:39:56 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Lk9845YBz2Y;
-	Sun,  1 Sep 2019 08:39:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1567319996;
-	bh=BnF4uzbA/4l0EgvNPTS0zFMteALrrxVdFpFdjM8WnDE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=LdDkg3FQBlYMU+9+sZQYxMowRncNKdZCFrx13SW70PgpJhXShnDLvAP10qBUGVso9
-	S4jX/EifGzjFSyukInNMYPtn48m3Y4nxDioYwyrxDzcEudyxoiWem5rfX1Q0p19iRl
-	9625Qsa4Os6jmO6vaqbJ3Loxc+xS4mNIAG88lRZumTdB0nm0bv7A0qrJrKKR1pLbxI
-	f/1+jrB+LgwDtuN0FvL8c9IZ469cSloYxIyzXIOJ1GnKgIvGKC1aB9WhY1D00/Tump
-	FqcdN13ABh732REG5s75dr0DeS+ebQzxbRzIgZahCMnl7PQKgBZ1Xz7h3UfHxjvWM7
-	LfMa3aAIN33ba7esHfn8FbXCn1LgRtwrz6gYrB7MEjcBFY8ebILZVlTaXzTO1d2MLj
-	xEmSQVPx5IxuOYvIb61kaFJtgF8SJvd8bHUIXwK4On7YRX5ukZ7oTcWnGOl35Wm5d2
-	gNAJvc5as1yaxyy+FIuj7bDclRbar67KIuSh5OVTx3Sq8vCa+3T2Nj5wqw5M67FdI+
-	wAWyCsxBW/vTwt/+gdHpTIj5DyX9movm4b+9z5hVWHarJBgVn8jvwyumWFM3x5/QFt
-	kfD6y9WRxhe1sITA5XzJovfaOSZNNlCeNd7YV1r7+3BNOcOnwISMV0BrrMq3rOmmCi
-	xX3/8S/bcawOY2ZIC8Ndsumw=
-Date: Sun, 1 Sep 2019 09:39:54 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Armin Kuster <akuster808@gmail.com>
-Message-ID: <20190901063954.GB22307@localhost>
-References: <cover.1567286967.git.akuster808@gmail.com>
-	<c9e4dfbcc163fdc33f62419b5c65c057c924247d.1567286967.git.akuster808@gmail.com>
+	Sun,  1 Sep 2019 18:44:39 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id t9so12395552wmi.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 01 Sep 2019 11:44:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8AiIf/olL3OKFKSrqzxJvDkPW8fiQ9x4047mx8ufbRQ=;
+	b=VF901ezorHOmkTz0oUAWDoSfry6inJKtGtSvdniSKOXi4JFu8TjHwrtZ35XUd0Dlci
+	DPWJznxJegBPZH4crIOT+GHa6IpfZoZ8M1KGM2PaepmrRnvuIV/LDD1uBNRm+guQzviZ
+	5edd3RcR1qKBhgvDQZ9CjF55TyYAcpR//rAYAQxbyEyagiNxJuK7IBKHrkcCtpXpWMsM
+	aCIy2tURU6I68pLDqfdXPZs2UFsHbLxTguSWLc0a0MGRRtK7l0K/e2uQB+mcqPA9C6ti
+	4li2c15If4tu4WiRT0So4ol47Ot5OEvl1EhRyFKyjGPdZAe0vVqLrAOPlYf5JU5Ao33P
+	lZoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=8AiIf/olL3OKFKSrqzxJvDkPW8fiQ9x4047mx8ufbRQ=;
+	b=Y9laMM+t83hnLDd+diBrKO/gAUs19I8w8Mi3ISL43YgF5b0tbyEEz6dQEy+9N9PQWj
+	kYeJFW78z3/65auAYu/aAbK7KsCSqOmjUd8Q7crFwVBNfIiTnFO2bphN/5KaYa3rpJn4
+	D+px2uqthjW1y2hQwLB6gZttcx1oDtB7wVT2Esu5bfXHz5WtQUB4mOFRmztGhck4jmSn
+	0BnPdJs5P5jU2IWXqMaJMhR2/kjA8J9B1Uv/DntGKfes+5OYtMAAag+SSJ4qdkG8rsP3
+	ObIohwFcyHEh7bW/iMNNZgOCke61B8A1SClWrJD7972SrxNHyHonkJ3cNUlFRC1NP4RG
+	sb7A==
+X-Gm-Message-State: APjAAAWz/nE7e/GCBLfz4ShWzrKwKtk5PbAxZrKS8zEamAs0VMDJ7AGf
+	FSxbHw72sMU0iSEPz2cZkCETF13H
+X-Google-Smtp-Source: APXvYqwC+cytGnzs+YCNc2gSD5NuWEVKc6D+db/Enf33/20ZEv4m5WCs1t/U2docTVhN2Gw5RfVLNQ==
+X-Received: by 2002:a7b:cf37:: with SMTP id m23mr4196080wmg.53.1567363480012; 
+	Sun, 01 Sep 2019 11:44:40 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F0291044A88851516F8950F.dip0.t-ipconnect.de.
+	[2003:f0:7f02:9104:4a88:8515:16f8:950f])
+	by smtp.gmail.com with ESMTPSA id
+	a17sm13594593wmm.47.2019.09.01.11.44.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 01 Sep 2019 11:44:39 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  1 Sep 2019 20:44:30 +0200
+Message-Id: <20190901184431.9227-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <c9e4dfbcc163fdc33f62419b5c65c057c924247d.1567286967.git.akuster808@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior 04/23] network-manager-applet: Remove obsolete dbus-glib and libnm-glib dependencies
+Subject: [PATCH] fluidsynth: upgrade 2.0.5 -> 2.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,51 +60,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Sep 2019 06:39:56 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Sun, 01 Sep 2019 18:44:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Aug 31, 2019 at 02:31:25PM -0700, Armin Kuster wrote:
-> From: Adrian Bunk <bunk@stusta.de>
-> 
-> network-manager-applet stopped using dbus-glib 3 years ago.
-> 
-> Building of the obsolete libnm-gtk is disabled by default in 1.8.20.
->...
+This is a bugfix maintenance release
 
-This commit is not really appropriate for stable branches.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> --- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
-> +++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "GTK+ applet for NetworkManager"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->  
-> -DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
-> +DEPENDS = "gtk+3 libnotify libsecret networkmanager \
->...
-
-That's a cleanup change removing an unused build dependency with
-no (intentional) changes to the built binaries.
-
-> --- a/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -# networkmanager-applet requires glib support
-> -PACKAGECONFIG_append = " glib"
->...
-
-The bbappend might not be nice, but removing it would be a behaviour 
-change in a stable branch.
-
-cu
-Adrian
-
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index 234be02ca..9e1c323fe 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+ 
+ SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
+-SRCREV = "7f11a9bf5c7304e04309a6ec9fc515ee815524bf"
++SRCREV = "f78486a50bd785200412ea16434b38edc4a45a6c"
+ S = "${WORKDIR}/git"
+-PV = "2.0.5"
++PV = "2.0.6"
+ 
+ inherit cmake pkgconfig lib_package
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.21.0
 
 
