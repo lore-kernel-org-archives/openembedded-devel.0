@@ -1,52 +1,37 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 101D57F4D6
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AC3E7EC56
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 21:37:43 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id n9so5307847pgc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Aug 2019 14:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=WF0BMM/OQeDkSkYkzIfDGhW7qTcqQVb/eDVxasWFMpU=;
-	b=Es16MiHBzb+TYsLKV5DlK7mSuIErq2Qfy1JNgqyYmEtk1MKkLZt8lodVwwEF9Idgxh
-	XtwhruiaH0WHJ+dURUw6zt5GdpXPwyXhU8CE8W98RZwRmsMw3SwG2hmy5r3VeEEMtfc9
-	5AgLWKPoNe9sPiXwE6sMvgghIzYBUZo5W6qVJfR6yyaGSnDBf5AHnGkUinjTw2CG3QUF
-	KexU5oiDsi/GjBzMv1d3t7xat7YforzzCRhAbjxyG+zRJGQIQ7V0jfNPlM/4xHcuAeGv
-	cm+qLPmNMiTIOW0VgCDo6y0jheTNI6uk1RMoceOAwkcXJe82gOBxRc+5Q4myPfZDuLKL
-	Dzzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=WF0BMM/OQeDkSkYkzIfDGhW7qTcqQVb/eDVxasWFMpU=;
-	b=L9irofW4wK518OOLo90/Y2u7BZgzkZrcQkmGK/nSb7BpjJhvoJv+QzRWTjQ1hw/qHf
-	AanLFBGAvR4dzNvP6INFDAeBZ9IwUoHHomIbkWoGA/TF9IKZg1jnUprvB7JBobkueDpc
-	MEINRs/yhR7Dakc6/xXLroY1AeMSQlcFm6tR0xcKmEU79e6jN8U3l2TkiUIM//NLeo5c
-	iR2XSvjnu1WL/B5j2sLHBQe9eh6dh6cIHNSiyX/IU5+8mz2T5gTsq1LGDMbriNtqIWmZ
-	GADThbwtCTkhHuShGC6x5P6ecVq8ueT7tucSVu+VViiFHhrg7/UN2quKmRNW6crg0e2g
-	cR/Q==
-X-Gm-Message-State: APjAAAUQ4wW3PJpUhSXkTTaxV0dCefXubze5jOryGNGS0HlCHepCJYVB
-	IdoH5fQ3dzCgXPps7EGpIw+zAa5+
-X-Google-Smtp-Source: APXvYqy6troc1rou1e27NtxQ86w7QGxeSufTzGvMKMz7DWvtMF5jzNQDkZ19F1lCO7fs4rGTVWWiFA==
-X-Received: by 2002:a17:90a:cf8d:: with SMTP id
-	i13mr5596612pju.63.1567287464920; 
-	Sat, 31 Aug 2019 14:37:44 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:8107:6109:754a:f033])
-	by smtp.gmail.com with ESMTPSA id d6sm9443836pgf.55.2019.08.31.14.37.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 31 Aug 2019 14:37:44 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Aug 2019 14:37:38 -0700
-Message-Id: <c97ed3bee0229dcae5cbf34d287c85009aa6e655.1567287402.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1567287402.git.akuster808@gmail.com>
-References: <cover.1567287402.git.akuster808@gmail.com>
-Subject: [thud 4/4] apache2: upgrade 2.4.39 -> 2.4.41
+	Sun,  1 Sep 2019 06:32:36 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Lk0g5C9Wz2Y;
+	Sun,  1 Sep 2019 08:32:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1567319556;
+	bh=lF9X2s6L+2eun98aN+OSD+mIAcMJT7IRpOXKoYyI3ZI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HCNnlJnlYkAZlmm7z45znOobcJh4J6jFUlbkDycmyHaT/nW+CZ1aEY/csrYU7Yl3E
+	SgCJO9CkNfQuw/W7aZI3J+dSVvNR2TdlOBVEtIxbBHdGx3/4OIn0etwGjXOoVuF92g
+	MhmJVJ50PSvl/Qv4doHpqABb9OFUvOZCXLRDZhAt/K4zTsS+XLncW0iC4lJcQRomM6
+	VqXAZKazMTLPNRbsWPV4MvGiU1agaCENvno/m6Dwv2aT9ZQ1f3Lpad9hVst/dMhvDl
+	7Sg5kxOa896wMUZ+VlAtkSWFmGvNTHRCHA/ILskitcOjdQZv5XtgIRPYda5krmmOOd
+	s6n7dDtcpOk8KgUIaT3pIg3ieTULohQ05o806wFfV+j8jyE8LtTDjGLkaQgXB20FiJ
+	rO6ZpAS/dLJFaOYQ5WOH8F/TdJ+dr7k9ta4UTIgzs0uUG5FsS1wp/kHcg18gx+GEwB
+	HJefISQMhsbDblwj36b5f8ovDN4pC/IwZc47EIS3rIku+6NZxdtzBfrLF20JzwquNt
+	9H5G/1qTNoJyzC+CxksaSLv45AJpC8c3k+WytaSvr4SiN1p5vN2qjQxR0VWWZ3r1cE
+	qS21eMKUMosqPdrKgrnay+Pym6JHpG4v5RGeIBfxVzk2aocT8NgcuiU3GcEtExf/+a
+	pDgAMoQ29y+JJQAmkGfFz9IU=
+Date: Sun, 1 Sep 2019 09:32:32 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Armin Kuster <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190901063232.GA22307@localhost>
+References: <cover.1567286967.git.akuster808@gmail.com>
+	<6404de28dbc2189edeae0045bd619b91de54198d.1567286967.git.akuster808@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <6404de28dbc2189edeae0045bd619b91de54198d.1567286967.git.akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior 14/23] libopus: Limit forcing ARM mode ISA to v5 only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,48 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Aug 2019 21:37:44 -0000
+X-List-Received-Date: Sun, 01 Sep 2019 06:32:37 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Yi Zhao <yi.zhao@windriver.com>
+On Sat, Aug 31, 2019 at 02:31:35PM -0700, Armin Kuster wrote:
+> From: Khem Raj <raj.khem@gmail.com>
+> 
+> This lets newer armv7+ still use thumb2 ISA
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+> index fb9bdc7..1512a1d 100644
+> --- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+> +++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+> @@ -50,6 +50,6 @@ python () {
+>  #| {standard input}:761: Error: selected processor does not support Thumb mode `smull fp,r2,r3,r9'
+>  #| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
+>  #| make[2]: *** [celt/celt.lo] Error 1
+> -ARM_INSTRUCTION_SET = "arm"
+> +ARM_INSTRUCTION_SET_armv5 = "arm"
+>...
 
-Security fixes:
-  CVE-2019-10081
-  CVE-2019-9517
-  CVE-2019-10098
-  CVE-2019-10092
-  CVE-2019-10097
-  CVE-2019-10082
+This is an optimization, not something that should go into stable.
 
-See: http://www.apache.org/dist/httpd/CHANGES_2.4.41
+It also looks buggy, as if it would break the build for armv4t
+and some armv6.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster@mvista.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb => apache2_2.4.41.bb} (98%)
+cu
+Adrian
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-index c6961ef..543d124 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.39.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-@@ -24,8 +24,8 @@ SRC_URI_append_class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
--SRC_URI[md5sum] = "930e217ba2d71e708a3f1521ecae7ec0"
--SRC_URI[sha256sum] = "b4ca9d05773aa59b54d66cd8f4744b945289f084d3be17d7981d1783a5decfa2"
-+SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
-+SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
 -- 
-2.7.4
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
