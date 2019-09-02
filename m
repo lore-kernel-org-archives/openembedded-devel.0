@@ -1,53 +1,23 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id A886E7F37D
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D11E7F34A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Sep 2019 18:44:39 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id t9so12395552wmi.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Sep 2019 11:44:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=8AiIf/olL3OKFKSrqzxJvDkPW8fiQ9x4047mx8ufbRQ=;
-	b=VF901ezorHOmkTz0oUAWDoSfry6inJKtGtSvdniSKOXi4JFu8TjHwrtZ35XUd0Dlci
-	DPWJznxJegBPZH4crIOT+GHa6IpfZoZ8M1KGM2PaepmrRnvuIV/LDD1uBNRm+guQzviZ
-	5edd3RcR1qKBhgvDQZ9CjF55TyYAcpR//rAYAQxbyEyagiNxJuK7IBKHrkcCtpXpWMsM
-	aCIy2tURU6I68pLDqfdXPZs2UFsHbLxTguSWLc0a0MGRRtK7l0K/e2uQB+mcqPA9C6ti
-	4li2c15If4tu4WiRT0So4ol47Ot5OEvl1EhRyFKyjGPdZAe0vVqLrAOPlYf5JU5Ao33P
-	lZoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=8AiIf/olL3OKFKSrqzxJvDkPW8fiQ9x4047mx8ufbRQ=;
-	b=Y9laMM+t83hnLDd+diBrKO/gAUs19I8w8Mi3ISL43YgF5b0tbyEEz6dQEy+9N9PQWj
-	kYeJFW78z3/65auAYu/aAbK7KsCSqOmjUd8Q7crFwVBNfIiTnFO2bphN/5KaYa3rpJn4
-	D+px2uqthjW1y2hQwLB6gZttcx1oDtB7wVT2Esu5bfXHz5WtQUB4mOFRmztGhck4jmSn
-	0BnPdJs5P5jU2IWXqMaJMhR2/kjA8J9B1Uv/DntGKfes+5OYtMAAag+SSJ4qdkG8rsP3
-	ObIohwFcyHEh7bW/iMNNZgOCke61B8A1SClWrJD7972SrxNHyHonkJ3cNUlFRC1NP4RG
-	sb7A==
-X-Gm-Message-State: APjAAAWz/nE7e/GCBLfz4ShWzrKwKtk5PbAxZrKS8zEamAs0VMDJ7AGf
-	FSxbHw72sMU0iSEPz2cZkCETF13H
-X-Google-Smtp-Source: APXvYqwC+cytGnzs+YCNc2gSD5NuWEVKc6D+db/Enf33/20ZEv4m5WCs1t/U2docTVhN2Gw5RfVLNQ==
-X-Received: by 2002:a7b:cf37:: with SMTP id m23mr4196080wmg.53.1567363480012; 
-	Sun, 01 Sep 2019 11:44:40 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F0291044A88851516F8950F.dip0.t-ipconnect.de.
-	[2003:f0:7f02:9104:4a88:8515:16f8:950f])
-	by smtp.gmail.com with ESMTPSA id
-	a17sm13594593wmm.47.2019.09.01.11.44.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 01 Sep 2019 11:44:39 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Sep 2019 20:44:30 +0200
-Message-Id: <20190901184431.9227-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Mon,  2 Sep 2019 00:59:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x820xYXC001171
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 1 Sep 2019 17:59:34 -0700 (PDT)
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 1 Sep 2019 17:59:34 -0700
+From: <kai.kang@windriver.com>
+To: <raj.khem@gmail.com>, <drew.moseley@northern.tech>
+Date: Sun, 1 Sep 2019 20:59:27 -0400
+Message-ID: <20190902005927.175922-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [PATCH] fluidsynth: upgrade 2.0.5 -> 2.0.6
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][Patch] Revert "networkmanager: Use ALTERNATIVES for resolv-conf handling."
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +30,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Sep 2019 18:44:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 02 Sep 2019 00:59:37 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-This is a bugfix maintenance release
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+This reverts commit 3982dc5b1994ffcc52336b02fbd2c44db164dd82.
+
+With this commit it creates link file /etc/resolv.conf via
+update-alternatives but the target doesn't exist.
+
+On target:
+
+root@qemux86-64:~# ls -l /etc/resolv*
+lrwxrwxrwx    1 root     root            33 Aug 27 09:17 /etc/resolv-conf.NetworkManager -> ../run/NetworkManager/resolv.conf
+lrwxrwxrwx    1 root     root            34 Aug 23 03:08 /etc/resolv-conf.systemd -> ../run/systemd/resolve/resolv.conf
+lrwxrwxrwx    1 root     root            31 Aug 27 09:22 /etc/resolv.conf -> /etc/resolv-conf.NetworkManager
+
+root@qemux86-64:~# ls -l /run/NetworkManager/resolv.conf
+ls: /run/NetworkManager/resolv.conf: No such file or directory
+
+root@qemux86-64:~# cat /etc/resolv.conf
+cat: can't open '/etc/resolv.conf': No such file or directory
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../networkmanager/networkmanager_1.18.2.bb          | 12 +-----------
+ 1 file changed, 1 insertion(+), 11 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-index 234be02ca..9e1c323fe 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-@@ -5,8 +5,8 @@ LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
+index b760a40c3..4149eddf0 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
+@@ -19,7 +19,7 @@ DEPENDS = " \
+     curl \
+ "
  
- SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
--SRCREV = "7f11a9bf5c7304e04309a6ec9fc515ee815524bf"
-+SRCREV = "f78486a50bd785200412ea16434b38edc4a45a6c"
- S = "${WORKDIR}/git"
--PV = "2.0.5"
-+PV = "2.0.6"
+-inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
++inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc
  
- inherit cmake pkgconfig lib_package
+ SRC_URI = " \
+     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+@@ -131,16 +131,6 @@ FILES_${PN}-nmtui-doc = " \
+ 
+ SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
+ 
+-ALTERNATIVE_PRIORITY = "100"
+-ALTERNATIVE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
+-ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
+-ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
+-
+ do_install_append() {
+     rm -rf ${D}/run ${D}${localstatedir}/run
+-
+-    # For read-only filesystem, do not create links during bootup
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+-        ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
+-    fi
+ }
 -- 
-2.21.0
+2.20.0
 
 
