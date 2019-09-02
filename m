@@ -1,23 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D11E7F34A
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 000927F36C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 00:59:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x820xYXC001171
+	Mon,  2 Sep 2019 02:17:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x822H5G6001625
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 1 Sep 2019 17:59:34 -0700 (PDT)
-Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Sun, 1 Sep 2019 17:59:34 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>, <drew.moseley@northern.tech>
-Date: Sun, 1 Sep 2019 20:59:27 -0400
-Message-ID: <20190902005927.175922-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.20.0
+	Sun, 1 Sep 2019 19:17:16 -0700
+Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 1 Sep 2019 19:16:55 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20190830101427.14200-1-schnitzeltony@gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <09091b50-b2fd-4f65-469a-fc797b2c2540@windriver.com>
+Date: Mon, 2 Sep 2019 10:15:45 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][Patch] Revert "networkmanager: Use ALTERNATIVES for resolv-conf handling."
+In-Reply-To: <20190830101427.14200-1-schnitzeltony@gmail.com>
+Subject: Re: [mexta-xfce][PATCH 1/3] imsettings: upgrade 1.7.3 -> 1.8.1 and rework recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,66 +34,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 00:59:37 -0000
+X-List-Received-Date: Mon, 02 Sep 2019 02:17:43 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Language: en-US
 
-From: Kai Kang <kai.kang@windriver.com>
+On 2019/8/30 下午6:14, Andreas Müller wrote:
+> It is more or less a recipe rewrite:
+>
+> * stylize recipe
+> * Use gtk3 instead of gtk
+> * Drop gconf backend - we should get rid of orphaned gconf
+> * Add PACKAGECONFIGs for 'xim' and 'xfce' - xfce is set by default
+> * Drop intltool-native from depends - they moved to gettext
+> * Remove entries from FILES - gobject-introspection.bbclass takes care
+>
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>   ...msettings_1.7.3.bb => imsettings_1.8.1.bb} | 22 ++++++++++---------
+>   1 file changed, 12 insertions(+), 10 deletions(-)
+>   rename meta-xfce/recipes-extended/imsettings/{imsettings_1.7.3.bb => imsettings_1.8.1.bb} (64%)
+>
+> diff --git a/meta-xfce/recipes-extended/imsettings/imsettings_1.7.3.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.1.bb
+> similarity index 64%
+> rename from meta-xfce/recipes-extended/imsettings/imsettings_1.7.3.bb
+> rename to meta-xfce/recipes-extended/imsettings/imsettings_1.8.1.bb
+> index 8f622bf6f..36cd7ad72 100644
+> --- a/meta-xfce/recipes-extended/imsettings/imsettings_1.7.3.bb
+> +++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.1.bb
+> @@ -7,25 +7,27 @@ This package contains the core DBus services and some utilities."
+>   HOMEPAGE = "http://code.google.com/p/imsettings/"
+>   SECTION = "Applications/System"
+>   
+> -inherit autotools gtk-doc gobject-introspection distro_features_check
+> +LICENSE = "LGPLv2+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+>   
+> -REQUIRED_DISTRO_FEATURES = "x11"
+> +inherit autotools gtk-doc gobject-introspection gettext distro_features_check
+>   
+> -SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
+> -           "
+> +DEPENDS = "gtk+3 libnotify dbus-glib"
 
-This reverts commit 3982dc5b1994ffcc52336b02fbd2c44db164dd82.
+It seems it transited to gdbus a long time ago but we didn't update 
+accordingly in imsettings recipe.
 
-With this commit it creates link file /etc/resolv.conf via
-update-alternatives but the target doesn't exist.
+https://bitbucket.org/tagoh/imsettings/commits/ef1c6a125455fea998bcc1a26fc546f9e14a16cd
 
-On target:
+commit ef1c6a125455fea998bcc1a26fc546f9e14a16cd
+Author: Akira TAGOH <akira@tagoh.org>
+Date:   Wed Dec 22 19:59:40 2010 +0900
 
-root@qemux86-64:~# ls -l /etc/resolv*
-lrwxrwxrwx    1 root     root            33 Aug 27 09:17 /etc/resolv-conf.NetworkManager -> ../run/NetworkManager/resolv.conf
-lrwxrwxrwx    1 root     root            34 Aug 23 03:08 /etc/resolv-conf.systemd -> ../run/systemd/resolve/resolv.conf
-lrwxrwxrwx    1 root     root            31 Aug 27 09:22 /etc/resolv.conf -> /etc/resolv-conf.NetworkManager
+     GDBus transition and revising a lot of code.
 
-root@qemux86-64:~# ls -l /run/NetworkManager/resolv.conf
-ls: /run/NetworkManager/resolv.conf: No such file or directory
 
-root@qemux86-64:~# cat /etc/resolv.conf
-cat: can't open '/etc/resolv.conf': No such file or directory
+Regards,
+Kai
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../networkmanager/networkmanager_1.18.2.bb          | 12 +-----------
- 1 file changed, 1 insertion(+), 11 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-index b760a40c3..4149eddf0 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-@@ -19,7 +19,7 @@ DEPENDS = " \
-     curl \
- "
- 
--inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
-+inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc
- 
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-@@ -131,16 +131,6 @@ FILES_${PN}-nmtui-doc = " \
- 
- SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
- 
--ALTERNATIVE_PRIORITY = "100"
--ALTERNATIVE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
--ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
--ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
--
- do_install_append() {
-     rm -rf ${D}/run ${D}${localstatedir}/run
--
--    # For read-only filesystem, do not create links during bootup
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
--    fi
- }
+
+>   
+> -SRC_URI[md5sum] = "c6c65a2b2654fe9dfe9ab2e8b80c079a"
+> -SRC_URI[sha256sum] = "196d3a74cef254ff812c32682d1818d740e36a68b976fef9e99748d23a71a71a"
+> +REQUIRED_DISTRO_FEATURES = "x11"
+>   
+> -LICENSE = "LGPLv2+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+> +SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "c04341a008d8c60e1532f033f4020f44"
+> +SRC_URI[sha256sum] = "ebf578299a10c6a1fea9047be6577df6d2b6470d3cc9d40f8a6589a3c13c4c8b"
+>   
+>   EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
+>                   --disable-static \
+>                  "
+>   
+> -DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf intltool-native"
+> +PACKAGECONFIG ??= "xfce"
+> +PACKAGECONFIG[xfce] = ",,xfconf"
+> +PACKAGECONFIG[xim] = ",,libgxim"
+>   
+>   RDEPENDS_${PN} += "bash"
+>   
+> -FILES_${PN} += "${datadir}/dbus-1/* ${datadir}/gir-1.0/* ${libdir}/girepository-1.0/*"
+> +FILES_${PN} += "${datadir}/dbus-1/*"
+
+
 -- 
-2.20.0
+Kai Kang
 
 
