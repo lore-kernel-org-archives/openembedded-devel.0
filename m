@@ -1,24 +1,23 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B0727ED64
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E269E7F381
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 09:41:55 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x829fOmM012850
+	Mon,  2 Sep 2019 10:06:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x82A6rHQ009953
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Sep 2019 02:41:46 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	Mon, 2 Sep 2019 03:06:53 -0700 (PDT)
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Mon, 2 Sep 2019 02:41:32 -0700
-From: <changqing.li@windriver.com>
+	14.3.468.0; Mon, 2 Sep 2019 03:06:52 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Sep 2019 17:41:31 +0800
-Message-ID: <1567417291-321780-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Mon, 2 Sep 2019 18:06:51 +0800
+Message-ID: <20190902100651.22832-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] satyr: upgrade 0.27 -> 0.28
+Subject: [meta-python][PATCH] python-hyperlink: rdepend on python-idna
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 09:41:55 -0000
+X-List-Received-Date: Mon, 02 Sep 2019 10:06:52 -0000
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+python hyperlink actually requires python idna. Otherwise, we get
+the following error.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib64/python3.7/site-packages/hyperlink/_init_.py", line 2, in <module>
+  from ._url import (URL,
+  File "/usr/lib64/python3.7/site-packages/hyperlink/_url.py", line 33, in <module>
+  from idna import encode as idna_encode, decode as idna_decode, IDNAError
+  ModuleNotFoundError: No module named 'idna'
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/satyr/{satyr_0.27.bb => satyr_0.28.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/satyr/{satyr_0.27.bb => satyr_0.28.bb} (87%)
+ meta-python/recipes-devtools/python/python-hyperlink.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/satyr/satyr_0.27.bb b/meta-oe/recipes-support/satyr/satyr_0.28.bb
-similarity index 87%
-rename from meta-oe/recipes-support/satyr/satyr_0.27.bb
-rename to meta-oe/recipes-support/satyr/satyr_0.28.bb
-index cc07dcb..fbf018d 100644
---- a/meta-oe/recipes-support/satyr/satyr_0.27.bb
-+++ b/meta-oe/recipes-support/satyr/satyr_0.28.bb
-@@ -10,7 +10,7 @@ inherit autotools-brokensep python3native pkgconfig
- SRC_URI = "git://github.com/abrt/satyr.git \
-            file://0002-fix-compile-failure-against-musl-C-library.patch \
- "
--SRCREV = "dff1b877d42bf2153f8f090905d9cc8fb333bf1e"
-+SRCREV = "8b5547b89b712b39a59f1d8b366e7de0f5f46108"
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/python-hyperlink.inc b/meta-python/recipes-devtools/python/python-hyperlink.inc
+index 25398541c..653170ca6 100644
+--- a/meta-python/recipes-devtools/python/python-hyperlink.inc
++++ b/meta-python/recipes-devtools/python/python-hyperlink.inc
+@@ -8,7 +8,7 @@ SRC_URI[md5sum] = "4772fb4d87c26a1ab22a6161424e3cba"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-@@ -23,7 +23,6 @@ PACKAGES += "python3-${BPN}"
- FILES_python3-${BPN} = "${PYTHON_SITEPACKAGES_DIR}/${BPN}"
+ inherit pypi
  
- PACKAGECONFIG ??= "python3 rpm"
--PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
- PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
- PACKAGECONFIG[rpm] = "--with-rpm, --without-rpm, rpm"
+-RDEPENDS_${PN} += "${PYTHON_PN}-stringold ${PYTHON_PN}-netclient"
++RDEPENDS_${PN} += "${PYTHON_PN}-stringold ${PYTHON_PN}-netclient ${PYTHON_PN}-idna"
+ 
+ PACKAGES =. "${PN}-test "
  
 -- 
-2.7.4
+2.17.1
 
 
