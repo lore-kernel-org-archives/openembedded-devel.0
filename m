@@ -1,103 +1,51 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
-	[209.85.210.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 428E67E53A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id C10597F2DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 17:49:41 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id s12so2305120pfe.6
+	Mon,  2 Sep 2019 22:50:40 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id d10so3471420pgo.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 10:49:42 -0700 (PDT)
+	Mon, 02 Sep 2019 15:50:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=C0nDdTEXZkRJP3YbIdTjxljK2JEoaQTctdpKPj64Vhk=;
-	b=b/x6I9xzDib81F/qNLDwQWxM8vjLu0O5NFLh9GBtKV2HeNYJbetXL8G9z0JWNx8Knn
-	7lUpFfD7pQES0w2aqscjkPZ5a6mlJxSyDCiiFYGt1HeNDWX1t1kVsFWsGgwsVoFk+BcC
-	aZz6+V1zlKPcxZfsn3CuxPWv3JMjBzkjmjezDWmZWhooOZnKkZWR2xDzcA8M0oahAQOo
-	w7DdCF25Nlj78yWgw1B6PtNs2qGKzU9wDcKk+Av/o1TdS2lvmbNi0OkTAhDgRGCbO3AR
-	EqNygSNkQjoUtIwwh5jSz2iq5JYVNjoYXRzZUN7DkXcRXVkhee+ZyklH5AhGrjIP20IF
-	LMzw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LYuobVuqpEYlOx8qYPO0mvy3u2crxKgiRdzPLZE3fzE=;
+	b=MxNiExhfc1BeCwmG8bORfKMe3NK7BtNS0rZWlw+n50qrvoi+RF1I+ULq46+oU+r7QL
+	hzGmO/V23q9pP/uXr8uv+9BunnVMABEHUWKw+PdQA7s/g08D7XuStKWYmklvSaLMXx9o
+	x7fcYXVqA7NFeTZ6K3kMEX5UF8UBGkVes7PcKuwG7x0/tngfmS129DUogGaa6Jn1rKXI
+	fYbsAUGY8YPgWMV/XyZFUGx4BWcIAudqEJL6Wpy9SBJubU8qxM+WGAvcANc7XqHlVw8u
+	1Xju7OJuEM4AwdmnZAuGzeejm040Enl1Czk7BvJJBBSCnUrNBlv44FRdkNtyreMtTGwG
+	A4IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language;
-	bh=C0nDdTEXZkRJP3YbIdTjxljK2JEoaQTctdpKPj64Vhk=;
-	b=SwLpo7rCdXW0ai27/TrQrKyg+geXojWcmB4ta5eG8RUIr7481ex4fk/2a244RbQyyY
-	Ew7FGjytrWnWtbOpqMpPt/lD8LRQEtE2jpeXNKWzOD6YbNk7ReG2GUpEgrpbXESYlgIm
-	zpefNrfI+Vc6FMAj4LEaOlQzxEKmTkwhrJgoJ1ZP9OkBCAC/urBcxN0pXX5UoVaDT9df
-	pDrzqLNu2xQQRMgLLb5IcvdYEwsR2sBJ87sHrs2mAzbEy3klzFXg1Ne2n56c+mtUet4P
-	SOTZwXNwgya/5UthZfeNwYBn7/DEn0NbJ0Vzl41YSCmuwJT+uN4kq/JzRtDqQB6UZRa4
-	9xJQ==
-X-Gm-Message-State: APjAAAVo4/dB4MLolXb6llhn1C9WogVju3oEB7o5Ov8eaF/MI8ImfR5p
-	G7jOdvYeZeHCMVzsnU1UCYSttjuf
-X-Google-Smtp-Source: APXvYqwxMM0tfD/VW/ZHc7n9pJeyYy9CyXqxMsxpGcmSOhCZfNfniDAf5Eh066RvLdZe1VUqVeZ3bA==
-X-Received: by 2002:a63:7c0d:: with SMTP id x13mr25960705pgc.360.1567446581942;
-	Mon, 02 Sep 2019 10:49:41 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
-	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
-	by smtp.gmail.com with ESMTPSA id
-	d16sm18615507pfd.81.2019.09.02.10.49.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Sep 2019 10:49:40 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>
-References: <cover.1563719996.git.akuster808@gmail.com>
-	<CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
-	<CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <4f40b2c0-94e9-759a-7942-870567a7ffed@gmail.com>
-Date: Mon, 2 Sep 2019 10:49:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LYuobVuqpEYlOx8qYPO0mvy3u2crxKgiRdzPLZE3fzE=;
+	b=uoJThhRfDUSv9oWdPrdftfzLcVcB1omJJtG3zMBKbPQYgl/bq6GpFIBuHH08IO8QhB
+	dTBi7VRfkNKLuLJjEe7NzzqVJx+322A1vr+HCpFNsJ46SK2M72E2P9leNlWieJIBlvMO
+	7U2TPTu5foy8V9SJTDJ/FEACNYIIb5/PSqtPmPxk5NZHpTSZbqJtiGVzDGUZW5c9MyBP
+	ZMPd9dclwTOCQxUvm5vkEGXXn/D1X5gdDlBqQwv9sm6Vx51jxpc1Gol3nsm0OnXNU5iF
+	dQ0suxr2MUJa9knR5YXvr+rwMlyXRGS2aAdjteDOb26NTU2jgYF2wyyG52tIfohboA+L
+	MK9Q==
+X-Gm-Message-State: APjAAAXEbd0ylkH8mqYIk5UZH6+chwT+xRXS1sqcEJz/e140hDquNU4m
+	ZVcAIzdVRM+FMBc6ACxOJTHSq7XEg08=
+X-Google-Smtp-Source: APXvYqxSeTWcL1kMeqKG4Ajw/3PTnvDJwkdG1Hn08GYNIboI+8tORzUVNZYoxJjfv+vbSDXClhrmSw==
+X-Received: by 2002:a17:90b:28b:: with SMTP id
+	az11mr4334174pjb.22.1567464641104; 
+	Mon, 02 Sep 2019 15:50:41 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	g3sm14834602pjx.32.2019.09.02.15.50.40
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 02 Sep 2019 15:50:40 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Sep 2019 15:50:26 -0700
+Message-Id: <20190902225026.35622-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [warrior] 0/8] patch review
+Subject: [meta-oe][PATCH] iperf2: Fix build with latest libc++
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,103 +58,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 17:49:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 02 Sep 2019 22:50:41 -0000
 Content-Transfer-Encoding: 8bit
 
+This patch was accidentally dropped in past iperf2 upgrades therefore
+bring it back see 0647b7d6400b1c40fc6cb40596e56b852ceb85c5
 
+helps in fixing  build with latest clang/libc++
 
-On 9/2/19 4:47 AM, Martin Jansa wrote:
-> This PR is still only in warrior-next, can this be merged to warrior
-> before the current PR gets merged to warrior-next (or warrior)?
-correct. I have not sent a merge request. khem did say to me to push it
-but I was not sure if he meant to mainline or *-next. I was on a two
-week holiday during that period and forgot to follow up on that request
-when I returned.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...nition-considering-stdbool.h-being-p.patch | 39 +++++++++++++++++++
+ .../recipes-benchmark/iperf2/iperf2_2.0.13.bb |  4 +-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
 
-i will send one today.
-
-- armin
->
-> On Sun, Jul 21, 2019 at 4:48 PM Khem Raj <raj.khem@gmail.com
-> <mailto:raj.khem@gmail.com>> wrote:
->
->     On Sun, Jul 21, 2019 at 7:41 AM Armin Kuster <akuster808@gmail.com
->     <mailto:akuster808@gmail.com>> wrote:
->     >
->     > Patch comments window closes on Wednesday.
->     >
->
->     series looks fine to me
->
->     > The following changes since commit
->     8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
->     >
->     >   turbostat: copy bits.h from kernel to turbostat (2019-06-16
->     08:15:44 -0700)
->     >
->     > are available in the git repository at:
->     >
->     >   https://git.openembedded.org/meta-openembedded-contrib
->     stable/warrior-nmut
->     >   http://cgit.openembedded.org//log/?h=stable/warrior-nmut
->     >
->     > Adrian Bunk (2):
->     >   ndctl: Remove the unnecessary dependency on virtual/kernel
->     >   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
->     >
->     > Andreas Müller (2):
->     >   gnome-desktop3: set correct meson gtk doc option
->     >   evince: add patch to fix build with recent gobject-introspection
->     >
->     > Martin Jansa (4):
->     >   ndctl: make MACHINE_ARCH and ignore from libblockdev
->     >   oprofile: make MACHINE_ARCH
->     >   oprofile: drop virtual/kernel dependency and switch back to
->     >     TUNE_PKGARCH
->     >   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and
->     util-linux for
->     >     phoronix-test-suite
->     >
->     >  ...ove-EvDocumentModel-get-type-function-dec.patch | 33
->     ++++++++++++++++++++++
->     >  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
->     <http://evince_3.28.2.bb>   | 12 ++++----
->     >  .../gnome-desktop/gnome-desktop3_3.32.0.bb
->     <http://gnome-desktop3_3.32.0.bb>         |  1 +
->     >  ..._2019.03.01.bb <http://2019.03.01.bb> =>
->     wireless-regdb_2019.06.03.bb
->     <http://wireless-regdb_2019.06.03.bb>} |  4 +--
->     >  meta-oe/conf/layer.conf                            |  3 ++
->     >  meta-oe/recipes-core/ndctl/ndctl_v63.bb <http://ndctl_v63.bb> 
->               |  2 +-
->     >  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
->     <http://oprofile_1.3.0.bb>  |  1 -
->     >  7 files changed, 47 insertions(+), 9 deletions(-)
->     >  create mode 100644
->     meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
->     >  rename
->     meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb
->     <http://wireless-regdb_2019.03.01.bb> =>
->     wireless-regdb_2019.06.03.bb
->     <http://wireless-regdb_2019.06.03.bb>} (91%)
->     >
->     > --
->     > 2.7.4
->     >
->     > --
->     > _______________________________________________
->     > Openembedded-devel mailing list
->     > Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch b/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
+new file mode 100644
+index 0000000000..44b902b5e8
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
+@@ -0,0 +1,39 @@
++From 6df092a4153c6c37cfaddcabf2cd25a910a7f6e1 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 2 Sep 2019 15:40:52 -0700
++Subject: [PATCH] Detect bool definition considering stdbool.h being present
++
++This helps in defining the value correctly on different platforms e.g.
++clang/libc++ depends on the definition coming from stdbool.h
++current builds fail to compile therefore
++
++TMPDIR/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/iperf2/2.0.13-r0/recipe-sysroot/usr/include/c++/v1/type_traits:742:29: error: redefinition of '__libcpp_is_integral<int>'
++template <>          struct __libcpp_is_integral<int>                : public true_type {};
++                            ^~~~~~~~~~~~~~~~~~~~~~~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ m4/dast.m4 | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/m4/dast.m4 b/m4/dast.m4
++index 2f729d4..7085955 100644
++--- a/m4/dast.m4
+++++ b/m4/dast.m4
++@@ -11,7 +11,12 @@ AH_TEMPLATE([false])
++ 
++ AC_DEFUN(DAST_CHECK_BOOL, [
++ 
++-AC_CHECK_SIZEOF(bool)
+++if test "$ac_cv_header_stdbool_h" = yes; then
+++  AC_CHECK_SIZEOF(bool,,[#include <stdbool.h>])
+++else
+++  AC_CHECK_SIZEOF(bool)
+++fi
+++
++ if test "$ac_cv_sizeof_bool" = 0 ; then
++   AC_DEFINE(bool, int)
++ fi
++-- 
++2.23.0
++
+diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
+index 2bd552d1d8..4a520e3be5 100644
+--- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
++++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
+@@ -4,7 +4,9 @@ SECTION = "console/network"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e136a7b2560d80bcbf0d9b3e1356ecff"
+ 
+-SRC_URI = " ${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz \
++           file://0001-Detect-bool-definition-considering-stdbool.h-being-p.patch \
++"
+ 
+ SRC_URI[md5sum] = "31ea1c6d5cbf80b16ff3abe4288dad5e"
+ SRC_URI[sha256sum] = "c88adec966096a81136dda91b4bd19c27aae06df4d45a7f547a8e50d723778ad"
+-- 
+2.23.0
 
 
