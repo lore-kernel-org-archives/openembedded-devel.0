@@ -1,30 +1,25 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6858660069
+Return-Path: <Li.Zhou@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E0D56D470
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 05:22:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,457,1559491200"; d="scan'208";a="74685722"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Sep 2019 13:22:49 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 407A24CE14E4
+	Mon,  2 Sep 2019 05:43:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x825hEKF007001
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 13:22:49 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 2 Sep 2019 13:22:54 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+	Sun, 1 Sep 2019 22:43:24 -0700
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Sun, 1 Sep 2019 22:43:03 -0700
+From: Li Zhou <li.zhou@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Sep 2019 13:22:08 +0800
-Message-ID: <1567401728-113652-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Date: Mon, 2 Sep 2019 13:42:46 +0800
+Message-ID: <20190902054246.15306-1-li.zhou@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: 407A24CE14E4.A68A0
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python-cmd2: Add python3 version
+X-Originating-IP: [128.224.153.75]
+Subject: [meta-oe][PATCH] tipcutils: ptts: Set recv buffer size to max to receive as many packets as possible
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,84 +32,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 05:22:51 -0000
+X-List-Received-Date: Mon, 02 Sep 2019 05:43:33 -0000
 Content-Type: text/plain
 
-Providing a python3 version of python-cmd2.
+Flooding multicast may make the rcv buffer overrun and is considered
+premature messages later and thus cause the following error.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+"Ignoring premature msg 16, currently handling 12"
+
+This patch sets SO_RCVBUF the of socket to max int value to receive as many
+packets as possible, and give a hint to user when possible overrun occurs. Note
+that the value of SO_RCVBUF will be limited up to min(INT_MAX/2,
+sysctl_rmem_max) in kernel.
+
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
 ---
- .../recipes-devtools/python/python-cmd2.inc       | 13 +++++++++++++
- .../recipes-devtools/python/python-cmd2_0.9.16.bb | 15 ++-------------
- .../python/python3-cmd2_0.9.16.bb                 |  9 +++++++++
- 3 files changed, 24 insertions(+), 13 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-cmd2.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+ ...et-recv-buffer-size-too-max-to-receive-as.patch | 66 ++++++++++++++++++++++
+ .../recipes-extended/tipcutils/tipcutils_git.bb    |  1 +
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/tipcutils/tipcutils/0001-test-ptts-Set-recv-buffer-size-too-max-to-receive-as.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc b/meta-python/recipes-devtools/python/python-cmd2.inc
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils/0001-test-ptts-Set-recv-buffer-size-too-max-to-receive-as.patch b/meta-oe/recipes-extended/tipcutils/tipcutils/0001-test-ptts-Set-recv-buffer-size-too-max-to-receive-as.patch
 new file mode 100644
-index 000000000..1a0be778b
+index 000000000..39f899cf1
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-cmd2.inc
-@@ -0,0 +1,13 @@
-+SUMMARY = "Extra features for standard library's cmd module"
-+HOMEPAGE = "http://packages.python.org/cmd2/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils/0001-test-ptts-Set-recv-buffer-size-too-max-to-receive-as.patch
+@@ -0,0 +1,66 @@
++From 4e4c8c7a1cca2125e2bf2a67cbab0bdbd78fdb86 Mon Sep 17 00:00:00 2001
++From: He Zhe <zhe.he@windriver.com>
++Date: Tue, 30 Jul 2019 13:24:22 +0800
++Subject: [PATCH] ptts: Set recv buffer size too max to receive as many
++ packets as possible
 +
-+SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
-+SRC_URI[sha256sum] = "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
++Flooding multicast may make the rcv buffer overrun and is considered
++premature messages later and thus cause the following error.
 +
-+inherit pypi
++"Ignoring premature msg 16, currently handling 12"
 +
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++This patch sets SO_RCVBUF the of socket to max int value to receive as many
++packets as possible, and give a hint to user when possible overrun occurs. Note
++that the value of SO_RCVBUF will be limited up to min(INT_MAX/2,
++sysctl_rmem_max) in kernel.
 +
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
-index 94db37a2d..17b6ae285 100644
---- a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
-+++ b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
-@@ -1,14 +1,5 @@
--SUMMARY = "Extra features for standard library's cmd module"
--HOMEPAGE = "http://packages.python.org/cmd2/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
--
--SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
--SRC_URI[sha256sum] = "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
--
--inherit pypi setuptools
--
--DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+inherit setuptools
-+require python-cmd2.inc
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-doctest \
-@@ -21,5 +12,3 @@ RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-textutils \
-     "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
-new file mode 100644
-index 000000000..f5c5c7e1a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
-@@ -0,0 +1,9 @@
-+inherit setuptools3
-+require python-cmd2.inc
++Signed-off-by: He Zhe <zhe.he@windriver.com>
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-pyperclip \
-+    ${PYTHON_PN}-colorama \
-+    ${PYTHON_PN}-attrs \
-+    ${PYTHON_PN}-wcwidth \
-+    "
++Upstream-Status: Backport
++
++Signed-off-by: Li Zhou <li.zhou@windriver.com>
++---
++ ptts/tipc_ts_server.c | 18 ++++++++++++++++--
++ 1 file changed, 16 insertions(+), 2 deletions(-)
++
++diff --git a/ptts/tipc_ts_server.c b/ptts/tipc_ts_server.c
++index a286daa..3a2f96f 100644
++--- a/ptts/tipc_ts_server.c
+++++ b/ptts/tipc_ts_server.c
++@@ -641,8 +641,9 @@ void server_mcast
++ 				if (rc < 0)
++ 					err("multicast message not received");
++ 				if (msgno != *(int*) buf) {
++-					dbg1("Ignoring premature msg %u, currently handling %u\n",
++-					       *(int*)buf, msgno);
+++					dbg1("Ignoring premature msg %u, currently handling %u\n"
+++                                             "You can enlarge /proc/sys/net/core/rmem_max and try again\n",
+++                                             *(int*)buf, msgno);
++ 					continue;
++ 				}
++ 				rc = recvfrom(sd[i], buf, expected_szs[numSubTest], 
++@@ -687,8 +688,21 @@ void server_test_multicast(void)
++ 	FD_ZERO(&readfds);
++ 
++ 	for (i = 0; i < TIPC_MCAST_SOCKETS; i++) {
+++		int optval = (int)(~0U >> 1);
+++		socklen_t optlen = sizeof(optval);
+++		int rc = 0;
+++
++ 		sd[i] = createSocketTIPC (SOCK_RDM);
++ 		FD_SET(sd[i], &readfds);
+++
+++		/*
+++                 * Flooding multicast may make the rcv buffer overrun and considered premature msg later.
+++                 * Set SO_RCVBUF to max int value to receive as many packets as possible.
+++                 * Note that it will be limited up to min(INT_MAX/2, sysctl_rmem_max) in kernel.
+++                 */
+++		rc = setsockopt(sd[i], SOL_SOCKET, SO_RCVBUF, (const char*)&optval, optlen);
+++		if(rc != 0)
+++			printf("Failed to set SO_RCVBUF of %d: %s\n", sd[i], strerror(errno));
++ 	}
++ 
++ 	server_bindMulticast(  0,  99, sd[0]);
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+index 054e0acc8..637770af2 100644
+--- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+@@ -6,6 +6,7 @@ SRC_URI = "git://git.code.sf.net/p/tipc/tipcutils \
+            file://0001-include-sys-select.h-for-FD_-definitions.patch \
+            file://0002-replace-non-standard-uint-with-unsigned-int.patch \
+            file://0001-multicast_blast-tipcc-Fix-struct-type-for-TIPC_GROUP.patch \
++           file://0001-test-ptts-Set-recv-buffer-size-too-max-to-receive-as.patch \
+            "
+ SRCREV = "7ab2211b87414ba240b0b2e4af219c1057c9cf9a"
+ PV = "2.2.0+git${SRCPV}"
 -- 
-2.17.1
-
-
+2.11.0
 
 
