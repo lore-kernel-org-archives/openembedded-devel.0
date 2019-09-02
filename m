@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
-	[209.85.208.47])
-	by mail.openembedded.org (Postfix) with ESMTP id EAFC87F2A1
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+	[209.85.221.48])
+	by mail.openembedded.org (Postfix) with ESMTP id E0F257E1E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2019 11:47:18 +0000 (UTC)
-Received: by mail-ed1-f47.google.com with SMTP id t50so15401282edd.2
+	Mon,  2 Sep 2019 14:35:35 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id g7so14296697wrx.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 04:47:20 -0700 (PDT)
+	Mon, 02 Sep 2019 07:35:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=qK7mSPzd+RtDmDPFPZeIXMG/RCVC5aakVqfH9LPlBrY=;
-	b=kWjGUur0HMlchMHGl84g4PR3IBwmknBXQhUtp/VWeKtXOxti6jFRUlp1/AkYKiA9tx
-	AVMXo81rcPcAkGyOq22eO+b7c3E6gUtMA8JXJhJE/7FC6T7CvQGJi6oxDedfc0S6P0xG
-	r6I5y9fKHf+u5m+I9i42PpqLTi9fYRvsfvvMidPHlqb+pjDTmMbvZ60vz1NgrWir+6ep
-	+LkxqxMn+G+2Pt+kTFaOWj6aDJblWa/HIe8EnpxWrWly9RaPJJhGmFRg6sIdcW5Pejom
-	7lXYmUYa2YkSfbaUkHvfUDQralMjednrkLncWAJAzpmguYrF+rlW9O9H/D8Tz826r1A6
-	qbYA==
+	h=from:to:cc:subject:date:message-id;
+	bh=GKEy19CoBcwr2Dky6Bgnu7QRoLeTTn2VDYW36/E9KzI=;
+	b=idExAdqPokVoSaTdI02KfszRmWGFxTytpNzfBxhmhkhCpY+p+Ismn3QBPvL4rEXPwc
+	bkV3p2/kETXwEG3+Q3z2BGrkh5lCsiHuP0Rh9WzN4iyjHJQorEsBuNXxii60pDSYZEY+
+	szzWQObUXnk2HvYK2epgmPmNiA15Nbdb3EqOjjyrdsDJy36cFepIWIchz2BIWXoMuKFI
+	6QY/kvGyk6qII73nt29uDy7tcXo7yS5p2a0Q2V51/lxjwYVsmqnO2fjSsX6GBZ53imsS
+	kPKfGb+IahLKaAHq3l5Ud8sxmherOpyH5JcA0W3WdxMTa5nCZPlbxMQOaVIeLPO7FgBP
+	NDlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=qK7mSPzd+RtDmDPFPZeIXMG/RCVC5aakVqfH9LPlBrY=;
-	b=X+1fmbEmpNpWi1zt/PH8plb9N4YTzmyr0kpHpYkkVjFYcFXZAJUmitCIg433yup+C8
-	a9EPSmBZGnRQBSqzHYbevxCyrAHwpgInTzJyNgBpQ/wRS/jCWRfjMlPJT4uu9GbnZS8G
-	bQVaqG4g6fo6sLz/IYpgZwriOp4TrUA/fEUR1jHBbVgpQc06aCOZowAbk6nud9WYysT+
-	542ikg0KYK9NGwVx6RI2FFDUpRDxusuqvvDV0JhOeSyO0JKS/54DmgFuA0rHzm73VlPq
-	3P4+e4ffuwk3Xhl6evEBbYNdQq8tPAUpyR0T/jrgG7d0x5WKteLoU4cxOW+57rGGMn7k
-	+tEQ==
-X-Gm-Message-State: APjAAAWfzG7YVAAGA1yWk4UEzij+Mf4RIoeJAmsYDRSS3Q041YpJ0d7d
-	4f+54ysjiVerrgkOd97kuqB9eHVRIjcCYR9nwW0=
-X-Google-Smtp-Source: APXvYqxCOHrtG8g5XHzRknwVkHyrvC9xDiZPwaUUf+KzQ2a+/kxmB5KqXGJAbXgTVtLlzbkFHTbAWN+tGR5zkJMcSy0=
-X-Received: by 2002:a50:c3cb:: with SMTP id i11mr2231482edf.98.1567424838429; 
-	Mon, 02 Sep 2019 04:47:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1563719996.git.akuster808@gmail.com>
-	<CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 2 Sep 2019 13:47:07 +0200
-Message-ID: <CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [warrior] 0/8] patch review
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GKEy19CoBcwr2Dky6Bgnu7QRoLeTTn2VDYW36/E9KzI=;
+	b=CaMfJAo4VuF/B3GETDmm74fY8kMPmzmkaMWIXcBQYuBHB7enwUbu2D/dC7F05Ba+8A
+	l7Hid1xOI5/mEizJjZKvgubp3m9E9S0mudOT6x1h4X7YEXqeY8mwi7d0Usb6S9G5TzKL
+	dCO7T7MoogrrP5XCkFAKXtwn1mm7DrFKWfywvZNvyZk87XF3X39TcbW9RsPMYPnXA7tS
+	g1IKii8AhEoxIdBf2VShhkFq6dhrD/IVZ7XCIZG2/IB7ETBARZ+n78KLFIqUeVqe4vAV
+	M26NfcMcmRjzyYERBQCKLbqj/HA9Bk0j5QKnNN18rNQI6i/3HNoT5I2KvJB/mTAB+wRw
+	AmWw==
+X-Gm-Message-State: APjAAAVJlt6yQWCzV8BCo7ZKIXJrZAaweXe5InZE/7TFMgADbbvRgsi+
+	jPmVY0d5VKT9prIUt+H9f93xXSNe
+X-Google-Smtp-Source: APXvYqzZDkLCgKuv1LrD858UnhZsJJaktFnBbpqQQmI9q7oMD4gLMnTuAlVWYpyiRoIBwihIYJ528Q==
+X-Received: by 2002:adf:f710:: with SMTP id r16mr32664947wrp.81.1567434936308; 
+	Mon, 02 Sep 2019 07:35:36 -0700 (PDT)
+Received: from localhost.localdomain ([193.164.125.20])
+	by smtp.gmail.com with ESMTPSA id
+	e30sm22402363wra.48.2019.09.02.07.35.35
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 02 Sep 2019 07:35:35 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Sep 2019 15:35:33 +0100
+Message-Id: <20190902143533.74977-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] zstd: Upgrade 1.4.2 -> 1.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,78 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 11:47:19 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Sep 2019 14:35:36 -0000
 
-This PR is still only in warrior-next, can this be merged to warrior before
-the current PR gets merged to warrior-next (or warrior)?
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-On Sun, Jul 21, 2019 at 4:48 PM Khem Raj <raj.khem@gmail.com> wrote:
+ meta-oe/recipes-extended/zstd/{zstd_1.4.2.bb => zstd_1.4.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/zstd/{zstd_1.4.2.bb => zstd_1.4.3.bb} (95%)
 
-> On Sun, Jul 21, 2019 at 7:41 AM Armin Kuster <akuster808@gmail.com> wrote=
-:
-> >
-> > Patch comments window closes on Wednesday.
-> >
->
-> series looks fine to me
->
-> > The following changes since commit
-> 8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
-> >
-> >   turbostat: copy bits.h from kernel to turbostat (2019-06-16 08:15:44
-> -0700)
-> >
-> > are available in the git repository at:
-> >
-> >   https://git.openembedded.org/meta-openembedded-contrib
-> stable/warrior-nmut
-> >   http://cgit.openembedded.org//log/?h=3Dstable/warrior-nmut
-> >
-> > Adrian Bunk (2):
-> >   ndctl: Remove the unnecessary dependency on virtual/kernel
-> >   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
-> >
-> > Andreas M=C3=BCller (2):
-> >   gnome-desktop3: set correct meson gtk doc option
-> >   evince: add patch to fix build with recent gobject-introspection
-> >
-> > Martin Jansa (4):
-> >   ndctl: make MACHINE_ARCH and ignore from libblockdev
-> >   oprofile: make MACHINE_ARCH
-> >   oprofile: drop virtual/kernel dependency and switch back to
-> >     TUNE_PKGARCH
-> >   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and util-linux for
-> >     phoronix-test-suite
-> >
-> >  ...ove-EvDocumentModel-get-type-function-dec.patch | 33
-> ++++++++++++++++++++++
-> >  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb   | 12 ++++----
-> >  .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  1 +
-> >  ..._2019.03.01.bb =3D> wireless-regdb_2019.06.03.bb} |  4 +--
-> >  meta-oe/conf/layer.conf                            |  3 ++
-> >  meta-oe/recipes-core/ndctl/ndctl_v63.bb            |  2 +-
-> >  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  |  1 -
-> >  7 files changed, 47 insertions(+), 9 deletions(-)
-> >  create mode 100644
-> meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentMode=
-l-get-type-function-dec.patch
-> >  rename meta-networking/recipes-connectivity/wireless-regdb/{
-> wireless-regdb_2019.03.01.bb =3D> wireless-regdb_2019.06.03.bb} (91%)
-> >
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.2.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.3.bb
+similarity index 95%
+rename from meta-oe/recipes-extended/zstd/zstd_1.4.2.bb
+rename to meta-oe/recipes-extended/zstd/zstd_1.4.3.bb
+index b5d95d940b34..e97b4efb2e66 100644
+--- a/meta-oe/recipes-extended/zstd/zstd_1.4.2.bb
++++ b/meta-oe/recipes-extended/zstd/zstd_1.4.3.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
+ 
+ SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
+ 
+-SRCREV = "ff304e9e65e7cde17a637eea190a874c26c48634"
++SRCREV = "a3d655d2255481333e09ecca9855f1b37f757c52"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
+
 
