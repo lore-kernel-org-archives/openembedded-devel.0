@@ -1,46 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 1150F7F301
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 850E57F2FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 03:26:37 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id a13so17942919qtj.1
+	Tue,  3 Sep 2019 03:34:12 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,461,1559491200"; d="scan'208";a="74740797"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 03 Sep 2019 11:34:12 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id DE5A04CE14E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 20:26:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OCt83uzJtG4E4ujFetusz8L8Zdggoh0+Aj0MXJtMSEQ=;
-	b=O5cZ8THmMGf+hNay/VI6lKTxeWXrrAfras8D67xw9FFVMtt6xLs9hIms5E2DJxRlrt
-	uT2OypwpqPB1BKSRC1E+Py0ssHvQus3nxBE4LMApfPjjtUsLs/KWEtYDvcwGnzIi+Kmt
-	O4qdE9SR3x7lajKMLgnBbuBIaEz8+B/Jz3RtSm+AlueC9m/z+NUzp9IrS3vpmqDtqTH6
-	SN4ernQYHLz0wDZTptYcRMeRaBlJ+Y95FLjO7sAmGbP7Dki/uIZskbPqSiipjrcbBwyw
-	vKvmOpZtTz+FjPICmVwfWDcxL9+9yl4RQFAIYTEVy5EPXKPZCaIwuImcY3CUqzSpBoud
-	ffrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=OCt83uzJtG4E4ujFetusz8L8Zdggoh0+Aj0MXJtMSEQ=;
-	b=ifwoFFyy0TsnROGWLhZUx0maW1xSYwWwqjMTWk32mWQevKr1SnjEtLhrwVIu9BGcv2
-	r+sBB6H6xeaYxFfhkVXLhazBq9e8RKy3669BA5N5d//XqtmD51mg8oQ1KgP915vdYPfk
-	gqTr4haGfInugjqMiq+2WSWuzGwEjQ7FokmBeYHEHeMN3/TlJ24MbIkZYGoBS5t3apd6
-	2//LFcM53kPmJ0iD7+yTW+zwODqpYRWVZdVUqAbPGuYldnqW2EEHlxq0v24p6kpi/bku
-	1lobY3zNsQGHr36TMaey2E1/vuuGdrdcFdUQYk2a7b1HaDvEBlagJ19vnW2QnHeg2vZP
-	mSUA==
-X-Gm-Message-State: APjAAAU6FghGQHi2wfHVrNzZNY2j8nQ9M1xOzIa0cCCh20QLedP7Gx5B
-	w8pfNBADnJDS9h62WwARBzUndDinf3bDlhJzxYE=
-X-Google-Smtp-Source: APXvYqyyyOKfQ8N4B1NCwvObCzz0qCXG9Nx0WKxMsUZRDg8WsHLlFEUWZUcudWCSETROX8fHOq2ozSsIkaE6/L9p6MM=
-X-Received: by 2002:ac8:460d:: with SMTP id p13mr23092547qtn.378.1567481198702;
-	Mon, 02 Sep 2019 20:26:38 -0700 (PDT)
+	Tue,  3 Sep 2019 11:34:07 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 3 Sep 2019 11:34:10 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 3 Sep 2019 12:33:48 +0900
+Message-ID: <20190903033348.32395-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-References: <f8250bb8-db71-1946-45c5-94722c6c81f6@gmail.com>
-In-Reply-To: <f8250bb8-db71-1946-45c5-94722c6c81f6@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 Sep 2019 20:26:12 -0700
-Message-ID: <CAMKF1sozaDZaikAUQMqXBxtE3WDyu2JkBpkYf18wwYucyfwEOg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Merge request for thud
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: DE5A04CE14E6.A15DF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking] [PATCH] strongswan: upgrade 5.8.0 -> 5.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,88 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 03:26:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 03 Sep 2019 03:34:13 -0000
+Content-Type: text/plain
 
-merged thanks
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+---
+ .../strongswan/{strongswan_5.8.0.bb => strongswan_5.8.1.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.8.0.bb => strongswan_5.8.1.bb} (97%)
 
-On Mon, Sep 2, 2019 at 8:02 PM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 9b3b907f30b0d5b92d58c7e68289184fda733d3e:
->
->   netkit-rsh: add tag to CVE patch (2019-05-27 22:22:25 -0700)
->
-> are available in the git repository at:
->
->   https://git.openembedded.org/meta-openembedded
-> aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95
->
-> for you to fetch changes up to aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95:
->
->   lua: Security fix for CVE-2019-6706 (2019-09-02 19:54:39 -0700)
->
-> ----------------------------------------------------------------
-> Armin Kuster (1):
->       lua: Security fix for CVE-2019-6706
->
-> Peter Kjellerstedt (1):
->       apache2: Correct appending to SYSROOT_PREPROCESS_FUNCS
->
-> Qi.Chen@windriver.com (1):
->       apache2: set CVE_PRODUCT
->
-> Yi Zhao (2):
->       apache2: upgrade 2.4.34 -> 2.4.39
->       apache2: upgrade 2.4.39 -> 2.4.41
->
->  .../recipes-devtools/lua/lua/CVE-2019-6706.patch   |  32 ++
->  meta-oe/recipes-devtools/lua/lua_5.3.4.bb          |   1 +
->  .../recipes-httpd/apache2/apache2-native_2.4.34.bb |  46 --
->  ...nfigure-use-pkg-config-for-PCRE-detection.patch |   8 +-
->  ...-up-the-core-size-limit-if-CoreDumpDirec.patch} |  12 +-
->  ...ot-export-apr-apr-util-symbols-when-usin.patch} |  10 +-
->  ...ache2-log-the-SELinux-context-at-startup.patch} |  23 +-
->  ...replace-lynx-to-curl-in-apachectl-script.patch} |   6 +-
->  ...-the-race-issue-of-parallel-installation.patch} |   6 +-
->  ...apache2-allow-to-disable-selinux-support.patch} |   8 +-
->  ...-not-use-relative-path-for-gen_test_char.patch} |   8 +-
->  .../apache2/apache2/CVE-2018-11763.patch           | 512
-> ---------------------
->  .../apache2/apache2/apache-configure_perlbin.patch |  27 --
->  .../{apache2_2.4.34.bb => apache2_2.4.41.bb}       | 202 ++++----
->  meta-webserver/recipes-httpd/apache2/files/init    |   0
->  15 files changed, 190 insertions(+), 711 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
->  delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-corelimit.patch
-> => 0002-apache2-bump-up-the-core-size-limit-if-CoreDumpDirec.patch} (83%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.4-export.patch
-> => 0003-apache2-do-not-export-apr-apr-util-symbols-when-usin.patch} (80%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-selinux.patch
-> => 0004-apache2-log-the-SELinux-context-at-startup.patch} (85%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{replace-lynx-to-curl-in-apachectl-script.patch
-> => 0005-replace-lynx-to-curl-in-apachectl-script.patch} (95%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.3-fix-race-issue-of-dir-install.patch
-> => 0006-apache2-fix-the-race-issue-of-parallel-installation.patch} (94%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{configure-allow-to-disable-selinux-support.patch
-> => 0007-apache2-allow-to-disable-selinux-support.patch} (91%)
->  rename
-> meta-webserver/recipes-httpd/apache2/apache2/{server-makefile.patch =>
-> 0008-apache2-do-not-use-relative-path-for-gen_test_char.patch} (76%)
->  delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
->  delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.34.bb =>
-> apache2_2.4.41.bb} (61%)
->  mode change 100755 => 100644
-> meta-webserver/recipes-httpd/apache2/files/init
->
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb
+similarity index 97%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb
+index fa1bd975c..9310a93fe 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.8.0.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+            "
+ 
+-SRC_URI[md5sum] = "e05f2d16a7479a2a9591609c256d523a"
+-SRC_URI[sha256sum] = "15b1e10c7dd6253ab5d791fe9b9cb84624e24c118aecd9b90251b4e60daa0933"
++SRC_URI[md5sum] = "5a6b9980cd1ac4fad3c24b55ed960ac9"
++SRC_URI[sha256sum] = "d9af70acea5c054952ad1584916c1bf231b064eb6c8a9791dcb6ae90a769990c"
+ 
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+-- 
+2.17.1
+
+
+
 
