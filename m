@@ -1,50 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C7AB67F2D5
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 81FFE7CED3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 02:41:00 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id l21so8269961pgm.3
+	Tue,  3 Sep 2019 02:41:49 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id w10so8266703pgj.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 19:41:02 -0700 (PDT)
+	Mon, 02 Sep 2019 19:41:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=/Zsv6cH1pHeggUaTt2496S7DtGpTUk+01aVHXPlLY18=;
-	b=qUU9kP63j6aoMyk3WIpomWTFPtAgM6Sehx2Gb+K7uuHcI7EVz5+0Y77vfWhc+KZn/J
-	BrgmDaVqgFNQfMc8qEpC92H2h3yaj0iwbwIbEf3GAwyiA8eRNlUF/4OzhEXLMqmnTZHF
-	ZREsk6KVBaA5ErJbLb6Pne6F4sp2JAWu0wjuLZzUv72UhyY32RDgN5tK0k6phqecCFM5
-	rKfj8ZeFXezmGfxSkUhqPvdC8+6snOi/vUCgT2x3iUrhD6CRLQASiKUbYjDwFnfPDmGl
-	pSv7W4Mn3Omk/NHWol/jd3it4bEacAwXLj6vJuLFTztdL7CvwA4iGHicdZoJOcJ2MLId
-	ll0Q==
+	bh=0Cg/Wdq5Zf7aEzMfJ5QTd6vzQaPMLy+uS0ZagtiWwCk=;
+	b=t0s4U9RVJ3Bt8amAnXNR5M/LPxlj7DHw/ADpVs70WBRgi9w4ZTSR6H3XcSaVZkQ30g
+	Z8fp30GUhvZ2Fq594wZWvG/JNA4DkWmxQww06UaChvtXxHXzSiKC8g85CX4vbi5J2y2G
+	Yz6LtF7zVZ4ap8cWvqZJpa5GZUk5G7gxzbvRr4jOn/y63esmhbTdv4ACAn1snzU8fJBz
+	usDtmRVJgOG/NaCxTnBEv571ElEhx6lnwkZkOGszI9EGkK+H5DLv4V03h6Dj/I5xGTWe
+	9xr5a28WNmU2Hdk/Zr/gKA+s0OPPyVdiqNBxrquO5q2caEhDyx8EPjMPaQNA4Irmo2v9
+	Q1Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=/Zsv6cH1pHeggUaTt2496S7DtGpTUk+01aVHXPlLY18=;
-	b=dKfx3Je02dvTVka8sioGHU6GXs2CFT0QO3Enh8UuPaCRJYQewOdhAKwFRNYWtXgM0L
-	NWk4O92QjDCHkl7bnK3x9tkmLn2prPdAlNcM3PtXoOffI/j1fHx6uX6XFlQrf1Z+0N5V
-	+aZPgMI9JGZK1FStrPtrWygbnvCyyqwXiek+fJ0Rb5sj6KkQvwoll2tbbPv+okNYcujM
-	xcK++VposHdCqh76xbw9UsKZs3IGQsA/Nvy7YkJjrFUHHDhMCwIDRka8A585y9e/EP13
-	rKEbDXNk/Rzvrg1w1d3qMLRGDb6PqzoIbk2v0cvHJOnbXLoo30HoeQtBXRh5gBN2qP41
-	ZpuA==
-X-Gm-Message-State: APjAAAVtYRcYyeBMM33MxibWUwZhrN/tX4ENuV4KwYxH+r+sJNkSU6c0
-	kmIpNsVmoVJJsZw+zOE+zo6EO1AS
-X-Google-Smtp-Source: APXvYqxLunp5AvGoKf4fCbehn7UhrgLzgyx48ghQnQMpYcCM4GTwtlYbR9YjvM0B2Y/SIxwjxusdFQ==
-X-Received: by 2002:a17:90a:ba04:: with SMTP id s4mr155219pjr.73.1567478461751;
-	Mon, 02 Sep 2019 19:41:01 -0700 (PDT)
+	bh=0Cg/Wdq5Zf7aEzMfJ5QTd6vzQaPMLy+uS0ZagtiWwCk=;
+	b=q2Yo/YXN5U24KqbyH3Cn4vT7dvmPzbxjScNeM1tNkrEus2rjHRjdHKURYZdwkNYKMa
+	m6Pg5NK+XXefU/HifijUz55Zc4BGRy8ow/ijqa2uDBDUNBpnF39kb9t9LAcq5m4kOZUD
+	5xLG0qdyyLpj+8XL2P7GcILAzcpEwk2qQboDQFOVx7XH0Bod+4pwKEOLV3qHmkX+Bf/p
+	h61BaL19uCgGGCG2220ddZG0B6QtTD9qMcYa0R1rjvdraPEd8zqYCIYxQKu4RPamDawZ
+	fOwSB29CdstV7YC8xrDoV/w/vATcU+T4DmtCSFqqWYZ6/nyF/LaBUU39Oac7glqmRh72
+	b1Nw==
+X-Gm-Message-State: APjAAAUeXBYbOGFTOgGpSjiKaPPcWfmEeIC8ljndKdPlj2u4TiCjDmMR
+	3SSmfyqdGue9kxz00QNDgD/jM9p5
+X-Google-Smtp-Source: APXvYqzk+vhbrj/lK8WLIwx0ygm728NFwC3hUJUbyBGOZqujEr+O86qEmvOFNb6hNaCS/v+dcpmj8w==
+X-Received: by 2002:aa7:9085:: with SMTP id i5mr10256971pfa.136.1567478510737; 
+	Mon, 02 Sep 2019 19:41:50 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
 	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
 	by smtp.gmail.com with ESMTPSA id
-	n19sm6003401pfa.67.2019.09.02.19.41.01
+	u1sm13572083pgi.28.2019.09.02.19.41.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Sep 2019 19:41:01 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>
+	Mon, 02 Sep 2019 19:41:50 -0700 (PDT)
+To: Adrian Bunk <bunk@stusta.de>, Khem Raj <raj.khem@gmail.com>
 References: <cover.1567286967.git.akuster808@gmail.com>
-	<c9e4dfbcc163fdc33f62419b5c65c057c924247d.1567286967.git.akuster808@gmail.com>
-	<20190901063954.GB22307@localhost>
+	<6404de28dbc2189edeae0045bd619b91de54198d.1567286967.git.akuster808@gmail.com>
+	<20190901063232.GA22307@localhost>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -90,14 +90,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <eef5f4a2-e318-6a33-0465-90cadfd1d8f2@gmail.com>
-Date: Mon, 2 Sep 2019 19:41:00 -0700
+Message-ID: <b1225829-5a75-9ed0-1db3-8f8e7df74df2@gmail.com>
+Date: Mon, 2 Sep 2019 19:41:49 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190901063954.GB22307@localhost>
+In-Reply-To: <20190901063232.GA22307@localhost>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior 04/23] network-manager-applet: Remove obsolete dbus-glib and libnm-glib dependencies
+Subject: Re: [warrior 14/23] libopus: Limit forcing ARM mode ISA to v5 only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,49 +110,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 02:41:00 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 02:41:50 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 8/31/19 11:39 PM, Adrian Bunk wrote:
-> On Sat, Aug 31, 2019 at 02:31:25PM -0700, Armin Kuster wrote:
->> From: Adrian Bunk <bunk@stusta.de>
+On 8/31/19 11:32 PM, Adrian Bunk wrote:
+> On Sat, Aug 31, 2019 at 02:31:35PM -0700, Armin Kuster wrote:
+>> From: Khem Raj <raj.khem@gmail.com>
 >>
->> network-manager-applet stopped using dbus-glib 3 years ago.
+>> This lets newer armv7+ still use thumb2 ISA
 >>
->> Building of the obsolete libnm-gtk is disabled by default in 1.8.20.
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+>> index fb9bdc7..1512a1d 100644
+>> --- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+>> +++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+>> @@ -50,6 +50,6 @@ python () {
+>>  #| {standard input}:761: Error: selected processor does not support Thumb mode `smull fp,r2,r3,r9'
+>>  #| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
+>>  #| make[2]: *** [celt/celt.lo] Error 1
+>> -ARM_INSTRUCTION_SET = "arm"
+>> +ARM_INSTRUCTION_SET_armv5 = "arm"
 >> ...
-> This commit is not really appropriate for stable branches.
-
-thanks for the feedback.
-
-removed from list.
+> This is an optimization, not something that should go into stable.
+>
+> It also looks buggy, as if it would break the build for armv4t
+> and some armv6.
+removed from list
 
 -armin
->
->> --- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
->> +++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
->> @@ -2,7 +2,7 @@ SUMMARY = "GTK+ applet for NetworkManager"
->>  LICENSE = "GPLv2"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->>  
->> -DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
->> +DEPENDS = "gtk+3 libnotify libsecret networkmanager \
->> ...
-> That's a cleanup change removing an unused build dependency with
-> no (intentional) changes to the built binaries.
->
->> --- a/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
->> +++ /dev/null
->> @@ -1,3 +0,0 @@
->> -# networkmanager-applet requires glib support
->> -PACKAGECONFIG_append = " glib"
->> ...
-> The bbappend might not be nice, but removing it would be a behaviour 
-> change in a stable branch.
 >
 > cu
 > Adrian
