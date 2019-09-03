@@ -1,50 +1,48 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 81FFE7CED3
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 36B727F2F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 02:41:49 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id w10so8266703pgj.7
+	Tue,  3 Sep 2019 02:48:47 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id gn20so7221208plb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 19:41:51 -0700 (PDT)
+	Mon, 02 Sep 2019 19:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=0Cg/Wdq5Zf7aEzMfJ5QTd6vzQaPMLy+uS0ZagtiWwCk=;
-	b=t0s4U9RVJ3Bt8amAnXNR5M/LPxlj7DHw/ADpVs70WBRgi9w4ZTSR6H3XcSaVZkQ30g
-	Z8fp30GUhvZ2Fq594wZWvG/JNA4DkWmxQww06UaChvtXxHXzSiKC8g85CX4vbi5J2y2G
-	Yz6LtF7zVZ4ap8cWvqZJpa5GZUk5G7gxzbvRr4jOn/y63esmhbTdv4ACAn1snzU8fJBz
-	usDtmRVJgOG/NaCxTnBEv571ElEhx6lnwkZkOGszI9EGkK+H5DLv4V03h6Dj/I5xGTWe
-	9xr5a28WNmU2Hdk/Zr/gKA+s0OPPyVdiqNBxrquO5q2caEhDyx8EPjMPaQNA4Irmo2v9
-	Q1Bg==
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=95NrfUC8HSDLxOoVs3UpcLd0FBcl544N6/6K/jW7WAk=;
+	b=sUyOazKD7jfL4DtiEArqFSR3jtYVcsSL/vIcXzYb0avPmu3Nsk6z/ohRZUb359JIy9
+	uruqUfIHIl8udjWwlnaZ5sulY9817IWrjIOeFuTXjC6EmDNa96Zg4zr1jzMqlWn/ATOe
+	g8CipeeOTqrNfqK2Ji0DwgNHVXoRU3odrUE3/sNtAEKGtaurGv25mcRMG0OOklCclk7L
+	3pZlitWEorTcAOSslqC7GbNqqwt8LPNtagb2H5/Cm1q7OBK9Xt4gm3SEdgiK7fa98yWd
+	fgN7aVHm7VSVJg2pSrLq8YJ71p/r47dAdkHiD+LJXSfxP/8JDzxumJp9Sl8mK3eFM2ym
+	9PBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=0Cg/Wdq5Zf7aEzMfJ5QTd6vzQaPMLy+uS0ZagtiWwCk=;
-	b=q2Yo/YXN5U24KqbyH3Cn4vT7dvmPzbxjScNeM1tNkrEus2rjHRjdHKURYZdwkNYKMa
-	m6Pg5NK+XXefU/HifijUz55Zc4BGRy8ow/ijqa2uDBDUNBpnF39kb9t9LAcq5m4kOZUD
-	5xLG0qdyyLpj+8XL2P7GcILAzcpEwk2qQboDQFOVx7XH0Bod+4pwKEOLV3qHmkX+Bf/p
-	h61BaL19uCgGGCG2220ddZG0B6QtTD9qMcYa0R1rjvdraPEd8zqYCIYxQKu4RPamDawZ
-	fOwSB29CdstV7YC8xrDoV/w/vATcU+T4DmtCSFqqWYZ6/nyF/LaBUU39Oac7glqmRh72
-	b1Nw==
-X-Gm-Message-State: APjAAAUeXBYbOGFTOgGpSjiKaPPcWfmEeIC8ljndKdPlj2u4TiCjDmMR
-	3SSmfyqdGue9kxz00QNDgD/jM9p5
-X-Google-Smtp-Source: APXvYqzk+vhbrj/lK8WLIwx0ygm728NFwC3hUJUbyBGOZqujEr+O86qEmvOFNb6hNaCS/v+dcpmj8w==
-X-Received: by 2002:aa7:9085:: with SMTP id i5mr10256971pfa.136.1567478510737; 
-	Mon, 02 Sep 2019 19:41:50 -0700 (PDT)
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=95NrfUC8HSDLxOoVs3UpcLd0FBcl544N6/6K/jW7WAk=;
+	b=pawoGd2W/LR6rVi4zoESQpldVwwopu5uOcn+LLETB2ekX8IHelwou/XjB32XH5Y7Fg
+	6d5W81Gx7/WZ1aOg5wjmkqa8LZeZUlkjrOXmaLoE1Uw4zrlYgqe0jeO80LbLg1LQiIE/
+	bP2cjsX4ZKjLLNBIH3UsbWNlvSzZhTXtkruU5aVF28b9zKDregnxyNRQqstAW47IdF36
+	p9KdsKXGhhGCfhxp+rCE2+6PSjtJoAzn4DnZg+uS5El/CRvR0bbhsGEcOrIkJAYfLRHk
+	yWzenKLRrsALe24KRx2EETlvNcON1YkLuwtvWxvCPd62HIes5Uv9kPFA7UXOMIJYyaYf
+	np5g==
+X-Gm-Message-State: APjAAAXssxCQX8Nv9JkssuVflCqhapjXZ44NuND3rv6KFQ+ToqN36DZY
+	6uDIqJpGhd+TMovtpQe/b5RNqX/6
+X-Google-Smtp-Source: APXvYqxJe3qafOKqM24lBXK4ueFp8OtQr4pBEd/mfnZRmqWjBC/yBKikKp/kmXyDiWY8a2767DXuQw==
+X-Received: by 2002:a17:902:e592:: with SMTP id
+	cl18mr32573896plb.291.1567478928081; 
+	Mon, 02 Sep 2019 19:48:48 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
 	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
 	by smtp.gmail.com with ESMTPSA id
-	u1sm13572083pgi.28.2019.09.02.19.41.49
+	ce20sm15274729pjb.16.2019.09.02.19.48.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Sep 2019 19:41:50 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>, Khem Raj <raj.khem@gmail.com>
-References: <cover.1567286967.git.akuster808@gmail.com>
-	<6404de28dbc2189edeae0045bd619b91de54198d.1567286967.git.akuster808@gmail.com>
-	<20190901063232.GA22307@localhost>
+	Mon, 02 Sep 2019 19:48:47 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -90,14 +88,12 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <b1225829-5a75-9ed0-1db3-8f8e7df74df2@gmail.com>
-Date: Mon, 2 Sep 2019 19:41:49 -0700
+Message-ID: <fe511106-68be-88ad-8cfd-572a1858f440@gmail.com>
+Date: Mon, 2 Sep 2019 19:48:46 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190901063232.GA22307@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior 14/23] libopus: Limit forcing ARM mode ISA to v5 only
+Subject: pull request for warrior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,46 +106,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 02:41:50 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 02:48:47 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
+he following changes since commit 222cafdcd97549f67c98833721b4f8f33607555e:
 
+  wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03 (2019-07-13 12:43:43
+-0700)
 
-On 8/31/19 11:32 PM, Adrian Bunk wrote:
-> On Sat, Aug 31, 2019 at 02:31:35PM -0700, Armin Kuster wrote:
->> From: Khem Raj <raj.khem@gmail.com>
->>
->> This lets newer armv7+ still use thumb2 ISA
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
->> index fb9bdc7..1512a1d 100644
->> --- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
->> +++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
->> @@ -50,6 +50,6 @@ python () {
->>  #| {standard input}:761: Error: selected processor does not support Thumb mode `smull fp,r2,r3,r9'
->>  #| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
->>  #| make[2]: *** [celt/celt.lo] Error 1
->> -ARM_INSTRUCTION_SET = "arm"
->> +ARM_INSTRUCTION_SET_armv5 = "arm"
->> ...
-> This is an optimization, not something that should go into stable.
->
-> It also looks buggy, as if it would break the build for armv4t
-> and some armv6.
-removed from list
+are available in the git repository at:
 
--armin
->
-> cu
-> Adrian
->
+  https://git.openembedded.org/meta-openembedded
+0afee3eacfd18a9962013830028f9e54b4973657
+
+for you to fetch changes up to 0afee3eacfd18a9962013830028f9e54b4973657:
+
+  apache2: upgrade 2.4.39 -> 2.4.41 (2019-09-02 19:39:53 -0700)
+
+----------------------------------------------------------------
+Adrian Bunk (5):
+      zeromq: Upgrade 4.3.1 -> 4.3.2
+      gnome-desktop3: Fix REQUIRED_DISTRO_FEATURES
+      wireshark: Use an upstream URL that stays valid longer
+      libgit2: Upgrade 0.27.8 -> 0.27.9
+      vlc: notify switched to GTK+3 some time ago
+
+Carlos Rafael Giani (1):
+      openh264: Fix armv7ve build
+
+Changqing Li (3):
+      volume-key: fix "Nothing RPROVIDES" when multilib enabled
+      isomd5sum: fix "Nothing RPROVIDES" when multilib enabled
+      satyr: fix "Nothing RPROVIDES" when multilib enabled
+
+Fabian Klemp (1):
+      openvpn: respect pid file in init.d service start
+
+Kai Kang (1):
+      net-snmp: update SRC_URI
+
+Luca Ceresoli (2):
+      fuse-exfat: moved to github
+      exfat-utils: moved to github
+
+Martin Jansa (5):
+      redis: backport a fix for stack trace generation on aarch64
+      ntop: fix missing return from non-void function
+      freeradius: add runtime dependency on perl
+      scsirastools: add runtime dependency on bash
+      scsirastools: add runtime dependency on bash II
+
+Mingli Yu (1):
+      mariadb: Upgrade to 10.3.16
+
+Yi Zhao (2):
+      fuse: upgrade 2.9.8 -> 2.9.9
+      apache2: upgrade 2.4.39 -> 2.4.41
+
+ .../fuse-exfat/fuse-exfat_1.2.3.bb                 |  6 +--
+ .../fuse/{fuse_2.9.8.bb => fuse_2.9.9.bb}          |  4 +-
+ .../recipes-utils/exfat-utils/exfat-utils_1.2.3.bb |  2 +-
+ .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  2 +-
+ .../recipes-multimedia/openh264/openh264_1.7.0.bb  |  1 +
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  2 +-
+ .../freeradius/freeradius_3.0.17.bb                |  2 +-
+ .../recipes-protocols/net-snmp/net-snmp_5.8.bb     |  6 +--
+ ...fix-missing-return-from-non-void-function.patch | 19 +++++++++
+ meta-networking/recipes-support/ntop/ntop_5.0.1.bb |  1 +
+ .../recipes-support/openvpn/openvpn/openvpn        | 12 +++++-
+ .../recipes-support/wireshark/wireshark_3.0.1.bb   |  2 +-
+ .../zeromq/{zeromq_4.3.1.bb => zeromq_4.3.2.bb}    |  4 +-
+ ...native_10.3.15.bb => mariadb-native_10.3.16.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc              |  8 ++--
+ .../{mariadb_10.3.15.bb => mariadb_10.3.16.bb}     |  0
+ .../recipes-extended/isomd5sum/isomd5sum_1.2.3.bb  |  8 ++--
+ .../Fixed-stack-trace-generation-on-aarch64.patch  | 45
+++++++++++++++++++++++
+ meta-oe/recipes-extended/redis/redis_4.0.14.bb     |  1 +
+ .../scsirastools/scsirastools_1.6.6.bb             |  4 +-
+ .../volume_key/volume-key_0.3.12.bb                |  7 ++--
+ .../{libgit2_0.27.8.bb => libgit2_0.27.9.bb}       |  3 +-
+ meta-oe/recipes-support/satyr/satyr_0.27.bb        |  4 +-
+ .../{apache2_2.4.39.bb => apache2_2.4.41.bb}       |  4 +-
+ 24 files changed, 110 insertions(+), 37 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse_2.9.8.bb =>
+fuse_2.9.9.bb} (94%)
+ create mode 100644
+meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
+ rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.3.1.bb =>
+zeromq_4.3.2.bb} (85%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.15.bb =>
+mariadb-native_10.3.16.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.15.bb =>
+mariadb_10.3.16.bb} (100%)
+ create mode 100644
+meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+ rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb =>
+libgit2_0.27.9.bb} (90%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb =>
+apache2_2.4.41.bb} (98%)
 
 
