@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
-	[209.85.214.180])
-	by mail.openembedded.org (Postfix) with ESMTP id DA4DF7F2E2
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 74F977F2E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 23:01:30 +0000 (UTC)
-Received: by mail-pl1-f180.google.com with SMTP id m9so8618844pls.8
+	Tue,  3 Sep 2019 23:01:31 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id n190so10059795pgn.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 03 Sep 2019 16:01:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=FBQueQAi2ep2EZSH6Wzwj/Mp6TJamEhu3LBDCHIUCT8=;
-	b=sH5lDqo7Lr9tKjHSuZ61f/kNf/1Qtz/MfxJFvD5h3W5ixK8dWFaQru5DUBxAPxNMhD
-	byL+VUcsuMPzxSwYhpgGGvxh7e4i1eYfa/Qoz6SJtZyHVusk6gkkd/K9SR1785ODkcq/
-	tke0KKyEFIyXChsYH8rDhAbm9uGn7YcnR8DKcqsTJYAGr3CwDGbFUgk5Ul/I7ok+GzDW
-	VvvoI/EKP+hayboFQcZz2BreGo2PM58vbKcZr6uZ7tI8Yp4hj9K+NKMhBVIUTII8tXIH
-	lLfI41xxnw9WGLjT6rW4b0Rgaf/Nhn21RX612/S1Ny+TqyqNy6j6blBrn32u+ACz6dYa
-	uVSQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=a7E5rvQmq2Afbu1OBtfnBIG3mezIvst1YizrMJQhPcY=;
+	b=eu/OOZYNugd9B9zeEiP8QmZTrYO2TI3aM0EnaTDbZFK1KHnxQ5yLGzDQ6+M0lTfOd/
+	h+gBnMGvQud6sw5gU9rZasxktU0aViXIDMi0/KqZAo1zaBT/JU/eEcsuH23uJMVRWNIg
+	OKqd4AwTg6MGkQtIIF9C2CB4bWs9ZBOTcKZ8/4gP2ICZL8wXQB8fWvKRG6uzp2J8uN/c
+	DdPiF+GOX+GDQICgEffVkr3tJkW5oOad3XsS7KGAfmQWLhKM1pZK4WrM5pF2ZH6VojpZ
+	HOJl+hYjVMqUDytnC2trrXfwcKKgo9PwWNYri81ZqGCwXEJRjW3COV7SRfbzoUu1HRpW
+	QJkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=FBQueQAi2ep2EZSH6Wzwj/Mp6TJamEhu3LBDCHIUCT8=;
-	b=kuvFmmceArKxg2TzwDQwV8aSUP96WQasMLSUscUaIbigsFDsptSqN8fPY6VlRgNipW
-	8tTLHWZu77q+xr2Cg55eNWa2gSoI658G2Qjzz2290B491ELMYWbdScQSzMrfxMlzXGh2
-	AZ0smh5TFcRpXxBxW0x3EDfbsxJEp06NSyGPMFMrUc6U/k8hd3lGC+ZoyaJH/6jcJc5V
-	kvXa4xTU6PUgJi125nJ1bp+SDQh8+CsfQ/+z7CFd3DkoYaQIEIC/R4aqHeqNF/Sl6/Mg
-	wHIa4nxvpq9u1eI5aKWHmRIDA2OA2bv0yyBogCZbeo+fyF555fjktA/CIRRmtG0J3aTJ
-	XNYw==
-X-Gm-Message-State: APjAAAWgdx9O2gWmh7O+VllQ1WRuDCRAcebE+2RiJGAGM4vbFSwgfG2Q
-	tqCIGYSlux7n6Ji211hsNKhucLxOX2U=
-X-Google-Smtp-Source: APXvYqzAsjqOb2gl6qglz41N6OwFQjN6rrkUn317Aa99+Zmfj2unV17U0SNSF2TRCtrBa1DatAP+HQ==
-X-Received: by 2002:a17:902:b604:: with SMTP id
-	b4mr5314953pls.94.1567551691439; 
-	Tue, 03 Sep 2019 16:01:31 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=a7E5rvQmq2Afbu1OBtfnBIG3mezIvst1YizrMJQhPcY=;
+	b=DUIanqPiaIFNe0qlLuDBIH8gA5oWeEBPpSDcBmEwo1oQofWzG08KQetNxuRAOFHkmd
+	dax3Khxplg6GpvNk1FEwtaBtB/QAHOFOOEdr7//QIPIaVzngdZp0QA5TthQeTNQ/bVas
+	V5Vyu/zlItCncVH4gZZ+01QiKjwolk/sylivqEHox2YtYfU4a6+g/8+x5aMdGuD0XwZL
+	WZDWJpMKbYvI0x4kh3z2tJbq6XZRiJAO87PnqlReopBYO/JDaobtkVltbXB/+GbTrFel
+	oZL7FE9Eg9NT1zw7l0bKIpnS39wcCHdRV1W+lrj+IpSrG3ms2kO8kgOJdSMloe31TRhB
+	rzMg==
+X-Gm-Message-State: APjAAAUO2MhRVwxE7mr393hIhQ376kd/x+BtVVYVh5qjtPr24vuenRUe
+	Pg/2gbtlHzznLqURT4CtWfki8T2cHh8=
+X-Google-Smtp-Source: APXvYqzTk5hAM6bowbwVFhf5SdApUAgoCO07EfvsCZT8QqyfiQQYIOCVWnkCkQbG7g5mRrso/JegkQ==
+X-Received: by 2002:a17:90a:c70e:: with SMTP id
+	o14mr1832472pjt.56.1567551692118; 
+	Tue, 03 Sep 2019 16:01:32 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	z25sm19314164pfa.91.2019.09.03.16.01.30
+	z25sm19314164pfa.91.2019.09.03.16.01.31
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 03 Sep 2019 16:01:30 -0700 (PDT)
+	Tue, 03 Sep 2019 16:01:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2019 16:01:22 -0700
-Message-Id: <20190903230123.37609-1-raj.khem@gmail.com>
+Date: Tue,  3 Sep 2019 16:01:23 -0700
+Message-Id: <20190903230123.37609-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20190903230123.37609-1-raj.khem@gmail.com>
+References: <20190903230123.37609-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] iscsi-initiator-utils: Inherit pkgconfig and override PKG_CONFIG
+Subject: [meta-initramfs][PATCH 2/2] klibc: Fix build with 5.2+ kernel headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,42 +63,67 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 03 Sep 2019 23:01:31 -0000
 Content-Transfer-Encoding: 8bit
 
-PKG_CONFIG is hardcoded to /usr/bin/pkg-config which is not cross
-compile safe and ends up with build errors especially on hosts where
-pkgconf is used it ends up with errors like
-
-/usr/bin/pkg-config: line 11: exec: pkgconf: not found
-/usr/bin/pkg-config: line 11: exec: pkgconf: not found
-
-Override it to use own native pkg-config which can deal with sysroot
-correctly
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../iscsi-initiator-utils/iscsi-initiator-utils_2.0.877.bb     | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...01-Fix-missing-include-in-sys-mman.h.patch | 36 +++++++++++++++++++
+ .../recipes-devtools/klibc/klibc.inc          |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/files/0001-Fix-missing-include-in-sys-mman.h.patch
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.877.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.877.bb
-index 1ba6ef065c..3cef70f5e0 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.877.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.877.bb
-@@ -29,7 +29,7 @@ B = "${WORKDIR}/build"
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/0001-Fix-missing-include-in-sys-mman.h.patch b/meta-initramfs/recipes-devtools/klibc/files/0001-Fix-missing-include-in-sys-mman.h.patch
+new file mode 100644
+index 0000000000..4bedef8052
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/klibc/files/0001-Fix-missing-include-in-sys-mman.h.patch
+@@ -0,0 +1,36 @@
++From 36360b16833400de7818151be5588b16ac4fd5bc Mon Sep 17 00:00:00 2001
++From: Barret Rhoden <brho@google.com>
++Date: Thu, 14 Mar 2019 17:30:38 -0400
++Subject: [PATCH] Fix missing include in sys/mman.h
++
++Linux commit 746c9398f5ac ("arch: move common mmap flags to
++linux/mman.h") moved a few mmap flags, particularly MAP_PRIVATE, from
++asm/mman.h to linux/mman.h.  This broke klibc's build, which uses
++MAP_PRIVATE.
++
++linux/mman.h includes asm/mman.h, so this commit merely includes
++linux/mman.h instead of asm/mman.h.
++
++Signed-off-by: Barret Rhoden <brho@google.com>
++Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
++---
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/klibc/klibc.git/commit/?id=d4853d030639cf3542ae39129c18b654d8d4f020]
++ usr/include/sys/mman.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/usr/include/sys/mman.h b/usr/include/sys/mman.h
++index 56f0b65c..3fd626e7 100644
++--- a/usr/include/sys/mman.h
+++++ b/usr/include/sys/mman.h
++@@ -7,7 +7,7 @@
++ 
++ #include <klibc/extern.h>
++ #include <sys/types.h>
++-#include <asm/mman.h>
+++#include <linux/mman.h>
++ 
++ #define MAP_FAILED ((void *)-1)
++ 
++-- 
++2.23.0
++
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 86aae33407..26689f87e7 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -23,6 +23,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
+            file://0001-klibc-add-getrandom-syscall.patch \
+            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
+            file://0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch \
++           file://0001-Fix-missing-include-in-sys-mman.h.patch \
+            "
  
- PV .= "+git${SRCPV}"
- 
--inherit update-rc.d systemd autotools
-+inherit update-rc.d systemd autotools pkgconfig
- 
- EXTRA_OECONF = " \
-     --target=${TARGET_SYS} \
-@@ -42,6 +42,7 @@ EXTRA_OEMAKE = ' \
-     BASE="${prefix}" \
-     MANDIR="${mandir}" \
-     OPTFLAGS="-DNO_SYSTEMD ${CFLAGS}" \
-+    PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
-     NO_SYSTEMD=1 \
- '
- 
+ ARMPATCHES ?= ""
 -- 
 2.23.0
 
