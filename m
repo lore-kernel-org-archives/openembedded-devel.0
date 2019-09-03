@@ -1,24 +1,104 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E8947D9D5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
+	[209.85.214.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 364127CED3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 01:17:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x831Gsux002714
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  3 Sep 2019 02:40:34 +0000 (UTC)
+Received: by mail-pl1-f173.google.com with SMTP id bd8so895054plb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Sep 2019 18:17:04 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Mon, 2 Sep 2019 18:16:43 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 3 Sep 2019 09:16:42 +0800
-Message-ID: <1567473402-404175-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 02 Sep 2019 19:40:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=otYwEKXRBeccKSimI+FVS59LPb7dW4CDm/Oal5AsbjY=;
+	b=L11QUxXKAtC+7NUrCIRwTSnEvjxsuUEy5sbQf7BaMMuXfCG4xomkAw7sMzVIdK4ryq
+	qicQmo41RfoixLZlg3v40pqxaaxBJ9d9x1WaEC7yrN82kpZFamzChu9e6lzBXDniO4en
+	TP08cs7a+66d6PGf0LBwD3gbelDsuSYJI6zXLzmzDANEhz2wjcnbJ0jfal14O0iLKdc/
+	cVuVCAf8fdHkblkdFTxfcaSUURMeiMbsB7qgyJNyhNMWYRx3qYb+UwrEjHz9V6DEh9dP
+	HBqT3jBmmPhc78sN89GUA7BUA1NjvGj7Z4cyaDikdKA0ZZ3QDuolRYUPOT1+cSaMIeVG
+	NIYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language;
+	bh=otYwEKXRBeccKSimI+FVS59LPb7dW4CDm/Oal5AsbjY=;
+	b=K6QIra6kIGSLrEtytJ266AsN1HX364QAVBDynGIy3t7zBj/+8I7IiUr6v2GVdofvK/
+	PxbGrNrckrx46kYMCRLkOh2y26EIZiuaN2FJWKAzSBjxSJJWhQgoiloXdIVRak8mIQOa
+	GVsvVHBq5HnzHdTOyHcU/L92ZbGeGMWs+FhVgLrijxsfSPSUzg5ZMUYLLmi1XxEcV22p
+	WqJpG5TjLnZJJSddj0ABU+H83sbreZ4uov5VERqNok7ANWBBfowA1HgsJoOdc28Drf4K
+	0EzAVvgcNwqlMO6sbg21qHicOYbodkAXP+LKFk+lEzxWnQR0FD6inVBqcF0vtpCMYcZ3
+	OpBA==
+X-Gm-Message-State: APjAAAWzXHGPizuUpCaIvjEnXwoXihhN2Udnsrul9ff4e1ibm6esh4O3
+	j6WyT+58G/X+SnH6jY5wLyMBGyza
+X-Google-Smtp-Source: APXvYqyeC4i3MRDt7GvpZT2eJKLAXUenHnBIxrMyWLCmP9swTmkOj2NU3HSZt95eMNKlyYUzDjSFdw==
+X-Received: by 2002:a17:902:9a07:: with SMTP id
+	v7mr33433306plp.245.1567478435167; 
+	Mon, 02 Sep 2019 19:40:35 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
+	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
+	by smtp.gmail.com with ESMTPSA id
+	a186sm17511680pge.0.2019.09.02.19.40.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Sep 2019 19:40:34 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>
+References: <cover.1563719996.git.akuster808@gmail.com>
+	<CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
+	<CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <9ba822ab-0769-b4e2-ddbb-dac53dccd6a8@gmail.com>
+Date: Mon, 2 Sep 2019 19:40:33 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] freeradius: upgrade 3.0.17 -> 3.0.19
+In-Reply-To: <CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [warrior] 0/8] patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,433 +111,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 01:17:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 03 Sep 2019 02:40:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+merged.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- ...s-correct-version-number-of-libssl-defect.patch |  44 -----
- ...radius-configure.ac-add-option-for-libcap.patch |  24 +--
- ...ius-fix-issues-related-to-m4-include-path.patch | 186 ---------------------
- .../files/freeradius-libtool-detection.patch       |  21 +--
- .../{freeradius_3.0.17.bb => freeradius_3.0.19.bb} |  15 +-
- 5 files changed, 32 insertions(+), 258 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
- delete mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-issues-related-to-m4-include-path.patch
- rename meta-networking/recipes-connectivity/freeradius/{freeradius_3.0.17.bb => freeradius_3.0.19.bb} (95%)
-
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
-deleted file mode 100644
-index 9e1f5b2..0000000
---- a/meta-networking/recipes-connectivity/freeradius/files/0001-freeradius-correct-version-number-of-libssl-defect.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From fecf974b63f72eeb12d3b43522e948ca2bc704d4 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Thu, 11 Oct 2018 09:45:52 +0800
--Subject: [PATCH] freeradius: correct version number of libssl defect
--
--Upstream-Status: Backport [https://github.com/FreeRADIUS/freeradius-server
--                 /commit/ad039347beca4ded297813a1da6eabb61fcf2ddd]
--
--upstream have refactored this part code into
--src/lib/tls/base.c, and problem also have fixed
--by commit ad039347beca
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- src/main/tls.c | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/src/main/tls.c b/src/main/tls.c
--index acbfe79..d9c91f1 100644
----- a/src/main/tls.c
--+++ b/src/main/tls.c
--@@ -72,15 +72,15 @@ typedef struct libssl_defect {
-- static libssl_defect_t libssl_defects[] =
-- {
-- 	{
---		.low		= 0x01010101f,		/* 1.1.0a */
---		.high		= 0x01010101f,		/* 1.1.0a */
--+		.low		= 0x01010001f,		/* 1.1.0a */
--+		.high		= 0x01010001f,		/* 1.1.0a */
-- 		.id		= "CVE-2016-6309",
-- 		.name		= "OCSP status request extension",
-- 		.comment	= "For more information see https://www.openssl.org/news/secadv/20160926.txt"
-- 	},
-- 	{
---		.low		= 0x01010100f,		/* 1.1.0  */
---		.high		= 0x01010100f,		/* 1.1.0  */
--+		.low		= 0x010100000f,		/* 1.1.0  */
--+		.high		= 0x01010000f,		/* 1.1.0  */
-- 		.id		= "CVE-2016-6304",
-- 		.name		= "OCSP status request extension",
-- 		.comment	= "For more information see https://www.openssl.org/news/secadv/20160922.txt"
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-add-option-for-libcap.patch b/meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-add-option-for-libcap.patch
-index 71b7809..4719358 100644
---- a/meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-add-option-for-libcap.patch
-+++ b/meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-add-option-for-libcap.patch
-@@ -1,20 +1,21 @@
--From 74eed61dec8702c89f3e121d577ea9db25c961a4 Mon Sep 17 00:00:00 2001
--From: Jackie Huang <jackie.huang@windriver.com>
--Date: Mon, 11 Jan 2016 02:52:16 -0500
--Subject: [PATCH] configure.ac: add option for libcap
-+From 98a9eff357959d1113e33a615c2178751d5b2054 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Thu, 22 Aug 2019 10:50:21 +0800
-+Subject: [PATCH 2/2] configure.ac: add option for libcap
- 
- Upstream-Status: Pending
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-- configure.ac | 37 ++++++++++++++++++++++++++++---------
-- 1 file changed, 28 insertions(+), 9 deletions(-)
-+ configure.ac | 36 +++++++++++++++++++++++++++---------
-+ 1 file changed, 27 insertions(+), 9 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 066d3d7..6e4266b 100644
-+index 65db61e..6486aac 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -948,6 +948,23 @@ fi
-+@@ -977,6 +977,22 @@ fi
-  dnl Set by FR_SMART_CHECKLIB
-  LIBS="${old_LIBS}"
-  
-@@ -34,11 +35,10 @@ index 066d3d7..6e4266b 100644
- +  esac ]
- +)
- +
--+
-  dnl Check for cap
-  dnl extra argument: --with-cap-lib-dir=DIR
-  cap_lib_dir=
--@@ -981,15 +998,17 @@ AC_ARG_WITH(cap-include-dir,
-+@@ -1010,15 +1026,17 @@ AC_ARG_WITH(cap-include-dir,
-        ;;
-    esac])
-  
-@@ -64,7 +64,7 @@ index 066d3d7..6e4266b 100644
- +  fi
-  fi
-  
-- VL_LIB_READLINE
-+ dnl #
- -- 
--1.9.1
-+2.7.4
- 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-issues-related-to-m4-include-path.patch b/meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-issues-related-to-m4-include-path.patch
-deleted file mode 100644
-index 638d950..0000000
---- a/meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-issues-related-to-m4-include-path.patch
-+++ /dev/null
-@@ -1,186 +0,0 @@
--From 69cb6d4bb5dd56a48695c0581a7d853e427b0ea3 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Tue, 24 Jul 2018 14:54:41 +0800
--Subject: [PATCH] freeradius: Fixing issues related to m4 include path
--
--Upstream-Status: Submitted [1]
--
--[1]: https://github.com/FreeRADIUS/freeradius-server/pull/1428
--
--Submmited by: Jorge Pereira <jpereiran@gmail.com>
--
--Update to version 3.0.17
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- src/modules/rlm_example/config.h.in | 35 +++--------------------------------
-- src/modules/rlm_pam/config.h.in     |  3 +++
-- src/modules/rlm_perl/config.h.in    |  3 +++
-- src/modules/rlm_perl/configure.ac   |  2 +-
-- src/modules/rlm_radutmp/config.h.in |  3 +++
-- src/modules/rlm_ruby/configure.ac   |  8 ++++----
-- src/modules/rlm_smsotp/config.h.in  |  3 +++
-- src/modules/rlm_unix/config.h.in    |  3 +++
-- 8 files changed, 23 insertions(+), 37 deletions(-)
--
--diff --git a/src/modules/rlm_example/config.h.in b/src/modules/rlm_example/config.h.in
--index 2a81ef5..4dbb8f4 100644
----- a/src/modules/rlm_example/config.h.in
--+++ b/src/modules/rlm_example/config.h.in
--@@ -1,37 +1,5 @@
-- /* config.h.in.  Generated from configure.ac by autoheader.  */
-- 
---/* Define to 1 if you have the <inttypes.h> header file. */
---#undef HAVE_INTTYPES_H
---
---/* Define to 1 if you have the <memory.h> header file. */
---#undef HAVE_MEMORY_H
---
---/* Define to 1 if you have the `printf' function. */
---#undef HAVE_PRINTF
---
---/* Define to 1 if you have the <stdint.h> header file. */
---#undef HAVE_STDINT_H
---
---/* Define to 1 if you have the <stdio.h> header file. */
---#undef HAVE_STDIO_H
---
---/* Define to 1 if you have the <stdlib.h> header file. */
---#undef HAVE_STDLIB_H
---
---/* Define to 1 if you have the <strings.h> header file. */
---#undef HAVE_STRINGS_H
---
---/* Define to 1 if you have the <string.h> header file. */
---#undef HAVE_STRING_H
---
---/* Define to 1 if you have the <sys/stat.h> header file. */
---#undef HAVE_SYS_STAT_H
---
---/* Define to 1 if you have the <sys/types.h> header file. */
---#undef HAVE_SYS_TYPES_H
---
---/* Define to 1 if you have the <unistd.h> header file. */
---#undef HAVE_UNISTD_H
-- 
-- /* Define to the address where bug reports for this package should be sent. */
-- #undef PACKAGE_BUGREPORT
--@@ -45,6 +13,9 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
-- 
--diff --git a/src/modules/rlm_pam/config.h.in b/src/modules/rlm_pam/config.h.in
--index 32ef6ff..1ad20c5 100644
----- a/src/modules/rlm_pam/config.h.in
--+++ b/src/modules/rlm_pam/config.h.in
--@@ -45,6 +45,9 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
-- 
--diff --git a/src/modules/rlm_perl/config.h.in b/src/modules/rlm_perl/config.h.in
--index 989ed53..f80de9c 100644
----- a/src/modules/rlm_perl/config.h.in
--+++ b/src/modules/rlm_perl/config.h.in
--@@ -12,5 +12,8 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
--diff --git a/src/modules/rlm_perl/configure.ac b/src/modules/rlm_perl/configure.ac
--index 4b3ff42..69c79cb 100644
----- a/src/modules/rlm_perl/configure.ac
--+++ b/src/modules/rlm_perl/configure.ac
--@@ -3,7 +3,7 @@ AC_INIT(rlm_perl.c)
-- AC_REVISION($Revision$)
-- AC_DEFUN(modname,[rlm_perl])
-- 
---m4_include([ax_with_prog.m4])
--+m4_include([m4/ax_with_prog.m4])
-- 
-- if test x$with_[]modname != xno; then
-- 	AC_PROG_CC
--diff --git a/src/modules/rlm_radutmp/config.h.in b/src/modules/rlm_radutmp/config.h.in
--index 9a883cc..750b434 100644
----- a/src/modules/rlm_radutmp/config.h.in
--+++ b/src/modules/rlm_radutmp/config.h.in
--@@ -42,6 +42,9 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
-- 
--diff --git a/src/modules/rlm_ruby/configure.ac b/src/modules/rlm_ruby/configure.ac
--index 9306382..ae86a14 100644
----- a/src/modules/rlm_ruby/configure.ac
--+++ b/src/modules/rlm_ruby/configure.ac
--@@ -3,15 +3,15 @@ AC_INIT(rlm_ruby.c)
-- AC_REVISION($Revision: 1.9 $)
-- AC_DEFUN(modname,[rlm_ruby])
-- 
---m4_include([ax_with_prog.m4])
--+m4_include([m4/ax_with_prog.m4])
-- 
-- AC_DEFUN([AX_WITH_RUBY],[
--     AX_WITH_PROG([RUBY],[ruby],[not-found],[${PATH}:/usr/bin:/usr/local/bin])
-- ])
-- 
---m4_include([ax_compare_version.m4])
---m4_include([ax_prog_ruby_version.m4])
---m4_include([ax_ruby_devel.m4])
--+m4_include([m4/ax_compare_version.m4])
--+m4_include([m4/ax_prog_ruby_version.m4])
--+m4_include([m4/ax_ruby_devel.m4])
-- 
-- targetname=modname
-- mod_cflags=
--diff --git a/src/modules/rlm_smsotp/config.h.in b/src/modules/rlm_smsotp/config.h.in
--index 5feaf91..9e69f85 100644
----- a/src/modules/rlm_smsotp/config.h.in
--+++ b/src/modules/rlm_smsotp/config.h.in
--@@ -42,6 +42,9 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
-- 
--diff --git a/src/modules/rlm_unix/config.h.in b/src/modules/rlm_unix/config.h.in
--index dcb9aa2..16107b8 100644
----- a/src/modules/rlm_unix/config.h.in
--+++ b/src/modules/rlm_unix/config.h.in
--@@ -54,6 +54,9 @@
-- /* Define to the one symbol short name of this package. */
-- #undef PACKAGE_TARNAME
-- 
--+/* Define to the home page for this package. */
--+#undef PACKAGE_URL
--+
-- /* Define to the version of this package. */
-- #undef PACKAGE_VERSION
-- 
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-detection.patch b/meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-detection.patch
-index 4eb61ff..4265f9d 100644
---- a/meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-detection.patch
-+++ b/meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-detection.patch
-@@ -1,7 +1,7 @@
--From 56ef434e454bcc82c162a83d9bcb076d4fc72b7f Mon Sep 17 00:00:00 2001
--From: Jackie Huang <jackie.huang@windriver.com>
--Date: Thu, 9 Jan 2014 14:30:26 +0800
--Subject: [PATCH] Fix libtool detection
-+From bfe4d7ed72edc9d4ae1a0f0d2dd84367d6214886 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Thu, 22 Aug 2019 10:45:46 +0800
-+Subject: [PATCH 1/2] Fix libtool detection
- 
- Upstream-Status: pending
- 
-@@ -16,18 +16,19 @@ Also patch autogen.sh so it uses autoreconf, which handles libtoolize better.
- 
- Signed-off-by: Jesse Zhang <sen.zhang@windriver.com>
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-  autogen.sh   |  5 +----
-  configure.ac | 36 ++++++++++++++++++++++++++++++++++++
-  2 files changed, 37 insertions(+), 4 deletions(-)
- 
- diff --git a/autogen.sh b/autogen.sh
--index 3418673..e42c3d5 100755
-+index a1d08a6..959182b 100755
- --- a/autogen.sh
- +++ b/autogen.sh
--@@ -5,10 +5,7 @@ parentdir=`dirname $0`
-- cd $parentdir
-+@@ -6,10 +6,7 @@ cd $parentdir
-  parentdir=`pwd`
-+ m4include="-I$parentdir -I$parentdir/m4 -Im4"
-  
- -libtoolize -f -c
- -#aclocal
-@@ -38,10 +39,10 @@ index 3418673..e42c3d5 100755
-  mysubdirs="$mysubdirs `find src/modules/ -name configure -print | sed 's%/configure%%'`"
-  mysubdirs=`echo $mysubdirs`
- diff --git a/configure.ac b/configure.ac
--index e73e4ad..066d3d7 100644
-+index a7abf00..65db61e 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -205,6 +205,42 @@ dnl #  See if we have Git.
-+@@ -220,6 +220,42 @@ dnl #  See if we have Git.
-  dnl #
-  AC_CHECK_PROG(GIT, git, yes, no)
-  
-@@ -85,5 +86,5 @@ index e73e4ad..066d3d7 100644
-  dnl AC_ARG_WITH(disablemodulefoo,
-  dnl [  --without-rlm_foo         Disables module compilation.  Module list:]
- -- 
--1.8.3
-+2.7.4
- 
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-similarity index 95%
-rename from meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
-rename to meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-index e0b04c1..ded1a67 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-@@ -13,12 +13,11 @@ LICENSE = "GPLv2 & LGPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
- DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
- 
--SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.bz2 \
-+SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x; \
-     file://freeradius \
-     file://volatiles.58_radiusd \
-     file://freeradius-enble-user-in-conf.patch \
-     file://freeradius-configure.ac-allow-cross-compilation.patch \
--    file://freeradius-fix-issues-related-to-m4-include-path.patch \
-     file://freeradius-libtool-detection.patch \
-     file://freeradius-configure.ac-add-option-for-libcap.patch \
-     file://freeradius-avoid-searching-host-dirs.patch \
-@@ -29,14 +28,16 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
-     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-     file://radiusd.service \
-     file://radiusd-volatiles.conf \
--    file://0001-freeradius-correct-version-number-of-libssl-defect.patch \
- "
--SRC_URI[md5sum] = "1f4ad38f32101a7d50d818afa6f17339"
--SRC_URI[sha256sum] = "3f03404b6e4a4f410e1f15ea2ababfec7f8a7ae8a49836d8a0c137436d913b96"
-+
-+SRCREV = "ab4c767099f263a7cd4109bcdca80ee74210a769"
- 
- PARALLEL_MAKE = ""
- 
--S = "${WORKDIR}/freeradius-server-${PV}"
-+S = "${WORKDIR}/git"
-+
-+LDFLAGS_append_powerpc = " -latomic"
-+LDFLAGS_append_mipsarch = " -latomic"
- 
- EXTRA_OECONF = " --enable-strict-dependencies \
-         --with-docdir=${docdir}/freeradius-${PV} \
-@@ -59,6 +60,8 @@ EXTRA_OECONF = " --enable-strict-dependencies \
-         --without-rlm_sql_oracle \
-         --without-rlm_sql_sybase \
-         --without-rlm_sqlhpwippool \
-+        --without-rlm_securid \
-+        --without-rlm_unbound \
-         ac_cv_path_PERL=${bindir}/perl \
-         ax_cv_cc_builtin_choose_expr=no \
-         ax_cv_cc_builtin_types_compatible_p=no \
--- 
-2.7.4
+On 9/2/19 4:47 AM, Martin Jansa wrote:
+> This PR is still only in warrior-next, can this be merged to warrior
+> before the current PR gets merged to warrior-next (or warrior)?
+>
+> On Sun, Jul 21, 2019 at 4:48 PM Khem Raj <raj.khem@gmail.com
+> <mailto:raj.khem@gmail.com>> wrote:
+>
+>     On Sun, Jul 21, 2019 at 7:41 AM Armin Kuster <akuster808@gmail.com
+>     <mailto:akuster808@gmail.com>> wrote:
+>     >
+>     > Patch comments window closes on Wednesday.
+>     >
+>
+>     series looks fine to me
+>
+>     > The following changes since commit
+>     8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
+>     >
+>     >   turbostat: copy bits.h from kernel to turbostat (2019-06-16
+>     08:15:44 -0700)
+>     >
+>     > are available in the git repository at:
+>     >
+>     >   https://git.openembedded.org/meta-openembedded-contrib
+>     stable/warrior-nmut
+>     >   http://cgit.openembedded.org//log/?h=stable/warrior-nmut
+>     >
+>     > Adrian Bunk (2):
+>     >   ndctl: Remove the unnecessary dependency on virtual/kernel
+>     >   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
+>     >
+>     > Andreas Müller (2):
+>     >   gnome-desktop3: set correct meson gtk doc option
+>     >   evince: add patch to fix build with recent gobject-introspection
+>     >
+>     > Martin Jansa (4):
+>     >   ndctl: make MACHINE_ARCH and ignore from libblockdev
+>     >   oprofile: make MACHINE_ARCH
+>     >   oprofile: drop virtual/kernel dependency and switch back to
+>     >     TUNE_PKGARCH
+>     >   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and
+>     util-linux for
+>     >     phoronix-test-suite
+>     >
+>     >  ...ove-EvDocumentModel-get-type-function-dec.patch | 33
+>     ++++++++++++++++++++++
+>     >  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+>     <http://evince_3.28.2.bb>   | 12 ++++----
+>     >  .../gnome-desktop/gnome-desktop3_3.32.0.bb
+>     <http://gnome-desktop3_3.32.0.bb>         |  1 +
+>     >  ..._2019.03.01.bb <http://2019.03.01.bb> =>
+>     wireless-regdb_2019.06.03.bb
+>     <http://wireless-regdb_2019.06.03.bb>} |  4 +--
+>     >  meta-oe/conf/layer.conf                            |  3 ++
+>     >  meta-oe/recipes-core/ndctl/ndctl_v63.bb <http://ndctl_v63.bb> 
+>               |  2 +-
+>     >  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
+>     <http://oprofile_1.3.0.bb>  |  1 -
+>     >  7 files changed, 47 insertions(+), 9 deletions(-)
+>     >  create mode 100644
+>     meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
+>     >  rename
+>     meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb
+>     <http://wireless-regdb_2019.03.01.bb> =>
+>     wireless-regdb_2019.06.03.bb
+>     <http://wireless-regdb_2019.06.03.bb>} (91%)
+>     >
+>     > --
+>     > 2.7.4
+>     >
+>     > --
+>     > _______________________________________________
+>     > Openembedded-devel mailing list
+>     > Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     -- 
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
 
