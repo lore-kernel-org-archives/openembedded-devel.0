@@ -1,30 +1,25 @@
-Return-Path: <yuanc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 70346606D0
+Return-Path: <andrej.valek@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id E2BCD7F22D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 08:02:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,462,1559491200"; d="scan'208";a="74757934"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Sep 2019 16:02:19 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9FEE84CE14E4
+	Tue,  3 Sep 2019 08:06:33 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id x8386X0H005855
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 16:02:15 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.21) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 3 Sep 2019 16:02:19 +0800
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 3 Sep 2019 17:01:56 +0900
-Message-ID: <20190903080156.33424-1-yuanc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.17.2
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: 9FEE84CE14E4.A45A8
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] php: upgrade 7.3.8 -> 7.3.9
+	Tue, 3 Sep 2019 10:06:33 +0200
+Received: from dev.vm6.ccp.siemens.com (sk1pv77c.siemens.sk [163.242.57.59])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id x8386Xek028895;
+	Tue, 3 Sep 2019 10:06:33 +0200
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id AA15B98021E;
+	Tue,  3 Sep 2019 10:06:32 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Sep 2019 10:06:09 +0200
+Message-Id: <20190903080609.388-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] nodejs: 10.16.2 -> 10.16.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 08:02:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 03 Sep 2019 08:06:34 -0000
 
-Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+- update nodejs to active 10.x LTS release 10.16.3
+ - include fix multiple HTTP/2 vulnerabilities
+
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- meta-oe/recipes-devtools/php/{php_7.3.8.bb => php_7.3.9.bb} | 4 ++--
+ .../recipes-devtools/nodejs/{nodejs_10.16.2.bb => nodejs_10.16.3.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_7.3.8.bb => php_7.3.9.bb} (88%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.2.bb => nodejs_10.16.3.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.8.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/php/php_7.3.8.bb
-rename to meta-oe/recipes-devtools/php/php_7.3.9.bb
-index 072d53a09..4d656da0f 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.8.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-@@ -15,8 +15,8 @@ SRC_URI_append_class-target = " \
-                                 file://xfail_two_bug_tests.patch \
-                                 "
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+index d464e9d8a..30724d41a 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
+            file://0002-Using-native-torque.patch \
+            "
  
--SRC_URI[md5sum] = "4ffc06e803cd782a95483eb02213301e"
--SRC_URI[sha256sum] = "d566c630175d9fa84a98d3c9170ec033069e9e20c8d23dea49ae2a976b6c76f5"
-+SRC_URI[md5sum] = "bcc37749815009c9201e4c126e1ab8ee"
-+SRC_URI[sha256sum] = "a39c9709a8c9eb7ea8ac4933ef7a78b92f7e5735a405c8b8e42ee39541d963c4"
+-SRC_URI[md5sum] = "fa70b942c5e3379ce96219fe90f50c8f"
+-SRC_URI[sha256sum] = "6cbc17795e9259dce7a8f5fd5a2e46f9e6920fb48b7d9539c5b2faa5bb5db4d8"
++SRC_URI[md5sum] = "b41275a018e670947c1950b12f050a2f"
++SRC_URI[sha256sum] = "7bf1123d7415964775b8f81fe6ec6dd5c3c08abb42bb71dfe4409dbeeba26bbd"
  
- PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
-                         --with-pdo-mysql=mysqlnd \
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
-2.17.1
-
-
+2.11.0
 
 
