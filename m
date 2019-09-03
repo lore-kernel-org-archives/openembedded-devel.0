@@ -1,47 +1,53 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
-	[209.85.208.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 189D77F2A4
+Return-Path: <drew@moseleynet.net>
+Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
+	[209.85.161.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 996B77F2DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 21:11:17 +0000 (UTC)
-Received: by mail-lj1-f175.google.com with SMTP id u14so10932229ljj.11
+	Tue,  3 Sep 2019 21:38:20 +0000 (UTC)
+Received: by mail-yw1-f66.google.com with SMTP id i207so6463563ywc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Sep 2019 14:11:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=1ISVAFabIIOcFEgq5Qt+ih/btbqWiSTPwXL0hpMk1mA=;
-	b=Qm7VJ2yr/wMZZL6rZX9FUhuNtl1uMTdHAVWwOSJEd9XGs38HuQpfwlVyrl0zW6Glb+
-	Dcvo1oMDkI2dQXKmG0Cq9mWF7DOjHumurYscQEUEfwCwQH/o6oV6C96vPUERg9bL+c/k
-	6Kjkmx2aMEqd6RnJIJyDgQiNHxxBgKfz6cZSVbXO7Mk/1z5J2DEwidSMhNppI6l2gE3F
-	jDEE8j8fYZhfz3tVp9VXEMyTzbw7sxV/2bJo3zcmxGsRUq5sa5Xj498yKqwHKviearAD
-	NDHeqX7DTyUuosi8IWoeYNCoPot/19JLs5fhd6cQXOKInZTgZduLR+SZEaigZX6aHX9m
-	N9Pw==
+	Tue, 03 Sep 2019 14:38:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=moseleynet.net; s=google;
+	h=from:subject:to:references:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language;
+	bh=BnuaQk0QKAhCAzcBag13c0TUo7h2D57HIdP/OtFi1OQ=;
+	b=Fh1KtwJJIDbXflREj6S7HEAf2LgrD+MJIGZT6uhPKaFG8u4GmUeHFmu4CatmC5nHo8
+	bEQdaK2WfHOR1opRoV/Xy731H7/GVhox4LnXNhW5/kYa4nWjsmhmXT9lNJXG2QJ7MePc
+	6zVYPJUicL0SVDN+xt8sVECS1tSuSJJN30fF0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=1ISVAFabIIOcFEgq5Qt+ih/btbqWiSTPwXL0hpMk1mA=;
-	b=TDR1T/DuBnP+oH0miwIKBLUmVNKiwIgDOAYJxo2g66eXvv2gtsBBlQ83Ev6u3+qqbL
-	XwVIdudsW6X7dDG6+iSaQALQ5+yVm+5eM0WSpIOt/Lnc97DaMrcnBsZg9vvPq/m0Cehk
-	eor/dlpzTRvZMu9XdOjpBIgpuIYROx/AJVmIccqrQno3y3T6EbZ/FhK2lPlV+CGxDKnU
-	YTrVmdHxq2lQaBnqA/6cImkwJV501gr1EBwtL+5r/b2USZNGBQquSDjCfO3Ctqqcp0nm
-	4DODbLZDQ5LLNEsDFcpIBhuScs0/gwOLjwjwEnPRe3IH6UReZV7ByGwWFtZ5nAFYtznv
-	mjOw==
-X-Gm-Message-State: APjAAAX+Sq+c2LtG/WVk5e/+vJ43nFskDbVlOAGJ/OVxqVm4VJPnT8Q2
-	b6ecfcQuoP0NwvrrtIw1VJeYzYfO9zfdzT6xb58=
-X-Google-Smtp-Source: APXvYqyRqjgKNMBrtQzcv8sGj5jbuZK4JxnST9LrRPifaJhy6OlkKgyqNnX6I/zZZIColAPtdonOYCTNCgod8GEGiCQ=
-X-Received: by 2002:a2e:b0e2:: with SMTP id h2mr3252496ljl.79.1567545077505;
-	Tue, 03 Sep 2019 14:11:17 -0700 (PDT)
+	h=x-gm-message-state:from:subject:to:references:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=BnuaQk0QKAhCAzcBag13c0TUo7h2D57HIdP/OtFi1OQ=;
+	b=Bx3pMKmtwlSHU7uNFJAMdy+K2EU5yAdjfI0UIV/YSYkhXMNtmwVtvnNwruoVRhuUYH
+	ptYvKaqHYxKnd9jPd8nmLP99XgL9KCtOe5jEMcnw2RTcnjZ8i7+TfPASH9EDrUpAQofw
+	8FVBzmYkZof7ivL3140a0FTJDeoNY9W73AW75lY0Zfoxi13/BqKP6xGTYS+Ula/lyo0P
+	ho+IRATqVvve4PokGiC3PMzRcpu9VaqhMbe8XcDYSpcVe2e96P4egtr1+7bZFkq036iJ
+	LZoWuy+opfp0db+LIbEj+l6gvhlvNdEppraznSUT6OQagaYMVuI214uRapGmDZODICcy
+	azGg==
+X-Gm-Message-State: APjAAAWaa8+5vimPhuhzLm387gqaMl6+7V1qAxy+zyt3AB6rIpHwgbWm
+	MNb1RpsmG0WKwo8tMoCpcKqlgGYFhxx59A==
+X-Google-Smtp-Source: APXvYqzivqNrQ3mKIehEvid+x/kQUk2aU9CQconVDcupK75YAfNyMhTby/5s5HTC9mQe9SIE1yQ8CA==
+X-Received: by 2002:a81:8453:: with SMTP id u80mr21765092ywf.481.1567546700711;
+	Tue, 03 Sep 2019 14:38:20 -0700 (PDT)
+Received: from [192.168.7.37] (user-24-236-82-253.knology.net. [24.236.82.253])
+	by smtp.gmail.com with ESMTPSA id
+	x10sm3839166ywl.16.2019.09.03.14.38.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 03 Sep 2019 14:38:19 -0700 (PDT)
+From: Drew Moseley <drew@moseleynet.net>
+To: openembedded-devel@lists.openembedded.org
+References: <20190902005927.175922-1-kai.kang@windriver.com>
+	<9b4f23fb-70b3-0c75-d754-812e6e304d27@northern.tech>
+Message-ID: <39215aee-15b2-ba27-5645-3ce28f40ba31@moseleynet.net>
+Date: Tue, 3 Sep 2019 17:38:18 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <1567156014-79892-1-git-send-email-hongzhi.song@windriver.com>
-	<CAMKF1spP9hQt64stWn_mSGfE7tVg_wLhaADyp4VHqWLCe1GCog@mail.gmail.com>
-In-Reply-To: <CAMKF1spP9hQt64stWn_mSGfE7tVg_wLhaADyp4VHqWLCe1GCog@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Tue, 3 Sep 2019 17:11:06 -0400
-Message-ID: <CADkTA4MqB8Sx7vP4VPL3GzG8J1pOMKps9TkTzgvhXmGdKxjHQA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-realtime][PATCH] layer.conf: add openembedded-layer to LAYERDEPENDS
+In-Reply-To: <9b4f23fb-70b3-0c75-d754-812e6e304d27@northern.tech>
+Subject: Re: [meta-networking][Patch] Revert "networkmanager: Use ALTERNATIVES for resolv-conf handling."
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +60,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 21:11:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 03 Sep 2019 21:38:20 -0000
+X-Groupsio-MsgNum: 79486
+Content-Type: multipart/mixed; boundary="------------D46E5CB84502C5C022B06BD5"
+Content-Language: en-US
 
-Indeed.
+--------------D46E5CB84502C5C022B06BD5
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-If khem hadn't followed up, I wouldn't have seen this at all.
+On 9/3/19 11:42 AM, Drew Moseley wrote:
 
-I have grabbed the patch and merged it, but in the future, the
-linux-yocto list is the one we are (re)using for the realtime stuff.
-
-Bruce
-
-On Tue, Sep 3, 2019 at 11:31 AM Khem Raj <raj.khem@gmail.com> wrote:
+> On 9/1/19 8:59 PM, kai.kang@windriver.com wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> This reverts commit 3982dc5b1994ffcc52336b02fbd2c44db164dd82.
+>>
+>> With this commit it creates link file /etc/resolv.conf via
+>> update-alternatives but the target doesn't exist.
+>>
+>> On target:
+>>
+>> root@qemux86-64:~# ls -l /etc/resolv*
+>> lrwxrwxrwx    1 root     root            33 Aug 27 09:17 /etc/resolv-c=
+onf.NetworkManager -> ../run/NetworkManager/resolv.conf
+>> lrwxrwxrwx    1 root     root            34 Aug 23 03:08 /etc/resolv-c=
+onf.systemd -> ../run/systemd/resolve/resolv.conf
+>> lrwxrwxrwx    1 root     root            31 Aug 27 09:22 /etc/resolv.c=
+onf -> /etc/resolv-conf.NetworkManager
+>>
+>> root@qemux86-64:~# ls -l /run/NetworkManager/resolv.conf
+>> ls: /run/NetworkManager/resolv.conf: No such file or directory
+>>
+>> root@qemux86-64:~# cat /etc/resolv.conf
+>> cat: can't open '/etc/resolv.conf': No such file or directory
+>>
+> (Apologies for the delay in getting back to this)
 >
-> please send this to linux-yocto@yoctoproject.org as per
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-realtime/tree/MAINTAINERS
-> always good to check README for such information.
+> Interestingly, in rocko, the /var/run/NetworkManager/resolv.conf file i=
+s
+> automatically generated but in thud it does not seem to be.=C2=A0 Witho=
+ut
+> this patch, we are relying on /var/run/systemd/resolv.conf existing eve=
+n
+> when not using systemd for name resolution. I wonder if the right
+> solution is to figure out why the /var/run/NetworkManager/resolv.conf
+> file is no longer created.
 >
-> On Fri, Aug 30, 2019 at 2:08 AM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
-> >
-> > latencytop.bb depends on gtk+ which exists at openembedded-layer.
-> >
-> > So we should add openembedded-layer to LAYERDEPENDS, otherwise
-> > "yocto-check-layer-wrapper meta-realtime --dependency 'cat mylist'"
-> > will fail with "NO PROVIDE gtk+ ..."
-> >
-> > Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> > ---
-> >  conf/layer.conf | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/conf/layer.conf b/conf/layer.conf
-> > index cb24358..72ae7ad 100644
-> > --- a/conf/layer.conf
-> > +++ b/conf/layer.conf
-> > @@ -16,4 +16,4 @@ BBFILE_PRIORITY_realtime = "5"
-> >  # cause compatibility issues with other layers
-> >  LAYERVERSION_realtime = "1"
-> >  LAYERSERIES_COMPAT_realtime = "thud warrior"
-> > -LAYERDEPENDS_realtime = "core"
-> > +LAYERDEPENDS_realtime = "core openembedded-layer"
-> > --
-> > 2.8.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I dug into this a bit more and I was incorrect about it being different
+on different branches. It actually seems to be different when using qemu
+vs hardware (in my case an RpI3).=C2=A0 Basically runqemu sets up
+kernel-level IP autoconfiguration so NetworkManager has nothing to
+configure and thus the /var/run/NetworkManager/resolv.conf file is not
+created.=C2=A0 But on RpI, it is.
+
+In the systemd recipe, there are tmpfiles.d entries setup to ensure that
+/var/run/systemd/resolve/resolv.conf exists. Should we make sure
+NetworkManager and connman do something similar? I verified that systemd
+will properly populate the file even when using kernel level
+autoconfiguration but initial experiments indicate that NetworkManager
+does not.
+
+Drew
 
 
+--------------D46E5CB84502C5C022B06BD5
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
 
--- 
-- Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end
-- "Use the force Harry" - Gandalf, Star Trek II
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+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
+7+85SM3M7t6pXOHL6evaYd/Qc/p6WKQdsKM=3D
+=3DwaDE
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------D46E5CB84502C5C022B06BD5--
