@@ -1,50 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
-	[209.85.214.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 364127CED3
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C7AB67F2D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 02:40:34 +0000 (UTC)
-Received: by mail-pl1-f173.google.com with SMTP id bd8so895054plb.6
+	Tue,  3 Sep 2019 02:41:00 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id l21so8269961pgm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 19:40:35 -0700 (PDT)
+	Mon, 02 Sep 2019 19:41:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=otYwEKXRBeccKSimI+FVS59LPb7dW4CDm/Oal5AsbjY=;
-	b=L11QUxXKAtC+7NUrCIRwTSnEvjxsuUEy5sbQf7BaMMuXfCG4xomkAw7sMzVIdK4ryq
-	qicQmo41RfoixLZlg3v40pqxaaxBJ9d9x1WaEC7yrN82kpZFamzChu9e6lzBXDniO4en
-	TP08cs7a+66d6PGf0LBwD3gbelDsuSYJI6zXLzmzDANEhz2wjcnbJ0jfal14O0iLKdc/
-	cVuVCAf8fdHkblkdFTxfcaSUURMeiMbsB7qgyJNyhNMWYRx3qYb+UwrEjHz9V6DEh9dP
-	HBqT3jBmmPhc78sN89GUA7BUA1NjvGj7Z4cyaDikdKA0ZZ3QDuolRYUPOT1+cSaMIeVG
-	NIYQ==
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=/Zsv6cH1pHeggUaTt2496S7DtGpTUk+01aVHXPlLY18=;
+	b=qUU9kP63j6aoMyk3WIpomWTFPtAgM6Sehx2Gb+K7uuHcI7EVz5+0Y77vfWhc+KZn/J
+	BrgmDaVqgFNQfMc8qEpC92H2h3yaj0iwbwIbEf3GAwyiA8eRNlUF/4OzhEXLMqmnTZHF
+	ZREsk6KVBaA5ErJbLb6Pne6F4sp2JAWu0wjuLZzUv72UhyY32RDgN5tK0k6phqecCFM5
+	rKfj8ZeFXezmGfxSkUhqPvdC8+6snOi/vUCgT2x3iUrhD6CRLQASiKUbYjDwFnfPDmGl
+	pSv7W4Mn3Omk/NHWol/jd3it4bEacAwXLj6vJuLFTztdL7CvwA4iGHicdZoJOcJ2MLId
+	ll0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language;
-	bh=otYwEKXRBeccKSimI+FVS59LPb7dW4CDm/Oal5AsbjY=;
-	b=K6QIra6kIGSLrEtytJ266AsN1HX364QAVBDynGIy3t7zBj/+8I7IiUr6v2GVdofvK/
-	PxbGrNrckrx46kYMCRLkOh2y26EIZiuaN2FJWKAzSBjxSJJWhQgoiloXdIVRak8mIQOa
-	GVsvVHBq5HnzHdTOyHcU/L92ZbGeGMWs+FhVgLrijxsfSPSUzg5ZMUYLLmi1XxEcV22p
-	WqJpG5TjLnZJJSddj0ABU+H83sbreZ4uov5VERqNok7ANWBBfowA1HgsJoOdc28Drf4K
-	0EzAVvgcNwqlMO6sbg21qHicOYbodkAXP+LKFk+lEzxWnQR0FD6inVBqcF0vtpCMYcZ3
-	OpBA==
-X-Gm-Message-State: APjAAAWzXHGPizuUpCaIvjEnXwoXihhN2Udnsrul9ff4e1ibm6esh4O3
-	j6WyT+58G/X+SnH6jY5wLyMBGyza
-X-Google-Smtp-Source: APXvYqyeC4i3MRDt7GvpZT2eJKLAXUenHnBIxrMyWLCmP9swTmkOj2NU3HSZt95eMNKlyYUzDjSFdw==
-X-Received: by 2002:a17:902:9a07:: with SMTP id
-	v7mr33433306plp.245.1567478435167; 
-	Mon, 02 Sep 2019 19:40:35 -0700 (PDT)
+	:content-transfer-encoding:content-language;
+	bh=/Zsv6cH1pHeggUaTt2496S7DtGpTUk+01aVHXPlLY18=;
+	b=dKfx3Je02dvTVka8sioGHU6GXs2CFT0QO3Enh8UuPaCRJYQewOdhAKwFRNYWtXgM0L
+	NWk4O92QjDCHkl7bnK3x9tkmLn2prPdAlNcM3PtXoOffI/j1fHx6uX6XFlQrf1Z+0N5V
+	+aZPgMI9JGZK1FStrPtrWygbnvCyyqwXiek+fJ0Rb5sj6KkQvwoll2tbbPv+okNYcujM
+	xcK++VposHdCqh76xbw9UsKZs3IGQsA/Nvy7YkJjrFUHHDhMCwIDRka8A585y9e/EP13
+	rKEbDXNk/Rzvrg1w1d3qMLRGDb6PqzoIbk2v0cvHJOnbXLoo30HoeQtBXRh5gBN2qP41
+	ZpuA==
+X-Gm-Message-State: APjAAAVtYRcYyeBMM33MxibWUwZhrN/tX4ENuV4KwYxH+r+sJNkSU6c0
+	kmIpNsVmoVJJsZw+zOE+zo6EO1AS
+X-Google-Smtp-Source: APXvYqxLunp5AvGoKf4fCbehn7UhrgLzgyx48ghQnQMpYcCM4GTwtlYbR9YjvM0B2Y/SIxwjxusdFQ==
+X-Received: by 2002:a17:90a:ba04:: with SMTP id s4mr155219pjr.73.1567478461751;
+	Mon, 02 Sep 2019 19:41:01 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
 	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
 	by smtp.gmail.com with ESMTPSA id
-	a186sm17511680pge.0.2019.09.02.19.40.34
+	n19sm6003401pfa.67.2019.09.02.19.41.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Sep 2019 19:40:34 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>
-References: <cover.1563719996.git.akuster808@gmail.com>
-	<CAMKF1sqTednsK5Rvw+F-_wE_1x7GL=jP483T7HRsLNrwP6G-pQ@mail.gmail.com>
-	<CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
+	Mon, 02 Sep 2019 19:41:01 -0700 (PDT)
+To: Adrian Bunk <bunk@stusta.de>
+References: <cover.1567286967.git.akuster808@gmail.com>
+	<c9e4dfbcc163fdc33f62419b5c65c057c924247d.1567286967.git.akuster808@gmail.com>
+	<20190901063954.GB22307@localhost>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -90,15 +90,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <9ba822ab-0769-b4e2-ddbb-dac53dccd6a8@gmail.com>
-Date: Mon, 2 Sep 2019 19:40:33 -0700
+Message-ID: <eef5f4a2-e318-6a33-0465-90cadfd1d8f2@gmail.com>
+Date: Mon, 2 Sep 2019 19:41:00 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfCXcEy+Fy_KGLDMiyW-u6wAGcpZzA9MQS2t6uQ1M-cFw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [warrior] 0/8] patch review
+In-Reply-To: <20190901063954.GB22307@localhost>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior 04/23] network-manager-applet: Remove obsolete dbus-glib and libnm-glib dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,95 +110,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 02:40:34 -0000
-Content-Language: en-US
+X-List-Received-Date: Tue, 03 Sep 2019 02:41:00 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-merged.
 
-On 9/2/19 4:47 AM, Martin Jansa wrote:
-> This PR is still only in warrior-next, can this be merged to warrior
-> before the current PR gets merged to warrior-next (or warrior)?
+
+On 8/31/19 11:39 PM, Adrian Bunk wrote:
+> On Sat, Aug 31, 2019 at 02:31:25PM -0700, Armin Kuster wrote:
+>> From: Adrian Bunk <bunk@stusta.de>
+>>
+>> network-manager-applet stopped using dbus-glib 3 years ago.
+>>
+>> Building of the obsolete libnm-gtk is disabled by default in 1.8.20.
+>> ...
+> This commit is not really appropriate for stable branches.
+
+thanks for the feedback.
+
+removed from list.
+
+-armin
 >
-> On Sun, Jul 21, 2019 at 4:48 PM Khem Raj <raj.khem@gmail.com
-> <mailto:raj.khem@gmail.com>> wrote:
+>> --- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
+>> +++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.20.bb
+>> @@ -2,7 +2,7 @@ SUMMARY = "GTK+ applet for NetworkManager"
+>>  LICENSE = "GPLv2"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>>  
+>> -DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
+>> +DEPENDS = "gtk+3 libnotify libsecret networkmanager \
+>> ...
+> That's a cleanup change removing an unused build dependency with
+> no (intentional) changes to the built binaries.
 >
->     On Sun, Jul 21, 2019 at 7:41 AM Armin Kuster <akuster808@gmail.com
->     <mailto:akuster808@gmail.com>> wrote:
->     >
->     > Patch comments window closes on Wednesday.
->     >
+>> --- a/meta-gnome/recipes-connectivity/networkmanager/networkmanager_%.bbappend
+>> +++ /dev/null
+>> @@ -1,3 +0,0 @@
+>> -# networkmanager-applet requires glib support
+>> -PACKAGECONFIG_append = " glib"
+>> ...
+> The bbappend might not be nice, but removing it would be a behaviour 
+> change in a stable branch.
 >
->     series looks fine to me
->
->     > The following changes since commit
->     8d5dcd6522e9d15e68637b6d7dda0401f9bb91d0:
->     >
->     >   turbostat: copy bits.h from kernel to turbostat (2019-06-16
->     08:15:44 -0700)
->     >
->     > are available in the git repository at:
->     >
->     >   https://git.openembedded.org/meta-openembedded-contrib
->     stable/warrior-nmut
->     >   http://cgit.openembedded.org//log/?h=stable/warrior-nmut
->     >
->     > Adrian Bunk (2):
->     >   ndctl: Remove the unnecessary dependency on virtual/kernel
->     >   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03
->     >
->     > Andreas Müller (2):
->     >   gnome-desktop3: set correct meson gtk doc option
->     >   evince: add patch to fix build with recent gobject-introspection
->     >
->     > Martin Jansa (4):
->     >   ndctl: make MACHINE_ARCH and ignore from libblockdev
->     >   oprofile: make MACHINE_ARCH
->     >   oprofile: drop virtual/kernel dependency and switch back to
->     >     TUNE_PKGARCH
->     >   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS add lsb, busybox and
->     util-linux for
->     >     phoronix-test-suite
->     >
->     >  ...ove-EvDocumentModel-get-type-function-dec.patch | 33
->     ++++++++++++++++++++++
->     >  meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
->     <http://evince_3.28.2.bb>   | 12 ++++----
->     >  .../gnome-desktop/gnome-desktop3_3.32.0.bb
->     <http://gnome-desktop3_3.32.0.bb>         |  1 +
->     >  ..._2019.03.01.bb <http://2019.03.01.bb> =>
->     wireless-regdb_2019.06.03.bb
->     <http://wireless-regdb_2019.06.03.bb>} |  4 +--
->     >  meta-oe/conf/layer.conf                            |  3 ++
->     >  meta-oe/recipes-core/ndctl/ndctl_v63.bb <http://ndctl_v63.bb> 
->               |  2 +-
->     >  meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
->     <http://oprofile_1.3.0.bb>  |  1 -
->     >  7 files changed, 47 insertions(+), 9 deletions(-)
->     >  create mode 100644
->     meta-gnome/recipes-gnome/evince/evince/0001-libview-Remove-EvDocumentModel-get-type-function-dec.patch
->     >  rename
->     meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2019.03.01.bb
->     <http://wireless-regdb_2019.03.01.bb> =>
->     wireless-regdb_2019.06.03.bb
->     <http://wireless-regdb_2019.06.03.bb>} (91%)
->     >
->     > --
->     > 2.7.4
->     >
->     > --
->     > _______________________________________________
->     > Openembedded-devel mailing list
->     > Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> cu
+> Adrian
 >
 
 
