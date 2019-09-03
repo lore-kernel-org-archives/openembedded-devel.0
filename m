@@ -1,23 +1,47 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AFA77ECCF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
+	[209.85.208.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 64B8A7E52D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 05:45:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x835j6u4020657
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 2 Sep 2019 22:45:06 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Mon, 2 Sep 2019 22:45:05 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 3 Sep 2019 01:43:58 -0400
-Message-ID: <1567489438-31815-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Tue,  3 Sep 2019 05:57:08 +0000 (UTC)
+Received: by mail-ed1-f46.google.com with SMTP id s49so17382723edb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Sep 2019 22:57:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=Vp9RwH7PqWplBcVTTmQ07HH1wRR5D4PDdXtqWUIyDIQ=;
+	b=iv3PYrWUf7lhMnLzJA0TmbezEuJtt+nOJzlRgXIfcEjmyaFMUBw4gV94CN87MDbaRB
+	aSETwU1vTJB9Yi2i8bH8ZPFmp7uW12/7SPhF/GpS9co1vVtxEkJEdYTmVmVlhd4vm5w1
+	HcGwbY7Lj9BWSc5naLR1w2YlqZ58xqkOfIeZjJZcwK9QVeYlIykFb2SnAa/tntiO3Gkg
+	r+3k50ucfEtuG/yV/IwFWdvuBx3lOQ8aRrR/4v3WYbLrjJe5CWzlD16Zuc+8R/UcnMfR
+	Zy4lYFWpBjlhXExX9goflDRrG+ehgZ8dCgWA1W05zbTC2Cyss4iWcHoSIMTdcjgr+sQc
+	ZtwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=Vp9RwH7PqWplBcVTTmQ07HH1wRR5D4PDdXtqWUIyDIQ=;
+	b=n5JNO850bLXHgPIcuFsc6+zSf6MRneuZLNC4B0KMOXIBel1tWt7sOIeoVJFy4EQmhM
+	2uOeCFZyKWllPdOhBoOJuGv+IEZm7VEErKVnoz8g6TVuyiU7DC+XCZpdQCy3YNiDwpoW
+	FaDarxJb9w6nyULY69JFWFBRmvgW8qgoG7i5W47BXewDvpkJNtk5G9PyOGOJf4RArk87
+	S2j4BpE6qWQg6m2T/f/2JBoJEpzb/CmG+5JXvUHxngpChReQxOmKHIjVYQKWC87R0DqL
+	IxvxhUjfKuSdoky8BlClFHQ9WIRb8OY8A8VnqQE9TMgV3iAl1zM+yXzIcYYUBRpBHGU5
+	QCGg==
+X-Gm-Message-State: APjAAAVSS56qJi6aejiCs3Zvsh8INExhu5RSdQXm24z1pnfslwPxrvwW
+	g5iXPtFg3jPzuwGjvnFcPU1bFIH9o9Tw/ZrfDQZqm5Ql
+X-Google-Smtp-Source: APXvYqx0pMSEDZbSXpp8CJ4HTcmjocx49e6N51+z0JLgErnS/uPKuL/fEjStb3o3+R0VJIyXurwR/yVx9UpK2Z9l6s8=
+X-Received: by 2002:a05:6402:654:: with SMTP id
+	u20mr16340996edx.216.1567490228878; 
+	Mon, 02 Sep 2019 22:57:08 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] lvm2: fix blkdeactivate failed with command not found
+References: <20190730171338.25-1-Martin.Jansa@gmail.com>
+In-Reply-To: <20190730171338.25-1-Martin.Jansa@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 3 Sep 2019 07:56:58 +0200
+Message-ID: <CA+chaQfpMek1nqxmGf=_zRtvON1KNxT55-WNTTdfT0y7W_ru4A@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [warrior][master][PATCH] oprofile: drop kernel-vmlinux from RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,135 +54,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 05:45:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 03 Sep 2019 05:57:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Run blkdeactivate failed:
-...
-root@intel-x86-64:~# /usr/sbin/blkdeactivate
-Deactivating block devices:
-/usr/sbin/blkdeactivate: line 345: /bin/lsblk: No such file or directory
-/usr/sbin/blkdeactivate: line 345: /bin/sort: No such file or directory
-/usr/sbin/blkdeactivate: line 345: /bin/lsblk: No such file or directory
-/usr/sbin/blkdeactivate: line 384: SKIP_DEVICE_LIST: bad array subscript
-...
+ping for warrior, this one didn't make it through last PR.
 
-- Add missing runtime depends
-- Set location of the commands
+On Tue, Jul 30, 2019 at 7:13 PM Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- ...-bin-findmnt-bin-lsblk-bin-sort-not-found.patch | 73 ++++++++++++++++++++++
- meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb       |  8 ++-
- 2 files changed, 80 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-new file mode 100644
-index 0000000..16de8c0
---- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
-@@ -0,0 +1,73 @@
-+From 27b56cb6b5dfc75ea8ddb395dc9ef41fb7a09c93 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Mon, 2 Sep 2019 23:04:50 -0400
-+Subject: [PATCH] fix command /bin/findmnt, /bin/lsblk, /bin/sort not found
-+
-+In oe-core (util-linux and coreutils), the commands locates in
-+${bindir} rather than /bin, add BINDIR to configure it
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ configure.ac                | 3 +++
-+ scripts/blkdeactivate.sh.in | 7 ++++---
-+ 2 files changed, 7 insertions(+), 3 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index d1431e2..54e5a7b 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1495,6 +1495,8 @@ fi
-+ 
-+ SYSCONFDIR="$(eval echo $(eval echo $sysconfdir))"
-+ 
-++BINDIR="$(eval echo $(eval echo $bindir))"
-++
-+ SBINDIR="$(eval echo $(eval echo $sbindir))"
-+ LVM_PATH="$SBINDIR/lvm"
-+ AC_DEFINE_UNQUOTED(LVM_PATH, ["$LVM_PATH"], [Path to lvm binary.])
-+@@ -1721,6 +1723,7 @@ AC_SUBST(SACKPT_CFLAGS)
-+ AC_SUBST(SACKPT_LIBS)
-+ AC_SUBST(SALCK_CFLAGS)
-+ AC_SUBST(SALCK_LIBS)
-++AC_SUBST(BINDIR)
-+ AC_SUBST(SBINDIR)
-+ AC_SUBST(SELINUX_LIBS)
-+ AC_SUBST(SELINUX_PC)
-+diff --git a/scripts/blkdeactivate.sh.in b/scripts/blkdeactivate.sh.in
-+index a4b8a8f..3db4226 100644
-+--- a/scripts/blkdeactivate.sh.in
-++++ b/scripts/blkdeactivate.sh.in
-+@@ -41,13 +41,14 @@ UMOUNT="/bin/umount"
-+ 
-+ sbindir="@SBINDIR@"
-+ DMSETUP="$sbindir/dmsetup"
-++bindir="@BINDIR@"
-+ LVM="$sbindir/lvm"
-+ 
-+ if "$UMOUNT" --help | grep -- "--all-targets" >"$DEV_DIR/null"; then
-+ 	UMOUNT_OPTS="--all-targets "
-+ else
-+ 	UMOUNT_OPTS=""
-+-	FINDMNT="/bin/findmnt -r --noheadings -u -o TARGET"
-++	FINDMNT="$bindir/findmnt -r --noheadings -u -o TARGET"
-+ 	FINDMNT_READ="read -r mnt"
-+ fi
-+ DMSETUP_OPTS=""
-+@@ -55,10 +56,10 @@ LVM_OPTS=""
-+ MDADM_OPTS=""
-+ MPATHD_OPTS=""
-+ 
-+-LSBLK="/bin/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
-++LSBLK="$bindir/lsblk -r --noheadings -o TYPE,KNAME,NAME,MOUNTPOINT"
-+ LSBLK_VARS="local devtype local kname local name local mnt"
-+ LSBLK_READ="read -r devtype kname name mnt"
-+-SORT_MNT="/bin/sort -r -u -k 4"
-++SORT_MNT="$bindir/sort -r -u -k 4"
-+ 
-+ # Do not show tool errors by default (only done/skipping summary
-+ # message provided by this script) and no verbose mode by default.
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-index 785c696..f42bd8e 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-@@ -4,6 +4,7 @@ SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
- 
- SRC_URI += " \
-             file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-+            file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
-            "
- 
- DEPENDS += "autoconf-archive-native"
-@@ -67,7 +68,12 @@ RDEPENDS_${PN}-udevrules = "libdevmapper"
- RDEPENDS_${PN}_append_class-target = " libdevmapper"
- RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
- 
--RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
-+RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) \
-+                          bash \
-+                          util-linux-lsblk \
-+                          util-linux-findmnt \
-+                          coreutils \
-+"
- RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
- 
- CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
--- 
-2.8.1
-
+> * now with virtual/kernel dependency dropped we don't want to depend on
+> kernel signature just for
+>   this RRECOMMENDS
+> * fixes:
+>    === Comparing signatures for task do_package_write_ipk.sigdata between
+> hammerhead and mako ===
+>   ERROR: oprofile different signature for task
+> do_package_write_ipk.sigdata between hammerhead and mako
+>   NOTE: Starting bitbake server...
+>   runtaskdeps changed:
+>   ['binutils/binutils_2.32.bb.do_packagedata',
+> -linux/linux-lg-hammerhead_git.bb.do_packagedata, +linux/
+> linux-lg-mako_git.bb.do_packagedata,
+> 'opkg-utils/opkg-utils_0.4.1.bb.do_populate_sysroot:virtual:native
+> oprofile/oprofile_1.3.0.bb.do_package
+> oprofile/oprofile_1.3.0.bb.do_packagedata
+> pseudo/pseudo_git.bb.do_populate_sysroot:virtual:native
+> xz/xz_5.2.4.bb.do_populate_sysroot:virtual:native']
+>   linux/linux-lg-hammerhead_git.bb.do_packagedata with hash
+> 0c5215deb4737611ad413f57cf5fbdef8a9b2cc6d04035f754a4e93fb38f61d1
+>    changed to
+>   linux/linux-lg-mako_git.bb.do_packagedata with hash
+> 0f3b34773ca3e590739754c25959feb7cdcd67cf7904ac7fe6cc535e8d6519a8
+>   Dependency on task linux/linux-lg-mako_git.bb.do_packagedata was added
+> with hash 0f3b34773ca3e590739754c25959feb7cdcd67cf7904ac7fe6cc535e8d6519a8
+>   Dependency on task linux/linux-lg-hammerhead_git.bb.do_packagedata was
+> removed with hash
+> 0c5215deb4737611ad413f57cf5fbdef8a9b2cc6d04035f754a4e93fb38f61d1
+>
+>   ERROR: 1 errors found in
+> /home/jenkins/workspace/luneos-unstable/webos-ports/tmp-glibc/sstate-diff/1563368432/signatures.mako.do_package_write_ipk.sigdata.log
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-kernel/oprofile/oprofile.inc | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-kernel/oprofile/oprofile.inc
+> b/meta-oe/recipes-kernel/oprofile/oprofile.inc
+> index 515ea8faf7..a9ee775d45 100644
+> --- a/meta-oe/recipes-kernel/oprofile/oprofile.inc
+> +++ b/meta-oe/recipes-kernel/oprofile/oprofile.inc
+> @@ -12,7 +12,6 @@ SECTION = "devel"
+>
+>  DEPENDS = "popt binutils"
+>  RDEPENDS_${PN} = "binutils-symlinks"
+> -RRECOMMENDS_${PN} = "kernel-vmlinux"
+>
+>  FILES_${PN} = "${bindir} ${libdir}/${BPN}/lib*${SOLIBS} ${datadir}/${BPN}"
+>  FILES_${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV}
+> ${libdir}/${BPN}/lib*.la"
+> --
+> 2.17.1
+>
+>
 
