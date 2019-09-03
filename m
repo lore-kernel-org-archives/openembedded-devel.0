@@ -1,48 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A5357F32E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C6F2A7D6A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 09:16:01 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id b16so16588170wrq.9
+	Tue,  3 Sep 2019 15:31:26 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id m2so16317822qkd.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Sep 2019 02:16:02 -0700 (PDT)
+	Tue, 03 Sep 2019 08:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=67HVEH/7hxICWJ7BxWiYwF3qSksEYQeGjdmvJKh1PQY=;
-	b=DRV9uWeuJBCPNW0o0iKMcmeKh21A10MuFh3GQF7Ne0HsuAIAltmNOFIppkemW9bpwk
-	X6TBEcUBrNFv4Ntf/ldUNYe6AU6tpx9O+ep8g8B4WW6pZlVWZQTQ3HFUDaRW+Okp09Qu
-	uOY1Pk5/Kb2cAh/dDvHEXtjCx+YnEFVaLZNtIAt5BbWtkmHO+LcZxkAjWRDfqqCJsbHr
-	e6bB47GlzCVpZvi4x1ax/29AwNlI/xgFeeEeJ1Z/YWf7HLRfIPo/gps4sBALokOJK3nP
-	UL2a1lNdsB6lu069VHmXje0/EmOkmlHV4se2QJz7iGUUmaae6MJvaKmjmwGIOYO/wH2K
-	vaZA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=5np+UItSu3Ph8fjpLV2ViqCSBZto7+LCZwc8GxXtujY=;
+	b=V53/1o2DsVouX/RRB48d0Yfile1MkZWLZNXI9XivA0nhs1sdYQrRDJJHyELbEjUxVh
+	ucNlWUEzWo/MfIiD/CQP/vqxAy34UkRj+hLna3HOLQC2qDhmmDvWmEMMSLSvzFTYWImd
+	xNTQfdtOeIo4td6E0W5jUc74Hxt29OnO+dUDELI3Oq5eW8h+viQzqgKvmFN49tswdfkM
+	ip2WM7tiWaYhWqGt4kGMOGuwW4qhGj/nfRIUlFTyKIRF6LaVMntZLaRyjyP+WBLby8PH
+	FtWPaVrgKtI0KIhKlT6UOQqb+Ic4i0qNoq7ZVFJ/WKLrXTGKl5buepOgmNuc2jwhP3X6
+	6uUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=67HVEH/7hxICWJ7BxWiYwF3qSksEYQeGjdmvJKh1PQY=;
-	b=D/3rkh5aRoBHh/6+OOxjfvFVNdzVOYq+besRjlgIhkBRS19eNUHSERGSFxIy5SeZ6X
-	xqWAlqcdthzsP18LhmS+4BYouulWTuZUsYmHO7OVGse30zfUmwVgzQMOhVVnsx+RsUN+
-	qtgFbC8i0FN5bEhT9eD0kRV3UIkxfopQkTlHqLcBQbTJiXPnvGWB/0yyTv/3CqWH52RX
-	6ASyQe9W6lSp53iOESqIUxilLzdTgD333etETeiVQwyrPp5n74Gy/O6zNFhCxlTYXMeG
-	Tue0PRv/d7C1YwUZekPSv0l6LpLUQ5YxSVQ6VVOWjknB7ew+4rbY6MH9rg56iWv3n/Cj
-	d7Gw==
-X-Gm-Message-State: APjAAAWY24/sZus3RxkaMj5VF/kybkgShOrGHKPghQlhD3bXtzj7M5Iw
-	C+SDZYX/hln6yrTE1TlJP0svlQ1iXeM=
-X-Google-Smtp-Source: APXvYqzHTPR6hFX+qQIJ1tTCIfFMFkk/C+xiBp/uzwMxmN9lJOCKXgaQu0XPWAfOXji5R62AY5bYBg==
-X-Received: by 2002:adf:eb49:: with SMTP id u9mr24832102wrn.235.1567502161668; 
-	Tue, 03 Sep 2019 02:16:01 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	l9sm14113809wmi.29.2019.09.03.02.16.01
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 03 Sep 2019 02:16:01 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2019 09:16:01 +0000
-Message-Id: <20190903091601.552632-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-pyatspi: restrict with GTK2DISTROFEATURES
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=5np+UItSu3Ph8fjpLV2ViqCSBZto7+LCZwc8GxXtujY=;
+	b=ap76VEl65AWKAufyUvfve323zdqBTm5/MDAdI0a4Z6jfIU/CEkd5kPZStQa/lylP9V
+	wxhwogRcKCSNmmfEIBNUF1xSiEp0w9qpjXaqtbXGh6FMwP919LPWz1ZvIUBx0E3t0L9J
+	dKMyeRHb55prkKAANNP4yVu0yRCSYVkWRKyVe5IFuiFtxadzDEb3fUI57Bu60Zg8uIFd
+	Sm8zTqpemoIkPBthJJgHr+mETm1n1EXBMw22nYbQsK7LqIj5mqQ5esJqH5F43eUl+lsk
+	lntm9OAQza4Xncy81bAyI09ki3acHhbtNFmL9b0DO9ViQNy7ycYIknVbZe00Hik/dmL+
+	+WvA==
+X-Gm-Message-State: APjAAAVHR0Lx2xDk4cBhOrY1MGhuPMWaxXZbc+1V1f00x9CD56fOq2Op
+	vIhezxnF2XO4OQkZ5ioEcjKM50JDz4xnn0U/qI4=
+X-Google-Smtp-Source: APXvYqxHGp8TRAh9ie9crbu/0se4BGWw+9E1oibJ0KBb1Ah+LAz6Oh4KAKAPnbjhc1Q5omSy2qRTFW8ftw8BWbkmfeM=
+X-Received: by 2002:a37:c403:: with SMTP id d3mr27569503qki.212.1567524687367; 
+	Tue, 03 Sep 2019 08:31:27 -0700 (PDT)
+MIME-Version: 1.0
+References: <1567156014-79892-1-git-send-email-hongzhi.song@windriver.com>
+In-Reply-To: <1567156014-79892-1-git-send-email-hongzhi.song@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Sep 2019 08:31:00 -0700
+Message-ID: <CAMKF1spP9hQt64stWn_mSGfE7tVg_wLhaADyp4VHqWLCe1GCog@mail.gmail.com>
+To: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-realtime][PATCH] layer.conf: add openembedded-layer to LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 09:16:01 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 15:31:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* fixes:
-  NOTE: Resolving any missing task queue dependencies
-  ERROR: Nothing PROVIDES 'gtk+' (but meta-oe/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb DEPENDS on or otherwise requires it)
-  gtk+ was skipped: one of 'x11 directfb' needs to be in DISTRO_FEATURES
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'python3-pyatspi', 'gtk+']
+please send this to linux-yocto@yoctoproject.org as per
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-realtime/tree/MAINTAINERS
+always good to check README for such information.
 
-  Summary: There was 1 WARNING message shown.
-  Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
-index 6d80c10915..c60d40e3a2 100644
---- a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
-@@ -11,6 +11,10 @@ SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=gnome-3-32"
- SRCREV = "dc4565208fca00da06b972915a080ad3c63f640d"
- S = "${WORKDIR}/git" 
- 
-+# Same restriction as gtk+
-+inherit distro_features_check
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
-+
- inherit pkgconfig autotools python3native
- 
- FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/pyatspi/*"
--- 
-2.17.1
-
+On Fri, Aug 30, 2019 at 2:08 AM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
+>
+> latencytop.bb depends on gtk+ which exists at openembedded-layer.
+>
+> So we should add openembedded-layer to LAYERDEPENDS, otherwise
+> "yocto-check-layer-wrapper meta-realtime --dependency 'cat mylist'"
+> will fail with "NO PROVIDE gtk+ ..."
+>
+> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index cb24358..72ae7ad 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -16,4 +16,4 @@ BBFILE_PRIORITY_realtime = "5"
+>  # cause compatibility issues with other layers
+>  LAYERVERSION_realtime = "1"
+>  LAYERSERIES_COMPAT_realtime = "thud warrior"
+> -LAYERDEPENDS_realtime = "core"
+> +LAYERDEPENDS_realtime = "core openembedded-layer"
+> --
+> 2.8.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
